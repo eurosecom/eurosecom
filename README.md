@@ -1,1 +1,1 @@
-app samRSPsung
+app projekt1
