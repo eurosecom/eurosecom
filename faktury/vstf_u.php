@@ -7312,7 +7312,7 @@ document.formx1.h_sz4x.value=<?php echo $cencis;?>;
 
 <tr>
 <td class="pvstup" colspan="9" align="right" >&nbsp;Celkom hodnota dokladu:</td>
-<td class="hvstup" align="right" colspan="1" ><?php echo $riadok->hod; ?> <?php echo $mena1; ?></td>
+<td class="hvstup" align="right" colspan="1" ><?php echo $riadok->hod; ?> <?php echo $fir_mena1; ?></td>
 </FORM>
 </tr>
 <?php
