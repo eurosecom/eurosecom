@@ -1182,6 +1182,16 @@ $pdf->Cell(190,6," ","$rmc1",1,"L");
 $pdf->Cell(5,4," ","$rmc1",0,"L");$pdf->Cell(170,4,"$hlavicka->dovod","$rmc",1,"L");
 
 //poznamka
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+$poleosob = explode("\r\n", $hlavicka->str2);
+if ( $poleosob[0] != '' )
+     {
+$ipole=1;
+foreach( $poleosob as $hodnota ) {
+$pdf->Cell(4,5," ","$rmc1",0,"L");$pdf->Cell(186,5,"$hodnota","$rmc",1,"L");
+$ipole=$ipole+1;
+                                 }
+     }
 
 
 //odtlacok zamestnavatela
