@@ -178,7 +178,7 @@ $dovod = strip_tags($_REQUEST['dovod']);
 //$exe3 = strip_tags($_REQUEST['exe3']);
 //$prs3 = strip_tags($_REQUEST['prs3']);
 //$pozn = strip_tags($_REQUEST['pozn']);
-//$str2 = strip_tags($_REQUEST['str2']);
+$str2 = strip_tags($_REQUEST['str2']);
 //$kval = strip_tags($_REQUEST['kval']);
 //$zps = strip_tags($_REQUEST['zps']);
 //$poist = strip_tags($_REQUEST['poist']);
@@ -199,7 +199,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_zapoctovylist SET ".
 " vylod5='$vylod5_sql', vyldo5='$vyldo5_sql', ".
 " vyl2od1='$vyl2od1_sql', vyl2do1='$vyl2do1_sql', ".
 " rok='$rok', roks='$roks', dni='$dni', dnis='$dnis', dovod='$dovod', ".
-" datum='$datum_sql' ".
+" datum='$datum_sql', str2='$str2' ".
 " WHERE oc = $cislo_oc"; 
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");  
@@ -751,6 +751,7 @@ $roks = $fir_riadok->roks;
 $dni = $fir_riadok->dni;
 $dnis = $fir_riadok->dnis;
 $dovod = $fir_riadok->dovod;
+$str2 = $fir_riadok->str2;
 mysql_free_result($fir_vysledok);
 
 
@@ -1021,6 +1022,7 @@ if ( $copern == 20 )
 <input type="text" name="vyl2do1" id="vyl2do1" onkeyup="CiarkaNaBodku(this);"
  style="width:80px; top:681px; left:435px;"/>
 <span class="text-echo" style="width:157px; top:685px; left:559px; text-align:center;"><?php echo $vyl2dni1; ?></span>
+<span class="text-echo" style="top:715px; left:240px; font-size:12px;">œalöie obdobia mÙûete nahraù cez pozn·mku (niûie uveden·).</span>
 
 <!-- II.cast -->
 <input type="text" name="rok" id="rok" style="width:92px; top:803px; left:572px;"/>
@@ -1030,6 +1032,10 @@ if ( $copern == 20 )
 <input type="text" name="dnis" id="dnis" style="width:337px; top:854px; left:270px;"/>
 <!-- dovod -->
 <input type="text" name="dovod" id="dovod" style="width:860px; top:902px; left:43px;"/>
+
+<!-- poznamka -->
+<label for="str2" style="position:absolute; top:955px; left:43px; font-size:12px; font-weight:bold;">Pozn·mka</label>
+<textarea name="str2" id="str2" style="position:absolute; top:970px; left:43px; width:500px; height:180px;"><?php echo $str2; ?></textarea>
 
 </div> <!-- koniec wrap-form-background -->
 </FORM>
@@ -1174,6 +1180,16 @@ $pdf->Cell(190,7," ","$rmc1",1,"L");
 $pdf->Cell(17,4," ","$rmc1",0,"L");$pdf->Cell(140,5,"$hlavicka->roks $hlavicka->dnis","$rmc",1,"L");
 $pdf->Cell(190,6," ","$rmc1",1,"L");
 $pdf->Cell(5,4," ","$rmc1",0,"L");$pdf->Cell(170,4,"$hlavicka->dovod","$rmc",1,"L");
+
+//poznamka
+
+
+//odtlacok zamestnavatela
+$pdf->SetY(285);
+$pdf->Cell(130,5,"","$rmc1",0,"R");$pdf->Cell(0,8,"OdtlaËok peËiatky a podpis","T",1,"C");
+$pdf->Cell(130,5,"","$rmc1",0,"R");$pdf->Cell(0,3,"zamestn·vateæa","$rmc1",1,"C");
+
+
 }
 $i = $i + 1;
   }
