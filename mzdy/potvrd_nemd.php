@@ -305,7 +305,18 @@ if( $minuly == 1 AND $kli_vrok > 2010 )
 {
 if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; }
 }
-
+if( $minuly == 1 AND $kli_vrok > 2011 )
+{
+if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; }
+}
+if( $minuly == 1 AND $kli_vrok > 2012 )
+{
+if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; }
+}
+if( $minuly == 1 AND $kli_vrok > 2013 )
+{
+if (File_Exists ("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; }
+}
 //echo $minuly;
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
