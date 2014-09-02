@@ -1832,6 +1832,30 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r00z2='$xr00z2', r00a2='$xr0
 }
 //koniec pracovneho suboru pre rocne 
 
+
+//ak z androidu nacitaj prijmy a vydavky z vykazu o prijmoch a vydavkoch
+if( $zandroidu == 1 )
+    {
+
+$sql = "SELECT * FROM F$kli_vxcf"."_prcvprivyds".$kli_uzid." WHERE prx = 1 ";
+$sqldok = mysql_query("$sql");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $prijmy=$riaddok->r04;
+  $vydavky=$riaddok->r11;
+  $poistne=$riaddok->r08;
+
+  }
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t1p2='$prijmy', t1v2='$vydavky', psp6='$poistne' WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+
+
+$prepocitaj=1;
+    }
+//koniec ak z androidu nacitaj prijmy a vydavky z vykazu o prijmoch a vydavkoch
+
 $miliondan = 1*$_REQUEST['miliondan'];
 if ( $miliondan == 1 ) { $prepocitaj=1; }
 if ( $namanzelku == 1 ) { $prepocitaj=1; }
@@ -3236,6 +3260,8 @@ var sirkawic = screen.width-10;
 </HEAD>
 <?php if( $zandroidu == 1 ) { ?>
 <BODY class="white" >
+<br />
+<br />
 <table width="100%" >
 <tr>
 <td>

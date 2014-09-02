@@ -1594,7 +1594,7 @@ exit;
 $pdf->Output("../tmp/vprivyd$kli_vume.$kli_uzid.pdf");
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvprivyds'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
+//$vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvprivyds1000x'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
