@@ -52,498 +52,9 @@ $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resiza
 $tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
-//ak existuje ../import/zozicdph01x1.csv  a  ../import/zozicdph01x2.csv nacitaj na 2x
-$oddelcsv=0;
-if( file_exists("../import/zozicdph01x1.csv")) { $oddelcsv=1; }
 
 
-//nacitaj zozicdph.csv
-$sql = "SELECT * FROM zozicdph01";
-$vysledok = mysql_query("$sql");
-$cpol=0;
-if( $vysledok ) { $cpol = mysql_num_rows($vysledok); }
-if( $cpol < 204000 AND $oddelcsv == 0 ) 
-{
-$sql = "DROP TABLE zozicdph01";
-$vysledek = mysql_query("$sql");
-echo $cpol." ".$sql."<br />";
-}
-$cpolicdph=$cpol;
-
-if( $oddelcsv == 0 ) {
-$sql = "SELECT * FROM zozicdph01";
-$vysledok = mysql_query("$sql"); 
-if (!$vysledok)
-          {
-
-if( file_exists("../import/zozicdph01.csv")) 
-        {
-
-echo "Vytvaram tabulku zozicdph01!"."<br />";
-
-$sqlt = <<<crs_no
-(
-   xicd         VARCHAR(15) not null,
-   xnaz         VARCHAR(40) not null,
-   xmes         VARCHAR(40) not null,
-   xuli         VARCHAR(40) not null
-);
-crs_no;
-
-$sql = 'CREATE TABLE zozicdph01'.$sqlt;
-$vysledek = mysql_query("$sql");
-
-$subor = fopen("../import/zozicdph01.csv", "r");
-while (! feof($subor))
-     {
-//zoznamplatitelovdph;05.02.2014
-//1020000003; ;SlavomÌr Duda;TovarnÈ;14
-//1020000025; ;Bartolomej Janok;SaËurov;Davidovsk· 315
-
-  $riadok = fgets($subor, 500);
-  //print "$riadok<br />";
-  $pole = explode(";", $riadok);
-
-  $x_icd =  $pole[0];
-  $x_naz =  $pole[2];
-  $x_mes =  $pole[3];
-  $x_uli =  $pole[4];
- 
-
-$c_icd=1*$x_icd;
-
-if( $c_icd > 0 )
-{
-$sqult = "INSERT INTO zozicdph01 ( xicd, xnaz, xmes, xuli )".
-" VALUES ( '$x_icd', '$x_naz', '$x_mes', '$x_uli' ); "; 
-
-$ulozene = mysql_query("$sqult"); 
-}
-     }
-//koniec while
-
-        }
-//koniec existuje csv
-          }
-//koniec neexistuje tabulka zozicdph01
-//ak oddelcsv=0
-                     }
-
-$akecsv = 1*$_REQUEST['akecsv'];
-if( $oddelcsv == 1 AND $akecsv == 1 ) {
-
-if( file_exists("../import/zozicdph01x1.csv")) 
-        {
-
-$sql = "DELETE FROM zozicdph01 ";
-$vysledek = mysql_query("$sql");
-
-$subor = fopen("../import/zozicdph01x1.csv", "r");
-while (! feof($subor))
-     {
-
-  $riadok = fgets($subor, 500);
-  //print "$riadok<br />";
-  $pole = explode(";", $riadok);
-
-  $x_icd =  $pole[0];
-  $x_naz =  $pole[2];
-  $x_mes =  $pole[3];
-  $x_uli =  $pole[4];
- 
-
-$c_icd=1*$x_icd;
-
-if( $c_icd > 0 )
-{
-$sqult = "INSERT INTO zozicdph01 ( xicd, xnaz, xmes, xuli )".
-" VALUES ( '$x_icd', '$x_naz', '$x_mes', '$x_uli' ); "; 
-
-$ulozene = mysql_query("$sqult"); 
-}
-     }
-//koniec while
-
-fclose ($subor);
-        }
-//koniec existuje csv
-
-//ak oddelcsv=1 akecsv=1
-                     }
-
-if( $oddelcsv == 1 AND $akecsv == 2 ) {
-if( file_exists("../import/zozicdph01x2.csv")) 
-        {
-
-$subor = fopen("../import/zozicdph01x2.csv", "r");
-while (! feof($subor))
-     {
-
-  $riadok = fgets($subor, 500);
-  //print "$riadok<br />";
-  $pole = explode(";", $riadok);
-
-  $x_icd =  $pole[0];
-  $x_naz =  $pole[2];
-  $x_mes =  $pole[3];
-  $x_uli =  $pole[4];
- 
-
-$c_icd=1*$x_icd;
-
-if( $c_icd > 0 )
-{
-$sqult = "INSERT INTO zozicdph01 ( xicd, xnaz, xmes, xuli )".
-" VALUES ( '$x_icd', '$x_naz', '$x_mes', '$x_uli' ); "; 
-
-$ulozene = mysql_query("$sqult"); 
-}
-     }
-//koniec while
-
-fclose ($subor);
-        }
-
-//koniec neexistuje tabulka zozicdph01
-//ak oddelcsv=1 akecsv=2
-                     }
-
-
-//dopln zozicdph k 20032014
-$sql = "SELECT * FROM zozicdph01new20032014 ";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-
-//echo "idem";
-
-if( file_exists("../import/zozicdph_plus140320.csv")) 
-        {
-$subor = fopen("../import/zozicdph_plus140320.csv", "r");
-while (! feof($subor))
-     {
-//1011111111; ;SlavomÌr Duda;TovarnÈ;14
-//1022222222; ;Bartolomej Janok;SaËurov;Davidovsk· 315
-//1099999999; ;Mari·n Bratko;Matiaöka;13
-
-  $riadok = fgets($subor, 500);
-  //print "$riadok<br />";
-  $pole = explode(";", $riadok);
-
-  $x_icd =  $pole[0];
-  $x_naz =  $pole[2];
-  $x_mes =  $pole[3];
-  $x_uli =  $pole[4];
-
-$jeicd=0;
-if( $jeicd == 1111 )
-  {
-$sqlttt = "SELECT * FROM zozicdph01 WHERE xicd = '$x_icd' ";
-$sqldok = mysql_query("$sqlttt");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $jeicd=1;
-  }
-if( $jeicd == 1 )
-    {
-echo $x_icd.";;".$x_naz.";".$x_mes.";".$x_uli."<br />";
-
-    }
-  } 
-
-$c_icd=1*$x_icd;
-
-if( $c_icd > 0 )
-{
-$sqult = "INSERT INTO zozicdph01 ( xicd, xnaz, xmes, xuli )".
-" VALUES ( '$x_icd', '$x_naz', '$x_mes', '$x_uli' ); "; 
-
-$ulozene = mysql_query("$sqult"); 
-}
-     }
-//koniec while
-
-
-        }
-//koniec ak existuje csv
-
-$sqlt = <<<vtvmzd
-(
-   xcf         INT,
-   id          INT,
-   datm        TIMESTAMP(14)
-);
-vtvmzd;
-
-$sql = "CREATE TABLE zozicdph01new20032014 ".$sqlt;
-$vysledek = mysql_query("$sql");
-
-}
-//koniec dopln zozicdph k 20032014
-
-
-//dopln zozicdph k 30052014
-$sql = "SELECT * FROM zozicdph01new30052014 ";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-
-echo "dopÂÚam iËdph.";
-
-if( file_exists("../import/zozicdph_plus140530.csv")) 
-        {
-$subor = fopen("../import/zozicdph_plus140530.csv", "r");
-while (! feof($subor))
-     {
-//1011111111; ;SlavomÌr Duda;TovarnÈ;14
-//1022222222; ;Bartolomej Janok;SaËurov;Davidovsk· 315
-//1099999999; ;Mari·n Bratko;Matiaöka;13
-
-  $riadok = fgets($subor, 500);
-  //print "$riadok<br />";
-  $pole = explode(";", $riadok);
-
-  $x_icd =  $pole[0];
-  $x_naz =  $pole[2];
-  $x_mes =  $pole[3];
-  $x_uli =  $pole[4];
-
-
-$c_icd=1*$x_icd;
-
-if( $c_icd > 0 )
-{
-$sqult = "INSERT INTO zozicdph01 ( xicd, xnaz, xmes, xuli )".
-" VALUES ( '$x_icd', '$x_naz', '$x_mes', '$x_uli' ); "; 
-
-$ulozene = mysql_query("$sqult"); 
-}
-     }
-//koniec while
-
-
-        }
-//koniec ak existuje csv
-
-$sqlt = <<<vtvmzd
-(
-   xcf         INT,
-   id          INT,
-   datm        TIMESTAMP(14)
-);
-vtvmzd;
-
-$sql = "CREATE TABLE zozicdph01new30052014 ".$sqlt;
-$vysledek = mysql_query("$sql");
-
-}
-//koniec dopln zozicdph k 30052014
-
-
-//kontrola DU
-if( $kli_vrok == 2012  )
- {
-$sql = "SELECT * FROM F$kli_vxcf"."_uctnewdupobocka";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_ufir ");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $danovy=$riaddok->uctt01;
-  $danovyx=$riaddok->uctt01;
-  }
-
-//ak existuje ../import/obce_du.csv naimportuj obec_du
-//Tabulka obec_du
-$sql = "SELECT * FROM obec_du";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-          {
-
-if( file_exists("../import/obce_du.csv")) 
-        {
-
-echo "Vytvaram tabulku obec_du!"."<br />";
-
-$sqlt = <<<crs_no
-(
-   obec         VARCHAR(40) not null,
-   obecbd       VARCHAR(40) not null,
-   okres        VARCHAR(40) not null,
-   pscs         VARCHAR(10) not null,
-   pscsb        VARCHAR(10) not null,
-   kodok        VARCHAR(10) not null,
-   vuc          VARCHAR(10) not null,
-   ndu          VARCHAR(30) not null
-);
-crs_no;
-
-$sql = 'CREATE TABLE obec_du'.$sqlt;
-$vysledek = mysql_query("$sql");
-
-$subor = fopen("../import/obce_du.csv", "r");
-while (! feof($subor))
-     {
-//DOBEC;OBEC;OKRES;PSC;DPOSTA;POSTA;KOD_OKR;KRAJ
-
-  $riadok = fgets($subor, 500);
-  //print "$riadok<br />";
-  $pole = explode(";", $riadok);
-
-  $x_obec =  $pole[0];
-  $x_okres = $pole[2];
-  $x_psc =   $pole[3];
-  $x_kok =   $pole[6];
-  $x_vuc =   $pole[7];
- 
-$x_pscb=str_replace(" ","",$x_psc);
-$x_obecbd = StrTr($x_obec, "·‰ËÔÈÏÎÌæÚÙÛˆ‡¯öù˙˘¸˝û¡ƒ»œ…ÃÀÕº“”÷‘ÿ¿äç⁄Ÿ‹›é",
-"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
-$x_obecbdlw=strtolower($x_obecbd);;
-
-$c_kok=1*$x_kok;
-
-if( $c_kok > 0 )
-{
-$sqult = "INSERT INTO obec_du ( obec,obecbd,okres,pscs,pscsb,kodok,vuc )".
-" VALUES ( '$x_obec', '$x_obecbdlw', '$x_okres', '$x_psc', '$x_pscb', '$x_kok', '$x_vuc' ); "; 
-
-$ulozene = mysql_query("$sqult"); 
-}
-     }
-
-//koniec existuje csv
-        }
-
-$sqult = "UPDATE obec_du SET ndu='TREN»ÕN' WHERE LEFT(vuc,2) = 'TC' "; $ulozene = mysql_query("$sqult"); 
-$sqult = "UPDATE obec_du SET ndu='TRNAVA' WHERE LEFT(vuc,2) = 'TA' "; $ulozene = mysql_query("$sqult");
-$sqult = "UPDATE obec_du SET ndu='KOäICE' WHERE LEFT(vuc,2) = 'KI' "; $ulozene = mysql_query("$sqult");
-$sqult = "UPDATE obec_du SET ndu='PREäOV' WHERE LEFT(vuc,2) = 'PV' "; $ulozene = mysql_query("$sqult");
-$sqult = "UPDATE obec_du SET ndu='NITRA' WHERE LEFT(vuc,2) = 'NI' "; $ulozene = mysql_query("$sqult");
-$sqult = "UPDATE obec_du SET ndu='BRATISLAVA' WHERE LEFT(vuc,2) = 'BL' "; $ulozene = mysql_query("$sqult");
-$sqult = "UPDATE obec_du SET ndu='éILINA' WHERE LEFT(vuc,2) = 'ZI' "; $ulozene = mysql_query("$sqult");
-$sqult = "UPDATE obec_du SET ndu='BANSK¡ BYSTRICA' WHERE LEFT(vuc,2) = 'BC' "; $ulozene = mysql_query("$sqult");
-
-          }
-//koniec  nie je obec_du tabulka
-
-//koniec ak existuje ../import/obce_du.csv naimportuj obec_du
-
-//ak je obec_du tak prepis DU
-$sql = "SELECT * FROM obec_du";
-$vysledok = mysql_query("$sql");
-if ($vysledok)
-          {
-
-
-//upravim danovy na same male a bez diakritiky
-$danovybd = StrTr($danovy, "·‰ËÔÈÏÎÌæÚÙÛˆ‡¯öù˙˘¸˝û¡ƒ»œ…ÃÀÕº“”÷‘ÿ¿äç⁄Ÿ‹›é",
-"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
-$danovy=strtolower($danovybd);
-
-$sqldok = mysql_query("SELECT * FROM obec_du WHERE obecbd = '$danovy' ");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $danovynew=$riaddok->ndu;
-  }
-
-$sqldok = mysql_query("UPDATE F$kli_vxcf"."_ufir SET uctt01 = '$danovynew' ");
-
-echo "Opravil som DUold ".$danovyx." na DUnew ".$danovynew.".";
-//exit;
-
-          }
-//koniec ak je obec_du tak prepis DU
-
-$sqlt = <<<vtvmzd
-(
-   xcf         INT,
-   id          INT,
-   datm        TIMESTAMP(14)
-);
-vtvmzd;
-
-$sql = "CREATE TABLE F$kli_vxcf"."_uctnewdupobocka".$sqlt;
-$vysledek = mysql_query("$sql");
-}
-
- }
-//koniec kontrola DU
-
-if( $kli_vrok < 2012 )
-{
-$koefmin = 1*$_REQUEST['koefmin'];
-$druhykoef = strip_tags($_REQUEST['druhykoef']);
-?>
-
-<script type="text/javascript">
-  var okno = window.open("../ucto/archivdph.php?copern=<?php echo $copern; ?>&drupoh=<?php echo $drupoh; ?>&tis=<?php echo $tis; ?>
-&fort=<?php echo $fort; ?>&subor=<?php echo $subor; ?>&prepoc=<?php echo $prepoc; ?>
-&cislo_ume=<?php echo $cislo_ume; ?>&cislo_stvrt=<?php echo $cislo_stvrt; ?>&koefmin=<?php echo $koefmin; ?>&druhykoef=<?php echo $druhykoef; ?>
-&cislo_druh=<?php echo $cislo_druh; ?>&cislo_dap=<?php echo $cislo_dap; ?>","_self");
-</script>
-<?php
-exit;
-}
-
-if ( $copern == 80 )
-    {
-
-$sql = "SELECT cpop FROM F$kli_vxcf"."_archivdph ";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-          {
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD koefmin DECIMAL(10,4) AFTER r36";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD koefnew DECIMAL(10,4) AFTER r36";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD odpocall DECIMAL(10,2) AFTER r36";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD odpocupr DECIMAL(10,2) AFTER r36";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD odpocroz DECIMAL(10,2) AFTER r36";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD rodpocall DECIMAL(10,2) AFTER r36";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD rodpocupr DECIMAL(10,2) AFTER r36";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD rodpocroz DECIMAL(10,2) AFTER r36";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD druhykoef TEXT AFTER r36";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD r19orig DECIMAL(10,2) DEFAULT 0 AFTER r36";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD r18orig DECIMAL(10,2) DEFAULT 0 AFTER r36";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD r37 DECIMAL(10,2) AFTER r36";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD r38 DECIMAL(10,2) AFTER r37";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD dad DATE NOT NULL AFTER fic";
-$vysledek = mysql_query("$sql");
-
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD cpid INT AFTER druh";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD daid timestamp AFTER cpid";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph MODIFY cpid int PRIMARY KEY auto_increment ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph MODIFY daid timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_archivdph ADD cpop INT DEFAULT 0 AFTER daid";
-$vysledek = mysql_query("$sql");
-          }
-
-     }
-
-
-
-//odpocet riadne od dodatocneho presunute do prizdph2014_uprava.php
+//odpocet riadne od dodatocneho
 if ( $copern == 230 )
     {
 $sqlt = "DROP TABLE F$kli_vxcf"."_archivdph".$kli_uzid;
@@ -579,7 +90,7 @@ $odpoc=1;
 //koniec odpocet riadne od dodatocneho
 
 
-//prepocet pomernej DPH presunute do prizdph2014_uprava.php
+//prepocet pomernej DPH
 if ( $copern == 220 )
     {
 $koefmin = 1*$_REQUEST['koefmin'];
@@ -797,30 +308,9 @@ $prepoc=1;
     }
 //koniec prepocet
 
-//vymazanie polozky
-if ( $copern == 60 )
-    {
-$zmazttt = "DELETE FROM F$kli_vxcf"."_archivdphzoznam WHERE er4 = $cislo_cpid  "; 
-$zmazane = mysql_query("$zmazttt");
 
-$zmazttt = "DELETE FROM F$kli_vxcf"."_archivdphkvdph WHERE cpid = $cislo_cpid  "; 
-$zmazane = mysql_query("$zmazttt");
 
-$zmazttt = "DELETE FROM F$kli_vxcf"."_archivdph WHERE cpid = $cislo_cpid  "; 
-$zmazane = mysql_query("$zmazttt"); 
-$copern=80;
-if (!$zmazane):
-?>
-<script type="text/javascript"> alert( " POLOéKA NEBOLA VYMAZAN¡ " ) </script>
-<?php
-endif;
-if ($zmazane):
-$zmaz="OK";
-endif;
-     }
-//koniec vymazania polozky
-
-// zapis upravene udaje presunute do prizdph2014_uprava.php
+// zapis upravene udaje
 if ( $copern == 23 )
     {
 
@@ -903,21 +393,19 @@ $sqtoz = "UPDATE F$kli_vxcf"."_archivdph".
 " WHERE r31 < 0 AND cpid = $cislo_cpid  ";
 $oznac = mysql_query("$sqtoz");
 
-$copern=80;
-if (!$upravene):
 ?>
-<script type="text/javascript"> alert( "⁄DAJE NEBOLI UPRAVEN… " ) </script>
+<script type="text/javascript">
+window.open('../ucto/archivdph2014.php?copern=80&drupoh=1&page=1', '_self' );
+</script>
 <?php
-endif;
-if ($upravene):
-$uprav="OK";
-endif;
+$copern=20;
+exit;
     }
 //koniec zapisu upravenych udajov
 
 
 
-//nacitaj udaje pre upravu presunute do prizdph2014_uprava.php
+//nacitaj udaje pre upravu
 if ( $copern == 20 )
     {
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_archivdph".
@@ -1176,25 +664,7 @@ var sirkawic = screen.width-10;
     }
 
 
-function ZmazPolozku(cpid)
-                {
-var cislo_cpid = cpid;
 
-window.open('../ucto/archivdph2014.php?copern=60&page=1&sysx=UCT&cislo_cpid=' + cislo_cpid + '&drupoh=1&uprav=1',
- '_self' );
-                }
-
-function UpravPolozku(cpid,ume,druh,stvrtrok,dap)
-                {
-var cislo_cpid = cpid;
-var cislo_ume = ume;
-var cislo_druh = druh;
-var cislo_dap = dap;
-var stvrtrok = stvrtrok;
-
-window.open('../ucto/prizdph2014_uprav.php?copern=20&page=1&sysx=UCT&cislo_cpid=' + cislo_cpid + '&cislo_ume=' + cislo_ume + '&cislo_druh=' + cislo_druh + '&cislo_stvrt=' + stvrtrok + '&drupoh=1&uprav=1',
- '_self' );
-                }
 
 function TlacPolozku(cpid,ume,druh,stvrtrok,dap)
                 {
@@ -1328,48 +798,6 @@ window.open('../ucto/prizdph2014.php?copern=7020&drupoh=1&page=1&typ=PDF&cislo_c
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-function KvPdf(cpid,ume,druh,stvrtrok,dap,cpop)
-                {
-var cislo_cpid = cpid;
-var cislo_ume = ume;
-var cislo_druh = druh;
-var stvrtrok = stvrtrok;
-var cislo_cpop = cpop;
-
-window.open('../ucto/kontrolnydph2014.php?copern=7020&drupoh=1&page=1&typ=PDF&cislo_cpop=' + cislo_cpop + '&cislo_cpid=' + cislo_cpid + '&cislo_ume=' + cislo_ume + '&cislo_druh=' + cislo_druh + '&cislo_stvrt=' + stvrtrok + '&rozdiel=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function KvXml(cpid,ume,druh,stvrtrok,dap,cpop)
-                {
-var cislo_cpid = cpid;
-var cislo_ume = ume;
-var cislo_druh = druh;
-var stvrtrok = stvrtrok;
-var cislo_cpop = cpop;
-
-window.open('../ucto/kontrolnydph2014.php?copern=7020&drupoh=1&page=1&typ=PDF&xmlko=1&cislo_cpop=' + cislo_cpop + '&cislo_cpid=' + cislo_cpid + '&cislo_ume=' + cislo_ume + '&cislo_druh=' + cislo_druh + '&cislo_stvrt=' + stvrtrok + '&rozdiel=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function KvControl(cpid,ume,druh,stvrtrok,dap,cpop)
-                {
-var cislo_cpid = cpid;
-var cislo_ume = ume;
-var cislo_druh = druh;
-var stvrtrok = stvrtrok;
-var cislo_cpop = cpop;
-
-window.open('../ucto/kontrolnydph2014.php?copern=7020&drupoh=1&page=1&typ=PDF&xmlko=0&control=1&cislo_cpop=' + cislo_cpop + '&cislo_cpid=' + cislo_cpid + '&cislo_ume=' + cislo_ume + '&cislo_druh=' + cislo_druh + '&cislo_stvrt=' + stvrtrok + '&rozdiel=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function manualDodKvdph(cpid, ume, stvrt)
-                {
-
-window.open('../ucto/kontrolnydph2014_manual.php?copern=1&drupoh=1&page=1&typ=PDF&xmlko=0&control=1&rozdiel=0&xume=' + ume + '&xstv=' + stvrt + '&xdod=' + cpid + '&xx=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
 
 </script>
 </HEAD>
@@ -1378,13 +806,8 @@ window.open('../ucto/kontrolnydph2014_manual.php?copern=1&drupoh=1&page=1&typ=PD
 <table class="h2" width="100%" >
 <tr>
 
-<td>EuroSecom  -  ArchÌv daÚov˝ch priznanÌ DPH <?php echo $kli_vrok; ?>
+<td>EuroSecom  -  ArchÌv daÚov˝ch priznanÌ DPH <?php echo $kli_vrok; ?> - ˙prava
 
-<?php if( $oddelcsv == 1 ) { ?>
-<a href="#" title="icDPH CSV1" onClick="window.open('../ucto/archivdph2014.php?copern=80&drupoh=1&page=1&akecsv=1', '_self')">CSV1</a>
-
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="icDPH CSV2" onClick="window.open('../ucto/archivdph2014.php?copern=80&drupoh=1&page=1&akecsv=2', '_self')">CSV2</a>
-<?php                      } ?>
 </td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
@@ -1415,7 +838,7 @@ if ( $copern == 20 )
  Poloûka OS»=<?php echo $h_oc;?> spr·vne uloûen·</span>
 </tr>
 <table class="fmenu" width="100%" >
-<FORM name="formv1" class="obyc" method="post" action="archivdph2014.php?copern=23
+<FORM name="formv1" class="obyc" method="post" action="prizdph2014_uprav.php?copern=23
 &cislo_cpid=<?php echo $cislo_cpid;?>" >
 <tr>
 <td class="bmenu" width="10%">
@@ -1698,137 +1121,7 @@ document.formv1.par79ods2.checked = "checked";
 //koniec uprav  udaje strana 1
 ?>
 
-<?php
-//zoznam priznani
-if ( $copern == 80 )
-     {
-$sqltt = "SELECT * FROM F$kli_vxcf"."_archivdph WHERE druh > 0 ORDER BY ume DESC,druh";
-//echo $sqltt;
-$sql = mysql_query("$sqltt");
 
-// celkom poloziek
-$cpol = mysql_num_rows($sql);
-$i = 0;
-?>
-
-<table class="fmenu" width="100%" >
-
-
-<tr>
-<td class="hmenu" colspan="5" >
-<?php
-if( $fir_uctx07 == 1 )
-     {
-?>
-<a href="#" onClick="ArchivJCD();">
-JCD <img src='../obr/zoznam.png' width=15 height=15 border=0 title='ArchÌv JCD uplatnen˝ch v DPH' ></a></td>
-<?php
-     }
-?>
-<td class="hmenu" colspan="5" align="right" ></td>
-</tr>
-
-
-<tr>
-<td class="hmenu" width="10%" >mesiac
-<td class="hmenu" width="10%" >ötvrùrok
-<td class="hmenu" width="15%" >druh
-<td class="hmenu" width="15%" align="right" >r31 vlastn· daÚ.povinnosù
-<td class="hmenu" width="15%" align="right" >r32 nadmer˝ odpoËet
-<td class="hmenu" width="5%" >TlaË
-<td class="hmenu" width="5%" >Uprav
-<td class="hmenu" width="5%" >Export
-<td class="hmenu" width="15%" >Kontroln˝ v˝kaz
-<td class="hmenu" width="5%" >Zmaû
-</tr>
-
-<?php
-   while ($i <= $cpol )
-   {
-?>
-<?php
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-?>
-<tr>
-<td class="fmenu" ><?php if ( $riadok->stvrtrok == 0 ) { echo $riadok->ume; }?></td>
-<td class="fmenu" >
-<?php if ( $riadok->stvrtrok != 0 AND $riadok->stvrtrok != 5 ) { echo $riadok->stvrtrok; } ?>
-<?php if ( $riadok->stvrtrok == 5 ) { echo "rok ".$kli_vrok; } ?>
-</td>
-<td class="fmenu" >
-
-<?php if ( $riadok->druh == 1 ) { echo "Riadne"; } ?>
-<?php if ( $riadok->druh == 2 ) { echo "OpravnÈ"; } ?>
-<?php if ( $riadok->druh == 3 ) { echo "DodatoËnÈ"; } ?>
- z <?php echo $riadok->dap;?> /id<?php echo $riadok->cpid;?> <?php echo $riadok->daid;?>
-</td>
-
-<td class="fmenu" align="right" ><?php echo $riadok->r31;?></td>
-<td class="fmenu" align="right" ><?php echo $riadok->r32;?></td>
-
-<td class="fmenu" width="5%" >
-<a href="#" onClick="TlacPolozku(<?php echo $riadok->cpid;?>,'<?php echo $riadok->ume;?>',<?php echo $riadok->druh;?>,<?php echo $riadok->stvrtrok;?>,'<?php echo $riadok->dap;?>');">
-<img src='../obr/tlac.png' width=15 height=10 border=0 title='TlaËiù priznanie DPH' ></a>
-
-<?php
-$obdx=$riadok->ume;
-if( $riadok->stvrtrok == 1 ) { $obdx="1.".$kli_vrok; }
-if( $riadok->stvrtrok == 2 ) { $obdx="4.".$kli_vrok; }
-if( $riadok->stvrtrok == 3 ) { $obdx="7.".$kli_vrok; }
-if( $riadok->stvrtrok == 4 ) { $obdx="10.".$kli_vrok; }
-?>
-
-<a href="#" onClick="TlacPotvrdDPH('<?php echo $obdx;?>');">
-<img src='../obr/tlac.png' width=10 height=10 border=0 title="VytlaËiù potvrdenie o podanÌ daÚovÈho priznania DPH vo form·te PDF" ></a>
-
-<td class="fmenu" width="5%" >
-<a href="#" onClick="UpravPolozku(<?php echo $riadok->cpid;?>,'<?php echo $riadok->ume;?>',<?php echo $riadok->druh;?>,<?php echo $riadok->stvrtrok;?>,'<?php echo $riadok->dap;?>');">
-<img src='../obr/uprav.png' width=15 height=10 border=0 title='Upraviù riadok' ></a>
-
-<td class="fmenu" width="5%" >
-<a href="#" onClick="ExportPolozku(<?php echo $riadok->cpid;?>,'<?php echo $riadok->ume;?>',<?php echo $riadok->druh;?>,<?php echo $riadok->stvrtrok;?>,'<?php echo $riadok->dap;?>');">
-<img src='../obr/export.png' width=15 height=10 border=0 title='Export do XML' ></a>
-
-<?php $cislo_cpop=1*$riadok->cpop; ?>
-
-<td class="fmenu" width="15%" >
-<a href="#" onClick="KvPdf(<?php echo $riadok->cpid;?>,'<?php echo $riadok->ume;?>',<?php echo $riadok->druh;?>,<?php echo $riadok->stvrtrok;?>,'<?php echo $riadok->dap;?>',<?php echo $cislo_cpop;?>);">
-<img src='../obr/tlac.png' width=15 height=10 border=0 title='TlaËiù kontroln˝ v˝kaz DPH PDF' ></a>
-&nbsp;&nbsp;&nbsp;
-<a href="#" onClick="KvXml(<?php echo $riadok->cpid;?>,'<?php echo $riadok->ume;?>',<?php echo $riadok->druh;?>,<?php echo $riadok->stvrtrok;?>,'<?php echo $riadok->dap;?>',<?php echo $cislo_cpop;?>);">
-<img src='../obr/export.png' width=15 height=10 border=0 title='Export kontrolnÈho v˝kazu DPH do XML' ></a>
-&nbsp;&nbsp;&nbsp;
-<a href="#" onClick="KvControl(<?php echo $riadok->cpid;?>,'<?php echo $riadok->ume;?>',<?php echo $riadok->druh;?>,<?php echo $riadok->stvrtrok;?>,'<?php echo $riadok->dap;?>',<?php echo $cislo_cpop;?>);">
-<img src='../obr/pozor.png' width=15 height=10 border=0 title='Kontrolovaù kontroln˝ v˝kaz DPH iËdph(<?php echo $cpolicdph; ?>)' ></a>
-
-<?php if ( $riadok->druh == 3 ) { ?>
-&nbsp;&nbsp;&nbsp;
-<a href="#" onClick="manualDodKvdph(<?php echo $riadok->cpid;?>,'<?php echo $riadok->ume;?>',<?php echo $riadok->stvrtrok;?>);">
-<img src='../obr/vlozit.png' width=15 height=10 border=0 title='Manu·lny vstup kontroln˝ v˝kaz DPH ' ></a>
-
-
-<?php                           } ?>
-
-<td class="fmenu" width="5%" >
-<a href="#" onClick="ZmazPolozku(<?php echo $riadok->cpid;?>);">
-<img src='../obr/zmaz.png' width=15 height=10 border=0 title='Vymazaù riadok' ></a>
-
-</td>
-</tr>
-<?php
-  }
-$i = $i + 1;
-   }
-?>
-
-</table>
-
-<?php
-     }
-//koniec zoznam
-?>
 
 
 <div id="robotokno" style="cursor: hand; display: none; position: absolute; z-index: 200; top: 490; left: 400; width:60; height:100;">
@@ -1894,8 +1187,6 @@ Suma 20% DPH za pomernÈ druhy upraven· </td><td width='20%' class='ponuka' colsp
 </div>
 
 <?php
-$robot=1;
-$cislista = include("uct_lista.php");
 
 
 // celkovy koniec dokumentu
