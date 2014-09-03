@@ -1553,7 +1553,7 @@ if( $hlavicka->ruc != 0 )
 $zaklzal=-1*$hlavicka->zal; $zakldph=-1*$hlavicka->ruc; $zaklzak=1*($zaklzal-$zakldph);
 $zaklzaks=sprintf("%0.2f", $zaklzak); $zakldphs=sprintf("%0.2f", $zakldph); $zaklzals=sprintf("%0.2f", $zaklzal);
 
-$zoszal=$hlavicka->hod-$hlavicka->zal; $zosdph=$hlavicka->dn2-$hlavicka->ruc; $zoszak=$zoszal-zosdph;
+$zoszal=$hlavicka->hod-$hlavicka->zal; $zosdph=$hlavicka->dn2-$hlavicka->ruc; $zoszak=$zoszal-$zosdph;
 $zoszaks=sprintf("%0.2f", $zoszak); $zosdphs=sprintf("%0.2f", $zosdph); $zoszals=sprintf("%0.2f", $zoszal);
 
 $pdf->SetFont('arial','',8);
