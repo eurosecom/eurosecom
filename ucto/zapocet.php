@@ -393,13 +393,13 @@ $pdf->Cell(30,6," ","T",0,"R");$pdf->Cell(40,6,"$rtov->hoz","T",1,"R");
 
 if( $rtov->poh == 999 )
      {
-if( $ekorobot == 0 ) { 
+if( $ekorobot >= 0 ) { 
 $pdf->Cell(0,2,"  ","0",1,"R");
 $pdf->SetFont('arial','',12);
 $pdf->Cell(170,6,"Rozdiel vo výške : $rtov->hoz Eur","1",1,"L");
                                         }
 
-if( $ekorobot == 1 AND $rtov->hodx != 0 AND $rtov->hoz != 0 ) { 
+if( $ekorobot == 2 AND $rtov->hodx != 0 AND $rtov->hoz != 0 ) { 
 $pdf->Cell(0,2,"  ","0",1,"R");
 $pdf->SetFont('arial','',12);
 $pdf->Cell(170,6,"Rozdiel vo výške : $rtov->hodx Eur","1",1,"L");
