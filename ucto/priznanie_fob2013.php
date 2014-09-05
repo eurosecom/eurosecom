@@ -254,6 +254,19 @@ $copern=20;
 //koniec nacitania celeho minuleho roka do FOB
     }
 
+
+//nacitaj prijmy a vydaje
+$nacitajpav=0;
+if ( $copern == 200 )
+{
+$nacitajpav=1;
+$copern=20;
+
+}
+//koniec copern=200 nacitaj prijmy a vydaje
+
+
+
 //znovu nacitaj
 if ( $copern == 26 ) { $copern=20; }
 
@@ -1834,7 +1847,9 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r00z2='$xr00z2', r00a2='$xr0
 
 
 //ak z androidu nacitaj prijmy a vydavky z vykazu o prijmoch a vydavkoch
-if( $zandroidu == 1 )
+if( $nacitajpav == 1 ) { $naccx=1; }
+if( $zandroidu == 1 ) { $naccx=1; }
+if( $naccx == 1 )
     {
 
 $sql = "SELECT * FROM F$kli_vxcf"."_prcvprivyds".$kli_uzid." WHERE prx = 1 ";
@@ -3256,6 +3271,10 @@ var sirkawic = screen.width-10;
   {
    window.open('priznanie_fob2013.php?copern=20&strana=<?php echo $strana; ?>&namanzelku=1', '_self');
   }
+  function NacitajVHpredDanou()
+  {
+   window.open('../ucto/priznanie_fob2013.php?strana=3&copern=200&drupoh=1&page=1&typ=PDF&dppo=1', '_self');
+  }
 </script>
 </HEAD>
 <?php if( $zandroidu == 1 ) { ?>
@@ -3505,6 +3524,9 @@ Fax:<input type="text" name="prfax" id="prfax" size="30" /> --> <!-- dopyt, nevi
 <input type="text" name="t1v1" id="t1v1" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:224px; left:661px;"/>
 <input type="text" name="t1p2" id="t1p2" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:262px; left:410px;"/>
 <input type="text" name="t1v2" id="t1v2" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:262px; left:661px;"/>
+
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajVHpredDanou();" title="Naèíta príjmy,výdavky a zaplatené poistné SP a ZP zo živnosti do tabu¾ky è.1 (VI.oddiel FOB 3. strana), musíte ma spracovaný Výkaz o príjmoch a výdavkoch za 12.2013" class="btn-row-tool" style="top:262px; left:910px;">
+
 <input type="text" name="t1p3" id="t1p3" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:302px; left:410px;"/>
 <input type="text" name="t1v3" id="t1v3" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:302px; left:661px;"/>
 <input type="text" name="t1p4" id="t1p4" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:343px; left:410px;"/>
