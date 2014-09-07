@@ -469,6 +469,8 @@ $dad = $fir_riadok->dad;
 $dad_sk=SkDatum($dad);
 $cpop = 1*$fir_riadok->cpop;
 
+$dap = $fir_riadok->dap;
+
 $odpocall=1*$fir_riadok->odpocall;
 $odpocupr=1*$fir_riadok->odpocupr;
 
@@ -963,7 +965,7 @@ $tel_za=$pole[1];
 <span class="text-echo-field" style="top:850px; left:179px; width:100px;"><?php echo $tel_za; ?></span>
 
 <!-- Vyhlasujem dna -->
-<span class="text-echo-field" style="top:880px; left:39px; width:650px;"><?php echo $cislo_dap; ?></span>
+<span class="text-echo-field" style="top:950px; left:39px; width:120px;"><?php echo $dap; ?></span>
 
 </div> <!-- koniec .wrap-form-background -->
 <?php                                        } ?>
