@@ -357,14 +357,25 @@ $cpop = 1*$_REQUEST['cpop'];
 
 $uprav="NO";
 
+if( $strana == 2 ) {
 
 $uprtxt = "UPDATE F$kli_vxcf"."_archivdph SET cpop='$cpop',".
 " r01='$r01', r02='$r02', r03='$r03', r04='$r04', r05='$r05', r06='$r06', r07='$r07', r08='$r08', r09='$r09',".
 " r10='$r10', r11='$r11', r12='$r12', r13='$r13', r14='$r14', r15='$r15', r16='$r16', r17='$r17', r18='$r18', r19='$r19',".
 " r20='$r20', r21='$r21', r22='$r22', r23='$r23', r24='$r24', r25='$r25', r26='$r26', r27='$r27', r28='$r28', r29='$r29',".
-" r30='$r30', r31='$r31', r32='$r32', r33='$r33', r34='$r34', r35='$r35', r36='$r36', r37='$r37', r38='$r38', dad='$dad_sql', ".
+" r30='$r30', r31='$r31', r32='$r32', r33='$r33', r34='$r34', r35='$r35', r36='$r36', r37='$r37', r38='$r38', ".
 " par79ods2='$par79ods2' ".
 " WHERE cpid = $cislo_cpid  "; 
+
+                   }
+if( $strana == 1 ) {
+
+$uprtxt = "UPDATE F$kli_vxcf"."_archivdph SET ".
+" dad='$dad_sql' ".
+" WHERE cpid = $cislo_cpid  "; 
+
+                   }
+
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");  
 
@@ -390,6 +401,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_archivdph".
 " WHERE r31 < 0 AND cpid = $cislo_cpid  ";
 $oznac = mysql_query("$sqtoz");
 
+//exit;
 ?>
 <script type="text/javascript">
  window.open('../ucto/archivdph2014.php?copern=80&drupoh=1&page=1', '_self' );
@@ -619,6 +631,8 @@ var sirkawic = screen.width-10;
 ?>
   function ObnovUI()
   {
+
+   <?php if( $strana == 2 ) { ?>
    document.formv1.r01.value = '<?php echo "$r01";?>';
    document.formv1.r02.value = '<?php echo "$r02";?>';
    document.formv1.r03.value = '<?php echo "$r03";?>';
@@ -657,8 +671,11 @@ var sirkawic = screen.width-10;
    document.formv1.r36.value = '<?php echo "$r36";?>';
    document.formv1.r37.value = '<?php echo "$r37";?>';
    document.formv1.r38.value = '<?php echo "$r38";?>';
-   document.formv1.dad.value = '<?php echo "$dad_sk";?>';
    document.formv1.cpop.value = '<?php echo "$cpop";?>';
+   <?php                    } ?>
+   <?php if( $strana == 1 ) { ?>
+   document.formv1.dad.value = '<?php echo "$dad_sk";?>';
+   <?php                    } ?>
   }
 <?php
 //koniec uprava
@@ -856,15 +873,15 @@ zoznam <img src='../obr/tlac.png' width=15 height=15 border=0 title='TlaË zoznam
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="prizdph2014_uprav.php?copern=23&cislo_cpid=<?php echo $cislo_cpid; ?>">
+<FORM name="formv1" method="post" action="prizdph2014_uprav.php?copern=23&cislo_cpid=<?php echo $cislo_cpid; ?>&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
-$source="prizdph2014_uprav.php"; //dopyt, preveriù
+$source="prizdph2014_uprav.php?cislo_cpid=$cislo_cpid&cislo_ume=$cislo_ume&cislo_druh=$cislo_druh&cislo_stvrt=$cislo_stvrt&drupoh=1&uprav=1"; //dopyt, preveriù
 ?>
 <div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
  <a href="#" onclick="TlacPrehlad(2);" class="<?php echo $clas2; ?> toright">2</a> <!-- dopyt, tlaË tu bude? -->
  <a href="#" onclick="TlacPrehlad(1);" class="<?php echo $clas1; ?> toright">1</a>
  <h6 class="toright">TlaËiù:</h6>
@@ -887,9 +904,9 @@ $source="prizdph2014_uprav.php"; //dopyt, preveriù
 $riadne="x";
 $opravne="x";
 $dodatocne="x";
-if ( $h_drp == 1 ) { $opravne=""; $dodatocne=""; $dat_dodatocne=""; }
-if ( $h_drp == 2 ) { $riadne=""; $dodatocne=""; $dat_dodatocne=""; }
-if ( $h_drp == 3 ) { $riadne=""; $opravne=""; $dat_dodatocne=$h_dap; }
+if ( $cislo_druh == 1 ) { $opravne=""; $dodatocne=""; $dat_dodatocne=""; }
+if ( $cislo_druh == 2 ) { $riadne=""; $dodatocne=""; $dat_dodatocne=""; }
+if ( $cislo_druh == 3 ) { $riadne=""; $opravne=""; $dat_dodatocne=$h_dap; }
 ?>
 <span class="text-echo" style="top:240px; left:360px; letter-spacing:0; font-size:18px;"><?php echo $riadne; ?></span> <!-- dopyt, oöetriù -->
 <span class="text-echo" style="top:260px; left:360px; letter-spacing:0; font-size:18px;"><?php echo $opravne; ?></span>
@@ -946,7 +963,7 @@ $tel_za=$pole[1];
 <span class="text-echo-field" style="top:850px; left:179px; width:100px;"><?php echo $tel_za; ?></span>
 
 <!-- Vyhlasujem dna -->
-<!-- dopyt, asi lepöie input -->
+<span class="text-echo-field" style="top:880px; left:39px; width:650px;"><?php echo $cislo_dap; ?></span>
 
 </div> <!-- koniec .wrap-form-background -->
 <?php                                        } ?>
