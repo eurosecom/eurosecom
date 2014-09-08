@@ -860,7 +860,8 @@ $source="prizdph2014_uprav.php?cislo_cpid=$cislo_cpid&cislo_ume=$cislo_ume&cislo
  class="form-background">
 
 <!-- danove udaje -->
-<span class="text-echo-field" style="top:233px; left:99px; width:233px;"><?php echo $fir_ficd; ?></span> <!-- dopyt, môžete ošetri ièdph bez sk -->
+<?php $fir_ficdx=substr($fir_ficd,2,10); ?>
+<span class="text-echo-field" style="top:233px; left:99px; width:233px;"><?php echo $fir_ficdx; ?></span> <!-- dopyt, môžete ošetri ièdph bez sk -->
 <span class="text-echo-field" style="top:289px; left:39px; width:234px;"><?php echo $fir_fdic; ?></span> <!-- dopyt, môžete ošetri pri tlaèi nedáva diè, ak je vyplenené ièdph -->
 <span class="text-echo-field" style="top:344px; left:39px; width:294px;"><?php echo $fir_uctt01; ?></span>
 
@@ -889,7 +890,8 @@ if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
 if ( $mesiac == 0 ) { $mesiac=""; }
 if ( $stvrtrok == 0 ) { $stvrtrok=""; }
 ?>
-<span class="text-echo" style="top:264px; left:698px;"><?php echo $mesiac; ?></span> <!-- dopyt, môžete ošetri rok preè a iba mesiac -->
+<?php $mesiacx=substr($mesiac,0,2); ?>
+<span class="text-echo" style="top:264px; left:698px;"><?php echo $mesiacx; ?></span> <!-- dopyt, môžete ošetri rok preè a iba mesiac -->
 <span class="text-echo" style="top:264px; left:774px;"><?php echo $stvrtrok; ?></span> <!-- dopyt, môžete ošetri výpis len ak nie je mesiac -->
 <span class="text-echo" style="top:264px; left:829px;"><?php echo $kli_vrok; ?></span>
 
@@ -941,7 +943,8 @@ $tel_za=$pole[1];
  class="form-background">
 
 <!-- zahlavie strany -->
-<span class="text-echo-field" style="top:82px; left:200px; width:233px;"><?php echo $fir_ficd; ?></span> <!-- dopyt, ošetri ièdph bez sk -->
+<?php $fir_ficdx=substr($fir_ficd,2,10); ?>
+<span class="text-echo-field" style="top:82px; left:200px; width:233px;"><?php echo $fir_ficdx; ?></span> <!-- dopyt, ošetri ièdph bez sk -->
 <span class="text-echo-field" style="top:82px; left:457px; width:233px;"><?php echo $fir_fdic; ?></span> <!-- dopyt, pri tlaèi nedáva diè, ak je vyplenené ièdph -->
 
 <!-- riadky 01-04 -->
