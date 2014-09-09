@@ -509,6 +509,20 @@ $ttqq = mysql_query("$ttvv");
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - Priznanie DPH</title>
 <style type="text/css">
+div.bar-btn-form-tool {
+  top: 28px;
+}
+div.bar-btn-form-tool > a {
+  display: block;
+  float: right;
+  line-height: 16px;
+  font-size: 14px;
+  color: #39f;
+  margin-left: 10px;
+}
+div.bar-btn-form-tool > a:hover {
+  text-decoration: underline;
+}
 div.navbar {
   overflow: auto;
   width: 100%;
@@ -535,7 +549,7 @@ span.text-echo-field {
   height: 28px;
   line-height: 28px;
   text-indent: 5px;
-  background-color: #dbdbdb;
+  background-color: #fff;
   letter-spacing: 1px;
   font-weight: bold;
   font-size: 18px;
@@ -807,10 +821,8 @@ if ( $cislo_druh == 3 ) { $druh_priz="DodatoËnÈ"; }
    </td>
    <td>
     <div class="bar-btn-form-tool">
-<!--
-       <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacZapoctovy();"
-      title="Zobraziù v PDF" class="btn-form-tool">
--->
+     <a href="#" title="Sp‰ù do archÌvu">Sp‰ù</a> <!-- dopyt, mÙûete oûiviù -->
+     <a style="height:16px; border-right:2px solid #39f;">&nbsp;</a>
 <?php
 if ( $cislo_stvrt == 0 ) { $podmzarchu=" er1 = 0 AND ume = $cislo_ume "; }
 if ( $cislo_stvrt > 0 ) { $podmzarchu=" er1 = $cislo_stvrt "; }
@@ -822,19 +834,17 @@ $sqldok = mysql_query("$sqlttt");
   $riaddok=mysql_fetch_object($sqldok);
   $jearchzoznam=1;
   }
-if ( $jearchzoznam == 1 ) // { ?> <!-- dopyt, skult˙rniù -->
-     <a href="#" onclick="TlacZoznam(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $cislo_stvrt;?>);">
-      zoznam <img src='../obr/tlac.png' width=15 height=15 border=0 title='TlaË zoznamu dokladov k priznaniu DPH podæa riadkov' ></a>
-<?php                    // } ?>
+if ( $jearchzoznam == 1 ) { ?>
+     <a href="#" onclick="TlacZoznam(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $cislo_stvrt;?>);"
+      title="Zobraziù zoznam dokladov k priznaniu DPH podæa riadkov">Doklady DPH</a>
+<?php                     } ?>
 
-<?php if ( $jearchzoznam == 1 ) // { ?> <!-- dopyt, skult˙rniù -->
-<a href="#" onClick="TlacZoznamRP(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $cislo_stvrt;?>);">
-+ <img src='../obr/export.png' width=15 height=15 border=0 title='TlaË rozdielov˝ch dokladov, ktorÈ s˙ navyöe v zozname archivovanom oproti aktu·lnemu' ></a>
-
-<a href="#" onClick="TlacZoznamRM(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $cislo_stvrt;?>);">
-- <img src='../obr/import.png' width=15 height=15 border=0 title='TlaË rozdielov˝ch dokladov, ktorÈ ch˝baj˙ v zozname archivovanom oproti aktu·lnemu' ></a>
-<?php                          // } ?>
-<!-- dopyt, pridaù tlaËidlo na vr·tenie zoznamu, eöte nem·m -->
+<?php if ( $jearchzoznam == 1 ) { ?>
+     <a href="#" onclick="TlacZoznamRP(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $cislo_stvrt;?>);"
+      title='Zobraziù rozdielovÈ doklady, ktorÈ s˙ navyöe oproti archÌvu'>PridanÈ doklady</a>
+     <a href="#" onclick="TlacZoznamRM(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $cislo_stvrt;?>);"
+      title='Zobraziù rozdielovÈ doklady, ktorÈ ch˝baj˙ oproti archÌvu'>Ch˝baj˙ce doklady</a>
+<?php                           } ?>
     </div>
    </td>
   </tr>
@@ -861,7 +871,7 @@ $source="prizdph2014_uprav.php?cislo_cpid=$cislo_cpid&cislo_ume=$cislo_ume&cislo
 
 <!-- danove udaje -->
 <?php $fir_ficdx=substr($fir_ficd,2,10); ?>
-<span class="text-echo-field" style="top:233px; left:99px; width:233px;"><?php echo $fir_ficdx; ?></span> <!-- dopyt, mÙûete oöetriù iËdph bez sk -->
+<span class="text-echo-field" style="top:233px; left:99px; width:233px;"><?php echo $fir_ficdx; ?></span>
 <span class="text-echo-field" style="top:289px; left:39px; width:234px;"><?php echo $fir_fdic; ?></span> <!-- dopyt, mÙûete oöetriù pri tlaËi ned·va diË, ak je vyplenenÈ iËdph -->
 <span class="text-echo-field" style="top:344px; left:39px; width:294px;"><?php echo $fir_uctt01; ?></span>
 
@@ -891,7 +901,7 @@ if ( $mesiac == 0 ) { $mesiac=""; }
 if ( $stvrtrok == 0 ) { $stvrtrok=""; }
 ?>
 <?php $mesiacx=substr($mesiac,0,2); ?>
-<span class="text-echo" style="top:264px; left:698px;"><?php echo $mesiacx; ?></span> <!-- dopyt, mÙûete oöetriù rok preË a iba mesiac -->
+<span class="text-echo" style="top:264px; left:698px;"><?php echo $mesiacx; ?></span>
 <span class="text-echo" style="top:264px; left:774px;"><?php echo $stvrtrok; ?></span> <!-- dopyt, mÙûete oöetriù v˝pis len ak nie je mesiac -->
 <span class="text-echo" style="top:264px; left:829px;"><?php echo $kli_vrok; ?></span>
 
@@ -937,14 +947,13 @@ $tel_za=$pole[1];
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-
 <div class="wrap-form-background">
 <img src="../dokumenty/dph2012/dphstr2.jpg" alt="tlaËivo Priznanie DPH 2.strana 309kB"
  class="form-background">
 
 <!-- zahlavie strany -->
 <?php $fir_ficdx=substr($fir_ficd,2,10); ?>
-<span class="text-echo-field" style="top:82px; left:200px; width:233px;"><?php echo $fir_ficdx; ?></span> <!-- dopyt, oöetriù iËdph bez sk -->
+<span class="text-echo-field" style="top:82px; left:200px; width:233px;"><?php echo $fir_ficdx; ?></span>
 <span class="text-echo-field" style="top:82px; left:457px; width:233px;"><?php echo $fir_fdic; ?></span> <!-- dopyt, pri tlaËi ned·va diË, ak je vyplenenÈ iËdph -->
 
 <!-- riadky 01-04 -->
