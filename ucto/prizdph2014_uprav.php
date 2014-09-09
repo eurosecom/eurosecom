@@ -1072,7 +1072,7 @@ $tel_za=$pole[1];
 </div>
 </FORM>
 
-</div> <!-- koniec #content -->
+
 <?php
 //mysql_free_result($vysledok);
      }
@@ -1144,7 +1144,7 @@ $tel_za=$pole[1];
 </FORM>
  </table>
 </div> <!-- koniec ekorobot-menu -->
-
+</div> <!-- koniec #content -->
 
 <?php
 if ( $prepoc == 1 ) {
