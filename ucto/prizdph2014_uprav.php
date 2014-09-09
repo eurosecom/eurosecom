@@ -821,7 +821,7 @@ if ( $cislo_druh == 3 ) { $druh_priz="DodatoËnÈ"; }
    </td>
    <td>
     <div class="bar-btn-form-tool">
-     <a href="#" title="Sp‰ù do archÌvu">Sp‰ù</a> <!-- dopyt, mÙûete oûiviù -->
+     <a href="#" title="Sp‰ù do archÌvu" onClick="window.open('../ucto/archivdph2014.php?copern=80&drupoh=1&page=1', '_self' )">Sp‰ù</a> <!-- dopyt, mÙûete oûiviù -->
      <a style="height:16px; border-right:2px solid #39f;">&nbsp;</a>
 <?php
 if ( $cislo_stvrt == 0 ) { $podmzarchu=" er1 = 0 AND ume = $cislo_ume "; }
@@ -872,7 +872,7 @@ $source="prizdph2014_uprav.php?cislo_cpid=$cislo_cpid&cislo_ume=$cislo_ume&cislo
 <!-- danove udaje -->
 <?php $fir_ficdx=substr($fir_ficd,2,10); ?>
 <span class="text-echo-field" style="top:233px; left:99px; width:233px;"><?php echo $fir_ficdx; ?></span>
-<span class="text-echo-field" style="top:289px; left:39px; width:234px;"><?php echo $fir_fdic; ?></span> <!-- dopyt, mÙûete oöetriù pri tlaËi ned·va diË, ak je vyplenenÈ iËdph -->
+<span class="text-echo-field" style="top:289px; left:39px; width:234px;"><?php echo $fir_fdicx; ?></span> <!-- dopyt, mÙûete oöetriù pri tlaËi ned·va diË, ak je vyplenenÈ iËdph -->
 <span class="text-echo-field" style="top:344px; left:39px; width:294px;"><?php echo $fir_uctt01; ?></span>
 
 <!-- Druh priznania -->
@@ -895,14 +895,17 @@ if ( $cislo_druh == 3 ) { $riadne=""; $opravne=""; $dat_dodatocne=$h_dap; }
 //if ( $stvrtrok == 0 ) { $mesiacx=$cislo_ume; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; } }
 //if ( $stvrtrok != 0 ) { echo $stvrtrok; }
 $mesiac=1*$cislo_ume;
-$stvrtrok=1*$obddph;
 if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
 if ( $mesiac == 0 ) { $mesiac=""; }
+$mesiacx=substr($mesiac,0,2);
+$mesiacxn=1*$mesiacx;
 if ( $stvrtrok == 0 ) { $stvrtrok=""; }
+if ( $mesiacxn == 0 ) { $mesiacx=""; }
+$stvrtrokx=$stvrtrok;
 ?>
-<?php $mesiacx=substr($mesiac,0,2); ?>
+
 <span class="text-echo" style="top:264px; left:698px;"><?php echo $mesiacx; ?></span>
-<span class="text-echo" style="top:264px; left:774px;"><?php echo $stvrtrok; ?></span> <!-- dopyt, mÙûete oöetriù v˝pis len ak nie je mesiac -->
+<span class="text-echo" style="top:264px; left:774px;"><?php echo $stvrtrokx; ?></span> <!-- dopyt, mÙûete oöetriù v˝pis len ak nie je mesiac -->
 <span class="text-echo" style="top:264px; left:829px;"><?php echo $kli_vrok; ?></span>
 
 <!-- typ platitela = natvrdo 1.moznost -->
@@ -954,7 +957,7 @@ $tel_za=$pole[1];
 <!-- zahlavie strany -->
 <?php $fir_ficdx=substr($fir_ficd,2,10); ?>
 <span class="text-echo-field" style="top:82px; left:200px; width:233px;"><?php echo $fir_ficdx; ?></span>
-<span class="text-echo-field" style="top:82px; left:457px; width:233px;"><?php echo $fir_fdic; ?></span> <!-- dopyt, pri tlaËi ned·va diË, ak je vyplenenÈ iËdph -->
+<span class="text-echo-field" style="top:82px; left:457px; width:233px;"><?php echo $fir_fdicx; ?></span> <!-- dopyt, pri tlaËi ned·va diË, ak je vyplenenÈ iËdph -->
 
 <!-- riadky 01-04 -->
 <input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);"
