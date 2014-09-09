@@ -63,10 +63,9 @@ $vsql = "CREATE TABLE F$kli_vxcf"."_archivdph".$kli_uzid." SELECT * FROM F$kli_v
 $vytvor = mysql_query("$vsql");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_archivdph,F$kli_vxcf"."_archivdph".$kli_uzid." ".
-" SET F$kli_vxcf"."_archivdph.r36=F$kli_vxcf"."_archivdph.r28-F$kli_vxcf"."_archivdph".$kli_uzid.".r28-".
-"F$kli_vxcf"."_archivdph.r30+F$kli_vxcf"."_archivdph.r30, ".
-" F$kli_vxcf"."_archivdph.r37=F$kli_vxcf"."_archivdph.r28-F$kli_vxcf"."_archivdph".$kli_uzid.".r28-".
-"F$kli_vxcf"."_archivdph.r30+F$kli_vxcf"."_archivdph.r30 ".
+" SET F$kli_vxcf"."_archivdph.r37=F$kli_vxcf"."_archivdph.r31-F$kli_vxcf"."_archivdph".$kli_uzid.".r31-".
+"F$kli_vxcf"."_archivdph.r32+F$kli_vxcf"."_archivdph.r32, ".
+" F$kli_vxcf"."_archivdph.r38=F$kli_vxcf"."_archivdph.r34-F$kli_vxcf"."_archivdph".$kli_uzid.".r34 ".
 " WHERE F$kli_vxcf"."_archivdph.ume = $cislo_ume AND F$kli_vxcf"."_archivdph.druh = 3 AND F$kli_vxcf"."_archivdph.stvrtrok = $cislo_stvrt ".
 " AND F$kli_vxcf"."_archivdph.ume=F$kli_vxcf"."_archivdph".$kli_uzid.".ume ".
 " AND F$kli_vxcf"."_archivdph.stvrtrok=F$kli_vxcf"."_archivdph".$kli_uzid.".stvrtrok ".
@@ -750,8 +749,7 @@ var sirkawic = screen.width-10;
    var cislo_ume = ume;
    var cislo_druh = druh;
    var stvrtrok = stvrtrok;
-window.open('../ucto/archivdph2014.php?copern=220&page=1&sysx=UCT&cislo_cpid=' + cislo_cpid + '&cislo_ume=' + cislo_ume + '&cislo_druh=' + cislo_druh + '&cislo_stvrt=' + stvrtrok +
- '&koefmin=' + h_koefmin + '&druhykoef=' + h_druhykoef + '&drupoh=1&uprav=1&prepoc=1', '_self' );
+window.open('../ucto/prizdph2014_uprav.php?copern=220&page=1&sysx=UCT&cislo_cpid=' + cislo_cpid + '&cislo_ume=' + cislo_ume + '&cislo_druh=' + cislo_druh + '&cislo_stvrt=' + stvrtrok + '&koefmin=' + h_koefmin + '&druhykoef=' + h_druhykoef + '&drupoh=1&uprav=1&prepoc=1', '_self' );
   }
 
 
@@ -762,8 +760,7 @@ window.open('../ucto/archivdph2014.php?copern=220&page=1&sysx=UCT&cislo_cpid=' +
    var cislo_ume = ume;
    var cislo_druh = druh;
    var stvrtrok = stvrtrok;
-window.open('../ucto/archivdph2014.php?copern=230&page=1&sysx=UCT&cislo_cpid=' + cislo_cpid + '&cislo_ume=' + cislo_ume + '&cislo_druh=' + cislo_druh + '&cislo_stvrt=' + stvrtrok +
- '&drupoh=1&uprav=1&odpoc=1', '_self');
+window.open('../ucto/prizdph2014_uprav.php?copern=230&page=1&sysx=UCT&cislo_cpid=' + cislo_cpid + '&cislo_ume=' + cislo_ume + '&cislo_druh=' + cislo_druh + '&cislo_stvrt=' + stvrtrok + '&drupoh=1&uprav=1&odpoc=1', '_self');
   }
 
   function TlacZoznam(cpid,ume,druh,stvrtrok)
@@ -797,7 +794,7 @@ window.open('../ucto/prizdph2014.php?copern=7020&drupoh=1&page=1&typ=PDF&cislo_c
   }
 </script>
 </HEAD>
-<BODY id="white" onload="ObnovUI(); <?php if ( $copern == 20 ) { echo 'ukazrobot();'; } ?> <?php if ( $prepoc == 1 ) { echo 'zobraz_robotmenu();'; } ?>">
+<BODY id="white" onload="ObnovUI(); <?php if ( $copern == 20 ) { echo 'ukazrobot();'; } ?> ">
 <?php
 //uprav udaje
 if ( $copern == 20 )
@@ -1055,63 +1052,6 @@ $tel_za=$pole[1];
  <img src='../obr/robot/robot3.jpg' onclick="zobraz_robotmenu();" class="ekorobot" style="float:left;"
   title='Dobrı deò, som Váš EkoRobot, ak máte otázku èi elanie, kliknite na mòa'>
 
-<div id="robotmenu" class="wrap-ekorobot-menu" style="display:none;">
- <table class="ekorobot-menu">
- <tr>
-  <th style="width:100%;">Koeficient pomerného odpoèítania DPH
-    <img src='../obr/zmazuplne.png' onclick='zhasni_menurobot();' title='Zavrie menu'
-     class="menu-close-btn">
-  </th>
- </tr>
-<?php if ( $cislo_druh == 3 ) { ?>
- <tr>
-  <td style="line-height:30px; height:30px; text-align:center;">
-   <a href="#" onclick="Odpoc(<?php echo $cislo_cpid; ?>,'<?php echo $cislo_ume; ?>',<?php echo $cislo_druh; ?>,<?php echo $stvrtrok; ?>);">
-    Odpoèíta riadne priznanie DPH od dodatoèného ?</a>
-  </td>
- </tr>
-<?php                         } ?>
-<?php if ( $koefmin == 0 OR $koefmin > 1 ) $koefmin="1.00"; ?>
-<FORM name='fkoef' method='post' action='#'>
- <tr>
-  <td style="height:60px;">
-   <p><strong>Druhy</strong> dokladov s pomernım uplatnením <span style="font-size:13px;">(napr: 34, 46, 48)</span></p>
-   <input type='text' name='h_druhykoef' id='h_druhykoef' maxlenght='30'
-    value='<?php echo $druhykoef; ?>' style="width:300px;">
-  </td>
- </tr>
- <tr>
-  <td>
-   <p style="float:left; line-height:34px;"><strong>Koeficient z predchádz.</strong> kalendárneho roka</p>
-   <input type='text' name='h_koefmin' id='h_koefmin' maxlenght='4'
-    value='<?php echo $koefmin; ?>' style="width:48px; float:right; position:relative; top:4px; right:30px;">
-  </td>
- </tr>
- <tr>
-  <td style="line-height:30px; height:30px; text-align:center;">
-   <a href="#" onclick="Prepoc(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $stvrtrok;?>);">
-   Prepoèíta pomernı odpoèet DPH ?</a>
-  </td>
- </tr>
-<?php if ( $prepoc == 1 ) { ?>
- <tr>
-  <td style="height:60px;">
-   <p>Suma 20% DPH za pomerné druhy <strong>celkom</strong></p>
-   <input type='text' name='h_odpocall' id='h_odpocall' maxlenght='10'
-    value='<?php echo $odpocall; ?>' style="width:100px;">
-  </td>
- </tr>
- <tr>
-  <td style="height:60px;">
-   <p>Suma 20% DPH za pomerné druhy <strong>upravená</strong></p>
-   <input type='text' name='h_odpocupr' id='h_odpocupr' maxlenght='10'
-    value='<?php echo $odpocupr; ?>' style="width:100px;">
-  </td>
- </tr>
-<?php                     } ?>
-</FORM>
- </table>
-</div> <!-- koniec ekorobot-menu -->
 
 <!-- id kvdph = manualna uprava dodatocneho kvdph -->
 <div class="kvdph-menu">
@@ -1141,30 +1081,79 @@ $tel_za=$pole[1];
 
 
 
-
-
-
-<tr>
-<span id="Cele" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota musí by celé kladné èíslo</span>
-<span id="Datum" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Dátum musí by v tvare DD.MM.RRRR,DD.MM alebo DD napríklad 21.10.2008 , 21 program doplni na 21.<?php echo $kli_vume; ?>;</span>
-<span id="Desc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus by desatinné èíslo, maximálne 2 desatinné miesta;</span>
-<span id="Desc4" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus by desatinné èíslo, maximálne 4 desatinné miesta;</span>
-<span id="Desc1" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus by desatinné èíslo, maximálne 1 desatinné miesto;</span>
-<span id="Oc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- OSÈ musí by celé kladné èíslo v rozsahu 1 a 9999</span>
-<span id="Fx" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Musíte vyplni všetky poloky vstupu</span>
-<span id="Ul" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:yellow; color:black;">
- Poloka OSÈ=<?php echo $h_oc;?> správne uloená</span>
-</tr>
+<div id="robotmenu" class="wrap-ekorobot-menu" style="display:none;">
+ <table class="ekorobot-menu">
+ <tr>
+  <th style="width:100%;">Koeficient pomerného odpoèítania DPH
+    <img src='../obr/zmazuplne.png' onclick='zhasni_menurobot();' title='Zavrie menu'
+     class="menu-close-btn">
+  </th>
+ </tr>
+<?php if ( $cislo_druh == 3 ) { ?>
+ <tr>
+  <td style="line-height:30px; height:30px; text-align:center;">
+   <a href="#" onclick="Odpoc(<?php echo $cislo_cpid; ?>,'<?php echo $cislo_ume; ?>',<?php echo $cislo_druh; ?>,<?php echo $stvrtrok; ?>);">
+    Odpoèíta riadne priznanie DPH od dodatoèného !</a>
+  </td>
+ </tr>
+<?php                         } ?>
+<?php if ( $koefmin == 0 OR $koefmin > 1 ) $koefmin="1.00"; ?>
+<FORM name='fkoef' method='post' action='#'>
+ <tr>
+  <td style="height:60px;">
+   <p><strong>Druhy</strong> dokladov s pomernım uplatnením <span style="font-size:13px;">(napr: 34, 46, 48)</span></p>
+   <input type='text' name='h_druhykoef' id='h_druhykoef' maxlenght='30'
+    value='<?php echo $druhykoef; ?>' style="width:300px;">
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p style="float:left; line-height:34px;"><strong>Koeficient z predchádz.</strong> kalendárneho roka</p>
+   <input type='text' name='h_koefmin' id='h_koefmin' maxlenght='4'
+    value='<?php echo $koefmin; ?>' style="width:48px; float:right; position:relative; top:4px; right:30px;">
+  </td>
+ </tr>
+ <tr>
+  <td style="line-height:30px; height:30px; text-align:center;">
+<?php if ( $prepoc == 0 ) { ?>
+   <a href="#" onclick="Prepoc(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $stvrtrok;?>);">
+   Prepoèíta pomernı odpoèet DPH !</a>
+<?php                     } ?>
+<?php if ( $prepoc == 1 ) { ?>
+   <a href="#" onclick="zhasni_menurobot();">
+   Pomernı odpoèet DPH prepoèítanı.</a>
+<?php                     } ?>
+  </td>
+ </tr>
+<?php if ( $prepoc == 1 ) { ?>
+ <tr>
+  <td style="height:60px;">
+   <p>Suma 20% DPH za pomerné druhy <strong>celkom</strong></p>
+   <input type='text' name='h_odpocall' id='h_odpocall' maxlenght='10'
+    value='<?php echo $odpocall; ?>' style="width:100px;">
+  </td>
+ </tr>
+ <tr>
+  <td style="height:60px;">
+   <p>Suma 20% DPH za pomerné druhy <strong>upravená</strong></p>
+   <input type='text' name='h_odpocupr' id='h_odpocupr' maxlenght='10'
+    value='<?php echo $odpocupr; ?>' style="width:100px;">
+  </td>
+ </tr>
+<?php                     } ?>
+</FORM>
+ </table>
+</div> <!-- koniec ekorobot-menu -->
 
 
 <?php
+if ( $prepoc == 1 ) {
+?>
+<script type="text/javascript">
+zobraz_robotmenu();
+</script>
+<?php
+                    }
 //celkovy koniec dokumentu
 } while (false);
 ?>
