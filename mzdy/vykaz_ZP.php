@@ -3504,19 +3504,19 @@ $platiazpn=$polxx;
   fwrite($soubor, $text);
 
 //den na vyplatu
-if( $fir_mzdx06 == 0 ) { $fir_mzdx06=15; }
-if( $fir_mzdx06 > 31 ) { $fir_mzdx06=15; }
+if( $fir_mzdx06 == 0 ) { $fir_mzdx06=31; }
+if( $fir_mzdx06 > 31 ) { $fir_mzdx06=31; }
 $denvyplaty=$fir_mzdx06;
 
 
-if( $denvyplaty == '29' AND $obdobie == 01 ) { $denvyplaty="28"; }
-if( $denvyplaty == '30' AND $obdobie == 01 ) { $denvyplaty="28"; }
-if( $denvyplaty == '31' AND $obdobie == 01 ) { $denvyplaty="28"; }
-if( $denvyplaty == '31' AND $obdobie == 03 ) { $denvyplaty="30"; }
-if( $denvyplaty == '31' AND $obdobie == 05 ) { $denvyplaty="30"; }
-if( $denvyplaty == '31' AND $obdobie == 08 ) { $denvyplaty="30"; }
-if( $denvyplaty == '31' AND $obdobie == 10 ) { $denvyplaty="30"; }
-
+if( $denvyplaty == 29 AND $obdobie == 1 ) { $denvyplaty="28"; }
+if( $denvyplaty == 30 AND $obdobie == 1 ) { $denvyplaty="28"; }
+if( $denvyplaty == 31 AND $obdobie == 1 ) { $denvyplaty="28"; }
+if( $denvyplaty == 31 AND $obdobie == 3 ) { $denvyplaty="30"; }
+if( $denvyplaty == 31 AND $obdobie == 5 ) { $denvyplaty="30"; }
+if( $denvyplaty == 31 AND $obdobie == 8 ) { $denvyplaty="30"; }
+if( $denvyplaty == 31 AND $obdobie == 10 ) { $denvyplaty="30"; }
+//echo $obdobie;
   $text = $kli_vrok.$obdobie."|$denvyplaty|".$fir_fnaz."|".$fir_fico."|".$platitel."|".$fir_fdic."|".$fir_ftel."|".$fir_ffax."|".$fir_fem1."|".$fir_fnm1."||".$fir_fuc1;
   
 
