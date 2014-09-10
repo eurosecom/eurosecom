@@ -620,7 +620,6 @@ div.kvdph-menu {
   position: absolute;
   top: 0px;
   right: 0;
-  width: 490px;
   height: 24px;
   line-height: 24px;
   padding-left: 7px;
@@ -1040,10 +1039,10 @@ $tel_za=$pole[1];
 <?php if ( $cislo_druh == 3 ) { ?>
 <!-- id kvdph = manualna uprava dodatocneho kvdph -->
 <div class="kvdph-menu">
- <div style="width:250px;"><strong>ID</strong> priznania DPH a KVDPH, ktoré opravujem</div>
- <div style="width:52px;">
+ <div style="width:270px;"><strong>ID</strong> priznania DPH a KVDPH, ktoré opravujem</div>
+ <div style="width:40px;">
   <input type="text" name="cpop" id="cpop"
-   style="width:40px; font-size:14px; height:18px; line-height:18px;"/>
+   style="width:30px; font-size:14px; height:18px; line-height:18px;"/>
  </div>
  <div>(len u <strong>dodatoèných</strong> priznaní !)</div>
 </div>
