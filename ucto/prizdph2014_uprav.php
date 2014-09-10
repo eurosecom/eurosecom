@@ -1037,15 +1037,27 @@ $tel_za=$pole[1];
  <img src='../obr/robot/robot3.jpg' onclick="zobraz_robotmenu();" class="ekorobot" style="float:left;"
   title='Dobrý deò, som Váš EkoRobot, ak máte otázku èi želanie, kliknite na mòa'>
 
+<?php if ( $cislo_druh == 3 ) { ?>
 <!-- id kvdph = manualna uprava dodatocneho kvdph -->
 <div class="kvdph-menu">
- <div style="width:250px;"><strong>ID</strong> kontrolného výkazu DPH, kt. opravujem</div>
+ <div style="width:250px;"><strong>ID</strong> priznania DPH a KVDPH, ktoré opravujem</div>
  <div style="width:52px;">
   <input type="text" name="cpop" id="cpop"
    style="width:40px; font-size:14px; height:18px; line-height:18px;"/>
  </div>
  <div>(len u <strong>dodatoèných</strong> priznaní !)</div>
 </div>
+
+<?php                         } ?>
+<?php if ( $cislo_druh != 3 ) { ?>
+<div class="kvdph-menu">
+ <div style="width:52px;">
+  <input type="hidden" name="cpop" id="cpop" />
+ </div>
+
+</div>
+
+<?php                         } ?>
 <?php                                        } ?>
 
 <div class="navbar">
