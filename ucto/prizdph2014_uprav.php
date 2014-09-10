@@ -803,7 +803,7 @@ if ( $cislo_druh == 3 ) { $druh_priz="DodatoËnÈ"; }
    </td>
    <td>
     <div class="bar-btn-form-tool">
-     <a href="#" title="Sp‰ù do archÌvu" onClick="window.open('../ucto/archivdph2014.php?copern=80&drupoh=1&page=1', '_self' )">Sp‰ù</a> <!-- dopyt, mÙûete oûiviù -->
+     <a href="#" title="Sp‰ù do archÌvu" onclick="window.open('../ucto/archivdph2014.php?copern=80&drupoh=1&page=1', '_self' )">Sp‰ù</a>
      <a style="height:16px; border-right:2px solid #39f;">&nbsp;</a>
 <?php
 if ( $cislo_stvrt == 0 ) { $podmzarchu=" er1 = 0 AND ume = $cislo_ume "; }
@@ -854,7 +854,7 @@ $source="prizdph2014_uprav.php?cislo_cpid=$cislo_cpid&cislo_ume=$cislo_ume&cislo
 <!-- danove udaje -->
 <?php $fir_ficdx=substr($fir_ficd,2,10); ?>
 <span class="text-echo-field" style="top:233px; left:99px; width:233px;"><?php echo $fir_ficdx; ?></span>
-<span class="text-echo-field" style="top:289px; left:39px; width:234px;"><?php echo $fir_fdicx; ?></span> <!-- dopyt, mÙûete oöetriù pri tlaËi ned·va diË, ak je vyplenenÈ iËdph -->
+<span class="text-echo-field" style="top:289px; left:39px; width:234px;"><?php echo $fir_fdicx; ?></span>
 <span class="text-echo-field" style="top:344px; left:39px; width:294px;"><?php echo $fir_uctt01; ?></span>
 
 <!-- Druh priznania -->
@@ -866,8 +866,8 @@ if ( $cislo_druh == 1 ) { $opravne=""; $dodatocne=""; $dat_dodatocne=""; }
 if ( $cislo_druh == 2 ) { $riadne=""; $dodatocne=""; $dat_dodatocne=""; }
 if ( $cislo_druh == 3 ) { $riadne=""; $opravne=""; $dat_dodatocne=$h_dap; }
 ?>
-<span class="text-echo" style="top:234px; left:358px;"><?php echo $riadne; ?></span>
-<span class="text-echo" style="top:261px; left:358px;"><?php echo $opravne; ?></span>
+<span class="text-echo" style="top:235px; left:358px;"><?php echo $riadne; ?></span>
+<span class="text-echo" style="top:262px; left:358px;"><?php echo $opravne; ?></span>
 <span class="text-echo" style="top:289px; left:358px;"><?php echo $dodatocne; ?></span>
 <input type="text" name="dad" id="dad" onkeyup="CiarkaNaBodku(this);"
  style="width:201px; top:283px; left:470px;"/>
@@ -887,7 +887,7 @@ $stvrtrokx=$stvrtrok;
 ?>
 
 <span class="text-echo" style="top:264px; left:698px;"><?php echo $mesiacx; ?></span>
-<span class="text-echo" style="top:264px; left:774px;"><?php echo $stvrtrokx; ?></span> <!-- dopyt, mÙûete oöetriù v˝pis len ak nie je mesiac -->
+<span class="text-echo" style="top:264px; left:774px;"><?php echo $stvrtrokx; ?></span>
 <span class="text-echo" style="top:264px; left:829px;"><?php echo $kli_vrok; ?></span>
 
 <!-- typ platitela = natvrdo 1.moznost -->
@@ -939,7 +939,7 @@ $tel_za=$pole[1];
 <!-- zahlavie strany -->
 <?php $fir_ficdx=substr($fir_ficd,2,10); ?>
 <span class="text-echo-field" style="top:82px; left:200px; width:233px;"><?php echo $fir_ficdx; ?></span>
-<span class="text-echo-field" style="top:82px; left:457px; width:233px;"><?php echo $fir_fdicx; ?></span> <!-- dopyt, pri tlaËi ned·va diË, ak je vyplenenÈ iËdph -->
+<span class="text-echo-field" style="top:82px; left:457px; width:233px;"><?php echo $fir_fdicx; ?></span>
 
 <!-- riadky 01-04 -->
 <input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);"
@@ -1049,8 +1049,10 @@ $tel_za=$pole[1];
 <?php                                        } ?>
 
 <div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
+<!--
+   <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+-->
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny"
   class="btn-bottom-formsave" style="top:0;">
 </div>
@@ -1063,8 +1065,7 @@ $tel_za=$pole[1];
 //koniec uprav
 ?>
 
-
-
+<!-- ekorobot menu -->
 <div id="robotmenu" class="wrap-ekorobot-menu" style="display:none;">
  <table class="ekorobot-menu">
  <tr>
