@@ -630,6 +630,10 @@ div.kvdph-menu > div {
   float: left;
   height: 20px;
 }
+span.alert-success {
+  color: #046D4B;
+  font-weight: normal;
+}
 </style>
 <script type="text/javascript">
 //sirka a vyska okna
@@ -714,21 +718,7 @@ var sirkawic = screen.width-10;
    if ( Vstup.value.search(/[^0-9.-]/g) != -1 ) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-
-
-
-
-  function ukazrobot()
-  { 
-<?php echo "robotokno.style.display=''; robotmenu.style.display='none';"; ?>
-   myRobot = document.getElementById("robotokno");
-   myRobotmenu = document.getElementById("robotmenu");
-  }
-  function zhasnirobot()
-  { 
-   robotokno.style.display='none';
-   robotmenu.style.display='none';
-  }
+//ekorobot menu
   function zobraz_robotmenu()
   { 
    robotmenu.style.display='';
@@ -737,9 +727,6 @@ var sirkawic = screen.width-10;
   { 
    robotmenu.style.display='none';
   }
-
-
-
 
   function Prepoc(cpid,ume,druh,stvrtrok)
   { 
@@ -751,8 +738,6 @@ var sirkawic = screen.width-10;
    var stvrtrok = stvrtrok;
 window.open('../ucto/prizdph2014_uprav.php?copern=220&page=1&sysx=UCT&cislo_cpid=' + cislo_cpid + '&cislo_ume=' + cislo_ume + '&cislo_druh=' + cislo_druh + '&cislo_stvrt=' + stvrtrok + '&koefmin=' + h_koefmin + '&druhykoef=' + h_druhykoef + '&drupoh=1&uprav=1&prepoc=1', '_self' );
   }
-
-
 
   function Odpoc(cpid,ume,druh,stvrtrok)
   { 
@@ -794,7 +779,7 @@ window.open('../ucto/prizdph2014.php?copern=7020&drupoh=1&page=1&typ=PDF&cislo_c
   }
 </script>
 </HEAD>
-<BODY id="white" onload="ObnovUI(); <?php if ( $copern == 20 ) { echo 'ukazrobot();'; } ?> ">
+<BODY id="white" onload="ObnovUI();">
 <?php
 //uprav udaje
 if ( $copern == 20 )
@@ -1052,7 +1037,6 @@ $tel_za=$pole[1];
  <img src='../obr/robot/robot3.jpg' onclick="zobraz_robotmenu();" class="ekorobot" style="float:left;"
   title='Dobr˝ deÚ, som V·ö EkoRobot, ak m·te ot·zku Ëi ûelanie, kliknite na mÚa'>
 
-
 <!-- id kvdph = manualna uprava dodatocneho kvdph -->
 <div class="kvdph-menu">
  <div style="width:250px;"><strong>ID</strong> kontrolnÈho v˝kazu DPH, kt. opravujem</div>
@@ -1109,22 +1093,18 @@ $tel_za=$pole[1];
  <tr>
   <td>
    <p style="float:left; line-height:34px;"><strong>Koeficient z predch·dz.</strong> kalend·rneho roka</p>
-   <input type='text' name='h_koefmin' id='h_koefmin' maxlenght='4'
+   <input type='text' name='h_koefmin' id='h_koefmin' maxlenght='4' onkeyup="CiarkaNaBodku(this);"
     value='<?php echo $koefmin; ?>' style="width:48px; float:right; position:relative; top:4px; right:30px;">
   </td>
  </tr>
+<?php if ( $prepoc == 0 ) { ?>
  <tr>
   <td style="line-height:30px; height:30px; text-align:center;">
-<?php if ( $prepoc == 0 ) { ?>
    <a href="#" onclick="Prepoc(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $stvrtrok;?>);">
    PrepoËÌtaù pomern˝ odpoËet DPH !</a>
-<?php                     } ?>
-<?php if ( $prepoc == 1 ) { ?>
-   <a href="#" onclick="zhasni_menurobot();">
-   Pomern˝ odpoËet DPH prepoËÌtan˝.</a>
-<?php                     } ?>
   </td>
  </tr>
+<?php                     } ?>
 <?php if ( $prepoc == 1 ) { ?>
  <tr>
   <td style="height:60px;">
@@ -1139,6 +1119,11 @@ $tel_za=$pole[1];
    <input type='text' name='h_odpocupr' id='h_odpocupr' maxlenght='10'
     value='<?php echo $odpocupr; ?>' style="width:100px;">
   </td>
+ </tr>
+ <tr>
+ 	<th style="text-align:center;">
+   <span class="alert-success">-- Pomern˝ odpoËet DPH prepoËÌtan˝. --</span>
+  </th>
  </tr>
 <?php                     } ?>
 </FORM>
