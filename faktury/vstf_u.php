@@ -18,6 +18,8 @@ $vyroba = $_REQUEST['vyroba'];
 if(!isset($vyroba)) $vyroba = 0;
 if($vyroba == 1 ) $DOPRAVA = "VÝROBA";
 
+if( $drupoh == 1 ) { $cslm=301881; }
+if( $drupoh == 2 ) { $cslm=301882; }
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 
