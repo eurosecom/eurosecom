@@ -1,6 +1,7 @@
+<!doctype html>
 <HTML>
 <?php
-
+//celkovy zaciatok dokumentu
 do
 {
 $sys = 'MZD';
@@ -73,9 +74,6 @@ else
 
     if ( $copern == 4156 )
     {
-
-
-
 $copern=26;
 $lenjedenrok=$rok;
     }
@@ -134,21 +132,21 @@ $h_ycf=0;
 if( $fir_allx11 > 0 ) $h_ycf=1*$fir_allx11;
 
 $databaza="";
-if( $kli_vrok > 2010 )
+if ( $kli_vrok > 2010 )
 {
-if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; }
+if ( File_Exists("../pswd/oddelena2010db2011.php") ) { $databaza=$mysqldb2010."."; }
 }
-if( $kli_vrok > 2011 )
+if ( $kli_vrok > 2011 )
 {
-if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; }
+if ( File_Exists("../pswd/oddelena2011db2012.php") ) { $databaza=$mysqldb2011."."; }
 }
-if( $kli_vrok > 2012 )
+if ( $kli_vrok > 2012 )
 {
-if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; }
+if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2012."."; }
 }
-if( $kli_vrok > 2013 )
+if ( $kli_vrok > 2013 )
 {
-if (File_Exists ("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; }
+if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; }
 }
 
 $uprtxt = "DELETE FROM F$kli_vxcf"."_mzdevidencny WHERE oc = $cislo_oc ";
@@ -218,29 +216,29 @@ if( $lenjedenrok == 5 ) { $xrok=$rokm5; }
 
 
 $databaza="";
-if( $xrok < 2014 AND $lenjedenrok > 0 )
+if ( $xrok < 2014 AND $lenjedenrok > 0 )
 {
-if (File_Exists ("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; }
+if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; }
 }
-if( $xrok < 2013 AND $lenjedenrok > 0 )
+if ( $xrok < 2013 AND $lenjedenrok > 0 )
 {
-if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; }
+if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2012."."; }
 } 
-if( $xrok < 2012 AND $lenjedenrok > 0 )
+if ( $xrok < 2012 AND $lenjedenrok > 0 )
 {
-if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; }
+if (File_Exists("../pswd/oddelena2011db2012.php") ) { $databaza=$mysqldb2011."."; }
 } 
-if( $xrok < 2011 AND $lenjedenrok > 0 )
+if ( $xrok < 2011 AND $lenjedenrok > 0 )
 {
-if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; }
+if ( File_Exists("../pswd/oddelena2010db2011.php") ) { $databaza=$mysqldb2010."."; }
 }                     
- 
+
 
 $vymzak=0;
 $znakpoistenia="A";
 
 $kli_vxcfx=$kli_vxcf;
-if( $lenjedenrok > 0 )
+if ( $lenjedenrok > 0 )
 {
 $kli_vxcfx=$fir;
 }
@@ -534,7 +532,7 @@ $upravene = mysql_query("$uprtxt");
 $copern=10;
 if (!$upravene):
 ?>
-<script type="text/javascript"> alert( "⁄DAJE NEBOLI UPRAVEN… " ) </script>
+<script type="text/javascript"> alert( "⁄DAJE NEBOLI UPRAVEN…" ) </script>
 <?php
 endif;
 if ($upravene):
@@ -718,7 +716,7 @@ $oznac = mysql_query("$sqtoz");
 
 
 
-if (File_Exists ("../tmp/evidlist.$kli_uzid.pdf")) { $soubor = unlink("../tmp/evidlist.$kli_uzid.pdf"); }
+if ( File_Exists("../tmp/evidlist.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/evidlist.$kli_uzid.pdf"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -765,7 +763,7 @@ $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10); 
 $pdf->SetTopMargin(10);
 
-if (File_Exists ('../dokumenty/mzdy_potvrdenia/evidencny_list.jpg') AND $i == 0 )
+if ( File_Exists('../dokumenty/mzdy_potvrdenia/evidencny_list.jpg') AND $i == 0 )
 {
 if( $fort == 1 ) { $pdf->Image('../dokumenty/mzdy_potvrdenia/evidencny_list.jpg',5,6,198,285); }
 }
@@ -1456,7 +1454,20 @@ $fir_riadok=mysql_fetch_object($fir_vysledok);
 $oc = $fir_riadok->oc;
 $meno = $fir_riadok->meno;
 $prie = $fir_riadok->prie;
-
+$titl = $fir_riadok->titl;
+$rodprie = $fir_riadok->rodn;
+$mnr = $fir_riadok->mnr;
+$dar = $fir_riadok->dar;
+$dar_sk=SkDatum($dar);
+$rodne = $fir_riadok->rdc."/".$fir_riadok->rdk;
+$ulica = $fir_riadok->zuli;
+$dom = $fir_riadok->zcdm;
+$obec = $fir_riadok->zmes;
+$psc = $fir_riadok->zpsc;
+$nastup = $fir_riadok->dan;
+$nastup_sk=SkDatum(nastup);
+$vystup = $fir_riadok->dav;
+$vystup_sk=SkDatum(vystup);
 
 $dp01 = SkDatum($fir_riadok->dp01);
 $dk01 = SkDatum($fir_riadok->dk01);
@@ -1560,191 +1571,212 @@ $datum = SkDatum($fir_riadok->datum);
 
 
 mysql_free_result($fir_vysledok);
-
     }
 //koniec nacitania
-
-
-
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
-  <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>EvidenËn˝ list dÙchodkovÈho poistenia</title>
-  <style type="text/css">
-
-  </style>
+ <link rel="stylesheet" href="../css/reset.css">
+ <link rel="stylesheet" href="../css/tlaciva.css">
+<title>EuroSecom - EvidenËn˝ list dÙchodkovÈho poistenia</title>
+<style type="text/css">
+div.wrap-form-background {
+  overflow: hidden;
+  width: 950px;
+  height: 1300px;
+  background-color: #fff;
+}
+img.form-background {
+  display: block;
+  width: 910px;
+  height: 1230px;
+  margin: 40px 0 0 15px;
+}
+form input[type=text] {
+  position: absolute;
+  height: 20px;
+  line-height: 20px;
+  padding-left: 4px;
+  border: 1px solid #39f;
+  font-size: 14px;
+}
+form select {
+  position: absolute;
+  height: 20px;
+  border: 1px solid #39f;
+}
+img.btn-row-tool {
+  width: 20px;
+  height: 20px;
+  cursor: default;
+}
+</style>
 <script type="text/javascript">
-
 //sirka a vyska okna
 var sirkawin = screen.width-10;
 var vyskawin = screen.height-175;
 var vyskawic = screen.height-20;
 var sirkawic = screen.width-10;
 
-function Dp01Onfocus(e)
-                {
-        var krx = document.formv1.kr01.value;
-        if ( document.formv1.dp01.value == '00.00.0000' ) document.formv1.dp01.value = '01.01.' + krx;
-        if ( document.formv1.dk01.value == '00.00.0000' ) document.formv1.dk01.value = '31.12.' + krx;
-                }
-function Dp02Onfocus(e)
-                {
-        var krx = document.formv1.kr02.value;
-        if ( document.formv1.dp02.value == '00.00.0000' ) document.formv1.dp02.value = '01.01.' + krx;
-        if ( document.formv1.dk02.value == '00.00.0000' ) document.formv1.dk02.value = '31.12.' + krx;
-                }
-
-function Dp03Onfocus(e)
-                {
-        var krx = document.formv1.kr03.value;
-        if ( document.formv1.dp03.value == '00.00.0000' ) document.formv1.dp03.value = '01.01.' + krx;
-        if ( document.formv1.dk03.value == '00.00.0000' ) document.formv1.dk03.value = '31.12.' + krx;
-                }
-function Dp04Onfocus(e)
-                {
-        var krx = document.formv1.kr04.value;
-        if ( document.formv1.dp04.value == '00.00.0000' ) document.formv1.dp04.value = '01.01.' + krx;
-        if ( document.formv1.dk04.value == '00.00.0000' ) document.formv1.dk04.value = '31.12.' + krx;
-                }
-function Dp05Onfocus(e)
-                {
-        var krx = document.formv1.kr05.value;
-        if ( document.formv1.dp05.value == '00.00.0000' ) document.formv1.dp05.value = '01.01.' + krx;
-        if ( document.formv1.dk05.value == '00.00.0000' ) document.formv1.dk05.value = '31.12.' + krx;
-                }
-function Dp06Onfocus(e)
-                {
-        var krx = document.formv1.kr06.value;
-        if ( document.formv1.dp06.value == '00.00.0000' ) document.formv1.dp06.value = '01.01.' + krx;
-        if ( document.formv1.dk06.value == '00.00.0000' ) document.formv1.dk06.value = '31.12.' + krx;
-                }
-function Dp07Onfocus(e)
-                {
-        var krx = document.formv1.kr07.value;
-        if ( document.formv1.dp07.value == '00.00.0000' ) document.formv1.dp07.value = '01.01.' + krx;
-        if ( document.formv1.dk07.value == '00.00.0000' ) document.formv1.dk07.value = '31.12.' + krx;
-                }
-function Dp08Onfocus(e)
-                {
-        var krx = document.formv1.kr08.value;
-        if ( document.formv1.dp08.value == '00.00.0000' ) document.formv1.dp08.value = '01.01.' + krx;
-        if ( document.formv1.dk08.value == '00.00.0000' ) document.formv1.dk08.value = '31.12.' + krx;
-                }
-
-
-
+  function Dp01Onfocus(e)
+  {
+   var krx = document.formv1.kr01.value;
+   if ( document.formv1.dp01.value == '00.00.0000' ) document.formv1.dp01.value = '01.01.' + krx;
+   if ( document.formv1.dk01.value == '00.00.0000' ) document.formv1.dk01.value = '31.12.' + krx;
+  }
+  function Dp02Onfocus(e)
+  {
+   var krx = document.formv1.kr02.value;
+   if ( document.formv1.dp02.value == '00.00.0000' ) document.formv1.dp02.value = '01.01.' + krx;
+   if ( document.formv1.dk02.value == '00.00.0000' ) document.formv1.dk02.value = '31.12.' + krx;
+  }
+  function Dp03Onfocus(e)
+  {
+   var krx = document.formv1.kr03.value;
+   if ( document.formv1.dp03.value == '00.00.0000' ) document.formv1.dp03.value = '01.01.' + krx;
+   if ( document.formv1.dk03.value == '00.00.0000' ) document.formv1.dk03.value = '31.12.' + krx;
+  }
+  function Dp04Onfocus(e)
+  {
+   var krx = document.formv1.kr04.value;
+   if ( document.formv1.dp04.value == '00.00.0000' ) document.formv1.dp04.value = '01.01.' + krx;
+   if ( document.formv1.dk04.value == '00.00.0000' ) document.formv1.dk04.value = '31.12.' + krx;
+  }
+  function Dp05Onfocus(e)
+  {
+   var krx = document.formv1.kr05.value;
+   if ( document.formv1.dp05.value == '00.00.0000' ) document.formv1.dp05.value = '01.01.' + krx;
+   if ( document.formv1.dk05.value == '00.00.0000' ) document.formv1.dk05.value = '31.12.' + krx;
+  }
+  function Dp06Onfocus(e)
+  {
+   var krx = document.formv1.kr06.value;
+   if ( document.formv1.dp06.value == '00.00.0000' ) document.formv1.dp06.value = '01.01.' + krx;
+   if ( document.formv1.dk06.value == '00.00.0000' ) document.formv1.dk06.value = '31.12.' + krx;
+  }
+  function Dp07Onfocus(e)
+  {
+   var krx = document.formv1.kr07.value;
+   if ( document.formv1.dp07.value == '00.00.0000' ) document.formv1.dp07.value = '01.01.' + krx;
+   if ( document.formv1.dk07.value == '00.00.0000' ) document.formv1.dk07.value = '31.12.' + krx;
+  }
+  function Dp08Onfocus(e)
+  {
+   var krx = document.formv1.kr08.value;
+   if ( document.formv1.dp08.value == '00.00.0000' ) document.formv1.dp08.value = '01.01.' + krx;
+   if ( document.formv1.dk08.value == '00.00.0000' ) document.formv1.dk08.value = '31.12.' + krx;
+  }
 
 <?php
-//uprava sadzby strana 1
+//uprava
   if ( $copern == 20 )
   { 
 ?>
-    function ObnovUI()
-    {
-    document.formv1.datum.value = '<?php echo "$datum";?>';
+  function ObnovUI()
+  {
+   document.formv1.datum.value = '<?php echo "$datum";?>';
 
-    document.formv1.kr01.value = '<?php echo "$kr01";?>';
-    document.formv1.kr02.value = '<?php echo "$kr02";?>';
-    document.formv1.kr03.value = '<?php echo "$kr03";?>';
-    document.formv1.kr04.value = '<?php echo "$kr04";?>';
-    document.formv1.kr05.value = '<?php echo "$kr05";?>';
-    document.formv1.kr06.value = '<?php echo "$kr06";?>';
-    document.formv1.kr07.value = '<?php echo "$kr07";?>';
-    document.formv1.kr08.value = '<?php echo "$kr08";?>';
-    document.formv1.kr09.value = '<?php echo "$kr09";?>';
-    document.formv1.kr10.value = '<?php echo "$kr10";?>';
-    document.formv1.kr11.value = '<?php echo "$kr11";?>';
-    document.formv1.kr12.value = '<?php echo "$kr12";?>';
-    document.formv1.kr13.value = '<?php echo "$kr13";?>';
+   document.formv1.kr01.value = '<?php echo "$kr01";?>';
+   document.formv1.kr02.value = '<?php echo "$kr02";?>';
+   document.formv1.kr03.value = '<?php echo "$kr03";?>';
+   document.formv1.kr04.value = '<?php echo "$kr04";?>';
+   document.formv1.kr05.value = '<?php echo "$kr05";?>';
+   document.formv1.kr06.value = '<?php echo "$kr06";?>';
+   document.formv1.kr07.value = '<?php echo "$kr07";?>';
+   document.formv1.kr08.value = '<?php echo "$kr08";?>';
+   document.formv1.kr09.value = '<?php echo "$kr09";?>';
+   document.formv1.kr10.value = '<?php echo "$kr10";?>';
+   document.formv1.kr11.value = '<?php echo "$kr11";?>';
+   document.formv1.kr12.value = '<?php echo "$kr12";?>';
+   document.formv1.kr13.value = '<?php echo "$kr13";?>';
 
-    document.formv1.zp01.value = '<?php echo "$zp01";?>';
-    document.formv1.zp02.value = '<?php echo "$zp02";?>';
-    document.formv1.zp03.value = '<?php echo "$zp03";?>';
-    document.formv1.zp04.value = '<?php echo "$zp04";?>';
-    document.formv1.zp05.value = '<?php echo "$zp05";?>';
-    document.formv1.zp06.value = '<?php echo "$zp06";?>';
-    document.formv1.zp07.value = '<?php echo "$zp07";?>';
-    document.formv1.zp08.value = '<?php echo "$zp08";?>';
-    document.formv1.zp09.value = '<?php echo "$zp09";?>';
-    document.formv1.zp10.value = '<?php echo "$zp10";?>';
-    document.formv1.zp11.value = '<?php echo "$zp11";?>';
-    document.formv1.zp12.value = '<?php echo "$zp12";?>';
-    document.formv1.zp13.value = '<?php echo "$zp13";?>';
+   document.formv1.zp01.value = '<?php echo "$zp01";?>';
+   document.formv1.zp02.value = '<?php echo "$zp02";?>';
+   document.formv1.zp03.value = '<?php echo "$zp03";?>';
+   document.formv1.zp04.value = '<?php echo "$zp04";?>';
+   document.formv1.zp05.value = '<?php echo "$zp05";?>';
+   document.formv1.zp06.value = '<?php echo "$zp06";?>';
+   document.formv1.zp07.value = '<?php echo "$zp07";?>';
+   document.formv1.zp08.value = '<?php echo "$zp08";?>';
+   document.formv1.zp09.value = '<?php echo "$zp09";?>';
+   document.formv1.zp10.value = '<?php echo "$zp10";?>';
+   document.formv1.zp11.value = '<?php echo "$zp11";?>';
+   document.formv1.zp12.value = '<?php echo "$zp12";?>';
+   document.formv1.zp13.value = '<?php echo "$zp13";?>';
 
-    document.formv1.dp01.value = '<?php echo "$dp01";?>';
-    document.formv1.dp02.value = '<?php echo "$dp02";?>';
-    document.formv1.dp03.value = '<?php echo "$dp03";?>';
-    document.formv1.dp04.value = '<?php echo "$dp04";?>';
-    document.formv1.dp05.value = '<?php echo "$dp05";?>';
-    document.formv1.dp06.value = '<?php echo "$dp06";?>';
-    document.formv1.dp07.value = '<?php echo "$dp07";?>';
-    document.formv1.dp08.value = '<?php echo "$dp08";?>';
-    document.formv1.dp09.value = '<?php echo "$dp09";?>';
-    document.formv1.dp10.value = '<?php echo "$dp10";?>';
-    document.formv1.dp11.value = '<?php echo "$dp11";?>';
-    document.formv1.dp12.value = '<?php echo "$dp12";?>';
-    document.formv1.dp13.value = '<?php echo "$dp13";?>';
+   document.formv1.dp01.value = '<?php echo "$dp01";?>';
+   document.formv1.dp02.value = '<?php echo "$dp02";?>';
+   document.formv1.dp03.value = '<?php echo "$dp03";?>';
+   document.formv1.dp04.value = '<?php echo "$dp04";?>';
+   document.formv1.dp05.value = '<?php echo "$dp05";?>';
+   document.formv1.dp06.value = '<?php echo "$dp06";?>';
+   document.formv1.dp07.value = '<?php echo "$dp07";?>';
+   document.formv1.dp08.value = '<?php echo "$dp08";?>';
+   document.formv1.dp09.value = '<?php echo "$dp09";?>';
+   document.formv1.dp10.value = '<?php echo "$dp10";?>';
+   document.formv1.dp11.value = '<?php echo "$dp11";?>';
+   document.formv1.dp12.value = '<?php echo "$dp12";?>';
+   document.formv1.dp13.value = '<?php echo "$dp13";?>';
 
-    document.formv1.dk01.value = '<?php echo "$dk01";?>';
-    document.formv1.dk02.value = '<?php echo "$dk02";?>';
-    document.formv1.dk03.value = '<?php echo "$dk03";?>';
-    document.formv1.dk04.value = '<?php echo "$dk04";?>';
-    document.formv1.dk05.value = '<?php echo "$dk05";?>';
-    document.formv1.dk06.value = '<?php echo "$dk06";?>';
-    document.formv1.dk07.value = '<?php echo "$dk07";?>';
-    document.formv1.dk08.value = '<?php echo "$dk08";?>';
-    document.formv1.dk09.value = '<?php echo "$dk09";?>';
-    document.formv1.dk10.value = '<?php echo "$dk10";?>';
-    document.formv1.dk11.value = '<?php echo "$dk11";?>';
-    document.formv1.dk12.value = '<?php echo "$dk12";?>';
-    document.formv1.dk13.value = '<?php echo "$dk13";?>';
+   document.formv1.dk01.value = '<?php echo "$dk01";?>';
+   document.formv1.dk02.value = '<?php echo "$dk02";?>';
+   document.formv1.dk03.value = '<?php echo "$dk03";?>';
+   document.formv1.dk04.value = '<?php echo "$dk04";?>';
+   document.formv1.dk05.value = '<?php echo "$dk05";?>';
+   document.formv1.dk06.value = '<?php echo "$dk06";?>';
+   document.formv1.dk07.value = '<?php echo "$dk07";?>';
+   document.formv1.dk08.value = '<?php echo "$dk08";?>';
+   document.formv1.dk09.value = '<?php echo "$dk09";?>';
+   document.formv1.dk10.value = '<?php echo "$dk10";?>';
+   document.formv1.dk11.value = '<?php echo "$dk11";?>';
+   document.formv1.dk12.value = '<?php echo "$dk12";?>';
+   document.formv1.dk13.value = '<?php echo "$dk13";?>';
 
-    document.formv1.vz01.value = '<?php echo "$vz01";?>';
-    document.formv1.vz02.value = '<?php echo "$vz02";?>';
-    document.formv1.vz03.value = '<?php echo "$vz03";?>';
-    document.formv1.vz04.value = '<?php echo "$vz04";?>';
-    document.formv1.vz05.value = '<?php echo "$vz05";?>';
-    document.formv1.vz06.value = '<?php echo "$vz06";?>';
-    document.formv1.vz07.value = '<?php echo "$vz07";?>';
-    document.formv1.vz08.value = '<?php echo "$vz08";?>';
-    document.formv1.vz09.value = '<?php echo "$vz09";?>';
-    document.formv1.vz10.value = '<?php echo "$vz10";?>';
-    document.formv1.vz11.value = '<?php echo "$vz11";?>';
-    document.formv1.vz12.value = '<?php echo "$vz12";?>';
-    document.formv1.vz13.value = '<?php echo "$vz13";?>';
+   document.formv1.vz01.value = '<?php echo "$vz01";?>';
+   document.formv1.vz02.value = '<?php echo "$vz02";?>';
+   document.formv1.vz03.value = '<?php echo "$vz03";?>';
+   document.formv1.vz04.value = '<?php echo "$vz04";?>';
+   document.formv1.vz05.value = '<?php echo "$vz05";?>';
+   document.formv1.vz06.value = '<?php echo "$vz06";?>';
+   document.formv1.vz07.value = '<?php echo "$vz07";?>';
+   document.formv1.vz08.value = '<?php echo "$vz08";?>';
+   document.formv1.vz09.value = '<?php echo "$vz09";?>';
+   document.formv1.vz10.value = '<?php echo "$vz10";?>';
+   document.formv1.vz11.value = '<?php echo "$vz11";?>';
+   document.formv1.vz12.value = '<?php echo "$vz12";?>';
+   document.formv1.vz13.value = '<?php echo "$vz13";?>';
 
-    document.formv1.vv01.value = '<?php echo "$vv01";?>';
-    document.formv1.vv02.value = '<?php echo "$vv02";?>';
-    document.formv1.vv03.value = '<?php echo "$vv03";?>';
-    document.formv1.vv04.value = '<?php echo "$vv04";?>';
-    document.formv1.vv05.value = '<?php echo "$vv05";?>';
-    document.formv1.vv06.value = '<?php echo "$vv06";?>';
-    document.formv1.vv07.value = '<?php echo "$vv07";?>';
-    document.formv1.vv08.value = '<?php echo "$vv08";?>';
-    document.formv1.vv09.value = '<?php echo "$vv09";?>';
-    document.formv1.vv10.value = '<?php echo "$vv10";?>';
-    document.formv1.vv11.value = '<?php echo "$vv11";?>';
-    document.formv1.vv12.value = '<?php echo "$vv12";?>';
-    document.formv1.vv13.value = '<?php echo "$vv13";?>';
+   document.formv1.vv01.value = '<?php echo "$vv01";?>';
+   document.formv1.vv02.value = '<?php echo "$vv02";?>';
+   document.formv1.vv03.value = '<?php echo "$vv03";?>';
+   document.formv1.vv04.value = '<?php echo "$vv04";?>';
+   document.formv1.vv05.value = '<?php echo "$vv05";?>';
+   document.formv1.vv06.value = '<?php echo "$vv06";?>';
+   document.formv1.vv07.value = '<?php echo "$vv07";?>';
+   document.formv1.vv08.value = '<?php echo "$vv08";?>';
+   document.formv1.vv09.value = '<?php echo "$vv09";?>';
+   document.formv1.vv10.value = '<?php echo "$vv10";?>';
+   document.formv1.vv11.value = '<?php echo "$vv11";?>';
+   document.formv1.vv12.value = '<?php echo "$vv12";?>';
+   document.formv1.vv13.value = '<?php echo "$vv13";?>';
 
-    document.formv1.kd01.value = '<?php echo "$kd01";?>';
-    document.formv1.kd02.value = '<?php echo "$kd02";?>';
-    document.formv1.kd03.value = '<?php echo "$kd03";?>';
-    document.formv1.kd04.value = '<?php echo "$kd04";?>';
-    document.formv1.kd05.value = '<?php echo "$kd05";?>';
-    document.formv1.kd06.value = '<?php echo "$kd06";?>';
-    document.formv1.kd07.value = '<?php echo "$kd07";?>';
-    document.formv1.kd08.value = '<?php echo "$kd08";?>';
-    document.formv1.kd09.value = '<?php echo "$kd09";?>';
-    document.formv1.kd10.value = '<?php echo "$kd10";?>';
-    document.formv1.kd11.value = '<?php echo "$kd11";?>';
-    document.formv1.kd12.value = '<?php echo "$kd12";?>';
-    document.formv1.kd13.value = '<?php echo "$kd13";?>';
+   document.formv1.kd01.value = '<?php echo "$kd01";?>';
+   document.formv1.kd02.value = '<?php echo "$kd02";?>';
+   document.formv1.kd03.value = '<?php echo "$kd03";?>';
+   document.formv1.kd04.value = '<?php echo "$kd04";?>';
+   document.formv1.kd05.value = '<?php echo "$kd05";?>';
+   document.formv1.kd06.value = '<?php echo "$kd06";?>';
+   document.formv1.kd07.value = '<?php echo "$kd07";?>';
+   document.formv1.kd08.value = '<?php echo "$kd08";?>';
+   document.formv1.kd09.value = '<?php echo "$kd09";?>';
+   document.formv1.kd10.value = '<?php echo "$kd10";?>';
+   document.formv1.kd11.value = '<?php echo "$kd11";?>';
+   document.formv1.kd12.value = '<?php echo "$kd12";?>';
+   document.formv1.kd13.value = '<?php echo "$kd13";?>';
 
-    document.forms.formv1.kr01.focus();
-    document.forms.formv1.kr01.select();
-    }
+   document.forms.formv1.kr01.focus();
+   document.forms.formv1.kr01.select();
+  }
 <?php
 //koniec uprava
   }
@@ -1754,317 +1786,43 @@ function Dp08Onfocus(e)
   if ( $copern != 20 )
   { 
 ?>
-    function ObnovUI()
-    {
-
-    }
+  function ObnovUI()
+  {
+  }
 <?php
   }
 ?>
 
-//Kontrola datumu Sk
-function kontrola_datum(vstup, Oznam, x1, errflag)
-		{
-		var text
-		var index
-		var tecka
-		var den
-		var mesic
-		var rok
-		var ch
-                var err
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
+  }
 
-		text=""
-                err=0 
-		
-		den=""
-		mesic=""
-		rok=""
-		tecka=0
-		
-		for (index = 0; index < vstup.value.length; index++) 
-			{
-      ch = vstup.value.charAt(index);
-			if (ch != "0" && ch != "1" && ch != "2" && ch != "3" && ch != "4" && ch != "5" && ch != "6" && ch != "7" && ch != "8" && ch != "9" && ch != ".") 
-				{text="Pole Datum zadavajte vo formate DD.MM alebo DD.MM.RRRR (DD=den, MM=mesiac, RRRR=rok).\r"; err=3 }
-			if ((ch == "0" || ch == "1" || ch == "2" || ch == "3" || ch == "4" || ch == "5" || ch == "6" || ch == "7" || ch == "8" || ch == "9") && (text ==""))
-				{
-				if (tecka == 0)
-					{den=den + ch}
-				if (tecka == 1)
-					{mesic=mesic + ch}
-				if (tecka == 2)
-					{rok=rok + ch}
-				}
-			if (ch == "." && text == "")
-				{
-				if (tecka == 1)
-					{tecka=2}
-				if (tecka == 0)
-					{tecka=1}
-				
-				}	
-			}
-			
-		if (tecka == 2 && rok == "" )
-			{rok=<?php echo $kli_vrok; ?>}
-		if (tecka == 1 && rok == "" )
-			{rok=<?php echo $kli_vrok; ?>; err= 0}
-		if (tecka == 1 && mesic == "" )
-			{mesic=<?php echo $kli_vmes; ?>; err= 0}
-		if (tecka == 0 && mesic == "" )
-			{mesic=<?php echo $kli_vmes; ?>; rok=<?php echo $kli_vrok; ?>; err= 0}
-		if ((den<1 || den >31) && (text == ""))
-			{text=text + "Pocet dni v uvedenom mesiaci nemoze byt mensi ako 1 a vacsi ako 31.\r"; err=1 }
-		if ((mesic<1 || mesic>12) && (text == ""))
-			{text=text + "Pocet mesiacov nemoze byt mensi ako 1 a vacsi ako 12.\r"; err=2 }
-		if (rok<1930 && tecka == 2 && text == "" && rok != "" )
-			{text=text + "Rok nemoze byt mensi ako 1930.\r"; err=3 }
-		if (rok>2029 && tecka == 2 && text == "" && rok != "" )
-			{text=text + "Rok nemoze byt v‰ËöÌ ako 2029.\r"; err=3 }
-		if (tecka > 2)
-			{text=text+ "Datum zadavajte vo formatu DD.MM alebo DD.MM.RRRR (DD=den, MM=mesiac, RRRR=rok)\r"; err=3 }
-
-		if (mesic == 2)
-			{
-			if (rok != "")
-				{
-				if (rok % 4 == 0)
-					{
-					if (den>29)
-						{text=text + "Vo februari roku " + rok + " je maximalne 29 dni.\r"; err=1 }
-					}
-				else
-					{
-					if (den>28)
-						{text=text + "Vo februari roku " + rok + " je maximalne 28 dni.\r"; err=1 }
-					}
-				}
-			else
-				{
-				if (den>29)
-					{text=text + "Vo februari roku je maximalne 29 dni.\r"}
-				}
-			}
-
-		if ((mesic == 4 || mesic == 6 || mesic == 9 || mesic == 11) && (den>30))
-			{text=text + "Pocet dni v uvedenom mesiaci nemoze byt mensi ako 1 a vacsi ako 30.\r"}
-		
+  function prevOC()
+  {
+   window.open('evidencny_list.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $prev_oc;?>', '_self');
+  }
+  function nextOC()
+  {
+   window.open('evidencny_list.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $next_oc;?>', '_self');
+  }
 
 
-
-		if (text!="" && err == 1 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "??"  + "." + mesic+ "." + rok;
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (text!="" && err == 2 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "." + mesic + "??" + "." + rok;
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (text!="" && err == 3 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "." + mesic +  "." + rok + "??";
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (err == 0)
-			{
-                        Oznam.style.display="none";
-                        x1.value = den + "." + mesic +  "." + rok ;
-                        errflag.value = "0";
-			return true;
-			}
-
-		}
-//koniec kontrola datumu
-
-// Kontrola cisla celeho v rozsahu x az y  
-      function intg(x1,x,y,Oznam) 
-      { 
-       var b;
-       b=x1.value;
-       var anyString=b;
-       Oznam.style.display="none";
-         if (b == "") return true;
-         else{
-         if (Math.floor(b)==b && b>=x && b<=y) return true; 
-         else {
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         return false;
-              } 
-             }
-      }
-
-
-// Kontrola des.cisla celeho v rozsahu x az y  
-      function cele(x1,x,y,Oznam,des) 
-      { 
-       var b;
-       b=x1.value;
-       var anyString=b;
-       var err=0;
-       var c;
-       var d;
-       var cele;
-       var pocdes;
-       cele=0;
-       pocdes=0;
-       c=b.toString();
-       d=c.split('.');
-       if ( isNaN(d[1]) ) { cele=1; }
-       if ( cele == 0 ) { pocdes=d[1].length; }
-
-         if (b == "") { err=0 }
-         if (b>=x && b<=y) { err=0 }
-         if ( x1.value.search(/[^0-9.-]/g) != -1) { err=1 }
-         if (b<x && b != "") { err=1 }
-         if (b>y && b != "") { err=1 }
-         if (cele == 0 && pocdes > des ) { err=1 }
-
-	 if (err == 0)
-	 {         
-         Oznam.style.display="none";
-         return true;
-         }
-
-	 if (err == 1)
-	 { 
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         x1.value = b + "??";
-         return false;
-         }
-
-      }
-
-
-//  Kontrola cisla
-    function KontrolaCisla(Vstup, Oznam)
-    {
-     if ( Vstup.value.search(/[^0-9]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-     if ( Vstup.value.search(/[^0-9]/g) != -1) { Oznam.style.display=""; }
-     else { Oznam.style.display="none"; }
-    }
-
-//  Kontrola cisla desatinneho
-    function KontrolaDcisla(Vstup, Oznam)
-    {
-     if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-     if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Oznam.style.display=""; }
-     else { Oznam.style.display="none"; }
-    }
-
-//  Kontrola datumu
-    function KontrolaDatum(Vstup, Oznam)
-    {
-     if ( Vstup.value.search(/[^0-9.]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-     if ( Vstup.value.search(/[^0-9.]/g) != -1) { Oznam.style.display=""; }
-     else { Oznam.style.display="none"; }
-    }
-
-
-function ZnovuPotvrdenie()
-                {
-window.open('../mzdy/evidencny_list.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=26&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>',
- '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  function ZnovuPotvrdenie()
+  {
+   window.open('../mzdy/evidencny_list.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=26&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>',
+ '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
                 }
-   
 </script>
-</HEAD>
-<BODY class="white" id="white" onload="ObnovUI();" >
-
-<table class="h2" width="100%" >
-<tr>
-
-<td>EuroSecom  -  EvidenËn˝ list dÙchodkovÈho poistenia
-
-</td>
-<td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
-</tr>
-</table>
-
-
-<?php if( $copern == 20 ) { ?>
-
-<table class="h2" width="100%" >
-<tr>
-<td align="left"><?php echo "Os.ËÌslo: $oc $meno $prie ";?>
-<a href="#" onClick="ZnovuPotvrdenie();">
-<img src='../obr/orig.png' width=20 height=15 border=0 title='Znovu naËÌtaù hodnoty roku <?php echo $kli_vrok; ?> do evidenËnÈho listu' >
-NaËÌtaj <?php echo $kli_vrok; ?></a></td>
-</tr>
-</table>
-
-
-<?php                     } ?>
-
-
 <?php
-//upravy  udaje strana 1
-if ( $copern == 20 )
-    {
-?>
-<tr>
-<span id="Cele" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota musÌ byù celÈ kladnÈ ËÌslo</span>
-<span id="Datum" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- D·tum musÌ byù v tvare DD.MM.RRRR,DD.MM alebo DD naprÌklad 21.10.2008 , 21 program doplni na 21.<?php echo $kli_vume; ?>;</span>
-<span id="Desc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus byù desatinnÈ ËÌslo, maxim·lne 2 desatinnÈ miesta;</span>
-<span id="Desc4" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus byù desatinnÈ ËÌslo, maxim·lne 4 desatinnÈ miesta;</span>
-<span id="Desc1" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus byù desatinnÈ ËÌslo, maxim·lne 1 desatinnÈ miesto;</span>
-<span id="Oc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- OS» musÌ byù celÈ kladnÈ ËÌslo v rozsahu 1 aû 9999</span>
-<span id="Fx" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- MusÌte vyplniù vöetky poloûky vstupu</span>
-<span id="Ul" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:yellow; color:black;">
- Poloûka OS»=<?php echo $h_oc;?> spr·vne uloûen·</span>
-</tr>
-<table class="fmenu" width="100%" >
-<FORM name="formv1" class="obyc" method="post" action="evidencny_list.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>" >
-<tr>
-<td class="bmenu" width="10%">
-<?php if( $copern == 20 ) { ?>
-Cel˝<a href="#" onClick="window.open('evidencny_list.php?copern=3155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self'  )">
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty celÈho evidenËnÈho listu z minulÈho roku - vöetky vyplnenÈ roky' ></a>
-<?php                      } ?>
-</td>
-
-<td class="bmenu" width="10%"></td><td class="bmenu" width="10%"></td><td class="bmenu" width="10%"></td>
-<td class="bmenu" width="10%"></td><td class="bmenu" width="10%"></td><td class="bmenu" width="10%"></td><td class="bmenu" width="10%"></td>
-<td class="bmenu" width="10%"></td>
-<td class="bmenu" width="10%">
-<?php if( $copern == 20 ) { ?>
-Del<a href="#" onClick="window.open('evidencny_list.php?copern=6155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self'  )">
-<img src='../obr/zmaz.png' width=20 height=15 border=0 title='Zmazaù hodnoty celÈho evidenËnÈho listu ' ></a>
-<?php                      } ?>
-</td>
-</tr>
-
-<tr>
-<?php 
 $rokm1=$kli_vrok-1;
 $rokm2=$kli_vrok-2;
 $rokm3=$kli_vrok-3;
 $rokm4=$kli_vrok-4;
 $rokm5=$kli_vrok-5;
 
-$firm1=0; $firm2=0; $firm3=0; $firm4=0; $firm5=0;  
+$firm1=0; $firm2=0; $firm3=0; $firm4=0; $firm5=0;
 
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_ufir WHERE udaje = 1";
 $fir_vysledok = mysql_query($sqlfir);
@@ -2130,294 +1888,466 @@ $fir_allx11 = 1*$fir_riadok->allx11;
 if( $fir_allx11 > 0 ) { $firm5=$fir_allx11; }
 }
 
+
+//osobne cislo prepinanie
+$novy=0;
+if ( $novy == 0 )
+{
+$prev_oc=$cislo_oc-1;
+$next_oc=$cislo_oc+1;
+if ( $prev_oc == 0 ) $prev_oc=1;
+if ( $next_oc > 9999 ) $next_oc=9999;
+$nasieloc=0;
+$i=0;
+while ( $i <= 9999 AND $nasieloc == 0 )
+{
+$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_mzdkun WHERE oc=$prev_oc ");
+  if (@$zaznam=mysql_data_seek($sqlico,$i))
+  {
+  $riadico=mysql_fetch_object($sqlico);
+  $nasieloc=1;
+  }
+if ( $nasieloc == 0 ) $prev_oc=$prev_oc-1;
+if ( $prev_oc <= 1 ) $nasieloc=1;
+}
+$i=$i+1;
+
+$maxoc=9999;
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun ORDER BY oc DESC LIMIT 1");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $maxoc=1*$riaddok->oc;
+  }
+if ( $next_oc > $maxoc ) $next_oc=$maxoc;
+
+$nasieloc=0;
+$i=0;
+while ($i <= 9999 AND $nasieloc == 0 AND $next_oc <= $maxoc )
+{
+$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_mzdkun WHERE oc=$next_oc ");
+  if (@$zaznam=mysql_data_seek($sqlico,$i))
+  {
+  $riadico=mysql_fetch_object($sqlico);
+  $nasieloc=1;
+  }
+if ( $nasieloc == 0 ) $next_oc=$next_oc+1;
+if ( $next_oc >= 9999 ) $nasieloc=1;
+}
+$i=$i+1;
+if ( $prev_oc == 0 ) $prev_oc=1;
+if ( $next_oc > 9999 ) $next_oc=9999;
+}
 ?>
-<td class="bmenu" width="10%">
-<?php if( $copern == 20 AND $firm1 > 0 ) { ?>
+</HEAD>
+<BODY id="white" onload="ObnovUI();">
+<?php
+//uprav udaje
+if ( $copern == 20 )
+    {
+?>
+<div id="wrap-heading">
+ <table id="heading">
+  <tr>
+   <td class="ilogin">EuroSecom</td>
+   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
+  </tr>
+  <tr>
+   <td class="header">EvidenËn˝ list dÙchodkovÈho poistenia - <span class="subheader"><?php echo "$oc $meno $prie";?></span>
+<?php if ( $novy == 0 ) { ?>
+    <img src='../obr/prev.png' onclick="prevOC();" title="Os.Ë. <?php echo $prev_oc; ?>" class="navoc-icon"> <!-- dopyt, rozbehaù -->
+    <img src='../obr/next.png' onclick="nextOC();" title="Os.Ë. <?php echo $next_oc; ?>" class="navoc-icon">
+<?php                   } ?>
+   </td>
+   <td>
+    <div class="bar-btn-form-tool">
+<!--      <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacZapoctovy();"
+      title="Zobraziù v PDF" class="btn-form-tool"> -->
+<?php if ( $copern == 20 ) { ?> <!-- dopyt, skult˙rniù -->
+<a href="#" onclick="ZnovuPotvrdenie();">
+<img src='../obr/orig.png' width=20 height=15 title='Znovu naËÌtaù hodnoty roku <?php echo $kli_vrok; ?> do evidenËnÈho listu' >
+NaËÌtaj <?php echo $kli_vrok; ?></a>
+<?php                     } ?>
+<?php if( $copern == 20 ) { ?> <!-- dopyt, predtym bolo v <form> -->
+Cel˝<a href="#" onClick="window.open('evidencny_list.php?copern=3155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self')">
+<img src='../obr/ziarovka.png' width=20 height=15 title='NaËÌtaù hodnoty celÈho evidenËnÈho listu z minulÈho roku - vöetky vyplnenÈ roky' ></a>
+<?php                      } ?>
+<?php if( $copern == 20 ) { ?> <!-- dopyt, predtym bolo v <form> -->
+Del<a href="#" onClick="window.open('evidencny_list.php?copern=6155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self')">
+<img src='../obr/zmaz.png' width=20 height=15 title='Zmazaù hodnoty celÈho evidenËnÈho listu ' ></a>
+<?php                      } ?>
+<?php if( $copern == 20 AND $firm1 > 0 ) { ?><!-- dopyt, predtym bolo v <form> -->
 <?php echo $rokm1; ?>/<?php echo $firm1; ?>
-<a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=1&fir=<?php echo $firm1; ?>', '_self'  )">
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu 
+<a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=1&fir=<?php echo $firm1; ?>', '_self')">
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu
 z minulÈho roku <?php echo $rokm1; ?> firma Ë.<?php echo $firm1; ?> - len hodnoty roku <?php echo $rokm1; ?>' ></a>
 <?php                      } ?>
-</td>
 
-<td class="bmenu" width="10%">
+
+
 <?php if( $copern == 20 AND $firm2 > 0 ) { ?>
 <?php echo $rokm2; ?>/<?php echo $firm2; ?>
 <a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=2&fir=<?php echo $firm2; ?>', '_self'  )">
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu 
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu
 z minulÈho roku <?php echo $rokm2; ?> firma Ë.<?php echo $firm2; ?> - len hodnoty roku <?php echo $rokm2; ?>' ></a>
 <?php                      } ?>
-</td>
-<td class="bmenu" width="10%">
+
 <?php if( $copern == 20 AND $firm3 > 0 ) { ?>
 <?php echo $rokm3; ?>/<?php echo $firm3; ?>
 <a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=3&fir=<?php echo $firm3; ?>', '_self'  )">
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu 
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu
 z minulÈho roku <?php echo $rokm3; ?> firma Ë.<?php echo $firm3; ?> - len hodnoty roku <?php echo $rokm3; ?>' ></a>
 <?php                      } ?>
-</td>
-<td class="bmenu" width="10%">
+
 <?php if( $copern == 20 AND $firm4 > 0 ) { ?>
 <?php echo $rokm4; ?>/<?php echo $firm4; ?>
 <a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=4&fir=<?php echo $firm4; ?>', '_self'  )">
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu 
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu
 z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm4; ?> - len hodnoty roku <?php echo $rokm4; ?>' ></a>
 <?php                      } ?>
-</td>
-<td class="bmenu" width="10%">
+
 <?php if( $copern == 20 AND $firm5 > 0 ) { ?>
 <?php echo $rokm5; ?>/<?php echo $firm5; ?>
 <a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=5&fir=<?php echo $firm5; ?>', '_self'  )">
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu 
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu
 z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnoty roku <?php echo $rokm5; ?>' ></a>
 <?php                      } ?>
-</td>
-</tr>
 
-<tr>
-<td class="bmenu" >Kal.rok
-<td class="bmenu" >Znak poistenia
-<td class="bmenu" >Od
-<td class="bmenu" >Do
-<td class="bmenu" >VZ
-<td class="bmenu" >VZ vyl.doby
-<td class="bmenu" >Kal dni vyl.doby
-<td class="obyc" colspan="3"><INPUT type="submit" id="uloz" name="uloz" value="Uloûiù a tlaËiù"></td>
-</tr>
+<!-- dopyt, dorobiù pouËenie -->
+    </div>
+   </td>
+  </tr>
+ </table>
+</div>
 
-<tr>
-<td class="bmenu" ><input type="text" name="kr01" id="kr01" size="4" />
-<td class="bmenu" >
-<select size="1" name="zp01" id="zp01"  >
-<option value="A" >A - zamestnanec</option>
-<option value="MD" >MD - matersk· dovolenka</option>
-<option value="RD" >RD - rodiËovsk· dovolenka</option>
-<option value="VS" >VS - vojensk· sluûba</option>
-<option value="CS" >CS - civiln· sluûba</option>
-<option value="  " >   - ûiadne poistenie</option>
-<td class="bmenu" ><input type="text" name="dp01" id="dp01" size="10" onFocus="return Dp01Onfocus(event.which)"/>
-<td class="bmenu" ><input type="text" name="dk01" id="dk01" size="10" />
-<td class="bmenu" ><input type="text" name="vz01" id="vz01" size="10" />
-<td class="bmenu" ><input type="text" name="vv01" id="vv01" size="10" />
-<td class="bmenu" ><input type="text" name="kd01" id="kd01" size="10" />
-</tr>
-<tr>
-<td class="bmenu" ><input type="text" name="kr02" id="kr02" size="4" />
-<td class="bmenu" >
-<select size="1" name="zp02" id="zp02"  >
-<option value="A" >A - zamestnanec</option>
-<option value="MD" >MD - matersk· dovolenka</option>
-<option value="RD" >RD - rodiËovsk· dovolenka</option>
-<option value="VS" >VS - vojensk· sluûba</option>
-<option value="CS" >CS - civiln· sluûba</option>
-<option value="  " >   - ûiadne poistenie</option>
-<td class="bmenu" ><input type="text" name="dp02" id="dp02" size="10" onFocus="return Dp02Onfocus(event.which)"/>
-<td class="bmenu" ><input type="text" name="dk02" id="dk02" size="10" />
-<td class="bmenu" ><input type="text" name="vz02" id="vz02" size="10" />
-<td class="bmenu" ><input type="text" name="vv02" id="vv02" size="10" />
-<td class="bmenu" ><input type="text" name="kd02" id="kd02" size="10" />
-</tr>
-<tr>
-<td class="bmenu" ><input type="text" name="kr03" id="kr03" size="4" />
-<td class="bmenu" >
-<select size="1" name="zp03" id="zp03"  >
-<option value="A" >A - zamestnanec</option>
-<option value="MD" >MD - matersk· dovolenka</option>
-<option value="RD" >RD - rodiËovsk· dovolenka</option>
-<option value="VS" >VS - vojensk· sluûba</option>
-<option value="CS" >CS - civiln· sluûba</option>
-<option value="  " >   - ûiadne poistenie</option>
-<td class="bmenu" ><input type="text" name="dp03" id="dp03" size="10" onFocus="return Dp03Onfocus(event.which)"/>
-<td class="bmenu" ><input type="text" name="dk03" id="dk03" size="10" />
-<td class="bmenu" ><input type="text" name="vz03" id="vz03" size="10" />
-<td class="bmenu" ><input type="text" name="vv03" id="vv03" size="10" />
-<td class="bmenu" ><input type="text" name="kd03" id="kd03" size="10" />
-</tr>
-<tr>
-<td class="bmenu" ><input type="text" name="kr04" id="kr04" size="4" />
-<td class="bmenu" >
-<select size="1" name="zp04" id="zp04"  >
-<option value="A" >A - zamestnanec</option>
-<option value="MD" >MD - matersk· dovolenka</option>
-<option value="RD" >RD - rodiËovsk· dovolenka</option>
-<option value="VS" >VS - vojensk· sluûba</option>
-<option value="CS" >CS - civiln· sluûba</option>
-<option value="  " >   - ûiadne poistenie</option>
-<td class="bmenu" ><input type="text" name="dp04" id="dp04" size="10" onFocus="return Dp04Onfocus(event.which)"/>
-<td class="bmenu" ><input type="text" name="dk04" id="dk04" size="10" />
-<td class="bmenu" ><input type="text" name="vz04" id="vz04" size="10" />
-<td class="bmenu" ><input type="text" name="vv04" id="vv04" size="10" />
-<td class="bmenu" ><input type="text" name="kd04" id="kd04" size="10" />
-</tr>
-<tr>
-<td class="bmenu" ><input type="text" name="kr05" id="kr05" size="4" />
-<td class="bmenu" >
-<select size="1" name="zp05" id="zp05"  >
-<option value="A" >A - zamestnanec</option>
-<option value="MD" >MD - matersk· dovolenka</option>
-<option value="RD" >RD - rodiËovsk· dovolenka</option>
-<option value="VS" >VS - vojensk· sluûba</option>
-<option value="CS" >CS - civiln· sluûba</option>
-<option value="  " >   - ûiadne poistenie</option>
-<td class="bmenu" ><input type="text" name="dp05" id="dp05" size="10" onFocus="return Dp05Onfocus(event.which)"/>
-<td class="bmenu" ><input type="text" name="dk05" id="dk05" size="10" />
-<td class="bmenu" ><input type="text" name="vz05" id="vz05" size="10" />
-<td class="bmenu" ><input type="text" name="vv05" id="vv05" size="10" />
-<td class="bmenu" ><input type="text" name="kd05" id="kd05" size="10" />
-</tr>
-<tr>
-<td class="bmenu" ><input type="text" name="kr06" id="kr06" size="4" />
-<td class="bmenu" >
-<select size="1" name="zp06" id="zp06"  >
-<option value="A" >A - zamestnanec</option>
-<option value="MD" >MD - matersk· dovolenka</option>
-<option value="RD" >RD - rodiËovsk· dovolenka</option>
-<option value="VS" >VS - vojensk· sluûba</option>
-<option value="CS" >CS - civiln· sluûba</option>
-<option value="  " >   - ûiadne poistenie</option>
-<td class="bmenu" ><input type="text" name="dp06" id="dp06" size="10" onFocus="return Dp06Onfocus(event.which)"/>
-<td class="bmenu" ><input type="text" name="dk06" id="dk06" size="10" />
-<td class="bmenu" ><input type="text" name="vz06" id="vz06" size="10" />
-<td class="bmenu" ><input type="text" name="vv06" id="vv06" size="10" />
-<td class="bmenu" ><input type="text" name="kd06" id="kd06" size="10" />
-</tr>
-<tr>
-<td class="bmenu" ><input type="text" name="kr07" id="kr07" size="4" />
-<td class="bmenu" >
-<select size="1" name="zp07" id="zp07"  >
-<option value="A" >A - zamestnanec</option>
-<option value="MD" >MD - matersk· dovolenka</option>
-<option value="RD" >RD - rodiËovsk· dovolenka</option>
-<option value="VS" >VS - vojensk· sluûba</option>
-<option value="CS" >CS - civiln· sluûba</option>
-<option value="  " >   - ûiadne poistenie</option>
-<td class="bmenu" ><input type="text" name="dp07" id="dp07" size="10" onFocus="return Dp07Onfocus(event.which)"/>
-<td class="bmenu" ><input type="text" name="dk07" id="dk07" size="10" />
-<td class="bmenu" ><input type="text" name="vz07" id="vz07" size="10" />
-<td class="bmenu" ><input type="text" name="vv07" id="vv07" size="10" />
-<td class="bmenu" ><input type="text" name="kd07" id="kd07" size="10" />
-</tr>
-<tr>
-<td class="bmenu" ><input type="text" name="kr08" id="kr08" size="4" />
-<td class="bmenu" >
-<select size="1" name="zp08" id="zp08"  >
-<option value="A" >A - zamestnanec</option>
-<option value="MD" >MD - matersk· dovolenka</option>
-<option value="RD" >RD - rodiËovsk· dovolenka</option>
-<option value="VS" >VS - vojensk· sluûba</option>
-<option value="CS" >CS - civiln· sluûba</option>
-<option value="  " >   - ûiadne poistenie</option>
-<td class="bmenu" ><input type="text" name="dp08" id="dp08" size="10" onFocus="return Dp08Onfocus(event.which)"/>
-<td class="bmenu" ><input type="text" name="dk08" id="dk08" size="10" />
-<td class="bmenu" ><input type="text" name="vz08" id="vz08" size="10" />
-<td class="bmenu" ><input type="text" name="vv08" id="vv08" size="10" />
-<td class="bmenu" ><input type="text" name="kd08" id="kd08" size="10" />
-</tr>
-<tr>
-<td class="bmenu" ><input type="text" name="kr09" id="kr09" size="4" />
-<td class="bmenu" >
-<select size="1" name="zp09" id="zp09"  >
-<option value="A" >A - zamestnanec</option>
-<option value="MD" >MD - matersk· dovolenka</option>
-<option value="RD" >RD - rodiËovsk· dovolenka</option>
-<option value="VS" >VS - vojensk· sluûba</option>
-<option value="CS" >CS - civiln· sluûba</option>
-<option value="  " >   - ûiadne poistenie</option>
-<td class="bmenu" ><input type="text" name="dp09" id="dp09" size="10" />
-<td class="bmenu" ><input type="text" name="dk09" id="dk09" size="10" />
-<td class="bmenu" ><input type="text" name="vz09" id="vz09" size="10" />
-<td class="bmenu" ><input type="text" name="vv09" id="vv09" size="10" />
-<td class="bmenu" ><input type="text" name="kd09" id="kd09" size="10" />
-</tr>
-<tr>
-<td class="bmenu" ><input type="text" name="kr10" id="kr10" size="4" />
-<td class="bmenu" >
-<select size="1" name="zp10" id="zp10"  >
-<option value="A" >A - zamestnanec</option>
-<option value="MD" >MD - matersk· dovolenka</option>
-<option value="RD" >RD - rodiËovsk· dovolenka</option>
-<option value="VS" >VS - vojensk· sluûba</option>
-<option value="CS" >CS - civiln· sluûba</option>
-<option value="  " >   - ûiadne poistenie</option>
-<td class="bmenu" ><input type="text" name="dp10" id="dp10" size="10" />
-<td class="bmenu" ><input type="text" name="dk10" id="dk10" size="10" />
-<td class="bmenu" ><input type="text" name="vz10" id="vz10" size="10" />
-<td class="bmenu" ><input type="text" name="vv10" id="vv10" size="10" />
-<td class="bmenu" ><input type="text" name="kd10" id="kd10" size="10" />
-</tr>
-<tr>
-<td class="bmenu" ><input type="text" name="kr11" id="kr11" size="4" />
-<td class="bmenu" >
-<select size="1" name="zp11" id="zp11"  >
-<option value="A" >A - zamestnanec</option>
-<option value="MD" >MD - matersk· dovolenka</option>
-<option value="RD" >RD - rodiËovsk· dovolenka</option>
-<option value="VS" >VS - vojensk· sluûba</option>
-<option value="CS" >CS - civiln· sluûba</option>
-<option value="  " >   - ûiadne poistenie</option>
-<td class="bmenu" ><input type="text" name="dp11" id="dp11" size="10" />
-<td class="bmenu" ><input type="text" name="dk11" id="dk11" size="10" />
-<td class="bmenu" ><input type="text" name="vz11" id="vz11" size="10" />
-<td class="bmenu" ><input type="text" name="vv11" id="vv11" size="10" />
-<td class="bmenu" ><input type="text" name="kd11" id="kd11" size="10" />
-</tr>
-<tr>
-<td class="bmenu" ><input type="text" name="kr12" id="kr12" size="4" />
-<td class="bmenu" >
-<select size="1" name="zp12" id="zp12"  >
-<option value="A" >A - zamestnanec</option>
-<option value="MD" >MD - matersk· dovolenka</option>
-<option value="RD" >RD - rodiËovsk· dovolenka</option>
-<option value="VS" >VS - vojensk· sluûba</option>
-<option value="CS" >CS - civiln· sluûba</option>
-<option value="  " >   - ûiadne poistenie</option>
-<td class="bmenu" ><input type="text" name="dp12" id="dp12" size="10" />
-<td class="bmenu" ><input type="text" name="dk12" id="dk12" size="10" />
-<td class="bmenu" ><input type="text" name="vz12" id="vz12" size="10" />
-<td class="bmenu" ><input type="text" name="vv12" id="vv12" size="10" />
-<td class="bmenu" ><input type="text" name="kd12" id="kd12" size="10" />
-</tr>
-<tr>
-<td class="bmenu" ><input type="text" name="kr13" id="kr13" size="4" />
-<td class="bmenu" >
-<select size="1" name="zp13" id="zp13"  >
-<option value="A" >A - zamestnanec</option>
-<option value="MD" >MD - matersk· dovolenka</option>
-<option value="RD" >RD - rodiËovsk· dovolenka</option>
-<option value="VS" >VS - vojensk· sluûba</option>
-<option value="CS" >CS - civiln· sluûba</option>
-<option value="  " >   - ûiadne poistenie</option>
-<td class="bmenu" ><input type="text" name="dp13" id="dp13" size="10" />
-<td class="bmenu" ><input type="text" name="dk13" id="dk13" size="10" />
-<td class="bmenu" ><input type="text" name="vz13" id="vz13" size="10" />
-<td class="bmenu" ><input type="text" name="vv13" id="vv13" size="10" />
-<td class="bmenu" ><input type="text" name="kd13" id="kd13" size="10" />
-</tr>
+<div id="content">
+<FORM name="formv1" method="post" action="evidencny_list.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloû a VytlaË" class="btn-top-formsave" style="top:4px;"> <!-- dopyt, nebude lepöie prerobiù na zvl·öù tlaË -->
 
-<tr><td class="bmenu" colspan="10">D·tum odoslania formul·ra</td></tr>
-<tr><td class="bmenu" colspan="10"><input type="text" name="datum" id="datum" size="10" /></td></tr>
+<div class="wrap-form-background">
+<img src="../dokumenty/mzdy_potvrdenia/evidencny_list.jpg"
+ alt="tlaËivo EvidenËn˝ list dÙchodkovÈho poistenia 231kB" class="form-background">
 
-<tr><td class="bmenu" colspan="10">Pozn·mka</td></tr>
-<tr><td class="bmenu" colspan="10"><input type="text" name="pozn" id="pozn" size="100" /></td></tr>
+<!-- vyplneny = natvrdo zaskrtnute -->
+<span class="text-echo" style="top:157px; left:277px;">x</span>
+<!-- dopyt, opravn˝ budeme rieöiù -->
+
+<!-- I. POISTENEC -->
+<span class="text-echo" style="top:215px; left:42px;"><?php echo $prie; ?></span>
+<span class="text-echo" style="top:215px; left:495px;"><?php echo $meno; ?></span>
+<span class="text-echo" style="top:215px; left:805px;"><?php echo $titl; ?></span>
+<span class="text-echo" style="top:252px; left:42px;"><?php echo $rodprie; ?></span>
+<!-- dopyt, predoölÈ priezvisko budeme rieöiù? -->
+<span class="text-echo" style="top:288px; left:42px;"><?php echo $mnr; ?></span>
+<span class="text-echo" style="top:288px; left:675px;"><?php echo $dar_sk; ?></span>
+<span class="text-echo" style="top:288px; left:795px;"><?php echo $rodne; ?></span>
+<span class="text-echo" style="top:328px; left:42px;"><?php echo $ulica; ?></span>
+<span class="text-echo" style="top:328px; left:642px;"><?php echo $dom; ?></span>
+<span class="text-echo" style="top:380px; left:42px;"><?php echo $obec; ?></span>
+<span class="text-echo" style="top:380px; left:650px;"><?php echo $psc; ?></span>
+<span class="text-echo" style="top:430px; left:550px;"><?php echo $nastup; ?></span>
+<span class="text-echo" style="top:430px; left:650px;"><?php echo $vystup; ?></span>
+
+<!-- II. Obdobia poistenia ... -->
+<img src="../obr/ikony/info_blue_icon.png" class="btn-row-tool" style="top:465px; left:127px;"
+ title="A = zamestnanec, MD = matersk· dovolenka, RD = rodiËovsk· dovolenka, VS = vojensk· sluûba, CS = civiln· sluûba">
+
+<!-- 1.riadok -->
+<input type="text" name="kr01" id="kr01" style="top:501px; left:29px; width:70px;"/>
+<select size="1" name="zp01" id="zp01" style="top:501px; left:129px;">
+ <option value="A">A</option>
+ <option value="MD">MD</option>
+ <option value="RD">RD</option>
+ <option value="VS">VS</option>
+ <option value="CS">CS</option>
+ <option value=" "></option>
+</select>
+<input type="text" name="dp01" id="dp01" onfocus="return Dp01Onfocus(event.which)"
+ onkeyup="CiarkaNaBodku(this);" style="top:501px; left:210px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="dk01" id="dk01" onkeyup="CiarkaNaBodku(this);"
+ style="top:501px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="vz01" id="vz01" onkeyup="CiarkaNaBodku(this);"
+ style="top:501px; left:449px; width:93px;"/>
+<input type="text" name="vv01" id="vv01" onkeyup="CiarkaNaBodku(this);"
+ style="top:501px; left:562px; width:93px;"/>
+<input type="text" name="kd01" id="kd01" style="top:501px; left:675px; width:72px;"/>
+
+<!-- 2.riadok -->
+<input type="text" name="kr02" id="kr02" style="top:550px; left:40px; width:70px;"/>
+<select size="1" name="zp02" id="zp02" style="top:550px; left:145px;">
+ <option value="A">A</option>
+ <option value="MD">MD</option>
+ <option value="RD">RD</option>
+ <option value="VS">VS</option>
+ <option value="CS">CS</option>
+ <option value=" "></option>
+</select>
+<input type="text" name="dp02" id="dp02" onfocus="return Dp02Onfocus(event.which)"
+ onkeyup="CiarkaNaBodku(this);" style="top:550px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="dk02" id="dk02" onkeyup="CiarkaNaBodku(this);"
+ style="top:550px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="vz02" id="vz02" onkeyup="CiarkaNaBodku(this);"
+ style="top:550px; left:470px; width:90px;"/>
+<input type="text" name="vv02" id="vv02" onkeyup="CiarkaNaBodku(this);"
+ style="top:550px; left:580px; width:90px;"/>
+<input type="text" name="kd02" id="kd02" style="top:550px; left:700px; width:70px;"/>
+
+<!-- 3.riadok -->
+<input type="text" name="kr03" id="kr03" style="top:590px; left:40px; width:70px;"/>
+<select size="1" name="zp03" id="zp03" style="top:590px; left:145px;">
+ <option value="A">A</option>
+ <option value="MD">MD</option>
+ <option value="RD">RD</option>
+ <option value="VS">VS</option>
+ <option value="CS">CS</option>
+ <option value=" "></option>
+</select>
+<input type="text" name="dp03" id="dp03" onfocus="return Dp03Onfocus(event.which)"
+ onkeyup="CiarkaNaBodku(this);" style="top:590px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="dk03" id="dk03" onkeyup="CiarkaNaBodku(this);"
+ style="top:590px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="vz03" id="vz03" onkeyup="CiarkaNaBodku(this);"
+ style="top:590px; left:470px; width:90px;"/>
+<input type="text" name="vv03" id="vv03" onkeyup="CiarkaNaBodku(this);"
+ style="top:590px; left:580px; width:90px;"/>
+<input type="text" name="kd03" id="kd03" style="top:590px; left:700px; width:70px;"/>
+
+<!-- 4.riadok -->
+<input type="text" name="kr04" id="kr04" style="top:625px; left:40px; width:70px;"/>
+<select size="1" name="zp04" id="zp04" style="top:625px; left:145px;">
+ <option value="A">A</option>
+ <option value="MD">MD</option>
+ <option value="RD">RD</option>
+ <option value="VS">VS</option>
+ <option value="CS">CS</option>
+ <option value=" "></option>
+</select>
+<input type="text" name="dp04" id="dp04" onfocus="return Dp04Onfocus(event.which)"
+ onkeyup="CiarkaNaBodku(this);" style="top:625px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="dk04" id="dk04" onkeyup="CiarkaNaBodku(this);"
+ style="top:625px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="vz04" id="vz04" onkeyup="CiarkaNaBodku(this);"
+ style="top:625px; left:470px; width:90px;"/>
+<input type="text" name="vv04" id="vv04" onkeyup="CiarkaNaBodku(this);"
+ style="top:625px; left:580px; width:90px;"/>
+<input type="text" name="kd04" id="kd04" style="top:625px; left:700px; width:70px;"/>
+
+<!-- 5.riadok -->
+<input type="text" name="kr05" id="kr05" style="top:660px; left:40px; width:70px;"/>
+<select size="1" name="zp05" id="zp05" style="top:660px; left:145px;">
+ <option value="A">A</option>
+ <option value="MD">MD</option>
+ <option value="RD">RD</option>
+ <option value="VS">VS</option>
+ <option value="CS">CS</option>
+ <option value=" "></option>
+</select>
+<input type="text" name="dp05" id="dp05" onfocus="return Dp05Onfocus(event.which)"
+ onkeyup="CiarkaNaBodku(this);" style="top:660px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="dk05" id="dk05" onkeyup="CiarkaNaBodku(this);"
+ style="top:660px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="vz05" id="vz05" onkeyup="CiarkaNaBodku(this);"
+ style="top:660px; left:470px; width:90px;"/>
+<input type="text" name="vv05" id="vv05" onkeyup="CiarkaNaBodku(this);"
+ style="top:660px; left:580px; width:90px;"/>
+<input type="text" name="kd05" id="kd05" style="top:660px; left:700px; width:70px;"/>
+
+<!-- 6.riadok -->
+<input type="text" name="kr06" id="kr06" style="top:700px; left:40px; width:70px;"/>
+<select size="1" name="zp06" id="zp06" style="top:700px; left:145px;">
+ <option value="A">A</option>
+ <option value="MD">MD</option>
+ <option value="RD">RD</option>
+ <option value="VS">VS</option>
+ <option value="CS">CS</option>
+ <option value=" "></option>
+</select>
+<input type="text" name="dp06" id="dp06" onfocus="return Dp06Onfocus(event.which)"
+ onkeyup="CiarkaNaBodku(this);" style="top:700px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="dk06" id="dk06" onkeyup="CiarkaNaBodku(this);"
+ style="top:700px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="vz06" id="vz06" onkeyup="CiarkaNaBodku(this);"
+ style="top:700px; left:470px; width:90px;"/>
+<input type="text" name="vv06" id="vv06" onkeyup="CiarkaNaBodku(this);"
+ style="top:700px; left:580px; width:90px;"/>
+<input type="text" name="kd06" id="kd06" style="top:700px; left:700px; width:70px;"/>
+
+<!-- 7.riadok -->
+<input type="text" name="kr07" id="kr07" style="top:740px; left:40px; width:70px;"/>
+<select size="1" name="zp07" id="zp07" style="top:740px; left:145px;">
+ <option value="A">A</option>
+ <option value="MD">MD</option>
+ <option value="RD">RD</option>
+ <option value="VS">VS</option>
+ <option value="CS">CS</option>
+ <option value=" "></option>
+</select>
+<input type="text" name="dp07" id="dp07" onfocus="return Dp07Onfocus(event.which)"
+ onkeyup="CiarkaNaBodku(this);" style="top:740px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="dk07" id="dk07" onkeyup="CiarkaNaBodku(this);"
+ style="top:740px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="vz07" id="vz07" onkeyup="CiarkaNaBodku(this);"
+ style="top:740px; left:470px; width:90px;"/>
+<input type="text" name="vv07" id="vv07" onkeyup="CiarkaNaBodku(this);"
+ style="top:740px; left:580px; width:90px;"/>
+<input type="text" name="kd07" id="kd07" style="top:740px; left:700px; width:70px;"/>
+
+<!-- 8.riadok -->
+<input type="text" name="kr08" id="kr08" style="top:780px; left:40px; width:70px;"/>
+<select size="1" name="zp08" id="zp08" style="top:780px; left:145px;">
+ <option value="A">A</option>
+ <option value="MD">MD</option>
+ <option value="RD">RD</option>
+ <option value="VS">VS</option>
+ <option value="CS">CS</option>
+ <option value=" "></option>
+</select>
+<input type="text" name="dp08" id="dp08" onfocus="return Dp08Onfocus(event.which)"
+ onkeyup="CiarkaNaBodku(this);" style="top:780px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="dk08" id="dk08" onkeyup="CiarkaNaBodku(this);"
+ style="top:780px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="vz08" id="vz08" onkeyup="CiarkaNaBodku(this);"
+ style="top:780px; left:470px; width:90px;"/>
+<input type="text" name="vv08" id="vv08" onkeyup="CiarkaNaBodku(this);"
+ style="top:780px; left:580px; width:90px;"/>
+<input type="text" name="kd08" id="kd08" style="top:780px; left:700px; width:70px;"/>
+
+<!-- 9.riadok -->
+<input type="text" name="kr09" id="kr09" style="top:810px; left:40px; width:70px;"/>
+<select size="1" name="zp09" id="zp09" style="top:810px; left:145px;">
+ <option value="A">A</option>
+ <option value="MD">MD</option>
+ <option value="RD">RD</option>
+ <option value="VS">VS</option>
+ <option value="CS">CS</option>
+ <option value=" "></option>
+</select>
+<input type="text" name="dp09" id="dp09" onkeyup="CiarkaNaBodku(this);"
+ style="top:810px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="dk09" id="dk09" onkeyup="CiarkaNaBodku(this);"
+ style="top:810px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="vz09" id="vz09" onkeyup="CiarkaNaBodku(this);"
+ style="top:810px; left:470px; width:90px;"/>
+<input type="text" name="vv09" id="vv09" onkeyup="CiarkaNaBodku(this);"
+ style="top:810px; left:580px; width:90px;"/>
+<input type="text" name="kd09" id="kd09" style="top:810px; left:700px; width:70px;"/>
+
+<!-- 10.riadok -->
+<input type="text" name="kr10" id="kr10" style="top:850px; left:40px; width:70px;"/>
+<select size="1" name="zp10" id="zp10" style="top:850px; left:145px;">
+ <option value="A">A</option>
+ <option value="MD">MD</option>
+ <option value="RD">RD</option>
+ <option value="VS">VS</option>
+ <option value="CS">CS</option>
+ <option value=" "></option>
+</select>
+<input type="text" name="dp10" id="dp10" onkeyup="CiarkaNaBodku(this);"
+ style="top:850px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="dk10" id="dk10" onkeyup="CiarkaNaBodku(this);"
+ style="top:850px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="vz10" id="vz10" onkeyup="CiarkaNaBodku(this);"
+ style="top:850px; left:470px; width:90px;"/>
+<input type="text" name="vv10" id="vv10" onkeyup="CiarkaNaBodku(this);"
+ style="top:850px; left:580px; width:90px;"/>
+<input type="text" name="kd10" id="kd10" style="top:850px; left:700px; width:70px;"/>
+
+<!-- 11.riadok -->
+<input type="text" name="kr11" id="kr11" style="top:885px; left:40px; width:70px;"/>
+<select size="1" name="zp11" id="zp11" style="top:885px; left:145px;">
+ <option value="A">A</option>
+ <option value="MD">MD</option>
+ <option value="RD">RD</option>
+ <option value="VS">VS</option>
+ <option value="CS">CS</option>
+ <option value=" "></option>
+</select>
+<input type="text" name="dp11" id="dp11" onkeyup="CiarkaNaBodku(this);"
+ style="top:885px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="dk11" id="dk11" onkeyup="CiarkaNaBodku(this);"
+ style="top:885px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="vz11" id="vz11" onkeyup="CiarkaNaBodku(this);"
+ style="top:885px; left:470px; width:90px;"/>
+<input type="text" name="vv11" id="vv11" onkeyup="CiarkaNaBodku(this);"
+ style="top:885px; left:580px; width:90px;"/>
+<input type="text" name="kd11" id="kd11" style="top:885px; left:700px; width:70px;"/>
+
+<!-- 12.riadok -->
+<input type="text" name="kr12" id="kr12" style="top:920px; left:40px; width:70px;"/>
+<select size="1" name="zp12" id="zp12" style="top:920px; left:145px;">
+ <option value="A">A</option>
+ <option value="MD">MD</option>
+ <option value="RD">RD</option>
+ <option value="VS">VS</option>
+ <option value="CS">CS</option>
+ <option value=" "></option>
+</select>
+<input type="text" name="dp12" id="dp12" onkeyup="CiarkaNaBodku(this);"
+ style="top:920px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="dk12" id="dk12" onkeyup="CiarkaNaBodku(this);"
+ style="top:920px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="vz12" id="vz12" onkeyup="CiarkaNaBodku(this);"
+ style="top:920px; left:470px; width:90px;"/>
+<input type="text" name="vv12" id="vv12" onkeyup="CiarkaNaBodku(this);"
+ style="top:920px; left:580px; width:90px;"/>
+<input type="text" name="kd12" id="kd12" style="top:920px; left:700px; width:70px;"/>
+
+<!-- 13.riadok -->
+<input type="text" name="kr13" id="kr13" style="top:960px; left:40px; width:70px;"/>
+<select size="1" name="zp13" id="zp13" style="top:960px; left:145px;">
+ <option value="A">A</option>
+ <option value="MD">MD</option>
+ <option value="RD">RD</option>
+ <option value="VS">VS</option>
+ <option value="CS">CS</option>
+ <option value=" "></option>
+</select>
+<input type="text" name="dp13" id="dp13" onkeyup="CiarkaNaBodku(this);"
+ style="top:960px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="dk13" id="dk13" onkeyup="CiarkaNaBodku(this);"
+ style="top:960px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+<input type="text" name="vz13" id="vz13" onkeyup="CiarkaNaBodku(this);"
+ style="top:960px; left:470px; width:90px;"/>
+<input type="text" name="vv13" id="vv13" onkeyup="CiarkaNaBodku(this);"
+ style="top:960px; left:580px; width:90px;"/>
+<input type="text" name="kd13" id="kd13" style="top:960px; left:700px; width:70px;"/>
+
+<!-- III. ZAMESTNAVATEL -->
+<span class="text-echo" style="top:1037px; left:42px;"><?php echo $fir_fnaz; ?></span>
+<span class="text-echo" style="top:1070px; left:690px;">x</span>
+<span class="text-echo" style="top:1070px; left:780px;"><?php echo $fir_fico; ?></span>
+<span class="text-echo" style="top:1110px; left:42px;"><?php echo $fir_fuli; ?></span>
+<span class="text-echo" style="top:1110px; left:700px;"><?php echo $fir_fcdm; ?></span>
+<span class="text-echo" style="top:1150px; left:42px;"><?php echo $fir_fmes; ?></span>
+<span class="text-echo" style="top:1150px; left:700px;"><?php echo $fir_fpsc; ?></span>
+
+<!-- IV. POTVRDENIE SPRAVNOSTI -->
+<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);"
+ style="top:1179px; left:29px; width:122px;"/>
+
+<!-- poznamka -->
+<label for="pozn" style="position:absolute; top:1280px; left:170px; font-size:12px; font-weight:bold;">Pozn·mka</label>
+<input type="text" name="pozn" id="pozn" style="top:1275px; right:10px; width:700px;"/>
 
 
+
+
+
+
+
+</div> <!-- koniec .wrap-form-background -->
 </FORM>
-
-</table>
-
-<div id="myBANKADelement"></div>
-<div id="jeBANKADelement"></div>
-
-
-<script type="text/javascript">
-
-</script>
-
+</div> <!-- koniec #content -->
 <?php
 //mysql_free_result($vysledok);
     }
-//koniec uprav  udaje strana 1
+//koniec uprav
 ?>
+
+
+
+
+
 
 
 <?php
@@ -2428,9 +2358,9 @@ $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
-// celkovy koniec dokumentu
-$cislista = include("mzd_lista.php");
-       } while (false);
+//celkovy koniec dokumentu
+$cislista = include("mzd_lista_norm.php");
+} while (false);
 ?>
 </BODY>
 </HTML>
