@@ -529,7 +529,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
 //echo $uprtxt;
 //exit;
 $upravene = mysql_query("$uprtxt");  
-$copern=10;
+$copern=20;
 if (!$upravene):
 ?>
 <script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ" ) </script>
@@ -659,6 +659,10 @@ $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdevidencny'.$sqlt;
 $vytvor = mysql_query("$vsql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdevidencny ADD pozn VARCHAR(80) AFTER konx";
 $vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdevidencny ADD predo VARCHAR(50) NOT NULL AFTER datum";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdevidencny ADD oprav DECIMAL(2,0) DEFAULT 0 AFTER datum";
+$vysledek = mysql_query("$sql");
 
 $jepotvrd=0;
 $sql = "SELECT * FROM F$kli_vxcf"."_mzdevidencny WHERE oc = $cislo_oc";
@@ -685,7 +689,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdevidencny".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','0000-00-00'".
+"1,'','','0000-00-00',0,'' ".
 " FROM F$kli_vxcf"."_mzdkun".
 " WHERE F$kli_vxcf"."_mzdkun.oc = $cislo_oc".
 "";
@@ -1799,13 +1803,13 @@ var sirkawic = screen.width-10;
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-  function prevOC()
+  function prevOC(prevoc)
   {
-   window.open('evidencny_list.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $prev_oc;?>', '_self');
+   window.open('evidencny_list.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + prevoc + '', '_self');
   }
-  function nextOC()
+  function nextOC(nextoc)
   {
-   window.open('evidencny_list.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $next_oc;?>', '_self');
+   window.open('evidencny_list.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + nextoc + '', '_self');
   }
 
 
@@ -1955,8 +1959,8 @@ if ( $copern == 20 )
   <tr>
    <td class="header">Evidenèný list dôchodkového poistenia - <span class="subheader"><?php echo "$oc $meno $prie";?></span>
 <?php if ( $novy == 0 ) { ?>
-    <img src='../obr/prev.png' onclick="prevOC();" title="Os.è. <?php echo $prev_oc; ?>" class="navoc-icon"> <!-- dopyt, rozbeha -->
-    <img src='../obr/next.png' onclick="nextOC();" title="Os.è. <?php echo $next_oc; ?>" class="navoc-icon">
+    <img src='../obr/prev.png' onclick="prevOC(<?php echo $prev_oc; ?>);" title="Os.è. <?php echo $prev_oc; ?>" class="navoc-icon"> <!-- dopyt, rozbeha -->
+    <img src='../obr/next.png' onclick="nextOC(<?php echo $next_oc; ?>);" title="Os.è. <?php echo $next_oc; ?>" class="navoc-icon">
 <?php                   } ?>
    </td>
    <td>
@@ -1985,28 +1989,28 @@ z minulého roku <?php echo $rokm1; ?> firma è.<?php echo $firm1; ?> - len hodnot
 
 
 
-<?php if( $copern == 20 AND $firm2 > 0 ) { ?>
+<?php if( $copern == 201 AND $firm2 > 0 ) { ?>
 <?php echo $rokm2; ?>/<?php echo $firm2; ?>
 <a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=2&fir=<?php echo $firm2; ?>', '_self'  )">
 <img src='../obr/ziarovka.png' width=20 height=15 border=0 title='Naèíta hodnoty evidenèného listu
 z minulého roku <?php echo $rokm2; ?> firma è.<?php echo $firm2; ?> - len hodnoty roku <?php echo $rokm2; ?>' ></a>
 <?php                      } ?>
 
-<?php if( $copern == 20 AND $firm3 > 0 ) { ?>
+<?php if( $copern == 201 AND $firm3 > 0 ) { ?>
 <?php echo $rokm3; ?>/<?php echo $firm3; ?>
 <a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=3&fir=<?php echo $firm3; ?>', '_self'  )">
 <img src='../obr/ziarovka.png' width=20 height=15 border=0 title='Naèíta hodnoty evidenèného listu
 z minulého roku <?php echo $rokm3; ?> firma è.<?php echo $firm3; ?> - len hodnoty roku <?php echo $rokm3; ?>' ></a>
 <?php                      } ?>
 
-<?php if( $copern == 20 AND $firm4 > 0 ) { ?>
+<?php if( $copern == 201 AND $firm4 > 0 ) { ?>
 <?php echo $rokm4; ?>/<?php echo $firm4; ?>
 <a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=4&fir=<?php echo $firm4; ?>', '_self'  )">
 <img src='../obr/ziarovka.png' width=20 height=15 border=0 title='Naèíta hodnoty evidenèného listu
 z minulého roku <?php echo $rokm4; ?> firma è.<?php echo $firm4; ?> - len hodnoty roku <?php echo $rokm4; ?>' ></a>
 <?php                      } ?>
 
-<?php if( $copern == 20 AND $firm5 > 0 ) { ?>
+<?php if( $copern == 201 AND $firm5 > 0 ) { ?>
 <?php echo $rokm5; ?>/<?php echo $firm5; ?>
 <a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=5&fir=<?php echo $firm5; ?>', '_self'  )">
 <img src='../obr/ziarovka.png' width=20 height=15 border=0 title='Naèíta hodnoty evidenèného listu
@@ -2022,7 +2026,7 @@ z minulého roku <?php echo $rokm4; ?> firma è.<?php echo $firm5; ?> - len hodnot
 
 <div id="content">
 <FORM name="formv1" method="post" action="evidencny_list.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
- <INPUT type="submit" id="uloz" name="uloz" value="Ulož a Vytlaè" class="btn-top-formsave" style="top:4px;"> <!-- dopyt, nebude lepšie prerobi na zvláš tlaè -->
+ <INPUT type="submit" id="uloz" name="uloz" value="Ulož zmeny" class="btn-top-formsave" style="top:4px;"> <!-- dopyt, nebude lepšie prerobi na zvláš tlaè -->
 
 <div class="wrap-form-background">
 <img src="../dokumenty/mzdy_potvrdenia/evidencny_list.jpg"
