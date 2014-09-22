@@ -745,7 +745,8 @@ $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdevidencny".
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
-
+//echo $sqltt;
+//exit;
 $i=0;
 $j=0; //zaciatok strany ak by som chcel strankovat
   while ($i <= $pol )
@@ -788,15 +789,19 @@ $datum=SkDatum($hlavicka->datum);
 
 
 $pdf->Cell(190,23,"                          ","0",1,"L");
-$pdf->Cell(48,3," ","0",0,"L");$pdf->Cell(3,3,"X","0",1,"C");
+$pdf->Cell(48,3," ","0",0,"L");$pdf->Cell(3,3,"X","0",0,"C");
+
+$opravx="";
+if( $hlavicka->oprav == 1 ) { $opravx="X"; }
+$pdf->Cell(14,3," ","0",0,"L");$pdf->Cell(3,3,"$opravx","0",1,"C");
 
 $pdf->Cell(190,9,"                          ","0",1,"L");
 $pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(95,6,"$hlavicka->prie","0",0,"L");
 $pdf->Cell(65,6,"$hlavicka->meno","0",0,"L");$pdf->Cell(30,6,"$hlavicka->titl","0",1,"L");
 
 $pdf->Cell(190,2,"                          ","0",1,"L");
-$pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(95,6,"$hlavicka->rodn","0",0,"L");
-$pdf->Cell(65,6," ","0",0,"L");$pdf->Cell(30,6," ","0",1,"L");
+$pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(85,6,"$hlavicka->rodn","0",0,"L");
+$pdf->Cell(10,6," ","0",0,"L");$pdf->Cell(30,6,"$hlavicka->predo","0",1,"L");
 
 $pdf->Cell(190,2,"                          ","0",1,"L");
 $pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(130,6,"$hlavicka->mnr","0",0,"L");
@@ -1853,6 +1858,10 @@ var sirkawic = screen.width-10;
   {
    window.open('../dokumenty/mzdy_potvrdenia/evidencny_list_v14_navod_vyplnenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
+  function tlacpdf(oc)
+  {
+   window.open('evidencny_list.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=' + oc + '&xx=1', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }
 </script>
 <?php
 $rokm1=$kli_vrok-1;
@@ -2018,8 +2027,9 @@ if ( $copern == 20 )
  </a>
 <?php                   } ?>
 
-<?php if ( $copern == 201 )
+<?php if ( $copern == 20 )
 {
+//toto musime doriesit
 ?>
 <?php if ( $firm2 > 0 ) { ?>
  <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=2&fir=<?php echo $firm2; ?>', '_self')"
@@ -2050,7 +2060,7 @@ if ( $copern == 20 )
 ?>
 </p>
      <img src="../obr/ikony/info_blue_icon.png" onclick="NavodVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
-     <img src="../obr/ikony/printer_blue_icon.png" onclick=""
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacpdf(<?php echo $cislo_oc; ?>);"
       title="Zobrazi v PDF" class="btn-form-tool"> <!-- dopyt, nefunkèné -->
     </div>
    </td>
