@@ -474,6 +474,8 @@ $vv13 = strip_tags($_REQUEST['vv13']);
 
 $pozn = strip_tags($_REQUEST['pozn']);
 $str2 = strip_tags($_REQUEST['str2']);
+$oprav = strip_tags($_REQUEST['oprav']);
+$predo = strip_tags($_REQUEST['predo']);
 
 $uprav="NO";
 
@@ -524,7 +526,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
 " vv07='$vv07', vv08='$vv08', vv09='$vv09', vv10='$vv10', vv11='$vv11', vv12='$vv12', vv13='$vv13', ".
 " vz01='$vz01', vz02='$vz02', vz03='$vz03', vz04='$vz04', vz05='$vz05', vz06='$vz06', ".
 " vz07='$vz07', vz08='$vz08', vz09='$vz09', vz10='$vz10', vz11='$vz11', vz12='$vz12', vz13='$vz13', ".
-" pozn='$pozn', datum='$datum_sql' ".
+" pozn='$pozn', oprav='$oprav', predo='$predo', datum='$datum_sql' ".
 " WHERE oc = $cislo_oc"; 
 //echo $uprtxt;
 //exit;
@@ -1468,10 +1470,10 @@ $ulica = $fir_riadok->zuli;
 $dom = $fir_riadok->zcdm;
 $obec = $fir_riadok->zmes;
 $psc = $fir_riadok->zpsc;
-$nastup = $fir_riadok->dan;
-$nastup_sk=SkDatum(nastup);
-$vystup = $fir_riadok->dav;
-$vystup_sk=SkDatum(vystup);
+$dan = $fir_riadok->dan;
+$dan_sk=SkDatum($dan);
+$dav = $fir_riadok->dav;
+$dav_sk=SkDatum($dav);
 
 $dp01 = SkDatum($fir_riadok->dp01);
 $dk01 = SkDatum($fir_riadok->dk01);
@@ -1571,8 +1573,9 @@ $kd12 = $fir_riadok->kd12;
 $kd13 = $fir_riadok->kd13;
 
 $pozn = $fir_riadok->pozn;
+$oprav = $fir_riadok->oprav;
+$predo = $fir_riadok->predo;
 $datum = SkDatum($fir_riadok->datum);
-
 
 mysql_free_result($fir_vysledok);
     }
@@ -1613,6 +1616,32 @@ img.btn-row-tool {
   width: 20px;
   height: 20px;
   cursor: default;
+}
+p.nacitaj-bar {
+  width: ;
+  height: 20px;
+  line-height: 20px;
+  float: right;
+  margin-left: 10px;
+  border-left: 2px solid lightblue;
+  border-right: 2px solid lightblue;
+  padding-right: 5px;
+  padding-left: 7px;
+}
+p.nacitaj-bar > span {
+  font-size: 12px;
+  padding-right: 2px;
+
+}
+p.nacitaj-bar > a {
+  font-size: 14px;
+  color: #39f;
+  font-weight: bold;
+  margin: 0 3px;
+}
+p.nacitaj-bar > a:hover {
+  border-bottom: 1px solid #39f;
+
 }
 </style>
 <script type="text/javascript">
@@ -1778,6 +1807,9 @@ var sirkawic = screen.width-10;
    document.formv1.kd12.value = '<?php echo "$kd12";?>';
    document.formv1.kd13.value = '<?php echo "$kd13";?>';
 
+<?php if ( $oprav == 1 ) { ?> document.formv1.oprav.checked = "checked"; <?php } ?>
+   document.formv1.predo.value = '<?php echo "$predo";?>';
+
    document.forms.formv1.kr01.focus();
    document.forms.formv1.kr01.select();
   }
@@ -1812,12 +1844,15 @@ var sirkawic = screen.width-10;
    window.open('evidencny_list.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + nextoc + '', '_self');
   }
 
-
   function ZnovuPotvrdenie()
   {
    window.open('../mzdy/evidencny_list.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=26&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>',
  '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-                }
+  }
+  function NavodVyplnenie()
+  {
+   window.open('../dokumenty/mzdy_potvrdenia/evidencny_list_v14_navod_vyplnenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }
 </script>
 <?php
 $rokm1=$kli_vrok-1;
@@ -1959,65 +1994,64 @@ if ( $copern == 20 )
   <tr>
    <td class="header">EvidenËn˝ list dÙchodkovÈho poistenia - <span class="subheader"><?php echo "$oc $meno $prie";?></span>
 <?php if ( $novy == 0 ) { ?>
-    <img src='../obr/prev.png' onclick="prevOC(<?php echo $prev_oc; ?>);" title="Os.Ë. <?php echo $prev_oc; ?>" class="navoc-icon"> <!-- dopyt, rozbehaù -->
+    <img src='../obr/prev.png' onclick="prevOC(<?php echo $prev_oc; ?>);" title="Os.Ë. <?php echo $prev_oc; ?>" class="navoc-icon">
     <img src='../obr/next.png' onclick="nextOC(<?php echo $next_oc; ?>);" title="Os.Ë. <?php echo $next_oc; ?>" class="navoc-icon">
 <?php                   } ?>
    </td>
    <td>
     <div class="bar-btn-form-tool">
-<!--      <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacZapoctovy();"
-      title="Zobraziù v PDF" class="btn-form-tool"> -->
-<?php if ( $copern == 20 ) { ?> <!-- dopyt, skult˙rniù -->
-<a href="#" onclick="ZnovuPotvrdenie();">
-<img src='../obr/orig.png' width=20 height=15 title='Znovu naËÌtaù hodnoty roku <?php echo $kli_vrok; ?> do evidenËnÈho listu' >
-NaËÌtaj <?php echo $kli_vrok; ?></a>
-<?php                     } ?>
-<?php if( $copern == 20 ) { ?> <!-- dopyt, predtym bolo v <form> -->
-Cel˝<a href="#" onClick="window.open('evidencny_list.php?copern=3155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self')">
-<img src='../obr/ziarovka.png' width=20 height=15 title='NaËÌtaù hodnoty celÈho evidenËnÈho listu z minulÈho roku - vöetky vyplnenÈ roky' ></a>
-<?php                      } ?>
-<?php if( $copern == 20 ) { ?> <!-- dopyt, predtym bolo v <form> -->
-Del<a href="#" onClick="window.open('evidencny_list.php?copern=6155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self')">
-<img src='../obr/zmaz.png' width=20 height=15 title='Zmazaù hodnoty celÈho evidenËnÈho listu ' ></a>
-<?php                      } ?>
-<?php if( $copern == 20 AND $firm1 > 0 ) { ?><!-- dopyt, predtym bolo v <form> -->
-<?php echo $rokm1; ?>/<?php echo $firm1; ?>
-<a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=1&fir=<?php echo $firm1; ?>', '_self')">
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu
-z minulÈho roku <?php echo $rokm1; ?> firma Ë.<?php echo $firm1; ?> - len hodnoty roku <?php echo $rokm1; ?>' ></a>
-<?php                      } ?>
+<img src="../obr/ikony/xmark_lred_icon.png" title="Vymazaù hodnoty evidenËnÈho listu"
+ onclick="window.open('evidencny_list.php?copern=6155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self')"
+ class="btn-form-tool">
+
+<p class="nacitaj-bar">
+ <span>NaËÌtaù</span>
+ <a href="#" onclick="ZnovuPotvrdenie();" title="NaËÌtaù hodnoty roku <?php echo $kli_vrok; ?>"><?php echo $kli_vrok; ?></a>
+ <a href="#" onclick="window.open('evidencny_list.php?copern=3155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self')"
+  title="NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm1; ?> - vöetky vyplnenÈ roky">Cel˝ <?php echo $rokm1; ?></a>
 
 
+<?php if ( $firm1 > 0 ) { ?>
+ <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=1&fir=<?php echo $firm1; ?>', '_self')"
+  title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm1; ?> a firmy Ë. <?php echo $firm1; ?> - len rok <?php echo $rokm1; ?>'>
+  <?php echo "$rokm1,$firm1"; ?>
+ </a>
+<?php                   } ?>
 
-<?php if( $copern == 201 AND $firm2 > 0 ) { ?>
-<?php echo $rokm2; ?>/<?php echo $firm2; ?>
-<a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=2&fir=<?php echo $firm2; ?>', '_self'  )">
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu
-z minulÈho roku <?php echo $rokm2; ?> firma Ë.<?php echo $firm2; ?> - len hodnoty roku <?php echo $rokm2; ?>' ></a>
-<?php                      } ?>
-
-<?php if( $copern == 201 AND $firm3 > 0 ) { ?>
-<?php echo $rokm3; ?>/<?php echo $firm3; ?>
-<a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=3&fir=<?php echo $firm3; ?>', '_self'  )">
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu
-z minulÈho roku <?php echo $rokm3; ?> firma Ë.<?php echo $firm3; ?> - len hodnoty roku <?php echo $rokm3; ?>' ></a>
-<?php                      } ?>
-
-<?php if( $copern == 201 AND $firm4 > 0 ) { ?>
-<?php echo $rokm4; ?>/<?php echo $firm4; ?>
-<a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=4&fir=<?php echo $firm4; ?>', '_self'  )">
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu
-z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm4; ?> - len hodnoty roku <?php echo $rokm4; ?>' ></a>
-<?php                      } ?>
-
-<?php if( $copern == 201 AND $firm5 > 0 ) { ?>
-<?php echo $rokm5; ?>/<?php echo $firm5; ?>
-<a href="#" onClick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=5&fir=<?php echo $firm5; ?>', '_self'  )">
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty evidenËnÈho listu
-z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnoty roku <?php echo $rokm5; ?>' ></a>
-<?php                      } ?>
-
-<!-- dopyt, dorobiù pouËenie -->
+<?php if ( $copern == 201 )
+{
+?>
+<?php if ( $firm2 > 0 ) { ?>
+ <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=2&fir=<?php echo $firm2; ?>', '_self')"
+  title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm2; ?> a firmy Ë. <?php echo $firm2; ?> - len rok <?php echo $rokm2; ?>'>
+  <?php echo "$rokm2,$firm2"; ?>
+ </a>
+<?php                   } ?>
+<?php if ( $firm3 > 0 ) { ?>
+ <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=3&fir=<?php echo $firm3; ?>', '_self')"
+  title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm3; ?> a firmy Ë. <?php echo $firm3; ?> - len rok <?php echo $rokm3; ?>'>
+  <?php echo "$rokm3,$firm3"; ?>
+ </a>
+<?php                   } ?>
+<?php if ( $firm4 > 0 ) { ?>
+ <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=4&fir=<?php echo $firm4; ?>', '_self')"
+  title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm4; ?> a firmy Ë. <?php echo $firm4; ?> - len rok <?php echo $rokm4; ?>'>
+  <?php echo "$rokm4,$firm4"; ?>
+ </a>
+<?php                   } ?>
+<?php if ( $firm5 > 0 ) { ?>
+ <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=5&fir=<?php echo $firm5; ?>', '_self')"
+  title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm4; ?> a firmy Ë. <?php echo $firm5; ?> - len rok <?php echo $rokm5; ?>'>
+  <?php echo "$rokm5,$firm5"; ?>
+ </a>
+<?php                   } ?>
+<?php
+}
+?>
+</p>
+     <img src="../obr/ikony/info_blue_icon.png" onclick="NavodVyplnenie();" title="PouËenie na vyplnenie" class="btn-form-tool">
+     <img src="../obr/ikony/printer_blue_icon.png" onclick=""
+      title="Zobraziù v PDF" class="btn-form-tool"> <!-- dopyt, nefunkËnÈ -->
     </div>
    </td>
   </tr>
@@ -2026,7 +2060,7 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
 
 <div id="content">
 <FORM name="formv1" method="post" action="evidencny_list.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
- <INPUT type="submit" id="uloz" name="uloz" value="Uloû zmeny" class="btn-top-formsave" style="top:4px;"> <!-- dopyt, nebude lepöie prerobiù na zvl·öù tlaË -->
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave" style="top:4px;">
 
 <div class="wrap-form-background">
 <img src="../dokumenty/mzdy_potvrdenia/evidencny_list.jpg"
@@ -2034,14 +2068,14 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
 
 <!-- vyplneny = natvrdo zaskrtnute -->
 <span class="text-echo" style="top:157px; left:277px;">x</span>
-<!-- dopyt, opravn˝ budeme rieöiù -->
+<input type="checkbox" name="oprav" value="1" style="top:170px; left:300px;"/>
 
 <!-- I. POISTENEC -->
 <span class="text-echo" style="top:215px; left:42px;"><?php echo $prie; ?></span>
 <span class="text-echo" style="top:215px; left:495px;"><?php echo $meno; ?></span>
 <span class="text-echo" style="top:215px; left:805px;"><?php echo $titl; ?></span>
 <span class="text-echo" style="top:252px; left:42px;"><?php echo $rodprie; ?></span>
-<!-- dopyt, predoölÈ priezvisko budeme rieöiù? -->
+<input type="text" name="predo" id="predo" style="top:252px; left:470px; width:70px;"/>
 <span class="text-echo" style="top:288px; left:42px;"><?php echo $mnr; ?></span>
 <span class="text-echo" style="top:288px; left:675px;"><?php echo $dar_sk; ?></span>
 <span class="text-echo" style="top:288px; left:795px;"><?php echo $rodne; ?></span>
@@ -2049,8 +2083,8 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
 <span class="text-echo" style="top:328px; left:642px;"><?php echo $dom; ?></span>
 <span class="text-echo" style="top:380px; left:42px;"><?php echo $obec; ?></span>
 <span class="text-echo" style="top:380px; left:650px;"><?php echo $psc; ?></span>
-<span class="text-echo" style="top:430px; left:550px;"><?php echo $nastup; ?></span>
-<span class="text-echo" style="top:430px; left:650px;"><?php echo $vystup; ?></span>
+<span class="text-echo" style="top:430px; left:550px;"><?php echo $dan_sk; ?></span>
+<span class="text-echo" style="top:430px; left:650px;"><?php echo $dav_sk; ?></span>
 
 <!-- II. Obdobia poistenia ... -->
 <img src="../obr/ikony/info_blue_icon.png" class="btn-row-tool" style="top:465px; left:127px;"
@@ -2067,9 +2101,9 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
  <option value=" "></option>
 </select>
 <input type="text" name="dp01" id="dp01" onfocus="return Dp01Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:501px; left:210px; width:90px;"/> <!-- dopyt, bez roku -->
+ onkeyup="CiarkaNaBodku(this);" style="top:501px; left:210px; width:90px;"/>
 <input type="text" name="dk01" id="dk01" onkeyup="CiarkaNaBodku(this);"
- style="top:501px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:501px; left:340px; width:90px;"/>
 <input type="text" name="vz01" id="vz01" onkeyup="CiarkaNaBodku(this);"
  style="top:501px; left:449px; width:93px;"/>
 <input type="text" name="vv01" id="vv01" onkeyup="CiarkaNaBodku(this);"
@@ -2087,9 +2121,9 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
  <option value=" "></option>
 </select>
 <input type="text" name="dp02" id="dp02" onfocus="return Dp02Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:550px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+ onkeyup="CiarkaNaBodku(this);" style="top:550px; left:230px; width:90px;"/>
 <input type="text" name="dk02" id="dk02" onkeyup="CiarkaNaBodku(this);"
- style="top:550px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:550px; left:340px; width:90px;"/>
 <input type="text" name="vz02" id="vz02" onkeyup="CiarkaNaBodku(this);"
  style="top:550px; left:470px; width:90px;"/>
 <input type="text" name="vv02" id="vv02" onkeyup="CiarkaNaBodku(this);"
@@ -2107,9 +2141,9 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
  <option value=" "></option>
 </select>
 <input type="text" name="dp03" id="dp03" onfocus="return Dp03Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:590px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+ onkeyup="CiarkaNaBodku(this);" style="top:590px; left:230px; width:90px;"/>
 <input type="text" name="dk03" id="dk03" onkeyup="CiarkaNaBodku(this);"
- style="top:590px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:590px; left:340px; width:90px;"/>
 <input type="text" name="vz03" id="vz03" onkeyup="CiarkaNaBodku(this);"
  style="top:590px; left:470px; width:90px;"/>
 <input type="text" name="vv03" id="vv03" onkeyup="CiarkaNaBodku(this);"
@@ -2127,9 +2161,9 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
  <option value=" "></option>
 </select>
 <input type="text" name="dp04" id="dp04" onfocus="return Dp04Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:625px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+ onkeyup="CiarkaNaBodku(this);" style="top:625px; left:230px; width:90px;"/>
 <input type="text" name="dk04" id="dk04" onkeyup="CiarkaNaBodku(this);"
- style="top:625px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:625px; left:340px; width:90px;"/>
 <input type="text" name="vz04" id="vz04" onkeyup="CiarkaNaBodku(this);"
  style="top:625px; left:470px; width:90px;"/>
 <input type="text" name="vv04" id="vv04" onkeyup="CiarkaNaBodku(this);"
@@ -2147,9 +2181,9 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
  <option value=" "></option>
 </select>
 <input type="text" name="dp05" id="dp05" onfocus="return Dp05Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:660px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+ onkeyup="CiarkaNaBodku(this);" style="top:660px; left:230px; width:90px;"/>
 <input type="text" name="dk05" id="dk05" onkeyup="CiarkaNaBodku(this);"
- style="top:660px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:660px; left:340px; width:90px;"/>
 <input type="text" name="vz05" id="vz05" onkeyup="CiarkaNaBodku(this);"
  style="top:660px; left:470px; width:90px;"/>
 <input type="text" name="vv05" id="vv05" onkeyup="CiarkaNaBodku(this);"
@@ -2167,9 +2201,9 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
  <option value=" "></option>
 </select>
 <input type="text" name="dp06" id="dp06" onfocus="return Dp06Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:700px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+ onkeyup="CiarkaNaBodku(this);" style="top:700px; left:230px; width:90px;"/>
 <input type="text" name="dk06" id="dk06" onkeyup="CiarkaNaBodku(this);"
- style="top:700px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:700px; left:340px; width:90px;"/>
 <input type="text" name="vz06" id="vz06" onkeyup="CiarkaNaBodku(this);"
  style="top:700px; left:470px; width:90px;"/>
 <input type="text" name="vv06" id="vv06" onkeyup="CiarkaNaBodku(this);"
@@ -2187,9 +2221,9 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
  <option value=" "></option>
 </select>
 <input type="text" name="dp07" id="dp07" onfocus="return Dp07Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:740px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+ onkeyup="CiarkaNaBodku(this);" style="top:740px; left:230px; width:90px;"/>
 <input type="text" name="dk07" id="dk07" onkeyup="CiarkaNaBodku(this);"
- style="top:740px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:740px; left:340px; width:90px;"/>
 <input type="text" name="vz07" id="vz07" onkeyup="CiarkaNaBodku(this);"
  style="top:740px; left:470px; width:90px;"/>
 <input type="text" name="vv07" id="vv07" onkeyup="CiarkaNaBodku(this);"
@@ -2207,9 +2241,9 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
  <option value=" "></option>
 </select>
 <input type="text" name="dp08" id="dp08" onfocus="return Dp08Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:780px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+ onkeyup="CiarkaNaBodku(this);" style="top:780px; left:230px; width:90px;"/>
 <input type="text" name="dk08" id="dk08" onkeyup="CiarkaNaBodku(this);"
- style="top:780px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:780px; left:340px; width:90px;"/>
 <input type="text" name="vz08" id="vz08" onkeyup="CiarkaNaBodku(this);"
  style="top:780px; left:470px; width:90px;"/>
 <input type="text" name="vv08" id="vv08" onkeyup="CiarkaNaBodku(this);"
@@ -2227,9 +2261,9 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
  <option value=" "></option>
 </select>
 <input type="text" name="dp09" id="dp09" onkeyup="CiarkaNaBodku(this);"
- style="top:810px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:810px; left:230px; width:90px;"/>
 <input type="text" name="dk09" id="dk09" onkeyup="CiarkaNaBodku(this);"
- style="top:810px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:810px; left:340px; width:90px;"/>
 <input type="text" name="vz09" id="vz09" onkeyup="CiarkaNaBodku(this);"
  style="top:810px; left:470px; width:90px;"/>
 <input type="text" name="vv09" id="vv09" onkeyup="CiarkaNaBodku(this);"
@@ -2247,9 +2281,9 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
  <option value=" "></option>
 </select>
 <input type="text" name="dp10" id="dp10" onkeyup="CiarkaNaBodku(this);"
- style="top:850px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:850px; left:230px; width:90px;"/>
 <input type="text" name="dk10" id="dk10" onkeyup="CiarkaNaBodku(this);"
- style="top:850px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:850px; left:340px; width:90px;"/>
 <input type="text" name="vz10" id="vz10" onkeyup="CiarkaNaBodku(this);"
  style="top:850px; left:470px; width:90px;"/>
 <input type="text" name="vv10" id="vv10" onkeyup="CiarkaNaBodku(this);"
@@ -2267,9 +2301,9 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
  <option value=" "></option>
 </select>
 <input type="text" name="dp11" id="dp11" onkeyup="CiarkaNaBodku(this);"
- style="top:885px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:885px; left:230px; width:90px;"/>
 <input type="text" name="dk11" id="dk11" onkeyup="CiarkaNaBodku(this);"
- style="top:885px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:885px; left:340px; width:90px;"/>
 <input type="text" name="vz11" id="vz11" onkeyup="CiarkaNaBodku(this);"
  style="top:885px; left:470px; width:90px;"/>
 <input type="text" name="vv11" id="vv11" onkeyup="CiarkaNaBodku(this);"
@@ -2287,9 +2321,9 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
  <option value=" "></option>
 </select>
 <input type="text" name="dp12" id="dp12" onkeyup="CiarkaNaBodku(this);"
- style="top:920px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:920px; left:230px; width:90px;"/>
 <input type="text" name="dk12" id="dk12" onkeyup="CiarkaNaBodku(this);"
- style="top:920px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:920px; left:340px; width:90px;"/>
 <input type="text" name="vz12" id="vz12" onkeyup="CiarkaNaBodku(this);"
  style="top:920px; left:470px; width:90px;"/>
 <input type="text" name="vv12" id="vv12" onkeyup="CiarkaNaBodku(this);"
@@ -2307,9 +2341,9 @@ z minulÈho roku <?php echo $rokm4; ?> firma Ë.<?php echo $firm5; ?> - len hodnot
  <option value=" "></option>
 </select>
 <input type="text" name="dp13" id="dp13" onkeyup="CiarkaNaBodku(this);"
- style="top:960px; left:230px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:960px; left:230px; width:90px;"/>
 <input type="text" name="dk13" id="dk13" onkeyup="CiarkaNaBodku(this);"
- style="top:960px; left:340px; width:90px;"/> <!-- dopyt, bez roku -->
+ style="top:960px; left:340px; width:90px;"/>
 <input type="text" name="vz13" id="vz13" onkeyup="CiarkaNaBodku(this);"
  style="top:960px; left:470px; width:90px;"/>
 <input type="text" name="vv13" id="vv13" onkeyup="CiarkaNaBodku(this);"
