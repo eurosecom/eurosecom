@@ -2077,24 +2077,24 @@ if ( $copern == 20 )
  alt="tlaèivo Evidenèný list dôchodkového poistenia 231kB" class="form-background">
 
 <!-- vyplneny = natvrdo zaskrtnute -->
-<span class="text-echo" style="top:157px; left:277px;">x</span>
-<input type="checkbox" name="oprav" value="1" style="top:170px; left:300px;"/>
+<span class="text-echo" style="top:155px; left:262px;">x</span>
+<input type="checkbox" name="oprav" value="1" style="top:154px; left:336px;"/>
 
 <!-- I. POISTENEC -->
-<span class="text-echo" style="top:215px; left:42px;"><?php echo $prie; ?></span>
-<span class="text-echo" style="top:215px; left:495px;"><?php echo $meno; ?></span>
-<span class="text-echo" style="top:215px; left:805px;"><?php echo $titl; ?></span>
-<span class="text-echo" style="top:252px; left:42px;"><?php echo $rodprie; ?></span>
-<input type="text" name="predo" id="predo" style="top:252px; left:470px; width:70px;"/>
-<span class="text-echo" style="top:288px; left:42px;"><?php echo $mnr; ?></span>
-<span class="text-echo" style="top:288px; left:675px;"><?php echo $dar_sk; ?></span>
-<span class="text-echo" style="top:288px; left:795px;"><?php echo $rodne; ?></span>
-<span class="text-echo" style="top:328px; left:42px;"><?php echo $ulica; ?></span>
-<span class="text-echo" style="top:328px; left:642px;"><?php echo $dom; ?></span>
-<span class="text-echo" style="top:380px; left:42px;"><?php echo $obec; ?></span>
-<span class="text-echo" style="top:380px; left:650px;"><?php echo $psc; ?></span>
-<span class="text-echo" style="top:430px; left:550px;"><?php echo $dan_sk; ?></span>
-<span class="text-echo" style="top:430px; left:650px;"><?php echo $dav_sk; ?></span>
+<span class="text-echo" style="top:213px; left:32px;"><?php echo $prie; ?></span>
+<span class="text-echo" style="top:213px; left:475px;"><?php echo $meno; ?></span>
+<span class="text-echo" style="top:213px; left:778px;"><?php echo $titl; ?></span>
+<span class="text-echo" style="top:249px; left:32px;"><?php echo $rodprie; ?></span>
+<input type="text" name="predo" id="predo" style="top:245px; left:471px; width:425px;"/>
+<span class="text-echo" style="top:286px; left:32px;"><?php echo $mnr; ?></span>
+<span class="text-echo" style="top:286px; left:652px;"><?php echo $dar_sk; ?></span>
+<span class="text-echo" style="top:286px; left:795px;"><?php echo $rodne; ?></span>
+<span class="text-echo" style="top:341px; left:32px;"><?php echo $ulica; ?></span>
+<span class="text-echo" style="top:341px; left:635px;"><?php echo $dom; ?></span>
+<span class="text-echo" style="top:378px; left:32px;"><?php echo $obec; ?></span>
+<span class="text-echo" style="top:378px; left:657px;"><?php echo $psc; ?></span>
+<span class="text-echo" style="top:415px; left:512px;"><?php echo $dan_sk; ?></span>
+<span class="text-echo" style="top:415px; left:650px;"><?php echo $dav_sk; ?></span>
 
 <!-- II. Obdobia poistenia ... -->
 <img src="../obr/ikony/info_blue_icon.png" class="btn-row-tool" style="top:465px; left:127px;"
@@ -2111,9 +2111,9 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp01" id="dp01" onfocus="return Dp01Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:501px; left:210px; width:90px;"/>
+ onkeyup="CiarkaNaBodku(this);" style="top:500px; left:215px; width:90px;"/>
 <input type="text" name="dk01" id="dk01" onkeyup="CiarkaNaBodku(this);"
- style="top:501px; left:340px; width:90px;"/>
+ style="top:500px; left:326px; width:90px;"/>
 <input type="text" name="vz01" id="vz01" onkeyup="CiarkaNaBodku(this);"
  style="top:501px; left:449px; width:93px;"/>
 <input type="text" name="vv01" id="vv01" onkeyup="CiarkaNaBodku(this);"
@@ -2121,8 +2121,8 @@ if ( $copern == 20 )
 <input type="text" name="kd01" id="kd01" style="top:501px; left:675px; width:72px;"/>
 
 <!-- 2.riadok -->
-<input type="text" name="kr02" id="kr02" style="top:550px; left:40px; width:70px;"/>
-<select size="1" name="zp02" id="zp02" style="top:550px; left:145px;">
+<input type="text" name="kr02" id="kr02" style="top:537px; left:29px; width:70px;"/>
+<select size="1" name="zp02" id="zp02" style="top:538px; left:129px;">
  <option value="A">A</option>
  <option value="MD">MD</option>
  <option value="RD">RD</option>
@@ -2131,18 +2131,18 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp02" id="dp02" onfocus="return Dp02Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:550px; left:230px; width:90px;"/>
+ onkeyup="CiarkaNaBodku(this);" style="top:536px; left:215px; width:90px;"/>
 <input type="text" name="dk02" id="dk02" onkeyup="CiarkaNaBodku(this);"
- style="top:550px; left:340px; width:90px;"/>
+ style="top:536px; left:326px; width:90px;"/>
 <input type="text" name="vz02" id="vz02" onkeyup="CiarkaNaBodku(this);"
- style="top:550px; left:470px; width:90px;"/>
+ style="top:537px; left:449px; width:93px;"/>
 <input type="text" name="vv02" id="vv02" onkeyup="CiarkaNaBodku(this);"
- style="top:550px; left:580px; width:90px;"/>
-<input type="text" name="kd02" id="kd02" style="top:550px; left:700px; width:70px;"/>
+ style="top:537px; left:562px; width:93px;"/>
+<input type="text" name="kd02" id="kd02" style="top:537px; left:675px; width:72px;"/>
 
 <!-- 3.riadok -->
-<input type="text" name="kr03" id="kr03" style="top:590px; left:40px; width:70px;"/>
-<select size="1" name="zp03" id="zp03" style="top:590px; left:145px;">
+<input type="text" name="kr03" id="kr03" style="top:574px; left:29px; width:70px;"/>
+<select size="1" name="zp03" id="zp03" style="top:574px; left:129px;">
  <option value="A">A</option>
  <option value="MD">MD</option>
  <option value="RD">RD</option>
@@ -2151,18 +2151,18 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp03" id="dp03" onfocus="return Dp03Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:590px; left:230px; width:90px;"/>
+ onkeyup="CiarkaNaBodku(this);" style="top:573px; left:215px; width:90px;"/>
 <input type="text" name="dk03" id="dk03" onkeyup="CiarkaNaBodku(this);"
- style="top:590px; left:340px; width:90px;"/>
+ style="top:573px; left:326px; width:90px;"/>
 <input type="text" name="vz03" id="vz03" onkeyup="CiarkaNaBodku(this);"
- style="top:590px; left:470px; width:90px;"/>
+ style="top:574px; left:449px; width:93px;"/>
 <input type="text" name="vv03" id="vv03" onkeyup="CiarkaNaBodku(this);"
- style="top:590px; left:580px; width:90px;"/>
-<input type="text" name="kd03" id="kd03" style="top:590px; left:700px; width:70px;"/>
+ style="top:574px; left:562px; width:93px;"/>
+<input type="text" name="kd03" id="kd03" style="top:574px; left:675px; width:72px;"/>
 
 <!-- 4.riadok -->
-<input type="text" name="kr04" id="kr04" style="top:625px; left:40px; width:70px;"/>
-<select size="1" name="zp04" id="zp04" style="top:625px; left:145px;">
+<input type="text" name="kr04" id="kr04" style="top:611px; left:29px; width:70px;"/>
+<select size="1" name="zp04" id="zp04" style="top:611px; left:129px;">
  <option value="A">A</option>
  <option value="MD">MD</option>
  <option value="RD">RD</option>
@@ -2171,18 +2171,18 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp04" id="dp04" onfocus="return Dp04Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:625px; left:230px; width:90px;"/>
+ onkeyup="CiarkaNaBodku(this);" style="top:610px; left:215px; width:90px;"/>
 <input type="text" name="dk04" id="dk04" onkeyup="CiarkaNaBodku(this);"
- style="top:625px; left:340px; width:90px;"/>
+ style="top:610px; left:326px; width:90px;"/>
 <input type="text" name="vz04" id="vz04" onkeyup="CiarkaNaBodku(this);"
- style="top:625px; left:470px; width:90px;"/>
+ style="top:610px; left:449px; width:93px;"/>
 <input type="text" name="vv04" id="vv04" onkeyup="CiarkaNaBodku(this);"
- style="top:625px; left:580px; width:90px;"/>
-<input type="text" name="kd04" id="kd04" style="top:625px; left:700px; width:70px;"/>
+ style="top:610px; left:562px; width:93px;"/>
+<input type="text" name="kd04" id="kd04" style="top:610px; left:675px; width:72px;"/>
 
 <!-- 5.riadok -->
-<input type="text" name="kr05" id="kr05" style="top:660px; left:40px; width:70px;"/>
-<select size="1" name="zp05" id="zp05" style="top:660px; left:145px;">
+<input type="text" name="kr05" id="kr05" style="top:647px; left:29px; width:70px;"/>
+<select size="1" name="zp05" id="zp05" style="top:647px; left:129px;">
  <option value="A">A</option>
  <option value="MD">MD</option>
  <option value="RD">RD</option>
@@ -2191,18 +2191,18 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp05" id="dp05" onfocus="return Dp05Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:660px; left:230px; width:90px;"/>
+ onkeyup="CiarkaNaBodku(this);" style="top:646px; left:215px; width:90px;"/>
 <input type="text" name="dk05" id="dk05" onkeyup="CiarkaNaBodku(this);"
- style="top:660px; left:340px; width:90px;"/>
+ style="top:646px; left:326px; width:90px;"/>
 <input type="text" name="vz05" id="vz05" onkeyup="CiarkaNaBodku(this);"
- style="top:660px; left:470px; width:90px;"/>
+ style="top:647px; left:449px; width:93px;"/>
 <input type="text" name="vv05" id="vv05" onkeyup="CiarkaNaBodku(this);"
- style="top:660px; left:580px; width:90px;"/>
-<input type="text" name="kd05" id="kd05" style="top:660px; left:700px; width:70px;"/>
+ style="top:647px; left:562px; width:93px;"/>
+<input type="text" name="kd05" id="kd05" style="top:647px; left:675px; width:72px;"/>
 
 <!-- 6.riadok -->
-<input type="text" name="kr06" id="kr06" style="top:700px; left:40px; width:70px;"/>
-<select size="1" name="zp06" id="zp06" style="top:700px; left:145px;">
+<input type="text" name="kr06" id="kr06" style="top:684px; left:29px; width:70px;"/>
+<select size="1" name="zp06" id="zp06" style="top:684px; left:129px;">
  <option value="A">A</option>
  <option value="MD">MD</option>
  <option value="RD">RD</option>
@@ -2211,18 +2211,18 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp06" id="dp06" onfocus="return Dp06Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:700px; left:230px; width:90px;"/>
+ onkeyup="CiarkaNaBodku(this);" style="top:683px; left:215px; width:90px;"/>
 <input type="text" name="dk06" id="dk06" onkeyup="CiarkaNaBodku(this);"
- style="top:700px; left:340px; width:90px;"/>
+ style="top:683px; left:326px; width:90px;"/>
 <input type="text" name="vz06" id="vz06" onkeyup="CiarkaNaBodku(this);"
- style="top:700px; left:470px; width:90px;"/>
+ style="top:684px; left:449px; width:93px;"/>
 <input type="text" name="vv06" id="vv06" onkeyup="CiarkaNaBodku(this);"
- style="top:700px; left:580px; width:90px;"/>
-<input type="text" name="kd06" id="kd06" style="top:700px; left:700px; width:70px;"/>
+ style="top:684px; left:562px; width:93px;"/>
+<input type="text" name="kd06" id="kd06" style="top:684px; left:675px; width:72px;"/>
 
 <!-- 7.riadok -->
-<input type="text" name="kr07" id="kr07" style="top:740px; left:40px; width:70px;"/>
-<select size="1" name="zp07" id="zp07" style="top:740px; left:145px;">
+<input type="text" name="kr07" id="kr07" style="top:721px; left:29px; width:70px;"/>
+<select size="1" name="zp07" id="zp07" style="top:721px; left:129px;">
  <option value="A">A</option>
  <option value="MD">MD</option>
  <option value="RD">RD</option>
@@ -2231,18 +2231,18 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp07" id="dp07" onfocus="return Dp07Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:740px; left:230px; width:90px;"/>
+ onkeyup="CiarkaNaBodku(this);" style="top:720px; left:215px; width:90px;"/>
 <input type="text" name="dk07" id="dk07" onkeyup="CiarkaNaBodku(this);"
- style="top:740px; left:340px; width:90px;"/>
+ style="top:720px; left:326px; width:90px;"/>
 <input type="text" name="vz07" id="vz07" onkeyup="CiarkaNaBodku(this);"
- style="top:740px; left:470px; width:90px;"/>
+ style="top:721px; left:449px; width:93px;"/>
 <input type="text" name="vv07" id="vv07" onkeyup="CiarkaNaBodku(this);"
- style="top:740px; left:580px; width:90px;"/>
-<input type="text" name="kd07" id="kd07" style="top:740px; left:700px; width:70px;"/>
+ style="top:721px; left:562px; width:93px;"/>
+<input type="text" name="kd07" id="kd07" style="top:721px; left:675px; width:72px;"/>
 
 <!-- 8.riadok -->
-<input type="text" name="kr08" id="kr08" style="top:780px; left:40px; width:70px;"/>
-<select size="1" name="zp08" id="zp08" style="top:780px; left:145px;">
+<input type="text" name="kr08" id="kr08" style="top:757px; left:29px; width:70px;"/>
+<select size="1" name="zp08" id="zp08" style="top:757px; left:129px;">
  <option value="A">A</option>
  <option value="MD">MD</option>
  <option value="RD">RD</option>
@@ -2251,18 +2251,18 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp08" id="dp08" onfocus="return Dp08Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:780px; left:230px; width:90px;"/>
+ onkeyup="CiarkaNaBodku(this);" style="top:756px; left:215px; width:90px;"/>
 <input type="text" name="dk08" id="dk08" onkeyup="CiarkaNaBodku(this);"
- style="top:780px; left:340px; width:90px;"/>
+ style="top:756px; left:326px; width:90px;"/>
 <input type="text" name="vz08" id="vz08" onkeyup="CiarkaNaBodku(this);"
- style="top:780px; left:470px; width:90px;"/>
+ style="top:757px; left:449px; width:93px;"/>
 <input type="text" name="vv08" id="vv08" onkeyup="CiarkaNaBodku(this);"
- style="top:780px; left:580px; width:90px;"/>
-<input type="text" name="kd08" id="kd08" style="top:780px; left:700px; width:70px;"/>
+ style="top:757px; left:562px; width:93px;"/>
+<input type="text" name="kd08" id="kd08" style="top:757px; left:675px; width:72px;"/>
 
 <!-- 9.riadok -->
-<input type="text" name="kr09" id="kr09" style="top:810px; left:40px; width:70px;"/>
-<select size="1" name="zp09" id="zp09" style="top:810px; left:145px;">
+<input type="text" name="kr09" id="kr09" style="top:794px; left:29px; width:70px;"/>
+<select size="1" name="zp09" id="zp09" style="top:794px; left:129px;">
  <option value="A">A</option>
  <option value="MD">MD</option>
  <option value="RD">RD</option>
@@ -2271,18 +2271,18 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp09" id="dp09" onkeyup="CiarkaNaBodku(this);"
- style="top:810px; left:230px; width:90px;"/>
+ style="top:793px; left:215px; width:90px;"/>
 <input type="text" name="dk09" id="dk09" onkeyup="CiarkaNaBodku(this);"
- style="top:810px; left:340px; width:90px;"/>
+ style="top:793px; left:326px; width:90px;"/>
 <input type="text" name="vz09" id="vz09" onkeyup="CiarkaNaBodku(this);"
- style="top:810px; left:470px; width:90px;"/>
+ style="top:794px; left:449px; width:93px;"/>
 <input type="text" name="vv09" id="vv09" onkeyup="CiarkaNaBodku(this);"
- style="top:810px; left:580px; width:90px;"/>
-<input type="text" name="kd09" id="kd09" style="top:810px; left:700px; width:70px;"/>
+ style="top:794px; left:562px; width:93px;"/>
+<input type="text" name="kd09" id="kd09" style="top:794px; left:675px; width:72px;"/>
 
 <!-- 10.riadok -->
-<input type="text" name="kr10" id="kr10" style="top:850px; left:40px; width:70px;"/>
-<select size="1" name="zp10" id="zp10" style="top:850px; left:145px;">
+<input type="text" name="kr10" id="kr10" style="top:830px; left:29px; width:70px;"/>
+<select size="1" name="zp10" id="zp10" style="top:831px; left:129px;">
  <option value="A">A</option>
  <option value="MD">MD</option>
  <option value="RD">RD</option>
@@ -2291,18 +2291,18 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp10" id="dp10" onkeyup="CiarkaNaBodku(this);"
- style="top:850px; left:230px; width:90px;"/>
+ style="top:829px; left:215px; width:90px;"/>
 <input type="text" name="dk10" id="dk10" onkeyup="CiarkaNaBodku(this);"
- style="top:850px; left:340px; width:90px;"/>
+ style="top:829px; left:326px; width:90px;"/>
 <input type="text" name="vz10" id="vz10" onkeyup="CiarkaNaBodku(this);"
- style="top:850px; left:470px; width:90px;"/>
+ style="top:830px; left:449px; width:93px;"/>
 <input type="text" name="vv10" id="vv10" onkeyup="CiarkaNaBodku(this);"
- style="top:850px; left:580px; width:90px;"/>
-<input type="text" name="kd10" id="kd10" style="top:850px; left:700px; width:70px;"/>
+ style="top:830px; left:562px; width:93px;"/>
+<input type="text" name="kd10" id="kd10" style="top:830px; left:675px; width:72px;"/>
 
 <!-- 11.riadok -->
-<input type="text" name="kr11" id="kr11" style="top:885px; left:40px; width:70px;"/>
-<select size="1" name="zp11" id="zp11" style="top:885px; left:145px;">
+<input type="text" name="kr11" id="kr11" style="top:867px; left:29px; width:70px;"/>
+<select size="1" name="zp11" id="zp11" style="top:867px; left:129px;">
  <option value="A">A</option>
  <option value="MD">MD</option>
  <option value="RD">RD</option>
@@ -2311,18 +2311,18 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp11" id="dp11" onkeyup="CiarkaNaBodku(this);"
- style="top:885px; left:230px; width:90px;"/>
+ style="top:866px; left:215px; width:90px;"/>
 <input type="text" name="dk11" id="dk11" onkeyup="CiarkaNaBodku(this);"
- style="top:885px; left:340px; width:90px;"/>
+ style="top:866px; left:326px; width:90px;"/>
 <input type="text" name="vz11" id="vz11" onkeyup="CiarkaNaBodku(this);"
- style="top:885px; left:470px; width:90px;"/>
+ style="top:867px; left:449px; width:93px;"/>
 <input type="text" name="vv11" id="vv11" onkeyup="CiarkaNaBodku(this);"
- style="top:885px; left:580px; width:90px;"/>
-<input type="text" name="kd11" id="kd11" style="top:885px; left:700px; width:70px;"/>
+ style="top:867px; left:562px; width:93px;"/>
+<input type="text" name="kd11" id="kd11" style="top:867px; left:675px; width:72px;"/>
 
 <!-- 12.riadok -->
-<input type="text" name="kr12" id="kr12" style="top:920px; left:40px; width:70px;"/>
-<select size="1" name="zp12" id="zp12" style="top:920px; left:145px;">
+<input type="text" name="kr12" id="kr12" style="top:904px; left:29px; width:70px;"/>
+<select size="1" name="zp12" id="zp12" style="top:904px; left:129px;">
  <option value="A">A</option>
  <option value="MD">MD</option>
  <option value="RD">RD</option>
@@ -2331,18 +2331,18 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp12" id="dp12" onkeyup="CiarkaNaBodku(this);"
- style="top:920px; left:230px; width:90px;"/>
+ style="top:903px; left:215px; width:90px;"/>
 <input type="text" name="dk12" id="dk12" onkeyup="CiarkaNaBodku(this);"
- style="top:920px; left:340px; width:90px;"/>
+ style="top:903px; left:326px; width:90px;"/>
 <input type="text" name="vz12" id="vz12" onkeyup="CiarkaNaBodku(this);"
- style="top:920px; left:470px; width:90px;"/>
+ style="top:904px; left:449px; width:93px;"/>
 <input type="text" name="vv12" id="vv12" onkeyup="CiarkaNaBodku(this);"
- style="top:920px; left:580px; width:90px;"/>
-<input type="text" name="kd12" id="kd12" style="top:920px; left:700px; width:70px;"/>
+ style="top:904px; left:562px; width:93px;"/>
+<input type="text" name="kd12" id="kd12" style="top:904px; left:675px; width:72px;"/>
 
 <!-- 13.riadok -->
-<input type="text" name="kr13" id="kr13" style="top:960px; left:40px; width:70px;"/>
-<select size="1" name="zp13" id="zp13" style="top:960px; left:145px;">
+<input type="text" name="kr13" id="kr13" style="top:940px; left:29px; width:70px;"/>
+<select size="1" name="zp13" id="zp13" style="top:941px; left:129px;">
  <option value="A">A</option>
  <option value="MD">MD</option>
  <option value="RD">RD</option>
@@ -2351,31 +2351,31 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp13" id="dp13" onkeyup="CiarkaNaBodku(this);"
- style="top:960px; left:230px; width:90px;"/>
+ style="top:940px; left:215px; width:90px;"/>
 <input type="text" name="dk13" id="dk13" onkeyup="CiarkaNaBodku(this);"
- style="top:960px; left:340px; width:90px;"/>
+ style="top:940px; left:326px; width:90px;"/>
 <input type="text" name="vz13" id="vz13" onkeyup="CiarkaNaBodku(this);"
- style="top:960px; left:470px; width:90px;"/>
+ style="top:940px; left:449px; width:93px;"/>
 <input type="text" name="vv13" id="vv13" onkeyup="CiarkaNaBodku(this);"
- style="top:960px; left:580px; width:90px;"/>
-<input type="text" name="kd13" id="kd13" style="top:960px; left:700px; width:70px;"/>
+ style="top:940px; left:562px; width:93px;"/>
+<input type="text" name="kd13" id="kd13" style="top:940px; left:675px; width:72px;"/>
 
 <!-- III. ZAMESTNAVATEL -->
-<span class="text-echo" style="top:1037px; left:42px;"><?php echo $fir_fnaz; ?></span>
-<span class="text-echo" style="top:1070px; left:690px;">x</span>
-<span class="text-echo" style="top:1070px; left:780px;"><?php echo $fir_fico; ?></span>
-<span class="text-echo" style="top:1110px; left:42px;"><?php echo $fir_fuli; ?></span>
-<span class="text-echo" style="top:1110px; left:700px;"><?php echo $fir_fcdm; ?></span>
-<span class="text-echo" style="top:1150px; left:42px;"><?php echo $fir_fmes; ?></span>
-<span class="text-echo" style="top:1150px; left:700px;"><?php echo $fir_fpsc; ?></span>
+<span class="text-echo" style="top:1019px; left:32px;"><?php echo $fir_fnaz; ?></span>
+<span class="text-echo" style="top:1054px; left:666px;">x</span>
+<span class="text-echo" style="top:1056px; left:760px;"><?php echo $fir_fico; ?></span>
+<span class="text-echo" style="top:1093px; left:32px;"><?php echo $fir_fuli; ?></span>
+<span class="text-echo" style="top:1093px; left:637px;"><?php echo $fir_fcdm; ?></span>
+<span class="text-echo" style="top:1129px; left:32px;"><?php echo $fir_fmes; ?></span>
+<span class="text-echo" style="top:1129px; left:637px;"><?php echo $fir_fpsc; ?></span>
 
 <!-- IV. POTVRDENIE SPRAVNOSTI -->
 <input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);"
  style="top:1179px; left:29px; width:122px;"/>
 
 <!-- poznamka -->
-<label for="pozn" style="position:absolute; top:1280px; left:170px; font-size:12px; font-weight:bold;">Poznámka</label>
-<input type="text" name="pozn" id="pozn" style="top:1275px; right:10px; width:700px;"/>
+<label for="pozn" style="position:absolute; top:1279px; left:170px; font-size:12px; font-weight:bold;">Poznámka</label>
+<input type="text" name="pozn" id="pozn" style="top:1273px; right:10px; width:700px;"/>
 
 
 
