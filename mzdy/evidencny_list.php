@@ -2016,8 +2016,6 @@ if ( $copern == 20 )
 <p class="nacitaj-bar">
  <span>Naèíta</span>
  <a href="#" onclick="ZnovuPotvrdenie();" title="Naèíta hodnoty roku <?php echo $kli_vrok; ?>"><?php echo $kli_vrok; ?></a>
- <a href="#" onclick="window.open('evidencny_list.php?copern=3155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self')"
-  title="Naèíta hodnoty evidenèného listu z <?php echo $rokm1; ?> - všetky vyplnené roky">Celı <?php echo $rokm1; ?></a>
 
 
 <?php if ( $firm1 > 0 ) { ?>
