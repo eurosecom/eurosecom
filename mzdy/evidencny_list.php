@@ -1639,10 +1639,10 @@ p.nacitaj-bar > span {
 
 }
 p.nacitaj-bar > a {
-  font-size: 14px;
+  font-size: 13px;
   color: #39f;
   font-weight: bold;
-  margin: 0 3px;
+  margin: 0 1px;
 }
 p.nacitaj-bar > a:hover {
   border-bottom: 1px solid #39f;
@@ -2001,7 +2001,7 @@ if ( $copern == 20 )
    <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
   </tr>
   <tr>
-   <td class="header">Evidenèný list dôchodkového poistenia - <span class="subheader"><?php echo "$oc $meno $prie";?></span>
+   <td class="header">Evidenèný list dôchodkov. poist. - <span class="subheader"><?php echo "$oc $meno $prie";?></span>
 <?php if ( $novy == 0 ) { ?>
     <img src='../obr/prev.png' onclick="prevOC(<?php echo $prev_oc; ?>);" title="Os.è. <?php echo $prev_oc; ?>" class="navoc-icon">
     <img src='../obr/next.png' onclick="nextOC(<?php echo $next_oc; ?>);" title="Os.è. <?php echo $next_oc; ?>" class="navoc-icon">
