@@ -668,7 +668,7 @@ exit;
 if ( $copern == 6666 )
   {
 $cislo_oc = strip_tags($_REQUEST['cislo_oc']);
-$nezmaz=0;
+$nezmaz=1;
 
 $poslhh = "SELECT * FROM F$kli_vxcf"."_mzdzalsum WHERE oc = $cislo_oc ";
 $posl = mysql_query("$poslhh"); 
