@@ -1298,6 +1298,11 @@ if( $generovacie == 1 )
 {
 $strxx1=" pomx != 1 ";
 $strxx2=" pomx != 1 ";
+if( $_SERVER['SERVER_NAME'] == "www.eurolark.sk" ) 
+{
+$strxx1=" pomx == 99 ";
+$strxx2=" pomx == 99 ";
+}
 
 $dsqlt = "UPDATE F$kli_vxcf"."_rzdanezoz".$kli_uzid.",F$kli_vxcf"."_$mzdkun ".
 " SET F$kli_vxcf"."_rzdanezoz".$kli_uzid.".pomx=F$kli_vxcf"."_$mzdkun.stz ".
@@ -1722,7 +1727,7 @@ $sqldok = mysql_query("SELECT csv, ndc FROM F$kli_vxcf"."_mzddochadzkaset WHERE 
 <?php if( $csvmzda == 1 ) { ?>
 <a href="#" onClick="DochadzkaEdi(<?php echo $polozka->oc;?>);">
 <?php                     } ?>
- <?php echo $polozka->prie; ?> <?php echo $polozka->meno; ?>
+ <?php echo $polozka->prie; ?> <?php echo $polozka->meno; ?> str <?php echo $polozka->stz; ?>
 <?php if( $csvmzda == 1 ) { ?>
 </a>
 <?php                     } ?>

@@ -162,6 +162,11 @@ if( $generovacie == 1 )
 $strxx=" str != 1 ";
 $strkunxx=" stz = 1 AND pom = 1 ";
 }
+if( $_SERVER['SERVER_NAME'] == "www.eurolark.sk" ) 
+{ 
+$strxx=" str != 1 ";
+$strkunxx=" stz = 1 AND pom = 1 "; 
+}
 //mzdmes cpl dok dat ume oc dm dp dk dni hod mnz saz kc str zak stj msx1 msx2 msx3 msx4 pop id datm 
 
 //ak ma vyplnene dp,dk v mesacnej zarad priamo do dochadzky
@@ -192,17 +197,36 @@ $sqlxx = mysql_query("$sqlttxx");
 
 $sqlttxx = "CREATE TABLE F".$kli_vxcf."_mzdkunx".$kli_uzid." SELECT * FROM F".$kli_vxcf."_mzdzalkun WHERE ume = $kli_vume AND stz = 1 AND pom = 1 ";
 $sqlxx = mysql_query("$sqlttxx");
-}
-
 
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid.",F$kli_vxcf"."_$mzdkun ".
 " SET F$kli_vxcf"."_mzdprcx".$kli_uzid.".str=F$kli_vxcf"."_$mzdkun.stz".
 " WHERE F$kli_vxcf"."_mzdprcx".$kli_uzid.".oc=F$kli_vxcf"."_$mzdkun.oc ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcx".$kli_uzid." WHERE $strxx ";
+}
+if( $generovacie == 1 AND $_SERVER['SERVER_NAME'] == "www.eurolark.sk" ) 
+{
+$mzdkun="mzdkunx".$kli_uzid;
+
+$sqlttxx = "DROP TABLE F".$kli_vxcf."_mzdkunx".$kli_uzid." ";
+$sqlxx = mysql_query("$sqlttxx");
+
+$sqlttxx = "CREATE TABLE F".$kli_vxcf."_mzdkunx".$kli_uzid." SELECT * FROM F".$kli_vxcf."_mzdzalkun WHERE ume = $kli_vume AND stz > 0 AND pom = 1 ";
+$sqlxx = mysql_query("$sqlttxx");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkunx".$kli_uzid." SET stz=1 ";
 $dsql = mysql_query("$dsqlt");
 
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcx".$kli_uzid.",F$kli_vxcf"."_$mzdkun ".
+" SET F$kli_vxcf"."_mzdprcx".$kli_uzid.".str=F$kli_vxcf"."_$mzdkun.stz".
+" WHERE F$kli_vxcf"."_mzdprcx".$kli_uzid.".oc=F$kli_vxcf"."_$mzdkun.oc ";
+$dsql = mysql_query("$dsqlt");
+
+}
+
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcx".$kli_uzid." WHERE $strxx ";
+$dsql = mysql_query("$dsqlt");
 
 
 //ak nema vyplnene dp,dk v mesacnej rozhod nahodne na dni podla poctu dni v dni z mesacnej
