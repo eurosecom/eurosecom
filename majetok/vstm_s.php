@@ -24,7 +24,7 @@ if( $copern == 33 ) $nzs = "dinv";
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Naèítaj Originál</title>
   <style type="text/css">
@@ -49,6 +49,7 @@ if( $copern == 33 ) $nzs = "dinv";
   if ( $copern == 31 ) echo "- uloenie fotografie B do databázy";
   if ( $copern == 32 ) echo "- uloenie fotografie C do databázy";
   if ( $copern == 33 ) echo "- uloenie fotografie D do databázy";
+echo " pre inv.èíslo ".$cislo_xy;
 ?>
 
 </td>
