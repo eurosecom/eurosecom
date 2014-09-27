@@ -861,6 +861,23 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvy".$kli_uzid.
 
 $dsql = mysql_query("$dsqlt");
 
+//pridaj datumy dm 809,811,812 materska a rocicovska k polozke z trvalych
+//pocet dni v mesiaci
+$pocetdnix=31;
+$sqltt = "SELECT * FROM kalendar WHERE ume = $kli_vume ";
+$sql = mysql_query("$sqltt");
+$pocetdnix = mysql_num_rows($sql);
+
+$denprvyx=$kli_vrok."-".$kli_vmes."-01";
+$denposlednyx=$kli_vrok."-".$kli_vmes."-".$pocetdnix;
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvy$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET dp='".$denprvyx."', dk='".$denposlednyx."', dni=".$pocetdnix.", hod=".$pocetdnix."*uva ".
+" WHERE F$kli_vxcf"."_mzdprcvy$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND odkial = 1 AND trx1 = 0 AND ( dm = 809 OR dm = 811 OR dm = 812 )";
+$oznac = mysql_query("$sqtoz");
+//echo $sqtoz;
+//exit;
+
 $sqtoz = "DELETE FROM F$kli_vxcf"."_mzdprcvy$kli_uzid WHERE odkial = 1 AND trx1 = 1 AND kc < 0 ";
 $oznac = mysql_query("$sqtoz");
 
