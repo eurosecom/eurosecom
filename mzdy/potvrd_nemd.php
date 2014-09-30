@@ -78,7 +78,7 @@ $uzjezaznam=1;
 
 $sqtoz = "DELETE FROM F$kli_vxcf"."_mzdpotvrdenienemd WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
-$copern=10;
+$copern=20;
 $subor=1;
     }
 //koniec znovu nacitaj
@@ -164,7 +164,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpotvrdenienemd SET ".
 " WHERE oc = $cislo_oc"; 
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");  
-$copern=10;
+$copern=20;
 if (!$upravene):
 ?>
 <script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ" ) </script>
@@ -250,6 +250,8 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenienemd ADD str2 TEXT AFTER pozn";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenienemd ADD vzspolu DECIMAL(10,2) AFTER vz12";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenienemd ADD datum DATE NOT NULL AFTER str2";
 $vysledek = mysql_query("$sql");
 
 $jepotvrd=0;
@@ -614,13 +616,15 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "DELETE FROM F$kli_vxcf"."_mzdpotvrdenienemd WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 
+$datdnes = Date ("Y-m-d", MkTime (0,0,0,date("m"),date("d"),date("Y"))); 
+
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdpotvrdenienemd".
 " SELECT oc,rdstav,uzemie,napprc,".
 "preod1,predo1,predv1,preod2,predo2,predv2,preod3,predo3,predv3,preod4,predo4,predv4,".
 "fe101,text51,text52,text53,".
 "SUM(vz01),SUM(vz02),SUM(vz03),SUM(vz04),SUM(vz05),SUM(vz06),SUM(vz07),SUM(vz08),SUM(vz09),SUM(vz10),SUM(vz11),SUM(vz12),SUM(vzspolu),".
 "vo01,vo02,vo03,vo04,vo05,vo06,vo07,vo08,vo09,vo10,vo11,vo12,SUM(vzodhad),".
-"2,pozn,str2".
+"2,pozn,str2,'$datdnes'".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " GROUP BY oc".
 "";
@@ -631,13 +635,10 @@ $dsql = mysql_query("$dsqlt");
 //koniec pracovneho suboru pre potvrdenie 
 
 
-/////////////NACITANIE UDAJOV Z PARAMETROV
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $cicz=$riaddok->cicz;
-  }
+//vypocty
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenienemd".
+" SET vzspolu=vz01+vz02+vz03+vz04+vz05+vz06+vz07+vz08+vz09+vz10+vz11+vz12 WHERE oc >= 0";
+$oznac = mysql_query("$sqtoz");
 
 
 //nacitaj udaje pre upravu
@@ -717,7 +718,7 @@ mysql_free_result($fir_vysledok);
 //koniec nacitania
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
  <link rel="stylesheet" href="../css/reset.css">
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - Potvrdenie na nárok nemocenskej dávky</title>
@@ -828,14 +829,14 @@ var sirkawic = screen.width-10;
    window.open('potvrd_nemd.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + nextoc + '', '_self');
   }
 
-
-
   function ZnovuPotvrdenie()
   {
-window.open('../mzdy/potvrd_fo.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1',
- '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  window.open('potvrd_nemd.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1', '_self');
   }
-   
+  function tlacpdf(oc)
+  {
+   window.open('potvrd_nemd.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=' + oc + '&xx=1', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }   
 </script>
 
 <?php
@@ -1045,8 +1046,9 @@ if ( $copern == 20 )
 <input type="text" name="vz12" id="vz12" onkeyup="CiarkaNaBodku(this);"
  style="top:1040px; left:148px; width:90px;"/>
 
-<!-- dopyt, spolu cez text echo -->
-
+<!-- dopyt, spolu cez text echo, disable input alebo mozes priamo dat echo do spanu-->
+<input type="text" name="vzspolu" id="vzspolu" onkeyup="CiarkaNaBodku(this);" value="<?php echo $vzspolu; ?>"
+ style="top:1070px; left:148px; width:90px;"/>
 
 <!-- bod 7. -->
 <input type="text" name="vzodhad" id="vzodhad" onkeyup="CiarkaNaBodku(this);"
