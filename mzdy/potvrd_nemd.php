@@ -1,6 +1,6 @@
+<!doctype html>
 <HTML>
 <?php
-
 do
 {
 $sys = 'MZD';
@@ -167,7 +167,7 @@ $upravene = mysql_query("$uprtxt");
 $copern=10;
 if (!$upravene):
 ?>
-<script type="text/javascript"> alert( "⁄DAJE NEBOLI UPRAVEN… " ) </script>
+<script type="text/javascript"> alert( "⁄DAJE NEBOLI UPRAVEN…" ) </script>
 <?php
 endif;
 if ($upravene):
@@ -298,24 +298,24 @@ $sqldok = mysql_query("$sql");
   $minuly=0;
   }
 
-if( $minuly == 0 ) { $kli_mrok=$kli_vrok; $kli_vmcf=$kli_vxcf; }
+if ( $minuly == 0 ) { $kli_mrok=$kli_vrok; $kli_vmcf=$kli_vxcf; }
 
 $databaza="";
-if( $minuly == 1 AND $kli_vrok > 2010 )
+if ( $minuly == 1 AND $kli_vrok > 2010 )
 {
-if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; }
+if ( File_Exists("../pswd/oddelena2010db2011.php") ) { $databaza=$mysqldb2010."."; }
 }
-if( $minuly == 1 AND $kli_vrok > 2011 )
+if ( $minuly == 1 AND $kli_vrok > 2011 )
 {
-if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; }
+if ( File_Exists("../pswd/oddelena2011db2012.php") ) { $databaza=$mysqldb2011."."; }
 }
-if( $minuly == 1 AND $kli_vrok > 2012 )
+if ( $minuly == 1 AND $kli_vrok > 2012 )
 {
-if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; }
+if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2012."."; }
 }
-if( $minuly == 1 AND $kli_vrok > 2013 )
+if ( $minuly == 1 AND $kli_vrok > 2013 )
 {
-if (File_Exists ("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; }
+if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; }
 }
 //echo $minuly;
 
@@ -630,6 +630,7 @@ $dsql = mysql_query("$dsqlt");
 }
 //koniec pracovneho suboru pre potvrdenie 
 
+
 /////////////NACITANIE UDAJOV Z PARAMETROV
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
   if (@$zaznam=mysql_data_seek($sqldok,0))
@@ -638,8 +639,445 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
   $cicz=$riaddok->cicz;
   }
 
+
+//nacitaj udaje pre upravu
+if ( $copern == 20 )
+    {
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpotvrdenienemd".
+" LEFT JOIN F$kli_vxcf"."_mzdkun".
+" ON F$kli_vxcf"."_mzdpotvrdenienemd.oc=F$kli_vxcf"."_mzdkun.oc".
+" WHERE F$kli_vxcf"."_mzdpotvrdenienemd.oc = $cislo_oc AND konx = 2 ORDER BY konx,prie,meno";
+
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
+$oc = $fir_riadok->oc;
+$meno = $fir_riadok->meno;
+$prie = $fir_riadok->prie;
+$rodne = $fir_riadok->rdc."/".$fir_riadok->rdk;
+$dar = $fir_riadok->dar;
+$dar_sk=SkDatum($dar);
+$adresa = $fir_riadok->zuli." ".$fir_riadok->zcdm.", ".$fir_riadok->zmes."  ".$fir_riadok->zpsc;
+$zamestnavatel = $fir_fnaz.", ".$fir_fuli." ".$fir_fcdm.", ".$fir_fmes." ".$fir_fpsc.", I»Z: ".$cicz;
+$dan = $fir_riadok->dan;
+$dan_sk=SkDatum($dan);
+$dav = $fir_riadok->dav;
+$dav_sk=SkDatum($dav);
+
+$rdstav = $fir_riadok->rdstav;
+$uzemie = $fir_riadok->uzemie;
+$napprc = SkDatum($fir_riadok->napprc);
+$preod1 = SkDatum($fir_riadok->preod1);
+$predo1 = SkDatum($fir_riadok->predo1);
+$predv1 = $fir_riadok->predv1;
+$preod2 = SkDatum($fir_riadok->preod2);
+$predo2 = SkDatum($fir_riadok->predo2);
+$predv2 = $fir_riadok->predv2;
+$preod3 = SkDatum($fir_riadok->preod3);
+$predo3 = SkDatum($fir_riadok->predo3);
+$predv3 = $fir_riadok->predv3;
+$preod4 = SkDatum($fir_riadok->preod4);
+$predo4 = SkDatum($fir_riadok->predo4);
+$predv4 = $fir_riadok->predv4;
+$fe101 = $fir_riadok->fe101;
+$text51 = $fir_riadok->text51;
+$text52 = $fir_riadok->text52;
+$text53 = $fir_riadok->text53;
+$vz01 = $fir_riadok->vz01;
+$vz02 = $fir_riadok->vz02;
+$vz03 = $fir_riadok->vz03;
+$vz04 = $fir_riadok->vz04;
+$vz05 = $fir_riadok->vz05;
+$vz06 = $fir_riadok->vz06;
+$vz07 = $fir_riadok->vz07;
+$vz08 = $fir_riadok->vz08;
+$vz09 = $fir_riadok->vz09;
+$vz10 = $fir_riadok->vz10;
+$vz11 = $fir_riadok->vz11;
+$vz12 = $fir_riadok->vz12;
+$vzspolu = $fir_riadok->vzspolu;
+$vo01 = $fir_riadok->vo01;
+$vo02 = $fir_riadok->vo02;
+$vo03 = $fir_riadok->vo03;
+$vo04 = $fir_riadok->vo04;
+$vo05 = $fir_riadok->vo05;
+$vo06 = $fir_riadok->vo06;
+$vo07 = $fir_riadok->vo07;
+$vo08 = $fir_riadok->vo08;
+$vo09 = $fir_riadok->vo09;
+$vo10 = $fir_riadok->vo10;
+$vo11 = $fir_riadok->vo11;
+$vo12 = $fir_riadok->vo12;
+$vzodhad = $fir_riadok->vzodhad;
+$pozn = $fir_riadok->pozn;
+$str2 = $fir_riadok->str2;
+
+mysql_free_result($fir_vysledok);
+    }
+//koniec nacitania
+?>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+ <link rel="stylesheet" href="../css/reset.css">
+ <link rel="stylesheet" href="../css/tlaciva.css">
+<title>EuroSecom - Potvrdenie na n·rok nemocenskej d·vky</title>
+<style type="text/css">
+form input[type=text] {
+  position: absolute;
+  height: 20px;
+  line-height: 20px;
+  padding-left: 4px;
+  border: 1px solid #39f;
+  font-size: 14px;
+}
+form select {
+  position: absolute;
+  height: 20px;
+  border: 1px solid #39f;
+}
+</style>
+<script type="text/javascript">
+
+//sirka a vyska okna
+var sirkawin = screen.width-10;
+var vyskawin = screen.height-175;
+var vyskawic = screen.height-20;
+var sirkawic = screen.width-10;
+
+<?php
+//uprava
+  if ( $copern == 20 )
+  { 
+?>
+  function ObnovUI()
+  {
+   document.formv1.rdstav.value = '<?php echo "$rdstav";?>';
+   document.formv1.uzemie.value = '<?php echo "$uzemie";?>';
+   document.formv1.napprc.value = '<?php echo "$napprc";?>';
+   document.formv1.preod1.value = '<?php echo "$preod1";?>';
+   document.formv1.predo1.value = '<?php echo "$predo1";?>';
+   document.formv1.predv1.value = '<?php echo "$predv1";?>';
+   document.formv1.preod2.value = '<?php echo "$preod2";?>';
+   document.formv1.predo2.value = '<?php echo "$predo2";?>';
+   document.formv1.predv2.value = '<?php echo "$predv2";?>';
+   document.formv1.preod3.value = '<?php echo "$preod3";?>';
+   document.formv1.predo3.value = '<?php echo "$predo3";?>';
+   document.formv1.predv3.value = '<?php echo "$predv3";?>';
+   document.formv1.preod4.value = '<?php echo "$preod4";?>';
+   document.formv1.predo4.value = '<?php echo "$predo4";?>';
+   document.formv1.predv4.value = '<?php echo "$predv4";?>';
+   document.formv1.fe101.value = '<?php echo "$fe101";?>';
+   document.formv1.text51.value = '<?php echo "$text51";?>';
+   document.formv1.text52.value = '<?php echo "$text52";?>';
+   document.formv1.text53.value = '<?php echo "$text53";?>';
+   document.formv1.vz01.value = '<?php echo "$vz01";?>';
+   document.formv1.vz02.value = '<?php echo "$vz02";?>';
+   document.formv1.vz03.value = '<?php echo "$vz03";?>';
+   document.formv1.vz04.value = '<?php echo "$vz04";?>';
+   document.formv1.vz05.value = '<?php echo "$vz05";?>';
+   document.formv1.vz06.value = '<?php echo "$vz06";?>';
+   document.formv1.vz07.value = '<?php echo "$vz07";?>';
+   document.formv1.vz08.value = '<?php echo "$vz08";?>';
+   document.formv1.vz09.value = '<?php echo "$vz09";?>';
+   document.formv1.vz10.value = '<?php echo "$vz10";?>';
+   document.formv1.vz11.value = '<?php echo "$vz11";?>';
+   document.formv1.vz12.value = '<?php echo "$vz12";?>';
+   document.formv1.vo01.value = '<?php echo "$vo01";?>';
+   document.formv1.vo02.value = '<?php echo "$vo02";?>';
+   document.formv1.vo03.value = '<?php echo "$vo03";?>';
+   document.formv1.vo04.value = '<?php echo "$vo04";?>';
+   document.formv1.vo05.value = '<?php echo "$vo05";?>';
+   document.formv1.vo06.value = '<?php echo "$vo06";?>';
+   document.formv1.vo07.value = '<?php echo "$vo07";?>';
+   document.formv1.vo08.value = '<?php echo "$vo08";?>';
+   document.formv1.vo09.value = '<?php echo "$vo09";?>';
+   document.formv1.vo10.value = '<?php echo "$vo10";?>';
+   document.formv1.vo11.value = '<?php echo "$vo11";?>';
+   document.formv1.vo12.value = '<?php echo "$vo12";?>';
+   document.formv1.vzodhad.value = '<?php echo "$vzodhad";?>';
+   document.formv1.pozn.value = '<?php echo "$pozn";?>';
+  }
+<?php
+//koniec uprava
+  }
+?>
+
+<?php
+  if ( $copern != 20 )
+  {
+?>
+  function ObnovUI()
+  {
+  }
+<?php
+  }
+?>
+
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
+  }
+
+  function prevOC(prevoc)
+  {
+   window.open('potvrd_nemd.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + prevoc + '', '_self');
+  }
+  function nextOC(nextoc)
+  {
+   window.open('potvrd_nemd.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + nextoc + '', '_self');
+  }
+
+
+
+  function ZnovuPotvrdenie()
+  {
+window.open('../mzdy/potvrd_fo.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1',
+ '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  }
+   
+</script>
+
+<?php
+//osobne cislo prepinanie
+$novy=0;
+if ( $novy == 0 )
+{
+$prev_oc=$cislo_oc-1;
+$next_oc=$cislo_oc+1;
+if ( $prev_oc == 0 ) $prev_oc=1;
+if ( $next_oc > 9999 ) $next_oc=9999;
+$nasieloc=0;
+$i=0;
+while ( $i <= 9999 AND $nasieloc == 0 )
+{
+$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_mzdkun WHERE oc=$prev_oc ");
+  if (@$zaznam=mysql_data_seek($sqlico,$i))
+  {
+  $riadico=mysql_fetch_object($sqlico);
+  $nasieloc=1;
+  }
+if ( $nasieloc == 0 ) $prev_oc=$prev_oc-1;
+if ( $prev_oc <= 1 ) $nasieloc=1;
+}
+$i=$i+1;
+
+$maxoc=9999;
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun ORDER BY oc DESC LIMIT 1");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $maxoc=1*$riaddok->oc;
+  }
+if ( $next_oc > $maxoc ) $next_oc=$maxoc;
+
+$nasieloc=0;
+$i=0;
+while ($i <= 9999 AND $nasieloc == 0 AND $next_oc <= $maxoc )
+{
+$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_mzdkun WHERE oc=$next_oc ");
+  if (@$zaznam=mysql_data_seek($sqlico,$i))
+  {
+  $riadico=mysql_fetch_object($sqlico);
+  $nasieloc=1;
+  }
+if ( $nasieloc == 0 ) $next_oc=$next_oc+1;
+if ( $next_oc >= 9999 ) $nasieloc=1;
+}
+$i=$i+1;
+if ( $prev_oc == 0 ) $prev_oc=1;
+if ( $next_oc > 9999 ) $next_oc=9999;
+}
+?>
+</HEAD>
+<BODY id="white" onload="ObnovUI();">
+<?php
+//uprav udaje
+if ( $copern == 20 )
+    {
+?>
+<div id="wrap-heading">
+ <table id="heading">
+  <tr>
+   <td class="ilogin">EuroSecom</td>
+   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
+  </tr>
+  <tr>
+   <td class="header">Potvrdenie n·roku na nemocensk˙ d·vku - <span class="subheader"><?php echo "$oc $meno $prie";?></span>
+<?php if ( $novy == 0 ) { ?>
+    <img src='../obr/prev.png' onclick="prevOC(<?php echo $prev_oc; ?>);" title="Os.Ë. <?php echo $prev_oc; ?>" class="navoc-icon">
+    <img src='../obr/next.png' onclick="nextOC(<?php echo $next_oc; ?>);" title="Os.Ë. <?php echo $next_oc; ?>" class="navoc-icon">
+<?php                   } ?>
+   </td>
+   <td>
+    <div class="bar-btn-form-tool">
+     <img src="../obr/ikony/info_blue_icon.png" onclick="NavodVyplnenie();" title="PouËenie na vyplnenie" class="btn-form-tool"> <!-- dopyt, aktualizovaù -->
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacpdf(<?php echo $cislo_oc; ?>);"
+      title="Zobraziù v PDF" class="btn-form-tool"> <!-- dopyt, aktualizovaù -->
+<a href="#" onClick="ZnovuPotvrdenie();">
+<img src='../obr/orig.png' width=20 height=15 border=0 alt='Znovu naËÌtaù hodnoty do potvrdenia z miezd' ></a>
+
+    </div>
+   </td>
+  </tr>
+ </table>
+</div>
+
+<div id="content">
+<FORM name="formv1" method="post" action="potvrd_nemd.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave" style="top:4px;"> <!-- dopyt, pÙvodn˝ je na uloûiù a tlaËiù -->
+<img src="../dokumenty/mzdy_potvrdenia/narok_nemocenska_v14/narok_nemocenska_v14_form.jpg"
+ alt="tlaËivo Potvrdenie zamestn·vateæa o zamestnancovi na ˙Ëely uplatnenia n·roku na nemocensk˙ d·vku 232kB" class="form-background">
+
+<!-- zamestnavatel -->
+<span class="text-echo" style="top:190px; left:50px;"><?php echo $zamestnavatel; ?></span>
+
+<!-- zamestnanec -->
+<span class="text-echo" style="top:86px; left:135px;"><?php echo $rodne; ?></span>
+<span class="text-echo" style="top:110px; left:75px;"><?php echo $meno; ?></span>
+<span class="text-echo" style="top:110px; left:420px;"><?php echo $prie; ?></span>
+<span class="text-echo" style="top:130px; left:150px;"><?php echo $dar_sk; ?></span>
+<select size="1" name="rdstav" id="rdstav" style="top:130px; left:440px;">
+ <option value="0">slobodn˝/slobodn·</option>
+ <option value="1">ûenat˝/vydat·</option>
+ <option value="2">vdovec/vdova</option>
+ <option value="3">rozveden˝/rozveden·</option>
+</select>
+<span class="text-echo" style="top:160px; left:150px;"><?php echo $adresa; ?></span>
+
+<select size="1" name="uzemie" id="uzemie" style="top:210px; left:260px;">
+ <option value="0" >na ˙zemÌ SR</option>
+ <option value="1" >mimo ˙zemia SR</option>
+ <option value="2" >na ˙zemÌ aj mimo ˙zemia SR</option>
+</select>
+
+<!-- bod 1. -->
+<!-- dopyt, tu m· byù d·tum n·stupu a v˝stupu -->
+<span class="text-echo" style="top:240px; left:630px;"><?php echo $dan_sk; ?></span>
+<span class="text-echo" style="top:260px; left:580px;"><?php echo $dav_sk; ?></span>
+
+<!-- bod 2. -->
+<input type="text" name="napprc" id="napprc" onkeyup="CiarkaNaBodku(this);"
+ style="top:280px; left:326px; width:80px;"/>
+
+<!-- bod 3. -->
+<input type="text" name="preod1" id="preod1" onkeyup="CiarkaNaBodku(this);"
+ style="top:350px; left:70px; width:80px;"/>
+<input type="text" name="predo1" id="predo1" onkeyup="CiarkaNaBodku(this);"
+ style="top:350px; left:300px; width:80px;"/>
+<input type="text" name="predv1" id="predv1" style="top:350px; left:470px; width:400px;"/>
+
+<input type="text" name="preod2" id="preod2" onkeyup="CiarkaNaBodku(this);"
+ style="top:380px; left:70px; width:80px;"/>
+<input type="text" name="predo2" id="predo2" onkeyup="CiarkaNaBodku(this);"
+ style="top:380px; left:300px; width:80px;"/>
+<input type="text" name="predv2" id="predv2" style="top:380px; left:470px; width:400px;"/>
+
+<input type="text" name="preod3" id="preod3" onkeyup="CiarkaNaBodku(this);"
+ style="top:400px; left:70px; width:80px;"/>
+<input type="text" name="predo3" id="predo3" onkeyup="CiarkaNaBodku(this);"
+ style="top:400px; left:300px; width:80px;"/>
+<input type="text" name="predv3" id="predv3" style="top:400px; left:470px; width:400px;"/>
+
+<input type="text" name="preod4" id="preod4" onkeyup="CiarkaNaBodku(this);"
+ style="top:430px; left:70px; width:80px;"/>
+<input type="text" name="predo4" id="predo4" onkeyup="CiarkaNaBodku(this);"
+ style="top:430px; left:300px; width:80px;"/>
+<input type="text" name="predv4" id="predv4" style="top:430px; left:470px; width:400px;"/>
+
+<!-- bod 4. -->
+<select size="1" name="fe101" id="fe101" style="top:460px; left:260px;">
+ <option value="0">nebola</option>
+ <option value="1">bola</option>
+</select>
+
+<!-- bod 5. -->
+<input type="text" name="text51" id="text51" style="top:530px; left:47px; width:800px;"/>
+<input type="text" name="text52" id="text52" style="top:560px; left:47px; width:800px;"/>
+<input type="text" name="text53" id="text53" style="top:590px; left:47px; width:800px;"/>
+
+<!-- bod 6. -->
+<input type="text" name="vo01" id="vo01" style="top:731px; left:105px; width:25px;"/>
+<input type="text" name="vz01" id="vz01" onkeyup="CiarkaNaBodku(this);"
+ style="top:731px; left:148px; width:90px;"/>
+
+<input type="text" name="vo02" id="vo02" style="top:755px; left:105px; width:25px;"/>
+<input type="text" name="vz02" id="vz02" onkeyup="CiarkaNaBodku(this);"
+ style="top:755px; left:148px; width:90px;"/>
+
+<input type="text" name="vo03" id="vo03" style="top:783px; left:105px; width:25px;"/>
+<input type="text" name="vz03" id="vz03" onkeyup="CiarkaNaBodku(this);"
+ style="top:783px; left:148px; width:90px;"/>
+
+<input type="text" name="vo04" id="vo04" style="top:811px; left:105px; width:25px;"/>
+<input type="text" name="vz04" id="vz04" onkeyup="CiarkaNaBodku(this);"
+ style="top:811px; left:148px; width:90px;"/>
+
+<input type="text" name="vo05" id="vo05" style="top:841px; left:105px; width:25px;"/>
+<input type="text" name="vz05" id="vz05" onkeyup="CiarkaNaBodku(this);"
+ style="top:841px; left:148px; width:90px;"/>
+
+<input type="text" name="vo06" id="vo06" style="top:871px; left:105px; width:25px;"/>
+<input type="text" name="vz06" id="vz06" onkeyup="CiarkaNaBodku(this);"
+ style="top:871px; left:148px; width:90px;"/>
+
+<input type="text" name="vo07" id="vo07" style="top:901px; left:105px; width:25px;"/>
+<input type="text" name="vz07" id="vz07" onkeyup="CiarkaNaBodku(this);"
+ style="top:901px; left:148px; width:90px;"/>
+
+<input type="text" name="vo08" id="vo08" style="top:925px; left:105px; width:25px;"/>
+<input type="text" name="vz08" id="vz08" onkeyup="CiarkaNaBodku(this);"
+ style="top:925px; left:148px; width:90px;"/>
+
+<input type="text" name="vo09" id="vo09" style="top:950px; left:105px; width:25px;"/>
+<input type="text" name="vz09" id="vz09" onkeyup="CiarkaNaBodku(this);"
+ style="top:950px; left:148px; width:90px;"/>
+
+<input type="text" name="vo10" id="vo10" style="top:980px; left:105px; width:25px;"/>
+<input type="text" name="vz10" id="vz10" onkeyup="CiarkaNaBodku(this);"
+ style="top:980px; left:148px; width:90px;"/>
+
+<input type="text" name="vo11" id="vo11" style="top:1010px; left:105px; width:25px;"/>
+<input type="text" name="vz11" id="vz11" onkeyup="CiarkaNaBodku(this);"
+ style="top:1010px; left:148px; width:90px;"/>
+
+<input type="text" name="vo12" id="vo12" style="top:1040px; left:105px; width:25px;"/>
+<input type="text" name="vz12" id="vz12" onkeyup="CiarkaNaBodku(this);"
+ style="top:1040px; left:148px; width:90px;"/>
+
+<!-- dopyt, spolu cez text echo -->
+
+
+<!-- bod 7. -->
+<input type="text" name="vzodhad" id="vzodhad" onkeyup="CiarkaNaBodku(this);"
+ style="top:1150px; left:100px; width:90px;"/>
+
+<!-- bod 8. -->
+<span class="text-echo" style="top:1230px; left:80px;"><?php echo "$fir_mzdt05 tel. $fir_mzdt04"; ?></span>
+<!-- dopyt, d·tum budeme rieöiù, v tlaËi som nenaöiel -->
+
+<!-- poznamka -->
+<label for="pozn" style="position:absolute; top:1279px; left:170px; font-size:12px; font-weight:bold;">Pozn·mka</label>
+<input type="text" name="pozn" id="pozn" style="top:1273px; right:10px; width:700px;"/>
+
+<!-- dopl.info na 2.stranu -->
+<!-- dopyt, nech·me -->
+<label for="str2" style="position:absolute; top:640px; left:620px; font-size:12px; font-weight:bold;">Dopl. info na 2. stranu</label>
+<textarea name="str2" id="str2" style="top:656px; left:620px; width:300px; height:430px;"><?php echo $str2; ?></textarea>
+
+
+
+</FORM>
+</div> <!-- koniec #content -->
+<?php
+//mysql_free_result($vysledok);
+    }
+//koniec uprav
+?>
+
+<?php
 /////////////////////////////////////////////////VYTLAC POTVRDENIE
-if( $copern == 10 )
+if ( $copern == 10 )
 {
 
 //urob sucet
@@ -650,11 +1088,9 @@ $oznac = mysql_query("$sqtoz");
 
 
 
-if (File_Exists ("../tmp/potvrdenieFO.$kli_uzid.pdf")) { $soubor = unlink("../tmp/potvrdenieFO.$kli_uzid.pdf"); }
-
-   define('FPDF_FONTPATH','../fpdf/font/');
-   require('../fpdf/fpdf.php');
-
+if ( File_Exists("../tmp/potvrdenieFO.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/potvrdenieFO.$kli_uzid.pdf"); }
+     define('FPDF_FONTPATH','../fpdf/font/');
+     require('../fpdf/fpdf.php');
 
 $sirka_vyska="210,320";
 $velkost_strany = explode(",", $sirka_vyska);
@@ -689,17 +1125,17 @@ $hlavicka=mysql_fetch_object($sql);
   $Cozam_np = $pole[0];
   $Dozam_np = substr($pole[1],0,1);
 
-$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 
-$pdf->SetLeftMargin(10); 
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 
-if (File_Exists ('../dokumenty/mzdy_potvrdenia/narok_na_NemD2011.jpg') AND $i == 0 )
+if ( File_Exists('../dokumenty/mzdy_potvrdenia/narok_na_NemD2011.jpg') AND $i == 0 )
 {
-if( $fort == 1 ) { $pdf->Image('../dokumenty/mzdy_potvrdenia/narok_na_NemD2011.jpg',10,13,195,286); }
+if( $fort == 1 ) { $pdf->Image('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v14/narok_nemocenska_v14.jpg',10,13,195,286); } //dopyt, fort zruöiù, rozmery na naöe ötandard viÔ ötatistika
 }
 
 $pdf->SetY(10);
@@ -864,7 +1300,7 @@ if( $pole[0] != '' )
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 
-$pdf->SetLeftMargin(10); 
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 
 $pdf->SetY(10);
@@ -873,7 +1309,7 @@ $pdf->SetFont('arial','',8);
 
 $ipole=1;
 foreach( $pole as $hodnota ) {
-if( $ipole == 1 ) 
+if ( $ipole == 1 )
 { $pdf->Cell(150,5,"Potvrdenie zamestn·vateæa o zamestnancovi na ˙Ëely uplatnenia n·roku na nemocensk˙ d·vku","B",0,"L");
   $pdf->Cell(0,5," 2.strana","B",1,"R");
   $pdf->Cell(0,5,"  ","0",1,"R");
@@ -891,8 +1327,6 @@ $pdf->Cell(145,5,"","0",0,"R");$pdf->Cell(0,5,"peËiatka,podpis zamestn·vateæa","
 
 
 $pdf->Output("../tmp/potvrdenieFO.$kli_uzid.pdf");
-
-
 ?>
 
 <script type="text/javascript">
@@ -902,610 +1336,7 @@ $pdf->Output("../tmp/potvrdenieFO.$kli_uzid.pdf");
 
 <?php
 }
-/////////////////////////////////////////KONIEC VYTLACENIA POTVRDENIA FO
-
-
-//nacitaj udaje pre upravu
-if ( $copern == 20 )
-    {
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpotvrdenienemd".
-" LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON F$kli_vxcf"."_mzdpotvrdenienemd.oc=F$kli_vxcf"."_mzdkun.oc".
-" WHERE F$kli_vxcf"."_mzdpotvrdenienemd.oc = $cislo_oc AND konx = 2 ORDER BY konx,prie,meno";
-
-$fir_vysledok = mysql_query($sqlfir);
-$fir_riadok=mysql_fetch_object($fir_vysledok);
-
-$oc = $fir_riadok->oc;
-$meno = $fir_riadok->meno;
-$prie = $fir_riadok->prie;
-
-$rdstav = $fir_riadok->rdstav;
-$uzemie = $fir_riadok->uzemie;
-$napprc = SkDatum($fir_riadok->napprc);
-$preod1 = SkDatum($fir_riadok->preod1);
-$predo1 = SkDatum($fir_riadok->predo1);
-$predv1 = $fir_riadok->predv1;
-$preod2 = SkDatum($fir_riadok->preod2);
-$predo2 = SkDatum($fir_riadok->predo2);
-$predv2 = $fir_riadok->predv2;
-$preod3 = SkDatum($fir_riadok->preod3);
-$predo3 = SkDatum($fir_riadok->predo3);
-$predv3 = $fir_riadok->predv3;
-$preod4 = SkDatum($fir_riadok->preod4);
-$predo4 = SkDatum($fir_riadok->predo4);
-$predv4 = $fir_riadok->predv4;
-$fe101 = $fir_riadok->fe101;
-$text51 = $fir_riadok->text51;
-$text52 = $fir_riadok->text52;
-$text53 = $fir_riadok->text53;
-$vz01 = $fir_riadok->vz01;
-$vz02 = $fir_riadok->vz02;
-$vz03 = $fir_riadok->vz03;
-$vz04 = $fir_riadok->vz04;
-$vz05 = $fir_riadok->vz05;
-$vz06 = $fir_riadok->vz06;
-$vz07 = $fir_riadok->vz07;
-$vz08 = $fir_riadok->vz08;
-$vz09 = $fir_riadok->vz09;
-$vz10 = $fir_riadok->vz10;
-$vz11 = $fir_riadok->vz11;
-$vz12 = $fir_riadok->vz12;
-$vzspolu = $fir_riadok->vzspolu;
-$vo01 = $fir_riadok->vo01;
-$vo02 = $fir_riadok->vo02;
-$vo03 = $fir_riadok->vo03;
-$vo04 = $fir_riadok->vo04;
-$vo05 = $fir_riadok->vo05;
-$vo06 = $fir_riadok->vo06;
-$vo07 = $fir_riadok->vo07;
-$vo08 = $fir_riadok->vo08;
-$vo09 = $fir_riadok->vo09;
-$vo10 = $fir_riadok->vo10;
-$vo11 = $fir_riadok->vo11;
-$vo12 = $fir_riadok->vo12;
-$vzodhad = $fir_riadok->vzodhad;
-$pozn = $fir_riadok->pozn;
-$str2 = $fir_riadok->str2;
-
-
-mysql_free_result($fir_vysledok);
-
-    }
-//koniec nacitania
-
-
-
-?>
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
-  <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>Potvrdenie zamestn·vateæa o zamestnancovi na ˙Ëely uplatnenia n·roku na nemocensk˙ d·vku</title>
-  <style type="text/css">
-
-  </style>
-<script type="text/javascript">
-
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height-20;
-var sirkawic = screen.width-10;
-
-<?php
-//uprava sadzby strana 1
-  if ( $copern == 20 )
-  { 
-?>
-    function ObnovUI()
-    {
-    document.formv1.rdstav.value = '<?php echo "$rdstav";?>';
-    document.formv1.uzemie.value = '<?php echo "$uzemie";?>';
-    document.formv1.napprc.value = '<?php echo "$napprc";?>';
-    document.formv1.preod1.value = '<?php echo "$preod1";?>';
-    document.formv1.predo1.value = '<?php echo "$predo1";?>';
-    document.formv1.predv1.value = '<?php echo "$predv1";?>';
-    document.formv1.preod2.value = '<?php echo "$preod2";?>';
-    document.formv1.predo2.value = '<?php echo "$predo2";?>';
-    document.formv1.predv2.value = '<?php echo "$predv2";?>';
-    document.formv1.preod3.value = '<?php echo "$preod3";?>';
-    document.formv1.predo3.value = '<?php echo "$predo3";?>';
-    document.formv1.predv3.value = '<?php echo "$predv3";?>';
-    document.formv1.preod4.value = '<?php echo "$preod4";?>';
-    document.formv1.predo4.value = '<?php echo "$predo4";?>';
-    document.formv1.predv4.value = '<?php echo "$predv4";?>';
-    document.formv1.fe101.value = '<?php echo "$fe101";?>';
-    document.formv1.text51.value = '<?php echo "$text51";?>';
-    document.formv1.text52.value = '<?php echo "$text52";?>';
-    document.formv1.text53.value = '<?php echo "$text53";?>';
-    document.formv1.vz01.value = '<?php echo "$vz01";?>';
-    document.formv1.vz02.value = '<?php echo "$vz02";?>';
-    document.formv1.vz03.value = '<?php echo "$vz03";?>';
-    document.formv1.vz04.value = '<?php echo "$vz04";?>';
-    document.formv1.vz05.value = '<?php echo "$vz05";?>';
-    document.formv1.vz06.value = '<?php echo "$vz06";?>';
-    document.formv1.vz07.value = '<?php echo "$vz07";?>';
-    document.formv1.vz08.value = '<?php echo "$vz08";?>';
-    document.formv1.vz09.value = '<?php echo "$vz09";?>';
-    document.formv1.vz10.value = '<?php echo "$vz10";?>';
-    document.formv1.vz11.value = '<?php echo "$vz11";?>';
-    document.formv1.vz12.value = '<?php echo "$vz12";?>';
-    document.formv1.vo01.value = '<?php echo "$vo01";?>';
-    document.formv1.vo02.value = '<?php echo "$vo02";?>';
-    document.formv1.vo03.value = '<?php echo "$vo03";?>';
-    document.formv1.vo04.value = '<?php echo "$vo04";?>';
-    document.formv1.vo05.value = '<?php echo "$vo05";?>';
-    document.formv1.vo06.value = '<?php echo "$vo06";?>';
-    document.formv1.vo07.value = '<?php echo "$vo07";?>';
-    document.formv1.vo08.value = '<?php echo "$vo08";?>';
-    document.formv1.vo09.value = '<?php echo "$vo09";?>';
-    document.formv1.vo10.value = '<?php echo "$vo10";?>';
-    document.formv1.vo11.value = '<?php echo "$vo11";?>';
-    document.formv1.vo12.value = '<?php echo "$vo12";?>';
-    document.formv1.vzodhad.value = '<?php echo "$vzodhad";?>';
-    document.formv1.pozn.value = '<?php echo "$pozn";?>';
-
-    }
-<?php
-//koniec uprava
-  }
-?>
-
-<?php
-  if ( $copern != 20 )
-  { 
-?>
-    function ObnovUI()
-    {
-
-    }
-<?php
-  }
-?>
-
-//Kontrola datumu Sk
-function kontrola_datum(vstup, Oznam, x1, errflag)
-		{
-		var text
-		var index
-		var tecka
-		var den
-		var mesic
-		var rok
-		var ch
-                var err
-
-		text=""
-                err=0 
-		
-		den=""
-		mesic=""
-		rok=""
-		tecka=0
-		
-		for (index = 0; index < vstup.value.length; index++) 
-			{
-      ch = vstup.value.charAt(index);
-			if (ch != "0" && ch != "1" && ch != "2" && ch != "3" && ch != "4" && ch != "5" && ch != "6" && ch != "7" && ch != "8" && ch != "9" && ch != ".") 
-				{text="Pole Datum zadavajte vo formate DD.MM alebo DD.MM.RRRR (DD=den, MM=mesiac, RRRR=rok).\r"; err=3 }
-			if ((ch == "0" || ch == "1" || ch == "2" || ch == "3" || ch == "4" || ch == "5" || ch == "6" || ch == "7" || ch == "8" || ch == "9") && (text ==""))
-				{
-				if (tecka == 0)
-					{den=den + ch}
-				if (tecka == 1)
-					{mesic=mesic + ch}
-				if (tecka == 2)
-					{rok=rok + ch}
-				}
-			if (ch == "." && text == "")
-				{
-				if (tecka == 1)
-					{tecka=2}
-				if (tecka == 0)
-					{tecka=1}
-				
-				}	
-			}
-			
-		if (tecka == 2 && rok == "" )
-			{rok=<?php echo $kli_vrok; ?>}
-		if (tecka == 1 && rok == "" )
-			{rok=<?php echo $kli_vrok; ?>; err= 0}
-		if (tecka == 1 && mesic == "" )
-			{mesic=<?php echo $kli_vmes; ?>; err= 0}
-		if (tecka == 0 && mesic == "" )
-			{mesic=<?php echo $kli_vmes; ?>; rok=<?php echo $kli_vrok; ?>; err= 0}
-		if ((den<1 || den >31) && (text == ""))
-			{text=text + "Pocet dni v uvedenom mesiaci nemoze byt mensi ako 1 a vacsi ako 31.\r"; err=1 }
-		if ((mesic<1 || mesic>12) && (text == ""))
-			{text=text + "Pocet mesiacov nemoze byt mensi ako 1 a vacsi ako 12.\r"; err=2 }
-		if (rok<1930 && tecka == 2 && text == "" && rok != "" )
-			{text=text + "Rok nemoze byt mensi ako 1930.\r"; err=3 }
-		if (rok>2029 && tecka == 2 && text == "" && rok != "" )
-			{text=text + "Rok nemoze byt v‰ËöÌ ako 2029.\r"; err=3 }
-		if (tecka > 2)
-			{text=text+ "Datum zadavajte vo formatu DD.MM alebo DD.MM.RRRR (DD=den, MM=mesiac, RRRR=rok)\r"; err=3 }
-
-		if (mesic == 2)
-			{
-			if (rok != "")
-				{
-				if (rok % 4 == 0)
-					{
-					if (den>29)
-						{text=text + "Vo februari roku " + rok + " je maximalne 29 dni.\r"; err=1 }
-					}
-				else
-					{
-					if (den>28)
-						{text=text + "Vo februari roku " + rok + " je maximalne 28 dni.\r"; err=1 }
-					}
-				}
-			else
-				{
-				if (den>29)
-					{text=text + "Vo februari roku je maximalne 29 dni.\r"}
-				}
-			}
-
-		if ((mesic == 4 || mesic == 6 || mesic == 9 || mesic == 11) && (den>30))
-			{text=text + "Pocet dni v uvedenom mesiaci nemoze byt mensi ako 1 a vacsi ako 30.\r"}
-		
-
-
-
-		if (text!="" && err == 1 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "??"  + "." + mesic+ "." + rok;
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (text!="" && err == 2 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "." + mesic + "??" + "." + rok;
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (text!="" && err == 3 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "." + mesic +  "." + rok + "??";
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (err == 0)
-			{
-                        Oznam.style.display="none";
-                        x1.value = den + "." + mesic +  "." + rok ;
-                        errflag.value = "0";
-			return true;
-			}
-
-		}
-//koniec kontrola datumu
-
-// Kontrola cisla celeho v rozsahu x az y  
-      function intg(x1,x,y,Oznam) 
-      { 
-       var b;
-       b=x1.value;
-       var anyString=b;
-       Oznam.style.display="none";
-         if (b == "") return true;
-         else{
-         if (Math.floor(b)==b && b>=x && b<=y) return true; 
-         else {
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         return false;
-              } 
-             }
-      }
-
-
-// Kontrola des.cisla celeho v rozsahu x az y  
-      function cele(x1,x,y,Oznam,des) 
-      { 
-       var b;
-       b=x1.value;
-       var anyString=b;
-       var err=0;
-       var c;
-       var d;
-       var cele;
-       var pocdes;
-       cele=0;
-       pocdes=0;
-       c=b.toString();
-       d=c.split('.');
-       if ( isNaN(d[1]) ) { cele=1; }
-       if ( cele == 0 ) { pocdes=d[1].length; }
-
-         if (b == "") { err=0 }
-         if (b>=x && b<=y) { err=0 }
-         if ( x1.value.search(/[^0-9.-]/g) != -1) { err=1 }
-         if (b<x && b != "") { err=1 }
-         if (b>y && b != "") { err=1 }
-         if (cele == 0 && pocdes > des ) { err=1 }
-
-	 if (err == 0)
-	 {         
-         Oznam.style.display="none";
-         return true;
-         }
-
-	 if (err == 1)
-	 { 
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         x1.value = b + "??";
-         return false;
-         }
-
-      }
-
-
-//  Kontrola cisla
-    function KontrolaCisla(Vstup, Oznam)
-    {
-     if ( Vstup.value.search(/[^0-9]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-     if ( Vstup.value.search(/[^0-9]/g) != -1) { Oznam.style.display=""; }
-     else { Oznam.style.display="none"; }
-    }
-
-//  Kontrola cisla desatinneho
-    function KontrolaDcisla(Vstup, Oznam)
-    {
-     if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-     if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Oznam.style.display=""; }
-     else { Oznam.style.display="none"; }
-    }
-
-//  Kontrola datumu
-    function KontrolaDatum(Vstup, Oznam)
-    {
-     if ( Vstup.value.search(/[^0-9.]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-     if ( Vstup.value.search(/[^0-9.]/g) != -1) { Oznam.style.display=""; }
-     else { Oznam.style.display="none"; }
-    }
-
-
-function ZnovuPotvrdenie()
-                {
-window.open('../mzdy/potvrd_fo.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1',
- '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-   
-</script>
-</HEAD>
-<BODY class="white" id="white" onload="ObnovUI();" >
-
-<table class="h2" width="100%" >
-<tr>
-
-<td>EuroSecom  -  Potvrdenie zamestn·vateæa o zamestnancovi na ˙Ëely uplatnenia n·roku na nemocensk˙ d·vku
-
-</td>
-<td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
-</tr>
-</table>
-
-
-<?php if( $copern == 20 ) { ?>
-
-<table class="h2" width="100%" >
-<tr>
-<td align="left"><?php echo "Os.ËÌslo: $oc $meno $prie ";?>
-<a href="#" onClick="ZnovuPotvrdenie();">
-<img src='../obr/orig.png' width=20 height=15 border=0 alt='Znovu naËÌtaù hodnoty do potvrdenia z miezd' ></a>
-</td>
-</tr>
-</table>
-
-
-<?php                     } ?>
-
-
-<?php
-//upravy  udaje strana 1
-if ( $copern == 20 )
-    {
-?>
-<tr>
-<span id="Cele" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota musÌ byù celÈ kladnÈ ËÌslo</span>
-<span id="Datum" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- D·tum musÌ byù v tvare DD.MM.RRRR,DD.MM alebo DD naprÌklad 21.10.2008 , 21 program doplni na 21.<?php echo $kli_vume; ?>;</span>
-<span id="Desc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus byù desatinnÈ ËÌslo, maxim·lne 2 desatinnÈ miesta;</span>
-<span id="Desc4" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus byù desatinnÈ ËÌslo, maxim·lne 4 desatinnÈ miesta;</span>
-<span id="Desc1" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus byù desatinnÈ ËÌslo, maxim·lne 1 desatinnÈ miesto;</span>
-<span id="Oc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- OS» musÌ byù celÈ kladnÈ ËÌslo v rozsahu 1 aû 9999</span>
-<span id="Fx" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- MusÌte vyplniù vöetky poloûky vstupu</span>
-<span id="Ul" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:yellow; color:black;">
- Poloûka OS»=<?php echo $h_oc;?> spr·vne uloûen·</span>
-</tr>
-<table class="fmenu" width="100%" >
-<FORM name="formv1" class="obyc" method="post" action="potvrd_nemd.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>" >
-<tr>
-<td class="bmenu" width="10%"></td><td class="bmenu" width="10%"></td><td class="bmenu" width="10%"></td><td class="bmenu" width="10%"></td>
-<td class="bmenu" width="10%"></td><td class="bmenu" width="10%"></td><td class="bmenu" width="10%"></td><td class="bmenu" width="10%"></td>
-<td class="bmenu" width="10%"></td><td class="bmenu" width="10%"></td>
-</tr>
-
-<tr><td class="bmenu" colspan="4">Rodinn˝ stav</td>
-<td class="fmenu" colspan="2">
-<select size="1" name="rdstav" id="rdstav"  >
-<option value="0" >slobodn˝/slobodn·</option>
-<option value="1" >ûenat˝/vydat·</option>
-<option value="2" >vdovec/vdova</option>
-<option value="3" >rozveden˝/rozveden·</option>
-</td>
-<td class="obyc" colspan="2"><INPUT type="submit" id="uloz" name="uloz" value="Uloûiù a tlaËiù"></td>
-</tr>
-
-<tr><td class="bmenu" colspan="4">Zamestnanec vykon·va pr·cu na</td>
-<td class="fmenu" colspan="2">
-<select size="1" name="uzemie" id="uzemie"  >
-<option value="0" >˙zemÌ SR</option>
-<option value="1" >mimo ˙zemia SR</option>
-<option value="2" >na ˙zemÌ SR aj mimo ˙zemia SR</option>
-</td>
-</tr>
-
-<tr><td class="bmenu" colspan="4">Zamestnanec naposledy pracoval dÚa</td>
-<td class="fmenu" colspan="2"><input type="text" name="napprc" id="napprc" size="10" /></td>
-</tr>
-
-<tr><td class="bmenu" colspan="10"></td></tr>
-
-<tr><td class="bmenu" colspan="4">Preruöenie povinnÈho nemocenskÈho poistenia</td>
-<td class="fmenu" colspan="1">od <input type="text" name="preod1" id="preod1" size="10" /></td>
-<td class="fmenu" colspan="1">do <input type="text" name="predo1" id="predo1" size="10" /></td>
-<td class="bmenu" colspan="4">dÙvod <input type="text" name="predv1" id="predv1" size="50" /></td>
-</tr>
-<tr><td class="bmenu" colspan="4"> </td>
-<td class="fmenu" colspan="1">od <input type="text" name="preod2" id="preod2" size="10" /></td>
-<td class="fmenu" colspan="1">do <input type="text" name="predo2" id="predo2" size="10" /></td>
-<td class="bmenu" colspan="4">dÙvod <input type="text" name="predv2" id="predv2" size="50" /></td>
-</tr>
-<tr><td class="bmenu" colspan="4"> </td>
-<td class="fmenu" colspan="1">od <input type="text" name="preod3" id="preod3" size="10" /></td>
-<td class="fmenu" colspan="1">do <input type="text" name="predo3" id="predo3" size="10" /></td>
-<td class="bmenu" colspan="4">dÙvod <input type="text" name="predv3" id="predv3" size="50" /></td>
-</tr>
-<tr><td class="bmenu" colspan="4"> </td>
-<td class="fmenu" colspan="1">od <input type="text" name="preod4" id="preod4" size="10" /></td>
-<td class="fmenu" colspan="1">do <input type="text" name="predo4" id="predo4" size="10" /></td>
-<td class="bmenu" colspan="4">dÙvod <input type="text" name="predv4" id="predv4" size="50" /></td>
-</tr>
-
-<tr><td class="bmenu" colspan="10"></td></tr>
-
-<tr><td class="bmenu" colspan="4">PoboËke Soci·lnej poisùovne </td>
-<td class="bmenu" colspan="4">
-<select size="1" name="fe101" id="fe101"  >
-<option value="0" >nebola</option>
-<option value="1" >bola</option></select> podan· ûiadosù o vystavenie formul·ra E-101
-</td>
-</tr>
-
-<tr><td class="bmenu" colspan="10"></td></tr>
-
-
-<tr><td class="bmenu" colspan="10">Zamestnanec v RO Ëerpal rodiËovsk˙ dovolenku, vypl·calo sa mu rehabilitaËnÈ alebo rekvalifikaËnÈ,
- mal neprÌtomnosù z dÙvodu ˙Ëasti na ötrajku</td></tr>
-<tr><td class="bmenu" colspan="10"><input type="text" name="text51" id="text51" size="100" /></td></tr>
-<tr><td class="bmenu" colspan="10"><input type="text" name="text52" id="text52" size="100" /></td></tr>
-<tr><td class="bmenu" colspan="10"><input type="text" name="text53" id="text53" size="100" /></td></tr>
-
-<tr><td class="bmenu" colspan="10"></td></tr>
-
-<tr><td class="bmenu" colspan="3">Vymeriavacie z·klady na nemocenskÈ poistenie</td>
-<td class="bmenu" colspan="1" align="right">janu·r</td>
-<td class="fmenu" colspan="1">rok <input type="text" name="vo01" id="vo01" size="4" /></td>
-<td class="fmenu" colspan="2">VZ <input type="text" name="vz01" id="vz01" size="10" /></td>
-</tr>
-<tr><td class="bmenu" colspan="3"> </td>
-<td class="bmenu" colspan="1" align="right">febru·r</td>
-<td class="fmenu" colspan="1">rok <input type="text" name="vo02" id="vo02" size="4" /></td>
-<td class="fmenu" colspan="2">VZ <input type="text" name="vz02" id="vz02" size="10" /></td>
-</tr>
-<tr><td class="bmenu" colspan="3"> </td>
-<td class="bmenu" colspan="1" align="right">marec</td>
-<td class="fmenu" colspan="1">rok <input type="text" name="vo03" id="vo03" size="4" /></td>
-<td class="fmenu" colspan="2">VZ <input type="text" name="vz03" id="vz03" size="10" /></td>
-</tr>
-<tr><td class="bmenu" colspan="3"> </td>
-<td class="bmenu" colspan="1" align="right">aprÌl</td>
-<td class="fmenu" colspan="1">rok <input type="text" name="vo04" id="vo04" size="4" /></td>
-<td class="fmenu" colspan="2">VZ <input type="text" name="vz04" id="vz04" size="10" /></td>
-</tr>
-<tr><td class="bmenu" colspan="3"> </td>
-<td class="bmenu" colspan="1" align="right">m·j</td>
-<td class="fmenu" colspan="1">rok <input type="text" name="vo05" id="vo05" size="4" /></td>
-<td class="fmenu" colspan="2">VZ <input type="text" name="vz05" id="vz05" size="10" /></td>
-</tr>
-<tr><td class="bmenu" colspan="3"> </td>
-<td class="bmenu" colspan="1" align="right">j˙n</td>
-<td class="fmenu" colspan="1">rok <input type="text" name="vo06" id="vo06" size="4" /></td>
-<td class="fmenu" colspan="2">VZ <input type="text" name="vz06" id="vz06" size="10" /></td>
-</tr>
-<tr><td class="bmenu" colspan="3"> </td>
-<td class="bmenu" colspan="1" align="right">j˙l</td>
-<td class="fmenu" colspan="1">rok <input type="text" name="vo07" id="vo07" size="4" /></td>
-<td class="fmenu" colspan="2">VZ <input type="text" name="vz07" id="vz07" size="10" /></td>
-</tr>
-<tr><td class="bmenu" colspan="3"> </td>
-<td class="bmenu" colspan="1" align="right">august</td>
-<td class="fmenu" colspan="1">rok <input type="text" name="vo08" id="vo08" size="4" /></td>
-<td class="fmenu" colspan="2">VZ <input type="text" name="vz08" id="vz08" size="10" /></td>
-</tr>
-<tr><td class="bmenu" colspan="3"> </td>
-<td class="bmenu" colspan="1" align="right">september</td>
-<td class="fmenu" colspan="1">rok <input type="text" name="vo09" id="vo09" size="4" /></td>
-<td class="fmenu" colspan="2">VZ <input type="text" name="vz09" id="vz09" size="10" /></td>
-</tr>
-<tr><td class="bmenu" colspan="3"> </td>
-<td class="bmenu" colspan="1" align="right">oktÛber</td>
-<td class="fmenu" colspan="1">rok <input type="text" name="vo10" id="vo10" size="4" /></td>
-<td class="fmenu" colspan="2">VZ <input type="text" name="vz10" id="vz10" size="10" /></td>
-</tr>
-<tr><td class="bmenu" colspan="3"> </td>
-<td class="bmenu" colspan="1" align="right">november</td>
-<td class="fmenu" colspan="1">rok <input type="text" name="vo11" id="vo11" size="4" /></td>
-<td class="fmenu" colspan="2">VZ <input type="text" name="vz11" id="vz11" size="10" /></td>
-</tr>
-<tr><td class="bmenu" colspan="3"> </td>
-<td class="bmenu" colspan="1" align="right">december</td>
-<td class="fmenu" colspan="1">rok <input type="text" name="vo12" id="vo12" size="4" /></td>
-<td class="fmenu" colspan="2">VZ <input type="text" name="vz12" id="vz12" size="10" /></td>
-</tr>
-
-<tr><td class="bmenu" colspan="10"></td></tr>
-
-<tr><td class="bmenu" colspan="10">VymeriavacÌ z·klad, z ktorÈho by sa platilo poistnÈ na NP za kalend·rny mesiac, v ktorom vznikol
-dÙvod na poskytnutie nemocenskej d·vky ( uvedie sa v prÌpade, ak zamestnanec nemal v RO vymeriavacÌ z·klad )</td>
-</tr>
-<tr><td class="fmenu" colspan="2">VZ <input type="text" name="vzodhad" id="vzodhad" size="10" /></td></tr>
-
-<tr><td class="bmenu" colspan="10">Pozn·mka</td></tr>
-<tr><td class="bmenu" colspan="10"><input type="text" name="pozn" id="pozn" size="100" /></td></tr>
-
-<tr><td class="bmenu" colspan="10">DoplÚuj˙ce inform·cie na 2.stranu potvrdenia</td></tr>
-<tr><td class="bmenu" colspan="10">
-<textarea name="str2" id="str2" rows="8" cols="100" >
-<?php echo $str2; ?>
-</textarea>
-</td></tr>
-
-</FORM>
-
-</table>
-
-<div id="myBANKADelement"></div>
-<div id="jeBANKADelement"></div>
-
-
-<script type="text/javascript">
-
-</script>
-
-<?php
-//mysql_free_result($vysledok);
-    }
-//koniec uprav  udaje strana 1
+/////////////////////////////////////////KONIEC VYTLACENIA POTVRDENIA
 ?>
 
 
@@ -1517,9 +1348,9 @@ $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
-// celkovy koniec dokumentu
-$cislista = include("mzd_lista.php");
-       } while (false);
+//celkovy koniec dokumentu
+$cislista = include("mzd_lista_norm.php");
+} while (false);
 ?>
 </BODY>
 </HTML>
