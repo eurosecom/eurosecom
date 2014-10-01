@@ -137,6 +137,7 @@ $vzodhad = strip_tags($_REQUEST['vzodhad']);
 $pozn = strip_tags($_REQUEST['pozn']);
 $str2 = strip_tags($_REQUEST['str2']);
 $datum = strip_tags($_REQUEST['datum']);
+$datum_sql = SqlDatum($_REQUEST['datum']);
 
 $uprav="NO";
 
@@ -163,7 +164,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpotvrdenienemd SET ".
 " vz07='$vz07', vz08='$vz08', vz09='$vz09', vz10='$vz10', vz11='$vz11', vz12='$vz12', vzodhad='$vzodhad', ".
 " vo01='$vo01', vo02='$vo02', vo03='$vo03', vo04='$vo04', vo05='$vo05', vo06='$vo06', ".
 " vo07='$vo07', vo08='$vo08', vo09='$vo09', vo10='$vo10', vo11='$vo11', vo12='$vo12', ".
-" pozn='$pozn', str2='$str2', datum='$datum' ".
+" pozn='$pozn', str2='$str2', datum='$datum_sql' ".
 " WHERE oc = $cislo_oc"; 
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");  
@@ -643,6 +644,13 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenienemd".
 " SET vzspolu=vz01+vz02+vz03+vz04+vz05+vz06+vz07+vz08+vz09+vz10+vz11+vz12 WHERE oc >= 0";
 $oznac = mysql_query("$sqtoz");
 
+/////////////NACITANIE UDAJOV Z PARAMETROV
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $cicz=$riaddok->cicz;
+  }
 
 //nacitaj udaje pre upravu
 if ( $copern == 20 )
@@ -720,6 +728,8 @@ $datum = SkDatum($fir_riadok->datum);
 mysql_free_result($fir_vysledok);
     }
 //koniec nacitania
+
+
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -1289,9 +1299,10 @@ $pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(32,5,"$vzodhad","$rmc",1,"C");
 //$pdf->Cell(150,12," ","0",1,"L");
 //$pdf->Cell(10,4," ","0",0,"L");$pdf->Cell(160,4,"$fir_mzdt05 tel. $fir_mzdt04","0",1,"L");
 
+$datumsk=SkDatum($hlavicka->datum);
 
 if ( $copern == 10 ) $pozn=$hlavicka->pozn;
-$pdf->Cell(190,20," ","$rmc1",1,"L"); //dopyt, umiestni, až keï bude dátum predtým umiestnený
+$pdf->Cell(190,20,"$datumsk ","$rmc1",1,"L"); //dopyt, umiestni, až keï bude dátum predtým umiestnený
 $pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(170,5,"$pozn","$rmc",1,"L");
 }
 $i = $i + 1;
@@ -1326,7 +1337,7 @@ $ipole=$ipole+1;
 
 //dopyt, na 2.stranu nedáme aj dátum v tlaèi
 
-$pdf->Cell(190,50," ","$rmc1",1,"R");
+$pdf->Cell(190,50,"$datumsk ","$rmc1",1,"R");
 $pdf->Cell(135,6,"","$rmc1",0,"R");$pdf->Cell(45,7,"peèiatka a podpis","T",1,"C");
 $pdf->Cell(135,6,"","$rmc1",0,"R");$pdf->Cell(45,2,"zamestnávate¾a","0",1,"C");
 }
