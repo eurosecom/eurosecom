@@ -8,8 +8,6 @@ $urov = 3000;
 $copern = $_REQUEST['copern'];
 $tis = $_REQUEST['tis'];
 if(!isset($tis)) $tis = 0;
-$fort = $_REQUEST['fort'];
-if(!isset($fort)) $fort = 1;
 
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
@@ -21,6 +19,10 @@ require_once("../pswd/password.php");
     exit;
   endif;
   mysql_select_db($mysqldb);
+
+//ramcek fpdf 1=zap,0=vyp
+$rmc=1;
+$rmc1=0;
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -134,6 +136,7 @@ $vo12 = strip_tags($_REQUEST['vo12']);
 $vzodhad = strip_tags($_REQUEST['vzodhad']);
 $pozn = strip_tags($_REQUEST['pozn']);
 $str2 = strip_tags($_REQUEST['str2']);
+$datum = strip_tags($_REQUEST['datum']);
 
 $uprav="NO";
 
@@ -160,7 +163,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpotvrdenienemd SET ".
 " vz07='$vz07', vz08='$vz08', vz09='$vz09', vz10='$vz10', vz11='$vz11', vz12='$vz12', vzodhad='$vzodhad', ".
 " vo01='$vo01', vo02='$vo02', vo03='$vo03', vo04='$vo04', vo05='$vo05', vo06='$vo06', ".
 " vo07='$vo07', vo08='$vo08', vo09='$vo09', vo10='$vo10', vo11='$vo11', vo12='$vo12', ".
-" pozn='$pozn', str2='$str2' ".
+" pozn='$pozn', str2='$str2', datum='$datum' ".
 " WHERE oc = $cislo_oc"; 
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");  
@@ -601,7 +604,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo10=$obdrom, vz10=$vz10_
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo11=$obdrom, vz11=$vz11_08 WHERE oc >= 0 AND vz11 = 0"; $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo12=$obdrom, vz12=$vz12_08 WHERE oc >= 0 AND vz12 = 0"; $oznac = mysql_query("$sqtoz");
 
-if( $uzjezaznam == 1 )
+if ( $uzjezaznam == 1 )
 {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid ".
 " SET rdstav='$rdstav_08', uzemie='$uzemie_08', fe101='$fe101_08', text51='$text51_08', text52='$text52_08', text53='$text53_08', ".
@@ -712,6 +715,7 @@ $vo12 = $fir_riadok->vo12;
 $vzodhad = $fir_riadok->vzodhad;
 $pozn = $fir_riadok->pozn;
 $str2 = $fir_riadok->str2;
+$datum = SkDatum($fir_riadok->datum);
 
 mysql_free_result($fir_vysledok);
     }
@@ -797,6 +801,7 @@ var sirkawic = screen.width-10;
    document.formv1.vo12.value = '<?php echo "$vo12";?>';
    document.formv1.vzodhad.value = '<?php echo "$vzodhad";?>';
    document.formv1.pozn.value = '<?php echo "$pozn";?>';
+   document.formv1.datum.value = '<?php echo "$datum";?>';
   }
 <?php
 //koniec uprava
@@ -828,6 +833,12 @@ var sirkawic = screen.width-10;
   {
    window.open('potvrd_nemd.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + nextoc + '', '_self');
   }
+
+  function NavodVyplnenie()
+  {
+   window.open('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v14/narok_nemocenska_v14_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }
+
 
   function ZnovuPotvrdenie()
   {
@@ -912,12 +923,10 @@ if ( $copern == 20 )
    </td>
    <td>
     <div class="bar-btn-form-tool">
-     <img src="../obr/ikony/info_blue_icon.png" onclick="NavodVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool"> <!-- dopyt, aktualizova -->
+     <img src="../obr/ikony/info_blue_icon.png" onclick="NavodVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
+     <img src="../obr/ikony/download_blue_icon.png" onclick="ZnovuPotvrdenie();" title="Naèíta údaje" class="btn-form-tool"> <!-- dopyt, preveri -->
      <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacpdf(<?php echo $cislo_oc; ?>);"
-      title="Zobrazi v PDF" class="btn-form-tool"> <!-- dopyt, aktualizova -->
-<a href="#" onClick="ZnovuPotvrdenie();">
-<img src='../obr/orig.png' width=20 height=15 border=0 alt='Znovu naèíta hodnoty do potvrdenia z miezd' ></a>
-
+      title="Zobrazi v PDF" class="btn-form-tool">
     </div>
    </td>
   </tr>
@@ -926,7 +935,7 @@ if ( $copern == 20 )
 
 <div id="content">
 <FORM name="formv1" method="post" action="potvrd_nemd.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
- <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-top-formsave" style="top:4px;"> <!-- dopyt, pôvodný je na uloži a tlaèi -->
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-top-formsave" style="top:4px;">
 <img src="../dokumenty/mzdy_potvrdenia/narok_nemocenska_v14/narok_nemocenska_v14_form.jpg"
  alt="tlaèivo Potvrdenie zamestnávate¾a o zamestnancovi na úèely uplatnenia nároku na nemocenskú dávku 232kB" class="form-background">
 
@@ -1046,9 +1055,8 @@ if ( $copern == 20 )
 <input type="text" name="vz12" id="vz12" onkeyup="CiarkaNaBodku(this);"
  style="top:1040px; left:148px; width:90px;"/>
 
-<!-- dopyt, spolu cez text echo, disable input alebo mozes priamo dat echo do spanu-->
-<input type="text" name="vzspolu" id="vzspolu" onkeyup="CiarkaNaBodku(this);" value="<?php echo $vzspolu; ?>"
- style="top:1070px; left:148px; width:90px;"/>
+<span class="text-echo" style="top:1080px; left:180px;"><?php echo $vzspolu; ?></span>
+
 
 <!-- bod 7. -->
 <input type="text" name="vzodhad" id="vzodhad" onkeyup="CiarkaNaBodku(this);"
@@ -1056,14 +1064,18 @@ if ( $copern == 20 )
 
 <!-- bod 8. -->
 <span class="text-echo" style="top:1230px; left:80px;"><?php echo "$fir_mzdt05 tel. $fir_mzdt04"; ?></span>
-<!-- dopyt, dátum budeme rieši, v tlaèi som nenašiel -->
+<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);"
+ style="top:1250px; left:108px; width:80px;"/> <!-- dopyt, nechce bra aktuálne nahrávanú položku -->
+
+
+
+
 
 <!-- poznamka -->
 <label for="pozn" style="position:absolute; top:1279px; left:170px; font-size:12px; font-weight:bold;">Poznámka</label>
 <input type="text" name="pozn" id="pozn" style="top:1273px; right:10px; width:700px;"/>
 
 <!-- dopl.info na 2.stranu -->
-<!-- dopyt, necháme -->
 <label for="str2" style="position:absolute; top:640px; left:620px; font-size:12px; font-weight:bold;">Dopl. info na 2. stranu</label>
 <textarea name="str2" id="str2" style="top:656px; left:620px; width:300px; height:430px;"><?php echo $str2; ?></textarea>
 
@@ -1088,8 +1100,6 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenienemd".
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-
-
 if ( File_Exists("../tmp/potvrdenieFO.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/potvrdenieFO.$kli_uzid.pdf"); }
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
@@ -1100,7 +1110,6 @@ $velkost_strany = explode(",", $sirka_vyska);
 $pdf=new FPDF("P","mm", $velkost_strany );
 $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
-
 
 //vytlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdpotvrdenienemd".
@@ -1116,8 +1125,6 @@ $i=0;
 $j=0; //zaciatok strany ak by som chcel strankovat
   while ($i <= $pol )
   {
-
-
   if (@$zaznam=mysql_data_seek($sql,$i))
 {
 $hlavicka=mysql_fetch_object($sql);
@@ -1130,200 +1137,198 @@ $hlavicka=mysql_fetch_object($sql);
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
 $pdf->AddPage();
-$pdf->SetFont('arial','',10);
-
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 
-if ( File_Exists('../dokumenty/mzdy_potvrdenia/narok_na_NemD2011.jpg') AND $i == 0 )
+if ( File_Exists('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v14/narok_nemocenska_v14.jpg') AND $i == 0 )
 {
-if( $fort == 1 ) { $pdf->Image('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v14/narok_nemocenska_v14.jpg',10,13,195,286); } //dopyt, fort zruši, rozmery na naše štandard viï štatistika
+$pdf->Image('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v14/narok_nemocenska_v14.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+$pdf->SetFont('arial','',9);
+
+//zamestnanec
+$pdf->Cell(190,13," ","$rmc1",1,"L");
+$pdf->Cell(25,4," ","$rmc1",0,"L");$pdf->Cell(25,4,"$hlavicka->rdc $hlavicka->rdk","$rmc",1,"L");
+$pdf->Cell(15,4," ","$rmc1",0,"L");$pdf->Cell(58,4,"$hlavicka->meno","$rmc",0,"L");
+$pdf->Cell(16,4," ","$rmc1",0,"L");$pdf->Cell(74,4,"$hlavicka->prie","$rmc",1,"L");
+$dar=SkDatum($hlavicka->dar);
+$pdf->Cell(30,3," ","$rmc1",0,"L");$pdf->Cell(43,3,"$dar","$rmc",0,"L");$pdf->Cell(19,3," ","$rmc1",0,"L");
+if ( $hlavicka->rdstav == 0 ) { $pdf->Cell(30,3,"slobodný/slobodná","$rmc",1,"L"); }
+if ( $hlavicka->rdstav == 1 ) { $pdf->Cell(30,3,"ženatý/vydatá","$rmc",1,"L"); }
+if ( $hlavicka->rdstav == 2 ) { $pdf->Cell(68,3,"vdovec/vdova","$rmc",1,"L"); }
+if ( $hlavicka->rdstav == 3 ) { $pdf->Cell(30,3,"rozvedený/rozvedená","$rmc",1,"L"); }
+$pdf->Cell(59,4," ","$rmc1",0,"L");$pdf->Cell(104,4,"$hlavicka->zuli $hlavicka->zcdm, $hlavicka->zmes, $hlavicka->zpsc","$rmc",1,"L");
+$pdf->Cell(59,4," ","$rmc1",0,"L");$pdf->Cell(104,4,"$fir_fnaz, $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",1,"L");
+$pdf->Cell(59,4," ","$rmc1",0,"L");$pdf->Cell(80,3,"IÈZ: $cicz","$rmc",1,"L");  //dopyt, nefunguje ani v html
+$pdf->Cell(48,4," ","$rmc1",0,"L");
+if ( $hlavicka->uzemie == 0 )
+{
+$pdf->Cell(21,4," ","$rmc",0,"L");$pdf->Cell(77,4,"----------------------------------------------------------------------","$rmc1",1,"L");
+}
+if ( $hlavicka->uzemie == 1 )
+{
+$pdf->Cell(22,4,"-------------------","$rmc1",0,"L");$pdf->Cell(26,4," ","$rmc",0,"L");$pdf->Cell(50,4,"---------------------------------------------","$rmc1",1,"L");
+}
+if ( $hlavicka->uzemie == 2 )
+{
+$pdf->Cell(22,4,"-------------------","$rmc1",0,"L");$pdf->Cell(27,4,"----------------------","$rmc1",0,"L");$pdf->Cell(49,4," ","$rmc",1,"L");
 }
 
-$pdf->SetY(10);
-$pdf->SetFont('arial','',8);
-$obdobie=$kli_vrok;
-
-$r01=$hlavicka->r01;
-if( $hlavicka->r01 == 0 ) $r01="";
-
-$dar=SkDatum($hlavicka->dar);
+//bod 1.
 $dan=SkDatum($hlavicka->dan);
-$dav=SkDatum($hlavicka->dav);
-if( $dav == "00.00.0000" ) $dav="";
-$napprc=SkDatum($hlavicka->napprc);
-if( $napprc == "00.00.0000" ) $napprc="";
+$dav=SkDatum($hlavicka->dav); if ( $dav == "00.00.0000" ) $dav="";
+$pdf->Cell(150,2," ","$rmc1",1,"L");
+$pdf->Cell(139,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$dan","$rmc",1,"L");
+$pdf->Cell(121,4," ","$rmc1",0,"L");$pdf->Cell(20,3,"$dav","$rmc",1,"L");
 
+//bod 2.
+$napprc=SkDatum($hlavicka->napprc); if ( $napprc == "00.00.0000" ) $napprc="";
+$pdf->Cell(150,2," ","$rmc1",1,"L");
+$pdf->Cell(64,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$napprc","$rmc",1,"L");
 
-$pdf->Cell(190,17,"                          ","0",1,"L");
-$pdf->Cell(25,4," ","0",0,"L");$pdf->Cell(30,4,"$hlavicka->rdc $hlavicka->rdk","0",1,"L");
-$pdf->Cell(25,4," ","0",0,"L");$pdf->Cell(30,4,"$hlavicka->meno","0",0,"L");$pdf->Cell(45,4," ","0",0,"L");$pdf->Cell(30,4,"$hlavicka->prie","0",1,"L");
-$pdf->Cell(35,3," ","0",0,"L");$pdf->Cell(30,3,"$dar","0",0,"L");$pdf->Cell(35,3," ","0",0,"L");
-
-
-if( $hlavicka->rdstav == 0 ) { $pdf->Cell(30,3,"slobodný/slobodná","0",1,"L"); }
-if( $hlavicka->rdstav == 1 ) { $pdf->Cell(30,3,"ženatý/vydatá","0",1,"L"); }
-if( $hlavicka->rdstav == 2 ) { $pdf->Cell(30,3,"vdovec/vdova","0",1,"L"); }
-if( $hlavicka->rdstav == 3 ) { $pdf->Cell(30,3,"rozvedený/rozvedená","0",1,"L"); }
-
-$pdf->Cell(65,4," ","0",0,"L");$pdf->Cell(80,4,"$hlavicka->zuli $hlavicka->zcdm, $hlavicka->zmes, $hlavicka->zpsc","0",1,"L");
-
-$pdf->Cell(65,4," ","0",0,"L");$pdf->Cell(80,4,"$fir_fnaz, $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","0",1,"L");
-$pdf->Cell(65,4," ","0",0,"L");$pdf->Cell(80,4,"IÈZ: $cicz","0",1,"L");
-
-
-$pdf->Cell(50,4," ","0",0,"L");
-if( $hlavicka->uzemie == 0 ) { $pdf->Cell(40,4,"na území SR","0",1,"L"); }
-if( $hlavicka->uzemie == 1 ) { $pdf->Cell(40,4,"mimo územia SR","0",1,"L"); }
-if( $hlavicka->uzemie == 2 ) { $pdf->Cell(40,4,"na území SR aj mimo územia SR","0",1,"L"); }
-
-$pdf->Cell(150,2," ","0",1,"L");
-$pdf->Cell(60,4," ","0",0,"L");$pdf->Cell(20,4,"$dan","0",0,"L");$pdf->Cell(60,4," ","0",0,"L");$pdf->Cell(20,4,"$dav","0",1,"L");
-
-$pdf->Cell(150,2," ","0",1,"L");
-$pdf->Cell(70,4," ","0",0,"L");$pdf->Cell(20,4,"$napprc","0",1,"L");
-
-//obdobia neplatenia
-$preod1=SkDatum($hlavicka->preod1);
-if( $preod1 == "00.00.0000" ) $preod1="";
-$predo1=SkDatum($hlavicka->predo1);
-if( $predo1 == "00.00.0000" ) $predo1="";
-$predv1=$hlavicka->predv1;
-$preod2=SkDatum($hlavicka->preod2);
-if( $preod2 == "00.00.0000" ) $preod2="";
-$predo2=SkDatum($hlavicka->predo2);
-if( $predo2 == "00.00.0000" ) $predo2="";
-$predv2=$hlavicka->predv2;
-$preod3=SkDatum($hlavicka->preod3);
-if( $preod3 == "00.00.0000" ) $preod3="";
-$predo3=SkDatum($hlavicka->predo3);
-if( $predo3 == "00.00.0000" ) $predo3="";
-$predv3=$hlavicka->predv3;
-$preod4=SkDatum($hlavicka->preod4);
-if( $preod4 == "00.00.0000" ) $preod4="";
-$predo4=SkDatum($hlavicka->predo4);
-if( $predo4 == "00.00.0000" ) $predo4="";
-$predv4=$hlavicka->predv4;
-
-
-$pdf->Cell(150,9," ","0",1,"L");
-$pdf->Cell(10,4," ","0",0,"L");$pdf->Cell(20,4,"$preod1","0",0,"L");
-$pdf->Cell(25,4," ","0",0,"L");$pdf->Cell(20,4,"$predo1","0",0,"L");
-$pdf->Cell(28,4," ","0",0,"L");$pdf->Cell(80,4,"$predv1","0",1,"L");
-
-$pdf->Cell(10,4," ","0",0,"L");$pdf->Cell(20,4,"$preod2","0",0,"L");
-$pdf->Cell(25,4," ","0",0,"L");$pdf->Cell(20,4,"$predo2","0",0,"L");
-$pdf->Cell(28,4," ","0",0,"L");$pdf->Cell(80,4,"$predv2","0",1,"L");
-
-$pdf->Cell(10,4," ","0",0,"L");$pdf->Cell(20,4,"$preod3","0",0,"L");
-$pdf->Cell(25,4," ","0",0,"L");$pdf->Cell(20,4,"$predo3","0",0,"L");
-$pdf->Cell(28,4," ","0",0,"L");$pdf->Cell(80,4,"$predv3","0",1,"L");
-
-$pdf->Cell(10,4," ","0",0,"L");$pdf->Cell(20,4,"$preod4","0",0,"L");
-$pdf->Cell(25,4," ","0",0,"L");$pdf->Cell(20,4,"$predo4","0",0,"L");
-$pdf->Cell(28,4," ","0",0,"L");$pdf->Cell(80,4,"$predv4","0",1,"L");
-
-$pdf->Cell(150,2," ","0",1,"L");
-$pdf->Cell(55,4," ","0",0,"L");
-if( $hlavicka->fe101 == 0 ) { $pdf->Cell(40,4,"nebola","0",1,"L"); }
-if( $hlavicka->fe101 == 1 ) { $pdf->Cell(40,4,"bola","0",1,"L"); }
-
-$pdf->Cell(150,13," ","0",1,"L");
-$pdf->Cell(10,4," ","0",0,"L");$pdf->Cell(170,4,"$hlavicka->text51","0",1,"L");
-$pdf->Cell(10,4," ","0",0,"L");$pdf->Cell(170,4,"$hlavicka->text52","0",1,"L");
-$pdf->Cell(10,4," ","0",0,"L");$pdf->Cell(170,4,"$hlavicka->text53","0",1,"L");
-
-
-//vym.zaklady
-$vo01=$hlavicka->vo01; if( $vo01 < 10 ) $vo01="0".$vo01;
-$vo02=$hlavicka->vo02; if( $vo02 < 10 ) $vo02="0".$vo02;
-$vo03=$hlavicka->vo03; if( $vo03 < 10 ) $vo03="0".$vo03;
-$vo04=$hlavicka->vo04; if( $vo04 < 10 ) $vo04="0".$vo04;
-$vo05=$hlavicka->vo05; if( $vo05 < 10 ) $vo05="0".$vo05;
-$vo06=$hlavicka->vo06; if( $vo06 < 10 ) $vo06="0".$vo06;
-$vo07=$hlavicka->vo07; if( $vo07 < 10 ) $vo07="0".$vo07;
-$vo08=$hlavicka->vo08; if( $vo08 < 10 ) $vo08="0".$vo08;
-$vo09=$hlavicka->vo09; if( $vo09 < 10 ) $vo09="0".$vo09;
-$vo10=$hlavicka->vo10; if( $vo10 < 10 ) $vo10="0".$vo10;
-$vo11=$hlavicka->vo11; if( $vo11 < 10 ) $vo11="0".$vo11;
-$vo12=$hlavicka->vo12; if( $vo12 < 10 ) $vo12="0".$vo12;
-
-
-$pdf->SetFont('arial','',9);
-$pdf->Cell(150,34," ","0",1,"L");
-$pdf->Cell(21,5," ","0",0,"L");$pdf->Cell(11,5,"$vo01","0",0,"L");$pdf->Cell(17,5,"$hlavicka->vz01","0",1,"R");
-$pdf->Cell(21,5," ","0",0,"L");$pdf->Cell(11,5,"$vo02","0",0,"L");$pdf->Cell(17,5,"$hlavicka->vz02","0",1,"R");
-$pdf->Cell(21,6," ","0",0,"L");$pdf->Cell(11,6,"$vo03","0",0,"L");$pdf->Cell(17,6,"$hlavicka->vz03","0",1,"R");
-$pdf->Cell(21,5," ","0",0,"L");$pdf->Cell(11,5,"$vo04","0",0,"L");$pdf->Cell(17,5,"$hlavicka->vz04","0",1,"R");
-$pdf->Cell(21,5," ","0",0,"L");$pdf->Cell(11,5,"$vo05","0",0,"L");$pdf->Cell(17,5,"$hlavicka->vz05","0",1,"R");
-$pdf->Cell(21,6," ","0",0,"L");$pdf->Cell(11,6,"$vo06","0",0,"L");$pdf->Cell(17,5,"$hlavicka->vz06","0",1,"R");
-$pdf->Cell(21,5," ","0",0,"L");$pdf->Cell(11,5,"$vo07","0",0,"L");$pdf->Cell(17,6,"$hlavicka->vz07","0",1,"R");
-$pdf->Cell(21,5," ","0",0,"L");$pdf->Cell(11,5,"$vo08","0",0,"L");$pdf->Cell(17,5,"$hlavicka->vz08","0",1,"R");
-$pdf->Cell(21,6," ","0",0,"L");$pdf->Cell(11,6,"$vo09","0",0,"L");$pdf->Cell(17,6,"$hlavicka->vz09","0",1,"R");
-$pdf->Cell(21,5," ","0",0,"L");$pdf->Cell(11,5,"$vo10","0",0,"L");$pdf->Cell(17,5,"$hlavicka->vz10","0",1,"R");
-$pdf->Cell(21,5," ","0",0,"L");$pdf->Cell(11,5,"$vo11","0",0,"L");$pdf->Cell(17,5,"$hlavicka->vz11","0",1,"R");
-$pdf->Cell(21,5," ","0",0,"L");$pdf->Cell(11,5,"$vo12","0",0,"L");$pdf->Cell(17,5,"$hlavicka->vz12","0",1,"R");
-
-$pdf->Cell(21,6," ","0",0,"L");$pdf->Cell(11,6," ","0",0,"L");$pdf->Cell(17,6,"$hlavicka->vzspolu","0",1,"R");
+//bod 3.
 $pdf->SetFont('arial','',8);
+$preod1=SkDatum($hlavicka->preod1); if ( $preod1 == "00.00.0000" ) $preod1="";
+$predo1=SkDatum($hlavicka->predo1); if ( $predo1 == "00.00.0000" ) $predo1="";
+$predv1=$hlavicka->predv1;
+$preod2=SkDatum($hlavicka->preod2); if ( $preod2 == "00.00.0000" ) $preod2="";
+$predo2=SkDatum($hlavicka->predo2); if ( $predo2 == "00.00.0000" ) $predo2="";
+$predv2=$hlavicka->predv2;
+$preod3=SkDatum($hlavicka->preod3); if ( $preod3 == "00.00.0000" ) $preod3="";
+$predo3=SkDatum($hlavicka->predo3); if ( $predo3 == "00.00.0000" ) $predo3="";
+$predv3=$hlavicka->predv3;
+$preod4=SkDatum($hlavicka->preod4); if ( $preod4 == "00.00.0000" ) $preod4="";
+$predo4=SkDatum($hlavicka->predo4); if ( $predo4 == "00.00.0000" ) $predo4="";
+$predv4=$hlavicka->predv4;
+$pdf->Cell(150,9.5," ","$rmc1",1,"L");
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(20,3,"$preod1","$rmc",0,"L");
+$pdf->Cell(25,4," ","$rmc1",0,"L");$pdf->Cell(20,3,"$predo1","$rmc",0,"L");
+$pdf->Cell(23,4," ","$rmc1",0,"L");$pdf->Cell(64,3,"$predv1","$rmc",1,"L");
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$preod2","$rmc",0,"L");
+$pdf->Cell(25,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$predo2","$rmc",0,"L");
+$pdf->Cell(23,4," ","$rmc1",0,"L");$pdf->Cell(64,4,"$predv2","$rmc",1,"L");
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(20,3.5,"$preod3","$rmc",0,"L");
+$pdf->Cell(25,4," ","$rmc1",0,"L");$pdf->Cell(20,3.5,"$predo3","$rmc",0,"L");
+$pdf->Cell(23,4," ","$rmc1",0,"L");$pdf->Cell(64,3.5,"$predv3","$rmc",1,"L");
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$preod4","$rmc",0,"L");
+$pdf->Cell(25,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$predo4","$rmc",0,"L");
+$pdf->Cell(23,4," ","$rmc1",0,"L");$pdf->Cell(64,4,"$predv4","$rmc",1,"L");
+$pdf->SetFont('arial','',9);
 
-$vzodhad=$hlavicka->vzodhad;
-if( $vzodhad == 0 ) $vzodhad="";
+//bod 4.
+$pdf->Cell(150,2," ","$rmc1",1,"L");
+$pdf->Cell(50,4," ","$rmc1",0,"L");
+if ( $hlavicka->fe101 == 0 )
+{
+$pdf->Cell(40,4,"-------","$rmc1",1,"L");
+}
+if ( $hlavicka->fe101 == 1 )
+{
+$pdf->Cell(9,4," ","$rmc",0,"L");$pdf->Cell(20,4,"-----------","$rmc1",1,"L");
+}
+
+//bod 5.
+$pdf->Cell(150,12.5," ","$rmc1",1,"L");
+$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(156,4,"$hlavicka->text51","$rmc",1,"L");
+$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(156,4,"$hlavicka->text52","$rmc",1,"L");
+$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(156,3.5,"$hlavicka->text53","$rmc",1,"L");
+
+//bod 6.
+$vo01=$hlavicka->vo01; if ( $vo01 < 10 ) $vo01="0".$vo01;
+$vo02=$hlavicka->vo02; if ( $vo02 < 10 ) $vo02="0".$vo02;
+$vo03=$hlavicka->vo03; if ( $vo03 < 10 ) $vo03="0".$vo03;
+$vo04=$hlavicka->vo04; if ( $vo04 < 10 ) $vo04="0".$vo04;
+$vo05=$hlavicka->vo05; if ( $vo05 < 10 ) $vo05="0".$vo05;
+$vo06=$hlavicka->vo06; if ( $vo06 < 10 ) $vo06="0".$vo06;
+$vo07=$hlavicka->vo07; if ( $vo07 < 10 ) $vo07="0".$vo07;
+$vo08=$hlavicka->vo08; if ( $vo08 < 10 ) $vo08="0".$vo08;
+$vo09=$hlavicka->vo09; if ( $vo09 < 10 ) $vo09="0".$vo09;
+$vo10=$hlavicka->vo10; if ( $vo10 < 10 ) $vo10="0".$vo10;
+$vo11=$hlavicka->vo11; if ( $vo11 < 10 ) $vo11="0".$vo11;
+$vo12=$hlavicka->vo12; if ( $vo12 < 10 ) $vo12="0".$vo12;
+$pdf->Cell(150,33," ","$rmc1",1,"L");
+$pdf->Cell(18,5," ","$rmc1",0,"L");$pdf->Cell(10,5,"$vo01","$rmc",0,"L");
+$pdf->Cell(22,5,"$hlavicka->vz01","$rmc",1,"R");
+$pdf->Cell(19,5," ","$rmc1",0,"L");$pdf->Cell(9,5,"$vo02","$rmc",0,"L");
+$pdf->Cell(22,5,"$hlavicka->vz02","$rmc",1,"R");
+$pdf->Cell(17,6," ","$rmc1",0,"L");$pdf->Cell(11,5,"$vo03","$rmc",0,"L");
+$pdf->Cell(22,5,"$hlavicka->vz03","$rmc",1,"R");
+$pdf->Cell(15,5," ","$rmc1",0,"L");$pdf->Cell(13,6,"$vo04","$rmc",0,"L");
+$pdf->Cell(22,6,"$hlavicka->vz04","$rmc",1,"R");
+$pdf->Cell(14,5," ","$rmc1",0,"L");$pdf->Cell(14,4,"$vo05","$rmc",0,"L");
+$pdf->Cell(22,4,"$hlavicka->vz05","$rmc",1,"R");
+$pdf->Cell(14,6," ","$rmc1",0,"L");$pdf->Cell(14,6,"$vo06","$rmc",0,"L");
+$pdf->Cell(22,5,"$hlavicka->vz06","$rmc",1,"R");
+$pdf->Cell(13,5," ","$rmc1",0,"L");$pdf->Cell(15,6,"$vo07","$rmc",0,"L");
+$pdf->Cell(22,6,"$hlavicka->vz07","$rmc",1,"R");
+$pdf->Cell(18,5," ","$rmc1",0,"L");$pdf->Cell(10,4,"$vo08","$rmc",0,"L");
+$pdf->Cell(22,4,"$hlavicka->vz08","$rmc",1,"R");
+$pdf->Cell(23,6," ","$rmc1",0,"L");$pdf->Cell(5,6,"$vo09","$rmc",0,"L");
+$pdf->Cell(22,6,"$hlavicka->vz09","$rmc",1,"R");
+$pdf->Cell(20,5," ","$rmc1",0,"L");$pdf->Cell(8,5,"$vo10","$rmc",0,"L");
+$pdf->Cell(22,5,"$hlavicka->vz10","$rmc",1,"R");
+$pdf->Cell(22,5," ","$rmc1",0,"L");$pdf->Cell(6,5,"$vo11","$rmc",0,"L");
+$pdf->Cell(22,5,"$hlavicka->vz11","$rmc",1,"R");
+$pdf->Cell(22,5," ","$rmc1",0,"L");$pdf->Cell(6,5,"$vo12","$rmc",0,"L");
+$pdf->Cell(22,5,"$hlavicka->vz12","$rmc",1,"R");
+$pdf->Cell(28,6," ","$rmc1",0,"L");$pdf->Cell(22,6,"$hlavicka->vzspolu","$rmc",1,"R");
+
+//bod 7.
+$vzodhad=$hlavicka->vzodhad; if ( $vzodhad == 0 ) $vzodhad="";
+$pdf->Cell(150,17," ","$rmc1",1,"L");
+$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(32,5,"$vzodhad","$rmc",1,"C");
+
+//bod 8.
+//dopyt, tu by mohol by, ten èo si plní povinnosti voèi z SP - z dopl. údajov SP aj vo formulári
+
+//datum
+//dopyt, nefunguje input
+
+//$pdf->SetFont('arial','',8);
+//$pdf->Cell(150,12," ","0",1,"L");
+//$pdf->Cell(10,4," ","0",0,"L");$pdf->Cell(160,4,"$fir_mzdt05 tel. $fir_mzdt04","0",1,"L");
 
 
-$pdf->Cell(150,19," ","0",1,"L");
-$pdf->Cell(10,4," ","0",0,"L");$pdf->Cell(20,4,"$vzodhad","0",1,"R");
-
-
-$pdf->Cell(150,12," ","0",1,"L");
-$pdf->Cell(10,4," ","0",0,"L");$pdf->Cell(160,4,"$fir_mzdt05 tel. $fir_mzdt04","0",1,"L");
-
-
-
-
-if( $copern == 10 ) $pozn=$hlavicka->pozn;
-
-$pdf->Cell(190,20,"                          ","0",1,"L");
-$pdf->Cell(130,5,"$pozn","0",1,"L");
-
-
+if ( $copern == 10 ) $pozn=$hlavicka->pozn;
+$pdf->Cell(190,20," ","$rmc1",1,"L"); //dopyt, umiestni, až keï bude dátum predtým umiestnený
+$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(170,5,"$pozn","$rmc",1,"L");
 }
 $i = $i + 1;
-
   }
 
-
-
 $pole = explode("\r\n", $hlavicka->str2);
-
-if( $pole[0] != '' )
+if ( $pole[0] != '' )
 {
-
 $pdf->AddPage();
-$pdf->SetFont('arial','',10);
-
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 
 $pdf->SetY(10);
-$pdf->SetFont('arial','',8);
-
+$pdf->SetFont('arial','',9);
 
 $ipole=1;
 foreach( $pole as $hodnota ) {
 if ( $ipole == 1 )
 { $pdf->Cell(150,5,"Potvrdenie zamestnávate¾a o zamestnancovi na úèely uplatnenia nároku na nemocenskú dávku","B",0,"L");
-  $pdf->Cell(0,5," 2.strana","B",1,"R");
-  $pdf->Cell(0,5,"  ","0",1,"R");
+  $pdf->Cell(0,5,"2.strana","B",1,"R");
 }
-if( $ipole == 1 ) { $pdf->Cell(150,5,"Rod.èíslo: $hlavicka->rdc $hlavicka->rdk Meno,priezvisko: $hlavicka->meno $hlavicka->prie","0",1,"L"); $pdf->Cell(0,5,"  ","0",1,"R");}
-$pdf->Cell(150,5,"$hodnota","0",1,"L");
+if ( $ipole == 1 )
+{
+$pdf->Cell(190,8," ","$rmc1",1,"R");
+$pdf->Cell(22,5,"Zamestnanec","B",1,"C");
+$pdf->Cell(150,6,"Rod.èíslo: $hlavicka->rdc $hlavicka->rdk   Meno,priezvisko: $hlavicka->meno $hlavicka->prie","$rmc",1,"L");
+}
+$pdf->Cell(190,8," ","$rmc1",1,"R");
+$pdf->Cell(150,5,"$hodnota","$rmc",1,"L");
 $ipole=$ipole+1;
                              }
 
-$pdf->Cell(0,20,"  ","0",1,"R");
-$pdf->Cell(145,5,"","0",0,"R");$pdf->Cell(0,5,"","B",1,"R");
-$pdf->Cell(145,5,"","0",0,"R");$pdf->Cell(0,5,"peèiatka,podpis zamestnávate¾a","0",1,"C");
+//dopyt, na 2.stranu nedáme aj dátum v tlaèi
+
+$pdf->Cell(190,50," ","$rmc1",1,"R");
+$pdf->Cell(135,6,"","$rmc1",0,"R");$pdf->Cell(45,7,"peèiatka a podpis","T",1,"C");
+$pdf->Cell(135,6,"","$rmc1",0,"R");$pdf->Cell(45,2,"zamestnávate¾a","0",1,"C");
 }
 
 
