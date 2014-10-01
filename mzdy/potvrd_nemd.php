@@ -21,7 +21,7 @@ require_once("../pswd/password.php");
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=1;
+$rmc=0;
 $rmc1=0;
 
 //datumove funkcie
@@ -925,7 +925,7 @@ if ( $copern == 20 )
    <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
   </tr>
   <tr>
-   <td class="header">Potvrdenie nároku na nemocenskú dávku - <span class="subheader"><?php echo "$oc $meno $prie";?></span>
+   <td class="header">Potvrdenie nároku na nemocenskú dávku - <span class="subheader"><?php echo "$oc $meno $prie"; ?></span>
 <?php if ( $novy == 0 ) { ?>
     <img src='../obr/prev.png' onclick="prevOC(<?php echo $prev_oc; ?>);" title="Os.è. <?php echo $prev_oc; ?>" class="navoc-icon">
     <img src='../obr/next.png' onclick="nextOC(<?php echo $next_oc; ?>);" title="Os.è. <?php echo $next_oc; ?>" class="navoc-icon">
@@ -953,144 +953,120 @@ if ( $copern == 20 )
 <span class="text-echo" style="top:190px; left:50px;"><?php echo $zamestnavatel; ?></span>
 
 <!-- zamestnanec -->
-<span class="text-echo" style="top:86px; left:135px;"><?php echo $rodne; ?></span>
-<span class="text-echo" style="top:110px; left:75px;"><?php echo $meno; ?></span>
-<span class="text-echo" style="top:110px; left:420px;"><?php echo $prie; ?></span>
-<span class="text-echo" style="top:130px; left:150px;"><?php echo $dar_sk; ?></span>
-<select size="1" name="rdstav" id="rdstav" style="top:130px; left:440px;">
+<span class="text-echo" style="top:85px; left:132px;"><?php echo $rodne; ?></span>
+<span class="text-echo" style="top:105px; left:85px;"><?php echo $meno; ?></span>
+<span class="text-echo" style="top:105px; left:425px;"><?php echo $prie; ?></span>
+<span class="text-echo" style="top:130px; left:160px;"><?php echo $dar_sk; ?></span>
+<select size="1" name="rdstav" id="rdstav" style="top:128px; left:440px;">
  <option value="0">slobodný/slobodná</option>
  <option value="1">ženatý/vydatá</option>
  <option value="2">vdovec/vdova</option>
  <option value="3">rozvedený/rozvedená</option>
 </select>
-<span class="text-echo" style="top:160px; left:150px;"><?php echo $adresa; ?></span>
-
-<select size="1" name="uzemie" id="uzemie" style="top:210px; left:260px;">
- <option value="0" >na území SR</option>
- <option value="1" >mimo územia SR</option>
- <option value="2" >na území aj mimo územia SR</option>
+<span class="text-echo" style="top:171px; left:290px;"><?php echo $adresa; ?></span>
+<select size="1" name="uzemie" id="uzemie" style="top:210px; left:240px;">
+ <option value="0">na území SR</option>
+ <option value="1">mimo územia SR</option>
+ <option value="2">na území aj mimo územia SR</option>
 </select>
 
 <!-- bod 1. -->
-<!-- dopyt, tu má by dátum nástupu a výstupu -->
-<span class="text-echo" style="top:240px; left:630px;"><?php echo $dan_sk; ?></span>
-<span class="text-echo" style="top:260px; left:580px;"><?php echo $dav_sk; ?></span>
+<span class="text-echo" style="top:238px; left:630px;"><?php echo $dan_sk; ?></span>
+<span class="text-echo" style="top:259px; left:570px;"><?php echo $dav_sk; ?></span>
 
 <!-- bod 2. -->
 <input type="text" name="napprc" id="napprc" onkeyup="CiarkaNaBodku(this);"
- style="top:280px; left:326px; width:80px;"/>
+ style="top:284px; left:310px; width:80px;"/>
 
 <!-- bod 3. -->
 <input type="text" name="preod1" id="preod1" onkeyup="CiarkaNaBodku(this);"
  style="top:350px; left:70px; width:80px;"/>
 <input type="text" name="predo1" id="predo1" onkeyup="CiarkaNaBodku(this);"
- style="top:350px; left:300px; width:80px;"/>
+ style="top:350px; left:270px; width:80px;"/>
 <input type="text" name="predv1" id="predv1" style="top:350px; left:470px; width:400px;"/>
-
 <input type="text" name="preod2" id="preod2" onkeyup="CiarkaNaBodku(this);"
- style="top:380px; left:70px; width:80px;"/>
+ style="top:376px; left:70px; width:80px;"/>
 <input type="text" name="predo2" id="predo2" onkeyup="CiarkaNaBodku(this);"
- style="top:380px; left:300px; width:80px;"/>
-<input type="text" name="predv2" id="predv2" style="top:380px; left:470px; width:400px;"/>
-
+ style="top:376px; left:270px; width:80px;"/>
+<input type="text" name="predv2" id="predv2" style="top:376px; left:470px; width:400px;"/>
 <input type="text" name="preod3" id="preod3" onkeyup="CiarkaNaBodku(this);"
- style="top:400px; left:70px; width:80px;"/>
+ style="top:402px; left:70px; width:80px;"/>
 <input type="text" name="predo3" id="predo3" onkeyup="CiarkaNaBodku(this);"
- style="top:400px; left:300px; width:80px;"/>
-<input type="text" name="predv3" id="predv3" style="top:400px; left:470px; width:400px;"/>
+ style="top:402px; left:270px; width:80px;"/>
+<input type="text" name="predv3" id="predv3" style="top:402px; left:470px; width:400px;"/>
 
 <input type="text" name="preod4" id="preod4" onkeyup="CiarkaNaBodku(this);"
- style="top:430px; left:70px; width:80px;"/>
+ style="top:427px; left:70px; width:80px;"/>
 <input type="text" name="predo4" id="predo4" onkeyup="CiarkaNaBodku(this);"
- style="top:430px; left:300px; width:80px;"/>
-<input type="text" name="predv4" id="predv4" style="top:430px; left:470px; width:400px;"/>
+ style="top:427px; left:270px; width:80px;"/>
+<input type="text" name="predv4" id="predv4" style="top:427px; left:470px; width:400px;"/>
 
 <!-- bod 4. -->
-<select size="1" name="fe101" id="fe101" style="top:460px; left:260px;">
+<select size="1" name="fe101" id="fe101" style="top:458px; left:250px;">
  <option value="0">nebola</option>
  <option value="1">bola</option>
 </select>
 
 <!-- bod 5. -->
-<input type="text" name="text51" id="text51" style="top:530px; left:47px; width:800px;"/>
-<input type="text" name="text52" id="text52" style="top:560px; left:47px; width:800px;"/>
-<input type="text" name="text53" id="text53" style="top:590px; left:47px; width:800px;"/>
+<input type="text" name="text51" id="text51" style="top:531px; left:47px; width:800px;"/>
+<input type="text" name="text52" id="text52" style="top:558px; left:47px; width:800px;"/>
+<input type="text" name="text53" id="text53" style="top:585px; left:47px; width:800px;"/>
 
 <!-- bod 6. -->
-<input type="text" name="vo01" id="vo01" style="top:731px; left:105px; width:25px;"/>
+<input type="text" name="vo01" id="vo01" style="top:730px; left:115px; width:20px;"/>
 <input type="text" name="vz01" id="vz01" onkeyup="CiarkaNaBodku(this);"
- style="top:731px; left:148px; width:90px;"/>
-
-<input type="text" name="vo02" id="vo02" style="top:755px; left:105px; width:25px;"/>
+ style="top:730px; left:148px; width:90px;"/>
+<input type="text" name="vo02" id="vo02" style="top:757px; left:115px; width:20px;"/>
 <input type="text" name="vz02" id="vz02" onkeyup="CiarkaNaBodku(this);"
- style="top:755px; left:148px; width:90px;"/>
-
-<input type="text" name="vo03" id="vo03" style="top:783px; left:105px; width:25px;"/>
+ style="top:757px; left:148px; width:90px;"/>
+<input type="text" name="vo03" id="vo03" style="top:784px; left:115px; width:20px;"/>
 <input type="text" name="vz03" id="vz03" onkeyup="CiarkaNaBodku(this);"
- style="top:783px; left:148px; width:90px;"/>
-
-<input type="text" name="vo04" id="vo04" style="top:811px; left:105px; width:25px;"/>
+ style="top:784px; left:148px; width:90px;"/>
+<input type="text" name="vo04" id="vo04" style="top:810px; left:115px; width:20px;"/>
 <input type="text" name="vz04" id="vz04" onkeyup="CiarkaNaBodku(this);"
- style="top:811px; left:148px; width:90px;"/>
-
-<input type="text" name="vo05" id="vo05" style="top:841px; left:105px; width:25px;"/>
+ style="top:810px; left:148px; width:90px;"/>
+<input type="text" name="vo05" id="vo05" style="top:836px; left:115px; width:20px;"/>
 <input type="text" name="vz05" id="vz05" onkeyup="CiarkaNaBodku(this);"
- style="top:841px; left:148px; width:90px;"/>
-
-<input type="text" name="vo06" id="vo06" style="top:871px; left:105px; width:25px;"/>
+ style="top:836px; left:148px; width:90px;"/>
+<input type="text" name="vo06" id="vo06" style="top:862px; left:115px; width:20px;"/>
 <input type="text" name="vz06" id="vz06" onkeyup="CiarkaNaBodku(this);"
- style="top:871px; left:148px; width:90px;"/>
-
-<input type="text" name="vo07" id="vo07" style="top:901px; left:105px; width:25px;"/>
+ style="top:862px; left:148px; width:90px;"/>
+<input type="text" name="vo07" id="vo07" style="top:888px; left:115px; width:20px;"/>
 <input type="text" name="vz07" id="vz07" onkeyup="CiarkaNaBodku(this);"
- style="top:901px; left:148px; width:90px;"/>
-
-<input type="text" name="vo08" id="vo08" style="top:925px; left:105px; width:25px;"/>
+ style="top:888px; left:148px; width:90px;"/>
+<input type="text" name="vo08" id="vo08" style="top:915px; left:115px; width:20px;"/>
 <input type="text" name="vz08" id="vz08" onkeyup="CiarkaNaBodku(this);"
- style="top:925px; left:148px; width:90px;"/>
-
-<input type="text" name="vo09" id="vo09" style="top:950px; left:105px; width:25px;"/>
+ style="top:915px; left:148px; width:90px;"/>
+<input type="text" name="vo09" id="vo09" style="top:941px; left:115px; width:20px;"/>
 <input type="text" name="vz09" id="vz09" onkeyup="CiarkaNaBodku(this);"
- style="top:950px; left:148px; width:90px;"/>
-
-<input type="text" name="vo10" id="vo10" style="top:980px; left:105px; width:25px;"/>
+ style="top:941px; left:148px; width:90px;"/>
+<input type="text" name="vo10" id="vo10" style="top:968px; left:115px; width:20px;"/>
 <input type="text" name="vz10" id="vz10" onkeyup="CiarkaNaBodku(this);"
- style="top:980px; left:148px; width:90px;"/>
-
-<input type="text" name="vo11" id="vo11" style="top:1010px; left:105px; width:25px;"/>
+ style="top:968px; left:148px; width:90px;"/>
+<input type="text" name="vo11" id="vo11" style="top:993px; left:115px; width:20px;"/>
 <input type="text" name="vz11" id="vz11" onkeyup="CiarkaNaBodku(this);"
- style="top:1010px; left:148px; width:90px;"/>
-
-<input type="text" name="vo12" id="vo12" style="top:1040px; left:105px; width:25px;"/>
+ style="top:993px; left:148px; width:90px;"/>
+<input type="text" name="vo12" id="vo12" style="top:1020px; left:115px; width:20px;"/>
 <input type="text" name="vz12" id="vz12" onkeyup="CiarkaNaBodku(this);"
- style="top:1040px; left:148px; width:90px;"/>
-
-<span class="text-echo" style="top:1080px; left:180px;"><?php echo $vzspolu; ?></span>
-
+ style="top:1020px; left:148px; width:90px;"/>
+<span class="text-echo" style="top:1051px; right:710px;"><?php echo $vzspolu; ?></span>
 
 <!-- bod 7. -->
 <input type="text" name="vzodhad" id="vzodhad" onkeyup="CiarkaNaBodku(this);"
- style="top:1150px; left:100px; width:90px;"/>
+ style="top:1155px; left:50px; width:90px;"/>
 
 <!-- bod 8. -->
-<span class="text-echo" style="top:1230px; left:80px;"><?php echo "$fir_mzdt05 tel. $fir_mzdt04"; ?></span>
+<span class="text-echo" style="top:1228px; left:65px; font-size:15px;"><?php echo "$fir_mzdt05 tel. $fir_mzdt04"; ?></span>
 <input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);"
- style="top:1250px; left:108px; width:80px;"/> <!-- dopyt, nechce bra aktuálne nahrávanú položku -->
-
-
-
-
+ style="top:1248px; left:93px; width:80px;"/>
 
 <!-- poznamka -->
-<label for="pozn" style="position:absolute; top:1279px; left:170px; font-size:12px; font-weight:bold;">Poznámka</label>
-<input type="text" name="pozn" id="pozn" style="top:1273px; right:10px; width:700px;"/>
+<label for="pozn" style="position:absolute; top:1281px; left:196px; font-size:12px; font-weight:bold;">Poznámka</label>
+<input type="text" name="pozn" id="pozn" style="top:1273px; right:4px; width:680px;"/>
 
 <!-- dopl.info na 2.stranu -->
 <label for="str2" style="position:absolute; top:640px; left:620px; font-size:12px; font-weight:bold;">Dopl. info na 2. stranu</label>
 <textarea name="str2" id="str2" style="top:656px; left:620px; width:300px; height:430px;"><?php echo $str2; ?></textarea>
-
-
-
 </FORM>
 </div> <!-- koniec #content -->
 <?php
@@ -1170,7 +1146,7 @@ if ( $hlavicka->rdstav == 2 ) { $pdf->Cell(68,3,"vdovec/vdova","$rmc",1,"L"); }
 if ( $hlavicka->rdstav == 3 ) { $pdf->Cell(30,3,"rozvedený/rozvedená","$rmc",1,"L"); }
 $pdf->Cell(59,4," ","$rmc1",0,"L");$pdf->Cell(104,4,"$hlavicka->zuli $hlavicka->zcdm, $hlavicka->zmes, $hlavicka->zpsc","$rmc",1,"L");
 $pdf->Cell(59,4," ","$rmc1",0,"L");$pdf->Cell(104,4,"$fir_fnaz, $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",1,"L");
-$pdf->Cell(59,4," ","$rmc1",0,"L");$pdf->Cell(80,3,"IÈZ: $cicz","$rmc",1,"L");  //dopyt, nefunguje ani v html
+$pdf->Cell(59,4," ","$rmc1",0,"L");$pdf->Cell(80,3,"IÈZ: $cicz","$rmc",1,"L");
 $pdf->Cell(48,4," ","$rmc1",0,"L");
 if ( $hlavicka->uzemie == 0 )
 {
@@ -1211,19 +1187,19 @@ $predv3=$hlavicka->predv3;
 $preod4=SkDatum($hlavicka->preod4); if ( $preod4 == "00.00.0000" ) $preod4="";
 $predo4=SkDatum($hlavicka->predo4); if ( $predo4 == "00.00.0000" ) $predo4="";
 $predv4=$hlavicka->predv4;
-$pdf->Cell(150,9.5," ","$rmc1",1,"L");
-$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(20,3,"$preod1","$rmc",0,"L");
-$pdf->Cell(25,4," ","$rmc1",0,"L");$pdf->Cell(20,3,"$predo1","$rmc",0,"L");
-$pdf->Cell(23,4," ","$rmc1",0,"L");$pdf->Cell(64,3,"$predv1","$rmc",1,"L");
-$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$preod2","$rmc",0,"L");
-$pdf->Cell(25,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$predo2","$rmc",0,"L");
-$pdf->Cell(23,4," ","$rmc1",0,"L");$pdf->Cell(64,4,"$predv2","$rmc",1,"L");
-$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(20,3.5,"$preod3","$rmc",0,"L");
-$pdf->Cell(25,4," ","$rmc1",0,"L");$pdf->Cell(20,3.5,"$predo3","$rmc",0,"L");
-$pdf->Cell(23,4," ","$rmc1",0,"L");$pdf->Cell(64,3.5,"$predv3","$rmc",1,"L");
-$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$preod4","$rmc",0,"L");
-$pdf->Cell(25,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$predo4","$rmc",0,"L");
-$pdf->Cell(23,4," ","$rmc1",0,"L");$pdf->Cell(64,4,"$predv4","$rmc",1,"L");
+$pdf->Cell(150,9," ","$rmc1",1,"L");
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(20,5,"$preod1","$rmc",0,"L");
+$pdf->Cell(25,4," ","$rmc1",0,"L");$pdf->Cell(20,5,"$predo1","$rmc",0,"L");
+$pdf->Cell(23,4," ","$rmc1",0,"L");$pdf->Cell(64,5,"$predv1","$rmc",1,"L");
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(20,2.5,"$preod2","$rmc",0,"L");
+$pdf->Cell(25,4," ","$rmc1",0,"L");$pdf->Cell(20,2.5,"$predo2","$rmc",0,"L");
+$pdf->Cell(23,4," ","$rmc1",0,"L");$pdf->Cell(64,2.5,"$predv2","$rmc",1,"L");
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(20,4.5,"$preod3","$rmc",0,"L");
+$pdf->Cell(25,4," ","$rmc1",0,"L");$pdf->Cell(20,4.5,"$predo3","$rmc",0,"L");
+$pdf->Cell(23,4," ","$rmc1",0,"L");$pdf->Cell(64,4.5,"$predv3","$rmc",1,"L");
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(20,3.5,"$preod4","$rmc",0,"L");
+$pdf->Cell(25,4," ","$rmc1",0,"L");$pdf->Cell(20,3.5,"$predo4","$rmc",0,"L");
+$pdf->Cell(23,4," ","$rmc1",0,"L");$pdf->Cell(64,3.5,"$predv4","$rmc",1,"L");
 $pdf->SetFont('arial','',9);
 
 //bod 4.
@@ -1241,7 +1217,7 @@ $pdf->Cell(9,4," ","$rmc",0,"L");$pdf->Cell(20,4,"-----------","$rmc1",1,"L");
 //bod 5.
 $pdf->Cell(150,12.5," ","$rmc1",1,"L");
 $pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(156,4,"$hlavicka->text51","$rmc",1,"L");
-$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(156,4,"$hlavicka->text52","$rmc",1,"L");
+$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(156,4.5,"$hlavicka->text52","$rmc",1,"L");
 $pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(156,3.5,"$hlavicka->text53","$rmc",1,"L");
 
 //bod 6.
@@ -1257,7 +1233,7 @@ $vo09=$hlavicka->vo09; if ( $vo09 < 10 ) $vo09="0".$vo09;
 $vo10=$hlavicka->vo10; if ( $vo10 < 10 ) $vo10="0".$vo10;
 $vo11=$hlavicka->vo11; if ( $vo11 < 10 ) $vo11="0".$vo11;
 $vo12=$hlavicka->vo12; if ( $vo12 < 10 ) $vo12="0".$vo12;
-$pdf->Cell(150,33," ","$rmc1",1,"L");
+$pdf->Cell(150,32," ","$rmc1",1,"L");
 $pdf->Cell(18,5," ","$rmc1",0,"L");$pdf->Cell(10,5,"$vo01","$rmc",0,"L");
 $pdf->Cell(22,5,"$hlavicka->vz01","$rmc",1,"R");
 $pdf->Cell(19,5," ","$rmc1",0,"L");$pdf->Cell(9,5,"$vo02","$rmc",0,"L");
@@ -1287,27 +1263,26 @@ $pdf->Cell(28,6," ","$rmc1",0,"L");$pdf->Cell(22,6,"$hlavicka->vzspolu","$rmc",1
 //bod 7.
 $vzodhad=$hlavicka->vzodhad; if ( $vzodhad == 0 ) $vzodhad="";
 $pdf->Cell(150,17," ","$rmc1",1,"L");
-$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(32,5,"$vzodhad","$rmc",1,"C");
+$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(32,5,"$vzodhad","$rmc",1,"L");
 
 //bod 8.
-//dopyt, tu by mohol by, ten èo si plní povinnosti voèi z SP - z dopl. údajov SP aj vo formulári
+$pdf->Cell(190,10.5," ","$rmc1",1,"L");
+$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(155,5,"$fir_mzdt05 tel. $fir_mzdt04","$rmc",1,"L");
 
 //datum
-//dopyt, nefunguje input
-
-//$pdf->SetFont('arial','',8);
-//$pdf->Cell(150,12," ","0",1,"L");
-//$pdf->Cell(10,4," ","0",0,"L");$pdf->Cell(160,4,"$fir_mzdt05 tel. $fir_mzdt04","0",1,"L");
-
 $datumsk=SkDatum($hlavicka->datum);
+$pdf->Cell(190,8," ","$rmc1",1,"L");
+$pdf->Cell(78,4," ","$rmc1",0,"L");$pdf->Cell(18,5,"$datumsk","$rmc",1,"L");
 
+//poznamka
 if ( $copern == 10 ) $pozn=$hlavicka->pozn;
-$pdf->Cell(190,20,"$datumsk ","$rmc1",1,"L"); //dopyt, umiestni, až keï bude dátum predtým umiestnený
-$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(170,5,"$pozn","$rmc",1,"L");
+$pdf->Cell(190,5," ","$rmc1",1,"L");
+$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(174,5,"$pozn","$rmc",1,"L");
 }
 $i = $i + 1;
   }
 
+//dopl.info na 2.strane
 $pole = explode("\r\n", $hlavicka->str2);
 if ( $pole[0] != '' )
 {
@@ -1329,20 +1304,16 @@ if ( $ipole == 1 )
 $pdf->Cell(190,8," ","$rmc1",1,"R");
 $pdf->Cell(22,5,"Zamestnanec","B",1,"C");
 $pdf->Cell(150,6,"Rod.èíslo: $hlavicka->rdc $hlavicka->rdk   Meno,priezvisko: $hlavicka->meno $hlavicka->prie","$rmc",1,"L");
-}
 $pdf->Cell(190,8," ","$rmc1",1,"R");
-$pdf->Cell(150,5,"$hodnota","$rmc",1,"L");
+}
+$pdf->Cell(180,5,"$hodnota","$rmc",1,"L");
 $ipole=$ipole+1;
                              }
-
-//dopyt, na 2.stranu nedáme aj dátum v tlaèi
-
-$pdf->Cell(190,50,"$datumsk ","$rmc1",1,"R");
-$pdf->Cell(135,6,"","$rmc1",0,"R");$pdf->Cell(45,7,"peèiatka a podpis","T",1,"C");
+$pdf->Cell(190,50," ","$rmc1",1,"R");
+$pdf->Cell(20,5,"$datumsk","$rmc",0,"C");
+$pdf->Cell(115,6,"","$rmc1",0,"R");$pdf->Cell(45,7,"peèiatka a podpis","T",1,"C");
 $pdf->Cell(135,6,"","$rmc1",0,"R");$pdf->Cell(45,2,"zamestnávate¾a","0",1,"C");
 }
-
-
 
 $pdf->Output("../tmp/potvrdenieFO.$kli_uzid.pdf");
 ?>
