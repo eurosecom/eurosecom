@@ -237,6 +237,18 @@ $upravene = mysql_query("$upravttt");
 
 }
 //koniec FO danovnik
+//Schvalil na pokladnicnych dokladoch
+$sql = "SELECT schvvp FROM F".$kli_vxcf."_ufirdalsie";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD schval VARCHAR(50) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD schvpp DECIMAL(1,0) DEFAULT 0 AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD schvvp DECIMAL(1,0) DEFAULT 0 AFTER kkx";
+$vysledek = mysql_query("$sql");
+}
 
 //koniec upravy
 
@@ -386,7 +398,7 @@ endif;
     }
 //koniec zapisu uprav datumy uzavierky
 
-//zapis upravene fosp
+//zapis upravene fosp aschvalil pokl
 if ( $copern == 303 )
     {
 $fospprie= strip_tags($_REQUEST['fospprie']);
@@ -394,7 +406,11 @@ $fospmeno= strip_tags($_REQUEST['fospmeno']);
 $fosptel= strip_tags($_REQUEST['fosptel']);
 $fospmail= strip_tags($_REQUEST['fospmail']);
 
-$upravttt = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
+$schval = strip_tags($_REQUEST['schval']);
+$schvpp = strip_tags($_REQUEST['schvpp']);
+$schvvp = strip_tags($_REQUEST['schvvp']);
+
+$upravttt = "UPDATE F$kli_vxcf"."_ufirdalsie SET schval='$schval', schvpp='$schvpp', schvvp='$schvvp', ".
 " fospprie='$fospprie', fospmeno='$fospmeno', fosptel='$fosptel', fospmail='$fospmail'  WHERE icox=0 "; 
 $upravene = mysql_query("$upravttt"); 
 $copern=302;
@@ -441,6 +457,7 @@ $uprav="OK";
 endif;
     }
 //koniec fo danovnik
+
 
 //nacitaj udaje
 if ( $copern >= 1 )
@@ -533,6 +550,9 @@ $fospprie = $riadok->fospprie;
 $fospmeno = $riadok->fospmeno;
 $fosptel = $riadok->fosptel;
 $fospmail = $riadok->fospmail;
+$schval = $riadok->schval;
+$schvpp = $riadok->schvpp;
+$schvvp = $riadok->schvvp;
                      }
 
 if( $copern == 402 ) {
@@ -684,6 +704,9 @@ $dfax = $riadok->dfax;
     document.formv1.fospmeno.value = '<?php echo "$fospmeno";?>';
     document.formv1.fosptel.value = '<?php echo "$fosptel";?>';
     document.formv1.fospmail.value = '<?php echo "$fospmail";?>';
+    document.formv1.schval.value = '<?php echo "$schval";?>';
+<?php if ( $schvpp == 1 ) { ?> document.formv1.schvpp.checked = "checked"; <?php } ?>
+<?php if ( $schvvp == 1 ) { ?> document.formv1.schvvp.checked = "checked"; <?php } ?>
     }
 <?php
 //koniec uprava
@@ -984,7 +1007,20 @@ if ( $copern == 302 )
 <td class="bmenu" colspan="1"><input type="text" name="fospmail" id="fospmail" size="35" /></td>
 </tr>
 <tr><td class="bmenu" colspan="10"></tr>
-
+<tr>
+<td class="pvstuz" colspan="10">Schválil: ( na pokladniènıch dokladoch ).&nbsp;</td>
+</tr>
+<tr>
+<td class="bmenu" colspan="1">Schválil:</td>
+<td class="bmenu" colspan="1"><input type="text" name="schval" id="schval" size="50" /></td>
+</tr>
+<tr>
+<td class="bmenu" colspan="2"><input type="checkbox" name="schvpp" value="1" /> Tlaèi na príjmovıch pokladniènıch dokladoch</td>
+</tr>
+<tr>
+<td class="bmenu" colspan="2"><input type="checkbox" name="schvvp" value="1" /> Tlaèi na vıdavkovıch pokladniènıch dokladoch</td>
+</tr>
+<tr><td class="bmenu" colspan="10"></tr>
 <tr>
 <td></td>
 <td class="obyc"><INPUT type="submit" id="uloz" name="uloz" value="Uloi úpravy"></td>
