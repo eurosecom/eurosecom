@@ -3780,129 +3780,6 @@ $pole_txz4 = explode("\r\n", $ptxz4);
 
 </script>
 
-  
-<?php 
-if( $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' ) 
-{  
-
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_$tabl WHERE dok=$cislo_dok");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-
-  $h_penp=str_replace("\r\n","<br />",$riaddok->txp);
-  $h_penp=str_replace("\r","<br />",$h_penp);
-  $h_penz=str_replace("\r\n","<br />",$riaddok->txz);
-  $h_penz=str_replace("\r","<br />",$h_penz);
-  }
-
-?>
-<script type='text/javascript'>
-//upravit texty pred fakturov 
-
-function Penpz(druh)
-                {
-  textpenp.style.display='none';
-  if( druh == 1 ) {   var h_penpx = '<?php echo $h_penp; ?>';  }
-  if( druh == 2 ) {   var h_penpx = '<?php echo $h_penz; ?>';  }
-  var h_penpx = h_penpx.replace("<br />","\r");
-  var h_penpx = h_penpx.replace("<br />","\r");
-  var h_penpx = h_penpx.replace("<br />","\r");
-  var h_penpx = h_penpx.replace("<br />","\r");
-  var h_penpx = h_penpx.replace("<br />","\r");
-  var h_penpx = h_penpx.replace("<br />","\r");
-  var h_penpx = h_penpx.replace("<br />","\r");
-  var h_penpx = h_penpx.replace("<br />","\r");
-  var h_penpx = h_penpx.replace("<br />","\r");
-  var h_penpx = h_penpx.replace("<br />","\r");
-
-  mytextpenp = document.getElementById("textpenp");
-
-    if( druh == 1 ) { var htmlpenp = "<table  class='ponuka' width='100%'><tr><td width='60%'>Text Faktúry - pred položkami " }
-    if( druh == 2 ) { var htmlpenp = "<table  class='ponuka' width='100%'><tr><td width='60%'>Text Faktúry - za položkami " }
-
-    htmlpenp += "<img border=0 src='../obr/ok.png' style='width:12; height:12;'";
-    htmlpenp += "onClick='UlozPenpz("+ druh + ");' alt='Ulož zmeny v texte' title='Ulož zmeny v texte' > ";
-
-    htmlpenp += " <span id='myTextElement'></span></td>";
-
-    htmlpenp += "<td width='40%' align='right'>";
-    htmlpenp += " text <img border=0 src='../obr/zoznam.png' style='width:12; height:12;' onClick='DajText("+ druh + ");' title='Vybra text z ponuky' > &nbsp&nbsp&nbsp&nbsp";
-    htmlpenp += "&nbsp&nbsp<img border=0 src='../obr/zmazuplne.png' style='width:12; height:12;'onClick='ZhasniPenpz();' title='Zhasni okno a neulož zmeny v texte' ></td></tr>";  
-
-    htmlpenp += "<tr><FORM name='fhoddok' class='obyc' method='post' action='#' >";
-    htmlpenp += "<td colspan='2' class='obyc' align='left'>";
-    htmlpenp += "<textarea name='h_penp' id='h_penp' rows='12' cols='118' >" + h_penpx.replace("<br />","\r") + "</textarea>";
-    htmlpenp += "</td></FORM></tr>";
-
-    htmlpenp += "</table>";  
-
-  mytextpenp.innerHTML = htmlpenp;
-  textpenp.style.display='';                
-                }
-
-function ZhasniPenpz()
-                {
-  textpenp.style.display='none';                
-                }
-
-function UlozPenpz(druh)
-                {
-  textpenp.style.display='none';                
-
-<?php if( $_SESSION['chrome'] == 0 ) { ?>
-  var h_penpe = document.forms.fhoddok.h_penp.value.replace("\r","%0D%0A");
-      h_penpe = h_penpe.replace("\r","%0D%0A");
-      h_penpe = h_penpe.replace("\r","%0D%0A");
-      h_penpe = h_penpe.replace("\r","%0D%0A");
-      h_penpe = h_penpe.replace("\r","%0D%0A");
-      h_penpe = h_penpe.replace("\r","%0D%0A");
-      h_penpe = h_penpe.replace("\r","%0D%0A");
-      h_penpe = h_penpe.replace("\r","%0D%0A");
-      h_penpe = h_penpe.replace("\r","%0D%0A");
-      h_penpe = h_penpe.replace("\r","%0D%0A");
-      h_penpe = h_penpe.replace("\r","%0D%0A");
-      h_penpe = h_penpe.replace("\r","%0D%0A");
-      h_penpe = h_penpe.replace("\r","%0D%0A");
-<?php                                } ?>
-<?php if( $_SESSION['chrome'] == 1 ) { ?>
-  var h_penpe = document.forms.fhoddok.h_penp.value.replace("\n","%0D%0A");
-      h_penpe = h_penpe.replace("\n","%0D%0A");
-      h_penpe = h_penpe.replace("\n","%0D%0A");
-      h_penpe = h_penpe.replace("\n","%0D%0A");
-      h_penpe = h_penpe.replace("\n","%0D%0A");
-      h_penpe = h_penpe.replace("\n","%0D%0A");
-      h_penpe = h_penpe.replace("\n","%0D%0A");
-      h_penpe = h_penpe.replace("\n","%0D%0A");
-      h_penpe = h_penpe.replace("\n","%0D%0A");
-      h_penpe = h_penpe.replace("\n","%0D%0A");
-      h_penpe = h_penpe.replace("\n","%0D%0A");
-      h_penpe = h_penpe.replace("\n","%0D%0A");
-      h_penpe = h_penpe.replace("\n","%0D%0A");
-<?php                                } ?>
-
-      if( druh == 1 ) { var copernx=2008; }
-      if( druh == 2 ) { var copernx=2009; }
-
-window.open('../faktury/vstf_u.php?regpok=<?php echo $regpok; ?>&h_penp=' + h_penpe + '&vyroba=0&copern='+ copernx + '&drupoh=<?php echo $drupoh; ?>&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&h_tlsl=<?php echo $h_tlsl; ?>&h_tltv=<?php echo $h_tltv; ?>&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $cislo_dok; ?>&h_fak=0&h_dol=0&h_prf=0', '_self' );
-
-                }
-
-//co urobi po potvrdeni ok z tabulky textov
-function vykonajText(druh, cpt)
-                {
-      if( druh == 1 ) { var copernx=3008; }
-      if( druh == 2 ) { var copernx=3009; }
-
-window.open('../faktury/vstf_u.php?regpok=<?php echo $regpok; ?>&cpt=' + cpt + '&vyroba=0&copern='+ copernx + '&drupoh=<?php echo $drupoh; ?>&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&h_tlsl=<?php echo $h_tlsl; ?>&h_tltv=<?php echo $h_tltv; ?>&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $cislo_dok; ?>&h_fak=0&h_dol=0&h_prf=0', '_self' );
-
-                }
-
-</script>
-<script type="text/javascript" src="spr_texty_xml.js"></script>
-<?php //koniec upravit texty pred a za fakturov
-                   } ?>
-
 <script type='text/javascript'>
 
 <?php if( $_SESSION['nieie'] == 0 )  { ?>
@@ -4434,11 +4311,206 @@ function OverIcdph()
 
 <?php                           }  ?>
 
+<?php
+//text pred a za polozkami
+if ( $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' )
+     {
+?>
+<script type="text/javascript" src="spr_texty_xml.js"></script>
+<?php
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_$tabl WHERE dok=$cislo_dok");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+
+  $h_penp1=$riaddok->txp;
+  $h_penz1=$riaddok->txz;
+  }
+
+?>
+<div id="myTextElement" style="cursor: hand; display: none; position: absolute; z-index: 800; top: 190px; left: 20px; width:800px; height:200px;">
+</div>
+
+<div id="nastavtpx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 190px; left: 10px; width:800px; height:200px;">
+<table  class='ponuka' width='100%'>
+<tr><td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td>
+<td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td></tr>
+
+<tr><FORM name='fhoddok' method='post' action='#' >
+<td colspan='5'>Text Faktúry - pred položkami
+<input type='hidden' name='druh' id='druh' >
+<img border=0 src='../obr/ok.png' style='width:15px; height:15px;' onClick='UlozPenp();' title='Ulož zmeny v texte' >
+
+</td>
+<td colspan='5' align='right'>
+
+<img border=0 src='../obr/zoznam.png' style='width:15px; height:15px;' onClick="myTextElement.style.display=''; DajTextp(1);" title='Vybra text z ponuky' > &nbsp&nbsp&nbsp&nbsp
+<img border=0 src='../obr/zmazuplne.png' style="width:15px; height:15px;" onClick="nastavtpx.style.display='none'; myTextElement.style.display='none';" title='Zhasni' >
+
+</td></tr>  
+                    
+<tr><td colspan='10' class='obyc' align='left'>
+<textarea name='h_penp' id='h_penp' rows='12' cols='118' ><?php echo $h_penp1; ?></textarea>
+</td></tr>
+
+
+</FORM></table>
+</div>
+
+<div id="nastavtzx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 190px; left: 10px; width:800px; height:200px;">
+<table  class='ponuka' width='100%'>
+<tr><td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td>
+<td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td></tr>
+
+<tr><FORM name='fhoddoz' method='post' action='#' >
+<td colspan='5'>Text Faktúry - za položkami
+<input type='hidden' name='druh' id='druh' >
+<img border=0 src='../obr/ok.png' style='width:15px; height:15px;' onClick='UlozPenz();' title='Ulož zmeny v texte' >
+
+</td>
+<td colspan='5' align='right'>
+
+<img border=0 src='../obr/zoznam.png' style='width:15px; height:15px;' onClick="myTextElement.style.display=''; DajTextp(2);" title='Vybra text z ponuky' > &nbsp&nbsp&nbsp&nbsp
+<img border=0 src='../obr/zmazuplne.png' style="width:15px; height:15px;" onClick="nastavtzx.style.display='none'; myTextElement.style.display='none';" title='Zhasni' >
+
+</td></tr>  
+                    
+<tr><td colspan='10' class='obyc' align='left'>
+<textarea name='h_penz' id='h_penz' rows='12' cols='118' ><?php echo $h_penz1; ?></textarea>
+</td></tr>
+
+
+</FORM></table>
+</div>
+
+<script type="text/javascript">
+
+function RozniPenp(druh)
+                {
+  nastavtpx.style.display='';
+  document.forms.fhoddok.druh.value=1; 
+
+                }
+
+function RozniPenz(druh)
+                {
+  nastavtzx.style.display='';
+  document.forms.fhoddok.druh.value=2; 
+
+                }
+
+function DajTextp(druh)
+                {
+  if( druh == 1 ) { DajText(1); }
+  if( druh == 2 ) { DajText(2); }
+                }
+
+
+function UlozPenp()
+                {
+  nastavtpx.style.display='none';                
+
+<?php if( $_SESSION['chrome'] == 0 ) { ?>
+  var h_penpe = document.forms.fhoddok.h_penp.value.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+<?php                                } ?>
+<?php if( $_SESSION['chrome'] == 1 ) { ?>
+  var h_penpe = document.forms.fhoddok.h_penp.value.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+<?php                                } ?>
+
+      var druh = document.forms.fhoddok.druh.value;
+      if( druh == 1 ) { var copernx=2008; }
+      if( druh == 2 ) { var copernx=2009; }
+
+window.open('../faktury/vstf_u.php?regpok=<?php echo $regpok; ?>&h_penp=' + h_penpe + '&vyroba=0&copern='+ copernx + '&drupoh=<?php echo $drupoh; ?>&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&h_tlsl=<?php echo $h_tlsl; ?>&h_tltv=<?php echo $h_tltv; ?>&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $cislo_dok; ?>&h_fak=0&h_dol=0&h_prf=0', '_self' );
+
+                }
+
+function UlozPenz()
+                {
+  nastavtzx.style.display='none';                
+
+<?php if( $_SESSION['chrome'] == 0 ) { ?>
+  var h_penpe = document.forms.fhoddoz.h_penz.value.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+<?php                                } ?>
+<?php if( $_SESSION['chrome'] == 1 ) { ?>
+  var h_penpe = document.forms.fhoddoz.h_penz.value.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+<?php                                } ?>
+
+      var druh = document.forms.fhoddok.druh.value;
+      if( druh == 1 ) { var copernx=2008; }
+      if( druh == 2 ) { var copernx=2009; }
+
+window.open('../faktury/vstf_u.php?regpok=<?php echo $regpok; ?>&h_penp=' + h_penpe + '&vyroba=0&copern='+ copernx + '&drupoh=<?php echo $drupoh; ?>&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&h_tlsl=<?php echo $h_tlsl; ?>&h_tltv=<?php echo $h_tltv; ?>&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $cislo_dok; ?>&h_fak=0&h_dol=0&h_prf=0', '_self' );
+
+                }
+
+//co urobi po potvrdeni ok z tabulky textov
+function vykonajText(druh, cpt)
+                {
+
+      if( druh == 1 ) { var copernx=3008; }
+      if( druh == 2 ) { var copernx=3009; }
+
+window.open('../faktury/vstf_u.php?regpok=<?php echo $regpok; ?>&cpt=' + cpt + '&vyroba=0&copern='+ copernx + '&drupoh=<?php echo $drupoh; ?>&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&h_tlsl=<?php echo $h_tlsl; ?>&h_tltv=<?php echo $h_tltv; ?>&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $cislo_dok; ?>&h_fak=0&h_dol=0&h_prf=0', '_self' );
+
+                }
+
+</script>
+<?php
+     }
+//koniec texty pred a za polozkami
+?>
 
 <?php
-//nastavenie potvrdenia o vyvoze
-//echo $copern." ".$drupoh." ".$sys;
-
+//potvrdenie o vyvoze tovaru
 if ( $copern == 7 AND $drupoh == 1 AND $sys == 'FAK' )
      {
 
@@ -6269,7 +6341,7 @@ $vypis_txp = ereg_replace(" ", "&nbsp;", trim($vypis_txp));
 if ( $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' )
      {
 ?>
-<img src='../obr/uprav.png' width=12 height=12 border=1 onClick="Penpz(1)" title="Upravi text pred položkami faktúry" >
+<img src='../obr/uprav.png' width=12 height=12 border=1 onClick="RozniPenp(1);" title="Upravi text pred položkami faktúry" >
 <?php
      }
 ?>
@@ -7369,7 +7441,7 @@ $vypis_txz = ereg_replace(" ", "&nbsp;", trim($vypis_txz));
 if ( $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' )
      {
 ?>
-<img src='../obr/uprav.png' width=12 height=12 border=1 onClick="Penpz(2)" title="Upravi text za položkami faktúry" >
+<img src='../obr/uprav.png' width=12 height=12 border=1 onClick="RozniPenz(2);" title="Upravi text za položkami faktúry" >
 <?php
      }
 ?>
