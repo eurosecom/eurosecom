@@ -981,8 +981,21 @@ $pdf->Cell(30,6,"$sPrepoc $mena2","1",1,"R");
 
 $pdf->Cell(180,2," ","0",1,"L");
 
+$schval=""; $schvpp=0; $schvvp=0;
+$sqlc = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE icox = 0";
+$vysledokc = mysql_query($sqlc);
+if ( $vysledokc )
+     {
+$riadokc=mysql_fetch_object($vysledokc);
+$schval = $riadokc->schval;
+$schvpp = 1*$riadokc->schvpp;
+$schvvp = 1*$riadokc->schvvp;
+     }
+if( ( $drupoh == 1 OR $drupoh == 3 ) AND $schvpp == 0 ) { $schval=""; }
+if( $drupoh == 2 AND $schvvp == 0 ) { $schval=""; }
+
 $pdf->SetFont('arial','',9);
-$pdf->Cell(90,5,"Schválil:","LT",0,"L");$pdf->Cell(90,5,"Podpis príjemcu,peèiatka:","TR",1,"L");
+$pdf->Cell(90,5,"Schválil: $schval","LT",0,"L");$pdf->Cell(90,5,"Podpis príjemcu,peèiatka:","TR",1,"L");
 $pdf->Cell(90,5," ","L",0,"L");$pdf->Cell(90,5," ","R",1,"L");
 $pdf->Cell(90,5," ","LB",0,"L");$pdf->Cell(90,5," ","RB",1,"L");
      }
