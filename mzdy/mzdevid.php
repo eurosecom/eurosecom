@@ -769,6 +769,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplp".$kli_uzid.
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+$dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcvyplp".$kli_uzid." WHERE dm < 799 AND dm != 502 AND dm != 503 ";
+$dsql = mysql_query("$dsqlt");
 
 $sqldttn = "SELECT * FROM F$kli_vxcf"."_mzdprcvyplp$kli_uzid ".
 " LEFT JOIN F$kli_vxcf"."_mzddmn".
