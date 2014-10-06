@@ -29,6 +29,30 @@ $upravttt = "DROP TABLE F$kli_vxcf"."_vtvmaj ";
 $upravene = mysql_query("$upravttt");
 $upravttt = "DROP TABLE F$kli_vxcf"."_vtvall "; 
 $upravene = mysql_query("$upravttt");
+
+$sql = "SELECT * FROM F$kli_vxcf"."_majdrm ";
+$vysledok = mysql_query($sql);
+$cpol=0;
+if( $vysledok ) { $cpol = mysql_num_rows($vysledok); }
+if( $cpol == 0 ) 
+    {
+$dsqlt = "DROP TABLE F$kli_vxcf"."_majdrm";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DROP TABLE F$kli_vxcf"."_majdimdrm";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DROP TABLE F$kli_vxcf"."_majdrunak";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DROP TABLE F$kli_vxcf"."_majdruvyr";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DROP TABLE F$kli_vxcf"."_majsodp";
+$dsql = mysql_query("$dsqlt");
+    }
+
+
 $copern=1;
 }
 //koniec reinicializuj majetok
