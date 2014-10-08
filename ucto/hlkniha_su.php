@@ -190,7 +190,7 @@ $dsql = mysql_query("$dsqlt");
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Hlavná kniha</title>
   <style type="text/css">

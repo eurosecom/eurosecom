@@ -374,7 +374,7 @@ $dsql = mysql_query("$dsqlt");
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Hlavná kniha položkovitá</title>
   <style type="text/css">
@@ -509,7 +509,7 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 $pdf->SetRightMargin(10);
 
-$pdf->Cell(110,5,"Hlavná kniha za $vyb_ume","LTB",0,"L");
+$pdf->Cell(110,5,"Hlavná kniha za $vyb_ume  - položkovitá ","LTB",0,"L");
 $pdf->Cell(0,5,"FIR$kli_vxcf $kli_nxcf strana $strana","RTB",1,"R");
 
 

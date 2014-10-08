@@ -246,7 +246,7 @@ window.open('../ucto/statistika_p304.php?copern=401&drupoh=1&page=1&modul=1003',
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Hlavná kniha</title>
   <style type="text/css">
@@ -365,7 +365,7 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 $pdf->SetRightMargin(10);
 
-$pdf->Cell(110,5,"Hlavná kniha za $vyb_ume","LTB",0,"L");
+$pdf->Cell(110,5,"Hlavná kniha za $vyb_ume - položkovitá ","LTB",0,"L");
 $pdf->Cell(0,5,"FIR$kli_vxcf $kli_nxcf strana $strana","RTB",1,"R");
 
 
@@ -387,7 +387,7 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 $pdf->SetRightMargin(10);
 
-$pdf->Cell(110,5,"Hlavná kniha za $vyb_umep / $vyb_umek","LTB",0,"L");
+$pdf->Cell(110,5,"Hlavná kniha za $vyb_umep / $vyb_umek  - sumárna ","LTB",0,"L");
 $pdf->Cell(100,5,"FIR$kli_vxcf $kli_nxcf strana $strana","RTB",1,"R");
 
 $pdf->Cell(210,4,"Úèet Popis","1",1,"L");
