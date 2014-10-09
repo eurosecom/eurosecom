@@ -226,11 +226,20 @@ if( $wyplmiesto > 0 AND $merkfood == 0 )
 $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE wmm != $wyplmiesto ";
 $dsql = mysql_query("$dsqlt");
   }
-if( $wyplmiesto > 0 AND $merkfood == 1 )
+//merkfood
+if( $wyplmiesto > 0 AND $merkfood == 1 AND $fir_fico == 22706852 )
   {
 if( $wyplmiesto == 1 ) { $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE wmm >= 11 AND wmm <= 31 "; }
 if( $wyplmiesto == 2 ) { $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE wmm < 11 OR wmm > 20 "; }
 if( $wyplmiesto == 3 ) { $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE wmm < 21 OR wmm > 31 "; }
+$dsql = mysql_query("$dsqlt");
+  }
+//eurodiskont
+if( $wyplmiesto > 0 AND $merkfood == 1 AND $fir_fico == 45232903 )
+  {
+if( $wyplmiesto == 1 ) { $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE wmm > 120 "; }
+if( $wyplmiesto == 2 ) { $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE wmm < 121 OR wmm > 159 "; }
+if( $wyplmiesto == 3 ) { $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE wmm < 160 "; }
 $dsql = mysql_query("$dsqlt");
   }
 
