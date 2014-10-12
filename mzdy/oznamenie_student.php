@@ -85,13 +85,11 @@ $da2sql=SqlDatum($da2);
 
 
 
-if ( $strana == 1 )    {
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdoznam_student SET ".
 " da1='$da1sql', da2='$da2sql' ".
 " WHERE oc = $cislo_oc"; 
 
-                       }
 
 $upravene = mysql_query("$uprtxt");  
 
@@ -236,10 +234,10 @@ var sirkawic = screen.width-10;
   function ObnovUI()
   {
 
-<?php if ( $strana == 1 OR $strana == 9999 )                           { ?>
+
    document.formv1.da1.value = '<?php echo "$da1sk";?>';
    document.formv1.da2.value = '<?php echo "$da2sk";?>';
-<?php                                                                   } ?>
+
   }
 <?php
 //koniec uprava
@@ -276,6 +274,11 @@ var sirkawic = screen.width-10;
    window.open('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v14/narok_nemocenska_v14_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
 
+function tlacpdf(oc) //dopyt, zruši?
+                {
+window.open('../mzdy/oznamenie_student.php?cislo_oc=' + oc + '&copern=10&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
 
 function ZnovuPotvrdenie() //dopyt, zruši?
                 {
