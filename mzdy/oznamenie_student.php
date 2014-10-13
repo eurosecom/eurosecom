@@ -8,8 +8,6 @@ $urov = 3000;
 $copern = $_REQUEST['copern'];
 $tis = $_REQUEST['tis'];
 if(!isset($tis)) $tis = 0;
-$fort = $_REQUEST['fort']; //dopyt, chcem zruöiù
-if(!isset($fort)) $fort = 1;
 
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
@@ -40,7 +38,7 @@ $kurz12 = $fir_kurz12;
 
 $cislo_oc = $_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
-$strana = 1*$_REQUEST['strana']; //dopyt, budeme pouûÌvaù strany? ak nie tak vymazaù $strana
+$strana = 1*$_REQUEST['strana'];
 if ( $strana == 0 ) $strana=1;
 
 
@@ -216,8 +214,13 @@ $da2sk=SkDatum($da2);
  <link rel="stylesheet" href="../css/reset.css" type="text/css">
  <link rel="stylesheet" href="../css/tlaciva.css" type="text/css">
 <title>EuroSecom - Ozn·menie ötudenta</title>
-
-
+<style>
+form input[type=text] {
+  height: 16px;
+  line-height: 16px;
+  font-size: 14px;
+}
+</style>
 
 <script type="text/javascript">
 //sirka a vyska okna
@@ -269,22 +272,18 @@ var sirkawic = screen.width-10;
   {
    window.open('oznamenie_student.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + nextoc + '', '_self');
   }
-  function Poucenie() //dopyt, aktualizovaù
+  function UpravZamestnanca()
   {
-   window.open('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v14/narok_nemocenska_v14_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('zamestnanci.php?sys=<?php echo $sys; ?>&copern=8&page=1&cislo_oc=<?php echo $cislo_oc;?>&h_oc=<?php echo $cislo_oc;?>', '_blank','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
   }
-
-function tlacpdf(oc) //dopyt, zruöiù?
-                {
-window.open('../mzdy/oznamenie_student.php?cislo_oc=' + oc + '&copern=10&drupoh=1&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function ZnovuPotvrdenie() //dopyt, zruöiù?
-                {
-window.open('../mzdy/oznamenie_student.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1',
- '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
+  function Poucenie()
+  {
+   window.open('../dokumenty/mzdy_potvrdenia/oznamenie_studenta_v14/oznamenie_studenta_v14_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function tlacpdf(oc)
+  {
+   window.open('../mzdy/oznamenie_student.php?cislo_oc=' + oc + '&copern=10&drupoh=1&page=1&subor=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 </script>
 
 <?php
@@ -360,15 +359,9 @@ if ( $copern == 20 )
    </td>
    <td>
     <div class="bar-btn-form-tool">
-     <img src="../obr/ikony/info_blue_icon.png" onclick="Poucenie();" title="PouËenie na vyplnenie" class="btn-form-tool"> <!-- dopyt, aktualizovaù -->
-     <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacpdf(<?php echo $cislo_oc; ?>);"
-      title="Zobraziù v PDF" class="btn-form-tool">
-<a href="#" onClick="window.open('../mzdy/oznamenie_student.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999',
- '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );">
-</a> <!-- dopyt, rozbehaù cez funkciu a img -->
-<a href="#" onClick="window.open('zamestnanci.php?sys=<?php echo $sys; ?>&copern=8&page=1&cislo_oc=<?php echo $cislo_oc;?>&h_oc=<?php echo $cislo_oc;?>',
- '_blank','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes')">
-<img src='../obr/uprav.png' width=15 height=15 border=0 title='⁄prava ˙dajov o zamestnancovi' ></a> <!-- dopyt, pozrieù v rz -->
+     <img src="../obr/ikony/info_blue_icon.png" onclick="Poucenie();" title="PouËenie na vyplnenie" class="btn-form-tool">
+     <img src="../obr/ikony/user_blue_icon.png" onclick="UpravZamestnanca();" title="Upraviù ˙daje o zamestnancovi" class="btn-form-tool">
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacpdf(<?php echo $cislo_oc; ?>);" title="Zobraziù v PDF" class="btn-form-tool">
     </div>
    </td>
   </tr>
@@ -379,14 +372,14 @@ if ( $copern == 20 )
 <FORM name="formv1" method="post" action="oznamenie_student.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave" style="top:4px;">
 <img src="../dokumenty/mzdy_potvrdenia/oznamenie_studenta_v14/oznamenie_studenta_v14.jpg"
- alt="tlaËivo Ozn·menie a ËestnÈ vyhl·senie k dohode o brig·dnickej pr·ci ötudentov 165kB" class="form-background">
+ alt="tlaËivo Ozn·menie a ËestnÈ vyhl·senie k dohode o brig·dnickej pr·ci ötudentov 175kB" class="form-background">
 
 <!-- zamestnanec -->
-<span class="text-echo" style="top:300px; left:190px;"><?php echo $prie; ?></span>
-<span class="text-echo" style="top:300px; left:400px;"><?php echo $meno; ?></span>
-<span class="text-echo" style="top:300px; left:700px;"><?php echo $titl; ?></span>
-<span class="text-echo" style="top:330px; left:190px;"><?php echo $rodne; ?></span>
-<span class="text-echo" style="top:370px; left:290px;"><?php echo $zuli; ?></span>
+<span class="text-echo" style="top:296px; left:195px;"><?php echo $prie; ?></span>
+<span class="text-echo" style="top:296px; left:559px;"><?php echo $meno; ?></span>
+<span class="text-echo" style="top:296px; left:776px;"><?php echo $titl; ?></span>
+<span class="text-echo" style="top:323px; left:206px;"><?php echo $rodne; ?></span>
+<span class="text-echo" style="top:349px; left:290px;"><?php echo $zuli; ?></span>
 
 <!-- zamestnavatel -->
 <span class="text-echo" style="top:430px; left:290px;"><?php echo $fnazov; ?></span>
@@ -442,89 +435,55 @@ $j=0; //zaciatok strany ak by som chcel strankovat
 {
 $hlavicka=mysql_fetch_object($sql);
 
-
-
 $pdf->Addpage();
-$pdf->SetFont('arial','',10);
-
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
 
-//tady upravis velkost na original
-
-if (File_Exists ('../dokumenty/mzdy_potvrdenia/oznamenie_studenta/Oznamenie_strana1.jpg') )
+if ( File_Exists('../dokumenty/mzdy_potvrdenia/oznamenie_studenta_v14/oznamenie_studenta_v14.jpg') )
 {
-$pdf->Image('../dokumenty/mzdy_potvrdenia/oznamenie_studenta/Oznamenie_strana1.jpg',1,0,209,297);
+$pdf->Image('../dokumenty/mzdy_potvrdenia/oznamenie_studenta_v14/oznamenie_studenta_v14.jpg',0,0,210,297);
 }
-
 $pdf->SetY(10);
 $pdf->SetFont('arial','',10);
 
-//zamestnanec - priezvisko, meno a titul
-$pdf->Cell(190,57,"                          ","$rmc",1,"L");
-$pdf->Cell(34,6," ","$rmc",0,"R");$pdf->Cell(71,5,"$hlavicka->prie","$rmc",0,"L");
-$pdf->Cell(9,6," ","$rmc",0,"R");$pdf->Cell(40,5,"$hlavicka->meno","$rmc",0,"L");
-$pdf->Cell(8,6," ","$rmc",0,"R");$pdf->Cell(28,5,"$hlavicka->titl","$rmc",1,"L");
+//zamestnanec
+$pdf->Cell(190,57," ","$rmc1",1,"L");
+$pdf->Cell(34,6," ","$rmc1",0,"R");$pdf->Cell(71,5,"$hlavicka->prie","$rmc",0,"L");
+$pdf->Cell(9,6," ","$rmc1",0,"R");$pdf->Cell(40,5,"$hlavicka->meno","$rmc",0,"L");
+$pdf->Cell(8,6," ","$rmc1",0,"R");$pdf->Cell(28,5,"$hlavicka->titl","$rmc",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(37,6," ","$rmc1",0,"R");$pdf->Cell(25,5,"$hlavicka->rdc / $hlavicka->rdk","$rmc",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(55,6," ","$rmc1",0,"R");$pdf->Cell(135,5,"$hlavicka->zuli $hlavicka->zcdm ","$rmc",1,"L");
 
-//zamestnanec - rodne cislo
-$pdf->Cell(190,1,"                          ","$rmc",1,"L");
-$pdf->Cell(37,6," ","$rmc",0,"R");$pdf->Cell(25,5,"$hlavicka->rdc / $hlavicka->rdk","$rmc",1,"L");
-
-//zamestnanec - pobyt
-$pdf->Cell(190,1,"                          ","$rmc",1,"L");
-$pdf->Cell(55,6," ","$rmc",0,"R");$pdf->Cell(135,5,"$hlavicka->zuli $hlavicka->zcdm ","$rmc",1,"L");
-
-//zamestnavatel - nazov
-$pdf->Cell(190,13,"                          ","$rmc",1,"L");
+//zamestnavatel
+$pdf->Cell(190,13," ","$rmc1",1,"L");
 $fnazov = $fir_fnaz;
 if ( $fir_uctt03 == 999 ) $fnazov = $fir_riadok->dmeno." ".$fir_riadok->dprie." ".$fir_riadok->dtitl;
-$pdf->Cell(29,6," ","$rmc",0,"R");$pdf->Cell(161,5,"$fnazov","$rmc",1,"L");
-
-//zamestnavatel - trvaly pobyt
-$pdf->Cell(190,1,"                          ","$rmc",1,"L");
+$pdf->Cell(29,6," ","$rmc1",0,"R");$pdf->Cell(161,5,"$fnazov","$rmc",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
 if ( $fir_uctt03 != 999 ) $dadresa = " ";
-$pdf->Cell(39,6," ","$rmc",0,"R");$pdf->Cell(151,5,"$dadresa","$rmc",1,"L");
-
-//zamestnavatel - sidlo
-$pdf->Cell(190,1,"                          ","$rmc",1,"L");
+$pdf->Cell(112,6," ","$rmc1",0,"R");$pdf->Cell(78,5,"$dadresa","$rmc",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
 if ( $fir_uctt03 == 999 ) $fadresa = " ";
-$pdf->Cell(27,6," ","$rmc",0,"R");$pdf->Cell(163,6,"$fadresa","$rmc",1,"L");
+$pdf->Cell(103,6," ","$rmc1",0,"R");$pdf->Cell(87,6,"$fadresa","$rmc",1,"L");
 
-//datum1
-$pdf->Cell(190,9,"                          ","$rmc",1,"L");
-$text="01012010";
+//uzatvoril dna
+$pdf->Cell(190,9," ","$rmc1",1,"L");
 $text=SKDatum($hlavicka->da2);
-if( $text =='00.00.0000' ) $text="";
-$pdf->Cell(26,6," ","$rmc",0,"R");$pdf->Cell(33,5,"$text","$rmc",1,"C");
+if ( $text =='00.00.0000' ) $text="";
+$pdf->Cell(25,6," ","$rmc1",0,"R");$pdf->Cell(33,5,"$text","$rmc",1,"C");
 
-//datum dna
-$pdf->Cell(190,63,"                          ","$rmc",1,"L");
-
-$text="01012010";
+//dna
+$pdf->Cell(190,67," ","$rmc1",1,"L");
 $text=SKDatum($hlavicka->da1);
-if( $text =='00.00.0000' ) $text="";
-$pdf->Cell(26,6," ","$rmc",0,"R");$pdf->Cell(29,6,"$text","$rmc",1,"C");
-
-
-
-
-
-
-
-
-
+if ( $text =='00.00.0000' ) $text="";
+$pdf->Cell(26,6," ","$rmc1",0,"R");$pdf->Cell(28,7,"$text","$rmc",1,"C");
 
 }
 $i = $i + 1;
-
   }
-
 $pdf->Output("../tmp/oznamenie.$kli_uzid.pdf");
-
-
-
-
-
 ?>
 
 <script type="text/javascript">
