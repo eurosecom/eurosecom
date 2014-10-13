@@ -220,7 +220,7 @@ $dadresa = "";
 $fadresa = $fir_fuli." ".$fir_fcdm." ".$fir_fmes;
                           }
 if ( $fir_uctt03 == 999 ) {
-$fnazov = $dmeno." ".$dprie." ".$dtitl;
+$fnazov = $fir_fnaz;
 $dadresa = $duli." "." ".$dcdm.", ".$dmes;
 $fadresa = "";
                           }
