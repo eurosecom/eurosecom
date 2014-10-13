@@ -51,43 +51,18 @@ $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resiza
 $tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
-//priezvisko,meno,titul FO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
-" WHERE oc = 9999 ORDER BY oc";
 
-$fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
-if ( $fir_uctt03 == 999 )
-{
-$fnazov = $fir_riadok->dmeno." ".$fir_riadok->dprie." ".$fir_riadok->dtitl;
-$dadresa = $fir_riadok->duli." "." ".$fir_riadok->dcdm." ".$fir_riadok->dmes;
-}
-if( $fir_uctt03 != 999 )
-{
-$fadresa = $fir_fuli." ".$fir_fcdm." ".$fir_fmes;
-$fnazov = $fir_fnaz;
-}
-
-
-
-// zapis upravene udaje
+//zapis upravene udaje
 if ( $copern == 23 )
-    {
-
-
+     {
 $da1 = strip_tags($_REQUEST['da1']);
 $da1sql=SqlDatum($da1);
-
 $da2 = strip_tags($_REQUEST['da2']);
 $da2sql=SqlDatum($da2);
-
-
-
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdoznam_student SET ".
 " da1='$da1sql', da2='$da2sql' ".
 " WHERE oc = $cislo_oc"; 
-
 
 $upravene = mysql_query("$uprtxt");  
 
@@ -200,14 +175,55 @@ $h_rdc = $fir_riadok->rdc;
 $h_rdk = $fir_riadok->rdk;
 $zuli = $fir_riadok->zuli." ".$fir_riadok->zcdm." ".$fir_riadok->zmes;
 
-//echo "meno".$meno;
-
 $da1 = $fir_riadok->da1;
 $da1sk=SkDatum($da1);
 $da2 = $fir_riadok->da2;
 $da2sk=SkDatum($da2);
     }
 //koniec nacitania
+
+
+//FO z ufir dalsie
+if ( $fir_uctt03 == 999 )
+{
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
+" WHERE oc = 9999 ORDER BY oc";
+$fir_vysledok = mysql_query($sqlfir);
+if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+$dmeno = $fir_riadok->dmeno;
+$dprie = $fir_riadok->dprie;
+$dtitl = $fir_riadok->dtitl;
+if ( $kli_vrok >= 2014 )
+   {
+$sqlc = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE icox = 0";
+$vysledokc = mysql_query($sqlc);
+if ( $vysledokc )
+     {
+$riadokc=mysql_fetch_object($vysledokc);
+$dprie = $riadokc->dprie;
+$dmeno = $riadokc->dmeno;
+$dtitl = $riadokc->dtitl;
+$dtitz = $riadokc->dtitz;
+$duli = $riadokc->duli;
+$dcdm = $riadokc->dcdm;
+$dpsc = $riadokc->dpsc;
+$dmes = $riadokc->dmes;
+$dtel = $riadokc->dtel;
+$dfax = $riadokc->dfax;
+     }
+   }
+}
+
+if ( $fir_uctt03 != 999 ) {
+$fnazov = $fir_fnaz;
+$dadresa = "";
+$fadresa = $fir_fuli." ".$fir_fcdm." ".$fir_fmes;
+                          }
+if ( $fir_uctt03 == 999 ) {
+$fnazov = $dmeno." ".$dprie." ".$dtitl;
+$dadresa = $duli." "." ".$dcdm.", ".$dmes;
+$fadresa = "";
+                          }
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -382,17 +398,17 @@ if ( $copern == 20 )
 <span class="text-echo" style="top:349px; left:290px;"><?php echo $zuli; ?></span>
 
 <!-- zamestnavatel -->
-<span class="text-echo" style="top:430px; left:290px;"><?php echo $fnazov; ?></span>
-<span class="text-echo" style="top:450px; left:290px;"><?php echo $dadresa; ?></span>
-<span class="text-echo" style="top:480px; left:290px;"><?php echo $fadresa; ?></span>
+<span class="text-echo" style="top:429px; left:170px;"><?php echo $fnazov; ?></span>
+<span class="text-echo" style="top:455px; left:545px;"><?php echo $dadresa; ?></span>
+<span class="text-echo" style="top:482px; left:505px;"><?php echo $fadresa; ?></span>
 
 <!-- oznamujem -->
 <input type="text" name="da2" id="da2" onkeyup="CiarkaNaBodku(this);"
- style="top:540px; left:160px; width:90px;"/>
+ style="top:542px; left:160px; width:90px;"/>
 
 <!-- dna -->
 <input type="text" name="da1" id="da1" onkeyup="CiarkaNaBodku(this);"
- style="top:840px; left:160px; width:90px;"/>
+ style="top:862px; left:160px; width:90px;"/>
 
 </FORM>
 </div> <!-- koniec #content -->
@@ -454,18 +470,14 @@ $pdf->Cell(8,6," ","$rmc1",0,"R");$pdf->Cell(28,5,"$hlavicka->titl","$rmc",1,"L"
 $pdf->Cell(190,1," ","$rmc1",1,"L");
 $pdf->Cell(37,6," ","$rmc1",0,"R");$pdf->Cell(25,5,"$hlavicka->rdc / $hlavicka->rdk","$rmc",1,"L");
 $pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(55,6," ","$rmc1",0,"R");$pdf->Cell(135,5,"$hlavicka->zuli $hlavicka->zcdm ","$rmc",1,"L");
+$pdf->Cell(55,6," ","$rmc1",0,"R");$pdf->Cell(135,5,"$hlavicka->zuli $hlavicka->zcdm, $hlavicka->zmes","$rmc",1,"L");
 
 //zamestnavatel
 $pdf->Cell(190,13," ","$rmc1",1,"L");
-$fnazov = $fir_fnaz;
-if ( $fir_uctt03 == 999 ) $fnazov = $fir_riadok->dmeno." ".$fir_riadok->dprie." ".$fir_riadok->dtitl;
 $pdf->Cell(29,6," ","$rmc1",0,"R");$pdf->Cell(161,5,"$fnazov","$rmc",1,"L");
 $pdf->Cell(190,1," ","$rmc1",1,"L");
-if ( $fir_uctt03 != 999 ) $dadresa = " ";
 $pdf->Cell(112,6," ","$rmc1",0,"R");$pdf->Cell(78,5,"$dadresa","$rmc",1,"L");
 $pdf->Cell(190,1," ","$rmc1",1,"L");
-if ( $fir_uctt03 == 999 ) $fadresa = " ";
 $pdf->Cell(103,6," ","$rmc1",0,"R");$pdf->Cell(87,6,"$fadresa","$rmc",1,"L");
 
 //uzatvoril dna
