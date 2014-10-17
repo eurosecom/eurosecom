@@ -645,6 +645,13 @@ $sqtz = "UPDATE F$kli_vxcf"."_$tablsluzby SET slu=$h_slu, nsl='$h_nsl', dph=$h_d
 " ced=$h_ced, mno=$h_mno, mer='$h_mer' ".
 " WHERE cpl='$cislo_cpl'";
 $upravene = mysql_query("$sqtz");
+
+$h_pon = trim(strip_tags($_REQUEST['h_pon']));
+if( $h_pon != '' AND $drupoh == 1 )
+   {
+$sqtz = "UPDATE F$kli_vxcfskl"."_$tablsluzby SET pon='$h_pon' WHERE cpl='$cislo_cpl'";
+$upravene = mysql_query("$sqtz");
+   }
 }
 if( $h_tltv == 1 )
 {
@@ -653,6 +660,13 @@ $sqtz = "UPDATE F$kli_vxcfskl"."_$tabltovar SET cis=$h_slu, nat='$h_nsl', dph=$h
 " ced=$h_ced, mno=$h_mno, mer='$h_mer' ".
 " WHERE cpl='$cislo_cpl'";
 $upravene = mysql_query("$sqtz");
+
+$h_pon = trim(strip_tags($_REQUEST['h_pon']));
+if( $h_pon != '' AND $drupoh == 1 )
+   {
+$sqtz = "UPDATE F$kli_vxcfskl"."_$tabltovar SET poz='$h_pon' WHERE cpl='$cislo_cpl'";
+$upravene = mysql_query("$sqtz");
+   }
 }
 
 //pripisat do zasob
@@ -4972,7 +4986,7 @@ $textnadpol=0;
 $textpodpol=0;
 $zahranicna=0;
 if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $maxtextpol=80; }
-if ( $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' ) {
+if ( ( $copern == 7 OR $copern == 87 ) AND $drupoh == 1 AND $sysx != 'UCT' ) {
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_fakturaset$kli_uzid ";
 $sqldok = mysql_query("$sqlttt");
   if (@$zaznam=mysql_data_seek($sqldok,0))
@@ -6387,9 +6401,11 @@ $sluz = mysql_query("$sluztt");
 $slpol = mysql_num_rows($sluz);
 
 //echo $slpol;
+$ajpoz="";
+if( $drupoh == 1 ) { $ajpoz=",poz"; }
 
 $tovtt = "SELECT dok, cpl, F$kli_vxcfskl"."_$tabltovar.cis AS slu, F$kli_vxcfskl"."_$tabltovar.nat AS nsl, pop, F$kli_vxcfskl"."_$tabltovar.dph,".
-" mno, F$kli_vxcfskl"."_$tabltovar.mer, F$kli_vxcfskl"."_$tabltovar.cep, F$kli_vxcfskl"."_$tabltovar.ced, F$kli_vxcfskl"."_$tabltovar.cen, fak, dol". 
+" mno, F$kli_vxcfskl"."_$tabltovar.mer, F$kli_vxcfskl"."_$tabltovar.cep, F$kli_vxcfskl"."_$tabltovar.ced, F$kli_vxcfskl"."_$tabltovar.cen, fak, dol $ajpoz". 
 " FROM F$kli_vxcfskl"."_$tabltovar".
 " LEFT JOIN F$kli_vxcfskl"."_sklcis".
 " ON F$kli_vxcfskl"."_$tabltovar.cis=F$kli_vxcfskl"."_sklcis.cis".
@@ -6487,6 +6503,13 @@ $i=0;
 $rtov=mysql_fetch_object($tov);
 
 ?>
+
+<?php if(  $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' ) { ?>
+<?php if( $textnadpol == 1 AND $rtov->poz != '' ) { ?>
+<tr><td class="bmenu" colspan="2" ><td class="fmenu" colspan="9" ><?php echo $rtov->poz;?></td></tr>
+<?php                                             } ?>
+<?php                                                         } ?>
+
 
 <tr>
 <?php
@@ -6888,6 +6911,23 @@ if ( $copern == 87 )
      {
 ?>
 &copern=88&cislo_dok=<?php echo $cislo_dok;?>&cislo_cpl=<?php echo $z_cpl;?>" >
+<?php if( $textnadpol == 0 ) { ?>
+<input type="hidden" name="h_pon" id="h_pon" />
+<?php                        } ?>
+<?php if( $textnadpol == 1 ) { ?>
+<?php
+if ( $copern == 87 AND $drupoh == 1 AND $sysx != 'UCT' ) {
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_sklfak WHERE cpl = $z_cpl ";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $z_pon=$riaddok->poz;
+  }
+                                                         }
+?>
+<td class="bmenu" colspan="2" >Text nad položkou:<td class="bmenu" colspan="9" ><input type="text" name="h_pon" id="h_pon" size="80" maxlength="80" value="<?php echo $z_pon; ?>" ></td></tr><tr>
+<?php                        } ?>
 <td class="fmenu" >
 <input type="text" name="h_cpl" id="h_cpl" size="5" style="background-color:lime; color:black;" value="<?php echo $z_cpl;?>" />
 </td>

@@ -1194,9 +1194,11 @@ if( $prepoczk2 == 1 )
 $tabltovar="sklfakprc".$kli_uzid; $ajhodb=",hodb"; $kli_vxcfskl=$kli_vxcf;
 }
 if( $drupoh == 11 ) { $ajunk=",unk"; }
+$ajpoz="";
+if( $drupoh == 1 ) { $ajpoz=",poz"; }
 
 $tovtt = "SELECT dok, cpl, F$kli_vxcfskl"."_$tabltovar.cis AS slu, F$kli_vxcfskl"."_$tabltovar.nat AS nsl, pop, F$kli_vxcfskl"."_$tabltovar.dph,".
-" mno, F$kli_vxcfskl"."_$tabltovar.mer, F$kli_vxcfskl"."_$tabltovar.cep, F$kli_vxcfskl"."_$tabltovar.ced, F$kli_vxcfskl"."_sklcis.nat AS nso $ajhodb $ajunk". 
+" mno, F$kli_vxcfskl"."_$tabltovar.mer, F$kli_vxcfskl"."_$tabltovar.cep, F$kli_vxcfskl"."_$tabltovar.ced, F$kli_vxcfskl"."_sklcis.nat AS nso $ajhodb $ajunk $ajpoz". 
 " FROM F$kli_vxcfskl"."_$tabltovar".
 " LEFT JOIN F$kli_vxcfskl"."_sklcis".
 " ON F$kli_vxcfskl"."_$tabltovar.cis=F$kli_vxcfskl"."_sklcis.cis".
@@ -1222,6 +1224,15 @@ $rtov=mysql_fetch_object($tov);
 
 if(  $rtov->slu >= 0 AND $rtov->nsl != '' )
     {
+
+if(  $rtov->poz != '' )
+      {
+$pdf->SetFont('arial','',8);
+$pdf->Cell(72,5,"$rtov->poz","0",1,"L");
+$js=$js+1;
+      }
+
+
 $mnozstvo=1*$rtov->mno;
 if( $mnozstvo == 0 AND $drupoh == 11 ) { $mnozstvo=1*$rtov->unk; } 
 $mnozstvo=sprintf("%0.3f", $mnozstvo);
