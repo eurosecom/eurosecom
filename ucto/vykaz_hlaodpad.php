@@ -1655,7 +1655,8 @@ $j = $j + 1;
 ?>
 
 <tr>
-<td class="bmenu" colspan="2" >
+<td class="bmenu" colspan="1" >
+<td class="bmenu" colspan="1" ><?php echo $kli_vume; ?>
 <td class="bmenu" align="left" colspan="8" > Nové IÈO
 <input class="hvstup" type="text" name="xico" id="xico" size="10" maxlength="10" onKeyDown="return xIcoEnter(event.which)" 
  onclick="myIcoElement.style.display='none'; Ico.style.display='none';" />
