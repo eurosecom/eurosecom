@@ -123,6 +123,7 @@ $fix = 1*$_REQUEST['fix'];
 if ( $umx == '1.2011' ) { $umx = "1.2014"; }
 if ( $umx == '1.2012' ) { $umx = "1.2014"; }
 if ( $umx == '1.2013' ) { $umx = "1.2014"; }
+if ( $umx == '1.2014' ) { $umx = "1.2015"; }
 
 $ned = 1*$_REQUEST['ned'];
 $pre = 1*$_REQUEST['pre'];
@@ -145,6 +146,7 @@ if ( $kli_vrok == 2010 ) { if ( File_Exists("../pswd/oddelena2010db2011.php") ) 
 if ( $kli_vrok == 2011 ) { if ( File_Exists("../pswd/oddelena2011db2012.php") ) { $databaza=$mysqldb2012."."; } }
 if ( $kli_vrok == 2012 ) { if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2013."."; } }
 if ( $kli_vrok == 2013 ) { if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2014."."; } }
+if ( $kli_vrok == 2014 ) { if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2015."."; } }
 
 $uprtxt = "DELETE FROM ".$databaza."F$fix"."_mzdmes WHERE oc = $cislo_oc AND dm = $dmx ";
 //echo $uprtxt;
@@ -532,7 +534,7 @@ mzdprc;
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdrocnedaneprenos'.$sqlt;
 $vytvor = mysql_query("$vsql");
 
-$vsql = "INSERT INTO F".$kli_vxcf."_mzdrocnedaneprenos ( dmx,umx,fix) VALUES ( '903','1.2014',0 )";
+$vsql = "INSERT INTO F".$kli_vxcf."_mzdrocnedaneprenos ( dmx,umx,fix) VALUES ( '903','1.2015',0 )";
 $vytvor = mysql_query("$vsql");
 
 }
@@ -799,8 +801,8 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//len vynulujem nepouzivane 2013
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r04c1=0, r04c2=0, r04d=0, r04e=0, r04f=0 WHERE oc = $cislo_oc";
+//len vynulujem nepouzivane 2014
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r04c1=0, r04c2=0, r04e=0, r04f=0 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 
 //nezdanitelna cast na danovnika za 2013
@@ -838,7 +840,7 @@ $oznac = mysql_query("$sqtoz");
 
 //rok 2013
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET po6=0, px4=0, r04x=r04a+r04b+r04c, r05=r03-r04x  WHERE oc = $cislo_oc";
+" SET po6=0, px4=0, r04x=r04a+r04b+r04c+r04d, r05=r03-r04x  WHERE oc = $cislo_oc";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
@@ -1058,6 +1060,11 @@ $fir_riadok=mysql_fetch_object($fir_vysledok);
 $dmx = $fir_riadok->dmx;
 $umx = $fir_riadok->umx;
 $fix = $fir_riadok->fix;
+
+if ( $umx == '1.2011' ) { $umx = "1.2014"; }
+if ( $umx == '1.2012' ) { $umx = "1.2014"; }
+if ( $umx == '1.2013' ) { $umx = "1.2014"; }
+if ( $umx == '1.2014' ) { $umx = "1.2015"; }
 
 mysql_free_result($fir_vysledok);
 
