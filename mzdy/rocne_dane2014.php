@@ -1275,19 +1275,19 @@ var sirkawic = screen.width-10;
 
   function prevOC()
   {
-   window.open('rocne_dane2013.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $prev_oc;?>', '_self');
+   window.open('rocne_dane2014.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $prev_oc;?>', '_self');
   }
   function nextOC()
   {
-   window.open('rocne_dane2013.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $next_oc;?>', '_self');
+   window.open('rocne_dane2014.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $next_oc;?>', '_self');
   }
   function TlacRZ()
   {
-   window.open('../mzdy/rocne_dane2013.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/rocne_dane2014.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function reNacitajMzdy()
   {
-   window.open('../mzdy/rocne_dane2013.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0', '_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/rocne_dane2014.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0', '_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravZamestnanca()
   {
@@ -1309,7 +1309,7 @@ var sirkawic = screen.width-10;
    var nedbon = 1*document.forms.formv1.r13.value;
    var zampre = 1*document.forms.formv1.r09.value;
    var zamprex = 1*document.forms.formv1.r09a.value;
-   window.open('../mzdy/rocne_dane2013.php?fix=' + fix + '&zamprex=' + zamprex + '&zampre=' + zampre + '&prebon=' + prebon +  '&nedbon=' + nedbon + '&pre=' + pre + '&ned=' + ned + '&umx=' + umx + '&dmx=' + dmx + '&cislo_oc=<?php echo $cislo_oc;?>&copern=27&drupoh=1&page=1&subor=0', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/rocne_dane2014.php?fix=' + fix + '&zamprex=' + zamprex + '&zampre=' + zampre + '&prebon=' + prebon +  '&nedbon=' + nedbon + '&pre=' + pre + '&ned=' + ned + '&umx=' + umx + '&dmx=' + dmx + '&cislo_oc=<?php echo $cislo_oc;?>&copern=27&drupoh=1&page=1&subor=0', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function ZoznamRocnezucto()
   {
@@ -1460,10 +1460,10 @@ if ( $copern == 20 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="rocne_dane2013.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>">
+<FORM name="formv1" method="post" action="rocne_dane2014.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>">
 <?php
 $clas1="noactive"; $clas2="noactive"; if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active"; if ( $strana == 3 ) $clas3="active";
-$source="../mzdy/rocne_dane2013.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0";
+$source="../mzdy/rocne_dane2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0";
 ?>
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>

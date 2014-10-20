@@ -212,10 +212,19 @@ window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+<?php
+$rokrocnezucz=$kli_vrok;
+if( $rokrocnezucz < 2011 ) { $rokrocnezucz="";  }
+if( $rokrocnezucz == 2011 ) { $rokrocnezucz="2011";  }
+if( $rokrocnezucz == 2012 ) { $rokrocnezucz="2012";  }
+if( $rokrocnezucz == 2013 ) { $rokrocnezucz="2013";  }
+if( $rokrocnezucz >= 2014 ) { $rokrocnezucz="2013";  }
+?>
+
 function ZoznamRocnezucto()
                 {
 
-window.open('../mzdy/rocne_danezoznam<?php echo $rokrocnezuc; ?>.php?copern=1&drupoh=1&page=1&subor=0',
+window.open('../mzdy/rocne_danezoznam<?php echo $rokrocnezucz; ?>.php?copern=1&drupoh=1&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
