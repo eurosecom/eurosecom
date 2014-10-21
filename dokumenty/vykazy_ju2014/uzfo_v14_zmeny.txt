@@ -1,0 +1,5 @@
+Porovnanie s výkazom o príjmoch a výdavkoch a výkazom o majetku a záväzkov
+1.strana:
+- pridané bezprostredne predchádzajúce obdobie (od - do)
+- zrušený polia pre trvalý pobyt
+- pridaný email
