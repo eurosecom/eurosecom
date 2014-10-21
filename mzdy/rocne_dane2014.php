@@ -790,11 +790,11 @@ $oznac = mysql_query("$sqtoz");
 //koniec pracovneho suboru pre rocne 
 
 //vypocty
-//vsetky vypocty su aktualizovane na rok 2013
+//vsetky vypocty su aktualizovane na rok 2014
 $nepocitaj=0;
 if ( ( $copern == 10 OR $copern == 20 ) AND $nepocitaj == 0 )
 {
-//vypocitaj 2013
+//vypocitaj 2014
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 " SET r00=r00z1+r00z2, r00a=r00a1+r00a2, r00b=r00b1+r00b2, r00c=r00c1+r00c2, r00d=r00d1+r00d2, r01=r00-r00a, r03=r01+r02, r04a=r04a1+r04a2  ".
 "  WHERE oc = $cislo_oc";
@@ -805,9 +805,9 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r04c1=0, r04c2=0, r04e=0, r04f=0 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 
-//nezdanitelna cast na danovnika za 2013
+//nezdanitelna cast na danovnika za 2014
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET r04a1=3735.94, r04a2=0   WHERE oc = $cislo_oc AND r04a1 != 0 AND r04a2 >= 0 AND r01 <= 19458.00 ";
+" SET r04a1=3803.33, r04a2=0   WHERE oc = $cislo_oc AND r04a1 != 0 AND r04a2 >= 0 AND r01 <= 19809.00 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
@@ -817,11 +817,11 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 $oznac = mysql_query("$sqtoz");
 
 
-//milionarska dan za 2013
+//milionarska dan za 2014
 if ( $vsetkyprepocty == 1 )
      {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET po6=8600.436-(r01/4) WHERE oc = $cislo_oc AND r01 > 19458.00 ";
+" SET po6=8755.58-(r01/4) WHERE oc = $cislo_oc AND r01 > 19809.00 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
@@ -829,16 +829,16 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET px4=po6*100, px4=ceil(px4), r04a1=px4/100, r04a=r04a1+r04a2 WHERE oc = $cislo_oc AND r01 > 19458.00 ";
+" SET px4=po6*100, px4=ceil(px4), r04a1=px4/100, r04a=r04a1+r04a2 WHERE oc = $cislo_oc AND r01 > 19809.00 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r04a=0, r04a1=0, r04a2=0 WHERE oc = $cislo_oc AND r01 >= 34401.75 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r04a=0, r04a1=0, r04a2=0 WHERE oc = $cislo_oc AND r01 >= 35022.32 ";
 $oznac = mysql_query("$sqtoz");
      }
-//koniec milionarska dan za 2013
+//koniec milionarska dan za 2014
 
-//rok 2013
+//rok 2014
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 " SET po6=0, px4=0, r04x=r04a+r04b+r04c+r04d, r05=r03-r04x  WHERE oc = $cislo_oc";
 //echo $sqtoz;
@@ -848,38 +848,41 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r05=0  WHERE oc = $cislo_oc AND 
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//dan z prijmu 2013
+//dan z prijmu 2014
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET po6=0, px4=0, r06=0 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET po6=r05*19/100 WHERE oc = $cislo_oc AND r05 <= 34401.74 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET po6=r05*19/100 WHERE oc = $cislo_oc AND r05 <= 35022.31 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET px4=po6*100, r06=floor(px4), r06=r06/100 WHERE oc = $cislo_oc AND r05 <= 34401.74 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET px4=po6*100, r06=floor(px4), r06=r06/100 WHERE oc = $cislo_oc AND r05 <= 35022.31 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET po6=(34401.74*19/100)+((r05-34401.74)*25/100) WHERE oc = $cislo_oc AND r05 > 34401.74 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET po6=(35022.31*19/100)+((r05-35022.31)*25/100) WHERE oc = $cislo_oc AND r05 > 35022.31 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET px4=po6*100, r06=floor(px4), r06=r06/100 WHERE oc = $cislo_oc AND r05 > 34401.74 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET px4=po6*100, r06=floor(px4), r06=r06/100 WHERE oc = $cislo_oc AND r05 > 35022.31 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r06=0 WHERE oc = $cislo_oc AND r06 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
 
-//zam.premia 2013
-if ( $vsetkyprepocty == 1 AND $kli_vrok >= 2013 )
+//zam.premia 2014
+//2013	2026.20		2014	2112.00
+//2013	4052.40		2014	4224.00
+//2013	3509.76		2014	3658.08
+if ( $vsetkyprepocty == 1 AND $kli_vrok >= 2014 )
      {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 " SET r07=r01, px4=0, po6=0 WHERE oc = $cislo_oc";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r07=3509.76 WHERE oc = $cislo_oc AND r00 < 4052.40 AND r00 >= 2026.20 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r07=3658.08 WHERE oc = $cislo_oc AND r00 < 4224.00 AND r00 >= 2112.00 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r07=0, r08=0 WHERE oc = $cislo_oc AND r00 < 2026.20 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r07=0, r08=0 WHERE oc = $cislo_oc AND r00 < 2112.00 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r07=0, r09=0 WHERE oc = $cislo_oc AND r08 = 0 ";
@@ -900,15 +903,15 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r09=0  WHERE oc = $cislo_oc AND 
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//max zam.premia=42.98 rok 2013
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r09=42.98  WHERE oc = $cislo_oc AND r09 > 42.98";
+//max zam.premia=27.60 rok 2014
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r09=27.60  WHERE oc = $cislo_oc AND r09 > 27.60";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
      }
-//koniec zam.premia 2013
+//koniec zam.premia 2014
 
 
-//dan.bonus 2013 max. 254.64
+//dan.bonus 2014 max. 256.92 na rok na 1 dieta
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 " SET r12=0, r13=0, r11=r11a+r11b, r12=r10-r11 WHERE oc = $cislo_oc";
 //echo $sqtoz;
