@@ -21,7 +21,7 @@ require_once("../pswd/password.php");
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=1;
+$rmc=0;
 $rmc1=0;
 
 //datumove funkcie
@@ -1600,8 +1600,8 @@ $source="../mzdy/rocne_dane2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 <input type="text" name="suma7" id="suma7" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:515px; left:606px;"/>
 <input type="text" name="zost7" id="zost7" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:515px; left:741px;"/>
 <!-- Dna -->
-<input type="text" name="da2ked" id="da2ked" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:643px; left:352px;"/>
-<span class="text-echo" style="top:643px; left:85px;"><?php echo $fir_fmes; ?></span>
+<input type="text" name="da2ked" id="da2ked" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:645px; left:352px;"/>
+<span class="text-echo" style="top:654px; left:85px;"><?php echo $fir_fmes; ?></span>
 <?php                     } ?>
 
 
@@ -1622,39 +1622,6 @@ $source="../mzdy/rocne_dane2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 <input type="text" name="statznec" id="statznec" value="<?php echo $statznec; ?>" disabled="disabled" class="nofill" style="width:200px; top:343px; left:530px;"/>
 
 <!-- II. Zamestnavatel -->
-<?php
-if ( $fir_uctt03 == 999 )
-{
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
-" WHERE oc = 9999 ORDER BY oc";
-$fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
-
-$dmeno = $fir_riadok->dmeno; //dopyt, ošetri, aby dávalo z ufir dalsie
-$dprie = $fir_riadok->dprie;
-$dtitl = $fir_riadok->dtitl;
-$dtitz = $fir_riadok->dtitz;
-$dtitul = $dtitl." / ".$dtitz;
-$uli = $fir_riadok->duli;
-$cdm = $fir_riadok->dcdm;
-$psc = $fir_riadok->dpsc;
-$mes = $fir_riadok->dmes;
-$fstat = $fir_riadok->xstat;  
-}
-if ( $fir_uctt03 != 999 )
-{
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_po".
-" WHERE psys = 0 ";
-$fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
-$naz = $fir_fnaz;
-$uli = $fir_fuli;
-$cdm = $fir_fcdm;
-$psc = $fir_fpsc;
-$mes = $fir_fmes;
-$fstat = $fir_riadok->xstat; 
-}
-?>
 <!-- FO -->
 <input type="text" name="dprie" id="dprie" value="<?php echo $dprie; ?>" disabled="disabled" class="nofill" style="width:273px; top:482px; left:120px;"/>
 <input type="text" name="dmeno" id="dmeno" value="<?php echo $dmeno; ?>" disabled="disabled" class="nofill" style="width:164px; top:482px; left:408px;"/>
@@ -1812,10 +1779,11 @@ $pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r01","$rmc",1,"R");
 $pdf->Cell(161,8," ","$rmc1",0,"L");$pdf->Cell(25,8,"$r02","$rmc",1,"R");
 $pdf->Cell(161,9," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r03","$rmc",1,"R");
 
-if ( $r09 > 0 ) { $r04a="";  $r04b=""; $r04c=""; $r04x=""; }
+if ( $r09 > 0 ) { $r04a="";  $r04b=""; $r04c=""; $r04d=""; $r04x=""; }
 $pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r04a","$rmc",1,"R");
 $pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r04b","$rmc",1,"R");
 $pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r04c","$rmc",1,"R");
+$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r04d","$rmc",1,"R");
 $pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r04x","$rmc",1,"R");
 $pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,7,"$r05","$rmc",1,"R");
 $pdf->Cell(161,7," ","$rmc1",0,"L");$pdf->Cell(25,7,"$r06","$rmc",1,"R");
@@ -1840,16 +1808,22 @@ $pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r18n","$rmc",1,"R");
 $pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r18p","$rmc",1,"R");
 
 //ZAMESTNAVATEL
-$pdf->Cell(190,6,"                          ","$rmc1",1,"L");
-$pdf->Cell(19,5," ","$rmc1",0,"L");$pdf->Cell(42,5,"$fir_fdic","$rmc",0,"L");$pdf->Cell(11,5," ","$rmc1",0,"L");$pdf->Cell(36,5,"$fir_ftel","$rmc",1,"L");
-$pdf->Cell(11,7," ","$rmc1",0,"L");$pdf->Cell(98,7,"$fir_fnaz, $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",1,"L");
-$pdf->Cell(190,4,"                          ","$rmc1",1,"L");
-if ( $dat_dat == '00.00.0000' ) $dat_dat="";
-$pdf->Cell(11,5," ","$rmc1",0,"L");$pdf->Cell(46,5,"$kli_uzprie","$rmc",0,"L");$pdf->Cell(22,5," ","$rmc1",0,"L");$pdf->Cell(29,5,"$dat_dat","$rmc",1,"C");
+$pdf->Cell(190,7," ","$rmc1",1,"L");
+$pdf->Cell(19,5," ","$rmc1",0,"L");$pdf->Cell(35,5,"$fir_fdic","$rmc",0,"L");
+$pdf->SetFont('arial','',9);
+$pdf->Cell(64,5," ","$rmc1",0,"L");$pdf->Cell(80,5,"$fir_fnaz, $fir_fuli $fir_fcdm, $fir_fmes","$rmc",1,"L");
+$pdf->SetFont('arial','',10);
 
-$pdf->Cell(190,14,"                          ","$rmc1",1,"L");
+//Vypracoval
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+$pdf->Cell(11,7," ","$rmc1",0,"L");$pdf->Cell(40,5,"$kli_uzprie","$rmc",0,"L");$pdf->Cell(2,5," ","$rmc1",0,"L");
+if ( $dat_dat == '00.00.0000' ) $dat_dat="";
+$pdf->Cell(20,5,"$dat_dat","$rmc",0,"L");$pdf->Cell(4,5," ","$rmc1",0,"L");$pdf->Cell(30,5,"$fir_ftel","$rmc",1,"L");
+
+//Poznamka
+$pdf->Cell(190,20," ","$rmc1",1,"L");
 $pozn=$hlavicka->pozn;
-$pdf->Cell(11,5," ","$rmc1",0,"L");$pdf->Cell(130,5,"$pozn","$rmc",1,"L");
+$pdf->Cell(11,5," ","$rmc1",0,"L");$pdf->Cell(160,5,"$pozn","$rmc",1,"L");
 }
 $i = $i + 1;
   }
@@ -1876,13 +1850,12 @@ $pdf->Image('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/rz/rz_v14_str2.j
 }
 
 //II. CAST
-$pdf->Cell(190,38,"                          ","$rmc1",1,"L");
+$pdf->Cell(190,38," ","$rmc1",1,"L");
 $da2str = $hlavicka2->da2str;
 $da2strsk=SkDatum($da2str);
 if ( $hlavicka2->da2str == '0000-00-00' ) $da2strsk="";
-$pdf->Cell(93,5," ","$rmc1",0,"L");$pdf->Cell(24,3,"$da2strsk","$rmc",1,"C");
-$pdf->Cell(190,1,"                          ","$rmc1",1,"L");
-$pdf->Cell(106,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$kli_vrok","$rmc",1,"C");
+$pdf->Cell(93,5," ","$rmc1",0,"L");$pdf->Cell(24,4,"$da2strsk","$rmc",1,"C");
+$pdf->Cell(106,4," ","$rmc1",0,"L");$pdf->Cell(20,5,"$kli_vrok","$rmc",1,"C");
 
 //Zamestnanec
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_oc ";
@@ -1894,10 +1867,10 @@ $sqldok = mysql_query("$sqlttt");
   $meno=$riaddok->meno;
   $titl=$riaddok->titl;
   }
-$pdf->Cell(190,10,"                          ","$rmc1",1,"L");
+$pdf->Cell(190,10," ","$rmc1",1,"L");
 $pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(80,6,"$titl $meno $prie","$rmc",0,"L");$pdf->Cell(23,4," ","$rmc1",0,"L");
 
-$pdf->Cell(190,7,"                          ","$rmc1",1,"L");
+$pdf->Cell(190,7," ","$rmc1",1,"L");
 $suma1 = $hlavicka2->suma1;
 $suma2 = $hlavicka2->suma2;
 $suma3 = $hlavicka2->suma3;
@@ -1955,7 +1928,8 @@ $pdf->Cell(190,19,"                          ","$rmc1",1,"L");
 $da2ked = $hlavicka2->da2ked;
 $da2kedsk =SkDatum($da2ked);
 if ( $hlavicka2->da2ked == '0000-00-00' ) $da2kedsk="";
-$pdf->Cell(15,5," ","$rmc1",0,"L");$pdf->Cell(40,5,"$fir_fmes","$rmc",0,"L");$pdf->Cell(14,5," ","$rmc1",0,"R");$pdf->Cell(27,5,"$da2kedsk","$rmc",1,"C");
+$pdf->Cell(15,5," ","$rmc1",0,"L");$pdf->Cell(46,6,"$fir_fmes","$rmc",0,"L");
+$pdf->Cell(12,5," ","$rmc1",0,"R");$pdf->Cell(27,5,"$da2kedsk","$rmc",1,"C");
 }
 $i2 = $i2 + 1;
   }
