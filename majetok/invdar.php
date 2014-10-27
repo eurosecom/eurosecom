@@ -311,7 +311,7 @@ $pdf->Cell(30,4,"$rtov->cen","0",0,"R");$pdf->Cell(30,4,"$rtov->ops","0",0,"R");
 $pdf->Cell(14,4,"$sk_zar","0",0,"L");
 $pdf->Cell(0,4," ","0",1,"L");
 
-$pdf->Cell(83,4,"obstarané z prostriedkov EU","0",0,"L");
+$pdf->Cell(83,4,"darované a bezplatne obstarané","0",0,"L");
 $pdf->Cell(10,4,"$rtov->stre","0",0,"L");$pdf->Cell(20,4,"$rtov->zake","0",0,"L");$pdf->Cell(24,4," ","0",0,"L");
 $pdf->Cell(30,4,"$rtov->ceneu","0",0,"R");$pdf->Cell(30,4,"$rtov->opseu","0",0,"R");$pdf->Cell(30,4,"$zostatokeu","0",0,"R");$pdf->Cell(30,4,"$rtov->roseu","0",1,"R");
 
@@ -367,7 +367,7 @@ $pdf->Cell(91,5,"CELKOM MAJETOK = $rtov->pol položiek","LT",0,"R");
 $pdf->Cell(10,5," ","T",0,"L");$pdf->Cell(20,5," ","T",0,"L");$pdf->Cell(16,5," ","T",0,"L");
 $pdf->Cell(30,5,"$rtov->cen","T",0,"R");$pdf->Cell(30,5,"$rtov->ops","T",0,"R");$pdf->Cell(30,5,"$zostatok","T",0,"R");$pdf->Cell(30,5,"$rtov->ros","TR",1,"R");
 
-$pdf->Cell(83,5,"obstarané z prostriedkov EU","L",0,"L");
+$pdf->Cell(83,5,"darované a bezplatne obstarané","L",0,"L");
 $pdf->Cell(10,5,"$rtov->stre","0",0,"L");$pdf->Cell(20,5,"$rtov->zake","0",0,"L");$pdf->Cell(24,5," ","0",0,"L");
 $pdf->Cell(30,5,"$rtov->ceneu","0",0,"R");$pdf->Cell(30,5,"$rtov->opseu","0",0,"R");$pdf->Cell(30,5,"$zostatokeu","0",0,"R");$pdf->Cell(30,5,"$rtov->roseu","R",1,"R");
 
