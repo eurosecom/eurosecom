@@ -469,12 +469,13 @@ $pdf->Cell(70,5,"$hodnota","0",1,"L");
 $ipole=$ipole+1;
                              }
 
-//exit;
+$ajstrana=1;
+if( $_SERVER['SERVER_NAME'] == "www.merkfood.sk" ) { $ajstrana=0; }
 
 $pozy=$pdf->GetY();                            
 $pdf->SetY(270);
 $pdf->SetFont('arial','',$velkost);
-$pdf->Cell(180,6,"- 1.strana -","0",1,"C");
+if( $ajstrana == 1 ) { $pdf->Cell(180,6,"- 1.strana -","0",1,"C"); }
 $pdf->SetY($pozy);
 
 }
@@ -492,10 +493,13 @@ $pdf->SetTopMargin(15);
 
 $pdf->SetFont('arial','',$velkost);
 
+$ajstrana=1;
+if( $_SERVER['SERVER_NAME'] == "www.merkfood.sk" ) { $ajstrana=0; }
+
 $pozy=$pdf->GetY();                            
 $pdf->SetY(270);
 $pdf->SetFont('arial','',$velkost);
-$pdf->Cell(180,6,"- 2.strana -","0",1,"C");
+if( $ajstrana == 1 ) { $pdf->Cell(180,6,"- 2.strana -","0",1,"C"); }
 $pdf->SetY($pozy);
 
 $pdf->Cell(180,1,""," ",1,"L");
