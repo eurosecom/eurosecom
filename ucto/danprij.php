@@ -691,6 +691,174 @@ window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=
 </table>
 
 
+<?php //MUJ 2014                  ?>
+<?php if( $kli_vrok >= 2014 )   { ?>
+
+<script type="text/javascript">
+
+function SuvahaMUJ2014()
+                {
+var h_zos = document.forms.formsumuj.h_zos.value;
+
+window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function VysledovkaMUJ2014()
+                {
+var h_zos = document.forms.formvzmuj.h_zos.value;
+
+window.open('../ucto/vykzis_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function SuvahaMUJ2014cele()
+                {
+var h_zos = document.forms.formsumuj.h_zos.value;
+
+window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function VysledovkaMUJ2014cele()
+                {
+var h_zos = document.forms.formvzmuj.h_zos.value;
+
+window.open('../ucto/vykzis_muj2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function UzavierkaMUJ2014()
+                {
+var h_zos = document.forms.formuzmuj.h_zos.value;
+
+window.open('../ucto/uzavierka_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function KompletMUJ2014()
+                {
+var h_zos = document.forms.formuzmuj.h_zos.value;
+var h_sch = document.forms.formuzmuj.h_sch.value;
+var h_drp = document.forms.formuzmuj.h_drp.value;
+
+window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function KompletMUJ2014doxml()
+                {
+var h_zos = document.forms.formuzmuj.h_zos.value;
+var h_sch = document.forms.formuzmuj.h_sch.value;
+var h_drp = document.forms.formuzmuj.h_drp.value;
+
+window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+  function GenSuvMuj()
+  { 
+
+  }
+
+  function GenVysMuj()
+  { 
+
+  }
+
+  function MinSuvMuj()
+  { 
+
+  }
+
+  function MinVysMuj()
+  { 
+
+  }
+
+</script>
+
+<table class="vstup" width="100%" >
+<FORM name="formsumuj" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="SuvahaMUJ2014();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlaèi vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="SuvahaMUJ2014cele();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="64%">Súvaha Úè MUJ 1-01 </td>
+<td class="bmenu" width="28%">
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
+ Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+</td>
+
+<td class="bmenu" width="2%">
+<a href="#" onClick="GenSuvMuj();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie výkazu' ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="MinSuvMuj();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+
+<table class="vstup" width="100%" >
+<FORM name="formvzmuj" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="VysledovkaMUJ2014();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlaèi vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="VysledovkaMUJ2014cele();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="64%">Výsledovka Úè MUJ 2-01 </td>
+<td class="bmenu" width="28%">
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
+ Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="GenVysMuj();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie výkazu' ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="MinVysMuj();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+
+<table class="vstup" width="100%" >
+<FORM name="formuzmuj" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="KompletMUJ2014();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlaèi vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="55%">Úètovná závierka MUJ 
+ <select size="1" name="h_drp" id="h_drp" >
+<option value="1" >Riadna</option>
+<option value="2" >Mimoriadna</option>
+</select>
+</td>
+<td class="bmenu" width="35%">
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
+ Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
+</td>
+<td class="bmenu" width="2%">
+<td class="bmenu" width="9%" align="right">
+<img src='../obr/export.png' onclick='KompletMUJ2014doxml()' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie' >
+</td>
+</tr>
+</FORM>
+</table>
+
+<?php                           } ?>
+<?php //koniec MUJ 2014           ?>
+
+
 <?php if( $kli_vrok <  2012 )   { ?>
 <script type="text/javascript">
 
