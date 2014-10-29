@@ -734,8 +734,10 @@ echo "Vytvorit tabulku F$kli_vxcf"."_crs_muj2014!"."<br />";
 
 $sqlt = <<<crs_muj2014
 (
+   cpl         int not null auto_increment,
    uce         VARCHAR(10),
-   crs         INT
+   crs         DECIMAL(10,0),
+   PRIMARY KEY(cpl)
 );
 crs_muj2014;
 

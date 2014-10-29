@@ -231,11 +231,20 @@ window.open('../mzdy/rocne_danezoznam<?php echo $rokrocnezucz; ?>.php?copern=1&d
 
 //Potvrdenie o zaplateni dane
 
+<?php
+$rokrocnezucp=$kli_vrok;
+if( $rokrocnezuczp < 2011 ) { $rokrocnezuczp="";  }
+if( $rokrocnezuczp == 2011 ) { $rokrocnezuczp="2011";  }
+if( $rokrocnezuczp == 2012 ) { $rokrocnezuczp="2012";  }
+if( $rokrocnezuczp == 2013 ) { $rokrocnezuczp="2013";  }
+if( $rokrocnezuczp >= 2014 ) { $rokrocnezuczp="2013";  }
+?>
+
 function TlacPotvrd2pdane()
                 {
 var h_oc = document.forms.formrz1.h_oc.value;
 
-window.open('../mzdy/potvrdenie_2pdane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&page=1&subor=0',
+window.open('../mzdy/potvrdenie_2pdane<?php echo $rokrocnezuczp; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 

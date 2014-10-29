@@ -752,22 +752,22 @@ window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 
   function GenSuvMuj()
   { 
-
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=91', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
   function GenVysMuj()
   { 
-
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=92', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
   function MinSuvMuj()
   { 
-
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
   function MinVysMuj()
   { 
-
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
 </script>
