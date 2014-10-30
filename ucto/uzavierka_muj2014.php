@@ -445,8 +445,10 @@ $pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$sn1c","$rmc",1,"C");
 //uctovna zavierka
 //dopyt, chýba priebežná
 $pdf->SetFont('arial','',8);
-$riadna=""; if ( $h_drp == 1 ) $riadna="x";
-$mimor=""; if ( $h_drp == 2 ) $mimor="x";
+$riadna=""; $mimor=""; $priebez="";
+if ( $h_drp == 1 ) { $riadna="x"; }
+if ( $h_drp == 2 ) { $mimor="x"; }
+if ( $h_drp == 3 ) { $priebez="x"; }
 if ( $h_zos != '' )
 {
 $krizzos="x";
@@ -471,7 +473,7 @@ $kli_vrokx=$pole[1];
 if( $kli_vmesx < 10 ) { $kli_vmesx="0".$kli_vmesx; }
 $kli_mrokx=$kli_vrokx-1;
 
-$datbodsk="01.01.".$kli_vrokx; $datbdosk="31.12.".$kli_vrokx; $datmodsk="01.01.".$kli_mrokx; $datmdosk="31.12.".$kli_mrokx;
+$datbodsk="01.01.".$kli_vrokx; $datbdosk="31.".$kli_vmesx.".".$kli_vrokx; $datmodsk="01.01.".$kli_mrokx; $datmdosk="31.12.".$kli_mrokx;
 $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
   if (@$zaznam=mysql_data_seek($sql,0))
   {

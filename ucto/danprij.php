@@ -840,6 +840,7 @@ window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
  <select size="1" name="h_drp" id="h_drp" >
 <option value="1" >Riadna</option>
 <option value="2" >Mimoriadna</option>
+<option value="3" >Priebežná</option>
 </select>
 </td>
 <td class="bmenu" width="35%">
