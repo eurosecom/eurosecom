@@ -705,166 +705,83 @@ $psys=$psys+1;
 //koniec vytvorenia pracovneho suboru
 
 
+$sql = "SELECT * FROM F$kli_vxcf"."_crv_muj2014";
+$vysledok = mysql_query("$sql");
+if ($vysledok)
+          {
+$polx = mysql_num_rows($vysledok);
+$sql = "DROP TABLE F$kli_vxcf"."_crv_muj2014";
+if( $polx < 4 ) { $vysledok = mysql_query("$sql"); }
+          }
+
 //zostava mesacna
 if( $copern == 10 )
 {
-//nastav crv podla uce
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=1 WHERE LEFT(uce,3) = 501 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=2 WHERE LEFT(uce,3) = 502 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=3 WHERE LEFT(uce,3) = 504 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=4 WHERE LEFT(uce,3) = 511 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=5 WHERE LEFT(uce,3) = 512 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=6 WHERE LEFT(uce,3) = 513 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=7 WHERE LEFT(uce,3) = 518 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=8 WHERE LEFT(uce,3) = 521 OR LEFT(uce,3) = 522 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=9 WHERE LEFT(uce,3) = 524 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=10 WHERE LEFT(uce,3) = 525 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=11 WHERE LEFT(uce,3) = 527 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=12 WHERE LEFT(uce,3) = 528 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=13 WHERE LEFT(uce,3) = 531 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=14 WHERE LEFT(uce,3) = 532 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=15 WHERE LEFT(uce,3) = 538 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=16 WHERE LEFT(uce,3) = 541 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=17 WHERE LEFT(uce,3) = 542 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=18 WHERE LEFT(uce,3) = 543 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=19 WHERE LEFT(uce,3) = 544 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=20 WHERE LEFT(uce,3) = 545 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=21 WHERE LEFT(uce,3) = 546 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=22 WHERE LEFT(uce,3) = 547 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=23 WHERE LEFT(uce,3) = 548 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=24 WHERE LEFT(uce,3) = 549 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=24 WHERE LEFT(uce,3) = 588 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=25 WHERE LEFT(uce,3) = 551 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=26 WHERE LEFT(uce,3) = 552 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=27 WHERE LEFT(uce,3) = 553 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=28 WHERE LEFT(uce,3) = 554 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=29 WHERE LEFT(uce,3) = 555 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=30 WHERE LEFT(uce,3) = 556 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=31 WHERE LEFT(uce,3) = 557 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=32 WHERE LEFT(uce,3) = 558 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=32 WHERE LEFT(uce,3) = 559 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=33 WHERE LEFT(uce,3) = 561 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=34 WHERE LEFT(uce,3) = 562 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=35 WHERE LEFT(uce,3) = 563 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=36 WHERE LEFT(uce,3) = 565 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=37 WHERE LEFT(uce,3) = 567 ";
+//nastav crs podla uce ale nie z uctosnova ako pri podnikatelskych ale z crv_muj2014.csv v adresary /import
+$sql = "DROP TABLE F$kli_vxcf"."_crv_muj2014";
+//$vysledok = mysql_query("$sql");
+
+//Tabulka crv_muj2014
+$sql = "SELECT * FROM F$kli_vxcf"."_crv_muj2014";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+          {
+echo "Vytvorit tabulku F$kli_vxcf"."_crv_muj2014!"."<br />";
+
+$sqlt = <<<crv_muj2014
+(
+   cpl         int not null auto_increment,
+   uce         VARCHAR(10),
+   crs         DECIMAL(10,0),
+   PRIMARY KEY(cpl)
+);
+crv_muj2014;
+
+$sql = 'CREATE TABLE F'.$kli_vxcf.'_crv_muj2014'.$sqlt;
+$vysledek = mysql_query("$sql");
+
+$subor = fopen("../import/crv_muj$kli_vrok.csv", "r");
+while (! feof($subor))
+     {
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+
+  $x_uce = $pole[0];
+  $x_crs = $pole[1];
+  $x_kon = $pole[2];
+ 
+$c_uce=1*$x_uce;
+
+if( $c_uce > 0 )
+{
+$sqult = "INSERT INTO F$kli_vxcf"."_crv_muj2014 ( uce,crs )".
+" VALUES ( '$x_uce', '$x_crs' ); "; 
+
+$ulozene = mysql_query("$sqult"); 
+}
+     }
+          }
+//koniec tabulky crv_muj2014
+
+//nacitaj riadky z crv_muj2014
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid,F$kli_vxcf"."_crv_muj2014".
+" SET rdk=F$kli_vxcf"."_crv_muj2014.crs".
+" WHERE LEFT(F$kli_vxcf"."_prcvykziss$kli_uzid.uce,3) = LEFT(F$kli_vxcf"."_crv_muj2014.uce,3) ";
+//echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=39 WHERE LEFT(uce,3) = 601 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=40 WHERE LEFT(uce,3) = 602 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=41 WHERE LEFT(uce,3) = 604 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=42 WHERE LEFT(uce,3) = 611 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=43 WHERE LEFT(uce,3) = 612 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=44 WHERE LEFT(uce,3) = 613 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=45 WHERE LEFT(uce,3) = 614 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=46 WHERE LEFT(uce,3) = 621 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=47 WHERE LEFT(uce,3) = 622 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=48 WHERE LEFT(uce,3) = 623 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=49 WHERE LEFT(uce,3) = 624 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=50 WHERE LEFT(uce,3) = 641 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=51 WHERE LEFT(uce,3) = 642 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=52 WHERE LEFT(uce,3) = 643 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=53 WHERE LEFT(uce,3) = 644 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=54 WHERE LEFT(uce,3) = 645 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=55 WHERE LEFT(uce,3) = 646 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=56 WHERE LEFT(uce,3) = 647 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=57 WHERE LEFT(uce,3) = 648 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=58 WHERE LEFT(uce,3) = 649 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=59 WHERE LEFT(uce,3) = 651 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=60 WHERE LEFT(uce,3) = 652 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=61 WHERE LEFT(uce,3) = 653 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=62 WHERE LEFT(uce,3) = 654 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=63 WHERE LEFT(uce,3) = 655 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=64 WHERE LEFT(uce,3) = 656 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=65 WHERE LEFT(uce,3) = 657 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=66 WHERE LEFT(uce,3) = 658 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=67 WHERE LEFT(uce,3) = 661 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=68 WHERE LEFT(uce,3) = 662 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=69 WHERE LEFT(uce,3) = 663 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=70 WHERE LEFT(uce,3) = 664 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=71 WHERE LEFT(uce,3) = 665 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=72 WHERE LEFT(uce,3) = 667 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=73 WHERE LEFT(uce,3) = 691 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid,F$kli_vxcf"."_crv_muj2014".
+" SET rdk=F$kli_vxcf"."_crv_muj2014.crs".
+" WHERE LEFT(F$kli_vxcf"."_prcvykziss$kli_uzid.uce,5) = LEFT(F$kli_vxcf"."_crv_muj2014.uce,5) ";
+//echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=76 WHERE LEFT(uce,3) = 591 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid,F$kli_vxcf"."_crv_muj2014".
+" SET rdk=F$kli_vxcf"."_crv_muj2014.crs".
+" WHERE LEFT(F$kli_vxcf"."_prcvykziss$kli_uzid.uce,6) = LEFT(F$kli_vxcf"."_crv_muj2014.uce,6) ";
+//echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET rdk=77 WHERE LEFT(uce,3) = 595 ";
-$oznac = mysql_query("$sqtoz");
-
 
 
 

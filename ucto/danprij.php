@@ -812,7 +812,7 @@ window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 <a href="#" onClick="VysledovkaMUJ2014cele();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="64%">Výsledovka Úè MUJ 2-01 </td>
+<td class="bmenu" width="64%">Výkaz ziskov a strát Úè MUJ 2-01 </td>
 <td class="bmenu" width="28%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
