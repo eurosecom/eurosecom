@@ -58,6 +58,22 @@ if( $kli_vrok > 2010 )
   {
 if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; }
   }
+if( $kli_vrok > 2011 )
+  {
+if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; }
+  }
+if( $kli_vrok > 2012 )
+  {
+if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; }
+  }
+if( $kli_vrok > 2013 )
+  {
+if (File_Exists ("../pswd/oddelena2010db2014.php")) { $databaza=$mysqldb2013."."; }
+  }
+if( $kli_vrok > 2014 )
+  {
+if (File_Exists ("../pswd/oddelena2010db2015.php")) { $databaza=$mysqldb2014."."; }
+  }
 
 
 }
@@ -65,7 +81,7 @@ if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Skladová karta PDF</title>
   <style type="text/css">
@@ -147,15 +163,18 @@ $vytvor = mysql_query("$vsql");
 
 $podmskl = "skl > 0";
 if( $h_skl > 0 ) $podmskl = "skl = ".$h_skl;
-$podmcis = "".$databaza."F$kli_vxcf"."_sklprc".$kli_uzid.".cis > 0";
-if( $copern == 10 ) $podmcis = "".$databaza."F$kli_vxcf"."_sklprc".$kli_uzid.".cis  = ".$h_cis;
+$podmcis = "".$databaza."F$kli_vxcf"."_sklprckar".$kli_uzid.".cis > 0";
+if( $copern == 10 ) $podmcis = "".$databaza."F$kli_vxcf"."_sklprckar".$kli_uzid.".cis  = ".$h_cis;
 
-//zober zo sklprc
+
+//zober zo sklprckar
 $dsqlt = "INSERT INTO ".$databaza."F$kli_vxcf"."_sklprcx".$kli_uzid.
-" SELECT 0,drp,ume,dat,dok,skl,poh,ico,cis,mno,cen,zas,vdj,prj,0 FROM ".$databaza."F$kli_vxcf"."_sklprc".$kli_uzid." ".
+" SELECT 0,drp,ume,dat,dok,skl,poh,ico,cis,mno,cen,zas,vdj,prj,0 FROM ".$databaza."F$kli_vxcf"."_sklprckar".$kli_uzid." ".
 " WHERE $podmcis AND $podmskl ".
 "";
 $dsql = mysql_query("$dsqlt");
+//echo $dsqlt;
+//exit;
 
 $dsqlt = "UPDATE ".$databaza."F$kli_vxcf"."_sklprcx$kli_uzid SET zoseur=zas*cen WHERE pox >= 0 ";
 $dsql = mysql_query("$dsqlt");
