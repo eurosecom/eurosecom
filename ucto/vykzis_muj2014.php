@@ -25,6 +25,9 @@ require_once("../pswd/password.php");
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
+$lenvzs = 1*$_REQUEST['lenvzs'];
+$lensuv = 1*$_REQUEST['lensuv'];
+
 //konecne odstranili tie kontrolne cisla
 
 $citfir = include("../cis/citaj_fir.php");
@@ -719,7 +722,7 @@ if( $copern == 10 )
 {
 //nastav crs podla uce ale nie z uctosnova ako pri podnikatelskych ale z crv_muj2014.csv v adresary /import
 $sql = "DROP TABLE F$kli_vxcf"."_crv_muj2014";
-//$vysledok = mysql_query("$sql");
+$vysledok = mysql_query("$sql");
 
 //Tabulka crv_muj2014
 $sql = "SELECT * FROM F$kli_vxcf"."_crv_muj2014";
@@ -786,20 +789,19 @@ $oznac = mysql_query("$sqtoz");
 
 
 //rozdel do riadkov
-//druha strana
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r01=mdt-dal WHERE rdk = 1 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r01=dal-mdt WHERE rdk = 1 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r02=mdt-dal WHERE rdk = 2 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r02=dal-mdt WHERE rdk = 2 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r03=mdt-dal WHERE rdk = 3 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r03=dal-mdt WHERE rdk = 3 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r04=mdt-dal WHERE rdk = 4 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r04=dal-mdt WHERE rdk = 4 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r05=mdt-dal WHERE rdk = 5 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r05=dal-mdt WHERE rdk = 5 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r06=mdt-dal WHERE rdk = 6 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r06=dal-mdt WHERE rdk = 6 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r07=mdt-dal WHERE rdk = 7 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r07=dal-mdt WHERE rdk = 7 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r08=mdt-dal WHERE rdk = 8 ";
 $oznac = mysql_query("$sqtoz");
@@ -821,23 +823,23 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r16=mdt-dal WHERE rdk = 1
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r17=mdt-dal WHERE rdk = 17 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r18=mdt-dal WHERE rdk = 18 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r18=dal-mdt WHERE rdk = 18 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r19=mdt-dal WHERE rdk = 19 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r19=dal-mdt WHERE rdk = 19 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r20=mdt-dal WHERE rdk = 20 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r20=dal-mdt WHERE rdk = 20 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r21=mdt-dal WHERE rdk = 21 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r21=dal-mdt WHERE rdk = 21 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r22=mdt-dal WHERE rdk = 22 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r22=dal-mdt WHERE rdk = 22 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r23=mdt-dal WHERE rdk = 23 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r23=dal-mdt WHERE rdk = 23 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r24=mdt-dal WHERE rdk = 24 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r24=dal-mdt WHERE rdk = 24 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r25=mdt-dal WHERE rdk = 25 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r25=dal-mdt WHERE rdk = 25 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r26=mdt-dal WHERE rdk = 26 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r26=dal-mdt WHERE rdk = 26 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r27=mdt-dal WHERE rdk = 27 ";
 $oznac = mysql_query("$sqtoz");
@@ -853,97 +855,22 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r32=mdt-dal WHERE rdk = 3
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r33=mdt-dal WHERE rdk = 33 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r34=mdt-dal WHERE rdk = 34 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r34=dal-mdt WHERE rdk = 34 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r35=mdt-dal WHERE rdk = 35 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r35=dal-mdt WHERE rdk = 35 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r36=mdt-dal WHERE rdk = 36 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r37=mdt-dal WHERE rdk = 37 ";
 $oznac = mysql_query("$sqtoz");
-
-//tretia strana
-
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r39=dal-mdt WHERE rdk = 39 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r40=dal-mdt WHERE rdk = 40 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r41=dal-mdt WHERE rdk = 41 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r42=dal-mdt WHERE rdk = 42 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r43=dal-mdt WHERE rdk = 43 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r44=dal-mdt WHERE rdk = 44 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r45=dal-mdt WHERE rdk = 45 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r46=dal-mdt WHERE rdk = 46 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r47=dal-mdt WHERE rdk = 47 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r48=dal-mdt WHERE rdk = 48 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r49=dal-mdt WHERE rdk = 49 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r50=dal-mdt WHERE rdk = 50 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r51=dal-mdt WHERE rdk = 51 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r52=dal-mdt WHERE rdk = 52 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r53=dal-mdt WHERE rdk = 53 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r54=dal-mdt WHERE rdk = 54 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r55=dal-mdt WHERE rdk = 55 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r56=dal-mdt WHERE rdk = 56 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r57=dal-mdt WHERE rdk = 57 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r58=dal-mdt WHERE rdk = 58 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r59=dal-mdt WHERE rdk = 59 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r60=dal-mdt WHERE rdk = 60 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r61=dal-mdt WHERE rdk = 61 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r62=dal-mdt WHERE rdk = 62 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r63=dal-mdt WHERE rdk = 63 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r64=dal-mdt WHERE rdk = 64 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r65=dal-mdt WHERE rdk = 65 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r66=dal-mdt WHERE rdk = 66 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r67=dal-mdt WHERE rdk = 67 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r68=dal-mdt WHERE rdk = 68 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r69=dal-mdt WHERE rdk = 69 ";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r70=dal-mdt WHERE rdk = 70 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r71=dal-mdt WHERE rdk = 71 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r72=dal-mdt WHERE rdk = 72 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r73=dal-mdt WHERE rdk = 73 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r38=dal-mdt WHERE rdk = 38 ";
 $oznac = mysql_query("$sqtoz");
 
 
-//dane
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r76=mdt-dal WHERE rdk = 76 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r77=mdt-dal WHERE rdk = 77 ";
-$oznac = mysql_query("$sqtoz");
 
-
+$rob=0;
+if( $rob == 1 )
+  {
 //podnikatelska cinnost presun z r01 do rpc01......r77 do rpc77 ak zakazka je oznacena v parametroch NV=2
 $sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET konx1=0 ";
 $oznac = mysql_query("$sqtoz");
@@ -977,6 +904,8 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET ".
 " r71=0, r72=0, r73=0, r74=0, r75=0, r76=0, r77=0                       ".
 " WHERE konx1 = 1 ";
 $oznac = mysql_query("$sqtoz");
+   }
+
 
 //potom odstran str,zak
 $sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET konx1=0 ";
@@ -985,6 +914,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_prcvykziss$kli_uzid DROP str";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_prcvykziss$kli_uzid DROP zak";
 $vysledek = mysql_query("$sql");
+
 
 //sumar za riadky
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykziss$kli_uzid "." SELECT".
@@ -1066,27 +996,29 @@ $dsql = mysql_query("$dsqlt");
 $vsldat="prcvykziss";
 if( $tis > 0 ) { $vsldat="prcvyk1000ziss"; }
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"r38=r01+r02+r03+r04+r05+r06+r07+r08+r09+r10+r11+r12+r13+r14+r15+r16+r17+r18+r19+r20+r21+r22+r23+r24+r25+r26+r27+r28+r29, ".
-"r38=r38+r30+r31+r32+r33+r34+r35+r36+r37, ".
-"r74=r39+r40+r41+r42+r43+r44+r45+r46+r47+r48+r49+r50+r51+r52+r53+r54+r55+r56+r57+r58+r59, ".
-"r74=r74+r60+r61+r62+r63+r64+r65+r66+r67+r68+r69+r70+r71+r72+r73, ".
-"r75=r74-r38,".
-"r78=r75-r76-r77,".
-"r995=2*r74+r75+r76+r77+r78,".
-"r994=2*r38 ".
+"r01=r02+r03+r04+r05+r06+r07, ".
+"r08=r09+r10+r11+r12+r13+r14+r15+r16+r17, ".
+"r18=r01-r08, ".
+"r19=r02-r09+r03+r04+r05-r10-r11, ".
+"r20=r21+r22+r23+r24+r25+r26, ".
+"r27=r28+r29+r30+r31+r32+r33, ".
+"r34=r20-r27, ".
+"r35=r18+r34, ".
+"r38=r35-r36-r37 ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rpc38=rpc01+rpc02+rpc03+rpc04+rpc05+rpc06+rpc07+rpc08+rpc09+rpc10+rpc11+rpc12+rpc13+rpc14+rpc15+rpc16+rpc17+rpc18+rpc19+rpc20+rpc21+rpc22+rpc23+rpc24+rpc25+rpc26+rpc27+rpc28+rpc29, ".
-"rpc38=rpc38+rpc30+rpc31+rpc32+rpc33+rpc34+rpc35+rpc36+rpc37, ".
-"rpc74=rpc39+rpc40+rpc41+rpc42+rpc43+rpc44+rpc45+rpc46+rpc47+rpc48+rpc49+rpc50+rpc51+rpc52+rpc53+rpc54+rpc55+rpc56+rpc57+rpc58+rpc59, ".
-"rpc74=rpc74+rpc60+rpc61+rpc62+rpc63+rpc64+rpc65+rpc66+rpc67+rpc68+rpc69+rpc70+rpc71+rpc72+rpc73, ".
-"rpc75=rpc74-rpc38,".
-"rpc78=rpc75-rpc76-rpc77,".
-"rpc995=2*rpc74+rpc75+rpc76+rpc77+rpc78,".
-"rpc994=2*rpc38 ".
+"rpc01=rpc02+rpc03+rpc04+rpc05+rpc06+rpc07, ".
+"rpc08=rpc09+rpc10+rpc11+rpc12+rpc13+rpc14+rpc15+rpc16+rpc17, ".
+"rpc18=rpc01-rpc08, ".
+"rpc19=rpc02-rpc09+rpc03+rpc04+rpc05-rpc10-rpc11, ".
+"rpc20=rpc21+rpc22+rpc23+rpc24+rpc25+rpc26, ".
+"rpc27=rpc28+rpc29+rpc30+rpc31+rpc32+rpc33, ".
+"rpc34=rpc20-rpc27, ".
+"rpc35=rpc18+rpc34, ".
+"rpc38=rpc35-rpc36-rpc37 ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
@@ -1148,14 +1080,15 @@ if( $fir_uctx06 > 0 ) { $oznac = mysql_query("$sqtoz"); }
 $vsldat="prcvykziss";
 if( $tis > 0 ) { $vsldat="prcvyk1000ziss"; }
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"r38=r01+r02+r03+r04+r05+r06+r07+r08+r09+r10+r11+r12+r13+r14+r15+r16+r17+r18+r19+r20+r21+r22+r23+r24+r25+r26+r27+r28+r29, ".
-"r38=r38+r30+r31+r32+r33+r34+r35+r36+r37, ".
-"r74=r39+r40+r41+r42+r43+r44+r45+r46+r47+r48+r49+r50+r51+r52+r53+r54+r55+r56+r57+r58+r59, ".
-"r74=r74+r60+r61+r62+r63+r64+r65+r66+r67+r68+r69+r70+r71+r72+r73, ".
-"r75=r74-r38,".
-"r78=r75-r76-r77,".
-"r995=2*r74+r75+r76+r77+r78,".
-"r994=2*r38 ".
+"r01=r02+r03+r04+r05+r06+r07, ".
+"r08=r09+r10+r11+r12+r13+r14+r15+r16+r17, ".
+"r18=r01-r08, ".
+"r19=r02-r09+r03+r04+r05-r10-r11, ".
+"r20=r21+r22+r23+r24+r25+r26, ".
+"r27=r28+r29+r30+r31+r32+r33, ".
+"r34=r20-r27, ".
+"r35=r18+r34, ".
+"r38=r35-r36-r37 ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
@@ -1305,81 +1238,6 @@ $ulozene = mysql_query("$sql");
 
 //koniec poc.stav
 
-$skusobna=0;
-if( $skusobna == 1 )
-  {
-  $text = "UPDATE F".$kli_vxcf."_prcvykziss".$kli_uzid." SET ";
-
-  $i=0;
-  while ( $i < 79 )
-   {
-   $ix=$i;
-   if( $i < 10 ) { $ix="0".$i; }
-   if( $i == 0 ) {  $text = $text."  "; }
-   if( $i == 1 ) {  $text = $text."  r".$ix."=".$i." "; }
-   if( $i > 1 )  {  $text = $text." ,r".$ix."=".$i." "; }
-   $hodpc=1000+$i;
-   if( $i > 0 )  {  $text = $text." ,rpc".$ix."=".$hodpc." "; }
-   $hodsp=2000+$i;
-   if( $i > 0 )  {  $text = $text." ,rsp".$ix."=".$hodsp." "; }
-
-  $i=$i+1;
-   }
-  $text = $text." WHERE prx = 1 ";
-//echo $text;
-//exit;
-$ulozene = mysql_query("$text");
-
-  $text = "UPDATE F".$kli_vxcf."_uctpocvziskovno_stl SET ";
-
-  $i=0;
-  while ( $i < 79 )
-   {
-   $ix=$i;
-   if( $i < 10 ) { $ix="0".$i; }
-   if( $i == 0 ) {  $text = $text."  "; }
-   if( $i == 1 ) {  $text = $text."  rm".$ix."=".$i." "; }
-   $hodrm=3000+$i;
-   if( $i > 1 )  {  $text = $text." ,rm".$ix."=".$hodrm." "; }
-
-  $i=$i+1;
-   }
-  $text = $text."  ";
-//echo $text;
-//exit;
-$ulozene = mysql_query("$text");
-  }
-//koniec skusobna
-
-
-//uzavierka MUJ 2014
-$kompletka = 1*$_REQUEST['kompletka'];
-if( $kompletka == 1 )
-  {
-$h_zos = $_REQUEST['h_zos'];
-$h_sch = $_REQUEST['h_sch'];
-$h_drp = $_REQUEST['h_drp'];
-?>
-<script type="text/javascript">
-
-window.open('../ucto/uzavierka_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&page=1&kompletka=1', '_self' )
-
-
-</script>
-<?php
-exit;
-  }
-
-
-//vytlac
-//$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykziss".$kli_uzid." WHERE prx = 1 ".""; 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykziss".$kli_uzid.
-" LEFT JOIN F$kli_vxcf"."_uctpocvziskovno_stl".
-" ON F$kli_vxcf"."_prcvykziss$kli_uzid.prx=F$kli_vxcf"."_uctpocvziskovno_stl.fic".
-" WHERE prx = 1 "."";
-
-
-
 if( $tis > 0 ) { 
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctpocvziskovno_stt SELECT ".
@@ -1398,12 +1256,26 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctpocvziskovno_stt SELECT ".
 
 $dsql = mysql_query("$dsqlt");
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvyk1000ziss".$kli_uzid.
-" LEFT JOIN F$kli_vxcf"."_uctpocvziskovno_stt".
-" ON F$kli_vxcf"."_prcvyk1000ziss$kli_uzid.prx=F$kli_vxcf"."_uctpocvziskovno_stt.fic".
-" WHERE prx = 1 ".""; 
-
 }
+
+
+//uzavierka MUJ 2014
+$kompletka = 1*$_REQUEST['kompletka'];
+if( $kompletka == 1 )
+  {
+$h_zos = $_REQUEST['h_zos'];
+$h_sch = $_REQUEST['h_sch'];
+$h_drp = $_REQUEST['h_drp'];
+?>
+<script type="text/javascript">
+
+window.open('../ucto/uzavierka_muj2014.php?copern=10&drupoh=1&tis=<?php echo $tis; ?>&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&page=1&kompletka=1&lenvzs=<?php echo $lenvzs; ?>&lensuv=<?php echo $lensuv; ?>', '_self' )
+
+
+</script>
+<?php
+exit;
+  }
 
 
 //uzavierka MUJ 2014
@@ -1416,7 +1288,7 @@ $h_drp = $_REQUEST['h_drp'];
 ?>
 <script type="text/javascript">
 
-window.open('../ucto/uzavierka_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&page=1&kompletka=0', '_self' )
+window.open('../ucto/uzavierka_muj2014.php?copern=10&drupoh=1&tis=<?php echo $tis; ?>&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&page=1&kompletka=0&lenvzs=<?php echo $lenvzs; ?>&lensuv=<?php echo $lensuv; ?>', '_self' )
 
 
 </script>
@@ -1430,20 +1302,7 @@ exit;
 
 
 
-$pdf->Output("../tmp/vykzis.$kli_uzid.pdf");
-
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvykziss'.$kli_uzid;
-//$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvykzis'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvyk1000ziss'.$kli_uzid;
-//$vysledok = mysql_query("$sqlt");
-
 ?> 
-
-<script type="text/javascript">
-  var okno = window.open("../tmp/vykzis.<?php echo $kli_uzid; ?>.pdf","_self");
-</script>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">

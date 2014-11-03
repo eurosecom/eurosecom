@@ -25,6 +25,9 @@ require_once("../pswd/password.php");
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
+$lenvzs = 1*$_REQUEST['lenvzs'];
+$lensuv = 1*$_REQUEST['lensuv'];
+
 //konecne odstranili tie kontrolne cisla
 
 $citfir = include("../cis/citaj_fir.php");
@@ -789,6 +792,9 @@ $oznac = mysql_query("$sqtoz");
 
 
 //korekcia
+$ajkorekcia=0;
+if( $ajkorekcia == 1 ) 
+  {
 $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid".
 " SET kor=1".
 " WHERE LEFT(uce,3) = 071 OR LEFT(uce,3) = 072 OR LEFT(uce,3) = 073 OR LEFT(uce,3) = 074 OR LEFT(uce,3) = 075 OR LEFT(uce,3) = 076 OR LEFT(uce,3) = 079 ".
@@ -801,22 +807,21 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid".
 "";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
-
-//exit;
+  }
 
 //rozdel do riadkov , vypocitaj netto
 
 $rdk=1;
-while ($rdk <= 118 ) 
+while ($rdk <= 45 ) 
   {
 $crdk=$rdk;
 if( $rdk < 10 ) $crdk="0".$rdk;
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET r$crdk=mdt-dal WHERE rdk = $rdk AND kor = 0 ";
-if( $rdk > 60 ) { $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET r$crdk=dal-mdt WHERE rdk = $rdk "; }
+if( $rdk >= 24 ) { $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET rn$crdk=dal-mdt WHERE rdk = $rdk "; }
 $oznac = mysql_query("$sqtoz");
 
-if( $rdk < 61 ) { 
+if( $rdk < 24 ) { 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET rk$crdk=dal-mdt WHERE rdk = $rdk AND kor = 1 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -952,97 +957,39 @@ $oznac = mysql_query("$sqtoz");
 
 //exit;
 
-//vypocitaj riadky strana 4
+//vypocitaj riadky strana 2
 $vsldat="prcsuvahas";
 if( $tis > 0 ) { $vsldat="prcsuv1000ahas"; }
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"r101=r102+r103, ".
-"r97=r98+r99+r100, ".
-"r87=r88+r89+r90+r91+r92+r93+r94+r95+r96, ".
-"r79=r80+r81+r82+r83+r84+r85+r86, ".
-"r75=r76+r77+r78, ".
-"r68=r69+r70+r71, ".
-"r62=r63+r64+r65+r66+r67, ".
-"r74=r75+r79+r87+r97 ".
+"rn21=rn22+rn23, ".
+"rn17=rn18+rn19+rn20, ".
+"rn14=rn15+rn16+rn17+rn21, ".
+"rn09=rn10+rn11+rn12+rn13, ".
+"rn04=rn05+rn06+rn07+rn08, ".
+"rn02=rn03+rn04+rn09, ".
+"rn01=rn02+rn14 ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
 //vypocitaj strana 3
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"r57=r58+r59, ".
-"r51=r52+r53+r54+r55+r56, ".
-"r42=r43+r44+r45+r46+r47+r48+r49+r50, ".
-"r37=r38+r39+r40+r41, ".
-"r30=r31+r32+r33+r34+r35+r36, ".
-"r29=r30+r37+r42+r51 ".
+"rn38=rn39+rn40+rn41+rn42, ".
+"rn26=rn27+rn28, ".
+"rn34=rn35+rn36+rn37+rn38+rn43+rn44+rn45 ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
+
+//vypocitaj vysledok  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rn57=rn58+rn59, ".
-"rn51=rn52+rn53+rn54+rn55+rn56, ".
-"rn42=rn43+rn44+rn45+rn46+rn47+rn48+rn49+rn50, ".
-"rn37=rn38+rn39+rn40+rn41, ".
-"rn30=rn31+rn32+rn33+rn34+rn35+rn36, ".
-"rn29=rn30+rn37+rn42+rn51 ".
+"rn33=rn01-rn26-rn29-rn30-rn31-rn32-rn34 ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
+//posledne sucty  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rk57=rk58+rk59, ".
-"rk51=rk52+rk53+rk54+rk55+rk56, ".
-"rk42=rk43+rk44+rk45+rk46+rk47+rk48+rk49+rk50, ".
-"rk37=rk38+rk39+rk40+rk41, ".
-"rk30=rk31+rk32+rk33+rk34+rk35+rk36, ".
-"rk29=rk30+rk37+rk42+rk51 ".
-" WHERE prx = 1 ";
-$oznac = mysql_query("$sqtoz");
-
-//vypocitaj strana 2
-$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"r21=r22+r23+r24+r25+r26+r27+r28, ".
-"r09=r10+r11+r12+r13+r14+r15+r16+r17+r18+r19+r20, ".
-"r02=r03+r04+r05+r06+r07+r08, ".
-"r01=r02+r09+r21 ".
-" WHERE prx = 1 ";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rn21=rn22+rn23+rn24+rn25+rn26+rn27+rn28, ".
-"rn09=rn10+rn11+rn12+rn13+rn14+rn15+rn16+rn17+rn18+rn19+rn20, ".
-"rn02=rn03+rn04+rn05+rn06+rn07+rn08, ".
-"rn01=rn02+rn09+rn21 ".
-" WHERE prx = 1 ";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rk21=rk22+rk23+rk24+rk25+rk26+rk27+rk28, ".
-"rk09=rk10+rk11+rk12+rk13+rk14+rk15+rk16+rk17+rk18+rk19+rk20, ".
-"rk02=rk03+rk04+rk05+rk06+rk07+rk08, ".
-"rk01=rk02+rk09+rk21 ".
-" WHERE prx = 1 ";
-$oznac = mysql_query("$sqtoz");
-
-//vypocitaj vysledok naposledy riadok 111,114,115=991, 112,116,117=992 113=993
-$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"r60=r01+r29+r57, ".
-"rn60=rn01+rn29+rn57, ".
-"rk60=rk01+rk29+rk57  ".
-" WHERE prx = 1 ";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"r111=r01+r02+r03+r04+r05+r06+r07+r08+r09+r10+r11+r12+r13+r14+r15+r16+r17+r18+r19+r20+r21+r22+r23+r24+r25+r26+r27+r28, ".
-"r112=r29+r30+r31+r32+r33+r34+r35+r36+r37+r38+r39+r40+r41+r42+r43+r44+r45+r46+r47+r48+r49+r50+r51+r52+r53+r54+r55+r56+r57+r58+r59+r60, ".
-"r114=rn01+rn02+rn03+rn04+rn05+rn06+rn07+rn08+rn09+rn10+rn11+rn12+rn13+rn14+rn15+rn16+rn17+rn18+rn19+rn20+rn21+rn22+rn23+rn24+rn25+rn26+rn27+rn28, ".
-"r116=rn29+rn30+rn31+rn32+rn33+rn34+rn35+rn36+rn37+rn38+rn39+rn40+rn41+rn42+rn43+rn44+rn45+rn46+rn47+rn48+rn49+rn50+rn51+rn52+rn53+rn54+rn55+rn56+rn57+rn58+rn59+rn60, ".
-"r115=rk01+rk02+rk03+rk04+rk05+rk06+rk07+rk08+rk09+rk10+rk11+rk12+rk13+rk14+rk15+rk16+rk17+rk18+rk19+rk20+rk21+rk22+rk23+rk24+rk25+rk26+rk27+rk28, ".
-"r117=rk29+rk30+rk31+rk32+rk33+rk34+rk35+rk36+rk37+rk38+rk39+rk40+rk41+rk42+rk43+rk44+rk45+rk46+rk47+rk48+rk49+rk50+rk51+rk52+rk53+rk54+rk55+rk56+rk57+rk58+rk59+rk60, ".
-"r73=rn60-(r62+r68+r72+r74+r101), ".
-"r61=r62+r68+r72+r73, ".
-"r104=r61+r74+r101, ".
-"r113=r61+r62+r63+r64+r65+r66+r67+r68+r69+r70+r71+r72+r73+r74+r75+r76+r77+r78+r79+r80, ".
-"r113=r113+r81+r82+r83+r84+r85+r86+r87+r88+r89+r90+r91+r92+r93+r94+r95+r96+r97+r98+r99+r100+r101+r102+r103+r104 ".
+"rn25=rn26+rn29+rn30+rn31+rn32+rn33, ".
+"rn24=rn25+rn34  ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
  
@@ -1191,79 +1138,6 @@ $ulozene = mysql_query("$sql");
 //koniec poc.stav
 
 
-$skusobna=0;
-if( $skusobna == 1 )
-  {
-  $text = "UPDATE F".$kli_vxcf."_prcsuvahas".$kli_uzid." SET ";
-
-  $i=0;
-  while ( $i < 105 )
-   {
-   $ix=$i;
-   if( $i < 10 ) { $ix="0".$i; }
-   if( $i == 0 ) {  $text = $text."  "; }
-   if( $i == 1 ) {  $text = $text."  r".$ix."=".$i." "; }
-   if( $i > 1 )  {  $text = $text." ,r".$ix."=".$i." "; }
-   $hodpc=1000+$i;
-   if( $i > 0 AND $i < 61 )  {  $text = $text." ,rk".$ix."=".$hodpc." "; }
-   $hodsp=2000+$i;
-   if( $i > 0 AND $i < 61 )  {  $text = $text." ,rn".$ix."=".$hodsp." "; }
-
-  $i=$i+1;
-   }
-  $text = $text." WHERE prx = 1 ";
-//echo $text;
-//exit;
-$ulozene = mysql_query("$text");
-
-  $text = "UPDATE F".$kli_vxcf."_uctpocsuvahano_stl SET ";
-
-  $i=0;
-  while ( $i < 105 )
-   {
-   $ix=$i;
-   if( $i < 10 ) { $ix="0".$i; }
-   if( $i == 0 ) {  $text = $text."  "; }
-   if( $i == 1 ) {  $text = $text."  rm".$ix."=".$i." "; }
-   $hodrm=3000+$i;
-   if( $i > 1 )  {  $text = $text." ,rm".$ix."=".$hodrm." "; }
-
-  $i=$i+1;
-   }
-  $text = $text."  ";
-//echo $text;
-//exit;
-$ulozene = mysql_query("$text");
-  }
-//koniec skusobna
-
-
-//uzavierka kompletna MUJ 2014
-$kompletka = 1*$_REQUEST['kompletka'];
-if( $kompletka == 1 )
-  {
-$h_zos = $_REQUEST['h_zos'];
-$h_sch = $_REQUEST['h_sch'];
-$h_drp = $_REQUEST['h_drp'];
-?>
-<script type="text/javascript">
-
-window.open('../ucto/vykzis_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&page=1&kompletka=1', '_self' )
-
-
-</script>
-<?php
-exit;
-  }
-
-
-//vytlac
-//$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuvahas".$kli_uzid." WHERE prx = 1 "."";
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuvahas".$kli_uzid.
-" LEFT JOIN F$kli_vxcf"."_uctpocsuvahano_stl".
-" ON F$kli_vxcf"."_prcsuvahas$kli_uzid.prx=F$kli_vxcf"."_uctpocsuvahano_stl.fic".
-" WHERE prx = 1 "."";
-
 
 if( $tis > 0 ) { 
 
@@ -1286,36 +1160,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctpocsuvahano_stt SELECT ".
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
-//if( $tis > 0 ) { $sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuv1000ahas".$kli_uzid." WHERE prx = 1 ".""; }
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuv1000ahas".$kli_uzid.
-" LEFT JOIN F$kli_vxcf"."_uctpocsuvahano_stt".
-" ON F$kli_vxcf"."_prcsuv1000ahas$kli_uzid.prx=F$kli_vxcf"."_uctpocsuvahano_stt.fic".
-" WHERE prx = 1 ".""; 
-
-//exit;
 }
+//koniec tis > 0 
 
-
-//uzavierka MUJ 2014
-$kompletka = 1*$_REQUEST['kompletka'];
-if( $kompletka == 0 )
-  {
-$h_zos = $_REQUEST['h_zos'];
-$h_sch = $_REQUEST['h_sch'];
-$h_drp = $_REQUEST['h_drp'];
-?>
-<script type="text/javascript">
-
-window.open('../ucto/uzavierka_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&page=1&kompletka=0', '_self' )
-
-
-</script>
-<?php
-  }
-exit;
-
-//koniec zostava mesacna
-}
 
 //vypis negenerovane pohyby
 $sqtoz = "DELETE FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE LEFT(uce,1) = 5 ";
@@ -1344,44 +1191,66 @@ $i=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
-if( $i == 0 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',10);
-
-$pdf->SetLeftMargin(10); 
-$pdf->SetTopMargin(10);
-              }
-$pdf->Cell(60,6,"Negenerované ","$rmc",0,"L");$pdf->Cell(25,6,"$hlavicka->uce / rdk$hlavicka->rdk","$rmc",0,"L");$pdf->Cell(25,6," ","$rmc",1,"L");
+echo "Negenerovaný úèet ".$hlavicka->uce." / èíslo riadku ".$hlavicka->rdk."<br />";
 
 }
 $i = $i + 1;
 
   }
 
-          }
-//koniec if( $pol > 0 )
 $sqtoz = "DROP TABLE F$kli_vxcf"."_prcsuvahasneg$kli_uzid ";
 $oznac = mysql_query("$sqtoz");
+exit;
+          }
+//koniec vypis negenerovane pohyby
 
-$pdf->Output("../tmp/suvaha.$kli_uzid.pdf");
 
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcsuvahas'.$kli_uzid;
-//$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcsuvaha'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-if( $tis == 0 ) { 
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcsuv1000ahas'.$kli_uzid;
-//$vysledok = mysql_query("$sqlt");
-                }
-?> 
 
+//uzavierka kompletna MUJ 2014
+$kompletka = 1*$_REQUEST['kompletka'];
+if( $kompletka == 1 )
+  {
+$h_zos = $_REQUEST['h_zos'];
+$h_sch = $_REQUEST['h_sch'];
+$h_drp = $_REQUEST['h_drp'];
+?>
 <script type="text/javascript">
-  var okno = window.open("../tmp/suvaha.<?php echo $kli_uzid; ?>.pdf","_self");
+
+window.open('../ucto/vykzis_muj2014.php?copern=10&drupoh=1&tis=<?php echo $tis; ?>&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&page=1&kompletka=1&lenvzs=<?php echo $lenvzs; ?>&lensuv=<?php echo $lensuv; ?>', '_self' )
+
+
 </script>
+<?php
+exit;
+  }
+
+//uzavierka MUJ 2014
+$kompletka = 1*$_REQUEST['kompletka'];
+if( $kompletka == 0 )
+  {
+$h_zos = $_REQUEST['h_zos'];
+$h_sch = $_REQUEST['h_sch'];
+$h_drp = $_REQUEST['h_drp'];
+?>
+<script type="text/javascript">
+
+window.open('../ucto/vykzis_muj2014.php?copern=10&drupoh=1&tis=<?php echo $tis; ?>&h_zos=<?php echo $h_zos; ?>&h_sch=<?php echo $h_sch; ?>&h_drp=<?php echo $h_drp; ?>&page=1&kompletka=0&lenvzs=<?php echo $lenvzs; ?>&lensuv=<?php echo $lensuv; ?>', '_self' )
+
+
+</script>
+<?php
+  }
+exit;
+
+//koniec zostava mesacna
+}
+
+
+?> 
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>Vykaz Ziskov PDF</title>
+<title>Suvaha PDF</title>
   <style type="text/css">
 
   </style>
