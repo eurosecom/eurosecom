@@ -844,17 +844,11 @@ $pdf->SetX(130);$pdf->Cell(85,5,"                                               
 //tlacit suvahu
 if( $tlacsuv == 1 ) {
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuvahas".$kli_uzid.
-" LEFT JOIN F$kli_vxcf"."_uctpocsuvahano_stl".
-" ON F$kli_vxcf"."_prcsuvahas$kli_uzid.prx=F$kli_vxcf"."_uctpocsuvahano_stl.fic".
-" WHERE prx = 1 ".""; 
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuvahas".$kli_uzid." WHERE prx = 1 "; 
 
 if( $tis > 0 ) { 
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuv1000ahas".$kli_uzid.
-" LEFT JOIN F$kli_vxcf"."_uctpocsuvahano_stt".
-" ON F$kli_vxcf"."_prcsuv1000ahas$kli_uzid.prx=F$kli_vxcf"."_uctpocsuvahano_stt.fic".
-" WHERE prx = 1 ".""; 
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuv1000ahas".$kli_uzid." WHERE prx = 1 "; 
 
 }
 
@@ -871,247 +865,114 @@ $hlavicka=mysql_fetch_object($sql);
 
 //V MUJ 2014 POUZIVAME LEN STLPCE rn01-rn45 a rm01-rm45
 $rn01=$hlavicka->rn01; if ( $hlavicka->rn01 == 0 ) $rn01='';
-$rm01=$hlavicka->rm01; if ( $hlavicka->rm01 == 0 ) $rm01='';
 $rn02=$hlavicka->rn02; if ( $hlavicka->rn02 == 0 ) $rn02='';
-$rm02=$hlavicka->rm02; if ( $hlavicka->rm02 == 0 ) $rm02='';
 $rn03=$hlavicka->rn03; if ( $hlavicka->rn03 == 0 ) $rn03='';
-$rm03=$hlavicka->rm03; if ( $hlavicka->rm03 == 0 ) $rm03='';
 $rn04=$hlavicka->rn04; if ( $hlavicka->rn04 == 0 ) $rn04='';
-$rm04=$hlavicka->rm04; if ( $hlavicka->rm04 == 0 ) $rm04='';
 $rn05=$hlavicka->rn05; if ( $hlavicka->rn05 == 0 ) $rn05='';
-$rm05=$hlavicka->rm05; if ( $hlavicka->rm05 == 0 ) $rm05='';
 $rn06=$hlavicka->rn06; if ( $hlavicka->rn06 == 0 ) $rn06='';
-$rm06=$hlavicka->rm06; if ( $hlavicka->rm06 == 0 ) $rm06='';
 $rn07=$hlavicka->rn07; if ( $hlavicka->rn07 == 0 ) $rn07='';
-$rm07=$hlavicka->rm07; if ( $hlavicka->rm07 == 0 ) $rm07='';
 $rn08=$hlavicka->rn08; if ( $hlavicka->rn08 == 0 ) $rn08='';
-$rm08=$hlavicka->rm08; if ( $hlavicka->rm08 == 0 ) $rm08='';
 $rn09=$hlavicka->rn09; if ( $hlavicka->rn09 == 0 ) $rn09='';
-$rm09=$hlavicka->rm09; if ( $hlavicka->rm09 == 0 ) $rm09='';
 $rn10=$hlavicka->rn10; if ( $hlavicka->rn10 == 0 ) $rn10='';
-$rm10=$hlavicka->rm10; if ( $hlavicka->rm10 == 0 ) $rm10='';
 $rn11=$hlavicka->rn11; if ( $hlavicka->rn11 == 0 ) $rn11='';
-$rm11=$hlavicka->rm11; if ( $hlavicka->rm11 == 0 ) $rm11='';
 $rn12=$hlavicka->rn12; if ( $hlavicka->rn12 == 0 ) $rn12='';
-$rm12=$hlavicka->rm12; if ( $hlavicka->rm12 == 0 ) $rm12='';
 $rn13=$hlavicka->rn13; if ( $hlavicka->rn13 == 0 ) $rn13='';
-$rm13=$hlavicka->rm13; if ( $hlavicka->rm13 == 0 ) $rm13='';
 $rn14=$hlavicka->rn14; if ( $hlavicka->rn14 == 0 ) $rn14='';
-$rm14=$hlavicka->rm14; if ( $hlavicka->rm14 == 0 ) $rm14='';
 $rn15=$hlavicka->rn15; if ( $hlavicka->rn15 == 0 ) $rn15='';
-$rm15=$hlavicka->rm15; if ( $hlavicka->rm15 == 0 ) $rm15='';
 $rn16=$hlavicka->rn16; if ( $hlavicka->rn16 == 0 ) $rn16='';
-$rm16=$hlavicka->rm16; if ( $hlavicka->rm16 == 0 ) $rm16='';
 $rn17=$hlavicka->rn17; if ( $hlavicka->rn17 == 0 ) $rn17='';
-$rm17=$hlavicka->rm17; if ( $hlavicka->rm17 == 0 ) $rm17='';
 $rn18=$hlavicka->rn18; if ( $hlavicka->rn18 == 0 ) $rn18='';
-$rm18=$hlavicka->rm18; if ( $hlavicka->rm18 == 0 ) $rm18='';
 $rn19=$hlavicka->rn19; if ( $hlavicka->rn19 == 0 ) $rn19='';
-$rm19=$hlavicka->rm19; if ( $hlavicka->rm19 == 0 ) $rm19='';
 $rn20=$hlavicka->rn20; if ( $hlavicka->rn20 == 0 ) $rn20='';
-$rm20=$hlavicka->rm20; if ( $hlavicka->rm20 == 0 ) $rm20='';
 $rn21=$hlavicka->rn21; if ( $hlavicka->rn21 == 0 ) $rn21='';
-$rm21=$hlavicka->rm21; if ( $hlavicka->rm21 == 0 ) $rm21='';
 $rn22=$hlavicka->rn22; if ( $hlavicka->rn22 == 0 ) $rn22='';
-$rm22=$hlavicka->rm22; if ( $hlavicka->rm22 == 0 ) $rm22='';
 $rn23=$hlavicka->rn23; if ( $hlavicka->rn23 == 0 ) $rn23='';
-$rm23=$hlavicka->rm23; if ( $hlavicka->rm23 == 0 ) $rm23='';
 $rn24=$hlavicka->rn24; if ( $hlavicka->rn24 == 0 ) $rn24='';
-$rm24=$hlavicka->rm24; if ( $hlavicka->rm24 == 0 ) $rm24='';
 $rn25=$hlavicka->rn25; if ( $hlavicka->rn25 == 0 ) $rn25='';
-$rm25=$hlavicka->rm25; if ( $hlavicka->rm25 == 0 ) $rm25='';
 $rn26=$hlavicka->rn26; if ( $hlavicka->rn26 == 0 ) $rn26='';
-$rm26=$hlavicka->rm26; if ( $hlavicka->rm26 == 0 ) $rm26='';
 $rn27=$hlavicka->rn27; if ( $hlavicka->rn27 == 0 ) $rn27='';
-$rm27=$hlavicka->rm27; if ( $hlavicka->rm27 == 0 ) $rm27='';
 $rn28=$hlavicka->rn28; if ( $hlavicka->rn28 == 0 ) $rn28='';
-$rm28=$hlavicka->rm28; if ( $hlavicka->rm28 == 0 ) $rm28='';
 $rn29=$hlavicka->rn29; if ( $hlavicka->rn29 == 0 ) $rn29='';
-$rm29=$hlavicka->rm29; if ( $hlavicka->rm29 == 0 ) $rm29='';
 $rn30=$hlavicka->rn30; if ( $hlavicka->rn30 == 0 ) $rn30='';
-$rm30=$hlavicka->rm30; if ( $hlavicka->rm30 == 0 ) $rm30='';
 $rn31=$hlavicka->rn31; if ( $hlavicka->rn31 == 0 ) $rn31='';
-$rm31=$hlavicka->rm31; if ( $hlavicka->rm31 == 0 ) $rm31='';
 $rn32=$hlavicka->rn32; if ( $hlavicka->rn32 == 0 ) $rn32='';
-$rm32=$hlavicka->rm32; if ( $hlavicka->rm32 == 0 ) $rm32='';
 $rn33=$hlavicka->rn33; if ( $hlavicka->rn33 == 0 ) $rn33='';
-$rm33=$hlavicka->rm33; if ( $hlavicka->rm33 == 0 ) $rm33='';
 $rn34=$hlavicka->rn34; if ( $hlavicka->rn34 == 0 ) $rn34='';
-$rm34=$hlavicka->rm34; if ( $hlavicka->rm34 == 0 ) $rm34='';
 $rn35=$hlavicka->rn35; if ( $hlavicka->rn35 == 0 ) $rn35='';
-$rm35=$hlavicka->rm35; if ( $hlavicka->rm35 == 0 ) $rm35='';
 $rn36=$hlavicka->rn36; if ( $hlavicka->rn36 == 0 ) $rn36='';
-$rm36=$hlavicka->rm36; if ( $hlavicka->rm36 == 0 ) $rm36='';
 $rn37=$hlavicka->rn37; if ( $hlavicka->rn37 == 0 ) $rn37='';
-$rm37=$hlavicka->rm37; if ( $hlavicka->rm37 == 0 ) $rm37='';
 $rn38=$hlavicka->rn38; if ( $hlavicka->rn38 == 0 ) $rn38='';
-$rm38=$hlavicka->rm38; if ( $hlavicka->rm38 == 0 ) $rm38='';
 $rn39=$hlavicka->rn39; if ( $hlavicka->rn39 == 0 ) $rn39='';
-$rm39=$hlavicka->rm39; if ( $hlavicka->rm39 == 0 ) $rm39='';
 $rn40=$hlavicka->rn40; if ( $hlavicka->rn40 == 0 ) $rn40='';
-$rm40=$hlavicka->rm40; if ( $hlavicka->rm40 == 0 ) $rm40='';
 $rn41=$hlavicka->rn41; if ( $hlavicka->rn41 == 0 ) $rn41='';
-$rm41=$hlavicka->rm41; if ( $hlavicka->rm41 == 0 ) $rm41='';
 $rn42=$hlavicka->rn42; if ( $hlavicka->rn42 == 0 ) $rn42='';
-$rm42=$hlavicka->rm42; if ( $hlavicka->rm42 == 0 ) $rm42='';
 $rn43=$hlavicka->rn43; if ( $hlavicka->rn43 == 0 ) $rn43='';
-$rm43=$hlavicka->rm43; if ( $hlavicka->rm43 == 0 ) $rm43='';
 $rn44=$hlavicka->rn44; if ( $hlavicka->rn44 == 0 ) $rn44='';
-$rm44=$hlavicka->rm44; if ( $hlavicka->rm44 == 0 ) $rm44='';
 $rn45=$hlavicka->rn45; if ( $hlavicka->rn45 == 0 ) $rn45='';
-$rm45=$hlavicka->rm45; if ( $hlavicka->rm45 == 0 ) $rm45='';
 
-//ak je ps 0.00 zadany daj 0.00
-$sqlttm = "SELECT * FROM F$kli_vxcf"."_uctpocsuvahano WHERE dok > 0 AND hod = 0 ORDER BY dok";
-$sqlm = mysql_query("$sqlttm");
-if($sqlm){ $polm = mysql_num_rows($sqlm); }
-$im=0;
-  while ($im <= $polm )
+
+$sqlttps = "SELECT * FROM F$kli_vxcf"."_pos_muj2014 WHERE dok > 0 ORDER BY dok "; 
+$sqlps = mysql_query("$sqlttps");
+$polps = mysql_num_rows($sqlps);
+
+$ips=0;
+  while ($ips <= $polps )
   {
-  if (@$zaznam=mysql_data_seek($sqlm,$im))
+  if (@$zaznam=mysql_data_seek($sqlps,$ips))
 {
-$hlavickam=mysql_fetch_object($sqlm);
-if( $hlavickam->dok ==  1 ) { $rm01="0.00"; }
-if( $hlavickam->dok ==  2 ) { $rm02="0.00"; }
-if( $hlavickam->dok ==  3 ) { $rm03="0.00"; }
-if( $hlavickam->dok ==  4 ) { $rm04="0.00"; }
-if( $hlavickam->dok ==  5 ) { $rm05="0.00"; }
-if( $hlavickam->dok ==  6 ) { $rm06="0.00"; }
-if( $hlavickam->dok ==  7 ) { $rm07="0.00"; }
-if( $hlavickam->dok ==  8 ) { $rm08="0.00"; }
-if( $hlavickam->dok ==  9 ) { $rm09="0.00"; }
-if( $hlavickam->dok == 10 ) { $rm10="0.00"; }
-if( $hlavickam->dok == 11 ) { $rm11="0.00"; }
-if( $hlavickam->dok == 12 ) { $rm12="0.00"; }
-if( $hlavickam->dok == 13 ) { $rm13="0.00"; }
-if( $hlavickam->dok == 14 ) { $rm14="0.00"; }
-if( $hlavickam->dok == 15 ) { $rm15="0.00"; }
-if( $hlavickam->dok == 16 ) { $rm16="0.00"; }
-if( $hlavickam->dok == 17 ) { $rm17="0.00"; }
-if( $hlavickam->dok == 18 ) { $rm18="0.00"; }
-if( $hlavickam->dok == 19 ) { $rm19="0.00"; }
-if( $hlavickam->dok == 20 ) { $rm20="0.00"; }
-if( $hlavickam->dok == 21 ) { $rm21="0.00"; }
-if( $hlavickam->dok == 22 ) { $rm22="0.00"; }
-if( $hlavickam->dok == 23 ) { $rm23="0.00"; }
-if( $hlavickam->dok == 24 ) { $rm24="0.00"; }
-if( $hlavickam->dok == 25 ) { $rm25="0.00"; }
-if( $hlavickam->dok == 26 ) { $rm26="0.00"; }
-if( $hlavickam->dok == 27 ) { $rm27="0.00"; }
-if( $hlavickam->dok == 28 ) { $rm28="0.00"; }
-if( $hlavickam->dok == 29 ) { $rm29="0.00"; }
-if( $hlavickam->dok == 30 ) { $rm30="0.00"; }
-if( $hlavickam->dok == 31 ) { $rm31="0.00"; }
-if( $hlavickam->dok == 32 ) { $rm32="0.00"; }
-if( $hlavickam->dok == 33 ) { $rm33="0.00"; }
-if( $hlavickam->dok == 34 ) { $rm34="0.00"; }
-if( $hlavickam->dok == 35 ) { $rm35="0.00"; }
-if( $hlavickam->dok == 36 ) { $rm36="0.00"; }
-if( $hlavickam->dok == 37 ) { $rm37="0.00"; }
-if( $hlavickam->dok == 38 ) { $rm38="0.00"; }
-if( $hlavickam->dok == 39 ) { $rm39="0.00"; }
-if( $hlavickam->dok == 40 ) { $rm40="0.00"; }
-if( $hlavickam->dok == 41 ) { $rm41="0.00"; }
-if( $hlavickam->dok == 42 ) { $rm42="0.00"; }
-if( $hlavickam->dok == 43 ) { $rm43="0.00"; }
-if( $hlavickam->dok == 44 ) { $rm44="0.00"; }
-if( $hlavickam->dok == 45 ) { $rm45="0.00"; }
-if( $hlavickam->dok == 46 ) { $rm46="0.00"; }
-if( $hlavickam->dok == 47 ) { $rm47="0.00"; }
-if( $hlavickam->dok == 48 ) { $rm48="0.00"; }
-if( $hlavickam->dok == 49 ) { $rm49="0.00"; }
-if( $hlavickam->dok == 50 ) { $rm50="0.00"; }
-if( $hlavickam->dok == 51 ) { $rm51="0.00"; }
-if( $hlavickam->dok == 52 ) { $rm52="0.00"; }
-if( $hlavickam->dok == 53 ) { $rm53="0.00"; }
-if( $hlavickam->dok == 54 ) { $rm54="0.00"; }
-if( $hlavickam->dok == 55 ) { $rm55="0.00"; }
-if( $hlavickam->dok == 56 ) { $rm56="0.00"; }
-if( $hlavickam->dok == 57 ) { $rm57="0.00"; }
-if( $hlavickam->dok == 58 ) { $rm58="0.00"; }
-if( $hlavickam->dok == 59 ) { $rm59="0.00"; }
-if( $hlavickam->dok == 60 ) { $rm60="0.00"; }
-if( $hlavickam->dok == 61 ) { $rm61="0.00"; }
-if( $hlavickam->dok == 62 ) { $rm62="0.00"; }
-if( $hlavickam->dok == 63 ) { $rm63="0.00"; }
-if( $hlavickam->dok == 64 ) { $rm64="0.00"; }
-if( $hlavickam->dok == 65 ) { $rm65="0.00"; }
-if( $hlavickam->dok == 66 ) { $rm66="0.00"; }
-if( $hlavickam->dok == 67 ) { $rm67="0.00"; }
-if( $hlavickam->dok == 68 ) { $rm68="0.00"; }
-if( $hlavickam->dok == 69 ) { $rm69="0.00"; }
-if( $hlavickam->dok == 70 ) { $rm70="0.00"; }
-if( $hlavickam->dok == 71 ) { $rm71="0.00"; }
-if( $hlavickam->dok == 72 ) { $rm72="0.00"; }
-if( $hlavickam->dok == 73 ) { $rm73="0.00"; }
-if( $hlavickam->dok == 74 ) { $rm74="0.00"; }
-if( $hlavickam->dok == 75 ) { $rm75="0.00"; }
-if( $hlavickam->dok == 76 ) { $rm76="0.00"; }
-if( $hlavickam->dok == 77 ) { $rm77="0.00"; }
-if( $hlavickam->dok == 78 ) { $rm78="0.00"; }
-if( $hlavickam->dok == 79 ) { $rm79="0.00"; }
-if( $hlavickam->dok == 80 ) { $rm80="0.00"; }
-if( $hlavickam->dok == 81 ) { $rm81="0.00"; }
-if( $hlavickam->dok == 82 ) { $rm82="0.00"; }
-if( $hlavickam->dok == 83 ) { $rm83="0.00"; }
-if( $hlavickam->dok == 84 ) { $rm84="0.00"; }
-if( $hlavickam->dok == 85 ) { $rm85="0.00"; }
-if( $hlavickam->dok == 86 ) { $rm86="0.00"; }
-if( $hlavickam->dok == 87 ) { $rm87="0.00"; }
-if( $hlavickam->dok == 88 ) { $rm88="0.00"; }
-if( $hlavickam->dok == 89 ) { $rm89="0.00"; }
-if( $hlavickam->dok == 90 ) { $rm90="0.00"; }
-if( $hlavickam->dok == 91 ) { $rm91="0.00"; }
-if( $hlavickam->dok == 92 ) { $rm92="0.00"; }
-if( $hlavickam->dok == 93 ) { $rm93="0.00"; }
-if( $hlavickam->dok == 94 ) { $rm94="0.00"; }
-if( $hlavickam->dok == 95 ) { $rm95="0.00"; }
-if( $hlavickam->dok == 96 ) { $rm96="0.00"; }
-if( $hlavickam->dok == 97 ) { $rm97="0.00"; }
-if( $hlavickam->dok == 98 ) { $rm98="0.00"; }
-if( $hlavickam->dok == 99 ) { $rm99="0.00"; }
-if( $hlavickam->dok == 100 ) { $rm100="0.00"; }
-if( $hlavickam->dok == 101 ) { $rm101="0.00"; }
-if( $hlavickam->dok == 102 ) { $rm102="0.00"; }
-if( $hlavickam->dok == 103 ) { $rm103="0.00"; }
-if( $hlavickam->dok == 104 ) { $rm104="0.00"; }
-if( $hlavickam->dok == 105 ) { $rm105="0.00"; }
-if( $hlavickam->dok == 106 ) { $rm106="0.00"; }
-if( $hlavickam->dok == 107 ) { $rm107="0.00"; }
-if( $hlavickam->dok == 108 ) { $rm108="0.00"; }
-if( $hlavickam->dok == 109 ) { $rm109="0.00"; }
-if( $hlavickam->dok == 110 ) { $rm110="0.00"; }
+$hlavickps=mysql_fetch_object($sqlps);
+
+$riadok=1*$hlavickps->dok;
+
+if( $riadok ==  1 ) { $rm01=1*$hlavickps->hod; }
+if( $riadok ==  2 ) { $rm02=1*$hlavickps->hod; }
+if( $riadok ==  3 ) { $rm03=1*$hlavickps->hod; }
+if( $riadok ==  4 ) { $rm04=1*$hlavickps->hod; }
+if( $riadok ==  5 ) { $rm05=1*$hlavickps->hod; }
+if( $riadok ==  6 ) { $rm06=1*$hlavickps->hod; }
+if( $riadok ==  7 ) { $rm07=1*$hlavickps->hod; }
+if( $riadok ==  8 ) { $rm08=1*$hlavickps->hod; }
+if( $riadok ==  9 ) { $rm09=1*$hlavickps->hod; }
+if( $riadok == 10 ) { $rm10=1*$hlavickps->hod; }
+if( $riadok == 11 ) { $rm11=1*$hlavickps->hod; }
+if( $riadok == 12 ) { $rm12=1*$hlavickps->hod; }
+if( $riadok == 13 ) { $rm13=1*$hlavickps->hod; }
+if( $riadok == 14 ) { $rm14=1*$hlavickps->hod; }
+if( $riadok == 15 ) { $rm15=1*$hlavickps->hod; }
+if( $riadok == 16 ) { $rm16=1*$hlavickps->hod; }
+if( $riadok == 17 ) { $rm17=1*$hlavickps->hod; }
+if( $riadok == 18 ) { $rm18=1*$hlavickps->hod; }
+if( $riadok == 19 ) { $rm19=1*$hlavickps->hod; }
+if( $riadok == 20 ) { $rm20=1*$hlavickps->hod; }
+if( $riadok == 21 ) { $rm21=1*$hlavickps->hod; }
+if( $riadok == 22 ) { $rm22=1*$hlavickps->hod; }
+if( $riadok == 23 ) { $rm23=1*$hlavickps->hod; }
+if( $riadok == 24 ) { $rm24=1*$hlavickps->hod; }
+if( $riadok == 25 ) { $rm25=1*$hlavickps->hod; }
+if( $riadok == 26 ) { $rm26=1*$hlavickps->hod; }
+if( $riadok == 27 ) { $rm27=1*$hlavickps->hod; }
+if( $riadok == 28 ) { $rm28=1*$hlavickps->hod; }
+if( $riadok == 29 ) { $rm29=1*$hlavickps->hod; }
+if( $riadok == 30 ) { $rm30=1*$hlavickps->hod; }
+if( $riadok == 31 ) { $rm31=1*$hlavickps->hod; }
+if( $riadok == 32 ) { $rm32=1*$hlavickps->hod; }
+if( $riadok == 33 ) { $rm33=1*$hlavickps->hod; }
+if( $riadok == 34 ) { $rm34=1*$hlavickps->hod; }
+if( $riadok == 35 ) { $rm35=1*$hlavickps->hod; }
+if( $riadok == 36 ) { $rm36=1*$hlavickps->hod; }
+if( $riadok == 37 ) { $rm37=1*$hlavickps->hod; }
+if( $riadok == 38 ) { $rm38=1*$hlavickps->hod; }
+if( $riadok == 39 ) { $rm39=1*$hlavickps->hod; }
+if( $riadok == 40 ) { $rm40=1*$hlavickps->hod; }
+if( $riadok == 41 ) { $rm41=1*$hlavickps->hod; }
+if( $riadok == 44 ) { $rm44=1*$hlavickps->hod; }
+if( $riadok == 43 ) { $rm43=1*$hlavickps->hod; }
+if( $riadok == 44 ) { $rm44=1*$hlavickps->hod; }
+if( $riadok == 45 ) { $rm45=1*$hlavickps->hod; }
+
 }
-$im = $im + 1;
+$ips = $ips + 1;
   }
-
-
-//vypocitaj rm991,992,993 ako sucet to uz od 2012 zbytocne lebo kontrolne cisla zrusili
-$nnne=1;
-if ( $nnne == 0 )
-    {
-$rm991=0;
-$sqldok = mysql_query("SELECT SUM(hod) as r991 FROM F$kli_vxcf"."_uctpocsuvahano WHERE dok >= 1 AND dok <= 28 ");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $rm991=1*$riaddok->r991;
-  }
-$rm992=0;
-$sqldok = mysql_query("SELECT SUM(hod) as r992 FROM F$kli_vxcf"."_uctpocsuvahano WHERE dok >= 29 AND dok <= 60 ");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $rm992=1*$riaddok->r992;
-  }
-$rm993=0;
-$sqldok = mysql_query("SELECT SUM(hod) as r993 FROM F$kli_vxcf"."_uctpocsuvahano WHERE dok >= 61 AND dok <= 104 ");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $rm993=1*$riaddok->r993;
-  }
-     }
 
 
 //strana 2
@@ -3056,21 +2917,14 @@ $i = $i + 1;
 //koniec tlacit suvahu
 
 //tlacit VZaS
-if( $tlacvzs == 1 ) {
+if( $tlacvzs == 1 ) { 
 
 //vytlac
-//$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykziss".$kli_uzid." WHERE prx = 1 ".""; 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykziss".$kli_uzid.
-" LEFT JOIN F$kli_vxcf"."_uctpocvziskovno_stl".
-" ON F$kli_vxcf"."_prcvykziss$kli_uzid.prx=F$kli_vxcf"."_uctpocvziskovno_stl.fic".
-" WHERE prx = 1 "."";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykziss".$kli_uzid." WHERE prx = 1 ";
 
 if( $tis > 0 ) { 
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvyk1000ziss".$kli_uzid.
-" LEFT JOIN F$kli_vxcf"."_uctpocvziskovno_stt".
-" ON F$kli_vxcf"."_prcvyk1000ziss$kli_uzid.prx=F$kli_vxcf"."_uctpocvziskovno_stt.fic".
-" WHERE prx = 1 ".""; 
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvyk1000ziss".$kli_uzid." WHERE prx = 1 "; 
 
 }
 
@@ -3125,188 +2979,67 @@ $r36=$hlavicka->r36; if ( $hlavicka->r36 == 0 ) $r36="";
 $r37=$hlavicka->r37; if ( $hlavicka->r37 == 0 ) $r37="";
 $r38=$hlavicka->r38; if ( $hlavicka->r38 == 0 ) $r38="";
 
-$rm01=$hlavicka->rm01; if ( $hlavicka->rm01 == 0 ) $rm01="";
-$rm02=$hlavicka->rm02; if ( $hlavicka->rm02 == 0 ) $rm02="";
-$rm03=$hlavicka->rm03; if ( $hlavicka->rm03 == 0 ) $rm03="";
-$rm04=$hlavicka->rm04; if ( $hlavicka->rm04 == 0 ) $rm04="";
-$rm05=$hlavicka->rm05; if ( $hlavicka->rm05 == 0 ) $rm05="";
-$rm06=$hlavicka->rm06; if ( $hlavicka->rm06 == 0 ) $rm06="";
-$rm07=$hlavicka->rm07; if ( $hlavicka->rm07 == 0 ) $rm07="";
-$rm08=$hlavicka->rm08; if ( $hlavicka->rm08 == 0 ) $rm08="";
-$rm09=$hlavicka->rm09; if ( $hlavicka->rm09 == 0 ) $rm09="";
-$rm10=$hlavicka->rm10; if ( $hlavicka->rm10 == 0 ) $rm10="";
-$rm11=$hlavicka->rm11; if ( $hlavicka->rm11 == 0 ) $rm11="";
-$rm12=$hlavicka->rm12; if ( $hlavicka->rm12 == 0 ) $rm12="";
-$rm13=$hlavicka->rm13; if ( $hlavicka->rm13 == 0 ) $rm13="";
-$rm14=$hlavicka->rm14; if ( $hlavicka->rm14 == 0 ) $rm14="";
-$rm15=$hlavicka->rm15; if ( $hlavicka->rm15 == 0 ) $rm15="";
-$rm16=$hlavicka->rm16; if ( $hlavicka->rm16 == 0 ) $rm16="";
-$rm17=$hlavicka->rm17; if ( $hlavicka->rm17 == 0 ) $rm17="";
-$rm18=$hlavicka->rm18; if ( $hlavicka->rm18 == 0 ) $rm18="";
-$rm19=$hlavicka->rm19; if ( $hlavicka->rm19 == 0 ) $rm19="";
-$rm20=$hlavicka->rm20; if ( $hlavicka->rm20 == 0 ) $rm20="";
-$rm21=$hlavicka->rm21; if ( $hlavicka->rm21 == 0 ) $rm21="";
-$rm22=$hlavicka->rm22; if ( $hlavicka->rm22 == 0 ) $rm22="";
-$rm23=$hlavicka->rm23; if ( $hlavicka->rm23 == 0 ) $rm23="";
-$rm24=$hlavicka->rm24; if ( $hlavicka->rm24 == 0 ) $rm24="";
-$rm25=$hlavicka->rm25; if ( $hlavicka->rm25 == 0 ) $rm25="";
-$rm26=$hlavicka->rm26; if ( $hlavicka->rm26 == 0 ) $rm26="";
-$rm27=$hlavicka->rm27; if ( $hlavicka->rm27 == 0 ) $rm27="";
-$rm28=$hlavicka->rm28; if ( $hlavicka->rm28 == 0 ) $rm28="";
-$rm29=$hlavicka->rm29; if ( $hlavicka->rm29 == 0 ) $rm29="";
-$rm30=$hlavicka->rm30; if ( $hlavicka->rm30 == 0 ) $rm30="";
-$rm31=$hlavicka->rm31; if ( $hlavicka->rm31 == 0 ) $rm31="";
-$rm32=$hlavicka->rm32; if ( $hlavicka->rm32 == 0 ) $rm32="";
-$rm33=$hlavicka->rm33; if ( $hlavicka->rm33 == 0 ) $rm33="";
-$rm34=$hlavicka->rm34; if ( $hlavicka->rm34 == 0 ) $rm34="";
-$rm35=$hlavicka->rm35; if ( $hlavicka->rm35 == 0 ) $rm35="";
-$rm36=$hlavicka->rm36; if ( $hlavicka->rm36 == 0 ) $rm36="";
-$rm37=$hlavicka->rm37; if ( $hlavicka->rm37 == 0 ) $rm37="";
-$rm38=$hlavicka->rm38; if ( $hlavicka->rm38 == 0 ) $rm38="";
+$rm01=""; $rm02=""; $rm03=""; $rm04=""; $rm05=""; $rm06=""; $rm07=""; $rm08=""; $rm09=""; $rm10=""; 
+$rm11=""; $rm12=""; $rm13=""; $rm14=""; $rm15=""; $rm16=""; $rm17=""; $rm18=""; $rm19=""; $rm20="";
+$rm21=""; $rm22=""; $rm23=""; $rm24=""; $rm25=""; $rm26=""; $rm27=""; $rm28=""; $rm29=""; $rm30="";
+$rm31=""; $rm32=""; $rm33=""; $rm34=""; $rm35=""; $rm36=""; $rm37=""; $rm38="";
 
-//ak je ps 0.00 zadany daj 0.00
-$sqlttm = "SELECT * FROM F$kli_vxcf"."_uctpocvziskovno WHERE dok > 0 AND hod = 0 ORDER BY dok";
-$sqlm = mysql_query("$sqlttm");
-if($sqlm){ $polm = mysql_num_rows($sqlm); }
-$im=0;
-  while ($im <= $polm )
+$sqlttpv = "SELECT * FROM F$kli_vxcf"."_pov_muj2014 WHERE dok > 0 ORDER BY dok "; 
+$sqlpv = mysql_query("$sqlttpv");
+$polpv = mysql_num_rows($sqlpv);
+
+$ipv=0;
+  while ($ipv <= $polpv )
   {
-  if (@$zaznam=mysql_data_seek($sqlm,$im))
+  if (@$zaznam=mysql_data_seek($sqlpv,$ipv))
 {
-$hlavickam=mysql_fetch_object($sqlm);
-if( $hlavickam->dok ==  1 ) { $rm01="0.00"; }
-if( $hlavickam->dok ==  2 ) { $rm02="0.00"; }
-if( $hlavickam->dok ==  3 ) { $rm03="0.00"; }
-if( $hlavickam->dok ==  4 ) { $rm04="0.00"; }
-if( $hlavickam->dok ==  5 ) { $rm05="0.00"; }
-if( $hlavickam->dok ==  6 ) { $rm06="0.00"; }
-if( $hlavickam->dok ==  7 ) { $rm07="0.00"; }
-if( $hlavickam->dok ==  8 ) { $rm08="0.00"; }
-if( $hlavickam->dok ==  9 ) { $rm09="0.00"; }
-if( $hlavickam->dok == 10 ) { $rm10="0.00"; }
-if( $hlavickam->dok == 11 ) { $rm11="0.00"; }
-if( $hlavickam->dok == 12 ) { $rm12="0.00"; }
-if( $hlavickam->dok == 13 ) { $rm13="0.00"; }
-if( $hlavickam->dok == 14 ) { $rm14="0.00"; }
-if( $hlavickam->dok == 15 ) { $rm15="0.00"; }
-if( $hlavickam->dok == 16 ) { $rm16="0.00"; }
-if( $hlavickam->dok == 17 ) { $rm17="0.00"; }
-if( $hlavickam->dok == 18 ) { $rm18="0.00"; }
-if( $hlavickam->dok == 19 ) { $rm19="0.00"; }
-if( $hlavickam->dok == 20 ) { $rm20="0.00"; }
-if( $hlavickam->dok == 21 ) { $rm21="0.00"; }
-if( $hlavickam->dok == 22 ) { $rm22="0.00"; }
-if( $hlavickam->dok == 23 ) { $rm23="0.00"; }
-if( $hlavickam->dok == 24 ) { $rm24="0.00"; }
-if( $hlavickam->dok == 25 ) { $rm25="0.00"; }
-if( $hlavickam->dok == 26 ) { $rm26="0.00"; }
-if( $hlavickam->dok == 27 ) { $rm27="0.00"; }
-if( $hlavickam->dok == 28 ) { $rm28="0.00"; }
-if( $hlavickam->dok == 29 ) { $rm29="0.00"; }
-if( $hlavickam->dok == 30 ) { $rm30="0.00"; }
-if( $hlavickam->dok == 31 ) { $rm31="0.00"; }
-if( $hlavickam->dok == 32 ) { $rm32="0.00"; }
-if( $hlavickam->dok == 33 ) { $rm33="0.00"; }
-if( $hlavickam->dok == 34 ) { $rm34="0.00"; }
-if( $hlavickam->dok == 35 ) { $rm35="0.00"; }
-if( $hlavickam->dok == 36 ) { $rm36="0.00"; }
-if( $hlavickam->dok == 37 ) { $rm37="0.00"; }
-if( $hlavickam->dok == 38 ) { $rm38="0.00"; }
-if( $hlavickam->dok == 39 ) { $rm39="0.00"; }
-if( $hlavickam->dok == 40 ) { $rm40="0.00"; }
-if( $hlavickam->dok == 41 ) { $rm41="0.00"; }
-if( $hlavickam->dok == 42 ) { $rm42="0.00"; }
-if( $hlavickam->dok == 43 ) { $rm43="0.00"; }
-if( $hlavickam->dok == 44 ) { $rm44="0.00"; }
-if( $hlavickam->dok == 45 ) { $rm45="0.00"; }
-if( $hlavickam->dok == 46 ) { $rm46="0.00"; }
-if( $hlavickam->dok == 47 ) { $rm47="0.00"; }
-if( $hlavickam->dok == 48 ) { $rm48="0.00"; }
-if( $hlavickam->dok == 49 ) { $rm49="0.00"; }
-if( $hlavickam->dok == 50 ) { $rm50="0.00"; }
-if( $hlavickam->dok == 51 ) { $rm51="0.00"; }
-if( $hlavickam->dok == 52 ) { $rm52="0.00"; }
-if( $hlavickam->dok == 53 ) { $rm53="0.00"; }
-if( $hlavickam->dok == 54 ) { $rm54="0.00"; }
-if( $hlavickam->dok == 55 ) { $rm55="0.00"; }
-if( $hlavickam->dok == 56 ) { $rm56="0.00"; }
-if( $hlavickam->dok == 57 ) { $rm57="0.00"; }
-if( $hlavickam->dok == 58 ) { $rm58="0.00"; }
-if( $hlavickam->dok == 59 ) { $rm59="0.00"; }
-if( $hlavickam->dok == 60 ) { $rm60="0.00"; }
-if( $hlavickam->dok == 61 ) { $rm61="0.00"; }
-if( $hlavickam->dok == 62 ) { $rm62="0.00"; }
-if( $hlavickam->dok == 63 ) { $rm63="0.00"; }
-if( $hlavickam->dok == 64 ) { $rm64="0.00"; }
-if( $hlavickam->dok == 65 ) { $rm65="0.00"; }
-if( $hlavickam->dok == 66 ) { $rm66="0.00"; }
-if( $hlavickam->dok == 67 ) { $rm67="0.00"; }
-if( $hlavickam->dok == 68 ) { $rm68="0.00"; }
-if( $hlavickam->dok == 69 ) { $rm69="0.00"; }
-if( $hlavickam->dok == 70 ) { $rm70="0.00"; }
-if( $hlavickam->dok == 71 ) { $rm71="0.00"; }
-if( $hlavickam->dok == 72 ) { $rm72="0.00"; }
-if( $hlavickam->dok == 73 ) { $rm73="0.00"; }
-if( $hlavickam->dok == 74 ) { $rm74="0.00"; }
-if( $hlavickam->dok == 75 ) { $rm75="0.00"; }
-if( $hlavickam->dok == 76 ) { $rm76="0.00"; }
-if( $hlavickam->dok == 77 ) { $rm77="0.00"; }
-if( $hlavickam->dok == 78 ) { $rm78="0.00"; }
-if( $hlavickam->dok == 79 ) { $rm79="0.00"; }
-if( $hlavickam->dok == 80 ) { $rm80="0.00"; }
-if( $hlavickam->dok == 81 ) { $rm81="0.00"; }
-if( $hlavickam->dok == 82 ) { $rm82="0.00"; }
-if( $hlavickam->dok == 83 ) { $rm83="0.00"; }
-if( $hlavickam->dok == 84 ) { $rm84="0.00"; }
-if( $hlavickam->dok == 85 ) { $rm85="0.00"; }
-if( $hlavickam->dok == 86 ) { $rm86="0.00"; }
-if( $hlavickam->dok == 87 ) { $rm87="0.00"; }
-if( $hlavickam->dok == 88 ) { $rm88="0.00"; }
-if( $hlavickam->dok == 89 ) { $rm89="0.00"; }
-if( $hlavickam->dok == 90 ) { $rm90="0.00"; }
-if( $hlavickam->dok == 91 ) { $rm91="0.00"; }
-if( $hlavickam->dok == 92 ) { $rm92="0.00"; }
-if( $hlavickam->dok == 93 ) { $rm93="0.00"; }
-if( $hlavickam->dok == 94 ) { $rm94="0.00"; }
-if( $hlavickam->dok == 95 ) { $rm95="0.00"; }
-if( $hlavickam->dok == 96 ) { $rm96="0.00"; }
-if( $hlavickam->dok == 97 ) { $rm97="0.00"; }
-if( $hlavickam->dok == 98 ) { $rm98="0.00"; }
-if( $hlavickam->dok == 99 ) { $rm99="0.00"; }
-if( $hlavickam->dok == 100 ) { $rm100="0.00"; }
-if( $hlavickam->dok == 101 ) { $rm101="0.00"; }
-if( $hlavickam->dok == 102 ) { $rm102="0.00"; }
-if( $hlavickam->dok == 103 ) { $rm103="0.00"; }
-if( $hlavickam->dok == 104 ) { $rm104="0.00"; }
-if( $hlavickam->dok == 105 ) { $rm105="0.00"; }
-if( $hlavickam->dok == 106 ) { $rm106="0.00"; }
-if( $hlavickam->dok == 107 ) { $rm107="0.00"; }
-if( $hlavickam->dok == 108 ) { $rm108="0.00"; }
-if( $hlavickam->dok == 109 ) { $rm109="0.00"; }
-if( $hlavickam->dok == 110 ) { $rm110="0.00"; }
+$hlavickpv=mysql_fetch_object($sqlpv);
+
+$riadok=1*$hlavickpv->dok;
+
+if( $riadok ==  1 ) { $rm01=1*$hlavickpv->hod; }
+if( $riadok ==  2 ) { $rm02=1*$hlavickpv->hod; }
+if( $riadok ==  3 ) { $rm03=1*$hlavickpv->hod; }
+if( $riadok ==  4 ) { $rm04=1*$hlavickpv->hod; }
+if( $riadok ==  5 ) { $rm05=1*$hlavickpv->hod; }
+if( $riadok ==  6 ) { $rm06=1*$hlavickpv->hod; }
+if( $riadok ==  7 ) { $rm07=1*$hlavickpv->hod; }
+if( $riadok ==  8 ) { $rm08=1*$hlavickpv->hod; }
+if( $riadok ==  9 ) { $rm09=1*$hlavickpv->hod; }
+if( $riadok == 10 ) { $rm10=1*$hlavickpv->hod; }
+if( $riadok == 11 ) { $rm11=1*$hlavickpv->hod; }
+if( $riadok == 12 ) { $rm12=1*$hlavickpv->hod; }
+if( $riadok == 13 ) { $rm13=1*$hlavickpv->hod; }
+if( $riadok == 14 ) { $rm14=1*$hlavickpv->hod; }
+if( $riadok == 15 ) { $rm15=1*$hlavickpv->hod; }
+if( $riadok == 16 ) { $rm16=1*$hlavickpv->hod; }
+if( $riadok == 17 ) { $rm17=1*$hlavickpv->hod; }
+if( $riadok == 18 ) { $rm18=1*$hlavickpv->hod; }
+if( $riadok == 19 ) { $rm19=1*$hlavickpv->hod; }
+if( $riadok == 20 ) { $rm20=1*$hlavickpv->hod; }
+if( $riadok == 21 ) { $rm21=1*$hlavickpv->hod; }
+if( $riadok == 22 ) { $rm22=1*$hlavickpv->hod; }
+if( $riadok == 23 ) { $rm23=1*$hlavickpv->hod; }
+if( $riadok == 24 ) { $rm24=1*$hlavickpv->hod; }
+if( $riadok == 25 ) { $rm25=1*$hlavickpv->hod; }
+if( $riadok == 26 ) { $rm26=1*$hlavickpv->hod; }
+if( $riadok == 27 ) { $rm27=1*$hlavickpv->hod; }
+if( $riadok == 28 ) { $rm28=1*$hlavickpv->hod; }
+if( $riadok == 29 ) { $rm29=1*$hlavickpv->hod; }
+if( $riadok == 30 ) { $rm30=1*$hlavickpv->hod; }
+if( $riadok == 31 ) { $rm31=1*$hlavickpv->hod; }
+if( $riadok == 32 ) { $rm32=1*$hlavickpv->hod; }
+if( $riadok == 33 ) { $rm33=1*$hlavickpv->hod; }
+if( $riadok == 34 ) { $rm34=1*$hlavickpv->hod; }
+if( $riadok == 35 ) { $rm35=1*$hlavickpv->hod; }
+if( $riadok == 36 ) { $rm36=1*$hlavickpv->hod; }
+if( $riadok == 37 ) { $rm37=1*$hlavickpv->hod; }
+if( $riadok == 38 ) { $rm38=1*$hlavickpv->hod; }
+
 }
-$im = $im + 1;
+$ipv = $ipv + 1;
   }
 
-//vypocitaj rm994,995 ako sucet
-$nnne=1;
-if ( $nnne == 0 )
-    {
-$rm994=0;
-$sqldok = mysql_query("SELECT SUM(hod) as r994 FROM F$kli_vxcf"."_uctpocvziskovno WHERE dok >= 1 AND dok <= 38 ");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $rm994=1*$riaddok->r994;
-  }
-$rm995=0;
-$sqldok = mysql_query("SELECT SUM(hod) as r995 FROM F$kli_vxcf"."_uctpocvziskovno WHERE dok >= 39 AND dok <= 78 ");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $rm995=1*$riaddok->r995;
-  }
-    }
 
 //strana 4
 $pdf->AddPage();
