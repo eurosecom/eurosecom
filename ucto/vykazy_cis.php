@@ -66,6 +66,12 @@ $uctsys="pos_muj2014";
 $gener=0;
 $minul=1;
 }
+if( $drupoh == 95 )
+{
+$uctsys="uctsyngensuv_muj2014";
+$gener=1;
+$minul=0;
+}
 if( $drupoh == 92 )
 {
 $uctsys="crv_muj2014";
@@ -91,6 +97,20 @@ $sqlt = <<<uctmzd
    PRIMARY KEY(cpl)
 );
 uctmzd;
+
+if( $drupoh == 95 )
+     {
+$sqlt = <<<uctmzd
+(
+   cpl         int not null auto_increment,
+   dok         VARCHAR(10),
+   ucm         DECIMAL(10,0),
+   ucd         DECIMAL(10,0),
+   PRIMARY KEY(cpl)
+);
+uctmzd;
+     }
+
 
 $sql = 'CREATE TABLE F'.$kli_vxcf.'_'.$uctsys.$sqlt;
 $ulozene = mysql_query("$sql");
@@ -213,9 +233,14 @@ if ( $copern == 315 AND $uprav != 1 AND $drupoh >= 91  )
     {
 $h_uce = strip_tags($_REQUEST['h_uce']);
 $h_crs = strip_tags($_REQUEST['h_crs']);
+$h_ucd = strip_tags($_REQUEST['h_ucd']);
 
 if( $gener == 1 ) {
-$ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); "; 
+$ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); ";
+if( $drupoh == 95 )
+     {
+$ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, ucm, ucd ) VALUES ( '$h_uce', '$h_crs', '$h_ucd'  ); ";
+     } 
                   }
 if( $minul == 1 ) {
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, hod ) VALUES ( '$h_uce', '$h_crs'  ); "; 
@@ -245,9 +270,14 @@ $uprav_cpl = 1*strip_tags($_REQUEST['uprav_cpl']);
 
 $h_uce = strip_tags($_REQUEST['h_uce']);
 $h_crs = strip_tags($_REQUEST['h_crs']);
+$h_ucd = strip_tags($_REQUEST['h_ucd']);
 
 if( $gener == 1 ) {
-$ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); "; 
+$ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); ";
+if( $drupoh == 95 )
+     {
+$ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, ucm, ucd ) VALUES ( '$h_uce', '$h_crs', '$h_ucd'  ); ";
+     }  
                   }
 if( $minul == 1 ) {
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, hod ) VALUES ( '$h_uce', '$h_crs'  ); "; 
@@ -283,6 +313,13 @@ $sql = mysql_query("$sqltt");
 if( $gener == 1 ) {
 $h_uce = $riadok->uce;
 $h_crs = $riadok->crs;
+$ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); ";
+if( $drupoh == 95 )
+     {
+$h_uce = $riadok->dok;
+$h_crs = $riadok->ucm;
+$h_ucd = $riadok->ucd;
+     }
                   }
 if( $minul == 1 ) {
 $h_uce = $riadok->dok;
@@ -350,7 +387,9 @@ var vyskawin = screen.height-175;
     <?php if( $copern == 308 AND $uprav >= 0 AND $drupoh >= 91  ) { ?>
     document.formv1.h_uce.value = '<?php echo "$h_uce";?>';
     document.formv1.h_crs.value = '<?php echo "$h_crs";?>';
-
+    <?php if( $drupoh == 95  ) { ?>
+    document.formv1.h_ucd.value = '<?php echo "$h_ucd";?>';
+    <?php                      } ?>
     <?php                                                         } ?>
     }
 
@@ -388,6 +427,7 @@ window.open('../ucto/vykazy_cis.php?copern=308&page=1&sysx=UCT&uprav_cpl=' + cis
 <?php if( $drupoh == 93 ) { echo " Bezprostredne predchádzajúce úètovné obdobie výkazu SUV MUJ 1-01 v.2014"; } ?>
 <?php if( $drupoh == 92 ) { echo " Generovanie výkazu VZaS MUJ 2-01 v.2014"; } ?>
 <?php if( $drupoh == 94 ) { echo " Bezprostredne predchádzajúce úètovné obdobie výkazu VZaS MUJ 2-01 v.2014"; } ?>
+<?php if( $drupoh == 95 ) { echo " Generovanie výkazu SUV MUJ 1-01 v.2014 Aktíva / Pasíva"; } ?>
 </td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
@@ -408,6 +448,9 @@ $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl";
 if( $minul == 1 ) { 
 $sqltt = "SELECT cpl, dok AS uce, hod AS crs FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl";
                   }
+if( $drupoh == 95 ) { 
+$sqltt = "SELECT cpl, dok AS uce, ucm AS crs, ucd FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl";
+                    }
 $sql = mysql_query("$sqltt");
 //echo $sqltt;
 
@@ -419,14 +462,22 @@ $i = 0;
 <table class="vstup" width="100%" >
 <tr>
 <?php if( $gener == 1 ) { ?>
+<?php if( $drupoh != 95 ) { ?>
 <td class="hmenu" width="10%" >Úèet</td>
 <td class="hmenu" width="10%" >Riadok</td>
+<td class="hmenu" width="10%" > </td>
+<?php                     } ?>
+<?php if( $drupoh == 95 ) { ?>
+<td class="hmenu" width="10%" >Úèet</td>
+<td class="hmenu" width="10%" >Aktíva</td>
+<td class="hmenu" width="10%" >Pasíva</td>
+<?php                     } ?>
 <?php                   } ?>
 <?php if( $minul == 1 ) { ?>
 <td class="hmenu" width="10%" >Riadok</td>
 <td class="hmenu" width="10%" >Hodnota</td>
-<?php                   } ?>
 <td class="hmenu" width="10%" > </td>
+<?php                   } ?>
 <td class="hmenu" width="10%" > </td>
 <td class="hmenu" width="10%" >
 <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'>
@@ -455,7 +506,9 @@ $riadok=mysql_fetch_object($sql);
 
 <td class="fmenu" ><?php echo $riadok->uce;?></td>
 <td class="fmenu" align="right" ><?php echo $riadok->crs;?></td>
-
+<?php if( $drupoh == 95 ) { ?>
+<td class="fmenu" align="right" ><?php echo $riadok->ucd;?></td>
+<?php                     } ?>
 <td class="fmenu" >
 <a href="#" onClick="UpravPolozku(<?php echo $riadok->cpl;?>);">
 <img src='../obr/uprav.png' width=15 height=10 border=0 title='Upravi riadok' ></a>
@@ -481,6 +534,10 @@ $i = $i + 1;
 <td class="hmenu"><input type="text" name="h_crs" id="h_crs" size="7" onclick=" "
  onKeyDown=" "  onkeyup=" "/>
 
+<?php if( $drupoh == 95 ) { ?>
+<td class="hmenu"><input type="text" name="h_ucd" id="h_ucd" size="7" onclick=" "
+ onKeyDown=" "  onkeyup=" "/>
+<?php                     } ?>
 </tr>
 
 <tr>

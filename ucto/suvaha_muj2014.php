@@ -790,6 +790,110 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid,F$kli_vxcf"."_crs_muj2014".
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
+//Tabulka uctsyngensuv_muj2014
+$sql = "SELECT * FROM F$kli_vxcf"."_uctsyngensuv_muj2014";
+$vysledok = mysql_query("$sql");
+if ($vysledok)
+          {
+$polx = mysql_num_rows($vysledok);
+$sql = "DROP TABLE F$kli_vxcf"."_uctsyngensuv_muj2014";
+if( $polx < 1 ) { $vysledok = mysql_query("$sql"); }
+          }
+
+$sql = "DROP TABLE F$kli_vxcf"."_uctsyngensuv_muj2014";
+//$vysledok = mysql_query("$sql");
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctsyngensuv_muj2014";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+          {
+echo "Vytvorit tabulku F$kli_vxcf"."_uctsyngensuv_muj2014!"."<br />";
+
+$sqlt = <<<uctsyngensuv_muj2014
+(
+   cpl         int not null auto_increment,
+   dok         VARCHAR(10),
+   ucm         DECIMAL(10,0),
+   ucd         DECIMAL(10,0),
+   PRIMARY KEY(cpl)
+);
+uctsyngensuv_muj2014;
+
+$sql = 'CREATE TABLE F'.$kli_vxcf.'_uctsyngensuv_muj2014'.$sqlt;
+$vysledek = mysql_query("$sql");
+
+$subor = fopen("../import/uctsyngensuv_muj$kli_vrok.csv", "r");
+while (! feof($subor))
+     {
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+
+  $x_dok = $pole[0];
+  $x_ucm = $pole[1];
+  $x_ucd = $pole[2];
+  $x_kon = $pole[3];
+ 
+$c_dok=1*$x_dok;
+
+if( $c_dok > 0 )
+{
+$sqult = "INSERT INTO F$kli_vxcf"."_uctsyngensuv_muj2014 ( dok,ucm,ucd )".
+" VALUES ( '$x_dok', '$x_ucm', '$x_ucd' ); "; 
+
+$ulozene = mysql_query("$sqult"); 
+}
+     }
+          }
+//koniec tabulky uctsyngensuv_muj2014
+
+
+//pozri co mame synteticky(zmen cislo riadku) a podla zostatku ( zmen cislo riadku )
+$sqltt = "SELECT * FROM F".$kli_vxcf."_uctsyngensuv_muj2014 WHERE dok != '' ";
+$jesynt=0;
+$pol=0;
+$sql = mysql_query("$sqltt");
+if( $sql ) { $pol = mysql_num_rows($sql); }
+if( $pol > 0 ) {
+//echo "mame synteticke";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid,F$kli_vxcf"."_uctsyngensuv_muj2014".
+" SET rdk=F$kli_vxcf"."_uctsyngensuv_muj2014.ucm, uce=F$kli_vxcf"."_uctsyngensuv_muj2014.dok ".
+" WHERE LEFT(F$kli_vxcf"."_prcsuvahas$kli_uzid.uce,3) = F$kli_vxcf"."_uctsyngensuv_muj2014.dok ";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+//ak aktiva je minus 
+
+//suma za ucet znovu po upravach syntetiky
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuvahas$kli_uzid"." SELECT".
+" 0,9,uce,0,0,rdk,0,0,SUM(mdt),SUM(dal),".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+" $fir_fico FROM F$kli_vxcf"."_prcsuvahas$kli_uzid".
+" WHERE prx = 0 GROUP BY uce";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prcsuvahas$kli_uzid WHERE prx != 9 ";
+$dsql = mysql_query("$dsqlt");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET prx=0, hod=mdt-dal";
+$oznac = mysql_query("$sqtoz"); 
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid,F$kli_vxcf"."_uctsyngensuv_muj2014".
+" SET rdk=F$kli_vxcf"."_uctsyngensuv_muj2014.ucd, F$kli_vxcf"."_prcsuvahas$kli_uzid.hod=-1*F$kli_vxcf"."_prcsuvahas$kli_uzid.hod  ".
+" WHERE LEFT(F$kli_vxcf"."_prcsuvahas$kli_uzid.uce,3) = F$kli_vxcf"."_uctsyngensuv_muj2014.dok ".
+" AND F$kli_vxcf"."_prcsuvahas$kli_uzid.hod < 0  AND F$kli_vxcf"."_uctsyngensuv_muj2014.ucd > 0 ";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+//exit;
+               }
+//koniec uprav pre synteticke generovanie
+
 
 //korekcia
 $ajkorekcia=0;

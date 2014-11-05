@@ -722,7 +722,7 @@ if( $copern == 10 )
 {
 //nastav crs podla uce ale nie z uctosnova ako pri podnikatelskych ale z crv_muj2014.csv v adresary /import
 $sql = "DROP TABLE F$kli_vxcf"."_crv_muj2014";
-$vysledok = mysql_query("$sql");
+//$vysledok = mysql_query("$sql");
 
 //Tabulka crv_muj2014
 $sql = "SELECT * FROM F$kli_vxcf"."_crv_muj2014";
