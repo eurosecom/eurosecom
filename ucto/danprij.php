@@ -786,6 +786,11 @@ window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=95', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
+  function ZaokMuj()
+  { 
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=96', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  }
+
 </script>
 
 <table class="vstup" width="100%" >
@@ -802,6 +807,9 @@ window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 <td class="bmenu" width="64%">Súvaha Úè MUJ 1-01 
 <a href="#" onClick="GesSuvMuj();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie výkazu Aktíva / Pasíva' ></a>
+
+<a href="#" onClick="ZaokMuj();">
+<img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
 </td>
 <td class="bmenu" width="28%"></td>
 <td class="bmenu" width="2%">

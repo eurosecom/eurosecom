@@ -60,9 +60,9 @@ $vysledok = mysql_query("$sqlt");
 $sqlt = <<<prcvykziss
 (
    prx          INT,
-   uce          INT,
-   ucm          INT,
-   ucd          INT,
+   uce          VARCHAR(11),
+   ucm          VARCHAR(11),
+   ucd          VARCHAR(11),
    rdk          INT,
    prv          INT,
    hod          DECIMAL(10,2),
@@ -326,9 +326,9 @@ $vysledok = mysql_query("$sqlt");
 $sqlt = <<<prcvykziss
 (
    prx          INT,
-   uce          INT,
-   ucm          INT,
-   ucd          INT,
+   uce          VARCHAR(11),
+   ucm          VARCHAR(11),
+   ucd          VARCHAR(11),
    rdk          INT,
    prv          INT,
    hod          DECIMAL(10,0),
@@ -786,7 +786,11 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid,F$kli_vxcf"."_crv_muj2014".
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
+$sqtoz = "DROP TABLE F$kli_vxcf"."_prcvykzisneg$kli_uzid ";
+$oznac = mysql_query("$sqtoz");
 
+$sqtoz = "CREATE TABLE F$kli_vxcf"."_prcvykzisneg".$kli_uzid." SELECT * FROM F".$kli_vxcf."_prcvykziss".$kli_uzid." WHERE rdk = 0 ";
+$oznac = mysql_query("$sqtoz");
 
 //rozdel do riadkov
 $sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid SET r01=dal-mdt WHERE rdk = 1 ";
@@ -1056,25 +1060,37 @@ $zisk_vzisk=0;
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_prcsuv1000ahas".$kli_uzid."");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
+  //echo "idem";
   $riaddok=mysql_fetch_object($sqldok);
-  $zisk_suvaha=$riaddok->r73;
+  $zisk_suvaha=$riaddok->rn33;
   }
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_prcvyk1000ziss".$kli_uzid."");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
+  //echo "idem";
   $riaddok=mysql_fetch_object($sqldok);
-  $zisk_vzisk=$riaddok->rsp78;
+  $zisk_vzisk=$riaddok->rsp38;
   }
 $zisk_rozd=$zisk_vzisk-$zisk_suvaha;
+//echo $zisk_rozd."=".$zisk_vzisk."-".$zisk_suvaha;
 
-$cislo_rdk=1*$fir_uctx06;
+$cislo_rdk=0;
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_uctparzaok_muj2014 ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $cislo_rdk=1*$riaddok->crs;
+  }
 if( $cislo_rdk < 10 ) $cislo_rdk="0".$cislo_rdk;
+//echo $cislo_rdk;
+//exit;
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcvyk1000ziss$kli_uzid SET ".
 "r".$cislo_rdk."=r".$cislo_rdk."+".$zisk_rozd."  ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
-if( $fir_uctx06 > 0 ) { $oznac = mysql_query("$sqtoz"); }
+if( $cislo_rdk > 0 ) { $oznac = mysql_query("$sqtoz"); }
+//exit;
 
 //vypocitaj znovu riadky
 $vsldat="prcvykziss";
@@ -1127,136 +1143,40 @@ $oznac = mysql_query("$sqtoz");
 
 
 
-//poc.stav subory
-$sqlt = <<<prcpred
-(
-   dok          INT,
-   hod          DECIMAL(10,2),
-   rm01         DECIMAL(10,2),
-   fic          INT
-);
-prcpred;
+//vypis negenerovane pohyby
+$sqtoz = "DELETE FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid WHERE LEFT(uce,1) != 5 AND LEFT(uce,1) != 6 AND LEFT(uce,1) != 8 AND LEFT(uce,1) != 9 ";
+$oznac = mysql_query("$sqtoz");
 
-$sql = 'CREATE TABLE F'.$kli_vxcf.'_uctpocvziskovno_stl'.$sqlt;
-$ulozene = mysql_query("$sql");
 
-$sql = 'DROP TABLE F'.$kli_vxcf.'_uctpocvziskovno_stl1000';
-$ulozene = mysql_query("$sql");
-$sql = 'DROP TABLE F'.$kli_vxcf.'_uctpocvziskovno_stt';
-$ulozene = mysql_query("$sql");
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid WHERE rdk = 0 GROUP BY uce ";
 
-$sqlt = <<<prcpred
-(
-   dok          INT,
-   hod          DECIMAL(10,0),
-   rm01         DECIMAL(10,0),
-   rm02         DECIMAL(10,0),
-   rm03         DECIMAL(10,0),
-   rm04         DECIMAL(10,0),
-   rm05         DECIMAL(10,0),
-   rm06         DECIMAL(10,0),
-   rm07         DECIMAL(10,0),
-   rm08         DECIMAL(10,0),
-   rm09         DECIMAL(10,0),
-   rm10         DECIMAL(10,0),
-   rm11         DECIMAL(10,0),
-   rm12         DECIMAL(10,0),
-   rm13         DECIMAL(10,0),
-   rm14         DECIMAL(10,0),
-   rm15         DECIMAL(10,0),
-   rm16         DECIMAL(10,0),
-   rm17         DECIMAL(10,0),
-   rm18         DECIMAL(10,0),
-   rm19         DECIMAL(10,0),
-   rm20         DECIMAL(10,0),
-   rm21         DECIMAL(10,0),
-   rm22         DECIMAL(10,0),
-   rm23         DECIMAL(10,0),
-   rm24         DECIMAL(10,0),
-   rm25         DECIMAL(10,0),
-   rm26         DECIMAL(10,0),
-   rm27         DECIMAL(10,0),
-   rm28         DECIMAL(10,0),
-   rm29         DECIMAL(10,0),
-   rm30         DECIMAL(10,0),
-   rm31         DECIMAL(10,0),
-   rm32         DECIMAL(10,0),
-   rm33         DECIMAL(10,0),
-   rm34         DECIMAL(10,0),
-   rm35         DECIMAL(10,0),
-   rm36         DECIMAL(10,0),
-   rm37         DECIMAL(10,0),
-   rm38         DECIMAL(10,0),
-   rm39         DECIMAL(10,0),
-   rm40         DECIMAL(10,0),
-   rm41         DECIMAL(10,0),
-   rm42         DECIMAL(10,0),
-   rm43         DECIMAL(10,0),
-   rm44         DECIMAL(10,0),
-   rm45         DECIMAL(10,0),
-   rm46         DECIMAL(10,0),
-   rm47         DECIMAL(10,0),
-   rm48         DECIMAL(10,0),
-   rm49         DECIMAL(10,0),
-   rm50         DECIMAL(10,0),
-   rm51         DECIMAL(10,0),
-   rm52         DECIMAL(10,0),
-   rm53         DECIMAL(10,0),
-   rm54         DECIMAL(10,0),
-   rm55         DECIMAL(10,0),
-   rm56         DECIMAL(10,0),
-   rm57         DECIMAL(10,0),
-   rm58         DECIMAL(10,0),
-   rm59         DECIMAL(10,0),
-   rm60         DECIMAL(10,0),
-   rm61         DECIMAL(10,0),
-   rm62         DECIMAL(10,0),
-   rm63         DECIMAL(10,0),
-   rm64         DECIMAL(10,0),
-   rm65         DECIMAL(10,0),
-   rm66         DECIMAL(10,0),
-   rm67         DECIMAL(10,0),
-   rm68         DECIMAL(10,0),
-   rm69         DECIMAL(10,0),
-   rm70         DECIMAL(10,0),
-   rm71         DECIMAL(10,0),
-   rm72         DECIMAL(10,0),
-   rm73         DECIMAL(10,0),
-   rm74         DECIMAL(10,0),
-   rm75         DECIMAL(10,0),
-   rm76         DECIMAL(10,0),
-   rm77         DECIMAL(10,0),
-   rm78         DECIMAL(10,0),
-   rm104         DECIMAL(10,0),
-   rm105         DECIMAL(10,0),
-   fic          INT
-);
-prcpred;
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
 
-$sql = 'CREATE TABLE F'.$kli_vxcf.'_uctpocvziskovno_stt'.$sqlt;
-$ulozene = mysql_query("$sql");
+if( $pol > 0 )
+          {
 
-//koniec poc.stav
+$i=0;
+  while ($i <= $pol )
+  {
 
-if( $tis > 0 ) { 
 
-$dsqlt = "INSERT INTO F$kli_vxcf"."_uctpocvziskovno_stt SELECT ".
-"dok,hod,".
-"rm01,rm02,rm03,rm04,rm05,rm06,rm07,rm08,rm09,rm10,".
-"rm11,rm12,rm13,rm14,rm15,rm16,rm17,rm18,rm19,rm20,".
-"rm21,rm22,rm23,rm24,rm25,rm26,rm27,rm28,rm29,rm30,".
-"rm31,rm32,rm33,rm34,rm35,rm36,rm37,rm38,rm39,rm40,".
-"rm41,rm42,rm43,rm44,rm45,rm46,rm47,rm48,rm49,rm50,".
-"rm51,rm52,rm53,rm54,rm55,rm56,rm57,rm58,rm59,rm60,".
-"rm61,rm62,rm63,rm64,rm65,rm66,rm67,rm68,rm69,rm70,".
-"rm71,rm72,rm73,rm74,rm75,rm76,rm77,rm78,rm104,rm105,".
-"fic".
-" FROM F$kli_vxcf"."_uctpocvziskovno_stl".
-"";
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
 
-$dsql = mysql_query("$dsqlt");
+echo "Negenerovaný úèet ".$hlavicka->uce." / èíslo riadku ".$hlavicka->rdk."<br />";
 
 }
+$i = $i + 1;
+
+  }
+
+$sqtoz = "DROP TABLE F$kli_vxcf"."_prcvykzisneg$kli_uzid ";
+$oznac = mysql_query("$sqtoz");
+exit;
+          }
+//koniec vypis negenerovane pohyby
 
 
 //uzavierka MUJ 2014

@@ -84,6 +84,12 @@ $uctsys="pov_muj2014";
 $gener=0;
 $minul=1;
 }
+if( $drupoh == 96 )
+{
+$uctsys="uctparzaok_muj2014";
+$gener=1;
+$minul=0;
+}
 
 
 if( $gener == 1 )
@@ -428,6 +434,7 @@ window.open('../ucto/vykazy_cis.php?copern=308&page=1&sysx=UCT&uprav_cpl=' + cis
 <?php if( $drupoh == 92 ) { echo " Generovanie výkazu VZaS MUJ 2-01 v.2014"; } ?>
 <?php if( $drupoh == 94 ) { echo " Bezprostredne predchádzajúce úètovné obdobie výkazu VZaS MUJ 2-01 v.2014"; } ?>
 <?php if( $drupoh == 95 ) { echo " Generovanie výkazu SUV MUJ 1-01 v.2014 Aktíva / Pasíva"; } ?>
+<?php if( $drupoh == 96 ) { echo " Nastavenie zaokrúhlenia výkazu SUV MUJ 1-01 a VZaS MUJ 2-01 v.2014"; } ?>
 </td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
@@ -460,9 +467,10 @@ $i = 0;
 
 ?>
 <table class="vstup" width="100%" >
+<FORM name="formv1" class="obyc" method="post" action="vykazy_cis.php?copern=315&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>" >
 <tr>
 <?php if( $gener == 1 ) { ?>
-<?php if( $drupoh != 95 ) { ?>
+<?php if( $drupoh != 95 AND $drupoh != 96 ) { ?>
 <td class="hmenu" width="10%" >Úèet</td>
 <td class="hmenu" width="10%" >Riadok</td>
 <td class="hmenu" width="10%" > </td>
@@ -471,6 +479,15 @@ $i = 0;
 <td class="hmenu" width="10%" >Úèet</td>
 <td class="hmenu" width="10%" >Aktíva</td>
 <td class="hmenu" width="10%" >Pasíva</td>
+<?php                     } ?>
+<?php if( $drupoh == 96 ) { ?>
+<td class="hmenu" width="10%" >èrSUV
+ <img src='../obr/info.png' width=12 height=12 border=0 title="Èíslo riadku aktív v Súvahe kam má program zúètova rozdiel HV po zaokrúhlení Súvahy, napr. è. 15">
+</td>
+<td class="hmenu" width="10%" >èrVZS
+ <img src='../obr/info.png' width=12 height=12 border=0 title="Èíslo nákladového riadku vo Výkaze ziskov kam má program zúètova rozdiel HV po zaokrúhlení Súvahy a VZaS, napr. è. 17">
+</td>
+<td class="hmenu" width="10%" > </td>
 <?php                     } ?>
 <?php                   } ?>
 <?php if( $minul == 1 ) { ?>
@@ -525,7 +542,7 @@ $i = $i + 1;
    }
 ?>
 
-<FORM name="formv1" class="obyc" method="post" action="vykazy_cis.php?copern=315&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>" >
+
 <tr>
 
 <td class="hmenu"><input type="text" name="h_uce" id="h_uce" size="7" onclick=" "

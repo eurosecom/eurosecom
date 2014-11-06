@@ -922,7 +922,7 @@ $crdk=$rdk;
 if( $rdk < 10 ) $crdk="0".$rdk;
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET r$crdk=mdt-dal WHERE rdk = $rdk AND kor = 0 ";
-if( $rdk >= 24 ) { $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET rn$crdk=dal-mdt WHERE rdk = $rdk "; }
+if( $rdk >= 24 ) { $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET r$crdk=dal-mdt WHERE rdk = $rdk "; }
 $oznac = mysql_query("$sqtoz");
 
 if( $rdk < 24 ) { 
@@ -979,35 +979,20 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuvahas$kli_uzid "." SELECT".
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
-//exit;
+$sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET ".
+"rn01=r01-rk01, rn02=r02-rk02, rn03=r03-rk03, rn04=r04-rk04, rn05=r05-rk05, rn06=r06-rk06, rn07=r07-rk07, rn08=r08-rk08, rn09=r09-rk09, rn10=r10-rk10,".
+"rn11=r11-rk11, rn12=r12-rk12, rn13=r13-rk13, rn14=r14-rk14, rn15=r15-rk15, rn16=r16-rk16, rn17=r17-rk17, rn18=r18-rk18, rn19=r19-rk19, rn20=r20-rk20,".
+"rn21=r21-rk21, rn22=r22-rk22, rn23=r23-rk23, rn24=r24-rk24, rn25=r25-rk25, rn26=r26-rk26, rn27=r27-rk27, rn28=r28-rk28, rn29=r29-rk29, rn30=r30-rk30,".
+"rn31=r31-rk31, rn32=r32-rk32, rn33=r33-rk33, rn34=r34-rk34, rn35=r35-rk35, rn36=r36-rk36, rn37=r37-rk37, rn38=r38-rk38, rn39=r39-rk39, rn40=r40-rk40,".
+"rn41=r41-rk41, rn42=r42-rk42, rn43=r43-rk43, rn44=r44-rk44, rn45=r45-rk45, rn46=r46-rk46, rn47=r47-rk47, rn48=r48-rk48, rn49=r49-rk49, rn50=r50-rk50,".
+"rn51=r51-rk51, rn52=r52-rk52, rn53=r53-rk53, rn54=r54-rk54, rn55=r55-rk55, rn56=r56-rk56, rn57=r57-rk57, rn58=r58-rk58, rn59=r59-rk59, rn60=r60-rk60,".
+"rn61=r61-rk61, rn62=r62-rk62, rn63=r63-rk63, rn64=r64-rk64 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
 
 //ak na tisic
 if( $tis > 0 )
 {
-$sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET ".
-"r01=r01/1, r02=r02/1, r03=r03/1, r04=r04/1, r05=r05/1, r06=r06/1, r07=r07/1, r08=r08/1, r09=r09/1, r10=r10/1,".
-"r11=r11/1, r12=r12/1, r13=r13/1, r14=r14/1, r15=r15/1, r16=r16/1, r17=r17/1, r18=r18/1, r19=r19/1, r20=r20/1,".
-"r21=r21/1, r22=r22/1, r23=r23/1, r24=r24/1, r25=r25/1, r26=r26/1, r27=r27/1, r28=r28/1, r29=r29/1, r30=r30/1,".
-"r31=r31/1, r32=r32/1, r33=r33/1, r34=r34/1, r35=r35/1, r36=r36/1, r37=r37/1, r38=r38/1, r39=r39/1, r40=r40/1,".
-"r41=r41/1, r42=r42/1, r43=r43/1, r44=r44/1, r45=r45/1, r46=r46/1, r47=r47/1, r48=r48/1, r49=r49/1,".
-"r50=r50/1, r51=r51/1, r52=r52/1, r53=r53/1, r54=r54/1, r55=r55/1, r56=r56/1, r57=r57/1, r58=r58/1 , r59=r59/1,".
-"r60=r60/1, r61=r61/1, r62=r62/1, r63=r63/1, r64=r64/1, r65=r65/1, r66=r66/1, r67=r67/1, r68=r68/1 , r69=r69/1,".
-"r70=r70/1, r71=r71/1, r72=r72/1, r73=r73/1, r74=r74/1, r75=r75/1, r76=r76/1, r77=r77/1, r78=r78/1 , r79=r79/1,".
-"r80=r80/1, r81=r81/1, r82=r82/1, r83=r83/1, r84=r84/1, r85=r85/1, r86=r86/1, r87=r87/1, r88=r88/1 , r89=r89/1,".
-"r90=r90/1, r91=r91/1, r92=r92/1, r93=r93/1, r94=r94/1, r95=r95/1, r96=r96/1, r97=r97/1, r98=r98/1 , r99=r99/1,".
-"r100=r100/1, r101=r101/1, r102=r102/1, r103=r103/1, r104=r104/1, r105=r105/1,".
-"r106=r106/1, r107=r107/1, r108=r108/1 , r109=r109/1,".
-"r110=r110/1, r111=r111/1, r112=r112/1, r113=r113/1, r114=r114/1, r115=r115/1,".
-"r116=r116/1, r117=r117/1, r118=r118/1, ".
-"rk01=rk01/1, rk02=rk02/1, rk03=rk03/1, rk04=rk04/1, rk05=rk05/1, rk06=rk06/1, rk07=rk07/1, rk08=rk08/1, rk09=rk09/1, rk10=rk10/1,".
-"rk11=rk11/1, rk12=rk12/1, rk13=rk13/1, rk14=rk14/1, rk15=rk15/1, rk16=rk16/1, rk17=rk17/1, rk18=rk18/1, rk19=rk19/1, rk20=rk20/1,".
-"rk21=rk21/1, rk22=rk22/1, rk23=rk23/1, rk24=rk24/1, rk25=rk25/1, rk26=rk26/1, rk27=rk27/1, rk28=rk28/1, rk29=rk29/1, rk30=rk30/1,".
-"rk31=rk31/1, rk32=rk32/1, rk33=rk33/1, rk34=rk34/1, rk35=rk35/1, rk36=rk36/1, rk37=rk37/1, rk38=rk38/1, rk39=rk39/1, rk40=rk40/1,".
-"rk41=rk41/1, rk42=rk42/1, rk43=rk43/1, rk44=rk44/1, rk45=rk45/1, rk46=rk46/1, rk47=rk47/1, rk48=rk48/1, rk49=rk49/1,".
-"rk50=rk50/1, rk51=rk51/1, rk52=rk52/1, rk53=rk53/1, rk54=rk54/1, rk55=rk55/1, rk56=rk56/1, rk57=rk57/1, rk58=rk58/1 , rk59=rk59/1,".
-"rk60=rk60/1, rk61=rk61/1, rk62=rk62/1, rk63=rk63/1, rk64=rk64/1, ".
-" WHERE prx = 1 ";
-$oznac = mysql_query("$sqtoz");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuv1000ahas$kli_uzid "." SELECT".
 " 0,1,uce,ucm,ucd,rdk,prv,hod,mdt,dal,r01,r02,r03,r04,r05,".
@@ -1097,176 +1082,6 @@ $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
  
-//poc.stav subory
-$sqlt = <<<prcpred
-(
-   dok          INT,
-   hod          DECIMAL(10,2),
-   rm01         DECIMAL(10,2),
-   fic          INT
-);
-prcpred;
-
-$sql = 'CREATE TABLE F'.$kli_vxcf.'_uctpocsuvahano_stl'.$sqlt;
-$ulozene = mysql_query("$sql");
-
-$sql = 'DROP TABLE F'.$kli_vxcf.'_uctpocsuvahano_stl1000';
-$ulozene = mysql_query("$sql");
-$sql = 'DROP TABLE F'.$kli_vxcf.'_uctpocsuvahano_stt';
-$ulozene = mysql_query("$sql");
-
-$sqlt = <<<prcpred
-(
-   dok          INT,
-   hod          DECIMAL(10,0),
-   rm01         DECIMAL(10,0),
-   rm02         DECIMAL(10,0),
-   rm03         DECIMAL(10,0),
-   rm04         DECIMAL(10,0),
-   rm05         DECIMAL(10,0),
-   rm06         DECIMAL(10,0),
-   rm07         DECIMAL(10,0),
-   rm08         DECIMAL(10,0),
-   rm09         DECIMAL(10,0),
-   rm10         DECIMAL(10,0),
-   rm11         DECIMAL(10,0),
-   rm12         DECIMAL(10,0),
-   rm13         DECIMAL(10,0),
-   rm14         DECIMAL(10,0),
-   rm15         DECIMAL(10,0),
-   rm16         DECIMAL(10,0),
-   rm17         DECIMAL(10,0),
-   rm18         DECIMAL(10,0),
-   rm19         DECIMAL(10,0),
-   rm20         DECIMAL(10,0),
-   rm21         DECIMAL(10,0),
-   rm22         DECIMAL(10,0),
-   rm23         DECIMAL(10,0),
-   rm24         DECIMAL(10,0),
-   rm25         DECIMAL(10,0),
-   rm26         DECIMAL(10,0),
-   rm27         DECIMAL(10,0),
-   rm28         DECIMAL(10,0),
-   rm29         DECIMAL(10,0),
-   rm30         DECIMAL(10,0),
-   rm31         DECIMAL(10,0),
-   rm32         DECIMAL(10,0),
-   rm33         DECIMAL(10,0),
-   rm34         DECIMAL(10,0),
-   rm35         DECIMAL(10,0),
-   rm36         DECIMAL(10,0),
-   rm37         DECIMAL(10,0),
-   rm38         DECIMAL(10,0),
-   rm39         DECIMAL(10,0),
-   rm40         DECIMAL(10,0),
-   rm41         DECIMAL(10,0),
-   rm42         DECIMAL(10,0),
-   rm43         DECIMAL(10,0),
-   rm44         DECIMAL(10,0),
-   rm45         DECIMAL(10,0),
-   rm46         DECIMAL(10,0),
-   rm47         DECIMAL(10,0),
-   rm48         DECIMAL(10,0),
-   rm49         DECIMAL(10,0),
-   rm50         DECIMAL(10,0),
-   rm51         DECIMAL(10,0),
-   rm52         DECIMAL(10,0),
-   rm53         DECIMAL(10,0),
-   rm54         DECIMAL(10,0),
-   rm55         DECIMAL(10,0),
-   rm56         DECIMAL(10,0),
-   rm57         DECIMAL(10,0),
-   rm58         DECIMAL(10,0),
-   rm59         DECIMAL(10,0),
-   rm60         DECIMAL(10,0),
-   rm61         DECIMAL(10,0),
-   rm62         DECIMAL(10,0),
-   rm63         DECIMAL(10,0),
-   rm64         DECIMAL(10,0),
-   rm65         DECIMAL(10,0),
-   rm66         DECIMAL(10,0),
-   rm67         DECIMAL(10,0),
-   rm68         DECIMAL(10,0),
-   rm69         DECIMAL(10,0),
-   rm70         DECIMAL(10,0),
-   rm71         DECIMAL(10,0),
-   rm72         DECIMAL(10,0),
-   rm73         DECIMAL(10,0),
-   rm74         DECIMAL(10,0),
-   rm75         DECIMAL(10,0),
-   rm76         DECIMAL(10,0),
-   rm77         DECIMAL(10,0),
-   rm78         DECIMAL(10,0),
-   rm79         DECIMAL(10,0),
-   rm80         DECIMAL(10,0),
-   rm81         DECIMAL(10,0),
-   rm82         DECIMAL(10,0),
-   rm83         DECIMAL(10,0),
-   rm84         DECIMAL(10,0),
-   rm85         DECIMAL(10,0),
-   rm86         DECIMAL(10,0),
-   rm87         DECIMAL(10,0),
-   rm88         DECIMAL(10,0),
-   rm89         DECIMAL(10,0),
-   rm90         DECIMAL(10,0),
-   rm91         DECIMAL(10,0),
-   rm92         DECIMAL(10,0),
-   rm93         DECIMAL(10,0),
-   rm94         DECIMAL(10,0),
-   rm95         DECIMAL(10,0),
-   rm96         DECIMAL(10,0),
-   rm97         DECIMAL(10,0),
-   rm98         DECIMAL(10,0),
-   rm99         DECIMAL(10,0),
-   rm100         DECIMAL(10,0),
-   rm101         DECIMAL(10,0),
-   rm102         DECIMAL(10,0),
-   rm103         DECIMAL(10,0),
-   rm104         DECIMAL(10,0),
-   rm105         DECIMAL(10,0),
-   rm106         DECIMAL(10,0),
-   rm107         DECIMAL(10,0),
-   rm108         DECIMAL(10,0),
-   rm109         DECIMAL(10,0),
-   rm110         DECIMAL(10,0),
-   rm111         DECIMAL(10,0),
-   rm112         DECIMAL(10,0),
-   rm113         DECIMAL(10,0),
-   fic          INT
-);
-prcpred;
-
-$sql = 'CREATE TABLE F'.$kli_vxcf.'_uctpocsuvahano_stt'.$sqlt;
-$ulozene = mysql_query("$sql");
-
-//koniec poc.stav
-
-
-
-if( $tis > 0 ) { 
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_uctpocsuvahano_stt SELECT ".
-"dok,hod,".
-"rm01,rm02,rm03,rm04,rm05,rm06,rm07,rm08,rm09,rm10,".
-"rm11,rm12,rm13,rm14,rm15,rm16,rm17,rm18,rm19,rm20,".
-"rm21,rm22,rm23,rm24,rm25,rm26,rm27,rm28,rm29,rm30,".
-"rm31,rm32,rm33,rm34,rm35,rm36,rm37,rm38,rm39,rm40,".
-"rm41,rm42,rm43,rm44,rm45,rm46,rm47,rm48,rm49,rm50,".
-"rm51,rm52,rm53,rm54,rm55,rm56,rm57,rm58,rm59,rm60,".
-"rm61,rm62,rm63,rm64,rm65,rm66,rm67,rm68,rm69,rm70,".
-"rm71,rm72,rm73,rm74,rm75,rm76,rm77,rm78,rm79,rm80,".
-"rm81,rm82,rm83,rm84,rm85,rm86,rm87,rm88,rm89,rm90,".
-"rm91,rm92,rm93,rm94,rm95,rm96,rm97,rm98,rm99,rm100,".
-"rm101,rm102,rm103,rm104,rm105,rm106,rm107,rm108,rm109,rm110,rm111,rm112,rm113,".
-"fic".
-" FROM F$kli_vxcf"."_uctpocsuvahano_stl".
-"";
-//echo $dsqlt;
-$dsql = mysql_query("$dsqlt");
-
-}
-//koniec tis > 0 
-
 
 //vypis negenerovane pohyby
 $sqtoz = "DELETE FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE LEFT(uce,1) = 5 ";
