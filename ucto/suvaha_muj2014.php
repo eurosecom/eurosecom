@@ -1081,6 +1081,157 @@ $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 "rn24=rn25+rn34  ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
+
+
+//ulozenie pre zaokruhlenie
+
+$vsql = 'DROP TABLE F'.$kli_vxcf.'_uctsuvmujzaok';
+if( $tis == 0 ) { $vytvor = mysql_query("$vsql"); }
+
+$sqlt = <<<uctcrv
+(
+   datprvy      TIMESTAMP(14),
+   hospcent     DECIMAL(10,2) DEFAULT 0,
+   datcent      TIMESTAMP(14),
+   cislcent     DECIMAL(10,0) DEFAULT 0,
+   umecent      DECIMAL(10,4) DEFAULT 0,
+   hospzaok     DECIMAL(10,2) DEFAULT 0,
+   datzaok      TIMESTAMP(14),
+   cislzaok     DECIMAL(10,0) DEFAULT 0,
+   umezaok      DECIMAL(10,4) DEFAULT 0,
+   hospeura     DECIMAL(10,0) DEFAULT 0,
+   hosprozd     DECIMAL(10,2) DEFAULT 0,
+   cislrozd     DECIMAL(10,0) DEFAULT 0,
+   umerozd      DECIMAL(10,4) DEFAULT 0,
+   cxx          INT DEFAULT 0
+);
+uctcrv;
+
+$vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctsuvmujzaok'.$sqlt;
+$vytvor = mysql_query("$vsql");
+
+if( $tis == 0 ) { 
+
+$hospodarsky=0;
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuvahas".$kli_uzid." WHERE prx = 1 "; 
+$sqldok = mysql_query("$sqltt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $hospodarsky=$riaddok->rn33;
+  } 
+
+$ttvv = "INSERT INTO F$kli_vxcf"."_uctsuvmujzaok ( hospcent, datcent, umecent ) VALUES ( '$hospodarsky', now(), '$kli_vume' )";
+$ttqq = mysql_query("$ttvv");
+$sqltt = "UPDATE F$kli_vxcf"."_uctsuvmujzaok SET cislcent=UNIX_TIMESTAMP(datcent) ";
+$sql = mysql_query("$sqltt");
+                }
+
+if( $tis > 0 )  { 
+
+$hospodarskyz=0;
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuv1000ahas".$kli_uzid." WHERE prx = 1 "; 
+$sqldok = mysql_query("$sqltt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $hospodarskyz=$riaddok->rn33;
+  }
+
+$sqltt = "UPDATE F$kli_vxcf"."_uctsuvmujzaok SET hospzaok='$hospodarskyz', datzaok=now(), umezaok='$kli_vume' ";
+$sql = mysql_query("$sqltt");
+$sqltt = "UPDATE F$kli_vxcf"."_uctsuvmujzaok SET cislzaok=UNIX_TIMESTAMP(datzaok), hospeura=hospcent ";
+$sql = mysql_query("$sqltt");
+
+$sqltt = "UPDATE F$kli_vxcf"."_uctsuvmujzaok SET hosprozd=hospzaok-hospeura, cislrozd=cislzaok-cislcent, umerozd=umezaok-umecent, cxx=cxx+1 ";
+$sql = mysql_query("$sqltt");
+                }
+
+//koniec ulozenie pre zaokruhlenie
+
+$cislo_rdk=0;
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_uctparzaok_muj2014 ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $cislo_rdk=1*$riaddok->uce;
+  }
+
+//tuto blok na zaokruhlenie zaokruhlenej suvahy na suvahu v centoch
+if( $tis > 0 AND $cislo_rdk > 0 )
+     {
+$sqtoz = "SELECT * FROM F$kli_vxcf"."_uctsuvmujzaok "; $exis = mysql_query("$sqtoz");
+if( $exis )
+{
+$hosprozd=0;
+$umerozd=1;
+$cislrozd=1000;
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctsuvmujzaok "; 
+$sqldok = mysql_query("$sqltt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $hosprozd=1*$riaddok->hosprozd;
+  $umerozd=1*$riaddok->umerozd;
+  $cislrozd=1*$riaddok->cislrozd;
+  $cxx=1*$riaddok->cxx;
+  } 
+if( $hosprozd != 0 AND $umerozd == 0 AND $cislrozd < 240 AND $cxx == 1 )
+  {
+//echo "zaokruhlujem";
+//exit;
+
+
+if( $cislo_rdk < 10 ) $cislo_rdk="0".$cislo_rdk;
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+"r".$cislo_rdk."=r".$cislo_rdk."-(".$hosprozd."), ".
+"rn".$cislo_rdk."=rn".$cislo_rdk."-(".$hosprozd.") ".
+" WHERE prx = 1 ";
+//echo $sqtoz;
+//exit;
+if( $cislo_rdk > 0 ) { $oznac = mysql_query("$sqtoz"); }
+
+//vypocitaj riadky strana 2
+$vsldat="prcsuvahas";
+if( $tis > 0 ) { $vsldat="prcsuv1000ahas"; }
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+"rn21=rn22+rn23, ".
+"rn17=rn18+rn19+rn20, ".
+"rn14=rn15+rn16+rn17+rn21, ".
+"rn09=rn10+rn11+rn12+rn13, ".
+"rn04=rn05+rn06+rn07+rn08, ".
+"rn02=rn03+rn04+rn09, ".
+"rn01=rn02+rn14 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+//vypocitaj strana 3
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+"rn38=rn39+rn40+rn41+rn42, ".
+"rn26=rn27+rn28, ".
+"rn34=rn35+rn36+rn37+rn38+rn43+rn44+rn45 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+
+//vypocitaj vysledok  
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+"rn33=rn01-rn26-rn29-rn30-rn31-rn32-rn34 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+//posledne sucty  
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+"rn25=rn26+rn29+rn30+rn31+rn32+rn33, ".
+"rn24=rn25+rn34  ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+  }
+}
+     }
+//koniec blok na zaokruhlenie zaokruhlenej suvahy na suvahu v centoch
+
  
 
 //vypis negenerovane pohyby

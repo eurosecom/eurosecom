@@ -692,7 +692,7 @@ window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=
 
 
 <?php //MUJ 2014                  ?>
-<?php if( $kli_vrok >= 2014 )   { ?>
+<?php if( $kli_vrok >= 2013 )   { ?>
 
 <script type="text/javascript">
 

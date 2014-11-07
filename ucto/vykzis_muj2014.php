@@ -1053,6 +1053,27 @@ $oznac = mysql_query("$sqtoz");
 
 
 //rozdiel po zaokruhleni
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_uctparzaok_muj2014 ");
+  if (!$sqldok)
+  {
+
+$sqlt = <<<uctmzd
+(
+   cpl         int not null auto_increment,
+   uce         VARCHAR(10),
+   crs         DECIMAL(10,0),
+   PRIMARY KEY(cpl)
+);
+uctmzd;
+
+$sql = "CREATE TABLE F".$kli_vxcf."_uctparzaok_muj2014 ".$sqlt;
+$ulozene = mysql_query("$sql");
+
+$sql = "INSERT INTO F".$kli_vxcf."_uctparzaok_muj2014 (uce, crs) VALUE ('15', '17') ";
+$ulozene = mysql_query("$sql");
+  }
+
+
 if( $tis > 0 )
 {
 $zisk_suvaha=0;
