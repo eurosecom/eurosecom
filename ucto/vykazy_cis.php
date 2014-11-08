@@ -175,11 +175,16 @@ if( $kli_vrok > 2013 )
 {
 if (File_Exists ("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; }
 }
+if( $kli_vrok > 2014 )
+{
+if (File_Exists ("../pswd/oddelena2014db2015.php")) { $databaza=$mysqldb2014."."; }
+}
 
-$dsqlt = "TRUNCATE F$kli_vxcf"."_crs_muj2014 ";
+
+$dsqlt = "TRUNCATE F$kli_vxcf"."_".$uctsys." ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "INSERT INTO F$kli_vxcf"."_crs_muj2014 SELECT * FROM ".$databaza."F$h_ycf"."_crs_muj2014 ";
+$dsqlt = "INSERT INTO F$kli_vxcf"."_".$uctsys." SELECT * FROM ".$databaza."F$h_ycf"."_".$uctsys." ";
 $dsql = mysql_query("$dsqlt");
 
 
@@ -189,24 +194,28 @@ $copern=308;
 
 
 //nacitanie standartneho generovania
-    if ( $copern == 155 AND $drupoh == 91 )
+    if ( $copern == 155 )
     {
 ?>
 <script type="text/javascript">
 if( !confirm ("Chcete naèíta štandartnı èíselník generovania ?") )
          { window.close()  }
 else
-         { location.href='vykazi_cis.php?copern=156&page=1&drupoh=<?php echo $drupoh; ?>'  }
+         { location.href='vykazy_cis.php?copern=156&page=1&drupoh=<?php echo $drupoh; ?>'  }
 </script>
 <?php
     }
 
-    if ( $copern == 156 AND $drupoh == 91 )
+    if ( $copern == 156 )
     {
 
-$sql = "DROP TABLE F$kli_vxcf"."_crs_muj2014";
+if ( $drupoh == 96 ) {
+$sql = "DELETE FROM F$kli_vxcf"."_uctparzaok_muj2014 ";
 $vysledok = mysql_query("$sql");
 
+$sql = "INSERT INTO F".$kli_vxcf."_uctparzaok_muj2014 (uce, crs) VALUE ('15', '17') ";
+$ulozene = mysql_query("$sql");
+                     }
 
 $copern=308; 
     }
