@@ -517,11 +517,7 @@ $sqlt = <<<mzdprc
 mzdprc;
 
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuv1000ahas".$kli_uzid.
-" LEFT JOIN F$kli_vxcf"."_uctpocsuvaha_stt".
-" ON F$kli_vxcf"."_prcsuv1000ahas$kli_uzid.prx=F$kli_vxcf"."_uctpocsuvaha_stt.fic".
-" WHERE prx = 1 ".""; 
-
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuv1000ahas".$kli_uzid." WHERE prx = 1 "; 
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -828,1521 +824,215 @@ $obmd1="01"; $obmm1="01"; $obmr1=$kli_mrok; $obmd2="31"; $obmm2=12; $obmr2=$kli_
   $text = "  </hlavicka>"."\r\n";   fwrite($soubor, $text);
  
   $text = "  <telo>"."\r\n";   fwrite($soubor, $text);
- 
-  $text = "  <r001>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r01;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4301\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk01;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4302\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
+
+//suvaha riadky
+
+$sqlttps = "SELECT * FROM F$kli_vxcf"."_pos_muj2014 WHERE dok > 0 ORDER BY dok "; 
+$sqlps = mysql_query("$sqlttps");
+$polps = mysql_num_rows($sqlps);
+
+$ips=0;
+  while ($ips <= $polps )
+  {
+  if (@$zaznam=mysql_data_seek($sqlps,$ips))
+{
+$hlavickps=mysql_fetch_object($sqlps);
+
+$riadok=1*$hlavickps->dok;
+
+if( $riadok ==  1 ) { $rm01=1*$hlavickps->hod; }
+if( $riadok ==  2 ) { $rm02=1*$hlavickps->hod; }
+if( $riadok ==  3 ) { $rm03=1*$hlavickps->hod; }
+if( $riadok ==  4 ) { $rm04=1*$hlavickps->hod; }
+if( $riadok ==  5 ) { $rm05=1*$hlavickps->hod; }
+if( $riadok ==  6 ) { $rm06=1*$hlavickps->hod; }
+if( $riadok ==  7 ) { $rm07=1*$hlavickps->hod; }
+if( $riadok ==  8 ) { $rm08=1*$hlavickps->hod; }
+if( $riadok ==  9 ) { $rm09=1*$hlavickps->hod; }
+if( $riadok == 10 ) { $rm10=1*$hlavickps->hod; }
+if( $riadok == 11 ) { $rm11=1*$hlavickps->hod; }
+if( $riadok == 12 ) { $rm12=1*$hlavickps->hod; }
+if( $riadok == 13 ) { $rm13=1*$hlavickps->hod; }
+if( $riadok == 14 ) { $rm14=1*$hlavickps->hod; }
+if( $riadok == 15 ) { $rm15=1*$hlavickps->hod; }
+if( $riadok == 16 ) { $rm16=1*$hlavickps->hod; }
+if( $riadok == 17 ) { $rm17=1*$hlavickps->hod; }
+if( $riadok == 18 ) { $rm18=1*$hlavickps->hod; }
+if( $riadok == 19 ) { $rm19=1*$hlavickps->hod; }
+if( $riadok == 20 ) { $rm20=1*$hlavickps->hod; }
+if( $riadok == 21 ) { $rm21=1*$hlavickps->hod; }
+if( $riadok == 22 ) { $rm22=1*$hlavickps->hod; }
+if( $riadok == 23 ) { $rm23=1*$hlavickps->hod; }
+if( $riadok == 24 ) { $rm24=1*$hlavickps->hod; }
+if( $riadok == 25 ) { $rm25=1*$hlavickps->hod; }
+if( $riadok == 26 ) { $rm26=1*$hlavickps->hod; }
+if( $riadok == 27 ) { $rm27=1*$hlavickps->hod; }
+if( $riadok == 28 ) { $rm28=1*$hlavickps->hod; }
+if( $riadok == 29 ) { $rm29=1*$hlavickps->hod; }
+if( $riadok == 30 ) { $rm30=1*$hlavickps->hod; }
+if( $riadok == 31 ) { $rm31=1*$hlavickps->hod; }
+if( $riadok == 32 ) { $rm32=1*$hlavickps->hod; }
+if( $riadok == 33 ) { $rm33=1*$hlavickps->hod; }
+if( $riadok == 34 ) { $rm34=1*$hlavickps->hod; }
+if( $riadok == 35 ) { $rm35=1*$hlavickps->hod; }
+if( $riadok == 36 ) { $rm36=1*$hlavickps->hod; }
+if( $riadok == 37 ) { $rm37=1*$hlavickps->hod; }
+if( $riadok == 38 ) { $rm38=1*$hlavickps->hod; }
+if( $riadok == 39 ) { $rm39=1*$hlavickps->hod; }
+if( $riadok == 40 ) { $rm40=1*$hlavickps->hod; }
+if( $riadok == 41 ) { $rm41=1*$hlavickps->hod; }
+if( $riadok == 44 ) { $rm44=1*$hlavickps->hod; }
+if( $riadok == 43 ) { $rm43=1*$hlavickps->hod; }
+if( $riadok == 44 ) { $rm44=1*$hlavickps->hod; }
+if( $riadok == 45 ) { $rm45=1*$hlavickps->hod; }
+
+}
+$ips = $ips + 1;
+  }
+
+  $text = "  <ucMuj1Suvaha>"."\r\n";   fwrite($soubor, $text);
+
+
+  $text = "  <r01>"."\r\n";   fwrite($soubor, $text);
   $riadok=1*$hlavicka->rn01;
   if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4303\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm01;
+  $text = "    <s1><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
+  $riadok=1*$rm01;
   if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4304\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r001>"."\r\n";   fwrite($soubor, $text);
+  $text = "    <s2><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
+  $text = "  </r01>"."\r\n";   fwrite($soubor, $text);
 
-  $text = "  <r002>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r02;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4305\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk02;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4306\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
+  $text = "  <r02>"."\r\n";   fwrite($soubor, $text);
   $riadok=1*$hlavicka->rn02;
   if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4307\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm02;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4308\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r002>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r003>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r03;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4309\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk03;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4310\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn03;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4311\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm03;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4312\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r003>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r004>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r04;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4313\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk04;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4314\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn04;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4315\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm04;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4316\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r004>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r005>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r05;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4317\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk05;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4318\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn05;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4319\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm05;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4320\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r005>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r006>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r06;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4321\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk06;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4322\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn06;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4323\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm06;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4324\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r006>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r007>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r07;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4325\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk07;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4326\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn07;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4327\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm07;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4328\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r007>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r008>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r08;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4329\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk08;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4330\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn08;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4331\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm08;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4332\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r008>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r009>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r09;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4333\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk09;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4334\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn09;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4335\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm09;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4336\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r009>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r010>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r10;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4337\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk10;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4338\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn10;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4339\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm10;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4340\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r010>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r011>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r11;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4341\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk11;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4342\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn11;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4343\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm11;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4344\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r011>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r012>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r12;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4345\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk12;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4346\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn12;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4347\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm12;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4348\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r012>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r013>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r13;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4349\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk13;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4350\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn13;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4351\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm13;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4352\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r013>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r014>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r14;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4353\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk14;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4354\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn14;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4355\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm14;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4356\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r014>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r015>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r15;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4357\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk15;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4358\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn15;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4359\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm15;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4360\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r015>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r016>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r16;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4361\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk16;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4362\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn16;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4363\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm16;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4364\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r016>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r017>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r17;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4365\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk17;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4366\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn17;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4367\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm17;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4368\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r017>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r018>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r18;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4369\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk18;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4370\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn18;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4371\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm18;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4372\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r018>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r019>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r19;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4373\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk19;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4374\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn19;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4375\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm19;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4376\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r019>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r020>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r20;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4377\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk20;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4378\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn20;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4379\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm20;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4380\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r020>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r021>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r21;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4381\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk21;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4382\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn21;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4383\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm21;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4384\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r021>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r022>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r22;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4385\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk22;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4386\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn22;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4387\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm22;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4388\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r022>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r023>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r23;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4389\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk23;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4390\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn23;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4391\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm23;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4392\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r023>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r024>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r24;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4393\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk24;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4394\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn24;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4395\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm24;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4396\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r024>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r025>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r25;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4397\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk25;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4398\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn25;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4399\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm25;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4400\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r025>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r026>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r26;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4401\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk26;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4402\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn26;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4403\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm26;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4404\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r026>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r027>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r27;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4405\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk27;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4406\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn27;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4407\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm27;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4408\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r027>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r028>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r28;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4409\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk28;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4410\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn28;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4411\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm28;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4412\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r028>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r029>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r29;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4413\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk29;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4414\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn29;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4415\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm29;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4416\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r029>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r030>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r30;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4417\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk30;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4418\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn30;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4419\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm30;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4420\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r030>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r031>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r31;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4421\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk31;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4422\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn31;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4423\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm31;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4424\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r031>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r032>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r32;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4425\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk32;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4426\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn32;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4427\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm32;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4428\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r032>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r033>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r33;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4429\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk33;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4430\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn33;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4431\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm33;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4432\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r033>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r034>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r34;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4433\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk34;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4434\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn34;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4435\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm34;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4436\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r034>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r035>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r35;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4437\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk35;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4438\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn35;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4439\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm35;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4440\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r035>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r036>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r36;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4441\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk36;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4442\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn36;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4443\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm36;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4444\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r036>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r037>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r37;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4445\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk37;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4446\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn37;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4447\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm37;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4448\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r037>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r038>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r38;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4449\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk38;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4450\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn38;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4451\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm38;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4452\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r038>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r039>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r39;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4453\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk39;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4454\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn39;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4455\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm39;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4456\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r039>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r040>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r40;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4457\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk40;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4458\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn40;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4459\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm40;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4460\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r040>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r041>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r41;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4461\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk41;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4462\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn41;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4463\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm41;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4464\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r041>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r042>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r42;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4465\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk42;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4466\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn42;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4467\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm42;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4468\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r042>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r043>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r43;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4469\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk43;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4470\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn43;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4471\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm43;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4472\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r043>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r044>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r44;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4473\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk44;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4474\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn44;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4475\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm44;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4476\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r044>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r045>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r45;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4477\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk45;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4478\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn45;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4479\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm45;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4480\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r045>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r046>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r46;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4481\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk46;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4482\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn46;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4483\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm46;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4484\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r046>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r047>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r47;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4485\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk47;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4486\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn47;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4487\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm47;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4488\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r047>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r048>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r48;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4489\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk48;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4490\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn48;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4491\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm48;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4492\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r048>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r049>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r49;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4493\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk49;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4494\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn49;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4495\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm49;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4496\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r049>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r050>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r50;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4497\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk50;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4498\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn50;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4499\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm50;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4500\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r050>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r051>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r51;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4501\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk51;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4502\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn51;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4503\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm51;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4504\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r051>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r052>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r52;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4505\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk52;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4506\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn52;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4507\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm52;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4508\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r052>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r053>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r53;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4509\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk53;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4510\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn53;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4511\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm53;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4512\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r053>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r054>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r54;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4513\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk54;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4514\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn54;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4515\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm54;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4516\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r054>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r055>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r55;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4517\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk55;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4518\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn55;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4519\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm55;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4520\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r055>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r056>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r56;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4521\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk56;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4522\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn56;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4523\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm56;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4524\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r056>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r057>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r57;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4525\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk57;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4526\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn57;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4527\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm57;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4528\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r057>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r058>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r58;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4529\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk58;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4530\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn58;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4531\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm58;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4532\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r058>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r059>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r59;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4533\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk59;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4534\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn59;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4535\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm59;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4536\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r059>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r060>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r60;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4537\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk60;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4538\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn60;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4539\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm60;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4540\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r060>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r061>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r61;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4541\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk61;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4542\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn61;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4543\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm61;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4544\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r061>"."\r\n";   fwrite($soubor, $text);
- 
-  $text = "  <r062>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r62;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4545\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk62;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4546\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn62;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4547\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm62;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4548\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r062>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r063>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r63;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4549\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk63;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4550\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn63;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4551\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm63;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4552\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r063>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r064>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r64;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4553\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk64;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4554\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn64;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4555\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm64;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4556\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r064>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r065>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r65;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s1 ukazovatel=\"4557\"><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rk65;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s2 ukazovatel=\"4558\"><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rn65;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s3 ukazovatel=\"4559\"><![CDATA[".$riadok."]]></s3>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm65;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s4 ukazovatel=\"4560\"><![CDATA[".$riadok."]]></s4>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r065>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r066>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r66;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4561\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm66;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4562\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r066>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r067>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r67;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4563\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm67;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4564\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r067>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r068>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r68;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4565\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm68;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4566\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r068>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r069>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r69;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4567\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm69;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4568\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r069>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r070>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r70;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4569\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm70;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4570\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r070>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r071>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r71;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4571\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm71;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4572\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r071>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r072>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r72;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4573\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm72;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4574\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r072>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r073>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r73;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4575\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm73;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4576\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r073>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r074>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r74;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4577\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm74;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4578\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r074>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r075>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r75;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4579\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm75;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4580\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r075>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r076>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r76;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4581\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm76;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4582\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r076>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r077>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r77;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4583\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm77;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4584\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r077>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r078>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r78;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4585\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm78;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4586\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r078>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r079>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r79;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4587\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm79;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4588\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r079>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r080>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r80;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4589\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm80;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4590\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r080>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r081>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r81;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4591\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm81;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4592\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r081>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r082>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r82;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4593\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm82;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4594\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r082>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r083>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r83;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4595\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm83;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4596\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r083>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r084>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r84;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4597\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm84;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4598\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r084>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r085>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r85;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4599\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm85;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4600\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r085>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r086>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r86;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4601\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm86;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4602\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r086>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r087>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r87;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4603\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm87;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4604\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r087>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r088>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r88;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4605\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm88;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4606\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r088>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r089>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r89;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4607\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm89;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4608\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r089>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r090>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r90;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4609\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm90;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4610\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r090>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r091>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r91;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4611\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm91;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4612\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r091>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r092>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r92;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4613\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm92;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4614\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r092>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r093>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r93;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4615\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm93;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4616\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r093>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r094>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r94;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4617\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm94;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4618\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r094>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r095>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r95;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4619\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm95;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4620\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r095>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r096>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r96;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4621\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm96;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4622\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r096>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r097>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r97;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4623\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm97;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4624\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r097>"."\r\n";   fwrite($soubor, $text);
+  $text = "    <s1><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
+  $riadok=1*$rm02;
+  if( $riadok == 0 ) $riadok="";
+  $text = "    <s2><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
+  $text = "  </r02>"."\r\n";   fwrite($soubor, $text);
+
+
+  $text = "  </ucMuj1Suvaha>"."\r\n";   fwrite($soubor, $text);
+
+          }
+//koniec ak j=0
+
+
+
+}
+$i = $i + 1;
+$j = $j + 1;
+  }
+
+//vykazziskov a strat
+
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvyk1000ziss".$kli_uzid." WHERE prx = 1 "; 
 
-  $text = "  <r098>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r98;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4625\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm98;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4626\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r098>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r099>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r99;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4627\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm99;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4628\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r099>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r100>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r100;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4629\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm100;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4630\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r100>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r101>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r101;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4631\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm101;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4632\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r101>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r102>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r102;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4633\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm102;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4634\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r102>"."\r\n";   fwrite($soubor, $text);
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
 
-  $text = "  <r103>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r103;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4635\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm103;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4636\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r103>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r104>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r104;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4637\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm104;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4638\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r104>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r105>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r105;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4639\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm105;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4640\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r105>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "  <r106>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r106;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4641\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm106;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4642\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r106>"."\r\n";   fwrite($soubor, $text);
+$i=0;
+$j=0; //zaciatok strany ak by som chcel strankovat
+  while ($i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavickav=mysql_fetch_object($sql);
 
-  $text = "  <r107>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r107;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4643\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm107;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4644\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r107>"."\r\n";   fwrite($soubor, $text);
 
-  $text = "  <r108>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r108;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4585\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm108;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4646\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r108>"."\r\n";   fwrite($soubor, $text);
+if( $j == 0 )
+          {
 
-  $text = "  <r109>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r109;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4647\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm109;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4648\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r109>"."\r\n";   fwrite($soubor, $text);
+$rm01=""; $rm02=""; $rm03=""; $rm04=""; $rm05=""; $rm06=""; $rm07=""; $rm08=""; $rm09=""; $rm10=""; 
+$rm11=""; $rm12=""; $rm13=""; $rm14=""; $rm15=""; $rm16=""; $rm17=""; $rm18=""; $rm19=""; $rm20="";
+$rm21=""; $rm22=""; $rm23=""; $rm24=""; $rm25=""; $rm26=""; $rm27=""; $rm28=""; $rm29=""; $rm30="";
+$rm31=""; $rm32=""; $rm33=""; $rm34=""; $rm35=""; $rm36=""; $rm37=""; $rm38="";
 
-  $text = "  <r110>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r110;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4649\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm110;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4650\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r110>"."\r\n";   fwrite($soubor, $text);
+$sqlttpv = "SELECT * FROM F$kli_vxcf"."_pov_muj2014 WHERE dok > 0 ORDER BY dok "; 
+$sqlpv = mysql_query("$sqlttpv");
+$polpv = mysql_num_rows($sqlpv);
 
-  $text = "  <r111>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r111;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4651\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm111;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4652\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r111>"."\r\n";   fwrite($soubor, $text);
+$ipv=0;
+  while ($ipv <= $polpv )
+  {
+  if (@$zaznam=mysql_data_seek($sqlpv,$ipv))
+{
+$hlavickpv=mysql_fetch_object($sqlpv);
 
-  $text = "  <r112>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r112;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4653\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm112;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4654\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r112>"."\r\n";   fwrite($soubor, $text);
+$riadok=1*$hlavickpv->dok;
 
-  $text = "  <r113>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r113;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4655\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm113;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4656\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r113>"."\r\n";   fwrite($soubor, $text);
+if( $riadok ==  1 ) { $rm01=1*$hlavickpv->hod; }
+if( $riadok ==  2 ) { $rm02=1*$hlavickpv->hod; }
+if( $riadok ==  3 ) { $rm03=1*$hlavickpv->hod; }
+if( $riadok ==  4 ) { $rm04=1*$hlavickpv->hod; }
+if( $riadok ==  5 ) { $rm05=1*$hlavickpv->hod; }
+if( $riadok ==  6 ) { $rm06=1*$hlavickpv->hod; }
+if( $riadok ==  7 ) { $rm07=1*$hlavickpv->hod; }
+if( $riadok ==  8 ) { $rm08=1*$hlavickpv->hod; }
+if( $riadok ==  9 ) { $rm09=1*$hlavickpv->hod; }
+if( $riadok == 10 ) { $rm10=1*$hlavickpv->hod; }
+if( $riadok == 11 ) { $rm11=1*$hlavickpv->hod; }
+if( $riadok == 12 ) { $rm12=1*$hlavickpv->hod; }
+if( $riadok == 13 ) { $rm13=1*$hlavickpv->hod; }
+if( $riadok == 14 ) { $rm14=1*$hlavickpv->hod; }
+if( $riadok == 15 ) { $rm15=1*$hlavickpv->hod; }
+if( $riadok == 16 ) { $rm16=1*$hlavickpv->hod; }
+if( $riadok == 17 ) { $rm17=1*$hlavickpv->hod; }
+if( $riadok == 18 ) { $rm18=1*$hlavickpv->hod; }
+if( $riadok == 19 ) { $rm19=1*$hlavickpv->hod; }
+if( $riadok == 20 ) { $rm20=1*$hlavickpv->hod; }
+if( $riadok == 21 ) { $rm21=1*$hlavickpv->hod; }
+if( $riadok == 22 ) { $rm22=1*$hlavickpv->hod; }
+if( $riadok == 23 ) { $rm23=1*$hlavickpv->hod; }
+if( $riadok == 24 ) { $rm24=1*$hlavickpv->hod; }
+if( $riadok == 25 ) { $rm25=1*$hlavickpv->hod; }
+if( $riadok == 26 ) { $rm26=1*$hlavickpv->hod; }
+if( $riadok == 27 ) { $rm27=1*$hlavickpv->hod; }
+if( $riadok == 28 ) { $rm28=1*$hlavickpv->hod; }
+if( $riadok == 29 ) { $rm29=1*$hlavickpv->hod; }
+if( $riadok == 30 ) { $rm30=1*$hlavickpv->hod; }
+if( $riadok == 31 ) { $rm31=1*$hlavickpv->hod; }
+if( $riadok == 32 ) { $rm32=1*$hlavickpv->hod; }
+if( $riadok == 33 ) { $rm33=1*$hlavickpv->hod; }
+if( $riadok == 34 ) { $rm34=1*$hlavickpv->hod; }
+if( $riadok == 35 ) { $rm35=1*$hlavickpv->hod; }
+if( $riadok == 36 ) { $rm36=1*$hlavickpv->hod; }
+if( $riadok == 37 ) { $rm37=1*$hlavickpv->hod; }
+if( $riadok == 38 ) { $rm38=1*$hlavickpv->hod; }
 
-  $text = "  <r114>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r114;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4657\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm114;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4658\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r114>"."\r\n";   fwrite($soubor, $text);
+}
+$ipv = $ipv + 1;
+  }
 
-  $text = "  <r115>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r115;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4659\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm115;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4660\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r115>"."\r\n";   fwrite($soubor, $text);
 
-  $text = "  <r116>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r116;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4661\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm116;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4662\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r116>"."\r\n";   fwrite($soubor, $text);
+  $text = "  <ucMuj2VykazZS>"."\r\n";   fwrite($soubor, $text);
 
-  $text = "  <r117>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r117;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4663\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm117;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4664\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r117>"."\r\n";   fwrite($soubor, $text);
 
-  $text = "  <r118>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r118;
+  $text = "  <r01>"."\r\n";   fwrite($soubor, $text);
+  $riadok=1*$hlavickav->r01;
   if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4665\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm118;
+  $text = "    <s1><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
+  $riadok=1*$rm01;
   if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4666\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r118>"."\r\n";   fwrite($soubor, $text);
+  $text = "    <s2><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
+  $text = "  </r01>"."\r\n";   fwrite($soubor, $text);
 
-  $text = "  <r119>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r119;
+  $text = "  <r02>"."\r\n";   fwrite($soubor, $text);
+  $riadok=1*$hlavickav->r02;
   if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4667\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm119;
+  $text = "    <s1><![CDATA[".$riadok."]]></s1>"."\r\n";   fwrite($soubor, $text);
+  $riadok=1*$rm02;
   if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4668\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r119>"."\r\n";   fwrite($soubor, $text);
+  $text = "    <s2><![CDATA[".$riadok."]]></s2>"."\r\n";   fwrite($soubor, $text);
+  $text = "  </r02>"."\r\n";   fwrite($soubor, $text);
 
-  $text = "  <r120>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r120;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4669\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm120;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4670\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r120>"."\r\n";   fwrite($soubor, $text);
 
-  $text = "  <r121>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r121;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4671\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm121;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4672\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r121>"."\r\n";   fwrite($soubor, $text);
+  $text = "  </ucMuj2VykazZS>"."\r\n";   fwrite($soubor, $text);
 
-  $text = "  <r122>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r122;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4673\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm122;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4674\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r122>"."\r\n";   fwrite($soubor, $text);
 
-  $text = "  <r123>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r123;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4675\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm123;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4676\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r123>"."\r\n";   fwrite($soubor, $text);
 
-  $text = "  <r124>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r124;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4677\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm124;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4678\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r124>"."\r\n";   fwrite($soubor, $text);
 
-  $text = "  <r125>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->r125;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s5 ukazovatel=\"4679\"><![CDATA[".$riadok."]]></s5>"."\r\n";   fwrite($soubor, $text);
-  $riadok=1*$hlavicka->rm125;
-  if( $riadok == 0 ) $riadok="";
-  $text = "    <s6 ukazovatel=\"4680\"><![CDATA[".$riadok."]]></s6>"."\r\n";   fwrite($soubor, $text);
-  $text = "  </r125>"."\r\n";   fwrite($soubor, $text);
 
   $text = "  </telo>"."\r\n";   fwrite($soubor, $text);    
 

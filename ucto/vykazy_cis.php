@@ -217,6 +217,92 @@ $sql = "INSERT INTO F".$kli_vxcf."_uctparzaok_muj2014 (uce, crs) VALUE ('15', '1
 $ulozene = mysql_query("$sql");
                      }
 
+if ( $drupoh == 91 ) {
+
+$sql = "DELETE FROM F$kli_vxcf"."_crs_muj2014 ";
+$vysledok = mysql_query("$sql");
+
+$subor = fopen("../import/crs_muj$kli_vrok.csv", "r");
+while (! feof($subor))
+     {
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+
+  $x_uce = $pole[0];
+  $x_crs = $pole[1];
+  $x_kon = $pole[2];
+ 
+$c_uce=1*$x_uce;
+
+if( $c_uce > 0 )
+{
+$sqult = "INSERT INTO F$kli_vxcf"."_crs_muj2014 ( uce,crs )".
+" VALUES ( '$x_uce', '$x_crs' ); "; 
+
+$ulozene = mysql_query("$sqult"); 
+}
+     }
+                     }
+
+if ( $drupoh == 92 ) {
+
+$sql = "DELETE FROM F$kli_vxcf"."_crv_muj2014 ";
+$vysledok = mysql_query("$sql");
+
+$subor = fopen("../import/crv_muj$kli_vrok.csv", "r");
+while (! feof($subor))
+     {
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+
+  $x_uce = $pole[0];
+  $x_crs = $pole[1];
+  $x_kon = $pole[2];
+ 
+$c_uce=1*$x_uce;
+
+if( $c_uce > 0 )
+{
+$sqult = "INSERT INTO F$kli_vxcf"."_crv_muj2014 ( uce,crs )".
+" VALUES ( '$x_uce', '$x_crs' ); "; 
+
+$ulozene = mysql_query("$sqult"); 
+}
+     }
+                     }
+
+if ( $drupoh == 95 ) {
+
+$sql = "DELETE FROM F$kli_vxcf"."_uctsyngensuv_muj2014 ";
+$vysledok = mysql_query("$sql");
+
+$subor = fopen("../import/uctsyngensuv_muj$kli_vrok.csv", "r");
+while (! feof($subor))
+     {
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+
+  $x_dok = $pole[0];
+  $x_ucm = $pole[1];
+  $x_ucd = $pole[2];
+  $x_kon = $pole[3];
+ 
+$c_dok=1*$x_dok;
+
+if( $c_dok > 0 )
+{
+$sqult = "INSERT INTO F$kli_vxcf"."_uctsyngensuv_muj2014 ( dok,ucm,ucd )".
+" VALUES ( '$x_dok', '$x_ucm', '$x_ucd' ); "; 
+
+$ulozene = mysql_query("$sqult"); 
+}
+     }
+                     }
+
+
 $copern=308; 
     }
 //koniec nacitania standartneho generovania
