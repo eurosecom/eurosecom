@@ -575,7 +575,7 @@ if ( $drupoh == 96 ) { echo "Súvaha a VZaS - Nastavenie zaokrúhlenia"; }
 
 <?php
 ////////////////////////////////////////////////////////////////uprava vykazu
-if ( $drupoh >= 91 )
+if ( $drupoh >= 91 AND $drupoh != 96 )
 {
 
 if ( $gener == 1 ) {
@@ -619,15 +619,6 @@ if ( $gener == 1 )
  <th>Pasíva</th>
 <?php                      } ?>
 
-<?php if ( $drupoh == 96 ) { ?>
- <th>
- èrSUV <img src='../obr/info.png' width=12 height=12 border=0 title="Èíslo riadku aktív v Súvahe kam má program zúètova rozdiel HV po zaokrúhlení Súvahy, napr. è. 15">
- </th> <!-- dopyt, spoloèný obrázok -->
- <th>
-èrVZS <img src='../obr/info.png' width=12 height=12 border=0 title="Èíslo nákladového riadku vo Výkaze ziskov kam má program zúètova rozdiel HV po zaokrúhlení Súvahy a VZaS, napr. è. 17">
-</th>
-
-<?php                     } ?>
 <?php
 }
 ?>
@@ -701,7 +692,6 @@ $i = $i + 1;
 </tfoot>
 </table>
 
-<!-- dopyt, sem pôjde drupoh 96 -->
 
 
 </FORM>
@@ -710,6 +700,114 @@ $i = $i + 1;
 }
 ////////////////////////////////////////////////////////////////koniec uprava vykazu
 ?>
+
+<?php
+////////////////////////////////////////////////////////////////uprava vykazu drupoh 96
+if ( $drupoh == 96 )
+{
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl";
+
+$sql = mysql_query("$sqltt");
+//echo $sqltt;
+
+// celkom poloziek
+$cpol = mysql_num_rows($sql);
+$i = 0;
+?>
+<table class="content-body" style="">
+<FORM name="formv1" method="post" action="vykazy_cis.php?copern=315&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>">
+
+<thead>
+<tr>
+ <th style="width:25%;"></th>
+ <th style="width:25%;"></th>
+ <th style="width:25%;"></th>
+ <th style="width:25%;"></th>
+</tr>
+<tr>
+<?php
+if ( $gener == 1 )
+{
+?>
+
+<?php if ( $drupoh == 96 ) { ?>
+ <th>
+ èrSUV <img src='../obr/info.png' width=12 height=12 border=0 title="Èíslo riadku aktív v Súvahe kam má program zúètova rozdiel HV po zaokrúhlení Súvahy, napr. è. 15">
+ </th> <!-- dopyt, spoloèný obrázok -->
+ <th>
+èrVZS <img src='../obr/info.png' width=12 height=12 border=0 title="Èíslo nákladového riadku vo Výkaze ziskov kam má program zúètova rozdiel HV po zaokrúhlení Súvahy a VZaS, napr. è. 17">
+</th>
+
+<?php                     } ?>
+<?php
+}
+?>
+
+ <th>
+  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1' style="display:none;"> <!-- dopyt, doprava na lištu spravi tlaèidlo "naèíta" -->
+   <img src='../obr/import.png' width=20 height=15 border=0 title="Naèítaj z minulého roka">
+  </a>
+  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=155&page=1' style="display:none;">
+   <img src='../obr/orig.png' width=20 height=15 border=0 title="Nastav štandartný èíselník">
+  </a>
+ </th>
+</tr>
+</thead>
+<?php
+   while ($i <= $cpol )
+   {
+?>
+<?php
+  if (@$zaznam=mysql_data_seek($sql,$i))
+  {
+$riadok=mysql_fetch_object($sql);
+?>
+<tbody>
+<tr>
+ <td><?php echo $riadok->uce;?></td>
+ <td style="text-align:right;"><?php echo $riadok->crs;?></td>
+
+ <td style="text-align:center;">
+  <a href="#" onclick="UpravPolozku(<?php echo $riadok->cpl;?>);" title="Upravi" class="btn-edit"></a>
+  <a href="#" onclick="ZmazPolozku(<?php echo $riadok->cpl;?>);" title="Vymaza" class="btn-cancel" ></a>
+ </td>
+</tr>
+</tbody>
+<?php
+  }
+$i = $i + 1;
+   }
+?>
+<tfoot>
+<tr>
+ <td>
+  <input type="text" name="h_uce" id="h_uce" size="7" onclick=" " onKeyDown=" "  onkeyup=" " />
+ </td>
+ <td>
+  <input type="text" name="h_crs" id="h_crs" size="7" onclick=" " onKeyDown=" "  onkeyup=" "/>
+ </td>
+</tr>
+
+
+
+<tr>
+ <td></td>
+ <td colspan="3" style="">
+  <input type="submit" id="uloz" name="uloz" value="Uloži" >
+ </td>
+</tr>
+</tfoot>
+</table>
+
+
+</FORM>
+
+<?php
+}
+////////////////////////////////////////////////////////////////koniec uprava vykazu drupoh 96
+?>
+
 
  </div> <!-- koniec .content-body -->
 
