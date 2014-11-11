@@ -288,6 +288,22 @@ $sqlt = <<<prcsuvahas
    rk62          DECIMAL(10,2),
    rk63          DECIMAL(10,2),
    rk64          DECIMAL(10,2),
+
+   rk65          DECIMAL(10,2),
+   rk66          DECIMAL(10,2),
+   rk67          DECIMAL(10,2),
+   rk68          DECIMAL(10,2),
+   rk69          DECIMAL(10,2),
+   rk70          DECIMAL(10,2),
+   rk71          DECIMAL(10,2),
+   rk72          DECIMAL(10,2),
+   rk73          DECIMAL(10,2),
+   rk74          DECIMAL(10,2),
+   rk75          DECIMAL(10,2),
+   rk76          DECIMAL(10,2),
+   rk77          DECIMAL(10,2),
+   rk78          DECIMAL(10,2),
+
    rn01          DECIMAL(10,2),
    rn02          DECIMAL(10,2),
    rn03          DECIMAL(10,2),
@@ -352,6 +368,22 @@ $sqlt = <<<prcsuvahas
    rn62          DECIMAL(10,2),
    rn63          DECIMAL(10,2),
    rn64          DECIMAL(10,2),
+
+   rn65          DECIMAL(10,2),
+   rn66          DECIMAL(10,2),
+   rn67          DECIMAL(10,2),
+   rn68          DECIMAL(10,2),
+   rn69          DECIMAL(10,2),
+   rn70          DECIMAL(10,2),
+   rn71          DECIMAL(10,2),
+   rn72          DECIMAL(10,2),
+   rn73          DECIMAL(10,2),
+   rn74          DECIMAL(10,2),
+   rn75          DECIMAL(10,2),
+   rn76          DECIMAL(10,2),
+   rn77          DECIMAL(10,2),
+   rn78          DECIMAL(10,2),
+
    ico          INT
 );
 prcsuvahas;
@@ -587,6 +619,22 @@ $sqlt = <<<prcsuvahas
    rk62          DECIMAL(10,0),
    rk63          DECIMAL(10,0),
    rk64          DECIMAL(10,0),
+
+   rk65          DECIMAL(10,2),
+   rk66          DECIMAL(10,2),
+   rk67          DECIMAL(10,2),
+   rk68          DECIMAL(10,2),
+   rk69          DECIMAL(10,2),
+   rk70          DECIMAL(10,2),
+   rk71          DECIMAL(10,2),
+   rk72          DECIMAL(10,2),
+   rk73          DECIMAL(10,2),
+   rk74          DECIMAL(10,2),
+   rk75          DECIMAL(10,2),
+   rk76          DECIMAL(10,2),
+   rk77          DECIMAL(10,2),
+   rk78          DECIMAL(10,2),
+
    rn01          DECIMAL(10,0),
    rn02          DECIMAL(10,0),
    rn03          DECIMAL(10,0),
@@ -651,6 +699,22 @@ $sqlt = <<<prcsuvahas
    rn62          DECIMAL(10,0),
    rn63          DECIMAL(10,0),
    rn64          DECIMAL(10,0),
+
+   rn65          DECIMAL(10,0),
+   rn66          DECIMAL(10,0),
+   rn67          DECIMAL(10,0),
+   rn68          DECIMAL(10,0),
+   rn69          DECIMAL(10,0),
+   rn70          DECIMAL(10,0),
+   rn71          DECIMAL(10,0),
+   rn72          DECIMAL(10,0),
+   rn73          DECIMAL(10,0),
+   rn74          DECIMAL(10,0),
+   rn75          DECIMAL(10,0),
+   rn76          DECIMAL(10,0),
+   rn77          DECIMAL(10,0),
+   rn78          DECIMAL(10,0),
+
    ico          INT
 );
 prcsuvahas;
@@ -670,6 +734,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuvahas$kli_uzid"." SELECT".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "$fir_fico FROM F$kli_vxcf"."_uctosnova".
 " WHERE F$kli_vxcf"."_uctosnova.pmd != 0";
 //echo $dsqlt;
@@ -682,6 +747,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuvahas$kli_uzid"." SELECT".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "$fir_fico FROM F$kli_vxcf"."_uctosnova".
 " WHERE F$kli_vxcf"."_uctosnova.pda != 0";
@@ -720,6 +786,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuvahas$kli_uzid"." SELECT".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM F$kli_vxcf"."_$uctovanie,F$kli_vxcf"."_$doklad".
 " WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ucm > 0 AND ume <= $kli_vume GROUP BY ucm";
 //echo $dsqlt;
@@ -732,6 +799,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuvahas$kli_uzid"." SELECT".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM F$kli_vxcf"."_$uctovanie,F$kli_vxcf"."_$doklad".
 " WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ucd > 0 AND ume <= $kli_vume GROUP BY ucd";
@@ -750,6 +818,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuvahas$kli_uzid"." SELECT".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM F$kli_vxcf"."_$uctovanie".
 " WHERE ( ucm > 0 AND ume <= $kli_vume ) GROUP BY F$kli_vxcf"."_$uctovanie.ucm";
 //echo $dsqlt;
@@ -762,6 +831,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuvahas$kli_uzid"." SELECT".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM F$kli_vxcf"."_$uctovanie".
 " WHERE ( ucd > 0 AND ume <= $kli_vume ) GROUP BY F$kli_vxcf"."_$uctovanie.ucd";
@@ -935,6 +1005,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuvahas$kli_uzid"." SELECT".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM F$kli_vxcf"."_prcsuvahas$kli_uzid".
 " WHERE prx = 0 GROUP BY uce";
 $dsql = mysql_query("$dsqlt");
@@ -958,7 +1029,7 @@ $oznac = mysql_query("$sqtoz");
 
 
 //korekcia
-$ajkorekcia=0;
+$ajkorekcia=1;
 if( $ajkorekcia == 1 ) 
   {
 $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid".
@@ -978,16 +1049,16 @@ $oznac = mysql_query("$sqtoz");
 //rozdel do riadkov , vypocitaj netto
 
 $rdk=1;
-while ($rdk <= 45 ) 
+while ($rdk <= 145 ) 
   {
 $crdk=$rdk;
 if( $rdk < 10 ) $crdk="0".$rdk;
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET r$crdk=mdt-dal WHERE rdk = $rdk AND kor = 0 ";
-if( $rdk >= 24 ) { $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET r$crdk=dal-mdt WHERE rdk = $rdk "; }
+if( $rdk >= 79 ) { $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET r$crdk=dal-mdt WHERE rdk = $rdk "; }
 $oznac = mysql_query("$sqtoz");
 
-if( $rdk < 24 ) { 
+if( $rdk < 79 ) { 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET rk$crdk=dal-mdt WHERE rdk = $rdk AND kor = 1 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -1028,14 +1099,16 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuvahas$kli_uzid "." SELECT".
 "SUM(rk31),SUM(rk32),SUM(rk33),SUM(rk34),SUM(rk35),SUM(rk36),SUM(rk37),SUM(rk38),SUM(rk39),SUM(rk40),".
 "SUM(rk41),SUM(rk42),SUM(rk43),SUM(rk44),SUM(rk45),SUM(rk46),SUM(rk47),SUM(rk48),SUM(rk49),SUM(rk50),".
 "SUM(rk51),SUM(rk52),SUM(rk53),SUM(rk54),SUM(rk55),SUM(rk56),SUM(rk57),SUM(rk58),SUM(rk59),SUM(rk60),".
-"SUM(rk61),SUM(rk62),SUM(rk63),SUM(rk64),".
+"SUM(rk61),SUM(rk62),SUM(rk63),SUM(rk64),SUM(rk65),SUM(rk66),SUM(rk67),SUM(rk68),SUM(rk69),SUM(rk70),".
+"SUM(rk71),SUM(rk72),SUM(rk73),SUM(rk74),SUM(rk75),SUM(rk76),SUM(rk77),SUM(rk78),".
 "SUM(rn01),SUM(rn02),SUM(rn03),SUM(rn04),SUM(rn05),SUM(rn06),SUM(rn07),SUM(rn08),SUM(rn09),SUM(rn10),".
 "SUM(rn11),SUM(rn12),SUM(rn13),SUM(rn14),SUM(rn15),SUM(rn16),SUM(rn17),SUM(rn18),SUM(rn19),SUM(rn20),".
 "SUM(rn21),SUM(rn22),SUM(rn23),SUM(rn24),SUM(rn25),SUM(rn26),SUM(rn27),SUM(rn28),SUM(rn29),SUM(rn30),".
 "SUM(rn31),SUM(rn32),SUM(rn33),SUM(rn34),SUM(rn35),SUM(rn36),SUM(rn37),SUM(rn38),SUM(rn39),SUM(rn40),".
 "SUM(rn41),SUM(rn42),SUM(rn43),SUM(rn44),SUM(rn45),SUM(rn46),SUM(rn47),SUM(rn48),SUM(rn49),SUM(rn50),".
 "SUM(rn51),SUM(rn52),SUM(rn53),SUM(rn54),SUM(rn55),SUM(rn56),SUM(rn57),SUM(rn58),SUM(rn59),SUM(rn60),".
-"SUM(rn61),SUM(rn62),SUM(rn63),SUM(rn64),".
+"SUM(rn61),SUM(rn62),SUM(rn63),SUM(rn64),SUM(rn65),SUM(rn66),SUM(rn67),SUM(rn68),SUM(rn69),SUM(rn70),".
+"SUM(rn71),SUM(rn72),SUM(rn73),SUM(rn74),SUM(rn75),SUM(rn76),SUM(rn77),SUM(rn78),".
 "$fir_fico".
 " FROM F$kli_vxcf"."_prcsuvahas$kli_uzid".
 " WHERE rdk > 0".
@@ -1051,7 +1124,8 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET ".
 "rn31=r31-rk31, rn32=r32-rk32, rn33=r33-rk33, rn34=r34-rk34, rn35=r35-rk35, rn36=r36-rk36, rn37=r37-rk37, rn38=r38-rk38, rn39=r39-rk39, rn40=r40-rk40,".
 "rn41=r41-rk41, rn42=r42-rk42, rn43=r43-rk43, rn44=r44-rk44, rn45=r45-rk45, rn46=r46-rk46, rn47=r47-rk47, rn48=r48-rk48, rn49=r49-rk49, rn50=r50-rk50,".
 "rn51=r51-rk51, rn52=r52-rk52, rn53=r53-rk53, rn54=r54-rk54, rn55=r55-rk55, rn56=r56-rk56, rn57=r57-rk57, rn58=r58-rk58, rn59=r59-rk59, rn60=r60-rk60,".
-"rn61=r61-rk61, rn62=r62-rk62, rn63=r63-rk63, rn64=r64-rk64 ".
+"rn61=r61-rk61, rn62=r62-rk62, rn63=r63-rk63, rn64=r64-rk64, rn65=r65-rk65, rn66=r66-rk66, rn67=r67-rk67, rn68=r68-rk68, rn69=r69-rk69, rn70=r70-rk70,".
+"rn71=r71-rk71, rn72=r72-rk72, rn73=r73-rk73, rn74=r74-rk74, rn75=r75-rk75, rn76=r76-rk76, rn77=r77-rk77, rn78=r78-rk78 ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -1081,14 +1155,16 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuv1000ahas$kli_uzid "." SELECT".
 "rk31,rk32,rk33,rk34,rk35,rk36,rk37,rk38,rk39,rk40,".
 "rk41,rk42,rk43,rk44,rk45,rk46,rk47,rk48,rk49,".
 "rk50,rk51,rk52,rk53,rk54,rk55,rk56,rk57,rk58,rk59,".
-"rk60,rk61,rk62,rk63,rk64,".
+"rk60,rk61,rk62,rk63,rk64,rk65,rk66,rk67,rk68,rk69,".
+"rk70,rk71,rk72,rk73,rk74,rk75,rk76,rk77,rk78,".
 "rn01,rn02,rn03,rn04,rn05,".
 "rn06,rn07,rn08,rn09,rn10,rn11,rn12,rn13,rn14,rn15,".
 "rn16,rn17,rn18,rn19,rn20,rn21,rn22,rn23,rn24,rn25,rn26,rn27,rn28,rn29,rn30,".
 "rn31,rn32,rn33,rn34,rn35,rn36,rn37,rn38,rn39,rn40,".
 "rn41,rn42,rn43,rn44,rn45,rn46,rn47,rn48,rn49,".
 "rn50,rn51,rn52,rn53,rn54,rn55,rn56,rn57,rn58,rn59,".
-"rn60,rn61,rn62,rn63,rn64,".
+"rn60,rn61,rn62,rn63,rn64,rn65,rn66,rn67,rn68,rn69,".
+"rn70,rn71,rn72,rn73,rn74,rn75,rn76,rn77,rn78,".
 "$fir_fico".
 " FROM F$kli_vxcf"."_prcsuvahas$kli_uzid".
 " WHERE prx = 1".
@@ -1105,7 +1181,8 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcsuv1000ahas$kli_uzid SET ".
 "rn31=r31-rk31, rn32=r32-rk32, rn33=r33-rk33, rn34=r34-rk34, rn35=r35-rk35, rn36=r36-rk36, rn37=r37-rk37, rn38=r38-rk38, rn39=r39-rk39, rn40=r40-rk40,".
 "rn41=r41-rk41, rn42=r42-rk42, rn43=r43-rk43, rn44=r44-rk44, rn45=r45-rk45, rn46=r46-rk46, rn47=r47-rk47, rn48=r48-rk48, rn49=r49-rk49, rn50=r50-rk50,".
 "rn51=r51-rk51, rn52=r52-rk52, rn53=r53-rk53, rn54=r54-rk54, rn55=r55-rk55, rn56=r56-rk56, rn57=r57-rk57, rn58=r58-rk58, rn59=r59-rk59, rn60=r60-rk60,".
-"rn61=r61-rk61, rn62=r62-rk62, rn63=r63-rk63, rn64=r64-rk64 ".
+"rn61=r61-rk61, rn62=r62-rk62, rn63=r63-rk63, rn64=r64-rk64, rn65=r65-rk65, rn66=r66-rk66, rn67=r67-rk67, rn68=r68-rk68, rn69=r69-rk69, rn70=r70-rk70,".
+"rn71=r71-rk71, rn72=r72-rk72, rn73=r73-rk73, rn74=r74-rk74, rn75=r75-rk75, rn76=r76-rk76, rn77=r77-rk77, rn78=r78-rk78 ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
