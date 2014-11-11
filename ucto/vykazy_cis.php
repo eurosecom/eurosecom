@@ -89,7 +89,42 @@ $uctsys="uctparzaok_muj2014";
 $gener=1;
 $minul=0;
 }
-
+if( $drupoh == 191 )
+{
+$uctsys="crs_pod2014";
+$gener=1;
+$minul=0;
+}
+if( $drupoh == 193 )
+{
+$uctsys="pos_pod2014";
+$gener=0;
+$minul=1;
+}
+if( $drupoh == 195 )
+{
+$uctsys="uctsyngensuv_pod2014";
+$gener=1;
+$minul=0;
+}
+if( $drupoh == 192 )
+{
+$uctsys="crv_pod2014";
+$gener=1;
+$minul=0;
+}
+if( $drupoh == 194 )
+{
+$uctsys="pov_pod2014";
+$gener=0;
+$minul=1;
+}
+if( $drupoh == 196 )
+{
+$uctsys="uctparzaok_pod2014";
+$gener=1;
+$minul=0;
+}
 
 if( $gener == 1 )
 {
@@ -103,7 +138,7 @@ $sqlt = <<<uctmzd
 );
 uctmzd;
 
-if( $drupoh == 95 )
+if( $drupoh == 95 OR $drupoh == 195 )
      {
 $sqlt = <<<uctmzd
 (
@@ -332,13 +367,13 @@ $h_crs = strip_tags($_REQUEST['h_crs']);
 $h_ucd = strip_tags($_REQUEST['h_ucd']);
 
 if( $gener == 1 ) {
-if( $drupoh == 96 )
+if( $drupoh == 96 OR $drupoh == 196 )
      {
 $ulozttx = "DELETE FROM F$kli_vxcf"."_$uctsys ";
 $ulozenx = mysql_query("$ulozttx");
      } 
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); ";
-if( $drupoh == 95 )
+if( $drupoh == 95 OR $drupoh == 195 )
      {
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, ucm, ucd ) VALUES ( '$h_uce', '$h_crs', '$h_ucd'  ); ";
      } 
@@ -375,7 +410,7 @@ $h_ucd = strip_tags($_REQUEST['h_ucd']);
 
 if( $gener == 1 ) {
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); ";
-if( $drupoh == 95 )
+if( $drupoh == 95 OR $drupoh == 195 )
      {
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, ucm, ucd ) VALUES ( '$h_uce', '$h_crs', '$h_ucd'  ); ";
      }  
@@ -404,7 +439,7 @@ if ( $copern == 308 AND $uprav == 1 AND $drupoh >= 91  )
       {
 $cislo_cpl = 1*strip_tags($_REQUEST['cislo_cpl']);
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl = $cislo_cpl  ";
-if( $drupoh == 96 ) 
+if( $drupoh == 96 OR $drupoh == 196 ) 
     {
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl >= 0 ";
     }
@@ -418,7 +453,7 @@ if( $gener == 1 ) {
 $h_uce = $riadok->uce;
 $h_crs = $riadok->crs;
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); ";
-if( $drupoh == 95 )
+if( $drupoh == 95 OR $drupoh == 195 )
      {
 $h_uce = $riadok->dok;
 $h_crs = $riadok->ucm;
@@ -433,7 +468,7 @@ $h_crs = $riadok->hod;
        }
 //koniec uprava nacitanie
 
-if( $drupoh != 96 AND $uprav == 1) 
+if( $drupoh != 96 AND $drupoh != 196 AND $uprav == 1) 
     {
 $sqltx = "DELETE FROM F$kli_vxcf"."_$uctsys WHERE cpl = $cislo_cpl ";
 //echo $sqltx;
@@ -623,7 +658,7 @@ var vyskawin = screen.height-175;
 <?php if ( $copern == 308 AND $uprav >= 0 AND $drupoh >= 91 ) { ?>
    document.formv1.h_uce.value = '<?php echo "$h_uce";?>';
    document.formv1.h_crs.value = '<?php echo "$h_crs";?>';
-<?php if ( $drupoh == 95 ) { ?>
+<?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
    document.formv1.h_ucd.value = '<?php echo "$h_ucd";?>';
 <?php                      } ?>
 <?php                                                         } ?>
@@ -681,13 +716,17 @@ var vyskawin = screen.height-175;
 <div class="wrap-content">
 <?php
 $clas1="darkgreen"; $clas2="darkgreen"; $clas3="purple"; $clas4="purple"; $clas5="darkgreen"; $clas6="darkgray";
-if ( $drupoh == 91 ) $clas1="active"; if ( $drupoh == 93 ) $clas2="active";
-if ( $drupoh == 92 ) $clas3="active"; if ( $drupoh == 94 ) $clas4="active";
-if ( $drupoh == 95 ) $clas5="active"; if ( $drupoh == 96 ) $clas6="active";
+if ( $drupoh ==  91 ) $clas1="active"; if ( $drupoh ==  93 ) $clas2="active";
+if ( $drupoh ==  92 ) $clas3="active"; if ( $drupoh ==  94 ) $clas4="active";
+if ( $drupoh ==  95 ) $clas5="active"; if ( $drupoh ==  96 ) $clas6="active";
+if ( $drupoh == 191 ) $clas1="active"; if ( $drupoh == 193 ) $clas2="active";
+if ( $drupoh == 192 ) $clas3="active"; if ( $drupoh == 194 ) $clas4="active";
+if ( $drupoh == 195 ) $clas5="active"; if ( $drupoh == 196 ) $clas6="active";
 $source="../ucto/vykazy_cis.php?copern=308";
 ?>
 
 <div class="content-navbar toright"> <!-- dopyt, rozchodi -->
+<?php if( $drupoh >=  91 AND $drupoh <=  96 ) { ?> 
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=91', '_self');"
   title="Súvaha - generovanie" class="<?php echo $clas1; ?> darkgreen" >Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=93', '_self');"
@@ -700,18 +739,33 @@ $source="../ucto/vykazy_cis.php?copern=308";
   title="Súvaha - generovanie Aktív / Pasív" class="<?php echo $clas5; ?> darkgreen">Generovanie A / P</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=96&uprav=1', '_self');"
   title="Súvaha a VZaS - zaokrúhlenie" class="<?php echo $clas6; ?> darkgray">Zaokrúhlenie</a>
+<?php                                         } ?> 
+<?php if( $drupoh >= 191 AND $drupoh <= 196 ) { ?> 
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=191', '_self');"
+  title="Súvaha - generovanie" class="<?php echo $clas1; ?> darkgreen" >Generovanie</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=193', '_self');"
+  title="Súvaha - predchádzajúce úètovné obdobie" class="<?php echo $clas2; ?> darkgreen">Predchádz. obdobie</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=192', '_self');"
+  title="VZaS - generovanie" class="<?php echo $clas3; ?> purple">Generovanie</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=194', '_self');"
+  title="VZaS - predchádzajúce úètovné obdobie" class="<?php echo $clas4; ?> purple">Predchádz. obdobie</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=195', '_self');"
+  title="Súvaha - generovanie Aktív / Pasív" class="<?php echo $clas5; ?> darkgreen">Generovanie A / P</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=196&uprav=1', '_self');"
+  title="Súvaha a VZaS - zaokrúhlenie" class="<?php echo $clas6; ?> darkgray">Zaokrúhlenie</a>
+<?php                                         } ?>
 </div>
 
 <div class="content" style="">
 
  <h2 style="font-size:16px; font-weight: bold; height:16px; background-color:; ">
 <?php
-if ( $drupoh == 91 ) { echo "Súvaha - generovanie"; }
-if ( $drupoh == 93 ) { echo "Súvaha - Predchádzajúce úètovné obdobie"; }
-if ( $drupoh == 92 ) { echo "Výkaz ziskov a strát - Generovanie"; }
-if ( $drupoh == 94 ) { echo "Výkaz ziskov a strát - Predchádzajúce úètovné obdobie"; }
-if ( $drupoh == 95 ) { echo "Súvaha - Generovanie výkazu Aktíva / Pasíva"; }
-if ( $drupoh == 96 ) { echo "Súvaha a Výkaz ziskov a strát - Nastavenie zaokrúhlenia"; }
+if ( $drupoh == 91 OR $drupoh == 191 ) { echo "Súvaha - generovanie"; }
+if ( $drupoh == 93 OR $drupoh == 193 ) { echo "Súvaha - Predchádzajúce úètovné obdobie"; }
+if ( $drupoh == 92 OR $drupoh == 192 ) { echo "Výkaz ziskov a strát - Generovanie"; }
+if ( $drupoh == 94 OR $drupoh == 194 ) { echo "Výkaz ziskov a strát - Predchádzajúce úètovné obdobie"; }
+if ( $drupoh == 95 OR $drupoh == 195 ) { echo "Súvaha - Generovanie výkazu Aktíva / Pasíva"; }
+if ( $drupoh == 96 OR $drupoh == 196 ) { echo "Súvaha a Výkaz ziskov a strát - Nastavenie zaokrúhlenia"; }
 ?>
  </h2>
 
@@ -729,17 +783,9 @@ if ( $drupoh == 96 ) { echo "Súvaha a Výkaz ziskov a strát - Nastavenie zaokrúhl
 
 
 
-
-
-
-
-
-
-
-
 <?php
 ////////////////////////////////////////////////////////////////uprava vykazu
-if ( $drupoh >= 91 AND $drupoh != 96 )
+if ( $drupoh >= 91 AND $drupoh != 96 AND $drupoh != 196 )
 {
 
 if ( $gener == 1 ) {
@@ -748,7 +794,7 @@ $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl";
 if ( $minul == 1 ) {
 $sqltt = "SELECT cpl, dok AS uce, hod AS crs FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl";
                    }
-if ( $drupoh == 95 ) {
+if ( $drupoh == 95 OR $drupoh == 195 ) {
 $sqltt = "SELECT cpl, dok AS uce, ucm AS crs, ucd FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl";
                      }
 $sql = mysql_query("$sqltt");
@@ -774,11 +820,11 @@ $i = 0;
 if ( $gener == 1 )
 {
 ?>
-<?php if ( $drupoh != 95 AND $drupoh != 96 ) { ?>
+<?php if ( $drupoh != 95 AND $drupoh != 96 AND $drupoh != 195 AND $drupoh != 196 ) { ?>
  <th>Úèet</th>
  <th colspan="2">Èíslo riadku</th>
 <?php                                        } ?>
-<?php if ( $drupoh == 95 ) { ?>
+<?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
  <th>Úèet</th>
  <th>Aktíva</th>
  <th>Pasíva</th>
@@ -817,12 +863,12 @@ $riadok=mysql_fetch_object($sql);
  <td style="text-align:center; color:#888;"><?php echo $riadok->uce;?></td>
 <?php
 $varcolspan = 2;
-if ( $drupoh == 95 ) $varcolspan = 1;
+if ( $drupoh == 95 OR $drupoh == 195 ) $varcolspan = 1;
 ?>
  <td colspan="<?php echo $varcolspan ?>" style="text-align:right;">
   <?php echo $riadok->crs;?>&nbsp;&nbsp;</td>
 
-<?php if ( $drupoh == 95 ) { ?>
+<?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
  <td style="text-align:right;"><?php echo $riadok->ucd;?>&nbsp;&nbsp;</td>
 <?php                      } ?>
 
@@ -847,7 +893,7 @@ $i = $i + 1;
  </td>
 
 
-<?php if ( $drupoh == 95 ) { ?>
+<?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
  <td>
   <input type="text" name="h_ucd" id="h_ucd" class="field"/>
  </td>
@@ -878,8 +924,8 @@ $i = $i + 1;
 
 
 <?php
-////////////////////////////////////////////////////////////////uprava vykazu drupoh 96
-if ( $drupoh == 96 )
+////////////////////////////////////////////////////////////////uprava vykazu drupoh 96,196
+if ( $drupoh == 96 OR $drupoh == 196 )
 {
 
 ?>
@@ -920,15 +966,46 @@ if ( $drupoh == 96 )
 
 <tbody>
 <tr>
+<?php
+if ( $drupoh == 96 )
+{
+?>
  <th>Súvaha <img src='../obr/info.png' width=12 height=12 border=0 title="Èíslo riadku aktív v Súvahe kam má program zúètova rozdiel HV po zaokrúhlení Súvahy, napr. è. 15">
+<?php
+}
+?>
+<?php
+if ( $drupoh == 196 )
+{
+?>
+ <th>Súvaha <img src='../obr/info.png' width=12 height=12 border=0 title="Èíslo riadku aktív v Súvahe kam má program zúètova rozdiel HV po zaokrúhlení Súvahy, napr. è. 35">
+<?php
+}
+?>
  </th>
  <td>
   <input type="text" name="h_uce" id="h_uce" class="field" />
  </td>
 </tr>
 <tr>
+<?php
+if ( $drupoh == 96 )
+{
+?>
  <th>Výkaz ziskov a strát
 <img src='../obr/info.png' width=12 height=12 border=0 title="Èíslo nákladového riadku vo Výkaze ziskov kam má program zúètova rozdiel HV po zaokrúhlení Súvahy a VZaS, napr. è. 17">
+<?php
+}
+?>
+<?php
+if ( $drupoh == 196 )
+{
+?>
+ <th>Výkaz ziskov a strát
+<img src='../obr/info.png' width=12 height=12 border=0 title="Èíslo nákladového riadku vo Výkaze ziskov kam má program zúètova rozdiel HV po zaokrúhlení Súvahy a VZaS, napr. è. 26">
+<?php
+}
+?>
 </th>
  <td>
   <input type="text" name="h_crs" id="h_crs" class="field"/>
@@ -951,7 +1028,7 @@ if ( $drupoh == 96 )
 
 <?php
 }
-////////////////////////////////////////////////////////////////koniec uprava vykazu drupoh 96
+////////////////////////////////////////////////////////////////koniec uprava vykazu drupoh 96,196
 ?>
 
 

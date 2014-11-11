@@ -762,32 +762,32 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 
   function GenSuvPod()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=91', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=191', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
   function GenVysPod()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=92', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=192', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
   function MinSuvPod()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
   function MinVysPod()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=194', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
   function GesSuvPod()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=95', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=195', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
   function ZaokPod()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=96', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=196', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
 </script>
