@@ -332,6 +332,11 @@ $h_crs = strip_tags($_REQUEST['h_crs']);
 $h_ucd = strip_tags($_REQUEST['h_ucd']);
 
 if( $gener == 1 ) {
+if( $drupoh == 96 )
+     {
+$ulozttx = "DELETE FROM F$kli_vxcf"."_$uctsys ";
+$ulozenx = mysql_query("$ulozttx");
+     } 
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); ";
 if( $drupoh == 95 )
      {
@@ -398,8 +403,11 @@ endif;
 if ( $copern == 308 AND $uprav == 1 AND $drupoh >= 91  )
       {
 $cislo_cpl = 1*strip_tags($_REQUEST['cislo_cpl']);
-$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl = $cislo_cpl  ".
-"";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl = $cislo_cpl  ";
+if( $drupoh == 96 ) 
+    {
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl >= 0 ";
+    }
 //echo $sqltt;
 $sql = mysql_query("$sqltt"); 
   if (@$zaznam=mysql_data_seek($sql,0))
@@ -422,10 +430,15 @@ $h_uce = $riadok->dok;
 $h_crs = $riadok->hod;
                   }
   }
-$cislo_cpl = strip_tags($_REQUEST['cislo_cpl']);
-$zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_$uctsys WHERE cpl='$cislo_cpl' "); 
        }
 //koniec uprava nacitanie
+
+if( $drupoh != 96 AND $uprav == 1) 
+    {
+$sqltx = "DELETE FROM F$kli_vxcf"."_$uctsys WHERE cpl = $cislo_cpl ";
+//echo $sqltx;
+$sqlx = mysql_query("$sqltx"); 
+    }
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -641,8 +654,13 @@ var vyskawin = screen.height-175;
    <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
   </tr>
   <tr>
+<?php if( $drupoh >=  91 AND $drupoh <=  96 ) { ?> 
    <td class="header">Úètovná závierka <span class="subheader">mikro úètovnej jednotky</span> - nastavenie</td>
-   <td>
+<?php                                         } ?> 
+<?php if( $drupoh >= 191 AND $drupoh <= 196 ) { ?> 
+   <td class="header">Úètovná závierka <span class="subheader">Podnikate¾skej úètovnej jednotky</span> - nastavenie</td>
+<?php                                         } ?> 
+  <td>
     <ul class="toright legend-vykazy">
      <li class="toleft">
       <span class="darkgreen">&nbsp;</span>&nbsp;&nbsp;Súvaha
@@ -663,24 +681,24 @@ var vyskawin = screen.height-175;
 <div class="wrap-content">
 <?php
 $clas1="darkgreen"; $clas2="darkgreen"; $clas3="purple"; $clas4="purple"; $clas5="darkgreen"; $clas6="darkgray";
-if ( $drupoh == 91 ) $clas1="active"; if ( $drupoh == 92 ) $clas2="active";
-if ( $drupoh == 93 ) $clas3="active"; if ( $drupoh == 94 ) $clas4="active";
+if ( $drupoh == 91 ) $clas1="active"; if ( $drupoh == 93 ) $clas2="active";
+if ( $drupoh == 92 ) $clas3="active"; if ( $drupoh == 94 ) $clas4="active";
 if ( $drupoh == 95 ) $clas5="active"; if ( $drupoh == 96 ) $clas6="active";
 $source="../ucto/vykazy_cis.php?copern=308";
 ?>
 
 <div class="content-navbar toright"> <!-- dopyt, rozchodi -->
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh91', '_self');"
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=91', '_self');"
   title="Súvaha - generovanie" class="<?php echo $clas1; ?> darkgreen" >Generovanie</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh92', '_self');"
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=93', '_self');"
   title="Súvaha - predchádzajúce úètovné obdobie" class="<?php echo $clas2; ?> darkgreen">Predchádz. obdobie</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh93', '_self');"
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=92', '_self');"
   title="VZaS - generovanie" class="<?php echo $clas3; ?> purple">Generovanie</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh94', '_self');"
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=94', '_self');"
   title="VZaS - predchádzajúce úètovné obdobie" class="<?php echo $clas4; ?> purple">Predchádz. obdobie</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh95', '_self');"
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=95', '_self');"
   title="Súvaha - generovanie Aktív / Pasív" class="<?php echo $clas5; ?> darkgreen">Generovanie A / P</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh96', '_self');"
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=96&uprav=1', '_self');"
   title="Súvaha a VZaS - zaokrúhlenie" class="<?php echo $clas6; ?> darkgray">Zaokrúhlenie</a>
 </div>
 
@@ -864,16 +882,8 @@ $i = $i + 1;
 if ( $drupoh == 96 )
 {
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl";
-
-$sql = mysql_query("$sqltt");
-//echo $sqltt;
-
-//celkom poloziek
-$cpol = mysql_num_rows($sql);
-$i = 0;
 ?>
-<FORM name="formv1" method="post" action="vykazy_cis.php?copern=315&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>">
+<FORM name="formv1" method="post" action="vykazy_cis.php?copern=315&uprav=0&drupoh=<?php echo $drupoh;?>">
 <table class="content-body-fixed" style="">
 <thead>
 <tr>
@@ -881,12 +891,6 @@ $i = 0;
  <th style="width:35%;">Èíslo riadku</th>
 </tr>
 <tr>
-<?php
-if ( $gener == 1 ) //dopyt, naèo táto podmienka
-{
-?>
-
-<?php if ( $drupoh == 96 ) { ?> <!-- dopyt, na èo táto podmienka -->
  <th>
 
  </th> <!-- dopyt, spoloèný obrázok -->
@@ -894,11 +898,6 @@ if ( $gener == 1 ) //dopyt, naèo táto podmienka
 
 </th>
 
-<?php                     } ?>
-
-<?php
-}
-?>
  <th>
   <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1' style="display:none;"> <!-- dopyt, má tu zmysel? -->
    <img src='../obr/import.png' width=20 height=15 border=0 title="Naèítaj z minulého roka">
@@ -909,31 +908,15 @@ if ( $gener == 1 ) //dopyt, naèo táto podmienka
  </th>
 </tr>
 </thead>
-<?php
-   while ($i <= $cpol ) //dopyt, toto tu netreba, veï napevno len 2 inputy
-   {
-?>
-<?php
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-?>
+
 <tbody style="display:none;">
 <tr>
- <td><?php echo $riadok->uce;?></td> <!-- dopyt, tu nebude výpis, èi? -->
- <td style="text-align:right;"><?php echo $riadok->crs;?></td>
+ <td> </td> 
+ <td style="text-align:right;"> </td>
 
- <td style="text-align:center;">
-  <a href="#" onclick="UpravPolozku(<?php echo $riadok->cpl;?>);" title="Upravi" class="btn-edit"></a>
-  <a href="#" onclick="ZmazPolozku(<?php echo $riadok->cpl;?>);" title="Vymaza" class="btn-cancel" ></a>
- </td>
+
 </tr>
 </tbody>
-<?php
-  } //dopyt, netreba, èi?
-$i = $i + 1;
-   }
-?>
 
 <tbody>
 <tr>

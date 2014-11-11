@@ -760,32 +760,32 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-  function GenSuvMuj()
+  function GenSuvPod()
   { 
   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=91', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
-  function GenVysMuj()
+  function GenVysPod()
   { 
   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=92', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
-  function MinSuvMuj()
+  function MinSuvPod()
   { 
   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
-  function MinVysMuj()
+  function MinVysPod()
   { 
   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
-  function GesSuvMuj()
+  function GesSuvPod()
   { 
   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=95', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
-  function ZaokMuj()
+  function ZaokPod()
   { 
   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=96', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
@@ -803,21 +803,12 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 <a href="#" onClick="SuvahaPOD2014cele();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="64%">Súvaha Úè POD 1-01 v.2014 
-<a href="#" onClick="GesSuvMuj();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie výkazu Aktíva / Pasíva' ></a>
-
-<a href="#" onClick="ZaokMuj();">
-<img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
-</td>
+<td class="bmenu" width="64%">Súvaha Úè POD 1-01 v.2014</td>
 <td class="bmenu" width="28%"></td>
+<td class="bmenu" width="2%"></td>
 <td class="bmenu" width="2%">
-<a href="#" onClick="GenSuvMuj();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie výkazu' ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="MinSuvMuj();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
+<a href="#" onClick="GenSuvPod();">
+<img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie generovania, bezprostredne predchádzajúceho úètovného obdobia a zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
 </td>
 </tr>
 </FORM>
@@ -836,13 +827,10 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 </td>
 <td class="bmenu" width="64%">Výkaz ziskov a strát Úè POD 2-01 v.2014 </td>
 <td class="bmenu" width="28%"></td>
+<td class="bmenu" width="2%"></td>
 <td class="bmenu" width="2%">
-<a href="#" onClick="GenVysMuj();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie výkazu' ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="MinVysMuj();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
+<a href="#" onClick="GenVysPod();">
+<img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie generovania, bezprostredne predchádzajúceho úètovného obdobia a zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
 </td>
 </tr>
 </FORM>
@@ -872,7 +860,10 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
  Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
 </td>
 <td class="bmenu" width="2%">
-<td class="bmenu" width="9%" align="right">
+<a href="#" onClick="GenSuvPod();">
+<img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie generovania, bezprostredne predchádzajúceho úètovného obdobia a zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
+</td>
+<td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='KompletPOD2014doxml()' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie' >
 </td>
 </tr>
@@ -997,20 +988,12 @@ window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
 <td class="bmenu" width="64%">Súvaha Úè MUJ 1-01 
-<a href="#" onClick="GesSuvMuj();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie výkazu Aktíva / Pasíva' ></a>
-
-<a href="#" onClick="ZaokMuj();">
-<img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
 </td>
 <td class="bmenu" width="28%"></td>
+<td class="bmenu" width="2%"></td>
 <td class="bmenu" width="2%">
 <a href="#" onClick="GenSuvMuj();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie výkazu' ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="MinSuvMuj();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
+<img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie generovania, bezprostredne predchádzajúceho úètovného obdobia a zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
 </td>
 </tr>
 </FORM>
@@ -1029,13 +1012,10 @@ window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 </td>
 <td class="bmenu" width="64%">Výkaz ziskov a strát Úè MUJ 2-01 </td>
 <td class="bmenu" width="28%"></td>
+<td class="bmenu" width="2%"></td>
 <td class="bmenu" width="2%">
 <a href="#" onClick="GenVysMuj();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie výkazu' ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="MinVysMuj();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
+<img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie generovania, bezprostredne predchádzajúceho úètovného obdobia a zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
 </td>
 </tr>
 </FORM>
@@ -1065,6 +1045,10 @@ window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
  Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
 </td>
 <td class="bmenu" width="2%">
+<td class="bmenu" width="2%">
+<a href="#" onClick="GenSuvMuj();">
+<img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie generovania, bezprostredne predchádzajúceho úètovného obdobia a zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
+</td>
 <td class="bmenu" width="9%" align="right">
 <img src='../obr/export.png' onclick='KompletMUJ2014doxml()' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie' >
 </td>
