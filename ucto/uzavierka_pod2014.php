@@ -872,6 +872,14 @@ $hlavicka=mysql_fetch_object($sql);
 
 //V pod 2014 POUZIVAME LEN STLPCE r01-r78,rk01-rk78,rn01-rn45 a rm01-rm45
 //dopyta, mám zvyšné ošetri
+$r01=$hlavicka->r01; if ( $hlavicka->r01 == 0 ) $r01='';
+$r02=$hlavicka->r02; if ( $hlavicka->r02 == 0 ) $r02='';
+$r03=$hlavicka->r03; if ( $hlavicka->r03 == 0 ) $r03='';
+
+$rk01=$hlavicka->rk01; if ( $hlavicka->rk01 == 0 ) $rk01='';
+$rk02=$hlavicka->rk02; if ( $hlavicka->rk02 == 0 ) $rk02='';
+$rk03=$hlavicka->rk03; if ( $hlavicka->rk03 == 0 ) $rk03='';
+
 $rn01=$hlavicka->rn01; if ( $hlavicka->rn01 == 0 ) $rn01='';
 $rn02=$hlavicka->rn02; if ( $hlavicka->rn02 == 0 ) $rn02='';
 $rn03=$hlavicka->rn03; if ( $hlavicka->rn03 == 0 ) $rn03='';

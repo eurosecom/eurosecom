@@ -1191,39 +1191,30 @@ $oznac = mysql_query("$sqtoz");
 
 //exit;
 
-//vypocitaj riadky strana 2
+//vypocitaj riadky 
 $vsldat="prcsuvahas";
 if( $tis > 0 ) { $vsldat="prcsuv1000ahas"; }
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rn21=rn22+rn23, ".
-"rn17=rn18+rn19+rn20, ".
-"rn14=rn15+rn16+rn17+rn21, ".
-"rn09=rn10+rn11+rn12+rn13, ".
-"rn04=rn05+rn06+rn07+rn08, ".
-"rn02=rn03+rn04+rn09, ".
-"rn01=rn02+rn14 ".
+
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
 //vypocitaj strana 3
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rn38=rn39+rn40+rn41+rn42, ".
-"rn26=rn27+rn28, ".
-"rn34=rn35+rn36+rn37+rn38+rn43+rn44+rn45 ".
+
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
 
 //vypocitaj vysledok  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rn33=rn01-rn26-rn29-rn30-rn31-rn32-rn34 ".
+
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
 //posledne sucty  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rn25=rn26+rn29+rn30+rn31+rn32+rn33, ".
-"rn24=rn25+rn34  ".
+
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -1361,37 +1352,29 @@ if( $cislo_rdk > 0 ) { $oznac = mysql_query("$sqtoz"); }
 $vsldat="prcsuvahas";
 if( $tis > 0 ) { $vsldat="prcsuv1000ahas"; }
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rn21=rn22+rn23, ".
-"rn17=rn18+rn19+rn20, ".
-"rn14=rn15+rn16+rn17+rn21, ".
-"rn09=rn10+rn11+rn12+rn13, ".
-"rn04=rn05+rn06+rn07+rn08, ".
-"rn02=rn03+rn04+rn09, ".
-"rn01=rn02+rn14 ".
+
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
 //vypocitaj strana 3
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rn38=rn39+rn40+rn41+rn42, ".
-"rn26=rn27+rn28, ".
-"rn34=rn35+rn36+rn37+rn38+rn43+rn44+rn45 ".
+
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
 
 //vypocitaj vysledok  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rn33=rn01-rn26-rn29-rn30-rn31-rn32-rn34 ".
+
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
 //posledne sucty  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rn25=rn26+rn29+rn30+rn31+rn32+rn33, ".
-"rn24=rn25+rn34  ".
+
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
+
 
   }
 }
