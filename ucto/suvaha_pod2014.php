@@ -1235,17 +1235,74 @@ $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
+//vypocitaj strana 5, 6
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+" rn66=rn67+rn68+rn69+rn70, ".
+" rn54=rn55+rn56+rn57, ".
+" rn53=rn54+rn58+rn59+rn60+rn61+rn62+rn63+rn64+rn65, ".
 
+" rk66=rk67+rk68+rk69+rk70, ".
+" rk54=rk55+rk56+rk57, ".
+" rk53=rk54+rk58+rk59+rk60+rk61+rk62+rk63+rk64+rk65, ".
+
+" r66=r67+r68+r69+r70, ".
+" r54=r55+r56+r57, ".
+" r53=r54+r58+r59+r60+r61+r62+r63+r64+r65 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+//vypocitaj strana 4
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+" rn42=rn43+rn44+rn44, ".
+" rn41=rn42+rn46+rn47+rn48+rn49+rn50+rn51+rn52, ".
+" rn34=rn35+rn36+rn37+rn38+rn39+rn40, ".
+" rn33=rn34+rn41+rn53+rn66+rn71, ".
+
+" rk42=rk43+rk44+rk44, ".
+" rk41=rk42+rk46+rk47+rk48+rk49+rk50+rk51+rk52, ".
+" rk34=rk35+rk36+rk37+rk38+rk39+rk40, ".
+" rk33=rk34+rk41+rk53+rk66+rk71, ".
+
+" r42=r43+r44+r44, ".
+" r41=r42+r46+r47+r48+r49+r50+r51+r52, ".
+" r34=r35+r36+r37+r38+r39+r40, ".
+" r33=r34+r41+r53+r66+r71 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+//vypocitaj strana 3,2
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+" rn21=rn22+rn23+rn24+rn25+rn26+rn27+rn28+rn29+rn30+rn31+rn32, ".
+" rn11=rn12+rn13+rn14+rn15+rn16+rn17+rn18+rn19+rn20, ".
+" rn03=rn04+rn05+rn06+rn07+rn08+rn09+rn10, ".
+" rn02=rn03+rn11+rn21, ".
+" rn01=rn02+rn33+rn74, ".
+
+" rk21=rk22+rk23+rk24+rk25+rk26+rk27+rk28+rk29+rk30+rk31+rk32, ".
+" rk11=rk12+rk13+rk14+rk15+rk16+rk17+rk18+rk19+rk20, ".
+" rk03=rk04+rk05+rk06+rk07+rk08+rk09+rk10, ".
+" rk02=rk03+rk11+rk21, ".
+" rk01=rk02+rk33+rk74, ".
+
+" r21=r22+r23+r24+r25+r26+r27+r28+r29+r30+r31+r32, ".
+" r11=r12+r13+r14+r15+r16+r17+r18+r19+r20, ".
+" r03=r04+r05+r06+r07+r08+r09+r10, ".
+" r02=r03+r11+r21, ".
+" r01=r02+r33+r74 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
 
 //vypocitaj vysledok  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-
+" r100=r01-r81-r85-r86-r87-r90-r93-r97-r101-r141 ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
 //posledne sucty znovu  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 
+" r80=r81+r85+r86+r87+r90+r93+r97+r109, ".
+" r79=r80+r101+r141 ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -1423,17 +1480,74 @@ $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
+//vypocitaj strana 5, 6
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+" rn66=rn67+rn68+rn69+rn70, ".
+" rn54=rn55+rn56+rn57, ".
+" rn53=rn54+rn58+rn59+rn60+rn61+rn62+rn63+rn64+rn65, ".
 
+" rk66=rk67+rk68+rk69+rk70, ".
+" rk54=rk55+rk56+rk57, ".
+" rk53=rk54+rk58+rk59+rk60+rk61+rk62+rk63+rk64+rk65, ".
+
+" r66=r67+r68+r69+r70, ".
+" r54=r55+r56+r57, ".
+" r53=r54+r58+r59+r60+r61+r62+r63+r64+r65 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+//vypocitaj strana 4
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+" rn42=rn43+rn44+rn44, ".
+" rn41=rn42+rn46+rn47+rn48+rn49+rn50+rn51+rn52, ".
+" rn34=rn35+rn36+rn37+rn38+rn39+rn40, ".
+" rn33=rn34+rn41+rn53+rn66+rn71, ".
+
+" rk42=rk43+rk44+rk44, ".
+" rk41=rk42+rk46+rk47+rk48+rk49+rk50+rk51+rk52, ".
+" rk34=rk35+rk36+rk37+rk38+rk39+rk40, ".
+" rk33=rk34+rk41+rk53+rk66+rk71, ".
+
+" r42=r43+r44+r44, ".
+" r41=r42+r46+r47+r48+r49+r50+r51+r52, ".
+" r34=r35+r36+r37+r38+r39+r40, ".
+" r33=r34+r41+r53+r66+r71 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+//vypocitaj strana 3,2
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+" rn21=rn22+rn23+rn24+rn25+rn26+rn27+rn28+rn29+rn30+rn31+rn32, ".
+" rn11=rn12+rn13+rn14+rn15+rn16+rn17+rn18+rn19+rn20, ".
+" rn03=rn04+rn05+rn06+rn07+rn08+rn09+rn10, ".
+" rn02=rn03+rn11+rn21, ".
+" rn01=rn02+rn33+rn74, ".
+
+" rk21=rk22+rk23+rk24+rk25+rk26+rk27+rk28+rk29+rk30+rk31+rk32, ".
+" rk11=rk12+rk13+rk14+rk15+rk16+rk17+rk18+rk19+rk20, ".
+" rk03=rk04+rk05+rk06+rk07+rk08+rk09+rk10, ".
+" rk02=rk03+rk11+rk21, ".
+" rk01=rk02+rk33+rk74, ".
+
+" r21=r22+r23+r24+r25+r26+r27+r28+r29+r30+r31+r32, ".
+" r11=r12+r13+r14+r15+r16+r17+r18+r19+r20, ".
+" r03=r04+r05+r06+r07+r08+r09+r10, ".
+" r02=r03+r11+r21, ".
+" r01=r02+r33+r74 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
 
 //vypocitaj vysledok  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-
+" r100=r01-r81-r85-r86-r87-r90-r93-r97-r101-r141 ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
 //posledne sucty znovu  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 
+" r80=r81+r85+r86+r87+r90+r93+r97+r109, ".
+" r79=r80+r101+r141 ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
