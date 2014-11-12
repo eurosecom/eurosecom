@@ -1050,29 +1050,23 @@ $dsql = mysql_query("$dsqlt");
 $vsldat="prcvykziss";
 if( $tis > 0 ) { $vsldat="prcvyk1000ziss"; }
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"r01=r02+r03+r04+r05+r06+r07, ".
-"r08=r09+r10+r11+r12+r13+r14+r15+r16+r17, ".
-"r18=r01-r08, ".
-"r19=r02-r09+r03+r04+r05-r10-r11, ".
-"r20=r21+r22+r23+r24+r25+r26, ".
-"r27=r28+r29+r30+r31+r32+r33, ".
-"r34=r20-r27, ".
-"r35=r18+r34, ".
-"r38=r35-r36-r37 ".
+"r57=r58+r59, ".
+"r49=r50+r51, ".
+"r45=r46+r47+r48+r49+r52+r53+r54, ".
+"r39=r40+r51, ".
+"r29=r30+r31+r35+r39+r42+r43+r44, ".
+"r21=r22+r23, ".
+"r15=r16+r17+r18+r19, ".
+"r10=r11+r12+r13+r14+r15+r20+r21+r24+r25+r26, ".
+"r02=r03+r04+r05+r06+r07+r08+r09 ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rpc01=rpc02+rpc03+rpc04+rpc05+rpc06+rpc07, ".
-"rpc08=rpc09+rpc10+rpc11+rpc12+rpc13+rpc14+rpc15+rpc16+rpc17, ".
-"rpc18=rpc01-rpc08, ".
-"rpc19=rpc02-rpc09+rpc03+rpc04+rpc05-rpc10-rpc11, ".
-"rpc20=rpc21+rpc22+rpc23+rpc24+rpc25+rpc26, ".
-"rpc27=rpc28+rpc29+rpc30+rpc31+rpc32+rpc33, ".
-"rpc34=rpc20-rpc27, ".
-"rpc35=rpc18+rpc34, ".
-"rpc38=rpc35-rpc36-rpc37 ".
+"r27=r02+r10, ".
+"r28=r03+r04+r045+r06+r07-r11-r12-r13-r14, ".
+"r55=r29-r45 ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
@@ -1081,22 +1075,8 @@ $oznac = mysql_query("$sqtoz");
 $vsldat="prcvykziss";
 if( $tis > 0 ) { $vsldat="prcvyk1000ziss"; }
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rsp01=r01+rpc01,rsp02=r02+rpc02,rsp03=r03+rpc03,rsp04=r04+rpc04,rsp05=r05+rpc05,".
-"rsp06=r06+rpc06,rsp07=r07+rpc07,rsp08=r08+rpc08,rsp09=r09+rpc09,rsp10=r10+rpc10,".
-"rsp11=r11+rpc11,rsp12=r12+rpc12,rsp13=r13+rpc13,rsp14=r14+rpc14,rsp15=r15+rpc15,".
-"rsp16=r16+rpc16,rsp17=r17+rpc17,rsp18=r18+rpc18,rsp19=r19+rpc19,rsp20=r20+rpc20,".
-"rsp21=r21+rpc21,rsp22=r22+rpc22,rsp23=r23+rpc23,rsp24=r24+rpc24,rsp25=r25+rpc25,".
-"rsp26=r26+rpc26,rsp27=r27+rpc27,rsp28=r28+rpc28,rsp29=r29+rpc29,rsp30=r30+rpc30,".
-"rsp31=r31+rpc31,rsp32=r32+rpc32,rsp33=r33+rpc33,rsp34=r34+rpc34,rsp35=r35+rpc35,".
-"rsp36=r36+rpc36,rsp37=r37+rpc37,rsp38=r38+rpc38,rsp39=r39+rpc39,rsp40=r40+rpc40,".
-"rsp41=r41+rpc41,rsp42=r42+rpc42,rsp43=r43+rpc43,rsp44=r44+rpc44,rsp45=r45+rpc45,".
-"rsp46=r46+rpc46,rsp47=r47+rpc47,rsp48=r48+rpc48,rsp49=r49+rpc49,rsp50=r50+rpc50,".
-"rsp51=r51+rpc51,rsp52=r52+rpc52,rsp53=r53+rpc53,rsp54=r54+rpc54,rsp55=r55+rpc55,".
-"rsp56=r56+rpc56,rsp57=r57+rpc57,rsp58=r58+rpc58,rsp59=r59+rpc59,rsp60=r60+rpc60,".
-"rsp61=r61+rpc61,rsp62=r62+rpc62,rsp63=r63+rpc63,rsp64=r64+rpc64,rsp65=r65+rpc65,".
-"rsp66=r66+rpc66,rsp67=r67+rpc67,rsp68=r68+rpc68,rsp69=r69+rpc69,rsp70=r70+rpc70,".
-"rsp71=r71+rpc71,rsp72=r72+rpc72,rsp73=r73+rpc73,rsp74=r74+rpc74,rsp75=r75+rpc75,".
-"rsp76=r76+rpc76,rsp77=r77+rpc77,rsp78=r78+rpc78,rsp994=r994+rpc994,rsp995=r995+rpc995".
+"r56=r27+r55, ".
+"r61=r56-r57-r60 ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
@@ -1167,40 +1147,33 @@ if( $cislo_rdk > 0 ) { $oznac = mysql_query("$sqtoz"); }
 $vsldat="prcvykziss";
 if( $tis > 0 ) { $vsldat="prcvyk1000ziss"; }
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"r01=r02+r03+r04+r05+r06+r07, ".
-"r08=r09+r10+r11+r12+r13+r14+r15+r16+r17, ".
-"r18=r01-r08, ".
-"r19=r02-r09+r03+r04+r05-r10-r11, ".
-"r20=r21+r22+r23+r24+r25+r26, ".
-"r27=r28+r29+r30+r31+r32+r33, ".
-"r34=r20-r27, ".
-"r35=r18+r34, ".
-"r38=r35-r36-r37 ".
+"r57=r58+r59, ".
+"r49=r50+r51, ".
+"r45=r46+r47+r48+r49+r52+r53+r54, ".
+"r39=r40+r51, ".
+"r29=r30+r31+r35+r39+r42+r43+r44, ".
+"r21=r22+r23, ".
+"r15=r16+r17+r18+r19, ".
+"r10=r11+r12+r13+r14+r15+r20+r21+r24+r25+r26, ".
+"r02=r03+r04+r05+r06+r07+r08+r09 ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+"r27=r02+r10, ".
+"r28=r03+r04+r045+r06+r07-r11-r12-r13-r14, ".
+"r55=r29-r45 ".
+" WHERE prx = 1 ";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
 
-//vypocitaj znovu spolu
+//vypocitaj spolu
 $vsldat="prcvykziss";
 if( $tis > 0 ) { $vsldat="prcvyk1000ziss"; }
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rsp01=r01+rpc01,rsp02=r02+rpc02,rsp03=r03+rpc03,rsp04=r04+rpc04,rsp05=r05+rpc05,".
-"rsp06=r06+rpc06,rsp07=r07+rpc07,rsp08=r08+rpc08,rsp09=r09+rpc09,rsp10=r10+rpc10,".
-"rsp11=r11+rpc11,rsp12=r12+rpc12,rsp13=r13+rpc13,rsp14=r14+rpc14,rsp15=r15+rpc15,".
-"rsp16=r16+rpc16,rsp17=r17+rpc17,rsp18=r18+rpc18,rsp19=r19+rpc19,rsp20=r20+rpc20,".
-"rsp21=r21+rpc21,rsp22=r22+rpc22,rsp23=r23+rpc23,rsp24=r24+rpc24,rsp25=r25+rpc25,".
-"rsp26=r26+rpc26,rsp27=r27+rpc27,rsp28=r28+rpc28,rsp29=r29+rpc29,rsp30=r30+rpc30,".
-"rsp31=r31+rpc31,rsp32=r32+rpc32,rsp33=r33+rpc33,rsp34=r34+rpc34,rsp35=r35+rpc35,".
-"rsp36=r36+rpc36,rsp37=r37+rpc37,rsp38=r38+rpc38,rsp39=r39+rpc39,rsp40=r40+rpc40,".
-"rsp41=r41+rpc41,rsp42=r42+rpc42,rsp43=r43+rpc43,rsp44=r44+rpc44,rsp45=r45+rpc45,".
-"rsp46=r46+rpc46,rsp47=r47+rpc47,rsp48=r48+rpc48,rsp49=r49+rpc49,rsp50=r50+rpc50,".
-"rsp51=r51+rpc51,rsp52=r52+rpc52,rsp53=r53+rpc53,rsp54=r54+rpc54,rsp55=r55+rpc55,".
-"rsp56=r56+rpc56,rsp57=r57+rpc57,rsp58=r58+rpc58,rsp59=r59+rpc59,rsp60=r60+rpc60,".
-"rsp61=r61+rpc61,rsp62=r62+rpc62,rsp63=r63+rpc63,rsp64=r64+rpc64,rsp65=r65+rpc65,".
-"rsp66=r66+rpc66,rsp67=r67+rpc67,rsp68=r68+rpc68,rsp69=r69+rpc69,rsp70=r70+rpc70,".
-"rsp71=r71+rpc71,rsp72=r72+rpc72,rsp73=r73+rpc73,rsp74=r74+rpc74,rsp75=r75+rpc75,".
-"rsp76=r76+rpc76,rsp77=r77+rpc77,rsp78=r78+rpc78,rsp994=r994+rpc994,rsp995=r995+rpc995".
+"r56=r27+r55, ".
+"r61=r56-r57-r60 ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
