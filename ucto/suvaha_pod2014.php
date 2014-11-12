@@ -1191,19 +1191,50 @@ $oznac = mysql_query("$sqtoz");
 
 //exit;
 
-//vypocitaj riadky 
+//vypocitaj riadky strana 9
 $vsldat="prcsuvahas";
 if( $tis > 0 ) { $vsldat="prcsuv1000ahas"; }
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-
+" r141=r142+r143+r144+r145, ".
+" r136=r137+r138, ".
+" r123=r124+r125+r126, ".
+" r122=r123+r127+r135, ".
+" r118=r119+r120 ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
-//vypocitaj strana 3
+//vypocitaj strana 8
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+" r103=r104+r105+r106, ".
+" r102=r103+r107+r108+r109+r110+r111+r112+r113+r114+r115+r116+r117, ".
+" r101=r102+r118+r121+r122+r136+r139+r140, ".
+" r97=r98+r99, ".
+" r93=r94+r95+r96, ".
+" r90=r91+r92 ".
 
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
+
+//vypocitaj strana 7 PAS
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+" r87=r88+r89, ".
+" r81=r82+r83+r84, ".
+" r80=r81+r85+r86+r87+r90+r93+r97+r109, ".
+" r79=r80+r101+r141 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+//vypocitaj strana 7 AKT
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+" rn74=rn75+rn76+rn77+rn78, ".
+" rn71=rn72+rn73, ".
+" rk74=rk75+rk76+rk77+rk78, ".
+" rk71=rk72+rk73, ".
+" r74=r75+r76+r77+r78, ".
+" r71=r72+r73 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
+
 
 
 //vypocitaj vysledok  
@@ -1212,7 +1243,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
-//posledne sucty  
+//posledne sucty znovu  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 
 " WHERE prx = 1 ";
@@ -1348,19 +1379,50 @@ $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 //exit;
 if( $cislo_rdk > 0 ) { $oznac = mysql_query("$sqtoz"); }
 
-//vypocitaj riadky strana 2
+//vypocitaj riadky strana 9
 $vsldat="prcsuvahas";
 if( $tis > 0 ) { $vsldat="prcsuv1000ahas"; }
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-
+" r141=r142+r143+r144+r145, ".
+" r136=r137+r138, ".
+" r123=r124+r125+r126, ".
+" r122=r123+r127+r135, ".
+" r118=r119+r120 ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
-//vypocitaj strana 3
+//vypocitaj strana 8
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+" r103=r104+r105+r106, ".
+" r102=r103+r107+r108+r109+r110+r111+r112+r113+r114+r115+r116+r117, ".
+" r101=r102+r118+r121+r122+r136+r139+r140, ".
+" r97=r98+r99, ".
+" r93=r94+r95+r96, ".
+" r90=r91+r92 ".
 
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
+
+//vypocitaj strana 7 PAS
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+" r87=r88+r89, ".
+" r81=r82+r83+r84, ".
+" r80=r81+r85+r86+r87+r90+r93+r97+r109, ".
+" r79=r80+r101+r141 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+//vypocitaj strana 7 AKT
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+" rn74=rn75+rn76+rn77+rn78, ".
+" rn71=rn72+rn73, ".
+" rk74=rk75+rk76+rk77+rk78, ".
+" rk71=rk72+rk73, ".
+" r74=r75+r76+r77+r78, ".
+" r71=r72+r73 ".
+" WHERE prx = 1 ";
+$oznac = mysql_query("$sqtoz");
+
 
 
 //vypocitaj vysledok  
@@ -1369,7 +1431,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
-//posledne sucty  
+//posledne sucty znovu  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 
 " WHERE prx = 1 ";
