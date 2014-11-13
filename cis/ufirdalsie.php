@@ -98,7 +98,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD prfax VARCHAR(20) NOT NULL AFTE
 $vysledek = mysql_query("$sql");
 }
 //uzavierka k, datum od do bezne predchadzajuce obdobie
-$sql = "SELECT druz FROM F".$kli_vxcf."_ufirdalsie";
+$sql = "SELECT tpuj FROM F".$kli_vxcf."_ufirdalsie";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -113,6 +113,8 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD datk DATE NOT NULL AFTER kkx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD druz DECIMAL(2,0) DEFAULT 0 AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD tpuj VARCHAR(2) NOT NULL AFTER kkx";
 $vysledek = mysql_query("$sql");
 }
 //fOsoba plni povinnosti SP
@@ -373,6 +375,7 @@ if ( $copern == 203 )
     {
 $datk = strip_tags($_REQUEST['datk']);
 $druz = 1*$_REQUEST['druz'];
+$tpuj = $_REQUEST['tpuj'];
 $datbod = strip_tags($_REQUEST['datbod']);
 $datbdo = strip_tags($_REQUEST['datbdo']);
 $datmod = strip_tags($_REQUEST['datmod']);
@@ -384,7 +387,7 @@ $datmodsql = SqlDatum($datmod);
 $datmdosql = SqlDatum($datmdo);
 
 $upravttt = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
-" datk='$datksql', druz='$druz', datbod='$datbodsql', datbdo='$datbdosql', datmod='$datmodsql', datmdo='$datmdosql'  WHERE icox=0 "; 
+" datk='$datksql', druz='$druz', tpuj='$tpuj', datbod='$datbodsql', datbdo='$datbdosql', datmod='$datmodsql', datmdo='$datmdosql'  WHERE icox=0 "; 
 $upravene = mysql_query("$upravttt"); 
 $copern=202;
 if (!$upravene):
@@ -543,6 +546,7 @@ $datbdosk = SkDatum($riadok->datbdo);
 $datmodsk = SkDatum($riadok->datmod);
 $datmdosk = SkDatum($riadok->datmdo);
 $druz = $riadok->druz;
+$tpuj = $riadok->tpuj;
                      }
 
 if( $copern == 302 ) {
@@ -684,6 +688,7 @@ $dfax = $riadok->dfax;
     {
     document.formv1.datk.value = '<?php echo "$datksk";?>';
     document.formv1.druz.value = '<?php echo "$druz";?>';
+    document.formv1.tpuj.value = '<?php echo "$tpuj";?>';
     document.formv1.datbod.value = '<?php echo "$datbodsk";?>';
     document.formv1.datbdo.value = '<?php echo "$datbdosk";?>';
     document.formv1.datmod.value = '<?php echo "$datmodsk";?>';
@@ -948,6 +953,16 @@ if ( $copern == 202 )
 <select size="1" name="druz" id="druz" >
 <option value="0" >riadna</option>
 <option value="1" >mimoriadna</option>
+</select></td>
+</tr>
+<tr>
+<td class="bmenu" colspan="5">Druh úètovnej jednotky ( nastavenie v Uzávierke ):</td>
+<td class="bmenu" colspan="5">
+<select size="1" name="tpuj" id="tpuj" >
+<option value=" " >nenastavené</option>
+<option value="1" >POD malá</option>
+<option value="2" >POD velká</option>
+<option value="3" >MUJ mikro</option>
 </select></td>
 </tr>
 <tr>

@@ -216,9 +216,17 @@ $pdf->SetFont('arial','',12);
 //uctovna jednotka
 //dopyt novinka, nerozchodene
 $pdf->SetFont('arial','',8);
-$mala=""; $velka="";
-if ( $h_drp == 1 ) { $mala="x"; }
-if ( $h_drp == 2 ) { $velka="x"; }
+$mala="x"; $velka="";
+//nacitaj druh uj
+$druhuj=" ";
+$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $druhuj=$riadok->tpuj;
+  }
+if ( $druhuj == 1 ) { $mala="x"; $velka=""; }
+if ( $druhuj == 2 ) { $mala=""; $velka="x"; }
 $pdf->SetY(62);
 $pdf->Cell(97,3," ","$rmc1",0,"C");$pdf->Cell(3,4,"$mala","$rmc",0,"C");
 $pdf->SetY(71);

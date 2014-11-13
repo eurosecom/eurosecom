@@ -46,6 +46,17 @@ $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resiz
 $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
+//nacitaj druh uj
+$druhuj=" ";
+$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $druhuj=$riadok->tpuj;
+  }
+$ajmuj=1; $ajpod=1;
+if( $druhuj == 1 OR $druhuj == 2 ) { $ajmuj=0; }
+if( $druhuj == 3 ) { $ajpod=0; }
 
 ?> 
 
@@ -540,7 +551,8 @@ if( $copern == 1 AND $kli_vduj != 9 )
 </table>
 <br />
 
-
+<?php //POD v.2013                ?>
+<?php if( $kli_vrok <= 2014 )   { ?>
 
 
 <?php
@@ -690,8 +702,11 @@ window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=
 </FORM>
 </table>
 
+<?php                           } ?>
+<?php //koniec POD v.2013         ?>
+
 <?php //POD 2014                  ?>
-<?php if( $kli_vrok >= 2013 )   { ?>
+<?php if( $kli_vrok >= 2013 AND $ajpod == 1 )   { ?>
 
 <script type="text/javascript">
 
@@ -875,7 +890,7 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 
 
 <?php //MUJ 2014                  ?>
-<?php if( $kli_vrok >= 2013 )   { ?>
+<?php if( $kli_vrok >= 2013 AND $ajmuj == 1 )   { ?>
 
 <script type="text/javascript">
 
