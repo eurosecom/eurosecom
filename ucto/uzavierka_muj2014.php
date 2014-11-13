@@ -965,7 +965,7 @@ if( $riadok == 38 ) { $rm38=1*$hlavickps->hod; }
 if( $riadok == 39 ) { $rm39=1*$hlavickps->hod; }
 if( $riadok == 40 ) { $rm40=1*$hlavickps->hod; }
 if( $riadok == 41 ) { $rm41=1*$hlavickps->hod; }
-if( $riadok == 44 ) { $rm44=1*$hlavickps->hod; }
+if( $riadok == 42 ) { $rm42=1*$hlavickps->hod; }
 if( $riadok == 43 ) { $rm43=1*$hlavickps->hod; }
 if( $riadok == 44 ) { $rm44=1*$hlavickps->hod; }
 if( $riadok == 45 ) { $rm45=1*$hlavickps->hod; }
