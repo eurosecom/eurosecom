@@ -1064,8 +1064,8 @@ $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"r27=r02+r10, ".
-"r28=r03+r04+r045+r06+r07-r11-r12-r13-r14, ".
+"r27=r02-r10, ".
+"r28=r03+r04+r05+r06+r07-r11-r12-r13-r14, ".
 "r55=r29-r45 ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
@@ -1161,8 +1161,8 @@ $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"r27=r02+r10, ".
-"r28=r03+r04+r045+r06+r07-r11-r12-r13-r14, ".
+"r27=r02-r10, ".
+"r28=r03+r04+r05+r06+r07-r11-r12-r13-r14, ".
 "r55=r29-r45 ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
