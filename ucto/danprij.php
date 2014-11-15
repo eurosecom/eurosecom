@@ -1600,6 +1600,35 @@ window.open('../ucto/vmajzav<?php echo $jedrok; ?>.php?copern=10&drupoh=1&h_zos=
 
                 }
 
+function uzavfo2014cele()
+                {
+var h_zos = document.forms.formuzfo2014.h_zos.value;
+var h_sch = document.forms.formuzfo2014.h_sch.value;
+var h_drp = document.forms.formuzfo2014.h_drp.value;
+
+window.open('../ucto/vmajzav<?php echo $jedrok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&celeeura=1&uzav=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+
+function uzavfo2014()
+                {
+var h_zos = document.forms.formuzfo2014.h_zos.value;
+var h_sch = document.forms.formuzfo2014.h_sch.value;
+var h_drp = document.forms.formuzfo2014.h_drp.value;
+
+window.open('../ucto/vmajzav<?php echo $jedrok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&uzav=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+
+function uzavfo2014xml()
+                {
+var h_zos = document.forms.formuzfo2014.h_zos.value;
+var h_sch = document.forms.formuzfo2014.h_sch.value;
+
+window.open('../ucto/vmajzav<?php echo $jedrok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&suborxml=1&celeeura=1&uzav=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+
 </script>
 
 <table class="h2" width="100%" >
@@ -1670,6 +1699,38 @@ window.open('../ucto/vmajzav<?php echo $jedrok; ?>.php?copern=10&drupoh=1&h_zos=
 </FORM>
 </table>
 
+<?php if( $kli_vrok >= 2014 )   { ?>
+
+<table class="vstup" width="100%" >
+<FORM name="formuzfo2014" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="4%">
+<a href="#" onClick="uzavfo2014();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi vo formáte PDF v eurocentoch" ></a>
+
+<a href="#" onClick="uzavfo2014cele();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi vo formáte PDF v celých eurách" ></a>
+</td>
+<td class="bmenu" width="60%">Úètovná závierka Úè FO v.2014  
+<td class="bmenu" width="30%">
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
+Úèt.závierka <select size="1" name="h_drp" id="h_drp" >
+<option value="1" >Riadna</option>
+<option value="2" >Mimoriadna</option>
+<option value="3" >Priebežná</option>
+</select>
+ Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ <input type="hidden" name="h_sch" id="h_sch" value="" />
+</td>
+
+<td class="bmenu" width="6%" align="right">
+<img src='../obr/export.png' onclick='uzavfo2014xml();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie' >
+</tr>
+<tr>
+</FORM>
+</table>
+
+<?php                           } ?>
 
 <?php if( $kli_vrok >= 2012 )   { ?>
 
