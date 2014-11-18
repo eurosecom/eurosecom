@@ -768,6 +768,9 @@ var vyskawin = screen.height-175; //dopyt, chcem daù preË
 <?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
    document.formv1.h_ucd.value = '<?php echo "$h_ucd";?>';
 <?php                      } ?>
+   document.formv1.uloz.disabled = true;
+   document.forms.formv1.h_uce.focus();
+   document.forms.formv1.h_uce.select();
 <?php                                                         } ?>
   }
 
@@ -789,6 +792,13 @@ var vyskawin = screen.height-175; //dopyt, chcem daù preË
 
   function Povol_uloz()
   {
+    var okvstup=1;
+
+    if ( document.formv1.h_crs.value == '' ) okvstup=0;
+    if ( document.formv1.h_uce.value == '' ) okvstup=0;
+
+    if ( okvstup == 1 ) { document.formv1.uloz.disabled = false; Fx.style.display="none"; return (true); }
+       else { document.formv1.uloz.disabled = true; Fx.style.display=""; return (false) ; }
   }
   function ZmazPolozku(cpl)
   {
@@ -800,7 +810,75 @@ var vyskawin = screen.height-175; //dopyt, chcem daù preË
    var cislo_cpl = cpl;
    window.open('../ucto/vykazy_cis.php?copern=308&page=1&sysx=UCT&uprav_cpl=' + cislo_cpl + '&cislo_cpl=' + cislo_cpl + '&drupoh=<?php echo $drupoh; ?>&uprav=1', '_self');
   }
-  
+
+  function UceEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kÛd stlaËenej kl·vesy
+
+  if(k == 13 ){
+        document.forms.formv1.h_crs.focus();
+        document.forms.formv1.h_crs.select();
+              }
+
+                }
+
+ function Crs96Enter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kÛd stlaËenej kl·vesy
+
+  if(k == 13 ){
+    var okvstup=1;
+
+    if ( document.formv1.h_crs.value == '' ) okvstup=0;
+    if ( document.formv1.h_uce.value == '' ) okvstup=0;
+
+    if ( okvstup == 1 ) { document.formv1.uloz.disabled = false; Fx.style.display="none"; document.forms.formv1.submit(); return (true); }
+       else { document.formv1.uloz.disabled = true; Fx.style.display=""; return (false) ; }
+              }
+
+                }
+
+ function CrsEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kÛd stlaËenej kl·vesy
+
+  if(k == 13 ){
+    var okvstup=1;
+
+    if ( document.formv1.h_crs.value == '' ) okvstup=0;
+    if ( document.formv1.h_uce.value == '' ) okvstup=0;
+
+    if ( okvstup == 1 ) { document.formv1.uloz.disabled = false; Fx.style.display="none"; return (true); }
+       else { document.formv1.uloz.disabled = true; Fx.style.display=""; return (false) ; }
+              }
+                }
+
+  function Crs95Enter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kÛd stlaËenej kl·vesy
+
+  if(k == 13 ){
+        document.forms.formv1.h_ucd.focus();
+        document.forms.formv1.h_ucd.select();
+              }
+
+                }
+
+  function UcdEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kÛd stlaËenej kl·vesy
+
+  if(k == 13 ){
+    var okvstup=1;
+
+    if ( document.formv1.h_crs.value == '' ) okvstup=0;
+    if ( document.formv1.h_uce.value == '' ) okvstup=0;
+
+    if ( okvstup == 1 ) { document.formv1.uloz.disabled = false; Fx.style.display="none"; return (true); }
+       else { document.formv1.uloz.disabled = true; Fx.style.display=""; return (false) ; }
+              }
+                }
+ 
 </script>
 </HEAD>
 <BODY id="white" onload="ObnovUI(); VyberVstup();">
@@ -977,17 +1055,23 @@ $i = $i + 1;
 <tfoot>
 <tr>
  <th>
-  <input type="text" name="h_uce" id="h_uce" class="field"/>
+  <input type="text" name="h_uce" id="h_uce" class="field" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return UceEnter(event.which)"/>
  </th>
 
  <th colspan="<?php echo $varcolspan ?>">
-  <input type="text" name="h_crs" id="h_crs" class="field"/>
+  <input type="text" name="h_crs" id="h_crs" class="field" onkeyup="KontrolaCisla(this, Cele)" 
+<?php if ( $drupoh != 95 AND $drupoh != 195 ) { ?>
+onKeyDown="return CrsEnter(event.which)"/> 
+<?php                      } ?>
+<?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
+onKeyDown="return Crs95Enter(event.which)"/> 
+<?php                      } ?>
  </th>
 
 
 <?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
  <th >
-  <input type="text" name="h_ucd" id="h_ucd" class="field"/>
+  <input type="text" name="h_ucd" id="h_ucd" class="field" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return UcdEnter(event.which)"/>
  </th>
 <?php                      } ?>
  <th>
@@ -1000,9 +1084,10 @@ $i = $i + 1;
  <tr style="background-color: ;">
   <td colspan="3" style="">
    <span id="Cele" class="alert-error" style="display:none; ">Hodnota musÌ byù celÈ ËÌslo</span>
+   <span id="Fx" class="alert-error" style="display:none; ">MusÌte vyplniù vöetky poloûky vstupu</span>
   </td>
-  <td colspan="1" style=" text-align:right;">
-   <input type="submit" id="uloz" name="uloz" value="Uloûiù" >
+  <td colspan="1" style=" text-align:right;" onmouseover="return Povol_uloz();" >
+   <input type="submit" id="uloz" name="uloz" value="Uloûiù" onmouseover="return Povol_uloz();">
   </td>
  </tr>
  </tfoot>
@@ -1080,7 +1165,7 @@ if ( $drupoh == 196 )
 ?>
  </th>
  <td>
-  <input type="text" name="h_uce" id="h_uce" class="field" />
+  <input type="text" name="h_uce" id="h_uce" class="field" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return UceEnter(event.which)"/>
  </td>
 </tr>
 <tr>
@@ -1104,7 +1189,7 @@ if ( $drupoh == 196 )
 ?>
 </th>
  <td>
-  <input type="text" name="h_crs" id="h_crs" class="field"/>
+  <input type="text" name="h_crs" id="h_crs" class="field" onkeyup="KontrolaCisla(this, Cele)" onKeyDown="return Crs96Enter(event.which)"/>
  </td>
 </tr>
 </tbody>
@@ -1112,7 +1197,7 @@ if ( $drupoh == 196 )
 
 <tr>
  <td></td>
- <td style="height:12px; padding:4px 0;">
+ <td style="height:12px; padding:4px 0;" onmouseover="return Povol_uloz();" >
   <input type="submit" id="uloz" name="uloz" value="Uloûiù" >
  </td>
  </tr>
@@ -1121,6 +1206,13 @@ if ( $drupoh == 196 )
 
 
 </FORM>
+
+<span id="Cele" style="display:none; width:100%; font-weight:bold; background-color:red; color:black;">
+ Hodnota musÌ byù celÈ ËÌslo</span>
+<span id="Desc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
+ Hodnota musÌ byù desatinnÈ ËÌslo</span>
+<span id="Fx" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
+ MusÌte vyplniù vöetky poloûky vstupu</span>
 
 <?php
 }
@@ -1141,19 +1233,6 @@ if ( $drupoh == 93 OR $drupoh == 193 OR $drupoh == 94 OR $drupoh == 194 ) $varti
  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
   title="NaËÌtaù <?php echo $vartitle; ?> z predch·dzaj˙ceho ˙ËtovnÈho obdobia"
   class="btn-down-x26 toright">Predch. obdobie</a>
-
-
-
-
-<!--
-  <span id="Cele" style="display:none; width:100%; font-weight:bold; background-color:red; color:black;">
- Hodnota musÌ byù celÈ ËÌslo</span>
--->
-<span id="Desc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota musÌ byù desatinnÈ ËÌslo</span>
-<span id="Fx" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- MusÌte vyplniù vöetky poloûky vstupu</span>
-
 
 
 
