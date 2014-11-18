@@ -344,15 +344,15 @@ while (! feof($subor))
   $x_uce = $pole[0];
   $x_crs = $pole[1];
   $x_kon = $pole[2];
- 
+
 $c_uce=1*$x_uce;
 
 if( $c_uce > 0 )
 {
 $sqult = "INSERT INTO F$kli_vxcf"."_crs_pod2014 ( uce,crs )".
-" VALUES ( '$x_uce', '$x_crs' ); "; 
+" VALUES ( '$x_uce', '$x_crs' ); ";
 
-$ulozene = mysql_query("$sqult"); 
+$ulozene = mysql_query("$sqult");
 }
      }
                      }
@@ -372,15 +372,15 @@ while (! feof($subor))
   $x_uce = $pole[0];
   $x_crs = $pole[1];
   $x_kon = $pole[2];
- 
+
 $c_uce=1*$x_uce;
 
 if( $c_uce > 0 )
 {
 $sqult = "INSERT INTO F$kli_vxcf"."_crv_pod2014 ( uce,crs )".
-" VALUES ( '$x_uce', '$x_crs' ); "; 
+" VALUES ( '$x_uce', '$x_crs' ); ";
 
-$ulozene = mysql_query("$sqult"); 
+$ulozene = mysql_query("$sqult");
 }
      }
                      }
@@ -401,15 +401,15 @@ while (! feof($subor))
   $x_ucm = $pole[1];
   $x_ucd = $pole[2];
   $x_kon = $pole[3];
- 
+
 $c_dok=1*$x_dok;
 
 if( $c_dok > 0 )
 {
 $sqult = "INSERT INTO F$kli_vxcf"."_uctsyngensuv_pod2014 ( dok,ucm,ucd )".
-" VALUES ( '$x_dok', '$x_ucm', '$x_ucd' ); "; 
+" VALUES ( '$x_dok', '$x_ucm', '$x_ucd' ); ";
 
-$ulozene = mysql_query("$sqult"); 
+$ulozene = mysql_query("$sqult");
 }
      }
                      }
@@ -518,7 +518,7 @@ if ( $copern == 308 AND $uprav == 1 AND $drupoh >= 91  )
       {
 $cislo_cpl = 1*strip_tags($_REQUEST['cislo_cpl']);
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl = $cislo_cpl  ";
-if( $drupoh == 96 OR $drupoh == 196 ) 
+if( $drupoh == 96 OR $drupoh == 196 )
     {
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl >= 0 ";
     }
@@ -547,7 +547,7 @@ $h_crs = $riadok->hod;
        }
 //koniec uprava nacitanie
 
-if( $drupoh != 96 AND $drupoh != 196 AND $uprav == 1) 
+if( $drupoh != 96 AND $drupoh != 196 AND $uprav == 1)
     {
 $sqltx = "DELETE FROM F$kli_vxcf"."_$uctsys WHERE cpl = $cislo_cpl ";
 //echo $sqltx;
@@ -558,25 +558,94 @@ $sqlx = mysql_query("$sqltx");
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
  <link rel="stylesheet" href="../css/reset.css" type="text/css">
  <link rel="stylesheet" href="../css/tlaciva.css" type="text/css">
-<title>EuroSecom - MÚJ závierka nastavenie</title>
+<title>EuroSecom -
+<?php
+if ( $drupoh >= 91 AND $drupoh <= 96 ) echo "MÚJ";
+if ( $drupoh >= 191 AND $drupoh <= 196 ) echo "PÚ";
+?>
+&nbsp;závierka nastavenie</title>
 <style type="text/css">
-div.wrap-content {
+ul.legend-vykazy { /* legenda v zahlavi */
+  position: relative;
+  top: 7px;
+  line-height: 20px;
+  font-size: 12px;
+}
+ul.legend-vykazy span {
+  padding: 0px 3px;
+}
+.darkgreen {
+  background-color: #1ccba8;
+  color: #0c5445;
+}
+.purple {
+  background-color: #a39dcd;
+  color: #433b74;
+}
+.darkgray {
+  background-color: #b1bdbd;
+  color: #4a5758;
+}
+div.wrap-content { /* centrovanie tela strany */
   position: relative;
   width: 950px;
   margin: 15px auto;
-  padding-bottom: 20px;
 }
-div.content {
+div.content-navbar > a { /* prepinanie vykazov */
+  display: block;
+  float: left;
+  height: 12px;
+  font-size: 12px;
+  padding: 6px 10px 4px 10px;
+}
+div.content-navbar > a:hover, a.active, div.content {
+  background-color: #fff;
+}
+div.content { /* telo strany */
   overflow: auto;
   width: 92%;
   padding: 20px 3% 20px 5%;
-  background-color: #fff;
+}
+div.content-heading { /* zahlavie tela */
+  height: 30px;
+}
+div.content-heading > h2 {
+  height: 16px;
+  font-size: 16px;
+  font-weight: bold;
+
+}
+
+a.btn-down-x26:hover {
+  opacity: 1; /* dopyt, prefixy */
+}
+a.btn-down-x26 {
+  line-height: 26px;
+  padding: 0 9px 0 7px;
+  font-size: 11px; /* dopyt, skúsi shortland */
+  color: #fff;
+  background-color: #39f;
+  border-radius: 2px; /* dopyt, prefixy */
+  font-weight: bold;
+  display: block;
+  margin-left: 10px;
+  opacity: 0.8; /* dopyt, prefixy */
+}
+a.btn-down-x26:before {
+  display: inline-block; /* dopyt, zosúladi s ostatnımi :before, :after */
+  background-image: url(../obr/ikony/download6_white_x16.png);
+  background-repeat: no-repeat; /* dopyt, zosúladi s ostatnımi :before, :after */
+  content: ''; /* dopyt, zosúladi s ostatnımi :before, :after */
+  width: 16px;
+  height: 16px;
+  vertical-align: -4px;
+  margin-right: 3px;
 }
 
 table.content-body {
   overflow: auto;
-  width: 400px;
-  margin-top: 15px;
+  width: 360px;
+  background-color: red;
 }
 table.content-body tr {
   background-color: #eee;
@@ -588,23 +657,32 @@ table.content-body tr:hover {
 table.content-body thead th {
   background-color: #fff;
   font-size: 11px;
-  height: 14px;
+  height: 13px;
   border-bottom: 1px solid #eee;
+
 }
 table.content-body tbody td {
-  line-height: 12px;
-  padding: 3px 0 2px 0;
+  line-height: 20px;
   border-bottom: 1px solid #fff;
   border-right: 1px solid #fff;
   font-size: 12px;
   
 }
-table.content-body tfoot td {
-  height: 18px;
-  padding-top: 4px;
-  padding-bottom: 6px;
+table.content-body tfoot th {
+  height: 26px;
+  line-height: 26px;
+/*   padding-top: 4px;
+  padding-bottom: 6px; */
   background-color: #ddd;
 }
+table.content-body tfoot td {
+  height: 26px;
+  line-height: 26px;
+  background-color: #fff;
+
+}
+
+
 input[type=text].field {
   display: block;
   width: 50px;
@@ -614,7 +692,7 @@ input[type=text].field {
   padding: 3px 0 3px 3px !important;
   font-size: 13px;
   border: 1px solid #c2c2c2;
-
+  margin-top: 3px;
 }
 
 table.content-body-fixed {
@@ -643,7 +721,8 @@ a.btn-edit, a.btn-cancel {
   width: 16px;
   height: 16px;
   vertical-align: -4px;
-  opacity: 0.7; /* dopyt, prefixy */
+  opacity: 0.8; /* dopyt, prefixy */
+  display: ;
 }
 a.btn-edit {
   background-image: url(../obr/ikony/pencil3_blue_x16.png);
@@ -660,73 +739,22 @@ a.btn-edit:hover, a.btn-cancel:hover {
   opacity: 1; /* dopyt, prefixy */
 }
 
-a.btn-down {
-  display: block; /* dopyt, zosúladi s ostatnımi :before, :after */
-  float: right;
-  line-height: 26px;
-  padding: 0 9px 0 7px;
-  font-size: 11px;
-  color: #fff;
-  background-color: #39f;
-  border-radius: 2px; /* dopyt, prefixy */
-  opacity: 0.8; /* dopyt, prefixy */
-  margin-left: 10px;
-  font-weight: bold;
-
-}
-a.btn-down:before {
-  display: inline-block; /* dopyt, zosúladi s ostatnımi :before, :after */
-  background-image: url(../obr/ikony/download6_white_x16.png);
-  background-repeat: no-repeat; /* dopyt, zosúladi s ostatnımi :before, :after */
-  content: ''; /* dopyt, zosúladi s ostatnımi :before, :after */
-  width: 16px;
-  height: 16px;
-  vertical-align: -4px;
-  margin-right: 3px;
-}
-a.btn-down:hover {
-  opacity: 1; /* dopyt, prefixy */
+span.alert-error {
+  font-weight:bold;
+  background-color: ;
+  font-size: 13px;
+  vertical-align: middle;
+  color: red;
 }
 
 
-div.content-navbar > a {
-  display: block;
-  float: left;
-  height: 12px;
-  font-size: 12px;
-  padding: 6px 10px 4px 10px;
-}
-div.content-navbar > a:hover {
-  background-color: #fff;
-}
 
-a.active {
-  background-color: #fff;
-}
-.darkgreen {
-  background-color: #1ccba8;
-  color: #0c5445;
-}
-.purple {
-  background-color: #a39dcd;
-  color: #433b74;
-}
-.darkgray {
-  background-color: #b1bdbd;
-  color: #4a5758;
-}
 
-ul.legend-vykazy {
- line-height:20px; font-size: 12px; position: relative; top:7px;
-}
-ul.legend-vykazy span {
-padding:0px 3px;
-}
 </style>
 
 <script type="text/javascript">
 //sirka a vyska okna
-var vyskawin = screen.height-175;
+var vyskawin = screen.height-175; //dopyt, chcem da preè
 
   function VyberVstup()
   {
@@ -743,10 +771,25 @@ var vyskawin = screen.height-175;
 <?php                                                         } ?>
   }
 
+//Kontrola cisla
+  function KontrolaCisla(Vstup, Oznam)
+  {
+   if ( Vstup.value.search(/[^0-9]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
+   if ( Vstup.value.search(/[^0-9]/g) != -1) { Oznam.style.display=""; }
+   else { Oznam.style.display="none"; }
+  }
+//Kontrola cisla desatinneho
+  function KontrolaDcisla(Vstup, Oznam)
+  {
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Oznam.style.display=""; }
+   else { Oznam.style.display="none"; }
+  }
+
+
   function Povol_uloz()
   {
   }
-
   function ZmazPolozku(cpl)
   {
    var cislo_cpl = cpl;
@@ -763,51 +806,52 @@ var vyskawin = screen.height-175;
 <BODY id="white" onload="ObnovUI(); VyberVstup();">
 <div id="wrap-heading">
  <table id="heading">
-  <tr>
-   <td class="ilogin">EuroSecom</td>
-   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
-  </tr>
-  <tr>
-<?php if( $drupoh >=  91 AND $drupoh <=  96 ) { ?> 
-   <td class="header">Úètovná závierka <span class="subheader">mikro úètovnej jednotky</span> - nastavenie</td>
-<?php                                         } ?> 
-<?php if( $drupoh >= 191 AND $drupoh <= 196 ) { ?> 
-   <td class="header">Úètovná závierka <span class="subheader">Podnikate¾skej úètovnej jednotky</span> - nastavenie</td>
-<?php                                         } ?> 
+ <tr>
+  <td class="ilogin">EuroSecom</td>
+  <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
+ </tr>
+ <tr>
+  <td class="header">Úètovná závierka
+   <span class="subheader">
+<?php
+if ( $drupoh >= 91 AND $drupoh <= 96 ) echo "mikro úètovnej jednotky";
+if ( $drupoh >= 191 AND $drupoh <= 196 ) echo "podnikate¾ov";
+?>
+   </span> - nastavenie
+  </td>
   <td>
-    <ul class="toright legend-vykazy">
-     <li class="toleft">
-      <span class="darkgreen">&nbsp;</span>&nbsp;&nbsp;Súvaha
-     </li>
-     <li class="toleft" style="margin-left:20px;">
-      <span class="purple">&nbsp;</span>&nbsp;&nbsp;Vıkaz ziskov a strát
-     </li>
-     <li class="toleft" style="margin-left:20px;">
-      <span class="darkgray">&nbsp;</span>&nbsp;&nbsp;Súvaha + Vıkaz ziskov a strát
-     </li>
-    </ul>
-   </td>
-  </tr>
+   <ul class="toright legend-vykazy">
+    <li class="toleft">
+     <span class="darkgreen">&nbsp;</span>&nbsp;&nbsp;Súvaha
+    </li>
+    <li class="toleft" style="margin-left:20px;">
+     <span class="purple">&nbsp;</span>&nbsp;&nbsp;Vıkaz ziskov a strát
+    </li>
+    <li class="toleft" style="margin-left:20px;">
+     <span class="darkgray">&nbsp;</span>&nbsp;&nbsp;Súvaha + Vıkaz ziskov a strát
+    </li>
+   </ul>
+  </td>
+ </tr>
  </table>
 </div>
-
 
 <div class="wrap-content">
 <?php
 $clas1="darkgreen"; $clas2="darkgreen"; $clas3="purple"; $clas4="purple"; $clas5="darkgreen"; $clas6="darkgray";
-if ( $drupoh ==  91 ) $clas1="active"; if ( $drupoh ==  93 ) $clas2="active";
-if ( $drupoh ==  92 ) $clas3="active"; if ( $drupoh ==  94 ) $clas4="active";
-if ( $drupoh ==  95 ) $clas5="active"; if ( $drupoh ==  96 ) $clas6="active";
-if ( $drupoh == 191 ) $clas1="active"; if ( $drupoh == 193 ) $clas2="active";
-if ( $drupoh == 192 ) $clas3="active"; if ( $drupoh == 194 ) $clas4="active";
-if ( $drupoh == 195 ) $clas5="active"; if ( $drupoh == 196 ) $clas6="active";
+if ( $drupoh == 91 OR $drupoh == 191 ) $clas1="active";
+if ( $drupoh == 93 OR $drupoh == 193 ) $clas2="active";
+if ( $drupoh == 92 OR $drupoh == 192 ) $clas3="active";
+if ( $drupoh == 94 OR $drupoh == 194 ) $clas4="active";
+if ( $drupoh == 95 OR $drupoh == 195 ) $clas5="active";
+if ( $drupoh == 96 OR $drupoh == 196 ) $clas6="active";
 $source="../ucto/vykazy_cis.php?copern=308";
 ?>
 
-<div class="content-navbar toright"> <!-- dopyt, rozchodi -->
-<?php if( $drupoh >=  91 AND $drupoh <=  96 ) { ?> 
+<div class="content-navbar toright">
+<?php if ( $drupoh >= 91 AND $drupoh <= 96 ) { ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=91', '_self');"
-  title="Súvaha - generovanie" class="<?php echo $clas1; ?> darkgreen" >Generovanie</a>
+  title="Súvaha - generovanie" class="<?php echo $clas1; ?> darkgreen">Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=93', '_self');"
   title="Súvaha - predchádzajúce úètovné obdobie" class="<?php echo $clas2; ?> darkgreen">Predchádz. obdobie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=92', '_self');"
@@ -815,11 +859,11 @@ $source="../ucto/vykazy_cis.php?copern=308";
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=94', '_self');"
   title="VZaS - predchádzajúce úètovné obdobie" class="<?php echo $clas4; ?> purple">Predchádz. obdobie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=95', '_self');"
-  title="Súvaha - generovanie Aktív / Pasív" class="<?php echo $clas5; ?> darkgreen">Generovanie A / P</a>
+  title="Súvaha - syntetické generovanie Aktív a Pasív" class="<?php echo $clas5; ?> darkgreen">Generovanie A / P</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=96&uprav=1', '_self');"
   title="Súvaha a VZaS - zaokrúhlenie" class="<?php echo $clas6; ?> darkgray">Zaokrúhlenie</a>
-<?php                                         } ?> 
-<?php if( $drupoh >= 191 AND $drupoh <= 196 ) { ?> 
+<?php                                        } ?>
+<?php if ( $drupoh >= 191 AND $drupoh <= 196 ) { ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=191', '_self');"
   title="Súvaha - generovanie" class="<?php echo $clas1; ?> darkgreen" >Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=193', '_self');"
@@ -829,41 +873,27 @@ $source="../ucto/vykazy_cis.php?copern=308";
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=194', '_self');"
   title="VZaS - predchádzajúce úètovné obdobie" class="<?php echo $clas4; ?> purple">Predchádz. obdobie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=195', '_self');"
-  title="Súvaha - generovanie Aktív / Pasív" class="<?php echo $clas5; ?> darkgreen">Generovanie A / P</a>
+  title="Súvaha - syntetické generovanie Aktív a Pasív" class="<?php echo $clas5; ?> darkgreen">Generovanie A / P</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=196&uprav=1', '_self');"
   title="Súvaha a VZaS - zaokrúhlenie" class="<?php echo $clas6; ?> darkgray">Zaokrúhlenie</a>
-<?php                                         } ?>
+<?php                                          } ?>
 </div>
 
-<div class="content" style="">
-
- <h2 style="font-size:16px; font-weight: bold; height:16px; background-color:; ">
+<div class="content">
+ <div class="content-heading">
+  <h2>
 <?php
 if ( $drupoh == 91 OR $drupoh == 191 ) { echo "Súvaha - generovanie"; }
-if ( $drupoh == 93 OR $drupoh == 193 ) { echo "Súvaha - Predchádzajúce úètovné obdobie"; }
-if ( $drupoh == 92 OR $drupoh == 192 ) { echo "Vıkaz ziskov a strát - Generovanie"; }
-if ( $drupoh == 94 OR $drupoh == 194 ) { echo "Vıkaz ziskov a strát - Predchádzajúce úètovné obdobie"; }
-if ( $drupoh == 95 OR $drupoh == 195 ) { echo "Súvaha - Generovanie vıkazu Aktíva / Pasíva"; }
-if ( $drupoh == 96 OR $drupoh == 196 ) { echo "Súvaha a Vıkaz ziskov a strát - Nastavenie zaokrúhlenia"; }
+if ( $drupoh == 93 OR $drupoh == 193 ) { echo "Súvaha - predchádzajúce úètovné obdobie"; }
+if ( $drupoh == 92 OR $drupoh == 192 ) { echo "Vıkaz ziskov a strát - generovanie"; }
+if ( $drupoh == 94 OR $drupoh == 194 ) { echo "Vıkaz ziskov a strát - predchádzajúce úètovné obdobie"; }
+if ( $drupoh == 95 OR $drupoh == 195 ) { echo "Súvaha - syntetické generovanie Aktív a Pasív"; }
+if ( $drupoh == 96 OR $drupoh == 196 ) { echo "Súvaha a Vıkaz ziskov a strát - zaokrúhlenie"; }
 ?>
- </h2>
-
-
-
-<div style="float:right; margin-top: 0px; width: 350px; background-color:; overflow:auto;">
-  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
-   title="Naèíta èíselník z predchádzajúce úètovného obdobia" class="btn-down">Predch. obdobie</a> <!-- dopyt, doprava na lištu spravi tlaèidlo "naèíta" -->
-
-  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=155&page=1'
-   title="Naèíta štandartnı èíselník" class="btn-down" style=""  >Štandardnı èíselník</a>
-</div>
-
-
-
-
-
+  </h2>
+ </div>
 <?php
-////////////////////////////////////////////////////////////////uprava vykazu
+//uprava vykazu
 if ( $drupoh >= 91 AND $drupoh != 96 AND $drupoh != 196 )
 {
 
@@ -875,59 +905,45 @@ $sqltt = "SELECT cpl, dok AS uce, hod AS crs FROM F$kli_vxcf"."_$uctsys WHERE cp
                    }
 if ( $drupoh == 95 OR $drupoh == 195 ) {
 $sqltt = "SELECT cpl, dok AS uce, ucm AS crs, ucd FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl";
-                     }
+                                       }
 $sql = mysql_query("$sqltt");
 //echo $sqltt;
 
-// celkom poloziek
+//celkom poloziek
 $cpol = mysql_num_rows($sql);
 $i = 0;
+
+$varcolspan = 2; if ( $drupoh == 95 OR $drupoh == 195 ) $varcolspan = 1;
 ?>
-
 <FORM name="formv1" method="post" action="vykazy_cis.php?copern=315&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>">
-<table class="content-body" style="">
-
-<thead>
-<tr>
- <th style="width:25%; border:0; height:1px;"></th>
- <th style="width:25%; border:0; height:1px;"></th>
- <th style="width:25%; border:0; height:1px;"></th>
- <th style="width:25%; border:0; height:1px;"></th>
-</tr>
-<tr>
+ <table class="content-body toleft" style="">
+ <thead>
+ <tr>
+  <th style="width:25%; border:0; height:1px;"></th>
+  <th style="width:25%; border:0; height:1px;"></th>
+  <th style="width:25%; border:0; height:1px;"></th>
+  <th style="width:25%; border:0; height:1px;"></th>
+ </tr>
+ <tr>
 <?php
 if ( $gener == 1 )
 {
 ?>
 <?php if ( $drupoh != 95 AND $drupoh != 96 AND $drupoh != 195 AND $drupoh != 196 ) { ?>
- <th>Úèet</th>
- <th colspan="2">Èíslo riadku</th>
-<?php                                        } ?>
+  <th>Úèet</th><th colspan="2">Èíslo riadku</th>
+<?php                                                                              } ?>
 <?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
- <th>Úèet</th>
- <th>Aktíva</th>
- <th>Pasíva</th>
-<?php                      } ?>
-
-
+  <th>Úèet</th><th>Aktíva</th><th>Pasíva</th>
+<?php                                        } ?>
 <?php
 }
 ?>
-
 <?php if ( $minul == 1 ) { ?>
- <th>Riadok</th>
- <th colspan="2">Hodnota</th>
+  <th>Riadok</th><th colspan="2">Hodnota</th>
 <?php                    } ?>
- <th>
-  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
-   title="Naèíta z predchádzajúce úètovného obdobia" class="btn-down" style="display:none;">Predchádz. obdobie</a> <!-- dopyt, doprava na lištu spravi tlaèidlo "naèíta" -->
-
-
-  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=155&page=1'
-   title="Naèíta štandartnı èíselník" class="btn-down" style="display:none;">Štandardnı èíselník</a>
- </th>
-</tr>
-</thead>
+  <th>&nbsp;</th>
+ </tr>
+ </thead>
 <?php
    while ($i <= $cpol )
    {
@@ -937,15 +953,11 @@ if ( $gener == 1 )
   {
 $riadok=mysql_fetch_object($sql);
 ?>
-<tbody>
-<tr>
- <td style="text-align:center; color:#888;"><?php echo $riadok->uce;?></td>
-<?php
-$varcolspan = 2;
-if ( $drupoh == 95 OR $drupoh == 195 ) $varcolspan = 1;
-?>
- <td colspan="<?php echo $varcolspan ?>" style="text-align:right;">
-  <?php echo $riadok->crs;?>&nbsp;&nbsp;</td>
+ <tbody>
+ <tr>
+  <td style="text-align:center;"><?php echo $riadok->uce; ?></td>
+  <td colspan="<?php echo $varcolspan; ?>" style="text-align:right;">
+  <?php echo $riadok->crs; ?>&nbsp;&nbsp;</td>
 
 <?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
  <td style="text-align:right;"><?php echo $riadok->ucd;?>&nbsp;&nbsp;</td>
@@ -964,31 +976,37 @@ $i = $i + 1;
 ?>
 <tfoot>
 <tr>
- <td style="">
+ <th>
   <input type="text" name="h_uce" id="h_uce" class="field"/>
- </td>
- <td colspan="<?php echo $varcolspan ?>">
+ </th>
+
+ <th colspan="<?php echo $varcolspan ?>">
   <input type="text" name="h_crs" id="h_crs" class="field"/>
- </td>
+ </th>
 
 
 <?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
- <td>
+ <th >
   <input type="text" name="h_ucd" id="h_ucd" class="field"/>
- </td>
+ </th>
 <?php                      } ?>
- <td>&nbsp;s</td><td>&nbsp;s</td>
+ <th>
+
+ </th>
 </tr>
 
 
 
-<tr>
- <td colspan="4" style="background-color:#fff;">
-  <input type="submit" id="uloz" name="uloz" value="Uloi" >
- </td>
-</tr>
-</tfoot>
-</table>
+ <tr style="background-color: ;">
+  <td colspan="3" style="">
+   <span id="Cele" class="alert-error" style="display:none; ">Hodnota musí by celé èíslo</span>
+  </td>
+  <td colspan="1" style=" text-align:right;">
+   <input type="submit" id="uloz" name="uloz" value="Uloi" >
+  </td>
+ </tr>
+ </tfoot>
+ </table>
 </FORM>
 
 
@@ -998,18 +1016,17 @@ $i = $i + 1;
 
 <?php
 }
-////////////////////////////////////////////////////////////////koniec uprava vykazu
+//koniec uprava vykazu
 ?>
 
 
 <?php
-////////////////////////////////////////////////////////////////uprava vykazu drupoh 96,196
+//uprava vykazu drupoh 96,196
 if ( $drupoh == 96 OR $drupoh == 196 )
 {
-
 ?>
 <FORM name="formv1" method="post" action="vykazy_cis.php?copern=315&uprav=0&drupoh=<?php echo $drupoh;?>">
-<table class="content-body-fixed" style="">
+<table class="content-body-fixed toleft" style="">
 <thead>
 <tr>
  <th style="width:65%;"></th>
@@ -1034,7 +1051,7 @@ if ( $drupoh == 96 OR $drupoh == 196 )
 </tr>
 </thead>
 
-<tbody style="display:none;">
+<tbody style="">
 <tr>
  <td> </td> 
  <td style="text-align:right;"> </td>
@@ -1057,7 +1074,7 @@ if ( $drupoh == 96 )
 if ( $drupoh == 196 )
 {
 ?>
- <th>Súvaha <img src='../obr/info.png' width=12 height=12 border=0 title="Èíslo riadku aktív v Súvahe kam má program zúètova rozdiel HV po zaokrúhlení Súvahy, napr. è. 35">
+ <th>Súvaha <img src='../obr/info.png' width=12 height=12 border=0 title="Èíslo riadku aktív v Súvahe kam má program zúètova rozdiel HV po zaokrúhlení Súvahy, napr. è. 35"> <!-- dopyt, pozor iné èíslo riadku v title img -->
 <?php
 }
 ?>
@@ -1098,39 +1115,53 @@ if ( $drupoh == 196 )
  <td style="height:12px; padding:4px 0;">
   <input type="submit" id="uloz" name="uloz" value="Uloi" >
  </td>
-</tr>
-</tfoot>
-</table>
+ </tr>
+ </tfoot>
+ </table>
 
 
 </FORM>
 
 <?php
 }
-////////////////////////////////////////////////////////////////koniec uprava vykazu drupoh 96,196
+//koniec uprava vykazu drupoh 96,196
 ?>
 
 
 
 
+<?php
+$vartitle = "èíselník";
+if ( $drupoh == 93 OR $drupoh == 193 OR $drupoh == 94 OR $drupoh == 194 ) $vartitle = "hodnoty";
+?>
+<?php if ( $drupoh != 93 AND $drupoh != 193 AND $drupoh != 94 AND $drupoh != 194 ) { ?> <!-- dopyt, ošetri, aby neukazoval v roku 2013 a staršie -->
+ <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=155&page=1'
+  title="Naèíta štandardnı èíselník" class="btn-down-x26 toright">Štandardnı</a> <!-- dopyt, preveri, èi nieèo robí -->
+<?php                                                                              } ?>
+ <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
+  title="Naèíta <?php echo $vartitle; ?> z predchádzajúceho úètovného obdobia"
+  class="btn-down-x26 toright">Predch. obdobie</a>
+
+
+
+
+<!--
+  <span id="Cele" style="display:none; width:100%; font-weight:bold; background-color:red; color:black;">
+ Hodnota musí by celé èíslo</span>
+-->
+<span id="Desc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
+ Hodnota musí by desatinné èíslo</span>
+<span id="Fx" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
+ Musíte vyplni všetky poloky vstupu</span>
 
 
 
 
 
+</div> <!-- koniec .content -->
 
 
-
-
-
-
-
-
-
- </div> <!-- koniec .content -->
-
-
-</div> <!-- koniec  .wrap-content -->
+</div> <!-- koniec .wrap-content -->
 
 
 <?php
