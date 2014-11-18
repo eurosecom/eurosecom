@@ -193,26 +193,7 @@ $h_ycf=0;
 if ( $fir_allx11 > 0 ) $h_ycf=1*$fir_allx11;
 
 $databaza="";
-if ( $kli_vrok > 2010 )
-{
-if ( File_Exists("../pswd/oddelena2010db2011.php") ) { $databaza=$mysqldb2010."."; }
-}
-if ( $kli_vrok > 2011 )
-{
-if ( File_Exists("../pswd/oddelena2011db2012.php") ) { $databaza=$mysqldb2011."."; }
-}
-if ( $kli_vrok > 2012 )
-{
-if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2012."."; }
-}
-if ( $kli_vrok > 2013 )
-{
-if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; }
-}
-if ( $kli_vrok > 2014 )
-{
-if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; }
-}
+$dtbzx = include("../cis/oddel_dtbz1.php");
 
 
 $dsqlt = "TRUNCATE F$kli_vxcf"."_".$uctsys." ";
@@ -249,6 +230,8 @@ $vysledok = mysql_query("$sql");
 
 $sql = "INSERT INTO F".$kli_vxcf."_uctparzaok_muj2014 (uce, crs) VALUE ('15', '17') ";
 $ulozene = mysql_query("$sql");
+
+$uprav=1;
                      }
 
 if ( $drupoh == 91 ) {
@@ -335,6 +318,102 @@ $ulozene = mysql_query("$sqult");
 }
      }
                      }
+
+if ( $drupoh == 196 ) {
+$sql = "DELETE FROM F$kli_vxcf"."_uctparzaok_pod2014 ";
+$vysledok = mysql_query("$sql");
+
+$sql = "INSERT INTO F".$kli_vxcf."_uctparzaok_pod2014 (uce, crs) VALUE ('35', '26') ";
+$ulozene = mysql_query("$sql");
+
+$uprav=1;
+                     }
+
+if ( $drupoh == 191 ) {
+
+$sql = "DELETE FROM F$kli_vxcf"."_crs_pod2014 ";
+$vysledok = mysql_query("$sql");
+
+$subor = fopen("../import/crs_pod$kli_vrok.csv", "r");
+while (! feof($subor))
+     {
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+
+  $x_uce = $pole[0];
+  $x_crs = $pole[1];
+  $x_kon = $pole[2];
+ 
+$c_uce=1*$x_uce;
+
+if( $c_uce > 0 )
+{
+$sqult = "INSERT INTO F$kli_vxcf"."_crs_pod2014 ( uce,crs )".
+" VALUES ( '$x_uce', '$x_crs' ); "; 
+
+$ulozene = mysql_query("$sqult"); 
+}
+     }
+                     }
+
+if ( $drupoh == 192 ) {
+
+$sql = "DELETE FROM F$kli_vxcf"."_crv_pod2014 ";
+$vysledok = mysql_query("$sql");
+
+$subor = fopen("../import/crv_pod$kli_vrok.csv", "r");
+while (! feof($subor))
+     {
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+
+  $x_uce = $pole[0];
+  $x_crs = $pole[1];
+  $x_kon = $pole[2];
+ 
+$c_uce=1*$x_uce;
+
+if( $c_uce > 0 )
+{
+$sqult = "INSERT INTO F$kli_vxcf"."_crv_pod2014 ( uce,crs )".
+" VALUES ( '$x_uce', '$x_crs' ); "; 
+
+$ulozene = mysql_query("$sqult"); 
+}
+     }
+                     }
+
+if ( $drupoh == 195 ) {
+
+$sql = "DELETE FROM F$kli_vxcf"."_uctsyngensuv_pod2014 ";
+$vysledok = mysql_query("$sql");
+
+$subor = fopen("../import/uctsyngensuv_pod$kli_vrok.csv", "r");
+while (! feof($subor))
+     {
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+
+  $x_dok = $pole[0];
+  $x_ucm = $pole[1];
+  $x_ucd = $pole[2];
+  $x_kon = $pole[3];
+ 
+$c_dok=1*$x_dok;
+
+if( $c_dok > 0 )
+{
+$sqult = "INSERT INTO F$kli_vxcf"."_uctsyngensuv_pod2014 ( dok,ucm,ucd )".
+" VALUES ( '$x_dok', '$x_ucm', '$x_ucd' ); "; 
+
+$ulozene = mysql_query("$sqult"); 
+}
+     }
+                     }
+
 $copern=308;
     }
 //koniec nacitania standartneho generovania
