@@ -418,6 +418,71 @@ $copern=308;
     }
 //koniec nacitania standartneho generovania
 
+//nacitanie standartneho generovania
+    if ( $copern == 1316 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete zmaza všetky poloky generovania ?") )
+         { window.close()  }
+else
+         { location.href='vykazy_cis.php?copern=1416&page=1&drupoh=<?php echo $drupoh; ?>'  }
+</script>
+<?php
+    }
+
+    if ( $copern == 1416 )
+    {
+
+
+if ( $drupoh == 91 )  {
+
+$sql = "DELETE FROM F$kli_vxcf"."_crs_muj2014 ";
+$vysledok = mysql_query("$sql");
+
+                      }
+
+if ( $drupoh == 92 )  {
+
+$sql = "DELETE FROM F$kli_vxcf"."_crv_muj2014 ";
+$vysledok = mysql_query("$sql");
+
+                      }
+
+if ( $drupoh == 95 )  {
+
+$sql = "DELETE FROM F$kli_vxcf"."_uctsyngensuv_muj2014 ";
+$vysledok = mysql_query("$sql");
+
+
+                      }
+
+
+if ( $drupoh == 191 ) {
+
+$sql = "DELETE FROM F$kli_vxcf"."_crs_pod2014 ";
+$vysledok = mysql_query("$sql");
+
+                      }
+
+if ( $drupoh == 192 ) {
+
+$sql = "DELETE FROM F$kli_vxcf"."_crv_pod2014 ";
+$vysledok = mysql_query("$sql");
+
+
+                      }
+
+if ( $drupoh == 195 ) {
+
+$sql = "DELETE FROM F$kli_vxcf"."_uctsyngensuv_pod2014 ";
+$vysledok = mysql_query("$sql");
+
+                      }
+
+$copern=308;
+    }
+//koniec vymaz vsetky
 
 //vymazanie 
 if ( $copern == 316 )
@@ -441,15 +506,15 @@ endif;
 //ulozenie noveho 
 if ( $copern == 315 AND $uprav != 1 AND $drupoh >= 91  )
     {
-$h_uce = strip_tags($_REQUEST['h_uce']);
-$h_crs = strip_tags($_REQUEST['h_crs']);
-$h_ucd = strip_tags($_REQUEST['h_ucd']);
+$h_uce = 1*$_REQUEST['h_uce'];
+$h_crs = 1*$_REQUEST['h_crs'];
+$h_ucd = 1*$_REQUEST['h_ucd'];
 
 if( $gener == 1 ) {
 if( $drupoh == 96 OR $drupoh == 196 )
      {
 $ulozttx = "DELETE FROM F$kli_vxcf"."_$uctsys ";
-$ulozenx = mysql_query("$ulozttx");
+if( $h_uce > 0 ) { $ulozenx = mysql_query("$ulozttx"); }
      } 
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); ";
 if( $drupoh == 95 OR $drupoh == 195 )
@@ -462,18 +527,9 @@ $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, hod ) VALUES ( '$h_uce', '$
                   }
 //echo $ulozttt;
 
-$ulozene = mysql_query("$ulozttt"); 
+if( $h_uce > 0 ) { $ulozene = mysql_query("$ulozttt"); } 
 $copern=308;
 $uprav=0;
-
-if (!$ulozene):
-?>
-<script type="text/javascript"> alert( "POLOKA NEBOLA SPRÁVNE ULOENÁ" ) </script>
-<?php
-endif;
-if ($ulozene):
-$uloz="OK";
-endif;
     }
 //koniec ulozenia 
 
@@ -483,9 +539,9 @@ if ( $copern == 315 AND $uprav == 1 AND $drupoh >= 81  )
 $cislo_cpl = 1*strip_tags($_REQUEST['cislo_cpl']);
 $uprav_cpl = 1*strip_tags($_REQUEST['uprav_cpl']);
 
-$h_uce = strip_tags($_REQUEST['h_uce']);
-$h_crs = strip_tags($_REQUEST['h_crs']);
-$h_ucd = strip_tags($_REQUEST['h_ucd']);
+$h_uce = 1*$_REQUEST['h_uce'];
+$h_crs = 1*$_REQUEST['h_crs'];
+$h_ucd = 1*$_REQUEST['h_ucd'];
 
 if( $gener == 1 ) {
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); ";
@@ -499,17 +555,9 @@ $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, hod ) VALUES ( '$h_uce', '$
                   }
 
 //echo $ulozttt;
-$ulozene = mysql_query("$ulozttt"); 
+if( $h_uce > 0 ) { $ulozene = mysql_query("$ulozttt"); } 
 $copern=308;
 $uprav=0;
-if (!$ulozene):
-?>
-<script type="text/javascript"> alert( "POLOKA NEBOLA SPRÁVNE ULOENÁ" ) </script>
-<?php
-endif;
-if ($ulozene):
-$uloz="OK";
-endif;
     }
 //koniec uprava 
 
@@ -835,6 +883,10 @@ div.alert-error {
    var cislo_cpl = cpl;
    window.open('../ucto/vykazy_cis.php?copern=308&page=1&sysx=UCT&uprav_cpl=' + cislo_cpl + '&cislo_cpl=' + cislo_cpl + '&drupoh=<?php echo $drupoh; ?>&uprav=1', '_self');
   }
+  function ZmazVsetky()
+  {
+   window.open('../ucto/vykazy_cis.php?copern=1316&page=1&sysx=UCT&drupoh=<?php echo $drupoh; ?>&uprav=0', '_self');
+  }
 
   function UceEnter(e)
                 {
@@ -872,6 +924,7 @@ div.alert-error {
 
     if ( document.formv1.h_crs.value == '' ) okvstup=0;
     if ( document.formv1.h_uce.value == '' ) okvstup=0;
+    if ( document.formv1.h_uce.value == '0' ) okvstup=0;
 
     if ( okvstup == 1 ) { document.formv1.uloz.disabled = false; Fx.style.display="none"; return (true); }
        else { document.formv1.uloz.disabled = true; Fx.style.display=""; return (false) ; }
@@ -898,6 +951,8 @@ div.alert-error {
 
     if ( document.formv1.h_crs.value == '' ) okvstup=0;
     if ( document.formv1.h_uce.value == '' ) okvstup=0;
+    if ( document.formv1.h_crs.value == '0' ) okvstup=0;
+    if ( document.formv1.h_uce.value == '0' ) okvstup=0;
 
     if ( okvstup == 1 ) { document.formv1.uloz.disabled = false; Fx.style.display="none"; return (true); }
        else { document.formv1.uloz.disabled = true; Fx.style.display=""; return (false) ; }
@@ -935,8 +990,10 @@ if ( $drupoh >= 191 AND $drupoh <= 196 ) echo "podnikate¾ov";
      <span class="darkgray">&nbsp;</span>&nbsp;&nbsp;Súvaha + Vıkaz ziskov a strát&nbsp;
     </li>
    </ul>
-    <img src="../obr/ikony/trash_blue_icon.png" onclick=";" title="Vymaza všetky poloky"
-     class="btn-form-tool"> <!-- dopyt, nie je funkèné + da alert pre vymazaním -->
+<?php if( $drupoh != 96 AND drupoh != 196 ) { ?>
+    <img src="../obr/ikony/trash_blue_icon.png" onclick="ZmazVsetky();" title="Vymaza všetky poloky"
+     class="btn-form-tool">
+<?php                                       } ?>
    </div>
   </td>
  </tr>
@@ -1218,9 +1275,11 @@ if ( $drupoh == 93 OR $drupoh == 193 OR $drupoh == 94 OR $drupoh == 194 ) $varti
  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=155&page=1'
   title="Naèíta štandardnı èíselník" class="btn-down-x26 toright">Štandardnı</a> <!-- dopyt, preveri, èi nieèo robí -->
 <?php                                                                              } ?>
+<?php if( $kli_vrok > 2013 ) { ?>
  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
   title="Naèíta <?php echo $vartitle; ?> z predchádzajúceho úètovného obdobia"
-  class="btn-down-x26 toright">Predch. obdobie</a> <!-- dopyt, majú zmysel pri zaokrúhlení?  -->
+  class="btn-down-x26 toright">Predch. obdobie</a> 
+<?php                        } ?>
 
 </div> <!-- koniec .content -->
 
