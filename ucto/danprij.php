@@ -610,19 +610,19 @@ window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=
 
 <?php $versuv="UVPOD1v09_1"; if( $kli_vrok > 2010 ) $versuv="UVPOD1v11 "; ?>
 
-<td class="bmenu" width="55%">Súvaha Úè POD 1 - 01 verzia <?php echo $versuv; ?>
+<td class="bmenu" width="56%">Súvaha Úè POD 1 - 01 verzia <?php echo $versuv; ?>
 <a href="#" onClick="SynGenSuv();">
 <img src='../obr/zoznam.png' width=15 height=15 border=0 title='Syntetické generovanie riadkov súvahy' ></a>
 </td>
-<td class="bmenu" width="28%">
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
 </td>
-<td class="bmenu" width="7%" align="right">
+<td class="bmenu" width="2%" align="right">
 <?php if( $kli_vrok < 2012 ) { ?><img src='../obr/import.png' onclick='ELsuvaha();' width=20 height=15 border=0 title='FDF a PDF súbory pre tlaè výkazu' ><?php } ?>
 <img src='../obr/export.png' onclick='XMLsuvaha();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie výkazu' >
-
+<td class="bmenu" width="2%" align="right">
 <a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=22&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
 </td>
@@ -685,16 +685,16 @@ window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=
 <a href="#" onClick="VYKZISEUR();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="55%">Výkaz ziskov a strát Úè POD 2 - 01 verzia UVPOD2v09_1</td>
-<td class="bmenu" width="28%">
+<td class="bmenu" width="56%">Výkaz ziskov a strát Úè POD 2 - 01 verzia UVPOD2v09_1</td>
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavený: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  Schválený: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
 </td>
-<td class="bmenu" width="7%" align="right">
+<td class="bmenu" width="2%" align="right">
 <?php if( $kli_vrok < 2012 ) { ?><img src='../obr/import.png' onclick='ELvykzis();' width=20 height=15 border=0 title='FDF a PDF súbory pre tlaè výkazu' ><?php } ?>
 <img src='../obr/export.png' onclick='XMLvykzis();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie výkazu' >
-
+<td class="bmenu" width="2%" align="right">
 <a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=21&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
 </td>
@@ -808,7 +808,6 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 </script>
 
 <table class="vstup" width="100%" >
-<FORM name="formsumuj" class="obyc" method="post" action="#" >
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="SuvahaPOD2014();">
@@ -818,19 +817,17 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 <a href="#" onClick="SuvahaPOD2014cele();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="64%">Súvaha Úè POD 1-01 v.2014</td>
-<td class="bmenu" width="28%"></td>
+<td class="bmenu" width="56%">Súvaha Úè POD 1-01 v.2014</td>
+<td class="bmenu" width="36%"></td>
 <td class="bmenu" width="2%"></td>
 <td class="bmenu" width="2%">
 <a href="#" onClick="GenSuvPod();">
 <img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie generovania, bezprostredne predchádzajúceho úètovného obdobia a zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
 </td>
 </tr>
-</FORM>
 </table>
 
 <table class="vstup" width="100%" >
-<FORM name="formvzmuj" class="obyc" method="post" action="#" >
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="VysledovkaPOD2014();">
@@ -840,15 +837,14 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 <a href="#" onClick="VysledovkaPOD2014cele();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="64%">Výkaz ziskov a strát Úè POD 2-01 v.2014 </td>
-<td class="bmenu" width="28%"></td>
+<td class="bmenu" width="56%">Výkaz ziskov a strát Úè POD 2-01 v.2014 </td>
+<td class="bmenu" width="36%"></td>
 <td class="bmenu" width="2%"></td>
 <td class="bmenu" width="2%">
 <a href="#" onClick="GenVysPod();">
 <img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie generovania, bezprostredne predchádzajúceho úètovného obdobia a zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
 </td>
 </tr>
-</FORM>
 </table>
 
 <table class="vstup" width="100%" >
@@ -862,14 +858,14 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 <a href="#" onClick="KompletPOD2014cele();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="55%">Úètovná závierka Úè POD v.2014  
+<td class="bmenu" width="56%">Úètovná závierka Úè POD v.2014  
  <select size="1" name="h_drp" id="h_drp" >
 <option value="1" >Riadna</option>
 <option value="2" >Mimoriadna</option>
 <option value="3" >Priebežná</option>
 </select>
 </td>
-<td class="bmenu" width="35%">
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
@@ -989,10 +985,37 @@ window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=96', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
+
+//poznamky MUJ 2014
+
+function TlacPoznamkyMUJ2014()
+                {
+var h_zos = document.forms.formpozmuj14.h_zos.value;
+var h_sch = document.forms.formpozmuj14.h_sch.value;
+
+window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function NacitajPoznamkyMUJ2014()
+                {
+
+window.open('../ucto/poznamky_muj2014tlac.php?copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function UpravPoznamkyMUJ2014()
+                {
+
+window.open('../ucto/poznamky_muj2014.php?copern=1&drupoh=1&page=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+
 </script>
 
 <table class="vstup" width="100%" >
-<FORM name="formsumuj" class="obyc" method="post" action="#" >
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="SuvahaMUJ2014();">
@@ -1002,20 +1025,18 @@ window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 <a href="#" onClick="SuvahaMUJ2014cele();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="64%">Súvaha Úè MUJ 1-01 
+<td class="bmenu" width="56%">Súvaha Úè MUJ 1-01 
 </td>
-<td class="bmenu" width="28%"></td>
+<td class="bmenu" width="36%"></td>
 <td class="bmenu" width="2%"></td>
 <td class="bmenu" width="2%">
 <a href="#" onClick="GenSuvMuj();">
 <img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie generovania, bezprostredne predchádzajúceho úètovného obdobia a zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
 </td>
 </tr>
-</FORM>
 </table>
 
 <table class="vstup" width="100%" >
-<FORM name="formvzmuj" class="obyc" method="post" action="#" >
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="VysledovkaMUJ2014();">
@@ -1025,15 +1046,14 @@ window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 <a href="#" onClick="VysledovkaMUJ2014cele();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="64%">Výkaz ziskov a strát Úè MUJ 2-01 </td>
-<td class="bmenu" width="28%"></td>
+<td class="bmenu" width="56%">Výkaz ziskov a strát Úè MUJ 2-01 </td>
+<td class="bmenu" width="36%"></td>
 <td class="bmenu" width="2%"></td>
 <td class="bmenu" width="2%">
 <a href="#" onClick="GenVysMuj();">
 <img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie generovania, bezprostredne predchádzajúceho úètovného obdobia a zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
 </td>
 </tr>
-</FORM>
 </table>
 
 <table class="vstup" width="100%" >
@@ -1047,29 +1067,58 @@ window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 <a href="#" onClick="KompletMUJ2014cele();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="55%">Úètovná závierka Úè MUJ 
+<td class="bmenu" width="56%">Úètovná závierka Úè MUJ 
  <select size="1" name="h_drp" id="h_drp" >
 <option value="1" >Riadna</option>
 <option value="2" >Mimoriadna</option>
 <option value="3" >Priebežná</option>
 </select>
 </td>
-<td class="bmenu" width="35%">
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
 </td>
 <td class="bmenu" width="2%">
-<td class="bmenu" width="2%">
 <a href="#" onClick="GenSuvMuj();">
 <img src='../obr/naradie.png' width=20 height=15 border=0 title='Nastavenie generovania, bezprostredne predchádzajúceho úètovného obdobia a zaokrúhlenia Súvahy a Výkazu ziskov a strát' ></a>
 </td>
-<td class="bmenu" width="9%" align="right">
+<td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='KompletMUJ2014doxml()' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie' >
 </td>
 </tr>
 </FORM>
 </table>
+
+<table class="vstup" width="100%" >
+<FORM name="formpozmuj14" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacPoznamkyMUJ2014();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
+</td>
+<td class="bmenu" width="2%"></td>
+<td class="bmenu" width="56%">Poznámky Úè MUJ 3 - 04 k DPPO verzia 2014 
+</td>
+<td class="bmenu" width="36%">
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
+ Zostavené: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválené: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+
+<a href="#" onClick="NacitajPoznamkyMUJ2014();">
+<img src='../obr/vlozit.png' width=20 height=15 border=0 title='Naèíta údaje do poznámok' ></a>
+
+</td>
+
+<td class="bmenu" width="2%" align="right"></td>
+<td class="bmenu" width="2%" align="right">
+<a href="#" onClick="UpravPoznamkyMUJ2014();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty v poznámkach' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+
 
 <?php                           } ?>
 <?php //koniec MUJ 2014           ?>
@@ -1112,19 +1161,19 @@ window.open('../ucto/oprcis.php?copern=308&drupoh=94&page=1&sysx=UCT', '_blank',
 <a href="#" onClick="CASHEUR();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="55%">Preh¾ad o peòažných tokoch - priama metóda verzia 2010
+<td class="bmenu" width="56%">Preh¾ad o peòažných tokoch - priama metóda verzia 2010
 
 <a href="#" onClick="CASHGEN();">
 <img src='../obr/zoznam.png' width=15 height=15 border=0 title='Generovanie CASH FLOW' ></a>
 
 </td>
-<td class="bmenu" width="28%">
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavený: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  Schválený: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 </td>
-<td class="bmenu" width="7%" align="right">
-
+<td class="bmenu" width="2%" align="right"></td>
+<td class="bmenu" width="2%" align="right">
 <a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=23&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
 </td>
@@ -1171,7 +1220,7 @@ window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT', '_blank',
 <a href="#" onClick="CASHEUR2011();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="55%">Preh¾ad o peòažných tokoch - priama metóda verzia 2011
+<td class="bmenu" width="56%">Preh¾ad o peòažných tokoch - priama metóda verzia 2011
 
 <a href="#" onClick="CASHGEN2011();">
 <img src='../obr/zoznam.png' width=15 height=15 border=0 title='Generovanie CASH FLOW' ></a>
@@ -1193,13 +1242,13 @@ window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT', '_blank',
 <?php                     } ?>
 
 </td>
-<td class="bmenu" width="28%">
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavený: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  Schválený: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 </td>
-<td class="bmenu" width="7%" align="right">
-
+<td class="bmenu" width="2%" align="right"></td>
+<td class="bmenu" width="2%" align="right">
 <a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=24&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
 </td>
@@ -1216,7 +1265,9 @@ window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT', '_blank',
 <a href="#" onClick="window.open('../ucto/suvaha_no2011.php?copern=10&drupoh=1&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="90%">Súvaha Úè NUJ 1-01 príloha è.1 k opatreniu è. MF/25682/2007-74</td>
+<td class="bmenu" width="56%">Súvaha Úè NUJ 1-01 príloha è.1 k opatreniu è. MF/25682/2007-74</td>
+<td class="bmenu" width="36%">
+<td class="bmenu" width="2%">
 <td class="bmenu" width="2%">
 <a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=32&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
@@ -1230,7 +1281,9 @@ window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT', '_blank',
 <a href="#" onClick="window.open('../ucto/vykzis_no2011.php?copern=10&drupoh=1&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="90%">Výsledovka Úè NUJ 2-01 príloha è.2 k opatreniu è. MF/25682/2007-74</td>
+<td class="bmenu" width="56%">Výsledovka Úè NUJ 2-01 príloha è.2 k opatreniu è. MF/25682/2007-74</td>
+<td class="bmenu" width="36%">
+<td class="bmenu" width="2%">
 <td class="bmenu" width="2%">
 <a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=31&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
@@ -1300,8 +1353,9 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <a href="#" onClick="SuvahaNO2012();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="66%">Súvaha Úè NUJ 1-01 príloha è.1 k opatreniu è. MF/22603/2012-74</td>
-<td class="bmenu" width="28%">
+<td class="bmenu" width="2%">
+<td class="bmenu" width="56%">Súvaha Úè NUJ 1-01 príloha è.1 k opatreniu è. MF/22603/2012-74</td>
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 </td>
@@ -1325,8 +1379,9 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <a href="#" onClick="VysledovkaNO2012();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="66%">Výsledovka Úè NUJ 2-01 príloha è.2 k opatreniu è. MF/22603/2012-74</td>
-<td class="bmenu" width="28%">
+<td class="bmenu" width="2%">
+<td class="bmenu" width="56%">Výsledovka Úè NUJ 2-01 príloha è.2 k opatreniu è. MF/22603/2012-74</td>
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 </td>
@@ -1346,19 +1401,20 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <a href="#" onClick="KompletNUJ2013();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="55%">Úètovná závierka NUJ príloha k opatreniu è. MF/17616/2013-74
+<td class="bmenu" width="2%">
+<td class="bmenu" width="56%">Úètovná závierka NUJ príloha k opatreniu è. MF/17616/2013-74
  <select size="1" name="h_drp" id="h_drp" >
 <option value="1" >Riadna</option>
 <option value="2" >Mimoriadna</option>
 </select>
 </td>
-<td class="bmenu" width="35%">
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
 </td>
 <td class="bmenu" width="2%">
-<td class="bmenu" width="9%" align="right">
+<td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='KompletNUJ2013doxml()' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie' >
 </td>
 </tr>
@@ -1377,17 +1433,18 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <a href="#" onClick="TlacPriznanie();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi všetky strany priznania vo formáte PDF' ></a>
 </td>
-<td class="bmenu" width="89%">Daòové priznanie k dani z príjmov PO 
+<td class="bmenu" width="2%" align="right">
+<td class="bmenu" width="56%">Daòové priznanie k dani z príjmov PO 
 <a href="#" onClick="TlacPotvrdDPO();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi potvrdenie o podaní daòového priznania PO vo formáte PDF" ></a>
 </td>
-
-<td class="bmenu" width="9%" align="right">
+<td class="bmenu" width="36%" align="right">
 <?php if( $kli_vrok < 2012 ) { ?>
 <img src='../obr/import.png' onclick='ELpriznaniepo();' width=20 height=15 border=0 title='FDF a PDF súbory pre tlaè priznania' >
 <?php                        } ?>
+<td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='POdoXML();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie priznania' >
-
+<td class="bmenu" width="2%" align="right">
 <a href="#" onClick="UpravPriznanie();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi priznanie' ></a>
 </td>
@@ -1465,23 +1522,23 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <a href="#" onClick="TlacPoznamky2013();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
-<td class="bmenu" width="55%">Poznámky Úc POD 3 - 04 k DPPO verzia 2013
+<td class="bmenu" width="2%"></td>
+<td class="bmenu" width="56%">Poznámky Úc POD 3 - 04 k DPPO verzia 2013
  <a href="#" onClick="NechcemStranyPOD2013();">
 <img src='../obr/zmaz.png' width=20 height=15 border=0 title='Netlaèi stranu XY Poznámok POD 2013' ></a>
 </td>
-<td class="bmenu" width="35%">
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavené: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  Schválené: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
-
 <a href="#" onClick="NacitajPoznamky2013();">
 <img src='../obr/vlozit.png' width=20 height=15 border=0 title='Naèíta údaje do poznámok 2013' ></a>
-
 </td>
 
-<td class="bmenu" width="9%" align="right">
+<td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='Poznamky2013doxml()' width=20 height=15 border=0 title='export pre elektronické komunikáciu' >
-
+</td>
+<td class="bmenu" width="2%" align="right">
 <a href="#" onClick="UpravPoznamky2013();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty v poznámkach' ></a>
 </td>
@@ -1499,11 +1556,12 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <a href="#" onClick="TlacPoznamky2011no();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
-<td class="bmenu" width="55%">Poznámky Úc NUJ 3 - 01 k DPPO pre Neziskové organizácie
+<td class="bmenu" width="2%" align="right"></td>
+<td class="bmenu" width="56%">Poznámky Úc NUJ 3 - 01 k DPPO pre Neziskové organizácie
  <a href="#" onClick="NechcemStranyNUJ2013();">
 <img src='../obr/zmaz.png' width=20 height=15 border=0 title='Netlaèi stranu XY Poznámok NUJ 2013' ></a>
 </td>
-<td class="bmenu" width="35%">
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavené: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  Schválené: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
@@ -1512,9 +1570,10 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <img src='../obr/vlozit.png' width=20 height=15 border=0 title='Naèíta údaje do poznámok 2011' ></a>
 
 </td>
-<td class="bmenu" width="9%" align="right">
+<td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='Poznamky2011NOdoxml()' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie' >
-
+</td>
+<td class="bmenu" width="2%" align="right">
 <a href="#" onClick="UpravPoznamky2011no();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty v poznámkach' ></a>
 </td>
@@ -1647,15 +1706,15 @@ window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drup
 <table class="vstup" width="100%" >
 <FORM name="formj1" class="obyc" method="post" action="#" >
 <tr>
-<td class="bmenu" width="4%">
+<td class="bmenu" width="2%">
 <a href="#" onClick="privyd();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi vo formáte PDF v eurocentoch" ></a>
-
+<td class="bmenu" width="2%">
 <a href="#" onClick="privydeur();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi vo formáte PDF v celých eurách" ></a>
 </td>
-<td class="bmenu" width="60%">Výkaz o príjmoch a výdavkoch Úè. FO 1-01
-<td class="bmenu" width="30%">
+<td class="bmenu" width="56%">Výkaz o príjmoch a výdavkoch Úè. FO 1-01
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
 Úèt.závierka <select size="1" name="h_drp" id="h_drp" >
 <option value="1" >Riadna</option>
@@ -1665,8 +1724,8 @@ window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drup
  Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  <input type="hidden" name="h_sch" id="h_sch" value="" />
 </td>
-
-<td class="bmenu" width="6%" align="right">
+<td class="bmenu" width="2%" align="right">
+<td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='XMLprivyd();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie výkazu' >
 </tr>
 </FORM>
@@ -1675,15 +1734,15 @@ window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drup
 <table class="vstup" width="100%" >
 <FORM name="formj2" class="obyc" method="post" action="#" >
 <tr>
-<td class="bmenu" width="4%">
+<td class="bmenu" width="2%">
 <a href="#" onClick="majzav();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi vo formáte PDF v eurocentoch" ></a>
-
+<td class="bmenu" width="2%">
 <a href="#" onClick="majzaveur();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi vo formáte PDF v celých eurách" ></a>
 </td>
-<td class="bmenu" width="60%">Výkaz o majetku a záväzkoch Úè. FO 2-01 
-<td class="bmenu" width="30%">
+<td class="bmenu" width="56%">Výkaz o majetku a záväzkoch Úè. FO 2-01 
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
 Úèt.závierka <select size="1" name="h_drp" id="h_drp" >
 <option value="1" >Riadna</option>
@@ -1693,10 +1752,10 @@ window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drup
  Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  <input type="hidden" name="h_sch" id="h_sch" value="" />
 </td>
-
-<td class="bmenu" width="6%" align="right">
+<td class="bmenu" width="2%" align="right">
 <a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=42&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
+<td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='XMLmajzav();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie výkazu' >
 </tr>
 <tr>
@@ -1708,15 +1767,15 @@ window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drup
 <table class="vstup" width="100%" >
 <FORM name="formuzfo2014" class="obyc" method="post" action="#" >
 <tr>
-<td class="bmenu" width="4%">
+<td class="bmenu" width="2%">
 <a href="#" onClick="uzavfo2014();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi vo formáte PDF v eurocentoch" ></a>
-
+<td class="bmenu" width="2%" >
 <a href="#" onClick="uzavfo2014cele();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi vo formáte PDF v celých eurách" ></a>
 </td>
-<td class="bmenu" width="60%">Úètovná závierka Úè FO v.2014  
-<td class="bmenu" width="30%">
+<td class="bmenu" width="56%">Úètovná závierka Úè FO v.2014  
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
 Úèt.závierka <select size="1" name="h_drp" id="h_drp" >
 <option value="1" >Riadna</option>
@@ -1726,8 +1785,8 @@ window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drup
  Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  <input type="hidden" name="h_sch" id="h_sch" value="" />
 </td>
-
-<td class="bmenu" width="6%" align="right">
+<td class="bmenu" width="2%" align="right">
+<td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='uzavfo2014xml();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie' >
 </tr>
 <tr>
@@ -1803,18 +1862,20 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 <a href="#" onClick="PriVydNOJU2012();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V Eur a centoch - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="66%">Výkaz o príjmoch a výdavkoch pre NEZISKOVÉ organizácie NO Uè. 1-01
+<td class="bmenu" width="2%" align="right">
+<td class="bmenu" width="56%">Výkaz o príjmoch a výdavkoch pre NEZISKOVÉ organizácie NO Uè. 1-01
 
 <a href="#" onClick="GenPriVydNOJU();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie riadkov výkazu NO' ></a>
 
 </td>
-<td class="bmenu" width="30%">
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavený: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 </td>
 
-<td class="bmenu" width="2%"></td>
+<td class="bmenu" width="2%" align="right">
+<td class="bmenu" width="2%" align="right">
 
 </tr>
 </table>
@@ -1825,18 +1886,20 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 <a href="#" onClick="MajZavNOJU2012();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V Eur a centoch - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="66%">Výkaz o majetku a záväzkoch pre NEZISKOVÉ organizácie NO Uè. 2-01
+<td class="bmenu" width="2%" align="right">
+<td class="bmenu" width="56%">Výkaz o majetku a záväzkoch pre NEZISKOVÉ organizácie NO Uè. 2-01
 
 <a href="#" onClick="GenMajZavNOJU();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie riadkov výkazu NO' ></a>
 
 </td>
-<td class="bmenu" width="30%">
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavený: <input type="text" name="h_zosx" id="h_zosx" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 </td>
 
-<td class="bmenu" width="2%">
+<td class="bmenu" width="2%" align="right">
+<td class="bmenu" width="2%" align="right">
 <a href="#" onClick="PredMajZavNOJU();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
 </td>
@@ -1852,19 +1915,20 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 <a href="#" onClick="KompletNO2013();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="55%">Úètovná závierka NO príloha k opatreniu è. MF/17616/2013-74
+<td class="bmenu" width="2%" align="right">
+<td class="bmenu" width="56%">Úètovná závierka NO príloha k opatreniu è. MF/17616/2013-74
  <select size="1" name="h_drp" id="h_drp" >
 <option value="1" >Riadna</option>
 <option value="2" >Mimoriadna</option>
 </select>
 </td>
-<td class="bmenu" width="35%">
+<td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
 </td>
 <td class="bmenu" width="2%">
-<td class="bmenu" width="9%" align="right">
+<td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='KompletNO2013doxml()' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie' >
 </td>
 </tr>
@@ -1881,8 +1945,12 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 <a href="#" onClick="platbyju();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Platby dane z príjmu a odvodov do fondov SP a ZP pre budúci rok" ></a>
 </td>
-<td class="bmenu" width="98%">Platby dane z príjmu a odvodov do fondov SP a ZP pre budúci rok
+<td class="bmenu" width="2%" align="right">
+<td class="bmenu" width="56%">Platby dane z príjmu a odvodov do fondov SP a ZP pre budúci rok
 </td>
+<td class="bmenu" width="36%" align="right">
+<td class="bmenu" width="2%" align="right">
+<td class="bmenu" width="2%" align="right">
 </tr>
 </FORM>
 </table>
@@ -1899,24 +1967,26 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 <a href="#" onClick="TlacFOB();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
-<td class="bmenu" width="90%">Daòové priznanie k dani z príjmov FO typ B 
+<td class="bmenu" width="2%" align="right">
+<td class="bmenu" width="56%">Daòové priznanie k dani z príjmov FO typ B 
 
 <a href="#" onClick="TlacPotvrdFOB();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi potvrdenie o podaní priznania" ></a>
 
 </td>
 
-<td class="bmenu" width="7%" align="right">
+<td class="bmenu" width="36%" align="right">
 <?php if( $kli_vrok < 2012 ) { ?>
 <img src='../obr/import.png' onclick='ELpriznaniefob();' width=20 height=15 border=0 title='FDF a PDF súbory pre tlaè priznania' >
 <?php                        } ?>
 <img src='../obr/export.png' onclick='FOBdoXML();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie priznania' >
 
+<td class="bmenu" width="2%" align="right">
 <a href="#" onClick="UpravFOB();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty v priznaní' ></a>
 </td>
 
-<td class="bmenu" width="2%">
+<td class="bmenu" width="2%" align="right">
 <a href="#" onClick="ZnovuFOB();">
 <img src='../obr/orig.png' width=20 height=15 border=0 title='Naèíta hodnoty do priznania - môžete opakova viackrát' ></a>
 </td>
@@ -1931,18 +2001,18 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 <a href="#" onClick="TlacDMV();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
-<td class="bmenu" width="55%">Daòové priznanie k dani z motorových vozidiel
+<td class="bmenu" width="2%" align="right">
+<td class="bmenu" width="56%">Daòové priznanie k dani z motorových vozidiel
 
 <a href="#" onClick="TlacPotvrdDMV();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi potvrdenie o podaní daòového priznania DMV vo formáte PDF" ></a>
 
 
 </td>
-<td class="bmenu" width="33%">
-</td>
-<td class="bmenu" width="4%">
+<td class="bmenu" width="36%"></td>
+<td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='DMVdoXML();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie priznania' >
-
+<td class="bmenu" width="2%" align="right">
 <a href="#" onClick="UpravDMV();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty v priznaní' ></a>
 </td>
