@@ -506,7 +506,8 @@ endif;
 //ulozenie noveho 
 if ( $copern == 315 AND $uprav != 1 AND $drupoh >= 91  )
     {
-$h_uce = 1*$_REQUEST['h_uce'];
+$h_uce = $_REQUEST['h_uce'];
+$c_uce = 1*$_REQUEST['h_uce'];
 $h_crs = 1*$_REQUEST['h_crs'];
 $h_ucd = 1*$_REQUEST['h_ucd'];
 
@@ -514,7 +515,7 @@ if( $gener == 1 ) {
 if( $drupoh == 96 OR $drupoh == 196 )
      {
 $ulozttx = "DELETE FROM F$kli_vxcf"."_$uctsys ";
-if( $h_uce > 0 ) { $ulozenx = mysql_query("$ulozttx"); }
+if( $c_uce > 0 ) { $ulozenx = mysql_query("$ulozttx"); }
      } 
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); ";
 if( $drupoh == 95 OR $drupoh == 195 )
@@ -539,7 +540,8 @@ if ( $copern == 315 AND $uprav == 1 AND $drupoh >= 81  )
 $cislo_cpl = 1*strip_tags($_REQUEST['cislo_cpl']);
 $uprav_cpl = 1*strip_tags($_REQUEST['uprav_cpl']);
 
-$h_uce = 1*$_REQUEST['h_uce'];
+$h_uce = $_REQUEST['h_uce'];
+$c_uce = 1*$_REQUEST['h_uce'];
 $h_crs = 1*$_REQUEST['h_crs'];
 $h_ucd = 1*$_REQUEST['h_ucd'];
 
@@ -555,7 +557,7 @@ $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, hod ) VALUES ( '$h_uce', '$
                   }
 
 //echo $ulozttt;
-if( $h_uce > 0 ) { $ulozene = mysql_query("$ulozttt"); } 
+if( $c_uce > 0 ) { $ulozene = mysql_query("$ulozttt"); } 
 $copern=308;
 $uprav=0;
     }
@@ -1052,13 +1054,13 @@ if ( $drupoh == 96 OR $drupoh == 196 ) { echo "Súvaha a Výkaz ziskov a strát - z
 if ( $drupoh >= 91 AND $drupoh != 96 AND $drupoh != 196 )
 {
 if ( $gener == 1 ) {
-$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl DESC";
                    }
 if ( $minul == 1 ) {
-$sqltt = "SELECT cpl, dok AS uce, hod AS crs FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl";
+$sqltt = "SELECT cpl, dok AS uce, hod AS crs FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl DESC";
                    }
 if ( $drupoh == 95 OR $drupoh == 195 ) {
-$sqltt = "SELECT cpl, dok AS uce, ucm AS crs, ucd FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl";
+$sqltt = "SELECT cpl, dok AS uce, ucm AS crs, ucd FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl DESC";
                                        }
 $sql = mysql_query("$sqltt");
 //echo $sqltt;
