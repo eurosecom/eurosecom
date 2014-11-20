@@ -689,64 +689,55 @@ a.btn-down-x26:before {
   margin-right: 3px;
 }
 
-table.content-body {
+table.vertical {
   width: 360px;
 }
-table.content-body tr {
+table.vertical tbody tr {
   background-color: #eee;
 }
-table.content-body tr:hover {
+table.vertical tbody tr:hover {
   background-color: #fff;
 }
-table.content-body thead th {
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
+table.vertical thead td {
+  height: 20px;
+  line-height: 20px;
+  padding: 4px 0;
+  background-color: #ddd;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
 }
-table.content-body tbody td {
+table.vertical tbody td {
   line-height: 20px;
   border-bottom: 1px solid #fff;
   border-right: 1px solid #fff;
   font-size: 12px;
 }
-table.content-body tfoot th {
-  height: 21px;
-  line-height: 21px;
-  padding: 3px 0 3px 0;
-  background-color: #ddd;
-}
-table.content-body tfoot td {
-  height: 30px;
-  line-height: 30px;
-  background-color: #fff;
-}
 
-table.content-body-fixed {
+table.flat {
   width: 360px;
 }
-table.content-body-fixed thead th {
+table.flat thead th {
   font-size: 11px;
   height: 14px;
   color: #777;
-
 }
-table.content-body-fixed tbody td {
-  height: 21px;
-  line-height: 21px;
-  padding: 3px 0 3px 0;
-  border-bottom: 3px solid #fff;
-  background-color: #eee;
-
+table.flat tbody td {
+  height: 20px;
+  line-height: 20px;
+  padding: 4px 0 4px 0;
+  border-bottom: 2px solid #fff;
+  background-color: #ddd;
 }
-table.content-body-fixed tbody th {
-  vertical-align: middle;
+table.flat tbody th {
+  line-height: 24px;
   text-align: left;
-  font-size: 12px;
+  font-size: 11px;
   color: #777;
 }
 
 
 span.legend-criadok:after {
-  display:inline-block;
+  display: inline-block;
   background-image: url(../obr/info.png);
   background-repeat: no-repeat;
   content: ''; /* dopyt, zosúladi s ostatnımi :before, :after */
@@ -754,7 +745,6 @@ span.legend-criadok:after {
   width: 11px;
   height: 11px;
   margin-left: 4px;
-  
 }
 
 input[type=text].field {
@@ -762,14 +752,12 @@ input[type=text].field {
   width: 50px;
   height: 13px;
   line-height: 13px;
-/*   border: 2px solid #82c5df; */
   padding: 3px 0 3px 3px !important;
-  font-size: 13px;
-  border: 1px solid #c2c2c2;
+  font-size: 12px;
 /*   margin-top: 3px; */
   margin-left: 18px;
   border: 1px solid #c2c2c2;
-  
+  margin-top: -12px\9; /* hack IE8- */
 }
 input[type=text].field:focus {
   box-shadow: none; /* dopyt, prefixy */
@@ -815,12 +803,14 @@ a.btn-edit:hover, a.btn-cancel:hover {
   opacity: 1; /* dopyt, prefixy */
 }
 
-div.alert-error {
+div.alert-warning {
   font-weight:bold;
   background-color: ;
-  font-size: 13px;
-  vertical-align: middle;
-  color: red;
+  font-size: 12px;
+/*   vertical-align: middle; */
+  color: #FF0000;
+  height: 12px;
+  padding: 4px 0;
 }
 
 
@@ -1054,11 +1044,11 @@ if ( $drupoh == 94 OR $drupoh == 194 ) { echo "Vıkaz ziskov a strát - predchádza
 if ( $drupoh == 95 OR $drupoh == 195 ) { echo "Súvaha - syntetické generovanie Aktív a Pasív"; }
 if ( $drupoh == 96 OR $drupoh == 196 ) { echo "Súvaha a Vıkaz ziskov a strát - zaokrúhlenie"; }
 ?>
-   <img src='../obr/info.png' title="EnterNext = klávesou ENTER prejdete na ïalšiu poloku"> <!-- dopyt, pri zaokrúhlení asi nemá vıznam? -->
+   <img src='../obr/info.png' title="EnterNext = klávesou ENTER prejdete na ïalšiu poloku">
   </h2>
  </div>
 <?php
-//uprava vykazu
+//uprava vykazu 91-95,191-195
 if ( $drupoh >= 91 AND $drupoh != 96 AND $drupoh != 196 )
 {
 if ( $gener == 1 ) {
@@ -1080,11 +1070,11 @@ $i = 0;
 $varcolspan = 2; if ( $drupoh == 95 OR $drupoh == 195 ) $varcolspan = 1;
 ?>
 <FORM name="formv1" method="post" action="vykazy_cis.php?copern=315&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>">
- <table class="content-body toleft" style="">
+ <table class="vertical toleft">
  <thead>
  <tr>
-  <td style="width:25%;"></td><td style="width:25%;"></td>
-  <td style="width:25%;"></td><td style="width:25%;"></td>
+  <th style="width:25%;"></th><th style="width:25%;"></td>
+  <th style="width:25%;"></th><th style="width:25%;"></td>
  </tr>
  <tr>
 <?php
@@ -1109,6 +1099,41 @@ if ( $gener == 1 )
 <?php                    } ?>
   <th>&nbsp;</th>
  </tr>
+ <tr>
+  <td>
+   <input type="text" name="h_uce" id="h_uce" onkeyup="KontrolaCisla(this, Cele)"
+    onKeyDown="return UceEnter(event.which)" class="field"/>
+  </td>
+  <td colspan="<?php echo $varcolspan ?>">
+   <input type="text" name="h_crs" id="h_crs" class="field" onkeyup="KontrolaCisla(this, Cele)"
+<?php if ( $drupoh != 95 AND $drupoh != 195 ) { ?> onKeyDown="return CrsEnter(event.which)" <?php } ?>
+<?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?> onKeyDown="return Crs95Enter(event.which)" <?php } ?>
+   />
+  </td>
+<?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
+  <td>
+   <input type="text" name="h_ucd" id="h_ucd" onkeyup="KontrolaCisla(this, Cele)"
+    onKeyDown="return UcdEnter(event.which)" class="field"/>
+  </td>
+<?php                                        } ?>
+  <td style="border-right:0; padding:0; text-align:center;">
+  <ul>
+	 <li onmouseover="Fx.style.display='none';" style="height:2px;">&nbsp;</li>
+	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
+	 <li onmouseover="return Povol_uloz();" style="width:55px; height:23px; line-height:22px; float:left;">
+    <input type="submit" id="uloz" name="uloz" value="Uloi">
+   </li>
+	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
+	 <li onmouseover="Fx.style.display='none';" style="height:3px; clear:left;">&nbsp;</li>
+  </ul>
+  </td>
+ </tr>
+ <tr>
+  <th colspan="4" style="text-align:left;">
+   <div id="Cele" class="alert-warning" style="display:none;">&nbsp;Hodnota musí by celé èíslo</div>
+   <div id="Fx" class="alert-warning" style="display:none;">&nbsp;Vyplòte všetky poloky</div>
+  </th>
+ </tr>
  </thead>
 <?php
    while ($i <= $cpol )
@@ -1126,70 +1151,28 @@ $riadok=mysql_fetch_object($sql);
   <?php echo $riadok->crs; ?>&nbsp;&nbsp;</td>
 
 <?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
- <td style="text-align:right;"><?php echo $riadok->ucd;?>&nbsp;&nbsp;</td>
+  <td style="text-align:right;"><?php echo $riadok->ucd;?>&nbsp;&nbsp;</td>
 <?php                      } ?>
-
- <td style="text-align:center;">
-  <a href="#" onclick="UpravPolozku(<?php echo $riadok->cpl;?>);" title="Upravi" class="btn-edit"></a>
-  <a href="#" onclick="ZmazPolozku(<?php echo $riadok->cpl;?>);" title="Vymaza" class="btn-cancel"></a>
- </td>
-</tr>
-</tbody>
+  <td style="text-align:center;">
+   <a href="#" onclick="UpravPolozku(<?php echo $riadok->cpl;?>);" title="Upravi" class="btn-edit"></a>
+   <a href="#" onclick="ZmazPolozku(<?php echo $riadok->cpl;?>);" title="Vymaza" class="btn-cancel"></a>
+  </td>
+ </tr>
+ </tbody>
 <?php
   }
 $i = $i + 1;
    }
 ?>
-<tfoot>
-<tr>
- <th style="background-color:;">
-  <input type="text" name="h_uce" id="h_uce" onkeyup="KontrolaCisla(this, Cele)"
-   onKeyDown="return UceEnter(event.which)" class="field"/>
- </th>
-
- <th colspan="<?php echo $varcolspan ?>">
-  <input type="text" name="h_crs" id="h_crs" class="field" onkeyup="KontrolaCisla(this, Cele)" 
-<?php if ( $drupoh != 95 AND $drupoh != 195 ) { ?> onKeyDown="return CrsEnter(event.which)" <?php } ?>
-<?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?> onKeyDown="return Crs95Enter(event.which)" <?php } ?>
-  />
- </th>
-
-
-<?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
- <th>
-  <input type="text" name="h_ucd" id="h_ucd" onkeyup="KontrolaCisla(this, Cele)"
-   onKeyDown="return UcdEnter(event.which)" class="field"/>
- </th>
-<?php                      } ?>
- <th>&nbsp;</th>
-</tr>
-
-
-
- <tr>
-  <td colspan="3" style="">
-   <div id="Cele" class="alert-error" style="display:none; ">Hodnota musí by celé èíslo</div>
-   <div id="Fx" class="alert-error" style="display:none; ">Vyplòte všetky poloky</div>
-  </td>
-  <td colspan="1" style=" text-align:right;" onmouseover="return Povol_uloz();" >
-   <input type="submit" id="uloz" name="uloz" value="Uloi" onmouseover="return Povol_uloz();">
-   <!-- <div style="height:10px; background-color:blue; clear:left;" onmouseover="Fx.style.display='none';"></div> -->
-  </td>
- </tr>
+ <tfoot>
+  <tr><td colspan="4">&nbsp;</td></tr>
  </tfoot>
  </table>
 </FORM>
-
-
-
-
-
-
 <?php
 }
-//koniec uprava vykazu
+//koniec uprava vykazu 91-95,191-195
 ?>
-
 
 <?php
 //uprava vykazu drupoh 96,196
@@ -1197,15 +1180,15 @@ if ( $drupoh == 96 OR $drupoh == 196 )
 {
 ?>
 <FORM name="formv1" method="post" action="vykazy_cis.php?copern=315&uprav=0&drupoh=<?php echo $drupoh;?>">
- <table class="content-body-fixed toleft">
+ <table class="flat toleft">
  <thead>
  <tr>
-  <td style="width:40%;"></td><td style="width:30%;"></td><td style="width:30%;"></td>
+  <td style="width:35%;"></td><td style="width:25%;"></td><td style="width:40%;"></td>
  </tr>
  <tr>
-  <th style="width:45%;"></th>
-  <th style="width:25%;">Èíslo riadku</th>
-  <th style="width:30%;"></th>
+  <th></th>
+  <th>Èíslo riadku</th>
+  <th></th>
  </tr>
  </thead>
  <tbody>
@@ -1222,6 +1205,9 @@ if ( $drupoh == 196 ) $titlesuvaha = "35";
    <input type="text" name="h_uce" id="h_uce" onkeyup="KontrolaCisla(this, Cele)"
     onKeyDown="return UceEnter(event.which)" class="field"/>
   </td>
+  <th>
+   <div id="Cele" class="alert-warning" style="display:none;">&nbsp;Musí by celé èíslo</div>
+  </th>
  </tr>
  <tr>
   <th>
@@ -1236,57 +1222,55 @@ if ( $drupoh == 196 ) $titlevzas = "26";
    <input type="text" name="h_crs" id="h_crs" onkeyup="KontrolaCisla(this, Cele)"
     onKeyDown="return Crs96Enter(event.which)" class="field"/>
   </td>
+  <th>
+   <div id="Cele" class="alert-warning" style="display:none;">&nbsp;Hodnota musí by celé èíslo</div>
+  </th>
  </tr>
  </tbody>
  <tfoot>
-
-<tr>
- <td></td>
- <td style="height:12px; padding:4px 0;" onmouseover="return Povol_uloz();" >
-  <input type="submit" id="uloz" name="uloz" value="Uloi" > <!-- dopyt, tu nemá zmysel blokova enter -->
+ <tr>
+  <td>&nbsp;</td>
+  <td style="text-align:center;">
+  <ul>
+	 <li onmouseover="Fx.style.display='none';" style="height:2px;">&nbsp;</li>
+	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
+	 <li onmouseover="return Povol_uloz();" style="width:55px; height:23px; line-height:22px; float:left;">
+    <input type="submit" id="uloz" name="uloz" value="Uloi">
+   </li>
+	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
+	 <li onmouseover="Fx.style.display='none';" style="height:3px; clear:left;">&nbsp;</li>
+  </ul>
+ </td>
+ <td>
+  <div id="Fx" class="alert-warning" style="display:none;">&nbsp;Vyplòte všetky poloky</div>
  </td>
  </tr>
  </tfoot>
  </table>
-
-
 </FORM>
-
-<span id="Cele" style="display:none; width:100%; font-weight:bold; background-color:red; color:black;">
- Hodnota musí by celé èíslo</span>
-<span id="Desc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota musí by desatinné èíslo</span>
-<span id="Fx" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Musíte vyplni všetky poloky vstupu</span>
-
+<!-- <span id="Desc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
+ Hodnota musí by desatinné èíslo</span> -->
 <?php
 }
 //koniec uprava vykazu drupoh 96,196
 ?>
 
-
-
-
 <?php
 $vartitle = "èíselník";
 if ( $drupoh == 93 OR $drupoh == 193 OR $drupoh == 94 OR $drupoh == 194 ) $vartitle = "hodnoty";
 ?>
-<?php if ( $drupoh != 93 AND $drupoh != 193 AND $drupoh != 94 AND $drupoh != 194 ) { ?> <!-- dopyt, ošetri, aby neukazoval v roku 2013 a staršie -->
+<?php if ( $drupoh != 93 AND $drupoh != 193 AND $drupoh != 94 AND $drupoh != 194 ) { ?>
  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=155&page=1'
   title="Naèíta štandardnı èíselník" class="btn-down-x26 toright">Štandardnı</a> <!-- dopyt, preveri, èi nieèo robí -->
 <?php                                                                              } ?>
-<?php if( $kli_vrok > 2013 ) { ?>
+<?php if ( $kli_vrok > 2013 ) { ?>
  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
   title="Naèíta <?php echo $vartitle; ?> z predchádzajúceho úètovného obdobia"
-  class="btn-down-x26 toright">Predch. obdobie</a> 
-<?php                        } ?>
+  class="btn-down-x26 toright">Minulı rok</a>
+<?php                         } ?>
 
 </div> <!-- koniec .content -->
-
-
 </div> <!-- koniec .wrap-content -->
-
-
 <?php
 //celkovy koniec dokumentu
        } while (false);
