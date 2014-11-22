@@ -178,7 +178,7 @@ $ulozene = mysql_query("$sql");
     {
 ?>
 <script type="text/javascript">
-if ( !confirm ("Chcete naËÌtaù generovanie z minulÈho roka ?") ) //dopyt, Ëo je to za hl·öku?
+if ( !confirm ("Chcete naËÌtaù generovanie z minulÈho roka ?") )
          { window.close()  }
 else
          { location.href='vykazy_cis.php?copern=4056&page=1&drupoh=<?php echo $drupoh; ?>' }
@@ -557,7 +557,7 @@ $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, hod ) VALUES ( '$h_uce', '$
                   }
 
 //echo $ulozttt;
-if( $c_uce > 0 ) { $ulozene = mysql_query("$ulozttt"); } 
+if( $c_uce > 0 ) { $ulozene = mysql_query("$ulozttt"); }
 $copern=308;
 $uprav=0;
     }
@@ -597,7 +597,7 @@ $h_crs = $riadok->hod;
        }
 //koniec uprava nacitanie
 
-if( $drupoh != 96 AND $drupoh != 196 AND $uprav == 1)
+if ( $drupoh != 96 AND $drupoh != 196 AND $uprav == 1)
     {
 $sqltx = "DELETE FROM F$kli_vxcf"."_$uctsys WHERE cpl = $cislo_cpl ";
 //echo $sqltx;
@@ -615,7 +615,7 @@ if ( $drupoh >= 191 AND $drupoh <= 196 ) echo "P⁄";
 ?>
 &nbsp;z·vierka nastavenie</title>
 <style type="text/css">
-ul.legend-vykazy { /* legenda v zahlavi */
+ul.legend-vykazy { /* legenda v druhu vykazu */
   position: relative;
   top: 5px;
   line-height: 20px;
@@ -636,11 +636,10 @@ ul.legend-vykazy span {
   background-color: #b1bdbd;
   color: #4a5758;
 }
-div.wrap-content { /* centrovanie tela strany */
+div.wrap-content { /* okolie tela strany */
   position: relative;
   width: 950px;
   margin: 15px auto;
-
 }
 div.content-navbar > a { /* prepinanie vykazov */
   display: block;
@@ -678,7 +677,7 @@ a.btn-down-x26 {
   font-weight: bold;
   display: block;
   margin-left: 10px;
-  opacity: 0.8; /* dopyt, prefixy */
+  opacity: 0.7; /* dopyt, prefixy */
 }
 a.btn-down-x26:before {
   display: inline-block; /* dopyt, zos˙ladiù s ostatn˝mi :before, :after */
@@ -691,7 +690,7 @@ a.btn-down-x26:before {
   margin-right: 3px;
 }
 
-table.vertical {
+table.vertical, table.flat {
   width: 360px;
 }
 table.vertical tbody tr {
@@ -701,9 +700,10 @@ table.vertical tbody tr:hover {
   background-color: #fff;
 }
 table.vertical thead td {
-  height: 20px;
-  line-height: 20px;
-  padding: 4px 0;
+  position:relative;
+  top:0;
+  left:0;
+  height: 30px;
   background-color: #ddd;
   border-right: 1px solid #fff;
   border-bottom: 1px solid #fff;
@@ -715,28 +715,32 @@ table.vertical tbody td {
   font-size: 12px;
 }
 
-table.flat {
-  width: 360px;
-}
 table.flat thead th {
   font-size: 11px;
   height: 14px;
   color: #777;
 }
 table.flat tbody td {
-  height: 20px;
-  line-height: 20px;
-  padding: 4px 0 4px 0;
+  height: 30px;
   border-bottom: 2px solid #fff;
   background-color: #ddd;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 table.flat tbody th {
-  line-height: 24px;
+  line-height: 30px;
   text-align: left;
   font-size: 11px;
   color: #777;
-}
 
+}
+table.flat tfoot td {
+  height: 30px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
 
 span.legend-criadok:after {
   display: inline-block;
@@ -754,13 +758,16 @@ input[type=text].field {
   width: 50px;
   height: 13px;
   line-height: 13px;
-  padding: 3px 0 3px 3px !important;
+  padding: 3px 0 3px 3px;
   font-size: 12px;
-/*   margin-top: 3px; */
   margin-left: 18px;
   border: 1px solid #c2c2c2;
-  margin-top: -12px\9; /* hack IE8- */
+  position: absolute;
+  top: 5px;
+  /* dopyt, left, tieû, zruöiù margin-left */
 }
+
+
 input[type=text].field:focus {
   box-shadow: none; /* dopyt, prefixy */
   border: 1px solid #888;
@@ -787,7 +794,7 @@ a.btn-edit, a.btn-cancel {
   width: 16px;
   height: 16px;
   vertical-align: -4px;
-  opacity: 0.8; /* dopyt, prefixy */
+  opacity: 0.7; /* dopyt, prefixy */
   display: ;
 }
 a.btn-edit {
@@ -811,12 +818,9 @@ div.alert-warning {
   font-size: 12px;
 /*   vertical-align: middle; */
   color: #FF0000;
-  height: 12px;
-  padding: 4px 0;
+  line-height: 24px;
+  padding-left: 7px;
 }
-
-
-
 
 </style>
 
@@ -950,7 +954,6 @@ div.alert-warning {
        else { document.formv1.uloz.disabled = true; Fx.style.display=""; return (false) ; }
               }
                 }
- 
 </script>
 </HEAD>
 <BODY id="white" onload="ObnovUI(); VyberVstup();">
@@ -1101,39 +1104,47 @@ if ( $gener == 1 )
 <?php                    } ?>
   <th>&nbsp;</th>
  </tr>
- <tr>
-  <td>
+ <tr style="">
+  <td style="">
    <input type="text" name="h_uce" id="h_uce" onkeyup="KontrolaCisla(this, Cele)"
     onKeyDown="return UceEnter(event.which)" class="field"/>
   </td>
-  <td colspan="<?php echo $varcolspan ?>">
+  <td colspan="<?php echo $varcolspan ?>" >
    <input type="text" name="h_crs" id="h_crs" class="field" onkeyup="KontrolaCisla(this, Cele)"
 <?php if ( $drupoh != 95 AND $drupoh != 195 ) { ?> onKeyDown="return CrsEnter(event.which)" <?php } ?>
 <?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?> onKeyDown="return Crs95Enter(event.which)" <?php } ?>
    />
   </td>
 <?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
-  <td>
+  <td >
    <input type="text" name="h_ucd" id="h_ucd" onkeyup="KontrolaCisla(this, Cele)"
     onKeyDown="return UcdEnter(event.which)" class="field"/>
   </td>
 <?php                                        } ?>
-  <td style="border-right:0; padding:0; text-align:center;">
-  <ul>
-	 <li onmouseover="Fx.style.display='none';" style="height:2px;">&nbsp;</li>
-	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
-	 <li onmouseover="return Povol_uloz();" style="width:55px; height:23px; line-height:22px; float:left;">
-    <input type="submit" id="uloz" name="uloz" value="Uloûiù">
+  <td>
+   <div onmouseover="Fx.style.display='none';" style="position:absolute; top:0; left:0; width:100%; height:100%;">&nbsp;</div>
+   <div onmouseover="return Povol_uloz();" style="width:60px; height:26px; position:absolute; top:2px; left:15px;">
+    <input type="submit" id="uloz" name="uloz" value="Uloûiù" style="width:56px; height:22px; margin: 2px auto; display:block; font-size:13px; ">
+   </div>
+
+
+<!--
+    <ul style="margin:0; padding:0; height:40px;">
+	 <li onmouseover="Fx.style.display='none';" style="height:2px; background-color:blue;">&nbsp;</li>
+	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px; background-color:pink;">&nbsp;</li>
+	 <li onmouseover="return Povol_uloz();" style="width:55px; height:23px; float:left; background-color:red;">
+    <input type="submit" id="uloz" name="uloz" value="Uloûiù" style="margin:0; display:block;">
    </li>
-	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
-	 <li onmouseover="Fx.style.display='none';" style="height:3px; clear:left;">&nbsp;</li>
+	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px; background-color:yellow;">&nbsp;</li>
+	 <li onmouseover="Fx.style.display='none';" style="height:3px; clear:left; background-color:green;">&nbsp;</li>
   </ul>
+-->
   </td>
  </tr>
  <tr>
   <th colspan="4" style="text-align:left;">
-   <div id="Cele" class="alert-warning" style="display:none;">&nbsp;Hodnota musÌ byù celÈ ËÌslo</div>
-   <div id="Fx" class="alert-warning" style="display:none;">&nbsp;VyplÚte vöetky poloûky</div>
+   <div id="Cele" class="alert-warning" style="display:none;">MusÌ byù celÈ ËÌslo</div> <!-- dopyt, lepöÌ text -->
+   <div id="Fx" class="alert-warning" style="display:none;">VyplÚte vöetky poloûky</div>
   </th>
  </tr>
  </thead>
@@ -1188,9 +1199,7 @@ if ( $drupoh == 96 OR $drupoh == 196 )
   <td style="width:35%;"></td><td style="width:25%;"></td><td style="width:40%;"></td>
  </tr>
  <tr>
-  <th></th>
-  <th>»Ìslo riadku</th>
-  <th></th>
+  <th>&nbsp;</th><th>»Ìslo riadku</th><th>&nbsp;</th>
  </tr>
  </thead>
  <tbody>
@@ -1208,7 +1217,7 @@ if ( $drupoh == 196 ) $titlesuvaha = "35";
     onKeyDown="return UceEnter(event.which)" class="field"/>
   </td>
   <th>
-   <div id="Cele" class="alert-warning" style="display:none;">&nbsp;MusÌ byù celÈ ËÌslo</div>
+   <div id="Cele" class="alert-warning" style="display:none;">MusÌ byù celÈ ËÌslo</div>
   </th>
  </tr>
  <tr>
@@ -1225,15 +1234,20 @@ if ( $drupoh == 196 ) $titlevzas = "26";
     onKeyDown="return Crs96Enter(event.which)" class="field"/>
   </td>
   <th>
-   <div id="Cele2" class="alert-warning" style="display:none;">&nbsp;Hodnota musÌ byù celÈ ËÌslo</div>
+   <div id="Cele2" class="alert-warning" style="display:none;">&nbsp;MusÌ byù celÈ ËÌslo</div>
   </th>
  </tr>
  </tbody>
  <tfoot>
  <tr>
   <td>&nbsp;</td>
-  <td style="text-align:center;">
-  <ul>
+  <td style="background-color:green;">
+   <div onmouseover="Fx.style.display='none';" style="position:absolute; top:0; left:0; width:100%; height:100%; background-color:blue;">&nbsp;</div>
+   <div onmouseover="return Povol_uloz();" style="width:60px; height:26px; position:absolute; top:2px; left:15px;">
+    <input type="submit" id="uloz" name="uloz" value="Uloûiù" style="width:56px; height:22px; margin: 2px auto; display:block; font-size:13px; ">
+   </div>
+<!--
+    <ul>
 	 <li onmouseover="Fx.style.display='none';" style="height:2px;">&nbsp;</li>
 	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
 	 <li onmouseover="return Povol_uloz();" style="width:55px; height:23px; line-height:22px; float:left;">
@@ -1242,7 +1256,8 @@ if ( $drupoh == 196 ) $titlevzas = "26";
 	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
 	 <li onmouseover="Fx.style.display='none';" style="height:3px; clear:left;">&nbsp;</li>
   </ul>
- </td>
+-->
+  </td>
  <td>
   <div id="Fx" class="alert-warning" style="display:none;">&nbsp;VyplÚte vöetky poloûky</div>
  </td>
