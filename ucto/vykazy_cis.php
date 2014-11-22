@@ -1221,11 +1221,11 @@ if ( $drupoh == 196 ) $titlevzas = "26";
     napr. è. <?php echo $titlevzas ?>">Vıkaz ziskov a strát</span>
   </th>
   <td>
-   <input type="text" name="h_crs" id="h_crs" onkeyup="KontrolaCisla(this, Cele)"
+   <input type="text" name="h_crs" id="h_crs" onkeyup="KontrolaCisla(this, Cele2)"
     onKeyDown="return Crs96Enter(event.which)" class="field"/>
   </td>
   <th>
-   <div id="Cele" class="alert-warning" style="display:none;">&nbsp;Hodnota musí by celé èíslo</div>
+   <div id="Cele2" class="alert-warning" style="display:none;">&nbsp;Hodnota musí by celé èíslo</div>
   </th>
  </tr>
  </tbody>
