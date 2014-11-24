@@ -213,7 +213,7 @@ $copern=308;
     {
 ?>
 <script type="text/javascript">
-if( !confirm ("Chcete naËÌtaù ötandartn˝ ËÌselnÌk generovania ?") )
+if( !confirm ("Chcete naËÌtaù ötandardn˝ ËÌselnÌk generovania ?") )
          { window.close()  }
 else
          { location.href='vykazy_cis.php?copern=156&page=1&drupoh=<?php echo $drupoh; ?>'  }
@@ -615,14 +615,19 @@ if ( $drupoh >= 191 AND $drupoh <= 196 ) echo "P⁄";
 ?>
 &nbsp;z·vierka nastavenie</title>
 <style type="text/css">
-ul.legend-vykazy { /* legenda v druhu vykazu */
+ul.legend-vykazy { /* legenda k druhu vykazu */
   position: relative;
   top: 5px;
   line-height: 20px;
   font-size: 12px;
 }
+ul.legend-vykazy > li {
+  margin-right: 15px;
+  float: left;
+}
 ul.legend-vykazy span {
   padding: 0px 3px;
+  margin-right: 5px;
 }
 .darkgreen {
   background-color: #1ccba8;
@@ -636,12 +641,12 @@ ul.legend-vykazy span {
   background-color: #b1bdbd;
   color: #4a5758;
 }
-div.wrap-content { /* okolie tela strany */
+div.wrap-content { /* okolie tela */
   position: relative;
   width: 950px;
   margin: 15px auto;
 }
-div.content-navbar > a { /* prepinanie vykazov */
+div.content-navbar > a { /* zalozky v tele */
   display: block;
   float: left;
   height: 12px;
@@ -656,40 +661,12 @@ div.content { /* telo strany */
   width: 92%;
   padding: 20px 3% 20px 5%;
 }
-div.content-heading { /* zahlavie tela */
-  height: 30px;
-}
-div.content-heading > h2 {
+div.content-heading > h2 { /* nadpis v tele */
   height: 16px;
   font-size: 16px;
   font-weight: bold;
 }
-a.btn-down-x26:hover {
-  opacity: 1; /* dopyt, prefixy */
-}
-a.btn-down-x26 {
-  line-height: 26px;
-  padding: 0 9px 0 7px;
-  font-size: 11px; /* dopyt, sk˙siù shortland */
-  color: #fff;
-  background-color: #39f;
-  border-radius: 2px; /* dopyt, prefixy */
-  font-weight: bold;
-  display: block;
-  margin-left: 10px;
-  opacity: 0.7; /* dopyt, prefixy */
-}
-a.btn-down-x26:before {
-  display: inline-block; /* dopyt, zos˙ladiù s ostatn˝mi :before, :after */
-  background-image: url(../obr/ikony/download6_white_x16.png);
-  background-repeat: no-repeat; /* dopyt, zos˙ladiù s ostatn˝mi :before, :after */
-  content: ''; /* dopyt, zos˙ladiù s ostatn˝mi :before, :after */
-  width: 16px;
-  height: 16px;
-  vertical-align: -4px;
-  margin-right: 3px;
-}
-
+/* TABLES */
 table.vertical, table.flat {
   width: 360px;
 }
@@ -699,60 +676,40 @@ table.vertical tbody tr {
 table.vertical tbody tr:hover {
   background-color: #fff;
 }
-table.vertical thead td {
-  position:relative;
-  top:0;
-  left:0;
-  height: 30px;
-  background-color: #ddd;
+table.vertical thead td, table.vertical tbody td {
   border-right: 1px solid #fff;
   border-bottom: 1px solid #fff;
 }
-table.vertical tbody td {
-  line-height: 20px;
-  border-bottom: 1px solid #fff;
-  border-right: 1px solid #fff;
-  font-size: 12px;
-}
-
-table.flat thead th {
-  font-size: 11px;
-  height: 14px;
-  color: #777;
-}
-table.flat tbody td {
-  height: 30px;
-  border-bottom: 2px solid #fff;
-  background-color: #ddd;
+table.vertical thead td, table.flat tbody td, table.flat tfoot td {
   position: relative;
   top: 0;
   left: 0;
+}
+table.vertical thead td, table.flat tbody td {
+  height: 30px;
+  background-color: #ddd;
+}
+table.vertical tbody td {
+  line-height: 20px;
+  font-size: 12px;
+}
+table.flat thead th {
+  height: 14px;
+  font-size: 11px;
+  color: #777;
+}
+table.flat tbody td {
+  border-bottom: 2px solid #fff;
 }
 table.flat tbody th {
   line-height: 30px;
   text-align: left;
   font-size: 11px;
   color: #777;
-
 }
-table.flat tfoot td {
+table.vertical tfoot td, table.flat tfoot td {
   height: 30px;
-  position: relative;
-  top: 0;
-  left: 0;
 }
-
-span.legend-criadok:after {
-  display: inline-block;
-  background-image: url(../obr/info.png);
-  background-repeat: no-repeat;
-  content: ''; /* dopyt, zos˙ladiù s ostatn˝mi :before, :after */
-  vertical-align: -1px;
-  width: 11px;
-  height: 11px;
-  margin-left: 4px;
-}
-
 input[type=text].field {
   display: block;
   width: 50px;
@@ -760,17 +717,51 @@ input[type=text].field {
   line-height: 13px;
   padding: 3px 0 3px 3px;
   font-size: 12px;
-  margin-left: 18px;
   border: 1px solid #c2c2c2;
   position: absolute;
   top: 5px;
-  /* dopyt, left, tieû, zruöiù margin-left */
+  left: 17px;
+}
+input[type=text].field:focus {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid #888;
+}
+div.wrap-area-uloz {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+div.area-uloz {
+  position: absolute;
+  top: 2px;
+  left: 15px;
+  width: 60px;
+  height: 26px;
+}
+input[type=submit] {
+  display: block;
+  width: 56px;
+  height: 22px;
+  margin: 2px auto;
+  font-size:13px;
 }
 
-
-input[type=text].field:focus {
-  box-shadow: none; /* dopyt, prefixy */
-  border: 1px solid #888;
+/* BUTTONS */
+span:after, a:before, a:after {
+  display: inline-block;
+  content: '';
+  background-repeat: no-repeat;
+}
+span.legend-criadok:after {
+  width: 11px;
+  height: 11px;
+  background-image: url(../obr/info.png);
+  vertical-align: -1px;
+  margin-left: 4px;
 }
 a.sort-field {
   height: 14px;
@@ -779,49 +770,63 @@ a.sort-field {
   display: block;
 }
 a.sort-field:after {
-  display: inline-block;
   width: 12px;
   height: 12px;
-  content: ''; /* dopyt, zos˙ladiù s ostatn˝mi :before, :after */
-  vertical-align: -2px;
   background-image: url(../obr/ikony/arrowdown37_gray_x12.png);
-  background-repeat: no-repeat;
+  vertical-align: -2px;
   margin-left: 2px;
 }
-
+a.btn-down-x26 {
+  display: block;
+  line-height: 26px;
+  padding: 0 9px 0 7px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #39f;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  margin-left: 10px;
+}
+a.btn-down-x26:before {
+  background-image: url(../obr/ikony/download6_white_x16.png);
+  width: 16px;
+  height: 16px;
+  vertical-align: -4px;
+  margin-right: 3px;
+}
 a.btn-edit, a.btn-cancel {
   display: inline-block;
   width: 16px;
   height: 16px;
-  vertical-align: -4px;
-  opacity: 0.7; /* dopyt, prefixy */
-  display: ;
+  vertical-align: -2px;
 }
 a.btn-edit {
   background-image: url(../obr/ikony/pencil3_blue_x16.png);
-  background-repeat: no-repeat;
-
 }
 a.btn-cancel {
   background-image: url(../obr/ikony/xmark_red_x16.png);
-  background-repeat: no-repeat;
-
 }
-
-a.btn-edit:hover, a.btn-cancel:hover {
-  opacity: 1; /* dopyt, prefixy */
+a.btn-edit, a.btn-cancel, a.btn-down-x26 {
+  -moz-opacity: 0.7;
+  -khtml-opacity: 0.7;
+  opacity: 0.7;
 }
-
+a.btn-edit:hover, a.btn-cancel:hover, a.btn-down-x26:hover {
+  -moz-opacity: 1;
+  -khtml-opacity: 1;
+  opacity: 1;
+}
+/* ALERTS */
 div.alert-warning {
   font-weight:bold;
   background-color: ;
   font-size: 12px;
-/*   vertical-align: middle; */
   color: #FF0000;
   line-height: 24px;
-  padding-left: 7px;
+  padding-left: 5px;
 }
-
 </style>
 
 <script type="text/javascript">
@@ -975,19 +980,13 @@ if ( $drupoh >= 191 AND $drupoh <= 196 ) echo "podnikateæov";
   <td>
    <div class="bar-btn-form-tool">
    <ul class="toleft legend-vykazy">
-    <li class="toleft">
-     <span class="darkgreen">&nbsp;</span>&nbsp;&nbsp;S˙vaha
-    </li>
-    <li class="toleft" style="margin-left:20px;">
-     <span class="purple">&nbsp;</span>&nbsp;&nbsp;V˝kaz ziskov a str·t
-    </li>
-    <li class="toleft" style="margin-left:20px;">
-     <span class="darkgray">&nbsp;</span>&nbsp;&nbsp;S˙vaha + V˝kaz ziskov a str·t&nbsp;
-    </li>
+    <li><span class="darkgreen">&nbsp;</span>S˙vaha</li>
+    <li><span class="purple">&nbsp;</span>V˝kaz ziskov a str·t</li>
+    <li><span class="darkgray">&nbsp;</span>S˙vaha + V˝kaz ziskov a str·t</li>
    </ul>
 <?php if( $drupoh != 96 AND drupoh != 196 ) { ?>
     <img src="../obr/ikony/trash_blue_icon.png" onclick="ZmazVsetky();" title="Vymazaù vöetky poloûky"
-     class="btn-form-tool">
+     class="btn-form-tool" style="margin:0;">
 <?php                                       } ?>
    </div>
   </td>
@@ -1039,7 +1038,7 @@ $source="../ucto/vykazy_cis.php?copern=308";
 </div>
 
 <div class="content">
- <div class="content-heading">
+ <div class="content-heading" style="height:30px;">
   <h2>
 <?php
 if ( $drupoh == 91 OR $drupoh == 191 ) { echo "S˙vaha - generovanie"; }
@@ -1122,28 +1121,15 @@ if ( $gener == 1 )
   </td>
 <?php                                        } ?>
   <td>
-   <div onmouseover="Fx.style.display='none';" style="position:absolute; top:0; left:0; width:100%; height:100%;">&nbsp;</div>
-   <div onmouseover="return Povol_uloz();" style="width:60px; height:26px; position:absolute; top:2px; left:15px;">
-    <input type="submit" id="uloz" name="uloz" value="Uloûiù" style="width:56px; height:22px; margin: 2px auto; display:block; font-size:13px; ">
+   <div onmouseover="Fx.style.display='none';" class="wrap-area-uloz">&nbsp;</div>
+   <div onmouseover="return Povol_uloz();" class="area-uloz">
+    <input type="submit" id="uloz" name="uloz" value="Uloûiù" style="">
    </div>
-
-
-<!--
-    <ul style="margin:0; padding:0; height:40px;">
-	 <li onmouseover="Fx.style.display='none';" style="height:2px; background-color:blue;">&nbsp;</li>
-	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px; background-color:pink;">&nbsp;</li>
-	 <li onmouseover="return Povol_uloz();" style="width:55px; height:23px; float:left; background-color:red;">
-    <input type="submit" id="uloz" name="uloz" value="Uloûiù" style="margin:0; display:block;">
-   </li>
-	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px; background-color:yellow;">&nbsp;</li>
-	 <li onmouseover="Fx.style.display='none';" style="height:3px; clear:left; background-color:green;">&nbsp;</li>
-  </ul>
--->
   </td>
  </tr>
  <tr>
   <th colspan="4" style="text-align:left;">
-   <div id="Cele" class="alert-warning" style="display:none;">MusÌ byù celÈ ËÌslo</div> <!-- dopyt, lepöÌ text -->
+   <div id="Cele" class="alert-warning" style="display:none;">MusÌ byù celÈ ËÌslo</div>
    <div id="Fx" class="alert-warning" style="display:none;">VyplÚte vöetky poloûky</div>
   </th>
  </tr>
@@ -1165,7 +1151,7 @@ $riadok=mysql_fetch_object($sql);
 
 <?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
   <td style="text-align:right;"><?php echo $riadok->ucd;?>&nbsp;&nbsp;</td>
-<?php                      } ?>
+<?php                                        } ?>
   <td style="text-align:center;">
    <a href="#" onclick="UpravPolozku(<?php echo $riadok->cpl;?>);" title="Upraviù" class="btn-edit"></a>
    <a href="#" onclick="ZmazPolozku(<?php echo $riadok->cpl;?>);" title="Vymazaù" class="btn-cancel"></a>
@@ -1234,32 +1220,21 @@ if ( $drupoh == 196 ) $titlevzas = "26";
     onKeyDown="return Crs96Enter(event.which)" class="field"/>
   </td>
   <th>
-   <div id="Cele2" class="alert-warning" style="display:none;">&nbsp;MusÌ byù celÈ ËÌslo</div>
+   <div id="Cele2" class="alert-warning" style="display:none;">MusÌ byù celÈ ËÌslo</div>
   </th>
  </tr>
  </tbody>
  <tfoot>
  <tr>
   <td>&nbsp;</td>
-  <td style="background-color:green;">
-   <div onmouseover="Fx.style.display='none';" style="position:absolute; top:0; left:0; width:100%; height:100%; background-color:blue;">&nbsp;</div>
-   <div onmouseover="return Povol_uloz();" style="width:60px; height:26px; position:absolute; top:2px; left:15px;">
-    <input type="submit" id="uloz" name="uloz" value="Uloûiù" style="width:56px; height:22px; margin: 2px auto; display:block; font-size:13px; ">
-   </div>
-<!--
-    <ul>
-	 <li onmouseover="Fx.style.display='none';" style="height:2px;">&nbsp;</li>
-	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
-	 <li onmouseover="return Povol_uloz();" style="width:55px; height:23px; line-height:22px; float:left;">
+  <td>
+   <div onmouseover="Fx.style.display='none';" class="wrap-area-uloz">&nbsp;</div>
+   <div onmouseover="return Povol_uloz();" class="area-uloz">
     <input type="submit" id="uloz" name="uloz" value="Uloûiù">
-   </li>
-	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
-	 <li onmouseover="Fx.style.display='none';" style="height:3px; clear:left;">&nbsp;</li>
-  </ul>
--->
+   </div>
   </td>
  <td>
-  <div id="Fx" class="alert-warning" style="display:none;">&nbsp;VyplÚte vöetky poloûky</div>
+  <div id="Fx" class="alert-warning" style="display:none;">VyplÚte vöetky poloûky</div>
  </td>
  </tr>
  </tfoot>
@@ -1278,7 +1253,7 @@ if ( $drupoh == 93 OR $drupoh == 193 OR $drupoh == 94 OR $drupoh == 194 ) $varti
 ?>
 <?php if ( $drupoh != 93 AND $drupoh != 193 AND $drupoh != 94 AND $drupoh != 194 ) { ?>
  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=155&page=1'
-  title="NaËÌtaù ötandardn˝ ËÌselnÌk" class="btn-down-x26 toright">ätandardn˝</a> <!-- dopyt, preveriù, Ëi nieËo robÌ -->
+  title="NaËÌtaù ötandardn˝ ËÌselnÌk" class="btn-down-x26 toright">ätandardn˝</a>
 <?php                                                                              } ?>
 <?php if ( $kli_vrok > 2013 ) { ?>
  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
