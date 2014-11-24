@@ -178,7 +178,7 @@ $ulozene = mysql_query("$sql");
     {
 ?>
 <script type="text/javascript">
-if ( !confirm ("Chcete naèíta generovanie z minulého roka ?") )
+if ( !confirm ("Chcete naèíta generovanie z minulého roka ?") ) //dopyt, èo je to za hlášku?
          { window.close()  }
 else
          { location.href='vykazy_cis.php?copern=4056&page=1&drupoh=<?php echo $drupoh; ?>' }
@@ -557,7 +557,7 @@ $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, hod ) VALUES ( '$h_uce', '$
                   }
 
 //echo $ulozttt;
-if( $c_uce > 0 ) { $ulozene = mysql_query("$ulozttt"); }
+if( $c_uce > 0 ) { $ulozene = mysql_query("$ulozttt"); } 
 $copern=308;
 $uprav=0;
     }
@@ -597,7 +597,7 @@ $h_crs = $riadok->hod;
        }
 //koniec uprava nacitanie
 
-if ( $drupoh != 96 AND $drupoh != 196 AND $uprav == 1)
+if( $drupoh != 96 AND $drupoh != 196 AND $uprav == 1)
     {
 $sqltx = "DELETE FROM F$kli_vxcf"."_$uctsys WHERE cpl = $cislo_cpl ";
 //echo $sqltx;
@@ -615,7 +615,11 @@ if ( $drupoh >= 191 AND $drupoh <= 196 ) echo "PÚ";
 ?>
 &nbsp;závierka nastavenie</title>
 <style type="text/css">
+<<<<<<< HEAD
 ul.legend-vykazy { /* legenda k druhu vykazu */
+=======
+ul.legend-vykazy { /* legenda v zahlavi */
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
   position: relative;
   top: 5px;
   line-height: 20px;
@@ -641,10 +645,15 @@ ul.legend-vykazy span {
   background-color: #b1bdbd;
   color: #4a5758;
 }
+<<<<<<< HEAD
 div.wrap-content { /* okolie tela */
+=======
+div.wrap-content { /* centrovanie tela strany */
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
   position: relative;
   width: 950px;
   margin: 15px auto;
+
 }
 div.content-navbar > a { /* zalozky v tele */
   display: block;
@@ -666,8 +675,38 @@ div.content-heading > h2 { /* nadpis v tele */
   font-size: 16px;
   font-weight: bold;
 }
+<<<<<<< HEAD
 /* TABLES */
 table.vertical, table.flat {
+=======
+a.btn-down-x26:hover {
+  opacity: 1; /* dopyt, prefixy */
+}
+a.btn-down-x26 {
+  line-height: 26px;
+  padding: 0 9px 0 7px;
+  font-size: 11px; /* dopyt, skúsi shortland */
+  color: #fff;
+  background-color: #39f;
+  border-radius: 2px; /* dopyt, prefixy */
+  font-weight: bold;
+  display: block;
+  margin-left: 10px;
+  opacity: 0.8; /* dopyt, prefixy */
+}
+a.btn-down-x26:before {
+  display: inline-block; /* dopyt, zosúladi s ostatnımi :before, :after */
+  background-image: url(../obr/ikony/download6_white_x16.png);
+  background-repeat: no-repeat; /* dopyt, zosúladi s ostatnımi :before, :after */
+  content: ''; /* dopyt, zosúladi s ostatnımi :before, :after */
+  width: 16px;
+  height: 16px;
+  vertical-align: -4px;
+  margin-right: 3px;
+}
+
+table.vertical {
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
   width: 360px;
 }
 table.vertical tbody tr {
@@ -676,7 +715,15 @@ table.vertical tbody tr {
 table.vertical tbody tr:hover {
   background-color: #fff;
 }
+<<<<<<< HEAD
 table.vertical thead td, table.vertical tbody td {
+=======
+table.vertical thead td {
+  height: 20px;
+  line-height: 20px;
+  padding: 4px 0;
+  background-color: #ddd;
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
   border-right: 1px solid #fff;
   border-bottom: 1px solid #fff;
 }
@@ -693,34 +740,73 @@ table.vertical tbody td {
   line-height: 20px;
   font-size: 12px;
 }
+<<<<<<< HEAD
+=======
+
+table.flat {
+  width: 360px;
+}
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
 table.flat thead th {
   height: 14px;
   font-size: 11px;
   color: #777;
 }
 table.flat tbody td {
+<<<<<<< HEAD
   border-bottom: 2px solid #fff;
+=======
+  height: 20px;
+  line-height: 20px;
+  padding: 4px 0 4px 0;
+  border-bottom: 2px solid #fff;
+  background-color: #ddd;
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
 }
 table.flat tbody th {
-  line-height: 30px;
+  line-height: 24px;
   text-align: left;
   font-size: 11px;
   color: #777;
+<<<<<<< HEAD
 }
 table.vertical tfoot td, table.flat tfoot td {
   height: 30px;
 }
+=======
+}
+
+
+span.legend-criadok:after {
+  display: inline-block;
+  background-image: url(../obr/info.png);
+  background-repeat: no-repeat;
+  content: ''; /* dopyt, zosúladi s ostatnımi :before, :after */
+  vertical-align: -1px;
+  width: 11px;
+  height: 11px;
+  margin-left: 4px;
+}
+
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
 input[type=text].field {
   display: block;
   width: 50px;
   height: 13px;
   line-height: 13px;
-  padding: 3px 0 3px 3px;
+  padding: 3px 0 3px 3px !important;
   font-size: 12px;
+<<<<<<< HEAD
   border: 1px solid #c2c2c2;
   position: absolute;
   top: 5px;
   left: 17px;
+=======
+/*   margin-top: 3px; */
+  margin-left: 18px;
+  border: 1px solid #c2c2c2;
+  margin-top: -12px\9; /* hack IE8- */
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
 }
 input[type=text].field:focus {
   -webkit-box-shadow: none;
@@ -800,7 +886,13 @@ a.btn-edit, a.btn-cancel {
   display: inline-block;
   width: 16px;
   height: 16px;
+<<<<<<< HEAD
   vertical-align: -2px;
+=======
+  vertical-align: -4px;
+  opacity: 0.8; /* dopyt, prefixy */
+  display: ;
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
 }
 a.btn-edit {
   background-image: url(../obr/ikony/pencil3_blue_x16.png);
@@ -824,9 +916,19 @@ div.alert-warning {
   background-color: ;
   font-size: 12px;
   color: #FF0000;
+<<<<<<< HEAD
   line-height: 24px;
   padding-left: 5px;
 }
+=======
+  height: 12px;
+  padding: 4px 0;
+}
+
+
+
+
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
 </style>
 
 <script type="text/javascript">
@@ -959,6 +1061,7 @@ div.alert-warning {
        else { document.formv1.uloz.disabled = true; Fx.style.display=""; return (false) ; }
               }
                 }
+ 
 </script>
 </HEAD>
 <BODY id="white" onload="ObnovUI(); VyberVstup();">
@@ -1103,34 +1206,52 @@ if ( $gener == 1 )
 <?php                    } ?>
   <th>&nbsp;</th>
  </tr>
- <tr style="">
-  <td style="">
+ <tr>
+  <td>
    <input type="text" name="h_uce" id="h_uce" onkeyup="KontrolaCisla(this, Cele)"
     onKeyDown="return UceEnter(event.which)" class="field"/>
   </td>
-  <td colspan="<?php echo $varcolspan ?>" >
+  <td colspan="<?php echo $varcolspan ?>">
    <input type="text" name="h_crs" id="h_crs" class="field" onkeyup="KontrolaCisla(this, Cele)"
 <?php if ( $drupoh != 95 AND $drupoh != 195 ) { ?> onKeyDown="return CrsEnter(event.which)" <?php } ?>
 <?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?> onKeyDown="return Crs95Enter(event.which)" <?php } ?>
    />
   </td>
 <?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
-  <td >
+  <td>
    <input type="text" name="h_ucd" id="h_ucd" onkeyup="KontrolaCisla(this, Cele)"
     onKeyDown="return UcdEnter(event.which)" class="field"/>
   </td>
 <?php                                        } ?>
+<<<<<<< HEAD
   <td>
    <div onmouseover="Fx.style.display='none';" class="wrap-area-uloz">&nbsp;</div>
    <div onmouseover="return Povol_uloz();" class="area-uloz">
     <input type="submit" id="uloz" name="uloz" value="Uloi" style="">
    </div>
+=======
+  <td style="border-right:0; padding:0; text-align:center;">
+  <ul>
+	 <li onmouseover="Fx.style.display='none';" style="height:2px;">&nbsp;</li>
+	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
+	 <li onmouseover="return Povol_uloz();" style="width:55px; height:23px; line-height:22px; float:left;">
+    <input type="submit" id="uloz" name="uloz" value="Uloi">
+   </li>
+	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
+	 <li onmouseover="Fx.style.display='none';" style="height:3px; clear:left;">&nbsp;</li>
+  </ul>
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
   </td>
  </tr>
  <tr>
   <th colspan="4" style="text-align:left;">
+<<<<<<< HEAD
    <div id="Cele" class="alert-warning" style="display:none;">Musí by celé èíslo</div>
    <div id="Fx" class="alert-warning" style="display:none;">Vyplòte všetky poloky</div>
+=======
+   <div id="Cele" class="alert-warning" style="display:none;">&nbsp;Hodnota musí by celé èíslo</div>
+   <div id="Fx" class="alert-warning" style="display:none;">&nbsp;Vyplòte všetky poloky</div>
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
   </th>
  </tr>
  </thead>
@@ -1185,7 +1306,9 @@ if ( $drupoh == 96 OR $drupoh == 196 )
   <td style="width:35%;"></td><td style="width:25%;"></td><td style="width:40%;"></td>
  </tr>
  <tr>
-  <th>&nbsp;</th><th>Èíslo riadku</th><th>&nbsp;</th>
+  <th></th>
+  <th>Èíslo riadku</th>
+  <th></th>
  </tr>
  </thead>
  <tbody>
@@ -1203,7 +1326,7 @@ if ( $drupoh == 196 ) $titlesuvaha = "35";
     onKeyDown="return UceEnter(event.which)" class="field"/>
   </td>
   <th>
-   <div id="Cele" class="alert-warning" style="display:none;">Musí by celé èíslo</div>
+   <div id="Cele" class="alert-warning" style="display:none;">&nbsp;Musí by celé èíslo</div>
   </th>
  </tr>
  <tr>
@@ -1220,19 +1343,37 @@ if ( $drupoh == 196 ) $titlevzas = "26";
     onKeyDown="return Crs96Enter(event.which)" class="field"/>
   </td>
   <th>
+<<<<<<< HEAD
    <div id="Cele2" class="alert-warning" style="display:none;">Musí by celé èíslo</div>
+=======
+   <div id="Cele2" class="alert-warning" style="display:none;">&nbsp;Hodnota musí by celé èíslo</div>
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
   </th>
  </tr>
  </tbody>
  <tfoot>
  <tr>
   <td>&nbsp;</td>
+<<<<<<< HEAD
   <td>
    <div onmouseover="Fx.style.display='none';" class="wrap-area-uloz">&nbsp;</div>
    <div onmouseover="return Povol_uloz();" class="area-uloz">
     <input type="submit" id="uloz" name="uloz" value="Uloi">
    </div>
   </td>
+=======
+  <td style="text-align:center;">
+  <ul>
+	 <li onmouseover="Fx.style.display='none';" style="height:2px;">&nbsp;</li>
+	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
+	 <li onmouseover="return Povol_uloz();" style="width:55px; height:23px; line-height:22px; float:left;">
+    <input type="submit" id="uloz" name="uloz" value="Uloi">
+   </li>
+	 <li onmouseover="Fx.style.display='none';" style="float:left; width:17px; height:23px;">&nbsp;</li>
+	 <li onmouseover="Fx.style.display='none';" style="height:3px; clear:left;">&nbsp;</li>
+  </ul>
+ </td>
+>>>>>>> parent of aaa657e... ÃšÄtovnÃ¡ zÃ¡vierka mikro ÃºÄt.jednotka
  <td>
   <div id="Fx" class="alert-warning" style="display:none;">Vyplòte všetky poloky</div>
  </td>
