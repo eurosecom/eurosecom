@@ -16,6 +16,10 @@ $uprav = 1*$_REQUEST['uprav'];
 $h_obdp = 1*$_REQUEST['h_obdp'];
 $h_obdk = 1*$_REQUEST['h_obdk'];
 
+$xtrd = 1*$_REQUEST['xtrd'];
+$xtrd1 = 1*$_REQUEST['xtrd1'];
+$xtrd2 = 1*$_REQUEST['xtrd2'];
+$xtrd3 = 1*$_REQUEST['xtrd3'];
 //echo $h_obdp;
 
 $pole = explode(".", $kli_vume);
@@ -531,6 +535,7 @@ $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, hod ) VALUES ( '$h_uce', '$
 if( $h_uce > 0 ) { $ulozene = mysql_query("$ulozttt"); } 
 $copern=308;
 $uprav=0;
+$xtrd=0;
     }
 //koniec ulozenia 
 
@@ -560,6 +565,7 @@ $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, hod ) VALUES ( '$h_uce', '$
 if( $c_uce > 0 ) { $ulozene = mysql_query("$ulozttt"); }
 $copern=308;
 $uprav=0;
+$xtrd=0;
     }
 //koniec uprava 
 
@@ -852,8 +858,8 @@ div.alert-warning {
   function KontrolaCisla(Vstup, Oznam)
   {
    if ( Vstup.value.search(/[^0-9]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-   if ( Vstup.value.search(/[^0-9]/g) != -1) { Oznam.style.display=""; }
-   else { Oznam.style.display="none"; }
+   if ( Vstup.value.search(/[^0-9]/g) != -1) { Oznam.style.display=""; Vstup.style.backgroundColor = "red"; }
+   else { Oznam.style.display="none"; Vstup.style.backgroundColor = "white"; }
   }
 //Kontrola cisla desatinneho
   function KontrolaDcisla(Vstup, Oznam)
@@ -1052,17 +1058,28 @@ if ( $drupoh == 96 OR $drupoh == 196 ) { echo "Súvaha a Výkaz ziskov a strát - z
   </h2>
  </div>
 <?php
+$triedenie="BY cpl DESC ";
+if( $xtrd1 == 0 ) { $xtrd1x=1; }
+if( $xtrd2 == 0 ) { $xtrd2x=3; }
+if( $xtrd3 == 0 ) { $xtrd3x=5; }
+if( $xtrd1 == 1 ) { $triedenie="BY uce "; $xtrd1x=2;}
+if( $xtrd1 == 2 ) { $triedenie="BY uce DESC "; $xtrd1x=1;}
+if( $xtrd2 == 3 ) { $triedenie="BY crs "; $xtrd2x=4;}
+if( $xtrd2 == 4 ) { $triedenie="BY crs DESC "; $xtrd2x=3;}
+if( $xtrd3 == 5 ) { $triedenie="BY ucd "; $xtrd3x=6;}
+if( $xtrd3 == 6 ) { $triedenie="BY ucd DESC "; $xtrd3x=5;}
+$xtrd1=$xtrd1x; $xtrd2=$xtrd2x; $xtrd3=$xtrd3x;
 //uprava vykazu 91-95,191-195
 if ( $drupoh >= 91 AND $drupoh != 96 AND $drupoh != 196 )
 {
 if ( $gener == 1 ) {
-$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl DESC";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER $triedenie";
                    }
 if ( $minul == 1 ) {
-$sqltt = "SELECT cpl, dok AS uce, hod AS crs FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl DESC";
+$sqltt = "SELECT cpl, dok AS uce, hod AS crs FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER $triedenie";
                    }
 if ( $drupoh == 95 OR $drupoh == 195 ) {
-$sqltt = "SELECT cpl, dok AS uce, ucm AS crs, ucd FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl DESC";
+$sqltt = "SELECT cpl, dok AS uce, ucm AS crs, ucd FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER $triedenie";
                                        }
 $sql = mysql_query("$sqltt");
 //echo $sqltt;
@@ -1073,7 +1090,7 @@ $i = 0;
 
 $varcolspan = 2; if ( $drupoh == 95 OR $drupoh == 195 ) $varcolspan = 1;
 ?>
-<FORM name="formv1" method="post" action="vykazy_cis.php?copern=315&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>">
+<FORM name="formv1" method="post" action="vykazy_cis.php?copern=315&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd=0">
  <table class="vertical toleft">
  <thead>
  <tr>
@@ -1086,20 +1103,20 @@ if ( $gener == 1 )
 {
 ?>
 <?php if ( $drupoh != 95 AND $drupoh != 96 AND $drupoh != 195 AND $drupoh != 196 ) { ?>
-  <th><a href="#" title="Zoradi" class="sort-field">Úèet</a></th>
-  <th colspan="2"><a href="#" title="Zoradi" class="sort-field">Èíslo riadku</a></th>
+  <th><a href="#" title="Zoradi" class="sort-field" onclick="window.open('vykazy_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd1=<?php echo $xtrd1;?>&xtrd2=0&xtrd3=0', '_self');">Úèet</a></th>
+  <th colspan="2"><a href="#" title="Zoradi" class="sort-field" onclick="window.open('vykazy_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd2=<?php echo $xtrd2;?>&xtrd1=0&xtrd3=0', '_self');">Èíslo riadku</a></th>
 <?php                                                                              } ?>
 <?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
-  <th><a href="#" title="Zoradi" class="sort-field">Úèet</a></th> <!-- dopyt, sort nie je funkèné -->
-  <th><a href="#" title="Zoradi" class="sort-field">Aktíva</a></th>
-  <th><a href="#" title="Zoradi" class="sort-field">Pasíva</a></th>
+  <th><a href="#" title="Zoradi" class="sort-field" onclick="window.open('vykazy_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd1=<?php echo $xtrd1;?>&xtrd2=0&xtrd3=0', '_self');">Úèet</a></th> <!-- dopyt, sort nie je funkèné -->
+  <th><a href="#" title="Zoradi" class="sort-field" onclick="window.open('vykazy_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd2=<?php echo $xtrd2;?>&xtrd1=0&xtrd3=0', '_self');">Aktíva</a></th>
+  <th><a href="#" title="Zoradi" class="sort-field" onclick="window.open('vykazy_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd3=<?php echo $xtrd3;?>&xtrd1=0&xtrd2=0', '_self');">Pasíva</a></th>
 <?php                                        } ?>
 <?php
 }
 ?>
 <?php if ( $minul == 1 ) { ?>
-  <th><a href="#" title="Zoradi" class="sort-field">Riadok</a></th>
-  <th colspan="2"><a href="#" title="sort-field" class="sort-field">Hodnota</a></th>
+  <th><a href="#" title="Zoradi" class="sort-field" onclick="window.open('vykazy_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd1=<?php echo $xtrd1;?>&xtrd2=0&xtrd3=0', '_self');">Riadok</a></th>
+  <th colspan="2"><a href="#" title="sort-field" class="sort-field" onclick="window.open('vykazy_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd2=<?php echo $xtrd2;?>&xtrd1=0&xtrd3=0', '_self');">Hodnota</a></th>
 <?php                    } ?>
   <th>&nbsp;</th>
  </tr>
