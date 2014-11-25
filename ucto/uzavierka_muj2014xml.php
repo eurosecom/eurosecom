@@ -622,16 +622,6 @@ $k3=$sknacec;
   $text = "  </skNace>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <typUzavierky>"."\r\n"; fwrite($soubor, $text);
-//riadna mimoriadna
-//dopyt prerábal som môže by ako v pdf
-//$druz=0;
-//$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
-//  if (@$zaznam=mysql_data_seek($sql,0))
-//  {
-//  $riadok=mysql_fetch_object($sql);
-//  $druz=1*$riadok->druz;
-//  }
-//if ( $druz == 1 ) { $riadna=0; $mimoriadna=1; }
 
 $riadna=1;
 $mimoriadna=0;
@@ -774,10 +764,12 @@ $riadok="";
   $text = "    </oznObchodReg>"."\r\n"; fwrite($soubor, $text);
 
 $telefon=$fir_ftel;
-//dopyt, chcú bez lomítka
+$telefon=str_replace("/","",$telefon);
+$telefon=str_replace(" ","",$telefon);
   $text = "    <telefon><![CDATA[".$telefon."]]></telefon>"."\r\n"; fwrite($soubor, $text);
 $fax=$fir_ffax;
-//dopyt, chcú bez lomítka
+$fax=str_replace("/","",$fax);
+$fax=str_replace(" ","",$fax);
   $text = "    <fax><![CDATA[".$fax."]]></fax>"."\r\n"; fwrite($soubor, $text);
 $email=$fir_fem1;
   $text = "    <email><![CDATA[".$email."]]></email>"."\r\n"; fwrite($soubor, $text);

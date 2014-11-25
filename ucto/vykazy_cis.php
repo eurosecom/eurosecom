@@ -453,6 +453,20 @@ $vysledok = mysql_query("$sql");
 
                       }
 
+if ( $drupoh == 93 )  {
+
+$sql = "DELETE FROM F$kli_vxcf"."_pos_muj2014 ";
+$vysledok = mysql_query("$sql");
+
+                      }
+
+if ( $drupoh == 94 )  {
+
+$sql = "DELETE FROM F$kli_vxcf"."_pov_muj2014 ";
+$vysledok = mysql_query("$sql");
+
+                      }
+
 if ( $drupoh == 95 )  {
 
 $sql = "DELETE FROM F$kli_vxcf"."_uctsyngensuv_muj2014 ";
@@ -476,6 +490,20 @@ $vysledok = mysql_query("$sql");
 
 
                       }
+
+if ( $drupoh == 193 )  {
+
+$sql = "DELETE FROM F$kli_vxcf"."_pos_pod2014 ";
+$vysledok = mysql_query("$sql");
+
+                       }
+
+if ( $drupoh == 194 )  {
+
+$sql = "DELETE FROM F$kli_vxcf"."_pov_pod2014 ";
+$vysledok = mysql_query("$sql");
+
+                       }
 
 if ( $drupoh == 195 ) {
 
@@ -866,8 +894,8 @@ div.alert-warning {
   function KontrolaDcisla(Vstup, Oznam)
   {
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Oznam.style.display=""; }
-   else { Oznam.style.display="none"; }
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Oznam.style.display=""; Vstup.style.borderColor = "red"; }
+   else { Oznam.style.display="none"; Vstup.style.borderColor = ""; }
   }
 
 
@@ -1127,7 +1155,9 @@ if ( $gener == 1 )
     onKeyDown="return UceEnter(event.which)" class="field"/>
   </td>
   <td colspan="<?php echo $varcolspan ?>" >
-   <input type="text" name="h_crs" id="h_crs" class="field" onkeyup="KontrolaCisla(this, Cele)"
+   <input type="text" name="h_crs" id="h_crs" class="field" 
+<?php if ( $drupoh != 93 AND $drupoh != 94 AND $drupoh != 193 AND $drupoh != 194 ) { ?> onkeyup="KontrolaCisla(this, Cele)" <?php } ?>
+<?php if ( $drupoh == 93 OR  $drupoh == 94 OR  $drupoh == 193 OR  $drupoh == 194 ) { ?> onkeyup="KontrolaDcisla(this, Desc)" <?php } ?>
 <?php if ( $drupoh != 95 AND $drupoh != 195 ) { ?> onKeyDown="return CrsEnter(event.which)" <?php } ?>
 <?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?> onKeyDown="return Crs95Enter(event.which)" <?php } ?>
    />
@@ -1148,6 +1178,7 @@ if ( $gener == 1 )
  <tr>
   <th colspan="4" style="text-align:left;">
    <div id="Cele" class="alert-warning" style="display:none;">Musí by celé èíslo</div>
+   <div id="Desc" class="alert-warning" style="display:none;">Musí by desatinné èíslo</div>
    <div id="Fx" class="alert-warning" style="display:none;">Vyplòte všetky poloky</div>
   </th>
  </tr>
