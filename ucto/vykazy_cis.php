@@ -734,27 +734,6 @@ input[type=text].field:focus {
   box-shadow: none;
   border: 1px solid #888;
 }
-div.wrap-area-uloz {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-div.area-uloz {
-  position: absolute;
-  top: 2px;
-  left: 15px;
-  width: 60px;
-  height: 26px;
-}
-input[type=submit] {
-  display: block;
-  width: 56px;
-  height: 22px;
-  margin: 2px auto;
-  font-size:13px;
-}
 
 /* BUTTONS */
 span:after, a:before, a:after {
@@ -824,6 +803,28 @@ a.btn-edit:hover, a.btn-cancel:hover, a.btn-down-x26:hover {
   -khtml-opacity: 1;
   opacity: 1;
 }
+div.wrap-area-uloz {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+div.area-uloz {
+  position: absolute;
+  top: 2px;
+  left: 15px;
+  width: 60px;
+  height: 26px;
+}
+input[type=submit] {
+  display: block;
+  width: 56px;
+  height: 22px;
+  margin: 2px auto;
+  font-size:13px;
+}
+
 /* ALERTS */
 div.alert-warning {
   font-weight:bold;
@@ -858,8 +859,8 @@ div.alert-warning {
   function KontrolaCisla(Vstup, Oznam)
   {
    if ( Vstup.value.search(/[^0-9]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-   if ( Vstup.value.search(/[^0-9]/g) != -1) { Oznam.style.display=""; Vstup.style.backgroundColor = "red"; }
-   else { Oznam.style.display="none"; Vstup.style.backgroundColor = "white"; }
+   if ( Vstup.value.search(/[^0-9]/g) != -1) { Oznam.style.display=""; Vstup.style.borderColor = "red"; }
+   else { Oznam.style.display="none"; Vstup.style.borderColor = ""; }
   }
 //Kontrola cisla desatinneho
   function KontrolaDcisla(Vstup, Oznam)
