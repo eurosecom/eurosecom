@@ -74,20 +74,25 @@ var vyskawin = screen.height-175;
 var vyskawic = screen.height;
 var sirkawic = screen.width-10;
 
-function VyberVstupx()
-                {
+  function VyberVstupx()
+  {
+  }
 
-                }
-
-function VyberVstup()
-                {
+  function VyberVstup()
+  {
 <?php if( $kli_vduj != 9 ) { echo "document.forms.formhk1.h_obdp.value=$kli_vmes; "; } ?>
 <?php if( $kli_vduj != 9 ) { echo "document.forms.formhk1.h_obdk.value=$kli_vmes; "; } ?>
 <?php if( $kli_vduj != 99 ) { echo "document.forms.formkf1.h_obdp.value=$kli_vmes; "; } ?>
 <?php if( $kli_vduj != 99 ) { echo "document.forms.formkf1.h_obdk.value=$kli_vmes; "; } ?>
 <?php echo "document.forms.formp1.fir_uctx01.value=$fir_uctx01; ";  ?>
 <?php echo "document.forms.formg1.fir_uctx01.value=$fir_uctx01; ";  ?>
-                }
+  }
+
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1 ) { Vstup.value=Vstup.value.replace(",","."); }
+  }
 
 
 function JUKnihaSumarnaPDF()
@@ -532,7 +537,6 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphs'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphsx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
-
 ?>
 
 
@@ -616,8 +620,8 @@ window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
+ Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválená: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="" />
 </td>
 <td class="bmenu" width="2%" align="right">
 <?php if( $kli_vrok < 2012 ) { ?><img src='../obr/import.png' onclick='ELsuvaha();' width=20 height=15 border=0 title='FDF a PDF súbory pre tlaè výkazu' ><?php } ?>
@@ -688,8 +692,8 @@ window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=
 <td class="bmenu" width="56%">Výkaz ziskov a strát Úè POD 2 - 01 verzia UVPOD2v09_1</td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavený: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválený: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
+ Zostavený: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválený: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="" />
 </td>
 <td class="bmenu" width="2%" align="right">
 <?php if( $kli_vrok < 2012 ) { ?><img src='../obr/import.png' onclick='ELvykzis();' width=20 height=15 border=0 title='FDF a PDF súbory pre tlaè výkazu' ><?php } ?>
@@ -867,8 +871,8 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
+ Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválená: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="" />
 </td>
 <td class="bmenu" width="2%">
 <a href="#" onClick="GenSuvPod();">
@@ -1076,8 +1080,8 @@ window.open('../ucto/poznamky_muj2014.php?copern=1&drupoh=1&page=1',
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
+ Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválená: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="" />
 </td>
 <td class="bmenu" width="2%">
 <a href="#" onClick="GenSuvMuj();">
@@ -1102,8 +1106,8 @@ window.open('../ucto/poznamky_muj2014.php?copern=1&drupoh=1&page=1',
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavené: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválené: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavené: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválené: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 
 <a href="#" onClick="NacitajPoznamkyMUJ2014();">
 <img src='../obr/vlozit.png' width=20 height=15 border=0 title='Naèíta údaje do poznámok' ></a>
@@ -1169,8 +1173,8 @@ window.open('../ucto/oprcis.php?copern=308&drupoh=94&page=1&sysx=UCT', '_blank',
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavený: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválený: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavený: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválený: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 </td>
 <td class="bmenu" width="2%" align="right"></td>
 <td class="bmenu" width="2%" align="right">
@@ -1244,8 +1248,8 @@ window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT', '_blank',
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavený: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválený: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavený: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválený: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 </td>
 <td class="bmenu" width="2%" align="right"></td>
 <td class="bmenu" width="2%" align="right">
@@ -1357,7 +1361,7 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <td class="bmenu" width="56%">Súvaha Úè NUJ 1-01 príloha è.1 k opatreniu è. MF/22603/2012-74</td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 </td>
 
 <td class="bmenu" width="2%">
@@ -1383,7 +1387,7 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <td class="bmenu" width="56%">Výsledovka Úè NUJ 2-01 príloha è.2 k opatreniu è. MF/22603/2012-74</td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 </td>
 <td class="bmenu" width="2%">
 <td class="bmenu" width="2%">
@@ -1410,8 +1414,8 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
+ Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválená: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="" />
 </td>
 <td class="bmenu" width="2%">
 <td class="bmenu" width="2%" align="right">
@@ -1465,8 +1469,8 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <td class="bmenu" width="55%">Poznámky k Daòovému priznaniu k dani z príjmov PO v.2010</td>
 <td class="bmenu" width="35%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavené: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválené: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavené: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválené: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 </td>
 
 
@@ -1496,8 +1500,8 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <td class="bmenu" width="55%">Poznámky Úc POD 3 - 04 k DPPO verzia 2012</td>
 <td class="bmenu" width="35%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavené: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválené: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavené: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválené: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 
 <a href="#" onClick="NacitajPoznamky2011();">
 <img src='../obr/vlozit.png' width=20 height=15 border=0 title='Naèíta údaje do poznámok 2011' ></a>
@@ -1529,8 +1533,8 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavené: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválené: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavené: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválené: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 <a href="#" onClick="NacitajPoznamky2013();">
 <img src='../obr/vlozit.png' width=20 height=15 border=0 title='Naèíta údaje do poznámok 2013' ></a>
 </td>
@@ -1563,8 +1567,8 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavené: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválené: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavené: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválené: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 
 <a href="#" onClick="NacitajPoznamky2011no();">
 <img src='../obr/vlozit.png' width=20 height=15 border=0 title='Naèíta údaje do poznámok 2011' ></a>
@@ -1721,7 +1725,7 @@ window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drup
 <option value="2" >Mimoriadna</option>
 <option value="3" >Priebežná</option>
 </select>
- Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  <input type="hidden" name="h_sch" id="h_sch" value="" />
 </td>
 <td class="bmenu" width="2%" align="right">
@@ -1749,7 +1753,7 @@ window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drup
 <option value="2" >Mimoriadna</option>
 <option value="3" >Priebežná</option>
 </select>
- Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  <input type="hidden" name="h_sch" id="h_sch" value="" />
 </td>
 <td class="bmenu" width="2%" align="right">
@@ -1782,7 +1786,7 @@ window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drup
 <option value="2" >Mimoriadna</option>
 <option value="3" >Priebežná</option>
 </select>
- Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  <input type="hidden" name="h_sch" id="h_sch" value="" />
 </td>
 <td class="bmenu" width="2%" align="right">
@@ -1871,7 +1875,7 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavený: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavený: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 </td>
 
 <td class="bmenu" width="2%" align="right">
@@ -1895,7 +1899,7 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavený: <input type="text" name="h_zosx" id="h_zosx" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Zostavený: <input type="text" name="h_zosx" id="h_zosx" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 </td>
 
 <td class="bmenu" width="2%" align="right">
@@ -1924,8 +1928,8 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="" />
+ Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválená: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="" />
 </td>
 <td class="bmenu" width="2%">
 <td class="bmenu" width="2%" align="right">
