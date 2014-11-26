@@ -1691,8 +1691,9 @@ function uzavfo2014xml()
                 {
 var h_zos = document.forms.formuzfo2014.h_zos.value;
 var h_sch = document.forms.formuzfo2014.h_sch.value;
+var h_drp = document.forms.formuzfo2014.h_drp.value;
 
-window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&suborxml=1&celeeura=1&uzav=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&suborxml=1&celeeura=1&uzav=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 
                 }
 
