@@ -8,6 +8,7 @@
 
 //../oddel_dtb1.php a oddel_dtb2.php						OK2014
 //../cis/oddel_dtbz1.php							OK2015
+//../cis/oddel_dtbm1.php a oddel_dtbm2.php pre hotel.sluzby			OK2014
 
 //ckli.php ckli_u.php autoinc,unique..  POZOR aj aktualizacia klienti v databaze min.roka pri ulozeni uprav  		OK2014
 //cfir.php cfir_u.php 													OK2014
@@ -17,8 +18,8 @@
 //hsheslo.php kalendar skopiruj automaticky 					OK2014
 //aky_robot.php datum velka noc 						OK2015
 
-//podvojneu.php,mzdy.php,sklad.php,fakt.php,dopr.php,majetok.php,vyroba.php,analyzy.php vsetko na 2 miestach		OK2014
-//ubyt.php,rest.php,kuch.php vsetko na 2 miestach									OK2014
+//podvojneu.php,mzdy.php,sklad.php,fakt.php,dopr.php,majetok.php,vyroba.php,analyzy.php vsetko na 2 miestach		setODDELDB
+//ubyt.php,rest.php,kuch.php vsetko na 2 miestach									setODDELDB
 
 //../cis/citaj_nas.php aby citalnastavenie firmy vzdy z db2014 			OK2014
 //../cis/zmenume.php aby upravil nastavenie firmy vzdy z db2014 		OK2014

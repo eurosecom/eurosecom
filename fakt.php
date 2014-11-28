@@ -34,34 +34,7 @@ if( !$uziv ) exit;
 
 $mysqldbfir=$mysqldb;
 $mysqldbdata=$mysqldb;
-$oddel2010=0;
-if (File_Exists ("pswd/oddelena2010db2011.php")) { $oddel2010=1; }
-if( $oddel2010 == 1 ) 
-{ 
-$mysqldbfir=$mysqldb2011; 
-$mysqldbdata=$mysqldb;
-}
-$oddel2011=0;
-if (File_Exists ("pswd/oddelena2011db2012.php")) { $oddel2011=1; }
-if( $oddel2011 == 1 ) 
-{ 
-$mysqldbfir=$mysqldb2012; 
-$mysqldbdata=$mysqldb;
-}
-$oddel2012=0;
-if (File_Exists ("pswd/oddelena2012db2013.php")) { $oddel2012=1; }
-if( $oddel2012 == 1 ) 
-{ 
-$mysqldbfir=$mysqldb2013; 
-$mysqldbdata=$mysqldb;
-}
-$oddel2013=0;
-if (File_Exists ("pswd/oddelena2013db2014.php")) { $oddel2013=1; }
-if( $oddel2013 == 1 ) 
-{ 
-$mysqldbfir=$mysqldb2014; 
-$mysqldbdata=$mysqldb;
-}
+$dtb2 = include("oddel_dtb1.php");
 
   @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
   if (!$spojeni):
@@ -129,30 +102,7 @@ $_SESSION['kli_vume'] = $vyb_ume;
 $_SESSION['kli_vrok'] = $vyb_rok;
 $_SESSION['kli_vduj'] = $vyb_duj;
 
-if (File_Exists ("pswd/oddelena2013db2014.php")) { $oddel2013=1; }
-if( $oddel2013 == 1 ) 
-{ 
-$mysqldbdata=$mysqldb;
-if( $vyb_rok > 0 AND $vyb_rok < 2014 ) { $mysqldbdata=$mysqldb2013; }
-}
-
-if (File_Exists ("pswd/oddelena2012db2013.php")) { $oddel2012=1; }
-if( $oddel2012 == 1 ) 
-{ 
-if( $vyb_rok > 0 AND $vyb_rok < 2013 ) { $mysqldbdata=$mysqldb2012; }
-}
-
-if (File_Exists ("pswd/oddelena2011db2012.php")) { $oddel2011=1; }
-if( $oddel2011 == 1 ) 
-{ 
-if( $vyb_rok > 0 AND $vyb_rok < 2012 ) { $mysqldbdata=$mysqldb2011; }
-}
-
-if (File_Exists ("pswd/oddelena2010db2011.php")) { $oddel2010=1; }
-if( $oddel2010 == 1 ) 
-{ 
-if( $vyb_rok > 0 AND $vyb_rok < 2011 ) { $mysqldbdata=$mysqldb2010; }
-}
+$dtb2 = include("oddel_dtb2.php");
 
   mysql_select_db($mysqldbdata);
 $vrz = include("verzia.php");
