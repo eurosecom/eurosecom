@@ -996,8 +996,9 @@ function TlacPoznamkyMUJ2014()
                 {
 var h_zos = document.forms.formpozmuj14.h_zos.value;
 var h_sch = document.forms.formpozmuj14.h_sch.value;
+var h_drp = document.forms.formuzmuj.h_drp.value;
 
-window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
