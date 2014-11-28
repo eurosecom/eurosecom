@@ -1,6 +1,5 @@
 <HTML>
 <?php
-
 //celkovy zaciatok dokumentu
        do
        {
@@ -255,9 +254,15 @@ mysql_free_result($fir_vysledok);
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
-  <link type="text/css" rel="stylesheet" href="../css/styl_poznamky_po2011.css">
-
+ <link type="text/css" rel="stylesheet" href="../css/styl_poznamky_po2011.css">
 <title>Poznámky k účt. závierke MUJ 2014</title>
+<style>
+
+
+
+</style>
+
+
 <SCRIPT Language="JavaScript" Src="../js/cookies.js">
 </SCRIPT>
 <script type="text/javascript">
@@ -482,6 +487,43 @@ if ( $strana == 1 )
 </div>
 </td>
 </tr>
+<tr>
+<td colspan="5">
+<div class="casti">
+<table width="100%" >
+<caption><span class="ctab"></span>Počet zamestnancov</caption>
+<thead>
+<tr>
+<th colspan="3">Názov položky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?>
+ <img src="../obr/vlozit.png" width="10" height="10" onclick="minulyrok(<?php echo $strana;?>)"
+ title="Načítať hodnoty predchádzajúceho obdobia pre stranu č.<?php echo $strana;?>" ></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="3">Priemerný prepočítaný počet zamestnancov</td>
+<td colspan="1"><input type="text" name="ac11" id="ac11" size="10" /></td>
+<td colspan="1"><input type="text" name="ac12" id="ac12" size="10" /></td>
+</tr>
+<tr>
+<td colspan="3">Stav zamestnancov ku dňu zostavenia účtovnej závierky, z toho:</td>
+<td colspan="1"><input type="text" name="ac21" id="ac21" size="10" /></td>
+<td colspan="1"><input type="text" name="ac22" id="ac22" size="10" /></td>
+</tr>
+<tr>
+<td colspan="3">&nbsp;- počet vedúcich zamestnancov</td>
+<td colspan="1"><input type="text" name="ac31" id="ac31" size="10" /></td>
+<td colspan="1"><input type="text" name="ac32" id="ac32" size="10" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+<td colspan="5"></td>
+</tr>
+<tr>
+<td colspan="10"></td>
+</tr>
 
 <?php
 //koniec zobraz a uprav nastavene udaje strana 1
@@ -671,7 +713,7 @@ if ( $strana == 1 )
 $robot=1;
 $cislista = include("uct_lista.php");
 
-// celkovy koniec dokumentu
+//celkovy koniec dokumentu
        } while (false);
 ?>
 </BODY>
