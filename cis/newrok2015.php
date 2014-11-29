@@ -1,17 +1,18 @@
 <?php
 //HOTOVO Kalendar 								OK2015
-//MZDY dorobit nastavenie soboty , nedele v kalendary pre 01. až 12.2015	OK2014
+//MZDY dorobit nastavenie soboty , nedele v kalendary pre 04. až 12.2015	OK2015
 
 //ak oddelena databaza treba upravit tieto skripty
 //../zaloz2015db.php prenos skriptov zakladnych					OK2014
 //../pswd/pasword.php a nakopirovat pswd/oddelena2014db2015.php
 
-//../oddel_dtb1.php a oddel_dtb2.php						OK2014
+//../oddel_dtb1.php a oddel_dtb2.php a oddel_dtb3.php				OK2014
 //../cis/oddel_dtbz1.php							OK2015
 //../cis/oddel_dtbm1.php a oddel_dtbm2.php pre hotel.sluzby			OK2014
 
-//ckli.php ckli_u.php autoinc,unique..  POZOR aj aktualizacia klienti v databaze min.roka pri ulozeni uprav  		OK2014
-//cfir.php cfir_u.php 													OK2014
+//ckli.php ckli_u.php autoinc,unique..  POZOR aj aktualizacia klienti v databaze min.roka a pri ulozeni uprav  		OK2014
+//ckli_u.php 														setODDELDB
+//cfir.php a cfir_u.php 												setODDELDB
 
 //MZDY restart parametrov prametre.php, drmiezd_export.php, prenos_poc.php	OK2014
 
