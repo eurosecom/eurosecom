@@ -636,8 +636,9 @@ $pdf->Cell(36,6," ","$rmc1",0,"L");$pdf->Cell(41,6,"$obdobie","$rmc",0,"C");
 if( $fir_mzdx06 == 0 ) { $fir_mzdx06=31; }
 
 $mesvyplat=1*($kli_vmes+1); $rokvyplat=$kli_vrok;
+$mesvyplatx=$mesvyplat;
 if ( $mesvyplat <  10 ) { $mesvyplat="0".$mesvyplat; }
-if ( $mesvyplat == 12 ) { $mesvyplat=01; $rokvyplat=$kli_vrok+1; }
+if ( $mesvyplatx == 13 ) { $mesvyplat=01; $rokvyplat=$kli_vrok+1; }
 $denvyplaty=$fir_mzdx06.".".$mesvyplat.".".$rokvyplat;
 
 if( $denvyplaty == '29.02.2014' ) { $denvyplaty="28.02.2014"; }
@@ -1604,9 +1605,11 @@ $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("
 
 if( $fir_mzdx06 == 0 ) { $fir_mzdx06=31; }
 
+
 $mesvyplat=1*($kli_vmes+1); $rokvyplat=$kli_vrok;
-if( $mesvyplat <  10 ) { $mesvyplat="0".$mesvyplat; }
-if( $mesvyplat == 12 ) { $mesvyplat=01; $rokvyplat=$kli_vrok+1; }
+$mesvyplatx=$mesvyplat;
+if ( $mesvyplat <  10 ) { $mesvyplat="0".$mesvyplat; }
+if ( $mesvyplatx == 13 ) { $mesvyplat=01; $rokvyplat=$kli_vrok+1; }
 
 $denvyplaty=$fir_mzdx06.".".$mesvyplat.".".$rokvyplat;
 if( $denvyplaty == '29.02.2014' ) { $denvyplaty="28.02.2014"; }
