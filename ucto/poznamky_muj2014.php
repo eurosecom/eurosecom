@@ -765,6 +765,62 @@ if ( $strana == 1 )
 </tr>
 <tr><td class="rmedium" colspan="10"></td></tr>
 <tr><td class="castname" colspan="10">Èl. II Informácie o prijatıch postupoch.</td></tr>
+
+
+
+<tr>
+<td colspan="5">
+<div class="casti">
+<table width="100%" >
+<caption ><span class="ctab">26</span> - Gcd) Záväzky</caption>
+<tr>
+<td class="rsmall" width="64%"></td><td class="rsmall" width="18%"></td><td class="rsmall" width="18%"></td>
+</tr>
+<thead>
+<tr>
+<th colspan="1">Názov poloky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?>
+ <img src="../obr/vlozit.png" width="10" height="10" onclick="minulyrok(<?php echo $strana;?>)"
+ title="Naèíta hodnoty predchádzajúceho obdobia pre stranu è.<?php echo $strana;?>" >
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th colspan="1">Dlhodobé záväzky spolu</th>
+<td colspan="1"><input type="text" name="gcd61" id="gcd61" size="12" /></td>
+<td colspan="1"><input type="text" name="gcd62" id="gcd62" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Záväzky so zostatkovou dobou splatnosti nad 5 rokov</td>
+<td colspan="1"><input type="text" name="gcd51" id="gcd51" size="12" /></td>
+<td colspan="1"><input type="text" name="gcd52" id="gcd52" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Záväzky so zostatkovou dobou splatnosti 1 a 5 rokov</td>
+<td colspan="1"><input type="text" name="gcd41" id="gcd41" size="12" /></td>
+<td colspan="1"><input type="text" name="gcd42" id="gcd42" size="12" /></td>
+</tr>
+<tr>
+<th colspan="1">Krátkodobé záväzky spolu</th>
+<td colspan="1"><input type="text" name="gcd31" id="gcd31" size="12" /></td>
+<td colspan="1"><input type="text" name="gcd32" id="gcd32" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Záväzky so zostatkovou dobou splatnosti do 1 roka vrátane</td>
+<td colspan="1"><input type="text" name="gcd21" id="gcd21" size="12" /></td>
+<td colspan="1"><input type="text" name="gcd22" id="gcd22" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Záväzky po lehote splatnosti</td>
+<td colspan="1"><input type="text" name="gcd11" id="gcd11" size="12" /></td>
+<td colspan="1"><input type="text" name="gcd12" id="gcd12" size="12" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+<td colspan="5"></td>
+</tr>
 <tr><td class="medium" colspan="10">Èl. II.1 Nepretrité pokraèovanie v èinnosti.</td></tr>
 <tr>
 <td colspan="10" >
@@ -854,6 +910,49 @@ if ( $strana == 1 )
 </tr>
 <tr><td class="rmedium" colspan="10"></td></tr>
 <tr><td class="castname" colspan="10">Èl. III Informácie, ktoré vysvet¾ujú a dopåòajú súvahu a vıkaz ziskov a strát.</td></tr>
+<tr>
+<td colspan="5">
+<div class="casti">
+<table width="100%" >
+<caption ><span class="ctab">29</span> - Gh) Vydané dlhopisy</caption>
+<tr>
+<td class="rsmall" width="38%"></td><td class="rsmall" width="20%"></td><td class="rsmall" width="6%"></td><td class="rsmall" width="15%"></td>
+<td class="rsmall" width="6%"></td><td class="rsmall" width="15%"></td>
+</tr>
+<thead>
+<tr>
+<th colspan="1">Názov vydaného dlhopisu</th><th colspan="1">Menovitá hodn.</th><th colspan="1">Poèet</th><th colspan="1">Emis. kurz</th>
+<th colspan="1">Úrok</th><th colspan="1">Splatnos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1"><input type="text" name="gh11" id="gh11" size="35" /></td><td colspan="1"><input type="text" name="gh12" id="gh12" size="10" /></td>
+<td colspan="1"><input type="text" name="gh13" id="gh13" size="8" /></td><td colspan="1"><input type="text" name="gh14" id="gh14" size="10" /></td>
+<td colspan="1"><input type="text" name="gh15" id="gh15" size="8" /></td><td colspan="1"><input type="text" name="gh16" id="gh16" size="10" /></td>
+</tr>
+<tr>
+<td colspan="1"><input type="text" name="gh21" id="gh21" size="35" /></td><td colspan="1"><input type="text" name="gh22" id="gh22" size="10" /></td>
+<td colspan="1"><input type="text" name="gh23" id="gh23" size="8" /></td><td colspan="1"><input type="text" name="gh24" id="gh24" size="10" /></td>
+<td colspan="1"><input type="text" name="gh25" id="gh25" size="8" /></td><td colspan="1"><input type="text" name="gh26" id="gh26" size="10" /></td>
+</tr>
+<tr>
+<td colspan="1"><input type="text" name="gh31" id="gh31" size="35" /></td><td colspan="1"><input type="text" name="gh32" id="gh32" size="10" /></td>
+<td colspan="1"><input type="text" name="gh33" id="gh33" size="8" /></td><td colspan="1"><input type="text" name="gh34" id="gh34" size="10" /></td>
+<td colspan="1"><input type="text" name="gh35" id="gh35" size="8" /></td><td colspan="1"><input type="text" name="gh36" id="gh36" size="10" /></td>
+</tr>
+<tr>
+<td colspan="1"><input type="text" name="gh41" id="gh41" size="35" /></td><td colspan="1"><input type="text" name="gh42" id="gh42" size="10" /></td>
+<td colspan="1"><input type="text" name="gh43" id="gh43" size="8" /></td><td colspan="1"><input type="text" name="gh44" id="gh44" size="10" /></td>
+<td colspan="1"><input type="text" name="gh45" id="gh45" size="8" /></td><td colspan="1"><input type="text" name="gh46" id="gh46" size="10" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</td>
+<td colspan="5"></td>
+</tr>
 <tr><td class="medium" colspan="10">Èl. III.1 Informácia o sume a dôvodoch vzniku jednotlivıch poloiek nákladov alebo vınosov, ktoré majú vınimoènı rozsah.</td></tr>
 <tr>
 <td colspan="10" >
