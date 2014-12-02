@@ -140,80 +140,370 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD ac32 DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gcd11 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gcd11 DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gcd12 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gcd12 DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gcd21 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gcd21 DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gcd22 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gcd22 DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gcd31 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gcd31 DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gcd32 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gcd32 DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gcd41 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gcd41 DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gcd42 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gcd42 DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gcd51 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gcd51 DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gcd52 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gcd52 DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gcd61 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gcd61 DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gcd62 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh11 VARCHAR(40) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh12 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh13 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh14 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh15 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh16 VARCHAR(30) NOT NULL"; 
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh21 VARCHAR(40) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh22 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh23 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh24 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh25 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh26 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh31 VARCHAR(40) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh32 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh33 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh34 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh35 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh36 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh41 VARCHAR(40) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh42 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh43 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh44 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh45 DECIMAL(10,2) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_po2011s3 ADD gh46 VARCHAR(30) NOT NULL";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gcd62 DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh11 VARCHAR(40) NOT NULL AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh12 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh13 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh14 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh15 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh16 VARCHAR(30) NOT NULL AFTER konx"; 
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh21 VARCHAR(40) NOT NULL AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh22 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh23 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh24 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh25 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh26 VARCHAR(30) NOT NULL AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh31 VARCHAR(40) NOT NULL AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh32 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh33 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh34 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh35 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh36 VARCHAR(30) NOT NULL AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh41 VARCHAR(40) NOT NULL AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh42 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh43 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh44 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh45 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD gh46 VARCHAR(30) NOT NULL AFTER konx";
+$vysledek = mysql_query("$sql");
+}
+$sql = "SELECT m143c FROM F$kli_vxcf"."_poznamky_muj2014 WHERE ico=0";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+echo "def2<br />";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k11 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k12 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k21 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k22 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k31 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k32 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k41 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k42 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k51 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k52 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k61 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k62 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k71 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k72 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k81 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k82 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k91 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD k92 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l1ab11 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l1ab12 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l1ab21 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l1ab22 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l1ab31 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l1ab32 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l1ab41 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l1ab42 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l1ab51 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l1ab52 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l1ab61 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l1ab62 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l2ab11 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l2ab12 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l2ab21 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l2ab22 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l2ab31 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l2ab32 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l2ab41 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l2ab42 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l2ab51 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l2ab52 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l2ab61 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD l2ab62 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc11 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc12 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc21 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc22 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc31 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc32 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc41 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc42 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc51 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc52 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc61 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc62 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc71 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc72 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc81 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD lc82 DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m11b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m12b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m13b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m11c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m12c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m13c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m21b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m22b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m23b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m21c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m22c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m23c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m31b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m32b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m33b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m31c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m32c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m33c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m41b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m42b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m43b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m41c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m42c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m43c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m51b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m52b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m53b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m51c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m52c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m53c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m61b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m62b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m63b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m61c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m62c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m63c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m71b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m72b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m73b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m71c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m72c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m73c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m81b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m82b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m83b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m81c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m82c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m83c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m91b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m92b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m93b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m91c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m92c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m93c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m101b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m102b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m103b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m101c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m102c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m103c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m111b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m112b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m113b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m111c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m112c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m113c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m121b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m122b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m123b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m121c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m122c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m123c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m131b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m132b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m133b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m131c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m132c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m133c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m141b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m142b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m143b DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m141c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m142c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m143c DECIMAL(10,2) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
 }
 
 //koniec upravy 2014
@@ -236,7 +526,7 @@ $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
 " ac11='$ac11', ac12='$ac12', ac21='$ac21', ac22='$ac22', ac31='$ac31', ac32='$ac32', ".
-" konx8=0 ".
+" konx=0 ".
 " WHERE ico >= 0"; 
 
 //echo $uprtxt;
@@ -264,7 +554,7 @@ $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
 
-" konx8=0 ".        
+" konx=0 ".        
 " WHERE ico >= 0";  
   
 //echo $uprtxt;
@@ -334,7 +624,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
 " gh21='$gh21', gh22='$gh22', gh23='$gh23', gh24='$gh24', gh25='$gh25', gh26='$gh26', ". 
 " gh31='$gh31', gh32='$gh32', gh33='$gh33', gh34='$gh34', gh35='$gh35', gh36='$gh36', ".
 " gh41='$gh41', gh42='$gh42', gh43='$gh43', gh44='$gh44', gh45='$gh45', gh46='$gh46', ".
-" konx8=0 ".        
+" konx=0 ".        
 " WHERE ico >= 0";  
   
 //echo $uprtxt;
@@ -350,7 +640,235 @@ if ($upravene):
 $uprav="OK";
 endif;
     }
-//koniec zapisu upravenych udajov strana 2
+//koniec zapisu upravenych udajov strana 3
+
+// zapis upravene udaje strana 4
+if ( $copern == 3 AND $strana == 24 )
+    {
+
+$m11b = strip_tags($_REQUEST['m11b']);
+$m12b = strip_tags($_REQUEST['m12b']);
+$m13b = strip_tags($_REQUEST['m13b']);
+$m11c = strip_tags($_REQUEST['m11c']);
+$m12c = strip_tags($_REQUEST['m12c']);
+$m13c = strip_tags($_REQUEST['m13c']);
+$m21b = strip_tags($_REQUEST['m21b']);
+$m22b = strip_tags($_REQUEST['m22b']);
+$m23b = strip_tags($_REQUEST['m23b']);
+$m21c = strip_tags($_REQUEST['m21c']);
+$m22c = strip_tags($_REQUEST['m22c']);
+$m23c = strip_tags($_REQUEST['m23c']);
+$m31b = strip_tags($_REQUEST['m31b']);
+$m32b = strip_tags($_REQUEST['m32b']);
+$m33b = strip_tags($_REQUEST['m33b']);
+$m31c = strip_tags($_REQUEST['m31c']);
+$m32c = strip_tags($_REQUEST['m32c']);
+$m33c = strip_tags($_REQUEST['m33c']);
+$m41b = strip_tags($_REQUEST['m41b']);
+$m42b = strip_tags($_REQUEST['m42b']);
+$m43b = strip_tags($_REQUEST['m43b']);
+$m41c = strip_tags($_REQUEST['m41c']);
+$m42c = strip_tags($_REQUEST['m42c']);
+$m43c = strip_tags($_REQUEST['m43c']);
+$m51b = strip_tags($_REQUEST['m51b']);
+$m52b = strip_tags($_REQUEST['m52b']);
+$m53b = strip_tags($_REQUEST['m53b']);
+$m51c = strip_tags($_REQUEST['m51c']);
+$m52c = strip_tags($_REQUEST['m52c']);
+$m53c = strip_tags($_REQUEST['m53c']);
+$m61b = strip_tags($_REQUEST['m61b']);
+$m62b = strip_tags($_REQUEST['m62b']);
+$m63b = strip_tags($_REQUEST['m63b']);
+$m61c = strip_tags($_REQUEST['m61c']);
+$m62c = strip_tags($_REQUEST['m62c']);
+$m63c = strip_tags($_REQUEST['m63c']);
+$m71b = strip_tags($_REQUEST['m71b']);
+$m72b = strip_tags($_REQUEST['m72b']);
+$m73b = strip_tags($_REQUEST['m73b']);
+$m71c = strip_tags($_REQUEST['m71c']);
+$m72c = strip_tags($_REQUEST['m72c']);
+$m73c = strip_tags($_REQUEST['m73c']);
+$m81b = strip_tags($_REQUEST['m81b']);
+$m82b = strip_tags($_REQUEST['m82b']);
+$m83b = strip_tags($_REQUEST['m83b']);
+$m81c = strip_tags($_REQUEST['m81c']);
+$m82c = strip_tags($_REQUEST['m82c']);
+$m83c = strip_tags($_REQUEST['m83c']);
+$m91b = strip_tags($_REQUEST['m91b']);
+$m92b = strip_tags($_REQUEST['m92b']);
+$m93b = strip_tags($_REQUEST['m93b']);
+$m91c = strip_tags($_REQUEST['m91c']);
+$m92c = strip_tags($_REQUEST['m92c']);
+$m93c = strip_tags($_REQUEST['m93c']);
+$m101b = strip_tags($_REQUEST['m101b']);
+$m102b = strip_tags($_REQUEST['m102b']);
+$m103b = strip_tags($_REQUEST['m103b']);
+$m101c = strip_tags($_REQUEST['m101c']);
+$m102c = strip_tags($_REQUEST['m102c']);
+$m103c = strip_tags($_REQUEST['m103c']);
+$m111b = strip_tags($_REQUEST['m111b']);
+$m112b = strip_tags($_REQUEST['m112b']);
+$m113b = strip_tags($_REQUEST['m113b']);
+$m111c = strip_tags($_REQUEST['m111c']);
+$m112c = strip_tags($_REQUEST['m112c']);
+$m113c = strip_tags($_REQUEST['m113c']);
+$m121b = strip_tags($_REQUEST['m121b']);
+$m122b = strip_tags($_REQUEST['m122b']);
+$m123b = strip_tags($_REQUEST['m123b']);
+$m121c = strip_tags($_REQUEST['m121c']);
+$m122c = strip_tags($_REQUEST['m122c']);
+$m123c = strip_tags($_REQUEST['m123c']);
+$m131b = strip_tags($_REQUEST['m131b']);
+$m132b = strip_tags($_REQUEST['m132b']);
+$m133b = strip_tags($_REQUEST['m133b']);
+$m131c = strip_tags($_REQUEST['m131c']);
+$m132c = strip_tags($_REQUEST['m132c']);
+$m133c = strip_tags($_REQUEST['m133c']);
+$m141b = strip_tags($_REQUEST['m141b']);
+$m142b = strip_tags($_REQUEST['m142b']);
+$m143b = strip_tags($_REQUEST['m143b']);
+$m141c = strip_tags($_REQUEST['m141c']);
+$m142c = strip_tags($_REQUEST['m142c']);
+$m143c = strip_tags($_REQUEST['m143c']);    
+
+$uprav="NO";
+
+$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
+" m11b='$m11b', m12b='$m12b', m13b='$m13b', m11c='$m11c', m12c='$m12c', ". 
+" m13c='$m13c', m21b='$m21b', m22b='$m22b', m23b='$m23b', m21c='$m21c', ".
+" m22c='$m22c', m23c='$m23c', m31b='$m31b', m32b='$m32b', m33b='$m33b', ".
+" m31c='$m31c', m32c='$m32c', m33c='$m33c', m41b='$m41b', m42b='$m42b', ".
+" m43b='$m43b', m41c='$m41c', m42c='$m42c', m43c='$m43c', m51b='$m51b', ".
+" m52b='$m52b', m53b='$m53b', m51c='$m51c', m52c='$m52c', m53c='$m53c', ".
+" m61b='$m61b', m62b='$m62b', m63b='$m63b', m61c='$m61c', m62c='$m62c', ".
+" m63c='$m63c', m71b='$m71b', m72b='$m72b', m73b='$m73b', m71c='$m71c', ".
+" m72c='$m72c', m73c='$m73c', ". 
+" m81b='$m81b', m82b='$m82b', m83b='$m83b', m81c='$m81c', m82c='$m82c', m83c='$m83c', ". 
+" m91b='$m91b', m92b='$m92b', m93b='$m93b', m91c='$m91c', m92c='$m92c', m93c='$m93c', ". 
+" m101b='$m101b', m102b='$m102b', m103b='$m103b', m101c='$m101c', ".
+" m102c='$m102c', m103c='$m103c', m111b='$m111b', m112b='$m112b', ".
+" m113b='$m113b', m111c='$m111c', m112c='$m112c', m113c='$m113c', ".
+" m121b='$m121b', m122b='$m122b', m123b='$m123b', m121c='$m121c', ".
+" m122c='$m122c', m123c='$m123c', m131b='$m131b', m132b='$m132b', ".
+" m133b='$m133b', m131c='$m131c', m132c='$m132c', m133c='$m133c', ".
+" m141b='$m141b', m142b='$m142b', m143b='$m143b', m141c='$m141c', ".
+" m142c='$m142c', m143c='$m143c', ". 
+" konx=0 ".        
+" WHERE ico >= 0";  
+  
+//echo $uprtxt;
+  
+$upravene = mysql_query("$uprtxt");  
+$copern=1;
+if (!$upravene):
+?>
+<script type="text/javascript"> alert( "⁄DAJE NEBOLI UPRAVEN… " ) </script>
+<?php
+endif;
+if ($upravene):
+$uprav="OK";
+endif;
+    }
+//koniec zapisu upravenych udajov strana 4
+
+// zapis upravene udaje strana 5
+if ( $copern == 3 AND $strana == 5 )
+    {
+$k11 = strip_tags($_REQUEST['k11']);
+$k12 = strip_tags($_REQUEST['k12']);
+$k21 = strip_tags($_REQUEST['k21']);
+$k22 = strip_tags($_REQUEST['k22']);
+$k31 = strip_tags($_REQUEST['k31']);
+$k32 = strip_tags($_REQUEST['k32']);
+$k41 = strip_tags($_REQUEST['k41']);
+$k42 = strip_tags($_REQUEST['k42']);
+$k51 = strip_tags($_REQUEST['k51']);
+$k52 = strip_tags($_REQUEST['k52']);
+$k61 = strip_tags($_REQUEST['k61']);
+$k62 = strip_tags($_REQUEST['k62']);
+$k71 = strip_tags($_REQUEST['k71']);
+$k72 = strip_tags($_REQUEST['k72']);
+$k81 = strip_tags($_REQUEST['k81']);
+$k82 = strip_tags($_REQUEST['k82']);
+$k91 = strip_tags($_REQUEST['k91']);
+$k92 = strip_tags($_REQUEST['k92']);
+$l1ab11 = strip_tags($_REQUEST['l1ab11']);
+$l1ab12 = strip_tags($_REQUEST['l1ab12']);
+$l1ab21 = strip_tags($_REQUEST['l1ab21']);
+$l1ab22 = strip_tags($_REQUEST['l1ab22']);
+$l1ab31 = strip_tags($_REQUEST['l1ab31']);
+$l1ab32 = strip_tags($_REQUEST['l1ab32']);
+$l1ab41 = strip_tags($_REQUEST['l1ab41']);
+$l1ab42 = strip_tags($_REQUEST['l1ab42']);
+$l1ab51 = strip_tags($_REQUEST['l1ab51']);
+$l1ab52 = strip_tags($_REQUEST['l1ab52']);
+$l1ab61 = strip_tags($_REQUEST['l1ab61']);
+$l1ab62 = strip_tags($_REQUEST['l1ab62']);
+$l2ab11 = strip_tags($_REQUEST['l2ab11']);
+$l2ab12 = strip_tags($_REQUEST['l2ab12']);
+$l2ab21 = strip_tags($_REQUEST['l2ab21']);
+$l2ab22 = strip_tags($_REQUEST['l2ab22']);
+$l2ab31 = strip_tags($_REQUEST['l2ab31']);
+$l2ab32 = strip_tags($_REQUEST['l2ab32']);
+$l2ab41 = strip_tags($_REQUEST['l2ab41']);
+$l2ab42 = strip_tags($_REQUEST['l2ab42']);
+$l2ab51 = strip_tags($_REQUEST['l2ab51']);
+$l2ab52 = strip_tags($_REQUEST['l2ab52']);
+$l2ab61 = strip_tags($_REQUEST['l2ab61']);
+$l2ab62 = strip_tags($_REQUEST['l2ab62']);
+$lc11 = strip_tags($_REQUEST['lc11']);
+$lc12 = strip_tags($_REQUEST['lc12']);
+$lc21 = strip_tags($_REQUEST['lc21']);
+$lc22 = strip_tags($_REQUEST['lc22']);
+$lc31 = strip_tags($_REQUEST['lc31']);
+$lc32 = strip_tags($_REQUEST['lc32']);
+$lc41 = strip_tags($_REQUEST['lc41']);
+$lc42 = strip_tags($_REQUEST['lc42']);
+$lc51 = strip_tags($_REQUEST['lc51']);
+$lc52 = strip_tags($_REQUEST['lc52']);
+$lc61 = strip_tags($_REQUEST['lc61']);
+$lc62 = strip_tags($_REQUEST['lc62']);
+$lc71 = strip_tags($_REQUEST['lc71']);
+$lc72 = strip_tags($_REQUEST['lc72']);
+$lc81 = strip_tags($_REQUEST['lc81']);
+$lc82 = strip_tags($_REQUEST['lc82']);    
+
+$uprav="NO";
+
+$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
+" k11='$k11', k12='$k12', k21='$k21', k22='$k22', k31='$k31',
+  k32='$k32', k41='$k41', k42='$k42', k51='$k51', k52='$k52',
+  k61='$k61', k62='$k62', k71='$k71', k72='$k72', k81='$k81',
+  k82='$k82', k91='$k91', k92='$k92', 
+  l1ab11='$l1ab11', l1ab12='$l1ab12', l1ab21='$l1ab21',
+  l1ab22='$l1ab22', l1ab31='$l1ab31', l1ab32='$l1ab32',
+  l1ab41='$l1ab41', l1ab42='$l1ab42', l1ab51='$l1ab51', 
+  l1ab52='$l1ab52', l1ab61='$l1ab61', l1ab62='$l1ab62',
+  l2ab11='$l2ab11', l2ab12='$l2ab12', l2ab21='$l2ab21',
+  l2ab22='$l2ab22', l2ab31='$l2ab31', l2ab32='$l2ab32',
+  l2ab41='$l2ab41', l2ab42='$l2ab42', l2ab51='$l2ab51',
+  l2ab52='$l2ab52', l2ab61='$l2ab61', l2ab62='$l2ab62',
+  lc11='$lc11', lc12='$lc12', lc21='$lc21', lc22='$lc22',
+  lc31='$lc31', lc32='$lc32', lc41='$lc41', lc42='$lc42',
+  lc51='$lc51', lc52='$lc52', lc61='$lc61', lc62='$lc62',
+  lc71='$lc71', lc72='$lc72', lc81='$lc81', lc82='$lc82', ".
+" konx=0 ".        
+" WHERE ico >= 0";  
+  
+//echo $uprtxt;
+  
+$upravene = mysql_query("$uprtxt");  
+$copern=1;
+if (!$upravene):
+?>
+<script type="text/javascript"> alert( "⁄DAJE NEBOLI UPRAVEN… " ) </script>
+<?php
+endif;
+if ($upravene):
+$uprav="OK";
+endif;
+    }
+//koniec zapisu upravenych udajov strana 5
 
 //prepocet kontrolnych cisiel
 if( $copern == 1 )
@@ -420,6 +938,150 @@ $gh43 = $fir_riadok->gh43;
 $gh44 = $fir_riadok->gh44;
 $gh45 = $fir_riadok->gh45;
 $gh46 = $fir_riadok->gh46;
+
+$m11b = $fir_riadok->m11b;
+$m12b = $fir_riadok->m12b;
+$m13b = $fir_riadok->m13b;
+$m11c = $fir_riadok->m11c;
+$m12c = $fir_riadok->m12c;
+$m13c = $fir_riadok->m13c;
+$m21b = $fir_riadok->m21b;
+$m22b = $fir_riadok->m22b;
+$m23b = $fir_riadok->m23b;
+$m21c = $fir_riadok->m21c;
+$m22c = $fir_riadok->m22c;
+$m23c = $fir_riadok->m23c;
+$m31b = $fir_riadok->m31b;
+$m32b = $fir_riadok->m32b;
+$m33b = $fir_riadok->m33b;
+$m31c = $fir_riadok->m31c;
+$m32c = $fir_riadok->m32c;
+$m33c = $fir_riadok->m33c;
+$m41b = $fir_riadok->m41b;
+$m42b = $fir_riadok->m42b;
+$m43b = $fir_riadok->m43b;
+$m41c = $fir_riadok->m41c;
+$m42c = $fir_riadok->m42c;
+$m43c = $fir_riadok->m43c;
+$m51b = $fir_riadok->m51b;
+$m52b = $fir_riadok->m52b;
+$m53b = $fir_riadok->m53b;
+$m51c = $fir_riadok->m51c;
+$m52c = $fir_riadok->m52c;
+$m53c = $fir_riadok->m53c;
+$m61b = $fir_riadok->m61b;
+$m62b = $fir_riadok->m62b;
+$m63b = $fir_riadok->m63b;
+$m61c = $fir_riadok->m61c;
+$m62c = $fir_riadok->m62c;
+$m63c = $fir_riadok->m63c;
+$m71b = $fir_riadok->m71b;
+$m72b = $fir_riadok->m72b;
+$m73b = $fir_riadok->m73b;
+$m71c = $fir_riadok->m71c;
+$m72c = $fir_riadok->m72c;
+$m73c = $fir_riadok->m73c;
+$m81b = $fir_riadok->m81b;
+$m82b = $fir_riadok->m82b;
+$m83b = $fir_riadok->m83b;
+$m81c = $fir_riadok->m81c;
+$m82c = $fir_riadok->m82c;
+$m83c = $fir_riadok->m83c;
+$m91b = $fir_riadok->m91b;
+$m92b = $fir_riadok->m92b;
+$m93b = $fir_riadok->m93b;
+$m91c = $fir_riadok->m91c;
+$m92c = $fir_riadok->m92c;
+$m93c = $fir_riadok->m93c;
+$m101b = $fir_riadok->m101b;
+$m102b = $fir_riadok->m102b;
+$m103b = $fir_riadok->m103b;
+$m101c = $fir_riadok->m101c;
+$m102c = $fir_riadok->m102c;
+$m103c = $fir_riadok->m103c;
+$m111b = $fir_riadok->m111b;
+$m112b = $fir_riadok->m112b;
+$m113b = $fir_riadok->m113b;
+$m111c = $fir_riadok->m111c;
+$m112c = $fir_riadok->m112c;
+$m113c = $fir_riadok->m113c;
+$m121b = $fir_riadok->m121b;
+$m122b = $fir_riadok->m122b;
+$m123b = $fir_riadok->m123b;
+$m121c = $fir_riadok->m121c;
+$m122c = $fir_riadok->m122c;
+$m123c = $fir_riadok->m123c;
+$m131b = $fir_riadok->m131b;
+$m132b = $fir_riadok->m132b;
+$m133b = $fir_riadok->m133b;
+$m131c = $fir_riadok->m131c;
+$m132c = $fir_riadok->m132c;
+$m133c = $fir_riadok->m133c;
+$m141b = $fir_riadok->m141b;
+$m142b = $fir_riadok->m142b;
+$m143b = $fir_riadok->m143b;
+$m141c = $fir_riadok->m141c;
+$m142c = $fir_riadok->m142c;
+$m143c = $fir_riadok->m143c;
+
+$k11 = $fir_riadok->k11;
+$k12 = $fir_riadok->k12;
+$k21 = $fir_riadok->k21;
+$k22 = $fir_riadok->k22;
+$k31 = $fir_riadok->k31;
+$k32 = $fir_riadok->k32;
+$k41 = $fir_riadok->k41;
+$k42 = $fir_riadok->k42;
+$k51 = $fir_riadok->k51;
+$k52 = $fir_riadok->k52;
+$k61 = $fir_riadok->k61;
+$k62 = $fir_riadok->k62;
+$k71 = $fir_riadok->k71;
+$k72 = $fir_riadok->k72;
+$k81 = $fir_riadok->k81;
+$k82 = $fir_riadok->k82;
+$k91 = $fir_riadok->k91;
+$k92 = $fir_riadok->k92;
+$l1ab11 = $fir_riadok->l1ab11;
+$l1ab12 = $fir_riadok->l1ab12;
+$l1ab21 = $fir_riadok->l1ab21;
+$l1ab22 = $fir_riadok->l1ab22;
+$l1ab31 = $fir_riadok->l1ab31;
+$l1ab32 = $fir_riadok->l1ab32;
+$l1ab41 = $fir_riadok->l1ab41;
+$l1ab42 = $fir_riadok->l1ab42;
+$l1ab51 = $fir_riadok->l1ab51;
+$l1ab52 = $fir_riadok->l1ab52;
+$l1ab61 = $fir_riadok->l1ab61;
+$l1ab62 = $fir_riadok->l1ab62;
+$l2ab11 = $fir_riadok->l2ab11;                           
+$l2ab12 = $fir_riadok->l2ab12;
+$l2ab21 = $fir_riadok->l2ab21;
+$l2ab22 = $fir_riadok->l2ab22;
+$l2ab31 = $fir_riadok->l2ab31;
+$l2ab32 = $fir_riadok->l2ab32;
+$l2ab41 = $fir_riadok->l2ab41;
+$l2ab42 = $fir_riadok->l2ab42;
+$l2ab51 = $fir_riadok->l2ab51;
+$l2ab52 = $fir_riadok->l2ab52;
+$l2ab61 = $fir_riadok->l2ab61;
+$l2ab62 = $fir_riadok->l2ab62;
+$lc11 = $fir_riadok->lc11;
+$lc12 = $fir_riadok->lc12;
+$lc21 = $fir_riadok->lc21;
+$lc22 = $fir_riadok->lc22;
+$lc31 = $fir_riadok->lc31;
+$lc32 = $fir_riadok->lc32;
+$lc41 = $fir_riadok->lc41;
+$lc42 = $fir_riadok->lc42;
+$lc51 = $fir_riadok->lc51;
+$lc52 = $fir_riadok->lc52;
+$lc61 = $fir_riadok->lc61;
+$lc62 = $fir_riadok->lc62;
+$lc71 = $fir_riadok->lc71;
+$lc72 = $fir_riadok->lc72;
+$lc81 = $fir_riadok->lc81;
+$lc82 = $fir_riadok->lc82;
 
 mysql_free_result($fir_vysledok);
     }
@@ -531,6 +1193,175 @@ var sirkawic = screen.width-10;
 //koniec uprava
   }
 ?>                                   
+
+<?php
+//uprava sadzby strana 4
+  if ( $copern == 1 AND $strana == 4 )
+  { 
+?>
+    function ObnovUI()
+    {
+    document.formv1.m11b.value = '<?php echo "$m11b";?>';
+    document.formv1.m12b.value = '<?php echo "$m12b";?>';
+    document.formv1.m13b.value = '<?php echo "$m13b";?>';
+    document.formv1.m11c.value = '<?php echo "$m11c";?>';
+    document.formv1.m12c.value = '<?php echo "$m12c";?>';
+    document.formv1.m13c.value = '<?php echo "$m13c";?>';
+    document.formv1.m21b.value = '<?php echo "$m21b";?>';
+    document.formv1.m22b.value = '<?php echo "$m22b";?>';
+    document.formv1.m23b.value = '<?php echo "$m23b";?>';
+    document.formv1.m21c.value = '<?php echo "$m21c";?>';
+    document.formv1.m22c.value = '<?php echo "$m22c";?>';
+    document.formv1.m23c.value = '<?php echo "$m23c";?>';
+    document.formv1.m31b.value = '<?php echo "$m31b";?>';
+    document.formv1.m32b.value = '<?php echo "$m32b";?>';
+    document.formv1.m33b.value = '<?php echo "$m33b";?>';
+    document.formv1.m31c.value = '<?php echo "$m31c";?>';
+    document.formv1.m32c.value = '<?php echo "$m32c";?>';
+    document.formv1.m33c.value = '<?php echo "$m33c";?>';
+    document.formv1.m41b.value = '<?php echo "$m41b";?>';
+    document.formv1.m42b.value = '<?php echo "$m42b";?>';
+    document.formv1.m43b.value = '<?php echo "$m43b";?>';
+    document.formv1.m41c.value = '<?php echo "$m41c";?>';
+    document.formv1.m42c.value = '<?php echo "$m42c";?>';
+    document.formv1.m43c.value = '<?php echo "$m43c";?>';
+    document.formv1.m51b.value = '<?php echo "$m51b";?>';
+    document.formv1.m52b.value = '<?php echo "$m52b";?>';
+    document.formv1.m53b.value = '<?php echo "$m53b";?>';
+    document.formv1.m51c.value = '<?php echo "$m51c";?>';
+    document.formv1.m52c.value = '<?php echo "$m52c";?>';
+    document.formv1.m53c.value = '<?php echo "$m53c";?>';
+    document.formv1.m61b.value = '<?php echo "$m61b";?>';
+    document.formv1.m62b.value = '<?php echo "$m62b";?>';
+    document.formv1.m63b.value = '<?php echo "$m63b";?>';
+    document.formv1.m61c.value = '<?php echo "$m61c";?>';
+    document.formv1.m62c.value = '<?php echo "$m62c";?>';
+    document.formv1.m63c.value = '<?php echo "$m63c";?>';
+    document.formv1.m71b.value = '<?php echo "$m71b";?>';
+    document.formv1.m72b.value = '<?php echo "$m72b";?>';
+    document.formv1.m73b.value = '<?php echo "$m73b";?>';
+    document.formv1.m71c.value = '<?php echo "$m71c";?>';
+    document.formv1.m72c.value = '<?php echo "$m72c";?>';
+    document.formv1.m73c.value = '<?php echo "$m73c";?>';
+    document.formv1.m81b.value = '<?php echo "$m81b";?>';
+    document.formv1.m82b.value = '<?php echo "$m82b";?>';
+    document.formv1.m83b.value = '<?php echo "$m83b";?>';
+    document.formv1.m81c.value = '<?php echo "$m81c";?>';
+    document.formv1.m82c.value = '<?php echo "$m82c";?>';
+    document.formv1.m83c.value = '<?php echo "$m83c";?>';
+    document.formv1.m91b.value = '<?php echo "$m91b";?>';
+    document.formv1.m92b.value = '<?php echo "$m92b";?>';
+    document.formv1.m93b.value = '<?php echo "$m93b";?>';
+    document.formv1.m91c.value = '<?php echo "$m91c";?>';
+    document.formv1.m92c.value = '<?php echo "$m92c";?>';
+    document.formv1.m93c.value = '<?php echo "$m93c";?>';
+    document.formv1.m101b.value = '<?php echo "$m101b";?>';
+    document.formv1.m102b.value = '<?php echo "$m102b";?>';
+    document.formv1.m103b.value = '<?php echo "$m103b";?>';
+    document.formv1.m101c.value = '<?php echo "$m101c";?>';
+    document.formv1.m102c.value = '<?php echo "$m102c";?>';
+    document.formv1.m103c.value = '<?php echo "$m103c";?>';
+    document.formv1.m111b.value = '<?php echo "$m111b";?>';
+    document.formv1.m112b.value = '<?php echo "$m112b";?>';
+    document.formv1.m113b.value = '<?php echo "$m113b";?>';
+    document.formv1.m111c.value = '<?php echo "$m111c";?>';
+    document.formv1.m112c.value = '<?php echo "$m112c";?>';
+    document.formv1.m113c.value = '<?php echo "$m113c";?>';
+    document.formv1.m121b.value = '<?php echo "$m121b";?>';
+    document.formv1.m122b.value = '<?php echo "$m122b";?>';
+    document.formv1.m123b.value = '<?php echo "$m123b";?>';
+    document.formv1.m121c.value = '<?php echo "$m121c";?>';
+    document.formv1.m122c.value = '<?php echo "$m122c";?>';
+    document.formv1.m123c.value = '<?php echo "$m123c";?>';
+    document.formv1.m131b.value = '<?php echo "$m131b";?>';
+    document.formv1.m132b.value = '<?php echo "$m132b";?>';
+    document.formv1.m133b.value = '<?php echo "$m133b";?>';
+    document.formv1.m131c.value = '<?php echo "$m131c";?>';
+    document.formv1.m132c.value = '<?php echo "$m132c";?>';
+    document.formv1.m133c.value = '<?php echo "$m133c";?>';
+    document.formv1.m141b.value = '<?php echo "$m141b";?>';
+    document.formv1.m142b.value = '<?php echo "$m142b";?>';
+    document.formv1.m143b.value = '<?php echo "$m143b";?>';
+    document.formv1.m141c.value = '<?php echo "$m141c";?>';
+    document.formv1.m142c.value = '<?php echo "$m142c";?>';
+    document.formv1.m143c.value = '<?php echo "$m143c";?>';
+    }
+<?php
+//koniec uprava
+  }
+?>
+
+<?php
+//uprava sadzby strana 5
+  if ( $copern == 1 AND $strana == 5 )
+  { 
+?>
+    function ObnovUI()
+    {
+    document.formv1.k11.value = '<?php echo "$k11";?>';
+    document.formv1.k12.value = '<?php echo "$k12";?>';
+    document.formv1.k21.value = '<?php echo "$k21";?>';
+    document.formv1.k22.value = '<?php echo "$k22";?>';
+    document.formv1.k31.value = '<?php echo "$k31";?>';
+    document.formv1.k32.value = '<?php echo "$k32";?>';
+    document.formv1.k41.value = '<?php echo "$k41";?>';
+    document.formv1.k42.value = '<?php echo "$k42";?>';
+    document.formv1.k51.value = '<?php echo "$k51";?>';
+    document.formv1.k52.value = '<?php echo "$k52";?>';
+    document.formv1.k61.value = '<?php echo "$k61";?>';
+    document.formv1.k62.value = '<?php echo "$k62";?>';
+    document.formv1.k71.value = '<?php echo "$k71";?>';
+    document.formv1.k72.value = '<?php echo "$k72";?>';
+    document.formv1.k81.value = '<?php echo "$k81";?>';
+    document.formv1.k82.value = '<?php echo "$k82";?>';
+    document.formv1.k91.value = '<?php echo "$k91";?>';
+    document.formv1.k92.value = '<?php echo "$k92";?>';
+    document.formv1.l1ab11.value = '<?php echo "$l1ab11";?>';
+    document.formv1.l1ab12.value = '<?php echo "$l1ab12";?>';
+    document.formv1.l1ab21.value = '<?php echo "$l1ab21";?>';
+    document.formv1.l1ab22.value = '<?php echo "$l1ab22";?>';
+    document.formv1.l1ab31.value = '<?php echo "$l1ab31";?>';
+    document.formv1.l1ab32.value = '<?php echo "$l1ab32";?>';
+    document.formv1.l1ab41.value = '<?php echo "$l1ab41";?>';
+    document.formv1.l1ab42.value = '<?php echo "$l1ab42";?>';
+    document.formv1.l1ab51.value = '<?php echo "$l1ab51";?>';
+    document.formv1.l1ab52.value = '<?php echo "$l1ab52";?>';
+    document.formv1.l1ab61.value = '<?php echo "$l1ab61";?>';
+    document.formv1.l1ab62.value = '<?php echo "$l1ab62";?>';
+    document.formv1.l2ab11.value = '<?php echo "$l2ab11";?>';
+    document.formv1.l2ab12.value = '<?php echo "$l2ab12";?>';
+    document.formv1.l2ab21.value = '<?php echo "$l2ab21";?>';
+    document.formv1.l2ab22.value = '<?php echo "$l2ab22";?>';
+    document.formv1.l2ab31.value = '<?php echo "$l2ab31";?>';
+    document.formv1.l2ab32.value = '<?php echo "$l2ab32";?>';
+    document.formv1.l2ab41.value = '<?php echo "$l2ab41";?>';
+    document.formv1.l2ab42.value = '<?php echo "$l2ab42";?>';
+    document.formv1.l2ab51.value = '<?php echo "$l2ab51";?>';
+    document.formv1.l2ab52.value = '<?php echo "$l2ab52";?>';
+    document.formv1.l2ab61.value = '<?php echo "$l2ab61";?>';
+    document.formv1.l2ab62.value = '<?php echo "$l2ab62";?>';
+    document.formv1.lc11.value = '<?php echo "$lc11";?>';
+    document.formv1.lc12.value = '<?php echo "$lc12";?>';
+    document.formv1.lc21.value = '<?php echo "$lc21";?>';
+    document.formv1.lc22.value = '<?php echo "$lc22";?>';
+    document.formv1.lc31.value = '<?php echo "$lc31";?>';
+    document.formv1.lc32.value = '<?php echo "$lc32";?>';
+    document.formv1.lc41.value = '<?php echo "$lc41";?>';
+    document.formv1.lc42.value = '<?php echo "$lc42";?>';
+    document.formv1.lc51.value = '<?php echo "$lc51";?>';
+    document.formv1.lc52.value = '<?php echo "$lc52";?>';
+    document.formv1.lc61.value = '<?php echo "$lc61";?>';
+    document.formv1.lc62.value = '<?php echo "$lc62";?>';
+    document.formv1.lc71.value = '<?php echo "$lc71";?>';
+    document.formv1.lc72.value = '<?php echo "$lc72";?>';
+    document.formv1.lc81.value = '<?php echo "$lc81";?>';
+    document.formv1.lc82.value = '<?php echo "$lc82";?>';
+
+    }
+<?php
+//koniec uprava
+  }
+?>
                                            
 </script>           
                     
@@ -670,6 +1501,8 @@ if( $strana == 14 ) $clas14="selected";
 
  <a class="<?php echo $clas4; ?>" href="#" onClick="window.open('poznamky_muj2014.php?copern=1&strana=4', '_self');">4</a>
 
+ <a class="<?php echo $clas5; ?>" href="#" onClick="window.open('poznamky_muj2014.php?copern=1&strana=5', '_self');">5</a>
+
 </td>
 <td width="10%" align="center"><INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny"></td>
 </tr>
@@ -768,59 +1601,7 @@ if ( $strana == 1 )
 
 
 
-<tr>
-<td colspan="5">
-<div class="casti">
-<table width="100%" >
-<caption ><span class="ctab">26</span> - Gcd) Z·v‰zky</caption>
-<tr>
-<td class="rsmall" width="64%"></td><td class="rsmall" width="18%"></td><td class="rsmall" width="18%"></td>
-</tr>
-<thead>
-<tr>
-<th colspan="1">N·zov poloûky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?>
- <img src="../obr/vlozit.png" width="10" height="10" onclick="minulyrok(<?php echo $strana;?>)"
- title="NaËÌtaù hodnoty predch·dzaj˙ceho obdobia pre stranu Ë.<?php echo $strana;?>" >
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th colspan="1">DlhodobÈ z·v‰zky spolu</th>
-<td colspan="1"><input type="text" name="gcd61" id="gcd61" size="12" /></td>
-<td colspan="1"><input type="text" name="gcd62" id="gcd62" size="12" /></td>
-</tr>
-<tr>
-<td colspan="1">Z·v‰zky so zostatkovou dobou splatnosti nad 5 rokov</td>
-<td colspan="1"><input type="text" name="gcd51" id="gcd51" size="12" /></td>
-<td colspan="1"><input type="text" name="gcd52" id="gcd52" size="12" /></td>
-</tr>
-<tr>
-<td colspan="1">Z·v‰zky so zostatkovou dobou splatnosti 1 aû 5 rokov</td>
-<td colspan="1"><input type="text" name="gcd41" id="gcd41" size="12" /></td>
-<td colspan="1"><input type="text" name="gcd42" id="gcd42" size="12" /></td>
-</tr>
-<tr>
-<th colspan="1">Kr·tkodobÈ z·v‰zky spolu</th>
-<td colspan="1"><input type="text" name="gcd31" id="gcd31" size="12" /></td>
-<td colspan="1"><input type="text" name="gcd32" id="gcd32" size="12" /></td>
-</tr>
-<tr>
-<td colspan="1">Z·v‰zky so zostatkovou dobou splatnosti do 1 roka vr·tane</td>
-<td colspan="1"><input type="text" name="gcd21" id="gcd21" size="12" /></td>
-<td colspan="1"><input type="text" name="gcd22" id="gcd22" size="12" /></td>
-</tr>
-<tr>
-<td colspan="1">Z·v‰zky po lehote splatnosti</td>
-<td colspan="1"><input type="text" name="gcd11" id="gcd11" size="12" /></td>
-<td colspan="1"><input type="text" name="gcd12" id="gcd12" size="12" /></td>
-</tr>
-</tbody>
-</table>
-</div>
-</td>
-<td colspan="5"></td>
-</tr>
+
 <tr><td class="medium" colspan="10">»l. II.1 NepretrûitÈ pokraËovanie v Ëinnosti.</td></tr>
 <tr>
 <td colspan="10" >
@@ -910,18 +1691,110 @@ if ( $strana == 1 )
 </tr>
 <tr><td class="rmedium" colspan="10"></td></tr>
 <tr><td class="castname" colspan="10">»l. III Inform·cie, ktorÈ vysvetæuj˙ a dopÂÚaj˙ s˙vahu a v˝kaz ziskov a str·t.</td></tr>
+
+<tr><td class="medium" colspan="10">»l. III.1 Inform·cia o sume a dÙvodoch vzniku jednotliv˝ch poloûiek n·kladov alebo v˝nosov, ktorÈ maj˙ v˝nimoËn˝ rozsah.</td></tr>
+<tr>
+<td colspan="10" >
+<div class="dtext" >
+<?php $ozntext="C_text1"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
+<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upraviù text" >
+<span class="dtextbox">
+<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+</span>
+</div>
+</td>
+</tr>
+
+<tr><td class="medium" colspan="10">»l. III.2 Inform·cie o z·v‰zkoch.</td></tr>
+<tr>
+<td colspan="10" >
+<div class="dtext" >
+<?php $ozntext="C_text2"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
+<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upraviù text" >
+<span class="dtextbox">
+<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+</span>
+</div>
+</td>
+</tr>
 <tr>
 <td colspan="5">
 <div class="casti">
 <table width="100%" >
-<caption ><span class="ctab">29</span> - Gh) VydanÈ dlhopisy</caption>
+<caption ><span class="ctab"></span> Z·v‰zky</caption>
+<tr>
+<td class="rsmall" width="64%"></td><td class="rsmall" width="18%"></td><td class="rsmall" width="18%"></td>
+</tr>
+<thead>
+<tr>
+<th colspan="1">N·zov poloûky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?>
+ <img src="../obr/vlozit.png" width="10" height="10" onclick="minulyrok(<?php echo $strana;?>)"
+ title="NaËÌtaù hodnoty predch·dzaj˙ceho obdobia pre stranu Ë.<?php echo $strana;?>" >
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th colspan="1">DlhodobÈ z·v‰zky spolu</th>
+<td colspan="1"><input type="text" name="gcd61" id="gcd61" size="12" /></td>
+<td colspan="1"><input type="text" name="gcd62" id="gcd62" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Z·v‰zky so zostatkovou dobou splatnosti nad 5 rokov</td>
+<td colspan="1"><input type="text" name="gcd51" id="gcd51" size="12" /></td>
+<td colspan="1"><input type="text" name="gcd52" id="gcd52" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Z·v‰zky so zostatkovou dobou splatnosti 1 aû 5 rokov</td>
+<td colspan="1"><input type="text" name="gcd41" id="gcd41" size="12" /></td>
+<td colspan="1"><input type="text" name="gcd42" id="gcd42" size="12" /></td>
+</tr>
+<tr>
+<th colspan="1">Kr·tkodobÈ z·v‰zky spolu</th>
+<td colspan="1"><input type="text" name="gcd31" id="gcd31" size="12" /></td>
+<td colspan="1"><input type="text" name="gcd32" id="gcd32" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Z·v‰zky so zostatkovou dobou splatnosti do 1 roka vr·tane</td>
+<td colspan="1"><input type="text" name="gcd21" id="gcd21" size="12" /></td>
+<td colspan="1"><input type="text" name="gcd22" id="gcd22" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Z·v‰zky po lehote splatnosti</td>
+<td colspan="1"><input type="text" name="gcd11" id="gcd11" size="12" /></td>
+<td colspan="1"><input type="text" name="gcd12" id="gcd12" size="12" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+<td colspan="5"></td>
+</tr>
+
+<tr><td class="medium" colspan="10">»l. III.3 Inform·cie o vlastn˝ch akci·ch.</td></tr>
+<tr>
+<td colspan="10" >
+<div class="dtext" >
+<?php $ozntext="C_text3"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
+<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upraviù text" >
+<span class="dtextbox">
+<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+</span>
+</div>
+</td>
+</tr>
+<tr>
+<td colspan="5">
+<div class="casti">
+<table width="100%" >
+<caption ><span class="ctab"></span> VlastnÈ akcie</caption>
 <tr>
 <td class="rsmall" width="38%"></td><td class="rsmall" width="20%"></td><td class="rsmall" width="6%"></td><td class="rsmall" width="15%"></td>
 <td class="rsmall" width="6%"></td><td class="rsmall" width="15%"></td>
 </tr>
 <thead>
 <tr>
-<th colspan="1">N·zov vydanÈho dlhopisu</th><th colspan="1">Menovit· hodn.</th><th colspan="1">PoËet</th><th colspan="1">Emis. kurz</th>
+<th colspan="1">N·zov akcie</th><th colspan="1">Menovit· hodn.</th><th colspan="1">PoËet</th><th colspan="1">Emis. kurz</th>
 <th colspan="1">⁄rok</th><th colspan="1">Splatnosù</th>
 </tr>
 </thead>
@@ -953,45 +1826,6 @@ if ( $strana == 1 )
 </td>
 <td colspan="5"></td>
 </tr>
-<tr><td class="medium" colspan="10">»l. III.1 Inform·cia o sume a dÙvodoch vzniku jednotliv˝ch poloûiek n·kladov alebo v˝nosov, ktorÈ maj˙ v˝nimoËn˝ rozsah.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="C_text1"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upraviù text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
-</span>
-</div>
-</td>
-</tr>
-
-<tr><td class="medium" colspan="10">»l. III.2 Inform·cie o z·v‰zkoch.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="C_text2"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upraviù text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
-</span>
-</div>
-</td>
-</tr>
-
-<tr><td class="medium" colspan="10">»l. III.3 Inform·cie o vlastn˝ch akci·ch.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="C_text3"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upraviù text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
-</span>
-</div>
-</td>
-</tr>
-
 
 <?php                     } ?>
 
@@ -1017,6 +1851,18 @@ if ( $strana == 1 )
 </td>
 </tr>
 
+
+<?php                     } ?>
+
+<?php if ( $strana == 5 ) { ?>
+<tr>
+<td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="5%"></td>
+<td class="rsmall" width="15%"></td><td class="rsmall" width="15%"></td><td class="rsmall" width="5%"></td><td class="rsmall" width="10%"></td>
+<td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
+</tr>
+<tr><td class="rmedium" colspan="10"></td></tr>
+<tr><td class="castname" colspan="10">»l. III Inform·cie, ktorÈ vysvetæuj˙ a dopÂÚaj˙ s˙vahu a v˝kaz ziskov a str·t.</td></tr>
+
 <tr><td class="medium" colspan="10">»l. III.5 Inform·cie o povinnostiach ˙Ëtovnej jednotky.</td></tr>
 <tr>
 <td colspan="10" >
@@ -1031,6 +1877,7 @@ if ( $strana == 1 )
 </tr>
 
 <?php                     } ?>
+
 
 </FORM>
 
