@@ -1851,6 +1851,105 @@ if ( $strana == 1 )
 </td>
 </tr>
 
+<tr>
+<td colspan="10">
+<div class="casti">
+<table width="100%" >
+<caption ><span class="ctab">45</span> - M Príjmy a vıhody èlenov štatutárnych orgánov, dozornıch orgánov a inıch orgánov</caption>
+<tr>
+<td class="rsmall" width="12%"></td>
+<td class="rsmall" width="8%"></td><td class="rsmall" width="7%"></td><td class="rsmall" width="7%"></td>
+<td class="rsmall" width="8%"></td><td class="rsmall" width="7%"></td><td class="rsmall" width="7%"></td>
+<td class="rsmall" width="8%"></td><td class="rsmall" width="7%"></td><td class="rsmall" width="7%"></td>
+<td class="rsmall" width="8%"></td><td class="rsmall" width="7%"></td><td class="rsmall" width="7%"></td>
+</tr>
+<thead>
+<tr>
+<th colspan="1" rowspan="3">Druh príjmu, vıhody</th><th colspan="3">Hodn. príjmu, vıhody súèas. èlenov org.</th>
+<th colspan="3">Hodn. príjmu, vıhody bıval. èlenov org.</th><th colspan="3">Hodn. príjmu, vıhody súèas. èlenov org.</th>
+<th colspan="3">Hodn. príjmu, vıhody bıval. èlenov org.</th>
+</tr>
+<tr>
+<th colspan="1">štatutár.</th><th colspan="1">dozornıch</th><th colspan="1">inıch</th>
+<th colspan="1">štatutár.</th><th colspan="1">dozornıch</th><th colspan="1">inıch</th>
+<th colspan="1">štatutár.</th><th colspan="1">dozornıch</th><th colspan="1">inıch</th>
+<th colspan="1">štatutár.</th><th colspan="1">dozornıch</th><th colspan="1">inıch</th>
+</tr>
+<tr>
+<th colspan="6"><?php echo $kli_vrok;?></th><th colspan="6"><?php echo $kli_minrok;?></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1">Peòané príjmy</td><td colspan="1"><input type="text" name="m11b" id="m11b" size="12" /></td>
+<td colspan="1"><input type="text" name="m12b" id="m12b" size="12" /></td><td colspan="1"><input type="text" name="m13b" id="m13b" size="12" /></td>
+<td colspan="1"><input type="text" name="m11c" id="m11c" size="12" /></td><td colspan="1"><input type="text" name="m12c" id="m12c" size="12" /></td>
+<td colspan="1"><input type="text" name="m13c" id="m13c" size="12" /></td><td colspan="1"><input type="text" name="m21b" id="m21b" size="12" /></td>
+<td colspan="1"><input type="text" name="m22b" id="m22b" size="12" /></td><td colspan="1"><input type="text" name="m23b" id="m23b" size="12" /></td>
+<td colspan="1"><input type="text" name="m21c" id="m21c" size="12" /></td><td colspan="1"><input type="text" name="m22c" id="m22c" size="12" /></td>
+<td colspan="1"><input type="text" name="m23c" id="m23c" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Nepeòa. príjmy</td><td colspan="1"><input type="text" name="m31b" id="m31b" size="12" /></td>
+<td colspan="1"><input type="text" name="m32b" id="m32b" size="12" /></td><td colspan="1"><input type="text" name="m33b" id="m33b" size="12" /></td>
+<td colspan="1"><input type="text" name="m31c" id="m31c" size="12" /></td><td colspan="1"><input type="text" name="m32c" id="m32c" size="12" /></td>
+<td colspan="1"><input type="text" name="m33c" id="m33c" size="12" /></td><td colspan="1"><input type="text" name="m41b" id="m41b" size="12" /></td>
+<td colspan="1"><input type="text" name="m42b" id="m42b" size="12" /></td><td colspan="1"><input type="text" name="m43b" id="m43b" size="12" /></td>
+<td colspan="1"><input type="text" name="m41c" id="m41c" size="12" /></td><td colspan="1"><input type="text" name="m42c" id="m42c" size="12" /></td>
+<td colspan="1"><input type="text" name="m43c" id="m43c" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Peòané preddav.</td><td colspan="1"><input type="text" name="m51b" id="m51b" size="12" /></td>
+<td colspan="1"><input type="text" name="m52b" id="m52b" size="12" /></td><td colspan="1"><input type="text" name="m53b" id="m53b" size="12" /></td>
+<td colspan="1"><input type="text" name="m51c" id="m51c" size="12" /></td><td colspan="1"><input type="text" name="m52c" id="m52c" size="12" /></td>
+<td colspan="1"><input type="text" name="m53c" id="m53c" size="12" /></td><td colspan="1"><input type="text" name="m61b" id="m61b" size="12" /></td>
+<td colspan="1"><input type="text" name="m62b" id="m62b" size="12" /></td><td colspan="1"><input type="text" name="m63b" id="m63b" size="12" /></td>
+<td colspan="1"><input type="text" name="m61c" id="m61c" size="12" /></td><td colspan="1"><input type="text" name="m62c" id="m62c" size="12" /></td>
+<td colspan="1"><input type="text" name="m63c" id="m63c" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Nepeòa. preddav.</td><td colspan="1"><input type="text" name="m71b" id="m71b" size="12" /></td>
+<td colspan="1"><input type="text" name="m72b" id="m72b" size="12" /></td><td colspan="1"><input type="text" name="m73b" id="m73b" size="12" /></td>
+<td colspan="1"><input type="text" name="m71c" id="m71c" size="12" /></td><td colspan="1"><input type="text" name="m72c" id="m72c" size="12" /></td>
+<td colspan="1"><input type="text" name="m73c" id="m73c" size="12" /></td><td colspan="1"><input type="text" name="m81b" id="m81b" size="12" /></td>
+<td colspan="1"><input type="text" name="m82b" id="m82b" size="12" /></td><td colspan="1"><input type="text" name="m83b" id="m83b" size="12" /></td>
+<td colspan="1"><input type="text" name="m81c" id="m81c" size="12" /></td><td colspan="1"><input type="text" name="m82c" id="m82c" size="12" /></td>
+<td colspan="1"><input type="text" name="m83c" id="m83c" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Poskytnuté úvery</td><td colspan="1"><input type="text" name="m91b" id="m91b" size="12" /></td>
+<td colspan="1"><input type="text" name="m92b" id="m92b" size="12" /></td><td colspan="1"><input type="text" name="m93b" id="m93b" size="12" /></td>
+<td colspan="1"><input type="text" name="m91c" id="m91c" size="12" /></td><td colspan="1"><input type="text" name="m92c" id="m92c" size="12" /></td>
+<td colspan="1"><input type="text" name="m93c" id="m93c" size="12" /></td><td colspan="1"><input type="text" name="m101b" id="m101b" size="12" /></td>
+<td colspan="1"><input type="text" name="m102b" id="m102b" size="12" /></td><td colspan="1"><input type="text" name="m103b" id="m103b" size="12" /></td>
+<td colspan="1"><input type="text" name="m101c" id="m101c" size="12" /></td><td colspan="1"><input type="text" name="m102c" id="m102c" size="12" /></td>
+<td colspan="1"><input type="text" name="m103c" id="m103c" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Poskytnuté záruky</td><td colspan="1"><input type="text" name="m111b" id="m111b" size="12" /></td>
+<td colspan="1"><input type="text" name="m112b" id="m112b" size="12" /></td><td colspan="1"><input type="text" name="m113b" id="m113b" size="12" /></td>
+<td colspan="1"><input type="text" name="m111c" id="m111c" size="12" /></td><td colspan="1"><input type="text" name="m112c" id="m112c" size="12" /></td>
+<td colspan="1"><input type="text" name="m113c" id="m113c" size="12" /></td><td colspan="1"><input type="text" name="m121b" id="m121b" size="12" /></td>
+<td colspan="1"><input type="text" name="m122b" id="m122b" size="12" /></td><td colspan="1"><input type="text" name="m123b" id="m123b" size="12" /></td>
+<td colspan="1"><input type="text" name="m121c" id="m121c" size="12" /></td><td colspan="1"><input type="text" name="m122c" id="m122c" size="12" /></td>
+<td colspan="1"><input type="text" name="m123c" id="m123c" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Iné</td><td colspan="1"><input type="text" name="m131b" id="m131b" size="12" /></td>
+<td colspan="1"><input type="text" name="m132b" id="m132b" size="12" /></td><td colspan="1"><input type="text" name="m133b" id="m133b" size="12" /></td>
+<td colspan="1"><input type="text" name="m131c" id="m131c" size="12" /></td><td colspan="1"><input type="text" name="m132c" id="m132c" size="12" /></td>
+<td colspan="1"><input type="text" name="m133c" id="m133c" size="12" /></td><td colspan="1"><input type="text" name="m141b" id="m141b" size="12" /></td>
+<td colspan="1"><input type="text" name="m142b" id="m142b" size="12" /></td><td colspan="1"><input type="text" name="m143b" id="m143b" size="12" /></td>
+<td colspan="1"><input type="text" name="m141c" id="m141c" size="12" /></td><td colspan="1"><input type="text" name="m142c" id="m142c" size="12" /></td>
+<td colspan="1"><input type="text" name="m143c" id="m143c" size="12" /></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</td>
+</tr>
 
 <?php                     } ?>
 
@@ -1875,6 +1974,214 @@ if ( $strana == 1 )
 </div>
 </td>
 </tr>
+<tr>
+<td colspan="6">
+<div class="casti">
+<table width="100%" >
+<caption ><span class="ctab">42</span> - K) Podsúvahové poloky</caption>
+<tr>
+<td class="rsmall" width="30%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
+<td class="rsmall" width="30%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
+</tr>
+<thead>
+<tr>
+<th colspan="1">Názov poloky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?>
+ <img src="../obr/vlozit.png" width="10" height="10" onclick="minulyrok(<?php echo $strana;?>)"
+ title="Naèíta hodnoty predchádzajúceho obdobia pre stranu è.<?php echo $strana;?>" >
+</th>
+<th colspan="1">Názov poloky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1">Prenajatı majetok</td><td colspan="1"><input type="text" name="k11" id="k11" size="12" /></td><td colspan="1"><input type="text" name="k12" id="k12" size="12" /></td>
+<td colspan="1">Odpísané poh¾adávky</td><td colspan="1"><input type="text" name="k61" id="k61" size="12" /></td><td colspan="1"><input type="text" name="k62" id="k62" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Majetok v nájme (operatívny prenájom)</td><td colspan="1"><input type="text" name="k21" id="k21" size="12" /></td><td colspan="1"><input type="text" name="k22" id="k22" size="12" /></td>
+<td colspan="1">Poh¾adávky z leasingu</td><td colspan="1"><input type="text" name="k71" id="k71" size="12" /></td><td colspan="1"><input type="text" name="k72" id="k72" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Majetok prijatı do úschovy</td><td colspan="1"><input type="text" name="k31" id="k31" size="12" /></td><td colspan="1"><input type="text" name="k32" id="k32" size="12" /></td>
+<td colspan="1">Záväzky z leasingu</td><td colspan="1"><input type="text" name="k81" id="k81" size="12" /></td><td colspan="1"><input type="text" name="k82" id="k82" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Poh¾adávky z derivátov</td><td colspan="1"><input type="text" name="k41" id="k41" size="12" /></td><td colspan="1"><input type="text" name="k42" id="k42" size="12" /></td>
+<td colspan="1">Iné poloky</td><td colspan="1"><input type="text" name="k91" id="k91" size="12" /></td><td colspan="1"><input type="text" name="k92" id="k92" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Záväzky z opcií derivátov</td><td colspan="1"><input type="text" name="k51" id="k51" size="12" /></td><td colspan="1"><input type="text" name="k52" id="k52" size="12" /></td>
+<td colspan="1"></td><td colspan="1"></td><td colspan="1"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+
+<tr>
+<td colspan="5">
+<div class="casti">
+<table width="100%" >
+<caption ><span class="ctab">43.1</span> - La,b) Podmienené záväzky - Tabu¾ka è. 1</caption>
+<tr>
+<td class="rsmall" width="50%"></td><td class="rsmall" width="25%"></td><td class="rsmall" width="25%"></td>
+</tr>
+<thead>
+<tr>
+<th colspan="1" rowspan="2">Druh podmieneného záväzku</th><th colspan="2"><?php echo $kli_vrok;?></th>
+</tr>
+<tr>
+<th colspan="1">Hodnota celkom</th><th colspan="1">Hodn. voèi spriaz. osobám</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1">Zo súdnych rozhodnutí</td>
+<td colspan="1"><input type="text" name="l1ab11" id="l1ab11" size="12" /></td>
+<td colspan="1"><input type="text" name="l1ab12" id="l1ab12" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Z poskytnutıch záruk</td>
+<td colspan="1"><input type="text" name="l1ab21" id="l1ab21" size="12" /></td>
+<td colspan="1"><input type="text" name="l1ab22" id="l1ab22" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Zo všeobecne záväznıch právnych predpisov</td>
+<td colspan="1"><input type="text" name="l1ab31" id="l1ab31" size="12" /></td>
+<td colspan="1"><input type="text" name="l1ab32" id="l1ab32" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Zo zmluvy o podriadenom záväzku</td>
+<td colspan="1"><input type="text" name="l1ab41" id="l1ab41" size="12" /></td>
+<td colspan="1"><input type="text" name="l1ab42" id="l1ab42" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Z ruèenia</td>
+<td colspan="1"><input type="text" name="l1ab51" id="l1ab51" size="12" /></td>
+<td colspan="1"><input type="text" name="l1ab52" id="l1ab52" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Iné podmienené záväzky</td>
+<td colspan="1"><input type="text" name="l1ab61" id="l1ab61" size="12" /></td>
+<td colspan="1"><input type="text" name="l1ab62" id="l1ab62" size="12" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+
+<tr>
+	<td colspan="5">
+<div class="casti">
+<table width="100%" >
+<caption ><span class="ctab">43.2</span> - La,b) Podmienené záväzky - Tabu¾ka è. 2</caption>
+<tr>
+<td class="rsmall" width="50%"></td><td class="rsmall" width="25%"></td><td class="rsmall" width="25%"></td>
+</tr>
+<thead>
+<tr>
+<th colspan="1" rowspan="2">Druh podmieneného záväzku</th><th colspan="2"><?php echo $kli_minrok;?></th>
+</tr>
+<tr>
+<th colspan="1">Hodnota celkom</th><th colspan="1">Hodn. voèi spriaz. osobám</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1">Zo súdnych rozhodnutí</td>
+<td colspan="1"><input type="text" name="l2ab11" id="l2ab11" size="12" /></td>
+<td colspan="1"><input type="text" name="l2ab12" id="l2ab12" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Z poskytnutıch záruk</td>
+<td colspan="1"><input type="text" name="l2ab21" id="l2ab21" size="12" /></td>
+<td colspan="1"><input type="text" name="l2ab22" id="l2ab22" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Zo všeobecne záväznıch právnych predpisov</td>
+<td colspan="1"><input type="text" name="l2ab31" id="l2ab31" size="12" /></td>
+<td colspan="1"><input type="text" name="l2ab32" id="l2ab32" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Zo zmluvy o podriadenom záväzku</td>
+<td colspan="1"><input type="text" name="l2ab41" id="l2ab41" size="12" /></td>
+<td colspan="1"><input type="text" name="l2ab42" id="l2ab42" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Z ruèenia</td>
+<td colspan="1"><input type="text" name="l2ab51" id="l2ab51" size="12" /></td>
+<td colspan="1"><input type="text" name="l2ab52" id="l2ab52" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Iné podmienené záväzky</td>
+<td colspan="1"><input type="text" name="l2ab61" id="l2ab61" size="12" /></td>
+<td colspan="1"><input type="text" name="l2ab62" id="l2ab62" size="12" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+  </td>
+</tr>
+
+<tr>
+<td colspan="6">
+<div class="casti">
+<table width="100%" >
+<caption ><span class="ctab">44</span> - Lc) Podmienenı majetok</caption>
+<tr>
+<td class="rsmall" width="30%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
+<td class="rsmall" width="30%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
+</tr>
+<thead>
+<tr>
+<th colspan="1">Druh podmieneného majetku</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?></th>
+<th colspan="1">Druh podmieneného majetku</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1">Práva zo servisnıch zmlúv</td>
+<td colspan="1"><input type="text" name="lc11" id="lc11" size="12" /></td>
+<td colspan="1"><input type="text" name="lc12" id="lc12" size="12" /></td>
+<td colspan="1">Práva z investov. prostried. získan. oslobod. od dane z príj.</td>
+<td colspan="1"><input type="text" name="lc51" id="lc51" size="12" /></td>
+<td colspan="1"><input type="text" name="lc52" id="lc52" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Práva z poistnıch zmlúv</td>
+<td colspan="1"><input type="text" name="lc21" id="lc21" size="12" /></td>
+<td colspan="1"><input type="text" name="lc22" id="lc22" size="12" /></td>
+<td colspan="1">Práva z privatizácie</td>
+<td colspan="1"><input type="text" name="lc61" id="lc61" size="12" /></td>
+<td colspan="1"><input type="text" name="lc62" id="lc62" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Práva z koncesionárskych zmlúv</td>
+<td colspan="1"><input type="text" name="lc31" id="lc31" size="12" /></td>
+<td colspan="1"><input type="text" name="lc32" id="lc32" size="12" /></td>
+<td colspan="1">Práva zo súdnych sporov</td>
+<td colspan="1"><input type="text" name="lc71" id="lc71" size="12" /></td>
+<td colspan="1"><input type="text" name="lc72" id="lc72" size="12" /></td>
+</tr>
+<tr>
+<td colspan="1">Práva z licenènıch zmlúv</td>
+<td colspan="1"><input type="text" name="lc41" id="lc41" size="12" /></td>
+<td colspan="1"><input type="text" name="lc42" id="lc42" size="12" /></td>
+<td colspan="1">Iné práva</td>
+<td colspan="1"><input type="text" name="lc81" id="lc81" size="12" /></td>
+<td colspan="1"><input type="text" name="lc82" id="lc82" size="12" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+<tr>
+<td colspan="10"></td>
+</tr>
+
 
 <?php                     } ?>
 
