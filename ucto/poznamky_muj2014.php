@@ -505,7 +505,28 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD m143c DECIMAL(10,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 }
-
+$sql = "SELECT tlt307 FROM F$kli_vxcf"."_poznamky_muj2014 WHERE ico=0";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+echo "def3<br />";
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD tlt101 DECIMAL(2,0) DEFAULT 1 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD tlt301 DECIMAL(2,0) DEFAULT 1 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD tlt302 DECIMAL(2,0) DEFAULT 1 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD tlt303 DECIMAL(2,0) DEFAULT 1 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD tlt304 DECIMAL(2,0) DEFAULT 1 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD tlt305 DECIMAL(2,0) DEFAULT 1 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD tlt306 DECIMAL(2,0) DEFAULT 1 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014 ADD tlt307 DECIMAL(2,0) DEFAULT 1 AFTER konx";
+$vysledek = mysql_query("$sql");
+}
 //koniec upravy 2014
 
 //koniec vytvor tabulku v databaze
@@ -521,11 +542,12 @@ $ac22 = strip_tags($_REQUEST['ac22']);
 $ac31 = strip_tags($_REQUEST['ac31']);       
 $ac32 = strip_tags($_REQUEST['ac32']); 
 
-
+$tlt101 = 1*$_REQUEST['tlt101'];
 $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
 " ac11='$ac11', ac12='$ac12', ac21='$ac21', ac22='$ac22', ac31='$ac31', ac32='$ac32', ".
+" tlt101='$tlt101', ".
 " konx=0 ".
 " WHERE ico >= 0"; 
 
@@ -614,6 +636,8 @@ $gh44 = strip_tags($_REQUEST['gh44']);
 $gh45 = strip_tags($_REQUEST['gh45']);
 $gh46 = strip_tags($_REQUEST['gh46']);    
 
+$tlt301 = 1*$_REQUEST['tlt301'];
+$tlt302 = 1*$_REQUEST['tlt302'];
 $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
@@ -624,6 +648,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
 " gh21='$gh21', gh22='$gh22', gh23='$gh23', gh24='$gh24', gh25='$gh25', gh26='$gh26', ". 
 " gh31='$gh31', gh32='$gh32', gh33='$gh33', gh34='$gh34', gh35='$gh35', gh36='$gh36', ".
 " gh41='$gh41', gh42='$gh42', gh43='$gh43', gh44='$gh44', gh45='$gh45', gh46='$gh46', ".
+" tlt301='$tlt301', tlt302='$tlt302', ".
 " konx=0 ".        
 " WHERE ico >= 0";  
   
@@ -643,7 +668,7 @@ endif;
 //koniec zapisu upravenych udajov strana 3
 
 // zapis upravene udaje strana 4
-if ( $copern == 3 AND $strana == 24 )
+if ( $copern == 3 AND $strana == 4 )
     {
 
 $m11b = strip_tags($_REQUEST['m11b']);
@@ -731,6 +756,7 @@ $m141c = strip_tags($_REQUEST['m141c']);
 $m142c = strip_tags($_REQUEST['m142c']);
 $m143c = strip_tags($_REQUEST['m143c']);    
 
+$tlt303 = 1*$_REQUEST['tlt303'];
 $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
@@ -753,6 +779,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
 " m133b='$m133b', m131c='$m131c', m132c='$m132c', m133c='$m133c', ".
 " m141b='$m141b', m142b='$m142b', m143b='$m143b', m141c='$m141c', ".
 " m142c='$m142c', m143c='$m143c', ". 
+" tlt303='$tlt303', ".
 " konx=0 ".        
 " WHERE ico >= 0";  
   
@@ -833,6 +860,10 @@ $lc72 = strip_tags($_REQUEST['lc72']);
 $lc81 = strip_tags($_REQUEST['lc81']);
 $lc82 = strip_tags($_REQUEST['lc82']);    
 
+$tlt304 = 1*$_REQUEST['tlt304'];
+$tlt305 = 1*$_REQUEST['tlt305'];
+$tlt306 = 1*$_REQUEST['tlt306'];
+$tlt307 = 1*$_REQUEST['tlt307'];
 $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
@@ -852,6 +883,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
   lc31='$lc31', lc32='$lc32', lc41='$lc41', lc42='$lc42',
   lc51='$lc51', lc52='$lc52', lc61='$lc61', lc62='$lc62',
   lc71='$lc71', lc72='$lc72', lc81='$lc81', lc82='$lc82', ".
+" tlt304='$tlt304', tlt305='$tlt305', tlt306='$tlt306', tlt307='$tlt307', ".
 " konx=0 ".        
 " WHERE ico >= 0";  
   
@@ -1083,6 +1115,15 @@ $lc72 = $fir_riadok->lc72;
 $lc81 = $fir_riadok->lc81;
 $lc82 = $fir_riadok->lc82;
 
+$tlt101 = 1*$fir_riadok->tlt101;
+$tlt301 = 1*$fir_riadok->tlt301;
+$tlt302 = 1*$fir_riadok->tlt302;
+$tlt303 = 1*$fir_riadok->tlt303;
+$tlt304 = 1*$fir_riadok->tlt304;
+$tlt305 = 1*$fir_riadok->tlt305;
+$tlt306 = 1*$fir_riadok->tlt306;
+$tlt307 = 1*$fir_riadok->tlt307;
+
 mysql_free_result($fir_vysledok);
     }
 //koniec nacitania
@@ -1121,6 +1162,8 @@ var sirkawic = screen.width-10;
     document.formv1.ac22.value = '<?php echo "$ac22";?>';
     document.formv1.ac31.value = '<?php echo "$ac31";?>';
     document.formv1.ac32.value = '<?php echo "$ac32";?>';
+
+    <?php if( $tlt101 == 1 ) { ?>document.formv1.tlt101.checked = "checked"; <?php } ?>
 
     }
 <?php
@@ -1187,6 +1230,9 @@ var sirkawic = screen.width-10;
     document.formv1.gh44.value = '<?php echo "$gh44";?>';
     document.formv1.gh45.value = '<?php echo "$gh45";?>';
     document.formv1.gh46.value = '<?php echo "$gh46";?>';
+
+    <?php if( $tlt301 == 1 ) { ?>document.formv1.tlt301.checked = "checked"; <?php } ?>
+    <?php if( $tlt302 == 1 ) { ?>document.formv1.tlt302.checked = "checked"; <?php } ?>
 
     }
 <?php
@@ -1285,6 +1331,8 @@ var sirkawic = screen.width-10;
     document.formv1.m141c.value = '<?php echo "$m141c";?>';
     document.formv1.m142c.value = '<?php echo "$m142c";?>';
     document.formv1.m143c.value = '<?php echo "$m143c";?>';
+    <?php if( $tlt303 == 1 ) { ?>document.formv1.tlt303.checked = "checked"; <?php } ?>
+
     }
 <?php
 //koniec uprava
@@ -1356,6 +1404,11 @@ var sirkawic = screen.width-10;
     document.formv1.lc72.value = '<?php echo "$lc72";?>';
     document.formv1.lc81.value = '<?php echo "$lc81";?>';
     document.formv1.lc82.value = '<?php echo "$lc82";?>';
+
+    <?php if( $tlt304 == 1 ) { ?>document.formv1.tlt304.checked = "checked"; <?php } ?>
+    <?php if( $tlt305 == 1 ) { ?>document.formv1.tlt305.checked = "checked"; <?php } ?>
+    <?php if( $tlt306 == 1 ) { ?>document.formv1.tlt306.checked = "checked"; <?php } ?>
+    <?php if( $tlt307 == 1 ) { ?>document.formv1.tlt307.checked = "checked"; <?php } ?>
 
     }
 <?php
@@ -1550,7 +1603,7 @@ if ( $strana == 1 )
 <td colspan="5">
 <div class="casti">
 <table width="100%" >
-<caption><span class="ctab"></span>Poèet zamestnancov</caption>
+<caption><span class="ctab"></span><input type="checkbox" name="tlt101" value="1" title="Zobrazi tabu¾ku v PDF"/> Poèet zamestnancov</caption>
 <thead>
 <tr>
 <th colspan="3">Názov položky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?>
@@ -1721,7 +1774,7 @@ if ( $strana == 1 )
 <td colspan="5">
 <div class="casti">
 <table width="100%" >
-<caption ><span class="ctab"></span> Záväzky</caption>
+<caption ><span class="ctab"></span><input type="checkbox" name="tlt301" value="1" title="Zobrazi tabu¾ku v PDF"/> Záväzky</caption>
 <tr>
 <td class="rsmall" width="64%"></td><td class="rsmall" width="18%"></td><td class="rsmall" width="18%"></td>
 </tr>
@@ -1787,7 +1840,7 @@ if ( $strana == 1 )
 <td colspan="5">
 <div class="casti">
 <table width="100%" >
-<caption ><span class="ctab"></span> Vlastné akcie</caption>
+<caption ><span class="ctab"></span><input type="checkbox" name="tlt302" value="1" title="Zobrazi tabu¾ku v PDF"/> Vlastné akcie</caption>
 <tr>
 <td class="rsmall" width="38%"></td><td class="rsmall" width="20%"></td><td class="rsmall" width="6%"></td><td class="rsmall" width="15%"></td>
 <td class="rsmall" width="6%"></td><td class="rsmall" width="15%"></td>
@@ -1855,7 +1908,7 @@ if ( $strana == 1 )
 <td colspan="10">
 <div class="casti">
 <table width="100%" >
-<caption ><span class="ctab">45</span> - M Príjmy a výhody èlenov štatutárnych orgánov, dozorných orgánov a iných orgánov</caption>
+<caption ><span class="ctab"></span><input type="checkbox" name="tlt303" value="1" title="Zobrazi tabu¾ku v PDF"/> Príjmy a výhody èlenov štatutárnych orgánov, dozorných orgánov a iných orgánov</caption>
 <tr>
 <td class="rsmall" width="12%"></td>
 <td class="rsmall" width="8%"></td><td class="rsmall" width="7%"></td><td class="rsmall" width="7%"></td>
@@ -1978,7 +2031,7 @@ if ( $strana == 1 )
 <td colspan="6">
 <div class="casti">
 <table width="100%" >
-<caption ><span class="ctab">42</span> - K) Podsúvahové položky</caption>
+<caption ><span class="ctab"></span><input type="checkbox" name="tlt304" value="1" title="Zobrazi tabu¾ku v PDF"/> Podsúvahové položky</caption>
 <tr>
 <td class="rsmall" width="30%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
 <td class="rsmall" width="30%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
@@ -2020,10 +2073,21 @@ if ( $strana == 1 )
 </tr>
 
 <tr>
+<td colspan="10" >
+<div class="dtext" >
+<?php $ozntext="C_text6"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
+<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
+<span class="dtextbox">
+<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+</span>
+</div>
+</td>
+</tr>
+<tr>
 <td colspan="5">
 <div class="casti">
 <table width="100%" >
-<caption ><span class="ctab">43.1</span> - La,b) Podmienené záväzky - Tabu¾ka è. 1</caption>
+<caption ><span class="ctab"></span><input type="checkbox" name="tlt305" value="1" title="Zobrazi tabu¾ku v PDF"/> Podmienené záväzky - Tabu¾ka è. 1</caption>
 <tr>
 <td class="rsmall" width="50%"></td><td class="rsmall" width="25%"></td><td class="rsmall" width="25%"></td>
 </tr>
@@ -2073,10 +2137,10 @@ if ( $strana == 1 )
 </tr>
 
 <tr>
-	<td colspan="5">
+<td colspan="5">
 <div class="casti">
 <table width="100%" >
-<caption ><span class="ctab">43.2</span> - La,b) Podmienené záväzky - Tabu¾ka è. 2</caption>
+<caption ><span class="ctab"></span><input type="checkbox" name="tlt306" value="1" title="Zobrazi tabu¾ku v PDF"/> Podmienené záväzky - Tabu¾ka è. 2</caption>
 <tr>
 <td class="rsmall" width="50%"></td><td class="rsmall" width="25%"></td><td class="rsmall" width="25%"></td>
 </tr>
@@ -2126,10 +2190,21 @@ if ( $strana == 1 )
 </tr>
 
 <tr>
+<td colspan="10" >
+<div class="dtext" >
+<?php $ozntext="C_text7"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
+<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
+<span class="dtextbox">
+<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+</span>
+</div>
+</td>
+</tr>
+<tr>
 <td colspan="6">
 <div class="casti">
 <table width="100%" >
-<caption ><span class="ctab">44</span> - Lc) Podmienený majetok</caption>
+<caption ><span class="ctab"></span><input type="checkbox" name="tlt307" value="1" title="Zobrazi tabu¾ku v PDF"/> Podmienený majetok</caption>
 <tr>
 <td class="rsmall" width="30%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
 <td class="rsmall" width="30%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
