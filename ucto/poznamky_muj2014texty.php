@@ -142,19 +142,19 @@ $ulozenx="Text uloûen˝";
 //koniec ulozenia
 
 
-//import z ../import/FIR$kli_vxcf/POZNAMKYPO2012.CSV
+//import z ../import/FIR$kli_vxcf/POZNAMKYMUJ.CSV
     if ( $copern == 55 )
     {
-$odkial="../import/FIR".$kli_vxcf."/POZNAMKYPO".$kli_vrok.".CSV";
+$odkial="../import/FIR".$kli_vxcf."/POZNAMKYMUJ".$kli_vrok.".CSV";
 $firxyz = 1*strip_tags($_REQUEST['firx']);
-if( $firxyz == 9999 ) { $odkial="../import/POZNAMKYPO".$kli_vrok.".CSV"; }
+if( $firxyz == 9999 ) { $odkial="../import/POZNAMKYMUJ".$kli_vrok.".CSV"; }
 
 ?>
 <script type="text/javascript">
 if( !confirm ("Chcete importovaù poloûky \r zo s˙boru <?php echo $odkial; ?> ? \r POZOR!!! Pred importom bud˙ terajöie pozn·mky v tejto firme vymazanÈ .") )
          { window.close()  }
 else
-         { location.href='poznamky_potexty.php?copern=56&page=1&firx=<?php echo $firxyz; ?>'  }
+         { location.href='poznamky_muj2014texty.php?copern=56&page=1&firx=<?php echo $firxyz; ?>'  }
 </script>
 <?php
     }
@@ -162,9 +162,9 @@ else
     {
 $copern=20;
 
-$odkial="../import/FIR".$kli_vxcf."/POZNAMKYPO".$kli_vrok.".CSV";
+$odkial="../import/FIR".$kli_vxcf."/POZNAMKYMUJ".$kli_vrok.".CSV";
 $firxyz = 1*strip_tags($_REQUEST['firx']);
-if( $firxyz == 9999 ) { $odkial="../import/POZNAMKYPO".$kli_vrok.".CSV"; }
+if( $firxyz == 9999 ) { $odkial="../import/POZNAMKYMUJ".$kli_vrok.".CSV"; }
 
 if( file_exists("$odkial")) 
 {
@@ -211,7 +211,7 @@ exit;
 //exportuj poznamky
 if ( $copern == 655 )
     {
-$nazsub="POZNAMKYPO".$kli_vrok;
+$nazsub="POZNAMKYMUJ".$kli_vrok;
 
 
 if (File_Exists ("../tmp/$nazsub.CSV")) { $soubor = unlink("../tmp/$nazsub.CSV"); }
@@ -281,7 +281,7 @@ if( $fix == 0 AND $firxyz == 0 ) { echo "V ˙dajoch o firme musÌte zadaù ËÌslo fi
 if( !confirm ("Chcete naËÌtaù pozn·mky z firmy Ë. <?php echo $fix;?> ? \r POZOR !!! CelÈ pozn·mky bud˙ najprv vymazanÈ .") )
          { window.close()  }
 else
-         { location.href='poznamky_potexty.php?&copern=356&drupoh=1&page=1&h_ozntxt=<?php echo $h_ozntxt; ?>&firx=<?php echo $firxyz; ?>'  }
+         { location.href='poznamky_muj2014texty.php?&copern=356&drupoh=1&page=1&h_ozntxt=<?php echo $h_ozntxt; ?>&firx=<?php echo $firxyz; ?>'  }
 </script>
 <?php
     }
@@ -485,7 +485,7 @@ window.open('poznamky_muj2014texty.php?copern=4055&drupoh=1&page=1&firmax='+ fir
 
 <?php if ( $kli_uzall > 90000 ) { ?>
   &nbsp;&nbsp;&nbsp;|&nbsp;
-<a href='poznamky_potexty.php?&copern=655&page=1'>
+<a href='poznamky_muj2014texty.php?&copern=655&page=1'>
 <img src='../obr/export.png' width=20 height=15 border=0 title="Exportuj pozn·mky do CSV"></a>
 <?php                           } ?>
 <?php if ( $kli_uzall > 90000 ) { ?>
@@ -494,7 +494,7 @@ window.open('poznamky_muj2014texty.php?copern=4055&drupoh=1&page=1&firmax='+ fir
 <img src='../obr/import.png' width=20 height=15 border=0 title="Importuj pozn·mky z CSV"></a>
 <?php                           } ?>
   &nbsp;|&nbsp;
-<a href='poznamky_potexty.php?&copern=55&page=1&firx=9999' >
+<a href='poznamky_muj2014texty.php?&copern=55&page=1&firx=9999' >
 <img src='../obr/orig.png' width=20 height=15 border=0 title="Importuj ötandartnÈ pozn·mky"></a>
   </td>
 </FORM>
