@@ -1421,7 +1421,12 @@ var sirkawic = screen.width-10;
 <script type='text/javascript'>
                     
                 
-                    
+function TlacPoznamkyMUJ2014()
+                {
+
+window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=&h_sch=&h_drp=1&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }                    
 
     function upravtext( oscx )
     {
@@ -1445,7 +1450,10 @@ window.open('../ucto/poznamky_muj2014nacitaj.php?copern=1999&stranax=' + strana 
 
 <table class="nadpis" width="100%" >
 <tr>
-<td class="h2">EuroSecom  -  Poznámky k úètovnej závierke MUJ 2014</td><td align="center" class="vyplnam" ><span style="display:none;">vypåòate stranu è. <?php echo "$strana";?></span></td>
+<td class="h2">EuroSecom  -  Poznámky k úètovnej závierke MUJ 2014</td><td align="center" class="vyplnam" ><span style="display:none;">vypåòate stranu è. <?php echo "$strana";?></span>
+<a href="#" onClick="TlacPoznamkyMUJ2014();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi vo formáte PDF" ></a>
+</td>
 <td class="login" align="right"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
 </tr>
 </table>

@@ -1137,9 +1137,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',9);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab1.jpg') AND $i == 0 )
+if ( File_Exists('../dokumenty/dan_z_prijmov2014/poznamkymuj2014tabtext/poznamkymuj_tab101.jpg') AND $hlavicka->tlt101 == 1 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab1.jpg',0,200,210,40);
+$pdf->Image('../dokumenty/dan_z_prijmov2014/poznamkymuj2014tabtext/poznamkymuj_tab101.jpg',0,200,210,40);
 }
 
 $stranax=$stranax+1;
@@ -1170,11 +1170,12 @@ $pdf->Cell(4,7,"$dic08","1",0,"L");
 $pdf->Cell(4,7,"$dic09","1",0,"L");
 $pdf->Cell(4,7,"$dic10","1",1,"L");
 $pdf->Cell(190,8,"                          ","$rmc1",1,"L");
+$pdf->SetFont('arial','',10);
 $pdf->Cell(10,6," ","$rmc1",0,"L");$pdf->Cell(180,6,"Èl.1 Všeobecné údaje","$rmc",1,"L");
 
 
 $pdf->Cell(90,10,"     ","$rmc1",1,"L");
-$pdf->SetFont('arial','',8);
+$pdf->SetFont('arial','',9);
 $pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.1.1 Názov právnickej osoby a jej sídlo alebo meno a priezvisko fyzickej osoby.","$rmc",1,"L");
 $pdf->Cell(90,10,"     ","$rmc1",1,"L");
 
@@ -1188,7 +1189,7 @@ $nazovsidlo=$fir_riadok->dmeno." ".$fir_riadok->dprie;                         }
 $pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"$nazovsidlo","$rmc",1,"L");
 
 $pdf->Cell(90,10,"     ","$rmc1",1,"L");
-$pdf->SetFont('arial','',8);
+$pdf->SetFont('arial','',9);
 $pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.1.2 Údaje o konsolidovanom celku.","$rmc",1,"L");
 $pdf->Cell(90,10,"     ","$rmc1",1,"L");
 
@@ -1207,20 +1208,26 @@ $hlavicka->ac31nyg46nyg46nyg46="1234.56";
 $hlavicka->ac32nyg46nyg46nyg46="1234.56";
 
 $pdf->Cell(90,120,"     ","$rmc1",1,"L");
-$pdf->SetFont('arial','',8);
-$pdf->Cell(12,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.1.3 Priemerný prepoèítaný poèet zamestnancov.","$rmc",1,"L");
+$pdf->SetFont('arial','',9);
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.1.3 Priemerný prepoèítaný poèet zamestnancov.","$rmc",1,"L");
 $pdf->Cell(90,12,"     ","$rmc1",1,"L");
+
+$yA_text2=206;
+if ( $hlavicka->tlt101 == 1 )
+{
 $pdf->SetFont('arial','',9);
 $pdf->Cell(82,6,"     ","$rmc1",0,"L");$pdf->Cell(47,6,"$hlavicka->ac11","$rmc",0,"R");$pdf->Cell(48,6,"$hlavicka->ac12","$rmc",1,"R");
 $pdf->Cell(82,5,"     ","$rmc1",0,"L");$pdf->Cell(47,10,"$hlavicka->ac21","$rmc",0,"R");$pdf->Cell(48,10,"$hlavicka->ac22","$rmc",1,"R");
 $pdf->Cell(82,5,"     ","$rmc1",0,"L");$pdf->Cell(47,7,"$hlavicka->ac31","$rmc",0,"R");$pdf->Cell(48,7,"$hlavicka->ac32","$rmc",1,"R");
 
+$yA_text2=240;
+}
 
-
+$pdf->SetFont('arial','',8);
 $ozntext="A_text1"; $textvypis=vytlactextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); 
 $poleosob = explode("\r\n", $textvypis);
 
-$pdf->SetY(80);
+$pdf->SetY(70);
 if( $poleosob[0] != '' )
     {
 $ipole=1;
@@ -1234,7 +1241,7 @@ $ipole=$ipole+1;
 $ozntext="A_text2"; $textvypis=vytlactextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); 
 $poleosob = explode("\r\n", $textvypis);
 
-$pdf->SetY(240);
+$pdf->SetY($yA_text2);
 if( $poleosob[0] != '' )
     {
 $ipole=1;
