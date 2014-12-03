@@ -1079,6 +1079,18 @@ $pdf->SetX(130);$pdf->Cell(85,5,"                                               
 //koniec prva strana
 
                                        } //koniec strana 1
+
+//ico
+$text=$fir_fico;
+$ico01=substr($text,0,1);
+$ico02=substr($text,1,1);
+$ico03=substr($text,2,1);
+$ico04=substr($text,3,1);
+$ico05=substr($text,4,1);
+$ico06=substr($text,5,1);
+$ico07=substr($text,6,1);
+$ico08=substr($text,7,1);
+
 //dic
 $text=$fir_fdic;
 $dic01=substr($text,0,1);
@@ -1092,7 +1104,6 @@ $dic08=substr($text,7,1);
 $dic09=substr($text,8,1);
 $dic10=substr($text,9,1);
 
-
     function vytlactextx($ktorytext, $mysqlhostx, $mysqluserx, $mysqlpasswdx, $mysqldbx, $kli_vxcf)
     {
   @$spojeni = mysql_connect($mysqlhostx, $mysqluserx, $mysqlpasswdx);
@@ -1104,7 +1115,7 @@ $dic10=substr($text,9,1);
 
 $ozntext=$ktorytext;
 $textvypis="";
-$sqlttt = "SELECT * FROM F$kli_vxcf"."_poznamky_po2011texty WHERE ozntxt = '$ozntext' ";
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_poznamky_muj2014texty WHERE ozntxt = '$ozntext' ";
 //echo $sqlttt;
 $sqldok = mysql_query("$sqlttt");
  if (@$zaznam=mysql_data_seek($sqldok,0))
@@ -1116,6 +1127,7 @@ $sqldok = mysql_query("$sqlttt");
     return $textvypis;
     }
 
+$nopg2=0;$nopg3=0;$nopg4=0;$nopg5=0;$nopg6=0; 
 
 //strana 2
 $stranax=1;
@@ -1127,14 +1139,25 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 if ( File_Exists('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab1.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab1.jpg',0,164,210,40);
+$pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab1.jpg',0,200,210,40);
 }
 
 $stranax=$stranax+1;
 //hlavicka strany
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè MUJ 3 - 04","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(38,7,"Poznámky Úè MÚJ 3 - 04","1",0,"L");
+$pdf->Cell(10,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(10,7," ","$rmc1",0,"L");
+
+$pdf->Cell(8,7,"IÈO","$rmc1",0,"L");
+$pdf->Cell(4,7,"$ico01","1",0,"L");
+$pdf->Cell(4,7,"$ico02","1",0,"L");
+$pdf->Cell(4,7,"$ico03","1",0,"L");
+$pdf->Cell(4,7,"$ico04","1",0,"L");
+$pdf->Cell(4,7,"$ico05","1",0,"L");
+$pdf->Cell(4,7,"$ico06","1",0,"L");
+$pdf->Cell(4,7,"$ico07","1",0,"L");
+$pdf->Cell(4,7,"$ico08","1",0,"L");
+
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -1147,10 +1170,29 @@ $pdf->Cell(4,7,"$dic08","1",0,"L");
 $pdf->Cell(4,7,"$dic09","1",0,"L");
 $pdf->Cell(4,7,"$dic10","1",1,"L");
 $pdf->Cell(190,8,"                          ","$rmc1",1,"L");
-$pdf->Cell(10,6," ","$rmc1",0,"L");$pdf->Cell(180,6,"A. INFORMÁCIE O ÚÈTOVNEJ JEDNOTKE","$rmc",1,"L");
+$pdf->Cell(10,6," ","$rmc1",0,"L");$pdf->Cell(180,6,"Èl.1 Všeobecné údaje","$rmc",1,"L");
 
 
-//cast A pism. c
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+$pdf->SetFont('arial','',8);
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.1.1 Názov právnickej osoby a jej sídlo alebo meno a priezvisko fyzickej osoby.","$rmc",1,"L");
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+
+$nazovsidlo=$fir_fnaz.", ".$fir_fuli." ".$fir_fcdm.", ".$fir_fmes.", ".$fir_fpsc;
+if ( $fir_uctt03 == 999 ) {
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
+$fir_vysledok = mysql_query($sqlfir);
+if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+$nazovsidlo=$fir_riadok->dmeno." ".$fir_riadok->dprie;                         }
+
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"$nazovsidlo","$rmc",1,"L");
+
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+$pdf->SetFont('arial','',8);
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.1.2 Údaje o konsolidovanom celku.","$rmc",1,"L");
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+
+//pocet zamestnancov
 if ( $hlavicka->ac11 == 0 ) $hlavicka->ac11="";
 if ( $hlavicka->ac12 == 0 ) $hlavicka->ac12="";
 if ( $hlavicka->ac21 == 0 ) $hlavicka->ac21="";
@@ -1164,9 +1206,9 @@ $hlavicka->ac22nyg46nyg46nyg46="1234.56";
 $hlavicka->ac31nyg46nyg46nyg46="1234.56";
 $hlavicka->ac32nyg46nyg46nyg46="1234.56";
 
-$pdf->Cell(90,136,"     ","$rmc1",1,"L");
+$pdf->Cell(90,120,"     ","$rmc1",1,"L");
 $pdf->SetFont('arial','',8);
-$pdf->Cell(12,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"1. Informácie k èasti A. písm. c) prílohy è.3 o poète zamestnancov","$rmc",1,"L");
+$pdf->Cell(12,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.1.3 Priemerný prepoèítaný poèet zamestnancov.","$rmc",1,"L");
 $pdf->Cell(90,12,"     ","$rmc1",1,"L");
 $pdf->SetFont('arial','',9);
 $pdf->Cell(82,6,"     ","$rmc1",0,"L");$pdf->Cell(47,6,"$hlavicka->ac11","$rmc",0,"R");$pdf->Cell(48,6,"$hlavicka->ac12","$rmc",1,"R");
@@ -1178,13 +1220,13 @@ $pdf->Cell(82,5,"     ","$rmc1",0,"L");$pdf->Cell(47,7,"$hlavicka->ac31","$rmc",
 $ozntext="A_text1"; $textvypis=vytlactextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); 
 $poleosob = explode("\r\n", $textvypis);
 
-$pdf->SetY(30);
+$pdf->SetY(80);
 if( $poleosob[0] != '' )
     {
 $ipole=1;
 foreach( $poleosob as $hodnota ) {
 
-$pdf->Cell(17,5," ","$rmc",0,"L");$pdf->Cell(0,5,"$hodnota","$rmc",1,"L");
+$pdf->Cell(10,5," ","$rmc",0,"L");$pdf->Cell(0,5,"$hodnota","$rmc",1,"L");
 $ipole=$ipole+1;
                                  }
     }
@@ -1192,13 +1234,13 @@ $ipole=$ipole+1;
 $ozntext="A_text2"; $textvypis=vytlactextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); 
 $poleosob = explode("\r\n", $textvypis);
 
-$pdf->SetY(208);
+$pdf->SetY(240);
 if( $poleosob[0] != '' )
     {
 $ipole=1;
 foreach( $poleosob as $hodnota ) {
 
-$pdf->Cell(17,5," ","$rmc",0,"L");$pdf->Cell(0,5,"$hodnota","$rmc",1,"L");
+$pdf->Cell(10,5," ","$rmc",0,"L");$pdf->Cell(0,5,"$hodnota","$rmc",1,"L");
 $ipole=$ipole+1;
                                  }
     }

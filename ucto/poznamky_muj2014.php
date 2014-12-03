@@ -1574,6 +1574,20 @@ if ( $strana == 1 )
 </tr>
 <tr><td class="rmedium" colspan="10"></td></tr>
 <tr><td class="castname" colspan="10">Èl. I Všeobecné údaje.</td></tr>
+<tr><td class="medium" colspan="10">Èl. I.1 Názov právnickej osoby a jej sídlo alebo meno a priezvisko fyzickej osoby.</td></tr>
+<?php
+$nazovsidlo=$fir_fnaz.", ".$fir_fuli." ".$fir_fcdm.", ".$fir_fmes.", ".$fir_fpsc;
+if ( $fir_uctt03 == 999 ) {
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
+$fir_vysledok = mysql_query($sqlfir);
+if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+$nazovsidlo=$fir_riadok->dmeno." ".$fir_riadok->dprie;
+                          }
+
+?>
+<tr><td class="medium" colspan="10"><?php echo $nazovsidlo; ?></td></tr>
+<tr><td class="medium" colspan="10"> </td></tr>
+
 <tr><td class="medium" colspan="10">Èl. I.2 Údaje o konsolidovanom celku.</td></tr>
 <tr>
 <td colspan="10" >
@@ -1588,17 +1602,7 @@ if ( $strana == 1 )
 </tr>
 
 <tr><td class="medium" colspan="10">Èl. I.3 Priemerný prepoèítaný poèet zamestnancov.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="A_text2"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
-</span>
-</div>
-</td>
-</tr>
+
 <tr>
 <td colspan="5">
 <div class="casti">
@@ -1636,6 +1640,20 @@ if ( $strana == 1 )
 <tr>
 <td colspan="10"></td>
 </tr>
+
+<tr>
+<td colspan="10" >
+<div class="dtext" >
+<?php $ozntext="A_text2"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
+<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
+<span class="dtextbox">
+<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+</span>
+</div>
+</td>
+</tr>
+
+
 
 <?php
 //koniec zobraz a uprav nastavene udaje strana 1
