@@ -187,7 +187,7 @@ htmlmenu += "<a href=\"#\" onClick=\"NacitajHodnotu( 402 );\">" +
 
     htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
 htmlmenu += "<a href=\"#\" onClick=\"NacitajHodnotu( 999 );\">" +
-"Chcete naèíta údaje o bezprostredne predchádzajúcom období z poznámok z firmy minulého roka ?</a>";
+"Chcete naèíta údaje o bezprostredne predchádzajúcom období z Poznámok PO 2013 z firmy minulého roka ?</a>";
     htmlmenu += "</td></tr>";
                     
     htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>";

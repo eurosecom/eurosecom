@@ -1620,7 +1620,7 @@ $nazovsidlo=$fir_riadok->dmeno." ".$fir_riadok->dprie;
 <tr>
 <th colspan="3">Názov poloky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?>
  <img src="../obr/vlozit.png" width="10" height="10" onclick="minulyrok(<?php echo $strana;?>)"
- title="Naèíta hodnoty predchádzajúceho obdobia pre stranu è.<?php echo $strana;?>" ></th>
+ title="Naèíta hodnoty predchádzajúceho obdobia do Poznámok MUJ 2014 pre stranu è.<?php echo $strana;?> z Poznámok PO 2013" ></th>
 </tr>
 </thead>
 <tbody>
@@ -1808,7 +1808,7 @@ $nazovsidlo=$fir_riadok->dmeno." ".$fir_riadok->dprie;
 <tr>
 <th colspan="1">Názov poloky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?>
  <img src="../obr/vlozit.png" width="10" height="10" onclick="minulyrok(<?php echo $strana;?>)"
- title="Naèíta hodnoty predchádzajúceho obdobia pre stranu è.<?php echo $strana;?>" >
+ title="Naèíta hodnoty predchádzajúceho obdobia do Poznámok MUJ 2014 pre stranu è.<?php echo $strana;?> z Poznámok PO 2013" >
 </th>
 </tr>
 </thead>
@@ -1955,7 +1955,10 @@ $nazovsidlo=$fir_riadok->dmeno." ".$fir_riadok->dprie;
 <th colspan="1">štatutár.</th><th colspan="1">dozornıch</th><th colspan="1">inıch</th>
 </tr>
 <tr>
-<th colspan="6"><?php echo $kli_vrok;?></th><th colspan="6"><?php echo $kli_minrok;?></th>
+<th colspan="6"><?php echo $kli_vrok;?></th><th colspan="6"><?php echo $kli_minrok;?>
+<img src="../obr/vlozit.png" width="10" height="10" onclick="minulyrok(<?php echo $strana;?>)"
+ title="Naèíta hodnoty predchádzajúceho obdobia do Poznámok MUJ 2014 pre stranu è.<?php echo $strana;?> z Poznámok PO 2013" >
+</th>
 </tr>
 </thead>
 <tbody>
@@ -2066,7 +2069,7 @@ $nazovsidlo=$fir_riadok->dmeno." ".$fir_riadok->dprie;
 <tr>
 <th colspan="1">Názov poloky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?>
  <img src="../obr/vlozit.png" width="10" height="10" onclick="minulyrok(<?php echo $strana;?>)"
- title="Naèíta hodnoty predchádzajúceho obdobia pre stranu è.<?php echo $strana;?>" >
+ title="Naèíta hodnoty predchádzajúceho obdobia do Poznámok MUJ 2014 pre stranu è.<?php echo $strana;?> z Poznámok PO 2013" >
 </th>
 <th colspan="1">Názov poloky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?></th>
 </tr>
