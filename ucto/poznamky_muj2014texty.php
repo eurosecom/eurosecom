@@ -63,22 +63,10 @@ if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); $kli_vrokxy 
 if( $firmaneex == 1 ) { echo "Zadana firma cislo ".$firmax." neexistuje v ciselniku firiem."; exit; }
 
 $databaza="";
-if( $kli_vrokxy == 2010 )
- {
-if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; }
- }
-if( $kli_vrokxy == 2011 )
- {
-if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; }
- }
-if( $kli_vrokxy == 2012 )
- {
-if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; }
- }
-if( $kli_vrokxy == 2013 )
- {
-$databaza="";
- }
+$kli_vrokx=$kli_vrok;
+$kli_vrok=$kli_vrokxy;
+$dtb2 = include("../cis/oddel_dtbz2.php");
+$kli_vrok=$kli_vrokx;
 
 $ulozttt = "INSERT INTO F$kli_vxcf"."_poznamky_muj2014texty ( ozntxt, hdntxt ) VALUES ('$h_ozntxt', '' ) "; 
 $ulozene = mysql_query("$ulozttt"); 
@@ -308,22 +296,10 @@ if( $firmaneex == 1 ) { echo "Zadaná firma èíslo ".$fix." neexistuje v èíselníku
 //echo $kli_vrokxy;
 
 $databaza="";
-if( $kli_vrokxy == 2010 )
- {
-if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; }
- }
-if( $kli_vrokxy == 2011 )
- {
-if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; }
- }
-if( $kli_vrokxy == 2012 )
- {
-if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; }
- }
-if( $kli_vrokxy == 2013 )
- {
-$databaza="";
- }
+$kli_vrokx=$kli_vrok;
+$kli_vrok=$kli_vrokxy;
+$dtb2 = include("../cis/oddel_dtbz2.php");
+$kli_vrok=$kli_vrokx;
 
 //_poznamky_muj2014texty   psys  ozntxt  hdntxt  prmx1  prmx2  prmx3  prmx4  oldp  oldc1  oldc2  konx  konx8  ico 
 
@@ -335,10 +311,14 @@ if( $idemezostarych == 0 )
      {
 //echo "ideme z novych";
 
+$sqlfir = "SELECT * FROM ".$databaza."F$fix"."_poznamky_muj2014texty ";
+$fir_vysledok = mysql_query($sqlfir);
+if(!$fir_vysledok) { echo "Vo firme ".$fix." neexistujú Poznámky MUJ 2014."; exit;  }
+
 $sqult = "TRUNCATE TABLE F$kli_vxcf"."_poznamky_muj2014texty ";
 $ulozene = mysql_query("$sqult");
 
-$dsqlt = "INSERT INTO F$kli_vxcf"."_poznamky_muj2014texty SELECT * FROM ".$databaza."F$fix"."_poznamky_po2011texty WHERE ico >= 0 ";
+$dsqlt = "INSERT INTO F$kli_vxcf"."_poznamky_muj2014texty SELECT * FROM ".$databaza."F$fix"."_poznamky_muj2014texty WHERE ico >= 0 ";
 $dsql = mysql_query("$dsqlt");
 //echo $dsqlt;
 
@@ -379,8 +359,6 @@ td.pnseda  { background-color:white; color:black; font-weight:bold;
 
   </style>
 <title>EuroSecom - Úètovné poznámky - doplòujúci text</title>
- <SCRIPT Language="JavaScript" Src="../js/cookies.js">
-</SCRIPT>
 <script type="text/javascript">
 
     function ImportPoz()
@@ -460,7 +438,7 @@ window.open('poznamky_muj2014texty.php?copern=4055&drupoh=1&page=1&firmax='+ fir
 ?>
 
   </script> 
-<script type="text/javascript" src="poznamky_texty_xml.js"></script>
+<script type="text/javascript" src="poznamky_textymuj2014_xml.js"></script>
 </HEAD>
 <BODY onload="ObnovUI();" style="overflow:auto;"  >
 
