@@ -1602,9 +1602,9 @@ if( $typZec == "" ) { $typZec="ZEC"; }
 if( $typZec == "ZECD3" AND $hlavicka->zzam_sp > 0 ) { $typZec="ZECD3V"; $vynimkaVZ="1"; }
 
 
-$sqltt = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET pocdni=0 WHERE ".
+$sqlttxx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET pocdni=0 WHERE ".
 " zfir_np = 0 AND zfir_sp = 0 AND  zfir_ip = 0 AND  zfir_pn = 0 AND  zfir_up = 0 AND  zfir_gf = 0 AND  zfir_rf = 0 ";
-$sql = mysql_query("$sqltt");
+$sqlxx = mysql_query("$sqlttxx");
 
 $niezaklad=0;
 if( $hlavicka->zfir_np == 0 AND $hlavicka->zfir_sp == 0 AND $hlavicka->zfir_ip == 0 AND $hlavicka->zfir_pn == 0 AND $hlavicka->zfir_up == 0 AND $hlavicka->zfir_gf == 0 AND $hlavicka->zfir_rf == 0 ) { $niezaklad=1; }
