@@ -3,28 +3,30 @@
 //MZDY dorobit nastavenie soboty , nedele v kalendary pre 04. až 12.2015	OK2015
 
 //ak oddelena databaza treba upravit tieto skripty
-//../zaloz2015db.php prenos skriptov zakladnych					OK2014
+//../zaloz2015db.php prenos skriptov zakladnych					OK2015
 //../pswd/pasword.php a nakopirovat pswd/oddelena2014db2015.php
 
-//../oddel_dtb1.php a oddel_dtb2.php a oddel_dtb3.php				OK2014
-//../cis/oddel_dtbz1.php							OK2015
-//../cis/oddel_dtbm1.php a oddel_dtbm2.php pre hotel.sluzby			OK2014
+//../oddel_dtb1.php a oddel_dtb2.php a oddel_dtb3.php				OK2015
+//../cis/oddel_dtbz1.php a ../cis/oddel_dtbz2.php				OK2015
+//../cis/oddel_dtbm1.php a oddel_dtbm2.php pre hotel.sluzby			OK2015
 
-//ckli.php ckli_u.php autoinc,unique..  POZOR aj aktualizacia klienti v databaze min.roka a pri ulozeni uprav  		OK2014
+//ckli.php autoinc,unique..  POZOR aj aktualizacia klienti v databaze min.roka a pri ulozeni uprav  			OK2015
 //ckli_u.php 														setODDELDB
 //cfir.php a cfir_u.php 												setODDELDB
 
-//MZDY restart parametrov prametre.php, drmiezd_export.php, prenos_poc.php	OK2014
+//MZDY restart parametrov prametre.php						OK2014
+//MZDY restart parametrov drmiezd_export.php					OK2014
+//MZDY restart parametrov prenos_poc.php					OK2014
 
-//hsheslo.php kalendar skopiruj automaticky 					OK2014
+//hsheslo.php kalendar skopiruj automaticky 					OK2015
 //aky_robot.php datum velka noc 						OK2015
 
-//podvojneu.php,mzdy.php,sklad.php,fakt.php,dopr.php,majetok.php,vyroba.php,analyzy.php vsetko na 2 miestach		setODDELDB
-//ubyt.php,rest.php,kuch.php vsetko na 2 miestach									setODDELDB
+//podvojneu.php,mzdy.php,sklad.php,fakt.php,dopr.php,majetok.php,vyroba.php,analyzy.php 				setODDELDB
+//ubyt.php,rest.php,kuch.php 												setODDELDB
 
-//../cis/citaj_nas.php aby citalnastavenie firmy vzdy z db2014 			OK2014
-//../cis/zmenume.php aby upravil nastavenie firmy vzdy z db2014 		OK2014
-//../cis/prenoc_poc.php POZOR OPRAV aj vymazavanie starych vystupenych oc < '01.01.2013' !!!!!!!!			OK2014  
+//../cis/citaj_nas.php aby citalnastavenie firmy vzdy z db2015 			setODDELDB
+//../cis/zmenume.php aby upravil nastavenie firmy vzdy z db2015 		setODDELDB
+//../cis/prenoc_poc.php 							setODDELDB  
 //../cis/prenos2014 mzdy,ucto,sklad PDF,DOC                                 	OK2014 
 //../cis/uzivspravy.php							    	OK2014  
 
@@ -32,12 +34,17 @@
 //../ucto/oprcis.php prenos generovania medzi rokmi na 3miestach            	ok2014
 //../ucto/vykazy_cis.php prenos generovania medzi rokmi 	           	setODDELDB
 
-//../ucto/poznamky_potexty.php prenos  medzi rokmi aj v ponuke textov		ok2014 
-//../ucto/poznamky_potextyno.php prenos  medzi rokmi aj v ponuke textov		ok2014 
-//../ucto/poznamky_po2011nacitaj.php  tabulky z minuleho roku po aj texty	ok2014
-//../ucto/poznamky_no2013nujnacitaj.php  tabulky z minuleho roku no aj texty	ok2014
-//../ucto/poznamky_textyno_dajxml.php						ok2014
-//../ucto/poznamky_texty_dajxml.php						ok2014
+//../ucto/poznamky_potexty.php prenos  medzi rokmi aj v ponuke textov		setODDELDB 
+//../ucto/poznamky_potextyno.php prenos  medzi rokmi aj v ponuke textov		setODDELDB 
+//../ucto/poznamky_muj2014texty.php prenos  medzi rokmi aj v ponuke textov	setODDELDB
+ 
+//../ucto/poznamky_po2013nacitaj.php  tabulky z minuleho roku po aj texty	setODDELDB
+//../ucto/poznamky_po2013nujnacitaj.php  tabulky z minuleho roku no aj texty	setODDELDB
+
+//../ucto/poznamky_textyno_dajxml.php						setODDELDB
+//../ucto/poznamky_texty_dajxml.php						setODDELDB
+//../ucto/poznamky_textymuj2014_dajxml.php					setODDELDB
+
 
 //../ucto/priznanie_po2013.php  prenos z minuleho roku                      	ok2014
 //../ucto/priznanie_fob2013.php  prenos z minuleho roku                     	ok2014
