@@ -181,13 +181,8 @@ window.open('../ucto/poznamky_muj2014nacitaj.php?&copern=901&drupoh=1&page=1&str
                      
 
     htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
-htmlmenu += "<a href=\"#\" onClick=\"NacitajHodnotu( 401 );\">" +
-"Chcete naèíta údaje o vekovej štruktúre poh¾adávok (tab.16) zo saldokonta ?</a>";
-    htmlmenu += "</td></tr>";  
-
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
 htmlmenu += "<a href=\"#\" onClick=\"NacitajHodnotu( 402 );\">" +
-"Chcete naèíta údaje o záväzkoch (tab.26) zo saldokonta ?</a>";
+"Chcete naèíta údaje o záväzkoch zo saldokonta ?</a>";
     htmlmenu += "</td></tr>"; 
 
     htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
@@ -197,7 +192,7 @@ htmlmenu += "<a href=\"#\" onClick=\"NacitajHodnotu( 999 );\">" +
                     
     htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>";
 htmlmenu += "<a href=\"#\" onClick=\"NacitajMzdy();\">" +
-"Chcete naèíta údaje z miezd (tab.1) firma èíslo</a> ";
+"Chcete naèíta údaje o poète zamestnancov z miezd firma èíslo</a> ";
     htmlmenu += "<input type='text' name='h_mfir' id='h_mfir' size='2' maxlenght='4' value='<?php echo $kli_vxcf; ?>' >"; 
     htmlmenu += " ?</td></tr>";
 
