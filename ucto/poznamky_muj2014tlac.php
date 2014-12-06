@@ -287,7 +287,7 @@ $j=0;
 $hlavicka=mysql_fetch_object($sql);
 
 
-if ( $strana == 1 OR $strana == 9999 ) {
+if ( $strana == 9999 ) {
 
 //strana 1
 $pdf->AddPage();
@@ -1122,12 +1122,11 @@ $sqldok = mysql_query("$sqlttt");
     return $textvypis;
     }
 
-$nopg2=0;$nopg3=0;$nopg4=0;$nopg5=0;$nopg6=0; 
-
-//strana 2
+$nopg2=0;$nopg3=0;$nopg4=0;$nopg5=0;$nopg6=0;$nopg7=0;$nopg8=0;$nopg9=0; 
 $stranax=1;
 
-if ( $nopg2 == 0 AND $strana == 9999 ) {
+//strana 2
+if ( $nopg2 == 0 AND ( $strana == 2 OR $strana == 9999 ) ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',9);
 $pdf->SetLeftMargin(10);
@@ -1137,7 +1136,6 @@ if ( File_Exists('../dokumenty/dan_z_prijmov2014/poznamkymuj2014tabtext/poznamky
 $pdf->Image('../dokumenty/dan_z_prijmov2014/poznamkymuj2014tabtext/poznamkymuj_tab101.jpg',0,200,210,40);
 }
 
-$stranax=$stranax+1;
 //hlavicka strany
 $pdf->SetY(5);
 $pdf->Cell(38,7,"Poznámky Úè MÚJ 3 - 04","1",0,"L");
@@ -1249,9 +1247,554 @@ $ipole=$ipole+1;
                                        } //koniec strana 2
 
 
+//strana 3
+$stranax=$stranax+1;
+if ( $nopg3 == 0 AND ( $strana == 3 OR $strana == 9999 ) ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',9);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+
+//hlavicka strany
+$pdf->SetY(5);
+$pdf->Cell(38,7,"Poznámky Úè MÚJ 3 - 04","1",0,"L");
+$pdf->Cell(10,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(10,7," ","$rmc1",0,"L");
+
+$pdf->Cell(8,7,"IÈO","$rmc1",0,"L");
+$pdf->Cell(4,7,"$ico01","1",0,"L");
+$pdf->Cell(4,7,"$ico02","1",0,"L");
+$pdf->Cell(4,7,"$ico03","1",0,"L");
+$pdf->Cell(4,7,"$ico04","1",0,"L");
+$pdf->Cell(4,7,"$ico05","1",0,"L");
+$pdf->Cell(4,7,"$ico06","1",0,"L");
+$pdf->Cell(4,7,"$ico07","1",0,"L");
+$pdf->Cell(4,7,"$ico08","1",0,"L");
+
+$pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
+$pdf->Cell(4,7,"$dic01","1",0,"L");
+$pdf->Cell(4,7,"$dic02","1",0,"L");
+$pdf->Cell(4,7,"$dic03","1",0,"L");
+$pdf->Cell(4,7,"$dic04","1",0,"L");
+$pdf->Cell(4,7,"$dic05","1",0,"L");
+$pdf->Cell(4,7,"$dic06","1",0,"L");
+$pdf->Cell(4,7,"$dic07","1",0,"L");
+$pdf->Cell(4,7,"$dic08","1",0,"L");
+$pdf->Cell(4,7,"$dic09","1",0,"L");
+$pdf->Cell(4,7,"$dic10","1",1,"L");
+$pdf->Cell(190,10,"                          ","$rmc1",1,"L");
+$pdf->SetFont('arial','',10);
+$pdf->Cell(10,6," ","$rmc1",0,"L");$pdf->Cell(180,6,"Èl.2 Informácie o prijatých postupoch.","$rmc",1,"L");
+
+
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+$pdf->SetFont('arial','',9);
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.2.1 Nepretržité pokraèovanie v èinnosti.","$rmc",1,"L");
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+
+$pdf->Cell(90,40,"     ","$rmc1",1,"L");
+
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+$pdf->SetFont('arial','',9);
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.2.2 Spôsob oceòovania jednotlivých položiek majetku a záväzkov.","$rmc",1,"L");
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+
+
+$pdf->SetFont('arial','',8);
+$ozntext="B_text1"; $textvypis=vytlactextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); 
+$poleosob = explode("\r\n", $textvypis);
+
+$pdf->SetY(50);
+if( $poleosob[0] != '' )
+    {
+$ipole=1;
+foreach( $poleosob as $hodnota ) {
+
+$pdf->Cell(10,5," ","$rmc",0,"L");$pdf->Cell(0,5,"$hodnota","$rmc",1,"L");
+$ipole=$ipole+1;
+                                 }
+    }
+
+$ozntext="B_text2"; $textvypis=vytlactextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); 
+$poleosob = explode("\r\n", $textvypis);
+
+$pdf->SetY(110);
+if( $poleosob[0] != '' )
+    {
+$ipole=1;
+foreach( $poleosob as $hodnota ) {
+
+$pdf->Cell(10,5," ","$rmc",0,"L");$pdf->Cell(0,5,"$hodnota","$rmc",1,"L");
+$ipole=$ipole+1;
+                                 }
+    }
+                                       } //koniec strana 3
+
+
+//strana 4
+$stranax=$stranax+1;
+if ( $nopg4 == 0 AND ( $strana == 3 OR $strana == 9999 ) ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',9);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+//hlavicka strany
+$pdf->SetY(5);
+$pdf->Cell(38,7,"Poznámky Úè MÚJ 3 - 04","1",0,"L");
+$pdf->Cell(10,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(10,7," ","$rmc1",0,"L");
+
+$pdf->Cell(8,7,"IÈO","$rmc1",0,"L");
+$pdf->Cell(4,7,"$ico01","1",0,"L");
+$pdf->Cell(4,7,"$ico02","1",0,"L");
+$pdf->Cell(4,7,"$ico03","1",0,"L");
+$pdf->Cell(4,7,"$ico04","1",0,"L");
+$pdf->Cell(4,7,"$ico05","1",0,"L");
+$pdf->Cell(4,7,"$ico06","1",0,"L");
+$pdf->Cell(4,7,"$ico07","1",0,"L");
+$pdf->Cell(4,7,"$ico08","1",0,"L");
+
+$pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
+$pdf->Cell(4,7,"$dic01","1",0,"L");
+$pdf->Cell(4,7,"$dic02","1",0,"L");
+$pdf->Cell(4,7,"$dic03","1",0,"L");
+$pdf->Cell(4,7,"$dic04","1",0,"L");
+$pdf->Cell(4,7,"$dic05","1",0,"L");
+$pdf->Cell(4,7,"$dic06","1",0,"L");
+$pdf->Cell(4,7,"$dic07","1",0,"L");
+$pdf->Cell(4,7,"$dic08","1",0,"L");
+$pdf->Cell(4,7,"$dic09","1",0,"L");
+$pdf->Cell(4,7,"$dic10","1",1,"L");
+$pdf->Cell(190,10,"                          ","$rmc1",1,"L");
+
+
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+$pdf->SetFont('arial','',9);
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.2.3 Spôsob zostavenia odpisového plánu majetku.","$rmc",1,"L");
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+
+$pdf->Cell(90,120,"     ","$rmc1",1,"L");
+
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+$pdf->SetFont('arial','',9);
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.2.4 Zmeny úètovných zásad a zmeny úètovných metód.","$rmc",1,"L");
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+
+
+$pdf->SetFont('arial','',8);
+$ozntext="B_text3"; $textvypis=vytlactextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); 
+$poleosob = explode("\r\n", $textvypis);
+
+$pdf->SetY(50);
+if( $poleosob[0] != '' )
+    {
+$ipole=1;
+foreach( $poleosob as $hodnota ) {
+
+$pdf->Cell(10,5," ","$rmc",0,"L");$pdf->Cell(0,5,"$hodnota","$rmc",1,"L");
+$ipole=$ipole+1;
+                                 }
+    }
+
+$ozntext="B_text4"; $textvypis=vytlactextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); 
+$poleosob = explode("\r\n", $textvypis);
+
+$pdf->SetY(190);
+if( $poleosob[0] != '' )
+    {
+$ipole=1;
+foreach( $poleosob as $hodnota ) {
+
+$pdf->Cell(10,5," ","$rmc",0,"L");$pdf->Cell(0,5,"$hodnota","$rmc",1,"L");
+$ipole=$ipole+1;
+                                 }
+    }
+                                       } //koniec strana 4
+
+
+//strana 5
+$stranax=$stranax+1;
+if ( $nopg5 == 0 AND ( $strana == 3 OR $strana == 9999 ) ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',9);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+
+//hlavicka strany
+$pdf->SetY(5);
+$pdf->Cell(38,7,"Poznámky Úè MÚJ 3 - 04","1",0,"L");
+$pdf->Cell(10,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(10,7," ","$rmc1",0,"L");
+
+$pdf->Cell(8,7,"IÈO","$rmc1",0,"L");
+$pdf->Cell(4,7,"$ico01","1",0,"L");
+$pdf->Cell(4,7,"$ico02","1",0,"L");
+$pdf->Cell(4,7,"$ico03","1",0,"L");
+$pdf->Cell(4,7,"$ico04","1",0,"L");
+$pdf->Cell(4,7,"$ico05","1",0,"L");
+$pdf->Cell(4,7,"$ico06","1",0,"L");
+$pdf->Cell(4,7,"$ico07","1",0,"L");
+$pdf->Cell(4,7,"$ico08","1",0,"L");
+
+$pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
+$pdf->Cell(4,7,"$dic01","1",0,"L");
+$pdf->Cell(4,7,"$dic02","1",0,"L");
+$pdf->Cell(4,7,"$dic03","1",0,"L");
+$pdf->Cell(4,7,"$dic04","1",0,"L");
+$pdf->Cell(4,7,"$dic05","1",0,"L");
+$pdf->Cell(4,7,"$dic06","1",0,"L");
+$pdf->Cell(4,7,"$dic07","1",0,"L");
+$pdf->Cell(4,7,"$dic08","1",0,"L");
+$pdf->Cell(4,7,"$dic09","1",0,"L");
+$pdf->Cell(4,7,"$dic10","1",1,"L");
+$pdf->Cell(190,10,"                          ","$rmc1",1,"L");
+
+
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+$pdf->SetFont('arial','',9);
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.2.5 Informácie o dotáciách a ich oceòovanie v úètovníctve.","$rmc",1,"L");
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+
+$pdf->Cell(90,120,"     ","$rmc1",1,"L");
+
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+$pdf->SetFont('arial','',9);
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.2.6 Informácie o úètovaní významných opráv chýb minulých úètovných období v bežnom úètovnom období.","$rmc",1,"L");
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+
+
+$pdf->SetFont('arial','',8);
+$ozntext="B_text5"; $textvypis=vytlactextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); 
+$poleosob = explode("\r\n", $textvypis);
+
+$pdf->SetY(50);
+if( $poleosob[0] != '' )
+    {
+$ipole=1;
+foreach( $poleosob as $hodnota ) {
+
+$pdf->Cell(10,5," ","$rmc",0,"L");$pdf->Cell(0,5,"$hodnota","$rmc",1,"L");
+$ipole=$ipole+1;
+                                 }
+    }
+
+$ozntext="B_text6"; $textvypis=vytlactextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); 
+$poleosob = explode("\r\n", $textvypis);
+
+$pdf->SetY(190);
+if( $poleosob[0] != '' )
+    {
+$ipole=1;
+foreach( $poleosob as $hodnota ) {
+
+$pdf->Cell(10,5," ","$rmc",0,"L");$pdf->Cell(0,5,"$hodnota","$rmc",1,"L");
+$ipole=$ipole+1;
+                                 }
+    }
+                                       } //koniec strana 5
+
+
+//strana 6
+$stranax=$stranax+1;
+if ( $nopg6 == 0 AND ( $strana == 4 OR $strana == 9999 ) ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',9);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists('../dokumenty/dan_z_prijmov2014/poznamkymuj2014tabtext/poznamkymuj_tab301.jpg') AND $hlavicka->tlt301 == 1 )
+{
+$pdf->Image('../dokumenty/dan_z_prijmov2014/poznamkymuj2014tabtext/poznamkymuj_tab301.jpg',0,150,210,70);
+}
+
+//hlavicka strany
+$pdf->SetY(5);
+$pdf->Cell(38,7,"Poznámky Úè MÚJ 3 - 04","1",0,"L");
+$pdf->Cell(10,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(10,7," ","$rmc1",0,"L");
+
+$pdf->Cell(8,7,"IÈO","$rmc1",0,"L");
+$pdf->Cell(4,7,"$ico01","1",0,"L");
+$pdf->Cell(4,7,"$ico02","1",0,"L");
+$pdf->Cell(4,7,"$ico03","1",0,"L");
+$pdf->Cell(4,7,"$ico04","1",0,"L");
+$pdf->Cell(4,7,"$ico05","1",0,"L");
+$pdf->Cell(4,7,"$ico06","1",0,"L");
+$pdf->Cell(4,7,"$ico07","1",0,"L");
+$pdf->Cell(4,7,"$ico08","1",0,"L");
+
+$pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
+$pdf->Cell(4,7,"$dic01","1",0,"L");
+$pdf->Cell(4,7,"$dic02","1",0,"L");
+$pdf->Cell(4,7,"$dic03","1",0,"L");
+$pdf->Cell(4,7,"$dic04","1",0,"L");
+$pdf->Cell(4,7,"$dic05","1",0,"L");
+$pdf->Cell(4,7,"$dic06","1",0,"L");
+$pdf->Cell(4,7,"$dic07","1",0,"L");
+$pdf->Cell(4,7,"$dic08","1",0,"L");
+$pdf->Cell(4,7,"$dic09","1",0,"L");
+$pdf->Cell(4,7,"$dic10","1",1,"L");
+$pdf->Cell(190,8,"                          ","$rmc1",1,"L");
+$pdf->SetFont('arial','',10);
+$pdf->Cell(10,6," ","$rmc1",0,"L");$pdf->Cell(180,6,"Èl.3. Informácie, ktoré vysvet¾ujú a dopåòajú súvahu a výkaz ziskov a strát.","$rmc",1,"L");
+
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+
+$pdf->SetFont('arial','',9);
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.3.1 Informácia o sume a dôvodoch vzniku jednotlivých položiek nákladov alebo výnosov, ktoré majú výnimoèný rozsah.","$rmc",1,"L");
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+
+$pdf->Cell(90,80,"     ","$rmc1",1,"L");
+
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+$pdf->SetFont('arial','',9);
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.3.2 Informácie o záväzkoch.","$rmc",1,"L");
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+
+
+$yC_text2=155;
+if ( $hlavicka->tlt301 == 1 )
+{
+
+
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+
+//info o zavazkoch
+if( $hlavicka->gcd11 == 0 ) $hlavicka->gcd11="";
+if( $hlavicka->gcd12 == 0 ) $hlavicka->gcd12="";
+
+$hlavicka->gcd11nyg46nyg46="1234.56";
+$hlavicka->gcd12nyg46nyg46="1234.56";
+
+$pdf->Cell(68,5," ","$rmc",0,"L");
+$pdf->Cell(54,5,"$hlavicka->gcd11","$rmc",0,"R");$pdf->Cell(54,5,"$hlavicka->gcd12","$rmc",1,"R");
+
+if( $hlavicka->gcd21 == 0 ) $hlavicka->gcd21="";
+if( $hlavicka->gcd22 == 0 ) $hlavicka->gcd22="";
+
+$hlavicka->gcd21nyg46nyg46="1234.56";
+$hlavicka->gcd22nyg46nyg46="1234.56";
+
+$pdf->Cell(90,4,"     ","$rmc",1,"L");
+$pdf->Cell(68,5," ","$rmc",0,"L");
+$pdf->Cell(54,5,"$hlavicka->gcd21","$rmc",0,"R");$pdf->Cell(54,5,"$hlavicka->gcd22","$rmc",1,"R");
+
+
+if( $hlavicka->gcd31 == 0 ) $hlavicka->gcd31="";
+if( $hlavicka->gcd32 == 0 ) $hlavicka->gcd32="";
+
+$hlavicka->gcd31nyg46nyg46="1234.56";
+$hlavicka->gcd32nyg46nyg46="1234.56";
+
+$pdf->Cell(90,4,"     ","$rmc",1,"L");
+$pdf->Cell(68,5," ","$rmc",0,"L");
+$pdf->Cell(54,5,"$hlavicka->gcd31","$rmc",0,"R");$pdf->Cell(54,5,"$hlavicka->gcd32","$rmc",1,"R");
+
+if( $hlavicka->gcd41 == 0 ) $hlavicka->gcd41="";
+if( $hlavicka->gcd42 == 0 ) $hlavicka->gcd42="";
+
+$hlavicka->gcd41nyg46nyg46="1234.56";
+$hlavicka->gcd42nyg46nyg46="1234.56";
+
+$pdf->Cell(90,5,"     ","$rmc",1,"L");
+$pdf->Cell(68,5," ","$rmc",0,"L");
+$pdf->Cell(54,5,"$hlavicka->gcd41","$rmc",0,"R");$pdf->Cell(54,5,"$hlavicka->gcd42","$rmc",1,"R");
+
+if( $hlavicka->gcd51 == 0 ) $hlavicka->gcd51="";
+if( $hlavicka->gcd52 == 0 ) $hlavicka->gcd52="";
+
+$hlavicka->gcd51nyg46nyg46="1234.56";
+$hlavicka->gcd52nyg46nyg46="1234.56";
+
+$pdf->Cell(90,4,"     ","$rmc",1,"L");
+$pdf->Cell(68,5," ","$rmc",0,"L");
+$pdf->Cell(54,5,"$hlavicka->gcd51","$rmc",0,"R");$pdf->Cell(54,5,"$hlavicka->gcd52","$rmc",1,"R");
+
+
+if( $hlavicka->gcd61 == 0 ) $hlavicka->gcd61="";
+if( $hlavicka->gcd62 == 0 ) $hlavicka->gcd62="";
+
+$hlavicka->gcd61nyg46nyg46="1234.56";
+$hlavicka->gcd62nyg46nyg46="1234.56";
+
+$pdf->Cell(90,5,"     ","$rmc",1,"L");
+$pdf->Cell(68,5," ","$rmc",0,"L");
+$pdf->Cell(54,5,"$hlavicka->gcd61","$rmc",0,"R");$pdf->Cell(54,5,"$hlavicka->gcd62","$rmc",1,"R");
+
+$yC_text2=225;
+}
+
+
+$pdf->SetFont('arial','',8);
+$ozntext="C_text1"; $textvypis=vytlactextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); 
+$poleosob = explode("\r\n", $textvypis);
+
+$pdf->SetY(50);
+if( $poleosob[0] != '' )
+    {
+$ipole=1;
+foreach( $poleosob as $hodnota ) {
+
+$pdf->Cell(10,5," ","$rmc",0,"L");$pdf->Cell(0,5,"$hodnota","$rmc",1,"L");
+$ipole=$ipole+1;
+                                 }
+    }
+
+$ozntext="C_text2"; $textvypis=vytlactextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); 
+$poleosob = explode("\r\n", $textvypis);
+
+$pdf->SetY($yC_text2);
+if( $poleosob[0] != '' )
+    {
+$ipole=1;
+foreach( $poleosob as $hodnota ) {
+
+$pdf->Cell(10,5," ","$rmc",0,"L");$pdf->Cell(0,5,"$hodnota","$rmc",1,"L");
+$ipole=$ipole+1;
+                                 }
+    }
+                                       } //koniec strana 6
+
+//strana 7
+$stranax=$stranax+1;
+if ( $nopg7 == 0 AND ( $strana == 4 OR $strana == 9999 ) ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',9);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists('../dokumenty/dan_z_prijmov2014/poznamkymuj2014tabtext/poznamkymuj_tab302.jpg') AND $hlavicka->tlt302 == 1 )
+{
+$pdf->Image('../dokumenty/dan_z_prijmov2014/poznamkymuj2014tabtext/poznamkymuj_tab302.jpg',0,40,210,40);
+}
+
+
+//hlavicka strany
+$pdf->SetY(5);
+$pdf->Cell(38,7,"Poznámky Úè MÚJ 3 - 04","1",0,"L");
+$pdf->Cell(10,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(10,7," ","$rmc1",0,"L");
+
+$pdf->Cell(8,7,"IÈO","$rmc1",0,"L");
+$pdf->Cell(4,7,"$ico01","1",0,"L");
+$pdf->Cell(4,7,"$ico02","1",0,"L");
+$pdf->Cell(4,7,"$ico03","1",0,"L");
+$pdf->Cell(4,7,"$ico04","1",0,"L");
+$pdf->Cell(4,7,"$ico05","1",0,"L");
+$pdf->Cell(4,7,"$ico06","1",0,"L");
+$pdf->Cell(4,7,"$ico07","1",0,"L");
+$pdf->Cell(4,7,"$ico08","1",0,"L");
+
+$pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
+$pdf->Cell(4,7,"$dic01","1",0,"L");
+$pdf->Cell(4,7,"$dic02","1",0,"L");
+$pdf->Cell(4,7,"$dic03","1",0,"L");
+$pdf->Cell(4,7,"$dic04","1",0,"L");
+$pdf->Cell(4,7,"$dic05","1",0,"L");
+$pdf->Cell(4,7,"$dic06","1",0,"L");
+$pdf->Cell(4,7,"$dic07","1",0,"L");
+$pdf->Cell(4,7,"$dic08","1",0,"L");
+$pdf->Cell(4,7,"$dic09","1",0,"L");
+$pdf->Cell(4,7,"$dic10","1",1,"L");
+$pdf->Cell(190,8,"                          ","$rmc1",1,"L");
+
+
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+$pdf->SetFont('arial','',9);
+$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(0,4,"Èl.3.3 Informácie o vlastných akciách.","$rmc",1,"L");
+$pdf->Cell(90,10,"     ","$rmc1",1,"L");
+
+
+$yC_text3=45;
+if ( $hlavicka->tlt302 == 1 )
+{
+
+$pdf->Cell(90,9,"     ","$rmc1",1,"L");
+
+if( $hlavicka->gh12 == 0 ) $hlavicka->gh12="";
+if( $hlavicka->gh13 == 0 ) $hlavicka->gh13="";
+if( $hlavicka->gh14 == 0 ) $hlavicka->gh14="";
+if( $hlavicka->gh15 == 0 ) $hlavicka->gh15="";
+
+$hlavicka->gh11nyg46nyg46="1234.56";
+$hlavicka->gh12nyg46nyg46="1234.56";
+$hlavicka->gh13nyg46nyg46="1234.56";
+$hlavicka->gh14nyg46nyg46="1234.56";
+$hlavicka->gh15nyg46nyg46="1234.56";
+$hlavicka->gh16nyg46nyg46="1234.56";
+
+$pdf->Cell(13,5," ","$rmc",0,"L");$pdf->Cell(27,5,"$hlavicka->gh11","$rmc",0,"L");
+$pdf->Cell(28,5,"$hlavicka->gh12","$rmc",0,"R");$pdf->Cell(27,5,"$hlavicka->gh13","$rmc",0,"R");
+$pdf->Cell(27,5,"$hlavicka->gh14","$rmc",0,"R");$pdf->Cell(28,5,"$hlavicka->gh15","$rmc",0,"R");
+$pdf->Cell(27,5,"$hlavicka->gh16","$rmc",1,"L");
+
+if( $hlavicka->gh22 == 0 ) $hlavicka->gh22="";
+if( $hlavicka->gh23 == 0 ) $hlavicka->gh23="";
+if( $hlavicka->gh24 == 0 ) $hlavicka->gh24="";
+if( $hlavicka->gh25 == 0 ) $hlavicka->gh25="";
+
+$hlavicka->gh21nyg46nyg46="1234.56";
+$hlavicka->gh22nyg46nyg46="1234.56";
+$hlavicka->gh23nyg46nyg46="1234.56";
+$hlavicka->gh24nyg46nyg46="1234.56";
+$hlavicka->gh25nyg46nyg46="1234.56";
+$hlavicka->gh26nyg46nyg46="1234.56";
+
+$pdf->Cell(90,2,"     ","$rmc",1,"L");
+$pdf->Cell(13,5," ","$rmc",0,"L");$pdf->Cell(27,5,"$hlavicka->gh21","$rmc",0,"L");
+$pdf->Cell(28,5,"$hlavicka->gh22","$rmc",0,"R");$pdf->Cell(27,5,"$hlavicka->gh23","$rmc",0,"R");
+$pdf->Cell(27,5,"$hlavicka->gh24","$rmc",0,"R");$pdf->Cell(28,5,"$hlavicka->gh25","$rmc",0,"R");
+$pdf->Cell(27,5,"$hlavicka->gh26","$rmc",1,"L");
+
+if( $hlavicka->gh32 == 0 ) $hlavicka->gh32="";
+if( $hlavicka->gh33 == 0 ) $hlavicka->gh33="";
+if( $hlavicka->gh34 == 0 ) $hlavicka->gh34="";
+if( $hlavicka->gh35 == 0 ) $hlavicka->gh35="";
+
+$hlavicka->gh31nyg46nyg46="1234.56";
+$hlavicka->gh32nyg46nyg46="1234.56";
+$hlavicka->gh33nyg46nyg46="1234.56";
+$hlavicka->gh34nyg46nyg46="1234.56";
+$hlavicka->gh35nyg46nyg46="1234.56";
+$hlavicka->gh36nyg46nyg46="1234.56";
+
+$pdf->Cell(90,2,"     ","$rmc",1,"L");
+$pdf->Cell(13,5," ","$rmc",0,"L");$pdf->Cell(27,5,"$hlavicka->gh31","$rmc",0,"L");
+$pdf->Cell(28,5,"$hlavicka->gh32","$rmc",0,"R");$pdf->Cell(27,5,"$hlavicka->gh33","$rmc",0,"R");
+$pdf->Cell(27,5,"$hlavicka->gh34","$rmc",0,"R");$pdf->Cell(28,5,"$hlavicka->gh35","$rmc",0,"R");
+$pdf->Cell(27,5,"$hlavicka->gh36","$rmc",1,"L");
+
+if( $hlavicka->gh42 == 0 ) $hlavicka->gh42="";
+if( $hlavicka->gh43 == 0 ) $hlavicka->gh43="";
+if( $hlavicka->gh44 == 0 ) $hlavicka->gh44="";
+if( $hlavicka->gh45 == 0 ) $hlavicka->gh45="";
+
+$hlavicka->gh41nyg46nyg46="1234.56";
+$hlavicka->gh42nyg46nyg46="1234.56";
+$hlavicka->gh43nyg46nyg46="1234.56";
+$hlavicka->gh44nyg46nyg46="1234.56";
+$hlavicka->gh45nyg46nyg46="1234.56";
+$hlavicka->gh46nyg46nyg46="1234.56";
+
+$pdf->Cell(90,2,"     ","$rmc",1,"L");
+$pdf->Cell(13,5," ","$rmc",0,"L");$pdf->Cell(27,5,"$hlavicka->gh41","$rmc",0,"L");
+$pdf->Cell(28,5,"$hlavicka->gh42","$rmc",0,"R");$pdf->Cell(27,5,"$hlavicka->gh43","$rmc",0,"R");
+$pdf->Cell(27,5,"$hlavicka->gh44","$rmc",0,"R");$pdf->Cell(28,5,"$hlavicka->gh45","$rmc",0,"R");
+$pdf->Cell(27,5,"$hlavicka->gh46","$rmc",1,"L");
+
+
+$yC_text3=95;
+}
 
 
 
+$ozntext="C_text3"; $textvypis=vytlactextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); 
+$poleosob = explode("\r\n", $textvypis);
+
+$pdf->SetY($yC_text3);
+if( $poleosob[0] != '' )
+    {
+$ipole=1;
+foreach( $poleosob as $hodnota ) {
+
+$pdf->Cell(10,5," ","$rmc",0,"L");$pdf->Cell(0,5,"$hodnota","$rmc",1,"L");
+$ipole=$ipole+1;
+                                 }
+    }
+                                       } //koniec strana 7
 
 }
 $i = $i + 1;
