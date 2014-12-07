@@ -1,3 +1,4 @@
+;;koniec
 A_text1;Úètovná jednotka nie je súèasou konsolidovaného celku.;koniec
 A_text2; ;koniec
 B_text1;Spoloènos nepretrite pokraèovala vo svojej èinnosti od 1.1.2014 do 31.12.2014.;koniec
@@ -9,7 +10,7 @@ B_text6;Úètovná jednotka v benom úètovnom období neúètovala iadne opravy chıb 
 C_text1;Úètovná jednotka v benom úètovnom období neúètovala jednotlivé poloky nákladov alebo vınosov, ktoré majú vınimoènı rozsah.;koniec
 C_text2;  ;koniec
 C_text3;Úètovná jednotka v benom úètovnom období nevlastnila, neobstarávala ani nepredávala vlastné akcie.###rn###;koniec
-C_text4;Úètovná jednotka v benom úètovnom období neposkytovala ani navyplácala príjmy a vıhody èlenom štatutárnych orgánov, dozornıch orgánov a inıch orgánov.;koniec
+C_text4;Úètovná jednotka v benom úètovnom období neposkytovala ani navyplácala príjmy a vıhody###rn###èlenom štatutárnych orgánov, dozornıch orgánov a inıch orgánov.;koniec
 C_text5;Úètovná jednotka v benom úètovnom období nemá povinnosti, ktoré sa nevykazujú v súvahe.;koniec
 C_text6;Úètovná jednotka v benom úètovnom období nemá podmienené záväzky.;koniec
 C_text7;Úètovná jednotka v benom úètovnom období nemá podmienenı majetok.;koniec
