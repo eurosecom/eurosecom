@@ -1256,6 +1256,7 @@ $rok=$pole[2];
 $dic=1*$fir_fdic;
   $text = "  <dic><![CDATA[".$dic."]]></dic>"."\r\n"; fwrite($soubor, $text);
 $ico=1*$fir_fico;
+if( $fir_fico < 1000000 ) {$ico="00".$ico;}
   $text = "  <ico><![CDATA[".$ico."]]></ico>"."\r\n"; fwrite($soubor, $text);
 
 $pole = explode(".", $fir_sknace);
@@ -1293,6 +1294,8 @@ $mala="";
 $velka="";
 if ( $druhuj == 1 ) { $mala="1"; $velka="0"; }
 if ( $druhuj == 2 ) { $mala="0"; $velka="1"; }
+if ( $kli_vrok <= 2014 ) { $mala="0"; $velka="0"; }
+
   $text = "   <mala><![CDATA[".$mala."]]></mala>"."\r\n"; fwrite($soubor, $text);
   $text = "   <velka><![CDATA[".$velka."]]></velka>"."\r\n"; fwrite($soubor, $text);
   $text = "  </typUzavierky>"."\r\n"; fwrite($soubor, $text);

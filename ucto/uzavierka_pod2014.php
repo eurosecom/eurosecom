@@ -161,6 +161,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(190,7," ","$rmc1",1,"L");
 $textxx="12345678";
 $text=$fir_fico;
+if( $fir_fico < 1000000 ) {$text="00".$fir_fico;}
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -225,6 +226,7 @@ $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
   }
 if ( $druhuj == 1 ) { $mala="x"; $velka=""; }
 if ( $druhuj == 2 ) { $mala=""; $velka="x"; }
+if ( $kli_vrok <= 2014 ) { $mala=""; $velka=""; }
 $pdf->SetY(62);
 $pdf->Cell(97,3," ","$rmc1",0,"C");$pdf->Cell(3,4,"$mala","$rmc",0,"C");
 $pdf->SetY(71);
