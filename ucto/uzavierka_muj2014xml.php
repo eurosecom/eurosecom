@@ -606,6 +606,7 @@ $rok=$pole[2];
 $dic=1*$fir_fdic;
   $text = "  <dic><![CDATA[".$dic."]]></dic>"."\r\n"; fwrite($soubor, $text);
 $ico=1*$fir_fico;
+if( $fir_fico < 1000000 ) {$ico="00".$ico;}
   $text = "  <ico><![CDATA[".$ico."]]></ico>"."\r\n"; fwrite($soubor, $text);
 
 $pole = explode(".", $fir_sknace);
