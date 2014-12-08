@@ -1282,7 +1282,6 @@ if ( $h_drp == 3 ) { $riadna="0"; $mimoriadna=0; $priebezna=1; }
   $text = "   <mimoriadna><![CDATA[".$mimoriadna."]]></mimoriadna>"."\r\n"; fwrite($soubor, $text);
   $text = "   <priebezna><![CDATA[".$priebezna."]]></priebezna>"."\r\n"; fwrite($soubor, $text);
 //druh uj z ufirdalsie
-//dopyt, neotestovane
 $druhuj=" ";
 $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
   if (@$zaznam=mysql_data_seek($sql,0))

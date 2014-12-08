@@ -214,7 +214,7 @@ $pdf->Cell(61,3," ","$rmc1",0,"C");$pdf->Cell(4,4,"$priebez","$rmc",0,"C");
 
 //uctovna jednotka
 $pdf->SetFont('arial','',10);
-$mala="x"; $velka="";
+$mala=""; $velka="";
 //nacitaj druh uj
 $druhuj=" ";
 $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
