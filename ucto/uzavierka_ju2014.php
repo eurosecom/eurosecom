@@ -151,6 +151,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(190,7," ","$rmc1",1,"L");
 $textxx="12345678";
 $text=$fir_fico;
+if( $fir_fico < 1000000 ) {$text="00".$fir_fico;}
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
