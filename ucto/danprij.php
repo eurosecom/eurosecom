@@ -873,6 +873,10 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
  Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  Schválená: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="" />
+<a href="../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_vysvetlivky.pdf" target="_blank"
+ title="Vysvetlivky k úètovnej závierke" style="margin-left:20px;">
+<img src="../obr/info.png" alt="info.png, 234B" border="0" height="11" width="11">
+</a>
 </td>
 <td class="bmenu" width="2%">
 <a href="#" onClick="GenSuvPod();">
@@ -1790,10 +1794,17 @@ window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drup
 </select>
  Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  <input type="hidden" name="h_sch" id="h_sch" value="" />
+<a href="../dokumenty/vykazy_ju2014/fo2014/uzfo_v14_vysvetlivky.pdf" target="_blank"
+ title="Vysvetlivky k úètovnej závierke" style="margin-left:20px;">
+<img src="../obr/info.png" alt="info.png, 234B" border="0" height="11" width="11">
+</a>
 </td>
 <td class="bmenu" width="2%" align="right">
+
+</td>
 <td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='uzavfo2014xml();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie' >
+</td>
 </tr>
 <tr>
 </FORM>
