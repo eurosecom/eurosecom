@@ -491,7 +491,7 @@ if ( $nepoc == 1 ) $vsetkyprepocty=0;
 $copern=20;
 if (!$upravene):
 ?>
-<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ " ) </script>
+<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ" ) </script>
 <?php
 endif;
 if ($upravene):
@@ -1020,7 +1020,6 @@ $oznac = mysql_query("$sqtoz");
 //danovnik zaklad dane r34 > 3735.94 nema narok lebo zam.premia=(r37-r43)*r44/12*0.19
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r43=0, r45=0 WHERE oc = $cislo_oc AND r43 >= r37  ";
 $oznac = mysql_query("$sqtoz");
-
    }
 //koniec zam.premia 2013
 
@@ -1585,205 +1584,9 @@ if ( $copern == 20 )
   }
 <?php                      } ?>
 
-//Kontrola datumu Sk
-  function kontrola_datum(vstup, Oznam, x1, errflag)
-  {
-	 var text
-	 var index
-	 var tecka
-	 var den
-	 var mesic
-	 var rok
-   var ch
-       var err
-  	text=""
-           err=0
-		
-		den=""
-		mesic=""
-		rok=""
-		tecka=0
-		
-    for (index = 0; index < vstup.value.length; index++)
-    {
-     ch = vstup.value.charAt(index);
-			if (ch != "0" && ch != "1" && ch != "2" && ch != "3" && ch != "4" && ch != "5" && ch != "6" && ch != "7" && ch != "8" && ch != "9" && ch != ".")
-				{ text="Pole Datum zadavajte vo formate DD.MM alebo DD.MM.RRRR (DD=den, MM=mesiac, RRRR=rok).\r"; err=3 }
-			if ((ch == "0" || ch == "1" || ch == "2" || ch == "3" || ch == "4" || ch == "5" || ch == "6" || ch == "7" || ch == "8" || ch == "9") && (text ==""))
-				{
-				if (tecka == 0)
-					{den=den + ch}
-				if (tecka == 1)
-					{mesic=mesic + ch}
-				if (tecka == 2)
-					{rok=rok + ch}
-				}
-			if (ch == "." && text == "")
-				{
-				if (tecka == 1)
-					{tecka=2}
-				if (tecka == 0)
-					{tecka=1}
-				}
-    }
-			
-		if (tecka == 2 && rok == "" )
-			{rok=<?php echo $kli_vrok; ?>}
-		if (tecka == 1 && rok == "" )
-			{rok=<?php echo $kli_vrok; ?>; err= 0}
-		if (tecka == 1 && mesic == "" )
-			{mesic=<?php echo $kli_vmes; ?>; err= 0}
-		if (tecka == 0 && mesic == "" )
-			{mesic=<?php echo $kli_vmes; ?>; rok=<?php echo $kli_vrok; ?>; err= 0}
-		if ((den<1 || den >31) && (text == ""))
-			{text=text + "Pocet dni v uvedenom mesiaci nemoze byt mensi ako 1 a vacsi ako 31.\r"; err=1 }
-		if ((mesic<1 || mesic>12) && (text == ""))
-			{text=text + "Pocet mesiacov nemoze byt mensi ako 1 a vacsi ako 12.\r"; err=2 }
-		if (rok<1930 && tecka == 2 && text == "" && rok != "" )
-			{text=text + "Rok nemoze byt mensi ako 1930.\r"; err=3 }
-		if (rok>2029 && tecka == 2 && text == "" && rok != "" )
-			{text=text + "Rok nemoze byt väèší ako 2029.\r"; err=3 }
-		if (tecka > 2)
-			{ text=text+ "Datum zadavajte vo formatu DD.MM alebo DD.MM.RRRR (DD=den, MM=mesiac, RRRR=rok)\r"; err=3 }
-
-		if (mesic == 2)
-			{
-			if (rok != "")
-				{
-				if (rok % 4 == 0)
-					{
-					if (den>29)
-						{text=text + "Vo februari roku " + rok + " je maximalne 29 dni.\r"; err=1 }
-					}
-				else
-					{
-					if (den>28)
-						{text=text + "Vo februari roku " + rok + " je maximalne 28 dni.\r"; err=1 }
-					}
-				}
-			else
-				{
-				if (den>29)
-					{text=text + "Vo februari roku je maximalne 29 dni.\r"}
-				}
-			}
-
-		if ((mesic == 4 || mesic == 6 || mesic == 9 || mesic == 11) && (den>30))
-			{text=text + "Pocet dni v uvedenom mesiaci nemoze byt mensi ako 1 a vacsi ako 30.\r"}
-		
 
 
 
-		if (text!="" && err == 1 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "??"  + "." + mesic+ "." + rok;
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (text!="" && err == 2 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "." + mesic + "??" + "." + rok;
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (text!="" && err == 3 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "." + mesic +  "." + rok + "??";
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (err == 0)
-			{
-                        Oznam.style.display="none";
-                        x1.value = den + "." + mesic +  "." + rok ;
-                        errflag.value = "0";
-			return true;
-			}
-		}
-//koniec kontrola datumu
-
-//Kontrola cisla celeho v rozsahu x az y
-  function intg(x1,x,y,Oznam)
-  {
-   var b;
-   b=x1.value;
-   var anyString=b;
-   Oznam.style.display="none";
-   if (b == "") return true;
-    else {
-    if (Math.floor(b)==b && b>=x && b<=y) return true;
-     else {
-      Oznam.style.display="";
-      document.formv1.uloz.disabled = true;
-      x1.focus();
-      return false;
-          }
-         }
-  }
-
-//Kontrola des.cisla celeho v rozsahu x az y
-  function cele(x1,x,y,Oznam,des)
-  {
-   var b;
-   b=x1.value;
-   var anyString=b;
-   var err=0;
-   var c;
-   var d;
-   var cele;
-   var pocdes;
-   cele=0;
-   pocdes=0;
-   c=b.toString();
-   d=c.split('.');
-   if ( isNaN(d[1]) ) { cele=1; }
-   if ( cele == 0 ) { pocdes=d[1].length; }
-      if (b == "") { err=0 }
-      if (b>=x && b<=y) { err=0 }
-      if ( x1.value.search(/[^0-9.-]/g) != -1) { err=1 }
-      if (b<x && b != "") { err=1 }
-      if (b>y && b != "") { err=1 }
-      if (cele == 0 && pocdes > des ) { err=1 }
-   if (err == 0) {
-       Oznam.style.display="none";
-       return true;
-                 }
-	 if (err == 1) {
-       Oznam.style.display="";
-       document.formv1.uloz.disabled = true;
-       x1.focus();
-       x1.value = b + "??";
-       return false;
-                 }
-  }
-
-//Kontrola cisla
-  function KontrolaCisla(Vstup, Oznam)
-  {
-   if ( Vstup.value.search(/[^0-9]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-   if ( Vstup.value.search(/[^0-9]/g) != -1) { Oznam.style.display=""; }
-   else { Oznam.style.display="none"; }
-  }
-//Kontrola cisla desatinneho
-  function KontrolaDcisla(Vstup, Oznam)
-  {
-   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Oznam.style.display=""; }
-   else { Oznam.style.display="none"; }
-  }
-//Kontrola datumu
-  function KontrolaDatum(Vstup, Oznam)
-  {
-   if ( Vstup.value.search(/[^0-9.]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-   if ( Vstup.value.search(/[^0-9.]/g) != -1) { Oznam.style.display=""; }
-   else { Oznam.style.display="none"; }
-  }
 //Z ciarky na bodku
   function CiarkaNaBodku(Vstup)
   {
@@ -1917,7 +1720,7 @@ $source="../mzdy/priznanie_foa2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
 </div>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-1.jpg" alt="tlaèivo Daò z príjmov FO typ A pre rok 2013 1.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str1.jpg" alt="tlaèivo Daò z príjmov FO typ A pre rok 2014 1.strana 282kB" class="form-background">
 
 <input type="text" name="rdc" id="rdc" style="width:129px; top:261px; left:51px;"/><input type="text" name="rdk" id="rdk" style="width:82px; top:261px; left:213px;"/>
 <input type="text" name="dar" id="dar" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:318px; left:51px;"/>
@@ -1939,7 +1742,8 @@ $source="../mzdy/priznanie_foa2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
 <input type="text" name="dpsc" id="dpsc" style="width:107px; top:538px; left:51px;"/>
 <input type="text" name="dmes" id="dmes" style="width:451px; top:538px; left:178px;"/>
 <input type="text" name="xstat" id="xstat" style="width:245px; top:538px; left:648px;"/>
-<input type="checkbox" name="nrz" value="1" style="top:576px; left:577px;"/>
+<!-- nerezident -->
+<input type="checkbox" name="nrz" value="1" style="top:576px; left:647px;"/>
 <!-- Adresa pobytu na uzemi SR -->
 <input type="text" name="d2uli" id="d2uli" style="width:635px; top:643px; left:51px;"/>
 <input type="text" name="d2cdm" id="d2cdm" style="width:175px; top:643px; left:718px;"/>
@@ -1965,13 +1769,13 @@ $source="../mzdy/priznanie_foa2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<?php $tlacrdk="$hrdc / $hrdk"; if( $tlacrdk == "0 / " ) { $tlacrdk=""; } ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-2.jpg" alt="tlaèivo Daò z príjmov FO typ A pre rok 2013 2.strana 250kB" class="form-background">
+<?php $tlacrdk="$hrdc / $hrdk"; if ( $tlacrdk == "0 / " ) { $tlacrdk=""; } ?>
+<img src="../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str2.jpg" alt="tlaèivo Daò z príjmov FO typ A pre rok 2014 2.strana 250kB" class="form-background">
 <input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo "$tlacrdk"; ?>" disabled="disabled" class="nofill" style="width:242px; top:68px; left:357px;"/>
 
 <!-- III. ODDIEL -->
-<input type="checkbox" name="r27" value="1" style="top:242px; left:745px;"/>
-<input type="text" name="r28" id="r28" onkeyup="CiarkaNaBodku(this);" style="width:174px; top:288px; left:701px;"/>
+<input type="checkbox" name="r27" value="1" style="top:242px; left:695px;"/>
+<input type="text" name="r28" id="r28" onkeyup="CiarkaNaBodku(this);" style="width:174px; top:288px; left:650px;"/>
 <input type="text" name="mprie" id="mprie" style="width:340px; top:376px; left:51px;"/>
 <input type="text" name="mrod" id="mrod" style="width:240px; top:376px; left:413px;"/>
 <input type="text" name="mpri" id="mpri" onkeyup="CiarkaNaBodku(this);" style="width:153px; top:376px; left:671px;"/>
@@ -2055,8 +1859,8 @@ $source="../mzdy/priznanie_foa2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
 
 
 <?php if ( $strana == 3 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-3.jpg" alt="tlaèivo Daò z príjmov FO typ A pre rok 2013 3.strana 250kB" class="form-background">
-<?php $tlacrdk="$hrdc / $hrdk"; if( $tlacrdk == "0 / " ) { $tlacrdk=""; } ?>
+<img src="../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str3.jpg" alt="tlaèivo Daò z príjmov FO typ A pre rok 2013 3.strana 250kB" class="form-background">
+<?php $tlacrdk="$hrdc / $hrdk"; if ( $tlacrdk == "0 / " ) { $tlacrdk=""; } ?>
 <input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo "$tlacrdk"; ?>" disabled="disabled" class="nofill" style="width:242px; top:68px; left:357px;"/>
 
 <!-- VI. ODDIEL -->
@@ -2066,93 +1870,94 @@ $source="../mzdy/priznanie_foa2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
 <input type="text" name="r38" id="r38" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:232px; left:569px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="namanzelku();" title="Doplni odpoèet na manželku a zoh¾adni milionársku daò" class="btn-row-tool" style="top:233px; left:736px;">
 <input type="text" name="r39" id="r39" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:272px; left:569px;"/>
-<input type="text" name="r40" id="r40" onkeyup="CiarkaNaBodku(this);" style="width:174px; top:311px; left:546px;"/>
-<input type="text" name="r41" id="r41" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:360px; left:477px;"/>
-<input type="text" name="r42" id="r42" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:412px; left:477px;"/>
-<input type="text" name="r43" id="r43" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:455px; left:569px;"/>
-<input type="text" name="r44" id="r44" style="width:35px; top:498px; left:616px;"/>
-<input type="text" name="r45" id="r45" onkeyup="CiarkaNaBodku(this);" style="width:129px; top:538px; left:591px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="zamestnanecka();" title="Doplni zamestnaneckú prémiu" class="btn-row-tool" style="top:539px; left:736px;">
-<input type="text" name="r46" id="r46" onkeyup="CiarkaNaBodku(this);" style="width:129px; top:578px; left:591px;"/>
-<input type="text" name="r47" id="r47" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:618px; left:477px;"/>
-<input type="text" name="r48" id="r48" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:667px; left:477px;"/>
-<input type="text" name="r49" id="r49" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:719px; left:477px;"/>
-<input type="text" name="r50" id="r50" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:762px; left:477px;"/>
-<input type="text" name="r51" id="r51" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:808px; left:477px;"/>
-<input type="text" name="r52" id="r52" onkeyup="CiarkaNaBodku(this);" style="width:129px; top:850px; left:591px;"/>
-<input type="text" name="r53" id="r53" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:894px; left:477px;"/>
-<input type="text" name="r54" id="r54" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:940px; left:477px;"/>
-<input type="text" name="r55" id="r55" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:980px; left:477px;"/>
-<input type="text" name="r56" id="r56" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1020px; left:569px;"/>
-<input type="text" name="r57" id="r57" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:1059px; left:477px;"/>
-<input type="text" name="r58" id="r58" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1099px; left:569px;"/>
-<input type="text" name="r59" id="r59" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1139px; left:569px;"/>
-<input type="text" name="r60" id="r60" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1179px; left:569px;"/>
-<input type="text" name="r61" id="r61" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1220px; left:569px;"/>
+<input type="text" name="r40" id="r40" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:311px; left:569px;"/>
+<input type="text" name="r41" id="r41" onkeyup="CiarkaNaBodku(this);" style="width:174px; top:352px; left:546px;"/>
+<input type="text" name="r42" id="r42" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:395px; left:477px;"/>
+<input type="text" name="r43" id="r43" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:440px; left:477px;"/>
+<input type="text" name="r44" id="r44" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:483px; left:569px;"/>
+<input type="text" name="r45" id="r45" style="width:35px; top:527px; left:616px;"/>
+<input type="text" name="r46" id="r46" onkeyup="CiarkaNaBodku(this);" style="width:129px; top:567px; left:591px;"/>
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="zamestnanecka();" title="Doplni zamestnaneckú prémiu"
+  class="btn-row-tool" style="top:568px; left:736px;">
+<input type="text" name="r47" id="r47" onkeyup="CiarkaNaBodku(this);" style="width:129px; top:608px; left:591px;"/>
+<input type="text" name="r48" id="r48" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:647px; left:477px;"/>
+<input type="text" name="r49" id="r49" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:696px; left:477px;"/>
+<input type="text" name="r50" id="r50" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:748px; left:477px;"/>
+<input type="text" name="r51" id="r51" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:791px; left:477px;"/>
+<input type="text" name="r52" id="r52" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:835px; left:477px;"/>
+<input type="text" name="r53" id="r53" onkeyup="CiarkaNaBodku(this);" style="width:129px; top:879px; left:591px;"/>
+<input type="text" name="r54" id="r54" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:923px; left:477px;"/>
+<input type="text" name="r55" id="r55" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:970px; left:477px;"/>
+<input type="text" name="r56" id="r56" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:1009px; left:477px;"/>
+<input type="text" name="r57" id="r57" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1047px; left:569px;"/>
+<input type="text" name="r58" id="r58" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:1087px; left:477px;"/>
+<input type="text" name="r59" id="r59" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1128px; left:569px;"/>
+<input type="text" name="r60" id="r60" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1168px; left:569px;"/>
+<input type="text" name="r61" id="r61" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1208px; left:569px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 4 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-4.jpg" alt="tlaèivo Daò z príjmov FO typ A pre rok 2013 4.strana 250kB" class="form-background">
-<?php $tlacrdk="$hrdc / $hrdk"; if( $tlacrdk == "0 / " ) { $tlacrdk=""; } ?>
+<img src="../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str4.jpg" alt="tlaèivo Daò z príjmov FO typ A pre rok 2014 4.strana 250kB" class="form-background">
+<?php $tlacrdk="$hrdc / $hrdk"; if ( $tlacrdk == "0 / " ) { $tlacrdk=""; } ?>
 <input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo "$tlacrdk"; ?>" disabled="disabled" class="nofill" style="width:242px; top:68px; left:357px;"/>
 
 <!-- VI. ODDIEL pokracovanie -->
-<input type="text" name="r62" id="r62" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:116px; left:477px;"/>
-<input type="text" name="r63" id="r63" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:156px; left:477px;"/>
-<input type="text" name="r64" id="r64" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:200px; left:477px;"/>
-<input type="text" name="r65" id="r65" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:250px; left:477px;"/>
-<input type="text" name="r66" id="r66" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:300px; left:540px;"/>
+<input type="text" name="r62" id="r62" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:117px; left:569px;"/>
+<input type="text" name="r63" id="r63" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:157px; left:477px;"/>
+<input type="text" name="r64" id="r64" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:197px; left:477px;"/>
+<input type="text" name="r65" id="r65" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:242px; left:477px;"/>
+<input type="text" name="r66" id="r66" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:292px; left:477px;"/>
 
 <!-- VII. ODDIEL -->
-<input type="text" name="r67" id="r67" onkeyup="CiarkaNaBodku(this);" style="width:265px; top:684px; left:519px;"/>
-<input type="text" name="r68" id="r68" onkeyup="CiarkaNaBodku(this);" style="width:265px; top:735px; left:519px;"/>
-<input type="text" name="r69" id="r69" onkeyup="CiarkaNaBodku(this);" style="width:265px; top:791px; left:519px;"/>
-<input type="text" name="r70" id="r70" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:838px; left:632px;"/>
-<input type="text" name="r71" id="r71" onkeyup="CiarkaNaBodku(this);" style="width:173px; top:878px; left:611px;"/>
-<input type="text" name="r72" id="r72" onkeyup="CiarkaNaBodku(this);" style="width:131px; top:923px; left:653px;"/>
-<input type="text" name="r73" id="r73" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:969px; left:633px;"/>
-<input type="text" name="r74" id="r74" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:999px; left:633px;"/>
+<input type="text" name="r67" id="r67" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:740px; left:541px;"/>
+<input type="text" name="r68" id="r68" onkeyup="CiarkaNaBodku(this);" style="width:265px; top:794px; left:519px;"/>
+<input type="text" name="r69" id="r69" onkeyup="CiarkaNaBodku(this);" style="width:265px; top:843px; left:519px;"/>
+<input type="text" name="r70" id="r70" onkeyup="CiarkaNaBodku(this);" style="width:265px; top:924px; left:519px;"/>
+<input type="text" name="r71" id="r71" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:1010px; left:632px;"/>
+<input type="text" name="r72" id="r72" onkeyup="CiarkaNaBodku(this);" style="width:173px; top:1064px; left:611px;"/>
+<input type="text" name="r73" id="r73" onkeyup="CiarkaNaBodku(this);" style="width:131px; top:1110px; left:653px;"/>
+<input type="text" name="r74" id="r74" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1155px; left:633px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 5 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-5.jpg" alt="tlaèivo Daò z príjmov FO typ A pre rok 2013 5.strana 250kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str5.jpg" alt="tlaèivo Daò z príjmov FO typ A pre rok 2014 5.strana 250kB" class="form-background">
 <?php $tlacrdk="$hrdc / $hrdk"; if( $tlacrdk == "0 / " ) { $tlacrdk=""; } ?>
 <input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo "$tlacrdk"; ?>" disabled="disabled" class="nofill" style="width:242px; top:68px; left:357px;"/>
 
 <!-- VIII. ODDIEL -->
-<input type="checkbox" name="upl50" value="1" style="top:155px; left:58px;"/>
-<input type="checkbox" name="spln3" value="1" style="top:155px; left:294px;"/>
-<input type="text" name="r75" id="r75" onkeyup="CiarkaNaBodku(this);" style="width:197px; top:192px; left:316px;"/>
+<input type="checkbox" name="upl50" value="1" style="top:160px; left:59px;"/>
+<input type="checkbox" name="spln3" value="1" style="top:160px; left:294px;"/>
+<input type="text" name="r75" id="r75" onkeyup="CiarkaNaBodku(this);" style="width:197px; top:203px; left:316px;"/>
 <!-- Prijimatel -->
-<input type="text" name="pico" id="pico" style="width:175px; top:274px; left:51px;"/>
-<input type="text" name="psid" id="psid" style="width:83px; top:274px; left:258px;"/>
-<input type="text" name="pfor" id="pfor" style="width:520px; top:274px; left:373px;"/>
-<input type="text" name="pmen" id="pmen" style="width:842px; top:328px; left:51px;"/>
-<input type="text" name="puli" id="puli" style="width:635px; top:438px; left:51px;"/>
-<input type="text" name="pcdm" id="pcdm" style="width:175px; top:438px; left:718px;"/>
-<input type="text" name="ppsc" id="ppsc" style="width:106px; top:490px; left:51px;"/>
-<input type="text" name="pmes" id="pmes" style="width:703px; top:490px; left:190px;"/>
+<input type="text" name="pico" id="pico" style="width:175px; top:285px; left:51px;"/>
+<input type="text" name="psid" id="psid" style="width:83px; top:285px; left:258px;"/>
+<input type="text" name="pfor" id="pfor" style="width:520px; top:285px; left:373px;"/>
+<input type="text" name="pmen" id="pmen" style="width:842px; top:339px; left:51px;"/>
+<input type="text" name="puli" id="puli" style="width:635px; top:449px; left:51px;"/>
+<input type="text" name="pcdm" id="pcdm" style="width:175px; top:449px; left:718px;"/>
+<input type="text" name="ppsc" id="ppsc" style="width:106px; top:500px; left:51px;"/>
+<input type="text" name="pmes" id="pmes" style="width:703px; top:500px; left:190px;"/>
 
 <!-- IX. ODDIEL -->
-<input type="checkbox" name="uoso" value="1" style="top:605px; left:58px;"/>
-<input type="text" name="pzks1" id="pzks1" style="width:61px; top:696px; left:51px;"/>
-<input type="text" name="pzpr1" id="pzpr1" onkeyup="CiarkaNaBodku(this);" style="width:231px; top:696px; left:135px;"/>
-<input type="text" name="pzvd1" id="pzvd1" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:696px; left:389px;"/>
-<input type="text" name="pzks2" id="pzks2" style="width:61px; top:736px; left:51px;"/>
-<input type="text" name="pzpr2" id="pzpr2" onkeyup="CiarkaNaBodku(this);" style="width:231px; top:736px; left:135px;"/>
-<input type="text" name="pzvd2" id="pzvd2" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:736px; left:389px;"/>
-<input type="text" name="pzks3" id="pzks3" style="width:61px; top:776px; left:51px;"/>
-<input type="text" name="pzpr3" id="pzpr3" onkeyup="CiarkaNaBodku(this);" style="width:231px; top:776px; left:135px;"/>
-<input type="text" name="pzvd3" id="pzvd3" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:776px; left:389px;"/>
-<textarea name="osob" id="osob" style="width:838px; height:368px; top:858px; left:53px;"><?php echo $osob; ?></textarea>
+<input type="checkbox" name="uoso" value="1" style="top:615px; left:58px;"/>
+<input type="text" name="pzks1" id="pzks1" style="width:61px; top:718px; left:51px;"/>
+<input type="text" name="pzpr1" id="pzpr1" onkeyup="CiarkaNaBodku(this);" style="width:231px; top:718px; left:135px;"/>
+<input type="text" name="pzvd1" id="pzvd1" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:718px; left:389px;"/>
+<input type="text" name="pzks2" id="pzks2" style="width:61px; top:758px; left:51px;"/>
+<input type="text" name="pzpr2" id="pzpr2" onkeyup="CiarkaNaBodku(this);" style="width:231px; top:758px; left:135px;"/>
+<input type="text" name="pzvd2" id="pzvd2" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:758px; left:389px;"/>
+<input type="text" name="pzks3" id="pzks3" style="width:61px; top:799px; left:51px;"/>
+<input type="text" name="pzpr3" id="pzpr3" onkeyup="CiarkaNaBodku(this);" style="width:231px; top:799px; left:135px;"/>
+<input type="text" name="pzvd3" id="pzvd3" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:799px; left:389px;"/>
+<textarea name="osob" id="osob" style="width:838px; height:351px; top:879px; left:53px;"><?php echo $osob; ?></textarea>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 6 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-6.jpg" alt="tlaèivo Daò z príjmov FO typ A pre rok 2013 6.strana 250kB" class="form-background">
-<?php $tlacrdk="$hrdc / $hrdk"; if( $tlacrdk == "0 / " ) { $tlacrdk=""; } ?>
+<img src="../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str6.jpg" alt="tlaèivo Daò z príjmov FO typ A pre rok 2014 6.strana 250kB" class="form-background">
+<?php $tlacrdk="$hrdc / $hrdk"; if ( $tlacrdk == "0 / " ) { $tlacrdk=""; } ?>
 <input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo "$tlacrdk"; ?>" disabled="disabled" class="nofill" style="width:242px; top:68px; left:357px;"/>
 
 <!-- X. ODDIEL -->
@@ -2184,9 +1989,9 @@ $source="../mzdy/priznanie_foa2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
  <script type="text/javascript">document.formv1.ucet.checked = "checked";</script>
 <?php                   } ?>
 
-<input type="text" name="diban" id="diban" style="width:773px; top:637px; left:116px;"/>
-<input type="text" name="uceb" id="uceb" style="width:381px; top:689px; left:59px;"/>
-<input type="text" name="numb" id="numb" style="width:81px; top:689px; left:482px;"/>
+<input type="text" name="diban" id="diban" style="width:773px; top:634px; left:116px;"/>
+<input type="text" name="uceb" id="uceb" style="width:381px; top:688px; left:59px;"/>
+<input type="text" name="numb" id="numb" style="width:81px; top:688px; left:482px;"/>
 <input type="text" name="da2" id="da2" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:748px; left:116px;"/>
 
 <!-- XII. ODDIEL -->
@@ -2252,17 +2057,17 @@ if ( $dat_dat == '0000-00-00' ) $dat_dat="";
 
 if ( $strana == 1 OR $strana == 9999 ) {
 $pdf->AddPage();
-$pdf->SetFont('arial','',10);
+$pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-1.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str1.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-1.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
 //rodne cislo
-$pdf->Cell(190,45,"                          ","$rmc1",1,"L");
+$pdf->Cell(190,45," ","$rmc1",1,"L");
 $text="1234567890";
 $text=$hlavicka->rdc.$hlavicka->rdk;
 $t01=substr($text,0,1);
@@ -2282,7 +2087,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$t10","$rmc",1,"C");
 
 //datum narodenia
-$pdf->Cell(190,7,"                          ","$rmc1",1,"L");
+$pdf->Cell(190,7," ","$rmc1",1,"L");
 $text="01012010";
 $text=SKDatum($hlavicka->dar);
 if ( $text =='00.00.0000' OR $hlavicka->nrz == 0 ) $text="";
@@ -2862,9 +2667,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-2.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str2.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-2.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str2.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -3321,9 +3126,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-3.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str3.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-3.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str3.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -3834,9 +3639,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-4.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str4.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-4.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str4.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -4135,9 +3940,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-5.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str5.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-5.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str5.jpg',0,0,210,297);
 }
 $pdf->SetY(8);
 
@@ -4698,9 +4503,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-6.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str6.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14-6.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfoa2014/dpfoa_v14_str6.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
