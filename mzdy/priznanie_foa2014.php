@@ -812,7 +812,7 @@ $vysledek = mysql_query("$sql");
 }
 
 //zmeny pre rok 2014
-$sql = "SELECT r79 FROM F".$kli_vxcf."_mzdpriznanie_foa";
+$sql = "SELECT r78 FROM F".$kli_vxcf."_mzdpriznanie_foa";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
