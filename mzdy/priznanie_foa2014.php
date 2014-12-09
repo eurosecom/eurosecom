@@ -818,10 +818,9 @@ if (!$vysledok)
 {
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD new2014 DECIMAL(2,0) NOT NULL AFTER pzks3";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD r78 DECIMAL(10,2) DEFAULT 0 AFTER new2013";
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD r78 DECIMAL(10,2) DEFAULT 0 AFTER new2014";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD r79 DECIMAL(10,2) DEFAULT 0 AFTER new2013";
-//$vysledek = mysql_query("$sql");
+
 }
 
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_mzdpriznanie_foa";
