@@ -12,6 +12,34 @@ Porovnanie s verziou pre rok 2013:
              §7 ods.17 nový
              tabu¾ka è.1a - 2 riadky z nej posunuté až na stranu 4, v prvých 2 riadkoch zmenený text asi aj význam
 
+
+NOVE POLOZKY V TABULKE NA STRANE 3.
+
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD uppr1 DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD uppr3 DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD uppr4 DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD uvp61 DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD uvp64 DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD uvp61m DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD uvp64m DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD uos61 DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD uos64 DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD kos61 DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD kos64 DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+
+
+
 4.strana
 - VI.oddiel: tabu¾ka è.1b predtým na strane 3, dlhší nadpis
              tabu¾ka è.1c zrušená
@@ -58,6 +86,9 @@ Porovnanie s verziou pre rok 2013:
 - Príloha: predtým r.09 zrušený => poposúvané i výpoèty
            riadok 16 nový
            checkbox pod riadkom 16 nový
+
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD vpdu DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
 
 13.strana = ZRUŠENÁ
 
