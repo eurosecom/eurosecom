@@ -662,8 +662,9 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r07a=0, r05a=-rb1a, r06
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//na konci stvrtroka 3,6,9,12 spocitaj rozdiel DB a ZPR a uplatni vyrovnanie
-if ( $kli_vmes == 3 OR $kli_vmes == 6 OR $kli_vmes == 9 OR $kli_vmes == 12 )
+//na konci stvrtroka 3,6,9,12 spocitaj rozdiel DB a ZPR a uplatni vyrovnanie TOTO SOM ZRUSIL MUSI NAPOCITAT UZIVATEL
+$nerobtoto=1;
+if ( $nerobtoto == 0 AND ( $kli_vmes == 3 OR $kli_vmes == 6 OR $kli_vmes == 9 OR $kli_vmes == 12 ) )
      {
 if ( $kli_vmes ==  3 ) { $podmume=" umex >= 1.".$kli_vrok." AND umex <= 3.".$kli_vrok." "; $strtrokx=1; }
 if ( $kli_vmes ==  6 ) { $podmume=" umex >= 4.".$kli_vrok." AND umex <= 6.".$kli_vrok." "; $strtrokx=2; }
