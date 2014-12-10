@@ -7,7 +7,7 @@
 //../pswd/pasword.php a nakopirovat pswd/oddelena2014db2015.php
 
 //../oddel_dtb1.php a oddel_dtb2.php a oddel_dtb3.php				OK2015
-//../cis/oddel_dtbz1.php a ../cis/oddel_dtbz2.php				OK2015
+//../cis/oddel_dtbz1.php a ../cis/oddel_dtbz2.php a ../cis/oddel_dtbz3.php	OK2015
 //../cis/oddel_dtbm1.php a oddel_dtbm2.php pre hotel.sluzby			OK2015
 
 //ckli.php autoinc,unique..  POZOR aj aktualizacia klienti v databaze min.roka a pri ulozeni uprav  			OK2015
@@ -21,8 +21,9 @@
 //hsheslo.php kalendar skopiruj automaticky 					OK2015
 //aky_robot.php datum velka noc 						OK2015
 
-//podvojneu.php,mzdy.php,sklad.php,fakt.php,dopr.php,majetok.php,vyroba.php,analyzy.php 				setODDELDB
-//ubyt.php,rest.php,kuch.php 												setODDELDB
+//podvojneu.php,mzdy.php,sklad.php,fakt.php,dopr.php				setODDELDB
+//majetok.php,vyroba.php,analyzy.php 						setODDELDB
+//ubyt.php,rest.php,kuch.php 							setODDELDB
 
 //../cis/citaj_nas.php aby citalnastavenie firmy vzdy z db2015 			setODDELDB
 //../cis/zmenume.php aby upravil nastavenie firmy vzdy z db2015 		setODDELDB
@@ -47,23 +48,23 @@
 
 
 //../ucto/priznanie_po2013.php  prenos z minuleho roku                      	ok2014
-//../ucto/priznanie_fob2013.php  prenos z minuleho roku                     	ok2014
+//../ucto/priznanie_fob2014.php  prenos z minuleho roku                     	setODDELDB
 //../mzdy/priznanie_foa2014.php  prenos z minuleho roku                     	setODDELDB
 //../ucto/priznanie_dmv2013.php  tabulky z minuleho roku		    	ok2014 
 
 //../ucto/roknakvyn.php  tabulky z minuleho roku				setODDELDB
 //../ucto/roksuv.php  tabulky z minuleho roku					setODDELDB
 
-//../mzdy/rocne_dane2014.php prenos RZ,bonus,zam.pr do dalsieho roku        	ok2014 
-//../mzdy/vyhlasenie_dane2014.php prenos z minuleho roku                    	ok2014
+//../mzdy/rocne_dane2014.php prenos RZ,bonus,zam.pr do dalsieho roku        	setODDELDB 
+//../mzdy/vyhlasenie_dane2014.php prenos z minuleho roku                    	setODDELDB
 //../mzdy/stat_kat.php  pocet sviatkov a dni					vyriesene navzdy vzorcom
 //../mzdy/stat_pomer.php  pocet sviatkov a dni					vyriesene navzdy vzorcom
 //../mzdy/evidencny_list.php  nacitanie minulych rokov                      	ok2014	POZOR potom ked cita firx tam to je este riadok 2064!!!
 //../mzdy/priemery.php  fond pracovnej doby		                    	vyriesene navzdy vzorcom
 //../mzdy/vypocet_sz4.php  fond pracovnej doby		                    	vyriesene navzdy vzorcom
-//../mzdy/uctovanie.php  prenos uctovania z minulej firmy		    	ok2014 
-//../mzdy/potvrd_nezd2013.php  prenos z minulej firmy		            	ok2014
-//../mzdy/potvrd_nemd.php  napocitanie zakladov z minuleho			ok2014
+//../mzdy/uctovanie.php  prenos uctovania z minulej firmy		    	setODDELDB 
+//../mzdy/potvrd_nezd2014.php  prenos z minulej firmy neda sa cez setODDELDB  	ok2014
+//../mzdy/potvrd_nemd.php  napocitanie zakladov z min. neda sa cez setODDELDB	ok2015
 
 //../analyzy/grafy_zdroj.php  minule roky			            	setODDELDB
 

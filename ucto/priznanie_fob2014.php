@@ -187,7 +187,7 @@ $h_ycf=0;
 if ( $fir_allx11 > 0 ) $h_ycf=1*$fir_allx11;
 
 $databaza="";
-$dtb2 = include("oddel_dtbz1.php");
+$dtb2 = include("../cis/oddel_dtbz1.php");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob,".$databaza."F$h_ycf"."_mzdpriznanie_fob SET ".
 " F$kli_vxcf"."_mzdpriznanie_fob.cinnost=".$databaza."F$h_ycf"."_mzdpriznanie_fob.cinnost, ".

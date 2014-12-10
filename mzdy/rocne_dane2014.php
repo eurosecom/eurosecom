@@ -142,11 +142,8 @@ if ( $dmx == 903 AND $umx > 0 AND $fix > 0 )
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdrocnedaneprenos SET dmx='$dmx', umx='$umx', fix='$fix' ";
 $upravene = mysql_query("$uprtxt"); 
 $databaza="";
-if ( $kli_vrok == 2010 ) { if ( File_Exists("../pswd/oddelena2010db2011.php") ) { $databaza=$mysqldb2011."."; } }
-if ( $kli_vrok == 2011 ) { if ( File_Exists("../pswd/oddelena2011db2012.php") ) { $databaza=$mysqldb2012."."; } }
-if ( $kli_vrok == 2012 ) { if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2013."."; } }
-if ( $kli_vrok == 2013 ) { if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2014."."; } }
-if ( $kli_vrok == 2014 ) { if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2015."."; } }
+
+$dtb2 = include("../cis/oddel_dtbz3.php");
 
 $uprtxt = "DELETE FROM ".$databaza."F$fix"."_mzdmes WHERE oc = $cislo_oc AND dm = $dmx ";
 //echo $uprtxt;

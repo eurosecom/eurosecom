@@ -1199,8 +1199,8 @@ $vysledok = mysql_query("$sqlt");
 
 
 //uprav maximalny a minimalny podla nepoistenych dni, zpmax neupravuj ak celkovedni = nepoistenedni pravdepodobne je to prijem rocny...
-//od 5.2011 neznizujem maximalny zaklad do ZP podla poctu poistenych dni, vzdy je maxZP
-if( $kli_vrok > 2011 )
+//od 11.2014 neznizujem maximalny zaklad do ZP podla poctu poistenych dni, vzdy je maxZP
+if( $kli_vrok < 2014 OR ( $kli_vrok == 2014 AND $kli_vume < 11.2014 ) )
   {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdprcneod$kli_uzid".
 " SET zmax_zp=zmax_zp*(celk_dni-nezp_dni)/celk_dni ".
@@ -1597,9 +1597,6 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
 " WHERE sspnie = 1";
 $oznac = mysql_query("$sqtoz");
 
-
-//exit;
-
 //uprav max zaklady ak nahodou > ako maximalne tak daj maximalny
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_zp=$max_zp WHERE zzam_zp > $max_zp "; $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_np=$max_np WHERE zzam_np > $max_np "; $oznac = mysql_query("$sqtoz");
@@ -1609,6 +1606,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_pn=$max_pn WHERE zzam
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_up=$max_up WHERE zzam_up > $max_up "; $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_gf=$max_gf WHERE zzam_gf > $max_gf "; $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_rf=$max_rf WHERE zzam_rf > $max_rf "; $oznac = mysql_query("$sqtoz");
+
 
 //zaklad firma zp,np,.....,gf,rf 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".

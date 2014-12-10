@@ -323,6 +323,10 @@ if ( $minuly == 1 AND $kli_vrok > 2013 )
 {
 if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; }
 }
+if ( $minuly == 1 AND $kli_vrok > 2014 )
+{
+if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; }
+}
 //echo $minuly;
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
