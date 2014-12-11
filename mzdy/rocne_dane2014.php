@@ -818,7 +818,7 @@ $oznac = mysql_query("$sqtoz");
 if ( $vsetkyprepocty == 1 )
      {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET po6=8755.58-(r01/4) WHERE oc = $cislo_oc AND r01 > 19809.00 ";
+" SET po6=8755.578-(r01/4) WHERE oc = $cislo_oc AND r01 > 19809.00 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
