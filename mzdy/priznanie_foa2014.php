@@ -4794,23 +4794,30 @@ $pdf->Cell(190,6," ","$rmc1",1,"L");
 $text="SK0123456789+-ab";
 $text=$hlavicka->uceb;
 if ( $hlavicka->ucet == 0 ) $text="";
-$t01=substr($text,0,1);
-$t02=substr($text,1,1);
-$t03=substr($text,2,1);
-$t04=substr($text,3,1);
-$t05=substr($text,4,1);
-$t06=substr($text,5,1);
-$t07=substr($text,6,1);
-$t08=substr($text,7,1);
-$t09=substr($text,8,1);
-$t10=substr($text,9,1);
-$t11=substr($text,10,1);
-$t12=substr($text,11,1);
-$t13=substr($text,12,1);
-$t14=substr($text,13,1);
-$t15=substr($text,14,1);
-$t16=substr($text,15,1);
-$t17=substr($text,16,1);
+
+$pole = explode("-", $text);
+$textp=$pole[0];
+$textu=$pole[1];
+if( $textu == '' ) { $textu=$textp; $textp=""; }
+
+$t01=substr($textp,0,1);
+$t02=substr($textp,1,1);
+$t03=substr($textp,2,1);
+$t04=substr($textp,3,1);
+$t05=substr($textp,4,1);
+$t06=substr($textp,5,1);
+$t07=substr($textp,6,1);
+
+$t08=substr($textu,0,1);
+$t09=substr($textu,1,1);
+$t10=substr($textu,2,1);
+$t11=substr($textu,3,1);
+$t12=substr($textu,4,1);
+$t13=substr($textu,5,1);
+$t14=substr($textu,6,1);
+$t15=substr($textu,7,1);
+$t16=substr($textu,8,1);
+$t17=substr($textu,9,1);
 $pdf->Cell(5,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"R");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"R");
 $pdf->Cell(1,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"L");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"L");
 $pdf->Cell(1,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"R");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",0,"R");
