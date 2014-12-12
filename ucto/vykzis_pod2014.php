@@ -1185,7 +1185,14 @@ $oznac = mysql_query("$sqtoz");
 }
 //koniec rozdiel po zaokruhleni
 
-
+//vypocitaj riadok 01 cisty obrat
+$vsldat="prcvykziss";
+if( $tis > 0 ) { $vsldat="prcvyk1000ziss"; }
+$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+"r01=r03+r04+r05 ".
+" WHERE prx = 1 ";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
 
 //vypis negenerovane pohyby
 $sqtoz = "DELETE FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid WHERE LEFT(uce,1) != 5 AND LEFT(uce,1) != 6 AND LEFT(uce,1) != 8 AND LEFT(uce,1) != 9 ";
