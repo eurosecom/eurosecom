@@ -1,3 +1,4 @@
+<!doctype html>
 <HTML>
 <?php
 //celkovy zaciatok dokumentu
@@ -6,9 +7,9 @@
 $sys = 'UCT';
 $urov = 2000;
 $uziv = include("../uziv.php");
-if( !$uziv ) exit;
+if ( !$uziv ) exit;
 
-if(!isset($kli_vxcf)) $kli_vxcf = 1;
+if (!isset($kli_vxcf)) $kli_vxcf = 1;
 
   require_once("../pswd/password.php");
   @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
@@ -25,9 +26,6 @@ $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, statu
 
 $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -41,21 +39,20 @@ $vyb_ump="1.".$kli_vrok;
 $vyb_ums="2.".$kli_vrok;
 $vyb_umk="3.".$kli_vrok;
 $mesiac="03";
-if( $kli_vmes > 3 ) { $stvrtrok=2; $vyb_ump="4.".$kli_vrok; $vyb_ums="5.".$kli_vrok; $vyb_umk="6.".$kli_vrok; $mesiac="06"; }
-if( $kli_vmes > 6 ) { $stvrtrok=3; $vyb_ump="7.".$kli_vrok; $vyb_ums="8.".$kli_vrok; $vyb_umk="9.".$kli_vrok; $mesiac="09"; }
-if( $kli_vmes > 9 ) { $stvrtrok=4; $vyb_ump="10.".$kli_vrok; $vyb_ums="11.".$kli_vrok; $vyb_umk="12.".$kli_vrok; $mesiac="12"; }
+if ( $kli_vmes > 3 ) { $stvrtrok=2; $vyb_ump="4.".$kli_vrok; $vyb_ums="5.".$kli_vrok; $vyb_umk="6.".$kli_vrok; $mesiac="06"; }
+if ( $kli_vmes > 6 ) { $stvrtrok=3; $vyb_ump="7.".$kli_vrok; $vyb_ums="8.".$kli_vrok; $vyb_umk="9.".$kli_vrok; $mesiac="09"; }
+if ( $kli_vmes > 9 ) { $stvrtrok=4; $vyb_ump="10.".$kli_vrok; $vyb_ums="11.".$kli_vrok; $vyb_umk="12.".$kli_vrok; $mesiac="12"; }
 
-// cislo operacie
+//cislo operacie
 $copern = 1*strip_tags($_REQUEST['copern']);
 $strana = 1*$_REQUEST['strana'];
-if( $strana == 0 ) $strana=1;
+if ( $strana == 0 ) $strana=1;
 
 $dopoz = 1*$_REQUEST['dopoz'];
-if( $copern == 1 ) $dopoz=1;
+if ( $copern == 1 ) $dopoz=1;
 //echo $copern;
 
 //vytvor tabulku textov v databaze
-
 $sql = "SELECT ico FROM F$kli_vxcf"."_poznamky_muj2014texty ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
@@ -86,14 +83,12 @@ $sql = "SELECT oldp FROM F$kli_vxcf"."_poznamky_muj2014texty ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
    {
-
 $sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014texty ADD oldc2 VARCHAR(10) NOT NULL AFTER prmx4";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014texty ADD oldc1 VARCHAR(10) NOT NULL AFTER prmx4";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_poznamky_muj2014texty ADD oldp VARCHAR(10) NOT NULL AFTER prmx4";
 $vysledek = mysql_query("$sql");
-
    }
 //koniec vytvor tabulku textov v databaze
 
@@ -532,7 +527,7 @@ $vysledek = mysql_query("$sql");
 //koniec vytvor tabulku v databaze
 
 
-// zapis upravene udaje strana 1
+//zapis upravene udaje strana 1
 if ( $copern == 3 AND $strana == 1 )
     {
 $ac11 = strip_tags($_REQUEST['ac11']);       
@@ -550,14 +545,13 @@ $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
 " tlt101='$tlt101', ".
 " konx=0 ".
 " WHERE ico >= 0"; 
-
 //echo $uprtxt;
 
 $upravene = mysql_query("$uprtxt");  
 $copern=1;
 if (!$upravene):
 ?>
-<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ " ) </script>
+<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ" ) </script>
 <?php
 endif;
 if ($upravene):
@@ -567,25 +561,20 @@ endif;
 //koniec zapisu upravenych udajov strana 1
 
 
-// zapis upravene udaje strana 2
+//zapis upravene udaje strana 2
 if ( $copern == 3 AND $strana == 2 )
     {
-    
-
 $uprav="NO";
-
 $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
-
-" konx=0 ".        
+" konx=0 ".
 " WHERE ico >= 0";  
-  
 //echo $uprtxt;
   
 $upravene = mysql_query("$uprtxt");  
 $copern=1;
 if (!$upravene):
 ?>
-<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ " ) </script>
+<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ" ) </script>
 <?php
 endif;
 if ($upravene):
@@ -597,7 +586,6 @@ endif;
 // zapis upravene udaje strana 3
 if ( $copern == 3 AND $strana == 3 )
     {
-
 $gcd11 = strip_tags($_REQUEST['gcd11']);
 $gcd12 = strip_tags($_REQUEST['gcd12']);
 $gcd21 = strip_tags($_REQUEST['gcd21']);
@@ -651,14 +639,13 @@ $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
 " tlt301='$tlt301', tlt302='$tlt302', ".
 " konx=0 ".        
 " WHERE ico >= 0";  
-  
 //echo $uprtxt;
   
 $upravene = mysql_query("$uprtxt");  
 $copern=1;
 if (!$upravene):
 ?>
-<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ " ) </script>
+<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ" ) </script>
 <?php
 endif;
 if ($upravene):
@@ -670,7 +657,6 @@ endif;
 // zapis upravene udaje strana 4
 if ( $copern == 3 AND $strana == 4 )
     {
-
 $m11b = strip_tags($_REQUEST['m11b']);
 $m12b = strip_tags($_REQUEST['m12b']);
 $m13b = strip_tags($_REQUEST['m13b']);
@@ -789,7 +775,7 @@ $upravene = mysql_query("$uprtxt");
 $copern=1;
 if (!$upravene):
 ?>
-<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ " ) </script>
+<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ" ) </script>
 <?php
 endif;
 if ($upravene):
@@ -886,14 +872,13 @@ $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
 " tlt304='$tlt304', tlt305='$tlt305', tlt306='$tlt306', tlt307='$tlt307', ".
 " konx=0 ".        
 " WHERE ico >= 0";  
-  
 //echo $uprtxt;
   
 $upravene = mysql_query("$uprtxt");  
 $copern=1;
 if (!$upravene):
 ?>
-<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ " ) </script>
+<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ" ) </script>
 <?php
 endif;
 if ($upravene):
@@ -912,9 +897,6 @@ $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET ".
 " gcd62=gcd42+gcd52 ".
 " WHERE ico >= 0 ";
 $upravene = mysql_query("$uprtxt");
-
-
-
    }
 //koniec prepocet kontrolnych cisiel
 
@@ -1127,21 +1109,123 @@ $tlt307 = 1*$fir_riadok->tlt307;
 mysql_free_result($fir_vysledok);
     }
 //koniec nacitania
-
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link type="text/css" rel="stylesheet" href="../css/styl_poznamky_po2011.css">
+ <link rel="stylesheet" href="../css/reset.css">
+ <link rel="stylesheet" href="../css/tlaciva.css">
 <title>Poznámky k úèt. závierke MUJ 2014</title>
 <style>
-
-
-
+div.form-background {
+  overflow: hidden;
+  width: 950px;
+  background-color: #fff;
+}
+h1.section-header {
+  height: 18px;
+  margin-top: 18px;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+}
+h1.section-header > span, h2.section-subheader:before,
+h2.section-subheader > span {
+  color: #999;
+}
+h1.section-header > span {
+  padding-right: 7px;
+}
+h2.section-subheader {
+  height: 14px;
+  font-size: 14px;
+  margin: 15px 0 4px 20px;
+}
+h2.section-subheader:before {
+  content:'•';
+}
+h2.section-subheader > span {
+  padding: 0 7px;
+  font-weight: bold;
+}
+span.section-echo {
+  display: inline-block;
+  margin-left: 35px;
+  padding: 7px 12px 5px 12px;
+  border-left: 3px solid #39f;
+  background-color: #ececec;
+  font-size:12px;
+}
+span.section-echo > img, table.section-table thead img {
+  display: inline-block;
+  cursor: pointer;
+}
+span.section-echo > img {
+  width: 16px;
+  height: 16px;
+  vertical-align: -3px;
+  margin-left: 12px;
+}
+table.section-table {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0 0 15px 35px;
+  border-left: 3px solid #39f;
+}
+table.section-table caption { /* dopyt, asi preè */
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: left;
+  padding-bottom: 3px;
+}
+table.section-table thead th {
+  font-size: 11px;
+  line-height: 20px;
+  background-color: #dbdbdb;
+}
+table.section-table tbody th {
+  font-size: 12px;
+  text-indent: 5px;
+  line-height: 24px;
+  text-align: left;
+  font-weight: normal;
+  background-color: #ececec;
+  border-top: 2px solid #dbdbdb;
+}
+table.section-table tbody td {
+  background-color: #ececec;
+  text-align:center;
+  line-height: 24px;
+  border-top: 2px solid #dbdbdb;
+}
+table.section-table tfoot td {
+  height: 2px;
+  background-color: #ececec;
+}
+table.section-table input[type=checkbox] {
+  position: absolute;
+  top: 2px;
+  left: 5px;
+}
+table.section-table thead img {
+  width: 14px;
+  height: 14px;
+  vertical-align: -4px;
+}
+table.section-table input[type=text] {
+  position: static;
+  width: 64px;
+  font-size: 12px;
+  line-height: 14px;
+  height: 14px;
+  padding: 1px 2px;
+}
+tr.head-line > td { /* urcenie sirky stlpcov */
+  height: 0;
+}
 </style>
 
-
-<SCRIPT Language="JavaScript" Src="../js/cookies.js">
-</SCRIPT>
+<script language="JavaScript" src="../js/cookies.js"></script>
 <script type="text/javascript">
 //sirka a vyska okna
 var sirkawin = screen.width-10;
@@ -1150,368 +1234,287 @@ var vyskawic = screen.height;
 var sirkawic = screen.width-10;
 
 <?php
-//uprava sadzby strana 1
-  if ( $copern == 1 AND $strana == 1 )
-  { 
+//uprava sadzby
+if ( $copern == 1 )
+{
 ?>
-    function ObnovUI()
-    {
-    document.formv1.ac11.value = '<?php echo "$ac11";?>';
-    document.formv1.ac12.value = '<?php echo "$ac12";?>';
-    document.formv1.ac21.value = '<?php echo "$ac21";?>';
-    document.formv1.ac22.value = '<?php echo "$ac22";?>';
-    document.formv1.ac31.value = '<?php echo "$ac31";?>';
-    document.formv1.ac32.value = '<?php echo "$ac32";?>';
+  function ObnovUI()
+  {
+<?php if ( $strana == 1 ) { ?>
+   document.formv1.ac11.value = '<?php echo "$ac11";?>';
+   document.formv1.ac12.value = '<?php echo "$ac12";?>';
+   document.formv1.ac21.value = '<?php echo "$ac21";?>';
+   document.formv1.ac22.value = '<?php echo "$ac22";?>';
+   document.formv1.ac31.value = '<?php echo "$ac31";?>';
+   document.formv1.ac32.value = '<?php echo "$ac32";?>';
+<?php if ( $tlt101 == 1 ) { ?> document.formv1.tlt101.checked = "checked"; <?php } ?>
+<?php                     } ?>
 
-    <?php if( $tlt101 == 1 ) { ?>document.formv1.tlt101.checked = "checked"; <?php } ?>
+<?php if ( $strana == 2 ) { ?>
+<?php                     } ?>
 
-    }
+<?php if ( $strana == 3 ) { ?>
+   document.formv1.gcd11.value = '<?php echo "$gcd11";?>';
+   document.formv1.gcd12.value = '<?php echo "$gcd12";?>';
+   document.formv1.gcd21.value = '<?php echo "$gcd21";?>';
+   document.formv1.gcd22.value = '<?php echo "$gcd22";?>';
+   document.formv1.gcd31.value = '<?php echo "$gcd31";?>';
+   document.formv1.gcd32.value = '<?php echo "$gcd32";?>';
+   document.formv1.gcd41.value = '<?php echo "$gcd41";?>';
+   document.formv1.gcd42.value = '<?php echo "$gcd42";?>';
+   document.formv1.gcd51.value = '<?php echo "$gcd51";?>';
+   document.formv1.gcd52.value = '<?php echo "$gcd52";?>';
+   document.formv1.gcd61.value = '<?php echo "$gcd61";?>';
+   document.formv1.gcd62.value = '<?php echo "$gcd62";?>';
+
+   document.formv1.gh11.value = '<?php echo "$gh11";?>';
+   document.formv1.gh12.value = '<?php echo "$gh12";?>';
+   document.formv1.gh13.value = '<?php echo "$gh13";?>';
+   document.formv1.gh14.value = '<?php echo "$gh14";?>';
+   document.formv1.gh15.value = '<?php echo "$gh15";?>';
+   document.formv1.gh16.value = '<?php echo "$gh16";?>';
+   document.formv1.gh21.value = '<?php echo "$gh21";?>';
+   document.formv1.gh22.value = '<?php echo "$gh22";?>';
+   document.formv1.gh23.value = '<?php echo "$gh23";?>';
+   document.formv1.gh24.value = '<?php echo "$gh24";?>';
+   document.formv1.gh25.value = '<?php echo "$gh25";?>';
+   document.formv1.gh26.value = '<?php echo "$gh26";?>';
+   document.formv1.gh31.value = '<?php echo "$gh31";?>';
+   document.formv1.gh32.value = '<?php echo "$gh32";?>';
+   document.formv1.gh33.value = '<?php echo "$gh33";?>';
+   document.formv1.gh34.value = '<?php echo "$gh34";?>';
+   document.formv1.gh35.value = '<?php echo "$gh35";?>';
+   document.formv1.gh36.value = '<?php echo "$gh36";?>';
+   document.formv1.gh41.value = '<?php echo "$gh41";?>';
+   document.formv1.gh42.value = '<?php echo "$gh42";?>';
+   document.formv1.gh43.value = '<?php echo "$gh43";?>';
+   document.formv1.gh44.value = '<?php echo "$gh44";?>';
+   document.formv1.gh45.value = '<?php echo "$gh45";?>';
+   document.formv1.gh46.value = '<?php echo "$gh46";?>';
+<?php if ( $tlt301 == 1 ) { ?> document.formv1.tlt301.checked = "checked"; <?php } ?>
+<?php if ( $tlt302 == 1 ) { ?> document.formv1.tlt302.checked = "checked"; <?php } ?>
+<?php                     } ?>
+
+<?php if ( $strana == 4 ) { ?>
+   document.formv1.m11b.value = '<?php echo "$m11b";?>';
+   document.formv1.m12b.value = '<?php echo "$m12b";?>';
+   document.formv1.m13b.value = '<?php echo "$m13b";?>';
+   document.formv1.m11c.value = '<?php echo "$m11c";?>';
+   document.formv1.m12c.value = '<?php echo "$m12c";?>';
+   document.formv1.m13c.value = '<?php echo "$m13c";?>';
+   document.formv1.m21b.value = '<?php echo "$m21b";?>';
+   document.formv1.m22b.value = '<?php echo "$m22b";?>';
+   document.formv1.m23b.value = '<?php echo "$m23b";?>';
+   document.formv1.m21c.value = '<?php echo "$m21c";?>';
+   document.formv1.m22c.value = '<?php echo "$m22c";?>';
+   document.formv1.m23c.value = '<?php echo "$m23c";?>';
+   document.formv1.m31b.value = '<?php echo "$m31b";?>';
+   document.formv1.m32b.value = '<?php echo "$m32b";?>';
+   document.formv1.m33b.value = '<?php echo "$m33b";?>';
+   document.formv1.m31c.value = '<?php echo "$m31c";?>';
+   document.formv1.m32c.value = '<?php echo "$m32c";?>';
+   document.formv1.m33c.value = '<?php echo "$m33c";?>';
+   document.formv1.m41b.value = '<?php echo "$m41b";?>';
+   document.formv1.m42b.value = '<?php echo "$m42b";?>';
+   document.formv1.m43b.value = '<?php echo "$m43b";?>';
+   document.formv1.m41c.value = '<?php echo "$m41c";?>';
+   document.formv1.m42c.value = '<?php echo "$m42c";?>';
+   document.formv1.m43c.value = '<?php echo "$m43c";?>';
+   document.formv1.m51b.value = '<?php echo "$m51b";?>';
+   document.formv1.m52b.value = '<?php echo "$m52b";?>';
+   document.formv1.m53b.value = '<?php echo "$m53b";?>';
+   document.formv1.m51c.value = '<?php echo "$m51c";?>';
+   document.formv1.m52c.value = '<?php echo "$m52c";?>';
+   document.formv1.m53c.value = '<?php echo "$m53c";?>';
+   document.formv1.m61b.value = '<?php echo "$m61b";?>';
+   document.formv1.m62b.value = '<?php echo "$m62b";?>';
+   document.formv1.m63b.value = '<?php echo "$m63b";?>';
+   document.formv1.m61c.value = '<?php echo "$m61c";?>';
+   document.formv1.m62c.value = '<?php echo "$m62c";?>';
+   document.formv1.m63c.value = '<?php echo "$m63c";?>';
+   document.formv1.m71b.value = '<?php echo "$m71b";?>';
+   document.formv1.m72b.value = '<?php echo "$m72b";?>';
+   document.formv1.m73b.value = '<?php echo "$m73b";?>';
+   document.formv1.m71c.value = '<?php echo "$m71c";?>';
+   document.formv1.m72c.value = '<?php echo "$m72c";?>';
+   document.formv1.m73c.value = '<?php echo "$m73c";?>';
+   document.formv1.m81b.value = '<?php echo "$m81b";?>';
+   document.formv1.m82b.value = '<?php echo "$m82b";?>';
+   document.formv1.m83b.value = '<?php echo "$m83b";?>';
+   document.formv1.m81c.value = '<?php echo "$m81c";?>';
+   document.formv1.m82c.value = '<?php echo "$m82c";?>';
+   document.formv1.m83c.value = '<?php echo "$m83c";?>';
+   document.formv1.m91b.value = '<?php echo "$m91b";?>';
+   document.formv1.m92b.value = '<?php echo "$m92b";?>';
+   document.formv1.m93b.value = '<?php echo "$m93b";?>';
+   document.formv1.m91c.value = '<?php echo "$m91c";?>';
+   document.formv1.m92c.value = '<?php echo "$m92c";?>';
+   document.formv1.m93c.value = '<?php echo "$m93c";?>';
+   document.formv1.m101b.value = '<?php echo "$m101b";?>';
+   document.formv1.m102b.value = '<?php echo "$m102b";?>';
+   document.formv1.m103b.value = '<?php echo "$m103b";?>';
+   document.formv1.m101c.value = '<?php echo "$m101c";?>';
+   document.formv1.m102c.value = '<?php echo "$m102c";?>';
+   document.formv1.m103c.value = '<?php echo "$m103c";?>';
+   document.formv1.m111b.value = '<?php echo "$m111b";?>';
+   document.formv1.m112b.value = '<?php echo "$m112b";?>';
+   document.formv1.m113b.value = '<?php echo "$m113b";?>';
+   document.formv1.m111c.value = '<?php echo "$m111c";?>';
+   document.formv1.m112c.value = '<?php echo "$m112c";?>';
+   document.formv1.m113c.value = '<?php echo "$m113c";?>';
+   document.formv1.m121b.value = '<?php echo "$m121b";?>';
+   document.formv1.m122b.value = '<?php echo "$m122b";?>';
+   document.formv1.m123b.value = '<?php echo "$m123b";?>';
+   document.formv1.m121c.value = '<?php echo "$m121c";?>';
+   document.formv1.m122c.value = '<?php echo "$m122c";?>';
+   document.formv1.m123c.value = '<?php echo "$m123c";?>';
+   document.formv1.m131b.value = '<?php echo "$m131b";?>';
+   document.formv1.m132b.value = '<?php echo "$m132b";?>';
+   document.formv1.m133b.value = '<?php echo "$m133b";?>';
+   document.formv1.m131c.value = '<?php echo "$m131c";?>';
+   document.formv1.m132c.value = '<?php echo "$m132c";?>';
+   document.formv1.m133c.value = '<?php echo "$m133c";?>';
+   document.formv1.m141b.value = '<?php echo "$m141b";?>';
+   document.formv1.m142b.value = '<?php echo "$m142b";?>';
+   document.formv1.m143b.value = '<?php echo "$m143b";?>';
+   document.formv1.m141c.value = '<?php echo "$m141c";?>';
+   document.formv1.m142c.value = '<?php echo "$m142c";?>';
+   document.formv1.m143c.value = '<?php echo "$m143c";?>';
+<?php if ( $tlt303 == 1 ) { ?> document.formv1.tlt303.checked = "checked"; <?php } ?>
+<?php                     } ?>
+
+<?php if ( $strana == 5 ) { ?>
+   document.formv1.k11.value = '<?php echo "$k11";?>';
+   document.formv1.k12.value = '<?php echo "$k12";?>';
+   document.formv1.k21.value = '<?php echo "$k21";?>';
+   document.formv1.k22.value = '<?php echo "$k22";?>';
+   document.formv1.k31.value = '<?php echo "$k31";?>';
+   document.formv1.k32.value = '<?php echo "$k32";?>';
+   document.formv1.k41.value = '<?php echo "$k41";?>';
+   document.formv1.k42.value = '<?php echo "$k42";?>';
+   document.formv1.k51.value = '<?php echo "$k51";?>';
+   document.formv1.k52.value = '<?php echo "$k52";?>';
+   document.formv1.k61.value = '<?php echo "$k61";?>';
+   document.formv1.k62.value = '<?php echo "$k62";?>';
+   document.formv1.k71.value = '<?php echo "$k71";?>';
+   document.formv1.k72.value = '<?php echo "$k72";?>';
+   document.formv1.k81.value = '<?php echo "$k81";?>';
+   document.formv1.k82.value = '<?php echo "$k82";?>';
+   document.formv1.k91.value = '<?php echo "$k91";?>';
+   document.formv1.k92.value = '<?php echo "$k92";?>';
+   document.formv1.l1ab11.value = '<?php echo "$l1ab11";?>';
+   document.formv1.l1ab12.value = '<?php echo "$l1ab12";?>';
+   document.formv1.l1ab21.value = '<?php echo "$l1ab21";?>';
+   document.formv1.l1ab22.value = '<?php echo "$l1ab22";?>';
+   document.formv1.l1ab31.value = '<?php echo "$l1ab31";?>';
+   document.formv1.l1ab32.value = '<?php echo "$l1ab32";?>';
+   document.formv1.l1ab41.value = '<?php echo "$l1ab41";?>';
+   document.formv1.l1ab42.value = '<?php echo "$l1ab42";?>';
+   document.formv1.l1ab51.value = '<?php echo "$l1ab51";?>';
+   document.formv1.l1ab52.value = '<?php echo "$l1ab52";?>';
+   document.formv1.l1ab61.value = '<?php echo "$l1ab61";?>';
+   document.formv1.l1ab62.value = '<?php echo "$l1ab62";?>';
+   document.formv1.l2ab11.value = '<?php echo "$l2ab11";?>';
+   document.formv1.l2ab12.value = '<?php echo "$l2ab12";?>';
+   document.formv1.l2ab21.value = '<?php echo "$l2ab21";?>';
+   document.formv1.l2ab22.value = '<?php echo "$l2ab22";?>';
+   document.formv1.l2ab31.value = '<?php echo "$l2ab31";?>';
+   document.formv1.l2ab32.value = '<?php echo "$l2ab32";?>';
+   document.formv1.l2ab41.value = '<?php echo "$l2ab41";?>';
+   document.formv1.l2ab42.value = '<?php echo "$l2ab42";?>';
+   document.formv1.l2ab51.value = '<?php echo "$l2ab51";?>';
+   document.formv1.l2ab52.value = '<?php echo "$l2ab52";?>';
+   document.formv1.l2ab61.value = '<?php echo "$l2ab61";?>';
+   document.formv1.l2ab62.value = '<?php echo "$l2ab62";?>';
+   document.formv1.lc11.value = '<?php echo "$lc11";?>';
+   document.formv1.lc12.value = '<?php echo "$lc12";?>';
+   document.formv1.lc21.value = '<?php echo "$lc21";?>';
+   document.formv1.lc22.value = '<?php echo "$lc22";?>';
+   document.formv1.lc31.value = '<?php echo "$lc31";?>';
+   document.formv1.lc32.value = '<?php echo "$lc32";?>';
+   document.formv1.lc41.value = '<?php echo "$lc41";?>';
+   document.formv1.lc42.value = '<?php echo "$lc42";?>';
+   document.formv1.lc51.value = '<?php echo "$lc51";?>';
+   document.formv1.lc52.value = '<?php echo "$lc52";?>';
+   document.formv1.lc61.value = '<?php echo "$lc61";?>';
+   document.formv1.lc62.value = '<?php echo "$lc62";?>';
+   document.formv1.lc71.value = '<?php echo "$lc71";?>';
+   document.formv1.lc72.value = '<?php echo "$lc72";?>';
+   document.formv1.lc81.value = '<?php echo "$lc81";?>';
+   document.formv1.lc82.value = '<?php echo "$lc82";?>';
+<?php if ( $tlt304 == 1 ) { ?> document.formv1.tlt304.checked = "checked"; <?php } ?>
+<?php if ( $tlt305 == 1 ) { ?> document.formv1.tlt305.checked = "checked"; <?php } ?>
+<?php if ( $tlt306 == 1 ) { ?> document.formv1.tlt306.checked = "checked"; <?php } ?>
+<?php if ( $tlt307 == 1 ) { ?> document.formv1.tlt307.checked = "checked"; <?php } ?>
+<?php                     } ?>
+  }
 <?php
 //koniec uprava
+}
+?>
+
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
-?>
 
-<?php
-//uprava sadzby strana 2
-  if ( $copern == 1 AND $strana == 2 )
-  { 
-?>
-    function ObnovUI()
-    {
-
-
-    }
-<?php
-//koniec uprava
+  function TlacPoznamkyMUJ2014()
+  {
+   window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=&h_sch=&h_drp=1&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-?>
-
-<?php
-//uprava sadzby strana 3
-  if ( $copern == 1 AND $strana == 3 )
-  { 
-?>
-    function ObnovUI()
-    {
-    document.formv1.gcd11.value = '<?php echo "$gcd11";?>';
-    document.formv1.gcd12.value = '<?php echo "$gcd12";?>';
-    document.formv1.gcd21.value = '<?php echo "$gcd21";?>';
-    document.formv1.gcd22.value = '<?php echo "$gcd22";?>';
-    document.formv1.gcd31.value = '<?php echo "$gcd31";?>';
-    document.formv1.gcd32.value = '<?php echo "$gcd32";?>';
-    document.formv1.gcd41.value = '<?php echo "$gcd41";?>';
-    document.formv1.gcd42.value = '<?php echo "$gcd42";?>';
-    document.formv1.gcd51.value = '<?php echo "$gcd51";?>';
-    document.formv1.gcd52.value = '<?php echo "$gcd52";?>';
-    document.formv1.gcd61.value = '<?php echo "$gcd61";?>';
-    document.formv1.gcd62.value = '<?php echo "$gcd62";?>';
-
-    document.formv1.gh11.value = '<?php echo "$gh11";?>';
-    document.formv1.gh12.value = '<?php echo "$gh12";?>';
-    document.formv1.gh13.value = '<?php echo "$gh13";?>';
-    document.formv1.gh14.value = '<?php echo "$gh14";?>';
-    document.formv1.gh15.value = '<?php echo "$gh15";?>';
-    document.formv1.gh16.value = '<?php echo "$gh16";?>';
-    document.formv1.gh21.value = '<?php echo "$gh21";?>';
-    document.formv1.gh22.value = '<?php echo "$gh22";?>';
-    document.formv1.gh23.value = '<?php echo "$gh23";?>';
-    document.formv1.gh24.value = '<?php echo "$gh24";?>';
-    document.formv1.gh25.value = '<?php echo "$gh25";?>';
-    document.formv1.gh26.value = '<?php echo "$gh26";?>';
-    document.formv1.gh31.value = '<?php echo "$gh31";?>';
-    document.formv1.gh32.value = '<?php echo "$gh32";?>';
-    document.formv1.gh33.value = '<?php echo "$gh33";?>';
-    document.formv1.gh34.value = '<?php echo "$gh34";?>';
-    document.formv1.gh35.value = '<?php echo "$gh35";?>';
-    document.formv1.gh36.value = '<?php echo "$gh36";?>';
-    document.formv1.gh41.value = '<?php echo "$gh41";?>';
-    document.formv1.gh42.value = '<?php echo "$gh42";?>';
-    document.formv1.gh43.value = '<?php echo "$gh43";?>';
-    document.formv1.gh44.value = '<?php echo "$gh44";?>';
-    document.formv1.gh45.value = '<?php echo "$gh45";?>';
-    document.formv1.gh46.value = '<?php echo "$gh46";?>';
-
-    <?php if( $tlt301 == 1 ) { ?>document.formv1.tlt301.checked = "checked"; <?php } ?>
-    <?php if( $tlt302 == 1 ) { ?>document.formv1.tlt302.checked = "checked"; <?php } ?>
-
-    }
-<?php
-//koniec uprava
+  function TlacPoznamkyMUJ2014strana( strana )
+  {
+   window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=&h_sch=&h_drp=1&copern=10&drupoh=1&page=' + strana + '&strana=' + strana + '&subor=0',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-?>                                   
-
-<?php
-//uprava sadzby strana 4
-  if ( $copern == 1 AND $strana == 4 )
-  { 
-?>
-    function ObnovUI()
-    {
-    document.formv1.m11b.value = '<?php echo "$m11b";?>';
-    document.formv1.m12b.value = '<?php echo "$m12b";?>';
-    document.formv1.m13b.value = '<?php echo "$m13b";?>';
-    document.formv1.m11c.value = '<?php echo "$m11c";?>';
-    document.formv1.m12c.value = '<?php echo "$m12c";?>';
-    document.formv1.m13c.value = '<?php echo "$m13c";?>';
-    document.formv1.m21b.value = '<?php echo "$m21b";?>';
-    document.formv1.m22b.value = '<?php echo "$m22b";?>';
-    document.formv1.m23b.value = '<?php echo "$m23b";?>';
-    document.formv1.m21c.value = '<?php echo "$m21c";?>';
-    document.formv1.m22c.value = '<?php echo "$m22c";?>';
-    document.formv1.m23c.value = '<?php echo "$m23c";?>';
-    document.formv1.m31b.value = '<?php echo "$m31b";?>';
-    document.formv1.m32b.value = '<?php echo "$m32b";?>';
-    document.formv1.m33b.value = '<?php echo "$m33b";?>';
-    document.formv1.m31c.value = '<?php echo "$m31c";?>';
-    document.formv1.m32c.value = '<?php echo "$m32c";?>';
-    document.formv1.m33c.value = '<?php echo "$m33c";?>';
-    document.formv1.m41b.value = '<?php echo "$m41b";?>';
-    document.formv1.m42b.value = '<?php echo "$m42b";?>';
-    document.formv1.m43b.value = '<?php echo "$m43b";?>';
-    document.formv1.m41c.value = '<?php echo "$m41c";?>';
-    document.formv1.m42c.value = '<?php echo "$m42c";?>';
-    document.formv1.m43c.value = '<?php echo "$m43c";?>';
-    document.formv1.m51b.value = '<?php echo "$m51b";?>';
-    document.formv1.m52b.value = '<?php echo "$m52b";?>';
-    document.formv1.m53b.value = '<?php echo "$m53b";?>';
-    document.formv1.m51c.value = '<?php echo "$m51c";?>';
-    document.formv1.m52c.value = '<?php echo "$m52c";?>';
-    document.formv1.m53c.value = '<?php echo "$m53c";?>';
-    document.formv1.m61b.value = '<?php echo "$m61b";?>';
-    document.formv1.m62b.value = '<?php echo "$m62b";?>';
-    document.formv1.m63b.value = '<?php echo "$m63b";?>';
-    document.formv1.m61c.value = '<?php echo "$m61c";?>';
-    document.formv1.m62c.value = '<?php echo "$m62c";?>';
-    document.formv1.m63c.value = '<?php echo "$m63c";?>';
-    document.formv1.m71b.value = '<?php echo "$m71b";?>';
-    document.formv1.m72b.value = '<?php echo "$m72b";?>';
-    document.formv1.m73b.value = '<?php echo "$m73b";?>';
-    document.formv1.m71c.value = '<?php echo "$m71c";?>';
-    document.formv1.m72c.value = '<?php echo "$m72c";?>';
-    document.formv1.m73c.value = '<?php echo "$m73c";?>';
-    document.formv1.m81b.value = '<?php echo "$m81b";?>';
-    document.formv1.m82b.value = '<?php echo "$m82b";?>';
-    document.formv1.m83b.value = '<?php echo "$m83b";?>';
-    document.formv1.m81c.value = '<?php echo "$m81c";?>';
-    document.formv1.m82c.value = '<?php echo "$m82c";?>';
-    document.formv1.m83c.value = '<?php echo "$m83c";?>';
-    document.formv1.m91b.value = '<?php echo "$m91b";?>';
-    document.formv1.m92b.value = '<?php echo "$m92b";?>';
-    document.formv1.m93b.value = '<?php echo "$m93b";?>';
-    document.formv1.m91c.value = '<?php echo "$m91c";?>';
-    document.formv1.m92c.value = '<?php echo "$m92c";?>';
-    document.formv1.m93c.value = '<?php echo "$m93c";?>';
-    document.formv1.m101b.value = '<?php echo "$m101b";?>';
-    document.formv1.m102b.value = '<?php echo "$m102b";?>';
-    document.formv1.m103b.value = '<?php echo "$m103b";?>';
-    document.formv1.m101c.value = '<?php echo "$m101c";?>';
-    document.formv1.m102c.value = '<?php echo "$m102c";?>';
-    document.formv1.m103c.value = '<?php echo "$m103c";?>';
-    document.formv1.m111b.value = '<?php echo "$m111b";?>';
-    document.formv1.m112b.value = '<?php echo "$m112b";?>';
-    document.formv1.m113b.value = '<?php echo "$m113b";?>';
-    document.formv1.m111c.value = '<?php echo "$m111c";?>';
-    document.formv1.m112c.value = '<?php echo "$m112c";?>';
-    document.formv1.m113c.value = '<?php echo "$m113c";?>';
-    document.formv1.m121b.value = '<?php echo "$m121b";?>';
-    document.formv1.m122b.value = '<?php echo "$m122b";?>';
-    document.formv1.m123b.value = '<?php echo "$m123b";?>';
-    document.formv1.m121c.value = '<?php echo "$m121c";?>';
-    document.formv1.m122c.value = '<?php echo "$m122c";?>';
-    document.formv1.m123c.value = '<?php echo "$m123c";?>';
-    document.formv1.m131b.value = '<?php echo "$m131b";?>';
-    document.formv1.m132b.value = '<?php echo "$m132b";?>';
-    document.formv1.m133b.value = '<?php echo "$m133b";?>';
-    document.formv1.m131c.value = '<?php echo "$m131c";?>';
-    document.formv1.m132c.value = '<?php echo "$m132c";?>';
-    document.formv1.m133c.value = '<?php echo "$m133c";?>';
-    document.formv1.m141b.value = '<?php echo "$m141b";?>';
-    document.formv1.m142b.value = '<?php echo "$m142b";?>';
-    document.formv1.m143b.value = '<?php echo "$m143b";?>';
-    document.formv1.m141c.value = '<?php echo "$m141c";?>';
-    document.formv1.m142c.value = '<?php echo "$m142c";?>';
-    document.formv1.m143c.value = '<?php echo "$m143c";?>';
-    <?php if( $tlt303 == 1 ) { ?>document.formv1.tlt303.checked = "checked"; <?php } ?>
-
-    }
-<?php
-//koniec uprava
+  function upravtext( oscx )
+  {
+   var h_osc = oscx;
+   window.open('poznamky_muj2014texty.php?h_ozntxt=' + h_osc + '&copern=1&drupoh=1&page=1', '_blank', 'width=900, height=900, top=0, left=40, status=yes, resizable=yes, scrollbars=yes');
   }
-?>
-
-<?php
-//uprava sadzby strana 5
-  if ( $copern == 1 AND $strana == 5 )
-  { 
-?>
-    function ObnovUI()
-    {
-    document.formv1.k11.value = '<?php echo "$k11";?>';
-    document.formv1.k12.value = '<?php echo "$k12";?>';
-    document.formv1.k21.value = '<?php echo "$k21";?>';
-    document.formv1.k22.value = '<?php echo "$k22";?>';
-    document.formv1.k31.value = '<?php echo "$k31";?>';
-    document.formv1.k32.value = '<?php echo "$k32";?>';
-    document.formv1.k41.value = '<?php echo "$k41";?>';
-    document.formv1.k42.value = '<?php echo "$k42";?>';
-    document.formv1.k51.value = '<?php echo "$k51";?>';
-    document.formv1.k52.value = '<?php echo "$k52";?>';
-    document.formv1.k61.value = '<?php echo "$k61";?>';
-    document.formv1.k62.value = '<?php echo "$k62";?>';
-    document.formv1.k71.value = '<?php echo "$k71";?>';
-    document.formv1.k72.value = '<?php echo "$k72";?>';
-    document.formv1.k81.value = '<?php echo "$k81";?>';
-    document.formv1.k82.value = '<?php echo "$k82";?>';
-    document.formv1.k91.value = '<?php echo "$k91";?>';
-    document.formv1.k92.value = '<?php echo "$k92";?>';
-    document.formv1.l1ab11.value = '<?php echo "$l1ab11";?>';
-    document.formv1.l1ab12.value = '<?php echo "$l1ab12";?>';
-    document.formv1.l1ab21.value = '<?php echo "$l1ab21";?>';
-    document.formv1.l1ab22.value = '<?php echo "$l1ab22";?>';
-    document.formv1.l1ab31.value = '<?php echo "$l1ab31";?>';
-    document.formv1.l1ab32.value = '<?php echo "$l1ab32";?>';
-    document.formv1.l1ab41.value = '<?php echo "$l1ab41";?>';
-    document.formv1.l1ab42.value = '<?php echo "$l1ab42";?>';
-    document.formv1.l1ab51.value = '<?php echo "$l1ab51";?>';
-    document.formv1.l1ab52.value = '<?php echo "$l1ab52";?>';
-    document.formv1.l1ab61.value = '<?php echo "$l1ab61";?>';
-    document.formv1.l1ab62.value = '<?php echo "$l1ab62";?>';
-    document.formv1.l2ab11.value = '<?php echo "$l2ab11";?>';
-    document.formv1.l2ab12.value = '<?php echo "$l2ab12";?>';
-    document.formv1.l2ab21.value = '<?php echo "$l2ab21";?>';
-    document.formv1.l2ab22.value = '<?php echo "$l2ab22";?>';
-    document.formv1.l2ab31.value = '<?php echo "$l2ab31";?>';
-    document.formv1.l2ab32.value = '<?php echo "$l2ab32";?>';
-    document.formv1.l2ab41.value = '<?php echo "$l2ab41";?>';
-    document.formv1.l2ab42.value = '<?php echo "$l2ab42";?>';
-    document.formv1.l2ab51.value = '<?php echo "$l2ab51";?>';
-    document.formv1.l2ab52.value = '<?php echo "$l2ab52";?>';
-    document.formv1.l2ab61.value = '<?php echo "$l2ab61";?>';
-    document.formv1.l2ab62.value = '<?php echo "$l2ab62";?>';
-    document.formv1.lc11.value = '<?php echo "$lc11";?>';
-    document.formv1.lc12.value = '<?php echo "$lc12";?>';
-    document.formv1.lc21.value = '<?php echo "$lc21";?>';
-    document.formv1.lc22.value = '<?php echo "$lc22";?>';
-    document.formv1.lc31.value = '<?php echo "$lc31";?>';
-    document.formv1.lc32.value = '<?php echo "$lc32";?>';
-    document.formv1.lc41.value = '<?php echo "$lc41";?>';
-    document.formv1.lc42.value = '<?php echo "$lc42";?>';
-    document.formv1.lc51.value = '<?php echo "$lc51";?>';
-    document.formv1.lc52.value = '<?php echo "$lc52";?>';
-    document.formv1.lc61.value = '<?php echo "$lc61";?>';
-    document.formv1.lc62.value = '<?php echo "$lc62";?>';
-    document.formv1.lc71.value = '<?php echo "$lc71";?>';
-    document.formv1.lc72.value = '<?php echo "$lc72";?>';
-    document.formv1.lc81.value = '<?php echo "$lc81";?>';
-    document.formv1.lc82.value = '<?php echo "$lc82";?>';
-
-    <?php if( $tlt304 == 1 ) { ?>document.formv1.tlt304.checked = "checked"; <?php } ?>
-    <?php if( $tlt305 == 1 ) { ?>document.formv1.tlt305.checked = "checked"; <?php } ?>
-    <?php if( $tlt306 == 1 ) { ?>document.formv1.tlt306.checked = "checked"; <?php } ?>
-    <?php if( $tlt307 == 1 ) { ?>document.formv1.tlt307.checked = "checked"; <?php } ?>
-
-    }
-<?php
-//koniec uprava
+  function minulyrok( strana )
+  {
+   window.open('../ucto/poznamky_muj2014nacitaj.php?copern=1999&stranax=' + strana + '&drupoh=1&page=1&dopoz=0&xxc=1', '_self' );
   }
-?>
-                                           
-</script>           
-                    
-<script type='text/javascript'>
-                    
-                
-function TlacPoznamkyMUJ2014()
-                {
-
-window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=&h_sch=&h_drp=1&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function TlacPoznamkyMUJ2014strana( strana )
-                {
-
-window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=&h_sch=&h_drp=1&copern=10&drupoh=1&page=' + strana + '&strana=' + strana + '&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }                    
-
-    function upravtext( oscx )
-    {
-
-var h_osc = oscx;
-
-window.open('poznamky_muj2014texty.php?h_ozntxt=' + h_osc + '&copern=1&drupoh=1&page=1', '_blank',  'width=900, height=900, top=0, left=40, status=yes, resizable=yes, scrollbars=yes' );
-
-    }
-
-function minulyrok( strana )
-                {
-
-window.open('../ucto/poznamky_muj2014nacitaj.php?copern=1999&stranax=' + strana + '&drupoh=1&page=1&dopoz=0&xxc=1', '_self' ); 
-                }
-
 </script>
-
 </HEAD>
-<BODY class="white" onload="ObnovUI();"  >
+<BODY onload="ObnovUI();">
+<?php
+//zobraz a uprav udaje
+if ( $copern == 1 )
+{
+?>
+<!-- zahlavie -->
+<div id="wrap-heading">
+ <table id="heading">
+  <tr>
+   <td class="ilogin">EuroSecom</td>
+   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
+  </tr>
+  <tr>
+   <td class="header">Poznámky k úètovnej závierke MUJ 2014</td>
+   <td>
+    <div class="bar-btn-form-tool">
+     <img src="../obr/ikony/info_blue_icon.png" onclick=";" title="Pouèenie na vyplnenie" class="btn-form-tool">
 
-<table class="nadpis" width="100%" >
-<tr>
-<td class="h2">EuroSecom  -  Poznámky k úètovnej závierke MUJ 2014</td><td align="center" class="vyplnam" ><span style="display:none;">vypåòate stranu è. <?php echo "$strana";?></span>
-<a href="#" onClick="TlacPoznamkyMUJ2014();">
-<img src='../obr/tlac.png' width=20 height=20 border=0 title="Vytlaèi vo formáte PDF" ></a>
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacPoznamkyMUJ2014();"
+      title="Zobrazi všetky strany v PDF" class="btn-form-tool">
 <?php
 $stranaxx=$strana+1;
 ?>
 <a href="#" onClick="TlacPoznamkyMUJ2014strana(<?php echo $stranaxx; ?>);">
 <img src='../obr/tlac.png' width=15 height=15 border=0 title="Vytlaèi vo formáte PDF" ></a>
-</td>
-<td class="login" align="right"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
-</tr>
-</table>
-
-<div id="robotokno" style="cursor: hand; display: none; position: absolute; z-index: 200; top: 200; left: 40; width:60; height:100;">
-<img border=0 src='../obr/robot/robot3.jpg' style='' onClick="zobraz_robotmenu();"
- alt='Dobrı deò , ja som Váš EkoRobot , ak máte otázku alebo nejaké elanie kliknite na mòa prosím 1x myšou' >
-<img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;' onClick="zhasnirobot();"
- alt='Zhasni EkoRobota' >
-</div>
-<div id="robotmenu" style="cursor: hand; display: none; position: absolute; z-index: 300; top: 160; left: 90; width:200; height:100;">
-zobrazene menu
+    </div>
+   </td>
+  </tr>
+ </table>
 </div>
 
-<!--
- <tr>
-<span id="Cele" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota musí by celé kladné èíslo</span>
-<span id="Datum" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Dátum musí by v tvare DD.MM.RRRR,DD.MM alebo DD napríklad 21.10.2008 , 21 program doplni na 21.<?php echo $kli_vume; ?>;</span>
-<span id="Desc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus by desatinné èíslo, maximálne 2 desatinné miesta;</span>
-<span id="Desc4" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus by desatinné èíslo, maximálne 4 desatinné miesta;</span>
-<span id="Desc1" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus by desatinné èíslo, maximálne 1 desatinné miesto;</span>
-<span id="Oc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- OSÈ musí by celé kladné èíslo v rozsahu 1 a 9999</span>
-<span id="Fx" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Musíte vyplni všetky poloky vstupu</span>
-<span id="Ul" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:yellow; color:black;">
- Poloka OSÈ=<?php echo $h_oc;?> správne uloená</span>
-</tr>
--->
-
 <?php
-//zobraz a uprav nastavene udaje 
-if ( $copern == 1  )
-        {
-?>
-
-<?php
-
-    function vypistextx($ktorytext, $mysqlhostx, $mysqluserx, $mysqlpasswdx, $mysqldbx, $kli_vxcf)
-    {
-
+  function vypistextx($ktorytext, $mysqlhostx, $mysqluserx, $mysqlpasswdx, $mysqldbx, $kli_vxcf)
+  {
   @$spojeni = mysql_connect($mysqlhostx, $mysqluserx, $mysqlpasswdx);
   if (!$spojeni):
     echo "Spojenie so serverom nedostupne.";
@@ -1531,70 +1534,31 @@ $sqldok = mysql_query("$sqlttt");
  }
 $dlzkatxt=strlen($textvypis);
 $textvypis=substr($textvypis,0,60);
-if( $dlzkatxt > 60 ) { $textvypis=$textvypis."..."; }
-
-    return $textvypis;
-    }
-
+if ( $dlzkatxt > 60 ) { $textvypis=$textvypis."..."; }
+     return $textvypis;
+  }
 ?>
-
-
-<!-- hlavièka tabu¾ky so stranami a tlaèou -->
+<div id="content">
+<FORM name="formv1" method="post" action="poznamky_muj2014.php?copern=3&strana=<?php echo "$strana"; ?>">
 <?php
-$clas1="noselect"; $clas2="noselect"; $clas2="noselect";$clas3="noselect"; $clas4="noselect"; $clas5="noselect"; $clas6="noselect"; $clas7="noselect";
-$clas8="noselect"; $clas9="noselect"; $clas10="noselect"; $clas11="noselect"; $clas12="noselect"; $clas13="noselect"; $clas14="noselect";
-if( $strana == 1 ) $clas1="selected";
-if( $strana == 2 ) $clas2="selected";
-if( $strana == 3 ) $clas3="selected";
-if( $strana == 4 ) $clas4="selected";
-if( $strana == 5 ) $clas5="selected";
-if( $strana == 6 ) $clas6="selected";
-if( $strana == 7 ) $clas7="selected";
-if( $strana == 8 ) $clas8="selected";
-if( $strana == 9 ) $clas9="selected";
-if( $strana == 10 ) $clas10="selected";
-if( $strana == 11 ) $clas11="selected";
-if( $strana == 12 ) $clas12="selected";
-if( $strana == 13 ) $clas13="selected";
-if( $strana == 14 ) $clas14="selected";
+$clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive"; $clas5="noactive";
+if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active"; if ( $strana == 3 ) $clas3="active";
+if ( $strana == 4 ) $clas4="active"; if ( $strana == 5 ) $clas5="active";
+$source="../ucto/poznamky_muj2014.php?copern=1";
 ?>
+<div class="navbar">
+ <a href="#" onclick="window.open('<?php echo $source; ?>&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloi zmeny" class="btn-top-formsave">
+</div>
+<div class="form-background">
 
-<table class="tbhead" width="100%">
-<FORM name="formv1" class="obyc" method="post" action="poznamky_muj2014.php?copern=3&strana=<?php echo "$strana";?>" >
-<tr>
-<td class="pages" width="90%">
-
-<span class="maleinfo">Strana:</span>
-&nbsp;&nbsp;
- <a class="<?php echo $clas1; ?>" href="#" onClick="window.open('poznamky_muj2014.php?copern=1&strana=1', '_self');">1</a>
-
- <a class="<?php echo $clas2; ?>" href="#" onClick="window.open('poznamky_muj2014.php?copern=1&strana=2', '_self');">2</a>
-
- <a class="<?php echo $clas3; ?>" href="#" onClick="window.open('poznamky_muj2014.php?copern=1&strana=3', '_self');">3</a>
-
- <a class="<?php echo $clas4; ?>" href="#" onClick="window.open('poznamky_muj2014.php?copern=1&strana=4', '_self');">4</a>
-
- <a class="<?php echo $clas5; ?>" href="#" onClick="window.open('poznamky_muj2014.php?copern=1&strana=5', '_self');">5</a>
-
-</td>
-<td width="10%" align="center"><INPUT type="submit" id="uloz" name="uloz" value="Uloi zmeny"></td>
-</tr>
-</table>
-
-<table class="tbbody" width="100%"> <!-- telo stránky -->
-<?php
-//zobraz a uprav nastavene udaje strana 1
-if ( $strana == 1 )
-    {
-?>
-<tr>
-<td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="5%"></td>
-<td class="rsmall" width="15%"></td><td class="rsmall" width="15%"></td><td class="rsmall" width="5%"></td><td class="rsmall" width="10%"></td>
-<td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
-</tr>
-<tr><td class="rmedium" colspan="10"></td></tr>
-<tr><td class="castname" colspan="10">Èl. I Všeobecné údaje.</td></tr>
-<tr><td class="medium" colspan="10">Èl. I.1 Názov právnickej osoby a jej sídlo alebo meno a priezvisko fyzickej osoby.</td></tr>
+<?php if ( $strana == 1 ) { ?>
+<h1 class="section-header"><span>èl.I</span>Všeobecné údaje</h1>
+<h2 class="section-subheader"><span>èl.I.1</span>Názov právnickej osoby (PO) / meno a priezvisko fyzickej osoby (FO) a jej sídlo / adresa</h2>
 <?php
 $nazovsidlo=$fir_fnaz.", ".$fir_fuli." ".$fir_fcdm.", ".$fir_fmes.", ".$fir_fpsc;
 if ( $fir_uctt03 == 999 ) {
@@ -1603,721 +1567,775 @@ $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 $nazovsidlo=$fir_riadok->dmeno." ".$fir_riadok->dprie;
                           }
-
 ?>
-<tr><td class="medium" colspan="10"><?php echo $nazovsidlo; ?></td></tr>
-<tr><td class="medium" colspan="10"> </td></tr>
+<span class="section-echo"><?php echo $nazovsidlo; ?></span>
 
-<tr><td class="medium" colspan="10">Èl. I.2 Údaje o konsolidovanom celku.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="A_text1"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+<h2 class="section-subheader"><span>èl.I.2</span>Údaje o konsolidovanom celku</h2>
+<span class="section-echo">
+<?php
+$ozntext="A_text1";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
 
-<tr><td class="medium" colspan="10">Èl. I.3 Priemernı prepoèítanı poèet zamestnancov.</td></tr>
-
-<tr>
-<td colspan="5">
-<div class="casti">
-<table width="100%" >
-<caption><span class="ctab"></span><input type="checkbox" name="tlt101" value="1" title="Zobrazi tabu¾ku v PDF"/> Poèet zamestnancov</caption>
+<h2 class="section-subheader"><span>èl.I.3</span>Priemernı prepoèítanı poèet zamestnancov</h2>
+<table class="section-table" style="width:550px; margin-bottom:10px;">
 <thead>
 <tr>
-<th colspan="3">Názov poloky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?>
- <img src="../obr/vlozit.png" width="10" height="10" onclick="minulyrok(<?php echo $strana;?>)"
- title="Naèíta hodnoty predchádzajúceho obdobia do Poznámok MUJ 2014 pre stranu è.<?php echo $strana;?> z Poznámok PO 2013" ></th>
+ <td class="head-line" style="width:60%;"></td>
+ <td class="head-line" style="width:20%;"></td>
+ <td class="head-line" style="width:20%;"></td>
+</tr>
+<tr>
+ <th>
+  <input type="checkbox" name="tlt101" value="1" title="Zaradi tabu¾ku do PDF"
+   style=""/>
+ </th>
+ <th><?php echo $kli_vrok; ?></th>
+ <th><?php echo $kli_minrok; ?>
+  <img src="../obr/ikony/download_blue_icon.png" onclick="minulyrok(<?php echo $strana;?>)"
+   title="Naèíta hodnoty z Poznámok PO 2013">
+ </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td colspan="3">Priemernı prepoèítanı poèet zamestnancov</td>
-<td colspan="1"><input type="text" name="ac11" id="ac11" size="10" /></td>
-<td colspan="1"><input type="text" name="ac12" id="ac12" size="10" /></td>
+ <th>Priemernı prepoèítanı poèet zamestnancov</th>
+ <td><input type="text" name="ac11" id="ac11" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="ac12" id="ac12" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="3">Stav zamestnancov ku dòu zostavenia úètovnej závierky, z toho:</td>
-<td colspan="1"><input type="text" name="ac21" id="ac21" size="10" /></td>
-<td colspan="1"><input type="text" name="ac22" id="ac22" size="10" /></td>
+ <th>Stav zamestnancov ku dòu zostavenia ÚZ, z toho:</th>
+ <td><input type="text" name="ac21" id="ac21" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="ac22" id="ac22" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="3">&nbsp;- poèet vedúcich zamestnancov</td>
-<td colspan="1"><input type="text" name="ac31" id="ac31" size="10" /></td>
-<td colspan="1"><input type="text" name="ac32" id="ac32" size="10" /></td>
+ <th>&nbsp;- poèet vedúcich zamestnancov</th>
+ <td><input type="text" name="ac31" id="ac31" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="ac32" id="ac32" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 </tbody>
+<tfoot>
+<tr><td colspan="3"></td></tr>
+</tfoot>
 </table>
-</div>
-</td>
-<td colspan="5"></td>
-</tr>
-<tr>
-<td colspan="10"></td>
-</tr>
 
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="A_text2"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
-</span>
-</div>
-</td>
-</tr>
-
-
-
+<span class="section-echo" style="margin-bottom:15px;">
 <?php
-//koniec zobraz a uprav nastavene udaje strana 1
-    }
+$ozntext="A_text2";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
 ?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
+</span>
+<?php                     } ?>
 
 
 <?php if ( $strana == 2 ) { ?>
-<tr>
-<td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="5%"></td>
-<td class="rsmall" width="15%"></td><td class="rsmall" width="15%"></td><td class="rsmall" width="5%"></td><td class="rsmall" width="10%"></td>
-<td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
-</tr>
-<tr><td class="rmedium" colspan="10"></td></tr>
-<tr><td class="castname" colspan="10">Èl. II Informácie o prijatıch postupoch.</td></tr>
-
-
-
-
-<tr><td class="medium" colspan="10">Èl. II.1 Nepretrité pokraèovanie v èinnosti.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="B_text1"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+<h1 class="section-header"><span>èl.II</span>Informácie o prijatıch postupoch</h1>
+<h2 class="section-subheader"><span>èl.II.1</span>Nepretrité pokraèovanie v èinnosti</h2>
+<span class="section-echo">
+<?php
+$ozntext="B_text1";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
 
-<tr><td class="medium" colspan="10">Èl. II.2 Spôsob oceòovania jednotlivıch poloiek majetku a záväzkov.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="B_text2"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+<h2 class="section-subheader"><span>èl.II.2</span>Spôsob oceòovania jednotlivıch poloiek majetku a záväzkov</h2>
+<span class="section-echo">
+<?php
+$ozntext="B_text2";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
 
-<tr><td class="medium" colspan="10">Èl. II.3 Spôsob zostavenia odpisového plánu majetku.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="B_text3"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+<h2 class="section-subheader"><span>èl.II.3</span>Spôsob zostavenia odpisového plánu majetku</h2>
+<span class="section-echo">
+<?php
+$ozntext="B_text3";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
 
-<tr><td class="medium" colspan="10">Èl. II.4 Zmeny úètovnıch zásad a zmeny úètovnıch metód.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="B_text4"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+<h2 class="section-subheader"><span>èl.II.4</span>Zmeny úètovnıch zásad a zmeny úètovnıch metód</h2>
+<span class="section-echo">
+<?php
+$ozntext="B_text4";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
 
-<tr><td class="medium" colspan="10">Èl. II.5 Informácie o dotáciách a ich oceòovanie v úètovníctve.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="B_text5"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+<h2 class="section-subheader"><span>èl.II.5</span>Informácie o dotáciách a ich oceòovanie v úètovníctve</h2>
+<span class="section-echo">
+<?php
+$ozntext="B_text5";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
 
-<tr><td class="medium" colspan="10">Èl. II.6 Informácie o úètovaní vıznamnıch opráv chıb minulıch úètovnıch období v benom úètovnom období.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="B_text6"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+<h2 class="section-subheader"><span>èl.II.6</span>Informácie o úètovaní vıznamnıch opráv chıb minulıch úètovnıch období v benom úètovnom období</h2>
+<span class="section-echo" style="margin-bottom:15px;">
+<?php
+$ozntext="B_text6";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
-
 <?php                     } ?>
 
 
 <?php if ( $strana == 3 ) { ?>
-<tr>
-<td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="5%"></td>
-<td class="rsmall" width="15%"></td><td class="rsmall" width="15%"></td><td class="rsmall" width="5%"></td><td class="rsmall" width="10%"></td>
-<td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
-</tr>
-<tr><td class="rmedium" colspan="10"></td></tr>
-<tr><td class="castname" colspan="10">Èl. III Informácie, ktoré vysvet¾ujú a dopåòajú súvahu a vıkaz ziskov a strát.</td></tr>
-
-<tr><td class="medium" colspan="10">Èl. III.1 Informácia o sume a dôvodoch vzniku jednotlivıch poloiek nákladov alebo vınosov, ktoré majú vınimoènı rozsah.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="C_text1"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+<h1 class="section-header"><span>èl.III</span>Informácie, ktoré vysvet¾ujú a dopåòajú súvahu a vıkaz ziskov a strát</h1>
+<h2 class="section-subheader"><span>èl.III.1</span>Informácia o sume a dôvodoch vzniku jednotlivıch poloiek nákladov alebo vınosov, ktoré majú vınimoènı rozsah</h2>
+<span class="section-echo">
+<?php
+$ozntext="C_text1";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
 
-<tr><td class="medium" colspan="10">Èl. III.2 Informácie o záväzkoch.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="C_text2"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+<h2 class="section-subheader"><span>èl.III.2</span>Informácie o záväzkoch</h2>
+<span class="section-echo" style="margin-bottom:10px;">
+<?php
+$ozntext="C_text2";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
-<tr>
-<td colspan="5">
-<div class="casti">
-<table width="100%" >
-<caption ><span class="ctab"></span><input type="checkbox" name="tlt301" value="1" title="Zobrazi tabu¾ku v PDF"/> Záväzky</caption>
-<tr>
-<td class="rsmall" width="64%"></td><td class="rsmall" width="18%"></td><td class="rsmall" width="18%"></td>
-</tr>
+
+<table class="section-table" style="width:550px;">
 <thead>
 <tr>
-<th colspan="1">Názov poloky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?>
- <img src="../obr/vlozit.png" width="10" height="10" onclick="minulyrok(<?php echo $strana;?>)"
- title="Naèíta hodnoty predchádzajúceho obdobia do Poznámok MUJ 2014 pre stranu è.<?php echo $strana;?> z Poznámok PO 2013" >
-</th>
+ <td class="head-line" style="width:64%;"></td>
+ <td class="head-line" style="width:18%;"></td>
+ <td class="head-line" style="width:18%;"></td>
+</tr>
+<tr>
+ <th>
+  <input type="checkbox" name="tlt301" value="1" title="Zaradi tabu¾ku do PDF"/>
+ </th>
+ <th><?php echo $kli_vrok; ?></th>
+ <th><?php echo $kli_minrok; ?>
+  <img src="../obr/ikony/download_blue_icon.png" onclick="minulyrok(<?php echo $strana;?>)"
+   title="Naèíta hodnoty z Poznámok PO 2013">
+ </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th colspan="1">Dlhodobé záväzky spolu</th>
-<td colspan="1"><input type="text" name="gcd61" id="gcd61" size="12" /></td>
-<td colspan="1"><input type="text" name="gcd62" id="gcd62" size="12" /></td>
+ <th>Záväzky po lehote splatnosti</th>
+ <td><input type="text" name="gcd11" id="gcd11" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gcd12" id="gcd12" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Záväzky so zostatkovou dobou splatnosti nad 5 rokov</td>
-<td colspan="1"><input type="text" name="gcd51" id="gcd51" size="12" /></td>
-<td colspan="1"><input type="text" name="gcd52" id="gcd52" size="12" /></td>
+ <th>Záväzky so zostatkovou dobou splatnosti do 1 roka vrátane</th>
+ <td><input type="text" name="gcd21" id="gcd21" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gcd22" id="gcd22" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Záväzky so zostatkovou dobou splatnosti 1 a 5 rokov</td>
-<td colspan="1"><input type="text" name="gcd41" id="gcd41" size="12" /></td>
-<td colspan="1"><input type="text" name="gcd42" id="gcd42" size="12" /></td>
+ <th><strong>Krátkodobé záväzky spolu</strong></th>
+ <td><input type="text" name="gcd31" id="gcd31" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gcd32" id="gcd32" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<th colspan="1">Krátkodobé záväzky spolu</th>
-<td colspan="1"><input type="text" name="gcd31" id="gcd31" size="12" /></td>
-<td colspan="1"><input type="text" name="gcd32" id="gcd32" size="12" /></td>
+ <th>Záväzky so zostatkovou dobou splatnosti 1 a 5 rokov</th>
+ <td><input type="text" name="gcd41" id="gcd41" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gcd42" id="gcd42" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Záväzky so zostatkovou dobou splatnosti do 1 roka vrátane</td>
-<td colspan="1"><input type="text" name="gcd21" id="gcd21" size="12" /></td>
-<td colspan="1"><input type="text" name="gcd22" id="gcd22" size="12" /></td>
+ <th>Záväzky so zostatkovou dobou splatnosti nad 5 rokov</th>
+ <td><input type="text" name="gcd51" id="gcd51" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gcd52" id="gcd52" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Záväzky po lehote splatnosti</td>
-<td colspan="1"><input type="text" name="gcd11" id="gcd11" size="12" /></td>
-<td colspan="1"><input type="text" name="gcd12" id="gcd12" size="12" /></td>
+ <th><strong>Dlhodobé záväzky spolu</strong></th>
+ <td><input type="text" name="gcd61" id="gcd61" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gcd62" id="gcd62" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 </tbody>
+<tfoot>
+<tr><td colspan="3"></td></tr>
+</tfoot>
 </table>
-</div>
-</td>
-<td colspan="5"></td>
-</tr>
 
-<tr><td class="medium" colspan="10">Èl. III.3 Informácie o vlastnıch akciách.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="C_text3"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+<h2 class="section-subheader"><span>èl.III.3</span>Informácie o vlastnıch akciách</h2>
+<span class="section-echo" style="margin-bottom:10px;">
+<?php
+$ozntext="C_text3";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
-<tr>
-<td colspan="5">
-<div class="casti">
-<table width="100%" >
-<caption ><span class="ctab"></span><input type="checkbox" name="tlt302" value="1" title="Zobrazi tabu¾ku v PDF"/> Vlastné akcie</caption>
-<tr>
-<td class="rsmall" width="38%"></td><td class="rsmall" width="20%"></td><td class="rsmall" width="6%"></td><td class="rsmall" width="15%"></td>
-<td class="rsmall" width="6%"></td><td class="rsmall" width="15%"></td>
-</tr>
+
+<table class="section-table" style="width:800px;">
 <thead>
 <tr>
-<th colspan="1">Názov akcie</th><th colspan="1">Menovitá hodn.</th><th colspan="1">Poèet</th><th colspan="1">Emis. kurz</th>
-<th colspan="1">Úrok</th><th colspan="1">Splatnos</th>
+ <td class="head-line" style="width:35%;"></td>
+ <td class="head-line" style="width:15%;"></td>
+ <td class="head-line" style="width:10%;"></td>
+ <td class="head-line" style="width:15%;"></td>
+ <td class="head-line" style="width:10%;"></td>
+ <td class="head-line" style="width:15%;"></td>
+</tr>
+<tr>
+ <th>
+  <input type="checkbox" name="tlt302" value="1" title="Zaradi tabu¾ku do PDF"/>
+ Názov akcie
+ </th>
+ <th>Menovitá hodnota</th>
+ <th>Poèet</th>
+ <th>Emisnı kurz</th>
+ <th>Úrok</th>
+ <th>Splatnos</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td colspan="1"><input type="text" name="gh11" id="gh11" size="35" /></td><td colspan="1"><input type="text" name="gh12" id="gh12" size="10" /></td>
-<td colspan="1"><input type="text" name="gh13" id="gh13" size="8" /></td><td colspan="1"><input type="text" name="gh14" id="gh14" size="10" /></td>
-<td colspan="1"><input type="text" name="gh15" id="gh15" size="8" /></td><td colspan="1"><input type="text" name="gh16" id="gh16" size="10" /></td>
+ <td><input type="text" name="gh11" id="gh11" style="width:250px;"/></td>
+ <td><input type="text" name="gh12" id="gh12" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gh13" id="gh13" onkeyup="CiarkaNaBodku(this);" style="width:40px;"/></td>
+ <td><input type="text" name="gh14" id="gh14" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gh15" id="gh15" onkeyup="CiarkaNaBodku(this);" style="width:50px;"/></td>
+ <td><input type="text" name="gh16" id="gh16"/></td>
 </tr>
 <tr>
-<td colspan="1"><input type="text" name="gh21" id="gh21" size="35" /></td><td colspan="1"><input type="text" name="gh22" id="gh22" size="10" /></td>
-<td colspan="1"><input type="text" name="gh23" id="gh23" size="8" /></td><td colspan="1"><input type="text" name="gh24" id="gh24" size="10" /></td>
-<td colspan="1"><input type="text" name="gh25" id="gh25" size="8" /></td><td colspan="1"><input type="text" name="gh26" id="gh26" size="10" /></td>
+ <td><input type="text" name="gh21" id="gh21" style="width:250px;"/></td>
+ <td><input type="text" name="gh22" id="gh22" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gh23" id="gh23" onkeyup="CiarkaNaBodku(this);" style="width:40px;"/></td>
+ <td><input type="text" name="gh24" id="gh24" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gh25" id="gh25" onkeyup="CiarkaNaBodku(this);" style="width:50px;"/></td>
+ <td><input type="text" name="gh26" id="gh26"/></td>
 </tr>
 <tr>
-<td colspan="1"><input type="text" name="gh31" id="gh31" size="35" /></td><td colspan="1"><input type="text" name="gh32" id="gh32" size="10" /></td>
-<td colspan="1"><input type="text" name="gh33" id="gh33" size="8" /></td><td colspan="1"><input type="text" name="gh34" id="gh34" size="10" /></td>
-<td colspan="1"><input type="text" name="gh35" id="gh35" size="8" /></td><td colspan="1"><input type="text" name="gh36" id="gh36" size="10" /></td>
+ <td><input type="text" name="gh31" id="gh31" style="width:250px;"/></td>
+ <td><input type="text" name="gh32" id="gh32" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gh33" id="gh33" onkeyup="CiarkaNaBodku(this);" style="width:40px;"/></td>
+ <td><input type="text" name="gh34" id="gh34" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gh35" id="gh35" onkeyup="CiarkaNaBodku(this);" style="width:50px;"/></td>
+ <td><input type="text" name="gh36" id="gh36"/></td>
 </tr>
 <tr>
-<td colspan="1"><input type="text" name="gh41" id="gh41" size="35" /></td><td colspan="1"><input type="text" name="gh42" id="gh42" size="10" /></td>
-<td colspan="1"><input type="text" name="gh43" id="gh43" size="8" /></td><td colspan="1"><input type="text" name="gh44" id="gh44" size="10" /></td>
-<td colspan="1"><input type="text" name="gh45" id="gh45" size="8" /></td><td colspan="1"><input type="text" name="gh46" id="gh46" size="10" /></td>
+ <td><input type="text" name="gh41" id="gh41" style="width:250px;"/></td>
+ <td><input type="text" name="gh42" id="gh42" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gh43" id="gh43" onkeyup="CiarkaNaBodku(this);" style="width:40px;"/></td>
+ <td><input type="text" name="gh44" id="gh44" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="gh45" id="gh45" onkeyup="CiarkaNaBodku(this);" style="width:50px;"/></td>
+ <td><input type="text" name="gh46" id="gh46"/></td>
 </tr>
 </tbody>
+<tfoot>
+<tr><td colspan="6"></td></tr>
+</tfoot>
 </table>
-</div>
-
-</td>
-<td colspan="5"></td>
-</tr>
-
 <?php                     } ?>
+
 
 <?php if ( $strana == 4 ) { ?>
-<tr>
-<td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="5%"></td>
-<td class="rsmall" width="15%"></td><td class="rsmall" width="15%"></td><td class="rsmall" width="5%"></td><td class="rsmall" width="10%"></td>
-<td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
-</tr>
-<tr><td class="rmedium" colspan="10"></td></tr>
-<tr><td class="castname" colspan="10">Èl. III Informácie, ktoré vysvet¾ujú a dopåòajú súvahu a vıkaz ziskov a strát.</td></tr>
-
-<tr><td class="medium" colspan="10">Èl. III.4 Informácie o orgánoch úètovnej jednotky.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="C_text4"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+<h1 class="section-header"><span>èl.III</span>Informácie, ktoré vysvet¾ujú a dopåòajú súvahu a vıkaz ziskov a strát</h1>
+<h2 class="section-subheader"><span>èl.III.4</span>Informácie o orgánoch úètovnej jednotky</h2>
+<span class="section-echo" style="margin-bottom:10px;">
+<?php
+$ozntext="C_text4";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
 
-<tr>
-<td colspan="10">
-<div class="casti">
-<table width="100%" >
-<caption ><span class="ctab"></span><input type="checkbox" name="tlt303" value="1" title="Zobrazi tabu¾ku v PDF"/> Príjmy a vıhody èlenov štatutárnych orgánov, dozornıch orgánov a inıch orgánov</caption>
-<tr>
-<td class="rsmall" width="12%"></td>
-<td class="rsmall" width="8%"></td><td class="rsmall" width="7%"></td><td class="rsmall" width="7%"></td>
-<td class="rsmall" width="8%"></td><td class="rsmall" width="7%"></td><td class="rsmall" width="7%"></td>
-<td class="rsmall" width="8%"></td><td class="rsmall" width="7%"></td><td class="rsmall" width="7%"></td>
-<td class="rsmall" width="8%"></td><td class="rsmall" width="7%"></td><td class="rsmall" width="7%"></td>
-</tr>
+<table class="section-table" style="width:800px;">
 <thead>
 <tr>
-<th colspan="1" rowspan="3">Druh príjmu, vıhody</th><th colspan="3">Hodn. príjmu, vıhody súèas. èlenov org.</th>
-<th colspan="3">Hodn. príjmu, vıhody bıval. èlenov org.</th><th colspan="3">Hodn. príjmu, vıhody súèas. èlenov org.</th>
-<th colspan="3">Hodn. príjmu, vıhody bıval. èlenov org.</th>
+ <td class="head-line" style="width:22%;"></td>
+ <td class="head-line" style="width:13%;"></td>
+ <td class="head-line" style="width:13%;"></td>
+ <td class="head-line" style="width:13%;"></td>
+ <td class="head-line" style="width:13%;"></td>
+ <td class="head-line" style="width:13%;"></td>
+ <td class="head-line" style="width:13%;"></td>
 </tr>
 <tr>
-<th colspan="1">štatutár.</th><th colspan="1">dozornıch</th><th colspan="1">inıch</th>
-<th colspan="1">štatutár.</th><th colspan="1">dozornıch</th><th colspan="1">inıch</th>
-<th colspan="1">štatutár.</th><th colspan="1">dozornıch</th><th colspan="1">inıch</th>
-<th colspan="1">štatutár.</th><th colspan="1">dozornıch</th><th colspan="1">inıch</th>
+ <th rowspan="5" style="border-right:2px solid #c2c2c2; vertical-align:middle;">Druh príjmu,<br>vıhody
+  <input type="checkbox" name="tlt303" value="1" title="Zaradi tabu¾ku do PDF"/>
+ </th>
+ <th colspan="6" style="font-weight:normal;">Hodnota príjmu, vıhody èlenov orgánov</th>
 </tr>
 <tr>
-<th colspan="6"><?php echo $kli_vrok;?></th><th colspan="6"><?php echo $kli_minrok;?>
-<img src="../obr/vlozit.png" width="10" height="10" onclick="minulyrok(<?php echo $strana;?>)"
- title="Naèíta hodnoty predchádzajúceho obdobia do Poznámok MUJ 2014 pre stranu è.<?php echo $strana;?> z Poznámok PO 2013" >
-</th>
+ <th colspan="3" style="border-right:2px solid #c2c2c2; border-bottom:2px solid #c2c2c2;
+  border-top:1px solid #c2c2c2; color:#39f;"><strong>súèasnıch</strong></th>
+ <th colspan="3" style="border-bottom:2px solid #c2c2c2; border-top:1px solid #c2c2c2; color:#39f;"><strong>bıvalıch</strong></th>
+</tr>
+<tr>
+ <th>štatutárnych</th>
+ <th>dozornıch</th>
+ <th style="border-right:2px solid #c2c2c2;">inıch</th>
+ <th>štatutárnych</th>
+ <th>dozornıch</th>
+ <th>inıch</th>
+</tr>
+<tr>
+ <th colspan="3" style="border-top:2px solid #c2c2c2; border-bottom:1px solid #c2c2c2;
+  border-right:2px solid #c2c2c2;"><?php echo $kli_vrok; ?></th>
+ <th colspan="3" style="border-top:2px solid #c2c2c2; border-bottom:1px solid #c2c2c2;"><?php echo $kli_vrok; ?></th>
+</tr>
+<tr>
+ <th colspan="3" style="border-right:2px solid #c2c2c2;"><?php echo $kli_minrok; ?>
+  <img src="../obr/ikony/download_blue_icon.png" onclick="minulyrok(<?php echo $strana;?>)"
+  title="Naèíta hodnoty z Poznámok PO 2013">
+ </th>
+ <th colspan="3"><?php echo $kli_minrok; ?>
+  <img src="../obr/ikony/download_blue_icon.png" onclick="minulyrok(<?php echo $strana;?>)"
+  title="Naèíta hodnoty z Poznámok PO 2013">
+ </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td colspan="1">Peòané príjmy</td><td colspan="1"><input type="text" name="m11b" id="m11b" size="12" /></td>
-<td colspan="1"><input type="text" name="m12b" id="m12b" size="12" /></td><td colspan="1"><input type="text" name="m13b" id="m13b" size="12" /></td>
-<td colspan="1"><input type="text" name="m11c" id="m11c" size="12" /></td><td colspan="1"><input type="text" name="m12c" id="m12c" size="12" /></td>
-<td colspan="1"><input type="text" name="m13c" id="m13c" size="12" /></td><td colspan="1"><input type="text" name="m21b" id="m21b" size="12" /></td>
-<td colspan="1"><input type="text" name="m22b" id="m22b" size="12" /></td><td colspan="1"><input type="text" name="m23b" id="m23b" size="12" /></td>
-<td colspan="1"><input type="text" name="m21c" id="m21c" size="12" /></td><td colspan="1"><input type="text" name="m22c" id="m22c" size="12" /></td>
-<td colspan="1"><input type="text" name="m23c" id="m23c" size="12" /></td>
+ <th rowspan="2" style="border-right:2px solid #dbdbdb; vertical-align:middle;">Peòané príjmy</th>
+ <td><input type="text" name="m11b" id="m11b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m12b" id="m12b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m13b" id="m13b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m11c" id="m11c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m12c" id="m12c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m13c" id="m13c" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Nepeòa. príjmy</td><td colspan="1"><input type="text" name="m31b" id="m31b" size="12" /></td>
-<td colspan="1"><input type="text" name="m32b" id="m32b" size="12" /></td><td colspan="1"><input type="text" name="m33b" id="m33b" size="12" /></td>
-<td colspan="1"><input type="text" name="m31c" id="m31c" size="12" /></td><td colspan="1"><input type="text" name="m32c" id="m32c" size="12" /></td>
-<td colspan="1"><input type="text" name="m33c" id="m33c" size="12" /></td><td colspan="1"><input type="text" name="m41b" id="m41b" size="12" /></td>
-<td colspan="1"><input type="text" name="m42b" id="m42b" size="12" /></td><td colspan="1"><input type="text" name="m43b" id="m43b" size="12" /></td>
-<td colspan="1"><input type="text" name="m41c" id="m41c" size="12" /></td><td colspan="1"><input type="text" name="m42c" id="m42c" size="12" /></td>
-<td colspan="1"><input type="text" name="m43c" id="m43c" size="12" /></td>
+ <td><input type="text" name="m21b" id="m21b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m22b" id="m22b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m23b" id="m23b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m21c" id="m21c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m22c" id="m22c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m23c" id="m23c" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Peòané preddav.</td><td colspan="1"><input type="text" name="m51b" id="m51b" size="12" /></td>
-<td colspan="1"><input type="text" name="m52b" id="m52b" size="12" /></td><td colspan="1"><input type="text" name="m53b" id="m53b" size="12" /></td>
-<td colspan="1"><input type="text" name="m51c" id="m51c" size="12" /></td><td colspan="1"><input type="text" name="m52c" id="m52c" size="12" /></td>
-<td colspan="1"><input type="text" name="m53c" id="m53c" size="12" /></td><td colspan="1"><input type="text" name="m61b" id="m61b" size="12" /></td>
-<td colspan="1"><input type="text" name="m62b" id="m62b" size="12" /></td><td colspan="1"><input type="text" name="m63b" id="m63b" size="12" /></td>
-<td colspan="1"><input type="text" name="m61c" id="m61c" size="12" /></td><td colspan="1"><input type="text" name="m62c" id="m62c" size="12" /></td>
-<td colspan="1"><input type="text" name="m63c" id="m63c" size="12" /></td>
+ <th rowspan="2" style="border-right:2px solid #dbdbdb; vertical-align:middle;">Nepeòané príjmy</th>
+ <td><input type="text" name="m31b" id="m31b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m32b" id="m32b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m33b" id="m33b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m31c" id="m31c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m32c" id="m32c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m33c" id="m33c" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Nepeòa. preddav.</td><td colspan="1"><input type="text" name="m71b" id="m71b" size="12" /></td>
-<td colspan="1"><input type="text" name="m72b" id="m72b" size="12" /></td><td colspan="1"><input type="text" name="m73b" id="m73b" size="12" /></td>
-<td colspan="1"><input type="text" name="m71c" id="m71c" size="12" /></td><td colspan="1"><input type="text" name="m72c" id="m72c" size="12" /></td>
-<td colspan="1"><input type="text" name="m73c" id="m73c" size="12" /></td><td colspan="1"><input type="text" name="m81b" id="m81b" size="12" /></td>
-<td colspan="1"><input type="text" name="m82b" id="m82b" size="12" /></td><td colspan="1"><input type="text" name="m83b" id="m83b" size="12" /></td>
-<td colspan="1"><input type="text" name="m81c" id="m81c" size="12" /></td><td colspan="1"><input type="text" name="m82c" id="m82c" size="12" /></td>
-<td colspan="1"><input type="text" name="m83c" id="m83c" size="12" /></td>
+ <td><input type="text" name="m41b" id="m41b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m42b" id="m42b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m43b" id="m43b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m41c" id="m41c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m42c" id="m42c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m43c" id="m43c" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Poskytnuté úvery</td><td colspan="1"><input type="text" name="m91b" id="m91b" size="12" /></td>
-<td colspan="1"><input type="text" name="m92b" id="m92b" size="12" /></td><td colspan="1"><input type="text" name="m93b" id="m93b" size="12" /></td>
-<td colspan="1"><input type="text" name="m91c" id="m91c" size="12" /></td><td colspan="1"><input type="text" name="m92c" id="m92c" size="12" /></td>
-<td colspan="1"><input type="text" name="m93c" id="m93c" size="12" /></td><td colspan="1"><input type="text" name="m101b" id="m101b" size="12" /></td>
-<td colspan="1"><input type="text" name="m102b" id="m102b" size="12" /></td><td colspan="1"><input type="text" name="m103b" id="m103b" size="12" /></td>
-<td colspan="1"><input type="text" name="m101c" id="m101c" size="12" /></td><td colspan="1"><input type="text" name="m102c" id="m102c" size="12" /></td>
-<td colspan="1"><input type="text" name="m103c" id="m103c" size="12" /></td>
+ <th rowspan="2" style="border-right:2px solid #dbdbdb; vertical-align:middle;">Peòané preddavky</th>
+ <td><input type="text" name="m51b" id="m51b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m52b" id="m52b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m53b" id="m53b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m51c" id="m51c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m52c" id="m52c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m53c" id="m53c" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Poskytnuté záruky</td><td colspan="1"><input type="text" name="m111b" id="m111b" size="12" /></td>
-<td colspan="1"><input type="text" name="m112b" id="m112b" size="12" /></td><td colspan="1"><input type="text" name="m113b" id="m113b" size="12" /></td>
-<td colspan="1"><input type="text" name="m111c" id="m111c" size="12" /></td><td colspan="1"><input type="text" name="m112c" id="m112c" size="12" /></td>
-<td colspan="1"><input type="text" name="m113c" id="m113c" size="12" /></td><td colspan="1"><input type="text" name="m121b" id="m121b" size="12" /></td>
-<td colspan="1"><input type="text" name="m122b" id="m122b" size="12" /></td><td colspan="1"><input type="text" name="m123b" id="m123b" size="12" /></td>
-<td colspan="1"><input type="text" name="m121c" id="m121c" size="12" /></td><td colspan="1"><input type="text" name="m122c" id="m122c" size="12" /></td>
-<td colspan="1"><input type="text" name="m123c" id="m123c" size="12" /></td>
+ <td><input type="text" name="m61b" id="m61b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m62b" id="m62b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m63b" id="m63b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m61c" id="m61c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m62c" id="m62c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m63c" id="m63c" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Iné</td><td colspan="1"><input type="text" name="m131b" id="m131b" size="12" /></td>
-<td colspan="1"><input type="text" name="m132b" id="m132b" size="12" /></td><td colspan="1"><input type="text" name="m133b" id="m133b" size="12" /></td>
-<td colspan="1"><input type="text" name="m131c" id="m131c" size="12" /></td><td colspan="1"><input type="text" name="m132c" id="m132c" size="12" /></td>
-<td colspan="1"><input type="text" name="m133c" id="m133c" size="12" /></td><td colspan="1"><input type="text" name="m141b" id="m141b" size="12" /></td>
-<td colspan="1"><input type="text" name="m142b" id="m142b" size="12" /></td><td colspan="1"><input type="text" name="m143b" id="m143b" size="12" /></td>
-<td colspan="1"><input type="text" name="m141c" id="m141c" size="12" /></td><td colspan="1"><input type="text" name="m142c" id="m142c" size="12" /></td>
-<td colspan="1"><input type="text" name="m143c" id="m143c" size="12" /></td>
+ <th rowspan="2" style="border-right:2px solid #dbdbdb; vertical-align:middle;">Nepeòané preddavky</th>
+ <td><input type="text" name="m71b" id="m71b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m72b" id="m72b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m73b" id="m73b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m71c" id="m71c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m72c" id="m72c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m73c" id="m73c" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <td><input type="text" name="m81b" id="m81b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m82b" id="m82b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m83b" id="m83b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m81c" id="m81c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m82c" id="m82c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m83c" id="m83c" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th rowspan="2" style="border-right:2px solid #dbdbdb; vertical-align:middle;">Poskytnuté úvery</th>
+ <td><input type="text" name="m91b" id="m91b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m92b" id="m92b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m93b" id="m93b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m91c" id="m91c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m92c" id="m92c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m93c" id="m93c" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <td><input type="text" name="m101b" id="m101b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m102b" id="m102b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m103b" id="m103b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m101c" id="m101c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m102c" id="m102c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m103c" id="m103c" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th rowspan="2" style="border-right:2px solid #dbdbdb; vertical-align:middle;">Poskytnuté záruky</th>
+ <td><input type="text" name="m111b" id="m111b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m112b" id="m112b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m113b" id="m113b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m111c" id="m111c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m112c" id="m112c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m113c" id="m113c" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <td><input type="text" name="m121b" id="m121b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m122b" id="m122b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m123b" id="m123b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m121c" id="m121c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m122c" id="m122c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m123c" id="m123c" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th rowspan="2" style="border-right:2px solid #dbdbdb; vertical-align:middle;">Iné</th>
+ <td><input type="text" name="m131b" id="m131b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m132b" id="m132b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m133b" id="m133b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m131c" id="m131c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m132c" id="m132c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m133c" id="m133c" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <td><input type="text" name="m141b" id="m141b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m142b" id="m142b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="m143b" id="m143b" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m141c" id="m141c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m142c" id="m142c" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="m143c" id="m143c" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 </tbody>
+<tfoot>
+<tr><td colspan="7"></td></tr>
+</tfoot>
 </table>
-
-
-</div>
-</td>
-</tr>
-
 <?php                     } ?>
+
 
 <?php if ( $strana == 5 ) { ?>
-<tr>
-<td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="5%"></td>
-<td class="rsmall" width="15%"></td><td class="rsmall" width="15%"></td><td class="rsmall" width="5%"></td><td class="rsmall" width="10%"></td>
-<td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
-</tr>
-<tr><td class="rmedium" colspan="10"></td></tr>
-<tr><td class="castname" colspan="10">Èl. III Informácie, ktoré vysvet¾ujú a dopåòajú súvahu a vıkaz ziskov a strát.</td></tr>
-
-<tr><td class="medium" colspan="10">Èl. III.5 Informácie o povinnostiach úètovnej jednotky.</td></tr>
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="C_text5"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+<h1 class="section-header"><span>èl.III</span>Informácie, ktoré vysvet¾ujú a dopåòajú súvahu a vıkaz ziskov a strát</h1>
+<h2 class="section-subheader"><span>èl.III.5</span>Informácie o povinnostiach úètovnej jednotky</h2>
+<span class="section-echo" style="margin-bottom:15px;">
+<?php
+$ozntext="C_text5";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
-<tr>
-<td colspan="6">
-<div class="casti">
-<table width="100%" >
-<caption ><span class="ctab"></span><input type="checkbox" name="tlt304" value="1" title="Zobrazi tabu¾ku v PDF"/> Podsúvahové poloky</caption>
-<tr>
-<td class="rsmall" width="30%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
-<td class="rsmall" width="30%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
-</tr>
+
+<table class="section-table" style="width:500px; margin-bottom:20px;">
+<caption>Podsúvahové poloky
+ <input type="checkbox" name="tlt304" value="1" title="Zaradi tabu¾ku do PDF"
+  style="top:18px;"/>
+</caption>
 <thead>
 <tr>
-<th colspan="1">Názov poloky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?>
- <img src="../obr/vlozit.png" width="10" height="10" onclick="minulyrok(<?php echo $strana;?>)"
- title="Naèíta hodnoty predchádzajúceho obdobia do Poznámok MUJ 2014 pre stranu è.<?php echo $strana;?> z Poznámok PO 2013" >
-</th>
-<th colspan="1">Názov poloky</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?></th>
+ <td class="head-line" style="width:60%;"></td>
+ <td class="head-line" style="width:20%;"></td>
+ <td class="head-line" style="width:20%;"></td>
+</tr>
+<tr>
+ <th>Názov poloky</th>
+ <th><?php echo $kli_vrok; ?></th>
+ <th><?php echo $kli_minrok; ?>
+ <img src="../obr/ikony/download_blue_icon.png" onclick="minulyrok(<?php echo $strana;?>)"
+  title="Naèíta hodnoty z Poznámok PO 2013">
+ </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td colspan="1">Prenajatı majetok</td><td colspan="1"><input type="text" name="k11" id="k11" size="12" /></td><td colspan="1"><input type="text" name="k12" id="k12" size="12" /></td>
-<td colspan="1">Odpísané poh¾adávky</td><td colspan="1"><input type="text" name="k61" id="k61" size="12" /></td><td colspan="1"><input type="text" name="k62" id="k62" size="12" /></td>
+ <th>Prenajatı majetok</th>
+ <td><input type="text" name="k11" id="k11" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="k12" id="k12" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Majetok v nájme (operatívny prenájom)</td><td colspan="1"><input type="text" name="k21" id="k21" size="12" /></td><td colspan="1"><input type="text" name="k22" id="k22" size="12" /></td>
-<td colspan="1">Poh¾adávky z leasingu</td><td colspan="1"><input type="text" name="k71" id="k71" size="12" /></td><td colspan="1"><input type="text" name="k72" id="k72" size="12" /></td>
+ <th>Majetok v nájme (operatívny prenájom)</th>
+ <td><input type="text" name="k21" id="k21" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="k22" id="k22" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Majetok prijatı do úschovy</td><td colspan="1"><input type="text" name="k31" id="k31" size="12" /></td><td colspan="1"><input type="text" name="k32" id="k32" size="12" /></td>
-<td colspan="1">Záväzky z leasingu</td><td colspan="1"><input type="text" name="k81" id="k81" size="12" /></td><td colspan="1"><input type="text" name="k82" id="k82" size="12" /></td>
+ <th>Majetok prijatı do úschovy</th>
+ <td><input type="text" name="k31" id="k31" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="k32" id="k32" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Poh¾adávky z derivátov</td><td colspan="1"><input type="text" name="k41" id="k41" size="12" /></td><td colspan="1"><input type="text" name="k42" id="k42" size="12" /></td>
-<td colspan="1">Iné poloky</td><td colspan="1"><input type="text" name="k91" id="k91" size="12" /></td><td colspan="1"><input type="text" name="k92" id="k92" size="12" /></td>
+ <th>Poh¾adávky z derivátov</th>
+ <td><input type="text" name="k41" id="k41" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="k42" id="k42" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Záväzky z opcií derivátov</td><td colspan="1"><input type="text" name="k51" id="k51" size="12" /></td><td colspan="1"><input type="text" name="k52" id="k52" size="12" /></td>
-<td colspan="1"></td><td colspan="1"></td><td colspan="1"></td>
+ <th>Záväzky z opcií derivátov</th>
+ <td><input type="text" name="k51" id="k51" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="k52" id="k52" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th>Odpísané poh¾adávky</th>
+ <td><input type="text" name="k61" id="k61" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="k62" id="k62" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th>Poh¾adávky z leasingu</th>
+ <td><input type="text" name="k71" id="k71" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="k72" id="k72" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th>Záväzky z leasingu</th>
+ <td><input type="text" name="k81" id="k81" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="k82" id="k82" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th>Iné poloky</th>
+ <td><input type="text" name="k91" id="k91" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="k92" id="k92" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 </tbody>
+<tfoot>
+<tr><td colspan="3"></td></tr>
+</tfoot>
 </table>
-</div>
-</td>
-</tr>
 
+<table class="section-table toleft" style="width:420px; margin-bottom:10px;">
+<caption>Podmienené záväzky - Tabu¾ka è. 1
+ <input type="checkbox" name="tlt305" value="1" title="Zobrazi tabu¾ku v PDF"
+  style="top:18px;"/>
+</caption>
+<thead>
 <tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="C_text6"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+ <td class="head-line" style="width:50%;"></td>
+ <td class="head-line" style="width:25%;"></td>
+ <td class="head-line" style="width:25%;"></td>
+</tr>
+<tr>
+ <th rowspan="2" style="vertical-align:middle; border-right:2px solid #c2c2c2;">Druh podmieneného záväzku</th>
+ <th colspan="2" style="border-bottom:2px solid #c2c2c2;"><?php echo $kli_vrok; ?></th>
+</tr>
+<tr>
+ <th style="border-right:2px solid #c2c2c2;">Hodnota celkom</th>
+ <th>Hodn. voèi spriaz. osobám</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+ <th style="border-right:2px solid #dbdbdb;">Zo súdnych rozhodnutí</th>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="l1ab11" id="l1ab11" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="l1ab12" id="l1ab12" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th style="border-right:2px solid #dbdbdb;">Z poskytnutıch záruk</th>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="l1ab21" id="l1ab21" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="l1ab22" id="l1ab22" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th style="border-right:2px solid #dbdbdb; font-size:11px;">Zo všeobec. záväznıch práv. predpisov</th>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="l1ab31" id="l1ab31" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="l1ab32" id="l1ab32" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th style="border-right:2px solid #dbdbdb;">Zo zmluvy o podriadenom záväzku</th>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="l1ab41" id="l1ab41" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="l1ab42" id="l1ab42" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th style="border-right:2px solid #dbdbdb;">Z ruèenia</th>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="l1ab51" id="l1ab51" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="l1ab52" id="l1ab52" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th style="border-right:2px solid #dbdbdb;">Iné podmienené záväzky</th>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="l1ab61" id="l1ab61" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="l1ab62" id="l1ab62" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+</tbody>
+<tfoot>
+<tr><td colspan="3"></td></tr>
+</tfoot>
+</table>
+
+<table class="section-table toleft" style="width:420px; margin-bottom:10px;">
+<caption>Podmienené záväzky - Tabu¾ka è. 2
+ <input type="checkbox" name="tlt306" value="1" title="Zobrazi tabu¾ku v PDF"
+  style="top:18px;"/>
+</caption>
+<thead>
+<tr>
+ <td class="head-line" style="width:50%;"></td>
+ <td class="head-line" style="width:25%;"></td>
+ <td class="head-line" style="width:25%;"></td>
+</tr>
+<tr>
+ <th rowspan="2" style="vertical-align:middle; border-right:2px solid #c2c2c2;">Druh podmieneného záväzku</th>
+ <th colspan="2" style="border-bottom:2px solid #c2c2c2;"><?php echo $kli_minrok; ?></th>
+</tr>
+<tr>
+ <th style="border-right:2px solid #c2c2c2;">Hodnota celkom</th>
+ <th>Hodn. voèi spriaz. osobám</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+ <th style="border-right:2px solid #dbdbdb;">Zo súdnych rozhodnutí</th>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="l2ab11" id="l2ab11" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="l2ab12" id="l2ab12" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th style="border-right:2px solid #dbdbdb;">Z poskytnutıch záruk</th>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="l2ab21" id="l2ab21" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="l2ab22" id="l2ab22" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th style="border-right:2px solid #dbdbdb; font-size:11px;">Zo všeobec. záväznıch práv. predpisov</th>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="l2ab31" id="l2ab31" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="l2ab32" id="l2ab32" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th style="border-right:2px solid #dbdbdb;">Zo zmluvy o podriadenom záväzku</th>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="l2ab41" id="l2ab41" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="l2ab42" id="l2ab42" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th style="border-right:2px solid #dbdbdb;">Z ruèenia</th>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="l2ab51" id="l2ab51" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="l2ab52" id="l2ab52" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th style="border-right:2px solid #dbdbdb;">Iné podmienené záväzky</th>
+ <td style="border-right:2px solid #dbdbdb;"><input type="text" name="l2ab61" id="l2ab61" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="l2ab62" id="l2ab62" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+</tbody>
+<tfoot>
+<tr><td colspan="3"></td></tr>
+</tfoot>
+</table>
+
+<span class="section-echo" style="margin-bottom:20px;">
+<?php
+$ozntext="C_text6";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
-<tr>
-<td colspan="5">
-<div class="casti">
-<table width="100%" >
-<caption ><span class="ctab"></span><input type="checkbox" name="tlt305" value="1" title="Zobrazi tabu¾ku v PDF"/> Podmienené záväzky - Tabu¾ka è. 1</caption>
-<tr>
-<td class="rsmall" width="50%"></td><td class="rsmall" width="25%"></td><td class="rsmall" width="25%"></td>
-</tr>
+
+<table class="section-table" style="width:600px; margin-bottom:10px;">
+<caption>Podmienenı majetok
+ <input type="checkbox" name="tlt307" value="1" title="Zaradi tabu¾ku do PDF"
+  style="top:18px;"/>
+</caption>
 <thead>
 <tr>
-<th colspan="1" rowspan="2">Druh podmieneného záväzku</th><th colspan="2"><?php echo $kli_vrok;?></th>
+ <td class="head-line" style="width:60%;"></td>
+ <td class="head-line" style="width:20%;"></td>
+ <td class="head-line" style="width:20%;"></td>
 </tr>
 <tr>
-<th colspan="1">Hodnota celkom</th><th colspan="1">Hodn. voèi spriaz. osobám</th>
+ <th>Druh podmieneného majetku</th>
+ <th><?php echo $kli_vrok; ?></th>
+ <th><?php echo $kli_minrok; ?></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td colspan="1">Zo súdnych rozhodnutí</td>
-<td colspan="1"><input type="text" name="l1ab11" id="l1ab11" size="12" /></td>
-<td colspan="1"><input type="text" name="l1ab12" id="l1ab12" size="12" /></td>
+ <th>Práva zo servisnıch zmlúv</th>
+ <td><input type="text" name="lc11" id="lc11" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="lc12" id="lc12" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Z poskytnutıch záruk</td>
-<td colspan="1"><input type="text" name="l1ab21" id="l1ab21" size="12" /></td>
-<td colspan="1"><input type="text" name="l1ab22" id="l1ab22" size="12" /></td>
+ <th>Práva z poistnıch zmlúv</th>
+ <td><input type="text" name="lc21" id="lc21" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="lc22" id="lc22" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Zo všeobecne záväznıch právnych predpisov</td>
-<td colspan="1"><input type="text" name="l1ab31" id="l1ab31" size="12" /></td>
-<td colspan="1"><input type="text" name="l1ab32" id="l1ab32" size="12" /></td>
+ <th>Práva z koncesionárskych zmlúv</th>
+ <td><input type="text" name="lc31" id="lc31" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="lc32" id="lc32" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Zo zmluvy o podriadenom záväzku</td>
-<td colspan="1"><input type="text" name="l1ab41" id="l1ab41" size="12" /></td>
-<td colspan="1"><input type="text" name="l1ab42" id="l1ab42" size="12" /></td>
+ <th>Práva z licenènıch zmlúv</th>
+ <td><input type="text" name="lc41" id="lc41" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="lc42" id="lc42" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Z ruèenia</td>
-<td colspan="1"><input type="text" name="l1ab51" id="l1ab51" size="12" /></td>
-<td colspan="1"><input type="text" name="l1ab52" id="l1ab52" size="12" /></td>
+ <th>Práva z investov. prostried. získan. oslobod. od dane z príj.</th>
+ <td><input type="text" name="lc51" id="lc51" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="lc52" id="lc52" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 <tr>
-<td colspan="1">Iné podmienené záväzky</td>
-<td colspan="1"><input type="text" name="l1ab61" id="l1ab61" size="12" /></td>
-<td colspan="1"><input type="text" name="l1ab62" id="l1ab62" size="12" /></td>
+ <th>Práva z privatizácie</th>
+ <td><input type="text" name="lc61" id="lc61" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="lc62" id="lc62" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th>Práva zo súdnych sporov</th>
+ <td><input type="text" name="lc71" id="lc71" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="lc72" id="lc72" onkeyup="CiarkaNaBodku(this);"/></td>
+</tr>
+<tr>
+ <th>Iné práva</th>
+ <td><input type="text" name="lc81" id="lc81" onkeyup="CiarkaNaBodku(this);"/></td>
+ <td><input type="text" name="lc82" id="lc82" onkeyup="CiarkaNaBodku(this);"/></td>
 </tr>
 </tbody>
 </table>
-</div>
-</td>
-</tr>
 
-<tr>
-<td colspan="5">
-<div class="casti">
-<table width="100%" >
-<caption ><span class="ctab"></span><input type="checkbox" name="tlt306" value="1" title="Zobrazi tabu¾ku v PDF"/> Podmienené záväzky - Tabu¾ka è. 2</caption>
-<tr>
-<td class="rsmall" width="50%"></td><td class="rsmall" width="25%"></td><td class="rsmall" width="25%"></td>
-</tr>
-<thead>
-<tr>
-<th colspan="1" rowspan="2">Druh podmieneného záväzku</th><th colspan="2"><?php echo $kli_minrok;?></th>
-</tr>
-<tr>
-<th colspan="1">Hodnota celkom</th><th colspan="1">Hodn. voèi spriaz. osobám</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td colspan="1">Zo súdnych rozhodnutí</td>
-<td colspan="1"><input type="text" name="l2ab11" id="l2ab11" size="12" /></td>
-<td colspan="1"><input type="text" name="l2ab12" id="l2ab12" size="12" /></td>
-</tr>
-<tr>
-<td colspan="1">Z poskytnutıch záruk</td>
-<td colspan="1"><input type="text" name="l2ab21" id="l2ab21" size="12" /></td>
-<td colspan="1"><input type="text" name="l2ab22" id="l2ab22" size="12" /></td>
-</tr>
-<tr>
-<td colspan="1">Zo všeobecne záväznıch právnych predpisov</td>
-<td colspan="1"><input type="text" name="l2ab31" id="l2ab31" size="12" /></td>
-<td colspan="1"><input type="text" name="l2ab32" id="l2ab32" size="12" /></td>
-</tr>
-<tr>
-<td colspan="1">Zo zmluvy o podriadenom záväzku</td>
-<td colspan="1"><input type="text" name="l2ab41" id="l2ab41" size="12" /></td>
-<td colspan="1"><input type="text" name="l2ab42" id="l2ab42" size="12" /></td>
-</tr>
-<tr>
-<td colspan="1">Z ruèenia</td>
-<td colspan="1"><input type="text" name="l2ab51" id="l2ab51" size="12" /></td>
-<td colspan="1"><input type="text" name="l2ab52" id="l2ab52" size="12" /></td>
-</tr>
-<tr>
-<td colspan="1">Iné podmienené záväzky</td>
-<td colspan="1"><input type="text" name="l2ab61" id="l2ab61" size="12" /></td>
-<td colspan="1"><input type="text" name="l2ab62" id="l2ab62" size="12" /></td>
-</tr>
-</tbody>
-</table>
-</div>
-  </td>
-</tr>
-
-<tr>
-<td colspan="10" >
-<div class="dtext" >
-<?php $ozntext="C_text7"; $textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf); ?>
-<img src="../obr/eshop/note.png" width="25" height="20" onclick="upravtext('<?php echo $ozntext; ?>')" title="Upravi text" >
-<span class="dtextbox">
-<span>&bdquo;</span>&nbsp;<?php echo $textvypis; ?>&nbsp;<span>&rdquo;</span>
+<span class="section-echo" style="margin-bottom:15px;">
+<?php
+$ozntext="C_text7";
+$textvypis=vypistextx($ozntext, $mysqlhost, $mysqluser, $mysqlpasswd, $mysqldb, $kli_vxcf);
+echo $textvypis;
+?>
+<img src="../obr/ikony/pencil3_blue_x16.png" onclick="upravtext('<?php echo $ozntext; ?>')"
+ title="Upravi">
 </span>
-</div>
-</td>
-</tr>
-<tr>
-<td colspan="6">
-<div class="casti">
-<table width="100%" >
-<caption ><span class="ctab"></span><input type="checkbox" name="tlt307" value="1" title="Zobrazi tabu¾ku v PDF"/> Podmienenı majetok</caption>
-<tr>
-<td class="rsmall" width="30%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
-<td class="rsmall" width="30%"></td><td class="rsmall" width="10%"></td><td class="rsmall" width="10%"></td>
-</tr>
-<thead>
-<tr>
-<th colspan="1">Druh podmieneného majetku</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?></th>
-<th colspan="1">Druh podmieneného majetku</th><th colspan="1"><?php echo $kli_vrok;?></th><th colspan="1"><?php echo $kli_minrok;?></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td colspan="1">Práva zo servisnıch zmlúv</td>
-<td colspan="1"><input type="text" name="lc11" id="lc11" size="12" /></td>
-<td colspan="1"><input type="text" name="lc12" id="lc12" size="12" /></td>
-<td colspan="1">Práva z investov. prostried. získan. oslobod. od dane z príj.</td>
-<td colspan="1"><input type="text" name="lc51" id="lc51" size="12" /></td>
-<td colspan="1"><input type="text" name="lc52" id="lc52" size="12" /></td>
-</tr>
-<tr>
-<td colspan="1">Práva z poistnıch zmlúv</td>
-<td colspan="1"><input type="text" name="lc21" id="lc21" size="12" /></td>
-<td colspan="1"><input type="text" name="lc22" id="lc22" size="12" /></td>
-<td colspan="1">Práva z privatizácie</td>
-<td colspan="1"><input type="text" name="lc61" id="lc61" size="12" /></td>
-<td colspan="1"><input type="text" name="lc62" id="lc62" size="12" /></td>
-</tr>
-<tr>
-<td colspan="1">Práva z koncesionárskych zmlúv</td>
-<td colspan="1"><input type="text" name="lc31" id="lc31" size="12" /></td>
-<td colspan="1"><input type="text" name="lc32" id="lc32" size="12" /></td>
-<td colspan="1">Práva zo súdnych sporov</td>
-<td colspan="1"><input type="text" name="lc71" id="lc71" size="12" /></td>
-<td colspan="1"><input type="text" name="lc72" id="lc72" size="12" /></td>
-</tr>
-<tr>
-<td colspan="1">Práva z licenènıch zmlúv</td>
-<td colspan="1"><input type="text" name="lc41" id="lc41" size="12" /></td>
-<td colspan="1"><input type="text" name="lc42" id="lc42" size="12" /></td>
-<td colspan="1">Iné práva</td>
-<td colspan="1"><input type="text" name="lc81" id="lc81" size="12" /></td>
-<td colspan="1"><input type="text" name="lc82" id="lc82" size="12" /></td>
-</tr>
-</tbody>
-</table>
-</div>
-</td>
-</tr>
-<tr>
-<td colspan="10"></td>
-</tr>
-
-
 <?php                     } ?>
 
-
+</div>
 </FORM>
-
-</table>
-
+</div> <!-- koniec #content -->
 <?php
-//zobraz a uprav nastavene udaje
-        }
+//koniec zobraz a uprav udaje
+}
 ?>
 
-
-
-
 <?php
-$robot=1;
-$cislista = include("uct_lista.php");
-
+$cislista = include("uct_lista_norm.php");
 //celkovy koniec dokumentu
        } while (false);
 ?>
