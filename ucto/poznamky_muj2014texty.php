@@ -447,7 +447,25 @@ window.open('poznamky_muj2014texty.php?copern=4055&drupoh=1&page=1&firmax='+ fir
 
 <table class="nadpis" width="100%" style="margin-bottom:20px;" >
  <tr>
-  <td width="40%" class="h2" >Doplòujúci text k <?php echo $h_ozntxt;?></td>
+<?php
+if( $h_ozntxt == "A_text1" ) { $h_ozntxtx="èl.I.2 "; }
+if( $h_ozntxt == "A_text2" ) { $h_ozntxtx="èl.I.3 "; }
+if( $h_ozntxt == "B_text1" ) { $h_ozntxtx="èl.II.1 "; }
+if( $h_ozntxt == "B_text2" ) { $h_ozntxtx="èl.II.2 "; }
+if( $h_ozntxt == "B_text3" ) { $h_ozntxtx="èl.II.3 "; }
+if( $h_ozntxt == "B_text4" ) { $h_ozntxtx="èl.II.4 "; }
+if( $h_ozntxt == "B_text5" ) { $h_ozntxtx="èl.II.5 "; }
+if( $h_ozntxt == "B_text6" ) { $h_ozntxtx="èl.II.6 "; }
+if( $h_ozntxt == "C_text1" ) { $h_ozntxtx="èl.III.1 "; }
+if( $h_ozntxt == "C_text2" ) { $h_ozntxtx="èl.III.2 "; }
+if( $h_ozntxt == "C_text3" ) { $h_ozntxtx="èl.III.3 "; }
+if( $h_ozntxt == "C_text4" ) { $h_ozntxtx="èl.III.4 "; }
+if( $h_ozntxt == "C_text5" ) { $h_ozntxtx="èl.III.5 Podsúvahové položky"; }
+if( $h_ozntxt == "C_text6" ) { $h_ozntxtx="èl.III.5 Podmienené záväzky"; }
+if( $h_ozntxt == "C_text7" ) { $h_ozntxtx="èl.III.5 Podmienený majetok"; }
+
+?>
+  <td width="40%" class="h2" >Doplòujúci text k <?php echo $h_ozntxtx;?></td>
 <FORM name="formpren" method="post" action="#">
   <td width="60%" align="right" style="font-size:14px;" >
   <a href="#" onClick="nacitajMin();" title='Naèíta všetky texty poznámok z minulého roka'>Minulý rok
