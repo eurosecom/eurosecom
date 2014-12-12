@@ -789,7 +789,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "DROP TABLE F$kli_vxcf"."_prcvykzisneg$kli_uzid ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "CREATE TABLE F$kli_vxcf"."_prcvykzisneg".$kli_uzid." SELECT * FROM F".$kli_vxcf."_prcvykziss".$kli_uzid." WHERE rdk = 0 ";
+$sqtoz = "CREATE TABLE F$kli_vxcf"."_prcvykzisneg".$kli_uzid." SELECT * FROM F".$kli_vxcf."_prcvykziss".$kli_uzid." WHERE rdk >= 0 ";
 $oznac = mysql_query("$sqtoz");
 
 //rozdel do riadkov
@@ -1054,6 +1054,8 @@ $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 "r49=r50+r51, ".
 "r45=r46+r47+r48+r49+r52+r53+r54, ".
 "r39=r40+r51, ".
+"r35=r36+r37+r38, ".
+"r31=r32+r33+r34, ".
 "r29=r30+r31+r35+r39+r42+r43+r44, ".
 "r21=r22+r23, ".
 "r15=r16+r17+r18+r19, ".
@@ -1151,6 +1153,8 @@ $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 "r49=r50+r51, ".
 "r45=r46+r47+r48+r49+r52+r53+r54, ".
 "r39=r40+r51, ".
+"r35=r36+r37+r38, ".
+"r31=r32+r33+r34, ".
 "r29=r30+r31+r35+r39+r42+r43+r44, ".
 "r21=r22+r23, ".
 "r15=r16+r17+r18+r19, ".
@@ -1199,7 +1203,10 @@ $sqtoz = "DELETE FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid WHERE LEFT(uce,1) != 5
 $oznac = mysql_query("$sqtoz");
 
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid WHERE rdk = 0 GROUP BY uce ";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid WHERE ( rdk = 0 OR rdk = 01 OR ".
+" rdk = 02 OR rdk = 10 OR rdk = 15 OR rdk = 21 OR rdk = 27 OR rdk = 28 OR rdk = 29 OR rdk = 31 OR rdk = 35 OR rdk = 39 OR rdk = 45 OR  ".
+" rdk = 49 OR rdk = 55 OR rdk = 56 OR rdk = 57 OR rdk = 61 ) ".
+" GROUP BY uce ";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
