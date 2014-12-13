@@ -789,7 +789,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "DROP TABLE F$kli_vxcf"."_prcvykzisneg$kli_uzid ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "CREATE TABLE F$kli_vxcf"."_prcvykzisneg".$kli_uzid." SELECT * FROM F".$kli_vxcf."_prcvykziss".$kli_uzid." WHERE rdk = 0 ";
+$sqtoz = "CREATE TABLE F$kli_vxcf"."_prcvykzisneg".$kli_uzid." SELECT * FROM F".$kli_vxcf."_prcvykziss".$kli_uzid." WHERE rdk >= 0 ";
 $oznac = mysql_query("$sqtoz");
 
 //rozdel do riadkov
@@ -1169,8 +1169,10 @@ $sqtoz = "DELETE FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid WHERE LEFT(uce,1) != 5
 $oznac = mysql_query("$sqtoz");
 
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid WHERE rdk = 0 GROUP BY uce ";
-
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid  WHERE ( rdk = 0 OR ".
+" rdk = 01 OR rdk = 08 OR rdk = 18 OR rdk = 19 OR rdk = 20 OR rdk = 27 OR rdk = 34 OR rdk = 35 OR ".
+" rdk = 38 ) ".
+" GROUP BY uce ";
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 

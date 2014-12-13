@@ -939,7 +939,7 @@ $rdk=$rdk+1;
 $sqtoz = "DROP TABLE F$kli_vxcf"."_prcsuvahasneg$kli_uzid ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "CREATE TABLE F$kli_vxcf"."_prcsuvahasneg".$kli_uzid." SELECT * FROM F".$kli_vxcf."_prcsuvahas".$kli_uzid." WHERE rdk = 0 ";
+$sqtoz = "CREATE TABLE F$kli_vxcf"."_prcsuvahasneg".$kli_uzid." SELECT * FROM F".$kli_vxcf."_prcsuvahas".$kli_uzid." WHERE rdk >= 0 ";
 $oznac = mysql_query("$sqtoz");
 
 //sumar za riadky
@@ -1265,7 +1265,10 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "DELETE FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE LEFT(uce,1) = 8 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE rdk = 0 GROUP BY uce ";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE ( rdk = 0 OR ".
+" rdk = 01 OR rdk = 02 OR rdk = 04 OR rdk = 09 OR rdk = 14 OR rdk = 17 OR rdk = 21 OR rdk = 24 OR rdk = 25 OR rdk = 26 OR rdk = 33 OR rdk = 34 OR ".
+" rdk = 38 ) ".
+" GROUP BY uce ";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
