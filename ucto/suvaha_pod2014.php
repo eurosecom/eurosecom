@@ -1072,7 +1072,7 @@ $rdk=$rdk+1;
 $sqtoz = "DROP TABLE F$kli_vxcf"."_prcsuvahasneg$kli_uzid ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "CREATE TABLE F$kli_vxcf"."_prcsuvahasneg".$kli_uzid." SELECT * FROM F".$kli_vxcf."_prcsuvahas".$kli_uzid." WHERE rdk = 0 ";
+$sqtoz = "CREATE TABLE F$kli_vxcf"."_prcsuvahasneg".$kli_uzid." SELECT * FROM F".$kli_vxcf."_prcsuvahas".$kli_uzid." WHERE rdk >= 0 ";
 $oznac = mysql_query("$sqtoz");
 
 //sumar za riadky
@@ -1569,7 +1569,12 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "DELETE FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE LEFT(uce,1) = 8 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE rdk = 0 GROUP BY uce ";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE ".
+" ( rdk =  0 OR rdk = 01 OR  rdk = 02 OR  rdk = 03 OR  rdk = 11 OR  rdk = 21 OR  rdk = 33 OR  rdk = 34 OR  rdk = 41 OR  rdk = 42 OR  ".
+"   rdk = 53 OR rdk = 54 OR  rdk = 66 OR  rdk = 71 OR  rdk = 74 OR  rdk = 79 OR  rdk = 80 OR  rdk = 81 OR  rdk = 87 OR  rdk = 90 OR  ".
+"   rdk = 93 OR rdk = 97 OR  rdk = 100 OR  rdk = 102 OR  rdk = 103 OR  rdk = 118 OR  rdk = 122 OR  rdk = 123 OR  ".
+"   rdk = 136 OR rdk = 141 ) ".
+" GROUP BY uce ";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
