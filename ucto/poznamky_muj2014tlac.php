@@ -155,29 +155,7 @@ var sirkawic = screen.width-10;
    if ( document.emzdy.dopoz.checked ) dopoz=1;
    window.open('../ucto/poznamky_muj2014nacitaj.php?h_mfir=' + h_mfir + '&copern=200&drupoh=1&page=1&typ=PDF&cstat=10101&vyb_ume=<?php echo $vyb_umk; ?>&dopoz=' + dopoz + '&xxc=1', '_self');
   }
-  function NacitajPol( premx )
-  {
-   var ucm1 = document.forms.enast.h_ucm1.value;
-   var ucm2 = document.forms.enast.h_ucm2.value;
-   var ucm3 = document.forms.enast.h_ucm3.value;
-   var ucm4 = document.forms.enast.h_ucm4.value;
-   var ucm5 = document.forms.enast.h_ucm5.value;
-   var ico1 = document.forms.enast.h_ico1.value;
-   var ico2 = document.forms.enast.h_ico2.value;
-   var ico3 = document.forms.enast.h_ico3.value;
-   var ico4 = document.forms.enast.h_ico4.value;
-   var ico5 = document.forms.enast.h_ico5.value;
-   var premenna = premx;
-   var zmd = 0; if ( document.enast.zmd.checked ) zmd=1;
-   var zdl = 0; if ( document.enast.zdl.checked ) zdl=1;
-   var omd = 0; if ( document.enast.omd.checked ) omd=1;
-   var odl = 0; if ( document.enast.odl.checked ) odl=1;
-   var pmd = 0; if ( document.enast.pmd.checked ) pmd=1;
-   var pdl = 0; if ( document.enast.pdl.checked ) pdl=1;
-   var mnl = 0; if ( document.enast.mnl.checked ) mnl=1;
 
-   window.open('../ucto/poznamky_muj2014nacitaj.php?h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&mnl=' + mnl + '&premenna=' + premenna + '&copern=900&drupoh=1&page=1&strana=<?php echo $strana; ?>', '_self');
-  }
 
   function UrobSubor()
   {
@@ -190,10 +168,15 @@ var sirkawic = screen.width-10;
    if ( document.emzdy.dopoz.checked ) dopoz=1;
    window.open('../ucto/poznamky_muj2014nacitaj.php?copern=' + riadok + '&drupoh=1&page=1&dopoz=' + dopoz + '&xxc=1', '_self');
   }
+
+  function obnovUI()
+  {
+  document.emzdy.dopoz.checked="true";
+  }
+
 </script>
-<script type="text/javascript" src="poznamky_po2011js.js"></script>
 </HEAD>
-<BODY>
+<BODY onload="obnovUI();">
 
 <!-- zahlavie -->
 <div id="wrap-heading">
