@@ -1797,7 +1797,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD pzthvd6 DECIMAL(10,2) DEF
 $vysledek = mysql_query("$sql");
 }
 //zmeny pre rok 2014
-$sql = "SELECT vpdu FROM F".$kli_vxcf."_mzdpriznanie_foa";
+$sql = "SELECT vpdu FROM F".$kli_vxcf."_mzdpriznanie_fob";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
