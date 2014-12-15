@@ -1,3 +1,4 @@
+<!doctype html>
 <HTML>
 <?php
 //celkovy zaciatok dokumentu
@@ -61,147 +62,127 @@ if ( $strana == 0 ) $strana=1;
 $urobxml = 1*$_REQUEST['urobxml'];
 
 //$strana=25;
-
-$dopoz = 1*$_REQUEST['dopoz'];
-if ( $copern == 1 ) $dopoz=1;
+//$dopoz = 1*$_REQUEST['dopoz'];
+//if ( $copern == 1 ) $dopoz=1;
 
 $no="";
 
 $h_drp = $_REQUEST['h_drp'];
 $h_zos = $_REQUEST['h_zos'];
 $h_sch = $_REQUEST['h_sch'];
-
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
-  <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>Poznámky PO 2013</title>
-
+ <link rel="stylesheet" href="../css/reset.css">
+ <link rel="stylesheet" href="../css/tlaciva.css">
+<title>Poznámky MUJ 2014 | EuroSecom</title>
+<style>
+div.form-background {
+  overflow: hidden;
+  width: 950px;
+  height: 300px;
+  background-color: #fff;
+}
+img.robot {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  display: block;
+  width: 92px;
+  height: 137px;
+  cursor: pointer;
+}
+ul.robot-menu {
+  position: absolute;
+  top: 80px;
+  left: 70px;
+  padding: 2px 3px;
+  background-color: #ffff90;
+  border: 2px outset #dbdbdb;
+}
+ul.robot-menu > li {
+  font-size: 12px;
+  background-color: #fff;
+  padding: 8px 6px;
+  border-top: 2px solid #ffff90;
+  overflow: auto;
+}
+ul.robot-menu input[type=text] {
+  position: static;
+  width: 40px;
+  font-size: 14px;
+  line-height: 14px;
+  height: 14px;
+  padding: 3px 3px;
+}
+ul.robot-menu > li > a {
+  color: #39f;
+  font-size: 12px;
+}
+ul.robot-menu > li > a:hover {
+  text-decoration: underline;
+}
+a.btn-file-do {
+  display: block;
+  font-size: 12px;
+  color: #fff !important;
+  background-color: #39f;
+  padding: 6px 14px;
+  border-radius: 2px;
+  opacity: 0.8;
+}
+a.btn-file-do:hover {
+  text-decoration: none !important;
+  opacity: 1;
+}
+img.btn-menu-cancel-old {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+</style>
 <script type="text/javascript">
 //sirka a vyska okna
 var sirkawin = screen.width-10;
 var vyskawin = screen.height-175;
 var vyskawic = screen.height;
 var sirkawic = screen.width-10;
-</script>
-<script type='text/javascript'>
-                    
-                    
-  function ukazrobot()
-  {                 
-  <?php echo "robotokno.style.display=''; robotmenu.style.display='none';";  ?>
-  myRobot = document.getElementById("robotokno");
-  myRobotmenu = document.getElementById("robotmenu");
-  myRobot.style.top = toprobot;
-  myRobot.style.left = leftrobot;
-  myRobotmenu.style.top = toprobotmenu;
-  myRobotmenu.style.left = leftrobotmenu;
-  }                 
-                    
-  function zhasnirobot()
-  {                 
-  robotokno.style.display='none';
-  robotmenu.style.display='none';
-  }                 
-                    
-  function zobraz_robotmenu()
-  {                 
-  myRobotmenu.style.width = widthrobotmenu;
-  myRobotmenu.innerHTML = htmlmenu;
-  robotmenu.style.display='';
-<?php if( $dopoz == 1 ) { ?>
-  document.emzdy.dopoz.checked = "checked";
-<?php                   } ?>
-  }                 
-                    
-  function zhasni_menurobot()
-  {                 
-   robotmenu.style.display='none';
-  }                 
-                    
-function NacitajMzdy()
-                {
-var h_mfir = document.forms.emzdy.h_mfir.value;
-var dopoz = 0;
-if( document.emzdy.dopoz.checked ) dopoz=1;
 
-window.open('../ucto/poznamky_muj2014nacitaj.php?h_mfir=' + h_mfir + '&copern=200&drupoh=1&page=1&typ=PDF&cstat=10101&vyb_ume=<?php echo $vyb_umk; ?>&dopoz=' + dopoz + '&xxc=1', '_self' );
-                }
+  function NacitajMzdy()
+  {
+   var h_mfir = document.forms.emzdy.h_mfir.value;
+   var dopoz = 0;
+   if ( document.emzdy.dopoz.checked ) dopoz=1;
+   window.open('../ucto/poznamky_muj2014nacitaj.php?h_mfir=' + h_mfir + '&copern=200&drupoh=1&page=1&typ=PDF&cstat=10101&vyb_ume=<?php echo $vyb_umk; ?>&dopoz=' + dopoz + '&xxc=1', '_self');
+  }
+  function NacitajPol( premx )
+  {
+   var ucm1 = document.forms.enast.h_ucm1.value;
+   var ucm2 = document.forms.enast.h_ucm2.value;
+   var ucm3 = document.forms.enast.h_ucm3.value;
+   var ucm4 = document.forms.enast.h_ucm4.value;
+   var ucm5 = document.forms.enast.h_ucm5.value;
+   var ico1 = document.forms.enast.h_ico1.value;
+   var ico2 = document.forms.enast.h_ico2.value;
+   var ico3 = document.forms.enast.h_ico3.value;
+   var ico4 = document.forms.enast.h_ico4.value;
+   var ico5 = document.forms.enast.h_ico5.value;
+   var premenna = premx;
+   var zmd = 0; if ( document.enast.zmd.checked ) zmd=1;
+   var zdl = 0; if ( document.enast.zdl.checked ) zdl=1;
+   var omd = 0; if ( document.enast.omd.checked ) omd=1;
+   var odl = 0; if ( document.enast.odl.checked ) odl=1;
+   var pmd = 0; if ( document.enast.pmd.checked ) pmd=1;
+   var pdl = 0; if ( document.enast.pdl.checked ) pdl=1;
+   var mnl = 0; if ( document.enast.mnl.checked ) mnl=1;
 
+   window.open('../ucto/poznamky_muj2014nacitaj.php?h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&mnl=' + mnl + '&premenna=' + premenna + '&copern=900&drupoh=1&page=1&strana=<?php echo $strana; ?>', '_self');
+  }
 
-function NacitajPol( premx )
-                {
-var ucm1 = document.forms.enast.h_ucm1.value;
-var ucm2 = document.forms.enast.h_ucm2.value;
-var ucm3 = document.forms.enast.h_ucm3.value;
-var ucm4 = document.forms.enast.h_ucm4.value;
-var ucm5 = document.forms.enast.h_ucm5.value;
-var ico1 = document.forms.enast.h_ico1.value;
-var ico2 = document.forms.enast.h_ico2.value;
-var ico3 = document.forms.enast.h_ico3.value;
-var ico4 = document.forms.enast.h_ico4.value;
-var ico5 = document.forms.enast.h_ico5.value;
-var premenna = premx;
-var zmd = 0;
-if( document.enast.zmd.checked ) zmd=1;
-var zdl = 0;
-if( document.enast.zdl.checked ) zdl=1;
-var omd = 0;
-if( document.enast.omd.checked ) omd=1;
-var odl = 0;
-if( document.enast.odl.checked ) odl=1;
-var pmd = 0;
-if( document.enast.pmd.checked ) pmd=1;
-var pdl = 0;
-if( document.enast.pdl.checked ) pdl=1;
-var mnl = 0;
-if( document.enast.mnl.checked ) mnl=1;
-
-window.open('../ucto/poznamky_muj2014nacitaj.php?h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&mnl=' + mnl + '&premenna=' + premenna + '&copern=900&drupoh=1&page=1&strana=<?php echo $strana; ?>', '_self' );
-                }
-
-function UrobSubor()
-                {
-window.open('../ucto/poznamky_muj2014nacitaj.php?&copern=901&drupoh=1&page=1&strana=<?php echo $strana; ?>&dopoz=1', '_self' );
-                }
-
-
-
-
-//robotmenu
-
-    var toprobot = 200;
-    var leftrobot = 40;
-    var toprobotmenu = 160;
-    var leftrobotmenu = 100;
-    var widthrobotmenu = 600;
-                    
-    var htmlmenu = "<FORM name='emzdy' method='post' action='#' ><table  class='ponuka' width='100%'><tr><td width='80%'>Menu EkoRobot</td>" +
-    "<td width='20%' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;' onClick='zhasni_menurobot();' alt='Zhasni menu' ></td></tr>";  
-                     
-
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
-htmlmenu += "<a href=\"#\" onClick=\"NacitajHodnotu( 402 );\">" +
-"Chcete načítať údaje o záväzkoch zo saldokonta ?</a>";
-    htmlmenu += "</td></tr>"; 
-
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
-htmlmenu += "<a href=\"#\" onClick=\"NacitajHodnotu( 999 );\">" +
-"Chcete načítať údaje o bezprostredne predchádzajúcom období z Poznámok PO 2013 z firmy minulého roka ?</a>";
-    htmlmenu += "</td></tr>";
-                    
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>";
-htmlmenu += "<a href=\"#\" onClick=\"NacitajMzdy();\">" +
-"Chcete načítať údaje o počte zamestnancov z miezd firma číslo</a> ";
-    htmlmenu += "<input type='text' name='h_mfir' id='h_mfir' size='2' maxlenght='4' value='<?php echo $kli_vxcf; ?>' >"; 
-    htmlmenu += " ?</td></tr>";
-
-    htmlmenu += "<tr><td class='ponuka' colspan='1'>"; 
-    htmlmenu += " <img border=0 src='../obr/zoznam.png' style='width:15; height:15;' onClick='UrobSubor();' alt='Vytvorenie súboru, z ktorého načítate hodnoty (stačí jeden krát kliknúť)' > Súbor"; 
-    htmlmenu += "<td class='ponuka' colspan='1'>Po načítaní naspäť <input type='checkbox' name='dopoz' value='1' >"; 
-    htmlmenu += " </td></tr>";
-
-    htmlmenu += "</table></FORM>"; 
+  function UrobSubor()
+  {
+   window.open('../ucto/poznamky_muj2014nacitaj.php?&copern=901&drupoh=1&page=1&strana=<?php echo $strana; ?>&dopoz=1', '_self');
+  }
 
   function NacitajHodnotu( riadok )
   {
@@ -212,45 +193,59 @@ htmlmenu += "<a href=\"#\" onClick=\"NacitajMzdy();\">" +
 </script>
 <script type="text/javascript" src="poznamky_po2011js.js"></script>
 </HEAD>
-<BODY class="white" onload="<?php if( $copern == 1 ) { echo 'ukazrobot();'; } ?>
-<?php if( $copern == 1 AND $dopoz == 1 ) { echo ' zobraz_robotmenu();'; } ?>"  >
-<table class="h2" width="100%" >
-<tr>
-  <td>EuroSecom  -  Poznámky MUJ v.2014 </td>
-  <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
-</tr>
-</table>
+<BODY>
 
-<div id="robotokno" style="cursor: hand; display: none; position: absolute; z-index: 200; top: 200; left: 40; width:60; height:100;">
-<img border=0 src='../obr/robot/robot3.jpg' style='' onClick="zobraz_robotmenu();"
- alt='Dobrý deň , ja som Váš EkoRobot , ak máte otázku alebo nejaké želanie kliknite na mňa prosím 1x myšou' >
-<img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;' onClick="zhasnirobot();"
- alt='Zhasni EkoRobota' >
-</div>
-<div id="robotmenu" style="cursor: hand; display: none; position: absolute; z-index: 300; top: 160; left: 90; width:200; height:100;">
-zobrazene menu
+<!-- zahlavie -->
+<div id="wrap-heading">
+ <table id="heading">
+  <tr>
+   <td class="ilogin">EuroSecom</td>
+   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
+  </tr>
+  <tr>
+   <td class="header">Poznámky k účtovnej závierke MUJ 2014 - <span class="subheader">načítanie</span></td>
+   <td>
+    <div class="bar-btn-form-tool"></div>
+   </td>
+  </tr>
+ </table>
 </div>
 
-<?php
-//nacitaj
-if ( $copern == 1  )
-        {
-?>  
-<table class="thead" width="100%">
-<FORM name="formv1" method="post" action="#" >
-<tr>
-  <td class="bmenu"  align="right"></td>
-  <td class="bmenu" ><input type="hidden" name="m405r41" id="m405r41" size="55"  /></td>
-</tr>
+<div id="content">
+<div class="form-background">
+ <img src='../obr/robot/robot3.jpg' onclick="robotmenu.style.display='block';"
+  alt='Dobrý deň, som Váš EkoRobot' class="robot">
+
+<!-- menu ekorobota -->
+<FORM name='emzdy' method='post' action='#'>
+ <ul id="robotmenu" class="robot-menu">
+ <li style="background-color:#ffff90; padding:4px 0 2px 0; text-align:right; display:none;">
+  <img src='../obr/zmazuplne.png' onclick="robotmenu.style.display='none';" title='Zavrieť'
+   class="btn-menu-cancel-old">
+ </li>
+ <li>
+  <a href="#" onclick="NacitajMzdy();">Načítať údaje o <strong>počte zamestnancov</strong> z firmy číslo</a>
+  <input type='text' name='h_mfir' id='h_mfir' maxlength='4' value='<?php echo $kli_vxcf; ?>'>
+ </li>
+ <li>
+  <a href="#" onclick="NacitajHodnotu( 402 );">Načítať údaje o <strong>záväzkoch</strong> zo saldokonta</a>
+ </li>
+ <li>
+  <a href="#" onclick="NacitajHodnotu( 999 );">Načítať <strong>minulý rok</strong> z Poznámok PO 2013</a>
+ </li>
+ <li>
+  <a href="#" onclick='UrobSubor();' title='Vytvoriť súbor pre načítanie (jeden krát kliknúť)'
+   class="btn-file-do toleft">Súbor</a>
+  <div class="toright" style="width:120px;">Po načítaní naspäť<br>
+   <input type='checkbox' name='dopoz' value='1'>
+  </div>
+ </li>
+ </ul>
 </FORM>
-<?php
-//koniec nacitaj
-        }
-?> 
 
-    
-<table class="thead" width="100%">
-<FORM name="formv1" class="obyc" method="post" action="statistika_r101.php?copern=3&strana=<?php echo "$strana";?>" >
+</div>
+</div> <!-- koniec #content -->
+
 
 <?php
 //zostava PDF
