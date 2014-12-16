@@ -1464,11 +1464,6 @@ if ( $copern == 1 )
    window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=&h_sch=&h_drp=1&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
 '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-  function TlacPoznamkyMUJ2014strana( strana )
-  {
-   window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=&h_sch=&h_drp=1&copern=10&drupoh=1&page=' + strana + '&strana=' + strana + '&subor=0',
-'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
   function upravtext( oscx )
   {
    var h_osc = oscx;
@@ -1497,15 +1492,8 @@ if ( $copern == 1 )
    <td class="header">Poznámky k úètovnej závierke MUJ 2014</td>
    <td>
     <div class="bar-btn-form-tool">
-     <img src="../obr/ikony/info_blue_icon.png" onclick=";" title="Pouèenie na vyplnenie" class="btn-form-tool">
-
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacPoznamkyMUJ2014();"
       title="Zobrazi všetky strany v PDF" class="btn-form-tool">
-<?php
-$stranaxx=$strana+1;
-?>
-<a href="#" onClick="TlacPoznamkyMUJ2014strana(<?php echo $stranaxx; ?>);">
-<img src='../obr/tlac.png' width=15 height=15 border=0 title="Vytlaèi vo formáte PDF" ></a>
     </div>
    </td>
   </tr>
