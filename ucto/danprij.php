@@ -118,7 +118,8 @@ $rokdppo=$kli_vrok;
 if( $rokdppo < 2011 ) { $rokdppo="";  }
 if( $rokdppo == 2011 ) { $rokdppo="2011";  }
 if( $rokdppo == 2012 ) { $rokdppo="2012";  }
-if( $rokdppo >= 2013 ) { $rokdppo="2013";  }
+if( $rokdppo == 2013 ) { $rokdppo="2013";  }
+if( $rokdppo >= 2014 ) { $rokdppo="2014";  }
 ?>
 
 function TlacPriznanie()
@@ -1108,7 +1109,7 @@ window.open('../ucto/poznamky_muj2014.php?copern=1&drupoh=1&page=1',
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
 <td class="bmenu" width="2%"></td>
-<td class="bmenu" width="56%">Poznámky Úè MUJ 3 - 04 k DPPO verzia 2014 
+<td class="bmenu" width="56%">Poznámky Úè MUJ 3 - 01 k DPPO verzia 2014 
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
@@ -1533,7 +1534,7 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
 <td class="bmenu" width="2%"></td>
-<td class="bmenu" width="56%">Poznámky Úc POD 3 - 04 k DPPO verzia 2013
+<td class="bmenu" width="56%">Poznámky Úè POD 3 - 01 k DPPO verzia 2013
  <a href="#" onClick="NechcemStranyPOD2013();">
 <img src='../obr/zmaz.png' width=20 height=15 border=0 title='Netlaèi stranu XY Poznámok POD 2013' ></a>
 </td>
