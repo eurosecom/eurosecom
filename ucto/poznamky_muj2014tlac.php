@@ -192,6 +192,10 @@ var sirkawic = screen.width-10;
  </table>
 </div>
 
+<?php
+if ( $copern != 10 )
+     {
+?>
 <div id="content">
 <div class="form-background">
  <img src='../obr/robot/robot3.jpg' onclick="robotmenu.style.display='block';"
@@ -226,7 +230,9 @@ var sirkawic = screen.width-10;
 
 </div>
 </div> <!-- koniec #content -->
-
+<?php
+     }
+?>
 
 <?php
 //zostava PDF
