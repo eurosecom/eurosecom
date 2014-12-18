@@ -1850,10 +1850,29 @@ if ( $jepotvrd == 0 ) $subor=1;
 //pre rocne vytvor pracovny subor
 if ( $subor == 1 )
 {
+//zober data z kun
+//dopyta, m· tu v˝znam, neùah·m niË z mzdkun
+$sql = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_oc";
+$sqldok = mysql_query("$sql");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $meno=$riaddok->meno;
+  $prie=$riaddok->prie;
+  $titl=$riaddok->titl;
+  $zuli=$riaddok->zuli;
+  $zcdm=$riaddok->zcdm;
+  $zpsc=$riaddok->zpsc;
+  $zmes=$riaddok->zmes;
+  $ztel=$riaddok->ztel;
+  $rdc=$riaddok->rdc;
+  $rdk=$riaddok->rdk;
+  $dar=$riaddok->dar;
+  }
 
 $ttvv = "INSERT INTO F$kli_vxcf"."_mzdprcvypl$kli_uzid ".
 " ( druh,oc,dmeno,dprie,dtitl,rdc,rdk,dar,duli,dcdm,dpsc,dmes,dtel ) VALUES ".
-" ( 1, '$cislo_oc', '', '', '', '', '', '', '', '', '', '', '' )";
+" ( 1, '$cislo_oc', '$meno', '$prie', '$titl', '$rdc', '$rdk', '$dar', '$zuli', '$zcdm', '$zpsc', '$zmes', '$ztel' )";
 $ttqq = mysql_query("$ttvv");
 
 //uloz do priznania
@@ -1867,7 +1886,13 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdpriznanie_fob".
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
-
+  if ( $nasielvyplnene == 1 )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r00z2='$xr00z2', r00a2='$xr00a2', r04a2='$xr04a2', r04b='$xr04b', ".
+" r04c2='$xr04c2', r04d='$xr04d', r04e='$xr04e', r11b='$xr11b', r14b='$xr14b', r15b='$xr15b', vyk='$xvyk'  WHERE oc = $cislo_oc ";
+//echo $sqtoz;
+//$oznac = mysql_query("$sqtoz");
+  }
 }
 //koniec pracovneho suboru pre rocne
 
@@ -2610,7 +2635,7 @@ mysql_free_result($fir_vysledok);
 
 //FO - priezvisko,meno,tituly a trvaly pobyt z ufirdalsie
 //dopyta, mÙûete rozchodiù bez "c" na konci pri $sqlc, vysledokc, riadokc a {}
-$sqlc = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
+$sqlc = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE icox = 0";
 $vysledokc = mysql_query($sqlc);
 if ( $vysledokc )
      {
