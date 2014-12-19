@@ -1492,6 +1492,9 @@ if ( $copern == 1 )
    <td class="header">Poznámky k úètovnej závierke MUJ 2014</td>
    <td>
     <div class="bar-btn-form-tool">
+     <img src="../obr/ikony/printer_blue_icon.png" onclick=";"
+      title="Zobrazi všetky - bez prvej strany - v PDF" class="btn-form-tool"
+      style="width:16px; height:16px; margin-top:2px;">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacPoznamkyMUJ2014();"
       title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
@@ -1549,12 +1552,13 @@ $source="../ucto/poznamky_muj2014.php?copern=1";
 <h2 class="section-subheader"><span>èl.I.1</span>Názov právnickej osoby (PO) / meno a priezvisko fyzickej osoby (FO) a jej sídlo / adresa</h2>
 <?php
 $nazovsidlo=$fir_fnaz.", ".$fir_fuli." ".$fir_fcdm.", ".$fir_fmes.", ".$fir_fpsc;
-if ( $fir_uctt03 == 999 ) {
+if ( $fir_uctt03 == 999 )
+{
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 $nazovsidlo=$fir_riadok->dmeno." ".$fir_riadok->dprie;
-                          }
+}
 ?>
 <span class="section-echo"><?php echo $nazovsidlo; ?></span>
 
