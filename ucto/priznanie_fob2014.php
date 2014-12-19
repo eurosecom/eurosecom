@@ -2610,22 +2610,22 @@ mysql_free_result($fir_vysledok);
 
 //FO - priezvisko,meno,tituly a trvaly pobyt z ufirdalsie
 //dopyta, môžete rozchodi bez "c" na konci pri $sqlc, vysledokc, riadokc a {}
-$sqlc = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
-$vysledokc = mysql_query($sqlc);
-if ( $vysledokc )
+$sql = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
+$vysledok = mysql_query($sql);
+if ( $vysledok )
      {
-$riadokc=mysql_fetch_object($vysledokc);
-$dprie = $riadokc->dprie;
-$dmeno = $riadokc->dmeno;
-$dtitl = $riadokc->dtitl;
-$dtitz = $riadokc->dtitz;
-$duli = $riadokc->duli;
-$dcdm = $riadokc->dcdm;
-$dpsc = $riadokc->dpsc;
-$dmes = $riadokc->dmes;
-$dstat = $riadokc->dstat;
-$dtel = $riadokc->dtel;
-$dfax = $riadokc->dfax;
+$riadok=mysql_fetch_object($vysledok);
+$dprie = $riadok->dprie;
+$dmeno = $riadok->dmeno;
+$dtitl = $riadok->dtitl;
+$dtitz = $riadok->dtitz;
+$duli = $riadok->duli;
+$dcdm = $riadok->dcdm;
+$dpsc = $riadok->dpsc;
+$dmes = $riadok->dmes;
+$dstat = $riadok->dstat;
+$dtel = $riadok->dtel;
+$dfax = $riadok->dfax;
      }
 ?>
 <HEAD>
@@ -6159,7 +6159,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,8," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r52;
-if ( $hodx == 0 ) $hodx="000";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -6745,7 +6745,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r55;
-if ( $hodx == 0 ) $hodx="000";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -7957,7 +7957,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r79;
-if ( $hodx == 0 ) $hodx="000";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -7979,7 +7979,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r80;
-if ( $hodx == 0 ) $hodx="";
+if ( $hodx == 0 ) $hodx="000";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -8001,7 +8001,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r81;
-if ( $hodx == 0 ) $hodx="";
+if ( $hodx == 0 ) $hodx="000";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -8092,7 +8092,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,5," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r85;
-if ( $hodx == 0 ) $hodx="000";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -8114,7 +8114,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,5," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r86;
-if ( $hodx == 0 ) $hodx="000";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -8180,7 +8180,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,4," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r89;
-if ( $hodx == 0 ) $hodx="000";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -8290,7 +8290,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,6," ","$rmc1",1,"L");
 $text="012345";
 $hodx=100*$hlavicka->r94;
-if ( $hodx == 0 ) $hodx="";
+if ( $hodx == 0 ) $hodx="000";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -8312,7 +8312,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $text="012345";
 $hodx=100*$hlavicka->r95;
-if ( $hodx == 0 ) $hodx="000";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -8334,7 +8334,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $text="012345";
 $hodx=100*$hlavicka->r96;
-if ( $hodx == 0 ) $hodx="";
+if ( $hodx == 0 ) $hodx="000";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -8434,7 +8434,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r99;
-if ( $hodx == 0 ) $hodx="000"; //dopyta, má význam?
+if ( $hodx == 0 ) $hodx=""; //dopyta, má význam?
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -8478,7 +8478,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r101;
-if ( $hodx == 0 ) $hodx="000"; //dopyt, má význam
+if ( $hodx == 0 ) $hodx=""; //dopyt, má význam
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -8656,6 +8656,7 @@ $pdf->Cell(190,5," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r109;
 if ( $hodx == 0 ) $hodx="";
+if ( $hodx == 0 AND $hlavicka->r110 == 0 ) $hodx="000";
 $text=sprintf("% 10s",$hodx);
 $znamienko="";
 $t01=substr($text,0,1);
