@@ -2609,7 +2609,6 @@ mysql_free_result($fir_vysledok);
 //koniec nacitania
 
 //FO - priezvisko,meno,tituly a trvaly pobyt z ufirdalsie
-//dopyta, mÙûete rozchodiù bez "c" na konci pri $sqlc, vysledokc, riadokc a {}
 $sql = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
 $vysledok = mysql_query($sql);
 if ( $vysledok )
@@ -3239,7 +3238,7 @@ if ( $prepocitaj == 0 ) { $prepocitaj=1; }
  <div class="alert-pocitam"><?php echo "$alertprepocet";?></div>
 </div>
 
-<?php if ( $strana == 1 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 1 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str1.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 1.strana 282kB" class="form-background">
 
 <span class="text-echo" style="top:258px; left:57px;"><?php echo $fir_fdic;?></span>
@@ -3309,10 +3308,10 @@ $sn1c=substr($sknacec,0,1);
 <!-- telefon a fax FO -->
 <div class="input-echo" style="width:290px; top:1022px; left:52px;"><?php echo $dtel; ?></div>
 <div class="input-echo" style="width:521px; top:1022px; left:373px;"><?php echo $fir_fem1; ?></div>
-<?php                                        } ?>
+<?php                     } ?>
 
 
-<?php if ( $strana == 2 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 2 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str2.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 2.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
@@ -3395,10 +3394,10 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r34a" id="r34a" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:1080px; left:501px;"/>
 <input type="text" name="r35" id="r35" onkeyup="CiarkaNaBodku(this);" style="width:175px; top:1119px; left:568px;"/>
 <input type="text" name="r36" id="r36" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:1158px; left:501px;"/>
-<?php                                        } ?>
+<?php                     } ?>
 
 
-<?php if ( $strana == 3 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 3 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str3.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 3.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
@@ -3455,10 +3454,10 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="t1ak2" id="t1ak2" onkeyup="CiarkaNaBodku(this);" style="width:233px; top:1175px; left:660px;"/>
 <input type="text" name="t1az3" id="t1az3" onkeyup="CiarkaNaBodku(this);" style="width:233px; top:1215px; left:410px;"/>
 <input type="text" name="t1ak3" id="t1ak3" onkeyup="CiarkaNaBodku(this);" style="width:233px; top:1215px; left:660px;"/>
-<?php                                        } ?>
+<?php                     } ?>
 
 
-<?php if ( $strana == 4 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 4 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str4.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 4.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
@@ -3487,10 +3486,10 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r47" id="r47" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:1140px; left:500px;"/>
 <input type="text" name="r48" id="r48" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:1179px; left:500px;"/>
 <input type="text" name="r49" id="r49" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:1218px; left:500px;"/>
-<?php                                        } ?>
+<?php                     } ?>
 
 
-<?php if ( $strana == 5 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 5 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str5.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 5.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
@@ -3524,10 +3523,10 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="t2p11" id="t2p11" onkeyup="CiarkaNaBodku(this);" style="width:233px; top:998px; left:410px;"/>
 <input type="text" name="t2v11" id="t2v11" onkeyup="CiarkaNaBodku(this);" style="width:233px; top:998px; left:660px;"/>
 <input type="text" name="t2p12" id="t2p12" onkeyup="CiarkaNaBodku(this);" style="width:233px; top:1048px; left:410px;"/>
-<?php                                        } ?>
+<?php                     } ?>
 
 
-<?php if ( $strana == 6 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 6 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str6.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 6.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
@@ -3565,10 +3564,10 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="t3p13" id="t3p13" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:952px; left:411px;"/>
 <input type="text" name="t3p14" id="t3p14" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:998px; left:411px;"/>
 <input type="text" name="t3v14" id="t3v14" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:998px; left:661px;"/>
-<?php                                        } ?>
+<?php                     } ?>
 
 
-<?php if ( $strana == 7 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 7 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str7.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 7.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
@@ -3592,10 +3591,10 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r70" id="r70" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:1132px; left:506px;"/>
 <input type="text" name="r71" id="r71" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:1178px; left:506px;"/>
 <input type="text" name="r72" id="r72" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1218px; left:506px;"/>
-<?php                                        } ?>
+<?php                     } ?>
 
 
-<?php if ( $strana == 8 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 8 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str8.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 8.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
@@ -3631,10 +3630,10 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r95" id="r95" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:1144px; left:580px;"/>
 <input type="text" name="r96" id="r96" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1183px; left:488px;"/>
 <input type="text" name="r97" id="r97" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:1223px; left:580px;"/>
-<?php                                        } ?>
+<?php                     } ?>
 
 
-<?php if ( $strana == 9 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 9 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str9.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 9.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
@@ -3652,10 +3651,10 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r108" id="r108" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:521px; left:493px;"/>
 <input type="text" name="r109" id="r109" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:568px; left:493px;"/>
 <input type="text" name="r110" id="r110" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:621px; left:493px;"/>
-<?php                                        } ?>
+<?php                     } ?>
 
 
-<?php if ( $strana == 10 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 10 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str10.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 10.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
@@ -3686,10 +3685,10 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="pcdm" id="pcdm" style="width:175px; top:1049px; left:718px;"/>
 <input type="text" name="ppsc" id="ppsc" style="width:106px; top:1103px; left:51px;"/>
 <input type="text" name="pmes" id="pmes" style="width:703px; top:1103px; left:190px;"/>
-<?php                                         } ?>
+<?php                      } ?>
 
 
-<?php if ( $strana == 11 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 11 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str11.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 11.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
@@ -3762,10 +3761,10 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="uceb" id="uceb" style="width:381px; top:1146px; left:59px;"/>
 <input type="text" name="numb" id="numb" style="width:81px; top:1146px; left:483px;"/>
 <input type="text" name="da2" id="da2" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:1206px; left:116px;"/>
-<?php                                         } ?>
+<?php                      } ?>
 
 
-<?php if ( $strana == 12 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 12 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str12.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 12.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
@@ -3791,9 +3790,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="checkbox" name="vpdu" value="1" style="top:1130px; left:61px;"/>
 
 <input type="text" name="szdat" id="szdat" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:1194px; left:115px;"/>
-<?php                                         } ?>
-
-
+<?php                      } ?>
 
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1&prepocitaj=101', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
@@ -5858,7 +5855,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r40;
-if ( $hodx < 0 ) $hodx=-$hodx; //dopyt, m· v˝znam, keÔ je "-" na zaËiatku riadku?
+if ( $hodx < 0 ) $hodx=-$hodx;
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
@@ -5947,7 +5944,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(190,4," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r44;
-if ( $hodx < 0 ) $hodx=-$hodx; //dopyt, m· v˝znam, keÔ je "-" na zaËiatku riadku?
+if ( $hodx < 0 ) $hodx=-$hodx;
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
@@ -6059,7 +6056,7 @@ $pdf->Cell(190,2," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r49;
 if ( $hodx == 0 ) $hodx="";
-if ( $hodx < 0 ) $hodx=-$hodx; //dopyt, m· v˝znam, keÔ je "-" na zaËiatku riadku?
+if ( $hodx < 0 ) $hodx=-$hodx;
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -8658,7 +8655,6 @@ $hodx=100*$hlavicka->r109;
 if ( $hodx == 0 ) $hodx="";
 if ( $hodx == 0 AND $hlavicka->r110 == 0 ) $hodx="000";
 $text=sprintf("% 10s",$hodx);
-$znamienko="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
