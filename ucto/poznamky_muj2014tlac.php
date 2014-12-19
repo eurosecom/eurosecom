@@ -266,8 +266,9 @@ $j=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
+$bez1 = 1*$_REQUEST['bez1'];
 //strana 1
-if ( $strana == 9999 ) {
+if ( $strana == 9999 AND $bez1 == 0 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);

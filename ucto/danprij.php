@@ -894,6 +894,38 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 <?php                           } ?>
 <?php //koniec POD 2014           ?>
 
+<?php if( $kli_vrok >= 2013 ) { ?>
+<table class="vstup" width="100%" >
+<FORM name="formpoz13" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacPoznamky2013();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
+</td>
+<td class="bmenu" width="2%"></td>
+<td class="bmenu" width="56%">Poznámky Úè POD 3 - 01 k DPPO verzia 2013
+ <a href="#" onClick="NechcemStranyPOD2013();">
+<img src='../obr/zmaz.png' width=20 height=15 border=0 title='Netlaèi stranu XY Poznámok POD 2013' ></a>
+</td>
+<td class="bmenu" width="36%">
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
+ Zostavené: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválené: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+<a href="#" onClick="NacitajPoznamky2013();">
+<img src='../obr/vlozit.png' width=20 height=15 border=0 title='Naèíta údaje do poznámok 2013' ></a>
+</td>
+
+<td class="bmenu" width="2%" align="right">
+<img src='../obr/export.png' onclick='Poznamky2013doxml()' width=20 height=15 border=0 title='export pre elektronické komunikáciu' >
+</td>
+<td class="bmenu" width="2%" align="right">
+<a href="#" onClick="UpravPoznamky2013();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty v poznámkach' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+<?php                         } ?>
 
 <?php //MUJ 2014                  ?>
 <?php if( $kli_vrok >= 2013 AND $ajmuj == 1 )   { ?>
@@ -1525,38 +1557,7 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 </FORM>
 </table>
 <?php                         } ?>
-<?php if( $kli_vrok >= 2013 ) { ?>
-<table class="vstup" width="100%" >
-<FORM name="formpoz13" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacPoznamky2013();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="2%"></td>
-<td class="bmenu" width="56%">Poznámky Úè POD 3 - 01 k DPPO verzia 2013
- <a href="#" onClick="NechcemStranyPOD2013();">
-<img src='../obr/zmaz.png' width=20 height=15 border=0 title='Netlaèi stranu XY Poznámok POD 2013' ></a>
-</td>
-<td class="bmenu" width="36%">
-<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavené: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválené: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
-<a href="#" onClick="NacitajPoznamky2013();">
-<img src='../obr/vlozit.png' width=20 height=15 border=0 title='Naèíta údaje do poznámok 2013' ></a>
-</td>
 
-<td class="bmenu" width="2%" align="right">
-<img src='../obr/export.png' onclick='Poznamky2013doxml()' width=20 height=15 border=0 title='export pre elektronické komunikáciu' >
-</td>
-<td class="bmenu" width="2%" align="right">
-<a href="#" onClick="UpravPoznamky2013();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty v poznámkach' ></a>
-</td>
-</tr>
-</FORM>
-</table>
-<?php                         } ?>
 
 
 <?php if( $kli_nezis ==    1 ) { ?>
