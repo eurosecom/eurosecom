@@ -16232,11 +16232,17 @@ window.open('../ucto/poznamky_po2013nacitaj.php?copern=1999&stranax=' + strana +
 
   function TlacPoznamky2013()
   {
-   var h_zos = document.forms.formpoz13.h_zos.value;
-   var h_sch = document.forms.formpoz13.h_sch.value;
-   window.open('../ucto/poznamky_po2013tlac.php?cislo_oc=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+   window.open('../ucto/poznamky_po2013tlac.php?cislo_oc=0&h_zos=&h_sch=&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
 '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
+
+  function TlacPoznamky2013bez1()
+  {
+   window.open('../ucto/poznamky_po2013tlac.php?cislo_oc=0&h_zos=&h_sch=&copern=10&drupoh=1&page=9999&strana=9999&subor=0&bez1=1',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+
+
 </script>
 
 </HEAD>
@@ -16251,7 +16257,7 @@ window.open('../ucto/poznamky_po2013nacitaj.php?copern=1999&stranax=' + strana +
    <td class="header">Poznámky k úètovnej závierke PÚ 2013</td>
    <td>
     <div class="bar-btn-form-tool">
-     <img src="../obr/ikony/printer_blue_icon.png" onclick=";"
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacPoznamky2013bez1();"
       title="Zobrazi všetky - bez prvej strany - v PDF" class="btn-form-tool"
       style="width:16px; height:16px; margin-top:2px;">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacPoznamky2013();"

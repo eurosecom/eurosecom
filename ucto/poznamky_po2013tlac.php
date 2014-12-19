@@ -509,7 +509,9 @@ $j=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
-if ( ( $strana == 1 OR $strana == 9999 ) AND $kli_vrok >= 2014 ) {
+$bez1 = 1*$_REQUEST['bez1'];
+
+if ( ( $strana == 1 OR $strana == 9999 ) AND $kli_vrok >= 2014 AND $bez1 == 0 ) {
 
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
