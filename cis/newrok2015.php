@@ -14,9 +14,9 @@
 //ckli_u.php 														setODDELDB
 //cfir.php a cfir_u.php 												setODDELDB
 
-//MZDY restart parametrov parametre.php						OK2014
-//MZDY restart parametrov drmiezd_export.php					OK2014
-//MZDY restart parametrov prenos_poc.php					OK2014
+//../mzdy/parametre.php	restart parametrov					OK2015
+//../mzdy/drmiezd_export.php	restart parametrov				OK2015
+//../cis/prenos_poc.php	restart parametrov					OK2015
 
 //hsheslo.php kalendar skopiruj automaticky 					OK2015
 //aky_robot.php datum velka noc 						OK2015
@@ -47,7 +47,7 @@
 //../ucto/poznamky_textymuj2014_dajxml.php					setODDELDB
 
 
-//../ucto/priznanie_po2013.php  prenos z minuleho roku                      	ok2014
+//../ucto/priznanie_po2014.php  prenos z minuleho roku                      	setODDELDB
 //../ucto/priznanie_fob2014.php  prenos z minuleho roku                     	setODDELDB
 //../mzdy/priznanie_foa2014.php  prenos z minuleho roku                     	setODDELDB
 //../ucto/priznanie_dmv2013.php  tabulky z minuleho roku		    	ok2014 
