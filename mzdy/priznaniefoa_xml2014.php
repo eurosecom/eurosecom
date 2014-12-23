@@ -1,6 +1,6 @@
 <HTML>
 <?php
-//XML pre FOA 2013
+//XML pre FOA 2014
 do
 {
 $sys = 'UCT';
@@ -42,9 +42,6 @@ exit;
 $sDat = include("../funkcie/dat_sk_us.php");
 
 $citfir = include("../cis/citaj_fir.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
 
 //druh priznania 1=mesacne,2=stvrtrocne,4=rocne
 $fir_uctx01 = $_REQUEST['fir_uctx01'];
@@ -65,9 +62,9 @@ $elsubor=2;
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
-  <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>EuroSecom - FOA xml</title>
-  <style type="text/css">
+ <link type="text/css" rel="stylesheet" href="../css/styl.css">
+<title>FOA xml | EuroSecom</title>
+<style type="text/css">
 td.hvstup_zlte  { background-color:#ffff90; color:black; font-weight:bold;
                   height:12px; font-size:12px; }
 td.hvstup_tzlte { background-color:#ecaa12; color:black; font-weight:bold;
@@ -76,7 +73,7 @@ td.hvstup_bsede { background-color:#eaeaea; color:black; font-weight:normal;
                   height:12px; font-size:12px; }
 td.hvstup_bred { background-color:#ff6c6c; color:black; font-weight:normal;
                   height:12px; font-size:12px; }
-  </style>
+</style>
 <script type="text/javascript">
 //sirka a vyska okna
 var sirkawin = screen.width-10;
@@ -94,329 +91,70 @@ var sirkawic = screen.width-10;
 </table>
 
 <?php
-///////////////////////////////////////////////////TLAC a VYTVORENIE XML SUBORU elsubor=1,2
+//XML SUBOR elsubor=2
 if ( $copern == 10 AND $elsubor == 2  )
      {
 //prva strana
-if ( File_Exists("../tmp/$nazsub")) { $soubor = unlink("../tmp/$nazsub"); }
+if ( File_Exists("../tmp/$nazsub") ) { $soubor = unlink("../tmp/$nazsub"); }
 $soubor = fopen("../tmp/$nazsub", "a+");
 
-//rok2012
+//rok2014
 $sqlt = <<<mzdprc
 (
 <?xml version="1.0" encoding="UTF-8"?>
 <dokument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="universal.xsd">
 	<hlavicka>
+		<rodneCislo>1234567890</rodneCislo>
+		<datumNarodenia>05.08.1966</datumNarodenia>
 		<typDP>
 			<rdp>1</rdp>
 			<odp>0</odp>
 			<ddp>0</ddp>
 		</typDP>
-		<rodneCislo>1234567890</rodneCislo>
-		<datumNarodenia>05.08.1966</datumNarodenia>
 		<zdanovacieObdobie>
-			<rok>2012</rok>
-			<datumDDP>16.04.2013</datumDDP>
+			<rok>2014</rok>
+			<datumDDP>16.04.2014</datumDDP>
 		</zdanovacieObdobie>
-		<spravcaOznamil>1</spravcaOznamil>
-		<priezvisko>Šťastný</priezvisko>
-		<meno>Miroslav</meno>
-		<titul>Ing.</titul>
-		<adresaTrvPobytu>
-			<ulica>Ulica</ulica>
-			<cislo>1</cislo>
-			<psc>11111</psc>
-			<obec>Obec</obec>
-			<stat>SR</stat>
-			<tel>
-				<predcislie>111</predcislie>
-				<cislo>111111</cislo>
-			</tel>
-			<fax>
-				<predcislie>222</predcislie>
-				<cislo>222222</cislo>
-			</fax>
-		</adresaTrvPobytu>
-		<nerezident>0</nerezident>
-		<adresaObvPobytu>
-			<ulica>Ulica OP</ulica>
-			<cislo>2</cislo>
-			<psc>22222</psc>
-			<obec>Obec OP</obec>
-			<tel>
-				<predcislie>333</predcislie>
-				<cislo>333333</cislo>
-			</tel>
-			<fax>
-				<predcislie>444</predcislie>
-				<cislo>444444</cislo>
-			</fax>
-		</adresaObvPobytu>
-		<adresaDorPosty>
-			<ulica>Ulica DP</ulica>
-			<cislo>3</cislo>
-			<psc>33333</psc>
-			<obec>Obec DP</obec>
-			<tel>
-				<predcislie>555</predcislie>
-				<cislo>555555</cislo>
-			</tel>
-			<fax>
-				<predcislie>666</predcislie>
-				<cislo>666666</cislo>
-			</fax>
-		</adresaDorPosty>
-		<zastupca>
-			<priezvisko>Priezvisko ZZ</priezvisko>
-			<meno>Meno ZZ</meno>
-			<titul>titul ZZ</titul>
-			<ulicaCislo>Ulica ZZ 12</ulicaCislo>
-			<psc>44444</psc>
-			<obec>Obec ZZ</obec>
-			<stat>Stat ZZ</stat>
-			<tel>
-				<predcislie>777</predcislie>
-				<cislo>777777</cislo>
-			</tel>
-			<rodneCislo>0987654321</rodneCislo>
-		</zastupca>
-	</hlavicka>
-	<telo>
-		<r28>0</r28>
-		<r29>29</r29>
-		<r30>
-			<priezviskoMeno>Priezvisko a meno manzelky</priezviskoMeno>
-			<rodneCislo>0000000000</rodneCislo>
-			<vlastnePrijmy>30.30</vlastnePrijmy>
-			<pocetMesiacov>12</pocetMesiacov>
-		</r30>
-		<r31>
-			<dieta>
-				<priezviskoMeno>Priezvisko a meno dietata 1</priezviskoMeno>
-        <rodneCislo>1111111111</rodneCislo>
-				<m00>1</m00>
-				<m01>0</m01>
-				<m02>0</m02>
-				<m03>0</m03>
-				<m04>0</m04>
-				<m05>0</m05>
-				<m06>0</m06>
-				<m07>0</m07>
-				<m08>0</m08>
-				<m09>0</m09>
-				<m10>0</m10>
-				<m11>0</m11>
-				<m12>0</m12>
-			</dieta>
-			<dieta>
-				<priezviskoMeno>Priezvisko a meno dietata 2</priezviskoMeno>
-        <rodneCislo>2222222222</rodneCislo>
-				<m00>0</m00>
-				<m01>1</m01>
-				<m02>1</m02>
-				<m03>1</m03>
-				<m04>0</m04>
-				<m05>0</m05>
-				<m06>0</m06>
-				<m07>0</m07>
-				<m08>0</m08>
-				<m09>0</m09>
-				<m10>0</m10>
-				<m11>0</m11>
-				<m12>0</m12>
-			</dieta>
-			<dieta>
-				<priezviskoMeno>Priezvisko a meno dietata 3</priezviskoMeno>
-        <rodneCislo>3333333333</rodneCislo>
-				<m00>0</m00>
-				<m01>0</m01>
-				<m02>0</m02>
-				<m03>0</m03>
-				<m04>0</m04>
-				<m05>0</m05>
-				<m06>1</m06>
-				<m07>1</m07>
-				<m08>1</m08>
-				<m09>1</m09>
-				<m10>0</m10>
-				<m11>0</m11>
-				<m12>0</m12>
-			</dieta>
-			<dieta>
-				<priezviskoMeno>Priezvisko a meno dietata 4</priezviskoMeno>
-        <rodneCislo>4444444444</rodneCislo>
-				<m00>0</m00>
-				<m01>0</m01>
-				<m02>0</m02>
-				<m03>0</m03>
-				<m04>0</m04>
-				<m05>0</m05>
-				<m06>0</m06>
-				<m07>0</m07>
-				<m08>0</m08>
-				<m09>0</m09>
-				<m10>0</m10>
-				<m11>0</m11>
-				<m12>1</m12>
-			</dieta>
-			<viacAko4>1</viacAko4>
-		</r31>
-		<r32>32.32</r32>
-		<r32a>32.01</r32a>
-		<r33>33.33</r33>
-		<r33a>33.01</r33a>
-		<r33b>33.02</r33b>
-		<r34>34.34</r34>
-		<r35>35.35</r35>
-		<r36>36.36</r36>
-		<r37>37.37</r37>
-		<r38>38.38</r38>
-		<r39>39.39</r39>
-		<r40>40.40</r40>
-		<r41>41.41</r41>
-		<r42>42.42</r42>
-		<r43>43</r43>
-		<r44>44.44</r44>
-		<r45>45.45</r45>
-		<r46>46.46</r46>
-		<r47>47.47</r47>
-		<r48>48.48</r48>
-		<r49>49.49</r49>
-		<r50>50.50</r50>
-		<r51>510.51</r51>
-		<r52>52.52</r52>
-		<r53>53.53</r53>
-		<r54>54.54</r54>
-		<r55>55.55</r55>
-		<r56>56.56</r56>
-		<r57>57.57</r57>
-		<r58>58.58</r58>
-		<r59>59.59</r59>
-		<r60>60.60</r60>
-		<r61>61.61</r61>
-		<r62>62.62</r62>
-		<r63>63.63</r63>
-		<r64>64.64</r64>
-		<r65>65.65</r65>
-		<r66>66.66</r66>
-		<r67>67.67</r67>
-		<r68>68.68</r68>
-		<r69>69.69</r69>
-		<r70>70.70</r70>
-		<r71>71.71</r71>
-		<r72>72.72</r72>
-		<paragraf50>1</paragraf50>
-		<splnam3per>1</splnam3per>
-		<r73>73.73</r73>
-		<r74>
-			<ico>012345670123</ico>
-			<pravnaForma>občianske združenie</pravnaForma>
-			<obchMeno>
-				<riadok>prijimatel Obchodné meno</riadok>
-				<riadok></riadok>
-			</obchMeno>
-			<ulica>Ulica</ulica>
-			<cislo>99</cislo>
-			<psc>77777</psc>
-			<obec>Obec</obec>
-		</r74>
-		<osobitneZaznamy>
-			<uvadza>1</uvadza>
-			<zaznamy/>
-		</osobitneZaznamy>
-		<r75>Štát daňovej rezidencie</r75>
-		<r76>76.76</r76>
-		<r77>77</r77>
-		<datumVyhlasenia>24.02.2012</datumVyhlasenia>
-		<danovyBonus>
-			<vyplatit>1</vyplatit>
-			<vyplatitRozdiel>1</vyplatitRozdiel>
-			<sposobPlatby>
-				<poukazka>1</poukazka>
-				<ucet>1</ucet>
-			</sposobPlatby>
-			<bankovyUcet>
-				<cisloUctu>1111111111</cisloUctu>
-				<kodBanky>1100</kodBanky>
-			</bankovyUcet>
-			<datum>24.02.2012</datum>
-		</danovyBonus>
-		<vrateniePreplatku>						
-			<vyplatitZamPremiu>1</vyplatitZamPremiu>
-			<vratit>1</vratit>
-			<sposobPlatby>
-				<poukazka>1</poukazka>
-				<ucet>1</ucet>
-			</sposobPlatby>
-			<bankovyUcet>
-				<cisloUctu>2222222222</cisloUctu>
-				<kodBanky>1200</kodBanky>
-			</bankovyUcet>
-			<datum>24.02.2012</datum>
-		</vrateniePreplatku>
-		<pomocneVypocty/>
-	</telo>
-</dokument>
-);
-mzdprc;
-
-//rok2013
-$sqlt = <<<mzdprc
-(
-<?xml version="1.0" encoding="UTF-8"?>
-<dokument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="universal.xsd">
-	<hlavicka>
-		<rodneCislo>1234567890</rodneCislo>
-		<datumNarodenia>05.08.1966</datumNarodenia>
-		<typDP>
-			<rdp>0</rdp>
-			<odp>0</odp>
-			<ddp>1</ddp>
-		</typDP>
-		<zdanovacieObdobie>
-			<rok>2013</rok>
-			<datumDDP>16.04.2013</datumDDP>
-		</zdanovacieObdobie>
-		<priezvisko>Priezvisko</priezvisko>
+		<priezvisko>Šťstný</priezvisko>
 		<meno>Miroslav</meno>
 		<titul>Ing.</titul>
 		<titulZa>PhDr.</titulZa>
 		<adresaTrvPobytu>
-			<ulica>Ulica</ulica>
-			<cislo>1</cislo>
-			<psc>11111</psc>
-			<obec>Obec</obec>
-			<stat>Štát</stat>
+			<ulica>Ulica TP</ulica>
+			<cislo>07</cislo>
+			<psc>08111</psc>
+			<obec>Obec TP</obec>
+			<stat>Štát TP</stat>
 		</adresaTrvPobytu>
 		<nerezident>0</nerezident>
 		<adresaObvPobytu>
 			<ulica>Ulica OP</ulica>
-			<cislo>2</cislo>
-			<psc>22222</psc>
+			<cislo>13</cislo>
+			<psc>14111</psc>
 			<obec>Obec OP</obec>
 		</adresaObvPobytu>
 		<zastupca>
 			<priezvisko>Priezvisko ZZ</priezvisko>
 			<meno>Meno ZZ</meno>
-			<titul>Mgr.</titul>
-			<titulZa>PhD.</titulZa>
-			<rodneCislo>1234561234</rodneCislo>
+			<titul>titul ZZ</titul>
+			<titulZa>titul Za</titulZa>
+			<rodneCislo>1111112222</rodneCislo>
 			<ulica>Ulica ZZ</ulica>
-			<cislo>3</cislo>
-			<psc>33333</psc>
+			<cislo>12</cislo>
+			<psc>22222</psc>
 			<obec>Obec ZZ</obec>
-			<stat>26-Stat ZZ</stat>
+			<stat>Stat ZZ</stat>
 			<tel>055/22445566</tel>
-			<emailFax>055/22445566</emailFax>
+			<email>email@mail.sk</email>
 		</zastupca>
 	</hlavicka>
 	<telo>
-		<r27>1</r27>
+		<r27>0</r27>
 		<r28>28</r28>
 		<r29>
 			<priezviskoMeno>Priezvisko a meno manzelky</priezviskoMeno>
-			<rodneCislo>1234561234</rodneCislo>
-			<vlastnePrijmy>29000</vlastnePrijmy>
+			<rodneCislo>0000000000</rodneCislo>
+			<vlastnePrijmy>290.29</vlastnePrijmy>
 			<pocetMesiacov>12</pocetMesiacov>
 		</r29>
 		<r30>
@@ -458,7 +196,7 @@ $sqlt = <<<mzdprc
 			<dieta>
 				<priezviskoMeno>Priezvisko a meno dietata 3</priezviskoMeno>
 				<rodneCislo>3333333333</rodneCislo>
-				<m00>1</m00>
+				<m00>0</m00>
 				<m01>0</m01>
 				<m02>0</m02>
 				<m03>0</m03>
@@ -470,12 +208,12 @@ $sqlt = <<<mzdprc
 				<m09>0</m09>
 				<m10>0</m10>
 				<m11>0</m11>
-				<m12>0</m12>
+				<m12>1</m12>
 			</dieta>
 			<dieta>
 				<priezviskoMeno>Priezvisko a meno dietata 4</priezviskoMeno>
 				<rodneCislo>4444444444</rodneCislo>
-				<m00>1</m00>
+				<m00>0</m00>
 				<m01>0</m01>
 				<m02>0</m02>
 				<m03>0</m03>
@@ -487,10 +225,10 @@ $sqlt = <<<mzdprc
 				<m09>0</m09>
 				<m10>0</m10>
 				<m11>0</m11>
-				<m12>0</m12>
+				<m12>1</m12>
 			</dieta>
 		</r30>
-		<r31viacAko4>1</r31viacAko4>
+		<r31viacAko4>0</r31viacAko4>
 		<r32>32.31</r32>
 		<r32a>32.32</r32a>
 		<r33>33.33</r33>
@@ -506,15 +244,15 @@ $sqlt = <<<mzdprc
 		<r41>41.41</r41>
 		<r42>42.42</r42>
 		<r43>43.43</r43>
-		<r44>44</r44>
-		<r45>45.45</r45>
+		<r44>44.44</r44>
+		<r45>45</r45>
 		<r46>46.46</r46>
 		<r47>47.47</r47>
 		<r48>48.48</r48>
 		<r49>49.49</r49>
 		<r50>50.50</r50>
 		<r51>51.51</r51>
-		<r52>520.52</r52>
+		<r52>52.52</r52>
 		<r53>53.53</r53>
 		<r54>54.54</r54>
 		<r55>55.55</r55>
@@ -536,44 +274,46 @@ $sqlt = <<<mzdprc
 		<r71>71.71</r71>
 		<r72>72.72</r72>
 		<r73>73.73</r73>
+		<r74>74.74</r74>
 		<paragraf50>1</paragraf50>
 		<splnam3per>1</splnam3per>
-		<r74>74.74</r74>
-		<r75>
-			<ico>01234567/0123</ico>
-			<pravnaForma>pravna forma</pravnaForma>
+		<r75>75.75</r75>
+		<r76>
+			<ico>12345678</ico>
+			<sid>1234</sid>
+			<pravnaForma>prijimatel spol. s rucanim obmedzenym</pravnaForma>
 			<obchMeno>
 				<riadok>prijimatel Obchodné meno</riadok>
-				<riadok></riadok>
+				<riadok>prijímateľa 2% dane</riadok>
 			</obchMeno>
-			<ulica>Ulica P</ulica>
-			<cislo>7</cislo>
+			<ulica>Ulica Prijímateľa</ulica>
+			<cislo>99</cislo>
 			<psc>77777</psc>
-			<obec>Obec P</obec>
-		</r75>
+			<obec>Obec Prijímateľa</obec>
+		</r76>
 		<osobitneZaznamy>
 			<uvadza>1</uvadza>
 			<udajeOprijmoch>
-				<kodStatu>GBR</kodStatu>
+				<kodStatu>105</kodStatu>
 				<prijmy>7501.01</prijmy>
 				<vydavky>7502.02</vydavky>
 			</udajeOprijmoch>
 			<udajeOprijmoch>
-				<kodStatu>CZE</kodStatu>
+				<kodStatu>705</kodStatu>
 				<prijmy>7503.03</prijmy>
 				<vydavky>7504.04</vydavky>
 			</udajeOprijmoch>
 			<udajeOprijmoch>
-				<kodStatu>POL</kodStatu>
+				<kodStatu>308</kodStatu>
 				<prijmy>7505.05</prijmy>
 				<vydavky>7506.06</vydavky>
 			</udajeOprijmoch>
 			<zaznamy/>
 		</osobitneZaznamy>
-		<r76>Štát rezidencie</r76>
-		<r77>77.77</r77>
-		<r78>78</r78>
-		<datumVyhlasenia>24.02.2013</datumVyhlasenia>
+		<r77>Štát daňovej rezidencie</r77>
+		<r78>78.78</r78>
+		<r79>79</r79>
+		<datumVyhlasenia>24.02.2014</datumVyhlasenia>
 		<danovyPreplatokBonus>
 			<vyplatitDanovyBonus>1</vyplatitDanovyBonus>
 			<vyplatitZamPremiu>1</vyplatitZamPremiu>
@@ -583,11 +323,12 @@ $sqlt = <<<mzdprc
 				<ucet>1</ucet>
 			</sposobPlatby>
 			<bankovyUcet>
-				<IBAN>SK11111111111111111111111</IBAN>
-				<cisloUctu/>
-				<kodBanky/>
+				<IBAN>SK111111111111111111</IBAN>
+				<predcislieUctu>123456</predcislieUctu>
+				<cisloUctu>1234567890</cisloUctu>
+				<kodBanky>1100</kodBanky>
 			</bankovyUcet>
-			<datum>24.02.2013</datum>
+			<datum>24.02.2014</datum>
 		</danovyPreplatokBonus>
 		<pomocneVypocty/>
 	</telo>
@@ -710,7 +451,7 @@ $stat=iconv("CP1250", "UTF-8", $hlavicka->zstat);
 $telefon=$hlavicka->dtel;
   $text = "   <tel><![CDATA[".$telefon."]]></tel>"."\r\n"; fwrite($soubor, $text);
 $mailfax=iconv("CP1250", "UTF-8", $hlavicka->dmailfax);
-  $text = "   <emailFax><![CDATA[".$mailfax."]]></emailFax>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <email><![CDATA[".$mailfax."]]></email>"."\r\n"; fwrite($soubor, $text);
   $text = "  </zastupca>"."\r\n"; fwrite($soubor, $text);
   $text = " </hlavicka>"."\r\n"; fwrite($soubor, $text);
 
@@ -1164,21 +905,30 @@ if ( $ddp == 1 ) $riadok=$hlavicka->r73;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r73><![CDATA[".$riadok."]]></r73>"."\r\n"; fwrite($soubor, $text);
 
+$riadok="";
+if ( $ddp == 1 ) $riadok=$hlavicka->r74;
+if ( $riadok == 0 ) $riadok="";
+  $text = "  <r74><![CDATA[".$riadok."]]></r74>"."\r\n"; fwrite($soubor, $text);
+
 $pgf50=$hlavicka->upl50;
-if( $hlavicka->r74 == 0 ) { $pgf50=1; }
+if ( $hlavicka->r75 == 0 ) { $pgf50=1; }
   $text = "  <paragraf50><![CDATA[".$pgf50."]]></paragraf50>"."\r\n"; fwrite($soubor, $text);
 
 $riadok=$hlavicka->spln3;
   $text = "  <splnam3per><![CDATA[".$riadok."]]></splnam3per>"."\r\n"; fwrite($soubor, $text);
 
-$riadok=$hlavicka->r74;
+$riadok=$hlavicka->r75;
 if ( $pgf50 == 1 OR $riadok == 0 OR $hlavicka->druh == 3 ) $riadok="";
-  $text = "  <r74><![CDATA[".$riadok."]]></r74>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <r75><![CDATA[".$riadok."]]></r75>"."\r\n"; fwrite($soubor, $text);
 
-  $text = "  <r75>"."\r\n"; fwrite($soubor, $text);
-$pico=$hlavicka->pico.$hlavicka->psid;
+  $text = "  <r76>"."\r\n"; fwrite($soubor, $text);
+$pico=$hlavicka->pico;
 if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $pico="";
   $text = "   <ico><![CDATA[".$pico."]]></ico>"."\r\n"; fwrite($soubor, $text);
+
+$psid=$hlavicka->psid;
+if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $psid="";
+  $text = "   <sid><![CDATA[".$psid."]]></sid>"."\r\n"; fwrite($soubor, $text);
 
 $pravnaForma=iconv("CP1250", "UTF-8", $hlavicka->pfor);
 if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $pravnaForma="";
@@ -1205,7 +955,7 @@ if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $psc="";
 $obec=iconv("CP1250", "UTF-8", $hlavicka->pmes);
 if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $obec="";
   $text = "   <obec><![CDATA[".$obec."]]></obec>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </r75>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </r76>"."\r\n"; fwrite($soubor, $text);
   
   $text = "  <osobitneZaznamy>"."\r\n"; fwrite($soubor, $text);
 $uvadza=$hlavicka->uoso;
@@ -1254,15 +1004,15 @@ if ( $uvadza == 0 ) $zaznamy="";
 
 $riadok=iconv("CP1250", "UTF-8", $hlavicka->sdnr);
 if ( $nerezident == 0 ) $riadok="";
-  $text = "  <r76><![CDATA[".$riadok."]]></r76>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <r77><![CDATA[".$riadok."]]></r77>"."\r\n"; fwrite($soubor, $text);
 
 $riadok=$hlavicka->udnr;
 if ( $nerezident == 0 OR $riadok == 0 ) $riadok="";
-  $text = "  <r77><![CDATA[".$riadok."]]></r77>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <r78><![CDATA[".$riadok."]]></r78>"."\r\n"; fwrite($soubor, $text);
 
 $riadok=$hlavicka->pril;
 if ( $riadok == 0 ) $riadok="";
-  $text = "  <r78><![CDATA[".$riadok."]]></r78>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <r79><![CDATA[".$riadok."]]></r79>"."\r\n"; fwrite($soubor, $text);
 
 $datum=SKDatum($hlavicka->dat);
 if ( $datum =='00.00.0000' ) $datum="";
@@ -1293,6 +1043,11 @@ $ucet=$hlavicka->ucet;
 $iban=$hlavicka->diban;
 if ( $ucet == 0 ) $iban="";
   $text = "    <IBAN><![CDATA[".$iban."]]></IBAN>"."\r\n"; fwrite($soubor, $text);
+
+//dopyt, nie je
+$predcislieUctu="";
+  $text = "    <predcislieUctu><![CDATA[".$predcislieUctu."]]></predcislieUctu>"."\r\n"; fwrite($soubor, $text);
+
 $cisloUctu=$hlavicka->uceb;
 if ( $ucet == 0 ) $cisloUctu="";
   $text = "    <cisloUctu><![CDATA[".$cisloUctu."]]></cisloUctu>"."\r\n"; fwrite($soubor, $text);
@@ -1323,7 +1078,7 @@ fclose($soubor);
 <?php if ( $elsubor == 2 ) { ?>
 <br />
 <br />
-Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a načítajte na www.drsr.sk alebo do aplikácie eDane:
+Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a načítajte na www.financnasprava.sk alebo do aplikácie eDane:
 <br />
 <br />
 <a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
@@ -1334,7 +1089,7 @@ Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a načítajte na www.drs
 <?php
 //mysql_free_result($vysledok);
      }
-/////////////////////////////////////////////////////koniec TLAC a VYTVORENIE XML SUBORU PRE ELEKTRONIKU
+//koniec XML SUBOR
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphsx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
