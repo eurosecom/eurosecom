@@ -865,8 +865,7 @@ $riadok=$hlavicka->r65;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r65><![CDATA[".$riadok."]]></r65>"."\r\n"; fwrite($soubor, $text);
 
-$riadok="";
-if ( $ddp == 1 ) $riadok=$hlavicka->r66;
+$riadok=$hlavicka->r66;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r66><![CDATA[".$riadok."]]></r66>"."\r\n"; fwrite($soubor, $text);
 
@@ -874,37 +873,30 @@ $riadok="";
 if ( $ddp == 1 ) $riadok=$hlavicka->r67;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r67><![CDATA[".$riadok."]]></r67>"."\r\n"; fwrite($soubor, $text);
-
 $riadok="";
 if ( $ddp == 1 ) $riadok=$hlavicka->r68;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r68><![CDATA[".$riadok."]]></r68>"."\r\n"; fwrite($soubor, $text);
-
 $riadok="";
 if ( $ddp == 1 ) $riadok=$hlavicka->r69;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r69><![CDATA[".$riadok."]]></r69>"."\r\n"; fwrite($soubor, $text);
-
 $riadok="";
 if ( $ddp == 1 ) $riadok=$hlavicka->r70;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r70><![CDATA[".$riadok."]]></r70>"."\r\n"; fwrite($soubor, $text);
-
 $riadok="";
 if ( $ddp == 1 ) $riadok=$hlavicka->r71;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r71><![CDATA[".$riadok."]]></r71>"."\r\n"; fwrite($soubor, $text);
-
 $riadok="";
 if ( $ddp == 1 ) $riadok=$hlavicka->r72;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r72><![CDATA[".$riadok."]]></r72>"."\r\n"; fwrite($soubor, $text);
-
 $riadok="";
 if ( $ddp == 1 ) $riadok=$hlavicka->r73;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r73><![CDATA[".$riadok."]]></r73>"."\r\n"; fwrite($soubor, $text);
-
 $riadok="";
 if ( $ddp == 1 ) $riadok=$hlavicka->r74;
 if ( $riadok == 0 ) $riadok="";
