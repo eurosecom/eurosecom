@@ -1044,11 +1044,14 @@ $iban=$hlavicka->diban;
 if ( $ucet == 0 ) $iban="";
   $text = "    <IBAN><![CDATA[".$iban."]]></IBAN>"."\r\n"; fwrite($soubor, $text);
 
-//dopyt, nie je
-$predcislieUctu="";
+$pole = explode("-", $hlavicka->uceb);
+$predcislieUctu=$pole[0];
+$cisloUctu=$pole[1];
+if( $pole[1] == '' ) { $cisloUctu=$pole[0]; $predcislieUctu=""; }
+
+if ( $ucet == 0 ) $predcislieUctu="";
   $text = "    <predcislieUctu><![CDATA[".$predcislieUctu."]]></predcislieUctu>"."\r\n"; fwrite($soubor, $text);
 
-$cisloUctu=$hlavicka->uceb;
 if ( $ucet == 0 ) $cisloUctu="";
   $text = "    <cisloUctu><![CDATA[".$cisloUctu."]]></cisloUctu>"."\r\n"; fwrite($soubor, $text);
 $kodBanky=$hlavicka->numb;
