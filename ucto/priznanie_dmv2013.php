@@ -737,10 +737,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='5' WHERE oc = 1 AND 
 $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='1' WHERE oc = 1 AND ( vzdru = '' OR vzdru = 0 ) ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzchm=0, vznpr=0 WHERE oc = 1 AND vzkat = 'M' ";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzobm=0 WHERE oc = 1 AND vzkat != 'M' ";
-$upravene = mysql_query("$uprtxt");
+
 
 //pocet dni v roku
 $prvyden=$kli_vrok."-01-01";
