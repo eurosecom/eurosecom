@@ -8,8 +8,6 @@ $urov = 3000;
 $copern = $_REQUEST['copern'];
 $tis = $_REQUEST['tis'];
 if (!isset($tis)) $tis = 0;
-$fort = $_REQUEST['fort'];
-if (!isset($fort)) $fort = 1;
 $strana = 1*$_REQUEST['strana'];
 if ( $strana == 0 ) { $strana=9999; }
 
@@ -35,9 +33,6 @@ $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
 $citfir = include("../cis/citaj_fir.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
 
 $cislo_oc = $_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
@@ -65,9 +60,7 @@ $fadresa = $fir_fnaz." ".$fir_fuli." ".$fir_fcdm." ".$fir_fmes;
 $fnazov = $fir_fnaz;
 }
 
-
-
-// znovu nacitaj
+//znovu nacitaj
 if ( $copern == 26 )
      {
 $sqtoz = "DELETE FROM F$kli_vxcf"."_oznamzpodpoc WHERE oc = $cislo_oc";
@@ -77,7 +70,7 @@ $subor=1;
      }
 //koniec znovu nacitaj
 
-// zapis upravene udaje
+//zapis upravene udaje
 if ( $copern == 23 )
      {
 $datum = strip_tags($_REQUEST['datum']);
@@ -88,15 +81,34 @@ $datpre_sql=SqlDatum($datpre);
 $zmtx1 = strip_tags($_REQUEST['zmtx1']);
 $zmdz1_sql=SqlDatum($_REQUEST['zmdz1']);
 $zmdo1_sql=SqlDatum($_REQUEST['zmdo1']);
-
+$zmtx2 = strip_tags($_REQUEST['zmtx2']);
+$zmdz2_sql=SqlDatum($_REQUEST['zmdz2']);
+$zmdo2_sql=SqlDatum($_REQUEST['zmdo2']);
+$zmtx3 = strip_tags($_REQUEST['zmtx3']);
+$zmdz3_sql=SqlDatum($_REQUEST['zmdz3']);
+$zmdo3_sql=SqlDatum($_REQUEST['zmdo3']);
+$zmtx4 = strip_tags($_REQUEST['zmtx4']);
+$zmdz4_sql=SqlDatum($_REQUEST['zmdz4']);
+$zmdo4_sql=SqlDatum($_REQUEST['zmdo4']);
+$zmtx5 = strip_tags($_REQUEST['zmtx5']);
+$zmdz5_sql=SqlDatum($_REQUEST['zmdz5']);
+$zmdo5_sql=SqlDatum($_REQUEST['zmdo5']);
+$zmtx6 = strip_tags($_REQUEST['zmtx6']);
+$zmdz6_sql=SqlDatum($_REQUEST['zmdz6']);
+$zmdo6_sql=SqlDatum($_REQUEST['zmdo6']);
 
 $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_oznamzpodpoc SET ".
 " zmtx1='$zmtx1', zmdz1='$zmdz1_sql', zmdo1='$zmdo1_sql', ".
+" zmtx2='$zmtx2', zmdz2='$zmdz2_sql', zmdo2='$zmdo2_sql', ".
+" zmtx3='$zmtx3', zmdz3='$zmdz3_sql', zmdo3='$zmdo3_sql', ".
+" zmtx4='$zmtx4', zmdz4='$zmdz4_sql', zmdo4='$zmdo4_sql', ".
+" zmtx5='$zmtx5', zmdz5='$zmdz5_sql', zmdo5='$zmdo5_sql', ".
+" zmtx6='$zmtx6', zmdz6='$zmdz6_sql', zmdo6='$zmdo6_sql', ".
 " datum='$datum_sql', datpre='$datpre_sql' ".
 " WHERE oc = $cislo_oc";
-echo $uprtxt;
+//echo $uprtxt;
 $upravene = mysql_query("$uprtxt");  
 
 $copern=20;
@@ -240,14 +252,26 @@ $cdm = $fir_riadok->zcdm;
 $psc = $fir_riadok->zpsc;
 $mes = $fir_riadok->zmes;
 $zamestnavatel = $fir_fnaz.", ".$fir_fuli." ".$fir_fcdm.", ".$fir_fmes;
-
-
 $datum_sk = SkDatum($fir_riadok->datum);
 $datpre_sk = SkDatum($fir_riadok->datpre);
-
 $zmtx1 = $fir_riadok->zmtx1;
 $zmdz1_sk = SkDatum($fir_riadok->zmdz1);
 $zmdo1_sk = SkDatum($fir_riadok->zmdo1);
+$zmtx2 = $fir_riadok->zmtx2;
+$zmdz2_sk = SkDatum($fir_riadok->zmdz2);
+$zmdo2_sk = SkDatum($fir_riadok->zmdo2);
+$zmtx3 = $fir_riadok->zmtx3;
+$zmdz3_sk = SkDatum($fir_riadok->zmdz3);
+$zmdo3_sk = SkDatum($fir_riadok->zmdo3);
+$zmtx4 = $fir_riadok->zmtx4;
+$zmdz4_sk = SkDatum($fir_riadok->zmdz4);
+$zmdo4_sk = SkDatum($fir_riadok->zmdo4);
+$zmtx5 = $fir_riadok->zmtx5;
+$zmdz5_sk = SkDatum($fir_riadok->zmdz5);
+$zmdo5_sk = SkDatum($fir_riadok->zmdo5);
+$zmtx6 = $fir_riadok->zmtx6;
+$zmdz6_sk = SkDatum($fir_riadok->zmdz6);
+$zmdo6_sk = SkDatum($fir_riadok->zmdo6);
 
 
 mysql_free_result($fir_vysledok);
@@ -330,8 +354,7 @@ if ( $next_oc > 9999 ) $next_oc=9999;
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
  <link rel="stylesheet" href="../css/reset.css">
  <link rel="stylesheet" href="../css/tlaciva.css">
-<title>EuroSecom - Ozn·menie zamestnanca na uplatnenie n·roku na odpoËÌtateæn˙ poloûku ZP</title>
-
+<title>EuroSecom - OdpoËÌtateæn· poloûka ZP</title>
 <script type="text/javascript">
 //sirka a vyska okna
 var sirkawin = screen.width-10;
@@ -348,13 +371,24 @@ var sirkawic = screen.width-10;
   {
    document.formv1.datum.value = '<?php echo "$datum_sk";?>';
    document.formv1.datpre.value = '<?php echo "$datpre_sk";?>';
-
    document.formv1.zmtx1.value = '<?php echo "$zmtx1";?>';
    document.formv1.zmdz1.value = '<?php echo "$zmdz1_sk";?>';
    document.formv1.zmdo1.value = '<?php echo "$zmdo1_sk";?>';
-
-
-
+   document.formv1.zmtx2.value = '<?php echo "$zmtx2";?>';
+   document.formv1.zmdz2.value = '<?php echo "$zmdz2_sk";?>';
+   document.formv1.zmdo2.value = '<?php echo "$zmdo2_sk";?>';
+   document.formv1.zmtx3.value = '<?php echo "$zmtx3";?>';
+   document.formv1.zmdz3.value = '<?php echo "$zmdz3_sk";?>';
+   document.formv1.zmdo3.value = '<?php echo "$zmdo3_sk";?>';
+   document.formv1.zmtx4.value = '<?php echo "$zmtx4";?>';
+   document.formv1.zmdz4.value = '<?php echo "$zmdz4_sk";?>';
+   document.formv1.zmdo4.value = '<?php echo "$zmdo4_sk";?>';
+   document.formv1.zmtx5.value = '<?php echo "$zmtx5";?>';
+   document.formv1.zmdz5.value = '<?php echo "$zmdz5_sk";?>';
+   document.formv1.zmdo5.value = '<?php echo "$zmdo5_sk";?>';
+   document.formv1.zmtx6.value = '<?php echo "$zmtx6";?>';
+   document.formv1.zmdz6.value = '<?php echo "$zmdz6_sk";?>';
+   document.formv1.zmdo6.value = '<?php echo "$zmdo6_sk";?>';
   }
 <?php
 //koniec uprava
@@ -381,15 +415,11 @@ var sirkawic = screen.width-10;
   {
    window.open('oznameniezp_odpoc.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $next_oc;?>', '_self');
   }
-  function ZnovuPotvrdenie()
-  {
-   window.open('../mzdy/oznameniezp_odpoc.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
   function TlacVyhlNCZD()
   {
    window.open('../mzdy/oznameniezp_odpoc.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=1', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
-  function NacitajMinRok()
+  function NacitajMinRok() //dopyt, asi nem· zmysel
   {
    window.open('../mzdy/oznameniezp_odpoc.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1055&drupoh=1&page=1&subor=1', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
@@ -420,7 +450,7 @@ if ( $copern == 20 )
    </td>
    <td>
     <div class="bar-btn-form-tool">
-<!-- dopyt, spraviù pouËenie, zatiaæ nem·m podklad -->
+<!-- dopyt, spraviù pouËenie, naËÌtanie asi nem· zmysel -->
      <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="NaËÌtaù ˙daje z minulÈho roka" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVyhlNCZD();" title="Zobraziù v PDF" class="btn-form-tool">
     </div>
@@ -432,43 +462,52 @@ if ( $copern == 20 )
 <div id="content">
 <FORM name="formv1" method="post" action="oznameniezp_odpoc.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
 <div class="navbar">
-<?php
-$clas1="active";
-$source="../mzdy/oznameniezp_odpoc.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0";
-?>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
- <h6 class="toright">TlaËiù:</h6>
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave" style="top:4px;">
 </div>
-
-<img src="../dokumenty/zdravpoist/oznamzp_odpoc.jpg" alt="../dokumenty/zdravpoist/oznamzp_odpoc.jpg"" class="form-background">
+<img src="../dokumenty/zdravpoist/oznamzp_odpoc_form.jpg"
+     alt="tlaËivo Ozn·menie n·roku na odpoËÌtateæn˙ poloûku ZP 348kB"
+     class="form-background">
 
 <!-- ZAMESTNANEC -->
- <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool" style="top:247px; left:330px; width:18px; height:18px;">
-<input type="text" name="prie" id="prie" value="<?php echo $prie; ?>" disabled="disabled" class="nofill" style="width:277px; top:304px; left:116px;"/>
-<input type="text" name="meno" id="meno" value="<?php echo $meno; ?>" disabled="disabled" class="nofill" style="width:166px; top:304px; left:405px;"/>
-<input type="text" name="rodne" id="rodne" value="<?php echo $rodne; ?>" disabled="disabled" class="nofill" style="width:110px; top:304px; left:590px;"/>
-<input type="text" name="ptitl" id="ptitl" value="<?php echo $ptitl; ?>" disabled="disabled" class="nofill" style="width:96px; top:339px; left:230px;"/>
-<input type="text" name="ztitz" id="ztitz" value="<?php echo $ztitz; ?>" disabled="disabled" class="nofill" style="width:106px; top:339px; left:465px;"/>
-
-<input type="text" name="uli" id="uli" value="<?php echo $uli; ?>" disabled="disabled" class="nofill" style="width:200px; top:392px; left:158px;"/>
-<input type="text" name="cdm" id="cdm" value="<?php echo $cdm; ?>" disabled="disabled" class="nofill" style="width:112px; top:392px; left:536px;"/>
-<input type="text" name="psc" id="psc" value="<?php echo $psc; ?>" disabled="disabled" class="nofill" style="width:60px; top:392px; left:700px;"/>
-<input type="text" name="mes" id="mes" value="<?php echo $mes; ?>" disabled="disabled" class="nofill" style="width:323px; top:428px; left:158px;"/>
-<input type="text" name="zstat" id="zstat" value="<?php echo $zstat; ?>" disabled="disabled" class="nofill" style="width:200px; top:428px; left:530px;"/>
-<input type="text" name="zamestnavatel" id="zamestnavatel" value="<?php echo $zamestnavatel; ?>" disabled="disabled" class="nofill" style="width:724px; top:482px; left:116px;"/>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();"
+     title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool"
+     style="top:145px; left:570px; width:16px; height:16px;">
+<span class="text-echo" style="top:202px; left:67px;"><?php echo $prie; ?></span>
+<span class="text-echo" style="top:202px; left:360px;"><?php echo $meno; ?></span>
+<span class="text-echo" style="top:202px; left:555px;"><?php echo $rodne; ?></span>
+<span class="text-echo" style="top:233px; left:175px;"><?php echo $ptitl; ?></span>
+<span class="text-echo" style="top:233px; left:455px;"><?php echo $ztitz; ?>»</span>
+<span class="text-echo" style="top:285px; left:104px;"><?php echo $uli; ?></span>
+<span class="text-echo" style="top:285px; left:587px;"><?php echo $cdm; ?></span>
+<span class="text-echo" style="top:285px; left:755px;"><?php echo $psc; ?></span>
+<span class="text-echo" style="top:319px; left:104px;"><?php echo $mes; ?></span>
+<span class="text-echo" style="top:319px; left:584px;"><?php echo $zstat; ?></span>
+<span class="text-echo" style="top:370px; left:67px;"><?php echo $zamestnavatel; ?></span>
 
 <!-- DATUMY -->
-<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:800px; left:140px;"/>
-<input type="text" name="datpre" id="datpre" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:900px; left:150px;"/>
+<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" style="width:90px; top:698px; left:95px;"/>
+<input type="text" name="datpre" id="datpre" onkeyup="CiarkaNaBodku(this);" style="width:90px; top:768px; left:145px;"/>
 
 <!-- ZMENY -->
-<input type="text" name="zmtx1" id="zmtx1" style="width:300px; top:1000px; left:120px;"/>
-<input type="text" name="zmdz1" id="zmdz1" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1000px; left:480px;"/>
-<input type="text" name="zmdo1" id="zmdo1" style="width:100px; top:1000px; left:620px;"/>
-
+<input type="text" name="zmtx1" id="zmtx1" style="width:317px; top:878px; left:60px;"/>
+<input type="text" name="zmdz1" id="zmdz1" onkeyup="CiarkaNaBodku(this);" style="width:135px; top:878px; left:389px;"/>
+<input type="text" name="zmdo1" id="zmdo1" onkeyup="CiarkaNaBodku(this);" style="width:135px; top:878px; left:536px;"/>
+<input type="text" name="zmtx2" id="zmtx2" style="width:317px; top:912px; left:60px;"/>
+<input type="text" name="zmdz2" id="zmdz2" onkeyup="CiarkaNaBodku(this);" style="width:135px; top:912px; left:389px;"/>
+<input type="text" name="zmdo2" id="zmdo2" onkeyup="CiarkaNaBodku(this);" style="width:135px; top:912px; left:536px;"/>
+<input type="text" name="zmtx3" id="zmtx3" style="width:317px; top:946px; left:60px;"/>
+<input type="text" name="zmdz3" id="zmdz3" onkeyup="CiarkaNaBodku(this);" style="width:135px; top:946px; left:389px;"/>
+<input type="text" name="zmdo3" id="zmdo3" onkeyup="CiarkaNaBodku(this);" style="width:135px; top:946px; left:536px;"/>
+<input type="text" name="zmtx4" id="zmtx4" style="width:317px; top:979px; left:60px;"/>
+<input type="text" name="zmdz4" id="zmdz4" onkeyup="CiarkaNaBodku(this);" style="width:135px; top:979px; left:389px;"/>
+<input type="text" name="zmdo4" id="zmdo4" onkeyup="CiarkaNaBodku(this);" style="width:135px; top:979px; left:536px;"/>
+<input type="text" name="zmtx5" id="zmtx5" style="width:317px; top:1013px; left:60px;"/>
+<input type="text" name="zmdz5" id="zmdz5" onkeyup="CiarkaNaBodku(this);" style="width:135px; top:1013px; left:389px;"/>
+<input type="text" name="zmdo5" id="zmdo5" onkeyup="CiarkaNaBodku(this);" style="width:135px; top:1013px; left:536px;"/>
+<input type="text" name="zmtx6" id="zmtx6" style="width:317px; top:1046px; left:60px;"/>
+<input type="text" name="zmdz6" id="zmdz6" onkeyup="CiarkaNaBodku(this);" style="width:135px; top:1046px; left:389px;"/>
+<input type="text" name="zmdo6" id="zmdo6" onkeyup="CiarkaNaBodku(this);" style="width:135px; top:1046px; left:536px;"/>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
-
 </FORM>
 </div> <!-- koniec #content -->
 <?php
@@ -477,8 +516,9 @@ $source="../mzdy/oznameniezp_odpoc.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
 //koniec uprav
 ?>
 
+
 <?php
-/////////////////////////////////////////////////VYTLAC VYHLASENIE
+//pdf
 if ( $copern == 10 )
 {
 //urob sucet
@@ -529,14 +569,14 @@ $hlavicka=mysql_fetch_object($sql);
 
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
-if ( $strana == 1 OR $strana == 9999 ) {
+if ( $strana == 1 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(15);
 if ( File_Exists('../dokumenty/zdravpoist/oznamzp_odpoc.jpg') AND $i == 0 )
 {
-if ( $fort == 1 ) { $pdf->Image('../dokumenty/zdravpoist/oznamzp_odpoc.jpg',0,0,210,297); }
+$pdf->Image('../dokumenty/zdravpoist/oznamzp_odpoc.jpg',0,0,210,297);
 }
 
 $zstat="Slovensko"; $zstak="703";
@@ -550,96 +590,71 @@ $sqldok = mysql_query("SELECT * FROM F".$kli_vxcf."_mzdtextmzd WHERE invt = $cis
 if ( $zstat == '' ) { $zstat="Slovensko"; }
 
 //zamestnanec
-$pdf->Cell(190,59,"                          ","$rmc1",1,"L");
-$pdf->Cell(18,4," ","$rmc1",0,"L");$pdf->Cell(63,6,"$hlavicka->prie","$rmc",0,"L");
-$pdf->Cell(2,4," ","$rmc1",0,"L");$pdf->Cell(38,6,"$hlavicka->meno","$rmc",0,"L");
+$pdf->Cell(190,52," ","$rmc1",1,"L");
+$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(63,6,"$hlavicka->prie","$rmc",0,"L");
+$pdf->Cell(2,4," ","$rmc1",0,"L");$pdf->Cell(41,6,"$hlavicka->meno","$rmc",0,"L");
 $dar=SkDatum($hlavicka->dar);
 $tlacrd="$hlavicka->rdc / $hlavicka->rdk";
 if ( $tlacrd == "0 / " ) { $tlacrd="$dar"; }
-$pdf->Cell(24,4," ","$rmc1",0,"L");$pdf->Cell(34,6,"$tlacrd","$rmc",1,"L");
+$pdf->Cell(2,4," ","$rmc1",0,"L");$pdf->Cell(60,6,"$tlacrd","$rmc",1,"L");
 $pdf->SetFont('arial','',8);
-$pdf->Cell(190,1,"                          ","$rmc1",1,"L");
-$pdf->Cell(42,4," ","$rmc1",0,"L");$pdf->Cell(25,5,"$hlavicka->titl","$rmc",0,"L");$pdf->Cell(27,4," ","$rmc1",0,"L");$pdf->Cell(27,5,"$ztitz","$rmc",0,"L");
-$pdf->Cell(20,4," ","$rmc1",0,"L");
-if ( $hlavicka->rdstav == 0 ) { $pdf->Cell(38,5,"slobodn˝/slobodn·","$rmc",1,"L"); }
-if ( $hlavicka->rdstav == 1 ) { $pdf->Cell(38,5,"ûenat˝/vydat·","$rmc",1,"L"); }
-if ( $hlavicka->rdstav == 2 ) { $pdf->Cell(38,5,"vdovec/vdova","$rmc",1,"L"); }
-if ( $hlavicka->rdstav == 3 ) { $pdf->Cell(38,5,"rozveden˝/rozveden·","$rmc",1,"L"); }
-$pdf->Cell(190,4,"                          ","$rmc1",1,"L");
-$pdf->Cell(26,5," ","$rmc1",0,"L");$pdf->Cell(75,4,"$hlavicka->zuli","$rmc",0,"L");$pdf->Cell(9,5," ","$rmc1",0,"L");$pdf->Cell(29,4,"$hlavicka->zcdm","$rmc",0,"L");
-$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(32,4,"$hlavicka->zpsc","$rmc",1,"L");
-$pdf->Cell(27,5," ","$rmc1",0,"L");$pdf->Cell(74,4,"$hlavicka->zmes","$rmc",0,"L");$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(70,4,"$zstat","$rmc",1,"L");
-$pdf->SetFont('arial','',10);
+$pdf->Cell(190,0," ","$rmc1",1,"L");
+$pdf->Cell(31,4," ","$rmc1",0,"L");$pdf->Cell(38,4,"$hlavicka->titl","$rmc",0,"L");
+$pdf->Cell(24,4," ","$rmc1",0,"L");$pdf->Cell(19,4,"$ztitz","$rmc",1,"L");
+$pdf->Cell(190,4," ","$rmc1",1,"L");
+$pdf->Cell(14,5," ","$rmc1",0,"L");$pdf->Cell(98,5,"$hlavicka->zuli","$rmc",0,"L");
+$pdf->Cell(9,5," ","$rmc1",0,"L");$pdf->Cell(29,5,"$hlavicka->zcdm","$rmc",0,"L");
+$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(32,5,"$hlavicka->zpsc","$rmc",1,"L");
+$pdf->Cell(14,5," ","$rmc1",0,"L");$pdf->Cell(98,3,"$hlavicka->zmes","$rmc",0,"L");
+$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(70,3,"$zstat","$rmc",1,"L");
+$pdf->SetFont('arial','',9);
 
 //zamestnavatel
-$pdf->Cell(190,5,"                          ","$rmc1",1,"L");
-$pdf->Cell(18,5," ","$rmc1",0,"L");$pdf->Cell(161,6,"$fir_fnaz, $fir_fuli $fir_fcdm $fir_fmes","$rmc",1,"L");
+$pdf->Cell(190,4," ","$rmc1",1,"L");
+$pdf->Cell(6,5," ","$rmc1",0,"L");$pdf->Cell(184,6,"$fir_fnaz, $fir_fuli $fir_fcdm $fir_fmes","$rmc",1,"L");
 
-//udaje NCZD
-$pdf->Cell(190,17,"                          ","$rmc1",1,"L");
-$nezdx=" ";
-if ( $hlavicka->nezd == 1 ) { $nezdx="x"; }
-$doch=" ";
-if ( $hlavicka->docx == 1 ) { $doch="x"; }
-$pdf->Cell(170,5," ","$rmc1",0,"L");$pdf->Cell(4,3,"$nezdx","$rmc",1,"L");
-$pdf->Cell(190,9,"                          ","$rmc1",1,"L");
-$pdf->Cell(170,5," ","$rmc1",0,"L");$pdf->Cell(4,4,"$doch","$rmc",1,"L");
-
-//udaje BONUS
-$pdf->Cell(190,19,"                          ","$rmc1",1,"L");
-$bonusx=" ";
-if ( $hlavicka->bonus == 1 ) { $bonusx="x"; }
-$pdf->Cell(170,5," ","$rmc1",0,"L");$pdf->Cell(4,5,"$bonusx","$rmc",1,"L");
-$pdf->SetFont('arial','',8);
-
-$pdf->Cell(190,17,"                          ","$rmc1",1,"L");
-$nar01=SkDatum($hlavicka->nar01);
-if ( $nar01 == '00.00.0000' ) $nar01="";
-$nar02=SkDatum($hlavicka->nar02);
-if ( $nar02 == '00.00.0000' ) $nar02="";
-$nar03=SkDatum($hlavicka->nar03);
-if ( $nar03 == '00.00.0000' ) $nar03="";
-$nar04=SkDatum($hlavicka->nar04);
-if ( $nar04 == '00.00.0000' ) $nar04="";
-$nar05=SkDatum($hlavicka->nar05);
-if ( $nar05 == '00.00.0000' ) $nar05="";
-$nar06=SkDatum($hlavicka->nar06);
-if ( $nar06 == '00.00.0000' ) $nar06="";
-$nar07=SkDatum($hlavicka->nar07);
-if ( $nar07 == '00.00.0000' ) $nar07="";
-$nar08=SkDatum($hlavicka->nar08);
-if ( $nar08 == '00.00.0000' ) $nar08="";
-$nar09=SkDatum($hlavicka->nar09);
-if ( $nar09 == '00.00.0000' ) $nar09="";
-$nar10=SkDatum($hlavicka->nar10);
-if ( $nar10 == '00.00.0000' ) $nar10="";
-
-if ( $hlavicka->bonus == 0 ) 
-{ 
-$hlavicka->det01=""; $nar01=""; $hlavicka->det02=""; $nar02=""; $hlavicka->det03=""; $nar03="";
-$hlavicka->det04=""; $nar04=""; $hlavicka->det05=""; $nar05=""; $hlavicka->det06=""; $nar06="";
-$hlavicka->det07=""; $nar07=""; $hlavicka->det08=""; $nar08=""; $hlavicka->det09=""; $nar09=""; $hlavicka->det10=""; $nar10="";
-}
-$pdf->Cell(17,4," ","$rmc1",0,"L");$pdf->Cell(58,4,"$hlavicka->det01","$rmc",0,"L");$pdf->Cell(24,4,"$nar01","$rmc",0,"C");
-$pdf->Cell(58,4,"$hlavicka->det06","$rmc",0,"L");$pdf->Cell(23,4,"$nar06","$rmc",1,"C");
-$pdf->Cell(17,4," ","$rmc1",0,"L");$pdf->Cell(58,5,"$hlavicka->det02","$rmc",0,"L");$pdf->Cell(24,5,"$nar02","$rmc",0,"C");
-$pdf->Cell(58,5,"$hlavicka->det07","$rmc",0,"L");$pdf->Cell(23,5,"$nar07","$rmc",1,"C");
-$pdf->Cell(17,4," ","$rmc1",0,"L");$pdf->Cell(58,4,"$hlavicka->det03","$rmc",0,"L");$pdf->Cell(24,4,"$nar03","$rmc",0,"C");
-$pdf->Cell(58,4,"$hlavicka->det08","$rmc",0,"L");$pdf->Cell(23,4,"$nar08","$rmc",1,"C");
-$pdf->Cell(17,4," ","$rmc1",0,"L");$pdf->Cell(58,4,"$hlavicka->det04","$rmc",0,"L");$pdf->Cell(24,4,"$nar04","$rmc",0,"C");
-$pdf->Cell(58,4,"$hlavicka->det09","$rmc",0,"L");$pdf->Cell(23,4,"$nar09","$rmc",1,"C");
-$pdf->Cell(17,4," ","$rmc1",0,"L");$pdf->Cell(58,4,"$hlavicka->det05","$rmc",0,"L");$pdf->Cell(24,4,"$nar05","$rmc",0,"C");
-$pdf->Cell(58,4,"$hlavicka->det10","$rmc",0,"L");$pdf->Cell(23,4,"$nar10","$rmc",1,"C");
-$pdf->SetFont('arial','',10);
-
-//Dna
-$pdf->Cell(190,56,"                          ","$rmc1",1,"L");
+//uplatnujem - datumy
+$pdf->Cell(190,69," ","$rmc1",1,"L");
 $datum=SkDatum($hlavicka->datum);
 if ( $datum == '00.00.0000' ) $datum="";
-$pdf->Cell(23,3," ","$rmc1",0,"L");$pdf->Cell(55,6,"$datum","$rmc",1,"C");
-                                       } //koniec 1.strany
+$pdf->Cell(11,3," ","$rmc1",0,"L");$pdf->Cell(54,6,"$datum","$rmc",1,"C");
+$pdf->Cell(190,10," ","$rmc1",1,"L");
+$datpre=SkDatum($hlavicka->datpre);
+if ( $datpre == '00.00.0000' ) $datpre="";
+$pdf->Cell(23,3," ","$rmc1",0,"L");$pdf->Cell(43,6,"$datpre","$rmc",1,"C");
 
-
+//zmeny
+$pdf->Cell(190,20," ","$rmc1",1,"L");
+$zmdz1=SkDatum($hlavicka->zmdz1); if ( $zmdz1 == '00.00.0000' ) $zmdz1="";
+$zmdo1=SkDatum($hlavicka->zmdo1); if ( $zmdo1 == '00.00.0000' ) $zmdo1="";
+$pdf->Cell(5,5," ","$rmc1",0,"L");$pdf->Cell(72,5,"$hlavicka->zmtx1","$rmc",0,"L");
+$pdf->Cell(33,5,"$zmdz1","$rmc",0,"C");$pdf->Cell(32,5,"$zmdo1","$rmc",1,"C");
+$pdf->Cell(190,0," ","$rmc1",1,"L");
+$zmdz2=SkDatum($hlavicka->zmdz2); if ( $zmdz2 == '00.00.0000' ) $zmdz2="";
+$zmdo2=SkDatum($hlavicka->zmdo2); if ( $zmdo2 == '00.00.0000' ) $zmdo2="";
+$pdf->Cell(5,5," ","$rmc1",0,"L");$pdf->Cell(72,5,"$hlavicka->zmtx2","$rmc",0,"L");
+$pdf->Cell(33,5,"$zmdz2","$rmc",0,"C");$pdf->Cell(32,5,"$zmdo2","$rmc",1,"C");
+$pdf->Cell(190,0," ","$rmc1",1,"L");
+$zmdz3=SkDatum($hlavicka->zmdz3); if ( $zmdz3 == '00.00.0000' ) $zmdz3="";
+$zmdo3=SkDatum($hlavicka->zmdo3); if ( $zmdo3 == '00.00.0000' ) $zmdo3="";
+$pdf->Cell(5,5," ","$rmc1",0,"L");$pdf->Cell(72,5,"$hlavicka->zmtx3","$rmc",0,"L");
+$pdf->Cell(33,5,"$zmdz3","$rmc",0,"C");$pdf->Cell(32,5,"$zmdo3","$rmc",1,"C");
+$pdf->Cell(190,0," ","$rmc1",1,"L");
+$zmdz4=SkDatum($hlavicka->zmdz4); if ( $zmdz4 == '00.00.0000' ) $zmdz4="";
+$zmdo4=SkDatum($hlavicka->zmdo4); if ( $zmdo4 == '00.00.0000' ) $zmdo4="";
+$pdf->Cell(5,5," ","$rmc1",0,"L");$pdf->Cell(72,4,"$hlavicka->zmtx4","$rmc",0,"L");
+$pdf->Cell(33,4,"$zmdz4","$rmc",0,"C");$pdf->Cell(32,4,"$zmdo4","$rmc",1,"C");
+$pdf->Cell(190,0," ","$rmc1",1,"L");
+$zmdz5=SkDatum($hlavicka->zmdz5); if ( $zmdz5 == '00.00.0000' ) $zmdz5="";
+$zmdo5=SkDatum($hlavicka->zmdo5); if ( $zmdo5 == '00.00.0000' ) $zmdo5="";
+$pdf->Cell(5,5," ","$rmc1",0,"L");$pdf->Cell(72,6,"$hlavicka->zmtx5","$rmc",0,"L");
+$pdf->Cell(33,6,"$zmdz5","$rmc",0,"C");$pdf->Cell(32,6,"$zmdo5","$rmc",1,"C");
+$pdf->Cell(190,0," ","$rmc1",1,"L");
+$zmdz6=SkDatum($hlavicka->zmdz6); if ( $zmdz6 == '00.00.0000' ) $zmdz6="";
+$zmdo6=SkDatum($hlavicka->zmdo6); if ( $zmdo6 == '00.00.0000' ) $zmdo6="";
+$pdf->Cell(5,5," ","$rmc1",0,"L");$pdf->Cell(72,5,"$hlavicka->zmtx6","$rmc",0,"L");
+$pdf->Cell(33,5,"$zmdz6","$rmc",0,"C");$pdf->Cell(32,5,"$zmdo6","$rmc",1,"C");
+                    } //koniec strany
   }
 $i = $i + 1;
   }
@@ -652,7 +667,7 @@ $pdf->Output("../tmp/vyhlasenie.$kli_uzid.pdf");
 
 <?php
 }
-/////////////////////////////////////////KONIEC VYTLACENIA VZHLASENIA
+//koniec pdf
 ?>
 
 <?php
