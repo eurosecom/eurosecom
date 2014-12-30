@@ -9006,6 +9006,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t07","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(190,12," ","$rmc1",1,"L");
 $text="0123456789ab";
 $text=$hlavicka->pico;
+if ( $hlavicka->pico < 1000000 ) { $text="00".$hlavicka->pico; }
 $text1=$hlavicka->psid;
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
