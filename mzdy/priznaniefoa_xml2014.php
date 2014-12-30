@@ -52,9 +52,10 @@ $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resiza
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
 $cislo_oc = $_REQUEST['cislo_oc'];
+$hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+$idx=$kli_uzid.$hhmm;
 
-//koniec nastav tlac z archivu
-$nazsub="PRIZNANIEFOA_".$kli_vrok."_".$kli_uzid.".xml";
+$nazsub="PRIZNANIEFOA_".$kli_vrok."_".$idx.".xml";
 
 $copern=10;
 $zarchivu=1;
