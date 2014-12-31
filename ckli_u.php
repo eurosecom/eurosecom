@@ -54,6 +54,77 @@ $npol = $max_id + 1;
 mysql_close();
 mysql_free_result($sql);
   }
+
+//vloz uzivatela
+if ( $copern == 1007 )
+  {
+$cisloold = 1*$_REQUEST['cisloold'];
+$cislonew = 1*$_REQUEST['cislonew'];
+
+$sqlttt = "INSERT INTO klienti SELECT ".
+" 0, uziv_meno, uziv_heslo, priezvisko, meno, all_prav, uct_prav, mzd_prav, skl_prav, ".
+" fak_prav, him_prav, dop_prav, ana_prav, vyr_prav, now(), cis1, cis2, txt1, txt2, email, aktivni ".
+" FROM klienti WHERE id_klienta = $cisloold ";
+$sqldok = mysql_query("$sqlttt");
+
+$copern=8;
+$page=1;
+$cislo_id=0;
+
+$sqlc = "SELECT * FROM klienti WHERE id_klienta > 0 ORDER BY id_klienta DESC ";
+$vysledokc = mysql_query($sqlc);
+if ( $vysledokc )
+     {
+$riadokc=mysql_fetch_object($vysledokc);
+$cislo_id = $riadokc->id_klienta;
+     }
+
+
+$naz_id=$cislo_id;
+$naz_id="";
+$naz_uzm="";
+$naz_uzh="";
+$naz_prie="";
+$naz_meno="";
+$naz_all="";
+$naz_uct="";
+$naz_mzd="";
+$naz_skl="";
+$naz_fak="";
+$naz_him="";
+$naz_dop="";
+$naz_vyr="";
+$naz_ana="";
+$naz_txt1="";
+$cis1=1;
+
+$sqlttt = "SELECT * FROM klienti WHERE id_klienta = $cislo_id ";
+$sqldok = mysql_query("$sqlttt");
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+ //echo "idem ".$riaddok->uziv_meno;
+ $naz_uzm=$riaddok->uziv_meno;
+ $naz_uzh=$riaddok->uziv_heslo;
+ $naz_prie=$riaddok->priezvisko;
+ $naz_meno=$riaddok->meno;
+ $naz_all=$riaddok->all_prav;
+ $naz_uct=$riaddok->uct_prav;
+ $naz_mzd=$riaddok->mzd_prav;
+ $naz_skl=$riaddok->skl_prav;
+ $naz_fak=$riaddok->fak_prav;
+ $naz_him=$riaddok->him_prav;
+ $naz_dop=$riaddok->dop_prav;
+ $naz_vyr=$riaddok->vyr_prav;
+ $naz_ana=$riaddok->ana_prav;
+ $naz_txt1=$riaddok->txt1;
+ }
+
+
+//ckli_u.php?copern=8&page=1&cislo_id=17&naz_id=17&naz_uzm=s&naz_uzh=s&naz_prie=analyzy&naz_meno=analyzy14&naz_all=10000&naz_uct=2000&naz_mzd=100
+//&naz_skl=0&naz_fak=2000&naz_him=0&naz_dop=3000&naz_vyr=3000&naz_ana=3000&naz_txt1=53-53&cis1=1
+
+  }
 ?>
 
 <HEAD>
@@ -84,20 +155,7 @@ if ( $copern != 6 )
 
       function Obnov_vstup()
       {
-//      document.formv1.h_uzm.value = (ReadCookie ( 'kli_uzm','UZM' ));
-//      document.formv1.h_uzh.value = (ReadCookie ( 'kli_uzh','UZH' ));
-//      document.formv1.h_meno.value = (ReadCookie ( 'kli_meno','Meno' ));
-//      document.formv1.h_prie.value = (ReadCookie ( 'kli_prie','Priezvisko' ));
-//      document.formv1.h_all.value = (ReadCookie ( 'kli_all','1' ));
-//      document.formv1.h_uct.value = (ReadCookie ( 'kli_uct','1' ));
-//      document.formv1.h_mzd.value = (ReadCookie ( 'kli_mzd','1' ));
-//      document.formv1.h_skl.value = (ReadCookie ( 'kli_skl','1' ));
-//      document.formv1.h_him.value = (ReadCookie ( 'kli_him','1' ));
-//      document.formv1.h_dop.value = (ReadCookie ( 'kli_dop','1' ));
-//      document.formv1.h_ana.value = (ReadCookie ( 'kli_ana','1' ));
-//      document.formv1.h_vyr.value = (ReadCookie ( 'kli_vyr','1' ));
-//      document.formv1.h_fak.value = (ReadCookie ( 'kli_fak','1' ));
-      return (true);
+
       }
 
 // Kontrola cisla v rozsahu x az y  
@@ -160,20 +218,7 @@ if ( $copern != 8 )
 
       function Zapis_COOK()
       {
-//      WriteCookie ( 'kli_uzm', document.formv1.h_uzm.value , 240);
-//      WriteCookie ( 'kli_uzh', document.formv1.h_uzh.value , 240);
-//      WriteCookie ( 'kli_meno', document.formv1.h_meno.value , 240);
-//      WriteCookie ( 'kli_prie', document.formv1.h_prie.value , 240);
-//      WriteCookie ( 'kli_all', document.formv1.h_all.value , 240);
-//      WriteCookie ( 'kli_uct', document.formv1.h_uct.value , 240);
-//      WriteCookie ( 'kli_mzd', document.formv1.h_mzd.value , 240);
-//      WriteCookie ( 'kli_skl', document.formv1.h_skl.value , 240);
-//      WriteCookie ( 'kli_him', document.formv1.h_him.value , 240);
-//      WriteCookie ( 'kli_dop', document.formv1.h_dop.value , 240);
-//      WriteCookie ( 'kli_ana', document.formv1.h_ana.value , 240);
-//      WriteCookie ( 'kli_vyr', document.formv1.h_vyr.value , 240);
-//      WriteCookie ( 'kli_fak', document.formv1.h_fak.value , 240);
-      return (true);
+
       }
 
       function Nastav_SEL()

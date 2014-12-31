@@ -665,6 +665,10 @@ $copern=1;
   window.open('../secom/servis.php?copern=1','_blank','width=980, height=800, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes'); 
   }
 
+  function Vlozit(cisloold, cislonew)
+  { 
+  window.open('cfir_u.php?copern=1007&cisloold=' + cisloold + '&cislonew=' + cislonew + '&tt=1','_self'); 
+  }
 
   </script>
 
@@ -897,7 +901,26 @@ if ( $kli_uzall > 500000 )
 </td>
 <td class="fmenu" width="10%" ><?php echo $riadok->rok;?></td>
 <td class="fmenu" width="10%" ><?php echo $riadok->duj;?></td>
-<td class="fmenu" width="10%" ><?php echo $riadok->dtb;?></td>
+<td class="fmenu" width="10%" >
+<?php
+$cislonew=$riadok->xcf+1;
+
+$uzje=0;
+$sqlttt = "SELECT * FROM fir WHERE xcf = $cislonew ";
+//echo $sqlttt;
+$sqldok = mysql_query("$sqlttt");
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+ $uzje=1;
+ }
+if( $_SERVER['SERVER_NAME'] != "localhost" AND $_SERVER['SERVER_NAME'] != "www.eshoptest.sk" ) { $uzje=1; }
+
+if( $uzje == 0 ) { ?>
+<img src='../obr/vlozit.png' width=15 height=12 border=1 onClick='Vlozit(<?php echo $riadok->xcf; ?>, <?php echo $cislonew; ?>);' title='Vloi firmu s èíslom <?php echo $cislonew; ?> a rovnakım nastavením ako firma <?php echo $riadok->xcf; ?>' >
+<?php            } ?>
+<?php echo $riadok->dtb;?>
+</td>
 <td class="fmenu" width="5%" ><a href='cfir_u.php?copern=8&page=<?php echo $page;?>
 &cislo_xcf=<?php echo $riadok->xcf;?>&naz_xcf=<?php echo $riadok->naz;?>&naz_rok=<?php echo $riadok->rok;?>&naz_prav=<?php echo $riadok->prav;?>
 &naz_duj=<?php echo $riadok->duj;?>&naz_dtb=<?php echo $riadok->dtb;?>'> <img src='obr/uprav.png' width=20 height=20 border=0></a></td>

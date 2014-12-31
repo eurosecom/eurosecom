@@ -1359,8 +1359,17 @@ $cislo=1*$kli_fmin4;
 if( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin4 AND xcf <= $kli_fmax4 )";
 
 
+if( $akefirmy == "( xcf >= 0 AND xcf <= 0 )" ) 
+{ 
+
+$mysqldbfir="";
+$dtb2 = include("oddel_dtbm1.php");
+$setuzfir = include("vybuzfir.php"); 
+}
+
 $rokmin=$kli_vrok-1;
-$podmxcf="xcf != ".$kli_vxcf." AND rok < ".$kli_vrok;
+//echo "rokmin".$rokmin;
+$podmxcf="xcf != ".$kli_vxcf." AND rok < ".$kli_vrok." AND rok = ".$rokmin;
 if( $fir_allx11 > 0 ) $podmxcf="xcf = ".$fir_allx11." AND xcf != ".$kli_vxcf." AND rok <= ".$kli_vrok;
 $sqlttt = "SELECT * FROM fir WHERE ( $akefirmy ) AND $podmxcf ORDER BY xcf";
 //echo $sqlttt;

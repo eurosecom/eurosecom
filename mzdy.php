@@ -961,7 +961,6 @@ $mysqldbdatas=$mysqldbdata;
 $vyb_xcfs=$vyb_xcf;
 $setprm = include("mzdy/set2014parametre.php");
 }
-
 //uprava parametrov miezd na aktualny stav od 1.1.2014
 
 //uprava nove pomery od 1.1.2014 
@@ -1006,7 +1005,7 @@ $vysledek = mysql_query("$sql");
 }
 //koniec uprava nove pomery od 1.1.2014 
 
-//uprava parametrov miezd na aktualny stav od 1.1.2014
+//uprava sepa od 1.1.2014
 $sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_sepa012014a";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
@@ -1016,8 +1015,33 @@ $mysqldbdatas=$mysqldbdata;
 $vyb_xcfs=$vyb_xcf;
 $setprm = include("mzdy/sepa2014.php");
 }
+//uprava sepa od 1.1.2014
 
-//uprava parametrov miezd na aktualny stav od 1.1.2014
+//echo $vyb_rok;
+
+//uprava parametrov miezd na aktualny stav od 1.1.2015
+$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_new012015";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$vyb_roks=$vyb_rok;
+$mysqldbdatas=$mysqldbdata;
+$vyb_xcfs=$vyb_xcf;
+$setprm = include("mzdy/set2015parametre.php");
+}
+//uprava parametrov miezd na aktualny stav od 1.1.2015
+
+//uprava sepa od 1.1.2015
+$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_sepa012015a";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$vyb_roks=$vyb_rok;
+$mysqldbdatas=$mysqldbdata;
+$vyb_xcfs=$vyb_xcf;
+$setprm = include("mzdy/sepa2015.php");
+}
+//uprava sepa od 1.1.2015
 
 //cleaning
 $datdnessql = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
@@ -1967,7 +1991,7 @@ $kli_fmax9=$pole9[1];
 $cislo=1*$kli_fmin9;
 if( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin9 AND xcf <= $kli_fmax9 )";
 
-//echo $akefirmy;
+if( $akefirmy == "( xcf >= 0 AND xcf <= 0 )" ) { $setuzfir = include("cis/vybuzfir.php"); }
 
 $sql = mysql_query("SELECT xcf,naz FROM $mysqldbfir.fir WHERE ( $akefirmy ) AND SUBSTRING(prav,$kli_uzid,1) != 'n' ORDER BY xcf");
 // celkom poloziek

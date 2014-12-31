@@ -27,9 +27,9 @@ $copern = 1*$_REQUEST['copern'];
 $sql = "ALTER TABLE klienti MODIFY txt1 VARCHAR(85) ";
 $vysledek = mysql_query("$sql");
 
-if( $oddel2013 == 1 )
+if( $oddel2014 == 1 )
 {
-
+echo "modify primary, timestamp";
 $sql = "ALTER TABLE dlogin MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
 $vysledek = mysql_query("$sql");
 
@@ -197,6 +197,16 @@ $copern=1;
    window.open('../secom/fakturacia.php?copern=1','_blank','width=980, height=800, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
 
+  function Vlozit(cisloold, cislonew)
+  { 
+  window.open('ckli_u.php?copern=1007&cisloold=' + cisloold + '&cislonew=' + cislonew + '&tt=1','_self'); 
+  }
+
+  function ZoznamFir(uzivatel)
+  { 
+  window.open('../cis/setuzfir.php?copern=1&uzid=' + uzivatel + '&tt=1','_blank','width=980, height=800, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes'); 
+  }
+
   </script>
 </HEAD>
 <BODY class="white" onload="ObnovUI(); VyberVstup();" >
@@ -313,6 +323,15 @@ if(!isset($mysqldb2013)) { $oddel2013=0; }
 if( $oddel2013 == 1 ) {
 $sqlttt=" DROP TABLE `".$mysqldb2013."`.`klienti` "; $sql = mysql_query("$sqlttt");
 $sqlttt=" CREATE TABLE `".$mysqldb2013."`.`klienti` SELECT * FROM `".$mysqldb2014."`.`klienti` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+                      }
+
+$oddel2014=0;
+if (File_Exists ("pswd/oddelena2014db2015.php")) { $oddel2014=1; }
+if(!isset($mysqldb2014)) { $oddel2014=0; }
+if( $oddel2014 == 1 ) {
+$sqlttt=" DROP TABLE `".$mysqldb2014."`.`klienti` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2014."`.`klienti` SELECT * FROM `".$mysqldb2015."`.`klienti` "; $sql = mysql_query("$sqlttt");
 //echo $sqlttt;
                       }
 
@@ -440,15 +459,28 @@ $xstr =ceil($cpol / $pols);
 $riadok=mysql_fetch_object($sql);
 ?>
 <tr>
-<td class="fmenu" width="5%" ><?php echo $riadok->id_klienta;?></td>
+<td class="fmenu" width="6%" >
+<?php
+
+$uzje=0;
+if( $_SERVER['SERVER_NAME'] != "localhost" AND $_SERVER['SERVER_NAME'] != "www.eshoptest.sk" ) { $uzje=1; }
+
+
+if( $uzje == 0 ) { ?>
+<img src='../obr/vlozit.png' width=15 height=12 border=1 onClick='Vlozit(<?php echo $riadok->id_klienta; ?>, 0);' title='Vloûiù novÈho uûÌvateæa s rovnak˝m nastavenÌm ako uûÌvateæ <?php echo $riadok->id_klienta; ?>' >
+<?php            } ?>
+<?php echo $riadok->id_klienta;?></td>
 <td class="fmenu" width="10%" ><?php echo $riadok->uziv_meno;?></td>
 <td class="fmenu" width="10%" ><?php echo $riadok->uziv_heslo;?></td>
 <td class="fmenu" width="10%" ><?php echo $riadok->meno;?></td>
 <td class="fmenu" width="10%" ><?php echo $riadok->priezvisko;?></td>
-<td class="fmenu" width="10%" ><?php echo $riadok->txt1;?></td>
+<td class="fmenu" width="10%" >
+<?php if( $riadok->txt1 == "0-0" ) { ?>
+<img src='../obr/zoznam.png' width=15 height=12 border=1 onClick='ZoznamFir(<?php echo $riadok->id_klienta; ?>);' title='Zoznam firiem pre uûÌvateæa <?php echo $riadok->id_klienta; ?>' >
+<?php                              } ?>
+<?php echo $riadok->txt1;?></td>
 <td class="fmenu" width="5%" >
-<img src='../obr/naradie.png' onClick="NastavFirmu(<?php echo $riadok->id_klienta;?>, <?php echo $page;?>);" width=15 height=15 border=0 alt='Nastaviù predvolen˙ FIRmu a UME podæa mÙjho konta' >
-
+<img src='../obr/naradie.png' onClick="NastavFirmu(<?php echo $riadok->id_klienta;?>, <?php echo $page;?>);" width=15 height=15 border=0 title='Nastaviù predvolen˙ FIRmu a UME podæa mÙjho konta' >
 <?php echo $riadok->all_prav;?>
 </td>
 <td class="fmenu" width="4%" ><?php echo $riadok->uct_prav;?></td>

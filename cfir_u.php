@@ -42,8 +42,48 @@ $npol = $max_xcf + 1;
 mysql_close();
 mysql_free_result($sql);
   }
-?>
 
+//vloz firmu
+if ( $copern == 1007 )
+  {
+$cisloold = 1*$_REQUEST['cisloold'];
+$cislonew = 1*$_REQUEST['cislonew'];
+
+$sqlttt = "INSERT INTO fir SELECT ".
+" '$cislonew',	naz,	rok,	duj,	dtb,	cis1,	cis2,	txt1,	txt2,	prav,	id_klienta,	now() ".
+" FROM fir WHERE xcf = $cisloold ";
+$sqldok = mysql_query("$sqlttt");
+
+$copern=8;
+$page=1;
+$cislo_xcf=$cislonew;
+$naz_xcf="";
+$naz_rok="2014";
+$naz_prav="";
+$naz_duj="9";
+$naz_dtb="";
+
+$sqlttt = "SELECT * FROM fir WHERE xcf = $cislonew ";
+$sqldok = mysql_query("$sqlttt");
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+ $naz_xcf=$riaddok->naz;
+ $naz_rok=$riaddok->rok;
+ $naz_prav=$riaddok->prav;
+ $naz_duj=$riaddok->duj;
+ $naz_dtb=$riaddok->dtb;
+ }
+
+$rok_ind = $naz_rok-2008;
+$duj_ind = $naz_duj;
+
+//cfir_u.php?copern=8&page=1&cislo_xcf=33&naz_xcf=SECOM 2011&naz_rok=2011
+//&naz_prav=XxxxxxxxxxXxxxxxxxxxXxxxxxxxxxXxxxxxxxxxXxxxxxxxxxXxxxxxxxxxXxxxxxxxxxXxxxxxxxxx&naz_duj=0&naz_dtb=
+
+  }
+
+?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="css/styl.css">
