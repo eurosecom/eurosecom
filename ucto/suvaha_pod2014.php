@@ -1117,6 +1117,10 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuvahas$kli_uzid "." SELECT".
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+//toto som pridal
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prcsuvahas$kli_uzid WHERE prx != 1 ";
+$dsql = mysql_query("$dsqlt");
+
 $sqtoz = "UPDATE F$kli_vxcf"."_prcsuvahas$kli_uzid SET ".
 "rn01=r01-rk01, rn02=r02-rk02, rn03=r03-rk03, rn04=r04-rk04, rn05=r05-rk05, rn06=r06-rk06, rn07=r07-rk07, rn08=r08-rk08, rn09=r09-rk09, rn10=r10-rk10,".
 "rn11=r11-rk11, rn12=r12-rk12, rn13=r13-rk13, rn14=r14-rk14, rn15=r15-rk15, rn16=r16-rk16, rn17=r17-rk17, rn18=r18-rk18, rn19=r19-rk19, rn20=r20-rk20,".
@@ -1294,7 +1298,7 @@ $oznac = mysql_query("$sqtoz");
 
 //vypocitaj vysledok  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-" r100=r01-r81-r85-r86-r87-r90-r93-r97-r101-r141 ".
+" r100=rn01-r81-r85-r86-r87-r90-r93-r97-r101-r141 ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -1363,7 +1367,7 @@ $sqldok = mysql_query("$sqltt");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
-  $hospodarsky=$riaddok->rn100;
+  $hospodarsky=$riaddok->r100;
   } 
 
 $ttvv = "INSERT INTO F$kli_vxcf"."_uctsuvpodzaok ( hospcent, datcent, umecent ) VALUES ( '$hospodarsky', now(), '$kli_vume' )";
@@ -1380,7 +1384,7 @@ $sqldok = mysql_query("$sqltt");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
-  $hospodarskyz=$riaddok->rn100;
+  $hospodarskyz=$riaddok->r100;
   }
 
 $sqltt = "UPDATE F$kli_vxcf"."_uctsuvpodzaok SET hospzaok='$hospodarskyz', datzaok=now(), umezaok='$kli_vume' ";
@@ -1539,9 +1543,36 @@ $oznac = mysql_query("$sqtoz");
 
 //vypocitaj vysledok  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-" r100=r01-r81-r85-r86-r87-r90-r93-r97-r101-r141 ".
+" r100=rn01-r81-r85-r86-r87-r90-r93-r97-r101-r141 ".
 " WHERE prx = 1 ";
 $oznac = mysql_query("$sqtoz");
+
+if( $kli_uzid == 57575757575757575 )
+{
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_".$vsldat.$kli_uzid." ";
+
+$tov = mysql_query("$sqltt");
+$tvpol = mysql_num_rows($tov);
+echo $sqltt.$tvpol."<br />";
+$i=0;
+  while ($i <= $tvpol )
+  {
+
+  if (@$zaznam=mysql_data_seek($tov,$i))
+ {
+$rtov=mysql_fetch_object($tov);
+
+echo "rn01=".$rtov->rn01."<br />";
+echo "r100=".$rtov->r100."<br />";
+
+ }
+
+$i=$i+1;
+   }
+
+exit;
+}
 
 //posledne sucty znovu  
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".

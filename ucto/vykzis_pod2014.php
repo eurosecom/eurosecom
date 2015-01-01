@@ -1006,6 +1006,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykziss$kli_uzid "." SELECT".
 $dsql = mysql_query("$dsqlt");
 
 //ak na tisic
+//echo $tis."<br />";
 if( $tis > 0 )
 {
 
@@ -1115,17 +1116,18 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_prcsuv1000ahas".$kli_uzid."")
   {
   //echo "idem";
   $riaddok=mysql_fetch_object($sqldok);
-  $zisk_suvaha=$riaddok->rn100;
+  $zisk_suvaha=$riaddok->r100;
   }
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_prcvyk1000ziss".$kli_uzid."");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   //echo "idem";
   $riaddok=mysql_fetch_object($sqldok);
-  $zisk_vzisk=$riaddok->rsp61;
+  $zisk_vzisk=$riaddok->r61;
   }
 $zisk_rozd=$zisk_vzisk-$zisk_suvaha;
 //echo $zisk_rozd."=".$zisk_vzisk."-".$zisk_suvaha;
+//exit;
 
 $cislo_rdk=0;
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_uctparzaok_pod2014 ");
