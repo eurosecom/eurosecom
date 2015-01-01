@@ -9,7 +9,7 @@ $copern = $_REQUEST['copern'];
 $tis = $_REQUEST['tis'];
 if (!isset($tis)) $tis = 0;
 $strana = 1*$_REQUEST['strana'];
-if ( $strana == 0 ) { $strana=9999; }
+if ( $strana == 0 ) { $strana=1; }
 
 $uziv = include("../uziv.php");
 if ( !$uziv ) exit;
@@ -419,9 +419,9 @@ var sirkawic = screen.width-10;
   {
    window.open('../mzdy/oznameniezp_odpoc.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=1', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
-  function NacitajMinRok() //dopyt, asi nemá zmysel
+  function NacitajMinRok() //dopyt, asi nemá zmysel ale narok bude
   {
-   window.open('../mzdy/oznameniezp_odpoc.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1055&drupoh=1&page=1&subor=1', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+
   }
   function UpravZamestnanca()
   {
@@ -476,7 +476,7 @@ if ( $copern == 20 )
 <span class="text-echo" style="top:202px; left:360px;"><?php echo $meno; ?></span>
 <span class="text-echo" style="top:202px; left:555px;"><?php echo $rodne; ?></span>
 <span class="text-echo" style="top:233px; left:175px;"><?php echo $ptitl; ?></span>
-<span class="text-echo" style="top:233px; left:455px;"><?php echo $ztitz; ?>È</span>
+<span class="text-echo" style="top:233px; left:455px;"><?php echo $ztitz; ?></span>
 <span class="text-echo" style="top:285px; left:104px;"><?php echo $uli; ?></span>
 <span class="text-echo" style="top:285px; left:587px;"><?php echo $cdm; ?></span>
 <span class="text-echo" style="top:285px; left:755px;"><?php echo $psc; ?></span>
