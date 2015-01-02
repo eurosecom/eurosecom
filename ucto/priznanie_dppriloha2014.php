@@ -19,7 +19,7 @@ if (!isset($kli_vxcf)) $kli_vxcf = 1;
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=1;
+$rmc=0;
 $rmc1=0;
 
 //tlacove okno
@@ -197,20 +197,19 @@ table.prijimatelia {
   margin: 5px auto;
 }
 table.prijimatelia caption {
-  width: 320px;
-  height: 38px;
-  line-height: 38px;
-  margin-top: 5px;
-  font-weight: bold;
+  width: 100%;
+  line-height: 40px;
+}
+table.prijimatelia caption h3 {
   font-size: 16px;
+  font-weight: bold;
   text-align: left;
 }
 table.prijimatelia caption img {
-  position: absolute;
-  top: 42px;
-  left: 290px;
-  width: 20px;
-  height: 20px;
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 11px 0 0 5px;
   cursor: pointer;
 }
 table.prijimatelia thead td {
@@ -231,6 +230,10 @@ table.prijimatelia tbody img {
   height: 20px;
   vertical-align: text-bottom;
   cursor: pointer;
+}
+span.text-echo {
+  font-size: 18px;
+  letter-spacing: 13px;
 }
 </style>
 <script language="JavaScript" src="../js/cookies.js"></script>
@@ -322,7 +325,7 @@ if ( $copern != 11 )
 ?>
 <FORM name="formv1" method="post" action="priznanie_dppriloha2014.php?copern=202&cislo_p1cpl=<?php echo $cislo_p1cpl; ?>&volapo=<?php echo $volapo; ?>">
 <?php
-$clas11="active";
+$clas99="active";
 $source="../ucto/priznanie_po2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0&volapo=".$volapo;
 if ( $volapo == 0 ) { $source="../ucto/priznanie_fob2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0&volapo=".$volapo; }
 ?>
@@ -338,8 +341,10 @@ if ( $volapo == 0 ) { $source="../ucto/priznanie_fob2014.php?cislo_oc=".$cislo_o
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=8', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=9', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2014.php?copern=101&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_self')" class="<?php echo $clas11; ?> toleft">príloha</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2014.php?copern=11&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_blank')" class="<?php echo $clas11; ?> toright">príloha</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=11', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
+ <a href="#" onclick="window.open('priznanie_dppriloha2014.php?copern=101&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_self')" class="<?php echo $clas99; ?> toleft">príloha</a>
+ <a href="#" onclick="window.open('priznanie_dppriloha2014.php?copern=11&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_blank')" class="<?php echo $clas99; ?> toright">príloha</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=11', '_blank');" class="<?php echo $clas11; ?> toright">11</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=10', '_blank');" class="<?php echo $clas10; ?> toright">10</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=9', '_blank');" class="<?php echo $clas9; ?> toright">9</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=8', '_blank');" class="<?php echo $clas8; ?> toright">8</a>
@@ -371,16 +376,18 @@ $riadok=mysql_fetch_object($sql);
 if ( $i == 0 ) { ?>
 <div class="wrap-prijimatelia">
  <table class="prijimatelia">
- <caption>Príloha k IV. èasti - Ïalší prijímatelia
-  <img src="../obr/ikony/plus_lgreen_icon.png" onclick="NovyPrmatel();" title="Prida prijímate¾a">
+ <caption>
+  <h3 class="toleft">Príloha k IV. èasti - Ïalší prijímatelia</h3>
+  <img src="../obr/ikony/plus_lgreen_icon.png" onclick="NovyPrmatel();"
+       title="Prida prijímate¾a" class="toleft">
  </caption>
  <thead>
-  <tr>
-   <td width="5%" align="center">èíslo</td>
-   <td width="65%">Názov - IÈO / SID</td>
-   <td width="15%" align="center">Suma</td>
-   <td width="15%" align="center">&nbsp;</td>
-  </tr>
+ <tr>
+  <td width="5%" align="center">èíslo</td>
+  <td width="65%">Názov - IÈO / SID</td>
+  <td width="15%" align="right">Suma</td>
+  <td width="15%" align="center">&nbsp;</td>
+ </tr>
  </thead>
 <?php          }
 if ( $riadok->p1cpl > 0 ) { ?>
@@ -421,7 +428,7 @@ if ( $copern == 201 )
 <?php if ( $volapo == 1 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2014/dppo2014/dppo_v14_str12.jpg" alt="tlaèivo Daò z príjmov PO pre rok 2014 12.strana 282kB" class="form-background">
 <?php                     } ?>
-<input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo $fir_fdic; ?>" disabled="disabled" class="nofill" style="width:220px; top:69px; left:332px;"/>
+<span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 <!-- PRILOHA k IV.casti -->
 <input type="text" name="p1cis" id="p1cis" style="width:35px; top:154px; left:190px;"/>
@@ -490,7 +497,7 @@ $hlavicka=mysql_fetch_object($sql);
 
 if ( $j == 0 ) {
 $pdf->AddPage();
-$pdf->SetFont('arial','',10);
+$pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(6);
 $pdf->SetTopMargin(10);
 if ( File_Exists('../dokumenty/dan_z_prijmov2014/dppo2014/dppo_v14_str12.jpg') )
@@ -501,7 +508,7 @@ $strana=$strana+1;
 $pdf->SetY(10);
 
 //dic
-$pdf->Cell(190,1,"                          ","$rmc1",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
 $A=substr($fir_fdic,0,1);
 $B=substr($fir_fdic,1,1);
 $C=substr($fir_fdic,2,1);
@@ -526,10 +533,6 @@ if ( $j == 1 ) { $pozy=116; }
 if ( $j == 2 ) { $pozy=201; }
 
 $pdf->SetY($pozy); 
-
-//sem vlozis bunky len 1x pre prijimatela ico,meno,suma... a potom ked nastavis pozy tak ti to urobi 3x na jednu stranu
-
-//cislo tato funkcia ti doplni text na 2miesta(2s) zlava medzerou(ta medzera pred 2s)
 
 //PRIJIMATEL
 //cislo
@@ -564,10 +567,11 @@ $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(5,6,"$I","$rmc",0,"C");$pdf->Cell(5,
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(5,6,"$K","$rmc",1,"C");
 
 //ico
-$pdf->Cell(190,6,"                          ","$rmc1",1,"L");
+$pdf->Cell(190,7," ","$rmc1",1,"L");
 $text=$hlavicka->p1ico;
 if ( $text == 0 ) $text="";
 if ( $druh == 3 OR $hlavicka->pzano == 1 ) { $text=""; }
+if ( $hlavicka->p1ico < 1000000 ) { $text="00".$hlavicka->p1ico; }
 $A=substr($text,0,1);
 $B=substr($text,1,1);
 $C=substr($text,2,1);
@@ -632,7 +636,7 @@ $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$V","$rmc",0,"C");$pdf->Cell(1,
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(5,6,"$X","$rmc",1,"C");
 
 //obchodne meno
-$pdf->Cell(190,6,"                          ","$rmc1",1,"L");
+$pdf->Cell(190,5," ","$rmc1",1,"L");
 $text=$hlavicka->p1men;
 if ( $druh == 3 OR $hlavicka->pzano == 1 ) { $text=""; }
 $A=substr($text,0,1);
@@ -818,9 +822,6 @@ $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$Z","$rmc",0,"C");$pdf->Cell(1,
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$B1","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$C1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$D1","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$E1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(5,6,"$F1","$rmc",1,"C");
-
-
-
   }
 $i = $i + 1;
 $j = $j + 1;
