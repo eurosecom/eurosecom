@@ -1768,9 +1768,15 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r820=r810, r830=r810-r800, ".
+" r820=r810, r830=0, ".
 " psys=0 ".
-" WHERE ico >= 0 AND r810 > 0 AND r810 >= r800 "; 
+" WHERE ico >= 0 AND r810 > 0 AND r810 > r800 "; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r830=-r820, r820=0, ".
+" psys=0 ".
+" WHERE ico >= 0 AND r810 > 0 AND r820 < 0 "; 
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
@@ -1780,21 +1786,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r950=r800, ".
-" psys=0 ".
-" WHERE ico >= 0 "; 
-$upravene = mysql_query("$uprtxt");
-
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r950=r900, ".
 " psys=0 ".
-" WHERE ico >= 0 AND r810 > r800 AND r810 > 0 "; 
-$upravene = mysql_query("$uprtxt");
-
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r950=r800+r900, ".
-" psys=0 ".
-" WHERE ico >= 0 AND r900 = r840 AND r810 > 0 "; 
+" WHERE ico >= 0 AND r810 > 0 AND r900 > 0 "; 
 $upravene = mysql_query("$uprtxt");
 
 //preddavky
@@ -1805,7 +1799,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r1000=r950-r940+r960, r1001=0, ".
+" r1000=r950-r940-r960, r1001=0, ".
 " psys=0 ".
 " WHERE ico >= 0 "; 
 $upravene = mysql_query("$uprtxt");
@@ -1819,7 +1813,7 @@ $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1001=-r1000, r1000=0, ".
 " psys=0 ".
-" WHERE ico >= 0 AND r1000 < 0 "; 
+" WHERE ico >= 0 AND r1000 <= 0 "; 
 $upravene = mysql_query("$uprtxt");
 
 
