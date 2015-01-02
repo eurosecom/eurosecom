@@ -1257,17 +1257,17 @@ $oznac = mysql_query("$sqtoz");
 
 //vypocitaj strana 4
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-" rn42=rn43+rn44+rn44, ".
+" rn42=rn43+rn44+rn45, ".
 " rn41=rn42+rn46+rn47+rn48+rn49+rn50+rn51+rn52, ".
 " rn34=rn35+rn36+rn37+rn38+rn39+rn40, ".
 " rn33=rn34+rn41+rn53+rn66+rn71, ".
 
-" rk42=rk43+rk44+rk44, ".
+" rk42=rk43+rk44+rk45, ".
 " rk41=rk42+rk46+rk47+rk48+rk49+rk50+rk51+rk52, ".
 " rk34=rk35+rk36+rk37+rk38+rk39+rk40, ".
 " rk33=rk34+rk41+rk53+rk66+rk71, ".
 
-" r42=r43+r44+r44, ".
+" r42=r43+r44+r45, ".
 " r41=r42+r46+r47+r48+r49+r50+r51+r52, ".
 " r34=r35+r36+r37+r38+r39+r40, ".
 " r33=r34+r41+r53+r66+r71 ".
