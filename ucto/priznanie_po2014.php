@@ -633,7 +633,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD hr06 DECIMAL(10,2) DEFAULT
 $vysledek = mysql_query("$sql");
 }
 //zmeny pre rok 2014
-$sql = "SELECT pcpod5 FROM F".$kli_vxcf."_uctpriznanie_po";
+$sql = "SELECT opr01 FROM F".$kli_vxcf."_uctpriznanie_po";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -783,6 +783,18 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD pcpod5 DECIMAL(10,2) DEFAULT 0 AFTER new2014";
 $vysledek = mysql_query("$sql");
 
+//opravy
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY r810 DECIMAL(10,0) DEFAULT 0 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY r820 DECIMAL(10,0) DEFAULT 0 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY r840 DECIMAL(10,0) DEFAULT 0 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY r900 DECIMAL(10,0) DEFAULT 0 ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD opr01 DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
 }
 //koniec pracovny def subor
 
