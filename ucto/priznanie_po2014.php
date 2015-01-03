@@ -1660,6 +1660,10 @@ $rozdielodpisov = 1*$_REQUEST['rozdielodpisov'];
 if ( $rozdielodpisov == 1 ) { $prepocitaj=1; }
 $nedanovevydavky = 1*$_REQUEST['nedanovevydavky'];
 if ( $nedanovevydavky == 1 ) { $prepocitaj=1; }
+$odpocetstraty = 1*$_REQUEST['odpocetstraty'];
+if ( $odpocetstraty == 1 ) { $prepocitaj=1; }
+$zapocetdane = 1*$_REQUEST['zapocetdane'];
+if ( $zapocetdane == 1 ) { $prepocitaj=1; }
 
 //nacitaj udaje
 if ( $copern >= 1 )
@@ -1705,11 +1709,14 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $upravene = mysql_query("$uprtxt");  
 
 /////////////////////strana 3 2014
+if ( $odpocetstraty == 1 )
+  {
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r410=d6r05, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
+  }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r410=r400, psys=0 WHERE ico >= 0 AND r410 > r400 "; 
 $upravene = mysql_query("$uprtxt");
@@ -1741,6 +1748,13 @@ $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r900=0, r901=0 WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
+
+if ( $zapocetdane == 1 )
+  {
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r710=e1r06 WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+  }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r700=r600-r610, r800=r700-r710, ".
@@ -1826,6 +1840,12 @@ $upravene = mysql_query("$uprtxt");
 //////////////////strana 4 2014
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " a1r15=a1r01+a1r02+a1r03+a1r04+a1r05+a1r06+a1r07+a1r08+a1r09+a1r10+a1r11+a1r12+a1r13+a1r14, ".
+" psys=0 ".
+" WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+//////////////////strana 5 2014
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET d6r05=d5r05+d4r05+d3r05+d2r06+d1r06, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
@@ -2698,6 +2718,14 @@ if ( $copern == 102 )
   {
    window.open('priznanie_po2014.php?copern=101&strana=<?php echo $strana; ?>&nedanovevydavky=1', '_self');
   }
+  function OdpocetStraty()
+  {
+   window.open('priznanie_po2014.php?copern=101&strana=<?php echo $strana; ?>&odpocetstraty=1', '_self');
+  }
+  function ZapocetDane()
+  {
+   window.open('priznanie_po2014.php?copern=101&strana=<?php echo $strana; ?>&zapocetdane=1', '_self');
+  }
 </script>
 
 <?php if ( $copern == 2 ) { echo "<script type='text/javascript' src='uloz_banku.js'></script>"; } ?>
@@ -2885,8 +2913,8 @@ $sn1c=substr($sknacec,0,1);
 
 <!-- II. CAST pokracovanie -->
 <input type="text" name="r410" id="r410" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:134px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick=";"
-      title="" class="btn-row-tool" style="top:135px; left:833px;">
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="OdpocetStraty();"
+      title="Naèíta odpoèet straty z tabu¾ky D ståpec 6 riadok 5 na str.6" class="btn-row-tool" style="top:135px; left:833px;">
 <input type="text" name="r500" id="r500" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:173px; left:529px;"/>
 <input type="text" name="r510" id="r510" style="width:35px; top:238px; left:529px;"/>
 <input type="text" name="r600" id="r600" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:277px; left:529px;"/>
@@ -2894,6 +2922,8 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r610" id="r610" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:346px; left:529px;"/>
 <input type="text" name="r700" id="r700" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:389px; left:529px;"/>
 <input type="text" name="r710" id="r710" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:453px; left:529px;"/>
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="ZapocetDane();"
+      title="Naèíta zápoèet dane z tabu¾ky E riadok 6 na str.6" class="btn-row-tool" style="top:453px; left:833px;">
 <input type="text" name="r800" id="r800" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:493px; left:529px;"/>
 <input type="text" name="r810" id="r810" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:557px; left:668px;"/>
 <input type="text" name="r820" id="r820" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:596px; left:668px;"/>
