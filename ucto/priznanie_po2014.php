@@ -2885,6 +2885,8 @@ $sn1c=substr($sknacec,0,1);
 
 <!-- II. CAST pokracovanie -->
 <input type="text" name="r410" id="r410" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:134px; left:529px;"/>
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick=";"
+      title="" class="btn-row-tool" style="top:135px; left:833px;">
 <input type="text" name="r500" id="r500" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:173px; left:529px;"/>
 <input type="text" name="r510" id="r510" style="width:35px; top:238px; left:529px;"/>
 <input type="text" name="r600" id="r600" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:277px; left:529px;"/>
