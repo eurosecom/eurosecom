@@ -1774,7 +1774,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r900=r820-r840, ".
+" r900=r820+r840, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r810 > 0 "; 
 $upravene = mysql_query("$uprtxt");
