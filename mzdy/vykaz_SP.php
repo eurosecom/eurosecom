@@ -638,7 +638,7 @@ if( $fir_mzdx06 == 0 ) { $fir_mzdx06=31; }
 $mesvyplat=1*($kli_vmes+1); $rokvyplat=$kli_vrok;
 $mesvyplatx=$mesvyplat;
 if ( $mesvyplat <  10 ) { $mesvyplat="0".$mesvyplat; }
-if ( $mesvyplatx == 13 ) { $mesvyplat=01; $rokvyplat=$kli_vrok+1; }
+if ( $mesvyplatx == 13 ) { $mesvyplat="01"; $rokvyplat=$kli_vrok+1; }
 $denvyplaty=$fir_mzdx06.".".$mesvyplat.".".$rokvyplat;
 
 if( $denvyplaty == '29.02.2014' ) { $denvyplaty="28.02.2014"; }
@@ -1609,7 +1609,7 @@ if( $fir_mzdx06 == 0 ) { $fir_mzdx06=31; }
 $mesvyplat=1*($kli_vmes+1); $rokvyplat=$kli_vrok;
 $mesvyplatx=$mesvyplat;
 if ( $mesvyplat <  10 ) { $mesvyplat="0".$mesvyplat; }
-if ( $mesvyplatx == 13 ) { $mesvyplat=01; $rokvyplat=$kli_vrok+1; }
+if ( $mesvyplatx == 13 ) { $mesvyplat="01"; $rokvyplat=$kli_vrok+1; }
 
 $denvyplaty=$fir_mzdx06.".".$mesvyplat.".".$rokvyplat;
 if( $denvyplaty == '29.02.2014' ) { $denvyplaty="28.02.2014"; }
