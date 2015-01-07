@@ -1059,17 +1059,21 @@ htmlmenu += "<a href=\"#\" onClick=\"window.open('../ucto/suvaha.php?copern=10&d
 "Chcete vytlaËiù S˙vahu ⁄Ë POD 1-01 verzia UVPOD1v07_1 ?</a>";
     htmlmenu += "</td></tr>";
 
-<?php                      } ?>
+<?php                      } 
+
+$rokdph=$vyb_rok;
+if( $vyb_rok == 2015 ) { $rokdph=2014; }
+?>
 
 
     htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
-htmlmenu += "<a href=\"#\" onClick=\"window.open('../ucto/prizdph<?php echo $vyb_rok; ?>.php?copern=10&drupoh=1&page=1fir_uctx01=0&h_drp=1&h_dap=&h_arch=0', '_blank','<?php echo $tlcswin; ?>' )\">" +
+htmlmenu += "<a href=\"#\" onClick=\"window.open('../ucto/prizdph<?php echo $rokdph; ?>.php?copern=10&drupoh=1&page=1fir_uctx01=0&h_drp=1&h_dap=&h_arch=0', '_blank','<?php echo $tlcswin; ?>' )\">" +
 "Chcete vytlaËiù DaÚovÈ priznanie DaÚ z pridanej hodnoty ?</a>";
     htmlmenu += "</td></tr>";
 
     htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
     htmlmenu += "Chcete skontrolovaù ";
-    htmlmenu += "<a href=\"#\" onClick=\"window.open('../ucto/prizdph<?php echo $vyb_rok; ?>.php?copern=40&drupoh=1&page=1&chyby=1', '_blank','<?php echo $tlcswin; ?>' )\">";
+    htmlmenu += "<a href=\"#\" onClick=\"window.open('../ucto/prizdph<?php echo $rokdph; ?>.php?copern=40&drupoh=1&page=1&chyby=1', '_blank','<?php echo $tlcswin; ?>' )\">";
     htmlmenu += "DPH </a> , ";
     htmlmenu += "<a href=\"#\" onClick=\"window.open('../ucto/ucto_kontrol.php?copern=40&drupoh=1&page=1', '_blank','<?php echo $tlcswin; ?>' )\">";
     htmlmenu += "⁄Ëtovanie </a> nahrat˝ch dokladov ?";
