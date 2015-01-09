@@ -204,9 +204,79 @@ $dtbzx = include("../cis/oddel_dtbz1.php");
 $dsqlt = "TRUNCATE F$kli_vxcf"."_".$uctsys." ";
 $dsql = mysql_query("$dsqlt");
 
+if( $drupoh != 93 AND $drupoh != 94 AND $drupoh != 193 AND $drupoh != 194 )
+{
 $dsqlt = "INSERT INTO F$kli_vxcf"."_".$uctsys." SELECT * FROM ".$databaza."F$h_ycf"."_".$uctsys." ";
 $dsql = mysql_query("$dsqlt");
+}
 
+if( $drupoh == 93 )
+{
+
+$ix=45;
+while( $ix > 0 )
+  {
+$ixn=$ix;
+if( $ix < 10 ) $ixn="0".$ix;
+$dsqlt = "INSERT INTO F$kli_vxcf"."_pos_muj2014 SELECT '0', '".$ix."', rn".$ixn." FROM ".$databaza."F$h_ycf"."_prcsuv1000ahas".$kli_uzid." WHERE rn".$ixn." != 0 ";   
+$dsql = mysql_query("$dsqlt");
+
+$ix=$ix-1;
+  }
+
+}
+
+if( $drupoh == 94 )
+{
+
+$ix=38;
+while( $ix > 0 )
+  {
+$ixn=$ix;
+if( $ix < 10 ) $ixn="0".$ix;
+$dsqlt = "INSERT INTO F$kli_vxcf"."_pov_muj2014 SELECT '0', '".$ix."', r".$ixn." FROM ".$databaza."F$h_ycf"."_prcvyk1000ziss".$kli_uzid." WHERE r".$ixn." != 0 ";   
+$dsql = mysql_query("$dsqlt");
+
+$ix=$ix-1;
+  }
+
+}
+
+if( $drupoh == 193 )
+{
+
+$ix=145;
+while( $ix > 0 )
+  {
+$ixn=$ix;
+if( $ix < 10 ) $ixn="0".$ix;
+$dsqlt = "INSERT INTO F$kli_vxcf"."_pos_pod2014 SELECT '0', '".$ix."', r".$ixn." FROM ".$databaza."F$h_ycf"."_prcsuv1000ahas".$kli_uzid." WHERE r".$ixn." != 0 ";
+if( $ix < 79 )
+      {
+$dsqlt = "INSERT INTO F$kli_vxcf"."_pos_pod2014 SELECT '0', '".$ix."', rn".$ixn." FROM ".$databaza."F$h_ycf"."_prcsuv1000ahas".$kli_uzid." WHERE rn".$ixn." != 0 ";   
+      }
+$dsql = mysql_query("$dsqlt");
+
+$ix=$ix-1;
+  }
+
+}
+
+if( $drupoh == 194 )
+{
+
+$ix=61;
+while( $ix > 0 )
+  {
+$ixn=$ix;
+if( $ix < 10 ) $ixn="0".$ix;
+$dsqlt = "INSERT INTO F$kli_vxcf"."_pov_pod2014 SELECT '0', '".$ix."', r".$ixn." FROM ".$databaza."F$h_ycf"."_prcvyk1000ziss".$kli_uzid." WHERE r".$ixn." != 0 ";   
+$dsql = mysql_query("$dsqlt");
+
+$ix=$ix-1;
+  }
+
+}
 
 $copern=308;
     }
