@@ -652,23 +652,11 @@ window.open('../ucto/vykaz_fin6a04.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&
                 }
 
 
-function UpravFin6a04()
+function SetFin6a04()
                 {
-var h_oc = document.forms.formfin604.h_oc.value;
-var h_fmzdy = 0;
-
-window.open('../ucto/vykaz_fin6a04.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  window.open('../ucto/vykfin_cis.php?copern=308&drupoh=92', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-function ZnovuFin6a04()
-                {
-var h_oc = document.forms.formfin604.h_oc.value;
-var h_fmzdy = 0;
-
-window.open('../ucto/vykaz_fin6a04.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
 
 
 //DBF
@@ -1284,8 +1272,8 @@ if( $kli_vrok >= 2013 ) {
 
 </td>
 <td class="bmenu" width="2%">
-<a href="#" onClick="UpravFin6a04();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty ' ></a>
+<a href="#" onClick="SetFin6a04();">
+<img src='../obr/naradie.png' width=20 height=15 border=0 title='Hodnoty bezprostredne predchádzajúceho obdobia a generovanie výkazu' ></a>
 </td>
 
 <td class="bmenu" width="2%">

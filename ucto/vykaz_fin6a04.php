@@ -30,6 +30,13 @@ $sDat = include("../funkcie/dat_sk_us.php");
 $lenvzs = 1*$_REQUEST['lenvzs'];
 $lensuv = 1*$_REQUEST['lensuv'];
 
+$cislo_oc = 1*$_REQUEST['cislo_oc'];
+if( $cislo_oc == 0 ) $cislo_oc=1;
+if( $cislo_oc == 1 ) { $datum="31.03.".$kli_vrok; $mesiac="03"; $kli_vume="3.".$kli_vrok; $kli_pume="1.".$kli_vrok; }
+if( $cislo_oc == 2 ) { $datum="30.06.".$kli_vrok; $mesiac="06"; $kli_vume="6.".$kli_vrok; $kli_pume="4.".$kli_vrok; }
+if( $cislo_oc == 3 ) { $datum="30.09.".$kli_vrok; $mesiac="09"; $kli_vume="9.".$kli_vrok; $kli_pume="7.".$kli_vrok; }
+if( $cislo_oc == 4 ) { $datum="31.12.".$kli_vrok; $mesiac="12"; $kli_vume="12.".$kli_vrok; $kli_pume="10.".$kli_vrok; }
+
 
 $citfir = include("../cis/citaj_fir.php");
 $mena1 = $fir_mena1;
@@ -54,7 +61,7 @@ $pdf->AddFont('arial','','arial.php');
 //pre zostavu vytvor pracovny subor prcvykzis$kli_uzid pre import nie
 if ( $copern == 10 )
 {
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvykfins'.$kli_uzid;
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvykfins6a04'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
 $sqlt = <<<prcvykziss
@@ -317,275 +324,13 @@ $sqlt = <<<prcvykziss
 );
 prcvykziss;
 
-$vsql = 'CREATE TABLE F'.$kli_vxcf.'_prcvykfins'.$kli_uzid.$sqlt;
+$vsql = 'CREATE TABLE F'.$kli_vxcf.'_prcvykfins6a04'.$kli_uzid.$sqlt;
 $vytvor = mysql_query("$vsql");
 
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvyk1000ziss'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
 
-$sqlt = <<<prcvykziss
-(
-   prx          INT,
-   uce          VARCHAR(11),
-   ucm          VARCHAR(11),
-   ucd          VARCHAR(11),
-   rdk          INT,
-   prv          INT,
-   hod          DECIMAL(10,0),
-   mdt          DECIMAL(10,0),
-   dal          DECIMAL(10,0),
-   r01          DECIMAL(10,0),
-   r02          DECIMAL(10,0),
-   r03          DECIMAL(10,0),
-   r04          DECIMAL(10,0),
-   r05          DECIMAL(10,0),
-   r06          DECIMAL(10,0),
-   r07          DECIMAL(10,0),
-   r08          DECIMAL(10,0),
-   r09          DECIMAL(10,0),
-   r10          DECIMAL(10,0),
-   r11          DECIMAL(10,0),
-   r12          DECIMAL(10,0),
-   r13          DECIMAL(10,0),
-   r14          DECIMAL(10,0),
-   r15          DECIMAL(10,0),
-   r16          DECIMAL(10,0),
-   r17          DECIMAL(10,0),
-   r18          DECIMAL(10,0),
-   r19          DECIMAL(10,0),
-   r20          DECIMAL(10,0),
-   r21          DECIMAL(10,0),
-   r22          DECIMAL(10,0),
-   r23          DECIMAL(10,0),
-   r24          DECIMAL(10,0),
-   r25          DECIMAL(10,0),
-   r26          DECIMAL(10,0),
-   r27          DECIMAL(10,0),
-   r28          DECIMAL(10,0),
-   r29          DECIMAL(10,0),
-   r30          DECIMAL(10,0),
-   r31          DECIMAL(10,0),
-   r32          DECIMAL(10,0),
-   r33          DECIMAL(10,0),
-   r34          DECIMAL(10,0),
-   r35          DECIMAL(10,0),
-   r36          DECIMAL(10,0),
-   r37          DECIMAL(10,0),
-   r38          DECIMAL(10,0),
-   r39          DECIMAL(10,0),
-   r40          DECIMAL(10,0),
-   r41          DECIMAL(10,0),
-   r42          DECIMAL(10,0),
-   r43          DECIMAL(10,0),
-   r44          DECIMAL(10,0),
-   r45          DECIMAL(10,0),
-   r46          DECIMAL(10,0),
-   r47          DECIMAL(10,0),
-   r48          DECIMAL(10,0),
-   r49          DECIMAL(10,0),
-   r50          DECIMAL(10,0),
-   r51          DECIMAL(10,0),
-   r52          DECIMAL(10,0),
-   r53          DECIMAL(10,0),
-   r54          DECIMAL(10,0),
-   r55          DECIMAL(10,0),
-   r56          DECIMAL(10,0),
-   r57          DECIMAL(10,0),
-   konx1        INT,
-   r58          DECIMAL(10,0),
-   r59          DECIMAL(10,0),
-   r60          DECIMAL(10,0),
-   r61          DECIMAL(10,0),
-   r62          DECIMAL(10,0),
-   r63          DECIMAL(10,0),
-   r64          DECIMAL(10,0),
-   r65          DECIMAL(10,0),
-   r66          DECIMAL(10,0),
-   r67          DECIMAL(10,0),
-   r68          DECIMAL(10,0),
-   r69          DECIMAL(10,0),
-   r70          DECIMAL(10,0),
-   r71          DECIMAL(10,0),
-   r72          DECIMAL(10,0),
-   r73          DECIMAL(10,0),
-   r74          DECIMAL(10,0),
-   r75          DECIMAL(10,0),
-   r76          DECIMAL(10,0),
-   r77          DECIMAL(10,0),
-   r78          DECIMAL(10,0),
-   r994         DECIMAL(10,0),
-   r995         DECIMAL(10,0),
-   rpc01          DECIMAL(10,0),
-   rpc02          DECIMAL(10,0),
-   rpc03          DECIMAL(10,0),
-   rpc04          DECIMAL(10,0),
-   rpc05          DECIMAL(10,0),
-   rpc06          DECIMAL(10,0),
-   rpc07          DECIMAL(10,0),
-   rpc08          DECIMAL(10,0),
-   rpc09          DECIMAL(10,0),
-   rpc10          DECIMAL(10,0),
-   rpc11          DECIMAL(10,0),
-   rpc12          DECIMAL(10,0),
-   rpc13          DECIMAL(10,0),
-   rpc14          DECIMAL(10,0),
-   rpc15          DECIMAL(10,0),
-   rpc16          DECIMAL(10,0),
-   rpc17          DECIMAL(10,0),
-   rpc18          DECIMAL(10,0),
-   rpc19          DECIMAL(10,0),
-   rpc20          DECIMAL(10,0),
-   rpc21          DECIMAL(10,0),
-   rpc22          DECIMAL(10,0),
-   rpc23          DECIMAL(10,0),
-   rpc24          DECIMAL(10,0),
-   rpc25          DECIMAL(10,0),
-   rpc26          DECIMAL(10,0),
-   rpc27          DECIMAL(10,0),
-   rpc28          DECIMAL(10,0),
-   rpc29          DECIMAL(10,0),
-   rpc30          DECIMAL(10,0),
-   rpc31          DECIMAL(10,0),
-   rpc32          DECIMAL(10,0),
-   rpc33          DECIMAL(10,0),
-   rpc34          DECIMAL(10,0),
-   rpc35          DECIMAL(10,0),
-   rpc36          DECIMAL(10,0),
-   rpc37          DECIMAL(10,0),
-   rpc38          DECIMAL(10,0),
-   rpc39          DECIMAL(10,0),
-   rpc40          DECIMAL(10,0),
-   rpc41          DECIMAL(10,0),
-   rpc42          DECIMAL(10,0),
-   rpc43          DECIMAL(10,0),
-   rpc44          DECIMAL(10,0),
-   rpc45          DECIMAL(10,0),
-   rpc46          DECIMAL(10,0),
-   rpc47          DECIMAL(10,0),
-   rpc48          DECIMAL(10,0),
-   rpc49          DECIMAL(10,0),
-   rpc50          DECIMAL(10,0),
-   rpc51          DECIMAL(10,0),
-   rpc52          DECIMAL(10,0),
-   rpc53          DECIMAL(10,0),
-   rpc54          DECIMAL(10,0),
-   rpc55          DECIMAL(10,0),
-   rpc56          DECIMAL(10,0),
-   rpc57          DECIMAL(10,0),
-   konx2          INT,
-   rpc58          DECIMAL(10,0),
-   rpc59          DECIMAL(10,0),
-   rpc60          DECIMAL(10,0),
-   rpc61          DECIMAL(10,0),
-   rpc62          DECIMAL(10,0),
-   rpc63          DECIMAL(10,0),
-   rpc64          DECIMAL(10,0),
-   rpc65          DECIMAL(10,0),
-   rpc66          DECIMAL(10,0),
-   rpc67          DECIMAL(10,0),
-   rpc68          DECIMAL(10,0),
-   rpc69          DECIMAL(10,0),
-   rpc70          DECIMAL(10,0),
-   rpc71          DECIMAL(10,0),
-   rpc72          DECIMAL(10,0),
-   rpc73          DECIMAL(10,0),
-   rpc74          DECIMAL(10,0),
-   rpc75          DECIMAL(10,0),
-   rpc76          DECIMAL(10,0),
-   rpc77          DECIMAL(10,0),
-   rpc78          DECIMAL(10,0),
-   rpc994         DECIMAL(10,0),
-   rpc995         DECIMAL(10,0),
-   rsp01          DECIMAL(10,0),
-   rsp02          DECIMAL(10,0),
-   rsp03          DECIMAL(10,0),
-   rsp04          DECIMAL(10,0),
-   rsp05          DECIMAL(10,0),
-   rsp06          DECIMAL(10,0),
-   rsp07          DECIMAL(10,0),
-   rsp08          DECIMAL(10,0),
-   rsp09          DECIMAL(10,0),
-   rsp10          DECIMAL(10,0),
-   rsp11          DECIMAL(10,0),
-   rsp12          DECIMAL(10,0),
-   rsp13          DECIMAL(10,0),
-   rsp14          DECIMAL(10,0),
-   rsp15          DECIMAL(10,0),
-   rsp16          DECIMAL(10,0),
-   rsp17          DECIMAL(10,0),
-   rsp18          DECIMAL(10,0),
-   rsp19          DECIMAL(10,0),
-   rsp20          DECIMAL(10,0),
-   rsp21          DECIMAL(10,0),
-   rsp22          DECIMAL(10,0),
-   rsp23          DECIMAL(10,0),
-   rsp24          DECIMAL(10,0),
-   rsp25          DECIMAL(10,0),
-   rsp26          DECIMAL(10,0),
-   rsp27          DECIMAL(10,0),
-   rsp28          DECIMAL(10,0),
-   rsp29          DECIMAL(10,0),
-   rsp30          DECIMAL(10,0),
-   rsp31          DECIMAL(10,0),
-   rsp32          DECIMAL(10,0),
-   rsp33          DECIMAL(10,0),
-   rsp34          DECIMAL(10,0),
-   rsp35          DECIMAL(10,0),
-   rsp36          DECIMAL(10,0),
-   rsp37          DECIMAL(10,0),
-   rsp38          DECIMAL(10,0),
-   rsp39          DECIMAL(10,0),
-   rsp40          DECIMAL(10,0),
-   rsp41          DECIMAL(10,0),
-   rsp42          DECIMAL(10,0),
-   rsp43          DECIMAL(10,0),
-   rsp44          DECIMAL(10,0),
-   rsp45          DECIMAL(10,0),
-   rsp46          DECIMAL(10,0),
-   rsp47          DECIMAL(10,0),
-   rsp48          DECIMAL(10,0),
-   rsp49          DECIMAL(10,0),
-   rsp50          DECIMAL(10,0),
-   rsp51          DECIMAL(10,0),
-   rsp52          DECIMAL(10,0),
-   rsp53          DECIMAL(10,0),
-   rsp54          DECIMAL(10,0),
-   rsp55          DECIMAL(10,0),
-   rsp56          DECIMAL(10,0),
-   rsp57          DECIMAL(10,0),
-   konx3          INT,
-   rsp58          DECIMAL(10,0),
-   rsp59          DECIMAL(10,0),
-   rsp60          DECIMAL(10,0),
-   rsp61          DECIMAL(10,0),
-   rsp62          DECIMAL(10,0),
-   rsp63          DECIMAL(10,0),
-   rsp64          DECIMAL(10,0),
-   rsp65          DECIMAL(10,0),
-   rsp66          DECIMAL(10,0),
-   rsp67          DECIMAL(10,0),
-   rsp68          DECIMAL(10,0),
-   rsp69          DECIMAL(10,0),
-   rsp70          DECIMAL(10,0),
-   rsp71          DECIMAL(10,0),
-   rsp72          DECIMAL(10,0),
-   rsp73          DECIMAL(10,0),
-   rsp74          DECIMAL(10,0),
-   rsp75          DECIMAL(10,0),
-   rsp76          DECIMAL(10,0),
-   rsp77          DECIMAL(10,0),
-   rsp78          DECIMAL(10,0),
-   rsp994         DECIMAL(10,0),
-   rsp995         DECIMAL(10,0),
-   ico            INT
-);
-prcvykziss;
-
-$vsql = 'CREATE TABLE F'.$kli_vxcf.'_prcvyk1000ziss'.$kli_uzid.$sqlt;
-$vytvor = mysql_query("$vsql");
 
 //zober pociatocny stav uctov
-$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins$kli_uzid"." SELECT".
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins6a04$kli_uzid"." SELECT".
 " 0,uce,uce,0,0,0,0,pmd,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
@@ -599,7 +344,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins$kli_uzid"." SELECT".
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins$kli_uzid"." SELECT".
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins6a04$kli_uzid"." SELECT".
 " 0,uce,uce,0,0,0,0,0,pda,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
@@ -637,7 +382,7 @@ if( $psys == 9 ) { $uctovanie="uctmzd"; }
 
 if( $psys <= 6 )
 {
-$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins$kli_uzid"." SELECT".
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins6a04$kli_uzid"." SELECT".
 " 0,ucm,ucm,0,0,0,0,SUM(F$kli_vxcf"."_$uctovanie.hod),0,".
 "0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
@@ -652,7 +397,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins$kli_uzid"." SELECT".
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins$kli_uzid"." SELECT".
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins6a04$kli_uzid"." SELECT".
 " 0,ucd,0,ucd,0,0,0,0,SUM(F$kli_vxcf"."_$uctovanie.hod),".
 "0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
@@ -671,7 +416,7 @@ else
 {
 //tu budu podsystemy
 
-$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins$kli_uzid"." SELECT".
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins6a04$kli_uzid"." SELECT".
 " 0,ucm,ucm,0,0,0,0,SUM(hod),0,".
 "0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
@@ -686,7 +431,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins$kli_uzid"." SELECT".
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins$kli_uzid"." SELECT".
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins6a04$kli_uzid"." SELECT".
 " 0,ucd,0,ucd,0,0,0,0,SUM(hod),".
 "0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
@@ -708,42 +453,40 @@ $psys=$psys+1;
 //koniec vytvorenia pracovneho suboru
 
 
-$sql = "SELECT * FROM F$kli_vxcf"."_crv_muj2014";
+$sql = "SELECT * FROM F$kli_vxcf"."_crv_fin6a04";
 $vysledok = mysql_query("$sql");
 if ($vysledok)
           {
 $polx = mysql_num_rows($vysledok);
-$sql = "DROP TABLE F$kli_vxcf"."_crv_muj2014";
+$sql = "DROP TABLE F$kli_vxcf"."_crv_fin6a04";
 if( $polx < 4 ) { $vysledok = mysql_query("$sql"); }
           }
 
 //zostava mesacna
 if( $copern == 10 )
 {
-//nastav crs podla uce ale nie z uctosnova ako pri podnikatelskych ale z crv_muj2014.csv v adresary /import
-$sql = "DROP TABLE F$kli_vxcf"."_crv_muj2014";
+$sql = "DROP TABLE F$kli_vxcf"."_crv_fin6a04";
 //$vysledok = mysql_query("$sql");
 
-//Tabulka crv_muj2014
-$sql = "SELECT * FROM F$kli_vxcf"."_crv_muj2014";
+$sql = "SELECT * FROM F$kli_vxcf"."_crv_fin6a04";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
           {
-echo "Vytvorit tabulku F$kli_vxcf"."_crv_muj2014!"."<br />";
+echo "Vytvorit tabulku F$kli_vxcf"."_crv_fin6a04!"."<br />";
 
-$sqlt = <<<crv_muj2014
+$sqlt = <<<crv_fin2014
 (
    cpl         int not null auto_increment,
    uce         VARCHAR(10),
    crs         DECIMAL(10,0),
    PRIMARY KEY(cpl)
 );
-crv_muj2014;
+crv_fin2014;
 
-$sql = 'CREATE TABLE F'.$kli_vxcf.'_crv_muj2014'.$sqlt;
+$sql = 'CREATE TABLE F'.$kli_vxcf.'_crv_fin6a04'.$sqlt;
 $vysledek = mysql_query("$sql");
 
-$subor = fopen("../import/crv_muj$kli_vrok.csv", "r");
+$subor = fopen("../import/crv_fin6a04_$kli_vrok.csv", "r");
 while (! feof($subor))
      {
   $riadok = fgets($subor, 500);
@@ -758,170 +501,129 @@ $c_uce=1*$x_uce;
 
 if( $c_uce > 0 )
 {
-$sqult = "INSERT INTO F$kli_vxcf"."_crv_muj2014 ( uce,crs )".
+$sqult = "INSERT INTO F$kli_vxcf"."_crv_fin6a04 ( uce,crs )".
 " VALUES ( '$x_uce', '$x_crs' ); "; 
 
 $ulozene = mysql_query("$sqult"); 
 }
      }
           }
-//koniec tabulky crv_muj2014
+//koniec tabulky 
 
-//nacitaj riadky z crv_muj2014
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid,F$kli_vxcf"."_crv_muj2014".
-" SET rdk=F$kli_vxcf"."_crv_muj2014.crs".
-" WHERE LEFT(F$kli_vxcf"."_prcvykfins$kli_uzid.uce,3) = LEFT(F$kli_vxcf"."_crv_muj2014.uce,3) ";
+//nacitaj riadky 
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid,F$kli_vxcf"."_crv_fin6a04".
+" SET rdk=F$kli_vxcf"."_crv_fin6a04.crs".
+" WHERE LEFT(F$kli_vxcf"."_prcvykfins6a04$kli_uzid.uce,3) = LEFT(F$kli_vxcf"."_crv_fin6a04.uce,3) ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid,F$kli_vxcf"."_crv_muj2014".
-" SET rdk=F$kli_vxcf"."_crv_muj2014.crs".
-" WHERE LEFT(F$kli_vxcf"."_prcvykfins$kli_uzid.uce,5) = LEFT(F$kli_vxcf"."_crv_muj2014.uce,5) ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid,F$kli_vxcf"."_crv_fin6a04".
+" SET rdk=F$kli_vxcf"."_crv_fin6a04.crs".
+" WHERE LEFT(F$kli_vxcf"."_prcvykfins6a04$kli_uzid.uce,5) = LEFT(F$kli_vxcf"."_crv_fin6a04.uce,5) ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid,F$kli_vxcf"."_crv_muj2014".
-" SET rdk=F$kli_vxcf"."_crv_muj2014.crs".
-" WHERE LEFT(F$kli_vxcf"."_prcvykfins$kli_uzid.uce,6) = LEFT(F$kli_vxcf"."_crv_muj2014.uce,6) ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid,F$kli_vxcf"."_crv_fin6a04".
+" SET rdk=F$kli_vxcf"."_crv_fin6a04.crs".
+" WHERE LEFT(F$kli_vxcf"."_prcvykfins6a04$kli_uzid.uce,6) = LEFT(F$kli_vxcf"."_crv_fin6a04.uce,6) ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "DROP TABLE F$kli_vxcf"."_prcvykfinneg$kli_uzid ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "CREATE TABLE F$kli_vxcf"."_prcvykfinneg".$kli_uzid." SELECT * FROM F".$kli_vxcf."_prcvykfins".$kli_uzid." WHERE rdk >= 0 ";
+$sqtoz = "CREATE TABLE F$kli_vxcf"."_prcvykfinneg".$kli_uzid." SELECT * FROM F".$kli_vxcf."_prcvykfins6a04".$kli_uzid." WHERE rdk >= 0 ";
 $oznac = mysql_query("$sqtoz");
+
 
 //rozdel do riadkov
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r01=dal-mdt WHERE rdk = 1 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r01=dal-mdt WHERE rdk = 1 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r02=dal-mdt WHERE rdk = 2 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r02=dal-mdt WHERE rdk = 2 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r03=dal-mdt WHERE rdk = 3 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r03=mdt-dal WHERE rdk = 3 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r04=dal-mdt WHERE rdk = 4 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r04=dal-mdt WHERE rdk = 4 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r05=dal-mdt WHERE rdk = 5 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r05=dal-mdt WHERE rdk = 5 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r06=dal-mdt WHERE rdk = 6 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r06=mdt-dal WHERE rdk = 6 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r07=dal-mdt WHERE rdk = 7 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r07=mdt-dal WHERE rdk = 7 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r08=mdt-dal WHERE rdk = 8 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r08=mdt-dal WHERE rdk = 8 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r09=mdt-dal WHERE rdk = 9 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r09=mdt-dal WHERE rdk = 9 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r10=mdt-dal WHERE rdk = 10 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r10=mdt-dal WHERE rdk = 10 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r11=mdt-dal WHERE rdk = 11 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r11=mdt-dal WHERE rdk = 11 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r12=mdt-dal WHERE rdk = 12 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r12=mdt-dal WHERE rdk = 12 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r13=mdt-dal WHERE rdk = 13 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r13=mdt-dal WHERE rdk = 13 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r14=mdt-dal WHERE rdk = 14 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r14=mdt-dal WHERE rdk = 14 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r15=mdt-dal WHERE rdk = 15 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r15=mdt-dal WHERE rdk = 15 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r16=mdt-dal WHERE rdk = 16 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r16=mdt-dal WHERE rdk = 16 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r17=mdt-dal WHERE rdk = 17 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r17=mdt-dal WHERE rdk = 17 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r18=dal-mdt WHERE rdk = 18 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r18=mdt-dal WHERE rdk = 18 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r19=dal-mdt WHERE rdk = 19 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r19=mdt-dal WHERE rdk = 19 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r20=dal-mdt WHERE rdk = 20 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r20=dal-mdt WHERE rdk = 20 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r21=dal-mdt WHERE rdk = 21 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r21=mdt-dal WHERE rdk = 21 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r22=dal-mdt WHERE rdk = 22 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r22=mdt-dal WHERE rdk = 22 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r23=dal-mdt WHERE rdk = 23 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r23=dal-mdt WHERE rdk = 23 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r24=dal-mdt WHERE rdk = 24 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r24=dal-mdt WHERE rdk = 24 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r25=dal-mdt WHERE rdk = 25 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r25=dal-mdt WHERE rdk = 25 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r26=dal-mdt WHERE rdk = 26 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r26=dal-mdt WHERE rdk = 26 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r27=mdt-dal WHERE rdk = 27 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r27=mdt-dal WHERE rdk = 27 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r28=mdt-dal WHERE rdk = 28 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r28=dal-mdt WHERE rdk = 28 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r29=mdt-dal WHERE rdk = 29 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r29=dal-mdt WHERE rdk = 29 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r30=mdt-dal WHERE rdk = 30 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r30=mdt-dal WHERE rdk = 30 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r31=mdt-dal WHERE rdk = 31 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r31=dal-mdt WHERE rdk = 31 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r32=mdt-dal WHERE rdk = 32 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r32=mdt-dal WHERE rdk = 32 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r33=mdt-dal WHERE rdk = 33 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r33=dal-mdt WHERE rdk = 33 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r34=dal-mdt WHERE rdk = 34 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r34=mdt-dal WHERE rdk = 34 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r35=dal-mdt WHERE rdk = 35 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r35=dal-mdt WHERE rdk = 35 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r36=mdt-dal WHERE rdk = 36 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r36=mdt-dal WHERE rdk = 36 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r37=mdt-dal WHERE rdk = 37 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET r37=mdt-dal WHERE rdk = 37 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET r38=dal-mdt WHERE rdk = 38 ";
-$oznac = mysql_query("$sqtoz");
-
-
-
-$rob=0;
-if( $rob == 1 )
-  {
-//podnikatelska cinnost presun z r01 do rpc01......r77 do rpc77 ak zakazka je oznacena v parametroch NV=2
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET konx1=0 ";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid,F$kli_vxcf"."_zak ".
-" SET konx1=1 ".
-" WHERE F$kli_vxcf"."_prcvykfins$kli_uzid.str=F$kli_vxcf"."_zak.str AND F$kli_vxcf"."_prcvykfins$kli_uzid.zak=F$kli_vxcf"."_zak.zak ".
-" AND F$kli_vxcf"."_zak.uzk=2 ";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET ".
-" rpc01=r01, rpc02=r02, rpc03=r03, rpc04=r04, rpc05=r05, rpc06=r06, rpc07=r07, rpc08=r08, rpc09=r09, rpc10=r10, ".
-" rpc11=r11, rpc12=r12, rpc13=r13, rpc14=r14, rpc15=r15, rpc16=r16, rpc17=r17, rpc18=r18, rpc19=r19, rpc20=r20, ".
-" rpc21=r21, rpc22=r22, rpc23=r23, rpc24=r24, rpc25=r25, rpc26=r26, rpc27=r27, rpc28=r28, rpc29=r29, rpc30=r30, ".
-" rpc31=r31, rpc32=r32, rpc33=r33, rpc34=r34, rpc35=r35, rpc36=r36, rpc37=r37, rpc38=r38, rpc39=r39, rpc40=r40, ".
-" rpc41=r41, rpc42=r42, rpc43=r43, rpc44=r44, rpc45=r45, rpc46=r46, rpc47=r47, rpc48=r48, rpc49=r49, rpc50=r50, ".
-" rpc51=r51, rpc52=r52, rpc53=r53, rpc54=r54, rpc55=r55, rpc56=r56, rpc57=r57, rpc58=r58, rpc59=r59, rpc60=r60, ".
-" rpc61=r61, rpc62=r62, rpc63=r63, rpc64=r64, rpc65=r65, rpc66=r66, rpc67=r67, rpc68=r68, rpc69=r69, rpc70=r70, ".
-" rpc71=r71, rpc72=r72, rpc73=r73, rpc74=r74, rpc75=r75, rpc76=r76, rpc77=r77                                   ".
-" WHERE konx1 = 1 ";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET ".
-" r01=0, r02=0, r03=0, r04=0, r05=0, r06=0, r07=0, r08=0, r09=0, r10=0, ".
-" r11=0, r12=0, r13=0, r14=0, r15=0, r16=0, r17=0, r18=0, r19=0, r20=0, ".
-" r21=0, r22=0, r23=0, r24=0, r25=0, r26=0, r27=0, r28=0, r29=0, r30=0, ".
-" r31=0, r32=0, r33=0, r34=0, r35=0, r36=0, r37=0, r38=0, r39=0, r40=0, ".
-" r41=0, r42=0, r43=0, r44=0, r45=0, r46=0, r47=0, r48=0, r49=0, r50=0, ".
-" r51=0, r52=0, r53=0, r54=0, r55=0, r56=0, r57=0, r58=0, r59=0, r60=0, ".
-" r61=0, r62=0, r63=0, r64=0, r65=0, r66=0, r67=0, r68=0, r69=0, r70=0, ".
-" r71=0, r72=0, r73=0, r74=0, r75=0, r76=0, r77=0                       ".
-" WHERE konx1 = 1 ";
-$oznac = mysql_query("$sqtoz");
-   }
 
 
 //potom odstran str,zak
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins$kli_uzid SET konx1=0 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET konx1=0 ";
 $oznac = mysql_query("$sqtoz");
-$sql = "ALTER TABLE F$kli_vxcf"."_prcvykfins$kli_uzid DROP str";
+$sql = "ALTER TABLE F$kli_vxcf"."_prcvykfins6a04$kli_uzid DROP str";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_prcvykfins$kli_uzid DROP zak";
+$sql = "ALTER TABLE F$kli_vxcf"."_prcvykfins6a04$kli_uzid DROP zak";
 $vysledek = mysql_query("$sql");
 
 
 //sumar za riadky
-$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins$kli_uzid "." SELECT".
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins6a04$kli_uzid "." SELECT".
 " 1,uce,ucm,ucd,rdk,prv,hod,mdt,dal,".
 "SUM(r01),SUM(r02),SUM(r03),SUM(r04),SUM(r05),".
 "SUM(r06),SUM(r07),SUM(r08),SUM(r09),SUM(r10),SUM(r11),SUM(r12),SUM(r13),SUM(r14),SUM(r15),".
@@ -948,81 +650,27 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykfins$kli_uzid "." SELECT".
 "SUM(rsp61),SUM(rsp62),SUM(rsp63),SUM(rsp64),SUM(rsp65),SUM(rsp66),SUM(rsp67),SUM(rsp68),SUM(rsp69),SUM(rsp70),".
 "SUM(rsp71),SUM(rsp72),SUM(rsp73),SUM(rsp74),SUM(rsp75),SUM(rsp76),SUM(rsp77),SUM(rsp78),SUM(rsp994),SUM(rsp995),".
 "$fir_fico".
-" FROM F$kli_vxcf"."_prcvykfins$kli_uzid".
+" FROM F$kli_vxcf"."_prcvykfins6a04$kli_uzid".
 " WHERE rdk > 0".
 " GROUP BY prx".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
-//ak na tisic
-if( $tis > 0 )
-{
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvyk1000ziss$kli_uzid "." SELECT".
-" 1,uce,ucm,ucd,rdk,prv,hod,mdt,dal,".
-"r01,r02,r03,r04,r05,".
-"r06,r07,r08,r09,r10,r11,r12,r13,r14,r15,".
-"r16,r17,r18,r19,r20,r21,r22,r23,r24,r25,r26,r27,r28,r29,r30,".
-"r31,r32,r33,r34,r35,r36,r37,r38,r39,r40,".
-"r41,r42,r43,r44,r45,r46,r47,r48,r49,r50,".
-"r51,r52,r53,r54,r55,r56,r57,0,r58,r59,r60,".
-"r61,r62,r63,r64,r65,r66,r67,r68,r69,r70,".
-"r71,r72,r73,r74,r75,r76,r77,r78,r994,r995,".
-"rpc01,rpc02,rpc03,rpc04,rpc05,".
-"rpc06,rpc07,rpc08,rpc09,rpc10,rpc11,rpc12,rpc13,rpc14,rpc15,".
-"rpc16,rpc17,rpc18,rpc19,rpc20,rpc21,rpc22,rpc23,rpc24,rpc25,rpc26,rpc27,rpc28,rpc29,rpc30,".
-"rpc31,rpc32,rpc33,rpc34,rpc35,rpc36,rpc37,rpc38,rpc39,rpc40,".
-"rpc41,rpc42,rpc43,rpc44,rpc45,rpc46,rpc47,rpc48,rpc49,rpc50,".
-"rpc51,rpc52,rpc53,rpc54,rpc55,rpc56,rpc57,0,rpc58,rpc59,rpc60,".
-"rpc61,rpc62,rpc63,rpc64,rpc65,rpc66,rpc67,rpc68,rpc69,rpc70,".
-"rpc71,rpc72,rpc73,rpc74,rpc75,rpc76,rpc77,rpc78,rpc994,rpc995,".
-"rsp01,rsp02,rsp03,rsp04,rsp05,".
-"rsp06,rsp07,rsp08,rsp09,rsp10,rsp11,rsp12,rsp13,rsp14,rsp15,".
-"rsp16,rsp17,rsp18,rsp19,rsp20,rsp21,rsp22,rsp23,rsp24,rsp25,rsp26,rsp27,rsp28,rsp29,rsp30,".
-"rsp31,rsp32,rsp33,rsp34,rsp35,rsp36,rsp37,rsp38,rsp39,rsp40,".
-"rsp41,rsp42,rsp43,rsp44,rsp45,rsp46,rsp47,rsp48,rsp49,rsp50,".
-"rsp51,rsp52,rsp53,rsp54,rsp55,rsp56,rsp57,0,rsp58,rsp59,rsp60,".
-"rsp61,rsp62,rsp63,rsp64,rsp65,rsp66,rsp67,rsp68,rsp69,rsp70,".
-"rsp71,rsp72,rsp73,rsp74,rsp75,rsp76,rsp77,rsp78,rsp994,rsp995,".
-"$fir_fico".
-" FROM F$kli_vxcf"."_prcvykfins$kli_uzid".
-" WHERE prx = 1".
-" GROUP BY prx".
-"";
-//echo $dsqlt;
-$dsql = mysql_query("$dsqlt");
-
-}
-//koniec ak 1000ky
 
 //vypocitaj riadky
 $vsldat="prcvykziss";
 if( $tis > 0 ) { $vsldat="prcvyk1000ziss"; }
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"r01=r02+r03+r04+r05+r06+r07, ".
-"r08=r09+r10+r11+r12+r13+r14+r15+r16+r17, ".
-"r18=r01-r08, ".
-"r19=r02-r09+r03+r04+r05-r10-r11, ".
-"r20=r21+r22+r23+r24+r25+r26, ".
-"r27=r28+r29+r30+r31+r32+r33, ".
-"r34=r20-r27, ".
-"r35=r18+r34, ".
-"r38=r35-r36-r37 ".
+"r11=r12+r13, ".
+"r17=r18+r19  ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rpc01=rpc02+rpc03+rpc04+rpc05+rpc06+rpc07, ".
-"rpc08=rpc09+rpc10+rpc11+rpc12+rpc13+rpc14+rpc15+rpc16+rpc17, ".
-"rpc18=rpc01-rpc08, ".
-"rpc19=rpc02-rpc09+rpc03+rpc04+rpc05-rpc10-rpc11, ".
-"rpc20=rpc21+rpc22+rpc23+rpc24+rpc25+rpc26, ".
-"rpc27=rpc28+rpc29+rpc30+rpc31+rpc32+rpc33, ".
-"rpc34=rpc20-rpc27, ".
-"rpc35=rpc18+rpc34, ".
-"rpc38=rpc35-rpc36-rpc37 ".
+"rpc11=rpc12+rpc13, ".
+"rpc17=rpc18+rpc19 ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
@@ -1052,126 +700,13 @@ $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 $oznac = mysql_query("$sqtoz");
 
 
-//rozdiel po zaokruhleni
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_uctparzaok_muj2014 ");
-  if (!$sqldok)
-  {
 
-$sqlt = <<<uctmzd
-(
-   cpl         int not null auto_increment,
-   uce         VARCHAR(10),
-   crs         DECIMAL(10,0),
-   PRIMARY KEY(cpl)
-);
-uctmzd;
-
-$sql = "CREATE TABLE F".$kli_vxcf."_uctparzaok_muj2014 ".$sqlt;
-$ulozene = mysql_query("$sql");
-
-$sql = "INSERT INTO F".$kli_vxcf."_uctparzaok_muj2014 (uce, crs) VALUE ('15', '17') ";
-$ulozene = mysql_query("$sql");
-  }
-
-
-if( $tis > 0 )
-{
-$zisk_suvaha=0;
-$zisk_vzisk=0;
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_prcsuv1000ahas".$kli_uzid."");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  //echo "idem";
-  $riaddok=mysql_fetch_object($sqldok);
-  $zisk_suvaha=$riaddok->rn33;
-  }
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_prcvyk1000ziss".$kli_uzid."");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  //echo "idem";
-  $riaddok=mysql_fetch_object($sqldok);
-  $zisk_vzisk=$riaddok->rsp38;
-  }
-$zisk_rozd=$zisk_vzisk-$zisk_suvaha;
-//echo $zisk_rozd."=".$zisk_vzisk."-".$zisk_suvaha;
-
-$cislo_rdk=0;
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_uctparzaok_muj2014 ");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $cislo_rdk=1*$riaddok->crs;
-  }
-if( $cislo_rdk < 10 ) $cislo_rdk="0".$cislo_rdk;
-//echo $cislo_rdk;
-//exit;
-
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvyk1000ziss$kli_uzid SET ".
-"r".$cislo_rdk."=r".$cislo_rdk."+".$zisk_rozd."  ".
-" WHERE prx = 1 ";
-//echo $sqtoz;
-if( $cislo_rdk > 0 ) { $oznac = mysql_query("$sqtoz"); }
-//exit;
-
-//vypocitaj znovu riadky
-$vsldat="prcvykziss";
-if( $tis > 0 ) { $vsldat="prcvyk1000ziss"; }
-$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"r01=r02+r03+r04+r05+r06+r07, ".
-"r08=r09+r10+r11+r12+r13+r14+r15+r16+r17, ".
-"r18=r01-r08, ".
-"r19=r02-r09+r03+r04+r05-r10-r11, ".
-"r20=r21+r22+r23+r24+r25+r26, ".
-"r27=r28+r29+r30+r31+r32+r33, ".
-"r34=r20-r27, ".
-"r35=r18+r34, ".
-"r38=r35-r36-r37 ".
-" WHERE prx = 1 ";
-//echo $sqtoz;
-$oznac = mysql_query("$sqtoz");
-
-
-//vypocitaj znovu spolu
-$vsldat="prcvykziss";
-if( $tis > 0 ) { $vsldat="prcvyk1000ziss"; }
-$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
-"rsp01=r01+rpc01,rsp02=r02+rpc02,rsp03=r03+rpc03,rsp04=r04+rpc04,rsp05=r05+rpc05,".
-"rsp06=r06+rpc06,rsp07=r07+rpc07,rsp08=r08+rpc08,rsp09=r09+rpc09,rsp10=r10+rpc10,".
-"rsp11=r11+rpc11,rsp12=r12+rpc12,rsp13=r13+rpc13,rsp14=r14+rpc14,rsp15=r15+rpc15,".
-"rsp16=r16+rpc16,rsp17=r17+rpc17,rsp18=r18+rpc18,rsp19=r19+rpc19,rsp20=r20+rpc20,".
-"rsp21=r21+rpc21,rsp22=r22+rpc22,rsp23=r23+rpc23,rsp24=r24+rpc24,rsp25=r25+rpc25,".
-"rsp26=r26+rpc26,rsp27=r27+rpc27,rsp28=r28+rpc28,rsp29=r29+rpc29,rsp30=r30+rpc30,".
-"rsp31=r31+rpc31,rsp32=r32+rpc32,rsp33=r33+rpc33,rsp34=r34+rpc34,rsp35=r35+rpc35,".
-"rsp36=r36+rpc36,rsp37=r37+rpc37,rsp38=r38+rpc38,rsp39=r39+rpc39,rsp40=r40+rpc40,".
-"rsp41=r41+rpc41,rsp42=r42+rpc42,rsp43=r43+rpc43,rsp44=r44+rpc44,rsp45=r45+rpc45,".
-"rsp46=r46+rpc46,rsp47=r47+rpc47,rsp48=r48+rpc48,rsp49=r49+rpc49,rsp50=r50+rpc50,".
-"rsp51=r51+rpc51,rsp52=r52+rpc52,rsp53=r53+rpc53,rsp54=r54+rpc54,rsp55=r55+rpc55,".
-"rsp56=r56+rpc56,rsp57=r57+rpc57,rsp58=r58+rpc58,rsp59=r59+rpc59,rsp60=r60+rpc60,".
-"rsp61=r61+rpc61,rsp62=r62+rpc62,rsp63=r63+rpc63,rsp64=r64+rpc64,rsp65=r65+rpc65,".
-"rsp66=r66+rpc66,rsp67=r67+rpc67,rsp68=r68+rpc68,rsp69=r69+rpc69,rsp70=r70+rpc70,".
-"rsp71=r71+rpc71,rsp72=r72+rpc72,rsp73=r73+rpc73,rsp74=r74+rpc74,rsp75=r75+rpc75,".
-"rsp76=r76+rpc76,rsp77=r77+rpc77,rsp78=r78+rpc78,rsp994=r994+rpc994,rsp995=r995+rpc995".
-" WHERE prx = 1 ";
-//echo $sqtoz;
-$oznac = mysql_query("$sqtoz");
-
-//echo " ".$fir_uctx06;
-//echo " ".$zisk_suvaha;
-//echo " ".$zisk_vzisk;
-//echo " ".$zisk_rozd;
-}
-//koniec rozdiel po zaokruhleni
-
-
-
-//vypis negenerovane pohyby
+//vypis negenerovane pohyby este neviem ci budu generovane vsetky
 $sqtoz = "DELETE FROM F$kli_vxcf"."_prcvykfinneg$kli_uzid WHERE LEFT(uce,1) != 5 AND LEFT(uce,1) != 6 AND LEFT(uce,1) != 8 AND LEFT(uce,1) != 9 ";
 $oznac = mysql_query("$sqtoz");
 
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykfinneg$kli_uzid  WHERE ( rdk = 0 OR ".
-" rdk = 01 OR rdk = 08 OR rdk = 18 OR rdk = 19 OR rdk = 20 OR rdk = 27 OR rdk = 34 OR rdk = 35 OR ".
-" rdk = 38 ) ".
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykfinneg$kli_uzid  WHERE ( rdk = 0 OR rdk = 11 OR rdk = 17 ) ".
 " GROUP BY uce ";
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -1201,9 +736,11 @@ exit;
           }
 //koniec vypis negenerovane pohyby
 
+$sqtoz = "DELETE FROM F$kli_vxcf"."_prcvykfins6a04$kli_uzid WHERE prx != 1 ";
+$oznac = mysql_query("$sqtoz");
 
 //vytlac
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykfins".$kli_uzid." WHERE prx = 1 ";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykfins6a04".$kli_uzid." WHERE prx = 1 ";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -1260,7 +797,7 @@ $rm11=""; $rm12=""; $rm13=""; $rm14=""; $rm15=""; $rm16=""; $rm17=""; $rm18=""; 
 $rm21=""; $rm22=""; $rm23=""; $rm24=""; $rm25=""; $rm26=""; $rm27=""; $rm28=""; $rm29=""; $rm30="";
 $rm31=""; $rm32=""; $rm33=""; $rm34=""; $rm35=""; $rm36=""; $rm37=""; $rm38="";
 
-$sqlttpv = "SELECT * FROM F$kli_vxcf"."_pov_muj2014 WHERE dok > 0 ORDER BY dok "; 
+$sqlttpv = "SELECT * FROM F$kli_vxcf"."_pov_fin6a04 WHERE dok > 0 ORDER BY dok "; 
 $sqlpv = mysql_query("$sqlttpv");
 if($sqlpv) { $polpv = mysql_num_rows($sqlpv); }
 
@@ -1330,7 +867,7 @@ $pdf->SetY(10);
 //dopyt, rozbeha
 $pdf->Cell(195,67," ","$rmc1",1,"L");
 $text=$datum;
-$textx="14.01.2010";
+//$textx="14.01.2010";
 $t01=substr($text,0,1);
 $pdf->Cell(83,6," ","$rmc1",0,"R");$pdf->Cell(34,6,"$text","$rmc",1,"C");
 
@@ -1355,7 +892,7 @@ $pdf->Cell(5,4,"$t07","$rmc",0,"C");$pdf->Cell(5,4,"$t08","$rmc",0,"C");
 //mesiac
 //dopyt, rozbeha
 $text=$mesiac;
-$text="12345678";
+//$text="12345678";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $pdf->Cell(5,5," ","$rmc1",0,"C");
@@ -1371,9 +908,23 @@ $t04=substr($text,3,1);
 $pdf->Cell(6,5," ","$rmc1",0,"C");
 $pdf->Cell(7,4,"$t01","$rmc",0,"C");$pdf->Cell(7,4,"$t02","$rmc",0,"C");$pdf->Cell(6,4,"$t03","$rmc",0,"C");$pdf->Cell(5,4,"$t04","$rmc",0,"C");
 
+
+$nasielvyplnene=0;
+
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin204nuj WHERE oc = $cislo_oc ";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $nasielvyplnene=1;
+
+  $riaddok=mysql_fetch_object($sqldok);
+  $xokres=1*$riaddok->okres;
+  $xobec=1*$riaddok->obec;
+  }
+
 //kód okresu
 //dopyt, rozbeha
-$text=$hlavicka->okres;
+$text=$xokres;
 $textx="123";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -1383,7 +934,7 @@ $pdf->Cell(5,4,"$t01","$rmc",0,"C");$pdf->Cell(4,4,"$t02","$rmc",0,"C");$pdf->Ce
 
 //kód obce
 //dopyt, rozbeha
-$text=$hlavicka->obec;
+$text=$xobec;
 $textx="123456";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -1798,10 +1349,9 @@ $i = $i + 1;
 $pdf->Output("../tmp/vykfin.$kli_uzid.pdf");
 
 
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvykfins'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvykfin'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvykfins6a04'.$kli_uzid;
+//$vysledok = mysql_query("$sqlt");
+
 
 
 ?> 
