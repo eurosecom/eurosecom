@@ -83,18 +83,6 @@ if( $kli_vrok < 2014 )
 exit;
 }
 
-if( $kli_vrok < 2015 )
-{
-?>
-<script type="text/javascript">
-  var okno = window.open("../mzdy/vyplat_paska2014.php?copern=<?php echo $copern; ?>&drupoh=<?php echo $drupoh; ?>&ostre=<?php echo $ostre; ?>
-&cislo_oc=<?php echo $cislo_oc; ?>&cislo_kanc=<?php echo $cislo_kanc; ?>&kanc=<?php echo $kanc; ?>&kontrola=<?php echo $kontrola; ?>
-&vyb_osc=<?php echo $vyb_osc; ?>","_self");
-</script>
-<?php
-exit;
-}
-
 //vyplatne pasky z menu po ostrom
 if( $copern == 11 )
     {
@@ -562,7 +550,7 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdprm");
 
 
 //danovy bonus sa bude asi menit od 1.7.2014, maximalne vymeriavacie pre SP,ZP sa budu menit az od 1.1.
-if( $kli_vume < 7.2015 AND $kli_vrok == 2015 )
+if( $kli_vume < 7.2014 AND $kli_vrok == 2014 )
           {
 $dan_bonus=21.41;
           }
@@ -1143,6 +1131,30 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
 " SET zzam_zp=zzam_zp+ddp_fir WHERE szpnie = 0";
 $oznac = mysql_query("$sqtoz");
 
+//DDP za firmu nad 3% zo zakladu zzam_sp pripocitaj do zakladov SP 
+  //vypocitaj 3% a rozdiel do des2
+if( $kli_vrok < 2010 )
+{
+//v zakone 461/2003 zrusene novelou 310/2006 od 1.8.2006
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
+" SET des6=zzam_sp*3/100, des2=ddp_fir-des6 ".
+" WHERE ddp_fir > 0 ";
+$oznac = mysql_query("$sqtoz");
+
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
+" SET zzam_np=zzam_np+des2, zzam_sp=zzam_sp+des2, zzam_up=zzam_up+des2, zzam_gf=zzam_gf+des2, zzam_rf=zzam_rf+des2".
+" WHERE sspnie = 0 AND ddp_fir > 0 AND des2 > 0 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
+" SET zzam_ip=zzam_ip+des2, zzam_pn=zzam_pn+des2".
+" WHERE sspnie = 0 AND sdoch = 0 AND sdocv = 0 AND ddp_fir > 0 AND des2 > 0";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET des2=0, des6=0  WHERE oc >= 0";
+$oznac = mysql_query("$sqtoz");
+}
 
 //uprav maximalny a minimalny zaklad ZP,NP,SP...,RF nesp_dni,hod a nezp_dni,hod v tabulke neod su dni , za ktore nie je poisteny SP a ZP
   //nastav max a min z parametrov
@@ -1188,6 +1200,13 @@ $vysledok = mysql_query("$sqlt");
 
 //uprav maximalny a minimalny podla nepoistenych dni, zpmax neupravuj ak celkovedni = nepoistenedni pravdepodobne je to prijem rocny...
 //od 11.2014 neznizujem maximalny zaklad do ZP podla poctu poistenych dni, vzdy je maxZP
+if( $kli_vrok < 2014 OR ( $kli_vrok == 2014 AND $kli_vume < 11.2014 ) )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET zmax_zp=zmax_zp*(celk_dni-nezp_dni)/celk_dni ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_mzdprcneod$kli_uzid.oc AND konnex != 508 AND celk_dni != nezp_dni ";
+$oznac = mysql_query("$sqtoz");
+  }
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdprcneod$kli_uzid".
 " SET zmin_zp=zmin_zp*(celk_dni-nezp_dni)/celk_dni ".
@@ -1328,6 +1347,49 @@ $vysledok = mysql_query("$sqlt");
 
 //uprav maximalny a minimalny ak je znizeny uvazok v kun uvazn=1
 //od 5.2011 neznizuj maximalny zaklad ZP,SP podla znizeneho uvazku, od 1.2011 uz minimalny nie je
+if( $kli_vrok < 2012 )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET zmax_zp=zmax_zp*(suva/$uva_hod), zmin_zp=zmin_zp*(suva/$uva_hod) ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND uvazn = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET zmax_np=zmax_np*(suva/$uva_hod), zmin_np=zmin_np*(suva/$uva_hod) ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND uvazn = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET zmax_sp=zmax_sp*(suva/$uva_hod), zmin_sp=zmin_sp*(suva/$uva_hod) ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND uvazn = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET zmax_ip=zmax_ip*(suva/$uva_hod), zmin_ip=zmin_ip*(suva/$uva_hod) ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND uvazn = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET zmax_pn=zmax_pn*(suva/$uva_hod), zmin_pn=zmin_pn*(suva/$uva_hod) ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND uvazn = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET ".
+" zmin_up=zmin_up*(suva/$uva_hod) ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND uvazn = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET zmax_gf=zmax_gf*(suva/$uva_hod), zmin_gf=zmin_gf*(suva/$uva_hod) ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND uvazn = 1 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET zmax_rf=zmax_rf*(suva/$uva_hod), zmin_rf=zmin_rf*(suva/$uva_hod) ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND uvazn = 1 ";
+$oznac = mysql_query("$sqtoz");
+  }
 
 //ak ma poisteny len jeden den napr. 1.2.2009 je nedela a maroduje od 2.2.2009 do 28.2.2009 vynuluj zaklad odvodov
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdprcneod$kli_uzid".
@@ -1350,6 +1412,20 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdprcneod$kli_u
 $oznac = mysql_query("$sqtoz");
 
 //ak je 508 nechaj zaklad neupravuj na min ani max len do 2.2011
+if( $kli_vrok < 2012 )
+ {
+//echo "idem".$kli_vume;
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET zmax_np=zzam_np, zmin_np=zzam_np, ".
+" zmax_sp=zzam_sp, zmin_sp=zzam_sp, ".
+" zmax_ip=zzam_ip, zmin_ip=zzam_ip, ".
+" zmax_pn=zzam_pn, zmin_pn=zzam_pn, ".
+" zmax_up=zzam_up, zmin_up=zzam_up, ".
+" zmax_gf=zzam_gf, zmin_gf=zzam_gf, ".
+" zmax_rf=zzam_rf, zmin_rf=zzam_rf ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_mzdprcneod$kli_uzid.oc AND konnex = 508 ";
+$oznac = mysql_query("$sqtoz");
+  }
 
 //vyhodnotenie dm=513 nahrada 60% neupravuj minimalny do SP
 if( $alchem == 1 )
@@ -1394,9 +1470,18 @@ $oznac = mysql_query("$sqtoz");
 //koniec vyhodnotenie 513
 
 //ak je pomer na dohodu nechaj zaklad gf,up neupravuj min len max, od 1.1.2013 podla BA-26366/2013 z 7.2.2013
+if( $kli_vrok < 2013 )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdpomer SET zmax_gf=$max_gf, zmin_gf=zzam_gf ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.spom = F$kli_vxcf"."_mzdpomer.pm AND pm_doh = 1 AND zzam_gf < $max_gf";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdpomer SET zmax_gf=$max_gf, zmin_gf=$max_gf ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.spom = F$kli_vxcf"."_mzdpomer.pm AND pm_doh = 1 AND zzam_gf >= $max_gf";
+$oznac = mysql_query("$sqtoz");
+  }
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zmax_gf=$max_gf, zmin_gf=zzam_gf ".
-" WHERE spom = 41 AND zzam_gf <= 200 AND zzam_gf < $max_gf ";
+" WHERE spom = 41 AND zzam_gf <= 159 AND zzam_gf < $max_gf ";
 $oznac = mysql_query("$sqtoz"); 
 
 
@@ -1408,7 +1493,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdpomer SET zma
 $oznac = mysql_query("$sqtoz");
 //exit;
 
-//uprava zakladov SP,IP,RF pre pomer=41 podla veku od 1.1.2015 18rokov(vratane v mesiaci ma 18nast)-200Eur,26rokov(v celom roku)-200Eur 
+//uprava zakladov SP,IP,RF pre pomer=41 podla veku od 1.1.2014 18rokov(vratane v mesiaci ma 18nast)-68Eur,26rokov(v celom roku)-159Eur 
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
 " SET des1=YEAR(dar), des2=MONTH(dar) ".
@@ -1434,19 +1519,19 @@ $oznac = mysql_query("$sqtoz");
 
 //exit;
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
-" SET zzam_sp=0, zzam_ip=0, zzam_rf=0, zfir_sp=0, zfir_ip=0, zfir_rf=0 WHERE spom = 41 AND zzam_sp <= 200 AND des6 <= 18 ";
+" SET zzam_sp=0, zzam_ip=0, zzam_rf=0, zfir_sp=0, zfir_ip=0, zfir_rf=0 WHERE spom = 41 AND zzam_sp <= 68 AND des6 <= 18 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
-" SET zzam_sp=zzam_sp-200, zzam_ip=zzam_ip-200, zzam_rf=zzam_rf-200, zfir_sp=zfir_sp-200, zfir_ip=zfir_ip-200, zfir_rf=zfir_rf-200  WHERE spom = 41 AND zzam_sp > 200 AND des6 <= 18 ";
+" SET zzam_sp=zzam_sp-68, zzam_ip=zzam_ip-68, zzam_rf=zzam_rf-68, zfir_sp=zfir_sp-68, zfir_ip=zfir_ip-68, zfir_rf=zfir_rf-68  WHERE spom = 41 AND zzam_sp > 68 AND des6 <= 18 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
-" SET zzam_sp=0, zzam_ip=0, zzam_rf=0, zfir_sp=0, zfir_ip=0, zfir_rf=0 WHERE spom = 41 AND zzam_sp <= 200 AND des6 <= 26 AND des6 > 18 ";
+" SET zzam_sp=0, zzam_ip=0, zzam_rf=0, zfir_sp=0, zfir_ip=0, zfir_rf=0 WHERE spom = 41 AND zzam_sp <= 159 AND des6 <= 26 AND des6 > 18 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
-" SET zzam_sp=zzam_sp-200, zzam_ip=zzam_ip-200, zzam_rf=zzam_rf-200, zfir_sp=zfir_sp-200, zfir_ip=zfir_ip-200, zfir_rf=zfir_rf-200 WHERE spom = 41 AND zzam_sp > 200 AND des6 <= 26 AND des6 > 18 ";
+" SET zzam_sp=zzam_sp-159, zzam_ip=zzam_ip-159, zzam_rf=zzam_rf-159, zfir_sp=zfir_sp-159, zfir_ip=zfir_ip-159, zfir_rf=zfir_rf-159 WHERE spom = 41 AND zzam_sp > 159 AND des6 <= 26 AND des6 > 18 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
@@ -1644,7 +1729,7 @@ $neprprijem = include("neprav_prijem.php");
      }
 //koniec odvody nepravidelny prijem
 
-//dan z prijmu vypocet od 1.1.2014 do 2918,53 Eur zaklad 19% a 25% z rozdielu nad 2918,53 Eur zaklad ZOSTAVA rovnako aj po 1.1.2015
+//dan z prijmu vypocet od 1.1.2014 do 2918,53 Eur zaklad 19% a 25% z rozdielu nad 2918,53 Eur zaklad
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
 " SET pdan_fnd=ozam_zp+ozam_np+ozam_sp+ozam_ip+ozam_pn+ozam_up+ozam_gf+ozam_rf, pdan_zn1=ddp_fir,".
 " zakl_dan=zdan_dnp-pdan_dnv-pdan_fnd+pdan_zn1-pdan_zn2, des6=($dan_perc*zakl_dan)/100, des6=des6-0.005, des2=des6, odan_dnp=des2, ".
@@ -1663,6 +1748,15 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET odan_dnp=0, zakl_dan=0 WHERE odan_dnp < 0 "; $oznac = mysql_query("$sqtoz");
 
 //zrazkova dan od 1.1.2011 zrusena
+if( $kli_vrok < 2011 )
+  {
+//zrazkova dan z dane z prijmu ak zaklad=0.01 az 165.97 a nie je bonus ani odpocet na danovnika ani zrz_dn=1
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET odan_zrz=odan_dnp, odan_dnp=0".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND zrz_dn = 0 AND zdan_dnp > 0 AND zdan_dnp < 165.98".
+" AND pom != 0 AND pom != 1 AND bonus_dan = 0 AND pdan_dnv = 0 ";
+$oznac = mysql_query("$sqtoz");
+  }
 
 //odvody spolu a zvys zrazky o dan a odvody a bonus
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET ozam_spolu=ozam_zp+ozam_np+ozam_sp+ozam_ip+ozam_pn+ozam_up+ozam_gf+ozam_rf,".
@@ -1946,7 +2040,7 @@ $oznac = mysql_query("$sqtoz");
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
+<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Výplatná páska</title>
   <style type="text/css">
