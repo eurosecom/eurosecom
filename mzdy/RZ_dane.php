@@ -101,7 +101,8 @@ if( $rokpotvrdenia < 2011 ) { $rokpotvrdenia="";  }
 if( $rokpotvrdenia == 2011 ) { $rokpotvrdenia="2011";  }
 if( $rokpotvrdenia == 2012 ) { $rokpotvrdenia="2012";  }
 if( $rokpotvrdenia == 2013 ) { $rokpotvrdenia="2013";  }
-if( $rokpotvrdenia >= 2014 ) { $rokpotvrdenia="2014";  }
+if( $rokpotvrdenia == 2014 ) { $rokpotvrdenia="2014";  }
+if( $rokpotvrdenia >= 2015 ) { $rokpotvrdenia="2015";  }
 ?>
 
 function TlacPotvrdenie()
@@ -255,8 +256,8 @@ $rokziadosti=$kli_vrok;
 if( $rokziadosti < 2011 ) { $rokziadosti="";  }
 if( $rokziadosti == 2011 ) { $rokziadosti="2011";  }
 if( $rokziadosti == 2012 ) { $rokziadosti="2012";  }
-if( $rokziadosti >= 2013 ) { $rokziadosti="2013";  }
-
+if( $rokziadosti == 2013 ) { $rokziadosti="2013";  }
+if( $rokziadosti >= 2014 ) { $rokziadosti="2014";  }
 ?>
 
 function TlacRocneziadost()
