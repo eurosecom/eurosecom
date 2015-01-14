@@ -61,8 +61,7 @@ exit;
      }
 
 //priezvisko,meno,titul FO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
-" WHERE oc = 9999 ORDER BY oc";
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
 
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
@@ -109,13 +108,15 @@ $docx = 1*$_REQUEST['docx'];
 $doceur = 1*$_REQUEST['doceur'];
 $uplsds = 1*$_REQUEST['uplsds'];
 $sdseur = 1*$_REQUEST['sdseur'];
+$upldds = 1*$_REQUEST['upldds'];
+$ddseur = 1*$_REQUEST['ddseur'];
 $uprav="NO";
 
 if ( $strana == 1 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_rocneziadost SET ".
 " uplman='$uplman', manprie='$manprie', manmeno='$manmeno', manrodne='$manrodne', manuli='$manuli', ".
 " mancdm='$mancdm', manpsc='$manpsc', manmes='$manmes', manstat='$manstat', manpes='$manpes', manzam='$manzam', maneur='$maneur', ".
-" prisknczd='$prisknczd', upldoc='$upldoc', docx='$docx', doceur='$doceur', uplsds='$uplsds', sdseur='$sdseur' ".
+" prisknczd='$prisknczd', upldoc='$upldoc', docx='$docx', doceur='$doceur', uplsds='$uplsds', sdseur='$sdseur', upldds='$upldds', ddseur='$ddseur' ".
 " WHERE oc = $cislo_oc";
                     }
 
@@ -446,13 +447,16 @@ $sql = "ALTER TABLE F$kli_vxcf"."_rocneziadost ADD priskbonus DECIMAL(2,0) DEFAU
 $vysledek = mysql_query("$sql");
 }
 //zmeny pre rok 2014
-$sql = "SELECT new2014 FROM F$kli_vxcf"."_rocneziadost ";
+$sql = "SELECT ddseur FROM F$kli_vxcf"."_rocneziadost ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
 $sql = "ALTER TABLE F$kli_vxcf"."_rocneziadost ADD new2014 DECIMAL(2,0) DEFAULT 0 AFTER ziad9";
 $vysledek = mysql_query("$sql");
-
+$sql = "ALTER TABLE F$kli_vxcf"."_rocneziadost ADD upldds DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_rocneziadost ADD ddseur DECIMAL(10,2) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
 }
 //koniec zmeny2014
 
@@ -536,6 +540,8 @@ $docx = $fir_riadok->docx;
 $doceur = $fir_riadok->doceur;
 $uplsds = $fir_riadok->uplsds;
 $sdseur = $fir_riadok->sdseur;
+$upldds = $fir_riadok->upldds;
+$ddseur = $fir_riadok->ddseur;
 
 if ( $strana == 2 ) {
 $bonus = $fir_riadok->bonus;
@@ -694,6 +700,8 @@ var sirkawic = screen.width-10;
    document.formv1.doceur.value = '<?php echo "$doceur";?>';
 <?php if ( $uplsds == 1 ) { ?> document.formv1.uplsds.checked = "checked"; <?php } ?>
    document.formv1.sdseur.value = '<?php echo "$sdseur";?>';
+<?php if ( $upldds == 1 ) { ?> document.formv1.upldds.checked = "checked"; <?php } ?>
+   document.formv1.ddseur.value = '<?php echo "$ddseur";?>';
 <?php                                        } ?>
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
@@ -838,7 +846,7 @@ $source="../mzdy/rocne_ziadost2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
 </div>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/ziadost_o_rz/Ziadost_RZv2013_str1_form.jpg" alt="tlaèivo Žiados o RZ FO pre rok 2013 1.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/rz_ziadost/rz_ziadost_v14-1.jpg" alt="tlaèivo Žiados o RZ FO pre rok 2013 1.strana 282kB" class="form-background">
 <input type="text" name="vrok" id="vrok" value="<?php echo $kli_vrok;?>" disabled="disabled" class="nofill center" style="width:135px; top:104px; left:710px; padding:0;"/>
 
 <!-- I. ZAMESTNANEC -->
@@ -855,6 +863,9 @@ $source="../mzdy/rocne_ziadost2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
 <input type="text" name="zstat" id="zstat" value="<?php echo $zstat; ?>" disabled="disabled" class="nofill" style="width:220px; top:356px; left:535px;"/>
 <input type="text" name="zamestnavatel" id="zamestnavatel" value="<?php echo $zamestnavatel; ?>" disabled="disabled" class="nofill" style="width:724px; top:408px; left:116px;"/>
 
+<!-- 90% prijmov SR -->
+<input type="checkbox" name="prisknczd" value="1" style="top:450px; left:790px;"/>
+
 <!-- II. UPLATNENIE NCZD -->
 <!-- 1. na manzel/ku -->
 <input type="checkbox" name="uplman" value="1" style="top:494px; left:790px;"/>
@@ -869,7 +880,7 @@ $source="../mzdy/rocne_ziadost2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
 <input type="text" name="manpes" id="manpes" style="width:45px; top:700px; left:795px;"/>
 <input type="text" name="manzam" id="manzam" style="width:724px; top:752px; left:116px;"/>
 <input type="text" name="maneur" id="maneur" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:820px; left:559px;"/>
-<input type="checkbox" name="prisknczd" value="1" style="top:862px; left:790px;"/>
+
 <!-- 2. na dochodok -->
 <input type="checkbox" name="upldoc" value="1" style="top:971px; left:790px;"/>
 <input type="checkbox" name="docx" value="1" style="top:1026px; left:790px;"/>
@@ -877,11 +888,15 @@ $source="../mzdy/rocne_ziadost2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
 <!-- 3. na SDS -->
 <input type="checkbox" name="uplsds" value="1" style="top:1149px; left:791px;"/>
 <input type="text" name="sdseur" id="sdseur" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:1212px; left:560px;"/>
+
+<!-- 4. na DDS -->
+<input type="checkbox" name="upldds" value="1" style="top:1240px; left:791px;"/>
+<input type="text" name="ddseur" id="ddseur" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:1260px; left:560px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/ziadost_o_rz/Ziadost_RZv2013_str2_form.jpg" alt="tlaèivo Žiados o RZ FO pre rok 2013 2.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/rz_ziadost/rz_ziadost_v14-2.jpg" alt="tlaèivo Žiados o RZ FO pre rok 2013 2.strana 282kB" class="form-background">
 
 <!-- III. BONUS -->
 <input type="checkbox" name="bonus" value="1" style="top:110px; left:795px;"/>
@@ -992,9 +1007,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/ziadost_o_rz/Ziadost_RZv2013_str1.jpg') AND $i == 0 )
+if ( File_Exists('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/rz_ziadost/rz_ziadost_v14-1.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/ziadost_o_rz/Ziadost_RZv2013_str1.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/rz_ziadost/rz_ziadost_v14-1.jpg',0,0,210,297);
 }
 
 //za zdanovacie obdobie
@@ -1117,9 +1132,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/ziadost_o_rz/Ziadost_RZv2013_str2.jpg') AND $i == 0 )
+if ( File_Exists('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/rz_ziadost/rz_ziadost_v14-2.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/ziadost_o_rz/Ziadost_RZv2013_str2.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/rz_ziadost/rz_ziadost_v14-2.jpg',0,0,210,297);
 }
 
 //III. BONUS
