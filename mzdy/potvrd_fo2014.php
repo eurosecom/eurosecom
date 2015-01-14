@@ -30,7 +30,7 @@ if ( $zablokovane == 1 )
      {
 ?>
 <script type="text/javascript">
-alert ("Potvrdenie bude pripravené v priebehu februára 2015. Aktuálne info nájdete na vstupnej stránke v bode Novinky, tipy, triky.");
+alert ("Potvrdenie bude pripravené v priebehu februára 2014. Aktuálne info nájdete na vstupnej stránke v bode Novinky, tipy, triky.");
 window.close();
 </script>
 <?php
@@ -71,7 +71,7 @@ if ( $copern == 26 )
      {
 $sqtoz = "DELETE FROM F$kli_vxcf"."_mzdpotvrdenieFO WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
-$copern=20;
+$copern=10;
 $subor=1;
      }
 
@@ -81,14 +81,10 @@ if ( $copern == 23 )
 $konx1 = strip_tags($_REQUEST['konx1']);
 $r01 = strip_tags($_REQUEST['r01']);
 $r13 = strip_tags($_REQUEST['r13']);
-$r12a = strip_tags($_REQUEST['r12a']);
-$r12b = strip_tags($_REQUEST['r12b']);
-$r11 = strip_tags($_REQUEST['r11']);
 $r02 = strip_tags($_REQUEST['r02']);
 $r03a = strip_tags($_REQUEST['r03a']);
 $r03c = strip_tags($_REQUEST['r03c']);
 $r03b = strip_tags($_REQUEST['r03b']);
-$r09 = strip_tags($_REQUEST['r09']);
 $r04 = strip_tags($_REQUEST['r04']);
 $r05 = strip_tags($_REQUEST['r05']);
 //$r06mes = strip_tags($_REQUEST['r06mes']);
@@ -161,7 +157,6 @@ $pozn = strip_tags($_REQUEST['pozn']);
 $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO SET ".
-" obmedz='$obmedz', r12a='$r12a', r12b='$r12b', r11='$r11', r09='$r09', ".
 " konx1='$konx1', r01='$r01', r13='$r13', r02='$r02', r03a='$r03a', r09='$r03c', r03b='$r03b', r04='$r04', r05='$r05', r06sum='$r06sum', r10='$r10', ".
 " r07det1='$r07det1', r07det2='$r07det2', r07det3='$r07det3', r07det4='$r07det4', r07det5='$r07det5', r07det6='$r07det6', r07det7='$r07det7', ".
 " r07rod1='$r07rod1', r07rod2='$r07rod2', r07rod3='$r07rod3', r07rod4='$r07rod4', r07rod5='$r07rod5', r07rod6='$r07rod6', r07rod7='$r07rod7', ".
@@ -375,19 +370,6 @@ $vysledek = mysql_query("$sql");
 }
 //koniec zmeny2014
 
-//zmeny2015
-$sql = "SELECT obmedz FROM F$kli_vxcf"."_mzdpotvrdenieFO ";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD new2015 DECIMAL(2,0) DEFAULT 0 AFTER datv";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD obmedz DECIMAL(2,0) DEFAULT 0 AFTER new2015";
-$vysledek = mysql_query("$sql");
-
-}
-//koniec zmeny2015
-
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid;
@@ -415,7 +397,6 @@ if ( $jepotvrd == 0 ) $subor=1;
 //pre potvrdenie vytvor pracovny subor
 if ( $subor == 1 )
 {
-
 $sqtoz = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid." ( oc ) VALUES ( $cislo_oc )";
 $oznac = mysql_query("$sqtoz");
 
@@ -803,8 +784,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdpotvrdenieFO".
 "2,'',konx1,".
 "0,0,0,0,0,0,0,0,0,0,0,0,1,".
 "0,0,0,0,0,0,0,0,0,0,0,0,1,".
-"podpa,podpn,0,1,0,'$dat_dat', ".
-"0,0 ".
+"podpa,podpn,0,1,0,'$dat_dat' ".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " GROUP BY oc".
 "";
@@ -864,17 +844,12 @@ $cdm = $fir_riadok->zcdm;
 $psc = $fir_riadok->zpsc;
 $mes = $fir_riadok->zmes;
 $konx1 = $fir_riadok->konx1;
-$obmedz = $fir_riadok->obmedz;
 $r01 = $fir_riadok->r01;
 $r13 = $fir_riadok->r13;
-$r12a = $fir_riadok->r12a;
-$r12b = $fir_riadok->r12b;
-$r11 = $fir_riadok->r11;
 $r02 = $fir_riadok->r02;
 $r03a = $fir_riadok->r03a;
 $r03c = $fir_riadok->r09;
 $r03b = $fir_riadok->r03b;
-$r09 = $fir_riadok->r09;
 $r04 = $fir_riadok->r04;
 $r05 = $fir_riadok->r05;
 $r06sum = $fir_riadok->r06sum;
@@ -1040,17 +1015,12 @@ var sirkawic = screen.width-10;
   function ObnovUI()
   {
 <?php if ( $konx1 == 1 ) { ?> document.formv1.konx1.checked = "checked"; <?php } ?>
-<?php if ( $obmedz == 1 ) { ?> document.formv1.obmedz.checked = "checked"; <?php } ?>
    document.formv1.r01.value = '<?php echo "$r01";?>';
    document.formv1.r13.value = '<?php echo "$r13";?>';
-   document.formv1.r12a.value = '<?php echo "$r12a";?>';
-   document.formv1.r12b.value = '<?php echo "$r12b";?>';
-   document.formv1.r11.value = '<?php echo "$r11";?>';
    document.formv1.r02.value = '<?php echo "$r02";?>';
    document.formv1.r03a.value = '<?php echo "$r03a";?>';
    document.formv1.r03c.value = '<?php echo "$r03c";?>';
    document.formv1.r03b.value = '<?php echo "$r03b";?>';
-   document.formv1.r09.value = '<?php echo "$r09";?>';
    document.formv1.r04.value = '<?php echo "$r04";?>';
    document.formv1.r05.value = '<?php echo "$r05";?>';
    document.formv1.r06sum.value = '<?php echo "$r06sum";?>';
@@ -1134,11 +1104,11 @@ var sirkawic = screen.width-10;
 
   function prevOC()
   {
-   window.open('potvrd_fo2015.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $prev_oc;?>', '_self');
+   window.open('potvrd_fo2014.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $prev_oc;?>', '_self');
   }
   function nextOC()
   {
-   window.open('potvrd_fo2015.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $next_oc;?>', '_self');
+   window.open('potvrd_fo2014.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $next_oc;?>', '_self');
   }
   function PoucVyplnenie()
   {
@@ -1146,11 +1116,11 @@ var sirkawic = screen.width-10;
   }
   function ZnovuPotvrdenie()
   {
-   window.open('../mzdy/potvrd_fo2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/potvrd_fo2014.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function TlacPotvrdPrijFO()
   {
-   window.open('../mzdy/potvrd_fo2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/potvrd_fo2014.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravZamestnanca()
   {
@@ -1199,14 +1169,13 @@ if ( $copern == 20 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="potvrd_fo2015.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
+<FORM name="formv1" method="post" action="potvrd_fo2014.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
 
 <div class="navbar">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-top-formsave" style="top:4px;">
 </div>
-<img src="../dokumenty/dan_z_prijmov2015/dan_zo_zavislej2015/potvrdeniefo/potvrdeniefo_v15.jpg" alt="tlaèivo Potvrdenie o príjmoch FO pre rok 2015 1.strana 273kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/potvrdeniefo/Potvrd_prijFOv14_str1_form.jpg" alt="tlaèivo Potvrdenie o príjmoch FO pre rok 2014 1.strana 273kB" class="form-background">
 <input type="checkbox" name="konx1" value="1" style="top:95px; left:800px;"/>
-
 
 <!-- I. ZAMESTNANEC -->
  <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upravi údaje o zamestnancovi" class="btn-row-tool" style="top:122px; left:315px; width:18px; height:18px;">
@@ -1221,26 +1190,18 @@ if ( $copern == 20 )
 <input type="text" name="mes" id="mes" value="<?php echo $mes; ?>" disabled="disabled" class="nofill" style="width:328px; top:287px; left:145px;"/>
 <input type="text" name="zstat" id="zstat" value="<?php echo $zstat; ?>" disabled="disabled" class="nofill" style="width:220px; top:287px; left:522px;"/>
 
-<input type="checkbox" name="obmedz" value="1" style="top:160px; left:748px;" title="obmedz"/>
-
 <!-- II. PRIJMY -->
-<input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:277px; left:748px;" title="r01"/>
-<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:311px; left:748px;" title="r01a"/>
-
-<input type="text" name="r12a" id="r12a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:341px; left:748px;" title="r01b"/>
-<input type="text" name="r12b" id="r12b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:371px; left:748px;" title="r01c"/>
-<input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:401px; left:748px;" title="r02"/>
-
-<input type="text" name="r02" id="r02" style="width:91px; top:444px; left:748px;" title="r03"/>
-<input type="text" name="r03a" id="r03a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:477px; left:748px;" title="r04"/>
-<input type="text" name="r03c" id="r03c" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:510px; left:748px;" title="r04a"/>
-<input type="text" name="r03b" id="r03b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:543px; left:748px;" title="r04b"/>
-<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:563px; left:748px;" title="r04c"/>
-<input type="text" name="r04" id="r04" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:575px; left:748px;" title="r05"/>
-<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:608px; left:748px;" title="r06"/>
+<input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:377px; left:748px;"/>
+<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:411px; left:748px;"/>
+<input type="text" name="r02" id="r02" style="width:91px; top:444px; left:748px;"/>
+<input type="text" name="r03a" id="r03a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:477px; left:748px;"/>
+<input type="text" name="r03c" id="r03c" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:510px; left:748px;"/>
+<input type="text" name="r03b" id="r03b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:543px; left:748px;"/>
+<input type="text" name="r04" id="r04" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:575px; left:748px;"/>
+<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:608px; left:748px;"/>
 <!-- NCZD -->
-<input type="text" name="r06sum" id="r06sum" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:670px; left:748px;" title="r07"/>
-<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:707px; left:748px;" title="r08"/>
+<input type="text" name="r06sum" id="r06sum" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:670px; left:748px;"/>
+<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:707px; left:748px;"/>
 <!-- DAN.BONUS -->
 <input type="text" name="r07det1" id="r07det1" style="width:380px; top:788px; left:135px;"/>
 <input type="text" name="r07rod1" id="r07rod1" style="width:110px; top:788px; left:526px;"/>
@@ -1367,9 +1328,9 @@ $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
 
-if ( File_Exists('../dokumenty/dan_z_prijmov2015/dan_zo_zavislej2015/potvrdeniefo/potvrdeniefo_v15.jpg') AND $i == 0 )
+if ( File_Exists('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/potvrdeniefo/Potvrd_prijFOv14_str1.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2015/dan_zo_zavislej2015/potvrdeniefo/potvrdeniefo_v15.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/potvrdeniefo/Potvrd_prijFOv14_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(20);
 
