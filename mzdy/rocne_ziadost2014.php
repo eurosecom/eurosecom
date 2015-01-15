@@ -666,7 +666,6 @@ if ( $next_oc > 9999 ) $next_oc=9999;
  <link rel="stylesheet" href="../css/reset.css">
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - éiadosù o RZ</title>
-
 <script type="text/javascript">
 //sirka a vyska okna
 var sirkawin = screen.width-10;
@@ -846,108 +845,114 @@ $source="../mzdy/rocne_ziadost2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
 </div>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/rz_ziadost/rz_ziadost_v14-1.jpg" alt="tlaËivo éiadosù o RZ FO pre rok 2013 1.strana 282kB" class="form-background">
-<input type="text" name="vrok" id="vrok" value="<?php echo $kli_vrok;?>" disabled="disabled" class="nofill center" style="width:135px; top:104px; left:710px; padding:0;"/>
+<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/rz_ziadost/rz_ziadost_v14_str1_form.jpg" alt="tlaËivo éiadosù o RZ FO pre rok 2014 1.strana 282kB" class="form-background">
+<span class="text-echo" style="top:127px; left:496px;"><?php echo $kli_vrok; ?></span>
 
 <!-- I. ZAMESTNANEC -->
- <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool" style="top:180px; left:330px; width:18px; height:18px;">
-<input type="text" name="prie" id="prie" value="<?php echo $prie; ?>" disabled="disabled" class="nofill" style="width:280px; top:231px; left:116px;"/>
-<input type="text" name="meno" id="meno" value="<?php echo $meno; ?>" disabled="disabled" class="nofill" style="width:156px; top:231px; left:408px;"/>
-<input type="text" name="rodne" id="rodne" value="<?php echo $rodne; ?>" disabled="disabled" class="nofill" style="width:100px; top:231px; left:576px;"/>
-<input type="text" name="ptitl" id="ptitl" value="<?php echo $ptitl; ?>" disabled="disabled" class="nofill" style="width:96px; top:267px; left:230px;"/>
-<input type="text" name="ztitz" id="ztitz" value="<?php echo $ztitz; ?>" disabled="disabled" class="nofill" style="width:106px; top:267px; left:630px;"/>
-<input type="text" name="uli" id="uli" value="<?php echo $uli; ?>" disabled="disabled" class="nofill" style="width:328px; top:320px; left:158px;"/>
-<input type="text" name="cdm" id="cdm" value="<?php echo $cdm; ?>" disabled="disabled" class="nofill" style="width:115px; top:320px; left:540px;"/>
-<input type="text" name="psc" id="psc" value="<?php echo $psc; ?>" disabled="disabled" class="nofill" style="width:70px; top:320px; left:705px;"/>
-<input type="text" name="mes" id="mes" value="<?php echo $mes; ?>" disabled="disabled" class="nofill" style="width:328px; top:356px; left:158px;"/>
-<input type="text" name="zstat" id="zstat" value="<?php echo $zstat; ?>" disabled="disabled" class="nofill" style="width:220px; top:356px; left:535px;"/>
-<input type="text" name="zamestnavatel" id="zamestnavatel" value="<?php echo $zamestnavatel; ?>" disabled="disabled" class="nofill" style="width:724px; top:408px; left:116px;"/>
-
-<!-- 90% prijmov SR -->
-<input type="checkbox" name="prisknczd" value="1" style="top:450px; left:790px;"/>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();"
+     title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool"
+     style="top:196px; left:360px; width:16px; height:16px;">
+<span class="text-echo" style="top:243px; left:100px;"><?php echo $prie; ?></span>
+<span class="text-echo" style="top:243px; left:390px;"><?php echo $meno; ?></span>
+<span class="text-echo" style="top:243px; left:571px;"><?php echo $rodne; ?></span>
+<span class="text-echo" style="top:270px; left:223px;"><?php echo $ptitl; ?></span>
+<span class="text-echo" style="top:270px; left:620px;"><?php echo $ztitz; ?></span>
+<span class="text-echo" style="top:318px; left:140px;"><?php echo $uli; ?></span>
+<span class="text-echo" style="top:318px; left:522px;"><?php echo $cdm; ?></span>
+<span class="text-echo" style="top:318px; left:680px;"><?php echo $psc; ?></span>
+<span class="text-echo" style="top:345px; left:138px;"><?php echo $mes; ?></span>
+<span class="text-echo" style="top:345px; left:514px;"><?php echo $zstat; ?></span>
+<span class="text-echo" style="top:389px; left:100px;"><?php echo $zamestnavatel; ?></span>
+<input type="checkbox" name="prisknczd" value="1" style="top:424px; left:798px;"/>
 
 <!-- II. UPLATNENIE NCZD -->
 <!-- 1. na manzel/ku -->
-<input type="checkbox" name="uplman" value="1" style="top:494px; left:790px;"/>
-<input type="text" name="manprie" id="manprie" style="width:334px; top:595px; left:116px;"/>
-<input type="text" name="manmeno" id="manmeno" style="width:196px; top:595px; left:461px;"/>
-<input type="text" name="manrodne" id="manrodne" style="width:100px; top:595px; left:668px;"/>
-<input type="text" name="manuli" id="manuli" style="width:392px; top:630px; left:158px;"/>
-<input type="text" name="mancdm" id="mancdm" style="width:94px; top:630px; left:605px;"/>
-<input type="text" name="manpsc" id="manpsc" style="width:90px; top:630px; left:750px;"/>
-<input type="text" name="manmes" id="manmes" style="width:392px; top:665px; left:158px;"/>
-<input type="text" name="manstat" id="manstat" style="width:240px; top:665px; left:600px;"/>
-<input type="text" name="manpes" id="manpes" style="width:45px; top:700px; left:795px;"/>
-<input type="text" name="manzam" id="manzam" style="width:724px; top:752px; left:116px;"/>
-<input type="text" name="maneur" id="maneur" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:820px; left:559px;"/>
-
+<input type="checkbox" name="uplman" value="1" style="top:526px; left:798px;"/>
+<input type="text" name="manprie" id="manprie" style="width:265px; top:614px; left:100px;"/>
+<input type="text" name="manmeno" id="manmeno" style="width:155px; top:614px; left:390px;"/>
+<input type="text" name="manrodne" id="manrodne" style="width:110px; top:614px; left:568px;"/>
+<input type="text" name="manuli" id="manuli" style="width:326px; top:646px; left:140px;"/>
+<input type="text" name="mancdm" id="mancdm" style="width:108px; top:646px; left:522px;"/>
+<input type="text" name="manpsc" id="manpsc" style="width:90px; top:646px; left:682px;"/>
+<input type="text" name="manmes" id="manmes" style="width:326px; top:679px; left:140px;"/>
+<input type="text" name="manstat" id="manstat" style="width:240px; top:679px; left:515px;"/>
+<input type="text" name="manpes" id="manpes" style="width:45px; top:712px; left:807px;"/>
+<input type="text" name="manzam" id="manzam" style="width:751px; top:761px; left:100px;"/>
+<input type="text" name="maneur" id="maneur" onkeyup="CiarkaNaBodku(this);"
+       style="width:181px; top:828px; left:594px;"/>
 <!-- 2. na dochodok -->
-<input type="checkbox" name="upldoc" value="1" style="top:971px; left:790px;"/>
-<input type="checkbox" name="docx" value="1" style="top:1026px; left:790px;"/>
-<input type="text" name="doceur" id="doceur" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:1067px; left:559px;"/>
+<input type="checkbox" name="upldoc" value="1" style="top:915px; left:798px;"/>
+<input type="text" name="doceur" id="doceur" onkeyup="CiarkaNaBodku(this);"
+       style="width:181px; top:978px; left:594px;"/>
+<input type="checkbox" name="docx" value="1" style="top:1026px; left:790px;"/> <!-- dopyt, toto preË? -->
 <!-- 3. na SDS -->
-<input type="checkbox" name="uplsds" value="1" style="top:1149px; left:791px;"/>
-<input type="text" name="sdseur" id="sdseur" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:1212px; left:560px;"/>
-
+<input type="checkbox" name="uplsds" value="1" style="top:1056px; left:798px;"/>
+<input type="text" name="sdseur" id="sdseur" onkeyup="CiarkaNaBodku(this);"
+       style="width:181px; top:1110px; left:594px;"/>
 <!-- 4. na DDS -->
-<input type="checkbox" name="upldds" value="1" style="top:1240px; left:791px;"/>
-<input type="text" name="ddseur" id="ddseur" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:1260px; left:560px;"/>
+<input type="checkbox" name="upldds" value="1" style="top:1189px; left:798px;"/>
+<input type="text" name="ddseur" id="ddseur" onkeyup="CiarkaNaBodku(this);"
+       style="width:181px; top:1242px; left:594px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/rz_ziadost/rz_ziadost_v14-2.jpg" alt="tlaËivo éiadosù o RZ FO pre rok 2013 2.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/rz_ziadost/rz_ziadost_v14_str2_form.jpg"
+     alt="tlaËivo éiadosù o RZ FO pre rok 2014 2.strana 282kB" class="form-background">
 
 <!-- III. BONUS -->
-<input type="checkbox" name="bonus" value="1" style="top:110px; left:795px;"/>
-<input type="text" name="det01" id="det01" style="width:186px; top:200px; left:116px;"/>
-<input type="text" name="rod01" id="rod01" style="width:77px; top:200px; left:314px;"/>
-<input type="text" name="mes01" id="mes01" style="width:70px; top:200px; left:402px;"/>
-<input type="text" name="det02" id="det02" style="width:186px; top:235px; left:116px;"/>
-<input type="text" name="rod02" id="rod02" style="width:77px; top:235px; left:314px;"/>
-<input type="text" name="mes02" id="mes02" style="width:70px; top:235px; left:402px;"/>
-<input type="text" name="det03" id="det03" style="width:186px; top:270px; left:116px;"/>
-<input type="text" name="rod03" id="rod03" style="width:77px; top:270px; left:314px;"/>
-<input type="text" name="mes03" id="mes03" style="width:70px; top:270px; left:402px;"/>
-<input type="text" name="det04" id="det04" style="width:186px; top:305px; left:116px;"/>
-<input type="text" name="rod04" id="rod04" style="width:77px; top:305px; left:314px;"/>
-<input type="text" name="mes04" id="mes04" style="width:70px; top:305px; left:402px;"/>
-<input type="text" name="det05" id="det05" style="width:186px; top:340px; left:116px;"/>
-<input type="text" name="rod05" id="rod05" style="width:77px; top:340px; left:314px;"/>
-<input type="text" name="mes05" id="mes05" style="width:70px; top:340px; left:402px;"/>
-<input type="text" name="det06" id="det06" style="width:185px; top:200px; left:485px;"/>
-<input type="text" name="rod06" id="rod06" style="width:78px; top:200px; left:681px;"/>
-<input type="text" name="mes06" id="mes06" style="width:70px; top:200px; left:770px;"/>
-<input type="text" name="det07" id="det07" style="width:185px; top:235px; left:485px;"/>
-<input type="text" name="rod07" id="rod07" style="width:78px; top:235px; left:681px;"/>
-<input type="text" name="mes07" id="mes07" style="width:70px; top:235px; left:770px;"/>
-<input type="text" name="det08" id="det08" style="width:185px; top:270px; left:485px;"/>
-<input type="text" name="rod08" id="rod08" style="width:78px; top:270px; left:681px;"/>
-<input type="text" name="mes08" id="mes08" style="width:70px; top:270px; left:770px;"/>
-<input type="text" name="det09" id="det09" style="width:185px; top:305px; left:485px;"/>
-<input type="text" name="rod09" id="rod09" style="width:78px; top:305px; left:681px;"/>
-<input type="text" name="mes09" id="mes09" style="width:70px; top:305px; left:770px;"/>
-<input type="text" name="det10" id="det10" style="width:185px; top:340px; left:485px;"/>
-<input type="text" name="rod10" id="rod10" style="width:78px; top:340px; left:681px;"/>
-<input type="text" name="mes10" id="mes10" style="width:70px; top:340px; left:770px;"/>
-<input type="checkbox" name="priskbonus" value="1" style="top:386px; left:795px;"/>
+<input type="checkbox" name="bonus" value="1" style="top:110px; left:798px;"/>
+<input type="text" name="det01" id="det01" style="width:172px; top:197px; left:94px;"/>
+<input type="text" name="rod01" id="rod01" style="width:86px; top:197px; left:280px;"/>
+<input type="text" name="mes01" id="mes01" style="width:86px; top:197px; left:379px;"/>
+<input type="text" name="det02" id="det02" style="width:172px; top:233px; left:94px;"/>
+<input type="text" name="rod02" id="rod02" style="width:86px; top:233px; left:280px;"/>
+<input type="text" name="mes02" id="mes02" style="width:86px; top:233px; left:379px;"/>
+<input type="text" name="det03" id="det03" style="width:172px; top:267px; left:94px;"/>
+<input type="text" name="rod03" id="rod03" style="width:86px; top:267px; left:280px;"/>
+<input type="text" name="mes03" id="mes03" style="width:86px; top:267px; left:379px;"/>
+<input type="text" name="det04" id="det04" style="width:172px; top:303px; left:94px;"/>
+<input type="text" name="rod04" id="rod04" style="width:86px; top:303px; left:280px;"/>
+<input type="text" name="mes04" id="mes04" style="width:86px; top:303px; left:379px;"/>
+<input type="text" name="det05" id="det05" style="width:172px; top:338px; left:94px;"/>
+<input type="text" name="rod05" id="rod05" style="width:86px; top:338px; left:280px;"/>
+<input type="text" name="mes05" id="mes05" style="width:86px; top:338px; left:379px;"/>
+<input type="text" name="det06" id="det06" style="width:172px; top:197px; left:480px;"/>
+<input type="text" name="rod06" id="rod06" style="width:86px; top:197px; left:664px;"/>
+<input type="text" name="mes06" id="mes06" style="width:86px; top:197px; left:764px;"/>
+<input type="text" name="det07" id="det07" style="width:172px; top:233px; left:480px;"/>
+<input type="text" name="rod07" id="rod07" style="width:86px; top:233px; left:664px;"/>
+<input type="text" name="mes07" id="mes07" style="width:86px; top:233px; left:764px;"/>
+<input type="text" name="det08" id="det08" style="width:172px; top:267px; left:480px;"/>
+<input type="text" name="rod08" id="rod08" style="width:86px; top:267px; left:664px;"/>
+<input type="text" name="mes08" id="mes08" style="width:86px; top:267px; left:764px;"/>
+<input type="text" name="det09" id="det09" style="width:172px; top:303px; left:480px;"/>
+<input type="text" name="rod09" id="rod09" style="width:86px; top:303px; left:664px;"/>
+<input type="text" name="mes09" id="mes09" style="width:86px; top:303px; left:764px;"/>
+<input type="text" name="det10" id="det10" style="width:172px; top:338px; left:480px;"/>
+<input type="text" name="rod10" id="rod10" style="width:86px; top:338px; left:664px;"/>
+<input type="text" name="mes10" id="mes10" style="width:86px; top:338px; left:764px;"/>
+<input type="checkbox" name="priskbonus" value="1" style="top:386px; left:795px;"/> <!-- dopyt, Ëo je toto? -->
 
 <!-- IV. POISTNE -->
-<input type="checkbox" name="uplpoist" value="1" style="top:488px; left:798px;"/>
-<input type="text" name="zappoistne" id="zappoistne" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:531px; left:560px;"/>
+<input type="checkbox" name="uplpoist" value="1" style="top:420px; left:798px;"/>
+<input type="text" name="zappoistne" id="zappoistne" onkeyup="CiarkaNaBodku(this);"
+       style="width:181px; top:470px; left:594px;"/>
 
 <!-- V. ZAM.PREMIA -->
-<input type="checkbox" name="ziad5" value="1" style="top:636px; left:798px;"/>
+<input type="checkbox" name="ziad5" value="1" style="top:583px; left:798px;"/>
 
 <!-- VI. ZDRAVOTNIK -->
-<input type="checkbox" name="ziad3" value="1" style="top:739px; left:798px;"/>
-<input type="text" name="ziad3eur" id="ziad3eur" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:786px; left:560px;"/>
+<input type="checkbox" name="ziad3" value="1" style="top:681px; left:798px;"/>
+<input type="text" name="ziad3eur" id="ziad3eur" onkeyup="CiarkaNaBodku(this);"
+       style="width:181px; top:731px; left:594px;"/>
 
 <!-- VII. POTVRDENIE -->
-<input type="checkbox" name="ziad9" value="1" style="top:856px; left:799px;"/>
-<input type="text" name="ineuda" id="ineuda" style="width:70px; top:930px; left:100px;"/>
-<input type="text" name="miesto" id="miesto" value="<?php echo $fir_fmes; ?>" disabled="disabled" class="nofill" style="width:222px; top:1083px; left:112px;"/>
-<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" style="width:129px; top:1083px; left:378px;"/>
+<input type="checkbox" name="ziad9" value="1" style="top:812px; left:798px;"/>
+<input type="text" name="ineuda" id="ineuda" style="width:60px; top:910px; left:141px;"/>
+<span class="text-echo" style="top:1085px; left:108px;"><?php echo $fir_fmes; ?></span>
+<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);"
+       style="width:110px; top:1080px; left:388px;"/>
 <?php                                        } ?>
 
 <div class="navbar">
