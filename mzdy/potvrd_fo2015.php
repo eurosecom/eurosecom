@@ -157,7 +157,7 @@ $datv = strip_tags($_REQUEST['datv']);
 $datvsql=SqlDatum($datv);
 $pozn = strip_tags($_REQUEST['pozn']);
 //$r07 = strip_tags($_REQUEST['r07']);
-//$r11 = strip_tags($_REQUEST['r11']);
+$obmedz = 1*$_REQUEST['obmedz'];
 $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO SET ".
