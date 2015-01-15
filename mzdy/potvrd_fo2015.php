@@ -1019,8 +1019,8 @@ if ( $next_oc > 9999 ) $next_oc=9999;
 <style>
 div.leg-pozn {
   position: absolute;
-  top: 1271px;
-  left: 785px;
+  top: 1276px;
+  left: 801px;
   font: bold 12px Times new Roman;
 }
 </style>
@@ -1204,112 +1204,111 @@ if ( $copern == 20 )
 <div class="navbar">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-top-formsave" style="top:4px;">
 </div>
-<img src="../dokumenty/dan_z_prijmov2015/dan_zo_zavislej2015/potvrdeniefo/potvrdeniefo_v15.jpg" alt="tlaèivo Potvrdenie o príjmoch FO pre rok 2015 1.strana 273kB" class="form-background">
-<input type="checkbox" name="konx1" value="1" style="top:95px; left:800px;"/>
-
+<img src="../dokumenty/dan_z_prijmov2015/dan_zo_zavislej2015/potvrdeniefo/potvrdeniefo_v15_form.jpg"
+     alt="tlaèivo Potvrdenie o príjmoch FO pre rok 2015 1.strana 273kB" class="form-background">
+<input type="checkbox" name="konx1" value="1" style="top:62px; left:828px;"/>
 
 <!-- I. ZAMESTNANEC -->
- <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upravi údaje o zamestnancovi" class="btn-row-tool" style="top:122px; left:315px; width:18px; height:18px;">
-<input type="text" name="prie" id="prie" value="<?php echo $prie; ?>" disabled="disabled" class="nofill" style="width:281px; top:170px; left:102px;"/>
-<input type="text" name="meno" id="meno" value="<?php echo $meno; ?>" disabled="disabled" class="nofill" style="width:169px; top:170px; left:394px;"/>
-<input type="text" name="rodne" id="rodne" value="<?php echo $rodne; ?>" disabled="disabled" class="nofill" style="width:110px; top:170px; left:574px;"/>
-<input type="text" name="ptitl" id="ptitl" value="<?php echo $ptitl; ?>" disabled="disabled" class="nofill" style="width:96px; top:203px; left:225px;"/>
-<input type="text" name="ztitz" id="ztitz" value="<?php echo $ztitz; ?>" disabled="disabled" class="nofill" style="width:106px; top:203px; left:620px;"/>
-<input type="text" name="uli" id="uli" value="<?php echo $uli; ?>" disabled="disabled" class="nofill" style="width:328px; top:254px; left:145px;"/>
-<input type="text" name="cdm" id="cdm" value="<?php echo $cdm; ?>" disabled="disabled" class="nofill" style="width:115px; top:254px; left:526px;"/>
-<input type="text" name="psc" id="psc" value="<?php echo $psc; ?>" disabled="disabled" class="nofill" style="width:70px; top:254px; left:691px;"/>
-<input type="text" name="mes" id="mes" value="<?php echo $mes; ?>" disabled="disabled" class="nofill" style="width:328px; top:287px; left:145px;"/>
-<input type="text" name="zstat" id="zstat" value="<?php echo $zstat; ?>" disabled="disabled" class="nofill" style="width:220px; top:287px; left:522px;"/>
-
-<input type="checkbox" name="obmedz" value="1" style="top:160px; left:748px;" title="obmedz"/>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();"
+     title="Upravi údaje o zamestnancovi" class="btn-row-tool"
+     style="top:88px; left:325px; width:14px; height:14px;">
+<span class="text-echo" style="top:128px; left:100px;"><?php echo $prie; ?></span>
+<span class="text-echo" style="top:128px; left:392px;"><?php echo $meno; ?></span>
+<span class="text-echo" style="top:128px; left:572px;"><?php echo $rodne; ?></span>
+<span class="text-echo" style="top:152px; left:220px;"><?php echo $ptitl; ?></span>
+<span class="text-echo" style="top:152px; left:615px;"><?php echo $ztitz; ?></span>
+<span class="text-echo" style="top:190px; left:135px;"><?php echo $uli; ?></span>
+<span class="text-echo" style="top:190px; left:515px;"><?php echo $cdm; ?></span>
+<span class="text-echo" style="top:190px; left:682px;"><?php echo $psc; ?></span>
+<span class="text-echo" style="top:212px; left:135px;"><?php echo $mes; ?></span>
+<span class="text-echo" style="top:212px; left:510px;"><?php echo $zstat; ?></span>
+<input type="checkbox" name="obmedz" value="1" style="top:238px; left:825px;"/>
 
 <!-- II. PRIJMY -->
-<input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:277px; left:748px;" title="r01"/>
-<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:311px; left:748px;" title="r01a"/>
-
-<input type="text" name="r12a" id="r12a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:341px; left:748px;" title="r01b"/>
-<input type="text" name="r12b" id="r12b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:371px; left:748px;" title="r01c"/>
-<input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:401px; left:748px;" title="r02"/>
-
-<input type="text" name="r02" id="r02" style="width:91px; top:444px; left:748px;" title="r03"/>
-<input type="text" name="r03a" id="r03a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:477px; left:748px;" title="r04"/>
-<input type="text" name="r03c" id="r03c" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:510px; left:748px;" title="r04a"/>
-<input type="text" name="r03b" id="r03b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:543px; left:748px;" title="r04b"/>
-<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:563px; left:748px;" title="r04c"/>
-<input type="text" name="r04" id="r04" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:575px; left:748px;" title="r05"/>
-<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:608px; left:748px;" title="r06"/>
+<input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:298px; left:755px;" title="r01"/>
+<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:331px; left:755px;" title="r01a"/>
+<input type="text" name="r12a" id="r12a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:364px; left:755px;" title="r01b"/>
+<input type="text" name="r12b" id="r12b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:397px; left:755px;" title="r01c"/>
+<input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:430px; left:755px;" title="r02"/>
+<input type="text" name="r02" id="r02" style="width:91px; top:463px; left:755px;" title="r03"/>
+<input type="text" name="r03a" id="r03a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:496px; left:755px;" title="r04"/>
+<input type="text" name="r03c" id="r03c" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:528px; left:755px;" title="r04a"/>
+<input type="text" name="r03b" id="r03b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:561px; left:755px;" title="r04b"/>
+<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:594px; left:755px;" title="r04c"/>
+<input type="text" name="r04" id="r04" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:627px; left:755px;" title="r05"/>
+<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:660px; left:755px;" title="r06"/>
 <!-- NCZD -->
-<input type="text" name="r06sum" id="r06sum" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:670px; left:748px;" title="r07"/>
-<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:707px; left:748px;" title="r08"/>
+<input type="text" name="r06sum" id="r06sum" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:716px; left:755px;" title="r07"/>
+<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:749px; left:755px;" title="r08"/>
 <!-- DAN.BONUS -->
-<input type="text" name="r07det1" id="r07det1" style="width:380px; top:788px; left:135px;"/>
-<input type="text" name="r07rod1" id="r07rod1" style="width:110px; top:788px; left:526px;"/>
-<input type="text" name="r07mes1" id="r07mes1" style="width:90px; top:788px; left:648px;"/>
-<input type="text" name="r07sum1" id="r07sum1" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:788px; left:748px;"/>
-<input type="text" name="r07det2" id="r07det2" style="width:380px; top:821px; left:135px;"/>
-<input type="text" name="r07rod2" id="r07rod2" style="width:110px; top:821px; left:526px;"/>
-<input type="text" name="r07mes2" id="r07mes2" style="width:90px; top:821px; left:648px;"/>
-<input type="text" name="r07sum2" id="r07sum2" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:821px; left:748px;"/>
-<input type="text" name="r07det3" id="r07det3" style="width:380px; top:854px; left:135px;"/>
-<input type="text" name="r07rod3" id="r07rod3" style="width:110px; top:854px; left:526px;"/>
-<input type="text" name="r07mes3" id="r07mes3" style="width:90px; top:854px; left:648px;"/>
-<input type="text" name="r07sum3" id="r07sum3" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:854px; left:748px;"/>
-<input type="text" name="r07det4" id="r07det4" style="width:380px; top:886px; left:135px;"/>
-<input type="text" name="r07rod4" id="r07rod4" style="width:110px; top:886px; left:526px;"/>
-<input type="text" name="r07mes4" id="r07mes4" style="width:90px; top:886px; left:648px;"/>
-<input type="text" name="r07sum4" id="r07sum4" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:886px; left:748px;"/>
-<input type="text" name="r07det5" id="r07det5" style="width:380px; top:919px; left:135px;"/>
-<input type="text" name="r07rod5" id="r07rod5" style="width:110px; top:919px; left:526px;"/>
-<input type="text" name="r07mes5" id="r07mes5" style="width:90px; top:919px; left:648px;"/>
-<input type="text" name="r07sum5" id="r07sum5" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:919px; left:748px;"/>
-<input type="text" name="r07det6" id="r07det6" style="width:380px; top:952px; left:135px;"/>
-<input type="text" name="r07rod6" id="r07rod6" style="width:110px; top:952px; left:526px;"/>
-<input type="text" name="r07mes6" id="r07mes6" style="width:90px; top:952px; left:648px;"/>
-<input type="text" name="r07sum6" id="r07sum6" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:952px; left:748px;"/>
-<input type="text" name="r07det7" id="r07det7" style="width:380px; top:985px; left:135px;"/>
-<input type="text" name="r07rod7" id="r07rod7" style="width:110px; top:985px; left:526px;"/>
-<input type="text" name="r07mes7" id="r07mes7" style="width:90px; top:985px; left:648px;"/>
-<input type="text" name="r07sum7" id="r07sum7" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:985px; left:748px;"/>
-<input type="text" name="r08" id="r08" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:1018px; left:748px;"/>
+<input type="text" name="r07det1" id="r07det1" style="width:368px; top:822px; left:138px;"/>
+<input type="text" name="r07rod1" id="r07rod1" style="width:110px; top:822px; left:517px;"/>
+<input type="text" name="r07mes1" id="r07mes1" style="width:90px; top:822px; left:638px;"/>
+<input type="text" name="r07sum1" id="r07sum1" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:822px; left:755px;"/>
+<input type="text" name="r07det2" id="r07det2" style="width:368px; top:855px; left:138px;"/>
+<input type="text" name="r07rod2" id="r07rod2" style="width:110px; top:855px; left:517px;"/>
+<input type="text" name="r07mes2" id="r07mes2" style="width:90px; top:855px; left:638px;"/>
+<input type="text" name="r07sum2" id="r07sum2" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:855px; left:755px;"/>
+<input type="text" name="r07det3" id="r07det3" style="width:368px; top:888px; left:138px;"/>
+<input type="text" name="r07rod3" id="r07rod3" style="width:110px; top:888px; left:517px;"/>
+<input type="text" name="r07mes3" id="r07mes3" style="width:90px; top:888px; left:638px;"/>
+<input type="text" name="r07sum3" id="r07sum3" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:888px; left:755px;"/>
+<input type="text" name="r07det4" id="r07det4" style="width:368px; top:921px; left:138px;"/>
+<input type="text" name="r07rod4" id="r07rod4" style="width:110px; top:921px; left:517px;"/>
+<input type="text" name="r07mes4" id="r07mes4" style="width:90px; top:921px; left:638px;"/>
+<input type="text" name="r07sum4" id="r07sum4" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:921px; left:755px;"/>
+<input type="text" name="r07det5" id="r07det5" style="width:368px; top:953px; left:138px;"/>
+<input type="text" name="r07rod5" id="r07rod5" style="width:110px; top:953px; left:517px;"/>
+<input type="text" name="r07mes5" id="r07mes5" style="width:90px; top:953px; left:638px;"/>
+<input type="text" name="r07sum5" id="r07sum5" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:953px; left:755px;"/>
+<input type="text" name="r07det6" id="r07det6" style="width:368px; top:986px; left:138px;"/>
+<input type="text" name="r07rod6" id="r07rod6" style="width:110px; top:986px; left:517px;"/>
+<input type="text" name="r07mes6" id="r07mes6" style="width:90px; top:986px; left:638px;"/>
+<input type="text" name="r07sum6" id="r07sum6" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:986px; left:755px;"/>
+<input type="text" name="r07det7" id="r07det7" style="width:368px; top:1019px; left:138px;"/>
+<input type="text" name="r07rod7" id="r07rod7" style="width:110px; top:1019px; left:517px;"/>
+<input type="text" name="r07mes7" id="r07mes7" style="width:90px; top:1019px; left:638px;"/>
+<input type="text" name="r07sum7" id="r07sum7" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:1019px; left:755px;"/>
+<input type="text" name="r08" id="r08" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:1052px; left:755px;"/>
 
 <!-- III. ZAM.PREMIA -->
-<!-- riadok 09 -->
-<input type="checkbox" name="m01pp" value="1" style="top:1105px; left:367px;"/>
-<input type="checkbox" name="m02pp" value="1" style="top:1105px; left:403px;"/>
-<input type="checkbox" name="m03pp" value="1" style="top:1105px; left:438px;"/>
-<input type="checkbox" name="m04pp" value="1" style="top:1105px; left:474px;"/>
-<input type="checkbox" name="m05pp" value="1" style="top:1105px; left:510px;"/>
-<input type="checkbox" name="m06pp" value="1" style="top:1105px; left:545px;"/>
-<input type="checkbox" name="m07pp" value="1" style="top:1105px; left:581px;"/>
-<input type="checkbox" name="m08pp" value="1" style="top:1105px; left:617px;"/>
-<input type="checkbox" name="m09pp" value="1" style="top:1105px; left:653px;"/>
-<input type="checkbox" name="m10pp" value="1" style="top:1105px; left:689px;"/>
-<input type="checkbox" name="m11pp" value="1" style="top:1105px; left:725px;"/>
-<input type="checkbox" name="m12pp" value="1" style="top:1105px; left:761px;"/>
-<input type="checkbox" name="m13pp" value="1" style="top:1105px; left:808px;"/>
 <!-- riadok 10 -->
-<input type="checkbox" name="m01dh" value="1" style="top:1124px; left:367px;"/>
-<input type="checkbox" name="m02dh" value="1" style="top:1124px; left:403px;"/>
-<input type="checkbox" name="m03dh" value="1" style="top:1124px; left:438px;"/>
-<input type="checkbox" name="m04dh" value="1" style="top:1124px; left:474px;"/>
-<input type="checkbox" name="m05dh" value="1" style="top:1124px; left:510px;"/>
-<input type="checkbox" name="m06dh" value="1" style="top:1124px; left:545px;"/>
-<input type="checkbox" name="m07dh" value="1" style="top:1124px; left:581px;"/>
-<input type="checkbox" name="m08dh" value="1" style="top:1124px; left:617px;"/>
-<input type="checkbox" name="m09dh" value="1" style="top:1124px; left:653px;"/>
-<input type="checkbox" name="m10dh" value="1" style="top:1124px; left:689px;"/>
-<input type="checkbox" name="m11dh" value="1" style="top:1124px; left:725px;"/>
-<input type="checkbox" name="m12dh" value="1" style="top:1124px; left:761px;"/>
-<input type="checkbox" name="m13dh" value="1" style="top:1124px; left:808px;"/>
-<!-- riadok 11 a 12 -->
-<input type="checkbox" name="podpa" value="1" style="top:1149px; left:780px;"/>
-<input type="checkbox" name="prija" value="1" style="top:1194px; left:780px;"/>
+<input type="checkbox" name="m01pp" value="1" style="top:1133px; left:358px;"/>
+<input type="checkbox" name="m02pp" value="1" style="top:1133px; left:394px;"/>
+<input type="checkbox" name="m03pp" value="1" style="top:1133px; left:429px;"/>
+<input type="checkbox" name="m04pp" value="1" style="top:1133px; left:465px;"/>
+<input type="checkbox" name="m05pp" value="1" style="top:1133px; left:500px;"/>
+<input type="checkbox" name="m06pp" value="1" style="top:1133px; left:536px;"/>
+<input type="checkbox" name="m07pp" value="1" style="top:1133px; left:572px;"/>
+<input type="checkbox" name="m08pp" value="1" style="top:1133px; left:607px;"/>
+<input type="checkbox" name="m09pp" value="1" style="top:1133px; left:643px;"/>
+<input type="checkbox" name="m10pp" value="1" style="top:1133px; left:680px;"/>
+<input type="checkbox" name="m11pp" value="1" style="top:1133px; left:716px;"/>
+<input type="checkbox" name="m12pp" value="1" style="top:1133px; left:753px;"/>
+<input type="checkbox" name="m13pp" value="1" style="top:1133px; left:814px;"/>
+<!-- riadok 11 -->
+<input type="checkbox" name="m01dh" value="1" style="top:1152px; left:358px;"/>
+<input type="checkbox" name="m02dh" value="1" style="top:1152px; left:394px;"/>
+<input type="checkbox" name="m03dh" value="1" style="top:1152px; left:429px;"/>
+<input type="checkbox" name="m04dh" value="1" style="top:1152px; left:465px;"/>
+<input type="checkbox" name="m05dh" value="1" style="top:1152px; left:500px;"/>
+<input type="checkbox" name="m06dh" value="1" style="top:1152px; left:536px;"/>
+<input type="checkbox" name="m07dh" value="1" style="top:1152px; left:572px;"/>
+<input type="checkbox" name="m08dh" value="1" style="top:1152px; left:607px;"/>
+<input type="checkbox" name="m09dh" value="1" style="top:1152px; left:643px;"/>
+<input type="checkbox" name="m10dh" value="1" style="top:1152px; left:680px;"/>
+<input type="checkbox" name="m11dh" value="1" style="top:1152px; left:716px;"/>
+<input type="checkbox" name="m12dh" value="1" style="top:1152px; left:753px;"/>
+<input type="checkbox" name="m13dh" value="1" style="top:1152px; left:814px;"/>
+<!-- riadky 12 a 13 -->
+<input type="checkbox" name="podpa" value="1" style="top:1177px; left:763px;"/>
+<input type="checkbox" name="prija" value="1" style="top:1209px; left:763px;"/>
 
 <!-- Vystavene -->
-<input type="text" name="miesto" id="miesto" value="<?php echo $fir_fmes; ?>" disabled="disabled" class="nofill" style="width:175px; top:1240px; left:106px; font-size:15px;"/>
-<input type="text" name="datv" id="datv" onkeyup="CiarkaNaBodku(this);" style="width:105px; top:1240px; left:325px;"/>
+<span class="text-echo" style="top:1247px; left:100px;"><?php echo $fir_fmes; ?></span>
+<input type="text" name="datv" id="datv" onkeyup="CiarkaNaBodku(this);" style="width:115px; top:1245px; left:335px;"/>
 <!-- Poznamka -->
-<input type="text" name="pozn" id="pozn" style="width:300px; top:1240px; left:534px;"/>
+<input type="text" name="pozn" id="pozn" style="width:300px; top:1245px; left:550px;"/>
 <div class="leg-pozn">Poznámka</div>
 
 <div class="navbar">
