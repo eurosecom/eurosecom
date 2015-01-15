@@ -86,9 +86,9 @@ $r12b = strip_tags($_REQUEST['r12b']);
 $r11 = strip_tags($_REQUEST['r11']);
 $r02 = strip_tags($_REQUEST['r02']);
 $r03a = strip_tags($_REQUEST['r03a']);
-$r03c = strip_tags($_REQUEST['r03c']);
-$r03b = strip_tags($_REQUEST['r03b']);
 $r09 = strip_tags($_REQUEST['r09']);
+$r03b = strip_tags($_REQUEST['r03b']);
+$r04c = strip_tags($_REQUEST['r04c']);
 $r04 = strip_tags($_REQUEST['r04']);
 $r05 = strip_tags($_REQUEST['r05']);
 //$r06mes = strip_tags($_REQUEST['r06mes']);
@@ -161,8 +161,8 @@ $pozn = strip_tags($_REQUEST['pozn']);
 $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO SET ".
-" obmedz='$obmedz', r12a='$r12a', r12b='$r12b', r11='$r11', r09='$r09', ".
-" konx1='$konx1', r01='$r01', r13='$r13', r02='$r02', r03a='$r03a', r09='$r03c', r03b='$r03b', r04='$r04', r05='$r05', r06sum='$r06sum', r10='$r10', ".
+" obmedz='$obmedz', r12a='$r12a', r12b='$r12b', r11='$r11', r04c='$r04c', ".
+" konx1='$konx1', r01='$r01', r13='$r13', r02='$r02', r03a='$r03a', r09='$r09', r03b='$r03b', r04='$r04', r05='$r05', r06sum='$r06sum', r10='$r10', ".
 " r07det1='$r07det1', r07det2='$r07det2', r07det3='$r07det3', r07det4='$r07det4', r07det5='$r07det5', r07det6='$r07det6', r07det7='$r07det7', ".
 " r07rod1='$r07rod1', r07rod2='$r07rod2', r07rod3='$r07rod3', r07rod4='$r07rod4', r07rod5='$r07rod5', r07rod6='$r07rod6', r07rod7='$r07rod7', ".
 " r07mes1='$r07mes1', r07mes2='$r07mes2', r07mes3='$r07mes3', r07mes4='$r07mes4', r07mes5='$r07mes5', r07mes6='$r07mes6', r07mes7='$r07mes7', ".
@@ -376,7 +376,7 @@ $vysledek = mysql_query("$sql");
 //koniec zmeny2014
 
 //zmeny2015
-$sql = "SELECT obmedz FROM F$kli_vxcf"."_mzdpotvrdenieFO ";
+$sql = "SELECT r04c FROM F$kli_vxcf"."_mzdpotvrdenieFO ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -384,7 +384,8 @@ $sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD new2015 DECIMAL(2,0) DEFAU
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD obmedz DECIMAL(2,0) DEFAULT 0 AFTER new2015";
 $vysledek = mysql_query("$sql");
-
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD r04c DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
 }
 //koniec zmeny2015
 
@@ -804,7 +805,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdpotvrdenieFO".
 "0,0,0,0,0,0,0,0,0,0,0,0,1,".
 "0,0,0,0,0,0,0,0,0,0,0,0,1,".
 "podpa,podpn,0,1,0,'$dat_dat', ".
-"0,0 ".
+"0,0,0 ".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " GROUP BY oc".
 "";
@@ -827,13 +828,13 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
   $cicz=$riaddok->cicz;
   }
 
-//vypocitaj r04
+//vypocitaj r05
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO".
 " SET r04=r01-r03a  WHERE r01 > 0 AND oc = $cislo_oc";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//vypocitaj r08
+//vypocitaj r09spolu
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO".
 " SET r08=r07sum1+r07sum2+r07sum3+r07sum4+r07sum5+r07sum6  WHERE oc = $cislo_oc";
 //echo $sqtoz;
@@ -872,9 +873,9 @@ $r12b = $fir_riadok->r12b;
 $r11 = $fir_riadok->r11;
 $r02 = $fir_riadok->r02;
 $r03a = $fir_riadok->r03a;
-$r03c = $fir_riadok->r09;
-$r03b = $fir_riadok->r03b;
 $r09 = $fir_riadok->r09;
+$r03b = $fir_riadok->r03b;
+$r04c = $fir_riadok->r04c;
 $r04 = $fir_riadok->r04;
 $r05 = $fir_riadok->r05;
 $r06sum = $fir_riadok->r06sum;
@@ -1048,9 +1049,9 @@ var sirkawic = screen.width-10;
    document.formv1.r11.value = '<?php echo "$r11";?>';
    document.formv1.r02.value = '<?php echo "$r02";?>';
    document.formv1.r03a.value = '<?php echo "$r03a";?>';
-   document.formv1.r03c.value = '<?php echo "$r03c";?>';
-   document.formv1.r03b.value = '<?php echo "$r03b";?>';
    document.formv1.r09.value = '<?php echo "$r09";?>';
+   document.formv1.r03b.value = '<?php echo "$r03b";?>';
+   document.formv1.r04c.value = '<?php echo "$r04c";?>';
    document.formv1.r04.value = '<?php echo "$r04";?>';
    document.formv1.r05.value = '<?php echo "$r05";?>';
    document.formv1.r06sum.value = '<?php echo "$r06sum";?>';
@@ -1232,9 +1233,9 @@ if ( $copern == 20 )
 <input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:430px; left:755px;" title="r02"/>
 <input type="text" name="r02" id="r02" style="width:91px; top:463px; left:755px;" title="r03"/>
 <input type="text" name="r03a" id="r03a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:496px; left:755px;" title="r04"/>
-<input type="text" name="r03c" id="r03c" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:528px; left:755px;" title="r04a"/>
+<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:528px; left:755px;" title="r04a"/>
 <input type="text" name="r03b" id="r03b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:561px; left:755px;" title="r04b"/>
-<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:594px; left:755px;" title="r04c"/>
+<input type="text" name="r04c" id="r04c" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:594px; left:755px;" title="r04c"/>
 <input type="text" name="r04" id="r04" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:627px; left:755px;" title="r05"/>
 <input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:660px; left:755px;" title="r06"/>
 <!-- NCZD -->
@@ -1376,7 +1377,7 @@ $r01=$hlavicka->r01; if ( $hlavicka->r01 == 0 ) $r01="";
 $r02=$hlavicka->r02;
 $r03a=$hlavicka->r03a; if ( $hlavicka->r03a == 0 ) $r03a="";
 $r03b=$hlavicka->r03b; if ( $hlavicka->r03b == 0 ) $r03b="";
-$r03c=$hlavicka->r09; if ( $hlavicka->r09 == 0 ) $r03c="";
+$r09=$hlavicka->r09; if ( $hlavicka->r09 == 0 ) $r09="";
 $r04=$hlavicka->r04; if ( $hlavicka->r04 == 0 ) $r04="";
 $r05=$hlavicka->r05; if ( $hlavicka->r05 == 0 ) $r05="";
 $r06sum=$hlavicka->r06sum; if ( $hlavicka->r06sum == 0 ) $r06sum="";
@@ -1423,7 +1424,7 @@ $pdf->Cell(160,25," ","$rmc1",0,"L");$pdf->Cell(20,8,"$r01","$rmc",1,"R");
 $pdf->Cell(160,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$r13","$rmc",1,"R");
 $pdf->Cell(160,5," ","$rmc1",0,"L");$pdf->Cell(20,4,"$r02","$rmc",1,"C");
 $pdf->Cell(160,5," ","$rmc1",0,"L");$pdf->Cell(20,6,"$r03a","$rmc",1,"R");
-$pdf->Cell(160,5," ","$rmc1",0,"L");$pdf->Cell(20,5,"$r03c","$rmc",1,"R");
+$pdf->Cell(160,5," ","$rmc1",0,"L");$pdf->Cell(20,5,"$r09","$rmc",1,"R");
 $pdf->Cell(160,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$r03b","$rmc",1,"R");
 $pdf->Cell(160,8," ","$rmc1",0,"L");$pdf->Cell(20,6,"$r04","$rmc",1,"R");
 $pdf->Cell(160,6," ","$rmc1",0,"L");$pdf->Cell(20,6,"$r05","$rmc",1,"R");
