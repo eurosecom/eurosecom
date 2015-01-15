@@ -60,6 +60,141 @@ $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resiza
 $tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
+//nastav sadzby 2015
+$sql = "SELECT vz08 FROM F".$kli_vxcf."_sadzby_dmv2015 ";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+     {
+$dsqlt = "DROP TABLE F".$kli_vxcf."_sadzby_dmv2015 ";
+$dsql = mysql_query("$dsqlt");
+
+$sqlt = <<<trexima
+(
+   csdz             DECIMAL(2,0) DEFAULT 0,
+   nsdz             VARCHAR(50) NOT NULL,
+   cprm             DECIMAL(2,0) DEFAULT 0,
+   pprm             VARCHAR(40) NOT NULL,
+   nprm             VARCHAR(40) NOT NULL,
+   szba             DECIMAL(10,2) DEFAULT 0,
+   szbb             DECIMAL(10,2) DEFAULT 0,
+   sznr             DECIMAL(10,2) DEFAULT 0,
+   sztn             DECIMAL(10,2) DEFAULT 0,
+   sztt             DECIMAL(10,2) DEFAULT 0,
+   szke             DECIMAL(10,2) DEFAULT 0,
+   szpo             DECIMAL(10,2) DEFAULT 0,
+   szza             DECIMAL(10,2) DEFAULT 0,
+   vz08             DECIMAL(2,0) DEFAULT 0
+);
+trexima;
+
+$vsql = "CREATE TABLE F".$kli_vxcf."_sadzby_dmv2015 ".$sqlt;
+$vytvor = mysql_query("$vsql");
+
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '1', 'Osobné vozidlo', '1', 'objem motora (cm3)', 'do 150 vr.', '50', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '1', 'Osobné vozidlo', '2', 'objem motora (cm3)', 'nad 150 do 900 vr.', '62', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '1', 'Osobné vozidlo', '3', 'objem motora (cm3)', 'nad 900 do 1200 vr.', '80', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '1', 'Osobné vozidlo', '4', 'objem motora (cm3)', 'nad 1200 do 1500 vr.', '115', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '1', 'Osobné vozidlo', '5', 'objem motora (cm3)', 'nad 1500 do 2000 vr.', '148', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '1', 'Osobné vozidlo', '6', 'objem motora (cm3)', 'nad 2000 do 3000 vr.', '180', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '1', 'Osobné vozidlo', '7', 'objem motora (cm3)', 'nad 3000', '218', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult"); 
+
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '1', 'hmotnos (t)', 'nad 0 - do 1', '74', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '2', 'hmotnos (t)', 'nad 1 - do 2', '133', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '3', 'hmotnos (t)', 'nad 2 - do 4', '212', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '4', 'hmotnos (t)', 'nad 4 - do 6', '321', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '5', 'hmotnos (t)', 'nad 6 - do 8', '417', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '6', 'hmotnos (t)', 'nad 8 - do 10', '518', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '7', 'hmotnos (t)', 'nad 10 - do 12', '620', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '8', 'hmotnos (t)', 'nad 12 - do 14', '777', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '9', 'hmotnos (t)', 'nad 14 - do 16', '933', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '10', 'hmotnos (t)', 'nad 16 - do 18', '1089', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '11', 'hmotnos (t)', 'nad 18 - do 20', '1252', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '12', 'hmotnos (t)', 'nad 20 - do 22', '1452', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '13', 'hmotnos (t)', 'nad 22 - do 24', '1660', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '14', 'hmotnos (t)', 'nad 24 - do 26', '1862', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '15', 'hmotnos (t)', 'nad 26 - do 28', '2075', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '16', 'hmotnos (t)', 'nad 28 - do 30', '2269', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', 'Úžitkové vozidlo - 1,2 nápravy', '17', 'hmotnos (t)', 'nad 30', '2480', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+
+
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '1', 'hmotnos (t)', 'nad 0 - do 15', '566', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '2', 'hmotnos (t)', 'nad 15 - do 17', '673', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '3', 'hmotnos (t)', 'nad 17 - do 19', '828', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '4', 'hmotnos (t)', 'nad 19 - do 21', '982', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '5', 'hmotnos (t)', 'nad 21 - do 23', '1144', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '6', 'hmotnos (t)', 'nad 23 - do 25', '1295', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '7', 'hmotnos (t)', 'nad 25 - do 27', '1452', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '8', 'hmotnos (t)', 'nad 27 - do 29', '1599', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '9', 'hmotnos (t)', 'nad 29 - do 31', '1755', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '10', 'hmotnos (t)', 'nad 31 - do 33', '1964', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '11', 'hmotnos (t)', 'nad 33 - do 35', '2172', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '12', 'hmotnos (t)', 'nad 35 - do 37', '2375', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '13', 'hmotnos (t)', 'nad 37 - do 40', '2582', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '3', 'Úžitkové vozidlo - 3 nápravy', '14', 'hmotnos (t)', 'nad 40', '2790', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+
+
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '4', 'Úžitkové vozidlo - 4 a viac náprav', '1', 'hmotnos (t)', 'nad 0 - do 23', '721', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '4', 'Úžitkové vozidlo - 4 a viac náprav', '2', 'hmotnos (t)', 'nad 23 - do 25', '877', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '4', 'Úžitkové vozidlo - 4 a viac náprav', '3', 'hmotnos (t)', 'nad 25 - do 27', '1033', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '4', 'Úžitkové vozidlo - 4 a viac náprav', '4', 'hmotnos (t)', 'nad 27 - do 29', '1189', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '4', 'Úžitkové vozidlo - 4 a viac náprav', '5', 'hmotnos (t)', 'nad 29 - do 31', '1337', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '4', 'Úžitkové vozidlo - 4 a viac náprav', '6', 'hmotnos (t)', 'nad 31 - do 33', '1548', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '4', 'Úžitkové vozidlo - 4 a viac náprav', '7', 'hmotnos (t)', 'nad 33 - do 35', '1755', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '4', 'Úžitkové vozidlo - 4 a viac náprav', '8', 'hmotnos (t)', 'nad 35 - do 37', '1968', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '4', 'Úžitkové vozidlo - 4 a viac náprav', '9', 'hmotnos (t)', 'nad 37 - do 40', '2172', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '4', 'Úžitkové vozidlo - 4 a viac náprav', '10', 'hmotnos (t)', 'nad 40', '2375', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
+ 
+     }
+//koniec nastav sadzby 2015
+
 //nacitaj sadzby
 $sql = "SELECT vz08 FROM F".$kli_vxcf."_sadzby_dmv ";
 $vysledok = mysql_query($sql);
@@ -347,10 +482,7 @@ $h_ycf=0;
 if ( $fir_allx11 > 0 ) $h_ycf=1*$fir_allx11;
 
 $databaza="";
-if ( $kli_vrok > 2010 ) { if (File_Exists("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
-if ( $kli_vrok > 2011 ) { if (File_Exists("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
-if ( $kli_vrok > 2012 ) { if (File_Exists("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; } }
-if ( $kli_vrok > 2013 ) { if (File_Exists("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; } }
+$dtb2 = include("../cis/oddel_dtbz1.php");
 
 $uprtxt = "DROP TABLE F$kli_vxcf"."_uctpriznanie_dmvx".$kli_uzid." ";
 $upravene = mysql_query("$uprtxt");
@@ -636,6 +768,7 @@ $r21 = strip_tags($_REQUEST['r21']);
 $r22 = strip_tags($_REQUEST['r22']);
 $r23 = strip_tags($_REQUEST['r23']);
 $r24 = strip_tags($_REQUEST['r24']);
+$r50 = strip_tags($_REQUEST['r50']);
 
 //ak sa pri ulozeni zmenila sadzba prepocitaj pomernu dan
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE cpl = $cislo_cpl ";
@@ -674,7 +807,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET ".
 " vzkat='$vzkat', vzdru='$vzdru', vzzn='$vzzn', da1='$da1sql', datz='$datzsql', datk='$datksql', ".
 " vzspz='$vzspz', vzobm='$vzobm', vzchm='$vzchm', vznpr='$vznpr', vzdno='$vzdno', vzdnp='$vzdnp', ".
 " r10='$r10', r11='$r11', r12='$r12', r13='$r13', r14='$r14', r15='$r15', r16='$r16', r17='$r17', r18='$r18', r19='$r19', r20='$r20', ".
-" r21='$r21',r22='$r22', r23='$r23', r24='$r24' ".
+" r21='$r21',r22='$r22', r23='$r23', r24='$r24', r50='$r50' ".
 " WHERE oc = 1 AND cpl = $cislo_cpl ";
 $strana=3;
                     }
@@ -778,6 +911,10 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r10/$pocetdnirok*r13 W
 $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r11/$pocetdnirok*r13 WHERE r11 != 0 AND oc = 1 $podmcpl";
 $upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r10 WHERE des6 > r10 AND oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r11 WHERE r11 != 0 AND des6 > r11 AND oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
 $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des2=des6 WHERE oc = 1 $podmcpl";
@@ -809,6 +946,9 @@ $predpoklad = 1*$_REQUEST['predpoklad'];
 if ( $predpoklad == 1 )
      {
 $danpredpok=0;
+
+if( $kli_vrok < 2014 OR $kli_vrok > 2014 ) 
+      {
 $sqlttt = "SELECT SUM(r10) AS sumr10 FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE oc = 1 AND datk = '0000-00-00' ";
 $sqldok = mysql_query("$sqlttt");
   if (@$zaznam=mysql_data_seek($sqldok,0))
@@ -816,6 +956,142 @@ $sqldok = mysql_query("$sqlttt");
   $riaddok=mysql_fetch_object($sqldok);
   $danpredpok=$riaddok->sumr10;
   }
+      }
+
+if( $kli_vrok == 2014 ) 
+      {
+$sqlttt = "DROP TABLE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "CREATE TABLE F$kli_vxcf"."_uctpriznanie_dmvx".$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE oc = 1 AND datk = '0000-00-00' ";
+$sqldok = mysql_query("$sqlttt");
+
+
+$sqltt = "SELECT * FROM F".$kli_vxcf."_uctpriznanie_dmvx$kli_uzid WHERE oc = 1 ORDER BY cpl ";
+$sql = mysql_query("$sqltt");
+$cpol = mysql_num_rows($sql);
+$i=0;
+   while ($i <= $cpol )
+   {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+  {
+$riadok=mysql_fetch_object($sql);
+
+$sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 7 "; 
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 7 "; }
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzdru <= 3000 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 6 "; }
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzdru <= 2000 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 5 "; }
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzdru <= 1500 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 4 "; }
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzdru <= 1200 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 3 "; }
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzdru <= 900  ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 2 "; }
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzdru <= 150  ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 1 "; }
+
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 4 ) { $riadok->vzkat="N"; }
+
+if( $riadok->vzkat != 'M' ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 10 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 40 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 9 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 37 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 8 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 35 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 7 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 33 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 6 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 31 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 5 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 29 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 4 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 27 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 3 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 25 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 2 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 23 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 1 "; }
+
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 14 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 40 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 13 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 37 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 12 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 35 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 11 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 33 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 10 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 31 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 9 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 29 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 8 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 27 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 7 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 25 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 6 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 23 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 5 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 21 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 4 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 19 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 3 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 17 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 2 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 15 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 1 "; }
+
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 17 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 30 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 16 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 28 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 15 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 26 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 14 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 24 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 13 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 22 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 12 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 20 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 11 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 18 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 10 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 16 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 9 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 14 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 8 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 12 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 7 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 10 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 6 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 8 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 5 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 6 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 4 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 4 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 3 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 2 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 2 "; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 1 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 1 "; }
+
+$sadzba15=0;
+$sqldos = mysql_query("$sqltts");
+  if (@$zaznam=mysql_data_seek($sqldos,0))
+  {
+  $riaddos=mysql_fetch_object($sqldos);
+  $sadzba15=$riaddos->szba;
+  }
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13='$sadzba15' WHERE cpl = $riadok->cpl ";
+$sqldok = mysql_query("$sqlttt");
+
+  }
+$i=$i+1;
+   }
+
+//pocet mesiacov 11, zlava 12, sadzba 13, rocna predpokl.dan r10
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r14=YEAR(da1), r15=MONTH(da1) WHERE oc = 1 ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r11=0, r12=0, r10=0 WHERE oc = 1 ";
+$sqldok = mysql_query("$sqlttt");
+
+$kli_vrok2=$kli_vrok+1;
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r11=(($kli_vrok2-r14)*12)-(r15-1) WHERE oc = 1 ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=-0.25 WHERE oc = 1 AND r11 >=  1 AND r11 <= 36";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=-0.20 WHERE oc = 1 AND r11 >= 37 AND r11 <= 72";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=-0.15 WHERE oc = 1 AND r11 >= 73 AND r11 <= 108";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=0.10 WHERE oc = 1 AND r11 >= 145 AND r11 <= 156";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=0.20 WHERE oc = 1 AND r11 > 156";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=-0.50 WHERE oc = 1 AND r50 = 50 ";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=-1.00 WHERE oc = 1 AND r50 = 100 ";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r11=0, r12=0 WHERE da1 = '0000-00-00' ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r10=(1+r12)*r13 WHERE oc = 1 ";
+$sqldok = mysql_query("$sqlttt");
+
+
+//elektromobil { $sadzba15=0; }
+//hybrid zlava 50%
+
+$sqlttt = "SELECT SUM(r10) AS sumr10 FROM F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid WHERE oc = 1 AND datk = '0000-00-00' ";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $danpredpok=$riaddok->sumr10;
+  }
+
+      }
+//koniec rok 2014
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r40=$danpredpok WHERE oc = 9999 ";
 $upravene = mysql_query("$uprtxt");
@@ -1638,6 +1914,10 @@ var sirkawic = screen.width-10;
   {
    window.open('../dokumenty/dan_z_prijmov2013/dpdmv2013/DMVv13_poucenie_na_vyplnenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
+  function Sadzby2015()
+  {
+   window.open('../dokumenty/dan_z_prijmov2013/dpdmv2013/DMVv15_sadzby.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }
   function klik31()
   {
    document.formv1.druh32.checked = false;
@@ -2041,6 +2321,7 @@ $i=$i+1;
    <td class="header">Daò z motorových vozidiel <?php echo $kli_vrok; ?></td>
    <td>
     <div class="bar-btn-form-tool">
+     <img src="../obr/ikony/info_blue_icon.png" onclick="Sadzby2015();" title="Sadzby DMV pre rok 2015" class="btn-form-tool">
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
      <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="Naèíta údaje z minulého roka" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
@@ -2091,8 +2372,7 @@ $source="../ucto/priznanie_dmv".$rokdmv.".php?cislo_oc=".$cislo_oc."&drupoh=1&pa
 
 <?php
 //priezvisko,meno,titul FO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
-" WHERE oc = 9999 ORDER BY oc";
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 $dmeno = $fir_riadok->dmeno;
@@ -2111,9 +2391,8 @@ if ( $fir_uctt03 == 999 ) { $fir_fnaz = ""; }
 <div class="nofill" style="width:846px; height:26px; top:626px; left:51px;"></div>
 
 <?php
-//trvaly pobyt z FOB, sidlo z udajov o firme PO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
-" WHERE oc = 9999 ORDER BY oc";
+//trvaly pobyt z ufirdalsie, sidlo z udajov o firme PO
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 $duli = $fir_riadok->duli;
@@ -2122,7 +2401,7 @@ $dmes = $fir_riadok->dmes;
 $dpsc = $fir_riadok->dpsc;
 $dtel = $fir_riadok->dtel;
 $dfax = $fir_riadok->dfax;
-$xstat = $fir_riadok->xstat;
+$xstat = $fir_riadok->dstat;
 if ( $fir_uctt03 != 999 )
 {
 $duli = $fir_fuli;
@@ -2266,6 +2545,7 @@ $r21 = $fir_riadok->r21;
 $r22 = $fir_riadok->r22;
 $r23 = $fir_riadok->r23;
 $r24 = $fir_riadok->r24;
+$r50 = $fir_riadok->r50;
 ?>
 <img src="../dokumenty/dan_z_prijmov2013/dpdmv2013/DMVv13_str3.jpg" alt="tlaèivo Daò z motorových vozidiel pre rok 2013 3.strana 380kB" class="form-background">
 <input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo $fir_fdic; ?>" disabled="disabled" class="nofill" style="width:220px; top:69px; left:452px;"/>
@@ -2336,9 +2616,12 @@ $r24 = $fir_riadok->r24;
 <input type="text" name="r24" id="r24" value="<?php echo $r24; ?>" onkeyup="CiarkaNaBodku(this);" style="width:172px; top:1159px; left:455px;"/>
 
 <label for="vzzn" class="added-label" style="top:1215px; left:51px;">Znaèka vozidla</label>
- <input type="text" name="vzzn" id="vzzn" value="<?php echo $vzzn; ?>" style="width:360px; top:1205px; left:385px;"/>
+ <input type="text" name="vzzn" id="vzzn" value="<?php echo $vzzn; ?>" style="width:360px; top:1205px; left:285px;"/>
 <label for="datk" class="added-label" style="top:1250px; left:51px;">Zánik daòovej povinnosti</label>
- <input type="text" name="datk" id="datk" value="<?php echo $datksk; ?>" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:1240px; left:385px;"/>
+ <input type="text" name="datk" id="datk" value="<?php echo $datksk; ?>" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:1240px; left:285px;"/>
+
+<label for="datk" class="added-label" style="top:1250px; left:500px;">Z¾ava 50 alebo 100% elektromobil,hybrid...</label>
+ <input type="text" name="r50" id="r50" value="<?php echo $r50; ?>" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1240px; left:800px;"/>
 <?php                     } ?>
 
 
@@ -2638,8 +2921,7 @@ $pdf->Cell(4,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$t08","$rmc",1,"C");
 
 //priezvisko,meno a titul FO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
-" WHERE oc = 9999 ORDER BY oc";
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 $dmeno = $fir_riadok->dmeno;
@@ -2831,9 +3113,8 @@ $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(5,6,"$H1","$rmc",0,"C");$pdf->Cell(1
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$J1","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$K1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$L1","$rmc",1,"C");
 
-//trvaly pobyt z FOB alebo sidlo z udajov o firme PO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
-" WHERE oc = 9999 ORDER BY oc";
+//trvaly pobyt z ufirdalsie alebo sidlo z udajov o firme PO
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 $duli = $fir_riadok->duli;
@@ -2842,7 +3123,7 @@ $dmes = $fir_riadok->dmes;
 $dpsc = $fir_riadok->dpsc;
 $dtel = $fir_riadok->dtel;
 $dfax = $fir_riadok->dfax;
-$xstat = $fir_riadok->xstat;
+$xstat = $fir_riadok->dstat;
 if ( $fir_uctt03 != 999 )
 {
 $duli = $fir_fuli;
@@ -4811,6 +5092,50 @@ $pdf->Output("../tmp/oznamdmv$kli_uzid.pdf");
 }
 /////////////////////////////////////////KONIEC VYTLACENIA OZNAMENIA copern=70
 ?>
+
+
+<?php
+//tlac predpoklad
+if ( $predpoklad == 1 AND $kli_vrok == 2014 )
+     {
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid WHERE oc = 1 ";
+
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+
+if( $pol > 0 )
+          {
+
+$i=0;
+  while ($i <= $pol )
+  {
+
+
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+echo "Predpokladaná DMV na rok 2015  ".$hlavicka->vzspz." 1.evidencia ".SkDatum($hlavicka->da1)." kategória ".$hlavicka->vzkat." druh ".$hlavicka->vzdru." ccm ".
+$hlavicka->vzobm." náprav ".$hlavicka->vznpr." hmotnos ".$hlavicka->vzchm." sadzba ".$hlavicka->r13.
+" mesiacov ".$hlavicka->r11." z¾ava ".$hlavicka->r12." roèná daò ".$hlavicka->r10."<br />";
+
+}
+$i = $i + 1;
+
+  }
+echo "SPOLU ZA VŠETKY VOZIDLÁ ".$danpredpok."<br />";
+           }
+
+$sqtoz = "DROP TABLE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid ";
+//$oznac = mysql_query("$sqtoz");
+exit;
+
+
+     }
+//koniec tlac predpoklad
+?>
+
 
 <?php
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
