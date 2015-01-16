@@ -211,8 +211,10 @@ banvyp;
 $sql = "ALTER TABLE F$kli_vxcf"."_fakdod MODIFY sz4 DATE NOT NULL ";
 $vysledek = mysql_query("$sql");
 
+if( $kli_vrok == 2014 ) {
 $sql = "UPDATE F$kli_vxcf"."_fakdod SET sz4=daz WHERE daz != '0000-00-00' ";
 $vysledek = mysql_query("$sql");
+                        }
 
 $sql = "CREATE TABLE F".$kli_vxcf."_uctvykdpha7new".$sqlt;
 $vysledek = mysql_query("$sql");

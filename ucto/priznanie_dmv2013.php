@@ -976,15 +976,16 @@ $i=0;
   if (@$zaznam=mysql_data_seek($sql,$i))
   {
 $riadok=mysql_fetch_object($sql);
+//andrej
 
 $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 7 "; 
 if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 7 "; }
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzdru <= 3000 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 6 "; }
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzdru <= 2000 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 5 "; }
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzdru <= 1500 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 4 "; }
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzdru <= 1200 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 3 "; }
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzdru <= 900  ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 2 "; }
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzdru <= 150  ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 1 "; }
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 3000 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 6 "; }
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 2000 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 5 "; }
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 1500 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 4 "; }
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 1200 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 3 "; }
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 900  ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 2 "; }
+if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 150  ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 1 "; }
 
 if( $riadok->vzkat == 'M' AND $riadok->vzdru == 4 ) { $riadok->vzkat="N"; }
 
@@ -5103,7 +5104,11 @@ $sqltt = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid WHERE oc = 1 ";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
-
+echo "<table width='100%' >";
+echo "<tr><td colspan='10'>PREDPOKLADAN¡ DA“ na bud˙ci rok<td/></tr>";
+echo "<tr><td width='10%' >SPZ</td><td width='10%' >1.evidencia </td><td width='10%' >kategÛria </td><td width='5%' >druh </td><td width='5%' >objem</td>";
+echo "<td width='10%' >n·prav </td><td width='10%' >hmotnosù </td><td width='10%' >sadzba </td><td width='10%' >mesiacov </td><td width='10%' >zæava </td><td width='10%' >daÚ</td>";
+echo "</tr>";
 if( $pol > 0 )
           {
 
@@ -5116,15 +5121,15 @@ $i=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
-echo "Predpokladan· DMV na rok 2015  ".$hlavicka->vzspz." 1.evidencia ".SkDatum($hlavicka->da1)." kategÛria ".$hlavicka->vzkat." druh ".$hlavicka->vzdru." ccm ".
-$hlavicka->vzobm." n·prav ".$hlavicka->vznpr." hmotnosù ".$hlavicka->vzchm." sadzba ".$hlavicka->r13.
-" mesiacov ".$hlavicka->r11." zæava ".$hlavicka->r12." roËn· daÚ ".$hlavicka->r10."<br />";
+echo "<tr><td>".$hlavicka->vzspz."</td><td>".SkDatum($hlavicka->da1)."</td><td>".$hlavicka->vzkat."</td><td>".$hlavicka->vzdru."</td><td>";
+echo $hlavicka->vzobm."</td><td>".$hlavicka->vznpr."</td><td>".$hlavicka->vzchm."</td><td>".$hlavicka->r13;
+echo "</td><td>".$hlavicka->r11."</td><td>".$hlavicka->r12."</td><td>".$hlavicka->r10."</td><tr />";
 
 }
 $i = $i + 1;
 
   }
-echo "SPOLU ZA VäETKY VOZIDL¡ ".$danpredpok."<br />";
+echo "<tr><td colspan='10'>SPOLU ZA VäETKY VOZIDL¡ ".$danpredpok."<td/></tr></table>";
            }
 
 $sqtoz = "DROP TABLE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid ";

@@ -1296,7 +1296,7 @@ $pdf->Cell(190,24," ","$rmc1",1,"L");
 //skutocnost k
 //dopyt, rozbeha
 $pdf->SetFont('arial','',8);
-$text="01.01.2014";
+$text=$datum;
 $pdf->Cell(117,6," ","$rmc1",0,"R");$pdf->Cell(31,4,"$text","$rmc",1,"C");
 $pdf->SetFont('arial','',10);
 
