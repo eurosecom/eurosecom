@@ -1415,7 +1415,7 @@ $pdf->Cell(35,4," ","$rmc1",0,"L");$pdf->Cell(34,6,"$tlacrd","$rmc",1,"L");
 $pdf->Cell(190,1," ","$rmc1",1,"L");
 $pdf->Cell(48,4," ","$rmc1",0,"L");$pdf->Cell(25,4,"$hlavicka->titl","$rmc",0,"L");$pdf->Cell(63,4," ","$rmc1",0,"L");$pdf->Cell(27,4,"$ztitz","$rmc",1,"L");
 $pdf->Cell(190,4," ","$rmc1",1,"L");
-$pdf->Cell(26,5," ","$rmc1",0,"L");$pdf->Cell(75,6,"È$hlavicka->zuli","$rmc",0,"L");$pdf->Cell(17,5," ","$rmc1",0,"L");$pdf->Cell(29,5,"$hlavicka->zcdm","$rmc",0,"L");
+$pdf->Cell(26,5," ","$rmc1",0,"L");$pdf->Cell(75,6,"$hlavicka->zuli","$rmc",0,"L");$pdf->Cell(17,5," ","$rmc1",0,"L");$pdf->Cell(29,5,"$hlavicka->zcdm","$rmc",0,"L");
 $pdf->Cell(4,5," ","$rmc1",0,"L");$pdf->Cell(32,5,"$hlavicka->zpsc","$rmc",1,"L");
 $pdf->Cell(27,5," ","$rmc1",0,"L");$pdf->Cell(74,4,"$hlavicka->zmes","$rmc",0,"L");$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(70,4,"$zstat","$rmc",1,"L");
 $pdf->Cell(190,2," ","$rmc1",1,"L");
