@@ -1032,7 +1032,7 @@ $pdf->SetFont('arial','',10);
 $pdf->Cell(190,-1," ","$rmc1",1,"L");
 $pdf->Cell(45,4," ","$rmc1",0,"L");$pdf->Cell(25,4,"$hlavicka->titl","$rmc",0,"L");$pdf->Cell(63,4," ","$rmc1",0,"L");$pdf->Cell(27,4,"$ztitz","$rmc",1,"L");
 $pdf->Cell(190,4,"                          ","$rmc1",1,"L");
-$pdf->Cell(27,5," ","$rmc1",0,"L");$pdf->Cell(75,6,"Èý$hlavicka->zuli","$rmc",0,"L");$pdf->Cell(11,5," ","$rmc1",0,"L");$pdf->Cell(29,6,"$hlavicka->zcdm","$rmc",0,"L");
+$pdf->Cell(27,5," ","$rmc1",0,"L");$pdf->Cell(75,6,"$hlavicka->zuli","$rmc",0,"L");$pdf->Cell(11,5," ","$rmc1",0,"L");$pdf->Cell(29,6,"$hlavicka->zcdm","$rmc",0,"L");
 $pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(32,6,"$hlavicka->zpsc","$rmc",1,"L");
 $pdf->Cell(190,-1," ","$rmc1",1,"L");
 $pdf->Cell(27,5," ","$rmc1",0,"L");$pdf->Cell(103,4,"$hlavicka->zmes","$rmc",0,"L");$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(40,4,"$zstat","$rmc",1,"L");
