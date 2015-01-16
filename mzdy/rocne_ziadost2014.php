@@ -793,7 +793,7 @@ var sirkawic = screen.width-10;
   }
   function PoucVyplnenie()
   {
-   window.open('../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/ziadost_o_rz/Ziadost_RZv2013_poucenie_na_vyplnenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/rz_ziadost/rz_ziadost_v14_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
 </HEAD>
@@ -818,7 +818,7 @@ if ( $copern == 20 )
    </td>
    <td>
     <div class="bar-btn-form-tool">
-<!--      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool"> -->
+     <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
      <img src="../obr/ikony/reload_blue_icon.png" onclick="reNacitajMzdy();" title="Znovu naèíta hodnoty z miezd" class="btn-form-tool">
      <img src="../obr/ikony/usertwo_blue_icon.png" onclick="DetiZamestnanca();" title="Deti zamestnanca" class="btn-form-tool">
      <img src="../obr/ikony/list_blue_icon.png" onclick="TlacMzdovyList();" title="Zobrazi mzdový list v PDF" class="btn-form-tool">
