@@ -1154,6 +1154,28 @@ window.open('../majetok/maj_text.php?h_inv=' + h_inv + '&copern=1&drupoh=<?php e
 
     }
 
+
+    function mespoh()
+    {
+
+var akep=document.formhl1.akep.value;
+
+window.open('../majetok/mespoh.php?akep=' + akep + '&copern=10&drupoh=<?php echo $drupoh; ?>&page=1', '_blank',  'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
+    }
+
+    function rocpoh()
+    {
+
+var akep=document.formhl1.akep.value;
+
+window.open('../majetok/mespoh.php?akep=' + akep + '&copern=10&drupoh=21&page=1', '_blank',  'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
+
+    }
+
+
+
   </script>
 </HEAD>
 <BODY class="white" onload="ObnovUI(); VyberVstup();" >
@@ -1401,15 +1423,15 @@ if ( $kli_uzall > 10000 AND $drupoh == 11 )
 ?>
 </td>
 <td class="hmenu" >
-<a href="#" onClick="window.open('mespoh.php?copern=10&drupoh=<?php echo $drupoh; ?>&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=15 height=15 border=0 title='Vytlaèi mesaèné pohyby' ></a>
+<a href="#" onClick="mespoh();">
+<img src='../obr/tlac.png' width=15 height=15 border=0 title='Vytlaèi mesaèné pohyby, všetky/zaradenia/vyradenia pod¾a selektora vpravo' ></a>
 
 <?php
        if ( $drupoh == 11 )
        {
 ?>
-<a href="#" onClick="window.open('mespoh.php?copern=10&drupoh=21&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=20 border=0 title='Vytlaèi roèné pohyby' ></a>
+<a href="#" onClick="rocpoh();">
+<img src='../obr/tlac.png' width=20 height=20 border=0 title='Vytlaèi roèné pohyby, všetky/zaradenia/vyradenia pod¾a selektora vpravo' ></a>
 
 <?php
        }
@@ -1429,6 +1451,13 @@ ume<a href="#" onClick="window.open('mespoh.php?copern=10&drupoh=32&page=1', '_b
        }
 ?>
 </td>
+
+<td class="hmenu" >
+<select class="hvstup" size="1" name="akep" id="akep" >
+<option value="0" >ALL</option>
+<option value="1" >ZAR</option>
+<option value="2" >VYR</option>
+</select>
 <?php
   }
 ?>
