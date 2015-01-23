@@ -557,159 +557,6 @@ if( $copern == 1 AND $kli_vduj != 9 )
 </table>
 <br />
 
-<?php //POD v.2013                ?>
-<?php if( $kli_vrok <= 2014 )   { ?>
-
-
-<?php
-//$povelak=""; tymto by urobil zostavu vzor 2008
-$povelak="__x";
-?>
-
-
-<script type="text/javascript">
-
-function SUvAHA()
-                {
-var h_zos = document.forms.formsv1.h_zos.value;
-var h_sch = document.forms.formsv1.h_sch.value;
-
-window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=0&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function SUvAHAEUR()
-                {
-var h_zos = document.forms.formsv1.h_zos.value;
-var h_sch = document.forms.formsv1.h_sch.value;
-
-window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function ELsuvaha()
-                {
-var h_zos = document.forms.formsv1.h_zos.value;
-var h_sch = document.forms.formsv1.h_sch.value;
-
-window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1&xml=1&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function XMLsuvaha()
-                {
-var h_zos = document.forms.formsv1.h_zos.value;
-var h_sch = document.forms.formsv1.h_sch.value;
-
-window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1&xml=1&vyb_ume=<?php echo $kli_vume; ?>&suborxml=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-</script>
-
-<table class="vstup" width="100%" >
-<FORM name="formsv1" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="SUvAHA();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlaèi vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="SUvAHAEUR();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
-</td>
-
-<?php $versuv="UVPOD1v09_1"; if( $kli_vrok > 2010 ) $versuv="UVPOD1v11 "; ?>
-
-<td class="bmenu" width="56%">Súvaha Úè POD 1 - 01 verzia <?php echo $versuv; ?>
-<a href="#" onClick="SynGenSuv();">
-<img src='../obr/zoznam.png' width=15 height=15 border=0 title='Syntetické generovanie riadkov súvahy' ></a>
-</td>
-<td class="bmenu" width="36%">
-<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválená: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="" />
-</td>
-<td class="bmenu" width="2%" align="right">
-<?php if( $kli_vrok < 2012 ) { ?><img src='../obr/import.png' onclick='ELsuvaha();' width=20 height=15 border=0 title='FDF a PDF súbory pre tlaè výkazu' ><?php } ?>
-<img src='../obr/export.png' onclick='XMLsuvaha();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie výkazu' >
-<td class="bmenu" width="2%" align="right">
-<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=22&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
-</td>
-</tr>
-</FORM>
-</table>
-
-<?php
-$povelak="__x";
-?>
-
-<script type="text/javascript">
-
-function VYKZIS()
-                {
-var h_zos = document.forms.formvz1.h_zos.value;
-var h_sch = document.forms.formvz1.h_sch.value;
-
-window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
-                }
-
-function VYKZISEUR()
-                {
-var h_zos = document.forms.formvz1.h_zos.value;
-var h_sch = document.forms.formvz1.h_sch.value;
-
-window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
-                }
-
-function ELvykzis()
-                {
-var h_zos = document.forms.formvz1.h_zos.value;
-var h_sch = document.forms.formvz1.h_sch.value;
-
-window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1&xml=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
-                }
-
-function XMLvykzis()
-                {
-var h_zos = document.forms.formvz1.h_zos.value;
-var h_sch = document.forms.formvz1.h_sch.value;
-
-window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1&xml=1&suborxml=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
-                }
-
-</script>
-
-<table class="vstup" width="100%" >
-<FORM name="formvz1" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="VYKZIS();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlaèi vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="VYKZISEUR();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="56%">Výkaz ziskov a strát Úè POD 2 - 01 verzia UVPOD2v09_1</td>
-<td class="bmenu" width="36%">
-<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavený: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválený: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="" />
-</td>
-<td class="bmenu" width="2%" align="right">
-<?php if( $kli_vrok < 2012 ) { ?><img src='../obr/import.png' onclick='ELvykzis();' width=20 height=15 border=0 title='FDF a PDF súbory pre tlaè výkazu' ><?php } ?>
-<img src='../obr/export.png' onclick='XMLvykzis();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie výkazu' >
-<td class="bmenu" width="2%" align="right">
-<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=21&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
-</td>
-</tr>
-</FORM>
-</table>
-
-<?php                           } ?>
-<?php //koniec POD v.2013         ?>
 
 <?php //POD 2014                  ?>
 <?php if( $kli_vrok >= 2013 AND $ajpod == 1 )   { ?>
@@ -1299,6 +1146,33 @@ window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT', '_blank',
 </FORM>
 </table>
 
+<table class="vstup" width="100%" >
+<FORM name="formp1" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacPriznanie();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi všetky strany priznania vo formáte PDF' ></a>
+</td>
+<td class="bmenu" width="2%" align="right">
+<td class="bmenu" width="56%">Daòové priznanie k dani z príjmov PO 
+<a href="#" onClick="TlacPotvrdDPO();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi potvrdenie o podaní daòového priznania PO vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="36%" align="right">
+<?php if( $kli_vrok < 2012 ) { ?>
+<img src='../obr/import.png' onclick='ELpriznaniepo();' width=20 height=15 border=0 title='FDF a PDF súbory pre tlaè priznania' >
+<?php                        } ?>
+<td class="bmenu" width="2%" align="right">
+<img src='../obr/export.png' onclick='POdoXML();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie priznania' >
+<td class="bmenu" width="2%" align="right">
+<a href="#" onClick="UpravPriznanie();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi priznanie' ></a>
+</td>
+
+</tr>
+</FORM>
+</table>
+
 <?php if( $kli_nezis == 1 ) { ?>
 
 <?php if( $kli_vrok <  2012 )   { ?>
@@ -1469,33 +1343,6 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <?php                      } ?>
 
 
-<table class="vstup" width="100%" >
-<FORM name="formp1" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacPriznanie();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi všetky strany priznania vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="2%" align="right">
-<td class="bmenu" width="56%">Daòové priznanie k dani z príjmov PO 
-<a href="#" onClick="TlacPotvrdDPO();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi potvrdenie o podaní daòového priznania PO vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="36%" align="right">
-<?php if( $kli_vrok < 2012 ) { ?>
-<img src='../obr/import.png' onclick='ELpriznaniepo();' width=20 height=15 border=0 title='FDF a PDF súbory pre tlaè priznania' >
-<?php                        } ?>
-<td class="bmenu" width="2%" align="right">
-<img src='../obr/export.png' onclick='POdoXML();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie priznania' >
-<td class="bmenu" width="2%" align="right">
-<a href="#" onClick="UpravPriznanie();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi priznanie' ></a>
-</td>
-
-</tr>
-</FORM>
-</table>
-
 <?php if( $kli_vrok <  2012 )   { ?>
 
 <table class="vstup" width="100%" >
@@ -1595,6 +1442,161 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 <?php                           } ?>
 
 <?php                                               } ?>
+
+
+<?php //POD v.2013                ?>
+<?php if( $kli_vrok <= 2014 )   { ?>
+
+
+<?php
+//$povelak=""; tymto by urobil zostavu vzor 2008
+$povelak="__x";
+?>
+
+
+<script type="text/javascript">
+
+function SUvAHA()
+                {
+var h_zos = document.forms.formsv1.h_zos.value;
+var h_sch = document.forms.formsv1.h_sch.value;
+
+window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=0&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function SUvAHAEUR()
+                {
+var h_zos = document.forms.formsv1.h_zos.value;
+var h_sch = document.forms.formsv1.h_sch.value;
+
+window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function ELsuvaha()
+                {
+var h_zos = document.forms.formsv1.h_zos.value;
+var h_sch = document.forms.formsv1.h_sch.value;
+
+window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1&xml=1&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function XMLsuvaha()
+                {
+var h_zos = document.forms.formsv1.h_zos.value;
+var h_sch = document.forms.formsv1.h_sch.value;
+
+window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1&xml=1&vyb_ume=<?php echo $kli_vume; ?>&suborxml=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+</script>
+
+<table class="vstup" width="100%" >
+<FORM name="formsv1" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="SUvAHA();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlaèi vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="SUvAHAEUR();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
+</td>
+
+<?php $versuv="UVPOD1v09_1"; if( $kli_vrok > 2010 ) $versuv="UVPOD1v11 "; ?>
+
+<td class="bmenu" width="56%">Súvaha Úè POD 1-01 ( platná do 30.12.2014 )
+<a href="#" onClick="SynGenSuv();">
+<img src='../obr/zoznam.png' width=15 height=15 border=0 title='Syntetické generovanie riadkov súvahy' ></a>
+</td>
+<td class="bmenu" width="36%">
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
+ Zostavená: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválená: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="" />
+</td>
+<td class="bmenu" width="2%" align="right">
+<?php if( $kli_vrok < 2012 ) { ?><img src='../obr/import.png' onclick='ELsuvaha();' width=20 height=15 border=0 title='FDF a PDF súbory pre tlaè výkazu' ><?php } ?>
+<img src='../obr/export.png' onclick='XMLsuvaha();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie výkazu' >
+<td class="bmenu" width="2%" align="right">
+<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=22&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+
+<?php
+$povelak="__x";
+?>
+
+<script type="text/javascript">
+
+function VYKZIS()
+                {
+var h_zos = document.forms.formvz1.h_zos.value;
+var h_sch = document.forms.formvz1.h_sch.value;
+
+window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+
+function VYKZISEUR()
+                {
+var h_zos = document.forms.formvz1.h_zos.value;
+var h_sch = document.forms.formvz1.h_sch.value;
+
+window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+
+function ELvykzis()
+                {
+var h_zos = document.forms.formvz1.h_zos.value;
+var h_sch = document.forms.formvz1.h_sch.value;
+
+window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1&xml=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+
+function XMLvykzis()
+                {
+var h_zos = document.forms.formvz1.h_zos.value;
+var h_sch = document.forms.formvz1.h_sch.value;
+
+window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1&xml=1&suborxml=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+
+</script>
+
+<table class="vstup" width="100%" >
+<FORM name="formvz1" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="VYKZIS();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlaèi vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="VYKZISEUR();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="56%">Výkaz ziskov a strát Úè POD 2-01  ( platný do 30.12.2014 )</td>
+<td class="bmenu" width="36%">
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
+ Zostavený: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválený: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="" />
+</td>
+<td class="bmenu" width="2%" align="right">
+<?php if( $kli_vrok < 2012 ) { ?><img src='../obr/import.png' onclick='ELvykzis();' width=20 height=15 border=0 title='FDF a PDF súbory pre tlaè výkazu' ><?php } ?>
+<img src='../obr/export.png' onclick='XMLvykzis();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie výkazu' >
+<td class="bmenu" width="2%" align="right">
+<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=21&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho úètovného obdobia' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+
+<?php                           } ?>
+<?php //koniec POD v.2013         ?>
 
 <?php
 //koniec podvojne uctovnictvo
