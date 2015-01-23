@@ -703,6 +703,40 @@ window.open('fin6a04dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+
+//vykaz Fin1a12
+
+function TlacFin1a12()
+                {
+var h_oc = document.forms.formfin1a12.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('../ucto/vykaz_fin112.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0&fin1a12=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+function UpravFin1a12()
+                {
+var h_oc = document.forms.formfin1a12.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin112.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&fin1a12=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function ZnovuFin1a12()
+                {
+var h_oc = document.forms.formfin1a12.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin112.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&fin1a12=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+
 <?php                        } ?>
 //koniec vykzy FIN NUJ 2013
 
@@ -1278,6 +1312,37 @@ if( $kli_vrok >= 2013 ) {
 
 <td class="bmenu" width="2%">
 
+</td>
+</tr>
+</FORM>
+</table>
+
+<table class="vstup" width="100%" >
+<FORM name="formfin1a12" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacFin1a12();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
+</td>
+<td class="bmenu" width="98%">FinanËn˝ v˝kaz o plnenÌ rozpoËtu a o nerozpoËtovan˝ch pohyboch na ˙Ëtoch subjektu verejnej spr·vy FIN 1a - 12
+ <select size="1" name="h_oc" id="h_oc" >
+<option value="1" >1.ötvrùrok</option>
+<option value="2" >2.ötvrùrok</option>
+<option value="3" >3.ötvrùrok</option>
+<option value="4" >4.ötvrùrok</option>
+</select>
+<a href="#" onClick="DbfFin112();">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
+
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="UpravFin1a12();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviù hodnoty ' ></a>
+</td>
+
+<td class="bmenu" width="2%">
+<a href="#" onClick="ZnovuFin1a12();">
+<img src='../obr/orig.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty  - mÙûete opakovaù viackr·t' ></a>
 </td>
 </tr>
 </FORM>

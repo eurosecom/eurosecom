@@ -1702,7 +1702,7 @@ document.formv1.par79ods2.checked = "checked";
 //zoznam priznani
 if ( $copern == 80 )
      {
-$sqltt = "SELECT * FROM F$kli_vxcf"."_archivdph WHERE druh > 0 ORDER BY ume DESC,druh";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_archivdph WHERE druh > 0 ORDER BY ume DESC,stvrtrok DESC,druh";
 //echo $sqltt;
 $sql = mysql_query("$sqltt");
 

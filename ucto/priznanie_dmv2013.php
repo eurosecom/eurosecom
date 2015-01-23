@@ -769,6 +769,7 @@ $r22 = strip_tags($_REQUEST['r22']);
 $r23 = strip_tags($_REQUEST['r23']);
 $r24 = strip_tags($_REQUEST['r24']);
 $r50 = strip_tags($_REQUEST['r50']);
+$r49 = 1*$_REQUEST['r49'];
 
 //ak sa pri ulozeni zmenila sadzba prepocitaj pomernu dan
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE cpl = $cislo_cpl ";
@@ -807,7 +808,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET ".
 " vzkat='$vzkat', vzdru='$vzdru', vzzn='$vzzn', da1='$da1sql', datz='$datzsql', datk='$datksql', ".
 " vzspz='$vzspz', vzobm='$vzobm', vzchm='$vzchm', vznpr='$vznpr', vzdno='$vzdno', vzdnp='$vzdnp', ".
 " r10='$r10', r11='$r11', r12='$r12', r13='$r13', r14='$r14', r15='$r15', r16='$r16', r17='$r17', r18='$r18', r19='$r19', r20='$r20', ".
-" r21='$r21',r22='$r22', r23='$r23', r24='$r24', r50='$r50' ".
+" r21='$r21',r22='$r22', r23='$r23', r24='$r24', r50='$r50', r49='$r49' ".
 " WHERE oc = 1 AND cpl = $cislo_cpl ";
 $strana=3;
                     }
@@ -988,6 +989,23 @@ if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 900  ) {
 if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 150  ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 1 "; }
 
 if( $riadok->vzkat == 'M' AND $riadok->vzdru == 4 ) { $riadok->vzkat="N"; }
+if( $riadok->vzkat != 'M' AND $riadok->vznpr == 1 ) { $riadok->vznpr=2; }
+
+if( $riadok->vzkat != 'M' AND ( $riadok->vzdru == 3 OR $riadok->vzdru == 5 ) AND $riadok->r49 > 0 ) 
+{ 
+
+if( $riadok->vznpr == 2 AND $riadok->vzchm == 2 ) { $riadok->vzchm=1; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm >  2 AND $riadok->vzchm <= 30 ) { $riadok->vzchm=$riadok->vzchm-2; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm > 30 ) { $riadok->vzchm=28; }
+
+if( $riadok->vznpr == 3 AND $riadok->vzchm > 15 AND $riadok->vzchm <= 37 ) { $riadok->vzchm=$riadok->vzchm-2; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm > 37 AND $riadok->vzchm <= 40 ) { $riadok->vzchm=37; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm > 40 ) { $riadok->vzchm=40; }
+
+if( $riadok->vznpr == 4 AND $riadok->vzchm > 23 AND $riadok->vzchm <= 37 ) { $riadok->vzchm=$riadok->vzchm-2; }
+if( $riadok->vznpr == 4 AND $riadok->vzchm > 37 AND $riadok->vzchm <= 40 ) { $riadok->vzchm=37; }
+if( $riadok->vznpr == 4 AND $riadok->vzchm > 40 ) { $riadok->vzchm=40; }
+}
 
 if( $riadok->vzkat != 'M' ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 10 "; }
 if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 40 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 9 "; }
@@ -2547,6 +2565,7 @@ $r22 = $fir_riadok->r22;
 $r23 = $fir_riadok->r23;
 $r24 = $fir_riadok->r24;
 $r50 = $fir_riadok->r50;
+$r49 = 1*$fir_riadok->r49;
 ?>
 <img src="../dokumenty/dan_z_prijmov2013/dpdmv2013/DMVv13_str3.jpg" alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2013 3.strana 380kB" class="form-background">
 <input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo $fir_fdic; ?>" disabled="disabled" class="nofill" style="width:220px; top:69px; left:452px;"/>
@@ -2621,8 +2640,16 @@ $r50 = $fir_riadok->r50;
 <label for="datk" class="added-label" style="top:1250px; left:51px;">Z·nik daÚovej povinnosti</label>
  <input type="text" name="datk" id="datk" value="<?php echo $datksk; ?>" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:1240px; left:285px;"/>
 
-<label for="datk" class="added-label" style="top:1250px; left:500px;">Zæava 50 alebo 100% elektromobil,hybrid...</label>
+<label for="r50" class="added-label" style="top:1250px; left:500px;">Zæava 50 alebo 100% elektromobil,hybrid...</label>
  <input type="text" name="r50" id="r50" value="<?php echo $r50; ?>" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1240px; left:800px;"/>
+
+<label for="r49" class="added-label" style="top:1285px; left:287px;">N·vesov· jazdn· s˙prava</label>
+<input type="checkbox" name="r49" value="1" style="top:1282px; left:445px;"/>
+<?php if ( $r49 == 1 ) { ?>
+<script>document.formv1.r49.checked = "checked";</script>
+<?php                  } ?>
+
+
 <?php                     } ?>
 
 
@@ -5106,8 +5133,8 @@ $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 echo "<table width='100%' >";
 echo "<tr><td colspan='10'>PREDPOKLADAN¡ DA“ na bud˙ci rok<td/></tr>";
-echo "<tr><td width='10%' >SPZ</td><td width='10%' >1.evidencia </td><td width='10%' >kategÛria </td><td width='5%' >druh </td><td width='5%' >objem</td>";
-echo "<td width='10%' >n·prav </td><td width='10%' >hmotnosù </td><td width='10%' >sadzba </td><td width='10%' >mesiacov </td><td width='10%' >zæava </td><td width='10%' >daÚ</td>";
+echo "<tr><td width='10%' >SPZ</td><td width='10%' >1.evidencia </td><td width='10%' >kategÛria </td><td width='10%' >druh/N·v.s˙p. </td><td width='5%' >objem</td>";
+echo "<td width='10%' >n·prav </td><td width='10%' >hmotnosù </td><td width='8%' >sadzba </td><td width='7%' >mesiacov </td><td width='10%' >zæava </td><td width='10%' >daÚ</td>";
 echo "</tr>";
 if( $pol > 0 )
           {
@@ -5121,7 +5148,9 @@ $i=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
-echo "<tr><td>".$hlavicka->vzspz."</td><td>".SkDatum($hlavicka->da1)."</td><td>".$hlavicka->vzkat."</td><td>".$hlavicka->vzdru."</td><td>";
+$r49=1*$hlavicka->r49;
+
+echo "<tr><td>".$hlavicka->vzspz."</td><td>".SkDatum($hlavicka->da1)."</td><td>".$hlavicka->vzkat."</td><td>".$hlavicka->vzdru."/".$r49."</td><td>";
 echo $hlavicka->vzobm."</td><td>".$hlavicka->vznpr."</td><td>".$hlavicka->vzchm."</td><td>".$hlavicka->r13;
 echo "</td><td>".$hlavicka->r11."</td><td>".$hlavicka->r12."</td><td>".$hlavicka->r10."</td><tr />";
 

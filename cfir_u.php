@@ -14,6 +14,7 @@ $copern = $_REQUEST['copern'];
 $cislo_xcf = $_REQUEST['cislo_xcf'];
 $naz_xcf = $_REQUEST['naz_xcf'];
 $naz_rok = 1*($_REQUEST['naz_rok']);
+if( $naz_rok == 0 ) { $naz_rok=2015;  }
 $naz_duj = 1*($_REQUEST['naz_duj']);
 $naz_dtb = $_REQUEST['naz_dtb'];
 $naz_prav = $_REQUEST['naz_prav'];
@@ -58,7 +59,7 @@ $copern=8;
 $page=1;
 $cislo_xcf=$cislonew;
 $naz_xcf="";
-$naz_rok="2014";
+$naz_rok="2015";
 $naz_prav="";
 $naz_duj="9";
 $naz_dtb="";
@@ -145,7 +146,7 @@ if ( $copern == 8 )
 ?>
       function Nastav_UPSEL()
       {
-      document.formv1.h_rok.options[<?php echo $rok_ind;?>].selected = true;
+      document.formv1.h_rok.value = <?php echo $naz_rok;?>;
       //document.formv1.h_duj.options[<?php echo $duj_ind;?>].selected = true;
       document.formv1.h_duj.value = <?php echo $naz_duj;?>;
       document.formv1.h_naz.focus();
@@ -179,7 +180,7 @@ if ( $copern != 8 )
       function Nastav_SEL()
       {
       Bx.style.display="none";
-      document.formv1.h_rok.options[0].selected = true;
+      document.formv1.h_rok.value = <?php echo $naz_rok;?>;
       document.formv1.h_duj.options[0].selected = true;
       document.formv1.uloz.disabled = true;
       return (true);
@@ -272,30 +273,31 @@ if ( $copern == 5 || $copern == 8 )
 
 <TD class="fmenu">
          <SELECT name="h_rok" id="h_rok">
-         <OPTION value="2008">
-         2008
-         </OPTION>
-         <OPTION value="2009">
-         2009
-         </OPTION>
-         <OPTION value="2010">
-         2010
-         </OPTION>
-         <OPTION value="2011">
-         2011
-         </OPTION>
-         <OPTION value="2012">
-         2012
-         </OPTION>
-         <OPTION value="2013">
-         2013
+         <OPTION value="2015">
+         2015
          </OPTION>
          <OPTION value="2014">
          2014
          </OPTION>
-         <OPTION value="2015">
-         2015
+         <OPTION value="2013">
+         2013
          </OPTION>
+         <OPTION value="2012">
+         2012
+         </OPTION>
+         <OPTION value="2011">
+         2011
+         </OPTION>
+         <OPTION value="2010">
+         2010
+         </OPTION>
+         <OPTION value="2009">
+         2009
+         </OPTION>
+         <OPTION value="2008">
+         2008
+         </OPTION>
+
          </SELECT>
 
 <TD class="fmenu">

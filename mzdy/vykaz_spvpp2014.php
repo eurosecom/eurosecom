@@ -6,14 +6,13 @@ $sys = 'MZD';
 $urov = 3000;
 $copern = $_REQUEST['copern'];
 $tis = $_REQUEST['tis'];
-if(!isset($tis)) $tis = 0;
+if (!isset($tis)) $tis = 0;
 $meno = 1*$_REQUEST['meno'];
 
 $h_oprav = 1*$_REQUEST['h_oprav'];
-$davyp = $_REQUEST['davyp'];
 
 $uziv = include("../uziv.php");
-if( !$uziv ) exit;
+if ( !$uziv ) exit;
 
 //ramcek fpdf 1=zap,0=vyp
 $rmc=0;
@@ -26,43 +25,6 @@ require_once("../pswd/password.php");
     exit;
   endif;
   mysql_select_db($mysqldb);
-
-if ( $kli_vrok < 2011 )
-{
-?>
-<script type="text/javascript">
-  var okno = window.open("../mzdy/vykaz_SP2010.php?copern=<?php echo $copern; ?>&page=<?php echo $page; ?>&ostre=0&drupoh=<?php echo $drupoh; ?>","_self");
-</script>
-<?php
-exit;
-}
-if ( $kli_vrok < 2013 )
-{
-?>
-<script type="text/javascript">
-  var okno = window.open("../mzdy/vykaz_SP2012.php?copern=<?php echo $copern; ?>&page=<?php echo $page; ?>&ostre=0&drupoh=<?php echo $drupoh; ?>","_self");
-</script>
-<?php
-exit;
-}
-if ( $kli_vrok < 2014 )
-{
-?>
-<script type="text/javascript">
-  var okno = window.open("../mzdy/vykaz_SP2013.php?copern=<?php echo $copern; ?>&h_oprav=<?php echo $h_oprav; ?>&davyp=<?php echo $davyp; ?>&page=<?php echo $page; ?>&ostre=0&drupoh=<?php echo $drupoh; ?>","_self");
-</script>
-<?php
-exit;
-}
-if ( $kli_vrok < 2015 )
-{
-?>
-<script type="text/javascript">
-  var okno = window.open("../mzdy/vykaz_SP2014.php?copern=<?php echo $copern; ?>&h_oprav=<?php echo $h_oprav; ?>&davyp=<?php echo $davyp; ?>&page=<?php echo $page; ?>&ostre=0&drupoh=<?php echo $drupoh; ?>","_self");
-</script>
-<?php
-exit;
-}
 
 if ( $copern == 1 )
      {
@@ -84,7 +46,6 @@ exit;
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
-
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
@@ -99,15 +60,6 @@ $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resiz
 $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
-
-//bezpecne zmaz
-if ( File_Exists("../tmp/mzdpasky$kli_uzid.pdf") ) { $soubor = unlink("../tmp/mzdpasky$kli_uzid.pdf"); }
-if ( File_Exists("../tmp/mzdzos.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/mzdzos.$kli_uzid.pdf"); }
-if ( File_Exists("../tmp/mzdvyp.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/mzdvyp.$kli_uzid.pdf"); }
-if ( File_Exists("../tmp/priemery.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/priemery.$kli_uzid.pdf"); }
-if ( File_Exists("../tmp/prilohaSP.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/prilohaSP.$kli_uzid.pdf"); }
-if ( File_Exists("../tmp/vykazSP.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/vykazSP.$kli_uzid.pdf"); }
-if ( File_Exists("../tmp/vykazZP.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/vykazZP.$kli_uzid.pdf"); }
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdzalmesx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
@@ -145,7 +97,6 @@ $vysledek = mysql_query("$sql");
 //pre mesacny vykaz vytvor pracovny subor
 if ( $copern == 10 OR $copern == 20 OR $copern == 30 OR $copern == 155 OR $copern == 156 )
 {
-
 //prac.subor
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
@@ -157,8 +108,13 @@ $vysledok = mysql_query("$sqlt");
 $sqlt = <<<mzdprc
 (
    oc           INT(7) DEFAULT 0,
+   umeo         DECIMAL(7,4) DEFAULT 0,
    zdrv         INT(7) DEFAULT 0,
    znizp        INT(1) DEFAULT 0,
+   pocdni       decimal(10,0) DEFAULT 0,
+   strajk       decimal(10,0) DEFAULT 0,
+   skonci       decimal(10,0) DEFAULT 0,
+   neplat       decimal(10,0) DEFAULT 0,
    zzam_zp      DECIMAL(10,2) DEFAULT 0,
    zzam_np      DECIMAL(10,2) DEFAULT 0,
    zzam_sp      DECIMAL(10,2) DEFAULT 0,
@@ -241,6 +197,7 @@ $vytvor = mysql_query("$vsql");
 $pole = explode(".", $kli_vume);
 $kli_mdph=$pole[0];
 $kli_rdph=$pole[1];
+
 $datp_dph=$kli_rdph.'-'.$kli_mdph.'-01';
 
 $ttvv = "INSERT INTO prcdatum".$kli_uzid." ( datp,datk,fic ) VALUES ( '$datp_dph', '$datp_dph', 0 )";
@@ -259,6 +216,7 @@ $sql = mysql_query("SELECT * FROM prcdatum$kli_uzid");
   $datp_dph=$riadok->datp;
   $datk_dph=$riadok->datk;
   }
+
 $sqlt = 'DROP TABLE prcdatum'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
@@ -268,62 +226,27 @@ $vysledok = mysql_query("$sqlt");
 //koniec datumy pociatok a koniec mesiaca
 
 
-//zober data zo sum zaklady,odvody
+//zober data z mzdneprav 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,".
-"zzam_zp,zzam_np,zzam_sp,zzam_ip,zzam_pn,zzam_up,zzam_gf,zzam_rf,".
-"zfir_zp,zfir_np,zfir_sp,zfir_ip,zfir_pn,zfir_up,zfir_gf,zfir_rf,".
-"ozam_zp,ozam_np,ozam_sp,ozam_ip,ozam_pn,ozam_up,ozam_gf,ozam_rf,".
-"ofir_zp,ofir_np,ofir_sp,ofir_ip,ofir_pn,ofir_up,ofir_gf,ofir_rf,".
-"0,0,0,0,0,0,0,0,".
-"ozam_spolu,ofir_spolu,0,0,0,0,'','',".
-"1,".
-"'','',0,0,".
-"0".
-" FROM F$kli_vxcf"."_mzdzalsum".
-" WHERE ume = $kli_vume AND sspnie = 0".
-"";
-//echo $dsqlt;
-$dsql = mysql_query("$dsqlt");
-
-//zober zamestnancov z kun ak by nemali nic v sumzal
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,".
-"0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,".
+" SELECT ocx,umeo,0,0,pocdni,strajk,skonci,neplat,".
+"0,zzam_np,zzam_sp,zzam_ip,zzam_pn,zzam_up,zzam_gf,zzam_rf,".
+"0,zfir_np,zfir_sp,zfir_ip,zfir_pn,zfir_up,zfir_gf,zfir_rf,".
+"0,ozam_np,ozam_sp,ozam_ip,ozam_pn,ozam_up,ozam_gf,ozam_rf,".
+"0,ofir_np,ofir_sp,ofir_ip,ofir_pn,ofir_up,ofir_gf,ofir_rf,".
 "0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,'','',".
 "1,".
 "'','',0,0,".
 "0".
-" FROM F$kli_vxcf"."_mzdzalkun".
-" WHERE ume = $kli_vume AND spnie = 0 AND pom != 9 AND dan <= '$datk_dph' AND ( dav = '0000-00-00' OR dav > '$datk_dph' )".
+" FROM F$kli_vxcf"."_mzdneprav ".
+" WHERE umex = $kli_vume ".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
-//zober data z vy nesp_dni
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,".
-"0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,".
-"0,0,0,0,nesp_dni,0,'','',".
-"1,".
-"'','',0,0,".
-"0".
-" FROM F$kli_vxcf"."_mzdzalvy".
-" WHERE ume = $kli_vume AND nesp_dni > 0".
-"";
-//echo $dsqlt;
-$dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,".
+" SELECT oc,umeo,0,0,pocdni,strajk,skonci,neplat,".
 "sum(zzam_zp),sum(zzam_np),sum(zzam_sp),sum(zzam_ip),sum(zzam_pn),sum(zzam_up),sum(zzam_gf),sum(zzam_rf),".
 "sum(zfir_zp),sum(zfir_np),sum(zfir_sp),sum(zfir_ip),sum(zfir_pn),sum(zfir_up),sum(zfir_gf),sum(zfir_rf),".
 "sum(ozam_zp),sum(ozam_np),sum(ozam_sp),sum(ozam_ip),sum(ozam_pn),sum(ozam_up),sum(ozam_gf),sum(ozam_rf),".
@@ -335,7 +258,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "0".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " WHERE oc >= 0".
-" GROUP BY oc";
+" GROUP BY oc,umeo";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
@@ -352,7 +275,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE znizp = 1";
 $oznac = mysql_query("$sqtoz");
 
-//daj prec nepravidelny prijem ak je v ciselniku pomerov pm4=1
+//daj prec pravidelny prijem ak je v ciselniku pomerov pm4=1
 if ( $fir_mzdx03 == 1 )
      {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdpomer".
@@ -361,7 +284,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdpomer".
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE znizp = 1 ";
+$sqtoz = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE znizp = 0 ";
 $oznac = mysql_query("$sqtoz");
      }
 
@@ -390,7 +313,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid".
 $oznac = mysql_query("$sqtoz");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplx".$kli_uzid.
-" SELECT oc,0,0,".
+" SELECT oc,0,0,0,0,0,0,0,".
 "sum(zzam_zp),sum(zzam_np),sum(zzam_sp),sum(zzam_ip),sum(zzam_pn),sum(zzam_up),sum(zzam_gf),sum(zzam_rf),".
 "sum(zfir_zp),sum(zfir_np),sum(zfir_sp),sum(zfir_ip),sum(zfir_pn),sum(zfir_up),sum(zfir_gf),sum(zfir_rf),".
 "sum(ozam_zp),sum(ozam_np),sum(ozam_sp),sum(ozam_ip),sum(ozam_pn),sum(ozam_up),sum(ozam_gf),sum(ozam_rf),".
@@ -407,7 +330,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplx".$kli_uzid.
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,".
+" SELECT oc,0,0,0,0,0,0,0,".
 "zzam_zp,zzam_np,zzam_sp,zzam_ip,zzam_pn,zzam_up,zzam_gf,zzam_rf,".
 "zfir_zp,zfir_np,zfir_sp,zfir_ip,zfir_pn,zfir_up,zfir_gf,zfir_rf,".
 "ozam_zp,ozam_np,ozam_sp,ozam_ip,ozam_pn,ozam_up,ozam_gf,ozam_rf,".
@@ -443,6 +366,8 @@ $oznac = mysql_query("$sqtoz");
 }
 //koniec pracovneho suboru 
 
+//exit;
+
 /////////////NACITANIE UDAJOV Z PARAMETROV
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
   if (@$zaznam=mysql_data_seek($sqldok,0))
@@ -468,22 +393,22 @@ $jk=1;
   while ($ik <= $polk )
   {
   if (@$zaznam=mysql_data_seek($sqldok,$ik))
-  {
+{
 $hlavickadok=mysql_fetch_object($sqldok);
 $ocdok=1*$hlavickadok->oc;
 
 if ( $jk == 6 AND $ocdok > 0 ) {  $pocetstran=$pocetstran+1; $jk=0; }
-  }
+
+}
 $ik = $ik + 1;
   }
 }
 /////////////NACITANIE poctu stran
 
 
-/////////////////////////////////////////////////VYTLAC MESACNY VYKAZ
+/////////////////////////////////////////////////VYTLAC VYKAZ
 if ( $copern == 10 OR $copern == 155 )
 {
-
 //$zablokovane=1;
 if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
 if ( $zablokovane == 1 )
@@ -519,6 +444,7 @@ $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid".
 " LEFT JOIN F$kli_vxcf"."_$mzdkun".
 " ON F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".oc=F$kli_vxcf"."_$mzdkun.oc".
 " WHERE F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".oc >= 0 AND konx = 9 ORDER BY konx,prie,meno";
+
 //exit;
 
 $sql = mysql_query("$sqltt");
@@ -626,93 +552,87 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(5);
 $pdf->SetTopMargin(20);
-if ( File_Exists('../dokumenty/socpoist2014/mesacny_vykaz.jpg') AND $i == 0 )
+if ( File_Exists('../dokumenty/socpoist2014/vykaz.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/socpoist2014/mesacny_vykaz.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/socpoist2014/vykaz.jpg',0,0,210,298);
 }
 
 //icz
-$pdf->Cell(195,9,"     ","$rmc1",1,"L");
-$pdf->Cell(3,5," ","$rmc1",0,"L");$pdf->Cell(36,5,"$cicz","$rmc",0,"C");
+$pdf->Cell(195,8,"     ","$rmc1",1,"L");
+$pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(37,5,"$cicz","$rmc",0,"C");
 
-//za obdobie
+//cislo vykazu v tvare MM99YYYY
 $obdobie=$kli_vume*10000;
 if ( $obdobie < 102009 ) $obdobie= "0".$obdobie;
 if ( $import == 1 ) $obdobie=$obdobix;
-$pdf->Cell(36,6," ","$rmc1",0,"L");$pdf->Cell(41,6,"$obdobie","$rmc",0,"C");
+$cislo1=$kli_vmes;
+if ( $cislo1 < 10 ) $cislo1= "0".$kli_vmes;
+$cislo2=$kli_vrok;
+$A=substr($cislo1,0,1);
+$B=substr($cislo1,1,1);
+$C=substr($cislo2,0,1);
+$D=substr($cislo2,1,1);
+$E=substr($cislo2,2,1);
+$F=substr($cislo2,3,1);
+$pdf->Cell(19,5," ","$rmc1",0,"L");$pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(5,6,"$B","$rmc",0,"C");$pdf->Cell(11,6," ","$rmc1",0,"L");
+$pdf->Cell(5,6,"$C","$rmc",0,"C");$pdf->Cell(5,6,"$D","$rmc",0,"C");$pdf->Cell(5,6,"$E","$rmc",0,"C");$pdf->Cell(5,6,"$F","$rmc",0,"C");
 
-//den na vyplatu
-if( $fir_mzdx06 == 0 ) { $fir_mzdx06=31; }
-
-$mesvyplat=1*($kli_vmes+1); $rokvyplat=$kli_vrok;
-$mesvyplatx=$mesvyplat;
-if ( $mesvyplat <  10 ) { $mesvyplat="0".$mesvyplat; }
-if ( $mesvyplatx == 13 ) { $mesvyplat="01"; $rokvyplat=$kli_vrok+1; }
-$denvyplaty=$fir_mzdx06.".".$mesvyplat.".".$rokvyplat;
-
-if( $denvyplaty == '29.02.2014' ) { $denvyplaty="28.02.2014"; }
-if( $denvyplaty == '30.02.2014' ) { $denvyplaty="28.02.2014"; }
-if( $denvyplaty == '31.02.2014' ) { $denvyplaty="28.02.2014"; }
-if( $denvyplaty == '31.04.2014' ) { $denvyplaty="30.04.2014"; }
-if( $denvyplaty == '31.06.2014' ) { $denvyplaty="30.06.2014"; }
-if( $denvyplaty == '31.09.2014' ) { $denvyplaty="30.09.2014"; }
-if( $denvyplaty == '31.11.2014' ) { $denvyplaty="30.11.2014"; }
-
-$pdf->Cell(6,6," ","$rmc1",0,"L");$pdf->Cell(42,6,"$denvyplaty","$rmc",0,"C");
+//zuctovane v mesiaci
+$pdf->Cell(2,6," ","$rmc1",0,"L");$pdf->Cell(41,6,"$obdobie","$rmc",0,"C");
 
 //typ vykazu
 $riadne="x";
 $opravne="x";
 if ( $h_oprav == 0 ) { $opravne="";  }
 if ( $h_oprav == 1 ) { $riadne="";  }
-$pdf->Cell(9,4," ","$rmc1",0,"C");$pdf->Cell(4,4,"$riadne","$rmc",0,"C");$pdf->Cell(11,4," ","$rmc1",0,"C");$pdf->Cell(4,4,"$opravne","$rmc",1,"C");
+$pdf->Cell(31,4,"   ","$rmc1",0,"C");$pdf->Cell(4,4,"$riadne","$rmc",0,"C");$pdf->Cell(11,4," ","$rmc1",0,"C");$pdf->Cell(3,4,"$opravne","$rmc",1,"C");
 
-//1. ZAMESTNAVATEL
-$pdf->Cell(195,13,"     ","$rmc1",1,"L");
-$pdf->Cell(3,5," ","$rmc1",0,"L");$pdf->Cell(114,6,"$fir_fnaz","$rmc",0,"L");$pdf->Cell(12,5," ","$rmc1",0,"L");$pdf->Cell(4,4,"x","$rmc",0,"C");
-$pdf->Cell(27,6," ","$rmc1",0,"L");$pdf->Cell(37,5,"$fir_fico","$rmc",1,"C");
-$pdf->Cell(195,4,"     ","$rmc1",1,"L");
-$pdf->Cell(3,5," ","$rmc1",0,"L");$pdf->Cell(194,7," ","$rmc",1,"L");
-$pdf->Cell(195,3,"     ","$rmc1",1,"L");
-$pdf->Cell(3,5," ","$rmc1",0,"L");$pdf->Cell(71,6,"$fir_ftel","$rmc",0,"L");$pdf->Cell(2,6," ","$rmc1",0,"L");
+//ZAMESTNAVATEL
+$pdf->Cell(198,12,"     ","$rmc1",1,"L");
+$pdf->Cell(3,6," ","$rmc1",0,"L");$pdf->Cell(114,7,"$fir_fnaz","$rmc",0,"L");$pdf->Cell(12,2," ","$rmc1",0,"L");$pdf->Cell(4,6,"x","$rmc",0,"C");
+$pdf->Cell(27,6," ","$rmc1",0,"L");$pdf->Cell(37,6,"$fir_fico","$rmc",1,"C");
+$pdf->Cell(198,4,"     ","$rmc1",1,"L");
+$pdf->Cell(3,6," ","$rmc1",0,"L");$pdf->Cell(194,6," ","$rmc",1,"L");
+$pdf->Cell(198,4," ","$rmc1",1,"L");
+$pdf->Cell(3,6," ","$rmc1",0,"L");$pdf->Cell(71,6,"$fir_ftel","$rmc",0,"L");$pdf->Cell(2,6," ","$rmc1",0,"L");
 $pdf->SetFont('arial','',10);
 $pdf->Cell(71,6,"$fir_fem1","$rmc",1,"L");
 $pdf->SetFont('arial','',12);
-$pdf->Cell(195,11,"     ","$rmc1",1,"L");
+$pdf->Cell(195,12,"     ","$rmc1",1,"L");
 $pdf->Cell(3,5," ","$rmc1",0,"L");$pdf->Cell(71,6,"$fir_fib1","$rmc",1,"L");
 
 //3. suhrn poistneho a prispevkov
-$pdf->Cell(195,11,"     ","$rmc1",1,"L");
-$pdf->Cell(94,6," ","$rmc1",0,"L");$pdf->Cell(31,6,"$Cozam_np","$rmc",0,"R");$pdf->Cell(1,6," ","$rmc",0,"L");$pdf->Cell(4,6,"$Dozam_np","$rmc",0,"L");
+$pdf->Cell(198,12,"     ","$rmc1",1,"L");
+$pdf->Cell(94,6," ","$rmc1",0,"L");$pdf->Cell(31,6,"$Cozam_np","$rmc",0,"R");$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(4,6,"$Dozam_np","$rmc",0,"L");
 $pdf->Cell(4,6,"$D2ozam_np","$rmc",0,"L");$pdf->Cell(13,6,"","$rmc1",0,"L");
-$pdf->Cell(30,6,"$Cofir_np","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc",0,"L");$pdf->Cell(7,6,"$Dofir_np $D2ofir_np","$rmc",1,"C");
+$pdf->Cell(30,6,"$Cofir_np","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(7,6,"$Dofir_np $D2ofir_np","$rmc",1,"C");
 
-$pdf->Cell(195,2,"     ","$rmc1",1,"L");
-$pdf->Cell(94,6," ","$rmc1",0,"L");$pdf->Cell(31,6,"$Cozam_sp","$rmc",0,"R");$pdf->Cell(1,6," ","$rmc",0,"L");$pdf->Cell(4,6,"$Dozam_sp","$rmc",0,"L");
+$pdf->Cell(198,2,"     ","$rmc1",1,"L");
+$pdf->Cell(94,6," ","$rmc1",0,"L");$pdf->Cell(31,6,"$Cozam_sp","$rmc",0,"R");$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(4,6,"$Dozam_sp","$rmc",0,"L");
 $pdf->Cell(4,6,"$D2ozam_sp","$rmc",0,"L");$pdf->Cell(13,6,"","$rmc1",0,"L");
-$pdf->Cell(30,6,"$Cofir_sp","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc",0,"L");$pdf->Cell(7,6,"$Dofir_sp $D2ofir_sp","$rmc",1,"C");
+$pdf->Cell(30,6,"$Cofir_sp","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(7,6,"$Dofir_sp $D2ofir_sp","$rmc",1,"C");
 
-$pdf->Cell(195,3,"     ","$rmc1",1,"L");
-$pdf->Cell(94,6," ","$rmc1",0,"L");$pdf->Cell(31,6,"$Cozam_ip","$rmc",0,"R");$pdf->Cell(1,6,"","$rmc",0,"L");$pdf->Cell(4,6,"$Dozam_ip","$rmc",0,"L");
+$pdf->Cell(198,3,"     ","$rmc1",1,"L");
+$pdf->Cell(94,6," ","$rmc1",0,"L");$pdf->Cell(31,6,"$Cozam_ip","$rmc",0,"R");$pdf->Cell(1,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$Dozam_ip","$rmc",0,"L");
 $pdf->Cell(4,6,"$D2ozam_ip","$rmc",0,"L");$pdf->Cell(13,6,"","$rmc1",0,"L");
-$pdf->Cell(30,6,"$Cofir_ip","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc",0,"L");$pdf->Cell(7,6,"$Dofir_ip $D2ofir_ip","$rmc",1,"C");
+$pdf->Cell(30,6,"$Cofir_ip","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(7,6,"$Dofir_ip $D2ofir_ip","$rmc",1,"C");
 
-$pdf->Cell(195,2,"     ","$rmc1",1,"L");
-$pdf->Cell(94,6," ","$rmc1",0,"L");$pdf->Cell(31,6,"$Cozam_pn","$rmc",0,"R");$pdf->Cell(1,6,"","$rmc",0,"L");$pdf->Cell(4,6,"$Dozam_pn","$rmc",0,"L");
+$pdf->Cell(198,2,"     ","$rmc1",1,"L");
+$pdf->Cell(94,6," ","$rmc1",0,"L");$pdf->Cell(31,6,"$Cozam_pn","$rmc",0,"R");$pdf->Cell(1,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$Dozam_pn","$rmc",0,"L");
 $pdf->Cell(4,6,"$D2ozam_pn","$rmc",0,"L");$pdf->Cell(13,6,"","$rmc1",0,"L");
 $pdf->Cell(30,6,"$Cofir_pn","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc",0,"L");$pdf->Cell(7,6,"$Dofir_pn $D2ofir_pn","$rmc",1,"C");
 
-$pdf->Cell(195,3,"     ","$rmc1",1,"L");
-$pdf->Cell(147,6," ","$rmc1",0,"L");$pdf->Cell(30,6,"$Cofir_up","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc",0,"L");$pdf->Cell(7,6,"$Dofir_up $D2ofir_up","$rmc",1,"C");
+$pdf->Cell(198,3,"     ","$rmc1",1,"L");
+$pdf->Cell(147,6," ","$rmc1",0,"L");$pdf->Cell(30,6,"$Cofir_up","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(7,6,"$Dofir_up $D2ofir_up","$rmc",1,"C");
 
-$pdf->Cell(195,2,"     ","$rmc1",1,"L");
-$pdf->Cell(147,6," ","$rmc1",0,"L");$pdf->Cell(30,6,"$Cofir_gf","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc",0,"L");$pdf->Cell(7,6,"$Dofir_gf $D2ofir_gf","$rmc",1,"C");
+$pdf->Cell(198,2,"     ","$rmc1",1,"L");
+$pdf->Cell(147,6," ","$rmc1",0,"L");$pdf->Cell(30,6,"$Cofir_gf","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(7,6,"$Dofir_gf $D2ofir_gf","$rmc",1,"C");
 
-$pdf->Cell(195,3,"     ","$rmc1",1,"L");
-$pdf->Cell(147,6," ","$rmc1",0,"L");$pdf->Cell(30,6,"$Cofir_rf","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc",0,"L");$pdf->Cell(7,6,"$Dofir_rf $D2ofir_rf","$rmc",1,"C");
+$pdf->Cell(198,2,"     ","$rmc1",1,"L");
+$pdf->Cell(147,6," ","$rmc1",0,"L");$pdf->Cell(30,6,"$Cofir_rf","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(7,6,"$Dofir_rf $D2ofir_rf","$rmc",1,"C");
 
-$pdf->Cell(195,7,"     ","$rmc1",1,"L");
-$pdf->Cell(147,6," ","$rmc1",0,"L");$pdf->Cell(30,6,"$Ccelk_spolu","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc",0,"L");$pdf->Cell(7,6,"$Dcelk_spolu $D2celk_spolu","$rmc",1,"C");
+$pdf->Cell(198,7,"     ","$rmc1",1,"L");
+$pdf->Cell(147,6," ","$rmc1",0,"L");$pdf->Cell(30,6,"$Ccelk_spolu","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(7,6,"$Dcelk_spolu $D2celk_spolu","$rmc",1,"C");
 
 //4. FO povinna voci SP
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
@@ -726,24 +646,26 @@ if ( $priefosoba == '' ) { $priefosoba="mzdov·"; }
 if ( $menofosoba == '' ) { $menofosoba="˙Ët·reÚ"; }
 if ( $telfosoba == '' ) { $telfosoba=$fir_ftel; }
 if ( $mailfosoba == '' ) { $mailfosoba=$fir_fem1; }
-$pdf->Cell(190,13,"     ","$rmc1",1,"L");
-$pdf->Cell(3,5," ","$rmc1",0,"L");$pdf->Cell(65,6,"$menofosoba","$rmc",0,"L");$pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(78,6,"$priefosoba","$rmc",1,"L");
+$pdf->Cell(190,16,"     ","$rmc1",1,"L");
+$pdf->Cell(3,5," ","$rmc1",0,"L");$pdf->Cell(64,7,"$menofosoba","$rmc",0,"L");$pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(78,7,"$priefosoba","$rmc",1,"L");
 $pdf->Cell(190,3,"     ","$rmc1",1,"L");
-$pdf->Cell(3,5," ","$rmc1",0,"L");$pdf->Cell(71,6,"$telfosoba","$rmc",0,"L");$pdf->Cell(3,5," ","$rmc1",0,"L");$pdf->Cell(71,6,"$mailfosoba","$rmc",1,"L");
+$pdf->Cell(3,5," ","$rmc1",0,"L");$pdf->Cell(71,7,"$telfosoba","$rmc",0,"L");$pdf->Cell(3,5," ","$rmc1",0,"L");$pdf->Cell(71,6,"$mailfosoba","$rmc",1,"L");
 
 //5. vyplnil
-$pdf->Cell(190,12,"     ","$rmc1",1,"L");
+$pdf->SetFont('arial','',10);
+$pdf->Cell(190,14,"     ","$rmc1",1,"L");
 if ( $fir_mzdt05 == '' ) $fir_mzdt05=$kli_uzmeno." ".$kli_uzprie;
-$pdf->Cell(3,5," ","$rmc1",0,"L");$pdf->Cell(58,6,"$fir_mzdt05","$rmc",1,"L");
+$pdf->Cell(3,6," ","$rmc1",0,"L");$pdf->Cell(58,6,"$fir_mzdt05","$rmc",1,"L");
+$pdf->SetFont('arial','',12);
 
 //pocet stran prilohy a datum vyplnenia
 $datumvypln = $_REQUEST['davyp'];
 $pdf->Cell(190,3,"     ","$rmc1",1,"L");
 $pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(15,6,"$pocetstran","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");$pdf->Cell(31,6,"$datumvypln","$rmc",1,"C");
-
 }
 $i = $i + 1;
   }
+
 $pdf->Output("../tmp/vykazSP.$kli_uzid.pdf");
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
@@ -771,13 +693,12 @@ $vysledok = mysql_query("$sqlt");
 
 <?php
 }
-/////////////////////////////////////////KONIEC VYTLACENIA MESACNEHO VYKAZU
+/////////////////////////////////////////KONIEC VYTLACENIA VYKAZU
 
 
-/////////////////////////////////////////VYTLAC PRILOHU MESACNEHO VYKAZU 
+/////////////////////////////////////////VYTLAC PRILOHU VYKAZU 
 if ( $copern == 20 OR $copern == 156 )
 {
-
 //$zablokovane=1;
 if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
 if ( $zablokovane == 1 )
@@ -809,10 +730,15 @@ $citajXML = include("citajxmlpril.php");
 }
 
 //vytlac
+
+$sqltt = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE ".
+" zfir_np = 0 AND zfir_sp = 0 AND  zfir_ip = 0 AND  zfir_pn = 0 AND  zfir_up = 0 AND  zfir_gf = 0 AND  zfir_rf = 0 ";
+$sql = mysql_query("$sqltt");
+
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid".
 " LEFT JOIN F$kli_vxcf"."_$mzdkun".
 " ON F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".oc=F$kli_vxcf"."_$mzdkun.oc".
-" WHERE F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".oc >= 0 AND konx = 0 ORDER BY konx,vrdc";
+" WHERE F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".oc >= 0 AND konx = 0 ORDER BY konx,vrdc,umeo";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -1008,32 +934,32 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(5);
 $pdf->SetTopMargin(20);
-if ( File_Exists('../dokumenty/socpoist2014/mesacny_vykaz_priloha.jpg') AND $j == 0 )
+if ( File_Exists('../dokumenty/socpoist2014/vykaz_priloha.jpg') AND $j == 0 )
 {
-$pdf->Image('../dokumenty/socpoist2014/mesacny_vykaz_priloha.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/socpoist2014/vykaz_priloha.jpg',0,0,210,298);
 }
-$pdf->SetY(14);
+$pdf->SetY(10);
 
-//za obdobie
+//zuctovane v mesiaci
 $obdobie=$kli_vume*10000;
 if ( $obdobie < 102009 ) $obdobie= "0".$obdobie;
-if ( $import == 1 ) $obdobie=$obdobix;
-$pdf->Cell(80,6," ","$rmc1",0,"L");$pdf->Cell(40,7,"$obdobie","$rmc",1,"C");
+$pdf->Cell(198,4,"                          ","$rmc1",1,"L");
+$pdf->Cell(80,6," ","$rmc1",0,"L");$pdf->Cell(41,6,"$obdobie","$rmc",1,"C");
 
 //typ priznania
 $pdf->Cell(195,-3,"                          ","$rmc1",1,"L");
 $riadne="x";
 $opravne="x";
-if ( $h_oprav == 0 ) { $opravne="";  }
-if ( $h_oprav == 1 ) { $riadne="";  }
+if ( $h_oprav == 0 ) { $opravne=""; }
+if ( $h_oprav == 1 ) { $riadne=""; }
 $pdf->Cell(172,4," ","$rmc1",0,"C");$pdf->Cell(4,5,"$riadne","$rmc",0,"C");$pdf->Cell(11,4," ","$rmc1",0,"C");$pdf->Cell(4,5,"$opravne","$rmc",1,"C");
 
 //1. ZAMESTNAVATEL
-$pdf->Cell(195,12,"     ","$rmc1",1,"L");
-$pdf->Cell(5,6," ","$rmc1",0,"L");$pdf->Cell(36,6,"$cicz","$rmc",0,"C");
+$pdf->Cell(198,13,"     ","$rmc1",1,"L");
+$pdf->Cell(4,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$cicz","$rmc",0,"C");
 $icokrizik="x";
-$pdf->Cell(87,6," ","$rmc1",0,"L");$pdf->Cell(4,5,"$icokrizik","$rmc",0,"C");$pdf->Cell(26,6," ","$rmc1",0,"L");$pdf->Cell(37,6,"$fir_fico","$rmc",1,"C");
-$pdf->Cell(195,17,"                          ","$rmc1",1,"L");
+$pdf->Cell(86,6," ","$rmc1",0,"L");$pdf->Cell(4,5,"$icokrizik","$rmc",0,"C");$pdf->Cell(26,6," ","$rmc1",0,"L");$pdf->Cell(37,6,"$fir_fico","$rmc",1,"C");
+$pdf->Cell(198,13,"                          ","$rmc1",1,"L");
 
 $strana=$strana+1;
      }
@@ -1042,11 +968,23 @@ $strana=$strana+1;
 //2. ZAMESTNANCI
 $porcislo=$i+1;
 $pdf->SetFont('arial','',10);
-$pdf->Cell(3,6," ","$rmc1",0,"L");$pdf->Cell(13,7,"$porcislo","$rmc",0,"L");$pdf->Cell(28,6," ","$rmc1",0,"L");
-$pdf->Cell(38,7,"$hlavicka->vrdc $hlavicka->vrdk","$rmc",0,"L");$pdf->Cell(5,7," ","$rmc1",0,"L");$pdf->Cell(7,7,"$hlavicka->vpois_dni","$rmc",0,"C");
-$pdf->Cell(20,7," ","$rmc1",0,"L");
-$strajk="";
-$pdf->Cell(8,7,"$strajk","$rmc",0,"C");$pdf->Cell(20,7," ","$rmc1",0,"L");
+$pdf->Cell(3,6," ","$rmc1",0,"L");$pdf->Cell(12,7,"$porcislo","$rmc",0,"L");
+
+$obdobiepr=$hlavicka->umeo*10000;
+if ( $obdobie < 99999 ) { $obdobiepr="0".$obdobiepr; }
+
+$pocdni=1*$hlavicka->pocdni;
+if ( $pocdni == 0 )
+     {
+$sqldok = mysql_query("SELECT * FROM kalendar WHERE ume = $hlavicka->umeo");
+$pocdni = 1*mysql_num_rows($sqldok);
+     }
+
+$strajk=$hlavicka->strajk;
+if ( $strajk == 0 ) { $strajk=""; }
+$pdf->Cell(5,6," ","$rmc1",0,"L");$pdf->Cell(26,7,"$obdobiepr","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");$pdf->Cell(35,7,"$hlavicka->vrdc $hlavicka->vrdk","$rmc",0,"L");
+$pdf->Cell(10,6,"","$rmc1",0,"L");$pdf->Cell(8,7,"$pocdni","$rmc",0,"C");$pdf->Cell(14,6," ","$rmc1",0,"L");$pdf->Cell(7,7,"$strajk","$rmc",0,"C");
+$pdf->Cell(28,6," ","$rmc1",0,"L");
 //dopyt, vyzer· na nov˝ input
 $pdf->Cell(8,7,"","$rmc",0,"C");
 
@@ -1060,13 +998,14 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdpomer WHERE pm=$hlavicka->
 if ( $typZec == "" ) { $typZec="ZEC"; }
 
 //ak dohoda o brig.praci studenta a presiahne hranize pre platenie DOCH.POISTENIA prepis ZECD3 na ZECD3V a daj vynimka=1 takto mi to bralo socpoist.sk 30.1.2013
-//toto riesenie som zrusil 26.2.2013
-//v reakciach poslednych SP napr. z 8.2.2013 sa uvadza aj riesenie ZECD4 bez poistenia a ak vyssi prijem nez hranica tak ZECD3 TAKTO TO PRESLO p.TRCKOVA
-if ( $typZec == "ZECD3" AND $hlavicka->zzam_sp == 0 AND $hlavicka->zzam_ip == 0 AND $hlavicka->porc != 42 ) { $typZec="ZECD4"; }
-$pdf->SetFont('arial','',9);
-$pdf->Cell(26,6," ","$rmc1",0,"L");$pdf->Cell(7,7,"$typZec","$rmc",1,"C");
+//v reakciach poslednych SP napr. z 8.2.2013 sa uvadza aj riesenie ZECD4 bez poistenia a ak vyssi prijem nez hranica tak ZECD3
+if( $typZec == "ZECD3" AND $hlavicka->zzam_sp > 0 ) { $typZec="ZECD3V"; }
 
-$pdf->Cell(195,6,"                          ","$rmc1",1,"L");
+$pdf->SetFont('arial','',5);
+$pdf->Cell(25,6," ","$rmc1",0,"L");$pdf->Cell(8,7,"$typZec","$rmc",1,"C");
+$pdf->SetFont('arial','',9);
+
+$pdf->Cell(198,8,"                          ","$rmc1",1,"L");
 $pdf->Cell(3,6," ","$rmc1",0,"L");
 $pdf->Cell(15,6,"$Czfir_np","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$D1zfir_np","$rmc",0,"C");$pdf->Cell(3,6,"$D2zfir_np","$rmc",0,"C");
 $pdf->Cell(4,6,"","$rmc1",0,"L");
@@ -1082,22 +1021,22 @@ $pdf->Cell(16,6,"$Czfir_gf","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf-
 $pdf->Cell(3,6,"","$rmc1",0,"L");
 $pdf->Cell(16,6,"$Czfir_rf","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(3,6,"$D1zfir_rf","$rmc",0,"C");$pdf->Cell(4,6,"$D2zfir_rf","$rmc",1,"C");
 
-$pdf->Cell(195,6,"                          ","$rmc1",1,"L");
-$pdf->Cell(3,6,"","$rmc1",0,"L");
-$pdf->Cell(15,6,"$Czzam_np","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"C");$pdf->Cell(4,6,"$D1zzam_np","$rmc",0,"C");$pdf->Cell(3,6,"$D2zzam_np","$rmc",0,"C");
+$pdf->Cell(198,7,"                          ","$rmc1",1,"L");
+$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(15,6,"$Czzam_np","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$D1zzam_np","$rmc",0,"C");$pdf->Cell(3,6,"$D2zzam_np","$rmc",0,"C");
 $pdf->Cell(4,6,"","$rmc1",0,"L");
-$pdf->Cell(15,6,"$Czzam_sp","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$D1zzam_sp","$rmc",0,"C");$pdf->Cell(3,6,"$D2zzam_sp","$rmc",0,"C");
+$pdf->Cell(16,6,"$Czzam_sp","$rmc",0,"R");$pdf->Cell(1,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$D1zzam_sp","$rmc",0,"C");$pdf->Cell(3,6,"$D2zzam_sp","$rmc",0,"C");
 $pdf->Cell(3,6,"","$rmc1",0,"L");
 $pdf->Cell(16,6,"$Czzam_ip","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(3,6,"$D1zzam_ip","$rmc",0,"C");$pdf->Cell(4,6,"$D2zzam_ip","$rmc",0,"C");
 $pdf->Cell(3,6,"","$rmc1",0,"L");
 $pdf->Cell(16,6,"$Czzam_pn","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$D1zzam_pn","$rmc",0,"C");$pdf->Cell(3,6,"$D2zzam_pn","$rmc",0,"C");
 
-$menoprie=$hlavicka->prie." ".$hlavicka->meno." osË ".$hlavicka->oc;
+$menoprie=$hlavicka->prie." ".$hlavicka->meno;
 if ( $meno == 0 ) $menoprie="";
 $pdf->Cell(4,6,"","$rmc1",0,"L");$pdf->Cell(80,6,"$menoprie","$rmc",1,"L");
 
-$pdf->Cell(195,4,"                          ","$rmc1",1,"L");
-$pdf->Cell(3,6,"","$rmc1",0,"L");
+$pdf->Cell(198,4,"                          ","$rmc1",1,"L");
+$pdf->Cell(3,6," ","$rmc1",0,"L");
 $pdf->Cell(15,6,"$Cofir_np","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$Dofir_np","$rmc",0,"C");$pdf->Cell(3,6,"$D2ofir_np","$rmc",0,"C");
 $pdf->Cell(4,6,"","$rmc1",0,"L");
 $pdf->Cell(15,6,"$Cofir_sp","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$Dofir_sp","$rmc",0,"C");$pdf->Cell(3,6,"$D2ofir_sp","$rmc",0,"C");
@@ -1106,24 +1045,31 @@ $pdf->Cell(16,6,"$Cofir_ip","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf-
 $pdf->Cell(3,6,"","$rmc1",0,"L");
 $pdf->Cell(16,6,"$Cofir_pn","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$Dofir_pn","$rmc",0,"C");$pdf->Cell(3,6,"$D2ofir_pn","$rmc",0,"C");
 $pdf->Cell(3,6,"","$rmc1",0,"L");
-$pdf->Cell(16,6,"$Cofir_up","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc",0,"L");$pdf->Cell(4,6,"$Dofir_up","$rmc",0,"C");$pdf->Cell(3,6,"$D2ofir_up","$rmc",0,"C");
+$pdf->Cell(16,6,"$Cofir_up","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$Dofir_up","$rmc",0,"C");$pdf->Cell(3,6,"$D2ofir_up","$rmc",0,"C");
 $pdf->Cell(3,6,"","$rmc1",0,"L");
-$pdf->Cell(16,6,"$Cofir_gf","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(3,6,"$Dofir_gf","$rmc",0,"C");$pdf->Cell(4,6,"$D2ofir_gf","$rmc",0,"L");
+$pdf->Cell(16,6,"$Cofir_gf","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(3,6,"$Dofir_gf","$rmc",0,"C");$pdf->Cell(4,6,"$D2ofir_gf","$rmc",0,"C");
 $pdf->Cell(3,6,"","$rmc1",0,"L");
 $pdf->Cell(16,6,"$Cofir_rf","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(3,6,"$Dofir_rf","$rmc",0,"C");$pdf->Cell(4,6,"$D2ofir_rf","$rmc",1,"C");
 
-$pdf->Cell(195,4,"                          ","$rmc1",1,"L");
-$pdf->Cell(3,6,"","$rmc1",0,"L");
+$pdf->Cell(198,4,"                          ","$rmc1",1,"L");
+$pdf->Cell(3,6," ","$rmc1",0,"L");
 $pdf->Cell(15,6,"$Cozam_np","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$Dozam_np","$rmc",0,"C");$pdf->Cell(3,6,"$D2ozam_np","$rmc",0,"C");
 $pdf->Cell(4,6,"","$rmc1",0,"L");
 $pdf->Cell(15,6,"$Cozam_sp","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$Dozam_sp","$rmc",0,"C");$pdf->Cell(3,6,"$D2ozam_sp","$rmc",0,"C");
 $pdf->Cell(3,6,"","$rmc1",0,"L");
 $pdf->Cell(16,6,"$Cozam_ip","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(3,6,"$Dozam_ip","$rmc",0,"C");$pdf->Cell(4,6,"$D2ozam_ip","$rmc",0,"C");
 $pdf->Cell(3,6,"","$rmc1",0,"L");
-$pdf->Cell(16,6,"$Cozam_pn","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc1",0,"L");$pdf->Cell(4,6,"$Dozam_pn","$rmc",0,"C");$pdf->Cell(3,6,"$D2ozam_pn","$rmc",1,"C");
-$pdf->Cell(195,3,"                          ","$rmc1",1,"L");
+$pdf->Cell(16,6,"$Cozam_pn","$rmc",0,"R");$pdf->Cell(2,6,"","$rmc",0,"L");$pdf->Cell(4,6,"$Dozam_pn","$rmc",0,"C");$pdf->Cell(3,6,"$D2ozam_pn","$rmc",0,"C");
+$skonci=$hlavicka->skonci;
+if ( $skonci != 1 ) { $skonci=""; }
+if ( $skonci == 1 ) { $skonci="x"; }
+$neplat=$hlavicka->neplat;
+if ( $neplat != 1 ) { $neplat=""; }
+if ( $neplat == 1 ) { $neplat="x"; }
+$pdf->Cell(28,6," ","$rmc1",0,"L");$pdf->Cell(4,9,"$skonci","$rmc",0,"C");$pdf->Cell(19,6," ","$rmc1",0,"L");$pdf->Cell(4,9,"$neplat","$rmc",1,"C");
+$pdf->Cell(195,1,"                          ","$rmc1",1,"L");
 
-//kal.dni vylucenych dob z doplnujucich o zamestnancovi 
+//kal.dni vylucenych dob z doplnujucich o zamestnancovi
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdtextmzd WHERE invt = $hlavicka->oc ";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
@@ -1136,7 +1082,7 @@ $pdf->Cell(114,6," ","$rmc1",0,"R");$pdf->Cell(31,7,"$spvod","$rmc",0,"C");$pdf-
 $pdf->Cell(7,6," ","$rmc1",0,"R");$pdf->Cell(4,5,"$spvtrx","$rmc",1,"C");
 $pdf->Cell(195,2,"                          ","$rmc1",1,"L");
 
-if ( $j == 0 ) { $pdf->Cell(195,5,"                          ","$rmc1",1,"L"); }
+if ( $j == 0 ) { $pdf->Cell(195,4,"                          ","$rmc1",1,"L"); }
 if ( $j == 1 ) { $pdf->Cell(195,5,"                          ","$rmc1",1,"L"); }
 if ( $j == 2 ) { $pdf->Cell(195,5,"                          ","$rmc1",1,"L"); }
 
@@ -1149,12 +1095,12 @@ if ( $j == 3 )
 {
 //3. vyplnil
 $pdf->SetFont('arial','',10);
-$pdf->SetY(261);
+$pdf->SetY(269);
 if ( $fir_mzdt05 == '' ) $fir_mzdt05=$kli_uzmeno." ".$kli_uzprie;
-$pdf->Cell(3,6," ","$rmc1",0,"R");$pdf->Cell(58,6,"$fir_mzdt05","$rmc",1,"L");
+$pdf->Cell(3,6," ","$rmc1",0,"R");$pdf->Cell(58,7,"$fir_mzdt05","$rmc",1,"L");
 
 //pocet stran prilohy a datum vyplnenia
-$pdf->SetY(275);
+$pdf->SetY(284);
 $datumvypln = $_REQUEST['davyp'];
 $pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(16,6,"$strana","$rmc",0,"C");$pdf->Cell(3,6," ","$rmc1",0,"L");$pdf->Cell(31,6,"$datumvypln","$rmc",1,"C");
 
@@ -1162,16 +1108,16 @@ $j=0;
 }
   }
 
-
 if ( $j > 0 )
 {
+//3. vyplnil
 $pdf->SetFont('arial','',10);
-$pdf->SetY(261);
+$pdf->SetY(269);
 if ( $fir_mzdt05 == '' ) $fir_mzdt05=$kli_uzmeno." ".$kli_uzprie;
-$pdf->Cell(3,6," ","$rmc1",0,"R");$pdf->Cell(58,6,"$fir_mzdt05","$rmc",1,"L");
+$pdf->Cell(3,6," ","$rmc1",0,"R");$pdf->Cell(58,7,"$fir_mzdt05","$rmc",1,"L");
 
 //pocet stran prilohy a datum vyplnenia
-$pdf->SetY(275);
+$pdf->SetY(284);
 $datumvypln = $_REQUEST['davyp'];
 $pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(16,6,"$strana","$rmc",0,"C");$pdf->Cell(3,6," ","$rmc1",0,"L");$pdf->Cell(31,6,"$datumvypln","$rmc",1,"C");
 
@@ -1204,13 +1150,13 @@ $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdzalprmx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 }
-////////////////////////////////////////////////////KONIEC VYTLACENIA PRILOHY MESACNEHO VYKAZU
+////////////////////////////////////////////////////KONIEC VYTLACENIA PRILOHY VYKAZU
 ?>
 
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>MesaËnÈ vykazy pre SP</title>
+<title>MesaËnÈ v˝kazy pre SP 2014</title>
   <style type="text/css">
 h3 {
   padding:0;
@@ -1221,268 +1167,44 @@ h3 {
 }
   </style>
 <script type="text/javascript">
-
 //sirka a vyska okna
 var sirkawin = screen.width-10;
 var vyskawin = screen.height-175;
 var vyskawic = screen.height;
 var sirkawic = screen.width-10;
-
-  function MesacnyVykaz()
-  {
-   var h_oprav = document.forms.formp1.h_oprav.value;
-   var davyp = document.forms.formp1.davyp.value;
-   window.open('../mzdy/vykaz_SP.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
-  }
-  function Priloha()
-  {
-   var h_oprav = document.forms.formp1.h_oprav.value;
-   var davyp = document.forms.formp1.davyp.value;
-   window.open('../mzdy/vykaz_SP.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
-  }
-  function PrilohaMena()
-  {
-   var h_oprav = document.forms.formp1.h_oprav.value;
-   var davyp = document.forms.formp1.davyp.value;
-   window.open('../mzdy/vykaz_SP.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1&meno=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
-  }
-  function ElektronikaVykaz()
-  {
-   var h_oprav = document.forms.formp1.h_oprav.value;
-   var davyp = document.forms.formp1.davyp.value;
-   window.open('../mzdy/vykaz_SP.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=30&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
-  }
-  function ElektronikaVykazVPP()
-  {
-   var h_oprav = document.forms.formp1vpp.h_oprav.value;
-   var davyp = document.forms.formp1vpp.davyp.value;
-   window.open('../mzdy/vykaz_spvpp.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=30&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
-  }
-  function VykazVPP()
-  {
-   var h_oprav = document.forms.formp1vpp.h_oprav.value;
-   var davyp = document.forms.formp1vpp.davyp.value;
-   window.open('../mzdy/vykaz_spvpp.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
-  }
-  function PrilohaVPP()
-  {
-   var h_oprav = document.forms.formp1vpp.h_oprav.value;
-   var davyp = document.forms.formp1vpp.davyp.value;
-   window.open('../mzdy/vykaz_spvpp.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
-  }
-  function PrilohaVPPMena()
-  {
-   var h_oprav = document.forms.formp1vpp.h_oprav.value;
-   var davyp = document.forms.formp1vpp.davyp.value;
-   window.open('../mzdy/vykaz_spvpp.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1&meno=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
-  }
-  function fosp()
-  {
-   window.open('../cis/ufirdalsie.php?copern=302&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
-  }
 </script>
 </HEAD>
-<BODY class="white" id="white" onload="">
+<BODY class="white" id="white" onload="" >
 
-<table class="h2" width="100%">
+<table class="h2" width="100%" >
 <tr>
-<td>EuroSecom - V˝kazy pre Soci·lnu poisùovÚu <?php echo $kli_vrok; ?></td>
+<td>EuroSecom - V˝kazy pre Soci·lnu poisùovÚu 2014</td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
 </table>
-<h3>&nbsp;MesaËn˝ v˝kaz poistnÈho a prÌspevkov</h3>
-
-<?php
-if ($_REQUEST["odeslano"] != 1 AND ( $copern == 255 OR $copern == 256 )) 
-          {  
-$coperx=$copern-100;
-?> 
-    <form method="POST" ENCTYPE="multipart/form-data" action="<?php echo $_SERVER["PHP_SELF"]?>?copern=<?php echo $coperx;?>&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>"> 
-    <table class="vstup" width="100%" height="50px">
-      <tr> 
-        <td  width="35%" align="right" >S˙bor PRILxy.XML:</td> 
-        <td  width="30%" align="center" > 
-        <input type="HIDDEN" name="MAX_FILE_SIZE" VALUE=400000> 
-        <input type="file" name="original" > 
-        </td> 
-        <td  width="35%" align="left" >(max. 400 kB)</td> 
-      </tr> 
-      <tr> 
-        <td colspan="3"> 
-              <input type="hidden" name="odeslano" value="1"> 
-          <p align="center"><input type="submit" value="NaËÌtaù"></td> 
-      </tr> 
-    </table> 
-    </form> 
-<?php 
-          } 
-//koniec ak neodeslano
-?>
-
-
-<?php
-//zakladna ponuka
-if( $copern == 1 )
-{
-?>
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="MesacnyVykaz();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
-</td>
-<td class="bmenu" width="90%">MesaËn˝ v˝kaz poistnÈho a prÌspevkov</td>
-<td class="bmenu" width="10%">
-<a href="#" onClick="fosp();" title="Nastavenie Fosoby, ktor· plnÌ povinnosti voËi SP (mzdov· uËt·reÚ) ">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Nastavenie Fosoby, ktor· plnÌ povinnosti voËi SP (mzdov· uËt·reÚ) " >Fosoba SP</a>
-</td>
-</tr>
-</table>
-
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="Priloha();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
-</td>
-<td class="bmenu" width="98%">MesaËn˝ v˝kaz poistnÈho a prÌspevkov - prÌloha
-<a href="#" onClick="PrilohaMena();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF aj Meno,Priezvisko' ></a>
-</td>
-<td class="bmenu" width="2%"></td>
-</tr>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formp1" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="ElektronikaVykaz();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytvoriù vo form·te XML verzia 2014' ></a>
-</td>
-<td class="bmenu" width="98%"> 
-S˙bor XML MesaËn˝ v˝kaz poistnÈho a prÌspevkov pre elektronick˙ podateæÚu www.socpoist.sk 
- <select size="1" name="h_oprav" id="h_oprav" >
-<option value="0" >Riadny</option>
-<option value="1" >Opravn˝</option>
-</select>
-
-<?php $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
-
-D·tum vyplnenia: <input type="text" name="davyp" id="davyp" size="10" value="<?php echo $dat_dat; ?>" />
-
-</td>
-</tr>
-</FORM>
-</table>
-
-<?php
-//nepravidelny prijem ak je v parametroch=1
-if( $fir_mzdx03 == 1 )
-  {
-?>
 
 <h3>&nbsp;V˝kaz poistnÈho a prÌspevkov</h3>
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="VykazVPP();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
-</td>
-<td class="bmenu" width="98%">V˝kaz poistnÈho a prÌspevkov</td>
-<td class="bmenu" width="2%"></td>
-</tr>
-</table>
-
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="PrilohaVPP();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
-</td>
-<td class="bmenu" width="98%">V˝kaz poistnÈho a prÌspevkov - prÌloha
-<a href="#" onClick="PrilohaVPPMena();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF aj Meno,Priezvisko' ></a>
-</td>
-<td class="bmenu" width="2%"></td>
-</tr>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formp1vpp" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="ElektronikaVykazVPP();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytvoriù vo form·te XML verzia 2014' ></a>
-</td>
-<td class="bmenu" width="98%"> 
-S˙bor XML V˝kaz poistnÈho a prÌspevkov pre elektronick˙ podateæÚu www.socpoist.sk 
- <select size="1" name="h_oprav" id="h_oprav" >
-<option value="0" >Riadny</option>
-<option value="1" >Opravn˝</option>
-</select>
-
-<?php $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
-
-D·tum vyplnenia: <input type="text" name="davyp" id="davyp" size="10" value="<?php echo $dat_dat; ?>" />
-</td>
-</tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" style=margin-top:5px; >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../mzdy/rozpis_sp.php?copern=1&drupoh=1&page=1&nepravidelny=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
-</td>
-<td class="bmenu" width="98%">Rozpis odvodov do Soci·lnej poisùovne zamestnancov s nepravideln˝m prÌjmom - POZOR !!! zamestnanci s nepravideln˝m
- prÌjmom NIE S⁄ v mesaËnom v˝kaze, prÌlohe mesaËnÈho v˝kazu ani v el.s˙bore</td>
-
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../mzdy/vykaz_spvppoc.php?copern=101&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='⁄prava V˝kazu SP zamestnancov s nepravideln˝m prÌjmom' ></a>
-</td>
-</tr>
-</table>
-
-
-
-<?php
-  }
-?>
-
-<?php
-}
-//koniec zakladnej ponuky
-?>
 
 <?php
 ///////////////////////////////////////////////////VYTVORENIE SUBORU PRE ELEKTRONIKU
-if( $copern == 30 )
+if ( $copern == 30 )
 {
 
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 $kli_vxr=substr($kli_vrok,2,2);;
-if( $kli_vmes < 10 ) $kli_vmes = ""."0".$kli_vmes;
-
+if ( $kli_vmes < 10 ) $kli_vmes = ""."0".$kli_vmes;
 
 $hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
 $idx=$kli_uzid.$hhmm;
-$nazsub="prilMVP".$kli_vmes."_id".$idx;
-
+$nazsub="prilVP".$kli_vmes."_id".$idx;
 
 //$nazsub="pril".$kli_vmes;
 
 
-if (File_Exists ("../tmp/$nazsub.xml")) { $soubor = unlink("../tmp/$nazsub.xml"); }
-
-$soubor = fopen("../tmp/$nazsub.xml", "a+");
+if ( File_Exists("../tmp/$nazsub.xml") ) { $soubor = unlink("../tmp/$nazsub.xml"); }
+     $soubor = fopen("../tmp/$nazsub.xml", "a+");
 
 /////////////NACITANIE CISLA PLATITELA,NAZVU Z CISELNIKA ZP
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_zdravpois WHERE zdrv=$cislo_zdrv ");
@@ -1497,10 +1219,10 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_zdravpois WHERE zdrv=$cislo_z
 $sqlt = <<<mzdprc
 (
 <?xml version="1.0" encoding="UTF-8"?>
-<mvpp xmlns="http://socpoist.sk/xsd/mvpp2014" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://socpoist.sk/xsd/mvpp2014 MVPP-v2014.xsd">
-	<typDoc>MVP00001</typDoc>
-	<obdobie>012014</obdobie>
-	<denVyplaty>06.02.2014</denVyplaty>
+<vpp xmlns="http://socpoist.sk/xsd/vpp2014" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://socpoist.sk/xsd/vpp2014 VPP-v2014.xsd">
+	<typDoc>VPP00001</typDoc>
+	<cisloVykazu>01992014</cisloVykazu>
+	<obdobieVyplPrijmov>012014</obdobieVyplPrijmov>
 	<typVykazu>R</typVykazu>
 	<zamestnavatel>
 		<identifikacia>
@@ -1533,15 +1255,15 @@ $sqlt = <<<mzdprc
 			<pvnZamnec>15.00</pvnZamnec>
 		</pvn>
 		<up>
-			<upZamtel>12.96</upZamtel>
+			<upZamtel>12.00</upZamtel>
 		</up>
 		<gp>
-			<gpZamtel>4.05</gpZamtel>
+			<gpZamtel>3.75</gpZamtel>
 		</gp>
 		<rfs>
 			<rfsZamtel>71.25</rfsZamtel>
 		</rfs>
-		<spoluPoistne>520.26</spoluPoistne>
+		<spoluPoistne>519.00</spoluPoistne>
 	</poistne>
 	<fOsoba>
 		<priezvisko>Priezvisko</priezvisko>
@@ -1556,22 +1278,25 @@ $sqlt = <<<mzdprc
 	<priloha>
 		<poistneZamestnancov>
 		<!-- Zamestnanec - pravidelny prijem. -->
-			<poistneZamestnanca pc="1" rc="1234567890" pocDni="31" typZec="ZEC" vynimkaVZ="0" rozsahSP="1111111" vzNp="300.00" vzSp="300.00" vzIp="300.00" vzPvn="300.00" vzUp="300.00" vzGp="300.00" vzRfs="300.00" vzZecNp="300.00" vzZecSp="300.00" vzZecIp="300.00" vzZecPvn="300.00" npZamtel="4.20" npZamnec="4.20" spZamtel="42.00" spZamnec="12.00" ipZamtel="9.00" ipZamnec="9.00" pvnZamtel="3.00" pvnZamnec="3.00" upZamtel="2.40" gpZamtel="0.75" rfsZamtel="14.25"/>
+			<poistneZamestnanca pc="1" obdobie="122013" rc="1234567890" pocDni="31" typZec="ZEC" vynimkaVZ="0" rozsahSP="1111111" vzNp="300.00" vzSp="300.00" vzIp="300.00" vzPvn="300.00" vzUp="300.00" vzGp="300.00" vzRfs="300.00" vzZecNp="300.00" vzZecSp="300.00" vzZecIp="300.00" vzZecPvn="300.00" npZamtel="4.20" npZamnec="4.20" spZamtel="42.00" spZamnec="12.00" ipZamtel="9.00" ipZamnec="9.00" pvnZamtel="3.00" pvnZamnec="3.00" upZamtel="2.40" gpZamtel="0.75" rfsZamtel="14.25" poSkonceni="1"/>
 		<!-- Zamestnanec - pravidelny prijem. Sucet pocDniStrajku a pocDni nesmie byt vyssi ako je pocet dni v kal. mesiaci.-->
-			<poistneZamestnanca pc="2" rc="1134567890" pocDni="30" typZec="ZEC" vynimkaVZ="0" rozsahSP="1111111" vzNp="300.00" vzSp="300.00" vzIp="300.00" vzPvn="300.00" vzUp="300.00" vzGp="300.00" vzRfs="300.00" vzZecNp="300.00" vzZecSp="300.00" vzZecIp="300.00" vzZecPvn="300.00" npZamtel="4.20" npZamnec="4.20" spZamtel="42.00" spZamnec="12.00" ipZamtel="9.00" ipZamnec="9.00" pvnZamtel="3.00" pvnZamnec="3.00" upZamtel="2.40" gpZamtel="0.75" rfsZamtel="14.25" pocDniStrajku="1"/>
-		<!-- Zamestnanec s odvodovou ulavou. Sucet pocDniObdobia a pocDni nesmie by vyssi ako je pocet dni v kal. mesiaci. -->
-			<poistneZamestnanca pc="3" rc="1224567890" pocDni="30" typZec="ZECDN" vynimkaVZ="0" rozsahSP="0000110" vzNp="0.00" vzSp="0.00" vzIp="0.00" vzPvn="0.00" vzUp="120.00" vzGp="120.00" vzRfs="0.00" vzZecNp="0.00" vzZecSp="0.00" vzZecIp="0.00" vzZecPvn="0.00" npZamtel="0.00" npZamnec="0.00" spZamtel="0.00" spZamnec="0.00" ipZamtel="0.00" ipZamnec="0.00" pvnZamtel="0.00" pvnZamnec="0.00" upZamtel="0.96" gpZamtel="0.30" rfsZamtel="0.00" pocDniObdobia="1"/>
+			<poistneZamestnanca pc="2" obdobie="112013" rc="1134567890" pocDni="29" typZec="ZEC" vynimkaVZ="0" rozsahSP="1111111" vzNp="300.00" vzSp="300.00" vzIp="300.00" vzPvn="300.00" vzUp="300.00" vzGp="300.00" vzRfs="300.00" vzZecNp="300.00" vzZecSp="300.00" vzZecIp="300.00" vzZecPvn="300.00" npZamtel="4.20" npZamnec="4.20" spZamtel="42.00" spZamnec="12.00" ipZamtel="9.00" ipZamnec="9.00" pvnZamtel="3.00" pvnZamnec="3.00" upZamtel="2.40" gpZamtel="0.75" rfsZamtel="14.25" poSkonceni="1" pocDniStrajku="1"/>
 		<!-- Zamestnanec - pravidelny prijem s uvedenim vylucDobyObdobieOd. -->
-			<poistneZamestnanca pc="4" rc="1233567890" pocDni="31" typZec="ZEC" vynimkaVZ="0" rozsahSP="1111111" vzNp="300.00" vzSp="300.00" vzIp="300.00" vzPvn="300.00" vzUp="300.00" vzGp="300.00" vzRfs="300.00" vzZecNp="300.00" vzZecSp="300.00" vzZecIp="300.00" vzZecPvn="300.00" npZamtel="4.20" npZamnec="4.20" spZamtel="42.00" spZamnec="12.00" ipZamtel="9.00" ipZamnec="9.00" pvnZamtel="3.00" pvnZamnec="3.00" upZamtel="2.40" gpZamtel="0.75" rfsZamtel="14.25" vylucDobyObdobieOd="30.01.2014"/>
+			<poistneZamestnanca pc="3" obdobie="112013" rc="1233567890" pocDni="30" typZec="ZEC" vynimkaVZ="0" rozsahSP="1111111" vzNp="300.00" vzSp="300.00" vzIp="300.00" vzPvn="300.00" vzUp="300.00" vzGp="300.00" vzRfs="300.00" vzZecNp="300.00" vzZecSp="300.00" vzZecIp="300.00" vzZecPvn="300.00" npZamtel="4.20" npZamnec="4.20" spZamtel="42.00" spZamnec="12.00" ipZamtel="9.00" ipZamnec="9.00" pvnZamtel="3.00" pvnZamnec="3.00" upZamtel="2.40" gpZamtel="0.75" rfsZamtel="14.25" poSkonceni="1" vylucDobyObdobieOd="30.01.2014"/>
 		<!-- Zamestnanec - pravidelny prijem s uvedenim vylucDobyObdobieDo. -->
-			<poistneZamestnanca pc="5" rc="1234456789" pocDni="31" typZec="ZEC" vynimkaVZ="0" rozsahSP="1111111" vzNp="300.00" vzSp="300.00" vzIp="300.00" vzPvn="300.00" vzUp="300.00" vzGp="300.00" vzRfs="300.00" vzZecNp="300.00" vzZecSp="300.00" vzZecIp="300.00" vzZecPvn="300.00" npZamtel="4.20" npZamnec="4.20" spZamtel="42.00" spZamnec="12.00" ipZamtel="9.00" ipZamnec="9.00" pvnZamtel="3.00" pvnZamnec="3.00" upZamtel="2.40" gpZamtel="0.75" rfsZamtel="14.25" vylucDobyObdobieDo="10.01.2014"/>
+			<poistneZamestnanca pc="4" obdobie="122013" rc="1234456789" pocDni="31" typZec="ZEC" vynimkaVZ="0" rozsahSP="1111111" vzNp="300.00" vzSp="300.00" vzIp="300.00" vzPvn="300.00" vzUp="300.00" vzGp="300.00" vzRfs="300.00" vzZecNp="300.00" vzZecSp="300.00" vzZecIp="300.00" vzZecPvn="300.00" npZamtel="4.20" npZamnec="4.20" spZamtel="42.00" spZamnec="12.00" ipZamtel="9.00" ipZamnec="9.00" pvnZamtel="3.00" pvnZamnec="3.00" upZamtel="2.40" gpZamtel="0.75" rfsZamtel="14.25" poSkonceni="1" vylucDobyObdobieDo="10.01.2014"/>
 		<!-- Zamestnanec - pravidelny prijem s uvedenim vylucDobyTrva. Je mozne pouzit boolean hodnoty true alebo false, tak aj ciselne zastupenie 1 alebo 0. -->
-			<poistneZamestnanca pc="6" rc="1234557890" pocDni="31" typZec="ZEC" vynimkaVZ="0" rozsahSP="1111111" vzNp="300.00" vzSp="300.00" vzIp="300.00" vzPvn="300.00" vzUp="300.00" vzGp="300.00" vzRfs="300.00" vzZecNp="300.00" vzZecSp="300.00" vzZecIp="300.00" vzZecPvn="300.00" npZamtel="4.20" npZamnec="4.20" spZamtel="42.00" spZamnec="12.00" ipZamtel="9.00" ipZamnec="9.00" pvnZamtel="3.00" pvnZamnec="3.00" upZamtel="2.40" gpZamtel="0.75" rfsZamtel="14.25" vylucDobyTrva="true"/>
+			<poistneZamestnanca pc="5" obdobie="112013" rc="1234557890" pocDni="30" typZec="ZEC" vynimkaVZ="0" rozsahSP="1111111" vzNp="300.00" vzSp="300.00" vzIp="300.00" vzPvn="300.00" vzUp="300.00" vzGp="300.00" vzRfs="300.00" vzZecNp="300.00" vzZecSp="300.00" vzZecIp="300.00" vzZecPvn="300.00" npZamtel="4.20" npZamnec="4.20" spZamtel="42.00" spZamnec="12.00" ipZamtel="9.00" ipZamnec="9.00" pvnZamtel="3.00" pvnZamnec="3.00" upZamtel="2.40" gpZamtel="0.75" rfsZamtel="14.25" poSkonceni="1" vylucDobyTrva="true"/>
 		</poistneZamestnancov>
 	</priloha>
-</mvpp>
+
+</vpp>
 );
 mzdprc;
+
+$sqltt = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE ".
+" zfir_np = 0 AND zfir_sp = 0 AND  zfir_ip = 0 AND  zfir_pn = 0 AND  zfir_up = 0 AND  zfir_gf = 0 AND  zfir_rf = 0 AND pocdni = 0 ";
+$sql = mysql_query("$sqltt");
 
 //hlavicka
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid".
@@ -1588,51 +1313,29 @@ $i=0;
 $j=0; //zaciatok strany ak by som chcel strankovat
   while ($i <= $pol )
   {
-
-
   if (@$zaznam=mysql_data_seek($sql,$i) OR $nulapoloziek == 1 )
 {
 $hlavicka=mysql_fetch_object($sql);
 
 $obdobie=$kli_vmes;
-
-$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
-
-
+$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
   $text = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"."\r\n";
   fwrite($soubor, $text);
-  $text = "<mvpp xmlns=\"http://socpoist.sk/xsd/mvpp2014\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""."\r\n";
-  fwrite($soubor, $text);
-  $text = "xsi:schemaLocation=\"http://socpoist.sk/xsd/mvpp2014 MVPP-v2014.xsd\" >"."\r\n";
-  fwrite($soubor, $text);
 
-  $text = "<typDoc>MVP00001</typDoc>"."\r\n";
+  $text = "<vpp xmlns=\"http://socpoist.sk/xsd/vpp2014\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""."\r\n";
   fwrite($soubor, $text);
-  $text = "<obdobie>".$kli_vmes.$kli_vrok."</obdobie>"."\r\n";
+  $text = "xsi:schemaLocation=\"http://socpoist.sk/xsd/vpp2014 VPP-v2014.xsd\" >"."\r\n";
   fwrite($soubor, $text);
 
-if( $fir_mzdx06 == 0 ) { $fir_mzdx06=31; }
-
-
-$mesvyplat=1*($kli_vmes+1); $rokvyplat=$kli_vrok;
-$mesvyplatx=$mesvyplat;
-if ( $mesvyplat <  10 ) { $mesvyplat="0".$mesvyplat; }
-if ( $mesvyplatx == 13 ) { $mesvyplat="01"; $rokvyplat=$kli_vrok+1; }
-
-$denvyplaty=$fir_mzdx06.".".$mesvyplat.".".$rokvyplat;
-if( $denvyplaty == '29.02.2014' ) { $denvyplaty="28.02.2014"; }
-if( $denvyplaty == '30.02.2014' ) { $denvyplaty="28.02.2014"; }
-if( $denvyplaty == '31.02.2014' ) { $denvyplaty="28.02.2014"; }
-if( $denvyplaty == '31.04.2014' ) { $denvyplaty="30.04.2014"; }
-if( $denvyplaty == '31.06.2014' ) { $denvyplaty="30.06.2014"; }
-if( $denvyplaty == '31.09.2014' ) { $denvyplaty="30.09.2014"; }
-if( $denvyplaty == '31.11.2014' ) { $denvyplaty="30.11.2014"; }
-
-  $text = "<denVyplaty>".$denvyplaty."</denVyplaty>"."\r\n";
+  $text = "<typDoc>VPP00001</typDoc>"."\r\n";
   fwrite($soubor, $text);
 
+  $text = "<cisloVykazu>".$kli_vmes."99".$kli_vrok."</cisloVykazu>"."\r\n";
+  fwrite($soubor, $text);
 
+  $text = "<obdobieVyplPrijmov>".$kli_vmes.$kli_vrok."</obdobieVyplPrijmov>"."\r\n";
+  fwrite($soubor, $text);
   if( $h_oprav == 0 ) { $text = "<typVykazu>R</typVykazu>"."\r\n"; }
   if( $h_oprav == 1 ) { $text = "<typVykazu>O</typVykazu>"."\r\n"; }
   fwrite($soubor, $text);
@@ -1647,7 +1350,7 @@ if( $denvyplaty == '31.11.2014' ) { $denvyplaty="30.11.2014"; }
   fwrite($soubor, $text);
   $text = "<identifikator>"."\r\n";
   fwrite($soubor, $text);
-  $text = "<ico>$fir_fico</ico>"."\r\n";
+  $text = "<dic>$fir_fdic</dic>"."\r\n";
   fwrite($soubor, $text);
   $text = "</identifikator>"."\r\n";
   fwrite($soubor, $text);
@@ -1750,14 +1453,17 @@ if( $pzam_rf == "" ) $pzam_rf=0;
 
   $text = "<up>"."\r\n";  fwrite($soubor, $text);
   $text = "<upZamtel>$ofir_up</upZamtel>"."\r\n";  fwrite($soubor, $text);
+  $text = "<upZamnec>0.00</upZamnec>"."\r\n";  fwrite($soubor, $text);
   $text = "</up>"."\r\n";  fwrite($soubor, $text);
 
   $text = "<gp>"."\r\n";  fwrite($soubor, $text);
   $text = "<gpZamtel>$ofir_gf</gpZamtel>"."\r\n";  fwrite($soubor, $text);
+  $text = "<gpZamnec>0.00</gpZamnec>"."\r\n";  fwrite($soubor, $text);
   $text = "</gp>"."\r\n";  fwrite($soubor, $text);
 
   $text = "<rfs>"."\r\n";  fwrite($soubor, $text);
   $text = "<rfsZamtel>$ofir_rf</rfsZamtel>"."\r\n";  fwrite($soubor, $text);
+  $text = "<rfsZamnec>0.00</rfsZamnec>"."\r\n";  fwrite($soubor, $text);
   $text = "</rfs>"."\r\n";  fwrite($soubor, $text);
 
   $text = "<spoluPoistne>$celk_spolu</spoluPoistne>"."\r\n";  fwrite($soubor, $text);
@@ -1830,7 +1536,7 @@ $oznac = mysql_query("$sqtoz");
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid".
 " LEFT JOIN F$kli_vxcf"."_$mzdkun".
 " ON F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".oc=F$kli_vxcf"."_$mzdkun.oc".
-" WHERE konx = 0 ORDER BY konx,rdc";
+" WHERE konx = 0 ORDER BY konx,rdc,umeo";
 
 
 $sql = mysql_query("$sqltt");
@@ -1893,10 +1599,37 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdpomer WHERE pm=$hlavicka->
 if( $typZec == "" ) { $typZec="ZEC"; }
 
 //ak dohoda o brig.praci studenta a presiahne hranize pre platenie DOCH.POISTENIA prepis ZECD3 na ZECD3V a daj vynimka=1 takto mi to bralo socpoist.sk 30.1.2013
-//toto riesenie som zrusil 26.2.2013
-//v reakciach poslednych SP napr. z 8.2.2013 sa uvadza aj riesenie ZECD4 bez poistenia a ak vyssi prijem nez hranica tak ZECD3 TAKTO TO PRESLO p.TRCKOVA
-if( $typZec == "ZECD3" AND $hlavicka->zzam_sp == 0 AND $hlavicka->zzam_ip == 0 AND $hlavicka->porc != 42 ) { $typZec="ZECD4"; }
+if( $typZec == "ZECD3" AND $hlavicka->zzam_sp > 0 ) { $typZec="ZECD3V"; $vynimkaVZ="1"; }
 
+
+$sqlttxx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET pocdni=0 WHERE ".
+" zfir_np = 0 AND zfir_sp = 0 AND  zfir_ip = 0 AND  zfir_pn = 0 AND  zfir_up = 0 AND  zfir_gf = 0 AND  zfir_rf = 0 ";
+$sqlxx = mysql_query("$sqlttxx");
+
+$niezaklad=0;
+if( $hlavicka->zfir_np == 0 AND $hlavicka->zfir_sp == 0 AND $hlavicka->zfir_ip == 0 AND $hlavicka->zfir_pn == 0 AND $hlavicka->zfir_up == 0 AND $hlavicka->zfir_gf == 0 AND $hlavicka->zfir_rf == 0 ) { $niezaklad=1; }
+
+$pocdni=1*$hlavicka->pocdni;
+if( $pocdni == 0 )
+  {
+$sqldok = mysql_query("SELECT * FROM kalendar WHERE ume = $hlavicka->umeo ");
+$pocdni = 1*mysql_num_rows($sqldok);
+  }
+
+if( $niezaklad == 1 )
+  {
+$pocdni=0;
+  }
+
+$strajk=$hlavicka->strajk;
+if( $strajk == 0 ) { $strajk="0"; }
+$skonci=$hlavicka->skonci;
+if( $skonci != 1 ) { $skonci="0"; }
+if( $skonci == 1 ) { $skonci="1"; }
+if( $hlavicka->pom == 61 ) { $skonci="1"; }
+$neplat=$hlavicka->neplat;
+if( $neplat != 1 ) { $neplat="0"; }
+if( $neplat == 1 ) { $neplat="1"; }
 
 //od 1.1.2013 vynimkaVZ len 0 a 1=ak viac dohod a prekroci maxVZ zamestnavatel plati vsetko zamestnanec len z rozdielu
 
@@ -1919,7 +1652,12 @@ $rozsahSP=$rozsahSPnp.$rozsahSPsp.$rozsahSPip.$rozsahSPpn.$rozsahSPup.$rozsahSPg
 $rodnecislo=$hlavicka->rdc.$hlavicka->rdk;
 //$rodnecislo=6505146681;
 
-  $text = "<poistneZamestnanca pc=\"$cislo\" rc=\"$rodnecislo\" pocDni=\"$hlavicka->vpois_dni\" typZec=\"$typZec\""."\r\n";
+$obdobie=$hlavicka->obdobie;
+$obdobie=$hlavicka->umeo*10000;
+if( $obdobie < 99999 ) { $obdobie="0".$obdobie; }
+
+
+  $text = "<poistneZamestnanca pc=\"$cislo\" obdobie=\"$obdobie\" rc=\"$rodnecislo\" pocDni=\"$pocdni\" typZec=\"$typZec\""."\r\n";
   fwrite($soubor, $text);
   $text = "vynimkaVZ=\"$vynimkaVZ\" rozsahSP=\"$rozsahSP\" vzNp=\"$hlavicka->zfir_np\" vzSp=\"$hlavicka->zfir_sp\" vzIp=\"$hlavicka->zfir_ip\""."\r\n";
   fwrite($soubor, $text);
@@ -1950,8 +1688,10 @@ if( $spvod != '' ) {   $text = "vylucDobyObdobieOd=\"$spvod\" "."\r\n"; fwrite($
 if( $spvdo != '' ) {   $text = "vylucDobyObdobieDo=\"$spvdo\" "."\r\n"; fwrite($soubor, $text); }
 if( $spvdo != '' ) {   $text = "vylucDobyTrva=\"$spvtr\" "."\r\n"; fwrite($soubor, $text); }
 
-  $text = " pocDniStrajku=\"0\" />"."\r\n";
+  $text = " poSkonceni=\"$skonci\" pocDniStrajku=\"$strajk\" />"."\r\n";
   fwrite($soubor, $text);
+
+
 
 
 }
@@ -1963,7 +1703,7 @@ $j = $j + 1;
   fwrite($soubor, $text);
   $text = "</priloha>"."\r\n";
   fwrite($soubor, $text);
-  $text = "</mvpp>"."\r\n";
+  $text = "</vpp>"."\r\n";
   fwrite($soubor, $text);
 
 fclose($soubor);
@@ -2003,7 +1743,8 @@ $vysledok = mysql_query("$sqlt");
 // celkovy koniec dokumentu
 $zmenume=1; $odkaz="../mzdy/vykaz_SP.php?&copern=1&page=1&ostre=0";
 $cislista = include("mzd_lista.php");
-} while (false);
+
+       } while (false);
 ?>
 </BODY>
 </HTML>

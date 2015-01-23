@@ -101,7 +101,7 @@ $h_spno = strip_tags($_REQUEST['h_spno']);
 $h_spnie = strip_tags($_REQUEST['h_spnie']);
 $h_dsp = strip_tags($_REQUEST['h_dsp']);
 $h_dav = strip_tags($_REQUEST['h_dav']);
-$h_deti_sp = strip_tags($_REQUEST['h_deti_sp']);
+$h_deti_sp = 1*$_REQUEST['h_deti_sp'];
 $h_zrz_dn = strip_tags($_REQUEST['h_zrz_dn']);
 $h_ziv_dn = strip_tags($_REQUEST['h_ziv_dn']);
 $h_deti_dn = strip_tags($_REQUEST['h_deti_dn']);
@@ -210,7 +210,7 @@ while (! feof($subor))
   $x_cdss = $pole[26];
   $x_roh = $pole[27];
   $x_spno = $pole[28];
-  $x_detisp = $pole[29];
+  $x_deti_sp = $pole[29];
   $x_zrzdn = $pole[30];
   $x_zivdn = $pole[31];
   $x_detidn = $pole[32];
@@ -255,7 +255,7 @@ $sqult = "INSERT INTO F$kli_vxcf"."_mzdkun ( oc,meno,prie,prbd,titl,rdc,rdk,dar,
 " VALUES ( '$x_oc', '$x_meno', '$x_prie', '$x_prbd', '$x_titl', '$x_rdc', '$x_rdk', '$dar_sql',".
 " '$x_mnr', '$x_zmes', '$x_zuli', '$x_zpsc', '$x_pom', '$x_kat', '$x_wms', '$x_stz', '$x_zkz', '$x_uva', '$dan_sql', '$daz_sql',".
 " '$x_nev', '$x_nrk', '$x_crp', '$x_znah', '$x_znem', '$x_doch', '$dad_sql', '$x_dvy',".
-" '$x_cdss', '$x_roh', '$x_spno', '$x_detisp', '$x_zrzdn', '$x_zivdn', '$x_detidn', '$x_zpno', '$dvp_sql', '$dvp_sql', '$x_zdrv',".
+" '$x_cdss', '$x_roh', '$x_spno', '$x_deti_sp', '$x_zrzdn', '$x_zivdn', '$x_detidn', '$x_zpno', '$dvp_sql', '$dvp_sql', '$x_zdrv',".
 " '$x_trd', '$x_sz0', '$x_sz1', '$x_sz2', '$x_sz3', '$x_sz4',".
 " '$x_vban', '$x_uceb', '$x_numb', '$x_vsy', '$x_ksy', '$x_ssy' ); "; 
 
@@ -453,10 +453,10 @@ $uloztt = "INSERT INTO F$kli_vxcf"."_mzdkun ( oc,meno,prie,rodn,prbd,titl,rdc,rd
 " VALUES ( '$h_oc', '$h_meno', '$h_prie', '$h_rodn', '$h_prbd', '$h_titl', '$h_rdc', '$h_rdk', '$dar_sql',".
 " '$h_mnr', '$h_cop', '$h_zmes', '$h_zuli', '$h_zpsc', '$h_pom', '$h_kat', '$h_wms', '$h_stz', '$h_zkz', '$h_uva', '$h_uvazn', '$dan_sql', '$daz_sql',".
 " '$h_nev', '$h_nrk', '$h_crp', '$h_znah', '$h_znem', '$h_doch', '$dad_sql', '$h_dvy',".
-" '$h_cdss', '$h_roh', '$h_spno', '$h_detisp', '$h_zrzdn', '$h_zivdn', '$h_detidn', '$h_zpno', '$h_zpnie', '$dvp_sql', '$h_zdrv',".
+" '$h_cdss', '$h_roh', '$h_spno', '$h_deti_sp', '$h_zrzdn', '$h_zivdn', '$h_detidn', '$h_zpno', '$h_zpnie', '$dvp_sql', '$h_zdrv',".
 " '$h_spnie', '$dsp_sql', '$h_trd', '$h_sz0', '$h_sz1', '$h_sz2', '$h_sz3', '$h_sz4', '$h_sz5', '$h_zema', '$h_ztel', '$h_zcdm' ); ";  
 
-//echo $uloztt;
+echo $uloztt;
 $ulozene = mysql_query("$uloztt"); 
 
 $copern=1;
@@ -514,7 +514,7 @@ $upravttt = "UPDATE F$kli_vxcf"."_mzdkun SET  meno='$h_meno', titl='$h_titl',".
 " uva='$h_uva', uvazn='$h_uvazn', kat='$h_kat', stz='$h_stz', zkz='$h_zkz', pom='$h_pom',".
 " zdrv='$h_zdrv', dvp='$dvp_sql', zpno='$h_zpno', zpnie='$h_zpnie',".
 " znah='$h_znah', nrk='$h_nrk', nev='$h_nev', crp='$h_crp', znem='$h_znem',".
-" cdss='$h_cdss', dsp='$dsp_sql', spno='$h_spno', spnie='$h_spnie',".
+" cdss='$h_cdss', dsp='$dsp_sql', spno='$h_spno', spnie='$h_spnie', deti_sp='$h_deti_sp',".
 " doch='$h_doch', docv='$h_docv', dad='$dad_sql', dvy='$h_dvy',".
 " deti_dn='$h_deti_dn', ziv_dn='$h_ziv_dn', zrz_dn='$h_zrz_dn',".
 " sz0='$h_sz0', sz1='$h_sz1', sz2='$h_sz2', sz3='$h_sz3', sz4='$h_sz4',".
@@ -2422,6 +2422,18 @@ if ( $h_zpnie == 1 )
 ?>
 <script type="text/javascript">
 document.formv1.h_zpnie.checked = "checked";
+</script>
+<?php
+   }
+?>
+Odvodová ú¾ava ZP:
+ <input type="checkbox" name="h_deti_sp" value="1"  />
+<?php
+if ( $h_deti_sp == 1 )
+   {
+?>
+<script type="text/javascript">
+document.formv1.h_deti_sp.checked = "checked";
 </script>
 <?php
    }

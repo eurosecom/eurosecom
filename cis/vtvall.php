@@ -452,18 +452,18 @@ $ttqq = mysql_query("$ttvv");
 
 $sql = "ALTER TABLE F$kli_vxcf"."_ico ENGINE InnoDB";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_ico ADD ib1 varchar(30) not null AFTER nm1";
+$sql = "ALTER TABLE F$kli_vxcf"."_ico ADD ib1 varchar(40) not null AFTER nm1";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_ico ADD ib2 varchar(30) not null AFTER nm2";
+$sql = "ALTER TABLE F$kli_vxcf"."_ico ADD ib2 varchar(40) not null AFTER nm2";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_ico ADD ib3 varchar(30) not null AFTER nm3";
+$sql = "ALTER TABLE F$kli_vxcf"."_ico ADD ib3 varchar(40) not null AFTER nm3";
 $vysledek = mysql_query("$sql");
 }
-$sql = "ALTER TABLE F$kli_vxcf"."_ico MODIFY ib1 varchar(30) not null AFTER nm1";
+$sql = "ALTER TABLE F$kli_vxcf"."_ico MODIFY ib1 varchar(40) not null ";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_ico MODIFY ib2 varchar(30) not null AFTER nm2";
+$sql = "ALTER TABLE F$kli_vxcf"."_ico MODIFY ib2 varchar(40) not null ";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_ico MODIFY ib3 varchar(30) not null AFTER nm3";
+$sql = "ALTER TABLE F$kli_vxcf"."_ico MODIFY ib3 varchar(40) not null ";
 $vysledek = mysql_query("$sql");
 //koniec tabulky ICO
 

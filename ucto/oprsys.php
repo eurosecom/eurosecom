@@ -1852,7 +1852,15 @@ var h_sys = document.forms.formct2.h_sys.value;
 
 window.open('../faktury/int_fakt2014pkse.php?copern=55&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-<?php                                       } ?>
+<?php                                          } ?>
+
+<?php if( $berext == 1 AND $kli_vrok == 2015 ) { ?>
+var h_obdp = document.forms.formct2.h_obdp.value;
+var h_sys = document.forms.formct2.h_sys.value;
+
+window.open('../faktury/int_fakt2015pkse.php?copern=55&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+<?php                                          } ?>
 
                 }
 
@@ -2184,6 +2192,31 @@ if($urob) { $blok514=" - BLOKOVAN…"; }
 <option value="511" >SYS 511 Zdrav.starostlivosù <?php echo $blok511;?></option>
 <option value="512" >SYS 512 OstatnÈ <?php echo $blok512;?></option>
 <option value="514" >SYS 514 N·jomnÈ <?php echo $blok514;?></option>
+<?php                                         } ?>
+
+<?php if( $berext == 1 AND $kli_vrok == 2015 ) { ?>
+<?php
+$blok611="";
+$blok612="";
+$blok614="";
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak611_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok611=" - BLOKOVAN…"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak612_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok612=" - BLOKOVAN…"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak614_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok614=" - BLOKOVAN…"; }
+
+?>
+
+<option value="611" >SYS 611 Zdrav.starostlivosù <?php echo $blok611;?></option>
+<option value="612" >SYS 612 OstatnÈ <?php echo $blok612;?></option>
+<option value="614" >SYS 614 N·jomnÈ <?php echo $blok614;?></option>
 <?php                                         } ?>
 
 </select>

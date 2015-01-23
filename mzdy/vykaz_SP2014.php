@@ -54,15 +54,6 @@ if ( $kli_vrok < 2014 )
 <?php
 exit;
 }
-if ( $kli_vrok < 2015 )
-{
-?>
-<script type="text/javascript">
-  var okno = window.open("../mzdy/vykaz_SP2014.php?copern=<?php echo $copern; ?>&h_oprav=<?php echo $h_oprav; ?>&davyp=<?php echo $davyp; ?>&page=<?php echo $page; ?>&ostre=0&drupoh=<?php echo $drupoh; ?>","_self");
-</script>
-<?php
-exit;
-}
 
 if ( $copern == 1 )
      {
@@ -1210,7 +1201,7 @@ $vysledok = mysql_query("$sqlt");
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>Mesačné vykazy pre SP</title>
+<title>Mesačné vykazy pre SP 2014</title>
   <style type="text/css">
 h3 {
   padding:0;
@@ -1232,49 +1223,49 @@ var sirkawic = screen.width-10;
   {
    var h_oprav = document.forms.formp1.h_oprav.value;
    var davyp = document.forms.formp1.davyp.value;
-   window.open('../mzdy/vykaz_SP.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
+   window.open('../mzdy/vykaz_SP2014.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
   }
   function Priloha()
   {
    var h_oprav = document.forms.formp1.h_oprav.value;
    var davyp = document.forms.formp1.davyp.value;
-   window.open('../mzdy/vykaz_SP.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
+   window.open('../mzdy/vykaz_SP2014.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
   }
   function PrilohaMena()
   {
    var h_oprav = document.forms.formp1.h_oprav.value;
    var davyp = document.forms.formp1.davyp.value;
-   window.open('../mzdy/vykaz_SP.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1&meno=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
+   window.open('../mzdy/vykaz_SP2014.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1&meno=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
   }
   function ElektronikaVykaz()
   {
    var h_oprav = document.forms.formp1.h_oprav.value;
    var davyp = document.forms.formp1.davyp.value;
-   window.open('../mzdy/vykaz_SP.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=30&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
+   window.open('../mzdy/vykaz_SP2014.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=30&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
   }
   function ElektronikaVykazVPP()
   {
    var h_oprav = document.forms.formp1vpp.h_oprav.value;
    var davyp = document.forms.formp1vpp.davyp.value;
-   window.open('../mzdy/vykaz_spvpp.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=30&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
+   window.open('../mzdy/vykaz_spvpp2014.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=30&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
   }
   function VykazVPP()
   {
    var h_oprav = document.forms.formp1vpp.h_oprav.value;
    var davyp = document.forms.formp1vpp.davyp.value;
-   window.open('../mzdy/vykaz_spvpp.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
+   window.open('../mzdy/vykaz_spvpp2014.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
   }
   function PrilohaVPP()
   {
    var h_oprav = document.forms.formp1vpp.h_oprav.value;
    var davyp = document.forms.formp1vpp.davyp.value;
-   window.open('../mzdy/vykaz_spvpp.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
+   window.open('../mzdy/vykaz_spvpp2014.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
   }
   function PrilohaVPPMena()
   {
    var h_oprav = document.forms.formp1vpp.h_oprav.value;
    var davyp = document.forms.formp1vpp.davyp.value;
-   window.open('../mzdy/vykaz_spvpp.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1&meno=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
+   window.open('../mzdy/vykaz_spvpp2014.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1&meno=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
   }
   function fosp()
   {
@@ -1286,7 +1277,7 @@ var sirkawic = screen.width-10;
 
 <table class="h2" width="100%">
 <tr>
-<td>EuroSecom - Výkazy pre Sociálnu poisťovňu <?php echo $kli_vrok; ?></td>
+<td>EuroSecom - Výkazy pre Sociálnu poisťovňu 2014</td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
 </table>
@@ -2001,7 +1992,7 @@ $vysledok = mysql_query("$sqlt");
 
 <?php
 // celkovy koniec dokumentu
-$zmenume=1; $odkaz="../mzdy/vykaz_SP.php?&copern=1&page=1&ostre=0";
+$zmenume=1; $odkaz="../mzdy/vykaz_SP2014.php?&copern=1&page=1&ostre=0";
 $cislista = include("mzd_lista.php");
 } while (false);
 ?>

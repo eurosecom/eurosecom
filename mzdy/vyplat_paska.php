@@ -1457,6 +1457,109 @@ $oznac = mysql_query("$sqtoz");
 //uprav zaklad podla max a min od 1.2012 do zmin_up ulozim neupraveny zzam_zp
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zmin_up=zzam_zp WHERE oc > 0 ";
 $oznac = mysql_query("$sqtoz");
+
+//tuto vypocitam odvodovu ulavu zp
+// ak od 380 do 570 do zmin_pn upraveny zaklad zp a do zmin_ip je odpocitatelna polozka
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET zmin_ip=zzam_zp ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND deti_sp = 1 AND zzam_zp < 380 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET zmin_ip=380-(2*(zzam_zp-380)) ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND deti_sp = 1 AND zzam_zp >= 380 AND zzam_zp < 570 ";
+$oznac = mysql_query("$sqtoz");
+
+//alikvotne znizenie o 502,503 a ak nemal zmluvu cely mesiac
+$prvydena=$kli_vrok."-".$kli_vmes."-01";
+$pocetdnia=31;
+$sqltt = "SELECT * FROM kalendar WHERE ume = $kli_vume ";
+$sql = mysql_query("$sqltt");
+$pocetdnia = mysql_num_rows($sql);
+$posldena=$kli_vrok."-".$kli_vmes."-".$pocetdni;
+
+$dsqlt = "DROP TABLE F$kli_vxcf"."_mzdprcneoda$kli_uzid  "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "CREATE TABLE F$kli_vxcf"."_mzdprcneoda$kli_uzid  SELECT * FROM F$kli_vxcf"."_mzdprcneod$kli_uzid WHERE oc < 0 "; $dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcneoda$kli_uzid "." SELECT".
+" oc,0,0,".
+" dan,dav,0,0,0,0,0,0,0,0,0,0,".
+"0,0".
+" FROM F$kli_vxcf"."_$mzdkun".
+" WHERE oc >= 0".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=1+TO_DAYS(den_posl)-TO_DAYS(den_prvy) ".
+" WHERE oc >= 0";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcneoda$kli_uzid".
+" SET nezp_dni=1+TO_DAYS(den_prvy)-TO_DAYS('$prvydena') ".
+" WHERE oc >= 0 AND den_prvy > '$prvydena' AND den_prvy <= '$posldena' ";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcneoda$kli_uzid".
+" SET nesp_dni=TO_DAYS('$posldena')-TO_DAYS(den_posl) ".
+" WHERE oc >= 0 AND den_posl < '$posldena' AND den_posl > '$prvydena' ";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcneoda$kli_uzid "." SELECT".
+" oc,0,0,".
+" dp,dk,0,0,sum(dni),0,0,0,0,0,0,0,".
+"0,0".
+" FROM F$kli_vxcf"."_mzdprcvy$kli_uzid".
+" WHERE id >= 0 AND ( dm = 502 OR dm = 503 ) ".
+" GROUP BY oc".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcneoda$kli_uzid "." SELECT".
+" oc,sum(neod_dni),sum(neod_hod),".
+" '','',sum(nesp_dni),sum(nesp_hod),sum(nezp_dni+nesp_dni),sum(nezp_hod),0,0,0,0,'$pocetdnia',0,".
+"0,9".
+" FROM F$kli_vxcf"."_mzdprcneoda$kli_uzid".
+" WHERE oc >= 0 AND ".$podm_oc.
+" GROUP BY oc".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+//exit;
+$dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcneoda$kli_uzid WHERE neoxx != 9 "; $dsql = mysql_query("$dsqlt");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdprcneoda$kli_uzid".
+" SET des6=zmin_ip*(celk_dni-nezp_dni)/celk_dni ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_mzdprcneoda$kli_uzid.oc AND zmin_ip > 0 ";
+$oznac = mysql_query("$sqtoz");
+
+$dsqlt = "DROP TABLE F$kli_vxcf"."_mzdprcneoda$kli_uzid  "; $dsql = mysql_query("$dsqlt");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET des6=des6+0.0049, des2=des6, zmin_ip=des2 ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND deti_sp = 1 AND zmin_ip > 0 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
+" SET des6=0, des3=0, des6=2, des1=0 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET zmin_pn=zzam_zp-zmin_ip, zzam_zp=zmin_pn ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND deti_sp = 1";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+//exit;
+
+//koniec tuto vypocitam odvodovu ulavu zp
+
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_zp=zmax_zp WHERE zzam_zp > zmax_zp ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_zp=zmin_zp WHERE zzam_zp < zmin_zp ";
@@ -2607,6 +2710,10 @@ $vysledok = mysql_query("$sqlt");
 
 //odvody ddp
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcddp'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+//zmaz nemoc.zaklady bezny rok pri ostrom
+$sqlt = "DROP TABLE F".$kli_vxcf."_mzdnemzakb ";
 $vysledok = mysql_query("$sqlt");
 
 //zmaz mesacny prehlad pri ostrom

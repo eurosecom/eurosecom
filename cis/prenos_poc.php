@@ -2436,10 +2436,12 @@ $upravene = mysql_query("$uprtt");
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 $pocp=0;
-$poslhh = "SELECT * FROM F".$h_ycf."_kuchrecepth ";
+$poslhh = "SELECT * FROM ".$databaza."F".$h_ycf."_kuchrecepth ";
 $posl = mysql_query("$poslhh"); 
 if( $posl ) { $pocp = mysql_num_rows($posl); }
 if( $_SERVER['SERVER_NAME'] == "www.penzionskalica.sk" ) { $pocp=0; }
+if( $_SERVER['SERVER_NAME'] == "www.eurosecom.sk" ) { $pocp=0; }
+if( $_SERVER['SERVER_NAME'] == "www.medosro.sk" ) { $pocp=0; }
 
 if( $pocp > 10 )
   {
@@ -2449,14 +2451,16 @@ echo "Prenos Kuchyne .<br />";
 $sqlt = "DROP TABLE F".$kli_vxcf."_uhot ";
 $vysledok = mysql_query("$sqlt");
 
-$sql = "CREATE TABLE F".$kli_vxcf."_uhot SELECT * FROM F".$h_ycf."_uhot ";
+$sql = "CREATE TABLE F".$kli_vxcf."_uhot SELECT * FROM ".$databaza."F".$h_ycf."_uhot ";
 $vysledek = mysql_query("$sql");
 
-$sqlt = "DROP TABLE F".$kli_vxcf."_kuchsuroviny ";
+$sqlt = "TRUNCATE F".$kli_vxcf."_kuchsuroviny ";
 $vysledok = mysql_query("$sqlt");
+//echo $sql;
 
-$sql = "CREATE TABLE F".$kli_vxcf."_kuchsuroviny SELECT * FROM F".$h_ycf."_kuchsuroviny ";
+$sql = "INSERT INTO F".$kli_vxcf."_kuchsuroviny SELECT * FROM ".$databaza."F".$h_ycf."_kuchsuroviny ";
 $vysledek = mysql_query("$sql");
+//echo $sql;
 
 $sql = "ALTER TABLE F".$kli_vxcf."_kuchsuroviny MODIFY ckmp int(11) PRIMARY KEY auto_increment ";
 $vysledek = mysql_query("$sql");
@@ -2466,13 +2470,13 @@ $vysledek = mysql_query("$sql");
 $sqlt = "TRUNCATE F".$kli_vxcf."_kuchrecepth ";
 $vysledok = mysql_query("$sqlt");
 
-$sql = "INSERT INTO F".$kli_vxcf."_kuchrecepth SELECT * FROM F".$h_ycf."_kuchrecepth ";
+$sql = "INSERT INTO F".$kli_vxcf."_kuchrecepth SELECT * FROM ".$databaza."F".$h_ycf."_kuchrecepth ";
 $vysledek = mysql_query("$sql");
 
 $sqlt = "TRUNCATE F".$kli_vxcf."_kuchreceptp ";
 $vysledok = mysql_query("$sqlt");
 
-$sql = "INSERT INTO F".$kli_vxcf."_kuchreceptp SELECT * FROM F".$h_ycf."_kuchreceptp ";
+$sql = "INSERT INTO F".$kli_vxcf."_kuchreceptp SELECT * FROM ".$databaza."F".$h_ycf."_kuchreceptp ";
 $vysledek = mysql_query("$sql");
 
 
@@ -2486,6 +2490,7 @@ $posl = mysql_query("$poslhh");
 if( $posl ) { $pocp = mysql_num_rows($posl); }
 
 if( $_SERVER['SERVER_NAME'] == "www.penzionskalica.sk" ) { $pocp=0; }
+if( $_SERVER['SERVER_NAME'] == "www.medosro.sk" ) { $pocp=0; }
 if( $pocp > 10 )
   {
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2586,6 +2591,7 @@ $poslhh = "SELECT * FROM F".$h_ycf."_restpredp ";
 $posl = mysql_query("$poslhh"); 
 if( $posl ) { $pocp = mysql_num_rows($posl); }
 if( $_SERVER['SERVER_NAME'] == "www.penzionskalica.sk" ) { $pocp=0; }
+if( $_SERVER['SERVER_NAME'] == "www.medosro.sk" ) { $pocp=0; }
 
 if( $pocp > 100 )
   {
@@ -4546,10 +4552,10 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "CREATE TABLE F$kli_vxcf"."_vyrzakpol SELECT * FROM ".$databaza."F$h_ycf"."_vyrzakpol ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakpol WHERE zak >= 120000 AND zak <= 129999 ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakpol WHERE zak >= 130000 AND zak <= 139999 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakdopln WHERE zak >= 120000 AND zak <= 129999 ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakdopln WHERE zak >= 130000 AND zak <= 139999 ";
 $dsql = mysql_query("$dsqlt");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

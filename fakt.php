@@ -85,7 +85,7 @@ $cit_nas = include("cis/citaj_nas.php");
 
   $ajnajom=0;
   if (File_Exists ("secomnajom/najom.php")) { $ajnajom=1; }
-  if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $vyb_xcf != 514 ) { $ajnajom=0; }
+  if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $vyb_xcf != 514 AND $vyb_xcf != 614 ) { $ajnajom=0; }
 
 $cook=0;
 if( $cook == 1 )

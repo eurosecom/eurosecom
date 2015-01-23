@@ -6,6 +6,8 @@
 //../zaloz2015db.php prenos skriptov zakladnych					OK2015
 //../pswd/pasword.php a nakopirovat pswd/oddelena2014db2015.php
 
+//prenos zozicodph01 z databazy 2015 do 2016 mam v tvrde_upravy.php		OK2015
+
 //../oddel_dtb1.php a oddel_dtb2.php a oddel_dtb3.php				OK2015
 //../cis/oddel_dtbz1.php a ../cis/oddel_dtbz2.php a ../cis/oddel_dtbz3.php	OK2015
 //../cis/oddel_dtbm1.php a oddel_dtbm2.php pre hotel.sluzby			OK2015
@@ -28,8 +30,8 @@
 //../cis/citaj_nas.php aby citalnastavenie firmy vzdy z db2015 			setODDELDB
 //../cis/zmenume.php aby upravil nastavenie firmy vzdy z db2015 		setODDELDB
 //../cis/prenoc_poc.php 							setODDELDB  
-//../cis/prenos2014 mzdy,ucto,sklad PDF,DOC                                 	OK2014 
-//../cis/uzivspravy.php							    	OK2014  
+//../cis/prenos2014 mzdy,ucto,sklad PDF,DOC                                 	OK2015 
+//../cis/uzivspravy.php							    	setODDELDB  
 
 //../ucto/oprsys.php prenos generovania medzi rokmi                         	setODDELDB
 //../ucto/oprcis.php prenos generovania medzi rokmi na 3miestach            	setODDELDB
@@ -50,7 +52,7 @@
 //../ucto/priznanie_po2014.php  prenos z minuleho roku                      	setODDELDB
 //../ucto/priznanie_fob2014.php  prenos z minuleho roku                     	setODDELDB
 //../mzdy/priznanie_foa2014.php  prenos z minuleho roku                     	setODDELDB
-//../ucto/priznanie_dmv2013.php  tabulky z minuleho roku		    	ok2014 
+//../ucto/priznanie_dmv2013.php  tabulky z minuleho roku		    	setODDELDB 
 
 //../ucto/roknakvyn.php  tabulky z minuleho roku				setODDELDB
 //../ucto/roksuv.php  tabulky z minuleho roku					setODDELDB
@@ -72,6 +74,6 @@
 //../ajax/daj_sklkarta_xml.php							setODDELDB
 //../ajax/daj_sklkar_xml.php							setODDELDB
 
-//../ubyt/ubyttouchme.php penzionskalica natvrdo cislo firmy podla roka
-//../ubytovanie/index.php penzionskalica volaj s rokom aby nekesoval minuly
+//../ubyt/ubyttouchme.php penzionskalica natvrdo cislo firmy podla roka		OK2015
+//../ubytovanie/index.php penzionskalica volaj s rokom aby nekesoval minuly	OK2015
 ?>
