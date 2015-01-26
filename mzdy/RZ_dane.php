@@ -353,10 +353,11 @@ window.open('../mzdy/hlasenie_danexml.php?h_drp=' + h_drp + '&h_dap=' + h_dap + 
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-//Rocne hlasenie dane 2012,2013
+//Rocne hlasenie dane 2012,2013,2014
 <?php
 $rocnehlasenier="2012";
-if( $kli_vrok >= 2013 ) { $rocnehlasenier="2013"; }
+if( $kli_vrok == 2013 ) { $rocnehlasenier="2013"; }
+if( $kli_vrok >= 2014 ) { $rocnehlasenier="2014"; }
 ?>
 
 function TlacRocHlasenie<?php echo $rocnehlasenier; ?>()
