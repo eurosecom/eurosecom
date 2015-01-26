@@ -528,6 +528,7 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdprm");
   $fir_zpn=$riaddok->fir_zpn;
   }
 
+
 /////////////////////////////////////////////////VYTLAC MESACNY VYKAZ
 if ( $copern == 10 )
 {
@@ -622,8 +623,9 @@ $pdf->Cell(174,5," ","$rmc1",0,"L");$pdf->Cell(4,6,"$akyvyk","$rmc",1,"C");
 
 //za obdobie
 $pdf->Cell(190,1," ","$rmc1",1,"L");
-$obdobie=$kli_vume*10000;
-if ( $obdobie < 102009 ) $obdobie= "0".$obdobie;
+$obdobiem=$kli_vmes;
+if ( $obdobiem < 10 ) $obdobiem= "0".$obdobiem;
+$obdobie=$kli_vrok.$obdobiem;
 $pdf->Cell(28,6," ","$rmc1",0,"L");$pdf->Cell(60,7,"$obdobie","$rmc",0,"L");
 
 //den vyplaty
@@ -637,7 +639,9 @@ $pdf->Cell(79,5," ","$rmc1",0,"L");$pdf->Cell(3,7,"$A","$rmc",0,"C");$pdf->Cell(
 //nazov a forma
 $pdf->Cell(190,8," ","$rmc1",1,"L");
 $pdf->Cell(35,6," ","$rmc1",0,"L");$pdf->Cell(90,5,"$fir_fnaz","$rmc",0,"L");
-$pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(43,5,"$fir_uctt02","$rmc",1,"L");
+$pravnaforma="PO";
+if( $fir_uctt03 == 999 ) { $pravnaforma="FO"; }
+$pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(43,5,"$pravnaforma","$rmc",1,"L");
 //rodne
 $pdf->Cell(190,4," ","$rmc1",1,"L");
 $A=substr($fordc,0,1);
@@ -707,6 +711,7 @@ $pdf->Cell(10,5," ","$rmc1",0,"L");
 $pdf->Cell(4,5,"$A","$rmc",0,"C");$pdf->Cell(4,5,"$B","$rmc",0,"C");$pdf->Cell(3,5,"$C","$rmc",0,"C");
 $pdf->Cell(4,5,"$D","$rmc",0,"C");$pdf->Cell(3,5,"$E","$rmc",0,"C");
 //stat
+$stat="";
 $pdf->Cell(17,5," ","$rmc1",0,"R");$pdf->Cell(34,5,"$stat","$rmc",1,"L");
 
 //celkovy pocet poistenych vo vsetkych ZP
@@ -820,11 +825,13 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdtextmzd WHERE invt = $hlav
   $cislozp=1*$riaddok->cszp;
   }
 if ( $cislozp > 0 ) { $cislopoistenca=$cislozp; }
+
 $pdf->Cell(21,5," ","$rmc1",0,"R");
 $pdf->Cell(20,5,"$cislopoistenca","$rmc",0,"C");
 
-//if ( $hlavicka->znizp == 0 )
-//{
+   if ( $hlavicka->znizp == 0 )
+   {
+
 $pdf->Cell(8,5,"$hlavicka->pdni_zp","$rmc",0,"C");
 $pdf->Cell(13,5,"$hlavicka->zcel_zp","$rmc",0,"R");
 $pdf->Cell(12,5,"$hlavicka->zcel_odp","$rmc",0,"R");
@@ -834,11 +841,11 @@ $pdf->Cell(13,5,"$hlavicka->zzam_zp","$rmc",0,"R");
 $pdf->Cell(12,5,"$fir_zp","$rmc",0,"C");$pdf->Cell(13,5,"$zam_zp","$rmc",0,"C");
 $pdf->Cell(13,5,"$hlavicka->ofir_zp","$rmc",0,"C");$pdf->Cell(12,5,"$hlavicka->ozam_zp","$rmc",0,"C");
 $pdf->Cell(13,5,"$hlavicka->ofir_gf","$rmc",1,"R");
-//}
+   }
 
-//if ( $hlavicka->znizp != 0 )
-//{
-//dopyt, pri tejto podmienky nedoplna stlpec "rodne cislo poistenca"
+   if ( $hlavicka->znizp != 0 )
+   {
+
 $pdf->Cell(8,5,"$hlavicka->pdni_zpn","$rmc",0,"C");
 $pdf->Cell(13,5,"$hlavicka->zcel_zpn","$rmc",0,"R");
 $pdf->Cell(12,5,"$hlavicka->zcel_odp","$rmc",0,"R");
@@ -848,7 +855,7 @@ $pdf->Cell(13,5,"$hlavicka->zzam_np","$rmc",0,"R");
 $pdf->Cell(12,5,"$fir_zpn","$rmc",0,"C");$pdf->Cell(13,5,"$zam_zpn","$rmc",0,"C");
 $pdf->Cell(13,5,"$hlavicka->ofir_np","$rmc",0,"C");$pdf->Cell(12,5,"$hlavicka->ozam_np","$rmc",0,"C");
 $pdf->Cell(13,5,"$hlavicka->ofir_rf","$rmc",1,"R");
-//}
+   }
   }
 $ip = $ip + 1;
     }
@@ -1174,8 +1181,9 @@ $pdf->Cell(186,5," ","$rmc1",0,"L");$pdf->Cell(5,5,"$akyvyk","$rmc",1,"C");
 
 //za obdobie
 $pdf->Cell(190,1," ","$rmc1",1,"L");
-$obdobie=$kli_vume*10000;
-if ( $obdobie < 102009 ) $obdobie= "0".$obdobie;
+$obdobiem=$kli_vmes;
+if ( $obdobiem < 10 ) $obdobiem= "0".$obdobiem;
+$obdobie=$kli_vrok.$obdobiem;
 $pdf->Cell(16,6," ","$rmc1",0,"L");$pdf->Cell(70,6,"$obdobie","$rmc",0,"L");
 
 //den vyplaty
@@ -1189,7 +1197,9 @@ $pdf->Cell(42,5," ","$rmc1",0,"L");$pdf->Cell(10,6,"$fir_mzdx06","$rmc",1,"L");
 //nazov a forma
 $pdf->Cell(190,15," ","$rmc1",1,"L");
 $pdf->Cell(25,6," ","$rmc1",0,"L");$pdf->Cell(117,5,"$fir_fnaz","$rmc",0,"L");
-$pdf->Cell(15,6," ","$rmc1",0,"L");$pdf->Cell(34,5,"$fir_uctt02","$rmc",1,"L");
+$pravnaforma="PO";
+if( $fir_uctt03 == 999 ) { $pravnaforma="FO"; }
+$pdf->Cell(15,6," ","$rmc1",0,"L");$pdf->Cell(34,5,"$pravnaforma","$rmc",1,"L");
 //rodne
 $pdf->Cell(190,11," ","$rmc1",1,"L");
 $A=substr($fordc,0,1);
@@ -1257,46 +1267,48 @@ $pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(5,6,"$B","$rmc",0,"C");$pdf->Cell(5
 $pdf->Cell(5,6,"$D","$rmc",0,"C");$pdf->Cell(5,6,"$E","$rmc",0,"C");
 
 //stat
-$stat="SR";
-//ak FO
-if ( $fir_uctt03 == 999 ) //dopyt, má tu zmysel, ak áno tak poprosím pre všetky zp na jednom mieste ošetri
-{
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
-" WHERE oc = 9999 ORDER BY oc";
- 
-$fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
- 
-$stat = $fir_riadok->xstat;
-}
-//ak PO
-if ( $fir_uctt03 != 999 )
-{
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_po ";
- 
-$fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
- 
-$stat = $fir_riadok->xstat;
-}
+$stat="";
 $pdf->Cell(9,5," ","$rmc1",0,"R");$pdf->Cell(46,6,"$stat","$rmc",1,"L");
 
 //celkovy pocet poistenych vo vsetkych ZP
-//dopyt u vszp bol dlhsi zapis
 $pocetpoistenychcelkom=0;
 $sqldokx = "SELECT * FROM F$kli_vxcf"."_mzdzalkun WHERE ume = $kli_vume AND zdrv > 0 AND zpnie = 0 ";
 $sqlx = mysql_query("$sqldokx");
 $pocetpoistenychcelkom=1*mysql_num_rows($sqlx);
 if ( $pocetpoistenychcelkom == 0 ) { $pocetpoistenychcelkom=$hlavicka->pzam_celk; }
 
+$poistenychvzp=$hlavicka->pzam_celk;
+$platia=$hlavicka->pzam_zp;
+$platiazpn=$hlavicka->pzam_zpn;
+if ( $agrostav >= 0 )
+{ 
+$sqlttxx = "SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE konx = 0 AND xdrv = $cislo_zdrv ORDER BY konx ";
+$sqlxx = mysql_query("$sqlttxx");
+$polxx = mysql_num_rows($sqlxx);
+
+$poistenychvzp=$polxx;
+
+$sqlttxx = "SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE konx = 0 AND xdrv = $cislo_zdrv AND znizp = 0 AND ( ozam_zp > 0 OR ofir_zp > 0 ) ORDER BY konx ";
+$sqlxx = mysql_query("$sqlttxx");
+$polxx = mysql_num_rows($sqlxx);
+
+$platia=$polxx;
+
+$sqlttxx = "SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE konx = 0 AND xdrv = $cislo_zdrv AND znizp > 0 AND ( ozam_np > 0 OR ofir_np > 0 ) ORDER BY konx ";
+$sqlxx = mysql_query("$sqlttxx");
+$polxx = mysql_num_rows($sqlxx);
+
+$platiazpn=$polxx;
+}
+
 //PREDDAVKY
 //riadky 1 a 1a
 $pdf->Cell(190,8," ","$rmc1",1,"L");
-$pdf->Cell(141,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$hlavicka->pzam_celk","$rmc",1,"R");
+$pdf->Cell(141,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$poistenychvzp","$rmc",1,"R");
 $pdf->Cell(141,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$pocetpoistenychcelkom","$rmc",1,"R");
 //riadky 2 az 8
 $pdf->Cell(190,5," ","$rmc1",1,"L");
-$pdf->Cell(141,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$hlavicka->pzam_zp","$rmc",1,"R");
+$pdf->Cell(141,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$platia","$rmc",1,"R");
 $pdf->Cell(141,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$hlavicka->pdni_zp","$rmc",1,"R");
 $pdf->Cell(141,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$hlavicka->zcel_zp","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,5,"$hlavicka->zzam_zp","$rmc",1,"R");
@@ -1305,7 +1317,7 @@ $pdf->Cell(141,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$hlavicka->ozam_zp","$rmc",
 $pdf->Cell(141,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$hlavicka->ofir_gf","$rmc",1,"R");
 //riadky 9 az 16
 $pdf->Cell(190,5," ","$rmc1",1,"L");
-$pdf->Cell(141,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$hlavicka->pzam_zpn","$rmc",1,"R");
+$pdf->Cell(141,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$platiazpn","$rmc",1,"R");
 $pdf->Cell(141,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$hlavicka->pdni_zpn","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,5,"$hlavicka->zcel_zpn","$rmc",1,"R");
 $pdf->Cell(141,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$hlavicka->zzam_np","$rmc",1,"R");
