@@ -778,23 +778,6 @@ $pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(25,4,"$fir_mzdt04","$rmc",0,"L");
 $pdf->Cell(7,4," ","$rmc1",0,"L");$pdf->Cell(26,4,"$fir_ffax","$rmc",0,"L");
 $pdf->Cell(9,4," ","$rmc1",0,"L");$pdf->Cell(40,4,"$fir_fem1","$rmc",1,"L");
 
-//datum
-//dopyt, nie je rozbehané
-$pdf->SetY(271);
-$datum="";
-$A=substr($datum,0,1);
-$B=substr($datum,1,1);
-$C=substr($datum,2,1);
-$D=substr($datum,3,1);
-$E=substr($datum,4,1);
-$F=substr($datum,5,1);
-$G=substr($datum,6,1);
-$H=substr($datum,7,1);
-$pdf->Cell(26,5," ","$rmc1",0,"L");
-$pdf->Cell(4,5,"$A","$rmc",0,"C");$pdf->Cell(4,5,"$B","$rmc",0,"C");$pdf->Cell(3,5,"$C","$rmc",0,"C");
-$pdf->Cell(4,5,"$D","$rmc",0,"C");$pdf->Cell(4,5,"$E","$rmc",0,"C");$pdf->Cell(3,5,"$F","$rmc",0,"C");
-$pdf->Cell(4,5,"$G","$rmc",0,"C");$pdf->Cell(3,5,"$H","$rmc",1,"C");
-
 //ZAMESTNANCI
 //vytlac prilohu
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid".
@@ -809,7 +792,6 @@ $sqldok = mysql_query("$sqltt");
   if (@$zaznam=mysql_data_seek($sqldok,$ip))
   {
   $hlavicka=mysql_fetch_object($sqldok);
-
 $porcislo=1;
 if ( $ip == 0 ) $pdf->SetY(226);
 if ( $ip == 1 ) $pdf->SetY(232);
@@ -825,13 +807,10 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdtextmzd WHERE invt = $hlav
   $cislozp=1*$riaddok->cszp;
   }
 if ( $cislozp > 0 ) { $cislopoistenca=$cislozp; }
+$pdf->Cell(21,5," ","$rmc1",0,"R");$pdf->Cell(20,5,"$cislopoistenca","$rmc",0,"C");
 
-$pdf->Cell(21,5," ","$rmc1",0,"R");
-$pdf->Cell(20,5,"$cislopoistenca","$rmc",0,"C");
-
-   if ( $hlavicka->znizp == 0 )
-   {
-
+if ( $hlavicka->znizp == 0 )
+{
 $pdf->Cell(8,5,"$hlavicka->pdni_zp","$rmc",0,"C");
 $pdf->Cell(13,5,"$hlavicka->zcel_zp","$rmc",0,"R");
 $pdf->Cell(12,5,"$hlavicka->zcel_odp","$rmc",0,"R");
@@ -839,13 +818,11 @@ $pdf->Cell(13,5,"$hlavicka->zcel_inp","$rmc",0,"R");
 $pdf->Cell(13,5,"$hlavicka->zodp_zp","$rmc",0,"R");
 $pdf->Cell(13,5,"$hlavicka->zzam_zp","$rmc",0,"R");
 $pdf->Cell(12,5,"$fir_zp","$rmc",0,"C");$pdf->Cell(13,5,"$zam_zp","$rmc",0,"C");
-$pdf->Cell(13,5,"$hlavicka->ofir_zp","$rmc",0,"C");$pdf->Cell(12,5,"$hlavicka->ozam_zp","$rmc",0,"C");
+$pdf->Cell(13,5,"$hlavicka->ofir_zp","$rmc",0,"R");$pdf->Cell(12,5,"$hlavicka->ozam_zp","$rmc",0,"R");
 $pdf->Cell(13,5,"$hlavicka->ofir_gf","$rmc",1,"R");
-   }
-
-   if ( $hlavicka->znizp != 0 )
-   {
-
+}
+if ( $hlavicka->znizp != 0 )
+{
 $pdf->Cell(8,5,"$hlavicka->pdni_zpn","$rmc",0,"C");
 $pdf->Cell(13,5,"$hlavicka->zcel_zpn","$rmc",0,"R");
 $pdf->Cell(12,5,"$hlavicka->zcel_odp","$rmc",0,"R");
@@ -855,7 +832,7 @@ $pdf->Cell(13,5,"$hlavicka->zzam_np","$rmc",0,"R");
 $pdf->Cell(12,5,"$fir_zpn","$rmc",0,"C");$pdf->Cell(13,5,"$zam_zpn","$rmc",0,"C");
 $pdf->Cell(13,5,"$hlavicka->ofir_np","$rmc",0,"C");$pdf->Cell(12,5,"$hlavicka->ozam_np","$rmc",0,"C");
 $pdf->Cell(13,5,"$hlavicka->ofir_rf","$rmc",1,"R");
-   }
+}
   }
 $ip = $ip + 1;
     }
@@ -1335,15 +1312,8 @@ $pdf->Cell(8,4," ","$rmc1",0,"L");$pdf->Cell(30,4,"$fir_ffax","$rmc",0,"L");
 $pdf->Cell(11,4," ","$rmc1",0,"L");$pdf->Cell(45,4,"$fir_fem1","$rmc",1,"L");
 $pdf->SetFont('arial','',9);
 
-//datum
-//dopyt, nie je rozbehané
-//asi zruši, nedá sa mi to na stranu
-$pdf->SetY(270);
-$datum="01012014";
-$pdf->Cell(10,5," ","$rmc1",0,"L");$pdf->Cell(26,5,"$datum","$rmc",1,"L");
-$pdf->SetFont('arial','',8);
-
-//vytlac prilohu 2 zamestnancov
+//ZAMESTNANCI
+//vytlac prilohu
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid".
 " LEFT JOIN F$kli_vxcf"."_$mzdkun".
 " ON F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".oc=F$kli_vxcf"."_$mzdkun.oc".
@@ -1356,8 +1326,10 @@ $sqldok = mysql_query("$sqltt");
   if (@$zaznam=mysql_data_seek($sqldok,$ip))
   {
   $hlavicka=mysql_fetch_object($sqldok);
-
 $porcislo=1;
+if ( $ip == 0 ) $pdf->SetY(249);
+if ( $ip == 1 ) $pdf->SetY(254);
+
 $cislopoistenca=$hlavicka->rdc." ".$hlavicka->rdk;
 
 //ak zahranicny v dovere daj cislo do doplnujucich udajov
@@ -1369,15 +1341,10 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdtextmzd WHERE invt = $hlav
   $cislozp=1*$riaddok->cszp;
   }
 if ( $cislozp > 0 ) { $cislopoistenca=$cislozp; }
+$pdf->Cell(5,5," ","$rmc1",0,"R");$pdf->Cell(25,5,"$cislopoistenca","$rmc",0,"L");
 
-if ( $ip == 0 ) $pdf->SetY(249);
-if ( $ip == 1 ) $pdf->SetY(261);
-
-$pdf->Cell(5,5," ","$rmc1",0,"R");
-$pdf->Cell(25,5,"$cislopoistenca","$rmc",0,"L");
-
-//if ( $hlavicka->znizp == 0 )
-//{
+if ( $hlavicka->znizp == 0 )
+{
 $pdf->Cell(10,5,"$hlavicka->pdni_zp","$rmc",0,"C");
 $pdf->Cell(15,5,"$hlavicka->zcel_zp","$rmc",0,"R");
 $pdf->Cell(15,5,"$hlavicka->zcel_odp","$rmc",0,"R");
@@ -1387,11 +1354,9 @@ $pdf->Cell(15,5,"$hlavicka->zzam_zp","$rmc",0,"R");
 $pdf->Cell(15,5,"$fir_zp","$rmc",0,"C");$pdf->Cell(15,5,"$zam_zp","$rmc",0,"C");
 $pdf->Cell(15,5,"$hlavicka->ofir_zp","$rmc",0,"R");$pdf->Cell(15,5,"$hlavicka->ozam_zp","$rmc",0,"R");
 $pdf->Cell(16,5,"$hlavicka->ofir_gf","$rmc",1,"R");
-//}
-
-//if ( $hlavicka->znizp != 0 )
-//{
-//dopyt, pri tejto podmienky nedoplna stlpec "rodne cislo poistenca"
+}
+if ( $hlavicka->znizp != 0 )
+{
 $pdf->Cell(10,5,"$hlavicka->pdni_zpn","$rmc",0,"C");
 $pdf->Cell(15,5,"$hlavicka->zcel_zpn","$rmc",0,"R");
 $pdf->Cell(15,5,"$hlavicka->zcel_odp","$rmc",0,"R");
@@ -1401,14 +1366,13 @@ $pdf->Cell(15,5,"$hlavicka->zzam_np","$rmc",0,"R");
 $pdf->Cell(15,5,"$fir_zpn","$rmc",0,"C");$pdf->Cell(15,5,"$zam_zpn","$rmc",0,"C");
 $pdf->Cell(15,5,"$hlavicka->ofir_np","$rmc",0,"R");$pdf->Cell(15,5,"$hlavicka->ozam_np","$rmc",0,"R");
 $pdf->Cell(16,5,"$hlavicka->ofir_rf","$rmc",1,"R");
-//}
+}
   }
 $ip = $ip + 1;
     }
 //koniec prilohy 
      }
-//koniec dovera mesacny max2=1
-
+//koniec dovera max2=1
 }
 $i = $i + 1;
   }
