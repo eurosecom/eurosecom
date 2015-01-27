@@ -71,7 +71,7 @@ if ( $copern == 26 )
      {
 $sqtoz = "DELETE FROM F$kli_vxcf"."_mzdpotvrdenieFO WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
-$copern=10;
+$copern=20;
 $subor=1;
      }
 
@@ -595,102 +595,105 @@ $oznac = mysql_query("$sqtoz");
 
 //nastup iny ako pred 1.1.
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,1,2,'02') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-02-01' ";
+" SET r02=INSERT(r02,1,2,'02') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-02-01' ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,1,2,'03') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-03-01' ";
+" SET r02=INSERT(r02,1,2,'03') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-03-01' ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,1,2,'04') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-04-01' ";
+" SET r02=INSERT(r02,1,2,'04') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-04-01' ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,1,2,'05') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-05-01' ";
+" SET r02=INSERT(r02,1,2,'05') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-05-01' ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,1,2,'06') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-06-01' ";
+" SET r02=INSERT(r02,1,2,'06') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-06-01' ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,1,2,'07') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-07-01' ";
+" SET r02=INSERT(r02,1,2,'07') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-07-01' ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,1,2,'08') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-08-01' ";
+" SET r02=INSERT(r02,1,2,'08') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-08-01' ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,1,2,'09') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-09-01' ";
+" SET r02=INSERT(r02,1,2,'09') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-09-01' ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,1,2,'10') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-10-01' ";
+" SET r02=INSERT(r02,1,2,'10') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-10-01' ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,1,2,'11') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-11-01' ";
+" SET r02=INSERT(r02,1,2,'11') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-11-01' ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,1,2,'12') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-12-01' ";
+" SET r02=INSERT(r02,1,2,'12') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-12-01' ";
 $oznac = mysql_query("$sqtoz");
+
 
 //vystup je v roku
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,4,2,'01') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-01-01' AND dav != '0000-00-00'  ";
+" SET r02=INSERT(r02,4,2,'01') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-01-01' AND dav != '0000-00-00'  ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,4,2,'02') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-02-01' AND dav != '0000-00-00'  ";
+" SET r02=INSERT(r02,4,2,'02') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-02-01' AND dav != '0000-00-00'  ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,4,2,'03') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-03-01' AND dav != '0000-00-00'  ";
+" SET r02=INSERT(r02,4,2,'03') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-03-01' AND dav != '0000-00-00'  ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,4,2,'04') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-04-01' AND dav != '0000-00-00'  ";
+" SET r02=INSERT(r02,4,2,'04') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-04-01' AND dav != '0000-00-00'  ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,4,2,'05') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-05-01' AND dav != '0000-00-00'  ";
+" SET r02=INSERT(r02,4,2,'05') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-05-01' AND dav != '0000-00-00'  ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,4,2,'06') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-06-01' AND dav != '0000-00-00'  ";
+" SET r02=INSERT(r02,4,2,'06') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-06-01' AND dav != '0000-00-00'  ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,4,2,'07') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-07-01' AND dav != '0000-00-00'  ";
+" SET r02=INSERT(r02,4,2,'07') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-07-01' AND dav != '0000-00-00'  ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,4,2,'08') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-08-01' AND dav != '0000-00-00'  ";
+" SET r02=INSERT(r02,4,2,'08') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-08-01' AND dav != '0000-00-00'  ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,4,2,'09') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-09-01' AND dav != '0000-00-00'  ";
+" SET r02=INSERT(r02,4,2,'09') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-09-01' AND dav != '0000-00-00'  ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,4,2,'10') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-10-01' AND dav != '0000-00-00'  ";
+" SET r02=INSERT(r02,4,2,'10') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-10-01' AND dav != '0000-00-00'  ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,4,2,'11') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-11-01' AND dav != '0000-00-00'  ";
+" SET r02=INSERT(r02,4,2,'11') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-11-01' AND dav != '0000-00-00'  ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET r02=INSERT(r06mes,4,2,'12') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-12-01' AND dav != '0000-00-00'  ";
+" SET r02=INSERT(r02,4,2,'12') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-12-01' AND dav != '0000-00-00'  ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid".
 " SET r06mes=r02 WHERE oc >= 0";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
+
+//exit;
 
 //deti
 $mdt1=""; $rcdt1=''; $msdt1="";
@@ -746,19 +749,19 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvypl$kli_uzid ADD r07rod1 VARCHAR(15) not null AFTER r07sum6";
 $vysledek = mysql_query("$sql");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det1='$mdt1', r07rod1='$rcdt1', r07mes1='01-12' WHERE oc >= 0";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det1='$mdt1', r07rod1='$rcdt1', r07mes1=r02 WHERE oc >= 0";
 if ( $mdt1 != '' ) $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det2='$mdt2', r07rod2='$rcdt2', r07mes2='01-12' WHERE oc >= 0";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det2='$mdt2', r07rod2='$rcdt2', r07mes2=r02 WHERE oc >= 0";
 if ( $mdt2 != '' ) $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det3='$mdt3', r07rod3='$rcdt3', r07mes3='01-12' WHERE oc >= 0";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det3='$mdt3', r07rod3='$rcdt3', r07mes3=r02 WHERE oc >= 0";
 if ( $mdt3 != '' ) $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det4='$mdt4', r07rod4='$rcdt4', r07mes4='01-12' WHERE oc >= 0";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det4='$mdt4', r07rod4='$rcdt4', r07mes4=r02 WHERE oc >= 0";
 if ( $mdt4 != '' ) $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det5='$mdt5', r07rod5='$rcdt5', r07mes5='01-12' WHERE oc >= 0";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det5='$mdt5', r07rod5='$rcdt5', r07mes5=r02 WHERE oc >= 0";
 if ( $mdt5 != '' ) $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det6='$mdt6', r07rod6='$rcdt6', r07mes6='01-12' WHERE oc >= 0";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det6='$mdt6', r07rod6='$rcdt6', r07mes6=r02 WHERE oc >= 0";
 if ( $mdt6 != '' ) $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det7='$mdt7', r07rod7='$rcdt7', r07mes7='01-12' WHERE oc >= 0";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET r07det7='$mdt7', r07rod7='$rcdt7', r07mes7=r02 WHERE oc >= 0";
 if ( $mdt7 != '' ) $oznac = mysql_query("$sqtoz");
 
 //uloz do mzdpotvrdenieFO
@@ -796,6 +799,120 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO SET m13dh=0 WHERE r13 = 0 AND oc 
 $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO SET m13pp=0 WHERE r01 = r13 AND oc = $cislo_oc ";
 $dsql = mysql_query("$dsqlt");
+
+
+//ceckboxy pp a dh
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO ".
+" SET m01pp=1,m02pp=1,m03pp=1,m04pp=1,m05pp=1,m06pp=1,m07pp=1,m08pp=1,m09pp=1,m10pp=1,m11pp=1,m12pp=1,m13pp=0 ";
+$oznac = mysql_query("$sqtoz");
+
+//nastup iny ako pred 1.1.
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m01pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-02-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m02pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-03-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m03pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-04-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m04pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-05-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m05pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-06-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m06pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-07-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m07pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-08-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m08pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-09-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m09pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-10-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m10pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-11-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m11pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-12-01' ";
+$oznac = mysql_query("$sqtoz");
+
+//vystup v roku
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m02pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dav > '0000-00-00' AND  dav < '".$kli_vrok."-02-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m03pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dav > '0000-00-00' AND  dav < '".$kli_vrok."-03-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m04pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dav > '0000-00-00' AND  dav < '".$kli_vrok."-04-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m05pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dav > '0000-00-00' AND  dav < '".$kli_vrok."-05-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m06pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dav > '0000-00-00' AND  dav < '".$kli_vrok."-06-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m07pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dav > '0000-00-00' AND  dav < '".$kli_vrok."-07-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m08pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dav > '0000-00-00' AND  dav < '".$kli_vrok."-08-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m09pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dav > '0000-00-00' AND  dav < '".$kli_vrok."-09-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m10pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dav > '0000-00-00' AND  dav < '".$kli_vrok."-10-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m11pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dav > '0000-00-00' AND  dav < '".$kli_vrok."-11-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m12pp=0 WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dav > '0000-00-00' AND  dav < '".$kli_vrok."-12-01' ";
+$oznac = mysql_query("$sqtoz");
+
+//ak nastupil pred 1.1. a nevystupil
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO,F$kli_vxcf"."_mzdkun".
+" SET m01pp=0,m02pp=0,m03pp=0,m04pp=0,m05pp=0,m06pp=0,m07pp=0,m08pp=0,m09pp=0,m10pp=0,m11pp=0,m12pp=0,m13pp=1 ".
+" WHERE F$kli_vxcf"."_mzdpotvrdenieFO.oc=F$kli_vxcf"."_mzdkun.oc AND dav = '0000-00-00' AND dan <= '".$kli_vrok."-01-01' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO ".
+" SET m01dh=m01pp,m02dh=m02pp,m03dh=m03pp,m04dh=m04pp,m05dh=m05pp,m06dh=m06pp,m07dh=m07pp,m08dh=m08pp,m09dh=m09pp,m10dh=m10pp,m11dh=m11pp,m12dh=m12pp,m13dh=m13pp ".
+" WHERE r13 != 0 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO ".
+" SET m01pp=0,m02pp=0,m03pp=0,m04pp=0,m05pp=0,m06pp=0,m07pp=0,m08pp=0,m09pp=0,m10pp=0,m11pp=0,m12pp=0,m13pp=0 ".
+" WHERE r13 = r01 AND r13 > 0 ";
+$oznac = mysql_query("$sqtoz");
+
+
 }
 //koniec pracovneho suboru pre potvrdenie 
 
