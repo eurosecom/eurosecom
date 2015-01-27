@@ -828,6 +828,11 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
   $cicz=$riaddok->cicz;
   }
 
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO".
+" SET r03a=r09+r03b+r04c  WHERE oc = $cislo_oc";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
 //vypocitaj r05
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO".
 " SET r04=r01-r03a  WHERE r01 > 0 AND oc = $cislo_oc";
