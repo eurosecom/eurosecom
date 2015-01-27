@@ -1234,8 +1234,7 @@ $mzc = 1*$fir_riadok->mzc;
 mysql_free_result($fir_vysledok);
 
 //priezvisko,meno,titul FO a nazov,forma PO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob". //dopyt, ošetri nie je dobre, má bra z ufir_dalsie
-" WHERE oc = 9999 ORDER BY oc";
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 $dmeno = $fir_riadok->dmeno;
