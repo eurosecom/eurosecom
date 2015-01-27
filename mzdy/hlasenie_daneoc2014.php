@@ -401,8 +401,16 @@ a.addzam-btn {
   font-weight: bold;
   text-align: center;
 }
+span.text-echo {
+  font-size: 18px;
+  letter-spacing: 13px;
+}
+div.input-echo {
+  position: absolute;
+  font-size: 18px;
+  background-color: #fff;
+}
 </style>
-
 <script language="JavaScript" src="../js/cookies.js"></script>
 <script type="text/javascript">
 //sirka a vyska okna
@@ -541,7 +549,7 @@ if ( $copern != 2 AND $copern != 102 )
    <a href="#" onclick="rozninewoc();" title="Pridaù zamestnanca do prÌlohy" class="addzam-btn">Pridaù os.Ë.</a>
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="PouËenie na vyplnenie" class="btn-form-tool">
-    <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacRocHlasenie2013priloha();" title="Zobraziù IV. a V.Ëasù Hl·senia v PDF" class="btn-form-tool">
+    <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacRocHlasenie2014priloha();" title="Zobraziù IV. a V.Ëasù Hl·senia v PDF" class="btn-form-tool">
    </div>
   </td>
  </tr>
@@ -560,12 +568,12 @@ if ( $copern != 2 AND $copern != 102 )
 <div class="navbar">
 <?php
 $clas3="active";
-$source="../mzdy/hlasenie_dane2013.php?drupoh=1&page=1&subor=0";
+$source="../mzdy/hlasenie_dane2014.php?drupoh=1&page=1&subor=0";
 ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
  <a href="#" onclick="window.open('../mzdy/hlasenie_daneoc2014.php?cislo_oc=9999&copern=101&drupoh=1&fmzdy=63&page=1&subor=0', '_self');" class="<?php echo $clas3; ?> toleft">prÌloha</a>
- <a href="#" onclick="window.open('../mzdy/hlasenie_dane2013.php?h_drp=&h_dap=&copern=10&drupoh=2&page=1&subor=0', '_blank');" class="<?php echo $clas3; ?> toright">prÌloha</a>
+ <a href="#" onclick="window.open('../mzdy/hlasenie_dane2014.php?h_drp=&h_dap=&copern=10&drupoh=2&page=1&subor=0', '_blank');" class="<?php echo $clas3; ?> toright">prÌloha</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
  <h6 class="toright">TlaËiù:</h6>
@@ -687,7 +695,7 @@ if ( $copern == 102 )
 <?php
 $alertuloz="!!! Zmeny boli uloûenÈ !!!";
 $akedisplay="none";
-if ( $ulozenezmeny ==  1 ) { $akedisplay="display"; }
+if ( $ulozenezmeny == 1 ) { $akedisplay="display"; }
 ?>
  <div id="alertdiv" class="alert-pocitam" style="display:<?php echo $akedisplay; ?>;"><?php echo "$alertuloz";?></div>
 
@@ -695,8 +703,9 @@ if ( $ulozenezmeny ==  1 ) { $akedisplay="display"; }
 //cast IV. nevykonal RZ
 if ( $tz1 != 1 ) {
 ?>
-<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str3.jpg" alt="III.Ëasù Hl·senia o vy˙ËtovanÌ dane pre rok 2013, 230kB" class="form-background">
-<input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo $fir_fdic; ?>" disabled="disabled" class="nofill" style="width:220px; top:69px; left:453px;"/>
+<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str3.jpg"
+     alt="III.Ëasù Hl·senia o vy˙ËtovanÌ dane pre rok 2014, 230kB" class="form-background">
+<span class="text-echo" style="top:75px; left:457px;"><?php echo $fir_fdic; ?></span>
 <select size="1" name="tz1" id="tz1" class="btn-rzstav" style="top:142px; left:557px;">
  <option value="0">&nbsp;Nevykonal&nbsp;&nbsp;</option>
  <option value="1">&nbsp;Vykonal</option>
@@ -704,20 +713,22 @@ if ( $tz1 != 1 ) {
 <div class="leg-osc" style="top:174px;" title="OsobnÈ ËÌslo"><?php echo $oc; ?></div>
 
 <!-- riadok 1 -->
-<input type="text" name="rodnec" id="rodnec" value="<?php echo $rodnec; ?>" disabled="disabled" class="nofill" style="width:128px; top:182px; left:195px;"/>
-<input type="text" name="rodnek" id="rodnek" value="<?php echo $rodnek; ?>" disabled="disabled" class="nofill" style="width:81px; top:182px; left:357px;"/>
-<input type="text" name="narodeny" id="narodeny" value="<?php echo $narodeny; ?>" disabled="disabled" class="nofill" style="width:197px; top:221px; left:195px;"/>
- <a href="#" onclick="upravRZ();" title="Upraviù roËnÈ z˙Ëtovanie zamestnanca" class="btn-rzuprav" style="top:221px; left:433px;">Upraviù RZ</a>
+<div class="input-echo" style="width:128px; top:183px; left:196px;"><?php echo $rodnec; ?></div>
+<div class="input-echo" style="width:81px; top:183px; left:358px;"><?php echo $rodnek; ?></div>
+<div class="input-echo" style="width:197px; top:222px; left:196px;"><?php echo $narodeny; ?></div>
+<a href="#" onclick="upravRZ();" title="Upraviù roËnÈ z˙Ëtovanie zamestnanca"
+   class="btn-rzuprav" style="top:221px; left:433px;">Upraviù RZ</a>
 <!-- riadok 2 -->
- <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool" style="top:261px; left:150px;">
-<input type="text" name="prie" id="prie" value="<?php echo $prie; ?>" disabled="disabled" class="nofill" style="width:336px; top:259px; left:195px;"/>
-<input type="text" name="meno" id="meno" value="<?php echo $meno; ?>" disabled="disabled" class="nofill" style="width:336px; top:298px; left:195px;"/>
-<input type="text" name="uli" id="uli" value="<?php echo $uli; ?>" disabled="disabled" class="nofill" style="width:336px; top:338px; left:195px;"/>
-<input type="text" name="cdm" id="cdm" value="<?php echo $cdm; ?>" disabled="disabled" class="nofill" style="width:174px; top:376px; left:195px;"/>
-<input type="text" name="psc" id="psc" value="<?php echo $psc; ?>" disabled="disabled" class="nofill" style="width:105px; top:376px; left:426px;"/>
-<input type="text" name="mes" id="mes" value="<?php echo $mes; ?>" disabled="disabled" class="nofill" style="width:336px; top:415px; left:195px;"/>
-<input type="text" name="zstat" id="zstat" value="<?php echo $zstat; ?>" disabled="disabled" class="nofill" style="width:243px; top:454px; left:195px;"/>
-<input type="text" name="zstak" id="zstak" value="<?php echo $zstak; ?>" disabled="disabled" class="nofill" style="width:60px; top:454px; left:471px;"/>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();"
+     title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool" style="top:261px; left:150px;">
+<div class="input-echo" style="width:336px; top:260px; left:196px;"><?php echo $prie; ?></div>
+<div class="input-echo" style="width:336px; top:300px; left:196px;"><?php echo $meno; ?></div>
+<div class="input-echo" style="width:336px; top:339px; left:196px;"><?php echo $uli; ?></div>
+<div class="input-echo" style="width:174px; top:378px; left:196px;"><?php echo $cdm; ?></div>
+<div class="input-echo" style="width:105px; top:378px; left:426px;"><?php echo $psc; ?></div>
+<div class="input-echo" style="width:336px; top:416px; left:196px;"><?php echo $mes; ?></div>
+<div class="input-echo" style="width:243px; top:455px; left:196px;"><?php echo $zstat; ?></div>
+<div class="input-echo" style="width:60px; top:455px; left:471px;"><?php echo $zstak; ?></div>
 <!-- riadok 3 -->
 <input type="text" name="r01a" id="r01a" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:493px; left:195px;"/>
 <input type="text" name="doho" id="doho" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:531px; left:195px;"/>
@@ -761,7 +772,6 @@ if ( $tz1 != 1 ) {
 
 <input type="hidden" name="prvypj" id="prvypj" value="<?php echo $prvypj;?>"/>
 <input type="hidden" name="dds2nc" id="dds2nc" value="<?php echo $dds2nc;?>"/>
-
 <?php            } ?>
 
 
@@ -769,58 +779,60 @@ if ( $tz1 != 1 ) {
 //cast V. vykonal RZ
 if ( $tz1 == 1 ) {
 ?>
-<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str4.jpg" alt="IV.Ëasù Hl·senia o vy˙ËtovanÌ dane pre rok 2013, 230kB" class="form-background">
-<input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo $fir_fdic;?>" disabled="disabled" class="nofill" style="width:220px; top:69px; left:453px;"/>
+<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str4.jpg"
+     alt="IV.Ëasù Hl·senia o vy˙ËtovanÌ dane pre rok 2014, 230kB" class="form-background">
+<span class="text-echo" style="top:75px; left:457px;"><?php echo $fir_fdic; ?></span>
 <select size="1" name="tz1" id="tz1" class="btn-rzstav" style="top:126px; left:683px;">
  <option value="0">&nbsp;Nevykonal&nbsp;&nbsp;</option>
  <option value="1">&nbsp;Vykonal</option>
 </select>
 <div class="leg-osc" style="top:159px;" title="OsobnÈ ËÌslo"><?php echo $oc; ?></div>
+<a href="#" onclick="upravRZ();" title="Upraviù roËnÈ z˙Ëtovanie zamestnanca"
+   class="btn-rzuprav" style="top:205px; left:433px;">Upraviù RZ</a>
 
 <!-- riadok 1 -->
-<input type="text" name="rodnec" id="rodnec" value="<?php echo $rodnec; ?>" disabled="disabled" class="nofill" style="width:128px; top:166px; left:195px;"/>
-<input type="text" name="rodnek" id="rodnek" value="<?php echo $rodnek; ?>" disabled="disabled" class="nofill" style="width:81px; top:166px; left:357px;"/>
-<input type="text" name="narodeny" id="narodeny" value="<?php echo $narodeny; ?>" disabled="disabled" class="nofill" style="width:197px; top:205px; left:195px;"/>
- <a href="#" onclick="upravRZ();" title="Upraviù roËnÈ z˙Ëtovanie zamestnanca" class="btn-rzuprav" style="top:205px; left:433px;">Upraviù RZ</a>
+<div class="input-echo" style="width:128px; top:167px; left:196px;"><?php echo $rodnec; ?></div>
+<div class="input-echo" style="width:81px; top:167px; left:358px;"><?php echo $rodnek; ?></div>
+<div class="input-echo" style="width:197px; top:206px; left:196px;"><?php echo $narodeny; ?></div>
 <!-- riadok 2 -->
- <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool" style="top:246px; left:150px;">
-<input type="text" name="prie" id="prie" value="<?php echo $prie; ?>" disabled="disabled" class="nofill" style="width:336px; top:244px; left:195px;"/>
-<input type="text" name="meno" id="meno" value="<?php echo $meno; ?>" disabled="disabled" class="nofill" style="width:336px; top:282px; left:195px;"/>
-<input type="text" name="uli" id="uli" value="<?php echo $uli; ?>" disabled="disabled" class="nofill" style="width:336px; top:322px; left:195px;"/>
-<input type="text" name="cdm" id="cdm" value="<?php echo $cdm; ?>" disabled="disabled" class="nofill" style="width:174px; top:360px; left:195px;"/>
-<input type="text" name="psc" id="psc" value="<?php echo $psc; ?>" disabled="disabled" class="nofill" style="width:105px; top:360px; left:426px;"/>
-<input type="text" name="mes" id="mes" value="<?php echo $mes; ?>" disabled="disabled" class="nofill" style="width:336px; top:399px; left:195px;"/>
-<input type="text" name="zstat" id="zstat" value="<?php echo $zstat; ?>" disabled="disabled" class="nofill" style="width:243px; top:438px; left:195px;"/>
-<input type="text" name="zstak" id="zstak" value="<?php echo $zstak; ?>" disabled="disabled" class="nofill" style="width:60px; top:438px; left:471px;"/>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();"
+     title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool" style="top:246px; left:150px;">
+<div class="input-echo" style="width:336px; top:245px; left:196px;"><?php echo $prie; ?></div>
+<div class="input-echo" style="width:336px; top:284px; left:196px;"><?php echo $meno; ?></div>
+<div class="input-echo" style="width:336px; top:323px; left:196px;"><?php echo $uli; ?></div>
+<div class="input-echo" style="width:174px; top:362px; left:196px;"><?php echo $cdm; ?></div>
+<div class="input-echo" style="width:105px; top:362px; left:426px;"><?php echo $psc; ?></div>
+<div class="input-echo" style="width:336px; top:401px; left:196px;"><?php echo $mes; ?></div>
+<div class="input-echo" style="width:243px; top:440px; left:196px;"><?php echo $zstat; ?></div>
+<div class="input-echo" style="width:60px; top:440px; left:471px;"><?php echo $zstak; ?></div>
 <!-- riadok 3 -->
-<input type="text" name="r01a" id="r01a" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:477px; left:195px;"/>
-<input type="text" name="doho" id="doho" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:515px; left:195px;"/>
-<input type="text" name="prvypj" id="dprvypj" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:545px; left:195px;"/>
+<input type="text" name="r01a" id="r01a" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:477px; left:196px;"/>
+<input type="text" name="doho" id="doho" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:515px; left:196px;"/>
+<input type="text" name="prvypj" id="dprvypj" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:557px; left:196px;"/>
 <!-- riadok 4 -->
-<input type="text" name="socp" id="socp" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:555px; left:195px;"/>
-<input type="text" name="zdrp" id="zdrp" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:555px; left:374px;"/>
+<input type="text" name="socp" id="socp" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:599px; left:196px;"/>
+<input type="text" name="zdrp" id="zdrp" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:599px; left:374px;"/>
 <!-- riadok 5 -->
-<input type="text" name="nzdh" id="nzdh" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:594px; left:219px;"/>
-<img src='../obr/ikony/download_blue_icon.png' onclick="nacitajRZ();" title="NaËÌtaù ˙daje z roËnÈho z˙Ëtovania" class="btn-row-tool" style="top:596px; left:385px;">
+<input type="text" name="nzdh" id="nzdh" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:639px; left:219px;"/>
+<img src='../obr/ikony/download_blue_icon.png' onclick="nacitajRZ();"
+     title="NaËÌtaù ˙daje z roËnÈho z˙Ëtovania" class="btn-row-tool" style="top:640px; left:385px;">
 <!-- riadok 6 -->
-<input type="text" name="r01b" id="r01b" onkeyup="CiarkaNaBodku(this);" style="width:220px; top:633px; left:195px;"/>
+<input type="text" name="r01b" id="r01b" onkeyup="CiarkaNaBodku(this);" style="width:220px; top:677px; left:196px;"/>
 <!-- riadok 7 -->
-<input type="text" name="nzmh" id="nzmh" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:671px; left:219px;"/>
-<input type="text" name="tz3" id="tz3" style="width:36px; top:671px; left:500px;"/>
+<input type="text" name="nzmh" id="nzmh" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:717px; left:219px;"/>
+<input type="text" name="tz3" id="tz3" style="width:36px; top:717px; left:500px;"/>
 <!-- riadok 8 -->
-<input type="text" name="ddsnzc" id="ddsnzc" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:716px; left:219px;"/>
-
+<input type="text" name="ddsnzc" id="ddsnzc" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:760px; left:219px;"/>
 <!-- riadok 9 -->
-<input type="text" name="dds2nc" id="dds2nc" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:746px; left:219px;"/>
-
+<input type="text" name="dds2nc" id="dds2nc" onkeyup="CiarkaNaBodku(this);" style="width:127px; top:806px; left:242px;"/>
 <!-- riadok 10 -->
-<input type="text" name="ra1b" id="ra1b" onkeyup="CiarkaNaBodku(this);" style="width:127px; top:761px; left:242px;"/>
-<input type="text" name="zmpm" id="zmpm" style="width:36px; top:760px; left:500px;"/>
+<input type="text" name="ra1b" id="ra1b" onkeyup="CiarkaNaBodku(this);" style="width:127px; top:844px; left:242px;"/>
+<input type="text" name="zmpm" id="zmpm" style="width:36px; top:844px; left:500px;"/>
 <!-- riadok 11 -->
-<input type="text" name="dnbh" id="dnbh" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:800px; left:219px;"/>
-<input type="text" name="dnbm" id="dnbm" style="width:58px; top:800px; left:478px;"/>
+<input type="text" name="dnbh" id="dnbh" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:883px; left:219px;"/>
+<input type="text" name="dnbm" id="dnbm" style="width:58px; top:883px; left:478px;"/>
 <!-- riadok 12 -->
-<input type="text" name="rocz" id="rocz" onkeyup="CiarkaNaBodku(this);" style="width:266px; top:845px; left:195px;"/>
+<input type="text" name="rocz" id="rocz" onkeyup="CiarkaNaBodku(this);" style="width:266px; top:927px; left:196px;"/>
 
 <!-- inputy nepouzite v V.casti = musia byt hidden -->
 <input type="hidden" name="oc" id="oc" value="<?php echo $oc;?>"/>
