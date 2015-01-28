@@ -1352,9 +1352,9 @@ if ( $copern == 20 )
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-  function PoucVyplnenie()//dopyt, aktualizovaù
+  function PoucVyplnenie()
   {
-   window.open('../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/hlaseniedane/HLASENIEv13_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function CitajMzlist()
   { 
@@ -1388,7 +1388,7 @@ if ( $copern == 20 )
   <td class="header">Hl·senie o vy˙ËtovanÌ dane</td>
   <td>
    <div class="bar-btn-form-tool">
-    <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="PouËenie na vyplnenie" class="btn-form-tool"> <!-- dopyt, aktualizovaù pouËenie -->
+    <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="PouËenie na vyplnenie" class="btn-form-tool">
     <img src="../obr/ikony/download_blue_icon.png" onclick="CitajPrehlad();" title="NaËÌtaù ˙daje z mesaËn˝ch PREHºADOV" class="btn-form-tool">
     <img src="../obr/ikony/download_blue_icon.png" onclick="CitajMzlist();" title="NaËÌtaù ˙daje z MZDOV›CH LISTOV" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacRocHlasenie2014();" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
@@ -1438,7 +1438,7 @@ $t02=substr($rokp,3,1);
        style="width:195px; top:382px; left:691px;"/>
 
 <!-- FO -->
-<div class="input-echo" style="width:357px; top:477px; left:53px;"><?php echo $dprie; ?></div> <!-- dopyt, nie je funkËnÈ -->
+<div class="input-echo" style="width:357px; top:477px; left:53px;"><?php echo $dprie; ?></div>
 <div class="input-echo" style="width:243px; top:477px; left:433px;"><?php echo $dmeno; ?></div>
 <div class="input-echo" style="width:113px; top:477px; left:695px;"><?php echo $dtitl; ?></div>
 <div class="input-echo" style="width:66px; top:477px; left:828px;"><?php echo $dtitz; ?></div>
@@ -1464,10 +1464,10 @@ $t02=substr($rokp,3,1);
 <!-- Vyhlasujem -->
 <input type="text" name="r07bd" id="r07bd" onkeyup="CiarkaNaBodku(this);"
        style="width:196px; top:930px; left:696px;"/>
-<div class="input-echo" style="width:84px; top:973px; left:213px;"><?php echo $str4; ?></div>
-<div class="input-echo" style="width:84px; top:973px; left:339px;"><?php echo $str5; ?></div>
-<div class="input-echo" style="width:106px; top:1014px; left:190px;"><?php echo $zam4; ?></div>
-<div class="input-echo" style="width:106px; top:1014px; left:317px;"><?php echo $zam5; ?></div>
+<div class="input-echo" style="width:84px; top:973px; left:213px; text-align:right;"><?php echo $str4; ?>&nbsp;</div>
+<div class="input-echo" style="width:84px; top:973px; left:339px; text-align:right;"><?php echo $str5; ?>&nbsp;</div>
+<div class="input-echo" style="width:106px; top:1014px; left:190px; text-align:right;"><?php echo $zam4; ?>&nbsp;</div>
+<div class="input-echo" style="width:106px; top:1014px; left:317px; text-align:right;"><?php echo $zam5; ?>&nbsp;</div>
 <?php                                        } ?>
 
 
@@ -1569,7 +1569,7 @@ $hlavicka=mysql_fetch_object($sql);
 
 if ( $strana == 1 OR $strana == 9999 ) {
 $pdf->AddPage();
-$pdf->SetFont('arial','',10);
+$pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(7);
 if ( File_Exists('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_str1.jpg') AND $i == 0 )
 {
@@ -2254,7 +2254,7 @@ $pdf->Cell(6,7," ","$rmc1",0,"C");$pdf->Cell(115,7,"$text","$rmc",1,"L");
 
 //CAST I.
 //riadok 0
-$pdf->Cell(190,14," ","$rmc1",1,"L");
+$pdf->Cell(190,18," ","$rmc1",1,"L");
 $znamienko="";
 $tlachod=100*$hlavicka->r01a;
 if ( $tlachod < 0 ) { $tlachod=-1*$tlachod; $znamienko="-"; }
@@ -2763,10 +2763,10 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(6
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$I","$rmc",1,"C");
 
 //krizik medium
-$pdf->Cell(190,10," ","$rmc1",1,"L");
+$pdf->Cell(190,5," ","$rmc1",1,"L");
 $ajmedium="x";
 if ( $hlavicka->mzc == 0 ) $ajmedium=" ";
-$pdf->Cell(68,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$ajmedium","$rmc",1,"C");
+$pdf->Cell(68,3," ","$rmc1",0,"C");$pdf->Cell(3,4,"$ajmedium","$rmc",1,"C");
                                        } //koniec 2.strany
 }
 $i = $i + 1;
@@ -2798,7 +2798,7 @@ $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdrocnehlaseniedaneoc".
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 $suvprilohe4=0;
-if( $pol > 0 ) { $suvprilohe4=1; }
+if ( $pol > 0 ) { $suvprilohe4=1; }
 
 $i=0;
 $j=0;
@@ -3293,7 +3293,7 @@ $B=substr($tlachod,1,1);
 $pdf->Cell(43,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",1,"C");
 
 //r9 prispevok na sds
-$pdf->Cell(30,3," ","$rmc1",1,"L");
+$pdf->Cell(30,4," ","$rmc1",1,"L");
 $znamienko="";
 $tlachod=100*$hlavicka->ddssum;
 if ( $tlachod == 0 ) $tlachod="";
@@ -3685,6 +3685,31 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
 $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",1,"C");
 
+//r3 prijmy iny zamestnavatel
+$pdf->Cell(30,4," ","$rmc1",1,"L");
+$znamienko="";
+$tlachod=100*$hlavicka->prvypj;
+if ( $tlachod == 0 ) $tlachod="";
+$pole = explode(".", $tlachod);
+$tlachod_c = $pole[0];
+$tlachod_d = substr($pole[1],0,2);
+$tlachod_c=sprintf("% 10s",$tlachod_c);
+$A=substr($tlachod_c,0,1);
+$B=substr($tlachod_c,1,1);
+$C=substr($tlachod_c,2,1);
+$D=substr($tlachod_c,3,1);
+$E=substr($tlachod_c,4,1);
+$F=substr($tlachod_c,5,1);
+$G=substr($tlachod_c,6,1);
+$H=substr($tlachod_c,7,1);
+$I=substr($tlachod_c,8,1);
+$J=substr($tlachod_c,9,1);
+$pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$D","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",1,"C");
+
 //r4 socialne poistenie
 $pdf->Cell(30,3," ","$rmc1",1,"L");
 $znamienko="";
@@ -3802,7 +3827,7 @@ $B=substr($tlachod,1,1);
 $pdf->Cell(27,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",1,"C");
 
 //r8 nczd na SDS
-$pdf->Cell(30,3," ","$rmc1",1,"L");
+$pdf->Cell(30,4," ","$rmc1",1,"L");
 $znamienko="";
 $tlachod=100*$hlavicka->ddsnzc;
 if ( $tlachod == 0 ) $tlachod="";
@@ -3822,8 +3847,29 @@ $pdf->Cell(4,6,"$B","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5
 $pdf->Cell(4,6,"$D","$rmc",0,"C");$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
 $pdf->Cell(4,6,"$F","$rmc",1,"C");
 
-//r9 zam.premia
-$pdf->Cell(30,5," ","$rmc1",1,"L");
+//r9 nczd na DDS
+$pdf->Cell(30,4," ","$rmc1",1,"L");
+$znamienko="";
+$tlachod=100*$hlavicka->dds2nc;
+if ( $tlachod == 0 ) $tlachod="";
+//if ( $hlavicka->ra1b > 0 ) $tlachod=""; dopyt, neviem, Ëi je
+$pole = explode(".", $tlachod);
+$tlachod_c = $pole[0];
+$tlachod_d = substr($pole[1],0,2);
+$tlachod_c=sprintf("% 6s",$tlachod_c);
+$A=substr($tlachod_c,0,1);
+$B=substr($tlachod_c,1,1);
+$C=substr($tlachod_c,2,1);
+$D=substr($tlachod_c,3,1);
+$E=substr($tlachod_c,4,1);
+$F=substr($tlachod_c,5,1);
+$pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(5,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
+$pdf->Cell(4,6,"$B","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
+$pdf->Cell(4,6,"$D","$rmc",0,"C");$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");
+$pdf->Cell(4,6,"$F","$rmc",1,"C");
+
+//r10 zam.premia
+$pdf->Cell(30,3," ","$rmc1",1,"L");
 $znamienko="";
 $tlachod=100*$hlavicka->ra1b;
 if ( $tlachod == 0 ) $tlachod="";
@@ -3840,7 +3886,7 @@ $pdf->Cell($pozx,6," ","$rmc1",0,"R");$pdf->Cell(10,6," ","$rmc1",0,"C");$pdf->C
 $pdf->Cell(5,6,"$B","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(6,6," ","$rmc1",0,"C");
 $pdf->Cell(4,6,"$D","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");
 
-//r9 mesiace naroku
+//r10 mesiace naroku
 $tlachod=$hlavicka->zmpm;
 if ( $tlachod == 0 OR $hlavicka->ra1b == 0 ) $tlachod="";
 $tlachod=sprintf("% 2s",$tlachod);
@@ -3848,7 +3894,7 @@ $A=substr($tlachod,0,1);
 $B=substr($tlachod,1,1);
 $pdf->Cell(27,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",1,"C");
 
-//r10 danovy bonus
+//r11 danovy bonus
 $pdf->Cell(30,3," ","$rmc1",1,"L");
 $znamienko="";
 $tlachod=100*$hlavicka->dnbh;
@@ -3869,7 +3915,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");$pdf->Cell(1
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$D","$rmc",0,"C");$pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
 
-//r10 pocet mesiacov
+//r11 pocet mesiacov
 $tlachod=$hlavicka->dnbm;
 if ( $tlachod == 0 OR $hlavicka->dnbh == 0 ) $tlachod="";
 $tlachod=sprintf("% 3s",$tlachod);
@@ -3879,7 +3925,7 @@ $C=substr($tlachod,2,1);
 $pdf->Cell(22,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",1,"C");
 
-//r11 nedo/pre-platok RZ
+//r12 nedo/pre-platok RZ
 $pdf->Cell(30,4," ","$rmc1",1,"L");
 $znamienko="";
 $tlachod=100*$hlavicka->rocz;
@@ -4320,9 +4366,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',11);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlaseniev14_potvrdenie.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_potvrdenie.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlaseniev14_potvrdenie.jpg',0,0,210,297); //dopyt, asi sa niË nemenilo, tak nechaù v13 = preveriù
+$pdf->Image('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/hlasenie_dane/hlasenie_v14_potvrdenie.jpg',0,0,210,297);
 }
 
 //za rok
