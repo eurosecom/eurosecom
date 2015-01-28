@@ -117,7 +117,8 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnehlaseniedaneoc,F$kli_vxcf"."_mzdrocnedane
 " F$kli_vxcf"."_mzdrocnehlaseniedaneoc.zdrp=F$kli_vxcf"."_mzdrocnedane.r00c, ".
 " F$kli_vxcf"."_mzdrocnehlaseniedaneoc.socp=F$kli_vxcf"."_mzdrocnedane.r00b, ".
 " F$kli_vxcf"."_mzdrocnehlaseniedaneoc.doho=F$kli_vxcf"."_mzdrocnedane.r00d, ".
-" F$kli_vxcf"."_mzdrocnehlaseniedaneoc.r01a=F$kli_vxcf"."_mzdrocnedane.r00 ".
+" F$kli_vxcf"."_mzdrocnehlaseniedaneoc.r01a=F$kli_vxcf"."_mzdrocnedane.r00, ".
+" F$kli_vxcf"."_mzdrocnehlaseniedaneoc.prvypj=F$kli_vxcf"."_mzdrocnedane.r00z1 ".
 "WHERE F$kli_vxcf"."_mzdrocnehlaseniedaneoc.oc=F$kli_vxcf"."_mzdrocnedane.oc AND vyk = 1 AND F$kli_vxcf"."_mzdrocnehlaseniedaneoc.oc = $cislo_oc ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
