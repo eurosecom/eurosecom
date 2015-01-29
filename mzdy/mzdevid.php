@@ -428,7 +428,7 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
 if( $copern == 10 )
 {
 
-if (File_Exists ("../tmp/mzdovyLIST.$kli_uzid.pdf")) { $soubor = unlink("../tmp/mzdovyLIST.$kli_uzid.pdf"); }
+if (File_Exists ("../tmp/mzdList.$kli_uzid.pdf")) { $soubor = unlink("../tmp/mzdList.$kli_uzid.pdf"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -992,7 +992,7 @@ $j=0;
 
 
 
-$pdf->Output("../tmp/mzdovyLIST.$kli_uzid.pdf");
+$pdf->Output("../tmp/mzdList.$kli_uzid.pdf");
 
 
 ?>
@@ -1011,7 +1011,7 @@ exit;
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/mzdovyLIST.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("../tmp/mzdList.<?php echo $kli_uzid; ?>.pdf","_self");
 </script>
 
 
@@ -1093,12 +1093,18 @@ window.open('../mzdy/prehlad_dane.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&p
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+//nemoc.davky
+<?php
+$roknemd="";
+if( $kli_vrok < 2015 ) { $roknemd=2014; }
+
+?>
 
 function TlacPotvrdNem()
                 {
 var h_oc = document.forms.formp4.h_oc.value;
 
-window.open('../mzdy/potvrd_nemd.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>',
+window.open('../mzdy/potvrd_nemd<?php echo $roknemd; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -1106,7 +1112,7 @@ function UpravPotvrdNem()
                 {
 var h_oc = document.forms.formp4.h_oc.value;
 
-window.open('../mzdy/potvrd_nemd.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>',
+window.open('../mzdy/potvrd_nemd<?php echo $roknemd; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -1114,9 +1120,11 @@ function ZnovuPotvrdNem()
                 {
 var h_oc = document.forms.formp4.h_oc.value;
 
-window.open('../mzdy/potvrd_nemd.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>',
+window.open('../mzdy/potvrd_nemd<?php echo $roknemd; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
+
+//evidencny
 
 
 function TlacEvidencny()

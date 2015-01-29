@@ -133,34 +133,6 @@ $vo09 = strip_tags($_REQUEST['vo09']);
 $vo10 = strip_tags($_REQUEST['vo10']);
 $vo11 = strip_tags($_REQUEST['vo11']);
 $vo12 = strip_tags($_REQUEST['vo12']);
-
-$vm01 = strip_tags($_REQUEST['vm01']);
-$vm02 = strip_tags($_REQUEST['vm02']);
-$vm03 = strip_tags($_REQUEST['vm03']);
-$vm04 = strip_tags($_REQUEST['vm04']);
-$vm05 = strip_tags($_REQUEST['vm05']);
-$vm06 = strip_tags($_REQUEST['vm06']);
-$vm07 = strip_tags($_REQUEST['vm07']);
-$vm08 = strip_tags($_REQUEST['vm08']);
-$vm09 = strip_tags($_REQUEST['vm09']);
-$vm10 = strip_tags($_REQUEST['vm10']);
-$vm11 = strip_tags($_REQUEST['vm11']);
-$vm12 = strip_tags($_REQUEST['vm12']);
-$vmspolu = strip_tags($_REQUEST['vmspolu']);
-$vp01 = strip_tags($_REQUEST['vp01']);
-$vp02 = strip_tags($_REQUEST['vp02']);
-$vp03 = strip_tags($_REQUEST['vp03']);
-$vp04 = strip_tags($_REQUEST['vp04']);
-$vp05 = strip_tags($_REQUEST['vp05']);
-$vp06 = strip_tags($_REQUEST['vp06']);
-$vp07 = strip_tags($_REQUEST['vp07']);
-$vp08 = strip_tags($_REQUEST['vp08']);
-$vp09 = strip_tags($_REQUEST['vp09']);
-$vp10 = strip_tags($_REQUEST['vp10']);
-$vp11 = strip_tags($_REQUEST['vp11']);
-$vp12 = strip_tags($_REQUEST['vp12']);
-
-
 $vzodhad = strip_tags($_REQUEST['vzodhad']);
 $pozn = strip_tags($_REQUEST['pozn']);
 $str2 = strip_tags($_REQUEST['str2']);
@@ -192,11 +164,6 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpotvrdenienemd SET ".
 " vz07='$vz07', vz08='$vz08', vz09='$vz09', vz10='$vz10', vz11='$vz11', vz12='$vz12', vzodhad='$vzodhad', ".
 " vo01='$vo01', vo02='$vo02', vo03='$vo03', vo04='$vo04', vo05='$vo05', vo06='$vo06', ".
 " vo07='$vo07', vo08='$vo08', vo09='$vo09', vo10='$vo10', vo11='$vo11', vo12='$vo12', ".
-
-" vm01='$vm01', vm02='$vm02', vm03='$vm03', vm04='$vm04', vm05='$vm05', vm06='$vm06', ".
-" vm07='$vm07', vm08='$vm08', vm09='$vm09', vm10='$vm10', vm11='$vm11', vm12='$vm12', ".
-" vp01='$vp01', vp02='$vp02', vp03='$vp03', vp04='$vp04', vp05='$vp05', vp06='$vp06', ".
-" vp07='$vp07', vp08='$vp08', vp09='$vp09', vp10='$vp10', vp11='$vp11', vp12='$vp12', ".
 " pozn='$pozn', str2='$str2', datum='$datum_sql' ".
 " WHERE oc = $cislo_oc"; 
 //echo $uprtxt;
@@ -270,53 +237,26 @@ $sqlt = <<<mzdprc
    vo11         DECIMAL(4,0) DEFAULT 0,
    vo12         DECIMAL(4,0) DEFAULT 0,
    vzodhad      DECIMAL(10,2) DEFAULT 0,
-   vm01         DECIMAL(10,2) DEFAULT 0,
-   vm02         DECIMAL(10,2) DEFAULT 0,
-   vm03         DECIMAL(10,2) DEFAULT 0,
-   vm04         DECIMAL(10,2) DEFAULT 0,
-   vm05         DECIMAL(10,2) DEFAULT 0,
-   vm06         DECIMAL(10,2) DEFAULT 0,
-   vm07         DECIMAL(10,2) DEFAULT 0,
-   vm08         DECIMAL(10,2) DEFAULT 0,
-   vm09         DECIMAL(10,2) DEFAULT 0,
-   vm10         DECIMAL(10,2) DEFAULT 0,
-   vm11         DECIMAL(10,2) DEFAULT 0,
-   vm12         DECIMAL(10,2) DEFAULT 0,
-   vmspolu      DECIMAL(10,2) DEFAULT 0,
-   vp01         DECIMAL(4,0) DEFAULT 0,
-   vp02         DECIMAL(4,0) DEFAULT 0,
-   vp03         DECIMAL(4,0) DEFAULT 0,
-   vp04         DECIMAL(4,0) DEFAULT 0,
-   vp05         DECIMAL(4,0) DEFAULT 0,
-   vp06         DECIMAL(4,0) DEFAULT 0,
-   vp07         DECIMAL(4,0) DEFAULT 0,
-   vp08         DECIMAL(4,0) DEFAULT 0,
-   vp09         DECIMAL(4,0) DEFAULT 0,
-   vp10         DECIMAL(4,0) DEFAULT 0,
-   vp11         DECIMAL(4,0) DEFAULT 0,
-   vp12         DECIMAL(4,0) DEFAULT 0,
    konx         DECIMAL(1,0) DEFAULT 0,
    pozn         VARCHAR(80),
-   str2         TEXT,
-   datum       DATE
+   str2         TEXT
 );
 mzdprc;
 
-$sql = "SELECT vp12 FROM F$kli_vxcf"."_mzdpotvrdenienemd ";
-$sqldok = mysql_query("$sql");
-  if (!$sqldok)
-  {
-
-$sqltx = "DROP TABLE F".$kli_vxcf."_mzdpotvrdenienemd ";
-$vysledok = mysql_query("$sqltx");
-
-$vsql = "CREATE TABLE F".$kli_vxcf."_mzdpotvrdenienemd ".$sqlt;
+$vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid.$sqlt;
 $vytvor = mysql_query("$vsql");
-//echo $vsql;
-  }
-
-$vsql = "CREATE TABLE F".$kli_vxcf."_mzdprcvypl".$kli_uzid." ".$sqlt;
+$vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid.$sqlt;
 $vytvor = mysql_query("$vsql");
+$vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdpotvrdenienemd'.$sqlt;
+$vytvor = mysql_query("$vsql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenienemd ADD pozn VARCHAR(80) AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenienemd ADD str2 TEXT AFTER pozn";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenienemd ADD vzspolu DECIMAL(10,2) AFTER vz12";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenienemd ADD datum DATE NOT NULL AFTER str2";
+$vysledek = mysql_query("$sql");
 
 $jepotvrd=0;
 $sql = "SELECT * FROM F$kli_vxcf"."_mzdpotvrdenienemd WHERE oc = $cislo_oc";
@@ -338,9 +278,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "0,'','','',".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','',''".
+"1,'',''".
 " FROM F$kli_vxcf"."_mzdkun".
 " WHERE F$kli_vxcf"."_mzdkun.oc = $cislo_oc".
 "";
@@ -356,6 +294,15 @@ $minuly=1;
 $kli_mrok=$kli_vrok-1;
 $kli_vmcf=$fir_allx11;
 
+//ak robil v minulom treba prejst do 2009 a nacitat
+//ak zacalrobit v tomto nacita z 2010
+
+$sql = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_oc AND dan >= '$dan1' AND dan <= '$dan365' ";
+$sqldok = mysql_query("$sql");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $minuly=0;
+  }
 
 if ( $minuly == 0 ) { $kli_mrok=$kli_vrok; $kli_vmcf=$kli_vxcf; }
 
@@ -382,192 +329,26 @@ if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014.".
 }
 //echo $minuly;
 
-//bezny rok
-
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT oc,0,0,'0000-00-00',".
 "'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
 "0,'','','',".
 "zfir_np,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
-" FROM F$kli_vxcf"."_mzdzalsum".
-" WHERE F$kli_vxcf"."_mzdzalsum.oc = $cislo_oc AND ume = 01.$kli_vrok";
-//echo $dsqlt;
-$dsql = mysql_query("$dsqlt");
-
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,'0000-00-00',".
-"'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
-"0,'','','',".
-"0,zfir_np,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
-" FROM F$kli_vxcf"."_mzdzalsum".
-" WHERE F$kli_vxcf"."_mzdzalsum.oc = $cislo_oc AND ume = 02.$kli_vrok";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,'0000-00-00',".
-"'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
-"0,'','','',".
-"0,0,zfir_np,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
-" FROM F$kli_vxcf"."_mzdzalsum".
-" WHERE F$kli_vxcf"."_mzdzalsum.oc = $cislo_oc AND ume = 03.$kli_vrok";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,'0000-00-00',".
-"'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
-"0,'','','',".
-"0,0,0,zfir_np,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
-" FROM F$kli_vxcf"."_mzdzalsum".
-" WHERE F$kli_vxcf"."_mzdzalsum.oc = $cislo_oc AND ume = 04.$kli_vrok";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,'0000-00-00',".
-"'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
-"0,'','','',".
-"0,0,0,0,zfir_np,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
-" FROM F$kli_vxcf"."_mzdzalsum".
-" WHERE F$kli_vxcf"."_mzdzalsum.oc = $cislo_oc AND ume = 05.$kli_vrok";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,'0000-00-00',".
-"'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
-"0,'','','',".
-"0,0,0,0,0,zfir_np,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
-" FROM F$kli_vxcf"."_mzdzalsum".
-" WHERE F$kli_vxcf"."_mzdzalsum.oc = $cislo_oc AND ume = 06.$kli_vrok";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,'0000-00-00',".
-"'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
-"0,'','','',".
-"0,0,0,0,0,0,zfir_np,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
-" FROM F$kli_vxcf"."_mzdzalsum".
-" WHERE F$kli_vxcf"."_mzdzalsum.oc = $cislo_oc AND ume = 07.$kli_vrok";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,'0000-00-00',".
-"'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
-"0,'','','',".
-"0,0,0,0,0,0,0,zfir_np,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
-" FROM F$kli_vxcf"."_mzdzalsum".
-" WHERE F$kli_vxcf"."_mzdzalsum.oc = $cislo_oc AND ume = 08.$kli_vrok";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,'0000-00-00',".
-"'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
-"0,'','','',".
-"0,0,0,0,0,0,0,0,zfir_np,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
-" FROM F$kli_vxcf"."_mzdzalsum".
-" WHERE F$kli_vxcf"."_mzdzalsum.oc = $cislo_oc AND ume = 09.$kli_vrok";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,'0000-00-00',".
-"'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
-"0,'','','',".
-"0,0,0,0,0,0,0,0,0,zfir_np,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
-" FROM F$kli_vxcf"."_mzdzalsum".
-" WHERE F$kli_vxcf"."_mzdzalsum.oc = $cislo_oc AND ume = 10.$kli_vrok";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,'0000-00-00',".
-"'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
-"0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,zfir_np,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
-" FROM F$kli_vxcf"."_mzdzalsum".
-" WHERE F$kli_vxcf"."_mzdzalsum.oc = $cislo_oc AND ume = 11.$kli_vrok";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,'0000-00-00',".
-"'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
-"0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,0,zfir_np,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
-" FROM F$kli_vxcf"."_mzdzalsum".
-" WHERE F$kli_vxcf"."_mzdzalsum.oc = $cislo_oc AND ume = 12.$kli_vrok";
-$dsql = mysql_query("$dsqlt");
-
-//minuly rok
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,0,0,'0000-00-00',".
-"'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
-"0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"zfir_np,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
+"1,'',''".
 " FROM ".$databaza."F$kli_vmcf"."_mzdzalsum".
 " WHERE ".$databaza."F$kli_vmcf"."_mzdzalsum.oc = $cislo_oc AND ume = 01.$kli_mrok";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
-
+//exit;
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT oc,0,0,'0000-00-00',".
 "'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
 "0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,zfir_np,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"1,'',''".
 " FROM ".$databaza."F$kli_vmcf"."_mzdzalsum".
 " WHERE ".$databaza."F$kli_vmcf"."_mzdzalsum.oc = $cislo_oc AND ume = 02.$kli_mrok";
 $dsql = mysql_query("$dsqlt");
@@ -576,11 +357,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT oc,0,0,'0000-00-00',".
 "'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
 "0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,zfir_np,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"1,'',''".
 " FROM ".$databaza."F$kli_vmcf"."_mzdzalsum".
 " WHERE ".$databaza."F$kli_vmcf"."_mzdzalsum.oc = $cislo_oc AND ume = 03.$kli_mrok";
 $dsql = mysql_query("$dsqlt");
@@ -589,11 +368,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT oc,0,0,'0000-00-00',".
 "'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
 "0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,zfir_np,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"1,'',''".
 " FROM ".$databaza."F$kli_vmcf"."_mzdzalsum".
 " WHERE ".$databaza."F$kli_vmcf"."_mzdzalsum.oc = $cislo_oc AND ume = 04.$kli_mrok";
 $dsql = mysql_query("$dsqlt");
@@ -602,11 +379,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT oc,0,0,'0000-00-00',".
 "'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
 "0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,zfir_np,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"1,'',''".
 " FROM ".$databaza."F$kli_vmcf"."_mzdzalsum".
 " WHERE ".$databaza."F$kli_vmcf"."_mzdzalsum.oc = $cislo_oc AND ume = 05.$kli_mrok";
 $dsql = mysql_query("$dsqlt");
@@ -615,11 +390,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT oc,0,0,'0000-00-00',".
 "'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
 "0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,zfir_np,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"1,'',''".
 " FROM ".$databaza."F$kli_vmcf"."_mzdzalsum".
 " WHERE ".$databaza."F$kli_vmcf"."_mzdzalsum.oc = $cislo_oc AND ume = 06.$kli_mrok";
 $dsql = mysql_query("$dsqlt");
@@ -628,11 +401,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT oc,0,0,'0000-00-00',".
 "'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
 "0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,zfir_np,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"1,'',''".
 " FROM ".$databaza."F$kli_vmcf"."_mzdzalsum".
 " WHERE ".$databaza."F$kli_vmcf"."_mzdzalsum.oc = $cislo_oc AND ume = 07.$kli_mrok";
 $dsql = mysql_query("$dsqlt");
@@ -641,11 +412,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT oc,0,0,'0000-00-00',".
 "'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
 "0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,zfir_np,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"1,'',''".
 " FROM ".$databaza."F$kli_vmcf"."_mzdzalsum".
 " WHERE ".$databaza."F$kli_vmcf"."_mzdzalsum.oc = $cislo_oc AND ume = 08.$kli_mrok";
 $dsql = mysql_query("$dsqlt");
@@ -654,11 +423,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT oc,0,0,'0000-00-00',".
 "'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
 "0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,zfir_np,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"1,'',''".
 " FROM ".$databaza."F$kli_vmcf"."_mzdzalsum".
 " WHERE ".$databaza."F$kli_vmcf"."_mzdzalsum.oc = $cislo_oc AND ume = 09.$kli_mrok";
 $dsql = mysql_query("$dsqlt");
@@ -667,11 +434,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT oc,0,0,'0000-00-00',".
 "'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
 "0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,zfir_np,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"1,'',''".
 " FROM ".$databaza."F$kli_vmcf"."_mzdzalsum".
 " WHERE ".$databaza."F$kli_vmcf"."_mzdzalsum.oc = $cislo_oc AND ume = 10.$kli_mrok";
 $dsql = mysql_query("$dsqlt");
@@ -680,11 +445,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT oc,0,0,'0000-00-00',".
 "'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
 "0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,zfir_np,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"1,'',''".
 " FROM ".$databaza."F$kli_vmcf"."_mzdzalsum".
 " WHERE ".$databaza."F$kli_vmcf"."_mzdzalsum.oc = $cislo_oc AND ume = 11.$kli_mrok";
 $dsql = mysql_query("$dsqlt");
@@ -693,11 +456,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT oc,0,0,'0000-00-00',".
 "'0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','','0000-00-00','0000-00-00','',".
 "0,'','','',".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,zfir_np,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,".
-"1,'','','' ".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"1,'',''".
 " FROM ".$databaza."F$kli_vmcf"."_mzdzalsum".
 " WHERE ".$databaza."F$kli_vmcf"."_mzdzalsum.oc = $cislo_oc AND ume = 12.$kli_mrok";
 $dsql = mysql_query("$dsqlt");
@@ -709,14 +470,13 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "fe101,text51,text52,text53,".
 "SUM(vz01),SUM(vz02),SUM(vz03),SUM(vz04),SUM(vz05),SUM(vz06),SUM(vz07),SUM(vz08),SUM(vz09),SUM(vz10),SUM(vz11),SUM(vz12),SUM(vzspolu),".
 "vo01,vo02,vo03,vo04,vo05,vo06,vo07,vo08,vo09,vo10,vo11,vo12,SUM(vzodhad),".
-"SUM(vm01),SUM(vm02),SUM(vm03),SUM(vm04),SUM(vm05),SUM(vm06),SUM(vm07),SUM(vm08),SUM(vm09),SUM(vm10),SUM(vm11),SUM(vm12),SUM(vmspolu),".
-"vp01,vp02,vp03,vp04,vp05,vp06,vp07,vp08,vp09,vp10,vp11,vp12,".
-"2,'','','' ".
+"2,'',''".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " GROUP BY oc".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
+
 
 $sqtoz = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE konx = 1";
 $oznac = mysql_query("$sqtoz");
@@ -724,34 +484,27 @@ $oznac = mysql_query("$sqtoz");
 //nastav obdobie
 $obdrok=$kli_vrok-2000;
 $obdrom=$kli_vrok-2001;
+if( $minuly == 0 ) { $obdrom=$kli_vrok-2000; }
+if( $minuly == 1 ) { $obdrok=$kli_vrok-2001; }
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo01=$obdrok WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo02=$obdrok WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo03=$obdrok WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo04=$obdrok WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo05=$obdrok WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo06=$obdrok WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo07=$obdrok WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo08=$obdrok WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo09=$obdrok WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo10=$obdrok WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo11=$obdrok WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo12=$obdrok WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid".
+" SET vo01=$obdrom,vo02=$obdrom,vo03=$obdrom,vo04=$obdrom,vo05=$obdrom,vo06=$obdrom,vo07=$obdrom,vo08=$obdrom,".
+" vo09=$obdrom,vo10=$obdrom,vo11=$obdrom,vo12=$obdrom WHERE oc >= 0";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vp01=$obdrom WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vp02=$obdrom WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vp03=$obdrom WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vp04=$obdrom WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vp05=$obdrom WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vp06=$obdrom WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vp07=$obdrom WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vp08=$obdrom WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vp09=$obdrom WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vp10=$obdrom WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vp11=$obdrom WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vp12=$obdrom WHERE oc >= 0 "; $oznac = mysql_query("$sqtoz");
-
-//exit;
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo01=$obdrok WHERE oc >= 0 AND vz01 > 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo02=$obdrok WHERE oc >= 0 AND vz02 > 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo03=$obdrok WHERE oc >= 0 AND vz03 > 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo04=$obdrok WHERE oc >= 0 AND vz04 > 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo05=$obdrok WHERE oc >= 0 AND vz05 > 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo06=$obdrok WHERE oc >= 0 AND vz06 > 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo07=$obdrok WHERE oc >= 0 AND vz07 > 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo08=$obdrok WHERE oc >= 0 AND vz08 > 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo09=$obdrok WHERE oc >= 0 AND vz09 > 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo10=$obdrok WHERE oc >= 0 AND vz10 > 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo11=$obdrok WHERE oc >= 0 AND vz11 > 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo12=$obdrok WHERE oc >= 0 AND vz12 > 0"; $oznac = mysql_query("$sqtoz");
 
 //nem.davky,nepl.volno,absencia napocitaj do preod,predo,predv1 az 4
 
@@ -842,6 +595,19 @@ $vysledok = mysql_query("$sqlt");
 
 //ak existuje v mzdpotvrdenienemd uz zaznam precitane z neho udaje v copern=26 hore dopln do noveho
 
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo01=$obdrom, vz01=$vz01_08 WHERE oc >= 0 AND vz01 = 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo02=$obdrom, vz02=$vz02_08 WHERE oc >= 0 AND vz02 = 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo03=$obdrom, vz03=$vz03_08 WHERE oc >= 0 AND vz03 = 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo04=$obdrom, vz04=$vz04_08 WHERE oc >= 0 AND vz04 = 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo05=$obdrom, vz05=$vz05_08 WHERE oc >= 0 AND vz05 = 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo06=$obdrom, vz06=$vz06_08 WHERE oc >= 0 AND vz06 = 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo07=$obdrom, vz07=$vz07_08 WHERE oc >= 0 AND vz07 = 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo08=$obdrom, vz08=$vz08_08 WHERE oc >= 0 AND vz08 = 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo09=$obdrom, vz09=$vz09_08 WHERE oc >= 0 AND vz09 = 0"; $oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo10=$obdrom, vz10=$vz10_08 WHERE oc >= 0 AND vz10 = 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo11=$obdrom, vz11=$vz11_08 WHERE oc >= 0 AND vz11 = 0"; $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET vo12=$obdrom, vz12=$vz12_08 WHERE oc >= 0 AND vz12 = 0"; $oznac = mysql_query("$sqtoz");
 
 if ( $uzjezaznam == 1 )
 {
@@ -866,8 +632,6 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdpotvrdenienemd".
 "fe101,text51,text52,text53,".
 "SUM(vz01),SUM(vz02),SUM(vz03),SUM(vz04),SUM(vz05),SUM(vz06),SUM(vz07),SUM(vz08),SUM(vz09),SUM(vz10),SUM(vz11),SUM(vz12),SUM(vzspolu),".
 "vo01,vo02,vo03,vo04,vo05,vo06,vo07,vo08,vo09,vo10,vo11,vo12,SUM(vzodhad),".
-"SUM(vm01),SUM(vm02),SUM(vm03),SUM(vm04),SUM(vm05),SUM(vm06),SUM(vm07),SUM(vm08),SUM(vm09),SUM(vm10),SUM(vm11),SUM(vm12),SUM(vmspolu),".
-"vp01,vp02,vp03,vp04,vp05,vp06,vp07,vp08,vp09,vp10,vp11,vp12,".
 "2,pozn,str2,'$datdnes'".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " GROUP BY oc".
@@ -960,33 +724,6 @@ $vo09 = $fir_riadok->vo09;
 $vo10 = $fir_riadok->vo10;
 $vo11 = $fir_riadok->vo11;
 $vo12 = $fir_riadok->vo12;
-
-$vm01 = $fir_riadok->vm01;
-$vm02 = $fir_riadok->vm02;
-$vm03 = $fir_riadok->vm03;
-$vm04 = $fir_riadok->vm04;
-$vm05 = $fir_riadok->vm05;
-$vm06 = $fir_riadok->vm06;
-$vm07 = $fir_riadok->vm07;
-$vm08 = $fir_riadok->vm08;
-$vm09 = $fir_riadok->vm09;
-$vm10 = $fir_riadok->vm10;
-$vm11 = $fir_riadok->vm11;
-$vm12 = $fir_riadok->vm12;
-$vmspolu = $fir_riadok->vmspolu;
-$vp01 = $fir_riadok->vp01;
-$vp02 = $fir_riadok->vp02;
-$vp03 = $fir_riadok->vp03;
-$vp04 = $fir_riadok->vp04;
-$vp05 = $fir_riadok->vp05;
-$vp06 = $fir_riadok->vp06;
-$vp07 = $fir_riadok->vp07;
-$vp08 = $fir_riadok->vp08;
-$vp09 = $fir_riadok->vp09;
-$vp10 = $fir_riadok->vp10;
-$vp11 = $fir_riadok->vp11;
-$vp12 = $fir_riadok->vp12;
-
 $vzodhad = $fir_riadok->vzodhad;
 $pozn = $fir_riadok->pozn;
 $str2 = $fir_riadok->str2;
@@ -1076,33 +813,6 @@ var sirkawic = screen.width-10;
    document.formv1.vo10.value = '<?php echo "$vo10";?>';
    document.formv1.vo11.value = '<?php echo "$vo11";?>';
    document.formv1.vo12.value = '<?php echo "$vo12";?>';
-
-   document.formv1.vm01.value = '<?php echo "$vm01";?>';
-   document.formv1.vm02.value = '<?php echo "$vm02";?>';
-   document.formv1.vm03.value = '<?php echo "$vm03";?>';
-   document.formv1.vm04.value = '<?php echo "$vm04";?>';
-   document.formv1.vm05.value = '<?php echo "$vm05";?>';
-   document.formv1.vm06.value = '<?php echo "$vm06";?>';
-   document.formv1.vm07.value = '<?php echo "$vm07";?>';
-   document.formv1.vm08.value = '<?php echo "$vm08";?>';
-   document.formv1.vm09.value = '<?php echo "$vm09";?>';
-   document.formv1.vm10.value = '<?php echo "$vm10";?>';
-   document.formv1.vm11.value = '<?php echo "$vm11";?>';
-   document.formv1.vm12.value = '<?php echo "$vm12";?>';
-   document.formv1.vp01.value = '<?php echo "$vp01";?>';
-   document.formv1.vp02.value = '<?php echo "$vp02";?>';
-   document.formv1.vp03.value = '<?php echo "$vp03";?>';
-   document.formv1.vp04.value = '<?php echo "$vp04";?>';
-   document.formv1.vp05.value = '<?php echo "$vp05";?>';
-   document.formv1.vp06.value = '<?php echo "$vp06";?>';
-   document.formv1.vp07.value = '<?php echo "$vp07";?>';
-   document.formv1.vp08.value = '<?php echo "$vp08";?>';
-   document.formv1.vp09.value = '<?php echo "$vp09";?>';
-   document.formv1.vp10.value = '<?php echo "$vp10";?>';
-   document.formv1.vp11.value = '<?php echo "$vp11";?>';
-   document.formv1.vp12.value = '<?php echo "$vp12";?>';
-
-
    document.formv1.vzodhad.value = '<?php echo "$vzodhad";?>';
    document.formv1.pozn.value = '<?php echo "$pozn";?>';
    document.formv1.datum.value = '<?php echo "$datum";?>';
@@ -1131,26 +841,26 @@ var sirkawic = screen.width-10;
 
   function prevOC(prevoc)
   {
-   window.open('potvrd_nemd.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + prevoc + '', '_self');
+   window.open('potvrd_nemd2014.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + prevoc + '', '_self');
   }
   function nextOC(nextoc)
   {
-   window.open('potvrd_nemd.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + nextoc + '', '_self');
+   window.open('potvrd_nemd2014.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + nextoc + '', '_self');
   }
 
   function NavodVyplnenie()
   {
-   window.open('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v15/narok_nemocenska_v15_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v14/narok_nemocenska_v14_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
 
 
   function ZnovuPotvrdenie()
   {
-  window.open('potvrd_nemd.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1', '_self');
+  window.open('potvrd_nemd2014.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1', '_self');
   }
   function tlacpdf(oc)
   {
-   window.open('potvrd_nemd.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=' + oc + '&xx=1', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('potvrd_nemd2014.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=' + oc + '&xx=1', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }   
 </script>
 
@@ -1238,9 +948,9 @@ if ( $copern == 20 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="potvrd_nemd.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
+<FORM name="formv1" method="post" action="potvrd_nemd2014.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-top-formsave" style="top:4px;">
-<img src="../dokumenty/mzdy_potvrdenia/narok_nemocenska_v15/narok_nemocenska_v15_form.jpg"
+<img src="../dokumenty/mzdy_potvrdenia/narok_nemocenska_v14/narok_nemocenska_v14_form.jpg"
  alt="tlaèivo Potvrdenie zamestnávate¾a o zamestnancovi na úèely uplatnenia nároku na nemocenskú dávku 232kB" class="form-background">
 
 <!-- zamestnavatel -->
@@ -1345,45 +1055,6 @@ if ( $copern == 20 )
  style="top:1020px; left:148px; width:90px;"/>
 <span class="text-echo" style="top:1051px; right:710px;"><?php echo $vzspolu; ?></span>
 
-<!-- bod 6. minuly -->
-<input type="text" name="vp01" id="vp01" style="top:730px; left:215px; width:20px;"/>
-<input type="text" name="vm01" id="vm01" onkeyup="CiarkaNaBodku(this);"
- style="top:730px; left:248px; width:90px;"/>
-<input type="text" name="vp02" id="vp02" style="top:757px; left:215px; width:20px;"/>
-<input type="text" name="vm02" id="vm02" onkeyup="CiarkaNaBodku(this);"
- style="top:757px; left:248px; width:90px;"/>
-<input type="text" name="vp03" id="vp03" style="top:784px; left:215px; width:20px;"/>
-<input type="text" name="vm03" id="vm03" onkeyup="CiarkaNaBodku(this);"
- style="top:784px; left:248px; width:90px;"/>
-<input type="text" name="vp04" id="vp04" style="top:810px; left:215px; width:20px;"/>
-<input type="text" name="vm04" id="vm04" onkeyup="CiarkaNaBodku(this);"
- style="top:810px; left:248px; width:90px;"/>
-<input type="text" name="vp05" id="vp05" style="top:836px; left:215px; width:20px;"/>
-<input type="text" name="vm05" id="vm05" onkeyup="CiarkaNaBodku(this);"
- style="top:836px; left:248px; width:90px;"/>
-<input type="text" name="vp06" id="vp06" style="top:862px; left:215px; width:20px;"/>
-<input type="text" name="vm06" id="vm06" onkeyup="CiarkaNaBodku(this);"
- style="top:862px; left:248px; width:90px;"/>
-<input type="text" name="vp07" id="vp07" style="top:888px; left:215px; width:20px;"/>
-<input type="text" name="vm07" id="vm07" onkeyup="CiarkaNaBodku(this);"
- style="top:888px; left:248px; width:90px;"/>
-<input type="text" name="vp08" id="vp08" style="top:915px; left:215px; width:20px;"/>
-<input type="text" name="vm08" id="vm08" onkeyup="CiarkaNaBodku(this);"
- style="top:915px; left:248px; width:90px;"/>
-<input type="text" name="vp09" id="vp09" style="top:941px; left:215px; width:20px;"/>
-<input type="text" name="vm09" id="vm09" onkeyup="CiarkaNaBodku(this);"
- style="top:941px; left:248px; width:90px;"/>
-<input type="text" name="vp10" id="vp10" style="top:968px; left:215px; width:20px;"/>
-<input type="text" name="vm10" id="vm10" onkeyup="CiarkaNaBodku(this);"
- style="top:968px; left:248px; width:90px;"/>
-<input type="text" name="vp11" id="vp11" style="top:993px; left:215px; width:20px;"/>
-<input type="text" name="vm11" id="vm11" onkeyup="CiarkaNaBodku(this);"
- style="top:993px; left:248px; width:90px;"/>
-<input type="text" name="vp12" id="vp12" style="top:1020px; left:215px; width:20px;"/>
-<input type="text" name="vm12" id="vm12" onkeyup="CiarkaNaBodku(this);"
- style="top:1020px; left:248px; width:90px;"/>
-<span class="text-echo" style="top:1051px; right:610px;"><?php echo $vmspolu; ?></span>
-
 <!-- bod 7. -->
 <input type="text" name="vzodhad" id="vzodhad" onkeyup="CiarkaNaBodku(this);"
  style="top:1155px; left:50px; width:90px;"/>
@@ -1459,9 +1130,9 @@ $pdf->AddPage();
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 
-if ( File_Exists('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v15/narok_nemocenska_v15.jpg') AND $i == 0 )
+if ( File_Exists('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v14/narok_nemocenska_v14.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v15/narok_nemocenska_v15.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v14/narok_nemocenska_v14.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 $pdf->SetFont('arial','',9);
