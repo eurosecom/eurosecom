@@ -95,8 +95,319 @@ $soubor = fopen("../tmp/$nazsub", "a+");
 //verzia 2014
 $sqlt = <<<mzdprc
 (
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- (Rocne) hlasenie o vyuctovani dane zo ZC a FP, vzor 2014 -->
+<dokument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="universal.xsd">
+	<hlavicka>
+		<dic>4511189151</dic>
+		<danovyUrad>Bratislava</danovyUrad>
+		<druhHlasenia>
+			<rh>1</rh>
+			<oh>0</oh>
+			<dh>0</dh>
+		</druhHlasenia>
+		<zdanovacieObdobie>
+			<rok>2014</rok>
+			<datumDDP></datumDDP>
+		</zdanovacieObdobie>
+		<fo>
+			<priezvisko>Bojný</priezvisko>
+			<meno>Alojz</meno>
+			<titul>MVDr.</titul>
+			<titulZa>CSC</titulZa>
+		</fo>
+		<po>
+			<obchodneMeno>Obchodné meno</obchodneMeno>
+			<pravnaForma>riadok 2</pravnaForma>
+		</po>
+		<sidlo>
+			<ulica>Aladinova</ulica>
+			<cislo>187</cislo>
+			<psc>04001</psc>
+			<obec>Košice</obec>
+			<stat>Slovensko</stat>
+			<tel>055/22445566</tel>
+			<email>email@mail.sk</email>
+		</sidlo>
+		<datumZuctovania>15.02.2014</datumZuctovania>
+		<vypracoval>
+			<kto>vypracoval</kto>
+			<dna>24.12.2014</dna>
+			<tel>055/3274264</tel>
+		</vypracoval>
+		<pocetStranC4>2</pocetStranC4>
+		<pocetStranC5>1</pocetStranC5>
+		<pocetZamC4>4</pocetZamC4>
+		<pocetZamC5>2</pocetZamC5>
+		<datumVyhlasenia>25.12.2014</datumVyhlasenia>
+		<dedicZastupca>
+			<priezvisko>Dedic priez</priezvisko>
+			<meno>Dedic meno</meno>
+			<titul>dedPr</titul>
+			<titulZa>dedZa</titulZa>
+			<rodneCislo>6608056928</rodneCislo>
+			<ulica>Aladinova</ulica>
+			<cislo>187</cislo>
+			<psc>04001</psc>
+			<obec>Košice</obec>
+			<stat>Slovensko</stat>
+			<tel>055/22445566</tel>
+			<email>email2@mail.sk</email>
+		</dedicZastupca>
+	</hlavicka>
+	<telo>
+		<cast1>
+			<r00>0.00</r00>
+			<r01>1.01</r01>
+			<r02>2.02</r02>
+			<r03>3.03</r03>
+			<r04>-4.04</r04>
+			<r05>5.05</r05>
+			<r06>6.06</r06>
+			<r07>-7.07</r07>
+			<r08>8.08</r08>
+			<r09>9.09</r09>
+			<r10>10.10</r10>
+		</cast1>
+		<cast2>
+			<r11>11.11</r11>
+			<r12>12.12</r12>
+		</cast2>
+		<cast3>
+			<rA>1.16</rA>
+			<rB>2.17</rB>
+			<rC>3.18</rC>
+			<rD>5.20</rD>
+			<rE>6.21</rE>
+			<rF>7.22</rF>
+		</cast3>
+		<medium5c>0</medium5c>
+		<!-- cast4 nemusi byt uvedena, takisto nie je, co do poctu, obmedzeny jej vyskyt -->
+		<cast4>
+			<strana>
+				<aktualna>1</aktualna>
+				<celkovo>2</celkovo>
+			</strana>
+			<stlpec1>
+				<rodneCislo>41546023317</rodneCislo>
+				<datumNarodenia>01.01.1991</datumNarodenia>
+				<priezvisko>Danielová</priezvisko>
+				<meno>Darina</meno>
+				<ulica>ulica</ulica>
+				<cislo>1</cislo>
+				<psc>11111</psc>
+				<obec>obec</obec>
+				<stat>SR</stat>
+				<kodStatu>703</kodStatu>
+				<r3a>1310000.04</r3a>
+				<r3b>1320000.04</r3b>
+				<r4>
+					<box00>0</box00>
+					<box01>0</box01>
+					<box02>1</box02>
+					<box03>1</box03>
+					<box04>0</box04>
+					<box05>1</box05>
+					<box06>0</box06>
+					<box07>0</box07>
+					<box08>0</box08>
+					<box09>0</box09>
+					<box10>0</box10>
+					<box11>0</box11>
+					<box12>0</box12>
+				</r4>
+				<r5a>15100.41</r5a>
+				<r5b>15200.42</r5b>
+				<r6>16360.06</r6>
+				<r7suma>1710000.71</r7suma>
+				<r7deti>171</r7deti>
+				<r8ano>1</r8ano>
+				<r8pm>18</r8pm>
+				<r9>19.91</r9>
+			</stlpec1>
+			<stlpec2>
+				<rodneCislo>4246023317</rodneCislo>
+				<datumNarodenia>02.02.1992</datumNarodenia>
+				<priezvisko>Danielová</priezvisko>
+				<meno>Darina</meno>
+				<ulica>ulica</ulica>
+				<cislo>2</cislo>
+				<psc>22222</psc>
+				<obec>obec</obec>
+				<stat>SR</stat>
+				<kodStatu>703</kodStatu>
+				<r3a>2310000.31</r3a>
+				<r3b>2320000.32</r3b>
+				<r4>
+					<box00>0</box00>
+					<box01>1</box01>
+					<box02>1</box02>
+					<box03>1</box03>
+					<box04>1</box04>
+					<box05>1</box05>
+					<box06>1</box06>
+					<box07>1</box07>
+					<box08>1</box08>
+					<box09>1</box09>
+					<box10>1</box10>
+					<box11>1</box11>
+					<box12>1</box12>
+				</r4>
+				<r5a>25100.51</r5a>
+				<r5b>25200.52</r5b>
+				<r6>26360.06</r6>
+				<r7suma>2710000.71</r7suma>
+				<r7deti>272</r7deti>
+				<r8ano>1</r8ano>
+				<r8pm>28</r8pm>
+				<r9>29.92</r9>
+			</stlpec2>
+		</cast4>
+		<cast4>
+			<strana>
+				<aktualna>2</aktualna>
+				<celkovo>2</celkovo>
+			</strana>
+			<stlpec1>
+				<rodneCislo>41546023317</rodneCislo>
+				<datumNarodenia>01.01.1991</datumNarodenia>
+				<priezvisko>Danielová</priezvisko>
+				<meno>Darina</meno>
+				<ulica>ulica</ulica>
+				<cislo>1</cislo>
+				<psc>11111</psc>
+				<obec>obec</obec>
+				<stat>SR</stat>
+				<kodStatu>703</kodStatu>
+				<r3a>1310000.04</r3a>
+				<r3b>1320000.04</r3b>
+				<r4>
+					<box00>0</box00>
+					<box01>0</box01>
+					<box02>1</box02>
+					<box03>1</box03>
+					<box04>0</box04>
+					<box05>1</box05>
+					<box06>0</box06>
+					<box07>0</box07>
+					<box08>0</box08>
+					<box09>0</box09>
+					<box10>0</box10>
+					<box11>0</box11>
+					<box12>0</box12>
+				</r4>
+				<r5a>15100.41</r5a>
+				<r5b>15200.42</r5b>
+				<r6>16360.06</r6>
+				<r7suma>1710000.71</r7suma>
+				<r7deti>171</r7deti>
+				<r8ano>1</r8ano>
+				<r8pm>18</r8pm>
+				<r9>19.91</r9>
+			</stlpec1>
+			<stlpec2>
+				<rodneCislo>4246023317</rodneCislo>
+				<datumNarodenia>02.02.1992</datumNarodenia>
+				<priezvisko>Danielová</priezvisko>
+				<meno>Darina</meno>
+				<ulica>ulica</ulica>
+				<cislo>2</cislo>
+				<psc>22222</psc>
+				<obec>obec</obec>
+				<stat>SR</stat>
+				<kodStatu>703</kodStatu>
+				<r3a>2310000.31</r3a>
+				<r3b>2320000.32</r3b>
+				<r4>
+					<box00>0</box00>
+					<box01>1</box01>
+					<box02>1</box02>
+					<box03>1</box03>
+					<box04>1</box04>
+					<box05>1</box05>
+					<box06>1</box06>
+					<box07>1</box07>
+					<box08>1</box08>
+					<box09>1</box09>
+					<box10>1</box10>
+					<box11>1</box11>
+					<box12>1</box12>
+				</r4>
+				<r5a>25100.51</r5a>
+				<r5b>25200.52</r5b>
+				<r6>26360.06</r6>
+				<r7suma>2710000.71</r7suma>
+				<r7deti>272</r7deti>
+				<r8ano>1</r8ano>
+				<r8pm>28</r8pm>
+				<r9>29.92</r9>
+			</stlpec2>
+		</cast4>
+		<!-- cast5 nemusi byt uvedena, takisto nie je, co do poctu, obmedzeny jej vyskyt -->
+		<cast5>
+			<c5strana>
+				<c5aktualna>1</c5aktualna>
+				<c5celkovo>1</c5celkovo>
+			</c5strana>
+			<c5stlpec1>
+				<c5rodneCislo>1546023317</c5rodneCislo>
+				<c5datumNarodenia>01.01.1991</c5datumNarodenia>
+				<c5priezvisko>Kašáková</c5priezvisko>
+				<c5meno>Katka</c5meno>
+				<c5ulica>ulica</c5ulica>
+				<c5cislo>1</c5cislo>
+				<c5psc>11111</c5psc>
+				<c5obec>obec</c5obec>
+				<c5stat>SRt</c5stat>
+				<c5kodStatu>703</c5kodStatu>
+				<c5r3a>5131000.01</c5r3a>
+				<c5r3b>5132000.02</c5r3b>
+				<c5r3c>5133000.03</c5r3c>
+				<c5r4a>51410.04</c5r4a>
+				<c5r4b>51420.04</c5r4b>
+				<c5r5>5150.03</c5r5>
+				<c5r6>5160.06</c5r6>
+				<c5r7suma>5710.71</c5r7suma>
+				<c5r7deti>172</c5r7deti>
+				<c5r8>581.81</c5r8>
+				<c5r9>591.81</c5r9>
+				<c5r10suma>5101</c5r10suma>
+				<c5r10pm>10</c5r10pm>
+				<c5r11suma>5111</c5r11suma>
+				<c5r11pm>11</c5r11pm>
+				<c5r12>512000.10</c5r12>
+			</c5stlpec1>
+			<c5stlpec2>
+				<c5rodneCislo>2546023317</c5rodneCislo>
+				<c5datumNarodenia>02.02.1992</c5datumNarodenia>
+				<c5priezvisko>Kašèáková</c5priezvisko>
+				<c5meno>Lucia</c5meno>
+				<c5ulica>ulica</c5ulica>
+				<c5cislo>2</c5cislo>
+				<c5psc>22222</c5psc>
+				<c5obec>obec</c5obec>
+				<c5stat>SR</c5stat>
+				<c5kodStatu>703</c5kodStatu>
+				<c5r3a>5231000.01</c5r3a>
+				<c5r3b>5232000.02</c5r3b>
+				<c5r3c>5233000.03</c5r3c>
+				<c5r4a>24100.04</c5r4a>
+				<c5r4b>24200.04</c5r4b>
+				<c5r5>2500.03</c5r5>
+				<c5r6>2600.06</c5r6>
+				<c5r7suma>2710.71</c5r7suma>
+				<c5r7deti>272</c5r7deti>
+				<c5r8>582.82</c5r8>
+				<c5r9>592.82</c5r9>
+				<c5r10suma>592.92</c5r10suma>
+				<c5r10pm>29</c5r10pm>
+				<c5r11suma>5102.10</c5r11suma>
+				<c5r11pm>12</c5r11pm>
+				<c5r12>211000.10</c5r12>
+			</c5stlpec2>
+		</cast5>
+	</telo>
+</dokument>
 );
 mzdprc;
 
@@ -198,7 +509,7 @@ $dpsc=str_replace(" ","",$dpsc);
   $text = "   <obec><![CDATA[".$dmes."]]></obec>"."\r\n"; fwrite($soubor, $text);
   $text = "   <stat><![CDATA[".$xstat."]]></stat>"."\r\n"; fwrite($soubor, $text);
   $text = "   <tel><![CDATA[".$fir_ftel."]]></tel>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <emailFax><![CDATA[".$fir_fem1."]]></emailFax>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <email><![CDATA[".$fir_fem1."]]></email>"."\r\n"; fwrite($soubor, $text);
   $text = "  </sidlo>"."\r\n"; fwrite($soubor, $text);
 
 $dat_rz=SkDatum($hlavicka->r01ad);
@@ -252,7 +563,7 @@ $stat=iconv("CP1250", "UTF-8", $hlavicka->zstat);
 $telefon=$hlavicka->ztel;
   $text = "   <tel><![CDATA[".$telefon."]]></tel>"."\r\n"; fwrite($soubor, $text);
 $mailfax=iconv("CP1250", "UTF-8", $hlavicka->zemfax);
-  $text = "   <emailFax><![CDATA[".$mailfax."]]></emailFax>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <email><![CDATA[".$mailfax."]]></email>"."\r\n"; fwrite($soubor, $text);
   $text = "  </dedicZastupca>"."\r\n"; fwrite($soubor, $text);
   $text = " </hlavicka>"."\r\n"; fwrite($soubor, $text);
 
@@ -615,6 +926,9 @@ if ( $tlachod_c == 0 ) $tlachod_c="";
 $tlachod_c=$hlavicka->doho;
 if ( $tlachod_c == 0 ) $tlachod_c="";
   $text = "    <c5r3b><![CDATA[".$tlachod_c."]]></c5r3b>"."\r\n"; fwrite($soubor, $text);
+$tlachod_c=$hlavicka->prvypj;
+if ( $tlachod_c == 0 ) $tlachod_c="";
+  $text = "    <c5r3c><![CDATA[".$tlachod_c."]]></c5r3c>"."\r\n"; fwrite($soubor, $text);
 
 $tlachod_c=$hlavicka->socp;
 if ( $tlachod_c == 0 ) $tlachod_c="";
@@ -644,23 +958,27 @@ $tlachod_c=$hlavicka->ddsnzc;
 if ( $tlachod_c == 0 ) $tlachod_c="";
   $text = "    <c5r8><![CDATA[".$tlachod_c."]]></c5r8>"."\r\n"; fwrite($soubor, $text);
 
+$tlachod_c=$hlavicka->dds2nc;
+if ( $tlachod_c == 0 ) $tlachod_c="";
+  $text = "    <c5r9><![CDATA[".$tlachod_c."]]></c5r9>"."\r\n"; fwrite($soubor, $text);
+
 $tlachod_c=$hlavicka->ra1b;
 if ( $tlachod_c == 0 ) $tlachod_c="";
-  $text = "    <c5r9suma><![CDATA[".$tlachod_c."]]></c5r9suma>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <c5r10suma><![CDATA[".$tlachod_c."]]></c5r10suma>"."\r\n"; fwrite($soubor, $text);
 $tlachod_c=$hlavicka->zmpm;
 if ( $tlachod_c == 0 OR $hlavicka->ra1b == 0 ) $tlachod_c="";
-  $text = "    <c5r9pm><![CDATA[".$tlachod_c."]]></c5r9pm>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <c5r10pm><![CDATA[".$tlachod_c."]]></c5r10pm>"."\r\n"; fwrite($soubor, $text);
 
 $tlachod_c=$hlavicka->dnbh;
 if ( $tlachod_c == 0 ) $tlachod_c="";
-  $text = "    <c5r10suma><![CDATA[".$tlachod_c."]]></c5r10suma>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <c5r11suma><![CDATA[".$tlachod_c."]]></c5r11suma>"."\r\n"; fwrite($soubor, $text);
 $tlachod_c=$hlavicka->dnbm;
 if ( $tlachod_c == 0 OR $hlavicka->dnbh == 0 ) $tlachod_c="";
-  $text = "    <c5r10pm><![CDATA[".$tlachod_c."]]></c5r10pm>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <c5r11pm><![CDATA[".$tlachod_c."]]></c5r11pm>"."\r\n"; fwrite($soubor, $text);
 
 $tlachod_c=$hlavicka->rocz;
 if ( $tlachod_c == 0 ) $tlachod_c="";
-  $text = "    <c5r11><![CDATA[".$tlachod_c."]]></c5r11>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <c5r12><![CDATA[".$tlachod_c."]]></c5r12>"."\r\n"; fwrite($soubor, $text);
 
 if ( $stlpec == 1 ) {  $text = "   </c5stlpec1>"."\r\n"; fwrite($soubor, $text); }
 if ( $stlpec == 2 ) {  $text = "   </c5stlpec2>"."\r\n"; fwrite($soubor, $text); }
