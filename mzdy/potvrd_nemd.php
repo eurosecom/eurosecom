@@ -1143,7 +1143,6 @@ var sirkawic = screen.width-10;
    window.open('../dokumenty/mzdy_potvrdenia/narok_nemocenska_v15/narok_nemocenska_v15_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
 
-
   function ZnovuPotvrdenie()
   {
   window.open('potvrd_nemd.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1', '_self');
@@ -1302,104 +1301,104 @@ if ( $copern == 20 )
 </select>
 
 <!-- bod 5. -->
-<input type="text" name="text51" id="text51" style="top:531px; left:47px; width:800px;"/>
-<input type="text" name="text52" id="text52" style="top:558px; left:47px; width:800px;"/>
-<input type="text" name="text53" id="text53" style="top:585px; left:47px; width:800px;"/>
+<input type="text" name="text51" id="text51" style="top:533px; left:47px; width:800px;"/>
+<input type="text" name="text52" id="text52" style="top:560px; left:47px; width:800px;"/>
+<input type="text" name="text53" id="text53" style="top:587px; left:47px; width:800px;"/>
 
 <!-- bod 6. -->
-<input type="text" name="vo01" id="vo01" style="top:730px; left:115px; width:20px;"/>
+<input type="text" name="vo01" id="vo01" style="top:712px; left:132px; width:36px;"/>
 <input type="text" name="vz01" id="vz01" onkeyup="CiarkaNaBodku(this);"
- style="top:730px; left:148px; width:90px;"/>
-<input type="text" name="vo02" id="vo02" style="top:757px; left:115px; width:20px;"/>
+       style="top:712px; left:190px; width:90px;"/>
+<input type="text" name="vo02" id="vo02" style="top:739px; left:132px; width:36px;"/>
 <input type="text" name="vz02" id="vz02" onkeyup="CiarkaNaBodku(this);"
- style="top:757px; left:148px; width:90px;"/>
-<input type="text" name="vo03" id="vo03" style="top:784px; left:115px; width:20px;"/>
+       style="top:739px; left:190px; width:90px;"/>
+<input type="text" name="vo03" id="vo03" style="top:765px; left:132px; width:36px;"/>
 <input type="text" name="vz03" id="vz03" onkeyup="CiarkaNaBodku(this);"
- style="top:784px; left:148px; width:90px;"/>
-<input type="text" name="vo04" id="vo04" style="top:810px; left:115px; width:20px;"/>
+ style="top:765px; left:190px; width:90px;"/>
+<input type="text" name="vo04" id="vo04" style="top:791px; left:132px; width:36px;"/>
 <input type="text" name="vz04" id="vz04" onkeyup="CiarkaNaBodku(this);"
- style="top:810px; left:148px; width:90px;"/>
-<input type="text" name="vo05" id="vo05" style="top:836px; left:115px; width:20px;"/>
+ style="top:791px; left:190px; width:90px;"/>
+<input type="text" name="vo05" id="vo05" style="top:817px; left:132px; width:36px;"/>
 <input type="text" name="vz05" id="vz05" onkeyup="CiarkaNaBodku(this);"
- style="top:836px; left:148px; width:90px;"/>
-<input type="text" name="vo06" id="vo06" style="top:862px; left:115px; width:20px;"/>
+       style="top:817px; left:190px; width:90px;"/>
+<input type="text" name="vo06" id="vo06" style="top:844px; left:132px; width:36px;"/>
 <input type="text" name="vz06" id="vz06" onkeyup="CiarkaNaBodku(this);"
- style="top:862px; left:148px; width:90px;"/>
-<input type="text" name="vo07" id="vo07" style="top:888px; left:115px; width:20px;"/>
+       style="top:844px; left:190px; width:90px;"/>
+<input type="text" name="vo07" id="vo07" style="top:870px; left:132px; width:36px;"/>
 <input type="text" name="vz07" id="vz07" onkeyup="CiarkaNaBodku(this);"
- style="top:888px; left:148px; width:90px;"/>
-<input type="text" name="vo08" id="vo08" style="top:915px; left:115px; width:20px;"/>
+ style="top:870px; left:190px; width:90px;"/>
+<input type="text" name="vo08" id="vo08" style="top:896px; left:132px; width:36px;"/>
 <input type="text" name="vz08" id="vz08" onkeyup="CiarkaNaBodku(this);"
- style="top:915px; left:148px; width:90px;"/>
-<input type="text" name="vo09" id="vo09" style="top:941px; left:115px; width:20px;"/>
+       style="top:896px; left:190px; width:90px;"/>
+<input type="text" name="vo09" id="vo09" style="top:922px; left:132px; width:36px;"/>
 <input type="text" name="vz09" id="vz09" onkeyup="CiarkaNaBodku(this);"
- style="top:941px; left:148px; width:90px;"/>
-<input type="text" name="vo10" id="vo10" style="top:968px; left:115px; width:20px;"/>
+       style="top:922px; left:190px; width:90px;"/>
+<input type="text" name="vo10" id="vo10" style="top:948px; left:132px; width:36px;"/>
 <input type="text" name="vz10" id="vz10" onkeyup="CiarkaNaBodku(this);"
- style="top:968px; left:148px; width:90px;"/>
-<input type="text" name="vo11" id="vo11" style="top:993px; left:115px; width:20px;"/>
+ style="top:948px; left:190px; width:90px;"/>
+<input type="text" name="vo11" id="vo11" style="top:975px; left:132px; width:36px;"/>
 <input type="text" name="vz11" id="vz11" onkeyup="CiarkaNaBodku(this);"
- style="top:993px; left:148px; width:90px;"/>
-<input type="text" name="vo12" id="vo12" style="top:1020px; left:115px; width:20px;"/>
+       style="top:975px; left:190px; width:90px;"/>
+<input type="text" name="vo12" id="vo12" style="top:1001px; left:132px; width:36px;"/>
 <input type="text" name="vz12" id="vz12" onkeyup="CiarkaNaBodku(this);"
- style="top:1020px; left:148px; width:90px;"/>
-<span class="text-echo" style="top:1051px; right:710px;"><?php echo $vzspolu; ?></span>
+       style="top:1001px; left:190px; width:90px;"/>
+<span class="text-echo" style="top:1033px; right:665px;"><?php echo $vzspolu; ?></span>
 
 <!-- bod 6. minuly -->
-<input type="text" name="vp01" id="vp01" style="top:730px; left:215px; width:20px;"/>
+<input type="text" name="vp01" id="vp01" style="top:712px; left:385px; width:36px;"/>
 <input type="text" name="vm01" id="vm01" onkeyup="CiarkaNaBodku(this);"
- style="top:730px; left:248px; width:90px;"/>
-<input type="text" name="vp02" id="vp02" style="top:757px; left:215px; width:20px;"/>
+       style="top:712px; left:445px; width:90px;"/>
+<input type="text" name="vp02" id="vp02" style="top:739px; left:385px; width:36px;"/>
 <input type="text" name="vm02" id="vm02" onkeyup="CiarkaNaBodku(this);"
- style="top:757px; left:248px; width:90px;"/>
-<input type="text" name="vp03" id="vp03" style="top:784px; left:215px; width:20px;"/>
+       style="top:739px; left:445px; width:90px;"/>
+<input type="text" name="vp03" id="vp03" style="top:765px; left:385px; width:36px;"/>
 <input type="text" name="vm03" id="vm03" onkeyup="CiarkaNaBodku(this);"
- style="top:784px; left:248px; width:90px;"/>
-<input type="text" name="vp04" id="vp04" style="top:810px; left:215px; width:20px;"/>
+       style="top:765px; left:445px; width:90px;"/>
+<input type="text" name="vp04" id="vp04" style="top:791px; left:385px; width:36px;"/>
 <input type="text" name="vm04" id="vm04" onkeyup="CiarkaNaBodku(this);"
- style="top:810px; left:248px; width:90px;"/>
-<input type="text" name="vp05" id="vp05" style="top:836px; left:215px; width:20px;"/>
+       style="top:791px; left:445px; width:90px;"/>
+<input type="text" name="vp05" id="vp05" style="top:817px; left:385px; width:36px;"/>
 <input type="text" name="vm05" id="vm05" onkeyup="CiarkaNaBodku(this);"
- style="top:836px; left:248px; width:90px;"/>
-<input type="text" name="vp06" id="vp06" style="top:862px; left:215px; width:20px;"/>
+       style="top:817px; left:445px; width:90px;"/>
+<input type="text" name="vp06" id="vp06" style="top:844px; left:385px; width:36px;"/>
 <input type="text" name="vm06" id="vm06" onkeyup="CiarkaNaBodku(this);"
- style="top:862px; left:248px; width:90px;"/>
-<input type="text" name="vp07" id="vp07" style="top:888px; left:215px; width:20px;"/>
+       style="top:844px; left:445px; width:90px;"/>
+<input type="text" name="vp07" id="vp07" style="top:870px; left:385px; width:36px;"/>
 <input type="text" name="vm07" id="vm07" onkeyup="CiarkaNaBodku(this);"
- style="top:888px; left:248px; width:90px;"/>
-<input type="text" name="vp08" id="vp08" style="top:915px; left:215px; width:20px;"/>
+       style="top:870px; left:445px; width:90px;"/>
+<input type="text" name="vp08" id="vp08" style="top:896px; left:385px; width:36px;"/>
 <input type="text" name="vm08" id="vm08" onkeyup="CiarkaNaBodku(this);"
- style="top:915px; left:248px; width:90px;"/>
-<input type="text" name="vp09" id="vp09" style="top:941px; left:215px; width:20px;"/>
+       style="top:896px; left:445px; width:90px;"/>
+<input type="text" name="vp09" id="vp09" style="top:922px; left:385px; width:36px;"/>
 <input type="text" name="vm09" id="vm09" onkeyup="CiarkaNaBodku(this);"
- style="top:941px; left:248px; width:90px;"/>
-<input type="text" name="vp10" id="vp10" style="top:968px; left:215px; width:20px;"/>
+       style="top:922px; left:445px; width:90px;"/>
+<input type="text" name="vp10" id="vp10" style="top:948px; left:385px; width:36px;"/>
 <input type="text" name="vm10" id="vm10" onkeyup="CiarkaNaBodku(this);"
- style="top:968px; left:248px; width:90px;"/>
-<input type="text" name="vp11" id="vp11" style="top:993px; left:215px; width:20px;"/>
+       style="top:948px; left:445px; width:90px;"/>
+<input type="text" name="vp11" id="vp11" style="top:975px; left:385px; width:36px;"/>
 <input type="text" name="vm11" id="vm11" onkeyup="CiarkaNaBodku(this);"
- style="top:993px; left:248px; width:90px;"/>
-<input type="text" name="vp12" id="vp12" style="top:1020px; left:215px; width:20px;"/>
+       style="top:975px; left:445px; width:90px;"/>
+<input type="text" name="vp12" id="vp12" style="top:1001px; left:385px; width:36px;"/>
 <input type="text" name="vm12" id="vm12" onkeyup="CiarkaNaBodku(this);"
- style="top:1020px; left:248px; width:90px;"/>
-<span class="text-echo" style="top:1051px; right:610px;"><?php echo $vmspolu; ?></span>
+ style="top:1001px; left:445px; width:90px;"/>
+<span class="text-echo" style="top:1033px; right:410px;"><?php echo $vmspolu; ?></span> <!-- dopyt, nepoèíta -->
 
 <!-- bod 7. -->
 <input type="text" name="vzodhad" id="vzodhad" onkeyup="CiarkaNaBodku(this);"
- style="top:1155px; left:50px; width:90px;"/>
+       style="top:1122px; left:50px; width:90px;"/>
 
 <!-- bod 8. -->
-<span class="text-echo" style="top:1228px; left:65px; font-size:15px;"><?php echo "$fir_mzdt05 tel. $fir_mzdt04"; ?></span>
+<span class="text-echo" style="top:1201px; left:65px; font-size:15px;"><?php echo "$fir_mzdt05 tel. $fir_mzdt04"; ?></span>
 <input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);"
- style="top:1248px; left:93px; width:80px;"/>
+       style="top:1225px; left:93px; width:80px;"/>
 
 <!-- poznamka -->
-<label for="pozn" style="position:absolute; top:1281px; left:196px; font-size:12px; font-weight:bold;">Poznámka</label>
-<input type="text" name="pozn" id="pozn" style="top:1273px; right:4px; width:680px;"/>
+<label for="pozn" style="position:absolute; top:1276px; left:190px; font-size:12px; font-weight:bold;">Poznámka</label>
+<input type="text" name="pozn" id="pozn" style="top:1268px; right:8px; width:680px;"/>
 
 <!-- dopl.info na 2.stranu -->
-<label for="str2" style="position:absolute; top:640px; left:620px; font-size:12px; font-weight:bold;">Dopl. info na 2. stranu</label>
-<textarea name="str2" id="str2" style="top:656px; left:620px; width:300px; height:430px;"><?php echo $str2; ?></textarea>
+<label for="str2" style="position:absolute; top:645px; left:615px; font-size:12px; font-weight:bold;">Dopl. info na 2. stranu</label>
+<textarea name="str2" id="str2" style="top:660px; left:615px; width:300px; height:400px;"><?php echo $str2; ?></textarea>
 </FORM>
 </div> <!-- koniec #content -->
 <?php
@@ -1565,37 +1564,62 @@ $vo08=$hlavicka->vo08; if ( $vo08 < 10 ) $vo08="0".$vo08;
 $vo09=$hlavicka->vo09; if ( $vo09 < 10 ) $vo09="0".$vo09;
 $vo10=$hlavicka->vo10; if ( $vo10 < 10 ) $vo10="0".$vo10;
 $vo11=$hlavicka->vo11; if ( $vo11 < 10 ) $vo11="0".$vo11;
-$vo12=$hlavicka->vo12; if ( $vo12 < 10 ) $vo12="0".$vo12;
-$pdf->Cell(150,32," ","$rmc1",1,"L");
-$pdf->Cell(18,5," ","$rmc1",0,"L");$pdf->Cell(10,5,"$vo01","$rmc",0,"L");
-$pdf->Cell(22,5,"$hlavicka->vz01","$rmc",1,"R");
-$pdf->Cell(19,5," ","$rmc1",0,"L");$pdf->Cell(9,5,"$vo02","$rmc",0,"L");
-$pdf->Cell(22,5,"$hlavicka->vz02","$rmc",1,"R");
-$pdf->Cell(17,6," ","$rmc1",0,"L");$pdf->Cell(11,5,"$vo03","$rmc",0,"L");
-$pdf->Cell(22,5,"$hlavicka->vz03","$rmc",1,"R");
-$pdf->Cell(15,5," ","$rmc1",0,"L");$pdf->Cell(13,6,"$vo04","$rmc",0,"L");
-$pdf->Cell(22,6,"$hlavicka->vz04","$rmc",1,"R");
-$pdf->Cell(14,5," ","$rmc1",0,"L");$pdf->Cell(14,4,"$vo05","$rmc",0,"L");
-$pdf->Cell(22,4,"$hlavicka->vz05","$rmc",1,"R");
-$pdf->Cell(14,6," ","$rmc1",0,"L");$pdf->Cell(14,6,"$vo06","$rmc",0,"L");
-$pdf->Cell(22,5,"$hlavicka->vz06","$rmc",1,"R");
-$pdf->Cell(13,5," ","$rmc1",0,"L");$pdf->Cell(15,6,"$vo07","$rmc",0,"L");
-$pdf->Cell(22,6,"$hlavicka->vz07","$rmc",1,"R");
-$pdf->Cell(18,5," ","$rmc1",0,"L");$pdf->Cell(10,4,"$vo08","$rmc",0,"L");
-$pdf->Cell(22,4,"$hlavicka->vz08","$rmc",1,"R");
-$pdf->Cell(23,6," ","$rmc1",0,"L");$pdf->Cell(5,6,"$vo09","$rmc",0,"L");
-$pdf->Cell(22,6,"$hlavicka->vz09","$rmc",1,"R");
-$pdf->Cell(20,5," ","$rmc1",0,"L");$pdf->Cell(8,5,"$vo10","$rmc",0,"L");
-$pdf->Cell(22,5,"$hlavicka->vz10","$rmc",1,"R");
-$pdf->Cell(22,5," ","$rmc1",0,"L");$pdf->Cell(6,5,"$vo11","$rmc",0,"L");
-$pdf->Cell(22,5,"$hlavicka->vz11","$rmc",1,"R");
-$pdf->Cell(22,5," ","$rmc1",0,"L");$pdf->Cell(6,5,"$vo12","$rmc",0,"L");
-$pdf->Cell(22,5,"$hlavicka->vz12","$rmc",1,"R");
-$pdf->Cell(28,6," ","$rmc1",0,"L");$pdf->Cell(22,6,"$hlavicka->vzspolu","$rmc",1,"R");
+$vo12=$hlavicka->vo12; if ( $vo12 < 10 ) $vo12="0".$vo12; //dopyt, èo je toto, nižšie nie je ošetrené + nie sú ošetrené "0" a "0.00"
+$vp01=$hlavicka->vp01;
+$vp02=$hlavicka->vp02;
+$vp03=$hlavicka->vp03;
+$vp04=$hlavicka->vp04;
+$vp05=$hlavicka->vp05;
+$vp06=$hlavicka->vp06;
+$vp07=$hlavicka->vp07;
+$vp08=$hlavicka->vp08;
+$vp09=$hlavicka->vp09;
+$vp10=$hlavicka->vp10;
+$vp11=$hlavicka->vp11;
+$vp12=$hlavicka->vp12;
+$pdf->Cell(150,20," ","$rmc1",1,"L");
+$pdf->Cell(18,5," ","$rmc1",0,"L");$pdf->Cell(18,6,"$vo01","$rmc",0,"L");$pdf->Cell(29,6,"$hlavicka->vz01","$rmc",0,"R");
+$pdf->Cell(13,5," ","$rmc1",0,"L");$pdf->Cell(18,6,"$vp01","$rmc",0,"L");$pdf->Cell(29,6,"$hlavicka->vm01","$rmc",1,"R");
+
+$pdf->Cell(19,5," ","$rmc1",0,"L");$pdf->Cell(17,5,"$vo02","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vz02","$rmc",0,"R");
+$pdf->Cell(14,5," ","$rmc1",0,"L");$pdf->Cell(17,5,"$vp02","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vm02","$rmc",1,"R");
+
+$pdf->Cell(17,6," ","$rmc1",0,"L");$pdf->Cell(19,5,"$vo03","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vz03","$rmc",0,"R");
+$pdf->Cell(12,6," ","$rmc1",0,"L");$pdf->Cell(19,5,"$vp03","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vm03","$rmc",1,"R");
+
+$pdf->Cell(15,5," ","$rmc1",0,"L");$pdf->Cell(21,5,"$vo04","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vz04","$rmc",0,"R");
+$pdf->Cell(10,5," ","$rmc1",0,"L");$pdf->Cell(21,5,"$vp04","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vm04","$rmc",1,"R");
+
+$pdf->Cell(13,5," ","$rmc1",0,"L");$pdf->Cell(23,5,"$vo05","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vz05","$rmc",0,"R");
+$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(23,5,"$vp05","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vm05","$rmc",1,"R");
+
+$pdf->Cell(13,6," ","$rmc1",0,"L");$pdf->Cell(23,5,"$vo06","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vz06","$rmc",0,"R");
+$pdf->Cell(8,6," ","$rmc1",0,"L");$pdf->Cell(23,5,"$vp06","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vm06","$rmc",1,"R");
+
+$pdf->Cell(12,5," ","$rmc1",0,"L");$pdf->Cell(24,6,"$vo07","$rmc",0,"L");$pdf->Cell(29,6,"$hlavicka->vz07","$rmc",0,"R");
+$pdf->Cell(7,5," ","$rmc1",0,"L");$pdf->Cell(24,6,"$vp07","$rmc",0,"L");$pdf->Cell(29,6,"$hlavicka->vm07","$rmc",1,"R");
+
+$pdf->Cell(18,5," ","$rmc1",0,"L");$pdf->Cell(18,4,"$vo08","$rmc",0,"L");$pdf->Cell(29,4,"$hlavicka->vz08","$rmc",0,"R");
+$pdf->Cell(13,5," ","$rmc1",0,"L");$pdf->Cell(18,4,"$vp08","$rmc",0,"L");$pdf->Cell(29,4,"$hlavicka->vm08","$rmc",1,"R");
+
+$pdf->Cell(23,6," ","$rmc1",0,"L");$pdf->Cell(13,6,"$vo09","$rmc",0,"L");$pdf->Cell(29,6,"$hlavicka->vz09","$rmc",0,"R");
+$pdf->Cell(19,6," ","$rmc1",0,"L");$pdf->Cell(12,6,"$vp09","$rmc",0,"L");$pdf->Cell(29,6,"$hlavicka->vm09","$rmc",1,"R");
+
+$pdf->Cell(19,5," ","$rmc1",0,"L");$pdf->Cell(17,5,"$vo10","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vz10","$rmc",0,"R");
+$pdf->Cell(14,5," ","$rmc1",0,"L");$pdf->Cell(17,5,"$vp10","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vm10","$rmc",1,"R");
+
+$pdf->Cell(22,5," ","$rmc1",0,"L");$pdf->Cell(14,5,"$vo11","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vz11","$rmc",0,"R");
+$pdf->Cell(17,5," ","$rmc1",0,"L");$pdf->Cell(14,5,"$vp11","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vm11","$rmc",1,"R");
+
+$pdf->Cell(22,5," ","$rmc1",0,"L");$pdf->Cell(14,5,"$vo12","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vz12","$rmc",0,"R");
+$pdf->Cell(17,5," ","$rmc1",0,"L");$pdf->Cell(14,5,"$vp12","$rmc",0,"L");$pdf->Cell(29,5,"$hlavicka->vm12","$rmc",1,"R");
+
+$pdf->Cell(36,6," ","$rmc1",0,"L");$pdf->Cell(29,5,"$hlavicka->vzspolu","$rmc",0,"R");
+$pdf->Cell(31,6," ","$rmc1",0,"L");$pdf->Cell(29,5,"$hlavicka->vmspolu","$rmc",1,"R");
 
 //bod 7.
 $vzodhad=$hlavicka->vzodhad; if ( $vzodhad == 0 ) $vzodhad="";
-$pdf->Cell(150,17," ","$rmc1",1,"L");
+$pdf->Cell(150,18," ","$rmc1",1,"L");
 $pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(32,5,"$vzodhad","$rmc",1,"L");
 
 //bod 8.
