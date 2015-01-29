@@ -1553,18 +1553,18 @@ $pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(156,4.5,"$hlavicka->text52","$rmc",
 $pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(156,3.5,"$hlavicka->text53","$rmc",1,"L");
 
 //bod 6.
-$vo01=$hlavicka->vo01; if ( $vo01 < 10 ) $vo01="0".$vo01;
-$vo02=$hlavicka->vo02; if ( $vo02 < 10 ) $vo02="0".$vo02;
-$vo03=$hlavicka->vo03; if ( $vo03 < 10 ) $vo03="0".$vo03;
-$vo04=$hlavicka->vo04; if ( $vo04 < 10 ) $vo04="0".$vo04;
-$vo05=$hlavicka->vo05; if ( $vo05 < 10 ) $vo05="0".$vo05;
-$vo06=$hlavicka->vo06; if ( $vo06 < 10 ) $vo06="0".$vo06;
-$vo07=$hlavicka->vo07; if ( $vo07 < 10 ) $vo07="0".$vo07;
-$vo08=$hlavicka->vo08; if ( $vo08 < 10 ) $vo08="0".$vo08;
-$vo09=$hlavicka->vo09; if ( $vo09 < 10 ) $vo09="0".$vo09;
-$vo10=$hlavicka->vo10; if ( $vo10 < 10 ) $vo10="0".$vo10;
-$vo11=$hlavicka->vo11; if ( $vo11 < 10 ) $vo11="0".$vo11;
-$vo12=$hlavicka->vo12; if ( $vo12 < 10 ) $vo12="0".$vo12; //dopyt, èo je toto, nižšie nie je ošetrené + nie sú ošetrené "0" a "0.00"
+$vo01=$hlavicka->vo01; 
+$vo02=$hlavicka->vo02; 
+$vo03=$hlavicka->vo03; 
+$vo04=$hlavicka->vo04; 
+$vo05=$hlavicka->vo05; 
+$vo06=$hlavicka->vo06; 
+$vo07=$hlavicka->vo07; 
+$vo08=$hlavicka->vo08; 
+$vo09=$hlavicka->vo09; 
+$vo10=$hlavicka->vo10; 
+$vo11=$hlavicka->vo11; 
+$vo12=$hlavicka->vo12; 
 $vp01=$hlavicka->vp01;
 $vp02=$hlavicka->vp02;
 $vp03=$hlavicka->vp03;
