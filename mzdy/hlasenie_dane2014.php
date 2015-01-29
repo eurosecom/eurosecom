@@ -25,7 +25,7 @@ require_once("../pswd/password.php");
 $rmc=0;
 $rmc1=0;
 
-$zablokovane=1;
+//$zablokovane=1;
 if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
 if ( $zablokovane == 1 )
      {
