@@ -348,8 +348,6 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 $dsql = mysql_query("$dsqlt");
 
 //zober data z mzdzalsum 
-//z firmy minuleho roka ak nenastupil tento rok DORIESIT //////////////////////////////////////////////////////////////////////////////
-//z firmy tohto roka ak nastupil tento rok 
 $dan1=$kli_vrok."-01-01";
 $dan365=$kli_vrok."-12-31";
 $minuly=1;
@@ -785,7 +783,16 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypln".$kli_uzid.
 " SELECT oc,".
 " dok,dat,ume,dm,dp,dk,dni,hod,mnz,saz,kc,0,0".
 " FROM ".$databaza."F$kli_vmcf"."_mzdzalvy".
-" WHERE ".$databaza."F$kli_vmcf"."_mzdzalvy.oc = $cislo_oc AND ".$databaza."F$kli_vmcf"."_mzdzalvy.dp != '0000-00-00'".
+" WHERE ".$databaza."F$kli_vmcf"."_mzdzalvy.oc = $cislo_oc AND ".$databaza."F$kli_vmcf"."_mzdzalvy.dp != '0000-00-00' AND ( ( dm > 800 AND dm < 899 ) OR dm = 502 OR dm = 503 ) ".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypln".$kli_uzid.
+" SELECT oc,".
+" dok,dat,ume,dm,dp,dk,dni,hod,mnz,saz,kc,0,0".
+" FROM F$kli_vxcf"."_mzdzalvy".
+" WHERE F$kli_vxcf"."_mzdzalvy.oc = $cislo_oc AND F$kli_vxcf"."_mzdzalvy.dp != '0000-00-00' AND ( ( dm > 800 AND dm < 899 ) OR dm = 502 OR dm = 503 ) ".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
@@ -881,7 +888,9 @@ $dsql = mysql_query("$dsqlt");
 
 //vypocty
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenienemd".
-" SET vzspolu=vz01+vz02+vz03+vz04+vz05+vz06+vz07+vz08+vz09+vz10+vz11+vz12 WHERE oc >= 0";
+" SET vmspolu=vm01+vm02+vm03+vm04+vm05+vm06+vm07+vm08+vm09+vm10+vm11+vm12, ".
+" vzspolu=vz01+vz02+vz03+vz04+vz05+vz06+vz07+vz08+vz09+vz10+vz11+vz12 ".
+" WHERE oc >= 0 ";
 $oznac = mysql_query("$sqtoz");
 
 /////////////NACITANIE UDAJOV Z PARAMETROV

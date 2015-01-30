@@ -246,6 +246,10 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdnemzakb SELECT 2, oc, 0, 0, dni, 0, 0, 0,
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdnemzakb SELECT 2, oc, 0, 0, dni, 0, 0, 0, 0, '', '' FROM F$kli_vxcf"."_mzdzalvy WHERE ume < $kli_vume AND ( dm = 502 OR dm = 503 ) ";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
 $kli_vmcf=$fir_allx11;
 $databaza="";
 $dtb2 = include("../cis/oddel_dtbz1.php");
@@ -254,6 +258,10 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdnemzakb SELECT 3, oc, zzam_np, 0, 0, 0, 0
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdnemzakb SELECT 4, oc, 0, 0, dni, 0, 0, 0, 0, '', '' FROM ".$databaza."F$kli_vmcf"."_mzdzalvy WHERE dm >= 801 AND dm <= 804 ";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdnemzakb SELECT 4, oc, 0, 0, dni, 0, 0, 0, 0, '', '' FROM ".$databaza."F$kli_vmcf"."_mzdzalvy WHERE dm = 502 OR dm = 503 ";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
@@ -278,8 +286,9 @@ $sql = "UPDATE F$kli_vxcf"."_mzdnemzakb SET umex='$kli_vume' WHERE oc > 0 ";
 $vysledek = mysql_query("$sql");
 
 $sql = "UPDATE F$kli_vxcf"."_mzdkun,F$kli_vxcf"."_mzdnemzakb SET F$kli_vxcf"."_mzdkun.znem=F$kli_vxcf"."_mzdnemzakb.sz4x ".
-" WHERE F$kli_vxcf"."_mzdkun.oc=F$kli_vxcf"."_mzdnemzakb.oc  ";
+" WHERE F$kli_vxcf"."_mzdkun.oc=F$kli_vxcf"."_mzdnemzakb.oc AND F$kli_vxcf"."_mzdkun.dan > '$datum0101'";
 $vysledek = mysql_query("$sql");
+//echo $sql;
 
 }
 

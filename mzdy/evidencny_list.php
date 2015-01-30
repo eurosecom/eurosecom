@@ -57,11 +57,13 @@ $rokm2=$kli_vrok-2;
 $rokm3=$kli_vrok-3;
 $rokm4=$kli_vrok-4;
 $rokm5=$kli_vrok-5;
+$rokm6=$kli_vrok-6;
 $xrok=$rokm1;
 if( $rok == 2 ) { $xrok=$rokm2; }
 if( $rok == 3 ) { $xrok=$rokm3; }
 if( $rok == 4 ) { $xrok=$rokm4; }
 if( $rok == 5 ) { $xrok=$rokm5; }
+if( $rok == 6 ) { $xrok=$rokm6; }
 ?>
 <script type="text/javascript">
 if( !confirm ("Chcete naËÌtaù hodnoty roku <?php echo $xrok; ?> do evidenËnÈho listu z firmy <?php echo $fir; ?> ? ") )
@@ -82,14 +84,7 @@ $lenjedenrok=$rok;
 //vymazat evidencny list 
     if ( $copern == 6155 )
     {
-$rokm1=$kli_vrok-1;
-$rokm2=$kli_vrok-2;
-$rokm3=$kli_vrok-3;
-$rokm4=$kli_vrok-4;
-$xrok=$rokm1;
-if( $rok == 2 ) { $xrok=$rokm2; }
-if( $rok == 3 ) { $xrok=$rokm3; }
-if( $rok == 4 ) { $xrok=$rokm4; }
+
 ?>
 <script type="text/javascript">
 if( !confirm ("Chcete vymazaù hodnoty evidenËnÈho listu ? ") )
@@ -148,26 +143,16 @@ if ( $kli_vrok > 2013 )
 {
 if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; }
 }
+if ( $kli_vrok > 2014 )
+{
+if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; }
+}
 
 $uprtxt = "DELETE FROM F$kli_vxcf"."_mzdevidencny WHERE oc = $cislo_oc ";
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "INSERT INTO F$kli_vxcf"."_mzdevidencny SELECT * FROM ".$databaza."F$h_ycf"."_mzdevidencny WHERE oc = $cislo_oc ";
 $upravene = mysql_query("$uprtxt"); 
-
-$uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny,F$h_ycf"."_mzdevidencny SET ".
-" F$kli_vxcf"."_mzdevidencny.kr01=".$databaza."F$h_ycf"."_mzdevidencny.kr01, ".
-" F$kli_vxcf"."_mzdevidencny.zp01=".$databaza."F$h_ycf"."_mzdevidencny.zp01, ".
-" F$kli_vxcf"."_mzdevidencny.dp01=".$databaza."F$h_ycf"."_mzdevidencny.dp01, ".
-" F$kli_vxcf"."_mzdevidencny.dk01=".$databaza."F$h_ycf"."_mzdevidencny.dk01, ".
-" F$kli_vxcf"."_mzdevidencny.vz01=".$databaza."F$h_ycf"."_mzdevidencny.vz01, ".
-" F$kli_vxcf"."_mzdevidencny.vv01=".$databaza."F$h_ycf"."_mzdevidencny.vv01, ".
-" F$kli_vxcf"."_mzdevidencny.kd01=".$databaza."F$h_ycf"."_mzdevidencny.kd01  ".
-" WHERE F$kli_vxcf"."_mzdevidencny.oc=".$databaza."F$h_ycf"."_mzdevidencny.oc AND ".$databaza."F$h_ycf"."_mzdevidencny.kr01 > 0 "; 
-//$upravene = mysql_query("$uprtxt"); 
-
-
-
 
 $copern=26;
 //koniec nacitania celeho minuleho roka do evid.listu 
@@ -207,15 +192,21 @@ $rokm2=$kli_vrok-2;
 $rokm3=$kli_vrok-3;
 $rokm4=$kli_vrok-4;
 $rokm5=$kli_vrok-5;
+$rokm6=$kli_vrok-6;
 $xrok=$rokm1;
 if( $lenjedenrok == 2 ) { $xrok=$rokm2; }
 if( $lenjedenrok == 3 ) { $xrok=$rokm3; }
 if( $lenjedenrok == 4 ) { $xrok=$rokm4; }
 if( $lenjedenrok == 5 ) { $xrok=$rokm5; }
+if( $lenjedenrok == 6 ) { $xrok=$rokm6; }
 }
 
 
 $databaza="";
+if ( $xrok < 2015 AND $lenjedenrok > 0 )
+{
+if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; }
+}
 if ( $xrok < 2014 AND $lenjedenrok > 0 )
 {
 if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; }
@@ -266,11 +257,13 @@ $rokm2=$kli_vrok-2;
 $rokm3=$kli_vrok-3;
 $rokm4=$kli_vrok-4;
 $rokm5=$kli_vrok-5;
+$rokm6=$kli_vrok-6;
 $xrok=$rokm1;
 if( $lenjedenrok == 2 ) { $xrok=$rokm2; }
 if( $lenjedenrok == 3 ) { $xrok=$rokm3; }
 if( $lenjedenrok == 4 ) { $xrok=$rokm4; }
 if( $lenjedenrok == 5 ) { $xrok=$rokm5; }
+if( $lenjedenrok == 6 ) { $xrok=$rokm6; }
 
 $dat0101=$xrok."-01-01";
 $dat3112=$xrok."-12-31";
@@ -330,11 +323,13 @@ $rokm2=$kli_vrok-2;
 $rokm3=$kli_vrok-3;
 $rokm4=$kli_vrok-4;
 $rokm5=$kli_vrok-5;
+$rokm6=$kli_vrok-6;
 $kli_vrokx=$rokm1;
 if( $lenjedenrok == 2 ) { $kli_vrokx=$rokm2; }
 if( $lenjedenrok == 3 ) { $kli_vrokx=$rokm3; }
 if( $lenjedenrok == 4 ) { $kli_vrokx=$rokm4; }
 if( $lenjedenrok == 5 ) { $kli_vrokx=$rokm5; }
+if( $lenjedenrok == 6 ) { $kli_vrokx=$rokm6; }
 }
 
 $uzje=0;
@@ -845,7 +840,7 @@ if( $hlavicka->kr01 > 0 )
 {
 $pdf->SetY(110);
 $vz01=$hlavicka->vz01;
-if( $hlavicka->vz01 == 0 ) $vz01="";
+//if( $hlavicka->vz01 == 0 ) $vz01="";
 $vv01=$hlavicka->vv01;
 if( $hlavicka->vv01 == 0 ) $vv01="";
 $kd01=$hlavicka->kd01;
@@ -888,7 +883,7 @@ if( $hlavicka->kr02 > 0 )
 {
 $pdf->SetY(119);
 $vz02=$hlavicka->vz02;
-if( $hlavicka->vz02 == 0 ) $vz02="";
+//if( $hlavicka->vz02 == 0 ) $vz02="";
 $vv02=$hlavicka->vv02;
 if( $hlavicka->vv02 == 0 ) $vv02="";
 $kd02=$hlavicka->kd02;
@@ -931,7 +926,7 @@ if( $hlavicka->kr03 > 0 )
 {
 $pdf->SetY(127);
 $vz03=$hlavicka->vz03;
-if( $hlavicka->vz03 == 0 ) $vz03="";
+//if( $hlavicka->vz03 == 0 ) $vz03="";
 $vv03=$hlavicka->vv03;
 if( $hlavicka->vv03 == 0 ) $vv03="";
 $kd03=$hlavicka->kd03;
@@ -974,7 +969,7 @@ if( $hlavicka->kr04 > 0 )
 {
 $pdf->SetY(136);
 $vz04=$hlavicka->vz04;
-if( $hlavicka->vz04 == 0 ) $vz04="";
+//if( $hlavicka->vz04 == 0 ) $vz04="";
 $vv04=$hlavicka->vv04;
 if( $hlavicka->vv04 == 0 ) $vv04="";
 $kd04=$hlavicka->kd04;
@@ -1018,7 +1013,7 @@ if( $hlavicka->kr05 > 0 )
 {
 $pdf->SetY(145);
 $vz05=$hlavicka->vz05;
-if( $hlavicka->vz05 == 0 ) $vz05="";
+//if( $hlavicka->vz05 == 0 ) $vz05="";
 $vv05=$hlavicka->vv05;
 if( $hlavicka->vv05 == 0 ) $vv05="";
 $kd05=$hlavicka->kd05;
@@ -1061,7 +1056,7 @@ if( $hlavicka->kr06 > 0 )
 {
 $pdf->SetY(153);
 $vz06=$hlavicka->vz06;
-if( $hlavicka->vz06 == 0 ) $vz06="";
+//if( $hlavicka->vz06 == 0 ) $vz06="";
 $vv06=$hlavicka->vv06;
 if( $hlavicka->vv06 == 0 ) $vv06="";
 $kd06=$hlavicka->kd06;
@@ -1104,7 +1099,7 @@ if( $hlavicka->kr07 > 0 )
 {
 $pdf->SetY(161);
 $vz07=$hlavicka->vz07;
-if( $hlavicka->vz07 == 0 ) $vz07="";
+//if( $hlavicka->vz07 == 0 ) $vz07="";
 $vv07=$hlavicka->vv07;
 if( $hlavicka->vv07 == 0 ) $vv07="";
 $kd07=$hlavicka->kd07;
@@ -1147,7 +1142,7 @@ if( $hlavicka->kr08 > 0 )
 {
 $pdf->SetY(170);
 $vz08=$hlavicka->vz08;
-if( $hlavicka->vz08 == 0 ) $vz08="";
+//if( $hlavicka->vz08 == 0 ) $vz08="";
 $vv08=$hlavicka->vv08;
 if( $hlavicka->vv08 == 0 ) $vv08="";
 $kd08=$hlavicka->kd08;
@@ -1190,7 +1185,7 @@ if( $hlavicka->kr09 > 0 )
 {
 $pdf->SetY(178);
 $vz09=$hlavicka->vz09;
-if( $hlavicka->vz09 == 0 ) $vz09="";
+//if( $hlavicka->vz09 == 0 ) $vz09="";
 $vv09=$hlavicka->vv09;
 if( $hlavicka->vv09 == 0 ) $vv09="";
 $kd09=$hlavicka->kd09;
@@ -1233,7 +1228,7 @@ if( $hlavicka->kr10 > 0 )
 {
 $pdf->SetY(187);
 $vz10=$hlavicka->vz10;
-if( $hlavicka->vz10 == 0 ) $vz10="";
+//if( $hlavicka->vz10 == 0 ) $vz10="";
 $vv10=$hlavicka->vv10;
 if( $hlavicka->vv10 == 0 ) $vv10="";
 $kd10=$hlavicka->kd10;
@@ -1276,7 +1271,7 @@ if( $hlavicka->kr11 > 0 )
 {
 $pdf->SetY(195);
 $vz11=$hlavicka->vz11;
-if( $hlavicka->vz11 == 0 ) $vz11="";
+//if( $hlavicka->vz11 == 0 ) $vz11="";
 $vv11=$hlavicka->vv11;
 if( $hlavicka->vv11 == 0 ) $vv11="";
 $kd11=$hlavicka->kd11;
@@ -1319,7 +1314,7 @@ if( $hlavicka->kr12 > 0 )
 {
 $pdf->SetY(204);
 $vz12=$hlavicka->vz12;
-if( $hlavicka->vz12 == 0 ) $vz12="";
+//if( $hlavicka->vz12 == 0 ) $vz12="";
 $vv12=$hlavicka->vv12;
 if( $hlavicka->vv12 == 0 ) $vv12="";
 $kd12=$hlavicka->kd12;
@@ -1869,8 +1864,9 @@ $rokm2=$kli_vrok-2;
 $rokm3=$kli_vrok-3;
 $rokm4=$kli_vrok-4;
 $rokm5=$kli_vrok-5;
+$rokm6=$kli_vrok-6;
 
-$firm1=0; $firm2=0; $firm3=0; $firm4=0; $firm5=0;
+$firm1=0; $firm2=0; $firm3=0; $firm4=0; $firm5=0; $firm6=0;
 
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_ufir WHERE udaje = 1";
 $fir_vysledok = mysql_query($sqlfir);
@@ -1884,6 +1880,7 @@ if( $kli_vrok == 2011 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { 
 if( $kli_vrok == 2012 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
 if( $kli_vrok == 2013 ) { if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; } }
 if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; } }
+if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2014db2015.php")) { $databaza=$mysqldb2014."."; } }
 
 if( $firm1 > 0 )
 {
@@ -1899,6 +1896,7 @@ if( $fir_allx11 > 0 ) { $firm2=$fir_allx11; }
 if( $kli_vrok == 2012 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
 if( $kli_vrok == 2013 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
 if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; } }
+if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; } }
 
 if( $firm2 > 0 )
 {
@@ -1912,6 +1910,7 @@ if( $fir_allx11 > 0 ) { $firm3=$fir_allx11; }
 
 if( $kli_vrok == 2013 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
 if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
+if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; } }
 
 if( $firm3 > 0 )
 {
@@ -1924,7 +1923,8 @@ if( $fir_allx11 > 0 ) { $firm4=$fir_allx11; }
 }
 
 
-if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2010."."; } }
+if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
+if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
 
 if( $firm4 > 0 )
 {
@@ -1936,6 +1936,17 @@ $fir_allx11 = 1*$fir_riadok->allx11;
 if( $fir_allx11 > 0 ) { $firm5=$fir_allx11; }
 }
 
+if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
+
+if( $firm5 > 0 )
+{
+$sqlfir = "SELECT * FROM ".$databaza."F$firm5"."_ufir WHERE udaje = 1";
+$fir_vysledok = mysql_query($sqlfir);
+if( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+
+$fir_allx11 = 1*$fir_riadok->allx11;
+if( $fir_allx11 > 0 ) { $firm6=$fir_allx11; }
+}
 
 //osobne cislo prepinanie
 $novy=0;
@@ -2049,8 +2060,14 @@ if ( $copern == 20 )
 <?php                   } ?>
 <?php if ( $firm5 > 0 ) { ?>
  <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=5&fir=<?php echo $firm5; ?>', '_self')"
-  title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm4; ?> a firmy Ë. <?php echo $firm5; ?> - len rok <?php echo $rokm5; ?>'>
+  title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm5; ?> a firmy Ë. <?php echo $firm5; ?> - len rok <?php echo $rokm5; ?>'>
   <?php echo "$rokm5,$firm5"; ?>
+ </a>
+<?php                   } ?>
+<?php if ( $firm6 > 0 ) { ?>
+ <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=6&fir=<?php echo $firm6; ?>', '_self')"
+  title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm6; ?> a firmy Ë. <?php echo $firm6; ?> - len rok <?php echo $rokm6; ?>'>
+  <?php echo "$rokm6,$firm6"; ?>
  </a>
 <?php                   } ?>
 <?php

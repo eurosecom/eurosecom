@@ -1460,6 +1460,9 @@ $oznac = mysql_query("$sqtoz");
 
 //tuto vypocitam odvodovu ulavu zp
 // ak od 380 do 570 do zmin_pn upraveny zaklad zp a do zmin_ip je odpocitatelna polozka
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zmin_ip=0, zmin_pn=0, des6=0, des2=0 WHERE oc > 0 ";
+$oznac = mysql_query("$sqtoz");
+
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
 " SET zmin_ip=zzam_zp ".
 " WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND deti_sp = 1 AND zzam_zp < 380 ";
@@ -1539,10 +1542,71 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdprcneoda$kli_
 " WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_mzdprcneoda$kli_uzid.oc AND zmin_ip > 0 ";
 $oznac = mysql_query("$sqtoz");
 
+if( $kli_uzid == 171717171717171 )
+{
+
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcneoda$kli_uzid  WHERE oc > 0 ";
+
+$tov = mysql_query("$sqltt");
+$tvpol = mysql_num_rows($tov);
+echo $sqltt.$tvpol."<br />";
+$i=0;
+  while ($i <= $tvpol )
+  {
+
+  if (@$zaznam=mysql_data_seek($tov,$i))
+ {
+$rtov=mysql_fetch_object($tov);
+
+
+echo $rtov->oc.";".$rtov->celk_dni.";".$rtov->nezp_dni."<br />";
+
+ }
+
+$i=$i+1;
+   }
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcsum$kli_uzid  WHERE oc > 0 ";
+
+$tov = mysql_query("$sqltt");
+$tvpol = mysql_num_rows($tov);
+echo $sqltt.$tvpol."<br />";
+$i=0;
+  while ($i <= $tvpol )
+  {
+
+  if (@$zaznam=mysql_data_seek($tov,$i))
+ {
+$rtov=mysql_fetch_object($tov);
+
+
+echo $rtov->oc.";".$rtov->zzam_zp.";".$rtov->des6."<br />";
+
+ }
+
+$i=$i+1;
+   }
+
+exit;
+}
+
+ 
+
 $dsqlt = "DROP TABLE F$kli_vxcf"."_mzdprcneoda$kli_uzid  "; $dsql = mysql_query("$dsqlt");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
-" SET des6=des6+0.0049, des2=des6, zmin_ip=des2 ".
+" SET des6=des6+0.0049 ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND deti_sp = 1 AND zmin_ip > 0 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET des2=des6  ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND deti_sp = 1 AND zmin_ip > 0 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET zmin_ip=des2 ".
 " WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND deti_sp = 1 AND zmin_ip > 0 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -1551,7 +1615,13 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
-" SET zmin_pn=zzam_zp-zmin_ip, zzam_zp=zmin_pn ".
+" SET zmin_pn=zzam_zp-zmin_ip  ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND deti_sp = 1";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET zzam_zp=zmin_pn ".
 " WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND deti_sp = 1";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
@@ -1560,26 +1630,28 @@ $oznac = mysql_query("$sqtoz");
 
 //koniec tuto vypocitam odvodovu ulavu zp
 
+//exit;
+
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_zp=zmax_zp WHERE zzam_zp > zmax_zp ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_zp=zmin_zp WHERE zzam_zp < zmin_zp ";
-$oznac = mysql_query("$sqtoz");
+//$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_np=zmax_np WHERE zzam_np > zmax_np ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_np=zmin_np WHERE zzam_np < zmin_np ";
-$oznac = mysql_query("$sqtoz");
+//$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_sp=zmax_sp WHERE zzam_sp > zmax_sp ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_sp=zmin_sp WHERE zzam_sp < zmin_sp ";
-$oznac = mysql_query("$sqtoz");
+//$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_ip=zmax_ip WHERE zzam_ip > zmax_ip ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_ip=zmin_ip WHERE zzam_ip < zmin_ip ";
-$oznac = mysql_query("$sqtoz");
+//$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_pn=zmax_pn WHERE zzam_pn > zmax_pn ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_pn=zmin_pn WHERE zzam_pn < zmin_pn ";
-$oznac = mysql_query("$sqtoz");
+//$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_up=zmax_up WHERE zzam_up > zmax_up ";
 //$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_up=zmin_up WHERE zzam_up < zmin_up ";
@@ -1587,11 +1659,11 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_up=zmin_up WHERE zzam
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_gf=zmax_gf WHERE zzam_gf > zmax_gf ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_gf=zmin_gf WHERE zzam_gf < zmin_gf ";
-$oznac = mysql_query("$sqtoz");
+//$oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_rf=zmax_rf WHERE zzam_rf > zmax_rf ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zzam_rf=zmin_rf WHERE zzam_rf < zmin_rf ";
-$oznac = mysql_query("$sqtoz");
+//$oznac = mysql_query("$sqtoz");
 
 //exit;
 

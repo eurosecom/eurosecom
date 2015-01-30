@@ -315,7 +315,7 @@ $pdf->Cell(180,5,"     ","0",1,"L");
 $metalcomimor=0;
 if( $kli_vume == 8.2011 AND $metalco == 1 ) { $metalcomimor=1; }
 $amagro=0;
-if( $alchem == 1 AND $kli_vxcf != 543 AND $kli_vxcf != 553 AND $kli_vxcf != 563 AND $kli_vxcf != 573 ) { $alchem=0; $amagro=1; }
+//if( $alchem == 1 AND $kli_vxcf != 543 AND $kli_vxcf != 553 AND $kli_vxcf != 563 AND $kli_vxcf != 573 ) { $alchem=0; $amagro=1; }
 
 if( $pohladavky == 1 AND $metalcomimor == 1 ) { $pdf->Cell(180,13," ","0",1,"L"); }
 
