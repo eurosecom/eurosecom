@@ -1062,6 +1062,29 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
 "";
 $dsql = mysql_query("$dsqlt");
 
+//sem pridam riadky z _archivdphkvdphmanualplus$cislo_cpid
+$sqltt = "SELECT * FROM F$kli_vxcf"."_archivdphkvdphmanualplus$cislo_cpid ";
+$sql = mysql_query("$sqltt");
+if($sql)
+  {
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
+" 0,'','$cislo_cpid',0,kvodd,kvicd,kvfak,kvpvf,SUM(kvsdn),kvszd,SUM(kvzdn),SUM(kvzkl),SUM(kvodn),kvkodt,kvdtov,SUM(kvmnot),kvmerj,SUM(kvcobr),0,0,9,0,0,0,0,0,'$kli_vume','',daz,16,".
+"0,0,0,0,0,0,0,0,0,0, ".
+"0,0,0,0,0,0,0,0,0,0,99,".
+"0,0,0,0,0,0,0,0,0,0, ".
+"0,0,0,0,0,0,0,0,0,0, ".
+"0,0,0,0,0,0,0,0,SUM(kvzdn10),SUM(kvsdn10),SUM(kvzdn20),SUM(kvsdn20),".
+"'$fir_fico'".
+" FROM F$kli_vxcf"."_archivdphkvdphmanualplus$cislo_cpid ".
+" WHERE er1 = 2 ".
+" GROUP BY dok ".
+"";
+$dsql = mysql_query("$dsqlt");
+  }
+
+//echo $dsqlt;
+//exit;
+
 //suma za oddiel
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
 " 0,kvdic,cpid,0,kvodd,kvicd,kvfak,kvpvf,SUM(kvsdn),kvszd,SUM(kvzdn),SUM(kvzkl),SUM(kvodn),kvkodt,kvdtov,SUM(kvmnot),kvmerj,SUM(kvcobr),0,0,0,0,0,0,0,0,ume,dat,daz,30,SUM(r01),SUM(r02),SUM(r03),SUM(r04),SUM(r05),SUM(r06),SUM(r07),SUM(r08),SUM(r09),SUM(r10),".
@@ -1075,6 +1098,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
 " GROUP BY kvodd ".
 "";
 $dsql = mysql_query("$dsqlt");
+
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
 " 0,kvdic,cpid,0,kvodd,kvicd,kvfak,kvpvf,SUM(kvsdn),kvszd,SUM(kvzdn),SUM(kvzkl),SUM(kvodn),kvkodt,kvdtov,SUM(kvmnot),kvmerj,SUM(kvcobr),0,0,9,0,0,0,0,0,ume,dat,daz,30,SUM(r01),SUM(r02),SUM(r03),SUM(r04),SUM(r05),SUM(r06),SUM(r07),SUM(r08),SUM(r09),SUM(r10),".
@@ -1577,8 +1601,8 @@ $pdf->Cell(37,4,"$hlavicka->dok","$rmc",1,"C");
 
 if ( $hlavicka->psys == 30 AND $hlavicka->kvodd == "A1" ) {
 $rmc="TB";
-$pdf->Cell(8,4," ","0",0,"R");$pdf->Cell(152,4,"SPOLU DPH","$rmc",0,"R");$pdf->Cell(38,4,"$hlavicka->kvodn","$rmc",0,"R");$pdf->Cell(2,4," ","0",0,"R");
-$dpha1=$hlavicka->kvodn;
+$pdf->Cell(8,4," ","0",0,"R");$pdf->Cell(152,4,"SPOLU DPH","$rmc",0,"R");$pdf->Cell(38,4,"$hlavicka->kvsdn","$rmc",0,"R");$pdf->Cell(2,4," ","0",0,"R");
+$dpha1=$hlavicka->kvsdn;
 $pdf->Cell(0,4," ","0",1,"R"); //dopyt, èo je toto
 $rmc=0;
                                                           }

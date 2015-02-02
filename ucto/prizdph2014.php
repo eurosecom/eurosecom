@@ -604,23 +604,7 @@ $oznac = mysql_query("$sqtoz");
 }
 
 
-//zober JCD z minuleho roka ulozene v uctdb_dokladov
-if( $fir_uctx07 == 1 AND $kli_vxcf == 370 AND $kli_vume == 1.2011 )
-     {
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid"." SELECT".
-" 0,0,0,0,0,0,0,0,0,1.2011,'2011-01-31','2011-01-31',16,0,0,0,0,0,0,0,0,0,0,".
-"hod,rdp,0,0,0,0,ucm,ucd,ico,fak,dok,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"$fir_fico".
-" FROM F$kli_vxcf"."_uctdb_dokladov ".
-" WHERE ucd = $fir_uctx08 ";
-//echo $dsqlt;
-$dsql = mysql_query("$dsqlt");
-
-     }
-//koniec zober JCD z minuleho roka ulozene v uctdb_dokladov
-
+//exit;
 
 //dovoz z 3k JCD, blok urob len ak su jcd crz1=1 v ciselniku drdp
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcprizdphs$kli_uzid".
@@ -818,6 +802,29 @@ $oznac = mysql_query("$sqtoz");
      }
 //koniec dovoz 3k JCD
 
+//zober JCD z minuleho roka ulozene v uctdb_dokladov
+if( $fir_uctx07 == 1 )
+     {
+$poles = explode(".", $kli_vume);
+$kli_vmesj=1*$poles[0];
+if( $kli_vmesj < 10 ) { $kli_vmesj="0".$kli_vmesj; }
+$datx1=$kli_vrok."-".$kli_vmesj."-01";
+
+$pdok="dph ".$kli_vmesj.".".$kli_vrok;
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid"." SELECT".
+" 0,0,0,0,0,0,0,0,0,'$kli_vume','$datx1','$datx1',16,0,0,0,0,0,0,0,0,0,0,".
+"hod,rdp,0,0,0,0,ucm,ucd,ico,fak,dok,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"$fir_fico".
+" FROM F$kli_vxcf"."_uctdb_dokladov ".
+" WHERE ucd = $fir_uctx08 AND pdok = '$pdok' ";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+     }
+//koniec zober JCD z minuleho roka ulozene v uctdb_dokladov
+//exit;
 
 //nastav crz,crd,szd podla rdp
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid ,F$kli_vxcf"."_uctdrdp".
@@ -986,7 +993,6 @@ $oznac = mysql_query("$sqtoz");
 $vsql = 'DROP TABLE F'.$kli_vxcf.'_dphprcx'.$kli_uzid;
 $vytvor = mysql_query("$vsql");
 //koniec tu zistim ci ak hod < 0 dph je to dobropis odberatelsky alebo len zuctovanie zalohy...
-//exit;
 
 
 //ak je dobropis moj odberatelsky presun zaklad do r26 a dph do r27  ( okrem sluzieb zo zahranicia samozdanenie rdp 34,84 xrz=11,xrd=12 )
@@ -998,7 +1004,14 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET rdk=27 ".
 " WHERE ( xrd = 02 OR xrd = 04 OR xrd = 06 OR xrd = 08 OR xrd = 10 ) AND hod < 0 AND LEFT(ucd,3) = 343 AND er1 = 1 ";
 $oznac = mysql_query("$sqtoz");
                                     }
-
+if( $chyby == 0 AND $copern != 40 ) {
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET rdk=26 ".
+" WHERE ( xrz = 01 OR xrz = 03 OR xrz = 05 OR xrz = 07 OR xrz = 09 ) AND ( rdp = 255 OR rdp = 260 ) AND hod > 0 AND LEFT(ucd,3) != 343 AND er1 = 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET rdk=27 ".
+" WHERE ( xrd = 02 OR xrd = 04 OR xrd = 06 OR xrd = 08 OR xrd = 10 ) AND ( rdp = 255 OR rdp = 260 ) AND hod > 0 AND LEFT(ucd,3) = 343 AND er1 = 0 ";
+$oznac = mysql_query("$sqtoz");
+                                    }
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET er1=0 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET r38=0 ";
@@ -1014,6 +1027,7 @@ if( $rdk >= 10 ) $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET r$rdk=h
 $oznac = mysql_query("$sqtoz");
 $rdk=$rdk+1;
   }
+
 
 //trojstranny rdp=63 daj aj do r36
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET r36=hod ".

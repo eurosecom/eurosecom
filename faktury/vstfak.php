@@ -429,13 +429,41 @@ $vysledek = mysql_query("$sql");
 }
 //koniec datove struktury mes.vykaz dph
 
-
-
-
 $citfir = include("../cis/citaj_fir.php");
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
+
+//oprava ciselnika uctdrdp
+if( $kli_vrok == 2015 )
+{
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_uctdrdp WHERE rdp = 25 ";
+$sqldok = mysql_query("$sqlttt");
+if(@$zaznam=mysql_data_seek($sqldok,0))
+{
+$riaddok=mysql_fetch_object($sqldok);
+$crd3=$riaddok->crd3;
+
+if ($crd3 != 'B2')
+    {
+$databaza="";
+$dtb2 = include("../cis/oddel_dtbz1.php");
+$kli_vmcf=1*$fir_allx11;
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_uctdrdp ";
+$dsql = mysql_query("$dsqlt");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_uctdrdp MODIFY crd3 VARCHAR(10) NOT NULL ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctdrdp MODIFY nrd VARCHAR(70) NOT NULL ";
+$vysledek = mysql_query("$sql");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctdrdp SELECT * FROM ".$databaza."F$kli_vmcf"."_uctdrdp ";
+if( $kli_vmcf > 0 ) { $dsql = mysql_query("$dsqlt"); echo "Znovu prenos èíselníka druhov DPH z firmy ".$kli_vmcf; }
+    }
+}
+}
+//koniec oprava ciselnika uctdrdp
 
 //tlacove okno
 $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";

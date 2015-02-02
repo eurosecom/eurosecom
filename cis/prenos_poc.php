@@ -1819,6 +1819,11 @@ echo "Prenos Druhov dokladov DPH.<br />";
 $dsqlt = "DELETE FROM F$kli_vxcf"."_uctdrdp ";
 $dsql = mysql_query("$dsqlt");
 
+$sql = "ALTER TABLE F$kli_vxcf"."_uctdrdp MODIFY crd3 VARCHAR(10) NOT NULL ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctdrdp MODIFY nrd VARCHAR(70) NOT NULL ";
+$vysledek = mysql_query("$sql");
+
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctdrdp SELECT * FROM ".$databaza."F$h_ycf"."_uctdrdp ";
 $dsql = mysql_query("$dsqlt");
 
