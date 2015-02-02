@@ -650,13 +650,13 @@ if ( $mesvyplat <  10 ) { $mesvyplat="0".$mesvyplat; }
 if ( $mesvyplatx == 13 ) { $mesvyplat="01"; $rokvyplat=$kli_vrok+1; }
 $denvyplaty=$fir_mzdx06.".".$mesvyplat.".".$rokvyplat;
 
-if( $denvyplaty == '29.02.2014' ) { $denvyplaty="28.02.2014"; }
-if( $denvyplaty == '30.02.2014' ) { $denvyplaty="28.02.2014"; }
-if( $denvyplaty == '31.02.2014' ) { $denvyplaty="28.02.2014"; }
-if( $denvyplaty == '31.04.2014' ) { $denvyplaty="30.04.2014"; }
-if( $denvyplaty == '31.06.2014' ) { $denvyplaty="30.06.2014"; }
-if( $denvyplaty == '31.09.2014' ) { $denvyplaty="30.09.2014"; }
-if( $denvyplaty == '31.11.2014' ) { $denvyplaty="30.11.2014"; }
+if( $denvyplaty == '29.02.2015' ) { $denvyplaty="28.02.2015"; }
+if( $denvyplaty == '30.02.2015' ) { $denvyplaty="28.02.2015"; }
+if( $denvyplaty == '31.02.2015' ) { $denvyplaty="28.02.2015"; }
+if( $denvyplaty == '31.04.2015' ) { $denvyplaty="30.04.2015"; }
+if( $denvyplaty == '31.06.2015' ) { $denvyplaty="30.06.2015"; }
+if( $denvyplaty == '31.09.2015' ) { $denvyplaty="30.09.2015"; }
+if( $denvyplaty == '31.11.2015' ) { $denvyplaty="30.11.2015"; }
 
 $pdf->Cell(6,6," ","$rmc1",0,"L");$pdf->Cell(42,6,"$denvyplaty","$rmc",0,"C");
 
@@ -1621,13 +1621,13 @@ if ( $mesvyplat <  10 ) { $mesvyplat="0".$mesvyplat; }
 if ( $mesvyplatx == 13 ) { $mesvyplat="01"; $rokvyplat=$kli_vrok+1; }
 
 $denvyplaty=$fir_mzdx06.".".$mesvyplat.".".$rokvyplat;
-if( $denvyplaty == '29.02.2014' ) { $denvyplaty="28.02.2014"; }
-if( $denvyplaty == '30.02.2014' ) { $denvyplaty="28.02.2014"; }
-if( $denvyplaty == '31.02.2014' ) { $denvyplaty="28.02.2014"; }
-if( $denvyplaty == '31.04.2014' ) { $denvyplaty="30.04.2014"; }
-if( $denvyplaty == '31.06.2014' ) { $denvyplaty="30.06.2014"; }
-if( $denvyplaty == '31.09.2014' ) { $denvyplaty="30.09.2014"; }
-if( $denvyplaty == '31.11.2014' ) { $denvyplaty="30.11.2014"; }
+if( $denvyplaty == '29.02.2015' ) { $denvyplaty="28.02.2015"; }
+if( $denvyplaty == '30.02.2015' ) { $denvyplaty="28.02.2015"; }
+if( $denvyplaty == '31.02.2015' ) { $denvyplaty="28.02.2015"; }
+if( $denvyplaty == '31.04.2015' ) { $denvyplaty="30.04.2015"; }
+if( $denvyplaty == '31.06.2015' ) { $denvyplaty="30.06.2015"; }
+if( $denvyplaty == '31.09.2015' ) { $denvyplaty="30.09.2015"; }
+if( $denvyplaty == '31.11.2015' ) { $denvyplaty="30.11.2015"; }
 
   $text = "<denVyplaty>".$denvyplaty."</denVyplaty>"."\r\n";
   fwrite($soubor, $text);
