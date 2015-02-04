@@ -1028,7 +1028,7 @@ $oznac = mysql_query("$sqtoz");
    }
 //koniec zam.premia 2014
 
-//vynate prijmy 2014 zo zdrojov v zahranici ak r48 > 0 to su vynate prijmy zo zahranicia 2013
+//vynate prijmy 2014 zo zdrojov v zahranici ak r48 > 0 to su vynate prijmy zo zahranicia 2014
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r49=r42-r48 WHERE oc = $cislo_oc AND r48 > 0 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r49=0, r50=0 WHERE oc = $cislo_oc AND r48 <= 0 ";
@@ -1036,6 +1036,9 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r50=0 WHERE oc = $cislo_oc AND r48 = 0 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r56=r50 WHERE oc = $cislo_oc AND r50 > 0 ";
+$oznac = mysql_query("$sqtoz");
+//vynate prijmy 2014 zo zdrojov v zahranici ak r48 > 0 to su vynate prijmy zo zahranicia 2014 dokoncenie ak je r49 < 0 tak ziadna dan dalej
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r50=0, r56=0, r58=0 WHERE oc = $cislo_oc AND r49 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
 //dan uznana na zapocet 2014
@@ -1055,6 +1058,11 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r58=0 WHERE oc = $cislo_oc A
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r58=0 WHERE oc = $cislo_oc AND r58 <= 16.60 AND r57 = 0 ";
 $oznac = mysql_query("$sqtoz");
+
+//vynate prijmy 2014 zo zdrojov v zahranici ak r48 > 0 to su vynate prijmy zo zahranicia 2014 dokoncenie ak je r49 < 0 tak ziadna dan dalej
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r49=0, r50=0, r56=0, r58=0 WHERE oc = $cislo_oc AND r49 < 0 ";
+$oznac = mysql_query("$sqtoz");
+
 
 //vysporiadanie danoveho bonusu 2014
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r60=r57-r59 WHERE oc = $cislo_oc ";
@@ -1574,7 +1582,7 @@ if ( $copern == 20 )
    document.formv1.uceb.value = '<?php echo "$uceb";?>';
    document.formv1.numb.value = '<?php echo "$numb";?>';
    document.formv1.da2.value = '<?php echo "$da2sk";?>';
-   document.formv1.pomv.value = '<?php echo "$pomv";?>';
+
 <?php                                        } ?>
   }
 <?php
