@@ -3037,7 +3037,6 @@ var sirkawic = screen.width-10;
    document.formv1.pzpr6.value = '<?php echo "$pzpr6";?>';
    document.formv1.pzvd6.value = '<?php echo "$pzvd6";?>';
    document.formv1.pzthvd6.value = '<?php echo "$pzthvd6";?>';
-   document.formv1.osob.value = '<?php echo "$osob";?>';
    document.formv1.pril.value = '<?php echo "$pril";?>';
    document.formv1.dat.value = '<?php echo "$datsk";?>';
 <?php if ( $zdbo == 1 ) { ?> document.formv1.zdbo.checked = "checked"; <?php } ?>
