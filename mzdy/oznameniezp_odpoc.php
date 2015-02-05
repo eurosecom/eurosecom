@@ -419,10 +419,6 @@ var sirkawic = screen.width-10;
   {
    window.open('../mzdy/oznameniezp_odpoc.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=1', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
-  function NacitajMinRok() //dopyt, asi nemá zmysel ale narok bude
-  {
-
-  }
   function UpravZamestnanca()
   {
    window.open('zamestnanci.php?sys=<?php echo $sys; ?>&copern=8&page=1&cislo_oc=<?php echo $cislo_oc;?>&h_oc=<?php echo $cislo_oc;?>', '_blank','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
@@ -450,8 +446,6 @@ if ( $copern == 20 )
    </td>
    <td>
     <div class="bar-btn-form-tool">
-<!-- dopyt, spravi pouèenie, naèítanie asi nemá zmysel -->
-     <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="Naèíta údaje z minulého roka" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVyhlNCZD();" title="Zobrazi v PDF" class="btn-form-tool">
     </div>
    </td>
