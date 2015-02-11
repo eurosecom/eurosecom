@@ -230,8 +230,12 @@ div.input-echo {
    document.formv1.obbdo.value = '<?php echo "$obbdo";?>';
    document.formv1.obmod.value = '<?php echo "$obmod";?>';
    document.formv1.obmdo.value = '<?php echo "$obmdo";?>';
-   document.formv1.druhuz.value = '<?php echo "$druhuz";?>';
-   document.formv1.druhuj.value = '<?php echo "$druhuj";?>';
+<?php if ( $druhuz == 0 ) { ?> document.formv1.druhuz0.checked = 'true'; <?php } ?>
+<?php if ( $druhuz == 1 ) { ?> document.formv1.druhuz1.checked = 'true'; <?php } ?>
+<?php if ( $druhuj == 0 ) { ?> document.formv1.druhuj0.checked = 'true'; <?php } ?>
+<?php if ( $druhuj == 1 ) { ?> document.formv1.druhuj1.checked = 'true'; <?php } ?>
+<?php if ( $druhuj == 2 ) { ?> document.formv1.druhuj2.checked = 'true'; <?php } ?>
+<?php if ( $druhuj == 3 ) { ?> document.formv1.druhuj3.checked = 'true'; <?php } ?>
   }
 <?php
 //koniec uprava
@@ -317,12 +321,12 @@ if ( $fir_fico < 1000000 ) { $ico="00".$fir_fico; }
        style="width:140px; top:338px; left:752px;"/>
 <input type="text" name="obmdo" id="obmdo" onkeyup="CiarkaNaBodku(this);"
        style="width:140px; top:376px; left:752px;"/>
-<input type="radio" id="druhuz1" name="druhuz" value="1" style="top:444px; left:67px;"/> <!-- dopyt, nefunkcne -->
-<input type="radio" id="druhuz2" name="druhuz" value="2" style="top:471px; left:67px;"/>
-<input type="radio" id="druhuj1" name="druhuj" value="1" style="top:422px; left:417px;"/> <!-- dopyt, nefunkcne -->
-<input type="radio" id="druhuj2" name="druhuj" value="2" style="top:449px; left:417px;"/>
-<input type="radio" id="druhuj3" name="druhuj" value="3" style="top:477px; left:417px;"/>
-<input type="radio" id="druhuj4" name="druhuj" value="4" style="top:505px; left:417px;"/>
+<input type="radio" id="druhuz0" name="druhuz" value="0" style="top:444px; left:67px;"/> <!-- dopyt, nefunkcne -->
+<input type="radio" id="druhuz1" name="druhuz" value="1" style="top:471px; left:67px;"/>
+<input type="radio" id="druhuj0" name="druhuj" value="0" style="top:422px; left:417px;"/> <!-- dopyt, nefunkcne -->
+<input type="radio" id="druhuj1" name="druhuj" value="1" style="top:449px; left:417px;"/>
+<input type="radio" id="druhuj2" name="druhuj" value="2" style="top:477px; left:417px;"/>
+<input type="radio" id="druhuj3" name="druhuj" value="3" style="top:505px; left:417px;"/>
 
 <!-- uctovna jednotka -->
 <div class="input-echo" style="width:843px; top:563px; left:52px;"><?php echo $fir_fnaz; ?></div>
@@ -541,7 +545,7 @@ $pdf->Cell(4,6,"$rok1","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cel
 //druh zavierky
 $pdf->SetFont('arial','',10);
 $riadna="x"; $mimoriadna="";
-if ( $hlavicka->druhuz == 2 ) { $riadna=""; $mimoriadna="x"; }
+if ( $hlavicka->druhuz == 1 ) { $riadna=""; $mimoriadna="x"; }
 $pdf->Cell(190,10," ","$rmc1",1,"L");
 $pdf->Cell(8,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$riadna","$rmc",1,"C");
 $pdf->Cell(190,3," ","$rmc1",1,"L");
@@ -549,9 +553,9 @@ $pdf->Cell(8,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$mimoriadna","$rmc",1,"C");
 
 //typ uct.jednotky
 $poduj="x"; $muj=""; $noju=""; $nopu="";
-if ( $hlavicka->druhuj == 2 ) { $poduj=""; $muj="x"; $noju=""; $nopu=""; }
-if ( $hlavicka->druhuj == 3 ) { $poduj=""; $muj=""; $noju="x"; $nopu=""; }
-if ( $hlavicka->druhuj == 4 ) { $poduj=""; $muj=""; $noju=""; $nopu="x"; }
+if ( $hlavicka->druhuj == 1 ) { $poduj=""; $muj="x"; $noju=""; $nopu=""; }
+if ( $hlavicka->druhuj == 2 ) { $poduj=""; $muj=""; $noju="x"; $nopu=""; }
+if ( $hlavicka->druhuj == 3 ) { $poduj=""; $muj=""; $noju=""; $nopu="x"; }
 $pdf->SetY(97);
 $pdf->Cell(85,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$poduj","$rmc",1,"C");
 $pdf->SetY(103);
