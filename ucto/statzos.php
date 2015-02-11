@@ -49,8 +49,10 @@ if( $_SERVER['SERVER_NAME'] == "www.enposro.sk" )
 { 
 if( $kli_uzid != 17 AND $kli_uzid != 23 AND $kli_uzid != 57 AND $kli_uzid != 58 AND $kli_uzid != 141 ) { $tlacodpady=0; }
 }
-
-
+$dajfinvykazy=0;
+if( $kli_nezis == 1 ) { $dajfinvykazy=1; }
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $dajfinvykazy=1; }
+ 
 ?> 
 
 <HEAD>
@@ -654,7 +656,7 @@ window.open('../ucto/vykaz_fin6a04.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&
 
 function SetFin6a04()
                 {
-  window.open('../ucto/vykfin_cis.php?copern=308&drupoh=92', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  window.open('../ucto/vykfin_cis.php?copern=308&drupoh=94', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 
@@ -698,9 +700,9 @@ function DbfFin6a04()
 var h_oc = document.forms.formfin604.h_oc.value;
 var h_fmzdy = 0;
 
-
-window.open('fin6a04dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+window.open('../ucto/vykaz_fin6a04.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0&dajdbf=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
                 }
 
 
@@ -1187,7 +1189,7 @@ if( $kli_vrok < 2013 ) {
 
 <?php 
 //VYKAZY FIN NUJ rok2013
-if( $kli_vrok >= 2013 AND $kli_nezis == 1 ) { 
+if( $kli_vrok >= 2013 AND $dajfinvykazy == 1 ) { 
 ?>
 
 <table class="vstup" width="100%" >

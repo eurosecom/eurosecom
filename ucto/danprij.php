@@ -501,56 +501,6 @@ window.open('../ucto/platbyju.php?copern=1&page=1&tt=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-
-//OZNAMENIE O SCHVALENI 
-
-function TlacOzUz()
-                {
-
-window.open('../ucto/uzavierka_oznamenie.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function UpravOzUz()
-                {
-
-window.open('../ucto/uzavierka_oznamenie.php?copern=20&drupoh=1&page=1&strana=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function OzUzdoXML()
-                {
-
-window.open('../ucto/uzavierka_oznameniexml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-//VSEOBECNE PODANIE 
-
-function TlacVseob()
-                {
-
-window.open('../ucto/vseobecne_podanie.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function UpravVseob()
-                {
-
-window.open('../ucto/vseobecne_podanie.php?copern=20&drupoh=1&page=1&strana=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function VseobdoXML()
-                {
-
-window.open('../ucto/vseobecne_podaniexml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
  
 </script>
 </HEAD>
@@ -680,12 +630,12 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 
   function GenSuvPod()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=191', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
   function GenVysPod()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=192', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=194', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
   function MinSuvPod()
@@ -896,12 +846,12 @@ window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 
   function GenSuvMuj()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=91', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
   function GenVysMuj()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=92', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
   function MinSuvMuj()
@@ -2087,46 +2037,6 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 <td class="bmenu" width="2%" align="right">
 <a href="#" onClick="UpravDMV();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty v priznaní' ></a>
-</td>
-</tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formozuz14" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacOzUz();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="2%" align="right">
-<td class="bmenu" width="56%">Oznámenie o dátume schválenia úètovnej závierky</td>
-<td class="bmenu" width="36%"></td>
-<td class="bmenu" width="2%" align="right">
-<img src='../obr/export.png' onclick='OzUzdoXML();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie oznámenia' >
-<td class="bmenu" width="2%" align="right">
-<a href="#" onClick="UpravOzUz();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty v oznámení' ></a>
-</td>
-</tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formvseob14" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacVseob();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="2%" align="right">
-<td class="bmenu" width="56%">Všeobecné podanie na finanènú správu</td>
-<td class="bmenu" width="36%"></td>
-<td class="bmenu" width="2%" align="right">
-<img src='../obr/export.png' onclick='VseobdoXML();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie' >
-<td class="bmenu" width="2%" align="right">
-<a href="#" onClick="UpravVseob();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty' ></a>
 </td>
 </tr>
 </FORM>

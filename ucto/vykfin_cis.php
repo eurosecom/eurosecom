@@ -38,6 +38,7 @@ require_once("../pswd/password.php");
   mysql_select_db($mysqldb);
 
 
+
 $citfir = include("../cis/citaj_fir.php");
 $mena1 = $fir_mena1;
 $mena2 = $fir_mena2;
