@@ -1571,9 +1571,9 @@ $stranap=$stranap+1;
 
 $poradoveCislo=$hlavickap->p1cis;
 $suma=1*$hlavickap->pcsum;
-$pico=$hlavicka->pico;
-if ( $hlavicka->pico < 1000000 ) { $pico="00".$hlavicka->pico; }
-$psid=$hlavicka->psid;
+$pico=$hlavickap->p1ico;
+if ( $hlavickap->p1ico < 1000000 AND $hlavickap->p1ico > 0 ) { $pico="00".$hlavickap->p1ico; }
+$psid=$hlavickap->p1sid;
 $pravnaForma=iconv("CP1250", "UTF-8", $hlavickap->p1pfr);
 $obchodneMeno=iconv("CP1250", "UTF-8", $hlavickap->p1men);
 $ulica=iconv("CP1250", "UTF-8", $hlavickap->p1uli);
