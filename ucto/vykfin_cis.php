@@ -25,6 +25,7 @@ $xtrd3 = 1*$_REQUEST['xtrd3'];
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
+$kli_minrok=$kli_vrok-1;
 
 if ( $h_obdp == 0 ) $h_obdp=$kli_vmes;
 if ( $h_obdk == 0 ) $h_obdk=$kli_vmes;
@@ -924,15 +925,15 @@ $i = $i + 1;
 $vartitle = "èíselník";
 if ( $drupoh == 93 OR $drupoh == 193 OR $drupoh == 94 OR $drupoh == 194 ) $vartitle = "hodnoty";
 ?>
+<?php if ( $kli_vrok > 2013 ) { ?>
+ <a href='vykfin_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
+  title="Naèíta <?php echo $vartitle; ?> z predchádzajúceho úètovného obdobia"
+  class="btn-down-x26 toright">Generovanie <?php echo $kli_minrok; ?></a>
+<?php                         } ?>
 <?php if ( $drupoh != 93 AND $drupoh != 193 AND $drupoh != 94 AND $drupoh != 194 ) { ?>
  <a href='vykfin_cis.php?drupoh=<?php echo $drupoh; ?>&copern=155&page=1'
   title="Naèíta štandardnı èíselník" class="btn-down-x26 toright">Štandardnı</a>
 <?php                                                                              } ?>
-<?php if ( $kli_vrok > 2013 ) { ?>
- <a href='vykfin_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
-  title="Naèíta <?php echo $vartitle; ?> z predchádzajúceho úètovného obdobia"
-  class="btn-down-x26 toright">Minulı rok</a>
-<?php                         } ?>
 
 </div> <!-- koniec .content -->
 </div> <!-- koniec .wrap-content -->
