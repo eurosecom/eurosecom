@@ -25,6 +25,7 @@ $xtrd3 = 1*$_REQUEST['xtrd3'];
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
+$kli_minrok=$kli_vrok-1;
 
 if ( $h_obdp == 0 ) $h_obdp=$kli_vmes;
 if ( $h_obdk == 0 ) $h_obdk=$kli_vmes;
@@ -1087,8 +1088,8 @@ if ( $drupoh >= 191 AND $drupoh <= 196 ) echo "podnikate¾ov";
   <td>
    <div class="bar-btn-form-tool">
    <ul class="toleft legend-vykazy">
-    <li><span class="darkgreen">&nbsp;</span>Súvaha</li>
-    <li><span class="purple">&nbsp;</span>Vıkaz ziskov a strát</li>
+    <li><span class="darkgreen">&nbsp;</span>S = Súvaha</li>
+    <li><span class="purple">&nbsp;</span>V = Vıkaz ziskov a strát</li>
     <li><span class="darkgray">&nbsp;</span>Súvaha + Vıkaz ziskov a strát</li>
    </ul>
 <?php if( $drupoh != 96 AND drupoh != 196 ) { ?>
@@ -1116,31 +1117,31 @@ $source="../ucto/vykazy_cis.php?copern=308";
 <div class="content-navbar toright">
 <?php if ( $drupoh >= 91 AND $drupoh <= 96 ) { ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=91', '_self');"
-  title="Súvaha - generovanie" class="<?php echo $clas1; ?> darkgreen">Generovanie</a>
+  title="Súvaha - generovanie" class="<?php echo $clas1; ?> darkgreen">S - Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=93', '_self');"
-  title="Súvaha - predchádzajúce úètovné obdobie" class="<?php echo $clas2; ?> darkgreen">Predchádz. obdobie</a>
+  title="Súvaha - predchádzajúce úètovné obdobie" class="<?php echo $clas2; ?> darkgreen">S - Predchádz. obdobie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=92', '_self');"
-  title="VZaS - generovanie" class="<?php echo $clas3; ?> purple">Generovanie</a>
+  title="VZaS - generovanie" class="<?php echo $clas3; ?> purple">V - Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=94', '_self');"
-  title="VZaS - predchádzajúce úètovné obdobie" class="<?php echo $clas4; ?> purple">Predchádz. obdobie</a>
+  title="VZaS - predchádzajúce úètovné obdobie" class="<?php echo $clas4; ?> purple">V - Predchádz. obdobie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=95', '_self');"
-  title="Súvaha - syntetické generovanie Aktív a Pasív" class="<?php echo $clas5; ?> darkgreen">Generovanie A / P</a>
+  title="Súvaha - syntetické generovanie Aktív a Pasív" class="<?php echo $clas5; ?> darkgreen">S - Generovanie A / P</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=96&uprav=1', '_self');"
-  title="Súvaha a VZaS - zaokrúhlenie" class="<?php echo $clas6; ?> darkgray">Zaokrúhlenie</a>
+  title="Súvaha a VZaS - zaokrúhlenie" class="<?php echo $clas6; ?> darkgray">Zaokrúhlenie S + V</a>
 <?php                                        } ?>
 <?php if ( $drupoh >= 191 AND $drupoh <= 196 ) { ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=191', '_self');"
-  title="Súvaha - generovanie" class="<?php echo $clas1; ?> darkgreen">Generovanie</a>
+  title="Súvaha - generovanie" class="<?php echo $clas1; ?> darkgreen">S - Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=193', '_self');"
-  title="Súvaha - predchádzajúce úètovné obdobie" class="<?php echo $clas2; ?> darkgreen">Predchádz. obdobie</a>
+  title="Súvaha - predchádzajúce úètovné obdobie" class="<?php echo $clas2; ?> darkgreen">S - Predchádz. obdobie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=192', '_self');"
-  title="VZaS - generovanie" class="<?php echo $clas3; ?> purple">Generovanie</a>
+  title="VZaS - generovanie" class="<?php echo $clas3; ?> purple">V - Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=194', '_self');"
-  title="VZaS - predchádzajúce úètovné obdobie" class="<?php echo $clas4; ?> purple">Predchádz. obdobie</a>
+  title="VZaS - predchádzajúce úètovné obdobie" class="<?php echo $clas4; ?> purple">V - Predchádz. obdobie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=195', '_self');"
-  title="Súvaha - syntetické generovanie Aktív a Pasív" class="<?php echo $clas5; ?> darkgreen">Generovanie A / P</a>
+  title="Súvaha - syntetické generovanie Aktív a Pasív" class="<?php echo $clas5; ?> darkgreen">S - Generovanie A / P</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=196&uprav=1', '_self');"
-  title="Súvaha a VZaS - zaokrúhlenie" class="<?php echo $clas6; ?> darkgray">Zaokrúhlenie</a>
+  title="Súvaha a VZaS - zaokrúhlenie" class="<?php echo $clas6; ?> darkgray">Zaokrúhlenie S + V</a>
 <?php                                          } ?>
 </div>
 
@@ -1372,15 +1373,15 @@ if ( $drupoh == 196 ) $titlevzas = "26";
 $vartitle = "èíselník";
 if ( $drupoh == 93 OR $drupoh == 193 OR $drupoh == 94 OR $drupoh == 194 ) $vartitle = "hodnoty";
 ?>
+<?php if ( $kli_vrok > 2013 ) { ?>
+ <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
+  title="Naèíta <?php echo $vartitle; ?> z predchádzajúceho úètovného obdobia"
+  class="btn-down-x26 toright">Generovanie <?php echo $kli_minrok; ?></a>
+<?php                         } ?>
 <?php if ( $drupoh != 93 AND $drupoh != 193 AND $drupoh != 94 AND $drupoh != 194 ) { ?>
  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=155&page=1'
   title="Naèíta štandardnı èíselník" class="btn-down-x26 toright">Štandardnı</a>
 <?php                                                                              } ?>
-<?php if ( $kli_vrok > 2013 ) { ?>
- <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
-  title="Naèíta <?php echo $vartitle; ?> z predchádzajúceho úètovného obdobia"
-  class="btn-down-x26 toright">Minulı rok</a>
-<?php                         } ?>
 
 </div> <!-- koniec .content -->
 </div> <!-- koniec .wrap-content -->
