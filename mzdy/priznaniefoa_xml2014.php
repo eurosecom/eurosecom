@@ -917,6 +917,7 @@ if ( $pgf50 == 1 OR $riadok == 0 OR $hlavicka->druh == 3 ) $riadok="";
   $text = "  <r76>"."\r\n"; fwrite($soubor, $text);
 $pico=$hlavicka->pico;
 if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $pico="";
+if ( $hlavicka->pico < 1000000 ) { $pico="00".$hlavicka->pico; }
   $text = "   <ico><![CDATA[".$pico."]]></ico>"."\r\n"; fwrite($soubor, $text);
 
 $psid=$hlavicka->psid;
