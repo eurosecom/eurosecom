@@ -573,6 +573,7 @@ if ( $j == 0 )
 $dic=$fir_fdic;
   $text = "  <dic><![CDATA[".$dic."]]></dic>"."\r\n"; fwrite($soubor, $text);
 $ico=$fir_fico;
+if ( $fir_fico < 1000000 ) { $ico="00".$fir_fico; }
   $text = "  <ico><![CDATA[".$ico."]]></ico>"."\r\n"; fwrite($soubor, $text);
 $pravnaforma=$fir_uctt03;
   $text = "  <pravnaForma><![CDATA[".$pravnaforma."]]></pravnaForma>"."\r\n"; fwrite($soubor, $text);
@@ -639,7 +640,7 @@ $mailfax=iconv("CP1250", "UTF-8", $fir_fem1);
 $text=$hlavicka->uoskr;
   $text = "  <uplatnujemPar17><![CDATA[".$text."]]></uplatnujemPar17>"."\r\n"; fwrite($soubor, $text);
 $text=$hlavicka->koskr;
-  $text = "  <uplatnujemUplatnovaniePar17><![CDATA[".$text."]]></uplatnujemUplatnovaniePar17>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <ukoncujemUplatnovaniePar17><![CDATA[".$text."]]></ukoncujemUplatnovaniePar17>"."\r\n"; fwrite($soubor, $text);
 $obmedzenie=$hlavicka->nerezident;
   $text = "  <obmedzenie><![CDATA[".$obmedzenie."]]></obmedzenie>"."\r\n"; fwrite($soubor, $text);
 $prepojenie=$hlavicka->zahrprep;
@@ -1368,6 +1369,7 @@ if ( $paragraf50 == 1 OR $suma == 0 ) $suma="";
   $text = "   <suma><![CDATA[".$suma."]]></suma>"."\r\n"; fwrite($soubor, $text);
 $pico1=$hlavicka->p1ico;
 if ( $paragraf50 == 1 OR $pico1 == 0 ) $pico1="";
+if ( $hlavicka->p1ico < 1000000 ) { $pico1="00".$hlavicka->p1ico; }
   $text = "   <ico><![CDATA[".$pico1."]]></ico>"."\r\n"; fwrite($soubor, $text);
 $psid1=$hlavicka->p1sid;
 if ( $paragraf50 == 1 OR $psid1 == 0 ) $psid1="";
@@ -1570,6 +1572,7 @@ $stranap=$stranap+1;
 $poradoveCislo=$hlavickap->p1cis;
 $suma=1*$hlavickap->pcsum;
 $pico=$hlavicka->pico;
+if ( $hlavicka->pico < 1000000 ) { $pico="00".$hlavicka->pico; }
 $psid=$hlavicka->psid;
 $pravnaForma=iconv("CP1250", "UTF-8", $hlavickap->p1pfr);
 $obchodneMeno=iconv("CP1250", "UTF-8", $hlavickap->p1men);
