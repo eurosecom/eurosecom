@@ -120,10 +120,18 @@ $dmx = 1*$_REQUEST['dmx'];
 $umx = $_REQUEST['umx'];
 $fix = 1*$_REQUEST['fix'];
 
-if ( $umx == '1.2011' ) { $umx = "1.2014"; }
-if ( $umx == '1.2012' ) { $umx = "1.2014"; }
-if ( $umx == '1.2013' ) { $umx = "1.2014"; }
+if ( $umx == '1.2011' ) { $umx = "1.2015"; }
+if ( $umx == '1.2012' ) { $umx = "1.2015"; }
+if ( $umx == '1.2013' ) { $umx = "1.2015"; }
 if ( $umx == '1.2014' ) { $umx = "1.2015"; }
+if ( $umx == '2.2011' ) { $umx = "2.2015"; }
+if ( $umx == '2.2012' ) { $umx = "2.2015"; }
+if ( $umx == '2.2013' ) { $umx = "2.2015"; }
+if ( $umx == '2.2014' ) { $umx = "2.2015"; }
+if ( $umx == '3.2011' ) { $umx = "3.2015"; }
+if ( $umx == '3.2012' ) { $umx = "3.2015"; }
+if ( $umx == '3.2013' ) { $umx = "3.2015"; }
+if ( $umx == '3.2014' ) { $umx = "3.2015"; }
 
 $ned = 1*$_REQUEST['ned'];
 $pre = 1*$_REQUEST['pre'];
@@ -144,6 +152,23 @@ $upravene = mysql_query("$uprtxt");
 $databaza="";
 
 $dtb2 = include("../cis/oddel_dtbz3.php");
+
+$jetamostre=0;
+$sqlfir = "SELECT * FROM ".$databaza."F$fix"."_mzdzalkun WHERE ume = '$umx' ";
+$sql = mysql_query("$sqlfir");
+$pol = 1*mysql_num_rows($sql);
+if( $pol > 0 ) { $jetamostre=1; }
+
+if ( $jetamostre == 1 )
+     {
+?>
+<script type="text/javascript">
+alert ("Nemôete prenáša do <?php echo $umx; ?>. U bolo ostré spracovanie za mesiac <?php echo $umx; ?>.");
+window.close();
+</script>
+<?php
+exit;
+     }
 
 $uprtxt = "DELETE FROM ".$databaza."F$fix"."_mzdmes WHERE oc = $cislo_oc AND dm = $dmx ";
 //echo $uprtxt;
