@@ -50,8 +50,6 @@ $subor=1;
 // zapis upravene udaje
 if ( $copern == 23 )
      {
-$datk = strip_tags($_REQUEST['datk']);
-$datk_sql=SqlDatum($datk);
 
 $evci1 = strip_tags($_REQUEST['evci1']);
 $evci2 = strip_tags($_REQUEST['evci2']);
@@ -67,10 +65,37 @@ $prsub = strip_tags($_REQUEST['prsub']);
 $prano = strip_tags($_REQUEST['prano']);
 $textpo = strip_tags($_REQUEST['textpo']);
 
+$datk = strip_tags($_REQUEST['datk']);
+$datk_sql=SqlDatum($datk);
+$datz = strip_tags($_REQUEST['datz']);
+$datz_sql=SqlDatum($datz);
+$dats = strip_tags($_REQUEST['dats']);
+$dats_sql=SqlDatum($dats);
+$obbod = strip_tags($_REQUEST['obbod']);
+$obbdo = strip_tags($_REQUEST['obbdo']);
+$obmod = strip_tags($_REQUEST['obmod']);
+$obmdo = strip_tags($_REQUEST['obmdo']);
+$druhuz = strip_tags($_REQUEST['druhuz']);
+$druhuj = strip_tags($_REQUEST['druhuj']);
+
+$datp = strip_tags($_REQUEST['datp']);
+$datp_sql=SqlDatum($datp);
+$datv = strip_tags($_REQUEST['datv']);
+$datv_sql=SqlDatum($datv);
+$jazyk = strip_tags($_REQUEST['jazyk']);
+$typuz = strip_tags($_REQUEST['typuz']);
+$typdok = strip_tags($_REQUEST['typdok']);
+$spopod = strip_tags($_REQUEST['spopod']);
+
 $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_vseobpodanie SET ".
-" datk='$datk_sql', ".
+" datp='$datp_sql', datv='$datv_sql', jazyk='$jazyk', typuz='$typuz', typdok='$typdok', spopod='$spopod', ".
+
+" datk='$datk_sql', datz='$datz_sql', dats='$dats_sql', ".
+" obbod='$obbod', obbdo='$obbdo', obmod='$obmod', obmdo='$obmdo', ".
+" druhuz='$druhuz', druhuj='$druhuj', ".
+
 " evci1='$evci1', evci2='$evci2', organ='$organ', duozn='$duozn', ".
 " duprc='$duprc', oblast='$oblast', agenda='$agenda', typpod='$typpod', ".
 " fopo='$fopo', prnie='$prnie', prsub='$prsub', prano='$prano', ".
@@ -93,7 +118,7 @@ endif;
 
 
 //vytvorenie tabulky
-$sql = "SELECT textpo FROM F$kli_vxcf"."_vseobpodanie";
+$sql = "SELECT datp FROM F$kli_vxcf"."_vseobpodanie";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -104,7 +129,6 @@ $vytvor = mysql_query("$vsql");
 $sqlt = <<<mzdprc
 (
    oc           INT(7) DEFAULT 0,
-   datk         DATE NOT NULL,
    evci1        VARCHAR(20) NOT NULL,
    evci2        VARCHAR(10) NOT NULL,
    organ        DECIMAL(2,0) DEFAULT 0,
@@ -118,6 +142,23 @@ $sqlt = <<<mzdprc
    prsub        DECIMAL(2,0) DEFAULT 0,
    prano        DECIMAL(2,0) DEFAULT 0,
    textpo       TEXT NOT NULL,
+
+   datk         DATE NOT NULL,
+   datz         DATE NOT NULL,
+   dats         DATE NOT NULL,
+   obbod        DECIMAL(7,4) DEFAULT 0,
+   obbdo        DECIMAL(7,4) DEFAULT 0,
+   obmod        DECIMAL(7,4) DEFAULT 0,
+   obmdo        DECIMAL(7,4) DEFAULT 0,
+   druhuz       DECIMAL(2,0) DEFAULT 0,
+   druhuj       DECIMAL(2,0) DEFAULT 0,
+
+   datp         DATE NOT NULL,
+   jazyk        DECIMAL(2,0) DEFAULT 0,
+   typuz        DECIMAL(2,0) DEFAULT 0,
+   datv         DATE NOT NULL,
+   typdok       DECIMAL(2,0) DEFAULT 0,
+   spopod       DECIMAL(2,0) DEFAULT 0,
    konx         DECIMAL(2,0) DEFAULT 0
 );
 mzdprc;
@@ -160,8 +201,6 @@ $sqlfir = "SELECT * FROM F$kli_vxcf"."_vseobpodanie ";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
-$datk_sk = SkDatum($fir_riadok->datk);
-
 $evci1 = $fir_riadok->evci1;
 $evci2 = $fir_riadok->evci2;
 $organ = $fir_riadok->organ;
@@ -175,6 +214,23 @@ $prnie = $fir_riadok->prnie;
 $prsub = $fir_riadok->prsub;
 $prano = $fir_riadok->prano;
 $textpo = $fir_riadok->textpo;
+
+$datk_sk = SkDatum($fir_riadok->datk);
+$datz_sk = SkDatum($fir_riadok->datz);
+$dats_sk = SkDatum($fir_riadok->dats);
+$obbod = $fir_riadok->obbod;
+$obbdo = $fir_riadok->obbdo;
+$obmod = $fir_riadok->obmod;
+$obmdo = $fir_riadok->obmdo;
+$druhuz = $fir_riadok->druhuz;
+$druhuj = $fir_riadok->druhuj;
+
+$datp_sk = SkDatum($fir_riadok->datp);
+$datv_sk = SkDatum($fir_riadok->datv);
+$jazyk = $fir_riadok->jazyk;
+$typuz = $fir_riadok->typuz;
+$typdok = $fir_riadok->typdok;
+$spopod = $fir_riadok->spopod;
 
      }
 //koniec nacitania
@@ -222,7 +278,7 @@ form input[type=text] {
 ?>
   function ObnovUI()
   {
-   document.formv1.datk.value = '<?php echo "$datk_sk";?>';
+
    document.formv1.evci1.value = '<?php echo "$evci1";?>';
    document.formv1.evci2.value = '<?php echo "$evci2";?>';
    document.formv1.organ.value = '<?php echo "$organ";?>';
@@ -235,6 +291,27 @@ form input[type=text] {
    document.formv1.prnie.value = '<?php echo "$prnie";?>';
    document.formv1.prsub.value = '<?php echo "$prsub";?>';
    document.formv1.prano.value = '<?php echo "$prano";?>';
+
+   document.formv1.datk.value = '<?php echo "$datk_sk";?>';
+   document.formv1.datz.value = '<?php echo "$datz_sk";?>';
+   document.formv1.dats.value = '<?php echo "$dats_sk";?>';
+   document.formv1.obbod.value = '<?php echo "$obbod";?>';
+   document.formv1.obbdo.value = '<?php echo "$obbdo";?>';
+   document.formv1.obmod.value = '<?php echo "$obmod";?>';
+   document.formv1.obmdo.value = '<?php echo "$obmdo";?>';
+<?php if ( $druhuz == 0 ) { ?> document.formv1.druhuz0.checked = 'true'; <?php } ?>
+<?php if ( $druhuz == 1 ) { ?> document.formv1.druhuz1.checked = 'true'; <?php } ?>
+<?php if ( $druhuj == 0 ) { ?> document.formv1.druhuj0.checked = 'true'; <?php } ?>
+<?php if ( $druhuj == 1 ) { ?> document.formv1.druhuj1.checked = 'true'; <?php } ?>
+<?php if ( $druhuj == 2 ) { ?> document.formv1.druhuj2.checked = 'true'; <?php } ?>
+<?php if ( $druhuj == 3 ) { ?> document.formv1.druhuj3.checked = 'true'; <?php } ?>
+
+   document.formv1.datp.value = '<?php echo "$datp_sk";?>';
+   document.formv1.datv.value = '<?php echo "$datv_sk";?>';
+   document.formv1.jazyk.value = '<?php echo "$jazyk";?>';
+   document.formv1.typuz.value = '<?php echo "$typuz";?>';
+   document.formv1.typdok.value = '<?php echo "$typdok";?>';
+   document.formv1.spopod.value = '<?php echo "$spopod";?>';
 
 
   }
@@ -305,8 +382,6 @@ if ( $copern == 20 )
 <span class="text-echo" style="top:103px; left:44px;"><?php echo "$fir_fuli $fir_fcdm"; ?></span>
 <span class="text-echo" style="top:126px; left:44px;"><?php echo $fir_fmes; ?></span>
 
-<input type="text" name="datk" id="datk" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:558px; left:275px;"/>
 
 <input type="text" name="evci1" id="evci1" onkeyup="CiarkaNaBodku(this);"
  style="width:80px; top:588px; left:435px;"/>
@@ -344,7 +419,42 @@ if ( $copern == 20 )
 <input type="text" name="prano" id="prano" onkeyup="CiarkaNaBodku(this);"
  style="width:80px; top:681px; left:275px;"/>
 
-<textarea name="textpo" id="textpo" rows="10" cols="110" style="width:600px; overflow:auto;" ><?php echo $textpo; ?></textarea>
+<input type="text" name="datk" id="datk" onkeyup="CiarkaNaBodku(this);"
+       style="width:195px; top:112px; left:426px;"/>
+
+<input type="text" name="datz" id="datz" onkeyup="CiarkaNaBodku(this);"
+       style="width:195px; top:262px; left:323px;"/>
+<input type="text" name="dats" id="dats" onkeyup="CiarkaNaBodku(this);"
+       style="width:195px; top:318px; left:323px;"/>
+<input type="text" name="obbod" id="obbod" onkeyup="CiarkaNaBodku(this);"
+       style="width:140px; top:260px; left:752px;"/>
+<input type="text" name="obbdo" id="obbdo" onkeyup="CiarkaNaBodku(this);"
+       style="width:140px; top:298px; left:752px;"/>
+<input type="text" name="obmod" id="obmod" onkeyup="CiarkaNaBodku(this);"
+       style="width:140px; top:338px; left:752px;"/>
+<input type="text" name="obmdo" id="obmdo" onkeyup="CiarkaNaBodku(this);"
+       style="width:140px; top:376px; left:752px;"/>
+<input type="radio" id="druhuz0" name="druhuz" value="0" style="top:444px; left:67px;"/> 
+<input type="radio" id="druhuz1" name="druhuz" value="1" style="top:471px; left:67px;"/>
+<input type="radio" id="druhuj0" name="druhuj" value="0" style="top:422px; left:417px;"/> 
+<input type="radio" id="druhuj1" name="druhuj" value="1" style="top:449px; left:417px;"/>
+<input type="radio" id="druhuj2" name="druhuj" value="2" style="top:477px; left:417px;"/>
+<input type="radio" id="druhuj3" name="druhuj" value="3" style="top:505px; left:417px;"/>
+
+<input type="text" name="datp" id="datp" onkeyup="CiarkaNaBodku(this);"
+       style="width:195px; top:500px; left:426px;"/>
+
+<input type="text" name="datv" id="datv" onkeyup="CiarkaNaBodku(this);"
+       style="width:195px; top:520px; left:323px;"/>
+
+<input type="text" name="jazyk" id="jazyk" onkeyup="CiarkaNaBodku(this);"
+       style="width:195px; top:540px; left:323px;"/>
+<input type="text" name="typuz" id="typuz" onkeyup="CiarkaNaBodku(this);"
+       style="width:195px; top:560px; left:323px;"/>
+<input type="text" name="typdok" id="typdok" onkeyup="CiarkaNaBodku(this);"
+       style="width:195px; top:580px; left:323px;"/>
+<input type="text" name="spopod" id="spopod" onkeyup="CiarkaNaBodku(this);"
+       style="width:195px; top:600px; left:323px;"/>
 
 
 </div> <!-- koniec wrap-form-background -->

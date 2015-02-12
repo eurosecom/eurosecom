@@ -2096,8 +2096,7 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 <FORM name="formozuz14" class="obyc" method="post" action="#" >
 <tr>
 <td class="bmenu" width="2%">
-<a href="#" onClick="TlacOzUz();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
+<img src='../obr/tlac.png' onClick="TlacOzUz();" width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' >
 </td>
 <td class="bmenu" width="2%" align="right">
 <td class="bmenu" width="56%">Oznámenie o dátume schválenia úètovnej závierky</td>
@@ -2105,8 +2104,7 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 <td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='OzUzdoXML();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie oznámenia' >
 <td class="bmenu" width="2%" align="right">
-<a href="#" onClick="UpravOzUz();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty v oznámení' ></a>
+<img src='../obr/zoznam.png' onClick="UpravOzUz();" width=20 height=15 border=0 title='Upravi hodnoty v oznámení' >
 </td>
 </tr>
 </FORM>
@@ -2116,17 +2114,16 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 <FORM name="formvseob14" class="obyc" method="post" action="#" >
 <tr>
 <td class="bmenu" width="2%">
-<a href="#" onClick="TlacVseob();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
+<img src='../obr/tlac.png' onClick="TlacVseob();" width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' >
 </td>
 <td class="bmenu" width="2%" align="right">
-<td class="bmenu" width="56%">Všeobecné podanie na finanènú správu</td>
+<td class="bmenu" width="56%">Všeobecné podanie k Úètovnej závierke podnikate¾skej úètovnej jednotky v sústave podvojného úètovníctva
+</td>
 <td class="bmenu" width="36%"></td>
 <td class="bmenu" width="2%" align="right">
 <img src='../obr/export.png' onclick='VseobdoXML();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie' >
 <td class="bmenu" width="2%" align="right">
-<a href="#" onClick="UpravVseob();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty' ></a>
+<img src='../obr/zoznam.png' onClick="UpravVseob();" width=20 height=15 border=0 title='Upravi hodnoty' >
 </td>
 </tr>
 </FORM>
