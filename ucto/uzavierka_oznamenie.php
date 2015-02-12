@@ -307,8 +307,6 @@ $ico=$fir_fico;
 if ( $fir_fico < 1000000 ) { $ico="00".$fir_fico; }
 ?>
 <span class="text-echo" style="top:323px; left:57px;"><?php echo $ico; ?></span>
-<!-- sid, dopyt, rozbeha -->
-<span class="text-echo" style="top:379px; left:57px;"><?php echo $sid; ?></span>
 <input type="text" name="datz" id="datz" onkeyup="CiarkaNaBodku(this);"
        style="width:195px; top:262px; left:323px;"/>
 <input type="text" name="dats" id="dats" onkeyup="CiarkaNaBodku(this);"
@@ -321,9 +319,9 @@ if ( $fir_fico < 1000000 ) { $ico="00".$fir_fico; }
        style="width:140px; top:338px; left:752px;"/>
 <input type="text" name="obmdo" id="obmdo" onkeyup="CiarkaNaBodku(this);"
        style="width:140px; top:376px; left:752px;"/>
-<input type="radio" id="druhuz0" name="druhuz" value="0" style="top:444px; left:67px;"/> <!-- dopyt, nefunkcne -->
+<input type="radio" id="druhuz0" name="druhuz" value="0" style="top:444px; left:67px;"/>
 <input type="radio" id="druhuz1" name="druhuz" value="1" style="top:471px; left:67px;"/>
-<input type="radio" id="druhuj0" name="druhuj" value="0" style="top:422px; left:417px;"/> <!-- dopyt, nefunkcne -->
+<input type="radio" id="druhuj0" name="druhuj" value="0" style="top:422px; left:417px;"/>
 <input type="radio" id="druhuj1" name="druhuj" value="1" style="top:449px; left:417px;"/>
 <input type="radio" id="druhuj2" name="druhuj" value="2" style="top:477px; left:417px;"/>
 <input type="radio" id="druhuj3" name="druhuj" value="3" style="top:505px; left:417px;"/>

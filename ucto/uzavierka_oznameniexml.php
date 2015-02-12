@@ -74,7 +74,7 @@ var sirkawic = screen.width-10;
 <BODY class="white">
  <table class="h2" width="100%" >
  <tr>
-  <td>EuroSecom  -  Úètovná závierka oznámenie dátumu schválenia <?php echo $kli_vrok; ?> - export do XML</td>
+  <td>EuroSecom - Oznámenie o dátume schválenia ÚZ <?php echo $kli_vrok; ?> - XML</td>
   <td align="right">
    <span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span>
   </td>
@@ -92,16 +92,62 @@ $soubor = fopen("../tmp/$nazsub", "a+");
 //rok 2014
 $sqlt = <<<mzdprc
 (
-
+<?xml version="1.0" encoding="utf-8"?>
+<dokument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="universal.xsd">
+  <secUdajeUZ>
+    <valZostavenaK>2014-12-31</valZostavenaK>
+    <secZaObdobieOd>
+      <valObdobieMesiacOd><![CDATA[01]]></valObdobieMesiacOd>
+      <valObdobieRokOd><![CDATA[2014]]></valObdobieRokOd>
+    </secZaObdobieOd>
+    <secZaObdobieDo>
+      <valObdobieMesiacDo><![CDATA[12]]></valObdobieMesiacDo>
+      <valObdobieRokDo><![CDATA[2014]]></valObdobieRokDo>
+    </secZaObdobieDo>
+    <secPredchadzajuceObdobieOd>
+      <valPredchadzajuceMesiacOd><![CDATA[01]]></valPredchadzajuceMesiacOd>
+      <valPredchadzajuceRokOd><![CDATA[2013]]></valPredchadzajuceRokOd>
+    </secPredchadzajuceObdobieOd>
+    <secPredchadzajuceObdobieDo>
+      <valPredchadzajuceMesiacDo><![CDATA[12]]></valPredchadzajuceMesiacDo>
+      <valPredchadzajuceRokDo><![CDATA[2013]]></valPredchadzajuceRokDo>
+    </secPredchadzajuceObdobieDo>
+    <valZostavenaDna>2014-12-31</valZostavenaDna>
+    <valSchvalenaDna>2015-02-12</valSchvalenaDna>
+    <secUctovnaZavierka>
+      <valTypUctovnejZavierky><![CDATA[0]]></valTypUctovnejZavierky>
+      <valUctovnaZavierkaRiadna><![CDATA[1]]></valUctovnaZavierkaRiadna>
+      <valUctovnaZavierkaMimoriadna><![CDATA[0]]></valUctovnaZavierkaMimoriadna>
+    </secUctovnaZavierka>
+  </secUdajeUZ>
+  <secUctJednotka>
+    <valTypUJ><![CDATA[RUZ_POD]]></valTypUJ>
+    <secIdUctJedn>
+      <valLeiUJ/>
+      <valDicUJ><![CDATA[2022753887]]></valDicUJ>
+      <valIcoUJ/>
+      <valSidUJ/>
+      <valObchMenoNazovUJ><![CDATA[EDcom s.r.o.]]></valObchMenoNazovUJ>
+      <valNazovSpravFondu_NazovSpravcSpol/>
+    </secIdUctJedn>
+    <secSidlo>
+      <valUlica><![CDATA[Sotinská]]></valUlica>
+      <valCislo><![CDATA[1474/11]]></valCislo>
+      <valPsc><![CDATA[90501]]></valPsc>
+      <valObec><![CDATA[Senica]]></valObec>
+      <valTelefon><![CDATA[0905804265]]></valTelefon>
+      <valFax/>
+      <valEmail/>
+    </secSidlo>
+  </secUctJednotka>
+</dokument>
 );
 mzdprc;
-
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_uzavoznamenie WHERE oc = 0 ";
 //echo $sqltt;
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql); 
-
 
 $i=0;
   while ($i <= $pol )
@@ -117,120 +163,102 @@ if ( $j == 0 )
      {
   $text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\r\n"; fwrite($soubor, $text);
   $text = "<dokument xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"universal.xsd\">"."\r\n"; fwrite($soubor, $text);		
-  $text = " <hlavicka>"."\r\n"; fwrite($soubor, $text);
+  $text = " <secUdajeUZ>"."\r\n"; fwrite($soubor, $text);
+$datk_sk=$hlavicka->datk;
+//$datk_sk=SkDatum($hlavicka->datk);
+  $text = "  <valZostavenaK><![CDATA[".$datk_sk."]]></valZostavenaK>"."\r\n"; fwrite($soubor, $text);
 
+  $text = "  <secZaObdobieOd>"."\r\n"; fwrite($soubor, $text);
+$pole = explode(".", $hlavicka->obbod);
+$mesiac=$pole[0];
+if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
+$rok=$pole[1];
+  $text = "   <valObdobieMesiacOd><![CDATA[".$mesiac."]]></valObdobieMesiacOd>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <valObdobieRokOd><![CDATA[".$rok."]]></valObdobieRokOd>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </secZaObdobieOd>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <secZaObdobieDo>"."\r\n"; fwrite($soubor, $text);
+$pole = explode(".", $hlavicka->obbdo);
+$mesiac=$pole[0];
+if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
+$rok=$pole[1];
+  $text = "   <valObdobieMesiacDo><![CDATA[".$mesiac."]]></valObdobieMesiacDo>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <valObdobieRokDo><![CDATA[".$rok."]]></valObdobieRokDo>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </secZaObdobieDo>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <secPredchadzajuceObdobieOd>"."\r\n"; fwrite($soubor, $text);
+$pole = explode(".", $hlavicka->obmod);
+$mesiac=$pole[0];
+if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
+$rok=$pole[1];
+  $text = "   <valPredchadzajuceMesiacOd><![CDATA[".$mesiac."]]></valPredchadzajuceMesiacOd>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <valPredchadzajuceRokOd><![CDATA[".$rok."]]></valPredchadzajuceRokOd>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </secPredchadzajuceObdobieOd>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <secPredchadzajuceObdobieDo>"."\r\n"; fwrite($soubor, $text);
+$pole = explode(".", $hlavicka->obmdo);
+$mesiac=$pole[0];
+if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
+$rok=$pole[1];
+  $text = "   <valPredchadzajuceMesiacDo><![CDATA[".$mesiac."]]></valPredchadzajuceMesiacDo>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <valPredchadzajuceRokDo><![CDATA[".$rok."]]></valPredchadzajuceRokDo>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </secPredchadzajuceObdobieDo>"."\r\n"; fwrite($soubor, $text);
 
+$datz_sk=$hlavicka->datz;
+//$datz_sk=SkDatum($hlavicka->datz);
+  $text = "  <valZostavenaDna><![CDATA[".$datz_sk."]]></valZostavenaDna>"."\r\n"; fwrite($soubor, $text);
+$dats_sk=$hlavicka->dats;
+//$dats_sk=SkDatum($hlavicka->dats);
+  $text = "  <valSchvalenaDna><![CDATA[".$dats_sk."]]></valSchvalenaDna>"."\r\n"; fwrite($soubor, $text);
 
+  $text = "  <secUctovnaZavierka>"."\r\n"; fwrite($soubor, $text);
+$typuz="0";
+  $text = "   <valTypUctovnejZavierky><![CDATA[".$typuz."]]></valTypUctovnejZavierky>"."\r\n"; fwrite($soubor, $text);
+$riadna="1"; $mimoriadna="0";
+if ( $hlavicka->druhuz == 1 ) { $riadna="0"; $mimoriadna="1"; }
+  $text = "   <valUctovnaZavierkaRiadna><![CDATA[".$riadna."]]></valUctovnaZavierkaRiadna>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <valUctovnaZavierkaMimoriadna><![CDATA[".$mimoriadna."]]></valUctovnaZavierkaMimoriadna>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </secUctovnaZavierka>"."\r\n"; fwrite($soubor, $text);
+
+  $text = " </secUdajeUZ>"."\r\n"; fwrite($soubor, $text);
+  $text = " <secUctJednotka>"."\r\n"; fwrite($soubor, $text);
+$typuj="RUZ_POD";
+if ( $hlavicka->druhuj == 1 ) { $typuj="RUZ_MUJ"; }
+if ( $hlavicka->druhuj == 2 ) { $typuj="RUZ_NO"; }
+if ( $hlavicka->druhuj == 3 ) { $typuj="RUZ_NUJ"; }
+  $text = "  <valTypUJ><![CDATA[".$typuj."]]></valTypUJ>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "  <secIdUctJedn>"."\r\n"; fwrite($soubor, $text);
+$text="";
+  $text = "   <valLeiUJ><![CDATA[".$text."]]></valLeiUJ>"."\r\n"; fwrite($soubor, $text);
 $dic=1*$fir_fdic;
-  $text = "  <dic><![CDATA[".$dic."]]></dic>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <valDicUJ><![CDATA[".$dic."]]></valDicUJ>"."\r\n"; fwrite($soubor, $text);
 $ico=1*$fir_fico;
-if( $fir_fico < 1000000 ) {$ico="00".$ico;}
-  $text = "  <ico><![CDATA[".$ico."]]></ico>"."\r\n"; fwrite($soubor, $text);
+if ( $fir_fico < 1000000 ) {$ico="00".$ico;}
+  $text = "   <valIcoUJ><![CDATA[".$ico."]]></valIcoUJ>"."\r\n"; fwrite($soubor, $text);
+$sid="";
+  $text = "   <valSidUJ><![CDATA[".$sid."]]></valSidUJ>"."\r\n"; fwrite($soubor, $text);
+$obchodneMeno = iconv("CP1250", "UTF-8", $fir_fnaz);
+  $text = "   <valObchMenoNazovUJ><![CDATA[".$obchodneMeno."]]></valObchMenoNazovUJ>"."\r\n"; fwrite($soubor, $text);
+$text="";
+  $text = "   <valNazovSpravFondu_NazovSpravcSpol><![CDATA[".$text."]]></valNazovSpravFondu_NazovSpravcSpol>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </secIdUctJedn>"."\r\n"; fwrite($soubor, $text);
 
-$pole = explode(".", $fir_sknace);
-$sknacea=$pole[0];
-$sknaceb=$pole[1];
-$sknacec=$pole[2];
-  $text = "  <skNace>"."\r\n"; fwrite($soubor, $text);
-$k1=$sknacea;
-  $text = "   <k1><![CDATA[".$k1."]]></k1>"."\r\n"; fwrite($soubor, $text);
-$k2=$sknaceb;
-  $text = "   <k2><![CDATA[".$k2."]]></k2>"."\r\n"; fwrite($soubor, $text);
-$k3=$sknacec;
-  $text = "   <k3><![CDATA[".$k3."]]></k3>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </skNace>"."\r\n"; fwrite($soubor, $text);
-
-  $text = "  <uctovnaZavierka>"."\r\n"; fwrite($soubor, $text);
-//dopyt, nefunguje
-$riadna=1;
-$mimoriadna=0;
-$priebezna=0;
-if ( $h_drp == 1 ) { $riadna="1"; $mimoriadna=0; $priebezna=0; }
-if ( $h_drp == 2 ) { $riadna="0"; $mimoriadna=1; $priebezna=0; }
-if ( $h_drp == 3 ) { $riadna="0"; $mimoriadna=0; $priebezna=1; }
-  $text = "   <riadna><![CDATA[".$riadna."]]></riadna>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <mimoriadna><![CDATA[".$mimoriadna."]]></mimoriadna>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <priebezna><![CDATA[".$priebezna."]]></priebezna>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </uctovnaZavierka>"."\r\n"; fwrite($soubor, $text);
-
-
-  $text = "  <miestoPodnikania>"."\r\n"; fwrite($soubor, $text);
-$ulica=iconv("CP1250", "UTF-8", $fir_fuli);
-  $text = "   <ulica><![CDATA[".$ulica."]]></ulica>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <secSidlo>"."\r\n"; fwrite($soubor, $text);
+$ulica= iconv("CP1250", "UTF-8", $fir_fuli);
+  $text = "   <valUlica><![CDATA[".$ulica."]]></valUlica>"."\r\n"; fwrite($soubor, $text);
 $cislo=$fir_fcdm;
-  $text = "   <cislo><![CDATA[".$cislo."]]></cislo>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <valCislo><![CDATA[".$cislo."]]></valCislo>"."\r\n"; fwrite($soubor, $text);
 $psc=$fir_fpsc;
-$psc=str_replace(" ","",$psc);
-  $text = "   <psc><![CDATA[".$psc."]]></psc>"."\r\n"; fwrite($soubor, $text);
-$obec=iconv("CP1250", "UTF-8", $fir_fmes);
-  $text = "   <obec><![CDATA[".$obec."]]></obec>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <valPsc><![CDATA[".$psc."]]></valPsc>"."\r\n"; fwrite($soubor, $text);
+$obec = iconv("CP1250", "UTF-8", $fir_fmes);
+  $text = "   <valObec><![CDATA[".$obec."]]></valObec>"."\r\n"; fwrite($soubor, $text);
 $telefon=$fir_ftel;
-$telefon=str_replace("/","",$telefon);
-$telefon=str_replace(" ","",$telefon);
-  $text = "   <telefon><![CDATA[".$telefon."]]></telefon>"."\r\n"; fwrite($soubor, $text);
-$email=$fir_fem1;
-  $text = "   <email><![CDATA[".$email."]]></email>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </miestoPodnikania>"."\r\n"; fwrite($soubor, $text);
-
-$datZostavenia=$h_zos;
-  $text = "  <zostaveneDna><![CDATA[".$datZostavenia."]]></zostaveneDna>"."\r\n"; fwrite($soubor, $text);
-  $text = " </hlavicka>"."\r\n"; fwrite($soubor, $text);
- 
-  $text = " <telo>"."\r\n"; fwrite($soubor, $text);
-//prijmy-vydavky riadky
-  $text = "  <ucFo1>"."\r\n"; fwrite($soubor, $text);
-
-$riadok=1*$hlavicka->r01;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r01><![CDATA[".$riadok."]]></r01>"."\r\n"; fwrite($soubor, $text);
-
-$riadok=1*$hlavicka->r02;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r02><![CDATA[".$riadok."]]></r02>"."\r\n"; fwrite($soubor, $text);
-
-$riadok=1*$hlavicka->r03;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r03><![CDATA[".$riadok."]]></r03>"."\r\n"; fwrite($soubor, $text);
-
-$riadok=1*$hlavicka->r04;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r04><![CDATA[".$riadok."]]></r04>"."\r\n"; fwrite($soubor, $text);
-
-$riadok=1*$hlavicka->r05;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r05><![CDATA[".$riadok."]]></r05>"."\r\n"; fwrite($soubor, $text);
-
-$riadok=1*$hlavicka->r06;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r06><![CDATA[".$riadok."]]></r06>"."\r\n"; fwrite($soubor, $text);
-
-$riadok=1*$hlavicka->r07;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r07><![CDATA[".$riadok."]]></r07>"."\r\n"; fwrite($soubor, $text);
-
-$riadok=1*$hlavicka->r08;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r08><![CDATA[".$riadok."]]></r08>"."\r\n"; fwrite($soubor, $text);
-
-$riadok=1*$hlavicka->r09;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r09><![CDATA[".$riadok."]]></r09>"."\r\n"; fwrite($soubor, $text);
-
-$riadok=1*$hlavicka->r10;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r10><![CDATA[".$riadok."]]></r10>"."\r\n"; fwrite($soubor, $text);
-
-$riadok=1*$hlavicka->r11;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r11><![CDATA[".$riadok."]]></r11>"."\r\n"; fwrite($soubor, $text);
-
-$riadok=1*$hlavicka->r12;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r12><![CDATA[".$riadok."]]></r12>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </ucFo1>"."\r\n"; fwrite($soubor, $text);
-
-  $text = "  </telo>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </dokument>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <valTelefon><![CDATA[".$telefon."]]></valTelefon>"."\r\n"; fwrite($soubor, $text);
+$fax=$fir_ffax;
+  $text = "   <valFax><![CDATA[".$fax."]]></valFax>"."\r\n"; fwrite($soubor, $text);
+$email=iconv("CP1250", "UTF-8", $fir_fem1);
+  $text = "   <valEmail><![CDATA[".$email."]]></valEmail>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </secSidlo>"."\r\n"; fwrite($soubor, $text);
+  $text = " </secUctJednotka>"."\r\n"; fwrite($soubor, $text);
+  $text = "</dokument>"."\r\n"; fwrite($soubor, $text);
      }
 //koniec ak j=0
 }
@@ -246,7 +274,7 @@ if ( $elsubor == 2 )
 ?>
 <br />
 <br />
-Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a naèítajte na www.drsr.sk alebo do aplikácie eDane :
+Stiahnite si nižšie uvedený súbor xml na Váš lokálny disk a naèítajte na www.financnasprava.sk alebo do aplikácie eDane:
 <br />
 <br />
 <a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
