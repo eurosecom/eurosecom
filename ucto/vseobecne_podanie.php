@@ -47,60 +47,44 @@ $subor=1;
      }
 //koniec znovu nacitaj
 
-// zapis upravene udaje
+//zapis upravene udaje
 if ( $copern == 23 )
      {
-
 $evci1 = strip_tags($_REQUEST['evci1']);
 $evci2 = strip_tags($_REQUEST['evci2']);
 $organ = strip_tags($_REQUEST['organ']);
 $duozn = strip_tags($_REQUEST['duozn']);
-$duprc = strip_tags($_REQUEST['duprc']);
 $oblast = strip_tags($_REQUEST['oblast']);
 $agenda = strip_tags($_REQUEST['agenda']);
 $typpod = strip_tags($_REQUEST['typpod']);
-$fopo = strip_tags($_REQUEST['fopo']);
-$prnie = strip_tags($_REQUEST['prnie']);
-$prsub = strip_tags($_REQUEST['prsub']);
-$prano = strip_tags($_REQUEST['prano']);
-$textpo = strip_tags($_REQUEST['textpo']);
-
+$obbod = strip_tags($_REQUEST['obbod']);
+$obbdo = strip_tags($_REQUEST['obbdo']);
+$obmod = strip_tags($_REQUEST['obmod']);
+$obmdo = strip_tags($_REQUEST['obmdo']);
+$typuz = strip_tags($_REQUEST['typuz']);
 $datk = strip_tags($_REQUEST['datk']);
 $datk_sql=SqlDatum($datk);
 $datz = strip_tags($_REQUEST['datz']);
 $datz_sql=SqlDatum($datz);
 $dats = strip_tags($_REQUEST['dats']);
 $dats_sql=SqlDatum($dats);
-$obbod = strip_tags($_REQUEST['obbod']);
-$obbdo = strip_tags($_REQUEST['obbdo']);
-$obmod = strip_tags($_REQUEST['obmod']);
-$obmdo = strip_tags($_REQUEST['obmdo']);
-$druhuz = strip_tags($_REQUEST['druhuz']);
-$druhuj = strip_tags($_REQUEST['druhuj']);
-
-$datp = strip_tags($_REQUEST['datp']);
-$datp_sql=SqlDatum($datp);
+$jazyk = strip_tags($_REQUEST['jazyk']);
 $datv = strip_tags($_REQUEST['datv']);
 $datv_sql=SqlDatum($datv);
-$jazyk = strip_tags($_REQUEST['jazyk']);
-$typuz = strip_tags($_REQUEST['typuz']);
 $typdok = strip_tags($_REQUEST['typdok']);
 $spopod = strip_tags($_REQUEST['spopod']);
+$datp = strip_tags($_REQUEST['datp']);
+$datp_sql=SqlDatum($datp);
 
 $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_vseobpodanie SET ".
-" datp='$datp_sql', datv='$datv_sql', jazyk='$jazyk', typuz='$typuz', typdok='$typdok', spopod='$spopod', ".
-
-" datk='$datk_sql', datz='$datz_sql', dats='$dats_sql', ".
-" obbod='$obbod', obbdo='$obbdo', obmod='$obmod', obmdo='$obmdo', ".
-" druhuz='$druhuz', druhuj='$druhuj', ".
-
 " evci1='$evci1', evci2='$evci2', organ='$organ', duozn='$duozn', ".
-" duprc='$duprc', oblast='$oblast', agenda='$agenda', typpod='$typpod', ".
-" fopo='$fopo', prnie='$prnie', prsub='$prsub', prano='$prano', ".
-" textpo='$textpo' ".
-" WHERE oc = $cislo_oc"; 
+" oblast='$oblast', agenda='$agenda', typpod='$typpod', ".
+" obbod='$obbod', obbdo='$obbdo', obmod='$obmod', obmdo='$obmdo', ".
+" typuz='$typuz', datk='$datk_sql', datz='$datz_sql', dats='$dats_sql', ".
+" jazyk='$jazyk', datv='$datv_sql', typdok='$typdok', spopod='$spopod', datp='$datp_sql' ".
+" WHERE oc = $cislo_oc";
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");  
 
@@ -122,7 +106,6 @@ $sql = "SELECT datp FROM F$kli_vxcf"."_vseobpodanie";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
-
 $vsql = "DROP TABLE F".$kli_vxcf."_vseobpodanie";
 $vytvor = mysql_query("$vsql");
 
@@ -205,37 +188,28 @@ $evci1 = $fir_riadok->evci1;
 $evci2 = $fir_riadok->evci2;
 $organ = $fir_riadok->organ;
 $duozn = $fir_riadok->duozn;
-$duprc = $fir_riadok->duprc;
 $oblast = $fir_riadok->oblast;
 $agenda = $fir_riadok->agenda;
 $typpod = $fir_riadok->typpod;
-$fopo = $fir_riadok->fopo;
-$prnie = $fir_riadok->prnie;
-$prsub = $fir_riadok->prsub;
-$prano = $fir_riadok->prano;
-$textpo = $fir_riadok->textpo;
-
-$datk_sk = SkDatum($fir_riadok->datk);
-$datz_sk = SkDatum($fir_riadok->datz);
-$dats_sk = SkDatum($fir_riadok->dats);
 $obbod = $fir_riadok->obbod;
 $obbdo = $fir_riadok->obbdo;
 $obmod = $fir_riadok->obmod;
 $obmdo = $fir_riadok->obmdo;
-$druhuz = $fir_riadok->druhuz;
-$druhuj = $fir_riadok->druhuj;
-
-$datp_sk = SkDatum($fir_riadok->datp);
-$datv_sk = SkDatum($fir_riadok->datv);
-$jazyk = $fir_riadok->jazyk;
 $typuz = $fir_riadok->typuz;
+$datk_sk = SkDatum($fir_riadok->datk);
+$datz_sk = SkDatum($fir_riadok->datz);
+$dats_sk = SkDatum($fir_riadok->dats);
+$jazyk = $fir_riadok->jazyk;
+$datv_sk = SkDatum($fir_riadok->datv);
 $typdok = $fir_riadok->typdok;
 $spopod = $fir_riadok->spopod;
-
+$datp_sk = SkDatum($fir_riadok->datp);
      }
 //koniec nacitania
 
-
+//6-miestne ico
+$ico=$fir_fico;
+if ( $fir_fico < 1000000 ) { $ico="00".$fir_fico; }
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -243,30 +217,26 @@ $spopod = $fir_riadok->spopod;
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - VöeobecnÈ podanie</title>
 <style type="text/css">
-div.navbar {
-  overflow: auto;
-  width: 100%;
-  background-color: #add8e6;
+span.text-echo {
+  font-size: 16px;
+  letter-spacing: 13px;
 }
-img.form-background {
-  display: block;
-  width: 930px;
-  height: 1240px;
-  margin: 50px 0 0 25px;
-}
-div.wrap-form-background {
-  overflow: hidden;
-  width: 950px;
-  height: 1300px;
-  background-color: #fff;
+div.input-echo {
+  font-size: 16px;
+/*   background-color: #fff; */
+  position: absolute;
+  font-weight:bold;
 }
 form input[type=text] {
   position: absolute;
-  height: 18px;
-  line-height: 18px;
+  height: 20px;
+  line-height: 20px;
   padding-left: 4px;
   border: 1px solid #39f;
   font-size: 14px;
+}
+form select {
+  height: 24px;
 }
 </style>
 
@@ -278,42 +248,29 @@ form input[type=text] {
 ?>
   function ObnovUI()
   {
-
    document.formv1.evci1.value = '<?php echo "$evci1";?>';
    document.formv1.evci2.value = '<?php echo "$evci2";?>';
    document.formv1.organ.value = '<?php echo "$organ";?>';
    document.formv1.duozn.value = '<?php echo "$duozn";?>';
-   document.formv1.duprc.value = '<?php echo "$duprc";?>';
    document.formv1.oblast.value = '<?php echo "$oblast";?>';
    document.formv1.agenda.value = '<?php echo "$agenda";?>';
    document.formv1.typpod.value = '<?php echo "$typpod";?>';
-   document.formv1.fopo.value = '<?php echo "$fopo";?>';
-   document.formv1.prnie.value = '<?php echo "$prnie";?>';
-   document.formv1.prsub.value = '<?php echo "$prsub";?>';
-   document.formv1.prano.value = '<?php echo "$prano";?>';
-
-   document.formv1.datk.value = '<?php echo "$datk_sk";?>';
-   document.formv1.datz.value = '<?php echo "$datz_sk";?>';
-   document.formv1.dats.value = '<?php echo "$dats_sk";?>';
    document.formv1.obbod.value = '<?php echo "$obbod";?>';
    document.formv1.obbdo.value = '<?php echo "$obbdo";?>';
    document.formv1.obmod.value = '<?php echo "$obmod";?>';
    document.formv1.obmdo.value = '<?php echo "$obmdo";?>';
-<?php if ( $druhuz == 0 ) { ?> document.formv1.druhuz0.checked = 'true'; <?php } ?>
-<?php if ( $druhuz == 1 ) { ?> document.formv1.druhuz1.checked = 'true'; <?php } ?>
-<?php if ( $druhuj == 0 ) { ?> document.formv1.druhuj0.checked = 'true'; <?php } ?>
-<?php if ( $druhuj == 1 ) { ?> document.formv1.druhuj1.checked = 'true'; <?php } ?>
-<?php if ( $druhuj == 2 ) { ?> document.formv1.druhuj2.checked = 'true'; <?php } ?>
-<?php if ( $druhuj == 3 ) { ?> document.formv1.druhuj3.checked = 'true'; <?php } ?>
-
-   document.formv1.datp.value = '<?php echo "$datp_sk";?>';
+<?php if ( $typuz == 0 ) { ?> document.formv1.typuz0.checked = 'true'; <?php } ?>
+<?php if ( $typuz == 1 ) { ?> document.formv1.typuz1.checked = 'true'; <?php } ?>
+<?php if ( $typuz == 2 ) { ?> document.formv1.typuz2.checked = 'true'; <?php } ?>
+   document.formv1.datk.value = '<?php echo "$datk_sk";?>';
+   document.formv1.datz.value = '<?php echo "$datz_sk";?>';
+   document.formv1.dats.value = '<?php echo "$dats_sk";?>';
+<?php if ( $jazyk == 0 ) { ?> document.formv1.jazyk0.checked = 'true'; <?php } ?>
+<?php if ( $jazyk == 1 ) { ?> document.formv1.jazyk1.checked = 'true'; <?php } ?>
    document.formv1.datv.value = '<?php echo "$datv_sk";?>';
-   document.formv1.jazyk.value = '<?php echo "$jazyk";?>';
-   document.formv1.typuz.value = '<?php echo "$typuz";?>';
    document.formv1.typdok.value = '<?php echo "$typdok";?>';
    document.formv1.spopod.value = '<?php echo "$spopod";?>';
-
-
+   document.formv1.datp.value = '<?php echo "$datp_sk";?>';
   }
 <?php
 //koniec uprava
@@ -337,7 +294,10 @@ form input[type=text] {
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-
+  function PoucVyplnenie()
+  {
+   window.open('../dokumenty/dan_z_prijmov2015/vppod_v15_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }
   function tlacVseob()
   {
    window.open('vseobecne_podanie.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc;?>', '_blank');
@@ -357,12 +317,14 @@ if ( $copern == 20 )
    <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
   </tr>
   <tr>
-   <td class="header">VöeobecnÈ podanie - <span class="subheader"></span>
+   <td class="header">VöeobecnÈ podanie <span class="subheader">k ˙Ëtovnej z·vierke</span>
    </td>
    <td>
     <div class="bar-btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacVseob();"
-      title="Zobraziù v PDF" class="btn-form-tool">
+          title="Zobraziù v PDF" class="btn-form-tool">
+     <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();"
+          title="PouËenie na vyplnenie" class="btn-form-tool">
     </div>
    </td>
   </tr>
@@ -373,91 +335,100 @@ if ( $copern == 20 )
 <FORM name="formv1" method="post" action="vseobecne_podanie.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave" style="top:4px;">
 
-<div class="wrap-form-background">
-<img src="../dokumenty/dan_z_prijmov2014/vseobecne_podanie.jpg"
- alt="tlaËivo Z·poËtov˝ list pre rok 2014 1.strana 174kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/vppod_v15.jpg"
+     alt="formul·r VöeobecnÈ podanie k ⁄Z - PodnikateæskÈ subjekty ˙Ëtuj˙ce v s˙stave podvojnÈho ˙ËtovnÌctva 204kB"
+     class="form-background">
 
-<!-- zamestnavatel -->
-<span class="text-echo" style="top:80px; left:44px;"><?php echo $fir_fnaz; ?></span>
-<span class="text-echo" style="top:103px; left:44px;"><?php echo "$fir_fuli $fir_fcdm"; ?></span>
-<span class="text-echo" style="top:126px; left:44px;"><?php echo $fir_fmes; ?></span>
-
-
-<input type="text" name="evci1" id="evci1" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:588px; left:435px;"/>
-
+<input type="text" name="evci1" id="evci1" style="width:177px; top:100px; left:361px;"/>
 <input type="text" name="evci2" id="evci2" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:593px; left:275px;"/>
+ style="width:85px; top:100px; left:588px;"/>
 
-<input type="text" name="organ" id="organ" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:608px; left:435px;"/>
+<!-- adresat podania -->
+<select name="organ" id="organ" size="1" style="width:274px; top:174px; left:248px;">
+ <option value="0"></option>
+ <option value="1">DaÚov˝ ˙rad</option>
+</select>
+<select name="duozn" id="duozn" size="1" style="width:274px; top:205px; left:248px;">
+ <option value="0"></option>
+ <option value="1">Bansk· Bystrica</option>
+ <option value="2">Bratislava</option>
+ <option value="3">Koöice</option>
+ <option value="4">Nitra</option>
+ <option value="5">pre vybranÈ daÚovÈ subjekty</option>
+ <option value="6">Preöov</option>
+ <option value="7">TrenËÌn</option>
+ <option value="8">Trnava</option>
+ <option value="9">éilina</option>
+</select>
+<select name="oblast" id="oblast" size="1" style="width:274px; top:248px; left:248px;">
+ <option value="0"></option>
+ <option value="1">⁄ËtovnÈ dokumenty</option>
+</select>
+<select name="agenda" id="agenda" size="1" style="width:612px; top:279px; left:248px;">
+ <option value="0"></option>
+ <option value="1">⁄ËtovnÈ v˝kazy pre podnikateæskÈ subjetky ˙Ëtuj˙ce v s˙stave podvojnÈho ˙ËtovnÌctva</option>
+</select>
+<select name="typpod" id="typpod" size="1" style="width:612px; top:310px; left:248px;">
+ <option value="0"></option>
+ <option value="1">Podnikateæsk˝ subjekt ˙Ëtuj˙ci v s˙stave podvojnÈho ˙ËtovnÌctva</option>
+</select>
 
-<input type="text" name="duozn" id="duozn" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:632px; left:275px;"/>
-
-<input type="text" name="duprc" id="duprc" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:632px; left:435px;"/>
-
-<input type="text" name="oblast" id="oblast" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:657px; left:275px;"/>
-
-<input type="text" name="agenda" id="agenda" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:657px; left:435px;"/>
-
-<input type="text" name="typpod" id="typpod" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:681px; left:275px;"/>
-
-<input type="text" name="fopo" id="fopo" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:681px; left:275px;"/>
-
-<input type="text" name="prnie" id="prnie" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:681px; left:275px;"/>
-
-<input type="text" name="prsub" id="prsub" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:681px; left:275px;"/>
-
-<input type="text" name="prano" id="prano" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:681px; left:275px;"/>
-
-<input type="text" name="datk" id="datk" onkeyup="CiarkaNaBodku(this);"
-       style="width:195px; top:112px; left:426px;"/>
-
-<input type="text" name="datz" id="datz" onkeyup="CiarkaNaBodku(this);"
-       style="width:195px; top:262px; left:323px;"/>
-<input type="text" name="dats" id="dats" onkeyup="CiarkaNaBodku(this);"
-       style="width:195px; top:318px; left:323px;"/>
+<!-- obdobia -->
 <input type="text" name="obbod" id="obbod" onkeyup="CiarkaNaBodku(this);"
-       style="width:140px; top:260px; left:752px;"/>
+       style="width:127px; top:369px; left:250px;"/>
 <input type="text" name="obbdo" id="obbdo" onkeyup="CiarkaNaBodku(this);"
-       style="width:140px; top:298px; left:752px;"/>
+       style="width:127px; top:399px; left:250px;"/>
 <input type="text" name="obmod" id="obmod" onkeyup="CiarkaNaBodku(this);"
-       style="width:140px; top:338px; left:752px;"/>
+       style="width:127px; top:369px; left:689px;"/>
 <input type="text" name="obmdo" id="obmdo" onkeyup="CiarkaNaBodku(this);"
-       style="width:140px; top:376px; left:752px;"/>
-<input type="radio" id="druhuz0" name="druhuz" value="0" style="top:444px; left:67px;"/> 
-<input type="radio" id="druhuz1" name="druhuz" value="1" style="top:471px; left:67px;"/>
-<input type="radio" id="druhuj0" name="druhuj" value="0" style="top:422px; left:417px;"/> 
-<input type="radio" id="druhuj1" name="druhuj" value="1" style="top:449px; left:417px;"/>
-<input type="radio" id="druhuj2" name="druhuj" value="2" style="top:477px; left:417px;"/>
-<input type="radio" id="druhuj3" name="druhuj" value="3" style="top:505px; left:417px;"/>
+       style="width:127px; top:399px; left:689px;"/>
+
+<!-- uctovna zavierka -->
+<span class="text-echo" style="top:475px; left:138px;">x</span>
+<input type="radio" id="typuz0" name="typuz" value="0" style="top:474px; left:349px;"/>
+<input type="radio" id="typuz1" name="typuz" value="1" style="top:501px; left:349px;"/>
+<input type="radio" id="typuz2" name="typuz" value="2" style="top:527px; left:349px;"/>
+<input type="text" name="datk" id="datk" onkeyup="CiarkaNaBodku(this);"
+       style="width:131px; top:498px; left:687px;"/>
+<input type="text" name="datz" id="datz" onkeyup="CiarkaNaBodku(this);"
+       style="width:127px; top:566px; left:250px;"/>
+<input type="text" name="dats" id="dats" onkeyup="CiarkaNaBodku(this);"
+       style="width:127px; top:566px; left:689px;"/>
+
+<!-- jazyk podania -->
+<input type="radio" id="jazyk0" name="jazyk" value="0" style="top:645px; left:132px;"/>
+<input type="radio" id="jazyk1" name="jazyk" value="1" style="top:671px; left:132px;"/>
+
+<!-- uctovna jednotka -->
+<div class="input-echo" style="top:751px; left:182px;"><?php echo $ico; ?></div>
+<div class="input-echo" style="top:751px; left:385px;"><?php echo $fir_fdic; ?></div>
+<input type="text" name="datv" id="datv" onkeyup="CiarkaNaBodku(this);"
+       style="width:131px; top:751px; left:687px;"/>
+<div class="input-echo" style="top:783px; left:688px;"><?php echo $fir_sknace; ?></div>
+<div class="input-echo" style="top:830px; left:70px;"><?php echo $fir_fnaz; ?></div>
+<div class="input-echo" style="top:879px; left:70px;"><?php echo $fir_obreg; ?></div>
+<div class="input-echo" style="top:923px; left:182px;"><?php echo $fir_fuli; ?></div>
+<div class="input-echo" style="top:923px; left:543px;"><?php echo $fir_fcdm; ?></div>
+<div class="input-echo" style="top:953px; left:182px;"><?php echo $fir_fpsc; ?></div>
+<div class="input-echo" style="top:953px; left:543px;"><?php echo $fir_fmes; ?></div>
+<div class="input-echo" style="top:984px; left:182px;"><?php echo $fir_ftel; ?></div>
+<div class="input-echo" style="top:984px; left:543px;"><?php echo $fir_fem1; ?></div>
+
+<!-- prilohy -->
+<select name="typdok" id="typdok" size="1" style="width:274px; top:1067px; left:248px;">
+ <option value="0"></option>
+ <option value="1">Spr·va audÌtora</option>
+ <option value="2">V˝roËn· spr·va</option>
+ <option value="3">RoËn· finanËn· spr·va emitenta</option>
+</select>
+<select name="spopod" id="spopod" size="1" style="width:274px; top:1098px; left:248px;">
+ <option value="0"></option>
+ <option value="1">Elektronicky - s˙Ëasù podania</option>
+</select>
 
 <input type="text" name="datp" id="datp" onkeyup="CiarkaNaBodku(this);"
-       style="width:195px; top:500px; left:426px;"/>
+       style="width:127px; top:1157px; left:250px;"/>
 
-<input type="text" name="datv" id="datv" onkeyup="CiarkaNaBodku(this);"
-       style="width:195px; top:520px; left:323px;"/>
-
-<input type="text" name="jazyk" id="jazyk" onkeyup="CiarkaNaBodku(this);"
-       style="width:195px; top:540px; left:323px;"/>
-<input type="text" name="typuz" id="typuz" onkeyup="CiarkaNaBodku(this);"
-       style="width:195px; top:560px; left:323px;"/>
-<input type="text" name="typdok" id="typdok" onkeyup="CiarkaNaBodku(this);"
-       style="width:195px; top:580px; left:323px;"/>
-<input type="text" name="spopod" id="spopod" onkeyup="CiarkaNaBodku(this);"
-       style="width:195px; top:600px; left:323px;"/>
-
-
-</div> <!-- koniec wrap-form-background -->
 </FORM>
 </div> <!-- koniec #content -->
 <?php
@@ -504,118 +475,166 @@ $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("
 
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
-$pdf->SetLeftMargin(8);
-$pdf->SetTopMargin(15);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/vseobecne_podanie.jpg') AND $i == 0 )
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/vppod_v15.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/vseobecne_podanie.jpg',9,15,193,270);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/vppod_v15.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
 
-//v dna
+//cislo dokumentu
+$pdf->Cell(190,13," ","$rmc1",1,"L");
+$pdf->Cell(70,5," ","$rmc1",0,"L");$pdf->Cell(40,5,"$hlavicka->evci1","$rmc",0,"L");
+$pdf->Cell(10,5," ","$rmc1",0,"L");$pdf->Cell(20,5,"$hlavicka->evci2","$rmc",1,"L");
+
+//adresat podania
+$pdf->Cell(190,12," ","$rmc1",1,"L");
+if ( $hlavicka->organ == 0 ) { $organ=""; }
+if ( $hlavicka->organ == 1 ) { $organ="DaÚov˝ ˙rad"; }
+$pdf->Cell(45,5," ","$rmc1",0,"L");$pdf->Cell(60,5,"$organ","$rmc",1,"L");
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+if ( $hlavicka->duozn == 0 ) { $duozn=""; }
+if ( $hlavicka->duozn == 1 ) { $duozn="Bansk· Bystrica"; }
+if ( $hlavicka->duozn == 2 ) { $duozn="Bratislava"; }
+if ( $hlavicka->duozn == 3 ) { $duozn="Koöice"; }
+if ( $hlavicka->duozn == 4 ) { $duozn="Nitra"; }
+if ( $hlavicka->duozn == 5 ) { $duozn="pre vybranÈ daÚovÈ subjekty"; }
+if ( $hlavicka->duozn == 6 ) { $duozn="Preöov"; }
+if ( $hlavicka->duozn == 7 ) { $duozn="TrenËÌn"; }
+if ( $hlavicka->duozn == 8 ) { $duozn="Trnava"; }
+if ( $hlavicka->duozn == 9 ) { $duozn="éilina"; }
+$pdf->Cell(45,5," ","$rmc1",0,"L");$pdf->Cell(60,5,"$duozn","$rmc",1,"L");
 $pdf->Cell(190,5," ","$rmc1",1,"L");
-$datum=SkDatum($hlavicka->datum);
-$pole = explode(".", $datum);
-$datum1=$pole[0];
-$datum2=$pole[1];
-$datum3=$pole[2];
-$pole = explode("20", $datum3);
-$datum3=$pole[1];
-$pdf->Cell(60,5," ","$rmc1",0,"L");
-$pdf->Cell(88,5,"$fir_fmes    ","$rmc",0,"R");$pdf->Cell(6,4," ","$rmc1",0,"L");
-$pdf->Cell(18,5,"$datum1.$datum2.","$rmc",0,"R");$pdf->Cell(5,4," ","$rmc1",0,"L");
-$pdf->Cell(10,5,"$datum3","$rmc",1,"L");
-
-//zamestnavatel
+if ( $hlavicka->oblast == 0 ) { $oblast=""; }
+if ( $hlavicka->oblast == 1 ) { $oblast="⁄ËtovnÈ dokumenty"; }
+$pdf->Cell(45,5," ","$rmc1",0,"L");$pdf->Cell(60,5,"$oblast","$rmc",1,"L");
+$pdf->SetFont('arial','',9);
 $pdf->Cell(190,2," ","$rmc1",1,"L");
-$pdf->Cell(5,4," ","$rmc1",0,"L");$pdf->Cell(85,4,"$fir_fnaz","$rmc",1,"L");
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(5,4," ","$rmc1",0,"L");$pdf->Cell(85,4,"$fir_fuli $fir_fcdm","$rmc",1,"L");
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(5,4," ","$rmc1",0,"L");$pdf->Cell(85,4,"$fir_fmes","$rmc",1,"L");
+if ( $hlavicka->agenda == 0 ) { $agenda=""; }
+if ( $hlavicka->agenda == 1 ) { $agenda="⁄ËtovnÈ v˝kazy pre podnikateæskÈ subjetky ˙Ëtuj˙ce v s˙stave podvojnÈho ˙ËtovnÌctva"; }
+$pdf->Cell(45,5," ","$rmc1",0,"L");$pdf->Cell(135,5,"$agenda","$rmc",1,"L");
+$pdf->SetFont('arial','',10);
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+if ( $hlavicka->typpod == 0 ) { $typpod=""; }
+if ( $hlavicka->typpod == 1 ) { $typpod="Podnikateæsk˝ subjekt ˙Ëtuj˙ci v s˙stave podvojnÈho ˙ËtovnÌctva"; }
+$pdf->Cell(45,5," ","$rmc1",0,"L");$pdf->Cell(135,5,"$typpod","$rmc",1,"L");
 
-//zamestnanec
-$dar=SkDatum($hlavicka->dar);
-$pdf->Cell(190,14," ","$rmc1",1,"L");
-$pdf->Cell(20,4," ","$rmc1",0,"L");
-$pdf->Cell(124,5,"$hlavicka->titl $hlavicka->meno $hlavicka->prie","$rmc",0,"L");
-$pdf->Cell(7,4," ","$rmc1",0,"L");$pdf->Cell(20,5,"$dar","$rmc",1,"L");
-$pdf->Cell(190,6," ","$rmc1",1,"L");
-$pdf->Cell(20,4," ","0",0,"L");$pdf->Cell(124,5,"$hlavicka->zuli $hlavicka->zcdm, $hlavicka->zmes, $hlavicka->zpsc","$rmc",1,"L");
-//doba zamestnania
-$dan=SkDatum($hlavicka->dan);
-$dav=SkDatum($hlavicka->dav);
-$pdf->Cell(190,6," ","$rmc1",1,"L");
-$pdf->Cell(53,4," ","$rmc1",0,"L");$pdf->Cell(70,5,"$dan","$rmc",0,"L");
-$pdf->Cell(6,4," ","$rmc1",0,"L");$pdf->Cell(60,5,"$dav","$rmc",1,"L");
+//obdobia
+//od
+$pdf->Cell(190,8," ","$rmc1",1,"L");
+$text=$hlavicka->obbod;
+if ( $text == '00.0000' ) { $text=""; }
+$pole = explode(".", $hlavicka->obbod);
+$mesiac=$pole[0];
+if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
+$rok=$pole[1];
+$pdf->Cell(45,5," ","$rmc1",0,"R");$pdf->Cell(30,6,"$mesiac.$rok","$rmc",0,"C");
+//
+$text=$hlavicka->obmod;
+if ( $text == '00.0000' ) { $text=""; }
+$pole = explode(".", $hlavicka->obmod);
+$mesiac=$pole[0];
+if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
+$rok=$pole[1];
+$pdf->Cell(67,5," ","$rmc1",0,"R");$pdf->Cell(30,6,"$mesiac.$rok","$rmc",1,"C");
+//do
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$text=$hlavicka->obbdo;
+if ( $text == '00.0000' ) { $text=""; }
+$pole = explode(".", $hlavicka->obbdo);
+$mesiac=$pole[0];
+if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
+$rok=$pole[1];
+$pdf->Cell(45,5," ","$rmc1",0,"R");$pdf->Cell(30,6,"$mesiac.$rok","$rmc",0,"C");
+//
+$text=$hlavicka->obmdo;
+if ( $text == '00.0000' ) { $text=""; }
+$pole = explode(".", $hlavicka->obmdo);
+$mesiac=$pole[0];
+if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
+$rok=$pole[1];
+$pdf->Cell(67,5," ","$rmc1",0,"R");$pdf->Cell(30,6,"$mesiac.$rok","$rmc",1,"C");
 
-//I.cast
-$pdf->Cell(190,19," ","$rmc1",1,"L");
-$pdf->Cell(59,4," ","$rmc1",0,"L");$pdf->Cell(75,6,"$hlavicka->neschop","$rmc",1,"L");
-//obdobia vylucene
-$vylod1=SkDatum($hlavicka->vylod1); if ( $vylod1 == "00.00.0000" ) $vylod1="";
-$vyldo1=SkDatum($hlavicka->vyldo1); if ( $vyldo1 == "00.00.0000" ) $vyldo1="";
-$vylod2=SkDatum($hlavicka->vylod2); if ( $vylod2 == "00.00.0000" ) $vylod2="";
-$vyldo2=SkDatum($hlavicka->vyldo2); if ( $vyldo2 == "00.00.0000" ) $vyldo2="";
-$vylod3=SkDatum($hlavicka->vylod3); if ( $vylod3 == "00.00.0000" ) $vylod3="";
-$vyldo3=SkDatum($hlavicka->vyldo3); if ( $vyldo3 == "00.00.0000" ) $vyldo3="";
-$vylod4=SkDatum($hlavicka->vylod4); if ( $vylod4 == "00.00.0000" ) $vylod4="";
-$vyldo4=SkDatum($hlavicka->vyldo4); if ( $vyldo4 == "00.00.0000" ) $vyldo4="";
-$vylod5=SkDatum($hlavicka->vylod5); if ( $vylod5 == "00.00.0000" ) $vylod5="";
-$vyldo5=SkDatum($hlavicka->vyldo5); if ( $vyldo5 == "00.00.0000" ) $vyldo5="";
-$vyl2od1=SkDatum($hlavicka->vyl2od1); if( $vyl2od1 == "00.00.0000" ) $vyl2od1="";
-$vyl2do1=SkDatum($hlavicka->vyl2do1); if( $vyl2do1 == "00.00.0000" ) $vyl2do1="";
-$vyldni1=$hlavicka->vyldni1; if ( $vyldni1 == 0 ) $vyldni1="";
-$vyldni2=$hlavicka->vyldni2; if ( $vyldni2 == 0 ) $vyldni2="";
-$vyldni3=$hlavicka->vyldni3; if ( $vyldni3 == 0 ) $vyldni3="";
-$vyldni4=$hlavicka->vyldni4; if ( $vyldni4 == 0 ) $vyldni4="";
-$vyldni5=$hlavicka->vyldni5; if ( $vyldni5 == 0 ) $vyldni5="";
-$vyl2dni1=$hlavicka->vyl2dni1; if ( $vyl2dni1 == 0 ) $vyl2dni1="";
-$pdf->Cell(190,24," ","$rmc1",1,"L");
-$pdf->Cell(46,4," ","$rmc1",0,"L");
-$pdf->Cell(32,5,"$vylod1","$rmc",0,"C");$pdf->Cell(34,5,"$vyldo1","$rmc",0,"C");
-$pdf->Cell(33,5,"$vyldni1","$rmc",1,"C");
-$pdf->Cell(46,4," ","$rmc1",0,"L");
-$pdf->Cell(32,5,"$vylod2","$rmc",0,"C");$pdf->Cell(34,5,"$vyldo2","$rmc",0,"C");
-$pdf->Cell(33,5,"$vyldni2","$rmc",1,"C");
-$pdf->Cell(46,4," ","$rmc1",0,"L");
-$pdf->Cell(32,5,"$vylod3","$rmc",0,"C");$pdf->Cell(34,5,"$vyldo3","$rmc",0,"C");
-$pdf->Cell(33,5,"$vyldni3","$rmc",1,"C");
-$pdf->Cell(46,4," ","$rmc1",0,"L");
-$pdf->Cell(32,6,"$vylod4","$rmc",0,"C");$pdf->Cell(34,6,"$vyldo4","$rmc",0,"C");
-$pdf->Cell(33,6,"$vyldni4","$rmc",1,"C");
-$pdf->Cell(46,4," ","$rmc1",0,"L");
-$pdf->Cell(32,5,"$vylod5","$rmc",0,"C");$pdf->Cell(34,5,"$vyldo5","$rmc",0,"C");
-$pdf->Cell(33,5,"$vyldni5","$rmc",1,"C");
-$pdf->Cell(46,4," ","$rmc1",0,"L");
-$pdf->Cell(32,5,"$vyl2od1","$rmc",0,"C");$pdf->Cell(34,5,"$vyl2do1","$rmc",0,"C");
-$pdf->Cell(33,5,"$vyl2dni1","$rmc",1,"C");
-//zapocitana doba
-$pdf->Cell(190,22," ","$rmc1",1,"L");
-$pdf->Cell(114,4," ","$rmc1",0,"L");$pdf->Cell(22,4,"$hlavicka->rok","$rmc",0,"L");
-$pdf->Cell(10,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$hlavicka->dni","$rmc",1,"L");
+//uctovna zavierka
+$pdf->Cell(190,12," ","$rmc1",1,"L");
+$individualna="x";
+$pdf->Cell(20,5," ","$rmc1",0,"R");$pdf->Cell(3,3,"$individualna","$rmc",1,"C");
+//
+$riadna="x"; $mimoriadna=""; $priebezna="";
+if ( $hlavicka->typuz == 1 ) { $riadna=""; $mimoriadna="x"; $priebezna=""; }
+if ( $hlavicka->typuz == 2 ) { $riadna=""; $mimoriadna=""; $priebezna="x"; }
+$pdf->SetY(109);
+$pdf->Cell(68,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$riadna","$rmc",1,"C");
+$pdf->SetY(115);
+$pdf->Cell(68,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$mimoriadna","$rmc",1,"C");
+$pdf->SetY(121);
+$pdf->Cell(68,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$priebezna","$rmc",1,"C");
+//zostavene k
+$pdf->SetY(114);
+$text=SkDatum($hlavicka->datk);
+if ( $text == '00.00.0000' ) { $text=""; }
+$pdf->Cell(142,6," ","$rcm1",0,"C");$pdf->Cell(30,5,"$text","$rmc",1,"L");
+
+//zostavena dna
+$pdf->Cell(190,10," ","$rmc1",1,"L");
+$text=SkDatum($hlavicka->datz);
+if ( $text == '00.00.0000' ) { $text=""; }
+$pdf->Cell(45,5," ","$rmc1",0,"R");$pdf->Cell(30,6,"$text","$rmc",0,"C");
+//schvalena dna
+$text=SkDatum($hlavicka->dats);
+if ( $text == '00.00.0000' ) { $text=""; }
+$pdf->Cell(67,5," ","$rmc1",0,"R");$pdf->Cell(30,6,"$text","$rmc",1,"C");
+
+//jazyk podania
+$pdf->Cell(190,13," ","$rmc1",1,"L");
+$slovencina="x"; $ine="";
+if ( $hlavicka->jazyk == 1 ) { $slovencina=""; $ine="x"; }
+$pdf->Cell(20,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$slovencina","$rmc",1,"C");
+$pdf->Cell(190,3," ","$rmc1",1,"L");
+$pdf->Cell(20,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$ine","$rmc",1,"C");
+
+//uctovna jednotka
+$pdf->Cell(190,15," ","$rmc1",1,"L");
+$pdf->Cell(30,3," ","$rmc1",0,"C");$pdf->Cell(25,5,"$ico","$rmc",0,"L");
+$pdf->Cell(20,3," ","$rmc1",0,"C");$pdf->Cell(25,5,"$fir_fdic","$rmc",0,"L");
+$vznikuj=SkDatum($hlavicka->datv);
+if ( $vznikuj == '00.00.0000' ) { $vznikuj=""; }
+$pdf->Cell(42,5," ","$rmc1",0,"R");$pdf->Cell(30,5,"$vznikuj","$rmc",1,"L");
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+$pdf->Cell(142,5," ","$rmc1",0,"R");$pdf->Cell(30,5,"$fir_sknace","$rmc",1,"L");
+$pdf->Cell(190,6," ","$rmc1",1,"L");
+$pdf->Cell(5,5," ","$rmc1",0,"R");$pdf->Cell(175,6,"$fir_fnaz","$rmc",1,"L");
+$pdf->Cell(190,5," ","$rmc1",1,"L");
+$pdf->Cell(5,5," ","$rmc1",0,"R");$pdf->Cell(175,6,"$fir_obreg","$rmc",1,"L");
+//sidlo
+$pdf->Cell(190,4," ","$rmc1",1,"L");
+$pdf->Cell(30,5," ","$rmc1",0,"R");$pdf->Cell(50,6,"$fir_fuli","$rmc",0,"L");
+$pdf->Cell(30,5," ","$rmc1",0,"R");$pdf->Cell(25,6,"$fir_fcdm","$rmc",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(30,5," ","$rmc1",0,"R");$pdf->Cell(25,6,"$fir_fpsc","$rmc",0,"L");
+$pdf->Cell(55,5," ","$rmc1",0,"R");$pdf->Cell(70,6,"$fir_fmes","$rmc",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(30,5," ","$rmc1",0,"R");$pdf->Cell(25,6,"$fir_ftel","$rmc",0,"L");
+$pdf->Cell(55,5," ","$rmc1",0,"R");$pdf->Cell(70,6,"$fir_fem1","$rmc",1,"L");
+
+//prilohy
+$pdf->Cell(190,13," ","$rmc1",1,"L");
+if ( $hlavicka->typdok == 0 ) { $typdok=""; }
+if ( $hlavicka->typdok == 1 ) { $typdok="Spr·va audÌtora"; }
+if ( $hlavicka->typdok == 2 ) { $typdok="V˝roËn· spr·va"; }
+if ( $hlavicka->typdok == 3 ) { $typdok="RoËn· finanËn· spr·va emitenta"; }
+$pdf->Cell(45,5," ","$rmc1",0,"L");$pdf->Cell(60,6,"$typdok","$rmc",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+if ( $hlavicka->spopod == 0 ) { $spopod=""; }
+if ( $hlavicka->spopod == 1 ) { $spopod="Elektronicky - s˙Ëasù podania"; }
+$pdf->Cell(45,5," ","$rmc1",0,"L");$pdf->Cell(60,6,"$spopod","$rmc",1,"L");
+
+//datum podania
 $pdf->Cell(190,7," ","$rmc1",1,"L");
-$pdf->Cell(17,4," ","$rmc1",0,"L");$pdf->Cell(140,5,"$hlavicka->roks $hlavicka->dnis","$rmc",1,"L");
-$pdf->Cell(190,6," ","$rmc1",1,"L");
-$pdf->Cell(5,4," ","$rmc1",0,"L");$pdf->Cell(170,4,"$hlavicka->dovod","$rmc",1,"L");
-
-//poznamka
-$pdf->Cell(190,2," ","$rmc1",1,"L");
-$poleosob = explode("\r\n", $hlavicka->str2);
-if ( $poleosob[0] != '' )
-     {
-$ipole=1;
-foreach( $poleosob as $hodnota ) {
-$pdf->Cell(4,5," ","$rmc1",0,"L");$pdf->Cell(186,5,"$hodnota","$rmc",1,"L");
-$ipole=$ipole+1;
-                                 }
-     }
-
-
-//odtlacok zamestnavatela
-$pdf->SetY(285);
-$pdf->Cell(130,5,"","$rmc1",0,"R");$pdf->Cell(0,8,"OdtlaËok peËiatky a podpis","T",1,"C");
-$pdf->Cell(130,5,"","$rmc1",0,"R");$pdf->Cell(0,3,"zamestn·vateæa","$rmc1",1,"C");
-
+$text=SkDatum($hlavicka->datp);
+if ( $text == '00.00.0000' ) { $text=""; }
+$pdf->Cell(45,5," ","$rmc1",0,"R");$pdf->Cell(30,6,"$text","$rmc",0,"C");
 
 }
 $i = $i + 1;
