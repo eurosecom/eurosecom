@@ -251,6 +251,16 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD schvvp DECIMAL(1,0) DEFAULT 0 AFTER kkx";
 $vysledek = mysql_query("$sql");
 }
+//kriziky zostavena a schvalena natvrdo
+$sql = "SELECT kzos FROM F".$kli_vxcf."_ufirdalsie";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD ksch DECIMAL(1,0) DEFAULT 0 AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD kzos DECIMAL(1,0) DEFAULT 0 AFTER kkx";
+$vysledek = mysql_query("$sql");
+}
 
 //koniec upravy
 
@@ -386,8 +396,12 @@ $datbdosql = SqlDatum($datbdo);
 $datmodsql = SqlDatum($datmod);
 $datmdosql = SqlDatum($datmdo);
 
+$kzos = strip_tags($_REQUEST['kzos']);
+$ksch = strip_tags($_REQUEST['ksch']);
+
 $upravttt = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
-" datk='$datksql', druz='$druz', tpuj='$tpuj', datbod='$datbodsql', datbdo='$datbdosql', datmod='$datmodsql', datmdo='$datmdosql'  WHERE icox=0 "; 
+" datk='$datksql', druz='$druz', tpuj='$tpuj', datbod='$datbodsql', datbdo='$datbdosql', datmod='$datmodsql', datmdo='$datmdosql', ".
+" kzos='$kzos', ksch='$ksch' WHERE icox=0 "; 
 $upravene = mysql_query("$upravttt"); 
 $copern=202;
 if (!$upravene):
@@ -547,6 +561,8 @@ $datmodsk = SkDatum($riadok->datmod);
 $datmdosk = SkDatum($riadok->datmdo);
 $druz = $riadok->druz;
 $tpuj = $riadok->tpuj;
+$kzos = 1*$riadok->kzos;
+$ksch = 1*$riadok->ksch;
                      }
 
 if( $copern == 302 ) {
@@ -693,6 +709,8 @@ $dfax = $riadok->dfax;
     document.formv1.datbdo.value = '<?php echo "$datbdosk";?>';
     document.formv1.datmod.value = '<?php echo "$datmodsk";?>';
     document.formv1.datmdo.value = '<?php echo "$datmdosk";?>';
+<?php if ( $ksch == 1 ) { ?> document.formv1.ksch.checked = 'true'; <?php } ?>
+<?php if ( $kzos == 1 ) { ?> document.formv1.kzos.checked = 'true'; <?php } ?>
     }
 <?php
 //koniec uprava
@@ -980,6 +998,14 @@ if ( $copern == 202 )
 <tr>
 <td class="bmenu" colspan="5">Bezprostredne predchádzajúce úètovné obdobie do dátumu:</td>
 <td class="bmenu" colspan="5"><input type="text" name="datmdo" id="datmdo" onkeyup="CiarkaNaBodku(this);" size="12" /></td>
+</tr>
+<tr>
+<td class="bmenu" colspan="5">Krížik zostavená ( Úètovná závierka NUJ 2014 ):</td>
+<td class="bmenu" colspan="5"><input type="checkbox" name="kzos" value="1" /></td>
+</tr>
+<tr>
+<td class="bmenu" colspan="5">Krížik schválená ( Úètovná závierka NUJ 2014 ):</td>
+<td class="bmenu" colspan="5"><input type="checkbox" name="ksch" value="1" /></td>
 </tr>
 <tr><td class="bmenu" colspan="10"></tr>
 

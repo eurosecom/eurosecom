@@ -799,10 +799,14 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 <a href="#" onClick="TlacPoznamky2013();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
+<?php
+$textverzia="verzia 2013";
+if( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
+?>
 <td class="bmenu" width="2%"></td>
-<td class="bmenu" width="56%">Poznámky Úè POD 3 - 01 k DPPO verzia 2013
+<td class="bmenu" width="56%">Poznámky Úè POD 3 - 01 k DPPO <?php echo $textverzia; ?>
  <a href="#" onClick="NechcemStranyPOD2013();">
-<img src='../obr/zmaz.png' width=20 height=15 border=0 title='Netlaèi stranu XY Poznámok POD 2013' ></a>
+<img src='../obr/zmaz.png' width=20 height=15 border=0 title='Netlaèi stranu XY Poznámok POD' ></a>
 </td>
 <td class="bmenu" width="36%">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
@@ -1160,7 +1164,11 @@ window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT', '_blank',
 <a href="#" onClick="CASHEUR2011();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlaèi vo formáte PDF" ></a>
 </td>
-<td class="bmenu" width="56%">Preh¾ad o peòažných tokoch - priama metóda verzia 2011
+<?php
+$textverzia="verzia 2011";
+if( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
+?>
+<td class="bmenu" width="56%">Preh¾ad o peòažných tokoch - priama metóda <?php echo $textverzia; ?>
 
 <a href="#" onClick="CASHGEN2011();">
 <img src='../obr/zoznam.png' width=15 height=15 border=0 title='Generovanie CASH FLOW' ></a>

@@ -109,7 +109,13 @@ function ZmazPolozku(cplf)
 window.open('setuzfir.php?copern=316&page=1&sysx=UCT&uzid=<?php echo $uzid; ?>&cplf=' + cplf + '&drupoh=1', '_self' );
                 }
 
+function KtoMa()
+                {
+var fod=document.formv1.fiod.value;
+var fdo=document.formv1.fido.value;
 
+window.open('setuzfir_pdf.php?copern=10&page=1&sysx=UCT&uzid=<?php echo $uzid; ?>&fod=' + fod + '&fdo=' + fdo + '&drupoh=1', '_blank' );
+                }
 
 </script>
 </HEAD>
@@ -177,12 +183,16 @@ $i = $i + 1;
 <td class="hmenu" colspan="1"><?php echo $uzid; ?>
 <td class="hmenu" colspan="1"><input type="text" name="fiod" id="fiod" size="7"  />
 <td class="hmenu" colspan="1"><input type="text" name="fido" id="fido" size="7"  />
+<td class="obyc" colspan="1">
+<a href="#" onClick="KtoMa();">
+<img src='../obr/info.png' width=15 height=10 border=0 title='Kto má prístup do firiem èíslo od - do' ></a>
 
 </tr>
 
 <tr>
-<td class="obyc" colspan="2"><INPUT type="submit" id="uloz" name="uloz" value="Uloži" ></td>
+<td class="obyc" colspan="1"><INPUT type="submit" id="uloz" name="uloz" value="Uloži" ></td>
 </tr>
+</FORM>
 </table>
 
 <?php

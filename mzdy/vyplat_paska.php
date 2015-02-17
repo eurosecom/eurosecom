@@ -1501,7 +1501,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcneoda$kli_uzid".
-" SET nezp_dni=1+TO_DAYS(den_prvy)-TO_DAYS('$prvydena') ".
+" SET nezp_dni=TO_DAYS(den_prvy)-TO_DAYS('$prvydena') ".
 " WHERE oc >= 0 AND den_prvy > '$prvydena' AND den_prvy <= '$posldena' ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
@@ -1536,6 +1536,8 @@ $dsql = mysql_query("$dsqlt");
 
 //exit;
 $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcneoda$kli_uzid WHERE neoxx != 9 "; $dsql = mysql_query("$dsqlt");
+
+
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdprcneoda$kli_uzid".
 " SET des6=zmin_ip*(celk_dni-nezp_dni)/celk_dni ".

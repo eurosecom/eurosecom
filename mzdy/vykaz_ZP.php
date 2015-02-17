@@ -570,6 +570,30 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_zdravpois WHERE zdrv=$cislo_z
   $nazzdrv=$riaddok->nzdr;
   }
 
+//pocitane dni
+$prvydena=$kli_vrok."-".$kli_vmes."-01";
+$pocetdnia=31;
+$sqlttd = "SELECT * FROM kalendar WHERE ume = $kli_vume ";
+$sqld = mysql_query("$sqlttd");
+$pocetdnia = mysql_num_rows($sqld);
+$posldena=$kli_vrok."-".$kli_vmes."-".$pocetdnia;
+
+$sqltd = "DROP TABLE F".$kli_vxcf."_mzdprcneod".$kli_uzid;
+$vysledokd = mysql_query("$sqltd");
+$sqltdd = <<<mzdprc
+(
+   oc           INT(7) DEFAULT 0,
+   den_prvy     DATE,
+   den_posl     DATE,
+   celk_dni     DECIMAL(10,2) DEFAULT 0,
+   konnex       DECIMAL(10,2) DEFAULT 0
+);
+mzdprc;
+
+$vsqld = "CREATE TABLE F".$kli_vxcf."_mzdprcneod".$kli_uzid.$sqltdd;
+$vytvord = mysql_query("$vsqld");
+
+//strana
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
@@ -791,6 +815,41 @@ $sqldok = mysql_query("$sqltt");
   if (@$zaznam=mysql_data_seek($sqldok,$ip))
   {
   $hlavicka=mysql_fetch_object($sqldok);
+
+//pocitane dni
+$dsqltd = "TRUNCATE TABLE F$kli_vxcf"."_mzdprcneod$kli_uzid ";
+$dsqld = mysql_query("$dsqltd");
+
+$dsqltd = "INSERT INTO F$kli_vxcf"."_mzdprcneod$kli_uzid "." SELECT oc,dan,dav,'$pocetdnia',0 FROM F$kli_vxcf"."_$mzdkun WHERE oc = $hlavicka->oc ";
+$dsqld = mysql_query("$dsqltd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS('$posldena')-TO_DAYS(den_prvy)+1 ".
+" WHERE oc >= 0 AND den_prvy >= '$prvydena' AND den_prvy <= '$posldena' AND ( den_posl = '0000-00-00' OR den_posl > '$posldena' )";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS(den_posl)-TO_DAYS('$prvydena')+1 ".
+" WHERE oc >= 0 AND den_prvy < '$prvydena' AND den_posl < '$posldena' AND den_posl >= '$prvydena' ";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS(den_posl)-TO_DAYS(den_prvy)+1 ".
+" WHERE oc >= 0 AND den_prvy >= '$prvydena' AND den_posl <= '$posldena' AND den_posl >= '$prvydena' ";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid SET celk_dni='$pocetdnia' WHERE celk_dni > '$pocetdnia' OR celk_dni < 0 ";
+$oznacd = mysql_query("$sqtozd");
+
+$dnipocitane=$pocetdnia;
+$sqldokd = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprcneod$kli_uzid WHERE oc = $hlavicka->oc ");
+  if (@$zaznam=mysql_data_seek($sqldokd,0))
+  {
+  $riaddokd=mysql_fetch_object($sqldokd);
+  $dnipocitane=1*$riaddokd->celk_dni;
+  }
+
+
 $porcislo=1;
 if ( $ip == 0 ) $pdf->SetY(226);
 if ( $ip == 1 ) $pdf->SetY(232);
@@ -810,7 +869,7 @@ $pdf->Cell(21,5," ","$rmc1",0,"R");$pdf->Cell(20,5,"$cislopoistenca","$rmc",0,"C
 
 if ( $hlavicka->znizp == 0 )
 {
-$pdf->Cell(8,5,"$hlavicka->pdni_zp","$rmc",0,"C");
+$pdf->Cell(8,5,"$dnipocitane","$rmc",0,"C");
 $pdf->Cell(13,5,"$hlavicka->zcel_zp","$rmc",0,"R");
 $pdf->Cell(12,5,"$hlavicka->zcel_odp","$rmc",0,"R");
 $pdf->Cell(13,5,"$hlavicka->zcel_inp","$rmc",0,"R");
@@ -822,7 +881,7 @@ $pdf->Cell(13,5,"$hlavicka->ofir_gf","$rmc",1,"R");
 }
 if ( $hlavicka->znizp != 0 )
 {
-$pdf->Cell(8,5,"$hlavicka->pdni_zpn","$rmc",0,"C");
+$pdf->Cell(8,5,"$dnipocitane","$rmc",0,"C");
 $pdf->Cell(13,5,"$hlavicka->zcel_zpn","$rmc",0,"R");
 $pdf->Cell(12,5,"$hlavicka->zcel_odp","$rmc",0,"R");
 $pdf->Cell(13,5,"$hlavicka->zcel_inp","$rmc",0,"R");
@@ -998,6 +1057,40 @@ $sqldok = mysql_query("$sqltt");
   if (@$zaznam=mysql_data_seek($sqldok,$ip))
   {
   $hlavicka=mysql_fetch_object($sqldok);
+
+//pocitane dni
+$dsqltd = "TRUNCATE TABLE F$kli_vxcf"."_mzdprcneod$kli_uzid ";
+$dsqld = mysql_query("$dsqltd");
+
+$dsqltd = "INSERT INTO F$kli_vxcf"."_mzdprcneod$kli_uzid "." SELECT oc,dan,dav,'$pocetdnia',0 FROM F$kli_vxcf"."_$mzdkun WHERE oc = $hlavicka->oc ";
+$dsqld = mysql_query("$dsqltd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS('$posldena')-TO_DAYS(den_prvy)+1 ".
+" WHERE oc >= 0 AND den_prvy >= '$prvydena' AND den_prvy <= '$posldena' AND ( den_posl = '0000-00-00' OR den_posl > '$posldena' )";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS(den_posl)-TO_DAYS('$prvydena')+1 ".
+" WHERE oc >= 0 AND den_prvy < '$prvydena' AND den_posl < '$posldena' AND den_posl >= '$prvydena' ";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS(den_posl)-TO_DAYS(den_prvy)+1 ".
+" WHERE oc >= 0 AND den_prvy >= '$prvydena' AND den_posl <= '$posldena' AND den_posl >= '$prvydena' ";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid SET celk_dni='$pocetdnia' WHERE celk_dni > '$pocetdnia' OR celk_dni < 0 ";
+$oznacd = mysql_query("$sqtozd");
+
+$dnipocitane=$pocetdnia;
+$sqldokd = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprcneod$kli_uzid WHERE oc = $hlavicka->oc ");
+  if (@$zaznam=mysql_data_seek($sqldokd,0))
+  {
+  $riaddokd=mysql_fetch_object($sqldokd);
+  $dnipocitane=1*$riaddokd->celk_dni;
+  }
+
 $porcislo=1;
 if ( $ip == 0 ) $pdf->SetY(256);
 if ( $ip == 1 ) $pdf->SetY(263);
@@ -1020,7 +1113,7 @@ $pdf->Cell(19,6,"$cislopoistenca","$rmc",0,"L");
 
 if ( $hlavicka->znizp == 0 )
 {
-$pdf->Cell(8,6,"$hlavicka->pdni_zp","$rmc",0,"C");
+$pdf->Cell(8,6,"$dnipocitane","$rmc",0,"C");
 $pdf->Cell(17,6,"$hlavicka->zcel_zp","$rmc",0,"R");
 $pdf->Cell(18,6,"$hlavicka->zcel_odp","$rmc",0,"R");
 $pdf->Cell(18,6,"$hlavicka->zcel_inp","$rmc",0,"R");
@@ -1033,7 +1126,7 @@ $pdf->Cell(17,6,"$hlavicka->ofir_gf","$rmc",1,"R");
 
 if ( $hlavicka->znizp != 0 )
 {
-$pdf->Cell(8,6,"$hlavicka->pdni_zpn","$rmc",0,"C");
+$pdf->Cell(8,6,"$dnipocitane","$rmc",0,"C");
 $pdf->Cell(17,6,"$hlavicka->zcel_zpn","$rmc",0,"R");
 $pdf->Cell(18,6,"$hlavicka->zcel_odp","$rmc",0,"R");
 $pdf->Cell(18,6,"$hlavicka->zcel_inp","$rmc",0,"R");
@@ -1264,6 +1357,40 @@ $sqldok = mysql_query("$sqltt");
   if (@$zaznam=mysql_data_seek($sqldok,$ip))
   {
   $hlavicka=mysql_fetch_object($sqldok);
+
+//pocitane dni
+$dsqltd = "TRUNCATE TABLE F$kli_vxcf"."_mzdprcneod$kli_uzid ";
+$dsqld = mysql_query("$dsqltd");
+
+$dsqltd = "INSERT INTO F$kli_vxcf"."_mzdprcneod$kli_uzid "." SELECT oc,dan,dav,'$pocetdnia',0 FROM F$kli_vxcf"."_$mzdkun WHERE oc = $hlavicka->oc ";
+$dsqld = mysql_query("$dsqltd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS('$posldena')-TO_DAYS(den_prvy)+1 ".
+" WHERE oc >= 0 AND den_prvy >= '$prvydena' AND den_prvy <= '$posldena' AND ( den_posl = '0000-00-00' OR den_posl > '$posldena' )";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS(den_posl)-TO_DAYS('$prvydena')+1 ".
+" WHERE oc >= 0 AND den_prvy < '$prvydena' AND den_posl < '$posldena' AND den_posl >= '$prvydena' ";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS(den_posl)-TO_DAYS(den_prvy)+1 ".
+" WHERE oc >= 0 AND den_prvy >= '$prvydena' AND den_posl <= '$posldena' AND den_posl >= '$prvydena' ";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid SET celk_dni='$pocetdnia' WHERE celk_dni > '$pocetdnia' OR celk_dni < 0 ";
+$oznacd = mysql_query("$sqtozd");
+
+$dnipocitane=$pocetdnia;
+$sqldokd = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprcneod$kli_uzid WHERE oc = $hlavicka->oc ");
+  if (@$zaznam=mysql_data_seek($sqldokd,0))
+  {
+  $riaddokd=mysql_fetch_object($sqldokd);
+  $dnipocitane=1*$riaddokd->celk_dni;
+  }
+
 $porcislo=1;
 if ( $ip == 0 ) $pdf->SetY(249);
 if ( $ip == 1 ) $pdf->SetY(254);
@@ -1283,7 +1410,7 @@ $pdf->Cell(5,5," ","$rmc1",0,"R");$pdf->Cell(25,5,"$cislopoistenca","$rmc",0,"L"
 
 if ( $hlavicka->znizp == 0 )
 {
-$pdf->Cell(10,5,"$hlavicka->pdni_zp","$rmc",0,"C");
+$pdf->Cell(10,5,"$dnipocitane","$rmc",0,"C");
 $pdf->Cell(15,5,"$hlavicka->zcel_zp","$rmc",0,"R");
 $pdf->Cell(15,5,"$hlavicka->zcel_odp","$rmc",0,"R");
 $pdf->Cell(15,5,"$hlavicka->zcel_inp","$rmc",0,"R");
@@ -1295,7 +1422,7 @@ $pdf->Cell(16,5,"$hlavicka->ofir_gf","$rmc",1,"R");
 }
 if ( $hlavicka->znizp != 0 )
 {
-$pdf->Cell(10,5,"$hlavicka->pdni_zpn","$rmc",0,"C");
+$pdf->Cell(10,5,"$dnipocitane","$rmc",0,"C");
 $pdf->Cell(15,5,"$hlavicka->zcel_zpn","$rmc",0,"R");
 $pdf->Cell(15,5,"$hlavicka->zcel_odp","$rmc",0,"R");
 $pdf->Cell(15,5,"$hlavicka->zcel_inp","$rmc",0,"R");
@@ -1345,6 +1472,28 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_zdravpois WHERE zdrv=$cislo_z
   $platitel=$riaddok->vsy;
   $nazzdrv=$riaddok->nzdr;
   }
+
+$prvydena=$kli_vrok."-".$kli_vmes."-01";
+$pocetdnia=31;
+$sqlttd = "SELECT * FROM kalendar WHERE ume = $kli_vume ";
+$sqld = mysql_query("$sqlttd");
+$pocetdnia = mysql_num_rows($sqld);
+$posldena=$kli_vrok."-".$kli_vmes."-".$pocetdnia;
+
+$sqltd = "DROP TABLE F".$kli_vxcf."_mzdprcneod".$kli_uzid;
+$vysledokd = mysql_query("$sqltd");
+$sqltdd = <<<mzdprc
+(
+   oc           INT(7) DEFAULT 0,
+   den_prvy     DATE,
+   den_posl     DATE,
+   celk_dni     DECIMAL(10,2) DEFAULT 0,
+   konnex       DECIMAL(10,2) DEFAULT 0
+);
+mzdprc;
+
+$vsqld = "CREATE TABLE F".$kli_vxcf."_mzdprcneod".$kli_uzid.$sqltdd;
+$vytvord = mysql_query("$vsqld");
 
 //vytlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid".
@@ -1414,6 +1563,40 @@ $pdf->Cell(12,5,"Príj.OP","1",0,"R");$pdf->Cell(12,5,"Príj.iný","1",0,"R");$pdf-
 //koniec hlavicky
 
 //telo polozky
+
+$dsqltd = "TRUNCATE TABLE F$kli_vxcf"."_mzdprcneod$kli_uzid ";
+$dsqld = mysql_query("$dsqltd");
+
+$dsqltd = "INSERT INTO F$kli_vxcf"."_mzdprcneod$kli_uzid "." SELECT oc,dan,dav,'$pocetdnia',0 FROM F$kli_vxcf"."_$mzdkun WHERE oc = $hlavicka->oc ";
+$dsqld = mysql_query("$dsqltd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS('$posldena')-TO_DAYS(den_prvy)+1 ".
+" WHERE oc >= 0 AND den_prvy >= '$prvydena' AND den_prvy <= '$posldena' AND ( den_posl = '0000-00-00' OR den_posl > '$posldena' )";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS(den_posl)-TO_DAYS('$prvydena')+1 ".
+" WHERE oc >= 0 AND den_prvy < '$prvydena' AND den_posl < '$posldena' AND den_posl >= '$prvydena' ";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS(den_posl)-TO_DAYS(den_prvy)+1 ".
+" WHERE oc >= 0 AND den_prvy >= '$prvydena' AND den_posl <= '$posldena' AND den_posl >= '$prvydena' ";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid SET celk_dni='$pocetdnia' WHERE celk_dni > '$pocetdnia' OR celk_dni < 0 ";
+$oznacd = mysql_query("$sqtozd");
+
+$dnipocitane=$pocetdnia;
+$sqldokd = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprcneod$kli_uzid WHERE oc = $hlavicka->oc ");
+  if (@$zaznam=mysql_data_seek($sqldokd,0))
+  {
+  $riaddokd=mysql_fetch_object($sqldokd);
+  $dnipocitane=1*$riaddokd->celk_dni;
+  }
+
+
 $porcislo=$i+1;
 $pdf->SetFont('arial','',8);
 
@@ -1441,7 +1624,7 @@ $fir_zptlac=$fir_zp;
 $zam_zptlac=$zam_zp;
 if( $hlavicka->pom == 14 ) { $fir_zptlac=0; $zam_zptlac=0; }
 
-$pdf->Cell(8,5,"$hlavicka->pdni_zp","0",0,"R");
+$pdf->Cell(8,5,"$dnipocitane","0",0,"R");
 $pdf->Cell(15,5,"$hlavicka->zcel_zp","0",0,"R");$pdf->Cell(15,5,"$hlavicka->zzam_zp","0",0,"R");
 $pdf->Cell(10,5,"$fir_zptlac","0",0,"R");$pdf->Cell(10,5,"$zam_zptlac","0",0,"R");
 $pdf->Cell(12,5,"$hlavicka->ofir_zp","0",0,"R");$pdf->Cell(12,5,"$hlavicka->ozam_zp","0",0,"R");
@@ -1452,7 +1635,7 @@ $pdf->Cell(12,5,"$hlavicka->zcel_odp","0",0,"R");$pdf->Cell(12,5,"$hlavicka->zce
 if( $hlavicka->znizp != 0 )
 {
 
-$pdf->Cell(8,5,"$hlavicka->pdni_zpn","0",0,"R");
+$pdf->Cell(8,5,"$dnipocitane","0",0,"R");
 $pdf->Cell(15,5,"$hlavicka->zcel_zpn","0",0,"R");$pdf->Cell(15,5,"$hlavicka->zzam_np","0",0,"R");
 $pdf->Cell(10,5,"$fir_zpn","0",0,"R");$pdf->Cell(10,5,"$zam_zpn","0",0,"R");
 $pdf->Cell(12,5,"$hlavicka->ofir_np","0",0,"R");$pdf->Cell(12,5,"$hlavicka->ozam_np","0",0,"R");
@@ -1808,6 +1991,29 @@ $j = $j + 1;
   }
 
 //polozky
+$prvydena=$kli_vrok."-".$kli_vmes."-01";
+$pocetdnia=31;
+$sqlttd = "SELECT * FROM kalendar WHERE ume = $kli_vume ";
+$sqld = mysql_query("$sqlttd");
+$pocetdnia = mysql_num_rows($sqld);
+$posldena=$kli_vrok."-".$kli_vmes."-".$pocetdnia;
+
+$sqltd = "DROP TABLE F".$kli_vxcf."_mzdprcneod".$kli_uzid;
+$vysledokd = mysql_query("$sqltd");
+$sqltdd = <<<mzdprc
+(
+   oc           INT(7) DEFAULT 0,
+   den_prvy     DATE,
+   den_posl     DATE,
+   celk_dni     DECIMAL(10,2) DEFAULT 0,
+   konnex       DECIMAL(10,2) DEFAULT 0
+);
+mzdprc;
+
+$vsqld = "CREATE TABLE F".$kli_vxcf."_mzdprcneod".$kli_uzid.$sqltdd;
+$vytvord = mysql_query("$vsqld");
+
+
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid".
 " LEFT JOIN F$kli_vxcf"."_$mzdkun".
 " ON F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".oc=F$kli_vxcf"."_$mzdkun.oc".
@@ -1828,6 +2034,42 @@ $j=0; //zaciatok strany ak by som chcel strankovat
 {
 $hlavicka=mysql_fetch_object($sql);
 $cislo=$i+1;
+
+$dsqltd = "TRUNCATE TABLE F$kli_vxcf"."_mzdprcneod$kli_uzid ";
+$dsqld = mysql_query("$dsqltd");
+
+$dsqltd = "INSERT INTO F$kli_vxcf"."_mzdprcneod$kli_uzid "." SELECT oc,dan,dav,'$pocetdnia',0 FROM F$kli_vxcf"."_$mzdkun WHERE oc = $hlavicka->oc ";
+$dsqld = mysql_query("$dsqltd");
+
+//$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid SET den_prvy='2015-01-02', den_posl='2015-01-20' ";
+//echo $sqtozd;
+//$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS('$posldena')-TO_DAYS(den_prvy)+1 ".
+" WHERE oc >= 0 AND den_prvy >= '$prvydena' AND den_prvy <= '$posldena' AND ( den_posl = '0000-00-00' OR den_posl > '$posldena' )";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS(den_posl)-TO_DAYS('$prvydena')+1 ".
+" WHERE oc >= 0 AND den_prvy < '$prvydena' AND den_posl < '$posldena' AND den_posl >= '$prvydena' ";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid".
+" SET celk_dni=TO_DAYS(den_posl)-TO_DAYS(den_prvy)+1 ".
+" WHERE oc >= 0 AND den_prvy >= '$prvydena' AND den_posl <= '$posldena' AND den_posl >= '$prvydena' ";
+$oznacd = mysql_query("$sqtozd");
+
+$sqtozd = "UPDATE F$kli_vxcf"."_mzdprcneod$kli_uzid SET celk_dni='$pocetdnia' WHERE celk_dni > '$pocetdnia' OR celk_dni < 0 ";
+$oznacd = mysql_query("$sqtozd");
+
+$dnipocitane=$pocetdnia;
+$sqldokd = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprcneod$kli_uzid WHERE oc = $hlavicka->oc ");
+  if (@$zaznam=mysql_data_seek($sqldokd,0))
+  {
+  $riaddokd=mysql_fetch_object($sqldokd);
+  $dnipocitane=1*$riaddokd->celk_dni;
+  }
 
 $cislopoistenca=$hlavicka->rdc.$hlavicka->rdk;
 
@@ -1870,7 +2112,7 @@ $fir_zptlac=$fir_zp;
 $zam_zptlac=$zam_zp;
 if( $hlavicka->pom == 14 ) { $fir_zptlac=0; $zam_zptlac=0; }
 
-  $text = $text.$hlavicka->pdni_zp."|".$fir_zptlac."|".$zam_zptlac."|".$hlavicka->zcel_zp."|".$hlavicka->zzam_zp."|";
+  $text = $text.$dnipocitane."|".$fir_zptlac."|".$zam_zptlac."|".$hlavicka->zcel_zp."|".$hlavicka->zzam_zp."|";
   $text = $text.$hlavicka->ofir_zp."|".$hlavicka->ozam_zp."|".$hlavicka->celk_spolu;
   $text = $text."|".$hlavicka->zcel_odp."|".$hlavicka->zcel_inp."|".$hlavicka->zodp_zp.$konznak."\r\n";
 
@@ -1880,7 +2122,7 @@ if( $hlavicka->pom == 14 ) { $fir_zptlac=0; $zam_zptlac=0; }
 
 if( $hlavicka->znizp != 0 )
 {
-  $text = $text.$hlavicka->pdni_zpn."|".$fir_zpn."|".$zam_zpn."|".$hlavicka->zcel_zpn."|".$hlavicka->zzam_np."|";
+  $text = $text.$dnipocitane."|".$fir_zpn."|".$zam_zpn."|".$hlavicka->zcel_zpn."|".$hlavicka->zzam_np."|";
   $text = $text.$hlavicka->ofir_np."|".$hlavicka->ozam_np."|".$hlavicka->celk_spolu;
   $text = $text."|".$hlavicka->zcel_odp."|".$hlavicka->zcel_inp."|".$hlavicka->zodp_zp.$konznak."\r\n";
 
