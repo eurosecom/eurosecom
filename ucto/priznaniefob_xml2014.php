@@ -1798,10 +1798,11 @@ if ( $riadok == 0 ) $riadok="";
   $text = "  <r121><![CDATA[".$riadok."]]></r121>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <r122>"."\r\n"; fwrite($soubor, $text);
-$ico=$hlavicka->pico;
+$pico=$hlavicka->pico;
+if ( $hlavicka->pico < 1000000 ) { $pico="00".$hlavicka->pico; }
 //$ico=$hlavicka->pico."/".$hlavicka->psid;
 //if ( $hlavicka->psid == '' ) { $ico=$hlavicka->pico; }
-  $text = "   <ico><![CDATA[".$ico."]]></ico>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <ico><![CDATA[".$pico."]]></ico>"."\r\n"; fwrite($soubor, $text);
 $sid=$hlavicka->psid;
   $text = "   <sid><![CDATA[".$sid."]]></sid>"."\r\n"; fwrite($soubor, $text);
 
