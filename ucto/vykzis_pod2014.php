@@ -767,24 +767,77 @@ $ulozene = mysql_query("$sqult");
           }
 //koniec tabulky crv_pod2014
 
+$sqtoz = "DROP TABLE F$kli_vxcf"."_crv_pod2014$kli_uzid ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "CREATE TABLE F$kli_vxcf"."_crv_pod2014$kli_uzid SELECT * FROM F$kli_vxcf"."_crv_pod2014 WHERE crs > 1 ";
+$oznac = mysql_query("$sqtoz");
+
 //nacitaj riadky z crv_pod2014
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid,F$kli_vxcf"."_crv_pod2014".
-" SET rdk=F$kli_vxcf"."_crv_pod2014.crs".
-" WHERE LEFT(F$kli_vxcf"."_prcvykziss$kli_uzid.uce,3) = LEFT(F$kli_vxcf"."_crv_pod2014.uce,3) ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid,F$kli_vxcf"."_crv_pod2014$kli_uzid".
+" SET rdk=F$kli_vxcf"."_crv_pod2014$kli_uzid.crs".
+" WHERE LEFT(F$kli_vxcf"."_prcvykziss$kli_uzid.uce,3) = LEFT(F$kli_vxcf"."_crv_pod2014$kli_uzid.uce,3) ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid,F$kli_vxcf"."_crv_pod2014".
-" SET rdk=F$kli_vxcf"."_crv_pod2014.crs".
-" WHERE LEFT(F$kli_vxcf"."_prcvykziss$kli_uzid.uce,5) = LEFT(F$kli_vxcf"."_crv_pod2014.uce,5) ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid,F$kli_vxcf"."_crv_pod2014$kli_uzid".
+" SET rdk=F$kli_vxcf"."_crv_pod2014$kli_uzid.crs".
+" WHERE LEFT(F$kli_vxcf"."_prcvykziss$kli_uzid.uce,5) = LEFT(F$kli_vxcf"."_crv_pod2014$kli_uzid.uce,5) ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid,F$kli_vxcf"."_crv_pod2014".
-" SET rdk=F$kli_vxcf"."_crv_pod2014.crs".
-" WHERE LEFT(F$kli_vxcf"."_prcvykziss$kli_uzid.uce,6) = LEFT(F$kli_vxcf"."_crv_pod2014.uce,6) ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykziss$kli_uzid,F$kli_vxcf"."_crv_pod2014$kli_uzid".
+" SET rdk=F$kli_vxcf"."_crv_pod2014$kli_uzid.crs".
+" WHERE LEFT(F$kli_vxcf"."_prcvykziss$kli_uzid.uce,6) = LEFT(F$kli_vxcf"."_crv_pod2014$kli_uzid.uce,6) ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
+
+$sqtoz = "DROP TABLE F$kli_vxcf"."_crv_pod2014$kli_uzid ";
+$oznac = mysql_query("$sqtoz");
+
+$gen01=0;
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_crv_pod2014 WHERE crs = 1 ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $gen01=1*$riaddok->uce;
+  }
+//$gen01=0;
+//exit;
+if( $gen01 > 0 )
+     {
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_crv_pod2014 WHERE crs = 1 ORDER BY uce";
+//echo $sqltt;
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+$i=0;
+  while ($i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcvykziss$kli_uzid SELECT ".
+" 0,uce,0,0,1,0,0,mdt,dal,".
+"0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"ico,str,zak".
+" FROM F$kli_vxcf"."_prcvykziss$kli_uzid ".
+" WHERE uce = $hlavicka->uce ";
+$dsql = mysql_query("$dsqlt");
+
+}
+$i = $i + 1;
+  }
+
+     }
+//koniec generuj r01
 
 $sqtoz = "DROP TABLE F$kli_vxcf"."_prcvykzisneg$kli_uzid ";
 $oznac = mysql_query("$sqtoz");
@@ -1191,7 +1244,9 @@ $oznac = mysql_query("$sqtoz");
 }
 //koniec rozdiel po zaokruhleni
 
-//vypocitaj riadok 01 cisty obrat
+//vypocitaj riadok 01 cisty obrat ak nie je generovany tak r03+r04+r05
+if( $gen01 == 0 )
+    {
 $vsldat="prcvykziss";
 if( $tis > 0 ) { $vsldat="prcvyk1000ziss"; }
 $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
@@ -1199,13 +1254,15 @@ $sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
+    }
+//koniec vypocitaj r01
 
 //vypis negenerovane pohyby
 $sqtoz = "DELETE FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid WHERE LEFT(uce,1) != 5 AND LEFT(uce,1) != 6 AND LEFT(uce,1) != 8 AND LEFT(uce,1) != 9 ";
 $oznac = mysql_query("$sqtoz");
 
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid WHERE ( rdk = 0 OR rdk = 01 OR ".
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid WHERE ( rdk = 0 OR ".
 " rdk = 02 OR rdk = 10 OR rdk = 15 OR rdk = 21 OR rdk = 27 OR rdk = 28 OR rdk = 29 OR rdk = 31 OR rdk = 35 OR rdk = 39 OR rdk = 45 OR  ".
 " rdk = 49 OR rdk = 55 OR rdk = 56 OR rdk = 57 OR rdk = 61 ) ".
 " GROUP BY uce ";

@@ -235,9 +235,15 @@ $upravene = mysql_query("$uprtxt");
 //koniec copern=999 minuly rok z poznamok firmy min.roka
 
 
+//kontrola ci je subor
+if( $copern == 402 )
+{
+$sql = "SELECT * FROM F".$kli_vxcf."_prcstatr101$kli_uzid ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok) { echo "<br /><br />Nemáte vytvorený súbor pre naèítanie, 1x kliknite na tlaèítko Súbor v Naèítaní údajov do Poznámok MUJ."; exit; }
 
-
-
+}
+//koniec kontrola ci je subor
 
 // copern=402 zavazky
 if( $copern == 402 )
@@ -316,6 +322,7 @@ if( $nacitaj ==  8 ) { $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET gcd3
 if( $nacitaj ==  9 ) { $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET gcd31=gcd31+'$hod'  WHERE psys >= 0 "; }
 if( $nacitaj == 10 ) { $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET gcd31=gcd31+'$hod'  WHERE psys >= 0 "; }
 if( $nacitaj == 11 ) { $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014 SET gcd31=gcd31+'$hod'  WHERE psys >= 0 "; }
+//echo $uprtxt."<br />";
   }
 
 if( $pocet == 2 )

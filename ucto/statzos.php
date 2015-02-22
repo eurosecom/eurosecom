@@ -737,7 +737,25 @@ window.open('../ucto/vykaz_fin112.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&f
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function CsvFin1a12()
+                {
+var h_oc = document.forms.formfin1a12.h_oc.value;
+var h_fmzdy = 0;
 
+
+window.open('fin1a12csv.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function DbfFin1a12()
+                {
+var h_oc = document.forms.formfin1a12.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('fin1a12dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
 
 <?php                        } ?>
 //koniec vykzy FIN NUJ 2013
@@ -1328,14 +1346,24 @@ if( $kli_vrok >= 2013 ) {
 </td>
 <td class="bmenu" width="98%">FinanËn˝ v˝kaz o plnenÌ rozpoËtu a o nerozpoËtovan˝ch pohyboch na ˙Ëtoch subjektu verejnej spr·vy FIN 1a - 12
  <select size="1" name="h_oc" id="h_oc" >
-<option value="1" >1.ötvrùrok</option>
-<option value="2" >2.ötvrùrok</option>
-<option value="3" >3.ötvrùrok</option>
-<option value="4" >4.ötvrùrok</option>
+<option value="1" >1.<?php echo $kli_vrok; ?></option>
+<option value="2" >2.<?php echo $kli_vrok; ?></option>
+<option value="3" >3.<?php echo $kli_vrok; ?></option>
+<option value="4" >4.<?php echo $kli_vrok; ?></option>
+<option value="5" >5.<?php echo $kli_vrok; ?></option>
+<option value="6" >6.<?php echo $kli_vrok; ?></option>
+<option value="7" >7.<?php echo $kli_vrok; ?></option>
+<option value="8" >8.<?php echo $kli_vrok; ?></option>
+<option value="9" >9.<?php echo $kli_vrok; ?></option>
+<option value="10" >10.<?php echo $kli_vrok; ?></option>
+<option value="11" >11.<?php echo $kli_vrok; ?></option>
+<option value="12" >12.<?php echo $kli_vrok; ?></option>
 </select>
-<a href="#" onClick="DbfFin112();">
+<a href="#" onClick="DbfFin1a12();">
 <img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
 
+<a href="#" onClick="CsvFin1a12();">
+<img src='../obr/export.png' width=20 height=15 border=0 title='Export CSV s˙boru' ></a>
 </td>
 <td class="bmenu" width="2%">
 <a href="#" onClick="UpravFin1a12();">
