@@ -341,6 +341,63 @@ $vysledek = mysql_query("$sql");
 //koniec dopln zozicdph k 30052014
 
 
+//dopln zozicdph k 150220
+$sql = "SELECT * FROM zozicdph01new150220 ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+
+echo "dopåòam ièdph.";
+
+if( file_exists("../import/zozicdph_plus150220.csv")) 
+        {
+$subor = fopen("../import/zozicdph_plus150220.csv", "r");
+while (! feof($subor))
+     {
+//1011111111;Slavomír Duda;Tovarné;
+//1022222222;Bartolomej Janok;Saèurov;
+
+
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+
+  $x_icd =  $pole[0];
+  $x_naz =  $pole[1];
+  $x_mes =  $pole[2];
+  $x_uli =  $pole[3];
+
+
+$c_icd=1*$x_icd;
+
+if( $c_icd > 0 )
+{
+$sqult = "INSERT INTO zozicdph01 ( xicd, xnaz, xmes, xuli )".
+" VALUES ( '$x_icd', '$x_naz', '$x_mes', '$x_uli' ); "; 
+
+$ulozene = mysql_query("$sqult"); 
+}
+     }
+//koniec while
+
+$sqlt = <<<vtvmzd
+(
+   xcf         INT,
+   id          INT,
+   datm        TIMESTAMP(14)
+);
+vtvmzd;
+
+$sql = "CREATE TABLE zozicdph01new150220 ".$sqlt;
+$vysledek = mysql_query("$sql");
+
+        }
+//koniec ak existuje csv
+
+}
+//koniec dopln zozicdph k 150220
+
+
 //kontrola DU
 if( $kli_vrok == 2012  )
  {
