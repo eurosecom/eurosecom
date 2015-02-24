@@ -1258,7 +1258,7 @@ $oznac = mysql_query("$sqtoz");
 //koniec vypocitaj r01
 
 //vypis negenerovane pohyby
-$sqtoz = "DELETE FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid WHERE LEFT(uce,1) != 5 AND LEFT(uce,1) != 6 AND LEFT(uce,1) != 8 AND LEFT(uce,1) != 9 ";
+$sqtoz = "DELETE FROM F$kli_vxcf"."_prcvykzisneg$kli_uzid WHERE LEFT(uce,1) != 5 AND LEFT(uce,1) != 6 ";
 $oznac = mysql_query("$sqtoz");
 
 

@@ -1599,6 +1599,8 @@ $sqtoz = "DELETE FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE LEFT(uce,1) = 7
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "DELETE FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE LEFT(uce,1) = 8 ";
 $oznac = mysql_query("$sqtoz");
+$sqtoz = "DELETE FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE LEFT(uce,1) = 9 ";
+$oznac = mysql_query("$sqtoz");
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE ".
 " ( rdk =  0 OR rdk = 01 OR  rdk = 02 OR  rdk = 03 OR  rdk = 11 OR  rdk = 21 OR  rdk = 33 OR  rdk = 34 OR  rdk = 41 OR  rdk = 42 OR  ".
