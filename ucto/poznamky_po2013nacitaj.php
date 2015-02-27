@@ -1734,19 +1734,23 @@ $nacitaj=$nacitaj+1;
 
 if( $pocet == 1 )
   {
-$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_po2011s3 SET jfg2c=0.19*jfg1b, jfg2d=19, jfg7d=19  WHERE psys >= 0 "; 
+$dansx=22;
+$danvx=0.22;
+$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_po2011s3 SET jfg2c=$danvx*jfg1b, jfg2d=$dansx, jfg7d=$dansx  WHERE psys >= 0 "; 
 $upravene = mysql_query("$uprtxt");  
 
-$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_po2011s3 SET jfg9c=jfg7c+jfg8c, jfg9d=19 WHERE psys >= 0 "; 
+$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_po2011s3 SET jfg9c=jfg7c+jfg8c, jfg9d=$dansx WHERE psys >= 0 "; 
 $upravene = mysql_query("$uprtxt");  
   }
 
 if( $pocet == 2 )
   {
-$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_po2011s3 SET jfg2f=0.19*jfg1e, jfg2g=19, jfg7g=19 WHERE psys >= 0 "; 
+$dansx=23;
+$danvx=0.23;
+$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_po2011s3 SET jfg2f=$danvx*jfg1e, jfg2g=$dansx, jfg7g=$dansx WHERE psys >= 0 "; 
 $upravene = mysql_query("$uprtxt");  
 
-$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_po2011s3 SET jfg9f=jfg7f+jfg8f, jfg9g=19  WHERE psys >= 0 "; 
+$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_po2011s3 SET jfg9f=jfg7f+jfg8f, jfg9g=$dansx  WHERE psys >= 0 "; 
 $upravene = mysql_query("$uprtxt");  
 
   }
