@@ -2689,11 +2689,29 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_majdruvyr SELECT * FROM ".$databaza."F$h_ycf"."_majdruvyr";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_majsodp";
+$dsqlt = "DROP TABLE F$kli_vxcf"."_majsodp";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "INSERT INTO F$kli_vxcf"."_majsodp SELECT * FROM ".$databaza."F$h_ycf"."_majsodp";
+$dsqlt = "CREATE TABLE F$kli_vxcf"."_majsodp SELECT * FROM ".$databaza."F$h_ycf"."_majsodp";
 $dsql = mysql_query("$dsqlt");
+
+if( $kli_vrok == 2015 )
+  {
+$sql = "DROP TABLE F".$kli_vxcf."_majodpskup2015new ";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F".$kli_vxcf."_majodpskup2015new1 ";
+$vysledek = mysql_query("$sql");
+
+
+$sql = "ALTER TABLE F".$kli_vxcf."_majsodp ADD zzvys7_dan DECIMAL(10,2) DEFAULT 0 AFTER zzvys6_dan  ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F".$kli_vxcf."_majsodp ADD zkoep7_dan DECIMAL(10,2) DEFAULT 0 AFTER zzvys6_dan  ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F".$kli_vxcf."_majsodp ADD zkoed7_dan DECIMAL(10,2) DEFAULT 0 AFTER zzvys6_dan  ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F".$kli_vxcf."_majsodp ADD rdoba7_dan DECIMAL(10,0) DEFAULT 0 AFTER zzvys6_dan  ";
+$vysledek = mysql_query("$sql");
+  }
 
 $dsqlt = "DELETE FROM F$kli_vxcf"."_kancelarie";
 $dsql = mysql_query("$dsqlt");

@@ -111,6 +111,119 @@ $uloz="NO";
 $zmaz="NO";
 $uprav="NO";
 
+//uprav sadzby 2015
+$sql = "SELECT prx6 FROM F$kli_vxcf"."_majodpskup2015new ";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+
+$sqlt = <<<banvyp
+(
+   cpld        int not null auto_increment,
+   dok         DECIMAL(10,0) DEFAULT 0,
+   prx6        DECIMAL(4,0) DEFAULT 0,
+   PRIMARY KEY(cpld)
+);
+banvyp;
+
+
+if( $kli_vrok >= 2015 )
+  {
+echo "Mením dobu odpisovania odpisovej skupiny 5 na 40 rokov.";
+
+$sql = "UPDATE F".$kli_vxcf."_majsodp SET rdoba5=40, zkoep5=40, zkoed5=41, zzvys5=40, zkoep5_dan=40, rdoba5_dan=40, zkoed5_dan=41, zzvys5_dan=40 WHERE rdoba5 = 20  ";
+$vysledek = mysql_query("$sql");
+
+$sql = "CREATE TABLE F".$kli_vxcf."_majodpskup2015new ".$sqlt;
+$vysledek = mysql_query("$sql");
+  }
+}
+//koniec uprav sadzby 2015
+
+//uprav sadzby 2015
+$sql = "SELECT prx6 FROM F$kli_vxcf"."_majodpskup2015new1 ";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+
+$sqlt = <<<banvyp
+(
+   cpld        int not null auto_increment,
+   dok         DECIMAL(10,0) DEFAULT 0,
+   prx6        DECIMAL(4,0) DEFAULT 0,
+   PRIMARY KEY(cpld)
+);
+banvyp;
+
+$sql = "ALTER TABLE F".$kli_vxcf."_majsodp ADD zzvys7_dan DECIMAL(10,2) DEFAULT 0 AFTER zzvys6_dan  ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F".$kli_vxcf."_majsodp ADD zkoep7_dan DECIMAL(10,2) DEFAULT 0 AFTER zzvys6_dan  ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F".$kli_vxcf."_majsodp ADD zkoed7_dan DECIMAL(10,2) DEFAULT 0 AFTER zzvys6_dan  ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F".$kli_vxcf."_majsodp ADD rdoba7_dan DECIMAL(10,0) DEFAULT 0 AFTER zzvys6_dan  ";
+$vysledek = mysql_query("$sql");
+
+if( $kli_vrok >= 2015 )
+  {
+echo "Nové odpisové skupiny pre rok 2015.";
+
+$standsku=0;
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_majsodp WHERE rdoba1 = 4 AND rdoba2 = 6 AND rdoba3 = 12 AND rdoba4 = 20 ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $standsku=1;
+  }
+if( $kli_vrok == 2015 AND $standsku == 1 )
+  {
+$sql = "UPDATE F".$kli_vxcf."_majmaj SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majpoh SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majpoh SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_1_".$kli_vrok." SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_1_".$kli_vrok." SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_2_".$kli_vrok." SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_2_".$kli_vrok." SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_3_".$kli_vrok." SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_3_".$kli_vrok." SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_4_".$kli_vrok." SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_4_".$kli_vrok." SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_5_".$kli_vrok." SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_5_".$kli_vrok." SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_6_".$kli_vrok." SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_6_".$kli_vrok." SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_7_".$kli_vrok." SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_7_".$kli_vrok." SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_8_".$kli_vrok." SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_8_".$kli_vrok." SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_9_".$kli_vrok." SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_9_".$kli_vrok." SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_10_".$kli_vrok." SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_10_".$kli_vrok." SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_11_".$kli_vrok." SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_11_".$kli_vrok." SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_12_".$kli_vrok." SET sku=sku+1 WHERE sku > 2 "; $vysledek = mysql_query("$sql");
+$sql = "UPDATE F".$kli_vxcf."_majmaj_12_".$kli_vrok." SET sku_dan=sku_dan+1 WHERE sku_dan > 2 "; $vysledek = mysql_query("$sql");
+  }
+
+$sql = "UPDATE F".$kli_vxcf."_majsodp SET ".
+" rdoba3=8,  zkoep3=8,  zkoed3=9,  zzvys3=8,  zkoep3_dan=8,  rdoba3_dan=8,  zkoed3_dan=9,  zzvys3_dan=8,  ".
+" rdoba4=12, zkoep4=12, zkoed4=13, zzvys4=12, zkoep4_dan=12, rdoba4_dan=12, zkoed4_dan=13, zzvys4_dan=12, ".
+" rdoba5=20, zkoep5=20, zkoed5=21, zzvys5=20, zkoep5_dan=20, rdoba5_dan=20, zkoed5_dan=21, zzvys5_dan=20, ".
+" rdoba6=40, zkoep6=40, zkoed6=41, zzvys6=40, zkoep6_dan=40, rdoba6_dan=40, zkoed6_dan=41, zzvys6_dan=40, ".
+" rdoba7=1,  zkoep7=1,  zkoed7=1,  zzvys7=1,  zkoep7_dan=1,  rdoba7_dan=1,  zkoed7_dan=1,  zzvys7_dan=1   ".
+" WHERE rdoba1 = 4 AND rdoba2 = 6 AND rdoba3 = 12 AND rdoba4 = 20 ";
+$vysledek = mysql_query("$sql");
+
+$sql = "CREATE TABLE F".$kli_vxcf."_majodpskup2015new1 ".$sqlt;
+$vysledek = mysql_query("$sql");
+  }
+}
+//koniec uprav sadzby 2015
+
+
+
 //oznacenie polozky
     if ( $copern == 3001 )
     {
