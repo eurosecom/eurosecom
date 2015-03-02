@@ -253,6 +253,7 @@ if ( $riadok->datbod != '0000-00-00' )
   $datbdosk=SkDatum($riadok->datbdo);
   $datmodsk=SkDatum($riadok->datmod);
   $datmdosk=SkDatum($riadok->datmdo);
+  if( $datmodsk = '00.00.0000' ) { $datmodsk=""; $datmdosk=""; }
      }
   }
 
@@ -314,8 +315,8 @@ $mep1=substr($obmm1,0,1);
 $mep2=substr($obmm1,1,1);
 }
 $kli_prdph=$kli_rdph-1;
-$C=substr($kli_prdph,2,1);
-$D=substr($kli_prdph,3,1);
+$C=substr($obmr1,2,1);
+$D=substr($obmr1,3,1);
 $pdf->SetY(76);
 $pdf->Cell(156,5," ","$rmc1",0,"R");$pdf->Cell(5,6,"$mep1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(3,6,"$mep2","$rmc",0,"C");
