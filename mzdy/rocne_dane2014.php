@@ -1631,7 +1631,9 @@ $source="../mzdy/rocne_dane2014.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 
 
 <?php if ( $strana == 3 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/rz/Potvrdenie_dane_RZv2013_form.jpg" alt="tlaèivo Potvrdenie o zaplatení dane z príjmov zo závislej èinnosti 305kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/rz/rz_potvrdenie_dane_v13_form.jpg"
+     alt="tlaèivo Potvrdenie o zaplatení dane z príjmov zo závislej èinnosti 305kB" class="form-background">
+<span class="text-echo" style="top:111px; left:742px; font-size:18px;"><?php echo $kli_vrok; ?></span>
 
 <!-- POTVRDENIE ZAPLATENIE DANE -->
 <!-- I. Zamestnanec -->
