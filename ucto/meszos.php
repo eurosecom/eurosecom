@@ -968,7 +968,7 @@ window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=
 
 <?php                           } ?>
 
-<?php if( $kli_vrok >= 2012 )   { ?>
+<?php if( $kli_vrok >= 2012 AND $kli_vrok < 2015 )   { ?>
 
 <table class="vstup" width="100%" >
 <tr>
