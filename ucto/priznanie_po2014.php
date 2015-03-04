@@ -8600,7 +8600,7 @@ $pdf->Cell(190,7," ","$rmc1",1,"L");
 $text=$hlavicka->p1ico;
 if ( $text == 0 ) { $text=""; }
 if ( $druh == 3 OR $hlavicka->pzano == 1 ) { $text=""; }
-if ( $hlavicka->p1ico < 1000000 ) { $text="00".$hlavicka->p1ico; }
+if ( $hlavicka->p1ico < 1000000 AND $hlavicka->p1ico > 1 ) { $text="00".$hlavicka->p1ico; }
 $A=substr($text,0,1);
 $B=substr($text,1,1);
 $C=substr($text,2,1);

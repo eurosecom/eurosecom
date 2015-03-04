@@ -32,6 +32,13 @@ $sDat = include("../funkcie/dat_sk_us.php");
 //ramcek fpdf 1=zap,0=vyp
 $rmc=0;
 
+//dropni stare nastavenie v ufirdalsie
+$dat0101=$kli_vrok."-01-01";
+$sqltt = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
+" datbod='0000-00-00', datbdo='0000-00-00', datmod='0000-00-00', datmdo='0000-00-00', datk='0000-00-00' WHERE datbod < '$dat0101' ";
+//echo $sqltt;
+$sql = mysql_query("$sqltt");
+
 $citfir = include("../cis/citaj_fir.php");
 $mena1 = $fir_mena1;
 $mena2 = $fir_mena2;

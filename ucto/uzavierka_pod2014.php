@@ -30,6 +30,15 @@ $sDat = include("../funkcie/dat_sk_us.php");
 $rmc=0;
 $rmc1=0;
 
+//dropni stare nastavenie v ufirdalsie
+$dat0101=$kli_vrok."-01-01";
+$sqltt = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
+" datbod='0000-00-00', datbdo='0000-00-00', datmod='0000-00-00', datmdo='0000-00-00', datk='0000-00-00' WHERE datbod < '$dat0101' ";
+//echo $sqltt;
+$sql = mysql_query("$sqltt");
+
+//exit;
+
 $citfir = include("../cis/citaj_fir.php");
 $mena1 = $fir_mena1;
 $mena2 = $fir_mena2;
@@ -10806,7 +10815,7 @@ $rm10=""; $rm11=""; $rm12=""; $rm13=""; $rm14=""; $rm15=""; $rm16=""; $rm17=""; 
 $rm20=""; $rm21=""; $rm22=""; $rm23=""; $rm24=""; $rm25=""; $rm26=""; $rm27=""; $rm28=""; $rm29="";
 $rm30=""; $rm31=""; $rm32=""; $rm33=""; $rm34=""; $rm35=""; $rm36=""; $rm37=""; $rm38=""; $rm39="";
 $rm40=""; $rm41=""; $rm42=""; $rm43=""; $rm44=""; $rm45=""; $rm46=""; $rm47=""; $rm48=""; $rm49="";
-$rm50=""; $rm51=""; $rm52=""; $rm53=""; $rm55=""; $rm55=""; $rm56=""; $rm57=""; $rm58=""; $rm59="";
+$rm50=""; $rm51=""; $rm52=""; $rm53=""; $rm54=""; $rm55=""; $rm56=""; $rm57=""; $rm58=""; $rm59="";
 $rm60=""; $rm61="";
 
 $sqlttpv = "SELECT * FROM F$kli_vxcf"."_pov_pod2014 WHERE dok > 0 ORDER BY dok "; 

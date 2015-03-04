@@ -1369,7 +1369,7 @@ if ( $paragraf50 == 1 OR $suma == 0 ) $suma="";
   $text = "   <suma><![CDATA[".$suma."]]></suma>"."\r\n"; fwrite($soubor, $text);
 $pico1=$hlavicka->p1ico;
 if ( $paragraf50 == 1 OR $pico1 == 0 ) $pico1="";
-if ( $hlavicka->p1ico < 1000000 ) { $pico1="00".$hlavicka->p1ico; }
+if ( $hlavicka->p1ico < 1000000 AND $hlavicka->p1ico > 1 ) { $pico1="00".$hlavicka->p1ico; }
   $text = "   <ico><![CDATA[".$pico1."]]></ico>"."\r\n"; fwrite($soubor, $text);
 $psid1=$hlavicka->p1sid;
 if ( $paragraf50 == 1 OR $psid1 == 0 ) $psid1="";

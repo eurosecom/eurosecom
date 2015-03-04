@@ -4070,7 +4070,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(195,13," ","$rmc1",1,"L");
 $text="0123456789xy";
 $text=$hlavicka->pico;
-if ( $hlavicka->pico < 1000000 ) { $text="00".$hlavicka->pico; }
+if ( $hlavicka->pico < 1000000 AND $hlavicka->pico > 1 ) { $text="00".$hlavicka->pico; }
 if ( $hlavicka->upl50 == 1 ) $text="";
 if ( $hlavicka->druh == 3 ) $text="";
 $t01=substr($text,0,1);

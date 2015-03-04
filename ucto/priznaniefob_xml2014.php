@@ -1799,7 +1799,7 @@ if ( $riadok == 0 ) $riadok="";
 
   $text = "  <r122>"."\r\n"; fwrite($soubor, $text);
 $pico=$hlavicka->pico;
-if ( $hlavicka->pico < 1000000 ) { $pico="00".$hlavicka->pico; }
+if ( $hlavicka->pico < 1000000 AND $hlavicka->pico > 1 ) { $pico="00".$hlavicka->pico; }
 //$ico=$hlavicka->pico."/".$hlavicka->psid;
 //if ( $hlavicka->psid == '' ) { $ico=$hlavicka->pico; }
   $text = "   <ico><![CDATA[".$pico."]]></ico>"."\r\n"; fwrite($soubor, $text);
