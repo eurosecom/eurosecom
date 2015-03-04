@@ -253,7 +253,7 @@ if ( $riadok->datbod != '0000-00-00' )
   $datbdosk=SkDatum($riadok->datbdo);
   $datmodsk=SkDatum($riadok->datmod);
   $datmdosk=SkDatum($riadok->datmdo);
-  if( $datmodsk = '00.00.0000' ) { $datmodsk=""; $datmdosk=""; }
+  if( $datmodsk == '00.00.0000' ) { $datmodsk=""; $datmdosk=""; }
      }
   }
 

@@ -49,6 +49,27 @@ if( $fir_allx11 > 0 ) { $h_ycf=1*$fir_allx11; }
 $databaza="";
 $dtb2 = include("../cis/oddel_dtbz1.php");
 
+
+//kontrola ci su poznamky inicializovane
+if( $copern != 901 )
+{
+$sql = "SELECT * FROM F".$kli_vxcf."_poznamky_po2011s4 ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok) { echo "<br /><br />Nemáte inicializované Poznámky POD, najprv 1x vojdite do úpravy Poznámok POD."; exit; }
+
+}
+//koniec kontrola ci su poznamky inicializovane
+
+//kontrola ci je subor
+if( $copern != 901 )
+{
+$sql = "SELECT * FROM F".$kli_vxcf."_prcstatr101$kli_uzid ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok) { echo "<br /><br />Nemáte vytvorený súbor pre naèítanie, 1x kliknite na odkaz Súbor v Naèítaní údajov do Poznámok POD."; exit; }
+
+}
+//koniec kontrola ci je subor
+
 //copern=999 minuly rok z poznamok firmy min.roka 1999 po stranach z uprav
 $postranach=0;
 if( $copern == 1999 ) { $copern=999; $postranach=1; }

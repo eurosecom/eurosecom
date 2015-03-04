@@ -139,7 +139,7 @@ if( $firxyz == 9999 ) { $odkial="../import/POZNAMKYPO".$kli_vrok.".CSV"; }
 
 ?>
 <script type="text/javascript">
-if( !confirm ("Chcete importova poloky \r zo súboru <?php echo $odkial; ?> ? \r POZOR!!! Pred importom budú terajšie poznámky v tejto firme vymazané .") )
+if( !confirm ("Chcete importova poloky \r zo súboru <?php echo $odkial; ?> ? \r POZOR!!! Pred importom budú terajšie texty poznámok v tejto firme vymazané .") )
          { window.close()  }
 else
          { location.href='poznamky_potexty.php?copern=56&page=1&firx=<?php echo $firxyz; ?>'  }
@@ -266,7 +266,7 @@ if( $fix == 0 AND $firxyz == 0 ) { echo "V údajoch o firme musíte zada èíslo fi
 
 ?>
 <script type="text/javascript">
-if( !confirm ("Chcete naèíta poznámky z firmy è. <?php echo $fix;?> ? \r POZOR !!! Celé poznámky budú najprv vymazané .") )
+if( !confirm ("Chcete naèíta poznámky z firmy è. <?php echo $fix;?> ? \r POZOR !!! Terajšie texty poznámok budú najprv vymazané .") )
          { window.close()  }
 else
          { location.href='poznamky_potexty.php?&copern=356&drupoh=1&page=1&h_ozntxt=<?php echo $h_ozntxt; ?>&firx=<?php echo $firxyz; ?>'  }
@@ -309,7 +309,7 @@ $poslhh = "SELECT * FROM F$kli_vxcf"."_poznamky_po2011texty WHERE ico >= 0 ";
 $posl = mysql_query("$poslhh"); 
 $kolkordk = 1*mysql_num_rows($posl);
 if( $kolkordk > 5 ) { $idemezostarych=0; }
-
+if( $kli_vrok >= 2014 ) { $idemezostarych=0; }
 
 //len ked prenos zo starych
 if( $idemezostarych == 1 )
