@@ -417,15 +417,10 @@ Vyui môete <a href="https://www.financnasprava.sk" target="_blank" title="Fin
 </p>
 <?php                         } ?>
 
-<?php if ( $kli_vrok == 2014 ) { ?>
+<?php if ( $kli_vrok >= 2014 ) { ?>
 <p>
-<strong>NOVINKA:</strong> pri úètovnej závierke k <strong>31.12.2014</strong> stiahnite
+<strong>NOVINKA:</strong> pri úètovnej závierke k <strong>31.12.<?php echo $kli_vrok; ?></strong> stiahnite
 <strong>iba pdf súbor</strong>, ktorı naèítate cez prílohu k úètovnej závierke.
-</p>
-<p style="line-height:20px;">
-Stiahnite si nišie uvedené súbory XML a PDF na Váš lokálny disk.<br>
-Pomocou xml naèítate len prvú stranu poznámok.
-Zvyšné strany posielate cez pdf súbor, ktorı pri podaní dáte ako prílohu.<br />
 </p>
 <p>
 Vyui môete <a href="https://www.financnasprava.sk" target="_blank" title="Finanèná správa SR">portál finanènej správy</a> alebo aplikáciu
@@ -433,7 +428,7 @@ Vyui môete <a href="https://www.financnasprava.sk" target="_blank" title="Fin
 </p>
 <?php                          } ?>
 
-<?php if ( $kli_vrok > 2014 ) { ?>
+<?php if ( $kli_vrok < 2014 ) { ?>
 <p>
 Stiahnite <strong>pdf súbor</strong>, ktorı naèítate cez prílohu k úètovnej závierke.
 </p>
@@ -444,7 +439,7 @@ Stiahnite <strong>pdf súbor</strong>, ktorı naèítate cez prílohu k úètovnej závi
 <a href="../tmp/<?php echo $nazsuborpdf; ?>">../tmp/<?php echo $nazsuborpdf; ?></a>
 <br>
 <br>
-<?php if ( $kli_vrok >= 2014 ) { ?>
+<?php if ( $kli_vrok < 2014 ) { ?>
 <a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
 <?php                          } ?>
 
