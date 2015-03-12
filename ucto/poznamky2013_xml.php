@@ -423,6 +423,11 @@ Vyui môete <a href="https://www.financnasprava.sk" target="_blank" title="Fin
 <strong>iba pdf súbor</strong>, ktorı naèítate cez prílohu k úètovnej závierke.
 </p>
 <p>
+Pri úètovnej závierke k 30.12.2014 stiahnite oba nišie uvedené súbory XML a PDF na Váš lokálny disk. Pomocou xml naèítate len prvú stranu poznámok.<br>
+Zvyšné strany posielate cez pdf súbor, ktorı pri podaní dáte ako prílohu.
+</p>
+
+<p>
 Vyui môete <a href="https://www.financnasprava.sk" target="_blank" title="Finanèná správa SR">portál finanènej správy</a> alebo aplikáciu
 <a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/elektronicka-komunikacia/elektronicka-komunikacia-dane/edane" target="_blank" title="aplikácia eDane Java">eDane</a>.
 </p>
