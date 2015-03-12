@@ -408,7 +408,7 @@ if ( $elsubor == 2 )
 {
 ?>
 <br />
-<?php if ( $kli_vrok < 2014 ) { ?>
+<?php if ( $kli_vrok == 2013 ) { ?>
 <p>
 Stiahnite si nišie uvedené súbory XML a PDF na Váš lokálny disk. Pomocou xml naèítate len prvú stranu poznámok.
 Zvyšné strany posielate cez pdf súbor, ktorı pri podaní dáte ako prílohu.<br />
@@ -417,7 +417,7 @@ Vyui môete <a href="https://www.financnasprava.sk" target="_blank" title="Fin
 </p>
 <?php                         } ?>
 
-<?php if ( $kli_vrok >= 2014 ) { ?>
+<?php if ( $kli_vrok == 2014 ) { ?>
 <p>
 <strong>NOVINKA:</strong> pri úètovnej závierke k <strong>31.12.<?php echo $kli_vrok; ?></strong> stiahnite
 <strong>iba pdf súbor</strong>, ktorı naèítate cez prílohu k úètovnej závierke.
@@ -428,18 +428,23 @@ Vyui môete <a href="https://www.financnasprava.sk" target="_blank" title="Fin
 </p>
 <?php                          } ?>
 
-<?php if ( $kli_vrok < 2014 ) { ?>
+<?php if ( $kli_vrok >= 2015 ) { ?>
 <p>
-Stiahnite <strong>pdf súbor</strong>, ktorı naèítate cez prílohu k úètovnej závierke.
+<strong>NOVINKA:</strong> pri úètovnej závierke k <strong>31.12.<?php echo $kli_vrok; ?></strong> stiahnite
+<strong>iba pdf súbor</strong>, ktorı naèítate cez prílohu k úètovnej závierke.
 </p>
-
+<p>
+Vyui môete <a href="https://www.financnasprava.sk" target="_blank" title="Finanèná správa SR">portál finanènej správy</a> alebo aplikáciu
+<a href="https://www.financnasprava.sk/sk/elektronicke-sluzby/elektronicka-komunikacia/elektronicka-komunikacia-dane/edane" target="_blank" title="aplikácia eDane Java">eDane</a>.
+</p>
 <?php                          } ?>
+
 
 <br>
 <a href="../tmp/<?php echo $nazsuborpdf; ?>">../tmp/<?php echo $nazsuborpdf; ?></a>
 <br>
 <br>
-<?php if ( $kli_vrok < 2014 ) { ?>
+<?php if ( $kli_vrok < 2015 ) { ?>
 <a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
 <?php                          } ?>
 
