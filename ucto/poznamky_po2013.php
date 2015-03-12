@@ -16254,7 +16254,7 @@ window.open('../ucto/poznamky_po2013nacitaj.php?copern=1999&stranax=' + strana +
    <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
   </tr>
   <tr>
-   <td class="header">Poznámky k úètovnej závierke PÚ 2013</td>
+   <td class="header">Poznámky k úètovnej závierke PÚ</td>
    <td>
     <div class="bar-btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacPoznamky2013bez1();"

@@ -224,7 +224,7 @@ $gf142 = $fir_riadokn->gf142;
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>Poznámky PO 2013</title>
+<title>Poznámky PO</title>
 
 <script type="text/javascript">
 //sirka a vyska okna
@@ -435,11 +435,11 @@ htmlmenu += "<a href=\"#\" onClick=\"NacitajMzdy();\">" +
 </script>
 <script type="text/javascript" src="poznamky_po2011js.js"></script>
 </HEAD>
-<BODY class="white" onload="<?php if( $copern == 1 ) { echo 'ukazrobot();'; } ?>
+<BODY class="white" onload="<?php if ( $copern == 1 ) { echo 'ukazrobot();'; } ?>
 <?php if( $copern == 1 AND $dopoz == 1 ) { echo ' zobraz_robotmenu();'; } ?>"  >
 <table class="h2" width="100%" >
 <tr>
-  <td>EuroSecom  -  Poznámky PO v.2013 </td>
+  <td>EuroSecom - Poznámky PO<?php if ( $copern == 1 ) { echo ' - načítanie údajov'; } ?></td>
   <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
 </table>

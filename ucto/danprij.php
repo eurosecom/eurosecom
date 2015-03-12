@@ -813,7 +813,7 @@ if( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
  Zostavené: <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
  Schválené: <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 <a href="#" onClick="NacitajPoznamky2013();">
-<img src='../obr/vlozit.png' width=20 height=15 border=0 title='Naèíta údaje do poznámok 2013' ></a>
+<img src='../obr/vlozit.png' width=20 height=15 border=0 title='Naèíta údaje do poznámok' ></a>
 </td>
 
 <td class="bmenu" width="2%" align="right">
