@@ -786,7 +786,7 @@ $riadok=$hlavicka->r840;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r840><![CDATA[".$riadok."]]></r840>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->r900;
-if ( $riadok == 0 ) $riadok="0.00";
+if ( $riadok == 0 ) $riadok="0";
 if ( $hlavicka->r901 > 0 ) $riadok="";
   $text = "  <r900><![CDATA[".$riadok."]]></r900>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->r910;
