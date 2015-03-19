@@ -733,6 +733,7 @@ if ( $datumDDP == '00.00.0000' ) $datumDDP="";
   $text = "  </zdanovacieObdobie>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <skNace>"."\r\n"; fwrite($soubor, $text);
+$fir_sknace=trim($fir_sknace);
 $pole = explode(".", $fir_sknace);
 $sknacea=$pole[0];
 $sknaceb=$pole[1];

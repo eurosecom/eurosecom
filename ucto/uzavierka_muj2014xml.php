@@ -609,6 +609,7 @@ $ico=1*$fir_fico;
 if( $fir_fico < 1000000 ) {$ico="00".$ico;}
   $text = "  <ico><![CDATA[".$ico."]]></ico>"."\r\n"; fwrite($soubor, $text);
 
+$fir_sknace=trim($fir_sknace);
 $pole = explode(".", $fir_sknace);
 $sknacea=$pole[0];
 $sknaceb=$pole[1];
