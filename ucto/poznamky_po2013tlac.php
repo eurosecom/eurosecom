@@ -511,7 +511,35 @@ $hlavicka=mysql_fetch_object($sql);
 
 $bez1 = 1*$_REQUEST['bez1'];
 
-if ( ( $strana == 1 OR $strana == 9999 ) AND $kli_vrok >= 2014 AND $bez1 == 0 ) {
+$kli_vrokxd=$kli_vrok;
+
+$datkxd="";
+$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $datkxd=$riadok->datk;
+  }
+if( $datkxd != '' AND $datkxd != '0000-00-00' ) 
+{  
+$polexd = explode("-", $datkxd);
+$kli_xdrok=$polexd[0];
+$kli_xdmes=$polexd[1];
+$kli_xdden=$polexd[2];
+
+if( $kli_vrok == 2014 AND $kli_xdmes < 12 ) { $kli_vrokxd=2013; }
+if( $kli_vrok == 2014 AND $kli_xdmes == 12 AND $kli_xdden < 31 ) { $kli_vrokxd=2013; }
+
+//echo $kli_xdrok."-".$kli_xdmes."-".$kli_xdden;
+//exit;
+}
+
+$priebeznauzav=0;
+if( $kli_vxcf == 854 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
+if( $kli_vxcf == 855 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
+//if( $kli_vxcf == 73  AND $_SERVER['SERVER_NAME'] == "localhost" )       { $priebeznauzav=1; $kli_vrokxd=2013; }
+
+if ( ( $strana == 1 OR $strana == 9999 ) AND $kli_vrokxd >= 2014 AND $bez1 == 0 ) {
 
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
@@ -519,7 +547,7 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 if ( File_Exists('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str1.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str1.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_str1.jpg',0,0,210,297); 
 }
 
 $sqlt = 'DROP TABLE prcdatum'.$kli_uzid;
@@ -1323,7 +1351,7 @@ $pdf->SetX(130);$pdf->Cell(85,5,"                                               
 
                                        } //koniec strana 1 rok >= 2014
 
-if ( ( $strana == 1 OR $strana == 9999 ) AND $kli_vrok < 2014 ) {
+if ( ( $strana == 1 OR $strana == 9999 ) AND $kli_vrokxd < 2014 ) {
 
 $pdf->AddPage();
 $pdf->SetFont('arial','',9);
@@ -1333,7 +1361,8 @@ $pdf->SetTopMargin(10);
 
 if ( File_Exists('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_vrchnastrana.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_vrchnastrana.jpg',0,0,210,296);
+if( $priebeznauzav == 0 ) { $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_vrchnastrana.jpg',0,0,210,296); }
+if( $priebeznauzav == 1 ) { $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypuz_vrchnastrana.jpg',0,0,210,296); }
 }
 
 //nacitaj uzavierka k datumu z ufirdalsie
@@ -1987,13 +2016,14 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 }
 
 $nazpoz="POD 3 - 04 ";
-if( $kli_vrok >= 2014 ) { $nazpoz="POD 3 - 01 "; }
+if( $kli_vrokxd >= 2014 ) { $nazpoz="POD 3 - 01 "; }
+if( $priebeznauzav == 1 ) { $nazpoz="POD PÚZ 3-04 "; }
 
 $stranax=$stranax+1;
 //hlavicka strany
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -2073,8 +2103,8 @@ $pdf->SetTopMargin(10);
 $stranax=$stranax+1;
 //hlavicka strany
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -2129,8 +2159,8 @@ $pdf->SetTopMargin(10);
 $stranax=$stranax+1;
 //hlavicka strany
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -2171,8 +2201,8 @@ $pdf->SetTopMargin(10);
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -2239,8 +2269,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -2714,8 +2744,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -3216,8 +3246,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -3735,8 +3765,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -4288,8 +4318,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -4711,8 +4741,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -5131,8 +5161,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -5413,8 +5443,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -5681,8 +5711,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -5950,8 +5980,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -6166,8 +6196,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -6395,8 +6425,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -6720,8 +6750,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -7015,8 +7045,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -7246,8 +7276,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -7523,8 +7553,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -7651,8 +7681,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -8036,8 +8066,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -8413,8 +8443,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -8723,8 +8753,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -8971,8 +9001,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -9384,8 +9414,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -9770,8 +9800,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -9976,8 +10006,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -10178,8 +10208,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -10487,8 +10517,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -10830,8 +10860,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -11189,8 +11219,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -11569,8 +11599,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -11842,8 +11872,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -12085,8 +12115,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -12432,8 +12462,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -12637,8 +12667,8 @@ $pdf->SetTopMargin(10);
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -12707,8 +12737,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");
@@ -13092,8 +13122,8 @@ $pdf->Image('../dokumenty/dan_z_prijmov2013/poznamkypo2013tabtext/poznamkypo_tab
 //hlavicka strany
 $stranax=$stranax+1;
 $pdf->SetY(5);
-$pdf->Cell(38,7,"Poznámky Úè $nazpoz","1",0,"L");
-$pdf->Cell(52,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
+$pdf->Cell(48,7,"Poznámky Úè $nazpoz","1",0,"L");
+$pdf->Cell(42,7," ","$rmc1",0,"L");$pdf->Cell(10,7,"- $stranax -","$rmc1",0,"C");$pdf->Cell(42,7," ","$rmc1",0,"L");
 $pdf->Cell(8,7,"DIÈ","$rmc1",0,"L");
 $pdf->Cell(4,7,"$dic01","1",0,"L");
 $pdf->Cell(4,7,"$dic02","1",0,"L");

@@ -192,7 +192,7 @@ $polozky[] = array("rs00003", "N", 15, 2);
 
 // Získáme unikátní název DBF souboru
 $nazev_souboru = "../tmp/".uniqid("soubor", true) . ".dbf";
-$nazev_souboru = "../tmp/prijnuj.dbf";
+$nazev_souboru = "../tmp/fin1aprij.dbf";
 //echo $nazev_souboru;
 
 @unlink($nazev_souboru);
@@ -230,7 +230,7 @@ while ($zaznam = @mysql_fetch_row($vysledek))
 
 /* Uživateli nabídneme soubor ke stažení - zašleme sadu pøíslušných hlavièek a následnì obsah celého souboru */
 //header("Content-Type: application/dbf");
-//header("Content-Disposition: attachment; filename=prijnuj.dbf"); 
+//header("Content-Disposition: attachment; filename=fin1aprij.dbf"); 
 //header("Content-Description: PHP Generated Data");
 //@readfile($nazev_souboru);
 
@@ -372,7 +372,7 @@ $polozky2[] = array("rs00003", "N", 15, 2);
 
 // Získáme unikátní název DBF souboru
 $nazev_souboru2 = "../tmp/".uniqid("soubor", true) . ".dbf";
-$nazev_souboru2 = "../tmp/vydnuj.dbf";
+$nazev_souboru2 = "../tmp/fin1avyd.dbf";
 //echo $nazev_souboru2;
 
 @unlink($nazev_souboru2);
@@ -410,7 +410,7 @@ while ($zaznam = @mysql_fetch_row($vysledek))
 
 /* Uživateli nabídneme soubor ke stažení - zašleme sadu pøíslušných hlavièek a následnì obsah celého souboru */
 //header("Content-Type: application/dbf");
-//header("Content-Disposition: attachment; filename=vydnuj.dbf"); 
+//header("Content-Disposition: attachment; filename=fin1avyd.dbf"); 
 //header("Content-Description: PHP Generated Data");
 //@readfile($nazev_souboru2);
 
@@ -487,10 +487,10 @@ if( $copern == 1 )
 Stiahnite si nižšie uvedené súbory na Váš lokálny disk  :
 <br />
 <br />
-<a href="../tmp/prijnuj.dbf">prijnuj.dbf</a>
+<a href="../tmp/fin1aprij.dbf">fin1aprij.dbf</a>
 <br />
 <br />
-<a href="../tmp/vydnuj.dbf">vydnuj.dbf</a>
+<a href="../tmp/fin1avyd.dbf">fin1avyd.dbf</a>
 
 <br />
 <br />

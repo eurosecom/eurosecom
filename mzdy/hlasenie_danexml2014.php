@@ -50,7 +50,10 @@ $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resiz
 $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
-$nazsub="HLASENIE_rok_".$kli_vrok."_".$kli_uzid.".xml";
+$hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+$idx=$kli_uzid.$hhmm;
+
+$nazsub="HLASENIE_rok_".$kli_vrok."_".$idx.".xml";
 $cislo_oc=1;
 ?>
 <HEAD>

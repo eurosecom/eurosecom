@@ -52,6 +52,23 @@ if( $cislo_oc == 2 ) { $datum="30.06.".$kli_vrok; $mesiac="06"; $kli_vume="6.".$
 if( $cislo_oc == 3 ) { $datum="30.09.".$kli_vrok; $mesiac="09"; $kli_vume="9.".$kli_vrok; }
 if( $cislo_oc == 4 ) { $datum="31.12.".$kli_vrok; $mesiac="12"; $kli_vume="12.".$kli_vrok; }
 
+if( $fin1a12 == 1 )
+    {
+if( $cislo_oc == 1 ) { $datum="31.01.".$kli_vrok; $mesiac="01"; $kli_vume="1.".$kli_vrok; }
+if( $cislo_oc == 2 ) { $datum="28.02.".$kli_vrok; $mesiac="02"; $kli_vume="2.".$kli_vrok; }
+if( $cislo_oc == 3 ) { $datum="31.03.".$kli_vrok; $mesiac="03"; $kli_vume="3.".$kli_vrok; }
+if( $cislo_oc == 4 ) { $datum="30.04.".$kli_vrok; $mesiac="04"; $kli_vume="4.".$kli_vrok; }
+if( $cislo_oc == 5 ) { $datum="31.05.".$kli_vrok; $mesiac="05"; $kli_vume="5.".$kli_vrok; }
+if( $cislo_oc == 6 ) { $datum="30.06.".$kli_vrok; $mesiac="06"; $kli_vume="6.".$kli_vrok; }
+if( $cislo_oc == 7 ) { $datum="31.07.".$kli_vrok; $mesiac="07"; $kli_vume="7.".$kli_vrok; }
+if( $cislo_oc == 8 ) { $datum="31.18.".$kli_vrok; $mesiac="08"; $kli_vume="8.".$kli_vrok; }
+if( $cislo_oc == 9 ) { $datum="30.09.".$kli_vrok; $mesiac="09"; $kli_vume="9.".$kli_vrok; }
+if( $cislo_oc == 10 ) { $datum="31.10.".$kli_vrok; $mesiac="10"; $kli_vume="10.".$kli_vrok; }
+if( $cislo_oc == 11 ) { $datum="30.11.".$kli_vrok; $mesiac="11"; $kli_vume="11.".$kli_vrok; }
+if( $cislo_oc == 12 ) { $datum="31.12.".$kli_vrok; $mesiac="12"; $kli_vume="12.".$kli_vrok; }
+    }
+
+
 $databaza="";
 $dtb2 = include("../cis/oddel_dtbz1.php");
 
@@ -428,11 +445,20 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobrats$kli_uzid "." SELECT".
 $dsql = mysql_query("$dsqlt");
 //exit;
 
+$zdroj3pol=0;
+if( $fin1a12 == 1 ) { $zdroj3pol=1; }
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 ) ) { $zdroj3pol=1; }
 
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 ) ) 
+if( $zdroj3pol == 1 )
 {  
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=substring(poloz,1,3) WHERE poloz > 0 ";
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 ) ) 
+{ 
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=41 WHERE poloz > 0 "; 
+
+}
+
 $oznac = mysql_query("$sqtoz");
 
 if( $kli_uzid == 111111111 )
@@ -2720,7 +2746,14 @@ window.open('vykaz_fin112.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&nostp='
 if( $strana < 1 OR $strana > 4 ) $strana=1;
 ?>
 
-<?php echo "Obdobie: ".$cislo_oc.".štvrrok ".$kli_vrok."  ";?>
+<?php if( $fin1a12 == 0 ) { 
+echo "Obdobie: ".$cislo_oc.".štvrrok ".$kli_vrok."  ";
+                          }
+?>
+<?php if( $fin1a12 == 1 ) { 
+echo "Obdobie: ".$cislo_oc.".mesiac ".$kli_vrok."  ";
+                          }
+?>
 <a href="#" onClick="ZnovuNacitaj();">
 <img src='../obr/orig.png' width=20 height=15 border=0 title='Znovu naèíta hodnoty ' ></a>
 

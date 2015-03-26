@@ -1925,7 +1925,7 @@ $oznac = mysql_query("$sqtoz");
 
 //vypocitaj celkovu cenu prace eur aj sk
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
-" SET sum_cccp=sum_hru+sum_nem+ofir_spolu, sum_cccpsk=sum_cccp*$kurz12 ".
+" SET sum_cccp=sum_hru+ofir_spolu, sum_cccpsk=sum_cccp*$kurz12 ".
 " WHERE oc > 0 ";
 $oznac = mysql_query("$sqtoz");
 
