@@ -2852,7 +2852,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="xstat" id="xstat" style="width:245px; top:672px; left:648px;"/>
 <!-- telefon a fax PO -->
 <div class="input-echo" style="width:280px; top:730px; left:52px;"><?php echo $fir_ftel; ?></div>
-<div class="input-echo" style="width:163px; top:730px; left:377px;"><?php echo $fir_fem1; ?></div>
+<div class="input-echo" style="width:363px; top:730px; left:377px;"><?php echo $fir_fem1; ?></div>
 
 <input type="checkbox" name="uoskr" value="1" style="top:769px; left:51px;"/> <!-- dopyt, preveri èi dobre trafené -->
 <input type="checkbox" name="koskr" value="1" style="top:805px; left:51px;"/>
