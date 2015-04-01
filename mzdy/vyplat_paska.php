@@ -1537,12 +1537,67 @@ $dsql = mysql_query("$dsqlt");
 //exit;
 $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcneoda$kli_uzid WHERE neoxx != 9 "; $dsql = mysql_query("$dsqlt");
 
-
-
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdprcneoda$kli_uzid".
 " SET des6=zmin_ip*(celk_dni-nezp_dni)/celk_dni ".
 " WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_mzdprcneoda$kli_uzid.oc AND zmin_ip > 0 ";
 $oznac = mysql_query("$sqtoz");
+
+
+if( $kli_uzid > 0 )
+{
+
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcneoda$kli_uzid ".
+" LEFT JOIN F$kli_vxcf"."_$mzdkun".
+" ON F$kli_vxcf"."_mzdprcneoda$kli_uzid.oc=F$kli_vxcf"."_$mzdkun.oc ".
+" WHERE deti_sp = 1 AND nezp_dni >= 0 ";
+
+$tov = mysql_query("$sqltt");
+$tvpol = mysql_num_rows($tov);
+//echo $sqltt.$tvpol."<br />";
+$i=0;
+  while ($i <= $tvpol )
+  {
+
+  if (@$zaznam=mysql_data_seek($tov,$i))
+ {
+$rtov=mysql_fetch_object($tov);
+
+
+$skutzaklad=0;
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdprcsum$kli_uzid WHERE oc = $rtov->oc ";
+$fir_vysledok = mysql_query($sqlfir);
+if ($fir_vysledok) 
+{ 
+$fir_riadok=mysql_fetch_object($fir_vysledok); 
+$skutzaklad=$fir_riadok->zmin_up;
+}
+
+
+$prepzaklad=570*($rtov->celk_dni-$rtov->nezp_dni)/$rtov->celk_dni;
+$rozd=$skutzaklad-$prepzaklad;
+
+
+if( $skutzaklad > $prepzaklad AND $rozd > 0.05 ) 
+{  
+echo "Zamestnanec osè. $rtov->oc s príjmom ".$skutzaklad." asi nemá nárok na odpoèet ZP !!!!! <br />"; 
+
+echo "celkom dni v mesiaci ".$rtov->celk_dni." nepoistené dni v mesiaci ".$rtov->nezp_dni."<br />";
+echo "skutoèný základ ZP ".$skutzaklad."<br />";
+echo "prepoèítaný základ ZP ".$prepzaklad."<br />";
+
+exit; 
+
+}
+
+ }
+
+$i=$i+1;
+   }
+
+}
+//koniec vyhodnod vysku prijmu pre odpocet ZP
+
 
 if( $kli_uzid == 171717171717171 )
 {
