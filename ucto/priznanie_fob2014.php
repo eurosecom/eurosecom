@@ -512,6 +512,9 @@ $r37 = 1*$_REQUEST['r37'];
 $r38 = 1*$_REQUEST['r38'];
 $r39 = 1*$_REQUEST['r39'];
 $r40 = 1*$_REQUEST['r40'];
+$r39pu = 1*$_REQUEST['r39pu'];
+$r40pu = 1*$_REQUEST['r40pu'];
+
 $r41 = 1*$_REQUEST['r41'];
 $r42 = 1*$_REQUEST['r42'];
 $r43 = 1*$_REQUEST['r43'];
@@ -523,7 +526,7 @@ $r48 = 1*$_REQUEST['r48'];
 $r49 = 1*$_REQUEST['r49'];
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
-" t1az4='$t1az4', t1az5='$t1az5', t1ak4='$t1ak4', t1ak5='$t1ak5', ".
+" t1az4='$t1az4', t1az5='$t1az5', t1ak4='$t1ak4', t1ak5='$t1ak5', r39pu='$r39pu', r40pu='$r40pu',".
 " t1bz1='$t1bz1', t1bz2='$t1bz2', t1bk1='$t1bk1', t1bk2='$t1bk2', ".
 " t1cz1='$t1cz1', t1ck1='$t1ck1', t1cz2='$t1cz2', t1ck2='$t1ck2', t1cz3='$t1cz3', t1ck3='$t1ck3', t1cz4='$t1cz4', t1ck4='$t1ck4', t1cz5='$t1cz5', t1ck5='$t1ck5', ".
 " r37='$r37', r38='$r38', r39='$r39', r40='$r40', r41='$r41', r42='$r42', r43='$r43', r44='$r44', r45='$r45', r46='$r46', r47='$r47', r48='$r48', r49='$r49'  ".
@@ -1794,7 +1797,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD pzthvd6 DECIMAL(10,2) DEF
 $vysledek = mysql_query("$sql");
 }
 //zmeny pre rok 2014
-$sql = "SELECT vpdu FROM F".$kli_vxcf."_mzdpriznanie_fob";
+$sql = "SELECT r40pu FROM F".$kli_vxcf."_mzdpriznanie_fob";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -1823,6 +1826,10 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD kos64 DECIMAL(2,0) DEFAULT 0 AFTER new2014";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD vpdu DECIMAL(2,0) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD r39pu DECIMAL(10,2) DEFAULT 0 AFTER new2014";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD r40pu DECIMAL(10,2) DEFAULT 0 AFTER new2014";
 $vysledek = mysql_query("$sql");
 }
 //koniec uprav def. tabulky
@@ -1925,9 +1932,11 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t1v12=t1v10+t1v11  WHERE oc 
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r37=t1p9, r38=t1v9, r39=0, r40=0, r43=0, r44=0  WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r39=r37-r38 WHERE oc = $cislo_oc ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r39=r37-r38+r39pu WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r40=-r39, r39=0 WHERE oc = $cislo_oc AND r39 < 0";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r40=r40pu WHERE oc = $cislo_oc AND r39 = 0 AND r40pu > 0 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r43=r39-r40+r41-r42 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
@@ -2334,6 +2343,10 @@ $r37 = $fir_riadok->r37;
 $r38 = $fir_riadok->r38;
 $r39 = $fir_riadok->r39;
 $r40 = $fir_riadok->r40;
+
+$r39pu = $fir_riadok->r39pu;
+$r40pu = $fir_riadok->r40pu;
+
 $r41 = $fir_riadok->r41;
 $r42 = $fir_riadok->r42;
 $r43 = $fir_riadok->r43;
@@ -2824,6 +2837,8 @@ var sirkawic = screen.width-10;
    document.formv1.r38.value = '<?php echo "$r38";?>';
    document.formv1.r39.value = '<?php echo "$r39";?>';
    document.formv1.r40.value = '<?php echo "$r40";?>';
+   document.formv1.r39pu.value = '<?php echo "$r39pu";?>';
+   document.formv1.r40pu.value = '<?php echo "$r40pu";?>';
    document.formv1.r41.value = '<?php echo "$r41";?>';
    document.formv1.r42.value = '<?php echo "$r42";?>';
    document.formv1.r43.value = '<?php echo "$r43";?>';
@@ -3476,6 +3491,18 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r38" id="r38" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:768px; left:500px;"/>
 <input type="text" name="r39" id="r39" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:807px; left:500px;"/>
 <input type="text" name="r40" id="r40" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:847px; left:500px;"/>
+
+<input type="text" name="r39pu" id="r39pu" onkeyup="CiarkaNaBodku(this);" style="width:130px; top:807px; left:762px;"/>
+<input type="text" name="r40pu" id="r40pu" onkeyup="CiarkaNaBodku(this);" style="width:130px; top:847px; left:762px;"/>
+
+ <img src="../obr/ikony/info_blue_icon.png" 
+  title="Ak FO vedie podvojné úètovníctvo vyplní ZISK v tejto položke, nie v riadku 37,38,39,40 a tabu¾ku è. 1 v VI. oddiely na strane 3. nevypåòa." class="btn-row-tool"
+  style="top:807px; left:910px;">
+
+ <img src="../obr/ikony/info_blue_icon.png" 
+  title="Ak FO vedie podvojné úètovníctvo vyplní STRATU v tejto položke, nie v riadku 37,38,39,40 a tabu¾ku è. 1 v VI. oddiely na strane 3. nevypåòa." class="btn-row-tool"
+  style="top:847px; left:910px;">
+
 <input type="text" name="r41" id="r41" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:887px; left:500px;"/>
 <input type="text" name="r42" id="r42" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:926px; left:500px;"/>
 <input type="text" name="r43" id="r43" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:970px; left:500px;"/>
