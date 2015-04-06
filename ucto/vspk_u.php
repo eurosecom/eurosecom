@@ -3159,6 +3159,7 @@ if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 3 OR $drupoh == 4 OR $drupoh == 
   myRobotmenu.style.width = widthrobotmenu;
   myRobotmenu.innerHTML = htmlmenu;
   robotmenu.style.display='';
+  hodprevz.style.display='';
   }
 
   function zhasni_menurobot()
@@ -3166,6 +3167,7 @@ if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 3 OR $drupoh == 4 OR $drupoh == 
   robotmenu.style.display='none';
   robotmenu.style.display='none';
   robothlas.style.display='none';
+  hodprevz.style.display='none';
   }
 
     var toprobot = 280;
@@ -3258,20 +3260,6 @@ htmlmenu += "<a href=\"#\" onClick=\"volajAutoUCT(10,<?php echo $drupohxx; ?>,<?
 $i=$i+1;
    }
 ?>
-
-    htmlmenu += "<tr><FORM name='fhoddok' class='obyc' method='post' action='#' ><td width='100%' colspan='2'>H1: ";
-    htmlmenu += "<input type='text' name='h_hod1' id='h_hod1' size='6' value=\"<?php echo $hod1;?>\" ";
-    htmlmenu += "onclick=\"Fx.style.display='none';\" onkeyup=\"KontrolaDcisla(this, Des)\" /> ";
-
-    htmlmenu += "H2: <input type='text' name='h_hod2' id='h_hod2' size='6' value=\"<?php echo $hod2;?>\" ";
-    htmlmenu += "onclick=\"Fx.style.display='none';\" onkeyup=\"KontrolaDcisla(this, Des)\" /> ";
-
-    htmlmenu += "H3: <input type='text' name='h_hod3' id='h_hod3' size='6' value=\"<?php echo $hod3;?>\" ";
-    htmlmenu += "onclick=\"Fx.style.display='none';\" onkeyup=\"KontrolaDcisla(this, Des)\" /> ";
-
-    htmlmenu += "H4: <input type='text' name='h_hod4' id='h_hod4' size='6' value=\"<?php echo $hod4;?>\" ";
-    htmlmenu += "onclick=\"Fx.style.display='none';\" onkeyup=\"KontrolaDcisla(this, Des)\" /> ";
-    htmlmenu += "</td></FORM></tr>";
 
 
 <?php                    } ?>
@@ -3882,6 +3870,45 @@ onload="window.scrollTo(0, 3000); ObnovUI(); VyberVstup(); <?php if( $copern == 
 </div>
 
 <?php                           }  ?>
+
+
+<?php
+//hodnoty pre vzorove doklady
+if( $copern == 7 AND $kli_vduj == 0 AND ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 5 OR $drupoh == 4 ) ) 
+     {
+
+?>
+<div id="hodprevz" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 226px; left: 50px; width:400px; height:50px;">
+<table  class='ponuka' width='100%'>
+<tr><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td></tr>
+                   
+<tr><FORM name='fhoddok' method='post' action='#' >
+
+<td width='100%' colspan='5'>
+H1:<input type='text' name='h_hod1' id='h_hod1' size='6' value="<?php echo $hod1;?>"
+onclick="Fx.style.display='none';" onkeyup="KontrolaDcisla(this, Des)" /> 
+
+H2:<input type='text' name='h_hod2' id='h_hod2' size='6' value="<?php echo $hod2;?>" 
+onclick="Fx.style.display='none';" onkeyup="KontrolaDcisla(this, Des)" />
+
+H3:<input type='text' name='h_hod3' id='h_hod3' size='5' value="<?php echo $hod3;?>"
+onclick="Fx.style.display='none';" onkeyup=\"KontrolaDcisla(this, Des)" />
+
+H4:<input type='text' name='h_hod4' id='h_hod4' size='5' value="<?php echo $hod4;?>"
+onclick="Fx.style.display='none';" onkeyup="KontrolaDcisla(this, Des)" /> 
+</td>
+
+</tr>
+</FORM></table>
+</div>
+<script type="text/javascript">
+
+</script>
+<?php
+     }
+//koniec hodnoty pre vzorove doklady
+?>
+
 
 <?php
 //nastavenie datumu do kvdph
