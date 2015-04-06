@@ -80,7 +80,7 @@ function volajAutoUCT(odkial,drupoh,pohyb)
       if( document.fhlv1.pau80.checked ) { pau80=1; }
 
       // create the params string
-      var params = "h_drupoh=" + h_drupoh + "&h_pohyb=" + h_pohyb + "&h_odkial=" + h_odkial + "&h_dok=" + h_dok + "&h_ico=" + h_ico ;
+      var params = "h_drupoh=" + h_drupoh + "&h_pohyb=" + h_pohyb + "&h_odkial=" + h_odkial + "&h_dok=" + h_dok + "&h_ico=" + h_ico;
           params += "&h_dat=" + h_dat + "&h_zk0=" + h_zk0 + "&h_zk1=" + h_zk1;
           params += "&h_zk2=" + h_zk2 + "&h_dn1=" + h_dn1 + "&h_dn2=" + h_dn2 + "&pau80=" + pau80; 
           params += "&h_uce=" + h_uce + "&h_txp=" + h_txp + "&h_txz=" + h_txz + "&h_poz=" + h_poz + "&h_kto=" + h_kto + "&h_unk=" + h_unk;
@@ -133,9 +133,9 @@ function volajAutoUCT(odkial,drupoh,pohyb)
       if( document.fhlv1.pau80.checked ) { pau80=1; }
 
       // create the params string
-      var params = "h_drupoh=" + h_drupoh + "&h_pohyb=" + h_pohyb + "&h_odkial=" + h_odkial + "&h_dok=" + h_dok + "&h_ico=" + h_ico ;
+      var params = "h_drupoh=" + h_drupoh + "&h_pohyb=" + h_pohyb + "&h_odkial=" + h_odkial + "&h_dok=" + h_dok + "&h_ico=" + h_ico;
           params += "&h_dat=" + h_dat + "&h_zk0=" + h_zk0 + "&h_zk1=" + h_zk1;
-          params += "&h_zk2=" + h_zk2 + "&h_dn1=" + h_dn1 + "&h_dn2=" + h_dn2 + "&pau80=" + pau80 
+          params += "&h_zk2=" + h_zk2 + "&h_dn1=" + h_dn1 + "&h_dn2=" + h_dn2 + "&pau80=" + pau80; 
           params += "&h_uce=" + h_uce + "&h_txp=" + h_txp + "&h_txz=" + h_txz + "&h_poz=" + h_poz + "&h_kto=" + h_kto + "&h_unk=" + h_unk;
 
 
@@ -164,9 +164,13 @@ function volajAutoUCT(odkial,drupoh,pohyb)
                           var h_hod3 = document.forms.fhoddok.h_hod3.value;
                           var h_hod4 = document.forms.fhoddok.h_hod4.value;
                                            }
+      var pau80 = 0;
+      if( h_drupoh == 2 || h_drupoh == 5  ) {
+      if( document.forms1.pau80.checked ) { pau80=1; }
+                                            }
 
       // create the params string
-      var params = "h_drupoh=" + h_drupoh + "&h_pohyb=" + h_pohyb + "&h_odkial=" + h_odkial + "&h_dok=" + h_dok;
+      var params = "h_drupoh=" + h_drupoh + "&h_pohyb=" + h_pohyb + "&h_odkial=" + h_odkial + "&h_dok=" + h_dok + "&pau80=" + pau80;
           params += "&h_uce=" + h_uce + "&h_fak=" + h_fak + "&h_ico=" + h_ico + "&h_hod=" + h_hod + "&h_hdx=" + h_hdx;
           params += "&h_hod1=" + h_hod1 + "&h_hod2=" + h_hod2 + "&h_hod3=" + h_hod3 + "&h_hod4=" + h_hod4;
 

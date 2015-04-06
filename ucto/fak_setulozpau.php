@@ -22,7 +22,9 @@ if(!isset($kli_vxcf)) $kli_vxcf = 1;
 
 // cislo operacie
 $copern = 1*$_REQUEST['copern'];
+$drupoh = 1*$_REQUEST['drupoh'];
 $cislo_dok = 1*$_REQUEST['cislo_dok'];
+$hladaj_uce = 1*$_REQUEST['hladaj_uce'];
 
 $citfir = include("../cis/citaj_fir.php");
 
@@ -112,7 +114,7 @@ if( $cstat == 10101 )
 ?>
 <script type="text/javascript">
 
-window.open('../ucto/vstpok.php?copern=1&drupoh=2&page=1', '_self' )
+window.open('../ucto/vstpok.php?copern=1&drupoh=<?php echo $drupoh; ?>&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>', '_self' )
 
 </script>
 <?php

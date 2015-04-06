@@ -35,13 +35,12 @@ if( $_SESSION['kli_vrok'] < 2011 ) { $nuctpoh="2010"; }
 $ductpoh="";
 if( $fir_uctx03 == 1 ) { $ductpoh="F".$kli_vxcf."_"; $nuctpoh=""; }
 
-
-$h_odkial = strip_tags($_GET['h_odkial']);//0=hlavicka pokladnica podvojne
+$h_odkial = strip_tags($_GET['h_odkial']);//9=hlavicka pokladnica jednoduche
 $h_drupoh = strip_tags($_GET['h_drupoh']);
 $h_pohyb = strip_tags($_GET['h_pohyb']);
 
 $h_odkupr=$h_odkial;
-if( $h_odkial == 10 ) $h_odkupr='0 ';
+if( $h_odkial == 29 ) $h_odkupr='9 ';
 
 $sqlzak = mysql_query("SELECT * FROM $ductpoh"."uctpohyby$nuctpoh WHERE ucto = $h_odkupr AND druh = $h_drupoh AND cpoh = $h_pohyb ORDER BY cpoh DESC LIMIT 1");
   if (@$zaznam=mysql_data_seek($sqlzak,0))
@@ -58,14 +57,14 @@ $sqlzak = mysql_query("SELECT * FROM $ductpoh"."uctpohyby$nuctpoh WHERE ucto = $
   $vzordok=$riadzak->ddn1;
   $strpoh=1*$riadzak->hstr;
   $zakpoh=1*$riadzak->hzak;
-  $pohp=$riadzak->pohp;
   }
+
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
 //prijmovy pokladnicny 
-if( $h_drupoh == 1 AND $h_odkial == 0 )
+if( $h_drupoh == 1 AND $h_odkial == 9 )
 {
 $h_uce = strip_tags($_GET['h_uce']);
 $h_dok = strip_tags($_GET['h_dok']);
@@ -96,19 +95,17 @@ if( $ucet_zk0 == 60 OR $ucet_zk0 == 61 OR $ucet_zk0 == 62 ) { $h_zk0u=$h_zk0+$h_
  "ico='$h_ico', txp='$h_txp', txz='$h_txz', kto='$h_kto', ".
  "zk0u='$h_zk0u', zk1u='$h_zk1u', zk2u='$h_zk2u', dn1u='$h_dn1u', dn2u='$h_dn2u', ".
  "sp1u=zk1u+dn1u, sp2u=zk2u+dn2u, hodu=zk0u+sp1u+sp2u, unk='$h_unk', ".
- "zk1=0, zk2=0, zk3=0, zk4=0, dn1=0, dn2=0, dn3=0, dn4=0, sz1=0, sz2=0, sz3=0, sz4=0, hod=0  ".
+ "zk1=0, zk2=0, zk3=0, zk4=0, dn1=0, dn2=0, dn3=0, dn4=0, sz1=0, sz2=0, sz3=0, sz4=0, hod=0 ".
  "WHERE dok='$h_dok'";
 $upravene = mysql_query("$uprt"); 
 
-$uprt = "UPDATE F$kli_vxcf"."_pokpri SET hod=hodu WHERE dok='$h_dok' AND hod = 0 ";
-$upravene = mysql_query("$uprt"); 
-
 //doklad polozky
+$h_fak=1*$h_poz;
 $h_str=0;
 if( $strpoh > 0 ) { $h_str=$strpoh; }
 $h_zak=0;
 if( $zakpoh > 0 ) { $h_zak=$zakpoh; }
-$h_fak=1*$h_poz;
+
 if( $ucet_zk0 == 60 OR $ucet_zk0 == 61 OR $ucet_zk0 == 62 ) { $rdp_zk0=1; $rdp_zk1=1; $rdp_zk2=1; $h_fak=1*$h_poz; }
 if( $h_zk0 != 0 )
 {
@@ -125,7 +122,7 @@ $ulozene = mysql_query("$sqty");
 if( $h_dn1 != 0 )
 {
 $sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$h_uce', '$ucet_dn1', '$rdp_zk1', 0, '$h_dn1', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$h_uce', '$ucet_dn1', '$rdp_zk1', 0, '$h_dn1', '$h_ico', '$h_fak', '', 0, 0, '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 if( $h_zk2 != 0 )
@@ -137,7 +134,7 @@ $ulozene = mysql_query("$sqty");
 if( $h_dn2 != 0 )
 {
 $sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$h_uce', '$ucet_dn2', '$rdp_zk2', 0, '$h_dn2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$h_uce', '$ucet_dn2', '$rdp_zk2', 0, '$h_dn2', '$h_ico', '$h_fak', '', 0, 0, '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 
@@ -145,7 +142,7 @@ $ulozene = mysql_query("$sqty");
 //koniec prijmovy pokladnicny
 
 //vydavkovy pokladnicny 
-if( $h_drupoh == 2 AND $h_odkial == 0 )
+if( $h_drupoh == 2 AND $h_odkial == 9 )
 {
 $h_uce = strip_tags($_GET['h_uce']);
 $h_dok = strip_tags($_GET['h_dok']);
@@ -181,15 +178,13 @@ if( $ucet_zk0 == 22 OR $ucet_zk0 == 23 OR $ucet_zk0 == 24 ) { $h_zk0u=$h_zk0+$h_
  "WHERE dok='$h_dok'";
 $upravene = mysql_query("$uprt"); 
 
-$uprt = "UPDATE F$kli_vxcf"."_pokvyd SET hod=hodu WHERE dok='$h_dok' AND hod = 0 ";
-$upravene = mysql_query("$uprt"); 
-
 //doklad polozky
 $h_fak=1*$h_poz;
 $h_str=0;
 if( $strpoh > 0 ) { $h_str=$strpoh; }
 $h_zak=0;
 if( $zakpoh > 0 ) { $h_zak=$zakpoh; }
+
 if( $ucet_zk0 == 22 OR $ucet_zk0 == 23 OR $ucet_zk0 == 24 ) { $rdp_zk0=1; $rdp_zk1=1; $rdp_zk2=1; $h_fak=1*$h_poz; }
 
 if( $pau80 == 1 )
@@ -244,7 +239,7 @@ $ulozene = mysql_query("$sqty");
 if( $h_dn1 != 0 )
 {
 $sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn1', '$h_uce', '$rdp_zk1', 0, '$h_dn1', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn1', '$h_uce', '$rdp_zk1', 0, '$h_dn1', '$h_ico', '$h_fak', '', 0, 0, '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 if( $h_zk2 != 0 )
@@ -256,7 +251,7 @@ $ulozene = mysql_query("$sqty");
 if( $h_dn2 != 0 )
 {
 $sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn2', '$h_uce', '$rdp_zk2', 0, '$h_dn2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn2', '$h_uce', '$rdp_zk2', 0, '$h_dn2', '$h_ico', '$h_fak', '', 0, 0, '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
 
@@ -285,12 +280,6 @@ $sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,ico,f
 " VALUES ('$h_dok', '$h_drupoh', '$ucet_dn2', '$h_uce', '27', 0, '$h_dn2n', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
 $ulozene = mysql_query("$sqty"); 
 }
-if( $ajo == 1 AND $aju > 0 AND $h_dn2n != 0 )
-{
-$sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$h_drupoh', '$aju', '$ucet_dn2', '10', 0, '$h_dn2n', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
-$ulozene = mysql_query("$sqty");  
-}
   }
 //koniec ak pau80=1
 
@@ -298,8 +287,314 @@ $ulozene = mysql_query("$sqty");
 //koniec vydavkovy pokladnicny
 
 
+//banka uhrada dodavatelskej 
+if( $h_drupoh == 104 AND $h_odkial == 19 )
+{
+$h_uce = strip_tags($_GET['h_uce']);
+$h_dok = strip_tags($_GET['h_dok']);
+$h_ico = strip_tags($_GET['h_ico']);
+$h_fak = strip_tags($_GET['h_fak']);
+$h_hod = 1*strip_tags($_GET['h_hod']);
+$h_hdx = 1*strip_tags($_GET['h_hdx']);
+
+//doklad hlavicka
+
+$h_kredit=0;
+$h_debet=0;
+
+//$h_kredit=$h_hod;
+$h_debet=1*$h_hod;
+$h_hzx=1*($h_hod-$h_hdx);
+
+$sqtz = "UPDATE F$kli_vxcf"."_banvyp SET zk0u=zk0u+('$h_kredit'), zk1u=zk1u+('$h_debet'), zk2u=zk0u-zk1u".
+" WHERE dok='$h_dok'";
+//echo $sqtz;
+$upravene = mysql_query("$sqtz"); 
+
+//doklad polozky
+$h_str=0;
+if( $strpoh > 0 ) { $h_str=$strpoh; }
+$h_zak=0;
+if( $zakpoh > 0 ) { $h_zak=$zakpoh; }
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_banvyp WHERE dok='$h_dok' ";
+$sqldok = mysql_query("$sqltt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $ddu=$riaddok->dat;
+  }
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctban ( dok,ddu,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$ddu', '$drupoh', '$h_pohyb', '$h_uce', '1', '0', '$h_hzx', '0', '', '0', '0',".
+" '$h_ico', '$h_fak', '',".
+" '$h_str', '$h_zak', '', '$kli_uzid' );"; 
+//echo $sqty;
+
+$ulozene = mysql_query("$sqty"); 
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctban ( dok,ddu,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$ddu', '$drupoh', '34399', '$h_uce', '1', '0', '$h_hdx', '0', '', '0', '0',".
+" '$h_ico', '$h_fak', '',".
+" '0', '0', '', '$kli_uzid' );"; 
+//echo $sqty;
+
+if( $h_hdx != 0 ) $ulozene = mysql_query("$sqty"); 
+
+
+     }
+//koniec banka uhrada dodavatelskej
+
+//banka uhrada odberatelskej 
+if( $h_drupoh == 204 AND $h_odkial == 19 )
+{
+$h_uce = strip_tags($_GET['h_uce']);
+$h_dok = strip_tags($_GET['h_dok']);
+$h_ico = strip_tags($_GET['h_ico']);
+$h_fak = strip_tags($_GET['h_fak']);
+$h_hod = 1*strip_tags($_GET['h_hod']);
+$h_hdx = 1*strip_tags($_GET['h_hdx']);
+
+//doklad hlavicka
+
+$h_kredit=0;
+$h_debet=0;
+
+$h_kredit=1*$h_hod;
+$h_hzx=1*($h_hod-$h_hdx);
+
+$sqtz = "UPDATE F$kli_vxcf"."_banvyp SET zk0u=zk0u+('$h_kredit'), zk1u=zk1u+('$h_debet'), zk2u=zk0u-zk1u".
+" WHERE dok='$h_dok'";
+//echo $sqtz;
+$upravene = mysql_query("$sqtz"); 
+
+//doklad polozky
+$h_str=0;
+if( $strpoh > 0 ) { $h_str=$strpoh; }
+$h_zak=0;
+if( $zakpoh > 0 ) { $h_zak=$zakpoh; }
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_banvyp WHERE dok='$h_dok' ";
+$sqldok = mysql_query("$sqltt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $ddu=$riaddok->dat;
+  }
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctban ( dok,ddu,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$ddu', '$drupoh', '$h_uce', '$h_pohyb', '1', '0', '$h_hzx', '0', '', '0', '0',".
+" '$h_ico', '$h_fak', '',".
+" '$h_str', '$h_zak', '', '$kli_uzid' );"; 
+//echo $sqty;
+
+$ulozene = mysql_query("$sqty"); 
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctban ( dok,ddu,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$ddu', '$drupoh', '$h_uce', '34399', '1', '0', '$h_hdx', '0', '', '0', '0',".
+" '$h_ico', '$h_fak', '',".
+" '0', '0', '', '$kli_uzid' );"; 
+//echo $sqty;
+
+if( $h_hdx != 0 ) $ulozene = mysql_query("$sqty"); 
+
+
+     }
+//koniec banka uhrada odberatelskej
+
+//vseob uhrada dodavatelskej 
+if( $h_drupoh == 105 AND $h_odkial == 19 )
+{
+$h_uce = strip_tags($_GET['h_uce']);
+$h_dok = strip_tags($_GET['h_dok']);
+$h_ico = strip_tags($_GET['h_ico']);
+$h_fak = strip_tags($_GET['h_fak']);
+$h_hod = 1*strip_tags($_GET['h_hod']);
+$h_hdx = 1*strip_tags($_GET['h_hdx']);
+
+//doklad hlavicka
+
+$h_hzx=1*($h_hod-$h_hdx);
+
+$sqtz = "UPDATE F$kli_vxcf"."_uctvsdh SET hodu=hodu+('$h_hod') ".
+" WHERE dok='$h_dok'";
+//echo $sqtz;
+$upravene = mysql_query("$sqtz"); 
+
+//doklad polozky
+$h_str=0;
+if( $strpoh > 0 ) { $h_str=$strpoh; }
+$h_zak=0;
+if( $zakpoh > 0 ) { $h_zak=$zakpoh; }
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctvsdp ( dok,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$drupoh', '$h_pohyb', '0', '1', '0', '$h_hzx', '0', '', '0', '0',".
+" '$h_ico', '$h_fak', '',".
+" '$h_str', '$h_zak', '', '$kli_uzid' );"; 
+//echo $sqty;
+
+$ulozene = mysql_query("$sqty"); 
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctvsdp ( dok,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$drupoh', '34399', '0', '1', '0', '$h_hdx', '0', '', '0', '0',".
+" '$h_ico', '$h_fak', '',".
+" '0', '0', '', '$kli_uzid' );"; 
+//echo $sqty;
+
+if( $h_hdx != 0 ) $ulozene = mysql_query("$sqty"); 
+
+
+     }
+//koniec vseob uhrada dodavatelskej
+
+//vseob uhrada odberatelskej 
+if( $h_drupoh == 205 AND $h_odkial == 19 )
+{
+$h_uce = strip_tags($_GET['h_uce']);
+$h_dok = strip_tags($_GET['h_dok']);
+$h_ico = strip_tags($_GET['h_ico']);
+$h_fak = strip_tags($_GET['h_fak']);
+$h_hod = 1*strip_tags($_GET['h_hod']);
+$h_hdx = 1*strip_tags($_GET['h_hdx']);
+
+//doklad hlavicka
+
+
+$h_hzx=1*($h_hod-$h_hdx);
+
+$sqtz = "UPDATE F$kli_vxcf"."_uctvsdh SET hodu=hodu+('$h_hod') ".
+" WHERE dok='$h_dok'";
+//echo $sqtz;
+$upravene = mysql_query("$sqtz"); 
+
+//doklad polozky
+$h_str=0;
+if( $strpoh > 0 ) { $h_str=$strpoh; }
+$h_zak=0;
+if( $zakpoh > 0 ) { $h_zak=$zakpoh; }
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctvsdp ( dok,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$drupoh', '0', '$h_pohyb', '1', '0', '$h_hzx', '0', '', '0', '0',".
+" '$h_ico', '$h_fak', '',".
+" '$h_str', '$h_zak', '', '$kli_uzid' );"; 
+//echo $sqty;
+
+$ulozene = mysql_query("$sqty"); 
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctvsdp ( dok,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$drupoh', '0', '34399', '1', '0', '$h_hdx', '0', '', '0', '0',".
+" '$h_ico', '$h_fak', '',".
+" '0', '0', '', '$kli_uzid' );"; 
+//echo $sqty;
+
+if( $h_hdx != 0 ) $ulozene = mysql_query("$sqty"); 
+
+
+     }
+//koniec vseob uhrada odberatelskej
+
+//prijmovy uhrada odberatelskej 
+if( $h_drupoh == 201 AND $h_odkial == 19 )
+{
+$h_uce = strip_tags($_GET['h_uce']);
+$h_dok = strip_tags($_GET['h_dok']);
+$h_ico = strip_tags($_GET['h_ico']);
+$h_fak = strip_tags($_GET['h_fak']);
+$h_hod = 1*strip_tags($_GET['h_hod']);
+$h_hdx = 1*strip_tags($_GET['h_hdx']);
+
+//doklad hlavicka
+
+$h_kredit=0;
+$h_debet=0;
+
+$h_kredit=1*$h_hod;
+$h_hzx=1*($h_hod-$h_hdx);
+
+$sqtz = "UPDATE F$kli_vxcf"."_pokpri SET zk0u=zk0u+('$h_kredit'), hodu=hodu+('$h_kredit')".
+" WHERE dok='$h_dok'";
+//echo $sqtz;
+$upravene = mysql_query("$sqtz"); 
+
+//doklad polozky
+$h_str=0;
+if( $strpoh > 0 ) { $h_str=$strpoh; }
+$h_zak=0;
+if( $zakpoh > 0 ) { $h_zak=$zakpoh; }
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$drupoh', '$h_uce', '$h_pohyb', '1', '0', '$h_hzx', '0', '', '0', '0',".
+" '$h_ico', '$h_fak', '',".
+" '$h_str', '$h_zak', '', '$kli_uzid' );"; 
+//echo $sqty;
+
+$ulozene = mysql_query("$sqty"); 
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$drupoh', '$h_uce', '34399', '1', '0', '$h_hdx', '0', '', '0', '0',".
+" '$h_ico', '$h_fak', '',".
+" '0', '0', '', '$kli_uzid' );"; 
+//echo $sqty;
+
+if( $h_hdx != 0 ) $ulozene = mysql_query("$sqty"); 
+
+
+     }
+//koniec prijmovy uhrada odberatelskej
+
+//vydavkovy uhrada dodavatelskej 
+if( $h_drupoh == 102 AND $h_odkial == 19 )
+{
+$h_uce = strip_tags($_GET['h_uce']);
+$h_dok = strip_tags($_GET['h_dok']);
+$h_ico = strip_tags($_GET['h_ico']);
+$h_fak = strip_tags($_GET['h_fak']);
+$h_hod = 1*strip_tags($_GET['h_hod']);
+$h_hdx = 1*strip_tags($_GET['h_hdx']);
+
+//doklad hlavicka
+
+$h_kredit=0;
+$h_debet=0;
+
+$h_kredit=1*$h_hod;
+$h_hzx=1*($h_hod-$h_hdx);
+
+$sqtz = "UPDATE F$kli_vxcf"."_pokvyd SET zk0u=zk0u+('$h_kredit'), hodu=hodu+('$h_kredit')".
+" WHERE dok='$h_dok'";
+//echo $sqtz;
+$upravene = mysql_query("$sqtz"); 
+
+//doklad polozky
+$h_str=0;
+if( $strpoh > 0 ) { $h_str=$strpoh; }
+$h_zak=0;
+if( $zakpoh > 0 ) { $h_zak=$zakpoh; }
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$drupoh', '$h_pohyb', '$h_uce', '1', '0', '$h_hzx', '0', '', '0', '0',".
+" '$h_ico', '$h_fak', '',".
+" '$h_str', '$h_zak', '', '$kli_uzid' );"; 
+//echo $sqty;
+
+$ulozene = mysql_query("$sqty"); 
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$drupoh', '34399', '$h_uce', '1', '0', '$h_hdx', '0', '', '0', '0',".
+" '$h_ico', '$h_fak', '',".
+" '0', '0', '', '$kli_uzid' );"; 
+//echo $sqty;
+
+if( $h_hdx != 0 ) $ulozene = mysql_query("$sqty"); 
+
+
+     }
+//koniec vydavkovy uhrada dodavatelskej
+
+
+
 //vseobecny z poloziek podla vzoru 
-if( $h_drupoh == 5 AND $h_odkial == 10 )
+if( $h_drupoh == 5 AND $h_odkial == 29 )
 {
 $h_uce = strip_tags($_GET['h_uce']);
 $h_dok = strip_tags($_GET['h_dok']);
@@ -311,46 +606,6 @@ $h_hod1 = 1*strip_tags($_GET['h_hod1']);
 $h_hod2 = 1*strip_tags($_GET['h_hod2']);
 $h_hod3 = 1*strip_tags($_GET['h_hod3']);
 $h_hod4 = 1*strip_tags($_GET['h_hod4']);
-
-
-$pau80 = 1*$_GET['pau80'];
-
-$h_zk2n=0; $h_dn2n=0; $ucet_zk2=""; $ucet_dn2=""; $ajo=0;
-
-if( $pau80 == 1 )
-  {
-
-$uprt = "UPDATE F$kli_vxcf"."_autopausal$kli_uzid SET xzk='$h_hod1', xdp='$h_hod2' ";
-$upravene = mysql_query("$uprt");
-
-$uprt = "UPDATE F$kli_vxcf"."_autopausal$kli_uzid SET mzk=0.8*xzk, mdp=0.8*xdp ";
-$upravene = mysql_query("$uprt");
-
-$uprt = "UPDATE F$kli_vxcf"."_autopausal$kli_uzid SET nzk=xzk-mzk, ndp=xdp-mdp ";
-$upravene = mysql_query("$uprt");
-
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_autopausal$kli_uzid WHERE id > 0 ORDER BY id DESC LIMIT 1");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-    {
-  $riaddok=mysql_fetch_object($sqldok);
-  $udp=$riaddok->udp;
-  $adp=$riaddok->adp;
-  $uzk=$riaddok->uzk;
-  $azk=$riaddok->azk;
-  $ajo=$riaddok->ajo;
-  $aju=$riaddok->aju;
-
-  $h_hod1=1*$riaddok->mzk;
-  $h_hod2=1*$riaddok->mdp;
-
-  $h_zk2n=1*$riaddok->nzk;
-  $h_dn2n=1*$riaddok->ndp;
-
-
-    }
-
-  }
-
 
 //doklad polozky
 
@@ -369,9 +624,7 @@ $i=0;
 $rsluz=mysql_fetch_object($sluz);
 
 $h_ucm=1*$rsluz->ucm;
-if( $h_ucm == 0 ) $h_ucm=$h_uce;
 $h_ucd=1*$rsluz->ucd;
-if( $h_ucd == 0 ) $h_ucd=$h_uce;
 $h_hox=1*$rsluz->hod;
 if( $h_hox == 0 ) $h_hox=$h_hod;
 
@@ -385,11 +638,10 @@ if( $h_str == 0 ) $h_str=$h_str;
 $h_zak=1*$rsluz->zak;
 if( $h_zak == 0 ) $h_fak=$h_zak;
 
-if( $h_hox == 0 AND $i == 0 AND $h_hod1 != 0 ) { $h_hox=1*$h_hod1; $ucet_zk2=$h_ucm; $h_ucezk2n=$h_ucd; }
-if( $h_hox == 0 AND $i == 1 AND $h_hod2 != 0 ) { $h_hox=1*$h_hod2; $ucet_dn2=$h_ucm; $h_ucedn2n=$h_ucd; }
-if( $h_hox == 0 AND $i == 2 AND $h_hod3 != 0 ) { $h_hox=1*$h_hod3; }
-if( $h_hox == 0 AND $i == 3 AND $h_hod4 != 0 ) { $h_hox=1*$h_hod4; }
-
+if( $h_hox == 0 AND $i == 0 AND $h_hod1 != 0 ) $h_hox=1*$h_hod1;
+if( $h_hox == 0 AND $i == 1 AND $h_hod2 != 0 ) $h_hox=1*$h_hod2;
+if( $h_hox == 0 AND $i == 2 AND $h_hod3 != 0 ) $h_hox=1*$h_hod3;
+if( $h_hox == 0 AND $i == 3 AND $h_hod4 != 0 ) $h_hox=1*$h_hod4;
 
 $h_hodu=$h_hodu+$h_hox;
 
@@ -410,43 +662,12 @@ $i = $i + 1;
   }
 
 
-if( $pau80 == 1 )
-  {
-if( $uzk > 0 ) { $ucet_zk2=$uzk; } 
-if( $udp > 0 ) { $ucet_dn2=$udp; }
-if( $azk > 0 ) { $ucet_zk2=substr($ucet_zk2,0,3).$azk; }
-if( $adp > 0 ) { $ucet_dn2=substr($ucet_dn2,0,3).$adp; }
-
-
-if( $h_zk2n != 0 )
-{
-$sqty = "INSERT INTO F$kli_vxcf"."_uctvsdp ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '5', '$ucet_zk2', '$h_ucezk2n', '27', 0, '$h_zk2n', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '', $kli_uzid );"; 
-$ulozene = mysql_query("$sqty"); 
-}
-if( $h_dn2n != 0 )
-{
-$sqty = "INSERT INTO F$kli_vxcf"."_uctvsdp ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '5', '$ucet_dn2', '$h_ucedn2n', '27', 0, '$h_dn2n', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '', $kli_uzid );"; 
-$ulozene = mysql_query("$sqty"); 
-}
-if( $ajo == 1 AND $aju > 0 AND $h_dn2n != 0 )
-{
-$sqty = "INSERT INTO F$kli_vxcf"."_uctvsdp ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '5', '$aju', '$ucet_dn2', '10', 0, '$h_dn2n', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '', $kli_uzid );"; 
-$ulozene = mysql_query("$sqty");  
-}
-  }
-//koniec ak pau80=1
-
-
-
      }
 //koniec vseobecny z poloziek
 
 
 //bankovy z poloziek podla vzoru
-if( $h_drupoh == 4 AND $h_odkial == 10 )
+if( $h_drupoh == 4 AND $h_odkial == 29 )
 {
 $h_uce = strip_tags($_GET['h_uce']);
 $h_dok = strip_tags($_GET['h_dok']);
@@ -506,7 +727,7 @@ $sqldok = mysql_query("$sqltt");
   }
 
 $sqty = "INSERT INTO F$kli_vxcf"."_uctban ( dok,ddu,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '$ddu', '0', '$h_ucm', '$h_ucd', '$rsluz->rdp', '0', '$h_hox', '0', '', '0', '0', ".
+" VALUES ('$h_dok', '0', '$ddu', '$h_ucm', '$h_ucd', '$rsluz->rdp', '0', '$h_hox', '0', '', '0', '0', ".
 " '$rsluz->ico', '$rsluz->fak', ".
 " '$rsluz->pop', '$rsluz->str', '$rsluz->zak', '', '$kli_uzid' );"; 
 
@@ -533,196 +754,13 @@ $i = $i + 1;
      }
 //koniec bankovy z poloziek
 
-// vydavkovy z poloziek podla vzoru
-if( $h_drupoh == 22 AND $h_odkial == 10 )
-{
-$h_uce = strip_tags($_GET['h_uce']);
-$h_dok = strip_tags($_GET['h_dok']);
-$h_ico = strip_tags($_GET['h_ico']);
-$h_fak = strip_tags($_GET['h_fak']);
-$h_hod = 1*strip_tags($_GET['h_hod']);
-
-$h_hod1 = 1*strip_tags($_GET['h_hod1']);
-$h_hod2 = 1*strip_tags($_GET['h_hod2']);
-$h_hod3 = 1*strip_tags($_GET['h_hod3']);
-$h_hod4 = 1*strip_tags($_GET['h_hod4']);
-
-
-//doklad polozky
-
-$hodu=0;
-
-$sluztt = "SELECT * FROM F$kli_vxcf"."_uctvzordok WHERE dok = '$vzordok' ORDER BY cpl";
-$sluz = mysql_query("$sluztt");
-$slpol = mysql_num_rows($sluz);
-
-$i=0;
-  while ($i <= $slpol )
-  {
-
-  if (@$zaznam=mysql_data_seek($sluz,$i))
-{
-$rsluz=mysql_fetch_object($sluz);
-
-$h_ucm=1*$rsluz->ucm;
-if( $h_ucm == 0 ) $h_ucm=$h_uce;
-$h_ucd=1*$rsluz->ucd;
-if( $h_ucd == 0 ) $h_ucd=$h_uce;
-$h_hox=1*$rsluz->hod;
-if( $h_hox == 0 ) $h_hox=$h_hod;
-
-$h_fakxx=1*$rsluz->fak;
-if( $h_fak == 0 ) $h_fak=$h_fakxx;
-$h_icoxx=1*$rsluz->ico;
-if( $h_ico == 0 ) $h_ico=$h_icoxx;
-
-$h_strxx=1*$rsluz->str;
-if( $h_str == 0 ) $h_str=$h_strxx;
-$h_zakxx=1*$rsluz->zak;
-if( $h_zak == 0 ) $h_zak=$h_zakxx;
-
-if( $h_hox == 0 AND $i == 0 AND $h_hod1 != 0 ) $h_hox=1*$h_hod1;
-if( $h_hox == 0 AND $i == 1 AND $h_hod2 != 0 ) $h_hox=1*$h_hod2;
-if( $h_hox == 0 AND $i == 2 AND $h_hod3 != 0 ) $h_hox=1*$h_hod3;
-if( $h_hox == 0 AND $i == 3 AND $h_hod4 != 0 ) $h_hox=1*$h_hod4;
-
-$pozice = 1*StrPos($pohp, "zdanenie20"); 
-
-if( $pozice > 0 )
-    {
-
-$sqltttx = "SELECT * FROM F$kli_vxcf"."_uctpokuct WHERE dok = $h_dok AND rdp = 31 ORDER BY cpl DESC LIMIT 1";
-$sqlzakx = mysql_query("$sqltttx");
-//echo "idem".$sqltttx;
-//exit;
-  if (@$zaznam=mysql_data_seek($sqlzakx,0))
-  {
-  $riadzakx=mysql_fetch_object($sqlzakx);
-  $h_ico=$riadzakx->ico;
-  $h_fak=$riadzakx->fak;
-  $h_str=$riadzakx->str;
-  $h_zak=$riadzakx->zak;
-  $h_hox=1*$riadzakx->hod*$fir_dph2/100;
-  }
-    }
-
-$pozice = 1*StrPos($pohp, "zdanenie10"); 
-
-if( $pozice > 0 )
-    {
-
-$sqltttx = "SELECT * FROM F$kli_vxcf"."_uctpokuct WHERE dok = $h_dok AND rdp = 31 ORDER BY cpl DESC LIMIT 1";
-$sqlzakx = mysql_query("$sqltttx");
-//echo "idem".$sqltttx;
-//exit;
-  if (@$zaznam=mysql_data_seek($sqlzakx,0))
-  {
-  $riadzakx=mysql_fetch_object($sqlzakx);
-  $h_ico=$riadzakx->ico;
-  $h_fak=$riadzakx->fak;
-  $h_str=$riadzakx->str;
-  $h_zak=$riadzakx->zak;
-  $h_hox=1*$riadzakx->hod*$fir_dph1/100;
-  }
-    }
-
-//dok  poh  cpl  ucm  ucd  rdp  dph  hod  hodm  kurz  mena  zmen  ico  fak  pop  str  zak  unk  id  datm  
-
-$sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '2', '$h_ucm', '$h_ucd', '$rsluz->rdp', '0', '$h_hox', '0', '', '0', '0', ".
-" '$h_ico', '$h_fak', ".
-" '$rsluz->pop', '$h_str', '$h_zak', '', '$kli_uzid' );"; 
-
-$ulozene = mysql_query("$sqty"); 
-
-
-}
-$i = $i + 1;
-  }
-
-     }
-//koniec vydavkovy z poloziek podla vzoru
-
-
-// prijmovy z poloziek podla vzoru
-if( $h_drupoh == 21 AND $h_odkial == 10 )
-{
-$h_uce = strip_tags($_GET['h_uce']);
-$h_dok = strip_tags($_GET['h_dok']);
-$h_ico = strip_tags($_GET['h_ico']);
-$h_fak = strip_tags($_GET['h_fak']);
-$h_hod = 1*strip_tags($_GET['h_hod']);
-
-$h_hod1 = 1*strip_tags($_GET['h_hod1']);
-$h_hod2 = 1*strip_tags($_GET['h_hod2']);
-$h_hod3 = 1*strip_tags($_GET['h_hod3']);
-$h_hod4 = 1*strip_tags($_GET['h_hod4']);
-
-
-//doklad polozky
-
-$hodu=0;
-
-$sluztt = "SELECT * FROM F$kli_vxcf"."_uctvzordok WHERE dok = '$vzordok' ORDER BY cpl";
-$sluz = mysql_query("$sluztt");
-$slpol = mysql_num_rows($sluz);
-
-$i=0;
-  while ($i <= $slpol )
-  {
-
-  if (@$zaznam=mysql_data_seek($sluz,$i))
-{
-$rsluz=mysql_fetch_object($sluz);
-
-$h_ucm=1*$rsluz->ucm;
-if( $h_ucm == 0 ) $h_ucm=$h_uce;
-$h_ucd=1*$rsluz->ucd;
-if( $h_ucd == 0 ) $h_ucd=$h_uce;
-$h_hox=1*$rsluz->hod;
-if( $h_hox == 0 ) $h_hox=$h_hod;
-
-$h_fakxx=1*$rsluz->fak;
-if( $h_fak == 0 ) $h_fak=$h_fakxx;
-$h_icoxx=1*$rsluz->ico;
-if( $h_ico == 0 ) $h_ico=$h_icoxx;
-
-$h_strxx=1*$rsluz->str;
-if( $h_str == 0 ) $h_str=$h_strxx;
-$h_zakxx=1*$rsluz->zak;
-if( $h_zak == 0 ) $h_zak=$h_zakxx;
-
-if( $h_hox == 0 AND $i == 0 AND $h_hod1 != 0 ) $h_hox=1*$h_hod1;
-if( $h_hox == 0 AND $i == 1 AND $h_hod2 != 0 ) $h_hox=1*$h_hod2;
-if( $h_hox == 0 AND $i == 2 AND $h_hod3 != 0 ) $h_hox=1*$h_hod3;
-if( $h_hox == 0 AND $i == 3 AND $h_hod4 != 0 ) $h_hox=1*$h_hod4;
-
-
-$h_hodu=$h_hodu+$h_hox;
-
-//dok  poh  cpl  ucm  ucd  rdp  dph  hod  hodm  kurz  mena  zmen  ico  fak  pop  str  zak  unk  id  datm  
-
-$sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,zmen,mena,kurz,hodm,ico,fak,pop,str,zak,unk,id )".
-" VALUES ('$h_dok', '1', '$h_ucm', '$h_ucd', '$rsluz->rdp', '0', '$h_hox', '0', '', '0', '0', ".
-" '$h_ico', '$h_fak', ".
-" '$rsluz->pop', '$h_str', '$h_zak', '', '$kli_uzid' );"; 
-
-$ulozene = mysql_query("$sqty"); 
-
-
-}
-$i = $i + 1;
-  }
-     }
-//koniec prijmovy z poloziek podla vzoru
-
-
 $uce2=1*substr($h_uce,0,2);
 $zk02=1*substr($ucet_zk0,0,2);
 $ucm2=1*substr($h_ucm,0,2);
 $ucd2=1*substr($h_ucd,0,2);
 if( $ucm2 == 31 OR $ucm2 == 32 OR $ucm2 == 37 OR $ucd2 == 31 OR $ucd2 == 32 OR $ucd2 == 37 OR $uce2 == 31 OR $uce2 == 32 OR $uce2 == 37 OR $zk02 == 31 OR $zk02 == 32 OR $zk02 == 37 ) 
 { include("../ucto/saldo_zmaz_uhr.php"); }
+
 
 $txp01=$h_odkial;
 $txp02=$h_drupoh;

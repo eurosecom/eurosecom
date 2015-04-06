@@ -1056,9 +1056,17 @@ if( $drupoh == 8 )
 {
 $UCT_POH="UHR_POC";
 }
+
+$odkial="../import/FIR".$kli_vxcf."/";
+
+if( $drupoh == 11 )
+{
+$UCT_POH="uctvzordok".$kli_vrok;
+$odkial="../import/";
+}
 ?>
 <script type="text/javascript">
-if( !confirm ("Chcete importovaù poloûky \r zo s˙boru ../import/FIR<?php echo $kli_vxcf; ?>/<?php echo $UCT_POH; ?>.CSV ?") )
+if( !confirm ("Chcete importovaù poloûky \r zo s˙boru <?php echo $odkial; ?><?php echo $UCT_POH; ?>.csv ?") )
          { window.close()  }
 else
          { location.href='oprsys.php?copern=56&page=1&drupoh=<?php echo $drupoh;?>'  }
@@ -1084,11 +1092,20 @@ if( $drupoh == 8 )
 {
 $UCT_POH="UHR_POC";
 }
-$copern=1;
 
-if( file_exists("../import/FIR$kli_vxcf/$UCT_POH.CSV")) echo "S˙bor ../import/FIR$kli_vxcf/$UCT_POH.CSV existuje<br />";
+$odkial="../import/FIR".$kli_vxcf."/";
 
-$subor = fopen("../import/FIR$kli_vxcf/$UCT_POH.CSV", "r");
+if( $drupoh == 11 )
+{
+$UCT_POH="uctvzordok".$kli_vrok;
+$odkial="../import/";
+}
+
+
+$suborxx=$odkial.$UCT_POH.".csv";
+if( file_exists("$suborxx")) echo "S˙bor ".$suborxx." existuje<br />";
+
+$subor = fopen("$suborxx", "r");
 while (! feof($subor))
   {
   $riadok = fgets($subor, 500);
@@ -1113,7 +1130,7 @@ $c_str=1*$x_str;
 $c_hod=1*$x_hod;
 $sql_dat=SqlDatum($x_dat);
 
-if( $c_hod != 0 )
+if( $x_dok != 0 AND $drupoh == 11 )
 {
 $sqult = "INSERT INTO F$kli_vxcf"."_$uctsys ( ume,dat,dok,ucm,ucd,rdp,ico,fak,str,zak,hod,pop,id )".
 " VALUES ( '$x_ume', '$sql_dat', '$x_dok', '$x_ucm', '$x_ucd', '$x_rdp', '$x_ico', '$x_fak', '$x_str', '$x_zak', '$x_hod', '$x_pop', $kli_uzid ); "; 
@@ -1838,6 +1855,14 @@ window.open('../faktury/int_fakt2014medo.php?copern=55&page=1&h_sys=' + h_sys + 
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 <?php                                       } ?>
 
+<?php if( $medo == 1 AND $kli_vrok == 2015 ) { ?>
+var h_obdp = document.forms.formct2.h_obdp.value;
+var h_sys = document.forms.formct2.h_sys.value;
+
+window.open('../faktury/int_fakt2015medo.php?copern=55&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+<?php                                       } ?>
+
 <?php if( $berext == 1 AND $kli_vrok == 2013 ) { ?>
 var h_obdp = document.forms.formct2.h_obdp.value;
 var h_sys = document.forms.formct2.h_sys.value;
@@ -2149,6 +2174,36 @@ if($urob) { $blok674=" - BLOKOVAN…"; }
 <option value="685" >SYS 685 ZK VrbovÈ <?php echo $blok685;?></option>
 <option value="674" >SYS 674 GastroBENE <?php echo $blok674;?></option>
 <?php                                         } ?>
+<?php if( $medo == 1 AND $kli_vrok == 2015 ) { ?>
+<?php
+$blok605="";
+$blok655="";
+$blok686="";
+$blok675="";
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak605_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok605=" - BLOKOVAN…"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak655_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok655=" - BLOKOVAN…"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak686_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok686=" - BLOKOVAN…"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak675_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok675=" - BLOKOVAN…"; }
+?>
+
+<option value="605" >SYS 605 Ubytovanie <?php echo $blok605;?></option>
+<option value="655" >SYS 655 FastFood NM <?php echo $blok655;?></option>
+<option value="686" >SYS 686 ZK VrbovÈ <?php echo $blok686;?></option>
+<option value="675" >SYS 675 GastroBENE <?php echo $blok675;?></option>
+<?php                                         } ?>
+
 
 <?php if( $berext == 1 AND $kli_vrok == 2013 ) { ?>
 <?php
@@ -2284,14 +2339,14 @@ $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 AND ( ume >= $h_obdp
   }
 if( $drupoh == 11 )
 {
-$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 AND ( ume >= $h_obdp.".$kli_vrok." AND ume <= $h_obdk.".$kli_vrok." ) ORDER BY dok,cpl";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY dok,cpl";
   if( $h_obdp == 100 )
   {
-  $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 AND ( ume <= $h_obdk.".$kli_vrok." ) ORDER BY dok,cpl";
+  $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY dok,cpl";
   }
   if( $h_obdk == 100 )
   {
-  $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 AND ( ume >= $h_obdp.".$kli_vrok." ) ORDER BY dok,cpl";
+  $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY dok,cpl";
   }
 }
 if( $drupoh == 8 OR $drupoh == 7 OR $drupoh == 6 )

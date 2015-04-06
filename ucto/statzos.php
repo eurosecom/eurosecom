@@ -763,7 +763,7 @@ window.open('fin1a12dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor
 
 </script>
 </HEAD>
-<BODY class="white" onload="VyberVstup();">
+<BODY class="white" >
 
 <?php 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendens'.$kli_uzid;
