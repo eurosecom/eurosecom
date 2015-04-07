@@ -1677,6 +1677,14 @@ function vlozDov()
 window.open('vloz_dmn.php?copern=20&cislo_oc=<?php echo $cislo_oc; ?>', '_self' )
                     }
 
+function zamsodpoc()
+                    {
+window.open('ktomaodpocetzp.php?copern=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+                    }
+
+
+
+
 </script>
 
 </HEAD>
@@ -1858,32 +1866,52 @@ if ( $copern != 5 AND $copern != 6 AND $copern != 8 )
 <tr>
 <FORM name="formhl1" class="hmenu" method="post" action="zamestnanci.php?sys=<?php echo $sys; ?>&page=1&copern=9" >
 <td class="hmenu" ><img src='../obr/hladaj.png' width=20 height=12 border=0>
+<td class="hmenu" align="left">
+<a href="#" onclick="zamsodpoc();">
+odpoèet ZP <img src='../obr/tlac.png' width=20 height=15 border=0 title="Zamestnanci s nastaveným odpoètom ZP"></a>
+</td>
 <td class="hmenu" ></td>
 <td class="hmenu" ></td>
-<td class="hmenu" ></td>
+
+<td class="hmenu" >
 <?php
 if ( $kli_uzall > 3500 )
   {
 ?>
-<td class="hmenu" ><a href='zamestnanci.php?sys=<?php echo $sys; ?>&copern=67&page=1'>
+<a href='zamestnanci.php?sys=<?php echo $sys; ?>&copern=67&page=1'>
 <img src='../obr/kos.png' width=20 height=15 border=0 title="Vymazanie všetkých položiek"></a>
+<?php
+  }
+?>
+</td>
 <td class="hmenu" ><a href='zamestnanci.php?sys=<?php echo $sys; ?>&copern=55&page=1'>
+<?php
+if ( $kli_uzall > 3500 )
+  {
+?>
 <img src='../obr/import.png' width=20 height=15 border=0 title="Import údajov"></a>
 <?php
   }
 ?>
+</td>
 </tr>
 <tr>
 <td class="hmenu"><input type="text" name="hladaj_oc" id="hladaj_oc" size="11" value="<?php echo $hladaj_oc;?>" />
 <td class="hmenu"><input type="text" name="hladaj_prie" id="hladaj_prie" size="30" value="<?php echo $hladaj_prie;?>" /> 
 <td class="hmenu"><input type="text" name="hladaj_zmes" id="hladaj_zmes" size="30" value="<?php echo $hladaj_zmes;?>" /> 
 <td class="hmenu"><input type="text" name="hladaj_ztel" id="hladaj_ztel" size="30" value="<?php echo $hladaj_ztel;?>" /> 
-<td class="obyc" align="left"><INPUT type="submit" id="hlad1" name="hlad1" value="H¾ada" ></td>
+<td class="obyc" align="left"><INPUT type="submit" id="hlad1" name="hlad1" value="H¾ada" >
+</td>
 </FORM>
-<FORM name="formhl2" class="hmenu" method="post" action="zamestnanci.php?sys=<?php echo $sys; ?>&page=1&copern=1" >
-<td class="obyc" align="left"><INPUT type="submit" id="hlad2" name="hlad2" value="Všetko" ></td>
 </tr>
+<tr>
+<FORM name="formhl2" class="hmenu" method="post" action="zamestnanci.php?sys=<?php echo $sys; ?>&page=1&copern=1" >
+<td class="hmenu" colspan="4"></td>
+<td class="obyc" align="left"><INPUT type="submit" id="hlad2" name="hlad2" value="Všetko" >
+</td>
 </FORM>
+</tr>
+
 <?php
      }
 ?>
@@ -2414,7 +2442,7 @@ document.formv1.h_zpno.checked = "checked";
 ?>
 </td>
 
-<td class="fmenu" colspan="2">Neprihlásený do ZP:
+<td class="fmenu" colspan="1">Neprihlásený do ZP:
  <input type="checkbox" name="h_zpnie" value="1"  />
 <?php
 if ( $h_zpnie == 1 )
@@ -2426,7 +2454,7 @@ document.formv1.h_zpnie.checked = "checked";
 <?php
    }
 ?>
-Odvodová ú¾ava ZP:
+<td class="fmenu" colspan="1">Odvodová ú¾ava ZP:
  <input type="checkbox" name="h_deti_sp" value="1"  />
 <?php
 if ( $h_deti_sp == 1 )
