@@ -2763,14 +2763,14 @@ echo "Obdobie: ".$cislo_oc.".mesiac ".$kli_vrok."  ";
 </td>
 
 <td colspan="2">
-<a href="#" onClick="Generuj();">
-UCRP<img src='../obr/zoznam.png' width=15 height=15 border=0 title='Generovanie naèítania=priradenie úètu k rozpoètovej položke' ></a>
+<a href="#" onClick="Generuj();" title='Generovanie naèítania=priradenie úètu k rozpoètovej položke'>
+UCRP<img src='../obr/zoznam.png' width=15 height=15 border=0  ></a>
  - 
-<a href="#" onClick="AkyZdroj();">
-ZD<img src='../obr/zoznam.png' width=15 height=15 border=0 title='Priradenie zdroja financovania k bankovému úètu,dokladu,úètu' ></a>
+<a href="#" onClick="AkyZdroj();" title='Priradenie zdroja financovania k bankovému úètu,dokladu,úètu'>
+ZD<img src='../obr/zoznam.png' width=15 height=15 border=0  ></a>
  - 
-<a href="#" onClick="AkyZdroj2();">
-ZDRP<img src='../obr/zoznam.png' width=15 height=15 border=0 title='Priradenie zdroja,rozp.položky ku kombinácii úèet,doklad,hodnota' ></a>
+<a href="#" onClick="AkyZdroj2();" title='Priradenie zdroja,rozp.položky ku kombinácii úèet,doklad,hodnota'>
+ZDRP<img src='../obr/zoznam.png' width=15 height=15 border=0  ></a>
 </tr>
 </table>
 
