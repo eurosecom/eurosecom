@@ -483,6 +483,27 @@ var h_oc = document.forms.formfa1.h_oc.value;
 window.open('../mzdy/priznaniefoa_xml<?php echo $rokfoa; ?>.php?cislo_oc=' + h_oc + '&copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
+
+//oznamenie ZRD
+<?php
+$rokzrd=$kli_vrok;
+?>
+
+function TlacZRD()
+                {
+var h_oc = document.forms.formzrd1.h_oc.value;
+
+window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&copern=101&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function UpravZRD()
+                {
+var h_oc = document.forms.formzrd1.h_oc.value;
+
+window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&copern=101&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
    
 </script>
 </HEAD>
@@ -921,6 +942,39 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 </table>
 
 
+
+<table class="vstup" width="100%" >
+<FORM name="formzrd1" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacZRD();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
+</td>
+<td class="bmenu" width="68%">Oznámenie o zrazení a odvedení zrážkovej dane pod¾a §43 ods. 3 písm. o) "poskytovatelia zdravotníckej starostlivosti"
+<?php
+$sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ORDER BY prie,meno");
+?>
+<select size="1" name="h_oc" id="h_oc" >
+<?php while($zaznam=mysql_fetch_array($sql)):?>
+<option value="<?php echo $zaznam["oc"];?>" >
+<?php echo $zaznam["prie"];?> <?php echo $zaznam["meno"];?> osè <?php echo $zaznam["oc"];?></option>
+<?php endwhile;?>
+</select>
+</td>
+
+<td class="bmenu" width="28%"></td> 
+
+<td class="bmenu" width="2%"></td>
+
+<td class="bmenu" width="2%"></td>
+
+<td class="bmenu" width="2%">
+<a href="#" onClick="UpravZRD();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty' ></a>
+</td>
+</tr>
+</FORM>
+</table>
 
 <?php
 }
