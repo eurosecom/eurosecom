@@ -269,78 +269,42 @@ div.input-echo {
   background-color: #fff;
   position: absolute;
 }
-
-
-table.poistenci {
-  position: absolute;
-  top: 792px;
-  left: 45px;
-  width: 890px;
-  font-size: 14px;
+div.wrap-vozidla {
+  overflow: auto;
+  width: 100%;
+  background-color: #fff;
+  min-height: 100px;
 }
-table.poistenci td {
-  height: 26px;
-  line-height: 26px;
-  border-bottom: 2px solid black; 
-  text-align: right;
-}
-img.btn-row-tool {
-  width: 20px;
-  height: 20px;
-}
-img.row-delete {
-  position: relative;
-  top: 4px;
+div.wrap-vozidla img {
+  display: inline-block;
   width: 18px;
   height: 18px;
-}
-div.ponuka-box {
-  z-index: 1;
-  position: absolute;
-  left: 20px;
-  overflow: auto;
-  height: 350px;
-  width: 530px;
-}
-div.ponuka-area {
-  width: 508px;
-  background-color: lightblue;
-}
-div.ponuka-area h2 {
-  float: left;
-  height: 26px;
-  line-height: 26px;
-  margin-top: 5px;
-}
-img.skry {
-  float: right;
-  position: relative;
-  top: 4px;
-  right: 4px;
-  width: 20px;
-  height: 20px;
   cursor: pointer;
 }
-table.ponuka {
-  width: 500px;
-  margin: 0 auto;
+table.vozidla {
+  width: 850px;
+  margin: 10px auto;
+  overflow: auto;
+  border: 0px solid black;
 }
-table.ponuka th {
+table.vozidla thead th {
+  height: 11px;
+  padding: 5px 0 3px 0;
   font-size: 11px;
-  font-weight: normal;
-  height: 16px;
-  line-height: 16px;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+  background-color: lightblue;
 }
-table.ponuka td {
+table.vozidla tbody td {
   height: 26px;
   line-height: 26px;
-  font-size: 13px;
-  background-color: white;
-  border: 2px solid lightblue;
+  border-top: 2px solid #add8e6;
+  font-size: 15px;
 }
-input.ok-btn {
+table.vozidla tbody img {
   position: relative;
-  top: 2px;
+  top: 4px;
 }
 </style>
 
@@ -449,7 +413,7 @@ input.ok-btn {
   </td>
   <td>
    <div class="bar-btn-form-tool">
-    <img src="../obr/ikony/info_blue_icon.png" onclick="VysvetlVypln();" title="Vysvetlivky" class="btn-form-tool">
+<!--     <img src="../obr/ikony/info_blue_icon.png" onclick="VysvetlVypln();" title="Vysvetlivky" class="btn-form-tool"> dopyt, zatiaæ nie -->
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
@@ -462,8 +426,9 @@ input.ok-btn {
 <FORM name="formv1" method="post"
       action="oznamenie_zrd2015.php?copern=801&cislo_cpl=<?php echo $cislo_cpl; ?>&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=<?php echo $strana; ?>">
 <?php
-$clas1="noactive"; $clas2="noactive";
+$clas1="noactive"; $clas2="noactive"; $clas3="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
+if ( $strana == 3 ) $clas3="active";
 
 $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=".$cislo_xplat;
 ?>
@@ -471,7 +436,11 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=1', '_self');"
     class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=2', '_self');"
-    class="<?php echo $clas2; ?> toleft">Drûitelia</a>
+    class="<?php echo $clas2; ?> toleft">Zoznam drûiteæov</a>
+<?php if ( $strana == 3 ) { ?>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=3', '_self');"
+    class="<?php echo $clas3; ?> toleft">⁄prava drûiteæa</a>
+<?php                     } ?>
  <h6 class="toright">TlaËiù:</h6>
 <?php if ( $strana != 2 ) { ?>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
@@ -484,50 +453,34 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 
 <!-- ZAHLAVIE -->
 <span class="text-echo" style="top:344px; left:56px;"><?php echo $fir_fdic; ?></span>
-<span class="text-echo" style="top:344px; left:723px;"><?php echo $zaobdobie; ?></span> <!-- dopyt, nie je funkËnÈ -->
+<span class="text-echo" style="top:344px; left:723px;"><?php echo $zaobdobie; ?></span>
 <span class="text-echo" style="top:344px; left:769px;"><?php echo $kli_vrok; ?></span>
 
 <!-- PLATITEL FO vzdy --> <!-- dopyt, nezd· sa mi, ûe vûdy FO, keÔ na 2.strane dole mÙûe byù aj poskytovateæ zdrv.starostlivosti -->
 <div class="input-echo" style="width:357px; top:452px; left:52px;"><?php echo $meno; ?></div>
 <div class="input-echo" style="width:241px; top:452px; left:432px;"><?php echo $prie; ?></div>
-<div class="input-echo" style="width:111px; top:452px; left:693px;"><?php echo $titulp; ?></div> <!-- dopyt, nie je funkËnÈ -->
+<div class="input-echo" style="width:111px; top:452px; left:693px;"><?php echo $ptitl; ?></div> <!-- dopyt, nie je funkËnÈ -->
 <div class="input-echo" style="width:66px; top:452px; left:827px;"><?php echo $titulz; ?></div> <!-- dopyt, nie je funkËnÈ -->
 <div class="input-echo" style="width:196px; top:505px; left:52px;"><?php echo $nar_sk; ?></div>
 
-<!-- ADRESA vzdy z udajov o zamestnancovi -->
+<!-- ADRESA dopyt, nedorieöenÈ adresy pre po -->
 <div class="input-echo" style="width:634px; top:696px; left:52px;"><?php echo $zuli; ?></div>
 <div class="input-echo" style="width:173px; top:696px; left:720px;"><?php echo $es; ?></div> <!-- dopyt, nie je funkËnÈ -->
 <div class="input-echo" style="width:105px; top:750px; left:52px;"><?php echo $es; ?></div> <!-- dopyt, nie je funkËnÈ -->
 <div class="input-echo" style="width:700px; top:750px; left:191px;"><?php echo $zmes; ?></div>
 
 
-<!-- ADRESA ZDRAVOTNICKEHO ZARIADENIA z udajov o firme -->
-<div class="input-echo" style="width:634px; top:826px; left:52px;"><?php echo $fir_fuli; ?></div>
-<div class="input-echo" style="width:173px; top:826px; left:720px;"><?php echo $fir_fcdm; ?></div>
-<div class="input-echo" style="width:105px; top:880px; left:52px;"><?php echo $fir_fpsc; ?></div>
-<div class="input-echo" style="width:700px; top:880px; left:191px;"><?php echo $fir_fmes; ?></div>
-
-
-<input type="text" name="zzul" id="zzul" title="zzul" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:1100px; left:200px;"/> <!-- dopyt, m·m daù vöade preË -->
-
-<input type="text" name="zzcs" id="zzcs" title="zzcs" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:1140px; left:200px;"/> <!-- dopyt, m·m daù vöade preË -->
-
-<input type="text" name="zzps" id="zzps" title="zzps" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:1180px; left:200px;"/> <!-- dopyt, m·m daù vöade preË -->
-
-<input type="text" name="zzms" id="zzms" title="zzms" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:1220px; left:200px;"/> <!-- dopyt, m·m daù vöade preË -->
+<!-- Adresa zdravotnickeho zariadenie -->
+<input type="text" name="zzul" id="zzul" style="width:634px; top:823px; left:52px;"/>
+<input type="text" name="zzcs" id="zzcs" style="width:173px; top:823px; left:719px;"/>
+<input type="text" name="zzps" id="zzps" style="width:105px; top:879px; left:52px;"/>
+<input type="text" name="zzms" id="zzms" style="width:701px; top:879px; left:191px;"/>
 
 <!-- Suhrnne udaje -->
 <div class="input-echo" style="width:220px; top:943px; left:487px;"><?php echo $r15; ?></div> <!-- dopyt, nie je funkËnÈ -->
 <div class="input-echo" style="width:220px; top:982px; left:487px;"><?php echo $r16; ?></div> <!-- dopyt, nie je funkËnÈ -->
-<input type="text" name="datum" id="datum" title="datum" onkeyup="CiarkaNaBodku(this);" onkeydown=""
+<input type="text" name="datum" id="datum" title="datum" onkeyup="CiarkaNaBodku(this);"
        style="width:196px; top:1020px; left:510px;"/>
-
-
-
 
 <?php                                        }
 //koniec copern == 101, strana 1
@@ -536,26 +489,26 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 
 <?php if ( $copern == 101 AND $strana == 2 ) {
 
-//VYPIS ZOZNAMU VOZIDIEL
+//VYPIS ZOZNAMU DRZITELOV
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY cpl";
-
 $sluz = mysql_query("$sqltt");
 $slpol = mysql_num_rows($sluz);
 ?>
 <div class="wrap-vozidla">
+ <div style="line-height:40px; margin:10px 0 0 45px; overflow:auto;">
+  <h2 class="toleft" style="font-size:18px; font-weight:;">Drûitelia a v˝öka nepeÚaûnÈho plnenia</h2>
+  <img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="Nov˝ drûiteæ"
+       class="toleft" style="margin:10px 0 0 10px;">
+ </div>
  <table class="vozidla">
- <caption>Zoznam 
-  <img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="NovÈ vozidlo">
- </caption>
  <thead>
   <tr>
-   <td width="10%">DIC</td>
-   <td width="35%">FO/PO</td>
-   <td width="30%">prijem</td>
-   <td width="10%">&nbsp;</td>
+   <th width="12%">&nbsp;DI»</th>
+   <th width="45%">FO / PO</th>
+   <th width="15%" style="text-align:right;">PrijatÈ peÚaûnÈ plnenie</th>
+   <th width="28%">&nbsp;</th>
   </tr>
  </thead>
-
 <?php
 $i=0;
   while ( $i <= $slpol )
@@ -566,13 +519,15 @@ $rsluz=mysql_fetch_object($sluz);
 ?>
  <tbody>
   <tr>
-   <td><?php echo $rsluz->xdic;?></td>
+   <td>&nbsp;<?php echo $rsluz->xdic;?></td>
    <td><?php echo $rsluz->xmfo." ".$rsluz->xpfo." ".$rsluz->xnpo;?></td>
-   <td><?php echo $rsluz->prj;?></td>
+   <td style="text-align:right;"><?php echo $rsluz->prj;?></td>
 
-   <td align="center">
-    <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl;?>);" title="Upraviù ">&nbsp;&nbsp;
-    <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl;?>);" title="Vymazaù ">
+   <td>
+    <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl;?>);"
+         title="Vymazaù" class="toright" style="margin-right:80px;">
+    <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl;?>);"
+         title="Upraviù" class="toright" style="margin-right:20px;">
    </td>
   </tr>
  </tbody>
@@ -589,52 +544,46 @@ $i=$i+1;
 
 
 <?php if ( $copern == 101 AND $strana == 3 ) { ?>
-
-
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny"
-  class="btn-top-formsave-noactive">
-
-<img src="../dokumenty/dan_z_prijmov2015/oznamenie_zrd/oznamenie_o_zrd_str2.jpg"
+<img src="../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str2.jpg"
      alt="tlaËivo Ozn·menie nepeÚaûnÈ plnenie 2.strana 221kB" class="form-background">
-
-
+<span class="text-echo" style="top:93px; left:182px;"><?php echo $fir_fdic; ?></span> <!-- dopyt, toto m· byù diË zamestnanca -->
+<span class="text-echo" style="top:93px; left:527px;"><?php echo $zaobdobie; ?></span>
+<span class="text-echo" style="top:93px; left:574px;"><?php echo $kli_vrok; ?></span>
 
 <!-- DRZITEL  -->
-
-<input type="text" name="xdic" id="xdic" title="xdic" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:200px; left:200px;"/>
-
+<input type="text" name="xdic" id="xdic" title="xdic" onkeydown=""
+       style="width:220px; top:186px; left:52px;"/>
 <input type="text" name="prj" id="prj" title="prj" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:200px; left:500px;"/>
+       style="width:220px; top:178px; left:630px;"/>
+<!-- FO -->
+<input type="text" name="xpfo" id="xpfo" title="xpfo" onkeydown=""
+       style="width:358px; top:262px; left:52px;"/>
+<input type="text" name="xmfo" id="xmfo" title="xmfo" onkeydown=""
+       style="width:244px; top:262px; left:431px;"/>
+<!-- dopyt, ch˝baj˙ inputy pre titul pred a za menom -->
 
-<input type="text" name="xmfo" id="xmfo" title="xmfo" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:240px; left:200px;"/>
+<!-- PO -->
+<input type="text" name="xnpo" id="xnpo" title="xnpo" onkeydown=""
+       style="width:842px; top:337px; left:52px;"/>
 
-<input type="text" name="xpfo" id="xpfo" title="xpfo" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:280px; left:200px;"/>
-
-<input type="text" name="xnpo" id="xnpo" title="xnpo" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:320px; left:200px;"/>
-
-<input type="text" name="xuli" id="xuli" title="xuli" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:360px; left:200px;"/>
-
-<input type="text" name="xcis" id="xcis" title="xcis" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:400px; left:200px;"/>
-
-<input type="text" name="xpsc" id="xpsc" title="xpsc" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:440px; left:200px;"/>
-
+<!-- Adresa -->
+<input type="text" name="xuli" id="xuli" title="xuli" onkeydown=""
+       style="width:634px; top:412px; left:52px;"/>
+<input type="text" name="xcis" id="xcis" title="xcis" onkeydown=""
+       style="width:173px; top:412px; left:719px;"/>
+<input type="text" name="xpsc" id="xpsc" title="xpsc" onkeydown=""
+       style="width:105px; top:467px; left:52px;"/>
 <input type="text" name="xmes" id="xmes" title="xmes" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:480px; left:200px;"/>
+       style="width:701px; top:467px; left:191px;"/>
 
 <!-- vyplnil a pocet priloh cez echo  -->
-
-<input type="text" name="datd" id="datd" title="datum" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:520px; left:200px;"/>
-
-
-
+<!-- Vypracoval -->
+<div class="input-echo" style="width:310px; top:919px; left:52px;"><?php echo $fir_mzdt05; ?></div>
+<input type="text" name="datd" id="datd" title="datum" onkeyup="CiarkaNaBodku(this);"
+       style="width:198px; top:918px; left:385px;"/>
+<div class="input-echo" style="width:290px; top:919px; left:602px;"><?php echo $fir_mzdt04; ?></div>
+<!-- Prilozene strany -->
+<div class="input-echo" style="width:105px; top:989px; left:172px;"><?php echo $prilohy; ?></div> <!-- dopyt, nie je funkËnÈ -->
 
 <?php                       }
 //koniec copern == 101, strana 3
