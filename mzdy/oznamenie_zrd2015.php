@@ -201,7 +201,7 @@ $strana=2;
 
 
 //nacitaj 
-if ( $copern == 101 )
+if ( $copern == 101 OR $copern == 40 )
      {
 //udaje o platitelovi - zamestnancovi
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_xplat ";
@@ -299,6 +299,48 @@ if( $nar_sk == '00.00.0000' ) { $nar_sk=""; }
 
 
   }
+
+//suma dane
+$celprj=0;
+$sqlfir = "SELECT SUM(prj) AS sumprj FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $celprj=1*$riaddok->sumprj;
+    }
+
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET prj=$celprj WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET kkx1=prj*19 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET kkx1=kkx1/100 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET kkx1=kkx1-0.0049 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET zrd=kkx1 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+
+$r15=0; $r16=0;
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrd WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $r15=$riaddok->prj;
+    $r16=$riaddok->zrd;
+    }
+
+$prilohy=0; $pocetdic=0; $pocetdic2=0; $pocetdic3=0;
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+if( $sqldok ) { $pocetdic = mysql_num_rows($sqldok); }
+
+$pocetdic2=$pocetdic-2;
+$pocetdic3=$pocetdic2/3;
+$prilohy=ceil($pocetdic3);
+if( $prilohy < 0 ) { $prilohy=0; }
+
 
 
      }
@@ -411,7 +453,7 @@ table.vozidla tbody img {
 
   function TlacVykaz()
   {
-   window.open('oznamenie_zrd2015.php?copern=40&cislo_xplat=<?php echo $cislo_xplat; ?>&h_oprav=<?php echo $h_oprav; ?>', '_blank');
+   window.open('oznamenie_zrd2015.php?copern=40&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=9999', '_blank');
   }
 
 
@@ -462,8 +504,8 @@ table.vozidla tbody img {
  <tr>
   <td class="header">Ozn·menie o dani z nepeÚaûnÈho plnenia -
 <?php
-$nazovplat=$oc." ".$meno." ".$prie;
-if( $cislo_xplat > 9999 ) { $nazovplat=$fir_fnazx; }
+$nazovplat=$cislo_xplat." ".$oc." ".$meno." ".$prie;
+if( $cislo_xplat > 9999 ) { $nazovplat=$cislo_xplat." ".$fir_fnazx; }
 ?>
   <span class="subheader"><?php echo $nazovplat; ?></span>
   </td>
@@ -499,7 +541,9 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 <?php                     } ?>
  <h6 class="toright">TlaËiù:</h6>
 <?php if ( $strana != 2 ) { ?>
+<div id="uvolni" onmouseover="return Povol_uloz();" class="uvolni-top-submit">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+</div>
 <?php                     } ?>
 </div>
 
@@ -590,12 +634,19 @@ $rsluz=mysql_fetch_object($sluz);
          title="Upraviù" class="toright" style="margin-right:20px;">
    </td>
   </tr>
+
  </tbody>
 <?php
  }
 $i=$i+1;
    }
 ?>
+ <tbody>
+  <tr>
+   <td>&nbsp;SPOLU <?php echo $r15;?></td>
+
+  </tr>
+ </tbody>
  </table>
 </div>
 <?php                                        }
@@ -606,7 +657,7 @@ $i=$i+1;
 <?php if ( $copern == 101 AND $strana == 3 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str2.jpg"
      alt="tlaËivo Ozn·menie nepeÚaûnÈ plnenie 2.strana 221kB" class="form-background">
-<span class="text-echo" style="top:93px; left:182px;"><?php echo $fir_fdic; ?></span> <!-- dopyt, toto m· byù diË zamestnanca -->
+<span class="text-echo" style="top:93px; left:182px;"><?php echo $mdic; ?></span> <!-- dopyt, toto m· byù diË zamestnanca, nie platitela -->
 <span class="text-echo" style="top:93px; left:527px;"><?php echo $zaobdobie; ?></span>
 <span class="text-echo" style="top:93px; left:574px;"><?php echo $kli_vrok; ?></span>
 
@@ -643,7 +694,7 @@ $i=$i+1;
        style="width:198px; top:918px; left:385px;"/>
 <div class="input-echo" style="width:290px; top:919px; left:602px;"><?php echo $fir_mzdt04; ?></div>
 <!-- Prilozene strany -->
-<div class="input-echo" style="width:105px; top:989px; left:172px;"><?php echo $prilohy; ?></div> <!-- dopyt, nie je funkËnÈ -->
+<div class="input-echo" style="width:105px; top:989px; left:172px;"><?php echo $prilohy; ?></div>
 
 <?php                       }
 //koniec copern == 101, strana 3
@@ -658,7 +709,177 @@ $i=$i+1;
 if ( $copern == 40 )
 {
 
+if ( File_Exists("../tmp/priznaniedmv.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/priznaniedmv.$kli_uzid.pdf"); }
+     define('FPDF_FONTPATH','../fpdf/font/');
+     require('../fpdf/fpdf.php');
 
+$sirka_vyska="210,320";
+$velkost_strany = explode(",", $sirka_vyska);
+$pdf=new FPDF("P","mm", $velkost_strany );
+$pdf->Open();
+$pdf->AddFont('arial','','arial.php');
+
+//vytlac
+$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrd WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+
+$i=0;
+$j=0; //zaciatok strany ak by som chcel strankovat
+  while ($i == 0 )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+if ( $strana == 1 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',10);
+$pdf->SetLeftMargin(8);
+$pdf->SetTopMargin(10);
+
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str1.jpg') )
+{
+$pdf->Image('../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str1.jpg',0,0,210,297);
+}
+$pdf->SetY(72);
+$pdf->Cell(20,7," ","$rmc1",0,"R");$pdf->Cell(50,7,"$mdic","$rmc",1,"L");
+
+
+                                       } //koniec 1.strany
+
+}
+$i = $i + 1;
+  }
+
+
+if ( $strana == 2 OR $strana == 9999 ) {
+$sqlttv = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY xdic ";
+$sqlv = mysql_query("$sqlttv");
+$polv = mysql_num_rows($sqlv);
+$iv=0;
+
+  while ($iv <= 1 )
+  {
+  if (@$zaznam=mysql_data_seek($sqlv,$iv))
+{
+$hlavickav=mysql_fetch_object($sqlv);
+
+//1.drzitel
+if ( $iv == 0 )  {
+$pdf->AddPage();
+$pdf->SetFont('arial','',10);
+$pdf->SetLeftMargin(8);
+$pdf->SetTopMargin(10);
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str2.jpg') )
+{
+$pdf->Image('../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str2.jpg',0,0,210,297);
+}
+//toto je pociatocna vyska 1.drzitela na strane
+$pdf->SetY(40);
+$pdf->Cell(20,7," ","$rmc1",0,"R");$pdf->Cell(50,7,"$hlavickav->xdic","$rmc",1,"L");
+
+
+//tuto budu tlace 1.drzitela
+
+
+                 }
+
+//2.drzitel
+if ( $iv == 1 )  {
+//toto je pociatocna vyska 2.drzitela na strane
+$pdf->SetY(120);
+$pdf->Cell(20,7," ","$rmc1",0,"R");$pdf->Cell(50,7,"$hlavickav->xdic","$rmc",1,"L");
+
+
+
+//tuto budu tlace 2.drzitela
+
+
+                 }
+}
+$iv = $iv + 1;
+  }
+                                       } //koniec 2.strany
+
+if ( $strana == 3 OR $strana == 9999 ) {
+$stranav=0;
+$sqlttv = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY xdic LIMIT 2,100 ";
+$sqlv = mysql_query("$sqlttv");
+$polv = mysql_num_rows($sqlv);
+//echo $polv;
+//exit;
+$iv=0;
+$jv=0; //zaciatok strany ak by som chcel strankovat
+
+  while ($iv <= $polv )
+  {
+  if (@$zaznam=mysql_data_seek($sqlv,$iv) OR $polv == 0 )
+{
+$hlavickav=mysql_fetch_object($sqlv);
+
+if ( $jv == 0 ) {
+$stranav=$stranav+1;
+$pdf->AddPage();
+$pdf->SetFont('arial','',10);
+$pdf->SetLeftMargin(8);
+$pdf->SetTopMargin(10);
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str3.jpg') )
+{
+$pdf->Image('../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str3.jpg',0,0,210,297);
+}
+//toto je pociatocna vyska 1.drzitela na strane
+$pdf->SetY(40);
+$pdf->Cell(20,7," ","$rmc1",0,"R");$pdf->Cell(50,7,"$hlavickav->xdic","$rmc",1,"L");
+
+
+//tuto budu tlace 1.drzitela
+
+
+                 }
+
+if ( $jv == 1 )  {
+//toto je pociatocna vyska 2.drzitela na strane
+$pdf->SetY(140);
+$pdf->Cell(20,7," ","$rmc1",0,"R");$pdf->Cell(50,7,"$hlavickav->xdic","$rmc",1,"L");
+
+
+//tuto budu tlace 2.drzitela
+
+
+                 }
+
+if ( $jv == 2 )  {
+//toto je pociatocna vyska 3.drzitela na strane
+$pdf->SetY(200);
+$pdf->Cell(20,7," ","$rmc1",0,"R");$pdf->Cell(50,7,"$hlavickav->xdic","$rmc",1,"L");
+
+
+//tuto budu tlace 3.drzitela
+
+
+                 }
+
+
+}
+$iv = $iv + 1;
+$jv = $jv + 1;
+if ( $jv == 3 ) { $jv=0; }
+  }
+                                       } //koniec 3.strany
+
+$pdf->Output("../tmp/priznaniedmv.$kli_uzid.pdf");
+
+
+$pdf->Output("../tmp/oznamzrd$kli_uzid.pdf");
+?>
+
+<script type="text/javascript">
+  var okno = window.open("../tmp/oznamzrd<?php echo $kli_uzid; ?>.pdf","_self");
+</script>
+
+<?php
 }
 ///////////////////////////////////////////////////KONIEC TLAC oznamenie copern=40
 ?>
