@@ -961,6 +961,8 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 <option value="<?php echo $zaznam["oc"];?>" >
 <?php echo $zaznam["prie"];?> <?php echo $zaznam["meno"];?> osè <?php echo $zaznam["oc"];?></option>
 <?php endwhile;?>
+<option value="<?php echo $fir_fico;?>" >
+<?php echo $fir_fnaz." ièo ".$fir_fico;?></option>
 </select>
 </td>
 

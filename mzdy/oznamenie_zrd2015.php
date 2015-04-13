@@ -39,7 +39,7 @@ $kli_vrok=$pole[1];
 $zaobdobie=1*$_REQUEST['h_stv'];
 
 
-$sql = "SELECT konx6 FROM F$kli_vxcf"."_mzdoznameniezrd ";
+$sql = "SELECT konx7 FROM F$kli_vxcf"."_mzdoznameniezrd ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -51,6 +51,7 @@ $vytvor = mysql_query("$vsql");
 $sqltv = <<<trexima
 (
    cpl          int not null auto_increment,
+   mdic         DECIMAL(10,0) DEFAULT 0,
    stvrt        DECIMAL(2,0) DEFAULT 0,
    xplat        DECIMAL(10,0) DEFAULT 0,
    zzul         VARCHAR(70) NOT NULL,
@@ -73,7 +74,7 @@ $sqltv = <<<trexima
    datum        DATE NOT NULL,
    kkx1         DECIMAL(13,6) DEFAULT 0,
    odvod        DECIMAL(10,2) DEFAULT 0,
-   konx6        DECIMAL(10,0) DEFAULT 0,
+   konx7        DECIMAL(10,0) DEFAULT 0,
    PRIMARY KEY(cpl)
 );  
 trexima;
@@ -109,6 +110,7 @@ $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 //ulozit sumar strana
 if ( $copern == 801 AND $strana == 1 )
      {
+$mdic = strip_tags($_REQUEST['mdic']);
 $zzul = strip_tags($_REQUEST['zzul']);
 $zzcs = strip_tags($_REQUEST['zzcs']);
 $zzps = strip_tags($_REQUEST['zzps']);
@@ -117,7 +119,7 @@ $datum = strip_tags($_REQUEST['datum']);
 $datum_sql=SqlDatum($datum);
 
 
-$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET datum='$datum_sql', zzul='$zzul', zzps='$zzps', zzms='$zzms', zzcs='$zzcs' ".
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET datum='$datum_sql', zzul='$zzul', zzps='$zzps', zzms='$zzms', zzcs='$zzcs', mdic='$mdic' ".
 " WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
 $upravene = mysql_query("$uprtxt"); 
 //echo $uprtxt;
@@ -213,6 +215,18 @@ $rdk = $fir_riadok->rdk;
 $nar_sk = SkDatum($fir_riadok->dar);
 $zuli = $fir_riadok->zuli;
 $zmes = $fir_riadok->zmes;
+$zpsc = $fir_riadok->zpsc;
+$zcdm = $fir_riadok->zcdm;
+$titulp = $fir_riadok->titl;
+
+mysql_free_result($fir_vysledok);
+
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdtextmzd WHERE invt = $cislo_xplat ";
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
+$titulz = $fir_riadok->ztitz;
+$fir_fdicx = $fir_riadok->zdic;
 
 mysql_free_result($fir_vysledok);
 
@@ -221,12 +235,14 @@ $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrd WHERE xplat = $cislo_xpla
 //echo $sqlfir;
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
+$mdic = $fir_riadok->mdic;
 $zzul = $fir_riadok->zzul;
 $zzcs = $fir_riadok->zzcs;
 $zzps = $fir_riadok->zzps;
 $zzms = $fir_riadok->zzms;
 $datum_sk = SkDatum($fir_riadok->datum);
 $datd_sk = SkDatum($fir_riadok->datd);
+$fir_fdicx=$mdic;
 
 mysql_free_result($fir_vysledok);
 
@@ -248,6 +264,40 @@ $xpsc = $fir_riadok->xpsc;
 $xmes = $fir_riadok->xmes;
 
 mysql_free_result($fir_vysledok);
+  }
+
+//ak platitel pravnicka osoba
+if( $cislo_xplat > 9999 )
+  {
+$fir_fdicx=$fir_fdic;
+$mdic=$fir_fdic;
+
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
+$fir_vysledok = mysql_query($sqlfir);
+if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+
+$meno = $fir_riadok->dmeno;
+$prie = $fir_riadok->dprie;
+$titulp = $fir_riadok->dtitl;
+$titulz = $fir_riadok->dtitz;
+$zuli = $fir_riadok->duli;
+$zcdm = $fir_riadok->dcdm;
+$zmes = $fir_riadok->dmes;
+$zpsc = $fir_riadok->dpsc;
+
+
+if ( $fir_uctt03 != 999 ) {
+$meno=""; $prie=""; $titulp=""; $titulz="";
+$fir_fnazx = $fir_fnaz;
+$nar_sk="";
+$zuli = $fir_fuli;
+$zcdm = $fir_fcdm;
+$zmes = $fir_fmes;
+$zpsc = $fir_fpsc;                          }
+
+if( $nar_sk == '00.00.0000' ) { $nar_sk=""; }
+
+
   }
 
 
@@ -356,6 +406,8 @@ input.ok-btn {
 
 <?php if( $strana == 1 ) { ?>
 
+
+   document.formv1.mdic.value = "<?php echo $mdic; ?>";
    document.formv1.zzul.value = "<?php echo $zzul; ?>";
    document.formv1.zzcs.value = "<?php echo $zzcs; ?>";
    document.formv1.zzps.value = "<?php echo $zzps; ?>";
@@ -445,7 +497,11 @@ input.ok-btn {
  </tr>
  <tr>
   <td class="header">Ozn·menie o dani z nepeÚaûnÈho plnenia -
-  <span class="subheader"><?php echo "$oc $meno $prie"; ?></span>
+<?php
+$nazovplat=$oc." ".$meno." ".$prie;
+if( $cislo_xplat > 9999 ) { $nazovplat=$fir_fnazx; }
+?>
+  <span class="subheader"><?php echo $nazovplat; ?></span>
   </td>
   <td>
    <div class="bar-btn-form-tool">
@@ -474,7 +530,10 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
     class="<?php echo $clas2; ?> toleft">Drûitelia</a>
  <h6 class="toright">TlaËiù:</h6>
 <?php if ( $strana != 2 ) { ?>
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+<div id="uvolni" onmouseover="return Povol_uloz();" class="uvolni-top-submit">
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny"
+  class="btn-top-formsave-noactive">
+</div>
 <?php                     } ?>
 </div>
 
@@ -483,42 +542,43 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
      alt="tlaËivo Ozn·menie nepeÚaûnÈ plnenie 1.strana 243kB" class="form-background">
 
 <!-- ZAHLAVIE -->
-<span class="text-echo" style="top:344px; left:56px;"><?php echo $fir_fdic; ?></span>
+
+<input type="text" name="mdic" id="mdic" title="mdic" onkeyup="CiarkaNaBodku(this);" onkeydown=""
+ style="width:100px; top:344px; left:56px;"/>
 <span class="text-echo" style="top:344px; left:723px;"><?php echo $zaobdobie; ?></span> <!-- dopyt, nie je funkËnÈ -->
 <span class="text-echo" style="top:344px; left:769px;"><?php echo $kli_vrok; ?></span>
 
-<!-- PLATITEL FO vzdy --> <!-- dopyt, nezd· sa mi, ûe vûdy FO, keÔ na 2.strane dole mÙûe byù aj poskytovateæ zdrv.starostlivosti -->
+<!-- PLATITEL FO --> <!-- dopyt, nezd· sa mi, ûe vûdy FO, keÔ na 2.strane dole mÙûe byù aj poskytovateæ zdrv.starostlivosti -->
 <div class="input-echo" style="width:357px; top:452px; left:52px;"><?php echo $meno; ?></div>
 <div class="input-echo" style="width:241px; top:452px; left:432px;"><?php echo $prie; ?></div>
-<div class="input-echo" style="width:111px; top:452px; left:693px;"><?php echo $titulp; ?></div> <!-- dopyt, nie je funkËnÈ -->
-<div class="input-echo" style="width:66px; top:452px; left:827px;"><?php echo $titulz; ?></div> <!-- dopyt, nie je funkËnÈ -->
+<div class="input-echo" style="width:111px; top:452px; left:693px;"><?php echo $titulp; ?></div> 
+<div class="input-echo" style="width:66px; top:452px; left:827px;"><?php echo $titulz; ?></div> 
 <div class="input-echo" style="width:196px; top:505px; left:52px;"><?php echo $nar_sk; ?></div>
+
+<!-- PLATITEL PO nazov z ufir--> <!-- dopyt, nezd· sa mi, ûe vûdy FO, keÔ na 2.strane dole mÙûe byù aj poskytovateæ zdrv.starostlivosti -->
+<div class="input-echo" style="width:357px; top:590px; left:52px;"><?php echo $fir_fnazx; ?></div>
 
 <!-- ADRESA vzdy z udajov o zamestnancovi -->
 <div class="input-echo" style="width:634px; top:696px; left:52px;"><?php echo $zuli; ?></div>
-<div class="input-echo" style="width:173px; top:696px; left:720px;"><?php echo $es; ?></div> <!-- dopyt, nie je funkËnÈ -->
-<div class="input-echo" style="width:105px; top:750px; left:52px;"><?php echo $es; ?></div> <!-- dopyt, nie je funkËnÈ -->
+<div class="input-echo" style="width:173px; top:696px; left:720px;"><?php echo $zcdm; ?></div> 
+<div class="input-echo" style="width:105px; top:750px; left:52px;"><?php echo $zpsc; ?></div> 
 <div class="input-echo" style="width:700px; top:750px; left:191px;"><?php echo $zmes; ?></div>
 
 
-<!-- ADRESA ZDRAVOTNICKEHO ZARIADENIA z udajov o firme -->
-<div class="input-echo" style="width:634px; top:826px; left:52px;"><?php echo $fir_fuli; ?></div>
-<div class="input-echo" style="width:173px; top:826px; left:720px;"><?php echo $fir_fcdm; ?></div>
-<div class="input-echo" style="width:105px; top:880px; left:52px;"><?php echo $fir_fpsc; ?></div>
-<div class="input-echo" style="width:700px; top:880px; left:191px;"><?php echo $fir_fmes; ?></div>
+<!-- ADRESA ZDRAVOTNICKEHO ZARIADENIA  -->
 
 
 <input type="text" name="zzul" id="zzul" title="zzul" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:1100px; left:200px;"/> <!-- dopyt, m·m daù vöade preË -->
+ style="width:110px; top:1100px; left:200px;"/> <!-- musia byt inputy -->
 
 <input type="text" name="zzcs" id="zzcs" title="zzcs" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:1140px; left:200px;"/> <!-- dopyt, m·m daù vöade preË -->
+ style="width:110px; top:1140px; left:200px;"/> <!-- musia byt inputy  -->
 
 <input type="text" name="zzps" id="zzps" title="zzps" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:1180px; left:200px;"/> <!-- dopyt, m·m daù vöade preË -->
+ style="width:110px; top:1180px; left:200px;"/> <!-- musia byt inputy  -->
 
 <input type="text" name="zzms" id="zzms" title="zzms" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:1220px; left:200px;"/> <!-- dopyt, m·m daù vöade preË -->
+ style="width:110px; top:1220px; left:200px;"/> <!-- musia byt inputy  -->
 
 <!-- Suhrnne udaje -->
 <div class="input-echo" style="width:220px; top:943px; left:487px;"><?php echo $r15; ?></div> <!-- dopyt, nie je funkËnÈ -->
@@ -591,10 +651,9 @@ $i=$i+1;
 <?php if ( $copern == 101 AND $strana == 3 ) { ?>
 
 
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny"
-  class="btn-top-formsave-noactive">
 
-<img src="../dokumenty/dan_z_prijmov2015/oznamenie_zrd/oznamenie_o_zrd_str2.jpg"
+
+<img src="../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str2.jpg"
      alt="tlaËivo Ozn·menie nepeÚaûnÈ plnenie 2.strana 221kB" class="form-background">
 
 
