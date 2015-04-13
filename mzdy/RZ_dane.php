@@ -492,16 +492,18 @@ $rokzrd=$kli_vrok;
 function TlacZRD()
                 {
 var h_oc = document.forms.formzrd1.h_oc.value;
+var h_stv = document.forms.formzrd1.h_stv.value;
 
-window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&copern=101&drupoh=1&page=1&subor=0',
+window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&h_stv=' + h_stv + '&copern=101&drupoh=1&strana=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function UpravZRD()
                 {
 var h_oc = document.forms.formzrd1.h_oc.value;
+var h_stv = document.forms.formzrd1.h_stv.value;
 
-window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&copern=101&drupoh=1&page=1&subor=0',
+window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&h_stv=' + h_stv + '&copern=101&drupoh=1&strana=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
    
@@ -962,7 +964,14 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 </select>
 </td>
 
-<td class="bmenu" width="28%"></td> 
+<td class="bmenu" width="28%">
+<select size="1" name="h_stv" id="h_stv" >
+<option value="1" >1.ötvrùrok</option>
+<option value="2" >2.ötvrùrok</option>
+<option value="3" >3.ötvrùrok</option>
+<option value="4" >4.ötvrùrok</option>
+</select>
+</td> 
 
 <td class="bmenu" width="2%"></td>
 
