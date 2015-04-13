@@ -509,7 +509,7 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 
 <!-- ZAHLAVIE -->
 
-<input type="text" name="mdic" id="mdic" title="mdic" onkeyup="CiarkaNaBodku(this);" onkeydown=""
+<input type="text" name="mdic" id="mdic" onkeyup="CiarkaNaBodku(this);" onkeydown=""
  style="width:100px; top:344px; left:56px;"/>
 <span class="text-echo" style="top:344px; left:723px;"><?php echo $zaobdobie; ?></span>
 <span class="text-echo" style="top:344px; left:769px;"><?php echo $kli_vrok; ?></span>
