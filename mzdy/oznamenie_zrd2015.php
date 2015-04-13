@@ -117,7 +117,7 @@ $datum_sql=SqlDatum($datum);
 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET datum='$datum_sql', zzul='$zzul', zzps='$zzps', zzms='$zzms', zzcs='$zzcs' ".
-" WHERE  xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+" WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
 $upravene = mysql_query("$uprtxt"); 
 //echo $uprtxt;
 $uprav="NO";
@@ -125,10 +125,42 @@ $copern=101;
      }
 //koniec ulozit sumar strana
 
-$uprav = 1*$_REQUEST['uprav'];
+
+//upravit polozku
+if ( $copern == 801 AND $strana == 3 )
+     {
+$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
+
+$xdic = strip_tags($_REQUEST['xdic']);
+$xmfo = strip_tags($_REQUEST['xmfo']);
+$xpfo = strip_tags($_REQUEST['xpfo']);
+$xnpo = strip_tags($_REQUEST['xnpo']);
+$xuli = strip_tags($_REQUEST['xuli']);
+$xcis = strip_tags($_REQUEST['xcis']);
+$xpsc = strip_tags($_REQUEST['xpsc']);
+$xmes = strip_tags($_REQUEST['xmes']);
+
+$prj = 1*strip_tags($_REQUEST['prj']);
+$datd = strip_tags($_REQUEST['datd']);
+$datd_sql=SqlDatum($datd);
+
+
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrdpol SET xdic='$xdic', xuli='$xuli', xcis='$xcis', xpsc='$xpsc', xmes='$xmes', ".
+" xmfo='$xmfo', xpfo='$xpfo', xnpo='$xnpo', prj='$prj', datd='$datd_sql' ".
+" WHERE  cpl = $cislo_cpl ";
+$upravene = mysql_query("$uprtxt"); 
+
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET datd='$datd_sql' WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$upravene = mysql_query("$uprtxt"); 
+
+$uprav="NO";
+$copern=101;
+$strana=3;
+     }
+//koniec upravit polozku
 
 //vlozit novu polozku
-if ( $copern == 801 AND $strana == 2 AND $uprav == 0 )
+if ( $copern == 801 AND $strana == 2 )
      {
 
 $uprtxt = "INSERT INTO F$kli_vxcf"."_mzdoznameniezrdpol (xplat,stvrt) VALUES ('$cislo_xplat', '$zaobdobie' )";
@@ -150,37 +182,6 @@ if( $cislo_cpl > 0 ) { $strana=3; }
 
      }
 //koniec vlozit novu polozku
-
-//upravit polozku
-if ( $copern == 801 AND $strana == 3 AND $uprav == 1 )
-     {
-$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
-
-$xdic = strip_tags($_REQUEST['xdic']);
-$xmfo = strip_tags($_REQUEST['xmfo']);
-$xpfo = strip_tags($_REQUEST['xpfo']);
-$xnpo = strip_tags($_REQUEST['xnpo']);
-$xuli = strip_tags($_REQUEST['xuli']);
-$xcis = strip_tags($_REQUEST['xcis']);
-$xpsc = strip_tags($_REQUEST['xpsc']);
-$xmes = strip_tags($_REQUEST['xmes']);
-
-$prj = 1*strip_tags($_REQUEST['prj']);
-$datd = strip_tags($_REQUEST['datd']);
-$datd_sql=SqlDatum($datd);
-
-
-$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrdpol SET datd='$datd_sql', xdic='$xdic', xuli='$xuli', xcis='$xcis', xpsc='$xpsc', xmes='$xmes', ".
-" xmfo='$xmfo', xpfo='$xpfo', xnpo='$xnpo', prj='$prj', datd='$datd_sql' ".
-" WHERE  cpl = $cislo_cpl ";
-$upravene = mysql_query("$uprtxt"); 
-//echo $uprtxt;
-
-$uprav="NO";
-$copern=101;
-$strana=3;
-     }
-//koniec upravit polozku
 
 
 //zmazat polozku
@@ -224,6 +225,7 @@ $zzcs = $fir_riadok->zzcs;
 $zzps = $fir_riadok->zzps;
 $zzms = $fir_riadok->zzms;
 $datum_sk = SkDatum($fir_riadok->datum);
+$datd_sk = SkDatum($fir_riadok->datd);
 
 mysql_free_result($fir_vysledok);
 
@@ -239,8 +241,6 @@ $xpfo = $fir_riadok->xpfo;
 $xnpo = $fir_riadok->xnpo;
 $xdic = $fir_riadok->xdic;
 $prj = $fir_riadok->prj;
-$datd_sk = SkDatum($fir_riadok->datd);
-
 $xuli = $fir_riadok->xuli;
 $xcis = $fir_riadok->xcis;
 $xpsc = $fir_riadok->xpsc;
@@ -431,16 +431,16 @@ input.ok-btn {
   function UpravVzd(cpl)
   {
    var cislo_cpl = cpl;
-   window.open('oznamenie_zrd2015.php?copern=101&cislo_cpl='+ cislo_cpl + '&uprav=0&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=3', '_self' )
+   window.open('oznamenie_zrd2015.php?copern=101&cislo_cpl='+ cislo_cpl + '&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=3', '_self' )
   }
   function ZmazVzd(cpl)
   {
    var cislo_cpl = cpl;
-   window.open('oznamenie_zrd2015.php?copern=502&cislo_cpl='+ cislo_cpl + '&uprav=0&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=2', '_self' )
+   window.open('oznamenie_zrd2015.php?copern=502&cislo_cpl='+ cislo_cpl + '&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=2', '_self' )
   }
   function NoveVzd()
   {
-   window.open('oznamenie_zrd2015.php?copern=801&strana=2&uprav=0&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>', '_self' )
+   window.open('oznamenie_zrd2015.php?copern=801&strana=2&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>', '_self' )
   }
 
 </script>
@@ -474,10 +474,12 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 </div>
 
 <div id="content">
-<?php if ( $copern == 101 AND $strana == 1 ) { ?>
 
 <FORM name="formv1" method="post"
- action="oznamenie_zrd2015.php?copern=801&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=<?php echo $strana; ?>">
+ action="oznamenie_zrd2015.php?copern=801&cislo_cpl=<?php echo $cislo_cpl; ?>&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=<?php echo $strana; ?>">
+
+<?php if ( $copern == 101 AND $strana == 1 ) { ?>
+
 <div id="uvolni" onmouseover="return Povol_uloz();" class="uvolni-top-submit">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny"
   class="btn-top-formsave-noactive">
@@ -516,10 +518,9 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 
 
 </div>
-</FORM>
 
 <?php                       }
-//koniec copern == 101 strana 2
+//koniec copern == 101, strana 1
 ?>
 
 
@@ -572,13 +573,13 @@ $i=$i+1;
 ?>
  </table>
 </div>
-<?php                                        } ?>
+<?php                       }
+//koniec copern == 101, strana 2
+?>
 
 
 <?php if ( $copern == 101 AND $strana == 3 ) { ?>
 
-<FORM name="formv1" method="post"
- action="oznamenie_zrd2015.php?copern=801&uprav=1&cislo_cpl=<?php echo $cislo_cpl; ?>&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=<?php echo $strana; ?>">
 <div id="uvolni" onmouseover="return Povol_uloz();" class="uvolni-top-submit">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny"
   class="btn-top-formsave-noactive">
@@ -623,11 +624,12 @@ $i=$i+1;
 
 
 </div>
-</FORM>
 
 <?php                       }
 //koniec copern == 101, strana 3
 ?>
+
+</FORM>
 
 </div> <!-- koniec #content -->
 
