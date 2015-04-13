@@ -7,6 +7,7 @@ do
 $sys = 'MZD';
 $urov = 2000;
 $uziv = include("../uziv.php");
+$copern = $_REQUEST['copern'];
 if ( !$uziv ) exit;
 if (!isset($kli_vxcf)) $kli_vxcf = 1;
 
@@ -259,27 +260,17 @@ mysql_free_result($fir_vysledok);
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - Ozn·menie ZRD</title>
 <style type="text/css">
-#content { background-color: white; }
-div.uvolni-top-submit {
+span.text-echo {
+  font-size: 18px;
+  letter-spacing: 13px;
+}
+div.input-echo {
+  font-size: 18px;
+  background-color: #fff;
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 108px;
-  height: 32px;
-  text-align: right;
 }
-input.btn-top-formsave-noactive {
-  width: 100px;
-  height: 24px;
-  margin-top: 4px;
-  margin-right: 4px;
-  cursor: pointer;
-}
-img.logozp {
-  position: absolute;
-  top: 30px;
-  left: 40px;
-}
+
+
 table.poistenci {
   position: absolute;
   top: 792px;
@@ -453,7 +444,9 @@ input.ok-btn {
   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
  </tr>
  <tr>
-  <td class="header">Ozn·menie ZRD zamestnanec <?php echo $oc." ".$meno." ".$prie; ?></td>
+  <td class="header">Ozn·menie o dani z nepeÚaûnÈho plnenia -
+  <span class="subheader"><?php echo "$oc $meno $prie"; ?></span>
+  </td>
   <td>
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="VysvetlVypln();" title="Vysvetlivky" class="btn-form-tool">
@@ -464,62 +457,79 @@ input.ok-btn {
  </table>
 </div>
 
-<?php
-$source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=".$cislo_xplat;
-?>
-
-<div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">Sum·r</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">PrÌlohy</a>
-</div>
 
 <div id="content">
-
 <FORM name="formv1" method="post"
- action="oznamenie_zrd2015.php?copern=801&cislo_cpl=<?php echo $cislo_cpl; ?>&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=<?php echo $strana; ?>">
+      action="oznamenie_zrd2015.php?copern=801&cislo_cpl=<?php echo $cislo_cpl; ?>&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=<?php echo $strana; ?>">
+<?php
+$clas1="noactive"; $clas2="noactive";
+if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
+
+$source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=".$cislo_xplat;
+?>
+<div class="navbar">
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=1', '_self');"
+    class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=2', '_self');"
+    class="<?php echo $clas2; ?> toleft">Drûitelia</a>
+ <h6 class="toright">TlaËiù:</h6>
+<?php if ( $strana != 2 ) { ?>
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+<?php                     } ?>
+</div>
 
 <?php if ( $copern == 101 AND $strana == 1 ) { ?>
-
-<div id="uvolni" onmouseover="return Povol_uloz();" class="uvolni-top-submit">
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny"
-  class="btn-top-formsave-noactive">
-</div>
-<img src="../dokumenty/dan_z_prijmov2015/oznamenie_zrd/oznamenie_o_zrd_str1.jpg" alt="tlaËivo Ozn·menie ZRD 15kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str1.jpg"
+     alt="tlaËivo Ozn·menie nepeÚaûnÈ plnenie 1.strana 243kB" class="form-background">
 
 <!-- ZAHLAVIE -->
+<span class="text-echo" style="top:344px; left:56px;"><?php echo $fir_fdic; ?></span>
+<span class="text-echo" style="top:344px; left:723px;"><?php echo $zaobdobie; ?></span> <!-- dopyt, nie je funkËnÈ -->
+<span class="text-echo" style="top:344px; left:769px;"><?php echo $kli_vrok; ?></span>
+
+<!-- PLATITEL FO vzdy --> <!-- dopyt, nezd· sa mi, ûe vûdy FO, keÔ na 2.strane dole mÙûe byù aj poskytovateæ zdrv.starostlivosti -->
+<div class="input-echo" style="width:357px; top:452px; left:52px;"><?php echo $meno; ?></div>
+<div class="input-echo" style="width:241px; top:452px; left:432px;"><?php echo $prie; ?></div>
+<div class="input-echo" style="width:111px; top:452px; left:693px;"><?php echo $titulp; ?></div> <!-- dopyt, nie je funkËnÈ -->
+<div class="input-echo" style="width:66px; top:452px; left:827px;"><?php echo $titulz; ?></div> <!-- dopyt, nie je funkËnÈ -->
+<div class="input-echo" style="width:196px; top:505px; left:52px;"><?php echo $nar_sk; ?></div>
+
+<!-- ADRESA vzdy z udajov o zamestnancovi -->
+<div class="input-echo" style="width:634px; top:696px; left:52px;"><?php echo $zuli; ?></div>
+<div class="input-echo" style="width:173px; top:696px; left:720px;"><?php echo $es; ?></div> <!-- dopyt, nie je funkËnÈ -->
+<div class="input-echo" style="width:105px; top:750px; left:52px;"><?php echo $es; ?></div> <!-- dopyt, nie je funkËnÈ -->
+<div class="input-echo" style="width:700px; top:750px; left:191px;"><?php echo $zmes; ?></div>
 
 
-<span class="text-echo" style="top:323px; left:142px;"><?php echo $zaobdobie; ?> <?php echo $kli_vrok; ?></span>
+<!-- ADRESA ZDRAVOTNICKEHO ZARIADENIA z udajov o firme -->
+<div class="input-echo" style="width:634px; top:826px; left:52px;"><?php echo $fir_fuli; ?></div>
+<div class="input-echo" style="width:173px; top:826px; left:720px;"><?php echo $fir_fcdm; ?></div>
+<div class="input-echo" style="width:105px; top:880px; left:52px;"><?php echo $fir_fpsc; ?></div>
+<div class="input-echo" style="width:700px; top:880px; left:191px;"><?php echo $fir_fmes; ?></div>
 
-<!-- PLATITEL FO vzdy -->
-<span class="text-echo" style="top:408px; left:155px;"><?php echo $meno." ".$prie." ".$dar;?></span>
-
-<!-- ADRESA PLATITEL FO vzdy z udajov o zamestnancovi -->
-<span class="text-echo" style="top:658px; left:155px;"><?php echo $zuli." ".$zmes;?></span>
-
-<!-- ADRESA ZDRAVOTNICKEHO ZARIADEIA z udajov o firme -->
 
 <input type="text" name="zzul" id="zzul" title="zzul" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:800px; left:200px;"/>
+ style="width:110px; top:1100px; left:200px;"/> <!-- dopyt, m·m daù vöade preË -->
 
 <input type="text" name="zzcs" id="zzcs" title="zzcs" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:840px; left:200px;"/>
+ style="width:110px; top:1140px; left:200px;"/> <!-- dopyt, m·m daù vöade preË -->
 
 <input type="text" name="zzps" id="zzps" title="zzps" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:880px; left:200px;"/>
+ style="width:110px; top:1180px; left:200px;"/> <!-- dopyt, m·m daù vöade preË -->
 
 <input type="text" name="zzms" id="zzms" title="zzms" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:920px; left:200px;"/>
+ style="width:110px; top:1220px; left:200px;"/> <!-- dopyt, m·m daù vöade preË -->
 
-<!-- SUMA PRIJMOV A DANE bude vypis cez echo -->
-
+<!-- Suhrnne udaje -->
+<div class="input-echo" style="width:220px; top:943px; left:487px;"><?php echo $r15; ?></div> <!-- dopyt, nie je funkËnÈ -->
+<div class="input-echo" style="width:220px; top:982px; left:487px;"><?php echo $r16; ?></div> <!-- dopyt, nie je funkËnÈ -->
 <input type="text" name="datum" id="datum" title="datum" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:110px; top:960px; left:200px;"/>
+       style="width:196px; top:1020px; left:510px;"/>
 
 
-</div>
 
-<?php                       }
+
+<?php                                        }
 //koniec copern == 101, strana 1
 ?>
 
@@ -573,18 +583,19 @@ $i=$i+1;
 ?>
  </table>
 </div>
-<?php                       }
+<?php                                        }
 //koniec copern == 101, strana 2
 ?>
 
 
 <?php if ( $copern == 101 AND $strana == 3 ) { ?>
 
-<div id="uvolni" onmouseover="return Povol_uloz();" class="uvolni-top-submit">
+
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny"
   class="btn-top-formsave-noactive">
-</div>
-<img src="../dokumenty/dan_z_prijmov2015/oznamenie_zrd/oznamenie_o_zrd_str2.jpg" alt="tlaËivo Ozn·menie ZRD 15kB" class="form-background">
+
+<img src="../dokumenty/dan_z_prijmov2015/oznamenie_zrd/oznamenie_o_zrd_str2.jpg"
+     alt="tlaËivo Ozn·menie nepeÚaûnÈ plnenie 2.strana 221kB" class="form-background">
 
 
 
@@ -623,14 +634,13 @@ $i=$i+1;
  style="width:110px; top:520px; left:200px;"/>
 
 
-</div>
+
 
 <?php                       }
 //koniec copern == 101, strana 3
 ?>
 
 </FORM>
-
 </div> <!-- koniec #content -->
 
 
