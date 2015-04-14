@@ -85,6 +85,21 @@ $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdoznameniezrdpol'.$sqltv;
 $vytvor = mysql_query("$vsql");
 }
 
+$sql = "SELECT xtitulp FROM F$kli_vxcf"."_mzdoznameniezrd ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrdpol ADD xtitulz VARCHAR(15) AFTER xmes ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrdpol ADD xtitulp VARCHAR(15) AFTER xmes ";
+$sqldok = mysql_query("$sqlfir");
+
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD xtitulz VARCHAR(15) AFTER xmes ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD xtitulp VARCHAR(15) AFTER xmes ";
+$sqldok = mysql_query("$sqlfir");
+}
+
 $jezam=0;
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrd WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
 $sqldok = mysql_query("$sqlfir");
@@ -143,13 +158,16 @@ $xcis = strip_tags($_REQUEST['xcis']);
 $xpsc = strip_tags($_REQUEST['xpsc']);
 $xmes = strip_tags($_REQUEST['xmes']);
 
+$xtitulp = strip_tags($_REQUEST['xtitulp']);
+$xtitulz = strip_tags($_REQUEST['xtitulz']);
+
 $prj = 1*strip_tags($_REQUEST['prj']);
 $datd = strip_tags($_REQUEST['datd']);
 $datd_sql=SqlDatum($datd);
 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrdpol SET xdic='$xdic', xuli='$xuli', xcis='$xcis', xpsc='$xpsc', xmes='$xmes', ".
-" xmfo='$xmfo', xpfo='$xpfo', xnpo='$xnpo', prj='$prj', datd='$datd_sql' ".
+" xmfo='$xmfo', xpfo='$xpfo', xnpo='$xnpo', prj='$prj', datd='$datd_sql', xtitulp='$xtitulp', xtitulz='$xtitulz' ".
 " WHERE  cpl = $cislo_cpl ";
 $upravene = mysql_query("$uprtxt"); 
 
@@ -262,6 +280,8 @@ $xuli = $fir_riadok->xuli;
 $xcis = $fir_riadok->xcis;
 $xpsc = $fir_riadok->xpsc;
 $xmes = $fir_riadok->xmes;
+$xtitulp = $fir_riadok->xtitulp;
+$xtitulz = $fir_riadok->xtitulz;
 
 mysql_free_result($fir_vysledok);
   }
@@ -285,6 +305,7 @@ $zcdm = $fir_riadok->dcdm;
 $zmes = $fir_riadok->dmes;
 $zpsc = $fir_riadok->dpsc;
 
+$fir_fnazovx = $fir_fnaz;
 
 if ( $fir_uctt03 != 999 ) {
 $meno=""; $prie=""; $titulp=""; $titulz="";
@@ -449,6 +470,8 @@ table.vozidla tfoot td {
    document.formv1.xcis.value = "<?php echo $xcis; ?>";
    document.formv1.xpsc.value = "<?php echo $xpsc; ?>";
    document.formv1.xmes.value = "<?php echo $xmes; ?>";
+   document.formv1.xtitulp.value = "<?php echo $xtitulp; ?>";
+   document.formv1.xtitulz.value = "<?php echo $xtitulz; ?>";
 
    document.formv1.uloz.disabled = true;
    document.formv1.uloz1.disabled = true;
@@ -504,7 +527,7 @@ table.vozidla tfoot td {
   <td class="header">Oznámenie o dani z nepeòažného plnenia -
 <?php
 $nazovplat=$cislo_xplat." ".$oc." ".$meno." ".$prie;
-if( $cislo_xplat > 9999 ) { $nazovplat=$cislo_xplat." ".$fir_fnazx; }
+if( $cislo_xplat > 9999 ) { $nazovplat=$cislo_xplat." ".$fir_fnazovx; }
 ?>
   <span class="subheader"><?php echo $nazovplat; ?></span>
   </td>
@@ -563,7 +586,7 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 <div class="input-echo" style="width:66px; top:452px; left:827px;"><?php echo $titulz; ?></div>
 <div class="input-echo" style="width:196px; top:505px; left:52px;"><?php echo $nar_sk; ?></div>
 <!-- PO -->
-<?php if ( $fir_uctt03 != 999 ) { ?> <!-- dopyt, podmienku, aby nezobrazil pri vybratej firmy z RZ_dane.php -->
+<?php if ( $fir_uctt03 != 999 AND $cislo_xplat > 9999 ) { ?> <!-- dopyt, podmienku, aby nezobrazil pri vybratej firmy z RZ_dane.php -->
 <div class="input-echo" style="width:840px; top:580px; left:52px;"><?php echo $fir_fnazx; ?></div>
 <?php                           } ?>
 
