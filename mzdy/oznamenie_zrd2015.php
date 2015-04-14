@@ -20,7 +20,7 @@ if (!isset($kli_vxcf)) $kli_vxcf = 1;
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=0;
+$rmc=1;
 $rmc1=0;
 
 //datumove funkcie
@@ -293,9 +293,10 @@ $nar_sk="";
 $zuli = $fir_fuli;
 $zcdm = $fir_fcdm;
 $zmes = $fir_fmes;
-$zpsc = $fir_fpsc;                          }
+$zpsc = $fir_fpsc;
+                          }
 
-if( $nar_sk == '00.00.0000' ) { $nar_sk=""; }
+if ( $nar_sk == '00.00.0000' ) { $nar_sk=""; }
 
 
   }
@@ -339,7 +340,7 @@ if( $sqldok ) { $pocetdic = mysql_num_rows($sqldok); }
 $pocetdic2=$pocetdic-2;
 $pocetdic3=$pocetdic2/3;
 $prilohy=ceil($pocetdic3);
-if( $prilohy < 0 ) { $prilohy=0; }
+if ( $prilohy < 0 ) { $prilohy=0; }
 
 
 
@@ -366,6 +367,11 @@ div.wrap-vozidla {
   width: 100%;
   background-color: #fff;
   min-height: 100px;
+}
+div.wrap-vozidla > div {
+  overflow: auto;
+  line-height: 40px;
+  margin: 10px 0 0 45px;
 }
 div.wrap-vozidla img {
   display: inline-block;
@@ -394,19 +400,24 @@ table.vozidla tbody td {
   border-top: 2px solid #add8e6;
   font-size: 15px;
 }
+table.vozidla tbody tr:hover {
+  background-color: #f3f3f3;
+
+}
 table.vozidla tbody img {
   position: relative;
   top: 4px;
+}
+table.vozidla tfoot td {
+  border-top: 2px solid #add8e6;
+  font-size: 15px;
+  height: 26px;
+  line-height: 26px;
 }
 </style>
 
 <script language="JavaScript" src="../js/cookies.js"></script>
 <script type="text/javascript">
-//preskakovanie ENTER-om
-
-
-
-
   function ObnovUI()
   {
 
@@ -457,18 +468,6 @@ table.vozidla tbody img {
   }
 
 
-  function Povol_uloz()
-  {
-   var okvstup=1;
-   if ( okvstup == 1 ) { document.formv1.uloz.disabled = false; return (true); }
-        else { document.formv1.uloz.disabled = true; return (false) ; }
-  }
-  function Povol_uloz1()
-  {
-   var okvstup=1;
-   if ( okvstup == 1 ) { document.formv1.uloz1.disabled = false; return (true); }
-        else { document.formv1.uloz1.disabled = true; return (false) ; }
-  }
 
 
 //Z ciarky na bodku
@@ -476,7 +475,7 @@ table.vozidla tbody img {
   {
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
-
+//zoznam drzitelov
   function UpravVzd(cpl)
   {
    var cislo_cpl = cpl;
@@ -539,11 +538,11 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=3', '_self');"
     class="<?php echo $clas3; ?> toleft">⁄prava drûiteæa</a>
 <?php                     } ?>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=40&strana=1', '_blank');"
+    class="<?php echo $clas1; ?> toright">1</a>
  <h6 class="toright">TlaËiù:</h6>
 <?php if ( $strana != 2 ) { ?>
-<div id="uvolni" onmouseover="return Povol_uloz();" class="uvolni-top-submit">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
-</div>
 <?php                     } ?>
 </div>
 
@@ -552,27 +551,27 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
      alt="tlaËivo Ozn·menie nepeÚaûnÈ plnenie 1.strana 243kB" class="form-background">
 
 <!-- ZAHLAVIE -->
-
-<input type="text" name="mdic" id="mdic" onkeyup="CiarkaNaBodku(this);" onkeydown=""
- style="width:100px; top:344px; left:56px;"/>
+<input type="text" name="mdic" id="mdic" style="width:220px; top:340px; left:52px;"/>
 <span class="text-echo" style="top:344px; left:723px;"><?php echo $zaobdobie; ?></span>
 <span class="text-echo" style="top:344px; left:769px;"><?php echo $kli_vrok; ?></span>
 
-<!-- PLATITEL FO vzdy --> <!-- dopyt, nezd· sa mi, ûe vûdy FO, keÔ na 2.strane dole mÙûe byù aj poskytovateæ zdrv.starostlivosti -->
+<!-- PLATITEL -->
+<!-- FO -->
 <div class="input-echo" style="width:357px; top:452px; left:52px;"><?php echo $meno; ?></div>
 <div class="input-echo" style="width:241px; top:452px; left:432px;"><?php echo $prie; ?></div>
 <div class="input-echo" style="width:111px; top:452px; left:693px;"><?php echo $titulp; ?></div>
 <div class="input-echo" style="width:66px; top:452px; left:827px;"><?php echo $titulz; ?></div>
 <div class="input-echo" style="width:196px; top:505px; left:52px;"><?php echo $nar_sk; ?></div>
+<!-- PO -->
+<?php if ( $fir_uctt03 != 999 ) { ?> <!-- dopyt, podmienku, aby nezobrazil pri vybratej firmy z RZ_dane.php -->
+<div class="input-echo" style="width:840px; top:580px; left:52px;"><?php echo $fir_fnazx; ?></div>
+<?php                           } ?>
 
-<!-- ADRESA dopyt, nedorieöenÈ adresy pre po -->
-<div class="input-echo" style="width:357px; top:590px; left:52px;"><?php echo $fir_fnazx; ?></div>
-
+<!-- Adresa -->
 <div class="input-echo" style="width:634px; top:696px; left:52px;"><?php echo $zuli; ?></div>
 <div class="input-echo" style="width:173px; top:696px; left:720px;"><?php echo $zcdm; ?></div>
 <div class="input-echo" style="width:105px; top:750px; left:52px;"><?php echo $zpsc; ?></div>
 <div class="input-echo" style="width:700px; top:750px; left:191px;"><?php echo $zmes; ?></div>
-
 
 <!-- Adresa zdravotnickeho zariadenie -->
 <input type="text" name="zzul" id="zzul" style="width:634px; top:823px; left:52px;"/>
@@ -581,37 +580,35 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 <input type="text" name="zzms" id="zzms" style="width:701px; top:879px; left:191px;"/>
 
 <!-- Suhrnne udaje -->
-<div class="input-echo" style="width:220px; top:943px; left:487px;"><?php echo $r15; ?></div> <!-- dopyt, nie je funkËnÈ -->
-<div class="input-echo" style="width:220px; top:982px; left:487px;"><?php echo $r16; ?></div> <!-- dopyt, nie je funkËnÈ -->
-<input type="text" name="datum" id="datum" title="datum" onkeyup="CiarkaNaBodku(this);"
+<div class="input-echo" style="width:220px; top:943px; left:487px; text-align:right;"><?php echo $r15; ?></div>
+<div class="input-echo" style="width:220px; top:982px; left:487px; text-align:right;"><?php echo $r16; ?></div>
+<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);"
        style="width:196px; top:1020px; left:510px;"/>
-
 <?php                                        }
 //koniec copern == 101, strana 1
 ?>
 
 
 <?php if ( $copern == 101 AND $strana == 2 ) {
-
-//VYPIS ZOZNAMU DRZITELOV
+//ZOZNAM DRZITELOV
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY cpl";
 $sluz = mysql_query("$sqltt");
 $slpol = mysql_num_rows($sluz);
 ?>
 <div class="wrap-vozidla">
- <div style="line-height:40px; margin:10px 0 0 45px; overflow:auto;">
-  <h2 class="toleft" style="font-size:18px; font-weight:;">Drûitelia a v˝öka nepeÚaûnÈho plnenia</h2>
+ <div>
+  <h2 class="toleft" style="font-size:18px;">Drûitelia a v˝öka nepeÚaûnÈho plnenia</h2>
   <img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="Nov˝ drûiteæ"
        class="toleft" style="margin:10px 0 0 10px;">
  </div>
  <table class="vozidla">
  <thead>
-  <tr>
-   <th width="12%">&nbsp;DI»</th>
-   <th width="45%">FO / PO</th>
-   <th width="15%" style="text-align:right;">PrijatÈ peÚaûnÈ plnenie</th>
-   <th width="28%">&nbsp;</th>
-  </tr>
+ <tr>
+  <th width="12%">&nbsp;DI»</th>
+  <th width="45%">FO / PO</th>
+  <th width="15%" style="text-align:right;">PrijatÈ peÚaûnÈ plnenie</th>
+  <th width="28%">&nbsp;</th>
+ </tr>
  </thead>
 <?php
 $i=0;
@@ -622,31 +619,30 @@ $i=0;
 $rsluz=mysql_fetch_object($sluz);
 ?>
  <tbody>
-  <tr>
-   <td>&nbsp;<?php echo $rsluz->xdic;?></td>
-   <td><?php echo $rsluz->xmfo." ".$rsluz->xpfo." ".$rsluz->xnpo;?></td>
-   <td style="text-align:right;"><?php echo $rsluz->prj;?></td>
-
-   <td>
-    <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl;?>);"
-         title="Vymazaù" class="toright" style="margin-right:80px;">
-    <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl;?>);"
-         title="Upraviù" class="toright" style="margin-right:20px;">
-   </td>
-  </tr>
-
+ <tr>
+  <td>&nbsp;<?php echo $rsluz->xdic;?></td>
+  <td><?php echo $rsluz->xmfo." ".$rsluz->xpfo." ".$rsluz->xnpo;?></td>
+  <td style="text-align:right;"><?php echo $rsluz->prj;?></td>
+  <td>
+   <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl;?>);"
+        title="Vymazaù" class="toright" style="margin-right:80px;">
+   <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl;?>);"
+        title="Upraviù" class="toright" style="margin-right:20px;">
+  </td>
+ </tr>
  </tbody>
 <?php
  }
 $i=$i+1;
    }
 ?>
- <tbody>
-  <tr>
-   <td>&nbsp;SPOLU <?php echo $r15;?></td>
-
-  </tr>
- </tbody>
+ <tfoot>
+ <tr>
+  <td colspan="2">&nbsp;SPOLU </td>
+  <td style="text-align:right;"><strong><?php echo $r15;?></strong></td>
+  <td>&nbsp;</td>
+ </tr>
+ </tfoot>
  </table>
 </div>
 <?php                                        }
@@ -657,35 +653,27 @@ $i=$i+1;
 <?php if ( $copern == 101 AND $strana == 3 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str2.jpg"
      alt="tlaËivo Ozn·menie nepeÚaûnÈ plnenie 2.strana 221kB" class="form-background">
-<span class="text-echo" style="top:93px; left:182px;"><?php echo $mdic; ?></span> <!-- dopyt, toto m· byù diË zamestnanca, nie platitela -->
-<span class="text-echo" style="top:93px; left:527px;"><?php echo $zaobdobie; ?></span>
+<span class="text-echo" style="top:93px; left:182px;"><?php echo $mdic; ?></span>
+<span class="text-echo" style="top:93px; left:528px;"><?php echo $zaobdobie; ?></span>
 <span class="text-echo" style="top:93px; left:574px;"><?php echo $kli_vrok; ?></span>
 
 <!-- DRZITEL  -->
-<input type="text" name="xdic" id="xdic" onkeydown=""
-       style="width:220px; top:186px; left:52px;"/>
-<input type="text" name="prj" id="prj" onkeyup="CiarkaNaBodku(this);" onkeydown=""
+<input type="text" name="xdic" id="xdic" style="width:220px; top:186px; left:52px;"/>
+<input type="text" name="prj" id="prj" onkeyup="CiarkaNaBodku(this);" 
        style="width:220px; top:178px; left:630px;"/>
 <!-- FO -->
-<input type="text" name="xpfo" id="xpfo" onkeydown=""
-       style="width:358px; top:262px; left:52px;"/>
-<input type="text" name="xmfo" id="xmfo" onkeydown=""
-       style="width:244px; top:262px; left:431px;"/>
-<!-- dopyt, ch˝baj˙ inputy pre titul pred a za menom -->
-
+<input type="text" name="xpfo" id="xpfo" style="width:358px; top:262px; left:52px;"/>
+<input type="text" name="xmfo" id="xmfo" style="width:244px; top:262px; left:431px;"/>
+<input type="text" name="xtitulp" id="xtitulp" style="width:113px; top:262px; left:692px;"/> <!-- dopyt, nie je funkËnÈ -->
+<input type="text" name="xtitulz" id="xtitulz" style="width:67px; top:262px; left:827px;"/> <!-- dopyt, nie je funkËnÈ -->
 <!-- PO -->
-<input type="text" name="xnpo" id="xnpo" onkeydown=""
-       style="width:842px; top:337px; left:52px;"/>
+<input type="text" name="xnpo" id="xnpo" style="width:842px; top:337px; left:52px;"/>
 
 <!-- Adresa -->
-<input type="text" name="xuli" id="xuli" onkeydown=""
-       style="width:634px; top:412px; left:52px;"/>
-<input type="text" name="xcis" id="xcis" onkeydown=""
-       style="width:173px; top:412px; left:719px;"/>
-<input type="text" name="xpsc" id="xpsc" onkeydown=""
-       style="width:105px; top:467px; left:52px;"/>
-<input type="text" name="xmes" id="xmes" onkeyup="CiarkaNaBodku(this);" onkeydown=""
-       style="width:701px; top:467px; left:191px;"/>
+<input type="text" name="xuli" id="xuli" style="width:634px; top:412px; left:52px;"/>
+<input type="text" name="xcis" id="xcis" style="width:173px; top:412px; left:719px;"/>
+<input type="text" name="xpsc" id="xpsc" style="width:105px; top:467px; left:52px;"/>
+<input type="text" name="xmes" id="xmes" style="width:701px; top:467px; left:191px;"/>
 
 <!-- vyplnil a pocet priloh cez echo  -->
 <!-- Vypracoval -->
@@ -700,6 +688,21 @@ $i=$i+1;
 //koniec copern == 101, strana 3
 ?>
 
+<div class="navbar">
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=1', '_self');"
+    class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=2', '_self');"
+    class="<?php echo $clas2; ?> toleft">Zoznam drûiteæov</a>
+<?php if ( $strana == 3 ) { ?>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=3', '_self');"
+    class="<?php echo $clas3; ?> toleft">⁄prava drûiteæa</a>
+<?php                     } ?>
+<?php if ( $strana != 2 ) { ?>
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+<?php                     } ?>
+</div>
+
+
 </FORM>
 </div> <!-- koniec #content -->
 
@@ -708,7 +711,6 @@ $i=$i+1;
 ///////////////////////////////////////////////////VYTLAC oznamenie
 if ( $copern == 40 )
 {
-
 if ( File_Exists("../tmp/priznaniedmv.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/priznaniedmv.$kli_uzid.pdf"); }
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
@@ -721,7 +723,6 @@ $pdf->AddFont('arial','','arial.php');
 
 //vytlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrd WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 
@@ -743,8 +744,54 @@ if ( File_Exists('../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str1.j
 {
 $pdf->Image('../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str1.jpg',0,0,210,297);
 }
-$pdf->SetY(72);
-$pdf->Cell(20,7," ","$rmc1",0,"R");$pdf->Cell(50,7,"$mdic","$rmc",1,"L");
+$pdf->SetY(10);
+
+//dic
+$pdf->Cell(190,63," ","$rmc1",1,"L");
+$text="1234567890";
+$text=$mdic;
+$t01=substr($text,0,1);
+$t02=substr($text,1,1);
+$t03=substr($text,2,1);
+$t04=substr($text,3,1);
+$t05=substr($text,4,1);
+$t06=substr($text,5,1);
+$t07=substr($text,6,1);
+$t08=substr($text,7,1);
+$t09=substr($text,8,1);
+$t10=substr($text,9,1);
+$pdf->Cell(3,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t02","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t08","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t10","$rmc",1,"C");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                                        } //koniec 1.strany
