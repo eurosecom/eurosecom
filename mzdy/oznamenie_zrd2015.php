@@ -37,7 +37,7 @@ $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
 $zaobdobie=1*$_REQUEST['h_stv'];
-
+$dajnew=1;
 
 $sql = "SELECT konx7 FROM F$kli_vxcf"."_mzdoznameniezrd ";
 $vysledok = mysql_query("$sql");
@@ -199,6 +199,7 @@ $sqldok = mysql_query("$sqlfir");
 $uprav="NO";
 $copern=101;
 $strana=2;
+$dajnew=0;
 if( $cislo_cpl > 0 ) { $strana=3; }
 
      }
@@ -507,6 +508,7 @@ table.vozidla tfoot td {
   {
    window.open('oznamenie_zrd2015.php?copern=801&strana=2&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>', '_self' )
   }
+
 </script>
 </HEAD>
 <?php if( $copern != 40 ) { ?>
@@ -674,9 +676,10 @@ $i=$i+1;
 <span class="text-echo" style="top:93px; left:182px;"><?php echo $mdic; ?></span>
 <span class="text-echo" style="top:93px; left:528px;"><?php echo $zaobdobie; ?></span>
 <span class="text-echo" style="top:93px; left:574px;"><?php echo $kli_vrok; ?></span>
-<img src="../obr/ikony/plus_lgreen_icon.png" onclick=" ;" title="Prida držite¾a"
+<?php if( $dajnew == 1 ) { ?>
+<img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="Prida držite¾a"
      style="position:absolute; top:134px; right:9px; width:24px; height:24px; cursor:pointer;">
-
+<?php                    } ?>
 <!-- DRZITEL  -->
 <input type="text" name="xdic" id="xdic" style="width:220px; top:186px; left:52px;"/>
 <input type="text" name="prj" id="prj" onkeyup="CiarkaNaBodku(this);" 
