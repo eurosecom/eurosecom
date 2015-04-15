@@ -478,18 +478,14 @@ table.vozidla tfoot td {
 
   }
 
-  function VysvetlVypln()
+  function InfoFRSR()
   {
-   window.open('../dokumenty/zdravpoist/dividendy_ZPv14_vysvetlivky.pdf', '_blank');
+   window.open('../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_info.pdf', '_blank');
   }
-
   function TlacVykaz()
   {
    window.open('oznamenie_zrd2015.php?copern=40&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=9999', '_blank');
   }
-
-
-
 
 //Z ciarky na bodku
   function CiarkaNaBodku(Vstup)
@@ -511,7 +507,6 @@ table.vozidla tfoot td {
   {
    window.open('oznamenie_zrd2015.php?copern=801&strana=2&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>', '_self' )
   }
-
 </script>
 </HEAD>
 <?php if( $copern != 40 ) { ?>
@@ -532,7 +527,8 @@ if ( $cislo_xplat > 9999 ) { $nazovplat=$cislo_xplat." ".$fir_fnazovx; }
   </td>
   <td>
    <div class="bar-btn-form-tool">
-<!--     <img src="../obr/ikony/info_blue_icon.png" onclick="VysvetlVypln();" title="Vysvetlivky" class="btn-form-tool"> dopyt, zatia¾ nie -->
+    <img src="../obr/ikony/info_blue_icon.png" onclick="InfoFRSR();"
+         title="Aktuálna informácia od Finanèného riadite¾stva SR" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
@@ -678,6 +674,8 @@ $i=$i+1;
 <span class="text-echo" style="top:93px; left:182px;"><?php echo $mdic; ?></span>
 <span class="text-echo" style="top:93px; left:528px;"><?php echo $zaobdobie; ?></span>
 <span class="text-echo" style="top:93px; left:574px;"><?php echo $kli_vrok; ?></span>
+<img src="../obr/ikony/plus_lgreen_icon.png" onclick=" ;" title="Prida držite¾a"
+     style="position:absolute; top:134px; right:9px; width:24px; height:24px; cursor:pointer;">
 
 <!-- DRZITEL  -->
 <input type="text" name="xdic" id="xdic" style="width:220px; top:186px; left:52px;"/>
@@ -1468,10 +1466,10 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",1,"C");
 //1.DRZITEL
 $pdf->SetY(32);
 }
-
+//2.DRZITEL
 if ( $iv == 1 ) {
 $pdf->SetY(111);
-}
+                }
 
 //dic
 $pdf->Cell(190,6," ","$rmc1",1,"L");
@@ -1815,10 +1813,9 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F1","$rmc",1,"C");
-
                 }
 
-if( $iv == 1 )  {
+if ( $iv == 1 ) {
                
 //Vypracoval
 $pdf->SetY(205);
@@ -1877,7 +1874,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$E","$rmc",1,"C");
                 }
-
 $iv = $iv + 1;
   }
                                        } //koniec 2.strany
@@ -1942,7 +1938,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",1,"C");
 
 //strana
-//dopyt nefunkèné
 $pdf->Cell(190,5,"","$rmc1",1,"L");
 $textx=$stranav;
 $text=sprintf("% 5s",$textx);
@@ -1957,7 +1952,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");
 //pocet stran
-//dopyt nefunkèné
 $textx=$prilohy;
 $text=sprintf("% 5s",$textx);
 $A=substr($text,0,1);
@@ -1970,7 +1964,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$C","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",1,"C");
-
                 }
 
 if ( $jv == 0 ) {
@@ -1979,16 +1972,14 @@ $pdf->SetY(42);
                 }
 
 if ( $jv == 1 ) {
-//1.DRZITEL V PRILOHE
+//2.DRZITEL V PRILOHE
 $pdf->SetY(121);
                 }
 
 if ( $jv == 2 ) {
-//1.DRZITEL V PRILOHE
-$pdf->SetY(199);
+//3.DRZITEL V PRILOHE
+$pdf->SetY(200);
                 }
-
-
 //dic
 $pdf->Cell(190,6," ","$rmc1",1,"L");
 $text="1234567890";
@@ -2331,9 +2322,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F1","$rmc",1,"C");
-                
-
-
 }
 $iv = $iv + 1;
 $jv = $jv + 1;
