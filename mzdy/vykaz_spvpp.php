@@ -1361,6 +1361,8 @@ $fir_fnaz = str_replace("&","a",$fir_fnaz);
 
   $text = "<tel>$fir_ftel</tel>"."\r\n";
   fwrite($soubor, $text);
+
+$fir_fem1 = $retezec = iconv("CP1250", "UTF-8", $fir_fem1);
   $text = "<mail>$fir_fem1</mail>"."\r\n";
   fwrite($soubor, $text);
 
