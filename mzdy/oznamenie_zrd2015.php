@@ -509,6 +509,16 @@ table.vozidla tfoot td {
    window.open('oznamenie_zrd2015.php?copern=801&strana=2&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>', '_self' )
   }
 
+
+  function kopyZar(ulica, cislo, psc, mesto)
+  {
+   document.formv1.zzul.value = ulica;
+   document.formv1.zzcs.value = cislo;
+   document.formv1.zzps.value = psc;
+   document.formv1.zzms.value = mesto;
+   dzdrzar.style.display='none';
+
+  }
 </script>
 </HEAD>
 <?php if( $copern != 40 ) { ?>
@@ -598,7 +608,7 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 <input type="text" name="zzcs" id="zzcs" style="width:173px; top:823px; left:719px;"/>
 <input type="text" name="zzps" id="zzps" style="width:105px; top:879px; left:52px;"/>
 <input type="text" name="zzms" id="zzms" style="width:701px; top:879px; left:191px;"/>
-<img src="../obr/ikony/copy5_blue_x32.png" title="Kopírova údaje zdravotníckeho zariadenia"
+<img src="../obr/ikony/copy5_blue_x32.png" title="Kopírova údaje zdravotníckeho zariadenia" onclick="dzdrzar.style.display='';"
      style="width:32px; height:32px; position:absolute; top:780px; right:6px; cursor:pointer;">
 
 <!-- Suhrnne udaje -->
@@ -733,6 +743,73 @@ $i=$i+1;
 
 </FORM>
 </div> <!-- koniec #content -->
+
+<?php
+//zdrav.zariadenia
+if( $copern == 101 AND $strana == 1  ) 
+     {
+
+$sqltt = "DROP TABLE F$kli_vxcf"."_mzdoznameniezrdx$kli_uzid ";
+$sql = mysql_query("$sqltt");
+
+$sqltt = "CREATE TABLE F$kli_vxcf"."_mzdoznameniezrdx".$kli_uzid." SELECT * FROM F$kli_vxcf"."_mzdoznameniezrd ";
+$sql = mysql_query("$sqltt");
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdx$kli_uzid WHERE zzms != '' GROUP BY zzms, zzul, zzcs ";
+$sql = mysql_query("$sqltt");
+
+$cpol = mysql_num_rows($sql);
+$i=0;
+?>
+<div id="dzdrzar" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 900px; left: 50px; width:400px; height:50px;">
+<table  class='ponuka' width='100%'>
+<tr><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td></tr>
+
+<tr>
+<td colspan="1">mesto</td>
+<td colspan="2">ulica</td>
+<td colspan="2">cislo
+<img src="../obr/ikony/copy5_blue_x32.png" title="zhasni" onclick="dzdrzar.style.display='none';">
+</td>
+</tr>
+
+<?php                   
+   while ($i <= $cpol )
+   {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+  {
+$riadok=mysql_fetch_object($sql);
+?>
+
+
+
+<tr>
+<td colspan="1">
+<img src="../obr/ikony/copy5_blue_x32.png" title="Kopírova zdrav zar <?php echo $riadok->zzms; ?>, <?php echo $riadok->zzul; ?>" 
+onclick="kopyZar('<?php echo $riadok->zzul; ?>','<?php echo $riadok->zzcs; ?>','<?php echo $riadok->zzps; ?>','<?php echo $riadok->zzms; ?>')">
+<?php echo $riadok->zzms; ?></td>
+<td colspan="2"><?php echo $riadok->zzul; ?></td>
+<td colspan="2"><?php echo $riadok->zzcs; ?></td>
+
+</tr>
+
+<?php
+  }
+$i=$i+1;
+   }
+?>
+</table>
+</div>
+<script type="text/javascript">
+
+</script>
+<?php
+     }
+//koniec zdrav.zariadenia
+?>
+
+
+
 <?php //koniec ak copern != 40 ?>
 <?php                     } ?>
 
