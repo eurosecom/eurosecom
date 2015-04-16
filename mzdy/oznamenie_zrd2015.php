@@ -598,6 +598,8 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 <input type="text" name="zzcs" id="zzcs" style="width:173px; top:823px; left:719px;"/>
 <input type="text" name="zzps" id="zzps" style="width:105px; top:879px; left:52px;"/>
 <input type="text" name="zzms" id="zzms" style="width:701px; top:879px; left:191px;"/>
+<img src="../obr/ikony/copy5_blue_x32.png" title="Kopírova údaje zdravotníckeho zariadenia"
+     style="width:32px; height:32px; position:absolute; top:780px; right:6px; cursor:pointer;">
 
 <!-- Suhrnne udaje -->
 <div class="input-echo" style="width:220px; top:943px; left:487px; text-align:right;"><?php echo $r15; ?></div>
@@ -676,14 +678,17 @@ $i=$i+1;
 <span class="text-echo" style="top:93px; left:182px;"><?php echo $mdic; ?></span>
 <span class="text-echo" style="top:93px; left:528px;"><?php echo $zaobdobie; ?></span>
 <span class="text-echo" style="top:93px; left:574px;"><?php echo $kli_vrok; ?></span>
-<?php if( $dajnew == 1 ) { ?>
-<img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="Prida držite¾a"
-     style="position:absolute; top:134px; right:9px; width:24px; height:24px; cursor:pointer;">
-<?php                    } ?>
+
 <!-- DRZITEL  -->
 <input type="text" name="xdic" id="xdic" style="width:220px; top:186px; left:52px;"/>
 <input type="text" name="prj" id="prj" onkeyup="CiarkaNaBodku(this);" 
        style="width:220px; top:178px; left:630px;"/>
+<?php if ( $dajnew == 1 ) { ?>
+<img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="Prida držite¾a"
+     style="position:absolute; top:134px; left:9px; width:24px; height:24px; cursor:pointer;">
+<?php                     } ?>
+<img src="../obr/ikony/copy5_blue_x32.png" title="Kopírova údaje držite¾a"
+     style="width:32px; height:32px; position:absolute; top:130px; right:6px; cursor:pointer;">
 <!-- FO -->
 <input type="text" name="xpfo" id="xpfo" style="width:358px; top:262px; left:52px;"/>
 <input type="text" name="xmfo" id="xmfo" style="width:244px; top:262px; left:431px;"/>
