@@ -403,7 +403,6 @@ table.vozidla {
   width: 850px;
   margin: 10px auto;
   overflow: auto;
-  border: 0px solid black;
 }
 table.vozidla thead th {
   height: 11px;
@@ -433,6 +432,37 @@ table.vozidla tfoot td {
   font-size: 15px;
   height: 26px;
   line-height: 26px;
+}
+div.wrap-zariadenia {
+  z-index: 500;
+  overflow: auto;
+  width: 400px;
+  position: absolute;
+  top: 711px;
+  right: 5px;
+  background-color: #ffff90;
+  padding: 5px;
+  border-right: 2px outset #c2c2c2;
+  border-bottom: 2px outset #c2c2c2;
+}
+div.wrap-zariadenia img {
+  cursor: pointer;
+}
+table.zariadenia {
+  width: 100%;
+  margin: 28px auto 0 auto;
+}
+table.zariadenia th {
+  background-color: #add8e6;
+  font-size: 11px;
+  padding: 4px 0 2px 0;
+  text-align: left;
+}
+table.zariadenia td {
+  background-color: #fff;
+  line-height: 25px;
+  font-size: 13px;
+  border-top: 3px solid #ffff90;
 }
 </style>
 
@@ -608,7 +638,8 @@ $source="../mzdy/oznamenie_zrd2015.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 <input type="text" name="zzcs" id="zzcs" style="width:173px; top:823px; left:719px;"/>
 <input type="text" name="zzps" id="zzps" style="width:105px; top:879px; left:52px;"/>
 <input type="text" name="zzms" id="zzms" style="width:701px; top:879px; left:191px;"/>
-<img src="../obr/ikony/copy5_blue_x32.png" title="Kopírova údaje zdravotníckeho zariadenia" onclick="dzdrzar.style.display='';"
+<img src="../obr/ikony/copy5_blue_x32.png" onclick="dzdrzar.style.display='block';"
+     title="Zobrazi uložené adresy"
      style="width:32px; height:32px; position:absolute; top:780px; right:6px; cursor:pointer;">
 
 <!-- Suhrnne udaje -->
@@ -740,15 +771,12 @@ $i=$i+1;
 <?php                     } ?>
 </div>
 
-
 </FORM>
-</div> <!-- koniec #content -->
 
 <?php
 //zdrav.zariadenia
-if( $copern == 101 AND $strana == 1  ) 
+if ( $copern == 101 AND $strana == 1  )
      {
-
 $sqltt = "DROP TABLE F$kli_vxcf"."_mzdoznameniezrdx$kli_uzid ";
 $sql = mysql_query("$sqltt");
 
@@ -761,45 +789,38 @@ $sql = mysql_query("$sqltt");
 $cpol = mysql_num_rows($sql);
 $i=0;
 ?>
-<div id="dzdrzar" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 900px; left: 50px; width:400px; height:50px;">
-<table  class='ponuka' width='100%'>
-<tr><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td></tr>
-
-<tr>
-<td colspan="1">mesto</td>
-<td colspan="2">ulica</td>
-<td colspan="2">cislo
-<img src="../obr/ikony/copy5_blue_x32.png" title="zhasni" onclick="dzdrzar.style.display='none';">
-</td>
-</tr>
-
-<?php                   
+<div id="dzdrzar" class="wrap-zariadenia" style="display:none;">
+ <h4 style="font-size:15px; float:left; line-height:20px; position:relative; top:3px;">&nbsp;Adresy zdravotníckych zariadení</h4>
+ <img src="../obr/ikony/turnoff_blue_icon.png" onclick="dzdrzar.style.display='none';"
+      title="Skry" style="width:20px; height:20px; float:right;
+                           position:absolute; top:7px; right:8px;">
+ <table class="zariadenia">
+ <tr>
+  <th style="width:55%;">&nbsp;&nbsp;Ulica èíslo</th>
+  <th style="width:45%;">Mesto</th>
+ </tr>
+<?php
    while ($i <= $cpol )
    {
   if (@$zaznam=mysql_data_seek($sql,$i))
   {
 $riadok=mysql_fetch_object($sql);
 ?>
-
-
-
-<tr>
-<td colspan="1">
-<img src="../obr/ikony/copy5_blue_x32.png" title="Kopírova zdrav zar <?php echo $riadok->zzms; ?>, <?php echo $riadok->zzul; ?>" 
-onclick="kopyZar('<?php echo $riadok->zzul; ?>','<?php echo $riadok->zzcs; ?>','<?php echo $riadok->zzps; ?>','<?php echo $riadok->zzms; ?>')">
-<?php echo $riadok->zzms; ?></td>
-<td colspan="2"><?php echo $riadok->zzul; ?></td>
-<td colspan="2"><?php echo $riadok->zzcs; ?></td>
-
-</tr>
-
+ <tr>
+  <td>&nbsp;&nbsp;<?php echo "$riadok->zzul $riadok->zzcs"; ?></td>
+  <td><?php echo $riadok->zzms; ?>&nbsp;
+   <img src="../obr/ikony/copy5_blue_x32.png" title="Kopírova adresu zariadenia"
+onclick="kopyZar('<?php echo $riadok->zzul; ?>','<?php echo $riadok->zzcs; ?>','<?php echo $riadok->zzps; ?>','<?php echo $riadok->zzms; ?>')"
+style="width:22px; height:22px; position:relative; top:4px;">
+  </td>
+ </tr>
 <?php
   }
 $i=$i+1;
    }
 ?>
-</table>
-</div>
+ </table>
+</div> <!-- .wrap-zariadenia -->
 <script type="text/javascript">
 
 </script>
@@ -807,7 +828,7 @@ $i=$i+1;
      }
 //koniec zdrav.zariadenia
 ?>
-
+</div> <!-- koniec #content -->
 
 
 <?php //koniec ak copern != 40 ?>
