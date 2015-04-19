@@ -76,6 +76,10 @@ if( $copern > 50 AND $drupoh == 86 )
 {
 $uctsys="crf104nuj_nozdrdok";
 }
+if( $copern > 50 AND $drupoh == 87 )
+{
+$uctsys="crf204pod_no";
+}
 if( $copern > 50 AND $drupoh == 94 )
 {
 $uctsys="crcash_flow";
@@ -123,7 +127,7 @@ $vysledek = mysql_query("$sql");
 
 }
 
-if( $drupoh == 81 OR $drupoh == 82 OR $drupoh == 83 OR $drupoh == 84 OR $drupoh == 85 OR $drupoh == 94 OR $drupoh == 95 OR $drupoh == 96 OR $drupoh == 97 OR $drupoh == 98 )
+if( $drupoh == 81 OR $drupoh == 82 OR $drupoh == 83 OR $drupoh == 84 OR $drupoh == 85 OR $drupoh == 94 OR $drupoh == 95 OR $drupoh == 96 OR $drupoh == 97 OR $drupoh == 98 OR $drupoh == 87 )
 {
 
 $sqlt = <<<uctmzd
@@ -150,6 +154,12 @@ $vysledek = mysql_query("$sql");
 if( $drupoh == 83 )
 {
 $sql = "ALTER TABLE F$kli_vxcf"."_crf204nuj_no ADD cpl01 int DEFAULT 0 AFTER crs";
+$vysledek = mysql_query("$sql");
+
+}
+if( $drupoh == 87 )
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_crf204pod_no ADD cpl01 int DEFAULT 0 AFTER crs";
 $vysledek = mysql_query("$sql");
 
 }
@@ -261,6 +271,15 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_crf204nuj_no SELECT * FROM ".$databaza."F$h_
 $dsql = mysql_query("$dsqlt");
   }
 
+if( $drupoh == 87 )
+  {
+$dsqlt = "TRUNCATE F$kli_vxcf"."_crf204pod_no ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_crf204pod_no SELECT * FROM ".$databaza."F$h_ycf"."_crf204pod_no ";
+$dsql = mysql_query("$dsqlt");
+  }
+
 if( $drupoh == 84 )
   {
 $dsqlt = "TRUNCATE F$kli_vxcf"."_crf104nuj_no ";
@@ -323,6 +342,35 @@ exit;
 
 $copern=308;
 //koniec nacitania standartnej generovania FIN 2 - 04 NUJ
+    }
+
+//nacitanie standartnej generovania FIN 2 - 04 POD
+    if ( $copern == 155 AND $drupoh == 87 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete naËÌtaù ötandartn˝ ËÌselnÌk generovania FIN 2 - 04 POD ?") )
+         { window.close()  }
+else
+         { location.href='oprcis.php?copern=156&page=1&drupoh=87'  }
+</script>
+<?php
+    }
+
+    if ( $copern == 156 AND $drupoh == 87 )
+    {
+
+$sql = "DROP TABLE F$kli_vxcf"."_crf204pod_no";
+$vysledok = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_crf204pod_nopre2011";
+$vysledok = mysql_query("$sql");
+
+echo "Zatvorte okno generovania a skliknite na naËÌtanie hodnÙt do v˝kazu FIN 2 - 04 POD - Program naËÌta ötandartn˝ ËÌselnÌk generovania FIN 2 - 04 POD";
+exit;
+
+
+$copern=308;
+//koniec nacitania standartnej generovania FIN 2 - 04 POD
     }
 
 //nacitanie standartnej generovania FIN 7 - 04
@@ -756,6 +804,7 @@ window.open('../ucto/oprcis.php?copern=308&page=1&sysx=UCT&uprav_cpl=' + cislo_c
 <?php if( $drupoh == 81 ) { echo " Generovanie v˝kazu FIN 2-04"; } ?>
 <?php if( $drupoh == 82 ) { echo " Generovanie v˝kazu FIN 7-04"; } ?>
 <?php if( $drupoh == 83 ) { echo " Generovanie v˝kazu FIN 2-04 NUJ"; } ?>
+<?php if( $drupoh == 87 ) { echo " Generovanie v˝kazu FIN 2-04 POD"; } ?>
 <?php if( $drupoh == 84 AND $kli_vrok <  2013 ) { echo " Generovanie v˝kazu FIN 1-04"; } ?>
 <?php if( $drupoh == 85 AND $kli_vrok <  2013 ) { echo " Generovanie v˝kazu FIN 1-04 - priradenie bank.˙Ëet,doklad,˙Ëet / zdroj financovania"; } ?>
 <?php if( $drupoh == 86 AND $kli_vrok <  2013 ) { echo " Generovanie v˝kazu FIN 1-04 - priradenie ˙Ëet,doklad,hodnota / zdroj financovania,RP"; } ?>
@@ -778,7 +827,7 @@ window.open('../ucto/oprcis.php?copern=308&page=1&sysx=UCT&uprav_cpl=' + cislo_c
 
 <?php
 ////////////////////////////////////////////////////////////////uprava vykaz204
-if( $drupoh == 81 OR $drupoh == 82 OR $drupoh == 83 OR $drupoh == 84 OR $drupoh == 85 OR $drupoh == 86 OR $drupoh == 94 OR $drupoh == 95 OR $drupoh == 96 OR $drupoh == 97 OR $drupoh == 98 )           
+if( $drupoh == 81 OR $drupoh == 82 OR $drupoh == 83 OR $drupoh == 84 OR $drupoh == 85 OR $drupoh == 86 OR $drupoh == 94 OR $drupoh == 95 OR $drupoh == 96 OR $drupoh == 97 OR $drupoh == 98 OR $drupoh == 87 )           
 {
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER BY cpl";
@@ -791,7 +840,7 @@ $i = 0;
 
 ?>
 <table class="vstup" width="100%" >
-<?php if( $drupoh == 81 OR $drupoh == 82 OR $drupoh == 83 OR $drupoh == 84 OR $drupoh == 94 OR $drupoh == 95 OR $drupoh == 96 OR $drupoh == 97 OR $drupoh == 98 ) { ?>
+<?php if( $drupoh == 81 OR $drupoh == 82 OR $drupoh == 83 OR $drupoh == 84 OR $drupoh == 94 OR $drupoh == 95 OR $drupoh == 96 OR $drupoh == 97 OR $drupoh == 98 OR $drupoh == 87 ) { ?>
 <tr>
 <td class="hmenu" width="10%" >Uce
 <?php if( $drupoh == 82 OR $drupoh == 84 ) { ?>
@@ -801,6 +850,10 @@ $i = 0;
 <?php if( $drupoh == 83 ) { ?>
 <a href='#'>
 <img src='../obr/import.png' width=20 height=15 border=0 title="NaËÌtaj generovanie z minulÈho roka nie je moûnÈ lebo sa zmenil v˝kaz oproti roku 2012"></a>
+<?php                     } ?>
+<?php if( $drupoh == 87 ) { ?>
+<a href='#'>
+<img src='../obr/import.png' width=20 height=15 border=0 title="NaËÌtaj generovanie z minulÈho roka nie je moûnÈ lebo nov˝ v˝kaz pre rok 2015"></a>
 <?php                     } ?>
 <?php if( $drupoh == 95 ) { ?>
 <a href='oprcis.php?drupoh=<?php echo $drupoh; ?>&copern=6095&page=1'>
@@ -814,7 +867,7 @@ $i = 0;
 <th class="hmenu" width="5%" >Edi/Del
 <td class="hmenu" width="75%" align="right" > 
 <?php
-if ( $drupoh != 95 AND $drupoh != 84 AND $drupoh != 83 )
+if ( $drupoh != 95 AND $drupoh != 84 AND $drupoh != 83 AND $drupoh != 87 )
   {
 ?>
 <a href='oprcis.php?drupoh=<?php echo $drupoh; ?>&copern=155&page=1'>
@@ -831,7 +884,15 @@ if (  $drupoh == 83 )
 <?php
   }
 ?>
-
+<?php
+if (  $drupoh == 87 )
+  {
+?>
+<a href='vykaz_fin204pod.php?drupoh=1&copern=1001&page=1'>
+<img src='../obr/import.png' width=20 height=15 border=0 title="Nastav ötandartn˝ ËÌselnÌk"></a>
+<?php
+  }
+?>
 <?php
 if ( $kli_uzall > 25000 AND $drupoh == 95 )
   {

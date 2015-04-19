@@ -448,6 +448,7 @@ $dsql = mysql_query("$dsqlt");
 $zdroj3pol=0;
 if( $fin1a12 == 1 ) { $zdroj3pol=1; }
 if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 ) ) { $zdroj3pol=1; }
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $zdroj3pol=1; }
 
 if( $zdroj3pol == 1 )
 {  
@@ -456,16 +457,36 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=substring(poloz,1,3
 if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 ) ) 
 { 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=41 WHERE poloz > 0 "; 
+}
 
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) 
+{ 
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=41 WHERE poloz > 0 "; 
 }
 
 $oznac = mysql_query("$sqtoz");
 
-if( $kli_uzid == 111111111 )
+
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) 
+{ 
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 610 AND str = 24 "; 
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 620 AND str = 24 "; 
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 641  "; 
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 310  "; 
+$oznac = mysql_query("$sqtoz");
+
+}
+
+
+
+if( $kli_uzid == 171717171717171 )
   {
 
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobrats$kli_uzid WHERE poloz > 0 ORDER BY uce,dat,dok ";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobrats$kli_uzid WHERE poloz > 0 ORDER BY uce,str ";
 
 $tov = mysql_query("$sqltt");
 $tvpol = mysql_num_rows($tov);
@@ -480,7 +501,7 @@ $rtov=mysql_fetch_object($tov);
 
 $hods=$hods+$rtov->hod;
 
-echo $rtov->uce.";".$rtov->zdroj.";".$rtov->poloz."<br />";
+echo $rtov->uce.";".$rtov->zdroj.";".$rtov->poloz.";".$rtov->str."<br />";
 
  }
 
@@ -590,6 +611,12 @@ $oznac = mysql_query("$sqtoz");
 if( $_SERVER['SERVER_NAME'] == "www.eurodpsgbely.sk" ) 
 {
 $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, oddiel='10.1.2.2' ";
+$oznac = mysql_query("$sqtoz");
+}
+
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) 
+{
+$sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, program='9.2', oddiel='0.8.2.0' ";
 $oznac = mysql_query("$sqtoz");
 }
 
@@ -1024,6 +1051,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
+
+
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $fin1a12=0; }
 
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_uctprcvykazx".$kli_uzid." ".
@@ -2274,6 +2304,7 @@ if( $daz_sk == '00.00.0000' ) { $daz_sk=$dness; }
 
 $popvyk="FIN 1-12";
 if( $fin1a12 == 1 ) { $popvyk="FIN 1a-12"; }
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $popvyk="FIN 1-12"; }
 
 ?>
 <HEAD>

@@ -50,8 +50,9 @@ if( $_SERVER['SERVER_NAME'] == "www.enposro.sk" )
 if( $kli_uzid != 17 AND $kli_uzid != 23 AND $kli_uzid != 57 AND $kli_uzid != 58 AND $kli_uzid != 141 ) { $tlacodpady=0; }
 }
 $dajfinvykazy=0;
-if( $kli_nezis == 1 ) { $dajfinvykazy=1; }
-if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $dajfinvykazy=1; }
+$volajfin1a12=1;
+if( $kli_nezis == 1 ) { $dajfinvykazy=1; $volajfin1a12=1; }
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $dajfinvykazy=1; $volajfin1a12=0; }
  
 ?> 
 
@@ -619,6 +620,37 @@ window.open('../ucto/vykaz_fin204nuj.php?cislo_oc=' + h_oc + '&copern=26&drupoh=
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+//vykaz Fin204POD13
+
+function TlacFin204pod13()
+                {
+var h_oc = document.forms.formfin204pod13.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin204pod.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=é',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+function UpravFin204pod13()
+                {
+var h_oc = document.forms.formfin204pod13.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin204pod.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function ZnovuFin204pod13()
+                {
+var h_oc = document.forms.formfin204pod13.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin204pod.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
 //vykaz Fin504
 
 function TlacFin504()
@@ -682,6 +714,16 @@ var h_fmzdy = 0;
 
 
 window.open('fin204nujdbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function DbfFin204pod13()
+                {
+var h_oc = document.forms.formfin204pod13.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('fin204poddbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -1274,6 +1316,37 @@ if( $kli_vrok >= 2013 AND $dajfinvykazy == 1 ) {
 </table>
 
 <table class="vstup" width="100%" >
+<FORM name="formfin204pod13" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacFin204pod13();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
+</td>
+<td class="bmenu" width="98%">Finanènı vıkaz o vybranıch údajoch z aktív a pasív subjektu verejnej správy FIN 2 - 04 POD
+ <select size="1" name="h_oc" id="h_oc" >
+<option value="1" >1.štvrrok</option>
+<option value="2" >2.štvrrok</option>
+<option value="3" >3.štvrrok</option>
+<option value="4" >4.štvrrok</option>
+</select>
+<a href="#" onClick="DbfFin204pod13();">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru pre AZUV' ></a>
+
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="UpravFin204pod13();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty ' ></a>
+</td>
+
+<td class="bmenu" width="2%">
+<a href="#" onClick="ZnovuFin204pod13();">
+<img src='../obr/orig.png' width=20 height=15 border=0 title='Naèíta hodnoty  - môete opakova viackrát' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+
+<table class="vstup" width="100%" >
 <FORM name="formfin504" class="obyc" method="post" action="#" >
 <tr>
 <td class="bmenu" width="2%">
@@ -1340,11 +1413,15 @@ if( $kli_vrok >= 2013 ) {
 <table class="vstup" width="100%" >
 <FORM name="formfin1a12" class="obyc" method="post" action="#" >
 <tr>
+<?php
+$nazfin1a12="FIN 1a - 12";
+if( $volajfin1a12 == 0 ) { $nazfin1a12="FIN 1 - 12";}
+?>
 <td class="bmenu" width="2%">
 <a href="#" onClick="TlacFin1a12();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
-<td class="bmenu" width="98%">Finanènı vıkaz o plnení rozpoètu a o nerozpoètovanıch pohyboch na úètoch subjektu verejnej správy FIN 1a - 12
+<td class="bmenu" width="98%">Finanènı vıkaz o plnení rozpoètu a o nerozpoètovanıch pohyboch na úètoch subjektu verejnej správy <?php echo $nazfin1a12; ?>
  <select size="1" name="h_oc" id="h_oc" >
 <option value="1" >1.<?php echo $kli_vrok; ?></option>
 <option value="2" >2.<?php echo $kli_vrok; ?></option>
