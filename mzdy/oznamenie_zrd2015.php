@@ -549,6 +549,22 @@ table.zariadenia td {
    dzdrzar.style.display='none';
 
   }
+  function kopyDrz(xdic, xmfo, xpfo, xnpo, xuli, xcis, xpsc, xmes, xtitulp, xtitulz )
+  {
+   document.formv1.xdic.value = xdic;
+   document.formv1.xmfo.value = xmfo;
+   document.formv1.xpfo.value = xpfo;
+   document.formv1.xnpo.value = xnpo;
+   document.formv1.xuli.value = xuli;
+   document.formv1.xcis.value = xcis;
+   document.formv1.xpsc.value = xpsc;
+   document.formv1.xmes.value = xmes;
+   document.formv1.xtitulp.value = xtitulp;
+   document.formv1.xtitulz.value = xtitulz;
+
+   ddrz.style.display='none';
+
+  }
 </script>
 </HEAD>
 <?php if( $copern != 40 ) { ?>
@@ -728,7 +744,7 @@ $i=$i+1;
 <img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="Prida držite¾a"
      style="position:absolute; top:134px; left:9px; width:24px; height:24px; cursor:pointer;">
 <?php                     } ?>
-<img src="../obr/ikony/copy5_blue_x32.png" title="Kopírova údaje držite¾a"
+<img src="../obr/ikony/copy5_blue_x32.png" title="Kopírova údaje držite¾a" onclick="ddrz.style.display='block'"
      style="width:32px; height:32px; position:absolute; top:130px; right:6px; cursor:pointer;">
 <!-- FO -->
 <input type="text" name="xpfo" id="xpfo" style="width:358px; top:262px; left:52px;"/>
@@ -772,6 +788,62 @@ $i=$i+1;
 </div>
 
 </FORM>
+
+<?php
+//drzitel
+if ( $copern == 101 AND $strana == 3  )
+     {
+$sqltt = "DROP TABLE F$kli_vxcf"."_mzdoznameniezrdpolx$kli_uzid ";
+$sql = mysql_query("$sqltt");
+
+$sqltt = "CREATE TABLE F$kli_vxcf"."_mzdoznameniezrdpolx".$kli_uzid." SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xdic > 0 ";
+$sql = mysql_query("$sqltt");
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpolx$kli_uzid WHERE xmes != '' GROUP BY xdic,xnpo,xmfo,xnpo,xuli,xmes ";
+$sql = mysql_query("$sqltt");
+
+$cpol = mysql_num_rows($sql);
+$i=0;
+?>
+<div id="ddrz" class="wrap-zariadenia" style="display:none;">
+ <h4 style="font-size:15px; float:left; line-height:20px; position:relative; top:3px;">&nbsp;drziatelia</h4>
+ <img src="../obr/ikony/turnoff_blue_icon.png" onclick="ddrz.style.display='none';"
+      title="Skry" style="width:20px; height:20px; float:right;
+                           position:absolute; top:7px; right:8px;">
+ <table class="zariadenia">
+ <tr>
+  <th style="width:55%;">&nbsp;&nbsp;dic nazov</th>
+  <th style="width:45%;">Mesto</th>
+ </tr>
+<?php
+   while ($i <= $cpol )
+   {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+  {
+$riadok=mysql_fetch_object($sql);
+?>
+ <tr>
+  <td>&nbsp;&nbsp;<?php echo "$riadok->xdic $riadok->xnpo $riadok->xmfo $riadok->xpfo"; ?></td>
+  <td><?php echo $riadok->xmes; ?>&nbsp;
+   <img src="../obr/ikony/copy5_blue_x32.png" title="Kopírova drzitela"
+onclick="kopyDrz('<?php echo $riadok->xdic; ?>','<?php echo $riadok->xmfo; ?>','<?php echo $riadok->xpfo; ?>','<?php echo $riadok->xnpo; ?>','<?php echo $riadok->xuli; ?>','<?php echo $riadok->xcis; ?>','<?php echo $riadok->xpsc; ?>','<?php echo $riadok->xmes; ?>','<?php echo $riadok->xtitulp; ?>','<?php echo $riadok->xtitulz; ?>')"
+style="width:22px; height:22px; position:relative; top:4px;">
+  </td>
+ </tr>
+<?php
+  }
+$i=$i+1;
+   }
+?>
+ </table>
+</div> <!-- .wrap-zariadenia -->
+<script type="text/javascript">
+
+</script>
+<?php
+     }
+//koniec drzitel
+?>
 
 <?php
 //zdrav.zariadenia
