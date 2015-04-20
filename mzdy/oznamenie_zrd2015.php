@@ -563,7 +563,6 @@ table.zariadenia td {
    document.formv1.xtitulz.value = xtitulz;
 
    ddrz.style.display='none';
-
   }
 </script>
 </HEAD>
@@ -805,15 +804,15 @@ $sql = mysql_query("$sqltt");
 $cpol = mysql_num_rows($sql);
 $i=0;
 ?>
-<div id="ddrz" class="wrap-zariadenia" style="display:none;">
- <h4 style="font-size:15px; float:left; line-height:20px; position:relative; top:3px;">&nbsp;drziatelia</h4>
+<div id="ddrz" class="wrap-zariadenia" style="display:none; width:600px; top:178px;">
+ <h4 style="font-size:15px; float:left; line-height:20px; position:relative; top:3px;">&nbsp;Držitelia</h4>
  <img src="../obr/ikony/turnoff_blue_icon.png" onclick="ddrz.style.display='none';"
       title="Skry" style="width:20px; height:20px; float:right;
                            position:absolute; top:7px; right:8px;">
  <table class="zariadenia">
  <tr>
-  <th style="width:55%;">&nbsp;&nbsp;dic nazov</th>
-  <th style="width:45%;">Mesto</th>
+  <th style="width:62%;">&nbsp;&nbsp;Diè Názov</th>
+  <th style="width:38%;">Mesto</th>
  </tr>
 <?php
    while ($i <= $cpol )
@@ -825,7 +824,7 @@ $riadok=mysql_fetch_object($sql);
  <tr>
   <td>&nbsp;&nbsp;<?php echo "$riadok->xdic $riadok->xnpo $riadok->xmfo $riadok->xpfo"; ?></td>
   <td><?php echo $riadok->xmes; ?>&nbsp;
-   <img src="../obr/ikony/copy5_blue_x32.png" title="Kopírova drzitela"
+   <img src="../obr/ikony/copy5_blue_x32.png" title="Kopírova držite¾a"
 onclick="kopyDrz('<?php echo $riadok->xdic; ?>','<?php echo $riadok->xmfo; ?>','<?php echo $riadok->xpfo; ?>','<?php echo $riadok->xnpo; ?>','<?php echo $riadok->xuli; ?>','<?php echo $riadok->xcis; ?>','<?php echo $riadok->xpsc; ?>','<?php echo $riadok->xmes; ?>','<?php echo $riadok->xtitulp; ?>','<?php echo $riadok->xtitulz; ?>')"
 style="width:22px; height:22px; position:relative; top:4px;">
   </td>
