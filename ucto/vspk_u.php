@@ -5522,7 +5522,7 @@ if ( $copern == 87 )
 <?php if ( $drupoh == 2 OR $drupoh == 5 ) { ?>
 <img src='../obr/naradie.png' onClick="nastavpaux.style.display='';" width=15 height=15 border=0 title="Nastavenie úètovania paušálu 80%" ></a>
 &nbsp;
-Paušál 80%<input type="checkbox" name="pau80" nid="pau80" value="1" />
+Paušál 80%<input type="checkbox" name="pau80" id="pau80" value="1" />
 <?php                     } ?>
 <?php
 if( $textpopis == 1 )

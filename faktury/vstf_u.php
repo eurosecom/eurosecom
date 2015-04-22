@@ -4326,6 +4326,150 @@ function OverIcdph()
 <?php                           }  ?>
 
 <?php
+//nastavenie datumu do kvdph
+if ( ( $copern == 5 AND ( $drupoh == 1 OR $drupoh == 2 ) ) OR ( $copern == 7 AND ( $drupoh == 1 OR $drupoh == 2 ) ) )
+     {
+
+$sql = "SELECT nzk0 FROM F".$kli_vxcf."_autopausal".$kli_uzid." ";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sqlt = "DROP TABLE F".$kli_vxcf."_autopausal".$kli_uzid." ";
+$vysledok = mysql_query("$sqlt");
+$sqlt = <<<mzdprc
+(
+   id           INT(7) DEFAULT 0,
+   udp          VARCHAR(11) NOT NULL,
+   adp          VARCHAR(11) NOT NULL,
+   uzk          VARCHAR(11) NOT NULL,
+   azk          VARCHAR(11) NOT NULL,
+   ajo          DECIMAL(2,0) DEFAULT 0,
+   aju          VARCHAR(11) NOT NULL,
+   xzk          DECIMAL(10,2) DEFAULT 0,
+   xdp          DECIMAL(10,2) DEFAULT 0,
+   mzk          DECIMAL(10,2) DEFAULT 0,
+   mdp          DECIMAL(10,2) DEFAULT 0,
+   nzk          DECIMAL(10,2) DEFAULT 0,
+   ndp          DECIMAL(10,2) DEFAULT 0,
+
+   xzk0         DECIMAL(10,2) DEFAULT 0,
+   mzk0         DECIMAL(10,2) DEFAULT 0,
+   nzk0         DECIMAL(10,2) DEFAULT 0,
+
+   kox          DECIMAL(2,0) DEFAULT 0
+);
+mzdprc;
+
+$vsql = "CREATE TABLE F".$kli_vxcf."_autopausal".$kli_uzid." ".$sqlt;
+$vytvor = mysql_query("$vsql");
+
+$vsql = "INSERT INTO F".$kli_vxcf."_autopausal".$kli_uzid." ( id, udp, adp, uzk, azk, ajo, aju ) VALUES ( '$kli_uzid', '', '', '', '99', 0, '' ) ";
+if( $kli_vduj == 9 )
+ {
+$vsql = "INSERT INTO F".$kli_vxcf."_autopausal".$kli_uzid." ( id, udp, adp, uzk, azk, ajo, aju ) VALUES ( '$kli_uzid', '', '99', '17', '', 0, '' ) ";
+ }
+$vytvor = mysql_query("$vsql");
+
+}
+
+
+$udp="";
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_autopausal$kli_uzid WHERE id > 0 ORDER BY id DESC LIMIT 1");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $udp=$riaddok->udp;
+  $adp=$riaddok->adp;
+  $uzk=$riaddok->uzk;
+  $azk=$riaddok->azk;
+  $ajo=$riaddok->ajo;
+  $aju=$riaddok->aju;
+
+  }
+?>
+<div id="nastavpaux" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 260px; left: 170px; width:620px; height:300px;">
+<table  class='ponuka' width='100%'>
+<tr><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td></tr>
+
+<tr><td colspan='3'>Nastavenie úètovania paušalnych vıdavkov 80 - 20 % PHM ...</td>
+<td colspan='2' align='right'><img border=0 src='../obr/zmazuplne.png' style="width:10; height:10;" onClick="nastavpaux.style.display='none';" title='Zhasni' ></td></tr>  
+                    
+<tr><FORM name='enastpau' method='post' action='#' >
+<td class='ponuka' colspan='4' align='left'> 
+ Úèet DPH 20% neodpoèítaná 
+<td class='ponuka' colspan='1' align='left'> 
+<input type='text' name='h_udp' id='h_udp' size='10' maxlenght='10' value='<?php echo $udp; ?>' >
+ <img border=0 src='../obr/info.png' style="width:10; height:10;" onClick="NastavPau();" title='Napr. 34399, 34388... = Úèet pre úètovanie 20% neodpoèítanej DPH' >
+</td></tr>
+<tr><td class='ponuka' colspan='4'> 
+ Analityka DPH 20% neodpoèítaná 
+<td class='ponuka' colspan='1'> 
+<input type='text' name='h_adp' id='h_adp' size='10' maxlenght='10' value='<?php echo $adp; ?>' >
+ <img border=0 src='../obr/info.png' style="width:10; height:10;" onClick="NastavPau();" title='Napr. 99, 88... = Analytika pre úètovanie 20% neodpoèítanej DPH. Úèet rovnakı ako v nastavení Robota. Ak nastavíte analytiku, úèet nechajte prázdny a opaène ak nastavíte úèet, analytiku nechajte prázdnu.' >
+</td></tr>
+<tr><td class='ponuka' colspan='4'> 
+ Úèet Základ 20% neuplatnenı 
+<td class='ponuka' colspan='1'> 
+<input type='text' name='h_uzk' id='h_uzk' size='10' maxlenght='10' value='<?php echo $uzk; ?>' >
+ <img border=0 src='../obr/info.png' style="width:10; height:10;" onClick="NastavPau();" title='Napr. 50199, 21399... = Úèet pre úètovanie 20% neuplatneného základu DPH, pripoèítate¾nej poloky' >
+</td></tr>
+<tr><td class='ponuka' colspan='4'> 
+ Analityka Základ 20% neuplatnenı  
+<td class='ponuka' colspan='1'> 
+<input type='text' name='h_azk' id='h_azk' size='10' maxlenght='10' value='<?php echo $azk; ?>' >
+ <img border=0 src='../obr/info.png' style="width:10; height:10;" onClick="NastavPau();" title='Napr. 99, 88... = Analytika pre úètovanie neuplatneného základu DPH, pripoèítate¾nej poloky. Úèet rovnakı ako v nastavení Robota. Ak nastavíte analytiku, úèet nechajte prázdny a opaène ak nastavíte úèet, analytiku nechajte prázdnu.' >
+</td></tr>
+<tr><td class='ponuka' colspan='4'>
+Odúètova neodpoèítanú DPH 20% 
+<td class='ponuka' colspan='1'>  
+<input type="checkbox" name="h_ajo" value="1" />
+ <img border=0 src='../obr/info.png' style="width:10; height:10;" onClick="NastavPau();" title='Ak zaškrtnete, program preúètuje 20% neodpoèítanú DPH na úèet nastavenı nišie s DRD=10' >
+<?php
+if ( $ajo == 1 )
+   {
+?>
+<script type="text/javascript">
+document.enastpau.h_ajo.checked = "checked";
+</script>
+<?php
+   }
+?>
+</td></tr>
+<tr><td class='ponuka' colspan='4'>
+Úèet pre odúètovanie neodpoèítanej DPH 20% 
+<td class='ponuka' colspan='1'>  
+<input type='text' name='h_aju' id='h_aju' size='10' maxlenght='10' value='<?php echo $aju; ?>' >
+ <img border=0 src='../obr/info.png' style="width:10; height:10;" onClick="NastavPau();" title='Napr. 54999... = Úèet pre preúètovanie 20% neodpoèítanej DPH s DRD=10' >
+</td></tr>
+<tr><td class='ponuka' colspan='4'>
+<td class='ponuka' colspan='1'>  
+ <img border=0 src='../obr/ok.png' style="width:10; height:10;" onClick="NastavPau();" title='Ulo nastavenie' > Uloi
+</td></tr>
+</FORM></table>
+</div>
+<script type="text/javascript">
+
+//zapis nastavenie
+function NastavPau()
+                {
+var udp = document.forms.enastpau.h_udp.value;
+var adp = document.forms.enastpau.h_adp.value;
+var uzk = document.forms.enastpau.h_uzk.value;
+var azk = document.forms.enastpau.h_azk.value;
+var ajo = 0;
+if ( document.enastpau.h_ajo.checked ) { ajo=1; }
+var aju = document.forms.enastpau.h_aju.value;
+
+window.open('../ucto/fak_setulozpau.php?cislo_dok=<?php echo $cislo_dok; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&udp=' + udp + '&adp=' + adp + '&uzk=' + uzk + '&azk=' + azk + '&ajo=' + ajo + '&aju=' + aju + '&copern=901', '_self' );
+                }
+
+</script>
+<?php
+     }
+?>
+
+
+<?php
 //text pred a za polozkami
 if ( $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' )
      {
@@ -5793,7 +5937,13 @@ Zaokrúhlenie:
 </tr>
 
 <tr>
-<td class="pvstup" colspan="7" >&nbsp;</td>
+<td class="pvstup" colspan="6" >&nbsp;</td>
+
+<td class="pvstup" colspan="1" >
+<img src='../obr/naradie.png' onClick="nastavpaux.style.display='';" width=15 height=15 border=0 title="Nastavenie úètovania paušálu 80%" ></a>
+&nbsp;
+Paušál 80%<input type="checkbox" name="pau80" id="pau80" value="1" />
+</td>
 <td class="pvstup" align="right" colspan="2" >
 Celkom hodnota dokladu:
 </td>

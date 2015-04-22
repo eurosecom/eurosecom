@@ -41,8 +41,10 @@ $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resiza
 $tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
+//copern=901 faktury
+
 //copern=900 uloz nastavenie 
-if( $copern == 900 )
+if( $copern == 900 OR $copern == 901 )
 {
 
 $ttvv = "DELETE FROM F$kli_vxcf"."_autopausal$kli_uzid ";
@@ -108,13 +110,24 @@ var sirkawic = screen.width-10;
 <?php
 
 //prepni do pokl
-$cstat=10101;
-if( $cstat == 10101 )
+if( $copern == 900 )
 {
 ?>
 <script type="text/javascript">
 
 window.open('../ucto/vstpok.php?copern=1&drupoh=<?php echo $drupoh; ?>&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>', '_self' )
+
+</script>
+<?php
+exit;
+}
+//prepni do faktur
+if( $copern == 901 )
+{
+?>
+<script type="text/javascript">
+
+window.open('../faktury/vstfak.php?copern=1&drupoh=<?php echo $drupoh; ?>&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>', '_self' )
 
 </script>
 <?php

@@ -9,10 +9,6 @@ $aky_rok=$pole[2];
 
 if( $dnes == '01.01.'.$aky_rok ) $robot3="robot3_novyrok";
 if( $dnes == '06.01.'.$aky_rok ) $robot3="robot3_trajakrali";
-if( $dnes == '18.04.'.$aky_rok ) $robot3="robot3_velkanoc";
-if( $dnes == '19.04.'.$aky_rok ) $robot3="robot3_velkanoc";
-if( $dnes == '20.04.'.$aky_rok ) $robot3="robot3_velkanoc";
-if( $dnes == '21.04.'.$aky_rok ) $robot3="robot3_velkanoc";
 if( $dnes == '01.06.'.$aky_rok ) $robot3="robot3_0106_mdd";
 if( $dnes == '30.06.'.$aky_rok ) $robot3="robot3_3006_vysv";
 if( $dnes == '01.07.'.$aky_rok ) $robot3="robot3_0107_prazdniny";

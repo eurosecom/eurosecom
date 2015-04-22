@@ -381,6 +381,12 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid,F$kli_vxcf"."_zak ".
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) 
+{  
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid SET podnk=2 WHERE LEFT(uce,3) = 551 ";
+$oznac = mysql_query("$sqtoz");
+}
+
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid SET podnk=0 WHERE podnk != 2 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -396,8 +402,6 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobrats$kli_uzid "." SELECT".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
-
-//exit;
 
 //nastav crv podla uce,3
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid,F$kli_vxcf"."_crf104nuj_no".
