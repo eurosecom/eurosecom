@@ -165,7 +165,7 @@ function volajAutoUCT(odkial,drupoh,pohyb)
                           var h_hod4 = document.forms.fhoddok.h_hod4.value;
                                            }
       var pau80 = 0;
-      if( h_drupoh == 2 || h_drupoh == 5  ) {
+      if( h_drupoh == 2 || h_drupoh == 4 || h_drupoh == 5  ) {
       if( document.forms1.pau80.checked ) { pau80=1; }
                                             }
 

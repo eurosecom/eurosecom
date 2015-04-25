@@ -3911,8 +3911,8 @@ onclick="Fx.style.display='none';" onkeyup="KontrolaDcisla(this, Des)" />
 
 
 <?php
-//nastavenie datumu do kvdph
-if ( ( $copern == 5 AND ( $drupoh == 2 OR $drupoh == 5 ) ) OR ( $copern == 7 AND ( $drupoh == 2 OR $drupoh == 5 ) ) )
+//nastavenie autopausal80
+if ( ( $copern == 5 AND ( $drupoh == 2 OR $drupoh == 4 OR $drupoh == 5 ) ) OR ( $copern == 7 AND ( $drupoh == 2 OR $drupoh == 4 OR $drupoh == 5 ) ) )
      {
 
 $sql = "SELECT nzk0 FROM F".$kli_vxcf."_autopausal".$kli_uzid." ";
@@ -5519,7 +5519,7 @@ if ( $copern == 87 )
 
 <tr>
 <td class="hmenu" colspan="5" align="right">
-<?php if ( $drupoh == 2 OR $drupoh == 5 ) { ?>
+<?php if ( $drupoh == 2 OR $drupoh == 4 OR $drupoh == 5 ) { ?>
 <img src='../obr/naradie.png' onClick="nastavpaux.style.display='';" width=15 height=15 border=0 title="Nastavenie úètovania paušálu 80%" ></a>
 &nbsp;
 Paušál 80%<input type="checkbox" name="pau80" id="pau80" value="1" />
