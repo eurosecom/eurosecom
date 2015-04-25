@@ -307,6 +307,9 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdtextmzd".
 " WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc = F$kli_vxcf"."_mzdtextmzd.invt AND cszp > 0 ";
 $oznac = mysql_query("$sqtoz");
 
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zzam_rf=1 ";
+$oznac = mysql_query("$sqtoz");
+
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplx".$kli_uzid.
 " SELECT MIN(oc),rodne,xdrv,znizp,".
 "sum(zzam_zp),sum(zzam_np),sum(zzam_sp),sum(zzam_ip),sum(zzam_pn),sum(zzam_up),sum(zzam_gf),sum(zzam_rf),".
@@ -2071,10 +2074,70 @@ $sqldokd = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprcneod$kli_uzid WHERE oc
   $dnipocitane=1*$riaddokd->celk_dni;
   }
 
+//od dni pocitanych odrataj 502ku
+$dni502=0;
+if( $cislo_zdrv >= 2400 AND $cislo_zdrv <= 2499 ) 
+      {
+$sqldokd = mysql_query("SELECT SUM(TO_DAYS(dk)-TO_DAYS(dp)+1) AS dni502 FROM F$kli_vxcf"."_mzdzalmes WHERE dm = 502 AND oc = $hlavicka->oc AND ume = $kli_vume ");
+  if (@$zaznam=mysql_data_seek($sqldokd,0))
+  {
+  $riaddokd=mysql_fetch_object($sqldokd);
+  $dni502=1*$riaddokd->dni502;
+  }
+      }
+
+//ak ma 3 osc pripocitaj dni z druheho osc
+$dni2osc=0;
+if( $cislo_zdrv >= 2400 AND $cislo_zdrv <= 2499 AND $dnipocitane < $pocetdnia ) 
+      {
+$sqldokd = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE konx = 0 AND oc = $hlavicka->oc AND zzam_rf > 1 ");
+    if (@$zaznam=mysql_data_seek($sqldokd,0))
+    {
+    $riaddokd=mysql_fetch_object($sqldokd);
+
+$sqltto2 = "SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE oc != $riaddokd->oc AND pom != 9 ";
+$sqlo2 = mysql_query("$sqltto2");
+$polo2 = mysql_num_rows($sqlo2);
+
+$io2=0;
+  while ($io2 <= $polo2 )
+  {
+  if(@$zaznam=mysql_data_seek($sqlo2,$io2))
+{
+    $riaddokdo2=mysql_fetch_object($sqlo2);
+
+       if( $hlavicka->rdc.$hlavicka->rdk == $riaddokdo2->rdc.$riaddokdo2->rdk )
+       {
+       //echo "idem ".$riaddokdo2->oc."<br />";
+
+$sqldokd = mysql_query("SELECT SUM(TO_DAYS('$posldena')-TO_DAYS(dan)+1) AS dni2osc FROM F$kli_vxcf"."_$mzdkun WHERE oc = $riaddokdo2->oc AND dan >= '$prvydena' ");
+  if (@$zaznam=mysql_data_seek($sqldokd,0))
+  {
+  $riaddokd=mysql_fetch_object($sqldokd);
+  $dni2osc=1*$riaddokd->dni2osc;
+  //echo "dni2osc ".$dni2osc."<br />";
+  }
+
+
+       }
+
+}
+$io2=$io2+1;
+  }
+
+
+    }
+      }
+//koniec ak ma 3 osc pripocitaj dni z druheho osc
+//exit;
+
+$dnipocitane=$dnipocitane-$dni502+$dni2osc;
+if( $dnipocitane > $pocetdnia ) { $dnipocitane=$pocetdnia; }
+
 $cislopoistenca=$hlavicka->rdc.$hlavicka->rdk;
 
-//ak zahranicny vo vszp,dovera daj cislo do doplnujucich udajov
-if( $cislo_zdrv >= 2400 AND $cislo_zdrv <= 2599 ) 
+//ak zahranicny vo vszp,dovera,union daj cislo do doplnujucich udajov
+if( $cislo_zdrv >= 2400 AND $cislo_zdrv <= 2799 ) 
       {
 $cislozp=0;
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdtextmzd WHERE invt = $hlavicka->oc ");
