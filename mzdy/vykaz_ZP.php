@@ -1929,8 +1929,11 @@ $polxx = mysql_num_rows($sqlxx);
 $platiazpn=$polxx;
 }
 
+$fir_ficox=$fir_fico;
+if( $fir_fico < 999999 ) { $fir_ficox="00".$fir_fico; }
 
-  $text = "".$akyvyk."|514|".$fir_fico."|".$platitel."|".$cislo_zdrv."|".$dat_dat."|1|".$poistenychvzp;
+
+  $text = "".$akyvyk."|514|".$fir_ficox."|".$platitel."|".$cislo_zdrv."|".$dat_dat."|1|".$poistenychvzp;
   $text = $text."|1|1".$konznak."\r\n";
   fwrite($soubor, $text);
 
@@ -1948,7 +1951,7 @@ if( $denvyplaty == 31 AND $obdobie == 5 ) { $denvyplaty="30"; }
 if( $denvyplaty == 31 AND $obdobie == 8 ) { $denvyplaty="30"; }
 if( $denvyplaty == 31 AND $obdobie == 10 ) { $denvyplaty="30"; }
 //echo $obdobie;
-  $text = $kli_vrok.$obdobie."|$denvyplaty|".$fir_fnaz."|".$fir_fico."|".$platitel."|".$fir_fdic."|".$fir_ftel."|".$fir_ffax."|".$fir_fem1."|".$fir_fnm1."||".$fir_fuc1;
+  $text = $kli_vrok.$obdobie."|$denvyplaty|".$fir_fnaz."|".$fir_ficox."|".$platitel."|".$fir_fdic."|".$fir_ftel."|".$fir_ffax."|".$fir_fem1."|".$fir_fnm1."||".$fir_fuc1;
   
 
   $text = $text.$konznak."\r\n";

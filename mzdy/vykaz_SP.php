@@ -1650,7 +1650,12 @@ if( $denvyplaty == '31.11.2015' ) { $denvyplaty="30.11.2015"; }
   fwrite($soubor, $text);
   $text = "<identifikator>"."\r\n";
   fwrite($soubor, $text);
-  $text = "<ico>$fir_fico</ico>"."\r\n";
+
+$fir_ficox=$fir_fico;
+if( $fir_fico < 999999 ) { $fir_ficox="00".$fir_fico; }
+
+
+  $text = "<ico>$fir_ficox</ico>"."\r\n";
   fwrite($soubor, $text);
   $text = "</identifikator>"."\r\n";
   fwrite($soubor, $text);
