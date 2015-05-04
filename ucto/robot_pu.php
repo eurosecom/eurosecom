@@ -61,6 +61,11 @@ $sqlzak = mysql_query("SELECT * FROM $ductpoh"."uctpohyby$nuctpoh WHERE ucto = $
   $pohp=$riadzak->pohp;
   }
 
+$samodph=0;
+$samodph10=0;
+if( ( $rdp_zk2 == 34 OR $rdp_zk2 == 35 OR $rdp_zk2 == 335 ) AND $kli_vrok >= 2011 ) { $samodph=1; }
+if( $rdp_zk1 == 40 AND $rdp_zk2 == 1 AND $kli_vrok >= 2012 ) { $samodph=1; $samodph10=1; }
+
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
@@ -163,6 +168,9 @@ $h_kto = strip_tags($_GET['h_kto']);
 $h_unk = strip_tags($_GET['h_unk']);
 $pau80 = 1*$_GET['pau80'];
 
+$samoajsdph=0;
+if( $h_zk2 != 0 AND $h_dn2 != 0 AND $samodph == 1 ) { $samoajsdph=1; }
+
 $h_dat = SqlDatum($h_dat);
 
   $pole = explode("-", $h_dat);
@@ -226,6 +234,19 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_autopausal$kli_uzid WHERE id 
   $h_dn2n=1*$riaddok->ndp;
 
     }
+
+  }
+//koniec if pau80=1
+
+if( $samoajsdph == 1 )
+  {
+
+$rdp_zk2ajsz=$rdp_zk2;
+$ucet_zk2ajsz=$ucet_zk2;
+$ucet_dn2ajsz=$ucet_dn2;
+
+$rdp_zk2=1;
+$ucet_dn2=$ucet_zk0;
 
   }
 
@@ -293,6 +314,39 @@ $ulozene = mysql_query("$sqty");
 }
   }
 //koniec ak pau80=1
+
+
+if( $samodph == 1 )
+{
+
+if( $samoajsdph == 1 )
+  {
+
+$rdp_zk2=$rdp_zk2ajsz;
+$ucet_dn2=$ucet_dn2ajsz;
+
+$h_zk0=$h_zk2;
+  }
+
+$rdp_zk2s=1*$rdp_zk2+50;
+$sadzbaDPH=$fir_dph2;
+if( $samodph10 == 1 ) { $sadzbaDPH=$fir_dph1; $rdp_zk2s=1*$rdp_zk1+50; $rdp_zk2=$rdp_zk1; $ucet_dn2=$ucet_dn1; }
+
+$prac_dn2=$h_zk0*$sadzbaDPH; $h_dn2=$prac_dn2/100;
+$ucetszd="37900";
+if( $ico_xx > 0 ) $ucetszd=$ico_xx;
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$h_drupoh', '$ucet_dn2', '$ucetszd', '$rdp_zk2', 0, '$h_dn2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );";
+$ulozene = mysql_query("$sqty"); 
+
+if( $fak_xx > 0 ) $ucet_dn2=$fak_xx;
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctpokuct ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$h_dok', '$h_drupoh', '$ucetszd', '$ucet_dn2', '$rdp_zk2s', 0, '$h_dn2', '$h_ico', '$h_fak', '', '$h_str', '$h_zak', '$h_unk', $kli_uzid );"; 
+$ulozene = mysql_query("$sqty");
+}
+
 
      }
 //koniec vydavkovy pokladnicny

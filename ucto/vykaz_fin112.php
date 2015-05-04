@@ -624,6 +624,12 @@ $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, program='9.2', oddiel
 $oznac = mysql_query("$sqtoz");
 }
 
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 )) 
+{
+$sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, program='', oddiel='0.7.2.2' ";
+$oznac = mysql_query("$sqtoz");
+}
+
 $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104,F$kli_vxcf"."_prcuobrats$kli_uzid".
 " SET F$kli_vxcf"."_uctvykaz_fin104.skutocnost=F$kli_vxcf"."_prcuobrats$kli_uzid.hod, zak=7777 ".
 " WHERE F$kli_vxcf"."_uctvykaz_fin104.polozka = F$kli_vxcf"."_prcuobrats$kli_uzid".".poloz ".
