@@ -506,6 +506,15 @@ var h_stv = document.forms.formzrd1.h_stv.value;
 window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&h_stv=' + h_stv + '&copern=101&drupoh=1&strana=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
+
+function ZRDXML()
+                {
+var h_oc = document.forms.formzrd1.h_oc.value;
+var h_stv = document.forms.formzrd1.h_stv.value;
+
+window.open('../mzdy/oznamenie_zrdxml<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&h_stv=' + h_stv + '&copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
    
 </script>
 </HEAD>
@@ -977,7 +986,9 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 
 <td class="bmenu" width="2%"></td>
 
-<td class="bmenu" width="2%"></td>
+<td class="bmenu" width="2%">
+<img src='../obr/export.png' onclick='ZRDXML();' width=20 height=15 border=0 title='XML súbor pre elektronické podanie' >
+</td>
 
 <td class="bmenu" width="2%">
 <a href="#" onClick="UpravZRD();">
