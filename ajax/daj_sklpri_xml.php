@@ -4,7 +4,7 @@ $urov = 1;
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 
-//ponuka skladovych poloziek pre skladovu kartu
+
 // set the output content type as xml
 header('Content-Type: text/xml; Accept-Charset: utf-8; ');
 //header('Content-Type: text/xml ');
@@ -30,80 +30,45 @@ require_once("../pswd/password.php");
 
 $prm1 = $_GET['prm1'];
 $prm2 = $_GET['prm2'];
-$prm3 = $_GET['prm3'];
-$prm4 = $_GET['prm4'];
 $cprm1 = 1*$prm1;
-$cprm3 = 1*$prm3;
 $prm2BD = StrTr($prm2, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ",
 "aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
 
 $citfir = include("../cis/citaj_fir.php");
-
 $sklzasoby="sklzas";
 if( $fir_xsk04 == 1 ) $sklzasoby="sklzaspriemer";
-//$sklzasoby="sklzas";
 
-
-$podmskl = "skl > 0";
-if( $cprm3 > 0 ) $podmskl = "skl = ".$cprm3;
-
-
-$h_min = 1*$_GET['h_min'];
-$databaza="";
-if( $h_min == 1 )
-{
-$kli_vxcf=$fir_allx11;
-
-$dtbzx = include("../cis/oddel_dtbz1.php");
-
+//pre nie dopravu
+if( $prm2 != "PRG_DOPRAVA" )
+     {
+if( $prm1 == "" AND $prm2 == "" )
+{ 
+$sqltt = "SELECT * FROM F$kli_vxcf"."_sklcis ".
+" LEFT JOIN F$kli_vxcf"."_sklcisudaje".
+" ON F$kli_vxcf"."_sklcis.cis=F$kli_vxcf"."_sklcisudaje.xcis".
+" WHERE cis > 0 ORDER BY natBD";
+$sql = mysql_query("$sqltt");
 }
 
 if( $prm1 == "" AND $prm2 != "" )
-{
-$sqltt = "SELECT skl, ".$databaza."F$kli_vxcf"."_$sklzasoby.cis, nat, natBD, ".$databaza."F$kli_vxcf"."_$sklzasoby.cen,".
-" mer, zas, dph".
-" FROM ".$databaza."F$kli_vxcf"."_$sklzasoby".
-" LEFT JOIN ".$databaza."F$kli_vxcf"."_sklcis".
-" ON ".$databaza."F$kli_vxcf"."_$sklzasoby.cis=".$databaza."F$kli_vxcf"."_sklcis.cis".
-" WHERE natBD LIKE '%$prm2BD%' AND $podmskl ORDER BY natBD";
+{ 
+$sqltt = "SELECT * FROM F$kli_vxcf"."_sklcis ".
+" LEFT JOIN F$kli_vxcf"."_sklcisudaje".
+" ON F$kli_vxcf"."_sklcis.cis=F$kli_vxcf"."_sklcisudaje.xcis".
+" WHERE natBD LIKE '%$prm2BD%' ORDER BY natBD";
 $sql = mysql_query("$sqltt");
 }
 
-if( $prm1 != "" AND $prm2 == ""  )
-{
-$sqltt = "SELECT skl, ".$databaza."F$kli_vxcf"."_$sklzasoby.cis, nat, natBD, ".$databaza."F$kli_vxcf"."_$sklzasoby.cen,".
-" mer, zas, dph".
-" FROM ".$databaza."F$kli_vxcf"."_$sklzasoby".
-" LEFT JOIN ".$databaza."F$kli_vxcf"."_sklcis".
-" ON ".$databaza."F$kli_vxcf"."_$sklzasoby.cis=".$databaza."F$kli_vxcf"."_sklcis.cis".
-" WHERE ".$databaza."F$kli_vxcf"."_$sklzasoby.cis = $cprm1 AND $podmskl ORDER BY natBD";
-//echo $sqltt;
+if( $prm1 != "" ) 
+{ 
+$sqltt = "SELECT * FROM F$kli_vxcf"."_sklcis ".
+" LEFT JOIN F$kli_vxcf"."_sklcisudaje".
+" ON F$kli_vxcf"."_sklcis.cis=F$kli_vxcf"."_sklcisudaje.xcis".
+" WHERE cis = $cprm1 ORDER BY cis";
 $sql = mysql_query("$sqltt");
 }
-
-
-if( $prm1 == "" AND $prm2 == ""  )
-{
-$sqltt = "SELECT skl, ".$databaza."F$kli_vxcf"."_$sklzasoby.cis, nat, natBD, ".$databaza."F$kli_vxcf"."_$sklzasoby.cen,".
-" mer, zas, dph".
-" FROM ".$databaza."F$kli_vxcf"."_$sklzasoby".
-" LEFT JOIN ".$databaza."F$kli_vxcf"."_sklcis".
-" ON ".$databaza."F$kli_vxcf"."_$sklzasoby.cis=".$databaza."F$kli_vxcf"."_sklcis.cis".
-" WHERE ".$databaza."F$kli_vxcf"."_$sklzasoby.cis > 0 AND $podmskl ORDER BY natBD";
-$sql = mysql_query("$sqltt");
-}
-
-if( $prm1 != "" AND $prm2 != ""  )
-{
-$sqltt = "SELECT skl, ".$databaza."F$kli_vxcf"."_$sklzasoby.cis, nat, natBD, ".$databaza."F$kli_vxcf"."_$sklzasoby.cen,".
-" mer, zas, dph".
-" FROM ".$databaza."F$kli_vxcf"."_$sklzasoby".
-" LEFT JOIN ".$databaza."F$kli_vxcf"."_sklcis".
-" ON ".$databaza."F$kli_vxcf"."_$sklzasoby.cis=".$databaza."F$kli_vxcf"."_sklcis.cis".
-" WHERE ".$databaza."F$kli_vxcf"."_$sklzasoby.cis = $cprm1 AND $podmskl ORDER BY natBD";
-$sql = mysql_query("$sqltt");
-}
-
+     }
+//koniec pre nie dopravu
 
 $cpol = mysql_num_rows($sql);
 $i=0;
@@ -134,17 +99,30 @@ $txp06 = StrTr($riadok->dns, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ",
 //s diakritikou prevod do utf-8
 if( $diak == 1 ) 
 { 
-$zasoba=$riadok->zas;
-$Cislo=$zasoba+"";
-$zasoba3=sprintf("%0.3f", $Cislo);
+$xmerx=1*$riadok->xmerx;
+$xmerk=1*$riadok->xmerk;
+
+$cena=1*$riadok->cen;
+if( $polno == 1 AND $i == 0 AND $xmerx == 1 )
+{
+//echo "idem";
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_$sklzasoby WHERE cis = $riadok->cis");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $cena=1*$riaddok->cen;
+  }
+}
 
 $txp01 = $retezec = iconv("CP1250", "UTF-8", $riadok->cis); 
 $txp02 = $retezec = iconv("CP1250", "UTF-8", $riadok->nat); 
 $txp03 = $retezec = iconv("CP1250", "UTF-8", $riadok->dph); 
 $txp04 = $retezec = iconv("CP1250", "UTF-8", $riadok->mer); 
-$txp05 = $retezec = iconv("CP1250", "UTF-8", $riadok->cen); 
-$txp06 = $retezec = iconv("CP1250", "UTF-8", $zasoba3); 
-$txp08 = $retezec = iconv("CP1250", "UTF-8", $riadok->skl);
+$txp05 = $retezec = iconv("CP1250", "UTF-8", $cena); 
+$txp06 = $retezec = iconv("CP1250", "UTF-8", $riadok->zas); 
+$txp08 = $retezec = iconv("CP1250", "UTF-8", $xmerx); 
+$txp09 = $retezec = iconv("CP1250", "UTF-8", $riadok->xmer2); 
+$txp10 = $retezec = iconv("CP1250", "UTF-8", $xmerk); 
 }
 
 if( $txp01 == '' ) $txp01='--';
@@ -156,6 +134,8 @@ $txp04 = AddSlashes($txp04);
 if( $txp05 == '' ) $txp05='0';
 if( $txp06 == '' ) $txp06='0';
 if( $txp08 == '' ) $txp08='0';
+if( $txp09 == '' ) $txp09='-';
+if( $txp10 == '' ) $txp10='0';
 
 // create the title element for the veta
 $pol01 = $dom->createElement('pol01');
@@ -197,6 +177,17 @@ $pol08 = $dom->createElement('pol08');
 $pol08Text = $dom->createTextNode($txp08);
 $pol08->appendChild($pol08Text);
 
+// create the pol09 element for the veta
+$pol09 = $dom->createElement('pol09');
+$pol09Text = $dom->createTextNode($txp09);
+$pol09->appendChild($pol09Text);
+
+// create the pol10 element for the veta
+$pol10 = $dom->createElement('pol10');
+$pol10Text = $dom->createTextNode($txp10);
+$pol10->appendChild($pol10Text);
+
+
 // create the <veta> element 
 $veta = $dom->createElement('veta');
 $veta->appendChild($pol01);
@@ -207,6 +198,8 @@ $veta->appendChild($pol05);
 $veta->appendChild($pol06);
 $veta->appendChild($pol07);
 $veta->appendChild($pol08);
+$veta->appendChild($pol09);
+$veta->appendChild($pol10);
 
 // append <veta> as a child of <vety>
 $vety->appendChild($veta);
@@ -230,5 +223,5 @@ echo $xmlString;
 // konfigurace pro uložení
 //$dom->formatOutput = TRUE;
 //$dom->encoding = 'utf-8';
-//$dom->save('../tmp/sklkar.xml');
+//$dom->save('../tmp/sklpri.xml');
 ?>
