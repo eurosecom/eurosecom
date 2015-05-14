@@ -41,7 +41,7 @@ if ( $zablokovane == 1 )
      {
 ?>
 <script type="text/javascript">
-alert ("Hlásenie bude pripravené v priebehu februára 2015. Aktuálne info nájdete na vstupnej stránke v bode Novinky, tipy, triky.");
+alert ("Oznámenie bude pripravené v priebehu mája 2015. Aktuálne info nájdete na vstupnej stránke v bode Novinky, tipy, triky.");
 window.close();
 </script>
 <?php
@@ -64,16 +64,8 @@ $cislo_oc=1;
  <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>EuroSecom - OZNAMENIE xml</title>
 <style type="text/css">
-td.hvstup_zlte  { background-color:#ffff90; color:black; font-weight:bold;
-                  height:12px; font-size:12px; }
-td.hvstup_tzlte { background-color:#ecaa12; color:black; font-weight:bold;
-                  height:12px; font-size:12px; }
-td.hvstup_bsede { background-color:#eaeaea; color:black; font-weight:normal;
-                  height:12px; font-size:12px; }
-td.hvstup_bred { background-color:#ff6c6c; color:black; font-weight:normal;
-                  height:12px; font-size:12px; }
-</style>
 
+</style>
 <script type="text/javascript">
 //sirka a vyska okna
 var sirkawin = screen.width-10;
@@ -103,84 +95,200 @@ $sqlt = <<<mzdprc
 (
 <?xml version="1.0" encoding="utf-8"?>
 <dokument>
-<hlavicka>
-<dic></dic>
-<zaObdobie>
-<stvrtRok></stvrtRok>
-<rok>2015</rok>
-</zaObdobie>
-<fyzickaOsoba>
-<priezvisko></priezvisko>
-<meno></meno>
-<titulPred></titulPred>
-<titulZa></titulZa>
-<datumNarodenia></datumNarodenia>
-</fyzickaOsoba>
-<pravnickaOsoba>
-<obchodneMeno>
-<riadok></riadok>
-</obchodneMeno>
-</pravnickaOsoba>
-<sidlo>
-<ulica></ulica>
-<supisneOrientacneCislo></supisneOrientacneCislo>
-<psc></psc>
-<obec></obec>
-</sidlo>
-<adresaZariadenia>
-<ulica></ulica>
-<supisneOrientacneCislo></supisneOrientacneCislo>
-<psc></psc>
-<obec></obec>
-</adresaZariadenia>
-<suhrnneUdaje>
-<vyska></vyska>
-<suma></suma>
-<datum></datum>
-</suhrnneUdaje>
-<vypracoval>
-<dna>12.05.2015</dna>
-<telefon></telefon>
-<vypracoval></vypracoval>
-<podpis>0</podpis>
-</vypracoval>
-<pocetStrPrilohy>1</pocetStrPrilohy>
-</hlavicka>
-<telo>
-<priloha>
-<strana>
-<aktualna>1</aktualna>
-<celkovo>1</celkovo>
-</strana>
-<drzitel>
-<dic></dic>
-<vyska></vyska>
-<fyzickaOsoba>
-<priezvisko></priezvisko>
-<meno></meno>
-<titulPred></titulPred>
-<titulZa></titulZa>
-</fyzickaOsoba>
-<pravnickaOsoba>
-<obchodneMeno></obchodneMeno>
-</pravnickaOsoba>
-<sidlo>
-<ulica></ulica>
-<supisneOrientacneCislo></supisneOrientacneCislo>
-<psc></psc>
-<obec></obec>
-</sidlo>
-</drzitel>
-</priloha>
-</telo>
+ <hlavicka>
+  <dic></dic>
+  <zaObdobie>
+   <stvrtRok></stvrtRok>
+   <rok>2015</rok>
+  </zaObdobie>
+  <fyzickaOsoba>
+   <priezvisko></priezvisko>
+   <meno></meno>
+   <titulPred></titulPred>
+   <titulZa></titulZa>
+   <datumNarodenia></datumNarodenia>
+  </fyzickaOsoba>
+  <pravnickaOsoba>
+   <obchodneMeno>
+    <riadok></riadok>
+   </obchodneMeno>
+  </pravnickaOsoba>
+  <sidlo>
+   <ulica></ulica>
+   <supisneOrientacneCislo></supisneOrientacneCislo>
+   <psc></psc>
+   <obec></obec>
+  </sidlo>
+  <adresaZariadenia>
+   <ulica></ulica>
+   <supisneOrientacneCislo></supisneOrientacneCislo>
+   <psc></psc>
+   <obec></obec>
+  </adresaZariadenia>
+  <suhrnneUdaje>
+   <vyska></vyska>
+   <suma></suma>
+   <datum></datum>
+  </suhrnneUdaje>
+  <vypracoval>
+   <dna>12.05.2015</dna>
+   <telefon></telefon>
+   <vypracoval></vypracoval>
+   <podpis>0</podpis>
+  </vypracoval>
+  <pocetStrPrilohy>1</pocetStrPrilohy>
+ </hlavicka>
+ <telo>
+  <priloha>
+   <strana>
+    <aktualna>1</aktualna>
+    <celkovo>1</celkovo>
+   </strana>
+   <drzitel>
+    <dic></dic>
+    <vyska></vyska>
+    <fyzickaOsoba>
+     <priezvisko></priezvisko>
+     <meno></meno>
+     <titulPred></titulPred>
+     <titulZa></titulZa>
+    </fyzickaOsoba>
+    <pravnickaOsoba>
+     <obchodneMeno></obchodneMeno>
+    </pravnickaOsoba>
+    <sidlo>
+     <ulica></ulica>
+     <supisneOrientacneCislo></supisneOrientacneCislo>
+     <psc></psc>
+     <obec></obec>
+    </sidlo>
+   </drzitel>
+  </priloha>
+ </telo>
 </dokument>
 );
 mzdprc;
 
+//udaje o platitelovi - zamestnancovi
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_xplat ";
+//echo $sqlfir;
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+$meno = $fir_riadok->meno;
+$prie = $fir_riadok->prie;
+$rdc = $fir_riadok->rdc;
+$rdk = $fir_riadok->rdk;
+$nar_sk = SkDatum($fir_riadok->dar);
+$zuli = $fir_riadok->zuli;
+$zmes = $fir_riadok->zmes;
+$zpsc = $fir_riadok->zpsc;
+$zcdm = $fir_riadok->zcdm;
+$titulp = $fir_riadok->titl;
+
+mysql_free_result($fir_vysledok);
+
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdtextmzd WHERE invt = $cislo_xplat ";
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
+$titulz = $fir_riadok->ztitz;
+$fir_fdicx = $fir_riadok->zdic;
+
+mysql_free_result($fir_vysledok);
+
+//udaje zdrav.zariadenie
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrd WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+//echo $sqlfir;
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+$mdic = $fir_riadok->mdic;
+$zzul = $fir_riadok->zzul;
+$zzcs = $fir_riadok->zzcs;
+$zzps = $fir_riadok->zzps;
+$zzms = $fir_riadok->zzms;
+$datum_sk = SkDatum($fir_riadok->datum);
+$datd_sk = SkDatum($fir_riadok->datd);
+$fir_fdicx=$mdic;
+
+mysql_free_result($fir_vysledok);
+
+//ak platitel pravnicka osoba
+if ( $cislo_xplat > 9999 )
+   {
+$fir_fdicx=$fir_fdic;
+$mdic=$fir_fdic;
+
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
+$fir_vysledok = mysql_query($sqlfir);
+if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+
+$meno = $fir_riadok->dmeno;
+$prie = $fir_riadok->dprie;
+$titulp = $fir_riadok->dtitl;
+$titulz = $fir_riadok->dtitz;
+$zuli = $fir_riadok->duli;
+$zcdm = $fir_riadok->dcdm;
+$zmes = $fir_riadok->dmes;
+$zpsc = $fir_riadok->dpsc;
+$fir_fnazovx = $fir_fnaz;
+
+if ( $fir_uctt03 != 999 ) {
+$meno=""; $prie=""; $titulp=""; $titulz="";
+$fir_fnazx = $fir_fnaz;
+$nar_sk="";
+$zuli = $fir_fuli;
+$zcdm = $fir_fcdm;
+$zmes = $fir_fmes;
+$zpsc = $fir_fpsc;
+                          }
+
+if ( $nar_sk == '00.00.0000' ) { $nar_sk=""; }
+   }
+
+$r15=0; $r16=0;
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrd WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $r15=$riaddok->prj;
+    $r16=$riaddok->zrd;
+    }
+
+if ( $strana == 3 )
+   {
+//udaje priloha
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE cpl = $cislo_cpl ";
+//echo $sqlfir;
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+$xmfo = $fir_riadok->xmfo;
+$xpfo = $fir_riadok->xpfo;
+$xnpo = $fir_riadok->xnpo;
+$xdic = $fir_riadok->xdic;
+$prj = $fir_riadok->prj;
+$xuli = $fir_riadok->xuli;
+$xcis = $fir_riadok->xcis;
+$xpsc = $fir_riadok->xpsc;
+$xmes = $fir_riadok->xmes;
+$xtitulp = $fir_riadok->xtitulp;
+$xtitulz = $fir_riadok->xtitulz;
+mysql_free_result($fir_vysledok);
+   }
+
+$prilohy=0; $pocetdic=0; $pocetdic2=0; $pocetdic3=0;
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie";
+$sqldok = mysql_query("$sqlfir");
+if ( $sqldok ) { $pocetdic = mysql_num_rows($sqldok); }
+$pocetdic2=$pocetdic-2;
+$pocetdic3=$pocetdic2/3;
+$prilohy=ceil($pocetdic3);
+if ( $prilohy < 0 ) { $prilohy=0; }
+if ( $prilohy == -0 ) { $prilohy=0; }
+
 
 //prva strana
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrd WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 
@@ -198,19 +306,72 @@ $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("
 if ( $j == 0 )
      {
   $text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\r\n"; fwrite($soubor, $text);
-  $text = "<dokument xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"universal.xsd\">"."\r\n";   fwrite($soubor, $text);
+  $text = "<dokument xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"universal.xsd\">"."\r\n"; fwrite($soubor, $text);
 
-  $text = " <hlavicka>"."\r\n"; fwrite($soubor, $text);
+  $text = "<hlavicka>"."\r\n"; fwrite($soubor, $text);
 
-  $text = "  <dic><![CDATA[".$fir_fdic."]]></dic>"."\r\n"; fwrite($soubor, $text);
-  $text = " <zaobdobie>"."\r\n"; fwrite($soubor, $text);
+  $text = " <dic><![CDATA[".$mdic."]]></dic>"."\r\n"; fwrite($soubor, $text);
+  $text = " <zaObdobie>"."\r\n"; fwrite($soubor, $text);
   $text = "  <stvrtRok><![CDATA[".$zaobdobie."]]></stvrtRok>"."\r\n"; fwrite($soubor, $text);
-  $text = " </zaobdobie>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <rok><![CDATA[".$kli_vrok."]]></rok>"."\r\n"; fwrite($soubor, $text);
+  $text = " </zaObdobie>"."\r\n"; fwrite($soubor, $text);
 
-  $text = " </hlavicka>"."\r\n"; fwrite($soubor, $text);
+  $text = " <fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
+$prie = iconv("CP1250", "UTF-8", $prie);
+  $text = "  <priezvisko><![CDATA[".$prie."]]></priezvisko>"."\r\n"; fwrite($soubor, $text);
+$meno = iconv("CP1250", "UTF-8", $meno);
+  $text = "  <meno><![CDATA[".$meno."]]></meno>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <titulPred><![CDATA[".$titulp."]]></titulPred>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <titulZa><![CDATA[".$titulz."]]></titulZa>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <datumNarodenia><![CDATA[".$nar_sk."]]></datumNarodenia>"."\r\n"; fwrite($soubor, $text);
+  $text = " </fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
 
+  $text = " <pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <obchodneMeno>"."\r\n"; fwrite($soubor, $text);
+$fir_fnazx = iconv("CP1250", "UTF-8", $fir_fnazx);
+$fir_fnazx1 = iconv("CP1250", "UTF-8", $fir_fnazx1);
+  $text = "   <riadok><![CDATA[".$fir_fnazx.$fir_fnazx1."]]></riadok>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </obchodneMeno>"."\r\n"; fwrite($soubor, $text);
+  $text = " </pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
 
+  $text = " <sidlo>"."\r\n"; fwrite($soubor, $text);
+$zuli = iconv("CP1250", "UTF-8", $zuli);
+  $text = "  <ulica><![CDATA[".$zuli."]]></ulica>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <supisneOrientacneCislo><![CDATA[".$zcdm."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <psc><![CDATA[".$zpsc."]]></psc>"."\r\n"; fwrite($soubor, $text);
+$zmes = iconv("CP1250", "UTF-8", $zmes);
+  $text = "  <obec><![CDATA[".$zmes."]]></obec>"."\r\n"; fwrite($soubor, $text);
+  $text = " </sidlo>"."\r\n"; fwrite($soubor, $text);
 
+  $text = " <adresaZariadenia>"."\r\n"; fwrite($soubor, $text);
+$zzul = iconv("CP1250", "UTF-8", $zzul);
+  $text = "  <ulica><![CDATA[".$zzul."]]></ulica>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <supisneOrientacneCislo><![CDATA[".$zzcs."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <psc><![CDATA[".$zzps."]]></psc>"."\r\n"; fwrite($soubor, $text);
+$zzms = iconv("CP1250", "UTF-8", $zzms);
+  $text = "  <obec><![CDATA[".$zzms."]]></obec>"."\r\n"; fwrite($soubor, $text);
+  $text = " </adresaZariadenia>"."\r\n"; fwrite($soubor, $text);
+
+  $text = " <suhrnneUdaje>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <vyska><![CDATA[".$r15."]]></vyska>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <suma><![CDATA[".$r16."]]></suma>"."\r\n"; fwrite($soubor, $text);
+$text=SkDatum($hlavicka->datum);
+  $text = "  <datum><![CDATA[".$text."]]></datum>"."\r\n"; fwrite($soubor, $text);
+  $text = " </suhrnneUdaje>"."\r\n"; fwrite($soubor, $text);
+
+  $text = " <vypracoval>"."\r\n"; fwrite($soubor, $text);
+$text=SkDatum($hlavicka->datd);
+  $text = "  <dna><![CDATA[".$text."]]></dna>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <telefon><![CDATA[".$fir_mzdt04."]]></telefon>"."\r\n"; fwrite($soubor, $text);
+$fir_mzdt05 = iconv("CP1250", "UTF-8", $fir_mzdt05);
+  $text = "  <vypracoval><![CDATA[".$fir_mzdt05."]]></vypracoval>"."\r\n"; fwrite($soubor, $text);
+$podpis="1";
+  $text = "  <podpis><![CDATA[".$podpis."]]></podpis>"."\r\n"; fwrite($soubor, $text);
+  $text = " </vypracoval>"."\r\n"; fwrite($soubor, $text);
+$textx=$prilohy;
+if ( $textx == 0 ) $textx="";
+  $text = " <pocetStrPrilohy><![CDATA[".$textx."]]></pocetStrPrilohy>"."\r\n"; fwrite($soubor, $text);
+  $text = "</hlavicka>"."\r\n"; fwrite($soubor, $text);
      }
 //koniec ak j=0
 
@@ -218,11 +379,9 @@ if ( $j == 0 )
 $i = $i + 1;
 $j = $j + 1;
   }
-//koniec prvej strany
 
-
-  $text = "  <telo>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <priloha>"."\r\n"; fwrite($soubor, $text);
+  $text = "<telo>"."\r\n"; fwrite($soubor, $text);
+  $text = "<priloha>"."\r\n"; fwrite($soubor, $text);
 
 //vytlac drzitelov
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY xdic ";
@@ -239,36 +398,50 @@ $aktualna=1;
 {
 $hlavicka=mysql_fetch_object($sql);
 
-if( $j == 0 ) {
-
-  $text = "  <strana>"."\r\n"; fwrite($soubor, $text);
+if ( $j == 0 ) {
+  $text = " <strana>"."\r\n"; fwrite($soubor, $text);
   $text = "  <aktualna><![CDATA[".$aktualna."]]></aktualna>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <celkovo><![CDATA[".$celkovo."]]></celkovo>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </strana>"."\r\n"; fwrite($soubor, $text);
-              }
+  $text = "  <celkovo><![CDATA[".$prilohy."]]></celkovo>"."\r\n"; fwrite($soubor, $text);
+  $text = " </strana>"."\r\n"; fwrite($soubor, $text);
+               }
 
-
-  $text = "  <drzitel>"."\r\n"; fwrite($soubor, $text);
-
+  $text = " <drzitel>"."\r\n"; fwrite($soubor, $text);
 $xdic = iconv("CP1250", "UTF-8", $hlavicka->xdic);
   $text = "  <dic><![CDATA[".$xdic."]]></dic>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <vyska><![CDATA[".$hlavicka->prj."]]></vyska>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
+$xpfo = iconv("CP1250", "UTF-8", $hlavicka->xpfo);
+  $text = "   <priezvisko><![CDATA[".$xpfo."]]></priezvisko>"."\r\n"; fwrite($soubor, $text);
+$xmfo = iconv("CP1250", "UTF-8", $hlavicka->xmfo);
+  $text = "   <meno><![CDATA[".$xmfo."]]></meno>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <titulPred><![CDATA[".$hlavicka->xtitulp."]]></titulPred>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <titulZa><![CDATA[".$hlavicka->xtitulz."]]></titulZa>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
 
-  $text = "  </drzitel>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
+$xnpo = iconv("CP1250", "UTF-8", $hlavicka->xnpo);
+  $text = "   <obchodneMeno><![CDATA[".$xnpo."]]></obchodneMeno>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "  <sidlo>"."\r\n"; fwrite($soubor, $text);
+$xuli = iconv("CP1250", "UTF-8", $hlavicka->xuli);
+  $text = "   <ulica><![CDATA[".$xuli."]]></ulica>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <supisneOrientacneCislo><![CDATA[".$hlavicka->xcis."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <psc><![CDATA[".$hlavicka->xpsc."]]></psc>"."\r\n"; fwrite($soubor, $text);
+$xmes = iconv("CP1250", "UTF-8", $hlavicka->xmes);
+  $text = "   <obec><![CDATA[".$xmes."]]></obec>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </sidlo>"."\r\n"; fwrite($soubor, $text);
+  $text = " </drzitel>"."\r\n"; fwrite($soubor, $text);
 }
-
-
 $i = $i + 1;
 $j = $j + 1;
 if( $j == 3 ) { $j=0; $aktualna=$aktualna+1; }
-
-
   }
 //koniec drzitelov
 
-
-  $text = "  </priloha>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </telo>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </dokument>"."\r\n"; fwrite($soubor, $text);
+  $text = "</priloha>"."\r\n"; fwrite($soubor, $text);
+  $text = "</telo>"."\r\n"; fwrite($soubor, $text);
+  $text = "</dokument>"."\r\n"; fwrite($soubor, $text);
 fclose($soubor);
 ?>
 
