@@ -462,7 +462,9 @@ $text=SkDatum($hlavicka->datum);
   $text = " <vypracoval>"."\r\n"; fwrite($soubor, $text);
 $text=SkDatum($hlavicka->datd);
   $text = "  <dna><![CDATA[".$text."]]></dna>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <telefon><![CDATA[".$fir_mzdt04."]]></telefon>"."\r\n"; fwrite($soubor, $text);
+
+$telefon=str_replace("/","",$fir_mzdt04);
+  $text = "  <telefon><![CDATA[".$telefon."]]></telefon>"."\r\n"; fwrite($soubor, $text);
 $fir_mzdt05 = iconv("CP1250", "UTF-8", $fir_mzdt05);
   $text = "  <vypracoval><![CDATA[".$fir_mzdt05."]]></vypracoval>"."\r\n"; fwrite($soubor, $text);
 $podpis="1";
@@ -481,7 +483,6 @@ $j = $j + 1;
   }
 
   $text = "<telo>"."\r\n"; fwrite($soubor, $text);
-  $text = "<priloha>"."\r\n"; fwrite($soubor, $text);
 
 //vytlac drzitelov
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY xdic ";
@@ -491,6 +492,7 @@ $pol = mysql_num_rows($sql);
 $i=0;
 $j=0;
 $aktualna=1;
+$celkovo=$pol;
 
   while ($i < $pol )
   {
@@ -499,9 +501,10 @@ $aktualna=1;
 $hlavicka=mysql_fetch_object($sql);
 
 if ( $j == 0 ) {
+  $text = "<priloha>"."\r\n"; fwrite($soubor, $text);
   $text = " <strana>"."\r\n"; fwrite($soubor, $text);
   $text = "  <aktualna><![CDATA[".$aktualna."]]></aktualna>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <celkovo><![CDATA[".$prilohy."]]></celkovo>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <celkovo><![CDATA[".$celkovo."]]></celkovo>"."\r\n"; fwrite($soubor, $text);
   $text = " </strana>"."\r\n"; fwrite($soubor, $text);
                }
 
@@ -532,14 +535,17 @@ $xmes = iconv("CP1250", "UTF-8", $hlavicka->xmes);
   $text = "   <obec><![CDATA[".$xmes."]]></obec>"."\r\n"; fwrite($soubor, $text);
   $text = "  </sidlo>"."\r\n"; fwrite($soubor, $text);
   $text = " </drzitel>"."\r\n"; fwrite($soubor, $text);
+  $text = "</priloha>"."\r\n"; fwrite($soubor, $text);
+
 }
 $i = $i + 1;
 $j = $j + 1;
 if( $j == 3 ) { $j=0; $aktualna=$aktualna+1; }
+$j=0;
   }
 //koniec drzitelov
 
-  $text = "</priloha>"."\r\n"; fwrite($soubor, $text);
+
   $text = "</telo>"."\r\n"; fwrite($soubor, $text);
   $text = "</dokument>"."\r\n"; fwrite($soubor, $text);
 fclose($soubor);
