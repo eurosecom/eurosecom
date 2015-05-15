@@ -95,76 +95,176 @@ $sqlt = <<<mzdprc
 (
 <?xml version="1.0" encoding="utf-8"?>
 <dokument>
- <hlavicka>
-  <dic></dic>
-  <zaObdobie>
-   <stvrtRok></stvrtRok>
-   <rok>2015</rok>
-  </zaObdobie>
+<hlavicka>
+ <dic>1234567890</dic>
+ <zaObdobie>
+  <stvrtRok>1</stvrtRok>
+  <rok>2015</rok>
+ </zaObdobie>
+ <fyzickaOsoba>
+  <priezvisko>Priezvisko FO</priezvisko>
+  <meno>Meno FO</meno>
+  <titulPred>TpFO</titulPred>
+  <titulZa>TzFO</titulZa>
+  <datumNarodenia>01.01.1991</datumNarodenia>
+ </fyzickaOsoba>
+ <pravnickaOsoba>
+  <obchodneMeno>
+   <riadok></riadok>
+  </obchodneMeno>
+ </pravnickaOsoba>
+ <sidlo>
+  <ulica>Ulica FO</ulica>
+  <supisneOrientacneCislo>8</supisneOrientacneCislo>
+  <psc>09090</psc>
+  <obec>Obec FO</obec>
+ </sidlo>
+ <adresaZariadenia>
+  <ulica>Ulica zariadenia</ulica>
+  <supisneOrientacneCislo>12</supisneOrientacneCislo>
+  <psc>01313</psc>
+  <obec>Obec zariadenia</obec>
+ </adresaZariadenia>
+ <suhrnneUdaje>
+  <vyska>166.65</vyska>
+  <suma>31.66</suma>
+  <datum>15.05.2015</datum>
+ </suhrnneUdaje>
+ <vypracoval>
+  <dna>15.05.2015</dna>
+  <telefon>0901901901</telefon>
+  <vypracoval>Vypracoval</vypracoval>
+  <podpis>1</podpis>
+ </vypracoval>
+ <pocetStrPrilohy>3</pocetStrPrilohy>
+</hlavicka>
+<telo>
+<priloha>
+ <strana>
+  <aktualna>1</aktualna>
+  <celkovo>5</celkovo>
+ </strana>
+ <drzitel>
+  <dic>1111111111</dic>
+  <vyska>11.11</vyska>
   <fyzickaOsoba>
    <priezvisko></priezvisko>
    <meno></meno>
    <titulPred></titulPred>
    <titulZa></titulZa>
-   <datumNarodenia></datumNarodenia>
   </fyzickaOsoba>
   <pravnickaOsoba>
-   <obchodneMeno>
-    <riadok></riadok>
-   </obchodneMeno>
+   <obchodneMeno>Názov1 </obchodneMeno>
   </pravnickaOsoba>
   <sidlo>
-   <ulica></ulica>
-   <supisneOrientacneCislo></supisneOrientacneCislo>
-   <psc></psc>
-   <obec></obec>
+   <ulica>Ulica1</ulica>
+   <supisneOrientacneCislo>251</supisneOrientacneCislo>
+   <psc>01101</psc>
+   <obec>Obec1</obec>
   </sidlo>
-  <adresaZariadenia>
-   <ulica></ulica>
-   <supisneOrientacneCislo></supisneOrientacneCislo>
-   <psc></psc>
-   <obec></obec>
-  </adresaZariadenia>
-  <suhrnneUdaje>
-   <vyska></vyska>
-   <suma></suma>
-   <datum></datum>
-  </suhrnneUdaje>
-  <vypracoval>
-   <dna>12.05.2015</dna>
-   <telefon></telefon>
-   <vypracoval></vypracoval>
-   <podpis>0</podpis>
-  </vypracoval>
-  <pocetStrPrilohy>1</pocetStrPrilohy>
- </hlavicka>
- <telo>
-  <priloha>
-   <strana>
-    <aktualna>1</aktualna>
-    <celkovo>1</celkovo>
-   </strana>
-   <drzitel>
-    <dic></dic>
-    <vyska></vyska>
-    <fyzickaOsoba>
-     <priezvisko></priezvisko>
-     <meno></meno>
-     <titulPred></titulPred>
-     <titulZa></titulZa>
-    </fyzickaOsoba>
-    <pravnickaOsoba>
-     <obchodneMeno></obchodneMeno>
-    </pravnickaOsoba>
-    <sidlo>
-     <ulica></ulica>
-     <supisneOrientacneCislo></supisneOrientacneCislo>
-     <psc></psc>
-     <obec></obec>
-    </sidlo>
-   </drzitel>
-  </priloha>
- </telo>
+ </drzitel>
+</priloha>
+<priloha>
+ <strana>
+  <aktualna>2</aktualna>
+  <celkovo>5</celkovo>
+ </strana>
+ <drzitel>
+  <dic>2222222222</dic>
+  <vyska>22.22</vyska>
+  <fyzickaOsoba>
+   <priezvisko></priezvisko>
+   <meno></meno>
+   <titulPred></titulPred>
+   <titulZa></titulZa>
+  </fyzickaOsoba>
+  <pravnickaOsoba>
+   <obchodneMeno>Názov2</obchodneMeno>
+  </pravnickaOsoba>
+  <sidlo>
+   <ulica>Ulica2</ulica>
+   <supisneOrientacneCislo>2</supisneOrientacneCislo>
+   <psc>02202</psc>
+   <obec>Obec2</obec>
+  </sidlo>
+ </drzitel>
+</priloha>
+<priloha>
+ <strana>
+  <aktualna>3</aktualna>
+  <celkovo>5</celkovo>
+ </strana>
+ <drzitel>
+  <dic>3333333333</dic>
+  <vyska>33.33</vyska>
+  <fyzickaOsoba>
+   <priezvisko></priezvisko>
+   <meno></meno>
+   <titulPred></titulPred>
+   <titulZa></titulZa>
+  </fyzickaOsoba>
+  <pravnickaOsoba>
+   <obchodneMeno>Názov3</obchodneMeno>
+  </pravnickaOsoba>
+  <sidlo>
+   <ulica>Ulica3</ulica>
+   <supisneOrientacneCislo>3</supisneOrientacneCislo>
+   <psc>03303</psc>
+   <obec>Obec3</obec>
+  </sidlo>
+ </drzitel>
+</priloha>
+<priloha>
+ <strana>
+  <aktualna>4</aktualna>
+  <celkovo>5</celkovo>
+ </strana>
+ <drzitel>
+  <dic>4444444444</dic>
+  <vyska>44.44</vyska>
+  <fyzickaOsoba>
+   <priezvisko></priezvisko>
+   <meno></meno>
+   <titulPred></titulPred>
+   <titulZa></titulZa>
+  </fyzickaOsoba>
+  <pravnickaOsoba>
+   <obchodneMeno>Názov4</obchodneMeno>
+  </pravnickaOsoba>
+  <sidlo>
+   <ulica>Ulica4</ulica>
+   <supisneOrientacneCislo>4</supisneOrientacneCislo>
+   <psc>04404</psc>
+   <obec>Obec4</obec>
+  </sidlo>
+ </drzitel>
+</priloha>
+<priloha>
+ <strana>
+  <aktualna>5</aktualna>
+  <celkovo>5</celkovo>
+ </strana>
+ <drzitel>
+  <dic>5555555555</dic>
+  <vyska>55.55</vyska>
+  <fyzickaOsoba>
+   <priezvisko>Prie</priezvisko>
+   <meno>Meno</meno>
+   <titulPred>Titulp</titulPred>
+   <titulZa>Titulz</titulZa>
+  </fyzickaOsoba>
+  <pravnickaOsoba>
+   <obchodneMeno></obchodneMeno>
+  </pravnickaOsoba>
+  <sidlo>
+   <ulica>Ulica5</ulica>
+   <supisneOrientacneCislo>5</supisneOrientacneCislo>
+   <psc>05505</psc>
+   <obec>Obec5</obec>
+  </sidlo>
+ </drzitel>
+</priloha>
+</telo>
 </dokument>
 );
 mzdprc;
