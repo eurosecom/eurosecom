@@ -1710,6 +1710,7 @@ $pdf->SetY(111);
 $pdf->Cell(190,6," ","$rmc1",1,"L");
 $text="1234567890";
 $text=$hlavickav->xdic;
+if( $text == 0 ) { $text=""; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
