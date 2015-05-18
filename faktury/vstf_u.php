@@ -69,7 +69,7 @@ $tlacitkoenter=0;
 if( $copern == 6 ) { $tlacitkoenter=0; }
 $itstablet=0;
 if( $_SESSION['nieie'] == 1 AND $_SESSION['chrome'] == 0 AND $_SESSION['safari'] == 0 ) { $itstablet=1; }
-
+if( $_SESSION['ie10'] == 1 ) { $itstablet=0; }
 
 $sql = "SELECT * FROM F$kli_vxcf"."_vtvall";
 $vysledok = mysql_query($sql);
@@ -662,7 +662,7 @@ $sqtz = "UPDATE F$kli_vxcfskl"."_$tabltovar SET cis=$h_slu, nat='$h_nsl', dph=$h
 $upravene = mysql_query("$sqtz");
 
 $h_pon = trim(strip_tags($_REQUEST['h_pon']));
-if( $h_pon != '' AND $drupoh == 1 )
+if( $h_pon != '' AND ( $drupoh == 1 OR $drupoh == 11 ) )
    {
 $sqtz = "UPDATE F$kli_vxcfskl"."_$tabltovar SET poz='$h_pon' WHERE cpl='$cislo_cpl'";
 $upravene = mysql_query("$sqtz");
@@ -774,10 +774,18 @@ $h_poh=50+$drupoh;
 $h_dat = SqlDatum($h_dat);
 $pole = explode("-", $h_dat);
 $h_ume = $pole[1].".".$pole[0];
-$sqty = "INSERT INTO F$kli_vxcfskl"."_$tabltovar ( dok,fak,dol,prf,skl,poh,ico,str,zak,dat,ume,cis,nat,pop,dph,cen,cep,ced,mno,mer,id )". 
+
+$h_pon = trim(strip_tags($_REQUEST['h_pon']));
+if( $h_pon != '' AND ( $drupoh == 1 OR $drupoh == 11 ) )
+   {
+$h_poz=$h_pon;
+   }
+
+$sqty = "INSERT INTO F$kli_vxcfskl"."_$tabltovar ( dok,fak,dol,prf,skl,poh,ico,str,zak,dat,ume,cis,nat,pop,poz,dph,cen,cep,ced,mno,mer,id )". 
 " VALUES ('$cislo_dok', '$h_cfak', '$h_cdol', '$h_cprf', '$h_skl', '$h_poh', '$h_ico', '$h_str', '$h_zak', '$h_dat', '$h_ume', '$h_slu', '$h_nsl',".
-" '$h_pop', '$h_dph', '$h_cen', '$h_cep', '$h_ced',".
-" '$h_mno', '$h_mer', '$kli_uzid' );"; 
+" '$h_pop', '$h_poz', '$h_dph', '$h_cen', '$h_cep', '$h_ced',".
+" '$h_mno', '$h_mer', '$kli_uzid' );";
+ 
 }
 
 //echo $sqty;
@@ -4821,10 +4829,9 @@ maxim·lny poËet znakov v n·zve poloûky <input type='text' name='h_ucm5' id='h_uc
 Zæava % <input type='text' name='h_ico5' id='h_ico5' size='4' maxlenght='4' value='' >
 <a href="#" onClick="ZlavaPol(<?php echo $kli_uzid; ?>);"> VypoËÌtaù zæavu z fakt˙ry</a></td></tr>  
 
-<tr><td class='ponuka' colspan='5'> | Text nad poloûkou <input type='checkbox' name='omd' value='1' > 
+<tr><td class='ponuka' colspan='5'> | Text nad poloûkou <input type='checkbox' name='omd' value='1' > / pod poloûkou <input type='checkbox' name='pdl' value='1' >
  | zahraniËn· fakt˙ra <input type='checkbox' name='odl' value='1' > </td></tr>
 <tr><td class='ponuka' colspan='5'> | Text za (pred rozpisom DPH) <input type='checkbox' name='pmd' value='1' > 
- | x2<input type='checkbox' name='pdl' value='1' > 
 </td></tr> 
 </FORM></table>
 </div>
@@ -5130,7 +5137,7 @@ $textnadpol=0;
 $textpodpol=0;
 $zahranicna=0;
 if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $maxtextpol=80; }
-if ( ( $copern == 7 OR $copern == 87 ) AND $drupoh == 1 AND $sysx != 'UCT' ) {
+if ( ( $copern == 7 OR $copern == 87 ) AND ( $drupoh == 1 OR $drupoh == 11 ) AND $sysx != 'UCT' ) {
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_fakturaset$kli_uzid ";
 $sqldok = mysql_query("$sqlttt");
   if (@$zaznam=mysql_data_seek($sqldok,0))
@@ -6552,7 +6559,7 @@ $slpol = mysql_num_rows($sluz);
 
 //echo $slpol;
 $ajpoz="";
-if( $drupoh == 1 ) { $ajpoz=",poz"; }
+if( $drupoh == 1 OR $drupoh == 11 ) { $ajpoz=",poz"; }
 
 $tovtt = "SELECT dok, cpl, F$kli_vxcfskl"."_$tabltovar.cis AS slu, F$kli_vxcfskl"."_$tabltovar.nat AS nsl, pop, F$kli_vxcfskl"."_$tabltovar.dph,".
 " mno, F$kli_vxcfskl"."_$tabltovar.mer, F$kli_vxcfskl"."_$tabltovar.cep, F$kli_vxcfskl"."_$tabltovar.ced, F$kli_vxcfskl"."_$tabltovar.cen, fak, dol $ajpoz". 
@@ -6654,7 +6661,7 @@ $rtov=mysql_fetch_object($tov);
 
 ?>
 
-<?php if(  $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' ) { ?>
+<?php if(  $copern == 7 AND ( $drupoh == 1 OR $drupoh == 11 ) AND $sysx != 'UCT' ) { ?>
 <?php if( $textnadpol == 1 AND $rtov->poz != '' ) { ?>
 <tr><td class="bmenu" colspan="2" ><td class="fmenu" colspan="9" ><?php echo $rtov->poz;?></td></tr>
 <?php                                             } ?>
@@ -6829,10 +6836,10 @@ $rsluz=mysql_fetch_object($sluz);
 
 ?>
 
-<?php if(  $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' ) { ?>
+<?php if(  $copern == 7 AND ( $drupoh == 1 OR $drupoh == 11 ) AND $sysx != 'UCT' ) { ?>
 <?php if( $textnadpol == 1 AND $rsluz->pon != '' ) { ?>
 <tr><td class="bmenu" colspan="2" ><td class="fmenu" colspan="9" ><?php echo $rsluz->pon;?></td></tr>
-<?php                                             } ?>
+<?php                                              } ?>
 <?php                                                         } ?>
 
 <?php
@@ -7044,7 +7051,7 @@ if ( $copern == 7 )
      {
 ?>
 &copern=77&cislo_dok=<?php echo $cislo_dok;?>" >
-<?php if(  $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' ) { ?>
+<?php if(  $copern == 7 AND ( $drupoh == 1 OR $drupoh == 11 ) AND $sysx != 'UCT' ) { ?>
 <?php if( $textnadpol == 0 ) { ?>
 <input type="hidden" name="h_pon" id="h_pon" />
 <?php                        } ?>

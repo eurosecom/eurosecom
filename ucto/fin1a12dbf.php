@@ -69,7 +69,7 @@ $fir_ficox="00310000";
 $typorg="22";
 }
 
-//////////////////////////////////////////////////////////// FIN 112p
+//////////////////////////////////////////////////////////// FIN 1a12p
 /* Zde zaèíná "vlastní" skript, celý je uzavøen do cyklu do-while (false), což pøi použití pøíkazù break znaènì usnadní a zpøehlední zpracování chybových stavù */
 do {
 
@@ -176,19 +176,19 @@ $dotaz = "select * from prijdbf order by cast,zdroj,pol,podp ";
 
 
 /* Vytvoøíme pole, která odpovídají jednotlivým položkám */
-$polozky[] = array("okres", "C", 3);
-$polozky[] = array("ico", "C", 8);
-$polozky[] = array("kodob", "C", 6);
-$polozky[] = array("datrok", "C", 4);
-$polozky[] = array("datmes", "C", 2);
-$polozky[] = array("typorg", "C", 2);
-$polozky[] = array("cast", "C", 1);
-$polozky[] = array("zdroj", "C", 4);
-$polozky[] = array("pol", "C", 3);
-$polozky[] = array("podp", "C", 3);
-$polozky[] = array("rs00001", "N", 15, 2);
-$polozky[] = array("rs00002", "N", 15, 2);
-$polozky[] = array("rs00003", "N", 15, 2);
+$polozky[] = array("OKRES", "C", 3);
+$polozky[] = array("ICO", "C", 8);
+$polozky[] = array("KODOB", "C", 6);
+$polozky[] = array("DATROK", "C", 4);
+$polozky[] = array("DATMES", "C", 2);
+$polozky[] = array("TYPORG", "C", 2);
+$polozky[] = array("CAST", "C", 1);
+$polozky[] = array("ZDROJ", "C", 4);
+$polozky[] = array("POL", "C", 3);
+$polozky[] = array("PODP", "C", 3);
+$polozky[] = array("RS00001", "N", 15, 2);
+$polozky[] = array("RS00002", "N", 15, 2);
+$polozky[] = array("RS00003", "N", 15, 2);
 
 // Získáme unikátní název DBF souboru
 $nazev_souboru = "../tmp/".uniqid("soubor", true) . ".dbf";
@@ -243,10 +243,10 @@ $sqlx = 'DROP TABLE prijdbf';
 //echo "idem dalejkon";
 
 } while (false);
-////////////////////////////////////////////////////////////KONIEC FIN 112p
+////////////////////////////////////////////////////////////KONIEC FIN 1a12p
 
 
-//////////////////////////////////////////////////////////// FIN 112v
+//////////////////////////////////////////////////////////// FIN 1a12v
 /* Zde zaèíná "vlastní" skript, celý je uzavøen do cyklu do-while (false), což pøi použití pøíkazù break znaènì usnadní a zpøehlední zpracování chybových stavù */
 do {
 
@@ -350,24 +350,24 @@ $dsql = mysql_query("$dsqlt");
 $dotaz2 = "select * from vyddbf order by cast,program,zdroj,odd,skup,trieda,podtr,pol,podp ";
 
 /* Vytvoøíme pole, která odpovídají jednotlivým položkám */
-$polozky2[] = array("okres", "C", 3);
-$polozky2[] = array("ico", "C", 8);
-$polozky2[] = array("kodob", "C", 6);
-$polozky2[] = array("datrok", "C", 4);
-$polozky2[] = array("datmes", "C", 2);
-$polozky2[] = array("typorg", "C", 2);
-$polozky2[] = array("cast", "C", 1);
-$polozky2[] = array("program", "C", 6);
-$polozky2[] = array("zdroj", "C", 4);
-$polozky2[] = array("odd", "C", 2);
-$polozky2[] = array("skup", "C", 1);
-$polozky2[] = array("trieda", "C", 1);
-$polozky2[] = array("podtr", "C", 1);
-$polozky2[] = array("pol", "C", 3);
-$polozky2[] = array("podp", "C", 3);
-$polozky2[] = array("rs00001", "N", 15, 2);
-$polozky2[] = array("rs00002", "N", 15, 2);
-$polozky2[] = array("rs00003", "N", 15, 2);
+$polozky2[] = array("OKRES", "C", 3);
+$polozky2[] = array("ICO", "C", 8);
+$polozky2[] = array("KODOB", "C", 6);
+$polozky2[] = array("DATROK", "C", 4);
+$polozky2[] = array("DATMES", "C", 2);
+$polozky2[] = array("TYPORG", "C", 2);
+$polozky2[] = array("CAST", "C", 1);
+$polozky2[] = array("PROGRAM", "C", 6);
+$polozky2[] = array("ZDROJ", "C", 4);
+$polozky2[] = array("ODD", "C", 2);
+$polozky2[] = array("SKUP", "C", 1);
+$polozky2[] = array("TRIEDA", "C", 1);
+$polozky2[] = array("PODTR", "C", 1);
+$polozky2[] = array("POL", "C", 3);
+$polozky2[] = array("PODP", "C", 3);
+$polozky2[] = array("RS00001", "N", 15, 2);
+$polozky2[] = array("RS00002", "N", 15, 2);
+$polozky2[] = array("RS00003", "N", 15, 2);
 
 
 // Získáme unikátní název DBF souboru
@@ -423,7 +423,7 @@ $sqlx = 'DROP TABLE vyddbf';
 //echo "idem dalejkon";
 
 } while (false);
-////////////////////////////////////////////////////////////KONIEC FIN 112v
+////////////////////////////////////////////////////////////KONIEC FIN 1a12v
 
 
 

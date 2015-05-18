@@ -308,6 +308,18 @@ window.open('../sklad/sklkarta_pdf.php?copern=10&h_skl=' + h_skl + '&h_cis=' + h
                 }
 
 
+function CisJednejKarty()
+                {
+
+var h_cis = document.forms.forms1.h_slu.value;
+
+if( h_cis > 0 ) {
+window.open('../sklad/ccis.php?copern=9&hladaj_cis=' + h_cis + '&page=1', '_blank', 'width=800, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes'  );
+                }
+
+                }
+
+
 function TlacVsetkyKarty()
                 {
 
@@ -327,7 +339,7 @@ window.open('../sklad/sklkarta_pdf.php?copern=20&h_skl=' + h_skl + '&h_cis=' + h
 <table class="h2" width="100%" >
 <tr>
 <td>EuroSecom  -  Skladové karty
- <img src='../obr/info.png' width=12 height=12 border=0 alt="EnterNext = v tomto formuláry po zadaní hodnoty položky a stlaèení Enter program prejde na vstup ïalšej položky">
+ <img src='../obr/info.png' width=12 height=12 border=0 title="EnterNext = v tomto formuláry po zadaní hodnoty položky a stlaèení Enter program prejde na vstup ïalšej položky">
 
 </td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
@@ -349,12 +361,16 @@ window.open('../sklad/sklkarta_pdf.php?copern=20&h_skl=' + h_skl + '&h_cis=' + h
 <td class="hmenu" width="20%">Sklad
 <td class="hmenu" width="10%">Èíslo materiálu
 <td class="hmenu" width="30%">Názov materiálu
+
+<input type='image' src='../obr/orig.png' width=15 height=15 border=0 title='Èíselník materiálu pre vybraný materiál'
+ onclick="CisJednejKarty();" >
 <td class="hmenu" width="10%">Nákupná cena
 <td class="hmenu" width="30%">
-<input type='image' src='../obr/tlac.png' width=15 height=15 border=0 alt='Tlaè skladovej karty pre vybraný materiál'
+<input type='image' src='../obr/tlac.png' width=15 height=15 border=0 title='Tlaè skladovej karty pre vybraný materiál'
  onclick="TlacJednejKarty();" >
-<input type='image' src='../obr/tlac.png' width=20 height=20 border=0 alt='Tlaè všetky skladové karty'
+<input type='image' src='../obr/tlac.png' width=20 height=20 border=0 title='Tlaè všetky skladové karty'
  onclick="TlacVsetkyKarty();" >
+
 </tr>
 <FORM name="forms1" class="obyc" method="post" action="#" >
 <tr>

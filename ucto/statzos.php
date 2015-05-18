@@ -1438,9 +1438,12 @@ if( $volajfin1a12 == 0 ) { $nazfin1a12="FIN 1 - 12";}
 </select>
 <a href="#" onClick="DbfFin1a12();">
 <img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru pre AZUV' ></a>
-
+<?php
+$nedaj=1; 
+      if( $nedaj == 0 ) { ?>
 <a href="#" onClick="CsvFin1a12();">
 <img src='../obr/export.png' width=20 height=15 border=0 title='Export CSV súboru' ></a>
+<?php                  } ?>
 </td>
 <td class="bmenu" width="2%">
 <a href="#" onClick="UpravFin1a12();">

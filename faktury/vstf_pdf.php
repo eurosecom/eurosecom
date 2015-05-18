@@ -214,14 +214,16 @@ exit;
 }
 //koniec ak je specialna faktura chod na nu
 
-$textza=0;
-if( $drupoh == 1 ) {
-$sqlttt = "SELECT pmd FROM F$kli_vxcf"."_fakturaset$kli_uzid ";
+$textza=0; $textnadpol=0; $textpodpol=0;
+if( $drupoh == 1 OR $drupoh == 11 ) {
+$sqlttt = "SELECT pmd, omd, pdl FROM F$kli_vxcf"."_fakturaset$kli_uzid ";
 $sqldok = mysql_query("$sqlttt");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
   $textza=1*$riaddok->pmd;
+  $textnadpol=1*$riaddok->omd;
+  $textpodpol=1*$riaddok->pdl;
   }
                    }
 
@@ -1195,7 +1197,8 @@ $tabltovar="sklfakprc".$kli_uzid; $ajhodb=",hodb"; $kli_vxcfskl=$kli_vxcf;
 }
 if( $drupoh == 11 ) { $ajunk=",unk"; }
 $ajpoz="";
-if( $drupoh == 1 ) { $ajpoz=",poz"; }
+if( $drupoh == 1  ) { $ajpoz=",poz"; }
+if( $drupoh == 11 ) { $ajpoz=",poz"; }
 
 $tovtt = "SELECT dok, cpl, F$kli_vxcfskl"."_$tabltovar.cis AS slu, F$kli_vxcfskl"."_$tabltovar.nat AS nsl, pop, F$kli_vxcfskl"."_$tabltovar.dph,".
 " mno, F$kli_vxcfskl"."_$tabltovar.mer, F$kli_vxcfskl"."_$tabltovar.cep, F$kli_vxcfskl"."_$tabltovar.ced, F$kli_vxcfskl"."_sklcis.nat AS nso $ajhodb $ajunk $ajpoz". 
@@ -1225,7 +1228,7 @@ $rtov=mysql_fetch_object($tov);
 if(  $rtov->slu >= 0 AND $rtov->nsl != '' )
     {
 
-if(  $rtov->poz != '' )
+if(  $rtov->poz != '' AND ( ( $textnadpol == 0 AND $textpodpol == 0 ) OR ( $textnadpol == 1 AND $textpodpol == 0 ) ) )
       {
 $pdf->SetFont('arial','',8);
 $pdf->Cell(72,5,"$rtov->poz","0",1,"L");
@@ -1271,6 +1274,13 @@ if(  $rtov->slu == 0 AND $rtov->nsl == '' AND $rtov->pop != '' )
 $pdf->Cell(180,5,"$rtov->pop","0",1,"L");
 $js=$js+1;
     }
+
+if(  $rtov->poz != '' AND $textnadpol == 1 AND $textpodpol == 1 )
+      {
+$pdf->SetFont('arial','',8);
+$pdf->Cell(72,5,"$rtov->poz","0",1,"L");
+$js=$js+1;
+      }
 
 }
 $i = $i + 1;
