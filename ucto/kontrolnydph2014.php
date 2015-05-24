@@ -1772,6 +1772,8 @@ if ( $j > 37 ) { $j=0; }
 
 //sumar sekcii
 $spoludph= $dpha1-$dphb2-$dphb3+$dphc1-$dphc2+$dphd1s20+$dphd1s10+$dphd2s20+$dphd2s10;
+$spoludphz=sprintf('%.2f', $spoludph);
+
 $pdf->Cell(190,4," ","0",1,"R");
 $pdf->Cell(20,4,"Spolu DPH","0",0,"L");$pdf->Cell(30,4,"A1","0",0,"L");$pdf->Cell(40,4,"$dpha1","0",1,"R");
 $pdf->Cell(20,4,"         ","0",0,"L");$pdf->Cell(30,4,"B1 samozdanenie +/-","0",0,"L");$pdf->Cell(40,4,"$dphb1","0",1,"R");
@@ -1783,7 +1785,7 @@ $pdf->Cell(20,4,"         ","0",0,"L");$pdf->Cell(30,4,"D1 $fir_dph2 %","0",0,"L
 $pdf->Cell(20,4,"         ","0",0,"L");$pdf->Cell(30,4,"D1 $fir_dph1 %","0",0,"L");$pdf->Cell(40,4,"$dphd1s10","0",1,"R");
 $pdf->Cell(20,4,"         ","0",0,"L");$pdf->Cell(30,4,"D2 $fir_dph2 %","0",0,"L");$pdf->Cell(40,4,"$dphd2s20","0",1,"R");
 $pdf->Cell(20,4,"         ","0",0,"L");$pdf->Cell(30,4,"D2 $fir_dph1 %","0",0,"L");$pdf->Cell(40,4,"$dphd2s10","0",1,"R");
-$pdf->Cell(50,4,"DPH","1",0,"L");$pdf->Cell(40,4,"$spoludph","1",1,"R");
+$pdf->Cell(50,4,"DPH","1",0,"L");$pdf->Cell(40,4,"$spoludphz","1",1,"R");
 
 if ( $copern == 20 )
 {
