@@ -344,6 +344,13 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE vyddbf "." SET cast=4 WHERE cast = 4 ";
 $dsql = mysql_query("$dsqlt");
 
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 )) 
+{
+$sqtoz = "UPDATE vyddbf SET odd='0', skup='7', trieda='2', podtr='2' ";
+$oznac = mysql_query("$sqtoz");
+}
+
+
 //exit;
 
 /* Pøipravíme si SQL dotaz (v praxi bychom jej získali asi jinak...) */
