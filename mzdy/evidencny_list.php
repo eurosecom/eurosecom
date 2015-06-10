@@ -784,7 +784,7 @@ $datum=SkDatum($hlavicka->datum);
 
 
 $pdf->Cell(190,23,"                          ","0",1,"L");
-$pdf->Cell(48,3," ","0",0,"L");$pdf->Cell(3,3,"X","0",0,"C");
+$pdf->Cell(48,3," ","0",0,"L");$pdf->Cell(3,3," ","0",0,"C");
 
 $opravx="";
 if( $hlavicka->oprav == 1 ) { $opravx="X"; }
