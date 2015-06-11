@@ -70,10 +70,12 @@ $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resiza
 $tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
+$sql = "ALTER TABLE F$kli_vxcf"."_uctprikp ADD pbic VARCHAR(10) NOT NULL AFTER iban ";
+$vysledek = mysql_query("$sql");
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Uhrada miezd</title>
   <style type="text/css">

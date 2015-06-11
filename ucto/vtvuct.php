@@ -1134,6 +1134,7 @@ $sqlt = <<<uctprikp
    uceb        VARCHAR(30),
    numb        VARCHAR(4),
    iban        VARCHAR(30),
+   pbic        VARCHAR(10),
    twib        VARCHAR(30),
    vsy         int(10),
    ksy         varchar(4) NOT NULL,
