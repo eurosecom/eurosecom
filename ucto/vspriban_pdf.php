@@ -120,18 +120,19 @@ $pdf->SetFont('arial','',9);
 
 //zahlavie
 $pdf->Cell(180,5," ","0",1,"L");
-$pdf->Cell(60,7,"IBAN platite¾a / Payer´s IBAN","1",0,"C");$pdf->Cell(30,3.5,"Celková suma","T",0,"C");$pdf->Cell(30,7,"Mena / Currency","LT",0,"C");$pdf->Cell(30,3.5,"Dátum splatnosti","LTR",1,"C");
-$pdf->Cell(60,0," ","0",0,"C");$pdf->Cell(30,3.5,"Total Amount","0",0,"C");$pdf->Cell(30,6," ","0",0,"C");$pdf->Cell(30,3.5,"Due Date","LR",1,"C");
+$pdf->Cell(82,7,"IBAN - BIC platite¾a / Payer´s IBAN - BIC","1",0,"C");$pdf->Cell(26,3.5,"Celková suma","T",0,"C");$pdf->Cell(20,3.5,"Mena","LT",0,"C");$pdf->Cell(28,3.5,"Dátum splatnosti","LTR",1,"C");
+$pdf->Cell(82,0," ","0",0,"C");$pdf->Cell(26,3.5,"Total Amount","R",0,"C");$pdf->Cell(20,3.5,"Currency ","0",0,"C");$pdf->Cell(28,3.5,"Due Date","LR",1,"C");
 $pdf->SetFont('arial','',10);
-$pdf->Cell(60,7,"$hlavicka->iban $hlavicka->twib","1",0,"C");$pdf->Cell(30,7," ","1",0,"R");$pdf->Cell(30,7,"$hlavicka->mena","1",0,"C");$pdf->Cell(30,7,"$dat_sk","1",1,"C");
+$pdf->Cell(82,7,"$hlavicka->iban - $hlavicka->twib","1",0,"C");$pdf->Cell(26,7," ","1",0,"C");$pdf->Cell(20,7,"$hlavicka->mena","1",0,"C");$pdf->Cell(28,7,"$dat_sk","1",1,"C");
 $pdf->SetFont('arial','',9);
 
 //polozky
 $pdf->Cell(180,3," ","0",1,"L");
-$pdf->Cell(60,7,"IBAN príjemcu / Beneficiary´s IBAN","LT",0,"C");$pdf->Cell(30,7,"Suma / Amount","LT",0,"C");$pdf->Cell(30,3.5,"Variabilný symbol","LT",0,"C");
-$pdf->Cell(30,3.5,"Špecifický symbol","LT",0,"C");$pdf->Cell(30,3.5,"Konštantný symbol","LTR",1,"C");
-$pdf->Cell(60,0," ","0",0,"C");$pdf->Cell(30,0," ","0",0,"C");$pdf->Cell(30,3.5,"Variable symbol","L",0,"C");$pdf->Cell(30,3.5,"Specific symbol","L",0,"C");
-$pdf->Cell(30,3.5,"Constant symbol","LR",1,"C");
+$pdf->Cell(56,7,"IBAN príjemcu / Beneficiary´s IBAN","LTR",0,"C");$pdf->Cell(26,3.5,"BIC príjemcu","RT",0,"C");$pdf->Cell(26,7,"Suma / Amount","LT",0,"C");$pdf->Cell(24,3.5,"Variabilný sym.","LT",0,"C");
+$pdf->Cell(24,3.5,"Špecifický sym.","LT",0,"C");$pdf->Cell(24,3.5,"Konštantný sym.","LTR",1,"C");
+$pdf->Cell(56,0," ","0",0,"C");$pdf->Cell(26,3.5,"Beneficiary´s BIC","RB",0,"C");$pdf->Cell(26,0," ","0",0,"C");$pdf->Cell(24,3.5,"Variable sym.","L",0,"C");$pdf->Cell(24,3.5,"Specific sym.","L",0,"C");
+$pdf->Cell(24,3.5,"Constant sym.","LR",1,"C");
+
 }
 
 $celkomstrana=$celkomstrana+$rtov->hodm;
@@ -142,8 +143,8 @@ $twib=trim($rtov->twib);
 
 if ( $twib == '' OR $ajtext == 0 )
      {
-$pdf->Cell(60,6,"$rtov->iban $rtov->pbic","1",0,"L");$pdf->Cell(30,6,"$rtov->hodm","1",0,"R");
-$pdf->Cell(30,6,"$rtov->vsy","1",0,"C");$pdf->Cell(30,6,"$rtov->ssy","1",0,"C");$pdf->Cell(30,6,"$rtov->ksy","1",1,"C");
+$pdf->Cell(56,6,"$rtov->iban","1",0,"L");$pdf->Cell(26,6,"$rtov->pbic","B",0,"C");$pdf->Cell(26,6,"$rtov->hodm","1",0,"R");
+$pdf->Cell(24,6,"$rtov->vsy","1",0,"C");$pdf->Cell(24,6,"$rtov->ssy","1",0,"C");$pdf->Cell(24,6,"$rtov->ksy","1",1,"C");
      }
 
 if ( $twib != '' AND $ajtext == 1 )
@@ -163,7 +164,7 @@ $xbxbxb=1*$hlavicka->txp;
 if ( $xbxbxb > 0 ) { $polozieknastranu=$xbxbxb; }
 if ( $j == $polozieknastranu ) { $j=0; }
 
-//popis pod polozkamy
+//popis pod polozkami
 if ( $j == 0 AND $i < $tvpol ) {
 $pdf->Cell(40,6," ","LR",0,"R");$pdf->Cell(20,6," ","LR",0,"R");$pdf->Cell(30,6," ","LR",0,"R");
 $pdf->Cell(35,6," ","LR",0,"R");$pdf->Cell(20,6," ","LR",0,"R");$pdf->Cell(35,6," ","LR",1,"R");
@@ -222,11 +223,11 @@ $pdf->SetFont('arial','',6);
 $pdf->Cell(180,3,"Vystavil(a): $hlavicka->meno $hlavicka->priezvisko / $hlavicka->id","0",1,"L");
 
 $sumary=32.5;
-$sumarx=70;
+$sumarx=97;
 $pdf->SetY($sumary);
 $pdf->SetX($sumarx);
 $pdf->SetFont('arial','',10);
-$pdf->Cell(35,6,"$Hcelkomstrana","0",0,"R");
+$pdf->Cell(26,6,"$Hcelkomstrana","0",0,"R");
   }
 //koniec hlavicky
 
