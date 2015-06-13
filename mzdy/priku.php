@@ -72,6 +72,10 @@ $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, statu
 
 $sql = "ALTER TABLE F$kli_vxcf"."_uctprikp ADD pbic VARCHAR(10) NOT NULL AFTER iban ";
 $vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtrn MODIFY trx3 VARCHAR(10) NOT NULL ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdzaltrn MODIFY trx3 VARCHAR(10) NOT NULL ";
+$vysledek = mysql_query("$sql");
 
 ?>
 <HEAD>
@@ -131,6 +135,7 @@ $sqlt = <<<mzdprc
    trncpl       INT(7) DEFAULT 0,
    twib         VARCHAR(30) NOT NULL,
    ibanp        VARCHAR(40) NOT NULL,
+   pbicp        VARCHAR(10) NOT NULL,
    konx         DECIMAL(10,0) DEFAULT 0
 );
 mzdprc;
@@ -152,7 +157,7 @@ if( $copern == 1 )
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT sum_ban,oc,$cislo_dok,".
 " '','',0,'','',".
-" 0,0,'','',5".
+" 0,0,'','','',5".
 " FROM F$kli_vxcf"."_mzdzalsum".
 " WHERE ume = $kli_vume AND sum_ban > 0".
 "";
@@ -169,7 +174,7 @@ $oznac = mysql_query("$sqtoz");
 if( $kli_vrok >= 2014 )
 {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdtextmzd".
-" SET ibanp=ziban ".
+" SET ibanp=ziban, pbicp=zswft ".
 " WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc = F$kli_vxcf"."_mzdtextmzd.invt";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
@@ -199,7 +204,7 @@ $podmexe=" AND ( dm = 938 OR dm = 939 ) ";
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT kc,oc,$cislo_dok,".
 " uceb,numb,vsy,ksy,ssy,".
-" 0,0,'',trx4,5".
+" 0,0,'',trx4,trx3,5".
 " FROM F$kli_vxcf"."_mzdzaltrn".
 " WHERE ume = $kli_vume AND uceb != '' AND numb != '0000' AND kc > 0 $podmexe ".
 "";
@@ -258,7 +263,7 @@ if( $copern == 2 )
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT (ozam_np+ozam_sp+ozam_ip+ozam_pn+ofir_np+ofir_sp+ofir_ip+ofir_pn+ofir_up+ofir_gf+ofir_rf),oc,$cislo_dok,".
 " '','',0,'','',".
-" 1,0,'SP','',5".
+" 1,0,'SP','','',5".
 " FROM F$kli_vxcf"."_mzdzalsum".
 " WHERE ume = $kli_vume ".
 "";
@@ -269,7 +274,7 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT (odan_dnp),oc,$cislo_dok,".
 " '','',0,'','',".
-" 3,0,'Dan z prijmu','',5".
+" 3,0,'Dan z prijmu','','',5".
 " FROM F$kli_vxcf"."_mzdzalsum".
 " WHERE ume = $kli_vume AND odan_dnp > 0 ".
 "";
@@ -280,7 +285,7 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT kc,oc,$cislo_dok,".
 " '','',0,'','',".
-" 3,0,'Dan z prijmu','',5".
+" 3,0,'Dan z prijmu','','',5".
 " FROM F$kli_vxcf"."_mzdzalvy".
 " WHERE ume = $kli_vume AND ( dm = 902 OR dm = 903 OR dm = 952 OR dm = 953 ) ".
 "";
@@ -291,7 +296,7 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT (odan_zrz),oc,$cislo_dok,".
 " '','',0,'','',".
-" 4,0,'','',5".
+" 4,0,'','','',5".
 " FROM F$kli_vxcf"."_mzdzalsum".
 " WHERE ume = $kli_vume AND odan_zrz > 0".
 "";
@@ -302,7 +307,7 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT (ozam_zp+ofir_zp),oc,$cislo_dok,".
 " '','',0,'','',".
-" 2,0,'','',5".
+" 2,0,'','','',5".
 " FROM F$kli_vxcf"."_mzdzalsum".
 " WHERE ume = $kli_vume AND ( ozam_zp > 0 OR ofir_zp > 0 )".
 "";
@@ -431,7 +436,7 @@ if( $copern == 3 )
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT (ozam_ddp+ofir_ddp),oc,$cislo_dok,".
 " '','',0,'','',".
-" 1,xddp,'','',5".
+" 1,xddp,'','','',5".
 " FROM F$kli_vxcf"."_mzdprcddp".$kli_uzid." ".
 " WHERE ( ozam_ddp != 0 OR ofir_ddp != 0 ) AND F$kli_vxcf"."_mzdprcddp".$kli_uzid.".konx = 9 ".
 "";
@@ -459,7 +464,7 @@ if( $copern == 4 )
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT kc,oc,$cislo_dok,".
 " '','',0,'','',".
-" 8,0,'odb','',5".
+" 8,0,'odb','','',5".
 " FROM F$kli_vxcf"."_mzdzalvy".
 " WHERE ume = $kli_vume AND dm = 920 ".
 "";
@@ -525,7 +530,7 @@ $oznac = mysql_query("$sqtoz");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT sum(sum_ban),0,$cislo_dok,".
 " ucep,nump,vsyp,ksyp,ssyp,".
-" 0,0,twib,ibanp,0".
+" 0,0,twib,ibanp,pbicp,0".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " WHERE oc >= 0".
 " GROUP BY ucep,nump,vsyp,ksyp,ssyp";
@@ -552,7 +557,7 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplx".$kli_uzid.
 " SELECT sum(sum_ban),0,$cislo_dok,".
 " '','',0,'','',".
-" 0,0,'','',0".
+" 0,0,'','','',0".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " WHERE oc >= 0".
 " GROUP BY konx";
@@ -572,9 +577,9 @@ while ($i <= $cpol )
   {
   $riadok=mysql_fetch_object($sql);
 
-$sqty = "INSERT INTO F$kli_vxcf"."_uctprikp ( dok,uceb,numb,hodp,hodm,vsy,ksy,ssy,id,uce,ico,iban,twib )".
+$sqty = "INSERT INTO F$kli_vxcf"."_uctprikp ( dok,uceb,numb,hodp,hodm,vsy,ksy,ssy,id,uce,ico,iban,pbic,twib )".
 " VALUES ('$cislo_dok', '$riadok->ucep', '$riadok->nump', '$riadok->sum_ban', '$riadok->sum_ban', '$riadok->vsyp', '$riadok->ksyp', '$riadok->ssyp',".
-" '$kli_uzid', '$hladaj_uce', '0', '$riadok->ibanp', '$riadok->twib' );"; 
+" '$kli_uzid', '$hladaj_uce', '0', '$riadok->ibanp', '$riadok->pbicp', '$riadok->twib' );"; 
 $ulozene = mysql_query("$sqty"); 
 
   }
