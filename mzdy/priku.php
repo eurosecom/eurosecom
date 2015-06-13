@@ -77,6 +77,35 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdzaltrn MODIFY trx3 VARCHAR(10) NOT NULL ";
 $vysledek = mysql_query("$sql");
 
+//bic dane sp a odbory
+$sql = "SELECT bicod FROM F".$kli_vxcf."_ufirdalsie";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdpfo1 VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdpfo2 VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdppo1 VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdppo2 VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdph VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdpzc VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdpzr VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdpdmv VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdpfo1 VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicsp VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicod VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+}
+
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -359,17 +388,20 @@ $sqlpok = mysql_query("$sqlpoktt");
 
   $ibandan = $riadokpok->ibdpzc;
   $ibandzr = $riadokpok->ibdpzr;
+
+  $bicdan = $riadokpok->bicdpzc;
+  $bicdzr = $riadokpok->bicdpzr;
   }
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdprm".
-" SET ucep='$ucetdan', nump='$numdan', vsyp='$vsydan', ksyp='$ksydan', ssyp='$ssydan', ibanp='$ibandan' ".
+" SET ucep='$ucetdan', nump='$numdan', vsyp='$vsydan', ksyp='$ksydan', ssyp='$ssydan', ibanp='$ibandan', pbicp='$bicdan' ".
 " WHERE dm=3";
 //echo $sqtoz;
 //exit;
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdprm".
-" SET ucep='$ucetdzr', nump='$numdzr', vsyp='$vsydzr', ksyp='$ksydzr', ssyp='$ssydzr', ibanp='$ibandzr'   ".
+" SET ucep='$ucetdzr', nump='$numdzr', vsyp='$vsydzr', ksyp='$ksydzr', ssyp='$ssydzr', ibanp='$ibandzr', pbicp='$bicdzr'   ".
 " WHERE dm=4";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
@@ -389,10 +421,11 @@ $kssp=$riadok->kssp;
 $sssp=$riadok->sssp;
 $vssp=$riadok->vssp;
 $ibsp=$riadok->ibsp;
+$bicsp=$riadok->bicsp;
   }
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid ".
-" SET ucep='$ucsp', nump='$nmsp', vsyp='$vssp', ksyp='$kssp', ssyp='$sssp', ibanp='$ibsp' ".
+" SET ucep='$ucsp', nump='$nmsp', vsyp='$vssp', ksyp='$kssp', ssyp='$sssp', ibanp='$ibsp', pbicp='$bicsp' ".
 " WHERE dm=1";
 $oznac = mysql_query("$sqtoz");
 
@@ -490,10 +523,11 @@ $ksod=$riadok->ksod;
 $ssod=$riadok->ssod;
 $vsod=$riadok->vsod;
 $ibod=$riadok->ibod;
+$bicod=$riadok->bicod;
   }
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid ".
-" SET ucep='$ucod', nump='$nmod', vsyp='$vsod', ksyp='$ksod', ssyp='$ssod', ibanp='$ibod' ".
+" SET ucep='$ucod', nump='$nmod', vsyp='$vsod', ksyp='$ksod', ssyp='$ssod', ibanp='$ibod', pbicp='$bicod' ".
 " WHERE dm=8";
 $oznac = mysql_query("$sqtoz");
 

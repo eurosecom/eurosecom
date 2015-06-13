@@ -261,7 +261,34 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD kzos DECIMAL(1,0) DEFAULT 0 AFTER kkx";
 $vysledek = mysql_query("$sql");
 }
-
+//bic dane sp a odbory
+$sql = "SELECT bicod FROM F".$kli_vxcf."_ufirdalsie";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdpfo1 VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdpfo2 VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdppo1 VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdppo2 VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdph VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdpzc VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdpzr VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdpdmv VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicdpfo1 VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicsp VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicod VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+}
 //koniec upravy
 
 // cislo operacie
@@ -318,6 +345,17 @@ $ibdpdmv = strip_tags($_REQUEST['ibdpdmv']);
 $ibsp = strip_tags($_REQUEST['ibsp']);
 $ibod = strip_tags($_REQUEST['ibod']);
 
+$bicdpfo1 = strip_tags($_REQUEST['bicdpfo1']);
+$bicdpfo2 = strip_tags($_REQUEST['bicdpfo2']);
+$bicdppo1 = strip_tags($_REQUEST['bicdppo1']);
+$bicdppo2 = strip_tags($_REQUEST['bicdppo2']);
+$bicdph = strip_tags($_REQUEST['bicdph']);
+$bicdpzc = strip_tags($_REQUEST['bicdpzc']);
+$bicdpzr = strip_tags($_REQUEST['bicdpzr']);
+$bicdpdmv = strip_tags($_REQUEST['bicdpdmv']);
+$bicsp = strip_tags($_REQUEST['bicsp']);
+$bicod = strip_tags($_REQUEST['bicod']);
+
 $ucsp = strip_tags($_REQUEST['ucsp']);
 $nmsp = strip_tags($_REQUEST['nmsp']);
 $kssp = strip_tags($_REQUEST['kssp']);
@@ -332,6 +370,8 @@ $vsod = strip_tags($_REQUEST['vsod']);
 
 
 $upravttt = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
+" bicdpfo1='$bicdpfo1', bicdpfo2='$bicdpfo2', bicdppo1='$bicdppo1', bicdppo2='$bicdppo2', bicdph='$bicdph', bicdpzc='$bicdpzc', bicdpzr='$bicdpzr', ".
+" bicsp='$bicsp', bicod='$bicod', bicdpdmv='$bicdpdmv', ".
 " ibdpfo1='$ibdpfo1', ibdpfo2='$ibdpfo2', ibdppo1='$ibdppo1', ibdppo2='$ibdppo2', ibdph='$ibdph', ibdpzc='$ibdpzc', ibdpzr='$ibdpzr', ibsp='$ibsp', ibod='$ibod', ". 
 " ibdpdmv='$ibdpdmv', ucsp='$ucsp', nmsp='$nmsp', kssp='$kssp', sssp='$sssp', vssp='$vssp', ".
 " ucod='$ucod', nmod='$nmod', ksod='$ksod', ssod='$ssod', vsod='$vsod', ".
@@ -530,6 +570,17 @@ $ibdpdmv=$riadok->ibdpdmv;
 $ibsp=$riadok->ibsp;
 $ibod=$riadok->ibod;
 
+$bicdpfo1=$riadok->bicdpfo1;
+$bicdpfo2=$riadok->bicdpfo2;
+$bicdppo1=$riadok->bicdppo1;
+$bicdppo2=$riadok->bicdppo2;
+$bicdph=$riadok->bicdph;
+$bicdpzc=$riadok->bicdpzc;
+$bicdpzr=$riadok->bicdpzr;
+$bicdpdmv=$riadok->bicdpdmv;
+$bicsp=$riadok->bicsp;
+$bicod=$riadok->bicod;
+
 $ucsp=$riadok->ucsp;
 $nmsp=$riadok->nmsp;
 $kssp=$riadok->kssp;
@@ -658,6 +709,17 @@ $dfax = $riadok->dfax;
     document.formv1.ibdpdmv.value = '<?php echo "$ibdpdmv";?>';
     document.formv1.ibsp.value = '<?php echo "$ibsp";?>';
     document.formv1.ibod.value = '<?php echo "$ibod";?>';
+
+    document.formv1.bicdpfo1.value = '<?php echo "$bicdpfo1";?>';
+    document.formv1.bicdpfo2.value = '<?php echo "$bicdpfo2";?>';
+    document.formv1.bicdppo1.value = '<?php echo "$bicdppo1";?>';
+    document.formv1.bicdppo2.value = '<?php echo "$bicdppo2";?>';
+    document.formv1.bicdph.value = '<?php echo "$bicdph";?>';
+    document.formv1.bicdpzc.value = '<?php echo "$bicdpzc";?>';
+    document.formv1.bicdpzr.value = '<?php echo "$bicdpzr";?>';
+    document.formv1.bicdpdmv.value = '<?php echo "$bicdpdmv";?>';
+    document.formv1.bicsp.value = '<?php echo "$bicsp";?>';
+    document.formv1.bicod.value = '<?php echo "$bicod";?>';
 
     document.formv1.ucsp.value = '<?php echo "$ucsp";?>';
     document.formv1.nmsp.value = '<?php echo "$nmsp";?>';
@@ -833,64 +895,64 @@ if ( $copern == 2 )
 <tr>
 <td class="bmenu" colspan="3">Èíslo úètu pre Daò z príjmov FO ( trvalı pobyt tuzemsko )</td>
 <td class="fmenu" colspan="7"><input type="text" name="ucdpfo1" id="ucdpfo1" size="15"/> / <input type="text" name="nmdpfo1" id="nmdpfo1" size="4"/>
- IBAN <input type="text" name="ibdpfo1" id="ibdpfo1" size="28"/> 
+ IBAN <input type="text" name="ibdpfo1" id="ibdpfo1" size="28"/> BIC <input type="text" name="bicdpfo1" id="bicdpfo1" size="10"/>
  KSY <input type="text" name="ksdpfo1" id="ksdpfo1" size="4"/> SSY <input type="text" name="ssdpfo1" id="ssdpfo1" size="10"/></td>
 </tr>
 <tr>
 <td class="bmenu" colspan="3">Èíslo úètu pre Daò z príjmov FO ( nerezident )</td>
 <td class="fmenu" colspan="7"><input type="text" name="ucdpfo2" id="ucdpfo2" size="15"/> / <input type="text" name="nmdpfo2" id="nmdpfo2" size="4"/>
- IBAN <input type="text" name="ibdpfo2" id="ibdpfo2" size="28"/> 
+ IBAN <input type="text" name="ibdpfo2" id="ibdpfo2" size="28"/> BIC <input type="text" name="bicdpfo2" id="bicdpfo2" size="10"/> 
  KSY <input type="text" name="ksdpfo2" id="ksdpfo2" size="4"/> SSY <input type="text" name="ssdpfo2" id="ssdpfo2" size="10"/></td>
 </tr>
 
 <tr>
 <td class="bmenu" colspan="3">Èíslo úètu pre Daò z príjmov PO ( so sídlom v tuzemsku )</td>
 <td class="fmenu" colspan="7"><input type="text" name="ucdppo1" id="ucdppo1" size="15"/> / <input type="text" name="nmdppo1" id="nmdppo1" size="4"/>
- IBAN <input type="text" name="ibdppo1" id="ibdppo1" size="28"/> 
+ IBAN <input type="text" name="ibdppo1" id="ibdppo1" size="28"/> BIC <input type="text" name="bicdppo1" id="bicdppo1" size="10"/> 
  KSY <input type="text" name="ksdppo1" id="ksdppo1" size="4"/> SSY <input type="text" name="ssdppo1" id="ssdppo1" size="10"/></td>
 </tr>
 <tr>
 <td class="bmenu" colspan="3">Èíslo úètu pre Daò z príjmov PO ( so sídlom v zahranièí )</td>
 <td class="fmenu" colspan="7"><input type="text" name="ucdppo2" id="ucdppo2" size="15"/> / <input type="text" name="nmdppo2" id="nmdppo2" size="4"/>
- IBAN <input type="text" name="ibdppo2" id="ibdppo2" size="28"/> 
+ IBAN <input type="text" name="ibdppo2" id="ibdppo2" size="28"/> BIC <input type="text" name="bicdppo2" id="bicdppo2" size="10"/> 
  KSY <input type="text" name="ksdppo2" id="ksdppo2" size="4"/> SSY <input type="text" name="ssdppo2" id="ssdppo2" size="10"/></td>
 </tr>
 <tr>
 <td class="bmenu" colspan="3">Èíslo úètu pre Daò z pridanej hodnoty</td>
 <td class="fmenu" colspan="7"><input type="text" name="ucdph" id="ucdph" size="15"/> / <input type="text" name="nmdph" id="nmdph" size="4"/>
- IBAN <input type="text" name="ibdph" id="ibdph" size="28"/> 
+ IBAN <input type="text" name="ibdph" id="ibdph" size="28"/> BIC <input type="text" name="bicdph" id="bicdph" size="10"/> 
  KSY <input type="text" name="ksdph" id="ksdph" size="4"/> SSY <input type="text" name="ssdph" id="ssdph" size="10"/></td>
 </tr>
 <tr>
 <td class="bmenu" colspan="3">Èíslo úètu pre Daò z príjmov zo závislej èinnosti</td>
 <td class="fmenu" colspan="7"><input type="text" name="ucdpzc" id="ucdpzc" size="15"/> / <input type="text" name="nmdpzc" id="nmdpzc" size="4"/>
- IBAN <input type="text" name="ibdpzc" id="ibdpzc" size="28"/> 
+ IBAN <input type="text" name="ibdpzc" id="ibdpzc" size="28"/> BIC <input type="text" name="bicdpzc" id="bicdpzc" size="10"/> 
  KSY <input type="text" name="ksdpzc" id="ksdpzc" size="4"/> SSY <input type="text" name="ssdpzc" id="ssdpzc" size="10"/></td>
 </tr>
 <tr>
 <td class="bmenu" colspan="3">Èíslo úètu pre Daò z príjmov vyberaná zrákou</td>
 <td class="fmenu" colspan="7"><input type="text" name="ucdpzr" id="ucdpzr" size="15"/> / <input type="text" name="nmdpzr" id="nmdpzr" size="4"/>
- IBAN <input type="text" name="ibdpzr" id="ibdpzr" size="28"/> 
+ IBAN <input type="text" name="ibdpzr" id="ibdpzr" size="28"/> BIC <input type="text" name="bicdpzr" id="bicdpzr" size="10"/> 
  KSY <input type="text" name="ksdpzr" id="ksdpzr" size="4"/> SSY <input type="text" name="ssdpzr" id="ssdpzr" size="10"/></td>
 </tr>
 <tr>
 <td class="bmenu" colspan="3">Èíslo úètu pre Daò z motorovıch vozidiel</td>
 <td class="fmenu" colspan="7"><input type="text" name="ucdmv" id="ucdmv" size="15"/> / <input type="text" name="nmdmv" id="nmdmv" size="4"/>
- IBAN <input type="text" name="ibdpdmv" id="ibdpdmv" size="28"/> 
+ IBAN <input type="text" name="ibdpdmv" id="ibdpdmv" size="28"/> BIC <input type="text" name="bicdpdmv" id="bicdpdmv" size="10"/> 
  KSY <input type="text" name="ksdmv" id="ksdmv" size="4"/> SSY <input type="text" name="ssdmv" id="ssdmv" size="10"/></td>
 </tr>
 <tr>
 <tr></tr>
 <td class="bmenu" colspan="3">Èíslo úètu pre Sociálnu poisovòu</td>
 <td class="fmenu" colspan="7"><input type="text" name="ucsp" id="ucsp" size="15"/> / <input type="text" name="nmsp" id="nmsp" size="4"/>
- IBAN <input type="text" name="ibsp" id="ibsp" size="28"/> 
+ IBAN <input type="text" name="ibsp" id="ibsp" size="28"/> BIC <input type="text" name="bicsp" id="bicsp" size="10"/> 
  KSY <input type="text" name="kssp" id="kssp" size="4"/> SSY <input type="text" name="sssp" id="sssp" size="10"/>
  VSY <input type="text" name="vssp" id="vssp" size="10"/></td>
 </tr>
 <tr>
 <td class="bmenu" colspan="3">Èíslo úètu pre príspevky do odborov</td>
 <td class="fmenu" colspan="7"><input type="text" name="ucod" id="ucod" size="15"/> / <input type="text" name="nmod" id="nmod" size="4"/>
- IBAN <input type="text" name="ibod" id="ibod" size="28"/> 
+ IBAN <input type="text" name="ibod" id="ibod" size="28"/> BIC <input type="text" name="bicod" id="bicod" size="10"/> 
  KSY <input type="text" name="ksod" id="ksod" size="4"/> SSY <input type="text" name="ssod" id="ssod" size="10"/>
  VSY <input type="text" name="vsod" id="vsod" size="10"/></td>
 </tr>
