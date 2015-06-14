@@ -740,7 +740,7 @@ mzde na dm=101 vypoèíta 20% prémií na dm=301">
 <input type="text" name="h_iban" id="h_iban" size="34" onclick="Fx.style.display='none';" /></td>
 <td class="hmenu" width="10%">BIC(swift):</td>
 <td class="fmenu" width="15%">
-<input type="text" name="h_pbic" id="h_pbic" size="10" onclick="Fx.style.display='none';" /></td>
+<input type="text" name="h_pbic" id="h_pbic" size="12" onclick="Fx.style.display='none';" /></td>
 </tr>
 <tr></tr>
 <tr>

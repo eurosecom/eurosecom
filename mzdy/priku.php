@@ -444,14 +444,14 @@ $ssyq=$kli_vrok.$kli_vumex;
 
 //dopln banku z zdravpois pre ZP
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_zdravpois".
-" SET ucep=uceb, nump=numb, vsyp=vsy, ksyp=ksy, ssyp=ssy, twib=CONCAT('ZP ', nzdr), ibanp=iban ".
+" SET ucep=uceb, nump=numb, vsyp=vsy, ksyp=ksy, ssyp=ssy, twib=CONCAT('ZP ', nzdr), ibanp=iban, pbicp=pt3 ".
 " WHERE dm=2 AND F$kli_vxcf"."_mzdprcvypl$kli_uzid.trncpl=F$kli_vxcf"."_zdravpois.zdrv AND ".
 " F$kli_vxcf"."_mzdprcvypl$kli_uzid.trncpl >= 2400 AND F$kli_vxcf"."_mzdprcvypl$kli_uzid.trncpl <= 2499  ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_zdravpois".
-" SET ucep=uceb, nump=numb, vsyp=vsy, ksyp=ksy, ssyp=$ssyq, twib=CONCAT('ZP ', nzdr), ibanp=iban ".
+" SET ucep=uceb, nump=numb, vsyp=vsy, ksyp=ksy, ssyp=$ssyq, twib=CONCAT('ZP ', nzdr), ibanp=iban, pbicp=pt3 ".
 " WHERE dm=2 AND F$kli_vxcf"."_mzdprcvypl$kli_uzid.trncpl=F$kli_vxcf"."_zdravpois.zdrv AND ".
 " ( F$kli_vxcf"."_mzdprcvypl$kli_uzid.trncpl < 2400 OR F$kli_vxcf"."_mzdprcvypl$kli_uzid.trncpl > 2499 )";
 //echo $sqtoz;
@@ -479,7 +479,7 @@ $dsql = mysql_query("$dsqlt");
 
 //dopln banku z mzdcisddp
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdcisddp".
-" SET ucep=uceb, nump=numb, vsyp=vsy, ksyp=ksy, ssyp=ssy, twib=nddp, ibanp=iban ".
+" SET ucep=uceb, nump=numb, vsyp=vsy, ksyp=ksy, ssyp=ssy, twib=nddp, ibanp=iban, pbicp=pt3 ".
 " WHERE dm=1 AND F$kli_vxcf"."_mzdprcvypl$kli_uzid.trncpl=F$kli_vxcf"."_mzdcisddp.cddp";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
