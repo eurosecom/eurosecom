@@ -633,6 +633,7 @@ $sqlr = mysql_query("$sqlttr");
   $riadokr=mysql_fetch_object($sqlr);
 
 $ibanb = $riadokr->ziban;
+$swft = $riadokr->zswft;
   }
 
 //echo "ibanb".$ibanb;
@@ -1697,39 +1698,42 @@ window.open('ktomaodpocetzp.php?copern=1&page=1', '_blank', 'width=1080, height=
 if ( $copern == 8 )
      {
 ?>
-<div id="nastavbankx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 512px; left: 10px; width:1080px; height:120px;">
+<div id="nastavbankx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 512px; left: 10px; width:1180px; height:120px;">
 <table  class='ponuka' width='100%'><tr><FORM name='fbanka1' class='obyc' method='post' action='#' >
 
-<td width='55%'>Bankový úèet: 
+<td width='62%'>Bankový úèet: 
 <input type='text' name='h_uceb' id='h_uceb' size='15' value="<?php echo $h_uceb;?>"  
 onchange='return intg(this,1,999999999999,Cele)' onclick="Fx.style.display='none';" onkeyup="KontrolaCisla(this, Cele)" /> 
  num<input type='text' name='h_numb' id='h_numb' size='6' value="<?php echo $h_numb;?>" 
 onchange='return intg(this,0,9999,Cele)' onclick="Fx.style.display='none';" onkeyup="KontrolaCisla(this, Cele)" /> 
  iban<input type='text' name='h_ibanb' id='h_ibanb' size='38' value="<?php echo $ibanb;?>" />
+ bic<input type='text' name='h_swft' id='h_swft' size='12' value="<?php echo $swft;?>" />
 </td>
 
-<td width='5%'>
-<img border=0 src='../obr/ok.png' style='width:15; height:10;' onclick="ulozitBANKUnew(1,<?php echo $h_oc;?>);" title='Uloži' >
+<td width='3%'>
+<img border=0 src='../obr/ok.png' style='width:15; height:10;' onclick="ulozitBANKUnew();" title='Uloži' >
 </td>
 
-<td width='12%'>VSY:
-<input type='text' name='h_vsy' id='h_vsy' size='10' value="<?php echo $h_vsy;?>"  
+<td width='10%'>VSY:
+<input type='text' name='h_vsy' id='h_vsy' size='8' value="<?php echo $h_vsy;?>"  
 onchange='return intg(this,0,9999999999,Cele)' onclick="Fx.style.display='none';" onkeyup="KontrolaCisla(this, Cele)" /> 
 </td>
 
-<td width='11%'>KSY:
-<input type='text' name='h_ksy' id='h_ksy' size='5' value="<?php echo $h_ksy;?>"  
+<td width='10%'>KSY:
+<input type='text' name='h_ksy' id='h_ksy' size='4' value="<?php echo $h_ksy;?>"  
 onchange='return intg(this,0,9999,Cele)' onclick="Fx.style.display='none';" onkeyup="KontrolaCisla(this, Cele)" /> 
 </td>
 
-<td width='12%'>SSY:
-<input type='text' name='h_ssy' id='h_ssy' size='10' value="<?php echo $h_ssy;?>"  
+<td width='10%'>SSY:
+<input type='text' name='h_ssy' id='h_ssy' size='8' value="<?php echo $h_ssy;?>"  
 onchange='return intg(this,1,9999999999,Cele)' onclick="Fx.style.display='none';" onkeyup="KontrolaCisla(this, Cele)" /> 
 </td>
 
 
 <td width='5%' align='left'><img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;'
-onClick="nastavbankx.style.display='none'; jeBANKAelement.style.display='';" title='Zhasni nastavenie úètu' ></td></FORM></tr> 
+onClick="nastavbankx.style.display='none'; jeBANKAelement.style.display='';" title='Zhasni nastavenie úètu' ></td></FORM></tr>
+
+ 
 </table>
 </div>
 <script type="text/javascript">

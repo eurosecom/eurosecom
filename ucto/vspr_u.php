@@ -1934,7 +1934,20 @@ if( $riadok->zmen == 1 )
 $vypis_txp = ereg_replace("\n", "<br>", trim($riadok->txp));
 $vypis_txp = ereg_replace(" ", "&nbsp;", trim($vypis_txp));
 ?>
-<td class="pvstup" width="15%" >Úèel:</td>
+<td class="pvstup" width="15%" >
+<?php
+if ( $drupoh == 1 )
+  {
+?>
+<a href="#" onClick="window.open('vspr_exportxml.php?copern=1&drupoh=<?php echo $drupoh;?>&page=1&cislo_dok=<?php echo $riadok->dok;?>
+&h_uce=<?php echo $riadok->uce;?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/export.png' width=15 height=15 border=0 title="Export nový XML formát pre všetky banky od 1.2.2016 " ></a>
+
+<?php
+  }
+?>
+
+ Úèel:</td>
 <td class="hvstup" width="75%" ><?php echo $vypis_txp; ?></td>
 
 <td class="pvstup" align="right" width="10%" >
