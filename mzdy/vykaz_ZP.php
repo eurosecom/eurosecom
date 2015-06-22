@@ -1625,7 +1625,7 @@ if( $hlavicka->znizp == 0 )
 
 $fir_zptlac=$fir_zp;
 $zam_zptlac=$zam_zp;
-if( $hlavicka->pom == 14 ) { $fir_zptlac=0; $zam_zptlac=0; }
+if( $hlavicka->pom == 14 AND ( $cislo_zdrv < 2400 OR $cislo_zdrv > 2499 ) ) { $fir_zptlac=0; $zam_zptlac=0; }
 
 $pdf->Cell(8,5,"$dnipocitane","0",0,"R");
 $pdf->Cell(15,5,"$hlavicka->zcel_zp","0",0,"R");$pdf->Cell(15,5,"$hlavicka->zzam_zp","0",0,"R");
@@ -2176,7 +2176,7 @@ if( $hlavicka->znizp == 0 )
 
 $fir_zptlac=$fir_zp;
 $zam_zptlac=$zam_zp;
-if( $hlavicka->pom == 14 ) { $fir_zptlac=0; $zam_zptlac=0; }
+if( $hlavicka->pom == 14 AND ( $cislo_zdrv < 2400 OR $cislo_zdrv > 2499 ) ) { $fir_zptlac=0; $zam_zptlac=0; }
 
   $text = $text.$dnipocitane."|".$fir_zptlac."|".$zam_zptlac."|".$hlavicka->zcel_zp."|".$hlavicka->zzam_zp."|";
   $text = $text.$hlavicka->ofir_zp."|".$hlavicka->ozam_zp."|".$hlavicka->celk_spolu;
