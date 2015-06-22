@@ -2092,7 +2092,7 @@ if ( $copern == 20 )
  alt="tlaèivo Evidenèný list dôchodkového poistenia 231kB" class="form-background">
 
 <!-- vyplneny = natvrdo zaskrtnute -->
-<span class="text-echo" style="top:155px; left:262px;">x</span>
+<span class="text-echo" style="top:155px; left:262px;"> </span>
 <input type="checkbox" name="oprav" value="1" style="top:154px; left:336px;"/>
 
 <!-- I. POISTENEC -->

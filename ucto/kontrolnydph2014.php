@@ -750,7 +750,7 @@ $i = $i + 1;
 //exit;
 
 //suma zakladu a dane POZOR dodav dobropisy r28 daj sumu dane -
-$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET kvsdn=-hod WHERE rdk = 28 AND hod > 0";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET kvsdn=-r28 WHERE rdk = 28 AND r28 != 0 ";
 $oznac = mysql_query("$sqtoz");
 
 //ak je B1,B2 kvsdn < 0 alebo kvzdn < 0 daj do C2 opravne a je vyplnene kvpvf 

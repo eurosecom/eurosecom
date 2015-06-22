@@ -279,7 +279,7 @@ $oznac = mysql_query("$sqtoz");
 
 //prepocty
 $sqtoz = "UPDATE F$kli_vxcf"."_archivdph".
-" SET r19=r02+r04+r06+r08+r10+r12+r14+r18, r31=r19-r21-r20-r29-r30+r27+r28-r29-r30 ".
+" SET r19=r02+r04+r06+r08+r10+r12+r14+r18, r31=r19-r21-r20-r29-r30+r27+r28-r30 ".
 " WHERE ume = $cislo_ume AND druh = $cislo_druh AND stvrtrok = $cislo_stvrt AND cpid = $cislo_cpid ";
 $oznac = mysql_query("$sqtoz");
 
@@ -381,7 +381,7 @@ $upravene = mysql_query("$uprtxt");
 //prepocty
 
 $sqtoz = "UPDATE F$kli_vxcf"."_archivdph".
-" SET r19=r02+r04+r06+r08+r10+r12+r14+r18, r31=r19-r21-r20-r29-r30+r27+r28-r29-r30 ".
+" SET r19=r02+r04+r06+r08+r10+r12+r14+r18, r31=r19-r21-r20-r29-r30+r27+r28-r30 ".
 " WHERE cpid = $cislo_cpid  ";
 $oznac = mysql_query("$sqtoz");
 

@@ -942,7 +942,13 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET rdk=28, hod=-hod WHERE (
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET rdk=28, hod=-hod WHERE ( rdk = 21 OR rdk = 23 ) AND rdp != 34 AND hod < 0 AND er1 = 1 ";
 $oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET rdk=28, hod=-hod WHERE ( rdk = 21 OR rdk = 23 ) AND rdp = 225 AND hod > 0 AND er1 = 0 ";
+$oznac = mysql_query("$sqtoz");
+//exit;
                                     }
+
+
+
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET er1=0 ";
 $oznac = mysql_query("$sqtoz");
@@ -1067,7 +1073,7 @@ $dsql = mysql_query("$dsqlt");
 
 //prepocty
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphsx$kli_uzid".
-" SET r19=r02+r04+r06+r08+r10+r12+r14+r18, r15=r15+r16+r17, r20=r20+r22+r24, r21=r21+r23+r25, r31=r19-r21-r20-r29-r30+r27+r28-r29-r30 ".
+" SET r19=r02+r04+r06+r08+r10+r12+r14+r18, r15=r15+r16+r17, r20=r20+r22+r24, r21=r21+r23+r25, r31=r19-r21-r20-r29-r30+r27+r28-r30 ".
 " WHERE psys = 999";
 $oznac = mysql_query("$sqtoz");
 
