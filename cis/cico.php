@@ -182,9 +182,9 @@ $h_st1 = strip_tags($_REQUEST['h_st1']);
 $h_st2 = strip_tags($_REQUEST['h_st2']);
 $h_st3 = strip_tags($_REQUEST['h_st3']);
 
-$h_ib1 = $h_ib1."-".$h_st1;
-$h_ib2 = $h_ib2."-".$h_st2;
-$h_ib3 = $h_ib3."-".$h_st3;
+//$h_ib1 = $h_ib1."-".$h_st1;
+//$h_ib2 = $h_ib2."-".$h_st2;
+//$h_ib3 = $h_ib3."-".$h_st3;
 
 $h_pozn = $_REQUEST['h_pozn'];
 $uloz="NO";
@@ -520,11 +520,13 @@ $h_ib2 = $h_ib2."-".$h_st2;
 $h_ib3 = $h_ib3."-".$h_st3;
 
 $h_datm = Date ("Y-m-d H:i:s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-$upravene = mysql_query("UPDATE F$kli_vxcf"."_ico SET ico='$h_ico', dic='$h_dic', icd='$h_icd',
+$upravttt = "UPDATE F$kli_vxcf"."_ico SET ico='$h_ico', dic='$h_dic', icd='$h_icd',
  nai='$h_nai', na2='$h_na2', uli='$h_uli', psc='$h_psc', mes='$h_mes', tel='$h_tel', fax='$h_fax',
  em1='$h_em1', em2='$h_em2', em3='$h_em3', www='$h_www',
  uc1='$h_uc1', nm1='$h_nm1', uc2='$h_uc2', nm2='$h_nm2', dns='$h_dns',
- uc3='$h_uc3', nm3='$h_nm3', ib1='$h_ib1', ib2='$h_ib2', ib3='$h_ib3', datm='$h_datm' WHERE ico='$cislo_ico'");  
+ uc3='$h_uc3', nm3='$h_nm3', ib1='$h_ib1', ib2='$h_ib2', ib3='$h_ib3', datm='$h_datm' WHERE ico='$cislo_ico'";  
+//echo $upravttt;
+$upravene = mysql_query("$upravttt");
 
 $uloztt = "INSERT INTO F$kli_vxcf"."_icorozsirenie ( ico,pozn ) VALUES ($h_ico, '$h_pozn' ) "; 
 $ulozrrr = mysql_query("$uloztt");
@@ -611,6 +613,8 @@ $h_dns = $cico->dns;
   $pole1 = explode("-", $h_ib1);
   $h_ib1 = $pole1[0];
   $h_st1 = $pole1[1];
+
+//echo "ib1 ".$h_ib1." st1 ".$h_st1;
 
   $pole2 = explode("-", $h_ib2);
   $h_ib2 = $pole2[0];

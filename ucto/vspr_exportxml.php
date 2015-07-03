@@ -482,13 +482,75 @@ if ( $j == 0 )
   $text = "<dokument xmlns=\"urn:iso:std:iso:20022:tech:xsd:pain.001.001.03\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"."\r\n"; fwrite($soubor, $text);		
   $text = " <CstmrCdtTrfInitn>"."\r\n"; fwrite($soubor, $text);
 
+  $text = " <GrpHdr>"."\r\n"; fwrite($soubor, $text);
+
+$datumuhrady=$hlavicka->dat;
+$bankauhrady=$hlavicka->uce;
+
+  $text = "  <MsgId>BAN".$bankauhrady."/DOK".$hlavicka->dok."/CCT001</MsgId>"."\r\n"; fwrite($soubor, $text);
+
+$credtm = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$credtm2 = Date ("H:i:s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$credtm3=$credtm."T".$credtm2;
+
+  $text = "  <CreDtTm>".$credtm3."</CreDtTm>"."\r\n"; fwrite($soubor, $text);
+
+$sqltt2 = "SELECT * FROM F$kli_vxcf"."_$uctpol WHERE F$kli_vxcf"."_$uctpol.dok = $cislo_dok ORDER BY cpl";
+$sql2 = mysql_query("$sqltt2");
+$pocpol = mysql_num_rows($sql2);
+
+
+  $text = "  <NbOfTxs>".$pocpol."</NbOfTxs>"."\r\n"; fwrite($soubor, $text);
+  $text = " </GrpHdr>"."\r\n"; fwrite($soubor, $text);
+
+
   $text = " <PmtInf>"."\r\n"; fwrite($soubor, $text);
 
+  $text = "  <PmtInfId>BAN".$bankauhrady."/DOK".$hlavicka->dok."/".$datumuhrady."</PmtInfId>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <PmtMtd>TRF</PmtMtd>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <ReqdExctnDt>".$hlavicka->dat."</ReqdExctnDt>"."\r\n"; fwrite($soubor, $text);
+
+$fname = iconv("CP1250", "UTF-8", $fir_fnaz);
+$fname = substr($fname,0,70);
+
+  $text = " <Dbtr>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <Nm>".$fname."</Nm>"."\r\n"; fwrite($soubor, $text);
+  $text = " </Dbtr>"."\r\n"; fwrite($soubor, $text);
+
+  $text = " <DbtrAcct>"."\r\n"; fwrite($soubor, $text);
+
+$priban=""; $prbic=""; $nban="";
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_dban WHERE dban = $hlavicka->uce ";
+$fir_vysledok = mysql_query($sqlfir);
+if( $fir_vysledok ) 
+{
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
+$priban = $fir_riadok->iban;
+$prbic = $fir_riadok->twib;
+$nban = $fir_riadok->nban;
+}
+
+  $text = "  <Id>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <IBAN>".$priban."</IBAN>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </Id>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <Ccy>EUR</Ccy>"."\r\n"; fwrite($soubor, $text);
+  $text = " </DbtrAcct>"."\r\n"; fwrite($soubor, $text);
 
 
+  $text = " <DbtrAgt>"."\r\n"; fwrite($soubor, $text);
+  $text = " <FinInstnId>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <BIC>".$prbic."</BIC>"."\r\n"; fwrite($soubor, $text);
+
+$bname = iconv("CP1250", "UTF-8", $nban);
+
+  $text = "  <Nm>".$bname."</Nm>"."\r\n"; fwrite($soubor, $text);
+  $text = " </FinInstnId>"."\r\n"; fwrite($soubor, $text);
+  $text = " </DbtrAgt>"."\r\n"; fwrite($soubor, $text);
 
 
   $text = " <ChrgBr>SLEV</ChrgBr>"."\r\n"; fwrite($soubor, $text);
+
 
      }
 
@@ -522,11 +584,11 @@ $hlavickav=mysql_fetch_object($sql);
 
   $text = "  <PmtId>"."\r\n"; fwrite($soubor, $text);
 
-$instrid="ABC/4562/2008-09-28";
+$instrid="BAN".$bankauhrady."/DOK".$hlavickav->dok."/".$datumuhrady;
 
   $text = "   <InstrId>".$instrid."</InstrId>"."\r\n"; fwrite($soubor, $text);
 
-$endtoendid="/VS1234567890/SS1234567890/KS0308";
+$endtoendid="/VS".$hlavickav->vsy."/SS".$hlavickav->ssy."/KS".$hlavickav->ksy."";
 
   $text = "   <EndToEndId>".$endtoendid."</EndToEndId>"."\r\n"; fwrite($soubor, $text);
 
@@ -541,6 +603,46 @@ $instdamt=$hlavickav->hodp;
   $text = "  </Amt>"."\r\n"; fwrite($soubor, $text);
 
 
+  $text = " <CdtrAgt>"."\r\n"; fwrite($soubor, $text);
+  $text = " <FinInstnId>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <BIC>".$hlavickav->pbic."</BIC>"."\r\n"; fwrite($soubor, $text);
+  $text = " </FinInstnId>"."\r\n"; fwrite($soubor, $text);
+  $text = " </CdtrAgt>"."\r\n"; fwrite($soubor, $text);
+
+
+
+$iconm=""; $icoad1=""; $icoad2="";
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $hlavickav->ico ";
+$fir_vysledok = mysql_query($sqlfir);
+if( $fir_vysledok ) 
+{
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
+$iconm = $fir_riadok->nai;
+$icoad1 = trim($fir_riadok->uli);
+$icoad2 = trim($fir_riadok->psc." ".$fir_riadok->mes);
+}
+
+$iconm = iconv("CP1250", "UTF-8", $iconm);
+$icoad1 = iconv("CP1250", "UTF-8", $icoad1);
+$icoad2 = iconv("CP1250", "UTF-8", $icoad2);
+
+  $text = " <Cdtr>"."\r\n"; fwrite($soubor, $text);
+  $text = " <Nm>".$iconm."</Nm>"."\r\n"; fwrite($soubor, $text);
+  $text = " <PstlAdr>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <Ctry>SK</Ctry>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <AdrLine>".$icoad1."</AdrLine>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <AdrLine>".$icoad2."</AdrLine>"."\r\n"; fwrite($soubor, $text);
+  $text = " </PstlAdr>"."\r\n"; fwrite($soubor, $text);
+  $text = " </Cdtr>"."\r\n"; fwrite($soubor, $text);
+
+
+
+  $text = " <CdtrAcct>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <Id>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <IBAN>".$hlavickav->iban."</IBAN>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </Id>"."\r\n"; fwrite($soubor, $text);
+  $text = " </CdtrAcct>"."\r\n"; fwrite($soubor, $text);
 
   $text = " </CdtTrfTxInf>"."\r\n"; fwrite($soubor, $text);
 

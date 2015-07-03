@@ -202,7 +202,7 @@ if( $cook == 1 )
     $_SESSION['kli_xuzfak'] = $riadok->fak_prav;
     $_SESSION['kli_xuzvyr'] = $riadok->vyr_prav;
     $_SESSION['kli_txt1'] = $riadok->txt1;
-    $_SESSION['verzia'] = '2015_03';
+    $_SESSION['verzia'] = '2015_04';
 
 
     $ipad=$_SERVER["REMOTE_ADDR"];
