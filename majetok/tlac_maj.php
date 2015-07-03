@@ -37,7 +37,7 @@ $copern = 1*$_REQUEST['copern'];
 $h_dru = 1*$_REQUEST['h_dru'];
 $czs = 1*$_REQUEST['czs'];
 
-//echo $czs;
+//echo "idem".$copern;
 //echo "cop".$copern;
 
 if( $czs == 0 )
@@ -228,6 +228,7 @@ $copern=1;
 //ulozenie  polozky 
 if ( $copern == 15 )
     {
+//echo "idem15";
 
 $h_por = 1*$_REQUEST['h_por'];
 $h_pol = strip_tags($_REQUEST['h_pol']);
@@ -460,6 +461,7 @@ function UpravPolozku(por)
                 {
 
                 }
+
 
 function UlozPolozku()
                 {
@@ -701,7 +703,7 @@ onclick="New.style.display='none'; " />
 onclick="New.style.display='none'; " />
 
 <td class="hmenu" colspan="1" align="left">
-<button id="uloz" onclick="UlozPolozku(); ">Uloûiù</button>
+<img border=0 src='../obr/ok.png' style='width:15; height:15;' onclick="UlozPolozku();" title='Uloûiù' ></td>
 
 </tr>
 
