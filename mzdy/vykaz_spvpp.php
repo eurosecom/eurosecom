@@ -10,6 +10,10 @@ if (!isset($tis)) $tis = 0;
 $meno = 1*$_REQUEST['meno'];
 
 $h_oprav = 1*$_REQUEST['h_oprav'];
+$h_umezuc = 1*$_REQUEST['h_umezuc'];
+$z_umezuc = 1*$_REQUEST['z_umezuc'];
+//echo $z_umezuc;
+//exit;
 
 $uziv = include("../uziv.php");
 if ( !$uziv ) exit;
@@ -563,11 +567,18 @@ $pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(37,5,"$cicz","$rmc",0,"C");
 
 //cislo vykazu v tvare MM99YYYY
 $obdobie=$kli_vume*10000;
+if( $z_umezuc == 1 ) { $obdobie=$h_umezuc*10000; $poled = explode(".", $h_umezuc); $cislo1z=$poled[0]; $cislo2z=$poled[1]; }
 if ( $obdobie < 102009 ) $obdobie= "0".$obdobie;
 if ( $import == 1 ) $obdobie=$obdobix;
 $cislo1=$kli_vmes;
 if ( $cislo1 < 10 ) $cislo1= "0".$kli_vmes;
+if( $z_umezuc == 1 ) 
+{ 
+$cislo1=$cislo1z; 
+if ( $cislo1 < 10 ) { $cislo1= "0".$cislo1z; } 
+}
 $cislo2=$kli_vrok;
+if( $z_umezuc == 1 ) { $cislo2=$cislo2z; }
 $A=substr($cislo1,0,1);
 $B=substr($cislo1,1,1);
 $C=substr($cislo2,0,1);
@@ -940,8 +951,11 @@ $pdf->Image('../dokumenty/socpoist2014/vykaz_priloha.jpg',0,0,210,298);
 }
 $pdf->SetY(10);
 
+
+
 //zuctovane v mesiaci
 $obdobie=$kli_vume*10000;
+if( $z_umezuc == 1 ) { $obdobie=$h_umezuc*10000; }
 if ( $obdobie < 102009 ) $obdobie= "0".$obdobie;
 $pdf->Cell(198,4,"                          ","$rmc1",1,"L");
 $pdf->Cell(80,6," ","$rmc1",0,"L");$pdf->Cell(41,6,"$obdobie","$rmc",1,"C");
@@ -1317,6 +1331,7 @@ $j=0; //zaciatok strany ak by som chcel strankovat
 {
 $hlavicka=mysql_fetch_object($sql);
 
+
 $obdobie=$kli_vmes;
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
@@ -1331,10 +1346,20 @@ $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("
   $text = "<typDoc>VPP00001</typDoc>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<cisloVykazu>".$kli_vmes."99".$kli_vrok."</cisloVykazu>"."\r\n";
+$kli_vmesx=$kli_vmes;
+$kli_vrokx=$kli_vrok;
+if( $z_umezuc == 1 ) 
+{ 
+$poled = explode(".", $h_umezuc); 
+$kli_vmesx=$poled[0]; 
+if( $kli_vmesx < 10 ) { $kli_vmesx="0".$kli_vmesx; }
+$kli_vrokx=$poled[1]; 
+}
+
+  $text = "<cisloVykazu>".$kli_vmesx."99".$kli_vrokx."</cisloVykazu>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<obdobieVyplPrijmov>".$kli_vmes.$kli_vrok."</obdobieVyplPrijmov>"."\r\n";
+  $text = "<obdobieVyplPrijmov>".$kli_vmesx.$kli_vrokx."</obdobieVyplPrijmov>"."\r\n";
   fwrite($soubor, $text);
   if( $h_oprav == 0 ) { $text = "<typVykazu>R</typVykazu>"."\r\n"; }
   if( $h_oprav == 1 ) { $text = "<typVykazu>O</typVykazu>"."\r\n"; }

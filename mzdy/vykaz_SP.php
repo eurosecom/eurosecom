@@ -1257,25 +1257,38 @@ var sirkawic = screen.width-10;
   {
    var h_oprav = document.forms.formp1vpp.h_oprav.value;
    var davyp = document.forms.formp1vpp.davyp.value;
-   window.open('../mzdy/vykaz_spvpp.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=30&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
+   var h_umezuc = document.forms.formp1vpp.h_umezuc.value;
+   var z_umezuc = 0;
+   if( document.formp1vpp.z_umezuc.checked ) { z_umezuc = 1; }
+
+   window.open('../mzdy/vykaz_spvpp.php?h_umezuc=' + h_umezuc + '&z_umezuc=' + z_umezuc + '&h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=30&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
   }
   function VykazVPP()
   {
    var h_oprav = document.forms.formp1vpp.h_oprav.value;
    var davyp = document.forms.formp1vpp.davyp.value;
-   window.open('../mzdy/vykaz_spvpp.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
+   var h_umezuc = document.forms.formp1vpp.h_umezuc.value;
+   var z_umezuc = 0;
+   if( document.forms.formp1vpp.z_umezuc.checked ) { z_umezuc = 1; }
+   window.open('../mzdy/vykaz_spvpp.php?h_umezuc=' + h_umezuc + '&z_umezuc=' + z_umezuc + '&h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
   }
   function PrilohaVPP()
   {
    var h_oprav = document.forms.formp1vpp.h_oprav.value;
    var davyp = document.forms.formp1vpp.davyp.value;
-   window.open('../mzdy/vykaz_spvpp.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
+   var h_umezuc = document.forms.formp1vpp.h_umezuc.value;
+   var z_umezuc = 0;
+   if( document.forms.formp1vpp.z_umezuc.checked ) { z_umezuc = 1; }
+   window.open('../mzdy/vykaz_spvpp.php?h_umezuc=' + h_umezuc + '&z_umezuc=' + z_umezuc + '&h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
   }
   function PrilohaVPPMena()
   {
    var h_oprav = document.forms.formp1vpp.h_oprav.value;
    var davyp = document.forms.formp1vpp.davyp.value;
-   window.open('../mzdy/vykaz_spvpp.php?h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1&meno=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
+   var h_umezuc = document.forms.formp1vpp.h_umezuc.value;
+   var z_umezuc = 0;
+   if( document.forms.formp1vpp.z_umezuc.checked ) { z_umezuc = 1; }
+   window.open('../mzdy/vykaz_spvpp.php?h_umezuc=' + h_umezuc + '&z_umezuc=' + z_umezuc + '&h_oprav=' + h_oprav + '&davyp=' + davyp + '&copern=20&drupoh=1&page=1&meno=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
   }
   function fosp()
   {
@@ -1387,13 +1400,18 @@ if( $fir_mzdx03 == 1 )
 
 <h3>&nbsp;V˝kaz poistnÈho a prÌspevkov</h3>
 <table class="vstup" width="100%" >
+<FORM name="formp1vpp" class="obyc" method="post" action="#" >
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="VykazVPP();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
 </td>
-<td class="bmenu" width="98%">V˝kaz poistnÈho a prÌspevkov</td>
-<td class="bmenu" width="2%"></td>
+<td class="bmenu" width="60%">V˝kaz poistnÈho a prÌspevkov</td>
+<td class="bmenu" width="38%" align="right">
+Zmeniù "PrÌjmy z˙ËtovanÈ v mesiaci:"
+<input type="checkbox" name="z_umezuc" value="1" /> 
+ na <input class="hvstup" type="text" name="h_umezuc" value="<?php echo $kli_vume; ?>" size="6">
+</td>
 </tr>
 </table>
 
@@ -1413,7 +1431,6 @@ if( $fir_mzdx03 == 1 )
 </table>
 
 <table class="vstup" width="100%" >
-<FORM name="formp1vpp" class="obyc" method="post" action="#" >
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="ElektronikaVykazVPP();">
