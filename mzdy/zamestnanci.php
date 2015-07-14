@@ -51,6 +51,11 @@ $mena1 = $fir_mena1;
 $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
 
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdkun MODIFY rdc VARCHAR(6) NOT NULL ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdzalkun MODIFY rdc VARCHAR(6) NOT NULL ";
+$vysledek = mysql_query("$sql");
+
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
