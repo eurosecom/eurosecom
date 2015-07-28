@@ -448,6 +448,29 @@ $sqlx = mysql_query("$sqlttx");
 $i=$i+1;
   }
 
+//ak je ZP DOVERA a DOHODAR presun CELK.PRIJEM PRE ODP. do CELK.INY PRIJ. od 1.7.2015 zacali kontrolovat
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun ".
+"LEFT JOIN F$kli_vxcf"."_mzdpomer ON F$kli_vxcf"."_$mzdkun.pom=F$kli_vxcf"."_mzdpomer.pm ".
+" WHERE ume = $kli_vume AND pm_doh = 1 ORDER BY oc ";
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+$i=0;
+  while ($i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_inp=zcel_odp WHERE oc = $hlavicka->oc AND konx2 = 999 AND zcel_odp != 0 AND xdrv >= 2400 AND xdrv <= 2499 ";
+$sqlx = mysql_query("$sqlttx");
+
+$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_odp=0 WHERE oc = $hlavicka->oc AND konx2 = 999 AND zcel_odp != 0 AND xdrv >= 2400 AND xdrv <= 2499 ";
+$sqlx = mysql_query("$sqlttx");
+
+}
+$i=$i+1;
+  }
+
 //exit;
 
 //ak zdravotne postihnutie znizp presun do .._np
