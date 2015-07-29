@@ -661,14 +661,14 @@ $dsql = mysql_query("$dsqlt");
 //vypocitaj riadky
 $vsldat="prcvykziss";
 if( $tis > 0 ) { $vsldat="prcvyk1000ziss"; }
-$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET ".
 "r11=r12+r13, ".
 "r17=r18+r19  ".
 " WHERE prx = 1 ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET ".
 "rpc11=rpc12+rpc13, ".
 "rpc17=rpc18+rpc19 ".
 " WHERE prx = 1 ";
@@ -678,7 +678,7 @@ $oznac = mysql_query("$sqtoz");
 //vypocitaj spolu
 $vsldat="prcvykziss";
 if( $tis > 0 ) { $vsldat="prcvyk1000ziss"; }
-$sqtoz = "UPDATE F$kli_vxcf"."_".$vsldat.$kli_uzid." SET ".
+$sqtoz = "UPDATE F$kli_vxcf"."_prcvykfins6a04$kli_uzid SET ".
 "rsp01=r01+rpc01,rsp02=r02+rpc02,rsp03=r03+rpc03,rsp04=r04+rpc04,rsp05=r05+rpc05,".
 "rsp06=r06+rpc06,rsp07=r07+rpc07,rsp08=r08+rpc08,rsp09=r09+rpc09,rsp10=r10+rpc10,".
 "rsp11=r11+rpc11,rsp12=r12+rpc12,rsp13=r13+rpc13,rsp14=r14+rpc14,rsp15=r15+rpc15,".
@@ -1352,17 +1352,27 @@ $pdf->Output("../tmp/vykfin.$kli_uzid.pdf");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvykfins6a04'.$kli_uzid;
 //$vysledok = mysql_query("$sqlt");
 
-
-
+$dajdbf = 1*$_REQUEST['dajdbf'];
+//echo $dajdbf;
+//exit;
+if( $dajdbf == 0 ) {
 ?> 
 
 <script type="text/javascript">
   var okno = window.open("../tmp/vykfin.<?php echo $kli_uzid; ?>.pdf","_self");
 </script>
-
 <?php
+                   }
+if( $dajdbf == 1 ) {
+?>
+<script type="text/javascript">
+window.open('fin6a04dbf.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=1&drupoh=1&page=1&subor=0', '_self' );
+</script>
+<?php
+                   }
 
 //koniec if( $copern == 10 )
+
 }
 
 
