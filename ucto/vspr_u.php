@@ -652,7 +652,7 @@ if ( $copern == 7 OR $copern == 87 )
 
 
 //co urobi po potvrdeni ok z tabulky Priku
-function vykonajPriku(ico,nai,mes,vsy,uceb,uce,uc1,zos,nm1,fak,ksy,ssy)
+function vykonajPriku(ico,nai,mes,vsy,uceb,uce,uc1,zos,nm1,fak,ksy,ssy,xiban,xbic)
                 {
         document.forms.forms1.h_ico.value = ico;
         document.forms.forms1.h_uceb.value = uc1;
@@ -662,15 +662,19 @@ function vykonajPriku(ico,nai,mes,vsy,uceb,uce,uc1,zos,nm1,fak,ksy,ssy)
         document.forms.forms1.h_ksy.value = ksy;
         document.forms.forms1.h_ssy.value = ssy;
         document.forms.forms1.h_uce.value = uce;
+        document.forms.forms1.h_iban.value = xiban;
+        document.forms.forms1.h_pbic.value = xbic;
         myPrikuelement.style.display='none';
         document.forms.forms1.h_hodp.focus();
         document.forms.forms1.h_hodp.select();
                 }
 
-function vykonajPriku2(ico,nai,mes,vsy,uceb,uce,uc1,zos,nm1,fak,ksy,ssy)
+function vykonajPriku2(ico,nai,mes,vsy,uceb,uce,uc1,zos,nm1,fak,ksy,ssy,xiban,xbic)
                 {
         document.forms.forms1.h_uceb.value = uc1;
         document.forms.forms1.h_numb.value = nm1;
+        document.forms.forms1.h_iban.value = xiban;
+        document.forms.forms1.h_pbic.value = xbic;
         myPrikuelement.style.display='none';
         document.forms.forms1.h_hodp.focus();
         document.forms.forms1.h_hodp.select();
@@ -1367,7 +1371,7 @@ if( document.fhlv1.h_dat.value != '' )    {
 { echo "<script type='text/javascript' src='robot_ju.js'></script>"; } ?>
 
 <?php if( $drupoh == 1 ) 
-{ echo "<script type='text/javascript' src='daj_priku.js'></script>"; } ?>
+{ echo "<script type='text/javascript' src='daj_priku_iban.js'></script>"; } ?>
 
 <?php if( $drupoh == 1 AND $copern == 7 ) 
 { echo "<script type='text/javascript' src='uloz_mena.js'></script>"; } ?>

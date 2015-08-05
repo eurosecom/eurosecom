@@ -1418,6 +1418,25 @@ $ibn1=trim($h_ib1);
 if( $ibn1 == '' ) $ibn1="0000";
 $bic1=trim($h_st1);
 if( $bic1 == '' ) $bic1="0";
+
+  $pole2 = explode("-", $rtov->ib2);
+  $h_ib2 = $pole2[0];
+  $h_st2 = $pole2[1];
+
+$ibn2=trim($h_ib2);
+if( $ibn2 == '' ) $ibn2="0000";
+$bic2=trim($h_st2);
+if( $bic2 == '' ) $bic2="0";
+
+  $pole3 = explode("-", $rtov->ib3);
+  $h_ib3 = $pole3[0];
+  $h_st3 = $pole3[1];
+
+$ibn3=trim($h_ib3);
+if( $ibn3 == '' ) $ibn3="0000";
+$bic3=trim($h_st3);
+if( $bic3 == '' ) $bic3="0";
+
 ?>
 <img src='../obr/pdf.png' width=10 height=10 border=1 
 onClick="VzpFakIban(<?php echo $rtov->ico; ?>,<?php echo $rtov->fak; ?>,<?php echo $strana; ?>,<?php echo $rtov->zos; ?>,
@@ -1426,15 +1445,15 @@ onClick="VzpFakIban(<?php echo $rtov->ico; ?>,<?php echo $rtov->fak; ?>,<?php ec
 
 <?php  if ( $uc2 != '00' )   { ?>
 <img src='../obr/pdf.png' width=10 height=10 border=1 
-onClick="VzpFak(<?php echo $rtov->ico; ?>,<?php echo $rtov->fak; ?>,<?php echo $strana; ?>,<?php echo $rtov->zos; ?>,
-'<?php echo $ksy; ?>','<?php echo $ssy; ?>','<?php echo $uc2; ?>','<?php echo $nm2; ?>');"
+onClick="VzpFakIban(<?php echo $rtov->ico; ?>,<?php echo $rtov->fak; ?>,<?php echo $strana; ?>,<?php echo $rtov->zos; ?>,
+'<?php echo $ksy; ?>','<?php echo $ssy; ?>','<?php echo $uc2; ?>','<?php echo $nm2; ?>','<?php echo $ibn2; ?>','<?php echo $bic2; ?>');"
  title='Uhradiù doklad <?php echo $rtov->dok; ?> na ˙Ëet <?php echo $rtov->uc2; ?>/<?php echo $rtov->nm2; ?>' >
 <?php                        } ?>
 
 <?php  if ( $uc3 != '00' )   { ?>
 <img src='../obr/pdf.png' width=10 height=10 border=1 
-onClick="VzpFak(<?php echo $rtov->ico; ?>,<?php echo $rtov->fak; ?>,<?php echo $strana; ?>,<?php echo $rtov->zos; ?>,
-'<?php echo $ksy; ?>','<?php echo $ssy; ?>','<?php echo $uc3; ?>','<?php echo $nm3; ?>');"
+onClick="VzpFakIban(<?php echo $rtov->ico; ?>,<?php echo $rtov->fak; ?>,<?php echo $strana; ?>,<?php echo $rtov->zos; ?>,
+'<?php echo $ksy; ?>','<?php echo $ssy; ?>','<?php echo $uc3; ?>','<?php echo $nm3; ?>','<?php echo $ibn3; ?>','<?php echo $bic3; ?>');"
  title='Uhradiù doklad <?php echo $rtov->dok; ?> na ˙Ëet <?php echo $rtov->uc3; ?>/<?php echo $rtov->nm3; ?>' >
 <?php                        } ?>
 
