@@ -368,6 +368,14 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid." WHERE konx2 != 999 ";
 $dsql = mysql_query("$dsqlt");
 
+//ak zzam_zp > zcel_zp zcel_zp=zzam_zp
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid".
+" SET  zcel_zp=zzam_zp".
+" WHERE zzam_zp > zcel_zp ";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+//exit;
+
 //ak zzam_zp=0 potom vynuluj pzam_zp
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid".
 " SET ".
@@ -461,10 +469,10 @@ $i=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
-$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_inp=zcel_odp WHERE oc = $hlavicka->oc AND konx2 = 999 AND zcel_odp != 0 AND xdrv >= 2400 AND xdrv <= 2499 ";
+$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_inp=zcel_odp WHERE oc = $hlavicka->oc AND konx2 = 999 AND zcel_odp != 0 AND xdrv >= 2300 AND xdrv <= 2499 ";
 $sqlx = mysql_query("$sqlttx");
 
-$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_odp=0 WHERE oc = $hlavicka->oc AND konx2 = 999 AND zcel_odp != 0 AND xdrv >= 2400 AND xdrv <= 2499 ";
+$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_odp=0 WHERE oc = $hlavicka->oc AND konx2 = 999 AND zcel_odp != 0 AND xdrv >= 2300 AND xdrv <= 2499 ";
 $sqlx = mysql_query("$sqlttx");
 
 }
