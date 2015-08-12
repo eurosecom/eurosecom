@@ -56,8 +56,9 @@ $pdf->SetTopMargin(15);
 //0=vsetkypohyby,1=zaradenia len,2=len vyradenia
 $akep = 1*$_REQUEST['akep'];
 $podmakep="";
-if( $akep == 1 ) { $podmakep=" AND poh = 2 "; }
-if( $akep == 2 ) { $podmakep=" AND poh = 3 "; }
+$nazovzos="pohybov";
+if( $akep == 1 ) { $podmakep=" AND poh = 2 "; $nazovzos="zaradeného"; }
+if( $akep == 2 ) { $podmakep=" AND poh = 3 "; $nazovzos="vyradeného"; }
 
 
 //zostava pohybov
@@ -94,7 +95,7 @@ $vytvor = mysql_query("$vsql");
 $sqltt = "SELECT * FROM F$kli_vxcf"."_majpohprc$kli_uzid"." WHERE ume = $kli_vume $podmakep ORDER BY poh,hx5,inv";
 //echo $sqltt;
 
-$pdf->Cell(120,5,"Zostava pohybov drobného majetku $kli_vume","LTB",0,"L");
+$pdf->Cell(120,5,"Zostava $nazovzos drobného majetku $kli_vume","LTB",0,"L");
 $pdf->Cell(125,5,"FIR$kli_vxcf $kli_nxcf strana $strana","RTB",1,"R");
 }
 
@@ -125,7 +126,7 @@ $vytvor = mysql_query("$vsql");
 $sqltt = "SELECT * FROM F$kli_vxcf"."_majpohprc$kli_uzid"." WHERE ume != 0 $podmakep ORDER BY poh,hx5,inv";
 //echo $sqltt;
 
-$pdf->Cell(120,5,"Zostava pohybov drobného majetku za rok $kli_vrok","LTB",0,"L");
+$pdf->Cell(120,5,"Zostava $nazovzos drobného majetku za rok $kli_vrok","LTB",0,"L");
 $pdf->Cell(125,5,"FIR$kli_vxcf $kli_nxcf strana $strana","RTB",1,"R");
 }
 
@@ -155,7 +156,7 @@ $vytvor = mysql_query("$vsql");
 $sqltt = "SELECT * FROM F$kli_vxcf"."_majpohprc$kli_uzid"." WHERE ume != 0 $podmakep ORDER BY ume,poh,hx5,inv";
 //echo $sqltt;
 
-$pdf->Cell(120,5,"Zostava pohybov drobného majetku za rok $kli_vrok pod¾a mesiacov","LTB",0,"L");
+$pdf->Cell(120,5,"Zostava $nazovzos drobného majetku za rok $kli_vrok pod¾a mesiacov","LTB",0,"L");
 $pdf->Cell(125,5,"FIR$kli_vxcf $kli_nxcf strana $strana","RTB",1,"R");
 }
 
@@ -182,7 +183,7 @@ $vytvor = mysql_query("$vsql");
 $sqltt = "SELECT * FROM F$kli_vxcf"."_majpohprc$kli_uzid"." WHERE ume = $kli_vume $podmakep ORDER BY poh,hx5,inv";
 //echo $sqltt;
 
-$pdf->Cell(120,5,"Zostava pohybov dlhodobého majetku $kli_vume","LTB",0,"L");
+$pdf->Cell(120,5,"Zostava $nazovzos dlhodobého majetku $kli_vume","LTB",0,"L");
 $pdf->Cell(125,5,"FIR$kli_vxcf $kli_nxcf strana $strana","RTB",1,"R");
 }
 
@@ -210,7 +211,7 @@ $vytvor = mysql_query("$vsql");
 $sqltt = "SELECT * FROM F$kli_vxcf"."_majpohprc$kli_uzid"." WHERE ume != 0 $podmakep ORDER BY poh,hx5,inv";
 //echo $sqltt;
 
-$pdf->Cell(120,5,"Zostava pohybov dlhodobého majetku za rok $kli_vrok","LTB",0,"L");
+$pdf->Cell(120,5,"Zostava $nazovzos dlhodobého majetku za rok $kli_vrok","LTB",0,"L");
 $pdf->Cell(125,5,"FIR$kli_vxcf $kli_nxcf strana $strana","RTB",1,"R");
 }
 
@@ -227,7 +228,7 @@ $pdf->SetFont('arial','',7);
 if( $drupoh == 12 OR $drupoh == 22 OR $drupoh == 32 )
 {
 $pdf->Cell(20,5,"POH","1",0,"C");$pdf->Cell(20,5,"Dátum","1",0,"R");$pdf->Cell(80,5,"Položka","1",0,"L");$pdf->Cell(25,5,"Množstvo","1",0,"R");
-$pdf->Cell(25,5,"Cena obstarania","1",0,"R");$pdf->Cell(25,5,"Hodnota","1",0,"R");$pdf->Cell(25,5," ","1",0,"R");
+$pdf->Cell(25,5,"Cena obstarania","1",0,"R");$pdf->Cell(25,5,"Hodnota","1",0,"R");$pdf->Cell(25,5,"Zaradené","1",0,"R");
 $pdf->Cell(25,5," ","1",1,"R");
 $pdf->SetFont('arial','',7);
 }
@@ -326,8 +327,11 @@ $pdf->Cell(25,5,"$sRos","LRTB",1,"R");
   }
 if ( $rtov->hx5 == 0 AND ( $drupoh == 12 OR $drupoh == 22 ) )
   {
+
+$dobsk=SkDatum($rtov->dob);
+
 $pdf->Cell(20,5,"$sk_dap","TB",0,"R");$pdf->Cell(80,5,"$rtov->inv $rtov->naz","LTB",0,"L");$pdf->Cell(25,5,"$rtov->mno","LRTB",0,"R");
-$pdf->Cell(25,5,"$rtov->cen","LRTB",0,"R");$pdf->Cell(25,5,"$rtov->ops","LRTB",0,"R");$pdf->Cell(25,5," ","LTB",0,"R");
+$pdf->Cell(25,5,"$rtov->cen","LRTB",0,"R");$pdf->Cell(25,5,"$rtov->ops","LRTB",0,"R");$pdf->Cell(25,5,"$dobsk","LTB",0,"R");
 $pdf->Cell(25,5," ","LRTB",1,"R");
   }
 if ( $rtov->hx5 == 0 AND $drupoh == 32 )
@@ -338,6 +342,11 @@ $pdf->Cell(25,5," ","LRTB",1,"R");
   }
 if ( $rtov->hx5 == 9 )
   {
+
+if( $rtov->zos == 0 ) { $rtov->zos=""; } 
+if( $rtov->ros == 0 ) { $rtov->ros=""; }
+
+
 $pdf->Cell(100,5,"položiek $rtov->hx4","LTB",0,"L");$pdf->Cell(25,5,"$rtov->mno","LRTB",0,"R");
 $pdf->Cell(25,5,"$rtov->cen","LRTB",0,"R");$pdf->Cell(25,5,"$rtov->ops","LRTB",0,"R");$pdf->Cell(25,5,"$rtov->zos","LTB",0,"R");
 $pdf->Cell(25,5,"$rtov->ros","LRTB",1,"R");
@@ -358,6 +367,9 @@ $Cislo=$cros+"";
 $scRos=sprintf("%0.2f", $Cislo);
 $Cislo=$cmno+"";
 $scMno=sprintf("%0.2f", $Cislo);
+
+if( $scZos == 0 ) { $scZos=""; } 
+if( $scRos == 0 ) { $scRos=""; } 
 
 $pdf->Cell(120,5,"CELKOM","LRTB",0,"L");$pdf->Cell(25,5,"$scMno","LRTB",0,"R");
 $pdf->Cell(25,5,"$scCen","LRTB",0,"R");$pdf->Cell(25,5,"$scOps","LRTB",0,"R");$pdf->Cell(25,5,"$scZos","LTB",0,"R");
