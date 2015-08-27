@@ -310,6 +310,34 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zzam_rf=1 ";
 $oznac = mysql_query("$sqtoz");
 
+//presunul som to sem aby vyriesil ak pomer 1 jedno osobne a dohoda druhe osobne
+//ak je ZP DOVERA a DOHODAR presun CELK.PRIJEM PRE ODP. do CELK.INY PRIJ. od 1.7.2015 zacali kontrolovat
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun ".
+"LEFT JOIN F$kli_vxcf"."_mzdpomer ON F$kli_vxcf"."_$mzdkun.pom=F$kli_vxcf"."_mzdpomer.pm ".
+" WHERE ume = $kli_vume AND pm_doh = 1 ORDER BY oc ";
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+$i=0;
+  while ($i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_inp=zcel_odp WHERE oc = $hlavicka->oc AND konx2 = 888 AND zcel_odp != 0 AND xdrv >= 2300 AND xdrv <= 2499 ";
+$sqlx = mysql_query("$sqlttx");
+
+//echo $sqlttx."<br />";
+
+$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_odp=0 WHERE oc = $hlavicka->oc AND konx2 = 888 AND zcel_odp != 0 AND xdrv >= 2300 AND xdrv <= 2499 ";
+$sqlx = mysql_query("$sqlttx");
+
+}
+$i=$i+1;
+  }
+
+//exit;
+
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplx".$kli_uzid.
 " SELECT MIN(oc),rodne,xdrv,znizp,".
 "sum(zzam_zp),sum(zzam_np),sum(zzam_sp),sum(zzam_ip),sum(zzam_pn),sum(zzam_up),sum(zzam_gf),sum(zzam_rf),".
@@ -436,10 +464,11 @@ $i=$i+1;
   }
 //exit;
 
+//od tadeto som to presunul hore
 //ak je DOHODAR co neodvadza do ZP a VZaklad=0 aj odvody=0 vynuluj aj UhrnPrijmu, od 1.5.2014 zacali kontrolovat
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun ".
 "LEFT JOIN F$kli_vxcf"."_mzdpomer ON F$kli_vxcf"."_$mzdkun.pom=F$kli_vxcf"."_mzdpomer.pm ".
-" WHERE ume = $kli_vume AND pm_doh = 1 AND zam_zp = 0 AND fir_zp = 0 ORDER BY oc ";
+" WHERE ume = $kli_vume AND pm_doh = 1111 AND zam_zp = 0 AND fir_zp = 0 ORDER BY oc ";
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 $i=0;
@@ -471,6 +500,8 @@ $hlavicka=mysql_fetch_object($sql);
 
 $sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_inp=zcel_odp WHERE oc = $hlavicka->oc AND konx2 = 999 AND zcel_odp != 0 AND xdrv >= 2300 AND xdrv <= 2499 ";
 $sqlx = mysql_query("$sqlttx");
+
+//echo $sqlttx."<br />";
 
 $sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_odp=0 WHERE oc = $hlavicka->oc AND konx2 = 999 AND zcel_odp != 0 AND xdrv >= 2300 AND xdrv <= 2499 ";
 $sqlx = mysql_query("$sqlttx");
