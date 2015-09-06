@@ -368,15 +368,15 @@ osè->
 />
 <td class="hmenu" colspan="3">GridKarta 
 <a href="#" onClick="window.open('../cis/grid.php?copern=10&cislo_id=<?php echo $naz_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
-<img src='../obr/tlac.png' width=20 height=12 border=0 alt="Vytlaèi GridKartu" ></a>
+<img src='../obr/tlac.png' width=20 height=12 border=0 title="Vytlaèi GridKartu" ></a>
 <a href="#" onClick="window.open('../cis/grid.php?copern=11&cislo_id=<?php echo $naz_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
-<img src='../obr/zoznam.png' width=20 height=12 border=0 alt="Vygenerova novú GridKartu" ></a>
+<img src='../obr/zoznam.png' width=20 height=12 border=0 title="Vygenerova novú GridKartu" ></a>
 <a href="#" onClick="window.open('../cis/grid.php?copern=15&cislo_id=<?php echo $naz_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
-<img src='../obr/orig.png' width=20 height=12 border=0 alt="Nastavi PIN GridKartu všetky polia rovnaké" ></a>
+<img src='../obr/orig.png' width=20 height=12 border=0 title="Nastavi PIN GridKartu všetky polia rovnaké" ></a>
 <a href="#" onClick="window.open('../cis/grid.php?copern=13&cislo_id=<?php echo $naz_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
-<img src='../obr/ziarovka.png' width=20 height=12 border=0 alt="Nastavi cviènú GridKartu 1234" ></a>
+<img src='../obr/ziarovka.png' width=20 height=12 border=0 title="Nastavi cviènú GridKartu 1234" ></a>
 <a href="#" onClick="window.open('../cis/grid.php?copern=14&cislo_id=<?php echo $naz_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
-<img src='../obr/zmazuplne.png' width=20 height=12 border=0 alt="Zmaza GridKartu" ></a>
+<img src='../obr/zmazuplne.png' width=20 height=12 border=0 title="Zmaza GridKartu" ></a>
 </tr>
 <tr>
 <td class="obyc"><INPUT type="submit" id="uloz" name="uloz" value="INS" onclick="Zapis_COOK();" ><SPAN id="uvolni" onmouseover="return Povol_uloz();">&nbsp;</SPAN></td>

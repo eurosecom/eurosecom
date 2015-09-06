@@ -93,6 +93,43 @@ $urob = mysql_query("$sql");
 $copern=1;
 }
 
+//zablokuj pokladnicu
+$blokacia=0;
+if( $copern == 3166 )
+{
+$h_sys = 1*$_REQUEST['h_sys'];
+$h_obdp = 1*$_REQUEST['h_obdp'];
+$blokacia=1;
+
+$sqlt = <<<saldo
+(
+   drx         VARCHAR(10),
+   idx         INT(4),
+   datm        TIMESTAMP(14)
+);
+saldo;
+
+$sql = "CREATE TABLE F$kli_vxcf"."_uctblokpokl_".$h_sys."_".$h_obdp."".$sqlt;
+$urob = mysql_query("$sql");
+//echo $sql;
+
+$copern=1;
+}
+
+//odblokuj pokladnicu
+if( $copern == 3177 )
+{
+$h_sys = 1*$_REQUEST['h_sys'];
+$h_obdp = 1*$_REQUEST['h_obdp'];
+$blokacia=1;
+
+$sql = "DROP TABLE F$kli_vxcf"."_uctblokpokl_".$h_sys."_".$h_obdp."".$sqlt;
+$urob = mysql_query("$sql");
+//echo $sql;
+
+$copern=1;
+}
+
 if( $copern > 50 AND $drupoh == 1 )
 {
 $uctsys="uctmzd";
@@ -2297,7 +2334,135 @@ if($urob) { $blok614=" - BLOKOVANÉ"; }
 
 <?php                           } ?>
 
+
+
+
+
 <?php
+
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx prenos pokladnice
+
+$jeuctovaniesluziebpok=0; $pokl1=0; $pokl2=0; $pokl3=0; $pokl4=0; $cfir1=0; $cfir2=0; $cfir3=0; $cfir4=0; 
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_sklsluudaje WHERE ( xuce1 >= 21100 AND xuce1 <= 21199 ) OR ( xuce1 >= 211000 AND xuce1 <= 211999 ) ORDER BY xuce1 ";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $jeuctovaniesluziebpok=1;
+  if( $i == 0 ) { $pokl1=1*$riaddok->xuce1; $cfir1=1*$riaddok->xuce2; } 
+  if( $i == 1 ) { $pokl2=1*$riaddok->xuce1; $cfir2=1*$riaddok->xuce2; } 
+  if( $i == 2 ) { $pokl3=1*$riaddok->xuce1; $cfir3=1*$riaddok->xuce2; } 
+  if( $i == 3 ) { $pokl4=1*$riaddok->xuce1; $cfir4=1*$riaddok->xuce2; } 
+  }
+
+if( $jeuctovaniesluziebpok == 1 ) { 
+?>
+
+<table class="vstup" width="100%" >
+<FORM name="formct3" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="ZoberPokladnicu();">
+<img src='../obr/vlozit.png' width=19 height=14 border=1 title='Prenies externú pokladnicu' ></a>
+</td>
+<td class="bmenu" width="90%">Externá pokladnica
+
+<select size="1" name="h_obdp" id="h_obdp" >
+<option value="<?php echo $kli_vmes;?>" >obdobie <?php echo $kli_vume;?></option>
+</select>
+
+<select size="1" name="h_sys" id="h_sys" >
+
+<?php
+$blokp1="";
+$blokp2="";
+$blokp3="";
+$blokp4="";
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokpokl_".$pokl1."_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blokp1=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokpokl_".$pokl2."_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blokp2=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokpokl_".$pokl3."_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blokp3=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokpokl_".$pokl4."_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blokp4=" - BLOKOVANÉ"; }
+
+?>
+
+<?php if( $pokl1 > 0 ) { ?><option value="<?php echo $pokl1;?>" ><?php echo $pokl1;?> <?php echo $blokp1;?></option><?php } ?>
+<?php if( $pokl2 > 0 ) { ?><option value="<?php echo $pokl2;?>" ><?php echo $pokl2;?> <?php echo $blokp2;?></option><?php } ?>
+<?php if( $pokl3 > 0 ) { ?><option value="<?php echo $pokl3;?>" ><?php echo $pokl3;?> <?php echo $blokp3;?></option><?php } ?>
+<?php if( $pokl4 > 0 ) { ?><option value="<?php echo $pokl4;?>" ><?php echo $pokl4;?> <?php echo $blokp4;?></option><?php } ?>
+
+</select>
+</td>
+
+<td class="bmenu" width="4%">
+<a href="#" onClick="ZablokujPrenos();">
+<img src='../obr/zmaz.png' width=19 height=14 border=1 title='Zablokova prenos pre nastavené UME a Pokladnicu' ></a>
+</td>
+
+<td class="bmenu" width="4%">
+<a href="#" onClick="OdblokujPrenos();">
+<img src='../obr/ok.png' width=19 height=14 border=1 title='Odblokova prenos pre nastavené UME a Pokladnicu' ></a>
+</td>
+
+
+</tr>
+</FORM>
+</table>
+<script type="text/javascript">
+
+function ZoberPokladnicu()
+                {
+
+var h_obdp = document.forms.formct3.h_obdp.value;
+var h_sys = document.forms.formct3.h_sys.value;
+
+window.open('../ucto/ext_pokl.php?copern=55&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+
+function ZablokujPrenos()
+                {
+
+var h_obdp = document.forms.formct3.h_obdp.value;
+var h_sys = document.forms.formct3.h_sys.value;
+
+window.open('../ucto/oprsys.php?copern=3166&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
+ '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function OdblokujPrenos()
+                {
+
+var h_obdp = document.forms.formct3.h_obdp.value;
+var h_sys = document.forms.formct3.h_sys.value;
+
+window.open('../ucto/oprsys.php?copern=3177&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
+ '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+  
+</script>
+<?php
+                                } 
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx koniec prenos pokladnice
+?>
+
+
+
+<?php
+//koniec copern=1
            }
 ?>
 

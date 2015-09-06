@@ -140,13 +140,14 @@ $dsqlt = "INSERT INTO prijdbf "." SELECT".
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+//cast 3ka nejde
 $dsqlt = "INSERT INTO prijdbf "." SELECT".
 " okres,'$fir_ficox',obec,'$kli_vrok','$mesiac','$typorg',".
 " 3,zdroj,xpolozka,podpolozka,schvaleny,zmeneny,skutocnost ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 3 ORDER BY polozka";
 //echo $dsqlt;
-$dsql = mysql_query("$dsqlt");
+//$dsql = mysql_query("$dsqlt");
 
 //vloz celkovy sucet do vytvorenej databazy
 
@@ -154,7 +155,7 @@ $dsqlt = "INSERT INTO prijdbf "." SELECT".
 " okres,'$fir_ficox',obec,'$kli_vrok','$mesiac','$typorg',".
 " druh,'9','','',SUM(schvaleny),SUM(zmeneny),SUM(skutocnost) ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
-" WHERE ( druh = 1 OR druh = 3 ) GROUP BY druh";
+" WHERE druh = 1 GROUP BY druh";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
@@ -164,7 +165,7 @@ $dsqlt = "INSERT INTO prijdbf "." SELECT".
 " okres,'$fir_ficox',obec,'$kli_vrok','$mesiac','$typorg',".
 " druh,zdroj,xpolozka,'',SUM(schvaleny),SUM(zmeneny),SUM(skutocnost) ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
-" WHERE ( druh = 1 OR druh = 3 ) GROUP BY druh,zdroj,xpolozka";
+" WHERE druh = 1 GROUP BY druh,zdroj,xpolozka";
 //echo $dsqlt;
 //$dsql = mysql_query("$dsqlt");
 
@@ -286,7 +287,6 @@ datrok          VARCHAR(4),
 datmes          VARCHAR(2),
 typorg          VARCHAR(2),
 cast            VARCHAR(1),
-program         VARCHAR(6),
 zdroj           VARCHAR(4),
 odd             VARCHAR(2),
 skup            VARCHAR(1),
@@ -315,38 +315,39 @@ $ttvv = "INSERT INTO vyddbf ( okres, ico, kodob, datrok, datmes, typorg, rs00101
 
 $dsqlt = "INSERT INTO vyddbf "." SELECT".
 " okres,'$fir_ficox',obec,'$kli_vrok','$mesiac','$typorg',".
-"1,program,zdroj,xoddiel,skupina,trieda,podtrieda,xpolozka,podpolozka,schvaleny,zmeneny,skutocnost ".
+"1,zdroj,xoddiel,skupina,trieda,podtrieda,xpolozka,podpolozka,schvaleny,zmeneny,skutocnost ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 2 ORDER BY polozka";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+//cast 4ka nejde
 $dsqlt = "INSERT INTO vyddbf "." SELECT".
 " okres,'$fir_ficox',obec,'$kli_vrok','$mesiac','$typorg',".
-"4,program,zdroj,xoddiel,skupina,trieda,podtrieda,xpolozka,podpolozka,schvaleny,zmeneny,skutocnost ".
+"4,zdroj,xoddiel,skupina,trieda,podtrieda,xpolozka,podpolozka,schvaleny,zmeneny,skutocnost ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 4 ORDER BY polozka";
 //echo $dsqlt;
-$dsql = mysql_query("$dsqlt");
+//$dsql = mysql_query("$dsqlt");
 
 //vloz celkovy sucet do vytvorenej databazy
 
 $dsqlt = "INSERT INTO vyddbf "." SELECT".
 " okres,'$fir_ficox',obec,'$kli_vrok','$mesiac','$typorg',".
-"druh,'9','','','','','','','',SUM(schvaleny),SUM(zmeneny),SUM(skutocnost) ".
+"druh,'9','','','','','','',SUM(schvaleny),SUM(zmeneny),SUM(skutocnost) ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
-" WHERE ( druh = 2 OR druh = 4 ) GROUP BY druh";
+" WHERE druh = 2 GROUP BY druh";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "UPDATE vyddbf "." SET cast=1 WHERE cast = 2 ";
 $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE vyddbf "." SET cast=4 WHERE cast = 4 ";
-$dsql = mysql_query("$dsqlt");
+//$dsql = mysql_query("$dsqlt");
 
 if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 )) 
 {
-$sqtoz = "UPDATE vyddbf SET odd='0', skup='7', trieda='2', podtr='2' ";
+$sqtoz = "UPDATE vyddbf SET odd='0', skup='7', trieda='2', podtr='2' WHERE zdroj != 9 ";
 $oznac = mysql_query("$sqtoz");
 }
 
@@ -354,7 +355,7 @@ $oznac = mysql_query("$sqtoz");
 //exit;
 
 /* Pøipravíme si SQL dotaz (v praxi bychom jej získali asi jinak...) */
-$dotaz2 = "select * from vyddbf order by cast,program,zdroj,odd,skup,trieda,podtr,pol,podp ";
+$dotaz2 = "select * from vyddbf order by cast,zdroj,odd,skup,trieda,podtr,pol,podp ";
 
 /* Vytvoøíme pole, která odpovídají jednotlivým položkám */
 $polozky2[] = array("OKRES", "C", 3);
@@ -364,7 +365,6 @@ $polozky2[] = array("DATROK", "C", 4);
 $polozky2[] = array("DATMES", "C", 2);
 $polozky2[] = array("TYPORG", "C", 2);
 $polozky2[] = array("CAST", "C", 1);
-$polozky2[] = array("PROGRAM", "C", 6);
 $polozky2[] = array("ZDROJ", "C", 4);
 $polozky2[] = array("ODD", "C", 2);
 $polozky2[] = array("SKUP", "C", 1);
