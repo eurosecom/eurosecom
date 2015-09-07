@@ -232,7 +232,17 @@ $i=$i+1;
 //echo $dsqlt."<br />";
 //exit;
 
+//zablokuj
+$sqlt = <<<saldo
+(
+   drx         VARCHAR(10),
+   idx         INT(4),
+   datm        TIMESTAMP(14)
+);
+saldo;
 
+$sql = "CREATE TABLE F$kli_vxcf"."_uctblokpokl_".$h_sys."_".$h_obdp."".$sqlt;
+$urob = mysql_query("$sql");
 }
 ///////koniec prenos pokladnice
 

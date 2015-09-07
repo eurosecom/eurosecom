@@ -356,6 +356,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplx".$kli_uzid.
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+//exit;
+
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdprcvyplx$kli_uzid".
 " SET F$kli_vxcf"."_mzdprcvypl$kli_uzid.vnesp_dni = 0 ".
 " WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.rodne = F$kli_vxcf"."_mzdprcvyplx$kli_uzid.rodne AND ".
@@ -464,11 +466,11 @@ $i=$i+1;
   }
 //exit;
 
-//od tadeto som to presunul hore
+
 //ak je DOHODAR co neodvadza do ZP a VZaklad=0 aj odvody=0 vynuluj aj UhrnPrijmu, od 1.5.2014 zacali kontrolovat
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun ".
 "LEFT JOIN F$kli_vxcf"."_mzdpomer ON F$kli_vxcf"."_$mzdkun.pom=F$kli_vxcf"."_mzdpomer.pm ".
-" WHERE ume = $kli_vume AND pm_doh = 1111 AND zam_zp = 0 AND fir_zp = 0 ORDER BY oc ";
+" WHERE ume = $kli_vume AND pm_doh = 1 AND zam_zp = 0 AND fir_zp = 0 ORDER BY oc ";
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 $i=0;
@@ -478,17 +480,18 @@ $i=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
-$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_zp=0 WHERE zzam_zp = 0 AND ozam_zp = 0 AND ofir_zp = 0 AND oc = $hlavicka->oc AND konx2 = 999 ";
+$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_zp=0, zcel_odp=0, zcel_inp=0 WHERE zzam_zp = 0 AND ozam_zp = 0 AND ofir_zp = 0 AND oc = $hlavicka->oc AND konx2 = 999 ";
 $sqlx = mysql_query("$sqlttx");
 //echo $sqlttx;
 }
 $i=$i+1;
   }
 
+//od tadeto som to presunul hore
 //ak je ZP DOVERA a DOHODAR presun CELK.PRIJEM PRE ODP. do CELK.INY PRIJ. od 1.7.2015 zacali kontrolovat
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun ".
 "LEFT JOIN F$kli_vxcf"."_mzdpomer ON F$kli_vxcf"."_$mzdkun.pom=F$kli_vxcf"."_mzdpomer.pm ".
-" WHERE ume = $kli_vume AND pm_doh = 1 ORDER BY oc ";
+" WHERE ume = $kli_vume AND pm_doh = 1111 ORDER BY oc ";
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 $i=0;
