@@ -33,7 +33,8 @@ $rmc1=0;
 //dropni stare nastavenie v ufirdalsie
 $dat0101=$kli_vrok."-01-01";
 $sqltt = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
-" datbod='0000-00-00', datbdo='0000-00-00', datmod='0000-00-00', datmdo='0000-00-00', datk='0000-00-00' WHERE datbod < '$dat0101' ";
+" datbod='0000-00-00', datbdo='0000-00-00', datmod='0000-00-00', datmdo='0000-00-00', datk='0000-00-00' ".
+" WHERE datbod < '$dat0101' AND datbdo < '$dat0101' ";
 //echo $sqltt;
 $sql = mysql_query("$sqltt");
 
@@ -266,15 +267,19 @@ $cobdd1=1*$obdd1;
 $cobdm1=1*$obdm1;
 $cobdr1=1*$obdr1;
 
+$C=substr($kli_rdph,2,1);
+$D=substr($kli_rdph,3,1);
+
 //za obdobie
 $me1="0"; $me2="1";
 if ( $cobdd1 > 0 AND $cobdm1 > 0 AND $cobdr1 > 0 )
 {
 $me1=substr($obdm1,0,1);
 $me2=substr($obdm1,1,1);
+$C=substr($obdr1,2,1);
+$D=substr($obdr1,3,1);
 }
-$C=substr($kli_rdph,2,1);
-$D=substr($kli_rdph,3,1);
+
 $pdf->SetY(58);
 $pdf->Cell(156,5," ","$rmc1",0,"R");$pdf->Cell(5,6,"$me1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(3,6,"$me2","$rmc",0,"C");
@@ -287,7 +292,10 @@ if ( $cobdd1 > 0 AND $cobdm1 > 0 AND $cobdr1 > 0 )
 {
 $Am=substr($obdm2,0,1);
 $Bm=substr($obdm2,1,1);
+$C=substr($obdr2,2,1);
+$D=substr($obdr2,3,1);
 }
+
 $pdf->SetY(67);
 $pdf->Cell(156,5," ","$rmc1",0,"R");$pdf->Cell(5,6,"$Am","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(3,6,"$Bm","$rmc",0,"C");
