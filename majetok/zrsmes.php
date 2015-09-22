@@ -2,6 +2,7 @@
 <?php
 $sys = 'HIM';
 $urov = 2000;
+$cslm=500502;
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 

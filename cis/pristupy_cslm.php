@@ -11,7 +11,7 @@ echo "    		 	cslm=999997	Ëas keÔ bolo zablokovanÈ cez cslm=999999"."<br />";
 echo "    		 	cslm=999998	Ëas keÔ bolo odblokovanÈ cez cslm=999999"."<br />";
 echo " "."<br />";
 
-echo "UCTO"."<br />";
+echo "UCTO ( pr·va pre ALL treba nastaviù na 1000 ak chce len prezeraù aby sa nedostal do ËÌselnÌkov a pr·va pre UCT treba nastaviù na 3000 na prezeranie )"."<br />";
 echo "../ucto/meszos.php 	cslm=100020	Vytvorenie mesacnych uctovnych zostav"."<br />";
 echo "../ucto/danprij.php 	cslm=100040	Priznanie k dani z prijmov"."<br />";
 echo "../ucto/vspk_u.php 	cslm=100080	Uprava, mazanie POKLADNICA, BANKA, VSEOB"."<br />";
@@ -34,10 +34,17 @@ echo " "."<br />";
 echo "../cis/ufir.php 		cslm=101901	Udaje o firme a parametre vsetkych programov ucto,mzdy.him,sklad,fakt..."."<br />";
 echo " "."<br />";
 
+
+echo "FAKT⁄RY ( pr·va pre FAK treba nastaviù na 1100 ak chce len prezeraù )"."<br />";
 echo "../faktury/vstf_u.php 	cslm=301881	Uprava, mazanie faktur odberatelskych"."<br />";
 echo "../faktury/vstf_u.php 	cslm=301882	Uprava, mazanie faktur dodavatelskych"."<br />";
 echo "../faktury/vstf_u.php 	cslm=301880	Uprava, mazanie faktur ine ako odberatelske alebo dodavatelske = dodacie listy, predfaktury..."."<br />";
 echo "../faktury/vstf_t.php 	cslm=301890	Rozuctovanie tlac html faktur"."<br />";
 echo " "."<br />";
 
+echo "MAJETOK ( pr·va pre MAJ treba nastaviù na 1100 ak chce len prezeraù )"."<br />";
+echo "../majetok/vstmaj.php 	cslm=500101	Zoznam a pohyby dlhodobÈho a drobnÈho majetku"."<br />";
+echo "../majetok/mesodp.php 	cslm=500501	Spracovanie mesaËnÈho odpisu"."<br />";
+echo "../majetok/zrsmes.php 	cslm=500502	Zruöenie spracovania mesaËnÈho odpisu"."<br />";
+echo "../majetok/majuct.php 	cslm=500503	Prevod do ˙ËtovnÌctva"."<br />";
 ?>

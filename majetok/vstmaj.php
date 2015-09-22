@@ -9,6 +9,8 @@ $copern = strip_tags($_REQUEST['copern']);
 $sys = 'HIM';
 $urov = 1100;
 if( $copern == 10 ) $urov = 1000;
+
+$cslm=500101;
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 
