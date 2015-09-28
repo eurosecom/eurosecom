@@ -22,10 +22,10 @@ if( $dnes == '26.12.'.$aky_rok ) $robot3="robot3_vianoce";
 if( $dnes == '31.12.'.$aky_rok ) $robot3="robot3_silvester";
 
 
-//2015
-if( $dnes == '03.04.2015' ) $robot3="robot3_velkanoc";
-if( $dnes == '04.04.2015' ) $robot3="robot3_velkanoc";
-if( $dnes == '05.04.2015' ) $robot3="robot3_velkanoc";
-if( $dnes == '06.04.2015' ) $robot3="robot3_velkanoc";
+//2016
+if( $dnes == '25.03.2016' ) $robot3="robot3_velkanoc";
+if( $dnes == '26.03.2016' ) $robot3="robot3_velkanoc";
+if( $dnes == '27.03.2016' ) $robot3="robot3_velkanoc";
+if( $dnes == '28.03.2016' ) $robot3="robot3_velkanoc";
 
 ?>
