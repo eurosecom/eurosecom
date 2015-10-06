@@ -90,7 +90,7 @@ $riadok=mysql_fetch_object($tov);
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdmes ".
 " SELECT 0,9998,dat,ume,oc,304,dp,dk,0,0,0,0,kc,str,zak,stj,msx1,msx2,msx3,msx4,pop,id,now() ".
 " FROM F$kli_vxcf"."_mzdmes ".
-" WHERE dm >= 104 AND dm <= 107 AND oc = $riadok->oc ";
+" WHERE dm >= 101 AND dm <= 107 AND oc = $riadok->oc ";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdmes ".

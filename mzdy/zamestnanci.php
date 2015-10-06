@@ -1708,7 +1708,7 @@ if ( $copern == 8 )
 
 <td width='62%'>Bankovı úèet: 
 <input type='text' name='h_uceb' id='h_uceb' size='15' value="<?php echo $h_uceb;?>"  
-onchange='return intg(this,1,999999999999,Cele)' onclick="Fx.style.display='none';" onkeyup="KontrolaCisla(this, Cele)" /> 
+ onclick="Fx.style.display='none';" onkeyup="KontrolaCisla(this, Cele)" /> 
  num<input type='text' name='h_numb' id='h_numb' size='6' value="<?php echo $h_numb;?>" 
 onchange='return intg(this,0,9999,Cele)' onclick="Fx.style.display='none';" onkeyup="KontrolaCisla(this, Cele)" /> 
  iban<input type='text' name='h_ibanb' id='h_ibanb' size='38' value="<?php echo $ibanb;?>" />

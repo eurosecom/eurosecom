@@ -389,7 +389,7 @@ $dsqlt = "TRUNCATE TABLE F$kli_vxcf"."_majprc2"; $dsql = mysql_query("$dsqlt");
 
 
 
-//uctovanie EUzaradeni poliklinikase
+//uctovanie EUzaradeni a zvyseni poliklinikase
 if( $poliklinikase == 1 )
      {
 //echo "idem";
@@ -398,7 +398,7 @@ $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "UPDATE F$kli_vxcf"."_majprc,F$kli_vxcf"."_majtextmaj ".
 " SET ico=2 ".
-" WHERE F$kli_vxcf"."_majprc.inv=F$kli_vxcf"."_majtextmaj.invt AND ( F$kli_vxcf"."_majtextmaj.zdro=2 OR F$kli_vxcf"."_majtextmaj.zdro=3 ) AND dru = 2 ".
+" WHERE F$kli_vxcf"."_majprc.inv=F$kli_vxcf"."_majtextmaj.invt AND ( F$kli_vxcf"."_majtextmaj.zdro=2 OR F$kli_vxcf"."_majtextmaj.zdro=3 ) AND ( dru = 2 OR dru = 4 ) ".
 "";
 $dsql = mysql_query("$dsqlt");
 
@@ -453,10 +453,10 @@ $dsql = mysql_query("$dsqlt");
 
 //exit;
      }
-//koniec uctovanie EUzaradeni poliklinikase
+//koniec uctovanie EUzaradeni a zvyseni poliklinikase
 
 
-//uctovanie SRzaradeni poliklinikase
+//uctovanie SRzaradeni a zvyseni poliklinikase
 if( $poliklinikase == 1 )
      {
 //echo "idem";
@@ -465,7 +465,7 @@ $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "UPDATE F$kli_vxcf"."_majprc,F$kli_vxcf"."_majtextmaj ".
 " SET ico=2 ".
-" WHERE F$kli_vxcf"."_majprc.inv=F$kli_vxcf"."_majtextmaj.invt AND ( F$kli_vxcf"."_majtextmaj.zdro=2 OR F$kli_vxcf"."_majtextmaj.zdro=3 )  AND dru = 2 ".
+" WHERE F$kli_vxcf"."_majprc.inv=F$kli_vxcf"."_majtextmaj.invt AND ( F$kli_vxcf"."_majtextmaj.zdro=2 OR F$kli_vxcf"."_majtextmaj.zdro=3 ) AND ( dru = 2 OR dru = 4 ) ".
 "";
 $dsql = mysql_query("$dsqlt");
 
@@ -520,7 +520,7 @@ $dsql = mysql_query("$dsqlt");
 
 //exit;
      }
-//koniec uctovanie SRzaradeni poliklinikase
+//koniec uctovanie SRzaradeni a zvyseni poliklinikase
 
 //len jedno inv pozri
 $dsqlt = "DELETE FROM F$kli_vxcf"."_majprc WHERE inv != 184 ";
