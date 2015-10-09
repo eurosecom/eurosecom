@@ -64,12 +64,19 @@ $vytvor = mysql_query("$vsql");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_archivdph,F$kli_vxcf"."_archivdph".$kli_uzid." ".
 " SET F$kli_vxcf"."_archivdph.r37=F$kli_vxcf"."_archivdph.r31-F$kli_vxcf"."_archivdph".$kli_uzid.".r31-".
-"F$kli_vxcf"."_archivdph.r32+F$kli_vxcf"."_archivdph.r32, ".
-" F$kli_vxcf"."_archivdph.r38=F$kli_vxcf"."_archivdph.r34-F$kli_vxcf"."_archivdph".$kli_uzid.".r34 ".
+"F$kli_vxcf"."_archivdph.r32+F$kli_vxcf"."_archivdph".$kli_uzid.".r32 ".
 " WHERE F$kli_vxcf"."_archivdph.ume = $cislo_ume AND F$kli_vxcf"."_archivdph.druh = 3 AND F$kli_vxcf"."_archivdph.stvrtrok = $cislo_stvrt ".
 " AND F$kli_vxcf"."_archivdph.ume=F$kli_vxcf"."_archivdph".$kli_uzid.".ume ".
 " AND F$kli_vxcf"."_archivdph.stvrtrok=F$kli_vxcf"."_archivdph".$kli_uzid.".stvrtrok ".
 " AND F$kli_vxcf"."_archivdph".$kli_uzid.".druh = 1 AND F$kli_vxcf"."_archivdph.cpid = $cislo_cpid ".
+"";
+
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_archivdph  ".
+" SET r38=r37 ".
+" WHERE r37 > 0 AND ume = $cislo_ume AND druh = 3 AND stvrtrok = $cislo_stvrt AND cpid = $cislo_cpid ".
 "";
 
 //echo $sqtoz;
