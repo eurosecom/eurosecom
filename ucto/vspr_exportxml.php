@@ -488,7 +488,7 @@ $datumuhrady=$hlavicka->dat;
 $bankauhrady=$hlavicka->uce;
 
 
-$priban=""; $prbic=""; $nban="";
+$priban=""; $prbic=""; $nban=""; $nstat="SK";
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_dban WHERE dban = $hlavicka->uce ";
 $fir_vysledok = mysql_query($sqlfir);
 if( $fir_vysledok ) 
@@ -498,6 +498,8 @@ $fir_riadok=mysql_fetch_object($fir_vysledok);
 $priban = $fir_riadok->iban;
 $prbic = $fir_riadok->twib;
 $nban = $fir_riadok->nban;
+$nstat = trim(substr($priban,0,2));
+if( $nstat == '' ) { $nstat="SK"; }
 }
 
 
@@ -534,7 +536,7 @@ $hicoad2 = iconv("CP1250", "UTF-8", $hicoad2);
   $text = "  <Nm>".$hiconm."</Nm>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <PstlAdr>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <Ctry>SK</Ctry>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <Ctry>".$nstat."</Ctry>"."\r\n"; fwrite($soubor, $text);
   $text = "  <AdrLine>".$hicoad1."</AdrLine>"."\r\n"; fwrite($soubor, $text);
   $text = "  <AdrLine>".$hicoad2."</AdrLine>"."\r\n"; fwrite($soubor, $text);
   $text = "  </PstlAdr>"."\r\n"; fwrite($soubor, $text);
@@ -580,7 +582,7 @@ $hicoad2 = iconv("CP1250", "UTF-8", $hicoad2);
   $text = " <Dbtr>"."\r\n"; fwrite($soubor, $text);
   $text = "  <Nm>".$hiconm."</Nm>"."\r\n"; fwrite($soubor, $text);
   $text = "  <PstlAdr>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <Ctry>SK</Ctry>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <Ctry>".$nstat."</Ctry>"."\r\n"; fwrite($soubor, $text);
   $text = "  <AdrLine>".$hicoad1."</AdrLine>"."\r\n"; fwrite($soubor, $text);
   $text = "  <AdrLine>".$hicoad2."</AdrLine>"."\r\n"; fwrite($soubor, $text);
   $text = "  </PstlAdr>"."\r\n"; fwrite($soubor, $text);
@@ -742,10 +744,13 @@ $iconm = iconv("CP1250", "UTF-8", $iconm);
 $icoad1 = iconv("CP1250", "UTF-8", $icoad1);
 $icoad2 = iconv("CP1250", "UTF-8", $icoad2);
 
+$pstat = trim(substr($hlavickav->iban,0,2));
+if( $pstat == '' ) { $pstat="SK"; }
+
   $text = " <Cdtr>"."\r\n"; fwrite($soubor, $text);
   $text = " <Nm>".$iconm."</Nm>"."\r\n"; fwrite($soubor, $text);
   $text = " <PstlAdr>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <Ctry>SK</Ctry>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <Ctry>".$pstat."</Ctry>"."\r\n"; fwrite($soubor, $text);
   $text = "  <AdrLine>".$icoad1."</AdrLine>"."\r\n"; fwrite($soubor, $text);
   $text = "  <AdrLine>".$icoad2."</AdrLine>"."\r\n"; fwrite($soubor, $text);
   $text = " </PstlAdr>"."\r\n"; fwrite($soubor, $text);
