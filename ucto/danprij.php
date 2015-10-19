@@ -300,6 +300,7 @@ window.open('../ucto/poznamky2013_xml.php?copern=110&h_zos=' + h_zos + '&h_sch='
 <?php
 $rokdmv="";
 if( $kli_vrok >= 2013 ) { $rokdmv=2013; }
+if( $kli_vrok >= 2015 ) { $rokdmv=2015; }
 ?>
 
 function TlacDMV()

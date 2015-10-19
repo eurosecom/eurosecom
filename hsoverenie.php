@@ -81,6 +81,11 @@ if( $_SERVER['SERVER_NAME'] == "www.ala.sk" ) { mysql_query("SET NAMES cp1250");
 if( $_SERVER['SERVER_NAME'] == "skplaysro" ) { mysql_query("SET NAMES cp1250"); }
 if( $_SESSION['ipad'] == 1 ) { mysql_query("SET NAMES cp1250"); mysql_query("SET CHARACTER SET cp1250");  }
 
+$eurosecom2015virtualnyserver=0;
+if( file_exists("pswd/eurosecom2015virtualnyserver.ano")) { $eurosecom2015virtualnyserver=1; }
+if( file_exists("../pswd/eurosecom2015virtualnyserver.ano")) { $eurosecom2015virtualnyserver=1; }
+if( $eurosecom2015virtualnyserver == 1 ) { mysql_query("SET NAMES cp1250"); }
+
 $eurosecomvirtualnyserver=0;
 if( file_exists("pswd/eurosecomvirtualnyserver.ano")) { $eurosecomvirtualnyserver=1; }
 if( $eurosecomvirtualnyserver == 1 ) { mysql_query("SET CHARACTER SET cp1250"); }
