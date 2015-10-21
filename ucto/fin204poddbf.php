@@ -95,254 +95,254 @@ if (!$vysledx)
 
 $sqlt = <<<fin2adbf
 (
-okres           VARCHAR(3),
-ico             VARCHAR(8),
-kodob           VARCHAR(6),
-datrok          VARCHAR(4),
-datmes          VARCHAR(2),
-typorg          VARCHAR(2),
-rs00101         DECIMAL(12,2),
-rs00102         DECIMAL(12,2),
-rs00103         DECIMAL(12,2),
-rs00104         DECIMAL(12,2),
-rs00201         DECIMAL(12,2),
-rs00202         DECIMAL(12,2),
-rs00203         DECIMAL(12,2),
-rs00204         DECIMAL(12,2),
-rs00301         DECIMAL(12,2),
-rs00302         DECIMAL(12,2),
-rs00303         DECIMAL(12,2),
-rs00304         DECIMAL(12,2),
-rs00401         DECIMAL(12,2),
-rs00402         DECIMAL(12,2),
-rs00403         DECIMAL(12,2),
-rs00404         DECIMAL(12,2),
-rs00501         DECIMAL(12,2),
-rs00502         DECIMAL(12,2),
-rs00503         DECIMAL(12,2),
-rs00504         DECIMAL(12,2),
-rs00601         DECIMAL(12,2),
-rs00602         DECIMAL(12,2),
-rs00603         DECIMAL(12,2),
-rs00604         DECIMAL(12,2),
-rs00701         DECIMAL(12,2),
-rs00702         DECIMAL(12,2),
-rs00703         DECIMAL(12,2),
-rs00704         DECIMAL(12,2),
-rs00801         DECIMAL(12,2),
-rs00802         DECIMAL(12,2),
-rs00803         DECIMAL(12,2),
-rs00804         DECIMAL(12,2),
-rs00901         DECIMAL(12,2),
-rs00902         DECIMAL(12,2),
-rs00903         DECIMAL(12,2),
-rs00904         DECIMAL(12,2),
-rs01001         DECIMAL(12,2),
-rs01002         DECIMAL(12,2),
-rs01003         DECIMAL(12,2),
-rs01004         DECIMAL(12,2),
-rs01101         DECIMAL(12,2),
-rs01102         DECIMAL(12,2),
-rs01103         DECIMAL(12,2),
-rs01104         DECIMAL(12,2),
-rs01201         DECIMAL(12,2),
-rs01202         DECIMAL(12,2),
-rs01203         DECIMAL(12,2),
-rs01204         DECIMAL(12,2),
-rs01301         DECIMAL(12,2),
-rs01302         DECIMAL(12,2),
-rs01303         DECIMAL(12,2),
-rs01304         DECIMAL(12,2),
-rs01401         DECIMAL(12,2),
-rs01402         DECIMAL(12,2),
-rs01403         DECIMAL(12,2),
-rs01404         DECIMAL(12,2),
-rs01501         DECIMAL(12,2),
-rs01502         DECIMAL(12,2),
-rs01503         DECIMAL(12,2),
-rs01504         DECIMAL(12,2),
-rs01601         DECIMAL(12,2),
-rs01602         DECIMAL(12,2),
-rs01603         DECIMAL(12,2),
-rs01604         DECIMAL(12,2),
-rs01701         DECIMAL(12,2),
-rs01702         DECIMAL(12,2),
-rs01703         DECIMAL(12,2),
-rs01704         DECIMAL(12,2),
-rs01801         DECIMAL(12,2),
-rs01802         DECIMAL(12,2),
-rs01803         DECIMAL(12,2),
-rs01804         DECIMAL(12,2),
-rs01901         DECIMAL(12,2),
-rs01902         DECIMAL(12,2),
-rs01903         DECIMAL(12,2),
-rs01904         DECIMAL(12,2),
-rs02001         DECIMAL(12,2),
-rs02002         DECIMAL(12,2),
-rs02003         DECIMAL(12,2),
-rs02004         DECIMAL(12,2),
-rs02101         DECIMAL(12,2),
-rs02102         DECIMAL(12,2),
-rs02103         DECIMAL(12,2),
-rs02104         DECIMAL(12,2),
-rs02201         DECIMAL(12,2),
-rs02202         DECIMAL(12,2),
-rs02203         DECIMAL(12,2),
-rs02204         DECIMAL(12,2),
-rs02301         DECIMAL(12,2),
-rs02302         DECIMAL(12,2),
-rs02303         DECIMAL(12,2),
-rs02304         DECIMAL(12,2),
-rs02401         DECIMAL(12,2),
-rs02402         DECIMAL(12,2),
-rs02403         DECIMAL(12,2),
-rs02404         DECIMAL(12,2),
-rs02501         DECIMAL(12,2),
-rs02502         DECIMAL(12,2),
-rs02503         DECIMAL(12,2),
-rs02504         DECIMAL(12,2),
-rs02601         DECIMAL(12,2),
-rs02602         DECIMAL(12,2),
-rs02603         DECIMAL(12,2),
-rs02604         DECIMAL(12,2),
-rs02701         DECIMAL(12,2),
-rs02702         DECIMAL(12,2),
-rs02703         DECIMAL(12,2),
-rs02704         DECIMAL(12,2),
-rs02801         DECIMAL(12,2),
-rs02802         DECIMAL(12,2),
-rs02803         DECIMAL(12,2),
-rs02804         DECIMAL(12,2),
-rs02901         DECIMAL(12,2),
-rs02902         DECIMAL(12,2),
-rs02903         DECIMAL(12,2),
-rs02904         DECIMAL(12,2),
-rs03001         DECIMAL(12,2),
-rs03002         DECIMAL(12,2),
-rs03003         DECIMAL(12,2),
-rs03004         DECIMAL(12,2),
-rs03101         DECIMAL(12,2),
-rs03102         DECIMAL(12,2),
-rs03103         DECIMAL(12,2),
-rs03104         DECIMAL(12,2),
-rs03201         DECIMAL(12,2),
-rs03202         DECIMAL(12,2),
-rs03203         DECIMAL(12,2),
-rs03204         DECIMAL(12,2),
-rs03301         DECIMAL(12,2),
-rs03302         DECIMAL(12,2),
-rs03303         DECIMAL(12,2),
-rs03304         DECIMAL(12,2),
-rs03401         DECIMAL(12,2),
-rs03402         DECIMAL(12,2),
-rs03403         DECIMAL(12,2),
-rs03404         DECIMAL(12,2),
-rs03501         DECIMAL(12,2),
-rs03502         DECIMAL(12,2),
-rs03503         DECIMAL(12,2),
-rs03504         DECIMAL(12,2),
-rs03601         DECIMAL(12,2),
-rs03602         DECIMAL(12,2),
-rs03603         DECIMAL(12,2),
-rs03604         DECIMAL(12,2),
-rs03701         DECIMAL(12,2),
-rs03702         DECIMAL(12,2),
-rs03703         DECIMAL(12,2),
-rs03704         DECIMAL(12,2),
-rs03801         DECIMAL(12,2),
-rs03802         DECIMAL(12,2),
-rs03803         DECIMAL(12,2),
-rs03804         DECIMAL(12,2),
-rs03901         DECIMAL(12,2),
-rs03902         DECIMAL(12,2),
-rs03903         DECIMAL(12,2),
-rs03904         DECIMAL(12,2),
-rs04001         DECIMAL(12,2),
-rs04002         DECIMAL(12,2),
-rs04003         DECIMAL(12,2),
-rs04004         DECIMAL(12,2),
+OKRES           VARCHAR(3),
+ICO             VARCHAR(8),
+KODOB           VARCHAR(6),
+DATROK          VARCHAR(4),
+DATMES          VARCHAR(2),
+TYPORG          VARCHAR(2),
+RS00101         DECIMAL(12,2),
+RS00102         DECIMAL(12,2),
+RS00103         DECIMAL(12,2),
+RS00104         DECIMAL(12,2),
+RS00201         DECIMAL(12,2),
+RS00202         DECIMAL(12,2),
+RS00203         DECIMAL(12,2),
+RS00204         DECIMAL(12,2),
+RS00301         DECIMAL(12,2),
+RS00302         DECIMAL(12,2),
+RS00303         DECIMAL(12,2),
+RS00304         DECIMAL(12,2),
+RS00401         DECIMAL(12,2),
+RS00402         DECIMAL(12,2),
+RS00403         DECIMAL(12,2),
+RS00404         DECIMAL(12,2),
+RS00501         DECIMAL(12,2),
+RS00502         DECIMAL(12,2),
+RS00503         DECIMAL(12,2),
+RS00504         DECIMAL(12,2),
+RS00601         DECIMAL(12,2),
+RS00602         DECIMAL(12,2),
+RS00603         DECIMAL(12,2),
+RS00604         DECIMAL(12,2),
+RS00701         DECIMAL(12,2),
+RS00702         DECIMAL(12,2),
+RS00703         DECIMAL(12,2),
+RS00704         DECIMAL(12,2),
+RS00801         DECIMAL(12,2),
+RS00802         DECIMAL(12,2),
+RS00803         DECIMAL(12,2),
+RS00804         DECIMAL(12,2),
+RS00901         DECIMAL(12,2),
+RS00902         DECIMAL(12,2),
+RS00903         DECIMAL(12,2),
+RS00904         DECIMAL(12,2),
+RS01001         DECIMAL(12,2),
+RS01002         DECIMAL(12,2),
+RS01003         DECIMAL(12,2),
+RS01004         DECIMAL(12,2),
+RS01101         DECIMAL(12,2),
+RS01102         DECIMAL(12,2),
+RS01103         DECIMAL(12,2),
+RS01104         DECIMAL(12,2),
+RS01201         DECIMAL(12,2),
+RS01202         DECIMAL(12,2),
+RS01203         DECIMAL(12,2),
+RS01204         DECIMAL(12,2),
+RS01301         DECIMAL(12,2),
+RS01302         DECIMAL(12,2),
+RS01303         DECIMAL(12,2),
+RS01304         DECIMAL(12,2),
+RS01401         DECIMAL(12,2),
+RS01402         DECIMAL(12,2),
+RS01403         DECIMAL(12,2),
+RS01404         DECIMAL(12,2),
+RS01501         DECIMAL(12,2),
+RS01502         DECIMAL(12,2),
+RS01503         DECIMAL(12,2),
+RS01504         DECIMAL(12,2),
+RS01601         DECIMAL(12,2),
+RS01602         DECIMAL(12,2),
+RS01603         DECIMAL(12,2),
+RS01604         DECIMAL(12,2),
+RS01701         DECIMAL(12,2),
+RS01702         DECIMAL(12,2),
+RS01703         DECIMAL(12,2),
+RS01704         DECIMAL(12,2),
+RS01801         DECIMAL(12,2),
+RS01802         DECIMAL(12,2),
+RS01803         DECIMAL(12,2),
+RS01804         DECIMAL(12,2),
+RS01901         DECIMAL(12,2),
+RS01902         DECIMAL(12,2),
+RS01903         DECIMAL(12,2),
+RS01904         DECIMAL(12,2),
+RS02001         DECIMAL(12,2),
+RS02002         DECIMAL(12,2),
+RS02003         DECIMAL(12,2),
+RS02004         DECIMAL(12,2),
+RS02101         DECIMAL(12,2),
+RS02102         DECIMAL(12,2),
+RS02103         DECIMAL(12,2),
+RS02104         DECIMAL(12,2),
+RS02201         DECIMAL(12,2),
+RS02202         DECIMAL(12,2),
+RS02203         DECIMAL(12,2),
+RS02204         DECIMAL(12,2),
+RS02301         DECIMAL(12,2),
+RS02302         DECIMAL(12,2),
+RS02303         DECIMAL(12,2),
+RS02304         DECIMAL(12,2),
+RS02401         DECIMAL(12,2),
+RS02402         DECIMAL(12,2),
+RS02403         DECIMAL(12,2),
+RS02404         DECIMAL(12,2),
+RS02501         DECIMAL(12,2),
+RS02502         DECIMAL(12,2),
+RS02503         DECIMAL(12,2),
+RS02504         DECIMAL(12,2),
+RS02601         DECIMAL(12,2),
+RS02602         DECIMAL(12,2),
+RS02603         DECIMAL(12,2),
+RS02604         DECIMAL(12,2),
+RS02701         DECIMAL(12,2),
+RS02702         DECIMAL(12,2),
+RS02703         DECIMAL(12,2),
+RS02704         DECIMAL(12,2),
+RS02801         DECIMAL(12,2),
+RS02802         DECIMAL(12,2),
+RS02803         DECIMAL(12,2),
+RS02804         DECIMAL(12,2),
+RS02901         DECIMAL(12,2),
+RS02902         DECIMAL(12,2),
+RS02903         DECIMAL(12,2),
+RS02904         DECIMAL(12,2),
+RS03001         DECIMAL(12,2),
+RS03002         DECIMAL(12,2),
+RS03003         DECIMAL(12,2),
+RS03004         DECIMAL(12,2),
+RS03101         DECIMAL(12,2),
+RS03102         DECIMAL(12,2),
+RS03103         DECIMAL(12,2),
+RS03104         DECIMAL(12,2),
+RS03201         DECIMAL(12,2),
+RS03202         DECIMAL(12,2),
+RS03203         DECIMAL(12,2),
+RS03204         DECIMAL(12,2),
+RS03301         DECIMAL(12,2),
+RS03302         DECIMAL(12,2),
+RS03303         DECIMAL(12,2),
+RS03304         DECIMAL(12,2),
+RS03401         DECIMAL(12,2),
+RS03402         DECIMAL(12,2),
+RS03403         DECIMAL(12,2),
+RS03404         DECIMAL(12,2),
+RS03501         DECIMAL(12,2),
+RS03502         DECIMAL(12,2),
+RS03503         DECIMAL(12,2),
+RS03504         DECIMAL(12,2),
+RS03601         DECIMAL(12,2),
+RS03602         DECIMAL(12,2),
+RS03603         DECIMAL(12,2),
+RS03604         DECIMAL(12,2),
+RS03701         DECIMAL(12,2),
+RS03702         DECIMAL(12,2),
+RS03703         DECIMAL(12,2),
+RS03704         DECIMAL(12,2),
+RS03801         DECIMAL(12,2),
+RS03802         DECIMAL(12,2),
+RS03803         DECIMAL(12,2),
+RS03804         DECIMAL(12,2),
+RS03901         DECIMAL(12,2),
+RS03902         DECIMAL(12,2),
+RS03903         DECIMAL(12,2),
+RS03904         DECIMAL(12,2),
+RS04001         DECIMAL(12,2),
+RS04002         DECIMAL(12,2),
+RS04003         DECIMAL(12,2),
+RS04004         DECIMAL(12,2),
 
-rs04101         DECIMAL(12,2),
-rs04102         DECIMAL(12,2),
-rs04103         DECIMAL(12,2),
-rs04104         DECIMAL(12,2),
+RS04101         DECIMAL(12,2),
+RS04102         DECIMAL(12,2),
+RS04103         DECIMAL(12,2),
+RS04104         DECIMAL(12,2),
 
-rs04201         DECIMAL(12,2),
-rs04202         DECIMAL(12,2),
-rs04203         DECIMAL(12,2),
-rs04204         DECIMAL(12,2),
+RS04201         DECIMAL(12,2),
+RS04202         DECIMAL(12,2),
+RS04203         DECIMAL(12,2),
+RS04204         DECIMAL(12,2),
 
-rs04301         DECIMAL(12,2),
-rs04302         DECIMAL(12,2),
-rs04303         DECIMAL(12,2),
-rs04304         DECIMAL(12,2),
+RS04301         DECIMAL(12,2),
+RS04302         DECIMAL(12,2),
+RS04303         DECIMAL(12,2),
+RS04304         DECIMAL(12,2),
 
-rs04405         DECIMAL(12,2),
-rs04406         DECIMAL(12,2),
-rs04505         DECIMAL(12,2),
-rs04506         DECIMAL(12,2),
-rs04605         DECIMAL(12,2),
-rs04606         DECIMAL(12,2),
-rs04705         DECIMAL(12,2),
-rs04706         DECIMAL(12,2),
-rs04805         DECIMAL(12,2),
-rs04806         DECIMAL(12,2),
-rs04905         DECIMAL(12,2),
-rs04906         DECIMAL(12,2),
-rs05005         DECIMAL(12,2),
-rs05006         DECIMAL(12,2),
-rs05105         DECIMAL(12,2),
-rs05106         DECIMAL(12,2),
-rs05205         DECIMAL(12,2),
-rs05206         DECIMAL(12,2),
-rs05305         DECIMAL(12,2),
-rs05306         DECIMAL(12,2),
-rs05405         DECIMAL(12,2),
-rs05406         DECIMAL(12,2),
-rs05505         DECIMAL(12,2),
-rs05506         DECIMAL(12,2),
-rs05605         DECIMAL(12,2),
-rs05606         DECIMAL(12,2),
-rs05705         DECIMAL(12,2),
-rs05706         DECIMAL(12,2),
-rs05805         DECIMAL(12,2),
-rs05806         DECIMAL(12,2),
-rs05905         DECIMAL(12,2),
-rs05906         DECIMAL(12,2),
-rs06005         DECIMAL(12,2),
-rs06006         DECIMAL(12,2),
-rs06105         DECIMAL(12,2),
-rs06106         DECIMAL(12,2),
-rs06205         DECIMAL(12,2),
-rs06206         DECIMAL(12,2),
-rs06305         DECIMAL(12,2),
-rs06306         DECIMAL(12,2),
-rs06405         DECIMAL(12,2),
-rs06406         DECIMAL(12,2),
-rs06505         DECIMAL(12,2),
-rs06506         DECIMAL(12,2),
-rs06605         DECIMAL(12,2),
-rs06606         DECIMAL(12,2),
-rs06705         DECIMAL(12,2),
-rs06706         DECIMAL(12,2),
-rs06805         DECIMAL(12,2),
-rs06806         DECIMAL(12,2),
-rs06905         DECIMAL(12,2),
-rs06906         DECIMAL(12,2),
-rs07005         DECIMAL(12,2),
-rs07006         DECIMAL(12,2),
+RS04405         DECIMAL(12,2),
+RS04406         DECIMAL(12,2),
+RS04505         DECIMAL(12,2),
+RS04506         DECIMAL(12,2),
+RS04605         DECIMAL(12,2),
+RS04606         DECIMAL(12,2),
+RS04705         DECIMAL(12,2),
+RS04706         DECIMAL(12,2),
+RS04805         DECIMAL(12,2),
+RS04806         DECIMAL(12,2),
+RS04905         DECIMAL(12,2),
+RS04906         DECIMAL(12,2),
+RS05005         DECIMAL(12,2),
+RS05006         DECIMAL(12,2),
+RS05105         DECIMAL(12,2),
+RS05106         DECIMAL(12,2),
+RS05205         DECIMAL(12,2),
+RS05206         DECIMAL(12,2),
+RS05305         DECIMAL(12,2),
+RS05306         DECIMAL(12,2),
+RS05405         DECIMAL(12,2),
+RS05406         DECIMAL(12,2),
+RS05505         DECIMAL(12,2),
+RS05506         DECIMAL(12,2),
+RS05605         DECIMAL(12,2),
+RS05606         DECIMAL(12,2),
+RS05705         DECIMAL(12,2),
+RS05706         DECIMAL(12,2),
+RS05805         DECIMAL(12,2),
+RS05806         DECIMAL(12,2),
+RS05905         DECIMAL(12,2),
+RS05906         DECIMAL(12,2),
+RS06005         DECIMAL(12,2),
+RS06006         DECIMAL(12,2),
+RS06105         DECIMAL(12,2),
+RS06106         DECIMAL(12,2),
+RS06205         DECIMAL(12,2),
+RS06206         DECIMAL(12,2),
+RS06305         DECIMAL(12,2),
+RS06306         DECIMAL(12,2),
+RS06405         DECIMAL(12,2),
+RS06406         DECIMAL(12,2),
+RS06505         DECIMAL(12,2),
+RS06506         DECIMAL(12,2),
+RS06605         DECIMAL(12,2),
+RS06606         DECIMAL(12,2),
+RS06705         DECIMAL(12,2),
+RS06706         DECIMAL(12,2),
+RS06805         DECIMAL(12,2),
+RS06806         DECIMAL(12,2),
+RS06905         DECIMAL(12,2),
+RS06906         DECIMAL(12,2),
+RS07005         DECIMAL(12,2),
+RS07006         DECIMAL(12,2),
 
-rs07105         DECIMAL(12,2),
-rs07106         DECIMAL(12,2),
+RS07105         DECIMAL(12,2),
+RS07106         DECIMAL(12,2),
 
-rs07205         DECIMAL(12,2),
-rs07206         DECIMAL(12,2),
+RS07205         DECIMAL(12,2),
+RS07206         DECIMAL(12,2),
 
-rs07305         DECIMAL(12,2),
-rs07306         DECIMAL(12,2),
+RS07305         DECIMAL(12,2),
+RS07306         DECIMAL(12,2),
 
-rs07405         DECIMAL(12,2),
-rs07406         DECIMAL(12,2)
+RS07405         DECIMAL(12,2),
+RS07406         DECIMAL(12,2)
 );
 fin2adbf;
 
@@ -449,255 +449,255 @@ $dsql = mysql_query("$dsqlt");
 $dotaz = "select * from fin2adbf";
 
 /* Vytvoøíme pole, která odpovídají jednotlivým položkám */
-$polozky[] = array("okres", "C", 3);
-$polozky[] = array("ico", "C", 8);
-$polozky[] = array("kodob", "C", 6);
-$polozky[] = array("datrok", "C", 4);
-$polozky[] = array("datmes", "C", 2);
-$polozky[] = array("typorg", "C", 2);
-$polozky[] = array("rs00101", "N", 15, 2);
-$polozky[] = array("rs00102", "N", 15, 2);
-$polozky[] = array("rs00103", "N", 15, 2);
-$polozky[] = array("rs00104", "N", 15, 2);
-$polozky[] = array("rs00201", "N", 15, 2);
-$polozky[] = array("rs00202", "N", 15, 2);
-$polozky[] = array("rs00203", "N", 15, 2);
-$polozky[] = array("rs00204", "N", 15, 2);
-$polozky[] = array("rs00301", "N", 15, 2);
-$polozky[] = array("rs00302", "N", 15, 2);
-$polozky[] = array("rs00303", "N", 15, 2);
-$polozky[] = array("rs00304", "N", 15, 2);
-$polozky[] = array("rs00401", "N", 15, 2);
-$polozky[] = array("rs00402", "N", 15, 2);
-$polozky[] = array("rs00403", "N", 15, 2);
-$polozky[] = array("rs00404", "N", 15, 2);
-$polozky[] = array("rs00501", "N", 15, 2);
-$polozky[] = array("rs00502", "N", 15, 2);
-$polozky[] = array("rs00503", "N", 15, 2);
-$polozky[] = array("rs00504", "N", 15, 2);
-$polozky[] = array("rs00601", "N", 15, 2);
-$polozky[] = array("rs00602", "N", 15, 2);
-$polozky[] = array("rs00603", "N", 15, 2);
-$polozky[] = array("rs00604", "N", 15, 2);
-$polozky[] = array("rs00701", "N", 15, 2);
-$polozky[] = array("rs00702", "N", 15, 2);
-$polozky[] = array("rs00703", "N", 15, 2);
-$polozky[] = array("rs00704", "N", 15, 2);
-$polozky[] = array("rs00801", "N", 15, 2);
-$polozky[] = array("rs00802", "N", 15, 2);
-$polozky[] = array("rs00803", "N", 15, 2);
-$polozky[] = array("rs00804", "N", 15, 2);
-$polozky[] = array("rs00901", "N", 15, 2);
-$polozky[] = array("rs00902", "N", 15, 2);
-$polozky[] = array("rs00903", "N", 15, 2);
-$polozky[] = array("rs00904", "N", 15, 2);
-$polozky[] = array("rs01001", "N", 15, 2);
-$polozky[] = array("rs01002", "N", 15, 2);
-$polozky[] = array("rs01003", "N", 15, 2);
-$polozky[] = array("rs01004", "N", 15, 2);
-$polozky[] = array("rs01101", "N", 15, 2);
-$polozky[] = array("rs01102", "N", 15, 2);
-$polozky[] = array("rs01103", "N", 15, 2);
-$polozky[] = array("rs01104", "N", 15, 2);
-$polozky[] = array("rs01201", "N", 15, 2);
-$polozky[] = array("rs01202", "N", 15, 2);
-$polozky[] = array("rs01203", "N", 15, 2);
-$polozky[] = array("rs01204", "N", 15, 2);
-$polozky[] = array("rs01301", "N", 15, 2);
-$polozky[] = array("rs01302", "N", 15, 2);
-$polozky[] = array("rs01303", "N", 15, 2);
-$polozky[] = array("rs01304", "N", 15, 2);
-$polozky[] = array("rs01401", "N", 15, 2);
-$polozky[] = array("rs01402", "N", 15, 2);
-$polozky[] = array("rs01403", "N", 15, 2);
-$polozky[] = array("rs01404", "N", 15, 2);
-$polozky[] = array("rs01501", "N", 15, 2);
-$polozky[] = array("rs01502", "N", 15, 2);
-$polozky[] = array("rs01503", "N", 15, 2);
-$polozky[] = array("rs01504", "N", 15, 2);
-$polozky[] = array("rs01601", "N", 15, 2);
-$polozky[] = array("rs01602", "N", 15, 2);
-$polozky[] = array("rs01603", "N", 15, 2);
-$polozky[] = array("rs01604", "N", 15, 2);
-$polozky[] = array("rs01701", "N", 15, 2);
-$polozky[] = array("rs01702", "N", 15, 2);
-$polozky[] = array("rs01703", "N", 15, 2);
-$polozky[] = array("rs01704", "N", 15, 2);
-$polozky[] = array("rs01801", "N", 15, 2);
-$polozky[] = array("rs01802", "N", 15, 2);
-$polozky[] = array("rs01803", "N", 15, 2);
-$polozky[] = array("rs01804", "N", 15, 2);
-$polozky[] = array("rs01901", "N", 15, 2);
-$polozky[] = array("rs01902", "N", 15, 2);
-$polozky[] = array("rs01903", "N", 15, 2);
-$polozky[] = array("rs01904", "N", 15, 2);
-$polozky[] = array("rs02001", "N", 15, 2);
-$polozky[] = array("rs02002", "N", 15, 2);
-$polozky[] = array("rs02003", "N", 15, 2);
-$polozky[] = array("rs02004", "N", 15, 2);
-$polozky[] = array("rs02101", "N", 15, 2);
-$polozky[] = array("rs02102", "N", 15, 2);
-$polozky[] = array("rs02103", "N", 15, 2);
-$polozky[] = array("rs02104", "N", 15, 2);
-$polozky[] = array("rs02201", "N", 15, 2);
-$polozky[] = array("rs02202", "N", 15, 2);
-$polozky[] = array("rs02203", "N", 15, 2);
-$polozky[] = array("rs02204", "N", 15, 2);
-$polozky[] = array("rs02301", "N", 15, 2);
-$polozky[] = array("rs02302", "N", 15, 2);
-$polozky[] = array("rs02303", "N", 15, 2);
-$polozky[] = array("rs02304", "N", 15, 2);
-$polozky[] = array("rs02401", "N", 15, 2);
-$polozky[] = array("rs02402", "N", 15, 2);
-$polozky[] = array("rs02403", "N", 15, 2);
-$polozky[] = array("rs02404", "N", 15, 2);
-$polozky[] = array("rs02501", "N", 15, 2);
-$polozky[] = array("rs02502", "N", 15, 2);
-$polozky[] = array("rs02503", "N", 15, 2);
-$polozky[] = array("rs02504", "N", 15, 2);
-$polozky[] = array("rs02601", "N", 15, 2);
-$polozky[] = array("rs02602", "N", 15, 2);
-$polozky[] = array("rs02603", "N", 15, 2);
-$polozky[] = array("rs02604", "N", 15, 2);
-$polozky[] = array("rs02701", "N", 15, 2);
-$polozky[] = array("rs02702", "N", 15, 2);
-$polozky[] = array("rs02703", "N", 15, 2);
-$polozky[] = array("rs02704", "N", 15, 2);
-$polozky[] = array("rs02801", "N", 15, 2);
-$polozky[] = array("rs02802", "N", 15, 2);
-$polozky[] = array("rs02803", "N", 15, 2);
-$polozky[] = array("rs02804", "N", 15, 2);
-$polozky[] = array("rs02901", "N", 15, 2);
-$polozky[] = array("rs02902", "N", 15, 2);
-$polozky[] = array("rs02903", "N", 15, 2);
-$polozky[] = array("rs02904", "N", 15, 2);
-$polozky[] = array("rs03001", "N", 15, 2);
-$polozky[] = array("rs03002", "N", 15, 2);
-$polozky[] = array("rs03003", "N", 15, 2);
-$polozky[] = array("rs03004", "N", 15, 2);
-$polozky[] = array("rs03101", "N", 15, 2);
-$polozky[] = array("rs03102", "N", 15, 2);
-$polozky[] = array("rs03103", "N", 15, 2);
-$polozky[] = array("rs03104", "N", 15, 2);
-$polozky[] = array("rs03201", "N", 15, 2);
-$polozky[] = array("rs03202", "N", 15, 2);
-$polozky[] = array("rs03203", "N", 15, 2);
-$polozky[] = array("rs03204", "N", 15, 2);
-$polozky[] = array("rs03301", "N", 15, 2);
-$polozky[] = array("rs03302", "N", 15, 2);
-$polozky[] = array("rs03303", "N", 15, 2);
-$polozky[] = array("rs03304", "N", 15, 2);
-$polozky[] = array("rs03401", "N", 15, 2);
-$polozky[] = array("rs03402", "N", 15, 2);
-$polozky[] = array("rs03403", "N", 15, 2);
-$polozky[] = array("rs03404", "N", 15, 2);
-$polozky[] = array("rs03501", "N", 15, 2);
-$polozky[] = array("rs03502", "N", 15, 2);
-$polozky[] = array("rs03503", "N", 15, 2);
-$polozky[] = array("rs03504", "N", 15, 2);
-$polozky[] = array("rs03601", "N", 15, 2);
-$polozky[] = array("rs03602", "N", 15, 2);
-$polozky[] = array("rs03603", "N", 15, 2);
-$polozky[] = array("rs03604", "N", 15, 2);
-$polozky[] = array("rs03701", "N", 15, 2);
-$polozky[] = array("rs03702", "N", 15, 2);
-$polozky[] = array("rs03703", "N", 15, 2);
-$polozky[] = array("rs03704", "N", 15, 2);
-$polozky[] = array("rs03801", "N", 15, 2);
-$polozky[] = array("rs03802", "N", 15, 2);
-$polozky[] = array("rs03803", "N", 15, 2);
-$polozky[] = array("rs03804", "N", 15, 2);
-$polozky[] = array("rs03901", "N", 15, 2);
-$polozky[] = array("rs03902", "N", 15, 2);
-$polozky[] = array("rs03903", "N", 15, 2);
-$polozky[] = array("rs03904", "N", 15, 2);
-$polozky[] = array("rs04001", "N", 15, 2);
-$polozky[] = array("rs04002", "N", 15, 2);
-$polozky[] = array("rs04003", "N", 15, 2);
-$polozky[] = array("rs04004", "N", 15, 2);
+$polozky[] = array("OKRES", "C", 3);
+$polozky[] = array("ICO", "C", 8);
+$polozky[] = array("KODOB", "C", 6);
+$polozky[] = array("DATROK", "C", 4);
+$polozky[] = array("DATMES", "C", 2);
+$polozky[] = array("TYPORG", "C", 2);
+$polozky[] = array("RS00101", "N", 15, 2);
+$polozky[] = array("RS00102", "N", 15, 2);
+$polozky[] = array("RS00103", "N", 15, 2);
+$polozky[] = array("RS00104", "N", 15, 2);
+$polozky[] = array("RS00201", "N", 15, 2);
+$polozky[] = array("RS00202", "N", 15, 2);
+$polozky[] = array("RS00203", "N", 15, 2);
+$polozky[] = array("RS00204", "N", 15, 2);
+$polozky[] = array("RS00301", "N", 15, 2);
+$polozky[] = array("RS00302", "N", 15, 2);
+$polozky[] = array("RS00303", "N", 15, 2);
+$polozky[] = array("RS00304", "N", 15, 2);
+$polozky[] = array("RS00401", "N", 15, 2);
+$polozky[] = array("RS00402", "N", 15, 2);
+$polozky[] = array("RS00403", "N", 15, 2);
+$polozky[] = array("RS00404", "N", 15, 2);
+$polozky[] = array("RS00501", "N", 15, 2);
+$polozky[] = array("RS00502", "N", 15, 2);
+$polozky[] = array("RS00503", "N", 15, 2);
+$polozky[] = array("RS00504", "N", 15, 2);
+$polozky[] = array("RS00601", "N", 15, 2);
+$polozky[] = array("RS00602", "N", 15, 2);
+$polozky[] = array("RS00603", "N", 15, 2);
+$polozky[] = array("RS00604", "N", 15, 2);
+$polozky[] = array("RS00701", "N", 15, 2);
+$polozky[] = array("RS00702", "N", 15, 2);
+$polozky[] = array("RS00703", "N", 15, 2);
+$polozky[] = array("RS00704", "N", 15, 2);
+$polozky[] = array("RS00801", "N", 15, 2);
+$polozky[] = array("RS00802", "N", 15, 2);
+$polozky[] = array("RS00803", "N", 15, 2);
+$polozky[] = array("RS00804", "N", 15, 2);
+$polozky[] = array("RS00901", "N", 15, 2);
+$polozky[] = array("RS00902", "N", 15, 2);
+$polozky[] = array("RS00903", "N", 15, 2);
+$polozky[] = array("RS00904", "N", 15, 2);
+$polozky[] = array("RS01001", "N", 15, 2);
+$polozky[] = array("RS01002", "N", 15, 2);
+$polozky[] = array("RS01003", "N", 15, 2);
+$polozky[] = array("RS01004", "N", 15, 2);
+$polozky[] = array("RS01101", "N", 15, 2);
+$polozky[] = array("RS01102", "N", 15, 2);
+$polozky[] = array("RS01103", "N", 15, 2);
+$polozky[] = array("RS01104", "N", 15, 2);
+$polozky[] = array("RS01201", "N", 15, 2);
+$polozky[] = array("RS01202", "N", 15, 2);
+$polozky[] = array("RS01203", "N", 15, 2);
+$polozky[] = array("RS01204", "N", 15, 2);
+$polozky[] = array("RS01301", "N", 15, 2);
+$polozky[] = array("RS01302", "N", 15, 2);
+$polozky[] = array("RS01303", "N", 15, 2);
+$polozky[] = array("RS01304", "N", 15, 2);
+$polozky[] = array("RS01401", "N", 15, 2);
+$polozky[] = array("RS01402", "N", 15, 2);
+$polozky[] = array("RS01403", "N", 15, 2);
+$polozky[] = array("RS01404", "N", 15, 2);
+$polozky[] = array("RS01501", "N", 15, 2);
+$polozky[] = array("RS01502", "N", 15, 2);
+$polozky[] = array("RS01503", "N", 15, 2);
+$polozky[] = array("RS01504", "N", 15, 2);
+$polozky[] = array("RS01601", "N", 15, 2);
+$polozky[] = array("RS01602", "N", 15, 2);
+$polozky[] = array("RS01603", "N", 15, 2);
+$polozky[] = array("RS01604", "N", 15, 2);
+$polozky[] = array("RS01701", "N", 15, 2);
+$polozky[] = array("RS01702", "N", 15, 2);
+$polozky[] = array("RS01703", "N", 15, 2);
+$polozky[] = array("RS01704", "N", 15, 2);
+$polozky[] = array("RS01801", "N", 15, 2);
+$polozky[] = array("RS01802", "N", 15, 2);
+$polozky[] = array("RS01803", "N", 15, 2);
+$polozky[] = array("RS01804", "N", 15, 2);
+$polozky[] = array("RS01901", "N", 15, 2);
+$polozky[] = array("RS01902", "N", 15, 2);
+$polozky[] = array("RS01903", "N", 15, 2);
+$polozky[] = array("RS01904", "N", 15, 2);
+$polozky[] = array("RS02001", "N", 15, 2);
+$polozky[] = array("RS02002", "N", 15, 2);
+$polozky[] = array("RS02003", "N", 15, 2);
+$polozky[] = array("RS02004", "N", 15, 2);
+$polozky[] = array("RS02101", "N", 15, 2);
+$polozky[] = array("RS02102", "N", 15, 2);
+$polozky[] = array("RS02103", "N", 15, 2);
+$polozky[] = array("RS02104", "N", 15, 2);
+$polozky[] = array("RS02201", "N", 15, 2);
+$polozky[] = array("RS02202", "N", 15, 2);
+$polozky[] = array("RS02203", "N", 15, 2);
+$polozky[] = array("RS02204", "N", 15, 2);
+$polozky[] = array("RS02301", "N", 15, 2);
+$polozky[] = array("RS02302", "N", 15, 2);
+$polozky[] = array("RS02303", "N", 15, 2);
+$polozky[] = array("RS02304", "N", 15, 2);
+$polozky[] = array("RS02401", "N", 15, 2);
+$polozky[] = array("RS02402", "N", 15, 2);
+$polozky[] = array("RS02403", "N", 15, 2);
+$polozky[] = array("RS02404", "N", 15, 2);
+$polozky[] = array("RS02501", "N", 15, 2);
+$polozky[] = array("RS02502", "N", 15, 2);
+$polozky[] = array("RS02503", "N", 15, 2);
+$polozky[] = array("RS02504", "N", 15, 2);
+$polozky[] = array("RS02601", "N", 15, 2);
+$polozky[] = array("RS02602", "N", 15, 2);
+$polozky[] = array("RS02603", "N", 15, 2);
+$polozky[] = array("RS02604", "N", 15, 2);
+$polozky[] = array("RS02701", "N", 15, 2);
+$polozky[] = array("RS02702", "N", 15, 2);
+$polozky[] = array("RS02703", "N", 15, 2);
+$polozky[] = array("RS02704", "N", 15, 2);
+$polozky[] = array("RS02801", "N", 15, 2);
+$polozky[] = array("RS02802", "N", 15, 2);
+$polozky[] = array("RS02803", "N", 15, 2);
+$polozky[] = array("RS02804", "N", 15, 2);
+$polozky[] = array("RS02901", "N", 15, 2);
+$polozky[] = array("RS02902", "N", 15, 2);
+$polozky[] = array("RS02903", "N", 15, 2);
+$polozky[] = array("RS02904", "N", 15, 2);
+$polozky[] = array("RS03001", "N", 15, 2);
+$polozky[] = array("RS03002", "N", 15, 2);
+$polozky[] = array("RS03003", "N", 15, 2);
+$polozky[] = array("RS03004", "N", 15, 2);
+$polozky[] = array("RS03101", "N", 15, 2);
+$polozky[] = array("RS03102", "N", 15, 2);
+$polozky[] = array("RS03103", "N", 15, 2);
+$polozky[] = array("RS03104", "N", 15, 2);
+$polozky[] = array("RS03201", "N", 15, 2);
+$polozky[] = array("RS03202", "N", 15, 2);
+$polozky[] = array("RS03203", "N", 15, 2);
+$polozky[] = array("RS03204", "N", 15, 2);
+$polozky[] = array("RS03301", "N", 15, 2);
+$polozky[] = array("RS03302", "N", 15, 2);
+$polozky[] = array("RS03303", "N", 15, 2);
+$polozky[] = array("RS03304", "N", 15, 2);
+$polozky[] = array("RS03401", "N", 15, 2);
+$polozky[] = array("RS03402", "N", 15, 2);
+$polozky[] = array("RS03403", "N", 15, 2);
+$polozky[] = array("RS03404", "N", 15, 2);
+$polozky[] = array("RS03501", "N", 15, 2);
+$polozky[] = array("RS03502", "N", 15, 2);
+$polozky[] = array("RS03503", "N", 15, 2);
+$polozky[] = array("RS03504", "N", 15, 2);
+$polozky[] = array("RS03601", "N", 15, 2);
+$polozky[] = array("RS03602", "N", 15, 2);
+$polozky[] = array("RS03603", "N", 15, 2);
+$polozky[] = array("RS03604", "N", 15, 2);
+$polozky[] = array("RS03701", "N", 15, 2);
+$polozky[] = array("RS03702", "N", 15, 2);
+$polozky[] = array("RS03703", "N", 15, 2);
+$polozky[] = array("RS03704", "N", 15, 2);
+$polozky[] = array("RS03801", "N", 15, 2);
+$polozky[] = array("RS03802", "N", 15, 2);
+$polozky[] = array("RS03803", "N", 15, 2);
+$polozky[] = array("RS03804", "N", 15, 2);
+$polozky[] = array("RS03901", "N", 15, 2);
+$polozky[] = array("RS03902", "N", 15, 2);
+$polozky[] = array("RS03903", "N", 15, 2);
+$polozky[] = array("RS03904", "N", 15, 2);
+$polozky[] = array("RS04001", "N", 15, 2);
+$polozky[] = array("RS04002", "N", 15, 2);
+$polozky[] = array("RS04003", "N", 15, 2);
+$polozky[] = array("RS04004", "N", 15, 2);
 
-$polozky[] = array("rs04101", "N", 15, 2);
-$polozky[] = array("rs04102", "N", 15, 2);
-$polozky[] = array("rs04103", "N", 15, 2);
-$polozky[] = array("rs04104", "N", 15, 2);
+$polozky[] = array("RS04101", "N", 15, 2);
+$polozky[] = array("RS04102", "N", 15, 2);
+$polozky[] = array("RS04103", "N", 15, 2);
+$polozky[] = array("RS04104", "N", 15, 2);
 
-$polozky[] = array("rs04201", "N", 15, 2);
-$polozky[] = array("rs04202", "N", 15, 2);
-$polozky[] = array("rs04203", "N", 15, 2);
-$polozky[] = array("rs04204", "N", 15, 2);
+$polozky[] = array("RS04201", "N", 15, 2);
+$polozky[] = array("RS04202", "N", 15, 2);
+$polozky[] = array("RS04203", "N", 15, 2);
+$polozky[] = array("RS04204", "N", 15, 2);
 
-$polozky[] = array("rs04301", "N", 15, 2);
-$polozky[] = array("rs04302", "N", 15, 2);
-$polozky[] = array("rs04303", "N", 15, 2);
-$polozky[] = array("rs04304", "N", 15, 2);
+$polozky[] = array("RS04301", "N", 15, 2);
+$polozky[] = array("RS04302", "N", 15, 2);
+$polozky[] = array("RS04303", "N", 15, 2);
+$polozky[] = array("RS04304", "N", 15, 2);
 
-$polozky[] = array("rs04405", "N", 15, 2);
-$polozky[] = array("rs04406", "N", 15, 2);
-$polozky[] = array("rs04505", "N", 15, 2);
-$polozky[] = array("rs04506", "N", 15, 2);
-$polozky[] = array("rs04605", "N", 15, 2);
-$polozky[] = array("rs04606", "N", 15, 2);
-$polozky[] = array("rs04705", "N", 15, 2);
-$polozky[] = array("rs04706", "N", 15, 2);
-$polozky[] = array("rs04805", "N", 15, 2);
-$polozky[] = array("rs04806", "N", 15, 2);
-$polozky[] = array("rs04905", "N", 15, 2);
-$polozky[] = array("rs04906", "N", 15, 2);
-$polozky[] = array("rs05005", "N", 15, 2);
-$polozky[] = array("rs05006", "N", 15, 2);
-$polozky[] = array("rs05105", "N", 15, 2);
-$polozky[] = array("rs05106", "N", 15, 2);
-$polozky[] = array("rs05205", "N", 15, 2);
-$polozky[] = array("rs05206", "N", 15, 2);
-$polozky[] = array("rs05305", "N", 15, 2);
-$polozky[] = array("rs05306", "N", 15, 2);
-$polozky[] = array("rs05405", "N", 15, 2);
-$polozky[] = array("rs05406", "N", 15, 2);
-$polozky[] = array("rs05505", "N", 15, 2);
-$polozky[] = array("rs05506", "N", 15, 2);
-$polozky[] = array("rs05605", "N", 15, 2);
-$polozky[] = array("rs05606", "N", 15, 2);
-$polozky[] = array("rs05705", "N", 15, 2);
-$polozky[] = array("rs05706", "N", 15, 2);
-$polozky[] = array("rs05805", "N", 15, 2);
-$polozky[] = array("rs05806", "N", 15, 2);
-$polozky[] = array("rs05905", "N", 15, 2);
-$polozky[] = array("rs05906", "N", 15, 2);
-$polozky[] = array("rs06005", "N", 15, 2);
-$polozky[] = array("rs06006", "N", 15, 2);
-$polozky[] = array("rs06105", "N", 15, 2);
-$polozky[] = array("rs06106", "N", 15, 2);
-$polozky[] = array("rs06205", "N", 15, 2);
-$polozky[] = array("rs06206", "N", 15, 2);
+$polozky[] = array("RS04405", "N", 15, 2);
+$polozky[] = array("RS04406", "N", 15, 2);
+$polozky[] = array("RS04505", "N", 15, 2);
+$polozky[] = array("RS04506", "N", 15, 2);
+$polozky[] = array("RS04605", "N", 15, 2);
+$polozky[] = array("RS04606", "N", 15, 2);
+$polozky[] = array("RS04705", "N", 15, 2);
+$polozky[] = array("RS04706", "N", 15, 2);
+$polozky[] = array("RS04805", "N", 15, 2);
+$polozky[] = array("RS04806", "N", 15, 2);
+$polozky[] = array("RS04905", "N", 15, 2);
+$polozky[] = array("RS04906", "N", 15, 2);
+$polozky[] = array("RS05005", "N", 15, 2);
+$polozky[] = array("RS05006", "N", 15, 2);
+$polozky[] = array("RS05105", "N", 15, 2);
+$polozky[] = array("RS05106", "N", 15, 2);
+$polozky[] = array("RS05205", "N", 15, 2);
+$polozky[] = array("RS05206", "N", 15, 2);
+$polozky[] = array("RS05305", "N", 15, 2);
+$polozky[] = array("RS05306", "N", 15, 2);
+$polozky[] = array("RS05405", "N", 15, 2);
+$polozky[] = array("RS05406", "N", 15, 2);
+$polozky[] = array("RS05505", "N", 15, 2);
+$polozky[] = array("RS05506", "N", 15, 2);
+$polozky[] = array("RS05605", "N", 15, 2);
+$polozky[] = array("RS05606", "N", 15, 2);
+$polozky[] = array("RS05705", "N", 15, 2);
+$polozky[] = array("RS05706", "N", 15, 2);
+$polozky[] = array("RS05805", "N", 15, 2);
+$polozky[] = array("RS05806", "N", 15, 2);
+$polozky[] = array("RS05905", "N", 15, 2);
+$polozky[] = array("RS05906", "N", 15, 2);
+$polozky[] = array("RS06005", "N", 15, 2);
+$polozky[] = array("RS06006", "N", 15, 2);
+$polozky[] = array("RS06105", "N", 15, 2);
+$polozky[] = array("RS06106", "N", 15, 2);
+$polozky[] = array("RS06205", "N", 15, 2);
+$polozky[] = array("RS06206", "N", 15, 2);
 
-$polozky[] = array("rs06305", "N", 15, 2);
-$polozky[] = array("rs06306", "N", 15, 2);
-$polozky[] = array("rs06405", "N", 15, 2);
-$polozky[] = array("rs06406", "N", 15, 2);
-$polozky[] = array("rs06505", "N", 15, 2);
-$polozky[] = array("rs06506", "N", 15, 2);
-$polozky[] = array("rs06605", "N", 15, 2);
-$polozky[] = array("rs06606", "N", 15, 2);
-$polozky[] = array("rs06705", "N", 15, 2);
-$polozky[] = array("rs06706", "N", 15, 2);
-$polozky[] = array("rs06805", "N", 15, 2);
-$polozky[] = array("rs06806", "N", 15, 2);
-$polozky[] = array("rs06905", "N", 15, 2);
-$polozky[] = array("rs06906", "N", 15, 2);
-$polozky[] = array("rs07005", "N", 15, 2);
-$polozky[] = array("rs07006", "N", 15, 2);
+$polozky[] = array("RS06305", "N", 15, 2);
+$polozky[] = array("RS06306", "N", 15, 2);
+$polozky[] = array("RS06405", "N", 15, 2);
+$polozky[] = array("RS06406", "N", 15, 2);
+$polozky[] = array("RS06505", "N", 15, 2);
+$polozky[] = array("RS06506", "N", 15, 2);
+$polozky[] = array("RS06605", "N", 15, 2);
+$polozky[] = array("RS06606", "N", 15, 2);
+$polozky[] = array("RS06705", "N", 15, 2);
+$polozky[] = array("RS06706", "N", 15, 2);
+$polozky[] = array("RS06805", "N", 15, 2);
+$polozky[] = array("RS06806", "N", 15, 2);
+$polozky[] = array("RS06905", "N", 15, 2);
+$polozky[] = array("RS06906", "N", 15, 2);
+$polozky[] = array("RS07005", "N", 15, 2);
+$polozky[] = array("RS07006", "N", 15, 2);
 
-$polozky[] = array("rs07105", "N", 15, 2);
-$polozky[] = array("rs07106", "N", 15, 2);
+$polozky[] = array("RS07105", "N", 15, 2);
+$polozky[] = array("RS07106", "N", 15, 2);
 
-$polozky[] = array("rs07205", "N", 15, 2);
-$polozky[] = array("rs07206", "N", 15, 2);
+$polozky[] = array("RS07205", "N", 15, 2);
+$polozky[] = array("RS07206", "N", 15, 2);
 
-$polozky[] = array("rs07305", "N", 15, 2);
-$polozky[] = array("rs07306", "N", 15, 2);
+$polozky[] = array("RS07305", "N", 15, 2);
+$polozky[] = array("RS07306", "N", 15, 2);
 
-$polozky[] = array("rs07405", "N", 15, 2);
-$polozky[] = array("rs07406", "N", 15, 2);
+$polozky[] = array("RS07405", "N", 15, 2);
+$polozky[] = array("RS07406", "N", 15, 2);
 
 // Získáme unikátní název DBF souboru
 $nazev_souboru = "../tmp/".uniqid("soubor", true) . ".dbf";
