@@ -1154,6 +1154,12 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid "." SELECT".
 $dsql = mysql_query("$dsqlt");
 
 
+
+$dsqlt = "UPDATE F$kli_vxcf"."_uctprcvykaz".$kli_uzid." ".
+" SET r11=r11+r12, rk11=rk11+rk12, rn11=rn11+rn12  WHERE oc = $cislo_oc ";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." ".
 " SELECT * FROM F$kli_vxcf"."_uctprcvykaz".$kli_uzid." WHERE oc = $cislo_oc ";
 //echo $dsqlt;
@@ -3522,7 +3528,7 @@ Výkaz zostavený dòa:&nbsp;<input type="text" name="daz" id="daz" size="10" />
 </tr>
 <tr>
 <td class="bmenu" colspan="1" align="center" style="font-weight:normal;">12</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Dopravné prostriedky / 023-(083,092A)</td>
+<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;z toho: Dopravné prostriedky / 023-(083,092A)</td>
 <td class="bmenu" colspan="1" align="center"><input type="text" name="r12" id="r12" size="10" /></td>
 <td class="bmenu" colspan="1" align="center"><input type="text" name="rk12" id="rk12" size="10" /></td>
 <td class="bmenu" colspan="1" align="center"><input type="text" name="rn12" id="rn12" size="10" /></td>
