@@ -107,6 +107,22 @@ window.open('../analyzy/str_zisk.php?cislo_zak=' + h_oc + '&copern=10&drupoh=1&p
 
                 }
 
+function VyslZakVsetky()
+                {
+
+window.open('../analyzy/str_zisk.php?vsetkystr=1&csv=0&cislo_zak=0&copern=10&drupoh=1&page=1&h_min=<?php echo $h_min; ?>&h_obdp=<?php echo $h_obdp; ?>&h_obdk=<?php echo $h_obdk; ?>&typ=PDF&zana=1&druhana=<?php echo $druhana; ?>',
+ '_blank', 'width=950, height=900, top=0, left=200, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+
+function VyslZakVsetkyCsv()
+                {
+
+window.open('../analyzy/str_zisk.php?vsetkystr=1&csv=1&cislo_zak=0&copern=10&drupoh=1&page=1&h_min=<?php echo $h_min; ?>&h_obdp=<?php echo $h_obdp; ?>&h_obdk=<?php echo $h_obdk; ?>&typ=PDF&zana=1&druhana=<?php echo $druhana; ?>',
+ '_blank', 'width=950, height=900, top=0, left=200, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+
 function Mat( h_oc )
                 {
 
@@ -538,11 +554,11 @@ Obdobie <select size="1" name="h_obdp" id="h_obdp" >
 
 
 <td class="<?php echo $tr06; ?>" width="9%" >
-<a href="#" onClick="window.open('../analyzy/str_zisk.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&zana=1&vsetkystr=1', '_blank', 'width=950, height=900, top=0, left=200, status=yes, resizable=yes, scrollbars=yes' )">
+<a href="#" onClick="VyslZakVsetky();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Výsledok za všetky Strediská Vytlaèi vo formáte PDF' ></a>
 
 <img src='../obr/export.png' width=20 height=15 border=0 title='Výsledovka za všetky Strediská - EXPORT do CSV' 
-onClick="window.open('../analyzy/str_zisk.php?csv=1&copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&zana=1&vsetkystr=1', '_blank', 'width=950, height=900, top=0, left=200, status=yes, resizable=yes, scrollbars=yes' )" >
+onClick="VyslZakVsetkyCsv();" >
 
 <?php                     } ?>
 

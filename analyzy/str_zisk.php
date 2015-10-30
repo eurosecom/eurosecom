@@ -868,7 +868,7 @@ if( $dat_sk == '00.00.0000' ) $dat_sk=$dau_sk;
 
 if( $i == 0 )
      {
-  $text = "stredisko".";"."ucet".";"."nazov".";"."zostatok madat".";"."zostatok dal"."\r\n"; 
+  $text = "stredisko".";"."str nazov".";"."ucet".";"."nazov".";"."zostatok madat".";"."zostatok dal"."\r\n"; 
 
   fwrite($soubor, $text);
 
@@ -878,7 +878,7 @@ $zmd=$hlavicka->zmd; $ezmd=str_replace(".",",",$zmd);
 $zdl=$hlavicka->zdl; $ezdl=str_replace(".",",",$zdl);
 $zos=$hlavicka->zos; $ezos=str_replace(".",",",$zos);
 
-  $text = $hlavicka->str.";".$hlavicka->uce.";".$hlavicka->nuc.";".$ezmd.";".$ezdl."\r\n"; 
+  $text = $hlavicka->str.";".$hlavicka->nst.";".$hlavicka->uce.";".$hlavicka->nuc.";".$ezmd.";".$ezdl."\r\n"; 
 
   fwrite($soubor, $text);
 
