@@ -1130,6 +1130,75 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD zod DATE NOT NULL AFTER px01";
 $vysledek = mysql_query("$sql");
 }
+//zmeny rok 2015
+$sql = "SELECT r20s2 FROM F".$kli_vxcf."_uctpriznanie_dmv";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD new2015 DECIMAL(2,0) DEFAULT 0 AFTER r35";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r12doniz DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r13s1zni25 DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r13s1zni20 DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r13s1zni15 DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r13s2zni25 DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r13s2zni20 DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r13s2zni15 DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r13s1zvy10 DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r13s1zvy20 DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r13s2zvy10 DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r13s2zvy20 DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r14s1 DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r14s2 DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r15s1zni50a DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r15s1zni50b DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r15s1zni50c DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r16s1 DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r16s2 DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r17kombi DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r18s1 DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r18s2 DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r19s1mes DECIMAL(10,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r19s1dni DECIMAL(10,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r19s2mes DECIMAL(10,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r19s2dni DECIMAL(10,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r20s1 DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r20s2 DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+}
 
 //koniec uprav def. tabulky
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv";
