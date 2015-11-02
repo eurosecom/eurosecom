@@ -806,7 +806,7 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
 </div>
 <a href="../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_vysvetlivky.pdf" target="_blank"
    title="Vysvetlivky k ˙Ëtovnej z·vierke" class="toleft line-box box-bluedefault">
- <img src="../obr/info.png"></a> <!-- dopyt, in˝ obr·zok -->
+ <img src="../obr/info.png"></a>
 <a href="#" onclick="GenSuvPod();" title="Nastavenie generovania, predch·dzaj˙ceho obdobia a zaokr˙hlenia"
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
 <a href="#" onclick="KompletPOD2014doxml();" title="Export do XML"
@@ -1039,7 +1039,7 @@ window.open('../ucto/poznamky_muj2014.php?copern=1&drupoh=1&page=1',
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
 <a href="#" onclick="KompletMUJ2014doxml();" title="Export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
-</FORM> <!-- dopyt, preveriù Ëi d·va d·tumy a typ do uz·vierok -->
+</FORM>
 
 <div class="toright" style="width:216px; margin-right:-4px;">
  <div class="toleft line-box-text" style="width:140px;">V˝kaz ziskov a str·t M⁄J</div>
@@ -1097,7 +1097,7 @@ var h_zos = document.forms.formcf1n.h_zos.value;
 var h_sch = document.forms.formcf1n.h_sch.value;
 var ktoracast = document.forms.formcf1n.ktoracast.value;
 
-window.open('../ucto/cashflow2011.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&ktoracast=' + ktoracast + '&page=1&tis=0&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+window.open('../ucto/cashflow2011.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&ktoracast=' + ktoracast + '&page=1&tis=0&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
                 }
 
 function CASHEUR2011()
@@ -1106,14 +1106,19 @@ var h_zos = document.forms.formcf1n.h_zos.value;
 var h_sch = document.forms.formcf1n.h_sch.value;
 var ktoracast = document.forms.formcf1n.ktoracast.value;
 
-window.open('../ucto/cashflow2011.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&ktoracast=' + ktoracast + '&page=1&tis=1&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+window.open('../ucto/cashflow2011.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&ktoracast=' + ktoracast + '&page=1&tis=1&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
                 }
 
 function CASHGEN2011()
                 {
-window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
 
                 }
+  function CASHPREDCH2011()
+  {
+   window.open('../ucto/oprsys.php?copern=308&drupoh=24&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+
 </script>
 
 <div class="line-area" style="margin-bottom:8px;"> <!-- cash flow priama -->
@@ -1143,7 +1148,7 @@ if ( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
 </div>
 <div>
 <?php if ( $fir_big == 1 ) { ?>
- <select size="1" name="ktoracast" id="ktoracast"> <!-- dopyt, preveriù Ëi vojde -->
+ <select size="1" name="ktoracast" id="ktoracast">
   <option value="0">vöetky Ëasti</option>
   <option value="1">Ëasù 1</option>
   <option value="2">Ëasù 2</option>
@@ -1160,14 +1165,13 @@ if ( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
 </div>
 <a href="#" onclick="CASHGEN2011();" title="Nastavenie generovania"
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-<a href="#" onclick="window.open('../ucto/oprsys.php?copern=308&drupoh=24&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');"
-   title="Upraviù predch·dzaj˙ce obdobie" class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, prerobiù na function -->
+<a href="#" onclick="CASHPREDCH2011();" title="Nastavenie predch·dzaj˙ceho obdobia"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, preveriù function, nejde mi vyrobiù cf -->
 </FORM>
 </div> <!-- .line-area cf priama -->
 
 
 <div class="line-area"> <!-- priznanie po -->
-<FORM name="formp1" method="post" action="#"> <!-- dopyt, <form> m· nejak˝ v˝znam -->
 <div class="toleft line-box"></div>
 <a href="#" onclick="TlacPriznanie();" title="Zobraziù v PDF"
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
@@ -1182,7 +1186,6 @@ if ( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
 <a href="#" onclick="UpravPriznanie();" title="Upraviù hodnoty"
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</FORM>
 </div> <!-- .line-area priznanie po -->
 
 <?php
@@ -1241,6 +1244,17 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+  function SuvPredchNUJ2013()
+  {
+   window.open('../ucto/oprsys.php?copern=308&drupoh=32&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+
+  function VzasPredchNUJ2013()
+  {
+   window.open('../ucto/oprsys.php?copern=308&drupoh=31&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+
+
 </script>
 
 <div class="line-area" style="margin-top:8px;"> <!-- uct.zavierka pu nuj -->
@@ -1278,9 +1292,8 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
  <div class="toleft line-box-text" style="width:140px;">V˝kaz ziskov a str·t N⁄J</div>
  <a href="#" onclick="VysledovkaNO2012();" title="<?php echo $mena1; ?>· + centy - zobraziù v PDF"
     class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
- <a href="#" onclick="window.open('../ucto/oprsys.php?copern=308&drupoh=31&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');"
-  title="Nastavenie predch·dzaj˙ceho obdobia"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, cez funkciu -->
+ <a href="#" onclick="VzasPredchNUJ2013();" title="Nastavenie predch·dzaj˙ceho obdobia"
+    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, preveriù -->
 </div>
 <div class="toright" style="width:192px;">
  <div class="toleft line-box-text" style="width:76px;">S˙vaha NUJ</div>
@@ -1288,21 +1301,16 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
     class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
  <a href="#" onclick="GenSuvNo();" title="Nastavenie generovania"
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
- <a href="#" onclick="window.open('../ucto/oprsys.php?copern=308&drupoh=32&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');" title="Nastavenie predch·dzaj˙ceho obdobia"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, cez funkciu -->
+ <a href="#" onclick="SuvPredchNUJ2013();" title="Nastavenie predch·dzaj˙ceho obdobia"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, preveriù -->
 </div>
 </div> <!-- .line-area uct.zavierka pu nuj -->
 <?php                          } ?>
 
-<?php
-}
-//koniec $kli_nezis == 1
-?>
-
 <?php $vsetky=1; ?>
-<?php if ( $_SERVER['SERVER_NAME'] == "localhost" OR $vsetky == 1 ) { ?>
-
-<?php if ( $kli_nezis == 1 ) { ?> <!-- dopyt, nemÙûeme spojiù s predch·dzaj˙cim "if ( $kli_nezis == 1 )" -->
+<?php
+if ( $_SERVER['SERVER_NAME'] == "localhost" OR $vsetky == 1 ) { //dopyt, preËo je v podmienke "localhost"
+?>
 <div class="line-area" style="margin-bottom:8px;"> <!-- poznamky pu nuj -->
 <FORM name="formpoz11no" method="post" action="#">
 <a href="#" onclick="TlacPoznamky2011no();" title="Zobraziù v PDF"
@@ -1334,8 +1342,10 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </FORM>
 </div> <!-- .line-area poznamky pu nuj -->
-<?php                        } ?>
-<?php                                                               } ?>
+<?php                                                         } ?>
+<?php
+}
+?>
 
 <?php
 //koniec podvojne
@@ -1400,9 +1410,15 @@ var h_drp = document.forms.formuzfo2014.h_drp.value;
 window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&suborxml=1&celeeura=1&uzav=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 
                 }
+
+  function vmazprech2014()
+  {
+   window.open('../ucto/oprsys.php?copern=308&drupoh=42&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+
 </script>
 
-<?php if ( $kli_vrok >= 2014 ) { ?> <!-- dopyt, t·to podmienky tu m· v˝znam, keÔ je to osekanÈ pre rok 2015 -->
+<?php if ( $kli_vrok >= 2014 ) { ?>
 <div class="line-area" style="margin-bottom:8px;"> <!-- uct.zavierka ju -->
 <FORM name="formuzfo2014" method="post" action="#">
 <a href="#" onclick="uzavfo2014();" title="<?php echo $mena1; ?>· + centy - zobraziù v PDF"
@@ -1434,35 +1450,19 @@ window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drup
 </div>
 <a href="../dokumenty/vykazy_ju2014/fo2014/uzfo_v14_vysvetlivky.pdf" target="_blank"
    title="Vysvetlivky k ˙Ëtovnej z·vierke" class="toleft line-box box-bluedefault">
- <img src="../obr/info.png"></a> <!-- dopyt, in˝ obr·zok -->
+ <img src="../obr/info.png"></a>
 <a href="#" onclick="uzavfo2014xml();" title="Export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
- <a href="#" onclick="window.open('../ucto/oprsys.php?copern=308&drupoh=42&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');"
-  title="Nastavenie predch·dzaj˙ceho obdobia v˝kazu o majetku a z·v‰zkoch"
-  class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, cez funkciu -->
+ <a href="#" onclick="vmazprech2014();" title="Nastavenie predch·dzaj˙ceho obdobia v˝kazu o majetku a z·v‰zkoch"
+  class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, preveriù -->
 </FORM>
 </div> <!-- .line-area uct.zavierka ju -->
-
 <?php                          } ?>
 
 
 <?php if ( $kli_vrok >= 2012 ) { ?>
 
 <script type="text/javascript">
-
-function PriVydNOJU2012()
-                {
-var h_zos = document.forms.formuznoj.h_zos.value;
-
-window.open('../ucto/privyd_noju.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function MajZavNOJU2012()
-                {
-var h_zos = document.forms.formuznoj.h_zos.value;
-
-window.open('../ucto/majzav_noju.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
 
 function GenPriVydNOJU()
                 {
@@ -1532,38 +1532,25 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 </div>
 <a href="#" onclick="KompletNO2013doxml();" title="Export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
+ <a href="#" onclick="GenMajZavNOJU();" title="Nastavenie generovania riadkov v˝kazu o majetku a z·v‰zkov N⁄J"
+    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+ <a href="#" onclick="GenMajZavNOJU();" title="Nastavenie predch·dzaj˙ceho obdobia v˝kazu o majetku a z·v‰zkov N⁄J"
+    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+ <a href="#" onclick="GenPriVydNOJU();" title="Nastavenie generovania riadkov v˝kazu o prÌjmoch a v˝davkoch N⁄J"
+    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, spojiù generovanie -->
 </FORM>
-
-<div class="toright" style="width:270px;"> <!-- dopyt, musÌ tu byù? -->
- <div class="toleft line-box-text">V˝kaz o maj. a z·v‰z. N⁄J</div>
- <a href="#" onclick="MajZavNOJU2012();" title="<?php echo $mena1; ?>· + centy - zobraziù v PDF"
-    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
- <a href="#" onclick="GenMajZavNOJU();" title="Nastavenie generovania riadkov"
-    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>  <!-- dopyt, prÌpadne presun˙ù do riadku ˙Ëtovn· z·vierka -->
- <a href="#" onclick="GenMajZavNOJU();" title="Nastavenie predch·dzaj˙ceho obdobia"
-    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, prÌpadne presun˙ù do riadku ˙Ëtovn· z·vierka -->
-</div>
-<div class="toright" style="width:230px;"> <!-- dopyt, musÌ tu byù? -->
- <div class="toleft line-box-text">V˝kaz o prÌj. a v˝dav. N⁄J</div>
- <a href="#" onclick="PriVydNOJU2012();" title="<?php echo $mena1; ?>· + centy - zobraziù v PDF"
-    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
- <a href="#" onclick="GenPriVydNOJU();" title="Nastavenie generovania riadkov"
-    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, prÌpadne presun˙ù do riadku ˙Ëtovn· z·vierka -->
-</div>
 </div> <!-- .line-area uct.zavierka ju nuj -->
 <?php                          } ?>
 
 <div class="line-area"> <!-- platby do fondov sp a zp -->
-<FORM name="formuplatju" method="post" action="#"> <!-- dopyt, preËo je tu <form> -->
 <a href="#" onclick="platbyju();" title="Uk·zaù platby v <?php echo $mena1; ?>· + centy"
-   class="toleft line-box box-bluedefault"><img src='../obr/tlac.png'></a> <!-- dopyt, in˙ ikonu, lebo nejde o pdf -->
+   class="toleft line-box box-bluedefault"><img src='../obr/hladaj.png'></a>
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
- <strong>Platby dane z prÌjmu a odvodov do fondov SP a ZP pre bud˙ci rok</strong> <!-- dopyt, lepöÌ text -->
+ <strong>Platby dane z prÌjmu a odvodov SP a ZP pre bud˙ci rok</strong>
 </div>
 </div>
-</FORM>
 </div> <!-- .line-area platby do fondov sp a zp -->
 <?php
 //koniec jednoduche
@@ -1572,7 +1559,6 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 
 
 <div class="line-area"> <!-- priznanie fob -->
-<FORM name="formfa1" method="post" action="#"> <!-- dopyt, m· v˝znam <form>? -->
 <a href="#" onclick="TlacFOB();" title="Zobraziù v PDF"
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <div class="toleft line-box"></div>
@@ -1589,11 +1575,9 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 <a href="#" onclick="ZnovuFOB();" title="NaËÌtaù ˙daje"
    class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-</FORM>
 </div> <!-- .line-area priznanie fob -->
 
 <div class="line-area" style="margin-bottom:8px;"> <!-- priznanie dmv -->
-<FORM name="formdmv11" method="post" action="#"> <!-- dopyt, m· v˝znam <form>? -->
 <a href="#" onclick="TlacDMV();" title="Zobraziù v PDF"
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <div class="toleft line-box"></div>
@@ -1608,11 +1592,9 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
 <a href="#" onclick="UpravDMV();" title="Upraviù hodnoty"
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</FORM>
 </div> <!-- .line-area priznanie dmv -->
 
 <div class="line-area"> <!-- oznamenie o uz -->
-<FORM name="formozuz14" method="post" action="#"> <!-- dopyt, m· v˝znam <form>? -->
 <div class="toleft line-box"></div>
 <a href="#" onclick="TlacOzUz();" title="Zobraziù v PDF"
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
@@ -1625,24 +1607,21 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
 <a href="#" onclick="UpravOzUz();" title="Upraviù hodnoty"
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</FORM>
 </div> <!-- .line-area oznamenie o uz -->
 
 <div class="line-area"> <!-- podanie o uz -->
-<FORM name="formvseob14" method="post" action="#"> <!-- dopyt, m· v˝znam <form>? -->
 <div class="toleft line-box"></div>
 <a href="#" onclick="TlacVseob();" title="Zobraziù v PDF"
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <div class="toleft line-box-text">
 <div>
- <strong>VöeobecnÈ podanie k ˙Ëtovnej z·vierke</strong> <!-- dopyt, aktualizovaù aj pre j˙ a keÔ bude n˙j asi nezobrazovaù -->
+ <strong>VöeobecnÈ podanie k ˙Ëtovnej z·vierke</strong> <!-- dopyt, aktualizovaù pre j˙ a pre n˙j nezobrazovaù -->
 </div>
 </div>
 <a href="#" onclick="VseobdoXML();" title="export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
 <a href="#" onclick="UpravVseob();" title="Upraviù hodnoty"
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</FORM>
 </div>
 
 </div> <!-- .content -->
