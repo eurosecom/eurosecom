@@ -8,7 +8,7 @@ $urov = 3000;
 $copern = $_REQUEST['copern'];
 $tis = $_REQUEST['tis'];
 if (!isset($tis)) $tis = 0;
-$fort = $_REQUEST['fort'];
+$fort = $_REQUEST['fort']; //dopyt, zruöiù
 if (!isset($fort)) $fort = 1;
 
 $uziv = include("../uziv.php");
@@ -496,12 +496,9 @@ $d3uli = strip_tags($_REQUEST['d3uli']);
 $d3cdm = strip_tags($_REQUEST['d3cdm']);
 $d3psc = strip_tags($_REQUEST['d3psc']);
 $d3mes = strip_tags($_REQUEST['d3mes']);
-$d3tel_pred = strip_tags($_REQUEST['d3tel_pred']);
-$d3tel_cislo = strip_tags($_REQUEST['d3tel_cislo']);
-$d3tel = $d3tel_pred."/".$d3tel_cislo;
-$d3fax_pred = strip_tags($_REQUEST['d3fax_pred']);
-$d3fax_cislo = strip_tags($_REQUEST['d3fax_cislo']);
-$d3fax = $d3fax_pred."/".$d3fax_cislo;
+$d3tel = strip_tags($_REQUEST['d3tel']);
+$d3fax = strip_tags($_REQUEST['d3fax']);
+
 $xstat3 = strip_tags($_REQUEST['xstat3']);
 $dar3 = strip_tags($_REQUEST['dar3']);
 $dar3sql=SqlDatum($dar3);
@@ -1273,12 +1270,6 @@ $d3psc = $fir_riadok->d3psc;
 $d3mes = $fir_riadok->d3mes;
 $d3tel = $fir_riadok->d3tel;
 $d3fax = $fir_riadok->d3fax;
-$polet = explode("/", $d3tel);
-$d3tel_pred=$polet[0];
-$d3tel_cislo=$polet[1];
-$polef = explode("/", $d3fax);
-$d3fax_pred=$polef[0];
-$d3fax_cislo=$polef[1];
 $dar3 = $fir_riadok->dar3;
 $dar3sk=SkDatum($dar3);
                     }
@@ -1320,7 +1311,7 @@ mysql_free_result($fir_vysledok);
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - DaÚ z motorov˝ch vozidiel</title>
 <style type="text/css">
-div.sadzby-dane-box, div.sadzby-dane2-box {
+div.sadzby-dane-box, div.sadzby-dane2-box { /* dopyt, sadzby budeme rieöiù cez tabuæku */
   overflow: auto;
   height: 400px;
   padding: 6px;
@@ -1468,6 +1459,15 @@ table.vozidla tbody img {
   vertical-align: text-bottom;
   cursor: pointer;
 }
+span.text-echo {
+  font-size: 18px;
+  letter-spacing: 13px;
+}
+div.input-echo {
+  position: absolute;
+  font-size: 18px;
+  background-color: #fff;
+}
 </style>
 
 <script type="text/javascript">
@@ -1489,7 +1489,7 @@ var sirkawic = screen.width-10;
 <?php if ( $druh == 1 ) { ?> document.formv1.druh1.checked = 'true'; <?php } ?>
 <?php if ( $druh == 2 ) { ?> document.formv1.druh2.checked = 'true'; <?php } ?>
 <?php if ( $druh == 3 ) { ?> document.formv1.druh3.checked = 'true'; <?php } ?>
-   document.formv1.fir_fdic.value = '<?php echo "$fir_fdic";?>';
+   
    document.formv1.dar.value = '<?php echo "$darsk";?>';
    document.formv1.zoo.value = '<?php echo "$zoosk";?>';
    document.formv1.zod.value = '<?php echo "$zodsk";?>';
@@ -1515,10 +1515,8 @@ var sirkawic = screen.width-10;
    document.formv1.d3cdm.value = '<?php echo "$d3cdm";?>';
    document.formv1.d3psc.value = '<?php echo "$d3psc";?>';
    document.formv1.d3mes.value = '<?php echo "$d3mes";?>';
-   document.formv1.d3tel_pred.value = '<?php echo "$d3tel_pred";?>';
-   document.formv1.d3tel_cislo.value = '<?php echo "$d3tel_cislo";?>';
-   document.formv1.d3fax_pred.value = '<?php echo "$d3fax_pred";?>';
-   document.formv1.d3fax_cislo.value = '<?php echo "$d3fax_cislo";?>';
+   document.formv1.d3tel.value = '<?php echo "$d3tel";?>';
+   document.formv1.d3fax.value = '<?php echo "$d3fax";?>';
    document.formv1.xstat3.value = '<?php echo "$xstat3";?>';
 <?php                                                                   } ?>
 
@@ -1776,7 +1774,7 @@ var sirkawic = screen.width-10;
   }
   function PoucVyplnenie()
   {
-   window.open('../dokumenty/dan_z_prijmov2013/dpdmv2013/DMVv13_poucenie_na_vyplnenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function Sadzby2015()
   {
@@ -1881,7 +1879,7 @@ $i=0;
   {
 $riadok=mysql_fetch_object($sql);
 if ( $i == 0 ) { ?>
-var htmlmenu = "<div class='sadzby-dane-box'>";
+var htmlmenu = "<div class='sadzby-dane-box'>"; //dopyt, chcem daù preË
     htmlmenu += "<h2>Sadzby dane z motorov˝ch vozidiel</h2><img src='../obr/ikony/turnoff_blue_icon.png' onclick='zhasnirobot();' title='Skryù menu'>";
     htmlmenu += "<table class='sadzby-dane'>";
     htmlmenu += "<caption><?php echo $riadok->nsdz; ?></caption>";
@@ -2185,10 +2183,13 @@ $i=$i+1;
    <td class="header">DaÚ z motorov˝ch vozidiel <?php echo $kli_vrok; ?></td>
    <td>
     <div class="bar-btn-form-tool">
-     <img src="../obr/ikony/info_blue_icon.png" onclick="Sadzby2015();" title="Sadzby DMV pre rok 2015" class="btn-form-tool">
-     <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="PouËenie na vyplnenie" class="btn-form-tool">
-     <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="NaËÌtaù ˙daje z minulÈho roka" class="btn-form-tool">
-     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV();" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
+     <img src="../obr/ikony/info_blue_icon.png" onclick="Sadzby2015();"
+          title="RoËnÈ sadzby dane" class="btn-form-tool">
+     <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();"
+          title="PouËenie na vyplnenie" class="btn-form-tool">
+     <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="NaËÌtaù ˙daje z minulÈho roka" class="btn-form-tool"> <!-- dopyt, preveriù -->
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV();"
+          title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
     </div>
    </td>
   </tr>
@@ -2218,20 +2219,22 @@ $source="../ucto/priznanie_dmv".$rokdmv.".php?cislo_oc=".$cislo_oc."&drupoh=1&pa
 </div>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str1.jpg" alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2013 1.strana" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str1.jpg"
+     alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2015 1.strana" class="form-background">
 
-<div class="nofill krizik" style="top:236px; left:76px;"><?php if ( $fir_uctt03 == 999 ) echo "x"; ?></div>
-<div class="nofill krizik" style="top:236px; left:236px;"><?php if ( $fir_uctt03 != 999 ) echo "x"; ?></div>
+<div class="nofill krizik" style="top:225px; left:58px;"><?php if ( $fir_uctt03 == 999 ) echo "x"; ?></div>
+<div class="nofill krizik" style="top:225px; left:220px;"><?php if ( $fir_uctt03 != 999 ) echo "x"; ?></div>
+<!-- dopyt, novinka: zahraniËn· osoba, ktor· nem· pridelenÈ diË -->
 
-<input type="text" name="fir_fdic" id="fir_fdic" disabled="disabled" class="nofill" style="width:220px; top:287px; left:51px;"/>
+<span class="text-echo" style="top:293px; left:56px;"><?php echo $fir_fdic;?></span>
 <input type="text" name="dar" id="dar" disabled="disabled" class="nofill" style="width:195px; top:342px; left:51px;"/>
 <!-- Druh priznania -->
 <input type="radio" id="druh1" name="druh" value="1" style="top:290px; left:423px;"/>
 <input type="radio" id="druh2" name="druh" value="2" style="top:315px; left:423px;"/>
 <input type="radio" id="druh3" name="druh" value="3" style="top:340px; left:423px;"/>
 <!-- Za zdanovacie obdobie -->
-<input type="text" name="zoo" id="zoo" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:237px; left:696px;"/>
-<input type="text" name="zod" id="zod" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:276px; left:696px;"/>
+<input type="text" name="zoo" id="zoo" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:232px; left:696px;"/>
+<input type="text" name="zod" id="zod" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:274px; left:696px;"/>
 <input type="text" name="ddp" id="ddp" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:343px; left:696px;"/>
 
 <?php
@@ -2242,18 +2245,21 @@ if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 $dmeno = $fir_riadok->dmeno;
 $dprie = $fir_riadok->dprie;
 $dtitl = $fir_riadok->dtitl;
-if ( $fir_uctt03 != 999 ) { $dmeno = ""; $dprie = ""; $dtitl = ""; }
+$dtitz = $fir_riadok->dtitz;
+
+//$dtitl = $fir_riadok->dtitl;
+if ( $fir_uctt03 != 999 ) { $dmeno = ""; $dprie = ""; $dtitl = ""; $dtitz = ""; }
 if ( $fir_uctt03 == 999 ) { $fir_fnaz = ""; }
 ?>
+<!-- I. ODDIEL -->
 <!-- Udaje o FO -->
-<input type="text" name="dprie" id="dprie" value="<?php echo $dprie; ?>" disabled="disabled" class="nofill" style="width:359px; top:454px; left:51px;"/>
-<input type="text" name="dmeno" id="dmeno" value="<?php echo $dmeno; ?>" disabled="disabled" class="nofill" style="width:244px; top:454px; left:430px;"/>
-<input type="text" name="dtitl" id="dtitl" value="<?php echo $dtitl; ?>" disabled="disabled" class="nofill" style="width:198px; top:454px; left:694px;"/>
-<input type="text" name="fod" id="fod" style="width:842px; top:510px; left:51px;" />
+<div class="input-echo" style="width:359px; top:455px; left:52px;"><?php echo $dprie; ?></div>
+<div class="input-echo" style="width:244px; top:455px; left:432px;"><?php echo $dmeno; ?></div>
+<div class="input-echo" style="width:112px; top:455px; left:696px;"><?php echo $dtitl; ?></div>
+<div class="input-echo" style="width:68px; top:455px; left:828px;"><?php echo $dtitz; ?></div>
+<input type="text" name="fod" id="fod" style="width:842px; top:510px; left:51px;"/>
 <!-- Udaje o PO -->
-<input type="text" name="obchm" id="obchm" value="<?php echo $fir_fnaz; ?>" disabled="disabled" class="nofill" style="width:842px; top:588px; left:51px;"/>
-<div class="nofill" style="width:846px; height:26px; top:626px; left:51px;"></div>
-
+<div class="input-echo" style="width:842px; top:589px; left:52px;"><?php echo $fir_fnaz; ?></div>
 <?php
 //trvaly pobyt z ufirdalsie, sidlo z udajov o firme PO
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
@@ -2264,8 +2270,7 @@ $dcdm = $fir_riadok->dcdm;
 $dmes = $fir_riadok->dmes;
 $dpsc = $fir_riadok->dpsc;
 $dtel = $fir_riadok->dtel;
-$dfax = $fir_riadok->dfax;
-$xstat = $fir_riadok->dstat;
+$dstat = $fir_riadok->dstat;
 if ( $fir_uctt03 != 999 )
 {
 $duli = $fir_fuli;
@@ -2273,26 +2278,17 @@ $dcdm = $fir_fcdm;
 $dmes = $fir_fmes;
 $dpsc = $fir_fpsc;
 $dtel = $fir_ftel;
-$dfax = $fir_ffax;
-$xstat = "SK";
+$dstat = "SK";
 }
-$polet = explode("/", $dtel);
-$dtel_pred=$polet[0];
-$dtel_cislo=$polet[1];
-$polef = explode("/", $dfax);
-$dfax_pred=$polef[0];
-$dfax_cislo=$polef[1];
 ?>
 <!-- Adresa pobytu FO alebo sidlo PO -->
-<input type="text" name="duli" id="duli" value="<?php echo $duli; ?>" disabled="disabled" class="nofill" style="width:635px; top:701px; left:51px;"/>
-<input type="text" name="dcdm" id="dcdm" value="<?php echo $dcdm; ?>" disabled="disabled" class="nofill" style="width:175px; top:701px; left:718px;"/>
-<input type="text" name="dpsc" id="dpsc" value="<?php echo $dpsc; ?>" disabled="disabled" class="nofill" style="width:107px; top:756px; left:51px;"/>
-<input type="text" name="dmes" id="dmes" value="<?php echo $dmes; ?>" disabled="disabled" class="nofill" style="width:451px; top:756px; left:178px;"/>
-<input type="text" name="xstat" id="xstat" value="<?php echo $xstat; ?>" disabled="disabled" class="nofill" style="width:245px; top:756px; left:648px;"/>
-<input type="text" name="dtel_pred" id="dtel_pred" value="<?php echo $dtel_pred; ?>" disabled="disabled" class="nofill" style="width:83px; top:812px; left:51px;"/>
-<input type="text" name="dtel_cislo" id="dtel_cislo" value="<?php echo $dtel_cislo; ?>" disabled="disabled" class="nofill" style="width:174px; top:812px; left:166px;"/>
-<input type="text" name="dfax_pred" id="dfax_pred" value="<?php echo $dfax_pred; ?>" disabled="disabled" class="nofill" style="width:83px; top:812px; left:361px;"/>
-<input type="text" name="dfax_cislo" id="dfax_cislo" value="<?php echo $dfax_cislo; ?>" disabled="disabled" class="nofill" style="width:174px; top:812px; left:476px;"/>
+<div class="input-echo" style="width:635px; top:702px; left:52px;"><?php echo $duli; ?></div>
+<div class="input-echo" style="width:175px; top:702px; left:718px;"><?php echo $dcdm; ?></div>
+<div class="input-echo" style="width:107px; top:758px; left:52px;"><?php echo $dpsc; ?></div>
+<div class="input-echo" style="width:451px; top:758px; left:178px;"><?php echo $dmes; ?></div>
+<div class="input-echo" style="width:245px; top:758px; left:649px;"><?php echo $dstat; ?></div>
+<div class="input-echo" style="width:290px; top:812px; left:52px;"><?php echo $dtel; ?></div>
+<div class="input-echo" style="width:521px; top:812px; left:361px;"><?php echo $fir_fem1; ?></div>
 
 <?php
 //prechodny adresa pobytu FOB, prevadzkaren PO
@@ -2322,58 +2318,50 @@ $d2uli = trim($fir_riadok->pruli);
 $d2cdm = $fir_riadok->prcdm;
 $d2mes = $fir_riadok->prmes;
 $d2psc = $fir_riadok->prpsc;
-$d2tel = $fir_ftel;
-$polet = explode("/", $d2tel);
-$d2tel_pred=$polet[0];
-$d2tel_cislo=$polet[1];
-$d2fax = $fir_ffax;
-$polef = explode("/", $d2fax);
-$d2fax_pred=$polef[0];
-$d2fax_cislo=$polef[1];
 }
-if ( $d2uli == '' ) { $d2tel_pred=""; $d2tel_cislo=""; $d2fax_pred=""; $d2fax_cislo=""; }
+if ( $d2uli == '' ) { $d2tel=""; $d2fax_cislo=""; }
 ?>
-<!-- Adresa prechodneho pobytu FO alebo prevadzkarne PO -->
+<!-- Adresa organizacnej zlozky -->
+<!-- dopyt, budeme rieöiù cez prev·dzk·reÚ z fob alebo novÈ inputy vyrobÌme -->
 <input type="text" name="d2uli" id="d2uli" value="<?php echo $d2uli; ?>" disabled="disabled" class="nofill" style="width:635px; top:900px; left:51px;"/>
 <input type="text" name="d2cdm" id="d2cdm" value="<?php echo $d2cdm; ?>" disabled="disabled" class="nofill" style="width:175px; top:900px; left:718px;"/>
 <input type="text" name="d2psc" id="d2psc" value="<?php echo $d2psc; ?>" disabled="disabled" class="nofill" style="width:107px; top:956px; left:51px;"/>
 <input type="text" name="d2mes" id="d2mes" value="<?php echo $d2mes; ?>" disabled="disabled" class="nofill" style="width:451px; top:956px; left:178px;"/>
-<input type="text" name="d2tel" id="d2tel" value="<?php echo $d2tel_pred; ?>" disabled="disabled" class="nofill" style="width:83px; top:1011px; left:51px;"/>
-<input type="text" name="d2tel" id="d2tel" value="<?php echo $d2tel_cislo; ?>" disabled="disabled" class="nofill" style="width:174px; top:1011px; left:166px;"/>
-<input type="text" name="d2fax" id="d2fax" value="<?php echo $d2fax_pred; ?>" disabled="disabled" class="nofill" style="width:83px; top:1011px; left:361px;"/>
-<input type="text" name="d2fax" id="d2fax" value="<?php echo $d2fax_cislo; ?>" disabled="disabled" class="nofill" style="width:174px; top:1011px; left:476px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str2.jpg" alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2013 2.strana 380kB" class="form-background">
-<input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo $fir_fdic; ?>" disabled="disabled" class="nofill" style="width:220px; top:69px; left:401px;"/>
+<img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str2.jpg"
+     alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2015 2.strana 380kB" class="form-background">
+<span class="text-echo" style="top:75px; left:405px;"><?php echo $fir_fdic;?></span>
 
 <!-- II. ODDIEL -->
-<input type="checkbox" name="druh31" id="druh31" value="1" onclick="klik31();" style="top:173px; left:67px;"/>
-<input type="checkbox" name="druh32" id="druh32" value="1" onclick="klik32();" style="top:198px; left:67px;"/>
-<input type="checkbox" name="druh33" id="druh33" value="1" onclick="klik33();" style="top:223px; left:67px;"/>
-<input type="checkbox" name="druh34" id="druh34" value="1" onclick="klik34();" style="top:173px; left:469px;"/>
-<input type="checkbox" name="druh35" id="druh35" value="1" onclick="klik35();" style="top:198px; left:469px;"/>
+<input type="checkbox" name="druh31" id="druh31" value="1" onclick="klik31();" style="top:157px; left:68px;"/>
+<!-- dopyt, checkbox pre dediË je novinka -->
+<input type="checkbox" name="druh33" id="druh33" value="1" onclick="klik33();" style="top:208px; left:68px;"/>
+<!-- dopyt, checkbox pre likvid·tor je novinka -->
+<input type="checkbox" name="druh32" id="druh32" value="1" onclick="klik32();" style="top:183px; left:470px;"/>
+<input type="checkbox" name="druh34" id="druh34" value="1" onclick="klik34();" style="top:208px; left:470px;"/>
 
-<input type="text" name="d3prie" id="d3prie" style="width:359px; top:278px; left:51px;"/>
-<input type="text" name="d3meno" id="d3meno" style="width:244px; top:278px; left:430px;"/>
-<input type="text" name="d3titl" id="d3titl" style="width:199px; top:278px; left:694px;"/>
-<input type="text" name="rdc3" id="rdc3" style="width:129px; top:334px; left:51px;"/>
-<input type="text" name="rdk3" id="rdk3" style="width:84px; top:334px; left:212px;"/>
-<input type="text" name="dar3" id="dar3" onkeyup="CiarkaNaBodku(this);" style="width:198px; top:334px; left:327px;"/>
-<input type="text" name="dic3" id="dic3" style="width:221px; top:334px; left:568px;"/>
-<input type="text" name="naz3" id="naz3" style="width:842px; top:390px; left:51px;"/>
+<input type="checkbox" name="druh35" id="druh35" value="1" onclick="klik35();" style="top:228px; left:469px;"/>
+ <!-- dopyt, m·m zruöiù alebo dam za sebou bez ohæadu Ëo bolo v minulej verzii -->
 
-<input type="text" name="d3uli" id="d3uli" style="width:635px; top:466px; left:51px;"/>
-<input type="text" name="d3cdm" id="d3cdm" style="width:175px; top:466px; left:718px;"/>
-<input type="text" name="d3psc" id="d3psc" style="width:107px; top:522px; left:51px;"/>
-<input type="text" name="d3mes" id="d3mes" style="width:451px; top:522px; left:178px;"/>
-<input type="text" name="xstat3" id="xstat3" style="width:245px; top:522px; left:648px;"/>
-<input type="text" name="d3tel_pred" id="d3tel_pred" style="width:83px; top:578px; left:51px;"/>
-<input type="text" name="d3tel_cislo" id="d3tel_cislo" style="width:175px; top:578px; left:166px;"/>
-<input type="text" name="d3fax_pred" id="d3fax_pred" style="width:83px; top:578px; left:361px;"/>
-<input type="text" name="d3fax_cislo" id="d3fax_cislo" style="width:175px; top:578px; left:476px;"/>
+<input type="text" name="d3prie" id="d3prie" style="width:359px; top:261px; left:51px;"/>
+<input type="text" name="d3meno" id="d3meno" style="width:244px; top:261px; left:430px;"/>
+<input type="text" name="d3titl" id="d3titl" style="width:111px; top:261px; left:695px;"/>
+<!-- dopyt, nov˝ input d3titz -->
+<input type="text" name="rdc3" id="rdc3" style="width:129px; top:319px; left:51px;"/>
+<input type="text" name="rdk3" id="rdk3" style="width:84px; top:319px; left:212px;"/>
+<input type="text" name="dar3" id="dar3" onkeyup="CiarkaNaBodku(this);" style="width:198px; top:319px; left:327px;"/>
+<input type="text" name="dic3" id="dic3" style="width:221px; top:319px; left:568px;"/>
+<input type="text" name="naz3" id="naz3" style="width:842px; top:374px; left:51px;"/>
+<input type="text" name="d3uli" id="d3uli" style="width:635px; top:451px; left:51px;"/>
+<input type="text" name="d3cdm" id="d3cdm" style="width:175px; top:451px; left:718px;"/>
+<input type="text" name="d3psc" id="d3psc" style="width:107px; top:505px; left:51px;"/>
+<input type="text" name="d3mes" id="d3mes" style="width:451px; top:505px; left:178px;"/>
+<input type="text" name="xstat3" id="xstat3" style="width:245px; top:505px; left:648px;"/>
+<input type="text" name="d3tel" id="d3tel" style="width:290px; top:562px; left:51px;"/>
+<input type="text" name="d3fax" id="d3fax" style="width:522px; top:562px; left:370px;"/>
 <?php                                        } ?>
 
 
@@ -2412,19 +2400,25 @@ $r24 = $fir_riadok->r24;
 $r50 = $fir_riadok->r50;
 $r49 = 1*$fir_riadok->r49;
 ?>
-<img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str3.jpg" alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2013 3.strana 380kB" class="form-background">
-<input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo $fir_fdic; ?>" disabled="disabled" class="nofill" style="width:220px; top:69px; left:452px;"/>
-
+<img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str3.jpg"
+     alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2015 3.strana 380kB" class="form-background">
+<span class="text-echo" style="top:75px; left:458px;"><?php echo $fir_fdic; ?></span>
 <!-- III. ODDIEL -->
-<input type="text" name="da1" id="da1" value="<?php echo $da1sk; ?>" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:163px; left:431px;"/>
-<input type="text" name="datz" id="datz" value="<?php echo $datzsk; ?>" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:208px; left:431px;"/>
-
-<select size="1" name="vzkat" id="vzkat" style="width:38px; top:251px; left:468px;">
+<!-- 01 a 02 riadok -->
+<input type="text" name="da1" id="da1" value="<?php echo $da1sk; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:196px; top:162px; left:381px;"/>
+<input type="text" name="datz" id="datz" value="<?php echo $datzsk; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:196px; top:203px; left:381px;"/>
+<input type="text" name="datk" id="datk" value="<?php echo $datksk; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:196px; top:244px; left:381px;"/>
+<!-- 03, 04 a 05 riadok -->
+<select size="1" name="vzkat" id="vzkat" style="top:285px; left:435px;"> <!-- dopyt, dorobiù help podæa eDane -->
+ <option value="L">L</option>
  <option value="M">M</option>
  <option value="N">N</option>
  <option value="O">O</option>
 </select>
-<select size="1" name="vzdru" id="vzdru" style="width:38px; top:251px; left:595px;">
+<select size="1" name="vzdru" id="vzdru" style="top:285px; left:515px;"> <!-- dopyt, asi budem musieù prekopaù, v pouËenÌ viacero kategÛrii -->
  <option value="1">1 - osobnÈ vozdlo</option>
  <option value="2">2 - n·kladnÈ vozidlo</option>
  <option value="3">3 - n·kladnÈ vozidlo ñ ùahaË n·vesu</option>
@@ -2432,43 +2426,137 @@ $r49 = 1*$fir_riadok->r49;
  <option value="5">5 - prÌpojnÈ vozidlo ñ n·ves</option>
  <option value="6">6 - prÌpojnÈ vozidlo ñ prÌves</option>
 </select>
+<input type="text" name="vzspz" id="vzspz" value="<?php echo $vzspz; ?>"
+       style="width:218px; top:327px; left:359px;"/>
+<!-- 06 a 07 riadok -->
+<input type="text" name="vzobm" id="vzobm" value="<?php echo $vzobm; ?>"
+       style="width:82px; top:370px; left:368px;"/>
+<!-- dopyt, v˝kon motora v kW nem·m, ak· je premenn· -->
 
-<input type="text" name="vzspz" id="vzspz" value="<?php echo $vzspz; ?>" style="width:218px; top:297px; left:409px;"/>
-<input type="text" name="vzobm" id="vzobm" value="<?php echo $vzobm; ?>" style="width:82px; top:341px; left:545px;"/>
-<input type="text" name="vzchm" id="vzchm" value="<?php echo $vzchm; ?>" onkeyup="CiarkaNaBodku(this);" style="width:106px; top:386px; left:395px;"/>
-<input type="text" name="vznpr" id="vznpr" value="<?php echo $vznpr; ?>" style="width:14px; top:386px; left:613px;"/>
+<!-- 08 a 09 riadok -->
+<input type="text" name="vzchm" id="vzchm" value="<?php echo $vzchm; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:106px; top:412px; left:344px;"/>
+<input type="text" name="vznpr" id="vznpr" value="<?php echo $vznpr; ?>"
+       style="width:15px; top:412px; left:560px;"/>
+<!-- 10 a 11 riadok -->
+<!-- dopyt, dorobiù helpy podæa edane -->
+<!-- dopyt, neviem, Ëi pouûiù "vzdno" alebo novÈ -->
+<!-- dopyt, neviem, Ëi pouûiù "vzdnp" alebo novÈ -->
 
-<select size="1" name="vzdno" id="vzdno" style="width:34px; top:430px; left:525px;">
+<select size="1" name="vzdno" id="vzdno" style="width:34px; top:480px; left:525px;"> <!-- dopyt, m·m pouûiù pÙvodn˝ ß85 alebo novÈ inputy -->
  <option value="0"></option>
  <option value="1">1</option>
  <option value="2">2</option></select>
-<select size="1" name="vzdnp" id="vzdnp" style="width:36px; top:430px; left:603px;">
+<select size="1" name="vzdnp" id="vzdnp" style="width:36px; top:480px; left:603px;">
  <option value=" "></option>
  <option value="A">A</option>
  <option value="B">B</option>
  <option value="C">C</option>
 </select>
- <img src="../obr/ikony/info_blue_icon.png" onclick="HelpDanovnici();" title="Druhy daÚovnÌkov podæa ß 85" class="btn-row-tool" style="top:434px; left:650px;" >
-
+<img src="../obr/ikony/info_blue_icon.png" onclick="HelpDanovnici();"
+     title="Druhy daÚovnÌkov podæa ß 85" class="btn-row-tool" style="top:450px; left:650px;"> <!-- dopyt, budem musieù prer·baù -->
 <script>
   document.formv1.vzkat.value = '<?php echo "$vzkat";?>';
   document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
   document.formv1.vzdno.value = '<?php echo "$vzdno";?>';
   document.formv1.vzdnp.value = '<?php echo "$vzdnp";?>';
-</script>
+</script> <!-- dopyt, prÌpadne preriediù a musÌ to tu byù? -->
 
-<input type="text" name="r10" id="r10" value="<?php echo $r10; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:475px; left:476px;"/>
- <img src="../obr/ikony/info_blue_icon.png" onclick="ukazrobot();" title="Sadzby dane z motorov˝ch vozidiel" class="btn-row-tool" style="top:477px; left:650px;">
- <div id="robot" class="sadzby-dane-box-locate" style="top:510px; left:110px;"></div>
-<input type="text" name="r11" id="r11" value="<?php echo $r11; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:525px; left:476px;"/>
+<!-- 12 riadok -->
+<input type="text" name="r10" id="r10" value="<?php echo $r10; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:79px; top:538px; left:288px;"/> <!-- dopyt, d·vam dobre "r10" -->
+ <img src="../obr/ikony/info_blue_icon.png" onclick="ukazrobot();"
+      title="Sadzby dane z motorov˝ch vozidiel" class="btn-row-tool" style="top:538px; left:380px;"> <!-- dopyt, prekopaù -->
+ <div id="robot" class="sadzby-dane-box-locate" style="top:510px; left:110px;"></div> <!-- dopyt, prekopaù podæa edane -->
+<input type="checkbox" name="r12doniz" value="1" style="top:542px; left:424px;"/>
+<!-- 13 riadok -->
+
+<!-- 1.riadok -->
+<input type="checkbox" name="r13s1zni25" id="r13s1zni25" value="1" onclick="klik31();"
+       style="top:613px; left:303px;"/> <!-- dopyt, onclick aktualizovaù -->
+<input type="checkbox" name="r13s1zni20" id="r13s1zni20" value="1" onclick="klik31();"
+       style="top:613px; left:343px;"/> <!-- dopyt, onclick aktualizovaù -->
+<input type="checkbox" name="r13s1zni15" id="r13s1zni15" value="1" onclick="klik31();"
+       style="top:613px; left:384px;"/> <!-- dopyt, onclick aktualizovaù -->
+<input type="checkbox" name="r13s2zni25" id="r13s2zni25" value="1" onclick="klik31();"
+       style="top:613px; left:460px;"/> <!-- dopyt, onclick aktualizovaù -->
+<input type="checkbox" name="r13s2zni20" id="r13s2zni20" value="1" onclick="klik31();"
+       style="top:613px; left:500px;"/> <!-- dopyt, onclick aktualizovaù -->
+<input type="checkbox" name="r13s2zni15" id="r13s2zni15" value="1" onclick="klik31();"
+       style="top:613px; left:540px;"/> <!-- dopyt, onclick aktualizovaù -->
+<!-- 2.riadok -->
+<input type="checkbox" name="r13s1zvy10" id="r13s1zvy10" value="1" onclick="klik31();"
+       style="top:652px; left:343px;"/> <!-- dopyt, onclick aktualizovaù -->
+<input type="checkbox" name="r13s1zvy20" id="r13s1zvy20" value="1" onclick="klik31();"
+       style="top:652px; left:384px;"/> <!-- dopyt, onclick aktualizovaù -->
+<input type="checkbox" name="r13s2zvy10" id="r13s2zvy10" value="1" onclick="klik31();"
+       style="top:652px; left:500px;"/> <!-- dopyt, onclick aktualizovaù -->
+<input type="checkbox" name="r13s2zvy20" id="r13s2zvy20" value="1" onclick="klik31();"
+       style="top:652px; left:540px;"/> <!-- dopyt, onclick aktualizovaù -->
+<!-- 14 riadok -->
+<input type="text" name="r14s1" id="r14s1" value="<?php echo $r14s1; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:137px; top:681px; left:282px;"/>
+<input type="text" name="r14s2" id="r14s2" value="<?php echo $r14s2; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:137px; top:681px; left:439px;"/>
+<!-- 15 riadok -->
+<!-- dopyt, checkbox buÔ alebo -->
+<input type="checkbox" name="r15s1zni50a" id="r15s1zni50a" value="1" onclick="klik31();"
+       style="top:723px; left:278px;"/> <!-- dopyt, onclick aktualizovaù,  -->
+<input type="checkbox" name="r15s1zni50b" id="r15s1zni50b" value="1" onclick="klik31();"
+       style="top:752px; left:278px;"/> <!-- dopyt, onclick aktualizovaù,  -->
+<input type="checkbox" name="r15s1zni50c" id="r15s1zni50c" value="1" onclick="klik31();"
+       style="top:775px; left:278px;"/> <!-- dopyt, onclick aktualizovaù,  -->
+<!-- 16 a 17 riadok -->
+<input type="text" name="r16s1" id="r16s1" value="<?php echo $r16s1; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:137px; top:806px; left:282px;"/>
+<input type="text" name="r16s2" id="r16s2" value="<?php echo $r16s2; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:137px; top:806px; left:439px;"/>
+<input type="checkbox" name="r17kombi" value="1" style="top:850px; left:278px;"/>
+<!-- 18 riadok -->
+<input type="text" name="r18s1" id="r18s1" value="<?php echo $r18s1; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:137px; top:884px; left:282px;"/>
+<input type="text" name="r18s2" id="r18s2" value="<?php echo $r18s2; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:137px; top:884px; left:439px;"/>
+<!-- 19 riadok -->
+<!-- pocet mesiacov -->
+<input type="text" name="r19s1mes" id="r19s1mes" value="<?php echo $r19s1mes; ?>"
+       style="width:35px; top:926px; left:326px;"/>
+<input type="text" name="r19s2mes" id="r19s2" value="<?php echo $r19s2mes; ?>"
+       style="width:35px; top:926px; left:485px;"/>
+<input type="text" name="r19s1dni" id="r19s1dni" value="<?php echo $r19s1dni; ?>"
+       style="width:57px; top:966px; left:326px;"/>
+<input type="text" name="r19s2dni" id="r19s2" value="<?php echo $r19s2dni; ?>"
+       style="width:57px; top:966px; left:485px;"/>
+<!-- 20 a 21 riadok -->
+<input type="text" name="r20s1" id="r20s1" value="<?php echo $r20s1; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:137px; top:1019px; left:282px;"/>
+<input type="text" name="r20s2" id="r20s2" value="<?php echo $r20s2; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:137px; top:1019px; left:439px;"/>
+<!-- dopyt, Ëo tu bude -->
+<!-- 22 - 24 riadky -->
+<input type="text" name="r22" id="r22" value="<?php echo $r22; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1136px; left:425px;"/>
+<input type="text" name="r23" id="r23" value="<?php echo $r23; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1179px; left:425px;"/>
+<input type="text" name="r24" id="r24" value="<?php echo $r24; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:172px; top:1220px; left:404px;"/>
+<!-- bonus -->
+<label for="vzzn" class="added-label" style="top:1265px; left:200px;">ZnaËka vozidla</label>
+<input type="text" name="vzzn" id="vzzn" value="<?php echo $vzzn; ?>"
+       style="width:360px; top:1258px; left:300px;"/>
+
+
+<input type="text" name="r11" id="r11" value="<?php echo $r11; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1025px; left:476px;"/>
  <img src="../obr/ikony/info_blue_icon.png" onclick="ukazrobot2();" title="ZnÌûenÈ sadzby dane z motorov˝ch vozidiel" class="btn-row-tool" style="top:525px; left:650px;">
- <div id="robot2" class="sadzby-dane-box-locate" style="top:558px; left:38px;"></div>
-<input type="text" name="r12" id="r12" value="<?php echo $r12; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:583px; left:476px;"/>
-<input type="text" name="r13" id="r13" value="<?php echo $r13; ?>" style="width:60px; top:635px; left:567px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetDni();" title="VypoËÌtaù dni, poËas ktor˝ch vozidlo podliehalo dani a pomern˙ Ëasù dane" class="btn-row-tool" style="top:637px; left:645px;">
+ <div id="robot2" class="sadzby-dane-box-locate" style="top:1058px; left:38px;"></div> <!-- dopyt, budeme potrebovaù -->
 
-<input type="text" name="r14" id="r14" value="<?php echo $r14; ?>" style="width:60px; top:679px; left:567px;"/>
-<input type="text" name="r15" id="r15" value="<?php echo $r15; ?>" style="width:60px; top:724px; left:567px;"/>
+
+<input type="text" name="r12" id="r12" value="<?php echo $r12; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:883px; left:476px;"/>
+<input type="text" name="r13" id="r13" value="<?php echo $r13; ?>" style="width:60px; top:1035px; left:567px;"/>
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetDni();" title="VypoËÌtaù dni, poËas ktor˝ch vozidlo podliehalo dani a pomern˙ Ëasù dane" class="btn-row-tool" style="top:1037px; left:645px;">
+
+<input type="text" name="r14" id="r14" value="<?php echo $r14; ?>" style="width:60px; top:1079px; left:567px;"/>
+<input type="text" name="r15" id="r15" value="<?php echo $r15; ?>" style="width:60px; top:1024px; left:567px;"/>
 <input type="text" name="r16" id="r16" value="<?php echo $r16; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:768px; left:476px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocitajDan();" title="VypoËÌtaù pomern˙ Ëasù dane podæa poËtu zadan˝ch dnÌ" class="btn-row-tool" style="top:770px; left:645px;">
 <input type="text" name="r17" id="r17" value="<?php echo $r17; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:818px; left:476px;"/>
@@ -2476,20 +2564,14 @@ $r49 = 1*$fir_riadok->r49;
 <input type="text" name="r19" id="r19" value="<?php echo $r19; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:936px; left:476px;"/>
 <input type="text" name="r20" id="r20" value="<?php echo $r20; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:977px; left:476px;"/>
 <input type="text" name="r21" id="r21" value="<?php echo $r21; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1018px; left:476px;"/>
-<input type="text" name="r22" id="r22" value="<?php echo $r22; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1077px; left:476px;"/>
-<input type="text" name="r23" id="r23" value="<?php echo $r23; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1118px; left:476px;"/>
-<input type="text" name="r24" id="r24" value="<?php echo $r24; ?>" onkeyup="CiarkaNaBodku(this);" style="width:172px; top:1159px; left:455px;"/>
 
-<label for="vzzn" class="added-label" style="top:1215px; left:51px;">ZnaËka vozidla</label>
- <input type="text" name="vzzn" id="vzzn" value="<?php echo $vzzn; ?>" style="width:360px; top:1205px; left:285px;"/>
-<label for="datk" class="added-label" style="top:1250px; left:51px;">Z·nik daÚovej povinnosti</label>
- <input type="text" name="datk" id="datk" value="<?php echo $datksk; ?>" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:1240px; left:285px;"/>
 
-<label for="r50" class="added-label" style="top:1250px; left:500px;">Zæava 50 alebo 100% elektromobil,hybrid...</label>
- <input type="text" name="r50" id="r50" value="<?php echo $r50; ?>" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1240px; left:800px;"/>
 
-<label for="r49" class="added-label" style="top:1285px; left:287px;">N·vesov· jazdn· s˙prava</label>
-<input type="checkbox" name="r49" value="1" style="top:1282px; left:445px;"/>
+<label for="r50" class="added-label" style="top:1350px; left:500px;">Zæava 50 alebo 100% elektromobil,hybrid...</label> <!-- dopyt, budeme potrebovaù -->
+ <input type="text" name="r50" id="r50" value="<?php echo $r50; ?>" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1340px; left:800px;"/>
+
+<label for="r49" class="added-label" style="top:1385px; left:287px;">N·vesov· jazdn· s˙prava</label> <!-- dopyt, budeme potrebovaù -->
+<input type="checkbox" name="r49" value="1" style="top:1382px; left:445px;"/>
 <?php if ( $r49 == 1 ) { ?>
 <script>document.formv1.r49.checked = "checked";</script>
 <?php                  } ?>
@@ -2499,8 +2581,9 @@ $r49 = 1*$fir_riadok->r49;
 
 
 <?php if ( $strana == 4 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str4.jpg" alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2013 4.strana 380kB" class="form-background">
-<input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo $fir_fdic; ?>" disabled="disabled" class="nofill" style="width:220px; top:69px; left:401px;"/>
+<img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str4.jpg"
+     alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2015 4.strana 380kB" class="form-background">
+<span class="text-echo" style="top:75px; left:405px;"><?php echo $fir_fdic;?></span>
 
 <!-- IV. ODDIEL -->
 <input type="text" name="r35" id="r35" style="width:82px; top:149px; left:593px;"/>
@@ -2520,11 +2603,8 @@ $r49 = 1*$fir_riadok->r49;
 
 <!-- VI. ODDIEL -->
 <input type="checkbox" name="zvra" value="1" style="top:673px; left:59px;"/>
-<?php if ( $zvra == 1 ) { ?>
-<script>document.formv1.zvra.checked = "checked";</script>
-<?php                   } ?>
-
-<input type="checkbox" name="post" value="1" onclick="budalebox12();" style="top:723px; left:122px;"/>
+<?php if ( $zvra == 1 ) { ?> <script>document.formv1.zvra.checked = "checked";</script> <?php } ?>
+<input type="checkbox" name="post" value="1" onclick="budalebox12();" style="top:723px; left:111px;"/>
 <script>
   function budalebox12()
   {                 
@@ -2532,11 +2612,9 @@ $r49 = 1*$fir_riadok->r49;
   if ( !document.formv1.post.checked ) { document.formv1.ucet.checked='checked'; }
   } 
 </script>
-<?php if ( $post == 1 ) { ?>
-<script>document.formv1.post.checked = "checked";</script>
-<?php                   } ?>
+<?php if ( $post == 1 ) { ?> <script>document.formv1.post.checked = "checked";</script> <?php } ?>
 
-<input type="checkbox" name="ucet" value="1" onclick="budalebox11();" style="top:723px; left:289px;" />
+<input type="checkbox" name="ucet" value="1" onclick="budalebox11();" style="top:723px; left:266px;" />
 <script type="text/javascript">
   function budalebox11()
   {                 
@@ -2547,15 +2625,17 @@ $r49 = 1*$fir_riadok->r49;
 <?php if ( $ucet == 1 ) { ?>
 <script>document.formv1.ucet.checked = "checked";</script>
 <?php                   } ?>
-<input type="text" name="fir_fuc1" id="fir_fuc1" value="<?php echo $fir_fuc1; ?>" disabled="disabled" class="nofill" style="width:359px; top:732px; left:402px;"/>
-<input type="text" name="fir_fnm1" id="fir_fnm1" value="<?php echo $fir_fnm1; ?>" disabled="disabled" class="nofill" style="width:83px; top:732px; left:803px;"/>
-<input type="text" name="dvp" id="dvp" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:795px; left:116px;"/>
+<div class="input-echo" style="width:381px; top:732px; left:393px;"><?php echo $fir_fuc1; ?></div>
+<div class="input-echo" style="width:81px; top:732px; left:807px;"><?php echo $fir_fnm1; ?></div>
+<div class="input-echo" style="width:773px; top:774px; left:117px;"><?php echo $fir_fib1;?></div>
+<input type="text" name="dvp" id="dvp" onkeyup="CiarkaNaBodku(this);"
+       style="width:196px; top:835px; left:116px;"/>
 
 <!-- VII. ODDIEL -->
-<textarea name="pozn" id="pozn" style="width:838px; height:99px; top:892px; left:53px;"><?php echo $pozn; ?></textarea>
+<textarea name="pozn" id="pozn" style="width:838px; height:221px; top:929px; left:53px;"><?php echo $pozn; ?></textarea>
 
 <!-- VIII. ODDIEL -->
-<textarea name="pomv" id="pomv" style="width:838px; height:99px; top:1051px; left:53px;"><?php echo $pomv; ?></textarea>
+<textarea name="pomv" id="pomv" style="width:838px; height:99px; top:1351px; left:53px;"><?php echo $pomv; ?></textarea> <!-- dopyt, zruöenÈ -->
 <input type="text" name="dvh" id="dvh" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:1216px; left:116px;"/>
 <?php                                        } ?>
 

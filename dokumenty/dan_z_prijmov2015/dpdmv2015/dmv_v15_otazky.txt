@@ -1,0 +1,20 @@
+1.STRANA
+- checkbox pre "zahraničná osoba, ktorá nemá pridelené DIČ" = budeme riešiť (ak áno vytvoríte mi ho), alebo natvrdo nebude "x"
+- políčka pre "Adresa organizačnej zložky zahraničnej osoby umiestnená na území Slovenskej republiky, zapísaná v obchodnom registri"
+  = pôvodne tam bola prevádzka či prechodný pobyt, čo sme brali z FOB, čiže pôvodne tie inputy neboli vypĺňateľné
+2.STRANA
+- checkbox pre "dedič" a "likvidátor" sú nové inputy, mám použiť predchádzajúce inputy (4 sú zhodné), alebo úplne nové checkboxy za sebou
+- Titul za priezviskom pre osobu, ktorá podáva priznanie = vytvoríte mi "d3titz"
+3.STRANA
+- 04 druh vozidla = pridané nové vozidlá, napr. "L" má L1e až L7e, najlepšie je to vidieť v eDane, kde
+  si vyberiem kategóriu a následne ponúknu druh vozidla podľa zvolenej kategórie = je to dosť zmenené
+- 07 výkon motora v kW = vytvoríte mi input
+- 10 Daňovník podľa §3 zákona = vyzerá na novinku a v eDane sú možnosti A až E = vytvoríte mi input, alebo čo mám použiť, predtým tam bolo podľa
+     "Daňovník podľa §85" a možnosti pre "ods." a "písm."
+- 11 Oslobodenie dane podľa §4 ods. 1 zákona = vyzerá na novinku a v eDane sú možnosti B až D = vytvoríte mi input, alebo čo mám použiť
+- 12 "Ročná sadzba dane podľa prílohy č.1 Zákona" = dávam dobre <input name="r10">?
+     + tabuľka so sadzbami dane budeme musieť prerobiť, sadzby sú dobre vidieť v eDane = budeme tabuľky so sadzbami robiť
+       klikateľné? Spravíme tabuľku v html? Pôvodná je javascript časti. Tabuľku so zníženými sadzbami dane môžem zlikvidovať?
+- 21 "Daň z r.20 alebo výsledná pomerná časť dane z r.20(súčet pomerných častí)" = aký tam má ísť input, alebo to bude len sčítavanie?
+- r50 (Zľava 50 či 100% elektromobil, hybrid ...) budeme potrebovať? Checkbox pre (návesová jazdná súprava), budeme
+  potrebovať. Predtým boli mimo oficiálnej strany
