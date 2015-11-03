@@ -1196,7 +1196,46 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r20s2 DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
 $vysledek = mysql_query("$sql");
 }
+$sql = "SELECT oslbd FROM F".$kli_vxcf."_uctpriznanie_dmv";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+//str.1
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD zahos DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
 
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD zouli VARCHAR(35) NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD zocdm VARCHAR(15) NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD zopsc VARCHAR(10) NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD zomes VARCHAR(35) NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD zotel VARCHAR(20) NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD zoema VARCHAR(30) NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+//2.strana
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD d2titz VARCHAR(15) NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD dedic DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD likvi DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+
+//vozidlo
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD vzdru VARCHAR(15) NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD vzvyk DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD dnvnk VARCHAR(15) NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD oslbd VARCHAR(15) NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+}
 //koniec uprav def. tabulky
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv";
 $vytvor = mysql_query("$vsql");
@@ -2292,7 +2331,7 @@ $dstat = "SK";
 
 <?php
 //prechodny adresa pobytu FOB, prevadzkaren PO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv".
 " WHERE oc = 9999 ORDER BY oc";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
@@ -3276,7 +3315,7 @@ $pdf->Cell(1,7," ","$rmc",0,"C");$pdf->Cell(4,7,"$t09","$rmc",0,"C");$pdf->Cell(
 $pdf->Cell(1,7," ","$rmc",0,"C");$pdf->Cell(4,7,"$t11","$rmc",1,"L");
 
 //prechodny pobyt FOB alebo prevadzkaren PO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv".
 " WHERE oc = 9999 ORDER BY oc";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
@@ -4774,7 +4813,7 @@ $dprie = $fir_fnaz;
 $dtitl = "";
 if ( $fir_uctt03 == 999 )
 {
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv".
 " WHERE oc = 9999 ORDER BY oc";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
@@ -4832,7 +4871,7 @@ $dfax = $fir_ffax;
 $xstat = "SK";
 if ( $fir_uctt03 == 999 )
 {
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv".
 " WHERE oc = 9999 ORDER BY oc";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
@@ -4964,7 +5003,7 @@ $dprie = "";
 $dtitl = "";
 if ( $fir_uctt03 == 999 )
 {
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv".
 " WHERE oc = 9999 ORDER BY oc";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
@@ -4980,7 +5019,7 @@ $pdf->Cell(190,1,"             ","$rmc",1,"L");
 $pdf->Cell(64,6," ","$rmc",0,"L");$pdf->Cell(105,6,"$fir_fnaz","$rmc",1,"L");
 
 //trvale bydliskoFO alebo sidlo PO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv".
 " WHERE oc = 9999 ORDER BY oc";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
