@@ -520,6 +520,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET ".
 " druh3='$druh3', d3uli='$d3uli', d3cdm='$d3cdm', d3psc='$d3psc', d3mes='$d3mes', ".
 " d3tel='$d3tel', d3fax='$d3fax', naz3='$naz3', dedic='$dedic', likvi='$likvi' ".
 " WHERE oc = 9999 ";
+
                     }
 
 if ( $strana == 3 ) {
@@ -1219,7 +1220,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r20s2 DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
 $vysledek = mysql_query("$sql");
 }
-$sql = "SELECT oslbd FROM F".$kli_vxcf."_uctpriznanie_dmv";
+$sql = "SELECT d3titz FROM F".$kli_vxcf."_uctpriznanie_dmv";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -1256,6 +1257,10 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD dnvnk VARCHAR(15) NOT NULL AFTER new2015";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD oslbd VARCHAR(15) NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+//2.strana
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD d3titz VARCHAR(15) NOT NULL AFTER new2015";
 $vysledek = mysql_query("$sql");
 
 }
@@ -2315,7 +2320,6 @@ $r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
   document.formv1.vzdnp.value = '<?php echo "$vzdnp";?>';
   document.formv1.dnvnk.value = '<?php echo "$dnvnk";?>';
   document.formv1.oslbd.value = '<?php echo "$oslbd";?>';
-<?php if ( $r12doniz == 1 ) { ?> document.formv1.r12doniz.checked = "checked"; <?php } ?>
 </script>
 
 
@@ -2327,6 +2331,9 @@ $r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
       title="Sadzby dane z motorových vozidiel" class="btn-row-tool" style="top:538px; left:380px;"> <!-- dopyt, prekopa sadzby -->
  <div id="robot" class="sadzby-dane-box-locate" style="top:510px; left:110px;"></div> <!-- dopyt, prekopa pod¾a edane -->
 <input type="checkbox" name="r12doniz" value="1" style="top:542px; left:424px;"/>
+<script type="text/javascript">
+<?php if ( $r12doniz == 1 ) { ?> document.formv1.r12doniz.checked = "checked"; <?php } ?>
+</script>
 
 <!-- 13 riadok -->
 <!-- znizenie sadzby -->
