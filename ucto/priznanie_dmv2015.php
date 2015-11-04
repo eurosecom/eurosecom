@@ -191,7 +191,6 @@ $sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, npr
 " ( '4', 'Úžitkové vozidlo - 4 a viac náprav', '9', 'hmotnos (t)', 'nad 37 - do 40', '2172', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
 " ( '4', 'Úžitkové vozidlo - 4 a viac náprav', '10', 'hmotnos (t)', 'nad 40', '2375', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
- 
      }
 //koniec nastav sadzby 2015
 
@@ -464,12 +463,20 @@ $darsql=SqlDatum($dar);
 $ddp = strip_tags($_REQUEST['ddp']);
 $ddpsql=SqlDatum($ddp);
 $fod = strip_tags($_REQUEST['fod']);
-
-if( $zoosql == '0000-00-00' ) { $zoosql=$kli_vrok."-01-01"; }
-if( $zodsql == '0000-00-00' ) { $zodsql=$kli_vrok."-12-31"; }
+$zahos = 1*$_REQUEST['zahos'];
+$zouli = strip_tags($_REQUEST['zouli']);
+$zocdm = strip_tags($_REQUEST['zocdm']);
+$zopsc = strip_tags($_REQUEST['zopsc']);
+$zomes = strip_tags($_REQUEST['zomes']);
+$zotel = strip_tags($_REQUEST['zotel']);
+$zoema = strip_tags($_REQUEST['zoema']);
+if ( $zoosql == '0000-00-00' ) { $zoosql=$kli_vrok."-01-01"; }
+if ( $zodsql == '0000-00-00' ) { $zodsql=$kli_vrok."-12-31"; }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET ".
-" dar='$darsql', ddp='$ddpsql', zoo='$zoosql', zod='$zodsql', fod='$fod', rdc='$rdc', rdk='$rdk', druh='$druh' ".
+" dar='$darsql', ddp='$ddpsql', zoo='$zoosql', zod='$zodsql', fod='$fod', ".
+" rdc='$rdc', rdk='$rdk', druh='$druh', zahos='$zahos', ".
+" zouli='$zouli', zocdm='$zocdm', zopsc='$zopsc', zomes='$zomes', zotel='$zotel', zoema='$zoema' ".
 " WHERE oc = 9999 ";
                     }
 
@@ -478,13 +485,17 @@ $druh31 = strip_tags($_REQUEST['druh31']);
 $druh32 = strip_tags($_REQUEST['druh32']);
 $druh33 = strip_tags($_REQUEST['druh33']);
 $druh34 = strip_tags($_REQUEST['druh34']);
-$druh35 = strip_tags($_REQUEST['druh35']);
+//$druh35 = strip_tags($_REQUEST['druh35']);
+$dedic = strip_tags($_REQUEST['dedic']);
+$likvi = strip_tags($_REQUEST['likvi']);
 $druh3=0;
 if ( $druh31 == 1 ) { $druh3=1; }
 if ( $druh32 == 1 ) { $druh3=2; }
 if ( $druh33 == 1 ) { $druh3=3; }
 if ( $druh34 == 1 ) { $druh3=4; }
-if ( $druh35 == 1 ) { $druh3=5; }
+//if ( $druh35 == 1 ) { $druh3=5; }
+if ( $dedic == 1 ) { $druh3=6; }
+if ( $likvi == 1 ) { $druh3=7; }
 $rdc3 = strip_tags($_REQUEST['rdc3']);
 $rdk3 = strip_tags($_REQUEST['rdk3']);
 $naz3 = strip_tags($_REQUEST['naz3']);
@@ -492,20 +503,22 @@ $dic3 = strip_tags($_REQUEST['dic3']);
 $d3meno = strip_tags($_REQUEST['d3meno']);
 $d3prie = strip_tags($_REQUEST['d3prie']);
 $d3titl = strip_tags($_REQUEST['d3titl']);
+$d3titz = strip_tags($_REQUEST['d3titz']);
 $d3uli = strip_tags($_REQUEST['d3uli']);
 $d3cdm = strip_tags($_REQUEST['d3cdm']);
 $d3psc = strip_tags($_REQUEST['d3psc']);
 $d3mes = strip_tags($_REQUEST['d3mes']);
 $d3tel = strip_tags($_REQUEST['d3tel']);
 $d3fax = strip_tags($_REQUEST['d3fax']);
-
 $xstat3 = strip_tags($_REQUEST['xstat3']);
 $dar3 = strip_tags($_REQUEST['dar3']);
 $dar3sql=SqlDatum($dar3);
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET ".
-" rdc3='$rdc3', rdk3='$rdk3', dic3='$dic3', d3meno='$d3meno', d3prie='$d3prie', d3titl='$d3titl', dar3='$dar3sql', xstat3='$xstat3', ".
-" druh3='$druh3', d3uli='$d3uli', d3cdm='$d3cdm', d3psc='$d3psc', d3mes='$d3mes', d3tel='$d3tel', d3fax='$d3fax', naz3='$naz3' ".
+" rdc3='$rdc3', rdk3='$rdk3', dic3='$dic3', d3meno='$d3meno', d3prie='$d3prie', ".
+" d3titl='$d3titl', d3titz='$d3titz', dar3='$dar3sql', xstat3='$xstat3', ".
+" druh3='$druh3', d3uli='$d3uli', d3cdm='$d3cdm', d3psc='$d3psc', d3mes='$d3mes', ".
+" d3tel='$d3tel', d3fax='$d3fax', naz3='$naz3', dedic='$dedic', likvi='$likvi' ".
 " WHERE oc = 9999 ";
                     }
 
@@ -543,6 +556,14 @@ $r23 = strip_tags($_REQUEST['r23']);
 $r24 = strip_tags($_REQUEST['r24']);
 $r50 = strip_tags($_REQUEST['r50']);
 $r49 = 1*$_REQUEST['r49'];
+$vzvyk = strip_tags($_REQUEST['vzvyk']);
+$r12doniz = 1*$_REQUEST['r12doniz'];
+$dnvnk = strip_tags($_REQUEST['dnvnk']);
+$oslbd = strip_tags($_REQUEST['oslbd']);
+$r15s1zni50a = 1*$_REQUEST['r15s1zni50a'];
+$r15s1zni50b = 1*$_REQUEST['r15s1zni50b'];
+$r15s1zni50c = 1*$_REQUEST['r15s1zni50c'];
+
 
 //ak sa pri ulozeni zmenila sadzba prepocitaj pomernu dan
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE cpl = $cislo_cpl ";
@@ -580,8 +601,10 @@ if ( $datkold != $datknew ) { $pocetdni=1; }
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET ".
 " vzkat='$vzkat', vzdru='$vzdru', vzzn='$vzzn', da1='$da1sql', datz='$datzsql', datk='$datksql', ".
 " vzspz='$vzspz', vzobm='$vzobm', vzchm='$vzchm', vznpr='$vznpr', vzdno='$vzdno', vzdnp='$vzdnp', ".
-" r10='$r10', r11='$r11', r12='$r12', r13='$r13', r14='$r14', r15='$r15', r16='$r16', r17='$r17', r18='$r18', r19='$r19', r20='$r20', ".
-" r21='$r21',r22='$r22', r23='$r23', r24='$r24', r50='$r50', r49='$r49' ".
+" r10='$r10', r11='$r11', r12='$r12', r13='$r13', r14='$r14', r15='$r15', r16='$r16', ".
+" r17='$r17', r18='$r18', r19='$r19', r20='$r20', ".
+" r21='$r21',r22='$r22', r23='$r23', r24='$r24', r50='$r50', r49='$r49', r12doniz='$r12doniz', ".
+" vzvyk='$vzvyk', dnvnk='$dnvnk', oslbd='$oslbd', r15s1zni50a='$r15s1zni50a', r15s1zni50b='$r15s1zni50b', r15s1zni50c='$r15s1zni50c' ".
 " WHERE oc = 1 AND cpl = $cislo_cpl ";
 $strana=3;
                     }
@@ -619,7 +642,7 @@ $upravene = mysql_query("$uprtxt");
 $copern=20;
 if (!$upravene):
 ?>
-<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ " ) </script>
+<script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ" ) </script>
 <?php
 endif;
 if ($upravene):
@@ -1291,6 +1314,13 @@ $zodsk=SkDatum($zod);
 $ddp = $fir_riadok->ddp;
 $ddpsk=SkDatum($ddp);
 $fod = $fir_riadok->fod;
+$zahos = 1*$fir_riadok->zahos;
+$zouli = $fir_riadok->zouli;
+$zocdm = $fir_riadok->zocdm;
+$zopsc = $fir_riadok->zopsc;
+$zomes = $fir_riadok->zomes;
+$zotel = $fir_riadok->zotel;
+$zoema = $fir_riadok->zoema;
                     }
 
 if ( $strana == 2 ) {
@@ -1311,6 +1341,9 @@ $d3tel = $fir_riadok->d3tel;
 $d3fax = $fir_riadok->d3fax;
 $dar3 = $fir_riadok->dar3;
 $dar3sk=SkDatum($dar3);
+$d3titz = $fir_riadok->d3titz;
+$dedic = $fir_riadok->dedic;
+$likvi = $fir_riadok->likvi;
                     }
 
 if ( $strana == 3 )
@@ -1343,6 +1376,33 @@ $pozn = $fir_riadok->pozn;
 mysql_free_result($fir_vysledok);
      }
 //koniec nacitania
+
+//udaje o FO z ufirdalsie
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie";
+$fir_vysledok = mysql_query($sqlfir);
+if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+$dmeno = $fir_riadok->dmeno;
+$dprie = $fir_riadok->dprie;
+$dtitl = $fir_riadok->dtitl;
+$dtitz = $fir_riadok->dtitz;
+if ( $fir_uctt03 != 999 ) { $dmeno = ""; $dprie = ""; $dtitl = ""; $dtitz = ""; }
+if ( $fir_uctt03 == 999 ) { $fir_fnaz = ""; }
+$duli = $fir_riadok->duli;
+$dcdm = $fir_riadok->dcdm;
+$dmes = $fir_riadok->dmes;
+$dpsc = $fir_riadok->dpsc;
+$dtel = $fir_riadok->dtel;
+$dstat = $fir_riadok->dstat;
+if ( $fir_uctt03 != 999 )
+{
+$duli = $fir_fuli;
+$dcdm = $fir_fcdm;
+$dmes = $fir_fmes;
+$dpsc = $fir_fpsc;
+$dtel = $fir_ftel;
+$dstat = "SK";
+}
+
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -1528,12 +1588,22 @@ var sirkawic = screen.width-10;
 <?php if ( $druh == 1 ) { ?> document.formv1.druh1.checked = 'true'; <?php } ?>
 <?php if ( $druh == 2 ) { ?> document.formv1.druh2.checked = 'true'; <?php } ?>
 <?php if ( $druh == 3 ) { ?> document.formv1.druh3.checked = 'true'; <?php } ?>
-   
+
+<?php if ( $zahos == 1 ) { ?> document.formv1.zahos.checked = 'checked'; <?php } ?>
    document.formv1.dar.value = '<?php echo "$darsk";?>';
    document.formv1.zoo.value = '<?php echo "$zoosk";?>';
    document.formv1.zod.value = '<?php echo "$zodsk";?>';
    document.formv1.ddp.value = '<?php echo "$ddpsk";?>';
    document.formv1.fod.value = '<?php echo "$fod";?>';
+
+   document.formv1.zouli.value = '<?php echo "$zouli";?>';
+   document.formv1.zocdm.value = '<?php echo "$zocdm";?>';
+   document.formv1.zopsc.value = '<?php echo "$zopsc";?>';
+   document.formv1.zomes.value = '<?php echo "$zomes";?>';
+   document.formv1.zotel.value = '<?php echo "$zotel";?>';
+   document.formv1.zoema.value = '<?php echo "$zoema";?>';
+
+
 <?php                                        } ?>
 
 <?php if ( $strana == 2 OR $strana == 9999 )                           { ?>
@@ -1541,7 +1611,9 @@ var sirkawic = screen.width-10;
 <?php if ( $druh3 == 2 ) { ?>document.formv1.druh32.checked = 'true'; <?php } ?>
 <?php if ( $druh3 == 3 ) { ?>document.formv1.druh33.checked = 'true'; <?php } ?>
 <?php if ( $druh3 == 4 ) { ?>document.formv1.druh34.checked = 'true'; <?php } ?>
-<?php if ( $druh3 == 5 ) { ?>document.formv1.druh35.checked = 'true'; <?php } ?>
+<?php if ( $druh3 == 6 ) { ?>document.formv1.dedic.checked = 'true'; <?php } ?>
+<?php if ( $druh3 == 7 ) { ?>document.formv1.likvi.checked = 'true'; <?php } ?>
+
    document.formv1.rdc3.value = '<?php echo "$rdc3";?>';
    document.formv1.naz3.value = '<?php echo "$naz3";?>';
    document.formv1.rdk3.value = '<?php echo "$rdk3";?>';
@@ -1557,6 +1629,7 @@ var sirkawic = screen.width-10;
    document.formv1.d3tel.value = '<?php echo "$d3tel";?>';
    document.formv1.d3fax.value = '<?php echo "$d3fax";?>';
    document.formv1.xstat3.value = '<?php echo "$xstat3";?>';
+   document.formv1.d3titz.value = '<?php echo "$d3titz";?>';
 <?php                                                                   } ?>
 
 <?php if ( $strana == 4 OR $strana == 9999 )                           { ?>
@@ -1586,213 +1659,9 @@ var sirkawic = screen.width-10;
   }
 <?php                      } ?>
 
-//Kontrola datumu Sk
-  function kontrola_datum(vstup, Oznam, x1, errflag)
-  {
-	 var text
-	 var index
-	 var tecka
-	 var den
-	 var mesic
-	 var rok
-	 var ch
-                var err
-
-		textxx=""
-                err=0
-
-		den=""
-		mesic=""
-		rok=""
-		tecka=0
-
-		for (index = 0; index < vstup.value.length; index++)
-			{
-      ch = vstup.value.charAt(index);
-			if (ch != "0" && ch != "1" && ch != "2" && ch != "3" && ch != "4" && ch != "5" && ch != "6" && ch != "7" && ch != "8" && ch != "9" && ch != ".")
-				{textxx="Pole Datum zadavajte vo formate DD.MM alebo DD.MM.RRRR (DD=den, MM=mesiac, RRRR=rok).\r"; err=3 }
-			if ((ch == "0" || ch == "1" || ch == "2" || ch == "3" || ch == "4" || ch == "5" || ch == "6" || ch == "7" || ch == "8" || ch == "9") && (text ==""))
-				{
-				if (tecka == 0)
-					{den=den + ch}
-				if (tecka == 1)
-					{mesic=mesic + ch}
-				if (tecka == 2)
-					{rok=rok + ch}
-				}
-			if (ch == "." && text == "")
-				{
-				if (tecka == 1)
-					{tecka=2}
-				if (tecka == 0)
-					{tecka=1}
-
-				}
-			}
-
-		if (tecka == 2 && rok == "" )
-			{rok=<?php echo $kli_vrok; ?>}
-		if (tecka == 1 && rok == "" )
-			{rok=<?php echo $kli_vrok; ?>; err= 0}
-		if (tecka == 1 && mesic == "" )
-			{mesic=<?php echo $kli_vmes; ?>; err= 0}
-		if (tecka == 0 && mesic == "" )
-			{mesic=<?php echo $kli_vmes; ?>; rok=<?php echo $kli_vrok; ?>; err= 0}
-		if ((den<1 || den >31) && (text == ""))
-			{text=text + "Pocet dni v uvedenom mesiaci nemoze byt mensi ako 1 a vacsi ako 31.\r"; err=1 }
-		if ((mesic<1 || mesic>12) && (text == ""))
-			{text=text + "Pocet mesiacov nemoze byt mensi ako 1 a vacsi ako 12.\r"; err=2 }
-		if (rok<1930 && tecka == 2 && text == "" && rok != "" )
-			{text=text + "Rok nemoze byt mensi ako 1930.\r"; err=3 }
-		if (rok>2029 && tecka == 2 && text == "" && rok != "" )
-			{text=text + "Rok nemoze byt väèší ako 2029.\r"; err=3 }
-		if (tecka > 2)
-			{text=text+ "Datum zadavajte vo formatu DD.MM alebo DD.MM.RRRR (DD=den, MM=mesiac, RRRR=rok)\r"; err=3 }
-
-		if (mesic == 2)
-			{
-			if (rok != "")
-				{
-				if (rok % 4 == 0)
-					{
-					if (den>29)
-						{text=text + "Vo februari roku " + rok + " je maximalne 29 dni.\r"; err=1 }
-					}
-				else
-					{
-					if (den>28)
-						{text=text + "Vo februari roku " + rok + " je maximalne 28 dni.\r"; err=1 }
-					}
-				}
-			else
-				{
-				if (den>29)
-					{text=text + "Vo februari roku je maximalne 29 dni.\r"}
-				}
-			}
-
-		if ((mesic == 4 || mesic == 6 || mesic == 9 || mesic == 11) && (den>30))
-			{text=text + "Pocet dni v uvedenom mesiaci nemoze byt mensi ako 1 a vacsi ako 30.\r"}
 
 
 
-
-		if (text!="" && err == 1 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "??"  + "." + mesic+ "." + rok;
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (text!="" && err == 2 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "." + mesic + "??" + "." + rok;
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (text!="" && err == 3 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "." + mesic +  "." + rok + "??";
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (err == 0)
-			{
-                        Oznam.style.display="none";
-                        x1.value = den + "." + mesic +  "." + rok ;
-                        errflag.value = "0";
-			return true;
-			}
-
-		}
-//koniec kontrola datumu
-
-//Kontrola cisla celeho v rozsahu x az y
-  function intg(x1,x,y,Oznam)
-  {
-       var b;
-       b=x1.value;
-       var anyString=b;
-       Oznam.style.display="none";
-         if (b == "") return true;
-         else{
-         if (Math.floor(b)==b && b>=x && b<=y) return true;
-         else {
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         return false;
-              }
-             }
-  }
-
-//Kontrola des.cisla celeho v rozsahu x az y
-  function cele(x1,x,y,Oznam,des)
-  {
-       var b;
-       b=x1.value;
-       var anyString=b;
-       var err=0;
-       var c;
-       var d;
-       var cele;
-       var pocdes;
-       cele=0;
-       pocdes=0;
-       c=b.toString();
-       d=c.split('.');
-       if ( isNaN(d[1]) ) { cele=1; }
-       if ( cele == 0 ) { pocdes=d[1].length; }
-
-         if (b == "") { err=0 }
-         if (b>=x && b<=y) { err=0 }
-         if ( x1.value.search(/[^0-9.-]/g) != -1) { err=1 }
-         if (b<x && b != "") { err=1 }
-         if (b>y && b != "") { err=1 }
-         if (cele == 0 && pocdes > des ) { err=1 }
-
-	 if (err == 0)
-	 {
-         Oznam.style.display="none";
-         return true;
-         }
-
-	 if (err == 1)
-	 {
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         x1.value = b + "??";
-         return false;
-         }
-  }
-
-//Kontrola cisla
-  function KontrolaCisla(Vstup, Oznam)
-  {
-   if ( Vstup.value.search(/[^0-9]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-   if ( Vstup.value.search(/[^0-9]/g) != -1) { Oznam.style.display=""; }
-   else { Oznam.style.display="none"; }
-  }
-//Kontrola cisla desatinneho
-  function KontrolaDcisla(Vstup, Oznam)
-  {
-   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Oznam.style.display=""; }
-   else { Oznam.style.display="none"; }
-  }
-//Kontrola datumu
-  function KontrolaDatum(Vstup, Oznam)
-  {
-   if ( Vstup.value.search(/[^0-9.]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-   if ( Vstup.value.search(/[^0-9.]/g) != -1) { Oznam.style.display=""; }
-   else { Oznam.style.display="none"; }
-  }
 //Z ciarky na bodku
   function CiarkaNaBodku(Vstup)
   {
@@ -1819,41 +1688,56 @@ var sirkawic = screen.width-10;
   {
    window.open('../dokumenty/dan_z_prijmov2013/dpdmv2013/DMVv15_sadzby.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
+//bud alebo v checkbox
   function klik31()
   {
    document.formv1.druh32.checked = false;
    document.formv1.druh33.checked = false;
    document.formv1.druh34.checked = false;
-   document.formv1.druh35.checked = false;
+   document.formv1.dedic.checked = false;
+   document.formv1.likvi.checked = false;
   }
   function klik32()
   {
    document.formv1.druh31.checked = false;
    document.formv1.druh33.checked = false;
    document.formv1.druh34.checked = false;
-   document.formv1.druh35.checked = false;
+   document.formv1.dedic.checked = false;
+   document.formv1.likvi.checked = false;
   }
   function klik33()
   {
    document.formv1.druh31.checked = false;
    document.formv1.druh32.checked = false;
    document.formv1.druh34.checked = false;
-   document.formv1.druh35.checked = false;
+   document.formv1.dedic.checked = false;
+   document.formv1.likvi.checked = false;
   }
   function klik34()
   {
    document.formv1.druh31.checked = false;
    document.formv1.druh32.checked = false;
    document.formv1.druh33.checked = false;
-   document.formv1.druh35.checked = false;
+   document.formv1.dedic.checked = false;
+   document.formv1.likvi.checked = false;
   }
-  function klik35()
+  function klik36()
   {
    document.formv1.druh31.checked = false;
    document.formv1.druh32.checked = false;
    document.formv1.druh33.checked = false;
    document.formv1.druh34.checked = false;
+   document.formv1.likvi.checked = false;
   }
+  function klik37()
+  {
+   document.formv1.druh31.checked = false;
+   document.formv1.druh32.checked = false;
+   document.formv1.druh33.checked = false;
+   document.formv1.druh34.checked = false;
+   document.formv1.dedic.checked = false;
+  }
+
   function HelpDanovnici()
   {
    window.open('../dokumenty/dan_z_prijmov2013/dpdmv2013/DMVv13_help_danovnik_paragraf85.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
@@ -1901,7 +1785,7 @@ var sirkawic = screen.width-10;
   {
    robot.style.display='none';
   }
-  function VyberZhasni()
+  function VyberZhasni() //dopyt, èo robí toto
   {
    robot.style.display='none';
    document.formv1.r10.focus();
@@ -2056,23 +1940,6 @@ $i=$i+1;
 
 
 <?php if ( $copern == 20 ) { ?>
-  function ukazrobot2()
-  {
-   myRobot2 = document.getElementById("robot2");
-   myRobot2.innerHTML = htmlmenu2;
-   robot2.style.display='';
-  }
-  function zhasnirobot2()
-  {
-   robot2.style.display='none';
-  }
-  function VyberZhasni2()
-  {
-   robot2.style.display='none';
-   document.formv1.r11.focus();
-   document.formv1.r11.select();
-  }
-
 <?php
 $sqltt = "SELECT * FROM F".$kli_vxcf."_sadzby_dmv_znizene WHERE csdz = 12 ORDER BY csdz,cprm ";
 $sql = mysql_query("$sqltt");
@@ -2261,10 +2128,9 @@ $source="../ucto/priznanie_dmv".$rokdmv.".php?cislo_oc=".$cislo_oc."&drupoh=1&pa
 <img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str1.jpg"
      alt="tlaèivo Daò z motorových vozidiel pre rok 2015 1.strana" class="form-background">
 
-<div class="nofill krizik" style="top:225px; left:58px;"><?php if ( $fir_uctt03 == 999 ) echo "x"; ?></div>
-<div class="nofill krizik" style="top:225px; left:220px;"><?php if ( $fir_uctt03 != 999 ) echo "x"; ?></div>
-<!-- dopyt, novinka: zahranièná osoba, ktorá nemá pridelené diè -->
-
+<span class="text-echo" style="top:223px; left:61px;"><?php if ( $fir_uctt03 == 999 ) echo "x"; ?></span>
+<span class="text-echo" style="top:223px; left:222px;"><?php if ( $fir_uctt03 != 999 ) echo "x"; ?></span>
+<input type="checkbox" name="zahos" value="1" style="top:229px; left:401px;"/>
 <span class="text-echo" style="top:293px; left:56px;"><?php echo $fir_fdic;?></span>
 <input type="text" name="dar" id="dar" disabled="disabled" class="nofill" style="width:195px; top:342px; left:51px;"/>
 <!-- Druh priznania -->
@@ -2276,20 +2142,6 @@ $source="../ucto/priznanie_dmv".$rokdmv.".php?cislo_oc=".$cislo_oc."&drupoh=1&pa
 <input type="text" name="zod" id="zod" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:274px; left:696px;"/>
 <input type="text" name="ddp" id="ddp" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:343px; left:696px;"/>
 
-<?php
-//priezvisko,meno,titul FO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
-$fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
-$dmeno = $fir_riadok->dmeno;
-$dprie = $fir_riadok->dprie;
-$dtitl = $fir_riadok->dtitl;
-$dtitz = $fir_riadok->dtitz;
-
-//$dtitl = $fir_riadok->dtitl;
-if ( $fir_uctt03 != 999 ) { $dmeno = ""; $dprie = ""; $dtitl = ""; $dtitz = ""; }
-if ( $fir_uctt03 == 999 ) { $fir_fnaz = ""; }
-?>
 <!-- I. ODDIEL -->
 <!-- Udaje o FO -->
 <div class="input-echo" style="width:359px; top:455px; left:52px;"><?php echo $dprie; ?></div>
@@ -2299,28 +2151,7 @@ if ( $fir_uctt03 == 999 ) { $fir_fnaz = ""; }
 <input type="text" name="fod" id="fod" style="width:842px; top:510px; left:51px;"/>
 <!-- Udaje o PO -->
 <div class="input-echo" style="width:842px; top:589px; left:52px;"><?php echo $fir_fnaz; ?></div>
-<?php
-//trvaly pobyt z ufirdalsie, sidlo z udajov o firme PO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
-$fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
-$duli = $fir_riadok->duli;
-$dcdm = $fir_riadok->dcdm;
-$dmes = $fir_riadok->dmes;
-$dpsc = $fir_riadok->dpsc;
-$dtel = $fir_riadok->dtel;
-$dstat = $fir_riadok->dstat;
-if ( $fir_uctt03 != 999 )
-{
-$duli = $fir_fuli;
-$dcdm = $fir_fcdm;
-$dmes = $fir_fmes;
-$dpsc = $fir_fpsc;
-$dtel = $fir_ftel;
-$dstat = "SK";
-}
-?>
-<!-- Adresa pobytu FO alebo sidlo PO -->
+<!-- Adresa -->
 <div class="input-echo" style="width:635px; top:702px; left:52px;"><?php echo $duli; ?></div>
 <div class="input-echo" style="width:175px; top:702px; left:718px;"><?php echo $dcdm; ?></div>
 <div class="input-echo" style="width:107px; top:758px; left:52px;"><?php echo $dpsc; ?></div>
@@ -2328,67 +2159,42 @@ $dstat = "SK";
 <div class="input-echo" style="width:245px; top:758px; left:649px;"><?php echo $dstat; ?></div>
 <div class="input-echo" style="width:290px; top:812px; left:52px;"><?php echo $dtel; ?></div>
 <div class="input-echo" style="width:521px; top:812px; left:361px;"><?php echo $fir_fem1; ?></div>
-
-<?php
-//prechodny adresa pobytu FOB, prevadzkaren PO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv".
-" WHERE oc = 9999 ORDER BY oc";
-$fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
-$d2uli = trim($fir_riadok->d2uli);
-$d2cdm = $fir_riadok->d2cdm;
-$d2mes = $fir_riadok->d2mes;
-$d2psc = $fir_riadok->d2psc;
-$d2tel = $fir_riadok->d2tel;
-$polet = explode("/", $d2tel);
-$d2tel_pred=$polet[0];
-$d2tel_cislo=$polet[1];
-$d2fax = $fir_riadok->d2fax;
-$polef = explode("/", $d2fax);
-$d2fax_pred=$polef[0];
-$d2fax_cislo=$polef[1];
-if ( $fir_uctt03 != 999 )
-{
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_po ";
-
-$fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
-$d2uli = trim($fir_riadok->pruli);
-$d2cdm = $fir_riadok->prcdm;
-$d2mes = $fir_riadok->prmes;
-$d2psc = $fir_riadok->prpsc;
-}
-if ( $d2uli == '' ) { $d2tel=""; $d2fax_cislo=""; }
-?>
 <!-- Adresa organizacnej zlozky -->
-<!-- dopyt, budeme rieši cez prevádzkáreò z fob alebo nové inputy vyrobíme -->
-<input type="text" name="d2uli" id="d2uli" value="<?php echo $d2uli; ?>" disabled="disabled" class="nofill" style="width:635px; top:900px; left:51px;"/>
-<input type="text" name="d2cdm" id="d2cdm" value="<?php echo $d2cdm; ?>" disabled="disabled" class="nofill" style="width:175px; top:900px; left:718px;"/>
-<input type="text" name="d2psc" id="d2psc" value="<?php echo $d2psc; ?>" disabled="disabled" class="nofill" style="width:107px; top:956px; left:51px;"/>
-<input type="text" name="d2mes" id="d2mes" value="<?php echo $d2mes; ?>" disabled="disabled" class="nofill" style="width:451px; top:956px; left:178px;"/>
+<input type="text" name="zouli" id="zouli" style="width:635px; top:890px; left:51px;"/>
+<input type="text" name="zocdm" id="zocdm" style="width:175px; top:890px; left:718px;"/>
+<input type="text" name="zopsc" id="zopsc" style="width:107px; top:946px; left:51px;"/>
+<input type="text" name="zomes" id="zomes" style="width:451px; top:946px; left:178px;"/>
+<input type="text" name="zotel" id="zotel" style="width:290px; top:1001px; left:51px;"/>
+<input type="text" name="zoema" id="zoema" style="width:522px; top:1001px; left:370px;"/>
+
+
+
+
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str2.jpg"
      alt="tlaèivo Daò z motorových vozidiel pre rok 2015 2.strana 380kB" class="form-background">
-<span class="text-echo" style="top:75px; left:405px;"><?php echo $fir_fdic;?></span>
+<span class="text-echo" style="top:75px; left:406px;"><?php echo $fir_fdic;?></span>
 
 <!-- II. ODDIEL -->
-<input type="checkbox" name="druh31" id="druh31" value="1" onclick="klik31();" style="top:157px; left:68px;"/>
-<!-- dopyt, checkbox pre dediè je novinka -->
-<input type="checkbox" name="druh33" id="druh33" value="1" onclick="klik33();" style="top:208px; left:68px;"/>
-<!-- dopyt, checkbox pre likvidátor je novinka -->
-<input type="checkbox" name="druh32" id="druh32" value="1" onclick="klik32();" style="top:183px; left:470px;"/>
-<input type="checkbox" name="druh34" id="druh34" value="1" onclick="klik34();" style="top:208px; left:470px;"/>
-
-<input type="checkbox" name="druh35" id="druh35" value="1" onclick="klik35();" style="top:228px; left:469px;"/>
- <!-- dopyt, mám zruši alebo dam za sebou bez oh¾adu èo bolo v minulej verzii -->
-
-<input type="text" name="d3prie" id="d3prie" style="width:359px; top:261px; left:51px;"/>
-<input type="text" name="d3meno" id="d3meno" style="width:244px; top:261px; left:430px;"/>
-<input type="text" name="d3titl" id="d3titl" style="width:111px; top:261px; left:695px;"/>
-<!-- dopyt, nový input d3titz -->
+<input type="checkbox" name="druh31" id="druh31" value="1" onclick="klik31();"
+       style="top:157px; left:68px;"/>
+<input type="checkbox" name="dedic" id="dedic" value="1" onclick="klik36();"
+       style="top:183px; left:68px;"/>
+<input type="checkbox" name="druh33" id="druh33" value="1" onclick="klik33();"
+       style="top:208px; left:68px;"/>
+<input type="checkbox" name="likvi" id="likvi" value="1" onclick="klik37();"
+       style="top:157px; left:470px;"/>
+<input type="checkbox" name="druh32" id="druh32" value="1" onclick="klik32();"
+       style="top:183px; left:470px;"/>
+<input type="checkbox" name="druh34" id="druh34" value="1" onclick="klik34();"
+       style="top:208px; left:470px;"/>
+<input type="text" name="d3prie" id="d3prie" style="width:359px; top:262px; left:51px;"/>
+<input type="text" name="d3meno" id="d3meno" style="width:244px; top:262px; left:430px;"/>
+<input type="text" name="d3titl" id="d3titl" style="width:111px; top:262px; left:695px;"/>
+<input type="text" name="d3titz" id="d3titz" style="width:68px; top:262px; left:827px;"/>
 <input type="text" name="rdc3" id="rdc3" style="width:129px; top:319px; left:51px;"/>
 <input type="text" name="rdk3" id="rdk3" style="width:84px; top:319px; left:212px;"/>
 <input type="text" name="dar3" id="dar3" onkeyup="CiarkaNaBodku(this);" style="width:198px; top:319px; left:327px;"/>
@@ -2438,6 +2244,13 @@ $r23 = $fir_riadok->r23;
 $r24 = $fir_riadok->r24;
 $r50 = $fir_riadok->r50;
 $r49 = 1*$fir_riadok->r49;
+$r12doniz = 1*$fir_riadok->r12doniz;
+$vzvyk = $fir_riadok->vzvyk;
+$dnvnk = $fir_riadok->dnvnk;
+$oslbd = $fir_riadok->oslbd;
+$r15s1zni50a = 1*$fir_riadok->r15s1zni50a;
+$r15s1zni50b = 1*$fir_riadok->r15s1zni50b;
+$r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
 ?>
 <img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str3.jpg"
      alt="tlaèivo Daò z motorových vozidiel pre rok 2015 3.strana 380kB" class="form-background">
@@ -2456,6 +2269,7 @@ $r49 = 1*$fir_riadok->r49;
  <option value="M">M</option>
  <option value="N">N</option>
  <option value="O">O</option>
+ <option value="0"></option>
 </select>
 <select size="1" name="vzdru" id="vzdru" style="top:285px; left:515px;"> <!-- dopyt, asi budem musie prekopa, v pouèení viacero kategórii -->
  <option value="1">1 - osobné vozdlo</option>
@@ -2464,53 +2278,58 @@ $r49 = 1*$fir_riadok->r49;
  <option value="4">4 - autobus</option>
  <option value="5">5 - prípojné vozidlo – náves</option>
  <option value="6">6 - prípojné vozidlo – príves</option>
+ <option value="0"></option>
 </select>
 <input type="text" name="vzspz" id="vzspz" value="<?php echo $vzspz; ?>"
        style="width:218px; top:327px; left:359px;"/>
 <!-- 06 a 07 riadok -->
 <input type="text" name="vzobm" id="vzobm" value="<?php echo $vzobm; ?>"
        style="width:82px; top:370px; left:368px;"/>
-<!-- dopyt, výkon motora v kW nemám, aká je premenná -->
-
+<input type="text" name="vzvyk" id="vzvyk" value="<?php echo $vzvyk; ?>"
+       style="width:82px; top:370px; left:495px;"/>
 <!-- 08 a 09 riadok -->
 <input type="text" name="vzchm" id="vzchm" value="<?php echo $vzchm; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:106px; top:412px; left:344px;"/>
 <input type="text" name="vznpr" id="vznpr" value="<?php echo $vznpr; ?>"
        style="width:15px; top:412px; left:560px;"/>
 <!-- 10 a 11 riadok -->
-<!-- dopyt, dorobi helpy pod¾a edane -->
-<!-- dopyt, neviem, èi použi "vzdno" alebo nové -->
-<!-- dopyt, neviem, èi použi "vzdnp" alebo nové -->
-
-<select size="1" name="vzdno" id="vzdno" style="width:34px; top:480px; left:525px;"> <!-- dopyt, mám použi pôvodný §85 alebo nové inputy -->
- <option value="0"></option>
- <option value="1">1</option>
- <option value="2">2</option></select>
-<select size="1" name="vzdnp" id="vzdnp" style="width:36px; top:480px; left:603px;">
- <option value=" "></option>
+<select size="1" name="dnvnk" id="dnvnk" style="top:453px; left:554px;"> <!-- dopyt, dorobi help pod¾a eDane -->
  <option value="A">A</option>
  <option value="B">B</option>
  <option value="C">C</option>
+ <option value="D">D</option>
+ <option value="E">E</option>
+ <option value=""></option>
 </select>
-<img src="../obr/ikony/info_blue_icon.png" onclick="HelpDanovnici();"
-     title="Druhy daòovníkov pod¾a § 85" class="btn-row-tool" style="top:450px; left:650px;"> <!-- dopyt, budem musie prerába -->
-<script>
+<select size="1" name="oslbd" id="oslbd" style="top:494px; left:554px;"> <!-- dopyt, dorobi help pod¾a eDane -->
+ <option value="B">B</option>
+ <option value="C">C</option>
+ <option value="D">D</option>
+ <option value=""></option>
+</select>
+
+<script type="text/javascript">
   document.formv1.vzkat.value = '<?php echo "$vzkat";?>';
   document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
   document.formv1.vzdno.value = '<?php echo "$vzdno";?>';
   document.formv1.vzdnp.value = '<?php echo "$vzdnp";?>';
-</script> <!-- dopyt, prípadne preriedi a musí to tu by? -->
+  document.formv1.dnvnk.value = '<?php echo "$dnvnk";?>';
+  document.formv1.oslbd.value = '<?php echo "$oslbd";?>';
+<?php if ( $r12doniz == 1 ) { ?> document.formv1.r12doniz.checked = "checked"; <?php } ?>
+</script>
+
+
 
 <!-- 12 riadok -->
-<input type="text" name="r10" id="r10" value="<?php echo $r10; ?>"
-       onkeyup="CiarkaNaBodku(this);" style="width:79px; top:538px; left:288px;"/> <!-- dopyt, dávam dobre "r10" -->
+<input type="text" name="r12" id="r12" value="<?php echo $r12; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:79px; top:538px; left:288px;"/>
  <img src="../obr/ikony/info_blue_icon.png" onclick="ukazrobot();"
-      title="Sadzby dane z motorových vozidiel" class="btn-row-tool" style="top:538px; left:380px;"> <!-- dopyt, prekopa -->
+      title="Sadzby dane z motorových vozidiel" class="btn-row-tool" style="top:538px; left:380px;"> <!-- dopyt, prekopa sadzby -->
  <div id="robot" class="sadzby-dane-box-locate" style="top:510px; left:110px;"></div> <!-- dopyt, prekopa pod¾a edane -->
 <input type="checkbox" name="r12doniz" value="1" style="top:542px; left:424px;"/>
-<!-- 13 riadok -->
 
-<!-- 1.riadok -->
+<!-- 13 riadok -->
+<!-- znizenie sadzby -->
 <input type="checkbox" name="r13s1zni25" id="r13s1zni25" value="1" onclick="klik31();"
        style="top:613px; left:303px;"/> <!-- dopyt, onclick aktualizova -->
 <input type="checkbox" name="r13s1zni20" id="r13s1zni20" value="1" onclick="klik31();"
@@ -2523,7 +2342,7 @@ $r49 = 1*$fir_riadok->r49;
        style="top:613px; left:500px;"/> <!-- dopyt, onclick aktualizova -->
 <input type="checkbox" name="r13s2zni15" id="r13s2zni15" value="1" onclick="klik31();"
        style="top:613px; left:540px;"/> <!-- dopyt, onclick aktualizova -->
-<!-- 2.riadok -->
+<!-- zvysenie sadzby -->
 <input type="checkbox" name="r13s1zvy10" id="r13s1zvy10" value="1" onclick="klik31();"
        style="top:652px; left:343px;"/> <!-- dopyt, onclick aktualizova -->
 <input type="checkbox" name="r13s1zvy20" id="r13s1zvy20" value="1" onclick="klik31();"
@@ -2557,7 +2376,6 @@ $r49 = 1*$fir_riadok->r49;
 <input type="text" name="r18s2" id="r18s2" value="<?php echo $r18s2; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:884px; left:439px;"/>
 <!-- 19 riadok -->
-<!-- pocet mesiacov -->
 <input type="text" name="r19s1mes" id="r19s1mes" value="<?php echo $r19s1mes; ?>"
        style="width:35px; top:926px; left:326px;"/>
 <input type="text" name="r19s2mes" id="r19s2" value="<?php echo $r19s2mes; ?>"
@@ -2571,7 +2389,8 @@ $r49 = 1*$fir_riadok->r49;
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:1019px; left:282px;"/>
 <input type="text" name="r20s2" id="r20s2" value="<?php echo $r20s2; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:1019px; left:439px;"/>
-<!-- dopyt, èo tu bude -->
+<input type="text" name="r21" id="r21" value="<?php echo $r21; ?>"
+       onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1075px; left:425px;"/>
 <!-- 22 - 24 riadky -->
 <input type="text" name="r22" id="r22" value="<?php echo $r22; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1136px; left:425px;"/>
@@ -2585,24 +2404,23 @@ $r49 = 1*$fir_riadok->r49;
        style="width:360px; top:1258px; left:300px;"/>
 
 
-<input type="text" name="r11" id="r11" value="<?php echo $r11; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1025px; left:476px;"/>
- <img src="../obr/ikony/info_blue_icon.png" onclick="ukazrobot2();" title="Znížené sadzby dane z motorových vozidiel" class="btn-row-tool" style="top:525px; left:650px;">
+<input type="text" name="r11" id="r11" value="<?php echo $r11; ?>"/>
  <div id="robot2" class="sadzby-dane-box-locate" style="top:1058px; left:38px;"></div> <!-- dopyt, budeme potrebova -->
 
 
-<input type="text" name="r12" id="r12" value="<?php echo $r12; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:883px; left:476px;"/>
-<input type="text" name="r13" id="r13" value="<?php echo $r13; ?>" style="width:60px; top:1035px; left:567px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetDni();" title="Vypoèíta dni, poèas ktorých vozidlo podliehalo dani a pomernú èas dane" class="btn-row-tool" style="top:1037px; left:645px;">
+<input type="text" name="r10" id="r10" value="<?php echo $r10; ?>"/>
+<input type="text" name="r13" id="r13" value="<?php echo $r13; ?>"/>
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetDni();" title="Vypoèíta dni, poèas ktorých vozidlo podliehalo dani a pomernú èas dane" class="btn-row-tool" style="top:1037px; left:645px;"> <!-- dopyt, budeme potrebova? -->
 
-<input type="text" name="r14" id="r14" value="<?php echo $r14; ?>" style="width:60px; top:1079px; left:567px;"/>
-<input type="text" name="r15" id="r15" value="<?php echo $r15; ?>" style="width:60px; top:1024px; left:567px;"/>
-<input type="text" name="r16" id="r16" value="<?php echo $r16; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:768px; left:476px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocitajDan();" title="Vypoèíta pomernú èas dane pod¾a poètu zadaných dní" class="btn-row-tool" style="top:770px; left:645px;">
-<input type="text" name="r17" id="r17" value="<?php echo $r17; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:818px; left:476px;"/>
-<input type="text" name="r18" id="r18" value="<?php echo $r18; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:880px; left:476px;"/>
-<input type="text" name="r19" id="r19" value="<?php echo $r19; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:936px; left:476px;"/>
-<input type="text" name="r20" id="r20" value="<?php echo $r20; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:977px; left:476px;"/>
-<input type="text" name="r21" id="r21" value="<?php echo $r21; ?>" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1018px; left:476px;"/>
+<input type="text" name="r14" id="r14" value="<?php echo $r14; ?>"/>
+<input type="text" name="r15" id="r15" value="<?php echo $r15; ?>"/>
+<input type="text" name="r16" id="r16" value="<?php echo $r16; ?>"/>
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocitajDan();" title="Vypoèíta pomernú èas dane pod¾a poètu zadaných dní" class="btn-row-tool" style="top:770px; left:645px;"> <!-- dopyt, budeme potrebova? -->
+<input type="text" name="r17" id="r17" value="<?php echo $r17; ?>"/>
+<input type="text" name="r18" id="r18" value="<?php echo $r18; ?>"/>
+<input type="text" name="r19" id="r19" value="<?php echo $r19; ?>"/>
+<input type="text" name="r20" id="r20" value="<?php echo $r20; ?>"/>
+
 
 
 
@@ -2615,6 +2433,20 @@ $r49 = 1*$fir_riadok->r49;
 <script>document.formv1.r49.checked = "checked";</script>
 <?php                  } ?>
 
+
+<!-- dopyt, nepouzite -->
+<select size="1" name="vzdno" id="vzdno">
+ <option value="0"></option>
+ <option value="1">1</option>
+ <option value="2">2</option></select>
+<select size="1" name="vzdnp" id="vzdnp">
+ <option value=" "></option>
+ <option value="A">A</option>
+ <option value="B">B</option>
+ <option value="C">C</option>
+</select>
+<img src="../obr/ikony/info_blue_icon.png" onclick="HelpDanovnici();"
+     title="Druhy daòovníkov pod¾a § 85" class="btn-row-tool" style="top:450px; left:650px;"> <!-- dopyt, budem musie prerába -->
 
 <?php                     } ?>
 
