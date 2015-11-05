@@ -561,10 +561,42 @@ $vzvyk = strip_tags($_REQUEST['vzvyk']);
 $r12doniz = 1*$_REQUEST['r12doniz'];
 $dnvnk = strip_tags($_REQUEST['dnvnk']);
 $oslbd = strip_tags($_REQUEST['oslbd']);
+$r13s1zni25 = 1*$_REQUEST['r13s1zni25'];
+$r13s1zni20 = 1*$_REQUEST['r13s1zni20'];
+$r13s1zni15 = 1*$_REQUEST['r13s1zni15'];
+$r13s2zni25 = 1*$_REQUEST['r13s2zni25'];
+$r13s2zni20 = 1*$_REQUEST['r13s2zni20'];
+$r13s2zni15 = 1*$_REQUEST['r13s2zni15'];
+$r13s1zvy10 = 1*$_REQUEST['r13s1zvy10'];
+$r13s1zvy20 = 1*$_REQUEST['r13s1zvy20'];
+$r13s2zvy10 = 1*$_REQUEST['r13s2zvy10'];
+$r13s2zvy20 = 1*$_REQUEST['r13s2zvy20'];
+
+$druh3=0;
+if ( $druh31 == 1 ) { $druh3=1; }
+if ( $druh32 == 1 ) { $druh3=2; }
+if ( $druh33 == 1 ) { $druh3=3; }
+if ( $druh34 == 1 ) { $druh3=4; }
+//if ( $druh35 == 1 ) { $druh3=5; }
+if ( $dedic == 1 ) { $druh3=6; }
+if ( $likvi == 1 ) { $druh3=7; }
+
+$r14s1 = strip_tags($_REQUEST['r14s1']);
+$r14s2 = strip_tags($_REQUEST['r14s2']);
 $r15s1zni50a = 1*$_REQUEST['r15s1zni50a'];
 $r15s1zni50b = 1*$_REQUEST['r15s1zni50b'];
 $r15s1zni50c = 1*$_REQUEST['r15s1zni50c'];
-
+$r16s1 = strip_tags($_REQUEST['r16s1']);
+$r16s2 = strip_tags($_REQUEST['r16s2']);
+$r17kombi = strip_tags($_REQUEST['r17kombi']);
+$r18s1 = strip_tags($_REQUEST['r18s1']);
+$r18s2 = strip_tags($_REQUEST['r18s2']);
+$r19s1mes = strip_tags($_REQUEST['r19s1mes']);
+$r19s2mes = strip_tags($_REQUEST['r19s2mes']);
+$r19s1dni = strip_tags($_REQUEST['r19s1dni']);
+$r19s2dni = strip_tags($_REQUEST['r19s2dni']);
+$r20s1 = strip_tags($_REQUEST['r20s1']);
+$r20s2 = strip_tags($_REQUEST['r20s2']);
 
 //ak sa pri ulozeni zmenila sadzba prepocitaj pomernu dan
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE cpl = $cislo_cpl ";
@@ -605,7 +637,15 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET ".
 " r10='$r10', r11='$r11', r12='$r12', r13='$r13', r14='$r14', r15='$r15', r16='$r16', ".
 " r17='$r17', r18='$r18', r19='$r19', r20='$r20', ".
 " r21='$r21',r22='$r22', r23='$r23', r24='$r24', r50='$r50', r49='$r49', r12doniz='$r12doniz', ".
-" vzvyk='$vzvyk', dnvnk='$dnvnk', oslbd='$oslbd', r15s1zni50a='$r15s1zni50a', r15s1zni50b='$r15s1zni50b', r15s1zni50c='$r15s1zni50c' ".
+" vzvyk='$vzvyk', dnvnk='$dnvnk', oslbd='$oslbd', ".
+" r13s1zni25='$r13s1zni25', r13s1zni20='$r13s1zni20', r13s1zni15='$r13s1zni15', ".
+" r13s2zni25='$r13s2zni25', r13s2zni20='$r13s2zni20', r13s2zni15='$r13s2zni15', ".
+" r13s1zvy10='$r13s1zvy10', r13s1zvy20='$r13s1zvy20', r13s2zvy10='$r13s2zvy10', r13s2zvy20='$r13s2zvy20', ".
+" r14s1='$r14s1', r14s2='$r14s2', ".
+" r15s1zni50a='$r15s1zni50a', r15s1zni50b='$r15s1zni50b', r15s1zni50c='$r15s1zni50c', ".
+" r16s1='$r16s1', r16s2='$r16s2', r17kombi='$r17kombi', r18s1='$r18s1', r18s2='$r18s2', ".
+" r19s1mes='$r19s1mes', r19s2mes='$r19s2mes', r19s1dni='$r19s1dni', r19s2dni='$r19s2dni', ".
+" r20s1='$r20s1', r20s2='$r20s2' ".
 " WHERE oc = 1 AND cpl = $cislo_cpl ";
 $strana=3;
                     }
@@ -1743,6 +1783,19 @@ var sirkawic = screen.width-10;
    document.formv1.dedic.checked = false;
   }
 
+//bud alebo checkbox v riadku 13
+  function zni25s1()
+  {
+   document.formv1.r13s1zni20.checked = false;
+   document.formv1.r13s1zni15.checked = false;
+   document.formv1.r13s1zvy10.checked = false;
+   document.formv1.r13s1zvy20.checked = false;
+  }
+
+
+
+
+
   function HelpDanovnici()
   {
    window.open('../dokumenty/dan_z_prijmov2013/dpdmv2013/DMVv13_help_danovnik_paragraf85.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
@@ -2253,9 +2306,32 @@ $r12doniz = 1*$fir_riadok->r12doniz;
 $vzvyk = $fir_riadok->vzvyk;
 $dnvnk = $fir_riadok->dnvnk;
 $oslbd = $fir_riadok->oslbd;
+$r13s1zni25 = 1*$fir_riadok->r13s1zni25;
+$r13s1zni20 = 1*$fir_riadok->r13s1zni20;
+$r13s1zni15 = 1*$fir_riadok->r13s1zni15;
+$r13s2zni25 = 1*$fir_riadok->r13s2zni25;
+$r13s2zni20 = 1*$fir_riadok->r13s2zni20;
+$r13s2zni15 = 1*$fir_riadok->r13s2zni15;
+$r13s1zvy10 = 1*$fir_riadok->r13s1zvy10;
+$r13s1zvy20 = 1*$fir_riadok->r13s1zvy20;
+$r13s2zvy10 = 1*$fir_riadok->r13s2zvy10;
+$r13s2zvy20 = 1*$fir_riadok->r13s2zvy20;
+$r14s1 = $fir_riadok->r14s1;
+$r14s2 = $fir_riadok->r14s2;
 $r15s1zni50a = 1*$fir_riadok->r15s1zni50a;
 $r15s1zni50b = 1*$fir_riadok->r15s1zni50b;
 $r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
+$r16s1 = $fir_riadok->r16s1;
+$r16s2 = $fir_riadok->r16s2;
+$r17kombi = $fir_riadok->r17kombi;
+$r18s1 = $fir_riadok->r18s1;
+$r18s2 = $fir_riadok->r18s2;
+$r19s1mes = $fir_riadok->r19s1mes;
+$r19s2mes = $fir_riadok->r19s2mes;
+$r19s1dni = $fir_riadok->r19s1dni;
+$r19s2dni = $fir_riadok->r19s2dni;
+$r20s1 = $fir_riadok->r20s1;
+$r20s2 = $fir_riadok->r20s2;
 ?>
 <img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str3.jpg"
      alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2015 3.strana 380kB" class="form-background">
@@ -2276,8 +2352,8 @@ $r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
  <option value="O">O</option>
  <option value="0"></option>
 </select>
-<select size="1" name="vzdru" id="vzdru" style="top:285px; left:515px;"> <!-- dopyt, asi budem musieù prekopaù, v pouËenÌ viacero kategÛrii -->
- <option value="1">1 - osobnÈ vozdlo</option>
+<select size="1" name="vzdru" id="vzdru" style="top:285px; left:515px; width:40px;"> <!-- dopyt, asi budem musieù prekopaù, v pouËenÌ viacero kategÛrii -->
+ <option value="1" >1 - osobnÈ vozdlo</option>
  <option value="2">2 - n·kladnÈ vozidlo</option>
  <option value="3">3 - n·kladnÈ vozidlo ñ ùahaË n·vesu</option>
  <option value="4">4 - autobus</option>
@@ -2313,14 +2389,6 @@ $r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
  <option value=""></option>
 </select>
 
-<script type="text/javascript">
-  document.formv1.vzkat.value = '<?php echo "$vzkat";?>';
-  document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
-  document.formv1.vzdno.value = '<?php echo "$vzdno";?>';
-  document.formv1.vzdnp.value = '<?php echo "$vzdnp";?>';
-  document.formv1.dnvnk.value = '<?php echo "$dnvnk";?>';
-  document.formv1.oslbd.value = '<?php echo "$oslbd";?>';
-</script>
 
 
 
@@ -2333,11 +2401,12 @@ $r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
 <input type="checkbox" name="r12doniz" value="1" style="top:542px; left:424px;"/>
 <script type="text/javascript">
 <?php if ( $r12doniz == 1 ) { ?> document.formv1.r12doniz.checked = "checked"; <?php } ?>
-</script>
+</script> <!-- dopyt, keÔ bud˙ vöetky tagy, tak presun˙ù niûöie -->
+
 
 <!-- 13 riadok -->
 <!-- znizenie sadzby -->
-<input type="checkbox" name="r13s1zni25" id="r13s1zni25" value="1" onclick="klik31();"
+<input type="checkbox" name="r13s1zni25" id="r13s1zni25" value="1" onclick="zni25s1();"
        style="top:613px; left:303px;"/> <!-- dopyt, onclick aktualizovaù -->
 <input type="checkbox" name="r13s1zni20" id="r13s1zni20" value="1" onclick="klik31();"
        style="top:613px; left:343px;"/> <!-- dopyt, onclick aktualizovaù -->
@@ -2358,6 +2427,21 @@ $r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
        style="top:652px; left:500px;"/> <!-- dopyt, onclick aktualizovaù -->
 <input type="checkbox" name="r13s2zvy20" id="r13s2zvy20" value="1" onclick="klik31();"
        style="top:652px; left:540px;"/> <!-- dopyt, onclick aktualizovaù -->
+<script type="text/javascript">
+<?php if ( $r13s1zni25 == 1 ) { ?> document.formv1.r13s1zni25.checked = "checked"; <?php } ?>
+<?php if ( $r13s1zni20 == 1 ) { ?> document.formv1.r13s1zni20.checked = "checked"; <?php } ?>
+<?php if ( $r13s1zni15 == 1 ) { ?> document.formv1.r13s1zni15.checked = "checked"; <?php } ?>
+<?php if ( $r13s2zni25 == 1 ) { ?> document.formv1.r13s2zni25.checked = "checked"; <?php } ?>
+<?php if ( $r13s2zni20 == 1 ) { ?> document.formv1.r13s2zni20.checked = "checked"; <?php } ?>
+<?php if ( $r13s2zni15 == 1 ) { ?> document.formv1.r13s2zni15.checked = "checked"; <?php } ?>
+<?php if ( $r13s1zvy10 == 1 ) { ?> document.formv1.r13s1zvy10.checked = "checked"; <?php } ?>
+<?php if ( $r13s1zvy20 == 1 ) { ?> document.formv1.r13s1zvy20.checked = "checked"; <?php } ?>
+<?php if ( $r13s2zvy10 == 1 ) { ?> document.formv1.r13s2zvy10.checked = "checked"; <?php } ?>
+<?php if ( $r13s2zvy20 == 1 ) { ?> document.formv1.r13s2zvy20.checked = "checked"; <?php } ?>
+
+</script>
+
+
 <!-- 14 riadok -->
 <input type="text" name="r14s1" id="r14s1" value="<?php echo $r14s1; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:681px; left:282px;"/>
@@ -2371,12 +2455,22 @@ $r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
        style="top:752px; left:278px;"/> <!-- dopyt, onclick aktualizovaù,  -->
 <input type="checkbox" name="r15s1zni50c" id="r15s1zni50c" value="1" onclick="klik31();"
        style="top:775px; left:278px;"/> <!-- dopyt, onclick aktualizovaù,  -->
+
+<script type="text/javascript">
+<?php if ( $r15s1zni50a == 1 ) { ?> document.formv1.r15s1zni50a.checked = "checked"; <?php } ?>
+<?php if ( $r15s1zni50b == 1 ) { ?> document.formv1.r15s1zni50b.checked = "checked"; <?php } ?>
+<?php if ( $r15s1zni50c == 1 ) { ?> document.formv1.r15s1zni50c.checked = "checked"; <?php } ?>
+</script>
+
 <!-- 16 a 17 riadok -->
 <input type="text" name="r16s1" id="r16s1" value="<?php echo $r16s1; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:806px; left:282px;"/>
 <input type="text" name="r16s2" id="r16s2" value="<?php echo $r16s2; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:806px; left:439px;"/>
 <input type="checkbox" name="r17kombi" value="1" style="top:850px; left:278px;"/>
+<script type="text/javascript">
+<?php if ( $r17kombi == 1 ) { ?> document.formv1.r17kombi.checked = "checked"; <?php } ?>
+</script>
 <!-- 18 riadok -->
 <input type="text" name="r18s1" id="r18s1" value="<?php echo $r18s1; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:884px; left:282px;"/>
@@ -2385,11 +2479,11 @@ $r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
 <!-- 19 riadok -->
 <input type="text" name="r19s1mes" id="r19s1mes" value="<?php echo $r19s1mes; ?>"
        style="width:35px; top:926px; left:326px;"/>
-<input type="text" name="r19s2mes" id="r19s2" value="<?php echo $r19s2mes; ?>"
+<input type="text" name="r19s2mes" id="r19s2mes" value="<?php echo $r19s2mes; ?>"
        style="width:35px; top:926px; left:485px;"/>
 <input type="text" name="r19s1dni" id="r19s1dni" value="<?php echo $r19s1dni; ?>"
        style="width:57px; top:966px; left:326px;"/>
-<input type="text" name="r19s2dni" id="r19s2" value="<?php echo $r19s2dni; ?>"
+<input type="text" name="r19s2dni" id="r19s2dni" value="<?php echo $r19s2dni; ?>"
        style="width:57px; top:966px; left:485px;"/>
 <!-- 20 a 21 riadok -->
 <input type="text" name="r20s1" id="r20s1" value="<?php echo $r20s1; ?>"
@@ -2436,16 +2530,17 @@ $r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
 
 <label for="r49" class="added-label" style="top:1385px; left:287px;">N·vesov· jazdn· s˙prava</label> <!-- dopyt, budeme potrebovaù -->
 <input type="checkbox" name="r49" value="1" style="top:1382px; left:445px;"/>
-<?php if ( $r49 == 1 ) { ?>
-<script>document.formv1.r49.checked = "checked";</script>
-<?php                  } ?>
+
+
+
 
 
 <!-- dopyt, nepouzite -->
 <select size="1" name="vzdno" id="vzdno">
  <option value="0"></option>
  <option value="1">1</option>
- <option value="2">2</option></select>
+ <option value="2">2</option>
+</select>
 <select size="1" name="vzdnp" id="vzdnp">
  <option value=" "></option>
  <option value="A">A</option>
@@ -2454,6 +2549,18 @@ $r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
 </select>
 <img src="../obr/ikony/info_blue_icon.png" onclick="HelpDanovnici();"
      title="Druhy daÚovnÌkov podæa ß 85" class="btn-row-tool" style="top:450px; left:650px;"> <!-- dopyt, budem musieù prer·baù -->
+
+<script type="text/javascript">
+  document.formv1.vzkat.value = '<?php echo "$vzkat";?>';
+  document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
+  document.formv1.vzdno.value = '<?php echo "$vzdno";?>';
+  document.formv1.vzdnp.value = '<?php echo "$vzdnp";?>';
+  document.formv1.dnvnk.value = '<?php echo "$dnvnk";?>';
+  document.formv1.oslbd.value = '<?php echo "$oslbd";?>';
+<?php if ( $r49 == 1 ) { ?> document.formv1.r49.checked = "checked"; <?php } ?>
+
+</script>
+
 
 <?php                     } ?>
 
