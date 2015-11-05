@@ -1792,7 +1792,37 @@ var sirkawic = screen.width-10;
    document.formv1.r13s1zvy20.checked = false;
   }
 
+  function zni20s1()
+  {
+   document.formv1.r13s1zni25.checked = false;
+   document.formv1.r13s1zni15.checked = false;
+   document.formv1.r13s1zvy10.checked = false;
+   document.formv1.r13s1zvy20.checked = false;
+  }
 
+  function zni15s1()
+  {
+   document.formv1.r13s1zni25.checked = false;
+   document.formv1.r13s1zni20.checked = false;
+   document.formv1.r13s1zvy10.checked = false;
+   document.formv1.r13s1zvy20.checked = false;
+  }
+
+  function zvy10s1()
+  {
+   document.formv1.r13s1zni25.checked = false;
+   document.formv1.r13s1zni20.checked = false;
+   document.formv1.r13s1zni15.checked = false;
+   document.formv1.r13s1zvy20.checked = false;
+  }
+
+  function zvy20s1()
+  {
+   document.formv1.r13s1zni25.checked = false;
+   document.formv1.r13s1zni20.checked = false;
+   document.formv1.r13s1zni15.checked = false;
+   document.formv1.r13s1zvy10.checked = false;
+  }
 
 
 
@@ -2408,9 +2438,9 @@ $r20s2 = $fir_riadok->r20s2;
 <!-- znizenie sadzby -->
 <input type="checkbox" name="r13s1zni25" id="r13s1zni25" value="1" onclick="zni25s1();"
        style="top:613px; left:303px;"/> <!-- dopyt, onclick aktualizova -->
-<input type="checkbox" name="r13s1zni20" id="r13s1zni20" value="1" onclick="klik31();"
+<input type="checkbox" name="r13s1zni20" id="r13s1zni20" value="1" onclick="zni20s1();"
        style="top:613px; left:343px;"/> <!-- dopyt, onclick aktualizova -->
-<input type="checkbox" name="r13s1zni15" id="r13s1zni15" value="1" onclick="klik31();"
+<input type="checkbox" name="r13s1zni15" id="r13s1zni15" value="1" onclick="zni15s1();"
        style="top:613px; left:384px;"/> <!-- dopyt, onclick aktualizova -->
 <input type="checkbox" name="r13s2zni25" id="r13s2zni25" value="1" onclick="klik31();"
        style="top:613px; left:460px;"/> <!-- dopyt, onclick aktualizova -->
@@ -2419,9 +2449,9 @@ $r20s2 = $fir_riadok->r20s2;
 <input type="checkbox" name="r13s2zni15" id="r13s2zni15" value="1" onclick="klik31();"
        style="top:613px; left:540px;"/> <!-- dopyt, onclick aktualizova -->
 <!-- zvysenie sadzby -->
-<input type="checkbox" name="r13s1zvy10" id="r13s1zvy10" value="1" onclick="klik31();"
+<input type="checkbox" name="r13s1zvy10" id="r13s1zvy10" value="1" onclick="zvy10s1();"
        style="top:652px; left:343px;"/> <!-- dopyt, onclick aktualizova -->
-<input type="checkbox" name="r13s1zvy20" id="r13s1zvy20" value="1" onclick="klik31();"
+<input type="checkbox" name="r13s1zvy20" id="r13s1zvy20" value="1" onclick="zvy20s1();"
        style="top:652px; left:384px;"/> <!-- dopyt, onclick aktualizova -->
 <input type="checkbox" name="r13s2zvy10" id="r13s2zvy10" value="1" onclick="klik31();"
        style="top:652px; left:500px;"/> <!-- dopyt, onclick aktualizova -->
