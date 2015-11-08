@@ -280,12 +280,11 @@ $i=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
-$sadzbadane=$hlavicka->r08;
-if ( $kli_vrok > 2013 ) { $sadzbadane=$hlavicka->r10; }
-
-$uprtxt = "INSERT INTO F$kli_vxcf"."_uctpriznanie_dmv ( oc, druh, vzdnp, vzdno, vznpr, vzchm, vzobm, vzkat, vzzn, vzspz, datz, r10 ) VALUES ".
+$uprtxt = "INSERT INTO F$kli_vxcf"."_uctpriznanie_dmv ( oc, druh, vzdnp, vzdno, vznpr, vzchm, vzobm, vzkat, vzdru, vzzn, vzspz, ".
+" datz, r49, r50, vzvyk, dnvnk ) VALUES ".
 " ( '$hlavicka->oc', '$hlavicka->druh', '$hlavicka->vzdnp', '$hlavicka->vzdno', '$hlavicka->vznpr', '$hlavicka->vzchm', '$hlavicka->vzobm', ".
-" '$hlavicka->vzkat', '$hlavicka->vzzn', '$hlavicka->vzspz', '$hlavicka->datz', '$sadzbadane' ) ";
+" '$hlavicka->vzkat', '$hlavicka->vzdru', '$hlavicka->vzzn', '$hlavicka->vzspz', '$hlavicka->datz', '$hlavicka->r49', '$hlavicka->r50', ".
+" '$hlavicka->vzvyk', '$hlavicka->dnvnk' ) ";
 $upravene = mysql_query("$uprtxt");
 }
 $i=$i+1;
@@ -317,132 +316,55 @@ $upravene = mysql_query("$uprtxt");
 $uprtxt = "DROP TABLE F$kli_vxcf"."_uctpriznanie_dmvx".$kli_uzid." ";
 $upravene = mysql_query("$uprtxt");
 
-//nova kolonka v 2013 
-if ( $kli_vrok == 2013 )
-   {
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='2' WHERE oc = 1 AND ( vzdru = '' OR vzdru = 0 ) AND vzkat = 'N' ";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='5' WHERE oc = 1 AND ( vzdru = '' OR vzdru = 0 ) AND vzkat = 'O' ";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='1' WHERE oc = 1 AND ( vzdru = '' OR vzdru = 0 ) ";
-$upravene = mysql_query("$uprtxt");
-   }
-
-//uprav sadzby v 2013 pri prenose
-if ( $kli_vrok == 2013 )
-     {
-//osobne vzkat == 'M' sadzba podla obsahu vzobm
-//nakladne vzkat == 'N' alebo 'O' sadzba podla poctu naprav vznpr a hmotnosti vzchm
-$sqltt = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv  WHERE oc = 1 ORDER BY oc,cpl ";
-$sql = mysql_query("$sqltt");
-$pol = mysql_num_rows($sql);
-
-$i=0;
-  while ($i <= $pol )
+if( $kli_vrok == 2015 )
   {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-{
-$hlavicka=mysql_fetch_object($sql);
 
-$sadzbakraj="xxx";
-$ciselnik=1;
-$riadok=1;
-$fir_uctt01 = StrTr($fir_uctt01, "·‰ËÔÈÏÎÌæÚÙÛˆ‡¯öù˙˘¸˝û¡ƒ»œ…ÃÀÕº“”÷‘ÿ¿äç⁄Ÿ‹›é",
-"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
-$fir_uctt01=strtolower($fir_uctt01);
-if ( $fir_uctt01 == 'bratislava' ) { $sadzbakraj="szba"; }
-if ( $fir_uctt01 == 'nitra' ) { $sadzbakraj="sznr"; }
-if ( $fir_uctt01 == 'trencin' ) { $sadzbakraj="sztn"; }
-if ( $fir_uctt01 == 'trnava' ) { $sadzbakraj="sztt"; }
-if ( $fir_uctt01 == 'kosice' ) { $sadzbakraj="szke"; }
-if ( $fir_uctt01 == 'presov' ) { $sadzbakraj="szpo"; }
-if ( $fir_uctt01 == 'zilina' ) { $sadzbakraj="szza"; }
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET dnvnk=vzdnp ";
+$upravene = mysql_query("$uprtxt");
 
-if ( $hlavicka->vzkat != 'N' AND $hlavicka->vzkat != 'O' )
-{ 
-$ciselnik=1; 
-if ( $hlavicka->vzobm <= 900 ) { $riadok=1; }
-if ( $hlavicka->vzobm >  900 AND $hlavicka->vzobm <= 1200 ) { $riadok=2; }
-if ( $hlavicka->vzobm > 1200 AND $hlavicka->vzobm <= 1500 ) { $riadok=3; }
-if ( $hlavicka->vzobm > 1500 AND $hlavicka->vzobm <= 2000 ) { $riadok=4; }
-if ( $hlavicka->vzobm > 2000 AND $hlavicka->vzobm <= 3000 ) { $riadok=5; }
-if ( $hlavicka->vzobm > 3000 ) { $riadok=6; }
-}
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r15s1zni50a=1 WHERE r50 = 50 ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r12doniz=1 WHERE r49 = 1 ";
+$upravene = mysql_query("$uprtxt");
 
-if ( ( $hlavicka->vzkat == 'N' OR $hlavicka->vzkat == 'N' ) AND $hlavicka->vznpr < 3 )
-{ 
-$ciselnik=2; 
-if ( $hlavicka->vzchm <= 1 ) { $riadok=1; }
-if ( $hlavicka->vzchm >  1 AND $hlavicka->vzchm <=  2 ) { $riadok=2; }
-if ( $hlavicka->vzchm >  2 AND $hlavicka->vzchm <=  4 ) { $riadok=3; }
-if ( $hlavicka->vzchm >  4 AND $hlavicka->vzchm <=  6 ) { $riadok=4; }
-if ( $hlavicka->vzchm >  6 AND $hlavicka->vzchm <=  8 ) { $riadok=5; }
-if ( $hlavicka->vzchm >  8 AND $hlavicka->vzchm <= 10 ) { $riadok=6; }
-if ( $hlavicka->vzchm > 10 AND $hlavicka->vzchm <= 12 ) { $riadok=7; }
-if ( $hlavicka->vzchm > 12 AND $hlavicka->vzchm <= 14 ) { $riadok=8; }
-if ( $hlavicka->vzchm > 14 AND $hlavicka->vzchm <= 16 ) { $riadok=9; }
-if ( $hlavicka->vzchm > 16 AND $hlavicka->vzchm <= 18 ) { $riadok=10; }
-if ( $hlavicka->vzchm > 18 AND $hlavicka->vzchm <= 20 ) { $riadok=11; }
-if ( $hlavicka->vzchm > 20 AND $hlavicka->vzchm <= 22 ) { $riadok=12; }
-if ( $hlavicka->vzchm > 22 AND $hlavicka->vzchm <= 24 ) { $riadok=13; }
-if ( $hlavicka->vzchm > 24 AND $hlavicka->vzchm <= 26 ) { $riadok=14; }
-if ( $hlavicka->vzchm > 26 AND $hlavicka->vzchm <= 28 ) { $riadok=15; }
-if ( $hlavicka->vzchm > 28 AND $hlavicka->vzchm <= 30 ) { $riadok=16; }
-if ( $hlavicka->vzobm > 30 ) { $riadok=17; }
-}
+//zmena druhov
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdrx=vzdru ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='' ";
+$upravene = mysql_query("$uprtxt");
 
-if ( ( $hlavicka->vzkat == 'N' OR $hlavicka->vzkat == 'N' ) AND $hlavicka->vznpr == 3 )
-{ 
-$ciselnik=2; 
-if ( $hlavicka->vzchm <= 15 ) { $riadok=1; }
-if ( $hlavicka->vzchm > 15 AND $hlavicka->vzchm <= 17 ) { $riadok=2; }
-if ( $hlavicka->vzchm > 17 AND $hlavicka->vzchm <= 19 ) { $riadok=3; }
-if ( $hlavicka->vzchm > 19 AND $hlavicka->vzchm <= 21 ) { $riadok=4; }
-if ( $hlavicka->vzchm > 21 AND $hlavicka->vzchm <= 23 ) { $riadok=5; }
-if ( $hlavicka->vzchm > 23 AND $hlavicka->vzchm <= 25 ) { $riadok=6; }
-if ( $hlavicka->vzchm > 25 AND $hlavicka->vzchm <= 27 ) { $riadok=7; }
-if ( $hlavicka->vzchm > 27 AND $hlavicka->vzchm <= 29 ) { $riadok=8; }
-if ( $hlavicka->vzchm > 29 AND $hlavicka->vzchm <= 31 ) { $riadok=9; }
-if ( $hlavicka->vzchm > 31 AND $hlavicka->vzchm <= 33 ) { $riadok=10; }
-if ( $hlavicka->vzchm > 33 AND $hlavicka->vzchm <= 35 ) { $riadok=11; }
-if ( $hlavicka->vzchm > 35 AND $hlavicka->vzchm <= 37 ) { $riadok=12; }
-if ( $hlavicka->vzchm > 37 AND $hlavicka->vzchm <= 40 ) { $riadok=13; }
-if ( $hlavicka->vzobm > 40 ) { $riadok=14; }
-}
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='L1' WHERE vzkat = 'L' ";
+$upravene = mysql_query("$uprtxt");
 
-if ( ( $hlavicka->vzkat == 'N' OR $hlavicka->vzkat == 'N' ) AND $hlavicka->vznpr > 3 )
-{ 
-$ciselnik=2; 
-if ( $hlavicka->vzchm <= 23) { $riadok=1; }
-if ( $hlavicka->vzchm > 23 AND $hlavicka->vzchm <= 25 ) { $riadok=2; }
-if ( $hlavicka->vzchm > 25 AND $hlavicka->vzchm <= 27 ) { $riadok=3; }
-if ( $hlavicka->vzchm > 27 AND $hlavicka->vzchm <= 29 ) { $riadok=4; }
-if ( $hlavicka->vzchm > 29 AND $hlavicka->vzchm <= 31 ) { $riadok=5; }
-if ( $hlavicka->vzchm > 31 AND $hlavicka->vzchm <= 33 ) { $riadok=6; }
-if ( $hlavicka->vzchm > 33 AND $hlavicka->vzchm <= 35 ) { $riadok=7; }
-if ( $hlavicka->vzchm > 35 AND $hlavicka->vzchm <= 37 ) { $riadok=8; }
-if ( $hlavicka->vzchm > 37 AND $hlavicka->vzchm <= 40 ) { $riadok=9; }
-if ( $hlavicka->vzobm > 40 ) { $riadok=10; }
-}
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='M1' WHERE vzkat = 'M' ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='M2' WHERE vzkat = 'M' AND vzdrx = 4 ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='M3' WHERE vzkat = 'M' AND vzdrx = 4 AND vzchm > 5 ";
+$upravene = mysql_query("$uprtxt");
 
-$sadzba=0;
-$sqlttt = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv WHERE csdz = $ciselnik AND cprm = $riadok ";
-$sqldok = mysql_query("$sqlttt");
- if (@$zaznam=mysql_data_seek($sqldok,0))
- {
- $riaddok=mysql_fetch_object($sqldok);
- $sadzba=$riaddok->$sadzbakraj;
- }
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r10=$sadzba WHERE cpl = $hlavicka->cpl ";
-if ( $sadzba > 0 ) { $upravene = mysql_query("$uprtxt"); }
-}
-$i=$i+1;
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='N1' WHERE vzkat = 'N' ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='N2' WHERE vzkat = 'N' AND vzchm > 3.5 ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='N3' WHERE vzkat = 'N' AND vzchm > 12 ";
+$upravene = mysql_query("$uprtxt");
+
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='O1' WHERE vzkat = 'O' ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='O2' WHERE vzkat = 'O' AND vzchm > 0.75 ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='O3' WHERE vzkat = 'O' AND vzchm > 3.5 ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='O4' WHERE vzkat = 'O' AND vzchm > 10 ";
+$upravene = mysql_query("$uprtxt");
+
   }
-     }
-//koniec uprav sadzbu
 
 $prenosminuly=1;
 $copern=20;
+//exit;
 //koniec nacitania celeho minuleho roka do DMV
     }
 
@@ -597,23 +519,21 @@ $r19s2dni = strip_tags($_REQUEST['r19s2dni']);
 $r20s1 = strip_tags($_REQUEST['r20s1']);
 $r20s2 = strip_tags($_REQUEST['r20s2']);
 
-//ak sa pri ulozeni zmenila sadzba prepocitaj pomernu dan
+//ak sa pri ulozeni zmenila sadzba, pocet mesiacov prepocitaj pomernu dan
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE cpl = $cislo_cpl ";
 $sqldok = mysql_query("$sqlttt");
  if (@$zaznam=mysql_data_seek($sqldok,0))
  {
  $riaddok=mysql_fetch_object($sqldok);
- $r10old=1*$riaddok->r10;
- $r13old=1*$riaddok->r13;
- $r11old=1*$riaddok->r11;
- }
-$r10new=1*$r10;
-$r13new=1*$r13;
-$r11new=1*$r11;
+ $r12old=1*$riaddok->r12;
+ $r19s1mesold=1*$riaddok->r19s1mes;
 
-if ( $r10old != $r10new ) { $vypocitajdan=1; }
-if ( $r13old != $r13new ) { $vypocitajdan=1; }
-if ( $r11old != $r11new ) { $vypocitajdan=1; }
+ }
+$r12new=1*$r12;
+$r19s1mesnew=1*$r19s1mes;
+
+if ( $r12old != $r12new ) { $vypocitajdan=1; }
+if ( $r19s1mesold != $r19s1mesnew ) { $vypocitajdan=1; }
 
 //ak sa pri ulozeni zmenil datum zac alebo kon prepocitaj dni a pomernu
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE cpl = $cislo_cpl ";
@@ -692,20 +612,10 @@ endif;
 //koniec zapisu upravenych udajov
 
 //vypocty
-$nerob=0;
-if ( $nerob == 0 )
-     {
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdno='1' WHERE oc = 1 AND vzdno = 0 ";
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET dnvnk='A' WHERE oc = 1 AND dnvnk = '' ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdnp='A' WHERE oc = 1 AND vzdnp = '' ";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzkat='M' WHERE oc = 1 AND vzkat = '' ";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='2' WHERE oc = 1 AND ( vzdru = '' OR vzdru = 0 ) AND vzkat = 'N' ";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='5' WHERE oc = 1 AND ( vzdru = '' OR vzdru = 0 ) AND vzkat = 'O' ";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzdru='1' WHERE oc = 1 AND ( vzdru = '' OR vzdru = 0 ) ";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzkat='M', vzdru='M1' WHERE oc = 1 AND vzkat = '' ";
 $upravene = mysql_query("$uprtxt");
 
 
@@ -716,93 +626,31 @@ $sqltt = "SELECT * FROM kalendar WHERE dat >= '$prvyden' AND dat <= '$denposledn
 $sql = mysql_query("$sqltt");
 $pocetdnirok = mysql_num_rows($sql);
 
-$podmcpl=" AND cpl = $cislo_cpl ";
-if ( $prenosminuly == 1 )
-{
-$pocetdni=1;
-$podmcpl="";
-}
-
-if ( $pocetdni == 1 )
-     {
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET datz='$prvyden' WHERE oc = 1 AND datz = '0000-00-00' $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13=$pocetdni WHERE oc = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13=DATEDIFF(datk,'$prvyden')+1 WHERE oc = 1 AND datk > '$prvyden' $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13=DATEDIFF('$denposledny',datz)+1 WHERE oc = 1 AND datz >= '$prvyden' $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13=DATEDIFF(datk,datz)+1 WHERE oc = 1 AND datz >= '$prvyden' AND datk >= '$prvyden' $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13=DATEDIFF(datk,'$prvyden')+1 WHERE oc = 1 AND datz < '$prvyden' AND datk >= '$prvyden' $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13=DATEDIFF('$denposledny','$prvyden')+1 WHERE oc = 1 AND datz < '$prvyden' AND datk = '0000-00-00' $podmcpl";
-$upravene = mysql_query("$uprtxt");
-     }
-
-if ( $pocetdni == 1 ) { $vypocitajdan=1; }
-if ( $vypocitajdan == 1 )
-     {
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r10/$pocetdnirok*r13 WHERE oc = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r11/$pocetdnirok*r13 WHERE r11 != 0 AND oc = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r10 WHERE des6 > r10 AND oc = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r11 WHERE r11 != 0 AND des6 > r11 AND oc = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des2=des6 WHERE oc = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r16=des2 WHERE oc = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r16=0 WHERE oc = 1 AND r16 < 0 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r17=0 WHERE oc = 1 AND r14 = 0 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r18=0 WHERE oc = 1 AND r15 = 0 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19=r16+r17+r18 WHERE oc = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r21=r19 WHERE oc = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-     }
-
-$sumadane=0; 
-$sqlttt = "SELECT SUM(r21) AS sumr21, SUM(oc) AS sumoc FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE oc = 1 ";
-$sqldok = mysql_query("$sqlttt");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $sumadane=$riaddok->sumr21;
-  }
 
 $predpoklad = 1*$_REQUEST['predpoklad'];
-if ( $predpoklad == 1 )
+$dajsadzbu = 1*$_REQUEST['dajsadzbu'];
+$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
+if ( $predpoklad == 1 OR $dajsadzbu == 1 )
      {
 $danpredpok=0;
 
-if( $kli_vrok < 2014 OR $kli_vrok > 2014 ) 
-      {
-$sqlttt = "SELECT SUM(r10) AS sumr10 FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE oc = 1 AND datk = '0000-00-00' ";
-$sqldok = mysql_query("$sqlttt");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $danpredpok=$riaddok->sumr10;
-  }
-      }
-
-if( $kli_vrok == 2015 ) 
-      {
 $sqlttt = "DROP TABLE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "CREATE TABLE F$kli_vxcf"."_uctpriznanie_dmvx".$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE oc = 1 AND datk = '0000-00-00' ";
-$sqldok = mysql_query("$sqlttt");
+$podmnacpl="";
+if( $dajsadzbu == 1 )
+  {
+$podmnacpl="cpl = ".$cislo_cpl." AND ";
+  }
 
+$podmdatk="";
+if( $predpoklad == 1 ) 
+  {
+$podmdatk=" AND datk = '0000-00-00' ";
+  }
+
+$sqlttt = "CREATE TABLE F$kli_vxcf"."_uctpriznanie_dmvx".$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE $podmnacpl oc = 1 $podmdatk ";
+$sqldok = mysql_query("$sqlttt");
 
 $sqltt = "SELECT * FROM F".$kli_vxcf."_uctpriznanie_dmvx$kli_uzid WHERE oc = 1 ORDER BY cpl ";
 $sql = mysql_query("$sqltt");
@@ -813,23 +661,36 @@ $i=0;
   if (@$zaznam=mysql_data_seek($sql,$i))
   {
 $riadok=mysql_fetch_object($sql);
-//andrej
 
+if( $riadok->vzkat == 'M' AND $riadok->vzdru != 'M1' ) { $riadok->vzkat="N"; }
+
+//osobne podla objemu
+if( $riadok->vzkat == 'L' OR $riadok->vzkat == 'M' ) 
+  {
 $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 7 "; 
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 7 "; }
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 3000 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 6 "; }
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 2000 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 5 "; }
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 1500 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 4 "; }
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 1200 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 3 "; }
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 900  ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 2 "; }
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 1 AND $riadok->vzobm <= 150  ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 1 "; }
+if( $riadok->vzobm <= 3000 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 6 "; }
+if( $riadok->vzobm <= 2000 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 5 "; }
+if( $riadok->vzobm <= 1500 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 4 "; }
+if( $riadok->vzobm <= 1200 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 3 "; }
+if( $riadok->vzobm <= 900  ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 2 "; }
+if( $riadok->vzobm <= 150  ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 1 "; }
+  }
 
-if( $riadok->vzkat == 'M' AND $riadok->vzdru == 4 ) { $riadok->vzkat="N"; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 1 ) { $riadok->vznpr=2; }
+//nakladne podla naprav a hmotnosti
+if( $riadok->vzkat == 'N' OR $riadok->vzkat == 'O' ) 
+  { 
 
-if( $riadok->vzkat != 'M' AND ( $riadok->vzdru == 3 OR $riadok->vzdru == 5 ) AND $riadok->r49 > 0 ) 
-{ 
+if( $riadok->vznpr < 2 ) 
+    { 
+$riadok->vznpr=2; 
+    }
+if( $riadok->vznpr > 4 ) 
+    { 
+$riadok->vznpr=4; 
+    }
 
+if( $riadok->r12doniz == 1 ) 
+    { 
 if( $riadok->vznpr == 2 AND $riadok->vzchm == 2 ) { $riadok->vzchm=1; }
 if( $riadok->vznpr == 2 AND $riadok->vzchm >  2 AND $riadok->vzchm <= 30 ) { $riadok->vzchm=$riadok->vzchm-2; }
 if( $riadok->vznpr == 2 AND $riadok->vzchm > 30 ) { $riadok->vzchm=28; }
@@ -841,118 +702,346 @@ if( $riadok->vznpr == 3 AND $riadok->vzchm > 40 ) { $riadok->vzchm=40; }
 if( $riadok->vznpr == 4 AND $riadok->vzchm > 23 AND $riadok->vzchm <= 37 ) { $riadok->vzchm=$riadok->vzchm-2; }
 if( $riadok->vznpr == 4 AND $riadok->vzchm > 37 AND $riadok->vzchm <= 40 ) { $riadok->vzchm=37; }
 if( $riadok->vznpr == 4 AND $riadok->vzchm > 40 ) { $riadok->vzchm=40; }
-}
+    }
 
-if( $riadok->vzkat != 'M' ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 10 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 40 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 9 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 37 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 8 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 35 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 7 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 33 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 6 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 31 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 5 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 29 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 4 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 27 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 3 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 25 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 2 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 4 AND $riadok->vzchm <= 23 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 1 "; }
+$sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 10 "; 
+if( $riadok->vznpr == 4 AND $riadok->vzchm <= 40 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 9 "; }
+if( $riadok->vznpr == 4 AND $riadok->vzchm <= 37 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 8 "; }
+if( $riadok->vznpr == 4 AND $riadok->vzchm <= 35 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 7 "; }
+if( $riadok->vznpr == 4 AND $riadok->vzchm <= 33 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 6 "; }
+if( $riadok->vznpr == 4 AND $riadok->vzchm <= 31 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 5 "; }
+if( $riadok->vznpr == 4 AND $riadok->vzchm <= 29 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 4 "; }
+if( $riadok->vznpr == 4 AND $riadok->vzchm <= 27 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 3 "; }
+if( $riadok->vznpr == 4 AND $riadok->vzchm <= 25 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 2 "; }
+if( $riadok->vznpr == 4 AND $riadok->vzchm <= 23 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 1 "; }
 
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 14 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 40 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 13 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 37 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 12 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 35 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 11 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 33 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 10 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 31 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 9 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 29 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 8 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 27 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 7 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 25 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 6 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 23 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 5 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 21 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 4 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 19 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 3 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 17 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 2 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 3 AND $riadok->vzchm <= 15 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 1 "; }
+if( $riadok->vznpr == 3 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 14 "; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm <= 40 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 13 "; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm <= 37 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 12 "; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm <= 35 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 11 "; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm <= 33 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 10 "; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm <= 31 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 9 "; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm <= 29 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 8 "; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm <= 27 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 7 "; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm <= 25 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 6 "; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm <= 23 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 5 "; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm <= 21 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 4 "; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm <= 19 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 3 "; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm <= 17 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 2 "; }
+if( $riadok->vznpr == 3 AND $riadok->vzchm <= 15 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 1 "; }
 
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 17 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 30 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 16 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 28 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 15 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 26 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 14 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 24 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 13 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 22 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 12 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 20 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 11 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 18 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 10 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 16 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 9 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 14 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 8 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 12 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 7 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 10 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 6 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 8 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 5 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 6 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 4 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 4 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 3 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 2 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 2 "; }
-if( $riadok->vzkat != 'M' AND $riadok->vznpr == 2 AND $riadok->vzchm <= 1 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 1 "; }
+if( $riadok->vznpr == 2 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 3 AND cprm = 17 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 30 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 16 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 28 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 15 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 26 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 14 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 24 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 13 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 22 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 12 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 20 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 11 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 18 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 10 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 16 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 9 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 14 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 8 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 12 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 7 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 10 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 6 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 8 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 5 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 6 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 4 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 4 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 3 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 2 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 2 "; }
+if( $riadok->vznpr == 2 AND $riadok->vzchm <= 1 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 2 AND cprm = 1 "; }
+  }
 
-$sadzba15=0;
+$sadzba12=0;
 $sqldos = mysql_query("$sqltts");
   if (@$zaznam=mysql_data_seek($sqldos,0))
   {
   $riaddos=mysql_fetch_object($sqldos);
-  $sadzba15=$riaddos->szba;
+  $sadzba12=$riaddos->szba;
   }
 
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13='$sadzba15' WHERE cpl = $riadok->cpl ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12='$sadzba12' WHERE cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
+
+
+echo "idem sadzba do r12"."<br />";
+
+
+//andrej toto robime
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r14=YEAR(da1), r15=MONTH(da1) WHERE oc = 1 ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=0, mesad2=0, mesad3=0, mesad4=0, mesad5=0, r13=0 WHERE oc = 1 ";
+$sqldok = mysql_query("$sqlttt");
+
+$kli_vrok2=$kli_vrok;
+$kli_vmes2=12;
+if( $predpoklad == 1 ) { $kli_vrok2=$kli_vrok+1; $kli_vmes2=0;}
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=(($kli_vrok2-r14)*12)-(r15-1)+$kli_vmes2 WHERE oc = 1 ";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad2=(($kli_vrok2-r14)*12)-(r15-1) WHERE oc = 1 ";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad3=MONTH(da1) WHERE oc = 1 ";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad4=MONTH(datk) WHERE oc = 1 ";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad5=1 WHERE oc = 1 AND datz < '$prvyden' ";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad5=MONTH(datz) WHERE oc = 1 AND datz >= '$prvyden' ";
+$sqldok = mysql_query("$sqlttt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13s1zni25=0, r13s1zni20=0, r13s1zni15=0 WHERE oc = 1 ";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13s1zvy10=0, r13s1zvy20=0 WHERE oc = 1 ";
+$upravene = mysql_query("$uprtxt");
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=-0.25, r13s1zni25=1 WHERE oc = 1 AND mesad1 >=  1 AND mesad1 <= 36";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=-0.20, r13s1zni20=1 WHERE oc = 1 AND mesad1 >= 37 AND mesad1 <= 72";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=-0.15, r13s1zni15=1 WHERE oc = 1 AND mesad1 >= 73 AND mesad1 <= 108";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=0.10, r13s1zvy10=1 WHERE oc = 1 AND mesad1 >= 145 AND mesad1 <= 156";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=0.20, r13s1zvy20=1 WHERE oc = 1 AND mesad1 > 156";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=0, r13=0 WHERE da1 = '0000-00-00' ";
+$sqldok = mysql_query("$sqlttt");
+
+
+//hybrid,kombinovana,elektro
+
+$sqlttt = "SELECT r13s1zni25, r13s1zni20, r13s1zni15, r13s1zvy10, r13s1zvy20, mesad1, mesad2, mesad3, mesad4, mesad5 ".
+" FROM F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid WHERE oc = 1 AND cpl = $riadok->cpl";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $mesad1x=$riaddok->mesad1;
+  $mesad2x=$riaddok->mesad2;
+  $mesad3x=$riaddok->mesad3;
+  $mesad4x=$riaddok->mesad4;
+  $mesad5x=$riaddok->mesad5;
+  $r13s1zni25x=$riaddok->r13s1zni25;
+  $r13s1zni20x=$riaddok->r13s1zni20;
+  $r13s1zni15x=$riaddok->r13s1zni15;
+  $r13s1zvy10x=$riaddok->r13s1zvy10;
+  $r13s1zvy20x=$riaddok->r13s1zvy20;
+  }
+
+
+if( $dajsadzbu == 1 )
+  {
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r12='$sadzba12' WHERE oc = 1 AND cpl = $cislo_cpl ";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13s1zni25='$r13s1zni25x', r13s1zni20='$r13s1zni20x', r13s1zni15='$r13s1zni15x' WHERE oc = 1 AND cpl = $cislo_cpl ";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET mesad1='$mesad1x', mesad2='$mesad2x', mesad3='$mesad3x', mesad4='$mesad4x', mesad5='$mesad5x', ".
+" r13s1zvy10='$r13s1zvy10x', r13s1zvy20='$r13s1zvy20x' WHERE oc = 1 AND cpl = $cislo_cpl ";
+$upravene = mysql_query("$uprtxt");
+
+$pocetdni=1;
+$copern=20;
+$strana=3;
+$zoznamaut=0;
+  }
+
 
   }
 $i=$i+1;
    }
 
-//pocet mesiacov 11, zlava 12, sadzba 13, rocna predpokl.dan r10
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r14=YEAR(da1), r15=MONTH(da1) WHERE oc = 1 ";
-$sqldok = mysql_query("$sqlttt");
-
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r11=0, r12=0, r10=0 WHERE oc = 1 ";
-$sqldok = mysql_query("$sqlttt");
-
-$kli_vrok2=$kli_vrok+1;
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r11=(($kli_vrok2-r14)*12)-(r15-1) WHERE oc = 1 ";
-$sqldok = mysql_query("$sqlttt");
-
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=-0.25 WHERE oc = 1 AND r11 >=  1 AND r11 <= 36";
-$sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=-0.20 WHERE oc = 1 AND r11 >= 37 AND r11 <= 72";
-$sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=-0.15 WHERE oc = 1 AND r11 >= 73 AND r11 <= 108";
-$sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=0.10 WHERE oc = 1 AND r11 >= 145 AND r11 <= 156";
-$sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=0.20 WHERE oc = 1 AND r11 > 156";
-$sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=-0.50 WHERE oc = 1 AND r50 = 50 ";
-$sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12=-1.00 WHERE oc = 1 AND r50 = 100 ";
-$sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r11=0, r12=0 WHERE da1 = '0000-00-00' ";
-$sqldok = mysql_query("$sqlttt");
-
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r10=(1+r12)*r13 WHERE oc = 1 ";
-$sqldok = mysql_query("$sqlttt");
-
-
-//elektromobil { $sadzba15=0; }
-//hybrid zlava 50%
-
-$sqlttt = "SELECT SUM(r10) AS sumr10 FROM F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid WHERE oc = 1 AND datk = '0000-00-00' ";
+$sqlttt = "SELECT SUM(r21) AS sumr21 FROM F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid WHERE oc = 1 ";
 $sqldok = mysql_query("$sqlttt");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
-  $danpredpok=$riaddok->sumr10;
+  $danpredpok=$riaddok->sumr21;
   }
 
-      }
-//koniec rok 2015
-
+if( $predpoklad == 1 )
+  {
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r40=$danpredpok WHERE oc = 9999 ";
 $upravene = mysql_query("$uprtxt");
-     }
-//koniec predpoklad=1
+  }
 
+     }
+//koniec predpoklad=1 alebo dajsadzbu=1
+
+
+$podmcpl=" AND cpl = $cislo_cpl ";
+if ( $prenosminuly == 1 )
+{
+$pocetdni=1;
+$podmcpl="";
+}
+
+if ( $pocetdni == 1 )
+     {
+echo "idem pocet mesiacov r19 "."<br />";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET datz='$prvyden' WHERE oc = 1 AND datz = '0000-00-00' $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1dni=$pocetdni WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1dni=DATEDIFF(datk,'$prvyden')+1 WHERE oc = 1 AND datk > '$prvyden' $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1dni=DATEDIFF('$denposledny',datz)+1 WHERE oc = 1 AND datz >= '$prvyden' $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1dni=DATEDIFF(datk,datz)+1 WHERE oc = 1 AND datz >= '$prvyden' AND datk >= '$prvyden' $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1dni=DATEDIFF(datk,'$prvyden')+1 WHERE oc = 1 AND datz < '$prvyden' AND datk >= '$prvyden' $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1dni=DATEDIFF('$denposledny','$prvyden')+1 WHERE oc = 1 AND datz < '$prvyden' AND datk = '0000-00-00' $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1dni=0 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1mes=12 WHERE oc = 1 AND datz < '$prvyden' AND datk = '0000-00-00' $podmcpl";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1mes=12-(12-MONTH(datk)) WHERE oc = 1 AND datz < '$prvyden' AND datk >= '$prvyden' $podmcpl";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1mes=12-MONTH(datz)+1 WHERE oc = 1 AND datz >= '$prvyden' AND datk = '0000-00-00' $podmcpl";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1mes=12-MONTH(datz)+1-(12-MONTH(datk)) WHERE oc = 1 AND datz >= '$prvyden' AND datk >= '$prvyden' $podmcpl";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1mes=12 WHERE oc = 1 AND r19s1mes = 0 $podmcpl";
+$sqldok = mysql_query("$sqlttt");
+
+     }
+
+
+if ( $pocetdni == 1 ) { $vypocitajdan=1; }
+if ( $vypocitajdan == 1 )
+     {
+echo "idem vypocitaj dan r14,16,18,20 "."<br />";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=0, des2=0 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*0.75 WHERE oc = 1 AND r13s1zni25 = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*0.80 WHERE oc = 1 AND r13s1zni20 = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*0.85 WHERE oc = 1 AND r13s1zni15 = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*1.20 WHERE oc = 1 AND r13s1zvy20 = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*1.10 WHERE oc = 1 AND r13s1zvy10 = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des2=des6 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des2=0 WHERE oc = 1 AND des2 < 0 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r14s1=des2 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r16s1=r14s1 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r18s1=r16s1 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+//s2
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=0, des2=0 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*0.75 WHERE oc = 1 AND r13s2zni25 = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*0.80 WHERE oc = 1 AND r13s2zni20 = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*0.85 WHERE oc = 1 AND r13s2zni15 = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*1.20 WHERE oc = 1 AND r13s2zvy20 = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*1.10 WHERE oc = 1 AND r13s2zvy10 = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des2=des6 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des2=0 WHERE oc = 1 AND des2 < 0 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r14s2=des2 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r16s2=r14s2 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r18s2=r16s2 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+
+$pomerdni=0;
+if( $pomerdni == 1 )
+  {
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r18s1/$pocetdnirok*r19s1dni WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des2=des6 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r20s1=des2 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r20s1=0 WHERE r20s1 < 0 AND oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+  }
+$pomermes=1;
+if( $pomermes == 1 )
+  {
+echo "idem pomer mes"."<br />";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r18s1/12*r19s1mes WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des2=des6 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r20s1=des2 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r20s1=0 WHERE r20s1 < 0 AND oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+//s2
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r18s2/12*r19s2mes WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des2=des6 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r20s2=des2 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r20s2=0 WHERE r20s2 < 0 AND oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+  }
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r21=r20s1+r20s2 WHERE oc = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+
+     }
+
+$sumadane=0; 
+$sqlttt = "SELECT SUM(r21) AS sumr21, SUM(oc) AS sumoc FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE oc = 1 ";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $sumadane=$riaddok->sumr21;
+  }
+
+//pocet vozidiel a na uhradu
 $pocetvozidiel=0;
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE oc = 1 ");
 $pocetvozidiel = mysql_num_rows($sqldok);
@@ -963,8 +1052,8 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r38=r36-r37, r39=0 WHERE oc
 $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r39=-r38, r38=0 WHERE oc = 9999 AND r38 < 0 ";
 $upravene = mysql_query("$uprtxt");
-     }
-//nerob=1
+
+
 
 //prac.subor a subor vytvorenych rocnych
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
@@ -1259,7 +1348,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r20s2 DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
 $vysledek = mysql_query("$sql");
 }
-$sql = "SELECT d3titz FROM F".$kli_vxcf."_uctpriznanie_dmv";
+$sql = "SELECT mesad5 FROM F".$kli_vxcf."_uctpriznanie_dmv";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -1301,7 +1390,18 @@ $vysledek = mysql_query("$sql");
 //2.strana
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD d3titz VARCHAR(15) NOT NULL AFTER new2015";
 $vysledek = mysql_query("$sql");
-
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD vzdrx DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD mesad1 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD mesad2 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD mesad3 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD mesad4 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD mesad5 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
 }
 //koniec uprav def. tabulky
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv";
@@ -1314,7 +1414,7 @@ $vytvor = mysql_query("$vsql");
 $vsql = 'TRUNCATE TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid." ";
 $vytvor = mysql_query("$vsql");
 
-//vypocty
+//pocet stran
 if ( $copern == 10 OR $copern == 20 )
 {
 //echo "PrepoËÌtavam hodnoty v daÚovom priznanÌ.";
@@ -1327,15 +1427,8 @@ $pos = mysql_num_rows($sqldok);
 $sqtoz = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET pos=ceil($pos/2) ";
 $oznac = mysql_query("$sqtoz");
 }
-//koniec vypocty
+//koniec pocet stran
 
-/////////////NACITANIE UDAJOV Z PARAMETROV
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $cicz=$riaddok->cicz;
-  }
 ?>
 
 <?php
@@ -1392,7 +1485,69 @@ $likvi = $fir_riadok->likvi;
 
 if ( $strana == 3 )
 {
-//moje upravy stranu 3 robime inak takze vsetko som dal prec
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv".
+" WHERE cpl = $cislo_cpl ORDER BY oc";
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+$vzkat = $fir_riadok->vzkat;
+$vzdru = $fir_riadok->vzdru;
+$vzzn = $fir_riadok->vzzn;
+$vzspz = $fir_riadok->vzspz;
+$da1sk = SkDatum($fir_riadok->da1);
+$datzsk = SkDatum($fir_riadok->datz);
+$datksk = SkDatum($fir_riadok->datk);
+$vzobm = $fir_riadok->vzobm;
+$vzchm = $fir_riadok->vzchm;
+$vznpr = $fir_riadok->vznpr;
+$vzdno = $fir_riadok->vzdno;
+$vzdnp = $fir_riadok->vzdnp;
+$r10 = $fir_riadok->r10;
+$r11 = $fir_riadok->r11;
+$r12 = $fir_riadok->r12;
+$r13 = $fir_riadok->r13;
+$r14 = $fir_riadok->r14;
+$r15 = $fir_riadok->r15;
+$r16 = $fir_riadok->r16;
+$r17 = $fir_riadok->r17;
+$r18 = $fir_riadok->r18;
+$r19 = $fir_riadok->r19;
+$r20 = $fir_riadok->r20;
+$r21 = $fir_riadok->r21;
+$r22 = $fir_riadok->r22;
+$r23 = $fir_riadok->r23;
+$r24 = $fir_riadok->r24;
+$r50 = $fir_riadok->r50;
+$r49 = 1*$fir_riadok->r49;
+$r12doniz = 1*$fir_riadok->r12doniz;
+$vzvyk = $fir_riadok->vzvyk;
+$dnvnk = $fir_riadok->dnvnk;
+$oslbd = $fir_riadok->oslbd;
+$r13s1zni25 = 1*$fir_riadok->r13s1zni25;
+$r13s1zni20 = 1*$fir_riadok->r13s1zni20;
+$r13s1zni15 = 1*$fir_riadok->r13s1zni15;
+$r13s2zni25 = 1*$fir_riadok->r13s2zni25;
+$r13s2zni20 = 1*$fir_riadok->r13s2zni20;
+$r13s2zni15 = 1*$fir_riadok->r13s2zni15;
+$r13s1zvy10 = 1*$fir_riadok->r13s1zvy10;
+$r13s1zvy20 = 1*$fir_riadok->r13s1zvy20;
+$r13s2zvy10 = 1*$fir_riadok->r13s2zvy10;
+$r13s2zvy20 = 1*$fir_riadok->r13s2zvy20;
+$r14s1 = $fir_riadok->r14s1;
+$r14s2 = $fir_riadok->r14s2;
+$r15s1zni50a = 1*$fir_riadok->r15s1zni50a;
+$r15s1zni50b = 1*$fir_riadok->r15s1zni50b;
+$r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
+$r16s1 = $fir_riadok->r16s1;
+$r16s2 = $fir_riadok->r16s2;
+$r17kombi = $fir_riadok->r17kombi;
+$r18s1 = $fir_riadok->r18s1;
+$r18s2 = $fir_riadok->r18s2;
+$r19s1mes = $fir_riadok->r19s1mes;
+$r19s2mes = $fir_riadok->r19s2mes;
+$r19s1dni = $fir_riadok->r19s1dni;
+$r19s2dni = $fir_riadok->r19s2dni;
+$r20s1 = $fir_riadok->r20s1;
+$r20s2 = $fir_riadok->r20s2;
 }
 
 if ( $strana == 4 ) {
@@ -1676,7 +1831,12 @@ var sirkawic = screen.width-10;
    document.formv1.d3titz.value = '<?php echo "$d3titz";?>';
 <?php                                                                   } ?>
 
-<?php if ( $strana == 4 OR $strana == 9999 )                           { ?>
+<?php if ( $strana == 3 OR $strana == 9999 )                            { ?>
+urobVzdru();
+document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
+<?php                                                                   } ?> 
+
+<?php if ( $strana == 4 OR $strana == 9999 )                            { ?>
     document.formv1.r35.value = '<?php echo "$r35";?>';
     document.formv1.r36.value = '<?php echo "$r36";?>';
     document.formv1.r37.value = '<?php echo "$r37";?>';
@@ -1874,7 +2034,7 @@ var sirkawic = screen.width-10;
   {
    window.open('../dokumenty/dan_z_prijmov2013/dpdmv2013/DMVv13_help_danovnik_paragraf85.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
   }
-  function vypocetDni()
+  function vypocetMes()
   {
    window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=346&cislo_cpl=<?php echo $cislo_cpl;?>&uprav=0&pocetdni=1', '_self' );
   }
@@ -1885,6 +2045,10 @@ var sirkawic = screen.width-10;
   function vypocitajPredpoDan()
   {
    window.open('priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&strana=4&predpoklad=1', '_self' );
+  }
+  function dajSadzbu()
+  {
+   window.open('priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&cislo_cpl=<?php echo $cislo_cpl;?>&dajsadzbu=1', '_self' );
   }
   function VytvorOznamZanik(cpl)
   {
@@ -2339,69 +2503,7 @@ $source="../ucto/priznanie_dmv".$rokdmv.".php?cislo_oc=".$cislo_oc."&drupoh=1&pa
 
 
 <?php if ( $strana == 3 ) {
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv".
-" WHERE cpl = $cislo_cpl ORDER BY oc";
-$fir_vysledok = mysql_query($sqlfir);
-$fir_riadok=mysql_fetch_object($fir_vysledok);
-$vzkat = $fir_riadok->vzkat;
-$vzdru = $fir_riadok->vzdru;
-$vzzn = $fir_riadok->vzzn;
-$vzspz = $fir_riadok->vzspz;
-$da1sk = SkDatum($fir_riadok->da1);
-$datzsk = SkDatum($fir_riadok->datz);
-$datksk = SkDatum($fir_riadok->datk);
-$vzobm = $fir_riadok->vzobm;
-$vzchm = $fir_riadok->vzchm;
-$vznpr = $fir_riadok->vznpr;
-$vzdno = $fir_riadok->vzdno;
-$vzdnp = $fir_riadok->vzdnp;
-$r10 = $fir_riadok->r10;
-$r11 = $fir_riadok->r11;
-$r12 = $fir_riadok->r12;
-$r13 = $fir_riadok->r13;
-$r14 = $fir_riadok->r14;
-$r15 = $fir_riadok->r15;
-$r16 = $fir_riadok->r16;
-$r17 = $fir_riadok->r17;
-$r18 = $fir_riadok->r18;
-$r19 = $fir_riadok->r19;
-$r20 = $fir_riadok->r20;
-$r21 = $fir_riadok->r21;
-$r22 = $fir_riadok->r22;
-$r23 = $fir_riadok->r23;
-$r24 = $fir_riadok->r24;
-$r50 = $fir_riadok->r50;
-$r49 = 1*$fir_riadok->r49;
-$r12doniz = 1*$fir_riadok->r12doniz;
-$vzvyk = $fir_riadok->vzvyk;
-$dnvnk = $fir_riadok->dnvnk;
-$oslbd = $fir_riadok->oslbd;
-$r13s1zni25 = 1*$fir_riadok->r13s1zni25;
-$r13s1zni20 = 1*$fir_riadok->r13s1zni20;
-$r13s1zni15 = 1*$fir_riadok->r13s1zni15;
-$r13s2zni25 = 1*$fir_riadok->r13s2zni25;
-$r13s2zni20 = 1*$fir_riadok->r13s2zni20;
-$r13s2zni15 = 1*$fir_riadok->r13s2zni15;
-$r13s1zvy10 = 1*$fir_riadok->r13s1zvy10;
-$r13s1zvy20 = 1*$fir_riadok->r13s1zvy20;
-$r13s2zvy10 = 1*$fir_riadok->r13s2zvy10;
-$r13s2zvy20 = 1*$fir_riadok->r13s2zvy20;
-$r14s1 = $fir_riadok->r14s1;
-$r14s2 = $fir_riadok->r14s2;
-$r15s1zni50a = 1*$fir_riadok->r15s1zni50a;
-$r15s1zni50b = 1*$fir_riadok->r15s1zni50b;
-$r15s1zni50c = 1*$fir_riadok->r15s1zni50c;
-$r16s1 = $fir_riadok->r16s1;
-$r16s2 = $fir_riadok->r16s2;
-$r17kombi = $fir_riadok->r17kombi;
-$r18s1 = $fir_riadok->r18s1;
-$r18s2 = $fir_riadok->r18s2;
-$r19s1mes = $fir_riadok->r19s1mes;
-$r19s2mes = $fir_riadok->r19s2mes;
-$r19s1dni = $fir_riadok->r19s1dni;
-$r19s2dni = $fir_riadok->r19s2dni;
-$r20s1 = $fir_riadok->r20s1;
-$r20s2 = $fir_riadok->r20s2;
+
 ?>
 <img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str3.jpg"
      alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2015 3.strana 380kB" class="form-background">
@@ -2415,7 +2517,7 @@ $r20s2 = $fir_riadok->r20s2;
 <input type="text" name="datk" id="datk" value="<?php echo $datksk; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:196px; top:244px; left:381px;"/>
 <!-- 03, 04 a 05 riadok -->
-<select size="1" name="vzkat" id="vzkat" style="top:285px; left:435px; width:40px;"> <!-- dopyt, oöetriù pre ie, aby nez˙ûil cel˝ <option> -->
+<select size="1" name="vzkat" id="vzkat" style="top:285px; left:435px; width:40px;" onchange="urobVzdru();"> <!-- dopyt, oöetriù pre ie, aby nez˙ûil cel˝ <option> -->
  <option value="L">L - motorovÈ vozidlo, s menej ako ötyrmi kolesami a ötvorkolky,</option>
  <option value="M">M - motorovÈ vozidlo najmenej so ötyrmi kolesami urËenÈ na dopravu osÙb,</option>
  <option value="N">N - motorovÈ vozidlo najmenej so ötyrmi kolesami urËenÈ na dopravu n·kladov,</option>
@@ -2423,14 +2525,140 @@ $r20s2 = $fir_riadok->r20s2;
  <option value="0"></option>
 </select>
 <select size="1" name="vzdru" id="vzdru" style="top:285px; left:518px; width:64px;"> <!-- dopyt, asi budem musieù prekopaù, v pouËenÌ viacero kategÛrii -->
- <option value="1" >1 - osobnÈ vozdlo</option>
- <option value="2">2 - n·kladnÈ vozidlo</option>
- <option value="3">3 - n·kladnÈ vozidlo ñ ùahaË n·vesu</option>
- <option value="4">4 - autobus</option>
- <option value="5">5 - prÌpojnÈ vozidlo ñ n·ves</option>
- <option value="6">6 - prÌpojnÈ vozidlo ñ prÌves</option>
+ <option value="L1" >L1</option>
+ <option value="L2" >L2</option>
+ <option value="L3" >L3</option>
+ <option value="L4" >L4</option>
+ <option value="L5" >L5</option>
+ <option value="L6" >L6</option>
+
+ <option value="M1" >M1</option>
+ <option value="M2" >M2</option>
+ <option value="M3" >M3</option>
+
+ <option value="N1" >N1</option>
+ <option value="N2" >N2</option>
+ <option value="N3" >N3</option>
+
+ <option value="O1" >O1</option>
+ <option value="O2" >O2</option>
+ <option value="O3" >O3</option>
+
  <option value="0"></option>
 </select>
+
+<script type="text/javascript">
+function urobVzdru()
+  {
+var mySelect = document.getElementById('vzdru');
+
+for (var i=0, len=mySelect.options.length; i<len; i++) {
+mySelect.removeChild( mySelect.options[0] );
+}
+
+if( document.formv1.vzkat.value == "L" ) { 
+
+var opt1 = document.createElement('option');
+opt1.appendChild( document.createTextNode('L1 Option L1') );
+opt1.value = 'L1';
+mySelect.appendChild(opt1);
+
+var opt2 = document.createElement('option');
+opt2.appendChild( document.createTextNode('L2 Option L2') );
+opt2.value = 'L2';
+mySelect.appendChild(opt2);
+
+var opt3 = document.createElement('option');
+opt3.appendChild( document.createTextNode('L3 Option L3') );
+opt3.value = 'L3';
+mySelect.appendChild(opt3);
+
+var opt4 = document.createElement('option');
+opt4.appendChild( document.createTextNode('L4 Option L4') );
+opt4.value = 'L4';
+mySelect.appendChild(opt4);
+
+var opt5 = document.createElement('option');
+opt5.appendChild( document.createTextNode('L5 Option L5') );
+opt5.value = 'L5';
+mySelect.appendChild(opt5);
+
+var opt6 = document.createElement('option');
+opt6.appendChild( document.createTextNode('L6 Option L6') );
+opt6.value = 'L6';
+mySelect.appendChild(opt6);
+
+var opt7 = document.createElement('option');
+opt7.appendChild( document.createTextNode('L7 Option L7') );
+opt7.value = 'L7';
+mySelect.appendChild(opt7);
+
+}
+
+if( document.formv1.vzkat.value == "M" ) { 
+
+var opt1 = document.createElement('option');
+opt1.appendChild( document.createTextNode('M1 Option M1') );
+opt1.value = 'M1';
+mySelect.appendChild(opt1);
+
+var opt2 = document.createElement('option');
+opt2.appendChild( document.createTextNode('M2 Option M2') );
+opt2.value = 'M2';
+mySelect.appendChild(opt2);
+
+var opt3 = document.createElement('option');
+opt3.appendChild( document.createTextNode('M3 Option M3') );
+opt3.value = 'M3';
+mySelect.appendChild(opt3);
+}
+
+if( document.formv1.vzkat.value == "N" ) { 
+
+var opt1 = document.createElement('option');
+opt1.appendChild( document.createTextNode('N1 Option N1') );
+opt1.value = 'N1';
+mySelect.appendChild(opt1);
+
+var opt2 = document.createElement('option');
+opt2.appendChild( document.createTextNode('N2 Option N2') );
+opt2.value = 'N2';
+mySelect.appendChild(opt2);
+
+var opt3 = document.createElement('option');
+opt3.appendChild( document.createTextNode('N3 Option N3') );
+opt3.value = 'N3';
+mySelect.appendChild(opt3);
+
+}
+
+if( document.formv1.vzkat.value == "O" ) { 
+
+var opt1 = document.createElement('option');
+opt1.appendChild( document.createTextNode('O1 Option O1') );
+opt1.value = 'O1';
+mySelect.appendChild(opt1);
+
+var opt2 = document.createElement('option');
+opt2.appendChild( document.createTextNode('O2 Option O2') );
+opt2.value = 'O2';
+mySelect.appendChild(opt2);
+
+var opt3 = document.createElement('option');
+opt3.appendChild( document.createTextNode('O3 Option O3') );
+opt3.value = 'O3';
+mySelect.appendChild(opt3);
+
+var opt4 = document.createElement('option');
+opt4.appendChild( document.createTextNode('O4 Option O4') );
+opt4.value = 'O4';
+mySelect.appendChild(opt4);
+
+}
+
+  }
+</script>
+
 <input type="text" name="vzspz" id="vzspz" value="<?php echo $vzspz; ?>"
        style="width:218px; top:327px; left:359px;"/>
 <!-- 06 a 07 riadok -->
@@ -2453,10 +2681,11 @@ $r20s2 = $fir_riadok->r20s2;
  <option value="0"></option>
 </select>
 <select size="1" name="oslbd" id="oslbd" style="top:494px; left:554px;">
+ <option value="0"></option>
  <option value="B">B</option>
  <option value="C">C</option>
  <option value="D">D</option>
- <option value="0"></option>
+
 </select>
 
 
@@ -2467,6 +2696,8 @@ $r20s2 = $fir_riadok->r20s2;
       title="Sadzby dane z motorov˝ch vozidiel" class="btn-row-tool" style="top:538px; left:380px;"> <!-- dopyt, prekopaù sadzby -->
  <div id="robot" class="sadzby-dane-box-locate" style="top:510px; left:110px;"></div> <!-- dopyt, prekopaù podæa edane -->
 <input type="checkbox" name="r12doniz" value="1" style="top:542px; left:424px;"/>
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="dajSadzbu();" title="Nastav sadzbu r.12 DMV podæa druhu vozidla, nastav r.13 checkbox, vypoËÌtaj poËet mesiacov r.19, vypoËÌtaj r.14,16,18,20,21" 
+class="btn-row-tool" style="top:538px; left:603px;"> 
 
 <!-- 13 riadok -->
 <!-- znizenie sadzby -->
@@ -2523,11 +2754,16 @@ $r20s2 = $fir_riadok->r20s2;
        style="width:35px; top:926px; left:485px;"/>
 <input type="text" name="r19s1dni" id="r19s1dni" value="<?php echo $r19s1dni; ?>"
        style="width:57px; top:966px; left:326px;"/>
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetMes();" title="VypoËÌtaj poËet mesiacov r.19, poËas ktor˝ch vozidlo podliehalo dani, vypoËÌtaj r.14,16,18,20,21" 
+class="btn-row-tool" style="top:926px; left:400px;"> 
+
 <input type="text" name="r19s2dni" id="r19s2dni" value="<?php echo $r19s2dni; ?>"
        style="width:57px; top:966px; left:485px;"/>
 <!-- 20 a 21 riadok -->
 <input type="text" name="r20s1" id="r20s1" value="<?php echo $r20s1; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:1019px; left:282px;"/>
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocitajDan();" title="VypoËÌtaj r.14,16,18,20,21" 
+class="btn-row-tool" style="top:1019px; left:603px;"> <!-- dopyt, budeme potrebovaù? -->
 <input type="text" name="r20s2" id="r20s2" value="<?php echo $r20s2; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:1019px; left:439px;"/>
 <input type="text" name="r21" id="r21" value="<?php echo $r21; ?>"
@@ -2545,51 +2781,18 @@ $r20s2 = $fir_riadok->r20s2;
        style="width:360px; top:1258px; left:300px;"/>
 
 
-<input type="text" name="r11" id="r11" value="<?php echo $r11; ?>"/>
- <div id="robot2" class="sadzby-dane-box-locate" style="top:1058px; left:38px;"></div> <!-- dopyt, budeme potrebovaù? -->
 
-<!-- dopyt, nepouzite -->
-<select size="1" name="vzdno" id="vzdno">
- <option value="0"></option>
- <option value="1">1</option>
- <option value="2">2</option>
-</select>
-<select size="1" name="vzdnp" id="vzdnp">
- <option value=" "></option>
- <option value="A">A</option>
- <option value="B">B</option>
- <option value="C">C</option>
-</select>
+
 <img src="../obr/ikony/info_blue_icon.png" onclick="HelpDanovnici();"
      title="Druhy daÚovnÌkov podæa ß 85" class="btn-row-tool" style="top:450px; left:650px;"> <!-- dopyt, budem musieù prer·baù -->
-<input type="text" name="r10" id="r10" value="<?php echo $r10; ?>"/>
-<input type="text" name="r13" id="r13" value="<?php echo $r13; ?>"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetDni();" title="VypoËÌtaù dni, poËas ktor˝ch vozidlo podliehalo dani a pomern˙ Ëasù dane" class="btn-row-tool" style="top:1037px; left:645px;"> <!-- dopyt, budeme potrebovaù? -->
-
-<input type="text" name="r14" id="r14" value="<?php echo $r14; ?>"/>
-<input type="text" name="r15" id="r15" value="<?php echo $r15; ?>"/>
-<input type="text" name="r16" id="r16" value="<?php echo $r16; ?>"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocitajDan();" title="VypoËÌtaù pomern˙ Ëasù dane podæa poËtu zadan˝ch dnÌ" class="btn-row-tool" style="top:770px; left:645px;"> <!-- dopyt, budeme potrebovaù? -->
-<input type="text" name="r17" id="r17" value="<?php echo $r17; ?>"/>
-<input type="text" name="r18" id="r18" value="<?php echo $r18; ?>"/>
-<input type="text" name="r19" id="r19" value="<?php echo $r19; ?>"/>
-<input type="text" name="r20" id="r20" value="<?php echo $r20; ?>"/>
 
 
 
-
-<label for="r50" class="added-label" style="top:1350px; left:500px;">Zæava 50 alebo 100% elektromobil,hybrid...</label> <!-- dopyt, budeme potrebovaù -->
- <input type="text" name="r50" id="r50" value="<?php echo $r50; ?>" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1340px; left:800px;"/>
-
-<label for="r49" class="added-label" style="top:1385px; left:287px;">N·vesov· jazdn· s˙prava</label> <!-- dopyt, budeme potrebovaù -->
-<input type="checkbox" name="r49" value="1" style="top:1382px; left:445px;"/>
 
 
 <script type="text/javascript">
   document.formv1.vzkat.value = '<?php echo "$vzkat";?>';
   document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
-  document.formv1.vzdno.value = '<?php echo "$vzdno";?>';
-  document.formv1.vzdnp.value = '<?php echo "$vzdnp";?>';
   document.formv1.dnvnk.value = '<?php echo "$dnvnk";?>';
   document.formv1.oslbd.value = '<?php echo "$oslbd";?>';
 <?php if ( $r12doniz == 1 ) { ?> document.formv1.r12doniz.checked = "checked"; <?php } ?>
@@ -2607,7 +2810,6 @@ $r20s2 = $fir_riadok->r20s2;
 <?php if ( $r15s1zni50b == 1 ) { ?> document.formv1.r15s1zni50b.checked = "checked"; <?php } ?>
 <?php if ( $r15s1zni50c == 1 ) { ?> document.formv1.r15s1zni50c.checked = "checked"; <?php } ?>
 <?php if ( $r17kombi == 1 ) { ?> document.formv1.r17kombi.checked = "checked"; <?php } ?>
-<?php if ( $r49 == 1 ) { ?> document.formv1.r49.checked = "checked"; <?php } ?>
 </script>
 <?php                     } ?>
 
