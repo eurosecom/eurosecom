@@ -769,7 +769,6 @@ $sqldok = mysql_query("$sqlttt");
 echo "idem sadzba do r12"."<br />";
 
 
-//andrej toto robime
 $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r14=YEAR(da1), r15=MONTH(da1) WHERE oc = 1 ";
 $sqldok = mysql_query("$sqlttt");
 
@@ -779,9 +778,9 @@ $sqldok = mysql_query("$sqlttt");
 $kli_vrok2=$kli_vrok;
 $kli_vmes2=12;
 if( $predpoklad == 1 ) { $kli_vrok2=$kli_vrok+1; $kli_vmes2=0;}
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=(($kli_vrok2-r14)*12)-(r15-1)+$kli_vmes2 WHERE oc = 1 ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=(($kli_vrok2-r14)*12)-(r15-1)+$kli_vmes2+1 WHERE oc = 1 ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad2=(($kli_vrok2-r14)*12)-(r15-1) WHERE oc = 1 ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad2=(($kli_vrok2-r14)*12)-(r15-1)+1 WHERE oc = 1 ";
 $sqldok = mysql_query("$sqlttt");
 $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad3=MONTH(da1) WHERE oc = 1 ";
 $sqldok = mysql_query("$sqlttt");
@@ -914,6 +913,21 @@ $sqldok = mysql_query("$sqlttt");
 $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1mes=12 WHERE oc = 1 AND r19s1mes = 0 $podmcpl";
 $sqldok = mysql_query("$sqlttt");
 
+
+//rozdel do 2 stlpcov andrej
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r18=mesad3, r19=r19s1mes, r13s2zni25=0, r13s2zni20=0, r13s2zni15=0, r13s2zni0=0, ".
+" r13s2zvy20=0, r13s2zvy10=0, r19s2mes=0 ".
+" WHERE oc = 1 AND cpl = $cislo_cpl ";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r18=0 WHERE oc = 1 AND mesad5 > mesad3 AND cpl = $cislo_cpl ";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13s1zni25=1, r13s1zni20=0, r13s2zni20=1, r19s1mes=r18, r19s2mes=r19-r18 ".
+" WHERE oc = 1 AND mesad2 < 37 AND mesad1 >= 37 AND r13s1zni20 = 1 AND cpl = $cislo_cpl ";
+//echo $uprtxt;
+$upravene = mysql_query("$uprtxt");
+
      }
 //koniec pocetdni=1
 
@@ -999,6 +1013,8 @@ $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*0.80 WHERE oc = 1 AND r13s2zni20 = 1 $podmcpl";
 $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*0.85 WHERE oc = 1 AND r13s2zni15 = 1 $podmcpl";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*1.00 WHERE oc = 1 AND r13s2zni0 = 1 $podmcpl";
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET des6=r12*1.20 WHERE oc = 1 AND r13s2zvy20 = 1 $podmcpl";
@@ -1421,7 +1437,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r20s2 DECIMAL(10,2) DEFAULT 0 AFTER new2015 ";
 $vysledek = mysql_query("$sql");
 }
-$sql = "SELECT mesad5 FROM F".$kli_vxcf."_uctpriznanie_dmv";
+$sql = "SELECT r13s2zni0 FROM F".$kli_vxcf."_uctpriznanie_dmv";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -1474,6 +1490,9 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD mesad4 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD mesad5 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r13s2zni0 DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
 $vysledek = mysql_query("$sql");
 }
 //koniec uprav def. tabulky
@@ -2774,7 +2793,7 @@ mySelect.appendChild(opt4);
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="dajSadzbu();" title="Nastav sadzbu r.12 DMV pod¾a druhu vozidla, nastav r.13 checkbox, vypoèítaj poèet mesiacov r.19, vypoèítaj r.14,16,18,20,21" 
 class="btn-row-tool" style="top:538px; left:603px;"> 
 
-<div id="robot" class="sadzby-dane-box-locate" style="top:580px; left:50px;"><?php echo "poèet mesiacov jan.".$mesad2." - dec.".$mesad1; ?></div>
+<div id="robot" class="sadzby-dane-box-locate" style="top:580px; left:50px;"><?php echo "mesiac od da1 jan.".$mesad2.". - dec.".$mesad1."."; ?></div>
 
 <!-- 13 riadok -->
 <!-- znizenie sadzby -->
