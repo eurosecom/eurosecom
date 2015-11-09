@@ -1,0 +1,251 @@
+/* dopyt, popísa, èo znamená */
+a { text-decoration: none; }
+strong { font-weight: bold; }
+body {
+  min-width: 900px;
+  background-color: #add8e6;
+  font-family: Arial, sans-serif;
+}
+#wrap-heading {
+  overflow: auto;
+  width: 98%;
+  padding: 0 1%;
+  background-color: #ffff90;
+  -webkit-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  -moz-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+}
+#heading {
+  margin-top: 4px;
+  width: 100%;
+}
+td.ilogin { font-size: 11px; }
+td.header {
+  height: 36px;
+  line-height: 36px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Times, 'Times New Roman', Georgia, serif;
+}
+span.subheader { color:#39f; }
+div.bar-btn-form-tool {
+  position: absolute;
+  top: 23px;
+  right: 1%;
+}
+img.btn-form-tool {
+  float: right;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+img.btn-row-tool {
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+}
+#content {
+  position: relative;
+  width: 950px;
+  margin: 20px auto;
+  padding-bottom: 20px;
+}
+.toleft { float: left; }
+.toright { float: right; }
+div.navbar > h6 {
+  padding: 8px 8px 5px 8px;
+  font-size: 11px;
+}
+div.navbar > a {
+  display: block;
+  padding: 6px 10px 5px 10px;
+  font-size: 13px;
+  color: #000;
+  text-align: center;
+}
+#content a.active { background-color: #fff; }
+input.btn-top-formsave {
+  position: absolute;
+  top: 28px;
+  right: 4px;
+  height: 24px;
+  cursor: pointer;
+  width: 100px;
+}
+input.btn-bottom-formsave {
+  position: relative;
+  top: 1px;
+  float: right;
+  height: 24px;
+  cursor: pointer;
+  width: 100px;
+}
+div.alert-pocitam {
+  position: absolute;
+  top: 30px;
+  left: 275px;
+  width: 400px;
+  height: 26px;
+  line-height: 26px;
+
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+}
+img.form-background {
+  display: block;
+  width: 950px;
+  height: 1300px;
+}
+form input[type=text] { /* dopyt, spravi slim input */
+  position: absolute;
+  height: 24px;
+  line-height: 24px;
+  padding-left: 4px;
+  border: 1px solid #39f;
+  font-size: 16px;
+}
+form input[type=text]:focus {
+  -webkit-box-shadow: 0px 0px 4px #39f;
+  -moz-box-shadow: 0px 0px 4px #39f;
+  box-shadow: 0px 0px 4px #39f;
+  outline: 0px none currentColor;
+}
+form input[type=checkbox], form input[type=radio] { position: absolute; }
+form select {
+  position: absolute;
+  height: 30px;
+  border: 1px solid #39f;
+  outline: 0px none currentColor; /* v Chrome odstrani yellow tien */
+}
+form select:focus {
+  -webkit-box-shadow: 0px 0px 4px #39f;
+  -moz-box-shadow: 0px 0px 4px #39f;
+  box-shadow: 0px 0px 4px #39f;
+}
+form textarea {
+  position: absolute;
+  border: 1px solid #39f;
+}
+form textarea:focus {
+  outline: 0px none currentColor;
+  -webkit-box-shadow: 0px 0px 4px #39f;
+  -moz-box-shadow: 0px 0px 4px #39f;
+  box-shadow: 0px 0px 4px #39f;
+}
+.nofill {
+  position: absolute;
+  border: 1px solid #abadb3 !important;
+  background-color: #ebebe4;
+  color: #755454;
+  cursor: not-allowed;
+}
+div.input-echo {
+  height: 26px;
+  line-height: 26px;
+  padding-left: 4px;
+}
+.krizik {
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #6d6d6d;
+  text-align:center;
+}
+label.added-label {
+  position: absolute;
+  font-size: 13px;
+  font-weight: bold;
+}
+input.btn-prepocet {
+  position: absolute;
+  top: 32px;
+  left: 5px;
+}
+h5.btn-prepocet-title {
+  position: absolute;
+  top: 36px;
+  left: 28px;
+  font-size: 12px;
+}
+img.navoc-icon { /* šipka na zmenu os.c. v hlavièke formulára */
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+}
+input.center { text-align: center; }
+span.text-echo {
+  position: absolute;
+  font-weight: bold;
+  font-size: 16px;
+}
+.hidden {
+  display: none;
+}
+.unhidden {
+  display: block;
+}
+/* tooltip vlavo zobacik */
+.tooltip-left {
+  z-index: 10;
+  position: absolute;
+  min-height: 40px;
+  padding: 0 3px 3px 3px;
+  background: #ffff90;
+  word-wrap: break-word;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* prefixy */
+}
+.tooltip-left:after{ /*arrow added to leftarrowdiv DIV*/
+content:'';
+display:block;
+position:absolute;
+top:0px;
+left:-30px; /*should be set to -border-width x 2 */
+width:0;
+height:0;
+border-color: transparent #ffff90 transparent transparent; /*border color should be same as div div background color*/
+border-style: solid;
+border-width: 15px;
+}
+.tooltip-heading {
+  clear: both; 
+  overflow: auto;
+  height: 30px;
+  padding: 0 4px;
+}
+.tooltip-heading > h3 {
+  line-height: 30px;
+font-size:12px; font-weight:bold;  text-indent:4px;
+
+}
+.tooltip-heading > img {
+  width: 16px;
+  height: 16px;
+  margin-top: 7px;
+  opacity: 1; /* prefixy */
+  cursor: pointer;
+}
+.tooltip-heading > img:hover {
+  opacity: 0.8; /* prefixy */
+}
+.tooltip-body {
+  padding: 6px 4px 2px 8px;
+  border-radius: 3px; /* prefixy */
+  background-color: #fff;
+}
+.tooltip-body ul li {
+  padding-left: 19px;
+  text-indent: -16px;
+  margin-bottom:3px;
+  font-size: 12px;
+  line-height: 16px;
+}
+.tooltip-body ul li strong {
+  margin-right: 6px;
+}

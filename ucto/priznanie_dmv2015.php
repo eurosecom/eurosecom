@@ -545,7 +545,6 @@ $sqldok = mysql_query("$sqlttt");
  $datzold=$riaddok->datz;
  $datkold=$riaddok->datk;
  $da1old=$riaddok->da1;
-
  }
 $datznew=$datzsql;
 $datknew=$datksql;
@@ -593,12 +592,12 @@ $dvp = strip_tags($_REQUEST['dvp']);
 $dvpsql=SqlDatum($dvp);
 $dvh = strip_tags($_REQUEST['dvh']);
 $dvhsql=SqlDatum($dvh);
-$pomv = strip_tags($_REQUEST['pomv']);
+//$pomv = strip_tags($_REQUEST['pomv']);
 $pozn = strip_tags($_REQUEST['pozn']);
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET ".
 " r35='$r35', r36='$r36', r37='$r37', r38='$r38', r39='$r39', r40='$r40', r41='$r41', r42='$r42', r43='$r43', r44='$r44', r45='$r45', ".
-" zvra='$zvra', post='$post', ucet='$ucet', dvp='$dvpsql', dvh='$dvhsql', pomv='$pomv', pozn='$pozn' ".
+" zvra='$zvra', post='$post', ucet='$ucet', dvp='$dvpsql', dvh='$dvhsql', pozn='$pozn' ".
 " WHERE oc = 9999 ";
                     }
 //echo $uprtxt;
@@ -617,7 +616,6 @@ endif;
 //koniec zapisu upravenych udajov
 
 //vypocty
-
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET dnvnk='A' WHERE oc = 1 AND dnvnk = '' ";
 $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET vzkat='M', vzdru='M1' WHERE oc = 1 AND vzkat = '' ";
@@ -649,7 +647,7 @@ $podmnacpl="cpl = ".$cislo_cpl." AND ";
   }
 
 $podmdatk="";
-if( $predpoklad == 1 ) 
+if( $predpoklad == 1 )
   {
 $podmdatk=" AND datk = '0000-00-00' ";
   }
@@ -670,9 +668,9 @@ $riadok=mysql_fetch_object($sql);
 if( $riadok->vzkat == 'M' AND $riadok->vzdru != 'M1' ) { $riadok->vzkat="N"; }
 
 //osobne podla objemu
-if( $riadok->vzkat == 'L' OR $riadok->vzkat == 'M' ) 
+if( $riadok->vzkat == 'L' OR $riadok->vzkat == 'M' )
   {
-$sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 7 "; 
+$sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 7 ";
 if( $riadok->vzobm <= 3000 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 6 "; }
 if( $riadok->vzobm <= 2000 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 5 "; }
 if( $riadok->vzobm <= 1500 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 1 AND cprm = 4 "; }
@@ -682,20 +680,20 @@ if( $riadok->vzobm <= 150  ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv
   }
 
 //nakladne podla naprav a hmotnosti
-if( $riadok->vzkat == 'N' OR $riadok->vzkat == 'O' ) 
-  { 
+if( $riadok->vzkat == 'N' OR $riadok->vzkat == 'O' )
+  {
 
-if( $riadok->vznpr < 2 ) 
-    { 
-$riadok->vznpr=2; 
+if( $riadok->vznpr < 2 )
+    {
+$riadok->vznpr=2;
     }
-if( $riadok->vznpr > 4 ) 
-    { 
-$riadok->vznpr=4; 
+if( $riadok->vznpr > 4 )
+    {
+$riadok->vznpr=4;
     }
 
-if( $riadok->r12doniz == 1 ) 
-    { 
+if( $riadok->r12doniz == 1 )
+    {
 if( $riadok->vznpr == 2 AND $riadok->vzchm == 2 ) { $riadok->vzchm=1; }
 if( $riadok->vznpr == 2 AND $riadok->vzchm >  2 AND $riadok->vzchm <= 30 ) { $riadok->vzchm=$riadok->vzchm-2; }
 if( $riadok->vznpr == 2 AND $riadok->vzchm > 30 ) { $riadok->vzchm=28; }
@@ -709,7 +707,7 @@ if( $riadok->vznpr == 4 AND $riadok->vzchm > 37 AND $riadok->vzchm <= 40 ) { $ri
 if( $riadok->vznpr == 4 AND $riadok->vzchm > 40 ) { $riadok->vzchm=40; }
     }
 
-$sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 10 "; 
+$sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 10 ";
 if( $riadok->vznpr == 4 AND $riadok->vzchm <= 40 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 9 "; }
 if( $riadok->vznpr == 4 AND $riadok->vzchm <= 37 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 8 "; }
 if( $riadok->vznpr == 4 AND $riadok->vzchm <= 35 ) { $sqltts = "SELECT * FROM F$kli_vxcf"."_sadzby_dmv2015 WHERE csdz = 4 AND cprm = 7 "; }
@@ -1121,7 +1119,7 @@ $upravene = mysql_query("$uprtxt");
      }
 //koniec vypocitajdan=1
 
-$sumadane=0; 
+$sumadane=0;
 $sqlttt = "SELECT SUM(r21) AS sumr21, SUM(oc) AS sumoc FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE oc = 1 ";
 $sqldok = mysql_query("$sqlttt");
   if (@$zaznam=mysql_data_seek($sqldok,0))
@@ -1520,7 +1518,6 @@ $sqtoz = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET pos=ceil($pos/2) ";
 $oznac = mysql_query("$sqtoz");
 }
 //koniec pocet stran
-
 ?>
 
 <?php
@@ -1663,7 +1660,6 @@ $dvp = $fir_riadok->dvp;
 $dvpsk=SkDatum($dvp);
 $dvh = $fir_riadok->dvh;
 $dvhsk=SkDatum($dvh);
-$pomv = $fir_riadok->pomv;
 $pozn = $fir_riadok->pozn;
                     }
 mysql_free_result($fir_vysledok);
@@ -1708,7 +1704,7 @@ div.sadzby-dane-box, div.sadzby-dane2-box { /* dopyt, sadzby budeme rieöiù cez t
   height: 400px;
   padding: 6px;
   background-color: #ffff90;
-}
+ }
 div.sadzby-dane-box { width: 720px; }
 div.sadzby-dane2-box { width: 862px; }
 div.sadzby-dane-box h2, div.sadzby-dane2-box h2 {
@@ -1926,11 +1922,11 @@ var sirkawic = screen.width-10;
 <?php                                                                   } ?>
 
 <?php if ( $strana == 3 OR $strana == 9999 )                            { ?>
-urobVzdru();
+urobVzdru(); //dopyt, Ëo je toto za z·pis, nech˝ba n·hodou function
 document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
-<?php                                                                   } ?> 
+<?php                                                                   } ?>
 
-<?php if ( $strana == 4 OR $strana == 9999 )                            { ?>
+<?php if ( $strana == 4 OR $strana == 9999 )                           { ?>
     document.formv1.r35.value = '<?php echo "$r35";?>';
     document.formv1.r36.value = '<?php echo "$r36";?>';
     document.formv1.r37.value = '<?php echo "$r37";?>';
@@ -1988,7 +1984,7 @@ document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
   }
   function Sadzby2015()
   {
-   window.open('../dokumenty/dan_z_prijmov2013/dpdmv2013/DMVv15_sadzby.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_sadzby.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
 //bud alebo v checkbox
   function klik31()
@@ -2083,6 +2079,20 @@ document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
    document.formv1.r13s2zvy10.checked = false;
    document.formv1.r13s2zvy20.checked = false;
   }
+  function zvy10s1()
+  {
+   document.formv1.r13s1zni25.checked = false;
+   document.formv1.r13s1zni20.checked = false;
+   document.formv1.r13s1zni15.checked = false;
+   document.formv1.r13s1zvy20.checked = false;
+  }
+  function zvy20s1()
+  {
+   document.formv1.r13s1zni25.checked = false;
+   document.formv1.r13s1zni20.checked = false;
+   document.formv1.r13s1zni15.checked = false;
+   document.formv1.r13s1zvy10.checked = false;
+  }
   function zvy10s2()
   {
    document.formv1.r13s2zni25.checked = false;
@@ -2124,10 +2134,6 @@ document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
   }
 
 
-  function HelpDanovnici()
-  {
-   window.open('../dokumenty/dan_z_prijmov2013/dpdmv2013/DMVv13_help_danovnik_paragraf85.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
-  }
   function vypocetMes()
   {
    window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=346&cislo_cpl=<?php echo $cislo_cpl;?>&uprav=0&pocetdni=1', '_self' );
@@ -2192,7 +2198,7 @@ $i=0;
   {
 $riadok=mysql_fetch_object($sql);
 if ( $i == 0 ) { ?>
-var htmlmenu = "<div class='sadzby-dane-box'>"; //dopyt, chcem daù preË
+var htmlmenu = "<div class='sadzby-dane-box'>"; //dopyt, budeme cez html
     htmlmenu += "<h2>Sadzby dane z motorov˝ch vozidiel</h2><img src='../obr/ikony/turnoff_blue_icon.png' onclick='zhasnirobot();' title='Skryù menu'>";
     htmlmenu += "<table class='sadzby-dane'>";
     htmlmenu += "<caption><?php echo $riadok->nsdz; ?></caption>";
@@ -2618,29 +2624,26 @@ $source="../ucto/priznanie_dmv".$rokdmv.".php?cislo_oc=".$cislo_oc."&drupoh=1&pa
  <option value="O">O - prÌpojnÈ nemotorovÈ vozidlo.</option>
  <option value="0"></option>
 </select>
-<select size="1" name="vzdru" id="vzdru" style="top:285px; left:518px; width:64px;"> <!-- dopyt, asi budem musieù prekopaù, v pouËenÌ viacero kategÛrii -->
- <option value="L1" >L1</option>
- <option value="L2" >L2</option>
- <option value="L3" >L3</option>
- <option value="L4" >L4</option>
- <option value="L5" >L5</option>
- <option value="L6" >L6</option>
-
- <option value="M1" >M1</option>
- <option value="M2" >M2</option>
- <option value="M3" >M3</option>
-
- <option value="N1" >N1</option>
- <option value="N2" >N2</option>
- <option value="N3" >N3</option>
-
- <option value="O1" >O1</option>
- <option value="O2" >O2</option>
- <option value="O3" >O3</option>
-
+<select size="1" name="vzdru" id="vzdru" style="top:285px; left:518px; width:64px; font-size:12px;">
+ <option value="L1"></option>
+ <option value="L2"></option>
+ <option value="L3"></option>
+ <option value="L4"></option>
+ <option value="L5"></option>
+ <option value="L6"></option>
+ <option value="L7"></option>
+ <option value="M1"></option>
+ <option value="M2"></option>
+ <option value="M3"></option>
+ <option value="N1"></option>
+ <option value="N2"></option>
+ <option value="N3"></option>
+ <option value="O1"></option>
+ <option value="O2"></option>
+ <option value="O3"></option>
+ <option value="O4"></option>
  <option value="0"></option>
 </select>
-
 <script type="text/javascript">
 function urobVzdru()
   {
@@ -2650,101 +2653,101 @@ for (var i=0, len=mySelect.options.length; i<len; i++) {
 mySelect.removeChild( mySelect.options[0] );
 }
 
-if( document.formv1.vzkat.value == "L" ) { 
-
+if ( document.formv1.vzkat.value == "L" )
+{
 var opt1 = document.createElement('option');
-opt1.appendChild( document.createTextNode('L1 Option L1') );
+opt1.appendChild( document.createTextNode('L1e - mal˝ motocykel(dvojkolesovÈ vozidlo), objem valcov neprevyöuje 50 cm3') ); //dopyt, skr·tiù text
 opt1.value = 'L1';
 mySelect.appendChild(opt1);
 
 var opt2 = document.createElement('option');
-opt2.appendChild( document.createTextNode('L2 Option L2') );
+opt2.appendChild( document.createTextNode('L2e - mal˝ motocykel(trojkolesovÈ vozidlo), objem valcov neprevyöuje 50 cm3') );
 opt2.value = 'L2';
 mySelect.appendChild(opt2);
 
 var opt3 = document.createElement('option');
-opt3.appendChild( document.createTextNode('L3 Option L3') );
+opt3.appendChild( document.createTextNode('L3e - motocykel, dvojkolesovÈ vozidlo(bez postrannÈho vozÌka s motorom), s objemom valcov v‰ËöÌ ako 50 cm3') );
 opt3.value = 'L3';
 mySelect.appendChild(opt3);
 
 var opt4 = document.createElement('option');
-opt4.appendChild( document.createTextNode('L4 Option L4') );
+opt4.appendChild( document.createTextNode('L4e - motocykel, dvojkolesovÈ vozidlo(s postrann˝m vozÌkom s motorom), s objemom valcov v‰ËöÌ ako 50 cm3') );
 opt4.value = 'L4';
 mySelect.appendChild(opt4);
 
 var opt5 = document.createElement('option');
-opt5.appendChild( document.createTextNode('L5 Option L5') );
+opt5.appendChild( document.createTextNode('L5e - motorov· trojkolka, vozidlo s 3 symetricky usporiadan˝mi kolesami vybavenÈ motorom, ktor˝ s objemom valcov v‰ËöÌ ako 50 cm3') );
 opt5.value = 'L5';
 mySelect.appendChild(opt5);
 
 var opt6 = document.createElement('option');
-opt6.appendChild( document.createTextNode('L6 Option L6') );
+opt6.appendChild( document.createTextNode('L6e - æahk· ötvorkolka s objemom valcov neprevyöuje 50 cm3') );
 opt6.value = 'L6';
 mySelect.appendChild(opt6);
 
 var opt7 = document.createElement('option');
-opt7.appendChild( document.createTextNode('L7 Option L7') );
+opt7.appendChild( document.createTextNode('L7e - ötvorkolka in·') );
 opt7.value = 'L7';
 mySelect.appendChild(opt7);
 
 }
 
-if( document.formv1.vzkat.value == "M" ) { 
+if( document.formv1.vzkat.value == "M" ) {
 
 var opt1 = document.createElement('option');
-opt1.appendChild( document.createTextNode('M1 Option M1') );
+opt1.appendChild( document.createTextNode('M1 - vozidl· projektovanÈ a konötruovanÈ na prepravu cestuj˙cich, najviac s Ùsmimi sedadlami okrem sedadla pre vodiËa') );
 opt1.value = 'M1';
 mySelect.appendChild(opt1);
 
 var opt2 = document.createElement('option');
-opt2.appendChild( document.createTextNode('M2 Option M2') );
+opt2.appendChild( document.createTextNode('M2 - vozidl· projektovanÈ a konötruovanÈ na prepravu cestuj˙cich, s viac ako Ùsmimi sedadlami okrem sedadla pre vodiËa, s najv‰Ëöou prÌpustnou celkovou hmotnosùou neprevyöuj˙cou 5000 kg') );
 opt2.value = 'M2';
 mySelect.appendChild(opt2);
 
 var opt3 = document.createElement('option');
-opt3.appendChild( document.createTextNode('M3 Option M3') );
+opt3.appendChild( document.createTextNode('M3 - vozidl· projektovanÈ a konötruovanÈ na prepravu cestuj˙cich, s viac ako Ùsmimi sedadlami okrem sedadla pre vodiËa, s najv‰Ëöou prÌpustnou celkovou hmotnosùou vyööou ako 5000 kg') );
 opt3.value = 'M3';
 mySelect.appendChild(opt3);
 }
 
-if( document.formv1.vzkat.value == "N" ) { 
+if( document.formv1.vzkat.value == "N" ) {
 
 var opt1 = document.createElement('option');
-opt1.appendChild( document.createTextNode('N1 Option N1') );
+opt1.appendChild( document.createTextNode('N1 - vozidl· projektovanÈ na prepravu tovaru s najv‰Ëöou prÌpustnou celkovou hmotnosùou neprevyöuj˙cou 3500 kg') );
 opt1.value = 'N1';
 mySelect.appendChild(opt1);
 
 var opt2 = document.createElement('option');
-opt2.appendChild( document.createTextNode('N2 Option N2') );
+opt2.appendChild( document.createTextNode('N2 - vozidl· projektovanÈ na prepravu tovaru s najv‰Ëöou prÌpustnou celkovou hmotnosùou vyööou ako 3500 kg, ale neprevyöuj˙cou 12000 kg') );
 opt2.value = 'N2';
 mySelect.appendChild(opt2);
 
 var opt3 = document.createElement('option');
-opt3.appendChild( document.createTextNode('N3 Option N3') );
+opt3.appendChild( document.createTextNode('N3 - vozidl· projektovanÈ na prepravu tovaru s najv‰Ëöou prÌpustnou celkovou hmotnosùou vyööou ako 12000 kg') );
 opt3.value = 'N3';
 mySelect.appendChild(opt3);
 
 }
 
-if( document.formv1.vzkat.value == "O" ) { 
+if( document.formv1.vzkat.value == "O" ) {
 
 var opt1 = document.createElement('option');
-opt1.appendChild( document.createTextNode('O1 Option O1') );
+opt1.appendChild( document.createTextNode('O1 - prÌpojnÈ vozidl· s najv‰Ëöou prÌpustnou celkovou hmotnosùou neprevyöuj˙cou 750 kg') );
 opt1.value = 'O1';
 mySelect.appendChild(opt1);
 
 var opt2 = document.createElement('option');
-opt2.appendChild( document.createTextNode('O2 Option O2') );
+opt2.appendChild( document.createTextNode('O2 - prÌpojnÈ vozidl· s najv‰Ëöou prÌpustnou celkovou hmotnosùou  vyööou ako 750 kg, ale neprevyöuj˙cou 3500 kg') );
 opt2.value = 'O2';
 mySelect.appendChild(opt2);
 
 var opt3 = document.createElement('option');
-opt3.appendChild( document.createTextNode('O3 Option O3') );
+opt3.appendChild( document.createTextNode('O3 - prÌpojnÈ vozidl· s najv‰Ëöou prÌpustnou celkovou hmotnosùou  vyööou ako 3500 kg, ale neprevyöuj˙cou 10000 kg') );
 opt3.value = 'O3';
 mySelect.appendChild(opt3);
 
 var opt4 = document.createElement('option');
-opt4.appendChild( document.createTextNode('O4 Option O4') );
+opt4.appendChild( document.createTextNode('O4 - prÌpojnÈ vozidl· s najv‰Ëöou prÌpustnou celkovou hmotnosùou presahuj˙cou 10000 kg') );
 opt4.value = 'O4';
 mySelect.appendChild(opt4);
 
@@ -2765,8 +2768,8 @@ mySelect.appendChild(opt4);
        onkeyup="CiarkaNaBodku(this);" style="width:106px; top:412px; left:344px;"/>
 <input type="text" name="vznpr" id="vznpr" value="<?php echo $vznpr; ?>"
        style="width:15px; top:412px; left:560px;"/>
-<!-- 10 a 11 riadok -->
-<select size="1" name="dnvnk" id="dnvnk" style="top:453px; left:554px;"> <!-- dopyt, dorobiù help cez html tooltip podæa pouËenia -->
+<!-- 10 riadok -->
+<select size="1" name="dnvnk" id="dnvnk" style="top:453px; left:554px; z-index:100;">
  <option value="A">A</option>
  <option value="B">B</option>
  <option value="C">C</option>
@@ -2774,14 +2777,37 @@ mySelect.appendChild(opt4);
  <option value="E">E</option>
  <option value="0"></option>
 </select>
+<img src="../obr/ikony/info_blue_icon.png" title="Druhy daÚovnÌkov podæa ß 3 z·k."
+     onclick="document.getElementById('tooltip').className='unhidden tooltip-left';"
+     class="btn-row-tool" style="top:455px; left:600px;">
+<!-- napoveda k riadku 10 -->
+<div id="tooltip" class="hidden tooltip-left" style="width:350px; top:453px; left:608px;">
+<div class="tooltip-heading">
+ <h3 class="toleft">DaÚovnÌk podæa ß3 z·k. a pÌsm.</h3>
+ <img src="../obr/ikony/xmark4_blue_x16.png" onclick="document.getElementById('tooltip').className='hidden';"
+      title="Zavrieù" class="toright">
+</div>
+<div class="tooltip-body">
+ <ul>
+ <li><strong>a)</strong>je ako drûiteæ vozidla zapÌsan· v dokladoch vozidla,</li>
+ <li><strong>b)</strong>m· v doklade ako drûiteæa zapÌsan˙ organizaËn˙ zloûku,</li>
+ <li><strong>c)</strong>pouûÌva vozidlo, v dokladoch ktorÈho je ako drûiteæ vozidla zapÌsan· osoba, ktor· zomrela, bola zruöen· alebo zanikla,</li>
+ <li><strong>d)</strong>pouûÌva vozidlo, v dokladoch ktorÈho je ako drûiteæ vozidla zapÌsan· osoba, ktor· nepouûÌva vozidlo na podnikanie,</li>
+ <li><strong>e)</strong>je zamestn·vateæom a vypl·ca zamestnancovi cestovnÈ n·hrady za pouûitie vozidla, ktorÈ sa nepouûÌva na podnikanie.</li>
+ </ul>
+</div>
+</div> <!-- #tooltip -->
+
+
+
+
+<!-- 11 riadok -->
 <select size="1" name="oslbd" id="oslbd" style="top:494px; left:554px;">
- <option value="0"></option>
  <option value="B">B</option>
  <option value="C">C</option>
  <option value="D">D</option>
-
+ <option value="0"></option>
 </select>
-
 
 <!-- 12 riadok -->
 <input type="text" name="r12" id="r12" value="<?php echo $r12; ?>"
@@ -2790,10 +2816,10 @@ mySelect.appendChild(opt4);
       title="Sadzby dane z motorov˝ch vozidiel" class="btn-row-tool" style="top:538px; left:380px;"> <!-- dopyt, prekopaù sadzby -->
  <div id="robot" class="sadzby-dane-box-locate" style="top:510px; left:110px;"></div> <!-- dopyt, prekopaù podæa edane -->
 <input type="checkbox" name="r12doniz" value="1" style="top:542px; left:424px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="dajSadzbu();" title="Nastav sadzbu r.12 DMV podæa druhu vozidla, nastav r.13 checkbox, vypoËÌtaj poËet mesiacov r.19, vypoËÌtaj r.14,16,18,20,21" 
-class="btn-row-tool" style="top:538px; left:603px;"> 
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="dajSadzbu();" title="Nastav sadzbu r.12 DMV podæa druhu vozidla, nastav r.13 checkbox, vypoËÌtaj poËet mesiacov r.19, vypoËÌtaj r.14,16,18,20,21"
+class="btn-row-tool" style="top:538px; left:603px;">
 
-<div id="robot" class="sadzby-dane-box-locate" style="top:580px; left:50px;"><?php echo "mesiac od da1 jan.".$mesad2.". - dec.".$mesad1."."; ?></div>
+<div id="robot" class="sadzby-dane-box-locate" style="top:580px; left:50px; background-color:white;"><?php echo "mesiac od da1 jan.".$mesad2.". - dec.".$mesad1."."; ?></div> <!-- dopyt, Ëo je toto? -->
 
 <!-- 13 riadok -->
 <!-- znizenie sadzby -->
@@ -2850,15 +2876,15 @@ class="btn-row-tool" style="top:538px; left:603px;">
        style="width:35px; top:926px; left:485px;"/>
 <input type="text" name="r19s1dni" id="r19s1dni" value="<?php echo $r19s1dni; ?>"
        style="width:57px; top:966px; left:326px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetMes();" title="VypoËÌtaj poËet mesiacov r.19, poËas ktor˝ch vozidlo podliehalo dani, vypoËÌtaj r.14,16,18,20,21" 
-class="btn-row-tool" style="top:926px; left:400px;"> 
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetMes();" title="VypoËÌtaj poËet mesiacov r.19, poËas ktor˝ch vozidlo podliehalo dani, vypoËÌtaj r.14,16,18,20,21"
+class="btn-row-tool" style="top:926px; left:400px;">
 
 <input type="text" name="r19s2dni" id="r19s2dni" value="<?php echo $r19s2dni; ?>"
        style="width:57px; top:966px; left:485px;"/>
 <!-- 20 a 21 riadok -->
 <input type="text" name="r20s1" id="r20s1" value="<?php echo $r20s1; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:1019px; left:282px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocitajDan();" title="VypoËÌtaj r.14,16,18,20,21" 
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocitajDan();" title="VypoËÌtaj r.14,16,18,20,21"
 class="btn-row-tool" style="top:1019px; left:603px;"> <!-- dopyt, budeme potrebovaù? -->
 <input type="text" name="r20s2" id="r20s2" value="<?php echo $r20s2; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:1019px; left:439px;"/>
@@ -2876,17 +2902,7 @@ class="btn-row-tool" style="top:1019px; left:603px;"> <!-- dopyt, budeme potrebo
 <input type="text" name="vzzn" id="vzzn" value="<?php echo $vzzn; ?>"
        style="width:360px; top:1258px; left:300px;"/>
 
-
-
-
-<img src="../obr/ikony/info_blue_icon.png" onclick="HelpDanovnici();"
-     title="Druhy daÚovnÌkov podæa ß 85" class="btn-row-tool" style="top:450px; left:650px;"> <!-- dopyt, budem musieù prer·baù -->
-
-
-
-
-
-<script type="text/javascript">
+<script type="text/javascript"> //dopyt, nemÙûe Ìsù do .js Ëasti?
   document.formv1.vzkat.value = '<?php echo "$vzkat";?>';
   document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
   document.formv1.dnvnk.value = '<?php echo "$dnvnk";?>';
@@ -2945,7 +2961,6 @@ class="btn-row-tool" style="top:1019px; left:603px;"> <!-- dopyt, budeme potrebo
 <textarea name="pozn" id="pozn" style="width:838px; height:221px; top:929px; left:53px;"><?php echo $pozn; ?></textarea>
 
 <!-- VIII. ODDIEL -->
-<textarea name="pomv" id="pomv" style="width:838px; height:99px; top:1351px; left:53px;"><?php echo $pomv; ?></textarea> <!-- dopyt, zruöenÈ -->
 <input type="text" name="dvh" id="dvh" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:1216px; left:116px;"/>
 <?php                                        } ?>
 
