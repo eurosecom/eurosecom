@@ -550,8 +550,8 @@ $datznew=$datzsql;
 $datknew=$datksql;
 $da1new=$da1sql;
 
-if ( $datzold != $datznew ) { $pocetdni=1; }
-if ( $datkold != $datknew ) { $pocetdni=1; }
+if ( $datzold != $datznew ) { $_REQUEST['dajsadzbu']=1; }
+if ( $datkold != $datknew ) { $_REQUEST['dajsadzbu']=1; }
 if ( $da1old != $da1new ) { $_REQUEST['dajsadzbu']=1; }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET ".
@@ -913,18 +913,20 @@ $sqldok = mysql_query("$sqlttt");
 
 
 //rozdel do 2 stlpcov andrej
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r18=mesad3, r19=r19s1mes, r13s2zni25=0, r13s2zni20=0, r13s2zni15=0, r13s2zni0=0, ".
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r18=(mesad3-1)-(mesad5-1), r19=r19s1mes, r13s2zni25=0, r13s2zni20=0, r13s2zni15=0, r13s2zni0=0, ".
 " r13s2zvy20=0, r13s2zvy10=0, r19s2mes=0 ".
 " WHERE oc = 1 AND cpl = $cislo_cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r18=0 WHERE oc = 1 AND mesad5 > mesad3 AND cpl = $cislo_cpl ";
-$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r18=0 WHERE oc = 1 AND r18 < 0 AND cpl = $cislo_cpl ";
+//$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13s1zni25=1, r13s1zni20=0, r13s2zni20=1, r19s1mes=r18, r19s2mes=r19-r18 ".
-" WHERE oc = 1 AND mesad2 < 37 AND mesad1 >= 37 AND r13s1zni20 = 1 AND cpl = $cislo_cpl ";
+" WHERE oc = 1 AND mesad2 < 37 AND mesad1 >= 37 AND r13s1zni20 = 1 AND r18 >= 0 AND cpl = $cislo_cpl ";
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
+
 
      }
 //koniec pocetdni=1
@@ -2803,10 +2805,11 @@ mySelect.appendChild(opt4);
 
 <!-- 11 riadok -->
 <select size="1" name="oslbd" id="oslbd" style="top:494px; left:554px;">
+ <option value="0"></option>
  <option value="B">B</option>
  <option value="C">C</option>
  <option value="D">D</option>
- <option value="0"></option>
+
 </select>
 
 <!-- 12 riadok -->
