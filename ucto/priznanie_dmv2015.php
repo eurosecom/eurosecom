@@ -532,6 +532,7 @@ $sqldok = mysql_query("$sqlttt");
 $r12new=1*$r12;
 $r19s1mesnew=1*$r19s1mes;
 
+
 if ( $r12old != $r12new ) { $vypocitajdan=1; }
 if ( $r19s1mesold != $r19s1mesnew ) { $vypocitajdan=1; }
 
@@ -543,12 +544,16 @@ $sqldok = mysql_query("$sqlttt");
  $riaddok=mysql_fetch_object($sqldok);
  $datzold=$riaddok->datz;
  $datkold=$riaddok->datk;
+ $da1old=$riaddok->da1;
+
  }
 $datznew=$datzsql;
 $datknew=$datksql;
+$da1new=$da1sql;
 
 if ( $datzold != $datznew ) { $pocetdni=1; }
 if ( $datkold != $datknew ) { $pocetdni=1; }
+if ( $da1old != $da1new ) { $_REQUEST['dajsadzbu']=1; }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET ".
 " vzkat='$vzkat', vzdru='$vzdru', vzzn='$vzzn', da1='$da1sql', datz='$datzsql', datk='$datksql', ".
@@ -910,6 +915,7 @@ $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1mes=12 WHERE oc = 1 AN
 $sqldok = mysql_query("$sqlttt");
 
      }
+//koniec pocetdni=1
 
 
 if ( $pocetdni == 1 ) { $vypocitajdan=1; }
@@ -1097,6 +1103,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r21=r20s1+r20s2 WHERE oc = 
 $upravene = mysql_query("$uprtxt");
 
      }
+//koniec vypocitajdan=1
 
 $sumadane=0; 
 $sqlttt = "SELECT SUM(r21) AS sumr21, SUM(oc) AS sumoc FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE oc = 1 ";
@@ -1614,6 +1621,8 @@ $r19s1dni = $fir_riadok->r19s1dni;
 $r19s2dni = $fir_riadok->r19s2dni;
 $r20s1 = $fir_riadok->r20s1;
 $r20s2 = $fir_riadok->r20s2;
+$mesad1 = $fir_riadok->mesad1;
+$mesad2 = $fir_riadok->mesad2;
 }
 
 if ( $strana == 4 ) {
@@ -2764,6 +2773,8 @@ mySelect.appendChild(opt4);
 <input type="checkbox" name="r12doniz" value="1" style="top:542px; left:424px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="dajSadzbu();" title="Nastav sadzbu r.12 DMV pod¾a druhu vozidla, nastav r.13 checkbox, vypoèítaj poèet mesiacov r.19, vypoèítaj r.14,16,18,20,21" 
 class="btn-row-tool" style="top:538px; left:603px;"> 
+
+<div id="robot" class="sadzby-dane-box-locate" style="top:580px; left:50px;"><?php echo "poèet mesiacov jan.".$mesad2." - dec.".$mesad1; ?></div>
 
 <!-- 13 riadok -->
 <!-- znizenie sadzby -->
