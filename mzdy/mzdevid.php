@@ -1159,6 +1159,14 @@ window.open('../mzdy/evidencny_listzoznam.php?cislo_oc=' + h_oc + '&copern=10&dr
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function XMLEvidencny()
+                {
+var h_oc = document.forms.formp2.h_oc.value;
+
+window.open('../mzdy/evidencny_listxml.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 //zpoctovy list
 <?php
 $rokzapoct="2014";
@@ -1408,7 +1416,7 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
 
-<td class="bmenu" width="98%">
+<td class="bmenu" width="94%">
 <?php
 $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ORDER BY prie,meno");
 ?>
@@ -1423,6 +1431,12 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 <a href="#" onClick="ZoznamEvidencny();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi zoznam všetkých evidenèných listov vo formáte PDF' ></a>
 </td>
+
+<td class="bmenu" width="2%">
+<a href="#" onClick="XMLEvidencny();">
+<img src='../obr/export.png' width=20 height=15 border=0 title='Export evidenèného listu do XML' ></a>
+</td>
+
 <td class="bmenu" width="2%">
 <a href="#" onClick="UpravEvidencny();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty v evidenènom liste' ></a>

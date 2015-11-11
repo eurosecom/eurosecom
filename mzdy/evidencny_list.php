@@ -521,7 +521,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
 " vv07='$vv07', vv08='$vv08', vv09='$vv09', vv10='$vv10', vv11='$vv11', vv12='$vv12', vv13='$vv13', ".
 " vz01='$vz01', vz02='$vz02', vz03='$vz03', vz04='$vz04', vz05='$vz05', vz06='$vz06', ".
 " vz07='$vz07', vz08='$vz08', vz09='$vz09', vz10='$vz10', vz11='$vz11', vz12='$vz12', vz13='$vz13', ".
-" pozn='$pozn', oprav='$oprav', predo='$predo', datum='$datum_sql' ".
+" pozn='$pozn', oprav='$oprav', predo='$predo', datum='$datum_sql', str2='$str2'  ".
 " WHERE oc = $cislo_oc"; 
 //echo $uprtxt;
 //exit;
@@ -782,9 +782,13 @@ $dan=SkDatum($hlavicka->dan);
 $dav=SkDatum($hlavicka->dav);
 $datum=SkDatum($hlavicka->datum);
 
+$str2=1*$hlavicka->str2;
+if( $_SERVER['SERVER_NAME'] == "www.zerotax.sk" ) { $strojom="X"; }
+if( $str2 == 1 ) { $strojom="X"; }
+if( $str2 != 1 ) { $strojom=" "; }
 
 $pdf->Cell(190,23,"                          ","0",1,"L");
-$pdf->Cell(48,3," ","0",0,"L");$pdf->Cell(3,3," ","0",0,"C");
+$pdf->Cell(48,3," ","0",0,"L");$pdf->Cell(3,3,"$strojom","0",0,"C");
 
 $opravx="";
 if( $hlavicka->oprav == 1 ) { $opravx="X"; }
@@ -1575,6 +1579,7 @@ $kd13 = $fir_riadok->kd13;
 $pozn = $fir_riadok->pozn;
 $oprav = $fir_riadok->oprav;
 $predo = $fir_riadok->predo;
+$str2 = 1*$fir_riadok->str2;
 $datum = SkDatum($fir_riadok->datum);
 
 mysql_free_result($fir_vysledok);
@@ -1808,6 +1813,7 @@ var sirkawic = screen.width-10;
    document.formv1.kd13.value = '<?php echo "$kd13";?>';
 
 <?php if ( $oprav == 1 ) { ?> document.formv1.oprav.checked = "checked"; <?php } ?>
+<?php if ( $str2 == 1 ) { ?> document.formv1.str2.checked = "checked"; <?php } ?>
    document.formv1.predo.value = '<?php echo "$predo";?>';
 
    document.forms.formv1.kr01.focus();
@@ -2093,6 +2099,7 @@ if ( $copern == 20 )
 
 <!-- vyplneny = natvrdo zaskrtnute -->
 <span class="text-echo" style="top:155px; left:262px;"> </span>
+<input type="checkbox" name="str2" value="1" style="top:154px; left:256px;"/>
 <input type="checkbox" name="oprav" value="1" style="top:154px; left:336px;"/>
 
 <!-- I. POISTENEC -->
