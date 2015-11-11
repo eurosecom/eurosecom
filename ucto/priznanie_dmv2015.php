@@ -927,7 +927,6 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13s1zni25=1, r13s1zni20=0,
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 
-
      }
 //koniec pocetdni=1
 
@@ -1701,7 +1700,147 @@ $dstat = "SK";
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - DaÚ z motorov˝ch vozidiel</title>
 <style type="text/css">
-div.sadzby-dane-box, div.sadzby-dane2-box { /* dopyt, sadzby budeme rieöiù cez tabuæku */
+div.sadzby-area {
+  position: absolute;
+  background-color: #ffff90;
+  z-index: 100;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* prefixy */
+  padding-bottom: 5px;
+}
+div.sadzby-area-heading {
+  clear: both;
+  overflow: auto;
+  height: 36px;
+}
+div.sadzby-area-heading > h1 {
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-top: 14px;
+  margin-left: 15px;
+}
+div.sadzby-area-heading > img {
+  width:18px;
+  height:18px;
+  margin-top: 8px;
+  margin-right: 8px;
+  opacity: 1; /* prefixy */
+  cursor: pointer;
+}
+div.sadzby-area-heading > img:hover {
+  opacity: 0.8; /* prefixy */
+}
+div.sadzby-area-body {
+  clear: both;
+}
+div.sadzby-area-body > div {
+  margin-left: 15px;
+}
+div.sadzby-section-heading {
+  font-size:14px;
+  height: 14px;
+  padding: 8px 0 2px 0;
+  font-weight: bold;
+}
+table.sadzby {
+  background-color: #add8e6;
+  margin-right: 15px;
+}
+table.sadzby caption {
+font-size: 14px;
+font-weight: ;
+text-align: left;
+height: 14px;
+background-color:;
+padding: 8px 0 6px 0;
+}
+tr.odd {
+  background-color: #90ccde;
+}
+table.sadzby tr td > a {
+  height: 24px;
+  line-height: 24px;
+  background-color: #fff;
+  color: #000;
+  text-align: right;
+  font-weight: bold;
+  display: block;
+  border-right: 3px solid #add8e6;
+  border-bottom: 3px solid #add8e6;
+  padding-right: 4px;
+}
+table.sadzby tr td > a:hover {
+  background-color: #eee;
+}
+table.sadzby th {
+  font-size: 11px;
+  font-weight: normal;
+  padding-top: 3px;
+  line-height: 15px;
+}
+table.sadzby td {
+  font-size: 12px;
+  text-align: center;
+  line-height: 24px;
+}
+
+div.wrap-vozidla {
+  overflow: auto;
+  width: 100%;
+  background-color: #fff;
+}
+table.vozidla {
+  width: 914px;
+  margin: 5px auto;
+}
+table.vozidla caption {
+  width: 200px;
+  height: 38px;
+  line-height: 38px;
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: left;
+}
+table.vozidla caption img {
+  position: absolute;
+  top: 42px;
+  left: 145px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+table.vozidla thead td {
+  height: 16px;
+  line-height: 16px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #999;
+}
+table.vozidla tbody td {
+  height: 30px;
+  line-height: 30px;
+  border-top: 2px solid #add8e6;
+  font-size: 15px;
+}
+table.vozidla tbody img {
+  width: 20px;
+  height: 20px;
+  vertical-align: text-bottom;
+  cursor: pointer;
+}
+span.text-echo {
+  font-size: 18px;
+  letter-spacing: 13px;
+}
+div.input-echo {
+  position: absolute;
+  font-size: 18px;
+  background-color: #fff;
+}
+
+
+
+/*  div.sadzby-dane-box, div.sadzby-dane2-box {
   overflow: auto;
   height: 400px;
   padding: 6px;
@@ -1803,61 +1942,8 @@ table.sadzby-dane a:hover, table.sadzby-dane2 a:hover { background-color: #add8e
 div.sadzby-dane-box-locate {
   position: absolute;
   z-index: 1;
-}
-div.wrap-vozidla {
-  overflow: auto;
-  width: 100%;
-  background-color: #fff;
-}
-table.vozidla {
-  width: 914px;
-  margin: 5px auto;
-}
-table.vozidla caption {
-  width: 200px;
-  height: 38px;
-  line-height: 38px;
-  margin-top: 5px;
-  font-weight: bold;
-  font-size: 16px;
-  text-align: left;
-}
-table.vozidla caption img {
-  position: absolute;
-  top: 42px;
-  left: 145px;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-table.vozidla thead td {
-  height: 16px;
-  line-height: 16px;
-  font-size: 11px;
-  font-weight: bold;
-  color: #999;
-}
-table.vozidla tbody td {
-  height: 30px;
-  line-height: 30px;
-  border-top: 2px solid #add8e6;
-  font-size: 15px;
-}
-table.vozidla tbody img {
-  width: 20px;
-  height: 20px;
-  vertical-align: text-bottom;
-  cursor: pointer;
-}
-span.text-echo {
-  font-size: 18px;
-  letter-spacing: 13px;
-}
-div.input-echo {
-  position: absolute;
-  font-size: 18px;
-  background-color: #fff;
-}
+} */
+
 </style>
 
 <script type="text/javascript">
@@ -1924,8 +2010,8 @@ var sirkawic = screen.width-10;
 <?php                                                                   } ?>
 
 <?php if ( $strana == 3 OR $strana == 9999 )                            { ?>
-urobVzdru(); //dopyt, Ëo je toto za z·pis, nech˝ba n·hodou function
-document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
+    urobVzdru();
+    document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
 <?php                                                                   } ?>
 
 <?php if ( $strana == 4 OR $strana == 9999 )                           { ?>
@@ -2172,23 +2258,29 @@ document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
    window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=336&uprav=0', '_self' )
   }
 
-<?php if ( $copern == 20 ) { ?>
+
+
+<?php if ( $copern == 20 ) { ?> //dopyt, zruöiù vöetko so sadzbami v .js
   function ukazrobot()
   {
    myRobot = document.getElementById("robot");
    myRobot.innerHTML = htmlmenu;
    robot.style.display='';
   }
+
   function zhasnirobot()
   {
    robot.style.display='none';
   }
-  function VyberZhasni() //dopyt, Ëo robÌ toto
+
+  function VyberZhasni(sadzba)
   {
-   robot.style.display='none';
-   document.formv1.r10.focus();
-   document.formv1.r10.select();
+   document.formv1.r12.value=sadzba;
+   document.getElementById('sadzby').className='hidden';
+   document.formv1.r12.focus();
+   document.formv1.r12.select();
   }
+
 <?php
 $sqltt = "SELECT * FROM F".$kli_vxcf."_sadzby_dmv WHERE csdz = 1 ORDER BY csdz,cprm ";
 $sql = mysql_query("$sqltt");
@@ -2604,9 +2696,7 @@ $source="../ucto/priznanie_dmv".$rokdmv.".php?cislo_oc=".$cislo_oc."&drupoh=1&pa
 <?php                                        } ?>
 
 
-<?php if ( $strana == 3 ) {
-
-?>
+<?php if ( $strana == 3 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str3.jpg"
      alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2015 3.strana 380kB" class="form-background">
 <span class="text-echo" style="top:75px; left:458px;"><?php echo $fir_fdic; ?></span>
@@ -2805,24 +2895,310 @@ mySelect.appendChild(opt4);
 
 <!-- 11 riadok -->
 <select size="1" name="oslbd" id="oslbd" style="top:494px; left:554px;">
- <option value="0"></option>
  <option value="B">B</option>
  <option value="C">C</option>
  <option value="D">D</option>
-
+ <option value="0"></option>
 </select>
 
 <!-- 12 riadok -->
 <input type="text" name="r12" id="r12" value="<?php echo $r12; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:79px; top:538px; left:288px;"/>
- <img src="../obr/ikony/info_blue_icon.png" onclick="ukazrobot();"
-      title="Sadzby dane z motorov˝ch vozidiel" class="btn-row-tool" style="top:538px; left:380px;"> <!-- dopyt, prekopaù sadzby -->
- <div id="robot" class="sadzby-dane-box-locate" style="top:510px; left:110px;"></div> <!-- dopyt, prekopaù podæa edane -->
+ <img src="../obr/ikony/info_blue_icon.png"
+  onclick="document.getElementById('sadzby').className='unhidden sadzby-area';"
+      title="Sadzby dane z motorov˝ch vozidiel" class="btn-row-tool" style="top:538px; left:380px;">
+
+
 <input type="checkbox" name="r12doniz" value="1" style="top:542px; left:424px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="dajSadzbu();" title="Nastav sadzbu r.12 DMV podæa druhu vozidla, nastav r.13 checkbox, vypoËÌtaj poËet mesiacov r.19, vypoËÌtaj r.14,16,18,20,21"
-class="btn-row-tool" style="top:538px; left:603px;">
+      class="btn-row-tool" style="top:538px; left:603px;">
 
-<div id="robot" class="sadzby-dane-box-locate" style="top:580px; left:50px; background-color:white;"><?php echo "mesiac od da1 jan.".$mesad2.". - dec.".$mesad1."."; ?></div> <!-- dopyt, Ëo je toto? -->
+<!-- rocne sadzby dane -->
+<div id="sadzby" class="sadzby-area hidden" style="top:572px; left:172px;">
+<div class="sadzby-area-heading">
+ <h1 class="toleft">Sadzby dane podæa druhov vozidiel</h1>
+ <img src='../obr/ikony/xmark4_blue_x16.png' title="Zavrieù"
+      onclick="document.getElementById('sadzby').className='hidden sadzby-area';"
+      class="toright">
+</div>
+<div class="sadzby-area-body">
+<div class="toleft">
+ <table class="sadzby" style="width:200px;">
+ <caption><strong>OsobnÈ vozidl·</strong></caption>
+ <tr class="zero-line">
+  <td style="width:30%;"></td><td style="width:30%;"></td><td style="width:40%;"></td>
+ </tr>
+ <tr>
+  <th colspan="2">Objem motora (cm3)</th>
+  <th rowspan="2">Sadzba<br>dane (Ä)</th>
+ </tr>
+ <tr>
+  <th>nad</th><th>do(vr·t.)</th>
+ </tr>
+ <tr class="odd">
+  <td></td><td>150</td>
+  <td><a href="#" onclick="VyberZhasni(50);">50</a></td>
+ </tr>
+ <tr>
+  <td>150</td><td>900</td>
+  <td><a href="">62</a></td>
+ </tr>
+ <tr class="odd">
+  <td>900</td><td>1200</td>
+  <td><a href="">80</a></td>
+ </tr>
+ <tr>
+  <td>1200</td><td>1500</td>
+  <td><a href="">115</a></td>
+ </tr>
+ <tr class="odd">
+  <td>1500</td><td>2000</td>
+  <td><a href="">148</a></td>
+ </tr>
+ <tr>
+  <td>2000</td><td>3000</td>
+  <td><a href="">180</a></td>
+ </tr>
+ <tr class="odd">
+  <td>3000</td><td></td>
+  <td><a href="">218</a></td>
+ </tr>
+ </table>
+<br>
+ <table class="sadzby" style="width:200px;">
+ <caption><strong>Vozidl· L, M a N na elektrinu</strong></caption>
+ <tr class="zero-line">
+  <td style="width:60%;"></td><td style="width:40%;"></td>
+ </tr>
+ <tr>
+  <th>V˝kon motora<br>(kW)</th>
+  <th>Sadzba<br>dane (Ä)</th>
+ </tr>
+ <tr class="odd">
+  <td>nad 0</td>
+  <td><a href="">0</a></td>
+ </tr>
+ </table>
+</div>
+
+<div class="toleft">
+<div class="sadzby-section-heading">⁄ûitkovÈ vozidl· a autobusy</div>
+<!-- 1,2 napravy -->
+ <table class="toleft sadzby" style="width:160px;">
+ <caption>1, 2 n·pravy</caption>
+ <tr class="zero-line">
+  <td style="width:30%;"></td><td style="width:30%;"></td><td style="width:40%;"></td>
+ </tr>
+ <tr>
+  <td></td>
+ </tr>
+ <tr>
+  <th colspan="2">Hmotnosù (t)</th>
+  <th rowspan="2">Sadzba<br>dane (Ä)</th>
+ </tr>
+ <tr>
+  <th>nad</th><th>do(vr·t.)</th>
+ </tr>
+ <tr class="odd">
+  <td></td><td>1</td>
+  <td><a href="">74</a></td>
+ </tr>
+ <tr>
+  <td>1</td><td>2</td>
+  <td><a href="">133</a></td>
+ </tr>
+ <tr class="odd">
+  <td>2</td><td>4</td>
+  <td><a href="">212</a></td>
+ </tr>
+ <tr>
+  <td>4</td><td>6</td>
+  <td><a href="">312</a></td>
+ </tr>
+ <tr class="odd">
+  <td>6</td><td>8</td>
+  <td><a href="">417</a></td>
+ </tr>
+ <tr>
+  <td>8</td><td>10</td>
+  <td><a href="">518</a></td>
+ </tr>
+ <tr class="odd">
+  <td>10</td><td>12</td>
+  <td><a href="">620</a></td>
+ </tr>
+ <tr>
+  <td>12</td><td>14</td>
+  <td><a href="">777</a></td>
+ </tr>
+ <tr class="odd">
+  <td>14</td><td>16</td>
+  <td><a href="">933</a></td>
+ </tr>
+ <tr>
+  <td>16</td><td>18</td>
+  <td><a href="">1089</a></td>
+ </tr>
+ <tr class="odd">
+  <td>18</td><td>20</td>
+  <td><a href="">1252</a></td>
+ </tr>
+ <tr>
+  <td>20</td><td>22</td>
+  <td><a href="">1452</a></td>
+ </tr>
+ <tr class="odd">
+  <td>22</td><td>24</td>
+  <td><a href="">1660</a></td>
+ </tr>
+ <tr>
+  <td>24</td><td>26</td>
+  <td><a href="">1862</a></td>
+ </tr>
+ <tr class="odd">
+  <td>26</td><td>28</td>
+  <td><a href="">2075</a></td>
+ </tr>
+ <tr>
+  <td>28</td><td>30</td>
+  <td><a href="">2269</a></td>
+ </tr>
+ <tr class="odd">
+  <td>30</td><td></td>
+  <td><a href="">2480</a></td>
+ </tr>
+ </table>
+<!-- 3 napravy -->
+ <table class="toleft sadzby" style="width:160px;">
+ <caption>3 n·pravy</caption>
+ <tr class="zero-line">
+  <td style="width:30%;"></td><td style="width:30%;"></td><td style="width:40%;"></td>
+ </tr>
+ <tr>
+  <th colspan="2">Hmotnosù (t)</th>
+  <th rowspan="2">Sadzba<br>dane (Ä)</th>
+ </tr>
+ <tr>
+  <th>nad</th><th>do(vr·t.)</th>
+ </tr>
+ <tr class="odd">
+  <td></td><td>15</td>
+  <td><a href="">566</a></td>
+ </tr>
+ <tr>
+  <td>15</td><td>17</td>
+  <td><a href="">673</a></td>
+ </tr>
+ <tr class="odd">
+  <td>17</td><td>19</td>
+  <td><a href="">828</a></td>
+ </tr>
+ <tr>
+  <td>19</td><td>21</td>
+  <td><a href="">982</a></td>
+ </tr>
+ <tr class="odd">
+  <td>21</td><td>23</td>
+  <td><a href="">1144</a></td>
+ </tr>
+ <tr>
+  <td>23</td><td>25</td>
+  <td><a href="">1295</a></td>
+ </tr>
+ <tr class="odd">
+  <td>25</td><td>27</td>
+  <td><a href="">1452</a></td>
+ </tr>
+ <tr>
+  <td>27</td><td>29</td>
+  <td><a href="">1599</a></td>
+ </tr>
+ <tr class="odd">
+  <td>29</td><td>31</td>
+  <td><a href="">1755</a></td>
+ </tr>
+ <tr>
+  <td>31</td><td>33</td>
+  <td><a href="">1964</a></td>
+ </tr>
+ <tr class="odd">
+  <td>33</td><td>35</td>
+  <td><a href="">2172</a></td>
+ </tr>
+ <tr>
+  <td>35</td><td>37</td>
+  <td><a href="">2375</a></td>
+ </tr>
+ <tr class="odd">
+  <td>37</td><td>40</td>
+  <td><a href="">2582</a></td>
+ </tr>
+ <tr>
+  <td>40</td><td></td>
+  <td><a href="">2790</a></td>
+ </tr>
+ </table>
+<!-- 4 napravy -->
+ <table class="toleft sadzby" style="width:160px;">
+ <caption>4 a viac n·prav</caption>
+ <tr class="zero-line">
+  <td style="width:30%;"></td><td style="width:30%;"></td><td style="width:40%;"></td>
+ </tr>
+ <tr>
+  <th colspan="2">Hmotnosù (t)</th>
+  <th rowspan="2">Sadzba<br>dane (Ä)</th>
+ </tr>
+ <tr>
+  <th>nad</th><th>do(vr·t.)</th>
+ </tr>
+ <tr class="odd">
+  <td></td><td>23</td>
+  <td><a href="">721</a></td>
+ </tr>
+ <tr>
+  <td>23</td><td>25</td>
+  <td><a href="">877</a></td>
+ </tr>
+ <tr class="odd">
+  <td>25</td><td>27</td>
+  <td><a href="">1033</a></td>
+ </tr>
+ <tr>
+  <td>27</td><td>29</td>
+  <td><a href="">1189</a></td>
+ </tr>
+ <tr class="odd">
+  <td>29</td><td>31</td>
+  <td><a href="">1337</a></td>
+ </tr>
+ <tr>
+  <td>31</td><td>33</td>
+  <td><a href="">1548</a></td>
+ </tr>
+ <tr class="odd">
+  <td>33</td><td>35</td>
+  <td><a href="">1755</a></td>
+ </tr>
+ <tr>
+  <td>35</td><td>37</td>
+  <td><a href="">1968</a></td>
+ </tr>
+ <tr class="odd">
+  <td>37</td><td>40</td>
+  <td><a href="">2172</a></td>
+ </tr>
+ <tr>
+  <td>40</td><td></td>
+  <td><a href="">2375</a></td>
+ </tr>
+ </table>
+</div>
+</div> <!-- .sadzby-area-body -->
+</div> <!-- .sadzby-area -->
+
+<div id="robot" class="sadzby-dane-box-locate"
+ style="position:absolute; padding: 5px; top:580px; left:20px; background-color:white;"><?php echo "mesiac od da1 jan.".$mesad2.". - dec.".$mesad1."."; ?></div> <!-- dopyt, Ëo je toto? -->
+
 
 <!-- 13 riadok -->
 <!-- znizenie sadzby -->
@@ -2880,7 +3256,7 @@ class="btn-row-tool" style="top:538px; left:603px;">
 <input type="text" name="r19s1dni" id="r19s1dni" value="<?php echo $r19s1dni; ?>"
        style="width:57px; top:966px; left:326px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetMes();" title="VypoËÌtaj poËet mesiacov r.19, poËas ktor˝ch vozidlo podliehalo dani, vypoËÌtaj r.14,16,18,20,21"
-class="btn-row-tool" style="top:926px; left:400px;">
+class="btn-row-tool" style="top:926px; left:590px;">
 
 <input type="text" name="r19s2dni" id="r19s2dni" value="<?php echo $r19s2dni; ?>"
        style="width:57px; top:966px; left:485px;"/>
@@ -2888,7 +3264,7 @@ class="btn-row-tool" style="top:926px; left:400px;">
 <input type="text" name="r20s1" id="r20s1" value="<?php echo $r20s1; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:1019px; left:282px;"/>
 <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocitajDan();" title="VypoËÌtaj r.14,16,18,20,21"
-class="btn-row-tool" style="top:1019px; left:603px;"> <!-- dopyt, budeme potrebovaù? -->
+class="btn-row-tool" style="top:1019px; left:603px;">
 <input type="text" name="r20s2" id="r20s2" value="<?php echo $r20s2; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:1019px; left:439px;"/>
 <input type="text" name="r21" id="r21" value="<?php echo $r21; ?>"
@@ -2901,9 +3277,9 @@ class="btn-row-tool" style="top:1019px; left:603px;"> <!-- dopyt, budeme potrebo
 <input type="text" name="r24" id="r24" value="<?php echo $r24; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:172px; top:1220px; left:404px;"/>
 <!-- bonus -->
-<label for="vzzn" class="added-label" style="top:1265px; left:200px;">ZnaËka vozidla</label>
+<label for="vzzn" class="added-label" style="top:1270px; left:220px;">ZnaËka vozidla</label>
 <input type="text" name="vzzn" id="vzzn" value="<?php echo $vzzn; ?>"
-       style="width:360px; top:1258px; left:300px;"/>
+       style="width:360px; top:1263px; left:320px;"/>
 
 <script type="text/javascript"> //dopyt, nemÙûe Ìsù do .js Ëasti?
   document.formv1.vzkat.value = '<?php echo "$vzkat";?>';

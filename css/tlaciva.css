@@ -191,6 +191,10 @@ span.text-echo {
 .unhidden {
   display: block;
 }
+tr.zero-line > td { /* urcenie sirky stlpcov */
+  height: 0;
+}
+
 /* tooltip vlavo zobacik */
 .tooltip-left {
   z-index: 10;
