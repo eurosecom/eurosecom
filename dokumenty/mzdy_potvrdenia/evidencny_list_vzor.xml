@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spELDPZec xmlns="http://socpoist.sk/xsd/eldpzec" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://socpoist.sk/xsd/eldpzec ELDP-v2015_1.3.xsd ">
+  <zamestnavatel>
+    <identifikacia>
+      <icz>1122334455</icz>
+      <identifikator>
+        <ico>11223344</ico>
+      </identifikator>
+      <nazov>SPtest s.r.o</nazov>
+    </identifikacia>
+    <korAdresa>
+      <ulica>Kvetinková</ulica>
+      <oCislo>17</oCislo>
+      <obec>Prešov</obec>
+      <psc>08001</psc>
+    </korAdresa>
+  </zamestnavatel>
+  <zoznamELDPZec>
+    <eldpZec opravny="1">
+      <poistenec>
+        <rc>531015123</rc>
+        <priezvisko>Osobitý</priezvisko>
+        <meno>František</meno>
+        <rodPriezvisko>Osobitý</rodPriezvisko>
+        <miestoNarodenia>Brezno</miestoNarodenia>
+        <datNarodenia>15.10.1953</datNarodenia>
+        <adresa>
+        	<ulica>Vesmírna</ulica>
+        	<oCislo>308</oCislo>
+        	<obec>Martin</obec>
+        	<psc>03601</psc>
+			<stat>SK</stat>
+        </adresa>
+      </poistenec>
+      <poistVztah>
+        <datVzniku>01.05.2008</datVzniku>
+        <datZaniku>30.09.2013</datZaniku>
+      </poistVztah>
+      <obdobiaPoist datDovrseniaDV="15.10.2012">
+        <vzZaObdobiePoist rok="2008" znakPoist="A" datOd="01.05.2008" datDo="31.12.2008" vzDP="123250" />
+        <vzZaObdobiePoist rok="2009" znakPoist="A" datOd="01.01.2009" datDo="31.12.2009" vzDP="7458.30" />
+        <vzZaObdobiePoist rok="2010" znakPoist="A" datOd="01.01.2010" datDo="31.12.2010" vzDP="10500.00" vzVyluc="1200.00" dniVyluc="20"/>
+        <vzZaObdobiePoist rok="2011" znakPoist="A" datOd="01.01.2011" datDo="31.12.2011" vzDP="8421.36" />
+        <vzZaObdobiePoist rok="2012" znakPoist="A" datOd="01.01.2012" datDo="14.10.2012" vzDP="12480.20"/>
+        <vzZaObdobiePoist rok="2012" znakPoist="A" datOd="15.10.2012" datDo="31.12.2012" vzDP="4258.35" dniVyluc="7"/>
+        <vzZaObdobiePoist rok="2013" znakPoist="A" datOd="01.01.2013" datDo="30.09.2013" vzDP="7525.48" />
+      </obdobiaPoist>
+    </eldpZec>
+    <eldpZec opravny="0">
+      <poistenec>
+        <rc>5511118899</rc>
+        <priezvisko>Osoba</priezvisko>
+        <meno>Ľubomír</meno>
+        <rodPriezvisko>Osoba</rodPriezvisko>
+        <miestoNarodenia>Prešov</miestoNarodenia>
+        <datNarodenia>11.11.1955</datNarodenia>
+        <adresa>
+        	<ulica>Dlhá</ulica>
+        	<oCislo>54</oCislo>
+        	<obec>Obec</obec>
+        	<psc>01122</psc>
+			<stat>SK</stat>
+        </adresa>
+      </poistenec>
+      <poistVztah>
+        <datVzniku>15.04.2014</datVzniku>
+        <trva>1</trva>
+      </poistVztah>
+      <obdobiaPoist>
+        <vzZaObdobiePoist rok="2014" znakPoist="A" datOd="15.04.2014" datDo="31.12.2014" vzDP="4826.20"/>
+        <vzZaObdobiePoist rok="2015" znakPoist="A" datOd="01.01.2015" datDo="27.10.2015" vzDP="6045.25"/>
+      </obdobiaPoist>
+    </eldpZec>
+  </zoznamELDPZec>
+  <datOdoslania>04.11.2015</datOdoslania>
+  <kontakt>
+  	<priezvisko>Test</priezvisko>
+  	<meno>Juraj</meno>
+  	<email>j.test@mailova.sk</email>
+  	<telCislo>+421911223344</telCislo>
+  </kontakt>
+</spELDPZec>
