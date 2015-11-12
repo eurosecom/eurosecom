@@ -776,7 +776,7 @@ $sqldok = mysql_query("$sqlttt");
 $kli_vrok2=$kli_vrok;
 $kli_vmes2=12;
 if( $predpoklad == 1 ) { $kli_vrok2=$kli_vrok+1; $kli_vmes2=0;}
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=(($kli_vrok2-r14)*12)-(r15-1)+$kli_vmes2+1 WHERE oc = 1 ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=(($kli_vrok2-r14)*12)-(r15-1)+$kli_vmes2 WHERE oc = 1 ";
 $sqldok = mysql_query("$sqlttt");
 $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad2=(($kli_vrok2-r14)*12)-(r15-1)+1 WHERE oc = 1 ";
 $sqldok = mysql_query("$sqlttt");
@@ -924,6 +924,26 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r18=0 WHERE oc = 1 AND r18 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13s1zni25=1, r13s1zni20=0, r13s2zni20=1, r19s1mes=r18, r19s2mes=r19-r18 ".
 " WHERE oc = 1 AND mesad2 < 37 AND mesad1 >= 37 AND r13s1zni20 = 1 AND r18 >= 0 AND cpl = $cislo_cpl ";
+//echo $uprtxt;
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13s1zni20=1, r13s1zni15=0, r13s2zni15=1, r19s1mes=r18, r19s2mes=r19-r18 ".
+" WHERE oc = 1 AND mesad2 < 73 AND mesad1 >= 73 AND r13s1zni15 = 1 AND r18 >= 0 AND cpl = $cislo_cpl ";
+//echo $uprtxt;
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13s1zni15=1, r13s2zni0=1, r19s1mes=r18, r19s2mes=r19-r18 ".
+" WHERE oc = 1 AND mesad2 < 109 AND mesad1 >= 109 AND r18 >= 0 AND cpl = $cislo_cpl ";
+//echo $uprtxt;
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13s1zvy10=0, r13s2zvy10=1, r19s1mes=r18, r19s2mes=r19-r18 ".
+" WHERE oc = 1 AND mesad2 < 145 AND mesad1 >= 145 AND r13s1zvy10 = 1 AND r18 >= 0 AND cpl = $cislo_cpl ";
+//echo $uprtxt;
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13s1zvy10=1, r13s1zvy20=0, r13s2zvy20=1, r19s1mes=r18, r19s2mes=r19-r18 ".
+" WHERE oc = 1 AND mesad2 < 157 AND mesad1 >= 157 AND r13s1zvy20 = 1 AND r18 >= 0 AND cpl = $cislo_cpl ";
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 
