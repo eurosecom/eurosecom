@@ -411,6 +411,7 @@ if ( $kli_vrokxx == 2011 ) { if ( File_Exists("../pswd/oddelena2011db2012.php") 
 if ( $kli_vrokxx == 2012 ) { if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2012."."; } }
 if ( $kli_vrokxx == 2013 ) { if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; } }
 if ( $kli_vrokxx == 2014 ) { if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; } }
+if ( $kli_vrokxx == 2015 ) { if ( File_Exists("../pswd/oddelena2015db2016.php") ) { $databaza=$mysqldb2015."."; } }
 
 //zober data z kun
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplx".$kli_uzid.
@@ -631,6 +632,11 @@ if( $kli_vrok == 2015 )
 { 
 if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databazamin=$mysqldb2014."."; }
 if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databazamin2=$mysqldb2013."."; } 
+}
+if( $kli_vrok == 2016 ) 
+{ 
+if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databazamin=$mysqldb2015."."; }
+if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databazamin2=$mysqldb2014."."; } 
 }
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplnxx".$kli_uzid.
@@ -1999,6 +2005,7 @@ $databaza="";
 if ( $kli_vrok == 2013 ) { if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2012."."; } }
 if ( $kli_vrok == 2014 ) { if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; } }
 if ( $kli_vrok == 2015 ) { if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; } }
+if ( $kli_vrok == 2016 ) { if ( File_Exists("../pswd/oddelena2015db2016.php") ) { $databaza=$mysqldb2015."."; } }
 
 if ( $firm2 > 0 )
 {

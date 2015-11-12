@@ -378,6 +378,10 @@ if ( $minuly == 1 AND $kli_vrok > 2014 )
 {
 if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; }
 }
+if ( $minuly == 1 AND $kli_vrok > 2015 )
+{
+if ( File_Exists("../pswd/oddelena2015db2016.php") ) { $databaza=$mysqldb2015."."; }
+}
 //echo $minuly;
 
 //bezny rok
