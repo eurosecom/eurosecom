@@ -115,7 +115,7 @@ $uloztt = "INSERT INTO F$kli_vxcf"."_mzdtrn".
 " ( oc,dm,uceb,numb,vsy,ksy,ssy,kc,mn,trx1,trx4,trx3 )".
 " VALUES ($h_oc, '$h_dm', '$h_uceb', '$h_numb', '$h_vsy', '$h_ksy', '$h_ssy', '$h_kc', '$h_mn', '$h_trx1', '$h_iban', '$h_pbic' ) "; 
 //echo $uloztt;
-$ulozene = mysql_query("$uloztt"); 
+if( $h_oc > 0 ) { $ulozene = mysql_query("$uloztt"); }
 
 if( ( $h_dm == 101 OR $h_dm == 107 ) AND $h_trx1 == 1 ) { include("vypocet_sz4.php"); }
 
@@ -160,7 +160,7 @@ $h_dsk = SqlDatum($h_dsk);
 
 $upravttt = "UPDATE F$kli_vxcf"."_mzdtrn SET oc='$h_oc', dm='$h_dm', numb='$h_numb',
  uceb='$h_uceb', vsy='$h_vsy', ksy='$h_ksy', ssy='$h_ssy', kc='$h_kc', mn='$h_mn', trx1='$h_trx1', trx4='$h_iban', trx3='$h_pbic' WHERE cpl='$cislo_cpl'";  
-$upravene = mysql_query("$upravttt");
+if( $h_oc > 0 ) { $upravene = mysql_query("$upravttt"); }
 //echo $upravttt;
 
 if( ( $h_dm == 101 OR $h_dm == 107 ) AND $h_trx1 == 1 ) { include("vypocet_sz4.php"); }
