@@ -147,6 +147,10 @@ if ( $kli_vrok > 2014 )
 {
 if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; }
 }
+if ( $kli_vrok > 2015 )
+{
+if ( File_Exists("../pswd/oddelena2015db2016.php") ) { $databaza=$mysqldb2015."."; }
+}
 
 $uprtxt = "DELETE FROM F$kli_vxcf"."_mzdevidencny WHERE oc = $cislo_oc ";
 $upravene = mysql_query("$uprtxt");
@@ -193,16 +197,22 @@ $rokm3=$kli_vrok-3;
 $rokm4=$kli_vrok-4;
 $rokm5=$kli_vrok-5;
 $rokm6=$kli_vrok-6;
+$rokm7=$kli_vrok-7;
 $xrok=$rokm1;
 if( $lenjedenrok == 2 ) { $xrok=$rokm2; }
 if( $lenjedenrok == 3 ) { $xrok=$rokm3; }
 if( $lenjedenrok == 4 ) { $xrok=$rokm4; }
 if( $lenjedenrok == 5 ) { $xrok=$rokm5; }
 if( $lenjedenrok == 6 ) { $xrok=$rokm6; }
+if( $lenjedenrok == 7 ) { $xrok=$rokm7; }
 }
 
 
 $databaza="";
+if ( $xrok < 2016 AND $lenjedenrok > 0 )
+{
+if ( File_Exists("../pswd/oddelena2015db2016.php") ) { $databaza=$mysqldb2015."."; }
+}
 if ( $xrok < 2015 AND $lenjedenrok > 0 )
 {
 if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; }
@@ -258,12 +268,14 @@ $rokm3=$kli_vrok-3;
 $rokm4=$kli_vrok-4;
 $rokm5=$kli_vrok-5;
 $rokm6=$kli_vrok-6;
+$rokm7=$kli_vrok-7;
 $xrok=$rokm1;
 if( $lenjedenrok == 2 ) { $xrok=$rokm2; }
 if( $lenjedenrok == 3 ) { $xrok=$rokm3; }
 if( $lenjedenrok == 4 ) { $xrok=$rokm4; }
 if( $lenjedenrok == 5 ) { $xrok=$rokm5; }
 if( $lenjedenrok == 6 ) { $xrok=$rokm6; }
+if( $lenjedenrok == 7 ) { $xrok=$rokm7; }
 
 $dat0101=$xrok."-01-01";
 $dat3112=$xrok."-12-31";
@@ -324,12 +336,14 @@ $rokm3=$kli_vrok-3;
 $rokm4=$kli_vrok-4;
 $rokm5=$kli_vrok-5;
 $rokm6=$kli_vrok-6;
+$rokm7=$kli_vrok-7;
 $kli_vrokx=$rokm1;
 if( $lenjedenrok == 2 ) { $kli_vrokx=$rokm2; }
 if( $lenjedenrok == 3 ) { $kli_vrokx=$rokm3; }
 if( $lenjedenrok == 4 ) { $kli_vrokx=$rokm4; }
 if( $lenjedenrok == 5 ) { $kli_vrokx=$rokm5; }
 if( $lenjedenrok == 6 ) { $kli_vrokx=$rokm6; }
+if( $lenjedenrok == 7 ) { $kli_vrokx=$rokm7; }
 }
 
 $uzje=0;
@@ -1871,8 +1885,9 @@ $rokm3=$kli_vrok-3;
 $rokm4=$kli_vrok-4;
 $rokm5=$kli_vrok-5;
 $rokm6=$kli_vrok-6;
+$rokm7=$kli_vrok-7;
 
-$firm1=0; $firm2=0; $firm3=0; $firm4=0; $firm5=0; $firm6=0;
+$firm1=0; $firm2=0; $firm3=0; $firm4=0; $firm5=0; $firm6=0; $firm7=0;
 
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_ufir WHERE udaje = 1";
 $fir_vysledok = mysql_query($sqlfir);
@@ -1887,6 +1902,7 @@ if( $kli_vrok == 2012 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { 
 if( $kli_vrok == 2013 ) { if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; } }
 if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; } }
 if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2014db2015.php")) { $databaza=$mysqldb2014."."; } }
+if( $kli_vrok == 2016 ) { if (File_Exists ("../pswd/oddelena2015db2016.php")) { $databaza=$mysqldb2015."."; } }
 
 if( $firm1 > 0 )
 {
@@ -1903,6 +1919,7 @@ if( $kli_vrok == 2012 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { 
 if( $kli_vrok == 2013 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
 if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; } }
 if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; } }
+if( $kli_vrok == 2016 ) { if (File_Exists ("../pswd/oddelena2014db2015.php")) { $databaza=$mysqldb2014."."; } }
 
 if( $firm2 > 0 )
 {
@@ -1917,6 +1934,7 @@ if( $fir_allx11 > 0 ) { $firm3=$fir_allx11; }
 if( $kli_vrok == 2013 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
 if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
 if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; } }
+if( $kli_vrok == 2016 ) { if (File_Exists ("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; } }
 
 if( $firm3 > 0 )
 {
@@ -1931,6 +1949,7 @@ if( $fir_allx11 > 0 ) { $firm4=$fir_allx11; }
 
 if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
 if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
+if( $kli_vrok == 2016 ) { if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; } }
 
 if( $firm4 > 0 )
 {
@@ -1943,6 +1962,7 @@ if( $fir_allx11 > 0 ) { $firm5=$fir_allx11; }
 }
 
 if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
+if( $kli_vrok == 2016 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
 
 if( $firm5 > 0 )
 {
@@ -1952,6 +1972,18 @@ if( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 
 $fir_allx11 = 1*$fir_riadok->allx11;
 if( $fir_allx11 > 0 ) { $firm6=$fir_allx11; }
+}
+
+if( $kli_vrok == 2016 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
+
+if( $firm6 > 0 )
+{
+$sqlfir = "SELECT * FROM ".$databaza."F$firm6"."_ufir WHERE udaje = 1";
+$fir_vysledok = mysql_query($sqlfir);
+if( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+
+$fir_allx11 = 1*$fir_riadok->allx11;
+if( $fir_allx11 > 0 ) { $firm7=$fir_allx11; }
 }
 
 //osobne cislo prepinanie
@@ -2076,6 +2108,14 @@ if ( $copern == 20 )
   <?php echo "$rokm6,$firm6"; ?>
  </a>
 <?php                   } ?>
+
+<?php if ( $firm7 > 0 ) { ?>
+ <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=7&fir=<?php echo $firm7; ?>', '_self')"
+  title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm7; ?> a firmy Ë. <?php echo $firm7; ?> - len rok <?php echo $rokm7; ?>'>
+  <?php echo "$rokm7,$firm7"; ?>
+ </a>
+<?php                   } ?>
+
 <?php
 }
 ?>
