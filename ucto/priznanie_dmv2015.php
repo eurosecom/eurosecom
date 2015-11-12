@@ -1837,113 +1837,6 @@ div.input-echo {
   font-size: 18px;
   background-color: #fff;
 }
-
-
-
-/*  div.sadzby-dane-box, div.sadzby-dane2-box {
-  overflow: auto;
-  height: 400px;
-  padding: 6px;
-  background-color: #ffff90;
- }
-div.sadzby-dane-box { width: 720px; }
-div.sadzby-dane2-box { width: 862px; }
-div.sadzby-dane-box h2, div.sadzby-dane2-box h2 {
-  float: left;
-  height: 25px;
-  line-height: 25px;
-  padding-bottom: 6px;
-  font-weight: bold;
-  font-size: 15px;
-}
-div.sadzby-dane-box img, div.sadzby-dane2-box img {
-  display: block;
-  float: right;
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-}
-table.sadzby-dane, table.sadzby-dane2 {
-  background-color: #add8e6;
-  margin-top: 6px;
-}
-table.sadzby-dane { width: 704px; }
-table.sadzby-dane2 { width: 846px; }
-table.sadzby-dane caption, table.sadzby-dane2 caption {
-  width: 270px;
-  height: 30px;
-  line-height: 30px;
-  padding-top: 2px;
-  background-color: #add8e6;
-  font-size: 13px;
-  text-align: center;
-  text-transform: uppercase;
-}
-table.sadzby-dane h3, table.sadzby-dane2 h3 {
-  float: left;
-  height: 24px;
-  line-height: 24px;
-  font-size: 11px;
-  font-weight: normal;
-  color: #fff;
-}
-table.sadzby-dane h3 { width: 120px; }
-table.sadzby-dane2 h3 { width: 90px; }
-table.sadzby-dane h4, table.sadzby-dane2 h4 {
-  float: left;
-  border-right: 3px solid #add8e6;
-  font-size: 11px;
-  font-weight: normal;
-}
-table.sadzby-dane h4 {
-  width: 70px;
-  height: 24px;
-  line-height: 24px;
-}
-table.sadzby-dane2 h4 {
-  width: 60px;
-  height: 30px;
-  line-height: 14px;
-}
-table.sadzby-dane2 h5 {
-  float: left;
-  width: 123px;
-  height: 24px;
-  line-height: 24px;
-  border-right: 3px solid #add8e6;
-  font-size: 11px;
-  font-weight: normal;
-}
-table.sadzby-dane h6, table.sadzby-dane2 h6 {
-  float: left;
-  height: 26px;
-  line-height: 26px;
-  font-size: 11px;
-  text-align: right;
-}
-table.sadzby-dane h6 { width: 120px; }
-table.sadzby-dane2 h6 { width: 90px; }
-table.sadzby-dane a, table.sadzby-dane2 a {
-  float: left;
-  display: block;
-  height: 26px;
-  line-height: 26px;
-  border-right: 3px solid #add8e6;
-  border-bottom: 3px solid #add8e6;
-  background-color: #fff;
-  font-size: 12px;
-  font-weight: bold;
-  color: #000;
-  text-align: right;
-}
-table.sadzby-dane a { width: 70px; }
-table.sadzby-dane2 a { width: 60px; }
-table.sadzby-dane a:hover, table.sadzby-dane2 a:hover { background-color: #add8e6; }
-div.sadzby-dane-box-locate {
-  position: absolute;
-  z-index: 1;
-} */
-
 </style>
 
 <script type="text/javascript">
@@ -2260,19 +2153,7 @@ var sirkawic = screen.width-10;
 
 
 
-<?php if ( $copern == 20 ) { ?> //dopyt, zruöiù vöetko so sadzbami v .js
-  function ukazrobot()
-  {
-   myRobot = document.getElementById("robot");
-   myRobot.innerHTML = htmlmenu;
-   robot.style.display='';
-  }
-
-  function zhasnirobot()
-  {
-   robot.style.display='none';
-  }
-
+<?php if ( $copern == 20 ) { ?>
   function VyberZhasni(sadzba)
   {
    document.formv1.r12.value=sadzba;
@@ -2280,286 +2161,6 @@ var sirkawic = screen.width-10;
    document.formv1.r12.focus();
    document.formv1.r12.select();
   }
-
-<?php
-$sqltt = "SELECT * FROM F".$kli_vxcf."_sadzby_dmv WHERE csdz = 1 ORDER BY csdz,cprm ";
-$sql = mysql_query("$sqltt");
-$cpol = mysql_num_rows($sql);
-$i=0;
-   while ($i <= $cpol )
-   {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-if ( $i == 0 ) { ?>
-var htmlmenu = "<div class='sadzby-dane-box'>"; //dopyt, budeme cez html
-    htmlmenu += "<h2>Sadzby dane z motorov˝ch vozidiel</h2><img src='../obr/ikony/turnoff_blue_icon.png' onclick='zhasnirobot();' title='Skryù menu'>";
-    htmlmenu += "<table class='sadzby-dane'>";
-    htmlmenu += "<caption><?php echo $riadok->nsdz; ?></caption>";
-    htmlmenu += "<tr>";
-    htmlmenu += "<th><h3><?php echo $riadok->pprm; ?></h3><h4>Bratislava</h4><h4>B.Bystrica</h4><h4>Nitra</h4><h4>TrenËÌn</h4><h4>Trnava</h4>";
-    htmlmenu += "<h4>Koöice</h4><h4>Preöov</h4><h4>éilina</h4></th>";
-    htmlmenu += "</tr>";
-<?php          } ?>
-    htmlmenu += "<tr>";
-    htmlmenu += "<td><h6><?php echo $riadok->nprm; ?>&nbsp;&nbsp;&nbsp;</h6>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szba; ?>';VyberZhasni();\"><?php echo $riadok->szba; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szbb; ?>';VyberZhasni();\"><?php echo $riadok->szbb; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->sznr; ?>';VyberZhasni();\"><?php echo $riadok->sznr; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->sztn; ?>';VyberZhasni();\"><?php echo $riadok->sztn; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->sztt; ?>';VyberZhasni();\"><?php echo $riadok->sztt; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szke; ?>';VyberZhasni();\"><?php echo $riadok->szke; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szpo; ?>';VyberZhasni();\"><?php echo $riadok->szpo; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szza; ?>';VyberZhasni();\"><?php echo $riadok->szza; ?>&nbsp;&nbsp;</a></td>";
-    htmlmenu += "</tr>";
-<?php
-  }
-$i=$i+1;
-   }
-?>
-    htmlmenu += "</table>";
-
-<?php
-$sqltt = "SELECT * FROM F".$kli_vxcf."_sadzby_dmv WHERE csdz = 2 ORDER BY csdz,cprm ";
-$sql = mysql_query("$sqltt");
-$cpol = mysql_num_rows($sql);
-$i=0;
-   while ($i <= $cpol )
-   {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-if ( $i == 0 ) { ?>
-    htmlmenu += "<table class='sadzby-dane'>";
-    htmlmenu += "<caption><?php echo $riadok->nsdz; ?></caption>";
-    htmlmenu += "<tr>";
-    htmlmenu += "<th><h3><?php echo $riadok->pprm; ?></h3><h4>Bratislava</h4><h4>B.Bystrica</h4><h4>Nitra</h4><h4>TrenËÌn</h4><h4>Trnava</h4>";
-    htmlmenu += "<h4>Koöice</h4><h4>Preöov</h4><h4>éilina</h4></th>";
-    htmlmenu += "</tr>";
-<?php          } ?>
-    htmlmenu += "<tr>";
-    htmlmenu += "<td><h6><?php echo $riadok->nprm; ?>&nbsp;&nbsp;&nbsp;</h6>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szba; ?>';VyberZhasni();\"><?php echo $riadok->szba; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szbb; ?>';VyberZhasni();\"><?php echo $riadok->szbb; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->sznr; ?>';VyberZhasni();\"><?php echo $riadok->sznr; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->sztn; ?>';VyberZhasni();\"><?php echo $riadok->sztn; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->sztt; ?>';VyberZhasni();\"><?php echo $riadok->sztt; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szke; ?>';VyberZhasni();\"><?php echo $riadok->szke; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szpo; ?>';VyberZhasni();\"><?php echo $riadok->szpo; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szza; ?>';VyberZhasni();\"><?php echo $riadok->szza; ?>&nbsp;&nbsp;</a></td>";
-    htmlmenu += "</tr>";
-<?php
-  }
-$i=$i+1;
-   }
-?>
-    htmlmenu += "</table>";
-
-<?php
-$sqltt = "SELECT * FROM F".$kli_vxcf."_sadzby_dmv WHERE csdz = 3 ORDER BY csdz,cprm ";
-$sql = mysql_query("$sqltt");
-$cpol = mysql_num_rows($sql);
-$i=0;
-   while ($i <= $cpol )
-   {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-if ( $i == 0 ) { ?>
-    htmlmenu += "<table class='sadzby-dane'>";
-    htmlmenu += "<caption><?php echo $riadok->nsdz; ?></caption>";
-    htmlmenu += "<tr>";
-    htmlmenu += "<th><h3><?php echo $riadok->pprm; ?></h3><h4>Bratislava</h4><h4>B.Bystrica</h4><h4>Nitra</h4><h4>TrenËÌn</h4><h4>Trnava</h4>";
-    htmlmenu += "<h4>Koöice</h4><h4>Preöov</h4><h4>éilina</h4></th>";
-    htmlmenu += "</tr>";
-<?php          } ?>
-    htmlmenu += "<tr>";
-    htmlmenu += "<td><h6><?php echo $riadok->nprm; ?>&nbsp;&nbsp;&nbsp;</h6>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szba; ?>';VyberZhasni();\"><?php echo $riadok->szba; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szbb; ?>';VyberZhasni();\"><?php echo $riadok->szbb; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->sznr; ?>';VyberZhasni();\"><?php echo $riadok->sznr; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->sztn; ?>';VyberZhasni();\"><?php echo $riadok->sztn; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->sztt; ?>';VyberZhasni();\"><?php echo $riadok->sztt; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szke; ?>';VyberZhasni();\"><?php echo $riadok->szke; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szpo; ?>';VyberZhasni();\"><?php echo $riadok->szpo; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szza; ?>';VyberZhasni();\"><?php echo $riadok->szza; ?>&nbsp;&nbsp;</a></td>";
-    htmlmenu += "</tr>";
-<?php
-  }
-$i=$i+1;
-   }
-?>
-    htmlmenu += "</table>";
-
-<?php
-$sqltt = "SELECT * FROM F".$kli_vxcf."_sadzby_dmv WHERE csdz = 4 ORDER BY csdz,cprm ";
-$sql = mysql_query("$sqltt");
-$cpol = mysql_num_rows($sql);
-$i=0;
-   while ($i <= $cpol )
-   {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-if ( $i == 0 ) { ?>
-    htmlmenu += "<table class='sadzby-dane'>";
-    htmlmenu += "<caption><?php echo $riadok->nsdz; ?></caption>";
-    htmlmenu += "<tr>";
-    htmlmenu += "<th><h3><?php echo $riadok->pprm; ?></h3><h4>Bratislava</h4><h4>B.Bystrica</h4><h4>Nitra</h4><h4>TrenËÌn</h4><h4>Trnava</h4>";
-    htmlmenu += "<h4>Koöice</h4><h4>Preöov</h4><h4>éilina</h4></th>";
-    htmlmenu += "</tr>";
-<?php          } ?>
-    htmlmenu += "<tr>";
-    htmlmenu += "<td><h6><?php echo $riadok->nprm; ?>&nbsp;&nbsp;&nbsp;</h6>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szba; ?>';VyberZhasni();\"><?php echo $riadok->szba; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szbb; ?>';VyberZhasni();\"><?php echo $riadok->szbb; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->sznr; ?>';VyberZhasni();\"><?php echo $riadok->sznr; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->sztn; ?>';VyberZhasni();\"><?php echo $riadok->sztn; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->sztt; ?>';VyberZhasni();\"><?php echo $riadok->sztt; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szke; ?>';VyberZhasni();\"><?php echo $riadok->szke; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szpo; ?>';VyberZhasni();\"><?php echo $riadok->szpo; ?>&nbsp;&nbsp;</a>";
-    htmlmenu += "<a href=\"#\" onclick=\"document.formv1.r10.value='<?php echo $riadok->szza; ?>';VyberZhasni();\"><?php echo $riadok->szza; ?>&nbsp;&nbsp;</a></td>";
-    htmlmenu += "</tr>";
-<?php
-  }
-$i=$i+1;
-   }
-?>
-    htmlmenu += "</table></div>";
-<?php                      } ?>
-
-
-<?php if ( $copern == 20 ) { ?>
-<?php
-$sqltt = "SELECT * FROM F".$kli_vxcf."_sadzby_dmv_znizene WHERE csdz = 12 ORDER BY csdz,cprm ";
-$sql = mysql_query("$sqltt");
-$cpol = mysql_num_rows($sql);
-$i=0;
-   while ($i <= $cpol )
-   {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-if ( $i == 0 ) { ?>
-var htmlmenu2 = "<div class='sadzby-dane2-box'>";
-    htmlmenu2 += "<h2>Sadzby dane z motorov˝ch vozidiel</h2><img src='../obr/ikony/turnoff_blue_icon.png' onclick='zhasnirobot2();' title='Skryù menu'>";
-    htmlmenu2 += "<table class='sadzby-dane2'>";
-    htmlmenu2 += "<caption><?php echo $riadok->nsdz; ?></caption>";
-    htmlmenu2 += "<tr>";
-    htmlmenu2 += "<th><h3></h3><h5>Koöice</h5><h5>éilina</h5><h5>Trnava</h5><h5>TrenËÌn</h5><h5>Nitra</h5><h5>B.Bystrica</h5></th>";
-    htmlmenu2 += "</tr>";
-    htmlmenu2 += "<tr>";
-    htmlmenu2 += "<th><h3><?php echo $riadok->pprm; ?></h3><h4>EURO 3</h4><h4>EURO 4,5</h4><h4>EURO 3</h4><h4>EURO 4,5</h4><h4>EURO 4,5<br>EEV</h4><h4>EURO 6</h4>";
-    htmlmenu2 += "<h4>EURO 3</h4><h4>EURO 4,5,6<br>EEV</h4><h4>EURO 3</h4><h4>EURO 4,5</h4><h4>EURO 3</h4><h4>EURO 4,5,6<br>EEV</h4></th>";
-    htmlmenu2 += "</tr>";
-<?php          } ?>
-    htmlmenu2 += "<tr>";
-    htmlmenu2 += "<td><h6><?php echo $riadok->nprm; ?>&nbsp;&nbsp;&nbsp;</h6>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szke1; ?>';VyberZhasni2();\"><?php echo $riadok->szke1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szke2; ?>';VyberZhasni2();\"><?php echo $riadok->szke2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szza1; ?>';VyberZhasni2();\"><?php echo $riadok->szza1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szza2; ?>';VyberZhasni2();\"><?php echo $riadok->szza2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sztt1; ?>';VyberZhasni2();\"><?php echo $riadok->sztt1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sztt2; ?>';VyberZhasni2();\"><?php echo $riadok->sztt2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sztn1; ?>';VyberZhasni2();\"><?php echo $riadok->sztn1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sztn2; ?>';VyberZhasni2();\"><?php echo $riadok->sztn2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sznr1; ?>';VyberZhasni2();\"><?php echo $riadok->sznr1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sznr2; ?>';VyberZhasni2();\"><?php echo $riadok->sznr2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szbb1; ?>';VyberZhasni2();\"><?php echo $riadok->szbb1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szbb2; ?>';VyberZhasni2();\"><?php echo $riadok->szbb2; ?>&nbsp;&nbsp;</a></td>";
-    htmlmenu2 += "</tr>";
-<?php
-  }
-$i=$i+1;
-   }
-?>
-    htmlmenu2 += "</table>";
-
-<?php
-$sqltt = "SELECT * FROM F".$kli_vxcf."_sadzby_dmv_znizene WHERE csdz = 13 ORDER BY csdz,cprm ";
-$sql = mysql_query("$sqltt");
-$cpol = mysql_num_rows($sql);
-$i=0;
-   while ($i <= $cpol )
-   {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-if ( $i == 0 ) { ?>
-    htmlmenu2 += "<table class='sadzby-dane2'>";
-    htmlmenu2 += "<caption><?php echo $riadok->nsdz; ?></caption>";
-    htmlmenu2 += "<tr>";
-    htmlmenu2 += "<th><h3></h3><h5>Koöice</h5><h5>éilina</h5><h5>Trnava</h5><h5>TrenËÌn</h5><h5>Nitra</h5><h5>B.Bystrica</h5></th>";
-    htmlmenu2 += "</tr>";
-    htmlmenu2 += "<tr>";
-    htmlmenu2 += "<th><h3><?php echo $riadok->pprm; ?></h3><h4>EURO 3</h4><h4>EURO 4,5</h4><h4>EURO 3</h4><h4>EURO 4,5</h4><h4>EURO 4,5<br>EEV</h4><h4>EURO 6</h4>";
-    htmlmenu2 += "<h4>EURO 3</h4><h4>EURO 4,5,6<br>EEV</h4><h4>EURO 3</h4><h4>EURO 4,5</h4><h4>EURO 3</h4><h4>EURO 4,5,6<br>EEV</h4></th>";
-    htmlmenu2 += "</tr>";
-<?php          } ?>
-    htmlmenu2 += "<tr>";
-    htmlmenu2 += "<td><h6><?php echo $riadok->nprm; ?>&nbsp;&nbsp;&nbsp;</h6>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szke1; ?>';VyberZhasni2();\"><?php echo $riadok->szke1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szke2; ?>';VyberZhasni2();\"><?php echo $riadok->szke2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szza1; ?>';VyberZhasni2();\"><?php echo $riadok->szza1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szza2; ?>';VyberZhasni2();\"><?php echo $riadok->szza2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sztt1; ?>';VyberZhasni2();\"><?php echo $riadok->sztt1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sztt2; ?>';VyberZhasni2();\"><?php echo $riadok->sztt2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sztn1; ?>';VyberZhasni2();\"><?php echo $riadok->sztn1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sztn2; ?>';VyberZhasni2();\"><?php echo $riadok->sztn2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sznr1; ?>';VyberZhasni2();\"><?php echo $riadok->sznr1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sznr2; ?>';VyberZhasni2();\"><?php echo $riadok->sznr2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szbb1; ?>';VyberZhasni2();\"><?php echo $riadok->szbb1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szbb2; ?>';VyberZhasni2();\"><?php echo $riadok->szbb2; ?>&nbsp;&nbsp;</a></td>";
-    htmlmenu2 += "</tr>";
-<?php
-  }
-$i=$i+1;
-   }
-?>
-    htmlmenu2 += "</table>";
-
-<?php
-$sqltt = "SELECT * FROM F".$kli_vxcf."_sadzby_dmv_znizene WHERE csdz = 14 ORDER BY csdz,cprm ";
-$sql = mysql_query("$sqltt");
-$cpol = mysql_num_rows($sql);
-$i=0;
-   while ($i <= $cpol )
-   {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-if ( $i == 0 ) { ?>
-    htmlmenu2 += "<table class='sadzby-dane2'>";
-    htmlmenu2 += "<caption><?php echo $riadok->nsdz; ?></caption>";
-    htmlmenu2 += "<tr>";
-    htmlmenu2 += "<th><h3></h3><h5>Koöice</h5><h5>éilina</h5><h5>Trnava</h5><h5>TrenËÌn</h5><h5>Nitra</h5><h5>B.Bystrica</h5></th>";
-    htmlmenu2 += "</tr>";
-    htmlmenu2 += "<tr>";
-    htmlmenu2 += "<th><h3><?php echo $riadok->pprm; ?></h3><h4>EURO 3</h4><h4>EURO 4,5</h4><h4>EURO 3</h4><h4>EURO 4,5</h4><h4>EURO 4,5<br>EEV</h4><h4>EURO 6</h4>";
-    htmlmenu2 += "<h4>EURO 3</h4><h4>EURO 4,5,6<br>EEV</h4><h4>EURO 3</h4><h4>EURO 4,5</h4><h4>EURO 3</h4><h4>EURO 4,5,6<br>EEV</h4></th>";
-    htmlmenu2 += "</tr>";
-<?php          } ?>
-    htmlmenu2 += "<tr>";
-    htmlmenu2 += "<td><h6><?php echo $riadok->nprm; ?>&nbsp;&nbsp;&nbsp;</h6>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szke1; ?>';VyberZhasni2();\"><?php echo $riadok->szke1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szke2; ?>';VyberZhasni2();\"><?php echo $riadok->szke2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szza1; ?>';VyberZhasni2();\"><?php echo $riadok->szza1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szza2; ?>';VyberZhasni2();\"><?php echo $riadok->szza2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sztt1; ?>';VyberZhasni2();\"><?php echo $riadok->sztt1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sztt2; ?>';VyberZhasni2();\"><?php echo $riadok->sztt2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sztn1; ?>';VyberZhasni2();\"><?php echo $riadok->sztn1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sztn2; ?>';VyberZhasni2();\"><?php echo $riadok->sztn2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sznr1; ?>';VyberZhasni2();\"><?php echo $riadok->sznr1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->sznr2; ?>';VyberZhasni2();\"><?php echo $riadok->sznr2; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szbb1; ?>';VyberZhasni2();\"><?php echo $riadok->szbb1; ?>&nbsp;&nbsp;</a>";
-    htmlmenu2 += "<a href=\"#\" onclick=\"document.formv1.r11.value='<?php echo $riadok->szbb2; ?>';VyberZhasni2();\"><?php echo $riadok->szbb2; ?>&nbsp;&nbsp;</a></td>";
-    htmlmenu2 += "</tr>";
-<?php
-  }
-$i=$i+1;
-   }
-?>
-    htmlmenu2 += "</table></div>";
 <?php                      } ?>
 </script>
 </HEAD>
@@ -2568,7 +2169,6 @@ $i=$i+1;
   if ( $copern == 20 )
   {
 ?>
-
 <div id="wrap-heading">
  <table id="heading">
   <tr>
@@ -2708,15 +2308,15 @@ $source="../ucto/priznanie_dmv".$rokdmv.".php?cislo_oc=".$cislo_oc."&drupoh=1&pa
        onkeyup="CiarkaNaBodku(this);" style="width:196px; top:203px; left:381px;"/>
 <input type="text" name="datk" id="datk" value="<?php echo $datksk; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:196px; top:244px; left:381px;"/>
-<!-- 03, 04 a 05 riadok -->
-<select size="1" name="vzkat" id="vzkat" style="top:285px; left:435px; width:40px;" onchange="urobVzdru();"> <!-- dopyt, oöetriù pre ie, aby nez˙ûil cel˝ <option> -->
+<!-- 03 a 04 riadok -->
+<select size="1" name="vzkat" id="vzkat" style="width:38px; top:285px; left:435px;" onchange="urobVzdru();"> <!-- dopyt, oöetriù pre ie, aby nez˙ûil cel˝ <option> -->
  <option value="L">L - motorovÈ vozidlo, s menej ako ötyrmi kolesami a ötvorkolky,</option>
  <option value="M">M - motorovÈ vozidlo najmenej so ötyrmi kolesami urËenÈ na dopravu osÙb,</option>
  <option value="N">N - motorovÈ vozidlo najmenej so ötyrmi kolesami urËenÈ na dopravu n·kladov,</option>
  <option value="O">O - prÌpojnÈ nemotorovÈ vozidlo.</option>
  <option value="0"></option>
 </select>
-<select size="1" name="vzdru" id="vzdru" style="top:285px; left:518px; width:64px; font-size:12px;">
+<select size="1" name="vzdru" id="vzdru" style="width:64px; top:285px; left:518px;">
  <option value="L1"></option>
  <option value="L2"></option>
  <option value="L3"></option>
@@ -2748,32 +2348,32 @@ mySelect.removeChild( mySelect.options[0] );
 if ( document.formv1.vzkat.value == "L" )
 {
 var opt1 = document.createElement('option');
-opt1.appendChild( document.createTextNode('L1e - mal˝ motocykel(dvojkolesovÈ vozidlo), objem valcov neprevyöuje 50 cm3') ); //dopyt, skr·tiù text
+opt1.appendChild( document.createTextNode('L1e - mal˝ motocykel (2-kolesovÈ vozidlo), objem valcov neprevyöuje 50 cm3') );
 opt1.value = 'L1';
 mySelect.appendChild(opt1);
 
 var opt2 = document.createElement('option');
-opt2.appendChild( document.createTextNode('L2e - mal˝ motocykel(trojkolesovÈ vozidlo), objem valcov neprevyöuje 50 cm3') );
+opt2.appendChild( document.createTextNode('L2e - mal˝ motocykel (3-kolesovÈ vozidlo), objem valcov neprevyöuje 50 cm3') );
 opt2.value = 'L2';
 mySelect.appendChild(opt2);
 
 var opt3 = document.createElement('option');
-opt3.appendChild( document.createTextNode('L3e - motocykel, dvojkolesovÈ vozidlo(bez postrannÈho vozÌka s motorom), s objemom valcov v‰ËöÌ ako 50 cm3') );
+opt3.appendChild( document.createTextNode('L3e - motocykel, 2-kolesovÈ vozidlo bez postran. motor. vozÌka, s objemom valcov v‰ËöÌ ako 50 cm3') );
 opt3.value = 'L3';
 mySelect.appendChild(opt3);
 
 var opt4 = document.createElement('option');
-opt4.appendChild( document.createTextNode('L4e - motocykel, dvojkolesovÈ vozidlo(s postrann˝m vozÌkom s motorom), s objemom valcov v‰ËöÌ ako 50 cm3') );
+opt4.appendChild( document.createTextNode('L4e - motocykel, 2-kolesovÈ vozidlo s postran. motor. vozÌkom, s objemom valcov v‰ËöÌ ako 50 cm3') );
 opt4.value = 'L4';
 mySelect.appendChild(opt4);
 
 var opt5 = document.createElement('option');
-opt5.appendChild( document.createTextNode('L5e - motorov· trojkolka, vozidlo s 3 symetricky usporiadan˝mi kolesami vybavenÈ motorom, ktor˝ s objemom valcov v‰ËöÌ ako 50 cm3') );
+opt5.appendChild( document.createTextNode('L5e - motorov· 3-kolka, vozidlo s 3 kolesami, s objemom valcov v‰ËöÌ ako 50 cm3') );
 opt5.value = 'L5';
 mySelect.appendChild(opt5);
 
 var opt6 = document.createElement('option');
-opt6.appendChild( document.createTextNode('L6e - æahk· ötvorkolka s objemom valcov neprevyöuje 50 cm3') );
+opt6.appendChild( document.createTextNode('L6e - æahk· 4-kolka s objemom valcov neprevyöuje 50 cm3') );
 opt6.value = 'L6';
 mySelect.appendChild(opt6);
 
@@ -2787,17 +2387,17 @@ mySelect.appendChild(opt7);
 if( document.formv1.vzkat.value == "M" ) {
 
 var opt1 = document.createElement('option');
-opt1.appendChild( document.createTextNode('M1 - vozidl· projektovanÈ a konötruovanÈ na prepravu cestuj˙cich, najviac s Ùsmimi sedadlami okrem sedadla pre vodiËa') );
+opt1.appendChild( document.createTextNode('M1 - najviac 8 sedadiel okrem sedadla pre vodiËa') );
 opt1.value = 'M1';
 mySelect.appendChild(opt1);
 
 var opt2 = document.createElement('option');
-opt2.appendChild( document.createTextNode('M2 - vozidl· projektovanÈ a konötruovanÈ na prepravu cestuj˙cich, s viac ako Ùsmimi sedadlami okrem sedadla pre vodiËa, s najv‰Ëöou prÌpustnou celkovou hmotnosùou neprevyöuj˙cou 5000 kg') );
+opt2.appendChild( document.createTextNode('M2 - viac ako 8 sedadiel okrem sedadla pre vodiËa, s prÌpust. celkovou hmotn. neprevyö. 5000 kg') );
 opt2.value = 'M2';
 mySelect.appendChild(opt2);
 
 var opt3 = document.createElement('option');
-opt3.appendChild( document.createTextNode('M3 - vozidl· projektovanÈ a konötruovanÈ na prepravu cestuj˙cich, s viac ako Ùsmimi sedadlami okrem sedadla pre vodiËa, s najv‰Ëöou prÌpustnou celkovou hmotnosùou vyööou ako 5000 kg') );
+opt3.appendChild( document.createTextNode('M3 - viac ako 8 sedadiel okrem sedadla pre vodiËa, s prÌpust. celkovou hmotn. vyööou ako 5000 kg') );
 opt3.value = 'M3';
 mySelect.appendChild(opt3);
 }
@@ -2805,17 +2405,17 @@ mySelect.appendChild(opt3);
 if( document.formv1.vzkat.value == "N" ) {
 
 var opt1 = document.createElement('option');
-opt1.appendChild( document.createTextNode('N1 - vozidl· projektovanÈ na prepravu tovaru s najv‰Ëöou prÌpustnou celkovou hmotnosùou neprevyöuj˙cou 3500 kg') );
+opt1.appendChild( document.createTextNode('N1 - s prÌpustnou celkovou hmotnosùou neprevyö. 3500 kg') );
 opt1.value = 'N1';
 mySelect.appendChild(opt1);
 
 var opt2 = document.createElement('option');
-opt2.appendChild( document.createTextNode('N2 - vozidl· projektovanÈ na prepravu tovaru s najv‰Ëöou prÌpustnou celkovou hmotnosùou vyööou ako 3500 kg, ale neprevyöuj˙cou 12000 kg') );
+opt2.appendChild( document.createTextNode('N2 - s prÌpustnou celkovou hmotnosùou vyööou ako 3500 kg, ale neprevyö. 12000 kg') );
 opt2.value = 'N2';
 mySelect.appendChild(opt2);
 
 var opt3 = document.createElement('option');
-opt3.appendChild( document.createTextNode('N3 - vozidl· projektovanÈ na prepravu tovaru s najv‰Ëöou prÌpustnou celkovou hmotnosùou vyööou ako 12000 kg') );
+opt3.appendChild( document.createTextNode('N3 - s prÌpustnou celkovou hmotnosùou vyööou ako 12000 kg') );
 opt3.value = 'N3';
 mySelect.appendChild(opt3);
 
@@ -2824,22 +2424,22 @@ mySelect.appendChild(opt3);
 if( document.formv1.vzkat.value == "O" ) {
 
 var opt1 = document.createElement('option');
-opt1.appendChild( document.createTextNode('O1 - prÌpojnÈ vozidl· s najv‰Ëöou prÌpustnou celkovou hmotnosùou neprevyöuj˙cou 750 kg') );
+opt1.appendChild( document.createTextNode('O1 - s prÌpustnou celkovou hmotnosùou neprevyöuj˙cou 750 kg') );
 opt1.value = 'O1';
 mySelect.appendChild(opt1);
 
 var opt2 = document.createElement('option');
-opt2.appendChild( document.createTextNode('O2 - prÌpojnÈ vozidl· s najv‰Ëöou prÌpustnou celkovou hmotnosùou  vyööou ako 750 kg, ale neprevyöuj˙cou 3500 kg') );
+opt2.appendChild( document.createTextNode('O2 - s prÌpustnou celkovou hmotnosùou vyööou ako 750 kg, ale neprevyö. 3500 kg') );
 opt2.value = 'O2';
 mySelect.appendChild(opt2);
 
 var opt3 = document.createElement('option');
-opt3.appendChild( document.createTextNode('O3 - prÌpojnÈ vozidl· s najv‰Ëöou prÌpustnou celkovou hmotnosùou  vyööou ako 3500 kg, ale neprevyöuj˙cou 10000 kg') );
+opt3.appendChild( document.createTextNode('O3 - s prÌpustnou celkovou hmotnosùou vyööou ako 3500 kg, ale neprevyö. 10000 kg') );
 opt3.value = 'O3';
 mySelect.appendChild(opt3);
 
 var opt4 = document.createElement('option');
-opt4.appendChild( document.createTextNode('O4 - prÌpojnÈ vozidl· s najv‰Ëöou prÌpustnou celkovou hmotnosùou presahuj˙cou 10000 kg') );
+opt4.appendChild( document.createTextNode('O4 - s prÌpustnou celkovou hmotnosùou presahuj˙cou 10000 kg') );
 opt4.value = 'O4';
 mySelect.appendChild(opt4);
 
@@ -2847,7 +2447,7 @@ mySelect.appendChild(opt4);
 
   }
 </script>
-
+<!-- 05 riadok -->
 <input type="text" name="vzspz" id="vzspz" value="<?php echo $vzspz; ?>"
        style="width:218px; top:327px; left:359px;"/>
 <!-- 06 a 07 riadok -->
@@ -2904,13 +2504,12 @@ mySelect.appendChild(opt4);
 <!-- 12 riadok -->
 <input type="text" name="r12" id="r12" value="<?php echo $r12; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:79px; top:538px; left:288px;"/>
- <img src="../obr/ikony/info_blue_icon.png"
-  onclick="document.getElementById('sadzby').className='unhidden sadzby-area';"
-      title="Sadzby dane z motorov˝ch vozidiel" class="btn-row-tool" style="top:538px; left:380px;">
-
-
+ <img src="../obr/ikony/info_blue_icon.png" title="Sadzby dane z motorov˝ch vozidiel"
+      onclick="document.getElementById('sadzby').className='unhidden sadzby-area';"
+      class="btn-row-tool" style="top:538px; left:380px;">
 <input type="checkbox" name="r12doniz" value="1" style="top:542px; left:424px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="dajSadzbu();" title="Nastav sadzbu r.12 DMV podæa druhu vozidla, nastav r.13 checkbox, vypoËÌtaj poËet mesiacov r.19, vypoËÌtaj r.14,16,18,20,21"
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="dajSadzbu();"
+      title="Doplniù sadzbu do r. 12 podæa druhu vozidla, nastav r.13 checkbox, vypoËÌtaj poËet mesiacov r.19, vypoËÌtaj r.14,16,18,20,21"
       class="btn-row-tool" style="top:538px; left:603px;">
 
 <!-- rocne sadzby dane -->
@@ -2941,27 +2540,27 @@ mySelect.appendChild(opt4);
  </tr>
  <tr>
   <td>150</td><td>900</td>
-  <td><a href="">62</a></td>
+  <td><a href="#" onclick="VyberZhasni(62);">62</a></td>
  </tr>
  <tr class="odd">
   <td>900</td><td>1200</td>
-  <td><a href="">80</a></td>
+  <td><a href="#" onclick="VyberZhasni(80);">80</a></td>
  </tr>
  <tr>
   <td>1200</td><td>1500</td>
-  <td><a href="">115</a></td>
+  <td><a href="#" onclick="VyberZhasni(115);">115</a></td>
  </tr>
  <tr class="odd">
   <td>1500</td><td>2000</td>
-  <td><a href="">148</a></td>
+  <td><a href="#" onclick="VyberZhasni(148);">148</a></td>
  </tr>
  <tr>
   <td>2000</td><td>3000</td>
-  <td><a href="">180</a></td>
+  <td><a href="#" onclick="VyberZhasni(180);">180</a></td>
  </tr>
  <tr class="odd">
   <td>3000</td><td></td>
-  <td><a href="">218</a></td>
+  <td><a href="#" onclick="VyberZhasni(218);">218</a></td>
  </tr>
  </table>
 <br>
@@ -2976,7 +2575,7 @@ mySelect.appendChild(opt4);
  </tr>
  <tr class="odd">
   <td>nad 0</td>
-  <td><a href="">0</a></td>
+  <td><a href="#" onclick="VyberZhasni(0);">0</a></td>
  </tr>
  </table>
 </div>
@@ -3001,71 +2600,71 @@ mySelect.appendChild(opt4);
  </tr>
  <tr class="odd">
   <td></td><td>1</td>
-  <td><a href="">74</a></td>
+  <td><a href="#" onclick="VyberZhasni(74);">74</a></td>
  </tr>
  <tr>
   <td>1</td><td>2</td>
-  <td><a href="">133</a></td>
+  <td><a href="#" onclick="VyberZhasni(133);">133</a></td>
  </tr>
  <tr class="odd">
   <td>2</td><td>4</td>
-  <td><a href="">212</a></td>
+  <td><a href="#" onclick="VyberZhasni(212);">212</a></td>
  </tr>
  <tr>
   <td>4</td><td>6</td>
-  <td><a href="">312</a></td>
+  <td><a href="#" onclick="VyberZhasni(312);">312</a></td>
  </tr>
  <tr class="odd">
   <td>6</td><td>8</td>
-  <td><a href="">417</a></td>
+  <td><a href="#" onclick="VyberZhasni(417);">417</a></td>
  </tr>
  <tr>
   <td>8</td><td>10</td>
-  <td><a href="">518</a></td>
+  <td><a href="#" onclick="VyberZhasni(518);">518</a></td>
  </tr>
  <tr class="odd">
   <td>10</td><td>12</td>
-  <td><a href="">620</a></td>
+  <td><a href="#" onclick="VyberZhasni(620);">620</a></td>
  </tr>
  <tr>
   <td>12</td><td>14</td>
-  <td><a href="">777</a></td>
+  <td><a href="#" onclick="VyberZhasni(777);">777</a></td>
  </tr>
  <tr class="odd">
   <td>14</td><td>16</td>
-  <td><a href="">933</a></td>
+  <td><a href="#" onclick="VyberZhasni(933);">933</a></td>
  </tr>
  <tr>
   <td>16</td><td>18</td>
-  <td><a href="">1089</a></td>
+  <td><a href="#" onclick="VyberZhasni(1089);">1089</a></td>
  </tr>
  <tr class="odd">
   <td>18</td><td>20</td>
-  <td><a href="">1252</a></td>
+  <td><a href="#" onclick="VyberZhasni(1252);">1252</a></td>
  </tr>
  <tr>
   <td>20</td><td>22</td>
-  <td><a href="">1452</a></td>
+  <td><a href="#" onclick="VyberZhasni(1452);">1452</a></td>
  </tr>
  <tr class="odd">
   <td>22</td><td>24</td>
-  <td><a href="">1660</a></td>
+  <td><a href="#" onclick="VyberZhasni(1660);">1660</a></td>
  </tr>
  <tr>
   <td>24</td><td>26</td>
-  <td><a href="">1862</a></td>
+  <td><a href="#" onclick="VyberZhasni(1862);">1862</a></td>
  </tr>
  <tr class="odd">
   <td>26</td><td>28</td>
-  <td><a href="">2075</a></td>
+  <td><a href="#" onclick="VyberZhasni(2075);">2075</a></td>
  </tr>
  <tr>
   <td>28</td><td>30</td>
-  <td><a href="">2269</a></td>
+  <td><a href="#" onclick="VyberZhasni(2269);">2269</a></td>
  </tr>
  <tr class="odd">
   <td>30</td><td></td>
-  <td><a href="">2480</a></td>
+  <td><a href="#" onclick="VyberZhasni(2480);">2480</a></td>
  </tr>
  </table>
 <!-- 3 napravy -->
@@ -3083,59 +2682,59 @@ mySelect.appendChild(opt4);
  </tr>
  <tr class="odd">
   <td></td><td>15</td>
-  <td><a href="">566</a></td>
+  <td><a href="#" onclick="VyberZhasni(566);">566</a></td>
  </tr>
  <tr>
   <td>15</td><td>17</td>
-  <td><a href="">673</a></td>
+  <td><a href="#" onclick="VyberZhasni(673);">673</a></td>
  </tr>
  <tr class="odd">
   <td>17</td><td>19</td>
-  <td><a href="">828</a></td>
+  <td><a href="#" onclick="VyberZhasni(828);">828</a></td>
  </tr>
  <tr>
   <td>19</td><td>21</td>
-  <td><a href="">982</a></td>
+  <td><a href="#" onclick="VyberZhasni(982);">982</a></td>
  </tr>
  <tr class="odd">
   <td>21</td><td>23</td>
-  <td><a href="">1144</a></td>
+  <td><a href="#" onclick="VyberZhasni(1144);">1144</a></td>
  </tr>
  <tr>
   <td>23</td><td>25</td>
-  <td><a href="">1295</a></td>
+  <td><a href="#" onclick="VyberZhasni(1295);">1295</a></td>
  </tr>
  <tr class="odd">
   <td>25</td><td>27</td>
-  <td><a href="">1452</a></td>
+  <td><a href="#" onclick="VyberZhasni(1452);">1452</a></td>
  </tr>
  <tr>
   <td>27</td><td>29</td>
-  <td><a href="">1599</a></td>
+  <td><a href="#" onclick="VyberZhasni(1599);">1599</a></td>
  </tr>
  <tr class="odd">
   <td>29</td><td>31</td>
-  <td><a href="">1755</a></td>
+  <td><a href="#" onclick="VyberZhasni(1755);">1755</a></td>
  </tr>
  <tr>
   <td>31</td><td>33</td>
-  <td><a href="">1964</a></td>
+  <td><a href="#" onclick="VyberZhasni(1964);">1964</a></td>
  </tr>
  <tr class="odd">
   <td>33</td><td>35</td>
-  <td><a href="">2172</a></td>
+  <td><a href="#" onclick="VyberZhasni(2172);">2172</a></td>
  </tr>
  <tr>
   <td>35</td><td>37</td>
-  <td><a href="">2375</a></td>
+  <td><a href="#" onclick="VyberZhasni(2375);">2375</a></td>
  </tr>
  <tr class="odd">
   <td>37</td><td>40</td>
-  <td><a href="">2582</a></td>
+  <td><a href="#" onclick="VyberZhasni(2582);">2582</a></td>
  </tr>
  <tr>
   <td>40</td><td></td>
-  <td><a href="">2790</a></td>
+  <td><a href="#" onclick="VyberZhasni(2790);">2790</a></td>
  </tr>
  </table>
 <!-- 4 napravy -->
@@ -3153,39 +2752,39 @@ mySelect.appendChild(opt4);
  </tr>
  <tr class="odd">
   <td></td><td>23</td>
-  <td><a href="">721</a></td>
+  <td><a href="#" onclick="VyberZhasni(721);">721</a></td>
  </tr>
  <tr>
   <td>23</td><td>25</td>
-  <td><a href="">877</a></td>
+  <td><a href="#" onclick="VyberZhasni(877);">877</a></td>
  </tr>
  <tr class="odd">
   <td>25</td><td>27</td>
-  <td><a href="">1033</a></td>
+  <td><a href="#" onclick="VyberZhasni(1033);">1033</a></td>
  </tr>
  <tr>
   <td>27</td><td>29</td>
-  <td><a href="">1189</a></td>
+  <td><a href="#" onclick="VyberZhasni(1189);">1189</a></td>
  </tr>
  <tr class="odd">
   <td>29</td><td>31</td>
-  <td><a href="">1337</a></td>
+  <td><a href="#" onclick="VyberZhasni(1337);">1337</a></td>
  </tr>
  <tr>
   <td>31</td><td>33</td>
-  <td><a href="">1548</a></td>
+  <td><a href="#" onclick="VyberZhasni(1548);">1548</a></td>
  </tr>
  <tr class="odd">
   <td>33</td><td>35</td>
-  <td><a href="">1755</a></td>
+  <td><a href="#" onclick="VyberZhasni(1755);">1755</a></td>
  </tr>
  <tr>
   <td>35</td><td>37</td>
-  <td><a href="">1968</a></td>
+  <td><a href="#" onclick="VyberZhasni(1968);">1968</a></td>
  </tr>
  <tr class="odd">
   <td>37</td><td>40</td>
-  <td><a href="">2172</a></td>
+  <td><a href="#" onclick="VyberZhasni(2172);">2172</a></td>
  </tr>
  <tr>
   <td>40</td><td></td>
@@ -4536,9 +4135,9 @@ $vzkatg=$hlavickav->vzkat;
 $pdf->SetX($stlpx);
 $pdf->Cell(36,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$vzkatg","$rmc",0,"C");
 //04druh vozidla
-//dopyt, preveriù, keÔ rozbeham na 3pismen·
 $text=$hlavickav->vzdru;
-if ( $hlavickav->vzkat =='' ) $vzdruh="";
+if ( $hlavickav->vzkat == 'L' ) $text=$hlavickav->vzdru.'e'; //dopyt, preveriù Ëi mÙûe byù
+if ( $hlavickav->vzkat == '' ) $vzdruh="";
 $text=sprintf("% 3s",$text);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
