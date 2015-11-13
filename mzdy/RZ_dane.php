@@ -186,7 +186,8 @@ if( $rokrocnezuc < 2011 ) { $rokrocnezuc="";  }
 if( $rokrocnezuc == 2011 ) { $rokrocnezuc="2011";  }
 if( $rokrocnezuc == 2012 ) { $rokrocnezuc="2012";  }
 if( $rokrocnezuc == 2013 ) { $rokrocnezuc="2013";  }
-if( $rokrocnezuc >= 2014 ) { $rokrocnezuc="2014";  }
+if( $rokrocnezuc == 2014 ) { $rokrocnezuc="2014";  }
+if( $rokrocnezuc >= 2015 ) { $rokrocnezuc="2015";  }
 ?>
 
 function TlacRocnezucto()
@@ -219,7 +220,8 @@ if( $rokrocnezucz < 2011 ) { $rokrocnezucz="";  }
 if( $rokrocnezucz == 2011 ) { $rokrocnezucz="2011";  }
 if( $rokrocnezucz == 2012 ) { $rokrocnezucz="2012";  }
 if( $rokrocnezucz == 2013 ) { $rokrocnezucz="2013";  }
-if( $rokrocnezucz >= 2014 ) { $rokrocnezucz="2013";  }
+if( $rokrocnezucz == 2014 ) { $rokrocnezucz="2013";  }
+if( $rokrocnezucz >= 2015 ) { $rokrocnezucz="2013";  }
 ?>
 
 function ZoznamRocnezucto()
@@ -238,7 +240,8 @@ if( $rokrocnezuczp < 2011 ) { $rokrocnezuczp="";  }
 if( $rokrocnezuczp == 2011 ) { $rokrocnezuczp="2011";  }
 if( $rokrocnezuczp == 2012 ) { $rokrocnezuczp="2012";  }
 if( $rokrocnezuczp == 2013 ) { $rokrocnezuczp="2013";  }
-if( $rokrocnezuczp >= 2014 ) { $rokrocnezuczp="2013";  }
+if( $rokrocnezuczp == 2014 ) { $rokrocnezuczp="2013";  }
+if( $rokrocnezuczp >= 2015 ) { $rokrocnezuczp="2013";  }
 ?>
 
 function TlacPotvrd2pdane()
@@ -257,7 +260,8 @@ if( $rokziadosti < 2011 ) { $rokziadosti="";  }
 if( $rokziadosti == 2011 ) { $rokziadosti="2011";  }
 if( $rokziadosti == 2012 ) { $rokziadosti="2012";  }
 if( $rokziadosti == 2013 ) { $rokziadosti="2013";  }
-if( $rokziadosti >= 2014 ) { $rokziadosti="2014";  }
+if( $rokziadosti == 2014 ) { $rokziadosti="2014";  }
+if( $rokziadosti >= 2015 ) { $rokziadosti="2014";  }
 ?>
 
 function TlacRocneziadost()
