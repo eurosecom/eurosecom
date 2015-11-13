@@ -947,6 +947,15 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r13s1zvy10=1, r13s1zvy20=0,
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET r19s1mes=r19s2mes, r13s1zni25=r13s2zni25, r13s1zni20=r13s2zni20, r13s1zni15=r13s2zni15, ".
+" r13s1zvy20=r13s2zvy20, r13s1zvy10=r13s2zvy10, ".
+" r19s2mes=0, r13s2zni25=0, r13s2zni20=0, r13s2zni15=0, r13s2zni0=0, r13s2zvy20=0, r13s2zvy10=0 ".
+" WHERE oc = 1 AND r19s1mes = 0 AND r19s2mes > 0 AND ".
+" ( r13s2zni25 = 1 OR r13s2zni20 = 1 OR r13s2zni15 = 1 OR r13s2zni0 = 1 OR r13s2zvy10 = 1 OR r13s2zvy20 ) AND cpl = $cislo_cpl ";
+//echo $uprtxt;
+$upravene = mysql_query("$uprtxt");
+
+
      }
 //koniec pocetdni=1
 
