@@ -448,7 +448,8 @@ if( $rokfoa < 2011 ) { $rokfoa="";  }
 if( $rokfoa == 2011 ) { $rokfoa="2011";  }
 if( $rokfoa == 2012 ) { $rokfoa="2012";  }
 if( $rokfoa == 2013 ) { $rokfoa="2013";  }
-if( $rokfoa >= 2014 ) { $rokfoa="2014";  }
+if( $rokfoa == 2014 ) { $rokfoa="2014";  }
+if( $rokfoa >= 2015 ) { $rokfoa="2015";  }
 ?>
 
 function TlacFOA( strana )
