@@ -305,12 +305,18 @@ if ( $j == 0 )
   $text = " <hlavicka> "."\r\n";
   fwrite($soubor, $text);
 
+//1.strana
+
   $fo=0; $po=1;
   if ( $fir_uctt03 == 999 ) { $fo=1; $po=0; }
   $hodnota=$fo;
   $text = "  <fo><![CDATA[".$hodnota."]]></fo> "."\r\n"; fwrite($soubor, $text);
   $hodnota=$po;
   $text = "  <po><![CDATA[".$hodnota."]]></po> "."\r\n"; fwrite($soubor, $text);
+
+  $hodnota=1*$hlavicka->zahos;
+  $text = "  <zahranicna><![CDATA[".$hodnota."]]></zahranicna> "."\r\n"; fwrite($soubor, $text);
+
   $hodnota=$fir_fdic;
   $text = "  <dic><![CDATA[".$hodnota."]]></dic> "."\r\n"; fwrite($soubor, $text);
 
@@ -343,9 +349,8 @@ if ( $j == 0 )
   $text = "   <datumDDP><![CDATA[".$hodnota."]]></datumDDP> "."\r\n"; fwrite($soubor, $text);
   $text = "  </zdanovacieObdobie>"."\r\n"; fwrite($soubor, $text);
 
-//priezvisko,meno,titul FO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
-" WHERE oc = 9999 ORDER BY oc";
+//priezvisko,meno,titul FO z ufirdasie
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 $dmeno = $fir_riadok->dmeno;
@@ -356,7 +361,6 @@ if ( $fir_uctt03 != 999 )
 $dmeno = "";
 $dprie = "";
 $dtitl = "";
-$fod = "";
 }
   $hodnota=iconv("CP1250", "UTF-8", $dprie);
   $text = "  <foPriezvisko><![CDATA[".$hodnota."]]></foPriezvisko> "."\r\n"; fwrite($soubor, $text);
@@ -364,26 +368,29 @@ $fod = "";
   $text = "  <foMeno><![CDATA[".$hodnota."]]></foMeno> "."\r\n"; fwrite($soubor, $text);
   $hodnota=iconv("CP1250", "UTF-8", $dtitl);
   $text = "  <foTitul><![CDATA[".$hodnota."]]></foTitul> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=iconv("CP1250", "UTF-8", $fod);
+  $hodnota=iconv("CP1250", "UTF-8", $dtitz);
+  $text = "  <foTitulZa><![CDATA[".$hodnota."]]></foTitulZa> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $fir_fnaz);
+  if( $fir_uctt03 != 999 ) { $hodnota=""; }
   $text = "  <foObchodneMeno><![CDATA[".$hodnota."]]></foObchodneMeno> "."\r\n"; fwrite($soubor, $text);
 
   $text = "  <poObchodneMeno>"."\r\n"; fwrite($soubor, $text);
   $hodnota=iconv("CP1250", "UTF-8", $fir_fnaz);
-  if ( $fir_uctt03 == 999 ) $hodnota="";
+  if( $fir_uctt03 == 999 ) { $hodnota=""; }
   $text = "   <riadok><![CDATA[".$hodnota."]]></riadok> "."\r\n"; fwrite($soubor, $text);
   $hodnota="";
   $text = "   <riadok><![CDATA[".$hodnota."]]></riadok> "."\r\n"; fwrite($soubor, $text);
   $text = "  </poObchodneMeno>"."\r\n"; fwrite($soubor, $text);
 
-//trvaly pobyt z FOB, sidlo z udajov o firme PO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
-" WHERE oc = 9999 ORDER BY oc";
+//trvaly pobyt z ufirdalsie, sidlo z udajov o firme PO
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 $duli = $fir_riadok->duli;
 $dcdm = $fir_riadok->dcdm;
 $dmes = $fir_riadok->dmes;
 $dpsc = $fir_riadok->dpsc;
+$dpsc=str_replace(" ","",$dpsc);
 $dtel = $fir_riadok->dtel;
 $dfax = $fir_riadok->dfax;
 $xstat = $fir_riadok->xstat;
@@ -393,6 +400,7 @@ $duli = $fir_fuli;
 $dcdm = $fir_fcdm;
 $dmes = $fir_fmes;
 $dpsc = $fir_fpsc;
+$dpsc=str_replace(" ","",$dpsc);
 $dtel = $fir_ftel;
 $dfax = $fir_ffax;
 $xstat = "SK";
@@ -409,102 +417,58 @@ $xstat = "SK";
   $hodnota=iconv("CP1250", "UTF-8", $xstat);
   $text = "   <stat><![CDATA[".$hodnota."]]></stat> "."\r\n"; fwrite($soubor, $text);
 
-$pole = explode("/", $dtel);
-$tel_pred=$pole[0];
-$tel_za=$pole[1];
-if ( $tel_pred == 0 ) $tel_pred="";
-if ( $tel_za == 0 ) $tel_za="";
-  $text = "   <tel>"."\r\n"; fwrite($soubor, $text);
-  $hodnota=$tel_pred;
-  $text = "    <predcislie><![CDATA[".$hodnota."]]></predcislie> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$tel_za;
-  $text = "    <cislo><![CDATA[".$hodnota."]]></cislo> "."\r\n"; fwrite($soubor, $text);
-  $text = "   </tel>"."\r\n";   fwrite($soubor, $text);
+$hodnota = $dtel;
+$hodnota=str_replace("/","",$hodnota);
+  $text = "    <telefon><![CDATA[".$hodnota."]]></telefon> "."\r\n"; fwrite($soubor, $text);
 
-$pole = explode("/", $dfax);
-$tel_pred=$pole[0];
-$tel_za=$pole[1];
-if ( $tel_pred == 0 ) $tel_pred="";
-if ( $tel_za == 0 ) $tel_za="";
-  $text = "   <fax>"."\r\n"; fwrite($soubor, $text);
-  $hodnota=$tel_pred;
-  $text = "    <predcislie><![CDATA[".$hodnota."]]></predcislie> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$tel_za;
-  $text = "    <cislo><![CDATA[".$hodnota."]]></cislo> "."\r\n"; fwrite($soubor, $text);
-  $text = "   </fax>"."\r\n"; fwrite($soubor, $text);
+$hodnota = $dfax;
+$hodnota=str_replace("/","",$hodnota);
+  $text = "    <emailFax><![CDATA[".$hodnota."]]></emailFax> "."\r\n"; fwrite($soubor, $text);
+
   $text = "  </sidlo>"."\r\n"; fwrite($soubor, $text);
 
-//prechodny adresa pobytu FOB, prevadzkaren PO
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
-" WHERE oc = 9999 ORDER BY oc";
-$fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
-$d2uli = trim($fir_riadok->d2uli);
-$d2cdm = $fir_riadok->d2cdm;
-$d2mes = $fir_riadok->d2mes;
-$d2psc = $fir_riadok->d2psc;
-$d2tel = $fir_riadok->d2tel;
-$d2fax = $fir_riadok->d2fax;
-if ( $fir_uctt03 != 999 )
-{
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_po ";
-$fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
-$d2uli = trim($fir_riadok->pruli);
-$d2cdm = $fir_riadok->prcdm;
-$d2mes = $fir_riadok->prmes;
-$d2psc = $fir_riadok->prpsc;
-$d2tel = $fir_ftel;
-$d2fax = $fir_ffax;
-}
-if( $d2uli == '' ) { $d2tel_pred=""; $d2tel_cislo=""; $d2fax_pred=""; $d2fax_cislo=""; }
-
-  $text = "  <prechodnyPobyt>"."\r\n";   fwrite($soubor, $text);
-  $hodnota=iconv("CP1250", "UTF-8", $d2uli);
+  $text = "  <adresaOrganizacnejZlozky>"."\r\n";   fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $hlavicka->zouli);
   $text = "   <ulica><![CDATA[".$hodnota."]]></ulica> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$d2cdm;
+  $hodnota=$hlavicka->zocdm;
   $text = "   <cislo><![CDATA[".$hodnota."]]></cislo> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$d2psc;
+  $hodnota=$hlavicka->zopsc;
+  $hodnota=str_replace("/","",$hodnota);
   $text = "   <psc><![CDATA[".$hodnota."]]></psc> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=iconv("CP1250", "UTF-8", $d2mes);
+  $hodnota=iconv("CP1250", "UTF-8", $hlavicka->zomes);
   $text = "   <obec><![CDATA[".$hodnota."]]></obec> "."\r\n"; fwrite($soubor, $text);
 
-$pole = explode("/", $d2tel);
-$tel_pred=$pole[0];
-$tel_za=$pole[1];
-if ( $tel_pred == 0 ) $tel_pred="";
-if ( $tel_za == 0 ) $tel_za="";
-  $text = "   <tel>"."\r\n"; fwrite($soubor, $text);
-  $hodnota=$tel_pred;
-  $text = "    <predcislie><![CDATA[".$hodnota."]]></predcislie> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$tel_za;
-  $text = "    <cislo><![CDATA[".$hodnota."]]></cislo> "."\r\n"; fwrite($soubor, $text);
-  $text = "   </tel>"."\r\n"; fwrite($soubor, $text);
+$hodnota = $hlavicka->zotel;
+$hodnota=str_replace("/","",$hodnota);
+  $text = "    <telefon><![CDATA[".$hodnota."]]></telefon> "."\r\n"; fwrite($soubor, $text);
 
-$pole = explode("/", $d2fax);
-$tel_pred=$pole[0];
-$tel_za=$pole[1];
-if ( $tel_pred == 0 ) $tel_pred="";
-if ( $tel_za == 0 ) $tel_za="";
-  $text = "   <fax>"."\r\n"; fwrite($soubor, $text);
-  $hodnota=$tel_pred;
-  $text = "    <predcislie><![CDATA[".$hodnota."]]></predcislie> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$tel_za;
-  $text = "    <cislo><![CDATA[".$hodnota."]]></cislo> "."\r\n"; fwrite($soubor, $text);
-  $text = "   </fax>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </prechodnyPobyt>"."\r\n"; fwrite($soubor, $text);
+$hodnota = $hlavicka->zoema;
+$hodnota=str_replace("/","",$hodnota);
+  $text = "    <emailFax><![CDATA[".$hodnota."]]></emailFax> "."\r\n"; fwrite($soubor, $text);
+
+  $text = "  </adresaOrganizacnejZlozky>"."\r\n"; fwrite($soubor, $text);
+
+//2.strana
 
   $text = "  <typZastupcu>"."\r\n"; fwrite($soubor, $text);
   $hodnota="0"; if ( $hlavicka->druh3 == 1 ) $hodnota=1;
-  $text = "   <splnomocneny><![CDATA[".$hodnota."]]></splnomocneny> "."\r\n"; fwrite($soubor, $text);
-  $hodnota="0"; if ( $hlavicka->druh3 == 2 ) $hodnota=1;
-  $text = "   <statutarny><![CDATA[".$hodnota."]]></statutarny> "."\r\n"; fwrite($soubor, $text);
+  $text = "   <typZastupca><![CDATA[".$hodnota."]]></typZastupca> "."\r\n"; fwrite($soubor, $text);
+
+  $hodnota="0"; if ( $hlavicka->druh3 == 6 ) $hodnota=1;
+  $text = "   <dedic><![CDATA[".$hodnota."]]></dedic> "."\r\n"; fwrite($soubor, $text);
+
   $hodnota="0"; if ( $hlavicka->druh3 == 3 ) $hodnota=1;
-  $text = "   <spravca><![CDATA[".$hodnota."]]></spravca> "."\r\n"; fwrite($soubor, $text);
+  $text = "   <spravcaVkonkurznomKonani><![CDATA[".$hodnota."]]></spravcaVkonkurznomKonani> "."\r\n"; fwrite($soubor, $text);
+
+  $hodnota="0"; if ( $hlavicka->druh3 == 7 ) $hodnota=1;
+  $text = "   <likvidator><![CDATA[".$hodnota."]]></likvidator> "."\r\n"; fwrite($soubor, $text);
+
+  $hodnota="0"; if ( $hlavicka->druh3 == 2 ) $hodnota=1;
+  $text = "   <statutarnyZastupcaPO><![CDATA[".$hodnota."]]></statutarnyZastupcaPO> "."\r\n"; fwrite($soubor, $text);
+
   $hodnota="0"; if ( $hlavicka->druh3 == 4 ) $hodnota=1;
   $text = "   <pravnyNastupca><![CDATA[".$hodnota."]]></pravnyNastupca> "."\r\n"; fwrite($soubor, $text);
-  $hodnota="0"; if ( $hlavicka->druh3 == 5 ) $hodnota=1;
-  $text = "   <naDorucovanie><![CDATA[".$hodnota."]]></naDorucovanie> "."\r\n"; fwrite($soubor, $text);
+
   $text = "  </typZastupcu>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <zastupca>"."\r\n"; fwrite($soubor, $text);
@@ -514,6 +478,8 @@ if ( $tel_za == 0 ) $tel_za="";
   $text = "   <meno><![CDATA[".$hodnota."]]></meno> "."\r\n"; fwrite($soubor, $text);
   $hodnota=iconv("CP1250", "UTF-8", $hlavicka->d3titl);
   $text = "   <titul><![CDATA[".$hodnota."]]></titul> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $hlavicka->d3titz);
+  $text = "   <titulZa><![CDATA[".$hodnota."]]></titulZa> "."\r\n"; fwrite($soubor, $text);
   $hodnota=$hlavicka->rdc3.$hlavicka->rdk3;
   $text = "   <rc><![CDATA[".$hodnota."]]></rc> "."\r\n"; fwrite($soubor, $text);
   $hodnota=SkDatum($hlavicka->dar3);
@@ -535,29 +501,14 @@ if ( $tel_za == 0 ) $tel_za="";
   $hodnota=iconv("CP1250", "UTF-8", $hlavicka->xstat3);
   $text = "    <stat><![CDATA[".$hodnota."]]></stat> "."\r\n"; fwrite($soubor, $text);
 
-$pole = explode("/", $hlavicka->d3tel);
-$tel_pred=$pole[0];
-$tel_za=$pole[1];
-if ( $tel_pred == 0 ) $tel_pred="";
-if ( $tel_za == 0 ) $tel_za="";
-  $text = "    <tel>"."\r\n"; fwrite($soubor, $text);
-  $hodnota=$tel_pred;
-  $text = "     <predcislie><![CDATA[".$hodnota."]]></predcislie> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$tel_za;
-  $text = "     <cislo><![CDATA[".$hodnota."]]></cislo> "."\r\n"; fwrite($soubor, $text);
-  $text = "    </tel>"."\r\n"; fwrite($soubor, $text);
+$hodnota = $hlavicka->d3tel;
+$hodnota=str_replace("/","",$hodnota);
+  $text = "    <telefon><![CDATA[".$hodnota."]]></telefon> "."\r\n"; fwrite($soubor, $text);
 
-$pole = explode("/", $hlavicka->d3fax);
-$tel_pred=$pole[0];
-$tel_za=$pole[1];
-if ( $tel_pred == 0 ) $tel_pred="";
-if ( $tel_za == 0 ) $tel_za="";
-  $text = "    <fax>"."\r\n"; fwrite($soubor, $text);
-  $hodnota=$tel_pred;
-  $text = "     <predcislie><![CDATA[".$hodnota."]]></predcislie> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$tel_za;
-  $text = "     <cislo><![CDATA[".$hodnota."]]></cislo> "."\r\n"; fwrite($soubor, $text);
-  $text = "    </fax>"."\r\n"; fwrite($soubor, $text);
+$hodnota = $hlavicka->d3fax;
+$hodnota=str_replace("/","",$hodnota);
+  $text = "    <emailFax><![CDATA[".$hodnota."]]></emailFax> "."\r\n"; fwrite($soubor, $text);
+
   $text = "   </adresa>"."\r\n"; fwrite($soubor, $text);
   $text = "  </zastupca>"."\r\n"; fwrite($soubor, $text);
   $text = " </hlavicka>	"."\r\n"; fwrite($soubor, $text);
@@ -621,46 +572,25 @@ if ( $tel_za == 0 ) $tel_za="";
   if ( $hlavicka->ucet == 0 ) $hodnota="";
   if ( $hlavicka->zvra == 0 ) $hodnota="";
   $text = "    <kodBanky><![CDATA[".$hodnota."]]></kodBanky> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=$fir_fib1;
+  $text = "    <IBAN><![CDATA[".$hodnota."]]></IBAN> "."\r\n"; fwrite($soubor, $text);
   $text = "   </bankovyUcet>"."\r\n"; fwrite($soubor, $text);
 
-$pole = explode(".", SkDatum($hlavicka->dvp));
-$den=$pole[0];
-$mesiac=$pole[1];
-$rok=$pole[2];
-if ( $den == '00' ) $den="";
-if ( $mesiac == '00' ) $mesiac="";
-if ( $rok == '0000' ) $rok="";
-if ( $hlavicka->zvra == 0 ) { $den=""; $mesiac=""; $rok=""; }
-  $text = "   <datum>"."\r\n"; fwrite($soubor, $text);
-  $hodnota=$den;
-  $text = "    <den><![CDATA[".$hodnota."]]></den> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$mesiac;
-  $text = "    <mesiac><![CDATA[".$hodnota."]]></mesiac> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$rok;
-  $text = "    <rok><![CDATA[".$hodnota."]]></rok> "."\r\n"; fwrite($soubor, $text);
-  $text = "   </datum>"."\r\n"; fwrite($soubor, $text);
+$hodnota=SkDatum($hlavicka->dvp);
+if( $hodnota == '00.00.0000' ) { $hodnota=""; }
+
+  $text = "   <datum>".$hodnota."</datum>"."\r\n"; fwrite($soubor, $text);
   $text = "  </vrateniePreplatku>"."\r\n"; fwrite($soubor, $text);
 
   $hodnota=iconv("CP1250", "UTF-8", $hlavicka->pozn);
   $text = "  <poznamky><![CDATA[".$hodnota."]]></poznamky> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=iconv("CP1250", "UTF-8", $hlavicka->pomv);
-  $text = "  <pomocneVypocty><![CDATA[".$hodnota."]]></pomocneVypocty> "."\r\n"; fwrite($soubor, $text);
 
-$pole = explode(".", SkDatum($hlavicka->dvh));
-$den=$pole[0];
-$mesiac=$pole[1];
-$rok=$pole[2];
-if ( $den == 00 ) $den="";
-if ( $mesiac == 00 ) $mesiac="";
-if ( $rok == 0000 ) $rok="";
-  $text = "  <datumVyhlasenia>"."\r\n"; fwrite($soubor, $text);
-  $hodnota=$den;
-  $text = "   <den><![CDATA[".$hodnota."]]></den> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$mesiac;
-  $text = "   <mesiac><![CDATA[".$hodnota."]]></mesiac> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$rok;
-  $text = "   <rok><![CDATA[".$hodnota."]]></rok> "."\r\n"; fwrite($soubor, $text);
-  $text = "  </datumVyhlasenia>"."\r\n"; fwrite($soubor, $text);
+
+$hodnota=SkDatum($hlavicka->dvh);
+if( $hodnota == '00.00.0000' ) { $hodnota=""; }
+
+  $text = "   <datumVyhlasenia>".$hodnota."</datumVyhlasenia>"."\r\n"; fwrite($soubor, $text);
+
 }
 //koniec ak j=0
 
@@ -709,67 +639,110 @@ if ( $jv == 1 ) {
   $text = "    <r01><![CDATA[".$hodnota."]]></r01> "."\r\n"; fwrite($soubor, $text);
   $hodnota=SKDatum($hlavickav->datz);
   if ( $hodnota =='00.00.0000' ) $hodnota="";
-  $text = "    <r02><![CDATA[".$hodnota."]]></r02> "."\r\n"; fwrite($soubor, $text);
+  $text = "    <r02vzniku><![CDATA[".$hodnota."]]></r02vzniku> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=SKDatum($hlavickav->datk);
+  if ( $hodnota =='00.00.0000' ) $hodnota="";
+  $text = "    <r02zaniku><![CDATA[".$hodnota."]]></r02zaniku> "."\r\n"; fwrite($soubor, $text);
+
   $hodnota=$hlavickav->vzkat;
-//if ( $vzkat == '' ) { $vzkat="M"; }
   $text = "    <r03><![CDATA[".$hodnota."]]></r03> "."\r\n"; fwrite($soubor, $text);
   $hodnota=$hlavickav->vzdru;
-  if ( $hlavickav->vzkat =='' ) $hodnota="";
   $text = "    <r04><![CDATA[".$hodnota."]]></r04> "."\r\n"; fwrite($soubor, $text);
+
   $hodnota=$hlavickav->vzspz;
   $text = "    <r05><![CDATA[".$hodnota."]]></r05> "."\r\n"; fwrite($soubor, $text);
   $hodnota=$hlavickav->vzobm;
-  if ( $hlavickav->vzkat != 'M' ) $hodnota="";
-  if ( $hodnota == 0 ) $hodnota="";
   $text = "    <r06><![CDATA[".$hodnota."]]></r06> "."\r\n"; fwrite($soubor, $text);
-//  if( $vzkat == 'M' ) { $vzchm=""; $vznpr=""; }
-  $hodnota=$hlavickav->vzchm;
-  if ( $hodnota == 0 ) $hodnota="";
+  $hodnota=$hlavickav->vzvyk;
   $text = "    <r07><![CDATA[".$hodnota."]]></r07> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$hlavickav->vznpr;
-  if ( $hodnota == 0 ) $hodnota="";
+
+  $hodnota=$hlavickav->vzchm;
   $text = "    <r08><![CDATA[".$hodnota."]]></r08> "."\r\n"; fwrite($soubor, $text);
-  $vzdno = $hlavickav->vzdno;
-  $vzdnp = $hlavickav->vzdnp;
-//  if( $vzdno == '' ) { $vzdno="1"; }
-//  if( $vzdnp == '' ) { $vzdnp="A"; }
-  $text = "    <r09>"."\r\n"; fwrite($soubor, $text);
-  $text = "     <ods><![CDATA[".$vzdno."]]></ods> "."\r\n"; fwrite($soubor, $text);
-  $text = "     <pism><![CDATA[".$vzdnp."]]></pism> "."\r\n"; fwrite($soubor, $text);
-  $text = "    </r09>"."\r\n"; fwrite($soubor, $text);
-  $hodnota=$hlavickav->r10;
-  if ( $hodnota == 0 ) $hodnota="";
-  $text = "    <r10><![CDATA[".$hodnota."]]></r10> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$hlavickav->r11;
-  if ( $hodnota == 0 ) $hodnota="";
-  $text = "    <r11><![CDATA[".$hodnota."]]></r11> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=$hlavickav->vznpr;
+  $text = "    <r09><![CDATA[".$hodnota."]]></r09> "."\r\n"; fwrite($soubor, $text);
+
+  $dnvnk = $hlavickav->dnvnk;
+  $oslbd = $hlavickav->oslbd;
+  if ( $oslbd == 0 ) $oslbd="";
+  $text = "     <r10pism><![CDATA[".$dnvnk."]]></r10pism> "."\r\n"; fwrite($soubor, $text);
+  $text = "     <r11pism><![CDATA[".$oslbd."]]></r11pism> "."\r\n"; fwrite($soubor, $text);
+
   $hodnota=$hlavickav->r12;
-  if ( $hodnota == 0 ) $hodnota="";
   $text = "    <r12><![CDATA[".$hodnota."]]></r12> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$hlavickav->r13;
-  if ( $hodnota == 0 ) $hodnota="";
-  $text = "    <r13><![CDATA[".$hodnota."]]></r13> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$hlavickav->r14;
-  if ( $hodnota == 0 ) $hodnota="";
-  $text = "    <r14><![CDATA[".$hodnota."]]></r14> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$hlavickav->r15;
-  if ( $hodnota == 0 ) $hodnota="";
-  $text = "    <r15><![CDATA[".$hodnota."]]></r15> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$hlavickav->r16;
-  if ( $hodnota == 0 ) $hodnota="";
-  $text = "    <r16><![CDATA[".$hodnota."]]></r16> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=$hlavickav->r12doniz;
+  $text = "    <r12nizsiaSadzba><![CDATA[".$hodnota."]]></r12nizsiaSadzba> "."\r\n"; fwrite($soubor, $text);
+
+  $hodnota=1*$hlavickav->r13s1zni25;
+  $text = "    <r13znizenbieSadzba1_25><![CDATA[".$hodnota."]]></r13znizenbieSadzba1_25> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=1*$hlavickav->r13s1zni20;
+  $text = "    <r13znizenbieSadzba1_20><![CDATA[".$hodnota."]]></r13znizenbieSadzba1_20> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=1*$hlavickav->r13s1zni15;
+  $text = "    <r13znizenbieSadzba1_15><![CDATA[".$hodnota."]]></r13znizenbieSadzba1_15> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=1*$hlavickav->r13s2zni25;
+  $text = "    <r13znizenbieSadzba2_25><![CDATA[".$hodnota."]]></r13znizenbieSadzba2_25> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=1*$hlavickav->r13s2zni20;
+  $text = "    <r13znizenbieSadzba2_20><![CDATA[".$hodnota."]]></r13znizenbieSadzba2_20> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=1*$hlavickav->r13s2zni15;
+  $text = "    <r13znizenbieSadzba2_15><![CDATA[".$hodnota."]]></r13znizenbieSadzba2_15> "."\r\n"; fwrite($soubor, $text);
+
+  $hodnota=1*$hlavickav->r13s1zvy10;
+  $text = "    <r13zvysenieSadzba1_10><![CDATA[".$hodnota."]]></r13zvysenieSadzba1_10> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=1*$hlavickav->r13s1zvy20;
+  $text = "    <r13zvysenieSadzba1_20><![CDATA[".$hodnota."]]></r13zvysenieSadzba1_20> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=1*$hlavickav->r13s2zvy10;
+  $text = "    <r13zvysenieSadzba2_10><![CDATA[".$hodnota."]]></r13zvysenieSadzba2_10> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=1*$hlavickav->r13s2zvy20;
+  $text = "    <r13zvysenieSadzba2_20><![CDATA[".$hodnota."]]></r13zvysenieSadzba2_20> "."\r\n"; fwrite($soubor, $text);
+
+  $hodnota=$hlavickav->r14s1;
+  $text = "    <r14s1><![CDATA[".$hodnota."]]></r14s1> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=$hlavickav->r14s2;
+  $text = "    <r14s2><![CDATA[".$hodnota."]]></r14s2> "."\r\n"; fwrite($soubor, $text);
+
+  $hodnota=$hlavickav->r15s1zni50a;
+  $text = "    <r15hybrid><![CDATA[".$hodnota."]]></r15hybrid> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=$hlavickav->r15s1zni50b;
+  $text = "    <r15plyn><![CDATA[".$hodnota."]]></r15plyn> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=$hlavickav->r15s1zni50c;
+  $text = "    <r15vodik><![CDATA[".$hodnota."]]></r15vodik> "."\r\n"; fwrite($soubor, $text);
+
+  $hodnota=$hlavickav->r16s1;
+  $text = "    <r16s1><![CDATA[".$hodnota."]]></r16s1> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=$hlavickav->r16s2;
+  $text = "    <r16s2><![CDATA[".$hodnota."]]></r16s2> "."\r\n"; fwrite($soubor, $text);
+
   $hodnota=$hlavickav->r17;
   if ( $hodnota == 0 ) $hodnota="";
   $text = "    <r17><![CDATA[".$hodnota."]]></r17> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$hlavickav->r18;
+
+  $hodnota=$hlavickav->r18s1;
   if ( $hodnota == 0 ) $hodnota="";
-  $text = "    <r18><![CDATA[".$hodnota."]]></r18> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$hlavickav->r19;
+  $text = "    <r18s1><![CDATA[".$hodnota."]]></r18s1> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=$hlavickav->r18s2;
   if ( $hodnota == 0 ) $hodnota="";
-  $text = "    <r19><![CDATA[".$hodnota."]]></r19> "."\r\n"; fwrite($soubor, $text);
-  $hodnota=$hlavickav->r20;
+  $text = "    <r18s2><![CDATA[".$hodnota."]]></r18s2> "."\r\n"; fwrite($soubor, $text);
+
+  $hodnota=$hlavickav->r19s1mes;
   if ( $hodnota == 0 ) $hodnota="";
-  $text = "    <r20><![CDATA[".$hodnota."]]></r20> "."\r\n"; fwrite($soubor, $text);
+  $text = "    <r19aPocMesS1><![CDATA[".$hodnota."]]></r19aPocMesS1> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=$hlavickav->r19s2mes;
+  if ( $hodnota == 0 ) $hodnota="";
+  $text = "    <r19aPocMesS2><![CDATA[".$hodnota."]]></r19aPocMesS2> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=$hlavickav->r19s1den;
+  if ( $hodnota == 0 ) $hodnota="";
+  $text = "    <r19bPocDniS1><![CDATA[".$hodnota."]]></r19bPocDniS1> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=$hlavickav->r19s2den;
+  if ( $hodnota == 0 ) $hodnota="";
+  $text = "    <r19bPocDniS2><![CDATA[".$hodnota."]]></r19bPocDniS2> "."\r\n"; fwrite($soubor, $text);
+
+
+  $hodnota=$hlavickav->r20s1;
+  if ( $hodnota == 0 ) $hodnota="";
+  $text = "    <r20s1><![CDATA[".$hodnota."]]></r20s1> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=$hlavickav->r20s2;
+  if ( $hodnota == 0 ) $hodnota="";
+  $text = "    <r20s2><![CDATA[".$hodnota."]]></r20s2> "."\r\n"; fwrite($soubor, $text);
+
   $hodnota = $hlavickav->r21;
   if ( $hodnota == 0 ) $hodnota="";
   $text = "    <r21><![CDATA[".$hodnota."]]></r21> "."\r\n"; fwrite($soubor, $text);
