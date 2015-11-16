@@ -1727,8 +1727,6 @@ $dmeno = $fir_riadok->dmeno;
 $dprie = $fir_riadok->dprie;
 $dtitl = $fir_riadok->dtitl;
 $dtitz = $fir_riadok->dtitz;
-if ( $fir_uctt03 != 999 ) { $dmeno = ""; $dprie = ""; $dtitl = ""; $dtitz = ""; }
-if ( $fir_uctt03 == 999 ) { $fir_fnaz = ""; }
 $duli = $fir_riadok->duli;
 $dcdm = $fir_riadok->dcdm;
 $dmes = $fir_riadok->dmes;
@@ -1737,6 +1735,10 @@ $dtel = $fir_riadok->dtel;
 $dstat = $fir_riadok->dstat;
 if ( $fir_uctt03 != 999 )
 {
+$dmeno = "";
+$dprie = "";
+$dtitl = "";
+$dtitz = "";
 $duli = $fir_fuli;
 $dcdm = $fir_fcdm;
 $dmes = $fir_fmes;
@@ -1744,7 +1746,10 @@ $dpsc = $fir_fpsc;
 $dtel = $fir_ftel;
 $dstat = "SK";
 }
-
+if ( $fir_uctt03 == 999 )
+{
+$fir_fnaz = "";
+}
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -2361,10 +2366,11 @@ $source="../ucto/priznanie_dmv".$rokdmv.".php?cislo_oc=".$cislo_oc."&drupoh=1&pa
 <input type="text" name="datk" id="datk" value="<?php echo $datksk; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:196px; top:244px; left:381px;"/>
 <!-- 03 a 04 riadok -->
-<select size="1" name="vzkat" id="vzkat" style="width:38px; top:285px; left:435px;" onchange="urobVzdru();"> <!-- dopyt, ošetriť pre ie, aby nezúžil celý <option> -->
- <option value="L">L - motorové vozidlo, s menej ako štyrmi kolesami a štvorkolky,</option>
- <option value="M">M - motorové vozidlo najmenej so štyrmi kolesami určené na dopravu osôb,</option>
- <option value="N">N - motorové vozidlo najmenej so štyrmi kolesami určené na dopravu nákladov,</option>
+<select size="1" name="vzkat" id="vzkat" onchange="urobVzdru();"
+        style="width:38px; top:285px; left:435px;">
+ <option value="L">L - motorové vozidlo, s menej ako 4 kolesami a 4-kolky,</option>
+ <option value="M">M - motorové vozidlo najmenej so 4 kolesami určené na dopravu osôb,</option>
+ <option value="N">N - motorové vozidlo najmenej so 4 kolesami určené na dopravu nákladov,</option>
  <option value="O">O - prípojné nemotorové vozidlo.</option>
  <option value="0"></option>
 </select>
@@ -2848,7 +2854,7 @@ mySelect.appendChild(opt4);
 </div> <!-- .sadzby-area -->
 
 <div id="robot" class="sadzby-dane-box-locate"
- style="position:absolute; padding: 5px; top:580px; left:20px; background-color:white;"><?php echo "mesiac od da1 jan.".$mesad2.". - dec.".$mesad1."."; ?></div> <!-- dopyt, čo je toto? -->
+ style="position:absolute; padding: 5px; top:580px; left:20px; background-color:white;"><?php echo "mesiac od da1 jan.".$mesad2.". - dec.".$mesad1."."; ?></div>
 
 
 <!-- 13 riadok -->
@@ -4188,7 +4194,7 @@ $pdf->SetX($stlpx);
 $pdf->Cell(36,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$vzkatg","$rmc",0,"C");
 //04druh vozidla
 $text=$hlavickav->vzdru;
-if ( $hlavickav->vzkat == 'L' ) $text=$hlavickav->vzdru.'e'; //dopyt, preveriť či môže byť
+if ( $hlavickav->vzkat == 'L' ) $text=$hlavickav->vzdru.'e';
 if ( $hlavickav->vzkat == '' ) $vzdruh="";
 $text=sprintf("% 3s",$text);
 $t01=substr($text,0,1);
