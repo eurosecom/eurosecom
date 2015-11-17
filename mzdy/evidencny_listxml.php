@@ -226,8 +226,7 @@ $text = "<spELDPZec xmlns=\"http://socpoist.sk/xsd/eldpzec\" xmlns:xsi=\"http://
 $duli = $fir_fuli;
 $dcdm = $fir_fcdm;
 $dmes = $fir_fmes;
-$dpsc = $fir_fpsc;
-
+$dpsc = str_replace(" ","",$fir_fpsc);
 
   $text = "  <korAdresa>"."\r\n"; fwrite($soubor, $text);
   $hodnota=iconv("CP1250", "UTF-8", $duli);
@@ -240,11 +239,99 @@ $dpsc = $fir_fpsc;
   $text = "   <psc><![CDATA[".$hodnota."]]></psc> "."\r\n"; fwrite($soubor, $text);
   $text = "  </korAdresa>"."\r\n"; fwrite($soubor, $text);
 
-
   $text = " </zamestnavatel> "."\r\n";
   fwrite($soubor, $text);
 
+  $text = " <zoznamELDPZec> "."\r\n";
+  fwrite($soubor, $text);
+
+$opravx="0";
+if( $hlavicka->oprav == 1 ) { $opravx="1"; }
+
+  $text = " <eldpZec opravny=\"".$opravx."\"> "."\r\n";
+  fwrite($soubor, $text);
+
+  $text = " <poistenec> "."\r\n";
+  fwrite($soubor, $text);
+
+  $rodne = $hlavicka->rdc."".$hlavicka->rdk;
+  $text = "   <rc><![CDATA[".$rodne."]]></rc> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $hlavicka->prie);
+  $text = "   <priezvisko><![CDATA[".$hodnota."]]></priezvisko> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $hlavicka->meno);
+  $text = "   <meno><![CDATA[".$hodnota."]]></meno> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $hlavicka->rodn);
+  $text = "   <rodPriezvisko><![CDATA[".$hodnota."]]></rodPriezvisko> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $hlavicka->mnr);
+  $text = "   <miestoNarodenia><![CDATA[".$hodnota."]]></miestoNarodenia> "."\r\n"; fwrite($soubor, $text);
+  $dar=SkDatum($hlavicka->dar);
+  $text = "   <datNarodenia><![CDATA[".$dar."]]></datNarodenia> "."\r\n"; fwrite($soubor, $text);
+
+
+
+  $text = " <adresa> "."\r\n";
+  fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $hlavicka->zuli);
+  $text = "   <ulica><![CDATA[".$hodnota."]]></ulica> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $hlavicka->zcdm);
+  $text = "   <oCislo><![CDATA[".$hodnota."]]></oCislo> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $hlavicka->zmes);
+  $text = "   <obec><![CDATA[".$hodnota."]]></obec> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $hlavicka->zpsc);
+  $text = "   <psc><![CDATA[".$hodnota."]]></psc> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", "SK");
+  $text = "   <stat><![CDATA[".$hodnota."]]></stat> "."\r\n"; fwrite($soubor, $text);
+  $text = " </adresa> "."\r\n";
+  fwrite($soubor, $text);
+
+
+  $text = " <poistVztah> "."\r\n";
+  fwrite($soubor, $text);
+  $dan=SkDatum($hlavicka->dan);
+  $text = "   <datVzniku><![CDATA[".$dan."]]></datVzniku> "."\r\n"; fwrite($soubor, $text);
+  $dav=SkDatum($hlavicka->dav);
+  $text = "   <datZaniku><![CDATA[".$dav."]]></datZaniku> "."\r\n"; fwrite($soubor, $text);
+  $text = " </poistVztah> "."\r\n";
+  fwrite($soubor, $text);
+
 //andrej
+
+  $text = " </poistenec> "."\r\n";
+  fwrite($soubor, $text);
+
+  $text = " </eldpZec> "."\r\n";
+  fwrite($soubor, $text);
+
+  $text = " </zoznamELDPZec> "."\r\n";
+  fwrite($soubor, $text);
+
+  $datum=SkDatum($hlavicka->datum);
+  $text = "   <datOdoslania><![CDATA[".$datum."]]></datOdoslania> "."\r\n"; fwrite($soubor, $text);
+
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
+$fir_vysledok = mysql_query($sqlfir);
+if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+$priefosoba = trim($fir_riadok->fospprie);
+$menofosoba = trim($fir_riadok->fospmeno);
+$telfosoba = trim($fir_riadok->fosptel);
+$mailfosoba = trim($fir_riadok->fospmail);
+if ( $priefosoba == '' ) { $priefosoba="mzdová"; }
+if ( $menofosoba == '' ) { $menofosoba="úètáreò"; }
+if ( $telfosoba == '' ) { $telfosoba=$fir_ftel; }
+if ( $mailfosoba == '' ) { $mailfosoba=$fir_fem1; }
+
+  $text = " <kontakt> "."\r\n";
+  fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $priefosoba);
+  $text = "   <priezvisko><![CDATA[".$hodnota."]]></priezvisko> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $menofosoba);
+  $text = "   <meno><![CDATA[".$hodnota."]]></meno> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $mailfosoba);
+  $text = "   <email><![CDATA[".$hodnota."]]></email> "."\r\n"; fwrite($soubor, $text);
+  $hodnota=iconv("CP1250", "UTF-8", $telfosoba);
+  $text = "   <telCislo><![CDATA[".$hodnota."]]></telCislo> "."\r\n"; fwrite($soubor, $text);
+  $text = " </kontakt> "."\r\n";
+  fwrite($soubor, $text);
 
 }
 //koniec ak j=0
