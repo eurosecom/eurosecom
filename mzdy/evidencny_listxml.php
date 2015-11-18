@@ -284,6 +284,8 @@ if( $hlavicka->oprav == 1 ) { $opravx="1"; }
   $text = " </adresa> "."\r\n";
   fwrite($soubor, $text);
 
+  $text = " </poistenec> "."\r\n";
+  fwrite($soubor, $text);
 
   $text = " <poistVztah> "."\r\n";
   fwrite($soubor, $text);
@@ -296,8 +298,183 @@ if( $hlavicka->oprav == 1 ) { $opravx="1"; }
 
 //andrej
 
-  $text = " </poistenec> "."\r\n";
+  $dad=SkDatum($hlavicka->dar);
+  if( $dad != '00.00.0000' ) {
+  $text = "   <obdobiaPoist datDovrseniaDV=\"".$dad."\">"."\r\n"; fwrite($soubor, $text);
+                             }
+  if( $dad == '00.00.0000' ) {
+  $text = "   <obdobiaPoist>"."\r\n"; fwrite($soubor, $text);
+                             }
+  
+$riadok=1;
+$dajriadok=0;
+while( $riadok <= 13 )
+          {                           
+
+if( $hlavicka->kr01 > 0 AND $riadok == 1 )
+{
+$rok=$hlavicka->kr01;
+$znak=$hlavicka->zp01;
+$daod=SkDatum($hlavicka->dp01);
+$dado=SkDatum($hlavicka->dk01);
+$vzdp=$hlavicka->vz01;
+$vv=$hlavicka->vv01;
+$kd=$hlavicka->kd01;
+$dajriadok=1;
+}
+if( $hlavicka->kr02 > 0 AND $riadok == 2 )
+{
+$rok=$hlavicka->kr02;
+$znak=$hlavicka->zp02;
+$daod=SkDatum($hlavicka->dp02);
+$dado=SkDatum($hlavicka->dk02);
+$vzdp=$hlavicka->vz02;
+$vv=$hlavicka->vv02;
+$kd=$hlavicka->kd02;
+$dajriadok=1;
+}
+if( $hlavicka->kr03 > 0 AND $riadok == 3 )
+{
+$rok=$hlavicka->kr03;
+$znak=$hlavicka->zp03;
+$daod=SkDatum($hlavicka->dp03);
+$dado=SkDatum($hlavicka->dk03);
+$vzdp=$hlavicka->vz03;
+$vv=$hlavicka->vv03;
+$kd=$hlavicka->kd03;
+$dajriadok=1;
+}
+if( $hlavicka->kr04 > 0 AND $riadok == 4 )
+{
+$rok=$hlavicka->kr04;
+$znak=$hlavicka->zp04;
+$daod=SkDatum($hlavicka->dp04);
+$dado=SkDatum($hlavicka->dk04);
+$vzdp=$hlavicka->vz04;
+$vv=$hlavicka->vv04;
+$kd=$hlavicka->kd04;
+$dajriadok=1;
+}
+if( $hlavicka->kr05 > 0 AND $riadok == 5 )
+{
+$rok=$hlavicka->kr05;
+$znak=$hlavicka->zp05;
+$daod=SkDatum($hlavicka->dp05);
+$dado=SkDatum($hlavicka->dk05);
+$vzdp=$hlavicka->vz05;
+$vv=$hlavicka->vv05;
+$kd=$hlavicka->kd05;
+$dajriadok=1;
+}
+if( $hlavicka->kr06 > 0 AND $riadok == 6 )
+{
+$rok=$hlavicka->kr06;
+$znak=$hlavicka->zp06;
+$daod=SkDatum($hlavicka->dp06);
+$dado=SkDatum($hlavicka->dk06);
+$vzdp=$hlavicka->vz06;
+$vv=$hlavicka->vv06;
+$kd=$hlavicka->kd06;
+$dajriadok=1;
+}
+if( $hlavicka->kr07 > 0 AND $riadok == 7 )
+{
+$rok=$hlavicka->kr07;
+$znak=$hlavicka->zp07;
+$daod=SkDatum($hlavicka->dp07);
+$dado=SkDatum($hlavicka->dk07);
+$vzdp=$hlavicka->vz07;
+$vv=$hlavicka->vv07;
+$kd=$hlavicka->kd07;
+$dajriadok=1;
+}
+if( $hlavicka->kr08 > 0 AND $riadok == 8 )
+{
+$rok=$hlavicka->kr08;
+$znak=$hlavicka->zp08;
+$daod=SkDatum($hlavicka->dp08);
+$dado=SkDatum($hlavicka->dk08);
+$vzdp=$hlavicka->vz08;
+$vv=$hlavicka->vv08;
+$kd=$hlavicka->kd08;
+$dajriadok=1;
+}
+if( $hlavicka->kr09 > 0 AND $riadok == 9 )
+{
+$rok=$hlavicka->kr09;
+$znak=$hlavicka->zp09;
+$daod=SkDatum($hlavicka->dp09);
+$dado=SkDatum($hlavicka->dk09);
+$vzdp=$hlavicka->vz09;
+$vv=$hlavicka->vv09;
+$kd=$hlavicka->kd09;
+$dajriadok=1;
+}
+if( $hlavicka->kr10 > 0 AND $riadok == 10 )
+{
+$rok=$hlavicka->kr10;
+$znak=$hlavicka->zp10;
+$daod=SkDatum($hlavicka->dp10);
+$dado=SkDatum($hlavicka->dk10);
+$vzdp=$hlavicka->vz10;
+$vv=$hlavicka->vv10;
+$kd=$hlavicka->kd10;
+$dajriadok=1;
+}
+if( $hlavicka->kr11 > 0 AND $riadok == 11 )
+{
+$rok=$hlavicka->kr11;
+$znak=$hlavicka->zp11;
+$daod=SkDatum($hlavicka->dp11);
+$dado=SkDatum($hlavicka->dk11);
+$vzdp=$hlavicka->vz11;
+$vv=$hlavicka->vv11;
+$kd=$hlavicka->kd11;
+$dajriadok=1;
+}
+if( $hlavicka->kr12 > 0 AND $riadok == 12 )
+{
+$rok=$hlavicka->kr12;
+$znak=$hlavicka->zp12;
+$daod=SkDatum($hlavicka->dp12);
+$dado=SkDatum($hlavicka->dk12);
+$vzdp=$hlavicka->vz12;
+$vv=$hlavicka->vv12;
+$kd=$hlavicka->kd12;
+$dajriadok=1;
+}
+if( $hlavicka->kr13 > 0 AND $riadok == 13 )
+{
+$rok=$hlavicka->kr13;
+$znak=$hlavicka->zp13;
+$daod=SkDatum($hlavicka->dp13);
+$dado=SkDatum($hlavicka->dk13);
+$vzdp=$hlavicka->vz13;
+$vv=$hlavicka->vv13;
+$kd=$hlavicka->kd13;
+$dajriadok=1;
+}
+
+if( $dajriadok == 1 ) 
+     {
+
+  $text = "<vzZaObdobiePoist rok=\"".$rok."\" znakPoist=\"".$znak."\" ";
+  $text = $text."datOd=\"".$daod."\" datDo=\"".$dado."\" vzDP=\"".$vzdp."\" ";
+
+if( $vv > 0 ) {   $text = $text."vzVyluc=\"".$vv."\" "; }
+if( $kd > 0 ) {   $text = $text."dniVyluc=\"".$kd."\" "; }
+
+  $text = $text."/>"."\r\n";
+echo $text; 
   fwrite($soubor, $text);
+     }
+
+$dajriadok=0;
+$riadok=$riadok+1;
+          }
+
+
+  $text = "   </obdobiaPoist>"."\r\n"; fwrite($soubor, $text);
 
   $text = " </eldpZec> "."\r\n";
   fwrite($soubor, $text);
