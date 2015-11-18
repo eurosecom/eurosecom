@@ -2576,7 +2576,8 @@ mySelect.appendChild(opt4);
 </select>
 
 <!-- 12 riadok -->
-<input type="text" name="r12" id="r12" value="<?php echo $r12; ?>"
+<?php $r12bez=1*$r12; ?>
+<input type="text" name="r12" id="r12" value="<?php echo $r12bez; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:79px; top:538px; left:288px;"/>
  <img src="../obr/ikony/info_blue_icon.png" title="Sadzby dane z motorových vozidiel"
       onclick="document.getElementById('sadzby').className='unhidden sadzby-area';"
