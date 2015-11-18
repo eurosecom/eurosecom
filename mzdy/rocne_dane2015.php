@@ -1515,7 +1515,8 @@ $source="../mzdy/rocne_dane2015.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 </div>
 
 <?php if ( $strana == 1 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/rz/rz_v14_str1_form.jpg" alt="tlaèivo Roèné zúètovanie pre rok 2014 1.strana 305kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dan_zo_zavislej2015/rz/rz_v15_str1_form.jpg"
+     alt="tlaèivo Roèné zúètovanie pre rok 2015 1.strana 305kB" class="form-background">
 
 <?php $nepoc=0; ?>
  <input type="checkbox" name="nepoc" value="1" class="btn-prepocet"/>
@@ -1538,74 +1539,75 @@ $source="../mzdy/rocne_dane2015.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 
 <!-- I. CAST -->
 <!-- r.00.. -->
-<input type="text" name="r00" id="r00" disabled="disabled" class="nofill" style="width:80px; top:226px; left:661px;"/>
-<input type="text" name="r00z1" id="r00z1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:226px; left:754px;"/>
-<input type="text" name="r00z2" id="r00z2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:226px; left:841px;"/>
-<input type="text" name="r00d" id="r00d" disabled="disabled" class="nofill" style="width:80px; top:260px; left:661px;"/>
-<input type="text" name="r00d1" id="r00d1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:260px; left:754px;"/>
-<input type="text" name="r00d2" id="r00d2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:260px; left:841px;"/>
-<input type="text" name="r00a" id="r00a" disabled="disabled" class="nofill" style="width:80px; top:292px; left:661px;"/>
-<input type="text" name="r00a1" id="r00a1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:292px; left:754px;"/>
-<input type="text" name="r00a2" id="r00a2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:292px; left:841px;"/>
-<input type="text" name="r00b" id="r00b" disabled="disabled" class="nofill" style="width:80px; top:325px; left:661px;"/>
-<input type="text" name="r00b1" id="r00b1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:325px; left:754px;"/>
-<input type="text" name="r00b2" id="r00b2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:325px; left:841px;"/>
-<input type="text" name="r00c" id="r00c" disabled="disabled" class="nofill" style="width:80px; top:357px; left:661px;"/>
-<input type="text" name="r00c1" id="r00c1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:357px; left:754px;"/>
-<input type="text" name="r00c2" id="r00c2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:357px; left:841px;"/>
+<input type="text" name="r00" id="r00" disabled="disabled" class="nofill" style="width:80px; top:224px; left:661px;"/>
+<input type="text" name="r00z1" id="r00z1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:224px; left:754px;"/>
+<input type="text" name="r00z2" id="r00z2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:224px; left:841px;"/>
+<input type="text" name="r00d" id="r00d" disabled="disabled" class="nofill" style="width:80px; top:258px; left:661px;"/>
+<input type="text" name="r00d1" id="r00d1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:258px; left:754px;"/>
+<input type="text" name="r00d2" id="r00d2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:258px; left:841px;"/>
+<input type="text" name="r00a" id="r00a" disabled="disabled" class="nofill" style="width:80px; top:290px; left:661px;"/>
+<input type="text" name="r00a1" id="r00a1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:290px; left:754px;"/>
+<input type="text" name="r00a2" id="r00a2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:290px; left:841px;"/>
+<input type="text" name="r00b" id="r00b" disabled="disabled" class="nofill" style="width:80px; top:323px; left:661px;"/>
+<input type="text" name="r00b1" id="r00b1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:323px; left:754px;"/>
+<input type="text" name="r00b2" id="r00b2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:323px; left:841px;"/>
+<input type="text" name="r00c" id="r00c" disabled="disabled" class="nofill" style="width:80px; top:355px; left:661px;"/>
+<input type="text" name="r00c1" id="r00c1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:355px; left:754px;"/>
+<input type="text" name="r00c2" id="r00c2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:355px; left:841px;"/>
 <!-- r.01,02,03,04..,05,06 -->
-<input type="text" name="r01" id="r01" disabled="disabled" class="nofill" style="width:80px; top:390px; left:661px;"/>
-<input type="text" name="r02" id="r02" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:422px; left:661px;"/>
-<input type="text" name="r03" id="r03" disabled="disabled" class="nofill" style="width:80px; top:455px; left:661px;"/>
-<input type="text" name="r04a" id="r04a" disabled="disabled" class="nofill" style="width:80px; top:487px; left:661px;"/>
-<input type="text" name="r04a1" id="r04a1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:487px; left:754px;"/>
-<input type="text" name="r04a2" id="r04a2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:487px; left:841px;"/>
-<input type="text" name="r04b" id="r04b" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:520px; left:661px;"/>
-<input type="text" name="r04c" id="r04c" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:552px; left:661px;"/>
-<input type="text" name="r04d" id="r04d" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:584px; left:661px;"/>
-<input type="text" name="r04x" id="r04x" disabled="disabled" class="nofill" style="width:80px; top:617px; left:661px;"/>
-<input type="text" name="r05" id="r05" disabled="disabled" class="nofill" style="width:80px; top:649px; left:661px;"/>
-<input type="text" name="r06" id="r06" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:682px; left:661px;"/>
+<input type="text" name="r01" id="r01" disabled="disabled" class="nofill" style="width:80px; top:388px; left:661px;"/>
+<input type="text" name="r02" id="r02" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:420px; left:661px;"/>
+<input type="text" name="r03" id="r03" disabled="disabled" class="nofill" style="width:80px; top:453px; left:661px;"/>
+<input type="text" name="r04a" id="r04a" disabled="disabled" class="nofill" style="width:80px; top:485px; left:661px;"/>
+<input type="text" name="r04a1" id="r04a1" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:485px; left:754px;"/>
+<input type="text" name="r04a2" id="r04a2" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:485px; left:841px;"/>
+<input type="text" name="r04b" id="r04b" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:518px; left:661px;"/>
+<input type="text" name="r04c" id="r04c" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:550px; left:661px;"/>
+<input type="text" name="r04d" id="r04d" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:582px; left:661px;"/>
+<input type="text" name="r04x" id="r04x" disabled="disabled" class="nofill" style="width:80px; top:615px; left:661px;"/>
+<input type="text" name="r05" id="r05" disabled="disabled" class="nofill" style="width:80px; top:647px; left:661px;"/>
+<input type="text" name="r06" id="r06" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:680px; left:661px;"/>
 <!-- r.07,08,09,09a -->
-<input type="text" name="r07" id="r07" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:714px; left:661px;"/>
-<input type="text" name="r08" id="r08" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:747px; left:661px;"/>
-<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:779px; left:661px;"/>
-<input type="text" name="r09a" id="r09a" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:811px; left:661px;"/>
+<input type="text" name="r07" id="r07" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:712px; left:661px;"/>
+<input type="text" name="r08" id="r08" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:745px; left:661px;"/>
+<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:777px; left:661px;"/>
+<input type="text" name="r09a" id="r09a" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:809px; left:661px;"/>
 <!-- r.10,11,12..,13 -->
-<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:844px; left:661px;"/>
-<input type="text" name="r11" id="r11" disabled="disabled" class="nofill" style="width:80px; top:879px; left:661px;"/>
-<input type="text" name="r11a" id="r11a" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:879px; left:754px;"/>
-<input type="text" name="r11b" id="r11b" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:879px; left:841px;"/>
-<input type="text" name="r12" id="r12" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:915px; left:661px;"/>
-<input type="text" name="r12a" id="r12a" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:947px; left:661px;"/>
-<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:980px; left:661px;"/>
+<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:842px; left:661px;"/>
+<input type="text" name="r11" id="r11" disabled="disabled" class="nofill" style="width:80px; top:877px; left:661px;"/>
+<input type="text" name="r11a" id="r11a" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:877px; left:754px;"/>
+<input type="text" name="r11b" id="r11b" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:877px; left:841px;"/>
+<input type="text" name="r12" id="r12" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:913px; left:661px;"/>
+<input type="text" name="r12a" id="r12a" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:945px; left:661px;"/>
+<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:978px; left:661px;"/>
 <!-- r.14..,15,16,17..,18.. -->
-<input type="text" name="r14" id="r14" disabled="disabled" class="nofill" style="width:80px; top:1015px; left:661px;"/>
-<input type="text" name="r14a" id="r14a" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:1015px; left:754px;"/>
-<input type="text" name="r14b" id="r14b" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:1015px; left:841px;"/>
-<input type="text" name="r15" id="r15" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1051px; left:661px;"/>
-<input type="text" name="r16" id="r16" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1083px; left:661px;"/>
-<input type="text" name="r17n" id="r17n" onkeyup="CiarkaNaBodku(this);" style="width:71px; top:1116px; left:670px;"/>
-<input type="text" name="r17p" id="r17p" onkeyup="CiarkaNaBodku(this);" style="width:71px; top:1148px; left:670px;"/>
-<input type="text" name="r18n" id="r18n" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1181px; left:661px;"/>
-<input type="text" name="r18p" id="r18p" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1213px; left:661px;"/>
+<input type="text" name="r14" id="r14" disabled="disabled" class="nofill" style="width:80px; top:1013px; left:661px;"/>
+<input type="text" name="r14a" id="r14a" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:1013px; left:754px;"/>
+<input type="text" name="r14b" id="r14b" onkeyup="CiarkaNaBodku(this);" style="width:75px; top:1013px; left:841px;"/>
+<input type="text" name="r15" id="r15" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1049px; left:661px;"/>
+<input type="text" name="r16" id="r16" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1081px; left:661px;"/>
+<input type="text" name="r17n" id="r17n" onkeyup="CiarkaNaBodku(this);" style="width:71px; top:1114px; left:670px;"/>
+<input type="text" name="r17p" id="r17p" onkeyup="CiarkaNaBodku(this);" style="width:71px; top:1146px; left:670px;"/>
+<input type="text" name="r18n" id="r18n" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1179px; left:661px;"/>
+<input type="text" name="r18p" id="r18p" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1211px; left:661px;"/>
 <!-- Vykonal a pozn -->
 <span class="text-echo" style="top:1265px; left:77px;"><?php echo $kli_uzprie; ?></span>
-<input type="text" name="da21" id="da21" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:1255px; left:384px;"/>
+<input type="text" name="da21" id="da21" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:1255px; left:383px;"/>
 <input type="text" name="pozn" id="pozn" style="width:300px; top:1255px; left:610px;"/>
 <div class="leg-pozn">Poznámka</div>
 <?php                     } ?>
 
 
 <?php if ( $strana == 2 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/dan_zo_zavislej2015/rz/rz_v15_str2_form.jpg" alt="tlaèivo Roèné zúètovanie pre rok 2014 2.strana 305kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dan_zo_zavislej2015/rz/rz_v15_str2_form.jpg"
+     alt="tlaèivo Roèné zúètovanie pre rok 2015 2.strana 305kB" class="form-background">
 
 <!-- II. CAST -->
-<input type="text" name="da2str" id="da2str" onkeyup="CiarkaNaBodku(this);" style="width:103px; top:170px; left:434px;"/>
+<input type="text" name="da2str" id="da2str" onkeyup="CiarkaNaBodku(this);" style="width:103px; top:170px; left:432px;"/>
 <span class="text-echo" style="top:209px; left:465px; "><?php echo $kli_vrok; ?></span>
 
 <!-- tabulka -->
-<span class="text-echo" style="top:277px; left:88px; "><?php echo $zamestnanec; ?></span>
+<span class="text-echo" style="top:277px; left:88px;"><?php echo $zamestnanec; ?></span>
 <!-- zrazene -->
 <input type="text" name="suma1" id="suma1" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:305px; left:606px;"/>
 <input type="text" name="zost1" id="zost1" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:305px; left:741px;"/>
@@ -1629,7 +1631,7 @@ $source="../mzdy/rocne_dane2015.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 <input type="text" name="zost7" id="zost7" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:515px; left:741px;"/>
 <!-- Dna -->
 <input type="text" name="da2ked" id="da2ked" onkeyup="CiarkaNaBodku(this);" style="width:117px; top:645px; left:352px;"/>
-<span class="text-echo" style="top:654px; left:85px;"><?php echo $fir_fmes; ?></span>
+<span class="text-echo" style="top:654px; left:75px;"><?php echo $fir_fmes; ?></span>
 <?php                     } ?>
 
 
