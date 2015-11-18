@@ -561,7 +561,7 @@ $hodnota=iconv("CP1250", "UTF-8", $hlavicka->pozn);
   $text = "  <poznamky><![CDATA[".$hodnota."]]></poznamky>"."\r\n"; fwrite($soubor, $text);
 
 $hodnota=SkDatum($hlavicka->dvh);
-if ( $hodnota == '00.00.0000' ) { $hodnota=""; }
+if ( $hodnota == '00.00.0000' ) { $hodnota=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); }
   $text = "   <datumVyhlasenia>".$hodnota."</datumVyhlasenia>"."\r\n"; fwrite($soubor, $text);
 
 }
@@ -640,7 +640,7 @@ if ( $oslbd == 0 ) $oslbd="";
   $text = "     <r10pism><![CDATA[".$dnvnk."]]></r10pism>"."\r\n"; fwrite($soubor, $text);
   $text = "     <r11pism><![CDATA[".$oslbd."]]></r11pism>"."\r\n"; fwrite($soubor, $text);
 
-$hodnota=$hlavickav->r12;
+$hodnota=1*$hlavickav->r12;
   $text = "    <r12><![CDATA[".$hodnota."]]></r12>"."\r\n"; fwrite($soubor, $text);
 $hodnota=$hlavickav->r12doniz;
   $text = "    <r12nizsiaSadzba><![CDATA[".$hodnota."]]></r12nizsiaSadzba>"."\r\n"; fwrite($soubor, $text);

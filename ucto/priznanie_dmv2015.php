@@ -231,6 +231,22 @@ $zoznamaut=0;
     if ( $copern == 316 )
     {
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
+$cislo_spz = $_REQUEST['cislo_spz'];
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete zmazaù vozidlo <?php echo $cislo_spz; ?> ?") )
+         { location.href='priznanie_dmv<?php echo $rokdmv; ?>.php?cislo_oc=9999&drupoh=1&page=1&subor=0&copern=20&strana=5' }
+else
+         { location.href='priznanie_dmv<?php echo $rokdmv; ?>.php?copern=3166&page=1&drupoh=1&cislo_cpl=<?php echo $cislo_cpl; ?>' }
+</script>
+<?php
+exit;                      
+    }
+
+    if ( $copern == 3166 )
+    {
+
+$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 $sql = "DELETE FROM F".$kli_vxcf."_uctpriznanie_dmv WHERE cpl = $cislo_cpl ";
 $vysledok = mysql_query($sql);
 
@@ -2198,10 +2214,10 @@ var sirkawic = screen.width-10;
    var cislo_cpl = cpl;
    window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=346&cislo_cpl='+ cislo_cpl + '&uprav=0', '_self' )
   }
-  function ZmazVzd(cpl)
+  function ZmazVzd(cpl, cislo_spz)
   {
    var cislo_cpl = cpl;
-   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=316&cislo_cpl='+ cislo_cpl + '&uprav=0', '_self' )
+   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=316&cislo_cpl='+ cislo_cpl + '&cislo_spz='+ cislo_spz + '&uprav=0', '_self' )
   }
   function NoveVzd()
   {
@@ -3046,7 +3062,7 @@ $rsluz=mysql_fetch_object($sluz);
    <td align="right"><?php echo $rsluz->r21;?></td>
    <td align="center">
     <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl;?>);" title="Upraviù vozidlo">&nbsp;&nbsp;
-    <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl;?>);" title="Vymazaù vozidlo">
+    <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl;?>, '<?php echo $rsluz->vzspz;?>');" title="Vymazaù vozidlo">
    </td>
   </tr>
  </tbody>
