@@ -1757,7 +1757,7 @@ $pdf->Image('../dokumenty/dan_z_prijmov2015/dan_zo_zavislej2015/rz/rz_v15_str1.j
 $pdf->SetFont('arial','',12);
 $pdf->Cell(190,12," ","$rmc1",1,"L");
 $obdobie=$kli_vrok;
-$pdf->Cell(118,4," ","$rmc1",0,"L");$pdf->Cell(22,6,"$kli_vrok","$rmc",1,"C");
+$pdf->Cell(115,4," ","$rmc1",0,"L");$pdf->Cell(22,6,"$kli_vrok","$rmc",1,"C");
 $pdf->SetFont('arial','',10);
 
 //ZAMESTNANEC
@@ -1801,13 +1801,13 @@ $r17n = $hlavicka->r17n; if ( $hlavicka->r17n == 0 ) $r17n="";
 $r17p = $hlavicka->r17p; if ( $hlavicka->r17p == 0 ) $r17p="";
 $r18n = $hlavicka->r18n; if ( $hlavicka->r18n == 0 ) $r18n="";
 $r18p = $hlavicka->r18p; if ( $hlavicka->r18p == 0 ) $r18p="";
-$pdf->Cell(190,14," ","$rmc1",1,"L");
+$pdf->Cell(190,15," ","$rmc1",1,"L");
 $pdf->Cell(161,15," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r00","$rmc",1,"R");
-$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r00d","$rmc",1,"R");
+$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,4,"$r00d","$rmc",1,"R");
 $pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r00a","$rmc",1,"R");
 $pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r00b","$rmc",1,"R");
-$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r00c","$rmc",1,"R");
-$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r01","$rmc",1,"R");
+$pdf->Cell(161,5," ","$rmc1",0,"L");$pdf->Cell(25,6,"$r00c","$rmc",1,"R");
+$pdf->Cell(161,6," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r01","$rmc",1,"R");
 $pdf->Cell(161,8," ","$rmc1",0,"L");$pdf->Cell(25,8,"$r02","$rmc",1,"R");
 $pdf->Cell(161,9," ","$rmc1",0,"L");$pdf->Cell(25,5,"$r03","$rmc",1,"R");
 
@@ -1848,9 +1848,9 @@ $pdf->SetFont('arial','',10);
 
 //Vypracoval
 $pdf->Cell(190,2," ","$rmc1",1,"L");
-$pdf->Cell(11,7," ","$rmc1",0,"L");$pdf->Cell(40,5,"$kli_uzprie","$rmc",0,"L");$pdf->Cell(2,5," ","$rmc1",0,"L");
+$pdf->Cell(11,7," ","$rmc1",0,"L");$pdf->Cell(40,4,"$kli_uzprie","$rmc",0,"L");$pdf->Cell(2,5," ","$rmc1",0,"L");
 if ( $dat_dat == '00.00.0000' ) $dat_dat="";
-$pdf->Cell(20,5,"$dat_dat","$rmc",0,"L");$pdf->Cell(4,5," ","$rmc1",0,"L");$pdf->Cell(30,5,"$fir_ftel","$rmc",1,"L");
+$pdf->Cell(20,4,"$dat_dat","$rmc",0,"L");$pdf->Cell(4,5," ","$rmc1",0,"L");$pdf->Cell(30,4,"$fir_ftel","$rmc",1,"L");
 
 //Poznamka
 $pdf->Cell(190,20," ","$rmc1",1,"L");
@@ -1899,7 +1899,7 @@ $sqldok = mysql_query("$sqlttt");
   $meno=$riaddok->meno;
   $titl=$riaddok->titl;
   }
-$pdf->Cell(190,10," ","$rmc1",1,"L");
+$pdf->Cell(190,9," ","$rmc1",1,"L");
 $pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(80,6,"$titl $meno $prie","$rmc",0,"L");$pdf->Cell(23,4," ","$rmc1",0,"L");
 
 $pdf->Cell(190,7," ","$rmc1",1,"L");
@@ -1951,17 +1951,17 @@ $pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,5," ","$rmc1",0,"R");$pdf->Cel
 $pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,6,"$datm2sk","$rmc",0,"C");$pdf->Cell(32,6,"$suma2","$rmc",0,"R");$pdf->Cell(28,6,"$zost2","$rmc",1,"R");
 $pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,7,"$datm3sk","$rmc",0,"C");$pdf->Cell(32,7,"$suma3","$rmc",0,"R");$pdf->Cell(28,7,"$zost3","$rmc",1,"R");
 $pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,5," ","$rmc1",0,"R");$pdf->Cell(32,7,"$suma4","$rmc",0,"R");$pdf->Cell(28,7,"$zost4","$rmc",1,"R");
-$pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,7,"$datm5sk","$rmc",0,"C");$pdf->Cell(32,7,"$suma5","$rmc",0,"R");$pdf->Cell(28,7,"$zost5","$rmc",1,"R");
+$pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,6,"$datm5sk","$rmc",0,"C");$pdf->Cell(32,6,"$suma5","$rmc",0,"R");$pdf->Cell(28,6,"$zost5","$rmc",1,"R");
 $pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,6,"$datm6sk","$rmc",0,"C");$pdf->Cell(32,6,"$suma6","$rmc",0,"R");$pdf->Cell(28,6,"$zost6","$rmc",1,"R");
-$pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,6,"$datm7sk","$rmc",0,"C");$pdf->Cell(32,6,"$suma7","$rmc",0,"R");$pdf->Cell(28,6,"$zost7","$rmc",1,"R");
+$pdf->Cell(101,5," ","$rmc1",0,"L");$pdf->Cell(22,7,"$datm7sk","$rmc",0,"C");$pdf->Cell(32,7,"$suma7","$rmc",0,"R");$pdf->Cell(28,7,"$zost7","$rmc",1,"R");
 
 //Vystavene
-$pdf->Cell(190,19,"                          ","$rmc1",1,"L");
+$pdf->Cell(190,18," ","$rmc1",1,"L");
 $da2ked = $hlavicka2->da2ked;
 $da2kedsk =SkDatum($da2ked);
 if ( $hlavicka2->da2ked == '0000-00-00' ) $da2kedsk="";
 $pdf->Cell(15,5," ","$rmc1",0,"L");$pdf->Cell(46,6,"$fir_fmes","$rmc",0,"L");
-$pdf->Cell(12,5," ","$rmc1",0,"R");$pdf->Cell(27,5,"$da2kedsk","$rmc",1,"C");
+$pdf->Cell(10,5," ","$rmc1",0,"R");$pdf->Cell(27,6,"$da2kedsk","$rmc",1,"C");
 }
 $i2 = $i2 + 1;
   }
