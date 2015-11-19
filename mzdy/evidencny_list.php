@@ -1433,6 +1433,7 @@ $pdf->Cell(30,6,"$fir_fpsc","0",0,"L");$pdf->Cell(30,6," ","0",1,"L");
 
 $pdf->Cell(190,6,"                          ","0",1,"L");
 
+if ( $datum == '00.00.0000' ) { $datum=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); }
 $pole = explode(".", $datum);
 $datum1=$pole[0];
 $datum2=$pole[1];
@@ -1595,6 +1596,7 @@ $oprav = $fir_riadok->oprav;
 $predo = $fir_riadok->predo;
 $str2 = 1*$fir_riadok->str2;
 $datum = SkDatum($fir_riadok->datum);
+if ( $datum == '00.00.0000' ) { $datum=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); }
 
 mysql_free_result($fir_vysledok);
     }

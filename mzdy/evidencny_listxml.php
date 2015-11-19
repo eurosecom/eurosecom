@@ -483,6 +483,7 @@ $riadok=$riadok+1;
   fwrite($soubor, $text);
 
   $datum=SkDatum($hlavicka->datum);
+  if ( $datum == '00.00.0000' ) { $datum=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); }
   $text = "   <datOdoslania><![CDATA[".$datum."]]></datOdoslania> "."\r\n"; fwrite($soubor, $text);
 
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
