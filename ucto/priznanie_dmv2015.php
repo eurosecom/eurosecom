@@ -479,7 +479,7 @@ $vzdno = strip_tags($_REQUEST['vzdno']);
 $vzdnp = strip_tags($_REQUEST['vzdnp']);
 $r10 = strip_tags($_REQUEST['r10']);
 $r11 = strip_tags($_REQUEST['r11']);
-$r12 = strip_tags($_REQUEST['r12']);
+$r12 = 1*$_REQUEST['r12'];
 $r13 = strip_tags($_REQUEST['r13']);
 $r14 = strip_tags($_REQUEST['r14']);
 $r15 = strip_tags($_REQUEST['r15']);
@@ -1661,7 +1661,7 @@ $vzdno = $fir_riadok->vzdno;
 $vzdnp = $fir_riadok->vzdnp;
 $r10 = $fir_riadok->r10;
 $r11 = $fir_riadok->r11;
-$r12 = $fir_riadok->r12;
+$r12 = 1*$fir_riadok->r12;
 $r13 = $fir_riadok->r13;
 $r14 = $fir_riadok->r14;
 $r15 = $fir_riadok->r15;
@@ -1729,6 +1729,7 @@ $dvp = $fir_riadok->dvp;
 $dvpsk=SkDatum($dvp);
 $dvh = $fir_riadok->dvh;
 $dvhsk=SkDatum($dvh);
+if ( $dvhsk == '00.00.0000' ) { $dvhsk=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); }
 $pozn = $fir_riadok->pozn;
                     }
 mysql_free_result($fir_vysledok);
@@ -4304,7 +4305,7 @@ $pdf->Cell(64,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$hlavickav->oslbd","$rmc",1,"
 
 //12sadzba dane
 $pdf->Cell(195,4," ","$rmc1",1,"L");
-$hodx=100*$hlavickav->r12;
+$hodx=1*$hlavickav->r12;
 if ( $hodx == 0 ) $hodx="";
 $hodxxx="121114";
 $text=sprintf("% 4s",$hodx);
