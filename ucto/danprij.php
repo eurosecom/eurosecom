@@ -5,15 +5,15 @@ $sys = 'UCT';
 $urov = 1000;
 $cslm=100040;
 $uziv = include("../uziv.php");
-if( !$uziv ) exit;
+if ( !$uziv ) exit;
 
-if(!isset($kli_vxcf)) $kli_vxcf = 1;
-if(!isset($kli_vduj)) $kli_vduj = 1;
+if (!isset($kli_vxcf)) $kli_vxcf = 1;
+if (!isset($kli_vduj)) $kli_vduj = 1;
 
        do
        {
 
-// cislo operacie
+//cislo operacie
 $copern = 1*$_REQUEST['copern'];
 $drupoh = 1*$_REQUEST['drupoh'];
 
@@ -145,7 +145,6 @@ div.line-area {
   height: 32px;
   opacity: 1;
   border-radius: 3px;
-
 }
 .line-box:hover {
   opacity: 0.8;
@@ -168,18 +167,12 @@ body, .box-bluedefault {
 .box-red {
   background-color:#ef9a9a;
 }
-
-
-
-
-
 .line-box-text {
   width: 630px;
   height: 32px;
   line-height: 32px;
   padding-left: 4px;
   font-size: 12px;
-  
 }
 .line-box-text > div {
   float: left;
@@ -204,24 +197,18 @@ body, .box-bluedefault {
 .line-box-text > div input[type=text] {
   display: block;
   float: left;
-  width: 80px;
+  width: 75px;
   margin-top: 5px;
   padding: 2px 0;
   font-size: 12px;
   text-indent: 4px;
 }
-
-
-
 .line-box > img {
   margin: 8px;
   display: block;
   width: 16px;
   height: 16px;
 }
-
-
-
 .toleft {
   float: left;
 }
@@ -234,7 +221,6 @@ body, .box-bluedefault {
 .hidden {
   display: none;
 }
-
 </style>
 <script type="text/javascript">
 //sirka a vyska okna
@@ -246,7 +232,6 @@ var sirkawic = screen.width-10;
   function VyberVstupx()
   {
   }
-
   function VyberVstup()
   {
 <?php if( $kli_vduj != 9 ) { echo "document.forms.formhk1.h_obdp.value=$kli_vmes; "; } ?>
@@ -263,176 +248,127 @@ var sirkawic = screen.width-10;
    if ( Vstup.value.search(/[^0-9.-]/g) != -1 ) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-
-function JUKnihaSumarnaPDF()
-                {
-var h_obdp = document.forms.formhk1.h_obdp.value;
-var h_obdk = document.forms.formhk1.h_obdk.value;
-
-window.open('../ucto/jukniha.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=PDF', '_blank', '<width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-
-
-                }
-
-
-function TlacPotvrdDPH()
+  function JUKnihaSumarnaPDF() //dopyt, mÙûem daù preË, nie je pouûitÈ v danprij.php
+  {
+   var h_obdp = document.forms.formhk1.h_obdp.value;
+   var h_obdk = document.forms.formhk1.h_obdk.value;
+   window.open('../ucto/jukniha.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=PDF', '_blank', '<width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
+  }
+  function TlacPotvrdDPH() //dopyt, mÙûem daù preË, nie je pouûitÈ v danprij.php
                 {
   var okno = window.open("../tmp/potvrddph<?php echo $kli_vume; ?>.<?php echo $kli_uzid; ?>.pdf", '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-
 //PRIZNANIE PO
 <?php
 $rokdppo=$kli_vrok;
-if( $rokdppo < 2011 ) { $rokdppo="";  }
-if( $rokdppo == 2011 ) { $rokdppo="2011";  }
-if( $rokdppo == 2012 ) { $rokdppo="2012";  }
-if( $rokdppo == 2013 ) { $rokdppo="2013";  }
-if( $rokdppo >= 2014 ) { $rokdppo="2014";  }
+if ( $rokdppo < 2011 ) { $rokdppo="";  }
+if ( $rokdppo == 2011 ) { $rokdppo="2011";  }
+if ( $rokdppo == 2012 ) { $rokdppo="2012";  }
+if ( $rokdppo == 2013 ) { $rokdppo="2013";  }
+if ( $rokdppo >= 2014 ) { $rokdppo="2014";  }
 ?>
-
-function TlacPriznanie()
-                {
-var h_oc = 0;
-
-window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=11&drupoh=1&page=1&typ=PDF&strana=999',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function UpravPriznanie()
-                {
-var h_oc = 0;
-
-window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=101&drupoh=1&page=1&strana=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function ZnovuPriznanie()
-                {
-var h_oc = 0;
-
-window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=101&drupoh=1&page=1&strana=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-
-
-function TlacPotvrdDPO()
-                {
-  var okno = window.open("../tmp/potvrddpo.<?php echo $kli_uzid; ?>.pdf", '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function POdoXML()
-                {
-
-window.open('../ucto/priznaniepo_xml<?php echo $rokdppo; ?>.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
+  function TlacPriznanie()
+  {
+   var h_oc = 0;
+   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=11&drupoh=1&page=1&typ=PDF&strana=999',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function UpravPriznanie()
+  {
+   var h_oc = 0;
+   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=101&drupoh=1&page=1&strana=1', '_blank');
+  }
+  function ZnovuPriznanie()
+  {
+   var h_oc = 0;
+   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=101&drupoh=1&page=1&strana=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function TlacPotvrdDPO()
+  {
+   var okno = window.open("../tmp/potvrddpo.<?php echo $kli_uzid; ?>.pdf",
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function POdoXML()
+  {
+   window.open('../ucto/priznaniepo_xml<?php echo $rokdppo; ?>.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 //priznanie FOB
 <?php
 $rokfob=$kli_vrok;
 $skriptfob="../mzdy/priznanie_fob";
-if( $rokfob < 2011 ) { $rokfob="";  }
-if( $rokfob == 2011 ) { $rokfob="2011";  }
-if( $rokfob == 2012 ) { $rokfob="2012";  }
-if( $rokfob == 2013 ) { $rokfob="2013";  }
-if( $rokfob >= 2014 ) { $rokfob="2014";  }
-if( $rokfob >= 2011 ) { $skriptfob="../ucto/priznanie_fob"; }
+if ( $rokfob < 2011 ) { $rokfob="";  }
+if ( $rokfob == 2011 ) { $rokfob="2011";  }
+if ( $rokfob == 2012 ) { $rokfob="2012";  }
+if ( $rokfob == 2013 ) { $rokfob="2013";  }
+if ( $rokfob >= 2014 ) { $rokfob="2014";  }
+if ( $rokfob >= 2011 ) { $skriptfob="../ucto/priznanie_fob"; }
 ?>
-
-
-function TlacFOB()
-                {
-var h_oc = 9999;
-
-window.open('<?php echo $skriptfob.$rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&page=1&subor=0&strana=9999',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function UpravFOB()
-                {
-var h_oc = 9999;
-
-window.open('<?php echo $skriptfob.$rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&page=1&subor=0&prepocitaj=101',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function ZnovuFOB()
-                {
-var h_oc = 9999;
-
-window.open('<?php echo $skriptfob.$rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&page=1&subor=0&prepocitaj=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function TlacPotvrdFOB()
-                {
-  var okno = window.open("../tmp/potvrdfob<?php echo $kli_vxcf; ?>.<?php echo $kli_uzid; ?>.pdf", '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function FOBdoXML()
-                {
-
-window.open('../ucto/priznaniefob_xml<?php echo $rokfob; ?>.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
+  function TlacFOB()
+  {
+   var h_oc = 9999;
+   window.open('<?php echo $skriptfob.$rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&page=1&subor=0&strana=9999',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function UpravFOB()
+  {
+   var h_oc = 9999;
+   window.open('<?php echo $skriptfob.$rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&page=1&subor=0&prepocitaj=101', '_blank');
+  }
+  function ZnovuFOB()
+  {
+   var h_oc = 9999;
+   window.open('<?php echo $skriptfob.$rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&page=1&subor=0&prepocitaj=1', '_blank');
+  }
+  function TlacPotvrdFOB()
+  {
+   var okno = window.open("../tmp/potvrdfob<?php echo $kli_vxcf; ?>.<?php echo $kli_uzid; ?>.pdf",
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function FOBdoXML()
+  {
+   window.open('../ucto/priznaniefob_xml<?php echo $rokfob; ?>.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 //poznamky 2013 podnikatelske
-
-function TlacPoznamky2013()
-                {
-var h_zos = document.forms.formpoz13.h_zos.value;
-var h_sch = document.forms.formpoz13.h_sch.value;
-
-window.open('../ucto/poznamky_po2013tlac.php?cislo_oc=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function NacitajPoznamky2013()
-                {
-
-window.open('../ucto/poznamky_po2013tlac.php?copern=1&drupoh=1&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function UpravPoznamky2013()
-                {
-
-window.open('../ucto/poznamky_po2013.php?copern=1&drupoh=1&page=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function ZnovuPoznamky2013()
-                {
-
-window.open('../ucto/poznamky_po2013.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function Poznamky2013doxml()
-                {
-var h_zos = document.forms.formpoz13.h_zos.value;
-var h_sch = document.forms.formpoz13.h_sch.value;
-
-window.open('../ucto/poznamky_po2013tlac.php?cislo_oc=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0&urobxml=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function Poznamky2013doxmlLENXML()
-                {
-var h_zos = document.forms.formpoz13.h_zos.value;
-var h_sch = document.forms.formpoz13.h_sch.value;
-
-window.open('../ucto/poznamky2013_xml.php?copern=110&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
+  function TlacPoznamky2013()
+  {
+   var h_zos = document.forms.formpoz13.h_zos.value;
+   var h_sch = document.forms.formpoz13.h_sch.value;
+   window.open('../ucto/poznamky_po2013tlac.php?cislo_oc=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function NacitajPoznamky2013()
+  {
+   window.open('../ucto/poznamky_po2013tlac.php?copern=1&drupoh=1&page=1&subor=0', '_blank');
+  }
+  function UpravPoznamky2013()
+  {
+   window.open('../ucto/poznamky_po2013.php?copern=1&drupoh=1&page=1', '_blank');
+  }
+  function ZnovuPoznamky2013()
+  {
+   window.open('../ucto/poznamky_po2013.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function Poznamky2013doxml()
+  {
+   var h_zos = document.forms.formpoz13.h_zos.value;
+   var h_sch = document.forms.formpoz13.h_sch.value;
+   window.open('../ucto/poznamky_po2013tlac.php?cislo_oc=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0&urobxml=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function Poznamky2013doxmlLENXML()
+  {
+   var h_zos = document.forms.formpoz13.h_zos.value;
+   var h_sch = document.forms.formpoz13.h_sch.value;
+   window.open('../ucto/poznamky2013_xml.php?copern=110&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 //DMV
 <?php
@@ -440,164 +376,112 @@ $rokdmv="";
 if ( $kli_vrok >= 2013 ) { $rokdmv=2013; }
 if ( $kli_vrok >= 2015 ) { $rokdmv=2015; }
 ?>
-
-function TlacDMV()
-                {
-
-window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function UpravDMV()
-                {
-var h_oc = 0;
-
-window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&drupoh=1&page=1&strana=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function TlacPotvrdDMV()
-                {
-  var okno = window.open("../tmp/potvrddmv<?php echo $kli_uzid; ?>.pdf", '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function DMVdoXML()
-                {
-
-window.open('../ucto/priznaniedmv_xml<?php echo $rokdmv; ?>.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
+  function TlacDMV()
+  {
+   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function UpravDMV()
+  {
+   var h_oc = 0;
+   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&drupoh=1&page=1&strana=1', '_blank');
+  }
+  function TlacPotvrdDMV()
+  {
+   var okno = window.open("../tmp/potvrddmv<?php echo $kli_uzid; ?>.pdf",
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function DMVdoXML()
+  {
+   window.open('../ucto/priznaniedmv_xml<?php echo $rokdmv; ?>.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 //poznamky 2011 neziskove org.
 <?php
-if( $kli_vrok  < 2013 ) { $poznuj="po2011no"; }
-if( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
+if ( $kli_vrok  < 2013 ) { $poznuj="po2011no"; }
+if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
 ?>
-
-function TlacPoznamky2011no()
-                {
-var h_zos = document.forms.formpoz11no.h_zos.value;
-var h_sch = document.forms.formpoz11no.h_sch.value;
-var h_oc = 0;
-
-window.open('../ucto/poznamky_<?php echo $poznuj; ?>tlac.php?cislo_oc=' + h_oc + '&h_zos=' + h_zos + '&h_sch=' + h_sch + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function NacitajPoznamky2011no()
-                {
-var h_zos = document.forms.formpoz11no.h_zos.value;
-var h_sch = document.forms.formpoz11no.h_sch.value;
-var h_oc = 0;
-
-window.open('../ucto/poznamky_<?php echo $poznuj; ?>tlac.php?copern=1&drupoh=1&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function UpravPoznamky2011no()
-                {
-var h_oc = 0;
-
-window.open('../ucto/poznamky_<?php echo $poznuj; ?>.php?copern=1&drupoh=1&page=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function ZnovuPoznamky2011no()
-                {
-var h_oc = 0;
-
-window.open('../ucto/poznamky_<?php echo $poznuj; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function Poznamky2011NOdoxml()
-                {
-
-window.open('../ucto/poznamky2013nuj_xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
+  function TlacPoznamky2011no()
+  {
+   var h_zos = document.forms.formpoz11no.h_zos.value;
+   var h_sch = document.forms.formpoz11no.h_sch.value;
+   var h_oc = 0;
+   window.open('../ucto/poznamky_<?php echo $poznuj; ?>tlac.php?cislo_oc=' + h_oc + '&h_zos=' + h_zos + '&h_sch=' + h_sch + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function NacitajPoznamky2011no()
+  {
+   var h_zos = document.forms.formpoz11no.h_zos.value;
+   var h_sch = document.forms.formpoz11no.h_sch.value;
+   var h_oc = 0;
+   window.open('../ucto/poznamky_<?php echo $poznuj; ?>tlac.php?copern=1&drupoh=1&page=1&subor=0', '_blank');
+  }
+  function UpravPoznamky2011no()
+  {
+   var h_oc = 0;
+   window.open('../ucto/poznamky_<?php echo $poznuj; ?>.php?copern=1&drupoh=1&page=1', '_blank');
+  }
+  function ZnovuPoznamky2011no()
+  {
+   var h_oc = 0;
+   window.open('../ucto/poznamky_<?php echo $poznuj; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function Poznamky2011NOdoxml()
+  {
+   window.open('../ucto/poznamky2013nuj_xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
   function SynGenSuv()
   { 
-
-window.open('../ucto/oprsys.php?copern=308&drupoh=44&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
+   window.open('../ucto/oprsys.php?copern=308&drupoh=44&page=1&sysx=UCT',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
   function GenSuvNo()
   { 
-
-window.open('../ucto/oprcis.php?copern=308&drupoh=96&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
+   window.open('../ucto/oprcis.php?copern=308&drupoh=96&page=1&sysx=UCT', '_blank');
   }
- 
-function NechcemStranyPOD2013()
-                {
-
-window.open('../ucto/poznamky_podnopage.php?copern=101&page=1&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function platbyju()
-                {
-
-window.open('../ucto/platbyju.php?copern=1&page=1&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
+  function NechcemStranyPOD2013()
+  {
+   window.open('../ucto/poznamky_podnopage.php?copern=101&page=1&tt=1', '_blank');
+  }
+  function platbyju()
+  {
+   window.open('../ucto/platbyju.php?copern=1&page=1&tt=1', '_blank');
+  }
 
 //OZNAMENIE O SCHVALENI 
-
-function TlacOzUz()
-                {
-
-window.open('../ucto/uzavierka_oznamenie.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function UpravOzUz()
-                {
-
-window.open('../ucto/uzavierka_oznamenie.php?copern=20&drupoh=1&page=1&strana=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function OzUzdoXML()
-                {
-
-window.open('../ucto/uzavierka_oznameniexml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
+  function TlacOzUz()
+  {
+   window.open('../ucto/uzavierka_oznamenie.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function UpravOzUz()
+  {
+   window.open('../ucto/uzavierka_oznamenie.php?copern=20&drupoh=1&page=1&strana=1', '_blank');
+  }
+  function OzUzdoXML()
+  {
+   window.open('../ucto/uzavierka_oznameniexml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 //VSEOBECNE PODANIE 
-
-function TlacVseob()
-                {
-
-window.open('../ucto/vseobecne_podanie.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function UpravVseob()
-                {
-
-window.open('../ucto/vseobecne_podanie.php?copern=20&drupoh=1&page=1&strana=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function VseobdoXML()
-                {
-
-window.open('../ucto/vseobecne_podaniexml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
- 
+  function TlacVseob()
+  {
+   window.open('../ucto/vseobecne_podanie.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function UpravVseob()
+  {
+   window.open('../ucto/vseobecne_podanie.php?copern=20&drupoh=1&page=1&strana=1', '_blank');
+  }
+  function VseobdoXML()
+  {
+   window.open('../ucto/vseobecne_podaniexml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 </script>
 </HEAD>
 <BODY onload="VyberVstupx();">
@@ -676,102 +560,96 @@ if ( $copern == 1 AND $kli_vduj != 9 )
 if ( $kli_vrok >= 2013 AND $ajpod == 1 )
 {
 ?>
-
 <script type="text/javascript">
-
-function SuvahaPOD2014()
-                {
-var h_zos = document.forms.formuzpod.h_zos.value;
-var h_sch = document.forms.formuzpod.h_sch.value;
-var h_drp = document.forms.formuzpod.h_drp.value;
-
-window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function VysledovkaPOD2014()
-                {
-var h_zos = document.forms.formuzpod.h_zos.value;
-var h_sch = document.forms.formuzpod.h_sch.value;
-var h_drp = document.forms.formuzpod.h_drp.value;
-
-window.open('../ucto/vykzis_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function SuvahaPOD2014cele()
-                {
-var h_zos = document.forms.formuzpod.h_zos.value;
-var h_sch = document.forms.formuzpod.h_sch.value;
-var h_drp = document.forms.formuzpod.h_drp.value;
-
-window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function VysledovkaPOD2014cele()
-                {
-var h_zos = document.forms.formuzpod.h_zos.value;
-var h_sch = document.forms.formuzpod.h_sch.value;
-var h_drp = document.forms.formuzpod.h_drp.value;
-
-window.open('../ucto/vykzis_pod2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function KompletPOD2014()
-                {
-var h_zos = document.forms.formuzpod.h_zos.value;
-var h_sch = document.forms.formuzpod.h_sch.value;
-var h_drp = document.forms.formuzpod.h_drp.value;
-
-window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=1&lenvzs=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function KompletPOD2014cele()
-                {
-var h_zos = document.forms.formuzpod.h_zos.value;
-var h_sch = document.forms.formuzpod.h_sch.value;
-var h_drp = document.forms.formuzpod.h_drp.value;
-
-window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=1&lenvzs=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function KompletPOD2014doxml()
-                {
-var h_zos = document.forms.formuzpod.h_zos.value;
-var h_sch = document.forms.formuzpod.h_sch.value;
-var h_drp = document.forms.formuzpod.h_drp.value;
-
-window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
+  function SuvahaPOD2014()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function VysledovkaPOD2014()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/vykzis_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function SuvahaPOD2014cele()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function VysledovkaPOD2014cele()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/vykzis_pod2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletPOD2014()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=1&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletPOD2014cele()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=1&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletPOD2014info()
+  {
+   window.open('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_vysvetlivky.pdf',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletPOD2014doxml()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
   function GenSuvPod()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193', '_blank');
   }
-
   function GenVysPod()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=194', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=194',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
   function MinSuvPod()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
   function MinVysPod()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=194', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=194',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
   function GesSuvPod()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=195', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=195',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
-  function ZaokPod()
+  function ZaokPod()//dopyt, mÙûem daù preË, nie je pouûitÈ v danprij.php
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=196', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=196',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
 
@@ -804,9 +682,8 @@ window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=
         maxlenght="10" value=""/>
 </div>
 </div>
-<a href="../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_vysvetlivky.pdf" target="_blank"
-   title="Vysvetlivky k ˙Ëtovnej z·vierke" class="toleft line-box box-bluedefault">
- <img src="../obr/info.png"></a>
+<a href="#" onclick="KompletPOD2014info();" title="Vysvetlivky k ˙Ëtovnej z·vierke"
+   class="toleft line-box box-bluedefault"><img src="../obr/info.png"></a>
 <a href="#" onclick="GenSuvPod();" title="Nastavenie generovania, predch·dzaj˙ceho obdobia a zaokr˙hlenia"
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
 <a href="#" onclick="KompletPOD2014doxml();" title="Export do XML"
@@ -860,7 +737,7 @@ if ( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
 </div>
 </div>
 <a href="#" onclick="NechcemStranyPOD2013();" title="Nastavenie str·n, ktorÈ nechcem tlaËiù"
-   class="toleft line-box box-brown"><img src='../obr/zmaz.png'></a>
+   class="toleft line-box box-brown"><img src='../obr/zmaz.png'></a> <!-- dopyt, nezruöÌme? -->
 <a href="#" onclick="NacitajPoznamky2013();" title="NaËÌtaù ˙daje do pozn·mok"
    class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
 <a href="#" onclick="Poznamky2013doxml();" title="export do PDF"
@@ -883,127 +760,110 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
 {
 ?>
 <script type="text/javascript">
-function SuvahaMUJ2014()
-                {
-var h_zos = document.forms.formuzmuj.h_zos.value;
-var h_sch = document.forms.formuzmuj.h_sch.value;
-var h_drp = document.forms.formuzmuj.h_drp.value;
-
-window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function VysledovkaMUJ2014()
-                {
-var h_zos = document.forms.formuzmuj.h_zos.value;
-var h_sch = document.forms.formuzmuj.h_sch.value;
-var h_drp = document.forms.formuzmuj.h_drp.value;
-
-window.open('../ucto/vykzis_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function SuvahaMUJ2014cele()
-                {
-var h_zos = document.forms.formuzmuj.h_zos.value;
-var h_sch = document.forms.formuzmuj.h_sch.value;
-var h_drp = document.forms.formuzmuj.h_drp.value;
-
-window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function VysledovkaMUJ2014cele()
-                {
-var h_zos = document.forms.formuzmuj.h_zos.value;
-var h_sch = document.forms.formuzmuj.h_sch.value;
-var h_drp = document.forms.formuzmuj.h_drp.value;
-
-window.open('../ucto/vykzis_muj2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function KompletMUJ2014()
-                {
-var h_zos = document.forms.formuzmuj.h_zos.value;
-var h_sch = document.forms.formuzmuj.h_sch.value;
-var h_drp = document.forms.formuzmuj.h_drp.value;
-
-window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=1&lenvzs=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function KompletMUJ2014cele()
-                {
-var h_zos = document.forms.formuzmuj.h_zos.value;
-var h_sch = document.forms.formuzmuj.h_sch.value;
-var h_drp = document.forms.formuzmuj.h_drp.value;
-
-window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=1&lenvzs=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function KompletMUJ2014doxml()
-                {
-var h_zos = document.forms.formuzmuj.h_zos.value;
-var h_sch = document.forms.formuzmuj.h_sch.value;
-var h_drp = document.forms.formuzmuj.h_drp.value;
-
-window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
+//dopyt, nemÙûem daù do js Ëasti?
+  function SuvahaMUJ2014()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function VysledovkaMUJ2014()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/vykzis_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function SuvahaMUJ2014cele()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function VysledovkaMUJ2014cele()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/vykzis_muj2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletMUJ2014()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=1&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletMUJ2014cele()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=1&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletMUJ2014doxml()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
   function GenSuvMuj()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93', '_blank');
   }
-
   function GenVysMuj()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
   function MinSuvMuj()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
   function MinVysMuj()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
   function GesSuvMuj()
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=95', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=95',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
-  function ZaokMuj()
+  function ZaokMuj() //dopyt, mÙûem daù preË, nie je pouûitÈ v danprij.php
   { 
-  window.open('../ucto/vykazy_cis.php?copern=308&drupoh=96', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=96',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
 
 //poznamky MUJ 2014
-
-function TlacPoznamkyMUJ2014()
-                {
-var h_zos = document.forms.formpozmuj14.h_zos.value;
-var h_sch = document.forms.formpozmuj14.h_sch.value;
-var h_drp = document.forms.formuzmuj.h_drp.value;
-
-window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function NacitajPoznamkyMUJ2014()
-                {
-
-window.open('../ucto/poznamky_muj2014tlac.php?copern=1&drupoh=1&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function UpravPoznamkyMUJ2014()
-                {
-
-window.open('../ucto/poznamky_muj2014.php?copern=1&drupoh=1&page=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
+  function TlacPoznamkyMUJ2014()
+  {
+   var h_zos = document.forms.formpozmuj14.h_zos.value;
+   var h_sch = document.forms.formpozmuj14.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function NacitajPoznamkyMUJ2014()
+  {
+   window.open('../ucto/poznamky_muj2014tlac.php?copern=1&drupoh=1&page=1&subor=0', '_blank');
+  }
+  function UpravPoznamkyMUJ2014()
+  {
+   window.open('../ucto/poznamky_muj2014.php?copern=1&drupoh=1&page=1', '_blank');
+  }
 </script>
 
 <div class="line-area"> <!-- uct.zavierka muj -->
@@ -1091,42 +951,39 @@ window.open('../ucto/poznamky_muj2014.php?copern=1&drupoh=1&page=1',
 ?>
 
 <script type="text/javascript">
-function CASH2011()
-                {
-var h_zos = document.forms.formcf1n.h_zos.value;
-var h_sch = document.forms.formcf1n.h_sch.value;
-var ktoracast = document.forms.formcf1n.ktoracast.value;
-
-window.open('../ucto/cashflow2011.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&ktoracast=' + ktoracast + '&page=1&tis=0&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-                }
-
-function CASHEUR2011()
-                {
-var h_zos = document.forms.formcf1n.h_zos.value;
-var h_sch = document.forms.formcf1n.h_sch.value;
-var ktoracast = document.forms.formcf1n.ktoracast.value;
-
-window.open('../ucto/cashflow2011.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&ktoracast=' + ktoracast + '&page=1&tis=1&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-                }
-
-function CASHGEN2011()
-                {
-window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-
-                }
+//dopyt, nemÙûe Ìsù do js Ëasti?
+  function CASH2011()
+  {
+   var h_zos = document.forms.formcf1n.h_zos.value;
+   var h_sch = document.forms.formcf1n.h_sch.value;
+   var ktoracast = document.forms.formcf1n.ktoracast.value;
+   window.open('../ucto/cashflow2011.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&ktoracast=' + ktoracast + '&page=1&tis=0&vyb_ume=<?php echo $kli_vume; ?>',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function CASHEUR2011()
+  {
+   var h_zos = document.forms.formcf1n.h_zos.value;
+   var h_sch = document.forms.formcf1n.h_sch.value;
+   var ktoracast = document.forms.formcf1n.ktoracast.value;
+   window.open('../ucto/cashflow2011.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&ktoracast=' + ktoracast + '&page=1&tis=1&vyb_ume=<?php echo $kli_vume; ?>',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function CASHGEN2011()
+  {
+   window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT', '_blank');
+  }
   function CASHPREDCH2011()
   {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=24&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/oprsys.php?copern=308&drupoh=24&page=1&sysx=UCT', '_blank');
   }
-
 </script>
 
 <div class="line-area" style="margin-bottom:8px;"> <!-- cash flow priama -->
 <FORM name="formcf1n" method="post" action="#">
 <a href="#" onclick="CASH2011();" title="<?php echo $mena1; ?>· + centy - zobraziù v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a> <!-- dopyt, niË mi nevyrobÌ -->
 <a href="#" onclick="CASHEUR2011();" title="<?php echo $mena1; ?>· - zobraziù v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a> <!-- dopyt, niË mi nevyrobÌ -->
 <div class="toleft line-box-text">
 <div>
 <?php
@@ -1166,7 +1023,7 @@ if ( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
 <a href="#" onclick="CASHGEN2011();" title="Nastavenie generovania"
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
 <a href="#" onclick="CASHPREDCH2011();" title="Nastavenie predch·dzaj˙ceho obdobia"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, preveriù function, nejde mi vyrobiù cf -->
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
 </FORM>
 </div> <!-- .line-area cf priama -->
 
@@ -1196,65 +1053,53 @@ if ( $kli_nezis == 1 )
 <?php if ( $kli_vrok >= 2012 ) { ?>
 
 <script type="text/javascript">
-
-function SuvahaNO2012()
-                {
-var h_zos = document.forms.formuznuj.h_zos.value;
-
-window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function VysledovkaNO2012()
-                {
-var h_zos = document.forms.formuznuj.h_zos.value;
-
-window.open('../ucto/vykzis_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function UzavierkaNUJ2013()
-                {
-var h_zos = document.forms.formuznuj.h_zos.value;
-
-window.open('../ucto/uzavierka_nuj2013.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function KompletNUJ2013()
-                {
-var h_zos = document.forms.formuznuj.h_zos.value;
-var h_sch = document.forms.formuznuj.h_sch.value;
-var h_drp = document.forms.formuznuj.h_drp.value;
-
-window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function KompletNUJ2013doxml()
-                {
-var h_zos = document.forms.formuznuj.h_zos.value;
-var h_sch = document.forms.formuznuj.h_sch.value;
-var h_drp = document.forms.formuznuj.h_drp.value;
-
-window.open('../ucto/uzavierka_nuj2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function NechcemStranyNUJ2013()
-                {
-
-window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
+//dopyt, nemÙûe Ìsù do js?
+  function SuvahaNO2012()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function VysledovkaNO2012()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   window.open('../ucto/vykzis_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function UzavierkaNUJ2013()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   window.open('../ucto/uzavierka_nuj2013.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletNUJ2013()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   var h_sch = document.forms.formuznuj.h_sch.value;
+   var h_drp = document.forms.formuznuj.h_drp.value;
+   window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletNUJ2013doxml()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   var h_sch = document.forms.formuznuj.h_sch.value;
+   var h_drp = document.forms.formuznuj.h_drp.value;
+   window.open('../ucto/uzavierka_nuj2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function NechcemStranyNUJ2013()
+  {
+   window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1', '_blank');
+  }
   function SuvPredchNUJ2013()
   {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=32&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/oprsys.php?copern=308&drupoh=32&page=1&sysx=UCT', '_blank');
   }
-
   function VzasPredchNUJ2013()
   {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=31&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/oprsys.php?copern=308&drupoh=31&page=1&sysx=UCT', '_blank');
   }
-
-
 </script>
 
 <div class="line-area" style="margin-top:8px;"> <!-- uct.zavierka pu nuj -->
@@ -1296,7 +1141,7 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
     class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, preveriù -->
 </div>
 <div class="toright" style="width:192px;">
- <div class="toleft line-box-text" style="width:76px;">S˙vaha NUJ</div>
+ <div class="toleft line-box-text" style="width:76px;">S˙vaha N⁄J</div>
  <a href="#" onclick="SuvahaNO2012();" title="<?php echo $mena1; ?>· + centy - zobraziù v PDF"
     class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
  <a href="#" onclick="GenSuvNo();" title="Nastavenie generovania"
@@ -1309,7 +1154,7 @@ window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
 
 <?php $vsetky=1; ?>
 <?php
-if ( $_SERVER['SERVER_NAME'] == "localhost" OR $vsetky == 1 ) { //dopyt, preËo je v podmienke "localhost"
+if ( $vsetky == 1 ) {
 ?>
 <div class="line-area" style="margin-bottom:8px;"> <!-- poznamky pu nuj -->
 <FORM name="formpoz11no" method="post" action="#">
@@ -1342,7 +1187,7 @@ if ( $_SERVER['SERVER_NAME'] == "localhost" OR $vsetky == 1 ) { //dopyt, preËo j
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </FORM>
 </div> <!-- .line-area poznamky pu nuj -->
-<?php                                                         } ?>
+<?php               } ?>
 <?php
 }
 ?>
@@ -1365,57 +1210,46 @@ if ( $copern == 1 AND $kli_vduj == 9 )
            {
 ?>
 <script type="text/javascript">
-
-
-function XMLprivyd()
-                {
-var h_zos = document.forms.formj1.h_zos.value;
-var h_sch = document.forms.formj1.h_sch.value;
-
-window.open('../ucto/vprivyd<?php echo $jedrok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&suborxml=1&celeeura=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
-                }
-
-
-
-
-
-
-function uzavfo2014cele()
-                {
-var h_zos = document.forms.formuzfo2014.h_zos.value;
-var h_sch = document.forms.formuzfo2014.h_sch.value;
-var h_drp = document.forms.formuzfo2014.h_drp.value;
-
-window.open('../ucto/vprivyd<?php echo $uzjuforok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&celeeura=1&uzav=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
-                }
-
-function uzavfo2014()
-                {
-var h_zos = document.forms.formuzfo2014.h_zos.value;
-var h_sch = document.forms.formuzfo2014.h_sch.value;
-var h_drp = document.forms.formuzfo2014.h_drp.value;
-
-window.open('../ucto/vprivyd<?php echo $uzjuforok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&uzav=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
-                }
-
-function uzavfo2014xml()
-                {
-var h_zos = document.forms.formuzfo2014.h_zos.value;
-var h_sch = document.forms.formuzfo2014.h_sch.value;
-var h_drp = document.forms.formuzfo2014.h_drp.value;
-
-window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&suborxml=1&celeeura=1&uzav=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
-                }
-
+  function XMLprivyd()
+  {
+   var h_zos = document.forms.formj1.h_zos.value;
+   var h_sch = document.forms.formj1.h_sch.value;
+   window.open('../ucto/vprivyd<?php echo $jedrok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&suborxml=1&celeeura=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function uzavfo2014cele()
+  {
+   var h_zos = document.forms.formuzfo2014.h_zos.value;
+   var h_sch = document.forms.formuzfo2014.h_sch.value;
+   var h_drp = document.forms.formuzfo2014.h_drp.value;
+   window.open('../ucto/vprivyd<?php echo $uzjuforok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&celeeura=1&uzav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function uzavfo2014()
+  {
+   var h_zos = document.forms.formuzfo2014.h_zos.value;
+   var h_sch = document.forms.formuzfo2014.h_sch.value;
+   var h_drp = document.forms.formuzfo2014.h_drp.value;
+   window.open('../ucto/vprivyd<?php echo $uzjuforok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&uzav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function uzavfo2014info()
+  {
+   window.open('../dokumenty/vykazy_ju2014/fo2014/uzfo_v14_vysvetlivky.pdf',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function uzavfo2014xml()
+  {
+   var h_zos = document.forms.formuzfo2014.h_zos.value;
+   var h_sch = document.forms.formuzfo2014.h_sch.value;
+   var h_drp = document.forms.formuzfo2014.h_drp.value;
+   window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&suborxml=1&celeeura=1&uzav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
   function vmazprech2014()
   {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=42&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/oprsys.php?copern=308&drupoh=42&page=1&sysx=UCT', '_blank');
   }
-
 </script>
 
 <?php if ( $kli_vrok >= 2014 ) { ?>
@@ -1448,7 +1282,7 @@ window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drup
         maxlenght="10" value=""/>
 </div>
 </div>
-<a href="../dokumenty/vykazy_ju2014/fo2014/uzfo_v14_vysvetlivky.pdf" target="_blank"
+<a href="#" onclick="uzavfo2014info();"
    title="Vysvetlivky k ˙Ëtovnej z·vierke" class="toleft line-box box-bluedefault">
  <img src="../obr/info.png"></a>
 <a href="#" onclick="uzavfo2014xml();" title="Export do XML"
@@ -1463,44 +1297,35 @@ window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drup
 <?php if ( $kli_vrok >= 2012 ) { ?>
 
 <script type="text/javascript">
-
-function GenPriVydNOJU()
-                {
-window.open('../ucto/oprcis.php?copern=308&drupoh=97&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function GenMajZavNOJU()
-                {
-window.open('../ucto/oprcis.php?copern=308&drupoh=98&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function PredMajZavNOJU()
-                {
-window.open('../ucto/oprsys.php?copern=308&drupoh=47&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
-                }
-
-
-function KompletNO2013()
-                {
-var h_zos = document.forms.formuznoj.h_zos.value;
-var h_sch = document.forms.formuznoj.h_sch.value;
-var h_drp = document.forms.formuznoj.h_drp.value;
-
-window.open('../ucto/privyd_noju.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function KompletNO2013doxml()
-                {
-var h_zos = document.forms.formuznoj.h_zos.value;
-var h_sch = document.forms.formuznoj.h_sch.value;
-var h_drp = document.forms.formuznoj.h_drp.value;
-
-window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
+//dopyt, nemÙûe byù v js Ëasti?
+  function GenPriVydNOJU()
+  {
+   window.open('../ucto/oprcis.php?copern=308&drupoh=97&page=1&sysx=UCT', '_blank');
+  }
+  function GenMajZavNOJU()
+  {
+   window.open('../ucto/oprcis.php?copern=308&drupoh=98&page=1&sysx=UCT', '_blank');
+  }
+  function PredMajZavNOJU()
+  {
+   window.open('../ucto/oprsys.php?copern=308&drupoh=47&page=1&sysx=UCT', '_blank');
+  }
+  function KompletNO2013()
+  {
+   var h_zos = document.forms.formuznoj.h_zos.value;
+   var h_sch = document.forms.formuznoj.h_sch.value;
+   var h_drp = document.forms.formuznoj.h_drp.value;
+   window.open('../ucto/privyd_noju.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletNO2013doxml()
+  {
+   var h_zos = document.forms.formuznoj.h_zos.value;
+   var h_sch = document.forms.formuznoj.h_sch.value;
+   var h_drp = document.forms.formuznoj.h_drp.value;
+  window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 </script>
 
 <div class="line-area" style="margin-bottom:8px;"> <!-- uct.zavierka ju nuj -->
@@ -1549,7 +1374,7 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 <div class="toleft line-box-text">
 <div>
  <strong>Platby dane z prÌjmu a odvodov SP a ZP pre bud˙ci rok</strong>
-</div>
+</div> <!-- dopyt, nezruöÌme? -->
 </div>
 </div> <!-- .line-area platby do fondov sp a zp -->
 <?php
@@ -1569,12 +1394,12 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
 </div>
 <a href="#" onclick="TlacPotvrdFOB();" title="Zobraziù potvrdenie o podanÌ v PDF"
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<a href="#" onclick="ZnovuFOB();" title="NaËÌtaù ˙daje"
+   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a> <!-- dopyt, musÌ tu byù? dosù nebezpeËnÈ, aspoÚ hl·öku, aby æudia neprepÌsali uû nahratÈ ˙daje -->
 <a href="#" onclick="FOBdoXML();" title="export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
 <a href="#" onclick="UpravFOB();" title="Upraviù hodnoty"
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-<a href="#" onclick="ZnovuFOB();" title="NaËÌtaù ˙daje"
-   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
 </div> <!-- .line-area priznanie fob -->
 
 <div class="line-area" style="margin-bottom:8px;"> <!-- priznanie dmv -->
@@ -1615,7 +1440,7 @@ window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <div class="toleft line-box-text">
 <div>
- <strong>VöeobecnÈ podanie k ˙Ëtovnej z·vierke</strong> <!-- dopyt, aktualizovaù pre j˙ a pre n˙j nezobrazovaù -->
+ <strong>VöeobecnÈ podanie k ˙Ëtovnej z·vierke</strong> <!-- dopyt, budeme robiù pre j˙, n˙j p˙ a n˙j j˙ -->
 </div>
 </div>
 <a href="#" onclick="VseobdoXML();" title="export do XML"
