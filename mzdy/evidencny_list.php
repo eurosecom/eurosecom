@@ -2122,9 +2122,12 @@ if ( $copern == 20 )
 }
 ?>
 </p>
-     <img src="../obr/ikony/info_blue_icon.png" onclick="NavodVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
+     <img src="../obr/ikony/info_blue_icon.png" onclick="NavodVyplnenie();"
+          title="Pouèenie na vyplnenie" class="btn-form-tool">
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick=";"
+          title="Export do XML" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacpdf(<?php echo $cislo_oc; ?>);"
-      title="Zobrazi v PDF" class="btn-form-tool"> <!-- dopyt, nefunkèné -->
+          title="Zobrazi v PDF" class="btn-form-tool"> <!-- dopyt, nefunkèné -->
     </div>
    </td>
   </tr>
