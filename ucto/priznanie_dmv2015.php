@@ -2295,16 +2295,21 @@ var sirkawic = screen.width-10;
    <td class="header">DaÚ z motorov˝ch vozidiel <?php echo $kli_vrok; ?></td>
    <td>
     <div class="bar-btn-form-tool">
-<?php if ( $strana == 5 ) { ?>
-    <img src="../obr/ikony/calculator_blue_icon.png" onclick="dajVsetky();"
-      title="Pre VäETKY VOZIDL¡ Doplniù sadzbu do r. 12 podæa druhu vozidla, nastav r.13 checkbox, vypoËÌtaj poËet mesiacov r.19, vypoËÌtaj r.14,16,18,20,21"
-      class="btn-form-tool">
-<?php                     } ?>
+     <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();"
+          title="NaËÌtaù ˙daje z minulÈho roka" class="btn-form-tool"> <!-- dopyt, preveriù -->
      <img src="../obr/ikony/info_blue_icon.png" onclick="Sadzby2015();"
           title="RoËnÈ sadzby dane" class="btn-form-tool">
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();"
           title="PouËenie na vyplnenie" class="btn-form-tool">
-     <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="NaËÌtaù ˙daje z minulÈho roka" class="btn-form-tool"> <!-- dopyt, preveriù -->
+<?php if ( $strana == 5 ) { ?>
+    <img src="../obr/ikony/calculator_blue_icon.png" onclick="dajVsetky();"
+      title="Pre VäETKY VOZIDL¡ doplniù sadzbu dane do r. 12 podæa druhu vozidla,
+             +nastaviù r.13 checkbox,
+             +vypoËÌtaù poËet mesiacov r.19,
+             +vypoËÌtaù r.14,16,18,20,21" class="btn-form-tool">
+<?php                     } ?>
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick=";"
+          title="Export do XML" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV();"
           title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
     </div>
@@ -2632,8 +2637,9 @@ mySelect.appendChild(opt4);
       class="btn-row-tool" style="top:538px; left:380px;">
 <input type="checkbox" name="r12doniz" value="1" style="top:542px; left:424px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="dajSadzbu();"
-      title="Doplniù sadzbu do r. 12 podæa druhu vozidla, nastav r.13 checkbox, vypoËÌtaj poËet mesiacov r.19, vypoËÌtaj r.14,16,18,20,21"
-      class="btn-row-tool" style="top:538px; left:603px;">
+      title="Doplniù sadzbu do r. 12 podæa druhu vozidla, +nastaviù r.13 checkbox,
+             +vypoËÌtaù poËet mesiacov r.19, +vypoËÌtaù r.14,16,18,20,21"
+      class="btn-row-tool" style="top:539px; left:596px;">
 
 <!-- rocne sadzby dane -->
 <div id="sadzby" class="sadzby-area hidden" style="top:572px; left:172px;">
@@ -2651,39 +2657,31 @@ mySelect.appendChild(opt4);
   <td style="width:30%;"></td><td style="width:30%;"></td><td style="width:40%;"></td>
  </tr>
  <tr>
-  <th colspan="2">Objem motora (cm3)</th>
-  <th rowspan="2">Sadzba<br>dane (Ä)</th>
+  <th colspan="2">Objem motora (cm3)</th><th rowspan="2">Sadzba<br>dane (Ä)</th>
  </tr>
  <tr>
   <th>nad</th><th>do(vr·t.)</th>
  </tr>
  <tr class="odd">
-  <td></td><td>150</td>
-  <td><a href="#" onclick="VyberZhasni(50);">50</a></td>
+  <td></td><td>150</td><td><a href="#" onclick="VyberZhasni(50);">50</a></td>
  </tr>
  <tr>
-  <td>150</td><td>900</td>
-  <td><a href="#" onclick="VyberZhasni(62);">62</a></td>
+  <td>150</td><td>900</td><td><a href="#" onclick="VyberZhasni(62);">62</a></td>
  </tr>
  <tr class="odd">
-  <td>900</td><td>1200</td>
-  <td><a href="#" onclick="VyberZhasni(80);">80</a></td>
+  <td>900</td><td>1200</td><td><a href="#" onclick="VyberZhasni(80);">80</a></td>
  </tr>
  <tr>
-  <td>1200</td><td>1500</td>
-  <td><a href="#" onclick="VyberZhasni(115);">115</a></td>
+  <td>1200</td><td>1500</td><td><a href="#" onclick="VyberZhasni(115);">115</a></td>
  </tr>
  <tr class="odd">
-  <td>1500</td><td>2000</td>
-  <td><a href="#" onclick="VyberZhasni(148);">148</a></td>
+  <td>1500</td><td>2000</td><td><a href="#" onclick="VyberZhasni(148);">148</a></td>
  </tr>
  <tr>
-  <td>2000</td><td>3000</td>
-  <td><a href="#" onclick="VyberZhasni(180);">180</a></td>
+  <td>2000</td><td>3000</td><td><a href="#" onclick="VyberZhasni(180);">180</a></td>
  </tr>
  <tr class="odd">
-  <td>3000</td><td></td>
-  <td><a href="#" onclick="VyberZhasni(218);">218</a></td>
+  <td>3000</td><td></td><td><a href="#" onclick="VyberZhasni(218);">218</a></td>
  </tr>
  </table>
 <br>
@@ -2693,12 +2691,10 @@ mySelect.appendChild(opt4);
   <td style="width:60%;"></td><td style="width:40%;"></td>
  </tr>
  <tr>
-  <th>V˝kon motora<br>(kW)</th>
-  <th>Sadzba<br>dane (Ä)</th>
+  <th>V˝kon motora<br>(kW)</th><th>Sadzba<br>dane (Ä)</th>
  </tr>
  <tr class="odd">
-  <td>nad 0</td>
-  <td><a href="#" onclick="VyberZhasni(0);">0</a></td>
+  <td>nad 0</td><td><a href="#" onclick="VyberZhasni(0);">0</a></td>
  </tr>
  </table>
 </div>
@@ -2712,82 +2708,61 @@ mySelect.appendChild(opt4);
   <td style="width:30%;"></td><td style="width:30%;"></td><td style="width:40%;"></td>
  </tr>
  <tr>
-  <td></td>
- </tr>
- <tr>
-  <th colspan="2">Hmotnosù (t)</th>
-  <th rowspan="2">Sadzba<br>dane (Ä)</th>
+  <th colspan="2">Hmotnosù (t)</th><th rowspan="2">Sadzba<br>dane (Ä)</th>
  </tr>
  <tr>
   <th>nad</th><th>do(vr·t.)</th>
  </tr>
  <tr class="odd">
-  <td></td><td>1</td>
-  <td><a href="#" onclick="VyberZhasni(74);">74</a></td>
+  <td></td><td>1</td><td><a href="#" onclick="VyberZhasni(74);">74</a></td>
  </tr>
  <tr>
-  <td>1</td><td>2</td>
-  <td><a href="#" onclick="VyberZhasni(133);">133</a></td>
+  <td>1</td><td>2</td><td><a href="#" onclick="VyberZhasni(133);">133</a></td>
  </tr>
  <tr class="odd">
-  <td>2</td><td>4</td>
-  <td><a href="#" onclick="VyberZhasni(212);">212</a></td>
+  <td>2</td><td>4</td><td><a href="#" onclick="VyberZhasni(212);">212</a></td>
  </tr>
  <tr>
-  <td>4</td><td>6</td>
-  <td><a href="#" onclick="VyberZhasni(312);">312</a></td>
+  <td>4</td><td>6</td><td><a href="#" onclick="VyberZhasni(312);">312</a></td>
  </tr>
  <tr class="odd">
-  <td>6</td><td>8</td>
-  <td><a href="#" onclick="VyberZhasni(417);">417</a></td>
+  <td>6</td><td>8</td><td><a href="#" onclick="VyberZhasni(417);">417</a></td>
  </tr>
  <tr>
-  <td>8</td><td>10</td>
-  <td><a href="#" onclick="VyberZhasni(518);">518</a></td>
+  <td>8</td><td>10</td><td><a href="#" onclick="VyberZhasni(518);">518</a></td>
  </tr>
  <tr class="odd">
-  <td>10</td><td>12</td>
-  <td><a href="#" onclick="VyberZhasni(620);">620</a></td>
+  <td>10</td><td>12</td><td><a href="#" onclick="VyberZhasni(620);">620</a></td>
  </tr>
  <tr>
-  <td>12</td><td>14</td>
-  <td><a href="#" onclick="VyberZhasni(777);">777</a></td>
+  <td>12</td><td>14</td><td><a href="#" onclick="VyberZhasni(777);">777</a></td>
  </tr>
  <tr class="odd">
-  <td>14</td><td>16</td>
-  <td><a href="#" onclick="VyberZhasni(933);">933</a></td>
+  <td>14</td><td>16</td><td><a href="#" onclick="VyberZhasni(933);">933</a></td>
  </tr>
  <tr>
-  <td>16</td><td>18</td>
-  <td><a href="#" onclick="VyberZhasni(1089);">1089</a></td>
+  <td>16</td><td>18</td><td><a href="#" onclick="VyberZhasni(1089);">1089</a></td>
  </tr>
  <tr class="odd">
-  <td>18</td><td>20</td>
-  <td><a href="#" onclick="VyberZhasni(1252);">1252</a></td>
+  <td>18</td><td>20</td><td><a href="#" onclick="VyberZhasni(1252);">1252</a></td>
  </tr>
  <tr>
-  <td>20</td><td>22</td>
-  <td><a href="#" onclick="VyberZhasni(1452);">1452</a></td>
+  <td>20</td><td>22</td><td><a href="#" onclick="VyberZhasni(1452);">1452</a></td>
  </tr>
  <tr class="odd">
-  <td>22</td><td>24</td>
-  <td><a href="#" onclick="VyberZhasni(1660);">1660</a></td>
+  <td>22</td><td>24</td><td><a href="#" onclick="VyberZhasni(1660);">1660</a></td>
  </tr>
  <tr>
-  <td>24</td><td>26</td>
-  <td><a href="#" onclick="VyberZhasni(1862);">1862</a></td>
+  <td>24</td><td>26</td><td><a href="#" onclick="VyberZhasni(1862);">1862</a></td>
  </tr>
  <tr class="odd">
-  <td>26</td><td>28</td>
-  <td><a href="#" onclick="VyberZhasni(2075);">2075</a></td>
+  <td>26</td><td>28</td><td><a href="#" onclick="VyberZhasni(2075);">2075</a></td>
  </tr>
  <tr>
-  <td>28</td><td>30</td>
-  <td><a href="#" onclick="VyberZhasni(2269);">2269</a></td>
+  <td>28</td><td>30</td><td><a href="#" onclick="VyberZhasni(2269);">2269</a></td>
  </tr>
  <tr class="odd">
-  <td>30</td><td></td>
-  <td><a href="#" onclick="VyberZhasni(2480);">2480</a></td>
+  <td>30</td><td></td><td><a href="#" onclick="VyberZhasni(2480);">2480</a></td>
  </tr>
  </table>
 <!-- 3 napravy -->
@@ -2797,67 +2772,52 @@ mySelect.appendChild(opt4);
   <td style="width:30%;"></td><td style="width:30%;"></td><td style="width:40%;"></td>
  </tr>
  <tr>
-  <th colspan="2">Hmotnosù (t)</th>
-  <th rowspan="2">Sadzba<br>dane (Ä)</th>
+  <th colspan="2">Hmotnosù (t)</th><th rowspan="2">Sadzba<br>dane (Ä)</th>
  </tr>
  <tr>
   <th>nad</th><th>do(vr·t.)</th>
  </tr>
  <tr class="odd">
-  <td></td><td>15</td>
-  <td><a href="#" onclick="VyberZhasni(566);">566</a></td>
+  <td></td><td>15</td><td><a href="#" onclick="VyberZhasni(566);">566</a></td>
  </tr>
  <tr>
-  <td>15</td><td>17</td>
-  <td><a href="#" onclick="VyberZhasni(673);">673</a></td>
+  <td>15</td><td>17</td><td><a href="#" onclick="VyberZhasni(673);">673</a></td>
  </tr>
  <tr class="odd">
-  <td>17</td><td>19</td>
-  <td><a href="#" onclick="VyberZhasni(828);">828</a></td>
+  <td>17</td><td>19</td><td><a href="#" onclick="VyberZhasni(828);">828</a></td>
  </tr>
  <tr>
-  <td>19</td><td>21</td>
-  <td><a href="#" onclick="VyberZhasni(982);">982</a></td>
+  <td>19</td><td>21</td><td><a href="#" onclick="VyberZhasni(982);">982</a></td>
  </tr>
  <tr class="odd">
-  <td>21</td><td>23</td>
-  <td><a href="#" onclick="VyberZhasni(1144);">1144</a></td>
+  <td>21</td><td>23</td><td><a href="#" onclick="VyberZhasni(1144);">1144</a></td>
  </tr>
  <tr>
-  <td>23</td><td>25</td>
-  <td><a href="#" onclick="VyberZhasni(1295);">1295</a></td>
+  <td>23</td><td>25</td><td><a href="#" onclick="VyberZhasni(1295);">1295</a></td>
  </tr>
  <tr class="odd">
-  <td>25</td><td>27</td>
-  <td><a href="#" onclick="VyberZhasni(1452);">1452</a></td>
+  <td>25</td><td>27</td><td><a href="#" onclick="VyberZhasni(1452);">1452</a></td>
  </tr>
  <tr>
-  <td>27</td><td>29</td>
-  <td><a href="#" onclick="VyberZhasni(1599);">1599</a></td>
+  <td>27</td><td>29</td><td><a href="#" onclick="VyberZhasni(1599);">1599</a></td>
  </tr>
  <tr class="odd">
-  <td>29</td><td>31</td>
-  <td><a href="#" onclick="VyberZhasni(1755);">1755</a></td>
+  <td>29</td><td>31</td><td><a href="#" onclick="VyberZhasni(1755);">1755</a></td>
  </tr>
  <tr>
-  <td>31</td><td>33</td>
-  <td><a href="#" onclick="VyberZhasni(1964);">1964</a></td>
+  <td>31</td><td>33</td><td><a href="#" onclick="VyberZhasni(1964);">1964</a></td>
  </tr>
  <tr class="odd">
-  <td>33</td><td>35</td>
-  <td><a href="#" onclick="VyberZhasni(2172);">2172</a></td>
+  <td>33</td><td>35</td><td><a href="#" onclick="VyberZhasni(2172);">2172</a></td>
  </tr>
  <tr>
-  <td>35</td><td>37</td>
-  <td><a href="#" onclick="VyberZhasni(2375);">2375</a></td>
+  <td>35</td><td>37</td><td><a href="#" onclick="VyberZhasni(2375);">2375</a></td>
  </tr>
  <tr class="odd">
-  <td>37</td><td>40</td>
-  <td><a href="#" onclick="VyberZhasni(2582);">2582</a></td>
+  <td>37</td><td>40</td><td><a href="#" onclick="VyberZhasni(2582);">2582</a></td>
  </tr>
  <tr>
-  <td>40</td><td></td>
-  <td><a href="#" onclick="VyberZhasni(2790);">2790</a></td>
+  <td>40</td><td></td><td><a href="#" onclick="VyberZhasni(2790);">2790</a></td>
  </tr>
  </table>
 <!-- 4 napravy -->
@@ -2867,51 +2827,40 @@ mySelect.appendChild(opt4);
   <td style="width:30%;"></td><td style="width:30%;"></td><td style="width:40%;"></td>
  </tr>
  <tr>
-  <th colspan="2">Hmotnosù (t)</th>
-  <th rowspan="2">Sadzba<br>dane (Ä)</th>
+  <th colspan="2">Hmotnosù (t)</th><th rowspan="2">Sadzba<br>dane (Ä)</th>
  </tr>
  <tr>
   <th>nad</th><th>do(vr·t.)</th>
  </tr>
  <tr class="odd">
-  <td></td><td>23</td>
-  <td><a href="#" onclick="VyberZhasni(721);">721</a></td>
+  <td></td><td>23</td><td><a href="#" onclick="VyberZhasni(721);">721</a></td>
  </tr>
  <tr>
-  <td>23</td><td>25</td>
-  <td><a href="#" onclick="VyberZhasni(877);">877</a></td>
+  <td>23</td><td>25</td><td><a href="#" onclick="VyberZhasni(877);">877</a></td>
  </tr>
  <tr class="odd">
-  <td>25</td><td>27</td>
-  <td><a href="#" onclick="VyberZhasni(1033);">1033</a></td>
+  <td>25</td><td>27</td><td><a href="#" onclick="VyberZhasni(1033);">1033</a></td>
  </tr>
  <tr>
-  <td>27</td><td>29</td>
-  <td><a href="#" onclick="VyberZhasni(1189);">1189</a></td>
+  <td>27</td><td>29</td><td><a href="#" onclick="VyberZhasni(1189);">1189</a></td>
  </tr>
  <tr class="odd">
-  <td>29</td><td>31</td>
-  <td><a href="#" onclick="VyberZhasni(1337);">1337</a></td>
+  <td>29</td><td>31</td><td><a href="#" onclick="VyberZhasni(1337);">1337</a></td>
  </tr>
  <tr>
-  <td>31</td><td>33</td>
-  <td><a href="#" onclick="VyberZhasni(1548);">1548</a></td>
+  <td>31</td><td>33</td><td><a href="#" onclick="VyberZhasni(1548);">1548</a></td>
  </tr>
  <tr class="odd">
-  <td>33</td><td>35</td>
-  <td><a href="#" onclick="VyberZhasni(1755);">1755</a></td>
+  <td>33</td><td>35</td><td><a href="#" onclick="VyberZhasni(1755);">1755</a></td>
  </tr>
  <tr>
-  <td>35</td><td>37</td>
-  <td><a href="#" onclick="VyberZhasni(1968);">1968</a></td>
+  <td>35</td><td>37</td><td><a href="#" onclick="VyberZhasni(1968);">1968</a></td>
  </tr>
  <tr class="odd">
-  <td>37</td><td>40</td>
-  <td><a href="#" onclick="VyberZhasni(2172);">2172</a></td>
+  <td>37</td><td>40</td><td><a href="#" onclick="VyberZhasni(2172);">2172</a></td>
  </tr>
  <tr>
-  <td>40</td><td></td>
-  <td><a href="">2375</a></td>
+  <td>40</td><td></td><td><a href="#" onclick="VyberZhasni(2375);">2375</a></td>
  </tr>
  </table>
 </div>
@@ -2977,16 +2926,17 @@ mySelect.appendChild(opt4);
        style="width:35px; top:926px; left:485px;"/>
 <input type="text" name="r19s1dni" id="r19s1dni" value="<?php echo $r19s1dni; ?>"
        style="width:57px; top:966px; left:326px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetMes();" title="VypoËÌtaj poËet mesiacov r.19, poËas ktor˝ch vozidlo podliehalo dani, vypoËÌtaj r.14,16,18,20,21"
-class="btn-row-tool" style="top:926px; left:590px;">
-
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetMes();"
+      title="VypoËÌtaù poËet mesiacov r.19, poËas ktor˝ch vozidlo podliehalo dani,
+             +vypoËÌtaù r.14,16,18,20,21"
+      class="btn-row-tool" style="top:928px; left:596px;">
 <input type="text" name="r19s2dni" id="r19s2dni" value="<?php echo $r19s2dni; ?>"
        style="width:57px; top:966px; left:485px;"/>
 <!-- 20 a 21 riadok -->
 <input type="text" name="r20s1" id="r20s1" value="<?php echo $r20s1; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:1019px; left:282px;"/>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocitajDan();" title="VypoËÌtaj r.14,16,18,20,21"
-class="btn-row-tool" style="top:1019px; left:603px;">
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocitajDan();"
+     title="VypoËÌtaù r.14,16,18,20,21" class="btn-row-tool" style="top:1019px; left:596px;">
 <input type="text" name="r20s2" id="r20s2" value="<?php echo $r20s2; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:1019px; left:439px;"/>
 <input type="text" name="r21" id="r21" value="<?php echo $r21; ?>"
@@ -3060,9 +3010,8 @@ class="btn-row-tool" style="top:1019px; left:603px;">
 
 <!-- VII. ODDIEL -->
 <textarea name="pozn" id="pozn" style="width:838px; height:221px; top:929px; left:53px;"><?php echo $pozn; ?></textarea>
-
-<!-- VIII. ODDIEL -->
-<input type="text" name="dvh" id="dvh" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:1216px; left:116px;"/>
+<input type="text" name="dvh" id="dvh" onkeyup="CiarkaNaBodku(this);"
+       style="width:196px; top:1216px; left:116px;"/>
 <?php                                        } ?>
 
 
@@ -3077,7 +3026,7 @@ $slpol = mysql_num_rows($sluz);
 <div class="wrap-vozidla">
  <table class="vozidla">
  <caption>Zoznam vozidiel
-  <img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="NovÈ vozidlo">
+  <img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="Pridaù vozidlo">
  </caption>
  <thead>
   <tr>
@@ -5083,7 +5032,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t31","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t33","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t34","$rmc",1,"C");
 
 //datum ziadosti
-$pdf->Cell(190,7," ","$rmc1",1,"L");
+$pdf->Cell(190,8," ","$rmc1",1,"L");
 $textxx="123456";
 $text=SKDatum($hlavicka->dvp);
 if ( $hlavicka->zvra == 0 ) $text="";
@@ -5114,7 +5063,10 @@ $ipole=$ipole+1;
 //datum vyhlasenia
 $pdf->SetY(273);
 $text=SKDatum($hlavicka->dvh);
-if ( $text =='00.00.0000' ) $text="";
+if ( $text =='00.00.0000' )
+{
+$text=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+}
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,3,1);
