@@ -194,8 +194,22 @@ $sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, npr
 //koniec nastav sadzby 2015
 
 
-
-
+//prepocitaj vsetky vozidla
+    if ( $copern == 2020 )
+    {
+$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
+$cislo_spz = $_REQUEST['cislo_spz'];
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete vypoËÌtaù sadzby a daÚ pre vöetky vozidl· ? \r Pozor program najprv vymaûe pÙvodnÈ sadzby a daÚ vo vöetk˝ch vozidl·ch.") )
+         { location.href='priznanie_dmv<?php echo $rokdmv; ?>.php?cislo_oc=9999&drupoh=1&page=1&subor=0&copern=20&strana=5' }
+else
+         { location.href='priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&cislo_cpl=0&dajsadzbu=1&dajvsetky=1' }
+</script>
+<?php
+exit;                      
+    }
+//koniec prepocitaj vsetky vozidla
 
 //uprav vozidlo
     if ( $copern == 346 )
@@ -297,10 +311,10 @@ $i=0;
 $hlavicka=mysql_fetch_object($sql);
 
 $uprtxt = "INSERT INTO F$kli_vxcf"."_uctpriznanie_dmv ( oc, druh, vzdnp, vzdno, vznpr, vzchm, vzobm, vzkat, vzdru, vzzn, vzspz, ".
-" datz, r49, r50, vzvyk, dnvnk ) VALUES ".
+" datz, r49, r50, vzvyk, dnvnk, da1 ) VALUES ".
 " ( '$hlavicka->oc', '$hlavicka->druh', '$hlavicka->vzdnp', '$hlavicka->vzdno', '$hlavicka->vznpr', '$hlavicka->vzchm', '$hlavicka->vzobm', ".
 " '$hlavicka->vzkat', '$hlavicka->vzdru', '$hlavicka->vzzn', '$hlavicka->vzspz', '$hlavicka->datz', '$hlavicka->r49', '$hlavicka->r50', ".
-" '$hlavicka->vzvyk', '$hlavicka->dnvnk' ) ";
+" '$hlavicka->vzvyk', '$hlavicka->dnvnk', '$hlavicka->da1' ) ";
 $upravene = mysql_query("$uprtxt");
 }
 $i=$i+1;
@@ -380,6 +394,7 @@ $upravene = mysql_query("$uprtxt");
 
 $prenosminuly=1;
 $copern=20;
+$strana=5;
 //exit;
 //koniec nacitania celeho minuleho roka do DMV
     }
@@ -651,15 +666,18 @@ $sqltt = "SELECT * FROM kalendar WHERE dat >= '$prvyden' AND dat <= '$denposledn
 $sql = mysql_query("$sqltt");
 $pocetdnirok = mysql_num_rows($sql);
 
-
+$dajvsetky = 1*$_REQUEST['dajvsetky'];
 $predpoklad = 1*$_REQUEST['predpoklad'];
 $dajsadzbu = 1*$_REQUEST['dajsadzbu'];
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
+
+//andre
+if( $dajvsetky == 1 OR $predpoklad == 1 OR $dajsadzbu == 1 OR $pocetdni == 1 OR $vypocitajdan == 1 )
+          {
+
 $akysub="";
 if( $predpoklad == 1 ) { $akysub="x".$kli_uzid; }
 
-if ( $predpoklad == 1 OR $dajsadzbu == 1 )
-     {
 $danpredpok=0;
 
 $sqlttt = "DROP TABLE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid ";
@@ -669,6 +687,10 @@ $podmnacpl="";
 if( $dajsadzbu == 1 )
   {
 $podmnacpl="cpl = ".$cislo_cpl." AND ";
+  }
+if( $dajvsetky == 1 )
+  {
+$podmnacpl="";
   }
 
 $podmdatk="";
@@ -799,45 +821,45 @@ $sqldok = mysql_query("$sqlttt");
 echo "idem sadzba do r12"."<br />";
 
 
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r14=YEAR(da1), r15=MONTH(da1) WHERE oc = 1 ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r14=YEAR(da1), r15=MONTH(da1) WHERE oc = 1 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=0, mesad2=0, mesad3=0, mesad4=0, mesad5=0, r13=0 WHERE oc = 1 ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=0, mesad2=0, mesad3=0, mesad4=0, mesad5=0, r13=0 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
 
 $kli_vrok2=$kli_vrok;
 $kli_vmes2=12;
 if( $predpoklad == 1 ) { $kli_vrok2=$kli_vrok+1; $kli_vmes2=0;}
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=(($kli_vrok2-r14)*12)-(r15-1)+$kli_vmes2 WHERE oc = 1 ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=(($kli_vrok2-r14)*12)-(r15-1)+$kli_vmes2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad2=(($kli_vrok2-r14)*12)-(r15-1)+1 WHERE oc = 1 ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad2=(($kli_vrok2-r14)*12)-(r15-1)+1 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad3=MONTH(da1) WHERE oc = 1 ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad3=MONTH(da1) WHERE oc = 1 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad4=MONTH(datk) WHERE oc = 1 ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad4=MONTH(datk) WHERE oc = 1 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad5=1 WHERE oc = 1 AND datz < '$prvyden' ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad5=1 WHERE oc = 1 AND datz < '$prvyden' AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad5=MONTH(datz) WHERE oc = 1 AND datz >= '$prvyden' ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad5=MONTH(datz) WHERE oc = 1 AND datz >= '$prvyden' AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13s1zni25=0, r13s1zni20=0, r13s1zni15=0 WHERE oc = 1 ";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13s1zni25=0, r13s1zni20=0, r13s1zni15=0 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13s1zvy10=0, r13s1zvy20=0 WHERE oc = 1 ";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13s1zvy10=0, r13s1zvy20=0 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=-0.25, r13s1zni25=1 WHERE oc = 1 AND mesad1 >=  1 AND mesad1 <= 36";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=-0.25, r13s1zni25=1 WHERE oc = 1 AND mesad1 >=  1 AND mesad1 <= 36 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=-0.20, r13s1zni20=1 WHERE oc = 1 AND mesad1 >= 37 AND mesad1 <= 72";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=-0.20, r13s1zni20=1 WHERE oc = 1 AND mesad1 >= 37 AND mesad1 <= 72 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=-0.15, r13s1zni15=1 WHERE oc = 1 AND mesad1 >= 73 AND mesad1 <= 108";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=-0.15, r13s1zni15=1 WHERE oc = 1 AND mesad1 >= 73 AND mesad1 <= 108 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=0.10, r13s1zvy10=1 WHERE oc = 1 AND mesad1 >= 145 AND mesad1 <= 156";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=0.10, r13s1zvy10=1 WHERE oc = 1 AND mesad1 >= 145 AND mesad1 <= 156 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=0.20, r13s1zvy20=1 WHERE oc = 1 AND mesad1 > 156";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r13=0.20, r13s1zvy20=1 WHERE oc = 1 AND mesad1 > 156 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=0, r13=0 WHERE da1 = '0000-00-00' ";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=0, r13=0 WHERE da1 = '0000-00-00' AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
 
 
@@ -861,32 +883,31 @@ $sqldok = mysql_query("$sqlttt");
 
 
 if( $dajsadzbu == 1 )
-  {
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r12='$sadzba12' WHERE oc = 1 AND cpl = $cislo_cpl ";
+    {
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r12='$sadzba12' WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r13s1zni25='$r13s1zni25x', r13s1zni20='$r13s1zni20x', r13s1zni15='$r13s1zni15x' WHERE oc = 1 AND cpl = $cislo_cpl ";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r13s1zni25='$r13s1zni25x', r13s1zni20='$r13s1zni20x', r13s1zni15='$r13s1zni15x' WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET mesad1='$mesad1x', mesad2='$mesad2x', mesad3='$mesad3x', mesad4='$mesad4x', mesad5='$mesad5x', ".
-" r13s1zvy10='$r13s1zvy10x', r13s1zvy20='$r13s1zvy20x' WHERE oc = 1 AND cpl = $cislo_cpl ";
+" r13s1zvy10='$r13s1zvy10x', r13s1zvy20='$r13s1zvy20x' WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
 $pocetdni=1;
 $copern=20;
 $strana=3;
 $zoznamaut=0;
+
+if( $dajvsetky == 1 )
+  {
+$zoznamaut=1;
+$strana=5;
   }
 
+    }
+//koniec dajsadzbu=1
 
-  }
-$i=$i+1;
-   }
-
-
-
-     }
-//koniec predpoklad=1 alebo dajsadzbu=1
 
 
 $podmcpl=" AND cpl = $cislo_cpl ";
@@ -895,75 +916,80 @@ if ( $predpoklad == 1 )
 $pocetdni=1;
 $podmcpl="";
 }
+if( $dajvsetky == 1 )
+{
+$pocetdni=1;
+$podmnacpl="";
+}
 
 if ( $pocetdni == 1 )
      {
 echo "idem pocet mesiacov r19 "."<br />";
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET datz='$prvyden' WHERE oc = 1 AND datz = '0000-00-00' $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET datz='$prvyden' WHERE oc = 1 AND datz = '0000-00-00' AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=$pocetdni WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=$pocetdni WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=DATEDIFF(datk,'$prvyden')+1 WHERE oc = 1 AND datk > '$prvyden' $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=DATEDIFF(datk,'$prvyden')+1 WHERE oc = 1 AND datk > '$prvyden' AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=DATEDIFF('$denposledny',datz)+1 WHERE oc = 1 AND datz >= '$prvyden' $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=DATEDIFF('$denposledny',datz)+1 WHERE oc = 1 AND datz >= '$prvyden' AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=DATEDIFF(datk,datz)+1 WHERE oc = 1 AND datz >= '$prvyden' AND datk >= '$prvyden' $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=DATEDIFF(datk,datz)+1 WHERE oc = 1 AND datz >= '$prvyden' AND datk >= '$prvyden' AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=DATEDIFF(datk,'$prvyden')+1 WHERE oc = 1 AND datz < '$prvyden' AND datk >= '$prvyden' $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=DATEDIFF(datk,'$prvyden')+1 WHERE oc = 1 AND datz < '$prvyden' AND datk >= '$prvyden' AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=DATEDIFF('$denposledny','$prvyden')+1 WHERE oc = 1 AND datz < '$prvyden' AND datk = '0000-00-00' $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=DATEDIFF('$denposledny','$prvyden')+1 WHERE oc = 1 AND datz < '$prvyden' AND datk = '0000-00-00' AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=0 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=0 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1mes=12 WHERE oc = 1 AND datz < '$prvyden' AND datk = '0000-00-00' $podmcpl";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1mes=12 WHERE oc = 1 AND datz < '$prvyden' AND datk = '0000-00-00' AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1mes=12-(12-MONTH(datk)) WHERE oc = 1 AND datz < '$prvyden' AND datk >= '$prvyden' $podmcpl";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1mes=12-(12-MONTH(datk)) WHERE oc = 1 AND datz < '$prvyden' AND datk >= '$prvyden' AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1mes=12-MONTH(datz)+1 WHERE oc = 1 AND datz >= '$prvyden' AND datk = '0000-00-00' $podmcpl";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1mes=12-MONTH(datz)+1 WHERE oc = 1 AND datz >= '$prvyden' AND datk = '0000-00-00' AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1mes=12-MONTH(datz)+1-(12-MONTH(datk)) WHERE oc = 1 AND datz >= '$prvyden' AND datk >= '$prvyden' $podmcpl";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1mes=12-MONTH(datz)+1-(12-MONTH(datk)) WHERE oc = 1 AND datz >= '$prvyden' AND datk >= '$prvyden' AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1mes=12 WHERE oc = 1 AND r19s1mes = 0 $podmcpl";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1mes=12 WHERE oc = 1 AND r19s1mes = 0 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
 
 
-//rozdel do 2 stlpcov andrej
+//rozdel do 2 stlpcov 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r18=(mesad3-1)-(mesad5-1), r19=r19s1mes, r13s2zni25=0, r13s2zni20=0, r13s2zni15=0, r13s2zni0=0, ".
 " r13s2zvy20=0, r13s2zvy10=0, r19s2mes=0 ".
-" WHERE oc = 1 AND cpl = $cislo_cpl ";
+" WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r18=0 WHERE oc = 1 AND r18 < 0 AND cpl = $cislo_cpl ";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r18=0 WHERE oc = 1 AND r18 < 0 AND cpl = $riadok->cpl ";
 //$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r13s1zni25=1, r13s1zni20=0, r13s2zni20=1, r19s1mes=r18, r19s2mes=r19-r18 ".
-" WHERE oc = 1 AND mesad2 < 37 AND mesad1 >= 37 AND r13s1zni20 = 1 AND r18 >= 0 AND cpl = $cislo_cpl ";
+" WHERE oc = 1 AND mesad2 < 37 AND mesad1 >= 37 AND r13s1zni20 = 1 AND r18 >= 0 AND cpl = $riadok->cpl ";
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r13s1zni20=1, r13s1zni15=0, r13s2zni15=1, r19s1mes=r18, r19s2mes=r19-r18 ".
-" WHERE oc = 1 AND mesad2 < 73 AND mesad1 >= 73 AND r13s1zni15 = 1 AND r18 >= 0 AND cpl = $cislo_cpl ";
+" WHERE oc = 1 AND mesad2 < 73 AND mesad1 >= 73 AND r13s1zni15 = 1 AND r18 >= 0 AND cpl = $riadok->cpl ";
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r13s1zni15=1, r13s2zni0=1, r19s1mes=r18, r19s2mes=r19-r18 ".
-" WHERE oc = 1 AND mesad2 < 109 AND mesad1 >= 109 AND r18 >= 0 AND cpl = $cislo_cpl ";
+" WHERE oc = 1 AND mesad2 < 109 AND mesad1 >= 109 AND r18 >= 0 AND cpl = $riadok->cpl ";
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r13s1zvy10=0, r13s2zvy10=1, r19s1mes=r18, r19s2mes=r19-r18 ".
-" WHERE oc = 1 AND mesad2 < 145 AND mesad1 >= 145 AND r13s1zvy10 = 1 AND r18 >= 0 AND cpl = $cislo_cpl ";
+" WHERE oc = 1 AND mesad2 < 145 AND mesad1 >= 145 AND r13s1zvy10 = 1 AND r18 >= 0 AND cpl = $riadok->cpl ";
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r13s1zvy10=1, r13s1zvy20=0, r13s2zvy20=1, r19s1mes=r18, r19s2mes=r19-r18 ".
-" WHERE oc = 1 AND mesad2 < 157 AND mesad1 >= 157 AND r13s1zvy20 = 1 AND r18 >= 0 AND cpl = $cislo_cpl ";
+" WHERE oc = 1 AND mesad2 < 157 AND mesad1 >= 157 AND r13s1zvy20 = 1 AND r18 >= 0 AND cpl = $riadok->cpl ";
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 
@@ -971,7 +997,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1mes=r19s2mes, r
 " r13s1zvy20=r13s2zvy20, r13s1zvy10=r13s2zvy10, ".
 " r19s2mes=0, r13s2zni25=0, r13s2zni20=0, r13s2zni15=0, r13s2zni0=0, r13s2zvy20=0, r13s2zvy10=0 ".
 " WHERE oc = 1 AND r19s1mes = 0 AND r19s2mes > 0 AND ".
-" ( r13s2zni25 = 1 OR r13s2zni20 = 1 OR r13s2zni15 = 1 OR r13s2zni0 = 1 OR r13s2zvy10 = 1 OR r13s2zvy20 ) AND cpl = $cislo_cpl ";
+" ( r13s2zni25 = 1 OR r13s2zni20 = 1 OR r13s2zni15 = 1 OR r13s2zni0 = 1 OR r13s2zvy10 = 1 OR r13s2zvy20 ) AND cpl = $riadok->cpl ";
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 
@@ -984,190 +1010,202 @@ if ( $pocetdni == 1 ) { $vypocitajdan=1; }
 if ( $vypocitajdan == 1 )
      {
 echo "idem vypocitaj dan r14,16,18,20 "."<br />";
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=0, des2=0 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=0, des2=0 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*0.75 WHERE oc = 1 AND r13s1zni25 = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*0.75 WHERE oc = 1 AND r13s1zni25 = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*0.80 WHERE oc = 1 AND r13s1zni20 = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*0.80 WHERE oc = 1 AND r13s1zni20 = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*0.85 WHERE oc = 1 AND r13s1zni15 = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*1.20 WHERE oc = 1 AND r13s1zvy20 = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*1.10 WHERE oc = 1 AND r13s1zvy10 = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*0.85 WHERE oc = 1 AND r13s1zni15 = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*1.20 WHERE oc = 1 AND r13s1zvy20 = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=0 WHERE oc = 1 AND des2 < 0 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*1.10 WHERE oc = 1 AND r13s1zvy10 = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r14s1=des2 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 AND cpl = $riadok->cpl ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=0 WHERE oc = 1 AND des2 < 0 AND cpl = $riadok->cpl ";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r14s1=des2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
 //zniz ak r15
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=0, des2=0 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=0, des2=0 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r14s1 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r14s1 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r14s1*0.50 WHERE oc = 1 AND ( r15s1zni50a = 1 OR r15s1zni50b = 1 OR r15s1zni50c = 1 ) $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r14s1*0.50 WHERE oc = 1 AND ( r15s1zni50a = 1 OR r15s1zni50b = 1 OR r15s1zni50c = 1 ) AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=0 WHERE oc = 1 AND des2 < 0 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=0 WHERE oc = 1 AND des2 < 0 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r16s1=des2 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r16s1=des2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
 //zniz ak r17
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=0, des2=0 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=0, des2=0 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r16s1 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r16s1 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r16s1*0.50 WHERE oc = 1 AND r17kombi = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r16s1*0.50 WHERE oc = 1 AND r17kombi = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=0 WHERE oc = 1 AND des2 < 0 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=0 WHERE oc = 1 AND des2 < 0 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r18s1=des2 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r18s1=des2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
 //s2
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=0, des2=0 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=0, des2=0 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*0.75 WHERE oc = 1 AND r13s2zni25 = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*0.75 WHERE oc = 1 AND r13s2zni25 = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*0.80 WHERE oc = 1 AND r13s2zni20 = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*0.80 WHERE oc = 1 AND r13s2zni20 = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*0.85 WHERE oc = 1 AND r13s2zni15 = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*0.85 WHERE oc = 1 AND r13s2zni15 = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*1.00 WHERE oc = 1 AND r13s2zni0 = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*1.20 WHERE oc = 1 AND r13s2zvy20 = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*1.10 WHERE oc = 1 AND r13s2zvy10 = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*1.00 WHERE oc = 1 AND r13s2zni0 = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*1.20 WHERE oc = 1 AND r13s2zvy20 = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 $podmcpl";
-$upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=0 WHERE oc = 1 AND des2 < 0 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r12*1.10 WHERE oc = 1 AND r13s2zvy10 = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r14s2=des2 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 AND cpl = $riadok->cpl ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=0 WHERE oc = 1 AND des2 < 0 AND cpl = $riadok->cpl ";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r14s2=des2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
 //zniz ak r15
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=0, des2=0 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=0, des2=0 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r14s2 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r14s2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r14s2*0.50 WHERE oc = 1 AND ( r15s1zni50a = 1 OR r15s1zni50b = 1 OR r15s1zni50c = 1 ) $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r14s2*0.50 WHERE oc = 1 AND ( r15s1zni50a = 1 OR r15s1zni50b = 1 OR r15s1zni50c = 1 ) AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=0 WHERE oc = 1 AND des2 < 0 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=0 WHERE oc = 1 AND des2 < 0 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r16s2=des2 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r16s2=des2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
 //zniz ak r17
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=0, des2=0 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=0, des2=0 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r16s2 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r16s2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r16s2*0.50 WHERE oc = 1 AND r17kombi = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r16s2*0.50 WHERE oc = 1 AND r17kombi = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=0 WHERE oc = 1 AND des2 < 0 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=0 WHERE oc = 1 AND des2 < 0 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r18s2=des2 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r18s2=des2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
 
 $pomerdni=0;
 if( $pomerdni == 1 )
   {
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s1/$pocetdnirok*r19s1dni WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s1/$pocetdnirok*r19s1dni WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s1=des2 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s1=des2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s1=0 WHERE r20s1 < 0 AND oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s1=0 WHERE r20s1 < 0 AND oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
   }
 $pomermes=1;
 if( $pomermes == 1 )
   {
 echo "idem pomer mes"."<br />";
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s1/12*r19s1mes WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s1/12*r19s1mes WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s1=des2 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s1=des2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s1=0 WHERE r20s1 < 0 AND oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s1=0 WHERE r20s1 < 0 AND oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
 //s2
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s2/12*r19s2mes WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s2/12*r19s2mes WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s2=des2 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s2=des2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s2=0 WHERE r20s2 < 0 AND oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s2=0 WHERE r20s2 < 0 AND oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
   }
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r21=r20s1+r20s2 WHERE oc = 1 $podmcpl";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r21=r20s1+r20s2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
      }
 //koniec vypocitajdan=1
+
+
+
+
+  }
+$i=$i+1;
+   }
+
+          }
+//koniec ak dajvsetko, predpoklad, dajsadzbu
+
+
 
 if( $predpoklad == 1 )
   {
@@ -2205,6 +2243,10 @@ var sirkawic = screen.width-10;
   {
    window.open('priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&cislo_cpl=<?php echo $cislo_cpl;?>&dajsadzbu=1', '_self' );
   }
+  function dajVsetky()
+  {
+   window.open('priznanie_dmv<?php echo $rokdmv; ?>.php?copern=2020&cislo_cpl=0&dajsadzbu=1&dajvsetky=1', '_self' );
+  }
   function VytvorOznamZanik(cpl)
   {
    var cislo_cpl = cpl;
@@ -2253,6 +2295,11 @@ var sirkawic = screen.width-10;
    <td class="header">DaÚ z motorov˝ch vozidiel <?php echo $kli_vrok; ?></td>
    <td>
     <div class="bar-btn-form-tool">
+<?php if ( $strana == 5 ) { ?>
+    <img src="../obr/ikony/calculator_blue_icon.png" onclick="dajVsetky();"
+      title="Pre VäETKY VOZIDL¡ Doplniù sadzbu do r. 12 podæa druhu vozidla, nastav r.13 checkbox, vypoËÌtaj poËet mesiacov r.19, vypoËÌtaj r.14,16,18,20,21"
+      class="btn-form-tool">
+<?php                     } ?>
      <img src="../obr/ikony/info_blue_icon.png" onclick="Sadzby2015();"
           title="RoËnÈ sadzby dane" class="btn-form-tool">
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();"
