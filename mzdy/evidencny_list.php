@@ -1879,6 +1879,13 @@ var sirkawic = screen.width-10;
   {
    window.open('evidencny_list.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=' + oc + '&xx=1', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
+
+function XMLEvidencny()
+                {
+
+window.open('../mzdy/evidencny_listxml.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=10&drupoh=1&page=1&subor=0&fmzdy=83',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
 </script>
 <?php
 $rokm1=$kli_vrok-1;
@@ -2124,7 +2131,7 @@ if ( $copern == 20 )
 </p>
      <img src="../obr/ikony/info_blue_icon.png" onclick="NavodVyplnenie();"
           title="Pouèenie na vyplnenie" class="btn-form-tool">
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick=";"
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="XMLEvidencny();"
           title="Export do XML" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacpdf(<?php echo $cislo_oc; ?>);"
           title="Zobrazi v PDF" class="btn-form-tool"> <!-- dopyt, nefunkèné -->
