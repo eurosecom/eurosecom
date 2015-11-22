@@ -2267,6 +2267,11 @@ var sirkawic = screen.width-10;
    window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=336&uprav=0', '_self' )
   }
 
+function DMVdoXML()
+  {
+   window.open('../ucto/priznaniedmv_xml2015.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 
 <?php if ( $copern == 20 ) { ?>
@@ -2308,7 +2313,7 @@ var sirkawic = screen.width-10;
              +vypoèíta poèet mesiacov r.19,
              +vypoèíta r.14,16,18,20,21" class="btn-form-tool">
 <?php                     } ?>
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick=";"
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML();"
           title="Export do XML" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV();"
           title="Zobrazi všetky strany v PDF" class="btn-form-tool">
