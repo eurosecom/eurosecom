@@ -1403,8 +1403,12 @@ $r07sum5=$hlavicka->r07sum5; if ( $hlavicka->r07sum5 == 0 ) $r07sum5="";
 $r07sum6=$hlavicka->r07sum6; if ( $hlavicka->r07sum6 == 0 ) $r07sum6="";
 $r07sum7=$hlavicka->r07sum7; if ( $hlavicka->r07sum7 == 0 ) $r07sum7="";
 
+//obdobie
+$pdf->Cell(190,5," ","$rmc1",1,"L");
+$pdf->Cell(177,6," ","$rmc1",0,"L");$pdf->Cell(4,6,"$kli_vrok","$rmc",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+
 //opravny
-$pdf->Cell(190,12," ","$rmc1",1,"L");
 $text="x";
 if ( $hlavicka->konx1 == 0 ) $text=" ";
 $pdf->Cell(177,6," ","$rmc1",0,"L");$pdf->Cell(4,5,"$text","$rmc",1,"L");
