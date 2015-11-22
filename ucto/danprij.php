@@ -384,7 +384,7 @@ if ( $kli_vrok >= 2015 ) { $rokdmv=2015; }
   function UpravDMV()
   {
    var h_oc = 0;
-   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&drupoh=1&page=1&strana=1', '_blank');
+   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&drupoh=1&page=1&strana=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function TlacPotvrdDMV()
   {
