@@ -8,12 +8,10 @@ $sys = 'MZD';
 $urov = 3000;
 $copern = $_REQUEST['copern'];
 $tis = $_REQUEST['tis'];
-if(!isset($tis)) $tis = 0;
-$fort = $_REQUEST['fort'];
-if(!isset($fort)) $fort = 1;
+if (!isset($tis)) $tis = 0;
 
 $uziv = include("../uziv.php");
-if( !$uziv ) exit;
+if ( !$uziv ) exit;
 
 require_once("../pswd/password.php");
 @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
@@ -31,9 +29,11 @@ $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
 $citfir = include("../cis/citaj_fir.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
+
+//ramcek fpdf 1=zap,0=vyp
+$rmc=1;
+$rmc1=0;
+
 
 $cislo_oc = $_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
@@ -42,14 +42,7 @@ $fir = 1*$_REQUEST['fir'];
 
 $lenjedenrok=0;
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
-
-
-//nacitanie jedneho roka do evidencneho listu 
+//nacitanie jedneho roka do evidencneho listu
     if ( $copern == 4155 )
     {
 $rokm1=$kli_vrok-1;
@@ -732,14 +725,11 @@ $oznac = mysql_query("$sqtoz");
 
 
 if ( File_Exists("../tmp/evidlist.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/evidlist.$kli_uzid.pdf"); }
-
-   define('FPDF_FONTPATH','../fpdf/font/');
-   require('../fpdf/fpdf.php');
-
+     define('FPDF_FONTPATH','../fpdf/font/');
+     require('../fpdf/fpdf.php');
 
 $sirka_vyska="210,320";
 $velkost_strany = explode(",", $sirka_vyska);
-
 $pdf=new FPDF("P","mm", $velkost_strany );
 $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
@@ -760,8 +750,6 @@ $i=0;
 $j=0; //zaciatok strany ak by som chcel strankovat
   while ($i <= $pol )
   {
-
-
   if (@$zaznam=mysql_data_seek($sql,$i))
 {
 $hlavicka=mysql_fetch_object($sql);
@@ -771,114 +759,110 @@ $hlavicka=mysql_fetch_object($sql);
   $Cozam_np = $pole[0];
   $Dozam_np = substr($pole[1],0,1);
 
-$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); //dopyt, má to zmysel, keï premenná nie je použitá
 
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
-
-$pdf->SetLeftMargin(10); 
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 
-if ( File_Exists('../dokumenty/mzdy_potvrdenia/evidencny_list.jpg') AND $i == 0 )
+if ( File_Exists('../dokumenty/mzdy_potvrdenia/evidencny_list/evidencny_list.jpg') AND $i == 0 )
 {
-if( $fort == 1 ) { $pdf->Image('../dokumenty/mzdy_potvrdenia/evidencny_list.jpg',5,6,198,285); }
+$pdf->Image('../dokumenty/mzdy_potvrdenia/evidencny_list/evidencny_list.jpg',5,6,198,285);
 }
-
 $pdf->SetY(10);
-$pdf->SetFont('arial','',10);
-$obdobie=$kli_vrok;
+
+$obdobie=$kli_vrok; //dopyt, premenná nie je použitá, má zmysel
 
 $r01=$hlavicka->r01;
-if( $hlavicka->r01 == 0 ) $r01="";
+if ( $hlavicka->r01 == 0 ) $r01=""; //dopyt, èo je toto
 
-$dar=SkDatum($hlavicka->dar);
-$dan=SkDatum($hlavicka->dan);
-$dav=SkDatum($hlavicka->dav);
-$datum=SkDatum($hlavicka->datum);
-
+//vyplnene strojom
+$pdf->Cell(190,23," ","$rmc1",1,"L");
 $str2=1*$hlavicka->str2;
-if( $_SERVER['SERVER_NAME'] == "www.zerotax.sk" ) { $strojom="X"; }
-if( $str2 == 1 ) { $strojom="X"; }
-if( $str2 != 1 ) { $strojom=" "; }
+if ( $_SERVER['SERVER_NAME'] == "www.zerotax.sk" ) { $strojom="X"; }
+if ( $str2 == 1 ) { $strojom="X"; }
+if ( $str2 != 1 ) { $strojom=" "; }
+$pdf->Cell(48,3," ","$rmc1",0,"L");$pdf->Cell(3,3,"$strojom","$rmc",0,"C");
 
-$pdf->Cell(190,23,"                          ","0",1,"L");
-$pdf->Cell(48,3," ","0",0,"L");$pdf->Cell(3,3,"$strojom","0",0,"C");
-
+//opravny
 $opravx="";
-if( $hlavicka->oprav == 1 ) { $opravx="X"; }
-$pdf->Cell(14,3," ","0",0,"L");$pdf->Cell(3,3,"$opravx","0",1,"C");
+if ( $hlavicka->oprav == 1 ) { $opravx="X"; }
+$pdf->Cell(14,3," ","$rmc1",0,"L");$pdf->Cell(4,3,"$opravx","$rmc",1,"C");
 
-$pdf->Cell(190,9,"                          ","0",1,"L");
-$pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(95,6,"$hlavicka->prie","0",0,"L");
-$pdf->Cell(65,6,"$hlavicka->meno","0",0,"L");$pdf->Cell(30,6,"$hlavicka->titl","0",1,"L");
-
-$pdf->Cell(190,2,"                          ","0",1,"L");
-$pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(85,6,"$hlavicka->rodn","0",0,"L");
-$pdf->Cell(10,6," ","0",0,"L");$pdf->Cell(30,6,"$hlavicka->predo","0",1,"L");
-
-$pdf->Cell(190,2,"                          ","0",1,"L");
-$pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(130,6,"$hlavicka->mnr","0",0,"L");
-
+//I. POISTENEC
+//priezvisko, meno, titul
+$pdf->Cell(190,9," ","$rmc1",1,"L");
+$pdf->Cell(93,6,"$hlavicka->prie","$rmc",0,"L");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(65,6,"$hlavicka->meno","$rmc",0,"L");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(30,6,"$hlavicka->titl","$rmc",1,"L");
+//rod.,predo priezviska
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(85,6,"$hlavicka->rodn","$rmc",0,"L");
+$pdf->Cell(10,6," ","$rmc1",0,"L");$pdf->Cell(30,6,"$hlavicka->predo","$rmc",1,"L");
+//miesto narodenia
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(130,6,"$hlavicka->mnr","$rmc",0,"L");
+//datum narodenia
+$dar=SkDatum($hlavicka->dar);
 $pole = explode(".", $dar);
 $dar1=$pole[0];
 $dar2=$pole[1];
 $dar3=$pole[2];
+$pdf->Cell(30,6,"$dar1$dar2$dar3","$rmc",0,"L");$pdf->Cell(30,6,"$hlavicka->rdc$hlavicka->rdk","$rmc",1,"L");
+//ulica a cislo
+$pdf->Cell(190,7," ","$rmc1",1,"L");
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(130,6,"$hlavicka->zuli","$rmc",0,"L");
+$pdf->Cell(30,6,"$hlavicka->zcdm","$rmc",0,"L");$pdf->Cell(30,6," ","$rmc1",1,"L");
+//obec a psc
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(130,6,"$hlavicka->zmes","$rmc",0,"L");
+$pdf->Cell(30,6,"$hlavicka->zpsc","$rmc",0,"L");$pdf->Cell(30,6," ","$rmc1",1,"L");
 
-$pdf->Cell(30,6,"$dar1$dar2$dar3","0",0,"L");$pdf->Cell(30,6,"$hlavicka->rdc$hlavicka->rdk","0",1,"L");
-
-//bydlisko
-$pdf->Cell(190,7,"                          ","0",1,"L");
-$pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(130,6,"$hlavicka->zuli","0",0,"L");
-$pdf->Cell(30,6,"$hlavicka->zcdm","0",0,"L");$pdf->Cell(30,6," ","0",1,"L");
-
-$pdf->Cell(190,2,"                          ","0",1,"L");
-$pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(130,6,"$hlavicka->zmes","0",0,"L");
-$pdf->Cell(30,6,"$hlavicka->zpsc","0",0,"L");$pdf->Cell(30,6," ","0",1,"L");
-
-//nastup,vystup
-$pdf->Cell(190,3,"                          ","0",1,"L");
-
+//nastup a vystup
+$pdf->Cell(190,3," ","$rmc1",1,"L");
+$dan=SkDatum($hlavicka->dan);
 $pole = explode(".", $dan);
 $dan1=$pole[0];
 $dan2=$pole[1];
 $dan3=$pole[2];
-
-$pdf->Cell(99,6," ","0",0,"L");$pdf->Cell(31,6,"$dan1$dan2$dan3","0",0,"L");
-
+$pdf->Cell(99,6," ","$rmc1",0,"L");$pdf->Cell(31,6,"$dan1$dan2$dan3","$rmc",0,"L");
+//
+$dav=SkDatum($hlavicka->dav);
 $pole = explode(".", $dav);
 $dav1=$pole[0];
 $dav2=$pole[1];
 $dav3=$pole[2];
 $davx=$dav1.$dav2.$dav3;
-if( $davx == 00000000 ) $davx="";
-$pdf->Cell(30,6,"$davx","0",1,"L");
+if ( $davx == 00000000 ) $davx="";
+$pdf->Cell(30,6,"$davx","$rmc",1,"L");
 
-//riadky evid.listu
-if( $hlavicka->kr01 > 0 )
+//obdobia evid.listu
+if ( $hlavicka->kr01 > 0 )
 {
 $pdf->SetY(110);
 $vz01=$hlavicka->vz01;
 //if( $hlavicka->vz01 == 0 ) $vz01="";
 $vv01=$hlavicka->vv01;
-if( $hlavicka->vv01 == 0 ) $vv01="";
+if ( $hlavicka->vv01 == 0 ) $vv01="";
 $kd01=$hlavicka->kd01;
-if( $hlavicka->kd01 == 0 ) $kd01="";
+if ( $hlavicka->kd01 == 0 ) $kd01="";
 
 $dp01=SkDatum($hlavicka->dp01);
-if( $dp01 == "00.00.0000" ) $dp01="";
+if ( $dp01 == "00.00.0000" ) $dp01="";
 $dk01=SkDatum($hlavicka->dk01);
-if( $dk01 == "00.00.0000" ) $dk01="";
+if ( $dk01 == "00.00.0000" ) $dk01="";
 
 $pole = explode(".", $vz01);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr01 < 2009 ) $vz01=$cel;
+if ( $hlavicka->kr01 < 2009 ) $vz01=$cel;
 $pole = explode(".", $vv01);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr01 < 2009 ) $vv01=$cel;
+if ( $hlavicka->kr01 < 2009 ) $vv01=$cel;
 
-if( $hlavicka->kr01 >= 2009 ) { $vz01=str_replace(".",",",$vz01); $vv01=str_replace(".",",",$vv01); }
+if ( $hlavicka->kr01 >= 2009 ) { $vz01=str_replace(".",",",$vz01); $vv01=str_replace(".",",",$vv01); }
 
 $pole = explode(".", $dp01);
 $dnip=$pole[0];
@@ -887,17 +871,20 @@ $pole = explode(".", $dk01);
 $dnik=$pole[0];
 $mesk=$pole[1];
 
-$pdf->Cell(90,2,"                          ","0",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr01","0",0,"L");$pdf->Cell(10,6,"$hlavicka->zp01","0",0,"L");
-$pdf->Cell(8,6," ","0",0,"L");$pdf->Cell(10,6,"$dnip","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesp","0",0,"C");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$dnik","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesk","0",0,"C");
-
-$pdf->Cell(4,6," ","0",0,"L");$pdf->Cell(23,6,"$vz01","0",0,"R");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(23,6,"$vv01","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd01","0",0,"R");
-$pdf->Cell(30,6," ","0",1,"L");
+$pdf->Cell(90,2," ","$rmc1",1,"L");
+$pdf->Cell(20,6,"$hlavicka->kr01","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$hlavicka->zp01","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vz01","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vv01","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(18,6,"$kd01","$rmc",0,"R");$pdf->Cell(30,6," ","$rmc1",1,"L");
+//dopyt, najprv spravi 1.riadok a pod¾a toho ostatné
 }
 
-if( $hlavicka->kr02 > 0 )
+if ( $hlavicka->kr02 > 0 )
 {
 $pdf->SetY(119);
 $vz02=$hlavicka->vz02;
@@ -1414,56 +1401,49 @@ $pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd13","0",0,"R");
 $pdf->Cell(30,6," ","0",1,"L");
 }
 
-//zamestnavatel
+//III. ZAMESTNAVATEL
+//nazov
 $pdf->SetY(230);
-$pdf->Cell(190,2,"                          ","0",1,"L");
-$pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(150,6,"$fir_fnaz","0",1,"L");
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(150,6,"$fir_fnaz","$rmc",1,"L");
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(135,6," ","$rmc",0,"L");
+//kriziky ico/dic
+$pdf->Cell(3,6,"X","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(3,6," ","$rmc",0,"C");$pdf->Cell(8,6," ","$rmc1",0,"L");
+//cislo organizacia
+$pdf->Cell(30,6,"$fir_fico","$rmc",1,"L");
+//ulica a cislo
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(130,6,"$fir_fuli","$rmc",0,"L");
+$pdf->Cell(30,6,"$fir_fcdm","$rmc",0,"L");$pdf->Cell(30,6," ","$rmc1",1,"L");
+//obec a psc
+$pdf->Cell(190,3," ","$rmc1",1,"L");
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(130,6,"$fir_fmes","$rmc",0,"L");
+$pdf->Cell(30,6,"$fir_fpsc","$rmc",0,"L");$pdf->Cell(30,6," ","$rmc1",1,"L");
 
-$pdf->Cell(190,2,"                          ","0",1,"L");
-$pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(135,6," ","0",0,"L");
-$pdf->Cell(3,6,"X","0",0,"C");$pdf->Cell(16,6," ","0",0,"L");$pdf->Cell(30,6,"$fir_fico","0",1,"L");
-
-$pdf->Cell(190,2,"                          ","0",1,"L");
-$pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(130,6,"$fir_fuli","0",0,"L");
-$pdf->Cell(30,6,"$fir_fcdm","0",0,"L");$pdf->Cell(30,6," ","0",1,"L");
-
-$pdf->Cell(190,3,"                          ","0",1,"L");
-$pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(130,6,"$fir_fmes","0",0,"L");
-$pdf->Cell(30,6,"$fir_fpsc","0",0,"L");$pdf->Cell(30,6," ","0",1,"L");
-
-$pdf->Cell(190,6,"                          ","0",1,"L");
-
+//datum odoslania
+$pdf->Cell(190,6," ","$rmc1",1,"L");
+$datum=SkDatum($hlavicka->datum);
 if ( $datum == '00.00.0000' ) { $datum=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); }
 $pole = explode(".", $datum);
 $datum1=$pole[0];
 $datum2=$pole[1];
 $datum3=$pole[2];
-
-$pdf->Cell(1,6," ","0",0,"L");$pdf->Cell(130,6,"$datum1$datum2$datum3","0",0,"L");
-
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(130,6,"$datum1$datum2$datum3","$rmc",0,"L");
 
 }
 $i = $i + 1;
-
   }
-
-
-
-
 $pdf->Output("../tmp/evidlist.$kli_uzid.pdf");
-
-
 ?>
 
 <script type="text/javascript">
   var okno = window.open("../tmp/evidlist.<?php echo $kli_uzid; ?>.pdf","_self");
 </script>
-
-
 <?php
 }
 /////////////////////////////////////////KONIEC VYTLACENIA POTVRDENIA FO
-
 
 //nacitaj udaje pre upravu
 if ( $copern == 20 )
@@ -1652,7 +1632,6 @@ p.nacitaj-bar {
 p.nacitaj-bar > span {
   font-size: 12px;
   padding-right: 2px;
-
 }
 p.nacitaj-bar > a {
   font-size: 13px;
@@ -1662,7 +1641,6 @@ p.nacitaj-bar > a {
 }
 p.nacitaj-bar > a:hover {
   border-bottom: 1px solid #39f;
-
 }
 </style>
 <script type="text/javascript">
@@ -1840,16 +1818,11 @@ var sirkawic = screen.width-10;
   }
 ?>
 
-<?php
-  if ( $copern != 20 )
-  { 
-?>
+<?php if ( $copern != 20 ) { ?>
   function ObnovUI()
   {
   }
-<?php
-  }
-?>
+<?php                      } ?>
 
 //Z ciarky na bodku
   function CiarkaNaBodku(Vstup)
@@ -1873,18 +1846,18 @@ var sirkawic = screen.width-10;
   }
   function NavodVyplnenie()
   {
-   window.open('../dokumenty/mzdy_potvrdenia/evidencny_list_v14_navod_vyplnenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../dokumenty/mzdy_potvrdenia/evidencny_list/evidencny_list_navod.pdf',
+ '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function tlacpdf(oc)
   {
-   window.open('evidencny_list.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=' + oc + '&xx=1', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('evidencny_list.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=' + oc + '&xx=1',
+ '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
-
-function XMLEvidencny()
-                {
-
-window.open('../mzdy/evidencny_listxml.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=10&drupoh=1&page=1&subor=0&fmzdy=83',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  function XMLEvidencny()
+  {
+   window.open('../mzdy/evidencny_listxml.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=10&drupoh=1&page=1&subor=0&fmzdy=83',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
                 }
 </script>
 <?php
@@ -1900,99 +1873,99 @@ $firm1=0; $firm2=0; $firm3=0; $firm4=0; $firm5=0; $firm6=0; $firm7=0;
 
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_ufir WHERE udaje = 1";
 $fir_vysledok = mysql_query($sqlfir);
-if( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+if ( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 
 $fir_allx11 = 1*$fir_riadok->allx11;
-if( $fir_allx11 > 0 ) { $firm1=$fir_allx11; }
+if ( $fir_allx11 > 0 ) { $firm1=$fir_allx11; }
 
 $databaza="";
-if( $kli_vrok == 2011 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
-if( $kli_vrok == 2012 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
-if( $kli_vrok == 2013 ) { if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; } }
-if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; } }
-if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2014db2015.php")) { $databaza=$mysqldb2014."."; } }
-if( $kli_vrok == 2016 ) { if (File_Exists ("../pswd/oddelena2015db2016.php")) { $databaza=$mysqldb2015."."; } }
+if ( $kli_vrok == 2011 ) { if ( File_Exists("../pswd/oddelena2010db2011.php") ) { $databaza=$mysqldb2010."."; } }
+if ( $kli_vrok == 2012 ) { if ( File_Exists("../pswd/oddelena2011db2012.php") ) { $databaza=$mysqldb2011."."; } }
+if ( $kli_vrok == 2013 ) { if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2012."."; } }
+if ( $kli_vrok == 2014 ) { if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; } }
+if ( $kli_vrok == 2015 ) { if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; } }
+if ( $kli_vrok == 2016 ) { if ( File_Exists("../pswd/oddelena2015db2016.php") ) { $databaza=$mysqldb2015."."; } }
 
-if( $firm1 > 0 )
+if ( $firm1 > 0 )
 {
 $sqlfir = "SELECT * FROM ".$databaza."F$firm1"."_ufir WHERE udaje = 1";
 $fir_vysledok = mysql_query($sqlfir);
-if( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+if ( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 
 $fir_allx11 = 1*$fir_riadok->allx11;
-if( $fir_allx11 > 0 ) { $firm2=$fir_allx11; }
+if ( $fir_allx11 > 0 ) { $firm2=$fir_allx11; }
 }
 
 
-if( $kli_vrok == 2012 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
-if( $kli_vrok == 2013 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
-if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; } }
-if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; } }
-if( $kli_vrok == 2016 ) { if (File_Exists ("../pswd/oddelena2014db2015.php")) { $databaza=$mysqldb2014."."; } }
+if ( $kli_vrok == 2012 ) { if ( File_Exists("../pswd/oddelena2010db2011.php") ) { $databaza=$mysqldb2010."."; } }
+if ( $kli_vrok == 2013 ) { if ( File_Exists("../pswd/oddelena2011db2012.php") ) { $databaza=$mysqldb2011."."; } }
+if ( $kli_vrok == 2014 ) { if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2012."."; } }
+if ( $kli_vrok == 2015 ) { if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; } }
+if ( $kli_vrok == 2016 ) { if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; } }
 
-if( $firm2 > 0 )
+if ( $firm2 > 0 )
 {
 $sqlfir = "SELECT * FROM ".$databaza."F$firm2"."_ufir WHERE udaje = 1";
 $fir_vysledok = mysql_query($sqlfir);
-if( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+if ( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 
 $fir_allx11 = 1*$fir_riadok->allx11;
-if( $fir_allx11 > 0 ) { $firm3=$fir_allx11; }
+if ( $fir_allx11 > 0 ) { $firm3=$fir_allx11; }
 }
 
-if( $kli_vrok == 2013 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
-if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
-if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; } }
-if( $kli_vrok == 2016 ) { if (File_Exists ("../pswd/oddelena2013db2014.php")) { $databaza=$mysqldb2013."."; } }
+if ( $kli_vrok == 2013 ) { if ( File_Exists("../pswd/oddelena2010db2011.php") ) { $databaza=$mysqldb2010."."; } }
+if ( $kli_vrok == 2014 ) { if ( File_Exists("../pswd/oddelena2011db2012.php") ) { $databaza=$mysqldb2011."."; } }
+if ( $kli_vrok == 2015 ) { if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2012."."; } }
+if ( $kli_vrok == 2016 ) { if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; } }
 
-if( $firm3 > 0 )
+if ( $firm3 > 0 )
 {
 $sqlfir = "SELECT * FROM ".$databaza."F$firm3"."_ufir WHERE udaje = 1";
 $fir_vysledok = mysql_query($sqlfir);
-if( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+if ( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 
 $fir_allx11 = 1*$fir_riadok->allx11;
-if( $fir_allx11 > 0 ) { $firm4=$fir_allx11; }
+if ( $fir_allx11 > 0 ) { $firm4=$fir_allx11; }
 }
 
 
-if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
-if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
-if( $kli_vrok == 2016 ) { if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; } }
+if ( $kli_vrok == 2014 ) { if ( File_Exists("../pswd/oddelena2010db2011.php") ) { $databaza=$mysqldb2010."."; } }
+if ( $kli_vrok == 2015 ) { if ( File_Exists("../pswd/oddelena2011db2012.php") ) { $databaza=$mysqldb2011."."; } }
+if ( $kli_vrok == 2016 ) { if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2012."."; } }
 
-if( $firm4 > 0 )
+if ( $firm4 > 0 )
 {
 $sqlfir = "SELECT * FROM ".$databaza."F$firm4"."_ufir WHERE udaje = 1";
 $fir_vysledok = mysql_query($sqlfir);
-if( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+if ( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 
 $fir_allx11 = 1*$fir_riadok->allx11;
-if( $fir_allx11 > 0 ) { $firm5=$fir_allx11; }
+if ( $fir_allx11 > 0 ) { $firm5=$fir_allx11; }
 }
 
-if( $kli_vrok == 2015 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
-if( $kli_vrok == 2016 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
+if ( $kli_vrok == 2015 ) { if ( File_Exists("../pswd/oddelena2010db2011.php") ) { $databaza=$mysqldb2010."."; } }
+if ( $kli_vrok == 2016 ) { if ( File_Exists("../pswd/oddelena2011db2012.php") ) { $databaza=$mysqldb2011."."; } }
 
-if( $firm5 > 0 )
+if ( $firm5 > 0 )
 {
 $sqlfir = "SELECT * FROM ".$databaza."F$firm5"."_ufir WHERE udaje = 1";
 $fir_vysledok = mysql_query($sqlfir);
-if( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+if ( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 
 $fir_allx11 = 1*$fir_riadok->allx11;
-if( $fir_allx11 > 0 ) { $firm6=$fir_allx11; }
+if ( $fir_allx11 > 0 ) { $firm6=$fir_allx11; }
 }
 
-if( $kli_vrok == 2016 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
+if ( $kli_vrok == 2016 ) { if ( File_Exists("../pswd/oddelena2010db2011.php") ) { $databaza=$mysqldb2010."."; } }
 
-if( $firm6 > 0 )
+if ( $firm6 > 0 )
 {
 $sqlfir = "SELECT * FROM ".$databaza."F$firm6"."_ufir WHERE udaje = 1";
 $fir_vysledok = mysql_query($sqlfir);
-if( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+if ( $fir_vysledok ) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
 
 $fir_allx11 = 1*$fir_riadok->allx11;
-if( $fir_allx11 > 0 ) { $firm7=$fir_allx11; }
+if ( $fir_allx11 > 0 ) { $firm7=$fir_allx11; }
 }
 
 //osobne cislo prepinanie
@@ -2134,7 +2107,7 @@ if ( $copern == 20 )
      <img src="../obr/ikony/upbox_blue_icon.png" onclick="XMLEvidencny();"
           title="Export do XML" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacpdf(<?php echo $cislo_oc; ?>);"
-          title="Zobrazi v PDF" class="btn-form-tool"> <!-- dopyt, nefunkèné -->
+          title="Zobrazi v PDF" class="btn-form-tool">
     </div>
    </td>
   </tr>
@@ -2144,10 +2117,9 @@ if ( $copern == 20 )
 <div id="content">
 <FORM name="formv1" method="post" action="evidencny_list.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-top-formsave" style="top:4px;">
-
 <div class="wrap-form-background">
-<img src="../dokumenty/mzdy_potvrdenia/evidencny_list.jpg"
- alt="tlaèivo Evidenèný list dôchodkového poistenia 231kB" class="form-background">
+<img src="../dokumenty/mzdy_potvrdenia/evidencny_list/evidencny_list.jpg"
+     alt="tlaèivo Evidenèný list dôchodkového poistenia 231kB" class="form-background">
 
 <!-- vyplneny = natvrdo zaskrtnute -->
 <span class="text-echo" style="top:155px; left:262px;"> </span>
@@ -2159,7 +2131,7 @@ if ( $copern == 20 )
 <span class="text-echo" style="top:213px; left:475px;"><?php echo $meno; ?></span>
 <span class="text-echo" style="top:213px; left:778px;"><?php echo $titl; ?></span>
 <span class="text-echo" style="top:249px; left:32px;"><?php echo $rodprie; ?></span>
-<input type="text" name="predo" id="predo" style="top:245px; left:471px; width:425px;"/>
+<input type="text" name="predo" id="predo" style="top:244px; left:471px; width:425px;"/>
 <span class="text-echo" style="top:286px; left:32px;"><?php echo $mnr; ?></span>
 <span class="text-echo" style="top:286px; left:652px;"><?php echo $dar_sk; ?></span>
 <span class="text-echo" style="top:286px; left:795px;"><?php echo $rodne; ?></span>
@@ -2172,7 +2144,7 @@ if ( $copern == 20 )
 
 <!-- II. Obdobia poistenia ... -->
 <img src="../obr/ikony/info_blue_icon.png" class="btn-row-tool" style="top:465px; left:127px;"
- title="A = zamestnanec, MD = materská dovolenka, RD = rodièovská dovolenka, VS = vojenská služba, CS = civilná služba">
+     title="A = zamestnanec, MD = materská dovolenka, RD = rodièovská dovolenka, VS = vojenská služba, CS = civilná služba">
 
 <!-- 1.riadok -->
 <input type="text" name="kr01" id="kr01" style="top:501px; left:29px; width:70px;"/>
@@ -2185,13 +2157,13 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp01" id="dp01" onfocus="return Dp01Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:500px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:500px; left:215px; width:90px;"/>
 <input type="text" name="dk01" id="dk01" onkeyup="CiarkaNaBodku(this);"
- style="top:500px; left:326px; width:90px;"/>
+       style="top:500px; left:326px; width:90px;"/>
 <input type="text" name="vz01" id="vz01" onkeyup="CiarkaNaBodku(this);"
- style="top:501px; left:449px; width:93px;"/>
+       style="top:501px; left:449px; width:93px;"/>
 <input type="text" name="vv01" id="vv01" onkeyup="CiarkaNaBodku(this);"
- style="top:501px; left:562px; width:93px;"/>
+       style="top:501px; left:562px; width:93px;"/>
 <input type="text" name="kd01" id="kd01" style="top:501px; left:675px; width:72px;"/>
 
 <!-- 2.riadok -->
@@ -2205,13 +2177,13 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp02" id="dp02" onfocus="return Dp02Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:536px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:536px; left:215px; width:90px;"/>
 <input type="text" name="dk02" id="dk02" onkeyup="CiarkaNaBodku(this);"
- style="top:536px; left:326px; width:90px;"/>
+       style="top:536px; left:326px; width:90px;"/>
 <input type="text" name="vz02" id="vz02" onkeyup="CiarkaNaBodku(this);"
- style="top:537px; left:449px; width:93px;"/>
+       style="top:537px; left:449px; width:93px;"/>
 <input type="text" name="vv02" id="vv02" onkeyup="CiarkaNaBodku(this);"
- style="top:537px; left:562px; width:93px;"/>
+       style="top:537px; left:562px; width:93px;"/>
 <input type="text" name="kd02" id="kd02" style="top:537px; left:675px; width:72px;"/>
 
 <!-- 3.riadok -->
@@ -2225,13 +2197,13 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp03" id="dp03" onfocus="return Dp03Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:573px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:573px; left:215px; width:90px;"/>
 <input type="text" name="dk03" id="dk03" onkeyup="CiarkaNaBodku(this);"
- style="top:573px; left:326px; width:90px;"/>
+       style="top:573px; left:326px; width:90px;"/>
 <input type="text" name="vz03" id="vz03" onkeyup="CiarkaNaBodku(this);"
- style="top:574px; left:449px; width:93px;"/>
+       style="top:574px; left:449px; width:93px;"/>
 <input type="text" name="vv03" id="vv03" onkeyup="CiarkaNaBodku(this);"
- style="top:574px; left:562px; width:93px;"/>
+       style="top:574px; left:562px; width:93px;"/>
 <input type="text" name="kd03" id="kd03" style="top:574px; left:675px; width:72px;"/>
 
 <!-- 4.riadok -->
@@ -2245,13 +2217,13 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp04" id="dp04" onfocus="return Dp04Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:610px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:610px; left:215px; width:90px;"/>
 <input type="text" name="dk04" id="dk04" onkeyup="CiarkaNaBodku(this);"
- style="top:610px; left:326px; width:90px;"/>
+       style="top:610px; left:326px; width:90px;"/>
 <input type="text" name="vz04" id="vz04" onkeyup="CiarkaNaBodku(this);"
- style="top:610px; left:449px; width:93px;"/>
+       style="top:610px; left:449px; width:93px;"/>
 <input type="text" name="vv04" id="vv04" onkeyup="CiarkaNaBodku(this);"
- style="top:610px; left:562px; width:93px;"/>
+       style="top:610px; left:562px; width:93px;"/>
 <input type="text" name="kd04" id="kd04" style="top:610px; left:675px; width:72px;"/>
 
 <!-- 5.riadok -->
@@ -2265,13 +2237,13 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp05" id="dp05" onfocus="return Dp05Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:646px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:646px; left:215px; width:90px;"/>
 <input type="text" name="dk05" id="dk05" onkeyup="CiarkaNaBodku(this);"
- style="top:646px; left:326px; width:90px;"/>
+       style="top:646px; left:326px; width:90px;"/>
 <input type="text" name="vz05" id="vz05" onkeyup="CiarkaNaBodku(this);"
- style="top:647px; left:449px; width:93px;"/>
+       style="top:647px; left:449px; width:93px;"/>
 <input type="text" name="vv05" id="vv05" onkeyup="CiarkaNaBodku(this);"
- style="top:647px; left:562px; width:93px;"/>
+       style="top:647px; left:562px; width:93px;"/>
 <input type="text" name="kd05" id="kd05" style="top:647px; left:675px; width:72px;"/>
 
 <!-- 6.riadok -->
@@ -2285,13 +2257,13 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp06" id="dp06" onfocus="return Dp06Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:683px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:683px; left:215px; width:90px;"/>
 <input type="text" name="dk06" id="dk06" onkeyup="CiarkaNaBodku(this);"
- style="top:683px; left:326px; width:90px;"/>
+       style="top:683px; left:326px; width:90px;"/>
 <input type="text" name="vz06" id="vz06" onkeyup="CiarkaNaBodku(this);"
- style="top:684px; left:449px; width:93px;"/>
+       style="top:684px; left:449px; width:93px;"/>
 <input type="text" name="vv06" id="vv06" onkeyup="CiarkaNaBodku(this);"
- style="top:684px; left:562px; width:93px;"/>
+       style="top:684px; left:562px; width:93px;"/>
 <input type="text" name="kd06" id="kd06" style="top:684px; left:675px; width:72px;"/>
 
 <!-- 7.riadok -->
@@ -2305,13 +2277,13 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp07" id="dp07" onfocus="return Dp07Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:720px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:720px; left:215px; width:90px;"/>
 <input type="text" name="dk07" id="dk07" onkeyup="CiarkaNaBodku(this);"
- style="top:720px; left:326px; width:90px;"/>
+       style="top:720px; left:326px; width:90px;"/>
 <input type="text" name="vz07" id="vz07" onkeyup="CiarkaNaBodku(this);"
- style="top:721px; left:449px; width:93px;"/>
+       style="top:721px; left:449px; width:93px;"/>
 <input type="text" name="vv07" id="vv07" onkeyup="CiarkaNaBodku(this);"
- style="top:721px; left:562px; width:93px;"/>
+       style="top:721px; left:562px; width:93px;"/>
 <input type="text" name="kd07" id="kd07" style="top:721px; left:675px; width:72px;"/>
 
 <!-- 8.riadok -->
@@ -2325,13 +2297,13 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp08" id="dp08" onfocus="return Dp08Onfocus(event.which)"
- onkeyup="CiarkaNaBodku(this);" style="top:756px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:756px; left:215px; width:90px;"/>
 <input type="text" name="dk08" id="dk08" onkeyup="CiarkaNaBodku(this);"
- style="top:756px; left:326px; width:90px;"/>
+       style="top:756px; left:326px; width:90px;"/>
 <input type="text" name="vz08" id="vz08" onkeyup="CiarkaNaBodku(this);"
- style="top:757px; left:449px; width:93px;"/>
+       style="top:757px; left:449px; width:93px;"/>
 <input type="text" name="vv08" id="vv08" onkeyup="CiarkaNaBodku(this);"
- style="top:757px; left:562px; width:93px;"/>
+       style="top:757px; left:562px; width:93px;"/>
 <input type="text" name="kd08" id="kd08" style="top:757px; left:675px; width:72px;"/>
 
 <!-- 9.riadok -->
@@ -2345,13 +2317,13 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp09" id="dp09" onkeyup="CiarkaNaBodku(this);"
- style="top:793px; left:215px; width:90px;"/>
+       style="top:793px; left:215px; width:90px;"/>
 <input type="text" name="dk09" id="dk09" onkeyup="CiarkaNaBodku(this);"
- style="top:793px; left:326px; width:90px;"/>
+       style="top:793px; left:326px; width:90px;"/>
 <input type="text" name="vz09" id="vz09" onkeyup="CiarkaNaBodku(this);"
- style="top:794px; left:449px; width:93px;"/>
+       style="top:794px; left:449px; width:93px;"/>
 <input type="text" name="vv09" id="vv09" onkeyup="CiarkaNaBodku(this);"
- style="top:794px; left:562px; width:93px;"/>
+       style="top:794px; left:562px; width:93px;"/>
 <input type="text" name="kd09" id="kd09" style="top:794px; left:675px; width:72px;"/>
 
 <!-- 10.riadok -->
@@ -2365,13 +2337,13 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp10" id="dp10" onkeyup="CiarkaNaBodku(this);"
- style="top:829px; left:215px; width:90px;"/>
+       style="top:829px; left:215px; width:90px;"/>
 <input type="text" name="dk10" id="dk10" onkeyup="CiarkaNaBodku(this);"
- style="top:829px; left:326px; width:90px;"/>
+       style="top:829px; left:326px; width:90px;"/>
 <input type="text" name="vz10" id="vz10" onkeyup="CiarkaNaBodku(this);"
- style="top:830px; left:449px; width:93px;"/>
+       style="top:830px; left:449px; width:93px;"/>
 <input type="text" name="vv10" id="vv10" onkeyup="CiarkaNaBodku(this);"
- style="top:830px; left:562px; width:93px;"/>
+       style="top:830px; left:562px; width:93px;"/>
 <input type="text" name="kd10" id="kd10" style="top:830px; left:675px; width:72px;"/>
 
 <!-- 11.riadok -->
@@ -2385,13 +2357,13 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp11" id="dp11" onkeyup="CiarkaNaBodku(this);"
- style="top:866px; left:215px; width:90px;"/>
+       style="top:866px; left:215px; width:90px;"/>
 <input type="text" name="dk11" id="dk11" onkeyup="CiarkaNaBodku(this);"
- style="top:866px; left:326px; width:90px;"/>
+       style="top:866px; left:326px; width:90px;"/>
 <input type="text" name="vz11" id="vz11" onkeyup="CiarkaNaBodku(this);"
- style="top:867px; left:449px; width:93px;"/>
+       style="top:867px; left:449px; width:93px;"/>
 <input type="text" name="vv11" id="vv11" onkeyup="CiarkaNaBodku(this);"
- style="top:867px; left:562px; width:93px;"/>
+       style="top:867px; left:562px; width:93px;"/>
 <input type="text" name="kd11" id="kd11" style="top:867px; left:675px; width:72px;"/>
 
 <!-- 12.riadok -->
@@ -2405,13 +2377,13 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp12" id="dp12" onkeyup="CiarkaNaBodku(this);"
- style="top:903px; left:215px; width:90px;"/>
+       style="top:903px; left:215px; width:90px;"/>
 <input type="text" name="dk12" id="dk12" onkeyup="CiarkaNaBodku(this);"
- style="top:903px; left:326px; width:90px;"/>
+       style="top:903px; left:326px; width:90px;"/>
 <input type="text" name="vz12" id="vz12" onkeyup="CiarkaNaBodku(this);"
- style="top:904px; left:449px; width:93px;"/>
+       style="top:904px; left:449px; width:93px;"/>
 <input type="text" name="vv12" id="vv12" onkeyup="CiarkaNaBodku(this);"
- style="top:904px; left:562px; width:93px;"/>
+       style="top:904px; left:562px; width:93px;"/>
 <input type="text" name="kd12" id="kd12" style="top:904px; left:675px; width:72px;"/>
 
 <!-- 13.riadok -->
@@ -2425,13 +2397,13 @@ if ( $copern == 20 )
  <option value=" "></option>
 </select>
 <input type="text" name="dp13" id="dp13" onkeyup="CiarkaNaBodku(this);"
- style="top:940px; left:215px; width:90px;"/>
+       style="top:940px; left:215px; width:90px;"/>
 <input type="text" name="dk13" id="dk13" onkeyup="CiarkaNaBodku(this);"
- style="top:940px; left:326px; width:90px;"/>
+       style="top:940px; left:326px; width:90px;"/>
 <input type="text" name="vz13" id="vz13" onkeyup="CiarkaNaBodku(this);"
- style="top:940px; left:449px; width:93px;"/>
+       style="top:940px; left:449px; width:93px;"/>
 <input type="text" name="vv13" id="vv13" onkeyup="CiarkaNaBodku(this);"
- style="top:940px; left:562px; width:93px;"/>
+       style="top:940px; left:562px; width:93px;"/>
 <input type="text" name="kd13" id="kd13" style="top:940px; left:675px; width:72px;"/>
 
 <!-- III. ZAMESTNAVATEL -->
@@ -2445,17 +2417,11 @@ if ( $copern == 20 )
 
 <!-- IV. POTVRDENIE SPRAVNOSTI -->
 <input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);"
- style="top:1179px; left:29px; width:122px;"/>
+       style="top:1179px; left:29px; width:122px;"/>
 
 <!-- poznamka -->
 <label for="pozn" style="position:absolute; top:1279px; left:170px; font-size:12px; font-weight:bold;">Poznámka</label>
 <input type="text" name="pozn" id="pozn" style="top:1273px; right:10px; width:700px;"/>
-
-
-
-
-
-
 
 </div> <!-- koniec .wrap-form-background -->
 </FORM>
@@ -2465,11 +2431,6 @@ if ( $copern == 20 )
     }
 //koniec uprav
 ?>
-
-
-
-
-
 
 
 <?php
