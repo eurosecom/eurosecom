@@ -12,7 +12,6 @@ if (!isset($kli_vduj)) $kli_vduj = 1;
 
        do
        {
-
 //cislo operacie
 $copern = 1*$_REQUEST['copern'];
 $drupoh = 1*$_REQUEST['drupoh'];
@@ -26,7 +25,7 @@ require_once("../pswd/password.php");
   mysql_select_db($mysqldb);
 
 
-if( $kli_vrok < 2015 )
+if ( $kli_vrok < 2015 )
 {
 ?>
 <script type="text/javascript">
@@ -234,12 +233,12 @@ var sirkawic = screen.width-10;
   }
   function VyberVstup()
   {
-<?php if( $kli_vduj != 9 ) { echo "document.forms.formhk1.h_obdp.value=$kli_vmes; "; } ?>
-<?php if( $kli_vduj != 9 ) { echo "document.forms.formhk1.h_obdk.value=$kli_vmes; "; } ?>
-<?php if( $kli_vduj != 99 ) { echo "document.forms.formkf1.h_obdp.value=$kli_vmes; "; } ?>
-<?php if( $kli_vduj != 99 ) { echo "document.forms.formkf1.h_obdk.value=$kli_vmes; "; } ?>
-<?php echo "document.forms.formp1.fir_uctx01.value=$fir_uctx01; ";  ?>
-<?php echo "document.forms.formg1.fir_uctx01.value=$fir_uctx01; ";  ?>
+<?php if ( $kli_vduj != 9 ) { echo "document.forms.formhk1.h_obdp.value=$kli_vmes;"; } ?>
+<?php if ( $kli_vduj != 9 ) { echo "document.forms.formhk1.h_obdk.value=$kli_vmes;"; } ?>
+<?php if ( $kli_vduj != 99 ) { echo "document.forms.formkf1.h_obdp.value=$kli_vmes;"; } ?>
+<?php if ( $kli_vduj != 99 ) { echo "document.forms.formkf1.h_obdk.value=$kli_vmes;"; } ?>
+<?php echo "document.forms.formp1.fir_uctx01.value=$fir_uctx01;"; ?>
+<?php echo "document.forms.formg1.fir_uctx01.value=$fir_uctx01;"; ?>
   }
 
 //Z ciarky na bodku
@@ -247,17 +246,6 @@ var sirkawic = screen.width-10;
   {
    if ( Vstup.value.search(/[^0-9.-]/g) != -1 ) { Vstup.value=Vstup.value.replace(",","."); }
   }
-
-  function JUKnihaSumarnaPDF() //dopyt, mÙûem daù preË, nie je pouûitÈ v danprij.php
-  {
-   var h_obdp = document.forms.formhk1.h_obdp.value;
-   var h_obdk = document.forms.formhk1.h_obdk.value;
-   window.open('../ucto/jukniha.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=PDF', '_blank', '<width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes')
-  }
-  function TlacPotvrdDPH() //dopyt, mÙûem daù preË, nie je pouûitÈ v danprij.php
-                {
-  var okno = window.open("../tmp/potvrddph<?php echo $kli_vume; ?>.<?php echo $kli_uzid; ?>.pdf", '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
 
 //PRIZNANIE PO
 <?php
@@ -275,11 +263,6 @@ if ( $rokdppo >= 2014 ) { $rokdppo="2014";  }
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravPriznanie()
-  {
-   var h_oc = 0;
-   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=101&drupoh=1&page=1&strana=1', '_blank');
-  }
-  function ZnovuPriznanie()
   {
    var h_oc = 0;
    window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=101&drupoh=1&page=1&strana=1',
@@ -316,12 +299,8 @@ if ( $rokfob >= 2011 ) { $skriptfob="../ucto/priznanie_fob"; }
   function UpravFOB()
   {
    var h_oc = 9999;
-   window.open('<?php echo $skriptfob.$rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&page=1&subor=0&prepocitaj=101', '_blank');
-  }
-  function ZnovuFOB()
-  {
-   var h_oc = 9999;
-   window.open('<?php echo $skriptfob.$rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&page=1&subor=0&prepocitaj=1', '_blank');
+   window.open('<?php echo $skriptfob.$rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&page=1&subor=0&prepocitaj=101',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function TlacPotvrdFOB()
   {
@@ -344,15 +323,12 @@ if ( $rokfob >= 2011 ) { $skriptfob="../ucto/priznanie_fob"; }
   }
   function NacitajPoznamky2013()
   {
-   window.open('../ucto/poznamky_po2013tlac.php?copern=1&drupoh=1&page=1&subor=0', '_blank');
+   window.open('../ucto/poznamky_po2013tlac.php?copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravPoznamky2013()
   {
-   window.open('../ucto/poznamky_po2013.php?copern=1&drupoh=1&page=1', '_blank');
-  }
-  function ZnovuPoznamky2013()
-  {
-   window.open('../ucto/poznamky_po2013.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&page=1&subor=0',
+   window.open('../ucto/poznamky_po2013.php?copern=1&drupoh=1&page=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function Poznamky2013doxml()
@@ -384,7 +360,8 @@ if ( $kli_vrok >= 2015 ) { $rokdmv=2015; }
   function UpravDMV()
   {
    var h_oc = 0;
-   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&drupoh=1&page=1&strana=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&drupoh=1&page=1&strana=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function TlacPotvrdDMV()
   {
@@ -415,17 +392,13 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
    var h_zos = document.forms.formpoz11no.h_zos.value;
    var h_sch = document.forms.formpoz11no.h_sch.value;
    var h_oc = 0;
-   window.open('../ucto/poznamky_<?php echo $poznuj; ?>tlac.php?copern=1&drupoh=1&page=1&subor=0', '_blank');
+   window.open('../ucto/poznamky_<?php echo $poznuj; ?>tlac.php?copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravPoznamky2011no()
   {
    var h_oc = 0;
-   window.open('../ucto/poznamky_<?php echo $poznuj; ?>.php?copern=1&drupoh=1&page=1', '_blank');
-  }
-  function ZnovuPoznamky2011no()
-  {
-   var h_oc = 0;
-   window.open('../ucto/poznamky_<?php echo $poznuj; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&page=1&subor=0',
+   window.open('../ucto/poznamky_<?php echo $poznuj; ?>.php?copern=1&drupoh=1&page=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function Poznamky2011NOdoxml()
@@ -440,15 +413,18 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
   }
   function GenSuvNo()
   { 
-   window.open('../ucto/oprcis.php?copern=308&drupoh=96&page=1&sysx=UCT', '_blank');
+   window.open('../ucto/oprcis.php?copern=308&drupoh=96&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function NechcemStranyPOD2013()
   {
-   window.open('../ucto/poznamky_podnopage.php?copern=101&page=1&tt=1', '_blank');
+   window.open('../ucto/poznamky_podnopage.php?copern=101&page=1&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function platbyju()
   {
-   window.open('../ucto/platbyju.php?copern=1&page=1&tt=1', '_blank');
+   window.open('../ucto/platbyju.php?copern=1&page=1&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
 //OZNAMENIE O SCHVALENI 
@@ -459,7 +435,8 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
   }
   function UpravOzUz()
   {
-   window.open('../ucto/uzavierka_oznamenie.php?copern=20&drupoh=1&page=1&strana=1', '_blank');
+   window.open('../ucto/uzavierka_oznamenie.php?copern=20&drupoh=1&page=1&strana=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function OzUzdoXML()
   {
@@ -475,7 +452,8 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
   }
   function UpravVseob()
   {
-   window.open('../ucto/vseobecne_podanie.php?copern=20&drupoh=1&page=1&strana=1', '_blank');
+   window.open('../ucto/vseobecne_podanie.php?copern=20&drupoh=1&page=1&strana=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function VseobdoXML()
   {
@@ -498,16 +476,11 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
  <div class="heading">
   <h1 class="toleft">DaÚ z prÌjmov</h1>
   <dl class="toright legend-area">
- 	 <dt class="toleft box-blue"></dt>
-	 <dd class="toleft">Zobraziù v pdf</dd>
-	 <dt class="toleft box-brown"></dt>
-	 <dd class="toleft">Nastaviù</dd>
-	 <dt class="toleft box-green"></dt>
-	 <dd class="toleft">Upraviù</dd>
-	 <dt class="toleft box-red"></dt>
-	 <dd class="toleft">Export</dd>
-	 <dt class="toleft box-lightblue"></dt>
-	 <dd class="toleft">NaËÌtaù</dd>
+ 	 <dt class="toleft box-blue"></dt><dd class="toleft">Zobraziù v pdf</dd>
+	 <dt class="toleft box-brown"></dt><dd class="toleft">Nastaviù</dd>
+	 <dt class="toleft box-green"></dt><dd class="toleft">Upraviù</dd>
+	 <dt class="toleft box-red"></dt><dd class="toleft">Export</dd>
+	 <dt class="toleft box-lightblue"></dt><dd class="toleft">NaËÌtaù</dd>
   </dl>
  </div>
 </div> <!-- .wrap-heading -->
@@ -624,7 +597,8 @@ if ( $kli_vrok >= 2013 AND $ajpod == 1 )
   }
   function GenSuvPod()
   { 
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193', '_blank');
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
   function GenVysPod()
   { 
@@ -644,11 +618,6 @@ if ( $kli_vrok >= 2013 AND $ajpod == 1 )
   function GesSuvPod()
   { 
    window.open('../ucto/vykazy_cis.php?copern=308&drupoh=195',
- '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function ZaokPod()//dopyt, mÙûem daù preË, nie je pouûitÈ v danprij.php
-  { 
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=196',
  '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
@@ -737,7 +706,7 @@ if ( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
 </div>
 </div>
 <a href="#" onclick="NechcemStranyPOD2013();" title="Nastavenie str·n, ktorÈ nechcem tlaËiù"
-   class="toleft line-box box-brown"><img src='../obr/zmaz.png'></a> <!-- dopyt, nezruöÌme? -->
+   class="toleft line-box box-brown"><img src='../obr/zmaz.png'></a>
 <a href="#" onclick="NacitajPoznamky2013();" title="NaËÌtaù ˙daje do pozn·mok"
    class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
 <a href="#" onclick="Poznamky2013doxml();" title="export do PDF"
@@ -760,7 +729,6 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
 {
 ?>
 <script type="text/javascript">
-//dopyt, nemÙûem daù do js Ëasti?
   function SuvahaMUJ2014()
   {
    var h_zos = document.forms.formuzmuj.h_zos.value;
@@ -819,7 +787,8 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
   }
   function GenSuvMuj()
   { 
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93', '_blank');
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function GenVysMuj()
   { 
@@ -841,11 +810,6 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
    window.open('../ucto/vykazy_cis.php?copern=308&drupoh=95',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-  function ZaokMuj() //dopyt, mÙûem daù preË, nie je pouûitÈ v danprij.php
-  { 
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=96',
- '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
 
 //poznamky MUJ 2014
   function TlacPoznamkyMUJ2014()
@@ -858,11 +822,13 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
   }
   function NacitajPoznamkyMUJ2014()
   {
-   window.open('../ucto/poznamky_muj2014tlac.php?copern=1&drupoh=1&page=1&subor=0', '_blank');
+   window.open('../ucto/poznamky_muj2014tlac.php?copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravPoznamkyMUJ2014()
   {
-   window.open('../ucto/poznamky_muj2014.php?copern=1&drupoh=1&page=1', '_blank');
+   window.open('../ucto/poznamky_muj2014.php?copern=1&drupoh=1&page=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
 
@@ -951,7 +917,6 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
 ?>
 
 <script type="text/javascript">
-//dopyt, nemÙûe Ìsù do js Ëasti?
   function CASH2011()
   {
    var h_zos = document.forms.formcf1n.h_zos.value;
@@ -970,20 +935,22 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
   }
   function CASHGEN2011()
   {
-   window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT', '_blank');
+   window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function CASHPREDCH2011()
   {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=24&page=1&sysx=UCT', '_blank');
+   window.open('../ucto/oprsys.php?copern=308&drupoh=24&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
 
 <div class="line-area" style="margin-bottom:8px;"> <!-- cash flow priama -->
 <FORM name="formcf1n" method="post" action="#">
 <a href="#" onclick="CASH2011();" title="<?php echo $mena1; ?>· + centy - zobraziù v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a> <!-- dopyt, niË mi nevyrobÌ -->
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <a href="#" onclick="CASHEUR2011();" title="<?php echo $mena1; ?>· - zobraziù v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a> <!-- dopyt, niË mi nevyrobÌ -->
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <div class="toleft line-box-text">
 <div>
 <?php
@@ -1053,7 +1020,6 @@ if ( $kli_nezis == 1 )
 <?php if ( $kli_vrok >= 2012 ) { ?>
 
 <script type="text/javascript">
-//dopyt, nemÙûe Ìsù do js?
   function SuvahaNO2012()
   {
    var h_zos = document.forms.formuznuj.h_zos.value;
@@ -1090,15 +1056,18 @@ if ( $kli_nezis == 1 )
   }
   function NechcemStranyNUJ2013()
   {
-   window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1', '_blank');
+   window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function SuvPredchNUJ2013()
   {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=32&page=1&sysx=UCT', '_blank');
+   window.open('../ucto/oprsys.php?copern=308&drupoh=32&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function VzasPredchNUJ2013()
   {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=31&page=1&sysx=UCT', '_blank');
+   window.open('../ucto/oprsys.php?copern=308&drupoh=31&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
 
@@ -1248,7 +1217,8 @@ if ( $copern == 1 AND $kli_vduj == 9 )
   }
   function vmazprech2014()
   {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=42&page=1&sysx=UCT', '_blank');
+   window.open('../ucto/oprsys.php?copern=308&drupoh=42&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
 
@@ -1297,18 +1267,20 @@ if ( $copern == 1 AND $kli_vduj == 9 )
 <?php if ( $kli_vrok >= 2012 ) { ?>
 
 <script type="text/javascript">
-//dopyt, nemÙûe byù v js Ëasti?
   function GenPriVydNOJU()
   {
-   window.open('../ucto/oprcis.php?copern=308&drupoh=97&page=1&sysx=UCT', '_blank');
+   window.open('../ucto/oprcis.php?copern=308&drupoh=97&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function GenMajZavNOJU()
   {
-   window.open('../ucto/oprcis.php?copern=308&drupoh=98&page=1&sysx=UCT', '_blank');
+   window.open('../ucto/oprcis.php?copern=308&drupoh=98&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function PredMajZavNOJU()
   {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=47&page=1&sysx=UCT', '_blank');
+   window.open('../ucto/oprsys.php?copern=308&drupoh=47&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function KompletNO2013()
   {
@@ -1362,7 +1334,7 @@ if ( $copern == 1 AND $kli_vduj == 9 )
  <a href="#" onclick="GenMajZavNOJU();" title="Nastavenie predch·dzaj˙ceho obdobia v˝kazu o majetku a z·v‰zkov N⁄J"
     class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
  <a href="#" onclick="GenPriVydNOJU();" title="Nastavenie generovania riadkov v˝kazu o prÌjmoch a v˝davkoch N⁄J"
-    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, spojiù generovanie -->
+    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
 </FORM>
 </div> <!-- .line-area uct.zavierka ju nuj -->
 <?php                          } ?>
@@ -1374,7 +1346,7 @@ if ( $copern == 1 AND $kli_vduj == 9 )
 <div class="toleft line-box-text">
 <div>
  <strong>Platby dane z prÌjmu a odvodov SP a ZP pre bud˙ci rok</strong>
-</div> <!-- dopyt, nezruöÌme? -->
+</div>
 </div>
 </div> <!-- .line-area platby do fondov sp a zp -->
 <?php
@@ -1394,8 +1366,6 @@ if ( $copern == 1 AND $kli_vduj == 9 )
 </div>
 <a href="#" onclick="TlacPotvrdFOB();" title="Zobraziù potvrdenie o podanÌ v PDF"
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<a href="#" onclick="ZnovuFOB();" title="NaËÌtaù ˙daje"
-   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a> <!-- dopyt, musÌ tu byù? dosù nebezpeËnÈ, aspoÚ hl·öku, aby æudia neprepÌsali uû nahratÈ ˙daje -->
 <a href="#" onclick="FOBdoXML();" title="export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
 <a href="#" onclick="UpravFOB();" title="Upraviù hodnoty"
