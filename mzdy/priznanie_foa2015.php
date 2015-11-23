@@ -201,6 +201,7 @@ if ( $copern == 23 )
      {
 $rdc = strip_tags($_REQUEST['rdc']);
 $rdk = strip_tags($_REQUEST['rdk']);
+$fdic = strip_tags($_REQUEST['fdic']);
 $dar = $_REQUEST['dar'];
 $darsql=SqlDatum($dar);
 $druh = 1*$_REQUEST['druh'];
@@ -246,7 +247,7 @@ $dmailfax = strip_tags($_REQUEST['dmailfax']);
 
 if ( $strana == 1 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET ".
-" rdc='$rdc', rdk='$rdk', dar='$darsql', druh='$druh', ddp='$ddpsql', ".
+" rdc='$rdc', rdk='$rdk', fdic='$fdic', dar='$darsql', druh='$druh', ddp='$ddpsql', ".
 " dprie='$dprie', dmeno='$dmeno', dtitl='$dtitl', dtitz='$dtitz', duli='$duli', dcdm='$dcdm', dpsc='$dpsc', dmes='$dmes', xstat='$xstat', nrz='$nrz', ".
 " d2uli='$d2uli', d2cdm='$d2cdm', d2psc='$d2psc', d2mes='$d2mes', dtel='$dtel', dmailfax='$dmailfax', ".
 " zprie='$zprie', zmeno='$zmeno', ztitl='$ztitl', ztitz='$ztitz', zrdc='$zrdc', zrdk='$zrdk', zuli='$zuli', zcdm='$zcdm', zpsc='$zpsc', zmes='$zmes', zstat='$zstat' ".
@@ -415,6 +416,7 @@ $pcdm = strip_tags($_REQUEST['pcdm']);
 $ppsc = strip_tags($_REQUEST['ppsc']);
 $pmes = strip_tags($_REQUEST['pmes']);
 $uoso = 1*$_REQUEST['uoso'];
+$zslu = 1*$_REQUEST['zslu'];
 $pzks1 = strip_tags($_REQUEST['pzks1']);
 //$pzst1 = strip_tags($_REQUEST['pzst1']);
 $pzpr1 = 1*$_REQUEST['pzpr1'];
@@ -433,7 +435,7 @@ if ( $strana == 5 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET ".
 " upl50='$upl50', spln3='$spln3', r75='$r75', ".
 " pico='$pico', psid='$psid', pfor='$pfor', pmen='$pmen', puli='$puli', pcdm='$pcdm', ppsc='$ppsc', pmes='$pmes', ".
-" uoso='$uoso', pzks1='$pzks1', pzpr1='$pzpr1', pzvd1='$pzvd1', pzks2='$pzks2', pzpr2='$pzpr2', pzvd2='$pzvd2', ".
+" uoso='$uoso', zslu='$zslu', pzks1='$pzks1', pzpr1='$pzpr1', pzvd1='$pzvd1', pzks2='$pzks2', pzpr2='$pzpr2', pzvd2='$pzvd2', ".
 " pzks3='$pzks3', pzpr3='$pzpr3', pzvd3='$pzvd3', osob='$osob' ".
 " WHERE oc = $cislo_oc";
                     }
@@ -819,6 +821,19 @@ $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD r79 DECIMAL(10,2) DEFAULT
 $vysledek = mysql_query("$sql");
 }
 
+//zmeny pre rok 2015
+$sql = "SELECT dic FROM F".$kli_vxcf."_mzdpriznanie_foa";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD new2015 DECIMAL(2,0) NOT NULL AFTER r78";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD zslu DECIMAL(2,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD fdic DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+}
+
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_mzdpriznanie_foa";
 $vytvor = mysql_query("$vsql");
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_mzdpriznanie_foa";
@@ -1091,6 +1106,12 @@ $sqldok = mysql_query("$sql");
 //nacitaj udaje pre upravu
 if ( $copern == 20 )
      {
+$sqlfiru = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_oc ";
+$fir_vysledoku = mysql_query($sqlfiru);
+$fir_riadoku=mysql_fetch_object($fir_vysledoku);
+$frdc = $fir_riadoku->rdc;
+$frdk = $fir_riadoku->rdk;
+
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_foa".
 " WHERE oc = $cislo_oc AND konx1 = 0 ORDER BY oc";
 $fir_vysledok = mysql_query($sqlfir);
@@ -1103,6 +1124,8 @@ $dtitl = $fir_riadok->dtitl;
 $dtitz = $fir_riadok->dtitz;
 $rdc = $fir_riadok->rdc;
 $rdk = $fir_riadok->rdk;
+$fdic = 1*$fir_riadok->fdic;
+if( $fdic == 0 ) { $fdic=$frdc.$frdk; }
 $dar = $fir_riadok->dar;
 $darsk=SkDatum($dar);
 $druh = $fir_riadok->druh;
@@ -1267,6 +1290,7 @@ $pcdm = $fir_riadok->pcdm;
 $ppsc = $fir_riadok->ppsc;
 $pmes = $fir_riadok->pmes;
 $uoso = $fir_riadok->uoso;
+$zslu = $fir_riadok->zslu;
 $pzks1 = $fir_riadok->pzks1;
 $pzpr1 = $fir_riadok->pzpr1;
 $pzvd1 = $fir_riadok->pzvd1;
@@ -1285,6 +1309,7 @@ $udnr = $fir_riadok->udnr;
 $pril = $fir_riadok->pril;
 $dat = $fir_riadok->dat;
 $datsk=Skdatum($dat);
+if ( $datsk== '00.00.0000' ) { $datsk=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); }
 $zdbo = $fir_riadok->zdbo;
 $zpre = $fir_riadok->zpre;
 $zprp = $fir_riadok->zprp;
@@ -1380,8 +1405,7 @@ if ( $copern == 20 )
   function ObnovUI()
   {
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-   document.formv1.rdc.value = '<?php echo "$rdc";?>';
-   document.formv1.rdk.value = '<?php echo "$rdk";?>';
+   document.formv1.fdic.value = '<?php echo "$fdic";?>';
    document.formv1.dar.value = '<?php echo "$darsk";?>';
 <?php if ( $druh == 0 ) { ?> document.formv1.druh1.checked = 'true'; <?php } ?>
 <?php if ( $druh == 1 ) { ?> document.formv1.druh1.checked = 'true'; <?php } ?>
@@ -1552,6 +1576,7 @@ if ( $copern == 20 )
    document.formv1.ppsc.value = '<?php echo "$ppsc";?>';
    document.formv1.pmes.value = '<?php echo "$pmes";?>';
 <?php if ( $uoso == 1 ) { ?> document.formv1.uoso.checked = "checked"; <?php } ?>
+<?php if ( $zslu == 1 ) { ?> document.formv1.zslu.checked = "checked"; <?php } ?>
    document.formv1.pzks1.value = '<?php echo "$pzks1";?>';
    document.formv1.pzpr1.value = '<?php echo "$pzpr1";?>';
    document.formv1.pzvd1.value = '<?php echo "$pzvd1";?>';
@@ -1750,9 +1775,7 @@ $source="../mzdy/priznanie_foa2015.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
 <img src="../dokumenty/dan_z_prijmov2015/dpfoa2015/dpfoa_v15_str1.jpg"
      alt="tlaèivo Daò z príjmov FO typ A pre rok 2015 1.strana 282kB" class="form-background">
 
-<input type="text" name="rdc" id="rdc" style="width:221px; top:260px; left:51px;"/>
-<input type="text" name="rdk" id="rdk" style="width:82px; top:261px; left:340px;"/>
-<!-- dopyt, da do jedného inputu a aby predpåòalo rodné èíslo z údajov o zamestnancoch -->
+<input type="text" name="fdic" id="fdic" style="width:220px; top:260px; left:51px;"/>
 
 <input type="text" name="dar" id="dar" onkeyup="CiarkaNaBodku(this);"
        style="width:195px; top:318px; left:51px;"/>
@@ -1808,7 +1831,7 @@ $t02=substr($rokp,3,1);
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
 <img src="../dokumenty/dan_z_prijmov2015/dpfoa2015/dpfoa_v15_str2.jpg"
      alt="tlaèivo Daò z príjmov FO typ A pre rok 2015 2.strana 250kB" class="form-background">
-<span class="text-echo" style="top:74px; left:401px;"><?php echo "$hrdc$hrdk"; ?></span> <!-- dopyt, bude asi iná premenná -->
+<span class="text-echo" style="top:74px; left:401px;"><?php echo "$fdic"; ?></span> <!-- dopyt, bude asi iná premenná -->
 
 <!-- III. ODDIEL -->
 <input type="checkbox" name="r27" value="1" style="top:235px; left:695px;"/>
@@ -1984,7 +2007,7 @@ $t02=substr($rokp,3,1);
 <input type="text" name="pcdm" id="pcdm" style="width:175px; top:449px; left:718px;"/>
 <input type="text" name="ppsc" id="ppsc" style="width:106px; top:500px; left:51px;"/>
 <input type="text" name="pmes" id="pmes" style="width:703px; top:500px; left:190px;"/>
-<input type="checkbox" name="" value="1" style="top:543px; left:59px;"/> <!-- dopyt, novinka, please vytvori -->
+<input type="checkbox" name="zslu" value="1" style="top:543px; left:59px;"/> <!-- dopyt, novinka, please vytvori -->
 
 
 <!-- IX. ODDIEL -->
