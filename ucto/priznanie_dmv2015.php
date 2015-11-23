@@ -53,12 +53,6 @@ $xml = 1*$_REQUEST['xml'];
 $rmc=0;
 $rmc1=0;
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
-
 //nastav sadzby 2015
 $sql = "SELECT vz08 FROM F".$kli_vxcf."_sadzby_dmv2015 ";
 $vysledok = mysql_query($sql);
@@ -1952,12 +1946,6 @@ div.input-echo {
 </style>
 
 <script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height-20;
-var sirkawic = screen.width-10;
-
 <?php
 //uprava
   if ( $copern == 20 )
@@ -1970,32 +1958,27 @@ var sirkawic = screen.width-10;
 <?php if ( $druh == 1 ) { ?> document.formv1.druh1.checked = 'true'; <?php } ?>
 <?php if ( $druh == 2 ) { ?> document.formv1.druh2.checked = 'true'; <?php } ?>
 <?php if ( $druh == 3 ) { ?> document.formv1.druh3.checked = 'true'; <?php } ?>
-
 <?php if ( $zahos == 1 ) { ?> document.formv1.zahos.checked = 'checked'; <?php } ?>
    document.formv1.dar.value = '<?php echo "$darsk";?>';
    document.formv1.zoo.value = '<?php echo "$zoosk";?>';
    document.formv1.zod.value = '<?php echo "$zodsk";?>';
    document.formv1.ddp.value = '<?php echo "$ddpsk";?>';
    document.formv1.fod.value = '<?php echo "$fod";?>';
-
    document.formv1.zouli.value = '<?php echo "$zouli";?>';
    document.formv1.zocdm.value = '<?php echo "$zocdm";?>';
    document.formv1.zopsc.value = '<?php echo "$zopsc";?>';
    document.formv1.zomes.value = '<?php echo "$zomes";?>';
    document.formv1.zotel.value = '<?php echo "$zotel";?>';
    document.formv1.zoema.value = '<?php echo "$zoema";?>';
-
-
 <?php                                        } ?>
 
-<?php if ( $strana == 2 OR $strana == 9999 )                           { ?>
+<?php if ( $strana == 2 OR $strana == 9999 ) { ?>
 <?php if ( $druh3 == 1 ) { ?>document.formv1.druh31.checked = 'true'; <?php } ?>
 <?php if ( $druh3 == 2 ) { ?>document.formv1.druh32.checked = 'true'; <?php } ?>
 <?php if ( $druh3 == 3 ) { ?>document.formv1.druh33.checked = 'true'; <?php } ?>
 <?php if ( $druh3 == 4 ) { ?>document.formv1.druh34.checked = 'true'; <?php } ?>
 <?php if ( $druh3 == 6 ) { ?>document.formv1.dedic.checked = 'true'; <?php } ?>
 <?php if ( $druh3 == 7 ) { ?>document.formv1.likvi.checked = 'true'; <?php } ?>
-
    document.formv1.rdc3.value = '<?php echo "$rdc3";?>';
    document.formv1.naz3.value = '<?php echo "$naz3";?>';
    document.formv1.rdk3.value = '<?php echo "$rdk3";?>';
@@ -2012,32 +1995,31 @@ var sirkawic = screen.width-10;
    document.formv1.d3fax.value = '<?php echo "$d3fax";?>';
    document.formv1.xstat3.value = '<?php echo "$xstat3";?>';
    document.formv1.d3titz.value = '<?php echo "$d3titz";?>';
-<?php                                                                   } ?>
+<?php                                        } ?>
 
-<?php if ( $strana == 3 OR $strana == 9999 )                            { ?>
-    urobVzdru();
-    document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
-<?php                                                                   } ?>
+<?php if ( $strana == 3 OR $strana == 9999 ) { ?>
+   urobVzdru();
+   document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
+<?php                                        } ?>
 
-<?php if ( $strana == 4 OR $strana == 9999 )                           { ?>
-    document.formv1.r35.value = '<?php echo "$r35";?>';
-    document.formv1.r36.value = '<?php echo "$r36";?>';
-    document.formv1.r37.value = '<?php echo "$r37";?>';
-    document.formv1.r38.value = '<?php echo "$r38";?>';
-    document.formv1.r39.value = '<?php echo "$r39";?>';
-    document.formv1.r40.value = '<?php echo "$r40";?>';
-    document.formv1.r41.value = '<?php echo "$r41";?>';
-    document.formv1.r42.value = '<?php echo "$r42";?>';
-    document.formv1.r43.value = '<?php echo "$r43";?>';
-    document.formv1.r44.value = '<?php echo "$r44";?>';
-    document.formv1.r45.value = '<?php echo "$r45";?>';
-    document.formv1.dvp.value = '<?php echo "$dvpsk";?>';    
-    document.formv1.dvh.value = '<?php echo "$dvhsk";?>';
+<?php if ( $strana == 4 OR $strana == 9999 ) { ?>
+   document.formv1.r35.value = '<?php echo "$r35";?>';
+   document.formv1.r36.value = '<?php echo "$r36";?>';
+   document.formv1.r37.value = '<?php echo "$r37";?>';
+   document.formv1.r38.value = '<?php echo "$r38";?>';
+   document.formv1.r39.value = '<?php echo "$r39";?>';
+   document.formv1.r40.value = '<?php echo "$r40";?>';
+   document.formv1.r41.value = '<?php echo "$r41";?>';
+   document.formv1.r42.value = '<?php echo "$r42";?>';
+   document.formv1.r43.value = '<?php echo "$r43";?>';
+   document.formv1.r44.value = '<?php echo "$r44";?>';
+   document.formv1.r45.value = '<?php echo "$r45";?>';
+   document.formv1.dvp.value = '<?php echo "$dvpsk";?>';
+   document.formv1.dvh.value = '<?php echo "$dvhsk";?>';
 <?php if ( $zvra == 1 ) { ?> document.formv1.zvra.checked = "checked"; <?php } ?>
 <?php if ( $post == 1 ) { ?> document.formv1.post.checked = "checked"; <?php } ?>
 <?php if ( $ucet == 1 ) { ?> document.formv1.ucet.checked = "checked"; <?php } ?>
-
-<?php                                                                   } ?>    
+<?php                                        } ?>
    }
 <?php
 //koniec uprava
@@ -2050,26 +2032,19 @@ var sirkawic = screen.width-10;
   }
 <?php                      } ?>
 
-
-
-
 //Z ciarky na bodku
   function CiarkaNaBodku(Vstup)
   {
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-  function ZnovuPotvrdenie()
-  {
-   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
   function TlacDMV()
   {
    window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function NacitajMinRok()
   {
-   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?cislo_oc=<?php echo $cislo_oc;?>&copern=3155&drupoh=1&page=1', '_self','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes')
+   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?cislo_oc=<?php echo $cislo_oc;?>&copern=3155&drupoh=1&page=1', '_self', 'width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes')
   }
   function PoucVyplnenie()
   {
@@ -2079,7 +2054,7 @@ var sirkawic = screen.width-10;
   {
    window.open('../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_sadzby.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
-//bud alebo v checkbox
+//bud alebo checkbox v ii.oddiele
   function klik31()
   {
    document.formv1.druh32.checked = false;
@@ -2226,31 +2201,31 @@ var sirkawic = screen.width-10;
    document.formv1.ucet.checked = false;
   }
 
-
   function vypocetMes()
   {
-   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=346&cislo_cpl=<?php echo $cislo_cpl;?>&uprav=0&pocetdni=1', '_self' );
+   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=346&cislo_cpl=<?php echo $cislo_cpl;?>&uprav=0&pocetdni=1', '_self');
   }
   function vypocitajDan()
   {
-   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=346&cislo_cpl=<?php echo $cislo_cpl;?>&uprav=0&vypocitajdan=1', '_self' );
+   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=346&cislo_cpl=<?php echo $cislo_cpl;?>&uprav=0&vypocitajdan=1', '_self');
   }
   function vypocitajPredpoDan()
   {
-   window.open('priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&strana=4&predpoklad=1', '_self' );
+   window.open('priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&strana=4&predpoklad=1', '_self');
   }
   function dajSadzbu()
   {
-   window.open('priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&cislo_cpl=<?php echo $cislo_cpl;?>&dajsadzbu=1', '_self' );
+   window.open('priznanie_dmv<?php echo $rokdmv; ?>.php?copern=20&cislo_cpl=<?php echo $cislo_cpl;?>&dajsadzbu=1', '_self');
   }
   function dajVsetky()
   {
-   window.open('priznanie_dmv<?php echo $rokdmv; ?>.php?copern=2020&cislo_cpl=0&dajsadzbu=1&dajvsetky=1', '_self' );
+   window.open('priznanie_dmv<?php echo $rokdmv; ?>.php?copern=2020&cislo_cpl=0&dajsadzbu=1&dajvsetky=1', '_self');
   }
   function VytvorOznamZanik(cpl)
   {
    var cislo_cpl = cpl;
-   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?cislo_oc=<?php echo $cislo_oc;?>&copern=70&drupoh=1&page=1&cislo_cpl='+ cislo_cpl + '&ukoncenie=1', '_blank','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes' )
+   window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?cislo_oc=<?php echo $cislo_oc;?>&copern=70&drupoh=1&page=1&cislo_cpl='+ cislo_cpl + '&ukoncenie=1',
+ '_blank','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes' )
   }
   function UpravVzd(cpl)
   {
@@ -2266,13 +2241,11 @@ var sirkawic = screen.width-10;
   {
    window.open('../ucto/priznanie_dmv<?php echo $rokdmv; ?>.php?copern=336&uprav=0', '_self' )
   }
-
-function DMVdoXML()
+  function DMVdoXML()
   {
    window.open('../ucto/priznaniedmv_xml2015.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
 
 <?php if ( $copern == 20 ) { ?>
   function VyberZhasni(sadzba)
@@ -2574,9 +2547,7 @@ var opt4 = document.createElement('option');
 opt4.appendChild( document.createTextNode('O4 - s prÌpustnou celkovou hmotnosùou presahuj˙cou 10000 kg') );
 opt4.value = 'O4';
 mySelect.appendChild(opt4);
-
 }
-
   }
 </script>
 <!-- 05 riadok -->
@@ -2873,7 +2844,7 @@ mySelect.appendChild(opt4);
 </div> <!-- .sadzby-area -->
 
 <div id="robot" class="sadzby-dane-box-locate"
- style="position:absolute; padding: 5px; top:580px; left:20px; background-color:white;"><?php echo "mesiac od da1 jan.".$mesad2.". - dec.".$mesad1."."; ?></div>
+ style="position:absolute; padding: 5px; top:580px; left:20px; background-color:white;"><?php echo "mesiac od da1 jan.".$mesad2.". - dec.".$mesad1."."; ?></div> <!-- dopyt, nezabudn˙ù schovaù -->
 
 
 <!-- 13 riadok -->
@@ -2957,12 +2928,11 @@ mySelect.appendChild(opt4);
 <label for="vzzn" class="added-label" style="top:1270px; left:220px;">ZnaËka vozidla</label>
 <input type="text" name="vzzn" id="vzzn" value="<?php echo $vzzn; ?>"
        style="width:360px; top:1263px; left:320px;"/>
-
-<script type="text/javascript"> //dopyt, nemÙûe Ìsù do .js Ëasti?
-  document.formv1.vzkat.value = '<?php echo "$vzkat";?>';
-  document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
-  document.formv1.dnvnk.value = '<?php echo "$dnvnk";?>';
-  document.formv1.oslbd.value = '<?php echo "$oslbd";?>';
+<script type="text/javascript">
+  document.formv1.vzkat.value = '<?php echo "$vzkat"; ?>';
+  document.formv1.vzdru.value = '<?php echo "$vzdru"; ?>';
+  document.formv1.dnvnk.value = '<?php echo "$dnvnk"; ?>';
+  document.formv1.oslbd.value = '<?php echo "$oslbd"; ?>';
 <?php if ( $r12doniz == 1 ) { ?> document.formv1.r12doniz.checked = "checked"; <?php } ?>
 <?php if ( $r13s1zni25 == 1 ) { ?> document.formv1.r13s1zni25.checked = "checked"; <?php } ?>
 <?php if ( $r13s1zni20 == 1 ) { ?> document.formv1.r13s1zni20.checked = "checked"; <?php } ?>
@@ -2994,7 +2964,8 @@ mySelect.appendChild(opt4);
 <input type="text" name="r38" id="r38" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:269px; left:503px;"/>
 <input type="text" name="r39" id="r39" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:309px; left:503px;"/>
 <input type="text" name="r40" id="r40" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:349px; left:503px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocitajPredpoDan();" title="VypoËÌtaù predpokladan˙ daÚ" class="btn-row-tool" style="top:350px; left:763px;">
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocitajPredpoDan();"
+     title="VypoËÌtaù predpokladan˙ daÚ" class="btn-row-tool" style="top:350px; left:763px;">
 <input type="text" name="r41" id="r41" style="width:82px; top:389px; left:593px;"/>
 
 <!-- V. ODDIEL -->
@@ -3021,7 +2992,6 @@ mySelect.appendChild(opt4);
 
 
 <?php if ( $strana == 5 OR $strana == 9999 ) {
-
 //VYPIS ZOZNAMU VOZIDIEL
 $sluztt = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE oc = 1 ORDER BY vzspz ";
 //echo $sluztt;
@@ -3059,7 +3029,8 @@ $rsluz=mysql_fetch_object($sluz);
    <td align="center" ><?php echo $rsluz->vzkat;?></td>
    <td align="center"><?php echo SkDatum($rsluz->datz);?></td>
    <td align="center">
-    <img src="../obr/ikony/list_blue_icon.png" onclick="VytvorOznamZanik(<?php echo $rsluz->cpl;?>);" title="Vytvoriù ozn·menie o z·niku daÚovej povinnosti">
+    <img src="../obr/ikony/list_blue_icon.png" onclick="VytvorOznamZanik(<?php echo $rsluz->cpl;?>);"
+         title="Vytvoriù ozn·menie o z·niku daÚovej povinnosti">
     <?php echo SkDatum($rsluz->datk);?>
    </td>
    <td align="right"><?php echo $rsluz->r21;?></td>
@@ -3083,7 +3054,9 @@ $i=$i+1;
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">vozidl·</a>
-<?php if ( $strana != 5 ) { ?> <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave"> <?php } ?>
+<?php if ( $strana != 5 ) { ?>
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+<?php                     } ?>
 </div>
 
 </FORM>
