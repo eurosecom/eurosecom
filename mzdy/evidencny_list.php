@@ -1509,7 +1509,13 @@ $oprav = $fir_riadok->oprav;
 $predo = $fir_riadok->predo;
 $str2 = 1*$fir_riadok->str2;
 $datum = SkDatum($fir_riadok->datum);
-if ( $datum == '00.00.0000' ) { $datum=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); }
+if ( $datum == '00.00.0000' ) 
+{ 
+$datum=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+$datumsql=SqlDatum($datum);
+$sqlx = "UPDATE F$kli_vxcf"."_mzdevidencny SET datum='$datumsql' ";
+$vysledekx = mysql_query("$sqlx");
+}
 
 mysql_free_result($fir_vysledok);
     }
@@ -1723,6 +1729,7 @@ var sirkawic = screen.width-10;
 <?php if ( $oprav == 1 ) { ?> document.formv1.oprav.checked = "checked"; <?php } ?>
 <?php if ( $str2 == 1 ) { ?> document.formv1.str2.checked = "checked"; <?php } ?>
    document.formv1.predo.value = '<?php echo "$predo";?>';
+   document.formv1.pozn.value = '<?php echo "$pozn";?>';
 
    document.forms.formv1.kr01.focus();
    document.forms.formv1.kr01.select();
