@@ -287,7 +287,8 @@ if ( $rokfob < 2011 ) { $rokfob="";  }
 if ( $rokfob == 2011 ) { $rokfob="2011";  }
 if ( $rokfob == 2012 ) { $rokfob="2012";  }
 if ( $rokfob == 2013 ) { $rokfob="2013";  }
-if ( $rokfob >= 2014 ) { $rokfob="2014";  }
+if ( $rokfob == 2014 ) { $rokfob="2014";  }
+if ( $rokfob >= 2015 ) { $rokfob="2015";  }
 if ( $rokfob >= 2011 ) { $skriptfob="../ucto/priznanie_fob"; }
 ?>
   function TlacFOB()
