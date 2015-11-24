@@ -1761,7 +1761,15 @@ $dvp = $fir_riadok->dvp;
 $dvpsk=SkDatum($dvp);
 $dvh = $fir_riadok->dvh;
 $dvhsk=SkDatum($dvh);
-if ( $dvhsk == '00.00.0000' ) { $dvhsk=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); }
+if ( $dvhsk == '00.00.0000' ) 
+{ 
+$dvhsk=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+ 
+$dvhsql=SqlDatum($dvhsk);
+$sqlx = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET dvh='$dvhsql' WHERE oc = 9999 ";
+$vysledekx = mysql_query("$sqlx");
+}
+
 $pozn = $fir_riadok->pozn;
                     }
 mysql_free_result($fir_vysledok);
