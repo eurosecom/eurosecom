@@ -31,7 +31,7 @@ $kli_vrok=$pole[1];
 $citfir = include("../cis/citaj_fir.php");
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=1;
+$rmc=0;
 $rmc1=0;
 
 
@@ -734,13 +734,11 @@ $pdf=new FPDF("P","mm", $velkost_strany );
 $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 
-
 //vytlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdevidencny".
 " LEFT JOIN F$kli_vxcf"."_mzdkun".
 " ON F$kli_vxcf"."_mzdevidencny.oc=F$kli_vxcf"."_mzdkun.oc".
 " WHERE F$kli_vxcf"."_mzdevidencny.oc = $cislo_oc AND konx = 1 ORDER BY konx,prie,meno";
-
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -759,8 +757,6 @@ $hlavicka=mysql_fetch_object($sql);
   $Cozam_np = $pole[0];
   $Dozam_np = substr($pole[1],0,1);
 
-$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); //dopyt, m· to zmysel, keÔ premenn· nie je pouûit·
-
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
@@ -768,14 +764,9 @@ $pdf->SetTopMargin(10);
 
 if ( File_Exists('../dokumenty/mzdy_potvrdenia/evidencny_list/evidencny_list.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/mzdy_potvrdenia/evidencny_list/evidencny_list.jpg',5,6,198,285);
+$pdf->Image('../dokumenty/mzdy_potvrdenia/evidencny_list/evidencny_list.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
-
-$obdobie=$kli_vrok; //dopyt, premenn· nie je pouûit·, m· zmysel
-
-$r01=$hlavicka->r01;
-if ( $hlavicka->r01 == 0 ) $r01=""; //dopyt, Ëo je toto
 
 //vyplnene strojom
 $pdf->Cell(190,23," ","$rmc1",1,"L");
@@ -783,42 +774,41 @@ $str2=1*$hlavicka->str2;
 if ( $_SERVER['SERVER_NAME'] == "www.zerotax.sk" ) { $strojom="X"; }
 if ( $str2 == 1 ) { $strojom="X"; }
 if ( $str2 != 1 ) { $strojom=" "; }
-$pdf->Cell(48,3," ","$rmc1",0,"L");$pdf->Cell(3,3,"$strojom","$rmc",0,"C");
+$pdf->Cell(48,3," ","$rmc1",0,"L");$pdf->Cell(3,4,"$strojom","$rmc",0,"C");
 
 //opravny
 $opravx="";
 if ( $hlavicka->oprav == 1 ) { $opravx="X"; }
-$pdf->Cell(14,3," ","$rmc1",0,"L");$pdf->Cell(4,3,"$opravx","$rmc",1,"C");
+$pdf->Cell(14,3," ","$rmc1",0,"L");$pdf->Cell(4,4,"$opravx","$rmc",1,"C");
 
-//I. POISTENEC
+//I.POISTENEC
 //priezvisko, meno, titul
-$pdf->Cell(190,9," ","$rmc1",1,"L");
-$pdf->Cell(93,6,"$hlavicka->prie","$rmc",0,"L");$pdf->Cell(2,6," ","$rmc1",0,"L");
-$pdf->Cell(65,6,"$hlavicka->meno","$rmc",0,"L");$pdf->Cell(2,6," ","$rmc1",0,"L");
-$pdf->Cell(30,6,"$hlavicka->titl","$rmc",1,"L");
+$pdf->Cell(190,8," ","$rmc1",1,"L");
+$pdf->Cell(92,6,"$hlavicka->prie","$rmc",0,"L");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(63,6,"$hlavicka->meno","$rmc",0,"L");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(31,6,"$hlavicka->titl","$rmc",1,"L");
 //rod.,predo priezviska
-$pdf->Cell(190,2," ","$rmc1",1,"L");
-$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(85,6,"$hlavicka->rodn","$rmc",0,"L");
-$pdf->Cell(10,6," ","$rmc1",0,"L");$pdf->Cell(30,6,"$hlavicka->predo","$rmc",1,"L");
-//miesto narodenia
-$pdf->Cell(190,2," ","$rmc1",1,"L");
-$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(130,6,"$hlavicka->mnr","$rmc",0,"L");
-//datum narodenia
+$pdf->Cell(190,3," ","$rmc1",1,"L");
+$pdf->Cell(92,5,"$hlavicka->rodn","$rmc",0,"L");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(94,5,"$hlavicka->predo","$rmc",1,"L");
+//narodenia
+$pdf->Cell(190,3," ","$rmc1",1,"L");
+$pdf->Cell(126,6,"$hlavicka->mnr","$rmc",0,"L");$pdf->Cell(3,6," ","$rmc1",0,"L");
 $dar=SkDatum($hlavicka->dar);
 $pole = explode(".", $dar);
 $dar1=$pole[0];
 $dar2=$pole[1];
 $dar3=$pole[2];
-$pdf->Cell(30,6,"$dar1$dar2$dar3","$rmc",0,"L");$pdf->Cell(30,6,"$hlavicka->rdc$hlavicka->rdk","$rmc",1,"L");
+$pdf->Cell(28,6,"$dar1$dar2$dar3","$rmc",0,"L");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(32,6,"$hlavicka->rdc$hlavicka->rdk","$rmc",1,"L");
 //ulica a cislo
 $pdf->Cell(190,7," ","$rmc1",1,"L");
-$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(130,6,"$hlavicka->zuli","$rmc",0,"L");
-$pdf->Cell(30,6,"$hlavicka->zcdm","$rmc",0,"L");$pdf->Cell(30,6," ","$rmc1",1,"L");
+$pdf->Cell(89,6,"$hlavicka->zuli","$rmc",0,"L");$pdf->Cell(40,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$hlavicka->zcdm","$rmc",0,"L");$pdf->Cell(30,6," ","$rmc1",1,"L");
 //obec a psc
 $pdf->Cell(190,2," ","$rmc1",1,"L");
-$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(130,6,"$hlavicka->zmes","$rmc",0,"L");
-$pdf->Cell(30,6,"$hlavicka->zpsc","$rmc",0,"L");$pdf->Cell(30,6," ","$rmc1",1,"L");
-
+$pdf->Cell(126,6,"$hlavicka->zmes","$rmc",0,"L");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$hlavicka->zpsc","$rmc",1,"L");
 //nastup a vystup
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $dan=SkDatum($hlavicka->dan);
@@ -826,7 +816,7 @@ $pole = explode(".", $dan);
 $dan1=$pole[0];
 $dan2=$pole[1];
 $dan3=$pole[2];
-$pdf->Cell(99,6," ","$rmc1",0,"L");$pdf->Cell(31,6,"$dan1$dan2$dan3","$rmc",0,"L");
+$pdf->Cell(98,6," ","$rmc1",0,"L");$pdf->Cell(28,6,"$dan1$dan2$dan3","$rmc",0,"C");
 //
 $dav=SkDatum($hlavicka->dav);
 $pole = explode(".", $dav);
@@ -835,24 +825,21 @@ $dav2=$pole[1];
 $dav3=$pole[2];
 $davx=$dav1.$dav2.$dav3;
 if ( $davx == 00000000 ) $davx="";
-$pdf->Cell(30,6,"$davx","$rmc",1,"L");
+$pdf->Cell(3,6," ","$rmc1",0,"L");$pdf->Cell(28,6,"$davx","$rmc",1,"C");
 
-//obdobia evid.listu
+//II.OBDOBIA
 if ( $hlavicka->kr01 > 0 )
 {
-$pdf->SetY(110);
 $vz01=$hlavicka->vz01;
 //if( $hlavicka->vz01 == 0 ) $vz01="";
 $vv01=$hlavicka->vv01;
 if ( $hlavicka->vv01 == 0 ) $vv01="";
 $kd01=$hlavicka->kd01;
 if ( $hlavicka->kd01 == 0 ) $kd01="";
-
 $dp01=SkDatum($hlavicka->dp01);
 if ( $dp01 == "00.00.0000" ) $dp01="";
 $dk01=SkDatum($hlavicka->dk01);
 if ( $dk01 == "00.00.0000" ) $dk01="";
-
 $pole = explode(".", $vz01);
 $cel=$pole[0];
 $des=$pole[1];
@@ -861,566 +848,512 @@ $pole = explode(".", $vv01);
 $cel=$pole[0];
 $des=$pole[1];
 if ( $hlavicka->kr01 < 2009 ) $vv01=$cel;
-
 if ( $hlavicka->kr01 >= 2009 ) { $vz01=str_replace(".",",",$vz01); $vv01=str_replace(".",",",$vv01); }
-
 $pole = explode(".", $dp01);
 $dnip=$pole[0];
 $mesp=$pole[1];
 $pole = explode(".", $dk01);
 $dnik=$pole[0];
 $mesk=$pole[1];
-
-$pdf->Cell(90,2," ","$rmc1",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr01","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"L");
-$pdf->Cell(10,6,"$hlavicka->zp01","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"L");
+$pdf->SetY(113);
+$pdf->Cell(13,6,"$hlavicka->kr01","$rmc",0,"C");$pdf->Cell(7,6," ","$rmc1",0,"L");
+$pdf->Cell(16,6,"$hlavicka->zp01","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
 $pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
 $pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
 $pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
-$pdf->Cell(10,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(11,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
 $pdf->Cell(23,6,"$vz01","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
-$pdf->Cell(23,6,"$vv01","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
-$pdf->Cell(18,6,"$kd01","$rmc",0,"R");$pdf->Cell(30,6," ","$rmc1",1,"L");
-//dopyt, najprv spraviù 1.riadok a podæa toho ostatnÈ
+$pdf->Cell(22,6,"$vv01","$rmc",0,"R");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(17,6,"$kd01","$rmc",1,"R");
 }
 
 if ( $hlavicka->kr02 > 0 )
 {
-$pdf->SetY(119);
 $vz02=$hlavicka->vz02;
 //if( $hlavicka->vz02 == 0 ) $vz02="";
 $vv02=$hlavicka->vv02;
-if( $hlavicka->vv02 == 0 ) $vv02="";
+if ( $hlavicka->vv02 == 0 ) $vv02="";
 $kd02=$hlavicka->kd02;
-if( $hlavicka->kd02 == 0 ) $kd02="";
-
+if ( $hlavicka->kd02 == 0 ) $kd02="";
 $dp02=SkDatum($hlavicka->dp02);
-if( $dp02 == "00.00.0000" ) $dp02="";
+if ( $dp02 == "00.00.0000" ) $dp02="";
 $dk02=SkDatum($hlavicka->dk02);
-if( $dk02 == "00.00.0000" ) $dk02="";
-
+if ( $dk02 == "00.00.0000" ) $dk02="";
 $pole = explode(".", $vz02);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr02 < 2009 ) $vz02=$cel;
+if ( $hlavicka->kr02 < 2009 ) $vz02=$cel;
 $pole = explode(".", $vv02);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr02 < 2009 ) $vv02=$cel;
-
-if( $hlavicka->kr02 >= 2009 ) { $vz02=str_replace(".",",",$vz02); $vv02=str_replace(".",",",$vv02); }
-
+if ( $hlavicka->kr02 < 2009 ) $vv02=$cel;
+if ( $hlavicka->kr02 >= 2009 ) { $vz02=str_replace(".",",",$vz02); $vv02=str_replace(".",",",$vv02); }
 $pole = explode(".", $dp02);
 $dnip=$pole[0];
 $mesp=$pole[1];
 $pole = explode(".", $dk02);
 $dnik=$pole[0];
 $mesk=$pole[1];
-
-$pdf->Cell(90,2,"                          ","0",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr02","0",0,"L");$pdf->Cell(10,6,"$hlavicka->zp02","0",0,"L");
-$pdf->Cell(8,6," ","0",0,"L");$pdf->Cell(10,6,"$dnip","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesp","0",0,"C");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$dnik","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesk","0",0,"C");
-
-$pdf->Cell(4,6," ","0",0,"L");$pdf->Cell(23,6,"$vz02","0",0,"R");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(23,6,"$vv02","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd02","0",0,"R");
-$pdf->Cell(30,6," ","0",1,"L");
+$pdf->SetY(121);
+$pdf->Cell(13,6,"$hlavicka->kr02","$rmc",0,"C");$pdf->Cell(7,6," ","$rmc1",0,"L");
+$pdf->Cell(16,6,"$hlavicka->zp02","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(11,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vz02","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$vv02","$rmc",0,"R");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(17,6,"$kd02","$rmc",1,"R");
 }
 
-if( $hlavicka->kr03 > 0 )
+if ( $hlavicka->kr03 > 0 )
 {
-$pdf->SetY(127);
 $vz03=$hlavicka->vz03;
 //if( $hlavicka->vz03 == 0 ) $vz03="";
 $vv03=$hlavicka->vv03;
-if( $hlavicka->vv03 == 0 ) $vv03="";
+if ( $hlavicka->vv03 == 0 ) $vv03="";
 $kd03=$hlavicka->kd03;
-if( $hlavicka->kd03 == 0 ) $kd03="";
-
+if ( $hlavicka->kd03 == 0 ) $kd03="";
 $dp03=SkDatum($hlavicka->dp03);
-if( $dp03 == "00.00.0000" ) $dp03="";
+if ( $dp03 == "00.00.0000" ) $dp03="";
 $dk03=SkDatum($hlavicka->dk03);
-if( $dk03 == "00.00.0000" ) $dk03="";
-
+if ( $dk03 == "00.00.0000" ) $dk03="";
 $pole = explode(".", $vz03);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr03 < 2009 ) $vz03=$cel;
+if ( $hlavicka->kr03 < 2009 ) $vz03=$cel;
 $pole = explode(".", $vv03);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr03 < 2009 ) $vv03=$cel;
-
-if( $hlavicka->kr03 >= 2009 ) { $vz03=str_replace(".",",",$vz03); $vv03=str_replace(".",",",$vv03); }
-
+if ( $hlavicka->kr03 < 2009 ) $vv03=$cel;
+if ( $hlavicka->kr03 >= 2009 ) { $vz03=str_replace(".",",",$vz03); $vv03=str_replace(".",",",$vv03); }
 $pole = explode(".", $dp03);
 $dnip=$pole[0];
 $mesp=$pole[1];
 $pole = explode(".", $dk03);
 $dnik=$pole[0];
 $mesk=$pole[1];
-
-$pdf->Cell(90,2,"                          ","0",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr03","0",0,"L");$pdf->Cell(10,6,"$hlavicka->zp03","0",0,"L");
-$pdf->Cell(8,6," ","0",0,"L");$pdf->Cell(10,6,"$dnip","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesp","0",0,"C");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$dnik","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesk","0",0,"C");
-
-$pdf->Cell(4,6," ","0",0,"L");$pdf->Cell(23,6,"$vz03","0",0,"R");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(23,6,"$vv03","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd03","0",0,"R");
-$pdf->Cell(30,6," ","0",1,"L");
+$pdf->SetY(130);
+$pdf->Cell(13,6,"$hlavicka->kr03","$rmc",0,"C");$pdf->Cell(7,6," ","$rmc1",0,"L");
+$pdf->Cell(16,6,"$hlavicka->zp03","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(11,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vz03","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$vv03","$rmc",0,"R");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(17,6,"$kd03","$rmc",1,"R");
 }
 
-if( $hlavicka->kr04 > 0 )
+if ( $hlavicka->kr04 > 0 )
 {
-$pdf->SetY(136);
 $vz04=$hlavicka->vz04;
 //if( $hlavicka->vz04 == 0 ) $vz04="";
 $vv04=$hlavicka->vv04;
-if( $hlavicka->vv04 == 0 ) $vv04="";
+if ( $hlavicka->vv04 == 0 ) $vv04="";
 $kd04=$hlavicka->kd04;
-if( $hlavicka->kd04 == 0 ) $kd04="";
-
+if ( $hlavicka->kd04 == 0 ) $kd04="";
 $dp04=SkDatum($hlavicka->dp04);
-if( $dp04 == "00.00.0000" ) $dp04="";
+if ( $dp04 == "00.00.0000" ) $dp04="";
 $dk04=SkDatum($hlavicka->dk04);
-if( $dk04 == "00.00.0000" ) $dk04="";
-
+if ( $dk04 == "00.00.0000" ) $dk04="";
 $pole = explode(".", $vz04);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr04 < 2009 ) $vz04=$cel;
+if ( $hlavicka->kr04 < 2009 ) $vz04=$cel;
 $pole = explode(".", $vv04);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr04 < 2009 ) $vv04=$cel;
-
-if( $hlavicka->kr04 >= 2009 ) { $vz04=str_replace(".",",",$vz04); $vv04=str_replace(".",",",$vv04); }
-
+if ( $hlavicka->kr04 < 2009 ) $vv04=$cel;
+if ( $hlavicka->kr04 >= 2009 ) { $vz04=str_replace(".",",",$vz04); $vv04=str_replace(".",",",$vv04); }
 $pole = explode(".", $dp04);
 $dnip=$pole[0];
 $mesp=$pole[1];
 $pole = explode(".", $dk04);
 $dnik=$pole[0];
 $mesk=$pole[1];
-
-$pdf->Cell(90,2,"                          ","0",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr04","0",0,"L");$pdf->Cell(10,6,"$hlavicka->zp04","0",0,"L");
-$pdf->Cell(8,6," ","0",0,"L");$pdf->Cell(10,6,"$dnip","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesp","0",0,"C");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$dnik","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesk","0",0,"C");
-
-$pdf->Cell(4,6," ","0",0,"L");$pdf->Cell(23,6,"$vz04","0",0,"R");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(23,6,"$vv04","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd04","0",0,"R");
-$pdf->Cell(30,6," ","0",1,"L");
+$pdf->SetY(138);
+$pdf->Cell(13,6,"$hlavicka->kr04","$rmc",0,"C");$pdf->Cell(7,6," ","$rmc1",0,"L");
+$pdf->Cell(16,6,"$hlavicka->zp04","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(11,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vz04","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$vv04","$rmc",0,"R");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(17,6,"$kd04","$rmc",1,"R");
 }
 
-
-if( $hlavicka->kr05 > 0 )
+if ( $hlavicka->kr05 > 0 )
 {
-$pdf->SetY(145);
 $vz05=$hlavicka->vz05;
 //if( $hlavicka->vz05 == 0 ) $vz05="";
 $vv05=$hlavicka->vv05;
-if( $hlavicka->vv05 == 0 ) $vv05="";
+if ( $hlavicka->vv05 == 0 ) $vv05="";
 $kd05=$hlavicka->kd05;
-if( $hlavicka->kd05 == 0 ) $kd05="";
-
+if ( $hlavicka->kd05 == 0 ) $kd05="";
 $dp05=SkDatum($hlavicka->dp05);
-if( $dp05 == "00.00.0000" ) $dp05="";
+if ( $dp05 == "00.00.0000" ) $dp05="";
 $dk05=SkDatum($hlavicka->dk05);
-if( $dk05 == "00.00.0000" ) $dk05="";
-
+if ( $dk05 == "00.00.0000" ) $dk05="";
 $pole = explode(".", $vz05);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr05 < 2009 ) $vz05=$cel;
+if ( $hlavicka->kr05 < 2009 ) $vz05=$cel;
 $pole = explode(".", $vv05);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr05 < 2009 ) $vv05=$cel;
-
-if( $hlavicka->kr05 >= 2009 ) { $vz05=str_replace(".",",",$vz05); $vv05=str_replace(".",",",$vv05); }
-
+if ( $hlavicka->kr05 < 2009 ) $vv05=$cel;
+if ( $hlavicka->kr05 >= 2009 ) { $vz05=str_replace(".",",",$vz05); $vv05=str_replace(".",",",$vv05); }
 $pole = explode(".", $dp05);
 $dnip=$pole[0];
 $mesp=$pole[1];
 $pole = explode(".", $dk05);
 $dnik=$pole[0];
 $mesk=$pole[1];
-
-$pdf->Cell(90,2,"                          ","0",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr05","0",0,"L");$pdf->Cell(10,6,"$hlavicka->zp05","0",0,"L");
-$pdf->Cell(8,6," ","0",0,"L");$pdf->Cell(10,6,"$dnip","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesp","0",0,"C");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$dnik","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesk","0",0,"C");
-
-$pdf->Cell(4,6," ","0",0,"L");$pdf->Cell(23,6,"$vz05","0",0,"R");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(23,6,"$vv05","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd05","0",0,"R");
-$pdf->Cell(30,6," ","0",1,"L");
+$pdf->SetY(147);
+$pdf->Cell(13,6,"$hlavicka->kr05","$rmc",0,"C");$pdf->Cell(7,6," ","$rmc1",0,"L");
+$pdf->Cell(16,6,"$hlavicka->zp05","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(11,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vz05","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$vv05","$rmc",0,"R");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(17,6,"$kd05","$rmc",1,"R");
 }
 
-if( $hlavicka->kr06 > 0 )
+if ( $hlavicka->kr06 > 0 )
 {
-$pdf->SetY(153);
 $vz06=$hlavicka->vz06;
 //if( $hlavicka->vz06 == 0 ) $vz06="";
 $vv06=$hlavicka->vv06;
-if( $hlavicka->vv06 == 0 ) $vv06="";
+if ( $hlavicka->vv06 == 0 ) $vv06="";
 $kd06=$hlavicka->kd06;
-if( $hlavicka->kd06 == 0 ) $kd06="";
-
+if ( $hlavicka->kd06 == 0 ) $kd06="";
 $dp06=SkDatum($hlavicka->dp06);
-if( $dp06 == "00.00.0000" ) $dp06="";
+if ( $dp06 == "00.00.0000" ) $dp06="";
 $dk06=SkDatum($hlavicka->dk06);
-if( $dk06 == "00.00.0000" ) $dk06="";
-
+if ( $dk06 == "00.00.0000" ) $dk06="";
 $pole = explode(".", $vz06);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr06 < 2009 ) $vz06=$cel;
+if ( $hlavicka->kr06 < 2009 ) $vz06=$cel;
 $pole = explode(".", $vv06);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr06 < 2009 ) $vv06=$cel;
-
-if( $hlavicka->kr06 >= 2009 ) { $vz06=str_replace(".",",",$vz06); $vv06=str_replace(".",",",$vv06); }
-
+if ( $hlavicka->kr06 < 2009 ) $vv06=$cel;
+if ( $hlavicka->kr06 >= 2009 ) { $vz06=str_replace(".",",",$vz06); $vv06=str_replace(".",",",$vv06); }
 $pole = explode(".", $dp06);
 $dnip=$pole[0];
 $mesp=$pole[1];
 $pole = explode(".", $dk06);
 $dnik=$pole[0];
 $mesk=$pole[1];
-
-$pdf->Cell(90,2,"                          ","0",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr06","0",0,"L");$pdf->Cell(10,6,"$hlavicka->zp06","0",0,"L");
-$pdf->Cell(8,6," ","0",0,"L");$pdf->Cell(10,6,"$dnip","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesp","0",0,"C");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$dnik","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesk","0",0,"C");
-
-$pdf->Cell(4,6," ","0",0,"L");$pdf->Cell(23,6,"$vz06","0",0,"R");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(23,6,"$vv06","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd06","0",0,"R");
-$pdf->Cell(30,6," ","0",1,"L");
+$pdf->SetY(155);
+$pdf->Cell(13,6,"$hlavicka->kr06","$rmc",0,"C");$pdf->Cell(7,6," ","$rmc1",0,"L");
+$pdf->Cell(16,6,"$hlavicka->zp06","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(11,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vz06","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$vv06","$rmc",0,"R");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(17,6,"$kd06","$rmc",1,"R");
 }
 
-if( $hlavicka->kr07 > 0 )
+if ( $hlavicka->kr07 > 0 )
 {
-$pdf->SetY(161);
 $vz07=$hlavicka->vz07;
 //if( $hlavicka->vz07 == 0 ) $vz07="";
 $vv07=$hlavicka->vv07;
-if( $hlavicka->vv07 == 0 ) $vv07="";
+if ( $hlavicka->vv07 == 0 ) $vv07="";
 $kd07=$hlavicka->kd07;
-if( $hlavicka->kd07 == 0 ) $kd07="";
-
+if ( $hlavicka->kd07 == 0 ) $kd07="";
 $dp07=SkDatum($hlavicka->dp07);
-if( $dp07 == "00.00.0000" ) $dp07="";
+if ( $dp07 == "00.00.0000" ) $dp07="";
 $dk07=SkDatum($hlavicka->dk07);
-if( $dk07 == "00.00.0000" ) $dk07="";
-
+if ( $dk07 == "00.00.0000" ) $dk07="";
 $pole = explode(".", $vz07);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr07 < 2009 ) $vz07=$cel;
+if ( $hlavicka->kr07 < 2009 ) $vz07=$cel;
 $pole = explode(".", $vv07);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr07 < 2009 ) $vv07=$cel;
-
-if( $hlavicka->kr07 >= 2009 ) { $vz07=str_replace(".",",",$vz07); $vv07=str_replace(".",",",$vv07); }
-
+if ( $hlavicka->kr07 < 2009 ) $vv07=$cel;
+if ( $hlavicka->kr07 >= 2009 ) { $vz07=str_replace(".",",",$vz07); $vv07=str_replace(".",",",$vv07); }
 $pole = explode(".", $dp07);
 $dnip=$pole[0];
 $mesp=$pole[1];
 $pole = explode(".", $dk07);
 $dnik=$pole[0];
 $mesk=$pole[1];
-
-$pdf->Cell(90,2,"                          ","0",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr07","0",0,"L");$pdf->Cell(10,6,"$hlavicka->zp07","0",0,"L");
-$pdf->Cell(8,6," ","0",0,"L");$pdf->Cell(10,6,"$dnip","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesp","0",0,"C");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$dnik","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesk","0",0,"C");
-
-$pdf->Cell(4,6," ","0",0,"L");$pdf->Cell(23,6,"$vz07","0",0,"R");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(23,6,"$vv07","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd07","0",0,"R");
-$pdf->Cell(30,6," ","0",1,"L");
+$pdf->SetY(164);
+$pdf->Cell(13,6,"$hlavicka->kr07","$rmc",0,"C");$pdf->Cell(7,6," ","$rmc1",0,"L");
+$pdf->Cell(16,6,"$hlavicka->zp07","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(11,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vz07","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$vv07","$rmc",0,"R");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(17,6,"$kd07","$rmc",1,"R");
 }
 
-if( $hlavicka->kr08 > 0 )
+if ( $hlavicka->kr08 > 0 )
 {
-$pdf->SetY(170);
 $vz08=$hlavicka->vz08;
 //if( $hlavicka->vz08 == 0 ) $vz08="";
 $vv08=$hlavicka->vv08;
-if( $hlavicka->vv08 == 0 ) $vv08="";
+if ( $hlavicka->vv08 == 0 ) $vv08="";
 $kd08=$hlavicka->kd08;
-if( $hlavicka->kd08 == 0 ) $kd08="";
-
+if ( $hlavicka->kd08 == 0 ) $kd08="";
 $dp08=SkDatum($hlavicka->dp08);
-if( $dp08 == "00.00.0000" ) $dp08="";
+if ( $dp08 == "00.00.0000" ) $dp08="";
 $dk08=SkDatum($hlavicka->dk08);
-if( $dk08 == "00.00.0000" ) $dk08="";
-
+if ( $dk08 == "00.00.0000" ) $dk08="";
 $pole = explode(".", $vz08);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr08 < 2009 ) $vz08=$cel;
+if ( $hlavicka->kr08 < 2009 ) $vz08=$cel;
 $pole = explode(".", $vv08);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr08 < 2009 ) $vv08=$cel;
-
-if( $hlavicka->kr08 >= 2009 ) { $vz08=str_replace(".",",",$vz08); $vv08=str_replace(".",",",$vv08); }
-
+if ( $hlavicka->kr08 < 2009 ) $vv08=$cel;
+if ( $hlavicka->kr08 >= 2009 ) { $vz08=str_replace(".",",",$vz08); $vv08=str_replace(".",",",$vv08); }
 $pole = explode(".", $dp08);
 $dnip=$pole[0];
 $mesp=$pole[1];
 $pole = explode(".", $dk08);
 $dnik=$pole[0];
 $mesk=$pole[1];
-
-$pdf->Cell(90,2,"                          ","0",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr08","0",0,"L");$pdf->Cell(10,6,"$hlavicka->zp08","0",0,"L");
-$pdf->Cell(8,6," ","0",0,"L");$pdf->Cell(10,6,"$dnip","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesp","0",0,"C");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$dnik","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesk","0",0,"C");
-
-$pdf->Cell(4,6," ","0",0,"L");$pdf->Cell(23,6,"$vz08","0",0,"R");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(23,6,"$vv08","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd08","0",0,"R");
-$pdf->Cell(30,6," ","0",1,"L");
+$pdf->SetY(172);
+$pdf->Cell(13,6,"$hlavicka->kr08","$rmc",0,"C");$pdf->Cell(7,6," ","$rmc1",0,"L");
+$pdf->Cell(16,6,"$hlavicka->zp08","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(11,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vz08","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$vv08","$rmc",0,"R");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(17,6,"$kd08","$rmc",1,"R");
 }
 
-if( $hlavicka->kr09 > 0 )
+if ( $hlavicka->kr09 > 0 )
 {
-$pdf->SetY(178);
 $vz09=$hlavicka->vz09;
 //if( $hlavicka->vz09 == 0 ) $vz09="";
 $vv09=$hlavicka->vv09;
-if( $hlavicka->vv09 == 0 ) $vv09="";
+if ( $hlavicka->vv09 == 0 ) $vv09="";
 $kd09=$hlavicka->kd09;
-if( $hlavicka->kd09 == 0 ) $kd09="";
-
+if ( $hlavicka->kd09 == 0 ) $kd09="";
 $dp09=SkDatum($hlavicka->dp09);
-if( $dp09 == "00.00.0000" ) $dp09="";
+if ( $dp09 == "00.00.0000" ) $dp09="";
 $dk09=SkDatum($hlavicka->dk09);
-if( $dk09 == "00.00.0000" ) $dk09="";
-
+if ( $dk09 == "00.00.0000" ) $dk09="";
 $pole = explode(".", $vz09);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr09 < 2009 ) $vz09=$cel;
+if ( $hlavicka->kr09 < 2009 ) $vz09=$cel;
 $pole = explode(".", $vv09);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr09 < 2009 ) $vv09=$cel;
-
-if( $hlavicka->kr09 >= 2009 ) { $vz09=str_replace(".",",",$vz09); $vv09=str_replace(".",",",$vv09); }
-
+if ( $hlavicka->kr09 < 2009 ) $vv09=$cel;
+if ( $hlavicka->kr09 >= 2009 ) { $vz09=str_replace(".",",",$vz09); $vv09=str_replace(".",",",$vv09); }
 $pole = explode(".", $dp09);
 $dnip=$pole[0];
 $mesp=$pole[1];
 $pole = explode(".", $dk09);
 $dnik=$pole[0];
 $mesk=$pole[1];
-
-$pdf->Cell(90,2,"                          ","0",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr09","0",0,"L");$pdf->Cell(10,6,"$hlavicka->zp09","0",0,"L");
-$pdf->Cell(8,6," ","0",0,"L");$pdf->Cell(10,6,"$dnip","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesp","0",0,"C");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$dnik","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesk","0",0,"C");
-
-$pdf->Cell(4,6," ","0",0,"L");$pdf->Cell(23,6,"$vz09","0",0,"R");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(23,6,"$vv09","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd09","0",0,"R");
-$pdf->Cell(30,6," ","0",1,"L");
+$pdf->SetY(180);
+$pdf->Cell(13,6,"$hlavicka->kr09","$rmc",0,"C");$pdf->Cell(7,6," ","$rmc1",0,"L");
+$pdf->Cell(16,6,"$hlavicka->zp09","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(11,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vz09","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$vv09","$rmc",0,"R");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(17,6,"$kd09","$rmc",1,"R");
 }
 
-if( $hlavicka->kr10 > 0 )
+if ( $hlavicka->kr10 > 0 )
 {
-$pdf->SetY(187);
 $vz10=$hlavicka->vz10;
 //if( $hlavicka->vz10 == 0 ) $vz10="";
 $vv10=$hlavicka->vv10;
-if( $hlavicka->vv10 == 0 ) $vv10="";
+if ( $hlavicka->vv10 == 0 ) $vv10="";
 $kd10=$hlavicka->kd10;
-if( $hlavicka->kd10 == 0 ) $kd10="";
-
+if ( $hlavicka->kd10 == 0 ) $kd10="";
 $dp10=SkDatum($hlavicka->dp10);
-if( $dp10 == "00.00.0000" ) $dp10="";
+if ( $dp10 == "00.00.0000" ) $dp10="";
 $dk10=SkDatum($hlavicka->dk10);
-if( $dk10 == "00.00.0000" ) $dk10="";
-
+if ( $dk10 == "00.00.0000" ) $dk10="";
 $pole = explode(".", $vz10);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr10 < 2009 ) $vz10=$cel;
+if ( $hlavicka->kr10 < 2009 ) $vz10=$cel;
 $pole = explode(".", $vv10);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr10 < 2009 ) $vv10=$cel;
-
-if( $hlavicka->kr10 >= 2009 ) { $vz10=str_replace(".",",",$vz10); $vv10=str_replace(".",",",$vv10); }
-
+if ( $hlavicka->kr10 < 2009 ) $vv10=$cel;
+if ( $hlavicka->kr10 >= 2009 ) { $vz10=str_replace(".",",",$vz10); $vv10=str_replace(".",",",$vv10); }
 $pole = explode(".", $dp10);
 $dnip=$pole[0];
 $mesp=$pole[1];
 $pole = explode(".", $dk10);
 $dnik=$pole[0];
 $mesk=$pole[1];
-
-$pdf->Cell(90,2,"                          ","0",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr10","0",0,"L");$pdf->Cell(10,6,"$hlavicka->zp10","0",0,"L");
-$pdf->Cell(8,6," ","0",0,"L");$pdf->Cell(10,6,"$dnip","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesp","0",0,"C");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$dnik","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesk","0",0,"C");
-
-$pdf->Cell(4,6," ","0",0,"L");$pdf->Cell(23,6,"$vz10","0",0,"R");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(23,6,"$vv10","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd10","0",0,"R");
-$pdf->Cell(30,6," ","0",1,"L");
+$pdf->SetY(189);
+$pdf->Cell(13,6,"$hlavicka->kr10","$rmc",0,"C");$pdf->Cell(7,6," ","$rmc1",0,"L");
+$pdf->Cell(16,6,"$hlavicka->zp10","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(11,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vz10","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$vv10","$rmc",0,"R");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(17,6,"$kd10","$rmc",1,"R");
 }
 
-if( $hlavicka->kr11 > 0 )
+if ( $hlavicka->kr11 > 0 )
 {
-$pdf->SetY(195);
 $vz11=$hlavicka->vz11;
 //if( $hlavicka->vz11 == 0 ) $vz11="";
 $vv11=$hlavicka->vv11;
-if( $hlavicka->vv11 == 0 ) $vv11="";
+if ( $hlavicka->vv11 == 0 ) $vv11="";
 $kd11=$hlavicka->kd11;
-if( $hlavicka->kd11 == 0 ) $kd11="";
-
+if ( $hlavicka->kd11 == 0 ) $kd11="";
 $dp11=SkDatum($hlavicka->dp11);
-if( $dp11 == "00.00.0000" ) $dp11="";
+if ( $dp11 == "00.00.0000" ) $dp11="";
 $dk11=SkDatum($hlavicka->dk11);
-if( $dk11 == "00.00.0000" ) $dk11="";
-
+if ( $dk11 == "00.00.0000" ) $dk11="";
 $pole = explode(".", $vz11);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr11 < 2009 ) $vz11=$cel;
+if ( $hlavicka->kr11 < 2009 ) $vz11=$cel;
 $pole = explode(".", $vv11);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr11 < 2009 ) $vv11=$cel;
-
-if( $hlavicka->kr11 >= 2009 ) { $vz11=str_replace(".",",",$vz11); $vv11=str_replace(".",",",$vv11); }
-
+if ( $hlavicka->kr11 < 2009 ) $vv11=$cel;
+if ( $hlavicka->kr11 >= 2009 ) { $vz11=str_replace(".",",",$vz11); $vv11=str_replace(".",",",$vv11); }
 $pole = explode(".", $dp11);
 $dnip=$pole[0];
 $mesp=$pole[1];
 $pole = explode(".", $dk11);
 $dnik=$pole[0];
 $mesk=$pole[1];
-
-$pdf->Cell(90,2,"                          ","0",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr11","0",0,"L");$pdf->Cell(10,6,"$hlavicka->zp11","0",0,"L");
-$pdf->Cell(8,6," ","0",0,"L");$pdf->Cell(10,6,"$dnip","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesp","0",0,"C");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$dnik","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesk","0",0,"C");
-
-$pdf->Cell(4,6," ","0",0,"L");$pdf->Cell(23,6,"$vz11","0",0,"R");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(23,6,"$vv11","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd11","0",0,"R");
-$pdf->Cell(30,6," ","0",1,"L");
+$pdf->SetY(197);
+$pdf->Cell(13,6,"$hlavicka->kr11","$rmc",0,"C");$pdf->Cell(7,6," ","$rmc1",0,"L");
+$pdf->Cell(16,6,"$hlavicka->zp11","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(11,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vz11","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$vv11","$rmc",0,"R");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(17,6,"$kd11","$rmc",1,"R");
 }
 
-if( $hlavicka->kr12 > 0 )
+if ( $hlavicka->kr12 > 0 )
 {
-$pdf->SetY(204);
 $vz12=$hlavicka->vz12;
 //if( $hlavicka->vz12 == 0 ) $vz12="";
 $vv12=$hlavicka->vv12;
-if( $hlavicka->vv12 == 0 ) $vv12="";
+if ( $hlavicka->vv12 == 0 ) $vv12="";
 $kd12=$hlavicka->kd12;
-if( $hlavicka->kd12 == 0 ) $kd12="";
-
+if ( $hlavicka->kd12 == 0 ) $kd12="";
 $dp12=SkDatum($hlavicka->dp12);
-if( $dp12 == "00.00.0000" ) $dp12="";
+if ( $dp12 == "00.00.0000" ) $dp12="";
 $dk12=SkDatum($hlavicka->dk12);
-if( $dk12 == "00.00.0000" ) $dk12="";
-
+if ( $dk12 == "00.00.0000" ) $dk12="";
 $pole = explode(".", $dp12);
 $dnip=$pole[0];
 $mesp=$pole[1];
 $pole = explode(".", $dk12);
 $dnik=$pole[0];
 $mesk=$pole[1];
-
 $pole = explode(".", $vz12);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr12 < 2009 ) $vz12=$cel;
+if ( $hlavicka->kr12 < 2009 ) $vz12=$cel;
 $pole = explode(".", $vv12);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr12 < 2009 ) $vv12=$cel;
-
-if( $hlavicka->kr12 >= 2009 ) { $vz12=str_replace(".",",",$vz12); $vv12=str_replace(".",",",$vv12); }
-
-$pdf->Cell(90,2,"                          ","0",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr12","0",0,"L");$pdf->Cell(10,6,"$hlavicka->zp12","0",0,"L");
-$pdf->Cell(8,6," ","0",0,"L");$pdf->Cell(10,6,"$dnip","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesp","0",0,"C");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$dnik","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesk","0",0,"C");
-
-$pdf->Cell(4,6," ","0",0,"L");$pdf->Cell(23,6,"$vz12","0",0,"R");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(23,6,"$vv12","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd12","0",0,"R");
-$pdf->Cell(30,6," ","0",1,"L");
+if ( $hlavicka->kr12 < 2009 ) $vv12=$cel;
+if ( $hlavicka->kr12 >= 2009 ) { $vz12=str_replace(".",",",$vz12); $vv12=str_replace(".",",",$vv12); }
+$pdf->SetY(206);
+$pdf->Cell(13,6,"$hlavicka->kr12","$rmc",0,"C");$pdf->Cell(7,6," ","$rmc1",0,"L");
+$pdf->Cell(16,6,"$hlavicka->zp12","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(11,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vz12","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$vv12","$rmc",0,"R");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(17,6,"$kd12","$rmc",1,"R");
 }
 
-if( $hlavicka->kr13 > 0 )
+if ( $hlavicka->kr13 > 0 )
 {
-$pdf->SetY(212);
 $vz13=$hlavicka->vz13;
-if( $hlavicka->vz13 == 0 ) $vz13="";
+if ( $hlavicka->vz13 == 0 ) $vz13="";
 $vv13=$hlavicka->vv13;
-if( $hlavicka->vv13 == 0 ) $vv13="";
+if ( $hlavicka->vv13 == 0 ) $vv13="";
 $kd13=$hlavicka->kd13;
-if( $hlavicka->kd13 == 0 ) $kd13="";
-
+if ( $hlavicka->kd13 == 0 ) $kd13="";
 $dp13=SkDatum($hlavicka->dp13);
-if( $dp13 == "00.00.0000" ) $dp13="";
+if ( $dp13 == "00.00.0000" ) $dp13="";
 $dk13=SkDatum($hlavicka->dk13);
-if( $dk13 == "00.00.0000" ) $dk13="";
-
+if ( $dk13 == "00.00.0000" ) $dk13="";
 $pole = explode(".", $vz13);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr13 < 2009 ) $vz13=$cel;
+if ( $hlavicka->kr13 < 2009 ) $vz13=$cel;
 $pole = explode(".", $vv13);
 $cel=$pole[0];
 $des=$pole[1];
-if( $hlavicka->kr13 < 2009 ) $vv13=$cel;
-
-if( $hlavicka->kr13 >= 2009 ) { $vz13=str_replace(".",",",$vz13); $vv13=str_replace(".",",",$vv13); }
-
+if ( $hlavicka->kr13 < 2009 ) $vv13=$cel;
+if ( $hlavicka->kr13 >= 2009 ) { $vz13=str_replace(".",",",$vz13); $vv13=str_replace(".",",",$vv13); }
 $pole = explode(".", $dp13);
 $dnip=$pole[0];
 $mesp=$pole[1];
 $pole = explode(".", $dk13);
 $dnik=$pole[0];
 $mesk=$pole[1];
-
-$pdf->Cell(90,2,"                          ","0",1,"L");
-$pdf->Cell(20,6,"$hlavicka->kr13","0",0,"L");$pdf->Cell(10,6,"$hlavicka->zp13","0",0,"L");
-$pdf->Cell(8,6," ","0",0,"L");$pdf->Cell(10,6,"$dnip","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesp","0",0,"C");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$dnik","0",0,"C");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(10,6,"$mesk","0",0,"C");
-
-$pdf->Cell(4,6," ","0",0,"L");$pdf->Cell(23,6,"$vz13","0",0,"R");$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(23,6,"$vv13","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"L");$pdf->Cell(18,6,"$kd13","0",0,"R");
-$pdf->Cell(30,6," ","0",1,"L");
+$pdf->SetY(214);
+$pdf->Cell(13,6,"$hlavicka->kr13","$rmc",0,"C");$pdf->Cell(7,6," ","$rmc1",0,"L");
+$pdf->Cell(16,6,"$hlavicka->zp13","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnip","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$mesp","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(10,6,"$dnik","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(11,6,"$mesk","$rmc",0,"C");$pdf->Cell(4,6," ","$rmc1",0,"L");
+$pdf->Cell(23,6,"$vz13","$rmc",0,"R");$pdf->Cell(2,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$vv13","$rmc",0,"R");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(17,6,"$kd13","$rmc",1,"R");
 }
 
-//III. ZAMESTNAVATEL
+//III.ZAMESTNAVATEL
 //nazov
-$pdf->SetY(230);
-$pdf->Cell(190,2," ","$rmc1",1,"L");
-$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(150,6,"$fir_fnaz","$rmc",1,"L");
-$pdf->Cell(190,2," ","$rmc1",1,"L");
-$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(135,6," ","$rmc",0,"L");
+$pdf->SetY(231);
+$pdf->Cell(192,6,"$fir_fnaz","$rmc",1,"L");
+$pdf->Cell(190,3," ","$rmc1",1,"L");
+$pdf->Cell(126,6," ","$rmc",0,"L");$pdf->Cell(10,6," ","$rmc1",0,"L");
 //kriziky ico/dic
-$pdf->Cell(3,6,"X","$rmc",0,"C");$pdf->Cell(2,6," ","$rmc1",0,"L");
-$pdf->Cell(3,6," ","$rmc",0,"C");$pdf->Cell(8,6," ","$rmc1",0,"L");
+$pdf->Cell(4,6,"X","$rmc",0,"C");$pdf->Cell(6,6," ","$rmc1",0,"L");
+$pdf->Cell(4,6," ","$rmc",0,"C");$pdf->Cell(5,6," ","$rmc1",0,"L");
 //cislo organizacia
-$pdf->Cell(30,6,"$fir_fico","$rmc",1,"L");
+$pdf->Cell(37,6," $fir_fico","$rmc",1,"L");
 //ulica a cislo
 $pdf->Cell(190,2," ","$rmc1",1,"L");
-$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(130,6,"$fir_fuli","$rmc",0,"L");
-$pdf->Cell(30,6,"$fir_fcdm","$rmc",0,"L");$pdf->Cell(30,6," ","$rmc1",1,"L");
+$pdf->Cell(89,6,"$fir_fuli","$rmc",0,"L");$pdf->Cell(40,7," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$fir_fcdm","$rmc",0,"L");$pdf->Cell(30,6," ","$rmc1",1,"L");
 //obec a psc
 $pdf->Cell(190,3," ","$rmc1",1,"L");
-$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(130,6,"$fir_fmes","$rmc",0,"L");
-$pdf->Cell(30,6,"$fir_fpsc","$rmc",0,"L");$pdf->Cell(30,6," ","$rmc1",1,"L");
+$pdf->Cell(126,6,"$fir_fmes","$rmc",0,"L");$pdf->Cell(3,6," ","$rmc1",0,"L");
+$pdf->Cell(22,6,"$fir_fpsc","$rmc",1,"L");
 
 //datum odoslania
 $pdf->Cell(190,6," ","$rmc1",1,"L");
@@ -1430,7 +1363,7 @@ $pole = explode(".", $datum);
 $datum1=$pole[0];
 $datum2=$pole[1];
 $datum3=$pole[2];
-$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(130,6,"$datum1$datum2$datum3","$rmc",0,"L");
+$pdf->Cell(23,6,"$datum1$datum2$datum3","$rmc",0,"C");
 
 }
 $i = $i + 1;
@@ -1588,30 +1521,13 @@ mysql_free_result($fir_vysledok);
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - EvidenËn˝ list dÙchodkovÈho poistenia</title>
 <style type="text/css">
-div.wrap-form-background {
-  overflow: hidden;
-  width: 950px;
-  height: 1300px;
-  background-color: #fff;
-}
-img.form-background {
-  display: block;
-  width: 910px;
-  height: 1230px;
-  margin: 40px 0 0 15px;
-}
 form input[type=text] {
-  position: absolute;
   height: 20px;
   line-height: 20px;
-  padding-left: 4px;
-  border: 1px solid #39f;
   font-size: 14px;
 }
 form select {
-  position: absolute;
-  height: 20px;
-  border: 1px solid #39f;
+  height: 24px;
 }
 img.btn-row-tool {
   width: 20px;
@@ -1619,10 +1535,8 @@ img.btn-row-tool {
   cursor: default;
 }
 p.nacitaj-bar {
-  width: ;
   height: 20px;
   line-height: 20px;
-  float: right;
   margin-left: 10px;
   border-left: 2px solid lightblue;
   border-right: 2px solid lightblue;
@@ -2044,7 +1958,7 @@ if ( $copern == 20 )
  onclick="window.open('evidencny_list.php?copern=6155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self')"
  class="btn-form-tool">
 
-<p class="nacitaj-bar">
+<p class="toright nacitaj-bar">
  <span>NaËÌtaù</span>
  <a href="#" onclick="ZnovuPotvrdenie();" title="NaËÌtaù hodnoty roku <?php echo $kli_vrok; ?>"><?php echo $kli_vrok; ?></a>
 
@@ -2117,313 +2031,297 @@ if ( $copern == 20 )
 <div id="content">
 <FORM name="formv1" method="post" action="evidencny_list.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave" style="top:4px;">
-<div class="wrap-form-background">
 <img src="../dokumenty/mzdy_potvrdenia/evidencny_list/evidencny_list.jpg"
      alt="tlaËivo EvidenËn˝ list dÙchodkovÈho poistenia 231kB" class="form-background">
 
-<!-- vyplneny = natvrdo zaskrtnute -->
-<span class="text-echo" style="top:155px; left:262px;"> </span>
-<input type="checkbox" name="str2" value="1" style="top:154px; left:256px;"/>
-<input type="checkbox" name="oprav" value="1" style="top:154px; left:336px;"/>
+<!-- vyplneny -->
+<input type="checkbox" name="str2" value="1" style="top:143px; left:260px;"/>
+<input type="checkbox" name="oprav" value="1" style="top:143px; left:339px;"/>
 
 <!-- I. POISTENEC -->
-<span class="text-echo" style="top:213px; left:32px;"><?php echo $prie; ?></span>
-<span class="text-echo" style="top:213px; left:475px;"><?php echo $meno; ?></span>
-<span class="text-echo" style="top:213px; left:778px;"><?php echo $titl; ?></span>
-<span class="text-echo" style="top:249px; left:32px;"><?php echo $rodprie; ?></span>
-<input type="text" name="predo" id="predo" style="top:244px; left:471px; width:425px;"/>
-<span class="text-echo" style="top:286px; left:32px;"><?php echo $mnr; ?></span>
-<span class="text-echo" style="top:286px; left:652px;"><?php echo $dar_sk; ?></span>
-<span class="text-echo" style="top:286px; left:795px;"><?php echo $rodne; ?></span>
-<span class="text-echo" style="top:341px; left:32px;"><?php echo $ulica; ?></span>
-<span class="text-echo" style="top:341px; left:635px;"><?php echo $dom; ?></span>
-<span class="text-echo" style="top:378px; left:32px;"><?php echo $obec; ?></span>
-<span class="text-echo" style="top:378px; left:657px;"><?php echo $psc; ?></span>
-<span class="text-echo" style="top:415px; left:512px;"><?php echo $dan_sk; ?></span>
-<span class="text-echo" style="top:415px; left:650px;"><?php echo $dav_sk; ?></span>
+<span class="text-echo" style="top:203px; left:40px;"><?php echo $prie; ?></span>
+<span class="text-echo" style="top:203px; left:478px;"><?php echo $meno; ?></span>
+<span class="text-echo" style="top:203px; left:778px;"><?php echo $titl; ?></span>
+<span class="text-echo" style="top:241px; left:40px;"><?php echo $rodprie; ?></span>
+<input type="text" name="predo" id="predo" style="top:235px; left:473px; width:420px;"/>
+<span class="text-echo" style="top:277px; left:40px;"><?php echo $mnr; ?></span>
+<span class="text-echo" style="top:277px; left:634px;"><?php echo $dar_sk; ?></span>
+<span class="text-echo" style="top:277px; left:775px;"><?php echo $rodne; ?></span>
+<span class="text-echo" style="top:333px; left:40px;"><?php echo $ulica; ?></span>
+<span class="text-echo" style="top:333px; left:634px;"><?php echo $dom; ?></span>
+<span class="text-echo" style="top:370px; left:40px;"><?php echo $obec; ?></span>
+<span class="text-echo" style="top:370px; left:634px;"><?php echo $psc; ?></span>
+<span class="text-echo" style="top:407px; left:513px;"><?php echo $dan_sk; ?></span>
+<span class="text-echo" style="top:407px; left:652px;"><?php echo $dav_sk; ?></span>
 
 <!-- II. Obdobia poistenia ... -->
 <img src="../obr/ikony/info_blue_icon.png" class="btn-row-tool" style="top:465px; left:127px;"
      title="A = zamestnanec, MD = matersk· dovolenka, RD = rodiËovsk· dovolenka, VS = vojensk· sluûba, CS = civiln· sluûba">
-
 <!-- 1.riadok -->
-<input type="text" name="kr01" id="kr01" style="top:501px; left:29px; width:70px;"/>
-<select size="1" name="zp01" id="zp01" style="top:501px; left:129px;">
- <option value="A">A</option>
- <option value="MD">MD</option>
- <option value="RD">RD</option>
- <option value="VS">VS</option>
- <option value="CS">CS</option>
+<input type="text" name="kr01" id="kr01" style="top:494px; left:35px; width:70px;"/>
+<select size="1" name="zp01" id="zp01" style="top:494px; left:136px; width:70px;">
+ <option value="A">A = zamestnanec</option>
+ <option value="MD">MD = matersk· dovolenka</option>
+ <option value="RD">RD = rodiËovsk· dovolenka</option>
+ <option value="VS">VS = vojensk· sluûba</option>
+ <option value="CS">CS = civiln· sluûba</option>
  <option value=" "></option>
 </select>
 <input type="text" name="dp01" id="dp01" onfocus="return Dp01Onfocus(event.which)"
-       onkeyup="CiarkaNaBodku(this);" style="top:500px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:494px; left:218px; width:93px;"/>
 <input type="text" name="dk01" id="dk01" onkeyup="CiarkaNaBodku(this);"
-       style="top:500px; left:326px; width:90px;"/>
+       style="top:494px; left:328px; width:93px;"/>
 <input type="text" name="vz01" id="vz01" onkeyup="CiarkaNaBodku(this);"
-       style="top:501px; left:449px; width:93px;"/>
+       style="top:494px; left:450px; width:93px;"/>
 <input type="text" name="vv01" id="vv01" onkeyup="CiarkaNaBodku(this);"
-       style="top:501px; left:562px; width:93px;"/>
-<input type="text" name="kd01" id="kd01" style="top:501px; left:675px; width:72px;"/>
-
+       style="top:494px; left:562px; width:93px;"/>
+<input type="text" name="kd01" id="kd01" style="top:494px; left:675px; width:72px;"/>
 <!-- 2.riadok -->
-<input type="text" name="kr02" id="kr02" style="top:537px; left:29px; width:70px;"/>
-<select size="1" name="zp02" id="zp02" style="top:538px; left:129px;">
- <option value="A">A</option>
- <option value="MD">MD</option>
- <option value="RD">RD</option>
- <option value="VS">VS</option>
- <option value="CS">CS</option>
+<input type="text" name="kr02" id="kr02" style="top:531px; left:35px; width:70px;"/>
+<select size="1" name="zp02" id="zp02" style="top:531px; left:136px; width:70px;">
+ <option value="A">A = zamestnanec</option>
+ <option value="MD">MD = matersk· dovolenka</option>
+ <option value="RD">RD = rodiËovsk· dovolenka</option>
+ <option value="VS">VS = vojensk· sluûba</option>
+ <option value="CS">CS = civiln· sluûba</option>
  <option value=" "></option>
 </select>
 <input type="text" name="dp02" id="dp02" onfocus="return Dp02Onfocus(event.which)"
-       onkeyup="CiarkaNaBodku(this);" style="top:536px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:531px; left:218px; width:93px;"/>
 <input type="text" name="dk02" id="dk02" onkeyup="CiarkaNaBodku(this);"
-       style="top:536px; left:326px; width:90px;"/>
+       style="top:531px; left:328px; width:93px;"/>
 <input type="text" name="vz02" id="vz02" onkeyup="CiarkaNaBodku(this);"
-       style="top:537px; left:449px; width:93px;"/>
+       style="top:531px; left:450px; width:93px;"/>
 <input type="text" name="vv02" id="vv02" onkeyup="CiarkaNaBodku(this);"
-       style="top:537px; left:562px; width:93px;"/>
-<input type="text" name="kd02" id="kd02" style="top:537px; left:675px; width:72px;"/>
-
+       style="top:531px; left:562px; width:93px;"/>
+<input type="text" name="kd02" id="kd02" style="top:531px; left:675px; width:72px;"/>
 <!-- 3.riadok -->
-<input type="text" name="kr03" id="kr03" style="top:574px; left:29px; width:70px;"/>
-<select size="1" name="zp03" id="zp03" style="top:574px; left:129px;">
- <option value="A">A</option>
- <option value="MD">MD</option>
- <option value="RD">RD</option>
- <option value="VS">VS</option>
- <option value="CS">CS</option>
+<input type="text" name="kr03" id="kr03" style="top:568px; left:35px; width:70px;"/>
+<select size="1" name="zp03" id="zp03" style="top:568px; left:136px; width:70px;">
+ <option value="A">A = zamestnanec</option>
+ <option value="MD">MD = matersk· dovolenka</option>
+ <option value="RD">RD = rodiËovsk· dovolenka</option>
+ <option value="VS">VS = vojensk· sluûba</option>
+ <option value="CS">CS = civiln· sluûba</option>
  <option value=" "></option>
 </select>
 <input type="text" name="dp03" id="dp03" onfocus="return Dp03Onfocus(event.which)"
-       onkeyup="CiarkaNaBodku(this);" style="top:573px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:568px; left:218px; width:93px;"/>
 <input type="text" name="dk03" id="dk03" onkeyup="CiarkaNaBodku(this);"
-       style="top:573px; left:326px; width:90px;"/>
+       style="top:568px; left:328px; width:93px;"/>
 <input type="text" name="vz03" id="vz03" onkeyup="CiarkaNaBodku(this);"
-       style="top:574px; left:449px; width:93px;"/>
+       style="top:568px; left:450px; width:93px;"/>
 <input type="text" name="vv03" id="vv03" onkeyup="CiarkaNaBodku(this);"
-       style="top:574px; left:562px; width:93px;"/>
-<input type="text" name="kd03" id="kd03" style="top:574px; left:675px; width:72px;"/>
-
+       style="top:568px; left:562px; width:93px;"/>
+<input type="text" name="kd03" id="kd03" style="top:568px; left:675px; width:72px;"/>
 <!-- 4.riadok -->
-<input type="text" name="kr04" id="kr04" style="top:611px; left:29px; width:70px;"/>
-<select size="1" name="zp04" id="zp04" style="top:611px; left:129px;">
- <option value="A">A</option>
- <option value="MD">MD</option>
- <option value="RD">RD</option>
- <option value="VS">VS</option>
- <option value="CS">CS</option>
+<input type="text" name="kr04" id="kr04" style="top:605px; left:35px; width:70px;"/>
+<select size="1" name="zp04" id="zp04" style="top:605px; left:136px; width:70px;">
+ <option value="A">A = zamestnanec</option>
+ <option value="MD">MD = matersk· dovolenka</option>
+ <option value="RD">RD = rodiËovsk· dovolenka</option>
+ <option value="VS">VS = vojensk· sluûba</option>
+ <option value="CS">CS = civiln· sluûba</option>
  <option value=" "></option>
 </select>
 <input type="text" name="dp04" id="dp04" onfocus="return Dp04Onfocus(event.which)"
-       onkeyup="CiarkaNaBodku(this);" style="top:610px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:605px; left:218px; width:93px;"/>
 <input type="text" name="dk04" id="dk04" onkeyup="CiarkaNaBodku(this);"
-       style="top:610px; left:326px; width:90px;"/>
+       style="top:605px; left:328px; width:93px;"/>
 <input type="text" name="vz04" id="vz04" onkeyup="CiarkaNaBodku(this);"
-       style="top:610px; left:449px; width:93px;"/>
+       style="top:605px; left:450px; width:93px;"/>
 <input type="text" name="vv04" id="vv04" onkeyup="CiarkaNaBodku(this);"
-       style="top:610px; left:562px; width:93px;"/>
-<input type="text" name="kd04" id="kd04" style="top:610px; left:675px; width:72px;"/>
-
+       style="top:605px; left:562px; width:93px;"/>
+<input type="text" name="kd04" id="kd04" style="top:605px; left:675px; width:72px;"/>
 <!-- 5.riadok -->
-<input type="text" name="kr05" id="kr05" style="top:647px; left:29px; width:70px;"/>
-<select size="1" name="zp05" id="zp05" style="top:647px; left:129px;">
- <option value="A">A</option>
- <option value="MD">MD</option>
- <option value="RD">RD</option>
- <option value="VS">VS</option>
- <option value="CS">CS</option>
+<input type="text" name="kr05" id="kr05" style="top:642px; left:35px; width:70px;"/>
+<select size="1" name="zp05" id="zp05" style="top:642px; left:136px; width:70px;">
+ <option value="A">A = zamestnanec</option>
+ <option value="MD">MD = matersk· dovolenka</option>
+ <option value="RD">RD = rodiËovsk· dovolenka</option>
+ <option value="VS">VS = vojensk· sluûba</option>
+ <option value="CS">CS = civiln· sluûba</option>
  <option value=" "></option>
 </select>
 <input type="text" name="dp05" id="dp05" onfocus="return Dp05Onfocus(event.which)"
-       onkeyup="CiarkaNaBodku(this);" style="top:646px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:642px; left:218px; width:93px;"/>
 <input type="text" name="dk05" id="dk05" onkeyup="CiarkaNaBodku(this);"
-       style="top:646px; left:326px; width:90px;"/>
+       style="top:642px; left:328px; width:93px;"/>
 <input type="text" name="vz05" id="vz05" onkeyup="CiarkaNaBodku(this);"
-       style="top:647px; left:449px; width:93px;"/>
+       style="top:642px; left:450px; width:93px;"/>
 <input type="text" name="vv05" id="vv05" onkeyup="CiarkaNaBodku(this);"
-       style="top:647px; left:562px; width:93px;"/>
-<input type="text" name="kd05" id="kd05" style="top:647px; left:675px; width:72px;"/>
-
+       style="top:642px; left:562px; width:93px;"/>
+<input type="text" name="kd05" id="kd05" style="top:642px; left:675px; width:72px;"/>
 <!-- 6.riadok -->
-<input type="text" name="kr06" id="kr06" style="top:684px; left:29px; width:70px;"/>
-<select size="1" name="zp06" id="zp06" style="top:684px; left:129px;">
- <option value="A">A</option>
- <option value="MD">MD</option>
- <option value="RD">RD</option>
- <option value="VS">VS</option>
- <option value="CS">CS</option>
+<input type="text" name="kr06" id="kr06" style="top:680px; left:35px; width:70px;"/>
+<select size="1" name="zp06" id="zp06" style="top:680px; left:136px; width:70px;">
+ <option value="A">A = zamestnanec</option>
+ <option value="MD">MD = matersk· dovolenka</option>
+ <option value="RD">RD = rodiËovsk· dovolenka</option>
+ <option value="VS">VS = vojensk· sluûba</option>
+ <option value="CS">CS = civiln· sluûba</option>
  <option value=" "></option>
 </select>
 <input type="text" name="dp06" id="dp06" onfocus="return Dp06Onfocus(event.which)"
-       onkeyup="CiarkaNaBodku(this);" style="top:683px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:680px; left:218px; width:93px;"/>
 <input type="text" name="dk06" id="dk06" onkeyup="CiarkaNaBodku(this);"
-       style="top:683px; left:326px; width:90px;"/>
+       style="top:680px; left:328px; width:93px;"/>
 <input type="text" name="vz06" id="vz06" onkeyup="CiarkaNaBodku(this);"
-       style="top:684px; left:449px; width:93px;"/>
+       style="top:680px; left:450px; width:93px;"/>
 <input type="text" name="vv06" id="vv06" onkeyup="CiarkaNaBodku(this);"
-       style="top:684px; left:562px; width:93px;"/>
-<input type="text" name="kd06" id="kd06" style="top:684px; left:675px; width:72px;"/>
-
+       style="top:680px; left:562px; width:93px;"/>
+<input type="text" name="kd06" id="kd06" style="top:680px; left:675px; width:72px;"/>
 <!-- 7.riadok -->
-<input type="text" name="kr07" id="kr07" style="top:721px; left:29px; width:70px;"/>
-<select size="1" name="zp07" id="zp07" style="top:721px; left:129px;">
- <option value="A">A</option>
- <option value="MD">MD</option>
- <option value="RD">RD</option>
- <option value="VS">VS</option>
- <option value="CS">CS</option>
+<input type="text" name="kr07" id="kr07" style="top:717px; left:35px; width:70px;"/>
+<select size="1" name="zp07" id="zp07" style="top:717px; left:136px; width:70px;">
+ <option value="A">A = zamestnanec</option>
+ <option value="MD">MD = matersk· dovolenka</option>
+ <option value="RD">RD = rodiËovsk· dovolenka</option>
+ <option value="VS">VS = vojensk· sluûba</option>
+ <option value="CS">CS = civiln· sluûba</option>
  <option value=" "></option>
 </select>
 <input type="text" name="dp07" id="dp07" onfocus="return Dp07Onfocus(event.which)"
-       onkeyup="CiarkaNaBodku(this);" style="top:720px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:717px; left:218px; width:93px;"/>
 <input type="text" name="dk07" id="dk07" onkeyup="CiarkaNaBodku(this);"
-       style="top:720px; left:326px; width:90px;"/>
+       style="top:717px; left:328px; width:93px;"/>
 <input type="text" name="vz07" id="vz07" onkeyup="CiarkaNaBodku(this);"
-       style="top:721px; left:449px; width:93px;"/>
+       style="top:717px; left:450px; width:93px;"/>
 <input type="text" name="vv07" id="vv07" onkeyup="CiarkaNaBodku(this);"
-       style="top:721px; left:562px; width:93px;"/>
-<input type="text" name="kd07" id="kd07" style="top:721px; left:675px; width:72px;"/>
-
+       style="top:717px; left:562px; width:93px;"/>
+<input type="text" name="kd07" id="kd07" style="top:717px; left:675px; width:72px;"/>
 <!-- 8.riadok -->
-<input type="text" name="kr08" id="kr08" style="top:757px; left:29px; width:70px;"/>
-<select size="1" name="zp08" id="zp08" style="top:757px; left:129px;">
- <option value="A">A</option>
- <option value="MD">MD</option>
- <option value="RD">RD</option>
- <option value="VS">VS</option>
- <option value="CS">CS</option>
+<input type="text" name="kr08" id="kr08" style="top:753px; left:35px; width:70px;"/>
+<select size="1" name="zp08" id="zp08" style="top:753px; left:136px; width:70px;">
+ <option value="A">A = zamestnanec</option>
+ <option value="MD">MD = matersk· dovolenka</option>
+ <option value="RD">RD = rodiËovsk· dovolenka</option>
+ <option value="VS">VS = vojensk· sluûba</option>
+ <option value="CS">CS = civiln· sluûba</option>
  <option value=" "></option>
 </select>
 <input type="text" name="dp08" id="dp08" onfocus="return Dp08Onfocus(event.which)"
-       onkeyup="CiarkaNaBodku(this);" style="top:756px; left:215px; width:90px;"/>
+       onkeyup="CiarkaNaBodku(this);" style="top:753px; left:218px; width:93px;"/>
 <input type="text" name="dk08" id="dk08" onkeyup="CiarkaNaBodku(this);"
-       style="top:756px; left:326px; width:90px;"/>
+       style="top:753px; left:328px; width:93px;"/>
 <input type="text" name="vz08" id="vz08" onkeyup="CiarkaNaBodku(this);"
-       style="top:757px; left:449px; width:93px;"/>
+       style="top:753px; left:450px; width:93px;"/>
 <input type="text" name="vv08" id="vv08" onkeyup="CiarkaNaBodku(this);"
-       style="top:757px; left:562px; width:93px;"/>
-<input type="text" name="kd08" id="kd08" style="top:757px; left:675px; width:72px;"/>
-
+       style="top:753px; left:562px; width:93px;"/>
+<input type="text" name="kd08" id="kd08" style="top:753px; left:675px; width:72px;"/>
 <!-- 9.riadok -->
-<input type="text" name="kr09" id="kr09" style="top:794px; left:29px; width:70px;"/>
-<select size="1" name="zp09" id="zp09" style="top:794px; left:129px;">
- <option value="A">A</option>
- <option value="MD">MD</option>
- <option value="RD">RD</option>
- <option value="VS">VS</option>
- <option value="CS">CS</option>
+<input type="text" name="kr09" id="kr09" style="top:790px; left:35px; width:70px;"/>
+<select size="1" name="zp09" id="zp09" style="top:790px; left:136px; width:70px;">
+ <option value="A">A = zamestnanec</option>
+ <option value="MD">MD = matersk· dovolenka</option>
+ <option value="RD">RD = rodiËovsk· dovolenka</option>
+ <option value="VS">VS = vojensk· sluûba</option>
+ <option value="CS">CS = civiln· sluûba</option>
  <option value=" "></option>
 </select>
 <input type="text" name="dp09" id="dp09" onkeyup="CiarkaNaBodku(this);"
-       style="top:793px; left:215px; width:90px;"/>
+       style="top:790px; left:218px; width:93px;"/>
 <input type="text" name="dk09" id="dk09" onkeyup="CiarkaNaBodku(this);"
-       style="top:793px; left:326px; width:90px;"/>
+       style="top:790px; left:328px; width:93px;"/>
 <input type="text" name="vz09" id="vz09" onkeyup="CiarkaNaBodku(this);"
-       style="top:794px; left:449px; width:93px;"/>
+       style="top:790px; left:450px; width:93px;"/>
 <input type="text" name="vv09" id="vv09" onkeyup="CiarkaNaBodku(this);"
-       style="top:794px; left:562px; width:93px;"/>
-<input type="text" name="kd09" id="kd09" style="top:794px; left:675px; width:72px;"/>
-
+       style="top:790px; left:562px; width:93px;"/>
+<input type="text" name="kd09" id="kd09" style="top:790px; left:675px; width:72px;"/>
 <!-- 10.riadok -->
-<input type="text" name="kr10" id="kr10" style="top:830px; left:29px; width:70px;"/>
-<select size="1" name="zp10" id="zp10" style="top:831px; left:129px;">
- <option value="A">A</option>
- <option value="MD">MD</option>
- <option value="RD">RD</option>
- <option value="VS">VS</option>
- <option value="CS">CS</option>
+<input type="text" name="kr10" id="kr10" style="top:827px; left:35px; width:70px;"/>
+<select size="1" name="zp10" id="zp10" style="top:827px; left:136px; width:70px;">
+ <option value="A">A = zamestnanec</option>
+ <option value="MD">MD = matersk· dovolenka</option>
+ <option value="RD">RD = rodiËovsk· dovolenka</option>
+ <option value="VS">VS = vojensk· sluûba</option>
+ <option value="CS">CS = civiln· sluûba</option>
  <option value=" "></option>
 </select>
 <input type="text" name="dp10" id="dp10" onkeyup="CiarkaNaBodku(this);"
-       style="top:829px; left:215px; width:90px;"/>
+       style="top:827px; left:218px; width:93px;"/>
 <input type="text" name="dk10" id="dk10" onkeyup="CiarkaNaBodku(this);"
-       style="top:829px; left:326px; width:90px;"/>
+       style="top:827px; left:328px; width:93px;"/>
 <input type="text" name="vz10" id="vz10" onkeyup="CiarkaNaBodku(this);"
-       style="top:830px; left:449px; width:93px;"/>
+       style="top:827px; left:450px; width:93px;"/>
 <input type="text" name="vv10" id="vv10" onkeyup="CiarkaNaBodku(this);"
-       style="top:830px; left:562px; width:93px;"/>
-<input type="text" name="kd10" id="kd10" style="top:830px; left:675px; width:72px;"/>
-
+       style="top:827px; left:562px; width:93px;"/>
+<input type="text" name="kd10" id="kd10" style="top:827px; left:675px; width:72px;"/>
 <!-- 11.riadok -->
-<input type="text" name="kr11" id="kr11" style="top:867px; left:29px; width:70px;"/>
-<select size="1" name="zp11" id="zp11" style="top:867px; left:129px;">
- <option value="A">A</option>
- <option value="MD">MD</option>
- <option value="RD">RD</option>
- <option value="VS">VS</option>
- <option value="CS">CS</option>
+<input type="text" name="kr11" id="kr11" style="top:865px; left:35px; width:70px;"/>
+<select size="1" name="zp11" id="zp11" style="top:865px; left:136px; width:70px;">
+ <option value="A">A = zamestnanec</option>
+ <option value="MD">MD = matersk· dovolenka</option>
+ <option value="RD">RD = rodiËovsk· dovolenka</option>
+ <option value="VS">VS = vojensk· sluûba</option>
+ <option value="CS">CS = civiln· sluûba</option>
  <option value=" "></option>
 </select>
 <input type="text" name="dp11" id="dp11" onkeyup="CiarkaNaBodku(this);"
-       style="top:866px; left:215px; width:90px;"/>
+       style="top:865px; left:218px; width:93px;"/>
 <input type="text" name="dk11" id="dk11" onkeyup="CiarkaNaBodku(this);"
-       style="top:866px; left:326px; width:90px;"/>
+       style="top:865px; left:328px; width:93px;"/>
 <input type="text" name="vz11" id="vz11" onkeyup="CiarkaNaBodku(this);"
-       style="top:867px; left:449px; width:93px;"/>
+       style="top:865px; left:450px; width:93px;"/>
 <input type="text" name="vv11" id="vv11" onkeyup="CiarkaNaBodku(this);"
-       style="top:867px; left:562px; width:93px;"/>
-<input type="text" name="kd11" id="kd11" style="top:867px; left:675px; width:72px;"/>
-
+       style="top:865px; left:562px; width:93px;"/>
+<input type="text" name="kd11" id="kd11" style="top:865px; left:675px; width:72px;"/>
 <!-- 12.riadok -->
-<input type="text" name="kr12" id="kr12" style="top:904px; left:29px; width:70px;"/>
-<select size="1" name="zp12" id="zp12" style="top:904px; left:129px;">
- <option value="A">A</option>
- <option value="MD">MD</option>
- <option value="RD">RD</option>
- <option value="VS">VS</option>
- <option value="CS">CS</option>
+<input type="text" name="kr12" id="kr12" style="top:902px; left:35px; width:70px;"/>
+<select size="1" name="zp12" id="zp12" style="top:902px; left:136px; width:70px;">
+ <option value="A">A = zamestnanec</option>
+ <option value="MD">MD = matersk· dovolenka</option>
+ <option value="RD">RD = rodiËovsk· dovolenka</option>
+ <option value="VS">VS = vojensk· sluûba</option>
+ <option value="CS">CS = civiln· sluûba</option>
  <option value=" "></option>
 </select>
 <input type="text" name="dp12" id="dp12" onkeyup="CiarkaNaBodku(this);"
-       style="top:903px; left:215px; width:90px;"/>
+       style="top:902px; left:218px; width:93px;"/>
 <input type="text" name="dk12" id="dk12" onkeyup="CiarkaNaBodku(this);"
-       style="top:903px; left:326px; width:90px;"/>
+       style="top:902px; left:328px; width:93px;"/>
 <input type="text" name="vz12" id="vz12" onkeyup="CiarkaNaBodku(this);"
-       style="top:904px; left:449px; width:93px;"/>
+       style="top:902px; left:450px; width:93px;"/>
 <input type="text" name="vv12" id="vv12" onkeyup="CiarkaNaBodku(this);"
-       style="top:904px; left:562px; width:93px;"/>
-<input type="text" name="kd12" id="kd12" style="top:904px; left:675px; width:72px;"/>
-
+       style="top:902px; left:562px; width:93px;"/>
+<input type="text" name="kd12" id="kd12" style="top:902px; left:675px; width:72px;"/>
 <!-- 13.riadok -->
-<input type="text" name="kr13" id="kr13" style="top:940px; left:29px; width:70px;"/>
-<select size="1" name="zp13" id="zp13" style="top:941px; left:129px;">
- <option value="A">A</option>
- <option value="MD">MD</option>
- <option value="RD">RD</option>
- <option value="VS">VS</option>
- <option value="CS">CS</option>
+<input type="text" name="kr13" id="kr13" style="top:939px; left:35px; width:70px;"/>
+<select size="1" name="zp13" id="zp13" style="top:939px; left:136px; width:70px;">
+ <option value="A">A = zamestnanec</option>
+ <option value="MD">MD = matersk· dovolenka</option>
+ <option value="RD">RD = rodiËovsk· dovolenka</option>
+ <option value="VS">VS = vojensk· sluûba</option>
+ <option value="CS">CS = civiln· sluûba</option>
  <option value=" "></option>
 </select>
 <input type="text" name="dp13" id="dp13" onkeyup="CiarkaNaBodku(this);"
-       style="top:940px; left:215px; width:90px;"/>
+       style="top:939px; left:218px; width:93px;"/>
 <input type="text" name="dk13" id="dk13" onkeyup="CiarkaNaBodku(this);"
-       style="top:940px; left:326px; width:90px;"/>
+       style="top:939px; left:328px; width:93px;"/>
 <input type="text" name="vz13" id="vz13" onkeyup="CiarkaNaBodku(this);"
-       style="top:940px; left:449px; width:93px;"/>
+       style="top:939px; left:450px; width:93px;"/>
 <input type="text" name="vv13" id="vv13" onkeyup="CiarkaNaBodku(this);"
-       style="top:940px; left:562px; width:93px;"/>
-<input type="text" name="kd13" id="kd13" style="top:940px; left:675px; width:72px;"/>
+       style="top:939px; left:562px; width:93px;"/>
+<input type="text" name="kd13" id="kd13" style="top:939px; left:675px; width:72px;"/>
 
 <!-- III. ZAMESTNAVATEL -->
-<span class="text-echo" style="top:1019px; left:32px;"><?php echo $fir_fnaz; ?></span>
-<span class="text-echo" style="top:1054px; left:666px;">x</span>
-<span class="text-echo" style="top:1056px; left:760px;"><?php echo $fir_fico; ?></span>
-<span class="text-echo" style="top:1093px; left:32px;"><?php echo $fir_fuli; ?></span>
-<span class="text-echo" style="top:1093px; left:637px;"><?php echo $fir_fcdm; ?></span>
-<span class="text-echo" style="top:1129px; left:32px;"><?php echo $fir_fmes; ?></span>
-<span class="text-echo" style="top:1129px; left:637px;"><?php echo $fir_fpsc; ?></span>
+<span class="text-echo" style="top:1018px; left:40px;"><?php echo $fir_fnaz; ?></span>
+<span class="text-echo" style="top:1053px; left:666px;">x</span>
+<span class="text-echo" style="top:1055px; left:756px;"><?php echo $fir_fico; ?></span>
+<span class="text-echo" style="top:1092px; left:40px;"><?php echo $fir_fuli; ?></span>
+<span class="text-echo" style="top:1092px; left:635px;"><?php echo $fir_fcdm; ?></span>
+<span class="text-echo" style="top:1129px; left:40px;"><?php echo $fir_fmes; ?></span>
+<span class="text-echo" style="top:1129px; left:635px;"><?php echo $fir_fpsc; ?></span>
 
 <!-- IV. POTVRDENIE SPRAVNOSTI -->
 <input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);"
-       style="top:1179px; left:29px; width:122px;"/>
+       style="top:1179px; left:35px; width:122px;"/>
 
 <!-- poznamka -->
-<label for="pozn" style="position:absolute; top:1279px; left:170px; font-size:12px; font-weight:bold;">Pozn·mka</label>
-<input type="text" name="pozn" id="pozn" style="top:1273px; right:10px; width:700px;"/>
-
-</div> <!-- koniec .wrap-form-background -->
+<label for="pozn" style="position:absolute; top:1280px; left:165px; font-size:12px; font-weight:bold;">Pozn·mka</label>
+<input type="text" name="pozn" id="pozn" style="top:1274px; right:12px; width:700px;"/>
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
 </FORM>
 </div> <!-- koniec #content -->
 <?php
