@@ -13,8 +13,6 @@ if( !$uziv ) exit;
 $databaza="";
 $dtb2 = include("oddel_dtbz1.php");
 
-//echo "db".$databaza;
-
 if(!isset($kli_vxcf)) $kli_vxcf = 1;
 
   require_once("../pswd/password.php");
@@ -50,6 +48,13 @@ $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
+//ak chcem pri oddelenych databazach docasne zmenit databazu, z ktorej berie udaje pre firmu cislo  $kli_vxcf
+if( $kli_vxcf == 0 )
+  {
+$databaza=$mysqldb2015.".";
+
+echo "db".$databaza;
+  }
 
 $aj2013=0;
 if( $fir_allx11 > 0 AND $fir_allx11 < $kli_vxcf AND $kli_vrok == 2014 AND $fir_allx12 == 2013 )
