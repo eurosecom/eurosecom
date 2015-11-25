@@ -128,9 +128,6 @@ $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
 $citfir = include("../cis/citaj_fir.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
 
 $cislo_oc = 9999;
 $subor = $_REQUEST['subor'];
@@ -147,7 +144,7 @@ $namanzelku = 1*$_REQUEST['namanzelku'];
 $xml = 1*$_REQUEST['xml'];
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=0;
+$rmc=1;
 $rmc1=0;
 
 //$zablokovane=1;
@@ -163,11 +160,6 @@ window.close();
 exit;
      }
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
 //nacitanie minuleho roka do FOB
 if ( $copern == 3155 ) { ?>
@@ -2656,13 +2648,7 @@ div.input-echo {
   background-color: #fff;
 }
 </style>
-<script>
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height-20;
-var sirkawic = screen.width-10;
-
+<script type="text/javascript">
 <?php
 //uprava sadzby strana 1
   if ( $copern == 20 )
@@ -3125,23 +3111,23 @@ var sirkawic = screen.width-10;
 
   function reNacitaj()
   {
-   window.open('../ucto/priznanie_fob2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0&prepocitaj=1', '_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/priznanie_fob2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0&prepocitaj=1',
+ '_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function TlacFOB()
   {
-   window.open('../ucto/priznanie_fob2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/priznanie_fob2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999',
+ '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function NacitajMinRok()
   {
-   window.open('../ucto/priznanie_fob2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=3155&drupoh=1&page=1', '_self','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/priznanie_fob2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=3155&drupoh=1&page=1',
+ '_self','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
   }
   function PoucVyplnenie()
   {
-   window.open('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function ZnovuPotvrdenie()
-  {
-   window.open('../ucto/priznanie_fob2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1&prepocitaj=1', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_poucenie.pdf',
+ '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function vypocetOP()
   {
@@ -3162,7 +3148,7 @@ var sirkawic = screen.width-10;
 </script>
 </HEAD>
 <?php if( $zandroidu == 1 ) { ?>
-<BODY class="white" >
+<BODY class="white">
 <br />
 <br />
 <table width="100%" >
@@ -3215,30 +3201,54 @@ if ( $strana == 12 ) $clas12="active"; if ( $strana == 13 ) $clas13="active";
 $source="../ucto/priznanie_fob2015.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0";
 ?>
 <div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1&prepocitaj=101', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2&prepocitaj=101', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=3&prepocitaj=101', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=4&prepocitaj=101', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=5&prepocitaj=101', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=6&prepocitaj=101', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=7&prepocitaj=101', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=8&prepocitaj=101', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=9&prepocitaj=101', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=10&prepocitaj=101', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=11&prepocitaj=101', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=12&prepocitaj=101', '_self');" class="<?php echo $clas12; ?> toleft">12</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=12', '_blank');" class="<?php echo $clas12; ?> toright">12</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=11', '_blank');" class="<?php echo $clas11; ?> toright">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=10', '_blank');" class="<?php echo $clas10; ?> toright">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=9', '_blank');" class="<?php echo $clas9; ?> toright">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=8', '_blank');" class="<?php echo $clas8; ?> toright">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=7', '_blank');" class="<?php echo $clas7; ?> toright">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=6', '_blank');" class="<?php echo $clas6; ?> toright">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=5', '_blank');" class="<?php echo $clas5; ?> toright">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=4', '_blank');" class="<?php echo $clas4; ?> toright">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=3', '_blank');" class="<?php echo $clas3; ?> toright">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1&prepocitaj=101', '_self');"
+    class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2&prepocitaj=101', '_self');"
+    class="<?php echo $clas2; ?> toleft">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=3&prepocitaj=101', '_self');"
+    class="<?php echo $clas3; ?> toleft">3</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=4&prepocitaj=101', '_self');"
+    class="<?php echo $clas4; ?> toleft">4</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=5&prepocitaj=101', '_self');"
+    class="<?php echo $clas5; ?> toleft">5</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=6&prepocitaj=101', '_self');"
+    class="<?php echo $clas6; ?> toleft">6</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=7&prepocitaj=101', '_self');"
+    class="<?php echo $clas7; ?> toleft">7</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=8&prepocitaj=101', '_self');"
+    class="<?php echo $clas8; ?> toleft">8</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=9&prepocitaj=101', '_self');"
+    class="<?php echo $clas9; ?> toleft">9</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=10&prepocitaj=101', '_self');"
+    class="<?php echo $clas10; ?> toleft">10</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=11&prepocitaj=101', '_self');"
+    class="<?php echo $clas11; ?> toleft">11</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=12&prepocitaj=101', '_self');"
+    class="<?php echo $clas12; ?> toleft">12</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=12', '_blank');"
+    class="<?php echo $clas12; ?> toright">12</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=11', '_blank');"
+    class="<?php echo $clas11; ?> toright">11</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=10', '_blank');"
+    class="<?php echo $clas10; ?> toright">10</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=9', '_blank');"
+    class="<?php echo $clas9; ?> toright">9</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=8', '_blank');"
+    class="<?php echo $clas8; ?> toright">8</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=7', '_blank');"
+    class="<?php echo $clas7; ?> toright">7</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=6', '_blank');"
+    class="<?php echo $clas6; ?> toright">6</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=5', '_blank');"
+    class="<?php echo $clas5; ?> toright">5</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=4', '_blank');"
+    class="<?php echo $clas4; ?> toright">4</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=3', '_blank');"
+    class="<?php echo $clas3; ?> toright">3</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=2', '_blank');"
+    class="<?php echo $clas2; ?> toright">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=1', '_blank');"
+    class="<?php echo $clas1; ?> toright">1</a>
  <h6 class="toright">TlaËiù:</h6>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 <?php
@@ -3247,15 +3257,16 @@ if ( $prepocitaj == 0 ) { $prepocitaj=1; }
  <input type="checkbox" name="prepocitaj" value="1" class="btn-prepocet"/>
 <?php if ( $prepocitaj == 1 ) { ?>
  <script type="text/javascript">document.formv1.prepocitaj.checked = "checked";</script>
-<?php                     } ?>
+<?php                         } ?>
  <h5 class="btn-prepocet-title">PrepoËÌtaù hodnoty</h5>
- <div class="alert-pocitam"><?php echo "$alertprepocet";?></div>
+ <div class="alert-pocitam"><?php echo $alertprepocet; ?></div>
 </div>
 
 <?php if ( $strana == 1 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str1.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 1.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str1.jpg"
+     alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2015 1.strana 282kB" class="form-background">
 
-<span class="text-echo" style="top:258px; left:57px;"><?php echo $fir_fdic;?></span>
+<span class="text-echo" style="top:258px; left:57px;"><?php echo $fir_fdic; ?></span>
 <input type="text" name="dar" id="dar" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:308px; left:51px;"/>
 <!-- Druh priznania -->
 <input type="radio" id="druh1" name="druh" value="1" style="top:253px; left:440px;"/>
@@ -3326,7 +3337,8 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 2 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str2.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 2.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str2.jpg"
+     alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2015 2.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
 <!-- III. ODDIEL -->
@@ -3412,7 +3424,8 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 3 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str3.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 3.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str3.jpg"
+     alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2015 3.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
 <!-- VI. ODDIEL -->
@@ -3472,7 +3485,8 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 4 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str4.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 4.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str4.jpg"
+     alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2015 4.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
 <!-- VI. ODDIEL pokracovanie -->
@@ -3516,7 +3530,8 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 5 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str5.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 5.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str5.jpg"
+     alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2015 5.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
 <!-- VI. ODDIEL pokracovanie -->
@@ -3553,7 +3568,8 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 6 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str6.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 6.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str6.jpg"
+     alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2015 6.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
 <!-- VII. ODDIEL pokracovanie -->
@@ -3594,7 +3610,8 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 7 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str7.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 7.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str7.jpg"
+     alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2015 7.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
 <!-- VIII. ODDIEL pokracovanie -->
@@ -3621,7 +3638,8 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 8 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str8.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 8.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str8.jpg"
+     alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2015 8.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
 <!-- X. ODDIEL -->
@@ -3660,7 +3678,8 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 9 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str9.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 9.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str9.jpg"
+     alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2015 9.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
 <!-- X. ODDIEL pokracovanie -->
@@ -3681,7 +3700,8 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 10 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str10.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 10.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str10.jpg"
+     alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2015 10.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
 <!-- XI. ODDIEL -->
@@ -3715,7 +3735,8 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 11 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str11.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 11.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str11.jpg"
+     alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2015 11.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
 <!-- XIV. ODDIEL -->
@@ -3791,7 +3812,8 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 12 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str12.jpg" alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2014 12.strana 282kB" class="form-background">
+<img src="../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str12.jpg"
+     alt="tlaËivo DaÚ z prÌjmov FO typ B pre rok 2015 12.strana 282kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic;?></span>
 
 <!-- PRILOHA 1 -->
@@ -3819,18 +3841,30 @@ $sn1c=substr($sknacec,0,1);
 <?php                      } ?>
 
 <div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1&prepocitaj=101', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2&prepocitaj=101', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=3&prepocitaj=101', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=4&prepocitaj=101', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=5&prepocitaj=101', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=6&prepocitaj=101', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=7&prepocitaj=101', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=8&prepocitaj=101', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=9&prepocitaj=101', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=10&prepocitaj=101', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=11&prepocitaj=101', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=12&prepocitaj=101', '_self');" class="<?php echo $clas12; ?> toleft">12</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1&prepocitaj=101', '_self');"
+    class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2&prepocitaj=101', '_self');"
+    class="<?php echo $clas2; ?> toleft">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=3&prepocitaj=101', '_self');"
+    class="<?php echo $clas3; ?> toleft">3</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=4&prepocitaj=101', '_self');"
+    class="<?php echo $clas4; ?> toleft">4</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=5&prepocitaj=101', '_self');"
+    class="<?php echo $clas5; ?> toleft">5</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=6&prepocitaj=101', '_self');"
+    class="<?php echo $clas6; ?> toleft">6</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=7&prepocitaj=101', '_self');"
+    class="<?php echo $clas7; ?> toleft">7</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=8&prepocitaj=101', '_self');"
+    class="<?php echo $clas8; ?> toleft">8</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=9&prepocitaj=101', '_self');"
+    class="<?php echo $clas9; ?> toleft">9</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=10&prepocitaj=101', '_self');"
+    class="<?php echo $clas10; ?> toleft">10</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=11&prepocitaj=101', '_self');"
+    class="<?php echo $clas11; ?> toleft">11</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=12&prepocitaj=101', '_self');"
+    class="<?php echo $clas12; ?> toleft">12</a>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
 </div>
 
@@ -3884,9 +3918,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str1.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str1.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str1.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -4519,9 +4553,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str2.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str2.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str2.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str2.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -4876,9 +4910,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str3.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str3.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str3.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str3.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -5610,9 +5644,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if (File_Exists('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str4.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str4.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str4.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str4.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -6106,9 +6140,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if (File_Exists('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str5.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str5.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str5.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str5.jpg',0,0,210,297);
 }
 $pdf->SetY(9);
 
@@ -6692,9 +6726,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if (File_Exists('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str6.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str6.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str6.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str6.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -7362,9 +7396,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if (File_Exists('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str7.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str7.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str7.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str7.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -7815,9 +7849,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if (File_Exists('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str8.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str8.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str8.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str8.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -8403,9 +8437,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if (File_Exists('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str9.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str9.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str9.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str9.jpg',0,0,210,297);
 }
 $pdf->SetY(9);
 
@@ -8725,9 +8759,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if (File_Exists('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str10.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str10.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str10.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str10.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -9347,9 +9381,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str11.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str11.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str11.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str11.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -10007,9 +10041,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists ('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str12.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str12.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_str12.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_str12.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -10423,9 +10457,9 @@ $pdf->AddFont('arial','','arial.php');
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_potvrdenie.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_potvrdenie.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dpfob2014/dpfob_v14_potvrdenie.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_potvrdenie.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
