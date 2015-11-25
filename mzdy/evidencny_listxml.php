@@ -212,7 +212,10 @@ $text = "<spELDPZec xmlns=\"http://socpoist.sk/xsd/eldpzec\" xmlns:xsi=\"http://
   $text = " <identifikator> "."\r\n";
   fwrite($soubor, $text);
 
-  $text = "  <ico><![CDATA[".$fir_fico."]]></ico> "."\r\n"; fwrite($soubor, $text);
+  $icox=1*$fir_fico;
+  if( $icox > 0 AND $icox < 999999 ) { $icox="00".$icox; }
+
+  $text = "  <ico><![CDATA[".$icox."]]></ico> "."\r\n"; fwrite($soubor, $text);
 
   $text = " </identifikator> "."\r\n";
   fwrite($soubor, $text);
