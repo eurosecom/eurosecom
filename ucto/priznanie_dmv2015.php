@@ -31,9 +31,6 @@ $rokdmv=2015;
 if ( $kli_vrok > 2015 ) { $rokdmv=2015; }
 
 $citfir = include("../cis/citaj_fir.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
 
 $cislo_oc = 9999;
 $subor = $_REQUEST['subor'];
@@ -1897,48 +1894,59 @@ table.sadzby td {
   line-height: 24px;
 }
 
+tr.zero-line > td {
+  border: 0 !important;
+  height: 0 !important;
+/*   line-height: 0 !important;
+  padding: 0 !important; */
+}
 div.wrap-vozidla {
   overflow: auto;
   width: 100%;
   background-color: #fff;
 }
 table.vozidla {
-  width: 914px;
-  margin: 5px auto;
+  width: 900px;
+  margin: 16px auto;
+  background-color: ;
 }
 table.vozidla caption {
-  width: 200px;
-  height: 38px;
-  line-height: 38px;
-  margin-top: 5px;
+  height: 18px;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 13px;
   text-align: left;
 }
-table.vozidla caption img {
+img.btn-item-new {
   position: absolute;
-  top: 42px;
-  left: 145px;
+  top: 32px;
+  right: 145px;
   width: 20px;
   height: 20px;
   cursor: pointer;
 }
-table.vozidla thead td {
-  height: 16px;
-  line-height: 16px;
+table.vozidla tr.body:hover {
+  background-color: #f1faff;
+}
+table.vozidla tr.alert-error {
+  background-color: #FFCC80;
+}
+
+table.vozidla th {
+  height: 14px;
+  vertical-align: middle;
   font-size: 11px;
   font-weight: bold;
   color: #999;
 }
-table.vozidla tbody td {
-  height: 30px;
-  line-height: 30px;
+table.vozidla td {
+  height: 28px;
+  line-height: 28px;
   border-top: 2px solid #add8e6;
-  font-size: 15px;
+  font-size: 14px;
 }
-table.vozidla tbody img {
-  width: 20px;
-  height: 20px;
+table.vozidla td img {
+  width: 18px;
+  height: 18px;
   vertical-align: text-bottom;
   cursor: pointer;
 }
@@ -3007,21 +3015,32 @@ $sluz = mysql_query("$sluztt");
 $slpol = mysql_num_rows($sluz);
 ?>
 <div class="wrap-vozidla">
- <table class="vozidla">
- <caption>Zoznam vozidiel
-  <img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="Pridaù vozidlo">
- </caption>
- <thead>
-  <tr>
-   <td width="10%" style="text-align:center;">E»V</td>
-   <td width="35%">ZnaËka</td>
-   <td width="5%" align="center">Katg.</td>
-   <td width="13%" align="center">D·tum vzniku</td>
-   <td width="13%" align="center">D·tum z·niku</td>
-   <td width="10%" align="right">DaÚ</td>
-   <td width="14%">&nbsp;</td>
-  </tr>
- </thead>
+ <img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="Pridaù vozidlo"
+      class="btn-item-new"> <!-- dopyt, spraviù tlaËidlovÈ "+ Vozidlo" -->
+<table class="vozidla">
+<caption>Zoznam vozidiel</caption>
+<tr class="zero-line">
+ <td style="width:9%;"></td><td style="width:32%;"></td><td style="width:4%;"></td>
+ <td style="width:12%;"></td><td style="width:10%;"></td><td style="width:12%;"></td>
+ <td style="width:9%;"></td><td style="width:12%;"></td>
+</tr>
+<tr>
+ <th rowspan="2">E»V</th>
+ <th rowspan="2" align="left">ZnaËka</th>
+ <th rowspan="2">Katg.</th>
+ <th>Prv·</th>
+ <th colspan="2">DaÚov· povinnosù</th>
+ <th rowspan="2" align="right">DaÚ</th>
+ <th rowspan="2">&nbsp;</th>
+</tr>
+<tr>
+ <th style="padding-bottom:1px;">evidencia</th>
+ <th style="padding-bottom:1px;">Vznik</th>
+ <th style="padding-bottom:1px;">Z·nik</th>
+</tr>
+<tr class="alert-error">
+<td colspan="8">error</td>
+</tr>
 <?php
 $i=0;
   while ( $i <= $slpol )
@@ -3030,24 +3049,26 @@ $i=0;
  {
 $rsluz=mysql_fetch_object($sluz);
 ?>
- <tbody>
-  <tr>
-   <td style="text-align:center"><?php echo $rsluz->vzspz;?></td>
-   <td><?php echo $rsluz->vzzn;?></td>
-   <td align="center" ><?php echo $rsluz->vzkat;?></td>
-   <td align="center"><?php echo SkDatum($rsluz->datz);?></td>
-   <td align="center">
-    <img src="../obr/ikony/list_blue_icon.png" onclick="VytvorOznamZanik(<?php echo $rsluz->cpl;?>);"
-         title="Vytvoriù ozn·menie o z·niku daÚovej povinnosti">
-    <?php echo SkDatum($rsluz->datk);?>
-   </td>
-   <td align="right"><?php echo $rsluz->r21;?></td>
-   <td align="center">
-    <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl;?>);" title="Upraviù vozidlo">&nbsp;&nbsp;
-    <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl;?>, '<?php echo $rsluz->vzspz;?>');" title="Vymazaù vozidlo">
-   </td>
-  </tr>
- </tbody>
+<tr class="body">
+ <td align="center"><?php echo $rsluz->vzspz; ?></td>
+ <td><?php echo $rsluz->vzzn; ?></td>
+ <td align="center"><?php echo $rsluz->vzkat; ?></td>
+ <td align="center"><img src="../obr/pozor.png" alt="pozor.png, 247B" title="pozor" height="16" width="16"></td> <!-- dopyt, rozbehaù plus podmienku, kedy zobrazÌ v˝kriËnÌk -->
+                                                                  
+ <td align="center"><?php echo SkDatum($rsluz->datz); ?></td>
+ <td align="center">
+  <img src="../obr/ikony/list_blue_icon.png" onclick="VytvorOznamZanik(<?php echo $rsluz->cpl; ?>);"
+       title="Vytvoriù ozn·menie o z·niku daÚovej povinnosti">
+    <?php echo SkDatum($rsluz->datk); ?>
+ </td>
+ <td align="right" style=""><?php echo $rsluz->r21; ?></td>
+ <td align="center">
+  <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl; ?>);"
+       title="Upraviù">&nbsp;&nbsp;&nbsp;
+  <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl; ?>, '<?php echo $rsluz->vzspz; ?>');"
+       title="Vymazaù">
+ </td>
+</tr>
 <?php
  }
 $i=$i+1;
@@ -3072,7 +3093,7 @@ $i=$i+1;
 <?php
 //mysql_free_result($vysledok);
   }
-//koniec uprav udaje
+//koniec uprav
 ?>
 
 
