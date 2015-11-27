@@ -3053,8 +3053,11 @@ $rsluz=mysql_fetch_object($sluz);
  <td align="center"><?php echo $rsluz->vzspz; ?></td>
  <td><?php echo $rsluz->vzzn; ?></td>
  <td align="center"><?php echo $rsluz->vzkat; ?></td>
- <td align="center"><img src="../obr/pozor.png" alt="pozor.png, 247B" title="pozor" height="16" width="16"></td> <!-- dopyt, rozbeha plus podmienku, kedy zobrazí výkrièník -->
-                                                                  
+ <td align="center">
+<?php echo SkDatum($rsluz->da1); ?>
+<?php if( SkDatum($rsluz->da1) == '00.00.0000' ) { ?>
+ <img src="../obr/pozor.png" alt="pozor.png, 247B" title="pozor" height="16" width="16"></td> <!-- dopyt, rozbeha plus podmienku, kedy zobrazí výkrièník -->
+<?php                                            } ?>                                                                
  <td align="center"><?php echo SkDatum($rsluz->datz); ?></td>
  <td align="center">
   <img src="../obr/ikony/list_blue_icon.png" onclick="VytvorOznamZanik(<?php echo $rsluz->cpl; ?>);"
