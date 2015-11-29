@@ -31,6 +31,10 @@ if (!$vysledok):
 $vtvall = include("../cis/vtvall.php");
 endif;
 
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdcisddp MODIFY iban VARCHAR(50) NOT NULL ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdcisddp MODIFY pt3 VARCHAR(35) NOT NULL ";
+$vysledek = mysql_query("$sql");
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");

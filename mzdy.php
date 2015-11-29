@@ -1043,6 +1043,30 @@ $setprm = include("mzdy/sepa2015.php");
 }
 //uprava sepa od 1.1.2015
 
+//uprava parametrov miezd na aktualny stav od 1.1.2016
+$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_new012016";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$vyb_roks=$vyb_rok;
+$mysqldbdatas=$mysqldbdata;
+$vyb_xcfs=$vyb_xcf;
+$setprm = include("mzdy/set2016parametre.php");
+}
+//uprava parametrov miezd na aktualny stav od 1.1.2016
+
+//uprava sepa od 1.1.2016
+$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_sepa012016a";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$vyb_roks=$vyb_rok;
+$mysqldbdatas=$mysqldbdata;
+$vyb_xcfs=$vyb_xcf;
+$setprm = include("mzdy/sepa2016.php");
+}
+//uprava sepa od 1.1.2016
+
 //cleaning
 $datdnessql = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 $jeclean=0;

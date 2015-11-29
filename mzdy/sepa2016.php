@@ -1,5 +1,5 @@
 <?php
-//echo "sepa";
+//echo "sepa 2016";
 $sqlt = <<<vtvmzd
 (
    xcf         INT,
@@ -79,6 +79,17 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD ziban VARCHAR(50) not null AFTER zdro";
 $vysledek = mysql_query("$sql");
                }
+
+$kli_vxcf=$vyb_xcfs;
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdcisddp MODIFY iban VARCHAR(50) NOT NULL ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdcisddp MODIFY pt3 VARCHAR(35) NOT NULL ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_zdravpois MODIFY iban VARCHAR(50) NOT NULL ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_zdravpois MODIFY pt3 VARCHAR(35) NOT NULL ";
+$vysledek = mysql_query("$sql");
+
 
 $sql = "CREATE TABLE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm_sepa012016a".$sqlt;
 $vysledek = mysql_query("$sql");
