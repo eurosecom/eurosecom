@@ -1766,7 +1766,6 @@ $dvhsql=SqlDatum($dvhsk);
 $sqlx = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET dvh='$dvhsql' WHERE oc = 9999 ";
 $vysledekx = mysql_query("$sqlx");
 }
-
 $pozn = $fir_riadok->pozn;
                     }
 mysql_free_result($fir_vysledok);
@@ -1893,12 +1892,9 @@ table.sadzby td {
   text-align: center;
   line-height: 24px;
 }
-
 tr.zero-line > td {
   border: 0 !important;
   height: 0 !important;
-/*   line-height: 0 !important;
-  padding: 0 !important; */
 }
 div.wrap-vozidla {
   overflow: auto;
@@ -1911,26 +1907,32 @@ table.vozidla {
   background-color: ;
 }
 table.vozidla caption {
-  height: 18px;
+  height: 20px;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 14px;
   text-align: left;
 }
-img.btn-item-new {
+a.btn-item-new {
   position: absolute;
-  top: 32px;
-  right: 145px;
-  width: 20px;
-  height: 20px;
+  top: 35px;
+  left: 150px;
   cursor: pointer;
+  font-weight: bold;
+  color: #fff;
+  font-size: 10px;
+  padding: 8px 12px 7px 12px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+  background-color: #1ccc66;
 }
+a.btn-item-new:hover {
+  background-color: #1abd5f;
+}
+
 table.vozidla tr.body:hover {
   background-color: #f1faff;
 }
-table.vozidla tr.alert-error {
-  background-color: #FFCC80;
-}
-
 table.vozidla th {
   height: 14px;
   vertical-align: middle;
@@ -1958,6 +1960,13 @@ div.input-echo {
   position: absolute;
   font-size: 18px;
   background-color: #fff;
+}
+.tooltip-body ul li {
+  font-size: 13px;
+  line-height: 20px;
+}
+.tooltip-body ul li strong {
+  font-size: 14px;
 }
 </style>
 
@@ -2290,7 +2299,7 @@ div.input-echo {
    <td>
     <div class="bar-btn-form-tool">
      <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();"
-          title="Naèíta údaje z minulého roka" class="btn-form-tool"> <!-- dopyt, preveri -->
+          title="Naèíta údaje z minulého roka" class="btn-form-tool">
      <img src="../obr/ikony/info_blue_icon.png" onclick="Sadzby2015();"
           title="Roèné sadzby dane" class="btn-form-tool">
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();"
@@ -2458,114 +2467,113 @@ $source="../ucto/priznanie_dmv".$rokdmv.".php?cislo_oc=".$cislo_oc."&drupoh=1&pa
  <option value="0"></option>
 </select>
 <script type="text/javascript">
-function urobVzdru()
+  function urobVzdru()
   {
-var mySelect = document.getElementById('vzdru');
+   var mySelect = document.getElementById('vzdru');
+   for (var i=0, len=mySelect.options.length; i<len; i++)
+   {
+    mySelect.removeChild( mySelect.options[0] );
+   }
 
-for (var i=0, len=mySelect.options.length; i<len; i++) {
-mySelect.removeChild( mySelect.options[0] );
-}
+  if ( document.formv1.vzkat.value == "L" )
+  {
+   var opt1 = document.createElement('option');
+   opt1.appendChild( document.createTextNode('L1e - malý motocykel (2-kolesové vozidlo), objem valcov neprevyšuje 50 cm3') );
+   opt1.value = 'L1';
+   mySelect.appendChild(opt1);
 
-if ( document.formv1.vzkat.value == "L" )
-{
-var opt1 = document.createElement('option');
-opt1.appendChild( document.createTextNode('L1e - malý motocykel (2-kolesové vozidlo), objem valcov neprevyšuje 50 cm3') );
-opt1.value = 'L1';
-mySelect.appendChild(opt1);
+   var opt2 = document.createElement('option');
+   opt2.appendChild( document.createTextNode('L2e - malý motocykel (3-kolesové vozidlo), objem valcov neprevyšuje 50 cm3') );
+   opt2.value = 'L2';
+   mySelect.appendChild(opt2);
 
-var opt2 = document.createElement('option');
-opt2.appendChild( document.createTextNode('L2e - malý motocykel (3-kolesové vozidlo), objem valcov neprevyšuje 50 cm3') );
-opt2.value = 'L2';
-mySelect.appendChild(opt2);
+   var opt3 = document.createElement('option');
+   opt3.appendChild( document.createTextNode('L3e - motocykel, 2-kolesové vozidlo bez postran. motor. vozíka, s objemom valcov väèší ako 50 cm3') );
+   opt3.value = 'L3';
+   mySelect.appendChild(opt3);
 
-var opt3 = document.createElement('option');
-opt3.appendChild( document.createTextNode('L3e - motocykel, 2-kolesové vozidlo bez postran. motor. vozíka, s objemom valcov väèší ako 50 cm3') );
-opt3.value = 'L3';
-mySelect.appendChild(opt3);
+   var opt4 = document.createElement('option');
+   opt4.appendChild( document.createTextNode('L4e - motocykel, 2-kolesové vozidlo s postran. motor. vozíkom, s objemom valcov väèší ako 50 cm3') );
+   opt4.value = 'L4';
+   mySelect.appendChild(opt4);
 
-var opt4 = document.createElement('option');
-opt4.appendChild( document.createTextNode('L4e - motocykel, 2-kolesové vozidlo s postran. motor. vozíkom, s objemom valcov väèší ako 50 cm3') );
-opt4.value = 'L4';
-mySelect.appendChild(opt4);
+   var opt5 = document.createElement('option');
+   opt5.appendChild( document.createTextNode('L5e - motorová 3-kolka, vozidlo s 3 kolesami, s objemom valcov väèší ako 50 cm3') );
+   opt5.value = 'L5';
+   mySelect.appendChild(opt5);
 
-var opt5 = document.createElement('option');
-opt5.appendChild( document.createTextNode('L5e - motorová 3-kolka, vozidlo s 3 kolesami, s objemom valcov väèší ako 50 cm3') );
-opt5.value = 'L5';
-mySelect.appendChild(opt5);
+   var opt6 = document.createElement('option');
+   opt6.appendChild( document.createTextNode('L6e - ¾ahká 4-kolka s objemom valcov neprevyšuje 50 cm3') );
+   opt6.value = 'L6';
+   mySelect.appendChild(opt6);
 
-var opt6 = document.createElement('option');
-opt6.appendChild( document.createTextNode('L6e - ¾ahká 4-kolka s objemom valcov neprevyšuje 50 cm3') );
-opt6.value = 'L6';
-mySelect.appendChild(opt6);
+   var opt7 = document.createElement('option');
+   opt7.appendChild( document.createTextNode('L7e - štvorkolka iná') );
+   opt7.value = 'L7';
+   mySelect.appendChild(opt7);
+  }
 
-var opt7 = document.createElement('option');
-opt7.appendChild( document.createTextNode('L7e - štvorkolka iná') );
-opt7.value = 'L7';
-mySelect.appendChild(opt7);
+  if ( document.formv1.vzkat.value == "M" )
+  {
+   var opt1 = document.createElement('option');
+   opt1.appendChild( document.createTextNode('M1 - najviac 8 sedadiel okrem sedadla pre vodièa') );
+   opt1.value = 'M1';
+   mySelect.appendChild(opt1);
 
-}
+   var opt2 = document.createElement('option');
+   opt2.appendChild( document.createTextNode('M2 - viac ako 8 sedadiel okrem sedadla pre vodièa, s prípust. celkovou hmotn. neprevyš. 5000 kg') );
+   opt2.value = 'M2';
+   mySelect.appendChild(opt2);
 
-if( document.formv1.vzkat.value == "M" ) {
+   var opt3 = document.createElement('option');
+   opt3.appendChild( document.createTextNode('M3 - viac ako 8 sedadiel okrem sedadla pre vodièa, s prípust. celkovou hmotn. vyššou ako 5000 kg') );
+   opt3.value = 'M3';
+   mySelect.appendChild(opt3);
+  }
 
-var opt1 = document.createElement('option');
-opt1.appendChild( document.createTextNode('M1 - najviac 8 sedadiel okrem sedadla pre vodièa') );
-opt1.value = 'M1';
-mySelect.appendChild(opt1);
+  if ( document.formv1.vzkat.value == "N" )
+  {
+   var opt1 = document.createElement('option');
+   opt1.appendChild( document.createTextNode('N1 - s prípustnou celkovou hmotnosou neprevyš. 3500 kg') );
+   opt1.value = 'N1';
+   mySelect.appendChild(opt1);
 
-var opt2 = document.createElement('option');
-opt2.appendChild( document.createTextNode('M2 - viac ako 8 sedadiel okrem sedadla pre vodièa, s prípust. celkovou hmotn. neprevyš. 5000 kg') );
-opt2.value = 'M2';
-mySelect.appendChild(opt2);
+   var opt2 = document.createElement('option');
+   opt2.appendChild( document.createTextNode('N2 - s prípustnou celkovou hmotnosou vyššou ako 3500 kg, ale neprevyš. 12000 kg') );
+   opt2.value = 'N2';
+   mySelect.appendChild(opt2);
 
-var opt3 = document.createElement('option');
-opt3.appendChild( document.createTextNode('M3 - viac ako 8 sedadiel okrem sedadla pre vodièa, s prípust. celkovou hmotn. vyššou ako 5000 kg') );
-opt3.value = 'M3';
-mySelect.appendChild(opt3);
-}
+   var opt3 = document.createElement('option');
+   opt3.appendChild( document.createTextNode('N3 - s prípustnou celkovou hmotnosou vyššou ako 12000 kg') );
+   opt3.value = 'N3';
+   mySelect.appendChild(opt3);
+  }
 
-if( document.formv1.vzkat.value == "N" ) {
+  if ( document.formv1.vzkat.value == "O" )
+  {
+   var opt1 = document.createElement('option');
+   opt1.appendChild( document.createTextNode('O1 - s prípustnou celkovou hmotnosou neprevyšujúcou 750 kg') );
+   opt1.value = 'O1';
+   mySelect.appendChild(opt1);
 
-var opt1 = document.createElement('option');
-opt1.appendChild( document.createTextNode('N1 - s prípustnou celkovou hmotnosou neprevyš. 3500 kg') );
-opt1.value = 'N1';
-mySelect.appendChild(opt1);
+   var opt2 = document.createElement('option');
+   opt2.appendChild( document.createTextNode('O2 - s prípustnou celkovou hmotnosou vyššou ako 750 kg, ale neprevyš. 3500 kg') );
+   opt2.value = 'O2';
+   mySelect.appendChild(opt2);
 
-var opt2 = document.createElement('option');
-opt2.appendChild( document.createTextNode('N2 - s prípustnou celkovou hmotnosou vyššou ako 3500 kg, ale neprevyš. 12000 kg') );
-opt2.value = 'N2';
-mySelect.appendChild(opt2);
+   var opt3 = document.createElement('option');
+   opt3.appendChild( document.createTextNode('O3 - s prípustnou celkovou hmotnosou vyššou ako 3500 kg, ale neprevyš. 10000 kg') );
+   opt3.value = 'O3';
+   mySelect.appendChild(opt3);
 
-var opt3 = document.createElement('option');
-opt3.appendChild( document.createTextNode('N3 - s prípustnou celkovou hmotnosou vyššou ako 12000 kg') );
-opt3.value = 'N3';
-mySelect.appendChild(opt3);
-
-}
-
-if( document.formv1.vzkat.value == "O" ) {
-
-var opt1 = document.createElement('option');
-opt1.appendChild( document.createTextNode('O1 - s prípustnou celkovou hmotnosou neprevyšujúcou 750 kg') );
-opt1.value = 'O1';
-mySelect.appendChild(opt1);
-
-var opt2 = document.createElement('option');
-opt2.appendChild( document.createTextNode('O2 - s prípustnou celkovou hmotnosou vyššou ako 750 kg, ale neprevyš. 3500 kg') );
-opt2.value = 'O2';
-mySelect.appendChild(opt2);
-
-var opt3 = document.createElement('option');
-opt3.appendChild( document.createTextNode('O3 - s prípustnou celkovou hmotnosou vyššou ako 3500 kg, ale neprevyš. 10000 kg') );
-opt3.value = 'O3';
-mySelect.appendChild(opt3);
-
-var opt4 = document.createElement('option');
-opt4.appendChild( document.createTextNode('O4 - s prípustnou celkovou hmotnosou presahujúcou 10000 kg') );
-opt4.value = 'O4';
-mySelect.appendChild(opt4);
-}
+   var opt4 = document.createElement('option');
+   opt4.appendChild( document.createTextNode('O4 - s prípustnou celkovou hmotnosou presahujúcou 10000 kg') );
+   opt4.value = 'O4';
+   mySelect.appendChild(opt4);
+  }
   }
 </script>
+
 <!-- 05 riadok -->
 <input type="text" name="vzspz" id="vzspz" value="<?php echo $vzspz; ?>"
        style="width:218px; top:327px; left:359px;"/>
@@ -2608,9 +2616,6 @@ mySelect.appendChild(opt4);
  </ul>
 </div>
 </div> <!-- #tooltip -->
-
-
-
 
 <!-- 11 riadok -->
 <select size="1" name="oslbd" id="oslbd" style="top:494px; left:554px;">
@@ -2859,10 +2864,6 @@ mySelect.appendChild(opt4);
 </div> <!-- .sadzby-area-body -->
 </div> <!-- .sadzby-area -->
 
-<div id="robot" class="sadzby-dane-box-locate"
- style="position:absolute; padding: 5px; top:580px; left:20px; background-color:white;"><?php echo "mesiac od da1 jan.".$mesad2.". - dec.".$mesad1."."; ?></div> <!-- dopyt, nezabudnú schova -->
-
-
 <!-- 13 riadok -->
 <!-- znizenie sadzby -->
 <input type="checkbox" name="r13s1zni25" id="r13s1zni25" value="1" onclick="zni25s1();"
@@ -2886,6 +2887,25 @@ mySelect.appendChild(opt4);
        style="top:652px; left:500px;"/>
 <input type="checkbox" name="r13s2zvy20" id="r13s2zvy20" value="1" onclick="zvy20s2();"
        style="top:652px; left:540px;"/>
+ <img src="../obr/ikony/info_blue_icon.png" title="Poèet mesiacov od prvej evidencie vozidla"
+      onclick="document.getElementById('tooltip-r13').className='unhidden tooltip-left';"
+      class="btn-row-tool" style="top:642px; left:600px;">
+
+<!-- napoveda k riadku 13 -->
+<div id="tooltip-r13" class="hidden tooltip-left" style="width:300px; top:605px; left:595px;">
+<div class="tooltip-heading">
+ <h3 class="toleft">Poèet mesiacov od prvej evidencie vozidla</h3>
+ <img src="../obr/ikony/xmark4_blue_x16.png" onclick="document.getElementById('tooltip-r13').className='hidden';"
+      title="Zavrie" class="toright">
+</div>
+<div class="tooltip-body">
+ <ul>
+ <li>v januári: <strong><?php echo $mesad2; ?></strong></li>
+ <li>v decembri: <strong><?php echo $mesad1; ?></strong></li>
+ </ul>
+</div>
+</div>
+
 <!-- 14 riadok -->
 <input type="text" name="r14s1" id="r14s1" value="<?php echo $r14s1; ?>"
        onkeyup="CiarkaNaBodku(this);" style="width:137px; top:681px; left:282px;"/>
@@ -3015,8 +3035,7 @@ $sluz = mysql_query("$sluztt");
 $slpol = mysql_num_rows($sluz);
 ?>
 <div class="wrap-vozidla">
- <img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="Prida vozidlo"
-      class="btn-item-new"> <!-- dopyt, spravi tlaèidlové "+ Vozidlo" -->
+ <a href="#" onclick="NoveVzd();" title="Prida vozidlo" class="btn-item-new" >+ Vozidlo</a>
 <table class="vozidla">
 <caption>Zoznam vozidiel</caption>
 <tr class="zero-line">
@@ -3038,9 +3057,6 @@ $slpol = mysql_num_rows($sluz);
  <th style="padding-bottom:1px;">Vznik</th>
  <th style="padding-bottom:1px;">Zánik</th>
 </tr>
-<tr class="alert-error">
-<td colspan="8">error</td>
-</tr>
 <?php
 $i=0;
   while ( $i <= $slpol )
@@ -3054,10 +3070,12 @@ $rsluz=mysql_fetch_object($sluz);
  <td><?php echo $rsluz->vzzn; ?></td>
  <td align="center"><?php echo $rsluz->vzkat; ?></td>
  <td align="center">
+<?php if ( SkDatum($rsluz->da1) == '00.00.0000' ) { ?>
+ <img src="../obr/pozor.png" style="width:14px; height:14px;"
+      title="Pozor, nie je vyplnený dátum prvej evidencie. Program nevypoèíta správne výšku dane">
+<?php                                             } ?>
 <?php echo SkDatum($rsluz->da1); ?>
-<?php if( SkDatum($rsluz->da1) == '00.00.0000' ) { ?>
- <img src="../obr/pozor.png" alt="pozor.png, 247B" title="pozor" height="16" width="16"></td> <!-- dopyt, rozbeha plus podmienku, kedy zobrazí výkrièník -->
-<?php                                            } ?>                                                                
+ </td>
  <td align="center"><?php echo SkDatum($rsluz->datz); ?></td>
  <td align="center">
   <img src="../obr/ikony/list_blue_icon.png" onclick="VytvorOznamZanik(<?php echo $rsluz->cpl; ?>);"
