@@ -1824,6 +1824,74 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD r40pu DECIMAL(10,2) DEFAULT 0 AFTER new2014";
 $vysledek = mysql_query("$sql");
 }
+//zmeny pre rok 2015
+$sql = "SELECT prppp FROM F".$kli_vxcf."_mzdpriznanie_fob";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+//priloha 1 o projektoch
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD new2015 DECIMAL(2,0) NOT NULL AFTER uppr1";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpdzc DATE NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpzo1 DATE NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpzd1 DATE NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpvz1 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpod1 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpzo2 DATE NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpzd2 DATE NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpvz2 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpod2 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpzo3 DATE NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpzd3 DATE NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpvz3 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpod3 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpzo4 DATE NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpzd4 DATE NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpvz4 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpod4 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpzo5 DATE NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpzd5 DATE NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpvz5 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpod5 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpods DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpodv DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prptxt TEXT NOT NULL AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpcp DECIMAL(4,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prppp DECIMAL(4,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+}
 //koniec uprav def. tabulky
 
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob";
