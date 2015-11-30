@@ -1808,7 +1808,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD r40pu DECIMAL(10,2) DEFAU
 $vysledek = mysql_query("$sql");
 }
 //zmeny pre rok 2015
-$sql = "SELECT prppp FROM F".$kli_vxcf."_mzdpriznanie_fob";
+$sql = "SELECT t3v15 FROM F".$kli_vxcf."_mzdpriznanie_fob";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -1873,6 +1873,21 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prpcp DECIMAL(4,0) DEFAULT 0 AFTER new2015";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD prppp DECIMAL(4,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+//ostatne
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob MODIFY r50 DECIMAL(10,0) DEFAULT 0 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob MODIFY r51 DECIMAL(10,0) DEFAULT 0 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob MODIFY r52 DECIMAL(10,0) DEFAULT 0 ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD zslu DECIMAL(2,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD t3p15 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD t3v15 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
 $vysledek = mysql_query("$sql");
 }
 //koniec uprav def. tabulky
