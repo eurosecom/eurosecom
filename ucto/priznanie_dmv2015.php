@@ -809,7 +809,7 @@ $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r12='$sadzba12' W
 $sqldok = mysql_query("$sqlttt");
 
 
-echo "idem sadzba do r12"."<br />";
+//echo "idem sadzba do r12"."<br />";
 
 
 $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET r14=YEAR(da1), r15=MONTH(da1) WHERE oc = 1 AND cpl = $riadok->cpl ";
@@ -915,7 +915,7 @@ $podmnacpl="";
 
 if ( $pocetdni == 1 )
      {
-echo "idem pocet mesiacov r19 "."<br />";
+//echo "idem pocet mesiacov r19 "."<br />";
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET datz='$prvyden' WHERE oc = 1 AND datz = '0000-00-00' AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r19s1dni=$pocetdni WHERE oc = 1 AND cpl = $riadok->cpl ";
@@ -1000,7 +1000,7 @@ $upravene = mysql_query("$uprtxt");
 if ( $pocetdni == 1 ) { $vypocitajdan=1; }
 if ( $vypocitajdan == 1 )
      {
-echo "idem vypocitaj dan r14,16,18,20 "."<br />";
+//echo "idem vypocitaj dan r14,16,18,20 "."<br />";
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=0, des2=0 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 
@@ -1155,7 +1155,7 @@ $upravene = mysql_query("$uprtxt");
 $pomermes=1;
 if( $pomermes == 1 )
   {
-echo "idem pomer mes"."<br />";
+//echo "idem pomer mes"."<br />";
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s1/12*r19s1mes WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
