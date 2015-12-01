@@ -53,8 +53,6 @@ img.btn-row-tool {
   margin: 20px auto;
   padding-bottom: 20px;
 }
-.toleft { float: left; }
-.toright { float: right; }
 div.navbar > h6 {
   padding: 8px 8px 5px 8px;
   font-size: 11px;
@@ -252,4 +250,25 @@ font-size:12px; font-weight:bold;  text-indent:4px;
 }
 .tooltip-body ul li strong {
   margin-right: 6px;
+}
+.toleft {
+  float: left;
+}
+.toright {
+  float: right;
+}
+.center {
+  text-align: center;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.hidden {
+  display: none;
+}
+.unhidden {
+  display: block;
 }
