@@ -954,6 +954,9 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET des6=mpom*(12558.906-(r36/4))/12 WHERE oc = $cislo_oc AND r36 >= 35022.32 ";
 $oznac = mysql_query("$sqtoz");
 
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET des6=des6-mpri WHERE oc = $cislo_oc AND r36 >= 35022.32 ";
+$oznac = mysql_query("$sqtoz");
+
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa".
 " SET des2=des6*100, des2=ceil(des2), r38=des2/100  WHERE oc = $cislo_oc AND r36 >= 35022.32 ";
 $oznac = mysql_query("$sqtoz");
