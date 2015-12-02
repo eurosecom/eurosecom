@@ -144,7 +144,7 @@ $namanzelku = 1*$_REQUEST['namanzelku'];
 $xml = 1*$_REQUEST['xml'];
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=1;
+$rmc=0;
 $rmc1=0;
 
 //$zablokovane=1;
@@ -3965,7 +3965,7 @@ $sn1c=substr($sknacec,0,1);
 <textarea name="osob" id="osob" style="width:838px; height:234px; top:564px; left:53px;"><?php echo $osob; ?></textarea>
 
 <input type="text" name="pril" id="pril" style="width:37px; top:832px; left:184px;"/>
-<input type="text" name="dat" id="dat" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:905px; left:277px;"/> <!-- dopyt, nemalo by predplòa aktuálny dátum -->
+<input type="text" name="dat" id="dat" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:905px; left:277px;"/>
 
 <!-- XIV.ODDIEL -->
 <input type="checkbox" name="zdbo" value="1" style="top:987px; left:59px;"/>
@@ -10251,7 +10251,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t09","$rmc",0,"C");$pdf->Cell
 
 //PRILOHA 1
 //projekt cislo
-//dopyt, nefunkèné
 $pdf->Cell(195,16," ","$rmc1",1,"L");
 $tlachod=$hlavicka->prpcp;
 $tlachod_c=sprintf("% 2s",$tlachod);
@@ -10261,7 +10260,6 @@ $pdf->Cell(51,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 
 //pocet projektov
-//dopyt, nefunkèné
 $tlachod=$hlavicka->prppp;
 $tlachodxx="222";
 $tlachod_c=sprintf("% 2s",$tlachod);
@@ -10706,7 +10704,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t11","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t12","$rmc",1,"C");
 
 //ciele projektu
-//dopyt, je to dobre
 $pdf->Cell(190,7," ","$rmc1",1,"L");
 $poleprptxt = explode("\r\n", $hlavicka->prptxt);
 if ( $poleprptxt[0] != '' )
