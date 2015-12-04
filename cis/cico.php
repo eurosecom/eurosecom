@@ -1426,6 +1426,28 @@ if( $sys == 'CST' )
 
 
 <?php
+//vypocet IBANu
+if ( $copern == 8 )
+     {
+?>
+<script type="text/javascript">
+
+//zapis nastavenie
+function dajIBAN(cislo)
+                {
+var cislox = cislo;
+
+window.open('../cis/dajiban.php?cislo_ico=<?php echo $cislo_ico; ?>&cislox=' + cislox + '&copern=1', '_self' );
+                }
+
+</script>
+<?php
+     }
+?>
+
+
+
+<?php
 // toto je cast na zobrazenie tabulky a prechody medzi stranami
 // 1=volanie z menu.php
 // 2=dalsia strana
@@ -1732,7 +1754,9 @@ Sídlo mesto:</td>
 <td class="fmenu">Banka 1 NUM:</td>
 <td class="fmenu">
 <input type="text" name="h_nm1" id="h_nm1" onKeyDown="return Nm1Enter(event.which)" />*</td>
-<td class="fmenu" colspan="2">Banka 1 IBAN-SWIFT:
+<td class="fmenu" colspan="2">
+<img src='../obr/vlozit.png' onclick="dajIBAN(1);" width=15 height=15 border=0 title="Vypoèíta SK IBAN è.1 z bankového úètu 1" >
+IBAN-SWIFT:
 <input type="text" name="h_ib1" id="h_ib1" onKeyDown="return Ib1Enter(event.which)" size="30"/>
 -<input type="text" name="h_st1" id="h_st1" onKeyDown="return St1Enter(event.which)" size="8"/>
 </td>
@@ -1745,7 +1769,9 @@ Sídlo mesto:</td>
 <td class="fmenu">Banka 2 NUM:</td>
 <td class="fmenu">
 <input type="text" name="h_nm2" id="h_nm2" onKeyDown="return Nm2Enter(event.which)" /></td>
-<td class="fmenu" colspan="2">Banka 2 IBAN-SWIFT:
+<td class="fmenu" colspan="2">
+<img src='../obr/vlozit.png' onclick="dajIBAN(2);" width=15 height=15 border=0 title="Vypoèíta SK IBAN è.2 z bankového úètu 2" >
+IBAN-SWIFT:
 <input type="text" name="h_ib2" id="h_ib2" onKeyDown="return Ib2Enter(event.which)" size="30"/>
 -<input type="text" name="h_st2" id="h_st2" onKeyDown="return St2Enter(event.which)" size="8"/>
 </td>
@@ -1758,7 +1784,9 @@ Sídlo mesto:</td>
 <td class="fmenu">Banka 3 NUM:</td>
 <td class="fmenu">
 <input type="text" name="h_nm3" id="h_nm3" onKeyDown="return Nm3Enter(event.which)" /></td>
-<td class="fmenu" colspan="2">Banka 3 IBAN-SWIFT:
+<td class="fmenu" colspan="2">
+<img src='../obr/vlozit.png' onclick="dajIBAN(3);" width=15 height=15 border=0 title="Vypoèíta SK IBAN è.3 z bankového úètu 3" >
+IBAN-SWIFT:
 <input type="text" name="h_ib3" id="h_ib3" onKeyDown="return Ib3Enter(event.which)" size="30"/>
 -<input type="text" name="h_st3" id="h_st3" onKeyDown="return St3Enter(event.which)" size="8"/>
 </td>
