@@ -254,7 +254,8 @@ if ( $rokdppo < 2011 ) { $rokdppo="";  }
 if ( $rokdppo == 2011 ) { $rokdppo="2011";  }
 if ( $rokdppo == 2012 ) { $rokdppo="2012";  }
 if ( $rokdppo == 2013 ) { $rokdppo="2013";  }
-if ( $rokdppo >= 2014 ) { $rokdppo="2014";  }
+if ( $rokdppo == 2014 ) { $rokdppo="2014";  }
+if ( $rokdppo >= 2015 ) { $rokdppo="2015";  }
 ?>
   function TlacPriznanie()
   {
