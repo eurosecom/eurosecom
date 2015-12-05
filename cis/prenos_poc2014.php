@@ -56,50 +56,936 @@ $databaza=$mysqldb2015.".";
 echo "db".$databaza;
   }
 
-//znovu prenos z 2014 do 2015 UCTO a MAJ ak nastavena firma minuleho roku 2014 a rok 2014 v udajoch o firme, a cislo firmy 2015 musi byt vacsie ako cislo firmy 2014
 $aj2013=0;
-if( $fir_allx11 > 0 AND $fir_allx11 < $kli_vxcf AND $kli_vrok == 2015 AND $fir_allx12 == 2014 )
+if( $fir_allx11 > 0 AND $fir_allx11 < $kli_vxcf AND $kli_vrok == 2014 AND $fir_allx12 == 2013 )
 {
 if( $copern == 2 OR $copern == 10   )  { $aj2013=1; }
 if( $copernx == 2 OR $copernx == 10 )  { $aj2013=1; }
 }
 
-//ak chcem dovolit natvrdo prenos z 2014 do 2015, inak dovoli v UCTO a MAJ ak nastavena firma roku 2014 a rok 2014 v udajoch o firme
-if( $kli_vxcf == 0 )
-  {
-$aj2013=1;
-  }
-
 //echo $kli_vrok;
 
-if( $kli_vrok == 2015 AND $aj2013 == 0 )
+if( $kli_vrok == 2014 AND $aj2013 == 0 )
     {
 ?>
 <script type="text/javascript">
-alert ("                   POZOR ! \r MusÌte byù vo firme roku 2016 ! ");
+alert ("                   POZOR ! \r MusÌte byù vo firme roku 2015 ! ");
 window.close();
 </script>
 <?php
 exit;
     }
-//koniec ak nie je firma roku 2016
+//koniec ak nie je firma roku 2015
 
 
 
-if( $kli_vrok == 2015 AND $upozorni2013 == 1 )
+if( $kli_vrok == 2014 AND $upozorni2013 == 1 )
     {
 ?>
 <script type="text/javascript">
-alert ("           POZOR !!! Nie ste vo firme roku 2016 !  \r  Chcete znovu pren·öaù ˙daje do roku 2015 z roku 2014 ??? ");
+alert ("           POZOR !!! Nie ste vo firme roku 2015 !  \r  Chcete znovu pren·öaù ˙daje do roku 2014 z roku 2013 ??? ");
 </script>
 <?php
     }
-//koniec ak nie je firma roku 2016
+//koniec ak nie je firma roku 2015
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
 
+//import pohyby vseobecne
+    if ( $copern == 6155 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete importovaù poloûky \r zo s˙boru ../import/FIR<?php echo $kli_vxcf; ?>/VSE_POH.CSV ?") )
+         { window.close()  }
+else
+         { location.href='prenos_poc.php?copern=6156&page=1&drupoh=1&pocstav=1'  }
+</script>
+<?php
+    }
+    if ( $copern == 6156 )
+    {
+$copern=1;
+
+//dok b 0;xz ; b;ucm b 'veru';xz ; b;ucd b 'veru';xz ; b;rdp b 0;xz ; b;
+//ico b 0;xz ; b;fak b 0;xz ; b;str b 0;xz ; b;zak b 0;xz ; b;
+//hod b 0;xz ; b;pop b 0;xz ; b;xt koniec@ b;
+ 
+//ucb b 0;xz ; b;dok b 0;xz ; b;ume b 0;xz ; b;dat b 10;xz ; b;
+//kredit b 0;xz ; b;debet b 0;xz ; b;xt koniec@ b;
+
+
+if( file_exists("../import/FIR$kli_vxcf/VSE_UCT.CSV")) echo "S˙bor ../import/FIR$kli_vxcf/VSE_UCT.CSV existuje<br />";
+
+$subor = fopen("../import/FIR$kli_vxcf/VSE_UCT.CSV", "r");
+while (! feof($subor))
+{
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+  $x_dok = $pole[0];
+  $x_ucm = $pole[1];
+  $x_ucd = $pole[2];
+  $x_rdp = $pole[3];
+  $x_ico = $pole[4];
+  $x_fak = $pole[5];
+  $x_str = $pole[6];
+  $x_zak = $pole[7];
+  $x_hod = $pole[8];
+  $x_pop = $pole[9];
+
+  $x_kon = $pole[10];
+
+
+$sqult = "INSERT INTO F$kli_vxcf"."_uctvsdp ( dok,ucm,ucd,rdp,ico,fak,str,zak,hod,id,pop)".
+" VALUES ( '$x_dok', '$x_ucm', '$x_ucd', '$x_rdp', '$x_ico', '$x_fak', '$x_str', '$x_zak',".
+" '$x_hod', '$kli_uzid', '$x_pop' ".
+");";
+//echo $sqult.$ucet2;
+
+if( $x_dok > 0 ) $ulozene = mysql_query("$sqult");
+}
+$sqlt = "UPDATE F$kli_vxcf"."_uctvsdp SET poh=0, dph=0, unk='' ";
+$vysledok = mysql_query("$sqlt");
+
+echo "Tabulka F$kli_vxcf"."_uctvsdp!"." naimportovan· <br />";
+fclose ($subor);
+
+//ucb b 0;xz ; b;dok b 0;xz ; b;ume b 0;xz ; b;dat b 10;xz ; b;
+//kredit b 0;xz ; b;debet b 0;xz ; b;xt koniec@ b;
+
+if( file_exists("../import/FIR$kli_vxcf/VSE_POH.CSV")) echo "S˙bor ../import/FIR$kli_vxcf/VSE_POH.CSV existuje<br />";
+
+$subor = fopen("../import/FIR$kli_vxcf/VSE_POH.CSV", "r");
+while (! feof($subor))
+{
+  $riadok = fgets($subor, 500);
+  print "$riadok<br />";
+  $pole = explode(";", $riadok);
+  $x_ucb = $pole[0];
+  $x_dok = $pole[1];
+  $x_umq = $pole[2];
+  $x_dat = $pole[3];
+  $x_kredit = $pole[4];
+  $x_debet = $pole[5];
+
+  $x_kon = $pole[6];
+
+  $x_str = 0;
+  $x_zak = 0;
+
+  $dat_sql = SqlDatum($x_dat);
+  $das_sql = SqlDatum($x_das);
+  $pole = explode("-", $dat_sql);
+  $x_ume = $pole[1].".".$pole[0];
+
+$ucet2=substr($x_uce,0,2);
+$ucet3=substr($x_uce,0,3);
+ 
+$sqult = "INSERT INTO F$kli_vxcf"."_uctvsdh ( uce,dok,doq,dat,hodu,zk1u,id,".
+"unk,poz,txz,txp,ume,kto,ico)".
+" VALUES ( '$x_ucb', '$x_dok', '$x_dok', '$dat_sql', ".
+" '$x_kredit', '0', '$kli_uzid',".
+" '', '', '', '$x_pop', '$x_ume',  '', '$fir_fico' ".
+");";
+//echo $sqult.$ucet2;
+
+if( $x_dok > 0 ) $ulozene = mysql_query("$sqult");
+}
+$sqlt = "UPDATE F$kli_vxcf"."_uctvsdh SET zk0=0,zk1=0,zk2=0,zk3=0,zk4=0,dn1=0,dn2=0,dn3=0,dn4=0,sz1=0,sz2=0,sz3=0,sz4=0,sp1=0,sp2=0,sp3=0,sp4=0,hod=0,".
+" dn1u=0,dn2u=0,sp0u=0,sp1u=0,sp2u=0,zk0u=0,zk1u=0,zk2u=zk0u-zk1u ";
+$vysledok = mysql_query("$sqlt");
+
+echo "Tabulka F$kli_vxcf"."_uctvsdh!"." naimportovan· <br />";
+fclose ($subor);
+
+$copern=10;
+    }
+//koniec nacitanie vseob
+
+//vymazanie vsetkych poloziek pohybov vseobecnych dokladov
+    if ( $copern == 6167 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete vymazaù vöetky poloûky \r vöeobecn˝ch dokladov ?") )
+         { window.close()  }
+else
+         { location.href='prenos_poc.php?&copern=6168&page=1&drupoh=1&pocstav=1'  }
+</script>
+<?php
+    }
+    if ( $copern == 6168 )
+    {
+$copern=1;
+$sqlt = 'DELETE FROM F'.$kli_vxcf.'_uctvsdh ';
+$vysledok = mysql_query("$sqlt");
+//echo $sqlt;
+if ($vysledok)
+echo "Tabulka F$kli_vxcf"."_uctvsdh!"." vynulovan· <br />";
+
+$sqlt = 'TRUNCATE F'.$kli_vxcf.'_uctvsdp';
+$vysledok = mysql_query("$sqlt");
+//echo $sqlt;
+if ($vysledok)
+echo "Tabulka F$kli_vxcf"."_uctvsdp!"." vynulovan· <br />";
+
+$copern=10;
+    }
+//koniec  vymazania databazy vseob
+
+//import pohyby vydavkov˝ch pokladniËn˝ch dokladov
+    if ( $copern == 5155 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete importovaù poloûky \r zo s˙boru ../import/FIR<?php echo $kli_vxcf; ?>/PKV_POH.CSV ?") )
+         { window.close()  }
+else
+         { location.href='prenos_poc.php?copern=5156&page=1&drupoh=1&pocstav=1'  }
+</script>
+<?php
+    }
+    if ( $copern == 5156 )
+    {
+$copern=1;
+
+//dok b 0;xz ; b;ucm b 'veru';xz ; b;ucd b 'veru';xz ; b;rdp b 0;xz ; b;
+//ico b 0;xz ; b;fak b 0;xz ; b;str b 0;xz ; b;zak b 0;xz ; b;
+//hod b 0;xz ; b;pop b 0;xz ; b;xt koniec@ b;
+ 
+//ucb b 0;xz ; b;dok b 0;xz ; b;ume b 0;xz ; b;dat b 10;xz ; b;
+//zk0 b 0;xz ; b;zk1 b 0;xz ; b;dn1 b 0;xz ; b;zk2 b 0;xz ; b;dn2 b 0;xz ; b;xt koniec@ b;
+
+
+if( file_exists("../import/FIR$kli_vxcf/PKV_UCT.CSV")) echo "S˙bor ../import/FIR$kli_vxcf/PKV_UCT.CSV existuje<br />";
+
+$subor = fopen("../import/FIR$kli_vxcf/PKV_UCT.CSV", "r");
+while (! feof($subor))
+{
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+  $x_dok = $pole[0];
+  $x_ucm = $pole[1];
+  $x_ucd = $pole[2];
+  $x_rdp = $pole[3];
+  $x_ico = $pole[4];
+  $x_fak = $pole[5];
+  $x_str = $pole[6];
+  $x_zak = $pole[7];
+  $x_hod = $pole[8];
+  $x_pop = $pole[9];
+
+  $x_kon = $pole[10];
+
+
+$sqult = "INSERT INTO F$kli_vxcf"."_uctpokuct ( poh,dok,ucm,ucd,rdp,ico,fak,str,zak,hod,id,pop)".
+" VALUES ( 2, '$x_dok', '$x_ucm', '$x_ucd', '$x_rdp', '$x_ico', '$x_fak', '$x_str', '$x_zak',".
+" '$x_hod', '$kli_uzid', '$x_pop' ".
+");";
+//echo $sqult.$ucet2;
+
+if( $x_dok > 0 ) $ulozene = mysql_query("$sqult");
+}
+$sqlt = "UPDATE F$kli_vxcf"."_uctpokuct SET dph=0, unk='' ";
+$vysledok = mysql_query("$sqlt");
+
+echo "Tabulka F$kli_vxcf"."_uctpokuct!"." naimportovan· <br />";
+fclose ($subor);
+
+//ucb b 0;xz ; b;dok b 0;xz ; b;ume b 0;xz ; b;dat b 10;xz ; b;
+//zk0 b 0;xz ; b;zk1 b 0;xz ; b;dn1 b 0;xz ; b;zk2 b 0;xz ; b;dn2 b 0;xz ; b;xt koniec@ b;
+
+if( file_exists("../import/FIR$kli_vxcf/PKV_POH.CSV")) echo "S˙bor ../import/FIR$kli_vxcf/PKV_POH.CSV existuje<br />";
+
+$subor = fopen("../import/FIR$kli_vxcf/PKV_POH.CSV", "r");
+while (! feof($subor))
+{
+  $riadok = fgets($subor, 500);
+  print "$riadok<br />";
+  $pole = explode(";", $riadok);
+  $x_ucb = $pole[0];
+  $x_dok = $pole[1];
+  $x_umq = $pole[2];
+  $x_dat = $pole[3];
+  $x_zk0 = $pole[4];
+  $x_zk1 = $pole[5];
+  $x_dn1 = $pole[6];
+  $x_zk2 = $pole[7];
+  $x_dn2 = $pole[8];
+
+
+  $x_kon = $pole[9];
+
+  $x_str = 0;
+  $x_zak = 0;
+
+  $dat_sql = SqlDatum($x_dat);
+  $das_sql = SqlDatum($x_das);
+  $pole = explode("-", $dat_sql);
+  $x_ume = $pole[1].".".$pole[0];
+
+$ucet2=substr($x_uce,0,2);
+$ucet3=substr($x_uce,0,3);
+ 
+$sqult = "INSERT INTO F$kli_vxcf"."_pokvyd ( uce,dok,doq,dat,zk0u,zk1u,dn1u,zk2u,dn2u,id,".
+"unk,poz,txz,txp,ume,kto,ico)".
+" VALUES ( '$x_ucb', '$x_dok', '$x_dok', '$dat_sql', ".
+" '$x_zk0', '$x_zk1', '$x_dn1', '$x_zk2', '$x_dn2', '$kli_uzid',".
+" '', '', '', '$x_pop', '$x_ume',  '', '$fir_fico' ".
+");";
+//echo $sqult.$ucet2;
+
+if( $x_dok > 0 ) $ulozene = mysql_query("$sqult");
+}
+$sqlt = "UPDATE F$kli_vxcf"."_pokvyd SET zk0=0,zk1=0,zk2=0,zk3=0,zk4=0,dn1=0,dn2=0,dn3=0,dn4=0,sz1=0,sz2=0,sz3=0,sz4=0,sp1=0,sp2=0,sp3=0,sp4=0,hod=0,".
+" sp0u=zk0u,sp1u=zk1u+dn1u,sp2u=zk2u+dn2u,hodu=sp0u+sp1u+sp2u ";
+$vysledok = mysql_query("$sqlt");
+
+echo "Tabulka F$kli_vxcf"."_pokvyd!"." naimportovan· <br />";
+fclose ($subor);
+
+$copern=10;
+    }
+//koniec nacitanie pokvyd
+
+//vymazanie vsetkych poloziek pohybov vydavkov˝ch pokladniËn˝ch dokladov
+    if ( $copern == 5167 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete vymazaù vöetky poloûky \r vydavkov˝ch pokladniËn˝ch dokladov ?") )
+         { window.close()  }
+else
+         { location.href='prenos_poc.php?&copern=5168&page=1&drupoh=1&pocstav=1'  }
+</script>
+<?php
+    }
+    if ( $copern == 5168 )
+    {
+$copern=1;
+$sqlt = 'DELETE FROM F'.$kli_vxcf.'_uctpokuct WHERE poh = 2';
+$vysledok = mysql_query("$sqlt");
+//echo $sqlt;
+if ($vysledok)
+echo "Tabulka F$kli_vxcf"."_uctpokuct!"." vynulovan· <br />";
+
+$sqlt = 'TRUNCATE F'.$kli_vxcf.'_pokvyd';
+$vysledok = mysql_query("$sqlt");
+//echo $sqlt;
+if ($vysledok)
+echo "Tabulka F$kli_vxcf"."_pokvyd!"." vynulovan· <br />";
+
+$copern=10;
+    }
+//koniec  vymazania databazy pokvyd
+
+
+//import pohyby prÌjmov˝ch pokladniËn˝ch dokladov
+    if ( $copern == 4155 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete importovaù poloûky \r zo s˙boru ../import/FIR<?php echo $kli_vxcf; ?>/PKP_POH.CSV ?") )
+         { window.close()  }
+else
+         { location.href='prenos_poc.php?copern=4156&page=1&drupoh=1&pocstav=1'  }
+</script>
+<?php
+    }
+    if ( $copern == 4156 )
+    {
+$copern=1;
+
+//dok b 0;xz ; b;ucm b 'veru';xz ; b;ucd b 'veru';xz ; b;rdp b 0;xz ; b;
+//ico b 0;xz ; b;fak b 0;xz ; b;str b 0;xz ; b;zak b 0;xz ; b;
+//hod b 0;xz ; b;pop b 0;xz ; b;xt koniec@ b;
+ 
+//ucb b 0;xz ; b;dok b 0;xz ; b;ume b 0;xz ; b;dat b 10;xz ; b;
+//zk0 b 0;xz ; b;zk1 b 0;xz ; b;dn1 b 0;xz ; b;zk2 b 0;xz ; b;dn2 b 0;xz ; b;xt koniec@ b;
+
+
+if( file_exists("../import/FIR$kli_vxcf/PKP_UCT.CSV")) echo "S˙bor ../import/FIR$kli_vxcf/PKP_UCT.CSV existuje<br />";
+
+$subor = fopen("../import/FIR$kli_vxcf/PKP_UCT.CSV", "r");
+while (! feof($subor))
+{
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+  $x_dok = $pole[0];
+  $x_ucm = $pole[1];
+  $x_ucd = $pole[2];
+  $x_rdp = $pole[3];
+  $x_ico = $pole[4];
+  $x_fak = $pole[5];
+  $x_str = $pole[6];
+  $x_zak = $pole[7];
+  $x_hod = $pole[8];
+  $x_pop = $pole[9];
+
+  $x_kon = $pole[10];
+
+
+$sqult = "INSERT INTO F$kli_vxcf"."_uctpokuct ( poh,dok,ucm,ucd,rdp,ico,fak,str,zak,hod,id,pop)".
+" VALUES ( 1, '$x_dok', '$x_ucm', '$x_ucd', '$x_rdp', '$x_ico', '$x_fak', '$x_str', '$x_zak',".
+" '$x_hod', '$kli_uzid', '$x_pop' ".
+");";
+//echo $sqult.$ucet2;
+
+if( $x_dok > 0 ) $ulozene = mysql_query("$sqult");
+}
+$sqlt = "UPDATE F$kli_vxcf"."_uctpokuct SET dph=0, unk='' ";
+$vysledok = mysql_query("$sqlt");
+
+echo "Tabulka F$kli_vxcf"."_uctpokuct!"." naimportovan· <br />";
+fclose ($subor);
+
+//ucb b 0;xz ; b;dok b 0;xz ; b;ume b 0;xz ; b;dat b 10;xz ; b;
+//zk0 b 0;xz ; b;zk1 b 0;xz ; b;dn1 b 0;xz ; b;zk2 b 0;xz ; b;dn2 b 0;xz ; b;xt koniec@ b;
+
+if( file_exists("../import/FIR$kli_vxcf/PKP_POH.CSV")) echo "S˙bor ../import/FIR$kli_vxcf/PKP_POH.CSV existuje<br />";
+
+$subor = fopen("../import/FIR$kli_vxcf/PKP_POH.CSV", "r");
+while (! feof($subor))
+{
+  $riadok = fgets($subor, 500);
+  print "$riadok<br />";
+  $pole = explode(";", $riadok);
+  $x_ucb = $pole[0];
+  $x_dok = $pole[1];
+  $x_umq = $pole[2];
+  $x_dat = $pole[3];
+  $x_zk0 = $pole[4];
+  $x_zk1 = $pole[5];
+  $x_dn1 = $pole[6];
+  $x_zk2 = $pole[7];
+  $x_dn2 = $pole[8];
+
+
+  $x_kon = $pole[9];
+
+  $x_str = 0;
+  $x_zak = 0;
+
+  $dat_sql = SqlDatum($x_dat);
+  $das_sql = SqlDatum($x_das);
+  $pole = explode("-", $dat_sql);
+  $x_ume = $pole[1].".".$pole[0];
+
+$ucet2=substr($x_uce,0,2);
+$ucet3=substr($x_uce,0,3);
+ 
+$sqult = "INSERT INTO F$kli_vxcf"."_pokpri ( uce,dok,doq,dat,zk0u,zk1u,dn1u,zk2u,dn2u,id,".
+"unk,poz,txz,txp,ume,kto,ico)".
+" VALUES ( '$x_ucb', '$x_dok', '$x_dok', '$dat_sql', ".
+" '$x_zk0', '$x_zk1', '$x_dn1', '$x_zk2', '$x_dn2', '$kli_uzid',".
+" '', '', '', '$x_pop', '$x_ume',  '', '$fir_fico' ".
+");";
+//echo $sqult.$ucet2;
+
+if( $x_dok > 0 ) $ulozene = mysql_query("$sqult");
+}
+$sqlt = "UPDATE F$kli_vxcf"."_pokpri SET zk0=0,zk1=0,zk2=0,zk3=0,zk4=0,dn1=0,dn2=0,dn3=0,dn4=0,sz1=0,sz2=0,sz3=0,sz4=0,sp1=0,sp2=0,sp3=0,sp4=0,hod=0,".
+" sp0u=zk0u,sp1u=zk1u+dn1u,sp2u=zk2u+dn2u,hodu=sp0u+sp1u+sp2u ";
+$vysledok = mysql_query("$sqlt");
+
+echo "Tabulka F$kli_vxcf"."_pokpri!"." naimportovan· <br />";
+fclose ($subor);
+
+$copern=10;
+    }
+//koniec nacitanie pokpri
+
+//vymazanie vsetkych poloziek pohybov prÌjmov˝ch pokladniËn˝ch dokladov
+    if ( $copern == 4167 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete vymazaù vöetky poloûky \r prÌjmov˝ch pokladniËn˝ch dokladov ?") )
+         { window.close()  }
+else
+         { location.href='prenos_poc.php?&copern=4168&page=1&drupoh=1&pocstav=1'  }
+</script>
+<?php
+    }
+    if ( $copern == 4168 )
+    {
+$copern=1;
+$sqlt = 'DELETE FROM F'.$kli_vxcf.'_uctpokuct WHERE poh = 1';
+$vysledok = mysql_query("$sqlt");
+//echo $sqlt;
+if ($vysledok)
+echo "Tabulka F$kli_vxcf"."_uctpokuct!"." vynulovan· <br />";
+
+$sqlt = 'TRUNCATE F'.$kli_vxcf.'_pokpri';
+$vysledok = mysql_query("$sqlt");
+//echo $sqlt;
+if ($vysledok)
+echo "Tabulka F$kli_vxcf"."_pokpri!"." vynulovan· <br />";
+
+$copern=10;
+    }
+//koniec  vymazania databazy pokpri
+
+
+//import pohyby bankove
+    if ( $copern == 3155 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete importovaù poloûky \r zo s˙boru ../import/FIR<?php echo $kli_vxcf; ?>/BAN_POH.CSV ?") )
+         { window.close()  }
+else
+         { location.href='prenos_poc.php?copern=3156&page=1&drupoh=1&pocstav=1'  }
+</script>
+<?php
+    }
+    if ( $copern == 3156 )
+    {
+$copern=1;
+
+//dok b 0;xz ; b;ucm b 'veru';xz ; b;ucd b 'veru';xz ; b;rdp b 0;xz ; b;
+//ico b 0;xz ; b;fak b 0;xz ; b;str b 0;xz ; b;zak b 0;xz ; b;
+//hod b 0;xz ; b;pop b 0;xz ; b;xt koniec@ b;
+ 
+//ucb b 0;xz ; b;dok b 0;xz ; b;ume b 0;xz ; b;dat b 10;xz ; b;
+//kredit b 0;xz ; b;debet b 0;xz ; b;xt koniec@ b;
+
+
+if( file_exists("../import/FIR$kli_vxcf/BAN_UCT.CSV")) echo "S˙bor ../import/FIR$kli_vxcf/BAN_UCT.CSV existuje<br />";
+
+$subor = fopen("../import/FIR$kli_vxcf/BAN_UCT.CSV", "r");
+while (! feof($subor))
+{
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+  $x_dok = $pole[0];
+  $x_ucm = $pole[1];
+  $x_ucd = $pole[2];
+  $x_rdp = $pole[3];
+  $x_ico = $pole[4];
+  $x_fak = $pole[5];
+  $x_str = $pole[6];
+  $x_zak = $pole[7];
+  $x_hod = $pole[8];
+  $x_pop = $pole[9];
+
+  $x_kon = $pole[10];
+
+
+$sqult = "INSERT INTO F$kli_vxcf"."_uctban ( dok,ucm,ucd,rdp,ico,fak,str,zak,hod,id,pop)".
+" VALUES ( '$x_dok', '$x_ucm', '$x_ucd', '$x_rdp', '$x_ico', '$x_fak', '$x_str', '$x_zak',".
+" '$x_hod', '$kli_uzid', '$x_pop' ".
+");";
+//echo $sqult.$ucet2;
+
+if( $x_dok > 0 ) $ulozene = mysql_query("$sqult");
+}
+$sqlt = "UPDATE F$kli_vxcf"."_uctban SET poh=0, dph=0, pop='', unk='' ";
+$vysledok = mysql_query("$sqlt");
+
+echo "Tabulka F$kli_vxcf"."_uctban!"." naimportovan· <br />";
+fclose ($subor);
+
+//ucb b 0;xz ; b;dok b 0;xz ; b;ume b 0;xz ; b;dat b 10;xz ; b;
+//kredit b 0;xz ; b;debet b 0;xz ; b;xt koniec@ b;
+
+if( file_exists("../import/FIR$kli_vxcf/BAN_POH.CSV")) echo "S˙bor ../import/FIR$kli_vxcf/BAN_POH.CSV existuje<br />";
+
+$subor = fopen("../import/FIR$kli_vxcf/BAN_POH.CSV", "r");
+while (! feof($subor))
+{
+  $riadok = fgets($subor, 500);
+  print "$riadok<br />";
+  $pole = explode(";", $riadok);
+  $x_ucb = $pole[0];
+  $x_dok = $pole[1];
+  $x_umq = $pole[2];
+  $x_dat = $pole[3];
+  $x_kredit = $pole[4];
+  $x_debet = $pole[5];
+
+  $x_kon = $pole[6];
+
+  $x_str = 0;
+  $x_zak = 0;
+
+  $dat_sql = SqlDatum($x_dat);
+  $das_sql = SqlDatum($x_das);
+  $pole = explode("-", $dat_sql);
+  $x_ume = $pole[1].".".$pole[0];
+
+$ucet2=substr($x_uce,0,2);
+$ucet3=substr($x_uce,0,3);
+ 
+$sqult = "INSERT INTO F$kli_vxcf"."_banvyp ( uce,dok,doq,dat,zk0u,zk1u,id,".
+"unk,poz,txz,txp,ume,kto,ico)".
+" VALUES ( '$x_ucb', '$x_dok', '$x_dok', '$dat_sql', ".
+" '$x_kredit', '$x_debet', '$kli_uzid',".
+" '', '', '', '$x_pop', '$x_ume',  '', '$fir_fico' ".
+");";
+//echo $sqult.$ucet2;
+
+if( $x_dok > 0 ) $ulozene = mysql_query("$sqult");
+}
+$sqlt = "UPDATE F$kli_vxcf"."_banvyp SET zk0=0,zk1=0,zk2=0,zk3=0,zk4=0,dn1=0,dn2=0,dn3=0,dn4=0,sz1=0,sz2=0,sz3=0,sz4=0,sp1=0,sp2=0,sp3=0,sp4=0,hod=0,".
+" dn1u=0,dn2u=0,sp0u=0,sp1u=0,sp2u=0,hodu=0,zk2u=zk0u-zk1u ";
+$vysledok = mysql_query("$sqlt");
+
+echo "Tabulka F$kli_vxcf"."_banvyp!"." naimportovan· <br />";
+fclose ($subor);
+
+$copern=10;
+    }
+//koniec nacitanie banvyp
+
+//vymazanie vsetkych poloziek pohybov bankovych
+    if ( $copern == 3167 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete vymazaù vöetky poloûky \r bankov˝ch v˝pisov ?") )
+         { window.close()  }
+else
+         { location.href='prenos_poc.php?&copern=3168&page=1&drupoh=1&pocstav=1'  }
+</script>
+<?php
+    }
+    if ( $copern == 3168 )
+    {
+$copern=1;
+$sqlt = 'TRUNCATE F'.$kli_vxcf.'_banvyp';
+$vysledok = mysql_query("$sqlt");
+//echo $sqlt;
+if ($vysledok)
+echo "Tabulka F$kli_vxcf"."_banvyp!"." vynulovan· <br />";
+
+$sqlt = 'TRUNCATE F'.$kli_vxcf.'_uctban';
+$vysledok = mysql_query("$sqlt");
+//echo $sqlt;
+if ($vysledok)
+echo "Tabulka F$kli_vxcf"."_uctban!"." vynulovan· <br />";
+
+$copern=10;
+    }
+//koniec  vymazania databazy banvyp
+
+//import pohyby dodav
+    if ( $copern == 2155 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete importovaù poloûky \r zo s˙boru ../import/FIR<?php echo $kli_vxcf; ?>/DOD_POH.CSV ?") )
+         { window.close()  }
+else
+         { location.href='prenos_poc.php?copern=2156&page=1&drupoh=1&pocstav=1'  }
+</script>
+<?php
+    }
+    if ( $copern == 2156 )
+    {
+$copern=1;
+
+//uce b 0;xz ; b;dok b 0;xz ; b;ico b 0;xz ; b;fak b 0;xz ; b;ume b 0;xz ; b;dat b 10;xz ; b;spl b 10;
+//xz ; b;zk1 b 0;xz ; b;dn1 b 0;xz ; b;zk2 b 0;xz ; b;dn2 b 0;xz ; b;zk0 b 0;
+//xz ; b;hod b 0;xz ; b;uhr b 0;xz ; b;pop b 0;xz ; b;xt koniec@ b;
+ 
+//dok b 0;xz ; b;ucm b 'veru';xz ; b;ucd b 'veru';xz ; b;rdp b 0;xz ; b;
+//ico b 0;xz ; b;fak b 0;xz ; b;str b 0;xz ; b;zak b 0;xz ; b;
+//hod b 0;xz ; b;pop b 0;xz ; b;xt koniec@ b;
+
+
+if( file_exists("../import/FIR$kli_vxcf/DOD_UCT.CSV")) echo "S˙bor ../import/FIR$kli_vxcf/DOD_UCT.CSV existuje<br />";
+
+$subor = fopen("../import/FIR$kli_vxcf/DOD_UCT.CSV", "r");
+while (! feof($subor))
+{
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+  $x_dok = $pole[0];
+  $x_ucm = $pole[1];
+  $x_ucd = $pole[2];
+  $x_rdp = $pole[3];
+  $x_ico = $pole[4];
+  $x_fak = $pole[5];
+  $x_str = $pole[6];
+  $x_zak = $pole[7];
+  $x_hod = $pole[8];
+  $x_pop = $pole[9];
+
+  $x_kon = $pole[10];
+
+
+$sqult = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,ucm,ucd,rdp,ico,fak,str,zak,hod,id)".
+" VALUES ( '$x_dok', '$x_ucm', '$x_ucd', '$x_rdp', '$x_ico', '$x_fak', '$x_str', '$x_zak',".
+" '$x_hod', '$kli_uzid' ".
+");";
+//echo $sqult.$ucet2;
+
+$ulozene = mysql_query("$sqult");
+}
+$sqlt = "UPDATE F$kli_vxcf"."_uctdod SET poh=0, dph=0, pop='', unk='' ";
+$vysledok = mysql_query("$sqlt");
+
+echo "Tabulka F$kli_vxcf"."_uctdod!"." naimportovan· <br />";
+fclose ($subor);
+
+
+if( file_exists("../import/FIR$kli_vxcf/DOD_POH.CSV")) echo "S˙bor ../import/FIR$kli_vxcf/DOD_POH.CSV existuje<br />";
+
+$subor = fopen("../import/FIR$kli_vxcf/DOD_POH.CSV", "r");
+while (! feof($subor))
+{
+  $riadok = fgets($subor, 500);
+  print "$riadok<br />";
+  $pole = explode(";", $riadok);
+  $x_uce = $pole[0];
+  $x_dok = $pole[1];
+  $x_ico = $pole[2];
+  $x_fak = $pole[3];
+  $x_umq = $pole[4];
+  $x_dat = $pole[5];
+  $x_das = $pole[6];
+
+  $x_zk1 = $pole[7];
+  $x_dn1 = $pole[8];
+  $x_zk2 = $pole[9];
+  $x_dn2 = $pole[10];
+  $x_zk0 = $pole[11];
+
+  $x_hod = $pole[12];
+  $x_uhr = $pole[13];
+  $x_pop = $pole[14];
+  $x_ssy = $pole[15];
+  $x_ksy = $pole[16];
+  $x_kon = $pole[17];
+
+  $x_str = 0;
+  $x_zak = 0;
+
+  $dat_sql = SqlDatum($x_dat);
+  $das_sql = SqlDatum($x_das);
+  $pole = explode("-", $dat_sql);
+  $x_ume = $pole[1].".".$pole[0];
+
+$ucet2=substr($x_uce,0,2);
+$ucet3=substr($x_uce,0,3);
+ 
+$sqult = "INSERT INTO F$kli_vxcf"."_fakdod ( uce,dok,doq,fak,ico,str,zak,dat,daz,das,zk2,dn2,sp2,hod,id,".
+"zk1,dn1,sp1,zk0,zao,zal,ruc,uhr,zk3,zk4,dn3,dn4,sz1,sz2,sz3,sz4,dol,prf,skl,poh,".
+"obj,unk,dpr,ksy,ssy,poz,txz,txp,ume,hodu,zk0u)".
+" VALUES ( '$x_uce', '$x_dok', '$x_dok', '$x_fak', '$x_ico', '$x_str', '$x_zak', '$dat_sql', '$dat_sql', '$das_sql',".
+" '$x_zk2', '$x_dn2', '0', '$x_hod', '$kli_uzid',".
+" '$x_zk1', '$x_dn1', '0', '$x_zk0', '0', '0', '0', '$x_uhr', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0',".
+" '', '', '', '$x_ksy', '$x_ssy', '', '', '$x_pop', '$x_ume', '0', '0' ".
+");";
+//echo $sqult.$ucet2;
+
+if( $ucet2 == 32 OR $ucet3 == 379 OR $ucet3 == 314  ) { $ulozene = mysql_query("$sqult"); }
+}
+$sqlt = "UPDATE F$kli_vxcf"."_fakdod SET sp1=zk1+dn1, sp2=zk2+dn2, hodu=hod, zk0u=zk0, zk1u=zk1, zk2u=zk2, dn1u=dn1, dn2u=dn2, sp1u=sp1, sp2u=sp2 ";
+$vysledok = mysql_query("$sqlt");
+
+echo "Tabulka F$kli_vxcf"."_fakdod!"." naimportovan· <br />";
+fclose ($subor);
+
+$copern=10;
+    }
+//koniec nacitanie dodav
+
+//vymazanie vsetkych poloziek pohybov dodav
+    if ( $copern == 2167 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete vymazaù vöetky poloûky \r dod·vateæsk˝ch fakt˙r ?") )
+         { window.close()  }
+else
+         { location.href='prenos_poc.php?&copern=2168&page=1&drupoh=1&pocstav=1'  }
+</script>
+<?php
+    }
+    if ( $copern == 2168 )
+    {
+$copern=1;
+$sqlt = 'TRUNCATE F'.$kli_vxcf.'_fakdod';
+$vysledok = mysql_query("$sqlt");
+//echo $sqlt;
+if ($vysledok)
+echo "Tabulka F$kli_vxcf"."_fakdod!"." vynulovan· <br />";
+
+$sqlt = 'TRUNCATE F'.$kli_vxcf.'_uctdod';
+$vysledok = mysql_query("$sqlt");
+//echo $sqlt;
+if ($vysledok)
+echo "Tabulka F$kli_vxcf"."_uctdod!"." vynulovan· <br />";
+
+$copern=10;
+    }
+//koniec  vymazania databazy fakdod
+
+
+//import pohyby odber
+    if ( $copern == 1155 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete importovaù poloûky \r zo s˙boru ../import/FIR<?php echo $kli_vxcf; ?>/ODB_POH.CSV ?") )
+         { window.close()  }
+else
+         { location.href='prenos_poc.php?copern=1156&page=1&drupoh=1&pocstav=1'  }
+</script>
+<?php
+    }
+    if ( $copern == 1156 )
+    {
+$copern=1;
+
+//uce b 0;xz ; b;dok b 0;xz ; b;ico b 0;xz ; b;fak b 0;xz ; b;ume b 0;xz ; b;dat b 10;xz ; b;spl b 10;
+//xz ; b;zk1 b 0;xz ; b;dn1 b 0;xz ; b;zk2 b 0;xz ; b;dn2 b 0;xz ; b;zk0 b 0;
+//xz ; b;hod b 0;xz ; b;uhr b 0;xz ; b;pop b 0;xz ; b;xt koniec@ b;
+ 
+//dok b 0;xz ; b;ucm b 'veru';xz ; b;ucd b 'veru';xz ; b;rdp b 0;xz ; b;
+//ico b 0;xz ; b;fak b 0;xz ; b;str b 0;xz ; b;zak b 0;xz ; b;
+//hod b 0;xz ; b;pop b 0;xz ; b;xt koniec@ b;
+
+
+if( file_exists("../import/FIR$kli_vxcf/ODB_UCT.CSV")) echo "S˙bor ../import/FIR$kli_vxcf/ODB_UCT.CSV existuje<br />";
+
+$subor = fopen("../import/FIR$kli_vxcf/ODB_UCT.CSV", "r");
+while (! feof($subor))
+{
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+  $x_dok = $pole[0];
+  $x_ucm = $pole[1];
+  $x_ucd = $pole[2];
+  $x_rdp = $pole[3];
+  $x_ico = $pole[4];
+  $x_fak = $pole[5];
+  $x_str = $pole[6];
+  $x_zak = $pole[7];
+  $x_hod = $pole[8];
+  $x_pop = $pole[9];
+
+  $x_kon = $pole[10];
+
+
+$sqult = "INSERT INTO F$kli_vxcf"."_uctodb ( dok,ucm,ucd,rdp,ico,fak,str,zak,hod,id)".
+" VALUES ( '$x_dok', '$x_ucm', '$x_ucd', '$x_rdp', '$x_ico', '$x_fak', '$x_str', '$x_zak',".
+" '$x_hod', '$kli_uzid' ".
+");";
+//echo $sqult.$ucet2;
+
+$ulozene = mysql_query("$sqult");
+}
+$sqlt = "UPDATE F$kli_vxcf"."_uctodb SET poh=0, dph=0, pop='', unk='' ";
+$vysledok = mysql_query("$sqlt");
+
+echo "Tabulka F$kli_vxcf"."_uctodb!"." naimportovan· <br />";
+fclose ($subor);
+
+
+if( file_exists("../import/FIR$kli_vxcf/ODB_POH.CSV")) echo "S˙bor ../import/FIR$kli_vxcf/ODB_POH.CSV existuje<br />";
+
+$subor = fopen("../import/FIR$kli_vxcf/ODB_POH.CSV", "r");
+while (! feof($subor))
+{
+  $riadok = fgets($subor, 500);
+  print "$riadok<br />";
+  $pole = explode(";", $riadok);
+  $x_uce = $pole[0];
+  $x_dok = $pole[1];
+  $x_ico = $pole[2];
+  $x_fak = $pole[3];
+  $x_umq = $pole[4];
+  $x_dat = $pole[5];
+  $x_das = $pole[6];
+
+  $x_zk1 = $pole[7];
+  $x_dn1 = $pole[8];
+  $x_zk2 = $pole[9];
+  $x_dn2 = $pole[10];
+  $x_zk0 = $pole[11];
+
+  $x_hod = $pole[12];
+  $x_uhr = $pole[13];
+  $x_pop = $pole[14];
+
+  $x_ssy = $pole[15];
+  $x_ksy = $pole[16];
+  $x_kon = $pole[17];
+
+  $x_str = 0;
+  $x_zak = 0;
+
+  $dat_sql = SqlDatum($x_dat);
+  $das_sql = SqlDatum($x_das);
+  $pole = explode("-", $dat_sql);
+  $x_ume = $pole[1].".".$pole[0];
+
+$ucet2=substr($x_uce,0,2);
+$ucet3=substr($x_uce,0,3);
+ 
+$sqult = "INSERT INTO F$kli_vxcf"."_fakodb ( uce,dok,doq,fak,ico,str,zak,dat,daz,das,zk2,dn2,sp2,hod,id,".
+"zk1,dn1,sp1,zk0,zao,zal,ruc,uhr,zk3,zk4,dn3,dn4,sz1,sz2,sz3,sz4,dol,prf,skl,poh,".
+"obj,unk,dpr,ksy,ssy,poz,txz,txp,ume,hodu,zk0u)".
+" VALUES ( '$x_uce', '$x_dok', '$x_dok', '$x_fak', '$x_ico', '$x_str', '$x_zak', '$dat_sql', '$dat_sql', '$das_sql',".
+" '$x_zk2', '$x_dn2', '0', '$x_hod', '$kli_uzid',".
+" '$x_zk1', '$x_dn1', '0', '$x_zk0', '0', '0', '0', '$x_uhr', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0',".
+" '', '', '', '$x_ksy', '$x_ssy', '', '', '$x_pop', '$x_ume', '0', '0' ".
+");";
+//echo $sqult.$ucet2;
+
+if( $ucet2 == 31 OR $ucet3 == 378 ) { $ulozene = mysql_query("$sqult"); }
+}
+$sqlt = "UPDATE F$kli_vxcf"."_fakodb SET sp1=zk1+dn1, sp2=zk2+dn2, hodu=hod, zk0u=zk0, zk1u=zk1, zk2u=zk2, dn1u=dn1, dn2u=dn2, sp1u=sp1, sp2u=sp2 ";
+$vysledok = mysql_query("$sqlt");
+
+echo "Tabulka F$kli_vxcf"."_fakodb!"." naimportovan· <br />";
+fclose ($subor);
+
+$copern=10;
+    }
+//koniec nacitanie odber
+
+//vymazanie vsetkych poloziek pohyby odber
+    if ( $copern == 1167 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete vymazaù vöetky poloûky \r odberateæsk˝ch fakt˙r ?") )
+         { window.close()  }
+else
+         { location.href='prenos_poc.php?&copern=1168&page=1&drupoh=1&pocstav=1'  }
+</script>
+<?php
+    }
+    if ( $copern == 1168 )
+    {
+$copern=1;
+$sqlt = 'TRUNCATE F'.$kli_vxcf.'_fakodb';
+$vysledok = mysql_query("$sqlt");
+//echo $sqlt;
+if ($vysledok)
+echo "Tabulka F$kli_vxcf"."_fakodb!"." vynulovan· <br />";
+
+$sqlt = 'TRUNCATE F'.$kli_vxcf.'_uctodb';
+$vysledok = mysql_query("$sqlt");
+//echo $sqlt;
+if ($vysledok)
+echo "Tabulka F$kli_vxcf"."_uctodb!"." vynulovan· <br />";
+
+$copern=10;
+    }
+//koniec  vymazania databazy fakodb
 
 ?>
 <HEAD>
@@ -297,21 +1183,21 @@ window.open('../cis/prenos_poc.php?h_ycf=' + h_ycf + '&h_xcf=<?php echo $kli_vxc
 function HelpUcto()
                 {
 
-window.open('../cis/Prenos_UCTO_2016.pdf',
+window.open('../cis/Prenos_UCTO_2015.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function HelpMzdy()
                 {
 
-window.open('../cis/Prenos_MZDY_2016.pdf',
+window.open('../cis/Prenos_MZDY_2015.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function HelpSklad()
                 {
 
-window.open('../cis/Prenos_SKLAD_a_FAKTURY_2016.pdf',
+window.open('../cis/Prenos_SKLAD_a_FAKTURY_2015.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -324,15 +1210,12 @@ window.open('../cis/Prenos_SKLAD_a_FAKTURY_2016.pdf',
 <tr>
 <td>EuroSecom  -  Prenos poËiatoËnÈho stavu 
 <?php 
-
 $prenesciselniky=0;
 $prenesufir=0;
 $prenesucis=0;
 $prenessaldo=0;
 $prenescudz=0;
 //echo $copern;
-$copernco=$copern;
-
 if( $copern == 121 ) 
 {
 $prenesciselniky=1;
@@ -364,9 +1247,7 @@ if( $copern == 221 )
 $prenescismzdy=1;
 $copern=$copernx; 
 } 
-
 ?>
-
 
 <?php if( $copern == 1 OR $copern == 101 ) { echo "SKLAD"; } ?>
 <?php if( $copern == 2 OR $copern == 102 ) { echo "MAJETOK"; } ?>
@@ -381,50 +1262,53 @@ $copern=$copernx;
 </table>
 <br />
 
+<?php
+//import ucto
+if ( $copern == 10 AND $kli_uzall > 50000 AND $kli_vrok < 2012 )
+     {
+?>
+<table class="h2" width="100%" >
+<tr>
+<td class="hmenu" width="10%">ODB <a href='prenos_poc.php?copern=1167&drupoh=1&page=1'>
+<img src='../obr/kos.png' width=20 height=15 border=0 title="Vymazanie vöetk˝ch poloûiek odberateæsk˝ch fakt˙r"></a>
+ <a href='prenos_poc.php?copern=1155&drupoh=1&page=1'>
+<img src='../obr/import.png' width=20 height=15 border=0 title="Import odberateæsk˝ch fakt˙r z TXT"></a>
 
+<td class="hmenu" width="10%">DOD <a href='prenos_poc.php?copern=2167&drupoh=1&page=1'>
+<img src='../obr/kos.png' width=20 height=15 border=0 title="Vymazanie vöetk˝ch poloûiek dod·vateæsk˝ch fakt˙r"></a>
+ <a href='prenos_poc.php?copern=2155&drupoh=1&page=1'>
+<img src='../obr/import.png' width=20 height=15 border=0 title="Import dod·vateæsk˝ch fakt˙r z TXT"></a>
+
+
+<td class="hmenu" width="10%">BAN <a href='prenos_poc.php?copern=3167&drupoh=1&page=1'>
+<img src='../obr/kos.png' width=20 height=15 border=0 title="Vymazanie vöetk˝ch poloûiek bankov˝ch v˝pisov"></a>
+ <a href='prenos_poc.php?copern=3155&drupoh=1&page=1'>
+<img src='../obr/import.png' width=20 height=15 border=0 title="Import  bankov˝ch v˝pisov z TXT"></a>
+
+
+<td class="hmenu" width="10%">PKP <a href='prenos_poc.php?copern=4167&drupoh=1&page=1'>
+<img src='../obr/kos.png' width=20 height=15 border=0 title="Vymazanie vöetk˝ch poloûiek prÌjmov˝ch pokladniËn˝ch dokladov"></a>
+ <a href='prenos_poc.php?copern=4155&drupoh=1&page=1'>
+<img src='../obr/import.png' width=20 height=15 border=0 title="Import prÌjmov˝ch pokladniËn˝ch dokladov z TXT"></a>
+
+<td class="hmenu" width="10%">PKV <a href='prenos_poc.php?copern=5167&drupoh=1&page=1'>
+<img src='../obr/kos.png' width=20 height=15 border=0 title="Vymazanie vöetk˝ch poloûiek v˝davkov˝ch pokladniËn˝ch dokladov"></a>
+ <a href='prenos_poc.php?copern=5155&drupoh=1&page=1'>
+<img src='../obr/import.png' width=20 height=15 border=0 title="Import v˝davkov˝ch pokladniËn˝ch dokladov z TXT"></a>
+
+<td class="hmenu" width="10%">VäE <a href='prenos_poc.php?copern=6167&drupoh=1&page=1'>
+<img src='../obr/kos.png' width=20 height=15 border=0 title="Vymazanie vöetk˝ch vöeobecn˝ch dokladov"></a>
+ <a href='prenos_poc.php?copern=6155&drupoh=1&page=1'>
+<img src='../obr/import.png' width=20 height=15 border=0 title="Import vöeobecn˝ch dokladov z TXT"></a>
+
+<td class="hmenu" width="50%"></td>
+</tr>
+</table>
+<?php
+     }
+?>
 
 <?php if( $copern >= 100 AND $copern <= 110 ) { $copernxy=$copern; $copern=$copernxy-100;  } ?>
-
-
-<?php
-$sql = "SELECT pods FROM prenosy ";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-
-$vsql = "DROP TABLE prenosy ";
-$vytvor = mysql_query("$vsql");
-
-$sqlt = <<<statistika_p1304
-(
-   kto          VARCHAR(10) NOT NULL,
-   pods         VARCHAR(10) NOT NULL,
-   co           VARCHAR(10) NOT NULL,
-   zfir         VARCHAR(10) NOT NULL,
-   zrok         VARCHAR(10) NOT NULL,
-   dofir        VARCHAR(10) NOT NULL,
-   dorok        VARCHAR(10) NOT NULL,
-   kedy         TIMESTAMP(14)
-);
-statistika_p1304;
-
-$vsql = "CREATE TABLE prenosy ".$sqlt;
-$vytvor = mysql_query("$vsql");
-
-}
- 
-//echo $copernco;
-if( $copernco > 100 )
-{
-
-$vsql = "INSERT INTO prenosy ( kto, pods, co, zfir, zrok, dofir, dorok ) VALUES ".
-" ( '$kli_uzid', '$copern', '$copernco', '$h_ycf', '$fir_allx12', '$kli_vxcf', '$kli_vrok' )  ";
-$vytvor = mysql_query("$vsql");
-
-}
-
-
-?>
 
 
 <?php
