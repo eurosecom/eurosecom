@@ -26,9 +26,53 @@ $cislox = 1*$_REQUEST['cislox'];
 
 $citfir = include("../cis/citaj_fir.php");
 
+$sql = "SELECT numb FROM F$kli_vxcf"."_bicbanky ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
 
+$vsql = "DROP TABLE F".$kli_vxcf."_bicban ";
+$vytvor = mysql_query("$vsql");
 
-$sql = "SELECT kontrolx FROM F$kli_vxcf"."_dajiban".$kli_vxcf;
+$sqlt = <<<statistika_p1304
+(
+   numb         VARCHAR(4) NOT NULL,
+   nazb         VARCHAR(50) NOT NULL,
+   bicb         VARCHAR(15) NOT NULL
+);
+statistika_p1304;
+
+$vsql = "CREATE TABLE F".$kli_vxcf."_bicban ".$sqlt;
+$vytvor = mysql_query("$vsql");
+
+$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '0200', 'Všeobecná úverová banka, a.s.', 'SUBASKBX' ) ";
+$vytvor = mysql_query("$vsql");
+$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '0900', 'Slovenská sporite¾òa, a.s', 'GIBASKBX' ) ";
+$vytvor = mysql_query("$vsql");
+$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '1100', 'Tatra banka, a.s.', 'TATRSKBX' ) ";
+$vytvor = mysql_query("$vsql");
+$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '1111', 'UniCredit Bank Slovakia, a.s', 'UNCRSKBX' ) ";
+$vytvor = mysql_query("$vsql");
+$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '5200', 'OTP Banka Slovensko, a.s.', 'OTPVSKBX' ) ";
+$vytvor = mysql_query("$vsql");
+$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '5600', 'OTP Banka Slovensko, a.s.', 'OTPVSKBX' ) ";
+$vytvor = mysql_query("$vsql");
+$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '5900', 'Prvá stavebná sporite¾òa, a.s.', 'PRVASKBA' ) ";
+$vytvor = mysql_query("$vsql");
+$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '6500', 'Poštová banka, a.s.', 'POBNSKBA' ) ";
+$vytvor = mysql_query("$vsql");
+$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '7300', 'ING Bank N.V.', 'INGBSKBX' ) ";
+$vytvor = mysql_query("$vsql");
+$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '7500', 'ÈSOB – Èeskoslovenská obchodná banka, a.s.', 'CEKOSKBX' ) ";
+$vytvor = mysql_query("$vsql");
+$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '7930', 'Wüstenrot stavebná sporite¾òa, a.s.', 'WUSTSKBA' ) ";
+$vytvor = mysql_query("$vsql");
+$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '8170', 'ÈSOB stavebná sporite¾òa, a.s.', 'KBSPSKBX' ) ";
+$vytvor = mysql_query("$vsql");
+
+}
+
+$sql = "SELECT kontrol FROM F$kli_vxcf"."_dajiban".$kli_vxcf;
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -62,8 +106,6 @@ statistika_p1304;
 $vsql = "CREATE TABLE F".$kli_vxcf."_dajiban".$kli_vxcf." ".$sqlt;
 $vytvor = mysql_query("$vsql");
 
-//echo $vsql;
-//exit;
 }
 
 $vsql = "DELETE FROM F".$kli_vxcf."_dajiban".$kli_vxcf." ";
@@ -194,25 +236,35 @@ $ibanx=$statx.$kont2.$num4.$predc6.$uceb10;
 $vsql = "UPDATE F".$kli_vxcf."_dajiban".$kli_vxcf." SET ibanx='$ibanx', predc6='$predc6', uceb10='$uceb10', num4='$num4', csl30='$csl30' ";
 $vytvor = mysql_query("$vsql");
 
+$bicx="";
+  $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_bicban WHERE numb = '$numx' ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $bicx=$riaddok->bicb;
+  }
+
+
+$ibanxs=$ibanx."-".$bicx;
 
 if( $copern == 1 AND $cislox == 1 )
 {
 
-$vsql = "UPDATE F".$kli_vxcf."_ico SET ib1='$ibanx' WHERE ico = $cislo_ico ";
+$vsql = "UPDATE F".$kli_vxcf."_ico SET ib1='$ibanxs' WHERE ico = $cislo_ico ";
 $vytvor = mysql_query("$vsql");
 
 }
 if( $copern == 1 AND $cislox == 2 )
 {
 
-$vsql = "UPDATE F".$kli_vxcf."_ico SET ib2='$ibanx' WHERE ico = $cislo_ico ";
+$vsql = "UPDATE F".$kli_vxcf."_ico SET ib2='$ibanxs' WHERE ico = $cislo_ico ";
 $vytvor = mysql_query("$vsql");
 
 }
 if( $copern == 1 AND $cislox == 3 )
 {
 
-$vsql = "UPDATE F".$kli_vxcf."_ico SET ib3='$ibanx' WHERE ico = $cislo_ico ";
+$vsql = "UPDATE F".$kli_vxcf."_ico SET ib3='$ibanxs' WHERE ico = $cislo_ico ";
 $vytvor = mysql_query("$vsql");
 
 }
