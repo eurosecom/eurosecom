@@ -630,7 +630,7 @@ $h_ssy = $riadok->ssy;
 
   }
 
-$ibanb="";
+$ibanb=""; $swft="";
 $sqlttr = "SELECT * FROM F$kli_vxcf"."_mzdtextmzd WHERE invt = $cislo_oc ";
 $sqlr = mysql_query("$sqlttr"); 
   if (@$zaznamr=mysql_data_seek($sqlr,0))
@@ -1603,6 +1603,7 @@ function kontrola_datum(vstup, Oznam, x1, errflag)
     var uceb = "<?php echo $h_uceb;?>";
     var numb = "<?php echo $h_numb;?>";
     var ibanb = "<?php echo $ibanb;?>";
+    var swft = "<?php echo $swft;?>";
     var vsy = "<?php echo $h_vsy;?>";
     var ksy = "<?php echo $h_ksy;?>";
     var ssy = "<?php echo $h_ssy;?>";
@@ -1613,13 +1614,14 @@ function kontrola_datum(vstup, Oznam, x1, errflag)
 
     var htmlbanka = "<table  class='ponuka' width='100%'><tr>";
 
-    htmlbanka += "<td width='40%'>Bankový úèet: ";
-    htmlbanka += "" + ibanb + " / ";
+    htmlbanka += "<td width='50%'>Bankový úèet: ";
+    htmlbanka += "" + ibanb + " - ";
+    htmlbanka += "" + swft + " / ";
     htmlbanka += "" + uceb + " / ";
     htmlbanka += "" + numb + "";
     htmlbanka += "</td>";
 
-    htmlbanka += "<td width='15%'>VSY:";
+    htmlbanka += "<td width='10%'>VSY:";
     htmlbanka += "" + vsy + "";
     htmlbanka += "</td>";
 
@@ -1627,7 +1629,7 @@ function kontrola_datum(vstup, Oznam, x1, errflag)
     htmlbanka += "" + ksy + "";
     htmlbanka += "</td>";
 
-    htmlbanka += "<td width='15%'>SSY:";
+    htmlbanka += "<td width='10%'>SSY:";
     htmlbanka += "" + ssy + "";
     htmlbanka += "</td>";
 
@@ -1688,7 +1690,12 @@ function zamsodpoc()
 window.open('ktomaodpocetzp.php?copern=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
                     }
 
+function dajIBAN(cislo)
+                {
+var cislox = cislo;
 
+window.open('../cis/dajiban.php?cislo_oc=<?php echo $cislo_oc; ?>&cislox=' + cislox + '&copern=2', '_self' );
+                }
 
 
 </script>
@@ -1706,11 +1713,14 @@ if ( $copern == 8 )
 <div id="nastavbankx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 512px; left: 10px; width:1180px; height:120px;">
 <table  class='ponuka' width='100%'><tr><FORM name='fbanka1' class='obyc' method='post' action='#' >
 
-<td width='62%'>Bankový úèet: 
-<input type='text' name='h_uceb' id='h_uceb' size='15' value="<?php echo $h_uceb;?>"  
+<td width='66%'>úèet 
+<input type='text' name='h_uceb' id='h_uceb' size='18' value="<?php echo $h_uceb;?>"  
  onclick="Fx.style.display='none';" onkeyup="KontrolaCisla(this, Cele)" /> 
  num<input type='text' name='h_numb' id='h_numb' size='6' value="<?php echo $h_numb;?>" 
 onchange='return intg(this,0,9999,Cele)' onclick="Fx.style.display='none';" onkeyup="KontrolaCisla(this, Cele)" /> 
+
+<img src='../obr/vlozit.png' onclick="dajIBAN(11);" width=15 height=15 border=0 title="Vypoèíta SK IBAN z bankového úètu zamestnanca" >
+
  iban<input type='text' name='h_ibanb' id='h_ibanb' size='38' value="<?php echo $ibanb;?>" />
  bic<input type='text' name='h_swft' id='h_swft' size='12' value="<?php echo $swft;?>" />
 </td>
@@ -1724,7 +1734,7 @@ onchange='return intg(this,0,9999,Cele)' onclick="Fx.style.display='none';" onke
 onchange='return intg(this,0,9999999999,Cele)' onclick="Fx.style.display='none';" onkeyup="KontrolaCisla(this, Cele)" /> 
 </td>
 
-<td width='10%'>KSY:
+<td width='8%'>KSY:
 <input type='text' name='h_ksy' id='h_ksy' size='4' value="<?php echo $h_ksy;?>"  
 onchange='return intg(this,0,9999,Cele)' onclick="Fx.style.display='none';" onkeyup="KontrolaCisla(this, Cele)" /> 
 </td>
@@ -1735,7 +1745,7 @@ onchange='return intg(this,1,9999999999,Cele)' onclick="Fx.style.display='none';
 </td>
 
 
-<td width='5%' align='left'><img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;'
+<td width='3%' align='left'><img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;'
 onClick="nastavbankx.style.display='none'; jeBANKAelement.style.display='';" title='Zhasni nastavenie úètu' ></td></FORM></tr>
 
  

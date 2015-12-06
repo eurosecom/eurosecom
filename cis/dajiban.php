@@ -20,8 +20,10 @@ if(!isset($kli_vxcf)) $kli_vxcf = 1;
   mysql_select_db($mysqldb);
 
 // cislo operacie
+//copern=1 z ciselnika ico, copern=2 z udajov o zamestnancovi
 $copern = 1*$_REQUEST['copern'];
 $cislo_ico = 1*$_REQUEST['cislo_ico'];
+$cislo_oc = 1*$_REQUEST['cislo_oc'];
 $cislox = 1*$_REQUEST['cislox'];
 
 $citfir = include("../cis/citaj_fir.php");
@@ -147,6 +149,20 @@ if( $copern == 1 AND $cislox == 3 )
   }
 
 }
+if( $copern == 2 AND $cislox == 11 )
+{
+
+  $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_oc ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $ucebx=$riaddok->uceb;
+  $numx=$riaddok->numb;
+  }
+
+}
+
+
 
 $vsql = "INSERT INTO F".$kli_vxcf."_dajiban".$kli_vxcf." ( cislox, ucebx, numx ) VALUES ( '$cislox', '$ucebx', '$numx' ) ";
 $vytvor = mysql_query("$vsql");
@@ -157,7 +173,7 @@ $vytvor = mysql_query("$vsql");
   $riaddok=mysql_fetch_object($sqldok);
   $ucebx=$riaddok->ucebx;
   $numx=$riaddok->numx;
-
+  }
 
 //rozdel ucebx na predcislie a cislo uctu
 
@@ -268,6 +284,14 @@ $vsql = "UPDATE F".$kli_vxcf."_ico SET ib3='$ibanxs' WHERE ico = $cislo_ico ";
 $vytvor = mysql_query("$vsql");
 
 }
+if( $copern == 2 AND $cislox == 11 )
+{
+
+$vsql = "UPDATE F".$kli_vxcf."_mzdtextmzd SET ziban='$ibanx', zswft='$bicx' WHERE invt = $cislo_oc ";
+$vytvor = mysql_query("$vsql");
+
+}
+
 
 
 ?>
@@ -295,12 +319,10 @@ $vytvor = mysql_query("$vsql");
 <br />
 
 
-
-
-
 <?php
-//cico.php?sys=ALL&copern=8&page=1&cislo_ico=360842&h_ico=360842
 //prepni spat
+
+//cico.php?sys=ALL&copern=8&page=1&cislo_ico=360842&h_ico=360842
 if( $copern == 1 )
 {
 ?>
@@ -311,8 +333,23 @@ window.open('../cis/cico.php?sys=ALL&copern=8&page=1&cislo_ico=<?php echo $cislo
 </script>
 <?php
 }
-exit;
+
+//zamestnanci.php?sys=MZD&copern=8&page=1&cislo_oc=1&h_oc=1
+if( $copern == 2 )
+{
+?>
+<script type="text/javascript">
+
+window.open('../mzdy/zamestnanci.php?sys=MZD&copern=8&page=1&cislo_oc=<?php echo $cislo_oc; ?>&h_oc=<?php echo $cislo_oc; ?>', '_self' )
+
+</script>
+<?php
 }
+
+
+
+exit;
+
 //koniec prepni do faktury
 // celkovy koniec dokumentu
        } while (false);
