@@ -651,7 +651,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_dodb ADD cx01 INT AFTER cfak";
 $vysledek = mysql_query("$sql");
 
-$sql = "UPDATE F$kli_vxcf"."_dodb SET cfak=750001 WHERE dodb = '31100' ";
+$sql = "UPDATE F$kli_vxcf"."_dodb SET cfak=760001 WHERE dodb = '31100' ";
 $vysledek = mysql_query("$sql");
 }
 //koniec tabulky dodb
@@ -686,7 +686,7 @@ $ttqq = mysql_query("$ttvv");
 $sql = "ALTER TABLE F$kli_vxcf"."_ddod ADD cfak INT(10) DEFAULT 1 AFTER ucdo";
 $vysledek = mysql_query("$sql");
 
-$sql = "UPDATE F$kli_vxcf"."_ddod SET cfak=850001 WHERE ddod = '32100' ";
+$sql = "UPDATE F$kli_vxcf"."_ddod SET cfak=860001 WHERE ddod = '32100' ";
 $vysledek = mysql_query("$sql");
 }
 //koniec tabulky ddod

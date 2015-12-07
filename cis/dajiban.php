@@ -286,6 +286,8 @@ $vytvor = mysql_query("$vsql");
 }
 if( $copern == 2 AND $cislox == 11 )
 {
+$sqltt = "INSERT INTO F$kli_vxcf"."_mzdtextmzd ( invt ) VALUES ( '$cislo_oc' ) ";
+$sql = mysql_query("$sqltt");
 
 $vsql = "UPDATE F".$kli_vxcf."_mzdtextmzd SET ziban='$ibanx', zswft='$bicx' WHERE invt = $cislo_oc ";
 $vytvor = mysql_query("$vsql");
