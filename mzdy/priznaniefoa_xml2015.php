@@ -719,6 +719,10 @@ $obec=iconv("CP1250", "UTF-8", $hlavicka->pmes);
 if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $obec="";
   $text = "   <obec><![CDATA[".$obec."]]></obec>"."\r\n"; fwrite($soubor, $text);
   $text = "  </r76>"."\r\n"; fwrite($soubor, $text);
+
+//new2015
+$riadok=$hlavicka->zslu;
+  $text = "    <suhlasZaslat><![CDATA[".$riadok."]]></suhlasZaslat>"."\r\n"; fwrite($soubor, $text);
   
   $text = "  <osobitneZaznamy>"."\r\n"; fwrite($soubor, $text);
 $uvadza=$hlavicka->uoso;
