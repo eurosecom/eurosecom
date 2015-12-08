@@ -331,7 +331,7 @@ $pdf->Cell(0,2,"  ","0",1,"R");
 
 $ipole=1;
 foreach( $pole as $hodnota ) {
-
+$hodnota=str_replace("\n","",$hodnota);
 $pdf->Cell(150,5,"$hodnota","0",1,"L");
 $ipole=$ipole+1;
                              }
@@ -433,7 +433,7 @@ $pdf->Cell(0,2,"  ","0",1,"R");
 
 $ipole=1;
 foreach( $pole as $hodnota ) {
-
+$hodnota=str_replace("\n","",$hodnota);
 $pdf->Cell(150,5,"$hodnota","0",1,"L");
 $ipole=$ipole+1;
                              }

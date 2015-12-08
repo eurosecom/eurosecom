@@ -23,6 +23,18 @@ require_once("../pswd/password.php");
 $copern = 1*$_REQUEST['copern'];
 $vsetko=1;
 
+//uprava textov pred a za
+if ( $copern == 2008 OR $copern == 2009 )
+    {
+$h_penp = strip_tags($_REQUEST['h_penp']);
+//echo "penpe".$h_penp;
+$sqtoz = "UPDATE F$kli_vxcf"."_uctupvtext SET vzpp='$h_penp' ";
+if( $copern == 2009 ) { $sqtoz = "UPDATE F$kli_vxcf"."_uctupvtext SET vzpz='$h_penp' ";  }
+$oznac = mysql_query("$sqtoz");
+$copern=11;
+}
+//koniec uprava textov pred a za
+
 //ulozenie vzpp
 if( $copern == 1011 )
 {
@@ -839,136 +851,21 @@ window.open('../ucto/zapocet.php?copern=10&vseob=<?php echo $vseob; ?>&drupoh=<?
  '_blank', 'width=800, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes'  );
                 }
 
-function TlacVseo(vseob)
+function TlacVseoOld(vseob)
                 {
 
 window.open('vspk_t.php?sysx=UCT&rozuct=ANO&copern=20&drupoh=5&page=1&cislo_dok=<?php echo $vseob; ?>',
  '_blank', 'width=800, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes'  );
                 }
 
-//vzaj pred
+function TlacVseo(vseob)
+    {
+    var hladaj_dok = 1;
+    var drupohx = 5;
+    var cislo_dok = vseob;
+    window.open('vspk_pdf.php?sysx=UCT&rozuct=ANO&hladaj_dok=' + hladaj_dok + '&copern=20&drupoh=' + drupohx + '&page=&cislo_dok=' + cislo_dok + '&fff=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
 
-function Vzpp()
-                {
-  textvzpz.style.display='none';
-  textpenp.style.display='none'; 
-  textpenz.style.display='none';  
-
-  var h_vzppx = '<?php echo $h_vzpp; ?>';
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-
-  mytextvzpp = document.getElementById("textvzpp");
-
-    var htmlvzpp = "<table  class='ponuka' width='100%'><tr><td width='90%'>Text Zápoètu - pred položkami "
-
-    htmlvzpp += "<img border=0 src='../obr/ok.png' style='width:12; height:12;'";
-    htmlvzpp += "onClick='UlozVzpp();' title='Ulož zmeny v texte' ></td>";
-
-    htmlvzpp += "<td width='10%' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:12; height:12;'";
-    htmlvzpp += "onClick='ZhasniVzpp();' title='Zhasni okno a neulož zmeny v texte' ></td></tr>";  
-
-    htmlvzpp += "<tr><FORM name='fhoddok' class='obyc' method='post' action='#' >";
-    htmlvzpp += "<td width='100%' class='obyc' align='left'>";
-    htmlvzpp += "<textarea name='h_vzpp' id='h_vzpp' rows='12' cols='118' >" + h_vzppx.replace("<br />","\r") + "</textarea>";
-    htmlvzpp += "</td></FORM></tr>";
-
-    htmlvzpp += "</table>";  
-
-
-  mytextvzpp.innerHTML = htmlvzpp;
-  textvzpp.style.display='';                
-                }
-
-function ZhasniVzpp()
-                {
-  textvzpp.style.display='none';                
-                }
-
-function UlozVzpp()
-                {
-  textvzpp.style.display='none';                
-
-//var h_vzppe = document.forms.fhoddok.h_vzpp.value;
-//var h_vzppe = escape( h_vzpp );
-  var h_vzppe = document.forms.fhoddok.h_vzpp.value.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-
-window.open('../ucto/saldo_zapocet.php?h_vzpp=' + h_vzppe + '&h_uce=<?php echo $h_uce; ?>&h_ico=<?php echo $h_ico; ?>&h_obd=<?php echo $h_obd; ?>&copern=1011&drupoh=1&page=1&cinnost=<?php echo $cinnost; ?>',
- '_self' );
-                }
-
-//vzaj za
-
-function Vzpz()
-                {
-  textvzpp.style.display='none';
-  textpenp.style.display='none'; 
-  textpenz.style.display='none'; 
-
-  var h_vzpzx = '<?php echo $h_vzpz; ?>';
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-
-  mytextvzpz = document.getElementById("textvzpz");
-
-    var htmlvzpz = "<table  class='ponuka' width='100%'><tr><td width='90%'>Text zápoètu - za položkami "
-
-    htmlvzpz += "<img border=0 src='../obr/ok.png' style='width:12; height:12;'";
-    htmlvzpz += "onClick='UlozVzpz();' title='Ulož zmeny v texte' ></td>";
-
-    htmlvzpz += "<td width='10%' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:12; height:12;'";
-    htmlvzpz += "onClick='ZhasniVzpz();' title='Zhasni okno a neulož zmeny v texte' ></td></tr>";  
-
-    htmlvzpz += "<tr><FORM name='fhoddok' class='obyc' method='post' action='#' >";
-    htmlvzpz += "<td width='100%' class='obyc' align='left'>";
-    htmlvzpz += "<textarea name='h_vzpz' id='h_vzpz' rows='12' cols='118' >" + h_vzpzx.replace("<br />","\r") + "</textarea>";
-    htmlvzpz += "</td></FORM></tr>";
-
-    htmlvzpz += "</table>";  
-
-
-  mytextvzpz.innerHTML = htmlvzpz;
-  textvzpz.style.display='';                
-                }
-
-function ZhasniVzpz()
-                {
-  textvzpz.style.display='none';                
-                }
-
-function UlozVzpz()
-                {
-  textvzpz.style.display='none';                
-
-  var h_vzpze = document.forms.fhoddok.h_vzpz.value.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-
-window.open('../ucto/saldo_zapocet.php?h_vzpz=' + h_vzpze + '&h_uce=<?php echo $h_uce; ?>&h_ico=<?php echo $h_ico; ?>&h_obd=<?php echo $h_obd; ?>&copern=2011&drupoh=1&page=1&cinnost=<?php echo $cinnost; ?>',
- '_self' );
-                }
+    }
 
 function NastavZaciatok()
                 {
@@ -1079,7 +976,237 @@ window.open('../ucto/saldo_zapocet.php?preuct=<?php echo $preuct;?>&copern=1618&
 </table>
 <br />
 
+<?php
+//text pred a za vz andrej
+if ( $copern == 10 )
+     {
 
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_uctupvtext ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+
+  $h_penp1=$riaddok->vzpp;
+  $h_penz1=$riaddok->vzpz;
+  }
+
+?>
+<div id="myTextElement" style="cursor: hand; display: none; position: absolute; z-index: 800; top: 190px; left: 20px; width:800px; height:200px;">
+</div>
+
+<div id="nastavtpx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 190px; left: 10px; width:800px; height:200px;">
+<table  class='ponuka' width='100%'>
+<tr><td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td>
+<td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td></tr>
+
+<tr><FORM name='fhoddok' method='post' action='#' >
+<td colspan='5'>Text zápoètu - pred položkami
+<input type='hidden' name='druh' id='druh' >
+<img border=0 src='../obr/ok.png' style='width:15px; height:15px;' onClick='UlozPenp();' title='Ulož zmeny v texte' >
+
+</td>
+<td colspan='5' align='right'>
+
+<img border=0 src='../obr/zmazuplne.png' style="width:15px; height:15px;" onClick="nastavtpx.style.display='none'; myTextElement.style.display='none';" title='Zhasni' >
+
+</td></tr>  
+                    
+<tr><td colspan='10' class='obyc' align='left'>
+<textarea name='h_penp' id='h_penp' rows='12' cols='118' ><?php echo $h_penp1; ?></textarea>
+</td></tr>
+
+
+</FORM></table>
+</div>
+
+<div id="nastavtzx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 190px; left: 10px; width:800px; height:200px;">
+<table  class='ponuka' width='100%'>
+<tr><td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td>
+<td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td><td width='10%'></td></tr>
+
+<tr><FORM name='fhoddoz' method='post' action='#' >
+<td colspan='5'>Text zápoètu - za položkami
+<input type='hidden' name='druh' id='druh' >
+<img border=0 src='../obr/ok.png' style='width:15px; height:15px;' onClick='UlozPenz();' title='Ulož zmeny v texte' >
+
+</td>
+<td colspan='5' align='right'>
+
+<img border=0 src='../obr/zmazuplne.png' style="width:15px; height:15px;" onClick="nastavtzx.style.display='none'; myTextElement.style.display='none';" title='Zhasni' >
+
+</td></tr>  
+                    
+<tr><td colspan='10' class='obyc' align='left'>
+<textarea name='h_penz' id='h_penz' rows='12' cols='118' ><?php echo $h_penz1; ?></textarea>
+</td></tr>
+
+
+</FORM></table>
+</div>
+
+<script type="text/javascript">
+
+function RozniPenp(druh)
+                {
+  nastavtpx.style.display='';
+  document.forms.fhoddok.druh.value=1; 
+
+                }
+
+function RozniPenz(druh)
+                {
+  nastavtzx.style.display='';
+  document.forms.fhoddok.druh.value=2; 
+
+                }
+
+function DajTextp(druh)
+                {
+  if( druh == 1 ) { DajText(1); }
+  if( druh == 2 ) { DajText(2); }
+                }
+
+
+function UlozPenp()
+                {
+  nastavtpx.style.display='none';                
+
+<?php if( $_SESSION['chrome'] == 0 ) { ?>
+  var h_penpe = document.forms.fhoddok.h_penp.value.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+<?php                                } ?>
+<?php if( $_SESSION['chrome'] == 1 ) { ?>
+  var h_penpe = document.forms.fhoddok.h_penp.value.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+<?php                                } ?>
+
+      var druh = document.forms.fhoddok.druh.value;
+      if( druh == 1 ) { var copernx=2008; }
+      if( druh == 2 ) { var copernx=2009; }
+
+window.open('../ucto/saldo_zapocet.php?regpok=<?php echo $regpok; ?>&h_penp=' + h_penpe + '&h_uce=<?php echo $h_uce; ?>&h_ico=<?php echo $h_ico; ?>&h_obd=0&copern=' + copernx + '&drupoh=<?php echo $drupoh; ?>&page=1&cinnost=<?php echo $cinnost; ?>', '_self' );
+
+                }
+
+function UlozPenz()
+                {
+  nastavtzx.style.display='none';                
+
+<?php if( $_SESSION['chrome'] == 0 ) { ?>
+  var h_penpe = document.forms.fhoddoz.h_penz.value.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+<?php                                } ?>
+<?php if( $_SESSION['chrome'] == 1 ) { ?>
+  var h_penpe = document.forms.fhoddoz.h_penz.value.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\n","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+      h_penpe = h_penpe.replace("\r","%0D%0A");
+<?php                                } ?>
+
+      var druh = document.forms.fhoddok.druh.value;
+      if( druh == 1 ) { var copernx=2008; }
+      if( druh == 2 ) { var copernx=2009; }
+
+window.open('../ucto/saldo_zapocet.php?regpok=<?php echo $regpok; ?>&h_penp=' + h_penpe + '&h_uce=<?php echo $h_uce; ?>&h_ico=<?php echo $h_ico; ?>&h_obd=0&copern=' + copernx + '&drupoh=<?php echo $drupoh; ?>&page=1&cinnost=<?php echo $cinnost; ?>', '_self' );
+
+                }
+
+
+</script>
+<?php
+     }
+//koniec text pred a za vz
+?>
 
 <?php
 ///////////////////////////////////////////////////////////////////////////////pre jedno a vsetky ICO
@@ -1325,8 +1452,8 @@ $dnes_sk=SkDatum($dnes);
  title='Nastavi èíslo všeobecného dokladu' >
 <td class="hmenu" colspan="2">
 <td class="hmenu" colspan="2">
-VZ<img src='../obr/zoznam.png' onClick="Vzpp();" width=15 height=15 border=0 title='Text zápoètu pred položkami' >
-<img src='../obr/zoznam.png' onClick="Vzpz();" width=15 height=15 border=0 title='Text zápoètu za položkami' >
+VZ<img src='../obr/zoznam.png' onClick="RozniPenp(1);" width=15 height=15 border=0 title='Text zápoètu pred položkami' >
+<img src='../obr/zoznam.png' onClick="RozniPenz(2);" width=15 height=15 border=0 title='Text zápoètu za položkami' >
 </FORM>
 <?php                     } ?>
 
