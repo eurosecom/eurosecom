@@ -792,7 +792,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD opr01 DECIMAL(2,0) DEFAULT
 $vysledek = mysql_query("$sql");
 }
 //zmeny pre rok 2015
-$sql = "SELECT zapdl FROM F".$kli_vxcf."_uctpriznanie_po";
+$sql = "SELECT zslu FROM F".$kli_vxcf."_uctpriznanie_po";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -863,9 +863,24 @@ $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY r820 DECIMAL(10,2)";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY r830 DECIMAL(10,0)";
 $vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d1r01 DECIMAL(10,2)";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d2r01 DECIMAL(10,2)";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d3r01 DECIMAL(10,2)";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d4r01 DECIMAL(10,2)";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d5r01 DECIMAL(10,2)";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d6r01 DECIMAL(10,2)";
+$vysledek = mysql_query("$sql");
 
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD zapdl DECIMAL(2,0) DEFAULT 0 AFTER new2015";
 $vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD zslu DECIMAL(2,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+
 }
 //koniec pracovny def subor
 
@@ -1458,8 +1473,6 @@ $d1r03 = strip_tags($_REQUEST['d1r03']);
 //$d1r07 = strip_tags($_REQUEST['d1r07']);
 $d2od = strip_tags($_REQUEST['d2od']);
 $d2odsql = SqlDatum($d2od);
-
-
 $d3od = strip_tags($_REQUEST['d3od']);
 $d3odsql = SqlDatum($d3od);
 $d3do = strip_tags($_REQUEST['d3do']);
@@ -1472,48 +1485,64 @@ $d5od = strip_tags($_REQUEST['d5od']);
 $d5odsql = SqlDatum($d5od);
 $d5do = strip_tags($_REQUEST['d5do']);
 $d5dosql = SqlDatum($d5do);
+$d6od = strip_tags($_REQUEST['d6od']);
+$d6odsql = SqlDatum($d6od);
 $d2r01 = strip_tags($_REQUEST['d2r01']);
 $d2r02 = strip_tags($_REQUEST['d2r02']);
 $d2r03 = strip_tags($_REQUEST['d2r03']);
-$d2r04 = strip_tags($_REQUEST['d2r04']);
-$d2r05 = strip_tags($_REQUEST['d2r05']);
-$d2r06 = strip_tags($_REQUEST['d2r06']);
-$d2r07 = strip_tags($_REQUEST['d2r07']);
+//$d2r04 = strip_tags($_REQUEST['d2r04']);
+//$d2r05 = strip_tags($_REQUEST['d2r05']);
+//$d2r06 = strip_tags($_REQUEST['d2r06']);
+//$d2r07 = strip_tags($_REQUEST['d2r07']);
 $d3r01 = strip_tags($_REQUEST['d3r01']);
 $d3r02 = strip_tags($_REQUEST['d3r02']);
 $d3r03 = strip_tags($_REQUEST['d3r03']);
-$d3r04 = strip_tags($_REQUEST['d3r04']);
-$d3r05 = strip_tags($_REQUEST['d3r05']);
-$d3r06 = strip_tags($_REQUEST['d3r06']);
+//$d3r04 = strip_tags($_REQUEST['d3r04']);
+//$d3r05 = strip_tags($_REQUEST['d3r05']);
+//$d3r06 = strip_tags($_REQUEST['d3r06']);
 $d4r01 = strip_tags($_REQUEST['d4r01']);
 $d4r02 = strip_tags($_REQUEST['d4r02']);
 $d4r03 = strip_tags($_REQUEST['d4r03']);
-$d4r04 = strip_tags($_REQUEST['d4r04']);
-$d4r05 = strip_tags($_REQUEST['d4r05']);
-$d4r06 = strip_tags($_REQUEST['d4r06']);
+//$d4r04 = strip_tags($_REQUEST['d4r04']);
+//$d4r05 = strip_tags($_REQUEST['d4r05']);
+//$d4r06 = strip_tags($_REQUEST['d4r06']);
 $d5r01 = strip_tags($_REQUEST['d5r01']);
 $d5r02 = strip_tags($_REQUEST['d5r02']);
 $d5r03 = strip_tags($_REQUEST['d5r03']);
-$d5r04 = strip_tags($_REQUEST['d5r04']);
-$d5r05 = strip_tags($_REQUEST['d5r05']);
-$d5r06 = strip_tags($_REQUEST['d5r06']);
+//$d5r04 = strip_tags($_REQUEST['d5r04']);
+//$d5r05 = strip_tags($_REQUEST['d5r05']);
+//$d5r06 = strip_tags($_REQUEST['d5r06']);
 $d6r01 = strip_tags($_REQUEST['d6r01']);
-//$d6r02 = strip_tags($_REQUEST['d6r02']);
-//$d6r03 = strip_tags($_REQUEST['d6r03']);
+$d6r02 = strip_tags($_REQUEST['d6r02']);
+$d6r03 = strip_tags($_REQUEST['d6r03']);
 //$d6r04 = strip_tags($_REQUEST['d6r04']);
-$d6r05 = strip_tags($_REQUEST['d6r05']);
-$d6r06 = strip_tags($_REQUEST['d6r06']);
-$d7r01 = strip_tags($_REQUEST['d7r01']);
+//$d6r05 = strip_tags($_REQUEST['d6r05']);
+//$d6r06 = strip_tags($_REQUEST['d6r06']);
+//$d7r01 = strip_tags($_REQUEST['d7r01']);
 $d7r02 = strip_tags($_REQUEST['d7r02']);
 $d7r03 = strip_tags($_REQUEST['d7r03']);
-$d7r04 = strip_tags($_REQUEST['d7r04']);
-$d7r05 = strip_tags($_REQUEST['d7r05']);
-$d8r01 = strip_tags($_REQUEST['d8r01']);
-$d8r02 = strip_tags($_REQUEST['d8r02']);
-$d8r03 = strip_tags($_REQUEST['d8r03']);
-$d8r04 = strip_tags($_REQUEST['d8r04']);
-$d8r05 = strip_tags($_REQUEST['d8r05']);
+//$d7r04 = strip_tags($_REQUEST['d7r04']);
+//$d7r05 = strip_tags($_REQUEST['d7r05']);
+//$d8r01 = strip_tags($_REQUEST['d8r01']);
+//$d8r02 = strip_tags($_REQUEST['d8r02']);
+//$d8r03 = strip_tags($_REQUEST['d8r03']);
+//$d8r04 = strip_tags($_REQUEST['d8r04']);
+//$d8r05 = strip_tags($_REQUEST['d8r05']);
 
+
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
+" c2r01='$c2r01', c2r02='$c2r02', c2r03='$c2r03', c2r04='$c2r04', c2r05='$c2r05', ".
+" d1r01='$d1r01', d1r02='$d1r02', d1r03='$d1r03', d2r01='$d2r01', d2r02='$d2r02', d2r03='$d2r03', ".
+" d2od='$d2odsql', d2do='$d2dosql', d3od='$d3odsql', d3do='$d3dosql', d4od='$d4odsql', d4do='$d4dosql',".
+" d5od='$d5odsql', d5do='$d5dosql', d6od='$d6odsql', d6do='$d6dosql', ".
+" d3r01='$d3r01', d3r02='$d3r02', d3r03='$d3r03', d4r01='$d4r01', d4r02='$d4r02', d4r03='$d4r03', ".
+" d5r01='$d5r01', d5r02='$d5r02', d5r03='$d5r03', d6r01='$d6r01', d6r02='$d6r02', d6r03='$d6r03', ".
+" d7r02='$d7r02', d7r03='$d7r03' ".
+" WHERE ico >= 0";
+                    }
+
+if ( $strana == 7 ) {
 $e1r01 = strip_tags($_REQUEST['e1r01']);
 $e1r02 = strip_tags($_REQUEST['e1r02']);
 $e1r03 = strip_tags($_REQUEST['e1r03']);
@@ -1523,22 +1552,6 @@ $e1r06 = strip_tags($_REQUEST['e1r06']);
 $f1r01 = strip_tags($_REQUEST['f1r01']);
 $f1r02 = strip_tags($_REQUEST['f1r02']);
 $f1r03 = strip_tags($_REQUEST['f1r03']);
-
-
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
-" d1r01='$d1r01', d1r02='$d1r02', d1r03='$d1r03', d1r04='$d1r04', d1r05='$d1r05', d2r01='$d2r01', d2r02='$d2r02', d2r03='$d2r03', d2r04='$d2r04', d2r05='$d2r05', ".
-" c2r01='$c2r01', c2r02='$c2r02', c2r03='$c2r03', c2r04='$c2r04', c2r05='$c2r05' ".
-" d1r06='$d1r06', d1r07='$d1r07', d2r06='$d2r06', d2r07='$d2r07',".
-" d3r06='$d3r06', d4r06='$d4r06', d5r06='$d5r06', d6r06='$d6r06', ". 
-" d3od='$d3odsql', d3do='$d3dosql', d4od='$d4odsql', d4do='$d4dosql', d5od='$d5odsql', d5do='$d5dosql', ".
-" d3r01='$d3r01', d3r02='$d3r02', d3r03='$d3r03', d3r04='$d3r04', d3r05='$d3r05', d4r01='$d4r01', d4r02='$d4r02', d4r03='$d4r03', d4r04='$d4r04', d4r05='$d4r05', ".
-" d5r01='$d5r01', d5r02='$d5r02', d5r03='$d5r03', d5r04='$d5r04', d5r05='$d5r05', d6r01='$d6r01', d6r05='$d6r05', ".
-" d7r01='$d7r01', d7r02='$d7r02', d7r03='$d7r03', d7r04='$d7r04', d7r05='$d7r05', d8r01='$d8r01', d8r02='$d8r02', d8r03='$d8r03', d8r04='$d8r04', d8r05='$d8r05', ".
-" e1r01='$e1r01', e1r02='$e1r02', e1r03='$e1r03', e1r04='$e1r04', e1r05='$e1r05', e1r06='$e1r06', f1r01='$f1r01', f1r02='$f1r02', f1r03='$f1r03' ".
-" WHERE ico >= 0";
-                    }
-
-if ( $strana == 7 ) {
 $g1r01 = strip_tags($_REQUEST['g1r01']);
 $g1r02 = strip_tags($_REQUEST['g1r02']);
 $g1r03 = strip_tags($_REQUEST['g1r03']);
@@ -1550,6 +1563,15 @@ $g3r02 = strip_tags($_REQUEST['g3r02']);
 $g3r03 = strip_tags($_REQUEST['g3r03']);
 $g3r04 = strip_tags($_REQUEST['g3r04']);
 
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
+" e1r01='$e1r01', e1r02='$e1r02', e1r03='$e1r03', e1r04='$e1r04', e1r05='$e1r05', e1r06='$e1r06', ".
+" f1r01='$f1r01', f1r02='$f1r02', f1r03='$f1r03', ".
+" g1r01='$g1r01', g1r02='$g1r02', g1r03='$g1r03', g2r01='$g2r01', g2r02='$g2r02', g2r03='$g2r03', ".
+" g3r01='$g3r01', g3r02='$g3r02', g3r03='$g3r03', g3r04='$g3r04' ".
+" WHERE ico >= 0";
+                    }
+
+if ( $strana == 8 ) {
 $hr01 = strip_tags($_REQUEST['hr01']);
 $h1r02 = strip_tags($_REQUEST['h1r02']);
 $h2r02 = strip_tags($_REQUEST['h2r02']);
@@ -1567,18 +1589,8 @@ $h1r08 = strip_tags($_REQUEST['h1r08']);
 $h2r08 = strip_tags($_REQUEST['h2r08']);
 $h1r09 = strip_tags($_REQUEST['h1r09']);
 $h2r09 = strip_tags($_REQUEST['h2r09']);
-$hr06 = strip_tags($_REQUEST['hr06']);
+//$hr06 = strip_tags($_REQUEST['hr06']);
 $hr10 = strip_tags($_REQUEST['hr10']);
-
-
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
-" g1r01='$g1r01', g1r02='$g1r02', g1r03='$g1r03', g2r01='$g2r01', g2r02='$g2r02', g2r03='$g2r03', g3r01='$g3r01', g3r02='$g3r02', g3r03='$g3r03', g3r04='$g3r04', ".
-" hr01='$hr01', h1r02='$h1r02', h2r02='$h2r02', h1r03='$h1r03', h2r03='$h2r03', h1r04='$h1r04', h2r04='$h2r04', h1r05='$h1r05', h2r05='$h2r05', hr06='$hr06', ".
-" hr10='$hr10', h1r06='$h1r06', h2r06='$h2r06', h1r07='$h1r07', h2r07='$h2r07', h1r08='$h1r08', h2r08='$h2r08', h1r09='$h1r09', h2r09='$h2r09' ".
-" WHERE ico >= 0"; 
-                    }
-
-if ( $strana == 8 ) {
 $i1r01 = strip_tags($_REQUEST['i1r01']);
 $i1r02 = strip_tags($_REQUEST['i1r02']);
 $i1r03 = strip_tags($_REQUEST['i1r03']);
@@ -1593,13 +1605,27 @@ $i2r04 = strip_tags($_REQUEST['i2r04']);
 $i2r05 = strip_tags($_REQUEST['i2r05']);
 $i2r06 = strip_tags($_REQUEST['i2r06']);
 $i2r07 = strip_tags($_REQUEST['i2r07']);
+//$jl1r01 = strip_tags($_REQUEST['jl1r01']);
+//$jl1r02 = strip_tags($_REQUEST['jl1r02']);
+//$jl1r03 = strip_tags($_REQUEST['jl1r03']);
+//$jl1r04 = strip_tags($_REQUEST['jl1r04']);
+//$jl1r05 = strip_tags($_REQUEST['jl1r05']);
+$jr01 = strip_tags($_REQUEST['jr01']);
+$jr02 = strip_tags($_REQUEST['jr02']);
 
-$jl1r01 = strip_tags($_REQUEST['jl1r01']);
-$jl1r02 = strip_tags($_REQUEST['jl1r02']);
-$jl1r03 = strip_tags($_REQUEST['jl1r03']);
-$jl1r04 = strip_tags($_REQUEST['jl1r04']);
-$jl1r05 = strip_tags($_REQUEST['jl1r05']);
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET".
+" hr01='$hr01', ".
+" h1r02='$h1r02', h2r02='$h2r02', h1r03='$h1r03', h2r03='$h2r03', h1r04='$h1r04', h2r04='$h2r04', ".
+" h1r05='$h1r05', h2r05='$h2r05', h1r06='$h1r06', h2r06='$h2r06', h1r07='$h1r07', h2r07='$h2r07', ".
+" h1r08='$h1r08', h2r08='$h2r08', h1r09='$h1r09', h2r09='$h2r09', ".
+" hr10='$hr10', ".
+" i1r01='$i1r01', i1r02='$i1r02', i1r03='$i1r03', i1r04='$i1r04', i1r05='$i1r05', i1r06='$i1r06', i1r07='$i1r07', ".
+" i2r01='$i2r01', i2r02='$i2r02', i2r03='$i2r03', i2r04='$i2r04', i2r05='$i2r05', i2r06='$i2r06', i2r07='$i2r07', ".
+" jr01='$jr01', jr02='$jr02' ".
+" WHERE ico >= 0";
+                    }
 
+if ( $strana == 9 ) {
 $k1od = strip_tags($_REQUEST['k1od']);
 $k1odsql = SqlDatum($k1od);
 $k1do = strip_tags($_REQUEST['k1do']);
@@ -1616,45 +1642,32 @@ $k4od = strip_tags($_REQUEST['k4od']);
 $k4odsql = SqlDatum($k4od);
 $k4do = strip_tags($_REQUEST['k4do']);
 $k4dosql = SqlDatum($k4do);
-
 $k2r01 = strip_tags($_REQUEST['k2r01']);
+$k3r01 = strip_tags($_REQUEST['k3r01']);
+$k4r01 = strip_tags($_REQUEST['k4r01']);
 $k5r01 = strip_tags($_REQUEST['k5r01']);
-
 $k2r02 = strip_tags($_REQUEST['k2r02']);
+$k3r02 = strip_tags($_REQUEST['k3r02']);
 $k4r02 = strip_tags($_REQUEST['k4r02']);
 $k5r02 = strip_tags($_REQUEST['k5r02']);
-
 $k2r03 = strip_tags($_REQUEST['k2r03']);
 $k3r03 = strip_tags($_REQUEST['k3r03']);
 $k4r03 = strip_tags($_REQUEST['k4r03']);
 $k5r03 = strip_tags($_REQUEST['k5r03']);
-
 $k2r04 = strip_tags($_REQUEST['k2r04']);
 $k3r04 = strip_tags($_REQUEST['k3r04']);
 $k4r04 = strip_tags($_REQUEST['k4r04']);
 $k5r04 = strip_tags($_REQUEST['k5r04']);
-
 $k4r05 = strip_tags($_REQUEST['k4r05']);
 $k5r05 = strip_tags($_REQUEST['k5r05']);
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
-" k1od='$k1odsql', k1do='$k1dosql', k2od='$k2odsql', k2do='$k2dosql', k3od='$k3odsql', k3do='$k3dosql', k4od='$k4odsql', k4do='$k4dosql',".
-" k2r01='$k2r01', k5r01='$k5r01', k2r02='$k2r02', k4r02='$k4r02', k5r02='$k5r02', ".
-" k2r03='$k2r03', k3r03='$k3r03', k4r03='$k4r03', k5r03='$k5r03', ".
-" k2r04='$k2r04', k3r04='$k3r04', k4r04='$k4r04', k5r04='$k5r04', k4r05='$k4r05', k5r05='$k5r05', ".
-" i1r01='$i1r01', i1r02='$i1r02', i1r03='$i1r03', i1r04='$i1r04', i1r05='$i1r05', i1r06='$i1r06', i1r07='$i1r07', ".
-" i2r01='$i2r01', i2r02='$i2r02', i2r03='$i2r03', i2r04='$i2r04', i2r05='$i2r05', i2r06='$i2r06', i2r07='$i2r07', ".
-" jl1r01='$jl1r01', jl1r02='$jl1r02', jl1r03='$jl1r03', jl1r04='$jl1r04', jl1r05='$jl1r05'  ".
-" WHERE ico >= 0";
-                    }
-
-if ( $strana == 9 ) {
 $pzano = strip_tags($_REQUEST['pzano']);
+$zslu = strip_tags($_REQUEST['zslu']);
 $pcpod = strip_tags($_REQUEST['pcpod']);
 $pcdar = strip_tags($_REQUEST['pcdar']);
-$pc15 = strip_tags($_REQUEST['pc15']);
-$pcpod5 = strip_tags($_REQUEST['pcpod5']);
-$pcdar5 = strip_tags($_REQUEST['pcdar5']);
+//$pc15 = strip_tags($_REQUEST['pc15']);
+//$pcpod5 = strip_tags($_REQUEST['pcpod5']);
+//$pcdar5 = strip_tags($_REQUEST['pcdar5']);
 $pc155 = strip_tags($_REQUEST['pc155']);
 $pcpoc = strip_tags($_REQUEST['pcpoc']);
 $pcsum = strip_tags($_REQUEST['pcsum']);
@@ -1666,17 +1679,23 @@ $p1uli = strip_tags($_REQUEST['p1uli']);
 $p1cdm = strip_tags($_REQUEST['p1cdm']);
 $p1psc = strip_tags($_REQUEST['p1psc']);
 $p1mes = strip_tags($_REQUEST['p1mes']);
-$osobit = strip_tags($_REQUEST['osobit']);
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
-" pcpod5='$pcpod5', pcdar5='$pcdar5', pc155='$pc155', ".
-" pzano='$pzano', pcpod='$pcpod', pcpoc='$pcpoc', pcsum='$pcsum', pcdar='$pcdar', pc15='$pc15', ".
-" p1ico='$p1ico', p1sid='$p1sid', p1pfr='$p1pfr', p1men='$p1men', p1uli='$p1uli', p1cdm='$p1cdm', p1psc='$p1psc', p1mes='$p1mes', osobit='$osobit' ".
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET".
+" k1od='$k1odsql', k1do='$k1dosql', k2od='$k2odsql', k2do='$k2dosql', k3od='$k3odsql', k3do='$k3dosql', k4od='$k4odsql', k4do='$k4dosql',".
+" k2r01='$k2r01', k3r01='$k3r01', k4r01='$k4r01', k5r01='$k5r01', ".
+" k2r02='$k2r02', k3r02='$k3r02', k4r02='$k4r02', k5r02='$k5r02', ".
+" k2r03='$k2r03', k3r03='$k3r03', k4r03='$k4r03', k5r03='$k5r03', ".
+" k2r04='$k2r04', k3r04='$k3r04', k4r04='$k4r04', k5r04='$k5r04', ".
+" k4r05='$k4r05', k5r05='$k5r05', ".
+" pzano='$pzano', zslu='$zslu', ".
+" pcpod='$pcpod', pcdar='$pcdar', pc155='$pc155', pcpoc='$pcpoc', pcsum='$pcsum', ".
+" p1ico='$p1ico', p1sid='$p1sid', p1pfr='$p1pfr', p1men='$p1men', p1uli='$p1uli', p1cdm='$p1cdm', p1psc='$p1psc', p1mes='$p1mes' ".
 " WHERE ico >= 0";
-
                     }
 
 if ( $strana == 10 ) {
+$osobit = strip_tags($_REQUEST['osobit']);
 $ooprie = strip_tags($_REQUEST['ooprie']);
 $oomeno = strip_tags($_REQUEST['oomeno']);
 $ootitl = strip_tags($_REQUEST['ootitl']);
@@ -1706,7 +1725,7 @@ $vruc = strip_tags($_REQUEST['vruc']);
 //$vrnum = strip_tags($_REQUEST['vrnum']);
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
-" ooprie='$ooprie', oomeno='$oomeno', ootitl='$ootitl', otitz='$otitz', oopost='$oopost', oouli='$oouli', oocdm='$oocdm', ".
+" osobit='$osobit', ooprie='$ooprie', oomeno='$oomeno', ootitl='$ootitl', otitz='$otitz', oopost='$oopost', oouli='$oouli', oocdm='$oocdm', ".
 " oopsc='$oopsc', oomes='$oomes', ootel='$ootel', oofax='$oofax', oostat='$oostat', ".
 " pril='$pril', datum='$datum_sql', datuk='$datuk_sql', vrat='$vrat', vrpp='$vrpp', vruc='$vruc' ".
 " WHERE ico >= 0";
@@ -2144,56 +2163,36 @@ $c2r05 = $fir_riadok->c2r05;
 $d1r01 = $fir_riadok->d1r01;
 $d1r02 = $fir_riadok->d1r02;
 $d1r03 = $fir_riadok->d1r03;
-$d1r04 = $fir_riadok->d1r04;
-$d1r05 = $fir_riadok->d1r05;
-$d1r06 = $fir_riadok->d1r06;
-$d1r07 = $fir_riadok->d1r07;
 $d2r01 = $fir_riadok->d2r01;
 $d2r02 = $fir_riadok->d2r02;
 $d2r03 = $fir_riadok->d2r03;
-$d2r04 = $fir_riadok->d2r04;
-$d2r05 = $fir_riadok->d2r05;
-$d2r06 = $fir_riadok->d2r06;
-$d2r07 = $fir_riadok->d2r07;
 $d3r01 = $fir_riadok->d3r01;
 $d3r02 = $fir_riadok->d3r02;
 $d3r03 = $fir_riadok->d3r03;
-$d3r04 = $fir_riadok->d3r04;
-$d3r05 = $fir_riadok->d3r05;
-$d3r06 = $fir_riadok->d3r06;
 $d4r01 = $fir_riadok->d4r01;
 $d4r02 = $fir_riadok->d4r02;
 $d4r03 = $fir_riadok->d4r03;
-$d4r04 = $fir_riadok->d4r04;
-$d4r05 = $fir_riadok->d4r05;
-$d4r06 = $fir_riadok->d4r06;
 $d5r01 = $fir_riadok->d5r01;
 $d5r02 = $fir_riadok->d5r02;
 $d5r03 = $fir_riadok->d5r03;
-$d5r04 = $fir_riadok->d5r04;
-$d5r05 = $fir_riadok->d5r05;
-$d5r06 = $fir_riadok->d5r06;
 $d6r01 = $fir_riadok->d6r01;
-$d6r05 = $fir_riadok->d6r05;
-$d6r06 = $fir_riadok->d6r06;
-$d7r01 = $fir_riadok->d7r01;
+$d6r02 = $fir_riadok->d6r02;
+$d6r03 = $fir_riadok->d6r03;
 $d7r02 = $fir_riadok->d7r02;
 $d7r03 = $fir_riadok->d7r03;
-$d7r04 = $fir_riadok->d7r04;
-$d7r05 = $fir_riadok->d7r05;
-$d8r01 = $fir_riadok->d8r01;
-$d8r02 = $fir_riadok->d8r02;
-$d8r03 = $fir_riadok->d8r03;
-$d8r04 = $fir_riadok->d8r04;
-$d8r05 = $fir_riadok->d8r05;
-
+$d2odsk = SkDatum($fir_riadok->d2od);
+$d2dosk = SkDatum($fir_riadok->d2do);
 $d3odsk = SkDatum($fir_riadok->d3od);
 $d3dosk = SkDatum($fir_riadok->d3do);
 $d4odsk = SkDatum($fir_riadok->d4od);
 $d4dosk = SkDatum($fir_riadok->d4do);
 $d5odsk = SkDatum($fir_riadok->d5od);
 $d5dosk = SkDatum($fir_riadok->d5do);
+$d6odsk = SkDatum($fir_riadok->d6od);
+$d6dosk = SkDatum($fir_riadok->d6do);
+                                      }
 
+if ( $strana == 7 OR $strana == 999 ) {
 $e1r01 = $fir_riadok->e1r01;
 $e1r02 = $fir_riadok->e1r02;
 $e1r03 = $fir_riadok->e1r03;
@@ -2204,9 +2203,6 @@ $f1r01 = $fir_riadok->f1r01;
 $f1r02 = $fir_riadok->f1r02;
 $f1r03 = $fir_riadok->f1r03;
 
-                                      }
-
-if ( $strana == 7 OR $strana == 999 ) {
 $g1r01 = $fir_riadok->g1r01;
 $g1r02 = $fir_riadok->g1r02;
 $g1r03 = $fir_riadok->g1r03;
@@ -2217,7 +2213,9 @@ $g3r01 = $fir_riadok->g3r01;
 $g3r02 = $fir_riadok->g3r02;
 $g3r03 = $fir_riadok->g3r03;
 $g3r04 = $fir_riadok->g3r04;
+                                      }
 
+if ( $strana == 8 OR $strana == 999 ) {
 $hr01 = $fir_riadok->hr01;
 $h1r02 = $fir_riadok->h1r02;
 $h2r02 = $fir_riadok->h2r02;
@@ -2235,12 +2233,7 @@ $h1r08 = $fir_riadok->h1r08;
 $h2r08 = $fir_riadok->h2r08;
 $h1r09 = $fir_riadok->h1r09;
 $h2r09 = $fir_riadok->h2r09;
-$hr06 = $fir_riadok->hr06;
 $hr10 = $fir_riadok->hr10;
-
-                                      }
-
-if ( $strana == 8 OR $strana == 999 ) {
 $i1r01 = $fir_riadok->i1r01;
 $i1r02 = $fir_riadok->i1r02;
 $i1r03 = $fir_riadok->i1r03;
@@ -2255,14 +2248,11 @@ $i2r04 = $fir_riadok->i2r04;
 $i2r05 = $fir_riadok->i2r05;
 $i2r06 = $fir_riadok->i2r06;
 $i2r07 = $fir_riadok->i2r07;
+$jr01 = $fir_riadok->jr01;
+$jr02 = $fir_riadok->jr02;
+                                      }
 
-$jl1r01 = $fir_riadok->jl1r01;
-$jl1r02 = $fir_riadok->jl1r02;
-$jl1r03 = $fir_riadok->jl1r03;
-$jl1r04 = $fir_riadok->jl1r04;
-$jl1r05 = $fir_riadok->jl1r05;
-
-
+if ( $strana == 9 OR $strana == 999 ) {
 $k1odsk = SkDatum($fir_riadok->k1od);
 $k1dosk = SkDatum($fir_riadok->k1do);
 $k2odsk = SkDatum($fir_riadok->k2od);
@@ -2273,35 +2263,28 @@ $k4odsk = SkDatum($fir_riadok->k4od);
 $k4dosk = SkDatum($fir_riadok->k4do);
 
 $k2r01 = $fir_riadok->k2r01;
+$k3r01 = $fir_riadok->k3r01;
+$k4r01 = $fir_riadok->k4r01;
 $k5r01 = $fir_riadok->k5r01;
-
 $k2r02 = $fir_riadok->k2r02;
+$k3r02 = $fir_riadok->k3r02;
 $k4r02 = $fir_riadok->k4r02;
 $k5r02 = $fir_riadok->k5r02;
-
 $k2r03 = $fir_riadok->k2r03;
 $k3r03 = $fir_riadok->k3r03;
 $k4r03 = $fir_riadok->k4r03;
 $k5r03 = $fir_riadok->k5r03;
-
 $k2r04 = $fir_riadok->k2r04;
 $k3r04 = $fir_riadok->k3r04;
 $k4r04 = $fir_riadok->k4r04;
 $k5r04 = $fir_riadok->k5r04;
-
 $k4r05 = $fir_riadok->k4r05;
 $k5r05 = $fir_riadok->k5r05;
 
-
-                                      }
-
-if ( $strana == 9 OR $strana == 999 ) {
 $pzano = $fir_riadok->pzano;
+$zslu = $fir_riadok->zslu;
 $pcpod = $fir_riadok->pcpod;
 $pcdar = $fir_riadok->pcdar;
-$pc15 = $fir_riadok->pc15;
-$pcpod5 = $fir_riadok->pcpod5;
-$pcdar5 = $fir_riadok->pcdar5;
 $pc155 = $fir_riadok->pc155;
 $pcpoc = $fir_riadok->pcpoc;
 $pcsum = $fir_riadok->pcsum;
@@ -2570,8 +2553,6 @@ if ( $copern == 102 )
    document.formv1.c1r03.value = '<?php echo "$c1r03";?>';
    document.formv1.c1r04.value = '<?php echo "$c1r04";?>';
    document.formv1.c1r05.value = '<?php echo "$c1r05";?>';
-
-
 <?php                     } ?>
 
 <?php if ( $strana == 6 ) { ?>
@@ -2580,45 +2561,40 @@ if ( $copern == 102 )
    document.formv1.c2r03.value = '<?php echo "$c2r03";?>';
    document.formv1.c2r04.value = '<?php echo "$c2r04";?>';
    document.formv1.c2r05.value = '<?php echo "$c2r05";?>';
-
+   document.formv1.d1r01.value = '<?php echo "$d1r01";?>';
    document.formv1.d1r02.value = '<?php echo "$d1r02";?>';
    document.formv1.d1r03.value = '<?php echo "$d1r03";?>';
-   document.formv1.d1r06.value = '<?php echo "$d1r06";?>';
-
-   document.formv1.d2r02.value = '<?php echo "$d2r02";?>';
-   document.formv1.d2r03.value = '<?php echo "$d2r03";?>';
-   document.formv1.d2r04.value = '<?php echo "$d2r04";?>';
-   document.formv1.d2r05.value = '<?php echo "$d2r05";?>';
-   document.formv1.d2r06.value = '<?php echo "$d2r06";?>';
-   document.formv1.d2r07.value = '<?php echo "$d2r07";?>';
+   document.formv1.d2od.value = '<?php echo "$d2odsk";?>';
+   document.formv1.d2do.value = '<?php echo "$d2dosk";?>';
    document.formv1.d3od.value = '<?php echo "$d3odsk";?>';
    document.formv1.d3do.value = '<?php echo "$d3dosk";?>';
    document.formv1.d4od.value = '<?php echo "$d4odsk";?>';
    document.formv1.d4do.value = '<?php echo "$d4dosk";?>';
    document.formv1.d5od.value = '<?php echo "$d5odsk";?>';
    document.formv1.d5do.value = '<?php echo "$d5dosk";?>';
+   document.formv1.d6od.value = '<?php echo "$d6odsk";?>';
+   document.formv1.d6do.value = '<?php echo "$d6dosk";?>';
 
+   document.formv1.d2r01.value = '<?php echo "$d2r01";?>';
+   document.formv1.d2r02.value = '<?php echo "$d2r02";?>';
+   document.formv1.d2r03.value = '<?php echo "$d2r03";?>';
+   document.formv1.d3r01.value = '<?php echo "$d3r01";?>';
    document.formv1.d3r02.value = '<?php echo "$d3r02";?>';
    document.formv1.d3r03.value = '<?php echo "$d3r03";?>';
-   document.formv1.d3r04.value = '<?php echo "$d3r04";?>';
-   document.formv1.d3r05.value = '<?php echo "$d3r05";?>';
-   document.formv1.d3r06.value = '<?php echo "$d3r06";?>';
-
+   document.formv1.d4r01.value = '<?php echo "$d4r01";?>';
    document.formv1.d4r02.value = '<?php echo "$d4r02";?>';
    document.formv1.d4r03.value = '<?php echo "$d4r03";?>';
-   document.formv1.d4r04.value = '<?php echo "$d4r04";?>';
-   document.formv1.d4r05.value = '<?php echo "$d4r05";?>';
-   document.formv1.d4r06.value = '<?php echo "$d4r06";?>';
-
+   document.formv1.d5r01.value = '<?php echo "$d5r01";?>';
    document.formv1.d5r02.value = '<?php echo "$d5r02";?>';
    document.formv1.d5r03.value = '<?php echo "$d5r03";?>';
-   document.formv1.d5r04.value = '<?php echo "$d5r04";?>';
-   document.formv1.d5r05.value = '<?php echo "$d5r05";?>';
-   document.formv1.d5r06.value = '<?php echo "$d5r06";?>';
+   document.formv1.d6r01.value = '<?php echo "$d6r01";?>';
+   document.formv1.d6r02.value = '<?php echo "$d6r02";?>';
+   document.formv1.d6r03.value = '<?php echo "$d6r03";?>';
+   document.formv1.d7r02.value = '<?php echo "$d7r02";?>';
+   document.formv1.d7r03.value = '<?php echo "$d7r03";?>';
+<?php                     } ?>
 
-   document.formv1.d6r05.value = '<?php echo "$d6r05";?>';
-   document.formv1.d6r06.value = '<?php echo "$d6r06";?>';
-
+<?php if ( $strana == 7 ) { ?>
    document.formv1.e1r01.value = '<?php echo "$e1r01";?>';
    document.formv1.e1r02.value = '<?php echo "$e1r02";?>';
    document.formv1.e1r03.value = '<?php echo "$e1r03";?>';
@@ -2629,9 +2605,6 @@ if ( $copern == 102 )
    document.formv1.f1r02.value = '<?php echo "$f1r02";?>';
    document.formv1.f1r03.value = '<?php echo "$f1r03";?>';
 
-<?php                     } ?>
-
-<?php if ( $strana == 7 ) { ?>
    document.formv1.g1r01.value = '<?php echo "$g1r01";?>';
    document.formv1.g1r02.value = '<?php echo "$g1r02";?>';
    document.formv1.g1r03.value = '<?php echo "$g1r03";?>';
@@ -2642,7 +2615,9 @@ if ( $copern == 102 )
    document.formv1.g3r02.value = '<?php echo "$g3r02";?>';
    document.formv1.g3r03.value = '<?php echo "$g3r03";?>';
    document.formv1.g3r04.value = '<?php echo "$g3r04";?>';
+<?php                     } ?>
 
+<?php if ( $strana == 8 ) { ?>
    document.formv1.hr01.value = '<?php echo "$hr01";?>';
    document.formv1.h1r02.value = '<?php echo "$h1r02";?>';
    document.formv1.h2r02.value = '<?php echo "$h2r02";?>';
@@ -2661,10 +2636,6 @@ if ( $copern == 102 )
    document.formv1.h1r09.value = '<?php echo "$h1r09";?>';
    document.formv1.h2r09.value = '<?php echo "$h2r09";?>';
    document.formv1.hr10.value = '<?php echo "$hr10";?>';
-
-<?php                     } ?>
-
-<?php if ( $strana == 8 ) { ?>
    document.formv1.i1r01.value = '<?php echo "$i1r01";?>';
    document.formv1.i1r02.value = '<?php echo "$i1r02";?>';
    document.formv1.i1r03.value = '<?php echo "$i1r03";?>';
@@ -2679,13 +2650,11 @@ if ( $copern == 102 )
    document.formv1.i2r05.value = '<?php echo "$i2r05";?>';
    document.formv1.i2r06.value = '<?php echo "$i2r06";?>';
    document.formv1.i2r07.value = '<?php echo "$i2r07";?>';
+   document.formv1.jr01.value = '<?php echo "$jr01";?>';
+   document.formv1.jr02.value = '<?php echo "$jr02";?>';
+<?php                     } ?>
 
-   document.formv1.jl1r01.value = '<?php echo "$jl1r01";?>';
-   document.formv1.jl1r02.value = '<?php echo "$jl1r02";?>';
-   document.formv1.jl1r03.value = '<?php echo "$jl1r03";?>';
-   document.formv1.jl1r04.value = '<?php echo "$jl1r04";?>';
-   document.formv1.jl1r05.value = '<?php echo "$jl1r05";?>';
-
+<?php if ( $strana == 9 ) { ?>
    document.formv1.k1od.value = '<?php echo "$k1odsk";?>';
    document.formv1.k1do.value = '<?php echo "$k1dosk";?>';
    document.formv1.k2od.value = '<?php echo "$k2odsk";?>';
@@ -2694,39 +2663,30 @@ if ( $copern == 102 )
    document.formv1.k3do.value = '<?php echo "$k3dosk";?>';
    document.formv1.k4od.value = '<?php echo "$k4odsk";?>';
    document.formv1.k4do.value = '<?php echo "$k4dosk";?>';
-
    document.formv1.k2r01.value = '<?php echo "$k2r01";?>';
+   document.formv1.k3r01.value = '<?php echo "$k3r01";?>';
+   document.formv1.k4r01.value = '<?php echo "$k4r01";?>';
    document.formv1.k5r01.value = '<?php echo "$k5r01";?>';
-
    document.formv1.k2r02.value = '<?php echo "$k2r02";?>';
+   document.formv1.k3r02.value = '<?php echo "$k3r02";?>';
    document.formv1.k4r02.value = '<?php echo "$k4r02";?>';
    document.formv1.k5r02.value = '<?php echo "$k5r02";?>';
-
    document.formv1.k2r03.value = '<?php echo "$k2r03";?>';
    document.formv1.k3r03.value = '<?php echo "$k3r03";?>';
    document.formv1.k4r03.value = '<?php echo "$k4r03";?>';
    document.formv1.k5r03.value = '<?php echo "$k5r03";?>';
-
    document.formv1.k2r04.value = '<?php echo "$k2r04";?>';
    document.formv1.k3r04.value = '<?php echo "$k3r04";?>';
    document.formv1.k4r04.value = '<?php echo "$k4r04";?>';
    document.formv1.k5r04.value = '<?php echo "$k5r04";?>';
-
    document.formv1.k4r05.value = '<?php echo "$k4r05";?>';
    document.formv1.k5r05.value = '<?php echo "$k5r05";?>';
-
-
-<?php                     } ?>
-
-<?php if ( $strana == 9 ) { ?>
-   document.formv1.pcpod.value = '<?php echo "$pcpod";?>';
 <?php if ( $pzano == 1 ) { ?> document.formv1.pzano.checked = "checked"; <?php } ?>
+<?php if ( $zslu == 1 ) { ?> document.formv1.zslu.checked = "checked"; <?php } ?>
    document.formv1.pcdar.value = '<?php echo "$pcdar";?>';
-   document.formv1.pcpoc.value = '<?php echo "$pcpoc";?>';
-   document.formv1.pc15.value = '<?php echo "$pc15";?>';
-   document.formv1.pcdar5.value = '<?php echo "$pcdar5";?>';
-   document.formv1.pcpod5.value = '<?php echo "$pcpod5";?>';
+   document.formv1.pcpod.value = '<?php echo "$pcpod";?>';
    document.formv1.pc155.value = '<?php echo "$pc155";?>';
+   document.formv1.pcpoc.value = '<?php echo "$pcpoc";?>';
    document.formv1.pcsum.value = '<?php echo "$pcsum";?>';
    document.formv1.p1ico.value = '<?php echo "$p1ico";?>';
    document.formv1.p1sid.value = '<?php echo "$p1sid";?>';
@@ -3381,9 +3341,9 @@ $sn1c=substr($sknacec,0,1);
 <?php $pznietext="X"; if ( $pzano == 1 ) { $pznietext=" "; } ?> <!-- dopyt, na èo je toto -->
 <input type="checkbox" name="pzano" value="1" style="top:657px; left:59px;"/>
 <input type="checkbox" name="zslu" value="1" style="top:657px; left:318px;"/> <!-- dopyt, novinka -->
-<input type="text" name="pcdar" onkeyup="CiarkaNaBodku(this);" id="pcdar" style="width:268px; top:697px; left:626px;"/>
-<input type="text" name="pcpod" onkeyup="CiarkaNaBodku(this);" id="pcpod" style="width:268px; top:742px; left:626px;"/>
-<input type="text" name="pc155" onkeyup="CiarkaNaBodku(this);" id="pc155" style="width:268px; top:786px; left:626px;"/>
+<input type="text" name="pcdar" id="pcdar" onkeyup="CiarkaNaBodku(this);" style="width:268px; top:697px; left:626px;"/>
+<input type="text" name="pcpod" id="pcpod" onkeyup="CiarkaNaBodku(this);" style="width:268px; top:742px; left:626px;"/>
+<input type="text" name="pc155" id="pc155" onkeyup="CiarkaNaBodku(this);" style="width:268px; top:786px; left:626px;"/>
 <input type="text" name="pcpoc" id="pcpoc" style="width:84px; top:829px; left:626px;"/>
 <!-- Prijimatel 1 -->
 <input type="text" name="pcsum" id="pcsum" onkeyup="CiarkaNaBodku(this);" style="width:268px; top:938px; left:201px;"/>
