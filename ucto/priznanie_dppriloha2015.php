@@ -19,22 +19,18 @@ if (!isset($kli_vxcf)) $kli_vxcf = 1;
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=0;
+$rmc=1;
 $rmc1=0;
-
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
+//.jpg podklad
+$jpg_cesta="../dokumenty/dan_z_prijmov2015/dppo2015/dppo_v15";
+$jpg_popis="tlaèivo Daò z príjmov PO pre rok ".$kli_vrok;
+
 $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
 
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
@@ -341,10 +337,10 @@ if ( $volapo == 0 ) { $source="../ucto/priznanie_fob2015.php?cislo_oc=".$cislo_o
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=8', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=9', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=11', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=101&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_self')" class="<?php echo $clas99; ?> toleft">príloha</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=11&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_blank')" class="<?php echo $clas99; ?> toright">príloha</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=11', '_blank');" class="<?php echo $clas11; ?> toright">11</a>
+ <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=101&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_self')" class="<?php echo $clas99; ?> toleft">P1</a>
+ <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=101&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_self')" class="<?php echo $clas99; ?> toleft">P2</a>
+ <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=11&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_blank')" class="<?php echo $clas99; ?> toright">P2</a>
+ <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=11&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_blank')" class="<?php echo $clas99; ?> toright">P1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=10', '_blank');" class="<?php echo $clas10; ?> toright">10</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=9', '_blank');" class="<?php echo $clas9; ?> toright">9</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=8', '_blank');" class="<?php echo $clas8; ?> toright">8</a>
@@ -423,10 +419,10 @@ if ( $copern == 201 )
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-top-formsave">
 </div>
 <?php if ( $volapo == 0 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dppo2014/dppo_v14_str12.jpg" alt="tlaèivo Daò z príjmov PO pre rok 2014 12.strana 282kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 12.strana 240kB">
 <?php                     } ?>
 <?php if ( $volapo == 1 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2014/dppo2014/dppo_v14_str12.jpg" alt="tlaèivo Daò z príjmov PO pre rok 2014 12.strana 282kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 12.strana 240kB">
 <?php                     } ?>
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
