@@ -2867,8 +2867,8 @@ $source="../ucto/priznanie_po2015.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&sub
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=9', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
  <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=101&drupoh=1&page=1&volapo=1', '_self')" class="<?php echo $clas11; ?> toleft">P1</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=101&drupoh=1&page=1&volapo=1', '_self')" class="<?php echo $clas12; ?> toleft">P2</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=11&drupoh=1&page=1', '_blank')" class="<?php echo $clas12; ?> toright">P2</a>
+ <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=1101&drupoh=1&page=1&volapo=1', '_self')" class="<?php echo $clas12; ?> toleft">P2</a>
+ <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=1011&drupoh=1&page=1', '_blank')" class="<?php echo $clas12; ?> toright">P2</a>
  <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=11&drupoh=1&page=1', '_blank')" class="<?php echo $clas11; ?> toright">P1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=10', '_blank');" class="<?php echo $clas10; ?> toright">10</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=9', '_blank');" class="<?php echo $clas9; ?> toright">9</a>
