@@ -657,6 +657,10 @@ $sqltt = "SELECT * FROM kalendar WHERE dat >= '$prvyden' AND dat <= '$denposledn
 $sql = mysql_query("$sqltt");
 $pocetdnirok = mysql_num_rows($sql);
 
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET datz='$prvyden' WHERE oc = 1 AND datz = '0000-00-00' ";
+$upravene = mysql_query("$uprtxt");
+
+
 $dajvsetky = 1*$_REQUEST['dajvsetky'];
 $predpoklad = 1*$_REQUEST['predpoklad'];
 $dajsadzbu = 1*$_REQUEST['dajsadzbu'];
