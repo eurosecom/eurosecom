@@ -143,7 +143,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dppriloha SET ".
 //echo $uprtxt;
 
 $upravene = mysql_query("$uprtxt");
-$copern=201;
+$copern=203;
 if (!$upravene):
 ?>
 <script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ " ) </script>
@@ -206,10 +206,10 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET ".
 " prpvz1='$prpvz1', prpvz2='$prpvz2', prpvz3='$prpvz3', prpvz4='$prpvz4', prpvz5='$prpvz5', ".
 " prpod1='$prpod1', prpod2='$prpod2', prpod3='$prpod3', prpod4='$prpod4', prpod5='$prpod5' ".
 " WHERE prcpl = $cislo_prcpl "; 
-echo $uprtxt;
+//echo $uprtxt;
 
 $upravene = mysql_query("$uprtxt");
-$copern=1201;
+$copern=1203;
 if (!$upravene):
 ?>
 <script type="text/javascript"> alert( "ÚDAJE NEBOLI UPRAVENÉ " ) </script>
@@ -251,7 +251,7 @@ $sqldok = mysql_query("$sqlttt");
 $pcsum = "0.00";
 $p1ico = 0;
 $p1sid = 0;
-$copern=201;
+$copern=203;
 
     }
 //koniec novy prijimatel
@@ -282,7 +282,7 @@ $sqldok = mysql_query("$sqlttt");
  $cislo_prcpl=$riaddok->prcpl;
  }
 
-$copern=1201;
+$copern=1203;
 
     }
 //koniec novy projekt
