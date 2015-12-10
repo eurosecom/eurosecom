@@ -290,6 +290,21 @@ $copern=1203;
 //zmaz prijimatela
     if ( $copern == 206 )
     {
+$cislo_p1cpl = 1*$_REQUEST['cislo_p1cpl'];
+?>
+<script type="text/javascript">
+if( confirm ("Chcete zmazaù prijÌmateæa Ë.<?php echo $cislo_p1cpl; ?> ?") )
+         { location.href='priznanie_dppriloha2015.php?copern=207&uprav=0&cislo_p1cpl=<?php echo $cislo_p1cpl; ?>&tt=1&volapo=<?php echo $volapo; ?>' }
+else
+         { location.href='priznanie_dppriloha2015.php?copern=101&uprav=0&cislo_p1cpl=&tt=1&volapo=<?php echo $volapo; ?>' }
+</script>
+<?php
+exit;                      
+    }
+    if ( $copern == 207 )
+    {
+$cislo_p1cpl = 1*$_REQUEST['cislo_p1cpl'];
+
 $sql = "DELETE FROM F".$kli_vxcf."_uctpriznanie_dppriloha WHERE p1cpl = $cislo_p1cpl ";
 $vysledok = mysql_query($sql);
 
@@ -301,6 +316,21 @@ $copern=101;
 //zmaz projekt
     if ( $copern == 1206 )
     {
+$cislo_prcpl = 1*$_REQUEST['cislo_prcpl'];
+?>
+<script type="text/javascript">
+if( confirm ("Chcete zmazaù projekt Ë.<?php echo $cislo_prcpl; ?> ?") )
+         { location.href='priznanie_dppriloha2015.php?copern=1207&uprav=0&cislo_prcpl=<?php echo $cislo_prcpl; ?>&tt=1&volapo=<?php echo $volapo; ?>' }
+else
+         { location.href='priznanie_dppriloha2015.php?copern=1101&uprav=0&cislo_prcpl=&tt=1&volapo=<?php echo $volapo; ?>' }
+</script>
+<?php
+exit;                      
+    }
+    if ( $copern == 1207 )
+    {
+$cislo_prcpl = 1*$_REQUEST['cislo_prcpl'];
+
 $sql = "DELETE FROM F".$kli_vxcf."_uctpriznanie_dpprilpro WHERE prcpl = $cislo_prcpl ";
 $vysledok = mysql_query($sql);
 
@@ -595,8 +625,8 @@ var sirkawic = screen.width-10;
 <?php if ( $volapo == 0 ) { ?> <td class="header">DaÚ z prÌjmov FOB - prÌloha k IV. Ëasti</td> <?php } ?>
 <?php if ( $volapo == 1 ) { ?>
    <td class="header">DaÚ z prÌjmov PO -
-<?php if ( $copern == 1101 OR $copern == 1203 ) echo "prÌloha k ß 30c z·k."; ?> <!-- dopyt, nefunguje pri ˙prave -->
-<?php if ( $copern == 101 OR $copern == 203 ) echo "prÌloha k IV. Ëasti"; ?> <!-- dopyt, nefunguje pri ˙prave -->
+<?php if ( $copern == 1101 OR $copern == 1203 OR $copern == 1201 ) echo "prÌloha k ß 30c z·k."; ?> <!-- dopyt, nefunguje pri ˙prave -->
+<?php if ( $copern == 101 OR $copern == 203 OR $copern == 201 ) echo "prÌloha k IV. Ëasti"; ?> <!-- dopyt, nefunguje pri ˙prave -->
    </td>
 <?php                     } ?>
    <td><div class="bar-btn-form-tool"></div></td>
