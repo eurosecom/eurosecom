@@ -792,7 +792,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD opr01 DECIMAL(2,0) DEFAULT
 $vysledek = mysql_query("$sql");
 }
 //zmeny pre rok 2015
-$sql = "SELECT zslu FROM F".$kli_vxcf."_uctpriznanie_po";
+$sql = "SELECT zmx1 FROM F".$kli_vxcf."_uctpriznanie_po";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -857,28 +857,32 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD k3r02 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
 $vysledek = mysql_query("$sql");
 
-$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY r510 DECIMAL(10,2)";
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY r510 DECIMAL(10,2) DEFAULT 0 ";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY r820 DECIMAL(10,2)";
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY r820 DECIMAL(10,2) DEFAULT 0 ";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY r830 DECIMAL(10,0)";
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY r830 DECIMAL(10,0) DEFAULT 0 ";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d1r01 DECIMAL(10,2)";
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d1r01 DECIMAL(10,2) DEFAULT 0 ";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d2r01 DECIMAL(10,2)";
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d2r01 DECIMAL(10,2) DEFAULT 0 ";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d3r01 DECIMAL(10,2)";
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d3r01 DECIMAL(10,2) DEFAULT 0 ";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d4r01 DECIMAL(10,2)";
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d4r01 DECIMAL(10,2) DEFAULT 0 ";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d5r01 DECIMAL(10,2)";
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d5r01 DECIMAL(10,2) DEFAULT 0 ";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d6r01 DECIMAL(10,2)";
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d6r01 DECIMAL(10,2) DEFAULT 0 ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY pcpoc DECIMAL(4,0) DEFAULT 0 ";
 $vysledek = mysql_query("$sql");
 
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD zapdl DECIMAL(2,0) DEFAULT 0 AFTER new2015";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD zslu DECIMAL(2,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD zmx1 DECIMAL(2,0) DEFAULT 0 AFTER new2015";
 $vysledek = mysql_query("$sql");
 
 }
@@ -2328,7 +2332,7 @@ if ( $datum_sk == '00.00.0000' )
 { 
 $datum_sk=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
 $datum_sql=SqlDatum($datum_sk);
-$sqlx = "UPDATE F$kli_vxcf"."_mzdpriznanie_po SET datum='$datum_sql' ";
+$sqlx = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET datum='$datum_sql' ";
 $vysledekx = mysql_query("$sqlx");
 }
 $datuk = $fir_riadok->datuk;
