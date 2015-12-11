@@ -2324,6 +2324,13 @@ $oostat = $fir_riadok->oostat;
 $pril = $fir_riadok->pril;
 $datum = $fir_riadok->datum;
 $datum_sk = SkDatum($datum);
+if ( $datum_sk == '00.00.0000' ) 
+{ 
+$datum_sk=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+$datum_sql=SqlDatum($datum_sk);
+$sqlx = "UPDATE F$kli_vxcf"."_mzdpriznanie_po SET datum='$datum_sql' ";
+$vysledekx = mysql_query("$sqlx");
+}
 $datuk = $fir_riadok->datuk;
 $datuk_sk = SkDatum($datuk);
 $vrat = $fir_riadok->vrat;
@@ -2836,8 +2843,6 @@ if ( $copern == 102 )
 
 </script>
 
-<?php if ( $copern == 2 ) { echo "<script type='text/javascript' src='uloz_banku.js'></script>"; } ?> <!-- dopyt, je to potrebné -->
-
 <script type='text/javascript'>
   function NacitatUdaje(riadok)
   {
@@ -2926,7 +2931,11 @@ $source="../ucto/priznanie_po2015.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&sub
 
 <span class="text-echo" style="top:263px; left:57px;"><?php echo $fir_fdic; ?></span>
 <span class="text-echo" style="top:320px; left:57px;"><?php echo $fir_fico6; ?></span>
-<span class="text-echo" style="top:320px; left:263px;"><?php echo $fir_uctt03; ?></span> <!-- dopyt, nevypisova pre živnostníka "999", taká neexistuje -->
+<?php
+$fir_uctt03x=$fir_uctt03;
+if( $fir_uctt03 == 999 ) { $fir_uctt03x=""; }
+?>
+<span class="text-echo" style="top:320px; left:263px;"><?php echo $fir_uctt03x; ?></span> <!-- dopyt, nevypisova pre živnostníka "999", taká neexistuje -->
 <!-- Druh priznania -->
 <input type="radio" id="druh1" name="druh" value="1" style="top:260px; left:417px;"/>
 <input type="radio" id="druh2" name="druh" value="2" style="top:285px; left:417px;"/>
@@ -3346,7 +3355,6 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="k5r05" id="k5r05" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:554px; left:753px;"/>
 
 <!-- IV.CAST -->
-<?php $pznietext="X"; if ( $pzano == 1 ) { $pznietext=" "; } ?> <!-- dopyt, na èo je toto -->
 <input type="checkbox" name="pzano" value="1" style="top:657px; left:59px;"/>
 <input type="checkbox" name="zslu" value="1" style="top:657px; left:318px;"/>
 <input type="text" name="pcdar" id="pcdar" onkeyup="CiarkaNaBodku(this);" style="width:268px; top:697px; left:626px;"/>
@@ -3604,9 +3612,11 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t08","$rmc",0,"C");
 
 //pravna forma
-$A=substr($fir_uctt03,0,1);
-$B=substr($fir_uctt03,1,1);
-$C=substr($fir_uctt03,2,1);
+$fir_uctt03x=$fir_uctt03;
+if( $fir_uctt03 == 999 ) { $fir_uctt03x=""; }
+$A=substr($fir_uctt03x,0,1);
+$B=substr($fir_uctt03x,1,1);
+$C=substr($fir_uctt03x,2,1);
 $pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$C","$rmc",0,"C");
