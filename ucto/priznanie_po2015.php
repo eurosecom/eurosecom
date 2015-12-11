@@ -2487,7 +2487,6 @@ if ( $copern == 102 )
    document.formv1.r160.value = '<?php echo "$r160";?>';
    document.formv1.r170.value = '<?php echo "$r170";?>';
    document.formv1.r180.value = '<?php echo "$r180";?>';
-   document.formv1.r200.value = '<?php echo "$r200";?>';
    document.formv1.r210.value = '<?php echo "$r210";?>';
    document.formv1.r220.value = '<?php echo "$r220";?>';
    document.formv1.r230.value = '<?php echo "$r230";?>';
@@ -2497,7 +2496,6 @@ if ( $copern == 102 )
    document.formv1.r270.value = '<?php echo "$r270";?>';
    document.formv1.r280.value = '<?php echo "$r280";?>';
    document.formv1.r290.value = '<?php echo "$r290";?>';
-   document.formv1.r300.value = '<?php echo "$r300";?>';
    document.formv1.r301.value = '<?php echo "$r301";?>';
    document.formv1.r302.value = '<?php echo "$r302";?>';
    document.formv1.r303.value = '<?php echo "$r303";?>';
@@ -2704,8 +2702,6 @@ if ( $copern == 102 )
    document.formv1.k3r04.value = '<?php echo "$k3r04";?>';
    document.formv1.k4r04.value = '<?php echo "$k4r04";?>';
    document.formv1.k5r04.value = '<?php echo "$k5r04";?>';
-   document.formv1.k4r05.value = '<?php echo "$k4r05";?>';
-   document.formv1.k5r05.value = '<?php echo "$k5r05";?>';
 <?php if ( $pzano == 1 ) { ?> document.formv1.pzano.checked = "checked"; <?php } ?>
 <?php if ( $zslu == 1 ) { ?> document.formv1.zslu.checked = "checked"; <?php } ?>
    document.formv1.pcdar.value = '<?php echo "$pcdar";?>';
@@ -2933,9 +2929,9 @@ $source="../ucto/priznanie_po2015.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&sub
 <span class="text-echo" style="top:320px; left:57px;"><?php echo $fir_fico6; ?></span>
 <?php
 $fir_uctt03x=$fir_uctt03;
-if( $fir_uctt03 == 999 ) { $fir_uctt03x=""; }
+if ( $fir_uctt03 == 999 ) { $fir_uctt03x=""; }
 ?>
-<span class="text-echo" style="top:320px; left:263px;"><?php echo $fir_uctt03x; ?></span> <!-- dopyt, nevypisova pre živnostníka "999", taká neexistuje -->
+<span class="text-echo" style="top:320px; left:263px;"><?php echo $fir_uctt03x; ?></span>
 <!-- Druh priznania -->
 <input type="radio" id="druh1" name="druh" value="1" style="top:260px; left:417px;"/>
 <input type="radio" id="druh2" name="druh" value="2" style="top:285px; left:417px;"/>
@@ -3012,7 +3008,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r160" id="r160" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:460px; left:529px;"/>
 <input type="text" name="r170" id="r170" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:508px; left:529px;"/>
 <input type="text" name="r180" id="r180" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:554px; left:529px;"/>
-<input type="text" name="r200" id="r200" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:594px; left:529px;"/>
+<div class="input-echo right" style="width:290px; top:594px; left:530px;"><?php echo $r200; ?>&nbsp;</div>
 <input type="text" name="r210" id="r210" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:660px; left:529px;"/>
 <input type="text" name="r220" id="r220" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:702px; left:529px;"/>
 <input type="text" name="r230" id="r230" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:744px; left:529px;"/>
@@ -3022,7 +3018,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r270" id="r270" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:908px; left:529px;"/>
 <input type="text" name="r280" id="r280" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:961px; left:529px;"/>
 <input type="text" name="r290" id="r290" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1011px; left:529px;"/>
-<input type="text" name="r300" id="r300" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1050px; left:529px;"/>
+<div class="input-echo right" style="width:290px; top:1050px; left:530px;"><?php echo $r300; ?>&nbsp;</div>
 <input type="text" name="r301" id="r301" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1117px; left:529px;"/>
 <input type="text" name="r302" id="r302" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1156px; left:529px;"/>
 <input type="text" name="r303" id="r303" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1204px; left:529px;"/>
@@ -3351,8 +3347,8 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="k4r04" id="k4r04" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:477px; left:595px;"/>
 <input type="text" name="k5r04" id="k5r04" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:477px; left:753px;"/>
 <!-- riadok 5 -->
-<input type="text" name="k4r05" id="k4r05" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:554px; left:595px;"/>
-<input type="text" name="k5r05" id="k5r05" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:554px; left:753px;"/>
+<div class="input-echo right" style="width:140px; top:555px; left:596px;"><?php echo $k4r05; ?>&nbsp;</div>
+<div class="input-echo right" style="width:140px; top:555px; left:754px;"><?php echo $k5r05; ?>&nbsp;</div>
 
 <!-- IV.CAST -->
 <input type="checkbox" name="pzano" value="1" style="top:657px; left:59px;"/>
@@ -3396,7 +3392,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="oofax" id="oofax" style="width:521px; top:791px; left:373px;"/>
 
 <input type="text" name="pril" id="pril" style="width:36px; top:841px; left:167px;"/>
-<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" style="width:198px; top:920px; left:74px;"/> <!-- dopyt, predplnanie aktuálneho dátumu i v pdf -->
+<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" style="width:198px; top:920px; left:74px;"/>
 
 <!-- VI. CAST -->
 <input type="checkbox" name="vrat" value="1" style="top:1004px; left:59px;"/>
