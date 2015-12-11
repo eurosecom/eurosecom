@@ -1229,7 +1229,7 @@ window.open('../ucto/priznanie_po2015.php?strana=<?php echo $strana; ?>&copern=1
 //koniec copern=200 nacitaj data dppo=2
 
 // zapis upravene udaje
-if ( $copern == 103 OR $copern == 4103 )
+if ( $copern == 103 OR $copern == 4103 OR $copern == 5103 )
      {
 if ( $strana == 1 ) {
 $druh = 1*$_REQUEST['druh'];
@@ -1380,10 +1380,10 @@ $a1r01 = strip_tags($_REQUEST['a1r01']);
 $a1r02 = strip_tags($_REQUEST['a1r02']);
 $a1r03 = strip_tags($_REQUEST['a1r03']);
 $a1r04 = strip_tags($_REQUEST['a1r04']);
-//$a1u01 = strip_tags($_REQUEST['a1u01']);
-//$a1u02 = strip_tags($_REQUEST['a1u02']);
-//$a1u03 = strip_tags($_REQUEST['a1u03']);
-//$a1u04 = strip_tags($_REQUEST['a1u04']);
+$a1u01 = strip_tags($_REQUEST['a1u01']);
+$a1u02 = strip_tags($_REQUEST['a1u02']);
+$a1u03 = strip_tags($_REQUEST['a1u03']);
+$a1u04 = strip_tags($_REQUEST['a1u04']);
 
 if ( $copern == 103 )
      {
@@ -1398,7 +1398,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
 if ( $copern == 4103 )
      {
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
-//" a1u01='$a1u01', a1u02='$a1u02', a1u03='$a1u03', a1u04='$a1u04' ".
+" a1u01='$a1u01', a1u02='$a1u02', a1u03='$a1u03', a1u04='$a1u04' ".
 " WHERE ico >= 0";
 $copern=103;
      }
@@ -1417,16 +1417,18 @@ $a1r13 = strip_tags($_REQUEST['a1r13']);
 $a1r14 = strip_tags($_REQUEST['a1r14']);
 $a1r15 = strip_tags($_REQUEST['a1r15']);
 $a1r16 = strip_tags($_REQUEST['a1r16']);
-//$a1u05 = strip_tags($_REQUEST['a1u05']);
-//$a1u06 = strip_tags($_REQUEST['a1u06']);
-//$a1u07 = strip_tags($_REQUEST['a1u07']);
-//$a1u08 = strip_tags($_REQUEST['a1u08']);
-//$a1u09 = strip_tags($_REQUEST['a1u09']);
-//$a1u10 = strip_tags($_REQUEST['a1u10']);
-//$a1u11 = strip_tags($_REQUEST['a1u11']);
-//$a1u12 = strip_tags($_REQUEST['a1u12']);
-//$a1u13 = strip_tags($_REQUEST['a1u13']);
-//$a1u14 = strip_tags($_REQUEST['a1u14']);
+$a1u05 = strip_tags($_REQUEST['a1u05']);
+$a1u06 = strip_tags($_REQUEST['a1u06']);
+$a1u07 = strip_tags($_REQUEST['a1u07']);
+$a1u08 = strip_tags($_REQUEST['a1u08']);
+$a1u09 = strip_tags($_REQUEST['a1u09']);
+$a1u10 = strip_tags($_REQUEST['a1u10']);
+$a1u11 = strip_tags($_REQUEST['a1u11']);
+$a1u12 = strip_tags($_REQUEST['a1u12']);
+$a1u13 = strip_tags($_REQUEST['a1u13']);
+$a1u14 = strip_tags($_REQUEST['a1u14']);
+$a1u15 = strip_tags($_REQUEST['a1u15']);
+$a1u16 = strip_tags($_REQUEST['a1u16']);
 $b1r01 = strip_tags($_REQUEST['b1r01']);
 $b1r02 = strip_tags($_REQUEST['b1r02']);
 $b1r03 = strip_tags($_REQUEST['b1r03']);
@@ -1451,8 +1453,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET".
 if ( $copern == 5103 )
      {
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET".
-//" a1u05='$a1u05', a1u06='$a1u06', a1u07='$a1u07', a1u08='$a1u08', a1u09='$a1u09', ".
-//" a1u10='$a1u10', a1u11='$a1u11', a1u12='$a1u12', a1u13='$a1u13', a1u14='$a1u14'  ".
+" a1u05='$a1u05', a1u06='$a1u06', a1u07='$a1u07', a1u08='$a1u08', a1u09='$a1u09', ".
+" a1u10='$a1u10', a1u11='$a1u11', a1u12='$a1u12', a1u13='$a1u13', a1u14='$a1u14', ".
+" a1u15='$a1u15', a1u16='$a1u16' ".
 " WHERE ico >= 0";
 $copern=103;
      }
@@ -2115,10 +2118,10 @@ $a1r01 = $fir_riadok->a1r01;
 $a1r02 = $fir_riadok->a1r02;
 $a1r03 = $fir_riadok->a1r03;
 $a1r04 = $fir_riadok->a1r04;
-//$a1u01 = $fir_riadok->a1u01;
-//$a1u02 = $fir_riadok->a1u02;
-//$a1u03 = $fir_riadok->a1u03;
-//$a1u04 = $fir_riadok->a1u04;
+$a1u01 = $fir_riadok->a1u01;
+$a1u02 = $fir_riadok->a1u02;
+$a1u03 = $fir_riadok->a1u03;
+$a1u04 = $fir_riadok->a1u04;
                                       }
 
 if ( $strana == 5 OR $strana == 999 ) {
@@ -2135,16 +2138,18 @@ $a1r14 = $fir_riadok->a1r14;
 $a1r15 = $fir_riadok->a1r15;
 $a1r16 = $fir_riadok->a1r16;
 $a1r17 = $fir_riadok->a1r17;
-//$a1u05 = $fir_riadok->a1u05;
-//$a1u06 = $fir_riadok->a1u06;
-//$a1u07 = $fir_riadok->a1u07;
-//$a1u08 = $fir_riadok->a1u08;
-//$a1u09 = $fir_riadok->a1u09;
-//$a1u10 = $fir_riadok->a1u10;
-//$a1u11 = $fir_riadok->a1u11;
-//$a1u12 = $fir_riadok->a1u12;
-//$a1u13 = $fir_riadok->a1u13;
-//$a1u14 = $fir_riadok->a1u14;
+$a1u05 = $fir_riadok->a1u05;
+$a1u06 = $fir_riadok->a1u06;
+$a1u07 = $fir_riadok->a1u07;
+$a1u08 = $fir_riadok->a1u08;
+$a1u09 = $fir_riadok->a1u09;
+$a1u10 = $fir_riadok->a1u10;
+$a1u11 = $fir_riadok->a1u11;
+$a1u12 = $fir_riadok->a1u12;
+$a1u13 = $fir_riadok->a1u13;
+$a1u14 = $fir_riadok->a1u14;
+$a1u15 = $fir_riadok->a1u15;
+$a1u16 = $fir_riadok->a1u16;
 $b1r01 = $fir_riadok->b1r01;
 $b1r02 = $fir_riadok->b1r02;
 $b1r03 = $fir_riadok->b1r03;
@@ -2362,54 +2367,69 @@ if ( $fir_fico < 1000000 ) { $fir_fico6="00".$fir_fico; }
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - DaÚ z prÌjmov PO</title>
 <style type="text/css">
-a.pripo-btn { /* dopyt, prerobiù tlaËidlo ako je v dmv */
+span.pripo-btn {
   position: absolute;
-  top: 2004px;
-  left: 520px;
+  left: 836px;
   color: #39f;
   cursor: pointer;
   font-weight: bold;
   font-size: 14px;
 }
-form.priparea {
-  background-color:#ffff90;
-  width: 385px;
+form.pripo-area {
   position: absolute;
-  top: 510px;
-  left: 521px;
-  height: 618px;
-  padding: 5px 5px;
+  left: 524px;
+  width: 385px;
+  padding: 5px 7px;
+  background-color: #ffff90;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* prefixy */
 }
-form.priparea > h3 {
-  font-size: 14px;
-  height:27px;
-  line-height:27px;
-  float: left;
-  font-weight: bold;
-}
-form.priparea > h3 > span {
-  font-weight: normal;
-  font-size: 11px;
-}
-form.priparea > img {
-  display: block;
-  float: right;
+form.pripo-area > img {
+  position: absolute;
+  top: 6px;
+  right: 7px;
   width: 22px;
   height: 22px;
   cursor: pointer;
+  opacity: 1; /* prefixy */
 }
-table.pripbox {
+form.pripo-area > img:hover {
+  opacity: 0.8; /* prefixy */
+}
+form.pripo-area > input[type=submit] {
+  float: right;
+  width: 70px;
+  height: 24px;
+}
+table.pripo-box {
   width: 100%;
-  background-color: lightblue;
+  background-color: #add8e6;
+  border-radius: 1px;
+  margin-bottom: 4px;
 }
+table.pripo-box > caption {
+  height: 30px;
+  line-height: 26px;
+  font-size: 11px;
+  text-align: left;
+}
+table.pripo-box > caption > strong {
+  font-size: 14px;
+  padding-right: 4px;
+}
+table.pripo-box input[type=text] {
+  position: relative;
+  left: 7px;
+  width: 94%;
+}
+
 span.text-echo {
   font-size: 18px;
   letter-spacing: 13px;
 }
 div.input-echo {
+  position: absolute;
   font-size: 18px;
   background-color: #fff;
-  position: absolute;
 }
 </style>
 
@@ -2501,7 +2521,7 @@ if ( $copern == 102 )
 <?php                     } ?>
 
 <?php if ( $strana == 4 ) { ?>
-   pripokno.style.display='none';
+   pripokno1.style.display='none';
    document.formv1.r910.value = '<?php echo "$r910";?>';
    document.formv1.r920.value = '<?php echo "$r920";?>';
    document.formv1.r1000.value = '<?php echo "$r1000";?>';
@@ -2525,7 +2545,7 @@ if ( $copern == 102 )
 <?php                     } ?>
 
 <?php if ( $strana == 5 ) { ?>
-   //pripokno.style.display='none'; //dopyt, asi nasekaù na riadky
+   pripokno2.style.display='none';
    document.formv1.a1r05.value = '<?php echo "$a1r05";?>';
    document.formv1.a1r06.value = '<?php echo "$a1r06";?>';
    document.formv1.a1r07.value = '<?php echo "$a1r07";?>';
@@ -3062,6 +3082,8 @@ $sn1c=substr($sknacec,0,1);
 
 <!-- III.CAST -->
 <!-- A-Pripocitatelne polozky -->
+<span id="pripoknobtn1" onclick="pripokno1.style.display='block'; pripoknobtn1.style.display='none';"
+   title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn" style="top:952px;">Nastaviù</span>
 <input type="text" name="a1r01" id="a1r01" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:991px; left:529px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(1);"
       title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:991px; left:832px;">
@@ -3074,14 +3096,6 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="a1r04" id="a1r04" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1189px; left:529px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(4);"
       title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:1189px; left:832px;">
-
-<!--
-<input type="text" name="a1u01" id="a1u01" value="<?php echo $a1u01; ?>"/>
-<input type="text" name="a1u02" id="a1u02" value="<?php echo $a1u02; ?>"/>
-<input type="text" name="a1u03" id="a1u03" value="<?php echo $a1u03; ?>"/>
-<input type="text" name="a1u04" id="a1u04" value="<?php echo $a1u04; ?>"/>
--->
-
 <?php                     } ?>
 
 
@@ -3090,8 +3104,10 @@ $sn1c=substr($sknacec,0,1);
      alt="<?php echo $jpg_popis; ?> 5.strana 225kB">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
-<!-- III.CAST pokracovanie -->
-<!-- A-Pripocitatelne polozky -->
+<!-- III.CAST -->
+<!-- A-Pripocitatelne polozky pokracovanie -->
+<span id="pripoknobtn2" onclick="pripokno2.style.display='block'; pripoknobtn2.style.display='none';"
+   title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn" style="top:94px;">Nastaviù</span>
 <input type="text" name="a1r05" id="a1r05" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:115px; left:529px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(5);"
       title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:115px; left:832px;">
@@ -3154,23 +3170,6 @@ $sn1c=substr($sknacec,0,1);
 
 <a href="#" id="pripoknobtn" onclick="pripokno.style.display='block'; pripoknobtn.style.display='none';"
    title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn hidden">Nastaviù</a>
-<!-- dopyt, prerobiù, formy bud˙ 2 -->
-
-<!--
-<input type="text" name="a1u05" id="a1u05" value="<?php echo $a1u05; ?>"/>
-<input type="text" name="a1u06" id="a1u06" value="<?php echo $a1u06; ?>"/>
-<input type="text" name="a1u07" id="a1u07" value="<?php echo $a1u07; ?>"/>
-<input type="text" name="a1u08" id="a1u08" value="<?php echo $a1u08; ?>"/>
-<input type="text" name="a1u09" id="a1u09" value="<?php echo $a1u09; ?>"/>
-<input type="text" name="a1u10" id="a1u10" value="<?php echo $a1u10; ?>"/>
-<input type="text" name="a1u11" id="a1u11" value="<?php echo $a1u11; ?>"/>
-<input type="text" name="a1u12" id="a1u12" value="<?php echo $a1u12; ?>"/>
-<input type="text" name="a1u13" id="a1u13" value="<?php echo $a1u13; ?>"/>
-<input type="text" name="a1u14" id="a1u14" value="<?php echo $a1u14; ?>"/>
-<input type="text" name="a1u15" id="a1u15" value="<?php echo $a1u15; ?>"/>
-<input type="text" name="a1u16" id="a1u16" value="<?php echo $a1u16; ?>"/>
--->
-
 <?php                     } ?>
 
 
@@ -3421,16 +3420,108 @@ $sn1c=substr($sknacec,0,1);
 
 <?php if ( $strana == 4 ) { ?>
 <!-- pripocitalne nastavenie -->
-<!-- dopyt, budem prer·baù -->
-<FORM id="pripokno" method="post" action="priznanie_po2015.php?strana=4&copern=4103" class="priparea" style="display:none;">
- <h3>Nastavenie ˙Ëtov <span>(v plnom tvare, napr. 51301,51302)</span></h3>
- <img src="../obr/ikony/turnoff_blue_icon.png" onclick="pripokno.style.display='none'; pripoknobtn.style.display='block';" title="Skryù menu">
-<table class="pripbox">
+<FORM id="pripokno1" method="post" action="priznanie_po2015.php?strana=4&copern=4103"
+      class="pripo-area" style="display:none; top:935px; height:336px;">
+ <img src="../obr/ikony/turnoff_blue_icon.png" title="Skryù"
+      onclick="pripokno1.style.display='none'; pripoknobtn1.style.display='block';" >
+<table class="pripo-box">
+<caption><strong>Nastavenie ˙Ëtov</strong>(v plnom tvare, napr. 51301,51302)</caption>
+<tr>
+ <td style="height:74px; line-height:74px;">
+  <input type="text" name="a1u01" id="a1u01" value="<?php echo $a1u01; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:74px; line-height:74px;">
+  <input type="text" name="a1u02" id="a1u02" value="<?php echo $a1u02; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:44px; line-height:44px;">
+  <input type="text" name="a1u03" id="a1u03" value="<?php echo $a1u03; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:86px; line-height:86px;">
+  <input type="text" name="a1u04" id="a1u04" value="<?php echo $a1u04; ?>"/>
+ </td>
+</tr>
 </table>
-<INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" style="position:relative; top:3px; float:right; height:28px; width:70px;">
+<INPUT type="submit" id="uloz" name="uloz" value="Uloûiù">
 </FORM>
 <?php                     } ?>
 
+<?php if ( $strana == 5 ) { ?>
+<FORM id="pripokno2" method="post" action="priznanie_po2015.php?strana=5&copern=5103"
+      class="pripo-area" style="display:none; top:70px; height:536px;">
+ <img src="../obr/ikony/turnoff_blue_icon.png" title="Skryù"
+      onclick="pripokno2.style.display='none'; pripoknobtn2.style.display='block';" >
+<table class="pripo-box">
+<caption><strong>Nastavenie ˙Ëtov</strong>(v plnom tvare, napr. 51301,51302)</caption>
+<tr>
+ <td style="height:46px; line-height:46px;">
+  <input type="text" name="a1u05" id="a1u05" value="<?php echo $a1u05; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:42px; line-height:42px;">
+  <input type="text" name="a1u06" id="a1u06" value="<?php echo $a1u06; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:38px; line-height:38px;">
+  <input type="text" name="a1u07" id="a1u07" value="<?php echo $a1u07; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:40px; line-height:40px;">
+  <input type="text" name="a1u08" id="a1u08" value="<?php echo $a1u08; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:40px; line-height:40px;">
+  <input type="text" name="a1u09" id="a1u09" value="<?php echo $a1u09; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:38px; line-height:38px;">
+  <input type="text" name="a1u10" id="a1u10" value="<?php echo $a1u10; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:40px; line-height:40px;">
+  <input type="text" name="a1u11" id="a1u11" value="<?php echo $a1u11; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:38px; line-height:38px;">
+  <input type="text" name="a1u12" id="a1u12" value="<?php echo $a1u12; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:38px; line-height:38px;">
+  <input type="text" name="a1u13" id="a1u13" value="<?php echo $a1u13; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:38px; line-height:38px;">
+  <input type="text" name="a1u14" id="a1u14" value="<?php echo $a1u14; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:40px; line-height:40px;">
+  <input type="text" name="a1u15" id="a1u15" value="<?php echo $a1u15; ?>"/>
+ </td>
+</tr>
+<tr>
+ <td style="height:40px; line-height:40px;">
+  <input type="text" name="a1u16" id="a1u16" value="<?php echo $a1u16; ?>"/>
+ </td>
+</tr>
+</table>
+<INPUT type="submit" id="uloz" name="uloz" value="Uloûiù">
+</FORM>
+<?php                     } ?>
 </div> <!-- koniec #content -->
 <?php
 //mysql_free_result($vysledok);

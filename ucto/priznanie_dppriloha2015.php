@@ -414,7 +414,6 @@ $prptxt = $fir_riadok->prptxt;
 
 $copern=1201;
                       }
-
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -437,7 +436,6 @@ table.prijimatelia caption {
   font-size: 14px;
   text-align: left;
 }
-
 table.prijimatelia tr.body:hover {
   background-color: #f1faff;
 }
@@ -465,8 +463,6 @@ tr.zero-line > td {
   height: 0 !important;
 }
 
-
-
 span.text-echo {
   font-size: 18px;
   letter-spacing: 13px;
@@ -490,7 +486,7 @@ a.btn-item-new {
   font-size: 10px;
   padding: 8px 12px 7px 12px;
   border-radius: 2px;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25); /* prefixy */
   text-transform: uppercase;
   background-color: #1ccc66;
 }
@@ -500,12 +496,6 @@ a.btn-item-new:hover {
 </style>
 <script language="JavaScript" src="../js/cookies.js"></script>
 <script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height;
-var sirkawic = screen.width-10;
-
 <?php
 //uprava sadzby strana prij
   if ( $copern == 201 )
@@ -538,25 +528,21 @@ var sirkawic = screen.width-10;
   {
    document.formv1.prcpr.value = '<?php echo "$prcpr"; ?>';
    document.formv1.prpdzc.value = '<?php echo "$prpdzcsk"; ?>';
-
    document.formv1.prpzo1.value = '<?php echo "$prpzo1sk"; ?>';
    document.formv1.prpzo2.value = '<?php echo "$prpzo2sk"; ?>';
    document.formv1.prpzo3.value = '<?php echo "$prpzo3sk"; ?>';
    document.formv1.prpzo4.value = '<?php echo "$prpzo4sk"; ?>';
    document.formv1.prpzo5.value = '<?php echo "$prpzo5sk"; ?>';
-
    document.formv1.prpzd1.value = '<?php echo "$prpzd1sk"; ?>';
    document.formv1.prpzd2.value = '<?php echo "$prpzd2sk"; ?>';
    document.formv1.prpzd3.value = '<?php echo "$prpzd3sk"; ?>';
    document.formv1.prpzd4.value = '<?php echo "$prpzd4sk"; ?>';
    document.formv1.prpzd5.value = '<?php echo "$prpzd5sk"; ?>';
-
    document.formv1.prpvz1.value = '<?php echo "$prpvz1"; ?>';
    document.formv1.prpvz2.value = '<?php echo "$prpvz2"; ?>';
    document.formv1.prpvz3.value = '<?php echo "$prpvz3"; ?>';
    document.formv1.prpvz4.value = '<?php echo "$prpvz4"; ?>';
    document.formv1.prpvz5.value = '<?php echo "$prpvz5"; ?>';
-
    document.formv1.prpod1.value = '<?php echo "$prpod1"; ?>';
    document.formv1.prpod2.value = '<?php echo "$prpod2"; ?>';
    document.formv1.prpod3.value = '<?php echo "$prpod3"; ?>';
@@ -625,8 +611,8 @@ var sirkawic = screen.width-10;
 <?php if ( $volapo == 0 ) { ?> <td class="header">Daň z príjmov FOB - príloha k IV. časti</td> <?php } ?>
 <?php if ( $volapo == 1 ) { ?>
    <td class="header">Daň z príjmov PO -
-<?php if ( $copern == 1101 OR $copern == 1203 OR $copern == 1201 ) echo "príloha k § 30c zák."; ?> <!-- dopyt, nefunguje pri úprave -->
-<?php if ( $copern == 101 OR $copern == 203 OR $copern == 201 ) echo "príloha k IV. časti"; ?> <!-- dopyt, nefunguje pri úprave -->
+<?php if ( $copern == 1101 OR $copern == 1203 OR $copern == 1201 ) echo "príloha k § 30c zák."; ?>
+<?php if ( $copern == 101 OR $copern == 203 OR $copern == 201 ) echo "príloha k IV. časti"; ?>
    </td>
 <?php                     } ?>
    <td><div class="bar-btn-form-tool"></div></td>
