@@ -339,6 +339,22 @@ $copern=1101;
     }
 //koniec zmaz projekt
 
+//vypocty
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET prpods=prpod1+prpod2+prpod3+prpod4+prpod5 WHERE prcpl > 0 ";
+$sqldok = mysql_query("$sqlttt");
+
+
+$prpodv=0;
+$sqlttt = "SELECT SUM(prpods) AS sums FROM F$kli_vxcf"."_uctpriznanie_dpprilpro WHERE prcpl > 0 ";
+$sqldok = mysql_query("$sqlttt");
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+ $prpodv=$riaddok->sums;
+ }
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET prpodv='$prpodv' WHERE prcpl > 0 ";
+$sqldok = mysql_query("$sqlttt");
 
 //nacitaj udaje 
 if ( $copern == 203 ) {

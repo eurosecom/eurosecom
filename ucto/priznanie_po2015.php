@@ -1795,6 +1795,10 @@ $odpocetstraty = 1*$_REQUEST['odpocetstraty'];
 if ( $odpocetstraty == 1 ) { $prepocitaj=1; }
 $zapocetdane = 1*$_REQUEST['zapocetdane'];
 if ( $zapocetdane == 1 ) { $prepocitaj=1; }
+$odpocetvyskum = 1*$_REQUEST['odpocetvyskum'];
+if ( $odpocetvyskum == 1 ) { $prepocitaj=1; }
+$licenciatabk = 1*$_REQUEST['licenciatabk'];
+if ( $licenciatabk == 1 ) { $prepocitaj=1; }
 
 //nacitaj udaje
 if ( $copern >= 1 )
@@ -1805,12 +1809,13 @@ $alertprepocet="";
 if ( $prepocitaj == 1 ) {
 $alertprepocet="!!! Prepoèítavam hodnoty v riadkoch !!!";
 
-//vsetky strany vypocty su upravene pre 2014
-//////////////////////strana 2 2014
+//vsetky strany vypocty su upravene pre 2015
+//////////////////////strana 2 2015
 
 if ( $rozdielodpisov == 1 )
   {
 //danove-uctovne prerobim na kliknutie na ikonku
+//upravene na rok 2015
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r150=b1r02-b1r01, r250=0, ".
 " psys=0 ".
@@ -1822,11 +1827,13 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r250=-r150, r150=0, psys=0  
 $upravene = mysql_query("$uprtxt"); 
   }
 
+
 if ( $nedanovevydavky == 1 )
   {
 //danove-uctovne prerobim na kliknutie na ikonku
+//upravene na rok 2015
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r130=a1r15, ".
+" r130=a1r17, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");  
@@ -1834,16 +1841,29 @@ $upravene = mysql_query("$uprtxt");
   }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r200=r110+r120+r130+r140+r150+r160+r170+r180, r300=r210+r220+r230+r240+r250+r260+r270+r280+r290, r310=r100+r200-r300+hr10, r400=r310-r320-r330, ".
+" r200=r110+r120+r130+r140+r150+r160+r170+r180, r300=r210+r220+r230+r240+r250+r260+r270+r280+r290, r301=r100+r200-r300+hr10, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");  
 
-/////////////////////strana 3 2014
+/////////////////////strana 3 2015
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r310=r301+r302+r303+r304-r305, ".
+" psys=0 ".
+" WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r400=r310-r320-r330, ".
+" psys=0 ".
+" WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
 if ( $odpocetstraty == 1 )
   {
+//upravene na rok 2015
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r410=d6r05, ".
+" r410=d7r02, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
@@ -1860,8 +1880,36 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r500=0 WHERE ico >= 0 AND r500 < 0 "; 
 $upravene = mysql_query("$uprtxt");
 
+if ( $odpocetvyskum == 1 )
+  {
+//upravene na rok 2015
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET prpods=prpod1+prpod2+prpod3+prpod4+prpod5 WHERE prcpl > 0 ";
+$sqldok = mysql_query("$sqlttt");
+
+$prpodv=0;
+$sqlttt = "SELECT SUM(prpods) AS sums FROM F$kli_vxcf"."_uctpriznanie_dpprilpro WHERE prcpl > 0 ";
+$sqldok = mysql_query("$sqlttt");
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+ $prpodv=$riaddok->sums;
+ }
+
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r550=22, r600=(r500*r510), psys=0 WHERE ico >= 0";
+" r501='$prpodv' WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+  }
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r510=r500-r501 WHERE ico >= 0 "; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r510=0 WHERE ico >= 0 AND r510 < 0 "; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r550=22, r600=(r550*r510), psys=0 WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
@@ -1873,39 +1921,38 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r600=0 WHERE r500 < 0"; 
+" r600=0 WHERE r510 <= 0"; 
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r900=0, r901=0 WHERE ico >= 0";
+" r700=r600-r610, ".
+" psys=0 ".
+" WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r700=0 WHERE r700 <= 0"; 
 $upravene = mysql_query("$uprtxt");
 
 if ( $zapocetdane == 1 )
   {
+//upravene na rok 2015
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r710=e1r06 WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
   }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r700=r600-r610, r800=r700-r710, ".
+" r800=r700-r710, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r700=r600-r610, r800=r700-r710, ".
-" psys=0 ".
-" WHERE ico >= 0"; 
+" r800=0 WHERE r800 <= 0"; 
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r950=r800, r1010=r800, ".
-" psys=0 ".
-" WHERE ico >= 0 "; 
-$upravene = mysql_query("$uprtxt");
-
-//danova licencia
+//danova licencia 2015
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r820=0, r830=0, r900=0, ".
 " psys=0 ".
@@ -1913,81 +1960,123 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r820=r810, r830=r810-r800, ".
+" r820=r810-r800, ".
 " psys=0 ".
-" WHERE ico >= 0 AND r810 > 0 AND r810 >= r800 "; 
+" WHERE ico >= 0 AND r810 > 0 AND r810 > r800 "; 
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r900=r820+r840, ".
+" r900=r810+r830, ".
 " psys=0 ".
-" WHERE ico >= 0 AND r810 > 0 "; 
+" WHERE ico >= 0 AND r810 > r800 "; 
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r950=r800, ".
+" r900=r830, ".
+" psys=0 ".
+" WHERE ico >= 0 AND r810 <= r800 "; 
+$upravene = mysql_query("$uprtxt");
+
+//////////////////strana 4 2015
+
+if ( $licenciatabk == 1 )
+  {
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r910=0, r920=0, r1000=0, ".
 " psys=0 ".
 " WHERE ico >= 0 "; 
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r950=r900, ".
+" r920=k4r05, ".
 " psys=0 ".
-" WHERE ico >= 0 AND r810 > r800 AND r810 > 0 "; 
+" WHERE ico >= 0 AND k4r05 > 0 "; 
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r950=r800+r900, ".
+" r910=r800-r810, ".
 " psys=0 ".
-" WHERE ico >= 0 AND r900 = r840 AND r810 > 0 "; 
-$upravene = mysql_query("$uprtxt");
-
-//preddavky
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r940=r910+r920+r930, ".
-" psys=0 ".
-" WHERE ico >= 0"; 
+" WHERE ico >= 0 AND r800 > r810 AND r920 > 0 "; 
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r1000=r950-r940+r960, r1001=0, ".
+" r1000=r800-r920, ".
 " psys=0 ".
-" WHERE ico >= 0 "; 
+" WHERE ico >= 0 AND r920 > 0 "; 
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1000=0, ".
 " psys=0 ".
-" WHERE ico >= 0 AND r1000 <= 5 AND r1000 > 0 "; 
+" WHERE r1000 <= 0 AND r920 > 0 "; 
 $upravene = mysql_query("$uprtxt");
+  }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r1001=-r1000, r1000=0, ".
+" r1040=r1010+r1020+r1030, ".
 " psys=0 ".
-" WHERE ico >= 0 AND r1000 < 0 "; 
+" WHERE ico >= 0 "; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r1050=r800, ".
+" psys=0 ".
+" WHERE ico >= 0 AND r900 = 0 AND r1000 = 0 "; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r1050=r900, ".
+" psys=0 ".
+" WHERE ico >= 0 AND r810 > r800  "; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r1050=r800+r900, ".
+" psys=0 ".
+" WHERE ico >= 0 AND r900 = r830 AND r1000 = 0  "; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r1050=r1000, ".
+" psys=0 ".
+" WHERE ico >= 0 AND r1000 > 0  "; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r1100=r1050-r1040, r1101=0, ".
+" psys=0 ".
+" WHERE ico >= 0 "; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r1101=-r1100, r1100=0, ".
+" psys=0 ".
+" WHERE ico >= 0 AND r1100 < 0 "; 
 $upravene = mysql_query("$uprtxt");
 
 
-//////////////////strana 4 2014
+//////////////////strana 4 tabulky 2015
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" a1r15=a1r01+a1r02+a1r03+a1r04+a1r05+a1r06+a1r07+a1r08+a1r09+a1r10+a1r11+a1r12+a1r13+a1r14, ".
+" a1r17=a1r01+a1r02+a1r03+a1r04+a1r05+a1r06+a1r07+a1r08+a1r09+a1r10+a1r11+a1r12+a1r13+a1r14+a1r15+a1r16, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
 
-//////////////////strana 5 2014
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET d6r05=d5r05+d4r05+d3r05+d2r06+d1r06, ".
+//////////////////strana 5 2015
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" b1r06=b1r02-b1r03-b1r04+b1r05, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
 
-//////////////////strana 6 2014
+
+//////////////////strana 7 2015
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET f1r03=f1r01-f1r02, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
 
-//////////////////strana 7 2014
+//////////////////strana 7 2015
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET g1r03=g1r01-g1r02, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
@@ -2003,10 +2092,18 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET g3r04=g3r01+g3r02-g3r03, ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
 
+//////////////////strana 8 2015
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET hr10=hr01+h1r02-h2r02+h1r03-h2r03+h1r04-h2r04+h1r05-h2r05+h1r06-h2r06+h1r07-h2r07+h1r08-h2r08+h1r09-h2r09, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
+
+//////////////////strana 9 2015
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k4r05=k4r01+k4r02+k4r03+k4r04, k5r05=k5r01+k5r02+k5r03+k5r04, ".
+" psys=0 ".
+" WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
 
 //koniec prepocitaj, len ak prepocitaj=1
                         }
@@ -2830,6 +2927,15 @@ if ( $copern == 102 )
   {
    window.open('priznanie_po2015.php?copern=101&strana=<?php echo $strana; ?>&zapocetdane=1', '_self');
   }
+  function OdpocetVyskum()
+  {
+   window.open('priznanie_po2015.php?copern=101&strana=<?php echo $strana; ?>&odpocetvyskum=1', '_self');
+  }
+
+  function LicenciaTabK()
+  {
+   window.open('priznanie_po2015.php?copern=101&strana=<?php echo $strana; ?>&licenciatabk=1', '_self');
+  }
 
 //bud alebo checkbox v vi.cast
   function klikpost()
@@ -2996,13 +3102,13 @@ $sn1c=substr($sknacec,0,1);
 <!-- II.CAST -->
 <input type="text" name="r100" id="r100" onkeyup="CiarkaNaBodku(this);" style="width:310px; top:183px; left:508px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajVHpredDanou();"
-      title="Naèíta VH pred zdanením do r.100 a do tabu¾ky F (III.èas PO 6. strana)"
+      title="Naèíta VH pred zdanením do r.100 a do tabu¾ky F (III.èas PO 7. strana)"
       class="btn-row-tool" style="top:183px; left:833px;">
 <input type="text" name="r110" id="r110" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:255px; left:529px;"/>
 <input type="text" name="r120" id="r120" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:296px; left:529px;"/>
 <input type="text" name="r130" id="r130" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:340px; left:529px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajNedVyd();"
-      title="Naèíta nedaòové výdavky (náklady) z tabu¾ky A (III.èas PO 4.strana)"
+      title="Naèíta nedaòové výdavky (náklady) z tabu¾ky A (III.èas PO 4. a 5.strana)"
       class="btn-row-tool" style="top:339px; left:833px;">
 <input type="text" name="r140" id="r140" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:382px; left:529px;"/>
 <input type="text" name="r150" id="r150" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:421px; left:529px;"/>
@@ -3044,10 +3150,15 @@ $sn1c=substr($sknacec,0,1);
 
 <input type="text" name="r410" id="r410" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:416px; left:529px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="OdpocetStraty();"
-      title="Naèíta odpoèet straty z tabu¾ky D ståpec 6 riadok 5 na str.6"
+      title="Naèíta odpoèet straty z tabu¾ky D ståpec 7 riadok 2 na str.6"
       class="btn-row-tool" style="top:416px; left:833px;">
 <input type="text" name="r500" id="r500" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:455px; left:529px;"/>
 <input type="text" name="r501" id="r501" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:520px; left:529px;"/>
+
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="OdpocetVyskum();"
+      title="Naèíta odpoèet výdavkov na výskum a vývoj z r.7 Prílohy P1"
+      class="btn-row-tool" style="top:520px; left:833px;">
+
 <input type="text" name="r510" id="r510" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:559px; left:529px;"/>
 <input type="text" name="r550" id="r550" onkeyup="CiarkaNaBodku(this);" style="width:36px; top:624px; left:529px;"/>
 <input type="text" name="r600" id="r600" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:663px; left:529px;"/>
@@ -3056,7 +3167,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r700" id="r700" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:776px; left:529px;"/>
 <input type="text" name="r710" id="r710" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:841px; left:529px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="ZapocetDane();"
-      title="Naèíta zápoèet dane z tabu¾ky E riadok 6 na str.6"
+      title="Naèíta zápoèet dane z tabu¾ky E riadok 6 na str.7"
       class="btn-row-tool" style="top:841px; left:833px;">
 <input type="text" name="r800" id="r800" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:881px; left:529px;"/>
 <input type="text" name="r810" id="r810" style="width:82px; top:945px; left:667px;"/>
@@ -3074,6 +3185,11 @@ $sn1c=substr($sknacec,0,1);
 <!-- II.CAST pokracovanie -->
 <input type="text" name="r910" id="r910" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:136px; left:529px;"/>
 <input type="text" name="r920" id="r920" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:177px; left:529px;"/>
+
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="LicenciaTabK();"
+      title="Kladný rozdiel medzi daòovou licenciou a daòou z predch. období z r.5 ståpec 4. tabu¾ky K na 9.strane"
+      class="btn-row-tool" style="top:177px; left:833px;">
+
 <input type="text" name="r1000" id="r1000" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:219px; left:529px;"/>
 <input type="text" name="r1010" id="r1010" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:304px; left:529px;"/>
 <input type="text" name="r1020" id="r1020" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:343px; left:529px;"/>
