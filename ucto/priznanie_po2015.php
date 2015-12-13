@@ -2406,10 +2406,10 @@ $p1uli = $fir_riadok->p1uli;
 $p1cdm = $fir_riadok->p1cdm;
 $p1psc = $fir_riadok->p1psc;
 $p1mes = $fir_riadok->p1mes;
-$osobit = $fir_riadok->osobit;
                                       }
 
 if ( $strana == 10 OR $strana == 999 ) {
+$osobit = $fir_riadok->osobit;
 $ooprie = $fir_riadok->ooprie;
 $oomeno = $fir_riadok->oomeno;
 $ootitl = $fir_riadok->ootitl;
