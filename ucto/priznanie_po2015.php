@@ -9698,12 +9698,12 @@ $pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(46,6,"$xstat","$rmc",1,"L");
 //udaje o danovom priznani
 $pdf->Cell(190,16," ","$rmc1",1,"L");
 if ( $r500 == 0 ) $r500="0.00";
-if ( $r1000 == 0 ) $r1000="";
-if ( $r1001 == 0 ) $r1001="";
+if ( $r1100 == 0 ) $r1100="";
+if ( $r1101 == 0 ) $r1101="";
 $pdf->Cell(122,7," ","$rmc1",0,"L");$pdf->Cell(51,7,"$kli_vrok","$rmc",1,"C");
 $pdf->Cell(122,7," ","$rmc1",0,"L");$pdf->Cell(51,8,"$r500","$rmc",1,"R");
-$pdf->Cell(122,7," ","$rmc1",0,"L");$pdf->Cell(51,7,"$r1000","$rmc",1,"R");
-$pdf->Cell(122,8," ","$rmc1",0,"L");$pdf->Cell(51,8,"$r1001","$rmc",1,"R");
+$pdf->Cell(122,7," ","$rmc1",0,"L");$pdf->Cell(51,7,"$r1100","$rmc",1,"R");
+$pdf->Cell(122,8," ","$rmc1",0,"L");$pdf->Cell(51,8,"$r1101","$rmc",1,"R");
 
 $pdf->Output("../tmp/potvrddpo.$kli_uzid.pdf");
      }
