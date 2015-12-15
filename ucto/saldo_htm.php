@@ -39,6 +39,7 @@ if( $h_drtx == 2 )
 $sqtoz = "UPDATE F$kli_vxcf"."_uctupvtext SET penp='$h_penp' ";
 if( $copern == 2009 ) { $sqtoz = "UPDATE F$kli_vxcf"."_uctupvtext SET penz='$h_penp' ";  }
   }
+//echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 $copern=11;
 }
@@ -1171,17 +1172,15 @@ function RozniPenp(druh, drtx)
                 {
 
   document.forms.fhoddok.drtx.value=drtx;
+  document.forms.fhoddok.druh.value=1;
 
   if( drtx == 1 )
   {
   nastavtpx.style.display='';
-  document.forms.fhoddok.druh.value=1;
-
   }
   if( drtx == 2 )
   {
   pastavtpx.style.display='';
-  document.forms.fhoddok.druh.value=1;
   } 
 
                 }
@@ -1189,16 +1188,15 @@ function RozniPenp(druh, drtx)
 function RozniPenz(druh, drtx)
                 {
   document.forms.fhoddok.drtx.value=drtx;
+  document.forms.fhoddok.druh.value=2;
 
   if( drtx == 1 )
   {
   nastavtzx.style.display='';
-  document.forms.fhoddok.druh.value=2;
   }
   if( drtx == 2 )
   {
   pastavtzx.style.display='';
-  document.forms.fhoddok.druh.value=2;
   } 
 
                 }
@@ -1241,7 +1239,7 @@ function UlozPenp()
 <?php                                } ?>
 <?php if( $_SESSION['chrome'] == 1 ) { ?>
   var h_penpe = document.forms.fhoddok.h_penp.value.replace("\n","%0D%0A");
-  if( drtx == 2 ) { h_penpe = document.forms.fhoddok.h_penp.value.replace("\n","%0D%0A"); }
+  if( drtx == 2 ) { h_penpe = document.forms.phoddok.h_penp.value.replace("\n","%0D%0A"); }
       h_penpe = h_penpe.replace("\n","%0D%0A");
       h_penpe = h_penpe.replace("\n","%0D%0A");
       h_penpe = h_penpe.replace("\n","%0D%0A");
@@ -1290,7 +1288,7 @@ function UlozPenz()
 
 <?php if( $_SESSION['chrome'] == 0 ) { ?>
   var h_penpe = document.forms.fhoddoz.h_penz.value.replace("\r","%0D%0A");
-  if( drtx == 2 ) { h_penpe = document.forms.phoddok.h_penp.value.replace("\n","%0D%0A"); }
+  if( drtx == 2 ) { h_penpe = document.forms.phoddoz.h_penz.value.replace("\n","%0D%0A"); }
       h_penpe = h_penpe.replace("\r","%0D%0A");
       h_penpe = h_penpe.replace("\r","%0D%0A");
       h_penpe = h_penpe.replace("\r","%0D%0A");
