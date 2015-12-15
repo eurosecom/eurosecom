@@ -286,7 +286,8 @@ if( $riadok->pox == 8 )
 
 $pdf->SetFont('arial','',9);
 
-$pdf->Cell(210,5,"CELKOM Materiál $riadok->cis $riadok->nat v $riadok->mer ","LTB",0,"L");
+$pdf->Cell(170,5,"CELKOM Materiál $riadok->cis $riadok->nat v $riadok->mer ","LTB",0,"L");
+$pdf->Cell(20,5,"$riadok->prj","TB",0,"R");$pdf->Cell(20,5,"$riadok->vdj","TB",0,"R");
 $pdf->Cell(20,5,"$riadok->zoseur","TB",0,"R");$pdf->Cell(0,5,"$riadok->zas","RTB",1,"R");
 
 $zostatok=0;
