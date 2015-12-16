@@ -34,6 +34,27 @@ if (!$vysledok):
 $vtvall = include("../cis/vtvall.php");
 endif;
 
+
+if( $copern == 9998 )
+  {
+$_SESSION['newzam']=1;
+
+$vsql = "CREATE TABLE F".$kli_vxcf."_mzdkunnewzam SELECT * FROM F".$kli_vxcf."_mzdkun WHERE oc < 0 ";
+$vytvor = mysql_query("$vsql");
+$sql = "ALTER TABLE F".$kli_vxcf."_mzdkunnewzam MODIFY oc int(7) PRIMARY KEY auto_increment ";
+$vysledek = mysql_query("$sql");
+
+$copern=1;
+  }
+if( $copern == 9999 )
+  {
+$_SESSION['newzam']=0;
+$copern=1;
+  }
+
+$mzdkun="mzdkun";
+if( $_SESSION['newzam'] == 1 ) { $mzdkun="mzdkunnewzam"; }
+
 $tlacitkoenter=0;
 //if( $_SESSION['nieie'] == 1 AND $_SESSION['chrome'] == 0 AND $_SESSION['safari'] == 0 ) { $tlacitkoenter=1; }
 
@@ -51,7 +72,7 @@ $mena1 = $fir_mena1;
 $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
 
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdkun MODIFY rdc VARCHAR(6) NOT NULL ";
+$sql = "ALTER TABLE F$kli_vxcf"."_$mzdkun MODIFY rdc VARCHAR(6) NOT NULL ";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdzalkun MODIFY rdc VARCHAR(6) NOT NULL ";
 $vysledek = mysql_query("$sql");
@@ -146,7 +167,7 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ORDER BY 
 
 if( $new_oc == 0 ) $new_oc=1;
 
-$uloztt = "INSERT INTO F$kli_vxcf"."_mzdkun ( oc ) VALUES ( '$new_oc' ); ";  
+$uloztt = "INSERT INTO F$kli_vxcf"."_$mzdkun ( oc ) VALUES ( '$new_oc' ); ";  
 //echo $uloztt;
 $ulozene = mysql_query("$uloztt"); 
 
@@ -252,7 +273,7 @@ while (! feof($subor))
 $x_prbd = StrTr($x_prie, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ",
 "aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
  
-$sqult = "INSERT INTO F$kli_vxcf"."_mzdkun ( oc,meno,prie,prbd,titl,rdc,rdk,dar,".
+$sqult = "INSERT INTO F$kli_vxcf"."_$mzdkun ( oc,meno,prie,prbd,titl,rdc,rdk,dar,".
 " mnr,zmes,zuli,zpsc,pom,kat,wms,stz,zkz,uva,dan,dav,".
 " nev,nrk,crp,znah,znem,doch,dad,dvy,".
 " cdss,roh,spno,deti_sp,zrz_dn,ziv_dn,deti_dn,zpno,dvp,dsp,zdrv,".
@@ -272,7 +293,7 @@ if( $c_oc > 0 ) { $ulozene = mysql_query("$sqult"); }
 
 }
 
-echo "Tabulka F$kli_vxcf"."_mzdkun!"." naimportovaná <br />";
+echo "Tabulka F$kli_vxcf"."_$mzdkun!"." naimportovaná <br />";
 
 fclose ($subor);
 
@@ -405,11 +426,11 @@ else
     if ( $copern == 167 )
     {
 $copern=1;
-$sqlt = 'TRUNCATE F'.$kli_vxcf.'_mzdkun';
+$sqlt = 'TRUNCATE F'.$kli_vxcf.'_$mzdkun';
 $vysledok = mysql_query("$sqlt");
 //echo $sqlt;
 if ($vysledok)
-echo "Tabulka F$kli_vxcf"."_mzdkun!"." vynulovaná <br />";
+echo "Tabulka F$kli_vxcf"."_$mzdkun!"." vynulovaná <br />";
 
 $sqlt = 'TRUNCATE F'.$kli_vxcf.'_mzdtrn';
 $vysledok = mysql_query("$sqlt");
@@ -449,7 +470,7 @@ if ( $copern == 15 )
   $dvp_sql = SqlDatum($h_dvp);
   $dsp_sql = SqlDatum($h_dsp);
 
-$uloztt = "INSERT INTO F$kli_vxcf"."_mzdkun ( oc,meno,prie,rodn,prbd,titl,rdc,rdk,dar,".
+$uloztt = "INSERT INTO F$kli_vxcf"."_$mzdkun ( oc,meno,prie,rodn,prbd,titl,rdc,rdk,dar,".
 " mnr,cop,zmes,zuli,zpsc,pom,kat,wms,stz,zkz,uva,uvazn,dan,dav,".
 " nev,nrk,crp,znah,znem,doch,dad,dvy,".
 " cdss,roh,spno,deti_sp,zrz_dn,ziv_dn,deti_dn,zpno,zpnie,dvp,zdrv,".
@@ -480,7 +501,7 @@ endif;
 if ( $copern == 16 )
     {
 
-$zmazttt = "UPDATE F$kli_vxcf"."_mzdkun SET akt=9 WHERE oc='$cislo_oc'";
+$zmazttt = "UPDATE F$kli_vxcf"."_$mzdkun SET akt=9 WHERE oc='$cislo_oc'";
 //echo $upravttt;
 
 $zmazane = mysql_query("$zmazttt");  
@@ -512,7 +533,7 @@ $cislo_oc = strip_tags($_REQUEST['cislo_oc']);
   $dvp_sql = SqlDatum($h_dvp);
   $dsp_sql = SqlDatum($h_dsp);
 
-$upravttt = "UPDATE F$kli_vxcf"."_mzdkun SET  meno='$h_meno', titl='$h_titl',".
+$upravttt = "UPDATE F$kli_vxcf"."_$mzdkun SET  meno='$h_meno', titl='$h_titl',".
 " prie='$h_prie', rodn='$h_rodn', prbd='$h_prbd', zuli='$h_zuli', zpsc='$h_zpsc', zmes='$h_zmes', ztel='$h_ztel',".
 " zema='$h_zema', rdc='$h_rdc', rdk='$h_rdk', zcdm='$h_zcdm', dar='$dar_sql',".
 " mnr='$h_mnr', cop='$h_cop', dan='$dan_sql', dav='$dav_sql', pom='$h_pom',".
@@ -544,7 +565,7 @@ endif;
 //uprava faktury hlavicka
 if ( $copern == 8 )
     {
-$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_oc ".
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE oc = $cislo_oc ".
 "";
 $sql = mysql_query("$sqltt"); 
   if (@$zaznam=mysql_data_seek($sql,0))
@@ -731,34 +752,34 @@ echo "Mažem zamestnanca os.èíslo ".$cislo_oc;
 $kli_vromaz=$kli_vrok-1;
 $datmaz=$kli_vromaz."-01-01";
 
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdtrn,F$kli_vxcf"."_mzdkun ".
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdtrn,F$kli_vxcf"."_$mzdkun ".
 " SET mn=9999 ".
-" WHERE F$kli_vxcf"."_mzdtrn.oc=F$kli_vxcf"."_mzdkun.oc ".
-" AND F$kli_vxcf"."_mzdkun.pom = 9 AND F$kli_vxcf"."_mzdkun.dav < '$datmaz' AND F$kli_vxcf"."_mzdkun.dav != '0000-00-00' AND F$kli_vxcf"."_mzdtrn.oc = $cislo_oc ";
+" WHERE F$kli_vxcf"."_mzdtrn.oc=F$kli_vxcf"."_$mzdkun.oc ".
+" AND F$kli_vxcf"."_$mzdkun.pom = 9 AND F$kli_vxcf"."_$mzdkun.dav < '$datmaz' AND F$kli_vxcf"."_$mzdkun.dav != '0000-00-00' AND F$kli_vxcf"."_mzdtrn.oc = $cislo_oc ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_mzddeti,F$kli_vxcf"."_mzdkun ".
+$dsqlt = "UPDATE F$kli_vxcf"."_mzddeti,F$kli_vxcf"."_$mzdkun ".
 " SET p4=9 ".
-" WHERE F$kli_vxcf"."_mzddeti.oc=F$kli_vxcf"."_mzdkun.oc ".
-" AND F$kli_vxcf"."_mzdkun.pom = 9 AND F$kli_vxcf"."_mzdkun.dav < '$datmaz' AND F$kli_vxcf"."_mzdkun.dav != '0000-00-00' AND F$kli_vxcf"."_mzddeti.oc = $cislo_oc ";
+" WHERE F$kli_vxcf"."_mzddeti.oc=F$kli_vxcf"."_$mzdkun.oc ".
+" AND F$kli_vxcf"."_$mzdkun.pom = 9 AND F$kli_vxcf"."_$mzdkun.dav < '$datmaz' AND F$kli_vxcf"."_$mzdkun.dav != '0000-00-00' AND F$kli_vxcf"."_mzddeti.oc = $cislo_oc ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdddp,F$kli_vxcf"."_mzdkun ".
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdddp,F$kli_vxcf"."_$mzdkun ".
 " SET pd4=9 ".
-" WHERE F$kli_vxcf"."_mzdddp.oc=F$kli_vxcf"."_mzdkun.oc ".
-" AND F$kli_vxcf"."_mzdkun.pom = 9 AND F$kli_vxcf"."_mzdkun.dav < '$datmaz' AND F$kli_vxcf"."_mzdkun.dav != '0000-00-00' AND F$kli_vxcf"."_mzdddp.oc = $cislo_oc ";
+" WHERE F$kli_vxcf"."_mzdddp.oc=F$kli_vxcf"."_$mzdkun.oc ".
+" AND F$kli_vxcf"."_$mzdkun.pom = 9 AND F$kli_vxcf"."_$mzdkun.dav < '$datmaz' AND F$kli_vxcf"."_$mzdkun.dav != '0000-00-00' AND F$kli_vxcf"."_mzdddp.oc = $cislo_oc ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdzaltrn,F$kli_vxcf"."_mzdkun ".
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdzaltrn,F$kli_vxcf"."_$mzdkun ".
 " SET mn=9999 ".
-" WHERE F$kli_vxcf"."_mzdzaltrn.oc=F$kli_vxcf"."_mzdkun.oc ".
-" AND F$kli_vxcf"."_mzdkun.pom = 9 AND F$kli_vxcf"."_mzdkun.dav < '$datmaz' AND F$kli_vxcf"."_mzdkun.dav != '0000-00-00' AND F$kli_vxcf"."_mzdzaltrn.oc = $cislo_oc ";
+" WHERE F$kli_vxcf"."_mzdzaltrn.oc=F$kli_vxcf"."_$mzdkun.oc ".
+" AND F$kli_vxcf"."_$mzdkun.pom = 9 AND F$kli_vxcf"."_$mzdkun.dav < '$datmaz' AND F$kli_vxcf"."_$mzdkun.dav != '0000-00-00' AND F$kli_vxcf"."_mzdzaltrn.oc = $cislo_oc ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdzalddp,F$kli_vxcf"."_mzdkun ".
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdzalddp,F$kli_vxcf"."_$mzdkun ".
 " SET pd4=9 ".
-" WHERE F$kli_vxcf"."_mzdzalddp.oc=F$kli_vxcf"."_mzdkun.oc ".
-" AND F$kli_vxcf"."_mzdkun.pom = 9 AND F$kli_vxcf"."_mzdkun.dav < '$datmaz' AND F$kli_vxcf"."_mzdkun.dav != '0000-00-00' AND F$kli_vxcf"."_mzdzalddp.oc = $cislo_oc ";
+" WHERE F$kli_vxcf"."_mzdzalddp.oc=F$kli_vxcf"."_$mzdkun.oc ".
+" AND F$kli_vxcf"."_$mzdkun.pom = 9 AND F$kli_vxcf"."_$mzdkun.dav < '$datmaz' AND F$kli_vxcf"."_$mzdkun.dav != '0000-00-00' AND F$kli_vxcf"."_mzdzalddp.oc = $cislo_oc ";
 $dsql = mysql_query("$dsqlt");
 
 
@@ -768,7 +789,7 @@ $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdddp WHERE pd4 = 9 AND oc = $cislo_oc "; $
 $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdzaltrn WHERE mn = 9999 AND oc = $cislo_oc "; $dsql = mysql_query("$dsqlt");
 $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdzalddp WHERE pd4 = 9 AND oc = $cislo_oc "; $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_mzdkun WHERE pom = 9 AND dav < '$datmaz' AND dav != '0000-00-00' AND oc = $cislo_oc ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_$mzdkun WHERE pom = 9 AND dav < '$datmaz' AND dav != '0000-00-00' AND oc = $cislo_oc ";
 $dsql = mysql_query("$dsqlt");
 $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdzalkun WHERE oc = $cislo_oc ";
 $dsql = mysql_query("$dsqlt");
@@ -1802,6 +1823,9 @@ $konc =($pols*($page-1))+($pols-1);
 <table class="h2" width="100%" >
 <tr>
 <td>EuroSecom  -  Zoznam zamestnancov
+<?php if( $_SESSION['newzam'] == 1 ) { ?>
+ - noví neaktívni zamestnanci
+<?php                                } ?>
 <?php
   if ( $copern == 5 ) echo "- nová položka";
   if ( $copern == 8 ) echo "- úprava položky";
@@ -1837,13 +1861,13 @@ if ( $copern != 1 && $copern != 2 && $copern != 3 && $copern != 4 && $copern != 
 // zobraz vsetko co je v tabulke
 if ( $copern == 1 || $copern == 2 || $copern == 3 || $copern == 4 || $copern == 5 || $copern == 6 || $copern == 7 )
   {
-$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun ORDER BY oc");
+$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdkun ORDER BY oc");
   }
 
 // zobraz len upravovaneho
 if ( $copern == 8 )
   {
-$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = '$cislo_oc' ORDER BY oc");
+$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE oc = '$cislo_oc' ORDER BY oc");
   }
 
 // zobraz hladanie
@@ -1855,15 +1879,15 @@ $hladaj_zmes = strip_tags($_REQUEST['hladaj_zmes']);
 $hladaj_ztel = strip_tags($_REQUEST['hladaj_ztel']);
 $hladaj_oc = strip_tags($_REQUEST['hladaj_oc']);
 
-if ( $hladaj_ztel != "" ) $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun WHERE ( ztel LIKE '%$hladaj_ztel%' ) ORDER BY oc");
-if ( $hladaj_zmes != "" ) $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun WHERE ( zmes LIKE '%$hladaj_zmes%' ) ORDER BY oc");
-if ( $hladaj_prie != "" ) $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun WHERE ( prie LIKE '%$hladaj_prie%' OR meno LIKE '%$hladaj_prie%' ) ORDER BY oc");
-if ( $hladaj_oc != "" ) $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun WHERE ( oc = '$hladaj_oc' ) ORDER BY oc");
+if ( $hladaj_ztel != "" ) $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE ( ztel LIKE '%$hladaj_ztel%' ) ORDER BY oc");
+if ( $hladaj_zmes != "" ) $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE ( zmes LIKE '%$hladaj_zmes%' ) ORDER BY oc");
+if ( $hladaj_prie != "" ) $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE ( prie LIKE '%$hladaj_prie%' OR meno LIKE '%$hladaj_prie%' ) ORDER BY oc");
+if ( $hladaj_oc != "" ) $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE ( oc = '$hladaj_oc' ) ORDER BY oc");
   }
 // zobraz uprava a zmazanie
 if ( $copern == 6 )
   {
-$sql = mysql_query("SELECT* FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 ORDER BY oc");
+$sql = mysql_query("SELECT* FROM F$kli_vxcf"."_$mzdkun WHERE oc > 0 ORDER BY oc");
 
   }
 
@@ -1964,12 +1988,18 @@ $riadok=mysql_fetch_object($sql);
 <td class="fmenu" width="10%" >
 <a href='zamestnanci.php?sys=<?php echo $sys; ?>&copern=8&page=<?php echo $page;?>&cislo_oc=<?php echo $riadok->oc;?>&h_oc=<?php echo $riadok->oc;?>'>
 <img src='../obr/uprav.png' width=15 height=15 border=0 title="Úprava údajov o zamestnancovi"></a>
+<?php if( $_SESSION['newzam'] == 0 ) { ?>
 <a href="#" onClick="window.open('../mzdy/trvale.php?copern=1&drupoh=1&page=1&zkun=1&cislo_oc=<?php echo $riadok->oc;?>','_blank','<?php echo $tlcuwin; ?>')">
 <img src='../obr/zoznam.png' width=15 height=15 border=0 title='Úprava trvalých položiek zamestnanca' ></a>
+<?php                                } ?>
+<?php if( $_SESSION['newzam'] == 0 ) { ?>
 <a href="#" onClick="window.open('../mzdy/mes_mzdy.php?copern=101&drupoh=1&page=1&zkun=1&vyb_osc=<?php echo $riadok->oc;?>','_self')">
 <img src='../obr/orig.png' width=15 height=15 border=0 title='Úprava mesaèných položiek zamestnanca' ></a>
+<?php                                } ?>
+<?php if( $_SESSION['newzam'] == 0 ) { ?>
 <a href="#" onClick="window.open('../mzdy/deti.php?copern=1&drupoh=1&page=1&zkun=1&cislo_oc=<?php echo $riadok->oc;?>','_blank','<?php echo $tlcuwin; ?>')">
 <img src='../obr/klienti.png' width=15 height=15 border=0 title='Deti zamestnanca' ></a>
+<?php                                } ?>
 </td>
 <td class="fmenu" width="5%" ><a href='zamestnanci.php?sys=<?php echo $sys; ?>&copern=6&page=<?php echo $page;?>&cislo_oc=<?php echo $riadok->oc;?>'>Zmaž</a></td>
 </tr>
@@ -1981,7 +2011,16 @@ $i = $i + 1;
 
 </table>
 <table class="fmenu" width="100%" >
-<tr><td><?php echo "Strana:$page  Celkom položiek/strán v celej tabulke:$cpol/$xstr ";?></td></tr>
+<tr><td  width="80%" ><?php echo "Strana:$page  Celkom položiek/strán v celej tabulke:$cpol/$xstr ";?></td>
+<td width="20%" align="right">
+<?php if( $_SESSION['newzam'] == 1 ) { ?>
+ <img src='../obr/vlozit.png' onClick="window.open('zamestnanci.php?copern=9999&drupoh=1&page=1','_self')" width=12 height=12 border=0 title="Spä na Aktívnych zamestnancov">
+<?php                                } ?>
+<?php if( $_SESSION['newzam'] == 0 ) { ?>
+ <img src='../obr/vlozit.png' onClick="window.open('zamestnanci.php?copern=9998&drupoh=1&page=1','_self')" width=12 height=12 border=0 title="Noví zamestnanci, ešte neaktívni len prihlásení do SP">
+<?php                                } ?>
+</td>
+</tr>
 </table>
 
 <?php
@@ -2003,7 +2042,7 @@ if ( $copern == 6 )
 $cislo_oc = strip_tags($_REQUEST['cislo_oc']);
 $page = strip_tags($_REQUEST['page']);
 
-$sqlp = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc='$cislo_oc'";
+$sqlp = "SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE oc='$cislo_oc'";
 $sql = mysql_query("$sqlp");
 ?>
 <table class="fmenu" width="100%" >
@@ -2093,7 +2132,7 @@ $nasieloc=0;
 $i=0;
 while ($i <= 9999 AND $nasieloc == 0 )
 {
-$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_mzdkun WHERE oc=$prev_oc ");
+$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_$mzdkun WHERE oc=$prev_oc ");
   if (@$zaznam=mysql_data_seek($sqlico,$i))
   {
   $riadico=mysql_fetch_object($sqlico);
@@ -2105,7 +2144,7 @@ if( $prev_oc <= 1 ) $nasieloc=1;
 $i=$i+1;
 
 $maxoc=9999;
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdkun ORDER BY oc DESC LIMIT 1"); 
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdkun ORDER BY oc DESC LIMIT 1"); 
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
@@ -2118,7 +2157,7 @@ $nasieloc=0;
 $i=0;
 while ($i <= 9999 AND $nasieloc == 0 AND $next_oc <= $maxoc )
 {
-$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_mzdkun WHERE oc=$next_oc ");
+$sqlico = mysql_query("SELECT oc FROM F$kli_vxcf"."_$mzdkun WHERE oc=$next_oc ");
   if (@$zaznam=mysql_data_seek($sqlico,$i))
   {
   $riadico=mysql_fetch_object($sqlico);
