@@ -67,7 +67,9 @@ $rokvyhlasenia=$kli_vrok;
 if( $rokvyhlasenia < 2012 ) { $rokvyhlasenia="";  }
 if( $rokvyhlasenia == 2012 ) { $rokvyhlasenia="2012";  }
 if( $rokvyhlasenia == 2013 ) { $rokvyhlasenia="2013";  }
-if( $rokvyhlasenia >= 2014 ) { $rokvyhlasenia="2014";  }
+if( $rokvyhlasenia == 2014 ) { $rokvyhlasenia="2014";  }
+if( $rokvyhlasenia == 2015 ) { $rokvyhlasenia="2014";  }
+if( $rokvyhlasenia >= 2016 ) { $rokvyhlasenia="2016";  }
 ?>
 
 function TlacVyhlasenie()
