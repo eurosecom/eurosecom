@@ -666,7 +666,6 @@ $predpoklad = 1*$_REQUEST['predpoklad'];
 $dajsadzbu = 1*$_REQUEST['dajsadzbu'];
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 
-//andre
 if( $dajvsetky == 1 OR $predpoklad == 1 OR $dajsadzbu == 1 OR $pocetdni == 1 OR $vypocitajdan == 1 )
           {
 
@@ -5227,6 +5226,15 @@ $pdf=new FPDF("P","mm", $velkost_strany );
 $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 
+
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv".
+" WHERE oc = 9999 ORDER BY oc";
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
+$fod = $fir_riadok->fod;
+
+
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 
 //vytlac
@@ -5285,6 +5293,11 @@ $pdf->Cell(6,4,"$D","$rmc",0,"C");$pdf->Cell(5,4,"$E","$rmc",0,"C");$pdf->Cell(5
 $pdf->Cell(5,4,"$G","$rmc",0,"C");$pdf->Cell(5,4,"$H","$rmc",0,"C");$pdf->Cell(5,4,"$I","$rmc",0,"C");
 $pdf->Cell(5,4,"$J","$rmc",1,"C");
 
+if ( $fir_uctt03 != 999 )
+{
+$dprie=""; $dmeno=""; $dtitl=""; $dtitz=""; $fod="";
+}
+
 //priezvisko, meno, titul FO
 $pdf->Cell(190,111," ","$rmc1",1,"L");
 $pdf->Cell(27,6," ","$rmc1",0,"L");$pdf->Cell(62,5,"$dprie","$rmc",0,"L");
@@ -5292,7 +5305,13 @@ $pdf->Cell(9,6," ","$rmc1",0,"L");$pdf->Cell(29,5,"$dmeno","$rmc",0,"L");
 $pdf->Cell(32,6," ","$rmc1",0,"L");$pdf->Cell(7,5,"$dtitl","$rmc",0,"L");
 $pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(8,5,"$dtitz","$rmc",1,"L");
 $pdf->Cell(190,2," ","$rmc1",1,"L");
-$pdf->Cell(52,6," ","$rmc1",0,"L");$pdf->Cell(123,5,"$fod","$rmc",1,"L"); //dopyt, $fod nefunguje + podmienka, aby zobrazil, iba keï je 999
+$pdf->Cell(52,6," ","$rmc1",0,"L");$pdf->Cell(123,5,"$fod","$rmc",1,"L"); 
+
+//andr
+if ( $fir_uctt03 == 999 )
+{
+$fir_fnaz="";
+}
 
 //obch.meno
 $pdf->Cell(190,6," ","$rmc1",1,"L");
@@ -5301,8 +5320,14 @@ $pdf->Cell(54,6," ","$rmc1",0,"L");$pdf->Cell(121,5,"$fir_fnaz","$rmc",1,"L");
 //ulica a cislo
 $pdf->Cell(190,15," ","$rmc1",1,"L");
 $pdf->Cell(20,6," ","$rmc1",0,"L");$pdf->Cell(85,4,"$duli","$rmc",0,"L");
-$pdf->Cell(37,6," ","$rmc1",0,"L");$pdf->Cell(15,4,"$dcdm","$rmc",0,"L"); //dopyt, rozdeli na pred lomítkom a za lomítkom
-$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(17,4,"$dcdm","$rmc",1,"L");
+
+$pole = explode("/", $dcdm);
+$dcdmp=1*$pole[0];
+$dcdmz=1*$pole[1];
+if( $dcdmz == 0 ) { $dcdmz=""; }
+
+$pdf->Cell(37,6," ","$rmc1",0,"L");$pdf->Cell(15,4,"$dcdmp","$rmc",0,"L"); 
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(17,4,"$dcdmz","$rmc",1,"L");
 
 //psc a obec
 $pdf->Cell(190,2," ","$rmc1",1,"L");
@@ -5313,7 +5338,10 @@ $pdf->Cell(18,6," ","$rmc1",0,"L");$pdf->Cell(107,5,"$dmes","$rmc",1,"L");
 //$pdf->SetFont('arial','',8);
 $pdf->Cell(190,6," ","$rmc1",1,"L");
 $pdf->Cell(55,5," ","$rmc1",0,"C");$pdf->Cell(47,5,"$fir_uctt01","$rmc",1,"L");
-$pdf->Cell(39,5," ","$rmc1",0,"C");$pdf->Cell(15,4,"$kli_vrok","$rmc",1,"L");
+
+$zanik=SkDatum($hlavicka->datk);
+
+$pdf->Cell(30,5," ","$rmc1",0,"C");$pdf->Cell(15,4,"$zanik","$rmc",1,"L");
 
 //SPZ vozidla
 $pdf->Cell(190,1," ","$rmc1",1,"L");
