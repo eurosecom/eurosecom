@@ -3156,10 +3156,6 @@ $hlavicka=mysql_fetch_object($sql);
   $Cozam_np = $pole[0];
   $Dozam_np = substr($pole[1],0,1);
 
-$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-$dat_dat = SkDatum($hlavicka->da21 );
-if ( $dat_dat == '0000-00-00' ) $dat_dat="";
-
 if ( $strana == 1 OR $strana == 9999 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
@@ -5253,10 +5249,6 @@ $hlavicka=mysql_fetch_object($sql);
   $Cozam_np = $pole[0];
   $Dozam_np = substr($pole[1],0,1);
 
-$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-$dat_dat = SkDatum($hlavicka->da21 );
-if ( $dat_dat == '0000-00-00' ) $dat_dat="";
-
 $pdf=new FPDF("P","mm", $velkost_strany );
 $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
@@ -5266,16 +5258,15 @@ $pdf->SetLeftMargin(13);
 $pdf->SetTopMargin(10);
 if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_oznamenie.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_oznamenie.jpg',0,0,209,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_oznamenie.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
 //sidlo DU
-$pdf->Cell(190,24," ","$rmc1",1,"L");
-$pdf->Cell(12,5," ","$rmc1",0,"C");$pdf->Cell(42,5,"$fir_uctt01","$rmc",1,"L");
+$pdf->Cell(190,20," ","$rmc1",1,"L");
+$pdf->Cell(10,5," ","$rmc1",0,"C");$pdf->Cell(92,5,"$fir_uctt01","$rmc",0,"L");
 
 //dic
-$pdf->Cell(190,40," ","$rmc1",1,"L");
 $text=$fir_fdic;
 //if( $text == 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $A=substr($text,0,1);
@@ -5288,44 +5279,51 @@ $G=substr($text,6,1);
 $H=substr($text,7,1);
 $I=substr($text,8,1);
 $J=substr($text,9,1);
-$pdf->Cell(130,4," ","$rmc1",0,"R");
-$pdf->Cell(4,4,"$A","$rmc",0,"C");$pdf->Cell(5,4,"$B","$rmc",0,"C");$pdf->Cell(4,4,"$C","$rmc",0,"C");
-$pdf->Cell(4,4,"$D","$rmc",0,"C");$pdf->Cell(4,4,"$E","$rmc",0,"C");$pdf->Cell(4,4,"$F","$rmc",0,"C");
-$pdf->Cell(5,4,"$G","$rmc",0,"C");$pdf->Cell(4,4,"$H","$rmc",0,"C");$pdf->Cell(4,4,"$I","$rmc",0,"C");
+$pdf->Cell(19,4," ","$rmc1",0,"R");
+$pdf->Cell(4,4,"$A","$rmc",0,"C");$pdf->Cell(6,4,"$B","$rmc",0,"C");$pdf->Cell(4,4,"$C","$rmc",0,"C");
+$pdf->Cell(6,4,"$D","$rmc",0,"C");$pdf->Cell(5,4,"$E","$rmc",0,"C");$pdf->Cell(5,4,"$F","$rmc",0,"C");
+$pdf->Cell(5,4,"$G","$rmc",0,"C");$pdf->Cell(5,4,"$H","$rmc",0,"C");$pdf->Cell(5,4,"$I","$rmc",0,"C");
 $pdf->Cell(5,4,"$J","$rmc",1,"C");
 
 //priezvisko, meno, titul FO
-$pdf->Cell(190,38," ","$rmc1",1,"L");
-$pdf->Cell(31,6," ","$rmc1",0,"L");$pdf->Cell(49,6,"$dmeno","$rmc",0,"L");$pdf->Cell(12,6," ","$rmc1",0,"L");$pdf->Cell(55,6,"$dprie","$rmc",0,"L");
-$pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(15,6,"$dtitl","$rmc",1,"L");
+$pdf->Cell(190,111," ","$rmc1",1,"L");
+$pdf->Cell(27,6," ","$rmc1",0,"L");$pdf->Cell(62,5,"$dprie","$rmc",0,"L");
+$pdf->Cell(9,6," ","$rmc1",0,"L");$pdf->Cell(29,5,"$dmeno","$rmc",0,"L");
+$pdf->Cell(32,6," ","$rmc1",0,"L");$pdf->Cell(7,5,"$dtitl","$rmc",0,"L");
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(8,5,"$dtitz","$rmc",1,"L");
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+$pdf->Cell(52,6," ","$rmc1",0,"L");$pdf->Cell(123,5,"$fod","$rmc",1,"L"); //dopyt, $fod nefunguje + podmienka, aby zobrazil, iba keï je 999
 
 //obch.meno
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(64,6," ","$rmc1",0,"L");$pdf->Cell(109,6,"$fir_fnaz","$rmc",1,"L");
+$pdf->Cell(190,6," ","$rmc1",1,"L");
+$pdf->Cell(54,6," ","$rmc1",0,"L");$pdf->Cell(121,5,"$fir_fnaz","$rmc",1,"L");
 
 //ulica a cislo
-$pdf->Cell(190,12," ","$rmc1",1,"L");
-$pdf->Cell(21,6," ","$rmc1",0,"L");$pdf->Cell(108,6,"$duli","$rmc",0,"L");$pdf->Cell(10,6," ","$rmc1",0,"L");$pdf->Cell(34,6,"$dcdm","$rmc",1,"L");
+$pdf->Cell(190,15," ","$rmc1",1,"L");
+$pdf->Cell(20,6," ","$rmc1",0,"L");$pdf->Cell(85,4,"$duli","$rmc",0,"L");
+$pdf->Cell(37,6," ","$rmc1",0,"L");$pdf->Cell(15,4,"$dcdm","$rmc",0,"L"); //dopyt, rozdeli na pred lomítkom a za lomítkom
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(17,4,"$dcdm","$rmc",1,"L");
 
 //psc a obec
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$pdf->Cell(20,6," ","$rmc1",0,"L");$pdf->Cell(35,6,"$dpsc","$rmc",0,"L");$pdf->Cell(22,6," ","$rmc1",0,"L");$pdf->Cell(96,6,"$dmes","$rmc",1,"L");
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+$pdf->Cell(20,6," ","$rmc1",0,"L");$pdf->Cell(30,5,"$dpsc","$rmc",0,"L");
+$pdf->Cell(18,6," ","$rmc1",0,"L");$pdf->Cell(107,5,"$dmes","$rmc",1,"L");
 
 //oznamujem DU
-$pdf->SetFont('arial','',8);
-$pdf->Cell(190,40," ","$rmc1",1,"L");
-$pdf->Cell(122,5," ","$rmc1",0,"C");$pdf->Cell(23,5,"$fir_uctt01","$rmc",1,"L");
-$pdf->SetFont('arial','',10);
+//$pdf->SetFont('arial','',8);
+$pdf->Cell(190,6," ","$rmc1",1,"L");
+$pdf->Cell(55,5," ","$rmc1",0,"C");$pdf->Cell(47,5,"$fir_uctt01","$rmc",1,"L");
+$pdf->Cell(39,5," ","$rmc1",0,"C");$pdf->Cell(15,4,"$kli_vrok","$rmc",1,"L");
 
 //SPZ vozidla
-$pdf->Cell(190,14," ","$rmc1",1,"L");
-$pdf->Cell(67,5," ","$rmc1",0,"C");$pdf->Cell(33,5,"$hlavicka->vzspz","$rmc",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(19,5," ","$rmc1",0,"C");$pdf->Cell(33,5,"$hlavicka->vzspz","$rmc",1,"L");
 
 //mesto a den oznamenia
-$pdf->Cell(190,8,"    ","$rmc1",1,"L");
-$pdf->Cell(24,5," ","$rmc1",0,"C");$pdf->Cell(42,6,"$fir_fmes","$rmc",0,"L");
+$pdf->SetY(244);
+$pdf->Cell(15,5," ","$rmc1",0,"C");$pdf->Cell(46,5,"$fir_fmes","$rmc",0,"L");
 $datksk=SkDatum($hlavicka->datk);
-$pdf->Cell(10,5," ","$rmc1",0,"C");$pdf->Cell(20,6,"$datksk","$rmc",1,"L");
+$pdf->Cell(7,5," ","$rmc1",0,"C");$pdf->Cell(20,5,"$datksk","$rmc",1,"L");
 
 }
 $i = $i + 1;
