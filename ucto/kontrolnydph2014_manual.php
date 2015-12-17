@@ -21,10 +21,6 @@ require_once("../pswd/password.php");
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
 $citfir = include("../cis/citaj_fir.php");
 
@@ -1191,6 +1187,13 @@ window.open('../ucto/kontrolnydph2014_manual.php?copern=18099&drupoh=1&page=1&ty
  '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
+  }
+
+
 
 </script>
 <script type="text/javascript" src="spr_kvdph_xml.js"></script>
@@ -1312,9 +1315,9 @@ $i = $i + 1;
  </td>
  <td><input type="text" name="kvicd" id="kvicd" onkeydown="kvicda1Enter(event.which);" maxlength="20" style="width:100px;"/></td>
  <td><input type="text" name="kvfak" id="kvfak" onkeydown="kvfaka1Enter(event.which);" maxlength="35" style="width:120px;"/></td> <!-- dopyt, preveri šírku inputu -->
- <td><input type="text" name="kvdaz" id="kvdaz" onkeydown="kvdaza1Enter(event.which);" maxlength="12" style="width:80px;"/></td>
- <td><input type="text" name="kvzdn" id="kvzdn" onkeydown="kvzdna1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
- <td><input type="text" name="kvsdn" id="kvsdn" onkeydown="kvsdna1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvdaz" id="kvdaz" onkeyup="CiarkaNaBodku(this);" onkeydown="kvdaza1Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td><input type="text" name="kvzdn" id="kvzdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzdna1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvsdn" id="kvsdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvsdna1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
  <td><input type="text" name="kvszd" id="kvszd" onkeydown="kvszda1Enter(event.which);" maxlength="2" style="width:80px;"/></td>
  <td>
   <select size="1" name="kver1" id="kver1" onkeydown="kver1a1Enter(event.which);">
@@ -1394,11 +1397,11 @@ $i = $i + 1;
  </td>
  <td><input type="text" name="kvicd" id="kvicd" onkeydown="kvicda2Enter(event.which);" maxlength="20" style="width:100px;"/></td>
  <td><input type="text" name="kvfak" id="kvfak" onkeydown="kvfaka2Enter(event.which);" maxlength="35" style="width:120px;"/></td> <!-- dopyt, preveri šírku inputu -->
- <td><input type="text" name="kvdaz" id="kvdaz" onkeydown="kvdaza2Enter(event.which);" maxlength="12" style="width:80px;"/></td>
- <td><input type="text" name="kvzkl" id="kvzkl" onkeydown="kvzkla2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvdaz" id="kvdaz" onkeyup="CiarkaNaBodku(this);" onkeydown="kvdaza2Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td><input type="text" name="kvzkl" id="kvzkl" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzkla2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
  <td><input type="text" name="kvkodt" id="kvkodt" onkeydown="kvkodta2Enter(event.which);" maxlength="12" style="width:60px;"/></td> <!-- dopyt, možno select -->
  <td><input type="text" name="kvdtov" id="kvdtov" onkeydown="kvdtova2Enter(event.which);" maxlength="12" style="width:60px;"/></td> <!-- dopyt, možno select -->
- <td><input type="text" name="kvmnot" id="kvmnot" onkeydown="kvmnota2Enter(event.which);" maxlength="12" style="width:60px;"/></td>
+ <td><input type="text" name="kvmnot" id="kvmnot" onkeyup="CiarkaNaBodku(this);" onkeydown="kvmnota2Enter(event.which);" maxlength="12" style="width:60px;"/></td>
  <td><input type="text" name="kvmerj" id="kvmerj" onkeydown="kvmerja2Enter(event.which);" maxlength="2" style="width:40px;"/></td> <!-- dopyt, možno select -->
  <td>
   <select size="1" name="kver1" id="kver1" onkeydown="kver1a2Enter(event.which);">
@@ -1475,11 +1478,11 @@ $i = $i + 1;
  </td>
  <td><input type="text" name="kvicd" id="kvicd" onkeydown="kvicdb1Enter(event.which);" maxlength="20" style="width:100px;"/></td>
  <td><input type="text" name="kvfak" id="kvfak" onkeydown="kvfakb1Enter(event.which);" maxlength="35" style="width:120px;"/></td> <!-- dopyt, preveri šírku inputu -->
- <td><input type="text" name="kvdaz" id="kvdaz" onkeydown="kvdazb1Enter(event.which);" maxlength="12" style="width:80px;"/></td>
- <td><input type="text" name="kvzdn" id="kvzdn" onkeydown="kvzdnb1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
- <td><input type="text" name="kvsdn" id="kvsdn" onkeydown="kvsdnb1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvdaz" id="kvdaz" onkeyup="CiarkaNaBodku(this);" onkeydown="kvdazb1Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td><input type="text" name="kvzdn" id="kvzdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzdnb1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvsdn" id="kvsdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvsdnb1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
  <td><input type="text" name="kvszd" id="kvszd" onkeydown="kvszdb1Enter(event.which);" maxlength="2" style="width:80px;"/></td>
- <td><input type="text" name="kvodn" id="kvodn" onkeydown="kvodnb1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvodn" id="kvodn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvodnb1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
  <td>
   <select size="1" name="kver1" id="kver1" onkeydown="kver1b1Enter(event.which);">
    <option value="1">1=zmazaná položka</option>
@@ -1556,11 +1559,11 @@ $i = $i + 1;
  </td>
  <td><input type="text" name="kvicd" id="kvicd" onkeydown="kvicdb2Enter(event.which);" maxlength="20" style="width:100px;"/></td>
  <td><input type="text" name="kvfak" id="kvfak" onkeydown="kvfakb2Enter(event.which);" maxlength="35" style="width:120px;"/></td> <!-- dopyt, preveri šírku inputu -->
- <td><input type="text" name="kvdaz" id="kvdaz" onkeydown="kvdazb2Enter(event.which);" maxlength="12" style="width:80px;"/></td>
- <td><input type="text" name="kvzdn" id="kvzdn" onkeydown="kvzdnb2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
- <td><input type="text" name="kvsdn" id="kvsdn" onkeydown="kvsdnb2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvdaz" id="kvdaz" onkeyup="CiarkaNaBodku(this);" onkeydown="kvdazb2Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td><input type="text" name="kvzdn" id="kvzdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzdnb2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvsdn" id="kvsdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvsdnb2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
  <td><input type="text" name="kvszd" id="kvszd" onkeydown="kvszdb2Enter(event.which);" maxlength="2" style="width:80px;"/></td>
- <td><input type="text" name="kvodn" id="kvodn" onkeydown="kvodnb2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvodn" id="kvodn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvodnb2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
  <td>
   <select size="1" name="kver1" id="kver1" onkeydown="kver1b2Enter(event.which);">
    <option value="1">1=zmazaná položka</option>
@@ -1627,9 +1630,9 @@ $i = $i + 1;
   <input type="hidden" name="kvodd" id="kvodd" value="B3"/>
   <img src='../obr/hladaj.png' onclick="myKVDPH.style.display=''; volajKvdph('B3');" title="H¾ada v KVDPH">
  </td>
- <td><input type="text" name="kvzdn" id="kvzdn" onkeydown="kvzdnb3Enter(event.which);" maxlength="12" style="width:80px;"/></td>
- <td><input type="text" name="kvsdn" id="kvsdn" onkeydown="kvsdnb3Enter(event.which);" maxlength="12" style="width:80px;"/></td>
- <td><input type="text" name="kvodn" id="kvodn" onkeydown="kvodnb3Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td><input type="text" name="kvzdn" id="kvzdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzdnb3Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td><input type="text" name="kvsdn" id="kvsdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvsdnb3Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td><input type="text" name="kvodn" id="kvodn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvodnb3Enter(event.which);" maxlength="12" style="width:80px;"/></td>
  <td>
   <select class="hmenu" size="1" name="kver1" id="kver1" onkeydown="kver1b3Enter(event.which);">
    <option value="1">1=zmazaná položka</option>
@@ -1713,12 +1716,12 @@ $i = $i + 1;
  <td><input type="text" name="kvicd" id="kvicd" onkeydown="kvicdc1Enter(event.which);" maxlength="20" style="width:90px;"/></td>
  <td><input type="text" name="kvfak" id="kvfak" onkeydown="kvfakc1Enter(event.which);" maxlength="35" style="width:110px;"/></td> <!-- dopyt, preveri šírku inputu -->
  <td><input type="text" name="kvpvf" id="kvpvf" onkeydown="kvpvfc1Enter(event.which);" maxlength="35" style="width:110px;"/></td>
- <td><input type="text" name="kvzkl" id="kvzkl" onkeydown="kvzklc1Enter(event.which);" maxlength="12" style="width:80px;"/></td>
- <td><input type="text" name="kvzdn" id="kvzdn" onkeydown="kvzdnc1Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td><input type="text" name="kvzkl" id="kvzkl" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzklc1Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td><input type="text" name="kvzdn" id="kvzdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzdnc1Enter(event.which);" maxlength="12" style="width:80px;"/></td>
  <td><input type="text" name="kvszd" id="kvszd" onkeydown="kvszdc1Enter(event.which);" maxlength="12" style="width:40px;"/></td>
  <td><input type="text" name="kvkodt" id="kvkodt" onkeydown="kvkodtc1Enter(event.which);" maxlength="12" style="width:40px;"/></td>
  <td><input type="text" name="kvdtov" id="kvdtov" onkeydown="kvdtovc1Enter(event.which);" maxlength="12" style="width:40px;"/></td>
- <td><input type="text" name="kvmnot" id="kvmnot" onkeydown="kvmnotc1Enter(event.which);" maxlength="12" style="width:70px;"/></td>
+ <td><input type="text" name="kvmnot" id="kvmnot" onkeyup="CiarkaNaBodku(this);" onkeydown="kvmnotc1Enter(event.which);" maxlength="12" style="width:70px;"/></td>
  <td><input type="text" name="kvmerj" id="kvmerj" onkeydown="kvmerjc1Enter(event.which);" maxlength="2" style="width:30px;"/></td>
  <td>
   <select size="1" name="kver1" id="kver1" onkeydown="kver1c1Enter(event.which);">
@@ -1797,10 +1800,10 @@ $i = $i + 1;
  <td><input type="text" name="kvicd" id="kvicd" onkeydown="kvicdc2Enter(event.which);" maxlength="20" style="width:90px;"/></td>
  <td><input type="text" name="kvfak" id="kvfak" onkeydown="kvfakc2Enter(event.which);" maxlength="35" style="width:120px;"/></td> <!-- dopyt, preveri šírku inputu -->
  <td><input type="text" name="kvpvf" id="kvpvf" onkeydown="kvpvfc2Enter(event.which);" maxlength="35" style="width:120px;"/></td>
- <td><input type="text" name="kvzdn" id="kvzdn" onkeydown="kvzdnc2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
- <td><input type="text" name="kvsdn" id="kvsdn" onkeydown="kvsdnc2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvzdn" id="kvzdn" onkeyup="CiarkaNaBodku(this);" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzdnc2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvsdn" id="kvsdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvsdnc2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
  <td><input type="text" name="kvszd" id="kvszd" onkeydown="kvszdc2Enter(event.which);" maxlength="2" style="width:50px;"/></td>
- <td><input type="text" name="kvodn" id="kvodn" onkeydown="kvodnc2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvodn" id="kvodn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvodnc2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
  <td>
   <select size="1" name="kver1" id="kver1" onkeydown="kver1c2Enter(event.which);">
    <option value="1">1=zmazaná položka</option>
@@ -1871,11 +1874,11 @@ $i = $i + 1;
   <input type="hidden" name="kvodd" id="kvodd" value="D1"/>
   <img src='../obr/hladaj.png' onclick="myKVDPH.style.display=''; volajKvdph('D1');" title="H¾ada v KVDPH">
  </td>
- <td><input type="text" name="kvcobr" id="kvcobr" onkeydown="kvcobrd1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
- <td><input type="text" name="kvzdn20" id="kvzdn20" onkeydown="kvzdn20d1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
- <td><input type="text" name="kvsdn20" id="kvsdn20" onkeydown="kvsdn20d1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
- <td><input type="text" name="kvzdn10" id="kvzdn10" onkeydown="kvzdn10d1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
- <td><input type="text" name="kvsdn10" id="kvsdn10" onkeydown="kvsdn10d1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvcobr" id="kvcobr" onkeyup="CiarkaNaBodku(this);" onkeydown="kvcobrd1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvzdn20" id="kvzdn20" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzdn20d1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvsdn20" id="kvsdn20" onkeyup="CiarkaNaBodku(this);" onkeydown="kvsdn20d1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvzdn10" id="kvzdn10" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzdn10d1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvsdn10" id="kvsdn10" onkeyup="CiarkaNaBodku(this);" onkeydown="kvsdn10d1Enter(event.which);" maxlength="12" style="width:90px;"/></td>
  <td>
   <select size="1" name="kver1" id="kver1" onkeydown="kver1d1Enter(event.which);">
    <option value="1">1=zmazaná položka</option>
@@ -1945,10 +1948,10 @@ $i = $i + 1;
   <img src='../obr/hladaj.png' onclick="myKVDPH.style.display=''; volajKvdph('D2');" title="H¾ada v KVDPH">
   <input type="hidden" name="kvcobr" id="kvcobr"/>
  </td>
- <td><input type="text" name="kvzdn20" id="kvzdn20" onkeydown="kvzdn20d2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
- <td><input type="text" name="kvsdn20" id="kvsdn20" onkeydown="kvsdn20d2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
- <td><input type="text" name="kvzdn10" id="kvzdn10" onkeydown="kvzdn10d2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
- <td><input type="text" name="kvsdn10" id="kvsdn10" onkeydown="kvsdn10d2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvzdn20" id="kvzdn20" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzdn20d2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvsdn20" id="kvsdn20" onkeyup="CiarkaNaBodku(this);" onkeydown="kvsdn20d2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvzdn10" id="kvzdn10" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzdn10d2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
+ <td><input type="text" name="kvsdn10" id="kvsdn10" onkeyup="CiarkaNaBodku(this);" onkeydown="kvsdn10d2Enter(event.which);" maxlength="12" style="width:90px;"/></td>
  <td>
   <select size="1" name="kver1" id="kver1" onkeydown="kver1d2Enter(event.which);">
    <option value="1">1=zmazaná položka</option>
