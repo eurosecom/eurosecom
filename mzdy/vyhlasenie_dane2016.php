@@ -8,8 +8,6 @@ $urov = 3000;
 $copern = $_REQUEST['copern'];
 $tis = $_REQUEST['tis'];
 if (!isset($tis)) $tis = 0;
-$fort = $_REQUEST['fort'];
-if (!isset($fort)) $fort = 1;
 $strana = 1*$_REQUEST['strana'];
 if ( $strana == 0 ) { $strana=9999; }
 
@@ -25,8 +23,12 @@ require_once("../pswd/password.php");
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=0;
+$rmc=1;
 $rmc1=0;
+
+//.jpg podklad
+$jpg_cesta="../dokumenty/dan_z_prijmov2016/dan_zo_zavislej2016/vyhlasenie_nazdanenie/vyhlasenie_nczd_v16";
+$jpg_popis="Vyhl·senie na uplatnenie N»ZD v roku ".$kli_vrok;
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -35,18 +37,9 @@ $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
 $citfir = include("../cis/citaj_fir.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
 
 $cislo_oc = $_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
-
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
 //priezvisko,meno,titul FO
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
@@ -627,12 +620,6 @@ if ( $next_oc > 9999 ) $next_oc=9999;
 <title>EuroSecom - Vyhl·senie na uplatnenie N»ZD</title>
 
 <script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height-20;
-var sirkawic = screen.width-10;
-
 <?php
 //uprava sadzby
   if ( $copern == 20 )
@@ -691,10 +678,6 @@ var sirkawic = screen.width-10;
   {
    window.open('vyhlasenie_dane2016.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $next_oc;?>', '_self');
   }
-  function ZnovuPotvrdenie()
-  {
-   window.open('../mzdy/vyhlasenie_dane2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
   function TlacVyhlNCZD()
   {
    window.open('../mzdy/vyhlasenie_dane2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=1', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
@@ -734,11 +717,9 @@ if ( $copern == 20 )
    </td>
    <td>
     <div class="bar-btn-form-tool">
-<!-- dopyt, spraviù pouËenie, zatiaæ nem·m podklad -->
-     <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="NaËÌtaù ˙daje z minulÈho roka" class="btn-form-tool">
+     <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="NaËÌtaù ˙daje z minulÈho roka" class="btn-form-tool"> <!-- dopyt, rozchodiù -->
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVyhlNCZD();" title="Zobraziù v PDF" class="btn-form-tool">
      <img src="../obr/ikony/usertwo_blue_icon.png" onclick="NacitajDeti();" title="NaËÌtaù deti z ˙dajov o zamestnancovi" class="btn-form-tool">
-
     </div>
    </td>
   </tr>
@@ -746,7 +727,7 @@ if ( $copern == 20 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="vyhlasenie_dane2016.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
+<FORM name="formv1" method="post" action="vyhlasenie_dane2016.php?copern=23&cislo_oc=<?php echo $cislo_oc; ?>">
 <div class="navbar">
 <?php
 $clas1="active";
@@ -757,58 +738,60 @@ $source="../mzdy/vyhlasenie_dane2016.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&
  <h6 class="toright">TlaËiù:</h6>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 </div>
-
-<img src="../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/vyhlasenie_nazdanenie/vyhlasenie_NCZDv2014_str1_form.jpg" alt="Vyhl·senie na uplatnenie N»ZD v roku 2014 1.strana 264kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str1_form.jpg"
+     alt="<?php echo $jpg_popis; ?> 1.strana 264kB" class="form-background">
 
 <!-- ZAMESTNANEC -->
- <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool" style="top:247px; left:330px; width:18px; height:18px;">
-<input type="text" name="prie" id="prie" value="<?php echo $prie; ?>" disabled="disabled" class="nofill" style="width:277px; top:304px; left:116px;"/>
-<input type="text" name="meno" id="meno" value="<?php echo $meno; ?>" disabled="disabled" class="nofill" style="width:166px; top:304px; left:405px;"/>
-<input type="text" name="rodne" id="rodne" value="<?php echo $rodne; ?>" disabled="disabled" class="nofill" style="width:110px; top:304px; left:590px;"/>
-<input type="text" name="ptitl" id="ptitl" value="<?php echo $ptitl; ?>" disabled="disabled" class="nofill" style="width:96px; top:339px; left:230px;"/>
-<input type="text" name="ztitz" id="ztitz" value="<?php echo $ztitz; ?>" disabled="disabled" class="nofill" style="width:106px; top:339px; left:465px;"/>
-<select size="1" name="rdstav" id="rdstav" style="top:339px; left:669px;">
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();"
+     title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool"
+     style="top:248px; left:330px; width:16px; height:16px;">
+<span class="text-echo" style="top:310px; left:122px;"><?php echo $prie; ?></span>
+<span class="text-echo" style="top:310px; left:410px;"><?php echo $meno; ?></span>
+<span class="text-echo" style="top:310px; left:590px;"><?php echo $rodne; ?></span>
+<span class="text-echo" style="top:347px; left:230px;"><?php echo $ptitl; ?></span>
+<span class="text-echo" style="top:347px; left:465px;"><?php echo $ptitz; ?></span>
+<select size="1" name="rdstav" id="rdstav" style="top:338px; left:669px;">
  <option value="0">slobodn˝/slobodn·</option>
  <option value="1">ûenat˝/vydat·</option>
  <option value="2">vdovec/vdova</option>
  <option value="3">rozveden˝/rozveden·</option>
 </select>
-<input type="text" name="uli" id="uli" value="<?php echo $uli; ?>" disabled="disabled" class="nofill" style="width:200px; top:392px; left:158px;"/>
-<input type="text" name="cdm" id="cdm" value="<?php echo $cdm; ?>" disabled="disabled" class="nofill" style="width:112px; top:392px; left:536px;"/>
-<input type="text" name="psc" id="psc" value="<?php echo $psc; ?>" disabled="disabled" class="nofill" style="width:60px; top:392px; left:700px;"/>
-<input type="text" name="mes" id="mes" value="<?php echo $mes; ?>" disabled="disabled" class="nofill" style="width:323px; top:428px; left:158px;"/>
-<input type="text" name="zstat" id="zstat" value="<?php echo $zstat; ?>" disabled="disabled" class="nofill" style="width:200px; top:428px; left:530px;"/>
-<input type="text" name="zamestnavatel" id="zamestnavatel" value="<?php echo $zamestnavatel; ?>" disabled="disabled" class="nofill" style="width:724px; top:482px; left:116px;"/>
+<span class="text-echo" style="top:399px; left:160px;"><?php echo $uli; ?></span>
+<span class="text-echo" style="top:399px; left:538px;"><?php echo $cdm; ?></span>
+<span class="text-echo" style="top:399px; left:702px;"><?php echo $psc; ?></span>
+<span class="text-echo" style="top:435px; left:160px;"><?php echo $mes; ?></span>
+<span class="text-echo" style="top:435px; left:530px;"><?php echo $zstat; ?></span>
+<span class="text-echo" style="top:488px; left:122px;">»˝<?php echo $zamestnavatel; ?></span>
 
 <!-- UPLATNENIE NCZD -->
 <input type="checkbox" name="nezd" value="1" style="top:581px; left:803px;"/>
-<input type="checkbox" name="docx" value="1" style="top:635px; left:803px;"/>
+<input type="checkbox" name="docx" value="1" style="top:634px; left:803px;"/>
 
 <!-- UPLATNENIE BONUS -->
 <input type="checkbox" name="bonus" value="1" style="top:736px; left:803px;"/>
-<input type="text" name="det01" id="det01" style="width:250px; top:835px; left:116px;"/>
-<input type="text" name="nar01" id="nar01" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:835px; left:378px;"/>
-<input type="text" name="det02" id="det02" style="width:250px; top:870px; left:116px;"/>
-<input type="text" name="nar02" id="nar02" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:870px; left:378px;"/>
-<input type="text" name="det03" id="det03" style="width:250px; top:905px; left:116px;"/>
-<input type="text" name="nar03" id="nar03" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:905px; left:378px;"/>
-<input type="text" name="det04" id="det04" style="width:250px; top:940px; left:116px;"/>
-<input type="text" name="nar04" id="nar04" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:940px; left:378px;"/>
-<input type="text" name="det05" id="det05" style="width:250px; top:975px; left:116px;"/>
-<input type="text" name="nar05" id="nar05" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:975px; left:378px;"/>
-<input type="text" name="det06" id="det06" style="width:250px; top:835px; left:486px;"/>
-<input type="text" name="nar06" id="nar06" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:835px; left:746px;"/>
-<input type="text" name="det07" id="det07" style="width:250px; top:870px; left:486px;"/>
-<input type="text" name="nar07" id="nar07" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:870px; left:746px;"/>
-<input type="text" name="det08" id="det08" style="width:250px; top:905px; left:486px;"/>
-<input type="text" name="nar08" id="nar08" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:905px; left:746px;"/>
-<input type="text" name="det09" id="det09" style="width:250px; top:940px; left:486px;"/>
-<input type="text" name="nar09" id="nar09" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:940px; left:746px;"/>
-<input type="text" name="det10" id="det10" style="width:250px; top:975px; left:486px;"/>
-<input type="text" name="nar10" id="nar10" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:975px; left:746px;"/>
-<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" style="width:241px; top:1224px; left:141px;" />
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+<input type="text" name="det01" id="det01" style="width:250px; top:833px; left:116px;"/>
+<input type="text" name="nar01" id="nar01" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:833px; left:378px;"/>
+<input type="text" name="det02" id="det02" style="width:250px; top:868px; left:116px;"/>
+<input type="text" name="nar02" id="nar02" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:868px; left:378px;"/>
+<input type="text" name="det03" id="det03" style="width:250px; top:903px; left:116px;"/>
+<input type="text" name="nar03" id="nar03" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:903px; left:378px;"/>
+<input type="text" name="det04" id="det04" style="width:250px; top:938px; left:116px;"/>
+<input type="text" name="nar04" id="nar04" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:938px; left:378px;"/>
+<input type="text" name="det05" id="det05" style="width:250px; top:974px; left:116px;"/>
+<input type="text" name="nar05" id="nar05" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:974px; left:378px;"/>
+<input type="text" name="det06" id="det06" style="width:250px; top:833px; left:486px;"/>
+<input type="text" name="nar06" id="nar06" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:833px; left:746px;"/>
+<input type="text" name="det07" id="det07" style="width:250px; top:868px; left:486px;"/>
+<input type="text" name="nar07" id="nar07" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:868px; left:746px;"/>
+<input type="text" name="det08" id="det08" style="width:250px; top:903px; left:486px;"/>
+<input type="text" name="nar08" id="nar08" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:903px; left:746px;"/>
+<input type="text" name="det09" id="det09" style="width:250px; top:938px; left:486px;"/>
+<input type="text" name="nar09" id="nar09" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:938px; left:746px;"/>
+<input type="text" name="det10" id="det10" style="width:250px; top:974px; left:486px;"/>
+<input type="text" name="nar10" id="nar10" onkeyup="CiarkaNaBodku(this);" style="width:95px; top:974px; left:746px;"/>
+<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" style="width:110px; top:1225px; left:141px;" />
 
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
 </FORM>
 </div> <!-- koniec #content -->
 <?php
@@ -873,11 +856,12 @@ if ( $strana == 1 OR $strana == 9999 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
-$pdf->SetTopMargin(15);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/vyhlasenie_nazdanenie/vyhlasenie_NCZDv2014_str1.jpg') AND $i == 0 )
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
 {
-if ( $fort == 1 ) { $pdf->Image('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/vyhlasenie_nazdanenie/vyhlasenie_NCZDv2014_str1.jpg',0,0,210,297); }
+$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
 
 $zstat="Slovensko"; $zstak="703";
 $sqldok = mysql_query("SELECT * FROM F".$kli_vxcf."_mzdtextmzd WHERE invt = $cislo_oc ");
@@ -890,100 +874,95 @@ $sqldok = mysql_query("SELECT * FROM F".$kli_vxcf."_mzdtextmzd WHERE invt = $cis
 if ( $zstat == '' ) { $zstat="Slovensko"; }
 
 //zamestnanec
-$pdf->Cell(190,59,"                          ","$rmc1",1,"L");
+$pdf->Cell(190,64," ","$rmc1",1,"L");
 $pdf->Cell(18,4," ","$rmc1",0,"L");$pdf->Cell(63,6,"$hlavicka->prie","$rmc",0,"L");
 $pdf->Cell(2,4," ","$rmc1",0,"L");$pdf->Cell(38,6,"$hlavicka->meno","$rmc",0,"L");
 $dar=SkDatum($hlavicka->dar);
 $tlacrd="$hlavicka->rdc / $hlavicka->rdk";
 if ( $tlacrd == "0 / " ) { $tlacrd="$dar"; }
-$pdf->Cell(24,4," ","$rmc1",0,"L");$pdf->Cell(34,6,"$tlacrd","$rmc",1,"L");
+$pdf->Cell(34,4," ","$rmc1",0,"L");$pdf->Cell(24,6,"$tlacrd","$rmc",1,"L");
+//titul a stav
 $pdf->SetFont('arial','',8);
-$pdf->Cell(190,1,"                          ","$rmc1",1,"L");
-$pdf->Cell(42,4," ","$rmc1",0,"L");$pdf->Cell(25,5,"$hlavicka->titl","$rmc",0,"L");$pdf->Cell(27,4," ","$rmc1",0,"L");$pdf->Cell(27,5,"$ztitz","$rmc",0,"L");
-$pdf->Cell(20,4," ","$rmc1",0,"L");
-if ( $hlavicka->rdstav == 0 ) { $pdf->Cell(38,5,"slobodn˝/slobodn·","$rmc",1,"L"); }
-if ( $hlavicka->rdstav == 1 ) { $pdf->Cell(38,5,"ûenat˝/vydat·","$rmc",1,"L"); }
-if ( $hlavicka->rdstav == 2 ) { $pdf->Cell(38,5,"vdovec/vdova","$rmc",1,"L"); }
-if ( $hlavicka->rdstav == 3 ) { $pdf->Cell(38,5,"rozveden˝/rozveden·","$rmc",1,"L"); }
-$pdf->Cell(190,4,"                          ","$rmc1",1,"L");
-$pdf->Cell(26,5," ","$rmc1",0,"L");$pdf->Cell(75,4,"$hlavicka->zuli","$rmc",0,"L");$pdf->Cell(9,5," ","$rmc1",0,"L");$pdf->Cell(29,4,"$hlavicka->zcdm","$rmc",0,"L");
-$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(32,4,"$hlavicka->zpsc","$rmc",1,"L");
-$pdf->Cell(27,5," ","$rmc1",0,"L");$pdf->Cell(74,4,"$hlavicka->zmes","$rmc",0,"L");$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(70,4,"$zstat","$rmc",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(45,4," ","$rmc1",0,"L");$pdf->Cell(22,5,"$hlavicka->titl","$rmc",0,"L");
+$pdf->Cell(31,4," ","$rmc1",0,"L");$pdf->Cell(23,5,"$ztitz","$rmc",0,"L");
+$pdf->Cell(22,4," ","$rmc1",0,"L");
+if ( $hlavicka->rdstav == 0 ) { $pdf->Cell(36,5,"slobodn˝/slobodn·","$rmc",1,"L"); }
+if ( $hlavicka->rdstav == 1 ) { $pdf->Cell(36,5,"ûenat˝/vydat·","$rmc",1,"L"); }
+if ( $hlavicka->rdstav == 2 ) { $pdf->Cell(36,5,"vdovec/vdova","$rmc",1,"L"); }
+if ( $hlavicka->rdstav == 3 ) { $pdf->Cell(36,5,"rozveden˝/rozveden·","$rmc",1,"L"); }
+//adresa
+$pdf->Cell(190,4," ","$rmc1",1,"L");
+$pdf->Cell(27,5," ","$rmc1",0,"L");$pdf->Cell(74,4,"$hlavicka->zuli","$rmc",0,"L");
+$pdf->Cell(10,5," ","$rmc1",0,"L");$pdf->Cell(28,4,"$hlavicka->zcdm","$rmc",0,"L");
+$pdf->Cell(9,5," ","$rmc1",0,"L");$pdf->Cell(31,4,"$hlavicka->zpsc","$rmc",1,"L");
+$pdf->Cell(27,5," ","$rmc1",0,"L");$pdf->Cell(74,4,"$hlavicka->zmes","$rmc",0,"L");
+$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(70,4,"$zstat","$rmc",1,"L");
 $pdf->SetFont('arial','',10);
 
 //zamestnavatel
-$pdf->Cell(190,5,"                          ","$rmc1",1,"L");
-$pdf->Cell(18,5," ","$rmc1",0,"L");$pdf->Cell(161,6,"$fir_fnaz, $fir_fuli $fir_fcdm $fir_fmes","$rmc",1,"L");
+$pdf->Cell(190,5," ","$rmc1",1,"L");
+$pdf->Cell(18,5," ","$rmc1",0,"L");$pdf->Cell(161,7,"$fir_fnaz, $fir_fuli $fir_fcdm $fir_fmes","$rmc",1,"L");
 
 //udaje NCZD
-$pdf->Cell(190,17,"                          ","$rmc1",1,"L");
-$nezdx=" ";
-if ( $hlavicka->nezd == 1 ) { $nezdx="x"; }
-$doch=" ";
-if ( $hlavicka->docx == 1 ) { $doch="x"; }
-$pdf->Cell(170,5," ","$rmc1",0,"L");$pdf->Cell(4,3,"$nezdx","$rmc",1,"L");
-$pdf->Cell(190,9,"                          ","$rmc1",1,"L");
-$pdf->Cell(170,5," ","$rmc1",0,"L");$pdf->Cell(4,4,"$doch","$rmc",1,"L");
+$pdf->Cell(190,17," ","$rmc1",1,"L");
+$nezdx=" "; if ( $hlavicka->nezd == 1 ) { $nezdx="x"; }
+$doch=" "; if ( $hlavicka->docx == 1 ) { $doch="x"; }
+$pdf->Cell(170,5," ","$rmc1",0,"L");$pdf->Cell(3,3,"$nezdx","$rmc",1,"C");
+$pdf->Cell(190,11," ","$rmc1",1,"L");
+$pdf->Cell(170,5," ","$rmc1",0,"L");$pdf->Cell(3,4,"$doch","$rmc",1,"C");
 
 //udaje BONUS
-$pdf->Cell(190,19,"                          ","$rmc1",1,"L");
-$bonusx=" ";
-if ( $hlavicka->bonus == 1 ) { $bonusx="x"; }
-$pdf->Cell(170,5," ","$rmc1",0,"L");$pdf->Cell(4,5,"$bonusx","$rmc",1,"L");
+$pdf->Cell(190,21," ","$rmc1",1,"L");
+$bonusx=" "; if ( $hlavicka->bonus == 1 ) { $bonusx="x"; }
+$pdf->Cell(170,5," ","$rmc1",0,"L");$pdf->Cell(3,5,"$bonusx","$rmc",1,"C");
 $pdf->SetFont('arial','',8);
 
-$pdf->Cell(190,17,"                          ","$rmc1",1,"L");
-$nar01=SkDatum($hlavicka->nar01);
-if ( $nar01 == '00.00.0000' ) $nar01="";
-$nar02=SkDatum($hlavicka->nar02);
-if ( $nar02 == '00.00.0000' ) $nar02="";
-$nar03=SkDatum($hlavicka->nar03);
-if ( $nar03 == '00.00.0000' ) $nar03="";
-$nar04=SkDatum($hlavicka->nar04);
-if ( $nar04 == '00.00.0000' ) $nar04="";
-$nar05=SkDatum($hlavicka->nar05);
-if ( $nar05 == '00.00.0000' ) $nar05="";
-$nar06=SkDatum($hlavicka->nar06);
-if ( $nar06 == '00.00.0000' ) $nar06="";
-$nar07=SkDatum($hlavicka->nar07);
-if ( $nar07 == '00.00.0000' ) $nar07="";
-$nar08=SkDatum($hlavicka->nar08);
-if ( $nar08 == '00.00.0000' ) $nar08="";
-$nar09=SkDatum($hlavicka->nar09);
-if ( $nar09 == '00.00.0000' ) $nar09="";
-$nar10=SkDatum($hlavicka->nar10);
-if ( $nar10 == '00.00.0000' ) $nar10="";
-
-
-
-$pdf->Cell(17,4," ","$rmc1",0,"L");$pdf->Cell(58,4,"$hlavicka->det01","$rmc",0,"L");$pdf->Cell(24,4,"$nar01","$rmc",0,"C");
+$pdf->Cell(190,20," ","$rmc1",1,"L");
+$nar01=SkDatum($hlavicka->nar01); if ( $nar01 == '00.00.0000' ) $nar01="";
+$nar02=SkDatum($hlavicka->nar02); if ( $nar02 == '00.00.0000' ) $nar02="";
+$nar03=SkDatum($hlavicka->nar03); if ( $nar03 == '00.00.0000' ) $nar03="";
+$nar04=SkDatum($hlavicka->nar04); if ( $nar04 == '00.00.0000' ) $nar04="";
+$nar05=SkDatum($hlavicka->nar05); if ( $nar05 == '00.00.0000' ) $nar05="";
+$nar06=SkDatum($hlavicka->nar06); if ( $nar06 == '00.00.0000' ) $nar06="";
+$nar07=SkDatum($hlavicka->nar07); if ( $nar07 == '00.00.0000' ) $nar07="";
+$nar08=SkDatum($hlavicka->nar08); if ( $nar08 == '00.00.0000' ) $nar08="";
+$nar09=SkDatum($hlavicka->nar09); if ( $nar09 == '00.00.0000' ) $nar09="";
+$nar10=SkDatum($hlavicka->nar10); if ( $nar10 == '00.00.0000' ) $nar10="";
+$pdf->Cell(17,4," ","$rmc1",0,"L");
+$pdf->Cell(58,4,"$hlavicka->det01","$rmc",0,"L");$pdf->Cell(24,4,"$nar01","$rmc",0,"C");
 $pdf->Cell(58,4,"$hlavicka->det06","$rmc",0,"L");$pdf->Cell(23,4,"$nar06","$rmc",1,"C");
-$pdf->Cell(17,4," ","$rmc1",0,"L");$pdf->Cell(58,5,"$hlavicka->det02","$rmc",0,"L");$pdf->Cell(24,5,"$nar02","$rmc",0,"C");
-$pdf->Cell(58,5,"$hlavicka->det07","$rmc",0,"L");$pdf->Cell(23,5,"$nar07","$rmc",1,"C");
-$pdf->Cell(17,4," ","$rmc1",0,"L");$pdf->Cell(58,4,"$hlavicka->det03","$rmc",0,"L");$pdf->Cell(24,4,"$nar03","$rmc",0,"C");
-$pdf->Cell(58,4,"$hlavicka->det08","$rmc",0,"L");$pdf->Cell(23,4,"$nar08","$rmc",1,"C");
-$pdf->Cell(17,4," ","$rmc1",0,"L");$pdf->Cell(58,4,"$hlavicka->det04","$rmc",0,"L");$pdf->Cell(24,4,"$nar04","$rmc",0,"C");
+$pdf->Cell(17,4," ","$rmc1",0,"L");
+$pdf->Cell(58,4,"$hlavicka->det02","$rmc",0,"L");$pdf->Cell(24,4,"$nar02","$rmc",0,"C");
+$pdf->Cell(58,4,"$hlavicka->det07","$rmc",0,"L");$pdf->Cell(23,4,"$nar07","$rmc",1,"C");
+$pdf->Cell(17,4," ","$rmc1",0,"L");
+$pdf->Cell(58,5,"$hlavicka->det03","$rmc",0,"L");$pdf->Cell(24,5,"$nar03","$rmc",0,"C");
+$pdf->Cell(58,5,"$hlavicka->det08","$rmc",0,"L");$pdf->Cell(23,5,"$nar08","$rmc",1,"C");
+$pdf->Cell(17,4," ","$rmc1",0,"L");
+$pdf->Cell(58,4,"$hlavicka->det04","$rmc",0,"L");$pdf->Cell(24,4,"$nar04","$rmc",0,"C");
 $pdf->Cell(58,4,"$hlavicka->det09","$rmc",0,"L");$pdf->Cell(23,4,"$nar09","$rmc",1,"C");
-$pdf->Cell(17,4," ","$rmc1",0,"L");$pdf->Cell(58,4,"$hlavicka->det05","$rmc",0,"L");$pdf->Cell(24,4,"$nar05","$rmc",0,"C");
+$pdf->Cell(17,4," ","$rmc1",0,"L");
+$pdf->Cell(58,4,"$hlavicka->det05","$rmc",0,"L");$pdf->Cell(24,4,"$nar05","$rmc",0,"C");
 $pdf->Cell(58,4,"$hlavicka->det10","$rmc",0,"L");$pdf->Cell(23,4,"$nar10","$rmc",1,"C");
 $pdf->SetFont('arial','',10);
 
 //Dna
-$pdf->Cell(190,56,"                          ","$rmc1",1,"L");
+$pdf->Cell(190,56," ","$rmc1",1,"L");
 $datum=SkDatum($hlavicka->datum);
 if ( $datum == '00.00.0000' ) $datum="";
-$pdf->Cell(23,3," ","$rmc1",0,"L");$pdf->Cell(55,6,"$datum","$rmc",1,"C");
+$pdf->Cell(24,3," ","$rmc1",0,"L");$pdf->Cell(60,6,"$datum","$rmc",1,"C");
                                        } //koniec 1.strany
 
 if ( $strana == 2 OR $strana == 9999 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
-$pdf->SetLeftMargin(8);
-$pdf->SetTopMargin(15);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/vyhlasenie_nazdanenie/vyhlasenie_NCZDv2014_str2.jpg') )
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/dan_zo_zavislej2014/vyhlasenie_nazdanenie/vyhlasenie_NCZDv2014_str2.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
                                        } //koniec 2.strany
   }
 $i = $i + 1;
