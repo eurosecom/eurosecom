@@ -102,9 +102,12 @@ window.open('../mzdy/dovolenky_min.php?&copern=1&aktpr=' + aktpr + '&page=1', '_
 
 //Mesacny prehlad dane
 <?php
-$rokmpreh=$kli_vrok;
+$rokmpreh=1*$kli_vrok;
 if( $rokmpreh <= 2012 ) { $rokmpreh="";  }
-if( $rokmpreh >= 2013 ) { $rokmpreh="2013";  }
+if( $rokmpreh == 2013 ) { $rokmpreh="2013";  }
+if( $rokmpreh == 2014 ) { $rokmpreh="2013";  }
+if( $rokmpreh == 2015 ) { $rokmpreh="2013";  }
+if( $rokmpreh >= 2016 ) { $rokmpreh="2016";  }
 ?>
 
 function TlacPrehlad()
