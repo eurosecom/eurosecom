@@ -104,7 +104,8 @@ if( $rokpotvrdenia == 2011 ) { $rokpotvrdenia="2011";  }
 if( $rokpotvrdenia == 2012 ) { $rokpotvrdenia="2012";  }
 if( $rokpotvrdenia == 2013 ) { $rokpotvrdenia="2013";  }
 if( $rokpotvrdenia == 2014 ) { $rokpotvrdenia="2014";  }
-if( $rokpotvrdenia >= 2015 ) { $rokpotvrdenia="2015";  }
+if( $rokpotvrdenia == 2015 ) { $rokpotvrdenia="2015";  }
+if( $rokpotvrdenia >= 2016 ) { $rokpotvrdenia="2016";  }
 ?>
 
 function TlacPotvrdenie()
