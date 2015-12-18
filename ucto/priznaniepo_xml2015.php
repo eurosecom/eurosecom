@@ -128,6 +128,8 @@ if ( $j == 0 )
      {
   $text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\r\n"; fwrite($soubor, $text);
   $text = "<dokument>"."\r\n"; fwrite($soubor, $text);
+
+//hlavicka OK podla definicie pre rok 2015
   $text = " <hlavicka>"."\r\n"; fwrite($soubor, $text);
 
 $dic=$fir_fdic;
@@ -204,6 +206,12 @@ $text=$hlavicka->koskr;
   $text = "  <ukoncujemUplatnovaniePar17><![CDATA[".$text."]]></ukoncujemUplatnovaniePar17>"."\r\n"; fwrite($soubor, $text);
 $obmedzenie=$hlavicka->nerezident;
   $text = "  <obmedzenie><![CDATA[".$obmedzenie."]]></obmedzenie>"."\r\n"; fwrite($soubor, $text);
+
+//zmena 2015
+$zapdl=$hlavicka->zapdl;
+  $text = "  <zapocitaniePar46b><![CDATA[".$zapdl."]]></zapocitaniePar46b>"."\r\n"; fwrite($soubor, $text);
+//koniec zmena 2015
+
 $prepojenie=$hlavicka->zahrprep;
   $text = "  <prepojenie><![CDATA[".$prepojenie."]]></prepojenie>"."\r\n"; fwrite($soubor, $text);
 $platiteldph=$hlavicka->chpld;
@@ -230,6 +238,9 @@ if ( $pocetSp == 0 ) { $pocetSp=""; }
   $text = "  </stalaPrevadzkaren>"."\r\n"; fwrite($soubor, $text);
 
   $text = " </hlavicka>"."\r\n"; fwrite($soubor, $text);
+
+//hlavicka OK podla definicie pre rok 2015
+
   $text = " <telo>"."\r\n"; fwrite($soubor, $text);
 
 $riadok=$hlavicka->r100;
@@ -292,6 +303,26 @@ if ( $riadok == 0 ) $riadok="";
 $riadok=$hlavicka->r300;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r300><![CDATA[".$riadok."]]></r300>"."\r\n"; fwrite($soubor, $text);
+
+//zmena 2015
+$riadok=$hlavicka->r301;
+if ( $riadok == 0 ) $riadok="";
+  $text = "  <r301><![CDATA[".$riadok."]]></r301>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r302;
+if ( $riadok == 0 ) $riadok="";
+  $text = "  <r302><![CDATA[".$riadok."]]></r302>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r303;
+if ( $riadok == 0 ) $riadok="";
+  $text = "  <r303><![CDATA[".$riadok."]]></r303>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r304;
+if ( $riadok == 0 ) $riadok="";
+  $text = "  <r304><![CDATA[".$riadok."]]></r304>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r305;
+if ( $riadok == 0 ) $riadok="";
+  $text = "  <r305><![CDATA[".$riadok."]]></r305>"."\r\n"; fwrite($soubor, $text);
+
+//koniec zmena 2015
+
 $riadok=$hlavicka->r310;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r310><![CDATA[".$riadok."]]></r310>"."\r\n"; fwrite($soubor, $text);
@@ -311,12 +342,23 @@ $riadok=$hlavicka->r500;
 if ( $riadok == 0 ) $riadok="0.00";
   $text = "  <r500><![CDATA[".$riadok."]]></r500>"."\r\n"; fwrite($soubor, $text);
 $riadok=1*$hlavicka->r510;
-if ( $riadok == 0 ) $riadok="23";
+
+//zmena 2015
+$riadok=$hlavicka->r501;
+if ( $riadok == 0 ) $riadok="0";
+  $text = "  <r501><![CDATA[".$riadok."]]></r501>"."\r\n"; fwrite($soubor, $text);
+$riadok=1*$hlavicka->r510;
+if ( $riadok == 0 ) $riadok="0";
   $text = "  <r510><![CDATA[".$riadok."]]></r510>"."\r\n"; fwrite($soubor, $text);
+$riadok=1*$hlavicka->r550;
+if ( $riadok == 0 ) $riadok="0";
+  $text = "  <r550><![CDATA[".$riadok."]]></r550>"."\r\n"; fwrite($soubor, $text);
+
+//koniec zmena 2015
+
 $riadok=$hlavicka->r600;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r600><![CDATA[".$riadok."]]></r600>"."\r\n"; fwrite($soubor, $text);
-
   $text = "  <r610>"."\r\n"; fwrite($soubor, $text);
 $text=iconv("CP1250", "UTF-8", $hlavicka->r610text);
   $text = "   <text><![CDATA[".$text."]]></text>"."\r\n"; fwrite($soubor, $text);
@@ -343,9 +385,8 @@ if ( $riadok == 0 ) $riadok="";
 $riadok=$hlavicka->r830;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r830><![CDATA[".$riadok."]]></r830>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r840;
-if ( $riadok == 0 ) $riadok="";
-  $text = "  <r840><![CDATA[".$riadok."]]></r840>"."\r\n"; fwrite($soubor, $text);
+
+//zmena 2015
 $riadok=$hlavicka->r900;
 if ( $riadok == 0 ) $riadok="0";
 if ( $hlavicka->r901 > 0 ) $riadok="";
@@ -356,55 +397,56 @@ if ( $riadok == 0 ) $riadok="";
 $riadok=$hlavicka->r920;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r920><![CDATA[".$riadok."]]></r920>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r930;
-if ( $riadok == 0 ) $riadok="";
-  $text = "  <r930><![CDATA[".$riadok."]]></r930>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r940;
-if ( $riadok == 0 ) $riadok="";
-  $text = "  <r940><![CDATA[".$riadok."]]></r940>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r950;
-if ( $riadok == 0 ) $riadok="";
-  $text = "  <r950><![CDATA[".$riadok."]]></r950>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r960;
-if ( $riadok == 0 ) $riadok="";
-  $text = "  <r960><![CDATA[".$riadok."]]></r960>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->r1000;
 if ( $riadok == 0 ) $riadok="0.00";
   $text = "  <r1000><![CDATA[".$riadok."]]></r1000>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r1001;
-if ( $riadok == 0 ) $riadok="";
-  $text = "  <r1001><![CDATA[".$riadok."]]></r1001>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->r1010;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r1010><![CDATA[".$riadok."]]></r1010>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r1020;
+if ( $riadok == 0 ) $riadok="";
+  $text = "  <r1020><![CDATA[".$riadok."]]></r1020>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r1030;
+if ( $riadok == 0 ) $riadok="";
+  $text = "  <r1030><![CDATA[".$riadok."]]></r1030>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r1040;
+if ( $riadok == 0 ) $riadok="";
+  $text = "  <r1040><![CDATA[".$riadok."]]></r1040>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r1050;
+if ( $riadok == 0 ) $riadok="";
+  $text = "  <r1050><![CDATA[".$riadok."]]></r1050>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r1100;
+if ( $riadok == 0 ) $riadok="0.00";
+  $text = "  <r1100><![CDATA[".$riadok."]]></r1100>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r1101;
+if ( $riadok == 0 ) $riadok="0.00";
+  $text = "  <r1101><![CDATA[".$riadok."]]></r1101>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r1110;
+if ( $riadok == 0 ) $riadok="0.00";
+  $text = "  <r1110><![CDATA[".$riadok."]]></r1110>"."\r\n"; fwrite($soubor, $text);
+
+//koniec zmena 2015
 
 $ddpDatum=SkDatum($hlavicka->dadod);
 if ( $ddp == 0 ) $ddpDatum="";
   $text = "  <ddpDatum><![CDATA[".$ddpDatum."]]></ddpDatum>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r1020;
+
+//zmena 2015
+
+$riadok=$hlavicka->r1120;
 if ( $riadok == 0 ) $riadok="0.00";
-if ( $ddp == 0 ) $riadok="";
-  $text = "  <r1020><![CDATA[".$riadok."]]></r1020>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r1030;
+  $text = "  <r1120><![CDATA[".$riadok."]]></r1120>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r1130;
 if ( $riadok == 0 ) $riadok="";
-if ( $ddp == 0 ) $riadok="";
-  $text = "  <r1030><![CDATA[".$riadok."]]></r1030>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r1040;
+  $text = "  <r1130><![CDATA[".$riadok."]]></r1130>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r1140;
 if ( $riadok == 0 ) $riadok="";
-if ( $ddp == 0 ) $riadok="";
-  $text = "  <r1040><![CDATA[".$riadok."]]></r1040>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r1050;
+  $text = "  <r1140><![CDATA[".$riadok."]]></r1140>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->r1150;
 if ( $riadok == 0 ) $riadok="";
-if ( $ddp == 0 ) $riadok="";
-  $text = "  <r1050><![CDATA[".$riadok."]]></r1050>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r1060;
-if ( $riadok == 0 ) $riadok="";
-if ( $ddp == 0 ) $riadok="";
-  $text = "  <r1060><![CDATA[".$riadok."]]></r1060>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->r1070;
-if ( $riadok == 0 ) $riadok="";
-if ( $ddp == 0 ) $riadok="";
-  $text = "  <r1070><![CDATA[".$riadok."]]></r1070>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <r1150><![CDATA[".$riadok."]]></r1150>"."\r\n"; fwrite($soubor, $text);
+
+//koniec zmena 2015
 
   $text = "  <tabA>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->a1r01;
@@ -452,6 +494,13 @@ if ( $riadok == 0 ) $riadok="";
 $riadok=$hlavicka->a1r15;
 if ( $riadok == 0 ) $riadok="";
   $text = "   <r15><![CDATA[".$riadok."]]></r15>"."\r\n"; fwrite($soubor, $text);
+//zmena 2015
+$riadok=$hlavicka->a1r16;
+if ( $riadok == 0 ) $riadok="";
+  $text = "   <r16><![CDATA[".$riadok."]]></r16>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->a1r17;
+if ( $riadok == 0 ) $riadok="";
+  $text = "   <r17><![CDATA[".$riadok."]]></r17>"."\r\n"; fwrite($soubor, $text);
   $text = "  </tabA>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <tabB>"."\r\n"; fwrite($soubor, $text);
@@ -467,6 +516,13 @@ if ( $riadok == 0 ) $riadok="";
 $riadok=$hlavicka->b1r04;
 if ( $riadok == 0 ) $riadok="";
   $text = "   <r04><![CDATA[".$riadok."]]></r04>"."\r\n"; fwrite($soubor, $text);
+//zmena 2015
+$riadok=$hlavicka->b1r05;
+if ( $riadok == 0 ) $riadok="";
+  $text = "   <r05><![CDATA[".$riadok."]]></r05>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->b1r06;
+if ( $riadok == 0 ) $riadok="";
+  $text = "   <r06><![CDATA[".$riadok."]]></r06>"."\r\n"; fwrite($soubor, $text);
   $text = "  </tabB>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <tabC1>"."\r\n"; fwrite($soubor, $text);
@@ -505,116 +561,122 @@ if ( $riadok == 0 ) $riadok="";
   $text = "   <r05><![CDATA[".$riadok."]]></r05>"."\r\n"; fwrite($soubor, $text);
   $text = "  </tabC2>"."\r\n"; fwrite($soubor, $text);
 
+//zmena 2015 tabD
   $text = "  <tabD>"."\r\n"; fwrite($soubor, $text);
   $text = "   <tabDs01>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->d1r01;
+if ( $riadok == 0 ) $riadok="0";
+  $text = "    <r01><![CDATA[".$riadok."]]></r01>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->d1r02;
-if ( $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="0";
   $text = "    <r02><![CDATA[".$riadok."]]></r02>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->d1r03;
-if ( $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="0";
   $text = "    <r03><![CDATA[".$riadok."]]></r03>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d1r06;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r06><![CDATA[".$riadok."]]></r06>"."\r\n"; fwrite($soubor, $text);
   $text = "   </tabDs01>"."\r\n"; fwrite($soubor, $text);
+
   $text = "   <tabDs02>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavicka->d2od);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <datumOd><![CDATA[".$riadok."]]></datumOd>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavicka->d2do);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <datumDo><![CDATA[".$riadok."]]></datumDo>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->d2r01;
+if ( $riadok == 0 ) $riadok="0";
+  $text = "    <r01><![CDATA[".$riadok."]]></r01>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->d2r02;
-if( $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="0";
   $text = "    <r02><![CDATA[".$riadok."]]></r02>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->d2r03;
-if ( $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="0";
   $text = "    <r03><![CDATA[".$riadok."]]></r03>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d2r04;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r04><![CDATA[".$riadok."]]></r04>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d2r05;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r05><![CDATA[".$riadok."]]></r05>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d2r06;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r06><![CDATA[".$riadok."]]></r06>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d2r07;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r07><![CDATA[".$riadok."]]></r07>"."\r\n"; fwrite($soubor, $text);
   $text = "   </tabDs02>"."\r\n"; fwrite($soubor, $text);
+
   $text = "   <tabDs03>"."\r\n"; fwrite($soubor, $text);
-$datumod3=SkDatum($hlavicka->d3od);
-if ( $datumod3 == '00.00.0000' ) $datumod3="";
-  $text = "    <r01od><![CDATA[".$datumod3."]]></r01od>"."\r\n"; fwrite($soubor, $text);
-$datumdo3=SkDatum($hlavicka->d3do);
-if ( $datumdo3 == '00.00.0000' ) $datumdo3="";
-  $text = "    <r01do><![CDATA[".$datumdo3."]]></r01do>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavicka->d3od);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <datumOd><![CDATA[".$riadok."]]></datumOd>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavicka->d3do);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <datumDo><![CDATA[".$riadok."]]></datumDo>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->d3r01;
+if ( $riadok == 0 ) $riadok="0";
+  $text = "    <r01><![CDATA[".$riadok."]]></r01>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->d3r02;
-if ( $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="0";
   $text = "    <r02><![CDATA[".$riadok."]]></r02>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->d3r03;
-if ( $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="0";
   $text = "    <r03><![CDATA[".$riadok."]]></r03>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d3r04;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r04><![CDATA[".$riadok."]]></r04>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d3r05;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r05><![CDATA[".$riadok."]]></r05>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d3r06;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r06><![CDATA[".$riadok."]]></r06>"."\r\n"; fwrite($soubor, $text);
   $text = "   </tabDs03>"."\r\n"; fwrite($soubor, $text);
+
   $text = "   <tabDs04>"."\r\n"; fwrite($soubor, $text);
-$datumod4=SkDatum($hlavicka->d4od);
-if ( $datumod4 == '00.00.0000' ) $datumod4="";
-  $text = "    <r01od><![CDATA[".$datumod4."]]></r01od>"."\r\n"; fwrite($soubor, $text);
-$datumdo4=SkDatum($hlavicka->d4do);
-if ( $datumdo4 == '00.00.0000' ) $datumdo4="";
-  $text = "    <r01do><![CDATA[".$datumdo4."]]></r01do>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavicka->d4od);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <datumOd><![CDATA[".$riadok."]]></datumOd>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavicka->d4do);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <datumDo><![CDATA[".$riadok."]]></datumDo>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->d4r01;
+if ( $riadok == 0 ) $riadok="0";
+  $text = "    <r01><![CDATA[".$riadok."]]></r01>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->d4r02;
-if ( $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="0";
   $text = "    <r02><![CDATA[".$riadok."]]></r02>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->d4r03;
-if ( $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="0";
   $text = "    <r03><![CDATA[".$riadok."]]></r03>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d4r04;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r04><![CDATA[".$riadok."]]></r04>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d4r05;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r05><![CDATA[".$riadok."]]></r05>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d4r06;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r06><![CDATA[".$riadok."]]></r06>"."\r\n"; fwrite($soubor, $text);
   $text = "   </tabDs04>"."\r\n"; fwrite($soubor, $text);
+
   $text = "   <tabDs05>"."\r\n"; fwrite($soubor, $text);
-$datumod5=SkDatum($hlavicka->d5od);
-if ( $datumod5 == '00.00.0000' ) $datumod5="";
-  $text = "    <r01od><![CDATA[".$datumod5."]]></r01od>"."\r\n"; fwrite($soubor, $text);
-$datumdo5=SkDatum($hlavicka->d5do);
-if ( $datumdo5 == '00.00.0000' ) $datumdo5="";
-  $text = "    <r01do><![CDATA[".$datumdo5."]]></r01do>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavicka->d5od);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <datumOd><![CDATA[".$riadok."]]></datumOd>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavicka->d5do);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <datumDo><![CDATA[".$riadok."]]></datumDo>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->d5r01;
+if ( $riadok == 0 ) $riadok="0";
+  $text = "    <r01><![CDATA[".$riadok."]]></r01>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->d5r02;
-if ( $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="0";
   $text = "    <r02><![CDATA[".$riadok."]]></r02>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->d5r03;
-if ( $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="0";
   $text = "    <r03><![CDATA[".$riadok."]]></r03>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d5r04;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r04><![CDATA[".$riadok."]]></r04>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d5r05;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r05><![CDATA[".$riadok."]]></r05>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d5r06;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r06><![CDATA[".$riadok."]]></r06>"."\r\n"; fwrite($soubor, $text);
   $text = "   </tabDs05>"."\r\n"; fwrite($soubor, $text);
+
   $text = "   <tabDs06>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d6r05;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r05><![CDATA[".$riadok."]]></r05>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->d6r06;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <r06><![CDATA[".$riadok."]]></r06>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavicka->d6od);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <datumOd><![CDATA[".$riadok."]]></datumOd>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavicka->d6do);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <datumDo><![CDATA[".$riadok."]]></datumDo>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->d6r01;
+if ( $riadok == 0 ) $riadok="0";
+  $text = "    <r01><![CDATA[".$riadok."]]></r01>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->d6r02;
+if ( $riadok == 0 ) $riadok="0";
+  $text = "    <r02><![CDATA[".$riadok."]]></r02>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->d6r03;
+if ( $riadok == 0 ) $riadok="0";
+  $text = "    <r03><![CDATA[".$riadok."]]></r03>"."\r\n"; fwrite($soubor, $text);
   $text = "   </tabDs06>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "   <tabDs07>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->d7r02;
+if ( $riadok == 0 ) $riadok="0";
+  $text = "    <r02><![CDATA[".$riadok."]]></r02>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->d7r03;
+if ( $riadok == 0 ) $riadok="0";
+  $text = "    <r03><![CDATA[".$riadok."]]></r03>"."\r\n"; fwrite($soubor, $text);
+  $text = "   </tabDs07>"."\r\n"; fwrite($soubor, $text);
+
+
   $text = "  </tabD>"."\r\n"; fwrite($soubor, $text);
+
 
   $text = "  <tabE>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->e1r01;
@@ -799,6 +861,7 @@ if ( $riadok == 0 ) $riadok="";
   $text = "   </naklady>"."\r\n"; fwrite($soubor, $text);
   $text = "  </tabI>"."\r\n"; fwrite($soubor, $text);
 
+//zmena 2015 tabJ
   $text = "  <tabJ>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->jl1r01;
 if ( $riadok == 0 ) $riadok="";
@@ -806,17 +869,9 @@ if ( $riadok == 0 ) $riadok="";
 $riadok=$hlavicka->jl1r02;
 if ( $riadok == 0 ) $riadok="";
   $text = "   <r02><![CDATA[".$riadok."]]></r02>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->jl1r03;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r03><![CDATA[".$riadok."]]></r03>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->jl1r04;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r04><![CDATA[".$riadok."]]></r04>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->jl1r05;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <r05><![CDATA[".$riadok."]]></r05>"."\r\n"; fwrite($soubor, $text);
   $text = "  </tabJ>"."\r\n"; fwrite($soubor, $text);
 
+//zmena 2015 tabK
   $text = "  <tabK>"."\r\n"; fwrite($soubor, $text);
   $text = "   <tabKs01>"."\r\n"; fwrite($soubor, $text);
 $datumk1od=SkDatum($hlavicka->k1od);
@@ -844,6 +899,7 @@ $datumk4do=SkDatum($hlavicka->k4do);
 if ( $datumk4do == '00.00.0000' ) $datumk4do="";
   $text = "    <r04s01do><![CDATA[".$datumk4do."]]></r04s01do>"."\r\n"; fwrite($soubor, $text);
   $text = "   </tabKs01>"."\r\n"; fwrite($soubor, $text);
+
   $text = "   <tabKs02>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->k2r01;
 if ( $riadok == 0 ) $riadok="";
@@ -858,7 +914,14 @@ $riadok=$hlavicka->k2r04;
 if ( $riadok == 0 ) $riadok="";
   $text = "    <r04s02><![CDATA[".$riadok."]]></r04s02>"."\r\n"; fwrite($soubor, $text);
   $text = "   </tabKs02>"."\r\n"; fwrite($soubor, $text);
+
   $text = "   <tabKs03>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->k3r01;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <r01s03><![CDATA[".$riadok."]]></r01s03>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->k3r02;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <r02s03><![CDATA[".$riadok."]]></r02s03>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->k3r03;
 if ( $riadok == 0 ) $riadok="";
   $text = "    <r03s03><![CDATA[".$riadok."]]></r03s03>"."\r\n"; fwrite($soubor, $text);
@@ -866,7 +929,12 @@ $riadok=$hlavicka->k3r04;
 if ( $riadok == 0 ) $riadok="";
   $text = "    <r04s03><![CDATA[".$riadok."]]></r04s03>"."\r\n"; fwrite($soubor, $text);
   $text = "   </tabKs03>"."\r\n"; fwrite($soubor, $text);
+
+
   $text = "   <tabKs04>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->k4r01;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <r01s04><![CDATA[".$riadok."]]></r01s04>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->k4r02;
 if ( $riadok == 0 ) $riadok="";
   $text = "    <r02s04><![CDATA[".$riadok."]]></r02s04>"."\r\n"; fwrite($soubor, $text);
@@ -880,6 +948,7 @@ $riadok=$hlavicka->k4r05;
 if ( $riadok == 0 ) $riadok="";
   $text = "    <r05s04><![CDATA[".$riadok."]]></r05s04>"."\r\n"; fwrite($soubor, $text);
   $text = "   </tabKs04>"."\r\n"; fwrite($soubor, $text);
+
   $text = "   <tabKs05>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->k5r01;
 if ( $riadok == 0 ) $riadok="";
@@ -899,44 +968,42 @@ if ( $riadok == 0 ) $riadok="";
   $text = "   </tabKs05>"."\r\n"; fwrite($soubor, $text);
   $text = "  </tabK>"."\r\n"; fwrite($soubor, $text);
 
+
 $paragraf50=$hlavicka->pzano;
 if ( $hlavicka->pcsum == 0 ) { $paragraf50=1; }
   $text = "  <c4paragraf50><![CDATA[".$paragraf50."]]></c4paragraf50>"."\r\n"; fwrite($soubor, $text);
+
+//zmena 2015
+$riadok=$hlavicka->zslu;
+  $text = "    <suhlasZasl><![CDATA[".$riadok."]]></suhlasZasl>"."\r\n"; fwrite($soubor, $text);
+
+
+//zmena 2015
 $riadok=$hlavicka->pcpoc;
-if ( $paragraf50 == 1 OR $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="";
   $text = "  <c4r1><![CDATA[".$riadok."]]></c4r1>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->pcdar;
-if ( $paragraf50 == 1 OR $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="";
   $text = "  <c4r2><![CDATA[".$riadok."]]></c4r2>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->pcpod;
-if ( $paragraf50 == 1 OR $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="";
   $text = "  <c4r3><![CDATA[".$riadok."]]></c4r3>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->pc15;
-if ( $paragraf50 == 1 OR $riadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="";
   $text = "  <c4r4><![CDATA[".$riadok."]]></c4r4>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pcdar5;
-if ( $paragraf50 == 1 OR $riadok == 0 ) $riadok="";
-  $text = "  <c4r5><![CDATA[".$riadok."]]></c4r5>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pcpod5;
-if ( $paragraf50 == 1 OR $riadok == 0 ) $riadok="";
-  $text = "  <c4r6><![CDATA[".$riadok."]]></c4r6>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pc155;
-if ( $paragraf50 == 1 OR $riadok == 0 ) $riadok="";
-  $text = "  <c4r7><![CDATA[".$riadok."]]></c4r7>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <c4prijimatel1>"."\r\n"; fwrite($soubor, $text);
 $suma=$hlavicka->pcsum;
-if ( $paragraf50 == 1 OR $suma == 0 ) $suma="";
+if ( $suma == 0 ) $suma="";
   $text = "   <suma><![CDATA[".$suma."]]></suma>"."\r\n"; fwrite($soubor, $text);
 $pico1=$hlavicka->p1ico;
-if ( $paragraf50 == 1 OR $pico1 == 0 ) $pico1="";
+if ( $pico1 == 0 ) $pico1="";
 if ( $hlavicka->p1ico < 1000000 AND $hlavicka->p1ico > 1 ) { $pico1="00".$hlavicka->p1ico; }
   $text = "   <ico><![CDATA[".$pico1."]]></ico>"."\r\n"; fwrite($soubor, $text);
 $psid1=$hlavicka->p1sid;
-if ( $paragraf50 == 1 OR $psid1 == 0 ) $psid1="";
+if ( $psid1 == 0 ) $psid1="";
   $text = "   <sid><![CDATA[".$psid1."]]></sid>"."\r\n"; fwrite($soubor, $text);
 $pravnaForma=iconv("CP1250", "UTF-8", $hlavicka->p1pfr);
-if ( $paragraf50 == 1 ) $pravnaForma="";
   $text = "   <pravnaForma><![CDATA[".$pravnaForma."]]></pravnaForma>"."\r\n"; fwrite($soubor, $text);
   $text = "   <obchodneMeno>"."\r\n"; fwrite($soubor, $text);
 $obchodneMeno=iconv("CP1250", "UTF-8", substr($hlavicka->p1men,0,37));
@@ -946,16 +1013,12 @@ if ( $paragraf50 == 1 ) { $obchodneMeno=""; $obchodneMeno2=""; }
   $text = "    <riadok><![CDATA[".$obchodneMeno2."]]></riadok>"."\r\n"; fwrite($soubor, $text);
   $text = "   </obchodneMeno>"."\r\n"; fwrite($soubor, $text);
 $ulica=iconv("CP1250", "UTF-8", $hlavicka->p1uli);
-if ( $paragraf50 == 1 ) $ulica="";
   $text = "   <ulica><![CDATA[".$ulica."]]></ulica>"."\r\n"; fwrite($soubor, $text);
 $cislo=$hlavicka->p1cdm;
-if ( $paragraf50 == 1 ) $cislo="";
   $text = "   <cislo><![CDATA[".$cislo."]]></cislo>"."\r\n"; fwrite($soubor, $text);
 $psc=$hlavicka->p1psc;
-if ( $paragraf50 == 1 ) $psc="";
   $text = "   <psc><![CDATA[".$psc."]]></psc>"."\r\n"; fwrite($soubor, $text);
 $obec=iconv("CP1250", "UTF-8", $hlavicka->p1mes);
-if ( $paragraf50 == 1 ) $obec="";
   $text = "   <obec><![CDATA[".$obec."]]></obec>"."\r\n"; fwrite($soubor, $text);
   $text = "  </c4prijimatel1>"."\r\n"; fwrite($soubor, $text);
 
@@ -1034,78 +1097,128 @@ if ( $datum_sk == '00.00.0000' ) $datum_sk="";
   $text = "   <datum><![CDATA[".$datum_sk."]]></datum>"."\r\n"; fwrite($soubor, $text);
   $text = "  </vrateniePreplatku>"."\r\n"; fwrite($soubor, $text);
 
-  $text = "  <dividendy>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <divr01>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzs01;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <s1><![CDATA[".$riadok."]]></s1>"."\r\n"; fwrite($soubor, $text);
-  $text = "   </divr01>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <divr02>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzs02;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <s1><![CDATA[".$riadok."]]></s1>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzd02;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <s2><![CDATA[".$riadok."]]></s2>"."\r\n"; fwrite($soubor, $text);
-  $text = "   </divr02>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <divr03>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzs03;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <s1><![CDATA[".$riadok."]]></s1>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzd03;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <s2><![CDATA[".$riadok."]]></s2>"."\r\n"; fwrite($soubor, $text);
-  $text = "   </divr03>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <divr04>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzs04;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <s1><![CDATA[".$riadok."]]></s1>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzd04;
-if ( $riadok == 0 ) $riadok="";
-  $text = "    <s2><![CDATA[".$riadok."]]></s2>"."\r\n"; fwrite($soubor, $text);
-  $text = "   </divr04>"."\r\n"; fwrite($soubor, $text);
+//zmena 2015
+//vytlac prilohu o projektoch
 
-$riadok=$hlavicka->pzr05;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <divr05><![CDATA[".$riadok."]]></divr05>"."\r\n"; fwrite($soubor, $text);
-$riadok="15";
-  $text = "   <divr06><![CDATA[".$riadok."]]></divr06>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzr07;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <divr07><![CDATA[".$riadok."]]></divr07>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzr08;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <divr08><![CDATA[".$riadok."]]></divr08>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzr09;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <divr09><![CDATA[".$riadok."]]></divr09>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzr10;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <divr10><![CDATA[".$riadok."]]></divr10>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzr11;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <divr11><![CDATA[".$riadok."]]></divr11>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzr12;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <divr12><![CDATA[".$riadok."]]></divr12>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzr13;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <divr13><![CDATA[".$riadok."]]></divr13>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzr14;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <divr14><![CDATA[".$riadok."]]></divr14>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzr15;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <divr15><![CDATA[".$riadok."]]></divr15>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pzr16;
-if ( $riadok == 0 ) $riadok="";
-  $text = "   <divr16><![CDATA[".$riadok."]]></divr16>"."\r\n"; fwrite($soubor, $text);
-$datum_pz=SkDatum($hlavicka->pzdat);
-if ( $datum_pz == '00.00.0000' ) $datum_pz="";
-  $text = "   <datum><![CDATA[".$datum_pz."]]></datum>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </dividendy>"."\r\n"; fwrite($soubor, $text);
+$sqlttp = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dpprilpro WHERE prcpr > 0 ORDER BY prcpr ";
+$sqlp = mysql_query("$sqlttp");
+if ($sqlp) { $polp = mysql_num_rows($sqlp); }
+$strxx=$polp/1;
+$polp=ceil($strxx);
 
-//vytlac prilohu
+$ip=0;
+$stranap=0;
+$stlpecp=1;
+  while ( $ip < $polp )
+  {
+@$zaznam=mysql_data_seek($sqlp,$ip);
+$hlavickap=mysql_fetch_object($sqlp);
+
+  $text = "  <prilPar30cOdpocetVydavkov>"."\r\n"; fwrite($soubor, $text);
+
+$riadok=$hlavickap->prcpr;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <projektCislo><![CDATA[".$riadok."]]></projektCislo>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavickap->prppp;
+if ( $hriadok == 0 ) $riadok="";
+  $text = "    <pocetProjektov><![CDATA[".$riadok."]]></pocetProjektov>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavickap->prpdzc);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <datumRealizacie><![CDATA[".$riadok."]]></datumRealizacie>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "   <r01>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavickap->prpzo1);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <s01Od><![CDATA[".$riadok."]]></s01Od>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavickap->prpzd1);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <s01Do><![CDATA[".$riadok."]]></s01Do>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavickap->prpvz1;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <s02><![CDATA[".$riadok."]]></s02>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavickap->prpod1;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <s03><![CDATA[".$riadok."]]></s03>"."\r\n"; fwrite($soubor, $text);
+  $text = "   </r01>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "   <r02>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavickap->prpzo2);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <s01Od><![CDATA[".$riadok."]]></s01Od>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavickap->prpzd2);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <s01Do><![CDATA[".$riadok."]]></s01Do>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavickap->prpvz2;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <s02><![CDATA[".$riadok."]]></s02>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavickap->prpod2;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <s03><![CDATA[".$riadok."]]></s03>"."\r\n"; fwrite($soubor, $text);
+  $text = "   </r02>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "   <r03>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavickap->prpzo3);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <s01Od><![CDATA[".$riadok."]]></s01Od>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavickap->prpzd3);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <s01Do><![CDATA[".$riadok."]]></s01Do>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavickap->prpvz3;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <s02><![CDATA[".$riadok."]]></s02>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavickap->prpod3;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <s03><![CDATA[".$riadok."]]></s03>"."\r\n"; fwrite($soubor, $text);
+  $text = "   </r03>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "   <r04>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavickap->prpzo4);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <s01Od><![CDATA[".$riadok."]]></s01Od>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavickap->prpzd4);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <s01Do><![CDATA[".$riadok."]]></s01Do>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavickap->prpvz4;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <s02><![CDATA[".$riadok."]]></s02>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavickap->prpod4;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <s03><![CDATA[".$riadok."]]></s03>"."\r\n"; fwrite($soubor, $text);
+  $text = "   </r04>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "   <r05>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavickap->prpzo5);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <s01Od><![CDATA[".$riadok."]]></s01Od>"."\r\n"; fwrite($soubor, $text);
+$riadok=SkDatum($hlavickap->prpzd5);
+if ( $riadok == '00.00.0000' ) $riadok="";
+  $text = "    <s01Do><![CDATA[".$riadok."]]></s01Do>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavickap->prpvz5;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <s02><![CDATA[".$riadok."]]></s02>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavickap->prpod5;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <s03><![CDATA[".$riadok."]]></s03>"."\r\n"; fwrite($soubor, $text);
+  $text = "   </r05>"."\r\n"; fwrite($soubor, $text);
+
+$riadok=$hlavickap->prpods;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <r06><![CDATA[".$riadok."]]></r06>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavickap->prptxt;
+  $text = "    <ciele><![CDATA[".$riadok."]]></ciele>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavickap->prpodv;
+if ( $riadok == 0 ) $riadok="";
+  $text = "    <r07><![CDATA[".$riadok."]]></r07>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "  </prilPar30cOdpocetVydavkov>"."\r\n"; fwrite($soubor, $text);
+
+$ip = $ip + 1;
+  }
+
+
+//koniec vytlac prilohu o projektoch
+
+//vytlac prilohu o prijimateloch
 $sqlttp = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dppriloha WHERE p1cis > 0 ORDER BY p1cis";
 $sqlp = mysql_query("$sqlttp");
 if ($sqlp) { $polp = mysql_num_rows($sqlp); }
@@ -1168,7 +1281,8 @@ $ip = $ip + 1;
 $stlpecp = $stlpecp + 1;
 if ( $stlpecp == 4 ) $stlpecp=1;
   }
-//koniec vytlac prilohu
+//koniec vytlac prilohu o prijimateloch
+
 
 //ukonci cely dokument a telo
   $text = " </telo>"."\r\n"; fwrite($soubor, $text);
