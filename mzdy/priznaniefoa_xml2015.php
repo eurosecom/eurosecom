@@ -673,50 +673,42 @@ if ( $riadok == 0 ) $riadok="";
   $text = "  <r74><![CDATA[".$riadok."]]></r74>"."\r\n"; fwrite($soubor, $text);
 
 $pgf50=$hlavicka->upl50;
-if ( $hlavicka->r75 == 0 ) { $pgf50=1; }
   $text = "  <paragraf50><![CDATA[".$pgf50."]]></paragraf50>"."\r\n"; fwrite($soubor, $text);
 
 $riadok=$hlavicka->spln3;
   $text = "  <splnam3per><![CDATA[".$riadok."]]></splnam3per>"."\r\n"; fwrite($soubor, $text);
 
 $riadok=$hlavicka->r75;
-if ( $pgf50 == 1 OR $riadok == 0 OR $hlavicka->druh == 3 ) $riadok="";
+if ( $riadok == 0 ) $riadok="";
   $text = "  <r75><![CDATA[".$riadok."]]></r75>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <r76>"."\r\n"; fwrite($soubor, $text);
 $pico=$hlavicka->pico;
-if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $pico="";
+if ( $pico == 0 ) $pico="";
 if ( $hlavicka->pico < 1000000 AND $hlavicka->pico > 1 ) { $pico="00".$hlavicka->pico; }
   $text = "   <ico><![CDATA[".$pico."]]></ico>"."\r\n"; fwrite($soubor, $text);
 
 $psid=$hlavicka->psid;
-if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $psid="";
+if ( $psid == 0 ) $psid="";
   $text = "   <sid><![CDATA[".$psid."]]></sid>"."\r\n"; fwrite($soubor, $text);
 
 $pravnaForma=iconv("CP1250", "UTF-8", $hlavicka->pfor);
-if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $pravnaForma="";
   $text = "   <pravnaForma><![CDATA[".$pravnaForma."]]></pravnaForma>"."\r\n"; fwrite($soubor, $text);
   
   $text = "   <obchMeno>"."\r\n";   fwrite($soubor, $text);
 $riadok=iconv("CP1250", "UTF-8", $hlavicka->pmen);
-if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $riadok="";
   $text = "    <riadok><![CDATA[".$riadok."]]></riadok>"."\r\n"; fwrite($soubor, $text);
 $riadok="";
-if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $riadok="";
   $text = "    <riadok><![CDATA[".$riadok."]]></riadok>"."\r\n"; fwrite($soubor, $text);
   $text = "   </obchMeno>"."\r\n";   fwrite($soubor, $text);
   
 $ulica=iconv("CP1250", "UTF-8", $hlavicka->puli);
-if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $ulica="";
   $text = "   <ulica><![CDATA[".$ulica."]]></ulica>"."\r\n"; fwrite($soubor, $text);
 $cislo=$hlavicka->pcdm;
-if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $cislo="";
   $text = "   <cislo><![CDATA[".$cislo."]]></cislo>"."\r\n"; fwrite($soubor, $text);
 $psc=$hlavicka->ppsc;
-if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $psc="";
   $text = "   <psc><![CDATA[".$psc."]]></psc>"."\r\n"; fwrite($soubor, $text);
 $obec=iconv("CP1250", "UTF-8", $hlavicka->pmes);
-if ( $pgf50 == 1 OR $hlavicka->druh == 3 ) $obec="";
   $text = "   <obec><![CDATA[".$obec."]]></obec>"."\r\n"; fwrite($soubor, $text);
   $text = "  </r76>"."\r\n"; fwrite($soubor, $text);
 
