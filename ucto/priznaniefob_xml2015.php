@@ -1516,7 +1516,7 @@ if ( $riadok == 0 ) $riadok="";
 $riadok=$hlavicka->prpods;
 if ( $riadok == 0 ) $riadok="";
   $text = "    <r06><![CDATA[".$riadok."]]></r06>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->prptxt;
+$riadok=iconv("CP1250", "UTF-8", $hlavicka->prptxt);
   $text = "    <ciele><![CDATA[".$riadok."]]></ciele>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->prpodv;
 if ( $riadok == 0 ) $riadok="";
