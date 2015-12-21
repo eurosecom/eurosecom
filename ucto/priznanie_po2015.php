@@ -2885,10 +2885,6 @@ if ( $copern == 102 )
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-  function NacitajMzdy() //je to potrebné
-  {
-   window.open('../ucto/priznanie_po2015.php?strana=<?php echo $strana; ?>&copern=200&drupoh=1&page=1&typ=PDF&cstat=1304&vyb_ume=<?php echo $vyb_umk; ?>', '_self');
-  }
   function TlacPO()
   {
    window.open('../ucto/priznanie_po2015.php?strana=999&copern=11&drupoh=1&page=1&typ=PDF',
@@ -2970,6 +2966,7 @@ if ( $copern == 102 )
     <div class="bar-btn-form-tool">
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
      <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="Naèíta údaje z minulého roka" class="btn-form-tool">
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick=";" title="Export do XML" class="btn-form-tool"> <!-- dopyt, nie je funkèné -->
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacPO();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
    </td>
