@@ -1652,11 +1652,6 @@ if ( $copern == 20 )
   {
    window.open('priznanie_foa2015.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $next_oc;?>', '_self');
   }
-  function ZnovuPotvrdenie()
-  {
-   window.open('../mzdy/priznanie_foa2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1',
- '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
   function TlacFOA()
   {
    window.open('../mzdy/priznanie_foa2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999',
@@ -1753,6 +1748,7 @@ if ( $copern == 20 )
      <img src="../obr/ikony/usertwo_blue_icon.png" onclick="DetiZamestnanca();" title="Deti zamestnanca" class="btn-form-tool">
      <img src="../obr/ikony/user_blue_icon.png" onclick="UpravZamestnanca();" title="Upravi údaje o zamestnancovi" class="btn-form-tool">
      <img src="../obr/ikony/list_blue_icon.png" onclick="TlacMzdovyList();" title="Zobrazi mzdový list v PDF" class="btn-form-tool">
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick=";" title="Export do XML" class="btn-form-tool"> <!-- dopyt, nie je funkèné -->
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacFOA();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
    </td>
