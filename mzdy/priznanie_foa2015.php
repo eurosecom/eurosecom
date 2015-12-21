@@ -1716,7 +1716,11 @@ if ( $copern == 20 )
   {
    document.formv1.post.checked = false;
   }
-
+  function FOAdoXML()
+                {
+  window.open('../mzdy/priznaniefoa_xml2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
 
 </script>
 </HEAD>
@@ -1748,7 +1752,7 @@ if ( $copern == 20 )
      <img src="../obr/ikony/usertwo_blue_icon.png" onclick="DetiZamestnanca();" title="Deti zamestnanca" class="btn-form-tool">
      <img src="../obr/ikony/user_blue_icon.png" onclick="UpravZamestnanca();" title="Upravi údaje o zamestnancovi" class="btn-form-tool">
      <img src="../obr/ikony/list_blue_icon.png" onclick="TlacMzdovyList();" title="Zobrazi mzdový list v PDF" class="btn-form-tool">
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick=";" title="Export do XML" class="btn-form-tool"> <!-- dopyt, nie je funkèné -->
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="FOAdoXML();" title="Export do XML" class="btn-form-tool"> 
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacFOA();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
    </td>

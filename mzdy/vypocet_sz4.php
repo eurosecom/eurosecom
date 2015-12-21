@@ -282,6 +282,17 @@ $vysledek = mysql_query("$sql");
 $sql = "UPDATE F$kli_vxcf"."_mzdnemzakb SET sz4x=znem WHERE oc > 0 AND sz4x = 0 ";
 $vysledek = mysql_query("$sql");
 
+if( $kli_vrok == 2015 )
+  {
+$sql = "UPDATE F$kli_vxcf"."_mzdnemzakb SET sz4x=40.6356 WHERE oc > 0 AND sz4x > 40.6356 ";
+$vysledek = mysql_query("$sql");
+  }
+if( $kli_vrok == 2016 )
+  {
+$sql = "UPDATE F$kli_vxcf"."_mzdnemzakb SET sz4x=42.3124 WHERE oc > 0 AND sz4x > 42.3124 ";
+$vysledek = mysql_query("$sql");
+  }
+
 $sql = "UPDATE F$kli_vxcf"."_mzdnemzakb SET umex='$kli_vume' WHERE oc > 0 ";
 $vysledek = mysql_query("$sql");
 
