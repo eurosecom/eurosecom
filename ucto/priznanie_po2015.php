@@ -2951,6 +2951,11 @@ if ( $copern == 102 )
    var h_riadok = riadok;
    window.open('priznanie_po2015.php?h_riadok=' + h_riadok + '&copern=266&drupoh=1&page=1', '_self');
   }
+  function POdoXML()
+  {
+   window.open('../ucto/priznaniepo_xml2015.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 </script>
 </HEAD>
 <BODY onload="ObnovUI(); <?php if ( $copern == 102 AND ( $strana == 2 OR $strana == 4 OR $strana == 6 ) ) ?>">
@@ -2966,7 +2971,7 @@ if ( $copern == 102 )
     <div class="bar-btn-form-tool">
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
      <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="Naèíta údaje z minulého roka" class="btn-form-tool">
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick=";" title="Export do XML" class="btn-form-tool"> <!-- dopyt, nie je funkèné -->
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="POdoXML();" title="Export do XML" class="btn-form-tool"> <!-- dopyt, nie je funkèné -->
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacPO();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
    </td>
