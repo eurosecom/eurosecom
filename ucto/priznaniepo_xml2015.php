@@ -42,9 +42,6 @@ exit;
 $sDat = include("../funkcie/dat_sk_us.php");
 
 $citfir = include("../cis/citaj_fir.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
 
 //druh priznania 1=mesacne,2=stvrtrocne,4=rocne
 $fir_uctx01 = $_REQUEST['fir_uctx01'];
