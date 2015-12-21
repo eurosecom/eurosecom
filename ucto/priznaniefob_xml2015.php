@@ -721,33 +721,42 @@ if ( $riadok == 0 ) $riadok="";
 $riadok=$hlavicka->r45;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r45>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <rok>2010</rok>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <strata><![CDATA[".$riadok."]]></strata>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <predchObdobie>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <rok>2010</rok>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <strata><![CDATA[".$riadok."]]></strata>"."\r\n"; fwrite($soubor, $text);
+  $text = "   </predchObdobie>"."\r\n"; fwrite($soubor, $text);
   $text = "  </r45>"."\r\n"; fwrite($soubor, $text);
-
 $riadok=$hlavicka->r46;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r46>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <rok>2011</rok>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <strata><![CDATA[".$riadok."]]></strata>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <predchObdobie>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <rok>2011</rok>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <strata><![CDATA[".$riadok."]]></strata>"."\r\n"; fwrite($soubor, $text);
+  $text = "   </predchObdobie>"."\r\n"; fwrite($soubor, $text);
   $text = "  </r46>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->r47;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r47>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <rok>2012</rok>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <strata><![CDATA[".$riadok."]]></strata>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <predchObdobie>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <rok>2012</rok>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <strata><![CDATA[".$riadok."]]></strata>"."\r\n"; fwrite($soubor, $text);
+  $text = "   </predchObdobie>"."\r\n"; fwrite($soubor, $text);
   $text = "  </r47>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->r48;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r48>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <rok>2013</rok>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <strata><![CDATA[".$riadok."]]></strata>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <predchObdobie>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <rok>2013</rok>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <strata><![CDATA[".$riadok."]]></strata>"."\r\n"; fwrite($soubor, $text);
+  $text = "   </predchObdobie>"."\r\n"; fwrite($soubor, $text);
   $text = "  </r48>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->r49;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r49>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <rok>2014</rok>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <strata><![CDATA[".$riadok."]]></strata>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <predchObdobie>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <rok>2014</rok>"."\r\n"; fwrite($soubor, $text);
+  $text = "    <strata><![CDATA[".$riadok."]]></strata>"."\r\n"; fwrite($soubor, $text);
+  $text = "   </predchObdobie>"."\r\n"; fwrite($soubor, $text);
   $text = "  </r49>"."\r\n"; fwrite($soubor, $text);
 //koniec zmena 2015
 
@@ -1042,7 +1051,6 @@ $riadok=$hlavicka->t3p14;
 if ( $riadok == 0 ) $riadok="";
   $text = "    <s1><![CDATA[".$riadok."]]></s1>"."\r\n"; fwrite($soubor, $text);
   $text = "   </t3r14>"."\r\n"; fwrite($soubor, $text);
-  $text = "  </tabulka3>"."\r\n"; fwrite($soubor, $text);
 
   $text = "   <t3r15>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->t3p15;
@@ -1053,7 +1061,7 @@ if ( $riadok == 0 ) $riadok="";
   $text = "    <s2><![CDATA[".$riadok."]]></s2>"."\r\n"; fwrite($soubor, $text);
   $text = "   </t3r15>"."\r\n"; fwrite($soubor, $text);
 //koniec zmena 2015
-
+  $text = "  </tabulka3>"."\r\n"; fwrite($soubor, $text);
 
 $riadok=$hlavicka->r69;
 if ( $riadok == 0 ) $riadok="";
