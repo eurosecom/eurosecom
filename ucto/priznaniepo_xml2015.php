@@ -59,6 +59,26 @@ $nazsub="PRIZNANIEPO_".$kli_vrok."_".$idx.".xml";
 $copern=10;
 $zarchivu=1;
 $elsubor=2;
+
+
+//vypocty
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET prpods=prpod1+prpod2+prpod3+prpod4+prpod5, prppp=1 WHERE prcpl > 0 ";
+$sqldok = mysql_query("$sqlttt");
+
+
+$prpodv=0;
+$sqlttt = "SELECT SUM(prpods) AS sums, SUM(prppp) AS sump FROM F$kli_vxcf"."_uctpriznanie_dpprilpro WHERE prcpl > 0 ";
+$sqldok = mysql_query("$sqlttt");
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+ $prpodv=$riaddok->sums;
+ $prppp=$riaddok->sump;
+ }
+
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET prpodv='$prpodv', prppp='$prppp' WHERE prcpl > 0 ";
+$sqldok = mysql_query("$sqlttt");
+
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -1117,7 +1137,7 @@ $riadok=$hlavickap->prcpr;
 if ( $riadok == 0 ) $riadok="";
   $text = "    <projektCislo><![CDATA[".$riadok."]]></projektCislo>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavickap->prppp;
-if ( $hriadok == 0 ) $riadok="";
+if ( $riadok == 0 ) $riadok="";
   $text = "    <pocetProjektov><![CDATA[".$riadok."]]></pocetProjektov>"."\r\n"; fwrite($soubor, $text);
 $riadok=SkDatum($hlavickap->prpdzc);
 if ( $riadok == '00.00.0000' ) $riadok="";
@@ -1201,7 +1221,7 @@ if ( $riadok == 0 ) $riadok="";
 $riadok=$hlavickap->prpods;
 if ( $riadok == 0 ) $riadok="";
   $text = "    <r06><![CDATA[".$riadok."]]></r06>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavickap->prptxt;
+$riadok=iconv("CP1250", "UTF-8", $hlavicka->prptxt);
   $text = "    <ciele><![CDATA[".$riadok."]]></ciele>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavickap->prpodv;
 if ( $riadok == 0 ) $riadok="";
