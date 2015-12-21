@@ -3317,6 +3317,11 @@ div.input-echo {
   {
    document.formv1.post.checked = false;
   }
+  function FOBdoXML()
+  {
+   window.open('../ucto/priznaniefob_xml2015.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 </script>
 </HEAD>
@@ -3354,7 +3359,7 @@ div.input-echo {
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
      <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="Naèíta údaje z minulého roka" class="btn-form-tool">
      <img src="../obr/ikony/reload_blue_icon.png" onclick="reNacitaj();" title="Znovu naèíta hodnoty do priznania" class="btn-form-tool">
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick=";" title="Export do XML" class="btn-form-tool"> <!-- dopyt, nie je funkèné -->
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="FOBdoXML();" title="Export do XML" class="btn-form-tool"> 
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacFOB();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
    </td>
