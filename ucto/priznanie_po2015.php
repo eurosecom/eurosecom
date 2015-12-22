@@ -1799,6 +1799,8 @@ $odpocetvyskum = 1*$_REQUEST['odpocetvyskum'];
 if ( $odpocetvyskum == 1 ) { $prepocitaj=1; }
 $licenciatabk = 1*$_REQUEST['licenciatabk'];
 if ( $licenciatabk == 1 ) { $prepocitaj=1; }
+$preddavky = 1*$_REQUEST['preddavky'];
+if ( $preddavky == 1 ) { $prepocitaj=1; }
 
 //nacitaj udaje
 if ( $copern >= 1 )
@@ -2053,6 +2055,32 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " psys=0 ".
 " WHERE ico >= 0 AND r1100 < 0 "; 
 $upravene = mysql_query("$uprtxt");
+
+if ( $preddavky == 1 )
+  {
+//upravene na rok 2015
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r1110=r510*22, psys=0 WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r1110=FLOOR(r1110)  WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r1110=r1110/100  WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r1110=r1110-r610-r710-r1030  WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r1110=0 WHERE r1110 <= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+  }
 
 
 //////////////////strana 4 tabulky 2015
@@ -2932,6 +2960,10 @@ if ( $copern == 102 )
   {
    window.open('priznanie_po2015.php?copern=101&strana=<?php echo $strana; ?>&licenciatabk=1', '_self');
   }
+  function Preddavky()
+  {
+   window.open('priznanie_po2015.php?copern=101&strana=<?php echo $strana; ?>&preddavky=1', '_self');
+  }
 
 //bud alebo checkbox v vi.cast
   function klikpost()
@@ -3210,7 +3242,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r1100" id="r1100" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:504px; left:529px;"/>
 <input type="text" name="r1101" id="r1101" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:543px; left:529px;"/>
 <input type="text" name="r1110" id="r1110" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:627px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick=";"
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="Preddavky();"
       title="Vypoèíta výšku preddavku na daò" class="btn-row-tool" style="top:627px; left:833px;">
 <input type="text" name="dadod" id="dadod" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:695px; left:529px;"/>
 <input type="text" name="r1120" id="r1120" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:735px; left:529px;"/>
