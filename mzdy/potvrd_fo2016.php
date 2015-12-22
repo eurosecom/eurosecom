@@ -21,7 +21,7 @@ require_once("../pswd/password.php");
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=0;
+$rmc=1;
 $rmc1=0;
 
 //$zablokovane=1;
@@ -44,18 +44,9 @@ $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
 $citfir = include("../cis/citaj_fir.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
 
 $cislo_oc = $_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
-
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
 //nazov/priezvisko,meno,titul , bydlisko,/sidlo
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
@@ -84,6 +75,7 @@ $r13 = strip_tags($_REQUEST['r13']);
 $r12a = strip_tags($_REQUEST['r12a']);
 $r12b = strip_tags($_REQUEST['r12b']);
 $r11 = strip_tags($_REQUEST['r11']);
+$r11m = strip_tags($_REQUEST['r11m']);
 $r02 = strip_tags($_REQUEST['r02']);
 $r03a = strip_tags($_REQUEST['r03a']);
 $r09 = strip_tags($_REQUEST['r09']);
@@ -161,7 +153,7 @@ $obmedz = 1*$_REQUEST['obmedz'];
 $uprav="NO";
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO SET ".
-" obmedz='$obmedz', r12a='$r12a', r12b='$r12b', r11='$r11', r04c='$r04c', ".
+" obmedz='$obmedz', r12a='$r12a', r12b='$r12b', r11='$r11', r11m='$r11m', r04c='$r04c', ".
 " konx1='$konx1', r01='$r01', r13='$r13', r02='$r02', r03a='$r03a', r09='$r09', r03b='$r03b', r04='$r04', r05='$r05', r06sum='$r06sum', r10='$r10', ".
 " r07det1='$r07det1', r07det2='$r07det2', r07det3='$r07det3', r07det4='$r07det4', r07det5='$r07det5', r07det6='$r07det6', r07det7='$r07det7', ".
 " r07rod1='$r07rod1', r07rod2='$r07rod2', r07rod3='$r07rod3', r07rod4='$r07rod4', r07rod5='$r07rod5', r07rod6='$r07rod6', r07rod7='$r07rod7', ".
@@ -388,6 +380,17 @@ $sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD r04c DECIMAL(10,2) DEFAULT
 $vysledek = mysql_query("$sql");
 }
 //koniec zmeny2015
+
+//zmeny2016
+$sql = "SELECT r10dds FROM F$kli_vxcf"."_mzdpotvrdenieFO ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD r11m DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD r10dds DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+}
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
@@ -876,6 +879,7 @@ $r13 = $fir_riadok->r13;
 $r12a = $fir_riadok->r12a;
 $r12b = $fir_riadok->r12b;
 $r11 = $fir_riadok->r11;
+$r11m = $fir_riadok->r11m;
 $r02 = $fir_riadok->r02;
 $r03a = $fir_riadok->r03a;
 $r09 = $fir_riadok->r09;
@@ -1052,6 +1056,7 @@ var sirkawic = screen.width-10;
    document.formv1.r12a.value = '<?php echo "$r12a";?>';
    document.formv1.r12b.value = '<?php echo "$r12b";?>';
    document.formv1.r11.value = '<?php echo "$r11";?>';
+   document.formv1.r11m.value = '<?php echo "$r11m";?>';
    document.formv1.r02.value = '<?php echo "$r02";?>';
    document.formv1.r03a.value = '<?php echo "$r03a";?>';
    document.formv1.r09.value = '<?php echo "$r09";?>';
@@ -1148,27 +1153,33 @@ var sirkawic = screen.width-10;
   }
   function PoucVyplnenie()
   {
-   window.open('../dokumenty/dan_z_prijmov2015/dan_zo_zavislej2015/potvrdeniefo/potvrdeniefo_v15_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../dokumenty/dan_z_prijmov2016/dan_zo_zavislej2016/potvrdeniefo/potvrdenie_fo_v16_poucenie.pdf',
+'_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function ZnovuPotvrdenie()
   {
-   window.open('../mzdy/potvrd_fo2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/potvrd_fo2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1',
+'_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function TlacPotvrdPrijFO()
   {
-   window.open('../mzdy/potvrd_fo2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/potvrd_fo2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0',
+'_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravZamestnanca()
   {
-   window.open('zamestnanci.php?sys=<?php echo $sys; ?>&copern=8&page=1&cislo_oc=<?php echo $cislo_oc;?>&h_oc=<?php echo $cislo_oc;?>', '_blank','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
+   window.open('zamestnanci.php?sys=<?php echo $sys; ?>&copern=8&page=1&cislo_oc=<?php echo $cislo_oc;?>&h_oc=<?php echo $cislo_oc;?>',
+'_blank','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
   }
   function DetiZamestnanca()
   {
-   window.open('../mzdy/deti.php?copern=1&drupoh=1&page=1&zkun=1&cislo_oc=<?php echo $cislo_oc;?>', '_blank','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/deti.php?copern=1&drupoh=1&page=1&zkun=1&cislo_oc=<?php echo $cislo_oc;?>',
+'_blank','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
   }
   function TlacMzdovyList()
   {
-   window.open('../mzdy/mzdevid.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1', '_blank','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/mzdevid.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1',
+'_blank','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
 </HEAD>
@@ -1185,7 +1196,7 @@ if ( $copern == 20 )
    <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
   </tr>
   <tr>
-   <td class="header">Potvrdenie o príjmoch FO - <span class="subheader"><?php echo "$oc $meno $prie ";?></span>
+   <td class="header">Potvrdenie o príjmoch FO - <span class="subheader"><?php echo "$oc $meno $prie"; ?></span>
 <?php if ( $novy == 0 ) { ?>
     <img src='../obr/prev.png' onclick="prevOC();" title="Os.è. <?php echo $prev_oc; ?>" class="navoc-icon">
     <img src='../obr/next.png' onclick="nextOC();" title="Os.è. <?php echo $next_oc; ?>" class="navoc-icon">
@@ -1210,42 +1221,44 @@ if ( $copern == 20 )
 <div class="navbar">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-top-formsave" style="top:4px;">
 </div>
-<img src="../dokumenty/dan_z_prijmov2015/dan_zo_zavislej2015/potvrdeniefo/potvrdeniefo_v15_form.jpg"
-     alt="tlaèivo Potvrdenie o príjmoch FO pre rok 2015 1.strana 273kB" class="form-background">
-<input type="checkbox" name="konx1" value="1" style="top:62px; left:828px;"/>
+<img src="../dokumenty/dan_z_prijmov2016/dan_zo_zavislej2016/potvrdeniefo/potvrdenie_fo_v16_form.jpg"
+     alt="tlaèivo Potvrdenie o príjmoch FO pre rok 2016 1.strana 273kB" class="form-background">
+<input type="checkbox" name="konx1" value="1" style="top:50px; left:828px;"/>
 
-<!-- I. ZAMESTNANEC -->
+<!-- I.ZAMESTNANEC -->
 <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();"
      title="Upravi údaje o zamestnancovi" class="btn-row-tool"
-     style="top:88px; left:325px; width:14px; height:14px;">
-<span class="text-echo" style="top:128px; left:100px;"><?php echo $prie; ?></span>
-<span class="text-echo" style="top:128px; left:392px;"><?php echo $meno; ?></span>
-<span class="text-echo" style="top:128px; left:572px;"><?php echo $rodne; ?></span>
-<span class="text-echo" style="top:152px; left:220px;"><?php echo $ptitl; ?></span>
-<span class="text-echo" style="top:152px; left:615px;"><?php echo $ztitz; ?></span>
-<span class="text-echo" style="top:190px; left:135px;"><?php echo $uli; ?></span>
-<span class="text-echo" style="top:190px; left:515px;"><?php echo $cdm; ?></span>
-<span class="text-echo" style="top:190px; left:682px;"><?php echo $psc; ?></span>
-<span class="text-echo" style="top:212px; left:135px;"><?php echo $mes; ?></span>
-<span class="text-echo" style="top:212px; left:510px;"><?php echo $zstat; ?></span>
-<input type="checkbox" name="obmedz" value="1" style="top:238px; left:825px;"/> <!-- dopyt, neukladá -->
+     style="top:73px; left:325px; width:14px; height:14px;">
+<span class="text-echo" style="top:114px; left:100px;"><?php echo $prie; ?></span>
+<span class="text-echo" style="top:114px; left:392px;"><?php echo $meno; ?></span>
+<span class="text-echo" style="top:114px; left:572px;"><?php echo $rodne; ?></span>
+<span class="text-echo" style="top:137px; left:220px;"><?php echo $ptitl; ?></span>
+<span class="text-echo" style="top:137px; left:615px;"><?php echo $ztitz; ?></span>
+<span class="text-echo" style="top:176px; left:135px;"><?php echo $uli; ?></span>
+<span class="text-echo" style="top:176px; left:515px;"><?php echo $cdm; ?></span>
+<span class="text-echo" style="top:176px; left:682px;"><?php echo $psc; ?></span>
+<span class="text-echo" style="top:198px; left:135px;"><?php echo $mes; ?></span>
+<span class="text-echo" style="top:198px; left:510px;"><?php echo $zstat; ?></span>
+<input type="checkbox" name="obmedz" value="1" style="top:222px; left:825px;"/>
 
-<!-- II. PRIJMY -->
-<input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:298px; left:755px;" title="r01"/>
-<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:331px; left:755px;" title="r01a"/>
-<input type="text" name="r12a" id="r12a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:364px; left:755px;" title="r01b"/>
-<input type="text" name="r12b" id="r12b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:397px; left:755px;" title="r01c"/>
-<input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:430px; left:755px;" title="r02"/>
-<input type="text" name="r02" id="r02" style="width:91px; top:463px; left:755px;" title="r03"/>
-<input type="text" name="r03a" id="r03a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:496px; left:755px;" title="r04"/>
-<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:528px; left:755px;" title="r04a"/>
-<input type="text" name="r03b" id="r03b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:561px; left:755px;" title="r04b"/>
-<input type="text" name="r04c" id="r04c" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:594px; left:755px;" title="r04c"/>
-<input type="text" name="r04" id="r04" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:627px; left:755px;" title="r05"/>
-<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:660px; left:755px;" title="r06"/>
+<!-- II.PRIJMY -->
+<input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:275px; left:755px;" title="r01"/> <!-- dopyt, cez sumár -->
+<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:308px; left:755px;" title="r01a"/>
+<input type="text" name="r12a" id="r12a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:341px; left:755px;" title="r01b"/>
+<input type="text" name="r12b" id="r12b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:374px; left:755px;" title="r01c"/>
+<input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:407px; left:755px;" title="r02"/>
+<input type="text" name="r11m" id="r11m" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:439px; left:755px;" title="r03"/>
+<input type="text" name="r02" id="r02" style="width:91px; top:460px; left:755px;" title="r04"/>
+<input type="text" name="r03a" id="r03a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:496px; left:755px;" title="r05"/> <!-- dopyt, dáme cez sumár -->
+<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:528px; left:755px;" title="r05a"/>
+<input type="text" name="r03b" id="r03b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:561px; left:755px;" title="r05b"/>
+<input type="text" name="r04c" id="r04c" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:594px; left:755px;" title="r05c"/>
+<input type="text" name="r04" id="r04" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:627px; left:755px;" title="r06"/>
+<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:660px; left:755px;" title="r07"/>
 <!-- NCZD -->
-<input type="text" name="r06sum" id="r06sum" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:716px; left:755px;" title="r07"/>
-<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:749px; left:755px;" title="r08"/>
+<input type="text" name="r06sum" id="r06sum" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:716px; left:755px;" title="r08"/>
+<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:749px; left:755px;" title="r09"/>
+<input type="text" name="r10dds" id="r10dds" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:749px; left:755px;" title="r10"/>
 <!-- DAN.BONUS -->
 <input type="text" name="r07det1" id="r07det1" style="width:368px; top:822px; left:138px;"/>
 <input type="text" name="r07rod1" id="r07rod1" style="width:110px; top:822px; left:517px;"/>
@@ -1275,7 +1288,7 @@ if ( $copern == 20 )
 <input type="text" name="r07rod7" id="r07rod7" style="width:110px; top:1019px; left:517px;"/>
 <input type="text" name="r07mes7" id="r07mes7" style="width:90px; top:1019px; left:638px;"/>
 <input type="text" name="r07sum7" id="r07sum7" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:1019px; left:755px;"/>
-<input type="text" name="r08" id="r08" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:1052px; left:755px;"/>
+<input type="text" name="r08" id="r08" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:1052px; left:755px;"/> <!-- dopyt, cez sumár -->
 
 <!-- III. ZAM.PREMIA -->
 <!-- riadok 10 -->
