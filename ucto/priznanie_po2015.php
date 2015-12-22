@@ -2971,7 +2971,7 @@ if ( $copern == 102 )
     <div class="bar-btn-form-tool">
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
      <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="Naèíta údaje z minulého roka" class="btn-form-tool">
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick="POdoXML();" title="Export do XML" class="btn-form-tool"> <!-- dopyt, nie je funkèné -->
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="POdoXML();" title="Export do XML" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacPO();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
    </td>
@@ -3164,7 +3164,16 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r510" id="r510" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:559px; left:529px;"/>
 <input type="text" name="r550" id="r550" onkeyup="CiarkaNaBodku(this);" style="width:36px; top:624px; left:529px;"/>
 <input type="text" name="r600" id="r600" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:663px; left:529px;"/>
-<input type="text" name="r610text" id="r610text" style="width:420px; top:741px; left:55px;"/>
+<select size="1" id="r610text" name="r610text" style="width:426px; top:740px; left:55px;">
+ <option value=""></option>
+ <option value="§ 30a zákona è. 595/2003 Z.z.">§ 30a zákona è. 595/2003 Z.z.</option>
+ <option value="§ 30b zákona è. 595/2003 Z.z.">§ 30b zákona è. 595/2003 Z.z.</option>
+ <option value="§ 35 zákona è. 366/1999 Z. z.">§ 35 zákona è. 366/1999 Z. z.</option>
+ <option value="§ 35a zákona è. 366/1999 Z. z.">§ 35a zákona è. 366/1999 Z. z.</option>
+ <option value="§ 35a ods. 9 zákona è. 366/1999 Z. z.">§ 35a ods. 9 zákona è. 366/1999 Z. z.</option>
+ <option value="§ 35b zákona è. 366/1999 Z. z.">§ 35b zákona è. 366/1999 Z. z.</option>
+ <option value="§ 35c zákona è. 366/1999 Z. z.">§ 35c zákona è. 366/1999 Z. z.</option>
+</select>
 <input type="text" name="r610" id="r610" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:734px; left:529px;"/>
 <input type="text" name="r700" id="r700" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:776px; left:529px;"/>
 <input type="text" name="r710" id="r710" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:841px; left:529px;"/>
@@ -3201,6 +3210,8 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r1100" id="r1100" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:504px; left:529px;"/>
 <input type="text" name="r1101" id="r1101" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:543px; left:529px;"/>
 <input type="text" name="r1110" id="r1110" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:627px; left:529px;"/>
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick=";"
+      title="Vypoèíta výšku preddavku na daò" class="btn-row-tool" style="top:627px; left:833px;">
 <input type="text" name="dadod" id="dadod" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:695px; left:529px;"/>
 <input type="text" name="r1120" id="r1120" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:735px; left:529px;"/>
 <input type="text" name="r1130" id="r1130" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:773px; left:529px;"/>
