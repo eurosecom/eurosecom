@@ -837,18 +837,19 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
   $cicz=$riaddok->cicz;
   }
 
+//poistne a prispevky celkom r05
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO".
 " SET r03a=r09+r03b+r04c  WHERE oc = $cislo_oc";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//vypocitaj r05
+//ciastkovy zaklad dane r06
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO".
 " SET r04=r01-r03a  WHERE r01 > 0 AND oc = $cislo_oc";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//vypocitaj r09spolu
+//vdanovy bonus spolu r11
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO".
 " SET r08=r07sum1+r07sum2+r07sum3+r07sum4+r07sum5+r07sum6  WHERE oc = $cislo_oc";
 //echo $sqtoz;
