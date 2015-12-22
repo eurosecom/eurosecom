@@ -386,9 +386,11 @@ $sql = "SELECT r10dds FROM F$kli_vxcf"."_mzdpotvrdenieFO ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD r11m DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD new2016 DECIMAL(2,0) DEFAULT 0 AFTER datv";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD r10dds DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD r11m DECIMAL(10,2) DEFAULT 0 AFTER new2016";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD r10dds DECIMAL(10,2) DEFAULT 0 AFTER new2016";
 $vysledek = mysql_query("$sql");
 }
 
@@ -808,7 +810,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdpotvrdenieFO".
 "0,0,0,0,0,0,0,0,0,0,0,0,1,".
 "0,0,0,0,0,0,0,0,0,0,0,0,1,".
 "podpa,podpn,0,1,0,'$dat_dat', ".
-"0,0,0 ".
+"0,0,0, ". //new2015
+"0,0,0 ".  //new2016
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " GROUP BY oc".
 "";
