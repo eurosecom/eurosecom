@@ -22,8 +22,12 @@ require_once("../pswd/password.php");
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=0;
+$rmc=1;
 $rmc1=0;
+
+//.jpg podklad
+$jpg_cesta="../dokumenty/dan_z_prijmov2016/dan_zo_zavislej2016/mesacny_prehlad/prehlad_v16";
+$jpg_popis="tlaËivo MesaËn˝ prehæad o odveden˝ch a zrazen˝ch preddavkoch pre rok ".$kli_vrok;
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -794,22 +798,23 @@ $duli = $riadokc->duli;
 $dcdm = $riadokc->dcdm;
 $dpsc = $riadokc->dpsc;
 $dmes = $riadokc->dmes;
+$dstat = $riadokc->dstat; //dopyt, otestovaù
 $dtel = $riadokc->dtel;
-$dfax = $riadokc->dfax;
+//$dfax = $riadokc->dfax;
      }
    }
 }
-if ( $fir_uctt03 != 999 ) {
+if ( $fir_uctt03 != 999 )
+{
 $dmeno=""; $dprie=""; $dtitl=""; $dtitz="";
 $duli=$fir_fuli; $dcdm=$fir_fcdm; $dmes=$fir_fmes; $dpsc=$fir_fpsc;
-$dtel=$fir_ftel; $dfax=$fir_ffax;
-                          }
+$dtel=$fir_ftel; $dfax=$fir_ffax; $dstat="Slovensko";
+}
 $fir_uctt03tlac=$fir_uctt03;
-if ( $fir_uctt03 == 999 ) {
-$fir_fnaz=""; $fir_uctt03tlac=""; 
-                          }
-
-
+if ( $fir_uctt03 == 999 )
+{
+$fir_fnaz=""; $fir_uctt03tlac="";
+}
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -817,32 +822,20 @@ $fir_fnaz=""; $fir_uctt03tlac="";
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - Prehæad dane mesaËn˝</title>
 <style type="text/css">
-div.navbar {
-  overflow: auto;
-  width: 100%;
-  background-color: #add8e6;
-}
-img.form-background {
-  display: block;
-  width: 930px;
-  height: 1260px;
-  margin: 30px 0 0 25px;
-}
-div.wrap-form-background {
-  overflow: hidden;
-  width: 950px;
-  height: 1300px;
-  background-color: #fff;
-}
 span.text-echo {
   font-size: 20px;
-  letter-spacing: 13px;
+  letter-spacing: 12px;
+}
+div.input-echo {
+  position: absolute;
+  font-size: 18px;
+  background-color: #fff;
 }
 img.btn-row-tool {
   width: 20px;
   height: 20px;
 }
-form.odved-area {
+form.odved-area { /* dopyt, preveriù */
   display: none;
   position: absolute;
   top: 565px;
@@ -875,7 +868,7 @@ table.odved-box td > input {
   margin-left: 5px;
   font-size: 13px;
 }
-div.content-xml {
+div.content-xml { /* dopyt, preveriù */
   position: relative;
   width: 950px;
   height: 100px;
@@ -915,10 +908,10 @@ div.content-xml > a:hover { text-decoration: underline; }
    document.formv1.r01ad.value = '<?php echo "$r01ad_sk";?>';
    document.formv1.r02a.value = '<?php echo "$r02a";?>';
    document.formv1.r03a.value = '<?php echo "$r03a";?>';
-   document.formv1.r04a.value = '<?php echo "$r04a";?>';
+//   document.formv1.r04a.value = '<?php echo "$r04a";?>';
    document.formv1.r05a.value = '<?php echo "$r05a";?>';
    document.formv1.r06a.value = '<?php echo "$r06a";?>';
-   document.formv1.r07a.value = '<?php echo "$r07a";?>';
+//   document.formv1.r07a.value = '<?php echo "$r07a";?>';
    document.formv1.r08a.value = '<?php echo "$r08a";?>';
    document.formv1.r08ad.value = '<?php echo "$r08ad_sk";?>';
    document.formv1.ra1a.value = '<?php echo "$ra1a";?>';
@@ -966,10 +959,6 @@ div.content-xml > a:hover { text-decoration: underline; }
 
   function PoucVyplnenie()
   {
-   window.open('../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/mesacny_prehlad/PREHLADv13_poucenie.pdf', '_blank');
-  }
-  function PoucVyplnenie2016()
-  {
    window.open('../dokumenty/dan_z_prijmov2016/dan_zo_zavislej2016/mesacny_prehlad/prehlad_v16_poucenie.pdf', '_blank');
   }
   function OdvodDane()
@@ -979,12 +968,12 @@ div.content-xml > a:hover { text-decoration: underline; }
   }
   function CitajMzlist()
   { 
-   window.open('../mzdy/prehladdane_mesacny2016.php?h_drp=<?php echo $h_drp; ?>&h_dap=<?php echo $h_dap; ?>&copern=26&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>', '_self' );
+   window.open('../mzdy/prehladdane_mesacny2016.php?h_drp=<?php echo $h_drp; ?>&h_dap=<?php echo $h_dap; ?>&copern=26&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>', '_self');
   }
   function TlacPrehlad(strana)
   {
    window.open('../mzdy/prehladdane_mesacny2016.php?h_drp=1&h_dap=<?php echo $h_dap; ?>&copern=10&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>&strana=' + strana + '&tt=1',
-    '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravFO()
   {
@@ -1001,7 +990,7 @@ div.content-xml > a:hover { text-decoration: underline; }
   function XMLPrehlad()
   {
    window.open('../mzdy/prehladdane_mesacny2016.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
 </HEAD>
@@ -1021,15 +1010,9 @@ if ( $copern == 20 )
   <td class="header">mesaËn˝ Prehæad o preddavkoch na daÚ</td>
   <td>
    <div class="bar-btn-form-tool">
-    <?php if( $kli_vrok <  2015 ) { ?>
-    <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();"
-    <?php                         } ?>
-    <?php if( $kli_vrok >= 2015 ) { ?>
-    <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie2015();"
-    <?php                         } ?>
-     title="PouËenie na vyplnenie" class="btn-form-tool">
-    <img src="../obr/ikony/upbox_blue_icon.png" onclick="XMLPrehlad();"
-     title="Export do XML" class="btn-form-tool">
+    <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="PouËenie na vyplnenie" class="btn-form-tool">
+
+    <img src="../obr/ikony/upbox_blue_icon.png" onclick="XMLPrehlad();" title="Export do XML" class="btn-form-tool">
     <img src="../obr/ikony/download_blue_icon.png" onclick="CitajMzlist();"
      title="NaËÌtaù ˙daje z MZDOV›CH LISTOV" style="top:235px; left:388px;" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacPrehlad(9999);"
@@ -1058,118 +1041,104 @@ $source="prehladdane_mesacny2016.php";
 </div>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<div class="wrap-form-background">
-<img src="../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/mesacny_prehlad/PREHLADv13_v1_4-1.jpg"
- alt="tlaËivo MesaËn˝ prehæad o odveden˝ch a zrazen˝ch preddavkoch 1.strana 283kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 1.strana 283kB">
 <?php
 $kli_vrokx = substr($kli_vrok,2,2);
 $mesiacx=$mesiac; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
 ?>
 <!-- danove -->
-<span class="text-echo" style="top:342px; left:47px;"><?php echo $fir_fdic; ?></span>
-<span class="text-echo" style="top:398px; left:47px; letter-spacing:0;"><?php echo $fir_uctt01; ?></span>
+<span class="text-echo" style="top:314px; left:56px;"><?php echo $fir_fdic; ?></span>
+<span class="text-echo" style="top:367px; left:56px; letter-spacing:0;"><?php echo $fir_uctt01; ?></span>
 <!-- Druh prehladu -->
-<input type="radio" id="druh1" name="druh" value="1" style="top:345px; left:426px;"/>
-<input type="radio" id="druh2" name="druh" value="2" style="top:373px; left:426px;"/>
-
+<input type="radio" id="druh1" name="druh" value="1" style="top:318px; left:419px;"/>
+<input type="radio" id="druh2" name="druh" value="2" style="top:346px; left:419px;"/>
 <!-- obdobia -->
-<span class="text-echo" style="top:325px; left:729px;"><?php echo $mesiacx; ?></span>
-<span class="text-echo" style="top:325px; left:878px;"><?php echo $kli_vrokx; ?></span>
+<span class="text-echo" style="top:299px; left:711px;"><?php echo $mesiacx; ?></span>
+<span class="text-echo" style="top:299px; left:855px;"><?php echo $kli_vrokx; ?></span>
 <input type="text" name="dopr" id="dopr" onkeyup="CiarkaNaBodku(this);"
- style="width:202px; top:390px; left:643px;"/>
+       style="width:195px; top:360px; left:628px;"/>
 
 <!-- FO -->
 <img src="../obr/ikony/pencil_blue_icon.png" title="Upraviù ˙daje FO"
- onclick="UpravFO();" class="btn-row-tool" style="top:436px; left:150px;">
-<input type="text" name="dprie" id="dprie" value="<?php echo $dprie; ?>"
- disabled="disabled" class="nofill" style="width:372px; top:486px; left:43px;"/>
-<input type="text" name="dmeno" id="dmeno" value="<?php echo $dmeno; ?>"
- disabled="disabled" class="nofill" style="width:253px; top:486px; left:437px;"/>
-<input type="text" name="dtitl" id="dtitl" value="<?php echo "$dtitl $dtitz"; ?>"
- disabled="disabled" class="nofill" style="width:205px; top:486px; left:712px;"/>
+ onclick="UpravFO();" class="btn-row-tool" style="top:423px; left:130px;">
+<div class="input-echo" style="width:360px; top:447px; left:52px;"><?php echo $dprie; ?></div>
+<div class="input-echo" style="width:245px; top:447px; left:431px;"><?php echo $dmeno; ?></div>
+<div class="input-echo" style="width:113px; top:447px; left:695px;"><?php echo $dtitl; ?></div>
+<div class="input-echo" style="width:68px; top:447px; left:827px;"><?php echo $dtitz; ?></div>
 <!-- PO -->
-<input type="text" name="obchm" id="obchm" value="<?php echo $fir_fnaz; ?>"
- disabled="disabled" class="nofill" style="width:755px; top:580px; left:43px;"/>
-<input type="text" name="pfor" id="pfor" value="<?php echo $fir_uctt03tlac; ?>"
- disabled="disabled" class="nofill" style="width:62px; top:580px; left:843px;"/>
+<div class="input-echo" style="width:727px; top:519px; left:52px;"><?php echo $fir_fnaz; ?></div>
+<div class="input-echo" style="width:60px; top:519px; left:822px;"><?php echo $fir_uctt03tlac; ?></div> <!-- dopyt, netlaËiù, keÔ bude fo -->
 <!-- Sidlo PO alebo pobyt FO -->
-<input type="text" name="duli" id="duli" value="<?php echo $duli; ?>"
- disabled="disabled" class="nofill" style="width:659px; top:670px; left:43px;"/>
-<input type="text" name="dcdm" id="dcdm" value="<?php echo $dcdm; ?>"
- disabled="disabled" class="nofill" style="width:182px; top:670px; left:735px;"/>
-<input type="text" name="dpsc" id="dpsc" value="<?php echo $dpsc; ?>"
- disabled="disabled" class="nofill" style="width:109px; top:727px; left:43px;"/>
-<input type="text" name="dmes" id="dmes" value="<?php echo $dmes; ?>"
- disabled="disabled" class="nofill" style="width:731px; top:727px; left:186px;"/>
-<input type="text" name="tel" id="tel" value="<?php echo $dtel; ?>"
- disabled="disabled" class="nofill" style="width:300px; top:783px; left:43px;"/>
-<input type="text" name="email" id="email" value="<?php echo $dfax; ?>"
- disabled="disabled" class="nofill" style="width:301px; top:783px; left:377px;"/>
+<div class="input-echo" style="width:635px; top:593px; left:52px;"><?php echo $duli; ?></div>
+<div class="input-echo" style="width:174px; top:593px; left:720px;"><?php echo $dcdm; ?></div>
+<div class="input-echo" style="width:106px; top:649px; left:52px;"><?php echo $dpsc; ?></div>
+<div class="input-echo" style="width:452px; top:649px; left:178px;"><?php echo $dmes; ?></div>
+<div class="input-echo" style="width:245px; top:649px; left:649px;"><?php echo $dstat; ?></div> <!-- dopyt, rozbehaù -->
 
-<!-- Vypracoval -->
-<span class="text-echo" style="top:865px; left:47px; letter-spacing:0;"><?php echo $zrobil; ?></span>
-<?php
-$pole = explode("/", $fir_mzdt04);
-$tel_pred=1*$pole[0];
-$tel_za=$pole[1];
-?>
-<span class="text-echo" style="top:935px; left:71px;"><?php echo $tel_pred; ?></span>
-<span class="text-echo" style="top:935px; left:167px;"><?php echo $tel_za; ?></span>
-<input type="text" name="dap" id="dap" onkeyup="CiarkaNaBodku(this);"
- style="width:204px; top:979px; left:43px;"/>
-</div> <!-- koniec wrap-form-background -->
+<!-- Podava -->
+<!-- dopyt, vöetko novÈ -->
+
+
+
+<!-- tel a email -->
+<div class="input-echo" style="width:290px; top:1017px; left:52px;"><?php echo $dtel; ?></div>
+<div class="input-echo" style="width:520px; top:1017px; left:374px;"><?php echo $fir_fem1; ?></div>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<div class="wrap-form-background">
-<img src="../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/mesacny_prehlad/PREHLADv13_v1_4-2.jpg"
- alt="tlaËivo MesaËn˝ prehæad o odveden˝ch a zrazen˝ch preddavkoch 2.strana 260kB" class="form-background">
-<span class="text-echo" style="top:76px; left:386px; letter-spacing:12.3px;"><?php echo $fir_fdic; ?></span>
+<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 2.strana 260kB">
+<span class="text-echo" style="top:75px; left:390px;"><?php echo $fir_fdic; ?></span>
 
-<!-- I. cast -->
+<!-- I.cast -->
 <input type="text" name="r00a" id="r00a" onkeyup="CiarkaNaBodku(this);"
- style="width:258px; top:168px; left:638px;"/>
+       style="width:255px; top:163px; left:638px;"/>
 <input type="text" name="r01ad" id="r01ad" onkeyup="CiarkaNaBodku(this);"
- style="width:200px; top:216px; left:439px;"/>
+       style="width:198px; top:211px; left:442px;"/>
 <input type="text" name="r01a" id="r01a" onkeyup="CiarkaNaBodku(this);"
- style="width:235px; top:216px; left:661px;"/>
+       style="width:232px; top:211px; left:661px;"/>
 <input type="text" name="r02a" id="r02a" onkeyup="CiarkaNaBodku(this);"
- style="width:235px; top:261px; left:661px;"/>
+       style="width:232px; top:255px; left:661px;"/>
 <input type="text" name="r03a" id="r03a" onkeyup="CiarkaNaBodku(this);"
- style="width:235px; top:306px; left:661px;"/>
-<input type="text" name="r04a" id="r04a" value="<?php echo $r04a; ?>"
- disabled="disabled" class="nofill" style="width:235px; top:352px; left:661px;"/>
+       style="width:232px; top:300px; left:661px;"/>
+<div class="input-echo right" style="width:233px; top:345px; left:661px;"><?php echo $r04a; ?>&nbsp;</div>
 <input type="text" name="r05a" id="r05a" onkeyup="CiarkaNaBodku(this);"
- style="width:235px; top:405px; left:661px;"/>
+       style="width:232px; top:397px; left:661px;"/>
 <input type="text" name="r06a" id="r06a" onkeyup="CiarkaNaBodku(this);"
- style="width:235px; top:467px; left:661px;"/>
-<input type="text" name="r07a" id="r07a" value="<?php echo $r07a; ?>"
- disabled="disabled" class="nofill" style="width:235px; top:520px; left:661px;"/>
+       style="width:232px; top:459px; left:661px;"/>
+<div class="input-echo right" style="width:233px; top:512px; left:661px;"><?php echo $r07a; ?>&nbsp;</div>
 <input type="text" name="r08ad" id="r08ad" onkeyup="CiarkaNaBodku(this);"
- style="width:200px; top:565px; left:439px;"/>
+       style="width:198px; top:556px; left:442px;"/>
 <input type="text" name="r08a" id="r08a" onkeyup="CiarkaNaBodku(this);"
- style="width:235px; top:565px; left:661px;"/>
+       style="width:232px; top:556px; left:661px;"/>
 <img src="../obr/ikony/downbox_blue_icon.png" title="Preniesù z ˙ËtovnÌctva"
- onclick="odvedarea.style.display='block';" class="btn-row-tool"
- style="width:25px; height:25px; top:567px; right:9px;">
+     onclick="odvedarea.style.display='block';" class="btn-row-tool"
+     style="width:25px; height:25px; top:558px; right:13px;">
 
-<!-- II. cast -->
+<!-- II.cast -->
 <input type="text" name="ra1a" id="ra1a" onkeyup="CiarkaNaBodku(this);"
- style="width:189px; top:676px; left:708px;"/>
+       style="width:186px; top:657px; left:708px;"/>
 <input type="text" name="rb1a" id="rb1a" onkeyup="CiarkaNaBodku(this);"
- style="width:211px; top:721px; left:686px;"/>
+       style="width:208px; top:697px; left:686px;"/>
 <input type="text" name="rc1a" id="rc1a" onkeyup="CiarkaNaBodku(this);"
- style="width:211px; top:766px; left:686px;"/>
+       style="width:208px; top:737px; left:686px;"/>
 <input type="text" name="rd1a" id="rd1a" onkeyup="CiarkaNaBodku(this);"
- style="width:189px; top:811px; left:708px;"/>
+       style="width:186px; top:778px; left:708px;"/>
 <input type="text" name="re1a" id="re1a" onkeyup="CiarkaNaBodku(this);"
- style="width:211px; top:856px; left:686px;"/>
+       style="width:208px; top:818px; left:686px;"/>
 <input type="text" name="rf1a" id="rf1a" onkeyup="CiarkaNaBodku(this);"
- style="width:211px; top:901px; left:686px;"/>
+       style="width:208px; top:857px; left:686px;"/>
 
-<!-- III. cast -->
-<input type="checkbox" name="zbon" value="1" style="top:998px; left:49px;"/>
+<!-- III.cast -->
+<input type="checkbox" name="zbon" value="1" style="top:944px; left:59px;"/>
+<input type="text" name="sbon" id="sbon" onkeyup="CiarkaNaBodku(this);"
+       style="width:186px; top:940px; left:702px;"/>
+<input type="checkbox" name="zzpr" value="1" style="top:982px; left:59px;"/>
+<input type="text" name="szpr" id="szpr" onkeyup="CiarkaNaBodku(this);"
+       style="width:186px; top:979px; left:702px;"/>
+
 <input type="text" name="vbon" id="vbon" style="width:15px; top:995px; left:852px;"/>
 <script>
   function klikpbon()
@@ -1186,15 +1155,14 @@ $tel_za=$pole[1];
 <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajDanBonus();"
  title="NaËÌtaù daÚov˝ bonus vyplaten˝ z prostriedkov zamestnanca ( II.Ëasù riadok C ) z prehæadov za <?php echo $vbon; ?>.ötvrùrok"
  style="top:1028px; left:220px;" class="btn-row-tool">
-<input type="text" name="sbon" id="sbon" onkeyup="CiarkaNaBodku(this);"
- style="width:190px; top:1051px; left:177px;"/>
+
 <img src="../obr/ikony/info_blue_icon.png" title="Firemn˝ ˙Ëet Ë. 1"
  class="btn-row-tool" style="top:1030px; left:467px; cursor:default;">
 <span class="text-echo" style="top:1056px; left:403px; letter-spacing:12.3px;"><?php echo $fir_fuc1; ?></span>
 <span class="text-echo" style="top:1056px; left:809px; letter-spacing:12.3px;"><?php echo $fir_fnm1; ?></span>
 
 <!-- IV. cast -->
-<input type="checkbox" name="zzpr" value="1" style="top:1142px; left:49px;"/>
+
 <input type="text" name="rzpr" id="rzpr" maxlength="2"
  style="width:37px; top:1141px; left:725px;"/>
 <script>
@@ -1212,13 +1180,26 @@ $tel_za=$pole[1];
 <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajZamPremia();"
  title="NaËÌtaù zamestnaneck˙ prÈmiu za rok 20<?php echo $rzpr; ?> vyplaten˙ z prostriedkov zamestnanca ( II.Ëasù riadok F ) z prehæadov za <?php echo $vbon; ?>.ötvrùrok"
   style="top:1167px; left:220px;" class="btn-row-tool">
-<input type="text" name="szpr" id="szpr" onkeyup="CiarkaNaBodku(this);"
- style="width:190px; top:1190px; left:177px;"/>
+
 <img src="../obr/ikony/info_blue_icon.png" title="Firemn˝ ˙Ëet Ë. 1"
  class="btn-row-tool" style="top:1168px; left:467px; cursor:default;">
 <span class="text-echo" style="top:1195px; left:403px; letter-spacing:12.3px;"><?php echo $fir_fuc1; ?></span>
 <span class="text-echo" style="top:1195px; left:809px; letter-spacing:12.3px;"><?php echo $fir_fnm1; ?></span>
-</div> <!-- koniec wrap-form-background -->
+
+<!-- Vypracoval -->
+<!-- <span class="text-echo" style="top:865px; left:47px; letter-spacing:0;"><?php echo $zrobil; ?></span> -->
+<?php
+$pole = explode("/", $fir_mzdt04);
+$tel_pred=1*$pole[0];
+$tel_za=$pole[1];
+?>
+<!-- <span class="text-echo" style="top:935px; left:71px;"><?php echo $tel_pred; ?></span> -->
+<!-- <span class="text-echo" style="top:935px; left:167px;"><?php echo $tel_za; ?></span> -->
+<!--
+ <input type="text" name="dap" id="dap" onkeyup="CiarkaNaBodku(this);"
+ style="width:204px; top:979px; left:43px;"/>
+-->
+
 <?php                                        } ?>
 
 <div class="navbar">
@@ -1230,7 +1211,7 @@ $tel_za=$pole[1];
 </FORM>
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<FORM name='fkoef' id="odvedarea" method='post' action='#' class="odved-area">
+<FORM name='fkoef' id="odvedarea" method='post' action='#' class="odved-area"> <!-- dopyt, Ëo je toto? -->
  <img src="../obr/ikony/turnoff_blue_icon.png" title="Zavrieù"
   onclick="odvedarea.style.display='none';">
  <table class="odved-box">
