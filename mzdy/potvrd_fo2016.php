@@ -1030,7 +1030,7 @@ div.input-echo {
   {
 <?php if ( $konx1 == 1 ) { ?> document.formv1.konx1.checked = "checked"; <?php } ?>
 <?php if ( $obmedz == 1 ) { ?> document.formv1.obmedz.checked = "checked"; <?php } ?>
-//   document.formv1.r01.value = '<?php echo "$r01";?>';
+   document.formv1.r01.value = '<?php echo "$r01";?>';
    document.formv1.r13.value = '<?php echo "$r13";?>';
    document.formv1.r12a.value = '<?php echo "$r12a";?>';
    document.formv1.r12b.value = '<?php echo "$r12b";?>';
@@ -1194,7 +1194,7 @@ if ( $copern == 20 )
 <input type="checkbox" name="obmedz" value="1" style="top:222px; left:825px;"/>
 
 <!-- II.PRIJMY -->
-<div class="input-echo" style="top:277px; right:100px;"><?php echo $r01; ?></div>
+<input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:275px; left:755px;" title="r01"/>
 <input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:308px; left:755px;" title="r01a"/>
 <input type="text" name="r12a" id="r12a" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:341px; left:755px;" title="r01b"/>
 <input type="text" name="r12b" id="r12b" onkeyup="CiarkaNaBodku(this);" style="width:91px; top:374px; left:755px;" title="r01c"/>
