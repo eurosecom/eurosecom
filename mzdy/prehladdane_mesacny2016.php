@@ -239,6 +239,18 @@ $rzpr = strip_tags($_REQUEST['rzpr']);
 $uprav="NO";
 
 if ( $strana == 1 ) {
+
+$mpprie = strip_tags($_REQUEST['mpprie']);
+$mpmeno = strip_tags($_REQUEST['mpmeno']);
+
+$uprmp = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
+" mpprie='$mpprie', mpmeno='$mpmeno' ".
+" WHERE kkx >= 0 ";
+$upravmp = mysql_query("$uprmp");
+                    }
+
+
+if ( $strana == 1 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET ".
 " druh='$druh', dopr='$dopr_sql', dap='$dap_sql' ".
 " WHERE umex = $kli_vume";
@@ -269,6 +281,46 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
+
+//Osoba podava mesacny prehlad MZDY
+$sql = "SELECT mpstat FROM F".$kli_vxcf."_ufirdalsie";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpprie VARCHAR(30) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpmeno VARCHAR(30) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mptitl VARCHAR(20) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mptitz VARCHAR(30) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mprdc VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpdar DATE NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpdic VARCHAR(15) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpnaz VARCHAR(50) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mppfr VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpuli VARCHAR(30) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpcdm VARCHAR(15) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mppsc VARCHAR(10) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpmes VARCHAR(30) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mptel VARCHAR(30) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpfax VARCHAR(30) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpstat VARCHAR(30) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+}
+//koniec Osoba podava mesacny prehlad MZDY
 
 $sql = "SELECT zamp FROM F$vyb_xcf"."_mzdmesacnyprehladdane";
 $vysledok = mysql_query("$sql");
@@ -363,6 +415,18 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdmesacnyprehladdaneoc ADD dap DATE AFTER pdet";
 $vysledek = mysql_query("$sql");
 }
+//verzia 2016
+$sql = "SELECT ucet FROM F$vyb_xcf"."_mzdmesacnyprehladdane";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdmesacnyprehladdane ADD new2016 DECIMAL(2,0) DEFAULT 0 AFTER druh";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdmesacnyprehladdane ADD post DECIMAL(2,0) DEFAULT 0 AFTER new2016";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdmesacnyprehladdane ADD uce DECIMAL(2,0) DEFAULT 0 AFTER new2016";
+$vysledek = mysql_query("$sql");
+}
 //koniec vytvorenia
 
 
@@ -419,7 +483,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " 0,0,0,0,0, ".
 " 0,0,'0000-00-00', ".
 " 0, ".
-" pdan_dnv,(ozam_np+ozam_sp+ozam_ip+ozam_pn),ozam_zp,0,0,0,0,0,0,'',0 ".
+" pdan_dnv,(ozam_np+ozam_sp+ozam_ip+ozam_pn),ozam_zp,0,0,0,0,0,0,'',0, ".
+" 0,0,0 ".
 " FROM F$kli_vxcfmzdy"."_mzdzalsum ".
 " WHERE ume = $kli_vume ".
 "";
@@ -437,7 +502,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " 0,0,0,0,0, ".
 " 0,0,'0000-00-00', ".
 " 0, ".
-" 0,0,0,0,0,0,0,0,0,'',0 ".
+" 0,0,0,0,0,0,0,0,0,'',0, ".
+" 0,0,0 ".
 " FROM F$kli_vxcf"."_mzdzalvy".
 " WHERE oc > 0 AND dm = 954 AND kc < 0 AND ume = $kli_vume ".
 "";
@@ -458,7 +524,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " 0,0,0,0,0, ".
 " 0,0,'0000-00-00', ".
 " 0, ".
-" 0,0,0,0,0,0,0,0,0,'',0 ".
+" 0,0,0,0,0,0,0,0,0,'',0, ".
+" 0,0,0 ".
 " FROM F$kli_vxcfmzdy"."_mzdzalvy".
 " WHERE oc > 0 AND dm = 903 AND ume = $kli_vume ".
 "";
@@ -477,7 +544,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " 0,0,0,0,0, ".
 " 0,0,'0000-00-00', ".
 " 0, ".
-" 0,0,0,0,0,(-kc),0,0,0,'',0 ".
+" 0,0,0,0,0,(-kc),0,0,0,'',0, ".
+" 0,0,0 ".
 " FROM F$kli_vxcfmzdy"."_mzdzalvy".
 " WHERE oc > 0 AND dm = 902 AND ume = $kli_vume ".
 "";
@@ -494,7 +562,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " 0,0,0,0,0, ".
 " 0,0,'0000-00-00', ".
 " 0, ".
-" 0,0,0,0,0,(-kc),(-kc),0,0,'',0 ".
+" 0,0,0,0,0,(-kc),(-kc),0,0,'',0, ".
+" 0,0,0 ".
 " FROM F$kli_vxcfmzdy"."_mzdzalvy".
 " WHERE oc > 0 AND dm = 952 AND ume = $kli_vume ".
 "";
@@ -511,7 +580,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " 0,0,0,0,0, ".
 " 0,0,'0000-00-00', ".
 " 0, ".
-" 0,0,0,0,0,0,0,(-kc),0,'',0 ".
+" 0,0,0,0,0,0,0,(-kc),0,'',0, ".
+" 0,0,0 ".
 " FROM F$kli_vxcfmzdy"."_mzdzalvy".
 " WHERE oc > 0 AND dm = 953 AND ume = $kli_vume ".
 "";
@@ -529,7 +599,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " 0,0,0,0,0, ".
 " 0,0,'0000-00-00', ".
 " 0, ".
-" SUM(dohod),SUM(socp),SUM(zdrp),0,0,SUM(bona),SUM(bonb),SUM(zamp),0,'',0 ".
+" SUM(dohod),SUM(socp),SUM(zdrp),0,0,SUM(bona),SUM(bonb),SUM(zamp),0,'',0, ".
+" 0,0,0 ".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid." WHERE oc > 0 ".
 " GROUP BY oc".
 "";
@@ -607,7 +678,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdmesacnyprehladdane".
 " 0,0,0,0,0, ".
 " 0,SUM(pzam),'0000-00-00', ".
 " 0, ".
-" 0,SUM(socp),SUM(zdrp),0,0,SUM(bona),SUM(bonb),SUM(zamp),0,'$datumx','$h_drp' ".
+" 0,SUM(socp),SUM(zdrp),0,0,SUM(bona),SUM(bonb),SUM(zamp),0,'$datumx','$h_drp', ".
+" 0,0,0 ".
 " FROM F$kli_vxcf"."_mzdmesacnyprehladdaneoc WHERE umex = $kli_vume ".
 " GROUP BY konx".
 "";
@@ -723,6 +795,15 @@ $oznac = mysql_query("$sqtoz");
 //nacitaj udaje pre upravu
 if ( $copern == 20 OR $copern == 10 )
      {
+$sqlmp = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE kkx >= 0 ";
+$fir_mp = mysql_query($sqlmp);
+$fir_rmp=mysql_fetch_object($fir_mp);
+$mpprie = $fir_rmp->mpprie;
+$mpmeno = $fir_rmp->mpmeno;
+
+//echo $mpprie;
+
+
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdmesacnyprehladdane".
 " WHERE umex = $kli_vume";
 $fir_vysledok = mysql_query($sqlfir);
