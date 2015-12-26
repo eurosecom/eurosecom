@@ -2975,9 +2975,6 @@ if ( $copern == 102 )
    document.formv1.vrpp.checked = false;
   }
 
-</script>
-
-<script type='text/javascript'>
   function NacitatUdaje(riadok)
   {
    var h_riadok = riadok;
@@ -2987,6 +2984,11 @@ if ( $copern == 102 )
   {
    window.open('../ucto/priznaniepo_xml2015.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function InfoPreddDane()
+  {
+   window.open('../dokumenty/dan_z_prijmov2015/dppo2015/dppo_v15_r1110_vypocet.pdf',
+'_blank', 'width=1080, height=540, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
 </HEAD>
@@ -3241,9 +3243,13 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r1050" id="r1050" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:462px; left:529px;"/>
 <input type="text" name="r1100" id="r1100" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:504px; left:529px;"/>
 <input type="text" name="r1101" id="r1101" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:543px; left:529px;"/>
+
+ <img src="../obr/ikony/info_blue_icon.png" title="Spôsob výpoètu preddavku"
+      onclick="InfoPreddDane();" class="btn-row-tool" style="top:627px; left:440px;">
 <input type="text" name="r1110" id="r1110" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:627px; left:529px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="Preddavky();"
       title="Vypoèíta výšku preddavku na daò" class="btn-row-tool" style="top:627px; left:833px;">
+
 <input type="text" name="dadod" id="dadod" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:695px; left:529px;"/>
 <input type="text" name="r1120" id="r1120" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:735px; left:529px;"/>
 <input type="text" name="r1130" id="r1130" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:773px; left:529px;"/>
