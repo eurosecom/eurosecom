@@ -1,0 +1,17 @@
+215;##########Tabulka F73_uctdrdp
+0;rdp;nrd;szd;crz;crd;crz1;crd1;crz2;crd2;crz3;crd3;rxx
+1;27;Daò na vstupe  TUZEMSKO DPH20% paušál;20;0;100;0;;;;0;B2;
+1;125;Daò na vstupe 20% zjednodušená faktúra;20;0;23;0;0;0;0;0;B3;
+1;130;Daò na vstupe 10% zjednodušená faktúra;10;0;22;0;0;0;0;0;B3;
+1;155;Daò na výstupe 20% zjednodušená faktúra ERP;20;3;4;0;0;0;0;0;D1;
+1;160;Daò na výstupe 10% zjednodušená faktúra ERP;10;1;2;0;0;0;0;0;D1;
+1;165;Daò na výstupe 20% zjednodušená faktúra nie ERP;20;3;4;0;0;0;0;0;D2;
+1;170;Daò na výstupe 10% zjednodušená faktúra nie ERP;10;1;2;0;0;0;0;0;D2;
+1;225;Daò na vstupe 20% opravná faktúra;20;0;23;0;0;0;0;0;C2;
+1;230;Daò na vstupe 10% opravná faktúra;10;0;22;0;0;0;0;0;C2;
+1;255;Daò na výstupe 20% opravná faktúra;20;3;4;0;0;0;0;0;C1;
+1;260;Daò na výstupe 10% opravná faktúra;10;1;2;0;0;0;0;0;C1;
+1;335;Samozdanenie na vstupe  20% príjemca=platite¾ §69 ods. 12 písm.f-i;20;9;21;0;0;0;0;1;B1;
+1;361;Daò na výstupe 0% príjemca=platite¾ §69 ods. 12 písm.f-i;0;0;0;0;0;0;0;0;A2;
+1;385;Samozdanenie na výstupe 20% príjemca=platite¾ §69 ods. 12 písm.f-i;20;0;10;0;0;0;0;1;;
+1;461;Daò na výstupe opravná faktúra 0% príjemca=platite¾ §69 ods. 12 písm.f;0;0;0;0;0;0;0;0;C1;
