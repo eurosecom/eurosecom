@@ -239,16 +239,32 @@ $rzpr = strip_tags($_REQUEST['rzpr']);
 $uprav="NO";
 
 if ( $strana == 1 ) {
-
 $mpprie = strip_tags($_REQUEST['mpprie']);
 $mpmeno = strip_tags($_REQUEST['mpmeno']);
+$mptitl = strip_tags($_REQUEST['mptitl']);
+$mptitz = strip_tags($_REQUEST['mptitz']);
+$mprdc = strip_tags($_REQUEST['mprdc']);
+$mpdar = strip_tags($_REQUEST['mpdar']);
+$mpdar_sql = SqlDatum($mpdar);
+$mpdic = strip_tags($_REQUEST['mpdic']);
+$mpnaz = strip_tags($_REQUEST['mpnaz']);
+$mppfr = strip_tags($_REQUEST['mppfr']);
+$mpuli = strip_tags($_REQUEST['mpuli']);
+$mpcdm = strip_tags($_REQUEST['mpcdm']);
+$mppsc = strip_tags($_REQUEST['mppsc']);
+$mpmes = strip_tags($_REQUEST['mpmes']);
+$mpstat = strip_tags($_REQUEST['mpstat']);
+$mptel = strip_tags($_REQUEST['mptel']);
+$mpfax = strip_tags($_REQUEST['mpfax']);
 
 $uprmp = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
-" mpprie='$mpprie', mpmeno='$mpmeno' ".
+" mpprie='$mpprie', mpmeno='$mpmeno', mptitl='$mptitl', mptitz='$mptitz', ".
+" mprdc='$mprdc', mpdar='$mpdar_sql', mpdic='$mpdic', ".
+" mpnaz='$mpnaz', mppfr='$mppfr', mpuli='$mpuli', mpcdm='$mpcdm', ".
+" mppsc='$mppsc', mpmes='$mpmes', mpstat='$mptel', mpprie='$mptel', mpfax='$mpfax' ".
 " WHERE kkx >= 0 ";
 $upravmp = mysql_query("$uprmp");
                     }
-
 
 if ( $strana == 1 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET ".
@@ -800,9 +816,21 @@ $fir_mp = mysql_query($sqlmp);
 $fir_rmp=mysql_fetch_object($fir_mp);
 $mpprie = $fir_rmp->mpprie;
 $mpmeno = $fir_rmp->mpmeno;
-
+$mptitl = $fir_rmp->mptitl;
+$mptitz = $fir_rmp->mptitz;
+$mprdc = $fir_rmp->mprdc;
+$mpdar_sk = SkDatum($fir_rmp->mpdar);
+$mpdic = $fir_rmp->mpdic;
+$mpnaz = $fir_rmp->mpnaz;
+$mppfr = $fir_rmp->mppfr;
+$mpuli = $fir_rmp->mpuli;
+$mpcdm = $fir_rmp->mpcdm;
+$mppsc = $fir_rmp->mppsc;
+$mpmes = $fir_rmp->mpmes;
+$mpstat = $fir_rmp->mpstat;
+$mptel = $fir_rmp->mptel;
+$mpfax = $fir_rmp->mpfax;
 //echo $mpprie;
-
 
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdmesacnyprehladdane".
 " WHERE umex = $kli_vume";
@@ -979,8 +1007,24 @@ div.content-xml > a:hover { text-decoration: underline; }
 <?php if ( $druh == 0 ) { ?> document.formv1.druh1.checked = 'true'; <?php } ?>
 <?php if ( $druh == 1 ) { ?> document.formv1.druh1.checked = 'true'; <?php } ?>
 <?php if ( $druh == 2 ) { ?> document.formv1.druh2.checked = 'true'; <?php } ?>
-   document.formv1.dopr.value = '<?php echo "$dopr_sk";?>';
-   document.formv1.dap.value = '<?php echo "$dap_sk";?>';
+   document.formv1.dopr.value = '<?php echo "$dopr_sk"; ?>';
+   document.formv1.dap.value = '<?php echo "$dap_sk"; ?>';
+   document.formv1.mpprie.value = '<?php echo "$mpprie"; ?>';
+   document.formv1.mpmeno.value = '<?php echo "$mpmeno"; ?>';
+   document.formv1.mptitl.value = '<?php echo "$mptitl"; ?>';
+   document.formv1.mptitz.value = '<?php echo "$mptitz"; ?>';
+   document.formv1.mprdc.value = '<?php echo "$mprdc"; ?>';
+   document.formv1.mpdar.value = '<?php echo "$mpdar_sk"; ?>';
+   document.formv1.mpdic.value = '<?php echo "$mpdic"; ?>';
+   document.formv1.mpnaz.value = '<?php echo "$mpnaz"; ?>';
+   document.formv1.mppfr.value = '<?php echo "$mppfr"; ?>';
+   document.formv1.mpuli.value = '<?php echo "$mpuli"; ?>';
+   document.formv1.mpcdm.value = '<?php echo "$mpcdm"; ?>';
+   document.formv1.mppsc.value = '<?php echo "$mppsc"; ?>';
+   document.formv1.mpmes.value = '<?php echo "$mpmes"; ?>';
+   document.formv1.mpstat.value = '<?php echo "$mpstat"; ?>';
+   document.formv1.mptel.value = '<?php echo "$mptel"; ?>';
+   document.formv1.mpfax.value = '<?php echo "$mpfax"; ?>';
 <?php                                        } ?>
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
@@ -1155,16 +1199,26 @@ $mesiacx=$mesiac; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
 <div class="input-echo" style="width:174px; top:593px; left:720px;"><?php echo $dcdm; ?></div>
 <div class="input-echo" style="width:106px; top:649px; left:52px;"><?php echo $dpsc; ?></div>
 <div class="input-echo" style="width:452px; top:649px; left:178px;"><?php echo $dmes; ?></div>
-<div class="input-echo" style="width:245px; top:649px; left:649px;"><?php echo $dstat; ?></div> <!-- dopyt, rozbeha -->
+<div class="input-echo" style="width:245px; top:649px; left:649px;"><?php echo $dstat; ?></div>
 
 <!-- Podava -->
-<!-- dopyt, všetko nové -->
-
-
-
-<!-- tel a email -->
-<div class="input-echo" style="width:290px; top:1017px; left:52px;"><?php echo $dtel; ?></div>
-<div class="input-echo" style="width:520px; top:1017px; left:374px;"><?php echo $fir_fem1; ?></div>
+<input type="text" name="mpprie" id="mpprie" style="width:358px; top:736px; left:52px;"/>
+<input type="text" name="mpmeno" id="mpmeno" style="width:243px; top:736px; left:431px;"/>
+<input type="text" name="mptitl" id="mptitl" style="width:111px; top:736px; left:695px;"/>
+<input type="text" name="mptitz" id="mptitz" style="width:66px; top:736px; left:827px;"/>
+<input type="text" name="mprdc" id="mprdc" style="width:243px; top:790px; left:52px;"/>
+<input type="text" name="mpdar" id="mpdar" onkeyup="CiarkaNaBodku(this);"
+       style="width:198px; top:790px; left:327px;"/>
+<input type="text" name="mpdic" id="mpdic" style="width:220px; top:790px; left:569px;"/>
+<input type="text" name="mpnaz" id="mpnaz" style="width:725px; top:845px; left:52px;"/>
+<input type="text" name="mppfr" id="mppfr" style="width:58px; top:845px; left:822px;"/>
+<input type="text" name="mpuli" id="mpuli" style="width:633px; top:897px; left:52px;"/>
+<input type="text" name="mpcdm" id="mpcdm" style="width:174px; top:897px; left:718px;"/>
+<input type="text" name="mppsc" id="mppsc" style="width:105px; top:953px; left:52px;"/>
+<input type="text" name="mpmes" id="mpmes" style="width:450px; top:953px; left:178px;"/>
+<input type="text" name="mpstat" id="mpstat" style="width:243px; top:953px; left:649px;"/>
+<input type="text" name="mptel" id="mptel" style="width:289px; top:1015px; left:52px;"/>
+<input type="text" name="mpfax" id="mpfax" style="width:519px; top:1015px; left:373px;"/>
 <?php                                        } ?>
 
 
