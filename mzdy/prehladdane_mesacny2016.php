@@ -261,9 +261,10 @@ $uprmp = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
 " mpprie='$mpprie', mpmeno='$mpmeno', mptitl='$mptitl', mptitz='$mptitz', ".
 " mprdc='$mprdc', mpdar='$mpdar_sql', mpdic='$mpdic', ".
 " mpnaz='$mpnaz', mppfr='$mppfr', mpuli='$mpuli', mpcdm='$mpcdm', ".
-" mppsc='$mppsc', mpmes='$mpmes', mpstat='$mptel', mpprie='$mptel', mpfax='$mpfax' ".
+" mppsc='$mppsc', mpmes='$mpmes', mpstat='$mptel', mptel='$mptel', mpfax='$mpfax' ".
 " WHERE kkx >= 0 ";
 $upravmp = mysql_query("$uprmp");
+echo $uprmp;
                     }
 
 if ( $strana == 1 ) {
@@ -1008,7 +1009,7 @@ div.content-xml > a:hover { text-decoration: underline; }
 <?php if ( $druh == 1 ) { ?> document.formv1.druh1.checked = 'true'; <?php } ?>
 <?php if ( $druh == 2 ) { ?> document.formv1.druh2.checked = 'true'; <?php } ?>
    document.formv1.dopr.value = '<?php echo "$dopr_sk"; ?>';
-   document.formv1.dap.value = '<?php echo "$dap_sk"; ?>';
+   //document.formv1.dap.value = '<?php echo "$dap_sk"; ?>';
    document.formv1.mpprie.value = '<?php echo "$mpprie"; ?>';
    document.formv1.mpmeno.value = '<?php echo "$mpmeno"; ?>';
    document.formv1.mptitl.value = '<?php echo "$mptitl"; ?>';
