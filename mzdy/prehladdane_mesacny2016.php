@@ -223,17 +223,19 @@ $re1a = strip_tags($_REQUEST['re1a']);
 $rf1a = strip_tags($_REQUEST['rf1a']);
 
 $zbon = strip_tags($_REQUEST['zbon']);
-$pbon = strip_tags($_REQUEST['pbon']);
-$ubon = strip_tags($_REQUEST['ubon']);
+//$pbon = strip_tags($_REQUEST['pbon']);
+//$ubon = strip_tags($_REQUEST['ubon']);
 $sbon = strip_tags($_REQUEST['sbon']);
 $vbon = strip_tags($_REQUEST['vbon']);
 
 $zzpr = strip_tags($_REQUEST['zzpr']);
-$pzpr = strip_tags($_REQUEST['pzpr']);
-$uzpr = strip_tags($_REQUEST['uzpr']);
+//$pzpr = strip_tags($_REQUEST['pzpr']);
+//$uzpr = strip_tags($_REQUEST['uzpr']);
 $szpr = strip_tags($_REQUEST['szpr']);
 $rzpr = strip_tags($_REQUEST['rzpr']);
 
+$post = 1*$_REQUEST['post'];
+$uce = 1*$_REQUEST['uce'];
 //$pzam = strip_tags($_REQUEST['pzam']);
 //$pstr = strip_tags($_REQUEST['pstr']);
 $uprav="NO";
@@ -261,15 +263,15 @@ $uprmp = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
 " mpprie='$mpprie', mpmeno='$mpmeno', mptitl='$mptitl', mptitz='$mptitz', ".
 " mprdc='$mprdc', mpdar='$mpdar_sql', mpdic='$mpdic', ".
 " mpnaz='$mpnaz', mppfr='$mppfr', mpuli='$mpuli', mpcdm='$mpcdm', ".
-" mppsc='$mppsc', mpmes='$mpmes', mpstat='$mptel', mptel='$mptel', mpfax='$mpfax' ".
+" mppsc='$mppsc', mpmes='$mpmes', mpstat='$mpstat', mptel='$mptel', mpfax='$mpfax' ".
 " WHERE kkx >= 0 ";
 $upravmp = mysql_query("$uprmp");
-echo $uprmp;
+//echo $uprmp;
                     }
 
 if ( $strana == 1 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET ".
-" druh='$druh', dopr='$dopr_sql', dap='$dap_sql' ".
+" druh='$druh', dopr='$dopr_sql' ".
 " WHERE umex = $kli_vume";
                     }
 
@@ -279,8 +281,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET ".
 " ra1a='$ra1a', rb1a='$rb1a', rc1a='$rc1a', rd1a='$rd1a', re1a='$re1a', rf1a='$rf1a', ".
 " r00a='$r00a', r01a='$r01a', r02a='$r02a', r03a='$r03a', r04a='$r04a', ".
 " r05a='$r05a', r06a='$r06a', r07a='$r07a', r08a='$r08a', ".
-" zbon='$zbon', pbon='$pbon', ubon='$ubon', sbon='$sbon', vbon='$vbon', ".
-" zzpr='$zzpr', pzpr='$pzpr', uzpr='$uzpr', szpr='$szpr', rzpr='$rzpr' ".
+" zbon='$zbon', sbon='$sbon', vbon='$vbon', ".
+" zzpr='$zzpr', szpr='$szpr', rzpr='$rzpr', ".
+" post='$post', uce='$uce', dap='$dap_sql' ".
 " WHERE umex = $kli_vume";
                     }
 //echo $uprtxt;
@@ -843,8 +846,7 @@ $ume = $fir_riadok->umex;
 $druh = $fir_riadok->druh;
 $dopr_sk = SkDatum($fir_riadok->dopr);
 $dap_sk = SkDatum($fir_riadok->dap);
-$zrobil = $fir_mzdt05;
-if ( $fir_mzdt05='' ) $zrobil=$kli_uzmeno." ".$kli_uzprie;
+$zrobil = $fir_mzdt05; if ( $fir_mzdt05='' ) $zrobil=$kli_uzmeno." ".$kli_uzprie;
 
 $r00a = $fir_riadok->r00a;
 $r01a = $fir_riadok->r01a;
@@ -866,19 +868,20 @@ $re1a = $fir_riadok->re1a;
 $rf1a = $fir_riadok->rf1a;
 
 $zbon = $fir_riadok->zbon;
-$pbon = $fir_riadok->pbon;
-$ubon = $fir_riadok->ubon;
+
+
 $sbon = $fir_riadok->sbon;
 $vbon = $fir_riadok->vbon;
 
 $zzpr = $fir_riadok->zzpr;
-$pzpr = $fir_riadok->pzpr;
-$uzpr = $fir_riadok->uzpr;
 $szpr = $fir_riadok->szpr;
 $rzpr = $fir_riadok->rzpr;
 
 $r01ad_sk = SkDatum($fir_riadok->r01ad);
 $r08ad_sk = SkDatum($fir_riadok->r08ad);
+
+$post = $fir_riadok->post;
+$uce = $fir_riadok->uce;
 mysql_free_result($fir_vysledok);
      }
 //koniec nacitania
@@ -1009,7 +1012,6 @@ div.content-xml > a:hover { text-decoration: underline; }
 <?php if ( $druh == 1 ) { ?> document.formv1.druh1.checked = 'true'; <?php } ?>
 <?php if ( $druh == 2 ) { ?> document.formv1.druh2.checked = 'true'; <?php } ?>
    document.formv1.dopr.value = '<?php echo "$dopr_sk"; ?>';
-   //document.formv1.dap.value = '<?php echo "$dap_sk"; ?>';
    document.formv1.mpprie.value = '<?php echo "$mpprie"; ?>';
    document.formv1.mpmeno.value = '<?php echo "$mpmeno"; ?>';
    document.formv1.mptitl.value = '<?php echo "$mptitl"; ?>';
@@ -1053,11 +1055,10 @@ div.content-xml > a:hover { text-decoration: underline; }
  //document.formv1.pstr.value = '<?php echo "$pstr";?>';
  //document.formv1.pzam.value = '<?php echo "$pzam";?>';
 <?php if ( $zbon == 1 ) { ?> document.formv1.zbon.checked = "checked"; <?php } ?>
-<?php if ( $pbon == 1 ) { ?> document.formv1.pbon.checked = "checked"; <?php } ?>
-<?php if ( $ubon == 1 ) { ?> document.formv1.ubon.checked = "checked"; <?php } ?>
 <?php if ( $zzpr == 1 ) { ?> document.formv1.zzpr.checked = "checked"; <?php } ?>
-<?php if ( $pzpr == 1 ) { ?> document.formv1.pzpr.checked = "checked"; <?php } ?>
-<?php if ( $uzpr == 1 ) { ?> document.formv1.uzpr.checked = "checked"; <?php } ?>
+<?php if ( $post == 1 ) { ?> document.formv1.post.checked = "checked"; <?php } ?>
+<?php if ( $uce == 1 ) { ?> document.formv1.uce.checked = "checked"; <?php } ?>
+   document.formv1.dap.value = '<?php echo "$dap_sk"; ?>';
 <?php                                        } ?>
   }
 <?php
@@ -1118,6 +1119,17 @@ div.content-xml > a:hover { text-decoration: underline; }
    window.open('../mzdy/prehladdane_mesacny2016.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
 '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
+
+//bud alebo checkbox v iii.cast
+  function klikpost()
+  {
+   document.formv1.uce.checked = false;
+  }
+  function klikucet()
+  {
+   document.formv1.post.checked = false;
+  }
+
 </script>
 </HEAD>
 <BODY id="white" onload="ObnovUI();">
@@ -1218,8 +1230,8 @@ $mesiacx=$mesiac; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
 <input type="text" name="mppsc" id="mppsc" style="width:105px; top:953px; left:52px;"/>
 <input type="text" name="mpmes" id="mpmes" style="width:450px; top:953px; left:178px;"/>
 <input type="text" name="mpstat" id="mpstat" style="width:243px; top:953px; left:649px;"/>
-<input type="text" name="mptel" id="mptel" style="width:289px; top:1015px; left:52px;"/>
-<input type="text" name="mpfax" id="mpfax" style="width:519px; top:1015px; left:373px;"/>
+<input type="text" name="mptel" id="mptel" style="width:289px; top:1015px; left:52px;"/> <!-- dopyt, keÔ nevyplnenÈ, aby bralo z ufir -->
+<input type="text" name="mpfax" id="mpfax" style="width:519px; top:1015px; left:373px;"/> <!-- dopyt, keÔ nevyplnenÈ, aby bralo z ufir -->
 <?php                                        } ?>
 
 
@@ -1251,7 +1263,7 @@ $mesiacx=$mesiac; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
        style="width:232px; top:556px; left:661px;"/>
 <img src="../obr/ikony/downbox_blue_icon.png" title="Preniesù z ˙ËtovnÌctva"
      onclick="odvedarea.style.display='block';" class="btn-row-tool"
-     style="width:25px; height:25px; top:558px; right:13px;">
+     style="width:25px; height:25px; top:558px; right:13px;"> <!-- dopyt, preveriù -->
 
 <!-- II.cast -->
 <input type="text" name="ra1a" id="ra1a" onkeyup="CiarkaNaBodku(this);"
@@ -1271,70 +1283,29 @@ $mesiacx=$mesiac; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
 <input type="checkbox" name="zbon" value="1" style="top:944px; left:59px;"/>
 <input type="text" name="sbon" id="sbon" onkeyup="CiarkaNaBodku(this);"
        style="width:186px; top:940px; left:702px;"/>
+<img src="../obr/ikony/download_blue_icon.png" onclick="NacitajDanBonus();"
+     title="NaËÌtaù daÚov˝ bonus vyplaten˝ z prostriedkov zamestnanca ( II.Ëasù riadok C ) z prehæadov za <?php echo $vbon; ?>.ötvrùrok"
+     style="top:944px; right:15px;" class="btn-row-tool"> <!-- dopyt, ötvrùrok uû nie je input --> <!-- dopyt, text v title in˝ -->
 <input type="checkbox" name="zzpr" value="1" style="top:982px; left:59px;"/>
 <input type="text" name="szpr" id="szpr" onkeyup="CiarkaNaBodku(this);"
        style="width:186px; top:979px; left:702px;"/>
-
-<input type="text" name="vbon" id="vbon" style="width:15px; top:995px; left:852px;"/>
-<script>
-  function klikpbon()
-  {
-   document.formv1.ubon.checked = false;
-  }
-  function klikubon()
-  {
-   document.formv1.pbon.checked = false;
-  }
-</script>
-<input type="checkbox" name="pbon" onchange="klikpbon();" value="1" style="top:1034px; left:49px;"/>
-<input type="checkbox" name="ubon" onchange="klikubon();" value="1" style="top:1062px; left:49px;"/>
-<img src="../obr/ikony/download_blue_icon.png" onclick="NacitajDanBonus();"
- title="NaËÌtaù daÚov˝ bonus vyplaten˝ z prostriedkov zamestnanca ( II.Ëasù riadok C ) z prehæadov za <?php echo $vbon; ?>.ötvrùrok"
- style="top:1028px; left:220px;" class="btn-row-tool">
-
-<img src="../obr/ikony/info_blue_icon.png" title="Firemn˝ ˙Ëet Ë. 1"
- class="btn-row-tool" style="top:1030px; left:467px; cursor:default;">
-<span class="text-echo" style="top:1056px; left:403px; letter-spacing:12.3px;"><?php echo $fir_fuc1; ?></span>
-<span class="text-echo" style="top:1056px; left:809px; letter-spacing:12.3px;"><?php echo $fir_fnm1; ?></span>
-
-<!-- IV. cast -->
-
-<input type="text" name="rzpr" id="rzpr" maxlength="2"
- style="width:37px; top:1141px; left:725px;"/>
-<script>
-  function klikpzpr()
-  {
-   document.formv1.uzpr.checked = false;
-  }
-  function klikuzpr()
-  {
-   document.formv1.pzpr.checked = false;
-  }
-</script>
-<input type="checkbox" name="pzpr" onchange="klikpzpr();" value="1" style="top:1172px; left:49px;"/>
-<input type="checkbox" name="uzpr" onchange="klikuzpr();" value="1" style="top:1200px; left:49px;"/>
 <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajZamPremia();"
- title="NaËÌtaù zamestnaneck˙ prÈmiu za rok 20<?php echo $rzpr; ?> vyplaten˙ z prostriedkov zamestnanca ( II.Ëasù riadok F ) z prehæadov za <?php echo $vbon; ?>.ötvrùrok"
-  style="top:1167px; left:220px;" class="btn-row-tool">
-
-<img src="../obr/ikony/info_blue_icon.png" title="Firemn˝ ˙Ëet Ë. 1"
- class="btn-row-tool" style="top:1168px; left:467px; cursor:default;">
-<span class="text-echo" style="top:1195px; left:403px; letter-spacing:12.3px;"><?php echo $fir_fuc1; ?></span>
-<span class="text-echo" style="top:1195px; left:809px; letter-spacing:12.3px;"><?php echo $fir_fnm1; ?></span>
-
+     title="NaËÌtaù zamestnaneck˙ prÈmiu za rok 20<?php echo $rzpr; ?> vyplaten˙ z prostriedkov zamestnanca ( II.Ëasù riadok F ) z prehæadov za <?php echo $vbon; ?>.ötvrùrok"
+     style="top:984px; right:15px;" class="btn-row-tool"> <!-- dopyt, ötvrùrok uû nie je input --> <!-- dopyt, text v title in˝ -->
+<input type="checkbox" name="post" value="1" onchange="klikpost();" style="top:1018px; left:59px;"/>
+<input type="checkbox" name="uce" value="1" onchange="klikucet();" style="top:1044px; left:59px;"/>
+<!-- ucet -->
+<div class="input-echo" style="width:382px; top:1033px; left:186px;"><?php echo $fir_fuc1; ?></div>
+<div class="input-echo" style="width:82px; top:1033px; left:610px;"><?php echo $fir_fnm1; ?></div>
+<div class="input-echo" style="width:773px; top:1070px; left:115px;"><?php echo $fir_fib1; ?></div>
 <!-- Vypracoval -->
-<!-- <span class="text-echo" style="top:865px; left:47px; letter-spacing:0;"><?php echo $zrobil; ?></span> -->
-<?php
-$pole = explode("/", $fir_mzdt04);
-$tel_pred=1*$pole[0];
-$tel_za=$pole[1];
-?>
-<!-- <span class="text-echo" style="top:935px; left:71px;"><?php echo $tel_pred; ?></span> -->
-<!-- <span class="text-echo" style="top:935px; left:167px;"><?php echo $tel_za; ?></span> -->
-<!--
- <input type="text" name="dap" id="dap" onkeyup="CiarkaNaBodku(this);"
- style="width:204px; top:979px; left:43px;"/>
--->
+<div class="input-echo" style="top:1132px; left:54px;"><?php echo $zrobil; ?></div>
+<div class="input-echo" style="width:290px; top:1210px; left:52px;"><?php echo $fir_mzdt04; ?></div>
+<input type="text" name="dap" id="dap" onkeyup="CiarkaNaBodku(this);"
+       style="width:196px; top:1114px; left:695px;"/>
+
+<input type="text" name="vbon" id="vbon" style="width:15px; top:1065px; left:852px;"/> <!-- dopyt, m·m nechaù? -->
+<input type="text" name="rzpr" id="rzpr" maxlength="2" style="width:37px; top:1060px; left:725px;"/> <!-- dopyt, m·m nechaù? -->
 
 <?php                                        } ?>
 
