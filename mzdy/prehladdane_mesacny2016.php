@@ -227,12 +227,20 @@ $zbon = strip_tags($_REQUEST['zbon']);
 //$ubon = strip_tags($_REQUEST['ubon']);
 $sbon = strip_tags($_REQUEST['sbon']);
 $vbon = strip_tags($_REQUEST['vbon']);
-
 $zzpr = strip_tags($_REQUEST['zzpr']);
+
+$vbon=0;
+if( $kli_vmes == 3 ) { $vbon=1; }
+if( $kli_vmes == 6 ) { $vbon=2; }
+if( $kli_vmes == 9 ) { $vbon=3; }
+if( $kli_vmes == 12 ) { $vbon=4; }
+
 //$pzpr = strip_tags($_REQUEST['pzpr']);
 //$uzpr = strip_tags($_REQUEST['uzpr']);
 $szpr = strip_tags($_REQUEST['szpr']);
 $rzpr = strip_tags($_REQUEST['rzpr']);
+$rzpr=0;
+if( $kli_vmes == 3 ) { $rzpr=$kli_vrok-2000; }
 
 $post = 1*$_REQUEST['post'];
 $uce = 1*$_REQUEST['uce'];
@@ -758,32 +766,20 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET r07a=0, r05a=-rb1a, r06
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//na konci stvrtroka 3,6,9,12 spocitaj rozdiel DB a ZPR a uplatni vyrovnanie TOTO SOM ZRUSIL MUSI NAPOCITAT UZIVATEL
-$nerobtoto=1;
-if ( $nerobtoto == 0 AND ( $kli_vmes == 3 OR $kli_vmes == 6 OR $kli_vmes == 9 OR $kli_vmes == 12 ) )
-     {
-if ( $kli_vmes ==  3 ) { $podmume=" umex >= 1.".$kli_vrok." AND umex <= 3.".$kli_vrok." "; $strtrokx=1; }
-if ( $kli_vmes ==  6 ) { $podmume=" umex >= 4.".$kli_vrok." AND umex <= 6.".$kli_vrok." "; $strtrokx=2; }
-if ( $kli_vmes ==  9 ) { $podmume=" umex >= 7.".$kli_vrok." AND umex <= 9.".$kli_vrok." "; $strtrokx=3; }
-if ( $kli_vmes == 12 ) { $podmume=" umex >= 10.".$kli_vrok." AND umex <= 12.".$kli_vrok." "; $strtrokx=4; }
-$sqlttt = "SELECT SUM(rc1a) AS sumrc1a, SUM(rf1a) AS sumrf1a  FROM F$kli_vxcf"."_mzdmesacnyprehladdane WHERE $podmume GROUP BY oc ";
-//echo $sqlttt;
-$sqldok = mysql_query("$sqlttt");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $sumrc1a=1*$riaddok->sumrc1a;
-  $sumrf1a=1*$riaddok->sumrf1a;
-  }
-$rzpr=$kli_vrok-2001;
+$vbon=0;
+if( $kli_vmes == 3 ) { $vbon=1; }
+if( $kli_vmes == 6 ) { $vbon=2; }
+if( $kli_vmes == 9 ) { $vbon=3; }
+if( $kli_vmes == 12 ) { $vbon=4; }
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET sbon='$sumrc1a', ubon=1, zbon=1, vbon='$strtrokx'  WHERE umex = $kli_vume";
-if( $sumrc1a > 0 ) { $oznac = mysql_query("$sqtoz"); }
+$rzpr=0;
+if( $kli_vmes == 3 ) { $rzpr=$kli_vrok-2000; }
+
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET vbon='$vbon', rzpr='$rzpr' WHERE umex = $kli_vume";
 //echo $sqtoz;
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdmesacnyprehladdane SET szpr='$sumrf1a', uzpr=1, zzpr=1, rzpr='$rzpr'  WHERE umex = $kli_vume";
-if( $sumrf1a > 0 ) { $oznac = mysql_query("$sqtoz"); }
-//echo $sqtoz;
-     }
+$oznac = mysql_query("$sqtoz");
+
 
 }
 //koniec pracovneho suboru pre potvrdenie 
@@ -833,7 +829,19 @@ $mppsc = $fir_rmp->mppsc;
 $mpmes = $fir_rmp->mpmes;
 $mpstat = $fir_rmp->mpstat;
 $mptel = $fir_rmp->mptel;
+if( $mptel == '' ) 
+  {
+$mptel=$fir_ftel;
+$sqlmpu = "UPDATE F$kli_vxcf"."_ufirdalsie SET mptel='$mptel' WHERE kkx >= 0 ";
+$fir_mpu = mysql_query($sqlmpu);
+  }
 $mpfax = $fir_rmp->mpfax;
+if( $mpfax == '' ) 
+  {
+$mpfax=$fir_fem1;
+$sqlmpu = "UPDATE F$kli_vxcf"."_ufirdalsie SET mpfax='$mpfax' WHERE kkx >= 0 ";
+$fir_mpu = mysql_query($sqlmpu);
+  }
 //echo $mpprie;
 
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdmesacnyprehladdane".
@@ -1283,15 +1291,19 @@ $mesiacx=$mesiac; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
 <input type="checkbox" name="zbon" value="1" style="top:944px; left:59px;"/>
 <input type="text" name="sbon" id="sbon" onkeyup="CiarkaNaBodku(this);"
        style="width:186px; top:940px; left:702px;"/>
+<?php if( $kli_vmes == 3 OR $kli_vmes == 6 OR $kli_vmes == 9 OR $kli_vmes == 12 ) { ?>
 <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajDanBonus();"
      title="NaËÌtaù daÚov˝ bonus vyplaten˝ z prostriedkov zamestnanca ( II.Ëasù riadok C ) z prehæadov za <?php echo $vbon; ?>.ötvrùrok"
      style="top:944px; right:15px;" class="btn-row-tool"> <!-- dopyt, ötvrùrok uû nie je input --> <!-- dopyt, text v title in˝ -->
+<?php } ?>
 <input type="checkbox" name="zzpr" value="1" style="top:982px; left:59px;"/>
 <input type="text" name="szpr" id="szpr" onkeyup="CiarkaNaBodku(this);"
        style="width:186px; top:979px; left:702px;"/>
+<?php if( $kli_vmes == 3 ) { ?>
 <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajZamPremia();"
      title="NaËÌtaù zamestnaneck˙ prÈmiu za rok 20<?php echo $rzpr; ?> vyplaten˙ z prostriedkov zamestnanca ( II.Ëasù riadok F ) z prehæadov za <?php echo $vbon; ?>.ötvrùrok"
      style="top:984px; right:15px;" class="btn-row-tool"> <!-- dopyt, ötvrùrok uû nie je input --> <!-- dopyt, text v title in˝ -->
+<?php } ?>
 <input type="checkbox" name="post" value="1" onchange="klikpost();" style="top:1018px; left:59px;"/>
 <input type="checkbox" name="uce" value="1" onchange="klikucet();" style="top:1044px; left:59px;"/>
 <!-- ucet -->
@@ -1304,8 +1316,8 @@ $mesiacx=$mesiac; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
 <input type="text" name="dap" id="dap" onkeyup="CiarkaNaBodku(this);"
        style="width:196px; top:1114px; left:695px;"/>
 
-<input type="text" name="vbon" id="vbon" style="width:15px; top:1065px; left:852px;"/> <!-- dopyt, m·m nechaù? -->
-<input type="text" name="rzpr" id="rzpr" maxlength="2" style="width:37px; top:1060px; left:725px;"/> <!-- dopyt, m·m nechaù? -->
+<input type="hidden" name="vbon" id="vbon" /> <!-- dopyt, m·m nechaù? -->
+<input type="hidden" name="rzpr" id="rzpr" /> <!-- dopyt, m·m nechaù? -->
 
 <?php                                        } ?>
 
