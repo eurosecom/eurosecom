@@ -812,7 +812,7 @@ $oznac = mysql_query("$sqtoz");
 
 
 //nacitaj udaje pre upravu
-if ( $copern == 20 OR $copern == 10 )
+if ( $copern == 20 OR $copern == 10 OR $copern == 110 )
      {
 $sqlmp = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE kkx >= 0 ";
 $fir_mp = mysql_query($sqlmp);
@@ -901,15 +901,7 @@ mysql_free_result($fir_vysledok);
 //FO-Priezvisko,Meno,Titul a trvaly pobyt z ufirdalsie
 if ( $fir_uctt03 == 999 )
 {
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob". //dopyt musí tu by keï verzia2016
-" WHERE oc = 9999 ORDER BY oc";
-$fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
-$dmeno = $fir_riadok->dmeno;
-$dprie = $fir_riadok->dprie;
-$dtitl = $fir_riadok->dtitl;
-if ( $kli_vrok >= 2014 ) //dopyt musí tu by keï verzia2016
-   {
+
 $sqlc = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE icox = 0";
 $vysledokc = mysql_query($sqlc);
 if ( $vysledokc )
@@ -927,7 +919,7 @@ $dstat = $riadokc->dstat;
 $dtel = $riadokc->dtel;
 //$dfax = $riadokc->dfax;
      }
-   }
+
 }
 if ( $fir_uctt03 != 999 )
 {
@@ -3177,15 +3169,6 @@ if ( $h_drp == 2 ) { $dat_opravne=SkDatum($hlavicka->dopr); }
    
 if ( $fir_uctt03 == 999 )
 {
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob".
-" WHERE oc = 9999 ORDER BY oc";
-$fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
-$dprie = $fir_riadok->dprie;
-$dmeno = $fir_riadok->dmeno;
-$dtitl = $fir_riadok->dtitl;
-if ( $kli_vrok >= 2014 ) //dopyt musí tu by keï verzia2016
-   {
 $sqlc = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE icox = 0";
 $vysledokc = mysql_query($sqlc);
 if ( $vysledokc )
@@ -3196,7 +3179,6 @@ $dmeno = $riadokc->dmeno;
 $dtitl = $riadokc->dtitl;
 $dtitz = $riadokc->dtitz;
      }
-   }
 }
 $dprie = iconv("CP1250", "UTF-8", $dprie);
 $dmeno = iconv("CP1250", "UTF-8", $dmeno);
@@ -3219,10 +3201,9 @@ $fir_fnaz = iconv("CP1250", "UTF-8", $fir_fnaz);
   $text = " </po>"."\r\n"; fwrite($soubor, $text);
 
 //fyzicka osoba - sidlo - ulica, cislo
+$fir_fstat="";
 if ( $fir_uctt03 == 999 )
 {
-if ( $kli_vrok >= 2014 )
-   {
 $sqlc = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE icox = 0";
 $vysledokc = mysql_query($sqlc);
 if ( $vysledokc )
@@ -3236,8 +3217,8 @@ $fir_fstat = $riadokc->dstat; //dopyt, ošetri, keï nie je 999, aby dalo $dstat=
 $fir_ftel = $riadokc->dtel;
 $fir_ffax = $riadokc->dfax;
      }
-   }
 }
+if( $fir_fstat == '' ) { $fir_fstat="SR";}
   $text = " <sidlo>"."\r\n"; fwrite($soubor, $text);
 $fir_fuli = iconv("CP1250", "UTF-8", $fir_fuli);
 $fir_fmes = iconv("CP1250", "UTF-8", $fir_fmes);
