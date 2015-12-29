@@ -290,7 +290,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD bicod VARCHAR(10) NOT NULL AFTE
 $vysledek = mysql_query("$sql");
 }
 //Osoba podava mesacny prehlad MZDY
-$sql = "SELECT mpstat FROM F".$kli_vxcf."_ufirdalsie";
+$sql = "SELECT mprdk FROM F".$kli_vxcf."_ufirdalsie";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -325,6 +325,8 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpfax VARCHAR(30) NOT NULL AFTER kkx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpstat VARCHAR(30) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mprdk VARCHAR(10) NOT NULL AFTER mprdc";
 $vysledek = mysql_query("$sql");
 }
 //koniec upravy

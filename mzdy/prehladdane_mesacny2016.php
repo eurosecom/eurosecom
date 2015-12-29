@@ -254,6 +254,7 @@ $mpmeno = strip_tags($_REQUEST['mpmeno']);
 $mptitl = strip_tags($_REQUEST['mptitl']);
 $mptitz = strip_tags($_REQUEST['mptitz']);
 $mprdc = strip_tags($_REQUEST['mprdc']);
+$mprdk = strip_tags($_REQUEST['mprdk']);
 $mpdar = strip_tags($_REQUEST['mpdar']);
 $mpdar_sql = SqlDatum($mpdar);
 $mpdic = strip_tags($_REQUEST['mpdic']);
@@ -269,7 +270,7 @@ $mpfax = strip_tags($_REQUEST['mpfax']);
 
 $uprmp = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
 " mpprie='$mpprie', mpmeno='$mpmeno', mptitl='$mptitl', mptitz='$mptitz', ".
-" mprdc='$mprdc', mpdar='$mpdar_sql', mpdic='$mpdic', ".
+" mprdc='$mprdc', mprdk='$mprdk', mpdar='$mpdar_sql', mpdic='$mpdic', ".
 " mpnaz='$mpnaz', mppfr='$mppfr', mpuli='$mpuli', mpcdm='$mpcdm', ".
 " mppsc='$mppsc', mpmes='$mpmes', mpstat='$mpstat', mptel='$mptel', mpfax='$mpfax' ".
 " WHERE kkx >= 0 ";
@@ -311,7 +312,7 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
 //Osoba podava mesacny prehlad MZDY
-$sql = "SELECT mpstat FROM F".$kli_vxcf."_ufirdalsie";
+$sql = "SELECT mprdk FROM F".$kli_vxcf."_ufirdalsie";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -346,6 +347,8 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpfax VARCHAR(30) NOT NULL AFTER kkx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mpstat VARCHAR(30) NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mprdk VARCHAR(10) NOT NULL AFTER mprdc";
 $vysledek = mysql_query("$sql");
 }
 //koniec Osoba podava mesacny prehlad MZDY
@@ -819,6 +822,7 @@ $mpmeno = $fir_rmp->mpmeno;
 $mptitl = $fir_rmp->mptitl;
 $mptitz = $fir_rmp->mptitz;
 $mprdc = $fir_rmp->mprdc;
+$mprdk = $fir_rmp->mprdk;
 $mpdar_sk = SkDatum($fir_rmp->mpdar);
 $mpdic = $fir_rmp->mpdic;
 $mpnaz = $fir_rmp->mpnaz;
