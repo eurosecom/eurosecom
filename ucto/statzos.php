@@ -488,6 +488,7 @@ window.open('../ucto/statistika_p1304<?php echo $rok1304; ?>.php?copern=1&drupoh
 
 <?php
 $rokopu112="";
+if( $kli_vrok < 2016 ) $rokopu112="_2015";
 if( $kli_vrok < 2014 ) $rokopu112="_2013";
 ?>
 
