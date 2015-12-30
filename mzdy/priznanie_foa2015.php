@@ -21,7 +21,7 @@ require_once("../pswd/password.php");
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=1;
+$rmc=0;
 $rmc1=0;
 
 //$zablokovane=1;
@@ -1608,7 +1608,7 @@ if ( $copern == 20 )
    document.formv1.pzks3.value = '<?php echo "$pzks3";?>';
    document.formv1.pzpr3.value = '<?php echo "$pzpr3";?>';
    document.formv1.pzvd3.value = '<?php echo "$pzvd3";?>';
-   document.formv1.osob.value = '<?php echo "$osob";?>';
+//   document.formv1.osob.value = '<?php echo "$osob";?>';
 <?php                                        } ?>
 
 <?php if ( $strana == 6 OR $strana == 9999 ) { ?>
@@ -1717,11 +1717,15 @@ if ( $copern == 20 )
    document.formv1.post.checked = false;
   }
   function FOAdoXML()
-                {
-  window.open('../mzdy/priznaniefoa_xml2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
+  {
+   window.open('../mzdy/priznaniefoa_xml2015.php?cislo_oc=<?php echo $cislo_oc;?>&copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
+  function CisKrajin()
+  {
+   window.open('../cis/ciselnik_krajin.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }
 </script>
 </HEAD>
 <BODY id="white" onload="ObnovUI();">
@@ -2029,6 +2033,8 @@ $t02=substr($rokp,3,1);
 
 <!-- IX. ODDIEL -->
 <input type="checkbox" name="uoso" value="1" style="top:655px; left:59px;"/>
+<img src="../obr/ikony/info_blue_icon.png" title="Štatistický èíselník krajín"
+     onclick="CisKrajin();" class="btn-row-tool" style="top:759px; left:7px;">
 <input type="text" name="pzks1" id="pzks1" style="width:61px; top:758px; left:51px;"/>
 <input type="text" name="pzpr1" id="pzpr1" onkeyup="CiarkaNaBodku(this);"
        style="width:231px; top:758px; left:135px;"/>
