@@ -2277,6 +2277,26 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
   $cicz=$riaddok->cicz;
   }
 
+
+//FO - priezvisko,meno,tituly a trvaly pobyt z ufirdalsie
+$sql = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
+$vysledok = mysql_query($sql);
+if ( $vysledok )
+     {
+$riadok=mysql_fetch_object($vysledok);
+$dprie = $riadok->dprie;
+$dmeno = $riadok->dmeno;
+$dtitl = $riadok->dtitl;
+$dtitz = $riadok->dtitz;
+$duli = $riadok->duli;
+$dcdm = $riadok->dcdm;
+$dpsc = $riadok->dpsc;
+$dmes = $riadok->dmes;
+$dstat = $riadok->dstat;
+$dtelzu = $riadok->dtel; 
+$dfaxzu = $riadok->dfax;
+     }
+
 //nacitaj udaje pre upravu
 if ( $copern == 20 )
      {
@@ -2310,6 +2330,22 @@ $zcdm = $fir_riadok->zcdm;
 $zpsc = $fir_riadok->zpsc;
 $zmes = $fir_riadok->zmes;
 $zstat = $fir_riadok->zstat;
+//tuto musi brat dtel a dmailfax
+$dtel = $fir_riadok->dtel;
+$dmailfax = $fir_riadok->dmailfax;
+
+if( $dtel == '' ) 
+  {
+$dtel=$dtelzu;
+$sqlmpu = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET dtel='$dtelzu' ";
+$fir_mpu = mysql_query($sqlmpu);
+  }
+if( $dmailfax == '' ) 
+  {
+$dmailfax=$dfaxzu;
+$sqlmpu = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET dmailfax='$dfaxzu' ";
+$fir_mpu = mysql_query($sqlmpu);
+  }
 
 if ( $strana == 2 ) {
 $r29 = $fir_riadok->r29;
@@ -2771,24 +2807,7 @@ mysql_free_result($fir_vysledok);
      }
 //koniec nacitania
 
-//FO - priezvisko,meno,tituly a trvaly pobyt z ufirdalsie
-$sql = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
-$vysledok = mysql_query($sql);
-if ( $vysledok )
-     {
-$riadok=mysql_fetch_object($vysledok);
-$dprie = $riadok->dprie;
-$dmeno = $riadok->dmeno;
-$dtitl = $riadok->dtitl;
-$dtitz = $riadok->dtitz;
-$duli = $riadok->duli;
-$dcdm = $riadok->dcdm;
-$dpsc = $riadok->dpsc;
-$dmes = $riadok->dmes;
-$dstat = $riadok->dstat;
-$dtel = $riadok->dtel;
-$dfax = $riadok->dfax;
-     }
+
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -4755,7 +4774,7 @@ $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t11","$rmc",1,"C");
 //telefon FO
 $pdf->Cell(190,7," ","$rmc1",1,"L");
 $text="12345678910";
-$text=$dtel;
+$text=$hlavicka->dtel;
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4779,7 +4798,7 @@ $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(5,7,"$t13","$rmc",0,"C");
 
 //email FO
 $text="12345678910";
-$pdf->Cell(6,7," ","$rmc1",0,"C");$pdf->Cell(115,6,"$dmailfax","$rmc",1,"L");
+$pdf->Cell(6,7," ","$rmc1",0,"C");$pdf->Cell(115,6,"$hlavicka->dmailfax","$rmc",1,"L");
                                        } //koniec 1.strany
 
 if ( $strana == 2 OR $strana == 9999 ) {

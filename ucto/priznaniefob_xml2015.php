@@ -76,7 +76,7 @@ $dcdm = $riadok->dcdm;
 $dpsc = $riadok->dpsc;
 $dmes = $riadok->dmes;
 $dstat = $riadok->dstat;
-$dtel = $riadok->dtel;
+//$dtel = $riadok->dtel;
      }
 ?>
 <HEAD>
@@ -249,9 +249,9 @@ $obec=iconv("CP1250", "UTF-8", $hlavicka->zmes);
   $text = "   <obec><![CDATA[".$obec."]]></obec>"."\r\n"; fwrite($soubor, $text);
 $stat=iconv("CP1250", "UTF-8", $hlavicka->zstat);
   $text = "   <stat><![CDATA[".$stat."]]></stat>"."\r\n"; fwrite($soubor, $text);
-$telefon=$dtel;
+$telefon=$hlavicka->dtel;
   $text = "   <tel><![CDATA[".$telefon."]]></tel>"."\r\n"; fwrite($soubor, $text);
-$mail=iconv("CP1250", "UTF-8", $fir_fem1);
+$mail=iconv("CP1250", "UTF-8", $hlavicka->dmailfax);
   $text = "   <email><![CDATA[".$mail."]]></email>"."\r\n"; fwrite($soubor, $text);
   $text = "  </zastupca>"."\r\n"; fwrite($soubor, $text);
 
