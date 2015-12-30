@@ -329,6 +329,13 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD mprdk VARCHAR(10) NOT NULL AFTER mprdc";
 $vysledek = mysql_query("$sql");
 }
+$sql = "SELECT fstat FROM F".$kli_vxcf."_ufirdalsie";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD fstat VARCHAR(30) DEFAULT 'SR' AFTER kkx";
+$vysledek = mysql_query("$sql");
+}
 //koniec upravy
 
 // cislo operacie

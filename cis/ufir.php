@@ -168,6 +168,14 @@ $vysledok = mysql_query("$sql");
 }
 //koniec subor uctov danoveho uradu
 
+$sql = "SELECT fstat FROM F".$kli_vxcf."_ufirdalsie";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD fstat VARCHAR(30) DEFAULT 'SR' AFTER kkx";
+$vysledek = mysql_query("$sql");
+}
+
 // cislo operacie
 $copern = 1*$_REQUEST['copern'];
 
@@ -201,6 +209,7 @@ $fir_fnaz = strip_tags($_REQUEST['fir_fnaz']);
 $fir_fuli = strip_tags($_REQUEST['fir_fuli']);
 $fir_fcdm = strip_tags($_REQUEST['fir_fcdm']);
 $fir_fmes = strip_tags($_REQUEST['fir_fmes']);
+$fir_fstat = strip_tags($_REQUEST['fir_fstat']);
 $fir_fpsc = strip_tags($_REQUEST['fir_fpsc']);
 $fir_ftel = strip_tags($_REQUEST['fir_ftel']);
 $fir_ffax = strip_tags($_REQUEST['fir_ffax']);
@@ -242,6 +251,9 @@ $fir_fsw3 = strip_tags($_REQUEST['fir_fsw3']);
 $fir_allx11 = strip_tags($_REQUEST['fir_allx11']);
 $fir_allx12 = 1*$_REQUEST['fir_allx12'];
 $uprav="NO";
+
+$upravttd = "UPDATE F$kli_vxcf"."_ufirdalsie SET fstat='$fir_fstat' ";  
+$upravend = mysql_query("$upravttd");
 
 $upravttt = "UPDATE F$kli_vxcf"."_ufir SET fico='$fir_fico', fdic='$fir_fdic', ficd='$fir_ficd'".
 ", fnaz='$fir_fnaz', fuli='$fir_fuli', fpsc='$fir_fpsc', fmes='$fir_fmes', ftel='$fir_ftel', ffax='$fir_ffax'".
@@ -1192,6 +1204,10 @@ window.open('../cis/ufir.php?copern=30191&drupoh=1&page=1&h_odb=' + h_odb + '&h_
 //zobraz nastavene udaje o firme
 if ( $copern == 1 OR $copern == 3 )
     {
+$sqd = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
+$vysledod = mysql_query($sqd);
+$riadod=mysql_fetch_object($vysledod);
+
 $sql = "SELECT * FROM F$kli_vxcf"."_ufir WHERE udaje = 1";
 $vysledok = mysql_query($sql);
 $riadok=mysql_fetch_object($vysledok);
@@ -1296,6 +1312,8 @@ document.formv1.h_vse.checked = "checked";
 <td class="fmenu"><?php echo $riadok->fpsc;?></td>
 <td class="fmenu">Sídlo mesto:</td>
 <td class="fmenu"><?php echo $riadok->fmes;?></td>
+<td class="fmenu">Sídlo štát:</td>
+<td class="fmenu"><?php echo $riadod->fstat;?></td>
 </tr>
 <tr></tr>
 <tr>
@@ -1415,6 +1433,10 @@ mysql_free_result($vysledok);
 //upravy  udaje o firme
 if ( $copern == 2 )
     {
+$sqd = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
+$vysledod = mysql_query($sqd);
+$riadod=mysql_fetch_object($vysledod);
+
 //$sql = "SELECT * FROM F$kli_vxcf"."_ufir WHERE udaje = 1";
 //$vysledok = mysql_query($sql);
 //$riadok=mysql_fetch_object($vysledok);
@@ -1454,6 +1476,9 @@ if ( $copern == 2 )
 <td class="fmenu">Sídlo mesto:</td>
 <td class="fmenu">
 <input type="text" name="fir_fmes" id="fir_fmes" /></td>
+<td class="fmenu">Sídlo štát:</td>
+<td class="fmenu">
+<input type="text" name="fir_fstat" id="fir_fstat" value="<?php echo $riadod->fstat; ?>"/></td>
 </tr>
 <tr></tr>
 <tr>
