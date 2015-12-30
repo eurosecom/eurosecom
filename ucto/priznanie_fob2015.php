@@ -2839,6 +2839,8 @@ div.input-echo {
    document.formv1.zpsc.value = '<?php echo "$zpsc";?>';
    document.formv1.zmes.value = '<?php echo "$zmes";?>';
    document.formv1.zstat.value = '<?php echo "$zstat";?>';
+   document.formv1.dtel.value = '<?php echo "$dtel";?>';
+   document.formv1.dmailfax.value = '<?php echo "$dmailfax";?>';
 <?php                                        } ?>
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
@@ -3514,8 +3516,8 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="zmes" id="zmes" style="width:451px; top:960px; left:178px;"/>
 <input type="text" name="zstat" id="zstat" style="width:245px; top:960px; left:648px;"/>
 <!-- telefon a fax FO -->
-<div class="input-echo" style="width:290px; top:1022px; left:52px;"><?php echo $dtel; ?></div>
-<div class="input-echo" style="width:521px; top:1022px; left:373px;"><?php echo $fir_fem1; ?></div>
+<input type="text" name="dtel" id="dtel" style="width:289px; top:1022px; left:52px;"/>
+<input type="text" name="dmailfax" id="dmailfax" style="width:519px; top:1022px; left:373px;"/>
 <?php                     } ?>
 
 
@@ -4772,7 +4774,7 @@ $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(5,7,"$t13","$rmc",0,"C");
 
 //email FO
 $text="12345678910";
-$pdf->Cell(6,7," ","$rmc1",0,"C");$pdf->Cell(115,6,"$fir_fem1","$rmc",1,"L");
+$pdf->Cell(6,7," ","$rmc1",0,"C");$pdf->Cell(115,6,"$dmailfax","$rmc",1,"L");
                                        } //koniec 1.strany
 
 if ( $strana == 2 OR $strana == 9999 ) {
