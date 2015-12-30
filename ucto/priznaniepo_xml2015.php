@@ -46,12 +46,7 @@ $citfir = include("../cis/citaj_fir.php");
 //druh priznania 1=mesacne,2=stvrtrocne,4=rocne
 $fir_uctx01 = $_REQUEST['fir_uctx01'];
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
-
-$hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+$hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 $idx=$kli_uzid.$hhmm;
 
 $nazsub="PRIZNANIEPO_".$kli_vrok."_".$idx.".xml";
@@ -94,13 +89,6 @@ td.hvstup_bsede { background-color:#eaeaea; color:black; font-weight:normal;
 td.hvstup_bred { background-color:#ff6c6c; color:black; font-weight:normal;
                   height:12px; font-size:12px; }
 </style>
-<script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height;
-var sirkawic = screen.width-10;
-</script>
 </HEAD>
 <BODY class="white">
 <table class="h2" width="100%">
@@ -208,8 +196,13 @@ $psc=$fir_fpsc;
   $text = "   <psc><![CDATA[".$psc."]]></psc>"."\r\n"; fwrite($soubor, $text);
 $obec = iconv("CP1250", "UTF-8", $fir_fmes);
   $text = "   <obec><![CDATA[".$obec."]]></obec>"."\r\n"; fwrite($soubor, $text);
-$stat = iconv("CP1250", "UTF-8", $hlavicka->xstat);
-if ( $stat == '' ) $stat="Slovensko";
+$sql = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
+$vysledok = mysql_query($sql);
+if ( $vysledok ) {
+$riadok=mysql_fetch_object($vysledok);
+$fstat = $riadok->fstat;
+                 }
+$stat = iconv("CP1250", "UTF-8", $fstat);
   $text = "   <stat><![CDATA[".$stat."]]></stat>"."\r\n"; fwrite($soubor, $text);
 $telefon=$fir_ftel;
   $text = "   <tel><![CDATA[".$telefon."]]></tel>"."\r\n"; fwrite($soubor, $text);

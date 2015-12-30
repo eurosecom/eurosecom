@@ -1267,7 +1267,7 @@ if ( $obdosql == '0000-00-00' ) { $obdosql=$kli_vrok."-12-31"; }
 //$obmr2 = strip_tags($_REQUEST['obmr2']);
 $cinnost = strip_tags($_REQUEST['cinnost']);
 //$oznucet = 1*$_REQUEST['oznucet'];
-$xstat = strip_tags($_REQUEST['xstat']);
+//$xstat = strip_tags($_REQUEST['xstat']);
 //$dmailfax = strip_tags($_REQUEST['dmailfax']);
 $uoskr = 1*$_REQUEST['uoskr'];
 $koskr = 1*$_REQUEST['koskr'];
@@ -1287,7 +1287,7 @@ $zapdl = 1*$_REQUEST['zapdl'];
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " chpld='$chpld', cho5k='$cho5k', chpdl='$chpdl', chndl='$chndl', zapdl='$zapdl', ".
-" druh='$druh', obod='$obodsql', obdo='$obdosql', cinnost='$cinnost', xstat='$xstat', uoskr='$uoskr', koskr='$koskr', ".
+" druh='$druh', obod='$obodsql', obdo='$obdosql', cinnost='$cinnost', uoskr='$uoskr', koskr='$koskr', ".
 " nerezident='$nerezident', zahrprep='$zahrprep', pruli='$pruli', prcdm='$prcdm', prpsc='$prpsc', prmes='$prmes', prpoc='$prpoc' ".
 " WHERE ico >= 0";
                     }
@@ -2145,6 +2145,18 @@ $upravene = mysql_query("$uprtxt");
                         }
 //////////////////koniec vypoctov
 
+//nacitaj udaje pre upravu
+if ( $copern == 102 OR $copern == 11 )
+     {
+$sql = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
+$vysledok = mysql_query($sql);
+if ( $vysledok ) {
+$riadok=mysql_fetch_object($vysledok);
+$fstat = $riadok->fstat;
+                 }
+     }
+//koniec nacitania
+
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_po WHERE ico >= 0";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
@@ -2155,7 +2167,6 @@ $obodsk=SkDatum($obod);
 $obdo = $fir_riadok->obdo;
 $obdosk=SkDatum($obdo);
 $cinnost = $fir_riadok->cinnost;
-$xstat = $fir_riadok->xstat;
 $uoskr = $fir_riadok->uoskr;
 $koskr = $fir_riadok->koskr;
 $nerezident = $fir_riadok->nerezident;
@@ -2595,7 +2606,6 @@ if ( $copern == 102 )
 <?php if ( $druh == 2 ) { ?> document.formv1.druh2.checked = 'true'; <?php } ?>
 <?php if ( $druh == 3 ) { ?> document.formv1.druh3.checked = 'true'; <?php } ?>
    document.formv1.cinnost.value = '<?php echo "$cinnost";?>';
-   document.formv1.xstat.value = '<?php echo "$xstat";?>';
 <?php if ( $uoskr == 1 ) { ?> document.formv1.uoskr.checked = 'true'; <?php } ?>
 <?php if ( $koskr == 1 ) { ?> document.formv1.koskr.checked = 'true'; <?php } ?>
 <?php if ( $nerezident == 1 ) { ?> document.formv1.nerezident.checked = 'true'; <?php } ?>
@@ -3115,7 +3125,7 @@ $sn1c=substr($sknacec,0,1);
 <div class="input-echo" style="width:163px; top:619px; left:718px;"><?php echo $fir_fcdm; ?></div>
 <div class="input-echo" style="width:110px; top:674px; left:52px;"><?php echo $fir_fpsc; ?></div>
 <div class="input-echo" style="width:440px; top:674px; left:180px;"><?php echo $fir_fmes; ?></div>
-<input type="text" name="xstat" id="xstat" style="width:245px; top:672px; left:648px;"/>
+<div class="input-echo" style="width:240px; top:674px; left:648px;"><?php echo $fstat; ?></div>
 <div class="input-echo" style="width:280px; top:730px; left:52px;"><?php echo $fir_ftel; ?></div>
 <div class="input-echo" style="width:363px; top:730px; left:377px;"><?php echo $fir_fem1; ?></div>
 
@@ -3985,26 +3995,27 @@ $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");
 
 //obec
-$A=substr($fir_fmes,0,1);
-$B=substr($fir_fmes,1,1);
-$C=substr($fir_fmes,2,1);
-$D=substr($fir_fmes,3,1);
-$E=substr($fir_fmes,4,1);
-$F=substr($fir_fmes,5,1);
-$G=substr($fir_fmes,6,1);
-$H=substr($fir_fmes,7,1);
-$I=substr($fir_fmes,8,1);
-$J=substr($fir_fmes,9,1);
-$K=substr($fir_fmes,10,1);
-$L=substr($fir_fmes,11,1);
-$M=substr($fir_fmes,12,1);
-$N=substr($fir_fmes,13,1);
-$O=substr($fir_fmes,14,1);
-$P=substr($fir_fmes,15,1);
-$R=substr($fir_fmes,16,1);
-$S=substr($fir_fmes,17,1);
-$T=substr($fir_fmes,18,1);
-$U=substr($fir_fmes,19,1);
+$text=$fir_fmes;
+$A=substr($text,0,1);
+$B=substr($text,1,1);
+$C=substr($text,2,1);
+$D=substr($text,3,1);
+$E=substr($text,4,1);
+$F=substr($text,5,1);
+$G=substr($text,6,1);
+$H=substr($text,7,1);
+$I=substr($text,8,1);
+$J=substr($text,9,1);
+$K=substr($text,10,1);
+$L=substr($text,11,1);
+$M=substr($text,12,1);
+$N=substr($text,13,1);
+$O=substr($text,14,1);
+$P=substr($text,15,1);
+$R=substr($text,16,1);
+$S=substr($text,17,1);
+$T=substr($text,18,1);
+$U=substr($text,19,1);
 $pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
@@ -4017,17 +4028,18 @@ $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$R","$rmc",0,"C");$pdf->Cell(1,
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$T","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$U","$rmc",0,"C");
 
 //stat
-$A=substr($hlavicka->xstat,0,1);
-$B=substr($hlavicka->xstat,1,1);
-$C=substr($hlavicka->xstat,2,1);
-$D=substr($hlavicka->xstat,3,1);
-$E=substr($hlavicka->xstat,4,1);
-$F=substr($hlavicka->xstat,5,1);
-$G=substr($hlavicka->xstat,6,1);
-$H=substr($hlavicka->xstat,7,1);
-$I=substr($hlavicka->xstat,8,1);
-$J=substr($hlavicka->xstat,9,1);
-$K=substr($hlavicka->xstat,10,1);
+$text=$fstat;
+$A=substr($text,0,1);
+$B=substr($text,1,1);
+$C=substr($text,2,1);
+$D=substr($text,3,1);
+$E=substr($text,4,1);
+$F=substr($text,5,1);
+$G=substr($text,6,1);
+$H=substr($text,7,1);
+$I=substr($text,8,1);
+$J=substr($text,9,1);
+$K=substr($text,10,1);
 $pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
@@ -9752,7 +9764,7 @@ $pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(26,8,"$fir_fpsc","$rmc",0,"L");$pd
 
 //stat
 $pdf->Cell(190,6," ","$rmc1",1,"L");
-$pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(46,6,"$xstat","$rmc",1,"L");
+$pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(46,6,"$fstat","$rmc",1,"L");
 
 //udaje o danovom priznani
 $pdf->Cell(190,16," ","$rmc1",1,"L");
