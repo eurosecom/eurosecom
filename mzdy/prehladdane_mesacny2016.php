@@ -858,7 +858,7 @@ $ume = $fir_riadok->umex;
 $druh = $fir_riadok->druh;
 $dopr_sk = SkDatum($fir_riadok->dopr);
 $dap_sk = SkDatum($fir_riadok->dap);
-$zrobil = $fir_mzdt05; if ( $fir_mzdt05='' ) $zrobil=$kli_uzmeno." ".$kli_uzprie;
+$zrobil = $fir_mzdt05; if ( $fir_mzdt05 == '' ) $zrobil=$kli_uzmeno." ".$kli_uzprie;
 
 $r00a = $fir_riadok->r00a;
 $r01a = $fir_riadok->r01a;
