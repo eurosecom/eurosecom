@@ -901,7 +901,6 @@ mysql_free_result($fir_vysledok);
 //FO-Priezvisko,Meno,Titul a trvaly pobyt z ufirdalsie
 if ( $fir_uctt03 == 999 )
 {
-
 $sqlc = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE icox = 0";
 $vysledokc = mysql_query($sqlc);
 if ( $vysledokc )
@@ -919,7 +918,6 @@ $dstat = $riadokc->dstat;
 $dtel = $riadokc->dtel;
 //$dfax = $riadokc->dfax;
      }
-
 }
 if ( $fir_uctt03 != 999 )
 {
@@ -994,8 +992,7 @@ form.odved-area > p > a {
   font-size: 13px;
   color: #39f;
 }
-
-div.content-xml { /* dopyt, preveriù */
+div.content-xml {
   position: relative;
   width: 950px;
   height: 100px;
@@ -1221,7 +1218,7 @@ $mesiacx=$mesiac; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
 <div class="input-echo" style="width:68px; top:447px; left:827px;"><?php echo $dtitz; ?></div>
 <!-- PO -->
 <div class="input-echo" style="width:727px; top:519px; left:52px;"><?php echo $fir_fnaz; ?></div>
-<div class="input-echo" style="width:60px; top:519px; left:822px;"><?php echo $fir_uctt03tlac; ?></div> <!-- dopyt, netlaËiù, keÔ bude fo -->
+<div class="input-echo" style="width:60px; top:519px; left:822px;"><?php echo $fir_uctt03tlac; ?></div>
 <!-- Sidlo PO alebo pobyt FO -->
 <div class="input-echo" style="width:635px; top:593px; left:52px;"><?php echo $duli; ?></div>
 <div class="input-echo" style="width:174px; top:593px; left:720px;"><?php echo $dcdm; ?></div>
@@ -3213,12 +3210,12 @@ $fir_fuli = $riadokc->duli;
 $fir_fcdm = $riadokc->dcdm;
 $fir_fpsc = $riadokc->dpsc;
 $fir_fmes = $riadokc->dmes;
-$fir_fstat = $riadokc->dstat; //dopyt, oöetriù, keÔ nie je 999, aby dalo $dstat="Slovensko";
+$fir_fstat = $riadokc->dstat;
 $fir_ftel = $riadokc->dtel;
 $fir_ffax = $riadokc->dfax;
      }
 }
-if( $fir_fstat == '' ) { $fir_fstat="SR";}
+if ( $fir_fstat == '' ) { $fir_fstat="SR";}
   $text = " <sidlo>"."\r\n"; fwrite($soubor, $text);
 $fir_fuli = iconv("CP1250", "UTF-8", $fir_fuli);
 $fir_fmes = iconv("CP1250", "UTF-8", $fir_fmes);
@@ -3230,7 +3227,7 @@ $fir_fstat = iconv("CP1250", "UTF-8", $fir_fstat);
   $text = "  <stat><![CDATA[".$fir_fstat."]]></stat>"."\r\n"; fwrite($soubor, $text);
   $text = " </sidlo>"."\r\n"; fwrite($soubor, $text);
 
-  $text = " <podava>"."\r\n"; fwrite($soubor, $text); //dopyt, nefunguje
+  $text = " <podava>"."\r\n"; fwrite($soubor, $text);
 $mpprie = iconv("CP1250", "UTF-8", $mpprie);
 $mpmeno = iconv("CP1250", "UTF-8", $mpmeno);
 $mptitl = iconv("CP1250", "UTF-8", $mptitl);
@@ -3241,7 +3238,8 @@ $mptitz = iconv("CP1250", "UTF-8", $mptitz);
   $text = "  <titulZa><![CDATA[".$mptitz."]]></titulZa>"."\r\n"; fwrite($soubor, $text);
 $mprodne=$mprdc.$mprdk;
   $text = "  <rodneCislo><![CDATA[".$mprodne."]]></rodneCislo>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <datumNarodenia><![CDATA[".$mpdar."]]></datumNarodenia>"."\r\n"; fwrite($soubor, $text);
+if ( $mpdar_sk == '00.00.0000' ) $mpdar_sk="";
+  $text = "  <datumNarodenia><![CDATA[".$mpdar_sk."]]></datumNarodenia>"."\r\n"; fwrite($soubor, $text);
   $text = "  <dic><![CDATA[".$mpdic."]]></dic>"."\r\n"; fwrite($soubor, $text);
 $mpnaz = iconv("CP1250", "UTF-8", $mpnaz);
 $mpuli = iconv("CP1250", "UTF-8", $mpuli);
@@ -3363,7 +3361,7 @@ $ucet="";
 if ( $hlavicka->uce == 1 ) { $ucet=$cisloUctu; }
   $text = "   <cisloUctu><![CDATA[".$ucet."]]></cisloUctu>"."\r\n"; fwrite($soubor, $text);
 $kodBanky="";
-if ( $hlavicka->uce == 1 AND $hlavicka->vrat == 1 ) { $kodBanky=$fir_fnm1; } //dopyt, oöetriù aby ned·val keÔ neûiadam bonus/prÈmiu
+if ( $hlavicka->uce == 1 ) { $kodBanky=$fir_fnm1; }
   $text = "   <kodBanky><![CDATA[".$kodBanky."]]></kodBanky>"."\r\n"; fwrite($soubor, $text);
 $iban="";
 if ( $hlavicka->uce == 1 ) { $iban=$fir_fib1; }
@@ -3374,8 +3372,8 @@ if ( $hlavicka->uce == 1 ) { $iban=$fir_fib1; }
   $text = "</telo>"."\r\n"; fwrite($soubor, $text);
 
   $text = "<vyhotovil>"."\r\n"; fwrite($soubor, $text);
-$fir_mzdt05 = iconv("CP1250", "UTF-8", $fir_mzdt05);
-  $text = " <meno><![CDATA[".$fir_mzdt05."]]></meno>"."\r\n"; fwrite($soubor, $text);
+$zrobil = iconv("CP1250", "UTF-8", $fir_mzdt05);
+  $text = " <meno><![CDATA[".$zrobil."]]></meno>"."\r\n"; fwrite($soubor, $text);
   $text = " <tel><![CDATA[".$fir_mzdt04."]]></tel>"."\r\n"; fwrite($soubor, $text);
 $h_dap = SkDatum($hlavicka->dap);
   $text = " <datumVyhotovenia><![CDATA[".$h_dap."]]></datumVyhotovenia>"."\r\n"; fwrite($soubor, $text);
@@ -3404,7 +3402,7 @@ fclose($soubor);
 </div>
 <div class="content-xml">
 <p>Stiahnite si niûöie uveden˝ s˙bor XML na V·ö lok·lny disk a
-   naËÌtajte na www.drsr.sk alebo do aplik·cie eDane:</p>
+   naËÌtajte na www.financnasprava.sk alebo do aplik·cie eDane:</p>
 <a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
 </div>
 <?php
