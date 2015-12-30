@@ -3324,7 +3324,10 @@ div.input-echo {
    window.open('../ucto/priznaniefob_xml2015.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
+  function CisKrajin()
+  {
+   window.open('../cis/ciselnik_krajin.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }
 </script>
 </HEAD>
 <?php if( $zandroidu == 1 ) { ?>
@@ -3947,6 +3950,8 @@ $sn1c=substr($sknacec,0,1);
 
 <!-- XIII.ODDIEL -->
 <input type="checkbox" name="uoso" value="1" style="top:144px; left:58px;"/>
+<img src="../obr/ikony/info_blue_icon.png" title="Štatistický èíselník krajín"
+     onclick="CisKrajin();" class="btn-row-tool" style="top:218px; left:7px;">
 <input type="text" name="pzks1" id="pzks1" style="width:59px; top:218px; left:51px;"/>
 <input type="text" name="pdrp1" id="pdrp1" style="width:14px; top:218px; left:146px;"/>
 <input type="text" name="pdro1" id="pdro1" style="width:14px; top:218px; left:204px;"/>
