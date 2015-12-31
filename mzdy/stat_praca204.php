@@ -28,9 +28,6 @@ if ( $strana == 0 ) $strana=1;
 
 $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
 
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
@@ -50,6 +47,10 @@ $modul = 1*$_REQUEST['modul'];
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
+
+//.jpg podklad
+$jpg_cesta="../dokumenty/statistika2016/praca204/praca204_v16";
+$jpg_popis="tlaËivo ätvrùroËn˝ v˝kaz o pr·ci Pr·ca 2-04 ".$kli_vrok;
 
 if ( $copern == 101 ) { $copern=102; }
 
@@ -533,7 +534,7 @@ form input[type=text] {
   function ObnovUI()
   {
 <?php if ( $strana == 1 ) { ?>
-    document.formv1.odoslane.value = '<?php echo "$odoslane_sk";?>';
+   document.formv1.odoslane.value = '<?php echo "$odoslane_sk";?>';
 <?php                     } ?>
 
 <?php if ( $strana == 2 ) { ?>
@@ -584,15 +585,18 @@ form input[type=text] {
 
   function MetodVypln()
   {
-   window.open('../dokumenty/statistika2014/praca204/praca204v14_metod_pokyny.pdf', '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+   window.open('<?php echo $jpg_cesta; ?>_metodika.pdf',
+'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
   function TlacVykaz()
   {
-   window.open('../mzdy/stat_praca204.php?copern=11&drupoh=1&page=1&typ=PDF&strana=9999', '_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/stat_praca204.php?copern=11&drupoh=1&page=1&typ=PDF&strana=9999',
+'_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
   }
   function UdajeFirma()
   {
-   window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0', '_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0',
+'_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
   }
   function NacitajMzdy()
   {
@@ -642,72 +646,79 @@ $source="stat_praca204.php?cislo_oc=".$cislo_oc."";
 </div>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/praca204/praca204v14_str1.jpg" alt="tlaËivo ätvrùroËn˝ v˝kaz o pr·ci Pr·ca 2-04 1.strana 216kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 1.strana 240kB">
 <?php
  $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
  $kli_vrokx = substr($kli_vrok,2,2);
 ?>
-<span class="text-echo" style="top:224px; left:475px; font-size:24px;"><?php echo $kli_vrok; ?></span>
-<span class="text-echo" style="top:326px; left:258px; font-size:18px; letter-spacing:35px;"><?php echo $kli_vrokx; ?></span>
-<span class="text-echo" style="top:326px; left:349px; font-size:18px; letter-spacing:35px;"><?php echo $mesiac; ?></span>
-<span class="text-echo" style="top:326px; left:440px; font-size:18px; letter-spacing:40px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:245px; left:326px; font-size:18px; letter-spacing:35px;"><?php echo $mesiac; ?></span>
+<span class="text-echo" style="top:245px; left:418px; font-size:18px; letter-spacing:38px;"><?php echo $fir_ficox; ?></span>
 <!-- ORGANIZACIA -->
-<span class="text-echo" style="top:966px; left:60px;"><?php echo $fir_fnaz; ?></span>
-<span class="text-echo" style="top:985px; left:60px;"><?php echo "$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
-<span class="text-echo" style="top:966px; left:808px;"><?php echo $okres; ?></span>
- <img src="../obr/ikony/pencil_blue_icon.png" onclick="UdajeFirma();" title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:964px; left:840px;">
+<span class="text-echo" style="top:932px; left:60px;"><?php echo "$fir_fnaz $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
+<span class="text-echo" style="top:932px; left:808px;"><?php echo $okres; ?></span>
+ <img src="../obr/ikony/pencil_blue_icon.png" onclick="UdajeFirma();" title="Nastaviù kÛd okresu"
+      class="btn-row-tool" style="top:930px; left:842px;">
 <!-- Vyplnil -->
-<span class="text-echo" style="top:1050px; left:60px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo" style="top:1050px; left:394px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo" style="top:1100px; left:60px;"><?php echo $fir_fem1; ?></span>
-<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);" style="width:90px; top:1094px; left:394px;"/>
+<span class="text-echo" style="top:985px; left:60px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo" style="top:997px; left:485px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo" style="top:1018px; left:110px;"><?php echo $fir_fem1; ?></span>
+<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);"
+       style="width:80px; top:1020px; left:495px;"/>
+
+<!-- modul 100307 -->
+<span class="text-echo center" style="width:488px; top:1165px; left:412px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo center" style="width:488px; top:1192px; left:412px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo center" style="width:488px; top:1217px; left:412px;"><?php echo $fir_fem1; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/praca204/praca204v14_str2.jpg" alt="tlaËivo ätvrùroËn˝ v˝kaz o pr·ci Pr·ca 2-04 2.strana 216kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 2.strana 216kB">
 
 <!-- modul 100164 -->
 <?php $fir_sknacex=str_replace(".","",$fir_sknace); ?>
-<span class="text-echo" style="top:200px; left:760px;"><?php echo $fir_sknacex; ?></span>
-<span class="text-echo" style="top:225px; left:778px;"><?php echo $okres; ?></span>
- <img src="../obr/ikony/pencil_blue_icon.png" onclick="UdajeFirma();" title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:223px; left:810px;">
+<span class="text-echo" style="top:165px; left:770px;"><?php echo $fir_sknacex; ?></span>
+<span class="text-echo" style="top:192px; left:778px;"><?php echo $okres; ?></span>
+ <img src="../obr/ikony/pencil_blue_icon.png" onclick="UdajeFirma();"
+      title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:189px; left:810px;">
 
 <!-- modul 2 -->
-<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:360px; left:700px;"/>
-<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:387px; left:700px;"/>
+<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:342px; left:740px;"/>
+<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:382px; left:740px;"/>
 
 <!-- modul 5 -->
-<input type="text" name="mod5r01" id="mod5r01" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:546px; left:700px;"/>
-<input type="text" name="mod5r02" id="mod5r02" style="width:100px; top:572px; left:700px;"/>
-<input type="text" name="mod5r03" id="mod5r03" style="width:100px; top:598px; left:700px;"/>
-<input type="text" name="mod5r04" id="mod5r04" style="width:100px; top:624px; left:700px;"/>
-<input type="text" name="mod5r05" id="mod5r05" style="width:100px; top:649px; left:700px;"/>
-<input type="text" name="mod5r06" id="mod5r06" style="width:100px; top:681px; left:700px;"/>
-<input type="text" name="mod5r07" id="mod5r07" style="width:100px; top:712px; left:700px;"/>
-<input type="text" name="mod5r08" id="mod5r08" style="width:100px; top:738px; left:700px;"/>
+<input type="text" name="mod5r01" id="mod5r01" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:567px; left:740px;"/>
+<input type="text" name="mod5r02" id="mod5r02" style="width:100px; top:593px; left:740px;"/>
+<input type="text" name="mod5r03" id="mod5r03" style="width:100px; top:619px; left:740px;"/>
+<input type="text" name="mod5r04" id="mod5r04" style="width:100px; top:645px; left:740px;"/>
+<input type="text" name="mod5r05" id="mod5r05" style="width:100px; top:671px; left:740px;"/>
+<input type="text" name="mod5r06" id="mod5r06" style="width:100px; top:696px; left:740px;"/>
+<input type="text" name="mod5r07" id="mod5r07" style="width:100px; top:722px; left:740px;"/>
+<input type="text" name="mod5r08" id="mod5r08" style="width:100px; top:748px; left:740px;"/>
 <!-- riadky 9 - 11 -->
-<input type="text" name="mod5r10" id="mod5r10" style="width:100px; top:764px; left:700px;"/>
-<input type="text" name="mod5r11" id="mod5r11" style="width:100px; top:795px; left:700px;"/>
-<input type="text" name="mod5r12" id="mod5r12" style="width:100px; top:832px; left:700px;"/>
+<input type="text" name="mod5r10" id="mod5r10" style="width:100px; top:774px; left:740px;"/>
+<input type="text" name="mod5r11" id="mod5r11" style="width:100px; top:806px; left:740px;"/>
+<input type="text" name="mod5r12" id="mod5r12" style="width:100px; top:843px; left:740px;"/>
 <!-- riadky 12 - 14 -->
-<input type="text" name="mod5r13" id="mod5r13" style="width:100px; top:863px; left:700px;"/>
-<input type="text" name="mod5r14" id="mod5r14" style="width:100px; top:889px; left:700px;"/>
-<input type="text" name="mod5r15" id="mod5r15" style="width:100px; top:915px; left:700px;"/>
+<input type="text" name="mod5r13" id="mod5r13" style="width:100px; top:873px; left:740px;"/>
+<input type="text" name="mod5r14" id="mod5r14" style="width:100px; top:899px; left:740px;"/>
+<input type="text" name="mod5r15" id="mod5r15" style="width:100px; top:925px; left:740px;"/>
 <!-- riadky 15 - 17 -->
-<input type="text" name="mod5r16" id="mod5r16" style="width:100px; top:941px; left:700px;"/>
-<input type="text" name="mod5r17" id="mod5r17" style="width:100px; top:966px; left:700px;"/>
-<input type="text" name="mod5r18" id="mod5r18" style="width:100px; top:992px; left:700px;"/>
+<input type="text" name="mod5r16" id="mod5r16" style="width:100px; top:951px; left:740px;"/>
+<input type="text" name="mod5r17" id="mod5r17" style="width:100px; top:977px; left:740px;"/>
+<input type="text" name="mod5r18" id="mod5r18" style="width:100px; top:1003px; left:740px;"/>
 <!-- riadky 18 - 20 -->
-<input type="text" name="mod5r19" id="mod5r19" style="width:100px; top:1018px; left:700px;"/>
-<input type="text" name="mod5r20" id="mod5r20" style="width:100px; top:1050px; left:700px;"/>
-<input type="text" name="mod5r22" id="mod5r22" style="width:100px; top:1086px; left:700px;"/>
+<input type="text" name="mod5r19" id="mod5r19" style="width:100px; top:1028px; left:740px;"/>
+<input type="text" name="mod5r20" id="mod5r20" style="width:100px; top:1055px; left:740px;"/>
+<input type="text" name="mod5r22" id="mod5r22" style="width:100px; top:1080px; left:740px;"/>
 <!-- riadky 21 - 23 -->
-<input type="text" name="mod5r23" id="mod5r23" style="width:100px; top:1117px; left:700px;"/>
-<input type="text" name="mod5r24" id="mod5r24" style="width:100px; top:1143px; left:700px;"/>
-<input type="text" name="mod5r25" id="mod5r25" style="width:100px; top:1174px; left:700px;"/>
+<input type="text" name="mod5r23" id="mod5r23" style="width:100px; top:1106px; left:740px;"/>
+<input type="text" name="mod5r24" id="mod5r24" style="width:100px; top:1132px; left:740px;"/>
+<input type="text" name="mod5r25" id="mod5r25" style="width:100px; top:1164px; left:740px;"/>
 <!-- kontrolny sucet -->
-<input type="text" name="mod5r99" id="mod5r99" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1206px; left:700px;"/>
+<input type="text" name="mod5r99" id="mod5r99" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1195px; left:740px;"/>
 <?php                                        } ?>
 
 <div class="navbar">
@@ -757,27 +768,20 @@ $hlavicka=mysql_fetch_object($sql);
 
 if ( $strana == 1 OR $strana == 9999 ) {
 $pdf->AddPage();
-$pdf->SetFont('arial','',10);
+$pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-
-if ( File_Exists('../dokumenty/statistika2014/praca204/praca204v14_str1.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/praca204/praca204v14_str1.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
 
 //OBDOBIA
-$pdf->SetFont('arial','',15);
-$pdf->Cell(190,35," ","$rmc1",1,"L");
-$pdf->Cell(87,8," ","$rmc1",0,"L");$pdf->Cell(30,8,"$kli_vrok ","$rmc1",1,"C");
-$pdf->SetFont('arial','',11);
-$pdf->Cell(190,15," ","$rmc1",1,"L");
-$R1=substr($kli_vrok,2,1);
-$R2=substr($kli_vrok,3,1);
 $A=substr($mesiac,0,1);
 $B=substr($mesiac,1,1);
-$pdf->Cell(43,5," ","$rmc1",0,"L");
-$pdf->Cell(10,6,"$R1","$rmc",0,"C");$pdf->Cell(10,6,"$R2","$rmc",0,"C");$pdf->Cell(10,6,"$A","$rmc",0,"C");$pdf->Cell(10,6,"$B","$rmc",0,"C");
+$pdf->Cell(190,39," ","$rmc1",1,"L");
+$pdf->Cell(58,5," ","$rmc1",0,"L");$pdf->Cell(10,6,"$A","$rmc",0,"C");$pdf->Cell(10,6,"$B","$rmc",0,"C");
 //ico
 $fir_ficx=$fir_fico;
 $cfico=1*$fir_fico;
@@ -790,21 +794,32 @@ $E=substr($fir_ficx,4,1);
 $F=substr($fir_ficx,5,1);
 $G=substr($fir_ficx,6,1);
 $H=substr($fir_ficx,7,1);
-$pdf->Cell(11,6,"$A","$rmc",0,"C");$pdf->Cell(11,6,"$B","$rmc",0,"C");$pdf->Cell(11,6,"$C","$rmc",0,"C");$pdf->Cell(11,6,"$D","$rmc",0,"C");
-$pdf->Cell(11,6,"$E","$rmc",0,"C");$pdf->Cell(11,6,"$F","$rmc",0,"C");$pdf->Cell(11,6,"$G","$rmc",0,"C");$pdf->Cell(11,6,"$H","$rmc",1,"C");
+$pdf->Cell(11,6,"$A","$rmc",0,"C");$pdf->Cell(11,6,"$B","$rmc",0,"C");
+$pdf->Cell(10,6,"$C","$rmc",0,"C");$pdf->Cell(11,6,"$D","$rmc",0,"C");
+$pdf->Cell(10,6,"$E","$rmc",0,"C");$pdf->Cell(11,6,"$F","$rmc",0,"C");
+$pdf->Cell(11,6,"$G","$rmc",0,"C");$pdf->Cell(11,6,"$H","$rmc",1,"C");
 
 //ORGANIZACIA
-$pdf->Cell(190,141," ","$rmc1",1,"L");
-$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(153,4,"$fir_fnaz","$rmc",0,"L");$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(20,4,"$okres","$rmc",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(153,6,"$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",1,"L");
+$pdf->Cell(190,152," ","$rmc1",1,"L");
+$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(153,4,"$fir_fnaz, $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",0,"L");
+$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(34,4,"$okres","$rmc",1,"C");
 
 //VYPLNIL
 $pdf->Cell(195,9," ","$rmc1",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(60,5,"$fir_mzdt05","$rmc",0,"L");$pdf->Cell(14,5," ","$rmc1",0,"L");$pdf->Cell(40,5,"$fir_mzdt04","$rmc",1,"L");
-$pdf->Cell(195,5," ","$rmc1",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(72,6,"$fir_fem1","$rmc",0,"L");$pdf->Cell(2,5," ","$rmc1",0,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(73,5,"$fir_mzdt05","$rmc",1,"L");
+$pdf->SetFont('arial','',10);
+$pdf->Cell(195,-3," ","$rmc1",1,"L");
+$pdf->Cell(95,5," ","$rmc1",0,"L");$pdf->Cell(24,4,"$fir_mzdt04","$rmc",1,"R");
+$pdf->Cell(195,1," ","$rmc1",1,"L");
+$pdf->Cell(12,5," ","$rmc1",0,"L");$pdf->Cell(61,6,"$fir_fem1","$rmc",0,"L");
 //odoslane
-$pdf->Cell(28,5,"$odoslane_sk","$rmc",1,"C");
+$pdf->Cell(22,5," ","$rmc1",0,"L");$pdf->Cell(24,6,"$odoslane_sk","$rmc",1,"R");
+
+//modul 100307
+$pdf->Cell(195,26," ","$rmc1",1,"L");
+$pdf->Cell(81,5," ","$rmc1",0,"C");$pdf->Cell(108,6.5,"$fir_mzdt05","$rmc",1,"C");
+$pdf->Cell(81,5," ","$rmc1",0,"C");$pdf->Cell(108,6,"$fir_mzdt04","$rmc",1,"C");
+$pdf->Cell(81,5," ","$rmc1",0,"C");$pdf->Cell(108,6,"$fir_fem1","$rmc",1,"C");
                                        }
 
 if ( $strana == 2 OR $strana == 9999 ) {
@@ -812,10 +827,11 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/praca204/praca204v14_str2.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/praca204/praca204v14_str2.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
 
 $mod2r01=$hlavicka->mod2r01;
 if ( $mod2r01 == 0 ) $mod2r01="";
@@ -872,42 +888,42 @@ $mod5r99=$hlavicka->mod5r99;
 if ( $hlavicka->mod5r99 == 0 ) $mod5r99="";
 
 //modul 100164
-$pdf->Cell(195,29," ","$rmc1",1,"L");
+$pdf->Cell(195,21," ","$rmc1",1,"L");
 $sknace= str_replace(".", "", $fir_sknace);
-$pdf->Cell(139,5," ","$rmc1",0,"C");$pdf->Cell(50,6,"$sknace","$rmc",1,"C");
-$pdf->Cell(139,5," ","$rmc1",0,"C");$pdf->Cell(50,6,"$okres","$rmc",1,"C");
+$pdf->Cell(141,5," ","$rmc1",0,"C");$pdf->Cell(48,6,"$sknace","$rmc",1,"C");
+$pdf->Cell(141,5," ","$rmc1",0,"C");$pdf->Cell(48,6,"$okres","$rmc",1,"C");
 
 //modul 2
-$pdf->Cell(195,25," ","$rmc1",1,"L");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,7,"$mod2r01","$rmc",1,"C");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,5,"$mod2r02","$rmc",1,"C");
+$pdf->Cell(195,28," ","$rmc1",1,"L");
+$pdf->Cell(141,5," ","$rmc1",0,"C");$pdf->Cell(48,8,"$mod2r01","$rmc",1,"C");
+$pdf->Cell(141,5," ","$rmc1",0,"C");$pdf->Cell(48,9,"$mod2r02","$rmc",1,"C");
 
 //modul 5
-$pdf->Cell(190,31," ","$rmc1",1,"L");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r01","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r02","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r03","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r04","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r05","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,8,"$mod5r06","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r07","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r08","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r10","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,8,"$mod5r11","$rmc",1,"R");
-$pdf->Cell(150,8," ","$rmc1",0,"L");$pdf->Cell(38,8,"$mod5r12","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r13","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r14","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r15","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r16","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r17","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r18","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r19","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,8,"$mod5r20","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,8,"$mod5r22","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r23","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,7,"$mod5r24","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,8,"$mod5r25","$rmc",1,"R");
-$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(38,6,"$mod5r99","$rmc",1,"R");
+$pdf->Cell(190,35.5," ","$rmc1",1,"L");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r01","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r02","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r03","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r04","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r05","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r06","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r07","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r08","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r10","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,8,"$mod5r11","$rmc",1,"R");
+$pdf->Cell(141,8," ","$rmc1",0,"L");$pdf->Cell(44,8,"$mod5r12","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r13","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r14","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r15","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r16","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r17","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r18","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r19","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r20","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r22","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r23","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r24","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,8,"$mod5r25","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r99","$rmc",1,"R");
                                        }
 }
 $i = $i + 1;
