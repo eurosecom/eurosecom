@@ -1159,11 +1159,13 @@ $pomermes=1;
 if( $pomermes == 1 )
   {
 //echo "idem pomer mes"."<br />";
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s1/12 WHERE oc = 1 AND cpl = $riadok->cpl ";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s1 WHERE oc = 1 AND cpl = $riadok->cpl AND r19s1mes = 12 ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6*r19s1mes WHERE oc = 1 AND cpl = $riadok->cpl ";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s1/12 WHERE oc = 1 AND cpl = $riadok->cpl AND r19s1mes < 12 ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6*r19s1mes WHERE oc = 1 AND cpl = $riadok->cpl AND r19s1mes < 12 ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl AND r19s1mes < 12 ";
 $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
@@ -1173,11 +1175,13 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s1=0 WHERE r20s1 
 $upravene = mysql_query("$uprtxt");
 
 //s2
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s2/12 WHERE oc = 1 AND cpl = $riadok->cpl ";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s2 WHERE oc = 1 AND cpl = $riadok->cpl AND r19s2mes = 12 ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6*r19s2mes WHERE oc = 1 AND cpl = $riadok->cpl ";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s2/12 WHERE oc = 1 AND cpl = $riadok->cpl AND r19s2mes < 12 ";
 $upravene = mysql_query("$uprtxt");
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6*r19s2mes WHERE oc = 1 AND cpl = $riadok->cpl AND r19s2mes < 12 ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl AND r19s2mes < 12 ";
 $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des2=des6 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
