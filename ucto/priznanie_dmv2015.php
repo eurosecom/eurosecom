@@ -1159,7 +1159,9 @@ $pomermes=1;
 if( $pomermes == 1 )
   {
 //echo "idem pomer mes"."<br />";
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s1/12*r19s1mes WHERE oc = 1 AND cpl = $riadok->cpl ";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s1/12 WHERE oc = 1 AND cpl = $riadok->cpl ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6*r19s1mes WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
@@ -1171,7 +1173,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET r20s1=0 WHERE r20s1 
 $upravene = mysql_query("$uprtxt");
 
 //s2
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s2/12*r19s2mes WHERE oc = 1 AND cpl = $riadok->cpl ";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=r18s2/12 WHERE oc = 1 AND cpl = $riadok->cpl ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6*r19s2mes WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv$akysub SET des6=des6-0.005 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $upravene = mysql_query("$uprtxt");
@@ -3042,7 +3046,7 @@ $slpol = mysql_num_rows($sluz);
 <table class="vozidla">
 <caption>Zoznam vozidiel</caption>
 <tr class="zero-line">
- <td style="width:9%;"></td><td style="width:32%;"></td><td style="width:4%;"></td>
+ <td style="width:12%;"></td><td style="width:29%;"></td><td style="width:4%;"></td>
  <td style="width:12%;"></td><td style="width:10%;"></td><td style="width:12%;"></td>
  <td style="width:9%;"></td><td style="width:12%;"></td>
 </tr>
@@ -3067,9 +3071,10 @@ $i=0;
   if (@$zaznam=mysql_data_seek($sluz,$i))
  {
 $rsluz=mysql_fetch_object($sluz);
+$cisloi=$i+1;
 ?>
-<tr class="body">
- <td align="center"><?php echo $rsluz->vzspz; ?></td>
+<tr class="body"> 
+ <td align="left"><?php echo $cisloi.". ".$rsluz->vzspz; ?></td>
  <td><?php echo $rsluz->vzzn; ?></td>
  <td align="center"><?php echo $rsluz->vzkat; ?></td>
  <td align="center">
