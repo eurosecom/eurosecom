@@ -549,6 +549,8 @@ if ( $hlavicka->ucet == 0 ) $hodnota="";
 if ( $hlavicka->zvra == 0 ) $hodnota="";
   $text = "    <kodBanky><![CDATA[".$hodnota."]]></kodBanky>"."\r\n"; fwrite($soubor, $text);
 $hodnota=$fir_fib1;
+if ( $hlavicka->ucet == 0 ) $hodnota="";
+if ( $hlavicka->zvra == 0 ) $hodnota="";
   $text = "    <IBAN><![CDATA[".$hodnota."]]></IBAN>"."\r\n"; fwrite($soubor, $text);
   $text = "   </bankovyUcet>"."\r\n"; fwrite($soubor, $text);
 
