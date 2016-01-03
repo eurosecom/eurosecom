@@ -535,7 +535,7 @@ $hodnota=$hlavicka->post;
 if ( $hlavicka->zvra == 0 ) $hodnota="0";
   $text = "    <poukazka><![CDATA[".$hodnota."]]></poukazka>"."\r\n"; fwrite($soubor, $text);
 $hodnota=$hlavicka->ucet;
-if ( $hlavicka->zvra == 0 ) $hodnota="";
+if ( $hlavicka->zvra == 0 ) $hodnota="0";
   $text = "    <ucet><![CDATA[".$hodnota."]]></ucet>"."\r\n"; fwrite($soubor, $text);
   $text = "   </sposobPlatby>"."\r\n"; fwrite($soubor, $text);
 
@@ -684,8 +684,7 @@ $hodnota=$hlavickav->r16s1;
 $hodnota=$hlavickav->r16s2;
   $text = "    <r16s2><![CDATA[".$hodnota."]]></r16s2>"."\r\n"; fwrite($soubor, $text);
 
-$hodnota=$hlavickav->r17;
-if ( $hodnota == 0 ) $hodnota="";
+$hodnota=1*$hlavickav->r17;
   $text = "    <r17><![CDATA[".$hodnota."]]></r17>"."\r\n"; fwrite($soubor, $text);
 
 $hodnota=$hlavickav->r18s1;

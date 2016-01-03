@@ -87,7 +87,7 @@
    <vratit><![CDATA[0]]></vratit>
    <sposobPlatby>
     <poukazka><![CDATA[0]]></poukazka>
-    <ucet><![CDATA[]]></ucet>
+    <ucet><![CDATA[0]]></ucet>
    </sposobPlatby>
    <bankovyUcet>
     <cisloUctu><![CDATA[]]></cisloUctu>
@@ -135,7 +135,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[169.60]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[169.60]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -181,7 +181,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[1089.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[1089.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -233,7 +233,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[180.20]]></r16s1>
     <r16s2><![CDATA[212.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[180.20]]></r18s1>
     <r18s2><![CDATA[212.00]]></r18s2>
     <r19aPocMesS1><![CDATA[2]]></r19aPocMesS1>
@@ -279,7 +279,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[169.60]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[169.60]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -331,7 +331,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[1295.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[1295.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -377,7 +377,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[68.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[68.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -429,7 +429,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[1089.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[1089.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -475,7 +475,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[159.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[159.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -527,7 +527,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[871.20]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[871.20]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -573,7 +573,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[86.25]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[86.25]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -625,7 +625,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[80.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[80.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -671,7 +671,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[254.40]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[254.40]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -723,7 +723,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[180.20]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[180.20]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -769,7 +769,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[180.20]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[180.20]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[1]]></r19aPocMesS1>
@@ -821,7 +821,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[1001.60]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[1001.60]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -867,7 +867,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[60.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[60.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -919,7 +919,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[133.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[133.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -965,7 +965,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[133.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[133.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -1017,7 +1017,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[169.60]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[169.60]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -1063,7 +1063,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[88.80]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[88.80]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -1115,7 +1115,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[135.00]]></r16s1>
     <r16s2><![CDATA[144.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[135.00]]></r18s1>
     <r18s2><![CDATA[144.00]]></r18s2>
     <r19aPocMesS1><![CDATA[8]]></r19aPocMesS1>
@@ -1161,7 +1161,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[115.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[115.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -1213,7 +1213,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[144.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[144.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -1259,7 +1259,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[97.75]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[97.75]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[4]]></r19aPocMesS1>
@@ -1311,7 +1311,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[111.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[111.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[3]]></r19aPocMesS1>
@@ -1357,7 +1357,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[527.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[527.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -1409,7 +1409,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[148.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[148.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[9]]></r19aPocMesS1>
@@ -1455,7 +1455,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[111.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[111.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -1507,7 +1507,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[68.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[68.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -1553,7 +1553,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[159.60]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[159.60]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[6]]></r19aPocMesS1>
@@ -1605,7 +1605,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[816.75]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[816.75]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -1651,7 +1651,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[86.25]]></r16s1>
     <r16s2><![CDATA[92.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[86.25]]></r18s1>
     <r18s2><![CDATA[92.00]]></r18s2>
     <r19aPocMesS1><![CDATA[11]]></r19aPocMesS1>
@@ -1703,7 +1703,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[37.50]]></r16s1>
     <r16s2><![CDATA[40.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[37.50]]></r18s1>
     <r18s2><![CDATA[40.00]]></r18s2>
     <r19aPocMesS1><![CDATA[4]]></r19aPocMesS1>
@@ -1749,7 +1749,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[518.00]]></r16s1>
     <r16s2><![CDATA[569.80]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[518.00]]></r18s1>
     <r18s2><![CDATA[569.80]]></r18s2>
     <r19aPocMesS1><![CDATA[4]]></r19aPocMesS1>
@@ -1801,7 +1801,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[1036.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[1036.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -1847,7 +1847,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[1036.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[1036.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -1899,7 +1899,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[135.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[135.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -1945,7 +1945,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[180.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[180.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -1997,7 +1997,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[180.20]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[180.20]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -2043,7 +2043,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[60.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[60.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[11]]></r19aPocMesS1>
@@ -2095,7 +2095,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[144.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[144.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[2]]></r19aPocMesS1>
@@ -2141,7 +2141,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[621.60]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[621.60]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -2193,7 +2193,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[159.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[159.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -2239,7 +2239,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[180.20]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[180.20]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
@@ -2291,7 +2291,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[971.25]]></r16s1>
     <r16s2><![CDATA[1036.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[971.25]]></r18s1>
     <r18s2><![CDATA[1036.00]]></r18s2>
     <r19aPocMesS1><![CDATA[1]]></r19aPocMesS1>
@@ -2337,7 +2337,7 @@
     <r15vodik><![CDATA[0]]></r15vodik>
     <r16s1><![CDATA[159.00]]></r16s1>
     <r16s2><![CDATA[0.00]]></r16s2>
-    <r17><![CDATA[]]></r17>
+    <r17><![CDATA[0]]></r17>
     <r18s1><![CDATA[159.00]]></r18s1>
     <r18s2><![CDATA[]]></r18s2>
     <r19aPocMesS1><![CDATA[12]]></r19aPocMesS1>
