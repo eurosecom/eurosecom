@@ -8,7 +8,7 @@ $sys = 'UCT';
 $urov = 2000;
 $uziv = include("../uziv.php");
 if ( !$uziv ) exit;
-if(!isset($kli_vxcf)) $kli_vxcf = 1;
+if (!isset($kli_vxcf)) $kli_vxcf = 1;
 
   require_once("../pswd/password.php");
   @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
@@ -19,7 +19,7 @@ if(!isset($kli_vxcf)) $kli_vxcf = 1;
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=1;
+$rmc=0;
 $rmc1=0;
 
 $citfir = include("../cis/citaj_fir.php");
@@ -88,8 +88,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET ".
 " mod124r99=mod124r01+mod124r02+mod124r03+mod124r04 ".
 " WHERE umex = $kli_vume "; 
 //echo $uprtxt;
-
-$upravene = mysql_query("$uprtxt"); 
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET ".
 " mod124r02='$fir_dph2'*mod124r01/100 ".
@@ -199,10 +198,10 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET ".
 if ( $strana == 2 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET ".
 " mod124r01='$mod124r01',mod124r02='$mod124r02',mod124r03='$mod124r03',mod124r04='$mod124r04', ".
-" mod2r01='$mod2r01',mod2r02='$mod2r02', aktivita='$aktivita',  ".
+" mod2r01='$mod2r01',mod2r02='$mod2r02', aktivita='$aktivita', ".
 " predajdni='$predajdni', mod124r99=mod124r01+mod124r02+mod124r03+mod124r04 ".
 " WHERE ico >= 0 AND umex = $kli_vume ";
-echo $uprtxt;
+//echo $uprtxt;
                     }
 $upravene = mysql_query("$uprtxt");
 $copern=2;
@@ -281,6 +280,7 @@ form input[type=text] {
    document.formv1.odoslane.value = '<?php echo "$odoslane_sk";?>';
 <?php                     } ?>
 <?php if ( $strana == 2 ) { ?>
+   document.formv1.aktivita.value = '<?php echo "$aktivita";?>';
    document.formv1.predajdni.value = '<?php echo "$predajdni";?>';
    document.formv1.mod124r01.value = '<?php echo "$mod124r01";?>';
    document.formv1.mod124r02.value = '<?php echo "$mod124r02";?>';
@@ -377,7 +377,6 @@ $source="statistika_opu112.php?drupoh=1&page=1";
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 1.strana 302kB">
-
 <?php
 $mesiacx=$mesiac;
 if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
@@ -409,22 +408,26 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 2.strana 302kB">
 
+<!-- modul 100340 -->
+<input type="text" name="aktivita" id="aktivita" style="width:329px; top:179px; left:562px;"/>
+<?php
+$sknace=str_replace(".", "", $fir_sknace);
+?>
+<span class="text-echo center" style="width:339px; top:211px; left:560px;"><?php echo $sknace; ?></span>
+
 <!-- modul 2 -->
-<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:830px; left:700px;"/>
-<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:855px; left:700px;"/>
+<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:352px; left:765px;"/>
+<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:389px; left:765px;"/>
 
 <!-- modul 100055 -->
-<input type="text" name="predajdni" id="predajdni" style="width:100px; top:971px; left:700px;"/>
+<input type="text" name="predajdni" id="predajdni" style="width:100px; top:541px; left:725px;"/>
 
 <!-- modul 124 -->
-<input type="text" name="mod124r01" id="mod124r01" style="width:100px; top:1084px; left:700px;"/>
-<input type="text" name="mod124r02" id="mod124r02" style="width:100px; top:1108px; left:700px;"/>
-<input type="text" name="mod124r03" id="mod124r03" style="width:100px; top:1132px; left:700px;"/>
-<input type="text" name="mod124r04" id="mod124r04" style="width:100px; top:1156px; left:700px;"/>
-<span class="text-echo" style="top:1184px; right:145px;"><?php echo $mod124r99;?></span>
-
-
-
+<input type="text" name="mod124r01" id="mod124r01" style="width:100px; top:714px; left:685px;"/>
+<input type="text" name="mod124r02" id="mod124r02" style="width:100px; top:742px; left:685px;"/>
+<input type="text" name="mod124r03" id="mod124r03" style="width:100px; top:770px; left:685px;"/>
+<input type="text" name="mod124r04" id="mod124r04" style="width:100px; top:799px; left:685px;"/>
+<span class="text-echo" style="top:832px; right:160px;"><?php echo $mod124r99; ?></span>
 <?php                                        } ?>
 
 
@@ -458,7 +461,6 @@ $pdf->AddFont('arial','','arial.php');
 
 //vytlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_statistika_opu112 WHERE  umex =  $kli_vume  "."";
-
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 
@@ -469,6 +471,73 @@ $j=0; //zaciatok strany ak by som chcel strankovat
   if (@$zaznam=mysql_data_seek($sql,$i))
 {
 $hlavicka=mysql_fetch_object($sql);
+
+if ( $strana == 1 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//OBDOBIA
+$mesiacx=$mesiac;
+if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
+$A=substr($mesiacx,0,1);
+$B=substr($mesiacx,1,1);
+$pdf->Cell(190,49," ","$rmc1",1,"L");
+$pdf->Cell(51,5," ","$rmc1",0,"L");$pdf->Cell(8,7,"$A","$rmc",0,"C");$pdf->Cell(9,7,"$B","$rmc",0,"C");
+//ico
+$fir_ficx=$fir_fico;
+$cfico=1*$fir_fico;
+if ( $cfico < 999999 ) $fir_ficx="00".$fir_fico;
+$A=substr($fir_ficx,0,1);
+$B=substr($fir_ficx,1,1);
+$C=substr($fir_ficx,2,1);
+$D=substr($fir_ficx,3,1);
+$E=substr($fir_ficx,4,1);
+$F=substr($fir_ficx,5,1);
+$G=substr($fir_ficx,6,1);
+$H=substr($fir_ficx,7,1);
+$pdf->Cell(10,7,"$A","$rmc",0,"C");$pdf->Cell(10,7,"$B","$rmc",0,"C");
+$pdf->Cell(9,7,"$C","$rmc",0,"C");$pdf->Cell(10,7,"$D","$rmc",0,"C");
+$pdf->Cell(10,7,"$E","$rmc",0,"C");$pdf->Cell(9,7,"$F","$rmc",0,"C");
+$pdf->Cell(10,7,"$G","$rmc",0,"C");$pdf->Cell(10,7,"$H","$rmc",1,"C");
+
+//ORGANIZACIA
+$pdf->Cell(190,116," ","$rmc1",1,"L");
+$pdf->Cell(55,4," ","$rmc1",0,"L");$pdf->Cell(99,4,"$fir_fnaz","$rmc",0,"L");$pdf->Cell(1,4," ","$rmc1",1,"L");
+$pdf->Cell(55,5," ","$rmc1",0,"L");$pdf->Cell(99,6,"$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",0,"L");
+$pdf->Cell(36,6,"$okres","$rmc",1,"C");
+
+//VYPLNIL
+$pdf->Cell(195,6," ","$rmc1",1,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(73,6,"$fir_mzdt05","$rmc",0,"L");$pdf->Cell(2,5," ","$rmc1",0,"L");
+$pdf->Cell(40,13,"$fir_mzdt04","$rmc",1,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(72,8,"$fir_fem1","$rmc",0,"L");$pdf->Cell(2,5," ","$rmc1",0,"L");
+//odoslane
+$pdf->Cell(41,8,"$odoslane_sk","$rmc",1,"C");
+
+//modul 100307
+$pdf->Cell(195,33," ","$rmc1",1,"L");
+$pdf->Cell(81,5," ","$rmc1",0,"C");$pdf->Cell(108,6,"$fir_mzdt05","$rmc",1,"C");
+$pdf->Cell(81,5," ","$rmc1",0,"C");$pdf->Cell(108,6,"$fir_mzdt04","$rmc",1,"C");
+$pdf->Cell(81,5," ","$rmc1",0,"C");$pdf->Cell(108,6,"$fir_fem1","$rmc",1,"C");
+                                       }
+
+if ( $strana == 2 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
 
 $mod2r01=$hlavicka->mod2r01;
 if ( $mod2r01 == 0 ) $mod2r01="";
@@ -485,99 +554,30 @@ if ( $mod124r03 == 0 ) $mod124r03="";
 $mod124r04=$hlavicka->mod124r04;
 if ( $mod124r04 == 0 ) $mod124r04="";
 
-if( $strana == 1 OR $strana == 9999 ) {
-
-$pdf->AddPage();
-$pdf->SetFont('arial','',10);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-
-if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
-}
-
-//OBDOBIA
-$pdf->SetFont('arial','',15);
-$pdf->Cell(190,27," ","$rmc1",1,"L");
-$pdf->Cell(94,8," ","$rmc1",0,"L");$pdf->Cell(15,6,"$kli_vrok","$rmc",1,"C");
-$pdf->SetFont('arial','',11);
-$pdf->Cell(190,12," ","$rmc1",1,"L");
-$R1=substr($kli_vrok,2,1);
-$R2=substr($kli_vrok,3,1);
-$mesiacx=$mesiac;
-if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
-$A=substr($mesiacx,0,1);
-$B=substr($mesiacx,1,1);
-$pdf->Cell(30,5," ","$rmc1",0,"L");
-$pdf->Cell(7,6,"$R1","$rmc",0,"C");$pdf->Cell(8,6,"$R2","$rmc",0,"C");$pdf->Cell(7,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");
-//ico
-$fir_ficx=$fir_fico;
-$cfico=1*$fir_fico;
-if ( $cfico < 999999 ) $fir_ficx="00".$fir_fico;
-$A=substr($fir_ficx,0,1);
-$B=substr($fir_ficx,1,1);
-$C=substr($fir_ficx,2,1);
-$D=substr($fir_ficx,3,1);
-$E=substr($fir_ficx,4,1);
-$F=substr($fir_ficx,5,1);
-$G=substr($fir_ficx,6,1);
-$H=substr($fir_ficx,7,1);
-$pdf->Cell(7,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
-$pdf->Cell(7,6,"$E","$rmc",0,"C");$pdf->Cell(8,6,"$F","$rmc",0,"C");$pdf->Cell(7,6,"$G","$rmc",0,"C");$pdf->Cell(8,6,"$H","$rmc",1,"C");
-
-//ORGANIZACIA
-$pdf->Cell(190,71," ","$rmc1",1,"L");
-$pdf->Cell(55,4," ","$rmc1",0,"L");$pdf->Cell(98,4,"$fir_fnaz","$rmc",0,"L");$pdf->Cell(1,4," ","$rmc1",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(152,6,"$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",0,"L");
-$pdf->Cell(37,6,"$okres","$rmc",1,"C");
-
-//VYPLNIL
-$pdf->Cell(195,5," ","$rmc1",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(73,6,"$fir_mzdt05","$rmc",0,"L");$pdf->Cell(2,5," ","$rmc1",0,"L");
-$pdf->Cell(40,13,"$fir_mzdt04","$rmc",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(72,8,"$fir_fem1","$rmc",0,"L");$pdf->Cell(2,5," ","$rmc1",0,"L");
-//odoslane
-$pdf->Cell(41,8,"$odoslane_sk","$rmc",1,"C");
-
-                                      }
-//koniec 1.strany
-if( $strana == 2 OR $strana == 9999 ) {
-
-$pdf->AddPage();
-$pdf->SetFont('arial','',10);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-
-if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
-}
-
-
+//modul 100340
+$pdf->Cell(195,25," ","$rmc1",1,"L");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6.5,"$aktivita","$rmc",1,"C");
+$sknace=str_replace(".", "", $fir_sknace);
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$sknace","$rmc",1,"C");
 
 //modul 2
-$pdf->Cell(195,22," ","$rmc1",1,"L");
-$pdf->Cell(121,5," ","$rmc1",0,"C");$pdf->Cell(67,5,"$mod2r01","$rmc",1,"C");
-$pdf->Cell(121,5," ","$rmc1",0,"C");$pdf->Cell(67,6,"$mod2r02","$rmc",1,"C");
+$pdf->Cell(195,26," ","$rmc1",1,"L");
+$pdf->Cell(153,5," ","$rmc1",0,"C");$pdf->Cell(36,8,"$mod2r01","$rmc",1,"C");
+$pdf->Cell(153,5," ","$rmc1",0,"C");$pdf->Cell(36,9,"$mod2r02","$rmc",1,"C");
 
 //modul 100055
-$pdf->Cell(180,20," ","$rmc1",1,"L");
-$pdf->Cell(132,6," ","$rmc1",0,"L");$pdf->Cell(56,7,"$predajdni","$rmc",1,"C");
+$pdf->Cell(180,26," ","$rmc1",1,"L");
+$pdf->Cell(133,6," ","$rmc1",0,"L");$pdf->Cell(56,8,"$predajdni","$rmc",1,"C");
 
 //modul 124
-$pdf->Cell(195,20," ","$rmc1",1,"L");
-$pdf->Cell(121,5," ","$rmc1",0,"C");$pdf->Cell(62,5,"$mod124r01","$rmc",1,"R");
-$pdf->Cell(121,5," ","$rmc1",0,"C");$pdf->Cell(62,6,"$mod124r02","$rmc",1,"R");
-$pdf->Cell(121,5," ","$rmc1",0,"C");$pdf->Cell(62,5,"$mod124r03","$rmc",1,"R");
-$pdf->Cell(121,5," ","$rmc1",0,"C");$pdf->Cell(62,6,"$mod124r04","$rmc",1,"R");
-$pdf->Cell(121,5," ","$rmc1",0,"C");$pdf->Cell(62,5,"$hlavicka->mod124r99","$rmc",1,"R");
-
-
-                                      }
+$pdf->Cell(195,33," ","$rmc1",1,"L");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,6,"$mod124r01","$rmc",1,"R");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,6,"$mod124r02","$rmc",1,"R");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,7,"$mod124r03","$rmc",1,"R");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,6.5,"$mod124r04","$rmc",1,"R");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,7,"$hlavicka->mod124r99","$rmc",1,"R");
+                                       }
 //koniec 2.strany
-
-
 }
 $i = $i + 1;
   }
