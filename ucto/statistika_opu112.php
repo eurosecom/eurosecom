@@ -37,8 +37,6 @@ $vyb_ump="1.".$kli_vrok; $vyb_umk=$kli_vmes.".".$kli_vrok;
 $jpg_cesta="../dokumenty/statistika2016/opu112/opu112_v16";
 $jpg_popis="tlaèivo Mesaèný výkaz v obchode, pohostinstve ... OPU 1-12 ".$kli_vrok;
 
-if ( $copern < 2 ) { $copern=2; };
-
 $strana = 1*$_REQUEST['strana'];
 if ( $strana == 0 AND $copern == 11 ) $strana=9999;
 if ( $strana == 0 ) $strana=1;
@@ -48,6 +46,7 @@ if ( $strana == 0 ) $strana=1;
 $copern = 1*strip_tags($_REQUEST['copern']);
 $modul = 1*$_REQUEST['modul'];
 
+if ( $copern < 2 ) { $copern=2; };
 
 //prepnute z uobrat.php modul 124 
 if ( $modul == 124 )
@@ -117,8 +116,9 @@ $ik=$ik+1;
 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET mod124r99=mod124r01+mod124r02+mod124r03+mod124r04 WHERE umex = $kli_vume "; 
-$upravene = mysql_query("$uprtxt"); 
-
+$upravene = mysql_query("$uprtxt");
+ 
+$strana=2;
 }
 //koniec odpocitaj modul 124 z uobrat.php
 
@@ -198,13 +198,11 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET ".
 
 if ( $strana == 2 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET ".
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET ".
 " mod124r01='$mod124r01',mod124r02='$mod124r02',mod124r03='$mod124r03',mod124r04='$mod124r04', ".
 " mod2r01='$mod2r01',mod2r02='$mod2r02', aktivita='$aktivita',  ".
 " predajdni='$predajdni', mod124r99=mod124r01+mod124r02+mod124r03+mod124r04 ".
 " WHERE ico >= 0 AND umex = $kli_vume ";
-//echo $uprtxt;
-" WHERE ico >= 0 AND umex = $kli_vume ";
+echo $uprtxt;
                     }
 $upravene = mysql_query("$uprtxt");
 $copern=2;
@@ -322,7 +320,7 @@ form input[type=text] {
   }
   function TlacVykaz()
   {
-   window.open('../ucto/statistika_opu112.php?copern=11&drupoh=1&page=1&typ=PDF', '_blank');
+   window.open('../ucto/statistika_opu112.php?copern=11&drupoh=1&page=1&typ=PDF&strana=9999', '_blank');
   }
   function UdajeFirma()
   {
@@ -361,7 +359,7 @@ if ( $copern == 2 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="statistika_opu112.php?copern=3">
+<FORM name="formv1" method="post" action="statistika_opu112.php?copern=3&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
@@ -408,6 +406,9 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 2.strana 302kB">
+
 <!-- modul 2 -->
 <input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:830px; left:700px;"/>
 <input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:855px; left:700px;"/>
@@ -484,14 +485,16 @@ if ( $mod124r03 == 0 ) $mod124r03="";
 $mod124r04=$hlavicka->mod124r04;
 if ( $mod124r04 == 0 ) $mod124r04="";
 
+if( $strana == 1 OR $strana == 9999 ) {
+
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 
-if ( File_Exists('../dokumenty/statistika2014/opu112/opu112v14_str1.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu112/opu112v14_str1.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
 
 //OBDOBIA
@@ -537,6 +540,22 @@ $pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(72,8,"$fir_fem1","$rmc",0,"L");$pdf
 //odoslane
 $pdf->Cell(41,8,"$odoslane_sk","$rmc",1,"C");
 
+                                      }
+//koniec 1.strany
+if( $strana == 2 OR $strana == 9999 ) {
+
+$pdf->AddPage();
+$pdf->SetFont('arial','',10);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+
+if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
+}
+
+
+
 //modul 2
 $pdf->Cell(195,22," ","$rmc1",1,"L");
 $pdf->Cell(121,5," ","$rmc1",0,"C");$pdf->Cell(67,5,"$mod2r01","$rmc",1,"C");
@@ -553,6 +572,12 @@ $pdf->Cell(121,5," ","$rmc1",0,"C");$pdf->Cell(62,6,"$mod124r02","$rmc",1,"R");
 $pdf->Cell(121,5," ","$rmc1",0,"C");$pdf->Cell(62,5,"$mod124r03","$rmc",1,"R");
 $pdf->Cell(121,5," ","$rmc1",0,"C");$pdf->Cell(62,6,"$mod124r04","$rmc",1,"R");
 $pdf->Cell(121,5," ","$rmc1",0,"C");$pdf->Cell(62,5,"$hlavicka->mod124r99","$rmc",1,"R");
+
+
+                                      }
+//koniec 2.strany
+
+
 }
 $i = $i + 1;
   }
