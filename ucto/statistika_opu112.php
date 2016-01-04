@@ -161,6 +161,8 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu112 ADD odoslane DATE NOT NULL AFTER aktivita";
 $vysledek = mysql_query("$sql");
 }
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu112 MODIFY aktivita VARCHAR(40) NOT NULL ";
+$vysledek = mysql_query("$sql");
 //koniec pracovny subor
 
 $poslhh = "SELECT * FROM F$kli_vxcf"."_statistika_opu112 WHERE umex = $kli_vume ";
