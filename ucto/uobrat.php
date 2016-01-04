@@ -604,10 +604,15 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 $upravene = mysql_query("$uprtxt");  
 //echo $uprtxt;
 //exit;
+
+$rok1304="";
+if( $kli_vrok < 2016 ) $rok1304="_2015";
+if( $kli_vrok < 2014 ) $rok1304="_2013";
+if( $kli_vrok < 2012 ) $rok1304="_2011";
 ?>
 <script type="text/javascript">
 
-window.open('../ucto/statistika_p1304.php?copern=1&drupoh=1&page=1&modul=112', '_self' )
+window.open('../ucto/statistika_p1304<?php echo $rok1304; ?>.php?copern=1&drupoh=1&page=1&modul=112', '_self' )
 
 </script>
 <?php
@@ -698,10 +703,15 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 $upravene = mysql_query("$uprtxt");  
 
 //exit;
+
+$rok1304="";
+if( $kli_vrok < 2016 ) $rok1304="_2015";
+if( $kli_vrok < 2014 ) $rok1304="_2013";
+if( $kli_vrok < 2012 ) $rok1304="_2011";
 ?>
 <script type="text/javascript">
 
-window.open('../ucto/statistika_p1304.php?copern=101&drupoh=1&page=1&modul=545', '_self' )
+window.open('../ucto/statistika_p1304<?php echo $rok1304; ?>.php?copern=101&drupoh=1&page=1&modul=545', '_self' )
 
 </script>
 <?php

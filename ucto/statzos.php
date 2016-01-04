@@ -476,6 +476,7 @@ window.open('../dokumenty/vykazy2010/xls_hlasenie.rar',
 //statistika 1304
 <?php
 $rok1304="";
+if( $kli_vrok < 2016 ) $rok1304="_2015";
 if( $kli_vrok < 2014 ) $rok1304="_2013";
 if( $kli_vrok < 2012 ) $rok1304="_2011";
 ?>
