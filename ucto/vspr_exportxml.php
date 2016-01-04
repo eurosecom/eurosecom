@@ -744,6 +744,11 @@ $iconm = iconv("CP1250", "UTF-8", $iconm);
 $icoad1 = iconv("CP1250", "UTF-8", $icoad1);
 $icoad2 = iconv("CP1250", "UTF-8", $icoad2);
 
+if( $iconm == '' ) { $iconm="Prijemca Nazov"; }
+if( $icoad1 == '' ) { $icoad1="Ulica"; }
+if( $icoad2 == '' ) { $icoad2="Mesto"; }
+
+
 $pstat = trim(substr($hlavickav->iban,0,2));
 if( $pstat == '' ) { $pstat="SK"; }
 
@@ -770,7 +775,7 @@ if( $pstat == '' ) { $pstat="SK"; }
   $text = " </CdtrAcct>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <InstrForCdtrAgt>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <InstrInf>Skusobna instrukcia</InstrInf>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <InstrInf>Instrukcia uhrady</InstrInf>"."\r\n"; fwrite($soubor, $text);
   $text = " </InstrForCdtrAgt>"."\r\n"; fwrite($soubor, $text);
 
 
