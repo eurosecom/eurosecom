@@ -19,7 +19,7 @@ if(!isset($kli_vxcf)) $kli_vxcf = 1;
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=0;
+$rmc=1;
 $rmc1=0;
 
 $citfir = include("../cis/citaj_fir.php");
@@ -33,11 +33,20 @@ $kli_vrok=$pole[1];
 $mesiac=$kli_vmes;
 $vyb_ump="1.".$kli_vrok; $vyb_umk=$kli_vmes.".".$kli_vrok; 
 
-//cislo operacie
-$copern = 1*strip_tags($_REQUEST['copern']);
-$modul = 1*$_REQUEST['modul'];
+//.jpg podklad
+$jpg_cesta="../dokumenty/statistika2016/opu112/opu112_v16";
+$jpg_popis="tlaËivo MesaËn˝ v˝kaz v obchode, pohostinstve ... OPU 1-12 ".$kli_vrok;
 
 if ( $copern < 2 ) { $copern=2; };
+
+$strana = 1*$_REQUEST['strana'];
+if ( $strana == 0 AND $copern == 11 ) $strana=9999;
+if ( $strana == 0 ) $strana=1;
+
+
+// cislo operacie
+$copern = 1*strip_tags($_REQUEST['copern']);
+$modul = 1*$_REQUEST['modul'];
 
 
 //prepnute z uobrat.php modul 124 
@@ -181,14 +190,23 @@ $mod124r04 = strip_tags($_REQUEST['mod124r04']);
 $odoslane_sql=SqlDatum($odoslane);
 $uprav="NO";
 
+if ( $strana == 1 ) {
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET ".
+" odoslane='$odoslane_sql' ".
+" WHERE ico >= 0 AND umex = $kli_vume ";
+                    }
+
+if ( $strana == 2 ) {
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET ".
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET ".
 " mod124r01='$mod124r01',mod124r02='$mod124r02',mod124r03='$mod124r03',mod124r04='$mod124r04', ".
-" mod2r01='$mod2r01',mod2r02='$mod2r02', aktivita='$aktivita', odoslane='$odoslane_sql', ".
+" mod2r01='$mod2r01',mod2r02='$mod2r02', aktivita='$aktivita',  ".
 " predajdni='$predajdni', mod124r99=mod124r01+mod124r02+mod124r03+mod124r04 ".
-" WHERE ico >= 0 AND umex = $kli_vume "; 
+" WHERE ico >= 0 AND umex = $kli_vume ";
 //echo $uprtxt;
-
-$upravene = mysql_query("$uprtxt");  
+" WHERE ico >= 0 AND umex = $kli_vume ";
+                    }
+$upravene = mysql_query("$uprtxt");
 $copern=2;
 if (!$upravene):
 ?>
@@ -251,10 +269,6 @@ form input[type=text] {
   border: 1px solid #39f;
   font-size: 14px;
 }
-input.btn-top-formsave {
-  top: 4px;
-}
-
 </style>
 <script language="JavaScript" src="../js/cookies.js"></script>
 <script type="text/javascript">
@@ -265,14 +279,18 @@ input.btn-top-formsave {
 ?>
   function ObnovUI()
   {
-   document.formv1.predajdni.value = '<?php echo "$predajdni";?>';
+<?php if ( $strana == 1 ) { ?>
    document.formv1.odoslane.value = '<?php echo "$odoslane_sk";?>';
+<?php                     } ?>
+<?php if ( $strana == 2 ) { ?>
+   document.formv1.predajdni.value = '<?php echo "$predajdni";?>';
    document.formv1.mod124r01.value = '<?php echo "$mod124r01";?>';
    document.formv1.mod124r02.value = '<?php echo "$mod124r02";?>';
    document.formv1.mod124r03.value = '<?php echo "$mod124r03";?>';
    document.formv1.mod124r04.value = '<?php echo "$mod124r04";?>';
    document.formv1.mod2r01.value = '<?php echo "$mod2r01";?>';
    document.formv1.mod2r02.value = '<?php echo "$mod2r02";?>';
+<?php                     } ?>
   }
 <?php
 //koniec uprava
@@ -300,7 +318,7 @@ input.btn-top-formsave {
 
   function MetodVypln()
   {
-   window.open('../dokumenty/statistika2014/opu112/opu112v14_metod_pokyny.pdf', '_blank');
+   window.open('<?php echo $jpg_cesta; ?>_metodika.pdf', '_blank');
   }
   function TlacVykaz()
   {
@@ -308,11 +326,12 @@ input.btn-top-formsave {
   }
   function UdajeFirma()
   {
-   window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0', '_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0',
+'_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
   }
   function NacitajMod124()
   {
-   window.open('../ucto/uobrat.php?copern=10&drupoh=1&page=1&typ=PDF&cstat=124&vyb_ume=<?php echo $vyb_umk; ?>', '_self' );
+   window.open('../ucto/uobrat.php?copern=10&drupoh=1&page=1&typ=PDF&cstat=124&vyb_ume=<?php echo $vyb_umk; ?>', '_self');
   }
 </script>
 </HEAD>
@@ -343,32 +362,52 @@ if ( $copern == 2 )
 
 <div id="content">
 <FORM name="formv1" method="post" action="statistika_opu112.php?copern=3">
+<?php
+$clas1="noactive"; $clas2="noactive";
+if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
+$source="statistika_opu112.php?drupoh=1&page=1";
+?>
+<div class="navbar">
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=1&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=1&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
+ <h6 class="toright">TlaËiù:</h6>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+</div>
 
-<img src="../dokumenty/statistika2014/opu112/opu112v14_str1.jpg" alt="tlaËivo MesaËn˝ v˝kaz v obhchode ... OPU 1-12 302kB" class="form-background">
+<?php if ( $strana == 1 OR $strana == 9999 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 1.strana 302kB">
+
 <?php
 $mesiacx=$mesiac;
- if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
+if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
 $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
- $kli_vrokx = substr($kli_vrok,2,2);
 ?>
-<span class="text-echo" style="top:162px; left:475px; font-size:24px;"><?php echo $kli_vrok; ?></span>
-<span class="text-echo" style="top:243px; left:193px; font-size:18px; letter-spacing:24px;"><?php echo $kli_vrokx; ?></span>
-<span class="text-echo" style="top:243px; left:261px; font-size:18px; letter-spacing:24px;"><?php echo $mesiacx; ?></span>
-<span class="text-echo" style="top:243px; left:330px; font-size:18px; letter-spacing:24px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:290px; left:289px; font-size:18px; letter-spacing:30px;"><?php echo $mesiacx; ?></span>
+<span class="text-echo" style="top:290px; left:370px; font-size:18px; letter-spacing:34px;"><?php echo $fir_ficox; ?></span>
 <!-- ORGANIZACIA -->
-<span class="text-echo" style="top:576px; left:295px;"><?php echo $fir_fnaz; ?></span>
-<span class="text-echo" style="top:598px; left:51px;"><?php echo "$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
-<span class="text-echo" style="top:598px; left:830px;"><?php echo $okres; ?></span>
+<span class="text-echo" style="top:823px; left:300px;"><?php echo $fir_fnaz; ?></span>
+<span class="text-echo" style="top:843px; left:300px;"><?php echo "$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
+<span class="text-echo" style="top:840px; left:840px;"><?php echo $okres; ?></span>
  <img src="../obr/ikony/pencil_blue_icon.png" onclick="UdajeFirma();"
-  title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:596px; left:860px;">
+      title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:838px; left:872px;">
 <!-- Vyplnil -->
-<span class="text-echo" style="top:650px; left:51px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo" style="top:664px; left:385px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo" style="top:708px; left:60px;"><?php echo $fir_fem1; ?></span>
+<span class="text-echo" style="top:895px; left:55px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo" style="top:910px; left:390px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo" style="top:958px; left:55px;"><?php echo $fir_fem1; ?></span>
 <input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:705px; left:385px;"/>
+       style="width:80px; top:956px; left:390px;"/>
 
+<!-- modul 100307 -->
+<span class="text-echo center" style="width:488px; top:1131px; left:412px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo center" style="width:488px; top:1158px; left:412px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo center" style="width:488px; top:1183px; left:412px;"><?php echo $fir_fem1; ?></span>
+<?php                                        } ?>
+
+
+<?php if ( $strana == 2 OR $strana == 9999 ) { ?>
 <!-- modul 2 -->
 <input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:830px; left:700px;"/>
 <input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:855px; left:700px;"/>
@@ -383,7 +422,16 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <input type="text" name="mod124r04" id="mod124r04" style="width:100px; top:1156px; left:700px;"/>
 <span class="text-echo" style="top:1184px; right:145px;"><?php echo $mod124r99;?></span>
 
+
+
+<?php                                        } ?>
+
+
+<div class="navbar">
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=1&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=1&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+</div>
 </FORM>
 </div> <!-- koniec #content -->
 <?php
