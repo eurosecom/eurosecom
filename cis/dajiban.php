@@ -215,13 +215,14 @@ $vydel=$sum;
 
 $pole = explode(".", $vydel);
 $cele=1*$pole[0];
-$zvysok=1*$pole[1];
+$zvysok=$pole[1];
 
 $pole = explode("-", $ucebx);
 $predcislie=1*$pole[0];
 $cislouctu=1*$pole[1];
 
 $nas="0.".$zvysok;
+//echo $nas."<br />";
 
  $num1 = $nas;
  $num2 = 97;
@@ -260,6 +261,7 @@ $bicx="";
   $bicx=$riaddok->bicb;
   }
 
+//exit;
 
 $ibanxs=$ibanx."-".$bicx;
 
