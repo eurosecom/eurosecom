@@ -510,6 +510,7 @@ $fir_uctx12 = strip_tags($_REQUEST['fir_uctx12']);
 $fir_uctx13 = strip_tags($_REQUEST['fir_uctx13']);
 $fir_uctx14 = strip_tags($_REQUEST['fir_uctx14']);
 $fir_uctx15 = strip_tags($_REQUEST['fir_uctx15']);
+$fir_xvr05 = strip_tags($_REQUEST['fir_xvr05']);
 $fir_allx15 = strip_tags($_REQUEST['fir_allx15']);
 $fir_allx14 = strip_tags($_REQUEST['fir_allx14']);
 $fir_allx13 = strip_tags($_REQUEST['fir_allx13']);
@@ -536,7 +537,7 @@ $vysledek = mysql_query("$sql");
 }
           }
 
-$upravene = mysql_query("UPDATE F$kli_vxcf"."_ufir SET dph1='$fir_dph1', dph2='$fir_dph2',
+$upravene = mysql_query("UPDATE F$kli_vxcf"."_ufir SET dph1='$fir_dph1', dph2='$fir_dph2', xvr05='$fir_xvr05',
  dph3='$fir_dph3', dph4='$fir_dph4', pokpri='$fir_pokpri', pokvyd='$fir_pokvyd', fakodb='$fir_fakodb', fakdod='$fir_fakdod', allx13='$fir_allx13',  
  mena1='$fir_mena1', mena2='$fir_mena2', kurz12='$fir_kurz12', uctx01='$fir_uctx01', uctx02='$fir_uctx02', uctx03='$fir_uctx03', allx14='$fir_allx14',
  uctx04='$fir_uctx04', uctx05='$fir_uctx05', uctx06='$fir_uctx06', uctx07='$fir_uctx07', uctx08='$fir_uctx08', uctx15='$fir_uctx15', allx15='$fir_allx15', 
@@ -1097,6 +1098,7 @@ $vysledek = mysql_query("$sql");
     document.formv1.fir_uctx13.value = '<?php echo "$fir_uctx13";?>';
     document.formv1.fir_uctx14.value = '<?php echo "$fir_uctx14";?>';
     document.formv1.fir_uctx15.value = '<?php echo "$fir_uctx15";?>';
+    document.formv1.fir_xvr05.value = '<?php echo "$fir_xvr05";?>';
     document.formv1.fir_allx15.value = '<?php echo "$fir_allx15";?>';
     document.formv1.fir_allx14.value = '<?php echo "$fir_allx14";?>';
     document.formv1.fir_allx13.value = '<?php echo "$fir_allx13";?>';
@@ -2652,6 +2654,10 @@ $riadok=mysql_fetch_object($vysledok);
 <td class="fmenu" width="10%" colspan="2">Nahrávanie dátumov dodávate¾ských faktúr:</td>
 <td class="fmenu" ><?php echo $riadok->allx13;?></td><td class="bmenu" colspan="5" >0=Dátum_vyhotovenia-Enter-Dátum_odpoètu, 1=Dátum_vyhotovenia-Enter-Dátum_dodania-Enter-Dátum_odpoètu</td>
 </tr>
+<tr>
+<td class="fmenu" width="10%" colspan="2">Odpoèet a odvod DPH po úhrade faktúry:</td>
+<td class="fmenu" ><?php echo $riadok->xvr05;?></td><td class="bmenu" colspan="5" >0=nie, 1=áno</td>
+</tr>
 <tr></tr><tr></tr>
 
 <tr></tr><tr></tr>
@@ -2793,7 +2799,10 @@ if ( $copern == 92 )
 <td class="fmenu" width="10%" colspan="2">Nahrávanie dátumov dodávate¾ských faktúr:</td>
 <td class="fmenu" ><input type="text" name="fir_allx13" id="fir_allx13" /></td><td class="bmenu" colspan="5">0=Dátum_vyhotovenia-Enter-Dátum_odpoètu, 1=Dátum_vyhotovenia-Enter-Dátum_dodania-Enter-Dátum_odpoètu</td>
 </tr>
-
+<tr>
+<td class="fmenu" width="10%" colspan="2">Odpoèet a odvod DPH po úhrade faktúry:</td>
+<td class="fmenu" ><input type="text" name="fir_xvr05" id="fir_xvr05" /></td><td class="bmenu" colspan="5" >0=nie, 1=áno</td>
+</tr>
 <tr></tr><tr></tr>
 
 <tr>
