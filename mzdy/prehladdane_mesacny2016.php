@@ -2428,7 +2428,7 @@ $tlachod_c=100*$hlavicka->r07a;
 if ( $tlachod_c == 0 ) $tlachod_c="";
 if ( $tlachod_c < 10 AND $tlachod_c != 0 ) { $tlachod_c="0".$tlachod_c; }
 if ( $tlachod_c < 100 AND $tlachod_c != 0 ) { $tlachod_c="0".$tlachod_c; }
-$tlachod_c=sprintf("% 9s",$tlachod_c);
+$tlachod_c=sprintf("% 10s",$tlachod_c);
 $A=substr($tlachod_c,0,1);
 $B=substr($tlachod_c,1,1);
 $C=substr($tlachod_c,2,1);
@@ -2732,7 +2732,7 @@ $t14=substr($textu,6,1);
 $t15=substr($textu,7,1);
 $t16=substr($textu,8,1);
 $t17=substr($textu,9,1);
-$pdf->SetY(230);
+$pdf->SetY(231);
 $pdf->Cell(31,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"L");
@@ -2798,7 +2798,7 @@ $t31=substr($text,30,1);
 $t32=substr($text,31,1);
 $t33=substr($text,32,1);
 $t34=substr($text,33,1);
-$pdf->Cell(190,3," ","$rmc1",1,"L");
+$pdf->Cell(190,2.5," ","$rmc1",1,"L");
 $pdf->Cell(16,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");
@@ -2835,7 +2835,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t33","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t34","$rmc",1,"C");
 
 //Vypracoval
-$pdf->Cell(190,8,"","$rmc1",1,"L");
+$pdf->Cell(190,7.5,"","$rmc1",1,"L");
 $pdf->Cell(2,6," ","$rmc1",0,"R");$pdf->Cell(78,6,"$zrobil","$rmc",1,"L");
 //telefon
 $text=$fir_mzdt04;
