@@ -1386,7 +1386,7 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 <!-- modul 82 -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Výsledovky"
-     onclick="NacitajMod82();" style="top:538px; left:387px;" class="btn-row-tool"> <!-- dopyt, preveri -->
+     onclick="NacitajMod82();" style="top:538px; left:387px;" class="btn-row-tool">
 <input type="text" name="mod82r01" id="mod82r01" style="width:100px; top:656px; left:700px;"/>
 <input type="text" name="mod82r02" id="mod82r02" style="width:100px; top:686px; left:700px;"/>
 <input type="text" name="mod82r03" id="mod82r03" style="width:100px; top:717px; left:700px;"/>
@@ -1413,7 +1413,7 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 <!-- modul 112a -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovej predvahy"
-     onclick="NacitajMod112a();" style="top:85px; left:532px;" class="btn-row-tool"> <!-- dopyt, preveri -->
+     onclick="NacitajMod112a();" style="top:85px; left:532px;" class="btn-row-tool">
 <input type="text" name="mod112r01a1" id="mod112r01a1" style="width:100px; top:226px; left:510px;"/>
 <input type="text" name="mod112r01a4" id="mod112r01a4" style="width:100px; top:226px; left:735px;"/>
 <input type="text" name="mod112r02a1" id="mod112r02a1" style="width:100px; top:256px; left:510px;"/>
@@ -1435,7 +1435,7 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 <!-- modul 545 -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovej predvahy"
-     onclick="NacitajMod545();" style="top:512px; left:337px;" class="btn-row-tool"> <!-- dopyt, preveri -->
+     onclick="NacitajMod545();" style="top:512px; left:337px;" class="btn-row-tool">
 <input type="text" name="mod545r03a1" id="mod545r03a1" style="width:100px; top:635px; left:592px;"/>
 <input type="text" name="mod545r03a2" id="mod545r03a2" style="width:100px; top:635px; left:765px;"/>
 <input type="text" name="mod545r04a1" id="mod545r04a1" style="width:100px; top:665px; left:592px;"/>
