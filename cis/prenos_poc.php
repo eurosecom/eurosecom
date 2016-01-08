@@ -3795,10 +3795,10 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "CREATE TABLE F$kli_vxcf"."_vyrzakpol SELECT * FROM ".$databaza."F$h_ycf"."_vyrzakpol ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakpol WHERE zak >= 130000 AND zak <= 139999 ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakpol WHERE zak >= 140000 AND zak <= 149999 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakdopln WHERE zak >= 130000 AND zak <= 139999 ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakdopln WHERE zak >= 140000 AND zak <= 149999 ";
 $dsql = mysql_query("$dsqlt");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
