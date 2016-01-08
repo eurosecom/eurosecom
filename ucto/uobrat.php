@@ -427,10 +427,15 @@ $cstat = 1*$_REQUEST['cstat'];
 if( $cstat == 20304 )
 {
 $modul = 1*$_REQUEST['modul'];
+
+$rok304="";
+if( $kli_vrok < 2016 ) $rok304="_2015";
+if( $kli_vrok < 2014 ) $rok304="_2013";
+if( $kli_vrok < 2013 ) $rok304="_2012";
 ?>
 <script type="text/javascript">
 
-window.open('../ucto/statistika_p304.php?copern=1&drupoh=1&page=1&modul=<?php echo $modul; ?>', '_self' )
+window.open('../ucto/statistika_p304<?php echo $rok304; ?>.php?copern=1&drupoh=1&page=1&modul=<?php echo $modul; ?>', '_self' )
 
 </script>
 <?php
@@ -757,10 +762,15 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 $upravene = mysql_query("$uprtxt");  
 //echo $uprtxt;
 //exit;
+
+$rok304="";
+if( $kli_vrok < 2016 ) $rok304="_2015";
+if( $kli_vrok < 2014 ) $rok304="_2013";
+if( $kli_vrok < 2013 ) $rok304="_2012";
 ?>
 <script type="text/javascript">
 
-window.open('../ucto/statistika_p304.php?copern=1&drupoh=1&page=1&modul=112', '_self' )
+window.open('../ucto/statistika_p304<?php echo $rok304; ?>.php?copern=1&drupoh=1&page=1&modul=112', '_self' )
 
 </script>
 <?php
@@ -853,10 +863,15 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 $upravene = mysql_query("$uprtxt");  
 
 //exit;
+
+$rok304="";
+if( $kli_vrok < 2016 ) $rok304="_2015";
+if( $kli_vrok < 2014 ) $rok304="_2013";
+if( $kli_vrok < 2013 ) $rok304="_2012";
 ?>
 <script type="text/javascript">
 
-window.open('../ucto/statistika_p304.php?copern=101&drupoh=1&page=1&modul=545', '_self' )
+window.open('../ucto/statistika_p304<?php echo $rok304; ?>.php?copern=101&drupoh=1&page=1&modul=545', '_self' )
 
 </script>
 <?php

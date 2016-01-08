@@ -523,11 +523,16 @@ $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 " mod82r99=mod82r01+mod82r02+mod82r03+mod82r04+mod82r05+mod82r06+mod82r07+mod82r08+mod82r09+mod82r10 ".
 " WHERE ico >= 0"; 
-$upravene = mysql_query("$uprtxt");  
+$upravene = mysql_query("$uprtxt");
+
+$rok304="";
+if( $kli_vrok < 2016 ) $rok304="_2015";
+if( $kli_vrok < 2014 ) $rok304="_2013";
+if( $kli_vrok < 2013 ) $rok304="_2012";  
 ?>
 <script type="text/javascript">
 
-window.open('../ucto/statistika_p304.php?copern=1&drupoh=1&page=1&modul=82', '_self' )
+window.open('../ucto/statistika_p304<?php echo $rok304; ?>.php?copern=1&drupoh=1&page=1&modul=82', '_self' )
 
 </script>
 <?php

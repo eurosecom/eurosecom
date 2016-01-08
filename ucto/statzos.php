@@ -503,8 +503,9 @@ window.open('../ucto/statistika_opu112<?php echo $rokopu112; ?>.php?copern=1&dru
 //statistika 304
 <?php
 $rok304="";
-if( $kli_vrok < 2013 ) $rok304="_2012";
+if( $kli_vrok < 2016 ) $rok304="_2015";
 if( $kli_vrok < 2014 ) $rok304="_2013";
+if( $kli_vrok < 2013 ) $rok304="_2012";
 ?>
 
 function stat304()
