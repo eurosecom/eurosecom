@@ -218,7 +218,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 " mod112r99a4=mod112r01a4+mod112r02a4+mod112r03a4+mod112r05a4+mod112r06a4+mod112r07a4+mod112r10a4 ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
-$strana=2;
+$strana=3;
 }
 //koniec odpocitaj modul 112 z uobrat.php
 
@@ -301,8 +301,8 @@ $oznac = mysql_query("$sqtoz");
 $sql = "DROP TABLE F".$kli_vxcf."_statistika_p1304archx ";
 $vysledek = mysql_query("$sql");
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
-" mod545r99a1=mod545r01a1+mod545r02a1+mod545r03a1+mod545r04a1+mod545r05a1+mod545r06a1+mod545r07a1+mod545r08a1+mod545r09a1+mod545r10a1+mod545r11a1,".
-" mod545r99a2=mod545r01a2+mod545r02a2+mod545r03a2+mod545r04a2+mod545r05a2+mod545r06a2+mod545r07a2+mod545r08a2+mod545r09a2+mod545r10a2+mod545r11a2".
+" mod545r99a1=mod545r03a1+mod545r04a1+mod545r05a1+mod545r06a1,".
+" mod545r99a2=mod545r03a2+mod545r04a2+mod545r05a2+mod545r06a2 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
 $strana=3;
@@ -359,8 +359,8 @@ $oznac = mysql_query("$sqtoz");
 $sql = "DROP TABLE F".$kli_vxcf."_statistika_p1304archx ";
 $vysledek = mysql_query("$sql");
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
-" mod545r99a1=mod545r01a1+mod545r02a1+mod545r03a1+mod545r04a1+mod545r05a1+mod545r06a1+mod545r07a1+mod545r08a1+mod545r09a1+mod545r10a1+mod545r11a1,".
-" mod545r99a2=mod545r01a2+mod545r02a2+mod545r03a2+mod545r04a2+mod545r05a2+mod545r06a2+mod545r07a2+mod545r08a2+mod545r09a2+mod545r10a2+mod545r11a2".
+" mod545r99a1=mod545r03a1+mod545r04a1+mod545r05a1+mod545r06a1,".
+" mod545r99a2=mod545r03a2+mod545r04a2+mod545r05a2+mod545r06a2 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
 $strana=3;
@@ -834,7 +834,7 @@ $vsql = 'DROP TABLE F'.$kli_vxcf.'_statprac';
 //$vytvor = mysql_query("$vsql");
 ?>
 <script type="text/javascript">
- window.open('../ucto/statistika_p1304.php?copern=102&drupoh=1&page=1&strana=3', '_self' )
+ window.open('../ucto/statistika_p1304.php?copern=102&drupoh=1&page=1&strana=4', '_self' )
 </script>
 <?php
 }
@@ -1013,8 +1013,8 @@ $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 " mod143r99=mod143r01+mod143r05+mod143r06+mod143r07+mod143r08+mod143r09+mod143r10,".
 " mod143r99=mod143r99+mod143r12+mod143r13+mod143r14+mod143r15+mod143r20,".
-" mod545r99a1=mod545r01a1+mod545r02a1+mod545r03a1+mod545r04a1+mod545r05a1+mod545r06a1+mod545r07a1+mod545r08a1+mod545r09a1+mod545r10a1+mod545r11a1,".
-" mod545r99a2=mod545r01a2+mod545r02a2+mod545r03a2+mod545r04a2+mod545r05a2+mod545r06a2+mod545r07a2+mod545r08a2+mod545r09a2+mod545r10a2+mod545r11a2 ".
+" mod545r99a1=mod545r03a1+mod545r04a1+mod545r05a1+mod545r06a1,".
+" mod545r99a2=mod545r03a2+mod545r04a2+mod545r05a2+mod545r06a2 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt"); 
 //koniec vypocty
