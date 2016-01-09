@@ -450,6 +450,14 @@ $sqlt = <<<mzdprc
 mzdprc;
 
 //prikaz hlavicka
+//celkova suma
+$celksuma=0;
+$sqlts = "SELECT SUM(hodp) AS shod FROM F$kli_vxcf"."_$uctpol WHERE dok = $cislo_dok GROUP BY dok ";
+//echo $sqlts;
+$sqls = mysql_query("$sqlts");
+$hlavickas=mysql_fetch_object($sqls);
+$celksuma=$hlavickas->shod;
+
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$tabl".
 " LEFT JOIN F$kli_vxcf"."_ico".
@@ -519,7 +527,7 @@ $pocpol = mysql_num_rows($sql2);
   $text = "  <NbOfTxs>".$pocpol."</NbOfTxs>"."\r\n"; fwrite($soubor, $text);
 
 
-  $text = "  <CtrlSum>".$hlavicka->hodp."</CtrlSum>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <CtrlSum>".$celksuma."</CtrlSum>"."\r\n"; fwrite($soubor, $text);
 
 
   $text = "  <InitgPty>"."\r\n"; fwrite($soubor, $text);
@@ -531,7 +539,11 @@ $hicoad2 = trim($fir_fpsc." ".$fir_fmes);
 
 $hiconm = iconv("CP1250", "UTF-8", $hiconm);
 $hicoad1 = iconv("CP1250", "UTF-8", $hicoad1);
+$hicoad1 = StrTr($hicoad1, "徜栾殪腠掘趔鲟鴼濟秊聊认商送家又载缞嵹佘輲",
+"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
 $hicoad2 = iconv("CP1250", "UTF-8", $hicoad2);
+$hicoad2 = StrTr($hicoad2, "徜栾殪腠掘趔鲟鴼濟秊聊认商送家又载缞嵹佘輲",
+"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
 
   $text = "  <Nm>".$hiconm."</Nm>"."\r\n"; fwrite($soubor, $text);
 
@@ -563,7 +575,7 @@ $hicoad2 = iconv("CP1250", "UTF-8", $hicoad2);
 
   $text = "  <NbOfTxs>".$pocpol."</NbOfTxs>"."\r\n"; fwrite($soubor, $text);
 
-  $text = "  <CtrlSum>".$hlavicka->hodp."</CtrlSum>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <CtrlSum>".$celksuma."</CtrlSum>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <PmtTpInf>"."\r\n"; fwrite($soubor, $text);
 
@@ -741,8 +753,12 @@ $icoad2 = trim($fir_riadok3->psc." ".$fir_riadok3->mes);
   }
 
 $iconm = iconv("CP1250", "UTF-8", $iconm);
-$icoad1 = iconv("CP1250", "UTF-8", $icoad1);
-$icoad2 = iconv("CP1250", "UTF-8", $icoad2);
+//$icoad1 = iconv("CP1250", "UTF-8", $icoad1);
+//$icoad2 = iconv("CP1250", "UTF-8", $icoad2);
+$icoad1 = StrTr($icoad1, "徜栾殪腠掘趔鲟鴼濟秊聊认商送家又载缞嵹佘輲",
+"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+$icoad2 = StrTr($icoad2, "徜栾殪腠掘趔鲟鴼濟秊聊认商送家又载缞嵹佘輲",
+"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
 
 if( $iconm == '' ) { $iconm="Prijemca Nazov"; }
 if( $icoad1 == '' ) { $icoad1="Ulica"; }
