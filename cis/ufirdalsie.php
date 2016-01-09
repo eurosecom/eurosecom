@@ -336,6 +336,14 @@ if (!$vysledok)
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD fstat VARCHAR(30) DEFAULT 'SR' AFTER kkx";
 $vysledek = mysql_query("$sql");
 }
+//datum vzniku UJ
+$sql = "SELECT datvzn FROM F".$kli_vxcf."_ufirdalsie";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD datvzn DATE NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+}
 //koniec upravy
 
 // cislo operacie
@@ -471,6 +479,7 @@ endif;
 if ( $copern == 203 )
     {
 $datk = strip_tags($_REQUEST['datk']);
+$datvzn = strip_tags($_REQUEST['datvzn']);
 $druz = 1*$_REQUEST['druz'];
 $tpuj = $_REQUEST['tpuj'];
 $datbod = strip_tags($_REQUEST['datbod']);
@@ -478,6 +487,7 @@ $datbdo = strip_tags($_REQUEST['datbdo']);
 $datmod = strip_tags($_REQUEST['datmod']);
 $datmdo = strip_tags($_REQUEST['datmdo']);
 $datksql = SqlDatum($datk);
+$datvznsql = SqlDatum($datvzn);
 $datbodsql = SqlDatum($datbod);
 $datbdosql = SqlDatum($datbdo);
 $datmodsql = SqlDatum($datmod);
@@ -487,7 +497,7 @@ $kzos = strip_tags($_REQUEST['kzos']);
 $ksch = strip_tags($_REQUEST['ksch']);
 
 $upravttt = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
-" datk='$datksql', druz='$druz', tpuj='$tpuj', datbod='$datbodsql', datbdo='$datbdosql', datmod='$datmodsql', datmdo='$datmdosql', ".
+" datk='$datksql', datvzn='$datvznsql', druz='$druz', tpuj='$tpuj', datbod='$datbodsql', datbdo='$datbdosql', datmod='$datmodsql', datmdo='$datmdosql', ".
 " kzos='$kzos', ksch='$ksch' WHERE icox=0 "; 
 $upravene = mysql_query("$upravttt"); 
 $copern=202;
@@ -653,6 +663,7 @@ $prfax = $riadok->prfax;
 
 if( $copern == 202 ) {
 $datksk = SkDatum($riadok->datk);
+$datvznsk = SkDatum($riadok->datvzn);
 $datbodsk = SkDatum($riadok->datbod);
 $datbdosk = SkDatum($riadok->datbdo);
 $datmodsk = SkDatum($riadok->datmod);
@@ -812,6 +823,7 @@ $dfax = $riadok->dfax;
     function ObnovUI()
     {
     document.formv1.datk.value = '<?php echo "$datksk";?>';
+    document.formv1.datvzn.value = '<?php echo "$datvznsk";?>';
     document.formv1.druz.value = '<?php echo "$druz";?>';
     document.formv1.tpuj.value = '<?php echo "$tpuj";?>';
     document.formv1.datbod.value = '<?php echo "$datbodsk";?>';
@@ -1115,6 +1127,10 @@ if ( $copern == 202 )
 <tr>
 <td class="bmenu" colspan="5">Krížik schválená ( Úètovná závierka NUJ 2014 ):</td>
 <td class="bmenu" colspan="5"><input type="checkbox" name="ksch" value="1" /></td>
+</tr>
+<tr>
+<td class="bmenu" colspan="5">Dátum vzniku ÚJ:</td>
+<td class="bmenu" colspan="5"><input type="text" name="datvzn" id="datvzn" onkeyup="CiarkaNaBodku(this);" size="12" /></td>
 </tr>
 <tr><td class="bmenu" colspan="10"></tr>
 

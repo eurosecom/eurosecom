@@ -37,6 +37,15 @@ $cislo_oc = 1*$_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
 $jedn = 1*$_REQUEST['jedn'];
 
+//datum vzniku UJ
+$sql = "SELECT datvzn FROM F".$kli_vxcf."_ufirdalsie";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD datvzn DATE NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+}
+
 //znovu nacitaj
 if ( $copern == 26 )
      {
@@ -77,6 +86,11 @@ $datp = strip_tags($_REQUEST['datp']);
 $datp_sql=SqlDatum($datp);
 
 $uprav="NO";
+
+$uprmp = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
+" datvzn='$datv_sql' ".
+" WHERE kkx >= 0 ";
+$upravmp = mysql_query("$uprmp");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_vseobpodanie SET ".
 " evci1='$evci1', evci2='$evci2', organ='$organ', duozn='$duozn', ".
@@ -177,8 +191,15 @@ $vytvor = mysql_query("$vsql");
 
 
 //nacitaj udaje pre upravu
-if ( $copern == 20 )
+if ( $copern == 20 OR $copern == 10 )
      {
+$sqlmp = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE kkx >= 0 ";
+$fir_mp = mysql_query($sqlmp);
+$fir_rmp=mysql_fetch_object($fir_mp);
+$datv_sk = SkDatum($fir_rmp->datvzn);
+
+
+
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_vseobpodanie ";
 
 $fir_vysledok = mysql_query($sqlfir);
@@ -200,7 +221,7 @@ $datk_sk = SkDatum($fir_riadok->datk);
 $datz_sk = SkDatum($fir_riadok->datz);
 $dats_sk = SkDatum($fir_riadok->dats);
 $jazyk = $fir_riadok->jazyk;
-$datv_sk = SkDatum($fir_riadok->datv);
+//$datv_sk = SkDatum($fir_riadok->datv);
 $typdok = $fir_riadok->typdok;
 $spopod = $fir_riadok->spopod;
 $datp_sk = SkDatum($fir_riadok->datp);
@@ -598,7 +619,7 @@ $pdf->Cell(20,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$ine","$rmc",1,"C");
 $pdf->Cell(190,15," ","$rmc1",1,"L");
 $pdf->Cell(30,3," ","$rmc1",0,"C");$pdf->Cell(25,5,"$ico","$rmc",0,"L");
 $pdf->Cell(20,3," ","$rmc1",0,"C");$pdf->Cell(25,5,"$fir_fdic","$rmc",0,"L");
-$vznikuj=SkDatum($hlavicka->datv);
+$vznikuj=$datv_sk;
 if ( $vznikuj == '00.00.0000' ) { $vznikuj=""; }
 $pdf->Cell(42,5," ","$rmc1",0,"R");$pdf->Cell(30,5,"$vznikuj","$rmc",1,"L");
 $pdf->Cell(190,2," ","$rmc1",1,"L");
