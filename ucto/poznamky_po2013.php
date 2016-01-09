@@ -55,6 +55,15 @@ $dopoz = 1*$_REQUEST['dopoz'];
 if( $copern == 1 ) $dopoz=1;
 //echo $copern;
 
+//datum vzniku UJ
+$sql = "SELECT datvzn FROM F".$kli_vxcf."_ufirdalsie";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD datvzn DATE NOT NULL AFTER kkx";
+$vysledek = mysql_query("$sql");
+}
+
 //vytvor tabulku textov v databaze
 
 $sql = "SELECT ico FROM F$kli_vxcf"."_poznamky_po2011texty ";
@@ -6085,6 +6094,12 @@ $x2w = strip_tags($_REQUEST['x2w']);
 
 $uprav="NO";
 
+
+$uprmp = "UPDATE F$kli_vxcf"."_ufirdalsie SET ".
+" datvzn='$aa2sql' ".
+" WHERE kkx >= 0 ";
+$upravmp = mysql_query("$uprmp");
+
 $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_po2011 SET ".
 " aa1='$aa1sql', aa2='$aa2sql', ab1='$ab1',  
   a1e='$a1e', a2e='$a2e',
@@ -10557,14 +10572,19 @@ $upravene = mysql_query("$uprtxt");
 //nacitaj udaje
 if ( $copern >= 1 )
     {
+$sqlmp = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE kkx >= 0 ";
+$fir_mp = mysql_query($sqlmp);
+$fir_rmp=mysql_fetch_object($fir_mp);
+$aa2sk = SkDatum($fir_rmp->datvzn);
+
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_poznamky_po2011 WHERE ico >= 0";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
 $aa1 = $fir_riadok->aa1;
 $aa1sk = SkDatum($aa1);
-$aa2 = $fir_riadok->aa2;
-$aa2sk = SkDatum($aa2);
+//$aa2 = $fir_riadok->aa2;
+//$aa2sk = SkDatum($aa2);
 $ab1 = $fir_riadok->ab1;
 $a1e = $fir_riadok->a1e;
 $a2e = $fir_riadok->a2e;

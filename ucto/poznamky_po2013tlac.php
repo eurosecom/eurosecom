@@ -490,7 +490,10 @@ $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 
 //vytlac
-
+$sqlmp = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE kkx >= 0 ";
+$fir_mp = mysql_query($sqlmp);
+$fir_rmp=mysql_fetch_object($fir_mp);
+$aa2sk = SkDatum($fir_rmp->datvzn);
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_poznamky_po2011$no WHERE psys >= 0 ".""; 
 //echo $sqltt;
