@@ -2490,6 +2490,16 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_fakdodpoc MODIFY sz4 DECIMAL(4,0) DEFAULT 0 ";
 $vysledek = mysql_query("$sql");
 
+if( $_SERVER['SERVER_NAME'] == "www.euroautovalas.sk" )
+{
+$sql = "UPDATE F".$kli_vxcf."_fakdodpoc SET uce='321001' WHERE uce = '321401' ";
+$vysledek = mysql_query("$sql");
+
+$sql = "UPDATE F".$kli_vxcf."_fakdodpoc SET uce='321004' WHERE uce = '321404' ";
+$vysledek = mysql_query("$sql");
+}
+
+
 $sql = "UPDATE F".$kli_vxcf."_fakdodpoc SET sz4=0 ";
 $vysledek = mysql_query("$sql");
 

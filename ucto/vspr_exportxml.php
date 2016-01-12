@@ -452,7 +452,7 @@ mzdprc;
 //prikaz hlavicka
 //celkova suma
 $celksuma=0;
-$sqlts = "SELECT SUM(hodp) AS shod FROM F$kli_vxcf"."_$uctpol WHERE dok = $cislo_dok GROUP BY dok ";
+$sqlts = "SELECT SUM(hodm) AS shod FROM F$kli_vxcf"."_$uctpol WHERE dok = $cislo_dok GROUP BY dok ";
 //echo $sqlts;
 $sqls = mysql_query("$sqlts");
 $hlavickas=mysql_fetch_object($sqls);

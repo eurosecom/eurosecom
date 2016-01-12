@@ -166,12 +166,11 @@ if ( $j == $polozieknastranu ) { $j=0; }
 
 //popis pod polozkami
 if ( $j == 0 AND $i < $tvpol ) {
-$pdf->Cell(40,6," ","LR",0,"R");$pdf->Cell(20,6," ","LR",0,"R");$pdf->Cell(30,6," ","LR",0,"R");
-$pdf->Cell(35,6," ","LR",0,"R");$pdf->Cell(20,6," ","LR",0,"R");$pdf->Cell(35,6," ","LR",1,"R");
-$pdf->Cell(40,6," ","LR",0,"R");$pdf->Cell(20,6," ","LR",0,"R");$pdf->Cell(30,6," ","LR",0,"R");
-$pdf->Cell(35,6," ","LR",0,"R");$pdf->Cell(20,6," ","LR",0,"R");$pdf->Cell(35,6," ","LR",1,"R");
-$pdf->Cell(40,6," ","LRB",0,"R");$pdf->Cell(20,6," ","LRB",0,"R");$pdf->Cell(30,6," ","LRB",0,"R");
-$pdf->Cell(35,6," ","LRB",0,"R");$pdf->Cell(20,6," ","LRB",0,"R");$pdf->Cell(35,6," ","LRB",1,"R");
+$pdf->Cell(56,6," ","LR",0,"R");$pdf->Cell(26,6," ","LR",0,"R");$pdf->Cell(26,6," ","LR",0,"R");
+$pdf->Cell(24,6," ","LR",0,"R");$pdf->Cell(24,6," ","LR",0,"R");$pdf->Cell(24,6," ","LR",1,"R");
+
+$pdf->Cell(56,6," ","LRB",0,"R");$pdf->Cell(26,6," ","LRB",0,"R");$pdf->Cell(26,6," ","LRB",0,"R");
+$pdf->Cell(24,6," ","LRB",0,"R");$pdf->Cell(24,6," ","LRB",0,"R");$pdf->Cell(24,6," ","LRB",1,"R");
 
 $pdf->Cell(35,6," ","0",1,"R");
 $pdf->Cell(35,6,"Doruèil:","0",1,"L");
@@ -188,8 +187,8 @@ $pdf->SetY($koniec+2);
 $pdf->SetFont('arial','',6);
 $pdf->Cell(180,3,"Vystavil(a): $hlavicka->meno $hlavicka->priezvisko / $hlavicka->id ","0",1,"L");
 
-$sumary=34;
-$sumarx=70;
+$sumary=33;
+$sumarx=87;
 $pdf->SetY($sumary);
 $pdf->SetX($sumarx);
 $pdf->SetFont('arial','',10);

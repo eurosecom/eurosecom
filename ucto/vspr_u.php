@@ -1476,6 +1476,15 @@ window.open('../cis/cico.php?sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function dajIBAN(cislodok, cislouce)
+                {
+var cislodok = cislodok;
+var cislouce = cislouce;
+
+window.open('../cis/dajiban.php?cislo_dok=<?php echo $cislo_dok; ?>&cislo_uce=' + cislouce + '&copern=3',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 </script>
 </HEAD>
 
@@ -2056,7 +2065,9 @@ $UCD="Dal";
 <table class="<?php echo $fmenu; ?>" width="100%" >
 <tr>
 <td class="<?php echo $pvstup ?>" width="4%">Položka
-<td class="<?php echo $pvstup ?>" width="19%">IBAN príjemcu
+<td class="<?php echo $pvstup ?>" width="19%">IBAN príjemcu 
+<a href="#" onClick="dajIBAN(<?php echo $riadok->dok;?>, <?php echo $riadok->uce;?>);">
+<img src='../obr/pozor.png' width=12 height=12 border=0 title="Kontrola IBANov príjemcov na príkaze èíslo <?php echo $riadok->dok;?> " ></a>
 <td class="<?php echo $pvstup ?>" width="5%">BIC príjemcu
 <td class="<?php echo $pvstup ?>" width="19%">Úèet príjemcu
 <td class="<?php echo $pvstup ?>" width="6%" align="right" >NumKód

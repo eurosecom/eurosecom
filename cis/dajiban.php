@@ -20,11 +20,13 @@ if(!isset($kli_vxcf)) $kli_vxcf = 1;
   mysql_select_db($mysqldb);
 
 // cislo operacie
-//copern=1 z ciselnika ico, copern=2 z udajov o zamestnancovi
+//copern=1 z ciselnika ico, copern=2 z udajov o zamestnancovi, copern=3 kontrola z prikazu na uhradu
 $copern = 1*$_REQUEST['copern'];
 $cislo_ico = 1*$_REQUEST['cislo_ico'];
 $cislo_oc = 1*$_REQUEST['cislo_oc'];
 $cislox = 1*$_REQUEST['cislox'];
+$cislo_dok = 1*$_REQUEST['cislo_dok'];
+$cislo_uce = 1*$_REQUEST['cislo_uce'];
 
 $citfir = include("../cis/citaj_fir.php");
 
@@ -74,7 +76,7 @@ $vytvor = mysql_query("$vsql");
 
 }
 
-$sql = "SELECT kontrol FROM F$kli_vxcf"."_dajiban".$kli_vxcf;
+$sql = "SELECT ibanold FROM F$kli_vxcf"."_dajiban".$kli_vxcf;
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -84,6 +86,8 @@ $vytvor = mysql_query("$vsql");
 
 $sqlt = <<<statistika_p1304
 (
+   cislocpl     DECIMAL(8,0) DEFAULT 0,
+   ibanold      VARCHAR(35) NOT NULL,
    cislox       DECIMAL(8,0) DEFAULT 0,
 
    zvysok       DECIMAL(10,0) DEFAULT 0,
@@ -163,11 +167,44 @@ if( $copern == 2 AND $cislox == 11 )
 }
 
 
-
-$vsql = "INSERT INTO F".$kli_vxcf."_dajiban".$kli_vxcf." ( cislox, ucebx, numx ) VALUES ( '$cislox', '$ucebx', '$numx' ) ";
+$vsql = "INSERT INTO F".$kli_vxcf."_dajiban".$kli_vxcf." ( cislocpl, cislox, ucebx, numx ) VALUES ( 1, '$cislox', '$ucebx', '$numx' ) ";
 $vytvor = mysql_query("$vsql");
 
-  $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_dajiban$kli_vxcf");
+if( $copern == 3 )
+{
+
+$vsql = "DELETE FROM F".$kli_vxcf."_dajiban".$kli_vxcf." ";
+$vytvor = mysql_query("$vsql");
+
+//cislocpl	ibanold	cislox	zvysok	kontrol	vynasob	zaokruh	ucebx	numx	ibanx	predc6	uceb10	num4	csl30	bicx
+//dok	cpl	uceb	numb	iban	pbic	twib	vsy	ksy	ssy	hodp	hodm	uce	ico	id	datm
+
+
+$vsql = "INSERT INTO F".$kli_vxcf."_dajiban".$kli_vxcf." SELECT ".
+" cpl, iban, 0, 0, '', 0, 0, '', '', '', '', '', '', '', '' ".
+" FROM F".$kli_vxcf."_uctprikp WHERE dok = $cislo_dok ";
+$vytvor = mysql_query("$vsql");
+
+$vsql = "UPDATE F".$kli_vxcf."_dajiban".$kli_vxcf." SET ".
+" ucebx=CONCAT(SUBSTRING(ibanold, 9, 6),'-',SUBSTRING(ibanold, 15, 10)), ".
+" numx=SUBSTRING(ibanold, 5, 4)  ".
+" WHERE cislocpl > 0 ";
+$vytvor = mysql_query("$vsql");
+
+$vsql = "DELETE FROM F".$kli_vxcf."_dajiban".$kli_vxcf." WHERE SUBSTRING(ibanold, 1, 2) != 'SK' ";
+$vytvor = mysql_query("$vsql");
+
+
+}
+
+
+          $vyslettt = "SELECT * FROM F$kli_vxcf"."_dajiban".$kli_vxcf." WHERE cislocpl > 0 ORDER BY cislocpl ";
+          $vysledok = mysql_query("$vyslettt");
+          while ($riadok = mysql_fetch_object($vysledok))
+          {
+          //zaciatok cyklu
+
+  $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_dajiban$kli_vxcf WHERE cislocpl = $riadok->cislocpl ");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
@@ -233,14 +270,14 @@ $nas="0.".$zvysok;
 $vynasob=$sum;
 
 
-$vsql = "UPDATE F".$kli_vxcf."_dajiban".$kli_vxcf." SET zvysok='$zvysok', vynasob=$vynasob ";
+$vsql = "UPDATE F".$kli_vxcf."_dajiban".$kli_vxcf." SET zvysok='$zvysok', vynasob=$vynasob WHERE cislocpl = $riadok->cislocpl ";
 $vytvor = mysql_query("$vsql");
-$vsql = "UPDATE F".$kli_vxcf."_dajiban".$kli_vxcf." SET zaokruh=vynasob ";
+$vsql = "UPDATE F".$kli_vxcf."_dajiban".$kli_vxcf." SET zaokruh=vynasob WHERE cislocpl = $riadok->cislocpl ";
 $vytvor = mysql_query("$vsql");
-$vsql = "UPDATE F".$kli_vxcf."_dajiban".$kli_vxcf." SET zaokruh=98-zaokruh ";
+$vsql = "UPDATE F".$kli_vxcf."_dajiban".$kli_vxcf." SET zaokruh=98-zaokruh WHERE cislocpl = $riadok->cislocpl ";
 $vytvor = mysql_query("$vsql");
 
-  $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_dajiban$kli_vxcf");
+  $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_dajiban$kli_vxcf WHERE cislocpl = $riadok->cislocpl ");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
@@ -250,7 +287,7 @@ $vytvor = mysql_query("$vsql");
 $kont2=sprintf("%02.0f", $kontx);
 $ibanx=$statx.$kont2.$num4.$predc6.$uceb10;
 
-$vsql = "UPDATE F".$kli_vxcf."_dajiban".$kli_vxcf." SET ibanx='$ibanx', predc6='$predc6', uceb10='$uceb10', num4='$num4', csl30='$csl30' ";
+$vsql = "UPDATE F".$kli_vxcf."_dajiban".$kli_vxcf." SET ibanx='$ibanx', predc6='$predc6', uceb10='$uceb10', num4='$num4', csl30='$csl30' WHERE cislocpl = $riadok->cislocpl ";
 $vytvor = mysql_query("$vsql");
 
 $bicx="";
@@ -264,6 +301,7 @@ $bicx="";
 //exit;
 
 $ibanxs=$ibanx."-".$bicx;
+
 
 if( $copern == 1 AND $cislox == 1 )
 {
@@ -296,14 +334,29 @@ $vytvor = mysql_query("$vsql");
 
 }
 
-
+          }
+          //koniec cyklu
 
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Nastavenie faktury uloz</title>
+  <style type="text/css">
+td.hvstup_zlte  { background-color:#ffff90; color:black; font-weight:bold;
+                  height:12px; font-size:12px; }
+td.hvstup_tzlte { background-color:#ecaa12; color:black; font-weight:bold;
+                  height:12px; font-size:12px; }
 
+td.hvstup_zlte  { background-color:#ffff90; color:black; font-weight:bold;
+                  height:12px; font-size:12px; }
+
+td.hvstup_bsede { background-color:#eaeaea; color:black; font-weight:normal;
+                  height:12px; font-size:12px; }
+td.hvstup_bred { background-color:#ff6c6c; color:black; font-weight:normal;
+                  height:12px; font-size:12px; }
+
+  </style>
 <script type="text/javascript">
 
 
@@ -337,7 +390,9 @@ window.open('../cis/cico.php?sys=ALL&copern=8&page=1&cislo_ico=<?php echo $cislo
 </script>
 <?php
 }
+?>
 
+<?php
 //zamestnanci.php?sys=MZD&copern=8&page=1&cislo_oc=1&h_oc=1
 if( $copern == 2 )
 {
@@ -349,9 +404,183 @@ window.open('../mzdy/zamestnanci.php?sys=MZD&copern=8&page=1&cislo_oc=<?php echo
 </script>
 <?php
 }
+?>
+
+<?php
+//ucto/vspr_u.php?sysx=UCT&hladaj_uce=22100&rozuct=NIE&copern=8&drupoh=1&page=1&h_tlsl=1&rozb1=NOT&rozb2=NOT
+//&cislo_dok=3&h_ico=36084299&h_uce=22100&h_unk=
+if( $copern == 3333 )
+{
+?>
+<script type="text/javascript">
+
+window.open('../ucto/vspr_u.php?sysx=UCT&rozuct=NIE&drupoh=1&page=1&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $cislo_dok; ?>&h_uce=<?php echo $cislo_uce; ?>&copern=8', '_self' )
+
+</script>
+<?php
+}
+?>
+
+<?php
+//kontrola prikazu na uhradu
+if( $copern == 3 )
+{
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_dajiban$kli_vxcf WHERE cislocpl > 0 ORDER BY cislocpl ";
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+
+$i=0;
+
+  while ($i <= $pol )
+  {
+
+if ( $i == 0 )
+      {
+?>
+
+<table class="vstup" width="100%" >
+
+<tr>
+<td class="bmenu" width="5%">è.p.</td>
+<td class="bmenu" width="20%">IBAN na príkaze</td>
+<td class="bmenu" width="20%">IBAN vypoèítaný</td>
+<td class="bmenu" width="5%">STAV</td>
+<td class="bmenu" width="20%">IÈO</td>
+<td class="bmenu" width="20%">ZAMESTNANEC</td>
+</tr>
+<?php
+      }
+//koniec j=0
+
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$polozka=mysql_fetch_object($sql);
+
+$hvstup="hvstup";
+$stav="OK";
+if( $polozka->ibanold != $polozka->ibanx ) { $hvstup="hvstup_bred"; $stav="ROZDIEL"; }
+
+$ico=0; $iconaz=""; $polico=0;
+
+if( $polico == 0 ) 
+  {
+$sqlfir1 = "SELECT * FROM F$kli_vxcf"."_ico WHERE ib1 LIKE '%".$polozka->ibanold."%' ";
+$fir_vysledok1 = mysql_query($sqlfir1);
+$polico1 = 1*mysql_num_rows($fir_vysledok1);
+if( $fir_vysledok1 ) 
+{
+$fir_riadok1=mysql_fetch_object($fir_vysledok1);
+
+$ico = $fir_riadok1->ico;
+$iconaz = $fir_riadok1->nai;
+}
+  }
+
+if( $polico > 0 ) { $polico1=1; $polico2=1; }
+
+if( $polico1 == 0 ) 
+  {
+$sqlfir2 = "SELECT * FROM F$kli_vxcf"."_ico WHERE ib2 LIKE '%".$polozka->ibanold."%' ";
+$fir_vysledok2 = mysql_query($sqlfir2);
+$polico2 = 1*mysql_num_rows($fir_vysledok2);
+if( $fir_vysledok2 ) 
+{
+$fir_riadok2=mysql_fetch_object($fir_vysledok2);
+
+$ico = $fir_riadok2->ico;
+$iconaz = $fir_riadok2->nai;
+}
+  }
+
+if( $polico1 > 0 ) { $polico2=1; }
+
+if( $polico2 == 0 ) 
+  {
+$sqlfir3 = "SELECT * FROM F$kli_vxcf"."_ico WHERE ib3 LIKE '%".$polozka->ibanold."%' ";
+$fir_vysledok3 = mysql_query($sqlfir3);
+$polico3 = 1*mysql_num_rows($fir_vysledok3);
+if( $fir_vysledok3 ) 
+{
+$fir_riadok3=mysql_fetch_object($fir_vysledok3);
+
+$ico = $fir_riadok3->ico;
+$iconaz = $fir_riadok3->nai;
+}
+  }
+
+
+$osc=0; $oscnaz=""; 
+
+
+$sqlfir4 = "SELECT * FROM F$kli_vxcf"."_mzdtextmzd ".
+" LEFT JOIN F$kli_vxcf"."_mzdkun ".
+" ON F$kli_vxcf"."_mzdtextmzd.invt=F$kli_vxcf"."_mzdkun.oc".
+" WHERE ziban LIKE '%".$polozka->ibanold."%' ";
+$fir_vysledok4 = mysql_query($sqlfir4);
+if( $fir_vysledok4 ) 
+{
+$fir_riadok4=mysql_fetch_object($fir_vysledok4);
+
+$osc = 1*$fir_riadok4->invt;
+$oscnaz = $fir_riadok4->prie." ".$fir_riadok4->meno;
+}
 
 
 
+?>
+
+<tr>
+<td class="<?php echo $hvstup; ?>" ><?php echo $polozka->cislocpl; ?></td>
+<td class="<?php echo $hvstup; ?>" ><?php echo $polozka->ibanold; ?></td>
+<td class="<?php echo $hvstup; ?>" ><?php echo $polozka->ibanx; ?></td>
+<td class="<?php echo $hvstup; ?>" ><?php echo $stav; ?></td>
+
+<td class="<?php echo $hvstup; ?>" >
+<?php 
+if( $ico > 0 ) { 
+?> 
+<a href="#" onClick="window.open('../cis/cico.php?sys=ALL&copern=8&page=1&cislo_ico=<?php echo $ico;?>&h_ico=<?php echo $ico;?>','_blank',
+'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes')">
+<?php echo $ico." ".$iconaz; ?></a>
+
+
+<?php
+               }
+?>
+</td>
+
+<td class="<?php echo $hvstup; ?>" >
+<?php 
+if( $osc > 0 ) { 
+?> 
+<a href="#" onClick="window.open('../mzdy/zamestnanci.php?sys=MZD&copern=8&page=1&cislo_oc=<?php echo $osc;?>&h_oc=<?php echo $osc;?>','_blank',
+'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes')">
+<?php echo $osc." ".$oscnaz; ?></a>
+
+
+<?php
+               }
+?>
+</td>
+
+</tr>
+<?php
+}
+
+$i = $i + 1;
+  }
+?>
+</table>
+
+
+<?php
+}
+?>
+
+
+
+<?php
 exit;
 
 //koniec prepni do faktury
