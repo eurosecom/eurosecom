@@ -2035,7 +2035,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_treximaprac SET icox=0 ";
 $oznac = mysql_query("$sqtoz");
 
 //hodiny
-$sqtoz = "UPDATE F$kli_vxcf"."_treximaprac SET odpracd=hod WHERE ( dm > 100 AND dm < 199 )"; 
+$sqtoz = "UPDATE F$kli_vxcf"."_treximaprac SET odpracd=hod WHERE ( dm > 100 AND dm < 110 )"; 
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_treximaprac SET nadcas=hod WHERE ( dm = 201 )"; 
@@ -2328,7 +2328,9 @@ $Spoc_praczpv=sprintf("%0.0f", $Cislo);
 if( $copern == 12 )
           {
 
-$nazsub="TREXIMA_".$stvrtrok;
+$hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+$idx=$kli_uzid.$hhmm;
+$nazsub="TREXIMA_".$stvrtrok."_".$idx;
 
 
 if (File_Exists ("../tmp/$nazsub.xml")) { $soubor = unlink("../tmp/$nazsub.xml"); }
@@ -2371,7 +2373,7 @@ $hlavicka=mysql_fetch_object($sql);
   fwrite($soubor, $text);
   $text = "<program>EuroSecom ochranna znamka</program>"."\r\n"; 
   fwrite($soubor, $text);
-  $text = "<verzia>2012_02</verzia>"."\r\n"; 
+  $text = "<verzia>2015_06</verzia>"."\r\n"; 
   fwrite($soubor, $text);
   $text = "</subor>"."\r\n";
   fwrite($soubor, $text);
