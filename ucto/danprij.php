@@ -446,39 +446,24 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
-//VSEOBECNE PODANIE POD 
+//VSEOBECNE PODANIE  
   function TlacVseob()
   {
-   window.open('../ucto/vseobecne_pod2015.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+   window.open('../ucto/vp_zavierka2015.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0&kli_vduj=<?php echo $kli_vduj; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravVseob()
   {
-   window.open('../ucto/vseobecne_pod2015.php?copern=20&drupoh=1&page=1&strana=1',
+   window.open('../ucto/vp_zavierka2015.php?copern=20&drupoh=1&page=1&strana=1&kli_vduj=<?php echo $kli_vduj; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function VseobdoXML()
   {
-   window.open('../ucto/vseobecne_pod2015xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+   window.open('../ucto/vp_zavierka2015xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&kli_vduj=<?php echo $kli_vduj; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
-//VSEOBECNE PODANIE NUJ 
-  function TlacVseobNuj()
-  {
-   window.open('../ucto/vseobecne_nuj2015.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function UpravVseobNuj()
-  {
-   window.open('../ucto/vseobecne_nuj2015.php?copern=20&drupoh=1&page=1&strana=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function VseobdoXMLNuj()
-  {
-   window.open('../ucto/vseobecne_nuj2015xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
+
 </script>
 </HEAD>
 <BODY onload="VyberVstupx();">
@@ -1429,7 +1414,7 @@ if ( $copern == 1 AND $kli_vduj == 9 )
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <div class="toleft line-box-text">
 <div>
- <strong>Všeobecné podanie k úètovnej závierke POD</strong> <!-- dopyt, budeme robi pre jú, núj pú a núj jú -->
+ <strong>Všeobecné podanie k úètovnej závierke </strong> 
 </div>
 </div>
 <a href="#" onclick="VseobdoXML();" title="export do XML"
@@ -1438,24 +1423,6 @@ if ( $copern == 1 AND $kli_vduj == 9 )
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </div>
 
-<?php if ( $kli_vduj != 9 ) { ?>
-
-<div class="line-area"> <!-- podanie o uz nuj-->
-<div class="toleft line-box"></div>
-<a href="#" onclick="TlacVseobNuj();" title="Zobrazi v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box-text">
-<div>
- <strong>Všeobecné podanie k úètovnej závierke NUJ</strong> <!-- dopyt, budeme robi pre jú, núj pú a núj jú -->
-</div>
-</div>
-<a href="#" onclick="VseobdoXMLNuj();" title="export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravVseobNuj();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</div>
-
-<?php                       } ?>
 
 </div> <!-- .content -->
 <?php
