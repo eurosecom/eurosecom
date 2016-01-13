@@ -102,7 +102,7 @@ $sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, npr
 $sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
 " ( '2', '⁄ûitkovÈ vozidlo - 1,2 n·pravy', '3', 'hmotnosù (t)', 'nad 2 - do 4', '212', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
-" ( '2', '⁄ûitkovÈ vozidlo - 1,2 n·pravy', '4', 'hmotnosù (t)', 'nad 4 - do 6', '321', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult"); //dopyt, tu m· byù 312
+" ( '2', '⁄ûitkovÈ vozidlo - 1,2 n·pravy', '4', 'hmotnosù (t)', 'nad 4 - do 6', '312', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult"); 
 $sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
 " ( '2', '⁄ûitkovÈ vozidlo - 1,2 n·pravy', '5', 'hmotnosù (t)', 'nad 6 - do 8', '417', '0', '0', '0', '0', '0', '0', '0' ) "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
@@ -184,6 +184,12 @@ $sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, npr
      }
 //koniec nastav sadzby 2015
 
+//oprava sadzby 2015
+$sqult = "INSERT INTO F$kli_vxcf"."_sadzby_dmv2015 ( csdz, nsdz, cprm, pprm, nprm, szba, szbb, sznr, sztn, sztt, szke, szpo, szza ) VALUES ".
+" ( '2', '⁄ûitkovÈ vozidlo - 1,2 n·pravy', '4', 'hmotnosù (t)', 'nad 4 - do 6', '312', '0', '0', '0', '0', '0', '0', '0' ) "; 
+
+$sqult = "UPDATE F$kli_vxcf"."_sadzby_dmv2015 SET szba=312 WHERE csdz = 2 AND cprm = 4 "; 
+$ulozene = mysql_query("$sqult");
 
 //prepocitaj vsetky vozidla
     if ( $copern == 2020 )
