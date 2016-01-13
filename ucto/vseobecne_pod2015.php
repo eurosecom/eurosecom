@@ -238,15 +238,20 @@ if ( $fir_fico < 1000000 ) { $ico="00".$fir_fico; }
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - Všeobecné podanie</title>
 <style type="text/css">
+img.btn-row-tool {
+  width: 20px;
+  height: 20px;
+}
+
 span.text-echo {
   font-size: 16px;
   letter-spacing: 13px;
 }
 div.input-echo {
-  font-size: 16px;
+  font-size: 15px;
 /*   background-color: #fff; */
   position: absolute;
-  font-weight:bold;
+  font-weight: bold;
 }
 form input[type=text] {
   position: absolute;
@@ -342,10 +347,11 @@ if ( $copern == 20 )
    </td>
    <td>
     <div class="bar-btn-form-tool">
-     <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacVseob();"
-          title="Zobrazi v PDF" class="btn-form-tool">
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="POdoXML();" title="Export do XML" class="btn-form-tool"> <!-- dopyt, rozchodi -->
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();"
           title="Pouèenie na vyplnenie" class="btn-form-tool">
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacVseob();"
+          title="Zobrazi v PDF" class="btn-form-tool">
     </div>
    </td>
   </tr>
@@ -364,12 +370,16 @@ if ( $copern == 20 )
 <input type="text" name="evci2" id="evci2" onkeyup="CiarkaNaBodku(this);"
  style="width:85px; top:100px; left:588px;"/>
 
-<!-- adresat podania -->
-<select name="organ" id="organ" size="1" style="width:274px; top:174px; left:248px;">
+<!-- Adresat podania -->
+<div class="input-echo" style="top:173px; left:248px;">Daòovı úrad</div>
+
+<!--
+ <select name="organ" id="organ" size="1" style="width:274px; top:174px; left:248px;">
  <option value="0"></option>
  <option value="1">Daòovı úrad</option>
 </select>
-<select name="duozn" id="duozn" size="1" style="width:274px; top:205px; left:248px;">
+--> <!-- dopyt, zruši všade -->
+<select name="duozn" id="duozn" size="1" style="width:274px; top:205px; left:248px;"> <!-- dopyt, predpåòa z ufur -->
  <option value="0"></option>
  <option value="1">Banská Bystrica</option>
  <option value="2">Bratislava</option>
@@ -381,51 +391,62 @@ if ( $copern == 20 )
  <option value="8">Trnava</option>
  <option value="9">ilina</option>
 </select>
-<select name="oblast" id="oblast" size="1" style="width:274px; top:248px; left:248px;">
+<div class="input-echo" style="top:248px; left:248px;">Úètovné dokumenty</div>
+
+<!--
+ <select name="oblast" id="oblast" size="1" style="width:274px; top:248px; left:248px;">
  <option value="0"></option>
  <option value="1">Úètovné dokumenty</option>
 </select>
-<select name="agenda" id="agenda" size="1" style="width:612px; top:279px; left:248px;">
+--> <!-- dopyt, zruši -->
+<!--
+ <select name="agenda" id="agenda" size="1" style="width:612px; top:279px; left:248px;">
  <option value="0"></option>
  <option value="1">Úètovné vıkazy pre podnikate¾ské subjetky úètujúce v sústave podvojného úètovníctva</option>
 </select>
+--> <!-- dopyt, zruši -->
+<div class="input-echo" style="top:279px; left:248px;">Podnikate¾skı subjekt úètujúci v sústave podvojného úètovníctva</div>
 <select name="typpod" id="typpod" size="1" style="width:612px; top:310px; left:248px;">
  <option value="0"></option>
  <option value="1">Podnikate¾skı subjekt úètujúci v sústave podvojného úètovníctva</option>
+ <option value="2">Mikro úètovná jednotka</option>
 </select>
 
-<!-- obdobia -->
+<!-- obdobia --> <!-- dopyt, bude ikona na naèítanie zo závierky -->
 <input type="text" name="obbod" id="obbod" onkeyup="CiarkaNaBodku(this);"
-       style="width:127px; top:369px; left:250px;"/>
+       style="width:127px; top:369px; left:250px;"/> <!-- dopyt, budeme predplòa pod¾a závierky -->
 <input type="text" name="obbdo" id="obbdo" onkeyup="CiarkaNaBodku(this);"
-       style="width:127px; top:399px; left:250px;"/>
+       style="width:127px; top:399px; left:250px;"/> <!-- dopyt, budeme predplòa pod¾a závierky -->
 <input type="text" name="obmod" id="obmod" onkeyup="CiarkaNaBodku(this);"
-       style="width:127px; top:369px; left:689px;"/>
+       style="width:127px; top:369px; left:689px;"/> <!-- dopyt, budeme predplòa pod¾a závierky -->
 <input type="text" name="obmdo" id="obmdo" onkeyup="CiarkaNaBodku(this);"
-       style="width:127px; top:399px; left:689px;"/>
+       style="width:127px; top:399px; left:689px;"/> <!-- dopyt, budeme predplòa pod¾a závierky -->
 
 <!-- uctovna zavierka -->
-<span class="text-echo" style="top:475px; left:138px;">x</span>
+<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Úètovnej závierky"
+     onclick=";" style="top:442px; left:18px;" class="btn-row-tool"> <!-- dopyt, rozchodi -->
+
+<span class="text-echo" style="top:476px; left:139px;">x</span>
 <input type="radio" id="typuz0" name="typuz" value="0" style="top:474px; left:349px;"/>
 <input type="radio" id="typuz1" name="typuz" value="1" style="top:501px; left:349px;"/>
 <input type="radio" id="typuz2" name="typuz" value="2" style="top:527px; left:349px;"/>
 <input type="text" name="datk" id="datk" onkeyup="CiarkaNaBodku(this);"
-       style="width:131px; top:498px; left:687px;"/>
+       style="width:131px; top:498px; left:687px;"/> <!-- dopyt, budeme predplòa pod¾a závierky -->
 <input type="text" name="datz" id="datz" onkeyup="CiarkaNaBodku(this);"
-       style="width:127px; top:566px; left:250px;"/>
+       style="width:127px; top:566px; left:250px;"/> <!-- dopyt, budeme predplòa pod¾a závierky, -->
 <input type="text" name="dats" id="dats" onkeyup="CiarkaNaBodku(this);"
-       style="width:127px; top:566px; left:689px;"/>
+       style="width:127px; top:566px; left:689px;"/> <!-- dopyt, budeme predplòa pod¾a závierky -->
 
 <!-- jazyk podania -->
-<input type="radio" id="jazyk0" name="jazyk" value="0" style="top:645px; left:132px;"/>
+<input type="radio" id="jazyk0" name="jazyk" value="0" style="top:645px; left:132px;"/> <!-- dopyt, natvrdo slovenèina -->
 <input type="radio" id="jazyk1" name="jazyk" value="1" style="top:671px; left:132px;"/>
 
 <!-- uctovna jednotka -->
 <div class="input-echo" style="top:751px; left:182px;"><?php echo $ico; ?></div>
 <div class="input-echo" style="top:751px; left:385px;"><?php echo $fir_fdic; ?></div>
 <input type="text" name="datv" id="datv" onkeyup="CiarkaNaBodku(this);"
-       style="width:131px; top:751px; left:687px;"/>
-<div class="input-echo" style="top:783px; left:688px;"><?php echo $fir_sknace; ?></div>
+       style="width:131px; top:751px; left:687px;"/> <!-- dopyt, toto by som doplnil do údajov o firme, máme aj v poznámkach -->
+<div class="input-echo" style="top:783px; left:688px;"><?php echo $fir_sknace; ?></div> <!-- dopyt, preveri v xml èi s bodkami alebo nie -->
 <div class="input-echo" style="top:830px; left:70px;"><?php echo $fir_fnaz; ?></div>
 <div class="input-echo" style="top:879px; left:70px;"><?php echo $fir_obreg; ?></div>
 <div class="input-echo" style="top:923px; left:182px;"><?php echo $fir_fuli; ?></div>
@@ -442,16 +463,18 @@ if ( $copern == 20 )
  <option value="2">Vıroèná správa</option>
  <option value="3">Roèná finanèná správa emitenta</option>
 </select>
+<!--
 <select name="spopod" id="spopod" size="1" style="width:274px; top:1098px; left:248px;">
  <option value="0"></option>
  <option value="1">Elektronicky - súèas podania</option>
 </select>
-
+--> <!-- dopyt, zruši -->
+<div class="input-echo" style="top:1098px; left:248px;">Elektronicky - súèas podania</div>
 <input type="text" name="datp" id="datp" onkeyup="CiarkaNaBodku(this);"
-       style="width:127px; top:1157px; left:250px;"/>
+       style="width:127px; top:1157px; left:250px;"/> <!-- dopyt, predpåòa aktuálny dátum -->
 
 </FORM>
-</div> <!-- koniec #content -->
+</div> <!-- #content -->
 <?php
 //mysql_free_result($vysledok);
      }
