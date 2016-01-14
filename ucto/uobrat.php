@@ -541,10 +541,13 @@ exit;
 $cstat = 1*$_REQUEST['cstat'];
 if( $cstat == 512 )
 {
+$rokvts112="";
+if( $kli_vrok < 2016 ) $rokvts112="_2015";
+if( $kli_vrok < 2014 ) $rokvts112="_2013";
 ?>
 <script type="text/javascript">
 
-window.open('../ucto/statistika_vts112.php?copern=1&drupoh=1&page=1&modul=512', '_self' )
+window.open('../ucto/statistika_vts112<?php echo $rokvts112; ?>.php?copern=1&drupoh=1&page=1&modul=512', '_self' )
 
 </script>
 <?php

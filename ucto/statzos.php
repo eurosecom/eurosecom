@@ -517,6 +517,7 @@ window.open('../ucto/statistika_p304<?php echo $rok304; ?>.php?copern=1&drupoh=1
 //statistika vts112
 <?php
 $rokvts112="";
+if( $kli_vrok < 2016 ) $rokvts112="_2015";
 if( $kli_vrok < 2014 ) $rokvts112="_2013";
 ?>
 
