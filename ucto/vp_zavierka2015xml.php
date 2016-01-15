@@ -32,12 +32,6 @@ $sDat = include("../funkcie/dat_sk_us.php");
 
 $citfir = include("../cis/citaj_fir.php");
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
-
-
 
 $hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
 $idx=$kli_uzid.$hhmm;
@@ -217,9 +211,7 @@ $text=$hlavicka->evci2;
   $text = "</secEvidencneCisloSuvisiacehoDOkumentu>"."\r\n"; fwrite($soubor, $text);
 
   $text = "<secAdresovanieVP>"."\r\n"; fwrite($soubor, $text);
-$organ=$hlavicka->organ;
-if ( $hlavicka->organ == 0 ) { $organ=" "; }
-if ( $hlavicka->organ == 1 ) { $organ="DU"; }
+$organ="DU";
   $text = " <valOrganFS><![CDATA[".$organ."]]></valOrganFS>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <secAdresatDU>"."\r\n"; fwrite($soubor, $text);
@@ -229,26 +221,24 @@ if ( $hlavicka->duozn == 1 ) { $duozn="600"; }
 if ( $hlavicka->duozn == 2 ) { $duozn="100"; }
 if ( $hlavicka->duozn == 3 ) { $duozn="800"; }
 if ( $hlavicka->duozn == 4 ) { $duozn="400"; }
-if ( $hlavicka->duozn == 5 ) { $duozn="900"; }
-if ( $hlavicka->duozn == 6 ) { $duozn="700"; }
-if ( $hlavicka->duozn == 7 ) { $duozn="300"; }
-if ( $hlavicka->duozn == 8 ) { $duozn="200"; }
-if ( $hlavicka->duozn == 9 ) { $duozn="500"; }
+if ( $hlavicka->duozn == 5 ) { $duozn="700"; }
+if ( $hlavicka->duozn == 6 ) { $duozn="300"; }
+if ( $hlavicka->duozn == 7 ) { $duozn="200"; }
+if ( $hlavicka->duozn == 8 ) { $duozn="500"; }
+if ( $hlavicka->duozn == 9 ) { $duozn="900"; }
   $text = "  <valDanovyUrad><![CDATA[".$duozn."]]></valDanovyUrad>"."\r\n"; fwrite($soubor, $text);
   $text = " </secAdresatDU>"."\r\n"; fwrite($soubor, $text);
   $text = "</secAdresovanieVP>"."\r\n"; fwrite($soubor, $text);
 
   $text = "<secOblastPodania>"."\r\n"; fwrite($soubor, $text);
-$oblast=$hlavicka->oblast;
-if ( $hlavicka->oblast == 0 ) { $oblast=" "; }
-if ( $hlavicka->oblast == 1 ) { $oblast="UCT"; }
+$oblast="UCT";
   $text = " <valOblastPodania><![CDATA[".$oblast."]]></valOblastPodania>"."\r\n"; fwrite($soubor, $text);
   $text = "</secOblastPodania>"."\r\n"; fwrite($soubor, $text);
 
   $text = "<secAgenda>"."\r\n"; fwrite($soubor, $text);
-$agenda=$hlavicka->agenda;
-if ( $hlavicka->agenda == 0 ) { $agenda=" "; }
-if ( $hlavicka->agenda == 1 ) { $agenda="UCT_PU"; }
+$agenda=" ";
+if ( $kli_vduj == 0 ) { $agenda="UCT_PU"; }
+if ( $kli_vduj == 1 ) { $agenda="UCT_PUN"; }
   $text = " <valAgenda><![CDATA[".$agenda."]]></valAgenda>"."\r\n"; fwrite($soubor, $text);
   $text = "</secAgenda>"."\r\n"; fwrite($soubor, $text);
 
@@ -256,14 +246,18 @@ if ( $hlavicka->agenda == 1 ) { $agenda="UCT_PU"; }
 $typpod=$hlavicka->typpod;
 if ( $hlavicka->typpod == 0 ) { $typpod=" "; }
 if ( $hlavicka->typpod == 1 ) { $typpod="RUZ_POD"; }
+if ( $hlavicka->typpod == 2 ) { $typpod="RUZ_MUJ"; }
+if ( $hlavicka->typpod == 3 ) { $typpod="RUZ_NUJ"; }
   $text = " <valTypUJ><![CDATA[".$typpod."]]></valTypUJ>"."\r\n"; fwrite($soubor, $text);
   $text = "</secTypUJ>"."\r\n"; fwrite($soubor, $text);
 
   $text = "<secUdajeUZ>"."\r\n"; fwrite($soubor, $text);
+if ( $kli_vduj == 0 ) {
   $text = " <secTypUZ>"."\r\n"; fwrite($soubor, $text);
 $typuz="0";
   $text = "  <valTypUZ><![CDATA[".$typuz."]]></valTypUZ>"."\r\n"; fwrite($soubor, $text);
   $text = " </secTypUZ>"."\r\n"; fwrite($soubor, $text);
+                      }
 
   $text = " <secZostavenaK>"."\r\n"; fwrite($soubor, $text);
 $datk_sk=$hlavicka->datk;
@@ -305,14 +299,24 @@ $rok=$pole[1];
   $text = " </secPredchadzajuceObdobieDo>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <secUctovnaZavierka>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <secUctovnaZavierkaRMP>"."\r\n"; fwrite($soubor, $text);
 $riadna="1"; $mimoriadna="0"; $priebezna="0";
 if ( $hlavicka->typuz == 1 ) { $riadna="0"; $mimoriadna="1"; $priebezna="0"; }
 if ( $hlavicka->typuz == 2 ) { $riadna="0"; $mimoriadna="0"; $priebezna="1"; }
+if ( $kli_vduj == 0 )
+{
+  $text = "  <secUctovnaZavierkaRMP>"."\r\n"; fwrite($soubor, $text);
   $text = "   <valUctovnaZavierkaRmpRiadna><![CDATA[".$riadna."]]></valUctovnaZavierkaRmpRiadna>"."\r\n"; fwrite($soubor, $text);
   $text = "   <valUctovnaZavierkaRmpMimoriadna><![CDATA[".$mimoriadna."]]></valUctovnaZavierkaRmpMimoriadna>"."\r\n"; fwrite($soubor, $text);
   $text = "   <valUctovnaZavierkaRmpPriebezna><![CDATA[".$priebezna."]]></valUctovnaZavierkaRmpPriebezna>"."\r\n"; fwrite($soubor, $text);
   $text = "  </secUctovnaZavierkaRMP>"."\r\n"; fwrite($soubor, $text);
+}
+if ( $kli_vduj == 1 )
+{
+  $text = "  <secUctovnaZavierkaRM>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <valUctovnaZavierkaRmRiadna><![CDATA[".$riadna."]]></valUctovnaZavierkaRmpRiadna>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <valUctovnaZavierkaRmMimoriadna><![CDATA[".$mimoriadna."]]></valUctovnaZavierkaRmpMimoriadna>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </secUctovnaZavierkaRM>"."\r\n"; fwrite($soubor, $text);
+}
   $text = " </secUctovnaZavierka>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <secDatumVznikuUJ>"."\r\n"; fwrite($soubor, $text);
@@ -332,7 +336,6 @@ $dats_sk=$hlavicka->dats;
 
   $text = " <secJazykPodania>"."\r\n"; fwrite($soubor, $text);
 $jazyk="0";
-if ( $hlavicka->jazyk == 1 ) { $jazyk="1"; }
   $text = "  <valJazykovaVerziaPodania><![CDATA[".$jazyk."]]></valJazykovaVerziaPodania>"."\r\n"; fwrite($soubor, $text);
   $text = " </secJazykPodania>"."\r\n"; fwrite($soubor, $text);
   $text = "</secUdajeUZ>"."\r\n"; fwrite($soubor, $text);
@@ -345,17 +348,13 @@ $ico=1*$fir_fico;
 if ( $fir_fico < 1000000 ) { $ico="00".$ico; }
   $text = "   <valIcoUj><![CDATA[".$ico."]]></valIcoUj>"."\r\n"; fwrite($soubor, $text);
   $text = "  </secIcoUJ>"."\r\n"; fwrite($soubor, $text);
-
 $dic=1*$fir_fdic;
   $text = "  <valDicUj><![CDATA[".$dic."]]></valDicUj>"."\r\n"; fwrite($soubor, $text);
-
 $sknace=$fir_sknace;
 $sknace=str_replace(".","",$sknace); $sknace=str_replace(" ","",$sknace);
   $text = "  <valKodSkNace><![CDATA[".$sknace."]]></valKodSkNace>"."\r\n"; fwrite($soubor, $text);
-
 $obchodneMeno = iconv("CP1250", "UTF-8", $fir_fnaz);
   $text = "  <valObchMenoUj><![CDATA[".$obchodneMeno."]]></valObchMenoUj>"."\r\n"; fwrite($soubor, $text);
-
 $register = iconv("CP1250", "UTF-8", $fir_obreg);
   $text = "  <valOznaObchRegACisObchSpol><![CDATA[".$register."]]></valOznaObchRegACisObchSpol>"."\r\n"; fwrite($soubor, $text);
   $text = " </secIdUctJedn>"."\r\n"; fwrite($soubor, $text);
@@ -385,9 +384,7 @@ if ( $hlavicka->typdok == 1 ) { $typdok="UJ_SPA"; }
 if ( $hlavicka->typdok == 2 ) { $typdok="UJ_VSP"; }
 if ( $hlavicka->typdok == 3 ) { $typdok="UJ_FSE"; }
   $text = "  <valTypPrilohyUJ><![CDATA[".$typdok."]]></valTypPrilohyUJ>"."\r\n"; fwrite($soubor, $text);
-$spopod=$hlavicka->spopod;
-if ( $hlavicka->spopod == 0 ) { $spopod=" "; }
-if ( $hlavicka->spopod == 1 ) { $spopod="SD_ESP"; }
+$spopod="SD_ESP";
   $text = "  <valSdUJ><![CDATA[".$spopod."]]></valSdUJ>"."\r\n"; fwrite($soubor, $text);
   $text = " </secPrilohaUJ>"."\r\n"; fwrite($soubor, $text);
   $text = "</secPrilohy>"."\r\n"; fwrite($soubor, $text);
