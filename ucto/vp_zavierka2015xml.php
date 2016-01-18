@@ -27,6 +27,8 @@ require_once("../pswd/password.php");
   endif;
   mysql_select_db($mysqldb);
 
+$kli_nezis = 1*$_REQUEST['kli_nezis'];
+
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
@@ -237,8 +239,8 @@ $oblast="UCT";
 
   $text = "<secAgenda>"."\r\n"; fwrite($soubor, $text);
 $agenda=" ";
-if ( $kli_vduj == 0 ) { $agenda="UCT_PU"; }
-if ( $kli_vduj == 1 ) { $agenda="UCT_PUN"; }
+if ( $kli_nezis == 0 ) { $agenda="UCT_PU"; }
+if ( $kli_nezis == 1 ) { $agenda="UCT_PUN"; }
   $text = " <valAgenda><![CDATA[".$agenda."]]></valAgenda>"."\r\n"; fwrite($soubor, $text);
   $text = "</secAgenda>"."\r\n"; fwrite($soubor, $text);
 
@@ -252,7 +254,7 @@ if ( $hlavicka->typpod == 3 ) { $typpod="RUZ_NUJ"; }
   $text = "</secTypUJ>"."\r\n"; fwrite($soubor, $text);
 
   $text = "<secUdajeUZ>"."\r\n"; fwrite($soubor, $text);
-if ( $kli_vduj == 0 ) {
+if ( $kli_nezis == 0 ) {
   $text = " <secTypUZ>"."\r\n"; fwrite($soubor, $text);
 $typuz="0";
   $text = "  <valTypUZ><![CDATA[".$typuz."]]></valTypUZ>"."\r\n"; fwrite($soubor, $text);
@@ -302,7 +304,7 @@ $rok=$pole[1];
 $riadna="1"; $mimoriadna="0"; $priebezna="0";
 if ( $hlavicka->typuz == 1 ) { $riadna="0"; $mimoriadna="1"; $priebezna="0"; }
 if ( $hlavicka->typuz == 2 ) { $riadna="0"; $mimoriadna="0"; $priebezna="1"; }
-if ( $kli_vduj == 0 )
+if ( $kli_nezis == 0 )
 {
   $text = "  <secUctovnaZavierkaRMP>"."\r\n"; fwrite($soubor, $text);
   $text = "   <valUctovnaZavierkaRmpRiadna><![CDATA[".$riadna."]]></valUctovnaZavierkaRmpRiadna>"."\r\n"; fwrite($soubor, $text);
@@ -310,7 +312,7 @@ if ( $kli_vduj == 0 )
   $text = "   <valUctovnaZavierkaRmpPriebezna><![CDATA[".$priebezna."]]></valUctovnaZavierkaRmpPriebezna>"."\r\n"; fwrite($soubor, $text);
   $text = "  </secUctovnaZavierkaRMP>"."\r\n"; fwrite($soubor, $text);
 }
-if ( $kli_vduj == 1 )
+if ( $kli_nezis == 1 )
 {
   $text = "  <secUctovnaZavierkaRM>"."\r\n"; fwrite($soubor, $text);
   $text = "   <valUctovnaZavierkaRmRiadna><![CDATA[".$riadna."]]></valUctovnaZavierkaRmpRiadna>"."\r\n"; fwrite($soubor, $text);

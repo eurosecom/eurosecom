@@ -449,12 +449,12 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
 //VSEOBECNE PODANIE  
   function TlacVseob()
   {
-   window.open('../ucto/vp_zavierka2015.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0&kli_vduj=<?php echo $kli_vduj; ?>',
+   window.open('../ucto/vp_zavierka2015.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0&kli_nezis=<?php echo $kli_nezis; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravVseob()
   {
-   window.open('../ucto/vp_zavierka2015.php?copern=20&drupoh=1&page=1&strana=1&kli_vduj=<?php echo $kli_vduj; ?>',
+   window.open('../ucto/vp_zavierka2015.php?copern=20&drupoh=1&page=1&strana=1&kli_nezis=<?php echo $kli_nezis; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function VseobdoXML()

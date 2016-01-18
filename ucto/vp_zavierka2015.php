@@ -40,7 +40,7 @@ $citfir = include("../cis/citaj_fir.php");
 $cislo_oc = 1*$_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
 $jedn = 1*$_REQUEST['jedn'];
-$kli_vduj = 1*$_REQUEST['kli_vduj'];
+$kli_nezis = 1*$_REQUEST['kli_nezis'];
 
 //datum vzniku UJ
 $sql = "SELECT datvzn FROM F".$kli_vxcf."_ufirdalsie";
@@ -50,6 +50,43 @@ if (!$vysledok)
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD datvzn DATE NOT NULL AFTER kkx";
 $vysledek = mysql_query("$sql");
 }
+
+//dopln datumy uzavierky
+if ( $copern == 1100 )
+     {
+$kli_mrok=$kli_vrok-1;
+$obbod="01.".$kli_vrok; $obbdo="12.".$kli_vrok;
+$obmod="01.".$kli_mrok; $obmdo="12.".$kli_mrok;
+$datk_sql=$kli_vrok."-12-31";
+
+$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+
+  $datksql=$riadok->datk;
+  $datbodsk=SkDatum($riadok->datbod);
+  $datbdosk=SkDatum($riadok->datbdo);
+  $datmodsk=SkDatum($riadok->datmod);
+  $datmdosk=SkDatum($riadok->datmdo);
+
+  }
+
+if( $datksql != '0000-00-00' ) { $datk_sql=$datksql; }
+if( $datbodsk != '00.00.0000' ) { $polex = explode(".", $datbodsk); $obbod=$polex[1].".".$polex[2]; }
+if( $datbdosk != '00.00.0000' ) { $polex = explode(".", $datbdosk); $obbdo=$polex[1].".".$polex[2]; }
+
+if( $datmodsk != '00.00.0000' ) { $polex = explode(".", $datmodsk); $obmod=$polex[1].".".$polex[2]; }
+if( $datmdosk != '00.00.0000' ) { $polex = explode(".", $datmdosk); $obmdo=$polex[1].".".$polex[2]; }
+
+$sqlx = "UPDATE F$kli_vxcf"."_vseobpodanie SET obbod='$obbod', obbdo='$obbdo', obmod='$obmod', obmdo='$obmdo', datk='$datk_sql'  ";
+//echo $sqlx;
+$vysledekx = mysql_query("$sqlx");
+
+
+$copern=20;
+     }
+//koniec dopln datumy uzavierky
 
 //znovu nacitaj
 if ( $copern == 26 )
@@ -222,6 +259,14 @@ $dats_sk = SkDatum($fir_riadok->dats);
 //$datv_sk = SkDatum($fir_riadok->datv);
 $typdok = $fir_riadok->typdok;
 $datp_sk = SkDatum($fir_riadok->datp);
+if ( $datp_sk == '00.00.0000' ) 
+{ 
+$datp_sk=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+$datp_sql=SqlDatum($datp_sk);
+$sqlx = "UPDATE F$kli_vxcf"."_vseobpodanie SET datp='$datp_sql' ";
+$vysledekx = mysql_query("$sqlx");
+}
+
      }
 //koniec nacitania
 
@@ -321,14 +366,19 @@ form select {
   }
   function tlacVseob()
   {
-   window.open('vp_zavierka2015.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc;?>&kli_vduj=<?php echo $kli_vduj; ?>',
+   window.open('vp_zavierka2015.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc;?>&kli_nezis=<?php echo $kli_nezis; ?>',
 '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
   function VseobdoXML()
   {
-   window.open('../ucto/vp_zavierka2015xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&kli_vduj=<?php echo $kli_vduj; ?>',
+   window.open('../ucto/vp_zavierka2015xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&kli_nezis=<?php echo $kli_nezis; ?>',
 '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+
+  function datumUzav()
+  {
+   window.open('../ucto/vp_zavierka2015.php?copern=1100&page=1&sysx=UCT&drupoh=1&uprav=1&kli_nezis=<?php echo $kli_nezis; ?>','_self' );
   }
 </script>
 </HEAD>
@@ -361,7 +411,7 @@ if ( $copern == 20 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="vp_zavierka2015.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&kli_vduj=<?php echo $kli_vduj; ?>">
+<FORM name="formv1" method="post" action="vp_zavierka2015.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&kli_nezis=<?php echo $kli_nezis; ?>">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-top-formsave" style="top:4px;">
 <img src="<?php echo $jpg_cesta; ?>.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 204kB">
@@ -386,17 +436,17 @@ if ( $copern == 20 )
 <div class="input-echo" style="top:249px; left:248px;">Úètovné dokumenty</div>
 <div class="input-echo" style="top:279px; left:248px;">
 <?php
-if ( $kli_vduj == 0 ) { echo "Úètovné výkazy pre podnikate¾ské subjekty úètujúce v sústave podvojného úètovníctva"; }
-if ( $kli_vduj == 1 ) { echo "Úètovné výkazy pre neziskové organizácie úètujúce v sústave podvojného úètovníctva"; }
+if ( $kli_nezis == 0 ) { echo "Úètovné výkazy pre podnikate¾ské subjekty úètujúce v sústave podvojného úètovníctva"; }
+if ( $kli_nezis == 1 ) { echo "Úètovné výkazy pre neziskové organizácie úètujúce v sústave podvojného úètovníctva"; }
 ?>
 </div>
 <select name="typpod" id="typpod" size="1" style="width:612px; top:310px; left:248px;">
  <option value="0"></option>
-<?php if ( $kli_vduj == 0 ) { ?>
+<?php if ( $kli_nezis == 0 ) { ?>
  <option value="1">Podnikate¾ský subjekt úètujúci v sústave podvojného úètovníctva</option>
  <option value="2">Mikro úètovná jednotka</option>
 <?php                       } ?>
-<?php if ( $kli_vduj == 1 ) { ?>
+<?php if ( $kli_nezis == 1 ) { ?>
  <option value="3">Nezisková organizácia úètujúca v sústave podvojného úètovníctva</option>
 <?php                       } ?>
 </select>
@@ -412,20 +462,20 @@ if ( $kli_vduj == 1 ) { echo "Úètovné výkazy pre neziskové organizácie úètujúce 
        style="width:126px; top:401px; left:690px;"/> <!-- dopyt, budeme predplòa pod¾a závierky -->
 
 <!-- uctovna zavierka -->
-<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Úètovnej závierky"
-     onclick=";" style="top:442px; left:18px;" class="btn-row-tool"> <!-- dopyt, rozchodi -->
+<img src="../obr/ikony/download_blue_icon.png" title="Naèíta obdobia a dátum k z Úètovnej závierky"
+     onclick="datumUzav();" style="top:442px; left:18px;" class="btn-row-tool"> <!-- dopyt, rozchodi -->
 <span class="text-echo" style="top:476px; left:139px;">x</span>
 <input type="radio" id="typuz0" name="typuz" value="0" style="top:475px; left:349px;"/>
 <input type="radio" id="typuz1" name="typuz" value="1" style="top:501px; left:349px;"/>
-<?php if ( $kli_vduj == 0 ) { ?>
+<?php if ( $kli_nezis == 0 ) { ?>
 <input type="radio" id="typuz2" name="typuz" value="2" style="top:527px; left:349px;"/>
 <?php                       } ?>
 <input type="text" name="datk" id="datk" onkeyup="CiarkaNaBodku(this);"
-       style="width:131px; top:498px; left:687px;"/> <!-- dopyt, budeme predplòa pod¾a závierky -->
+       style="width:131px; top:498px; left:687px;"/> 
 <input type="text" name="datz" id="datz" onkeyup="CiarkaNaBodku(this);"
-       style="width:126px; top:567px; left:251px;"/> <!-- dopyt, budeme predplòa pod¾a závierky, -->
+       style="width:126px; top:567px; left:251px;"/> 
 <input type="text" name="dats" id="dats" onkeyup="CiarkaNaBodku(this);"
-       style="width:126px; top:567px; left:690px;"/> <!-- dopyt, budeme predplòa pod¾a závierky -->
+       style="width:126px; top:567px; left:690px;"/> 
 
 <!-- jazyk podania -->
 <span class="text-echo" style="top:647px; left:139px;">x</span>
@@ -450,7 +500,7 @@ if ( $kli_vduj == 1 ) { echo "Úètovné výkazy pre neziskové organizácie úètujúce 
  <option value="0"></option>
  <option value="1">Správa audítora</option>
  <option value="2">Výroèná správa</option>
-<?php if ( $kli_vduj == 0 ) { ?>
+<?php if ( $kli_nezis == 0 ) { ?>
  <option value="3">Roèná finanèná správa emitenta</option>
 <?php                       } ?>
 </select>
@@ -531,8 +581,8 @@ $oblast="Úètovné dokumenty";
 $pdf->Cell(45,5," ","$rmc1",0,"L");$pdf->Cell(60,5,"$oblast","$rmc",1,"L");
 $pdf->SetFont('arial','',9);
 $pdf->Cell(190,2," ","$rmc1",1,"L");
-if ( $kli_vduj == 0 ) { $agenda="Úètovné výkazy pre podnikate¾ské subjekty úètujúce v sústave podvojného úètovníctva"; }
-if ( $kli_vduj == 1 ) { $agenda="Úètovné výkazy pre neziskové organizácie úètujúce v sústave podvojného úètovníctva"; }
+if ( $kli_nezis == 0 ) { $agenda="Úètovné výkazy pre podnikate¾ské subjekty úètujúce v sústave podvojného úètovníctva"; }
+if ( $kli_nezis == 1 ) { $agenda="Úètovné výkazy pre neziskové organizácie úètujúce v sústave podvojného úètovníctva"; }
 $pdf->Cell(45,5," ","$rmc1",0,"L");$pdf->Cell(135,5,"$agenda","$rmc",1,"L");
 $pdf->SetFont('arial','',10);
 $pdf->Cell(190,2," ","$rmc1",1,"L");
