@@ -1924,6 +1924,14 @@ window.open('../faktury/int_fakt2015pkse.php?copern=55&page=1&h_sys=' + h_sys + 
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 <?php                                          } ?>
 
+<?php if( $berext == 1 AND $kli_vrok == 2016 ) { ?>
+var h_obdp = document.forms.formct2.h_obdp.value;
+var h_sys = document.forms.formct2.h_sys.value;
+
+window.open('../faktury/int_fakt2016pkse.php?copern=55&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+<?php                                          } ?>
+
                 }
 
 function ZablokujFaktury()
@@ -2309,6 +2317,31 @@ if($urob) { $blok614=" - BLOKOVAN…"; }
 <option value="611" >SYS 611 Zdrav.starostlivosù <?php echo $blok611;?></option>
 <option value="612" >SYS 612 OstatnÈ <?php echo $blok612;?></option>
 <option value="614" >SYS 614 N·jomnÈ <?php echo $blok614;?></option>
+<?php                                         } ?>
+
+<?php if( $berext == 1 AND $kli_vrok == 2016 ) { ?>
+<?php
+$blok611="";
+$blok612="";
+$blok614="";
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak711_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok711=" - BLOKOVAN…"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak712_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok712=" - BLOKOVAN…"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak714_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok714=" - BLOKOVAN…"; }
+
+?>
+
+<option value="711" >SYS 711 Zdrav.starostlivosù <?php echo $blok711;?></option>
+<option value="712" >SYS 712 OstatnÈ <?php echo $blok712;?></option>
+<option value="714" >SYS 714 N·jomnÈ <?php echo $blok714;?></option>
 <?php                                         } ?>
 
 </select>
