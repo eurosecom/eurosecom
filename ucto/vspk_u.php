@@ -4949,7 +4949,20 @@ $kurzform=1*$riadok->kurz;
 $vypis_txp = ereg_replace("\n", "<br>", trim($riadok->txp));
 $vypis_txp = ereg_replace(" ", "&nbsp;", trim($vypis_txp));
 ?>
-<td class="pvstup" width="15%" >&nbsp;Úèel:</td>
+<td class="pvstup" width="15%" >
+<?php
+if ( $drupoh == 4 )
+  {
+?>
+<a href="#" onClick="window.open('vspk_importxml.php?copern=1&drupoh=<?php echo $drupoh;?>&page=1&cislo_dok=<?php echo $riadok->dok;?>
+&cislo_uce=<?php echo $riadok->uce;?>', '_self' )">
+<img src='../obr/import.png' width=15 height=15 border=0 title="Import vıpisu z Banky novı XML formát pre všetky banky od 1.2.2016 " ></a>
+
+<?php
+  }
+?>
+
+ Úèel:</td>
 <td class="hvstup" width="85%" ><?php echo $vypis_txp; ?></td>
 </tr>
 </table>
