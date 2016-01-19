@@ -1900,6 +1900,14 @@ window.open('../faktury/int_fakt2015medo.php?copern=55&page=1&h_sys=' + h_sys + 
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 <?php                                       } ?>
 
+<?php if( $medo == 1 AND $kli_vrok == 2016 ) { ?>
+var h_obdp = document.forms.formct2.h_obdp.value;
+var h_sys = document.forms.formct2.h_sys.value;
+
+window.open('../faktury/int_fakt2016medo.php?copern=55&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+<?php                                       } ?>
+
 <?php if( $berext == 1 AND $kli_vrok == 2013 ) { ?>
 var h_obdp = document.forms.formct2.h_obdp.value;
 var h_sys = document.forms.formct2.h_sys.value;
@@ -2248,6 +2256,37 @@ if($urob) { $blok675=" - BLOKOVANÉ"; }
 <option value="686" >SYS 686 ZK Vrbové <?php echo $blok686;?></option>
 <option value="675" >SYS 675 GastroBENE <?php echo $blok675;?></option>
 <?php                                         } ?>
+
+<?php if( $medo == 1 AND $kli_vrok == 2016 ) { ?>
+<?php
+$blok606="";
+$blok656="";
+$blok687="";
+$blok676="";
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak606_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok606=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak656_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok656=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak687_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok687=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak676_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok676=" - BLOKOVANÉ"; }
+?>
+
+<option value="606" >SYS 606 Ubytovanie <?php echo $blok606;?></option>
+<option value="656" >SYS 656 FastFood NM <?php echo $blok656;?></option>
+<option value="687" >SYS 687 ZK Vrbové <?php echo $blok687;?></option>
+<option value="676" >SYS 676 GastroBENE <?php echo $blok676;?></option>
+<?php                                         } ?>
+
 
 
 <?php if( $berext == 1 AND $kli_vrok == 2013 ) { ?>
