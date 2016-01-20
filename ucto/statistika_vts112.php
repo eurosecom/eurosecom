@@ -26,6 +26,10 @@ $rmc1=0;
 $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
 
+//.jpg podklad
+$jpg_cesta="../dokumenty/statistika2016/vts112/vts112_v16";
+$jpg_popis="tlaèivo Mesaèný výkaz vo vybraných trhových službách Prod 3-04 ".$kli_vrok;
+
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
@@ -256,7 +260,7 @@ $vysledek = mysql_query("$sql");
 if ( $copern == 3 )
     {
 $cinnost = strip_tags($_REQUEST['cinnost']);
-$aktivita = strip_tags($_REQUEST['aktivita']);
+//$aktivita = strip_tags($_REQUEST['aktivita']);
 $odoslane = strip_tags($_REQUEST['odoslane']);
 $mod512r01 = strip_tags($_REQUEST['mod512r01']);
 $mod512r02 = strip_tags($_REQUEST['mod512r02']);
@@ -269,7 +273,7 @@ $odoslane_sql=SqlDatum($odoslane);
 
 if( $strana == 1 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts112 SET ".
-" aktivita='$aktivita', odoslane='$odoslane_sql', cinnost='$cinnost' ".
+" odoslane='$odoslane_sql', cinnost='$cinnost' ".
 " WHERE ico >= 0"; }
 
 if( $strana == 2 ) {
@@ -303,7 +307,6 @@ $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
 $cinnost = $fir_riadok->cinnost;
-$aktivita = $fir_riadok->aktivita;
 $odoslane_sk = SkDatum($fir_riadok->odoslane);
 $mod512r01 = $fir_riadok->mod512r01;
 $mod512r02 = $fir_riadok->mod512r02;
@@ -363,7 +366,6 @@ a.archiv-link {
 <?php if ( $strana == 1 ) { ?>
    document.formv1.cinnost.value = '<?php echo "$cinnost";?>';
    document.formv1.odoslane.value = '<?php echo "$odoslane_sk";?>';
-   document.formv1.aktivita.value = '<?php echo "$aktivita";?>';
 <?php                     } ?>
 
 <?php if ( $strana == 2 ) { ?>
@@ -403,7 +405,8 @@ a.archiv-link {
 
   function MetodVypln()
   {
-   window.open('../dokumenty/statistika2014/vts112/vts112v14_metod_pokyny.pdf', '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+   window.open('<?php echo $jpg_cesta; ?>_metodika.pdf',
+'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
   function TlacVykaz()
   {
@@ -411,7 +414,8 @@ a.archiv-link {
   }
   function StatUdajeFirma()
   {
-   window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0', '_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0',
+'_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
   }
   function NacitajMod512()
   {
@@ -419,7 +423,8 @@ a.archiv-link {
   }
   function zarch( mesiac )
   {
-   window.open('../ucto/statistika_vts112.php?copern=11&drupoh=1&page=1&typ=PDF&zarchivu=1&mesarch=' + mesiac +  '&xxx=1', '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+   window.open('../ucto/statistika_vts112.php?copern=11&drupoh=1&page=1&typ=PDF&zarchivu=1&mesarch=' + mesiac +  '&xxx=1',
+'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
 </script>
 </HEAD>
@@ -483,53 +488,54 @@ $i=$i+1;
 </div>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/vts112/vts112v14_str1.jpg"
- alt="tlaèivo Mesaèný výkaz vo vybraných trhových službách VTS 1-12 1.strana 124kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 1.strana 127kB">
+
 <?php
 $kli_vrokx = substr($kli_vrok,2,2);
 $mesiacx=$mesiac; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
 $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 ?>
-<span class="text-echo" style="top:211px; left:475px; font-size:24px;"><?php echo $kli_vrok; ?></span>
-<span class="text-echo" style="top:305px; left:195px; font-size:18px; letter-spacing:24px;"><?php echo $kli_vrokx; ?></span>
-<span class="text-echo" style="top:305px; left:263px; font-size:18px; letter-spacing:24px;"><?php echo $mesiacx; ?></span>
-<span class="text-echo" style="top:305px; left:333px; font-size:18px; letter-spacing:27px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:289px; left:263px; font-size:18px; letter-spacing:24px;"><?php echo $mesiacx; ?></span>
+<span class="text-echo" style="top:289px; left:336px; font-size:18px; letter-spacing:32px;"><?php echo $fir_ficox; ?></span>
 <!-- ORGANIZACIA -->
-<span class="text-echo" style="top:729px; left:295px;"><?php echo $fir_fnaz; ?></span>
-<span class="text-echo" style="top:751px; left:53px;"><?php echo "$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
-<span class="text-echo" style="top:751px; left:820px;"><?php echo $okres; ?></span>
- <img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();"
-  title="Nastavi kód okresu" class="btn-row-tool" style="top:749px; left:850px;">
-<input type="text" name="cinnost" id="cinnost" style="width:500px; top:806px; left:53px;"/>
+<span class="text-echo" style="top:786px; left:300px;"><?php echo $fir_fnaz; ?></span>
+<span class="text-echo" style="top:806px; left:300px;"><?php echo "$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
+<span class="text-echo" style="top:806px; left:820px;"><?php echo $okres; ?></span>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();"
+     title="Nastavi kód okresu" class="btn-row-tool" style="top:804px; left:851px;">
+<input type="text" name="cinnost" id="cinnost" style="width:500px; top:852px; left:54px;"/>
 
 <!-- Vyplnil -->
-<span class="text-echo" style="top:865px; left:53px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo" style="top:885px; left:385px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo" style="top:945px; left:53px;"><?php echo $fir_fem1; ?></span>
+<span class="text-echo" style="top:912px; left:54px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo" style="top:924px; left:485px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo" style="top:959px; left:54px;"><?php echo $fir_fem1; ?></span>
 <input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);"
- style="width:80px; top:944px; left:387px;"/>
+       style="width:80px; top:954px; left:387px;"/>
 
-<!-- modul 100155 -->
-<input type="text" name="aktivita" id="aktivita" style="width:50px; top:1125px; left:807px;"/>
+<!-- modul 100307 -->
+<span class="text-echo center" style="width:499px; top:1113px; left:400px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo center" style="width:499px; top:1138px; left:400px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo center" style="width:499px; top:1164px; left:400px;"><?php echo $fir_fem1; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/vts112/vts112v14_str2.jpg"
- alt="tlaèivo Mesaèný výkaz vo vybraných trhových službách VTS 1-12 2.strana 268kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 2.strana 127kB">
 
 <!-- modul 2 -->
-<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:166px; left:680px;"/>
-<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:191px; left:680px;"/>
+<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:162px; left:770px;"/>
+<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:199px; left:770px;"/>
 
 <!-- modul 512 -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Výsledovky"
- onclick="NacitajMod512();" style="top:262px; left:386px;" class="btn-row-tool">
-<input type="text" name="mod512r01" id="mod512r01" style="width:100px; top:351px; left:680px;"/>
-<input type="text" name="mod512r02" id="mod512r02" style="width:100px; top:377px; left:680px;"/>
-<input type="text" name="mod512r03" id="mod512r03" style="width:100px; top:404px; left:680px;"/>
-<input type="text" name="mod512r04" id="mod512r04" style="width:100px; top:430px; left:680px;"/>
-<span class="text-echo" style="top:460px; right:165px;"><?php echo $mod512r99; ?></span>
+     onclick="NacitajMod512();" style="top:308px; left:386px;" class="btn-row-tool">
+<input type="text" name="mod512r01" id="mod512r01" style="width:100px; top:416px; left:690px;"/>
+<input type="text" name="mod512r02" id="mod512r02" style="width:100px; top:442px; left:690px;"/>
+<input type="text" name="mod512r03" id="mod512r03" style="width:100px; top:468px; left:690px;"/>
+<input type="text" name="mod512r04" id="mod512r04" style="width:100px; top:494px; left:690px;"/>
+<span class="text-echo" style="top:525px; right:155px;"><?php echo $mod512r99; ?></span>
 <?php                                        } ?>
 
 <div class="navbar">
