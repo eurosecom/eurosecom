@@ -58,14 +58,6 @@ td.hvstup_bsede { background-color:#eaeaea; color:black; font-weight:normal;
 td.hvstup_bred { background-color:#ff6c6c; color:black; font-weight:normal;
                   height:12px; font-size:12px; }
 </style>
-
-<script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height;
-var sirkawic = screen.width-10;
-</script>
 </HEAD>
 <BODY class="white">
  <table class="h2" width="100%" >
@@ -315,8 +307,8 @@ if ( $kli_nezis == 0 )
 if ( $kli_nezis == 1 )
 {
   $text = "  <secUctovnaZavierkaRM>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <valUctovnaZavierkaRmRiadna><![CDATA[".$riadna."]]></valUctovnaZavierkaRmpRiadna>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <valUctovnaZavierkaRmMimoriadna><![CDATA[".$mimoriadna."]]></valUctovnaZavierkaRmpMimoriadna>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <valUctovnaZavierkaRmRiadna><![CDATA[".$riadna."]]></valUctovnaZavierkaRmRiadna>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <valUctovnaZavierkaRmMimoriadna><![CDATA[".$mimoriadna."]]></valUctovnaZavierkaRmMimoriadna>"."\r\n"; fwrite($soubor, $text);
   $text = "  </secUctovnaZavierkaRM>"."\r\n"; fwrite($soubor, $text);
 }
   $text = " </secUctovnaZavierka>"."\r\n"; fwrite($soubor, $text);
@@ -345,11 +337,25 @@ $jazyk="0";
   $text = "<secUctJednotka>"."\r\n"; fwrite($soubor, $text);
   $text = " <secIdUctJedn>"."\r\n"; fwrite($soubor, $text);
 
+if ( $kli_nezis == 0 )
+{
   $text = "  <secIcoUJ>"."\r\n"; fwrite($soubor, $text);
 $ico=1*$fir_fico;
 if ( $fir_fico < 1000000 ) { $ico="00".$ico; }
   $text = "   <valIcoUj><![CDATA[".$ico."]]></valIcoUj>"."\r\n"; fwrite($soubor, $text);
   $text = "  </secIcoUJ>"."\r\n"; fwrite($soubor, $text);
+}
+if ( $kli_nezis == 1 )
+{
+  $text = "  <secIcoSidUJ>"."\r\n"; fwrite($soubor, $text);
+$ico=1*$fir_fico;
+if ( $fir_fico < 1000000 ) { $ico="00".$ico; }
+  $text = "   <valIcoSidUJ><![CDATA[".$ico."]]></valIcoSidUJ>"."\r\n"; fwrite($soubor, $text);
+$sid="";
+  $text = "   <valSidUJ><![CDATA[".$sid."]]></valSidUJ>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </secIcoSidUJ>"."\r\n"; fwrite($soubor, $text);
+}
+
 $dic=1*$fir_fdic;
   $text = "  <valDicUj><![CDATA[".$dic."]]></valDicUj>"."\r\n"; fwrite($soubor, $text);
 $sknace=$fir_sknace;
@@ -357,8 +363,11 @@ $sknace=str_replace(".","",$sknace); $sknace=str_replace(" ","",$sknace);
   $text = "  <valKodSkNace><![CDATA[".$sknace."]]></valKodSkNace>"."\r\n"; fwrite($soubor, $text);
 $obchodneMeno = iconv("CP1250", "UTF-8", $fir_fnaz);
   $text = "  <valObchMenoUj><![CDATA[".$obchodneMeno."]]></valObchMenoUj>"."\r\n"; fwrite($soubor, $text);
+if ( $kli_nezis == 0 )
+{
 $register = iconv("CP1250", "UTF-8", $fir_obreg);
   $text = "  <valOznaObchRegACisObchSpol><![CDATA[".$register."]]></valOznaObchRegACisObchSpol>"."\r\n"; fwrite($soubor, $text);
+}
   $text = " </secIdUctJedn>"."\r\n"; fwrite($soubor, $text);
   $text = "</secUctJednotka>"."\r\n"; fwrite($soubor, $text);
 

@@ -421,7 +421,7 @@ if ( $copern == 20 )
        style="width:86px; top:100px; left:588px;"/>
 <!-- Adresat podania -->
 <div class="input-echo" style="top:174px; left:248px;">Daòovı úrad</div>
-<select name="duozn" id="duozn" size="1" style="width:274px; top:205px; left:248px;"> <!-- dopyt, predpåòa z ufir -->
+<select name="duozn" id="duozn" size="1" style="width:274px; top:205px; left:248px;">
  <option value="0"></option>
  <option value="1">Banská Bystrica</option>
  <option value="2">Bratislava</option>
@@ -453,17 +453,17 @@ if ( $kli_nezis == 1 ) { echo "Úètovné vıkazy pre neziskové organizácie úètujúce
 
 <!-- obdobia -->
 <input type="text" name="obbod" id="obbod" onkeyup="CiarkaNaBodku(this);"
-       style="width:126px; top:370px; left:251px;"/> <!-- dopyt, budeme predplòa pod¾a závierky -->
+       style="width:126px; top:370px; left:251px;"/>
 <input type="text" name="obbdo" id="obbdo" onkeyup="CiarkaNaBodku(this);"
-       style="width:126px; top:401px; left:251px;"/> <!-- dopyt, budeme predplòa pod¾a závierky -->
+       style="width:126px; top:401px; left:251px;"/>
 <input type="text" name="obmod" id="obmod" onkeyup="CiarkaNaBodku(this);"
-       style="width:126px; top:370px; left:690px;"/> <!-- dopyt, budeme predplòa pod¾a závierky -->
+       style="width:126px; top:370px; left:690px;"/>
 <input type="text" name="obmdo" id="obmdo" onkeyup="CiarkaNaBodku(this);"
-       style="width:126px; top:401px; left:690px;"/> <!-- dopyt, budeme predplòa pod¾a závierky -->
+       style="width:126px; top:401px; left:690px;"/>
 
 <!-- uctovna zavierka -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta obdobia a dátum k z Úètovnej závierky"
-     onclick="datumUzav();" style="top:442px; left:18px;" class="btn-row-tool"> <!-- dopyt, rozchodi -->
+     onclick="datumUzav();" style="top:442px; left:18px;" class="btn-row-tool">
 <span class="text-echo" style="top:476px; left:139px;">x</span>
 <input type="radio" id="typuz0" name="typuz" value="0" style="top:475px; left:349px;"/>
 <input type="radio" id="typuz1" name="typuz" value="1" style="top:501px; left:349px;"/>
@@ -506,7 +506,7 @@ if ( $kli_nezis == 1 ) { echo "Úètovné vıkazy pre neziskové organizácie úètujúce
 </select>
 <div class="input-echo" style="top:1099px; left:248px;">Elektronicky - súèas podania</div>
 <input type="text" name="datp" id="datp" onkeyup="CiarkaNaBodku(this);"
-       style="width:126px; top:1157px; left:251px;"/> <!-- dopyt, predpåòa aktuálny dátum -->
+       style="width:126px; top:1157px; left:251px;"/>
 
 </FORM>
 </div> <!-- #content -->
