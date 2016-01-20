@@ -426,7 +426,7 @@ else
     if ( $copern == 167 )
     {
 $copern=1;
-$sqlt = 'TRUNCATE F'.$kli_vxcf.'_$mzdkun';
+$sqlt = "TRUNCATE F".$kli_vxcf."_".$mzdkun." ";
 $vysledok = mysql_query("$sqlt");
 //echo $sqlt;
 if ($vysledok)

@@ -966,6 +966,46 @@ $vysledek = mysql_query("$sql");
 }
 //koniec tabulky mzducty
 
+//Tabulka dban
+$sql = "SELECT cban FROM F$kli_vxcf"."_dban";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+//echo "Vytvorit tabulku F$kli_vxcf"."_dban!"."<br />";
+
+$sqlt = <<<dban
+(
+   dban         INT(10),
+   nban         VARCHAR(30),
+   uceb         VARCHAR(30),
+   numb         VARCHAR(4),
+   iban         VARCHAR(30),
+   twib         VARCHAR(30),
+   parb         INT(10),
+   datm         TIMESTAMP(14)
+);
+dban;
+
+$sql = 'CREATE TABLE F'.$kli_vxcf.'_dban'.$sqlt;
+////echo 'CREATE TABLE F'.$kli_vxcf.'_dban'.$sqlt;
+
+$vysledek = mysql_query("$sql");
+
+
+$ttvv = "INSERT INTO F$kli_vxcf"."_dban (dban,nban,uceb,numb,iban,twib,parb  ) VALUES ( '22100', 'TATRABANKA', '262458987', '1100', 'SK2411000000000262459786', '', '1' )";
+$ttqq = mysql_query("$ttvv");
+$ttvv = "INSERT INTO F$kli_vxcf"."_dban (dban,nban,uceb,numb,iban,twib,parb  ) VALUES ( '22110', 'VUB', '704040182', '0200', 'SK4602000000000704040182', '', '1' )";
+//$ttqq = mysql_query("$ttvv");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_dban ADD cban INT(10) DEFAULT 1 AFTER parb";
+$vysledek = mysql_query("$sql");
+
+$sql = "UPDATE F$kli_vxcf"."_dban SET cban=30001 WHERE dban = '22100' ";
+$vysledek = mysql_query("$sql");
+}
+
+//koniec tabulky dban
+
 //vymaz upravove subory pre parametre
 $sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new032009".$sqlt;
 $vysledek = mysql_query("$sql");
