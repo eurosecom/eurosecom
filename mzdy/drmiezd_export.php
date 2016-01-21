@@ -623,7 +623,7 @@ if( $dopln == 1 )
 { 
 $nazov="../import/druhdph".$kli_vrok."dopln.csv"; 
 
-$sqult = "DELETE FROM F$kli_vxcf"."_uctdrdp WHERE rdp > 100 ";
+$sqult = "DELETE FROM F$kli_vxcf"."_uctdrdp WHERE rdp > 100 OR rdp = 27 OR rdp = 32 OR rdp = 82 ";
 $uloz = mysql_query("$sqult");
 
 }
@@ -631,7 +631,7 @@ if( $dopln == 27 )
 { 
 $nazov="../import/druhdph".$kli_vrok."dopln27.csv"; 
 
-$sqult = "DELETE FROM F$kli_vxcf"."_uctdrdp WHERE rdp = 27 ";
+$sqult = "DELETE FROM F$kli_vxcf"."_uctdrdp WHERE rdp = 27 OR rdp = 32 OR rdp = 82 ";
 $uloz = mysql_query("$sqult");
 
 }

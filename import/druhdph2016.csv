@@ -5,6 +5,7 @@
 1;21;Daò na vstupe  TUZEMSKO DPH00% ;0;0;0;0;0;0;0;0;;
 1;25;Daò na vstupe  TUZEMSKO DPH20%  ;20;0;23;0;0;0;0;0;B2;
 1;27;Daò na vstupe  TUZEMSKO DPH20% paušál;20;0;100;0;;;;0;B2;
+1;32;Dan na vstupe DOVOZ EU20%tovar, služby §69ods.2,9-12;20;9;21;0;;;;1;B1;
 1;30;Daò na vstupe  TUZEMSKO DPH10% ;10;0;22;0;0;0;0;0;B2;
 1;34;Daò na vstupe  DOVOZ EU DPH20% služby v EU  ;20;11;21;0;0;0;0;1;B1;
 1;35;Daò na vstupe  DOVOZ EU DPH20% nákup v EU  ;20;7;21;0;0;0;0;1;B1;
@@ -19,6 +20,7 @@
 1;65;Daò na výstupe VÝVOZ DPH20% ;20;3;4;0;0;0;0;0;A1;
 1;70;Daò na výstupe VÝVOZ EU DPH10% ;10;1;2;0;0;0;0;0;A1;
 1;71;Daò na výstupe VÝVOZ 3k DPH00% ;0;17;0;0;0;0;0;0;;
+1;82;Dan na vstupe DOVOZ EU20%tovar, služby §69ods.2,9-12;20;0;10;0;;;;1;;
 1;84;Daò na výstupe DOVOZ EU DPH20% služby v EU ;20;0;12;0;0;0;0;1;;
 1;85;Daò na výstupe DOVOZ EU DPH20% nákup v EU ;20;0;8;0;0;0;0;1;;
 1;90;Daò na výstupe DOVOZ EU DPH10% nákup v EU ;10;0;6;0;0;0;0;1;;

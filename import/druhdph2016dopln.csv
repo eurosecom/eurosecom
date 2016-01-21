@@ -1,6 +1,8 @@
 215;##########Tabulka F73_uctdrdp
 0;rdp;nrd;szd;crz;crd;crz1;crd1;crz2;crd2;crz3;crd3;rxx
 1;27;Daò na vstupe  TUZEMSKO DPH20% paušál;20;0;100;0;;;;0;B2;
+1;32;Dan na vstupe DOVOZ EU20%tovar, služby §69ods.2,9-12;20;9;21;0;;;;1;B1;
+1;82;Dan na vstupe DOVOZ EU20%tovar, služby §69ods.2,9-12;20;0;10;0;;;;1;;
 1;125;Daò na vstupe 20% zjednodušená faktúra;20;0;23;0;0;0;0;0;B3;
 1;130;Daò na vstupe 10% zjednodušená faktúra;10;0;22;0;0;0;0;0;B3;
 1;155;Daò na výstupe 20% zjednodušená faktúra ERP;20;3;4;0;0;0;0;0;D1;

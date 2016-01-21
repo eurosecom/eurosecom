@@ -622,6 +622,11 @@ width=20 height=15 border=0 title="Doplni èíselník druhov DPH z ../import/druhd
 width=20 height=15 border=0 title="Naèíta èíselník druhov DPH z firmy è. <?php echo $fir_allx11; ?> minulého roka" >
 </td>
 
+<td class="hmenu" >
+ 27,32<img src='../obr/zoznam.png' onclick="window.open('../mzdy/drmiezd_export.php?sys=<?php echo $sys; ?>&copern=1516&page=1&dopln=27', '_self');" 
+width=20 height=15 border=0 title="Doplni paušálny druh DPH 27 a druhy 32, 82 z ../import/druhdph<?php echo $kli_vrok; ?>dopln27.csv" >
+</td>
+
 </tr>
 <tr>
 <td class="hmenu"><input type="text" name="hladaj_rdp" id="hladaj_rdp" size="15" value="<?php echo $hladaj_rdp;?>" />
