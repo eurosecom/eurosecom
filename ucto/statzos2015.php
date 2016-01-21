@@ -28,16 +28,6 @@ $mena1 = $fir_mena1;
 $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
 
-if ( $kli_vrok < 2016 )
-{
-?>
-<script type="text/javascript">
-  var okno = window.open("../ucto/statzos2015.php?copern=1&drupoh=1&page=1&sysx=UCT","_self");
-</script>
-<?php
-exit;
-}
-
 $rozuct = $_REQUEST['rozuct'];
 if(!isset($rozuct)) $rozuct = 'NIE';
 $sysx = $_REQUEST['sysx'];
@@ -64,7 +54,6 @@ $volajfin1a12=1;
 if( $kli_nezis == 1 ) { $dajfinvykazy=1; $volajfin1a12=1; }
 if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $dajfinvykazy=1; $volajfin1a12=0; }
  
-if( $_SERVER['SERVER_NAME'] == "localhost" ) { $dajfinvykazy=1; }
 ?> 
 
 <HEAD>
@@ -88,6 +77,36 @@ function VyberVstup()
 
                 }
 
+
+function TlacPrehlad()
+                {
+var h_oc = document.forms.formp2.h_oc.value;
+var h_fmzdy = document.forms.formp2.h_fmzdy.value;
+var h_drp = document.forms.formp2.h_drp.value;
+
+window.open('../mzdy/prehlad_dane.php?cislo_oc=' + h_oc + '&h_drp=' + h_drp + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function UpravPrehlad()
+                {
+var h_oc = document.forms.formp2.h_oc.value;
+var h_fmzdy = document.forms.formp2.h_fmzdy.value;
+var h_drp = document.forms.formp2.h_drp.value;
+
+window.open('../mzdy/prehlad_dane.php?cislo_oc=' + h_oc + '&h_drp=' + h_drp + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function ZnovuPrehlad()
+                {
+var h_oc = document.forms.formp2.h_oc.value;
+var h_fmzdy = document.forms.formp2.h_fmzdy.value;
+var h_drp = document.forms.formp2.h_drp.value;
+
+window.open('../mzdy/prehlad_dane.php?cislo_oc=' + h_oc + '&h_drp=' + h_drp + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
 
 //suhrn DPH
 
@@ -155,9 +174,250 @@ function TlacPotvrdSuhrn()
   var okno = window.open("../tmp/potvrdsuhrn<?php echo $kli_vxcf; ?>.<?php echo $kli_uzid; ?>.pdf", '_blank', '<?php echo $tlcswin; ?>' );
                 }
 
+//nahlasovacia povinnost
+
+function TlacNahlas()
+                {
+  var h_oc = 0;
+  var h_fmzdy = 0;
+
+window.open('../ucto/nahlasovacia.php?cislo_oc=' + h_oc + '&copern=361&drupoh=45&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function TlacPodklad()
+                {
+  var h_oc = 0;
+  var h_fmzdy = 0;
+
+window.open('../ucto/nahlasovacia.php?cislo_oc=' + h_oc + '&copern=361&drupoh=45&fmzdy=' + h_fmzdy + '&page=1&subor=0&podklad=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function UpravNahlas()
+                {
+  var h_oc = 0;
+  var h_fmzdy = 0;
+
+window.open('../ucto/nahlasovacia.php?cislo_oc=' + h_oc + '&copern=308&drupoh=45&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function ZnovuNahlas()
+                {
+  var h_oc = 0;
+  var h_fmzdy = 0;
+
+window.open('../ucto/nahlasovacia.php?cislo_oc=' + h_oc + '&copern=358&drupoh=45&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
 
 
 
+//vykazy FinNUJ 2012
+<?php if( $kli_vrok < 2013 ) { ?>
+
+//vykaz Fin104
+
+function TlacFin104()
+                {
+var h_oc = document.forms.formfin104.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('../ucto/vykaz_fin104.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=È',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+function UpravFin104()
+                {
+var h_oc = document.forms.formfin104.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin104.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function ZnovuFin104()
+                {
+var h_oc = document.forms.formfin104.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin104.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+//vykaz Fin204
+
+function TlacFin204()
+                {
+var h_oc = document.forms.formfin204.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin204.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=È',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+function UpravFin204()
+                {
+var h_oc = document.forms.formfin204.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin204.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function ZnovuFin204()
+                {
+var h_oc = document.forms.formfin204.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin204.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+//vykaz Fin601
+
+function TlacFin601()
+                {
+var h_oc = document.forms.formfin601.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('../ucto/vykaz_fin601.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=È',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+function UpravFin601()
+                {
+var h_oc = document.forms.formfin601.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin601.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+//vykaz Fin704
+
+function TlacFin704()
+                {
+var h_oc = document.forms.formfin704.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin704.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=È',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+function UpravFin704()
+                {
+var h_oc = document.forms.formfin704.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin704.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function ZnovuFin704()
+                {
+var h_oc = document.forms.formfin704.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin704.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+//vykaz Fin204NUJ
+
+function TlacFin204nuj()
+                {
+var h_oc = document.forms.formfin204nuj.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin204nuj2012.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=È',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+function UpravFin204nuj()
+                {
+var h_oc = document.forms.formfin204nuj.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin204nuj2012.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function ZnovuFin204nuj()
+                {
+var h_oc = document.forms.formfin204nuj.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin204nuj2012.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+//DBF
+
+function DbfFin704()
+                {
+var h_oc = document.forms.formfin704.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('fin7dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function DbfFin204()
+                {
+var h_oc = document.forms.formfin204.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('fin2dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function DbfFin204nuj()
+                {
+var h_oc = document.forms.formfin204nuj.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('fin2nujdbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function DbfFin104()
+                {
+var h_oc = document.forms.formfin104.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('fin1dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function DbfFin601()
+                {
+var h_oc = document.forms.formfin601.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('fin6dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+<?php                        } ?>
+//koniec vykzy FIN NUJ 2012
     
 //vykaz Hlaodpad
 
@@ -601,6 +861,60 @@ $vysledok = mysql_query("$sqlt");
 <br />
 
 
+<?php if( $kli_vrok < 2012 ) { ?>
+
+<table class="vstup" width="100%" >
+<FORM name="formp2" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacPrehlad();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
+</td>
+<td class="bmenu" width="98%">ätvrùroËn˝ Prehæad o zrazen˝ch a odveden˝ch preddavkoch dane z prÌjmu a daÚovom bonuse PREHLADv10_1
+
+<select size="1" name="h_oc" id="h_oc" >
+<option value="1" >1.ötvrùrok</option>
+<option value="2" >2.ötvrùrok</option>
+<option value="3" >3.ötvrùrok</option>
+<option value="4" >4.ötvrùrok</option>
+</select>
+
+<select size="1" name="h_drp" id="h_drp" >
+<option value="1" >Riadny</option>
+<option value="2" >Opravn˝</option>
+</select>
+
+<?php
+//////////////////////////////nacitaj cislo firmy mzdy
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzducty WHERE ucty = 1");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $cfuct=1*$riaddok->cfuct;
+  if( $cfuct == 0 ) $cfuct=$kli_vxcf;
+  }
+?>
+
+ Mzdy ËÌslo firmy <input type="text" name="h_fmzdy" id="h_fmzdy" maxlenght="10" size="8" value="<?php echo $cfuct;?>" />
+
+<a href="#" onClick="TlacPotvrdPrehlad();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="VytlaËiù potvrdenie o podanÌ Prehæadu" ></a>
+
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="UpravPrehlad();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviù hodnoty v prehæade' ></a>
+</td>
+
+<td class="bmenu" width="2%">
+<a href="#" onClick="ZnovuPrehlad();">
+<img src='../obr/orig.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty do prehæadu z miezd - mÙûete opakovaù viackr·t' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+
+<?php                        } ?>
 
 <?php
 $versuh="09_1";
@@ -679,6 +993,17 @@ if( $kli_vrok > 2009 ) $versuh="10_1";
 </tr>
 </table>
 
+<?php if( $kli_vrok < 2013 ) { ?>
+<table class="vstup" width="100%" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/statistika_r101.php?copern=1&drupoh=1&page=1', '_blank', '<?php echo $tlcuwin; ?>' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Vytvorenie ötatistickÈho v˝kazu RoË 1-01" ></a>
+</td>
+<td class="bmenu" width="90%">äTATISTIKA - RoËn˝ v˝kaz produkËn˝ch odvetvÌ RoË 1-01 pre 1 ZJ so skupinou modulov Fin, Zav a Prier VTS </td>
+</tr>
+</table>
+<?php                        } ?>
 
 <table class="vstup" width="100%" >
 <tr>
@@ -730,6 +1055,200 @@ if( $kli_vrok > 2009 ) $versuh="10_1";
 </tr>
 </table>
 
+<table class="vstup" width="100%" >
+<FORM name="formpn2" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacNahlas();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
+</td>
+<td class="bmenu" width="98%">Nahlasovacia povinnosù hotovostn˝ch platieb fyzick˝m osob·m
+ <a href="#" onClick="TlacPodklad();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù podklad vo form·te PDF' ></a>
+
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="UpravNahlas();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviù hodnoty ' ></a>
+</td>
+
+<td class="bmenu" width="2%">
+<a href="#" onClick="ZnovuNahlas();">
+<img src='../obr/orig.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty  - mÙûete opakovaù viackr·t' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+
+<?php 
+//VYKAZY FIN NUJ rok2012
+if( $kli_vrok < 2013 ) { 
+?>
+
+<table class="vstup" width="100%" >
+<FORM name="formfin104" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacFin104();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
+</td>
+<td class="bmenu" width="98%">FinanËn˝ v˝kaz o plnenÌ rozpoËtu subjektu verejnej spr·vy FIN 1 - 04
+ <select size="1" name="h_oc" id="h_oc" >
+<option value="1" >1.ötvrùrok</option>
+<option value="2" >2.ötvrùrok</option>
+<option value="3" >3.ötvrùrok</option>
+<option value="4" >4.ötvrùrok</option>
+</select>
+<a href="#" onClick="DbfFin104();">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
+
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="UpravFin104();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviù hodnoty ' ></a>
+</td>
+
+<td class="bmenu" width="2%">
+<a href="#" onClick="ZnovuFin104();">
+<img src='../obr/orig.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty  - mÙûete opakovaù viackr·t' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+
+
+<table class="vstup" width="100%" >
+<FORM name="formfin204" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacFin204();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
+</td>
+<td class="bmenu" width="98%">FinanËn˝ v˝kaz o vybran˝ch ˙dajoch z aktÌv a pasÌv subjektu verejnej spr·vy FIN 2 - 04
+ <select size="1" name="h_oc" id="h_oc" >
+<option value="1" >1.ötvrùrok</option>
+<option value="2" >2.ötvrùrok</option>
+<option value="3" >3.ötvrùrok</option>
+<option value="4" >4.ötvrùrok</option>
+</select>
+<a href="#" onClick="DbfFin204();">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
+
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="UpravFin204();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviù hodnoty ' ></a>
+</td>
+
+<td class="bmenu" width="2%">
+<a href="#" onClick="ZnovuFin204();">
+<img src='../obr/orig.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty  - mÙûete opakovaù viackr·t' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+
+
+<table class="vstup" width="100%" >
+<FORM name="formfin204nuj" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacFin204nuj();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
+</td>
+<td class="bmenu" width="98%">FinanËn˝ v˝kaz o vybran˝ch ˙dajoch z aktÌv a pasÌv subjektu verejnej spr·vy FIN 2 - 04 NUJ
+ <select size="1" name="h_oc" id="h_oc" >
+<option value="1" >1.ötvrùrok</option>
+<option value="2" >2.ötvrùrok</option>
+<option value="3" >3.ötvrùrok</option>
+<option value="4" >4.ötvrùrok</option>
+</select>
+<a href="#" onClick="DbfFin204nuj();">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
+
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="UpravFin204nuj();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviù hodnoty ' ></a>
+</td>
+
+<td class="bmenu" width="2%">
+<a href="#" onClick="ZnovuFin204nuj();">
+<img src='../obr/orig.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty  - mÙûete opakovaù viackr·t' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+
+
+<table class="vstup" width="100%" >
+<FORM name="formfin601" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacFin601();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
+</td>
+<td class="bmenu" width="98%">FinanËn˝ v˝kaz o ˙veroch, dlhopisoch, zmenk·ch a finanËnom pren·jme subjektu verejnej spr·vy FIN 6 - 04
+ <select size="1" name="h_oc" id="h_oc" >
+<option value="1" >1.ötvrùrok</option>
+<option value="2" >2.ötvrùrok</option>
+<option value="3" >3.ötvrùrok</option>
+<option value="4" >4.ötvrùrok</option>
+</select>
+<a href="#" onClick="DbfFin601();">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
+
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="UpravFin601();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviù hodnoty ' ></a>
+</td>
+
+<td class="bmenu" width="2%">
+
+</td>
+</tr>
+</FORM>
+</table>
+
+
+<table class="vstup" width="100%" >
+<FORM name="formfin704" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacFin704();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
+</td>
+<td class="bmenu" width="98%">FinanËn˝ v˝kaz o prÌrastku a ˙bytku vybran˝ch pohæad·vok a z·v‰zkov subjektu verejnej spr·vy FIN 7 - 04
+ <select size="1" name="h_oc" id="h_oc" >
+<option value="1" >1.ötvrùrok</option>
+<option value="2" >2.ötvrùrok</option>
+<option value="3" >3.ötvrùrok</option>
+<option value="4" >4.ötvrùrok</option>
+</select>
+
+<a href="#" onClick="DbfFin704();">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
+
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="UpravFin704();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviù hodnoty ' ></a>
+</td>
+
+<td class="bmenu" width="2%">
+<a href="#" onClick="ZnovuFin704();">
+<img src='../obr/orig.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty  - mÙûete opakovaù viackr·t' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+
+
+<?php 
+//KONIEC VYKAZY FIN NUJ rok2012
+                       } 
+?>
 
 
 <?php 
