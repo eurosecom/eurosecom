@@ -599,29 +599,22 @@ $hlavicka=mysql_fetch_object($sql);
 
 if ( $strana == 1 OR $strana == 9999 ) {
 $pdf->AddPage();
-$pdf->SetFont('arial','',10);
+$pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/vts112/vts112v14_str1.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/vts112/vts112v14_str1.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
 
 //OBDOBIA
-$pdf->SetFont('arial','',15);
-$pdf->Cell(190,33," ","$rmc1",1,"L");
-$pdf->Cell(94,8," ","$rmc1",0,"L");$pdf->Cell(15,6,"$kli_vrok","$rmc",1,"C");
-$pdf->SetFont('arial','',11);
-$pdf->Cell(190,14," ","$rmc1",1,"L");
-$R1=substr($kli_vrok,2,1);
-$R2=substr($kli_vrok,3,1);
-$pdf->Cell(31,5," ","$rmc1",0,"L");
-$pdf->Cell(7,7,"$R1","$rmc",0,"C");$pdf->Cell(8,7,"$R2","$rmc",0,"C");
 $mesiacx=$mesiac;
 if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
 $A=substr($mesiacx,0,1);
 $B=substr($mesiacx,1,1);
-$pdf->Cell(7,7,"$A","$rmc",0,"C");$pdf->Cell(8,7,"$B","$rmc",0,"C");
+$pdf->Cell(190,50," ","$rmc1",1,"L");
+$pdf->Cell(46,5," ","$rmc1",0,"L");$pdf->Cell(7,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");
 //ico
 $fir_ficx=$fir_fico;
 $cfico=1*$fir_fico;
@@ -634,48 +627,56 @@ $E=substr($fir_ficx,4,1);
 $F=substr($fir_ficx,5,1);
 $G=substr($fir_ficx,6,1);
 $H=substr($fir_ficx,7,1);
-$pdf->Cell(8,7,"$A","$rmc",0,"C");$pdf->Cell(8,7,"$B","$rmc",0,"C");$pdf->Cell(8,7,"$C","$rmc",0,"C");$pdf->Cell(8,7,"$D","$rmc",0,"C");
-$pdf->Cell(8,7,"$E","$rmc",0,"C");$pdf->Cell(8,7,"$F","$rmc",0,"C");$pdf->Cell(8,7,"$G","$rmc",0,"C");$pdf->Cell(9,7,"$H","$rmc",1,"C");
+$pdf->Cell(9,6,"$A","$rmc",0,"C");$pdf->Cell(9,6,"$B","$rmc",0,"C");
+$pdf->Cell(10,6,"$C","$rmc",0,"C");$pdf->Cell(9,6,"$D","$rmc",0,"C");
+$pdf->Cell(10,6,"$E","$rmc",0,"C");$pdf->Cell(9,6,"$F","$rmc",0,"C");
+$pdf->Cell(9,6,"$G","$rmc",0,"C");$pdf->Cell(10,6,"$H","$rmc",1,"C");
 
 //ORGANIZACIA
-$pdf->Cell(190,91," ","$rmc1",1,"L");
+$pdf->Cell(190,108," ","$rmc1",1,"L");
 $pdf->Cell(55,4," ","$rmc1",0,"L");$pdf->Cell(99,4,"$fir_fnaz","$rmc",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(153,7,"$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",0,"L");
+$pdf->Cell(55,5," ","$rmc1",0,"L");$pdf->Cell(99,7,"$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",0,"L");
 $pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(34,7,"$okres","$rmc",1,"C");
-$pdf->Cell(190,6," ","$rmc1",1,"L");
+$pdf->Cell(190,4," ","$rmc1",1,"L");
 $pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(153,7,"$hlavicka->cinnost","$rmc",1,"L");
 
 //VYPLNIL
-$pdf->Cell(195,7," ","$rmc1",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(60,7,"$fir_mzdt05","$rmc",0,"L");$pdf->Cell(14,5," ","$rmc1",0,"L");$pdf->Cell(43,12,"$fir_mzdt04","$rmc",1,"L");
 $pdf->Cell(195,6," ","$rmc1",1,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(60,7,"$fir_mzdt05","$rmc",0,"L");
+$pdf->Cell(14,5," ","$rmc1",0,"L");$pdf->Cell(44,10,"$fir_mzdt04","$rmc",1,"R");
+$pdf->Cell(195,0," ","$rmc1",1,"L");
 $pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(72,7,"$fir_fem1","$rmc",0,"L");$pdf->Cell(2,5," ","$rmc1",0,"L");
 //odoslane
 $pdf->Cell(43,7,"$odoslane_sk","$rmc",1,"C");
 
-//modul 100155
-$pdf->Cell(195,34," ","$rmc1",1,"L");
-$pdf->Cell(159,5," ","$rmc1",0,"L");$pdf->Cell(30,7,"$hlavicka->aktivita","$rmc",1,"C");
+//modul 100307
+$pdf->Cell(195,28," ","$rmc1",1,"L");
+$pdf->Cell(81,5," ","$rmc1",0,"C");$pdf->Cell(108,6.5,"$fir_mzdt05","$rmc",1,"C");
+$pdf->Cell(81,5," ","$rmc1",0,"C");$pdf->Cell(108,6,"$fir_mzdt04","$rmc",1,"C");
+$pdf->Cell(81,5," ","$rmc1",0,"C");$pdf->Cell(108,5.5,"$fir_fem1","$rmc",1,"C");
                                        }
 
 if ( $strana == 2 OR $strana == 9999 ) {
 $pdf->AddPage();
-$pdf->SetFont('arial','',10);
+$pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/vts112/vts112v14_str2.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/vts112/vts112v14_str2.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
 
 //modul 2
 $mod2r01=$hlavicka->mod2r01;
 if ( $mod2r01 == 0 ) $mod2r01="";
 $mod2r02=$hlavicka->mod2r02;
 if ( $mod2r02 == 0 ) $mod2r02="";
-$pdf->Cell(195,22," ","$rmc1",1,"L");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$mod2r01","$rmc",1,"C");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$mod2r02","$rmc",1,"C");
+$pdf->Cell(195,20," ","$rmc1",1,"L");
+$pdf->Cell(153,5," ","$rmc1",0,"C");$pdf->Cell(36,8,"$mod2r01","$rmc",1,"C");
+$pdf->Cell(153,5," ","$rmc1",0,"C");$pdf->Cell(36,9,"$mod2r02","$rmc",1,"C");
+
+
 
 //modul 512
 $mod512r01=$hlavicka->mod512r01;
@@ -688,8 +689,8 @@ $mod512r04=$hlavicka->mod512r04;
 if( $mod512r04 == 0 ) $mod512r04="";
 $mod512r99=$hlavicka->mod512r99;
 //if( $mod512r99 == 0 ) $mod512r99="";
-$pdf->Cell(190,30," ","$rmc1",1,"L");
-$pdf->Cell(118,6," ","$rmc1",0,"L");$pdf->Cell(65,7,"$mod512r01","$rmc",1,"R");
+$pdf->Cell(190,42," ","$rmc1",1,"L");
+$pdf->Cell(118,6," ","$rmc1",0,"L");$pdf->Cell(65,6,"$mod512r01","$rmc",1,"R");
 $pdf->Cell(118,6," ","$rmc1",0,"L");$pdf->Cell(65,6,"$mod512r02","$rmc",1,"R");
 $pdf->Cell(118,7," ","$rmc1",0,"L");$pdf->Cell(65,6,"$mod512r03","$rmc",1,"R");
 $pdf->Cell(118,6," ","$rmc1",0,"L");$pdf->Cell(65,6,"$mod512r04","$rmc",1,"R");
