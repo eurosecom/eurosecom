@@ -301,6 +301,13 @@ window.open('../cis/Prenos_UCTO_2016.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function HelpMaj()
+                {
+
+window.open('../cis/Prenos_MAJETOK_2016.pdf',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 function HelpMzdy()
                 {
 
@@ -523,6 +530,11 @@ HELP<img src='../obr/info.png' width=20 height=20 border=0
 onClick="HelpSklad();"
  title='Help - prenos poèiatoèných stavov sklad a faktúry' >
 <?php                     } ?>
+<?php if( $copern == 2 ) { ?>
+HELP<img src='../obr/info.png' width=20 height=20 border=0
+onClick="HelpMaj();"
+ title='Help - prenos poèiatoèných stavov majetku' >
+<?php                     } ?>
 </td>
 
 <td class="hmenu" width="20%" colspan="2">
@@ -586,6 +598,7 @@ onClick="PrenesSkl();"
  title='Prenos údajov podsystému SKLAD - preèítajte si prosím pred prenosom HELP' >
 
 <?php                     } ?>
+
 
 </td>
 
