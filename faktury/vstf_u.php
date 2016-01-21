@@ -4479,7 +4479,7 @@ window.open('../ucto/fak_setulozpau.php?cislo_dok=<?php echo $cislo_dok; ?>&hlad
 
 <?php
 //text pred a za polozkami
-if ( $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' )
+if ( $copern == 7 AND ( $drupoh == 1 OR $drupoh == 31 ) AND $sysx != 'UCT' )
      {
 ?>
 <script type="text/javascript" src="spr_texty_xml.js"></script>
@@ -6509,7 +6509,7 @@ $vypis_txp = ereg_replace(" ", "&nbsp;", trim($vypis_txp));
 <td class="hvstup" width="100%" >
 
 <?php
-if ( $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' )
+if ( $copern == 7 AND ( $drupoh == 1 OR $drupoh == 31 ) AND $sysx != 'UCT' )
      {
 ?>
 <img src='../obr/uprav.png' width=12 height=12 border=1 onClick="RozniPenp(1);" title="Upravi text pred položkami faktúry" >
@@ -7511,6 +7511,20 @@ if ( $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' )
 
 //andrejko
 ?>
+
+<?php
+if ( $copern == 7 AND $drupoh == 31 AND $sysx != 'UCT' )
+     {
+?>
+<a href="#" onClick="window.open('../faktury/set_danpren.php?copern=<?php echo $copern;?>&drupoh=<?php echo $drupoh;?>&page=1&cislo_dok=<?php echo $riadok->dok;?>
+&cislo_uce=<?php echo $riadok->uce;?>', '_self' )">
+<img src='../obr/pozor.png' width=15 height=15 border=0 title="Nastav prenos daòovej povinnosti" ></a>
+<?php
+     }
+
+//andrejko
+?>
+
 </td>
 <td class="hvstup" align="right" ><?php echo $fir_dph2; ?></td>
 <td class="hvstup" align="right" ><?php echo $riadok->zk2; ?></td>
