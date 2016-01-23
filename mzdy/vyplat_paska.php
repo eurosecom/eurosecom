@@ -2446,6 +2446,14 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzddss WHERE cdss=$hlavicka->
   $nzdss=$riaddok->ndss;
   }
 
+//precitaj iban
+$ibanoc="";
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdtextmzd WHERE invt=$hlavicka->oc ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $ibanoc=$riaddok->ziban;
+  }
 
 $h_hod=$rtov->hod;
 if( $rtov->hod == 0 ) $h_hod="";
@@ -2554,9 +2562,10 @@ $pdf->Cell(60,6,"€ k výplate v hotovosti","BT",1,"L");
 }
 if( $hlavicka->sum_ban != 0 )
 {
-$pdf->Cell(50,6,"$hlavicka->sum_ban € cez banku","LBT",0,"R");
-$pdf->SetFont('arial','',8);
-$pdf->Cell(30,6,"$hlavicka->uceb / $hlavicka->numb","BT",1,"L");
+$pdf->Cell(50,6,"$hlavicka->sum_ban € banka","LBT",0,"R");
+$pdf->SetFont('arial','',6);
+if( $ibanoc == '' ) { $pdf->Cell(30,6,"$hlavicka->uceb / $hlavicka->numb","BT",1,"L"); }
+if( $ibanoc != '' ) { $pdf->Cell(30,6,"$ibanoc","BT",1,"L"); }
 }
 
 $pdf->Cell(20,2,"","0",1,"L");
