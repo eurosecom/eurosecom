@@ -73,6 +73,26 @@ if( $rdp_zk1 == 40 AND $rdp_zk2 == 1 AND $kli_vrok >= 2012 ) { $samodph=1; $samo
 
 if( $alchem == 1 AND ( $rdp_zk1 == 33 OR $rdp_zk2 == 46 ) AND $h_pohyb == 2094 ) { $samodph=1; $ceskadph=1; }
 
+$dalsieszd=0;
+$dalsieszd10=0;
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctdrdp WHERE crz3 = 1 AND rdp = $rdp_zk2 AND rdp < 49 ORDER BY rdp";
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+$i=0;
+  while ($i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+if( $hlavicka->crz3 == 1 ) { $dalsieszd=1; }
+if( $hlavicka->szd == 10 ) { $dalsieszd10=1; }
+
+}
+$i=$i+1;
+  }
+if( $dalsieszd == 1 ) { $samodph=1; }
+if( $dalsieszd10 == 1 ) { $dalsieszd10=1; }
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
