@@ -510,6 +510,7 @@ $nstat = trim(substr($priban,0,2));
 if( $nstat == '' ) { $nstat="SK"; }
 }
 
+$priban=str_replace(" ","",$priban);
 
   $text = "  <MsgId>BAN".$bankauhrady."/DOK".$hlavicka->dok."/CCT001</MsgId>"."\r\n"; fwrite($soubor, $text);
 
@@ -786,7 +787,10 @@ if( $pstat == '' ) { $pstat="SK"; }
 
   $text = " <CdtrAcct>"."\r\n"; fwrite($soubor, $text);
   $text = "  <Id>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <IBAN>".$hlavickav->iban."</IBAN>"."\r\n"; fwrite($soubor, $text);
+
+$ibanxx=str_replace(" ","",$hlavickav->iban);
+
+  $text = "  <IBAN>".$ibanxx."</IBAN>"."\r\n"; fwrite($soubor, $text);
   $text = "  </Id>"."\r\n"; fwrite($soubor, $text);
   $text = " </CdtrAcct>"."\r\n"; fwrite($soubor, $text);
 
