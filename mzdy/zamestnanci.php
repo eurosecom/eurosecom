@@ -2851,7 +2851,7 @@ if( $h_vban == 9 )
 ?>
 <table  class='ponuka' width='100%'>
 <tr>
-<td width="30%" >Bankový úèet: <?php echo $ibanb; ?> / <?php echo $riadok->uceb; ?> / <?php echo $riadok->numb; ?></td>
+<td width="30%" >Bankový úèet: <?php echo $ibanb; ?> - <?php echo $swift; ?> / <?php echo $riadok->uceb; ?> / <?php echo $riadok->numb; ?></td>
 <td width="15%" >VSY: <?php echo $riadok->vsy; ?></td>
 <td width="10%" >KSY: <?php echo $riadok->ksy; ?></td>
 <td width="15%" >SSY: <?php echo $riadok->ssy; ?></td>

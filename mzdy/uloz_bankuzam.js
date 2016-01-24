@@ -183,6 +183,8 @@ function tabulka_MENUXML()
   pol05Array = xmlRoot.getElementsByTagName("pol05");
   pol06Array = xmlRoot.getElementsByTagName("pol06");
   pol07Array = xmlRoot.getElementsByTagName("pol07");
+  pol08Array = xmlRoot.getElementsByTagName("pol08");
+  pol09Array = xmlRoot.getElementsByTagName("pol09");
 
   // generate HTML output
   var ggg = 0;
@@ -195,6 +197,8 @@ function tabulka_MENUXML()
   var vsy = 0;
   var ksy = 0;
   var ssy = 0;
+  var ibanx = 0;
+  var swftx = 0;
 
 
   for (var i=0; i<pol01Array.length; i++)
@@ -216,6 +220,8 @@ function tabulka_MENUXML()
     vsy = pol04Array.item(i).firstChild.data;
     ksy = pol05Array.item(i).firstChild.data;
     ssy = pol06Array.item(i).firstChild.data;
+    swftx = pol08Array.item(i).firstChild.data;
+    ibanx = pol09Array.item(i).firstChild.data;
     }
 
   myBANKA = document.getElementById("myBANKAelement");
@@ -230,7 +236,7 @@ function tabulka_MENUXML()
     var htmlbanka = "<table  class='ponuka' width='100%'><tr>";
 
     htmlbanka += "<td width='40%'>Bankový úèet: ";
-    htmlbanka += "" + ibanb + " / ";
+    htmlbanka += "" + ibanx + " - " + swftx + " / ";
     htmlbanka += "" + uceb + " / ";
     htmlbanka += "" + numb + "";
     htmlbanka += "</td>";

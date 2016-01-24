@@ -105,7 +105,7 @@ if( $kli_vrok > 2015 )
   {
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdtextmzd".
-" SET ucep=ziban, nump='' ".
+" SET ucep=ziban, nump=zswft ".
 " WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc = F$kli_vxcf"."_mzdtextmzd.invt AND F$kli_vxcf"."_mzdtextmzd.ziban != '' ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
@@ -130,7 +130,7 @@ if( $kli_vrok >  2015 )
   {
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT kc,oc,0,".
-" trx4,numb,vsy,ksy,ssy,".
+" trx4,trx3,vsy,ksy,ssy,".
 " dm,0,0,0,0".
 " FROM F$kli_vxcf"."_mzdzaltrn".
 " WHERE ume = $kli_vume AND uceb != '' AND numb != '0000' AND kc > 0 ".
@@ -326,9 +326,26 @@ $pdf->Cell(90,6,"$kli_nxcf strana $strana","RTB",1,"R");
 
 $pdf->SetFont('arial','',9);
 
-$pdf->Cell(15,6,"DM","1",0,"R");$pdf->Cell(45,6,"Úèet","1",0,"R");
+$pdf->Cell(15,6,"DM","1",0,"L");
+if( $kli_vrok <= 2015 )
+  {
+$pdf->Cell(45,6,"Úèet","1",0,"R");
+  }
+if( $kli_vrok >  2015 )
+  {
+$pdf->Cell(45,6,"IBAN","1",0,"R");
+  }
 $pdf->Cell(40,6,"Priezvisko,Meno,titul","LTB",0,"L");$pdf->Cell(10,6,"osè","RTB",0,"R");
-$pdf->Cell(30,6,"Vyplatené v €","1",0,"R");$pdf->Cell(40,6,"Poznámka ","1",1,"L");
+$pdf->Cell(30,6,"Vyplatené v €","1",0,"R");
+
+if( $kli_vrok <= 2015 )
+  {
+$pdf->Cell(40,6,"Poznámka ","1",1,"L");
+  }
+if( $kli_vrok >  2015 )
+  {
+$pdf->Cell(40,6,"SWIFT","1",1,"R");
+  }
 
 if( $zastr == 1 AND $rtov->konx != 999 ) { $pdf->Cell(40,6,"Stredisko: $rtov->strx ","0",1,"L"); $j=$j+1; }
 
@@ -346,9 +363,21 @@ $pdf->Cell(15,7,"$rtov->dm","0",0,"R");$pdf->Cell(45,7,"$rtov->ucep / $rtov->num
 if( $kli_vrok >  2015 )
   {
 $pdf->SetFont('arial','',9);
-$pdf->Cell(15,7,"$rtov->dm","0",0,"R");
+$pdf->Cell(15,7,"$rtov->dm","0",0,"L");
 $pdf->SetFont('arial','',7);
-$pdf->Cell(45,7,"$rtov->ucep","0",0,"R");
+
+$ibanoc=$rtov->ucep;
+$ibanoc=str_replace(" ","",$ibanoc);
+$ibanoc1 = substr($ibanoc,0,4);
+$ibanoc2 = substr($ibanoc,3,4);
+$ibanoc3 = substr($ibanoc,7,4);
+$ibanoc4 = substr($ibanoc,11,4);
+$ibanoc5 = substr($ibanoc,15,4);
+$ibanoc6 = trim(substr($ibanoc,19,20));
+
+$ibanoc=$ibanoc1." ".$ibanoc2." ".$ibanoc3." ".$ibanoc4." ".$ibanoc5." ".$ibanoc6;
+
+$pdf->Cell(45,7,"$ibanoc","0",0,"R");
   }
 
 $pdf->SetFont('arial','',8);
@@ -357,7 +386,14 @@ $pdf->SetFont('arial','',9);
 $pdf->Cell(10,7,"$rtov->oc","0",0,"R");
 
 $pdf->Cell(30,7,"$rtov->sum_ban","0",0,"R");
+if( $kli_vrok <= 2015 )
+  {
 $pdf->Cell(40,7,"","0",1,"R");
+  }
+if( $kli_vrok >  2015 )
+  {
+$pdf->Cell(40,7,"$rtov->nump","0",1,"R");
+  }
 }
 
 if( $rtov->konx == 999 )

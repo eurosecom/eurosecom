@@ -2454,6 +2454,7 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdtextmzd WHERE invt=$hlavic
   $riaddok=mysql_fetch_object($sqldok);
   $ibanoc=$riaddok->ziban;
   }
+$ibanoc=str_replace(" ","",$ibanoc);
 
 $h_hod=$rtov->hod;
 if( $rtov->hod == 0 ) $h_hod="";

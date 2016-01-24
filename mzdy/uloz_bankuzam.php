@@ -94,7 +94,9 @@ $txp03 = $retezec = iconv("CP1250", "UTF-8", $numb);
 $txp04 = $retezec = iconv("CP1250", "UTF-8", $vsy); 
 $txp05 = $retezec = iconv("CP1250", "UTF-8", $ksy); 
 $txp06 = $retezec = iconv("CP1250", "UTF-8", $ssy); 
-$txp07 = $retezec = iconv("CP1250", "UTF-8", $prm4); 
+$txp07 = $retezec = iconv("CP1250", "UTF-8", $prm4);
+$txp08 = $retezec = iconv("CP1250", "UTF-8", $swft);
+$txp09 = $retezec = iconv("CP1250", "UTF-8", $iban); 
 
 }
 
@@ -105,6 +107,8 @@ if( $txp04 == '' ) $txp04='0';
 if( $txp05 == '' ) $txp05='0';
 if( $txp06 == '' ) $txp06='0';
 if( $txp07 == '' ) $txp07='0';
+if( $txp08 == '' ) $txp08='0';
+if( $txp09 == '' ) $txp08='0';
 
 // create the title element for the veta
 $pol01 = $dom->createElement('pol01');
@@ -141,6 +145,16 @@ $pol07 = $dom->createElement('pol07');
 $pol07Text = $dom->createTextNode($txp07);
 $pol07->appendChild($pol07Text);
 
+// create the pol08 element for the veta
+$pol08 = $dom->createElement('pol08');
+$pol08Text = $dom->createTextNode($txp08);
+$pol08->appendChild($pol08Text);
+
+// create the pol09 element for the veta
+$pol09 = $dom->createElement('pol09');
+$pol09Text = $dom->createTextNode($txp09);
+$pol09->appendChild($pol09Text);
+
 // create the <veta> element 
 $veta = $dom->createElement('veta');
 $veta->appendChild($pol01);
@@ -150,6 +164,8 @@ $veta->appendChild($pol04);
 $veta->appendChild($pol05);
 $veta->appendChild($pol06);
 $veta->appendChild($pol07);
+$veta->appendChild($pol08);
+$veta->appendChild($pol09);
 
 // append <veta> as a child of <vety>
 $vety->appendChild($veta);
