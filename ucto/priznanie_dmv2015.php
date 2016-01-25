@@ -235,6 +235,7 @@ $sqldok = mysql_query("$sqlttt");
 $copern=20;
 $strana=3;
 $zoznamaut=0;
+$_REQUEST['cislo_cpl']=$cislo_cpl;
     }
 //koniec nove vozidlo
 
