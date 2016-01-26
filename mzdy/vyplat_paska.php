@@ -2406,7 +2406,8 @@ $pdf->Cell(60,4,"$textsk","BT",1,"R");
 //zaciatok vypisu poloziek
 
 $tovtt = "SELECT kcsk,dni,hod,F$kli_vxcf"."_mzdprcvypp$kli_uzid.oc,F$kli_vxcf"."_mzdprcvypp$kli_uzid.dm,F$kli_vxcf"."_mzdprcvypp$kli_uzid.kc,".
-" F$kli_vxcf"."_mzddmn.nzdm,F$kli_vxcf"."_mzdtrn.uceb,F$kli_vxcf"."_mzdtrn.numb,nddp,F$kli_vxcf"."_mzdprcvypp$kli_uzid.cddp,dp,dk,konx,saz,dmh,och,kch,str,zak ". 
+" F$kli_vxcf"."_mzddmn.nzdm,F$kli_vxcf"."_mzdtrn.uceb,F$kli_vxcf"."_mzdtrn.numb,F$kli_vxcf"."_mzdtrn.trx4, ".
+" nddp,F$kli_vxcf"."_mzdprcvypp$kli_uzid.cddp,dp,dk,konx,saz,dmh,och,kch,str,zak ". 
 " FROM F$kli_vxcf"."_mzdprcvypp".$kli_uzid.
 " LEFT JOIN F$kli_vxcf"."_mzddmn".
 " ON F$kli_vxcf"."_mzdprcvypp".$kli_uzid.".dm=F$kli_vxcf"."_mzddmn.dm".
@@ -2446,15 +2447,6 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzddss WHERE cdss=$hlavicka->
   $nzdss=$riaddok->ndss;
   }
 
-//precitaj iban
-$ibanoc="";
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdtextmzd WHERE invt=$hlavicka->oc ");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $ibanoc=$riaddok->ziban;
-  }
-$ibanoc=str_replace(" ","",$ibanoc);
 
 $h_hod=$rtov->hod;
 if( $rtov->hod == 0 ) $h_hod="";
@@ -2489,7 +2481,7 @@ if( $ajstrzak == 1 AND $rtov->dmh > 1 AND $rtov->dmh < 599 ) { $pdf->SetFont('ar
 if( $rtov->dmh > 0 ) { $pdf->SetFont('arial','',7); $pdf->Cell(10,4,"(Základ $rtov->kch)","0",0,"L"); $pdf->SetFont('arial','',9); }
 if( $rtov->saz > 0 ) { $pdf->SetFont('arial','',7); $pdf->Cell(10,4,"($rtov->saz)","0",0,"L"); $pdf->SetFont('arial','',9); }
 if( $rtov->dp != '0000-00-00' AND $rtov->dk != '0000-00-00' ) $pdf->Cell(60,4,"$dp_sk - $dk_sk","0",0,"L");
-if( $rtov->uceb != '' AND $rtov->dm != 965 ) $pdf->Cell(60,4,"banka $rtov->uceb / $rtov->numb ","0",0,"L");
+if( $rtov->trx4 != '' AND $rtov->dm != 965 ) { $pdf->SetFont('arial','',6); $pdf->Cell(60,4,"banka $rtov->trx4","0",0,"L"); $pdf->SetFont('arial','',9); }
 if( $rtov->cddp > 0 ) $pdf->Cell(60,4,"DDP $rtov->cddp $rtov->nddp ","0",0,"L");
 $pdf->Cell(0,4," ","0",1,"L");
      }
@@ -2563,10 +2555,9 @@ $pdf->Cell(60,6,"€ k výplate v hotovosti","BT",1,"L");
 }
 if( $hlavicka->sum_ban != 0 )
 {
-$pdf->Cell(50,6,"$hlavicka->sum_ban € banka","LBT",0,"R");
-$pdf->SetFont('arial','',6);
-if( $ibanoc == '' ) { $pdf->Cell(30,6,"$hlavicka->uceb / $hlavicka->numb","BT",1,"L"); }
-if( $ibanoc != '' ) { $pdf->Cell(30,6,"$ibanoc","BT",1,"L"); }
+$pdf->Cell(50,6,"$hlavicka->sum_ban € cez banku","LBT",0,"R");
+$pdf->SetFont('arial','',8);
+$pdf->Cell(30,6,"$hlavicka->uceb / $hlavicka->numb","BT",1,"L");
 }
 
 $pdf->Cell(20,2,"","0",1,"L");
