@@ -276,6 +276,12 @@ $sqlt = <<<mzdprc
 );
 mzdprc;
 
+//ak datum vzniku povinnosti < 1.1.2015 daj 1.1.2015
+$dat0101p=$kli_vrok."-01-01";
+$sqltt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET datz='$dat0101p' WHERE oc = 1 AND datz < '$dat0101p' ";
+$sql = mysql_query("$sqltt");
+//echo $sqltt;
+
 //hlavicka
 $sqltt = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv ".
 " WHERE oc = 9999 ";
@@ -606,6 +612,9 @@ $strana3=$strana3+1;
   $text = "   <stlpec1>"."\r\n"; fwrite($soubor, $text);
                 }
 
+//len ak je vozidlo
+if( trim($hlavickav->vzspz) != '' ) {
+
 if ( $jv == 1 ) {
   $text = "   <stlpec2>"."\r\n"; fwrite($soubor, $text);
                 }
@@ -627,13 +636,17 @@ $hodnota=$hlavickav->vzdru;
 $hodnota=$hlavickav->vzspz;
   $text = "    <r05><![CDATA[".$hodnota."]]></r05>"."\r\n"; fwrite($soubor, $text);
 $hodnota=$hlavickav->vzobm;
+if( $hodnota == 0 ) { $hodnota=""; }
   $text = "    <r06><![CDATA[".$hodnota."]]></r06>"."\r\n"; fwrite($soubor, $text);
 $hodnota=$hlavickav->vzvyk;
+if( $hodnota == 0 ) { $hodnota=""; }
   $text = "    <r07><![CDATA[".$hodnota."]]></r07>"."\r\n"; fwrite($soubor, $text);
 
 $hodnota=$hlavickav->vzchm;
+if( $hodnota == 0 ) { $hodnota=""; }
   $text = "    <r08><![CDATA[".$hodnota."]]></r08>"."\r\n"; fwrite($soubor, $text);
 $hodnota=$hlavickav->vznpr;
+if( $hodnota == 0 ) { $hodnota=""; }
   $text = "    <r09><![CDATA[".$hodnota."]]></r09>"."\r\n"; fwrite($soubor, $text);
 
 $dnvnk = $hlavickav->dnvnk;
@@ -739,8 +752,14 @@ if ( $jv == 0 ) {
 
 if ( $jv == 1 ) {
   $text = "   </stlpec2>"."\r\n"; fwrite($soubor, $text);
+                }
+
+//len ak je vozidlo vzspz
+                                    }
+
+if ( $jv == 1 ) {
   $text = "  </strana3>"."\r\n"; fwrite($soubor, $text);
-               }
+                }
 $iv = $iv + 1;
 $jv = $jv + 1;
 if ( $jv == 2 ) { $jv=0; }
