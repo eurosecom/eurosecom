@@ -695,6 +695,76 @@ htmlmenu2 += " Komisia 3 ";
 </table>
 <br />
 
+
+<?php
+//nastavenie komisie
+if (  $copern == 1 )
+     {
+
+?>
+<div id="nastavpaux" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 260px; left: 170px; width:400px; height:300px;">
+<table  class='ponuka' width='100%'>
+<tr><td width='20%'></td><td width='80%'></td></td></tr>
+
+<tr><td colspan='1'>Nastavenie invent˙ry </td>
+<td colspan='1' align='right'><img border=0 src='../obr/zmazuplne.png' style="width:12; height:12;" onClick="nastavpaux.style.display='none';" title='Zhasni' >
+</td></tr>  
+                    
+<tr><FORM name='enastpau' method='post' action='#' >
+<td class='ponuka' colspan='1' align='left'> 
+ Vykonan· dÚa  
+<td class='ponuka' colspan='1' align='left'> 
+<input type='text' name='h_mail' id='h_mail' size='40' maxlenght='50' value='<?php echo $h_mail; ?>' >
+</td></tr>
+<tr><td class='ponuka' colspan='1'> 
+ Zodpovedn˝  
+<td class='ponuka' colspan='1'> 
+<input type='text' name='h_mdov' id='h_mdov' size='40' maxlenght='50' value='<?php echo $h_mdov; ?>' >
+</td></tr>
+<tr><td class='ponuka' colspan='1'> 
+ Komisia 1 
+<td class='ponuka' colspan='1'> 
+<input type='text' name='h_dovv' id='h_dovv' size='40' maxlenght='50' value='<?php echo $h_dovv; ?>' >
+</td></tr>
+<tr><td class='ponuka' colspan='1'> 
+ Komisia 2  
+<td class='ponuka' colspan='1'> 
+<input type='text' name='h_dovv2' id='h_dovv2' size='40' maxlenght='50' value='<?php echo $h_dovv2; ?>' >
+</td></tr>
+<tr><td class='ponuka' colspan='1'>
+ Komisia 3 
+<td class='ponuka' colspan='1'> 
+<input type='text' name='h_dovv3' id='h_dovv3' size='40' maxlenght='50' value='<?php echo $h_dovv3; ?>' >
+</td></tr>
+
+<tr><td class='ponuka' colspan='1'>
+<td class='ponuka' colspan='1'>  
+ <img border=0 src='../obr/ok.png' style="width:12; height:12;" onClick="NastavPau();" title='Uloû nastavenie' > Uloûiù
+</td></tr>
+</FORM></table>
+</div>
+<script type="text/javascript">
+
+//zapis nastavenie
+function NastavPau()
+                {
+  var h_mail = document.forms.enastpau.h_mail.value;
+  var h_dovv = document.forms.enastpau.h_dovv.value;
+  var h_dovv2 = document.forms.enastpau.h_dovv2.value;
+  var h_dovv3 = document.forms.enastpau.h_dovv3.value;
+  var h_mdov = document.forms.enastpau.h_mdov.value;
+
+  window.open('invmaj.php?cislo_oc=1&h_mail=' + h_mail + '&h_dovv=' + h_dovv + '&h_mdov=' + h_mdov + '&h_dovv2=' + h_dovv2 + '&h_dovv3=' + h_dovv3 + '&copern=1059&drupoh=1&page=1&subor=0',
+ '_self');                }
+
+</script>
+<?php
+     }
+//koniec nastavenie komisie
+?>
+
+
+
 <?php 
 
 //ponuka
@@ -728,7 +798,7 @@ zobrazene menu
 </td>
 
 <td class="bmenu" width="10%" align="right" >
-<img src='../obr/naradie.png'  onClick="zobraz_upravmail();" width=15 height=15 border=0 alt='Nastaviù komisiu a d·tum invent˙ry, platÌ aj pre DIM' >
+<img src='../obr/naradie.png'  onClick="nastavpaux.style.display='';" width=15 height=15 border=0 alt='Nastaviù komisiu a d·tum invent˙ry, platÌ aj pre DIM' >
 
 </td>
 
