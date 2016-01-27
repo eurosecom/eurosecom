@@ -1,7 +1,7 @@
 <HTML>
 <?php
 
-//skript pre rok 2016 a vyššie
+//skript pre rok 2015 a nižšie
 
 do
 {
@@ -1531,7 +1531,7 @@ if ( $copern == 20 )
  Položka OSÈ=<?php echo $h_oc;?> správne uložená</span>
 </tr>
 <table class="fmenu" width="100%" >
-<FORM name="formv1" class="obyc" method="post" action="../ucto/vykaz_hlaodpad.php?copern=23&stvrtrok=<?php echo $stvrtrok;?>" >
+<FORM name="formv1" class="obyc" method="post" action="../ucto/vykaz_hlaodpad_2015.php?copern=23&stvrtrok=<?php echo $stvrtrok;?>" >
 
 
 
@@ -1639,10 +1639,10 @@ $text_komodita=NazovKomodity($rsluz->komodita);
 <td class="fmenu" align="right" ><?php echo $rsluz->dox;?></td>
 <td class="fmenu" align="right" ><?php echo $rsluz->hod;?></td>
 <td class="fmenu" width="5%" >
-<a href='vykaz_hlaodpad.php?copern=316&cislo_cpl=<?php echo $rsluz->cpl;?>&stvrtrok=<?php echo $stvrtrok;?>&upravit=1'>
+<a href='vykaz_hlaodpad_2015.php?copern=316&cislo_cpl=<?php echo $rsluz->cpl;?>&stvrtrok=<?php echo $stvrtrok;?>&upravit=1'>
 <img src='../obr/uprav.png' width=15 height=10 border=0 title="Upravi riadok" ></a>
 
- <a href='vykaz_hlaodpad.php?copern=316&cislo_cpl=<?php echo $rsluz->cpl;?>&stvrtrok=<?php echo $stvrtrok;?>'>
+ <a href='vykaz_hlaodpad_2015.php?copern=316&cislo_cpl=<?php echo $rsluz->cpl;?>&stvrtrok=<?php echo $stvrtrok;?>'>
 <img src='../obr/zmaz.png' width=15 height=10 border=0 title="Vymaza riadok" ></a>
 </td>
 </tr>

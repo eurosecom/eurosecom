@@ -420,6 +420,10 @@ window.open('fin6dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0'
 //koniec vykzy FIN NUJ 2012
     
 //vykaz Hlaodpad
+<?php
+$rokodpad="";
+if( $kli_vrok < 2016 ) $rokodpad="_2015";
+?>
 
 function TlacHlaodpad()
                 {
@@ -431,7 +435,7 @@ var h_kmd = document.forms.formhlaodpad.h_kmd.value;
 var h_zos = document.forms.formhlaodpad.h_zos.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_hlaodpad.php?stvrtrok=' + h_oc + '&h_kmd=' + h_kmd + '&h_zos=' + h_zos + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0',
+window.open('../ucto/vykaz_hlaodpad<?php echo $rokodpad; ?>.php?stvrtrok=' + h_oc + '&h_kmd=' + h_kmd + '&h_zos=' + h_zos + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 
 <?php                        } ?>
@@ -445,7 +449,7 @@ var h_oc = document.forms.formhlaodpad.h_oc.value;
 var h_kmd = document.forms.formhlaodpad.h_kmd.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_hlaodpad.php?stvrtrok=' + h_oc + '&h_kmd=' + h_kmd + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&zaciatok=1',
+window.open('../ucto/vykaz_hlaodpad<?php echo $rokodpad; ?>.php?stvrtrok=' + h_oc + '&h_kmd=' + h_kmd + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&zaciatok=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -455,7 +459,7 @@ var h_oc = document.forms.formhlaodpad.h_oc.value;
 var h_kmd = document.forms.formhlaodpad.h_kmd.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_hlaodpad.php?stvrtrok=' + h_oc + '&h_kmd=' + h_kmd + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+window.open('../ucto/vykaz_hlaodpad<?php echo $rokodpad; ?>.php?stvrtrok=' + h_oc + '&h_kmd=' + h_kmd + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
