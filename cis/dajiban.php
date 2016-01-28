@@ -76,6 +76,112 @@ $vytvor = mysql_query("$vsql");
 
 }
 
+
+if( $copern == 2 )
+  {
+
+$sql = "SELECT zstak FROM F".$kli_vxcf."_mzdtextmzd";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+    {
+
+$sqlt = <<<paskovacka
+(
+   invt        VARCHAR(30) not null,
+   itxt        TEXT not null
+);
+paskovacka;
+
+$sql = 'CREATE TABLE F'.$kli_vxcf.'_mzdtextmzd'.$sqlt;
+$vysledok = mysql_query($sql);
+
+
+$sql = "SELECT zdro FROM F".$kli_vxcf."_mzdtextmzd ";
+$vysledok = mysql_query($sql);
+if (!$vysledok){
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD nas1 DECIMAL(4,0) DEFAULT 0 AFTER itxt";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD zdro DECIMAL(1,0) DEFAULT 0 AFTER nas1";
+$vysledek = mysql_query("$sql");
+               }
+
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd MODIFY invt VARCHAR(30) PRIMARY KEY not null ";
+$vysledek = mysql_query("$sql");
+
+$sql = "SELECT pcen FROM F".$kli_vxcf."_mzdtextmzd ";
+$vysledok = mysql_query($sql);
+if (!$vysledok){
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD pnak VARCHAR(10) not null AFTER zdro";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD pcen DECIMAL(10,4) DEFAULT 0 AFTER zdro";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd MODIFY pcen DECIMAL(10,4) DEFAULT 0 ";
+$vysledek = mysql_query("$sql");
+               }
+
+$sql = "SELECT cszp FROM F".$kli_vxcf."_mzdtextmzd ";
+$vysledok = mysql_query($sql);
+if (!$vysledok){
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD cszp VARCHAR(15) not null AFTER zdro";
+$vysledek = mysql_query("$sql");
+               }
+
+$sql = "SELECT dmm FROM F".$kli_vxcf."_mzdtextmzd ";
+$vysledok = mysql_query($sql);
+if (!$vysledok){
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD kprh DECIMAL(10,2) DEFAULT 0 AFTER zdro";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD kpre DECIMAL(10,2) DEFAULT 0 AFTER zdro";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD kprc DECIMAL(10,0) DEFAULT 0 AFTER zdro";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD dmp DECIMAL(10,0) DEFAULT 0 AFTER zdro";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD dmm DECIMAL(10,0) DEFAULT 0 AFTER zdro";
+$vysledek = mysql_query("$sql");
+               }
+
+$sql = "SELECT spvod FROM F".$kli_vxcf."_mzdtextmzd ";
+$vysledok = mysql_query($sql);
+if (!$vysledok){
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD spvtr VARCHAR(10) not null AFTER zdro";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD spvdo VARCHAR(10) not null AFTER zdro";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD spvod VARCHAR(10) not null AFTER zdro";
+$vysledek = mysql_query("$sql");
+               }
+
+$sql = "SELECT ziban FROM F".$kli_vxcf."_mzdtextmzd ";
+$vysledok = mysql_query($sql);
+if (!$vysledok){
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD zswft VARCHAR(15) not null AFTER zdro";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD ziban VARCHAR(50) not null AFTER zdro";
+$vysledek = mysql_query("$sql");
+               }
+
+$sql = "SELECT ztitz FROM F".$kli_vxcf."_mzdtextmzd ";
+$vysledok = mysql_query($sql);
+if (!$vysledok){
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD ztitz VARCHAR(15) not null AFTER zdro";
+$vysledek = mysql_query("$sql");
+               }
+
+$sql = "SELECT zstat FROM F".$kli_vxcf."_mzdtextmzd ";
+$vysledok = mysql_query($sql);
+if (!$vysledok){
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD zstat VARCHAR(30) not null DEFAULT 'Slovensko' AFTER zdro";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdtextmzd ADD zstak VARCHAR(30) not null DEFAULT '703' AFTER zdro";
+$vysledek = mysql_query("$sql");
+               }
+
+    }
+
+  }
+//koniec testuj mzdtextmzd
+
 $sql = "SELECT ibanold FROM F$kli_vxcf"."_dajiban".$kli_vxcf;
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
