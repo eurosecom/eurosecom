@@ -340,7 +340,7 @@ $pdf->Cell(180,6,"Vec: Inventariz·cia pohæad·vok k $h_dsp","B",1,"L");
 $pdf->Cell(180,2,"     ","0",1,"L");
 $pdf->Cell(180,6,"     V zmysle ß 29,30 z·kona Ë. 431/2002 Z.z. V·s ûiadame o ods˙hlasenie zostatku z·v‰zkov k  $h_dsp.","0",1,"L");
 $pdf->Cell(180,6,"Na ûiadosù audÌtora naöej spoloËnosti Ing. Vincencie OûvoldÌkovej, ktor· vykon·va overenie ˙Ëtovnej z·vierky","0",1,"L");
-$pdf->Cell(180,6,"k 31.12.2014, V·s prosÌme, aby ste na origin·le s˙pisu potvrdili zhodnosù naöich z·znamov so stavom Vaöej","0",1,"L");
+$pdf->Cell(180,6,"k 31.12.$kli_vrok, V·s prosÌme, aby ste na origin·le s˙pisu potvrdili zhodnosù naöich z·znamov so stavom Vaöej","0",1,"L");
 $pdf->Cell(180,6,"˙Ëtovnej evidencie a potvrdenie n·m obratom zaslali sp‰ù.","0",1,"L");
 $pdf->Cell(180,6,"Ak potvrdenie neobdrûÌme do 14 dnÌ, povaûujeme n·ö stav pohæad·vok za platn˝.","0",1,"L");
                        }
@@ -371,7 +371,7 @@ $pdf->Cell(180,2,"     ","0",1,"L");
 $pdf->Cell(180,6,"     V zmysle ß 29,30 z·kona Ë. 431/2002 Z.z. V·m oznamujeme, ûe podæa ˙dajov naöej ˙Ëtovnej evidencie evidujeme","0",1,"L");
 $pdf->Cell(180,6,"Vaöe fakt˙ry podæa priloûenÈho zoznamu.","0",1,"L");
 $pdf->Cell(180,6,"Na ûiadosù audÌtora naöej spoloËnosti Ing. Vincencie OûvoldÌkovej, ktor· vykon·va overenie ˙Ëtovnej z·vierky","0",1,"L");
-$pdf->Cell(180,6,"k 31.12.2014, prosÌme o ods˙hlasenie naöich z·v‰zkov a zaslanie potvrdenia obratom sp‰ù n·m.","0",1,"L");
+$pdf->Cell(180,6,"k 31.12.$kli_vrok, prosÌme o ods˙hlasenie naöich z·v‰zkov a zaslanie potvrdenia obratom sp‰ù n·m.","0",1,"L");
                        }
 
 if( $pohladavky != 1 AND $amagro == 1 ) {

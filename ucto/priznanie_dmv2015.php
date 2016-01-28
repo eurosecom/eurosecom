@@ -657,6 +657,11 @@ $sql = mysql_query("$sqltt");
 //echo $sqltt;
 
 
+$dajvsetky = 1*$_REQUEST['dajvsetky'];
+$predpoklad = 1*$_REQUEST['predpoklad'];
+$dajsadzbu = 1*$_REQUEST['dajsadzbu'];
+$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
+
 //pocet dni v roku
 $prvyden=$kli_vrok."-01-01";
 $denposledny=$kli_vrok."-12-31";
@@ -673,11 +678,6 @@ $pocetdnirok = mysql_num_rows($sql);
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET datz='$prvyden' WHERE oc = 1 AND datz = '0000-00-00' ";
 $upravene = mysql_query("$uprtxt");
 
-
-$dajvsetky = 1*$_REQUEST['dajvsetky'];
-$predpoklad = 1*$_REQUEST['predpoklad'];
-$dajsadzbu = 1*$_REQUEST['dajsadzbu'];
-$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 
 if( $dajvsetky == 1 OR $predpoklad == 1 OR $dajsadzbu == 1 OR $pocetdni == 1 OR $vypocitajdan == 1 )
           {
@@ -712,7 +712,7 @@ $sqldok = mysql_query("$sqlttt");
 if( $predpoklad == 1 )
   {
 $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx".$kli_uzid." SET r19s1mes=0, r19s2mes=0, r13s2zni25=0, r13s2zni20=0, r13s2zni15=0, ".
-" r13s2zvy10=0, r13s2zvy20=0 WHERE oc = 1 $podmcpl";
+" r13s2zvy10=0, r13s2zvy20=0, r12doniz=0 WHERE oc = 1 $podmcpl";
 $sqldok = mysql_query("$sqlttt");
   }
 
@@ -834,9 +834,17 @@ $sqldok = mysql_query("$sqlttt");
 $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=0, mesad2=0, mesad3=0, mesad4=0, mesad5=0, r13=0 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
 
+
 $kli_vrok2=$kli_vrok;
 $kli_vmes2=12;
-if( $predpoklad == 1 ) { $kli_vrok2=$kli_vrok+1; $kli_vmes2=12;}
+if( $predpoklad == 1 ) 
+ { 
+$kli_vrok2=$kli_vrok+1; 
+$kli_vmes2=12;
+$dat0101b=$kli_vrok2."-01-01";
+$sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid datz='$dat0101b' WHERE oc = 1 AND datz < '$dat0101b' AND cpl = $riadok->cpl ";
+$sqldok = mysql_query("$sqlttt");
+ }
 $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad1=(($kli_vrok2-r14)*12)-(r15-1)+$kli_vmes2 WHERE oc = 1 AND cpl = $riadok->cpl ";
 $sqldok = mysql_query("$sqlttt");
 $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmvx$kli_uzid SET mesad2=(($kli_vrok2-r14)*12)-(r15-1)+1 WHERE oc = 1 AND cpl = $riadok->cpl ";
