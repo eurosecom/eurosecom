@@ -1061,8 +1061,9 @@ htmlmenu += "<a href=\"#\" onClick=\"window.open('../ucto/suvaha.php?copern=10&d
 
 <?php                      } 
 
-$rokdph=$vyb_rok;
-if( $vyb_rok == 2015 ) { $rokdph=2014; }
+$rokdph=2014;
+if( $vyb_rok <= 2013 ) { $rokdph=2013; }
+if( $vyb_rok <= 2012 ) { $rokdph=2012; }
 ?>
 
 

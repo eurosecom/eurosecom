@@ -1325,10 +1325,10 @@ Skontrolujte si správne nahraté IÈ DPH = <?php echo $icd ?> <a href="#" onclick=
 <img src='../obr/export.png' border="1" onclick="TovarDok();" width="15" height="15" title="Údaje o tovare na doklade <?php echo $cislo_dok;?>" >
 &nbsp;&nbsp;&nbsp;
 <img src='../obr/import.png' border="1" onclick="roznizalohu();" width="15" height="15" title="Odúètovanie zálohy" >
-<?php if( $fir_xvr05 == 1 ) { ?>
+<?php if( $fir_xvr05 == 1 OR $drupoh == 2 ) { ?>
 &nbsp;&nbsp;&nbsp;
-<img src='../obr/vlozit.png' border="1" onclick="UhradyDok();" width="15" height="15" title="Úhrady pre odpoèet a odvod DPH z faktúr" >
-<?php                      } ?>
+<img src='../obr/vlozit.png' border="1" onclick="UhradyDok();" width="15" height="15" title="Úhrady pre Odpoèet a uplatnenie DPH až po prijatí platby" >
+<?php                                       } ?>
        </td>
 <?php                                 } ?>
 <?php if( $_SESSION['nieie'] == 1 )  { ?>
@@ -1359,10 +1359,10 @@ Skontrolujte si správne nahraté IÈ DPH = <?php echo $icd ?> <a href="#" onclick=
 <img src='../obr/export.png' border="1" onclick="TovarDok();" width="15" height="15" title="Údaje o dodanom tovare na doklade <?php echo $cislo_dok;?>" >
 &nbsp;&nbsp;&nbsp;
 <img src='../obr/import.png' border="1" onclick="roznizalohu();" width="15" height="15" title="Odúètovanie zálohy" >
-<?php if( $fir_xvr05 == 1 ) { ?>
+<?php if( $fir_xvr05 == 1 OR $drupoh == 2 ) { ?>
 &nbsp;&nbsp;&nbsp;
-<img src='../obr/vlozit.png' border="1" onclick="UhradyDok();" width="15" height="15" title="Úhrady pre odpoèet a odvod DPH z faktúr" >
-<?php                      } ?>
+<img src='../obr/vlozit.png' border="1" onclick="UhradyDok();" width="15" height="15" title="Úhrady pre Odpoèet a uplatnenie DPH až po prijatí platby" >
+<?php                                       } ?>
        </td>
 <?php                                 } ?>
 
