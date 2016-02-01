@@ -466,6 +466,25 @@ $i=$i+1;
   }
 //exit;
 
+//ak pomer=14 dlhodobo nezamestnany UNION chce zcel_zp=zzam_zp= zcel_odp
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE ume = $kli_vume AND pom = 14 AND zdrv >= 2700 AND zdrv <= 2799 ORDER BY oc";
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+$i=0;
+  while ($i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_zp=zcel_odp, zzam_zp=zcel_odp WHERE oc = $hlavicka->oc AND konx2 = 999 AND zcel_odp != 0 ";
+$sqlx = mysql_query("$sqlttx");
+
+}
+$i=$i+1;
+  }
+//exit;
+
 
 //ak je DOHODAR co neodvadza do ZP a VZaklad=0 aj odvody=0 vynuluj aj UhrnPrijmu, od 1.5.2014 zacali kontrolovat
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun ".
