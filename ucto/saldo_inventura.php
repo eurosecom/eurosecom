@@ -422,10 +422,11 @@ if( $medo == 1 ) { $fir_uctt05=$kli_uzprie." ".$kli_uzmeno; $fir_uctt04=$fir_fte
 
 $pdf->Cell(60,6,"Vybavuje: $fir_uctt05 $fir_uctt04","0",0,"L");$pdf->Cell(60,6," ","0",0,"L");
 $pdf->Cell(60,6,"peèiatka, podpis","T",1,"L");
+$pdf->Cell(60,4,"$fir_fem1","0",1,"L");
 $pdf->Cell(180,2,"     ","0",1,"L");
 
 if( $pohladavky == 1 ) {
-$pdf->Cell(180,10,"     ","0",1,"L");
+$pdf->Cell(180,6,"     ","0",1,"L");
 
 $pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");
 $pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");
@@ -442,7 +443,7 @@ $pdf->Cell(60,6,"peèiatka, podpis","T",1,"L");
                         }
 
 if( $pohladavky != 1 AND $alchem == 1 ) {
-$pdf->Cell(180,10,"     ","0",1,"L");
+$pdf->Cell(180,6,"     ","0",1,"L");
 
 $pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");
 $pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");
@@ -467,7 +468,7 @@ $pdf->Cell(60,6,"peèiatka, èitate¾ný podpis","T",1,"L");
                         }
 
 if( $pohladavky != 1 AND $amagro == 1 ) {
-$pdf->Cell(180,10,"     ","0",1,"L");
+$pdf->Cell(180,6,"     ","0",1,"L");
 
 $pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");
 $pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");
@@ -492,7 +493,7 @@ $pdf->Cell(60,6,"peèiatka, èitate¾ný podpis","T",1,"L");
                         }
 
 if( $pohladavky != 1 AND $medo == 1 ) {
-$pdf->Cell(180,10,"     ","0",1,"L");
+$pdf->Cell(180,6,"     ","0",1,"L");
 
 $pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");
 $pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");$pdf->Cell(10,1,"- - - - - ","0",0,"L");

@@ -29,6 +29,10 @@ $drupoh = 1*strip_tags($_REQUEST['drupoh']);
 $cislo_dok = 1*$_REQUEST['cislo_dok'];
 $cislo_cpld = 1*$_REQUEST['cislo_cpld'];
 
+
+$faktury="fakdod";
+if( $drupoh == 1 ) { $faktury="fakodb"; }
+
 //echo $copern;
 //echo $cislo_cpld;
 
@@ -100,6 +104,8 @@ if ( $copern == 1001 OR $copern == 1002 )
     }
 //koniec nacitaj uhrady
 
+$cplda=0;
+$prepocty=0;
 
 //ulozenie novej
 if ( $copern == 15 )
@@ -108,12 +114,148 @@ if ( $copern == 15 )
 $ulozttt = " INSERT INTO F$kli_vxcf"."_uctfakuhrdph ( dok,dppx,dou,dau,dpp,hou,hz1,hd1,hz2,hd2 ) ".
 " VALUES ( '$cislo_dok', '$h_dppx', '$h_dou', '$h_dausql', '$h_dppsql', '$h_hou', '$h_hz1', '$h_hd1', '$h_hz2', '$h_hd2' ) "; 
 $ulozene = mysql_query("$ulozttt"); 
-echo $ulozttt;
+//echo $ulozttt;
+
+$cplda=0;
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctfakuhrdph WHERE cpld > 0 ORDER BY cpld DESC ";
+$sql = mysql_query("$sqltt"); 
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $cplda=1*$riadok->cpld;
+
+  }
+
+$prepocty=1;
 
 $copern=1;
 
     }
 //koniec ulozenia
+
+
+//urob prepocty
+if( $prepocty == 1 ) 
+{
+
+$zk2a=0; $dn2a=0; $zk1a=0; $dn1a=0; $hoda=0;
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctfakuhrdph WHERE dok = $cislo_dok AND cpld = $cplda ";
+$sql = mysql_query("$sqltt"); 
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $zk2a=1*$riadok->hz2;
+  $dn2a=1*$riadok->hd2;
+  $zk1a=1*$riadok->hz1;
+  $dn1a=1*$riadok->hd1;
+  $hoda=1*$riadok->hou;
+  }
+
+$zk2s=0; $dn2s=0; $zk1s=0; $dn1s=0; $hods=0;
+$sqltt = "SELECT SUM(hz2) AS hz2s, SUM(hd2) AS hd2s, SUM(hz1) AS hz1s, SUM(hd1) AS hd1s, SUM(hou) AS hous FROM F$kli_vxcf"."_uctfakuhrdph WHERE dok = $cislo_dok ";
+$sql = mysql_query("$sqltt"); 
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $zk2s=1*$riadok->hz2s;
+  $dn2s=1*$riadok->hd2s;
+  $zk1s=1*$riadok->hz1s;
+  $dn1s=1*$riadok->hd1s;
+  $hods=1*$riadok->hous;
+  }
+
+
+$zk2f=0; $dn2f=0; $zk1f=0; $dn1f=0; $hodf=0;
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$faktury WHERE dok = $cislo_dok ";
+$sql = mysql_query("$sqltt"); 
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $zk2f=1*$riadok->zk2u;
+  $dn2f=1*$riadok->dn2u;
+  $zk1f=1*$riadok->zk1u;
+  $dn1f=1*$riadok->dn1u;
+  $hodf=1*$riadok->hodu;
+  }
+
+$koef=$hoda/$hodf;
+if( $koef > 1 ) { $koef=1; }
+$zk2set=$zk2f*$koef;
+$dn2set=$dn2f*$koef;
+$zk1set=$zk1f*$koef;
+$dn1set=$dn1f*$koef;
+
+
+if( $koef <  1 ) {
+$sqltt = "UPDATE F$kli_vxcf"."_uctfakuhrdph SET hz2=$zk2set WHERE dok = $cislo_dok AND cpld = $cplda AND hz2 = 0 ";
+$sql = mysql_query("$sqltt"); 
+
+$sqltt = "UPDATE F$kli_vxcf"."_uctfakuhrdph SET hd2=$dn2set WHERE dok = $cislo_dok AND cpld = $cplda AND hd2 = 0 ";
+$sql = mysql_query("$sqltt");
+
+$sqltt = "UPDATE F$kli_vxcf"."_uctfakuhrdph SET hz1=$zk1set WHERE dok = $cislo_dok AND cpld = $cplda AND hz1 = 0 ";
+$sql = mysql_query("$sqltt"); 
+
+$sqltt = "UPDATE F$kli_vxcf"."_uctfakuhrdph SET hd1=$dn1set WHERE dok = $cislo_dok AND cpld = $cplda AND hd1 = 0 ";
+$sql = mysql_query("$sqltt");
+                 }
+
+if( $koef == 1 ) {
+$sqltt = "UPDATE F$kli_vxcf"."_uctfakuhrdph SET hz2=$zk2f WHERE dok = $cislo_dok AND cpld = $cplda AND hz2 = 0 ";
+$sql = mysql_query("$sqltt"); 
+
+$sqltt = "UPDATE F$kli_vxcf"."_uctfakuhrdph SET hd2=$dn2f WHERE dok = $cislo_dok AND cpld = $cplda AND hd2 = 0 ";
+$sql = mysql_query("$sqltt");
+
+$sqltt = "UPDATE F$kli_vxcf"."_uctfakuhrdph SET hz1=$zk1f WHERE dok = $cislo_dok AND cpld = $cplda AND hz1 = 0 ";
+$sql = mysql_query("$sqltt"); 
+
+$sqltt = "UPDATE F$kli_vxcf"."_uctfakuhrdph SET hd1=$dn1f WHERE dok = $cislo_dok AND cpld = $cplda AND hd1 = 0 ";
+$sql = mysql_query("$sqltt");
+                 }
+
+//kontrola max. zaklad a dph
+$zk2s=0; $dn2s=0; $zk1s=0; $dn1s=0; $hods=0;
+$sqltt = "SELECT SUM(hz2) AS hz2s, SUM(hd2) AS hd2s, SUM(hz1) AS hz1s, SUM(hd1) AS hd1s, SUM(hou) AS hous FROM F$kli_vxcf"."_uctfakuhrdph WHERE dok = $cislo_dok ";
+$sql = mysql_query("$sqltt"); 
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $zk2s=1*$riadok->hz2s;
+  $dn2s=1*$riadok->hd2s;
+  $zk1s=1*$riadok->hz1s;
+  $dn1s=1*$riadok->hd1s;
+  $hods=1*$riadok->hous;
+  }
+
+if( $zk2s > $zk2f )
+ {
+$sqltt = "UPDATE F$kli_vxcf"."_uctfakuhrdph SET hz2=hz2-($zk2s-$zk2f) WHERE dok = $cislo_dok AND cpld = $cplda AND hz2 != 0 ";
+$sql = mysql_query("$sqltt"); 
+ }
+if( $dn2s > $dn2f )
+ {
+$sqltt = "UPDATE F$kli_vxcf"."_uctfakuhrdph SET hd2=hd2-($dn2s-$dn2f) WHERE dok = $cislo_dok AND cpld = $cplda AND hd2 != 0 ";
+$sql = mysql_query("$sqltt"); 
+ }
+if( $zk1s > $zk1f )
+ {
+$sqltt = "UPDATE F$kli_vxcf"."_uctfakuhrdph SET hz1=hz1-($zk1s-$zk1f) WHERE dok = $cislo_dok AND cpld = $cplda AND hz1 != 0 ";
+$sql = mysql_query("$sqltt"); 
+ }
+if( $dn1s > $dn1f )
+ {
+$sqltt = "UPDATE F$kli_vxcf"."_uctfakuhrdph SET hd1=hd1-($dn1s-$dn1f) WHERE dok = $cislo_dok AND cpld = $cplda AND hd1 != 0 ";
+$sql = mysql_query("$sqltt"); 
+ }
+
+
+}
+//koniec urob prepocty
+
+
+
+
 
 //vymazanie a uprava
 if ( $copern == 16 )
@@ -129,15 +271,13 @@ $sql = mysql_query("$sqltt");
 $h_dok = $riadok->dok;
 $h_dou = $riadok->dou;
 $h_dppx = $riadok->dppx;
-
-$h_dok = $riadok->h_dok;
-$h_dau = $riadok->h_dau;
-$h_dpp = $riadok->h_dpp;
-$h_hou = $riadok->h_hou;
-$h_hz1 = $riadok->h_hz1;
-$h_hd1 = $riadok->h_hd1;
-$h_hz1 = $riadok->h_hz1;
-$h_hd1 = $riadok->h_hd1;
+$h_dau = $riadok->dau;
+$h_dpp = $riadok->dpp;
+$h_hou = $riadok->hou;
+$h_hz2 = $riadok->hz2;
+$h_hd2 = $riadok->hd2;
+$h_hz1 = $riadok->hz1;
+$h_hd1 = $riadok->hd1;
 
 
 
@@ -164,21 +304,138 @@ $copern=1;
   </style>
 <script type="text/javascript">
 
+  function douEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
+  if(k == 13 ){
+
+        document.forms.formv1.h_dau.focus();
+	document.forms.formv1.h_dau.select();
+              }
+
+                }
+
+  function dauEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+
+        document.forms.formv1.h_dpp.focus();
+	document.forms.formv1.h_dpp.select();
+              }
+
+                }
+
+  function dppEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+
+        document.forms.formv1.h_hou.focus();
+	document.forms.formv1.h_hou.select();
+              }
+
+                }
+
+  function houEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+
+        if ( document.formv1.h_hz2.value == '' ) { document.forms.formv1.h_hz2.value="0"; };
+        document.forms.formv1.h_hz2.focus();
+	document.forms.formv1.h_hz2.select();
+              }
+
+                }
+
+  function hz2Enter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+
+
+        if ( document.formv1.h_hd2.value == '' ) { document.forms.formv1.h_hd2.value="0"; };
+        document.forms.formv1.h_hd2.focus();
+	document.forms.formv1.h_hd2.select();
+              }
+
+                }
+
+  function hd2Enter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+
+
+        if ( document.formv1.h_hz1.value == '' ) { document.forms.formv1.h_hz1.value="0"; };
+        document.forms.formv1.h_hz1.focus();
+	document.forms.formv1.h_hz1.select();
+              }
+
+                }
+
+  function hz1Enter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+
+
+        if ( document.formv1.h_hd1.value == '' ) { document.forms.formv1.h_hd1.value="0"; };
+        document.forms.formv1.h_hd1.focus();
+	document.forms.formv1.h_hd1.select();
+              }
+
+                }
+
+  function hd1Enter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+
+        Povol_uloz();
+              }
+
+                }
+
+
+    function Povol_uloz()
+    {
+    var okvstup=1;
+    if ( document.formv1.h_hou.value == '' ) okvstup=0;
+    if ( document.formv1.h_hou.value == '0' ) okvstup=0;
+    if ( okvstup == 1 ) { document.formv1.uloz.disabled = false; return (true); }
+       else { document.formv1.uloz.disabled = true; return (false) ; }
+
+    }
 
     function ObnovUI()
     {
-    document.formv1.h_cpld.value = '<?php echo "$h_cpld";?>';
+    //document.formv1.h_cpld.value = '<?php echo "$h_cpld";?>';
     document.formv1.h_dok.value = '<?php echo "$cislo_dok";?>';
     document.formv1.h_dou.value = '<?php echo "$h_dou";?>';
-    document.formv1.h_dppx.value = '<?php echo "$h_dppx";?>';
+    //document.formv1.h_dppx.value = '<?php echo "$h_dppx";?>';
     document.formv1.h_dau.value = '<?php echo "$h_dausk";?>';
     document.formv1.h_dpp.value = '<?php echo "$h_dppsk";?>';
     document.formv1.h_hou.value = '<?php echo "$h_hou";?>';
+    document.formv1.h_hz2.value = '<?php echo "$h_hz2";?>';
+    document.formv1.h_hd2.value = '<?php echo "$h_hd2";?>';
     document.formv1.h_hz1.value = '<?php echo "$h_hz1";?>';
     document.formv1.h_hd1.value = '<?php echo "$h_hd1";?>';
-    document.formv1.h_hz1.value = '<?php echo "$h_hz1";?>';
-    document.formv1.h_hd1.value = '<?php echo "$h_hd1";?>';
+
+    document.formv1.h_dou.focus();
+    document.formv1.h_dou.select();
+    document.formv1.h_dok.disabled = true
+    document.formv1.h_cpld.disabled = true;
+    document.formv1.uloz.disabled = true;
 
     }
 
@@ -275,6 +532,40 @@ $i=0;
 
 <table class="fmenu" width="100%" >
 
+<?php
+
+$zk2f=0; $dn2f=0; $zk1f=0; $dn1f=0; $hodf=0;
+$sqlttd = "SELECT * FROM F$kli_vxcf"."_$faktury WHERE dok = $cislo_dok ";
+$sqld = mysql_query("$sqlttd"); 
+  if (@$zaznamd=mysql_data_seek($sqld,0))
+  {
+  $riadokd=mysql_fetch_object($sqld);
+  $zk2f=1*$riadokd->zk2u;
+  $dn2f=1*$riadokd->dn2u;
+  $zk1f=1*$riadokd->zk1u;
+  $dn1f=1*$riadokd->dn1u;
+  $hodf=1*$riadokd->hodu;
+
+  }
+
+?>
+
+<tr>
+<td class="hmenu" > </td>
+<td class="hmenu" >Faktúra</td>
+<td class="hmenu" > </td>
+<td class="hmenu" > </td>
+<td class="hmenu" > </td>
+<td class="hmenu" ><?php echo $hodf;?></td>
+<td class="hmenu" ><?php echo $zk2f;?></td>
+<td class="hmenu" ><?php echo $dn2f;?></td>
+<td class="hmenu" ><?php echo $zk1f;?></td>
+<td class="hmenu" ><?php echo $dn1f;?></td>
+<td class="hmenu" ></td>
+
+</tr>
+
+
 <tr>
 <td class="hmenu" width="8%" >è.p.
 
@@ -346,22 +637,54 @@ $i = $i + 1;
    }
 ?>
 <tr>
-<FORM name="formv1" class="obyc" method="post" action="faktovdph.php?cislo_dok=<?php echo $cislo_dok; ?>&page=<?php echo $page;?>&copern=15&drupoh=<?php echo $drupoh; ?>" >
+<FORM name="formv1" class="obyc" method="post" action="fakuhrdph.php?cislo_dok=<?php echo $cislo_dok; ?>&page=<?php echo $page;?>&copern=15&drupoh=<?php echo $drupoh; ?>" >
 
 <td class="fmenu"><input type="text" name="h_cpld" id="h_cpld" size="6" /></td>
 <td class="fmenu"><input type="text" name="h_dok" id="h_dok" size="8"  /></td>
 
-<td class="fmenu"><input type="text" name="h_dou" id="h_dou" size="10"  /></td>
-<td class="fmenu"><input type="text" name="h_dau" id="h_dau" size="10"  /></td>
-<td class="fmenu"><input type="text" name="h_dpp" id="h_dpp" size="10"  /></td>
-<td class="fmenu"><input type="text" name="h_hou" id="h_hou" size="10"  /></td>
+<td class="fmenu"><input type="text" name="h_dou" id="h_dou" size="10" onKeyDown="return douEnter(event.which)" onkeyup="CiarkaNaBodku(this);" /></td>
+<td class="fmenu"><input type="text" name="h_dau" id="h_dau" size="10" onKeyDown="return dauEnter(event.which)" onkeyup="CiarkaNaBodku(this);" /></td>
+<td class="fmenu"><input type="text" name="h_dpp" id="h_dpp" size="10" onKeyDown="return dppEnter(event.which)" onkeyup="CiarkaNaBodku(this);" /></td>
+<td class="fmenu"><input type="text" name="h_hou" id="h_hou" size="10" onKeyDown="return houEnter(event.which)" onkeyup="CiarkaNaBodku(this);" /></td>
 
-<td class="fmenu"><input type="text" name="h_hz2" id="h_hz2" size="10"  /></td>
-<td class="fmenu"><input type="text" name="h_hd2" id="h_hd2" size="10"  /></td>
-<td class="fmenu"><input type="text" name="h_hz1" id="h_hz1" size="10"  /></td>
-<td class="fmenu"><input type="text" name="h_hd1" id="h_hd1" size="10"  /></td>
+<td class="fmenu"><input type="text" name="h_hz2" id="h_hz2" size="10" onKeyDown="return hz2Enter(event.which)" onkeyup="CiarkaNaBodku(this);" /></td>
+<td class="fmenu"><input type="text" name="h_hd2" id="h_hd2" size="10" onKeyDown="return hd2Enter(event.which)" onkeyup="CiarkaNaBodku(this);" /></td>
+<td class="fmenu"><input type="text" name="h_hz1" id="h_hz1" size="10" onKeyDown="return hz1Enter(event.which)" onkeyup="CiarkaNaBodku(this);" /></td>
+<td class="fmenu"><input type="text" name="h_hd1" id="h_hd1" size="10" onKeyDown="return hd1Enter(event.which)" onkeyup="CiarkaNaBodku(this);" /></td>
 
 <td class="fmenu"><input type="text" name="h_ne1" id="h_ne1" size="5" /></td>
+
+</tr>
+
+<?php
+
+$zk2s=0; $dn2s=0; $zk1s=0; $dn1s=0; $hods=0;
+$sqlttd = "SELECT SUM(hz2) AS hz2s, SUM(hd2) AS hd2s, SUM(hz1) AS hz1s, SUM(hd1) AS hd1s, SUM(hou) AS hous FROM F$kli_vxcf"."_uctfakuhrdph WHERE dok = $cislo_dok ";
+$sqld = mysql_query("$sqlttd"); 
+  if (@$zaznamd=mysql_data_seek($sqld,0))
+  {
+  $riadokd=mysql_fetch_object($sqld);
+  $zk2s=1*$riadokd->hz2s;
+  $dn2s=1*$riadokd->hd2s;
+  $zk1s=1*$riadokd->hz1s;
+  $dn1s=1*$riadokd->hd1s;
+  $hous=1*$riadokd->hous;
+
+  }
+
+?>
+
+<tr>
+<td class="hmenu" > </td>
+<td class="hmenu" colspan="2" >Spolu platby</td>
+<td class="hmenu" > </td>
+<td class="hmenu" > </td>
+<td class="hmenu" ><?php echo $hous;?></td>
+<td class="hmenu" ><?php echo $zk2s;?></td>
+<td class="hmenu" ><?php echo $dn2s;?></td>
+<td class="hmenu" ><?php echo $zk1s;?></td>
+<td class="hmenu" ><?php echo $dn1s;?></td>
+<td class="hmenu" ></td>
 
 </tr>
 
