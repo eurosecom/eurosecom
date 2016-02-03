@@ -180,6 +180,35 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun,F$kli_vxcf"."_mzdprb".$kli_uzid." SET sz4=
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+//uprava dps gbely
+if( $fir_fico == 36084514 )
+     {
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdprc".$kli_uzid." SET sz4x=kc WHERE oc > 0";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun,F$kli_vxcf"."_mzdprc".$kli_uzid." SET sz3=sz4x WHERE F$kli_vxcf"."_mzdkun.oc = F$kli_vxcf"."_mzdprc".$kli_uzid.".oc AND uva > 0";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun,F$kli_vxcf"."_mzdprb".$kli_uzid." SET sz3=sz3+kc/3 WHERE F$kli_vxcf"."_mzdkun.oc = F$kli_vxcf"."_mzdprb".$kli_uzid.".oc ";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz4=sz3 WHERE oc > 0 ";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/163 WHERE oc > 0 ";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz4=sz4/($pracsviat*uva) WHERE oc > 0 AND uva > 0 ";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+     }
+
 //vypocet priemeru na nemocenske tento rok _mzdnemzakb
 //len 1.krat po ostrom spracovani
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdnemzakb ";
@@ -302,6 +331,14 @@ $vysledek = mysql_query("$sql");
 //echo $sql;
 
 }
+
+
+//max.vyplata nemocenske
+if( $kli_vrok == 2016 )
+  {
+$sql = "UPDATE F$kli_vxcf"."_mzdkun SET znem=42.3124 WHERE znem > 42.3124 ";
+$vysledek = mysql_query("$sql");
+  }
 
 //koniec vypocet priemeru na nemocenske tento rok
 

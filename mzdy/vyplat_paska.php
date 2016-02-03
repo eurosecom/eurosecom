@@ -2481,7 +2481,7 @@ if( $ajstrzak == 1 AND $rtov->dmh > 1 AND $rtov->dmh < 599 ) { $pdf->SetFont('ar
 if( $rtov->dmh > 0 ) { $pdf->SetFont('arial','',7); $pdf->Cell(10,4,"(Základ $rtov->kch)","0",0,"L"); $pdf->SetFont('arial','',9); }
 if( $rtov->saz > 0 ) { $pdf->SetFont('arial','',7); $pdf->Cell(10,4,"($rtov->saz)","0",0,"L"); $pdf->SetFont('arial','',9); }
 if( $rtov->dp != '0000-00-00' AND $rtov->dk != '0000-00-00' ) $pdf->Cell(60,4,"$dp_sk - $dk_sk","0",0,"L");
-if( $rtov->trx4 != '' AND $rtov->dm != 965 ) { $pdf->SetFont('arial','',6); $pdf->Cell(60,4,"banka $rtov->trx4","0",0,"L"); $pdf->SetFont('arial','',9); }
+if( trim($rtov->trx4) != '' AND trim($rtov->trx4) != '0' AND $rtov->dm != 965 ) { $pdf->SetFont('arial','',6); $pdf->Cell(60,4,"banka $rtov->trx4","0",0,"L"); $pdf->SetFont('arial','',9); }
 if( $rtov->cddp > 0 ) $pdf->Cell(60,4,"DDP $rtov->cddp $rtov->nddp ","0",0,"L");
 $pdf->Cell(0,4," ","0",1,"L");
      }
