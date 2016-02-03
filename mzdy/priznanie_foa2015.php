@@ -1037,6 +1037,10 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r44=0, r46=0 WHERE oc = $cislo_oc AND r32 < 2280.00 ";
 $oznac = mysql_query("$sqtoz");
 
+//danovnik prijem r32 < 4560.00 nema narok lebo zaklad dane vyjde vacsi ako odpocet na danovnika
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r44=0, r45=0, r46=0 WHERE oc = $cislo_oc AND r32 < 4560.00 ";
+$oznac = mysql_query("$sqtoz");
+
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r44=0, r46=0 WHERE oc = $cislo_oc AND r44 >= r37  ";
 $oznac = mysql_query("$sqtoz");
    }
