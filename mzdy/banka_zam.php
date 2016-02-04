@@ -369,11 +369,11 @@ $pdf->SetFont('arial','',7);
 $ibanoc=$rtov->ucep;
 $ibanoc=str_replace(" ","",$ibanoc);
 $ibanoc1 = substr($ibanoc,0,4);
-$ibanoc2 = substr($ibanoc,3,4);
-$ibanoc3 = substr($ibanoc,7,4);
-$ibanoc4 = substr($ibanoc,11,4);
-$ibanoc5 = substr($ibanoc,15,4);
-$ibanoc6 = trim(substr($ibanoc,19,20));
+$ibanoc2 = substr($ibanoc,4,4);
+$ibanoc3 = substr($ibanoc,8,4);
+$ibanoc4 = substr($ibanoc,12,4);
+$ibanoc5 = substr($ibanoc,16,4);
+$ibanoc6 = trim(substr($ibanoc,20,20));
 
 $ibanoc=$ibanoc1." ".$ibanoc2." ".$ibanoc3." ".$ibanoc4." ".$ibanoc5." ".$ibanoc6;
 

@@ -2026,10 +2026,17 @@ if( $fir_mzdx06 == 0 ) { $fir_mzdx06=31; }
 if( $fir_mzdx06 > 31 ) { $fir_mzdx06=31; }
 $denvyplaty=$fir_mzdx06;
 
-
+if( $kli_vrok <  2016 )
+  {
 if( $denvyplaty == 29 AND $obdobie == 1 ) { $denvyplaty="28"; }
 if( $denvyplaty == 30 AND $obdobie == 1 ) { $denvyplaty="28"; }
 if( $denvyplaty == 31 AND $obdobie == 1 ) { $denvyplaty="28"; }
+  }
+if( $kli_vrok == 2016 )
+  {
+if( $denvyplaty == 30 AND $obdobie == 1 ) { $denvyplaty="29"; }
+if( $denvyplaty == 31 AND $obdobie == 1 ) { $denvyplaty="29"; }
+  }
 if( $denvyplaty == 31 AND $obdobie == 3 ) { $denvyplaty="30"; }
 if( $denvyplaty == 31 AND $obdobie == 5 ) { $denvyplaty="30"; }
 if( $denvyplaty == 31 AND $obdobie == 8 ) { $denvyplaty="30"; }

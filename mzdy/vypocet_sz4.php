@@ -199,7 +199,11 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz4=sz3 WHERE oc > 0 ";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/163 WHERE oc > 0 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/163 WHERE oc > 0 AND oc != 41 AND oc != 19 ";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/119.53 WHERE oc = 41 OR oc = 19 ";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 

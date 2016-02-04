@@ -264,9 +264,11 @@ $hiconm = $fir_fnaz;
 $hicoad1 = trim($fir_fuli);
 $hicoad2 = trim($fir_fpsc." ".$fir_fmes);
 
-$hiconm = iconv("CP1250", "UTF-8", $hiconm);
+//$hiconm = iconv("CP1250", "UTF-8", $hiconm);
 $hiconm = StrTr($hiconm, "徜栾殪腠掘趔鲟鴼濟秊聊认商送家又载缞嵹佘輲",
 "aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+$hiconm=str_replace("&","",$hiconm);
+
 //$hicoad1 = iconv("CP1250", "UTF-8", $hicoad1);
 $hicoad1 = StrTr($hicoad1, "徜栾殪腠掘趔鲟鴼濟秊聊认商送家又载缞嵹佘輲",
 "aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
@@ -464,7 +466,11 @@ $icoad2 = trim($fir_riadok3->psc." ".$fir_riadok3->mes);
 }
   }
 
-$iconm = iconv("CP1250", "UTF-8", $iconm);
+//$iconm = iconv("CP1250", "UTF-8", $iconm);
+$iconm = StrTr($iconm, "徜栾殪腠掘趔鲟鴼濟秊聊认商送家又载缞嵹佘輲",
+"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+$iconm=str_replace("&","",$iconm);
+
 //$icoad1 = iconv("CP1250", "UTF-8", $icoad1);
 //$icoad2 = iconv("CP1250", "UTF-8", $icoad2);
 $icoad1 = StrTr($icoad1, "徜栾殪腠掘趔鲟鴼濟秊聊认商送家又载缞嵹佘輲",
@@ -499,8 +505,14 @@ $ibanxx=strtoupper($ibanxx);
   $text = "  </Id>"."\r\n"; fwrite($soubor, $text);
   $text = " </CdtrAcct>"."\r\n"; fwrite($soubor, $text);
 
+$ustrdxx=trim($hlavickav->twib);
+$ustrdxx = StrTr($ustrdxx, "徜栾殪腠掘趔鲟鴼濟秊聊认商送家又载缞嵹佘輲",
+"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+$ustrdxx=str_replace("&","",$ustrdxx);
+if( $ustrdxx == '' ) { $ustrdxx="info"; }
+
   $text = " <RmtInf>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <Ustrd>Informacia pre prijemcu</Ustrd>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <Ustrd>".$ustrdxx."</Ustrd>"."\r\n"; fwrite($soubor, $text);
   $text = " </RmtInf>"."\r\n"; fwrite($soubor, $text);
 
 
