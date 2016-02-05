@@ -24,6 +24,10 @@ require_once("../pswd/password.php");
   endif;
   mysql_select_db($mysqldb);
 
+//ramcek fpdf 1=zap,0=vyp
+$rmc=1;
+$rmc1=0;
+
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
@@ -32,16 +36,16 @@ $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
 $citfir = include("../cis/citaj_fir.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
 
+//.jpg podklad
+$jpg_cesta="../dokumenty/statistika2016/hlasenie_vyroba/hlasenie_vyroba_v16";
+$jpg_popis="tlaèivo Ohlásenie o objeme výroby ... ".$kli_vrok;
 
 $tlacodpady=1;
 
-if( $_SERVER['SERVER_NAME'] == "www.enposro.sk" ) 
+if ( $_SERVER['SERVER_NAME'] == "www.enposro.sk" )
 { 
-if( $kli_uzid != 17 AND $kli_uzid != 57 AND $kli_uzid != 58 AND $kli_uzid != 141 ) { $tlacodpady=0; }
+if ( $kli_uzid != 17 AND $kli_uzid != 57 AND $kli_uzid != 58 AND $kli_uzid != 141 ) { $tlacodpady=0; }
 }
 
 
@@ -75,7 +79,7 @@ $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resiza
 $tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
-// zmaz,uprav riadok
+//zmaz,uprav riadok
 if ( $copern == 316 )
     {
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
@@ -398,61 +402,59 @@ $k=0;
 $strana=$strana+1;
 
 $pdf->AddPage();
-$pdf->SetFont('arial','',10);
-
-$pdf->SetLeftMargin(8); 
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-
-if (File_Exists ('../dokumenty/vykazy2010/hlaovyrobes1.jpg') )
+if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/vykazy2010/hlaovyrobes1.jpg',1,8,212,290); 
+$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
-
 $pdf->SetY(10);
-$pdf->SetFont('arial','',10);
 
+//Rok
+$pdf->Cell(190,63," ","$rmc1",1,"L");
+$text=$kli_vrok;
+$t01=substr($text,0,1);
+$t02=substr($text,1,1);
+$t03=substr($text,2,1);
+$t04=substr($text,3,1);
+$pdf->Cell(39,6," ","$rmc1",0,"R");
+$pdf->Cell(6,7,"$t01","$rmc",0,"C");$pdf->Cell(5,7,"$t02","$rmc",0,"C");
+$pdf->Cell(5,7,"$t03","$rmc",0,"C");$pdf->Cell(5,7,"$t04","$rmc",1,"C");
 
-//za štvrrok
-$pdf->Cell(190,42,"                          ","0",1,"L");
+//Stvrtrok
+$pdf->Cell(190,0," ","$rmc1",1,"L");
+$text=$stvrtrok;
+$pdf->Cell(55,6," ","$rmc1",0,"R");$pdf->Cell(5,6,"$text","$rmc",1,"C");
 
-$text=$stvrtrok.".".$kli_vrok;
-
-$pdf->Cell(28,6," ","0",0,"R");$pdf->Cell(6,6,"$text","0",1,"L");
-
-
-//list è.:
-$pdf->Cell(190,5,"                          ","0",1,"L");
-
+//List c.
+//dopyt, odsadenie sprava
+$pdf->Cell(190,8," ","$rmc1",1,"L");
 $text="1";
-
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
+$t04=substr($text,3,1);
+$pdf->Cell(40,6," ","$rmc1",0,"R");
+$pdf->Cell(5,6,"$t01","$rmc",0,"R");$pdf->Cell(5,6,"$t02","$rmc",0,"C");
+$pdf->Cell(5,6,"$t03","$rmc",0,"C");$pdf->Cell(5,6,"$t04","$rmc",1,"C");
 
-$pdf->Cell(30,6," ","0",0,"R");$pdf->Cell(5,7,"$t01","0",0,"R");$pdf->Cell(5,7,"$t02","0",0,"C");$pdf->Cell(5,7,"$t03","0",0,"C");
-$pdf->Cell(1,6," ","0",0,"C");
-
-
-//poèet listov:
-$pdf->Cell(190,5,"                          ","0",1,"L");
-
+//Pocet listov
+//dopyt, odsadenie sprava
+$pdf->Cell(190,0," ","$rmc1",1,"L");
 $text=$celkomstran;
-
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
+$pdf->Cell(40,6," ","$rmc1",0,"R");
+$pdf->Cell(5,5,"$t01","$rmc",0,"R");$pdf->Cell(5,5,"$t02","$rmc",0,"C");
+$pdf->Cell(5,5,"$t03","$rmc",0,"C");$pdf->Cell(5,5,"$t04","$rmc",1,"C");
 
-$pdf->Cell(30,6," ","0",0,"R");$pdf->Cell(5,7,"$t01","0",0,"R");$pdf->Cell(5,7,"$t02","0",0,"C");$pdf->Cell(5,7,"$t03","0",0,"C");
-$pdf->Cell(1,6," ","0",0,"C");
-
-
-//ièo
-$pdf->Cell(190,25,"                          ","0",1,"L");
-
+//ORGANIZACIA
+//ICO
+$pdf->Cell(190,11," ","$rmc1",1,"L");
 $text=$fir_fico;
-$textx="12345678";
-if( $text < 999999 ) $text="00".$text;
-
+$textx="12345678"; if ( $text < 999999 ) $text="00".$text;
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -461,188 +463,113 @@ $t05=substr($text,4,1);
 $t06=substr($text,5,1);
 $t07=substr($text,6,1);
 $t08=substr($text,7,1);
+$pdf->Cell(82,6," ","$rmc1",0,"R");
+$pdf->Cell(5,6,"$t01","$rmc",0,"R");$pdf->Cell(5,6,"$t02","$rmc",0,"C");
+$pdf->Cell(5,6,"$t03","$rmc",0,"C");$pdf->Cell(5,6,"$t04","$rmc",0,"C");
+$pdf->Cell(4,6,"$t05","$rmc",0,"R");$pdf->Cell(5,6,"$t06","$rmc",0,"C");
+$pdf->Cell(5,6,"$t07","$rmc",0,"C");$pdf->Cell(5,6,"$t08","$rmc",1,"C");
+$pdf->SetFont('arial','',11);
 
-$pdf->Cell(86,6," ","0",0,"R");$pdf->Cell(5,6,"$t01","0",0,"C");$pdf->Cell(5,6,"$t02","0",0,"C");$pdf->Cell(5,6,"$t03","0",0,"C");
-$pdf->Cell(4,6,"$t04","0",0,"C");$pdf->Cell(5,6,"$t05","0",0,"R");$pdf->Cell(5,6,"$t06","0",0,"C");$pdf->Cell(5,6,"$t07","0",0,"C");
-$pdf->Cell(5,6,"$t08","0",0,"C");$pdf->Cell(5,6," ","0",1,"C");
-
-
-//obchodné meno
-$pdf->Cell(190,5,"                          ","0",1,"L");
-
+//Obchodne meno
+$pdf->Cell(190,2," ","$rmc1",1,"L");
 $text=$fir_fnaz;
+$pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(84,7,"$text","$rmc",0,"L");
 
-$pdf->Cell(14,6," ","0",0,"R");$pdf->Cell(84,7,"$text","0",0,"L");
 
-
-//názov zavodu
 //udaje o zavode a zodpovednej osobe za zavod berie z danoveho priznania PO
-//Umiestnenie stálej prevádzkárne na území Slovenskej republiky (ak nie je sídlo na území SR) 1.strana - tam je adresa prevadzkarne
+//Umiestnenie stálej prevádzkárne na území SR (ak nie je sídlo na území SR) 1.strana - tam je adresa prevadzkarne
 //nazov prevadzkarne je v polozke ulica v tvare "nazov - ulica", podla pomlcky si to rozdeli
-//Osoba oprávnená na podanie daòového priznania za PO 8.strana
-
+//Osoba oprávnená na podanie daòového priznania za PO 10.strana
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_po ";
-
 $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
-
 $pole = explode("-", $fir_riadok->pruli);
 $zav_fnaz=$pole[0];
 $zav_fuli=$pole[1];
-
 $zav_fpsc = $fir_riadok->prpsc;
 $zav_fcdm = $fir_riadok->prcdm;
 $zav_fmes = $fir_riadok->prmes;
-
 $zav_oprie = $fir_riadok->ooprie;
 $zav_omeno = $fir_riadok->oomeno;
 $zav_otitl = $fir_riadok->ootitl;
 $zav_otel = $fir_riadok->ootel;
 $zav_ofax = $fir_riadok->oofax;
 
-$pdf->Cell(2,6,"                          ","0",0,"L");
-
+//Nazov
 $text=$zav_fnaz;
+$pdf->Cell(85,7,"$text","$rmc",1,"L");
+$pdf->SetFont('arial','',10);
 
-$pdf->Cell(1,6," ","0",0,"R");$pdf->Cell(86,7,"$text","0",1,"L");
-
-
-//ulica a èíslo
-$pdf->Cell(190,6,"                          ","0",1,"L");
-
+//Ulica a cislo
+$pdf->Cell(190,4," ","$rmc1",1,"L");
 $text=$fir_fuli." ".$fir_fcdm;
+$pdf->Cell(23,6," ","$rmc1",0,"R");$pdf->Cell(74,4,"$text","$rmc",0,"L");
 
-$pdf->Cell(22,6," ","0",0,"R");$pdf->Cell(75,6,"$text","0",0,"L");
-
-
-//ulica a èíslo závodu
-$pdf->Cell(2,6,"                          ","0",0,"L");
-
+//Ulica a císlo zavodu
 $text=$zav_fuli." ".$zav_fcdm;
+$pdf->Cell(10,6," ","$rmc1",0,"R");$pdf->Cell(75,4,"$text","$rmc",1,"L");
 
-$pdf->Cell(9,6," ","0",0,"R");$pdf->Cell(79,6,"$text","0",1,"L");
-
-
-//obec
-$pdf->Cell(190,-1,"                          ","0",1,"L");
-
+//Obec
 $text=$fir_fmes;
-
-$pdf->Cell(23,6," ","0",0,"R");$pdf->Cell(43,7,"$text","0",0,"L");
-
-
-//psè
-$pdf->Cell(2,6,"                          ","0",0,"L");
-
+$pdf->Cell(190,-1," ","$rmc1",1,"L");
+$pdf->Cell(23,6," ","$rmc1",0,"R");$pdf->Cell(40,7,"$text","$rmc",0,"L");
+//PSC
 $fir_fpsc=str_replace(" ","",$fir_fpsc);
 $text=$fir_fpsc;
+$pdf->Cell(7,6," ","$rmc1",0,"R");$pdf->Cell(27,7,"$text","$rmc",0,"L");
 
-$pdf->Cell(7,6," ","0",0,"R");$pdf->Cell(25,7,"$text","0",0,"L");$pdf->Cell(1,6," ","0",0,"C");
-
-
-//obec závodu
-$pdf->Cell(2,6,"                          ","0",0,"L");
-
+//Obec zavodu
 $text=$zav_fmes;
-
-$pdf->Cell(6,6," ","0",0,"R");$pdf->Cell(43,7,"$text","0",0,"L");
-
-
-//psè závodu
-$pdf->Cell(2,6,"                          ","0",0,"L");
-
+$pdf->Cell(9,6," ","$rmc1",0,"R");$pdf->Cell(42,7,"$text","$rmc",0,"L");
+//PSC zavodu
 $text=$zav_fpsc;
+$pdf->Cell(8,6," ","$rmc1",0,"R");$pdf->Cell(26,7,"$text","$rmc",1,"L");
 
-$pdf->Cell(7,6," ","0",0,"R");$pdf->Cell(25,6,"$text","0",1,"L");
-
-
-//meno štatutára firmy
-$pdf->Cell(190,7,"                          ","0",1,"L");
-
+//Meno a priezvisko statutara
 $text="$fir_uctt05";
+$pdf->Cell(190,3," ","$rmc1",1,"L");
+$pdf->Cell(41,6," ","$rmc1",0,"R");$pdf->Cell(56,4,"$text","$rmc",0,"L");
 
-$pdf->Cell(23,6," ","0",0,"R");$pdf->Cell(74,6,"$text","0",0,"L");
-
-
-//meno zodpovednej osoby zavodu
-$pdf->Cell(2,6,"                          ","0",0,"L");
-
+//Meno a priezvisko zodpovedneho
 $text=$zav_otitl." ".$zav_omeno." ".$zav_oprie;
+$pdf->Cell(28,6," ","$rmc1",0,"R");$pdf->Cell(57,4,"$text","$rmc",1,"L");
 
-$pdf->Cell(10,6," ","0",0,"R");$pdf->Cell(78,6,"$text","0",1,"L");
-
-
-//telefón štatutára firmy
-$pdf->Cell(190,0,"                          ","0",1,"L");
-
+//Telefon statutara
 $text=$fir_ftel;
-
-$pdf->Cell(25,6," ","0",0,"R");$pdf->Cell(40,6,"$text","0",0,"L");
-
-
-//fax štatutára
-$pdf->Cell(2,6,"                          ","0",0,"L");
-
+$pdf->Cell(190,0," ","$rmc1",1,"L");
+$pdf->Cell(25,6," ","$rmc1",0,"R");$pdf->Cell(38,5,"$text","$rmc",0,"L");
+//Fax statutara
 $text=$fir_ffax;
+$pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(28,5,"$text","$rmc",0,"L");
 
-$pdf->Cell(6,6," ","0",0,"R");$pdf->Cell(24,6,"$text","0",0,"L");
-
-
-//telefón zodpovednej osoby zavodu
-$pdf->Cell(2,6,"                          ","0",0,"L");
-
+//Telefon zodpovedneho
 $text=$zav_otel;
-
-$pdf->Cell(12,6," ","0",0,"R");$pdf->Cell(40,6,"$text","0",0,"L");
-
-
-//fax zodpovednej osoby zavodu
-$pdf->Cell(2,6,"                          ","0",0,"L");
-
+$pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(38,5,"$text","$rmc",0,"L");
+//Fax zodpovedneho
 $text=$zav_ofax;
+$text="0457";
+$pdf->Cell(7,6," ","$rmc1",0,"R");$pdf->Cell(27,5,"$text","$rmc",1,"L");
 
-$pdf->Cell(7,6," ","0",0,"R");$pdf->Cell(27,6,"$text","0",1,"L");
-
-
-//email štatúra
+//email statura
 $pdf->SetFont('arial','',8); 
-$pdf->Cell(190,-1,"                          ","0",1,"L");
-
 $text=$fir_fem1;
-
-$pdf->Cell(23,6," ","0",0,"R");$pdf->Cell(43,6,"$text","0",0,"L");
-
-
-//url štatutára
-$pdf->Cell(2,6,"                          ","0",0,"L");
-
+$pdf->Cell(190,-1," ","$rmc1",1,"L");
+$pdf->Cell(23,6," ","$rmc1",0,"R");$pdf->Cell(40,5,"$text","$rmc",0,"L");
+//url statutara
 $text=$fir_fwww;
+$pdf->Cell(8,6," ","$rmc1",0,"R");$pdf->Cell(26,5,"$text","$rmc",0,"L");
 
-$pdf->Cell(6,6," ","0",0,"R");$pdf->Cell(24,6,"$text","0",0,"L");
-
-
-//email zodpovedného zavodu
-$pdf->Cell(2,6,"                          ","0",0,"L");
-
+//email zodpovedneho
 $text="";
-
-$pdf->Cell(10,6," ","0",0,"R");$pdf->Cell(43,6,"$text","0",0,"L");
-
-
-//url zodpovedného zavodu
-$pdf->Cell(2,6,"                          ","0",0,"L");
-
+$pdf->Cell(11,6," ","$rmc1",0,"R");$pdf->Cell(40,5,"$text","$rmc",0,"L");
+//url zodpovedneho
 $text="";
+$pdf->Cell(8,6," ","$rmc1",0,"R");$pdf->Cell(26,5,"$text","$rmc",1,"L");
+$pdf->SetFont('arial','',10);
 
-$pdf->Cell(6,6," ","0",0,"R");$pdf->Cell(25,6,"$text","0",0,"L");
-
-$pdf->SetFont('arial','',10); 
-//dátum podpisu
-$pdf->Cell(190,13,"                          ","0",1,"L");
-
+//datum podpisu
 $text=$h_zos;
 $textx="0123456789";
-
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -653,19 +580,15 @@ $t07=substr($text,6,1);
 $t08=substr($text,7,1);
 $t09=substr($text,8,1);
 $t10=substr($text,9,1);
+$pdf->Cell(190,6," ","$rmc1",1,"L");
+$pdf->Cell(15,6," ","$rmc1",0,"C");$pdf->Cell(5,4,"$t01","$rmc",0,"C");$pdf->Cell(4,4,"$t02","$rmc",0,"C");
+$pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,4,"$t04","$rmc",0,"C");$pdf->Cell(5,4,"$t05","$rmc",0,"C");
+$pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(4,4,"$t07","$rmc",0,"C");$pdf->Cell(4,4,"$t08","$rmc",0,"C");
+$pdf->Cell(4,4,"$t09","$rmc",0,"C");$pdf->Cell(4,4,"$t10","$rmc",0,"C");
 
-$pdf->Cell(14,6," ","0",0,"C");$pdf->Cell(5,6,"$t01","0",0,"C");$pdf->Cell(5,6,"$t02","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"C");$pdf->Cell(5,6,"$t04","0",0,"C");$pdf->Cell(6,6,"$t05","0",0,"L");
-$pdf->Cell(1,6," ","0",0,"C");$pdf->Cell(5,6,"$t07","0",0,"C");$pdf->Cell(5,6,"$t08","0",0,"C");
-$pdf->Cell(5,6,"$t09","0",0,"C");$pdf->Cell(5,6,"$t10","0",0,"C");$pdf->Cell(4,6," ","0",0,"C");
-
-
-//dátum podpisu závodu
-$pdf->Cell(2,6,"                          ","0",0,"L");
-
+//datum podpisu zavodu
 $text=$h_zos;
 $textx="0123456789";
-
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -676,77 +599,72 @@ $t07=substr($text,6,1);
 $t08=substr($text,7,1);
 $t09=substr($text,8,1);
 $t10=substr($text,9,1);
+$pdf->Cell(43,6," ","$rmc1",0,"C");$pdf->Cell(4,4,"$t01","$rmc",0,"C");$pdf->Cell(4,4,"$t02","$rmc",0,"C");
+$pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(4,4,"$t04","$rmc",0,"C");$pdf->Cell(4,4,"$t05","$rmc",0,"C");
+$pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(4,4,"$t07","$rmc",0,"C");$pdf->Cell(4,4,"$t08","$rmc",0,"C");
+$pdf->Cell(4,4,"$t09","$rmc",0,"C");$pdf->Cell(4,4,"$t10","$rmc",1,"C");
 
-$pdf->Cell(36,6," ","0",0,"C");$pdf->Cell(5,6,"$t01","0",0,"C");$pdf->Cell(5,6,"$t02","0",0,"R");
-$pdf->Cell(2,6," ","0",0,"C");$pdf->Cell(5,6,"$t04","0",0,"R");$pdf->Cell(6,6,"$t05","0",0,"C");
-$pdf->Cell(1,6," ","0",0,"C");$pdf->Cell(5,6,"$t07","0",0,"R");$pdf->Cell(5,6,"$t08","0",0,"C");
-$pdf->Cell(5,6,"$t09","0",0,"C");$pdf->Cell(5,6,"$t10","0",0,"C");$pdf->Cell(4,6," ","0",1,"C");
-
-//tab. názov výrobku
-
-$pdf->Cell(190,21,"                          ","0",1,"L");
-$pdf->SetFont('arial','',12);
-$pdf->Cell(45,5," ","0",0,"C");$pdf->Cell(0,7,"$text_komodita","0",1,"L");
-$pdf->Cell(190,13,"                          ","0",1,"L");
-
+//KOMODITY
+//nazov vyrobku
+$pdf->Cell(190,27," ","$rmc1",1,"L");
+$pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(142,4,"$text_komodita","$rmc",1,"L");
+$pdf->Cell(190,27," ","$rmc1",1,"L");
 
 ////////////////////////////////////////KONIEC 1.STRANA DVOJSTRANY prx=1
                               }
 
 $datum = $hlavicka->daz;
-if( $datum == 0 ) $datum="";
+if ( $datum == 0 ) $datum="";
 $vyroba = $hlavicka->vyroba;
 $Cislo=$vyroba+"";
 $vyroba=sprintf("%0.3f", $Cislo);
-if( $vyroba == 0 ) $vyroba="";
+if ( $vyroba == 0 ) $vyroba="";
 $dovoz = $hlavicka->dovoz;
 $Cislo=$dovoz+"";
 $dovoz=sprintf("%0.3f", $Cislo);
-if( $dovoz == 0 ) $dovoz="";
+if ( $dovoz == 0 ) $dovoz="";
 $vyvoz = $hlavicka->vyvoz;
 $Cislo=$vyvoz+"";
 $vyvoz=sprintf("%0.3f", $Cislo);
-if( $vyvoz == 0 ) $vyvoz="";
+if ( $vyvoz == 0 ) $vyvoz="";
 $reexport = $hlavicka->reexport;
 $Cislo=$reexport+"";
 $reexport=sprintf("%0.3f", $Cislo);
-if( $reexport == 0 ) $reexport="";
+if ( $reexport == 0 ) $reexport="";
 
 
 ////////////////////////////////////////ZACIATOK 2.STRANA DVOJSTRANY POLOZKY da sa tam 32 poloziek
-if ( $hlavicka->prx == 10 AND $j > 10)    {
+if ( $hlavicka->prx == 10 AND $j > 10) {
 
-
-
-if( $k == 0 AND $j > 11 )
+if ( $k == 0 AND $j > 11 )
      {
 $strana=$strana+1;
 
-if( $strana > 2 )
+if ( $strana > 2 )
 {
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
-
-$pdf->SetLeftMargin(8); 
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 
-if (File_Exists ('../dokumenty/vykazy2010/hlaovyrobes2.jpg') )
-  {
-$pdf->Image('../dokumenty/vykazy2010/hlaovyrobes2.jpg',3,6,210,294); 
-  }
-
+if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
+}
 $pdf->SetY(10);
 
+//KOMODITY
+//nazov vyrobku
+//dopyt, nie je vyskúšané
+$pdf->Cell(190,9," ","$rmc1",1,"L");
+$pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita","$rmc",0,"L");
+$pdf->Cell(22,5,"List è. $strana","$rmc",1,"L");
 
-//tab. názov výrobku
+$pdf->Cell(190,14," ","$rmc1",1,"L");
 
-$pdf->Cell(190,9,"                          ","0",1,"L");
-$pdf->SetFont('arial','',12);
-$pdf->Cell(50,5," ","0",0,"C");$pdf->Cell(120,7,"$text_komodita","0",0,"L");$pdf->Cell(0,5,"List è. $strana","0",1,"L");
-$pdf->Cell(190,14,"                          ","0",1,"L");
+
 
 }
-
      }
 
 
@@ -782,7 +700,7 @@ $k=$k+1;
 $j = $j + 1;
 
 ////////////////////////////////////////KONIEC 2.STRANA DVOJSTRANY POLOZKY
-                                            }
+                                       }
 
 
 ////////////////////////////////////////ZACIATOK 1.STRANA DVOJSTRANY POLOZKY
@@ -817,29 +735,31 @@ $pdf->Cell(1,3,"                          ","0",0,"L");$pdf->Cell(91,3,"$iconazo
 $pdf->Cell(96,3,"                          ","0",0,"L");$pdf->Cell(91,3,"$mesto","0",1,"L");
 $pdf->Cell(0,1," ","0",1,"L");
 
-if( $j == 10 )
+if ( $j == 10 )
   {
 $strana=$strana+1;
 
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
-
-$pdf->SetLeftMargin(8); 
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-
-if (File_Exists ('../dokumenty/vykazy2010/hlaovyrobes2.jpg') )
-  {
-$pdf->Image('../dokumenty/vykazy2010/hlaovyrobes2.jpg',3,6,210,294); 
-  }
-
+if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
+}
 $pdf->SetY(10);
 
 
-//tab. názov výrobku
-$pdf->Cell(190,9,"                          ","0",1,"L");
-$pdf->SetFont('arial','',12);
-$pdf->Cell(50,5," ","0",0,"C");$pdf->Cell(120,7,"$text_komodita","0",0,"L");$pdf->Cell(0,5,"List è. $strana","0",1,"L");
-$pdf->Cell(190,14,"                          ","0",1,"L");
+//KOMODITY
+//nazov vyrobku
+//dopyt, nevyskúšané
+$pdf->Cell(190,9," ","$rmc1",1,"L");
+$pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita","$rmc",0,"L");
+$pdf->Cell(22,5,"List è. $strana","$rmc",1,"L");
+
+$pdf->Cell(190,14," ","$rmc1",1,"L");
+
+
 
   }
 
@@ -855,32 +775,44 @@ if( $k >= 32 ) { $k=0; }
 ////////////////////////////////////////SPOLU
 if ( $hlavicka->prx == 100   )    {
 
-
-if( $j < 11 )
-  {
+if ( $j < 11 )
+   {
 $strana=$strana+1;
 
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
-
-$pdf->SetLeftMargin(8); 
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 
-if (File_Exists ('../dokumenty/vykazy2010/hlaovyrobes2.jpg') )
-  {
-$pdf->Image('../dokumenty/vykazy2010/hlaovyrobes2.jpg',3,6,210,294); 
-  }
-
+if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
+}
 $pdf->SetY(10);
 
 
-//tab. názov výrobku
-$pdf->Cell(190,9,"                          ","0",1,"L");
-$pdf->SetFont('arial','',12);
-$pdf->Cell(50,5," ","0",0,"C");$pdf->Cell(120,7,"$text_komodita","0",0,"L");$pdf->Cell(0,5,"List è. $strana","0",1,"L");
-$pdf->Cell(190,14,"                          ","0",1,"L");
 
-  }
+
+//$pdf->Image('../dokumenty/vykazy2010/hlaovyrobes2.jpg',3,6,210,294);
+
+
+
+
+
+
+
+
+//KOMODITY
+//nazov vyrobku
+$pdf->Cell(190,9," ","$rmc1",1,"L");
+$pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita","$rmc",0,"L");
+$pdf->Cell(22,4,"List è. $strana","$rmc",1,"L");
+
+$pdf->Cell(190,14," ","$rmc1",1,"L");
+
+
+
+   }
 
 //spolu
 $pdf->SetFont('arial','',9);
@@ -1617,13 +1549,12 @@ document.formv1.hodx.checked = "checked";
 
      }
 
-if( $rsluz->druh == 0 ) $text_druh="VÝROBA";
-if( $rsluz->druh == 1 ) $text_druh="DOVOZ";
-if( $rsluz->druh == 2 ) $text_druh="VÝVOZ";
-if( $rsluz->druh == 3 ) $text_druh="REEXPORT";
+if ( $rsluz->druh == 0 ) $text_druh="VÝROBA";
+if ( $rsluz->druh == 1 ) $text_druh="DOVOZ";
+if ( $rsluz->druh == 2 ) $text_druh="VÝVOZ";
+if ( $rsluz->druh == 3 ) $text_druh="REEXPORT";
 
 $text_komodita=NazovKomodity($rsluz->komodita);
-
 ?>
 
 <tr>
