@@ -578,18 +578,12 @@ $hiconm = $fir_fnaz;
 $hicoad1 = trim($fir_fuli);
 $hicoad2 = trim($fir_fpsc." ".$fir_fmes);
 
-//$hiconm = iconv("CP1250", "UTF-8", $hiconm);
-$hiconm = StrTr($hiconm, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ",
-"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
-$hiconm=str_replace("&","",$hiconm);
-
-
-//$hicoad1 = iconv("CP1250", "UTF-8", $hicoad1);
-$hicoad1 = StrTr($hicoad1, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ",
-"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
-//$hicoad2 = iconv("CP1250", "UTF-8", $hicoad2);
-$hicoad2 = StrTr($hicoad2, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ",
-"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+$hiconm = StrTr($hiconm, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ","aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+$hiconm = StrTr($hiconm, "!@#$%^&*()_+=-[[{};:|<>?§\"\'€„“","                              ");
+$hicoad1 = StrTr($hicoad1, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ","aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+$hicoad1 = StrTr($hicoad1, "!@#$%^&*()_+=-[[{};:|<>?§\"\'€„“","                              ");
+$hicoad2 = StrTr($hicoad2, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ","aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+$hicoad2 = StrTr($hicoad2, "!@#$%^&*()_+=-[[{};:|<>?§\"\'€„“","                              ");
 
   $text = "  <Nm>".$hiconm."</Nm>"."\r\n"; fwrite($soubor, $text);
 
@@ -798,16 +792,12 @@ $icoad2 = trim($fir_riadok3->psc." ".$fir_riadok3->mes);
 }
   }
 
-//$iconm = iconv("CP1250", "UTF-8", $iconm);
-$iconm = StrTr($iconm, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ",
-"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
-$iconm=str_replace("&","",$iconm);
-//$icoad1 = iconv("CP1250", "UTF-8", $icoad1);
-//$icoad2 = iconv("CP1250", "UTF-8", $icoad2);
-$icoad1 = StrTr($icoad1, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ",
-"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
-$icoad2 = StrTr($icoad2, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ",
-"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+$iconm = StrTr($iconm, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ","aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+$iconm = StrTr($iconm, "!@#$%^&*()_+=-[[{};:|<>?§\"\'€„“","                              ");
+$icoad1 = StrTr($icoad1, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ","aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+$icoad2 = StrTr($icoad2, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ","aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+$icoad1 = StrTr($icoad1, "!@#$%^&*()_+=-[[{};:|<>?§\"\'€„“","                              ");
+$icoad2 = StrTr($icoad2, "!@#$%^&*()_+=-[[{};:|<>?§\"\'€„“","                              ");
 
 if( $iconm == '' ) { $iconm="Prijemca Nazov"; }
 if( $icoad1 == '' ) { $icoad1="Ulica"; }
@@ -853,9 +843,8 @@ $ibanxx=strtoupper($ibanxx);
   $text = " </Purp>"."\r\n"; fwrite($soubor, $text);
 
 $ustrdxx=trim($hlavickav->twib);
-$ustrdxx = StrTr($ustrdxx, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ",
-"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
-$ustrdxx=str_replace("&","",$ustrdxx);
+$ustrdxx = StrTr($ustrdxx, "áäèïéìëí¾òôóöàøšúùüýžÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜÝŽ","aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+$ustrdxx = StrTr($ustrdxx, "!@#$%^&*()_+=-[[{};:|<>?§\"\'€„“","                              ");
 if( $ustrdxx == '' ) { $ustrdxx="info"; }
 
   $text = " <RmtInf>"."\r\n"; fwrite($soubor, $text);

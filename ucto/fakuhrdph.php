@@ -49,7 +49,7 @@ $h_dausql=SqlDatum($h_dau);
 $h_dppsql=SqlDatum($h_dpp); 
 
 //datova tabulka
-$sql = "SELECT dppx FROM F$kli_vxcf"."_uctfakuhrdph ";
+$sql = "SELECT druh FROM F$kli_vxcf"."_uctfakuhrdph ";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -61,6 +61,7 @@ $sqlt = <<<banvyp
 (
    cpld        int not null auto_increment,
    dok         DECIMAL(10,0) DEFAULT 0,
+   druh        DECIMAL(10,0) DEFAULT 0,
    dppx        DECIMAL(2,0) DEFAULT 0,
    prx7        DECIMAL(4,0) DEFAULT 0,
    PRIMARY KEY(cpld)
@@ -111,8 +112,8 @@ $prepocty=0;
 if ( $copern == 15 )
     {
 
-$ulozttt = " INSERT INTO F$kli_vxcf"."_uctfakuhrdph ( dok,dppx,dou,dau,dpp,hou,hz1,hd1,hz2,hd2 ) ".
-" VALUES ( '$cislo_dok', '$h_dppx', '$h_dou', '$h_dausql', '$h_dppsql', '$h_hou', '$h_hz1', '$h_hd1', '$h_hz2', '$h_hd2' ) "; 
+$ulozttt = " INSERT INTO F$kli_vxcf"."_uctfakuhrdph ( dok,druh,dppx,dou,dau,dpp,hou,hz1,hd1,hz2,hd2 ) ".
+" VALUES ( '$cislo_dok', '$drupoh', '$h_dppx', '$h_dou', '$h_dausql', '$h_dppsql', '$h_hou', '$h_hz1', '$h_hd1', '$h_hz2', '$h_hd2' ) "; 
 $ulozene = mysql_query("$ulozttt"); 
 //echo $ulozttt;
 

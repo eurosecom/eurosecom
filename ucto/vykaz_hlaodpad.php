@@ -405,7 +405,7 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str1.jpg'))
 {
 $pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
@@ -647,7 +647,7 @@ $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 
-if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str2.jpg'))
 {
 $pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 }
@@ -743,7 +743,7 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str2.jpg'))
 {
 $pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 }
@@ -784,7 +784,7 @@ $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 
-if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str2.jpg'))
 {
 $pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 }
