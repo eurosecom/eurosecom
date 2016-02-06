@@ -71,7 +71,7 @@ $sql = "DELETE FROM F".$kli_vxcf."_uctfakuhrdph WHERE dok = $cislo_dok AND prx7 
 $vysledek = mysql_query("$sql");
 
 
-$sql = "INSERT INTO F".$kli_vxcf."_uctfakuhrdph ( dok, dppx, prx7 ) VALUES ( '$cislo_dok', '$dppx', 1 ) ";
+$sql = "INSERT INTO F".$kli_vxcf."_uctfakuhrdph ( dok, druh, dppx, prx7 ) VALUES ( '$cislo_dok', '$drupoh', '$dppx', 1 ) ";
 if( $dppx == 1 ) { $vysledek = mysql_query("$sql"); }
 
 

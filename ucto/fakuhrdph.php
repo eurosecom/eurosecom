@@ -97,50 +97,14 @@ $vysledek = mysql_query("$sql");
 
 }
 
-//nacitaj uhrady
-if ( $copern == 1001 OR $copern == 1002 )
-    {
 
-
-    }
-//koniec nacitaj uhrady
-
-$cplda=0;
-$prepocty=0;
-
-//ulozenie novej
-if ( $copern == 15 )
-    {
-
-$ulozttt = " INSERT INTO F$kli_vxcf"."_uctfakuhrdph ( dok,druh,dppx,dou,dau,dpp,hou,hz1,hd1,hz2,hd2 ) ".
-" VALUES ( '$cislo_dok', '$drupoh', '$h_dppx', '$h_dou', '$h_dausql', '$h_dppsql', '$h_hou', '$h_hz1', '$h_hd1', '$h_hz2', '$h_hd2' ) "; 
-$ulozene = mysql_query("$ulozttt"); 
-//echo $ulozttt;
-
-$cplda=0;
-$sqltt = "SELECT * FROM F$kli_vxcf"."_uctfakuhrdph WHERE cpld > 0 ORDER BY cpld DESC ";
-$sql = mysql_query("$sqltt"); 
-  if (@$zaznam=mysql_data_seek($sql,0))
-  {
-  $riadok=mysql_fetch_object($sql);
-  $cplda=1*$riadok->cpld;
-
-  }
-
-$prepocty=1;
-
-$copern=1;
-
-    }
-//koniec ulozenia
-
-
-//urob prepocty
-if( $prepocty == 1 ) 
-{
+//funkcia
+function urob_prepocet( $faktury, $kli_vxcf, $cislo_dok, $cplda )
+         {
 
 $zk2a=0; $dn2a=0; $zk1a=0; $dn1a=0; $hoda=0;
 $sqltt = "SELECT * FROM F$kli_vxcf"."_uctfakuhrdph WHERE dok = $cislo_dok AND cpld = $cplda ";
+//echo $sqltt."<br />";
 $sql = mysql_query("$sqltt"); 
   if (@$zaznam=mysql_data_seek($sql,0))
   {
@@ -152,8 +116,12 @@ $sql = mysql_query("$sqltt");
   $hoda=1*$riadok->hou;
   }
 
+//echo "zk2a ".$zk2a."<br />";
+
+
 $zk2s=0; $dn2s=0; $zk1s=0; $dn1s=0; $hods=0;
 $sqltt = "SELECT SUM(hz2) AS hz2s, SUM(hd2) AS hd2s, SUM(hz1) AS hz1s, SUM(hd1) AS hd1s, SUM(hou) AS hous FROM F$kli_vxcf"."_uctfakuhrdph WHERE dok = $cislo_dok ";
+//echo $sqltt."<br />";
 $sql = mysql_query("$sqltt"); 
   if (@$zaznam=mysql_data_seek($sql,0))
   {
@@ -165,9 +133,11 @@ $sql = mysql_query("$sqltt");
   $hods=1*$riadok->hous;
   }
 
+//echo "zk2s ".$zk2s."<br />";
 
 $zk2f=0; $dn2f=0; $zk1f=0; $dn1f=0; $hodf=0;
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$faktury WHERE dok = $cislo_dok ";
+//echo $sqltt."<br />";
 $sql = mysql_query("$sqltt"); 
   if (@$zaznam=mysql_data_seek($sql,0))
   {
@@ -178,6 +148,8 @@ $sql = mysql_query("$sqltt");
   $dn1f=1*$riadok->dn1u;
   $hodf=1*$riadok->hodu;
   }
+
+//echo "zk2f ".$zk2f."<br />";
 
 $koef=$hoda/$hodf;
 if( $koef > 1 ) { $koef=1; }
@@ -250,12 +222,212 @@ $sqltt = "UPDATE F$kli_vxcf"."_uctfakuhrdph SET hd1=hd1-($dn1s-$dn1f) WHERE dok 
 $sql = mysql_query("$sqltt"); 
  }
 
+         }
+//koniec funkcie
+
+
+
+//nacitaj uhrady
+if ( $copern == 1001 OR $copern == 1002 )
+    {
+$copernplus=$copern+1000;
+$textx=" do dokladu Ë.".$cislo_dok." za obdobie ".$kli_vume;
+if( $copern == 1002 ) { $textx=" do vöetk˝ch dokladov za obdobie ".$kli_vume; }
+?>
+<script type="text/javascript">
+if ( !confirm ("Chcete naËÌtaù platby pre uplatnenie DPH <?php echo $textx; ?> ?") )
+         { location.href='fakuhrdph.php?copern=1&drupoh=<?php echo $drupoh; ?>&cislo_dok=<?php echo $cislo_dok; ?>' }
+else
+         { location.href='fakuhrdph.php?copern=<?php echo $copernplus; ?>&drupoh=<?php echo $drupoh; ?>&cislo_dok=<?php echo $cislo_dok; ?>' }
+</script>
+<?php                    }
+
+    if ( $copern == 2001 OR $copern == 2002 )
+    {
+
+$sqltt = "SELECT * FROM kalendar WHERE ume = $kli_vume ORDER BY dat LIMIT 1";
+$sql = mysql_query("$sqltt"); 
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $datp_dph=$riadok->dat;
+  }
+
+$sqltt = "SELECT * FROM kalendar WHERE ume = $kli_vume ORDER BY dat DESC LIMIT 1";
+$sql = mysql_query("$sqltt"); 
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $datk_dph=$riadok->dat;
+  }
+
+$sql = "DROP TABLE F".$kli_vxcf."_uctfakuhradydph".$kli_uzid;
+$vysledek = mysql_query("$sql");
+
+$sqlt = <<<banvyp
+(
+   cpld        int not null auto_increment,
+   dok         DECIMAL(10,0) DEFAULT 0,
+   dru         DECIMAL(10,0) DEFAULT 0,
+   ddu         DATE not null,
+   ico         DECIMAL(10,0) DEFAULT 0,
+   fak         DECIMAL(10,0) DEFAULT 0,
+   hou         DECIMAL(10,2) DEFAULT 0,
+   knx         DECIMAL(4,0) DEFAULT 0,
+   PRIMARY KEY(cpld)
+);
+banvyp;
+
+$sql = "CREATE TABLE F".$kli_vxcf."_uctfakuhradydph".$kli_uzid." ".$sqlt;
+$vysledek = mysql_query("$sql");
+
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctfakuhradydph$kli_uzid"." SELECT".
+" 0,F$kli_vxcf"."_uctban.dok,1,F$kli_vxcf"."_uctban.ddu,F$kli_vxcf"."_uctban.ico,F$kli_vxcf"."_uctban.fak,F$kli_vxcf"."_uctban.hod,0 ".
+" FROM F$kli_vxcf"."_uctban,F$kli_vxcf"."_banvyp ".
+" WHERE F$kli_vxcf"."_uctban.dok=F$kli_vxcf"."_banvyp.dok ".
+" AND F$kli_vxcf"."_uctban.ico != $fir_fico AND F$kli_vxcf"."_uctban.ico > 0 AND LEFT(ucd,2) = 31 ".
+" AND F$kli_vxcf"."_uctban.ddu >= '$datp_dph' AND F$kli_vxcf"."_uctban.ddu <= '$datk_dph' ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctfakuhradydph$kli_uzid"." SELECT".
+" 0,F$kli_vxcf"."_uctpokuct.dok,1,F$kli_vxcf"."_pokpri.dat,F$kli_vxcf"."_uctpokuct.ico,F$kli_vxcf"."_uctpokuct.fak,F$kli_vxcf"."_uctpokuct.hod,0 ".
+" FROM F$kli_vxcf"."_uctpokuct,F$kli_vxcf"."_pokpri ".
+" WHERE F$kli_vxcf"."_uctpokuct.dok=F$kli_vxcf"."_pokpri.dok ".
+" AND F$kli_vxcf"."_uctpokuct.ico != $fir_fico AND F$kli_vxcf"."_uctpokuct.ico > 0 AND LEFT(ucd,2) = 31 ".
+" AND F$kli_vxcf"."_pokpri.dat >= '$datp_dph' AND F$kli_vxcf"."_pokpri.dat <= '$datk_dph' ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctfakuhradydph$kli_uzid"." SELECT ".
+" 0,F$kli_vxcf"."_uctban.dok,2,F$kli_vxcf"."_uctban.ddu,F$kli_vxcf"."_uctban.ico,F$kli_vxcf"."_uctban.fak,F$kli_vxcf"."_uctban.hod,0 ".
+" FROM F$kli_vxcf"."_uctban,F$kli_vxcf"."_banvyp ".
+" WHERE F$kli_vxcf"."_uctban.dok=F$kli_vxcf"."_banvyp.dok ".
+" AND F$kli_vxcf"."_uctban.ico != $fir_fico AND F$kli_vxcf"."_uctban.ico > 0 AND LEFT(ucm,2) = 32 ".
+" AND F$kli_vxcf"."_uctban.ddu >= '$datp_dph' AND F$kli_vxcf"."_uctban.ddu <= '$datk_dph' ";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctfakuhradydph$kli_uzid"." SELECT ".
+" 0,F$kli_vxcf"."_uctpokuct.dok,2,F$kli_vxcf"."_pokvyd.dat,F$kli_vxcf"."_uctpokuct.ico,F$kli_vxcf"."_uctpokuct.fak,F$kli_vxcf"."_uctpokuct.hod,0 ".
+" FROM F$kli_vxcf"."_uctpokuct,F$kli_vxcf"."_pokvyd ".
+" WHERE F$kli_vxcf"."_uctpokuct.dok=F$kli_vxcf"."_pokvyd.dok ".
+" AND F$kli_vxcf"."_uctpokuct.ico != $fir_fico AND F$kli_vxcf"."_uctpokuct.ico > 0 AND LEFT(ucm,2) = 32 ".
+" AND F$kli_vxcf"."_pokvyd.dat >= '$datp_dph' AND F$kli_vxcf"."_pokvyd.dat <= '$datk_dph' ";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctfakuhradydph$kli_uzid"." SELECT ".
+" 0,dok,dru,max(ddu),ico,fak,SUM(hou),9 ".
+" FROM F$kli_vxcf"."_uctfakuhradydph$kli_uzid ".
+" WHERE dok > 0 GROUP BY dru,dok,ico,fak ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_uctfakuhradydph$kli_uzid"." WHERE knx != 9 ";
+$dsql = mysql_query("$dsqlt");
+
+$podmdok=" AND dok = ".$cislo_dok;
+if( $copern == 2002 ) { $podmdok=""; }
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctfakuhrdph WHERE prx7 = 1 $podmdok ORDER BY dok";
+//echo $sqltt."<br />";
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+$i11=0;
+  while ($i11 <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i11))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+$tfaktury="fakdod";
+$druhuhrady=2;
+if( $hlavicka->druh == 1 ) { $tfaktury="fakodb"; $druhuhrady=1; }
+
+$sqldot = "SELECT * FROM F$kli_vxcf"."_".$tfaktury." WHERE dok = $hlavicka->dok ";
+//echo $sqldot."<br />";
+$sqldok = mysql_query("$sqldot");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $icof=$riaddok->ico;
+  $fakf=$riaddok->fak;
+  }
+
+
+$sqldot12 = "SELECT * FROM F$kli_vxcf"."_uctfakuhradydph$kli_uzid WHERE ico = $icof AND fak = $fakf AND hou != 0 AND dru = $druhuhrady ";
+//echo $sqldot12."<br />";
+$sql12 = mysql_query("$sqldot12");
+$pol12 = mysql_num_rows($sql12);
+$i12=0;
+    while ($i12 <= $pol12 )
+    {
+    if (@$zaznam=mysql_data_seek($sql12,$i12))
+  {
+  $hlavicka12=mysql_fetch_object($sql12);
+
+$ulozttt = "DELETE FROM F$kli_vxcf"."_uctfakuhrdph WHERE dok = $hlavicka->dok AND dou = $hlavicka12->dok ";
+$ulozene = mysql_query("$ulozttt");
+
+$ulozttt = "INSERT INTO F$kli_vxcf"."_uctfakuhrdph ( dok,druh,dppx,dou,dau,dpp,hou,hz1,hd1,hz2,hd2 ) ".
+" VALUES ( '$hlavicka->dok', '$hlavicka12->dru', '0', '$hlavicka12->dok', '$hlavicka12->ddu', '$hlavicka12->ddu', '$hlavicka12->hou', '0', '0', '0', '0' ) "; 
+$ulozene = mysql_query("$ulozttt"); 
+
+$cpldax=0;
+$sqlttu = "SELECT * FROM F$kli_vxcf"."_uctfakuhrdph WHERE cpld > 0 ORDER BY cpld DESC ";
+$sqlu = mysql_query("$sqlttu"); 
+  if (@$zaznam=mysql_data_seek($sqlu,0))
+  {
+  $riadoku=mysql_fetch_object($sqlu);
+  $cpldax=1*$riadoku->cpld;
+
+  }
+
+urob_prepocet( $tfaktury, $kli_vxcf, $hlavicka->dok, $cpldax );
+
+  }
+  $i12 = $i12 + 1;
+    }
+
+
 
 }
-//koniec urob prepocty
+$i11 = $i11 + 1;
+  }
 
+$copern=1;
+    }
+//koniec nacitaj uhrady
 
+$cplda=0;
+$prepocty=0;
 
+//ulozenie novej
+if ( $copern == 15 )
+    {
+
+if( $h_dppsql == '0000-00-00' ) { $h_dppsql=$h_dausql; }
+
+$ulozttt = " INSERT INTO F$kli_vxcf"."_uctfakuhrdph ( dok,druh,dppx,dou,dau,dpp,hou,hz1,hd1,hz2,hd2 ) ".
+" VALUES ( '$cislo_dok', '$drupoh', '$h_dppx', '$h_dou', '$h_dausql', '$h_dppsql', '$h_hou', '$h_hz1', '$h_hd1', '$h_hz2', '$h_hd2' ) "; 
+$ulozene = mysql_query("$ulozttt"); 
+//echo $ulozttt;
+
+$cplda=0;
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctfakuhrdph WHERE cpld > 0 ORDER BY cpld DESC ";
+$sql = mysql_query("$sqltt"); 
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $cplda=1*$riadok->cpld;
+
+  }
+
+urob_prepocet( $faktury, $kli_vxcf, $cislo_dok, $cplda );
+
+$copern=1;
+
+    }
+//koniec ulozenia
 
 
 //vymazanie a uprava
@@ -462,6 +634,13 @@ function TovarFakAll()
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
+function TZoznamDPHPRP()
+                {
+
+window.open('../ucto/prijplat_dph.php?fir_uctx01=1&copern=40&drupoh=2&page=1&typ=PDF&zdrd=11', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+
+                }
+
   </script>
 </HEAD>
 <BODY class="white" onload="ObnovUI();" >
@@ -469,7 +648,13 @@ function TovarFakAll()
 
 <table class="h2" width="100%" >
 <tr>
-<td>EuroSecom  -  ⁄hrady dokladu ËÌslo <?php echo $cislo_dok; ?> pre OdpoËet a uplatnenie DPH aû po prijatÌ platby</td>
+<td>EuroSecom  -  ⁄hrady dokladu ËÌslo <?php echo $cislo_dok; ?> pre OdpoËet a uplatnenie DPH aû po prijatÌ platby
+
+ <a href="#" onClick="TZoznamDPHPRP();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="VytlaËiù Zoznam prijat˝ch platieb pre uplatnenie DPH vo form·te PDF" ></a>
+
+
+</td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
 </table>
