@@ -298,6 +298,15 @@ window.open('../ucto/prizdph<?php echo $rokdph; ?>.php?fir_uctx01=' + fir_uctx01
 
                 }
 
+
+function TZoznamDPHPRP()
+                {
+var fir_uctx01 = document.forms.formg1.fir_uctx01.value;
+
+window.open('../ucto/prijplat_dph.php?fir_uctx01=' + fir_uctx01 + '&copern=40&drupoh=2&page=1&typ=PDF&zdrd=11', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+
+                }
+
   function SynGenSuv()
   { 
 
@@ -1081,12 +1090,20 @@ window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlaèi Zoznam dokladov po riadkoch DPH vo formáte HTML' ></a>
 </td>
 </td>
-<td class="bmenu" width="62%">Daò z pridanej hodnoty - Zoznamy dokladov a chybové hlásenia v.<?php echo $kli_vrok; ?>
+<td class="bmenu" width="54%">Daò z pridanej hodnoty - Zoznamy dokladov a chybové hlásenia v.<?php echo $kli_vrok; ?>
 <select size="1" name="fir_uctx01" id="fir_uctx01" >
 <option value="1" >Mesaènı</option>
 <option value="2" >Štvrroènı</option>
 <option value="4" >Roèné</option>
 </select>
+</td>
+
+<td class="bmenu" align="right" width="8%">
+<?php if( $fir_xvr05 != 2 AND $kli_vrok >= 2016 ) { ?>
+PRP
+<a href="#" onClick="TZoznamDPHPRP();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi Zoznam prijatıch platieb pre uplatnenie DPH vo formáte PDF" ></a>
+<?php                                             } ?>
 </td>
 
 <td class="bmenu" align="right" width="8%">FKT
@@ -1457,6 +1474,7 @@ if( $kli_vrok < 2013 ) { $jedrok=""; }
 <select size="1" name="fir_uctx01" id="fir_uctx01" >
 <option value="1" >Mesaèné</option>
 <option value="2" >Štvrroèné</option>
+<option value="4" >Roèné</option>
 </select>
 <a href="#" onClick="TlacPotvrdDPH();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi potvrdenie o podaní daòového priznania DPH vo formáte PDF" ></a>
