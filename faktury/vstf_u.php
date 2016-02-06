@@ -4961,6 +4961,51 @@ window.open('fak_setulozdak.php?cislo_dok=<?php echo $cislo_dok; ?>&dak=' + dak 
 ?>
 
 <?php
+//nastavenie datumu do kvdph
+if ( $copern == 7 AND $sysx == 'UCT' )
+     {
+$textdpp=0;
+$sql = mysql_query("SELECT * FROM F".$kli_vxcf."_uctfakuhrdph WHERE dok = $cislo_dok AND prx7 = 1 ");
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $textdpp=$riadok->dppx;
+  }
+?>
+<div id="nastavdppx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 200px; left: 10px; width:600px; height:100px;">
+<table  class='ponuka' width='100%'>
+<tr><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td></tr>
+
+<tr><td colspan='3'>Nastavenie Odpoètu a uplatnenia DPH až po prijatí platby</td>
+<td colspan='2' align='right'><img border=0 src='../obr/zmazuplne.png' style="width:10; height:10;" onClick="nastavdppx.style.display='none';" title='Zhasni' ></td></tr>  
+                    
+<tr><FORM name='enastdpp' method='post' action='#' >
+<td class='ponuka' colspan='5'> 
+ Odpoèet a uplatnenie DPH až po prijatí platby <input type="checkbox" name="dppx" value="1" />
+ <img border=0 src='../obr/ok.png' style="width:10; height:10;" onClick="NacitajDpp();" title='Ulož nastavenie Odpoètu a uplatnenia DPH až po prijatí platby' > 
+<?php if ( $textdpp == 1 )       { ?>
+ <script type="text/javascript">document.enastdpp.dppx.checked = "checked";</script>
+<?php                            } ?>
+</td></tr> 
+</FORM></table>
+</div>
+<script type="text/javascript">
+
+//zapis nastavenie
+function NacitajDpp()
+                {
+var dppx = 0;
+if( document.enastdpp.dppx.checked ) dppx=1;
+
+window.open('fak_setulozdpp.php?cislo_dok=<?php echo $cislo_dok; ?>&drupoh=<?php echo $drupoh; ?>&dppx=' + dppx + '&copern=900', '_self' );
+                }
+
+</script>
+<?php
+     }
+?>
+
+<?php
 //nastavenie cudzej meny na doklade
 //echo $copern;
 if ( $copern == 7 AND ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 31 ) )
@@ -6239,11 +6284,32 @@ if ( $copern != 6 AND $copern != 87 AND $copern != 8 )
 </tr>
 
 <?php if( $drupoh != 2 ) { ?>
-<tr><td class="pvstup" >&nbsp;Dátum dodania:</td><td class="hvstup"><?php echo $riadok->daz; ?></td></tr>
+<tr><td class="pvstup" >&nbsp;Dátum dodania:</td><td class="hvstup"><?php echo $riadok->daz; ?></td>
 <?php                    } ?>
 <?php if( $drupoh == 2 ) { ?>
-<tr><td class="pvstup" >&nbsp;Dátum dodania - odpoètu:</td><td class="hvstup"><?php echo SkDatum($riadok->sz4); ?> - <?php echo $riadok->daz; ?></td></tr>
+<tr><td class="pvstup" >&nbsp;Dátum dodania - odpoètu:</td><td class="hvstup"><?php echo SkDatum($riadok->sz4); ?> - <?php echo $riadok->daz; ?></td>
 <?php                    } ?>
+<?php
+//echo $copern;
+if ( $copern == 7 AND $sysx == 'UCT' AND $kli_vrok >= 2016 )
+     {
+$textdpp=0;
+$sql = mysql_query("SELECT * FROM F".$kli_vxcf."_uctfakuhrdph WHERE dok = $cislo_dok AND prx7 = 1 ");
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $textdpp=$riadok->dppx;
+  }
+?>
+<td class="pvstup">
+<img src='../obr/icon_calendar.png' onClick="nastavdppx.style.display=''; volajDppset(<?php echo $kli_uzid;?>);" width=13 height=9 border=0 title="Odpoèet a uplatnenie DPH až po prijatí platby 0=nie, 1=áno" ></a>
+<?php echo $textdpp; ?>
+</td>
+<?php
+     }
+?>
+
+</tr>
 
 <tr>
 <td class="pvstup" >&nbsp;Dátum splatnosti:</td>
@@ -6257,7 +6323,7 @@ $textdak="kvdph";
 if( $dak_set != '' AND $dak_set != '00.00.0000' ) { $textdak=$dak_set; }
 ?>
 <td class="pvstup">
-<img src='../obr/icon_calendar.png' onClick="nastavdakx.style.display=''; volajDakset(<?php echo $kli_uzid;?>);" width=15 height=15 border=0 title="Dátum zaradenia do KV DPH, ak je iný ako dátum odpoètu" ></a>
+<img src='../obr/icon_calendar.png' onClick="nastavdakx.style.display=''; volajDakset(<?php echo $kli_uzid;?>);" width=12 height=9 border=0 title="Dátum zaradenia do KV DPH, ak je iný ako dátum odpoètu" ></a>
 <?php echo $textdak; ?>
 </td>
 <?php

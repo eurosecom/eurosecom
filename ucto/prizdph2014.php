@@ -591,6 +591,7 @@ $dsql = mysql_query("$dsqlt");
 $psys=$psys+1;
   }
 
+//exit;
 
 //ak je jednoduche daj prec uce 34399 rdp 1
 if( $kli_vduj == 9 )
@@ -603,7 +604,267 @@ $oznac = mysql_query("$sqtoz");
 
 }
 
+if( $fir_xvr05 != 2 AND $kli_vrok >= 2016 ) { 
+//tu musim upravit podla prijatych platieb ak dppx=1
+//1. dam prec ak dppx=1 a nema uhrady v tomto obdobi
+//2. nastavim daz na datum prijatia platby ak dppx=1 a ma uhrady v tomto obdobi ( pred tym suma uhrad )
+//3. pridam dppx=1 ak daz je z minulych obdobi a nastavim daz na datum prijatia platby ( pred tym suma uhrad )
 
+$sqltt = "DROP TABLE F$kli_vxcf"."_uctfakuhrdphs".$kli_uzid." ";
+$sql = mysql_query("$sqltt");
+
+$sqltt = "CREATE TABLE F$kli_vxcf"."_uctfakuhrdphs".$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctfakuhrdph WHERE prx7 = 0 AND dpp >= '$datp_dph' AND dpp <= '$datk_dph' ";
+$sql = mysql_query("$sqltt");
+
+//cpld	dok	druh	dppx	prx7	dou	dpp	dau	hd2	hz2	hd1	hz1	hou
+
+$sqltt = "INSERT INTO F$kli_vxcf"."_uctfakuhrdphs$kli_uzid SELECT ".
+" 0,dok,druh,dppx,9,dou,MAX(dpp),dau,SUM(hd2),SUM(hz2),SUM(hd1),SUM(hz1),SUM(hou) ".
+" FROM F$kli_vxcf"."_uctfakuhrdphs$kli_uzid WHERE prx7 = 0 GROUP BY dok ";
+$sql = mysql_query("$sqltt");
+
+$sqltt = "DELETE FROM F$kli_vxcf"."_uctfakuhrdphs$kli_uzid WHERE prx7 != 9 ";
+$sql = mysql_query("$sqltt");
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctfakuhrdph WHERE prx7 = 1 ORDER BY dok";
+//echo $sqltt."<br />";
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+$i11=0;
+  while ($i11 <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i11))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+//echo $hlavicka->dok."<br />";
+
+$mapp=0; $druhpp=0; $hz2pp=0; $hd2pp=0; $hz1pp=0; $hd1pp=0; 
+$sqldot = "SELECT * FROM F$kli_vxcf"."_uctfakuhrdphs$kli_uzid WHERE prx7 = 9 AND dok = $hlavicka->dok ORDER BY dok";
+$sqldok = mysql_query("$sqldot");
+$poldok = 1*mysql_num_rows($sqldok);
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $mapp=1;
+  $druhpp=1*$riaddok->druh;
+  $hz2pp=1*$riaddok->hz2;
+  $hd2pp=1*$riaddok->hd2;
+  $hz1pp=1*$riaddok->hz1;
+  $hd1pp=1*$riaddok->hd1;
+  $dpppp=$riaddok->dpp;
+  }
+
+//echo $hlavicka->dok." druh ".$druhpp." mapp ".$mapp." hz2 ".$hz2pp." hd2 ".$hd2pp."<br />";
+
+if( $mapp == 0 )
+  {
+$sqlttd = "DELETE FROM F$kli_vxcf"."_prcprizdphs$kli_uzid WHERE dok = $hlavicka->dok ";
+$sqld = mysql_query("$sqlttd");
+  }
+
+
+
+if( $mapp == 1 )
+  {
+$ume=$kli_vume;
+
+if( $druhpp == 2 )
+      {
+$psysx=16;
+$rdp=25; $rdp10=30;
+//echo "idem druhpp 2"."<br />";
+
+$sqldot = "SELECT * FROM F$kli_vxcf"."_uctdod WHERE dok = $hlavicka->dok AND rdp = 25 AND LEFT(ucm,3) != 343 ";
+$sqldok = mysql_query("$sqldot");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $fak=1*$riaddok->fak;
+  $ico=1*$riaddok->ico;
+  $ucmz=$riaddok->ucm;
+  $ucd=$riaddok->ucd;
+  }
+$sqldot = "SELECT * FROM F$kli_vxcf"."_uctdod WHERE dok = $hlavicka->dok AND rdp = 25 AND LEFT(ucm,3) = 343 ";
+$sqldok = mysql_query("$sqldot");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $ucmd=$riaddok->ucm;
+  }
+
+$sqlttd = "DELETE FROM F$kli_vxcf"."_prcprizdphs$kli_uzid WHERE dok = $hlavicka->dok AND rdp = $rdp ";
+$sqld = mysql_query("$sqlttd");
+
+$sqltti = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid ".
+" ( er1, er2, er3, er4, zk0, zk1, zk2, dn1, dn2, ume, dat, daz, psys, r01, r02, r03, r04, r05, r06, r07, r08, r09, r10, ".
+" hod, rdp, rdk, xrz, xrd, xsz, ucm, ucd, ico, fak, dok, ".
+" r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35, r36, r37, r38, fic ) ".
+" VALUES ( 0, 0, 0, 0, 0, 0, 0, 0, 0, '$ume', '$dpppp', '$dpppp', '$psysx', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ".
+" '$hz2pp', '$rdp', 0, 0, 0, 0, '$ucmz', '$ucd', '$ico', '$fak', '$hlavicka->dok', ".
+" 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '$fir_fico' )";
+//echo $sqltti."<br />";
+if( $hz2pp != 0 ) {  $sqli = mysql_query("$sqltti"); }
+
+$sqltti = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid ".
+" ( er1, er2, er3, er4, zk0, zk1, zk2, dn1, dn2, ume, dat, daz, psys, r01, r02, r03, r04, r05, r06, r07, r08, r09, r10, ".
+" hod, rdp, rdk, xrz, xrd, xsz, ucm, ucd, ico, fak, dok, ".
+" r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35, r36, r37, r38, fic ) ".
+" VALUES ( 0, 0, 0, 0, 0, 0, 0, 0, 0, '$ume', '$dpppp', '$dpppp', '$psysx', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ".
+" '$hd2pp', '$rdp', 0, 0, 0, 0, '$ucmd', '$ucd', '$ico', '$fak', '$hlavicka->dok', ".
+" 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '$fir_fico' )";
+//echo $sqltti."<br />";
+if( $hd2pp != 0 ) {  $sqli = mysql_query("$sqltti"); }
+
+$sqlttd = "DELETE FROM F$kli_vxcf"."_prcprizdphs$kli_uzid WHERE dok = $hlavicka->dok AND rdp = $rdp10 ";
+$sqld = mysql_query("$sqlttd");
+
+$sqldot = "SELECT * FROM F$kli_vxcf"."_uctdod WHERE dok = $hlavicka->dok AND rdp = 30 AND LEFT(ucm,3) != 343 ";
+$sqldok = mysql_query("$sqldot");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $ucmz=$riaddok->ucm;
+  }
+
+$sqldot = "SELECT * FROM F$kli_vxcf"."_uctdod WHERE dok = $hlavicka->dok AND rdp = 30 AND LEFT(ucm,3) = 343 ";
+$sqldok = mysql_query("$sqldot");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $ucmd=$riaddok->ucm;
+  }
+
+$sqltti = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid ".
+" ( er1, er2, er3, er4, zk0, zk1, zk2, dn1, dn2, ume, dat, daz, psys, r01, r02, r03, r04, r05, r06, r07, r08, r09, r10, ".
+" hod, rdp, rdk, xrz, xrd, xsz, ucm, ucd, ico, fak, dok, ".
+" r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35, r36, r37, r38, fic ) ".
+" VALUES ( 0, 0, 0, 0, 0, 0, 0, 0, 0, '$ume', '$dpppp', '$dpppp', '$psysx', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ".
+" '$hz1pp', '$rdp10', 0, 0, 0, 0, '$ucmz', '$ucd', '$ico', '$fak', '$hlavicka->dok', ".
+" 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '$fir_fico' )";
+//echo $sqltti."<br />";
+if( $hz1pp != 0 ) {  $sqli = mysql_query("$sqltti"); }
+
+$sqltti = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid ".
+" ( er1, er2, er3, er4, zk0, zk1, zk2, dn1, dn2, ume, dat, daz, psys, r01, r02, r03, r04, r05, r06, r07, r08, r09, r10, ".
+" hod, rdp, rdk, xrz, xrd, xsz, ucm, ucd, ico, fak, dok, ".
+" r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35, r36, r37, r38, fic ) ".
+" VALUES ( 0, 0, 0, 0, 0, 0, 0, 0, 0, '$ume', '$dpppp', '$dpppp', '$psysx', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ".
+" '$hd1pp', '$rdp10', 0, 0, 0, 0, '$ucmd', '$ucd', '$ico', '$fak', '$hlavicka->dok', ".
+" 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '$fir_fico' )";
+//echo $sqltti."<br />";
+if( $hd1pp != 0 ) {  $sqli = mysql_query("$sqltti"); }
+
+      }
+//koniec druhpp=2
+
+if( $druhpp == 1 AND $fir_xvr05 == 1 )
+      {
+$psysx=15;
+$rdp=55; $rdp10=60;
+//echo "idem druhpp 1"."<br />";
+
+$sqldot = "SELECT * FROM F$kli_vxcf"."_uctodb WHERE dok = $hlavicka->dok AND rdp = 55 AND LEFT(ucd,3) != 343 ";
+$sqldok = mysql_query("$sqldot");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $fak=1*$riaddok->fak;
+  $ico=1*$riaddok->ico;
+  $ucdz=$riaddok->ucd;
+  $ucm=$riaddok->ucm;
+  }
+$sqldot = "SELECT * FROM F$kli_vxcf"."_uctodb WHERE dok = $hlavicka->dok AND rdp = 55 AND LEFT(ucd,3) = 343 ";
+$sqldok = mysql_query("$sqldot");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $ucdd=$riaddok->ucd;
+  }
+
+$sqlttd = "DELETE FROM F$kli_vxcf"."_prcprizdphs$kli_uzid WHERE dok = $hlavicka->dok AND rdp = $rdp ";
+$sqld = mysql_query("$sqlttd");
+
+$sqltti = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid ".
+" ( er1, er2, er3, er4, zk0, zk1, zk2, dn1, dn2, ume, dat, daz, psys, r01, r02, r03, r04, r05, r06, r07, r08, r09, r10, ".
+" hod, rdp, rdk, xrz, xrd, xsz, ucm, ucd, ico, fak, dok, ".
+" r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35, r36, r37, r38, fic ) ".
+" VALUES ( 0, 0, 0, 0, 0, 0, 0, 0, 0, '$ume', '$dpppp', '$dpppp', '$psysx', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ".
+" '$hz2pp', '$rdp', 0, 0, 0, 0, '$ucm', '$ucdz', '$ico', '$fak', '$hlavicka->dok', ".
+" 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '$fir_fico' )";
+//echo $sqltti."<br />";
+if( $hz2pp != 0 ) {  $sqli = mysql_query("$sqltti"); }
+
+$sqltti = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid ".
+" ( er1, er2, er3, er4, zk0, zk1, zk2, dn1, dn2, ume, dat, daz, psys, r01, r02, r03, r04, r05, r06, r07, r08, r09, r10, ".
+" hod, rdp, rdk, xrz, xrd, xsz, ucm, ucd, ico, fak, dok, ".
+" r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35, r36, r37, r38, fic ) ".
+" VALUES ( 0, 0, 0, 0, 0, 0, 0, 0, 0, '$ume', '$dpppp', '$dpppp', '$psysx', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ".
+" '$hd2pp', '$rdp', 0, 0, 0, 0, '$ucm', '$ucdd', '$ico', '$fak', '$hlavicka->dok', ".
+" 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '$fir_fico' )";
+//echo $sqltti."<br />";
+if( $hd2pp != 0 ) {  $sqli = mysql_query("$sqltti"); }
+
+$sqldot = "SELECT * FROM F$kli_vxcf"."_uctodb WHERE dok = $hlavicka->dok AND rdp = 60 AND LEFT(ucd,3) != 343 ";
+$sqldok = mysql_query("$sqldot");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $ucdz=$riaddok->ucd;
+  }
+
+$sqldot = "SELECT * FROM F$kli_vxcf"."_uctodb WHERE dok = $hlavicka->dok AND rdp = 60 AND LEFT(ucd,3) = 343 ";
+$sqldok = mysql_query("$sqldot");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $ucdd=$riaddok->ucd;
+  }
+
+
+$sqlttd = "DELETE FROM F$kli_vxcf"."_prcprizdphs$kli_uzid WHERE dok = $hlavicka->dok AND rdp = $rdp10 ";
+$sqld = mysql_query("$sqlttd");
+
+$sqltti = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid ".
+" ( er1, er2, er3, er4, zk0, zk1, zk2, dn1, dn2, ume, dat, daz, psys, r01, r02, r03, r04, r05, r06, r07, r08, r09, r10, ".
+" hod, rdp, rdk, xrz, xrd, xsz, ucm, ucd, ico, fak, dok, ".
+" r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35, r36, r37, r38, fic ) ".
+" VALUES ( 0, 0, 0, 0, 0, 0, 0, 0, 0, '$ume', '$dpppp', '$dpppp', '$psysx', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ".
+" '$hz1pp', '$rdp10', 0, 0, 0, 0, '$ucm', '$ucdz', '$ico', '$fak', '$hlavicka->dok', ".
+" 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '$fir_fico' )";
+//echo $sqltti."<br />";
+if( $hz1pp != 0 ) {  $sqli = mysql_query("$sqltti"); }
+
+$sqltti = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid ".
+" ( er1, er2, er3, er4, zk0, zk1, zk2, dn1, dn2, ume, dat, daz, psys, r01, r02, r03, r04, r05, r06, r07, r08, r09, r10, ".
+" hod, rdp, rdk, xrz, xrd, xsz, ucm, ucd, ico, fak, dok, ".
+" r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26, r27, r28, r29, r30, r31, r32, r33, r34, r35, r36, r37, r38, fic ) ".
+" VALUES ( 0, 0, 0, 0, 0, 0, 0, 0, 0, '$ume', '$dpppp', '$dpppp', '$psysx', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ".
+" '$hd1pp', '$rdp10', 0, 0, 0, 0, '$ucm', '$ucdd', '$ico', '$fak', '$hlavicka->dok', ".
+" 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '$fir_fico' )";
+//echo $sqltti."<br />";
+if( $hd1pp != 0 ) {  $sqli = mysql_query("$sqltti"); }
+
+      }
+//koniec druhpp=1 AND $fir_xvr05 == 1 
+
+  }
+//koniec mapp=1
+
+
+
+//echo $hlavicka->dok." druh ".$druhpp." mapp ".$mapp." hz2 ".$hz2pp." hd2 ".$hd2pp."<br />";
+
+}
+$i11 = $i11 + 1;
+  }
+//exit;
+
+$sqltt = "DROP TABLE F$kli_vxcf"."_uctfakuhrdphs".$kli_uzid." ";
+$sql = mysql_query("$sqltt");
+
+                                            }
+//koniec dph po prijatej platbe
 //exit;
 
 //dovoz z 3k JCD, blok urob len ak su jcd crz1=1 v ciselniku drdp
