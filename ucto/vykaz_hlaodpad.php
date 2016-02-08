@@ -607,7 +607,7 @@ $pdf->Cell(4,4,"$t09","$rmc",0,"C");$pdf->Cell(4,4,"$t10","$rmc",1,"C");
 //KOMODITY
 //nazov vyrobku
 $pdf->Cell(190,27," ","$rmc1",1,"L");
-$pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(142,4,"$text_komodita","$rmc",1,"L");
+$pdf->Cell(47,5," ","$rmc1",0,"C");$pdf->Cell(140,4,"$text_komodita","$rmc",1,"L");
 $pdf->Cell(190,27," ","$rmc1",1,"L");
 
 ////////////////////////////////////////KONIEC 1.STRANA DVOJSTRANY prx=1
@@ -655,46 +655,38 @@ $pdf->SetY(10);
 
 //KOMODITY
 //nazov vyrobku
-//dopyt, nie je vyskúšané
-$pdf->Cell(190,9," ","$rmc1",1,"L");
+$pdf->Cell(190,16," ","$rmc1",1,"L");
 $pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita","$rmc",0,"L");
 $pdf->Cell(22,5,"List è. $strana","$rmc",1,"L");
-
-$pdf->Cell(190,14," ","$rmc1",1,"L");
+$pdf->Cell(190,26," ","$rmc1",1,"L");
 
 
 
 }
      }
 
-
-
-//dátum 11
+//datum 11
 $pdf->SetFont('arial','',8);
+$pdf->Cell(8,3," ","$rmc1",0,"C");$pdf->Cell(15,3,"$datum","$rmc",0,"C");
 
-$pdf->Cell(14,3," ","0",0,"R");$pdf->Cell(12,3,"$datum","0",0,"R");
-
-//výrobok v tonách 11
+//vyrobok v tonach 11
 $pdf->SetFont('arial','',10);
-$pdf->Cell(1,3,"                          ","0",0,"L");
-
-$pdf->Cell(16,3,"$vyroba","0",0,"R");$pdf->Cell(1,3," ","0",0,"C");$pdf->Cell(16,3,"$dovoz","0",0,"R");$pdf->Cell(1,3," ","0",0,"C");
-$pdf->Cell(17,3,"$vyvoz","0",0,"R");$pdf->Cell(1,3," ","0",0,"C");$pdf->Cell(17,3,"$reexport","0",0,"R");
-
+$pdf->Cell(1,3," ","$rmc1",0,"L");
+$pdf->Cell(22,3,"$vyroba","$rmc",0,"R");$pdf->Cell(23,3,"$vyvoz","$rmc",0,"R");
+$pdf->Cell(18,3,"$dovoz","$rmc",0,"R");$pdf->Cell(22,3,"$reexport","$rmc",0,"R");
 $pdf->SetFont('arial','',9);
 
-//ièo a obchodné meno 11
+//ico a obchodne meno 11
 $ico=$hlavicka->ico;
-if( $ico > 111111 AND $ico < 1000000 ) { $ico="00".$ico; }
+if ( $ico > 111111 AND $ico < 1000000 ) { $ico="00".$ico; }
 $iconazov=$ico.", ".$hlavicka->nai.$hlavicka->na2;
 $iconazov=substr($iconazov,0,57);
 $mesto=trim($hlavicka->mes);
-if( $mesto == '0' ) { $mesto=""; }
+if ( $mesto == '0' ) { $mesto=""; }
 
-$pdf->SetFont('arial','',9);
-$pdf->Cell(1,3,"                          ","0",0,"L");$pdf->Cell(90,3,"$iconazov","0",1,"L");
-$pdf->Cell(97,3,"                          ","0",0,"L");$pdf->Cell(90,3,"$mesto","0",1,"L");
-$pdf->Cell(0,1," ","0",1,"L");
+$pdf->Cell(78,3," $iconazov","$rmc",1,"L");
+$pdf->Cell(109,3," ","$rmc1",0,"L");$pdf->Cell(78,3," $mesto","$rmc",1,"L");
+$pdf->Cell(0,0.5," ","$rmc1",1,"L");
 
 $k=$k+1;
 $j = $j + 1;
@@ -704,36 +696,29 @@ $j = $j + 1;
 
 
 ////////////////////////////////////////ZACIATOK 1.STRANA DVOJSTRANY POLOZKY
-if ( $hlavicka->prx == 10 AND $j <= 10 )    {
+if ( $hlavicka->prx == 10 AND $j <= 10 ) {
 
-
-//dátum 1
+//datum 1
 $pdf->SetFont('arial','',8);
+$pdf->Cell(12,3," ","$rmc1",0,"C");$pdf->Cell(15,3,"$datum","$rmc",0,"C");
 
-
-$pdf->Cell(12,3," ","0",0,"C");$pdf->Cell(12,3,"$datum","0",0,"C");
-
-//výrobok v tonách 1
+//vyrobok v tonach 1
 $pdf->SetFont('arial','',10);
-$pdf->Cell(1,3,"                          ","0",0,"L");
+$pdf->Cell(1,3," ","$rmc1",0,"L");
+$pdf->Cell(20,3,"$vyroba","$rmc",0,"R");$pdf->Cell(21,3,"$vyvoz","$rmc",0,"R");
+$pdf->Cell(21,3,"$dovoz","$rmc",0,"R");$pdf->Cell(21,3,"$reexport","$rmc",0,"R");
+$pdf->SetFont('arial','',9);
 
-$pdf->Cell(16,3,"$vyroba","0",0,"R");$pdf->Cell(1,3," ","0",0,"C");$pdf->Cell(17,3,"$dovoz","0",0,"R");$pdf->Cell(1,3," ","0",0,"C");
-$pdf->Cell(17,3,"$vyvoz","0",0,"R");$pdf->Cell(1,3," ","0",0,"C");$pdf->Cell(17,3,"$reexport","0",0,"R");
-
-
-
-//ièo a obchodné meno 1
+//ico a obchodne meno 1
 $ico=$hlavicka->ico;
-if( $ico > 111111 AND $ico < 1000000 ) { $ico="00".$ico; }
+if ( $ico > 111111 AND $ico < 1000000 ) { $ico="00".$ico; }
 $iconazov=$ico.", ".$hlavicka->nai.$hlavicka->na2;
 $iconazov=substr($iconazov,0,58);
 $mesto=trim($hlavicka->mes);
-if( $mesto == '0' ) { $mesto=""; }
-
-$pdf->SetFont('arial','',9);
-$pdf->Cell(1,3,"                          ","0",0,"L");$pdf->Cell(91,3,"$iconazov","0",1,"L");
-$pdf->Cell(96,3,"                          ","0",0,"L");$pdf->Cell(91,3,"$mesto","0",1,"L");
-$pdf->Cell(0,1," ","0",1,"L");
+if ( $mesto == '0' ) { $mesto=""; }
+$pdf->Cell(76,3," $iconazov","$rmc",1,"L");
+$pdf->Cell(111,3," ","$rmc1",0,"L");$pdf->Cell(76,3," $mesto","$rmc",1,"L");
+$pdf->Cell(0,0.5," ","$rmc1",1,"L");
 
 if ( $j == 10 )
   {
@@ -752,12 +737,10 @@ $pdf->SetY(10);
 
 //KOMODITY
 //nazov vyrobku
-//dopyt, nevyskúšané
-$pdf->Cell(190,9," ","$rmc1",1,"L");
+$pdf->Cell(190,16," ","$rmc1",1,"L");
 $pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita","$rmc",0,"L");
 $pdf->Cell(22,5,"List è. $strana","$rmc",1,"L");
-
-$pdf->Cell(190,14," ","$rmc1",1,"L");
+$pdf->Cell(190,26," ","$rmc1",1,"L");
 
 
 
@@ -766,9 +749,9 @@ $pdf->Cell(190,14," ","$rmc1",1,"L");
 $j = $j + 1;
 
 ////////////////////////////////////////KONIEC 1.STRANA DVOJSTRANY POLOZKY
-                                           }
+                                         }
 
-if( $k >= 32 ) { $k=0; }
+if ( $k >= 32 ) { $k=0; }
 
 
 
@@ -790,31 +773,16 @@ $pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
-
-
-
-//$pdf->Image('../dokumenty/vykazy2010/hlaovyrobes2.jpg',3,6,210,294);
-
-
-
-
-
-
-
-
 //KOMODITY
 //nazov vyrobku
 $pdf->Cell(190,9," ","$rmc1",1,"L");
 $pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita","$rmc",0,"L");
 $pdf->Cell(22,4,"List è. $strana","$rmc",1,"L");
-
 $pdf->Cell(190,14," ","$rmc1",1,"L");
-
-
-
    }
 
 //spolu
+//dopyt, nevyskúšané
 $pdf->SetFont('arial','',9);
 $pdf->SetY(270); $pdf->SetX(33); 
 $pdf->Cell(18,7,"$vyroba","0",0,"R");$pdf->Cell(17,7,"$dovoz","0",0,"R");$pdf->Cell(1,6," ","0",0,"C");$pdf->Cell(17,7,"$vyvoz","0",0,"R");
