@@ -708,6 +708,17 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdprc2 SET ico=$fir_fico, fak=10000*ume WHERE LEFT(ucm,2)=37 OR LEFT(ucd,2)=37 ";
 $dsql = mysql_query("$dsqlt");
 
+//zaverecne upravy DPS Gbely
+if( $fir_fico == 36084514 AND $kli_vrok >= 2016 )
+  {
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdprc2 SET ucm=ucm+1, ucd=ucd+1 WHERE str = 100 ";
+$dsql = mysql_query("$dsqlt");
+
+  }
+
+
+
 //zmaz pracovnu mzdprc
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprc';
 $vysledok = mysql_query("$sqlt");
@@ -718,7 +729,7 @@ $vysledok = mysql_query("$sqlt");
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Tlaè-V</title>
   <style type="text/css">

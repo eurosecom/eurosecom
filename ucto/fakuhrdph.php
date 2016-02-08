@@ -281,12 +281,21 @@ banvyp;
 $sql = "CREATE TABLE F".$kli_vxcf."_uctfakuhradydph".$kli_uzid." ".$sqlt;
 $vysledek = mysql_query("$sql");
 
+$podmucd2=" AND LEFT(ucd,2) = 31 ";
+$podmucm2=" AND LEFT(ucm,2) = 32 ";
+if( $kli_vduj == 9 )
+ {
+
+$podmucd2="";
+$podmucm2="";
+
+ }
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctfakuhradydph$kli_uzid"." SELECT".
 " 0,F$kli_vxcf"."_uctban.dok,1,F$kli_vxcf"."_uctban.ddu,F$kli_vxcf"."_uctban.ico,F$kli_vxcf"."_uctban.fak,F$kli_vxcf"."_uctban.hod,0 ".
 " FROM F$kli_vxcf"."_uctban,F$kli_vxcf"."_banvyp ".
 " WHERE F$kli_vxcf"."_uctban.dok=F$kli_vxcf"."_banvyp.dok ".
-" AND F$kli_vxcf"."_uctban.ico != $fir_fico AND F$kli_vxcf"."_uctban.ico > 0 AND LEFT(ucd,2) = 31 ".
+" AND F$kli_vxcf"."_uctban.ico != $fir_fico AND F$kli_vxcf"."_uctban.ico > 0 AND F$kli_vxcf"."_uctban.fak > 0 $podmucd2 ".
 " AND F$kli_vxcf"."_uctban.ddu >= '$datp_dph' AND F$kli_vxcf"."_uctban.ddu <= '$datk_dph' ";
 $dsql = mysql_query("$dsqlt");
 
@@ -294,7 +303,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctfakuhradydph$kli_uzid"." SELECT".
 " 0,F$kli_vxcf"."_uctpokuct.dok,1,F$kli_vxcf"."_pokpri.dat,F$kli_vxcf"."_uctpokuct.ico,F$kli_vxcf"."_uctpokuct.fak,F$kli_vxcf"."_uctpokuct.hod,0 ".
 " FROM F$kli_vxcf"."_uctpokuct,F$kli_vxcf"."_pokpri ".
 " WHERE F$kli_vxcf"."_uctpokuct.dok=F$kli_vxcf"."_pokpri.dok ".
-" AND F$kli_vxcf"."_uctpokuct.ico != $fir_fico AND F$kli_vxcf"."_uctpokuct.ico > 0 AND LEFT(ucd,2) = 31 ".
+" AND F$kli_vxcf"."_uctpokuct.ico != $fir_fico AND F$kli_vxcf"."_uctpokuct.ico > 0 AND F$kli_vxcf"."_uctpokuct.fak > 0 $podmucd2 ".
 " AND F$kli_vxcf"."_pokpri.dat >= '$datp_dph' AND F$kli_vxcf"."_pokpri.dat <= '$datk_dph' ";
 $dsql = mysql_query("$dsqlt");
 
@@ -302,7 +311,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctfakuhradydph$kli_uzid"." SELECT ".
 " 0,F$kli_vxcf"."_uctban.dok,2,F$kli_vxcf"."_uctban.ddu,F$kli_vxcf"."_uctban.ico,F$kli_vxcf"."_uctban.fak,F$kli_vxcf"."_uctban.hod,0 ".
 " FROM F$kli_vxcf"."_uctban,F$kli_vxcf"."_banvyp ".
 " WHERE F$kli_vxcf"."_uctban.dok=F$kli_vxcf"."_banvyp.dok ".
-" AND F$kli_vxcf"."_uctban.ico != $fir_fico AND F$kli_vxcf"."_uctban.ico > 0 AND LEFT(ucm,2) = 32 ".
+" AND F$kli_vxcf"."_uctban.ico != $fir_fico AND F$kli_vxcf"."_uctban.ico > 0 AND F$kli_vxcf"."_uctban.fak > 0 $podmucm2 ".
 " AND F$kli_vxcf"."_uctban.ddu >= '$datp_dph' AND F$kli_vxcf"."_uctban.ddu <= '$datk_dph' ";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
@@ -311,7 +320,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctfakuhradydph$kli_uzid"." SELECT ".
 " 0,F$kli_vxcf"."_uctpokuct.dok,2,F$kli_vxcf"."_pokvyd.dat,F$kli_vxcf"."_uctpokuct.ico,F$kli_vxcf"."_uctpokuct.fak,F$kli_vxcf"."_uctpokuct.hod,0 ".
 " FROM F$kli_vxcf"."_uctpokuct,F$kli_vxcf"."_pokvyd ".
 " WHERE F$kli_vxcf"."_uctpokuct.dok=F$kli_vxcf"."_pokvyd.dok ".
-" AND F$kli_vxcf"."_uctpokuct.ico != $fir_fico AND F$kli_vxcf"."_uctpokuct.ico > 0 AND LEFT(ucm,2) = 32 ".
+" AND F$kli_vxcf"."_uctpokuct.ico != $fir_fico AND F$kli_vxcf"."_uctpokuct.ico > 0 AND F$kli_vxcf"."_uctpokuct.fak > 0 $podmucm2 ".
 " AND F$kli_vxcf"."_pokvyd.dat >= '$datp_dph' AND F$kli_vxcf"."_pokvyd.dat <= '$datk_dph' ";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
