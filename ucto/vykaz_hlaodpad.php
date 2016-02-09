@@ -369,7 +369,7 @@ $j=0;
 $j2=0;
 $prvastrana=1;
 $druhastrana=0; 
-$hlav2strana=1;
+$hlav2strana=0;
 $strana=0;
 
 //pocet poloziek na 1. a 2.strane
@@ -405,7 +405,6 @@ $text_komodita=str_replace("\"O\"","",$text_komodita);
 ////////////////////////////////////////ZACIATOK 1.STRANA hlavicka prx=1
 if ( $hlavicka->prx == 1 )    {
 
-$hl2strana=1;
 $strana=$strana+1;
 
 $pdf->AddPage();
