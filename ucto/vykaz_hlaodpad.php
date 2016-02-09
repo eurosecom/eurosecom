@@ -761,7 +761,7 @@ if ( $k > $pol2str ) { $k=1; }
 ////////////////////////////////////////SPOLU
 if ( $hlavicka->prx == 100   )    {
 
-if ( $j <= $polstr1 )
+if ( $j <= $pol1str )
    {
 $strana=$strana+1;
 
@@ -787,8 +787,8 @@ $pdf->Cell(190,14," ","$rmc1",1,"L");
 //spolu
 //dopyt, nevyskúšané
 $pdf->SetFont('arial','',9);
-$pdf->SetY(260); $pdf->SetX(33); 
-$pdf->Cell(18,7,"$vyroba","0",0,"R");$pdf->Cell(17,7,"$dovoz","0",0,"R");$pdf->Cell(1,6," ","0",0,"C");$pdf->Cell(17,7,"$vyvoz","0",0,"R");
+$pdf->SetY(270); $pdf->SetX(33); 
+$pdf->Cell(18,7,"$j $vyroba","0",0,"R");$pdf->Cell(17,7,"$dovoz","0",0,"R");$pdf->Cell(1,6," ","0",0,"C");$pdf->Cell(17,7,"$vyvoz","0",0,"R");
 $pdf->Cell(1,6," ","0",0,"C");$pdf->Cell(17,7,"$reexport","0",1,"R");
 
 $pdf->SetFont('arial','',11);
