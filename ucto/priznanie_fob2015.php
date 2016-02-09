@@ -10082,7 +10082,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",1,"C");
 
 //osobitne zaznamy
 $pdf->Cell(190,27," ","$rmc1",1,"L");
-if ( $hlavicka->uoso != 1 ) $hlavicka->osob=" ";
+//if ( $hlavicka->uoso != 1 ) $hlavicka->osob=" ";
 $poleosob = explode("\r\n", $hlavicka->osob);
 if ( $poleosob[0] != '' )
      {

@@ -1376,7 +1376,7 @@ if ( $riadok == 0 ) $riadok="";
   $text = "   </udajeOprijmoch>"."\r\n"; fwrite($soubor, $text);
 
 $zaznamy=iconv("CP1250", "UTF-8", $hlavicka->osob);
-if ( $uvadza == 0 ) $zaznamy="";
+//if ( $uvadza == 0 ) $zaznamy="";
   $text = "   <zaznamy><![CDATA[".$zaznamy."]]></zaznamy>"."\r\n"; fwrite($soubor, $text);
   $text = "  </osobitneZaznamy>"."\r\n"; fwrite($soubor, $text);
 
