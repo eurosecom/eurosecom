@@ -311,10 +311,10 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctvykaz_hlaodpad".
 $dsql = mysql_query("$dsqlt");
 
 
-$dsqlt = "UPDATE F$kli_vxcf"."_uctvykaz_hlaodpad SET kor=kor-10 WHERE prx=1 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_uctvykaz_hlaodpad SET kor=kor-7 WHERE prx=1 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_uctvykaz_hlaodpad SET pxy06=kor/32 WHERE prx=1 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_uctvykaz_hlaodpad SET pxy06=kor/30 WHERE prx=1 ";
 $dsql = mysql_query("$dsqlt");
 
 
@@ -358,15 +358,18 @@ $chodna2stranu=0;
 $sqltt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_hlaodpad".
 " LEFT JOIN F$kli_vxcf"."_ico".
 " ON F$kli_vxcf"."_uctvykaz_hlaodpad.ico=F$kli_vxcf"."_ico.ico".
-" WHERE prx >= 0  ORDER BY komodita,prx,F$kli_vxcf"."_uctvykaz_hlaodpad.ico,daz";
+" WHERE ( prx = 1 OR prx = 10 OR prx = 100 )  ORDER BY komodita,prx,F$kli_vxcf"."_uctvykaz_hlaodpad.ico,daz";
 
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 
 $i=0;
-$j=0; 
-$k=0;
+$j=0;
+$j2=0;
+$prvastrana=1;
+$druhastrana=0; 
+$hlav2strana=1;
 $strana=0;
 
 //pocet poloziek na 1. a 2.strane
@@ -402,7 +405,7 @@ $text_komodita=str_replace("\"O\"","",$text_komodita);
 ////////////////////////////////////////ZACIATOK 1.STRANA hlavicka prx=1
 if ( $hlavicka->prx == 1 )    {
 
-$k=0;
+$hl2strana=1;
 $strana=$strana+1;
 
 $pdf->AddPage();
@@ -637,8 +640,9 @@ $reexport=sprintf("%0.3f", $Cislo);
 if ( $reexport == 0 ) $reexport="";
 
 
+
 ////////////////////////////////////////ZACIATOK 1.STRANA polozky da sa tam $pol1str poloziek
-if ( $hlavicka->prx == 10 AND $j <= $pol1str ) {
+if ( $hlavicka->prx == 10 AND $prvastrana == 1 ) {
 
 //datum 1
 $pdf->SetFont('arial','',8);
@@ -646,7 +650,7 @@ $pdf->Cell(12,3," ","$rmc1",0,"C");$pdf->Cell(15,3,"$datum","$rmc",0,"C");
 
 //vyrobok v tonach 1
 $pdf->SetFont('arial','',10);
-$pdf->Cell(1,3,"$j ","$rmc1",0,"L");
+$pdf->Cell(1,3," ","$rmc1",0,"L");
 $pdf->Cell(20,3,"$vyroba","$rmc",0,"R");$pdf->Cell(21,3,"$vyvoz","$rmc",0,"R");
 $pdf->Cell(21,3,"$dovoz","$rmc",0,"R");$pdf->Cell(21,3,"$reexport","$rmc",0,"R");
 $pdf->SetFont('arial','',9);
@@ -662,7 +666,7 @@ $pdf->Cell(76,3," $iconazov","$rmc",1,"L");
 $pdf->Cell(111,3," ","$rmc1",0,"L");$pdf->Cell(76,3," $mesto","$rmc",1,"L");
 $pdf->Cell(0,0.5," ","$rmc1",1,"L");
 
-if ( $j == $pol1str )
+if ( $j == 7 )
   {
 $strana=$strana+1;
 
@@ -684,7 +688,6 @@ $pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita ","$rmc",0,"
 $pdf->Cell(22,5,"List è. $strana","$rmc",1,"L");
 $pdf->Cell(190,26," ","$rmc1",1,"L");
 
-$k=1;
   }
 
 
@@ -693,9 +696,9 @@ $k=1;
 
 
 ////////////////////////////////////////ZACIATOK 2.STRANA polozky da sa tam $pol2str poloziek
-if ( $hlavicka->prx == 10 AND $j > $pol1str ) {
+if ( $hlavicka->prx == 10 AND $druhastrana == 1 ) {
 
-if ( $k == 0 )
+if ( $hlav2strana == 0 )
      {
 $strana=$strana+1;
 
@@ -719,7 +722,7 @@ $pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita ","$rmc",0,"
 $pdf->Cell(22,5,"List è. $strana","$rmc",1,"L");
 $pdf->Cell(190,26," ","$rmc1",1,"L");
 
-
+$hlav2strana=1;
 }
      }
 
@@ -729,7 +732,7 @@ $pdf->Cell(8,3," ","$rmc1",0,"C");$pdf->Cell(15,3,"$datum","$rmc",0,"C");
 
 //vyrobok v tonach 11
 $pdf->SetFont('arial','',10);
-$pdf->Cell(1,3,"$j","$rmc1",0,"L");
+$pdf->Cell(1,3," ","$rmc1",0,"L");
 $pdf->Cell(22,3,"$vyroba","$rmc",0,"R");$pdf->Cell(23,3,"$vyvoz","$rmc",0,"R");
 $pdf->Cell(18,3,"$dovoz","$rmc",0,"R");$pdf->Cell(22,3,"$reexport","$rmc",0,"R");
 $pdf->SetFont('arial','',9);
@@ -746,6 +749,7 @@ $pdf->Cell(78,3," $iconazov","$rmc",1,"L");
 $pdf->Cell(109,3," ","$rmc1",0,"L");$pdf->Cell(78,3," $mesto","$rmc",1,"L");
 $pdf->Cell(0,0.5," ","$rmc1",1,"L");
 
+$j2=$j2+1;
 
 ////////////////////////////////////////KONIEC 2.STRANA polozky
                                        }
@@ -753,15 +757,11 @@ $pdf->Cell(0,0.5," ","$rmc1",1,"L");
 
 
 
-$k=$k+1;
-if ( $k > $pol2str ) { $k=1; }
-
-
 
 ////////////////////////////////////////SPOLU
-if ( $hlavicka->prx == 100   )    {
+if ( $hlavicka->prx == 100  )    {
 
-if ( $j <= $pol1str )
+if ( $hlav2strana == 0 )
    {
 $strana=$strana+1;
 
@@ -782,13 +782,15 @@ $pdf->Cell(190,9," ","$rmc1",1,"L");
 $pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita","$rmc",0,"L");
 $pdf->Cell(22,4,"List è. $strana","$rmc",1,"L");
 $pdf->Cell(190,14," ","$rmc1",1,"L");
+
+$hlav2strana=1;
    }
 
 //spolu
 //dopyt, nevyskúšané
 $pdf->SetFont('arial','',9);
 $pdf->SetY(270); $pdf->SetX(33); 
-$pdf->Cell(18,7,"$j $vyroba","0",0,"R");$pdf->Cell(17,7,"$dovoz","0",0,"R");$pdf->Cell(1,6," ","0",0,"C");$pdf->Cell(17,7,"$vyvoz","0",0,"R");
+$pdf->Cell(18,7,"$vyroba","0",0,"R");$pdf->Cell(17,7,"$dovoz","0",0,"R");$pdf->Cell(1,6," ","0",0,"C");$pdf->Cell(17,7,"$vyvoz","0",0,"R");
 $pdf->Cell(1,6," ","0",0,"C");$pdf->Cell(17,7,"$reexport","0",1,"R");
 
 $pdf->SetFont('arial','',11);
@@ -796,12 +798,31 @@ $pdf->SetFont('arial','',11);
 //zodpovedná osoba
 $pdf->SetY(285); $pdf->SetX(48); $pdf->Cell(100,7,"$fir_mzdt05","0",0,"L");
 
+$hlav2strana=0;
+$prvastrana=1;
+$druhastrana=0;
+$j=-1;
+$j2=0;
+$strana=0;
 
 
 ////////////////////////////////////////koniec SPOLU
                                   }
 
+if( $j == 7 )
+  {
+$hlav2strana=1;
+$prvastrana=0;
+$druhastrana=1;
+  }
 
+if( $j2 == 30 )
+  {
+$hlav2strana=0;
+$prvastrana=0;
+$druhastrana=1;
+$j2=0;
+  }
 
 }
 $i = $i + 1;
