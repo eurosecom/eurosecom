@@ -2,7 +2,6 @@
 <?php
 
 //skript pre rok 2016 a vyššie
-
 do
 {
 $sys = 'UCT';
@@ -25,7 +24,7 @@ require_once("../pswd/password.php");
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=1;
+$rmc=0;
 $rmc1=0;
 
 //datumove funkcie
@@ -434,7 +433,6 @@ $text=$stvrtrok;
 $pdf->Cell(55,6," ","$rmc1",0,"R");$pdf->Cell(5,6,"$text","$rmc",1,"C");
 
 //List c.
-//dopyt, odsadenie sprava
 $pdf->Cell(190,8," ","$rmc1",1,"L");
 $text="1";
 $t01=substr($text,0,1);
@@ -446,7 +444,6 @@ $pdf->Cell(5,6,"$t01","$rmc",0,"R");$pdf->Cell(5,6,"$t02","$rmc",0,"C");
 $pdf->Cell(5,6,"$t03","$rmc",0,"C");$pdf->Cell(5,6,"$t04","$rmc",1,"C");
 
 //Pocet listov
-//dopyt, odsadenie sprava
 $pdf->Cell(190,0," ","$rmc1",1,"L");
 $text=$celkomstran;
 $t01=substr($text,0,1);
@@ -639,7 +636,6 @@ $reexport=sprintf("%0.3f", $Cislo);
 if ( $reexport == 0 ) $reexport="";
 
 
-
 ////////////////////////////////////////ZACIATOK 1.STRANA polozky da sa tam $pol1str poloziek
 if ( $hlavicka->prx == 10 AND $prvastrana == 1 ) {
 
@@ -684,12 +680,10 @@ $pdf->SetY(10);
 //nazov vyrobku
 $pdf->Cell(190,16," ","$rmc1",1,"L");
 $pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita ","$rmc",0,"L");
-$pdf->Cell(22,5,"List è. $strana","$rmc",1,"L");
-$pdf->Cell(190,26," ","$rmc1",1,"L");
+$pdf->Cell(22,4,"List è. $strana","$rmc",1,"L");
+$pdf->Cell(190,27," ","$rmc1",1,"L");
 
   }
-
-
 ////////////////////////////////////////KONIEC 1.STRANA polozky
                                          }
 
@@ -718,8 +712,8 @@ $pdf->SetY(10);
 //nazov vyrobku
 $pdf->Cell(190,16," ","$rmc1",1,"L");
 $pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita ","$rmc",0,"L");
-$pdf->Cell(22,5,"List è. $strana","$rmc",1,"L");
-$pdf->Cell(190,26," ","$rmc1",1,"L");
+$pdf->Cell(22,4,"List è. $strana","$rmc",1,"L");
+$pdf->Cell(190,27," ","$rmc1",1,"L");
 
 $hlav2strana=1;
 }
@@ -754,9 +748,6 @@ $j2=$j2+1;
                                        }
 
 
-
-
-
 ////////////////////////////////////////SPOLU
 if ( $hlavicka->prx == 100  )    {
 
@@ -777,7 +768,7 @@ $pdf->SetY(10);
 
 //KOMODITY
 //nazov vyrobku
-$pdf->Cell(190,9," ","$rmc1",1,"L");
+$pdf->Cell(190,16," ","$rmc1",1,"L");
 $pdf->Cell(45,5," ","$rmc1",0,"C");$pdf->Cell(120,4,"$text_komodita","$rmc",0,"L");
 $pdf->Cell(22,4,"List è. $strana","$rmc",1,"L");
 $pdf->Cell(190,14," ","$rmc1",1,"L");
@@ -786,16 +777,17 @@ $hlav2strana=1;
    }
 
 //spolu
-//dopyt, nevyskúšané
 $pdf->SetFont('arial','',9);
-$pdf->SetY(270); $pdf->SetX(33); 
-$pdf->Cell(18,7,"$vyroba","0",0,"R");$pdf->Cell(17,7,"$dovoz","0",0,"R");$pdf->Cell(1,6," ","0",0,"C");$pdf->Cell(17,7,"$vyvoz","0",0,"R");
-$pdf->Cell(1,6," ","0",0,"C");$pdf->Cell(17,7,"$reexport","0",1,"R");
-
+$pdf->SetY(252);
+$pdf->SetX(33);
+$pdf->Cell(23,6,"$vyroba","$rmc",0,"R");$pdf->Cell(23,6,"$vyvoz","$rmc",0,"R");
+$pdf->Cell(18,6,"$dovoz","$rmc",0,"R");$pdf->Cell(22,6,"$reexport","$rmc",1,"R");
 $pdf->SetFont('arial','',11);
 
-//zodpovedná osoba
-$pdf->SetY(285); $pdf->SetX(48); $pdf->Cell(100,7,"$fir_mzdt05","0",0,"L");
+//zodpovedna osoba
+$pdf->SetY(275);
+$pdf->SetX(48);
+$pdf->Cell(80,7,"$fir_mzdt05","$rmc",0,"L");
 
 $hlav2strana=0;
 $prvastrana=1;
@@ -803,12 +795,10 @@ $druhastrana=0;
 $j=-1;
 $j2=0;
 $strana=0;
-
-
 ////////////////////////////////////////koniec SPOLU
                                   }
 
-if( $j == 7 )
+if ( $j == 7 )
   {
 $hlav2strana=1;
 $prvastrana=0;
