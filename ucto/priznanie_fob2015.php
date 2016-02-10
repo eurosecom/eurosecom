@@ -3968,7 +3968,8 @@ $sn1c=substr($sknacec,0,1);
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
 
 <!-- XIII.ODDIEL -->
-<input type="checkbox" name="uoso" value="1" style="top:144px; left:58px;"/>
+<input type="checkbox" name="uoso" value="1" style="top:144px; left:58px; z-index:100;"/>
+<div style="z-index:10; position:absolute; top:142px; left:57px; background-color:#39f; width:22px; height:22px; border-radius:3px;">&nbsp;</div>
 <img src="../obr/ikony/info_blue_icon.png" title="Štatistický èíselník krajín"
      onclick="CisKrajin();" class="btn-row-tool" style="top:218px; left:7px;">
 <input type="text" name="pzks1" id="pzks1" style="width:59px; top:218px; left:51px;"/>
