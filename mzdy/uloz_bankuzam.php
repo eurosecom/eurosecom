@@ -40,6 +40,9 @@ $swft = strip_tags($_GET['swft']);
 
 if( $prm4 == 1 ) 
 {
+if( trim($uceb) == '' AND trim($iban) != '' ) {  $uceb = 1*substr($iban,14,10); }   
+if( trim($numb) == '' AND trim($iban) != '' ) {  $numb = substr($iban,4,4); }
+
 $sqltt = "UPDATE F$kli_vxcf"."_mzdkun".
 " SET vban=1, uceb='$uceb', numb='$numb', vsy='$vsy', ksy='$ksy', ssy='$ssy'".
 " WHERE oc = $h_oc";

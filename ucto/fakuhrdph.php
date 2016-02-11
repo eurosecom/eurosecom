@@ -650,6 +650,13 @@ window.open('../ucto/prijplat_dph.php?fir_uctx01=1&copern=40&drupoh=2&page=1&typ
 
                 }
 
+function TZoznamDPHFAK()
+                {
+
+window.open('../ucto/prijplatfak_dph.php?fir_uctx01=1&copern=40&drupoh=2&page=1&typ=PDF&zdrd=11', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+
+                }
+
   </script>
 </HEAD>
 <BODY class="white" onload="ObnovUI();" >
@@ -659,9 +666,11 @@ window.open('../ucto/prijplat_dph.php?fir_uctx01=1&copern=40&drupoh=2&page=1&typ
 <tr>
 <td>EuroSecom  -  Úhrady dokladu èíslo <?php echo $cislo_dok; ?> pre Odpoèet a uplatnenie DPH až po prijatí platby
 
- <a href="#" onClick="TZoznamDPHPRP();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi Zoznam prijatých platieb pre uplatnenie DPH vo formáte PDF" ></a>
+ <a href="#" onClick="TZoznamDPHPRP();" title="Vytlaèi Zoznam prijatých platieb pre uplatnenie DPH za <?php echo $kli_vume; ?> vo formáte PDF">
+Platby <img src='../obr/tlac.png' width=20 height=15 border=0 ></a>
 
+ <a href="#" onClick="TZoznamDPHFAK();" title="Vytlaèi Zoznam fakúr v režíme uplatnenia DPH až po prijatí platby za <?php echo $kli_vume; ?> vo formáte PDF" >
+Faktúry <img src='../obr/tlac.png' width=20 height=15 border=0 ></a>
 
 </td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>

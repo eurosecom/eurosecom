@@ -2069,7 +2069,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
 " SET sum_ban=sum_hot,".
 " sum_hot=0 ".
-" WHERE oc > 0 AND svban = 1 AND snumb > 0000 ";
+" WHERE oc > 0 AND svban = 1 AND snumb >= 0000 ";
 $oznac = mysql_query("$sqtoz");
 
 
