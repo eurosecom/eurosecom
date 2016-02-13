@@ -279,6 +279,9 @@ $dsqlt = "UPDATE F$kli_vxcf"."_uctvykaz_hlaodpad SET dovoz=hod WHERE druh=1 ";
 $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_uctvykaz_hlaodpad SET vyvoz=hod WHERE druh=2 ";
 $dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_uctvykaz_hlaodpad SET reexport=hod, dovoz=hod WHERE druh=3 ";
+//ako s reexportom ?
 $dsqlt = "UPDATE F$kli_vxcf"."_uctvykaz_hlaodpad SET reexport=hod WHERE druh=3 ";
 $dsql = mysql_query("$dsqlt");
 
@@ -548,9 +551,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(28,5,"$text","$rmc",0,"L");
 //Telefon zodpovedneho
 $text=$zav_otel;
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(38,5,"$text","$rmc",0,"L");
-//Fax zodpovedneho
-$text=$zav_ofax;
-$text="0457";
+//Fax zodpovedneho nie je
 $pdf->Cell(7,6," ","$rmc1",0,"R");$pdf->Cell(27,5,"$text","$rmc",1,"L");
 
 //email statura
@@ -563,7 +564,7 @@ $text=$fir_fwww;
 $pdf->Cell(8,6," ","$rmc1",0,"R");$pdf->Cell(26,5,"$text","$rmc",0,"L");
 
 //email zodpovedneho
-$text="";
+$text=$zav_ofax;
 $pdf->Cell(11,6," ","$rmc1",0,"R");$pdf->Cell(40,5,"$text","$rmc",0,"L");
 //url zodpovedneho
 $text="";
