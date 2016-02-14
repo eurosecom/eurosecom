@@ -816,25 +816,65 @@ $pdf->Cell(180,1," ","T",1,"L");
 //$pdf->Line(15, 90, 195, 90); 
 //$pdf->SetY(92);
 $pdf->Cell(180,4,"$bankovespojenie","0",1,"L");
+
+$pdf->SetFont('arial','',9);
 if( $fir_uc1fk == 1 )
 {
-if( $fir_fsw1 == '' ) { $pdf->Cell(180,4,"$fir_fnb1 IBAN: $fir_fib1 úèet: $fir_fuc1 / $fir_fnm1 ","0",1,"L"); }
-if( $fir_fsw1 != '' AND $jazyk == 0 ) { $pdf->Cell(180,4,"$fir_fnb1 IBAN: $fir_fib1 úèet: $fir_fuc1 / $fir_fnm1 SWIFT: $fir_fsw1","0",1,"L"); }
-if( $jazyk    >  0  ) { $pdf->Cell(180,4,"$fir_fnb1 IBAN: $fir_fib1 SWIFT: $fir_fsw1","0",1,"L"); }
-}
-if( $fir_fuc2 != '' AND $fir_uc2fk == 1 )
-{
-if( $fir_fsw2 == '' ) { $pdf->Cell(180,4,"$fir_fnb2 IBAN: $fir_fib2 úèet: $fir_fuc2 / $fir_fnm2 ","0",1,"L"); }
-if( $fir_fsw2 != '' AND $jazyk == 0 ) { $pdf->Cell(180,4,"$fir_fnb2 IBAN: $fir_fib2 úèet: $fir_fuc2 / $fir_fnm2 SWIFT: $fir_fsw2","0",1,"L"); }
-if( $jazyk    >  0  ) { $pdf->Cell(180,4,"$fir_fnb2 IBAN: $fir_fib2 SWIFT: $fir_fsw2","0",1,"L"); }
-}
-if( $fir_fuc3 != '' AND $fir_uc3fk == 1 )
-{
-if( $fir_fsw3 == '' ) { $pdf->Cell(180,4,"$fir_fnb3 IBAN: $fir_fib3 úèet: $fir_fuc3 / $fir_fnm3 ","0",1,"L"); }
-if( $fir_fsw3 != '' AND $jazyk == 0 ) { $pdf->Cell(180,4,"$fir_fnb3 IBAN: $fir_fib3 úèet: $fir_fuc3 / $fir_fnm3 SWIFT: $fir_fsw3","0",1,"L"); }
-if( $jazyk    >  0  ) { $pdf->Cell(180,4,"$fir_fnb3 IBAN: $fir_fib3 SWIFT: $fir_fsw3","0",1,"L"); }
+
+$ibanoc=str_replace(" ","",$fir_fib1);
+$ibanoc1 = substr($ibanoc,0,4);
+$ibanoc2 = substr($ibanoc,4,4);
+$ibanoc3 = substr($ibanoc,8,4);
+$ibanoc4 = substr($ibanoc,12,4);
+$ibanoc5 = substr($ibanoc,16,4);
+$ibanoc6 = trim(substr($ibanoc,20,20));
+
+$fir_fib1=$ibanoc1." ".$ibanoc2." ".$ibanoc3." ".$ibanoc4." ".$ibanoc5." ".$ibanoc6;
+
+
+if( $fir_fsw1 == '' ) { $pdf->Cell(180,4,"IBAN: $fir_fib1 úèet: $fir_fuc1 / $fir_fnm1 $fir_fnb1","0",1,"L"); }
+if( $fir_fsw1 != '' AND $jazyk == 0 ) { $pdf->Cell(180,4,"IBAN: $fir_fib1 SWIFT: $fir_fsw1 úèet: $fir_fuc1 / $fir_fnm1 $fir_fnb1 ","0",1,"L"); }
+
+if( $jazyk    >  0  ) { $pdf->Cell(180,4,"IBAN: $fir_fib1 SWIFT: $fir_fsw1 $fir_fnb1 ","0",1,"L"); }
 }
 
+if( ( $fir_fuc2 != '' OR $fir_fib2 != '' ) AND $fir_uc2fk == 1 )
+{
+
+$ibanoc=str_replace(" ","",$fir_fib2);
+$ibanoc1 = substr($ibanoc,0,4);
+$ibanoc2 = substr($ibanoc,4,4);
+$ibanoc3 = substr($ibanoc,8,4);
+$ibanoc4 = substr($ibanoc,12,4);
+$ibanoc5 = substr($ibanoc,16,4);
+$ibanoc6 = trim(substr($ibanoc,20,20));
+
+$fir_fib2=$ibanoc1." ".$ibanoc2." ".$ibanoc3." ".$ibanoc4." ".$ibanoc5." ".$ibanoc6;
+
+if( $fir_fsw2 == '' ) { $pdf->Cell(180,4,"IBAN: $fir_fib2 úèet: $fir_fuc2 / $fir_fnm2 $fir_fnb2","0",1,"L"); }
+if( $fir_fsw2 != '' AND $jazyk == 0 ) { $pdf->Cell(180,4,"IBAN: $fir_fib2 SWIFT: $fir_fsw2 úèet: $fir_fuc2 / $fir_fnm2 $fir_fnb2","0",1,"L"); }
+if( $jazyk    >  0  ) { $pdf->Cell(180,4,"IBAN: $fir_fib2 SWIFT: $fir_fsw2 $fir_fnb2 ","0",1,"L"); }
+}
+
+if( ( $fir_fuc3 != '' OR $fir_fib3 != '' )  AND $fir_uc3fk == 1 )
+{
+
+$ibanoc=str_replace(" ","",$fir_fib3);
+$ibanoc1 = substr($ibanoc,0,4);
+$ibanoc2 = substr($ibanoc,4,4);
+$ibanoc3 = substr($ibanoc,8,4);
+$ibanoc4 = substr($ibanoc,12,4);
+$ibanoc5 = substr($ibanoc,16,4);
+$ibanoc6 = trim(substr($ibanoc,20,20));
+
+$fir_fib3=$ibanoc1." ".$ibanoc2." ".$ibanoc3." ".$ibanoc4." ".$ibanoc5." ".$ibanoc6;
+
+if( $fir_fsw3 == '' ) { $pdf->Cell(180,4,"IBAN: $fir_fib3 úèet: $fir_fuc3 / $fir_fnm3 $fir_fnb3","0",1,"L"); }
+if( $fir_fsw3 != '' AND $jazyk == 0 ) { $pdf->Cell(180,4,"IBAN: $fir_fib3 SWIFT: $fir_fsw3 úèet: $fir_fuc3 / $fir_fnm3 $fir_fnb3","0",1,"L"); }
+if( $jazyk    >  0  ) { $pdf->Cell(180,4,"IBAN: $fir_fib3 SWIFT: $fir_fsw3 $fir_fnb3 ","0",1,"L"); }
+}
+
+$pdf->SetFont('arial','',10);
 $pdf->Cell(180,1,"","B",1,"L");
                     }
 //koniec ak drupoh!=21,22
@@ -1099,7 +1139,7 @@ if( $jazyk == 0 )
 {
 $pdf->SetFont('arial','',6);
 $vcene="";
-if( $hlavicka->zmen == 1  ) { $vcene=" - $cenapoloziek".$hlavicka->mena; }
+if( $hlavicka->zmen == 1 AND $hlavicka->dn2 == 0 ) { $vcene=" - $cenapoloziek".$hlavicka->mena; }
 $pdf->Cell(72,5,"$polozka $vcene","0",0,"L");
 $pdf->Cell(8,5,"$sadzbadph","0",0,"L");$pdf->Cell(4,5,"","0",0,"C");
 $pdf->Cell(14,5,"$jcenabezdph","0",0,"R");$pdf->Cell(6,5,"","0",0,"C");
@@ -1114,7 +1154,7 @@ if( $jazyk == 1 )
 {
 $pdf->SetFont('arial','',6);
 $vcene="";
-if( $hlavicka->zmen == 1  ) { $vcene=" - ceny položiek v ".$hlavicka->mena; }
+if( $hlavicka->zmen == 1 AND $hlavicka->dn2 == 0 ) { $vcene=" - ceny položiek v ".$hlavicka->mena; }
 $pdf->Cell(180,0,"","-1",1,"L");
 $pdf->Cell(72,4,"Položka / $vcene","0",0,"L");
 $pdf->Cell(8,4,"DPH /","0",0,"C");$pdf->Cell(4,4,"","0",0,"C");
@@ -1125,7 +1165,7 @@ $pdf->Cell(6,4,"MJ /","0",0,"C");$pdf->Cell(4,4,"","0",0,"C");
 $pdf->Cell(16,4,"HODN bDPH/","0",0,"C");$pdf->Cell(2,4,"","0",0,"C");
 $pdf->Cell(15,4,"HODN sDPH/","0",1,"C");
 
-if( $hlavicka->zmen == 1  ) { $vcene=" - $cenapoloziek".$hlavicka->mena; }
+if( $hlavicka->zmen == 1 AND $hlavicka->dn2 == 0 ) { $vcene=" - $cenapoloziek".$hlavicka->mena; }
 $pdf->Cell(180,-1,"","0",1,"L");
 $pdf->Cell(72,4," $polozka $vcene","0",0,"L");
 $pdf->Cell(8,4,"$sadzbadph","0",0,"L");$pdf->Cell(4,4,"","0",0,"C");
@@ -1141,7 +1181,7 @@ if( $jazyk == 2 )
 {
 $pdf->SetFont('arial','',6);
 $vcene="";
-if( $hlavicka->zmen == 1  ) { $vcene=" - ceny položiek v ".$hlavicka->mena; }
+if( $hlavicka->zmen == 1 AND $hlavicka->dn2 == 0 ) { $vcene=" - ceny položiek v ".$hlavicka->mena; }
 $pdf->Cell(180,0,"","-1",1,"L");
 $pdf->Cell(72,4,"Položka / $vcene","0",0,"L");
 $pdf->Cell(8,4,"DPH /","0",0,"C");$pdf->Cell(4,4,"","0",0,"C");
@@ -1152,7 +1192,7 @@ $pdf->Cell(6,4,"MJ /","0",0,"C");$pdf->Cell(4,4,"","0",0,"C");
 $pdf->Cell(16,4,"HODN bDPH/","0",0,"C");$pdf->Cell(2,4,"","0",0,"C");
 $pdf->Cell(15,4,"HODN sDPH/","0",1,"C");
 
-if( $hlavicka->zmen == 1  ) { $vcene=" - $cenapoloziek".$hlavicka->mena; }
+if( $hlavicka->zmen == 1 AND $hlavicka->dn2 == 0 ) { $vcene=" - $cenapoloziek".$hlavicka->mena; }
 $pdf->Cell(180,-1,"","0",1,"L");
 $pdf->Cell(72,4," $polozka $vcene","0",0,"L");
 $pdf->Cell(8,4,"$sadzbadph","0",0,"L");$pdf->Cell(4,4,"","0",0,"C");
@@ -1457,7 +1497,8 @@ $aktpoz_y=$aktpoz_y+2;
 $pdf->SetY($aktpoz_y);
 
 //rozpis dph len ak zmen!=1
-if( $hlavicka->zmen != 1 AND $predfaktura == 0 AND $drupoh != 21 AND $drupoh != 22 AND $bezcen == 0 ) {
+if( ( $hlavicka->zmen != 1 AND $predfaktura == 0 AND $drupoh != 21 AND $drupoh != 22 AND $bezcen == 0 ) OR 
+( $hlavicka->zmen == 1 AND $drupoh == 1 AND $hlavicka->dn2 != 0 ) ) {
 
 if( $jazyk == 0 )
   {
@@ -1509,7 +1550,7 @@ $aktpoz_y=$aktpoz_y+2;
 $pdf->Line(15, $aktpoz_y, 195, $aktpoz_y); 
 $aktpoz_y=$aktpoz_y+2;
 
-//koniec rozpisu ak zmen != 1
+//koniec rozpisu ak zmen != 1 alebo dn2 != 0
                              }
 
 if( $bezcen == 0 ) 
@@ -1549,9 +1590,19 @@ $pdf->Line(15, $aktpoz_y, 195, $aktpoz_y);
 $aktpoz_y=$aktpoz_y+2;
 $pdf->SetY($aktpoz_y);
 
+//toto funguje ak polozky su v EUR s dph a nakoniec dame cudziu menu
+$hodmxx=$hlavicka->hodm;
+if($hlavicka->zmen == 1 AND $drupoh == 1 AND $hlavicka->dn2 != 0 )
+  {
+$hodmxx=$hlavicka->hod*$hlavicka->kurz;
+$sqlttt = "UPDATE F$kli_vxcf"."_fakodb SET hodm=$hodmxx WHERE dok = $hlavicka->dok ";
+$sqldok = mysql_query("$sqlttt");
+
+  }
+
 $pdf->SetFont('arial','B',12);
 $pdf->Cell(72,5,"Celkom hodnota v $hlavicka->mena kurz $hlavicka->kurz $hlavicka->mena/1$mena1","0",0,"L");$pdf->Cell(15,5," ","0",0,"R");
-$pdf->Cell(31,5," ","0",0,"R");$pdf->Cell(31,5," ","0",0,"R");$pdf->Cell(31,5,"$hlavicka->hodm $hlavicka->mena","0",1,"R");
+$pdf->Cell(31,5," ","0",0,"R");$pdf->Cell(31,5," ","0",0,"R");$pdf->Cell(31,5,"$hodmxx $hlavicka->mena","0",1,"R");
 
 }
 $pdf->SetFont('arial','',10);
