@@ -279,11 +279,18 @@ $dsqlt = "UPDATE F$kli_vxcf"."_uctvykaz_hlaodpad SET dovoz=hod WHERE druh=1 ";
 $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_uctvykaz_hlaodpad SET vyvoz=hod WHERE druh=2 ";
 $dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_uctvykaz_hlaodpad SET reexport=hod, dovoz=hod WHERE druh=3 ";
-//ako s reexportom ?
 $dsqlt = "UPDATE F$kli_vxcf"."_uctvykaz_hlaodpad SET reexport=hod WHERE druh=3 ";
 $dsql = mysql_query("$dsqlt");
+
+//reexport pridat aj do dovozu ??!!??!!?!?!?!
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctvykaz_hlaodpad".
+" SELECT 0,0,oc,1,daz,kor,9,0,0,reexport,0,0,'44551142',komodita,dox FROM F$kli_vxcf"."_uctvykaz_hlaodpad ".
+" WHERE druh = 3 ".
+" GROUP BY komodita,ico,daz ".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctvykaz_hlaodpad".
 " SELECT 0,0,oc,druh,daz,1,10,sum(hod),sum(vyroba),sum(dovoz),sum(vyvoz),sum(reexport),ico,komodita,0 FROM F$kli_vxcf"."_uctvykaz_hlaodpad ".
