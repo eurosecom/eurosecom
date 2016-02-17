@@ -989,16 +989,16 @@ $riadok=$hlavicka->zslu;
 
 
 //zmena 2015
-$riadok=$hlavicka->pcpoc;
-if ( $riadok == 0 ) $riadok="";
-  $text = "  <c4r1><![CDATA[".$riadok."]]></c4r1>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->pcdar;
 if ( $riadok == 0 ) $riadok="";
-  $text = "  <c4r2><![CDATA[".$riadok."]]></c4r2>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <c4r1><![CDATA[".$riadok."]]></c4r1>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->pcpod;
 if ( $riadok == 0 ) $riadok="";
+  $text = "  <c4r2><![CDATA[".$riadok."]]></c4r2>"."\r\n"; fwrite($soubor, $text);
+$riadok=$hlavicka->pcsum;
+if ( $riadok == 0 ) $riadok="";
   $text = "  <c4r3><![CDATA[".$riadok."]]></c4r3>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pc15;
+$riadok=$hlavicka->pcpoc;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <c4r4><![CDATA[".$riadok."]]></c4r4>"."\r\n"; fwrite($soubor, $text);
 
