@@ -451,14 +451,14 @@ $dsql = mysql_query("$dsqlt");
 
 $zdroj3pol=0;
 if( $fin1a12 == 1 ) { $zdroj3pol=1; }
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 ) ) { $zdroj3pol=1; }
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 ) ) { $zdroj3pol=1; }
 if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $zdroj3pol=1; }
 
 if( $zdroj3pol == 1 )
 {  
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=substring(poloz,1,3) WHERE poloz > 0 ";
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 ) ) 
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 ) ) 
 { 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=41 WHERE poloz > 0 "; 
 }
@@ -624,7 +624,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, program='9.2', oddiel
 $oznac = mysql_query("$sqtoz");
 }
 
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 )) 
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 )) 
 {
 $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, program='', oddiel='0.7.2.2' ";
 $oznac = mysql_query("$sqtoz");

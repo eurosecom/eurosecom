@@ -550,6 +550,18 @@ window.open('fin1a12dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+
+function DbfFin112nujpod()
+                {
+var h_oc = document.forms.formfin1a12.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('fin112nujpoddbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
 <?php                        } ?>
 //koniec vykzy FIN NUJ 2013
 
@@ -906,8 +918,8 @@ if( $kli_vrok >= 2013 ) {
 <FORM name="formfin1a12" class="obyc" method="post" action="#" >
 <tr>
 <?php
-$nazfin1a12="FIN 1a - 12";
-if( $volajfin1a12 == 0 ) { $nazfin1a12="FIN 1 - 12";}
+$nazfin1a12="FIN 1-12 NUJPOD";
+if( $volajfin1a12 == 0 ) { $nazfin1a12="FIN 1-12";}
 ?>
 <td class="bmenu" width="2%">
 <a href="#" onClick="TlacFin1a12();">
@@ -928,8 +940,14 @@ if( $volajfin1a12 == 0 ) { $nazfin1a12="FIN 1 - 12";}
 <option value="11" >11.<?php echo $kli_vrok; ?></option>
 <option value="12" >12.<?php echo $kli_vrok; ?></option>
 </select>
+<?php if( $kli_vrok <  2016 ) { ?>
 <a href="#" onClick="DbfFin1a12();">
 <img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru pre AZUV' ></a>
+<?php                         } ?>
+<?php if( $kli_vrok >= 2016 ) { ?>
+<a href="#" onClick="DbfFin112nujpod();">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru pre AZUV' ></a>
+<?php                         } ?>
 <?php
 $nedaj=1; 
       if( $nedaj == 0 ) { ?>
