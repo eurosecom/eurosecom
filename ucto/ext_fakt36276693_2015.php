@@ -7,7 +7,7 @@ if( !$uziv ) exit;
 
 if(!isset($kli_vxcf)) $kli_vxcf = 1;
 
-//toto je import ext_faktur z pohody fy ENII rok 2016
+//toto je import ext_faktur z pohody fy ENII
 
        do
        {
@@ -177,14 +177,12 @@ $x_uce=31110; $x_ucm=31110; $x_ucd1=60400; $x_ucd2=34300; $x_rdp=55;
 //vs 3901400002 31139/60420 vystavene faktury do talianska
 //vs 140200001 
 
-if( $x_fak >= 160100001  AND $x_fak <= 160199999  ) { $x_uce=31110; $x_ucm=31110; $x_ucd1=60410; $x_ucd2=34320; $x_rdp=55; }
-if( $x_fak >= 3491600001 AND $x_fak <= 3491699999 ) { $x_uce=31134; $x_ucm=31134; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
-if( $x_fak >= 3591600001 AND $x_fak <= 3591699999 ) { $x_uce=31135; $x_ucm=31135; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
-if( $x_fak >= 3691600001 AND $x_fak <= 3691699999 ) { $x_uce=31136; $x_ucm=31136; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
-if( $x_fak >= 3901600001 AND $x_fak <= 3901699999 ) { $x_uce=31139; $x_ucm=31139; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
-if( $x_fak >= 3911600001 AND $x_fak <= 3911699999 ) { $x_uce=31139; $x_ucm=31139; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
-if( $x_fak >= 4301600001 AND $x_fak <= 4301699999 ) { $x_uce=31143; $x_ucm=31143; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
-
+if( $x_fak >= 150100001  AND $x_fak <= 150199999  ) { $x_uce=31110; $x_ucm=31110; $x_ucd1=60410; $x_ucd2=34320; $x_rdp=55; }
+if( $x_fak >= 1500100001 AND $x_fak <= 1500199999 ) { $x_uce=31110; $x_ucm=31110; $x_ucd1=60410; $x_ucd2=34320; $x_rdp=55; }
+if( $x_fak >= 3901500001 AND $x_fak <= 3901509999 ) { $x_uce=31139; $x_ucm=31139; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
+if( $x_fak >= 420150001  AND $x_fak <= 420159999  ) { $x_uce=31120; $x_ucm=31120; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
+if( $x_fak >= 3401500001 AND $x_fak <= 3401509999 ) { $x_uce=31134; $x_ucm=31134; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
+if( $x_fak >= 3601500001 AND $x_fak <= 3601509999 ) { $x_uce=31136; $x_ucm=31136; $x_ucd1=60420; $x_ucd2=34320; $x_rdp=55; }
 
 
 $sqult = "INSERT INTO F$kli_vxcf"."_fakodb ( uce,dok,doq,fak,ico,str,zak,dat,daz,das,zk2,dn2,sp2,hod,id,".

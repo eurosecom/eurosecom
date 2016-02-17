@@ -46,8 +46,8 @@ $h_obdp = $_REQUEST['h_obdp'];
 
 
 //http://www.ekorobot.sk/ucto/ext_fakt.php?copern=55&page=1&h_sys=55&h_obdp=1&drupoh=1&uprav=1
-if( $fir_fico == 36276693 AND $kli_vrok != 2015 ) { echo $kli_vrok." ??"; exit; }
-if( $fir_fico == 36276693 AND $kli_vrok == 2015 ) 
+if( $fir_fico == 36276693 AND $kli_vrok != 2016 ) { echo $kli_vrok." ??"; exit; }
+if( $fir_fico == 36276693 AND $kli_vrok == 2016 ) 
 {
 ?>
 <script type="text/javascript">

@@ -275,6 +275,7 @@ window.open('../ucto/statistika_vts112<?php echo $rokvts112; ?>.php?copern=1&dru
 //statistika vts101
 <?php
 $rokvts101="";
+if( $kli_vrok < 2015 ) $rokvts101="_2014";
 ?>
 
 function statvts101()
