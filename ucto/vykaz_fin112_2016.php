@@ -115,10 +115,12 @@ $dsql = mysql_query("$dsqlt");
 
 $sql = "ALTER TABLE F".$kli_vxcf."_uctvykaz_fin104 MODIFY cpl int PRIMARY KEY not null auto_increment ";
 $vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin104 ADD predpoklad DECIMAL(10,2) DEFAULT 0 AFTER zmeneny";
+$vysledek = mysql_query("$sql");
 
 $dsqlt = "INSERT INTO F".$kli_vxcf."_uctvykaz_fin104 SELECT ".
 " cpl,px12,oc,druh,okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal,".
-" program,zdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,schvaleny,zmeneny,skutocnost,ico   ".
+" program,zdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,schvaleny,zmeneny,0,skutocnost,ico   ".
 " FROM ".$databaza."F".$kli_vxcf2010."_uctvykaz_fin104 ".
 " WHERE cpl >= 0 ";
 //echo $dsqlt;
@@ -554,42 +556,42 @@ $dsql = mysql_query("$dsqlt");
 
 $sqtoz = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 SELECT ".
 "0,px12,oc,druh,okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal, ".
-"program,$dfzdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,ico ".
+"program,$dfzdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,0,ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104 ".
 " WHERE zdroj = 41 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 SELECT ".
 "0,px12,oc,druh,okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal, ".
-"program,41,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,ico ".
+"program,41,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,0,ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104 ".
 " WHERE zdroj = $dfzdroj ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 SELECT ".
 "0,px12,oc,druh,okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal, ".
-"program,71,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,ico ".
+"program,71,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,0,ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104 ".
 " WHERE zdroj = $dfzdroj ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 SELECT ".
 "0,px12,oc,druh,okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal, ".
-"program,111,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,ico ".
+"program,111,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,0,ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104 ".
 " WHERE zdroj = $dfzdroj ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 SELECT ".
 "0,px12,oc,(druh+2),okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal, ".
-"'','',oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,ico ".
+"'','',oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,0,ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104 ".
 " WHERE druh <= 2 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 SELECT ".
 "0,1,oc,druh,okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal, ".
-"program,zdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,sum(schvaleny),sum(zmeneny),0,ico ".
+"program,zdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,sum(schvaleny),sum(zmeneny),sum(predpoklad),0,ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104 ".
 " GROUP BY druh,zdroj,polozka ";
 $oznac = mysql_query("$sqtoz");
@@ -697,6 +699,7 @@ $oddiel = $riaddok->oddiel;
 $polozka = $riaddok->polozka;
 $schvaleny = 1*$riaddok->schvaleny;
 $zmeneny = 1*$riaddok->zmeneny;
+$predpoklad = 1*$riaddok->predpoklad;
 $skutocnost = 1*$riaddok->skutocnost;
   }
 
@@ -724,11 +727,12 @@ $zdroj = strip_tags($_REQUEST['zdroj']);
 $polozka = strip_tags($_REQUEST['polozka']);
 $schvaleny = 1*$_REQUEST['schvaleny'];
 $zmeneny = 1*$_REQUEST['zmeneny'];
+$predpoklad = 1*$_REQUEST['predpoklad'];
 $skutocnost = 1*$_REQUEST['skutocnost'];
 
 
-$uprtxt = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 (oc,druh,zdroj,polozka,schvaleny,zmeneny,skutocnost) VALUES ".
-" (  '$stvrtrok', '$strana', '$zdroj', '$polozka', '$schvaleny', '$zmeneny', '$skutocnost' ) ";
+$uprtxt = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 (oc,druh,zdroj,polozka,schvaleny,zmeneny,predpoklad,skutocnost) VALUES ".
+" (  '$stvrtrok', '$strana', '$zdroj', '$polozka', '$schvaleny', '$zmeneny', '$predpoklad', '$skutocnost' ) ";
 
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
@@ -758,11 +762,12 @@ $oddiel = strip_tags($_REQUEST['oddiel']);
 $polozka = strip_tags($_REQUEST['polozka']);
 $schvaleny = 1*$_REQUEST['schvaleny'];
 $zmeneny = 1*$_REQUEST['zmeneny'];
+$predpoklad = 1*$_REQUEST['predpoklad'];
 $skutocnost = 1*$_REQUEST['skutocnost'];
 
 
-$uprtxt = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 (oc,druh,zdroj,oddiel,polozka,schvaleny,zmeneny,skutocnost) VALUES ".
-" (  '$stvrtrok', '$strana', '$zdroj', '$oddiel', '$polozka', '$schvaleny', '$zmeneny', '$skutocnost' ) ";
+$uprtxt = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 (oc,druh,zdroj,oddiel,polozka,schvaleny,zmeneny,predpoklad,skutocnost) VALUES ".
+" (  '$stvrtrok', '$strana', '$zdroj', '$oddiel', '$polozka', '$schvaleny', '$zmeneny', '$predpoklad', '$skutocnost' ) ";
 
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
@@ -887,6 +892,16 @@ $sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin104d2 ADD xoddiel VARCHAR(11) NOT 
 $vysledek = mysql_query("$sql");
 }
 
+$sql = "SELECT predpoklad FROM F".$kli_vxcf."_uctvykaz_fin104";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin104 ADD predpoklad DECIMAL(10,2) DEFAULT 0 AFTER zmeneny";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin104d2 ADD predpoklad DECIMAL(10,2) DEFAULT 0 AFTER zmeneny";
+$vysledek = mysql_query("$sql");
+}
+
 $sql = "SELECT px12 FROM F".$kli_vxcf."_uctvykaz_fin104na2des";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
@@ -970,7 +985,7 @@ $vytvor = mysql_query("$vsql");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
 " 0,1,oc,druh,okres,obec,daz,kor,0,uce,ucm,ucd,0,0,0,".
 " program,zdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,'',".
-"SUM(schvaleny),SUM(zmeneny),SUM(skutocnost),ico ".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 1 OR druh = 3 ".
 " GROUP BY druh,zdroj,polozka".
@@ -983,7 +998,7 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
 " 0,1,oc,druh,okres,obec,daz,kor,10,uce,ucm,ucd,0,0,0,".
 " program,zdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,'',".
-"SUM(schvaleny),SUM(zmeneny),SUM(skutocnost),ico ".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 1 OR druh = 3 ".
 " GROUP BY druh,zdroj,xpolozka".
@@ -994,7 +1009,7 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
 " 0,1,oc,druh,okres,obec,daz,kor,200,uce,ucm,ucd,0,0,0,".
 " program,zdroj,'99999','99999',skupina,trieda,podtrieda,999999,999,podpolozka,'',".
-"SUM(schvaleny),SUM(zmeneny),SUM(skutocnost),ico ".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 1 ".
 " GROUP BY druh,zdroj".
@@ -1005,7 +1020,7 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
 " 0,1,oc,druh,okres,obec,daz,kor,500,uce,ucm,ucd,0,0,0,".
 " program,'99999','99999','99999',skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,'',".
-"SUM(schvaleny),SUM(zmeneny),SUM(skutocnost),ico ".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 1 OR druh = 3 ".
 " GROUP BY druh".
@@ -1020,7 +1035,7 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
 " 0,1,oc,druh,okres,obec,daz,kor,0,uce,ucm,ucd,0,0,0,".
 " program,zdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,'',".
-"SUM(schvaleny),SUM(zmeneny),SUM(skutocnost),ico ".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 2 OR druh = 4 ".
 " GROUP BY druh,zdroj,polozka".
@@ -1031,7 +1046,7 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
 " 0,1,oc,druh,okres,obec,daz,kor,10,uce,ucm,ucd,0,0,0,".
 " program,zdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,'',".
-"SUM(schvaleny),SUM(zmeneny),SUM(skutocnost),ico ".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 2 OR druh = 4 ".
 " GROUP BY druh,zdroj,xpolozka".
@@ -1042,7 +1057,7 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
 " 0,1,oc,druh,okres,obec,daz,kor,200,uce,ucm,ucd,0,0,0,".
 " program,zdroj,'99999','99999',skupina,trieda,podtrieda,999999,999,podpolozka,'',".
-"SUM(schvaleny),SUM(zmeneny),SUM(skutocnost),ico ".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 2 ".
 " GROUP BY druh,zdroj".
@@ -1054,7 +1069,7 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
 " 0,1,oc,druh,okres,obec,daz,kor,500,uce,ucm,ucd,0,0,0,".
 " program,'99999','99999','99999',skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,'',".
-"SUM(schvaleny),SUM(zmeneny),SUM(skutocnost),ico ".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 2 OR druh = 4  ".
 " GROUP BY druh".
@@ -2117,6 +2132,8 @@ $schvaleny=$hlavicka->schvaleny;
 if( $hlavicka->schvaleny == 0 ) $schvaleny="";
 $zmeneny=$hlavicka->zmeneny;
 if( $hlavicka->zmeneny == 0 ) $zmeneny="";
+$predpoklad=$hlavicka->predpoklad;
+if( $hlavicka->predpoklad == 0 ) $predpoklad="";
 $skutocnost=$hlavicka->skutocnost;
 if( $hlavicka->skutocnost == 0 ) $skutocnost="";
 
@@ -2408,6 +2425,16 @@ function ZmenenyEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kÛd stlaËenej kl·vesy
 
   if(k == 13 ){
+        document.forms.formv1.predpoklad.focus();
+        document.forms.formv1.predpoklad.select();
+              }
+                }
+
+function PredpokladEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kÛd stlaËenej kl·vesy
+
+  if(k == 13 ){
         document.forms.formv1.skutocnost.focus();
         document.forms.formv1.skutocnost.select();
               }
@@ -2421,8 +2448,10 @@ function SkutocnostEnter(e)
 
     var okvstup=1;
 
+<?php if ( $strana == 1 OR $strana == 2 )           { ?>
     if ( document.formv1.zdroj.value == '' ) okvstup=0;
     if ( document.formv1.zdroj.value == 0 ) okvstup=0;
+<?php                                               } ?>
     if ( document.formv1.polozka.value == '' ) okvstup=0;
     if ( document.formv1.polozka.value == 0 ) okvstup=0;
 
@@ -2436,7 +2465,7 @@ function SkutocnostEnter(e)
     function ObnovUI()
     {
 
-<?php if ( $strana == 1 OR $strana == 3 )                           { ?>
+<?php if ( $strana == 1 )                           { ?>
 
 document.formv1.okres.value = '<?php echo $okres;?>';
 document.formv1.obec.value = '<?php echo $obec;?>';
@@ -2447,22 +2476,37 @@ document.formv1.zdroj.value = '<?php echo $zdroj;?>';
 document.formv1.polozka.value = '<?php echo $polozka;?>';
 document.formv1.schvaleny.value = '<?php echo $schvaleny;?>';
 document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
+document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
  document.formv1.uloz.disabled = true;
  if( document.forms.formv1.zdroj.value == '' ) { document.forms.formv1.zdroj.value="41"; }
-        <?php if ( $strana == 1 ) { ?>
+
         document.forms.formv1.zdroj.focus();
         document.forms.formv1.zdroj.select();
-        <?php                     } ?>
-        <?php if ( $strana == 3 ) { ?>
+
+
+<?php                                               } ?>
+
+<?php if ( $strana == 3 )                           { ?>
+
+document.formv1.okres.value = '<?php echo $okres;?>';
+document.formv1.obec.value = '<?php echo $obec;?>';
+document.formv1.daz.value = '<?php echo $daz_sk;?>';
+document.formv1.ostp.value = '<?php echo $ostp;?>';
+
+document.formv1.polozka.value = '<?php echo $polozka;?>';
+document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
+
+ document.formv1.uloz.disabled = true;
+
         document.forms.formv1.polozka.focus();
         document.forms.formv1.polozka.select();
-        <?php                     } ?>
 
-<?php                                                  } ?>
 
-<?php if ( $strana == 2 OR $strana == 4 )                           { ?>
+<?php                                               } ?>
+
+<?php if ( $strana == 2 )                           { ?>
 
 
 document.formv1.okres.value = '<?php echo $okres;?>';
@@ -2475,20 +2519,34 @@ document.formv1.oddiel.value = '<?php echo $oddiel;?>';
 document.formv1.polozka.value = '<?php echo $polozka;?>';
 document.formv1.schvaleny.value = '<?php echo $schvaleny;?>';
 document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
+document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
  document.formv1.uloz.disabled = true;
  if( document.forms.formv1.zdroj.value == '' ) { document.forms.formv1.zdroj.value="41"; }
  if( document.forms.formv1.oddiel.value == '' ) { document.forms.formv1.oddiel.value="10.1.2.2"; }
-        <?php if ( $strana == 2 ) { ?>
         document.forms.formv1.zdroj.focus();
         document.forms.formv1.zdroj.select();
-        <?php                     } ?>
-        <?php if ( $strana == 4 ) { ?>
+
+<?php                                               } ?>
+
+<?php if ( $strana == 4 )                           { ?>
+
+
+document.formv1.okres.value = '<?php echo $okres;?>';
+document.formv1.obec.value = '<?php echo $obec;?>';
+document.formv1.daz.value = '<?php echo $daz_sk;?>';
+document.formv1.ostp.value = '<?php echo $ostp;?>';
+
+document.formv1.oddiel.value = '<?php echo $oddiel;?>';
+document.formv1.polozka.value = '<?php echo $polozka;?>';
+document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
+
+ document.formv1.uloz.disabled = true;
+ if( document.forms.formv1.oddiel.value == '' ) { document.forms.formv1.oddiel.value="10.1.2.2"; }
         document.forms.formv1.oddiel.focus();
         document.forms.formv1.oddiel.select();
-        <?php                     } ?>
-<?php                                                                   } ?>
+<?php                                                } ?>
 
 
 
@@ -2940,9 +2998,10 @@ $pvstup="pvstup";
 <tr>
 <td class="bmenu" colspan="1">Zdroj</td>
 <td class="bmenu" colspan="2">Poloûka + Podpoloûka</td>
-<td class="bmenu" colspan="4"> </td>
+<td class="bmenu" colspan="3"> </td>
 <td class="bmenu" colspan="1" align="right">Schv·len˝ rozpoËet</td>
 <td class="bmenu" colspan="1" align="right">RozpoËet po zmen·ch</td>
+<td class="bmenu" colspan="1" align="right">Predpoklad</td>
 <td class="bmenu" colspan="1" align="right">SkutoËnosù</td>
 </tr>
 
@@ -2957,9 +3016,10 @@ $pvstup="pvstup";
 <tr>
 <td class="hvstup" colspan="1"><?php echo $rsluz->zdroj;?></td>
 <td class="hvstup" colspan="2"><?php echo $rsluz->polozka;?></td>
-<td class="hvstup" colspan="4"><?php echo $rsluz->nazov;?></td>
+<td class="hvstup" colspan="3"><?php echo $rsluz->nazov;?></td>
 <td class="hvstup" colspan="1" align="right"><?php echo $rsluz->schvaleny;?></td>
 <td class="hvstup" colspan="1" align="right"><?php echo $rsluz->zmeneny;?></td>
+<td class="hvstup" colspan="1" align="right"><?php echo $rsluz->predpoklad;?></td>
 <td class="hvstup" colspan="1" align="right"><?php echo $rsluz->skutocnost;?>
 
 <a href='vykaz_fin112_2016.php?copern=316&cislo_cpl=<?php echo $rsluz->cpl;?>&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>&fin1a12=<?php echo $fin1a12; ?>'>
@@ -2981,9 +3041,10 @@ $j = $j + 1;
 <td class="bmenu" colspan="1"><input type="text" name="zdroj" id="zdroj" size="10" onKeyDown="return ZdrojEnter(event.which)"/></td>
 <td class="bmenu" colspan="2"><input type="text" name="polozka" id="polozka" size="10" onKeyDown="return PolozkaEnter(event.which)"/></td>
 
-<td class="bmenu" colspan="4"> </td>
+<td class="bmenu" colspan="3"> </td>
 <td class="bmenu" colspan="1" align="right"><input type="text" name="schvaleny" id="schvaleny" size="10" onKeyDown="return SchvalenyEnter(event.which)"/></td>
 <td class="bmenu" colspan="1" align="right"><input type="text" name="zmeneny" id="zmeneny" size="10" onKeyDown="return ZmenenyEnter(event.which)"/></td>
+<td class="bmenu" colspan="1" align="right"><input type="text" name="predpoklad" id="predpoklad" size="10" onKeyDown="return PredpokladEnter(event.which)"/></td>
 <td class="bmenu" colspan="1" align="right"><input type="text" name="skutocnost" id="skutocnost" size="10" onKeyDown="return SkutocnostEnter(event.which)"/></td>
 </tr>
 
@@ -3029,8 +3090,8 @@ $pvstup="pvstup";
 ?>
 
 
-<tr><td class="pvstuz" colspan="10">»asù I.PrÌjmy a v˝davky rozpoËtu subjektu verejnej spr·vy </td></tr>
-<tr><td class="pvstuz" colspan="10">1.2. V˝davky </td></tr>
+<tr><td class="pvstuz" colspan="11">»asù I.PrÌjmy a v˝davky rozpoËtu subjektu verejnej spr·vy </td></tr>
+<tr><td class="pvstuz" colspan="11">1.2. V˝davky </td></tr>
 <tr>
 <td class="bmenu" colspan="1">Program</td>
 <td class="bmenu" colspan="1">Zdroj</td>
@@ -3039,6 +3100,7 @@ $pvstup="pvstup";
 <td class="bmenu" colspan="1"> </td>
 <td class="bmenu" colspan="1" align="right">Schv·len˝ rozpoËet</td>
 <td class="bmenu" colspan="1" align="right">RozpoËet po zmen·ch</td>
+<td class="bmenu" colspan="1" align="right">Predpoklad</td>
 <td class="bmenu" colspan="1" align="right">SkutoËnosù</td>
 </tr>
 
@@ -3059,6 +3121,7 @@ $pvstup="pvstup";
 <td class="hvstup" colspan="1"><?php echo $rsluz->nazov;?></td>
 <td class="hvstup" colspan="1" align="right"><?php echo $rsluz->schvaleny;?></td>
 <td class="hvstup" colspan="1" align="right"><?php echo $rsluz->zmeneny;?></td>
+<td class="hvstup" colspan="1" align="right"><?php echo $rsluz->predpoklad;?></td>
 <td class="hvstup" colspan="1" align="right"><?php echo $rsluz->skutocnost;?>
 
 <a href='vykaz_fin112_2016.php?copern=316&cislo_cpl=<?php echo $rsluz->cpl;?>&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>&fin1a12=<?php echo $fin1a12; ?>'>
@@ -3087,6 +3150,7 @@ $j = $j + 1;
 <td class="bmenu" colspan="1"> </td>
 <td class="bmenu" colspan="1" align="right"><input type="text" name="schvaleny" id="schvaleny" size="10" onKeyDown="return SchvalenyEnter(event.which)"/></td>
 <td class="bmenu" colspan="1" align="right"><input type="text" name="zmeneny" id="zmeneny" size="10" onKeyDown="return ZmenenyEnter(event.which)"/></td>
+<td class="bmenu" colspan="1" align="right"><input type="text" name="predpoklad" id="predpoklad" size="10" onKeyDown="return PredpokladEnter(event.which)"/></td>
 <td class="bmenu" colspan="1" align="right"><input type="text" name="skutocnost" id="skutocnost" size="10" onKeyDown="return SkutocnostEnter(event.which)"/></td>
 </tr>
 
@@ -3131,7 +3195,8 @@ $pvstup="pvstup";
 <tr>
 <td class="bmenu" colspan="1"> </td>
 <td class="bmenu" colspan="2">Poloûka + Podpoloûka</td>
-<td class="bmenu" colspan="4"> </td>
+<td class="bmenu" colspan="3"> </td>
+<td class="bmenu" colspan="1" align="right"> </td>
 <td class="bmenu" colspan="1" align="right"> </td>
 <td class="bmenu" colspan="1" align="right"> </td>
 <td class="bmenu" colspan="1" align="right">SkutoËnosù</td>
@@ -3148,7 +3213,8 @@ $pvstup="pvstup";
 <tr>
 <td class="hvstup" colspan="1"> </td>
 <td class="hvstup" colspan="2"><?php echo $rsluz->polozka;?></td>
-<td class="hvstup" colspan="4"><?php echo $rsluz->nazov;?></td>
+<td class="hvstup" colspan="3"><?php echo $rsluz->nazov;?></td>
+<td class="hvstup" colspan="1" align="right"> </td>
 <td class="hvstup" colspan="1" align="right"> </td>
 <td class="hvstup" colspan="1" align="right"> </td>
 <td class="hvstup" colspan="1" align="right"><?php echo $rsluz->skutocnost;?>
@@ -3169,12 +3235,12 @@ $j = $j + 1;
 ?>
 
 <tr>
-<td class="bmenu" colspan="1"><input type="hidden" name="zdroj" id="zdroj" size="10" onKeyDown="return ZdrojEnter(event.which)"/></td>
+<td class="bmenu" colspan="1"> </td>
 <td class="bmenu" colspan="2"><input type="text" name="polozka" id="polozka" size="10" onKeyDown="return PolozkaEnter(event.which)"/></td>
 
 <td class="bmenu" colspan="4"> </td>
-<td class="bmenu" colspan="1" align="right"><input type="hidden" name="schvaleny" id="schvaleny" size="10" onKeyDown="return SchvalenyEnter(event.which)"/></td>
-<td class="bmenu" colspan="1" align="right"><input type="hidden" name="zmeneny" id="zmeneny" size="10" onKeyDown="return ZmenenyEnter(event.which)"/></td>
+<td class="bmenu" colspan="1"> </td>
+<td class="bmenu" colspan="1"> </td>
 <td class="bmenu" colspan="1" align="right"><input type="text" name="skutocnost" id="skutocnost" size="10" onKeyDown="return SkutocnostEnter(event.which)"/></td>
 </tr>
 
@@ -3220,14 +3286,15 @@ $pvstup="pvstup";
 ?>
 
 
-<tr><td class="pvstuz" colspan="10">»asù III.Podnikateæsk· Ëinnosù subjektu verejnej spr·vy </td></tr>
-<tr><td class="pvstuz" colspan="10">3.2. V˝davky </td></tr>
+<tr><td class="pvstuz" colspan="11">»asù III.Podnikateæsk· Ëinnosù subjektu verejnej spr·vy </td></tr>
+<tr><td class="pvstuz" colspan="11">3.2. V˝davky </td></tr>
 <tr>
 <td class="bmenu" colspan="1"> </td>
 <td class="bmenu" colspan="1"> </td>
 <td class="bmenu" colspan="2">Oddiel + Skupina + Trieda + Podtrieda</td>
 <td class="bmenu" colspan="2">Poloûka + Podpoloûka</td>
 <td class="bmenu" colspan="1"> </td>
+<td class="bmenu" colspan="1" align="right"> </td>
 <td class="bmenu" colspan="1" align="right"> </td>
 <td class="bmenu" colspan="1" align="right"> </td>
 <td class="bmenu" colspan="1" align="right">SkutoËnosù</td>
@@ -3250,6 +3317,7 @@ $pvstup="pvstup";
 <td class="hvstup" colspan="1"><?php echo $rsluz->nazov;?></td>
 <td class="hvstup" colspan="1" align="right"> </td>
 <td class="hvstup" colspan="1" align="right"> </td>
+<td class="hvstup" colspan="1" align="right"> </td>
 <td class="hvstup" colspan="1" align="right"><?php echo $rsluz->skutocnost;?>
 
 <a href='vykaz_fin112_2016.php?copern=316&cislo_cpl=<?php echo $rsluz->cpl;?>&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>&fin1a12=<?php echo $fin1a12; ?>'>
@@ -3269,15 +3337,16 @@ $j = $j + 1;
 
 
 <tr>
-<td class="bmenu" colspan="1"><input type="hidden" name="program" id="program" size="10" onKeyDown="return ProgramEnter(event.which)"/></td>
-<td class="bmenu" colspan="1"><input type="hidden" name="zdroj" id="zdroj" size="10" onKeyDown="return ZdrojEnter(event.which)"/></td>
+<td class="bmenu" colspan="1"> </td>
+<td class="bmenu" colspan="1"> </td>
 <td class="bmenu" colspan="2"><input type="text" name="oddiel" id="oddiel" size="10" onKeyDown="return OddielEnter(event.which)"/></td>
 
 <td class="bmenu" colspan="2"><input type="text" name="polozka" id="polozka" size="10" onKeyDown="return PolozkaEnter(event.which)"/></td>
 
 <td class="bmenu" colspan="1"> </td>
-<td class="bmenu" colspan="1" align="right"><input type="hidden" name="schvaleny" id="schvaleny" size="10" onKeyDown="return SchvalenyEnter(event.which)"/></td>
-<td class="bmenu" colspan="1" align="right"><input type="hidden" name="zmeneny" id="zmeneny" size="10" onKeyDown="return ZmenenyEnter(event.which)"/></td>
+<td class="bmenu" colspan="1" align="right"> </td>
+<td class="bmenu" colspan="1" align="right"> </td>
+<td class="bmenu" colspan="1" align="right"> </td>
 <td class="bmenu" colspan="1" align="right"><input type="text" name="skutocnost" id="skutocnost" size="10" onKeyDown="return SkutocnostEnter(event.which)"/></td>
 </tr>
 

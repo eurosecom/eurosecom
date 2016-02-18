@@ -152,7 +152,7 @@ $vysledx = mysql_query("$sqlx");
 
 $dsqlt = "INSERT INTO prijdbf "." SELECT".
 " '$fir_ficox','$kli_vrok','$mesiac','$typorg',".
-" 1,zdroj,'R',xpolozka,podpolozka,schvaleny,zmeneny,0,skutocnost ".
+" 1,zdroj,'R',xpolozka,podpolozka,schvaleny,zmeneny,predpoklad,skutocnost ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 1 ORDER BY polozka";
 //echo $dsqlt;
@@ -161,7 +161,7 @@ $dsql = mysql_query("$dsqlt");
 //cast 3ka nejde
 $dsqlt = "INSERT INTO prijdbf "." SELECT".
 " '$fir_ficox','$kli_vrok','$mesiac','$typorg',".
-" 1,zdroj,'R',xpolozka,podpolozka,schvaleny,zmeneny,0,skutocnost ".
+" 1,zdroj,'R',xpolozka,podpolozka,schvaleny,zmeneny,predpoklad,skutocnost ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 1 ORDER BY polozka";
 //echo $dsqlt;
@@ -171,7 +171,7 @@ $dsqlt = "INSERT INTO prijdbf "." SELECT".
 
 $dsqlt = "INSERT INTO prijdbf "." SELECT".
 " '$fir_ficox','$kli_vrok','$mesiac','$typorg',".
-" druh,'9','R','','',SUM(schvaleny),SUM(zmeneny),0,SUM(skutocnost) ".
+" druh,'9','R','','',SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost) ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 1 GROUP BY druh";
 //echo $dsqlt;
@@ -320,7 +320,7 @@ $vysledx = mysql_query("$sqlx");
 
 $dsqlt = "INSERT INTO vyddbf "." SELECT".
 " '$fir_ficox','$kli_vrok','$mesiac','$typorg',".
-" 2,zdroj,'R',xoddiel,skupina,trieda,podtrieda,xpolozka,podpolozka,schvaleny,zmeneny,0,skutocnost ".
+" 2,zdroj,'R',xoddiel,skupina,trieda,podtrieda,xpolozka,podpolozka,schvaleny,zmeneny,predpoklad,skutocnost ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 2 ORDER BY polozka";
 //echo $dsqlt;
@@ -333,7 +333,7 @@ $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO vyddbf "." SELECT".
 " '$fir_ficox','$kli_vrok','$mesiac','$typorg',".
-" druh,'9','R','','','','','','',SUM(schvaleny),SUM(zmeneny),0,SUM(skutocnost) ".
+" druh,'9','R','','','','','','',SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost) ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 2 GROUP BY druh";
 //echo $dsqlt;
