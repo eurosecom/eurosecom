@@ -553,9 +553,12 @@ var vyskawin = screen.height-175;
 
 <?php
 // nastavenie vzhladu stranky v IE zahlavie= &d &t &b Strana è. &p z &P pata=prazdna
-// na vysku okraje vl=15 vp=15 hr=15 dl=15 poloziek 43   
+// na vysku okraje vl=15 vp=15 hr=15 dl=15 poloziek 43 
 
-if (File_Exists ("../tmp/udoklad$kli_uzid.pdf")) { $soubor = unlink("../tmp/udoklad$kli_uzid.pdf"); }
+$hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$idx=$kli_uzid.$hhmm; 
+
+if (File_Exists ("../tmp/udoklad$idx.pdf")) { $soubor = unlink("../tmp/udoklad$idx.pdf"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -1032,7 +1035,7 @@ $j=-1;
 
 $razitko = 1*$_REQUEST['h_razitko'];
 
-if( $razitko == 1 AND $drupoh <v4 )
+if( $razitko == 1 AND $drupoh < 4 )
           {
 $pocetpoloziek=$slpol+$tvpol;
 
@@ -1079,8 +1082,19 @@ if( $j > 46 ) $j=0;
   }
 
 
+$tlacover=1;
+$meno1="Jurenova";
+if( $tlacover == 1 )
+          {
 
-$pdf->Output("../tmp/udoklad.$kli_uzid.pdf");
+$pdf->Cell(30,5," ","0",1,"L");
+$pdf->Cell(60,5,"tabulka: $meno1","1",1,"L");
+
+
+          }
+
+
+$pdf->Output("../tmp/udoklad.$idx.pdf");
 
 $sql = 'DROP TABLE F'.$kli_vxcf.'_prcudok'.$kli_uzid;
 //$vysledek = mysql_query("$sql");
@@ -1091,7 +1105,7 @@ $sql = 'DROP TABLE F'.$kli_vxcf.'_prcupoh'.$kli_uzid;
 ?> 
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/udoklad.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("../tmp/udoklad.<?php echo $idx; ?>.pdf","_self");
 </script>
 
 
