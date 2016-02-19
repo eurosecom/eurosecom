@@ -2467,8 +2467,7 @@ function SkutocnostEnter(e)
 
 <?php if ( $strana == 1 )                           { ?>
 
-document.formv1.okres.value = '<?php echo $okres;?>';
-document.formv1.obec.value = '<?php echo $obec;?>';
+
 document.formv1.daz.value = '<?php echo $daz_sk;?>';
 document.formv1.ostp.value = '<?php echo $ostp;?>';
 
@@ -2490,8 +2489,7 @@ document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
 <?php if ( $strana == 3 )                           { ?>
 
-document.formv1.okres.value = '<?php echo $okres;?>';
-document.formv1.obec.value = '<?php echo $obec;?>';
+
 document.formv1.daz.value = '<?php echo $daz_sk;?>';
 document.formv1.ostp.value = '<?php echo $ostp;?>';
 
@@ -2509,8 +2507,6 @@ document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 <?php if ( $strana == 2 )                           { ?>
 
 
-document.formv1.okres.value = '<?php echo $okres;?>';
-document.formv1.obec.value = '<?php echo $obec;?>';
 document.formv1.daz.value = '<?php echo $daz_sk;?>';
 document.formv1.ostp.value = '<?php echo $ostp;?>';
 
@@ -2524,7 +2520,7 @@ document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
  document.formv1.uloz.disabled = true;
  if( document.forms.formv1.zdroj.value == '' ) { document.forms.formv1.zdroj.value="41"; }
- if( document.forms.formv1.oddiel.value == '' ) { document.forms.formv1.oddiel.value="10.1.2.2"; }
+ if( document.forms.formv1.oddiel.value == '' ) { document.forms.formv1.oddiel.value="<?php echo $ostp;?>"; }
         document.forms.formv1.zdroj.focus();
         document.forms.formv1.zdroj.select();
 
@@ -2533,8 +2529,6 @@ document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 <?php if ( $strana == 4 )                           { ?>
 
 
-document.formv1.okres.value = '<?php echo $okres;?>';
-document.formv1.obec.value = '<?php echo $obec;?>';
 document.formv1.daz.value = '<?php echo $daz_sk;?>';
 document.formv1.ostp.value = '<?php echo $ostp;?>';
 
@@ -2543,7 +2537,7 @@ document.formv1.polozka.value = '<?php echo $polozka;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
  document.formv1.uloz.disabled = true;
- if( document.forms.formv1.oddiel.value == '' ) { document.forms.formv1.oddiel.value="10.1.2.2"; }
+ if( document.forms.formv1.oddiel.value == '' ) { document.forms.formv1.oddiel.value="<?php echo $ostp;?>"; }
         document.forms.formv1.oddiel.focus();
         document.forms.formv1.oddiel.select();
 <?php                                                } ?>
@@ -2945,10 +2939,7 @@ if( $next_str == 5 ) $next_str=1;
 
 <tr><td class="pvstuz" colspan="10">⁄daje o firme </td></tr>
 <tr>
-<td class="bmenu" colspan="9">KÛd okresu:
-<input type="text" name="okres" id="okres" size="10" />
- KÛd obce:
-<input type="text" name="obec" id="obec" size="10" />
+<td class="bmenu" colspan="9">
  V˝kaz zostaven˝ dÚa:
 <input type="text" name="daz" id="daz" size="10" />
 
@@ -3001,7 +2992,7 @@ $pvstup="pvstup";
 <td class="bmenu" colspan="3"> </td>
 <td class="bmenu" colspan="1" align="right">Schv·len˝ rozpoËet</td>
 <td class="bmenu" colspan="1" align="right">RozpoËet po zmen·ch</td>
-<td class="bmenu" colspan="1" align="right">Predpoklad</td>
+<td class="bmenu" colspan="1" align="right">OËak·van· skutoËnosù</td>
 <td class="bmenu" colspan="1" align="right">SkutoËnosù</td>
 </tr>
 
@@ -3100,7 +3091,7 @@ $pvstup="pvstup";
 <td class="bmenu" colspan="1"> </td>
 <td class="bmenu" colspan="1" align="right">Schv·len˝ rozpoËet</td>
 <td class="bmenu" colspan="1" align="right">RozpoËet po zmen·ch</td>
-<td class="bmenu" colspan="1" align="right">Predpoklad</td>
+<td class="bmenu" colspan="1" align="right">OËak·van· skutoËnosù</td>
 <td class="bmenu" colspan="1" align="right">SkutoËnosù</td>
 </tr>
 
