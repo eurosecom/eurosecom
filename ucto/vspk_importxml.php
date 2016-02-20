@@ -34,22 +34,39 @@ $citfir = include("../cis/citaj_fir.php");
 if( $copern == 1003 )
 {
 $h_ucex = strip_tags($_REQUEST['h_ucex']);
+$h_uced = strip_tags($_REQUEST['h_uced']);
 $h_ibanx = strip_tags($_REQUEST['h_ibanx']);
+$h_popx = strip_tags($_REQUEST['h_popx']);
 $h_vsyx = 1*$_REQUEST['h_vsyx'];
 $h_ucey = 1*$_REQUEST['h_ucex'];
+$h_ucey1 = 1*$_REQUEST['h_uced'];
 
-$ulozttt = "INSERT INTO F$kli_vxcf"."_uctimportbankyuce ( ibanx, vsyx, ucex ) ".
-" VALUES ( '$h_ibanx', '$h_vsyx', '$h_ucex' ); ";
-if( $h_ucey > 0 ) { $vysledok = mysql_query("$ulozttt"); }
+$ulozttt = "INSERT INTO F$kli_vxcf"."_uctimportbankyuce ( ibanx, vsyx, ucex, uced, popx ) ".
+" VALUES ( '$h_ibanx', '$h_vsyx', '$h_ucex', '$h_uced', '$h_popx' ); ";
+if( $h_ucey > 0 OR $h_ucey1 > 0 ) { $vysledok = mysql_query("$ulozttt"); }
 
 $copern=1001;
 }
 //koniec uloz polozku
 
+$zmazanie=0;
 //zmaz polozku
 if( $copern == 1006 )
 {
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
+
+$sqlico = mysql_query("SELECT * FROM F$kli_vxcf"."_uctimportbankyuce WHERE porx = $cislo_cpl");
+  if (@$zaznam=mysql_data_seek($sqlico,0))
+  {
+  $riadico=mysql_fetch_object($sqlico);
+  $ibanx=$riadico->ibanx;
+  $vsyx=$riadico->vsyx;
+  $ucex=$riadico->ucex;
+  $uced=$riadico->uced;
+  $popx=$riadico->popx;
+  $zmazanie=1;
+  }
+
 
 $ulozttt = "DELETE FROM F$kli_vxcf"."_uctimportbankyuce WHERE porx = $cislo_cpl";
 $vysledok = mysql_query("$ulozttt");
@@ -79,6 +96,18 @@ $sqlt = <<<statistika_p1304
 statistika_p1304;
 
 $vsql = "CREATE TABLE F".$kli_vxcf."_uctimportbankyuce ".$sqlt;
+$vytvor = mysql_query("$vsql");
+
+}
+
+$sql = "SELECT popx FROM F$kli_vxcf"."_uctimportbankyuce  ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+
+$vsql = "ALTER TABLE F".$kli_vxcf."_uctimportbankyuce ADD uced VARCHAR(50) NOT NULL AFTER ucex ";
+$vytvor = mysql_query("$vsql");
+$vsql = "ALTER TABLE F".$kli_vxcf."_uctimportbankyuce ADD popx VARCHAR(30) NOT NULL AFTER uced ";
 $vytvor = mysql_query("$vsql");
 
 }
@@ -198,18 +227,21 @@ fclose($soubox);
 
 //hladanie ico
 
+$ico=0;
 $nasielico=0;
 $nasieluce=0;
 $xvsy=1*$riadok->vsy;
 $tabulka="odb";
 if( $riadok->pohyb == 'DBIT' ) { $tabulka="dod"; }
 
-$ucproti=26100; 
+$ucproti=26100;
+$ucprotidebet=26100; 
 $sqlico = mysql_query("SELECT uce,ico,hod,dn1,dn2 FROM F$kli_vxcf"."_fak".$tabulka." WHERE fak = $xvsy ");
   if (@$zaznam=mysql_data_seek($sqlico,0))
   {
   $riadico=mysql_fetch_object($sqlico);
   $ucproti=$riadico->uce;
+  $ucprotidebet=$riadico->uce;
   $ico=$riadico->ico;
   $hdp=$riadico->dn1+$riadico->dn2;
   $nasielico=1;
@@ -222,6 +254,7 @@ $sqlico = mysql_query("SELECT uce,ico,hod,dn1,dn2 FROM F$kli_vxcf"."_fak".$tabul
   {
   $riadico=mysql_fetch_object($sqlico);
   $ucproti=$riadico->uce;
+  $ucprotidebet=$riadico->uce;
   $ico=$riadico->ico;
   $hdp=$riadico->dn1+$riadico->dn2;
   $nasielico=1;
@@ -289,6 +322,7 @@ if( $polico4 > 0 )
 $fir_riadok4=mysql_fetch_object($fir_vysledok4);
 
 $ucproti = $fir_riadok4->ucex;
+$ucprotidebet = $fir_riadok4->uced;
 $nasieluce=1;
 }
   }
@@ -304,11 +338,17 @@ if( $polico5 > 0 )
 $fir_riadok5=mysql_fetch_object($fir_vysledok5);
 
 $ucproti = $fir_riadok5->ucex;
+$ucprotidebet = $fir_riadok5->uced;
 $nasieluce=1;
 }
   }
 
 //koniec hladanie uce
+
+$ucproti=trim($ucproti);
+$ucprotidebet=trim($ucprotidebet);
+if( $ucproti == '' ) { $ucproti="26100"; } 
+if( $ucprotidebet == '' ) { $ucprotidebet="26100"; } 
 
 //dok	ddu	poh	cpl	ucm	ucd	rdp	dph	hod	hodm	kurz	mena	zmen	ico	fak	pop	str	zak	unk	id	datm
 $sqty = "UPDATE F$kli_vxcf"."_importbanky$kli_uzid SET ".
@@ -317,7 +357,7 @@ $sqty = "UPDATE F$kli_vxcf"."_importbanky$kli_uzid SET ".
 $ulozene = mysql_query("$sqty"); 
 
 $sqty = "UPDATE F$kli_vxcf"."_importbanky$kli_uzid SET ".
-" ucd='$cislo_uce', ucm='$ucproti', ico='$ico' WHERE pohyb = 'DBIT' AND porc = $riadok->porc ";
+" ucd='$cislo_uce', ucm='$ucprotidebet', ico='$ico' WHERE pohyb = 'DBIT' AND porc = $riadok->porc ";
 //echo $sqty; 
 $ulozene = mysql_query("$sqty");
 
@@ -366,10 +406,23 @@ $ulozene = mysql_query("$sqty");
 
 <script type="text/javascript">
 
+    function ObnovUI()
+    {
+<?php if( $zmazanie == 1 ) { ?>
+    document.formv1.h_ibanx.value = '<?php echo "$ibanx";?>';
+    document.formv1.h_vsyx.value = '<?php echo "$vsyx";?>';
+    document.formv1.h_ucex.value = '<?php echo "$ucex";?>';
+    document.formv1.h_uced.value = '<?php echo "$uced";?>';
+    document.formv1.h_popx.value = '<?php echo "$popx";?>';
+    document.formv1.h_ibanx.focus();
+    document.formv1.h_ibanx.select();
+<?php                      } ?>
+    }
+
 
 </script>
 </HEAD>
-<BODY class="white" >
+<BODY class="white" onload="ObnovUI();" >
 
 
 <?php
@@ -424,7 +477,7 @@ if ($_REQUEST["odeslano"]!=1)
 </tr>
 </table>
 <br />
-    <form method="POST" ENCTYPE="multipart/form-data" action="<?php echo $_SERVER["PHP_SELF"]?>?copern=1003&drupoh=<?php echo $drupoh;?>&page=1&cislo_dok=<?php echo $cislo_dok; ?>&cislo_uce=<?php echo $cislo_uce; ?>"> 
+    <form method="POST" name="formv1" ENCTYPE="multipart/form-data" action="<?php echo $_SERVER["PHP_SELF"]?>?copern=1003&drupoh=<?php echo $drupoh;?>&page=1&cislo_dok=<?php echo $cislo_dok; ?>&cislo_uce=<?php echo $cislo_uce; ?>"> 
     <table class="vstup" width="100%" height="50px">
       <tr> 
         <td  width="10%" align="left" >
@@ -433,11 +486,13 @@ if ($_REQUEST["odeslano"]!=1)
 
         <td  width="20%" align="left" >IBAN</td>
         <td  width="10%" align="left" >VSY</td>
-        <td  width="10%" align="left" >˙Ëet</td>
+        <td  width="10%" align="left" >˙Ëet Kredit</td>
+        <td  width="10%" align="left" >˙Ëet Debet</td>
+        <td  width="20%" align="left" >popis</td>
         <td  width="5%" align="left" >Zmazaù</td>
 
 
-        <td  width="35%" align="right" > </td> 
+        <td  width="5%" align="right" > </td> 
         <td  width="10%" align="right" >
 <a href="#" onClick="window.open('vspk_importxml.php?copern=1&drupoh=<?php echo $drupoh;?>&page=1&cislo_dok=<?php echo $cislo_dok;?>
 &cislo_uce=<?php echo $cislo_uce;?>', '_self' )">
@@ -464,6 +519,8 @@ $hlavicka=mysql_fetch_object($sql);
         <td  colspan="1" align="left" ><?php echo $hlavicka->ibanx; ?></td>
         <td  colspan="1" align="left" ><?php echo $hlavicka->vsyx; ?></td>
         <td  colspan="1" align="left" ><?php echo $hlavicka->ucex; ?></td>
+        <td  colspan="1" align="left" ><?php echo $hlavicka->uced; ?></td>
+        <td  colspan="1" align="left" ><?php echo $hlavicka->popx; ?></td>
         <td  colspan="1" align="left" ><a href="#" onClick="window.open('vspk_importxml.php?copern=1006&drupoh=<?php echo $drupoh;?>&page=1&cislo_dok=<?php echo $cislo_dok;?>
 &cislo_uce=<?php echo $cislo_uce;?>&cislo_cpl=<?php echo $hlavicka->porx; ?>', '_self' )">
 <img src='../obr/zmaz.png' width=15 height=15 border=0 title="Zmazaù poloûku" ></a>
@@ -477,9 +534,11 @@ $i=$i+1;
 ?>
         <tr>
         <td  colspan="1" align="left" > </td>
-        <td  colspan="1" align="left" ><input type="text" name="h_ibanx" id="h_ibanx" size="30"/></td>
+        <td  colspan="1" align="left" ><input type="text" name="h_ibanx" id="h_ibanx" size="35"/></td>
         <td  colspan="1" align="left" ><input type="text" name="h_vsyx" id="h_vsyx" size="12"/></td>
         <td  colspan="1" align="left" ><input type="text" name="h_ucex" id="h_ucex" size="10"/></td>
+        <td  colspan="1" align="left" ><input type="text" name="h_uced" id="h_uced" size="10"/></td>
+        <td  colspan="1" align="left" ><input type="text" name="h_popx" id="h_popx" size="35"/></td>
         </tr>
 <tr>
 <td class="obyc" colspan="2"><INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" ></td>

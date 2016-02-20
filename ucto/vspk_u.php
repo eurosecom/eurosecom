@@ -2408,11 +2408,11 @@ if ( $drupoh == 2 )
     document.forms1.h_cpl.disabled = true;
     document.forms1.h_ne1.disabled = true;
     document.forms1.uloz.disabled = true;
-<?php if( $fir_allx15 == 0 OR $drupoh != 4  ) { ?>
+<?php if( $fir_allx15 == 0 OR $drupoh != 4 OR $copern == 87 ) { ?>
     document.forms1.h_ucm.focus();
     document.forms1.h_ucm.select();
 <?php                                         } ?>
-<?php if( $fir_allx15 == 1 AND $drupoh == 4 ) { ?>
+<?php if( $fir_allx15 == 1 AND $drupoh == 4 AND $copern != 87 ) { ?>
     document.forms1.ddu.focus();
     document.forms1.ddu.select();
 <?php                                         } ?>
