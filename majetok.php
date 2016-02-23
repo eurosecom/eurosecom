@@ -121,6 +121,8 @@ endif;
           }
 //koniec len ak je vybrana firma
 
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -398,37 +400,37 @@ var vyskawin = screen.height-90;
 
   function Zozmaj()
   { 
-  var okno = window.open("../majetok/vstmaj.php?copern=1&drupoh=1&page=1","_blank",'<?php echo $parwin; ?>');
+  var okno = window.open("../majetok/vstmaj.php?copern=1&drupoh=1&page=1&<?php echo $hhmmss; ?>","_blank",'<?php echo $parwin; ?>');
   }
 
   function Zozdim()
   { 
-  var okno = window.open("../majetok/vstmaj.php?copern=1&drupoh=2&page=1","_blank",'<?php echo $parwin; ?>');
+  var okno = window.open("../majetok/vstmaj.php?copern=1&drupoh=2&page=1&<?php echo $hhmmss; ?>","_blank",'<?php echo $parwin; ?>');
   }
 
   function Pohmaj()
   { 
-  var okno = window.open("../majetok/vstmaj.php?copern=1&drupoh=11&page=1","_blank",'<?php echo $parwin; ?>');
+  var okno = window.open("../majetok/vstmaj.php?copern=1&drupoh=11&page=1&<?php echo $hhmmss; ?>","_blank",'<?php echo $parwin; ?>');
   }
 
   function Pohdim()
   { 
-  var okno = window.open("../majetok/vstmaj.php?copern=1&drupoh=12&page=1","_blank",'<?php echo $parwin; ?>');
+  var okno = window.open("../majetok/vstmaj.php?copern=1&drupoh=12&page=1&<?php echo $hhmmss; ?>","_blank",'<?php echo $parwin; ?>');
   }
 
   function MesOdp()
   { 
-  var okno = window.open("../majetok/mesodp.php?copern=2&drupoh=1&page=1","_blank",'<?php echo $parwin; ?>');
+  var okno = window.open("../majetok/mesodp.php?copern=2&drupoh=1&page=1&<?php echo $hhmmss; ?>","_blank",'<?php echo $parwin; ?>');
   }
 
   function DanOdp()
   { 
-  var okno = window.open("../majetok/mesodp.php?copern=3&drupoh=3&page=1","_blank",'<?php echo $parwin; ?>');
+  var okno = window.open("../majetok/mesodp.php?copern=3&drupoh=3&page=1&<?php echo $hhmmss; ?>","_blank",'<?php echo $parwin; ?>');
   }
 
   function ZrsOdp()
   { 
-  var okno = window.open("../majetok/zrsmes.php?copern=1&drupoh=1&page=1","_blank",'<?php echo $parwin; ?>');
+  var okno = window.open("../majetok/zrsmes.php?copern=1&drupoh=1&page=1&<?php echo $hhmmss; ?>","_blank",'<?php echo $parwin; ?>');
   }
 
   function PreUct()

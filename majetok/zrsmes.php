@@ -29,6 +29,81 @@ $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
 
 
+
+//tabulka so zostavami
+$vsql = "DROP TABLE F$kli_vxcf"."_majzostavy".$kli_uzid." ";
+$vytvor = mysql_query("$vsql");
+
+$sqlt = <<<mzdprc
+(
+   dat1          timestamp(14) NOT NULL,
+   date          timestamp(14) NOT NULL,
+   name          VARCHAR(50) NOT NULL,
+   nam2          VARCHAR(50) NOT NULL,
+   mesx          DECIMAL(10,2) DEFAULT 0,
+   konx1         DECIMAL(10,0) DEFAULT 0
+);
+mzdprc;
+
+$vsql = "CREATE TABLE F$kli_vxcf"."_majzostavy".$kli_uzid." ".$sqlt;
+$vytvor = mysql_query("$vsql");
+
+$adresar = opendir("../dokumenty/FIR".$kli_vxcf);
+chdir("../dokumenty/FIR".$kli_vxcf);
+
+
+while ($soubor = readdir($adresar))
+{
+
+if(is_file($soubor))
+    {
+
+$filename = "$soubor";
+if (file_exists($filename)) {
+
+$datumzmeny=date ("Y-m-d h:i:s", filemtime($filename));
+
+
+$ttvv = "INSERT INTO F$kli_vxcf"."_majzostavy".$kli_uzid." ( date,name,konx1  ) VALUES ( '$datumzmeny', '$filename', '1' )";
+$ttqq = mysql_query("$ttvv");
+//echo $ttvv."<br />";
+
+                            }
+
+    }
+
+}
+
+$vsql = "DELETE FROM F$kli_vxcf"."_majzostavy".$kli_uzid." WHERE LEFT(name,6) != 'mesodp' ";
+$vytvor = mysql_query("$vsql");
+
+$vsql = "UPDATE F$kli_vxcf"."_majzostavy".$kli_uzid." SET mesx=SUBSTRING(name,8,2), nam2=SUBSTRING(name,8,2)  ";
+$vytvor = mysql_query("$vsql");
+
+$ttvv = "INSERT INTO F$kli_vxcf"."_majzostavy".$kli_uzid." SELECT dat1,MAX(date),name,nam2,mesx,2 FROM F$kli_vxcf"."_majzostavy".$kli_uzid." WHERE konx1 = 1 GROUP BY mesx ";
+$ttqq = mysql_query("$ttvv");
+//echo $ttvv."<br />";
+
+          $vyslettt = "SELECT * FROM F$kli_vxcf"."_majzostavy$kli_uzid WHERE konx1 = 2 ORDER BY mesx ";
+          $vysledok = mysql_query("$vyslettt");
+          while ($riadok = mysql_fetch_object($vysledok))
+          {
+
+
+                $vsql = "DELETE FROM F$kli_vxcf"."_majzostavy".$kli_uzid." WHERE konx1 = 1 AND mesx = $riadok->mesx AND date != '$riadok->date' ";
+                $vytvor = mysql_query("$vsql");
+
+
+          	//echo $vsql."<br />";
+
+
+
+          }
+          //koniec cyklu
+
+//koniec tabulka so zostavami
+
+
 //zrusenie uzavierky
 if( $copern == 6 )
            {
@@ -79,6 +154,13 @@ $copern=1;
   </style>
 <script type="text/javascript">
     
+function DajZostavu(zostava)
+                {
+
+window.open('../dokumenty/FIR<?php echo $kli_vxcf; ?>/' + zostava + '',
+ "_blank", "width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes" );
+                }
+
 </script>
 </HEAD>
 <BODY class="white" >
@@ -203,8 +285,18 @@ $kli_vrok=$pole[1];
 <td class="fmenu" align="right">&nbsp;<?php echo $rtov->ros;?></td>
 <td class="fmenu" align="right">&nbsp;<?php echo $rtov->rop;?></td>
 <td class="fmenu" align="center">
-<a href="../dokumenty/FIR<?php echo $kli_vxcf; ?>/mesodp.<?php echo $kli_vmes; ?>.pdf" target="_blank">
-<img src='../obr/tlac.png' width=15 height=10 border=0 alt="Zostava mesaèných odpisov <?php echo $rtov->ume; ?>" ></a>
+<?php
+$zostavaxx="";
+$poslhh = "SELECT * FROM F$kli_vxcf"."_majzostavy$kli_uzid WHERE konx1 = 1 AND mesx = $kli_vmes ";
+$posl = mysql_query("$poslhh"); 
+  if (@$zaznam=mysql_data_seek($posl,0))
+  {
+  $posled=mysql_fetch_object($posl);
+  $zostavaxx = $posled->name;
+  }
+
+?>
+<img src='../obr/tlac.png' width=15 onclick="DajZostavu('<?php echo $zostavaxx; ?>');" height=10 border=0 title="Zostava mesaèných odpisov <?php echo $rtov->ume; ?>" ></a>
 </td>
 <td class="fmenu" align="center">
 <?php

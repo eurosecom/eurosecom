@@ -1134,13 +1134,31 @@ $vysledok = mysql_query("$sqlt");
 if( $copern == 1 )
           {
 //zapis do majmaj
+
+          $vyslettt = "SELECT * FROM F$kli_vxcf"."_odpprc$kli_uzid WHERE inv > 0 ORDER BY inv ";
+          $vysledok = mysql_query("$vyslettt");
+          while ($riadok = mysql_fetch_object($vysledok))
+          {
+          //zaciatok cyklu
+
+$sqtoz = "UPDATE F$kli_vxcf"."_majmaj ".
+" SET mes=$riadok->mes, ros=$riadok->ros, cen=$riadok->cen, ops=$riadok->ops, ".
+" zos=$riadok->zos, rop=$riadok->rop, ume=$kli_vume, poh=1, dph=1 ".
+" WHERE inv= $riadok->inv ";
+$oznac = mysql_query("$sqtoz");
+
+
+          }
+          //koniec cyklu
+
+
 $sqtoz = "UPDATE F$kli_vxcf"."_majmaj,F$kli_vxcf"."_odpprc$kli_uzid".
 " SET F$kli_vxcf"."_majmaj.mes=F$kli_vxcf"."_odpprc$kli_uzid.mes,F$kli_vxcf"."_majmaj.ros=F$kli_vxcf"."_odpprc$kli_uzid.ros,".
 " F$kli_vxcf"."_majmaj.cen=F$kli_vxcf"."_odpprc$kli_uzid.cen,F$kli_vxcf"."_majmaj.ops=F$kli_vxcf"."_odpprc$kli_uzid.ops,".
 " F$kli_vxcf"."_majmaj.zos=F$kli_vxcf"."_odpprc$kli_uzid.zos,F$kli_vxcf"."_majmaj.rop=F$kli_vxcf"."_odpprc$kli_uzid.rop,".
 " F$kli_vxcf"."_majmaj.ume=$kli_vume,F$kli_vxcf"."_majmaj.poh=1,F$kli_vxcf"."_majmaj.dph=1".
 " WHERE F$kli_vxcf"."_majmaj.inv=F$kli_vxcf"."_odpprc$kli_uzid.inv ";
-$oznac = mysql_query("$sqtoz");
+//$oznac = mysql_query("$sqtoz");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_majmajmes".
 " SELECT 0,$kli_vume,1,999,0,naz,pop,poz,vyc,rvr,tri,obo,jkp,ckp,0,0,SUM(mno),dob,dox,zar,rzv,str,zak,oc,kanc,spo,sku,perc,meso,".
@@ -1196,14 +1214,32 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_odpprc$kli_uzid".
 "";
 $dsql = mysql_query("$dsqlt");
 
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
 if( $drupoh == 1 )
 {
+ $outfilexmesdel="../dokumenty/FIR".$kli_vxcf."/mesodp.".$kli_vmes."_*.*";
+ foreach (glob("$outfilexmesdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilexmes="../dokumenty/FIR".$kli_vxcf."/mesodp.".$kli_vmes."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilexmes")) { $soubor = unlink("$outfilexmes"); }
 if (File_Exists ("../dokumenty/FIR$kli_vxcf/mesodp.$kli_vmes.pdf")) { $soubor = unlink("../dokumenty/FIR$kli_vxcf/mesodp.$kli_vmes.pdf"); }
+
 }
+
+
 
 if( $drupoh == 3 )
 {
-if (File_Exists ("../dokumenty/FIR$kli_vxcf/danodp.$kli_vmes.pdf")) { $soubor = unlink("../dokumenty/FIR$kli_vxcf/danodp.$kli_vmes.pdf"); }
+ $outfilexdandel="../dokumenty/FIR".$kli_vxcf."/danodp*.*";
+ foreach (glob("$outfilexdandel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilexdan="../dokumenty/FIR".$kli_vxcf."/danodp_".$hhmmss.".pdf";
+if (File_Exists ("$outfilexdan")) { $soubor = unlink("$outfilexdan"); }
 }
 
    define('FPDF_FONTPATH','../fpdf/font/');
@@ -1602,25 +1638,25 @@ $pdf->Cell(180,3,"Vytlaèil(a): $kli_uzmeno $kli_uzprie / $kli_uzid ","0",1,"L");
 
 if( $copern == 1 )
           {
-$pdf->Output("../dokumenty/FIR$kli_vxcf/mesodp.$kli_vmes.pdf");
+$pdf->Output("$outfilexmes");
 ?> 
 <script type="text/javascript">
-  var okno = window.open("../dokumenty/FIR<?php echo $kli_vxcf; ?>/mesodp.<?php echo $kli_vmes; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilexmes; ?>","_self");
 </script>
 <?php
           }
 if( $copern == 3 )
           {
-$pdf->Output("../dokumenty/FIR$kli_vxcf/danodp.$kli_vmes.pdf");
+$pdf->Output("$outfilexdan");
 ?> 
 <script type="text/javascript">
-  var okno = window.open("../dokumenty/FIR<?php echo $kli_vxcf; ?>/danodp.<?php echo $kli_vmes; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilexdan; ?>","_self");
 </script>
 <?php
           }
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Mesaèný odpis majetku</title>
   <style type="text/css">
