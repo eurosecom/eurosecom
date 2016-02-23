@@ -1841,6 +1841,26 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "CREATE TABLE F$kli_vxcf"."_majsodp SELECT * FROM ".$databaza."F$h_ycf"."_majsodp";
 $dsql = mysql_query("$dsqlt");
 
+if( $kli_vrok >= 2016 )
+  {
+
+$sqlt = <<<banvyp
+(
+   cpld        int not null auto_increment,
+   dok         DECIMAL(10,0) DEFAULT 0,
+   prx6        DECIMAL(4,0) DEFAULT 0,
+   PRIMARY KEY(cpld)
+);
+banvyp;
+
+$sql = "CREATE TABLE F".$kli_vxcf."_majodpskup2015new ".$sqlt;
+$vysledek = mysql_query("$sql");
+
+$sql = "CREATE TABLE F".$kli_vxcf."_majodpskup2015new1 ".$sqlt;
+$vysledek = mysql_query("$sql");
+
+  }
+
 if( $kli_vrok == 2015 )
   {
 $sql = "DROP TABLE F".$kli_vxcf."_majodpskup2015new ";
