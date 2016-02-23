@@ -343,6 +343,25 @@ $nasieluce=1;
 }
   }
 
+if( $nasieluce == 0 AND trim($riadok->iban) == '' ) 
+  {
+$sqlfir6 = "SELECT * FROM F$kli_vxcf"."_uctimportbankyuce WHERE ibanx = '' ";
+$fir_vysledok6 = mysql_query($sqlfir6);
+$polico6 = 1*mysql_num_rows($fir_vysledok6);
+if( $polico6 > 0 ) 
+{
+$fir_riadok6=mysql_fetch_object($fir_vysledok6);
+
+$ucprotiempty = trim($fir_riadok6->ucex);
+$ucprotidebetempty = trim($fir_riadok6->uced);
+$nasieluce=1;
+}
+
+if( $ucprotiempty != '' ) { $ucproti=$ucprotiempty; }
+if( $ucprotidebetempty != '' ) { $ucprotidebet=$ucprotidebetempty; }
+
+  }
+
 //koniec hladanie uce
 
 $ucproti=trim($ucproti);
