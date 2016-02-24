@@ -455,17 +455,17 @@ var vyskawin = screen.height-90;
 
   function Invmaj()
   { 
-  var okno = window.open("../majetok/invmaj.php?copern=1&drupoh=1&page=1","_blank",'<?php echo $parwin; ?>');
+  var okno = window.open("../majetok/invmaj.php?copern=1&drupoh=1&page=1&<?php echo $hhmmss; ?>","_blank",'<?php echo $parwin; ?>');
   }
 
   function Invdan()
   { 
-  var okno = window.open("../majetok/invmaj.php?copern=1&drupoh=1&page=1","_blank",'<?php echo $parwin; ?>');
+  var okno = window.open("../majetok/invmaj.php?copern=1&drupoh=1&page=1&<?php echo $hhmmss; ?>","_blank",'<?php echo $parwin; ?>');
   }
 
   function Invdim()
   { 
-  var okno = window.open("../majetok/invmaj.php?copern=1&drupoh=1&page=1","_blank",'<?php echo $parwin; ?>');
+  var okno = window.open("../majetok/invmaj.php?copern=1&drupoh=1&page=1&<?php echo $hhmmss; ?>","_blank",'<?php echo $parwin; ?>');
   }
 
   function CisDrm()

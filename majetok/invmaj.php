@@ -540,6 +540,14 @@ window.open('../majetok/zarad_maj.php?h_trd=' + h_trd + '&copern=10&drupoh=1&pag
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function InvOspo()
+                {
+var h_trd = 0;
+
+window.open('../majetok/osobspo_maj.php?h_trd=' + h_trd + '&copern=10&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 function InvEU()
                 {
 var h_trd = document.forms.formpe3.h_trd.value;
@@ -591,12 +599,12 @@ window.open('../majetok/invdim.php?h_trd=' + h_trd + '&copern=10&drupoh=1&page=1
 
 
     htmlmenu2 += "<tr><td colspan='8'>";
-    htmlmenu2 += "<img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='zhasni_upravmail();' alt='Zhasni menu' > "; 
+    htmlmenu2 += "<img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='zhasni_upravmail();' title='Zhasni menu' > "; 
     htmlmenu2 += "Nastavenie inventúry ";
 
     htmlmenu2 += " </td>";
 
-    htmlmenu2 += "<td colspan='2' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='zhasni_upravmail();' alt='Zhasni menu' ></td></tr>";  
+    htmlmenu2 += "<td colspan='2' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='zhasni_upravmail();' title='Zhasni menu' ></td></tr>";  
 
     htmlmenu2 += "<tr><FORM name='fkoef2' method='post' action='#' ><td class='ponuka' colspan='2'>";
 htmlmenu2 += "Vykonaná dòa ";
@@ -631,7 +639,7 @@ htmlmenu2 += " Komisia 3 ";
 
     htmlmenu2 += "<tr><td colspan='10'>";
 
-    htmlmenu2 += " <img border=0 src='../obr/ok.png' style='width:15; height:15;' onClick='uloz_upravmail();' alt='Uloži nastavenie' >";  
+    htmlmenu2 += " <img border=0 src='../obr/ok.png' style='width:15; height:15;' onClick='uloz_upravmail();' title='Uloži nastavenie' >";  
 
 
     htmlmenu2 += "</td></tr>";
@@ -782,7 +790,7 @@ zobrazene menu
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="InvMaj();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 alt='Vytlaèi vo formáte PDF' ></a>
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
 <td class="bmenu" width="38%">Inventúrna zostava dlhodobého majetku 
 <td class="bmenu" width="50%">
@@ -798,7 +806,7 @@ zobrazene menu
 </td>
 
 <td class="bmenu" width="10%" align="right" >
-<img src='../obr/naradie.png'  onClick="nastavpaux.style.display='';" width=15 height=15 border=0 alt='Nastavi komisiu a dátum inventúry, platí aj pre DIM' >
+<img src='../obr/naradie.png'  onClick="nastavpaux.style.display='';" width=15 height=15 border=0 title='Nastavi komisiu a dátum inventúry, platí aj pre DIM' >
 
 </td>
 
@@ -812,7 +820,7 @@ zobrazene menu
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="InvDim();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 alt='Vytlaèi vo formáte PDF' ></a>
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
 <td class="bmenu" width="38%">Inventúrna zostava drobného majetku 
 
@@ -838,7 +846,7 @@ zobrazene menu
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="InvEU();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 alt='Vytlaèi vo formáte PDF' ></a>
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
 <td class="bmenu" width="38%">Inventúrna zostava majetku obstaraného zo zdrojov EU a iných cudzích zdrojov
 
@@ -864,7 +872,7 @@ zobrazene menu
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="InvDar();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 alt='Vytlaèi vo formáte PDF' ></a>
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
 <td class="bmenu" width="38%">Inventúrna zostava majetku darovaného a bezplatne nadobudnutého
 
@@ -890,7 +898,7 @@ zobrazene menu
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="tlacmaj();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 alt='Definovanie a tlaè zostáv vo formáte PDF' ></a>
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Definovanie a tlaè zostáv vo formáte PDF' ></a>
 </td>
 <td class="bmenu" width="38%">Preddefinované zostavy z majetku
 
@@ -906,9 +914,27 @@ zobrazene menu
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="InvZar();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 alt='Vytlaèi vo formáte PDF' ></a>
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
 <td class="bmenu" width="38%">Zostava zaradeného majetku a stavu odpisov v roku zaradenia
+
+<td class="bmenu" width="60%">
+
+</td>
+
+</tr>
+</FORM>
+</table>
+
+
+<table class="vstup" width="100%" >
+<FORM name="formneu1" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="InvOspo();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
+</td>
+<td class="bmenu" width="38%">Zostava Osobnej spotreby daòových odpisov majetku
 
 <td class="bmenu" width="60%">
 
@@ -924,7 +950,7 @@ zobrazene menu
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="OdpisPlan();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 alt='Vytlaèi vo formáte PDF' ></a>
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
 <td class="bmenu" width="38%">Odpisový plán majetku pod¾a odpisových skupín
 
