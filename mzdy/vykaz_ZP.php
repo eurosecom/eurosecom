@@ -467,7 +467,7 @@ $i=$i+1;
 //exit;
 
 //ak pomer=14 dlhodobo nezamestnany UNION chce zcel_zp=zzam_zp= zcel_odp
-$sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE ume = $kli_vume AND pom = 14 AND zdrv >= 2700 AND zdrv <= 2799 ORDER BY oc";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE ume = $kli_vume AND pom = 1411111 AND zdrv >= 2700 AND zdrv <= 2799 ORDER BY oc";
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 $i=0;
@@ -506,33 +506,6 @@ $sqlx = mysql_query("$sqlttx");
 $i=$i+1;
   }
 
-//od tadeto som to presunul hore
-//ak je ZP DOVERA a DOHODAR presun CELK.PRIJEM PRE ODP. do CELK.INY PRIJ. od 1.7.2015 zacali kontrolovat
-$sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun ".
-"LEFT JOIN F$kli_vxcf"."_mzdpomer ON F$kli_vxcf"."_$mzdkun.pom=F$kli_vxcf"."_mzdpomer.pm ".
-" WHERE ume = $kli_vume AND pm_doh = 1111 ORDER BY oc ";
-$sql = mysql_query("$sqltt");
-$pol = mysql_num_rows($sql);
-$i=0;
-  while ($i <= $pol )
-  {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-{
-$hlavicka=mysql_fetch_object($sql);
-
-$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_inp=zcel_odp WHERE oc = $hlavicka->oc AND konx2 = 999 AND zcel_odp != 0 AND xdrv >= 2300 AND xdrv <= 2499 ";
-$sqlx = mysql_query("$sqlttx");
-
-//echo $sqlttx."<br />";
-
-$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_odp=0 WHERE oc = $hlavicka->oc AND konx2 = 999 AND zcel_odp != 0 AND xdrv >= 2300 AND xdrv <= 2499 ";
-$sqlx = mysql_query("$sqlttx");
-
-}
-$i=$i+1;
-  }
-
-//exit;
 
 //ak zdravotne postihnutie znizp presun do .._np
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid".
@@ -578,6 +551,24 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplx".$kli_uzid.
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+//exit;
+//ak pomer=14 dlhodobo nezamestnany UNION chce zcel_zp=zzam_zp= zcel_odp ALE V SUMARE ZA ZP TO NECHCU
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE ume = $kli_vume AND pom = 14 AND zdrv >= 2700 AND zdrv <= 2799 ORDER BY oc";
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+$i=0;
+  while ($i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_zp=zcel_odp, zzam_zp=zcel_odp WHERE oc = $hlavicka->oc AND konx2 = 999 AND zcel_odp != 0 ";
+$sqlx = mysql_query("$sqlttx");
+
+}
+$i=$i+1;
+  }
 //exit;
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
