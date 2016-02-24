@@ -1809,6 +1809,8 @@ $licenciatabk = 1*$_REQUEST['licenciatabk'];
 if ( $licenciatabk == 1 ) { $prepocitaj=1; }
 $preddavky = 1*$_REQUEST['preddavky'];
 if ( $preddavky == 1 ) { $prepocitaj=1; }
+$nacitajdanlicencia = 1*$_REQUEST['nacitajdanlicencia'];
+if ( $nacitajdanlicencia == 1 ) { $prepocitaj=1; }
 
 //nacitaj udaje
 if ( $copern >= 1 )
@@ -2010,6 +2012,12 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r920=r910, ".
+" psys=0 ".
+" WHERE ico >= 0 AND r920 > r910 AND r920 > 0 "; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1000=r800-r920, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r920 > 0 "; 
@@ -2135,6 +2143,40 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET hr10=hr01+h1r02-h2r02+h1r03-
 $upravene = mysql_query("$uprtxt");
 
 //////////////////strana 9 2015
+if ( $nacitajdanlicencia == 1 )
+  {
+
+$h_ycf=0;
+if ( $fir_allx11 > 0 ) $h_ycf=1*$fir_allx11;
+
+$databaza="";
+$dtb2 = include("../cis/oddel_dtbz1.php");
+
+$dl2014=0;
+$sqlttt = "SELECT r830, obdo, obod FROM ".$databaza."F$h_ycf"."_uctpriznanie_po ";
+$sqldok = mysql_query("$sqlttt");
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+ $dl2014=1*$riaddok->r830;
+ $obod=$riaddok->obod;
+ $obdo=$riaddok->obdo;
+ }
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k2r01='$dl2014', k1od='$obod', k1do='$obdo', ".
+" psys=0 ".
+" WHERE ico >= 0"; 
+//echo $uprtxt;
+$upravene = mysql_query("$uprtxt");
+
+
+  }
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k5r01=k2r01-k3r01-k4r01, k5r02=k2r02-k3r02-k4r02, k5r03=k2r03-k3r03-k4r03, k5r04=k2r04-k3r04-k4r04, ".
+" psys=0 ".
+" WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k4r05=k4r01+k4r02+k4r03+k4r04, k5r05=k5r01+k5r02+k5r03+k5r04, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
@@ -3008,6 +3050,12 @@ if ( $copern == 102 )
    window.open('../dokumenty/dan_z_prijmov2015/dppo2015/dppo_v15_r1110_vypocet.pdf',
 '_blank', 'width=1080, height=540, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
+
+  function NacitajDanLicencia()
+  {
+   window.open('priznanie_po2015.php?copern=101&strana=<?php echo $strana; ?>&nacitajdanlicencia=1', '_self');
+  }
+
 </script>
 </HEAD>
 <BODY onload="ObnovUI(); <?php if ( $copern == 102 AND ( $strana == 2 OR $strana == 4 OR $strana == 6 ) ) ?>">
@@ -3250,7 +3298,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r920" id="r920" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:177px; left:529px;"/>
 
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="LicenciaTabK();"
-      title="Kladný rozdiel medzi daòovou licenciou a daòou z predch. období z r.5 ståpec 4. tabu¾ky K na 9.strane"
+      title="Kladný rozdiel medzi daòovou licenciou a daòou z predch. období z r.5 ståpec 4. tabu¾ky K na 9.strane max. do výšky na riadku 910"
       class="btn-row-tool" style="top:177px; left:833px;">
 
 <input type="text" name="r1000" id="r1000" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:219px; left:529px;"/>
@@ -3510,6 +3558,11 @@ $sn1c=substr($sknacec,0,1);
 <!-- riadok 1 -->
 <input type="text" name="k1od" id="k1od" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:244px; left:62px;"/>
 <input type="text" name="k1do" id="k1do" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:282px; left:62px;"/>
+
+ <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajDanLicencia();"
+      title="Naèíta výšku kladného rozdielu medzi daòovou licenciou a daòou, ktorú možno zapoèíta v roku 2015 z r.830 Priznania DPPO 2014"
+      class="btn-row-tool" style="top:282px; left:280px;">
+
 <input type="text" name="k2r01" id="k2r01" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:244px; left:276px;"/>
 <input type="text" name="k3r01" id="k3r01" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:244px; left:436px;"/>
 <input type="text" name="k4r01" id="k4r01" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:244px; left:595px;"/>
@@ -3726,7 +3779,11 @@ $sn1c=substr($sknacec,0,1);
 //zostava PDF
 if ( $copern == 11 )
      {
-if ( File_Exists("../tmp/priznaniepo.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/priznaniepo.$kli_uzid.pdf"); }
+
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$outfilex="../tmp/priznaniepo_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -9707,7 +9764,7 @@ $pdf->Cell(14,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cel
 $i = $i + 1;
   }
 
-$pdf->Output("../tmp/priznaniepo.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 //koniec zostava PDF
 
 //potvrdenie o podani
@@ -9782,7 +9839,7 @@ $pdf->Output("../tmp/potvrddpo.$kli_uzid.pdf");
 ?>
 
 <?php if ( $xml == 0 ) { ?>
- <script type="text/javascript"> var okno = window.open("../tmp/priznaniepo.<?php echo $kli_uzid; ?>.pdf","_self"); </script>
+ <script type="text/javascript"> var okno = window.open("<?php echo $outfilex; ?>","_self"); </script>
 <?php                  }
      }
 ?>

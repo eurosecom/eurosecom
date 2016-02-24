@@ -44,7 +44,11 @@ $citfir = include("../cis/citaj_fir.php");
 $mena1 = $fir_mena1;
 $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
-if ( File_Exists("../tmp/uzavierka.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/uzavierka.$kli_uzid.pdf"); }
+
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$outfilex="../tmp/uzavierka_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -13554,7 +13558,7 @@ $i = $i + 1;
 //koniec tlacit VZaS
 
 
-$pdf->Output("../tmp/uzavierka.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcsuvahas'.$kli_uzid;
 //$vysledok = mysql_query("$sqlt");
@@ -13573,7 +13577,7 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvyk1000ziss'.$kli_uzid;
 ?> 
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/uzavierka.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
