@@ -167,6 +167,11 @@ $dsql = mysql_query("$dsqlt");
 
 $hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
+ $outfilexdel="../tmp/invmaj_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
 $outfilex="../tmp/invmaj_".$kli_uzid."_".$hhmmss.".pdf";
 if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
