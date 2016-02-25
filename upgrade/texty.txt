@@ -1,0 +1,170 @@
+25.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MAJ Zostava daòovıch odpisov do osobnej spotreby
+- UCTO ochrana proti cache Uzavierky POD, MUJ a NUJ a Priznanie DPPO 2015
+- èistenie adresára ../tmp staršie ako dnešné vymae,pred tım staršie ako 3dni, ochrana proti cache viac súborov
+- UCTO FIN 1-12 Poliklinika Se zdroj upravenı na 46
+
+24.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO import SEPA XML bankovıch vıpisov ico=0 pred kadou vetou aby nedával ico do následujúcej poloky
+- UCTO uprava poloky v bankovom vıpise ak aj dátum v poloke
+- UCTO naèítanie IBAN xml bankového vıpisu, 2 úèty pre IBAN credit aj debet
+- MAJ ochrana zoznamov majetku proti cache v chrome
+- MAJ prenos odpisove sadzby u neupravuj v roku 2016 po prenose
+- FAKT prístup do predfaktúr dopravy z Robot menu
+- MAJ percento pre osobnu spotrebu z daòovıch odpisov v doplòujúcich údajoch o poloke majetku
+- UCTO generovanie NUJ uzavierky úèet 479 doplnenı do štandartného generovania 2015 a 2016
+- MZDY UNION ZP elektronickı mesaènı vıkaz ak pomer=14 VZ nie je v sumároch za ZP 3.riadok
+
+
+19.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY ak bolo v trvalıch polokách èíslo úètu nula povaoval to za úèet a dával do zostavy bankovıch platieb
+- UCTO FIN 1-12 uprava rok 2016 Poliklinika stlpec Predpoklad
+
+18.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY úprava priemerov na náhrady a príplatky DPS Gbely
+- UCTO Priznanie DPPO 2015 úprava v exporte XML èas uplatòujem postup pod¾a par. 50
+- UCTO prenos externıch faktúr ENII 2016 ekorobot.sk úprava analytiky 311 a 604
+- UCTO statistika vts 101 oddelenie 2014 a 2015
+- UCTO FIN 1-12 uprava rok 2016 Poliklinika 
+- UCT prenos z 136 do 36 faktúry EDcom
+
+
+15.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY Statistika UNP 101 JPG a skript komplet
+- MZDY Ak v zamestnancovi ukladal prázdny IBAN bol error, teraz namiesto prázdneho dá SK
+- UCTO pre doplòanie druhu 32 a 82 do èíselníka druhov DPH staèí prístupy UCT 2000, to je ten druh ako ked
+  alza nam dovezie tovar bez dph
+- MZDY ak v mesaènej dávke je osè, ktoré nie je v mzdkun tak vidím èíslo v tlaèi dávky
+- FAKTURY zmena Bankové spojenie dodávatela na odberate¾skıch faktúrach, IBAN a
+  SWIFT na zaèiatku a IBAN v tlaèovom tvare s medzerami
+
+12.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO Priznanie DPPO, naèítanie kladného rozdielu medzi daòovou licenciou a daòou z minulého roka
+  z riadku 830 DPPO 2014
+- UCTO ukladanie BIC a IBAN v ciselniku ICO bez medzier
+- MZDY ukladanie BIC a IBAN v údajoch o zamestnancovi a trvalıch polokách bez medzier 
+
+11.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY ak ukladá len iban v údajoch o zamestnancovi, program uloí aj èíslo úètu a num z ibanu
+- MZDY vıplatu do banky nie v hotovosti urobí program, keï je zaškrtnutı checkbox "Bankovı úèet" 
+  v údajoch o zamestnancovi, doteraz musel by aj vyplnenı num symbol, teraz v IBANoch nemusí.
+- UCTO zostava faktúr v reime "Odpoètu a uplatnenia DPH a po prijatí platby" faktúry a platby len
+  do konca nastaveného úètovného obdobia berie do zostavy 
+- UCTO odstránenie medzier z BIC v XML príkaze na úhradu
+- UCTO oprava BIC kódu pre Prima Banku num 5600
+- UCTO štatistika Hlasenie vıroby novı skript pre rok 2016
+- UCTO FOB zvıraznenie checkbox "uvádzam osobitné záznamy"
+
+10.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO zostava faktúr v reime "Odpoètu a uplatnenia DPH a po prijatí platby" ikona v nahrávaní platieb
+- UCTO FOB nedaval osobitne zaznamy do PDF a XML ak nebol checkbox uvadzam osobitné záznamy
+- UCTO priznanie DPH zoh¾adnuje reim "Odpoètu a uplatnenia DPH a po prijatí platby"
+
+09.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY úprava DPS Gbely pre STR 100 pridaj 1ku k analytike napr. 33101
+- UCTO štatistika Hlasenie vıroby JPG, skript nie
+- UCTO roèná štatistika zav 101  oddeleny skript 2014 a 2015
+- UCTO oprava FOB nedával priezvisko FO do formu
+
+08.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO v mesaènıch zostavách Zostava platieb pre uplatnenie DPH v reime "Nastavenie Odpoètu a uplatnenia DPH a po prijatí platby"
+- UCTO do tabulky _uctfakuhrdph doplnena poloka druh 1-odber, 2-dodav aj v nastaveni priamo z faktury
+- UCTO v tabulke _uctfakuhrdph sa nastaví poloka druh aj pri nastavení reimu faktúry
+- UCTO naèítanie úhrad do _uctfakuhrdph
+
+
+05.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO pre num 5600 export prikazu na úhradu do xml pain.04
+- UCTO odstráò & a dalsie znaky z názvu firmy v prikaze XML
+- UCTO info do textu pre prijemcu v XML príkaze 
+- UCTO do tabulky _uctfakuhrdph doplnena poloka druh 1-odber, 2-dodav
+
+04.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO parametre úètovníctva a registrácia pre uplatòovanie DPH po prijatej platbe
+- MZDY oprava IBAN na vıplatnej páske pri vıplate na bankovı úèet
+
+03.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- Príkaz XML ochrana proti malému sk v IBANe
+- MZDY oprava vıpoètu Zamestnaneckej prémie v priznaní FOA 2015 ak je r32 < 4560 tak vraj nemá nárok
+- MZDY úprava vıpoètu sz3 a sz4 pre DPS Gbely
+- MZDY ochrana dátum vıplaty vıkazy SP a ZP
+- MZDY zostava platieb oprava nasekanie IBANu
+
+02.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- úpravy nahrávanie prijatıch platieb na faktúru v reime "Nastavenie Odpoètu a uplatnenia DPH a po prijatí platby"
+- MZDY ak IBAN nula v trvalıch píše Banka 0 na pásku
+- UCTO email z údajov o firme na inventúru poh¾adávok a záväzkov pod Vybavuje
+- MZDY oprava vıpoètu Zamestnaneckej prémie v roènom zúètovaní 2015 ak je r01 < 4560 tak vraj nemá nárok
+
+01.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- kontrola priznania DPH z Robota smerovanie skriptu 2016
+- nahrávanie prijatıch platieb na faktúru v reime "Nastavenie Odpoètu a uplatnenia DPH a po prijatí platby"
+- Ak pomer=14 a ZP >= 2700 a ZP <= 2799 potom urobím zcel_zp=zzam_zp=zcel_odp, ostatné poisovne bez zmeny
+
+29.1.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- priprava na reim "Nastavenie Odpoètu a uplatnenia DPH a po prijatí platby"
+
+
+28.1.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- max. vyplata nemocenske 42.3124 pri vstupe do nahrávania mesaènej dávky kontroluje a zníi
+- statistika vts 112 skript
+- statistika hlasenie o odpade oddelenz skript 2015 a 2016
+- inventura poh¾adávok a záväzkov Alchem texty 
+- DMV 2015 úprava predpokladanej dane, návesové súpravy=0 a obstarané v 2015 prvyden=1.1.2016 a datz=1.1.2016
+- Statistika unp101 oddeleny skript 2014 a 2015
+- osetrene ukladanie IBAN a BIC ak este neboli v doplnujucich udajoch o zamestnancoch
+
+27.1.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- DMV2015 zaokruhlovanie, r06 a r09 prázdny string, dátum vzniku max 1.1.2015
+
+26.1.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- Prenos ZAK SEKOV z vıroby do úètovníctva
+- MAJETOK nastavenie inventúrnej komisie
+
+25.1.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- DOPRAVA prenos danovej povinnosti pri fakturacii stavebnzch prac
+- IBAN na vıplatnej páske a zostave platieb cez banku
+- UCTO druhy 32 a 82 v AutoPohyboch aby pocital samozdanenie
+- inštrukcie k prenosu majetku z 2015 do 2016
+- MZDY iban v tlacovej forme a swift na yostave vzplat cey banku
+- MZDY uprava bankoveho úètu v údajoch o zamestnancovi IBAN a SWIFT
+- UCTO DMV 2015 ak pridám nové vozidlo neukladal zmeny v údajoch o vozidle, a po uprav údaje o vozidle
+
+21.1.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO vseobecne podanie k zavierke JPG aj skripty FORM a XML
+- JPG statistika vts112
+- UCTO nové druhy DPH 32 a 82
+- MZDY znovu vıplatné pásky 2016 a 2015 oddelené
+
+20.1.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO prenos faktur MEDO a POLIKLINIKA SE 2016
+- SKLAD uprava uctovania MEDO
+- verzia 2016_01
+
+19.1.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- DOPRAVA prenos stavov tachometrov do noveho roka
+- UCTO statistika OPU 1-12 novı skript
+- ANALYZY export hlavnej knihy polozkovitej do CSV aj so ZAK
+- UCTO import XML bankoveho vypisu
+- MZDY vıplatné pásky 2016 
+- UCTO JPG a skript statistika p 3-04
+
+
+14.1.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO roèné priznanie DPH v mesaènıch zostavách
+- UCTO DMV 2015 oprava sadzby pre 1, 2 nápravy 4 a 6 ton na 312 eur miesto 321 eur
+- JPG pre vp_zavierka2015
+
+13.1.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO,MZDY kontrola IBANov na prikaze na úhradu
+- UCTO prenos saldokonta AUTOVALAS 321001/321401 a 321004/321404
+- MZDY trexima ochrana XML cache, odpracd = 101 a 109 hodiny
+
+
+11.1.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO statistika p 13-04 komplet
+- UCTO statistika p 3-04 oddelene skripty 2015, JPG, uprava nacitania suvaha_x.php, vys_mala.php, uobrat.php
+- UCTO uplatnenie DPH a po úhrade, ikonka v rozúètovaní, parametre úètovníctva
+- CIS kalendár soboty a nedele 01 a 03.2016
+- VYROBA prepis alt na title, img namiesto button
+- Ufirdalsie dátum vzniku UJ
