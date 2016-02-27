@@ -287,6 +287,7 @@ window.open('../ucto/statistika_vts101<?php echo $rokvts101; ?>.php?copern=1&dru
 //opu201
 <?php
 $rokopu201="";
+if( $kli_vrok < 2015 ) $rokopu201="_2014";
 ?>
 
 function statopu201()
