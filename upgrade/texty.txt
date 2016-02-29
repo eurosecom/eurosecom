@@ -1,3 +1,9 @@
+29.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO Roè štatistika ZAV 101 jpg aj skript komplet
+- UCTO NUJ FIN 1-12 jph nové
+- UCTO hlásenie o objeme výroby... zmena ièo pri double dovoze reexportu na ièo odberate¾a na www.enposro.sk
+- UCTO Poznámky MUJ texty naèítanie jedného textu z inej firmy oprava
+
 25.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - MAJ Zostava daòových odpisov do osobnej spotreby
 - UCTO ochrana proti cache Uzavierky POD, MUJ a NUJ a Priznanie DPPO 2015
