@@ -667,8 +667,8 @@ $iconazov=$ico.", ".$hlavicka->nai.$hlavicka->na2;
 $iconazov=substr($iconazov,0,58);
 $mesto=trim($hlavicka->mes);
 if ( $mesto == '0' ) { $mesto=""; }
-$pdf->Cell(76,3," $iconazov","$rmc",1,"L");
-$pdf->Cell(111,3," ","$rmc1",0,"L");$pdf->Cell(76,3," $mesto","$rmc",1,"L");
+$pdf->SetFont('arial','',7);$pdf->Cell(76,3," $iconazov","$rmc",1,"L");
+$pdf->Cell(111,3," ","$rmc1",0,"L");$pdf->Cell(76,3," $mesto","$rmc",1,"L");$pdf->SetFont('arial','',10);
 $pdf->Cell(0,0.5," ","$rmc1",1,"L");
 
 if ( $j == 7 )
@@ -744,12 +744,12 @@ $pdf->SetFont('arial','',9);
 $ico=$hlavicka->ico;
 if ( $ico > 111111 AND $ico < 1000000 ) { $ico="00".$ico; }
 $iconazov=$ico.", ".$hlavicka->nai.$hlavicka->na2;
-$iconazov=substr($iconazov,0,57);
+$iconazov=substr($iconazov,0,58);
 $mesto=trim($hlavicka->mes);
 if ( $mesto == '0' ) { $mesto=""; }
 
-$pdf->Cell(78,3," $iconazov","$rmc",1,"L");
-$pdf->Cell(109,3," ","$rmc1",0,"L");$pdf->Cell(78,3," $mesto","$rmc",1,"L");
+$pdf->SetFont('arial','',7);$pdf->Cell(78,3," $iconazov","$rmc",1,"L");
+$pdf->Cell(109,3," ","$rmc1",0,"L");$pdf->Cell(78,3," $mesto","$rmc",1,"L");$pdf->SetFont('arial','',10);
 $pdf->Cell(0,0.5," ","$rmc1",1,"L");
 
 $j2=$j2+1;
