@@ -4965,11 +4965,11 @@ window.open('fak_setulozdak.php?cislo_dok=<?php echo $cislo_dok; ?>&dak=' + dak 
 if ( $copern == 7 AND $sysx == 'UCT' )
      {
 $textdpp=0;
-$sql = mysql_query("SELECT * FROM F".$kli_vxcf."_uctfakuhrdph WHERE dok = $cislo_dok AND prx7 = 1 ");
-  if (@$zaznam=mysql_data_seek($sql,0))
+$sqldpp = mysql_query("SELECT * FROM F".$kli_vxcf."_uctfakuhrdph WHERE dok = $cislo_dok AND prx7 = 1 ");
+  if (@$zaznam=mysql_data_seek($sqldpp,0))
   {
-  $riadok=mysql_fetch_object($sql);
-  $textdpp=$riadok->dppx;
+  $riadokdpp=mysql_fetch_object($sqldpp);
+  $textdpp=$riadokdpp->dppx;
   }
 ?>
 <div id="nastavdppx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 200px; left: 10px; width:600px; height:100px;">
@@ -6294,11 +6294,11 @@ if ( $copern != 6 AND $copern != 87 AND $copern != 8 )
 if ( $copern == 7 AND $sysx == 'UCT' AND $kli_vrok >= 2016 )
      {
 $textdpp=0;
-$sql = mysql_query("SELECT * FROM F".$kli_vxcf."_uctfakuhrdph WHERE dok = $cislo_dok AND prx7 = 1 ");
-  if (@$zaznam=mysql_data_seek($sql,0))
+$sqldpp = mysql_query("SELECT * FROM F".$kli_vxcf."_uctfakuhrdph WHERE dok = $cislo_dok AND prx7 = 1 ");
+  if (@$zaznam=mysql_data_seek($sqldpp,0))
   {
-  $riadok=mysql_fetch_object($sql);
-  $textdpp=$riadok->dppx;
+  $riadokdpp=mysql_fetch_object($sqldpp);
+  $textdpp=$riadokdpp->dppx;
   }
 ?>
 <td class="pvstup">

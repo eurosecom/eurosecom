@@ -1169,16 +1169,13 @@ $sqldok = mysql_query("$sqldokttt");
   $fakx=$riaddok->fak;
   $houx=$riaddok->hod;
   $icd=$riaddok->icd;
+  $odbm=1*$riaddok->odbm;
   }
 ?>
 Doklad è.<?php echo $cislo_dok ?>, IÈO <?php echo $icox ?> <?php echo $naix ?>, <?php echo $mesx ?>, Faktúra <?php echo $fakx ?>, Hodnota=<?php echo $houx ?>
 </td>
-<td class="<?php echo $pvstup ?>" colspan="3">
-Skontrolujte si správne nahraté IÈ DPH = <?php echo $icd ?> <a href="#" onclick="OverIcdph();" >Overovanie IÈ DPH</a>
-</td>
-<td class="<?php echo $pvstup ?>" colspan="2">
-
-</td>
+<td class="<?php echo $pvstup ?>" colspan="3"></td>
+<td class="<?php echo $pvstup ?>" colspan="2"></td>
 </tr>
 <tr>
 <td class="<?php echo $pvstup ?>" width="7%">Por.èíslo
@@ -1512,9 +1509,22 @@ function DpzEnter(e)
 // celkovy koniec dokumentu
 $cislista = include("../ucto/uct_lista.php");
 
+$akeicd=$icd;
+if( $odbm > 0 )
+{
+$sqlttt = "SELECT icd2 FROM F$kli_vxcf"."_icoodbm WHERE ico = $ico AND odbm = $odbm ";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $akeicd=$riaddok->icd2;
+  }
+}
+
+
 ?>
 <br />
-<span id="overicdph" style="display:blok; width:100%; align:center; font-family:bold; font-weight:bold; background-color:white; color:black;">Skontrolujte si správne nahraté IÈ DPH = <?php echo $icd ?></span> &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="Pre správne vytvorenie Kontrolného výkazu DPH je dôležité aby ste mali v èíselníku IÈO správne IÈ DPH !!!" onclick="OverIcdph();" >Overovanie IÈ DPH</a>
+<span id="overicdph" style="display:blok; width:100%; align:center; font-family:bold; font-weight:bold; background-color:white; color:black;">Skontrolujte si správne nahraté IÈ DPH = <?php echo $akeicd ?></span> &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" title="Pre správne vytvorenie Kontrolného výkazu DPH je dôležité aby ste mali v èíselníku IÈO správne IÈ DPH !!!" onclick="OverIcdph();" >Overovanie IÈ DPH</a>
 <br />
 <br />
 <?php
