@@ -345,63 +345,69 @@ window.open('../ucto/vykaz_fin112<?php echo $rokfin112; ?>.php?cislo_oc=' + h_oc
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-//vykaz Fin204NUJ13
+//vykaz Fin204no16
+<?php
+$rokfin204no="_2016";
+?>
 
-function TlacFin204nuj13()
+function TlacFin204no16()
                 {
-var h_oc = document.forms.formfin204nuj13.h_oc.value;
+var h_oc = document.forms.formfin204no16.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin204nuj.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=È',
+window.open('../ucto/vykaz_fin204no<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=È',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 
-function UpravFin204nuj13()
+function UpravFin204no16()
                 {
-var h_oc = document.forms.formfin204nuj13.h_oc.value;
+var h_oc = document.forms.formfin204no16.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin204nuj.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+window.open('../ucto/vykaz_fin204no<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-function ZnovuFin204nuj13()
+function ZnovuFin204no16()
                 {
-var h_oc = document.forms.formfin204nuj13.h_oc.value;
+var h_oc = document.forms.formfin204no16.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin204nuj.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+window.open('../ucto/vykaz_fin204no<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-//vykaz Fin204POD13
+//vykaz Fin204pod16
+<?php
+$rokfin204pod="_2016";
+?>
 
-function TlacFin204pod13()
+function TlacFin204pod16()
                 {
-var h_oc = document.forms.formfin204pod13.h_oc.value;
+var h_oc = document.forms.formfin204pod16.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin204pod.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=È',
+window.open('../ucto/vykaz_fin204pod<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=È',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 
-function UpravFin204pod13()
+function UpravFin204pod16()
                 {
-var h_oc = document.forms.formfin204pod13.h_oc.value;
+var h_oc = document.forms.formfin204pod16.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin204pod.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+window.open('../ucto/vykaz_fin204pod<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-function ZnovuFin204pod13()
+function ZnovuFin204pod16()
                 {
-var h_oc = document.forms.formfin204pod13.h_oc.value;
+var h_oc = document.forms.formfin204pod16.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin204pod.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+window.open('../ucto/vykaz_fin204pod<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -462,23 +468,23 @@ window.open('fin112dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=
 
 
 
-function DbfFin204nuj13()
+function DbfFin204no16()
                 {
-var h_oc = document.forms.formfin204nuj13.h_oc.value;
+var h_oc = document.forms.formfin204no16.h_oc.value;
 var h_fmzdy = 0;
 
 
-window.open('fin204nujdbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+window.open('fin204nodbf_2016.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-function DbfFin204pod13()
+function DbfFin204pod16()
                 {
-var h_oc = document.forms.formfin204pod13.h_oc.value;
+var h_oc = document.forms.formfin204pod16.h_oc.value;
 var h_fmzdy = 0;
 
 
-window.open('fin204poddbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+window.open('fin204poddbf_2016.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -770,15 +776,15 @@ if( $kli_vrok >= 2013 AND $dajfinvykazy == 1 ) {
 <a href="#" onClick="TlacFin112();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
 </td>
-<td class="bmenu" width="98%">FinanËn˝ v˝kaz o plnenÌ rozpoËtu a o nerozpoËtovan˝ch pohyboch na ˙Ëtoch subjektu verejnej spr·vy FIN 1 - 12
+<td class="bmenu" width="98%">FinanËn˝ v˝kaz o plnenÌ rozpoËtu a o nerozpoËtovan˝ch pohyboch na ˙Ëtoch subjektu verejnej spr·vy FIN 1 - 12 NUJPOD
  <select size="1" name="h_oc" id="h_oc" >
 <option value="1" >1.ötvrùrok</option>
 <option value="2" >2.ötvrùrok</option>
 <option value="3" >3.ötvrùrok</option>
 <option value="4" >4.ötvrùrok</option>
 </select>
-<a href="#" onClick="DbfFin112();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
+<a href="#" onClick="DbfFin112nujpod();">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru' ></a>
 
 </td>
 <td class="bmenu" width="2%">
@@ -796,30 +802,30 @@ if( $kli_vrok >= 2013 AND $dajfinvykazy == 1 ) {
 
 
 <table class="vstup" width="100%" >
-<FORM name="formfin204nuj13" class="obyc" method="post" action="#" >
+<FORM name="formfin204no16" class="obyc" method="post" action="#" >
 <tr>
 <td class="bmenu" width="2%">
-<a href="#" onClick="TlacFin204nuj13();">
+<a href="#" onClick="TlacFin204no16();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
 </td>
-<td class="bmenu" width="98%">FinanËn˝ v˝kaz o vybran˝ch ˙dajoch z aktÌv a pasÌv subjektu verejnej spr·vy FIN 2 - 04 NUJ
+<td class="bmenu" width="98%">FinanËn˝ v˝kaz o vybran˝ch ˙dajoch z aktÌv a pasÌv subjektu verejnej spr·vy FIN 2 - 04 NO
  <select size="1" name="h_oc" id="h_oc" >
 <option value="1" >1.ötvrùrok</option>
 <option value="2" >2.ötvrùrok</option>
 <option value="3" >3.ötvrùrok</option>
 <option value="4" >4.ötvrùrok</option>
 </select>
-<a href="#" onClick="DbfFin204nuj13();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
+<a href="#" onClick="DbfFin204no16();">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru' ></a>
 
 </td>
 <td class="bmenu" width="2%">
-<a href="#" onClick="UpravFin204nuj13();">
+<a href="#" onClick="UpravFin204no16();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviù hodnoty ' ></a>
 </td>
 
 <td class="bmenu" width="2%">
-<a href="#" onClick="ZnovuFin204nuj13();">
+<a href="#" onClick="ZnovuFin204no16();">
 <img src='../obr/orig.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty  - mÙûete opakovaù viackr·t' ></a>
 </td>
 </tr>
@@ -827,10 +833,10 @@ if( $kli_vrok >= 2013 AND $dajfinvykazy == 1 ) {
 </table>
 
 <table class="vstup" width="100%" >
-<FORM name="formfin204pod13" class="obyc" method="post" action="#" >
+<FORM name="formfin204pod16" class="obyc" method="post" action="#" >
 <tr>
 <td class="bmenu" width="2%">
-<a href="#" onClick="TlacFin204pod13();">
+<a href="#" onClick="TlacFin204pod16();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
 </td>
 <td class="bmenu" width="98%">FinanËn˝ v˝kaz o vybran˝ch ˙dajoch z aktÌv a pasÌv subjektu verejnej spr·vy FIN 2 - 04 POD
@@ -840,17 +846,17 @@ if( $kli_vrok >= 2013 AND $dajfinvykazy == 1 ) {
 <option value="3" >3.ötvrùrok</option>
 <option value="4" >4.ötvrùrok</option>
 </select>
-<a href="#" onClick="DbfFin204pod13();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
+<a href="#" onClick="DbfFin204pod16();">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru' ></a>
 
 </td>
 <td class="bmenu" width="2%">
-<a href="#" onClick="UpravFin204pod13();">
+<a href="#" onClick="UpravFin204pod16();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviù hodnoty ' ></a>
 </td>
 
 <td class="bmenu" width="2%">
-<a href="#" onClick="ZnovuFin204pod13();">
+<a href="#" onClick="ZnovuFin204pod16();">
 <img src='../obr/orig.png' width=20 height=15 border=0 title='NaËÌtaù hodnoty  - mÙûete opakovaù viackr·t' ></a>
 </td>
 </tr>
@@ -872,7 +878,7 @@ if( $kli_vrok >= 2013 AND $dajfinvykazy == 1 ) {
 <option value="4" >4.ötvrùrok</option>
 </select>
 <a href="#" onClick="DbfFin504();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru' ></a>
 
 </td>
 <td class="bmenu" width="2%">
@@ -906,7 +912,7 @@ if( $kli_vrok >= 2013 ) {
 <option value="4" >4.ötvrùrok</option>
 </select>
 <a href="#" onClick="DbfFin6a04();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru' ></a>
 
 </td>
 <td class="bmenu" width="2%">
@@ -949,11 +955,11 @@ if( $volajfin1a12 == 0 ) { $nazfin1a12="FIN 1-12";}
 </select>
 <?php if( $kli_vrok <  2016 ) { ?>
 <a href="#" onClick="DbfFin1a12();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru' ></a>
 <?php                         } ?>
 <?php if( $kli_vrok >= 2016 ) { ?>
 <a href="#" onClick="DbfFin112nujpod();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru pre AZUV' ></a>
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru' ></a>
 <?php                         } ?>
 <?php
 $nedaj=1; 
