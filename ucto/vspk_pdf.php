@@ -1077,21 +1077,42 @@ $j=$j+1;
 }
 $i = $i + 1;
 $j = $j + 1;
-if( $j > 46 ) $j=0;
-
+if ( $j > 46 ) $j=0;
   }
 
-
+//tabulka financna kontrola vs
 $tlacover=1;
-$meno1="Jurenova";
-if( $tlacover == 1 )
-          {
+$meno1="Ing. Gabriela Kováèová";
+$meno2="Drahoslava Jureòová";
+if ( $tlacover == 1 )
+{
+$pdf->SetY(245);
+//1.osoba
+$pdf->SetFont('arial','',8);
+$pdf->Cell(130,5,"  Finanènú operáciu  je  -  nie je  možné vykona a pokraèova v nej","1",1,"L");
+$pdf->SetFont('arial','',7);
+$pdf->Cell(65,5,"Vykonal:  $meno1","0",0,"L");
+$pdf->Cell(35,5,"Dátum  $dat_sk","0",0,"L");
+$pdf->Cell(30,5,"Podpis","0",1,"L");
+//2.osoba
+$pdf->SetFont('arial','',8);
+$pdf->Cell(130,5,"  Finanènú operáciu  je  -  nie je  možné vykona a pokraèova v nej","1",1,"L");
+$pdf->SetFont('arial','',7);
+$pdf->Cell(65,5,"Vykonal:  $meno2","0",0,"L");
+$pdf->Cell(35,5,"Dátum  $dat_sk","0",0,"L");
+$pdf->Cell(30,5,"Podpis","0",1,"L");
+//vecna spravnost
+$pdf->SetFont('arial','',7);
+$pdf->Cell(190,1," ","0",1,"L");
+$pdf->Cell(65,5,"a) Vecnú správnos overil:  $meno1","TL",0,"L");
+$pdf->Cell(35,5,"Dátum  $dat_sk","T",0,"L");
+$pdf->Cell(30,5,"Podpis","TR",1,"L");
+//formalna spravnost
+$pdf->Cell(65,5,"b) Formálnu správnos overil:  $meno2","TBL",0,"L");
+$pdf->Cell(35,5,"Dátum  $dat_sk","TB",0,"L");
+$pdf->Cell(30,5,"Podpis","TRB",1,"L");
 
-$pdf->Cell(30,5," ","0",1,"L");
-$pdf->Cell(60,5,"tabulka: $meno1","1",1,"L");
-
-
-          }
+}
 
 
 $pdf->Output("../tmp/udoklad.$idx.pdf");
