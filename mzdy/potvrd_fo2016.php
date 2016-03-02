@@ -666,6 +666,11 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
 " SET r02=INSERT(r06mes,1,2,'12') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dan >= '".$kli_vrok."-12-01' ";
 $oznac = mysql_query("$sqtoz");
 
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid".
+" SET r06mes=r02 WHERE oc >= 0";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
 //vystup je v roku
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
 " SET r02=INSERT(r06mes,4,2,'01') WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc=F$kli_vxcf"."_mzdkun.oc AND dav >= '".$kli_vrok."-01-01' AND dav != '0000-00-00'  ";

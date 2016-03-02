@@ -62,6 +62,7 @@ $sqlt = <<<uctcrv
    popis         VARCHAR(60) NOT NULL,
    konx4         DECIMAL(10,0) DEFAULT 0,
    str           DECIMAL(10,0) DEFAULT 0,
+   zak           DECIMAL(10,0) DEFAULT 0,
    PRIMARY KEY(cpl)
 );
 uctcrv;
@@ -103,7 +104,7 @@ if( $psys <= 6 )
 {
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prctopmany$kli_uzid"." SELECT".
 " 0,$psys,ume,F$kli_vxcf"."_$doklad.dat,F$kli_vxcf"."_$doklad.dok,0,ucm,ucd,F$kli_vxcf"."_$uctovanie.hod,".
-" CONCAT(txp, ' ', pop),0,F$kli_vxcf"."_$uctovanie.str ".
+" CONCAT(txp, ' ', pop),0,F$kli_vxcf"."_$uctovanie.str,F$kli_vxcf"."_$uctovanie.zak ".
 " FROM F$kli_vxcf"."_$uctovanie,F$kli_vxcf"."_$doklad".
 " WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ume >= 0 ";
 //echo $dsqlt;
@@ -114,7 +115,7 @@ else
 //tu budu podsystemy
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prctopmany$kli_uzid"." SELECT".
-" 0,$psys,ume,dat,dok,0,ucm,ucd,hod,pop,0,str ".
+" 0,$psys,ume,dat,dok,0,ucm,ucd,hod,pop,0,str,zak ".
 " FROM F$kli_vxcf"."_$uctovanie".
 " WHERE ume >= 0 ";
 $dsql = mysql_query("$dsqlt");
@@ -228,7 +229,7 @@ $hlavicka=mysql_fetch_object($sql);
 if( $i == 0 )
 {
 
-  $text = "uc.mesiac;datum;c.dokladu;ucm;ucd;str;hodnota;popis"."\r\n";
+  $text = "uc.mesiac;datum;c.dokladu;ucm;ucd;str;zak;hodnota;popis"."\r\n";
   fwrite($soubor, $text);
 }
 
@@ -236,9 +237,13 @@ if( $i == 0 )
 $hodnota=$hlavicka->hod;
 $hodnotaex=str_replace(".",",",$hodnota);
 
+$popis=$hlavicka->popis;
+$popis=str_replace("\n","",$popis);
+$popis=str_replace("\r","",$popis);
+
   $text = $hlavicka->ume.";".$hlavicka->dat.";".$hlavicka->dok.";";
 
-  $text = $text.$hlavicka->ucm.";".$hlavicka->ucd.";".$hlavicka->str.";".$hodnotaex.";".$hlavicka->popis."\r\n";
+  $text = $text.$hlavicka->ucm.";".$hlavicka->ucd.";".$hlavicka->str.";".$hlavicka->zak.";".$hodnotaex.";".$popis."\r\n";
   fwrite($soubor, $text);
 
 }
