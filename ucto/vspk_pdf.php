@@ -556,9 +556,17 @@ var vyskawin = screen.height-175;
 // na vysku okraje vl=15 vp=15 hr=15 dl=15 poloziek 43 
 
 $hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-$idx=$kli_uzid.$hhmm; 
+$idx=$kli_uzid."_".$hhmm;
 
-if (File_Exists ("../tmp/udoklad$idx.pdf")) { $soubor = unlink("../tmp/udoklad$idx.pdf"); }
+ $outfilexdel="../tmp/udok*_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/udok".$cislo_dok."_".$idx.".pdf";
+
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -1077,13 +1085,19 @@ $j=$j+1;
 }
 $i = $i + 1;
 $j = $j + 1;
-if ( $j > 46 ) $j=0;
+if( $j > 46 ) $j=0;
+
   }
 
 //tabulka financna kontrola vs
+$tlacover=0;
+if( $fir_fico == 36268399 ) 
+ { 
 $tlacover=1;
 $meno1="Ing. Gabriela Kováèová";
-$meno2="Drahoslava Jureòová";
+$meno2="Drahoslava Jureòová"; 
+ }
+
 if ( $tlacover == 1 )
 {
 $pdf->SetY(245);
@@ -1114,8 +1128,7 @@ $pdf->Cell(30,5,"Podpis","TRB",1,"L");
 
 }
 
-
-$pdf->Output("../tmp/udoklad.$idx.pdf");
+$pdf->Output("$outfilex");
 
 $sql = 'DROP TABLE F'.$kli_vxcf.'_prcudok'.$kli_uzid;
 //$vysledek = mysql_query("$sql");
@@ -1126,7 +1139,7 @@ $sql = 'DROP TABLE F'.$kli_vxcf.'_prcupoh'.$kli_uzid;
 ?> 
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/udoklad.<?php echo $idx; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 

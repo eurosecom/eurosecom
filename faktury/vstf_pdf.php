@@ -227,7 +227,17 @@ $sqldok = mysql_query("$sqlttt");
   }
                    }
 
-if (File_Exists ("../tmp/f$cislo_dok.$kli_uzid.pdf")) { $soubor = unlink("../tmp/f$cislo_dok.$kli_uzid.pdf"); }
+$hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$idx=$kli_uzid."_".$hhmm;
+
+ $outfilexdel="../tmp/f*_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/f".$cislo_dok."_".$idx.".pdf";
+
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -1827,6 +1837,48 @@ $pdf->SetY($koniec+2);
 $pdf->SetFont('arial','',6);
 $pdf->Cell(180,3,"$vystavil $hlavicka->meno $hlavicka->priezvisko / $hlavicka->id ","0",1,"L");
           }
+
+
+//tabulka financna kontrola vs
+$tlacover=0;
+if( $fir_fico == 36268399 AND $mini == 1 ) 
+ { 
+$tlacover=1;
+$meno1="Ing. Gabriela Kováèová";
+$meno2="Drahoslava Jureòová"; 
+ }
+
+if ( $tlacover == 1 )
+{
+$pdf->SetY(245);
+//1.osoba
+$pdf->SetFont('arial','',8);
+$pdf->Cell(130,5,"  Finanènú operáciu  je  -  nie je  možné vykona a pokraèova v nej","1",1,"L");
+$pdf->SetFont('arial','',7);
+$pdf->Cell(65,5,"Vykonal:  $meno1","0",0,"L");
+$pdf->Cell(35,5,"Dátum  $dat_sk","0",0,"L");
+$pdf->Cell(30,5,"Podpis","0",1,"L");
+//2.osoba
+$pdf->SetFont('arial','',8);
+$pdf->Cell(130,5,"  Finanènú operáciu  je  -  nie je  možné vykona a pokraèova v nej","1",1,"L");
+$pdf->SetFont('arial','',7);
+$pdf->Cell(65,5,"Vykonal:  $meno2","0",0,"L");
+$pdf->Cell(35,5,"Dátum  $dat_sk","0",0,"L");
+$pdf->Cell(30,5,"Podpis","0",1,"L");
+//vecna spravnost
+$pdf->SetFont('arial','',7);
+$pdf->Cell(190,1," ","0",1,"L");
+$pdf->Cell(65,5,"a) Vecnú správnos overil:  $meno1","TL",0,"L");
+$pdf->Cell(35,5,"Dátum  $dat_sk","T",0,"L");
+$pdf->Cell(30,5,"Podpis","TR",1,"L");
+//formalna spravnost
+$pdf->Cell(65,5,"b) Formálnu správnos overil:  $meno2","TBL",0,"L");
+$pdf->Cell(35,5,"Dátum  $dat_sk","TB",0,"L");
+$pdf->Cell(30,5,"Podpis","TRB",1,"L");
+
+}
+//koniec tabulka financna kontrola vs
+
   }
 //koniec hlavicky
 
@@ -1857,13 +1909,7 @@ $sqldok = mysql_query("$sqlttt");
 
 <?php 
 
-$cislo_dokmin=$cislo_dok-1;
-$cislo_dokmin2=$cislo_dok-2;
-$cislo_dokmin3=$cislo_dok-3;
-if (File_Exists ("../tmp/f$cislo_dokmin.$kli_uzid.pdf")) { $soubor = unlink("../tmp/f$cislo_dokmin.$kli_uzid.pdf"); }
-if (File_Exists ("../tmp/f$cislo_dokmin2.$kli_uzid.pdf")) { $soubor = unlink("../tmp/f$cislo_dokmin2.$kli_uzid.pdf"); }
-if (File_Exists ("../tmp/f$cislo_dokmin3.$kli_uzid.pdf")) { $soubor = unlink("../tmp/f$cislo_dokmin3.$kli_uzid.pdf"); }
-$pdf->Output("../tmp/f$cislo_dok.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 ?>
 
 <table class="h2" width="100%" >
@@ -1878,7 +1924,7 @@ $pdf->Output("../tmp/f$cislo_dok.$kli_uzid.pdf");
 <br />
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/f<?php echo $cislo_dok; ?>.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php 
 
