@@ -1091,7 +1091,7 @@ if( $j > 46 ) $j=0;
 
 //tabulka financna kontrola vs
 $tlacover=0;
-if( $fir_fico == 36268399 ) 
+if( $fir_fico == 36268399 AND $kli_vrok >= 2016 ) 
  { 
 $tlacover=1;
 $meno1="Ing. Gabriela Kov·Ëov·";

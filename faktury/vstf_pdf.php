@@ -1841,7 +1841,7 @@ $pdf->Cell(180,3,"$vystavil $hlavicka->meno $hlavicka->priezvisko / $hlavicka->i
 
 //tabulka financna kontrola vs
 $tlacover=0;
-if( $fir_fico == 36268399 AND $mini == 1 ) 
+if( $fir_fico == 36268399 AND $mini == 1 AND $kli_vrok >= 2016 ) 
  { 
 $tlacover=1;
 $meno1="Ing. Gabriela Kov·Ëov·";
