@@ -345,6 +345,16 @@ $sqlt = "DROP TABLE F".$kli_vxcf."_uctpocsuv2011";
 $vysledok = mysql_query("$sqlt");
 }
 
+if( $drupoh == 42 AND $kli_vrok >= 2015 ) 
+{ 
+$odkial="".$databaza."F$h_ycf"."_prcvmajzavs$kli_uzid"; $hodx="r"; 
+
+$dsqlt="DELETE FROM $odkial WHERE prx != 1 ";
+$dsql = mysql_query("$dsqlt");
+//echo $dsqlt;
+}
+
+
 $dsqlt="INSERT INTO F$kli_vxcf"."_$uctsys SELECT 0,'0000-00-00','01',0,0,0,0,0,0,".$hodx."01,0,0,'',0,0,'',0,'0000-00-00' FROM $odkial WHERE ".$hodx."01 != 0 ";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
@@ -614,7 +624,13 @@ $dsqlt="INSERT INTO F$kli_vxcf"."_$uctsys SELECT 0,'0000-00-00','129',0,0,0,0,0,
 $dsql = mysql_query("$dsqlt");
 
 
+if( $drupoh == 42 AND $kli_vrok >= 2015 ) 
+{ 
 
+$dsqlt="DELETE FROM F$kli_vxcf"."_$uctsys WHERE dok > 21 ";
+$dsql = mysql_query("$dsqlt");
+//echo $dsqlt;
+}
 
 
 $copern=308;
@@ -2851,7 +2867,7 @@ if( $drupoh != 28 AND $drupoh != 29 )
 <tr>
 <td class="hmenu" width="10%" >riadok
 
-<?php if( $drupoh == 21 OR $drupoh == 22 OR $drupoh == 23 OR $drupoh == 24 OR $drupoh == 31 OR $drupoh == 32 ) { ?>
+<?php if( $drupoh == 21 OR $drupoh == 22 OR $drupoh == 23 OR $drupoh == 24 OR $drupoh == 31 OR $drupoh == 32 OR $drupoh == 42 ) { ?>
 <a href="#" onClick="window.open('../ucto/oprsys.php?copern=3155&drupoh=<?php echo $drupoh; ?>&page=1', '_self'  )">
 <img src='../obr/ziarovka.png' width=20 height=15 border=0 title='Naèíta hodnoty bezprostredne predchádzajúceho úètovného obdobia z minulého roku' ></a>
 <?php                      } ?>
