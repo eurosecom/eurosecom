@@ -783,6 +783,7 @@ $pzvd6 = 1*$_REQUEST['pzvd6'];
 $pzthvd6 = 1*$_REQUEST['pzthvd6'];
 $osob = strip_tags($_REQUEST['osob']);
 $pril = 1*$_REQUEST['pril'];
+if( $pril < 2 ) { $pril=2; }
 $dat = $_REQUEST['dat'];
 $datsql=Sqldatum($dat);
 $zdbo = 1*$_REQUEST['zdbo'];
@@ -4010,7 +4011,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="pzthvd6" id="pzthvd6" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:417px; left:731px;"/>
 <textarea name="osob" id="osob" style="width:838px; height:234px; top:564px; left:53px;"><?php echo $osob; ?></textarea>
 
-<input type="text" name="pril" id="pril" style="width:37px; top:832px; left:184px;"/>
+<input type="text" name="pril" id="pril" style="width:37px; top:832px; left:184px;" title="Minimálny poèet príloh je 2, vrátane Prílohy è.1 Výzkum a vývoj a Prílohy è.2 Údaje SP a ZP"/>
 <input type="text" name="dat" id="dat" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:905px; left:277px;"/>
 
 <!-- XIV.ODDIEL -->

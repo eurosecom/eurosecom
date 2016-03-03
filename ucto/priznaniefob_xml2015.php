@@ -1381,6 +1381,7 @@ $zaznamy=iconv("CP1250", "UTF-8", $hlavicka->osob);
   $text = "  </osobitneZaznamy>"."\r\n"; fwrite($soubor, $text);
 
 $riadok=$hlavicka->pril;
+if( $riadok < 2 ) { $riadok=2; }
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r125><![CDATA[".$riadok."]]></r125>"."\r\n"; fwrite($soubor, $text);
 
