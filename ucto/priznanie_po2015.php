@@ -1219,7 +1219,7 @@ $i=$i+1;               }
 
 //zapis 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" b1r01='$b1r01x', b1r02='$b1r02x', b1r04='$b1r04x', r150=b1r02-b1r01, r250=0, ".
+" b1r01='$b1r02x', b1r02='$b1r01x', b1r04='$b1r04x', r150=b1r02-b1r01, r250=0, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");  
@@ -1829,7 +1829,7 @@ if ( $rozdielodpisov == 1 )
 //danove-uctovne prerobim na kliknutie na ikonku
 //upravene na rok 2015
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r150=b1r02-b1r01, r250=0, ".
+" r150=b1r01-b1r02, r250=0, ".
 " psys=0 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");  

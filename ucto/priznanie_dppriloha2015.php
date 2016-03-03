@@ -79,7 +79,7 @@ priznaniepo;
 
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctpriznanie_dpprilpro'.$sqlt;
 $vytvor = mysql_query("$vsql");
-echo $vsql;
+//echo $vsql;
 }
 
 $sql = "SELECT pcsum FROM F$kli_vxcf"."_uctpriznanie_dppriloha WHERE ico=0";
