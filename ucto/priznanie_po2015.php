@@ -1965,6 +1965,23 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $upravene = mysql_query("$uprtxt");
 
 //danova licencia 2015
+//document.formv1.chpld.checked = 'true';  document.formv1.cho5k.checked = 'true';  document.formv1.chpdl.checked = 'true';  document.formv1.chndl.checked = 'true';
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r810=0      WHERE chndl = 1 ";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r810=480    WHERE chndl = 0 ";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r810=960    WHERE chndl = 0 AND chpld = 1 ";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r810=2880   WHERE chndl = 0 AND chpld = 1 AND cho5k = 1 ";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r810=r810/2 WHERE chndl = 0 AND chpdl = 1 ";
+$upravene = mysql_query("$uprtxt");
+
+
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r820=0, r830=0, r900=0, ".
 " psys=0 ".
