@@ -15,7 +15,7 @@ if( $vyb_roks == 2016 )
 $sql = "CREATE TABLE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm2015 SELECT * FROM ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm";
 $vysledek = mysql_query("$sql");
 
-$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdpomer SET fir_up=0 WHERE pm = 3 ";
+$sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdpomer SET fir_up=1 WHERE pm = 3 ";
 $vysledek = mysql_query("$sql");
 
 $sql = "UPDATE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm SET ".
@@ -32,6 +32,6 @@ $vysledek = mysql_query("$sql");
 
      }
 
-$sql = "CREATE TABLE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm_new012016".$sqlt;
+$sql = "CREATE TABLE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm_new012016a".$sqlt;
 $vysledek = mysql_query("$sql");
 ?>

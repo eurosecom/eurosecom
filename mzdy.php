@@ -1044,7 +1044,7 @@ $setprm = include("mzdy/sepa2015.php");
 //uprava sepa od 1.1.2015
 
 //uprava parametrov miezd na aktualny stav od 1.1.2016
-$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_new012016";
+$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_new012016a";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -1443,7 +1443,7 @@ var vyskawin = screen.height-90;
                          }
 
   function OtvorKun() {
-  var okno = window.open('../mzdy/zamestnanci.php?copern=1&drupoh=1&page=1','_blank','<?php echo $parwin; ?>');
+  var okno = window.open('../mzdy/zamestnanci.php?copern=9999&drupoh=1&page=1','_blank','<?php echo $parwin; ?>');
                       }
 
   function OtvorTrn() {
