@@ -262,7 +262,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
-$strana=15; //dopyt, teraz je na 13.strane
+$strana=13; 
 }
 //koniec modul 514
 
@@ -3446,6 +3446,105 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m514r99 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 }
+//2.strana
+$sql = "SELECT m100305r3 FROM F$kli_vxcf"."_statistika_vts101s2 WHERE ico=0";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+echo "new2015<br />";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD new2015 DECIMAL(2,0) DEFAULT 0 AFTER ico";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m100301r1 DECIMAL(2,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m100301r2 DECIMAL(2,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m100303r1 DECIMAL(2,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m100303r2 DECIMAL(2,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m100302 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m100304 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m100305r1 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m100305r2 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m100305r3 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r31 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r32 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r41 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r42 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r51 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r52 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r61 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r62 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r71 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r72 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r81 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r82 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r91 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r92 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r101 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r102 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r111 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r112 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r121 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r122 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r161 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r162 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r171 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r172 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r181 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r182 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r211 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r212 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r221 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r222 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r231 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r232 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r241 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r242 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+}
+
+
 //koniec vytvorenia definicie
 
 
@@ -4211,6 +4310,18 @@ $m586r201 = strip_tags($_REQUEST['m586r201']);
 $m586r202 = strip_tags($_REQUEST['m586r202']);
 $m586r991 = strip_tags($_REQUEST['m586r991']);
 $m586r992 = strip_tags($_REQUEST['m586r992']);
+
+
+$m586r211 = strip_tags($_REQUEST['m586r211']);
+$m586r212 = strip_tags($_REQUEST['m586r212']);
+$m586r221 = strip_tags($_REQUEST['m586r221']);
+$m586r222 = strip_tags($_REQUEST['m586r222']);
+$m586r231 = strip_tags($_REQUEST['m586r231']);
+$m586r232 = strip_tags($_REQUEST['m586r232']);
+$m586r241 = strip_tags($_REQUEST['m586r241']);
+$m586r242 = strip_tags($_REQUEST['m586r242']);
+
+
 //10.strana
 $m19r1 = strip_tags($_REQUEST['m19r1']);
 $m19r2 = strip_tags($_REQUEST['m19r2']);
@@ -4688,6 +4799,13 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
   m586r151='$m586r151', m586r152='$m586r152',m586r191='$m586r191', m586r192='$m586r192',
   m586r201='$m586r201', m586r202='$m586r202', m586r991='$m586r991', m586r992='$m586r992' ".
 " WHERE ico >= 0 ";
+
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m586r211='$m586r211', m586r212='$m586r212', m586r221='$m586r221', m586r222='$m586r222', ".
+" m586r231='$m586r231', m586r232='$m586r232', m586r241='$m586r241', m586r242='$m586r242'  ".
+" WHERE ico >= 0 ";
                     }
 
 if ( $strana == 10 ) {
@@ -4837,15 +4955,18 @@ $upravene = mysql_query("$uprtxt");
 
 
 //9.strana
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" m586r991=m586r11+m586r21+m586r131+m586r141+m586r151+m586r191+m586r201, ".
-" m586r992=m586r12+m586r22+m586r132+m586r142+m586r152+m586r192+m586r202  ".
-" WHERE ico >= 0";
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101, F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m586r991=m586r11+m586r21+m586r31+m586r41+m586r51+m586r61+m586r71+m586r81+m586r91+m586r101+m586r111+m586r121+m586r131+m586r141+m586r151+".
+" m586r161+m586r171+m586r181+m586r191+m586r201+m586r211+m586r221+m586r231+m586r241, ".
+" m586r992=m586r12+m586r22+m586r32+m586r42+m586r52+m586r62+m586r72+m586r82+m586r92+m586r102+m586r112+m586r122+m586r132+m586r142+m586r152+".
+" m586r162+m586r172+m586r182+m586r192+m586r202+m586r212+m586r222+m586r232+m586r242 ".
+" WHERE F$kli_vxcf"."_statistika_vts101.ico >= 0";
 $upravene = mysql_query("$uprtxt");
+//echo $uprtxt;
 
 //6.strana
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" m581r99=m581r1+m581r2+m581r3+m581r4+m581r5+m581r6+m581r7+m581r8+m581r9+m581r10+m581r11+m581r12 ".
+" m581r99=m581r1+m581r2+m581r3+m581r4+m581r5+m581r6+m581r7+m581r8+m581r12 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
 
@@ -5000,7 +5121,7 @@ $m100214r02 = $fir_riadok->m100214r02;
 $mod100069ano = $fir_riadok->mod100069ano;
 $mod100069nie = $fir_riadok->mod100069nie;
 $m1101r2 = $fir_riadok->m1101r2;
-$m1101r3 = $fir_riadok->m1101r3;
+$m1101r3 = 1*$fir_riadok->m1101r3;
 $m1101r4a = $fir_riadok->m1101r4a;
 $m1101r4b = $fir_riadok->m1101r4b;
 $m1101r5a = $fir_riadok->m1101r5a;
@@ -5511,10 +5632,21 @@ $m586r201 = $fir_riadok->m586r201;
 $m586r202 = $fir_riadok->m586r202;
 $m586r991 = $fir_riadok->m586r991;
 $m586r992 = $fir_riadok->m586r992;
-//10.strana
+//9.strana
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_statistika_vts101s2 WHERE ico >= 0";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
+
+$m586r211 = $fir_riadok->m586r211;
+$m586r212 = $fir_riadok->m586r212;
+$m586r221 = $fir_riadok->m586r221;
+$m586r222 = $fir_riadok->m586r222;
+$m586r231 = $fir_riadok->m586r231;
+$m586r232 = $fir_riadok->m586r232;
+$m586r241 = $fir_riadok->m586r241;
+$m586r242 = $fir_riadok->m586r242;
+
+//10.strana
 $m19r1 = $fir_riadok->m19r1;
 $m19r2 = $fir_riadok->m19r2;
 $m19r3 = $fir_riadok->m19r3;
@@ -6990,7 +7122,10 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <!-- modul 100315 -->
 <!-- <input type="text" name="cinnost" id="cinnost" style="width:487px; top:180px; left:405px;"/> -->
 <span class="text-echo center" style="top:184px; left:410px;"><?php echo $cinnost; ?></span> <!-- dopyt, na 1.strane to isté spravi výpis -->
-<span class="text-echo center" style="top:210px; left:630px;"><?php echo $sknace; ?></span>
+<?php
+$sknacesb=$fir_sknace;
+?>
+<span class="text-echo center" style="top:210px; left:630px;"><?php echo $sknacesb; ?></span>
 
 <!-- modul 2 -->
 <input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:373px; left:750px;"/>

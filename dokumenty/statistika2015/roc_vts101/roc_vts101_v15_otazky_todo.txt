@@ -1,23 +1,27 @@
-2.strana
-- výpis inputu pre SK NACE názov hlavnej činnosti z 1.strany
+﻿2.strana
+- OK výpis inputu pre SK NACE názov hlavnej činnosti z 1.strany
 3.strana
-- modul 100074 bez desatinného miesta
+- OK modul 100074 bez desatinného miesta
 6.strana
-- modul 581 upraviť vzorec, m581r9 až m581r11 zrušené
-- vytvoriť v mysql: m100301r1, m100301r2 oba checkboxy
-- vytvoriť v mysql: m100303r1, m100303r2 oba checkboxy
-- vytvoriť v mysql: m100302 celé číslo
-- vytvoriť v mysql: m100304 celé číslo
+- OK modul 581 upraviť vzorec, m581r9 až m581r11 zrušené
+- Ok vytvoriť v mysql: m100301r1, m100301r2 oba checkboxy
+- Ok vytvoriť v mysql: m100303r1, m100303r2 oba checkboxy
+- OK vytvoriť v mysql: m100302 celé číslo
+- OK vytvoriť v mysql: m100304 celé číslo
 9.strana
-- modul 100305 - vytvoriť v mysql: m100305r1, m100305r2, m100305r3 všetko celé číslo
+- OK modul 100305 - vytvoriť v mysql: m100305r1, m100305r2, m100305r3 všetko celé číslo
 - modul 586
-  - pôvodne malo 7riadkov teraz 24 + súčtový
-  - upraviť výpočet
-  - upraviť načítanie
-  - vytvoriť v mysql (všetko celé čísla):
+  - OK pôvodne malo 7riadkov teraz 24 + súčtový
+  - OK upraviť výpočet
+  - upraviť načítanie NAJPRV POZICIU inputov vo FORMe potrebujem
+  - OK vytvoriť v mysql (všetko celé čísla):
     m586r31,m586r32,m586r41,m586r42,m586r51,m586r52,m586r61,m586r62,m586r71,m586r72,
     m586r81,m586r82,m586r91,m586r92,m586r101,m586r102,m586r111,m586r112,
     m586r121,m586r122,m586r161,m586r162,m586r171,m586r172,m586r181,m586r182,
     m586r211,m586r212,m586r221,m586r222,m586r231,m586r232,m586r241,m586r242
 13.strana
--  modul 514 predtým na 15.strane: upraviť načítanie
+-  OK modul 514 predtým na 15.strane: upraviť načítanie
+
+
+POZOR !!!! Všetky nové položky v tabulke sú vytvorené v F$kli_vxcf"."_statistika_vts101s2, 
+odtade ich treba čítať aj ich tam zapisovať, tie m586 som tak urobil
