@@ -1535,7 +1535,7 @@ $source="../mzdy/rocne_dane2015.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 <span class="text-echo" style="top:91px; left:571px; font-size:18px;"><?php echo $kli_vrok; ?></span>
 
 <!-- zamestnanec -->
-<span class="text-echo" style="top:126px; left:302px; "><?php echo $zamestnanec; ?></span>
+<span class="text-echo" style="top:126px; left:302px; "><?php echo "$ptitl $zamestnanec"; ?></span>
 <span class="text-echo" style="top:126px; left:670px; "><?php echo $rodne; ?></span>
  <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();"
   title="Upravi údaje o zamestnancovi" class="btn-row-tool" style="top:123px; left:780px; width:20px; height:20px;">
