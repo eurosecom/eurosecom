@@ -411,6 +411,50 @@ window.open('../ucto/vykaz_fin204pod<?php echo $rokfin204no; ?>.php?cislo_oc=' +
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+//vykaz Fin304
+
+function TlacFin304()
+                {
+var h_oc = document.forms.formfin304.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('../ucto/vykaz_fin304.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=é',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+function UpravFin304()
+                {
+var h_oc = document.forms.formfin304.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin304.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+//vykaz Fin404
+
+function TlacFin404()
+                {
+var h_oc = document.forms.formfin404.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('../ucto/vykaz_fin404.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=é',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+
+function UpravFin404()
+                {
+var h_oc = document.forms.formfin404.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin404.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 
 //vykaz Fin504
 
@@ -485,6 +529,26 @@ var h_fmzdy = 0;
 
 
 window.open('fin204poddbf_2016.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function DbfFin304()
+                {
+var h_oc = document.forms.formfin304.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('fin304dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function DbfFin404()
+                {
+var h_oc = document.forms.formfin404.h_oc.value;
+var h_fmzdy = 0;
+
+
+window.open('fin404dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -858,6 +922,67 @@ if( $kli_vrok >= 2013 AND $dajfinvykazy == 1 ) {
 <td class="bmenu" width="2%">
 <a href="#" onClick="ZnovuFin204pod16();">
 <img src='../obr/orig.png' width=20 height=15 border=0 title='Naèíta hodnoty  - môete opakova viackrát' ></a>
+</td>
+</tr>
+</FORM>
+</table>
+
+<table class="vstup" width="100%" >
+<FORM name="formfin304" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacFin304();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
+</td>
+<td class="bmenu" width="98%">Finanènı vıkaz o finanènıch aktívach pod¾a sektorov FIN 3 - 04
+ <select size="1" name="h_oc" id="h_oc" >
+<option value="1" >1.štvrrok</option>
+<option value="2" >2.štvrrok</option>
+<option value="3" >3.štvrrok</option>
+<option value="4" >4.štvrrok</option>
+</select>
+<a href="#" onClick="DbfFin304();">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru' ></a>
+
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="UpravFin304();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty ' ></a>
+</td>
+
+<td class="bmenu" width="2%">
+
+</td>
+</tr>
+</FORM>
+</table>
+
+
+<table class="vstup" width="100%" >
+<FORM name="formfin404" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacFin404();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
+</td>
+<td class="bmenu" width="98%">Finanènı vıkaz o finanènıch pasívach pod¾a sektorov FIN 4 - 04
+ <select size="1" name="h_oc" id="h_oc" >
+<option value="1" >1.štvrrok</option>
+<option value="2" >2.štvrrok</option>
+<option value="3" >3.štvrrok</option>
+<option value="4" >4.štvrrok</option>
+</select>
+<a href="#" onClick="DbfFin404();">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru' ></a>
+
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="UpravFin404();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty ' ></a>
+</td>
+
+<td class="bmenu" width="2%">
+
 </td>
 </tr>
 </FORM>
