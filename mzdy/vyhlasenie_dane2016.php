@@ -761,7 +761,7 @@ $source="../mzdy/vyhlasenie_dane2016.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&
 <span class="text-echo" style="top:399px; left:702px;"><?php echo $psc; ?></span>
 <span class="text-echo" style="top:435px; left:160px;"><?php echo $mes; ?></span>
 <span class="text-echo" style="top:435px; left:530px;"><?php echo $zstat; ?></span>
-<span class="text-echo" style="top:488px; left:122px;">Èý<?php echo $zamestnavatel; ?></span>
+<span class="text-echo" style="top:488px; left:122px;"><?php echo $zamestnavatel; ?></span>
 
 <!-- UPLATNENIE NCZD -->
 <input type="checkbox" name="nezd" value="1" style="top:581px; left:803px;"/>
