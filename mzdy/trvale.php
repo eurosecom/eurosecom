@@ -65,6 +65,15 @@ $h_ssy = strip_tags($_REQUEST['h_ssy']);
 $h_iban = strip_tags($_REQUEST['h_iban']);
 $h_pbic = strip_tags($_REQUEST['h_pbic']);
 
+$h_iban=str_replace(" ","",$h_iban);
+$h_iban=strtoupper($h_iban);
+$h_pbic=str_replace(" ","",$h_pbic);
+$h_pbic=strtoupper($h_pbic);
+
+if( trim($h_uceb) == '' AND trim($h_iban) != '' ) {  $h_uceb = 1*substr($h_iban,14,10); }   
+if( trim($h_numb) == '' AND trim($h_iban) != '' ) {  $h_numb = substr($h_iban,4,4); }
+
+
 if( $copern == 101 ) { $cislo_oc = 1*$_SESSION['vyb_osc']; $copern=1; }
 
 $tlacitkoenter=0;

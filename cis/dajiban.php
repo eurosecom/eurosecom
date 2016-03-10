@@ -59,7 +59,7 @@ $vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '1111',
 $vytvor = mysql_query("$vsql");
 $vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '5200', 'OTP Banka Slovensko, a.s.', 'OTPVSKBX' ) ";
 $vytvor = mysql_query("$vsql");
-$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '5600', 'OTP Banka Slovensko, a.s.', 'OTPVSKBX' ) ";
+$vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '5600', 'Prima Banka', 'KOMASK2X' ) ";
 $vytvor = mysql_query("$vsql");
 $vsql = "INSERT INTO F".$kli_vxcf."_bicban ( numb, nazb, bicb ) VALUES ( '5900', 'Prvá stavebná sporite¾òa, a.s.', 'PRVASKBA' ) ";
 $vytvor = mysql_query("$vsql");
@@ -76,6 +76,8 @@ $vytvor = mysql_query("$vsql");
 
 }
 
+$vsql = "UPDATE F".$kli_vxcf."_bicban SET bicb='KOMASK2X' WHERE numb = '5600' ";
+$vytvor = mysql_query("$vsql");
 
 if( $copern == 2 )
   {
@@ -616,14 +618,15 @@ $iconaz = $fir_riadok3->nai;
   }
 
 
-$osc=0; $oscnaz=""; 
+$osc=0; $oscnaz=""; $poloc4=0; $poloc5=0;
 
 
 $sqlfir4 = "SELECT * FROM F$kli_vxcf"."_mzdtextmzd ".
 " LEFT JOIN F$kli_vxcf"."_mzdkun ".
 " ON F$kli_vxcf"."_mzdtextmzd.invt=F$kli_vxcf"."_mzdkun.oc".
-" WHERE ziban LIKE '%".$polozka->ibanold."%' ";
+" WHERE ziban LIKE '%".trim($polozka->ibanold)."%' ";
 $fir_vysledok4 = mysql_query($sqlfir4);
+$poloc4 = 1*mysql_num_rows($fir_vysledok4);
 if( $fir_vysledok4 ) 
 {
 $fir_riadok4=mysql_fetch_object($fir_vysledok4);
@@ -632,6 +635,26 @@ $osc = 1*$fir_riadok4->invt;
 $oscnaz = $fir_riadok4->prie." ".$fir_riadok4->meno;
 }
 
+$iconum=1*$ico;
+if( $poloc4 == 0 AND $iconum == 0 )
+  {
+
+$sqlfir5 = "SELECT * FROM F$kli_vxcf"."_mzdtrn ".
+" LEFT JOIN F$kli_vxcf"."_mzdkun ".
+" ON F$kli_vxcf"."_mzdtrn.oc=F$kli_vxcf"."_mzdkun.oc".
+" WHERE trx4 LIKE '%".trim($polozka->ibanold)."%' ";
+$fir_vysledok5 = mysql_query($sqlfir5);
+$poloc5 = 1*mysql_num_rows($fir_vysledok5);
+if( $fir_vysledok5 ) 
+{
+$fir_riadok5=mysql_fetch_object($fir_vysledok5);
+
+$osc = 1*$fir_riadok5->oc;
+$oscnaz = $fir_riadok5->prie." ".$fir_riadok5->meno;
+}
+
+
+  }
 
 
 ?>
@@ -658,15 +681,30 @@ if( $ico > 0 ) {
 
 <td class="<?php echo $hvstup; ?>" >
 <?php 
-if( $osc > 0 ) { 
+if( $osc > 0 AND $poloc5 == 0 ) { 
 ?> 
 <a href="#" onClick="window.open('../mzdy/zamestnanci.php?sys=MZD&copern=8&page=1&cislo_oc=<?php echo $osc;?>&h_oc=<?php echo $osc;?>','_blank',
 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes')">
+
 <?php echo $osc." ".$oscnaz; ?></a>
 
 
 <?php
                }
+
+if( $osc > 0 AND $poloc5 >  0 ) { 
+?> 
+<a href="#" onClick="window.open('../mzdy/trvale.php?hladaj_oc=<?php echo $osc;?>&zkun=0&sys=MZD&page=1&copern=9','_blank',
+'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes')">
+
+<?php echo "TRVALÉ ".$osc." ".$oscnaz; ?></a>
+
+
+<?php
+               }
+
+//mzdy/trvale.php?cislo_oc=&zkun=0&sys=MZD&page=1&copern=9
+
 ?>
 </td>
 
