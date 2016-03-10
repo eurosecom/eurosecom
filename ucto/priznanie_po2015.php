@@ -1877,11 +1877,11 @@ if ( $odpocetstraty == 1 )
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r410=d7r02, ".
 " psys=0 ".
-" WHERE ico >= 0"; 
+" WHERE ico >= 0 AND r400 > 0 "; 
 $upravene = mysql_query("$uprtxt");
   }
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r410=r400, psys=0 WHERE ico >= 0 AND r410 > r400 "; 
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r410=r400, psys=0 WHERE ico >= 0 AND r410 > r400 AND r400 > 0 "; 
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".

@@ -540,6 +540,8 @@ if( $kli_vrok == 2014 AND $kli_xdmes == 12 AND $kli_xdden < 31 ) { $kli_vrokxd=2
 $priebeznauzav=0;
 if( $kli_vxcf == 854 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
 if( $kli_vxcf == 855 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
+if( $kli_vxcf == 856 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
+if( $kli_vxcf == 857 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
 //if( $kli_vxcf == 73  AND $_SERVER['SERVER_NAME'] == "localhost" )       { $priebeznauzav=1; $kli_vrokxd=2013; }
 
 if ( ( $strana == 1 OR $strana == 9999 ) AND $kli_vrokxd >= 2014 AND $bez1 == 0 ) {
@@ -1451,7 +1453,9 @@ $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
 
 $riadna="x";
 $mimoriadna=" ";
-if( $druz == 1 ) { $riadna=" "; $mimoriadna="x"; } 
+$priebez=" ";
+if( $druz == 1 ) { $riadna=" "; $mimoriadna="x"; $priebez=" "; }
+if( $priebeznauzav == 1 ) { $riadna=" "; $mimoriadna=" "; $priebez="x"; } 
 $zostavena="x";
 $schvalena="x";
 $text=1*$hlavicka->a2e; if ( $text == 0 ) $schvalena="";
@@ -1460,6 +1464,8 @@ $pdf->SetY(61);
 $pdf->Cell(63,3," ","$rmc1",0,"C");$pdf->Cell(4,3,"$riadna","$rmc",0,"C");$pdf->Cell(27,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$zostavena","$rmc",1,"C");
 $pdf->Cell(190,3,"                          ","$rmc1",1,"L");
 $pdf->Cell(63,3," ","$rmc1",0,"C");$pdf->Cell(4,3,"$mimoriadna","$rmc",0,"C");$pdf->Cell(27,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$schvalena","$rmc",1,"C");
+$pdf->Cell(190,4,"                          ","$rmc1",1,"L");
+$pdf->Cell(63,3," ","$rmc1",0,"C");$pdf->Cell(4,3,"$priebez","$rmc",1,"C");
 
 //v eurocentoch
 $keurocenty="x";

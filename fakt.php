@@ -85,7 +85,7 @@ $cit_nas = include("cis/citaj_nas.php");
 
   $ajnajom=0;
   if (File_Exists ("secomnajom/najom.php")) { $ajnajom=1; }
-  if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $vyb_xcf != 514 AND $vyb_xcf != 614 ) { $ajnajom=0; }
+  if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $vyb_xcf != 514 AND $vyb_xcf != 614 AND $vyb_xcf != 714 ) { $ajnajom=0; }
 
 $cook=0;
 if( $cook == 1 )
@@ -675,6 +675,9 @@ htmlmenu += " <a href=\"#\" onClick=\"window.open('../faktury/vstfak.php?copern=
 
 htmlmenu += " <a href=\"#\" onClick=\"window.open('../faktury/vstfak.php?copern=1&drupoh=11&page=1&vyroba=0', '_blank','<?php echo $parwin; ?>' )\">" +
 "Dod.listov </a> , ";
+
+htmlmenu += " <a href=\"#\" onClick=\"window.open('../faktury/vstfak.php?copern=1&drupoh=52&page=1&pocstav=0', '_blank','<?php echo $parwin; ?>' )\">" +
+"Predfaktúr</a>  ";
 
     htmlmenu += " ?</td></tr>";
 
