@@ -1,7 +1,7 @@
 <!doctype html>
 <HTML>
 <?php
-//celkovy zaciatok dokumentu VTS 101 rok 2015
+//celkovy zaciatok
 do
 {
 $sys = 'UCT';
@@ -3948,6 +3948,12 @@ $m581r8 = strip_tags($_REQUEST['m581r8']);
 //$m581r11 = strip_tags($_REQUEST['m581r11']);
 $m581r12 = strip_tags($_REQUEST['m581r12']);
 $m581r99 = strip_tags($_REQUEST['m581r99']);
+$m100301r1 = strip_tags($_REQUEST['m100301r1']);
+$m100301r2 = strip_tags($_REQUEST['m100301r2']);
+$m100303r1 = strip_tags($_REQUEST['m100303r1']);
+$m100303r2 = strip_tags($_REQUEST['m100303r2']);
+$m100302 = strip_tags($_REQUEST['m100302']);
+$m100304 = strip_tags($_REQUEST['m100304']);
 //7.strana
 $m513r11 = strip_tags($_REQUEST['m513r11']);
 $m513r12 = strip_tags($_REQUEST['m513r12']);
@@ -4294,24 +4300,49 @@ $m516r995 = strip_tags($_REQUEST['m516r995']);
 $m516r996 = strip_tags($_REQUEST['m516r996']);
 $m516r997 = strip_tags($_REQUEST['m516r997']);
 //9.strana
+$m100305r1 = strip_tags($_REQUEST['m100305r1']);
+$m100305r2 = strip_tags($_REQUEST['m100305r2']);
+$m100305r3 = strip_tags($_REQUEST['m100305r3']);
 $m586r11 = strip_tags($_REQUEST['m586r11']);
 $m586r12 = strip_tags($_REQUEST['m586r12']);
 $m586r21 = strip_tags($_REQUEST['m586r21']);
 $m586r22 = strip_tags($_REQUEST['m586r22']);
+$m586r31 = strip_tags($_REQUEST['m586r31']);
+$m586r32 = strip_tags($_REQUEST['m586r32']);
+$m586r41 = strip_tags($_REQUEST['m586r41']);
+$m586r42 = strip_tags($_REQUEST['m586r42']);
+$m586r51 = strip_tags($_REQUEST['m586r51']);
+$m586r52 = strip_tags($_REQUEST['m586r52']);
+$m586r61 = strip_tags($_REQUEST['m586r61']);
+$m586r62 = strip_tags($_REQUEST['m586r62']);
+$m586r71 = strip_tags($_REQUEST['m586r71']);
+$m586r72 = strip_tags($_REQUEST['m586r72']);
+$m586r81 = strip_tags($_REQUEST['m586r81']);
+$m586r82 = strip_tags($_REQUEST['m586r82']);
+$m586r91 = strip_tags($_REQUEST['m586r91']);
+$m586r92 = strip_tags($_REQUEST['m586r92']);
+$m586r101 = strip_tags($_REQUEST['m586r101']);
+$m586r102 = strip_tags($_REQUEST['m586r102']);
+$m586r111 = strip_tags($_REQUEST['m586r111']);
+$m586r112 = strip_tags($_REQUEST['m586r112']);
+$m586r121 = strip_tags($_REQUEST['m586r121']);
+$m586r122 = strip_tags($_REQUEST['m586r122']);
 $m586r131 = strip_tags($_REQUEST['m586r131']);
 $m586r132 = strip_tags($_REQUEST['m586r132']);
 $m586r141 = strip_tags($_REQUEST['m586r141']);
 $m586r142 = strip_tags($_REQUEST['m586r142']);
 $m586r151 = strip_tags($_REQUEST['m586r151']);
 $m586r152 = strip_tags($_REQUEST['m586r152']);
+$m586r161 = strip_tags($_REQUEST['m586r161']);
+$m586r162 = strip_tags($_REQUEST['m586r162']);
+$m586r171 = strip_tags($_REQUEST['m586r171']);
+$m586r172 = strip_tags($_REQUEST['m586r172']);
+$m586r181 = strip_tags($_REQUEST['m586r181']);
+$m586r182 = strip_tags($_REQUEST['m586r182']);
 $m586r191 = strip_tags($_REQUEST['m586r191']);
 $m586r192 = strip_tags($_REQUEST['m586r192']);
 $m586r201 = strip_tags($_REQUEST['m586r201']);
 $m586r202 = strip_tags($_REQUEST['m586r202']);
-$m586r991 = strip_tags($_REQUEST['m586r991']);
-$m586r992 = strip_tags($_REQUEST['m586r992']);
-
-
 $m586r211 = strip_tags($_REQUEST['m586r211']);
 $m586r212 = strip_tags($_REQUEST['m586r212']);
 $m586r221 = strip_tags($_REQUEST['m586r221']);
@@ -4320,8 +4351,8 @@ $m586r231 = strip_tags($_REQUEST['m586r231']);
 $m586r232 = strip_tags($_REQUEST['m586r232']);
 $m586r241 = strip_tags($_REQUEST['m586r241']);
 $m586r242 = strip_tags($_REQUEST['m586r242']);
-
-
+$m586r991 = strip_tags($_REQUEST['m586r991']);
+$m586r992 = strip_tags($_REQUEST['m586r992']);
 //10.strana
 $m19r1 = strip_tags($_REQUEST['m19r1']);
 $m19r2 = strip_tags($_REQUEST['m19r2']);
@@ -4694,6 +4725,11 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
   m581r4='$m581r4', m581r5='$m581r5', m581r6='$m581r6', m581r7='$m581r7',
   m581r8='$m581r8', m581r12='$m581r12', m581r99='$m581r99' ".
 " WHERE ico >= 0 ";
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m100301r1='$m100301r1', m100301r2='$m100301r2',
+  m100303r1='$m100303r1', m100303r2='$m100303r2',
+  m100302='$m100302', m100304='$m100304' ".
+" WHERE ico >= 0 ";
                     }
 
 if ( $strana == 7 ) {
@@ -4800,11 +4836,18 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
   m586r201='$m586r201', m586r202='$m586r202', m586r991='$m586r991', m586r992='$m586r992' ".
 " WHERE ico >= 0 ";
 
-$upravene = mysql_query("$uprtxt");
+$upravene = mysql_query("$uprtxt"); //dopyt, èo je toto
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
-" m586r211='$m586r211', m586r212='$m586r212', m586r221='$m586r221', m586r222='$m586r222', ".
-" m586r231='$m586r231', m586r232='$m586r232', m586r241='$m586r241', m586r242='$m586r242'  ".
+" m100305r1='$m100305r1', m100305r2='$m100305r2', m100305r3='$m100305r3',
+  m586r31='$m586r31', m586r32='$m586r32', m586r41='$m586r41', m586r42='$m586r42',
+  m586r51='$m586r51', m586r52='$m586r52', m586r61='$m586r61', m586r62='$m586r62',
+  m586r71='$m586r71', m586r72='$m586r72', m586r81='$m586r81', m586r82='$m586r82',
+  m586r91='$m586r91', m586r102='$m586r102', m586r111='$m586r111', m586r112='$m586r112',
+  m586r111='$m586r111', m586r121='$m586r121', m586r161='$m586r161', m586r162='$m586r162',
+  m586r171='$m586r171', m586r172='$m586r172', m586r181='$m586r181', m586r182='$m586r182',
+  m586r211='$m586r211', m586r212='$m586r212', m586r221='$m586r221', m586r222='$m586r222',
+  m586r231='$m586r231', m586r232='$m586r232', m586r241='$m586r241', m586r242='$m586r242' ".
 " WHERE ico >= 0 ";
                     }
 
@@ -5632,11 +5675,48 @@ $m586r201 = $fir_riadok->m586r201;
 $m586r202 = $fir_riadok->m586r202;
 $m586r991 = $fir_riadok->m586r991;
 $m586r992 = $fir_riadok->m586r992;
-//9.strana
+
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_statistika_vts101s2 WHERE ico >= 0";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
+//6.strana
+$m100301r1 = $fir_riadok->m100301r1;
+$m100301r2 = $fir_riadok->m100301r2;
+$m100303r1 = $fir_riadok->m100303r1;
+$m100303r2 = $fir_riadok->m100303r2;
+$m100302 = $fir_riadok->m100302;
+$m100304 = $fir_riadok->m100304;
 
+//9.strana
+$m100305r1 = $fir_riadok->m100305r1;
+$m100305r2 = $fir_riadok->m100305r2;
+$m100305r3 = $fir_riadok->m100305r3;
+$m586r31 = $fir_riadok->m586r31;
+$m586r32 = $fir_riadok->m586r32;
+$m586r41 = $fir_riadok->m586r41;
+$m586r42 = $fir_riadok->m586r42;
+$m586r51 = $fir_riadok->m586r51;
+$m586r52 = $fir_riadok->m586r52;
+$m586r61 = $fir_riadok->m586r61;
+$m586r62 = $fir_riadok->m586r62;
+$m586r71 = $fir_riadok->m586r71;
+$m586r72 = $fir_riadok->m586r72;
+$m586r81 = $fir_riadok->m586r81;
+$m586r82 = $fir_riadok->m586r82;
+$m586r91 = $fir_riadok->m586r91;
+$m586r92 = $fir_riadok->m586r92;
+$m586r101 = $fir_riadok->m586r101;
+$m586r102 = $fir_riadok->m586r102;
+$m586r111 = $fir_riadok->m586r111;
+$m586r112 = $fir_riadok->m586r112;
+$m586r121 = $fir_riadok->m586r121;
+$m586r122 = $fir_riadok->m586r122;
+$m586r161 = $fir_riadok->m586r161;
+$m586r162 = $fir_riadok->m586r162;
+$m586r171 = $fir_riadok->m586r171;
+$m586r172 = $fir_riadok->m586r172;
+$m586r181 = $fir_riadok->m586r181;
+$m586r182 = $fir_riadok->m586r182;
 $m586r211 = $fir_riadok->m586r211;
 $m586r212 = $fir_riadok->m586r212;
 $m586r221 = $fir_riadok->m586r221;
@@ -5645,7 +5725,6 @@ $m586r231 = $fir_riadok->m586r231;
 $m586r232 = $fir_riadok->m586r232;
 $m586r241 = $fir_riadok->m586r241;
 $m586r242 = $fir_riadok->m586r242;
-
 //10.strana
 $m19r1 = $fir_riadok->m19r1;
 $m19r2 = $fir_riadok->m19r2;
@@ -5985,8 +6064,8 @@ form input[type=text] {
   function ObnovUI()
   {
 <?php if ( $strana == 1 ) { ?>
-   document.formv1.odoslane.value = '<?php echo "$odoslane_sk";?>';
-   document.formv1.cinnost.value = '<?php echo "$cinnost";?>';
+   document.formv1.odoslane.value = '<?php echo "$odoslane_sk"; ?>';
+   document.formv1.cinnost.value = '<?php echo "$cinnost"; ?>';
 <?php                     } ?>
 
 <?php if ( $strana == 2 ) { ?>
@@ -6178,6 +6257,12 @@ form input[type=text] {
    document.formv1.m581r8.value = '<?php echo "$m581r8";?>';
    document.formv1.m581r12.value = '<?php echo "$m581r12";?>';
  //document.formv1.m581r99.value = '<?php echo "$m581r99";?>';
+<?php if ( $m100301r1 == 1 ) { echo "document.formv1.m100301r1.checked='checked';"; } ?>
+<?php if ( $m100301r2 == 1 ) { echo "document.formv1.m100301r2.checked='checked';"; } ?>
+<?php if ( $m100303r1 == 1 ) { echo "document.formv1.m100303r1.checked='checked';"; } ?>
+<?php if ( $m100303r2 == 1 ) { echo "document.formv1.m100303r2.checked='checked';"; } ?>
+   document.formv1.m100302.value = '<?php echo "$m100302"; ?>';
+   document.formv1.m100304.value = '<?php echo "$m100304"; ?>';
 <?php                     } ?>
 
 <?php if (  $strana == 7 ) { ?>
@@ -6530,26 +6615,59 @@ form input[type=text] {
 <?php                     } ?>
 
 <?php if ( $strana == 9 ) { ?>
+   document.formv1.m100305r1.value = '<?php echo "$m100305r1";?>';
+   document.formv1.m100305r2.value = '<?php echo "$m100305r2";?>';
+   document.formv1.m100305r3.value = '<?php echo "$m100305r3";?>';
    document.formv1.m586r11.value = '<?php echo "$m586r11";?>';
    document.formv1.m586r12.value = '<?php echo "$m586r12";?>';
    document.formv1.m586r21.value = '<?php echo "$m586r21";?>';
    document.formv1.m586r22.value = '<?php echo "$m586r22";?>';
+   document.formv1.m586r31.value = '<?php echo "$m586r31";?>';
+   document.formv1.m586r32.value = '<?php echo "$m586r32";?>';
+   document.formv1.m586r41.value = '<?php echo "$m586r41";?>';
+   document.formv1.m586r42.value = '<?php echo "$m586r42";?>';
+   document.formv1.m586r51.value = '<?php echo "$m586r51";?>';
+   document.formv1.m586r52.value = '<?php echo "$m586r52";?>';
+   document.formv1.m586r61.value = '<?php echo "$m586r61";?>';
+   document.formv1.m586r62.value = '<?php echo "$m586r62";?>';
+   document.formv1.m586r71.value = '<?php echo "$m586r71";?>';
+   document.formv1.m586r72.value = '<?php echo "$m586r72";?>';
+   document.formv1.m586r81.value = '<?php echo "$m586r81";?>';
+   document.formv1.m586r82.value = '<?php echo "$m586r82";?>';
+   document.formv1.m586r91.value = '<?php echo "$m586r91";?>';
+   document.formv1.m586r92.value = '<?php echo "$m586r92";?>';
+   document.formv1.m586r101.value = '<?php echo "$m586r101";?>';
+   document.formv1.m586r102.value = '<?php echo "$m586r102";?>';
+   document.formv1.m586r111.value = '<?php echo "$m586r111";?>';
+   document.formv1.m586r112.value = '<?php echo "$m586r112";?>';
+   document.formv1.m586r121.value = '<?php echo "$m586r121";?>';
+   document.formv1.m586r122.value = '<?php echo "$m586r122";?>';
    document.formv1.m586r131.value = '<?php echo "$m586r131";?>';
    document.formv1.m586r132.value = '<?php echo "$m586r132";?>';
    document.formv1.m586r141.value = '<?php echo "$m586r141";?>';
    document.formv1.m586r142.value = '<?php echo "$m586r142";?>';
    document.formv1.m586r151.value = '<?php echo "$m586r151";?>';
    document.formv1.m586r152.value = '<?php echo "$m586r152";?>';
+   document.formv1.m586r161.value = '<?php echo "$m586r161";?>';
+   document.formv1.m586r162.value = '<?php echo "$m586r162";?>';
+   document.formv1.m586r171.value = '<?php echo "$m586r171";?>';
+   document.formv1.m586r172.value = '<?php echo "$m586r172";?>';
+   document.formv1.m586r181.value = '<?php echo "$m586r181";?>';
+   document.formv1.m586r182.value = '<?php echo "$m586r182";?>';
    document.formv1.m586r191.value = '<?php echo "$m586r191";?>';
    document.formv1.m586r192.value = '<?php echo "$m586r192";?>';
    document.formv1.m586r201.value = '<?php echo "$m586r201";?>';
    document.formv1.m586r202.value = '<?php echo "$m586r202";?>';
+   document.formv1.m586r211.value = '<?php echo "$m586r211";?>';
+   document.formv1.m586r212.value = '<?php echo "$m586r212";?>';
+   document.formv1.m586r221.value = '<?php echo "$m586r221";?>';
+   document.formv1.m586r222.value = '<?php echo "$m586r222";?>';
+   document.formv1.m586r231.value = '<?php echo "$m586r231";?>';
+   document.formv1.m586r232.value = '<?php echo "$m586r232";?>';
+   document.formv1.m586r241.value = '<?php echo "$m586r241";?>';
+   document.formv1.m586r242.value = '<?php echo "$m586r242";?>';
  //document.formv1.m586r991.value = '<?php echo "$m586r991";?>';
  //document.formv1.m586r992.value = '<?php echo "$m586r992";?>';
-
-
-
-
 <?php                     } ?>
 
 <?php if ( $strana == 10 ) { ?>
@@ -7121,7 +7239,7 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 <!-- modul 100315 -->
 <!-- <input type="text" name="cinnost" id="cinnost" style="width:487px; top:180px; left:405px;"/> -->
-<span class="text-echo center" style="top:184px; left:410px;"><?php echo $cinnost; ?></span> <!-- dopyt, na 1.strane to isté spravi výpis -->
+<span class="text-echo center" style="top:184px; left:410px;"><?php echo $cinnost; ?></span>
 <?php
 $sknacesb=$fir_sknace;
 ?>
@@ -7408,7 +7526,6 @@ $sknacesb=$fir_sknace;
 <input type="text" name="m571r98" id="m571r98" style="width:71px; top:469px; left:820px;"/>
 
 <!-- modul 581 -->
-<!-- dopyt, upravi súètový vzorec -->
 <input type="text" name="m581r1" id="m581r1" style="width:100px; top:692px; left:680px;"/>
 <input type="text" name="m581r2" id="m581r2" style="width:100px; top:718px; left:680px;"/>
 <input type="text" name="m581r3" id="m581r3" style="width:100px; top:743px; left:680px;"/>
@@ -7420,8 +7537,23 @@ $sknacesb=$fir_sknace;
 <input type="text" name="m581r12" id="m581r12" style="width:100px; top:899px; left:680px;"/>
 <span class="text-echo" style="top:929px; right:165px;"><?php echo $m581r99; ?></span>
 
-<!-- modul 100301, 100302, 100303, 100304 dorobi, sú nové -->
+<!-- modul 100301 -->
+<input type="checkbox" name="m100301r1" value="1" onchange="klikm100301ano();"
+       style="top:992px; left:839px;"/>
+<input type="checkbox" name="m100301r2" value="1" onchange="klikm100301nie();"
+       style="top:1012px; left:839px;"/>
 
+<!-- modul 100302 -->
+<input type="text" name="m100302" id="m100302" style="width:253px; top:1087px; left:643px;"/>
+
+<!-- modul 100303 -->
+<input type="checkbox" name="m100303r1" value="1" onchange="klikm100303ano();"
+       style="top:1146px; left:839px;"/>
+<input type="checkbox" name="m100303r2" value="1" onchange="klikm100303nie();"
+       style="top:1166px; left:839px;"/>
+
+<!-- modul 100304 -->
+<input type="text" name="m100304" id="m100304" style="width:253px; top:1240px; left:643px;"/>
 <?php                                        } ?>
 
 
@@ -7794,7 +7926,9 @@ $sknacesb=$fir_sknace;
      alt="<?php echo $jpg_popis; ?> 9.strana 237kB">
 
 <!-- modul 100305 -->
-<!-- dopyt, novinka -->
+<input type="text" name="m100305r1" id="m100305r1" style="width:109px; top:220px; left:503px;"/>
+<input type="text" name="m100305r2" id="m100305r2" style="width:109px; top:220px; left:639px;"/>
+<input type="text" name="m100305r3" id="m100305r3" style="width:109px; top:220px; left:775px;"/>
 
 <!-- modul 586 -->
 <!-- dopyt, iné výpoèty -->
@@ -7806,20 +7940,52 @@ $sknacesb=$fir_sknace;
 <input type="text" name="m586r12" id="m586r12" style="width:100px; top:391px; left:760px;"/>
 <input type="text" name="m586r21" id="m586r21" style="width:100px; top:419px; left:596px;"/>
 <input type="text" name="m586r22" id="m586r22" style="width:100px; top:419px; left:760px;"/>
+<input type="text" name="m586r31" id="m586r31" style="width:100px; top:447px; left:596px;"/>
+<input type="text" name="m586r32" id="m586r32" style="width:100px; top:447px; left:760px;"/>
+<input type="text" name="m586r41" id="m586r41" style="width:100px; top:476px; left:596px;"/>
+<input type="text" name="m586r42" id="m586r42" style="width:100px; top:476px; left:760px;"/>
+<input type="text" name="m586r51" id="m586r51" style="width:100px; top:504px; left:596px;"/>
+<input type="text" name="m586r52" id="m586r52" style="width:100px; top:504px; left:760px;"/>
+<input type="text" name="m586r61" id="m586r61" style="width:100px; top:533px; left:596px;"/>
+<input type="text" name="m586r62" id="m586r62" style="width:100px; top:533px; left:760px;"/>
+<input type="text" name="m586r71" id="m586r71" style="width:100px; top:561px; left:596px;"/>
+<input type="text" name="m586r72" id="m586r72" style="width:100px; top:561px; left:760px;"/>
+<input type="text" name="m586r81" id="m586r81" style="width:100px; top:590px; left:596px;"/>
+<input type="text" name="m586r82" id="m586r82" style="width:100px; top:590px; left:760px;"/>
+<input type="text" name="m586r91" id="m586r91" style="width:100px; top:618px; left:596px;"/>
+<input type="text" name="m586r92" id="m586r92" style="width:100px; top:618px; left:760px;"/>
+<input type="text" name="m586r101" id="m586r101" style="width:100px; top:647px; left:596px;"/>
+<input type="text" name="m586r102" id="m586r102" style="width:100px; top:647px; left:760px;"/>
+<input type="text" name="m586r111" id="m586r111" style="width:100px; top:675px; left:596px;"/>
+<input type="text" name="m586r112" id="m586r112" style="width:100px; top:675px; left:760px;"/>
+<input type="text" name="m586r121" id="m586r121" style="width:100px; top:704px; left:596px;"/>
+<input type="text" name="m586r122" id="m586r122" style="width:100px; top:704px; left:760px;"/>
 <input type="text" name="m586r131" id="m586r131" style="width:100px; top:732px; left:596px;"/>
 <input type="text" name="m586r132" id="m586r132" style="width:100px; top:732px; left:760px;"/>
 <input type="text" name="m586r141" id="m586r141" style="width:100px; top:761px; left:596px;"/>
 <input type="text" name="m586r142" id="m586r142" style="width:100px; top:761px; left:760px;"/>
 <input type="text" name="m586r151" id="m586r151" style="width:100px; top:789px; left:596px;"/>
 <input type="text" name="m586r152" id="m586r152" style="width:100px; top:789px; left:760px;"/>
+<input type="text" name="m586r161" id="m586r161" style="width:100px; top:818px; left:596px;"/>
+<input type="text" name="m586r162" id="m586r162" style="width:100px; top:818px; left:760px;"/>
+<input type="text" name="m586r171" id="m586r171" style="width:100px; top:846px; left:596px;"/>
+<input type="text" name="m586r172" id="m586r172" style="width:100px; top:846px; left:760px;"/>
+<input type="text" name="m586r181" id="m586r181" style="width:100px; top:875px; left:596px;"/>
+<input type="text" name="m586r182" id="m586r182" style="width:100px; top:875px; left:760px;"/>
 <input type="text" name="m586r191" id="m586r191" style="width:100px; top:903px; left:596px;"/>
 <input type="text" name="m586r192" id="m586r192" style="width:100px; top:903px; left:760px;"/>
 <input type="text" name="m586r201" id="m586r201" style="width:100px; top:932px; left:596px;"/>
 <input type="text" name="m586r202" id="m586r202" style="width:100px; top:932px; left:760px;"/>
+<input type="text" name="m586r211" id="m586r211" style="width:100px; top:960px; left:596px;"/>
+<input type="text" name="m586r212" id="m586r212" style="width:100px; top:960px; left:760px;"/>
+<input type="text" name="m586r221" id="m586r221" style="width:100px; top:989px; left:596px;"/>
+<input type="text" name="m586r222" id="m586r222" style="width:100px; top:989px; left:760px;"/>
+<input type="text" name="m586r231" id="m586r231" style="width:100px; top:1017px; left:596px;"/>
+<input type="text" name="m586r232" id="m586r232" style="width:100px; top:1017px; left:760px;"/>
+<input type="text" name="m586r241" id="m586r241" style="width:100px; top:1046px; left:596px;"/>
+<input type="text" name="m586r242" id="m586r242" style="width:100px; top:1046px; left:760px;"/>
 <span class="text-echo" style="top:1078px; right:250px;"><?php echo $m586r991; ?></span>
 <span class="text-echo" style="top:1078px; right:80px;"><?php echo $m586r992; ?></span>
-
-
 <?php                                        } ?>
 
 
