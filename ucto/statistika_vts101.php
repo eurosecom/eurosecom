@@ -623,45 +623,97 @@ $strana=7;
 //modul 586
 if ( $modul == 586 )
 {
+
+
+
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuv1000ahas$kli_uzid WHERE prx = 1 ";
 $sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
 $i=0; while ($i <= $pol )  {
 if (@$zaznam=mysql_data_seek($sql,$i))
             { $polozka=mysql_fetch_object($sql);
 $rn12=$rn12+$polozka->rn01;
-$rn22=$rn22+$polozka->r31;
-$rn132=$rn132+$polozka->r67;
-$rn142=$rn142+$polozka->r68;
-$rn192=$rn192+$polozka->r118;
+$rn22=$rn22+$polozka->rn34;
+$rn32=$rn32+$polozka->rn22+$polozka->rn23+$polozka->rn24;
+$rn72=$rn72+$polozka->rn28;
+$rn92=$rn92+$polozka->rn25+$polozka->rn26+$polozka->rn27;
+$rn112=$rn112+$polozka->rn41+$polozka->rn53;
+$rn122=$rn122+$polozka->rn42+$polozka->rn54;
+
+$rn132=$rn132+$polozka->r80;
+$rn142=$rn142+$polozka->r81;
+
+$rn192=$rn192+$polozka->r139;
+$rn212=$rn212+$polozka->r140;
+$rn232=$rn232+$polozka->r122;
+$rn242=$rn242+$polozka->r123;
+
             }
 $i=$i+1;                   }
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_uctpocsuvaha_stt WHERE dok >= 0 ";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-$i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i))
-            { $polozka=mysql_fetch_object($sql);
-$rm11=$rm11+$polozka->rm01;
-$rm21=$rm21+$polozka->rm31;
-$rm131=$rm131+$polozka->rm67;
-$rm141=$rm141+$polozka->rm68;
-$rm191=$rm191+$polozka->r118;
-            }
-$i=$i+1;                   }
+
+
+$sqlttps = "SELECT * FROM F$kli_vxcf"."_pos_pod2014 WHERE dok > 0 ORDER BY dok ";
+$sqlps = mysql_query("$sqlttps");
+if ($sqlps) { $polps = mysql_num_rows($sqlps); }
+
+$ips=0;
+  while ($ips <= $polps )
+  {
+  if (@$zaznam=mysql_data_seek($sqlps,$ips))
+{
+$hlavickps=mysql_fetch_object($sqlps);
+
+$riadok=1*$hlavickps->dok;
+
+if ( $riadok ==  1   ) { $rm11=$rm11+1*$hlavickps->hod; }
+if ( $riadok ==  34  ) { $rm21=$rm21+1*$hlavickps->hod; }
+if ( $riadok ==  22 OR $riadok ==  23 OR $riadok ==  24 ) { $rm31=$rm31+1*$hlavickps->hod; }
+if ( $riadok ==  28  ) { $rm71=$rm71+1*$hlavickps->hod; }
+if ( $riadok ==  25 OR $riadok ==  26 OR $riadok ==  27 ) { $rm91=$rm91+1*$hlavickps->hod; }
+if ( $riadok ==  41 OR $riadok ==  53 ) { $rm111=$rm111+1*$hlavickps->hod; }
+if ( $riadok ==  42 OR $riadok ==  54 ) { $rm121=$rm121+1*$hlavickps->hod; }
+
+if ( $riadok ==  80  ) { $rm131=$rm131+1*$hlavickps->hod; }
+if ( $riadok ==  81  ) { $rm141=$rm141+1*$hlavickps->hod; }
+
+if ( $riadok ==  139 ) { $rm191=$rm191+1*$hlavickps->hod; }
+if ( $riadok ==  140 ) { $rm211=$rm211+1*$hlavickps->hod; }
+if ( $riadok ==  122 ) { $rm231=$rm231+1*$hlavickps->hod; }
+if ( $riadok ==  123 ) { $rm241=$rm241+1*$hlavickps->hod; }
+
+}
+$ips = $ips + 1;
+  }
 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" m586r12='$rn12', m586r11='$rm11', ".
-" m586r22='$rn22', m586r21='$rm21', ".
-" m586r132='$rn132', m586r131='$rm131', ".
+" m586r192='$rn192', m586r191='$rm191', ".
+
 " m586r142='$rn142', m586r141='$rm141', ".
-" m586r152='$rn152', m586r151='$rm151', ".
-" m586r192='$rn192', m586r191='$rm191'  ".
+" m586r132='$rn132', m586r131='$rm131', ".
+
+" m586r22='$rn22', m586r21='$rm21', ".
+" m586r12='$rn12', m586r11='$rm11'   ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
+//echo $uprtxt;
 
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
 
-$strana=5;
+" m586r242='$rn242', m586r241='$rm241', ".
+" m586r232='$rn232', m586r231='$rm231', ".
+" m586r212='$rn212', m586r211='$rm211', ".
+
+" m586r122='$rn122', m586r121='$rm121', ".
+" m586r112='$rn112', m586r111='$rm111', ".
+" m586r92='$rn92', m586r91='$rm91', ".
+" m586r72='$rn72', m586r71='$rm71', ".
+" m586r32='$rn32', m586r31='$rm31'  ".
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
+//echo $uprtxt;
+
+$strana=9;
 }
 //koniec modul 586
 
@@ -4836,15 +4888,15 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
   m586r201='$m586r201', m586r202='$m586r202', m586r991='$m586r991', m586r992='$m586r992' ".
 " WHERE ico >= 0 ";
 
-$upravene = mysql_query("$uprtxt"); //dopyt, èo je toto
+$upravene = mysql_query("$uprtxt"); //dopyt, èo je toto MUSI BYT LEBO polozky modulu586 su v dvoch tabulkach _statistika_vts101 aj _statistika_vts101s2
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
 " m100305r1='$m100305r1', m100305r2='$m100305r2', m100305r3='$m100305r3',
   m586r31='$m586r31', m586r32='$m586r32', m586r41='$m586r41', m586r42='$m586r42',
   m586r51='$m586r51', m586r52='$m586r52', m586r61='$m586r61', m586r62='$m586r62',
   m586r71='$m586r71', m586r72='$m586r72', m586r81='$m586r81', m586r82='$m586r82',
-  m586r91='$m586r91', m586r102='$m586r102', m586r111='$m586r111', m586r112='$m586r112',
-  m586r111='$m586r111', m586r121='$m586r121', m586r161='$m586r161', m586r162='$m586r162',
+  m586r91='$m586r91', m586r92='$m586r92', m586r101='$m586r101',  m586r102='$m586r102', m586r111='$m586r111', m586r112='$m586r112',
+  m586r121='$m586r121', m586r122='$m586r122', m586r161='$m586r161', m586r162='$m586r162',
   m586r171='$m586r171', m586r172='$m586r172', m586r181='$m586r181', m586r182='$m586r182',
   m586r211='$m586r211', m586r212='$m586r212', m586r221='$m586r221', m586r222='$m586r222',
   m586r231='$m586r231', m586r232='$m586r232', m586r241='$m586r241', m586r242='$m586r242' ".
@@ -7005,7 +7057,7 @@ form input[type=text] {
   }
   function NacitajZosuvahy(modul)
   {
-   window.open('../ucto/suvaha__x.php?modul=' + modul + '&copern=10&drupoh=1&page=1&tis=1&typ=PDF&cstat=20201&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
+   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=1&modul=' + modul + '&page=1&typ=PDF&cstat=vts101&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
   }
 
 //bud alebo checkbox v module 100041
@@ -7934,7 +7986,7 @@ $sknacesb=$fir_sknace;
 <!-- dopyt, iné výpoèty -->
 <!-- dopyt, predtým str.5 -->
 <!-- dopyt, pridané inputy -->
-<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje zo Súvahy"
+<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje zo Súvahy POD"
      onclick="NacitajZosuvahy(586);" style="top:285px; left:338px;" class="btn-row-tool">
 <input type="text" name="m586r11" id="m586r11" style="width:100px; top:391px; left:596px;"/>
 <input type="text" name="m586r12" id="m586r12" style="width:100px; top:391px; left:760px;"/>

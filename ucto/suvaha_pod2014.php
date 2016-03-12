@@ -1638,7 +1638,21 @@ exit;
           }
 //koniec vypis negenerovane pohyby
 
+//zapis do statistickej TABLE vts101 a prepni do stat zostavy
+$cstat = $_REQUEST['cstat'];
+if( $cstat == 'vts101' )
+{
+$modul = 1*$_REQUEST['modul'];
+?>
+<script type="text/javascript">
 
+window.open('../ucto/statistika_vts101.php?copern=1&drupoh=1&page=1&modul=<?php echo $modul; ?>', '_self' )
+
+</script>
+<?php
+exit;
+}
+//koniec statistiky vts101
 
 //uzavierka kompletna pod 2014
 $kompletka = 1*$_REQUEST['kompletka'];
