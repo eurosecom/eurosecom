@@ -65,6 +65,7 @@ $postranach=0;
 if( $copern == 1999 ) { $copern=999; $postranach=1; }
 if( $copern == 999 )
 {
+
 $stranax = 1*$_REQUEST['stranax'];
 
 $sql = "SELECT * FROM ".$databaza."F".$h_ycf."_poznamky_po2011 ";
@@ -72,7 +73,7 @@ $vysledok = mysql_query("$sql");
 if (!$vysledok) { echo "Vo firme è.$h_ycf nie sú poznámky v.2011, program nenaèíta hodnoty bezprostredne predchádzajúceho obdobia."; exit; }
 
 //str1 pocet zamestnancov 
-if( $stranax == 0 OR $stranax == 1 )
+if( $stranax == 0 OR $stranax == 1 AND $kli_vrok <  2015 )
   {
 $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznamky_po2011 SET ".
 " F$kli_vxcf"."_poznamky_muj2014.ac12=".$databaza."F".$h_ycf."_poznamky_po2011.ac11, ".
@@ -82,9 +83,19 @@ $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznam
 
 $upravene = mysql_query("$uprtxt"); 
   }
+if( $stranax == 0 OR $stranax == 1 AND $kli_vrok >= 2015 )
+  {
+$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznamky_muj2014 SET ".
+" F$kli_vxcf"."_poznamky_muj2014.ac12=".$databaza."F".$h_ycf."_poznamky_muj2014.ac11, ".
+" F$kli_vxcf"."_poznamky_muj2014.ac22=".$databaza."F".$h_ycf."_poznamky_muj2014.ac21, ".
+" F$kli_vxcf"."_poznamky_muj2014.ac32=".$databaza."F".$h_ycf."_poznamky_muj2014.ac31  ".
+" WHERE F$kli_vxcf"."_poznamky_muj2014.psys=".$databaza."F".$h_ycf."_poznamky_muj2014.psys "; 
+
+$upravene = mysql_query("$uprtxt"); 
+  }
 
 //str3 zavazky, vlastne akcie 
-if( $stranax == 0 OR $stranax == 3 )
+if( $stranax == 0 OR $stranax == 3 AND $kli_vrok <  2015 )
   {
 $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznamky_po2011s3 SET ".
 
@@ -131,9 +142,56 @@ $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznam
 " WHERE F$kli_vxcf"."_poznamky_muj2014.psys=".$databaza."F".$h_ycf."_poznamky_po2011s3.psys "; 
 $upravene = mysql_query("$uprtxt"); 
   }
+if( $stranax == 0 OR $stranax == 3 AND $kli_vrok >= 2015 )
+  {
+$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznamky_muj2014 SET ".
+
+" F$kli_vxcf"."_poznamky_muj2014.gcd12=".$databaza."F".$h_ycf."_poznamky_muj2014.gcd11, ".
+" F$kli_vxcf"."_poznamky_muj2014.gcd22=".$databaza."F".$h_ycf."_poznamky_muj2014.gcd21, ".
+" F$kli_vxcf"."_poznamky_muj2014.gcd32=".$databaza."F".$h_ycf."_poznamky_muj2014.gcd31, ".
+" F$kli_vxcf"."_poznamky_muj2014.gcd42=".$databaza."F".$h_ycf."_poznamky_muj2014.gcd41, ".
+" F$kli_vxcf"."_poznamky_muj2014.gcd52=".$databaza."F".$h_ycf."_poznamky_muj2014.gcd51, ".
+" F$kli_vxcf"."_poznamky_muj2014.gcd62=".$databaza."F".$h_ycf."_poznamky_muj2014.gcd61  ".
+
+" WHERE F$kli_vxcf"."_poznamky_muj2014.psys=".$databaza."F".$h_ycf."_poznamky_muj2014.psys "; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznamky_muj2014 SET ".
+
+" F$kli_vxcf"."_poznamky_muj2014.gh11=".$databaza."F".$h_ycf."_poznamky_muj2014.gh11, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh12=".$databaza."F".$h_ycf."_poznamky_muj2014.gh12, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh13=".$databaza."F".$h_ycf."_poznamky_muj2014.gh13, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh14=".$databaza."F".$h_ycf."_poznamky_muj2014.gh14, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh15=".$databaza."F".$h_ycf."_poznamky_muj2014.gh15, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh16=".$databaza."F".$h_ycf."_poznamky_muj2014.gh16, ".
+
+" F$kli_vxcf"."_poznamky_muj2014.gh21=".$databaza."F".$h_ycf."_poznamky_muj2014.gh21, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh22=".$databaza."F".$h_ycf."_poznamky_muj2014.gh22, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh23=".$databaza."F".$h_ycf."_poznamky_muj2014.gh23, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh24=".$databaza."F".$h_ycf."_poznamky_muj2014.gh24, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh25=".$databaza."F".$h_ycf."_poznamky_muj2014.gh25, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh26=".$databaza."F".$h_ycf."_poznamky_muj2014.gh26, ".
+
+" F$kli_vxcf"."_poznamky_muj2014.gh31=".$databaza."F".$h_ycf."_poznamky_muj2014.gh31, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh32=".$databaza."F".$h_ycf."_poznamky_muj2014.gh32, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh33=".$databaza."F".$h_ycf."_poznamky_muj2014.gh33, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh34=".$databaza."F".$h_ycf."_poznamky_muj2014.gh34, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh35=".$databaza."F".$h_ycf."_poznamky_muj2014.gh35, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh36=".$databaza."F".$h_ycf."_poznamky_muj2014.gh36, ".
+
+" F$kli_vxcf"."_poznamky_muj2014.gh41=".$databaza."F".$h_ycf."_poznamky_muj2014.gh41, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh42=".$databaza."F".$h_ycf."_poznamky_muj2014.gh42, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh43=".$databaza."F".$h_ycf."_poznamky_muj2014.gh43, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh44=".$databaza."F".$h_ycf."_poznamky_muj2014.gh44, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh45=".$databaza."F".$h_ycf."_poznamky_muj2014.gh45, ".
+" F$kli_vxcf"."_poznamky_muj2014.gh46=".$databaza."F".$h_ycf."_poznamky_muj2014.gh46  ".
+
+" WHERE F$kli_vxcf"."_poznamky_muj2014.psys=".$databaza."F".$h_ycf."_poznamky_muj2014.psys "; 
+$upravene = mysql_query("$uprtxt"); 
+  }
 
 //str4 statutary 
-if( $stranax == 0 OR $stranax == 4 )
+if( $stranax == 0 OR $stranax == 4 AND $kli_vrok <  2015 )
   {
 $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznamky_po2011s3 SET ".
 
@@ -189,9 +247,65 @@ $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznam
 " WHERE F$kli_vxcf"."_poznamky_muj2014.psys=".$databaza."F".$h_ycf."_poznamky_po2011s3.psys "; 
 $upravene = mysql_query("$uprtxt"); 
   }
+if( $stranax == 0 OR $stranax == 4 AND $kli_vrok >= 2015 )
+  {
+$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznamky_muj2014 SET ".
+
+" F$kli_vxcf"."_poznamky_muj2014.m23c=".$databaza."F".$h_ycf."_poznamky_muj2014.m13c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m22c=".$databaza."F".$h_ycf."_poznamky_muj2014.m12c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m21c=".$databaza."F".$h_ycf."_poznamky_muj2014.m11c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m23b=".$databaza."F".$h_ycf."_poznamky_muj2014.m13b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m22b=".$databaza."F".$h_ycf."_poznamky_muj2014.m12b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m21b=".$databaza."F".$h_ycf."_poznamky_muj2014.m11b,  ".
+
+" F$kli_vxcf"."_poznamky_muj2014.m43c=".$databaza."F".$h_ycf."_poznamky_muj2014.m33c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m42c=".$databaza."F".$h_ycf."_poznamky_muj2014.m32c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m41c=".$databaza."F".$h_ycf."_poznamky_muj2014.m31c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m43b=".$databaza."F".$h_ycf."_poznamky_muj2014.m33b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m42b=".$databaza."F".$h_ycf."_poznamky_muj2014.m32b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m41b=".$databaza."F".$h_ycf."_poznamky_muj2014.m31b,  ".
+
+" F$kli_vxcf"."_poznamky_muj2014.m63c=".$databaza."F".$h_ycf."_poznamky_muj2014.m53c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m62c=".$databaza."F".$h_ycf."_poznamky_muj2014.m52c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m61c=".$databaza."F".$h_ycf."_poznamky_muj2014.m51c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m63b=".$databaza."F".$h_ycf."_poznamky_muj2014.m53b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m62b=".$databaza."F".$h_ycf."_poznamky_muj2014.m52b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m61b=".$databaza."F".$h_ycf."_poznamky_muj2014.m51b,  ".
+
+" F$kli_vxcf"."_poznamky_muj2014.m83c=".$databaza."F".$h_ycf."_poznamky_muj2014.m73c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m82c=".$databaza."F".$h_ycf."_poznamky_muj2014.m72c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m81c=".$databaza."F".$h_ycf."_poznamky_muj2014.m71c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m83b=".$databaza."F".$h_ycf."_poznamky_muj2014.m73b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m82b=".$databaza."F".$h_ycf."_poznamky_muj2014.m72b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m81b=".$databaza."F".$h_ycf."_poznamky_muj2014.m71b,  ".
+
+" F$kli_vxcf"."_poznamky_muj2014.m103c=".$databaza."F".$h_ycf."_poznamky_muj2014.m93c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m102c=".$databaza."F".$h_ycf."_poznamky_muj2014.m92c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m101c=".$databaza."F".$h_ycf."_poznamky_muj2014.m91c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m103b=".$databaza."F".$h_ycf."_poznamky_muj2014.m93b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m102b=".$databaza."F".$h_ycf."_poznamky_muj2014.m92b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m101b=".$databaza."F".$h_ycf."_poznamky_muj2014.m91b,  ".
+
+" F$kli_vxcf"."_poznamky_muj2014.m123c=".$databaza."F".$h_ycf."_poznamky_muj2014.m113c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m122c=".$databaza."F".$h_ycf."_poznamky_muj2014.m112c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m121c=".$databaza."F".$h_ycf."_poznamky_muj2014.m111c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m123b=".$databaza."F".$h_ycf."_poznamky_muj2014.m113b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m122b=".$databaza."F".$h_ycf."_poznamky_muj2014.m112b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m121b=".$databaza."F".$h_ycf."_poznamky_muj2014.m111b,  ".
+
+" F$kli_vxcf"."_poznamky_muj2014.m143c=".$databaza."F".$h_ycf."_poznamky_muj2014.m133c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m142c=".$databaza."F".$h_ycf."_poznamky_muj2014.m132c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m141c=".$databaza."F".$h_ycf."_poznamky_muj2014.m131c,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m143b=".$databaza."F".$h_ycf."_poznamky_muj2014.m133b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m142b=".$databaza."F".$h_ycf."_poznamky_muj2014.m132b,  ".
+" F$kli_vxcf"."_poznamky_muj2014.m141b=".$databaza."F".$h_ycf."_poznamky_muj2014.m131b   ".
+
+" WHERE F$kli_vxcf"."_poznamky_muj2014.psys=".$databaza."F".$h_ycf."_poznamky_muj2014.psys "; 
+$upravene = mysql_query("$uprtxt"); 
+  }
 
 //str5 podmienene zavazky a majetok
-if( $stranax == 0 OR $stranax == 5 )
+if( $stranax == 0 OR $stranax == 5 AND $kli_vrok <  2015 )
   {
 $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznamky_po2011s3 SET ".
 
@@ -238,6 +352,56 @@ $uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznam
 " F$kli_vxcf"."_poznamky_muj2014.lc82=".$databaza."F".$h_ycf."_poznamky_po2011s3.lc81  ".
 
 " WHERE F$kli_vxcf"."_poznamky_muj2014.psys=".$databaza."F".$h_ycf."_poznamky_po2011s3.psys "; 
+$upravene = mysql_query("$uprtxt");
+ 
+  }
+if( $stranax == 0 OR $stranax == 5 AND $kli_vrok >= 2015 )
+  {
+$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznamky_muj2014 SET ".
+
+" F$kli_vxcf"."_poznamky_muj2014.k12=".$databaza."F".$h_ycf."_poznamky_muj2014.k11, ".
+" F$kli_vxcf"."_poznamky_muj2014.k22=".$databaza."F".$h_ycf."_poznamky_muj2014.k21, ".
+" F$kli_vxcf"."_poznamky_muj2014.k32=".$databaza."F".$h_ycf."_poznamky_muj2014.k31, ".
+" F$kli_vxcf"."_poznamky_muj2014.k42=".$databaza."F".$h_ycf."_poznamky_muj2014.k41, ".
+" F$kli_vxcf"."_poznamky_muj2014.k52=".$databaza."F".$h_ycf."_poznamky_muj2014.k51, ".
+" F$kli_vxcf"."_poznamky_muj2014.k62=".$databaza."F".$h_ycf."_poznamky_muj2014.k61, ".
+" F$kli_vxcf"."_poznamky_muj2014.k72=".$databaza."F".$h_ycf."_poznamky_muj2014.k71, ".
+" F$kli_vxcf"."_poznamky_muj2014.k82=".$databaza."F".$h_ycf."_poznamky_muj2014.k81, ".
+" F$kli_vxcf"."_poznamky_muj2014.k92=".$databaza."F".$h_ycf."_poznamky_muj2014.k91  ".
+
+" WHERE F$kli_vxcf"."_poznamky_muj2014.psys=".$databaza."F".$h_ycf."_poznamky_muj2014.psys "; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznamky_muj2014 SET ".
+
+" F$kli_vxcf"."_poznamky_muj2014.l2ab11=".$databaza."F".$h_ycf."_poznamky_muj2014.l1ab11, ".
+" F$kli_vxcf"."_poznamky_muj2014.l2ab21=".$databaza."F".$h_ycf."_poznamky_muj2014.l1ab21, ".
+" F$kli_vxcf"."_poznamky_muj2014.l2ab31=".$databaza."F".$h_ycf."_poznamky_muj2014.l1ab31, ".
+" F$kli_vxcf"."_poznamky_muj2014.l2ab41=".$databaza."F".$h_ycf."_poznamky_muj2014.l1ab41, ".
+" F$kli_vxcf"."_poznamky_muj2014.l2ab51=".$databaza."F".$h_ycf."_poznamky_muj2014.l1ab51, ".
+" F$kli_vxcf"."_poznamky_muj2014.l2ab61=".$databaza."F".$h_ycf."_poznamky_muj2014.l1ab61, ".
+" F$kli_vxcf"."_poznamky_muj2014.l2ab12=".$databaza."F".$h_ycf."_poznamky_muj2014.l1ab12, ".
+" F$kli_vxcf"."_poznamky_muj2014.l2ab22=".$databaza."F".$h_ycf."_poznamky_muj2014.l1ab22, ".
+" F$kli_vxcf"."_poznamky_muj2014.l2ab32=".$databaza."F".$h_ycf."_poznamky_muj2014.l1ab32, ".
+" F$kli_vxcf"."_poznamky_muj2014.l2ab42=".$databaza."F".$h_ycf."_poznamky_muj2014.l1ab42, ".
+" F$kli_vxcf"."_poznamky_muj2014.l2ab52=".$databaza."F".$h_ycf."_poznamky_muj2014.l1ab52, ".
+" F$kli_vxcf"."_poznamky_muj2014.l2ab62=".$databaza."F".$h_ycf."_poznamky_muj2014.l1ab62  ".
+
+" WHERE F$kli_vxcf"."_poznamky_muj2014.psys=".$databaza."F".$h_ycf."_poznamky_muj2014.psys "; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_poznamky_muj2014,".$databaza."F".$h_ycf."_poznamky_muj2014 SET ".
+
+" F$kli_vxcf"."_poznamky_muj2014.lc12=".$databaza."F".$h_ycf."_poznamky_muj2014.lc11, ".
+" F$kli_vxcf"."_poznamky_muj2014.lc22=".$databaza."F".$h_ycf."_poznamky_muj2014.lc21, ".
+" F$kli_vxcf"."_poznamky_muj2014.lc32=".$databaza."F".$h_ycf."_poznamky_muj2014.lc31, ".
+" F$kli_vxcf"."_poznamky_muj2014.lc42=".$databaza."F".$h_ycf."_poznamky_muj2014.lc41, ".
+" F$kli_vxcf"."_poznamky_muj2014.lc52=".$databaza."F".$h_ycf."_poznamky_muj2014.lc51, ".
+" F$kli_vxcf"."_poznamky_muj2014.lc62=".$databaza."F".$h_ycf."_poznamky_muj2014.lc61, ".
+" F$kli_vxcf"."_poznamky_muj2014.lc72=".$databaza."F".$h_ycf."_poznamky_muj2014.lc71, ".
+" F$kli_vxcf"."_poznamky_muj2014.lc82=".$databaza."F".$h_ycf."_poznamky_muj2014.lc81  ".
+
+" WHERE F$kli_vxcf"."_poznamky_muj2014.psys=".$databaza."F".$h_ycf."_poznamky_muj2014.psys "; 
 $upravene = mysql_query("$uprtxt");
  
   }

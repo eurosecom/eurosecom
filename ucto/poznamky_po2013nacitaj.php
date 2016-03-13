@@ -79,7 +79,7 @@ $stranax = 1*$_REQUEST['stranax'];
 
 $sql = "SELECT * FROM ".$databaza."F".$h_ycf."_poznamky_po2011 ";
 $vysledok = mysql_query("$sql");
-if (!$vysledok) { echo "Vo firme è.$h_ycf nie sú poznámky v.2011, program nenaèíta hodnoty bezprostredne predchádzajúceho obdobia."; exit; }
+if (!$vysledok) { echo "Vo firme è.$h_ycf nie sú poznámky v.2013, program nenaèíta hodnoty bezprostredne predchádzajúceho obdobia."; exit; }
 
 //str uvod,1,2 
 if( $stranax == 0 OR $stranax == 2 )
@@ -4753,7 +4753,7 @@ if( $cstat == 20101 )
 ?>
 <script type="text/javascript">
 
-window.open('../ucto/poznamky_po2011.php?copern=1&drupoh=1&page=<?php echo $strana; ?>&strana=<?php echo $strana; ?>', '_self' )
+window.open('../ucto/poznamky_po2013.php?copern=1&drupoh=1&page=<?php echo $strana; ?>&strana=<?php echo $strana; ?>', '_self' )
 
 </script>
 <?php
