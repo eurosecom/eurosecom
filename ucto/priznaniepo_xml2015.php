@@ -995,7 +995,7 @@ if ( $riadok == 0 ) $riadok="";
 $riadok=$hlavicka->pcpod;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <c4r2><![CDATA[".$riadok."]]></c4r2>"."\r\n"; fwrite($soubor, $text);
-$riadok=$hlavicka->pcsum;
+$riadok=$hlavicka->pc155;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <c4r3><![CDATA[".$riadok."]]></c4r3>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->pcpoc;
@@ -1249,12 +1249,17 @@ $stranap=$stranap+1;
 
   $text = "  <priloha>"."\r\n"; fwrite($soubor, $text);
                      }
+
+$sumaxx=$hlavickap->pcsum;
+
+if( $sumaxx > 0 ) {
+
   $text = "   <prijimatel>"."\r\n"; fwrite($soubor, $text);
 
 //p1cpl  psys  druh  p1cis  pcsum  p1ico  p1sid  p1pfr  p1men  p1uli  p1cdm  p1psc  p1mes  ico 
 
 $poradoveCislo=$hlavickap->p1cis;
-$suma=1*$hlavickap->pcsum;
+$suma=$hlavickap->pcsum;
 $pico=$hlavickap->p1ico;
 if ( $hlavickap->p1ico < 1000000 AND $hlavickap->p1ico > 0 ) { $pico="00".$hlavickap->p1ico; }
 $psid=$hlavickap->p1sid;
@@ -1282,6 +1287,9 @@ if ( $suma == 0 ) { $suma=""; $poradoveCislo=""; $icosid=""; $pravnaForma=""; $o
   $text = "    <psc><![CDATA[".$psc."]]></psc>"."\r\n"; fwrite($soubor, $text);
   $text = "    <obec><![CDATA[".$obec."]]></obec>"."\r\n"; fwrite($soubor, $text);
   $text = "   </prijimatel>"."\r\n"; fwrite($soubor, $text);
+
+                  }
+//koniec ak if( $sumaxx > 0 ) 
 
 if ( $stlpecp == 3 ) {
   $text = "  </priloha>"."\r\n"; fwrite($soubor, $text);

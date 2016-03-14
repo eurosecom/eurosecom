@@ -124,7 +124,7 @@ if( !$uziv ) exit;
   $kli_uzprie = $_SESSION['kli_uzprie'];
   $verzia = $_SESSION['verzia'];
 
-$sql = "SELECT m032016 FROM kalendar";
+$sql = "SELECT m062016 FROM kalendar";
 $vysledok = mysql_query($sql);
 if (!$vysledok):
 $kalend = include("cis/kalendar.php");
@@ -132,7 +132,7 @@ endif;
 
 if(isset($mysqldb2010))
 {
-$sql = "SELECT m032016 FROM $mysqldb2010.kalendar";
+$sql = "SELECT m062016 FROM $mysqldb2010.kalendar";
 $vysledok = mysql_query($sql);
 if (!$vysledok){
 $sqlfir = "DROP TABLE $mysqldb2010.kalendar";
@@ -145,7 +145,7 @@ $fir_vysledok = mysql_query($sqlfir);
 
 if(isset($mysqldb2011))
 {
-$sql = "SELECT m032016 FROM $mysqldb2011.kalendar";
+$sql = "SELECT m062016 FROM $mysqldb2011.kalendar";
 $vysledok = mysql_query($sql);
 if (!$vysledok){
 $sqlfir = "DROP TABLE $mysqldb2011.kalendar";
@@ -158,7 +158,7 @@ $fir_vysledok = mysql_query($sqlfir);
 
 if(isset($mysqldb2012))
 {
-$sql = "SELECT m032016 FROM $mysqldb2012.kalendar";
+$sql = "SELECT m062016 FROM $mysqldb2012.kalendar";
 $vysledok = mysql_query($sql);
 if (!$vysledok){
 $sqlfir = "DROP TABLE $mysqldb2012.kalendar";
@@ -171,7 +171,7 @@ $fir_vysledok = mysql_query($sqlfir);
 
 if(isset($mysqldb2013))
 {
-$sql = "SELECT m032016 FROM $mysqldb2013.kalendar";
+$sql = "SELECT m062016 FROM $mysqldb2013.kalendar";
 $vysledok = mysql_query($sql);
 if (!$vysledok){
 $sqlfir = "DROP TABLE $mysqldb2013.kalendar";
@@ -184,7 +184,7 @@ $fir_vysledok = mysql_query($sqlfir);
 
 if(isset($mysqldb2014))
 {
-$sql = "SELECT m032016 FROM $mysqldb2014.kalendar";
+$sql = "SELECT m062016 FROM $mysqldb2014.kalendar";
 $vysledok = mysql_query($sql);
 if (!$vysledok){
 $sqlfir = "DROP TABLE $mysqldb2014.kalendar";
@@ -197,7 +197,7 @@ $fir_vysledok = mysql_query($sqlfir);
 
 if(isset($mysqldb2015))
 {
-$sql = "SELECT m032016 FROM $mysqldb2015.kalendar";
+$sql = "SELECT m062016 FROM $mysqldb2015.kalendar";
 $vysledok = mysql_query($sql);
 if (!$vysledok){
 $sqlfir = "DROP TABLE $mysqldb2015.kalendar";
