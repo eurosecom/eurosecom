@@ -1,18 +1,19 @@
+<!doctype html>
 <HTML>
 <?php
-
+//celkovy zaciatok dokumentu
 do
 {
 $sys = 'UCT';
 $urov = 3000;
 $copern = $_REQUEST['copern'];
-$tis = $_REQUEST['tis'];
+$tis = $_REQUEST['tis']; //dopyt, preveriù, Ëi musÌ byù
 if(!isset($tis)) $tis = 0;
-$fort = $_REQUEST['fort'];
+$fort = $_REQUEST['fort']; //dopyt, preveriù, Ëi musÌ byù
 if(!isset($fort)) $fort = 1;
 
 $uziv = include("../uziv.php");
-if( !$uziv ) exit;
+if ( !$uziv ) exit;
 
 require_once("../pswd/password.php");
 @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
@@ -25,28 +26,30 @@ require_once("../pswd/password.php");
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
-//ramcek fpdf
-$rmc=0;
+//ramcek fpdf 1=zap,0=vyp
+$rmc=1;
+$rmc1=0;
+
+//.jpg podklad
+$jpg_cesta="../dokumenty/statistika2016/fin204pod/fin2-04pod_v16";
+$jpg_popis="tlaËivo FinanËn˝ v˝kaz o vybran˝ch ˙dajoch z aktÌv a z pasÌv podnikateæskÈho subjektu verejnej spr·vy FIN 2-04 za rok ".$kli_vrok;
 
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
 $citfir = include("../cis/citaj_fir.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
 
 $cislo_oc = 1*$_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
 $strana = 1*$_REQUEST['strana'];
-if( $strana == 0 ) $strana=9999;
+if ( $strana == 0 ) $strana=9999;
 
-if( $cislo_oc == 0 ) $cislo_oc=1;
-if( $cislo_oc == 1 ) { $datum="31.03.".$kli_vrok; $mesiac="03"; $kli_vume="3.".$kli_vrok; }
-if( $cislo_oc == 2 ) { $datum="30.06.".$kli_vrok; $mesiac="06"; $kli_vume="6.".$kli_vrok; }
-if( $cislo_oc == 3 ) { $datum="30.09.".$kli_vrok; $mesiac="09"; $kli_vume="9.".$kli_vrok; }
-if( $cislo_oc == 4 ) { $datum="31.12.".$kli_vrok; $mesiac="12"; $kli_vume="12.".$kli_vrok; }
+if ( $cislo_oc == 0 ) $cislo_oc=1;
+if ( $cislo_oc == 1 ) { $datum="31.03.".$kli_vrok; $mesiac="03"; $kli_vume="3.".$kli_vrok; }
+if ( $cislo_oc == 2 ) { $datum="30.06.".$kli_vrok; $mesiac="06"; $kli_vume="6.".$kli_vrok; }
+if ( $cislo_oc == 3 ) { $datum="30.09.".$kli_vrok; $mesiac="09"; $kli_vume="9.".$kli_vrok; }
+if ( $cislo_oc == 4 ) { $datum="31.12.".$kli_vrok; $mesiac="12"; $kli_vume="12.".$kli_vrok; }
 
 
 $vsetkyprepocty=0;
@@ -57,17 +60,16 @@ $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resiza
 $tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
-//ak nie je generovanie daj standartne
+//ak nie je generovanie daj standardne
 $niejegen=0;
 $sql = "SELECT * FROM F".$kli_vxcf."_crf204pod_no ";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
-
 $copern=1002;
 $niejegen=1;
 }
-//koniec ak nie je generovanie daj standartne
+//koniec ak nie je generovanie daj standardne
 
 
 //Tabulka crf204nuj_no
@@ -75,10 +77,10 @@ if ( $copern == 1001 )
 {
 ?>
 <script type="text/javascript">
-if( !confirm ("Chcete naËÌtaù ötandartnÈ generovanie v˝kazu FIN 2-04 POD ?") )
+if( !confirm ("Chcete naËÌtaù ötandardnÈ generovanie v˝kazu FIN 2-04 POD ?") )
          { window.close()  }
 else
-         { location.href='vykaz_fin204pod_2016.php?copern=1002&page=1&drupoh=1'  }
+         { location.href='vykaz_fin204pod_2016.php?copern=1002&page=1&drupoh=1' }
 </script>
 <?php
     }
@@ -269,14 +271,14 @@ $sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '249', '72
 $sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '383', '73' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '384', '73' ); "; $ulozene = mysql_query("$sqult");
 
-if( $niejegen == 0 ) {
+if ( $niejegen == 0 ) {
 ?>
 <script type="text/javascript">
 window.open('../ucto/oprcis.php?copern=308&drupoh=87&page=1&sysx=UCT', '_self' );
 </script>
 <?php
 exit;
-                     }
+                      }
 $copern=20;
 }
 //koniec tabulky crf204pod_no
@@ -310,18 +312,21 @@ $vsetkyprepocty=1;
 
 
 
-// zapis upravene udaje
+//zapis upravene udaje
 if ( $copern == 23 )
-    {
-
-
-if ( $strana == 1 )    {
-
-$okres = strip_tags($_REQUEST['okres']);
-$obec = strip_tags($_REQUEST['obec']);
+     {
+if ( $strana == 1 ) {
+//$okres = strip_tags($_REQUEST['okres']);
+//$obec = strip_tags($_REQUEST['obec']);
 $daz = $_REQUEST['daz'];
 $daz_sql = SqlDatum($daz);
 
+$uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin204pod SET ".
+" daz='$daz_sql' ".
+" WHERE oc = $cislo_oc"; 
+                    }
+
+if ( $strana == 2 ) {
 $r01 = 1*$_REQUEST['r01']; $rk01 = 1*$_REQUEST['rk01']; $rn01 = 1*$_REQUEST['rn01']; $rm01 = 1*$_REQUEST['rm01'];
 $r02 = 1*$_REQUEST['r02']; $rk02 = 1*$_REQUEST['rk02']; $rn02 = 1*$_REQUEST['rn02']; $rm02 = 1*$_REQUEST['rm02'];
 $r03 = 1*$_REQUEST['r03']; $rk03 = 1*$_REQUEST['rk03']; $rn03 = 1*$_REQUEST['rn03']; $rm03 = 1*$_REQUEST['rm03'];
@@ -344,28 +349,6 @@ $r19 = 1*$_REQUEST['r19']; $rk19 = 1*$_REQUEST['rk19']; $rn19 = 1*$_REQUEST['rn1
 $r20 = 1*$_REQUEST['r20']; $rk20 = 1*$_REQUEST['rk20']; $rn20 = 1*$_REQUEST['rn20']; $rm20 = 1*$_REQUEST['rm20'];
 $r21 = 1*$_REQUEST['r21']; $rk21 = 1*$_REQUEST['rk21']; $rn21 = 1*$_REQUEST['rn21']; $rm21 = 1*$_REQUEST['rm21'];
 $r22 = 1*$_REQUEST['r22']; $rk22 = 1*$_REQUEST['rk22']; $rn22 = 1*$_REQUEST['rn22']; $rm22 = 1*$_REQUEST['rm22'];
-
-$uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin204pod SET r22='$r22', rk22='$rk22', rn22='$rn22', rm22='$rm22', ".
-" r01='$r01', rk01='$rk01', rn01='$rn01', rm01='$rm01', r02='$r02', rk02='$rk02', rn02='$rn02', rm02='$rm02', ".
-" r03='$r03', rk03='$rk03', rn03='$rn03', rm03='$rm03', r04='$r04', rk04='$rk04', rn04='$rn04', rm04='$rm04', ".
-" r05='$r05', rk05='$rk05', rn05='$rn05', rm05='$rm05', r06='$r06', rk06='$rk06', rn06='$rn06', rm06='$rm06', ".
-" r07='$r07', rk07='$rk07', rn07='$rn07', rm07='$rm07', r08='$r08', rk08='$rk08', rn08='$rn08', rm08='$rm08', ".
-" r09='$r09', rk09='$rk09', rn09='$rn09', rm09='$rm09', r10='$r10', rk10='$rk10', rn10='$rn10', rm10='$rm10', ".
-" r11='$r11', rk11='$rk11', rn11='$rn11', rm11='$rm11', r12='$r12', rk12='$rk12', rn12='$rn12', rm12='$rm12', ".
-" r13='$r13', rk13='$rk13', rn13='$rn13', rm13='$rm13', r14='$r14', rk14='$rk14', rn14='$rn14', rm14='$rm14', ".
-" r15='$r15', rk15='$rk15', rn15='$rn15', rm15='$rm15', r16='$r16', rk16='$rk16', rn16='$rn16', rm16='$rm16', ".
-" r17='$r17', rk17='$rk17', rn17='$rn17', rm17='$rm17', r18='$r18', rk18='$rk18', rn18='$rn18', rm18='$rm18', ".
-" r19='$r19', rk19='$rk19', rn19='$rn19', rm19='$rm19', r20='$r20', rk20='$rk20', rn20='$rn20', rm20='$rm20', ".
-" r21='$r21', rk21='$rk21', rn21='$rn21', rm21='$rm21',  ".
-" okres='$okres', obec='$obec', daz='$daz_sql' ".
-" WHERE oc = $cislo_oc"; 
-
-                       }
-
-
-
-if ( $strana == 2 )    {
-
 $r23 = 1*$_REQUEST['r23']; $rk23 = 1*$_REQUEST['rk23']; $rn23 = 1*$_REQUEST['rn23']; $rm23 = 1*$_REQUEST['rm23'];
 $r24 = 1*$_REQUEST['r24']; $rk24 = 1*$_REQUEST['rk24']; $rn24 = 1*$_REQUEST['rn24']; $rm24 = 1*$_REQUEST['rm24'];
 $r25 = 1*$_REQUEST['r25']; $rk25 = 1*$_REQUEST['rk25']; $rn25 = 1*$_REQUEST['rn25']; $rm25 = 1*$_REQUEST['rm25'];
@@ -373,7 +356,6 @@ $r26 = 1*$_REQUEST['r26']; $rk26 = 1*$_REQUEST['rk26']; $rn26 = 1*$_REQUEST['rn2
 $r27 = 1*$_REQUEST['r27']; $rk27 = 1*$_REQUEST['rk27']; $rn27 = 1*$_REQUEST['rn27']; $rm27 = 1*$_REQUEST['rm27'];
 $r28 = 1*$_REQUEST['r28']; $rk28 = 1*$_REQUEST['rk28']; $rn28 = 1*$_REQUEST['rn28']; $rm28 = 1*$_REQUEST['rm28'];
 $r29 = 1*$_REQUEST['r29']; $rk29 = 1*$_REQUEST['rk29']; $rn29 = 1*$_REQUEST['rn29']; $rm29 = 1*$_REQUEST['rm29'];
-
 $r30 = 1*$_REQUEST['r30']; $rk30 = 1*$_REQUEST['rk30']; $rn30 = 1*$_REQUEST['rn30']; $rm30 = 1*$_REQUEST['rm30'];
 $r31 = 1*$_REQUEST['r31']; $rk31 = 1*$_REQUEST['rk31']; $rn31 = 1*$_REQUEST['rn31']; $rm31 = 1*$_REQUEST['rm31'];
 $r32 = 1*$_REQUEST['r32']; $rk32 = 1*$_REQUEST['rk32']; $rn32 = 1*$_REQUEST['rn32']; $rm32 = 1*$_REQUEST['rm32'];
@@ -384,33 +366,59 @@ $r36 = 1*$_REQUEST['r36']; $rk36 = 1*$_REQUEST['rk36']; $rn36 = 1*$_REQUEST['rn3
 $r37 = 1*$_REQUEST['r37']; $rk37 = 1*$_REQUEST['rk37']; $rn37 = 1*$_REQUEST['rn37']; $rm37 = 1*$_REQUEST['rm37'];
 $r38 = 1*$_REQUEST['r38']; $rk38 = 1*$_REQUEST['rk38']; $rn38 = 1*$_REQUEST['rn38']; $rm38 = 1*$_REQUEST['rm38'];
 $r39 = 1*$_REQUEST['r39']; $rk39 = 1*$_REQUEST['rk39']; $rn39 = 1*$_REQUEST['rn39']; $rm39 = 1*$_REQUEST['rm39'];
-
 $r40 = 1*$_REQUEST['r40']; $rk40 = 1*$_REQUEST['rk40']; $rn40 = 1*$_REQUEST['rn40']; $rm40 = 1*$_REQUEST['rm40'];
-$r41 = 1*$_REQUEST['r41']; $rk41 = 1*$_REQUEST['rk41']; $rn40 = 1*$_REQUEST['rn41']; $rm41 = 1*$_REQUEST['rm41'];
-$r42 = 1*$_REQUEST['r42']; $rk42 = 1*$_REQUEST['rk42']; $rn40 = 1*$_REQUEST['rn42']; $rm42 = 1*$_REQUEST['rm42'];
-$r43 = 1*$_REQUEST['r43']; $rk43 = 1*$_REQUEST['rk43']; $rn40 = 1*$_REQUEST['rn43']; $rm43 = 1*$_REQUEST['rm43'];
+$r41 = 1*$_REQUEST['r41']; $rk41 = 1*$_REQUEST['rk41']; $rn41 = 1*$_REQUEST['rn41']; $rm41 = 1*$_REQUEST['rm41'];
+$r42 = 1*$_REQUEST['r42']; $rk42 = 1*$_REQUEST['rk42']; $rn42 = 1*$_REQUEST['rn42']; $rm42 = 1*$_REQUEST['rm42'];
+$r43 = 1*$_REQUEST['r43']; $rk43 = 1*$_REQUEST['rk43']; $rn43 = 1*$_REQUEST['rn43']; $rm43 = 1*$_REQUEST['rm43'];
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin204pod SET ".
-" r23='$r23', rk23='$rk23', rn23='$rn23', rm23='$rm23', ". 
-" r24='$r24', rk24='$rk24', rn24='$rn24', rm24='$rm24', r25='$r25', rk25='$rk25', rn25='$rn25', rm25='$rm25', ".
-" r26='$r26', rk26='$rk26', rn26='$rn26', rm26='$rm26', r27='$r27', rk27='$rk27', rn27='$rn27', rm27='$rm27', ".
-" r28='$r28', rk28='$rk28', rn28='$rn28', rm28='$rm28', r29='$r29', rk29='$rk29', rn29='$rn29', rm29='$rm29', ".
-" r30='$r30', rk30='$rk30', rn30='$rn30', rm30='$rm30', r31='$r31', rk31='$rk31', rn31='$rn31', rm31='$rm31', ".
-" r32='$r32', rk32='$rk32', rn32='$rn32', rm32='$rm32', r33='$r33', rk33='$rk33', rn33='$rn33', rm33='$rm33', ".
-" r34='$r34', rk34='$rk34', rn34='$rn34', rm34='$rm34', r35='$r35', rk35='$rk35', rn35='$rn35', rm35='$rm35', ".
-" r36='$r36', rk36='$rk36', rn36='$rn36', rm36='$rm36', r37='$r37', rk37='$rk37', rn37='$rn37', rm37='$rm37', ".
-" r38='$r38', rk38='$rk38', rn38='$rn38', rm38='$rm38', r39='$r39', rk39='$rk39', rn39='$rn39', rm39='$rm39', ".
-" r40='$r40', rk40='$rk40', rn40='$rn40', rm40='$rm40',  ".
-" r41='$r41', rk41='$rk41', rn41='$rn41', rm41='$rm41',  ".
-" r42='$r42', rk42='$rk42', rn42='$rn42', rm42='$rm42',  ".
-" r43='$r43', rk43='$rk43', rn43='$rn43', rm43='$rm43'   ".
+" r01='$r01', rk01='$rk01', rn01='$rn01', rm01='$rm01',
+  r02='$r02', rk02='$rk02', rn02='$rn02', rm02='$rm02',
+  r03='$r03', rk03='$rk03', rn03='$rn03', rm03='$rm03',
+  r04='$r04', rk04='$rk04', rn04='$rn04', rm04='$rm04',
+  r05='$r05', rk05='$rk05', rn05='$rn05', rm05='$rm05',
+  r06='$r06', rk06='$rk06', rn06='$rn06', rm06='$rm06',
+  r07='$r07', rk07='$rk07', rn07='$rn07', rm07='$rm07',
+  r08='$r08', rk08='$rk08', rn08='$rn08', rm08='$rm08',
+  r09='$r09', rk09='$rk09', rn09='$rn09', rm09='$rm09',
+  r10='$r10', rk10='$rk10', rn10='$rn10', rm10='$rm10',
+  r11='$r11', rk11='$rk11', rn11='$rn11', rm11='$rm11',
+  r12='$r12', rk12='$rk12', rn12='$rn12', rm12='$rm12',
+  r13='$r13', rk13='$rk13', rn13='$rn13', rm13='$rm13',
+  r14='$r14', rk14='$rk14', rn14='$rn14', rm14='$rm14',
+  r15='$r15', rk15='$rk15', rn15='$rn15', rm15='$rm15',
+  r16='$r16', rk16='$rk16', rn16='$rn16', rm16='$rm16',
+  r17='$r17', rk17='$rk17', rn17='$rn17', rm17='$rm17',
+  r18='$r18', rk18='$rk18', rn18='$rn18', rm18='$rm18',
+  r19='$r19', rk19='$rk19', rn19='$rn19', rm19='$rm19',
+  r20='$r20', rk20='$rk20', rn20='$rn20', rm20='$rm20',
+  r21='$r21', rk21='$rk21', rn21='$rn21', rm21='$rm21',
+  r22='$r22', rk22='$rk22', rn22='$rn22', rm22='$rm22',
+  r23='$r23', rk23='$rk23', rn23='$rn23', rm23='$rm23',
+  r24='$r24', rk24='$rk24', rn24='$rn24', rm24='$rm24',
+  r25='$r25', rk25='$rk25', rn25='$rn25', rm25='$rm25',
+  r26='$r26', rk26='$rk26', rn26='$rn26', rm26='$rm26',
+  r27='$r27', rk27='$rk27', rn27='$rn27', rm27='$rm27',
+  r28='$r28', rk28='$rk28', rn28='$rn28', rm28='$rm28',
+  r29='$r29', rk29='$rk29', rn29='$rn29', rm29='$rm29',
+  r30='$r30', rk30='$rk30', rn30='$rn30', rm30='$rm30',
+  r31='$r31', rk31='$rk31', rn31='$rn31', rm31='$rm31',
+  r32='$r32', rk32='$rk32', rn32='$rn32', rm32='$rm32',
+  r33='$r33', rk33='$rk33', rn33='$rn33', rm33='$rm33',
+  r34='$r34', rk34='$rk34', rn34='$rn34', rm34='$rm34',
+  r35='$r35', rk35='$rk35', rn35='$rn35', rm35='$rm35',
+  r36='$r36', rk36='$rk36', rn36='$rn36', rm36='$rm36',
+  r37='$r37', rk37='$rk37', rn37='$rn37', rm37='$rm37',
+  r38='$r38', rk38='$rk38', rn38='$rn38', rm38='$rm38',
+  r39='$r39', rk39='$rk39', rn39='$rn39', rm39='$rm39',
+  r40='$r40', rk40='$rk40', rn40='$rn40', rm40='$rm40',
+  r41='$r41', rk41='$rk41', rn41='$rn41', rm41='$rm41',
+  r42='$r42', rk42='$rk42', rn42='$rn42', rm42='$rm42',
+  r43='$r43', rk43='$rk43', rn43='$rn43', rm43='$rm43' ".
 " WHERE oc = $cislo_oc"; 
+                    }
 
-                       }
-
-
-if ( $strana == 3 )    {
-
+if ( $strana == 3 ) {
 $r44 = 1*$_REQUEST['r44']; $rm44 = 1*$_REQUEST['rm44'];
 $r45 = 1*$_REQUEST['r45']; $rm45 = 1*$_REQUEST['rm45'];
 $r46 = 1*$_REQUEST['r46']; $rm46 = 1*$_REQUEST['rm46'];
@@ -438,30 +446,32 @@ $r67 = 1*$_REQUEST['r67']; $rm67 = 1*$_REQUEST['rm67'];
 $r68 = 1*$_REQUEST['r68']; $rm68 = 1*$_REQUEST['rm68'];
 $r69 = 1*$_REQUEST['r69']; $rm69 = 1*$_REQUEST['rm69'];
 $r70 = 1*$_REQUEST['r70']; $rm70 = 1*$_REQUEST['rm70'];
-
 $r71 = 1*$_REQUEST['r71']; $rm71 = 1*$_REQUEST['rm71'];
 $r72 = 1*$_REQUEST['r72']; $rm72 = 1*$_REQUEST['rm72'];
 $r73 = 1*$_REQUEST['r73']; $rm73 = 1*$_REQUEST['rm73'];
 $r74 = 1*$_REQUEST['r74']; $rm74 = 1*$_REQUEST['rm74'];
+$r75 = 1*$_REQUEST['r75']; $rm75 = 1*$_REQUEST['rm75'];
+$r76 = 1*$_REQUEST['r76']; $rm76 = 1*$_REQUEST['rm76'];
+$r77 = 1*$_REQUEST['r77']; $rm77 = 1*$_REQUEST['rm77'];
+$r78 = 1*$_REQUEST['r78']; $rm78 = 1*$_REQUEST['rm78'];
+$r79 = 1*$_REQUEST['r79']; $rm79 = 1*$_REQUEST['rm79'];
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin204pod SET ".
-"  r44='$r44', rm44='$rm44', ".
-" r45='$r45', rm45='$rm45', r46='$r46', rm46='$rm46', ".
-" r47='$r47', rm47='$rm47', r48='$r48', rm48='$rm48', ".
-" r49='$r49', rm49='$rm49', r50='$r50', rm50='$rm50', ".
-" r51='$r51', rm51='$rm51', r52='$r52', rm52='$rm52', ".
-" r53='$r53', rm53='$rm53', r54='$r54', rm54='$rm54', ".
-" r55='$r55', rm55='$rm55', r56='$r56', rm56='$rm56', ".
-" r57='$r57', rm57='$rm57', r58='$r58', rm58='$rm58', ".
-" r59='$r59', rm59='$rm59', r60='$r60', rm60='$rm60', ".
-" r61='$r61', rm61='$rm61', r62='$r62', rm62='$rm62', ".
-" r63='$r63', rm63='$rm63', r64='$r64', rm64='$rm64', ".
-" r65='$r65', rm65='$rm65', r66='$r66', rm66='$rm66', ".
-" r67='$r67', rm67='$rm67', r68='$r68', rm68='$rm68', ".
-" r69='$r69', rm69='$rm69', r70='$r70', rm70='$rm70',  ".
-" r70='$r70', rm70='$rm70', r71='$r71', rm71='$rm71', r72='$r72', rm72='$rm72', r73='$r73', rm73='$rm73', r74='$r74', rm74='$rm74'  ".
+" r44='$r44', rm44='$rm44', r45='$r45', rm45='$rm45', r46='$r46', rm46='$rm46',
+  r47='$r47', rm47='$rm47', r48='$r48', rm48='$rm48', r49='$r49', rm49='$rm49',
+  r50='$r50', rm50='$rm50', r51='$r51', rm51='$rm51', r52='$r52', rm52='$rm52',
+  r53='$r53', rm53='$rm53', r54='$r54', rm54='$rm54', r55='$r55', rm55='$rm55',
+  r56='$r56', rm56='$rm56', r57='$r57', rm57='$rm57', r58='$r58', rm58='$rm58',
+  r59='$r59', rm59='$rm59', r60='$r60', rm60='$rm60', r61='$r61', rm61='$rm61',
+  r62='$r62', rm62='$rm62', r63='$r63', rm63='$rm63', r64='$r64', rm64='$rm64',
+  r65='$r65', rm65='$rm65', r66='$r66', rm66='$rm66', r67='$r67', rm67='$rm67',
+  r68='$r68', rm68='$rm68', r69='$r69', rm69='$rm69', r70='$r70', rm70='$rm70',
+  r70='$r70', rm70='$rm70', r71='$r71', rm71='$rm71', r72='$r72', rm72='$rm72',
+  r73='$r73', rm73='$rm73', r74='$r74', rm74='$rm74', r75='$r75', rm75='$rm75',
+  r76='$r76', rm76='$rm76', r77='$r77', rm77='$rm77', r78='$r78', rm78='$rm78',
+  r79='$r79', rm79='$rm79' ".
 " WHERE oc = $cislo_oc"; 
-                       }
+                    }
 
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");  
@@ -473,13 +483,13 @@ if( $nepoc == 1 ) $vsetkyprepocty=0;
 $copern=20;
 if (!$upravene):
 ?>
-<script type="text/javascript"> alert( "⁄DAJE NEBOLI UPRAVEN… " ) </script>
+<script type="text/javascript"> alert( "⁄DAJE NEBOLI UPRAVEN…" ) </script>
 <?php
 endif;
 if ($upravene):
 $uprav="OK";
 endif;
-    }
+     }
 //koniec zapisu upravenych udajov
 
 //prac.subor a subor 
@@ -864,11 +874,8 @@ mzdprc;
 
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctvykaz_fin204pod'.$sqlt;
 $vytvor = mysql_query("$vsql");
-
-
 }
 //koniec vytvorenie 
-
 
 
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctprcvykaz'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctvykaz_fin204pod";
@@ -880,7 +887,6 @@ $vsql = 'TRUNCATE TABLE F'.$kli_vxcf.'_uctprcvykaz'.$kli_uzid." ";
 $vytvor = mysql_query("$vsql");
 $vsql = 'TRUNCATE TABLE F'.$kli_vxcf.'_uctprcvykazx'.$kli_uzid." ";
 $vytvor = mysql_query("$vsql");
-
 //exit;
 
 
@@ -891,10 +897,10 @@ $sqldok = mysql_query("$sql");
   {
   $jepotvrd=1;
   }
-if( $jepotvrd == 0 ) $subor=1;
+if ( $jepotvrd == 0 ) $subor=1;
 
 //vytvor pracovny subor
-if( $subor == 1 )
+if ( $subor == 1 )
 {
 
 //zober data z kun
@@ -904,7 +910,6 @@ $sqldok = mysql_query("$sql");
   {
   $riaddok=mysql_fetch_object($sqldok);
   $meno=$riaddok->meno;
-
   }
 
 $ttvv = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid ".
@@ -1273,11 +1278,10 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
   $cicz=$riaddok->cicz;
   }
 
+//dopyt, prehodiù tlaË na spodok formul·ra ako vo vöetk˝ch ötatistick˝ch formul·roch
 /////////////////////////////////////////////////VYTLAC ROCNE
 if( $copern == 10 )
 {
-
-
 if (File_Exists ("../tmp/vykazfin.$kli_uzid.pdf")) { $soubor = unlink("../tmp/vykazfin.$kli_uzid.pdf"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
@@ -1324,9 +1328,9 @@ $pdf->AddPage();
 $pdf->SetLeftMargin(8); 
 $pdf->SetTopMargin(10);
 
-if (File_Exists ('../dokumenty/vykazy_nujfin2015/fin204pod/fin204pod_str1.jpg') )
+if (File_Exists ('../dokumenty/statistika2016/fin204pod/fin2-04pod_v16_str1.jpg') )
 {
-$pdf->Image('../dokumenty/vykazy_nujfin2015/fin204pod/fin204pod_str1.jpg',0,0,211,295); 
+$pdf->Image('../dokumenty/statistika2016/fin204pod/fin2-04pod_v16_str1.jpg',0,0,211,295);
 }
 
 $pdf->SetY(10);
@@ -1381,28 +1385,8 @@ $pdf->Cell(6,5,"$t01","$rmc",0,"C");$pdf->Cell(6,5,"$t02","$rmc",0,"C");$pdf->Ce
 $pdf->Cell(7,5," ","$rmc",0,"C");
 
 
-//kod okresu
-$text=$hlavicka->okres;
-$textx="123";
-$t01=substr($text,0,1);
-$t02=substr($text,1,1);
-$t03=substr($text,2,1);
-
-$pdf->Cell(6,5,"$t01","$rmc",0,"C");$pdf->Cell(6,5,"$t02","$rmc",0,"C");$pdf->Cell(6,5,"$t03","$rmc",0,"C");$pdf->Cell(24,5," ","$rmc",0,"C");
 
 
-//kod obce
-$text=$hlavicka->obec;
-$textx="123456";
-$t01=substr($text,0,1);
-$t02=substr($text,1,1);
-$t03=substr($text,2,1);
-$t04=substr($text,3,1);
-$t05=substr($text,4,1);
-$t06=substr($text,5,1);
-
-$pdf->Cell(6,5,"$t01","$rmc",0,"C");$pdf->Cell(6,5,"$t02","$rmc",0,"C");$pdf->Cell(6,5,"$t03","$rmc",0,"C");$pdf->Cell(6,5,"$t04","$rmc",0,"C");
-$pdf->Cell(6,5,"$t05","$rmc",0,"C");$pdf->Cell(6,5,"$t06","$rmc",1,"C");
 
 
 //nazov subj. VS
@@ -1769,12 +1753,12 @@ if ( $strana == 2 OR $strana == 9999 )    {
 
 //strana 2
 $pdf->AddPage();
-$pdf->SetLeftMargin(8); 
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 
-if (File_Exists ('../dokumenty/vykazy_nujfin2015/fin204pod/fin204pod_str2.jpg') )
+if (File_Exists ('../dokumenty/statistika2016/fin204pod/fin2-04pod_v16_str2.jpg') )
 {
-$pdf->Image('../dokumenty/vykazy_nujfin2015/fin204pod/fin204pod_str2.jpg',5,5,200,297); 
+$pdf->Image('../dokumenty/statistika2016/fin204pod/fin2-04pod_v16_str2.jpg',5,5,200,297);
 }
 
 $pdf->SetFont('arial','',7);
@@ -2245,7 +2229,7 @@ $pdf->Cell(115,4," ","$rmc",0,"C");$pdf->Cell(19,5,"$r41","$rmc",0,"R");$pdf->Ce
 $pdf->Cell(21,5,"$rm41","$rmc",1,"R");
 $pdf->Cell(115,4," ","$rmc",0,"C");$pdf->Cell(19,5,"$r42","$rmc",0,"R");$pdf->Cell(22,5,"$rk42","$rmc",0,"R");$pdf->Cell(16,5,"$rn42","$rmc",0,"R");
 $pdf->Cell(21,5,"$rm42","$rmc",1,"R");
-$pdf->Cell(115,4," ","$rmc",0,"C");$pdf->Cell(19,4,"$r43","$rmc",0,"R");$pdf->Cell(22,4,"$rk43","$rmc",0,"R");$pdf->Cell(16,4,"$rn43","$rmc",0,"R");
+$pdf->Cell(115,4," ","$rmc",0,"C");$pdf->Cell(19,4,"$r43","$rmc",0,"R");$pdf->Cell(22,7,"$rk43","$rmc",0,"R");$pdf->Cell(16,4,"$rn43","$rmc",0,"R");
 $pdf->Cell(21,4,"$rm43","$rmc",1,"R");
 
                                           }
@@ -2481,14 +2465,14 @@ $sqlfir = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin204pod WHERE oc = $cislo_oc "
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
-if( $strana == 1 OR $strana == 9999 )
+if ( $strana == 1 OR $strana == 9999 )
 {
-
-$okres = 1*$fir_riadok->okres;
-$obec = 1*$fir_riadok->obec;
 $daz = $fir_riadok->daz;
 $daz_sk=SkDatum($daz);
+}
 
+if ( $strana == 2 )
+{
 $r01 = $fir_riadok->r01;
 $rk01 = $fir_riadok->rk01;
 $rn01 = $fir_riadok->rn01;
@@ -2529,7 +2513,6 @@ $r10 = $fir_riadok->r10;
 $rk10 = $fir_riadok->rk10;
 $rn10 = $fir_riadok->rn10;
 $rm10 = $fir_riadok->rm10;
-
 $r11 = $fir_riadok->r11;
 $rk11 = $fir_riadok->rk11;
 $rn11 = $fir_riadok->rn11;
@@ -2570,21 +2553,14 @@ $r20 = $fir_riadok->r20;
 $rk20 = $fir_riadok->rk20;
 $rn20 = $fir_riadok->rn20;
 $rm20 = $fir_riadok->rm20;
-
 $r21 = $fir_riadok->r21;
 $rk21 = $fir_riadok->rk21;
 $rn21 = $fir_riadok->rn21;
 $rm21 = $fir_riadok->rm21;
-
 $r22 = $fir_riadok->r22;
 $rk22 = $fir_riadok->rk22;
 $rn22 = $fir_riadok->rn22;
 $rm22 = $fir_riadok->rm22;
-}
-
-if( $strana == 2 )
-{
-
 $r23 = $fir_riadok->r23;
 $rk23 = $fir_riadok->rk23;
 $rn23 = $fir_riadok->rn23;
@@ -2601,7 +2577,6 @@ $r26 = $fir_riadok->r26;
 $rk26 = $fir_riadok->rk26;
 $rn26 = $fir_riadok->rn26;
 $rm26 = $fir_riadok->rm26;
-
 $r27 = $fir_riadok->r27;
 $rk27 = $fir_riadok->rk27;
 $rn27 = $fir_riadok->rn27;
@@ -2614,7 +2589,6 @@ $r29 = $fir_riadok->r29;
 $rk29 = $fir_riadok->rk29;
 $rn29 = $fir_riadok->rn29;
 $rm29 = $fir_riadok->rm29;
-
 $r30 = $fir_riadok->r30;
 $rk30 = $fir_riadok->rk30;
 $rn30 = $fir_riadok->rn30;
@@ -2655,31 +2629,26 @@ $r39 = $fir_riadok->r39;
 $rk39 = $fir_riadok->rk39;
 $rn39 = $fir_riadok->rn39;
 $rm39 = $fir_riadok->rm39;
-
 $r40 = $fir_riadok->r40;
 $rk40 = $fir_riadok->rk40;
 $rn40 = $fir_riadok->rn40;
 $rm40 = $fir_riadok->rm40;
-
 $r41 = $fir_riadok->r41;
 $rk41 = $fir_riadok->rk41;
 $rn41 = $fir_riadok->rn41;
 $rm41 = $fir_riadok->rm41;
-
 $r42 = $fir_riadok->r42;
 $rk42 = $fir_riadok->rk42;
 $rn42 = $fir_riadok->rn42;
 $rm42 = $fir_riadok->rm42;
-
 $r43 = $fir_riadok->r43;
 $rk43 = $fir_riadok->rk43;
 $rn43 = $fir_riadok->rn43;
 $rm43 = $fir_riadok->rm43;
 }
 
-if( $strana == 3 )
+if ( $strana == 3 )
 {
-
 $r44 = $fir_riadok->r44;
 $rm44 = $fir_riadok->rm44;
 $r45 = $fir_riadok->r45;
@@ -2692,7 +2661,6 @@ $r48 = $fir_riadok->r48;
 $rm48 = $fir_riadok->rm48;
 $r49 = $fir_riadok->r49;
 $rm49 = $fir_riadok->rm49;
-
 $r50 = $fir_riadok->r50;
 $rm50 = $fir_riadok->rm50;
 $r51 = $fir_riadok->r51;
@@ -2713,7 +2681,6 @@ $r58 = $fir_riadok->r58;
 $rm58 = $fir_riadok->rm58;
 $r59 = $fir_riadok->r59;
 $rm59 = $fir_riadok->rm59;
-
 $r60 = $fir_riadok->r60;
 $rm60 = $fir_riadok->rm60;
 $r61 = $fir_riadok->r61;
@@ -2736,7 +2703,6 @@ $r69 = $fir_riadok->r69;
 $rm69 = $fir_riadok->rm69;
 $r70 = $fir_riadok->r70;
 $rm70 = $fir_riadok->rm70;
-
 $r71 = $fir_riadok->r71;
 $rm71 = $fir_riadok->rm71;
 $r72 = $fir_riadok->r72;
@@ -2745,18 +2711,22 @@ $r73 = $fir_riadok->r73;
 $rm73 = $fir_riadok->rm73;
 $r74 = $fir_riadok->r74;
 $rm74 = $fir_riadok->rm74;
-
+$r75 = $fir_riadok->r75;
+$rm75 = $fir_riadok->rm75;
+$r76 = $fir_riadok->r76;
+$rm76 = $fir_riadok->rm76;
+$r77 = $fir_riadok->r77;
+$rm77 = $fir_riadok->rm77;
+$r78 = $fir_riadok->r78;
+$rm78 = $fir_riadok->rm78;
+$r79 = $fir_riadok->r79;
+$rm79 = $fir_riadok->rm79;
 }
-
-
 mysql_free_result($fir_vysledok);
-
-
-
     }
 //koniec nacitania
 
-$pol=0;
+$pol=0; //dopyt, preveriù, Ëi eöte m· v˝znam
 if( $okres == 0 OR $obec == 0 )
 {
 $sqlokr = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE okres > 0 AND obec > 0 ";
@@ -2791,1242 +2761,699 @@ if( $pol > 0) { $okr_riadok=mysql_fetch_object($okr_vysledok); $okres=1*$okr_ria
 
 
 
-$dness = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-if( $daz_sk == '00.00.0000' ) { $daz_sk=$dness; }
+
+//6-miestne ico
+$fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
+
 
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
-  <link type="text/css" rel="stylesheet" href="../css/styl.css">
+ <link rel="stylesheet" href="../css/reset.css">
+ <link rel="stylesheet" href="../css/tlaciva.css">
 <title>V˝kaz FIN 2-04 POD</title>
-  <style type="text/css">
+<style type="text/css">
+img.btn-row-tool {
+  width: 20px;
+  height: 20px;
+}
+form input[type=text] {
+  height: 14px;
+  line-height: 14px;
+  padding-left: 2px;
+  border: 1px solid #39f;
+  font-size: 12px;
+}
+div.input-echo {
+  position: absolute;
+  font-size: 16px;
+  background-color: #fff;
+  font-weight: bold;
+}
 
-  </style>
+</style>
 <script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height-20;
-var sirkawic = screen.width-10;
-
 <?php
-//uprava sadzby strana 1
+//uprava sadzby
   if ( $copern == 20 )
   { 
 ?>
-    function ObnovUI()
-    {
+  function ObnovUI()
+  {
+<?php if ( $strana == 1 ) { ?>
+   document.formv1.daz.value = '<?php echo $daz_sk;?>';
+<?php                     } ?>
 
-<?php if ( $strana == 1  )                           { ?>
+<?php if ( $strana == 2 ) { ?>
+   document.formv1.r01.value = '<?php echo $r01;?>';
+   document.formv1.rk01.value = '<?php echo $rk01;?>';
+   document.formv1.rn01.value = '<?php echo $rn01;?>';
+   document.formv1.rm01.value = '<?php echo $rm01;?>';
+   document.formv1.r02.value = '<?php echo $r02;?>';
+   document.formv1.rk02.value = '<?php echo $rk02;?>';
+   document.formv1.rn02.value = '<?php echo $rn02;?>';
+   document.formv1.rm02.value = '<?php echo $rm02;?>';
+   document.formv1.r03.value = '<?php echo $r03;?>';
+   document.formv1.rk03.value = '<?php echo $rk03;?>';
+   document.formv1.rn03.value = '<?php echo $rn03;?>';
+   document.formv1.rm03.value = '<?php echo $rm03;?>';
+   document.formv1.r04.value = '<?php echo $r04;?>';
+   document.formv1.rk04.value = '<?php echo $rk04;?>';
+   document.formv1.rn04.value = '<?php echo $rn04;?>';
+   document.formv1.rm04.value = '<?php echo $rm04;?>';
+   document.formv1.r05.value = '<?php echo $r05;?>';
+   document.formv1.rk05.value = '<?php echo $rk05;?>';
+   document.formv1.rn05.value = '<?php echo $rn05;?>';
+   document.formv1.rm05.value = '<?php echo $rm05;?>';
+   document.formv1.r06.value = '<?php echo $r06;?>';
+   document.formv1.rk06.value = '<?php echo $rk06;?>';
+   document.formv1.rn06.value = '<?php echo $rn06;?>';
+   document.formv1.rm06.value = '<?php echo $rm06;?>';
+   document.formv1.r07.value = '<?php echo $r07;?>';
+   document.formv1.rk07.value = '<?php echo $rk07;?>';
+   document.formv1.rn07.value = '<?php echo $rn07;?>';
+   document.formv1.rm07.value = '<?php echo $rm07;?>';
+   document.formv1.r08.value = '<?php echo $r08;?>';
+   document.formv1.rk08.value = '<?php echo $rk08;?>';
+   document.formv1.rn08.value = '<?php echo $rn08;?>';
+   document.formv1.rm08.value = '<?php echo $rm08;?>';
+   document.formv1.r09.value = '<?php echo $r09;?>';
+   document.formv1.rk09.value = '<?php echo $rk09;?>';
+   document.formv1.rn09.value = '<?php echo $rn09;?>';
+   document.formv1.rm09.value = '<?php echo $rm09;?>';
+   document.formv1.r10.value = '<?php echo $r10;?>';
+   document.formv1.rk10.value = '<?php echo $rk10;?>';
+   document.formv1.rn10.value = '<?php echo $rn10;?>';
+   document.formv1.rm10.value = '<?php echo $rm10;?>';
+   document.formv1.r11.value = '<?php echo $r11;?>';
+   document.formv1.rk11.value = '<?php echo $rk11;?>';
+   document.formv1.rn11.value = '<?php echo $rn11;?>';
+   document.formv1.rm11.value = '<?php echo $rm11;?>';
+   document.formv1.r12.value = '<?php echo $r12;?>';
+   document.formv1.rk12.value = '<?php echo $rk12;?>';
+   document.formv1.rn12.value = '<?php echo $rn12;?>';
+   document.formv1.rm12.value = '<?php echo $rm12;?>';
+   document.formv1.r13.value = '<?php echo $r13;?>';
+   document.formv1.rk13.value = '<?php echo $rk13;?>';
+   document.formv1.rn13.value = '<?php echo $rn13;?>';
+   document.formv1.rm13.value = '<?php echo $rm13;?>';
+   document.formv1.r14.value = '<?php echo $r14;?>';
+   document.formv1.rk14.value = '<?php echo $rk14;?>';
+   document.formv1.rn14.value = '<?php echo $rn14;?>';
+   document.formv1.rm14.value = '<?php echo $rm14;?>';
+   document.formv1.r15.value = '<?php echo $r15;?>';
+   document.formv1.rk15.value = '<?php echo $rk15;?>';
+   document.formv1.rn15.value = '<?php echo $rn15;?>';
+   document.formv1.rm15.value = '<?php echo $rm15;?>';
+   document.formv1.r16.value = '<?php echo $r16;?>';
+   document.formv1.rk16.value = '<?php echo $rk16;?>';
+   document.formv1.rn16.value = '<?php echo $rn16;?>';
+   document.formv1.rm16.value = '<?php echo $rm16;?>';
+   document.formv1.r17.value = '<?php echo $r17;?>';
+   document.formv1.rk17.value = '<?php echo $rk17;?>';
+   document.formv1.rn17.value = '<?php echo $rn17;?>';
+   document.formv1.rm17.value = '<?php echo $rm17;?>';
+   document.formv1.r18.value = '<?php echo $r18;?>';
+   document.formv1.rk18.value = '<?php echo $rk18;?>';
+   document.formv1.rn18.value = '<?php echo $rn18;?>';
+   document.formv1.rm18.value = '<?php echo $rm18;?>';
+   document.formv1.r19.value = '<?php echo $r19;?>';
+   document.formv1.rk19.value = '<?php echo $rk19;?>';
+   document.formv1.rn19.value = '<?php echo $rn19;?>';
+   document.formv1.rm19.value = '<?php echo $rm19;?>';
+   document.formv1.r20.value = '<?php echo $r20;?>';
+   document.formv1.rk20.value = '<?php echo $rk20;?>';
+   document.formv1.rn20.value = '<?php echo $rn20;?>';
+   document.formv1.rm20.value = '<?php echo $rm20;?>';
+   document.formv1.r21.value = '<?php echo $r21;?>';
+   document.formv1.rk21.value = '<?php echo $rk21;?>';
+   document.formv1.rn21.value = '<?php echo $rn21;?>';
+   document.formv1.rm21.value = '<?php echo $rm21;?>';
+   document.formv1.r22.value = '<?php echo $r22;?>';
+   document.formv1.rk22.value = '<?php echo $rk22;?>';
+   document.formv1.rn22.value = '<?php echo $rn22;?>';
+   document.formv1.rm22.value = '<?php echo $rm22;?>';
+   document.formv1.r23.value = '<?php echo $r23;?>';
+   document.formv1.rk23.value = '<?php echo $rk23;?>';
+   document.formv1.rn23.value = '<?php echo $rn23;?>';
+   document.formv1.rm23.value = '<?php echo $rm23;?>';
+   document.formv1.r24.value = '<?php echo $r24;?>';
+   document.formv1.rk24.value = '<?php echo $rk24;?>';
+   document.formv1.rn24.value = '<?php echo $rn24;?>';
+   document.formv1.rm24.value = '<?php echo $rm24;?>';
+   document.formv1.r25.value = '<?php echo $r25;?>';
+   document.formv1.rk25.value = '<?php echo $rk25;?>';
+   document.formv1.rn25.value = '<?php echo $rn25;?>';
+   document.formv1.rm25.value = '<?php echo $rm25;?>';
+   document.formv1.r26.value = '<?php echo $r26;?>';
+   document.formv1.rk26.value = '<?php echo $rk26;?>';
+   document.formv1.rn26.value = '<?php echo $rn26;?>';
+   document.formv1.rm26.value = '<?php echo $rm26;?>';
+   document.formv1.r27.value = '<?php echo $r27;?>';
+   document.formv1.rk27.value = '<?php echo $rk27;?>';
+   document.formv1.rn27.value = '<?php echo $rn27;?>';
+   document.formv1.rm27.value = '<?php echo $rm27;?>';
+   document.formv1.r28.value = '<?php echo $r28;?>';
+   document.formv1.rk28.value = '<?php echo $rk28;?>';
+   document.formv1.rn28.value = '<?php echo $rn28;?>';
+   document.formv1.rm28.value = '<?php echo $rm28;?>';
+   document.formv1.r29.value = '<?php echo $r29;?>';
+   document.formv1.rk29.value = '<?php echo $rk29;?>';
+   document.formv1.rn29.value = '<?php echo $rn29;?>';
+   document.formv1.rm29.value = '<?php echo $rm29;?>';
+   document.formv1.r30.value = '<?php echo $r30;?>';
+   document.formv1.rk30.value = '<?php echo $rk30;?>';
+   document.formv1.rn30.value = '<?php echo $rn30;?>';
+   document.formv1.rm30.value = '<?php echo $rm30;?>';
+   document.formv1.r31.value = '<?php echo $r31;?>';
+   document.formv1.rk31.value = '<?php echo $rk31;?>';
+   document.formv1.rn31.value = '<?php echo $rn31;?>';
+   document.formv1.rm31.value = '<?php echo $rm31;?>';
+   document.formv1.r32.value = '<?php echo $r32;?>';
+   document.formv1.rk32.value = '<?php echo $rk32;?>';
+   document.formv1.rn32.value = '<?php echo $rn32;?>';
+   document.formv1.rm32.value = '<?php echo $rm32;?>';
+   document.formv1.r33.value = '<?php echo $r33;?>';
+   document.formv1.rk33.value = '<?php echo $rk33;?>';
+   document.formv1.rn33.value = '<?php echo $rn33;?>';
+   document.formv1.rm33.value = '<?php echo $rm33;?>';
+   document.formv1.r34.value = '<?php echo $r34;?>';
+   document.formv1.rk34.value = '<?php echo $rk34;?>';
+   document.formv1.rn34.value = '<?php echo $rn34;?>';
+   document.formv1.rm34.value = '<?php echo $rm34;?>';
+   document.formv1.r35.value = '<?php echo $r35;?>';
+   document.formv1.rk35.value = '<?php echo $rk35;?>';
+   document.formv1.rn35.value = '<?php echo $rn35;?>';
+   document.formv1.rm35.value = '<?php echo $rm35;?>';
+   document.formv1.r36.value = '<?php echo $r36;?>';
+   document.formv1.rk36.value = '<?php echo $rk36;?>';
+   document.formv1.rn36.value = '<?php echo $rn36;?>';
+   document.formv1.rm36.value = '<?php echo $rm36;?>';
+   document.formv1.r37.value = '<?php echo $r37;?>';
+   document.formv1.rk37.value = '<?php echo $rk37;?>';
+   document.formv1.rn37.value = '<?php echo $rn37;?>';
+   document.formv1.rm37.value = '<?php echo $rm37;?>';
+   document.formv1.r38.value = '<?php echo $r38;?>';
+   document.formv1.rk38.value = '<?php echo $rk38;?>';
+   document.formv1.rn38.value = '<?php echo $rn38;?>';
+   document.formv1.rm38.value = '<?php echo $rm38;?>';
+   document.formv1.r39.value = '<?php echo $r39;?>';
+   document.formv1.rk39.value = '<?php echo $rk39;?>';
+   document.formv1.rn39.value = '<?php echo $rn39;?>';
+   document.formv1.rm39.value = '<?php echo $rm39;?>';
+   document.formv1.r40.value = '<?php echo $r40;?>';
+   document.formv1.rk40.value = '<?php echo $rk40;?>';
+   document.formv1.rn40.value = '<?php echo $rn40;?>';
+   document.formv1.rm40.value = '<?php echo $rm40;?>';
+   document.formv1.r41.value = '<?php echo $r41;?>';
+   document.formv1.rk41.value = '<?php echo $rk41;?>';
+   document.formv1.rn41.value = '<?php echo $rn41;?>';
+   document.formv1.rm41.value = '<?php echo $rm41;?>';
+   document.formv1.r42.value = '<?php echo $r42;?>';
+   document.formv1.rk42.value = '<?php echo $rk42;?>';
+   document.formv1.rn42.value = '<?php echo $rn42;?>';
+   document.formv1.rm42.value = '<?php echo $rm42;?>';
+   document.formv1.r43.value = '<?php echo $r43;?>';
+   document.formv1.rk43.value = '<?php echo $rk43;?>';
+   document.formv1.rn43.value = '<?php echo $rn43;?>';
+   document.formv1.rm43.value = '<?php echo $rm43;?>';
+<?php                     } ?>
 
-document.formv1.okres.value = '<?php echo $okres;?>';
-document.formv1.obec.value = '<?php echo $obec;?>';
-document.formv1.daz.value = '<?php echo $daz_sk;?>';
-document.formv1.r01.value = '<?php echo $r01;?>';
-document.formv1.rk01.value = '<?php echo $rk01;?>';
-document.formv1.rn01.value = '<?php echo $rn01;?>';
-document.formv1.rm01.value = '<?php echo $rm01;?>';
-document.formv1.r02.value = '<?php echo $r02;?>';
-document.formv1.rk02.value = '<?php echo $rk02;?>';
-document.formv1.rn02.value = '<?php echo $rn02;?>';
-document.formv1.rm02.value = '<?php echo $rm02;?>';
-document.formv1.r03.value = '<?php echo $r03;?>';
-document.formv1.rk03.value = '<?php echo $rk03;?>';
-document.formv1.rn03.value = '<?php echo $rn03;?>';
-document.formv1.rm03.value = '<?php echo $rm03;?>';
-document.formv1.r04.value = '<?php echo $r04;?>';
-document.formv1.rk04.value = '<?php echo $rk04;?>';
-document.formv1.rn04.value = '<?php echo $rn04;?>';
-document.formv1.rm04.value = '<?php echo $rm04;?>';
-document.formv1.r05.value = '<?php echo $r05;?>';
-document.formv1.rk05.value = '<?php echo $rk05;?>';
-document.formv1.rn05.value = '<?php echo $rn05;?>';
-document.formv1.rm05.value = '<?php echo $rm05;?>';
-document.formv1.r06.value = '<?php echo $r06;?>';
-document.formv1.rk06.value = '<?php echo $rk06;?>';
-document.formv1.rn06.value = '<?php echo $rn06;?>';
-document.formv1.rm06.value = '<?php echo $rm06;?>';
-document.formv1.r07.value = '<?php echo $r07;?>';
-document.formv1.rk07.value = '<?php echo $rk07;?>';
-document.formv1.rn07.value = '<?php echo $rn07;?>';
-document.formv1.rm07.value = '<?php echo $rm07;?>';
-document.formv1.r08.value = '<?php echo $r08;?>';
-document.formv1.rk08.value = '<?php echo $rk08;?>';
-document.formv1.rn08.value = '<?php echo $rn08;?>';
-document.formv1.rm08.value = '<?php echo $rm08;?>';
-document.formv1.r09.value = '<?php echo $r09;?>';
-document.formv1.rk09.value = '<?php echo $rk09;?>';
-document.formv1.rn09.value = '<?php echo $rn09;?>';
-document.formv1.rm09.value = '<?php echo $rm09;?>';
-document.formv1.r10.value = '<?php echo $r10;?>';
-document.formv1.rk10.value = '<?php echo $rk10;?>';
-document.formv1.rn10.value = '<?php echo $rn10;?>';
-document.formv1.rm10.value = '<?php echo $rm10;?>';
-
-document.formv1.r11.value = '<?php echo $r11;?>';
-document.formv1.rk11.value = '<?php echo $rk11;?>';
-document.formv1.rn11.value = '<?php echo $rn11;?>';
-document.formv1.rm11.value = '<?php echo $rm11;?>';
-document.formv1.r12.value = '<?php echo $r12;?>';
-document.formv1.rk12.value = '<?php echo $rk12;?>';
-document.formv1.rn12.value = '<?php echo $rn12;?>';
-document.formv1.rm12.value = '<?php echo $rm12;?>';
-document.formv1.r13.value = '<?php echo $r13;?>';
-document.formv1.rk13.value = '<?php echo $rk13;?>';
-document.formv1.rn13.value = '<?php echo $rn13;?>';
-document.formv1.rm13.value = '<?php echo $rm13;?>';
-document.formv1.r14.value = '<?php echo $r14;?>';
-document.formv1.rk14.value = '<?php echo $rk14;?>';
-document.formv1.rn14.value = '<?php echo $rn14;?>';
-document.formv1.rm14.value = '<?php echo $rm14;?>';
-document.formv1.r15.value = '<?php echo $r15;?>';
-document.formv1.rk15.value = '<?php echo $rk15;?>';
-document.formv1.rn15.value = '<?php echo $rn15;?>';
-document.formv1.rm15.value = '<?php echo $rm15;?>';
-document.formv1.r16.value = '<?php echo $r16;?>';
-document.formv1.rk16.value = '<?php echo $rk16;?>';
-document.formv1.rn16.value = '<?php echo $rn16;?>';
-document.formv1.rm16.value = '<?php echo $rm16;?>';
-document.formv1.r17.value = '<?php echo $r17;?>';
-document.formv1.rk17.value = '<?php echo $rk17;?>';
-document.formv1.rn17.value = '<?php echo $rn17;?>';
-document.formv1.rm17.value = '<?php echo $rm17;?>';
-document.formv1.r18.value = '<?php echo $r18;?>';
-document.formv1.rk18.value = '<?php echo $rk18;?>';
-document.formv1.rn18.value = '<?php echo $rn18;?>';
-document.formv1.rm18.value = '<?php echo $rm18;?>';
-document.formv1.r19.value = '<?php echo $r19;?>';
-document.formv1.rk19.value = '<?php echo $rk19;?>';
-document.formv1.rn19.value = '<?php echo $rn19;?>';
-document.formv1.rm19.value = '<?php echo $rm19;?>';
-document.formv1.r20.value = '<?php echo $r20;?>';
-document.formv1.rk20.value = '<?php echo $rk20;?>';
-document.formv1.rn20.value = '<?php echo $rn20;?>';
-document.formv1.rm20.value = '<?php echo $rm20;?>';
-
-document.formv1.r21.value = '<?php echo $r21;?>';
-document.formv1.rk21.value = '<?php echo $rk21;?>';
-document.formv1.rn21.value = '<?php echo $rn21;?>';
-document.formv1.rm21.value = '<?php echo $rm21;?>';
-
-document.formv1.r22.value = '<?php echo $r22;?>';
-document.formv1.rk22.value = '<?php echo $rk22;?>';
-document.formv1.rn22.value = '<?php echo $rn22;?>';
-document.formv1.rm22.value = '<?php echo $rm22;?>';
-
-<?php                                                                   } ?>
-
-<?php if ( $strana == 2  )                           { ?>
-
-document.formv1.r23.value = '<?php echo $r23;?>';
-document.formv1.rk23.value = '<?php echo $rk23;?>';
-document.formv1.rn23.value = '<?php echo $rn23;?>';
-document.formv1.rm23.value = '<?php echo $rm23;?>';
-document.formv1.r24.value = '<?php echo $r24;?>';
-document.formv1.rk24.value = '<?php echo $rk24;?>';
-document.formv1.rn24.value = '<?php echo $rn24;?>';
-document.formv1.rm24.value = '<?php echo $rm24;?>';
-document.formv1.r25.value = '<?php echo $r25;?>';
-document.formv1.rk25.value = '<?php echo $rk25;?>';
-document.formv1.rn25.value = '<?php echo $rn25;?>';
-document.formv1.rm25.value = '<?php echo $rm25;?>';
-document.formv1.r26.value = '<?php echo $r26;?>';
-document.formv1.rk26.value = '<?php echo $rk26;?>';
-document.formv1.rn26.value = '<?php echo $rn26;?>';
-document.formv1.rm26.value = '<?php echo $rm26;?>';
-
-document.formv1.r27.value = '<?php echo $r27;?>';
-document.formv1.rk27.value = '<?php echo $rk27;?>';
-document.formv1.rn27.value = '<?php echo $rn27;?>';
-document.formv1.rm27.value = '<?php echo $rm27;?>';
-document.formv1.r28.value = '<?php echo $r28;?>';
-document.formv1.rk28.value = '<?php echo $rk28;?>';
-document.formv1.rn28.value = '<?php echo $rn28;?>';
-document.formv1.rm28.value = '<?php echo $rm28;?>';
-document.formv1.r29.value = '<?php echo $r29;?>';
-document.formv1.rk29.value = '<?php echo $rk29;?>';
-document.formv1.rn29.value = '<?php echo $rn29;?>';
-document.formv1.rm29.value = '<?php echo $rm29;?>';
-
-document.formv1.r30.value = '<?php echo $r30;?>';
-document.formv1.rk30.value = '<?php echo $rk30;?>';
-document.formv1.rn30.value = '<?php echo $rn30;?>';
-document.formv1.rm30.value = '<?php echo $rm30;?>';
-document.formv1.r31.value = '<?php echo $r31;?>';
-document.formv1.rk31.value = '<?php echo $rk31;?>';
-document.formv1.rn31.value = '<?php echo $rn31;?>';
-document.formv1.rm31.value = '<?php echo $rm31;?>';
-document.formv1.r32.value = '<?php echo $r32;?>';
-document.formv1.rk32.value = '<?php echo $rk32;?>';
-document.formv1.rn32.value = '<?php echo $rn32;?>';
-document.formv1.rm32.value = '<?php echo $rm32;?>';
-document.formv1.r33.value = '<?php echo $r33;?>';
-document.formv1.rk33.value = '<?php echo $rk33;?>';
-document.formv1.rn33.value = '<?php echo $rn33;?>';
-document.formv1.rm33.value = '<?php echo $rm33;?>';
-document.formv1.r34.value = '<?php echo $r34;?>';
-document.formv1.rk34.value = '<?php echo $rk34;?>';
-document.formv1.rn34.value = '<?php echo $rn34;?>';
-document.formv1.rm34.value = '<?php echo $rm34;?>';
-document.formv1.r35.value = '<?php echo $r35;?>';
-document.formv1.rk35.value = '<?php echo $rk35;?>';
-document.formv1.rn35.value = '<?php echo $rn35;?>';
-document.formv1.rm35.value = '<?php echo $rm35;?>';
-document.formv1.r36.value = '<?php echo $r36;?>';
-document.formv1.rk36.value = '<?php echo $rk36;?>';
-document.formv1.rn36.value = '<?php echo $rn36;?>';
-document.formv1.rm36.value = '<?php echo $rm36;?>';
-document.formv1.r37.value = '<?php echo $r37;?>';
-document.formv1.rk37.value = '<?php echo $rk37;?>';
-document.formv1.rn37.value = '<?php echo $rn37;?>';
-document.formv1.rm37.value = '<?php echo $rm37;?>';
-document.formv1.r38.value = '<?php echo $r38;?>';
-document.formv1.rk38.value = '<?php echo $rk38;?>';
-document.formv1.rn38.value = '<?php echo $rn38;?>';
-document.formv1.rm38.value = '<?php echo $rm38;?>';
-document.formv1.r39.value = '<?php echo $r39;?>';
-document.formv1.rk39.value = '<?php echo $rk39;?>';
-document.formv1.rn39.value = '<?php echo $rn39;?>';
-document.formv1.rm39.value = '<?php echo $rm39;?>';
-
-document.formv1.r40.value = '<?php echo $r40;?>';
-document.formv1.rk40.value = '<?php echo $rk40;?>';
-document.formv1.rn40.value = '<?php echo $rn40;?>';
-document.formv1.rm40.value = '<?php echo $rm40;?>';
-
-document.formv1.r41.value = '<?php echo $r41;?>';
-document.formv1.rk41.value = '<?php echo $rk41;?>';
-document.formv1.rn41.value = '<?php echo $rn41;?>';
-document.formv1.rm41.value = '<?php echo $rm41;?>';
-
-document.formv1.r42.value = '<?php echo $r42;?>';
-document.formv1.rk42.value = '<?php echo $rk42;?>';
-document.formv1.rn42.value = '<?php echo $rn42;?>';
-document.formv1.rm42.value = '<?php echo $rm42;?>';
-
-document.formv1.r43.value = '<?php echo $r43;?>';
-document.formv1.rk43.value = '<?php echo $rk43;?>';
-document.formv1.rn43.value = '<?php echo $rn43;?>';
-document.formv1.rm43.value = '<?php echo $rm43;?>';
-
-<?php                                                                   } ?>
-
-<?php if ( $strana == 3   )                           { ?>
-
-
-document.formv1.r44.value = '<?php echo $r44;?>';
-document.formv1.rm44.value = '<?php echo $rm44;?>';
-document.formv1.r45.value = '<?php echo $r45;?>';
-document.formv1.rm45.value = '<?php echo $rm45;?>';
-document.formv1.r46.value = '<?php echo $r46;?>';
-document.formv1.rm46.value = '<?php echo $rm46;?>';
-document.formv1.r47.value = '<?php echo $r47;?>';
-document.formv1.rm47.value = '<?php echo $rm47;?>';
-document.formv1.r48.value = '<?php echo $r48;?>';
-document.formv1.rm48.value = '<?php echo $rm48;?>';
-document.formv1.r49.value = '<?php echo $r49;?>';
-document.formv1.rm49.value = '<?php echo $rm49;?>';
-
-document.formv1.r50.value = '<?php echo $r50;?>';
-document.formv1.rm50.value = '<?php echo $rm50;?>';
-document.formv1.r51.value = '<?php echo $r51;?>';
-document.formv1.rm51.value = '<?php echo $rm51;?>';
-document.formv1.r52.value = '<?php echo $r52;?>';
-document.formv1.rm52.value = '<?php echo $rm52;?>';
-document.formv1.r53.value = '<?php echo $r53;?>';
-document.formv1.rm53.value = '<?php echo $rm53;?>';
-document.formv1.r54.value = '<?php echo $r54;?>';
-document.formv1.rm54.value = '<?php echo $rm54;?>';
-document.formv1.r55.value = '<?php echo $r55;?>';
-document.formv1.rm55.value = '<?php echo $rm55;?>';
-document.formv1.r56.value = '<?php echo $r56;?>';
-document.formv1.rm56.value = '<?php echo $rm56;?>';
-document.formv1.r57.value = '<?php echo $r57;?>';
-document.formv1.rm57.value = '<?php echo $rm57;?>';
-document.formv1.r58.value = '<?php echo $r58;?>';
-document.formv1.rm58.value = '<?php echo $rm58;?>';
-
-document.formv1.r59.value = '<?php echo $r59;?>';
-document.formv1.rm59.value = '<?php echo $rm59;?>';
-document.formv1.r60.value = '<?php echo $r60;?>';
-document.formv1.rm60.value = '<?php echo $rm60;?>';
-document.formv1.r61.value = '<?php echo $r61;?>';
-document.formv1.rm61.value = '<?php echo $rm61;?>';
-document.formv1.r62.value = '<?php echo $r62;?>';
-document.formv1.rm62.value = '<?php echo $rm62;?>';
-
-document.formv1.r63.value = '<?php echo $r63;?>';
-document.formv1.rm63.value = '<?php echo $rm63;?>';
-document.formv1.r64.value = '<?php echo $r64;?>';
-document.formv1.rm64.value = '<?php echo $rm64;?>';
-document.formv1.r65.value = '<?php echo $r65;?>';
-document.formv1.rm65.value = '<?php echo $rm65;?>';
-document.formv1.r66.value = '<?php echo $r66;?>';
-document.formv1.rm66.value = '<?php echo $rm66;?>';
-document.formv1.r67.value = '<?php echo $r67;?>';
-document.formv1.rm67.value = '<?php echo $rm67;?>';
-document.formv1.r68.value = '<?php echo $r68;?>';
-document.formv1.rm68.value = '<?php echo $rm68;?>';
-document.formv1.r69.value = '<?php echo $r69;?>';
-document.formv1.rm69.value = '<?php echo $rm69;?>';
-document.formv1.r70.value = '<?php echo $r70;?>';
-document.formv1.rm70.value = '<?php echo $rm70;?>';
-
-document.formv1.r71.value = '<?php echo $r71;?>';
-document.formv1.rm71.value = '<?php echo $rm71;?>';
-document.formv1.r72.value = '<?php echo $r72;?>';
-document.formv1.rm72.value = '<?php echo $rm72;?>';
-document.formv1.r73.value = '<?php echo $r73;?>';
-document.formv1.rm73.value = '<?php echo $rm73;?>';
-document.formv1.r74.value = '<?php echo $r74;?>';
-document.formv1.rm74.value = '<?php echo $rm74;?>';
-
-<?php                                                                   } ?>
-
-
-
-
-
+<?php if ( $strana == 3 ) { ?>
+   document.formv1.r44.value = '<?php echo $r44;?>';
+   document.formv1.rm44.value = '<?php echo $rm44;?>';
+   document.formv1.r45.value = '<?php echo $r45;?>';
+   document.formv1.rm45.value = '<?php echo $rm45;?>';
+   document.formv1.r46.value = '<?php echo $r46;?>';
+   document.formv1.rm46.value = '<?php echo $rm46;?>';
+   document.formv1.r47.value = '<?php echo $r47;?>';
+   document.formv1.rm47.value = '<?php echo $rm47;?>';
+   document.formv1.r48.value = '<?php echo $r48;?>';
+   document.formv1.rm48.value = '<?php echo $rm48;?>';
+   document.formv1.r49.value = '<?php echo $r49;?>';
+   document.formv1.rm49.value = '<?php echo $rm49;?>';
+   document.formv1.r50.value = '<?php echo $r50;?>';
+   document.formv1.rm50.value = '<?php echo $rm50;?>';
+   document.formv1.r51.value = '<?php echo $r51;?>';
+   document.formv1.rm51.value = '<?php echo $rm51;?>';
+   document.formv1.r52.value = '<?php echo $r52;?>';
+   document.formv1.rm52.value = '<?php echo $rm52;?>';
+   document.formv1.r53.value = '<?php echo $r53;?>';
+   document.formv1.rm53.value = '<?php echo $rm53;?>';
+   document.formv1.r54.value = '<?php echo $r54;?>';
+   document.formv1.rm54.value = '<?php echo $rm54;?>';
+   document.formv1.r55.value = '<?php echo $r55;?>';
+   document.formv1.rm55.value = '<?php echo $rm55;?>';
+   document.formv1.r56.value = '<?php echo $r56;?>';
+   document.formv1.rm56.value = '<?php echo $rm56;?>';
+   document.formv1.r57.value = '<?php echo $r57;?>';
+   document.formv1.rm57.value = '<?php echo $rm57;?>';
+   document.formv1.r58.value = '<?php echo $r58;?>';
+   document.formv1.rm58.value = '<?php echo $rm58;?>';
+   document.formv1.r59.value = '<?php echo $r59;?>';
+   document.formv1.rm59.value = '<?php echo $rm59;?>';
+   document.formv1.r60.value = '<?php echo $r60;?>';
+   document.formv1.rm60.value = '<?php echo $rm60;?>';
+   document.formv1.r61.value = '<?php echo $r61;?>';
+   document.formv1.rm61.value = '<?php echo $rm61;?>';
+   document.formv1.r62.value = '<?php echo $r62;?>';
+   document.formv1.rm62.value = '<?php echo $rm62;?>';
+   document.formv1.r63.value = '<?php echo $r63;?>';
+   document.formv1.rm63.value = '<?php echo $rm63;?>';
+   document.formv1.r64.value = '<?php echo $r64;?>';
+   document.formv1.rm64.value = '<?php echo $rm64;?>';
+   document.formv1.r65.value = '<?php echo $r65;?>';
+   document.formv1.rm65.value = '<?php echo $rm65;?>';
+   document.formv1.r66.value = '<?php echo $r66;?>';
+   document.formv1.rm66.value = '<?php echo $rm66;?>';
+   document.formv1.r67.value = '<?php echo $r67;?>';
+   document.formv1.rm67.value = '<?php echo $rm67;?>';
+   document.formv1.r68.value = '<?php echo $r68;?>';
+   document.formv1.rm68.value = '<?php echo $rm68;?>';
+   document.formv1.r69.value = '<?php echo $r69;?>';
+   document.formv1.rm69.value = '<?php echo $rm69;?>';
+   document.formv1.r70.value = '<?php echo $r70;?>';
+   document.formv1.rm70.value = '<?php echo $rm70;?>';
+   document.formv1.r71.value = '<?php echo $r71;?>';
+   document.formv1.rm71.value = '<?php echo $rm71;?>';
+   document.formv1.r72.value = '<?php echo $r72;?>';
+   document.formv1.rm72.value = '<?php echo $rm72;?>';
+   document.formv1.r73.value = '<?php echo $r73;?>';
+   document.formv1.rm73.value = '<?php echo $rm73;?>';
+   document.formv1.r74.value = '<?php echo $r74;?>';
+   document.formv1.rm74.value = '<?php echo $rm74;?>';
+   document.formv1.r75.value = '<?php echo $r75;?>';
+   document.formv1.rm75.value = '<?php echo $rm75;?>';
+   document.formv1.r76.value = '<?php echo $r76;?>';
+   document.formv1.rm76.value = '<?php echo $rm76;?>';
+   document.formv1.r77.value = '<?php echo $r77;?>';
+   document.formv1.rm77.value = '<?php echo $rm77;?>';
+   document.formv1.r78.value = '<?php echo $r78;?>';
+   document.formv1.rm78.value = '<?php echo $rm78;?>';
+   document.formv1.r79.value = '<?php echo $r79;?>';
+   document.formv1.rm79.value = '<?php echo $rm79;?>';
+<?php                     } ?>
     }
-
 <?php
 //koniec uprava
   }
 ?>
-
 <?php
   if ( $copern != 20 )
   { 
 ?>
-    function ObnovUI()
-    {
-
-    }
+  function ObnovUI()
+  {
+  }
 <?php
   }
 ?>
-
-//Kontrola datumu Sk
-function kontrola_datum(vstup, Oznam, x1, errflag)
-		{
-		var text
-		var index
-		var tecka
-		var den
-		var mesic
-		var rok
-		var ch
-                var err
-
-		text=""
-                err=0 
-		
-		den=""
-		mesic=""
-		rok=""
-		tecka=0
-		
-		for (index = 0; index < vstup.value.length; index++) 
-			{
-      ch = vstup.value.charAt(index);
-			if (ch != "0" && ch != "1" && ch != "2" && ch != "3" && ch != "4" && ch != "5" && ch != "6" && ch != "7" && ch != "8" && ch != "9" && ch != ".") 
-				{text="Pole Datum zadavajte vo formate DD.MM alebo DD.MM.RRRR (DD=den, MM=mesiac, RRRR=rok).\r"; err=3 }
-			if ((ch == "0" || ch == "1" || ch == "2" || ch == "3" || ch == "4" || ch == "5" || ch == "6" || ch == "7" || ch == "8" || ch == "9") && (text ==""))
-				{
-				if (tecka == 0)
-					{den=den + ch}
-				if (tecka == 1)
-					{mesic=mesic + ch}
-				if (tecka == 2)
-					{rok=rok + ch}
-				}
-			if (ch == "." && text == "")
-				{
-				if (tecka == 1)
-					{tecka=2}
-				if (tecka == 0)
-					{tecka=1}
-				
-				}	
-			}
-			
-		if (tecka == 2 && rok == "" )
-			{rok=<?php echo $kli_vrok; ?>}
-		if (tecka == 1 && rok == "" )
-			{rok=<?php echo $kli_vrok; ?>; err= 0}
-		if (tecka == 1 && mesic == "" )
-			{mesic=<?php echo $kli_vmes; ?>; err= 0}
-		if (tecka == 0 && mesic == "" )
-			{mesic=<?php echo $kli_vmes; ?>; rok=<?php echo $kli_vrok; ?>; err= 0}
-		if ((den<1 || den >31) && (text == ""))
-			{text=text + "Pocet dni v uvedenom mesiaci nemoze byt mensi ako 1 a vacsi ako 31.\r"; err=1 }
-		if ((mesic<1 || mesic>12) && (text == ""))
-			{text=text + "Pocet mesiacov nemoze byt mensi ako 1 a vacsi ako 12.\r"; err=2 }
-		if (rok<1930 && tecka == 2 && text == "" && rok != "" )
-			{text=text + "Rok nemoze byt mensi ako 1930.\r"; err=3 }
-		if (rok>2029 && tecka == 2 && text == "" && rok != "" )
-			{text=text + "Rok nemoze byt v‰ËöÌ ako 2029.\r"; err=3 }
-		if (tecka > 2)
-			{text=text+ "Datum zadavajte vo formatu DD.MM alebo DD.MM.RRRR (DD=den, MM=mesiac, RRRR=rok)\r"; err=3 }
-
-		if (mesic == 2)
-			{
-			if (rok != "")
-				{
-				if (rok % 4 == 0)
-					{
-					if (den>29)
-						{text=text + "Vo februari roku " + rok + " je maximalne 29 dni.\r"; err=1 }
-					}
-				else
-					{
-					if (den>28)
-						{text=text + "Vo februari roku " + rok + " je maximalne 28 dni.\r"; err=1 }
-					}
-				}
-			else
-				{
-				if (den>29)
-					{text=text + "Vo februari roku je maximalne 29 dni.\r"}
-				}
-			}
-
-		if ((mesic == 4 || mesic == 6 || mesic == 9 || mesic == 11) && (den>30))
-			{text=text + "Pocet dni v uvedenom mesiaci nemoze byt mensi ako 1 a vacsi ako 30.\r"}
-		
-
-
-
-		if (text!="" && err == 1 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "??"  + "." + mesic+ "." + rok;
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (text!="" && err == 2 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "." + mesic + "??" + "." + rok;
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (text!="" && err == 3 && vstup.value.length > 0 )
-			{
-                        Oznam.style.display="";
-                        x1.value = den + "." + mesic +  "." + rok + "??";
-                        errflag.value = "1";
-                        x1.focus();
-			return false;
-                        }
-		if (err == 0)
-			{
-                        Oznam.style.display="none";
-                        x1.value = den + "." + mesic +  "." + rok ;
-                        errflag.value = "0";
-			return true;
-			}
-
-		}
-//koniec kontrola datumu
-
-// Kontrola cisla celeho v rozsahu x az y  
-      function intg(x1,x,y,Oznam) 
-      { 
-       var b;
-       b=x1.value;
-       var anyString=b;
-       Oznam.style.display="none";
-         if (b == "") return true;
-         else{
-         if (Math.floor(b)==b && b>=x && b<=y) return true; 
-         else {
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         return false;
-              } 
-             }
-      }
-
-
-// Kontrola des.cisla celeho v rozsahu x az y  
-      function cele(x1,x,y,Oznam,des) 
-      { 
-       var b;
-       b=x1.value;
-       var anyString=b;
-       var err=0;
-       var c;
-       var d;
-       var cele;
-       var pocdes;
-       cele=0;
-       pocdes=0;
-       c=b.toString();
-       d=c.split('.');
-       if ( isNaN(d[1]) ) { cele=1; }
-       if ( cele == 0 ) { pocdes=d[1].length; }
-
-         if (b == "") { err=0 }
-         if (b>=x && b<=y) { err=0 }
-         if ( x1.value.search(/[^0-9.-]/g) != -1) { err=1 }
-         if (b<x && b != "") { err=1 }
-         if (b>y && b != "") { err=1 }
-         if (cele == 0 && pocdes > des ) { err=1 }
-
-	 if (err == 0)
-	 {         
-         Oznam.style.display="none";
-         return true;
-         }
-
-	 if (err == 1)
-	 { 
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         x1.value = b + "??";
-         return false;
-         }
-
-      }
-
-
-//  Kontrola cisla
-    function KontrolaCisla(Vstup, Oznam)
-    {
-     if ( Vstup.value.search(/[^0-9]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-     if ( Vstup.value.search(/[^0-9]/g) != -1) { Oznam.style.display=""; }
-     else { Oznam.style.display="none"; }
-    }
-
-//  Kontrola cisla desatinneho
-    function KontrolaDcisla(Vstup, Oznam)
-    {
-     if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-     if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Oznam.style.display=""; }
-     else { Oznam.style.display="none"; }
-    }
-
-//  Kontrola datumu
-    function KontrolaDatum(Vstup, Oznam)
-    {
-     if ( Vstup.value.search(/[^0-9.]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-     if ( Vstup.value.search(/[^0-9.]/g) != -1) { Oznam.style.display=""; }
-     else { Oznam.style.display="none"; }
-    }
-
-
-function ZnovuPotvrdenie()
-                {
-window.open('vykaz_fin204pod_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=1',
- '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
 
 
   function Generuj()
   { 
-
-window.open('../ucto/oprcis.php?copern=308&drupoh=87&page=1&sysx=UCT', '_blank','<?php echo $tlcuwin; ?>' );
-
+   window.open('../ucto/oprcis.php?copern=308&drupoh=87&page=1&sysx=UCT', '_blank','<?php echo $tlcuwin; ?>');
   }
+
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
+  }
+
+  function MetodVypln()
+  {
+   window.open('<?php echo $jpg_cesta; ?>_vysvetlivky.pdf',
+'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+  }
+  function TlacVykaz() //dopyt, daù do pÙvodnÈho stavu, pravdepodobne cislo_oc s˙visÌ so ötvrùrok, i keÔ je to mesaËnÈ
+  {
+   window.open('vykaz_fin204pod_2016.php?copern=10&strana=9999',
+ '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes'); //dopyt, m· v˝znam cislo_oc,page,subor
+  }
+  function Nacitaj()
+  {
+   window.open('vykaz_fin204pod_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0',
+'_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes'); //dopyt, m· v˝znam cislo_oc,page,subor
+  }
+
 </script>
 </HEAD>
-<BODY class="white" id="white" onload="ObnovUI();" >
-<table class="h2" width="100%" >
-<tr>
-<td>EuroSecom - V˝kaz FIN 2-04 POD</td>
-<td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
-</tr>
-</table>
-
-<?php if( $copern == 20 ) { ?>
-<table class="h2" width="100%" >
-<tr>
-<td align="left">
-<?php if( $strana < 1 OR $strana > 3 ) $strana=1; ?>
-<?php echo "ätvrùrok: $cislo_oc ";?>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="#" onclick="window.open('vykaz_fin204pod_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0',
- '_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );">
-<img src='../obr/orig.png' width=20 height=15 border=0 title='Znovu naËÌtaù hodnoty ' ></a>
-<a href="#" onClick="window.open('vykaz_fin204pod_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999',
- '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='TlaË do PDF' ></a>
-</td>
-<td>
-<a href="#" onClick="Generuj();"><img src='../obr/zoznam.png' width=15 height=15 border=0 title='Generovanie naËÌtania' ></a>
-</td>
-</tr>
-</table>
-<?php                     } ?>
-
+<BODY onload="ObnovUI();">
 <?php
-//upravy  udaje strana
+//uprav udaje
 if ( $copern == 20 )
-    {
+     {
 ?>
-<tr>
-<span id="Cele" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota musÌ byù celÈ kladnÈ ËÌslo</span>
-<span id="Datum" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- D·tum musÌ byù v tvare DD.MM.RRRR,DD.MM alebo DD naprÌklad 21.10.2008 , 21 program doplni na 21.<?php echo $kli_vume; ?>;</span>
-<span id="Desc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus byù desatinnÈ ËÌslo, maxim·lne 2 desatinnÈ miesta;</span>
-<span id="Desc4" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus byù desatinnÈ ËÌslo, maxim·lne 4 desatinnÈ miesta;</span>
-<span id="Desc1" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota mus byù desatinnÈ ËÌslo, maxim·lne 1 desatinnÈ miesto;</span>
-<span id="Oc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- OS» musÌ byù celÈ kladnÈ ËÌslo v rozsahu 1 aû 9999</span>
-<span id="Fx" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- MusÌte vyplniù vöetky poloûky vstupu</span>
-<span id="Ul" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:yellow; color:black;">
- Poloûka OS»=<?php echo $h_oc;?> spr·vne uloûen·</span>
-</tr>
-<table class="fmenu" width="100%" style="margin-bottom:5px;">
-<FORM name="formv1" class="obyc" method="post" action="../ucto/vykaz_fin204pod_2016.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>" >
-<tr>
-<td width="10%"></td><td width="10%"></td><td width="10%"></td><td width="10%"></td><td width="10%"></td>
-<td width="10%"></td><td width="10%"></td><td width="10%"></td><td width="10%"></td><td width="10%"></td>
-</tr>
+<div id="wrap-heading">
+ <table id="heading">
+ <tr>
+  <td class="ilogin">EuroSecom</td>
+  <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
+ </tr>
+ <tr>
+  <td class="header">FIN 2-04 VybranÈ aktÌva a pasÌva podnikateæskÈho subjektu</td> <!-- dopyt, skr·tiù -->
+  <td>
+   <div class="bar-btn-form-tool">
+<?php if ( $strana < 1 OR $strana > 3 ) $strana=1; ?>
+<?php echo "ätvrùrok: $cislo_oc ";?>&nbsp;&nbsp;&nbsp;&nbsp; <!-- dopyt, m· v˝znam? -->
+
+<a href="#" onClick="Generuj();"><img src='../obr/zoznam.png' width=15 height=15 title="Nastaviù generovanie"></a> <!-- dopyt, nefunguje -->
+    <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie v˝kazu" class="btn-form-tool">
+    <img src="../obr/ikony/download_blue_icon.png" onclick="Nacitaj();" title="NaËÌtaù ˙daje" class="btn-form-tool">
+    <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
+   </div>
+  </td>
+ </tr>
+ </table>
+</div>
+
+<div id="content">
+<FORM name="formv1" method="post" action="../ucto/vykaz_fin204pod_2016.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana; ?>"> <!-- dopyt, m· v˝znam cislo_oc -->
 <?php
-$prev_str=$strana-1;
-$next_str=$strana+1;
-if( $prev_str == 0 ) $prev_str=3;
-if( $next_str == 4 ) $next_str=1;
+$clas1="noactive"; $clas2="noactive"; $clas3="noactive";
+if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
+if ( $strana == 3 ) $clas3="active";
+$source="vykaz_fin204pod_2016.php";
 ?>
-<tr>
-<td colspan="4" class="bmenu" width="10%">&nbsp;&nbsp;Strana <?php echo $strana;?>&nbsp;&nbsp;&nbsp;
-<a href="#" onclick="window.open('vykaz_fin204pod_2016.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $prev_str;?>', '_self' )">
-<img src='../obr/prev.png' width=12 height=12 border=0 title='Strana <?php echo $prev_str;?> obdobie <?php echo $cislo_oc; ?>' ></a>
-<a href="#" onclick="window.open('vykaz_fin204pod_2016.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $next_str;?>', '_self' )">
-<img src='../obr/next.png' width=12 height=12 border=0 title='Strana <?php echo $next_str;?> obdobie <?php echo $cislo_oc; ?>' ></a>
-</td>
-<td colspan="3" class="bmenu">
-<img src='../obr/tlac.png' width="20" height="15" border=0 title="TlaËiù vybran˙ stranu Ë." ></a>
-<a href="#" onclick="window.open('../ucto/vykaz_fin204pod_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=1', '_self' );">1</a> 
-<a href="#" onclick="window.open('../ucto/vykaz_fin204pod_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=2', '_self' );">2</a>
-<a href="#" onclick="window.open('../ucto/vykaz_fin204pod_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=3', '_self' );">3</a>
-</td>
-<td colspan="3" class="obyc" align="center"><INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny"></td>
-<!-- 
-<a href="#" onclick="window.open('../ucto/vykaz_fin204pod_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=20&drupoh=1&page=1&subor=0&strana=1', '_self' );">1</a> 
-<a href="#" onclick="window.open('../ucto/vykaz_fin204pod_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=20&drupoh=1&page=1&subor=0&strana=2', '_self' );">2</a>
-<a href="#" onclick="window.open('../ucto/vykaz_fin204pod_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=20&drupoh=1&page=1&subor=0&strana=3', '_self' );">3</a>
- -->
-</tr>
+<div class="navbar">
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=10&strana=3', '_blank');" class="<?php echo $clas3; ?> toright">3</a> <!-- dopyt, asi daù aj cislo_oc Ëo je asi ötrvrùok -->
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=10&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a> <!-- dopyt, nakoniec zruöiù tlaËiù po stran·ch -->
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=10&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
+ <h6 class="toright">TlaËiù:</h6>
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+</div>
 
-<?php if ( $strana == 1   )                           { ?>
+<?php if ( $strana == 1 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 1.strana 265kB">
 
-<tr><td class="pvstuz" colspan="10">⁄daje o firme </td></tr>
-<tr>
-<td class="bmenu" colspan="10">&nbsp;KÛd okresu:<input type="text" name="okres" id="okres" size="10" />
-KÛd obce:&nbsp;<input type="text" name="obec" id="obec" size="10" />
-V˝kaz zostaven˝ dÚa:&nbsp;<input type="text" name="daz" id="daz" size="10" />
-</td>
-</tr>
-<tr><td style="height:5px;" colspan="10"></td></tr>
-<tr><td class="pvstuz" colspan="10">3.1. VybranÈ aktÌva </td></tr>
-<tr>
-<td class="pvstuz" colspan="1" align="center">».r.</td>
-<td class="pvstuz" colspan="5" align="center">Popis / ˙Ëty</td>
-<td class="pvstuz" colspan="1" align="center">Brutto</td>
-<td class="pvstuz" colspan="1" align="center">Korekcia</td>
-<td class="pvstuz" colspan="1" align="center">Netto</td>
-<td class="pvstuz" colspan="1" align="center">Predch·dzaj˙ce</td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center">01</td>
-<td class="bmenu" colspan="5">Dlhodob˝ nehmotn˝ majetok (r. 02 aû r. 05)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r01" id="r01" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk01" id="rk01" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn01" id="rn01" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm01" id="rm01" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">02</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;AktivovanÈ n·klady na v˝voj, oceniteænÈ pr·va a goodwill / 012,014,015-(07X,091A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r02" id="r02" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk02" id="rk02" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn02" id="rn02" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm02" id="rm02" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">03</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;PoskytnutÈ preddavky na dlhodob˝ nehmotn˝ majetok / 051-(095A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r03" id="r03" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk03" id="rk03" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn03" id="rn03" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm03" id="rm03" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">04</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;In˝ dlhodob˝ nehmotn˝ majetok / 013,018,019-(07x,091A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r04" id="r04" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk04" id="rk04" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn04" id="rn04" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm04" id="rm04" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">05</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Obstaranie dlhodobÈho nehmotnÈho majetku / 041-(093)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r05" id="r05" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk05" id="rk05" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn05" id="rn05" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm05" id="rm05" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center">06</td>
-<td class="bmenu" colspan="5">Dlhodob˝ hmotn˝ majetok (r. 07 aû r. 11 + r. 13 aû r. 16)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r06" id="r06" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk06" id="rk06" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn06" id="rn06" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm06" id="rm06" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">07</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Pozemky / 031</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r07" id="r07" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk07" id="rk07" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn07" id="rn07" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm07" id="rm07" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">08</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;PestovateæskÈ celky trval˝ch porastov / 025-(085,092A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r08" id="r08" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk08" id="rk08" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn08" id="rn08" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm08" id="rm08" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">09</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;UmeleckÈ diela a zbierky / 032</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r09" id="r09" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk09" id="rk09" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn09" id="rn09" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm09" id="rm09" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">10</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Stavby / 021-(081,092A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r10" id="r10" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk10" id="rk10" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn10" id="rn10" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm10" id="rm10" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">11</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;SamostatnÈ hnuteænÈ veci a s˙bory hnuteæn˝ch vecÌ / 022-(082,092A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r11" id="r11" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk11" id="rk11" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn11" id="rn11" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm11" id="rm11" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">12</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;z toho: DopravnÈ prostriedky / 023-(083,092A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r12" id="r12" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk12" id="rk12" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn12" id="rn12" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm12" id="rm12" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">13</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;PoskytnutÈ preddavky na dlhodob˝ hmotn˝ majetok / 052-(095A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r13" id="r13" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk13" id="rk13" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn13" id="rn13" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm13" id="rm13" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">14</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;In˝ dlhodob˝ hmotn˝ majetok / 026,029,02X -(08X,092A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r14" id="r14" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk14" id="rk14" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn14" id="rn14" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm14" id="rm14" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">15</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Obstaranie dlhodobÈho hmotnÈho majetku / 042-(094)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r15" id="r15" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk15" id="rk15" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn15" id="rn15" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm15" id="rm15" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">16</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">Opravn· poloûka k nadobudnutÈmu majetku / +/-097 (+/-098)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r16" id="r16" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk16" id="rk16" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn16" id="rn16" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm16" id="rm16" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" >17</td>
-<td class="bmenu" colspan="5" >&nbsp;Dlhodob˝ finanËn˝ majetok (r. 18 aû r. 22) </td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r17" id="r17" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk17" id="rk17" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn17" id="rn17" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm17" id="rm17" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">18</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;PodielovÈ cennÈ papiere a podiely / 061,062-(096A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r18" id="r18" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk18" id="rk18" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn18" id="rn18" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm18" id="rm18" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">19</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;DlhovÈ CP drûanÈ do splatnosti / 065-(096A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r19" id="r19" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk19" id="rk19" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn19" id="rn19" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm19" id="rm19" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">20</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;PÙûiËky ˙Ëtovnej jednotke v konsolidovanom celku a ostatnÈ pÙûiËky / 066, 067</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r20" id="r20" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk20" id="rk20" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn20" id="rn20" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm20" id="rm20" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">21</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;PoskytnutÈ preddavky na DhFM a obstaranie DhFM / 053,043-(096A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r21" id="r21" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk21" id="rk21" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn21" id="rn21" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm21" id="rm21" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">22</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">Ostatn˝ dlhodob˝ finanËn˝ majetok / 069-(096A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r22" id="r22" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk22" id="rk22" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn22" id="rn22" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm22" id="rm22" size="10" /></td>
-</tr>
-
-<?php                                                                  } //koniec 1.strana ?>
-
-<?php if ( $strana == 2  )                           { ?>
-
-<tr><td class="pvstuz" colspan="10">3.1. VybranÈ aktÌva </td></tr>
-<tr>
-<td class="pvstuz" colspan="1" align="center">».r.</td>
-<td class="pvstuz" colspan="5" align="center">Popis / ˙Ëty</td>
-<td class="pvstuz" colspan="1" align="center">Brutto</td>
-<td class="pvstuz" colspan="1" align="center">Korekcia</td>
-<td class="pvstuz" colspan="1" align="center">Netto</td>
-<td class="pvstuz" colspan="1" align="center">Predch·dzaj˙ce</td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center">23</td>
-<td class="bmenu" colspan="5">Z·soby / skupina 11,12,13-(19x)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r23" id="r23" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk23" id="rk23" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn23" id="rn23" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm23" id="rm23" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" >24</td>
-<td class="bmenu" colspan="5" >&nbsp;Pohæad·vky (r. 25 aû r. 35)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r24" id="r24" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk24" id="rk24" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn24" id="rn24" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm24" id="rm24" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">25</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Odberatelia / 311-(391A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r25" id="r25" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk25" id="rk25" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn25" id="rn25" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm25" id="rm25" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">26</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Zmenky na inkaso / 312</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r26" id="r26" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk26" id="rk26" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn26" id="rn26" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm26" id="rm26" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">27</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;PoskytnutÈ prev·dzkovÈ preddavky / 314A</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r27" id="r27" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk27" id="rk27" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn27" id="rn27" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm27" id="rm27" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">28</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Pohæad·vky za eskontovanÈ cennÈ papiere, pohæad·vky z vydan˝ch dlhopisov / 313,375</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r28" id="r28" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk28" id="rk28" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn28" id="rn28" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm28" id="rm28" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">29</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;DaÚovÈ pohæad·vky a pohæad·vky zo soci·lneho a zdravotnÈho poistenia / 336,341,342,343,345</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r29" id="r29" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk29" id="rk29" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn29" id="rn29" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm29" id="rm29" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">30</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Dot·cie zo öt·tneho rozpoËtu a ostatnÈ dot·cie / 346,347</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r30" id="r30" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk30" id="rk30" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn30" id="rn30" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm30" id="rm30" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">31</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Pohæad·vky z n·jmu/ 374-(391A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r31" id="r31" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk31" id="rk31" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn31" id="rn31" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm31" id="rm31" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">32</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Pohæad·vky z pevn˝ch termÌnov˝ch oper·ciÌ a nak˙penÈ opcie / 373A,376-(391A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r32" id="r32" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk32" id="rk32" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn32" id="rn32" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm32" id="rm32" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">33</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;" >Pohæad·vky voËi ˙ËastnÌkom zdruûenia, spojovacÌ ˙Ëet pri zdruûenÌ / 358,398A-(391A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r33" id="r33" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk33" id="rk33" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn33" id="rn33" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm33" id="rm33" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">34</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Pohæad·vky v r·mci konsolid.celku, voËi spoloËnÌkom a Ëlenom,z predaja podniku / 351,354,355,35X,371-(391A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r34" id="r34" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk34" id="rk34" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn34" id="rn34" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm34" id="rm34" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">35</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;OstatnÈ pohæad·vky / 315,335,378-(391A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r35" id="r35" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk35" id="rk35" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn35" id="rn35" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm35" id="rm35" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1"  align="center" >36</td>
-<td class="bmenu" colspan="5" >&nbsp;FinanËnÈ ˙Ëty (r. 37 aû r. 41) </td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r36" id="r36" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk36" id="rk36" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn36" id="rn36" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm36" id="rm36" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">37</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Pokladnica a ceniny / 211,213</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r37" id="r37" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk37" id="rk37" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn37" id="rn37" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm37" id="rm37" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">38</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;BankovÈ ˙Ëty / 221+-261</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r38" id="r38" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk38" id="rk38" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn38" id="rn38" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm38" id="rm38" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center"style="font-weight:normal;">39</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;MajetkovÈ cennÈ papiere / 251,257A,25XA-(291A,29X)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r39" id="r39" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk39" id="rk39" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn39" id="rn39" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm39" id="rm39" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center"style="font-weight:normal;">40</td>
-<td class="bmenu" colspan="5"style="font-weight:normal;">&nbsp;DlhovÈ cennÈ papiere / 253,256,257A,25XA-(291A,29X)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r40" id="r40" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk40" id="rk40" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn40" id="rn40" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm40" id="rm40" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center" style="font-weight:normal;">41</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">Obstaranie kr·tkodobÈho finanËnÈho majetku / 259,314A-(291A,391A)</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r41" id="r41" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk41" id="rk41" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn41" id="rn41" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm41" id="rm41" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center">42</td>
-<td class="bmenu" colspan="5">&nbsp;»asovÈ rozlÌöenie / 381, 382, 385</td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="r42" id="r42" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rk42" id="rk42" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rn42" id="rn42" size="10" /></td>
-<td class="bmenu" colspan="1" align="center"><input type="text" name="rm42" id="rm42" size="10" /></td>
-</tr>
-<tr>
-<td class="pvstuz" colspan="1" align="center">43</td>
-<td class="pvstuz" colspan="5">&nbsp;VybranÈ aktÌva spolu (r. 01 + r. 06 + r. 17 + r. 23 + r. 24 + r. 36 + r. 42)</td>
-<td class="pvstuz" colspan="1" align="center"><input type="text" name="r43" id="r43" size="10" /></td>
-<td class="pvstuz" colspan="1" align="center"><input type="text" name="rk43" id="rk43" size="10" /></td>
-<td class="pvstuz" colspan="1" align="center"><input type="text" name="rn43" id="rn43" size="10" /></td>
-<td class="pvstuz" colspan="1" align="center"><input type="text" name="rm43" id="rm43" size="10" /></td>
-</tr>
+<span class="text-echo" style="top:153px; left:403px;"><?php echo $datum; ?></span>
+<span class="text-echo" style="top:271px; left:141px;">x</span>
+<span class="text-echo" style="top:516px; left:141px; letter-spacing:13.5px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:516px; left:342px; letter-spacing:14px;"><?php echo $mesiac; ?></span>
+<span class="text-echo" style="top:516px; left:409px; letter-spacing:13.5px;"><?php echo $kli_vrok; ?></span>
+<div class="input-echo" style="width:687px; top:574px; left:135px; height:40px; line-height:40px;"><?php echo $fir_fnaz; ?></div>
+<div class="input-echo" style="width:687px; top:655px; left:135px; height:19px; line-height:19px; font-size:15px;"><?php echo $fir_uctt02; ?></div>
+<div class="input-echo" style="width:687px; top:735.5px; left:135px; height:39.5px; line-height:39.5px;"><?php echo $fir_fuli; ?></div>
+<div class="input-echo" style="width:105px; top:816.5px; left:135px; height:19px; line-height:19px;"><?php echo $fir_fpsc; ?></div>
+<div class="input-echo" style="width:553px; top:816.5px; left:269px; height:39.5px; line-height:39.5px;"><?php echo $fir_fmes; ?></div>
+<div class="input-echo" style="width:687px; top:898px; left:135px; height:19px; line-height:19px; font-size:15px;"><?php echo $fir_fem1; ?></div>
+<input type="text" name="daz" id="daz" onkeyup="CiarkaNaBodku(this);"
+       style="width:80px; top:966px; left:236px; height:22px; line-height:22px; font-size:14px; padding-left:4px;"/>
+<?php                     } //koniec 1.strana ?>
 
 
-<?php                                                                  } //koniec 2.strana ?>
+<?php if ( $strana == 2 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 2.strana 265kB">
 
-<?php if ( $strana == 3  )                           { ?>
-<tr>
-<td class="pvstuz" colspan="10">3.2. VybranÈ pasÌva </td>
-</tr>
-<tr>
-<td class="pvstuz" colspan="1" align="center">».r.</td>
-<td class="pvstuz" colspan="5" align="center">Popis / ˙Ëty</td>
-<td class="pvstuz" colspan="2" align="center">BeûnÈ obdobie</td>
-<td class="pvstuz" colspan="2" align="center">Predch·dzaj˙ce</td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center">44</td>
-<td class="bmenu" colspan="5">Rezervy / <span style="font-weight:normal;">323,451,459</span></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r44" id="r44" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm44" id="rm44" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center">45</td>
-<td class="bmenu" colspan="5">Z·v‰zky (r. 46 aû r. 50 + r. 53 + r. 56 + r. 59 aû r. 65)</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r45" id="r45" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm45" id="rm45" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">46</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;DlhodobÈ zmenky na ˙hradu / 478</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r46" id="r46" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm46" id="rm46" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">47</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Kr·tkodobÈ zmenky na ˙hradu / 322</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r47" id="r47" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm47" id="rm47" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">48</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Z·v‰zky z pevn˝ch termÌnov˝ch oper·ciÌ / 373A</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r48" id="r48" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm48" id="rm48" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">49</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;VydanÈ dlhopisy dlhodobÈ / 473</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r49" id="r49" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm49" id="rm49" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">50</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Dod·vatelia a nevyfakturovanÈ dod·vky / 321,326,476</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r50" id="r50" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm50" id="rm50" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">51</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;&nbsp;&nbsp;- kr·tkodobÈ</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r51" id="r51" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm51" id="rm51" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">52</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;&nbsp;&nbsp;- dlhodobÈ</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r52" id="r52" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm52" id="rm52" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">53</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">PrijatÈ preddavky / 324,475</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r53" id="r53" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm53" id="rm53" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">54</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;&nbsp;&nbsp;- kr·tkodobÈ</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r54" id="r54" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm54" id="rm54" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">55</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;&nbsp;&nbsp;- dlhodobÈ</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r55" id="r55" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm55" id="rm55" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">56</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Z·v‰zky z n·jmu / 474</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r56" id="r56" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm56" id="rm56" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">57</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;&nbsp;&nbsp;- kr·tkodobÈ</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r57" id="r57" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm57" id="rm57" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">58</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;&nbsp;&nbsp;- dlhodobÈ</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r58" id="r58" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm58" id="rm58" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">59</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Z·v‰zky voËi zamestnancom / 331,333</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r59" id="r59" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm59" id="rm59" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">60</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;DaÚovÈ z·v‰zky a z·v‰zky zo soc. a zdravot. poistenia / 336,341,342,343,345</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r60" id="r60" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm60" id="rm60" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">61</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Dot·cie a z˙Ëtovanie so äR a ostatnÈ / 346,348</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r61" id="r61" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm61" id="rm61" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">62</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Z·v‰zky z upÌsan˝ch nesplaten˝ch CP a vkladov / 367</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r62" id="r62" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm62" id="rm62" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">63</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Z·v‰zky voËi ˙ËastnÌkom zdruûenÌ, spojovacÌ ˙Ëet pri zdruûenÌ / 368,396</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r63" id="r63" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm63" id="rm63" size="10" /></td>
-</tr>
+<!-- 4.1.Vybrane aktiva -->
+<!-- 1.DnHM -->
+<input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:229px; left:541px;"/>
+<input type="text" name="rk01" id="rk01" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:229px; left:618px;"/>
+<input type="text" name="rn01" id="rn01" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:229px; left:695px;"/>
+<input type="text" name="rm01" id="rm01" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:229px; left:773px;"/>
+<input type="text" name="r02" id="r02" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:254px; left:541px;"/>
+<input type="text" name="rk02" id="rk02" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:254px; left:618px;"/>
+<input type="text" name="rn02" id="rn02" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:254px; left:695px;"/>
+<input type="text" name="rm02" id="rm02" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:254px; left:773px;"/>
+<input type="text" name="r03" id="r03" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:279px; left:541px;"/>
+<input type="text" name="rk03" id="rk03" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:279px; left:618px;"/>
+<input type="text" name="rn03" id="rn03" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:279px; left:695px;"/>
+<input type="text" name="rm03" id="rm03" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:279px; left:773px;"/>
+<input type="text" name="r04" id="r04" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:304px; left:541px;"/>
+<input type="text" name="rk04" id="rk04" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:304px; left:618px;"/>
+<input type="text" name="rn04" id="rn04" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:304px; left:695px;"/>
+<input type="text" name="rm04" id="rm04" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:304px; left:773px;"/>
+<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:329px; left:541px;"/>
+<input type="text" name="rk05" id="rk05" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:329px; left:618px;"/>
+<input type="text" name="rn05" id="rn05" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:329px; left:695px;"/>
+<input type="text" name="rm05" id="rm05" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:329px; left:773px;"/>
+<!-- 6.DHM -->
+<input type="text" name="r06" id="r06" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:354px; left:541px;"/>
+<input type="text" name="rk06" id="rk06" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:354px; left:618px;"/>
+<input type="text" name="rn06" id="rn06" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:354px; left:695px;"/>
+<input type="text" name="rm06" id="rm06" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:354px; left:773px;"/>
+<input type="text" name="r07" id="r07" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:379px; left:541px;"/>
+<input type="text" name="rk07" id="rk07" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:379px; left:618px;"/>
+<input type="text" name="rn07" id="rn07" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:379px; left:695px;"/>
+<input type="text" name="rm07" id="rm07" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:379px; left:773px;"/>
+<input type="text" name="r08" id="r08" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:403px; left:541px;"/>
+<input type="text" name="rk08" id="rk08" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:403px; left:618px;"/>
+<input type="text" name="rn08" id="rn08" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:403px; left:695px;"/>
+<input type="text" name="rm08" id="rm08" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:403px; left:773px;"/>
+<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:428px; left:541px;"/>
+<input type="text" name="rk09" id="rk09" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:428px; left:618px;"/>
+<input type="text" name="rn09" id="rn09" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:428px; left:695px;"/>
+<input type="text" name="rm09" id="rm09" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:428px; left:773px;"/>
+<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:453px; left:541px;"/>
+<input type="text" name="rk10" id="rk10" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:453px; left:618px;"/>
+<input type="text" name="rn10" id="rn10" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:453px; left:695px;"/>
+<input type="text" name="rm10" id="rm10" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:453px; left:773px;"/>
+<input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:478px; left:541px;"/>
+<input type="text" name="rk11" id="rk11" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:478px; left:618px;"/>
+<input type="text" name="rn11" id="rn11" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:478px; left:695px;"/>
+<input type="text" name="rm11" id="rm11" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:478px; left:773px;"/>
+<input type="text" name="r12" id="r12" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:503px; left:541px;"/>
+<input type="text" name="rk12" id="rk12" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:503px; left:618px;"/>
+<input type="text" name="rn12" id="rn12" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:503px; left:695px;"/>
+<input type="text" name="rm12" id="rm12" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:503px; left:773px;"/>
+<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:528px; left:541px;"/>
+<input type="text" name="rk13" id="rk13" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:528px; left:618px;"/>
+<input type="text" name="rn13" id="rn13" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:528px; left:695px;"/>
+<input type="text" name="rm13" id="rm13" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:528px; left:773px;"/>
+<input type="text" name="r14" id="r14" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:553px; left:541px;"/>
+<input type="text" name="rk14" id="rk14" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:553px; left:618px;"/>
+<input type="text" name="rn14" id="rn14" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:553px; left:695px;"/>
+<input type="text" name="rm14" id="rm14" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:553px; left:773px;"/>
+<input type="text" name="r15" id="r15" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:577px; left:541px;"/>
+<input type="text" name="rk15" id="rk15" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:577px; left:618px;"/>
+<input type="text" name="rn15" id="rn15" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:577px; left:695px;"/>
+<input type="text" name="rm15" id="rm15" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:577px; left:773px;"/>
+<input type="text" name="r16" id="r16" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:602px; left:541px;"/>
+<input type="text" name="rk16" id="rk16" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:602px; left:618px;"/>
+<input type="text" name="rn16" id="rn16" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:602px; left:695px;"/>
+<input type="text" name="rm16" id="rm16" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:602px; left:773px;"/>
+<!-- 17.DFM -->
+<input type="text" name="r17" id="r17" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:627px; left:541px;"/>
+<input type="text" name="rk17" id="rk17" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:627px; left:618px;"/>
+<input type="text" name="rn17" id="rn17" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:627px; left:695px;"/>
+<input type="text" name="rm17" id="rm17" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:627px; left:773px;"/>
+<input type="text" name="r18" id="r18" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:652px; left:541px;"/>
+<input type="text" name="rk18" id="rk18" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:652px; left:618px;"/>
+<input type="text" name="rn18" id="rn18" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:652px; left:695px;"/>
+<input type="text" name="rm18" id="rm18" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:652px; left:773px;"/>
+<input type="text" name="r19" id="r19" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:677px; left:541px;"/>
+<input type="text" name="rk19" id="rk19" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:677px; left:618px;"/>
+<input type="text" name="rn19" id="rn19" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:677px; left:695px;"/>
+<input type="text" name="rm19" id="rm19" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:677px; left:773px;"/>
+<input type="text" name="r20" id="r20" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:702px; left:541px;"/>
+<input type="text" name="rk20" id="rk20" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:702px; left:618px;"/>
+<input type="text" name="rn20" id="rn20" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:702px; left:695px;"/>
+<input type="text" name="rm20" id="rm20" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:702px; left:773px;"/>
+<input type="text" name="r21" id="r21" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:727px; left:541px;"/>
+<input type="text" name="rk21" id="rk21" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:727px; left:618px;"/>
+<input type="text" name="rn21" id="rn21" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:727px; left:695px;"/>
+<input type="text" name="rm21" id="rm21" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:727px; left:773px;"/>
+<input type="text" name="r22" id="r22" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:752px; left:541px;"/>
+<input type="text" name="rk22" id="rk22" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:752px; left:618px;"/>
+<input type="text" name="rn22" id="rn22" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:752px; left:695px;"/>
+<input type="text" name="rm22" id="rm22" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:752px; left:773px;"/>
+<!-- 23.ZASOBY -->
+<input type="text" name="r23" id="r23" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:777px; left:541px;"/>
+<input type="text" name="rk23" id="rk23" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:777px; left:618px;"/>
+<input type="text" name="rn23" id="rn23" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:777px; left:695px;"/>
+<input type="text" name="rm23" id="rm23" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:777px; left:773px;"/>
+<!-- 24.POHLADAVKY -->
+<input type="text" name="r24" id="r24" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:801px; left:541px;"/>
+<input type="text" name="rk24" id="rk24" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:801px; left:618px;"/>
+<input type="text" name="rn24" id="rn24" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:801px; left:695px;"/>
+<input type="text" name="rm24" id="rm24" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:801px; left:773px;"/>
+<input type="text" name="r25" id="r25" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:826px; left:541px;"/>
+<input type="text" name="rk25" id="rk25" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:826px; left:618px;"/>
+<input type="text" name="rn25" id="rn25" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:826px; left:695px;"/>
+<input type="text" name="rm25" id="rm25" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:826px; left:773px;"/>
+<input type="text" name="r26" id="r26" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:851px; left:541px;"/>
+<input type="text" name="rk26" id="rk26" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:851px; left:618px;"/>
+<input type="text" name="rn26" id="rn26" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:851px; left:695px;"/>
+<input type="text" name="rm26" id="rm26" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:851px; left:773px;"/>
+<input type="text" name="r27" id="r27" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:876px; left:541px;"/>
+<input type="text" name="rk27" id="rk27" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:876px; left:618px;"/>
+<input type="text" name="rn27" id="rn27" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:876px; left:695px;"/>
+<input type="text" name="rm27" id="rm27" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:876px; left:773px;"/>
+<input type="text" name="r28" id="r28" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:901px; left:541px;"/>
+<input type="text" name="rk28" id="rk28" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:901px; left:618px;"/>
+<input type="text" name="rn28" id="rn28" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:901px; left:695px;"/>
+<input type="text" name="rm28" id="rm28" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:901px; left:773px;"/>
+<input type="text" name="r29" id="r29" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:925px; left:541px;"/>
+<input type="text" name="rk29" id="rk29" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:925px; left:618px;"/>
+<input type="text" name="rn29" id="rn29" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:925px; left:695px;"/>
+<input type="text" name="rm29" id="rm29" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:925px; left:773px;"/>
+<input type="text" name="r30" id="r30" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:951px; left:541px;"/>
+<input type="text" name="rk30" id="rk30" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:951px; left:618px;"/>
+<input type="text" name="rn30" id="rn30" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:951px; left:695px;"/>
+<input type="text" name="rm30" id="rm30" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:951px; left:773px;"/>
+<input type="text" name="r31" id="r31" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:976px; left:541px;"/>
+<input type="text" name="rk31" id="rk31" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:976px; left:618px;"/>
+<input type="text" name="rn31" id="rn31" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:976px; left:695px;"/>
+<input type="text" name="rm31" id="rm31" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:976px; left:773px;"/>
+<input type="text" name="r32" id="r32" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1000px; left:541px;"/>
+<input type="text" name="rk32" id="rk32" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1000px; left:618px;"/>
+<input type="text" name="rn32" id="rn32" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1000px; left:695px;"/>
+<input type="text" name="rm32" id="rm32" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1000px; left:773px;"/>
+<input type="text" name="r33" id="r33" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1025px; left:541px;"/>
+<input type="text" name="rk33" id="rk33" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1025px; left:618px;"/>
+<input type="text" name="rn33" id="rn33" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1025px; left:695px;"/>
+<input type="text" name="rm33" id="rm33" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1025px; left:773px;"/>
+<input type="text" name="r34" id="r34" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1052px; left:541px;"/>
+<input type="text" name="rk34" id="rk34" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1052px; left:618px;"/>
+<input type="text" name="rn34" id="rn34" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1052px; left:695px;"/>
+<input type="text" name="rm34" id="rm34" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1052px; left:773px;"/>
+<input type="text" name="r35" id="r35" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1079px; left:541px;"/>
+<input type="text" name="rk35" id="rk35" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1079px; left:618px;"/>
+<input type="text" name="rn35" id="rn35" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1079px; left:695px;"/>
+<input type="text" name="rm35" id="rm35" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1079px; left:773px;"/>
+<!-- 36.FU -->
+<input type="text" name="r36" id="r36" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1104px; left:541px;"/>
+<input type="text" name="rk36" id="rk36" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1104px; left:618px;"/>
+<input type="text" name="rn36" id="rn36" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1104px; left:695px;"/>
+<input type="text" name="rm36" id="rm36" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1104px; left:773px;"/>
+<input type="text" name="r37" id="r37" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1129px; left:541px;"/>
+<input type="text" name="rk37" id="rk37" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1129px; left:618px;"/>
+<input type="text" name="rn37" id="rn37" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1129px; left:695px;"/>
+<input type="text" name="rm37" id="rm37" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1129px; left:773px;"/>
+<input type="text" name="r38" id="r38" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1154px; left:541px;"/>
+<input type="text" name="rk38" id="rk38" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1154px; left:618px;"/>
+<input type="text" name="rn38" id="rn38" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1154px; left:695px;"/>
+<input type="text" name="rm38" id="rm38" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1154px; left:773px;"/>
+<input type="text" name="r39" id="r39" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1179px; left:541px;"/>
+<input type="text" name="rk39" id="rk39" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1179px; left:618px;"/>
+<input type="text" name="rn39" id="rn39" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1179px; left:695px;"/>
+<input type="text" name="rm39" id="rm39" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1179px; left:773px;"/>
+<input type="text" name="r40" id="r40" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1203px; left:541px;"/>
+<input type="text" name="rk40" id="rk40" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1203px; left:618px;"/>
+<input type="text" name="rn40" id="rn40" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1203px; left:695px;"/>
+<input type="text" name="rm40" id="rm40" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1203px; left:773px;"/>
+<input type="text" name="r41" id="r41" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1228px; left:541px;"/>
+<input type="text" name="rk41" id="rk41" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1228px; left:618px;"/>
+<input type="text" name="rn41" id="rn41" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1228px; left:695px;"/>
+<input type="text" name="rm41" id="rm41" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1228px; left:773px;"/>
+<!-- 42.CAS.ROZLISENIE -->
+<input type="text" name="r42" id="r42" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1253px; left:541px;"/>
+<input type="text" name="rk42" id="rk42" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1253px; left:618px;"/>
+<input type="text" name="rn42" id="rn42" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1253px; left:695px;"/>
+<input type="text" name="rm42" id="rm42" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1253px; left:773px;"/>
+<!-- 43.AKTIVA SPOLU -->
+<input type="text" name="r43" id="r43" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1278px; left:541px;"/>
+<input type="text" name="rk43" id="rk43" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1278px; left:618px;"/>
+<input type="text" name="rn43" id="rn43" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1278px; left:695px;"/>
+<input type="text" name="rm43" id="rm43" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1278px; left:773px;"/>
+<!-- dopyt, skontrolovaù v˝poËty -->
+<?php                     } //koniec 2.strana ?>
 
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">64</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Z·v‰zky v r·mci konsolidovanÈho celku, voËi spoloËnÌkom a Ëlenom, z k˙py podniku / 361,364,365,366,372</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r64" id="r64" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm64" id="rm64" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">65</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;OstatnÈ z·v‰zky / 325,379,472,479</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r65" id="r65" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm65" id="rm65" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">66</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;&nbsp;&nbsp;- kr·tkodobÈ</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r66" id="r66" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm66" id="rm66" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">67</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;&nbsp;&nbsp;- dlhodobÈ</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r67" id="r67" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm67" id="rm67" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center">68</td>
-<td class="bmenu" colspan="5">BankovÈ ˙very a v˝pomoci (r.69 aû r.72)</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r68" id="r68" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm68" id="rm68" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">69</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;DlhodobÈ bankovÈ ˙very / 461A</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r69" id="r69" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm69" id="rm69" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">70</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;BeûnÈ bankovÈ ˙very / 231,232,461A</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r70" id="r70" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm70" id="rm70" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">71</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;VydanÈ dlhopisy kr·tkodobÈ / 241</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r71" id="r71" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm71" id="rm71" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" style="font-weight:normal;" align="center">72</td>
-<td class="bmenu" colspan="5" style="font-weight:normal;">&nbsp;Kr·tkodobÈ finanËnÈ v˝pomoci / 249</td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r72" id="r72" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm72" id="rm72" size="10" /></td>
-</tr>
-<tr>
-<td class="bmenu" colspan="1" align="center">73</td>
-<td class="bmenu" colspan="5">»asovÈ rozlÌöenie / <span style="font-weight:normal;">383,384</span></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="r73" id="r73" size="10" /></td>
-<td class="bmenu" colspan="2" align="center"><input type="text" name="rm73" id="rm73" size="10" /></td>
-</tr>
-<tr>
-<td class="pvstuz" colspan="1" align="center">74</td>
-<td class="pvstuz" colspan="5">VybranÈ pasÌva spolu (r. 44 + r. 45 + r. 68 + r. 73)</td>
-<td class="pvstuz" colspan="2" align="center"><input type="text" name="r74" id="r74" size="10" /></td>
-<td class="pvstuz" colspan="2" align="center"><input type="text" name="rm74" id="rm74" size="10" /></td>
-</tr>
+<?php if ( $strana == 3 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 3.strana 265kB">
+
+<!-- 4.2.Vybrane pasiva -->
+<!-- 44.VI -->
+<input type="text" name="r44" id="r44" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:166px; left:600px;"/>
+<input type="text" name="rm44" id="rm44" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:166px; left:785px;"/>
+<input type="text" name="r45" id="r45" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:191px; left:600px;"/>
+<input type="text" name="rm45" id="rm45" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:191px; left:785px;"/>
+<input type="text" name="r46" id="r46" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:218px; left:600px;"/>
+<input type="text" name="rm46" id="rm46" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:218px; left:785px;"/>
+<input type="text" name="r47" id="r47" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:245px; left:600px;"/>
+<input type="text" name="rm47" id="rm47" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:245px; left:785px;"/>
+<input type="text" name="r48" id="r48" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:270px; left:600px;"/>
+<input type="text" name="rm48" id="rm48" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:270px; left:785px;"/>
+<!-- 49.REZERVY -->
+<input type="text" name="r49" id="r49" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:294px; left:600px;"/>
+<input type="text" name="rm49" id="rm49" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:294px; left:785px;"/>
+<!-- 50.ZAVAZKY -->
+<input type="text" name="r50" id="r50" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:319px; left:600px;"/>
+<input type="text" name="rm50" id="rm50" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:319px; left:785px;"/>
+<input type="text" name="r51" id="r51" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:344px; left:600px;"/>
+<input type="text" name="rm51" id="rm51" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:344px; left:785px;"/>
+<input type="text" name="r52" id="r52" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:369px; left:600px;"/>
+<input type="text" name="rm52" id="rm52" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:369px; left:785px;"/>
+<input type="text" name="r53" id="r53" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:394px; left:600px;"/>
+<input type="text" name="rm53" id="rm53" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:394px; left:785px;"/>
+<input type="text" name="r54" id="r54" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:418px; left:600px;"/>
+<input type="text" name="rm54" id="rm54" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:418px; left:785px;"/>
+<input type="text" name="r55" id="r55" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:444px; left:600px;"/>
+<input type="text" name="rm55" id="rm55" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:444px; left:785px;"/>
+<input type="text" name="r56" id="r56" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:468px; left:600px;"/>
+<input type="text" name="rm56" id="rm56" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:468px; left:785px;"/>
+<input type="text" name="r57" id="r57" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:493px; left:600px;"/>
+<input type="text" name="rm57" id="rm57" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:493px; left:785px;"/>
+<input type="text" name="r58" id="r58" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:518px; left:600px;"/>
+<input type="text" name="rm58" id="rm58" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:518px; left:785px;"/>
+<input type="text" name="r59" id="r59" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:543px; left:600px;"/>
+<input type="text" name="rm59" id="rm59" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:543px; left:785px;"/>
+<input type="text" name="r60" id="r60" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:568px; left:600px;"/>
+<input type="text" name="rm60" id="rm60" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:568px; left:785px;"/>
+<input type="text" name="r61" id="r61" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:593px; left:600px;"/>
+<input type="text" name="rm61" id="rm61" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:593px; left:785px;"/>
+<input type="text" name="r62" id="r62" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:618px; left:600px;"/>
+<input type="text" name="rm62" id="rm62" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:618px; left:785px;"/>
+<input type="text" name="r63" id="r63" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:642px; left:600px;"/>
+<input type="text" name="rm63" id="rm63" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:642px; left:785px;"/>
+<input type="text" name="r64" id="r64" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:667px; left:600px;"/>
+<input type="text" name="rm64" id="rm64" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:667px; left:785px;"/>
+<input type="text" name="r65" id="r65" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:694px; left:600px;"/>
+<input type="text" name="rm65" id="rm65" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:694px; left:785px;"/>
+<input type="text" name="r66" id="r66" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:721px; left:600px;"/>
+<input type="text" name="rm66" id="rm66" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:721px; left:785px;"/>
+<input type="text" name="r67" id="r67" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:746px; left:600px;"/>
+<input type="text" name="rm67" id="rm67" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:746px; left:785px;"/>
+<input type="text" name="r68" id="r68" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:771px; left:600px;"/>
+<input type="text" name="rm68" id="rm68" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:771px; left:785px;"/>
+<input type="text" name="r69" id="r69" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:798px; left:600px;"/>
+<input type="text" name="rm69" id="rm69" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:798px; left:785px;"/>
+<input type="text" name="r70" id="r70" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:827px; left:600px;"/>
+<input type="text" name="rm70" id="rm70" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:827px; left:785px;"/>
+<input type="text" name="r71" id="r71" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:854px; left:600px;"/>
+<input type="text" name="rm71" id="rm71" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:854px; left:785px;"/>
+<input type="text" name="r72" id="r72" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:879px; left:600px;"/>
+<input type="text" name="rm72" id="rm72" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:879px; left:785px;"/>
+<!-- 73.BANK.UVERY -->
+<input type="text" name="r73" id="r73" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:904px; left:600px;"/>
+<input type="text" name="rm73" id="rm73" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:904px; left:785px;"/>
+<input type="text" name="r74" id="r74" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:929px; left:600px;"/>
+<input type="text" name="rm74" id="rm74" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:929px; left:785px;"/>
+<input type="text" name="r75" id="r75" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:956px; left:600px;"/>
+<input type="text" name="rm75" id="rm75" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:956px; left:785px;"/>
+<input type="text" name="r76" id="r76" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:983px; left:600px;"/>
+<input type="text" name="rm76" id="rm76" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:983px; left:785px;"/>
+<input type="text" name="r77" id="r77" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1007px; left:600px;"/>
+<input type="text" name="rm77" id="rm77" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1007px; left:785px;"/>
+<!-- 78.CAS.ROZLISENIE -->
+<input type="text" name="r78" id="r78" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1032px; left:600px;"/>
+<input type="text" name="rm78" id="rm78" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1032px; left:785px;"/>
+<!-- 79.PASIVA SPOLU -->
+<input type="text" name="r79" id="r79" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1057px; left:600px;"/>
+<input type="text" name="rm79" id="rm79" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1057px; left:785px;"/>
+<!-- dopyt, preveriù v˝poËty -->
+<?php                     } //koniec 3.strana ?>
 
 
 
 
-
-
-<?php                                                                  } //koniec 3.strana ?>
-
-
-
-
-
+<!-- dopyt, pridaù navbar -->
 
 </FORM>
-
-</table>
-
-<div id="myBANKADelement"></div>
-<div id="jeBANKADelement"></div>
-
-
-<script type="text/javascript">
-
-</script>
-
+</div> <!-- #content -->
 <?php
-//mysql_free_result($vysledok);
-    }
-//koniec uprav  udaje 
+     }
+//koniec uprav
 ?>
+
+<!-- dopyt, presun˙ù tlaË pod formul·r -->
 
 
 <?php
@@ -4037,8 +3464,8 @@ $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykazz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
-// celkovy koniec dokumentu
-$cislista = include("uct_lista.php");
+//celkovy koniec dokumentu
+$cislista = include("uct_lista_norm.php");
        } while (false);
 ?>
 </BODY>
