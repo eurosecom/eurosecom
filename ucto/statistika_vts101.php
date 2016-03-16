@@ -4754,6 +4754,15 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
                     }
 
 if ( $strana == 6 ) {
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m100301r1='$m100301r1', m100301r2='$m100301r2',
+  m100303r1='$m100303r1', m100303r2='$m100303r2',
+  m100302='$m100302', m100304='$m100304' ".
+" WHERE ico >= 0 ";
+
+$upravene = mysql_query("$uprtxt"); //dopyt, èo je toto MUSI BYT LEBO polozky modulu586 su v dvoch tabulkach _statistika_vts101 aj _statistika_vts101s2
+
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 " m571r10='$m571r10', m571r12='$m571r12', m571r13='$m571r13', m571r15='$m571r15',
   m571r16='$m571r16', m571r17='$m571r17', m571r18='$m571r18',
@@ -4777,11 +4786,8 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
   m581r4='$m581r4', m581r5='$m581r5', m581r6='$m581r6', m581r7='$m581r7',
   m581r8='$m581r8', m581r12='$m581r12', m581r99='$m581r99' ".
 " WHERE ico >= 0 ";
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
-" m100301r1='$m100301r1', m100301r2='$m100301r2',
-  m100303r1='$m100303r1', m100303r2='$m100303r2',
-  m100302='$m100302', m100304='$m100304' ".
-" WHERE ico >= 0 ";
+
+
                     }
 
 if ( $strana == 7 ) {
@@ -8413,6 +8419,17 @@ $pdf=new FPDF("P","mm", $velkost_strany );
 $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 
+//vytlac strana 1 az 9 polozky z tabulky _statistika_vts101s2
+$sqltt2 = "SELECT * FROM F$kli_vxcf"."_statistika_vts101s2 WHERE ico >= 0 "."";
+$sql2 = mysql_query("$sqltt2");
+$pol2 = mysql_num_rows($sql2);
+$i2=0;
+  if (@$zaznam2=mysql_data_seek($sql2,$i2))
+{
+$hlavicka2=mysql_fetch_object($sql2);
+}
+
+
 //vytlac strana 1 az 9
 $sqltt = "SELECT * FROM F$kli_vxcf"."_statistika_vts101 WHERE ico >= 0 "."";
 //echo $sqltt;
@@ -9056,8 +9073,8 @@ $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(70,6,"$m581r99","$rmc",1,"R");
 //dopyt, rozchodi
 $m100301r1=" ";
 $m100301r2=" ";
-if ( $hlavicka->m100301r1 == 1 ) { $m100301r1="x"; }
-if ( $hlavicka->m100301r2 == 1 ) { $m100301r2="x"; }
+if ( $hlavicka2->m100301r1 == 1 ) { $m100301r1="x"; }
+if ( $hlavicka2->m100301r2 == 1 ) { $m100301r2="x"; }
 $pdf->Cell(190,10," ","$rmc1",1,"L");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m100301r1","$rmc",1,"C");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m100301r2","$rmc",1,"C");
