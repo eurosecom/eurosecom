@@ -274,7 +274,7 @@ $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '384', '73
 if ( $niejegen == 0 ) {
 ?>
 <script type="text/javascript">
-window.open('../ucto/oprcis.php?copern=308&drupoh=87&page=1&sysx=UCT', '_self' );
+window.open('../ucto/fin_cis.php?copern=308&drupoh=87&page=1&sysx=UCT', '_self' );
 </script>
 <?php
 exit;
@@ -1851,7 +1851,7 @@ div.input-echo {
 
   function Generuj()
   { 
-   window.open('../ucto/oprcis.php?copern=308&drupoh=87&page=1&sysx=UCT', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
+   window.open('../ucto/fin_cis.php?copern=308&drupoh=91&page=1', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
   }
 
 //Z ciarky na bodku
