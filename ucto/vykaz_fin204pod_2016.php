@@ -62,7 +62,7 @@ $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, statu
 
 //ak nie je generovanie daj standardne
 $niejegen=0;
-$sql = "SELECT * FROM F".$kli_vxcf."_crf204pod_no ";
+$sql = "SELECT * FROM F".$kli_vxcf."_genfin204pod ";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -72,7 +72,7 @@ $niejegen=1;
 //koniec ak nie je generovanie daj standardne
 
 
-//Tabulka crf204nuj_no
+//Tabulka generovania
 if ( $copern == 1001 )
 {
 ?>
@@ -88,7 +88,7 @@ else
     if ( $copern == 1002 )
     {
 
-$sql = "DROP TABLE F$kli_vxcf"."_crf204pod_no";
+$sql = "DROP TABLE F$kli_vxcf"."_genfin204pod";
 $vysledok = mysql_query("$sql");
 
 $sqlt = <<<crf204nuj_no
@@ -101,175 +101,175 @@ $sqlt = <<<crf204nuj_no
 );
 crf204nuj_no;
 
-$sql = 'CREATE TABLE F'.$kli_vxcf.'_crf204pod_no'.$sqlt;
+$sql = 'CREATE TABLE F'.$kli_vxcf.'_genfin204pod'.$sqlt;
 $vysledek = mysql_query("$sql");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '012', '2' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '014', '2' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '015', '2' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '072', '2' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '073', '2' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '074', '2' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '075', '2' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '079', '2' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '091', '2' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '051', '3' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '095', '3' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '013', '4' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '018', '4' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '019', '4' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '073', '4' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '078', '4' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '079', '4' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '041', '5' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '093', '5' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '031', '7' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '025', '8' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '085', '8' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '092', '8' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '032', '9' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '021', '10' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '081', '10' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '022', '11' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '023', '11' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '082', '11' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '083', '11' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '052', '13' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '024', '14' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '025', '14' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '026', '14' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '028', '14' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '029', '14' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '084', '14' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '085', '14' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '086', '14' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '088', '14' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '089', '14' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '042', '15' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '094', '15' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '012', '2' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '014', '2' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '015', '2' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '072', '2' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '073', '2' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '074', '2' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '075', '2' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '079', '2' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '091', '2' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '051', '3' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '095', '3' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '013', '4' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '018', '4' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '019', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '073', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '078', '4' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '079', '4' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '041', '5' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '093', '5' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '031', '7' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '025', '8' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '085', '8' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '092', '8' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '032', '9' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '021', '10' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '081', '10' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '022', '11' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '023', '11' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '082', '11' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '083', '11' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '052', '13' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '024', '14' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '025', '14' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '026', '14' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '028', '14' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '029', '14' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '084', '14' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '085', '14' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '086', '14' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '088', '14' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '089', '14' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '042', '15' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '094', '15' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '061', '18' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '062', '18' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '063', '18' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '096', '18' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '065', '19' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '066', '20' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '067', '20' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '069', '20' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '053', '21' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '043', '21' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '069', '22' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '061', '18' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '062', '18' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '063', '18' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '096', '18' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '065', '19' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '066', '20' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '067', '20' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '069', '20' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '053', '21' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '043', '21' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '069', '22' ); "; $ulozene = mysql_query("$sqult");
   
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '111', '23' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '112', '23' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '119', '23' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '121', '23' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '122', '23' ); "; $ulozene = mysql_query("$sqult");  
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '123', '23' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '124', '23' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '131', '23' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '132', '23' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '139', '23' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '191', '23' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '192', '23' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '193', '23' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '194', '23' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '195', '23' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '196', '23' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '111', '23' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '112', '23' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '119', '23' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '121', '23' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '122', '23' ); "; $ulozene = mysql_query("$sqult");  
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '123', '23' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '124', '23' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '131', '23' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '132', '23' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '139', '23' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '191', '23' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '192', '23' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '193', '23' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '194', '23' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '195', '23' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '196', '23' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '311', '25' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '391', '25' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '312', '26' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '314', '27' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '313', '28' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '375', '28' ); "; $ulozene = mysql_query("$sqult");  
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '311', '25' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '391', '25' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '312', '26' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '314', '27' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '313', '28' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '375', '28' ); "; $ulozene = mysql_query("$sqult");  
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '346', '30' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '347', '30' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '346', '30' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '347', '30' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '374', '31' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '374', '31' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '373', '32' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '376', '32' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '373', '32' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '376', '32' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '358', '33' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '398', '33' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '358', '33' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '398', '33' ); "; $ulozene = mysql_query("$sqult");
  
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '351', '34' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '354', '34' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '355', '34' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '371', '34' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '351', '34' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '354', '34' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '355', '34' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '371', '34' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '315', '35' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '335', '35' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '378', '35' ); "; $ulozene = mysql_query("$sqult");
-
-
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '211', '37' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '213', '37' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '221', '38' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '261', '38' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '251', '39' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '257', '39' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '291', '39' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '253', '40' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '255', '40' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '256', '40' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '259', '41' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '381', '42' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '382', '42' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '385', '42' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '315', '35' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '335', '35' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '378', '35' ); "; $ulozene = mysql_query("$sqult");
 
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '323', '44' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '451', '44' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '459', '44' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '478', '46' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '322', '47' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '211', '37' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '213', '37' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '221', '38' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '261', '38' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '251', '39' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '257', '39' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '291', '39' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '253', '40' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '255', '40' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '256', '40' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '259', '41' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '381', '42' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '382', '42' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '385', '42' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '373', '48' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '377', '48' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '473', '49' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '321', '50' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '326', '50' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '476', '50' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '323', '44' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '451', '44' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '459', '44' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '478', '46' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '322', '47' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '324', '53' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '475', '53' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '373', '48' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '377', '48' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '474', '56' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '473', '49' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '321', '50' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '326', '50' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '476', '50' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '331', '59' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '333', '59' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '336', '60' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '341', '60' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '342', '60' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '343', '60' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '345', '60' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '324', '53' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '475', '53' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '346', '61' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '348', '61' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '474', '56' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '367', '62' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '331', '59' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '333', '59' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '336', '60' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '341', '60' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '342', '60' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '343', '60' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '345', '60' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '368', '63' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '398', '63' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '346', '61' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '348', '61' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '325', '65' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '379', '65' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '472', '65' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '479', '65' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '367', '62' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '461', '69' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '368', '63' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '398', '63' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '231', '70' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '232', '70' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '325', '65' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '379', '65' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '472', '65' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '479', '65' ); "; $ulozene = mysql_query("$sqult");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '241', '71' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '249', '72' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '383', '73' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_crf204pod_no ( uce,crs ) VALUES ( '384', '73' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '461', '69' ); "; $ulozene = mysql_query("$sqult");
+
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '231', '70' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '232', '70' ); "; $ulozene = mysql_query("$sqult");
+
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '241', '71' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '249', '72' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '383', '73' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '384', '73' ); "; $ulozene = mysql_query("$sqult");
 
 if ( $niejegen == 0 ) {
 ?>
@@ -1051,15 +1051,15 @@ $dsql = mysql_query("$dsqlt");
 $psys=$psys+1;
   }
 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid,F$kli_vxcf"."_crf204pod_no".
-" SET rdk=F$kli_vxcf"."_crf204pod_no.crs".
-" WHERE LEFT(F$kli_vxcf"."_uctprcvykaz$kli_uzid.uce,3) = LEFT(F$kli_vxcf"."_crf204pod_no.uce,3) ";
+$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid,F$kli_vxcf"."_genfin204pod".
+" SET rdk=F$kli_vxcf"."_genfin204pod.crs".
+" WHERE LEFT(F$kli_vxcf"."_uctprcvykaz$kli_uzid.uce,3) = LEFT(F$kli_vxcf"."_genfin204pod.uce,3) ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid,F$kli_vxcf"."_crf204pod_no".
-" SET rdk=F$kli_vxcf"."_crf204pod_no.crs".
-" WHERE F$kli_vxcf"."_uctprcvykaz$kli_uzid.uce = F$kli_vxcf"."_crf204pod_no.uce ";
+$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid,F$kli_vxcf"."_genfin204pod".
+" SET rdk=F$kli_vxcf"."_genfin204pod.crs".
+" WHERE F$kli_vxcf"."_uctprcvykaz$kli_uzid.uce = F$kli_vxcf"."_genfin204pod.uce ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 //exit;
