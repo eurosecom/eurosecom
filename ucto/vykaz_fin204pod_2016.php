@@ -270,7 +270,7 @@ $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '384', '73
 if ( $niejegen == 0 ) {
 ?>
 <script type="text/javascript">
-window.open('../ucto/fin_cis.php?copern=308&drupoh=87&page=1&sysx=UCT', '_self');
+window.open('../ucto/fin_cis.php?copern=308&drupoh=91&page=1&sysx=UCT', '_self');
 </script>
 <?php
 exit;
