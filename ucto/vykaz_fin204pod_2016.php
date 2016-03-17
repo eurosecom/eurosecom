@@ -270,7 +270,7 @@ $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '384', '73
 if ( $niejegen == 0 ) {
 ?>
 <script type="text/javascript">
-window.open('../ucto/fin_cis.php?copern=308&drupoh=87&page=1&sysx=UCT', '_self' );
+window.open('../ucto/fin_cis.php?copern=308&drupoh=87&page=1&sysx=UCT', '_self');
 </script>
 <?php
 exit;
@@ -280,7 +280,7 @@ $copern=20;
 //koniec tabulky crf204pod_no
 
 
-// znovu nacitaj
+//znovu nacitaj
 if ( $copern == 26 )
     {
 //echo "citam";
@@ -1565,7 +1565,6 @@ div.input-echo {
   background-color: #fff;
   font-weight: bold;
 }
-
 </style>
 <script type="text/javascript">
 <?php
@@ -1844,12 +1843,6 @@ div.input-echo {
   }
 ?>
 
-
-  function Generuj()
-  { 
-   window.open('../ucto/fin_cis.php?copern=308&drupoh=91&page=1', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
-  }
-
 //Z ciarky na bodku
   function CiarkaNaBodku(Vstup)
   {
@@ -1861,19 +1854,18 @@ div.input-echo {
    window.open('<?php echo $jpg_cesta; ?>_vysvetlivky.pdf',
 '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
-  function TlacVykaz() //dopyt, daù do pÙvodnÈho stavu, pravdepodobne cislo_oc s˙visÌ so ötvrùrok
+  function TlacVykaz()
   {
-   window.open('vykaz_fin204pod_2016.php?copern=10&strana=9999',
- '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes'); //dopyt, m· v˝znam cislo_oc,page,subor
+   window.open('vykaz_fin204pod_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999',
+ '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function Nacitaj()
   {
    window.open('vykaz_fin204pod_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0',
-'_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes'); //dopyt, m· v˝znam cislo_oc,page,subor
+'_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
-
 </script>
-</HEAD> <!-- dopyt, nezabudn˙ù na export do dbf skontrolovaù -->
+</HEAD>
 <BODY onload="ObnovUI();">
 <?php
 //uprav udaje
@@ -1892,7 +1884,6 @@ if ( $copern == 20 )
   </td>
   <td>
    <div class="bar-btn-form-tool">
-<a href="#" onClick="Generuj();"><img src='../obr/zoznam.png' width=15 height=15 title="Nastaviù generovanie"></a> <!-- dopyt, daù do zoznamu zost·v -->
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie v˝kazu" class="btn-form-tool">
     <img src="../obr/ikony/download_blue_icon.png" onclick="Nacitaj();" title="NaËÌtaù ˙daje" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
@@ -1915,10 +1906,6 @@ $source="vykaz_fin204pod_2016.php";
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>?copern=10&strana=3', '_blank');" class="<?php echo $clas3; ?> toright">3</a> <!-- dopyt, asi daù aj cislo_oc Ëo je asi ötrvrùok -->
- <a href="#" onclick="window.open('<?php echo $source; ?>?copern=10&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a> <!-- dopyt, nakoniec zruöiù tlaËiù po stran·ch -->
- <a href="#" onclick="window.open('<?php echo $source; ?>?copern=10&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
- <h6 class="toright">TlaËiù:</h6>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 </div>
 
@@ -1939,7 +1926,7 @@ $source="vykaz_fin204pod_2016.php";
 <div class="input-echo" style="width:687px; top:898px; left:135px; height:19px; line-height:19px; font-size:15px;"><?php echo $fir_fem1; ?></div>
 <input type="text" name="daz" id="daz" onkeyup="CiarkaNaBodku(this);"
        style="width:80px; top:966px; left:236px; height:22px; line-height:22px; font-size:14px; padding-left:4px;"/>
-<?php                     } //koniec 1.strana ?>
+<?php                     } ?>
 
 
 <?php if ( $strana == 2 ) { ?>
@@ -2128,8 +2115,8 @@ $source="vykaz_fin204pod_2016.php";
 <span class="text-echo" style="top:1282px; right:262px; font-size:12px;"><?php echo $rk43; ?></span>
 <span class="text-echo" style="top:1282px; right:185px; font-size:12px;"><?php echo $rn43; ?></span>
 <span class="text-echo" style="top:1282px; right:50px; font-size:12px;"><?php echo $rm43; ?></span>
-<!-- dopyt, skontrolovaù v˝poËty -->
-<?php                     } //koniec 2.strana ?>
+<?php                     } ?>
+
 
 <?php if ( $strana == 3 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background"
@@ -2215,15 +2202,15 @@ $source="vykaz_fin204pod_2016.php";
 <!-- 79.PASIVA SPOLU -->
 <span class="text-echo" style="top:1059px; right:186px; font-size:14px;"><?php echo $r79; ?></span>
 <span class="text-echo" style="top:1059px; right:50px; font-size:14px;"><?php echo $rm79; ?></span>
-<!-- dopyt, preveriù v˝poËty -->
-<?php                     } //koniec 3.strana ?>
+<?php                     } ?>
 
+<div class="navbar">
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
+ <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+</div>
 
-
-
-<!-- dopyt, pridaù navbar -->
-<!-- dopyt, aktualizovaù export do dbf -->
-<!-- dopyt, generovanie daù do zoznamu tlaËÌv, odtiaæto vyhodiù -->
 </FORM>
 </div> <!-- #content -->
 <?php
@@ -2233,7 +2220,7 @@ $source="vykaz_fin204pod_2016.php";
 
 <?php
 /////////////////////////////////////////////////VYTLAC
-if( $copern == 10 )
+if ( $copern == 10 )
 {
 if ( File_Exists("../tmp/vykazfin.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/vykazfin.$kli_uzid.pdf"); }
    define('FPDF_FONTPATH','../fpdf/font/');
@@ -3193,7 +3180,6 @@ $pdf->Output("../tmp/vykazfin.$kli_uzid.pdf");
 <script type="text/javascript">
   var okno = window.open("../tmp/vykazfin.<?php echo $kli_uzid; ?>.pdf","_self");
 </script>
-
 
 <?php
 }
