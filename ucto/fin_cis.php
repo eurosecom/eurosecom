@@ -1063,7 +1063,7 @@ $source="../ucto/fin_cis.php?copern=308";
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=93', '_self');"
   title="Súvaha - predchádzajúce úètovné obdobie" class="<?php echo $clas2; ?> darkgreen">S - Predchádz. obdobie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=92', '_self');"
-  title="VZaS - generovanie" class="<?php echo $clas3; ?> purple">V - Generovanie</a>
+  title="F204no" class="<?php echo $clas3; ?> purple">F204no - Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=94', '_self');"
   title="VZaS - predchádzajúce úètovné obdobie" class="<?php echo $clas4; ?> purple">V - Predchádz. obdobie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=95', '_self');"
@@ -1093,7 +1093,7 @@ $source="../ucto/fin_cis.php?copern=308";
 <?php
 if ( $drupoh == 91 OR $drupoh == 191 ) { echo "FIN204POD - generovanie"; }
 if ( $drupoh == 93 OR $drupoh == 193 ) { echo "Súvaha - predchádzajúce úètovné obdobie"; }
-if ( $drupoh == 92 OR $drupoh == 192 ) { echo "Výkaz ziskov a strát - generovanie"; }
+if ( $drupoh == 92 OR $drupoh == 192 ) { echo "FIN204NO - generovanie"; }
 if ( $drupoh == 94 OR $drupoh == 194 ) { echo "Výkaz ziskov a strát - predchádzajúce úètovné obdobie"; }
 if ( $drupoh == 95 OR $drupoh == 195 ) { echo "Súvaha - syntetické generovanie Aktív a Pasív"; }
 if ( $drupoh == 96 OR $drupoh == 196 ) { echo "Súvaha a Výkaz ziskov a strát - zaokrúhlenie"; }

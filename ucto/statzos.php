@@ -884,6 +884,11 @@ if( $kli_vrok >= 2013 AND $dajfinvykazy == 1 ) {
 
 </td>
 <td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/fin_cis.php?copern=308&drupoh=92&page=1&sysx=UCT', '_blank' );">
+<img src='../obr/naradie.png' width=20 height=15 border=0 title='Generovanie' ></a>
+</td>
+
+<td class="bmenu" width="2%">
 <a href="#" onClick="UpravFin204no16();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty ' ></a>
 </td>
@@ -914,6 +919,11 @@ if( $kli_vrok >= 2013 AND $dajfinvykazy == 1 ) {
 <img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru' ></a>
 
 </td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/fin_cis.php?copern=308&drupoh=91&page=1&sysx=UCT', '_blank' );">
+<img src='../obr/naradie.png' width=20 height=15 border=0 title='Generovanie' ></a>
+</td>
+
 <td class="bmenu" width="2%">
 <a href="#" onClick="UpravFin204pod16();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty ' ></a>
