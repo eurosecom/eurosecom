@@ -68,9 +68,18 @@ if( $copern == 999 )
 
 $stranax = 1*$_REQUEST['stranax'];
 
+if( $kli_vrok <  2015 )
+  {
 $sql = "SELECT * FROM ".$databaza."F".$h_ycf."_poznamky_po2011 ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok) { echo "Vo firme è.$h_ycf nie sú poznámky v.2011, program nenaèíta hodnoty bezprostredne predchádzajúceho obdobia."; exit; }
+  }
+if( $kli_vrok >= 2015 )
+  {
+$sql = "SELECT * FROM ".$databaza."F".$h_ycf."_poznamky_muj2014 ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok) { echo "Vo firme è.$h_ycf nie sú poznámky MUJ v.2014, program nenaèíta hodnoty bezprostredne predchádzajúceho obdobia."; exit; }
+  }
 
 //str1 pocet zamestnancov 
 if( $stranax == 0 OR $stranax == 1 AND $kli_vrok <  2015 )

@@ -216,7 +216,7 @@ if ( $copern != 10 )
   <a href="#" onclick="NacitajHodnotu( 402 );">Naèíta údaje o <strong>záväzkoch</strong> zo saldokonta</a>
  </li>
  <li>
-  <a href="#" onclick="NacitajHodnotu( 999 );">Naèíta <strong>minulı rok</strong> z Poznámok PO 2013</a>
+  <a href="#" onclick="NacitajHodnotu( 999 );">Naèíta <strong>minulı rok</strong> z Poznámok MUJ</a>
  </li>
  <li>
   <a href="#" onclick='UrobSubor();' title='Vytvori súbor pre naèítanie (jeden krát kliknú)'

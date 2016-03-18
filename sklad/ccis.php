@@ -153,6 +153,7 @@ $povimp1=0;
 if( $_SERVER['SERVER_NAME'] == "localhost" ) { $povimp1=1; }
 //ploty skala
 if( $_SERVER['SERVER_NAME'] == "www.educto.sk" AND $fir_fico == 46614478 ) { $povimp1=1; }
+if( $_SERVER['SERVER_NAME'] == "www.biomeat.sk" ) { $povimp1=1; }
 
 //echo "firfico".$fir_fico;
 
