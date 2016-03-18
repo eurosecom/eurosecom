@@ -28,7 +28,7 @@ $rmc1=0;
 
 //.jpg podklad
 $jpg_cesta="../dokumenty/statistika2016/fin204no/fin2-04no_v16";
-$jpg_popis="Finanèný výkaz o vybraných údajoch z aktív a z pasív podnikate¾ského subjektu verejnej správy FIN 2-04 za rok ".$kli_vrok;
+$jpg_popis="Finanèný výkaz o vybraných údajoch z aktív a z pasív NÚJ FIN 2-04 za rok ".$kli_vrok;
 
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
@@ -270,7 +270,7 @@ $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '384', '73'
 if ( $niejegen == 0 ) {
 ?>
 <script type="text/javascript">
-window.open('../ucto/fin_cis.php?copern=308&drupoh=92&page=1&sysx=UCT', '_self');
+ window.open('../ucto/fin_cis.php?copern=308&drupoh=92&page=1&sysx=UCT', '_self');
 </script>
 <?php
 exit;
@@ -305,7 +305,6 @@ $subor=1;
 $vsetkyprepocty=1;
     }
 //koniec znovu nacitaj
-
 
 
 //zapis upravene udaje
@@ -363,9 +362,6 @@ $r37 = 1*$_REQUEST['r37']; $rk37 = 1*$_REQUEST['rk37']; $rn37 = 1*$_REQUEST['rn3
 $r38 = 1*$_REQUEST['r38']; $rk38 = 1*$_REQUEST['rk38']; $rn38 = 1*$_REQUEST['rn38']; $rm38 = 1*$_REQUEST['rm38'];
 $r39 = 1*$_REQUEST['r39']; $rk39 = 1*$_REQUEST['rk39']; $rn39 = 1*$_REQUEST['rn39']; $rm39 = 1*$_REQUEST['rm39'];
 $r40 = 1*$_REQUEST['r40']; $rk40 = 1*$_REQUEST['rk40']; $rn40 = 1*$_REQUEST['rn40']; $rm40 = 1*$_REQUEST['rm40'];
-$r41 = 1*$_REQUEST['r41']; $rk41 = 1*$_REQUEST['rk41']; $rn41 = 1*$_REQUEST['rn41']; $rm41 = 1*$_REQUEST['rm41'];
-$r42 = 1*$_REQUEST['r42']; $rk42 = 1*$_REQUEST['rk42']; $rn42 = 1*$_REQUEST['rn42']; $rm42 = 1*$_REQUEST['rm42'];
-$r43 = 1*$_REQUEST['r43']; $rk43 = 1*$_REQUEST['rk43']; $rn43 = 1*$_REQUEST['rn43']; $rm43 = 1*$_REQUEST['rm43'];
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin204no SET ".
 " r01='$r01', rk01='$rk01', rn01='$rn01', rm01='$rm01',
@@ -407,14 +403,14 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin204no SET ".
   r37='$r37', rk37='$rk37', rn37='$rn37', rm37='$rm37',
   r38='$r38', rk38='$rk38', rn38='$rn38', rm38='$rm38',
   r39='$r39', rk39='$rk39', rn39='$rn39', rm39='$rm39',
-  r40='$r40', rk40='$rk40', rn40='$rn40', rm40='$rm40',
-  r41='$r41', rk41='$rk41', rn41='$rn41', rm41='$rm41',
-  r42='$r42', rk42='$rk42', rn42='$rn42', rm42='$rm42',
-  r43='$r43', rk43='$rk43', rn43='$rn43', rm43='$rm43' ".
+  r40='$r40', rk40='$rk40', rn40='$rn40', rm40='$rm40' ".
 " WHERE oc = $cislo_oc"; 
                     }
 
 if ( $strana == 3 ) {
+$r41 = 1*$_REQUEST['r41']; $rm41 = 1*$_REQUEST['rm41'];
+$r42 = 1*$_REQUEST['r42']; $rm42 = 1*$_REQUEST['rm42'];
+$r43 = 1*$_REQUEST['r43']; $rm43 = 1*$_REQUEST['rm43'];
 $r44 = 1*$_REQUEST['r44']; $rm44 = 1*$_REQUEST['rm44'];
 $r45 = 1*$_REQUEST['r45']; $rm45 = 1*$_REQUEST['rm45'];
 $r46 = 1*$_REQUEST['r46']; $rm46 = 1*$_REQUEST['rm46'];
@@ -446,14 +442,10 @@ $r71 = 1*$_REQUEST['r71']; $rm71 = 1*$_REQUEST['rm71'];
 $r72 = 1*$_REQUEST['r72']; $rm72 = 1*$_REQUEST['rm72'];
 $r73 = 1*$_REQUEST['r73']; $rm73 = 1*$_REQUEST['rm73'];
 $r74 = 1*$_REQUEST['r74']; $rm74 = 1*$_REQUEST['rm74'];
-$r75 = 1*$_REQUEST['r75']; $rm75 = 1*$_REQUEST['rm75'];
-$r76 = 1*$_REQUEST['r76']; $rm76 = 1*$_REQUEST['rm76'];
-$r77 = 1*$_REQUEST['r77']; $rm77 = 1*$_REQUEST['rm77'];
-$r78 = 1*$_REQUEST['r78']; $rm78 = 1*$_REQUEST['rm78'];
-$r79 = 1*$_REQUEST['r79']; $rm79 = 1*$_REQUEST['rm79'];
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin204no SET ".
-" r44='$r44', rm44='$rm44', r45='$r45', rm45='$rm45', r46='$r46', rm46='$rm46',
+" r41='$r41', rm41='$rm41', r42='$r42', rm42='$rm42', r43='$r43', rm43='$rm43',
+  r44='$r44', rm44='$rm44', r45='$r45', rm45='$rm45', r46='$r46', rm46='$rm46',
   r47='$r47', rm47='$rm47', r48='$r48', rm48='$rm48', r49='$r49', rm49='$rm49',
   r50='$r50', rm50='$rm50', r51='$r51', rm51='$rm51', r52='$r52', rm52='$rm52',
   r53='$r53', rm53='$rm53', r54='$r54', rm54='$rm54', r55='$r55', rm55='$rm55',
@@ -463,9 +455,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin204no SET ".
   r65='$r65', rm65='$rm65', r66='$r66', rm66='$rm66', r67='$r67', rm67='$rm67',
   r68='$r68', rm68='$rm68', r69='$r69', rm69='$rm69', r70='$r70', rm70='$rm70',
   r70='$r70', rm70='$rm70', r71='$r71', rm71='$rm71', r72='$r72', rm72='$rm72',
-  r73='$r73', rm73='$rm73', r74='$r74', rm74='$rm74', r75='$r75', rm75='$rm75',
-  r76='$r76', rm76='$rm76', r77='$r77', rm77='$rm77', r78='$r78', rm78='$rm78',
-  r79='$r79', rm79='$rm79' ".
+  r73='$r73', rm73='$rm73', r74='$r74', rm74='$rm74' ".
 " WHERE oc = $cislo_oc"; 
                     }
 
@@ -474,7 +464,7 @@ $upravene = mysql_query("$uprtxt");
 
 $nepoc = 1*$_REQUEST['nepoc'];
 $vsetkyprepocty=1;
-if( $nepoc == 1 ) $vsetkyprepocty=0;
+if ( $nepoc == 1 ) $vsetkyprepocty=0;
 
 $copern=20;
 if (!$upravene):
@@ -1262,7 +1252,6 @@ $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin204no SET ".
 
 " WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
-
 }
 //koniec vypocty
 
@@ -1443,22 +1432,16 @@ $r40 = $fir_riadok->r40;
 $rk40 = $fir_riadok->rk40;
 $rn40 = $fir_riadok->rn40;
 $rm40 = $fir_riadok->rm40;
-$r41 = $fir_riadok->r41;
-$rk41 = $fir_riadok->rk41;
-$rn41 = $fir_riadok->rn41;
-$rm41 = $fir_riadok->rm41;
-$r42 = $fir_riadok->r42;
-$rk42 = $fir_riadok->rk42;
-$rn42 = $fir_riadok->rn42;
-$rm42 = $fir_riadok->rm42;
-$r43 = $fir_riadok->r43;
-$rk43 = $fir_riadok->rk43;
-$rn43 = $fir_riadok->rn43;
-$rm43 = $fir_riadok->rm43;
 }
 
 if ( $strana == 3 )
 {
+$r41 = $fir_riadok->r41;
+$rm41 = $fir_riadok->rm41;
+$r42 = $fir_riadok->r42;
+$rm42 = $fir_riadok->rm42;
+$r43 = $fir_riadok->r43;
+$rm43 = $fir_riadok->rm43;
 $r44 = $fir_riadok->r44;
 $rm44 = $fir_riadok->rm44;
 $r45 = $fir_riadok->r45;
@@ -1521,16 +1504,6 @@ $r73 = $fir_riadok->r73;
 $rm73 = $fir_riadok->rm73;
 $r74 = $fir_riadok->r74;
 $rm74 = $fir_riadok->rm74;
-$r75 = $fir_riadok->r75;
-$rm75 = $fir_riadok->rm75;
-$r76 = $fir_riadok->r76;
-$rm76 = $fir_riadok->rm76;
-$r77 = $fir_riadok->r77;
-$rm77 = $fir_riadok->rm77;
-$r78 = $fir_riadok->r78;
-$rm78 = $fir_riadok->rm78;
-$r79 = $fir_riadok->r79;
-$rm79 = $fir_riadok->rm79;
 }
 mysql_free_result($fir_vysledok);
     }
@@ -1639,14 +1612,14 @@ div.input-echo {
    document.formv1.rk15.value = '<?php echo $rk15;?>';
    document.formv1.rn15.value = '<?php echo $rn15;?>';
    document.formv1.rm15.value = '<?php echo $rm15;?>';
-   document.formv1.r16.value = '<?php echo $r16;?>';
-   document.formv1.rk16.value = '<?php echo $rk16;?>';
-   document.formv1.rn16.value = '<?php echo $rn16;?>';
-   document.formv1.rm16.value = '<?php echo $rm16;?>';
-//   document.formv1.r17.value = '<?php echo $r17;?>';
-//   document.formv1.rk17.value = '<?php echo $rk17;?>';
-//   document.formv1.rn17.value = '<?php echo $rn17;?>';
-//   document.formv1.rm17.value = '<?php echo $rm17;?>';
+//   document.formv1.r16.value = '<?php echo $r16;?>';
+//   document.formv1.rk16.value = '<?php echo $rk16;?>';
+//   document.formv1.rn16.value = '<?php echo $rn16;?>';
+//   document.formv1.rm16.value = '<?php echo $rm16;?>';
+   document.formv1.r17.value = '<?php echo $r17;?>';
+   document.formv1.rk17.value = '<?php echo $rk17;?>';
+   document.formv1.rn17.value = '<?php echo $rn17;?>';
+   document.formv1.rm17.value = '<?php echo $rm17;?>';
    document.formv1.r18.value = '<?php echo $r18;?>';
    document.formv1.rk18.value = '<?php echo $rk18;?>';
    document.formv1.rn18.value = '<?php echo $rn18;?>';
@@ -1667,14 +1640,14 @@ div.input-echo {
    document.formv1.rk22.value = '<?php echo $rk22;?>';
    document.formv1.rn22.value = '<?php echo $rn22;?>';
    document.formv1.rm22.value = '<?php echo $rm22;?>';
-   document.formv1.r23.value = '<?php echo $r23;?>';
-   document.formv1.rk23.value = '<?php echo $rk23;?>';
-   document.formv1.rn23.value = '<?php echo $rn23;?>';
-   document.formv1.rm23.value = '<?php echo $rm23;?>';
-//   document.formv1.r24.value = '<?php echo $r24;?>';
-//   document.formv1.rk24.value = '<?php echo $rk24;?>';
-//   document.formv1.rn24.value = '<?php echo $rn24;?>';
-//   document.formv1.rm24.value = '<?php echo $rm24;?>';
+//   document.formv1.r23.value = '<?php echo $r23;?>';
+//   document.formv1.rk23.value = '<?php echo $rk23;?>';
+//   document.formv1.rn23.value = '<?php echo $rn23;?>';
+//   document.formv1.rm23.value = '<?php echo $rm23;?>';
+   document.formv1.r24.value = '<?php echo $r24;?>';
+   document.formv1.rk24.value = '<?php echo $rk24;?>';
+   document.formv1.rn24.value = '<?php echo $rn24;?>';
+   document.formv1.rm24.value = '<?php echo $rm24;?>';
    document.formv1.r25.value = '<?php echo $r25;?>';
    document.formv1.rk25.value = '<?php echo $rk25;?>';
    document.formv1.rn25.value = '<?php echo $rn25;?>';
@@ -1707,10 +1680,10 @@ div.input-echo {
    document.formv1.rk32.value = '<?php echo $rk32;?>';
    document.formv1.rn32.value = '<?php echo $rn32;?>';
    document.formv1.rm32.value = '<?php echo $rm32;?>';
-   document.formv1.r33.value = '<?php echo $r33;?>';
-   document.formv1.rk33.value = '<?php echo $rk33;?>';
-   document.formv1.rn33.value = '<?php echo $rn33;?>';
-   document.formv1.rm33.value = '<?php echo $rm33;?>';
+//   document.formv1.r33.value = '<?php echo $r33;?>';
+//   document.formv1.rk33.value = '<?php echo $rk33;?>';
+//   document.formv1.rn33.value = '<?php echo $rn33;?>';
+//   document.formv1.rm33.value = '<?php echo $rm33;?>';
    document.formv1.r34.value = '<?php echo $r34;?>';
    document.formv1.rk34.value = '<?php echo $rk34;?>';
    document.formv1.rn34.value = '<?php echo $rn34;?>';
@@ -1719,10 +1692,10 @@ div.input-echo {
    document.formv1.rk35.value = '<?php echo $rk35;?>';
    document.formv1.rn35.value = '<?php echo $rn35;?>';
    document.formv1.rm35.value = '<?php echo $rm35;?>';
-//   document.formv1.r36.value = '<?php echo $r36;?>';
-//   document.formv1.rk36.value = '<?php echo $rk36;?>';
-//   document.formv1.rn36.value = '<?php echo $rn36;?>';
-//   document.formv1.rm36.value = '<?php echo $rm36;?>';
+   document.formv1.r36.value = '<?php echo $r36;?>';
+   document.formv1.rk36.value = '<?php echo $rk36;?>';
+   document.formv1.rn36.value = '<?php echo $rn36;?>';
+   document.formv1.rm36.value = '<?php echo $rm36;?>';
    document.formv1.r37.value = '<?php echo $r37;?>';
    document.formv1.rk37.value = '<?php echo $rk37;?>';
    document.formv1.rn37.value = '<?php echo $rn37;?>';
@@ -1735,39 +1708,33 @@ div.input-echo {
    document.formv1.rk39.value = '<?php echo $rk39;?>';
    document.formv1.rn39.value = '<?php echo $rn39;?>';
    document.formv1.rm39.value = '<?php echo $rm39;?>';
-   document.formv1.r40.value = '<?php echo $r40;?>';
-   document.formv1.rk40.value = '<?php echo $rk40;?>';
-   document.formv1.rn40.value = '<?php echo $rn40;?>';
-   document.formv1.rm40.value = '<?php echo $rm40;?>';
-   document.formv1.r41.value = '<?php echo $r41;?>';
-   document.formv1.rk41.value = '<?php echo $rk41;?>';
-   document.formv1.rn41.value = '<?php echo $rn41;?>';
-   document.formv1.rm41.value = '<?php echo $rm41;?>';
-   document.formv1.r42.value = '<?php echo $r42;?>';
-   document.formv1.rk42.value = '<?php echo $rk42;?>';
-   document.formv1.rn42.value = '<?php echo $rn42;?>';
-   document.formv1.rm42.value = '<?php echo $rm42;?>';
-//   document.formv1.r43.value = '<?php echo $r43;?>';
-//   document.formv1.rk43.value = '<?php echo $rk43;?>';
-//   document.formv1.rn43.value = '<?php echo $rn43;?>';
-//   document.formv1.rm43.value = '<?php echo $rm43;?>';
+//   document.formv1.r40.value = '<?php echo $r40;?>';
+//   document.formv1.rk40.value = '<?php echo $rk40;?>';
+//   document.formv1.rn40.value = '<?php echo $rn40;?>';
+//   document.formv1.rm40.value = '<?php echo $rm40;?>';
 <?php                     } ?>
 
 <?php if ( $strana == 3 ) { ?>
-//   document.formv1.r44.value = '<?php echo $r44;?>';
-//   document.formv1.rm44.value = '<?php echo $rm44;?>';
+//   document.formv1.r41.value = '<?php echo $r41;?>';
+//   document.formv1.rm41.value = '<?php echo $rm41;?>';
+   document.formv1.r42.value = '<?php echo $r42;?>';
+   document.formv1.rm42.value = '<?php echo $rm42;?>';
+   document.formv1.r43.value = '<?php echo $r43;?>';
+   document.formv1.rm43.value = '<?php echo $rm43;?>';
+   document.formv1.r44.value = '<?php echo $r44;?>';
+   document.formv1.rm44.value = '<?php echo $rm44;?>';
    document.formv1.r45.value = '<?php echo $r45;?>';
    document.formv1.rm45.value = '<?php echo $rm45;?>';
-   document.formv1.r46.value = '<?php echo $r46;?>';
-   document.formv1.rm46.value = '<?php echo $rm46;?>';
+//   document.formv1.r46.value = '<?php echo $r46;?>';
+//   document.formv1.rm46.value = '<?php echo $rm46;?>';
    document.formv1.r47.value = '<?php echo $r47;?>';
    document.formv1.rm47.value = '<?php echo $rm47;?>';
    document.formv1.r48.value = '<?php echo $r48;?>';
    document.formv1.rm48.value = '<?php echo $rm48;?>';
    document.formv1.r49.value = '<?php echo $r49;?>';
    document.formv1.rm49.value = '<?php echo $rm49;?>';
-//   document.formv1.r50.value = '<?php echo $r50;?>';
-//   document.formv1.rm50.value = '<?php echo $rm50;?>';
+   document.formv1.r50.value = '<?php echo $r50;?>';
+   document.formv1.rm50.value = '<?php echo $rm50;?>';
    document.formv1.r51.value = '<?php echo $r51;?>';
    document.formv1.rm51.value = '<?php echo $rm51;?>';
    document.formv1.r52.value = '<?php echo $r52;?>';
@@ -1802,8 +1769,8 @@ div.input-echo {
    document.formv1.rm66.value = '<?php echo $rm66;?>';
    document.formv1.r67.value = '<?php echo $r67;?>';
    document.formv1.rm67.value = '<?php echo $rm67;?>';
-   document.formv1.r68.value = '<?php echo $r68;?>';
-   document.formv1.rm68.value = '<?php echo $rm68;?>';
+//   document.formv1.r68.value = '<?php echo $r68;?>';
+//   document.formv1.rm68.value = '<?php echo $rm68;?>';
    document.formv1.r69.value = '<?php echo $r69;?>';
    document.formv1.rm69.value = '<?php echo $rm69;?>';
    document.formv1.r70.value = '<?php echo $r70;?>';
@@ -1812,20 +1779,10 @@ div.input-echo {
    document.formv1.rm71.value = '<?php echo $rm71;?>';
    document.formv1.r72.value = '<?php echo $r72;?>';
    document.formv1.rm72.value = '<?php echo $rm72;?>';
-//   document.formv1.r73.value = '<?php echo $r73;?>';
-//   document.formv1.rm73.value = '<?php echo $rm73;?>';
-   document.formv1.r74.value = '<?php echo $r74;?>';
-   document.formv1.rm74.value = '<?php echo $rm74;?>';
-   document.formv1.r75.value = '<?php echo $r75;?>';
-   document.formv1.rm75.value = '<?php echo $rm75;?>';
-   document.formv1.r76.value = '<?php echo $r76;?>';
-   document.formv1.rm76.value = '<?php echo $rm76;?>';
-   document.formv1.r77.value = '<?php echo $r77;?>';
-   document.formv1.rm77.value = '<?php echo $rm77;?>';
-   document.formv1.r78.value = '<?php echo $r78;?>';
-   document.formv1.rm78.value = '<?php echo $rm78;?>';
-//   document.formv1.r79.value = '<?php echo $r79;?>';
-//   document.formv1.rm79.value = '<?php echo $rm79;?>';
+   document.formv1.r73.value = '<?php echo $r73;?>';
+   document.formv1.rm73.value = '<?php echo $rm73;?>';
+//   document.formv1.r74.value = '<?php echo $r74;?>';
+//   document.formv1.rm74.value = '<?php echo $rm74;?>';
 <?php                     } ?>
     }
 <?php
@@ -1879,7 +1836,7 @@ if ( $copern == 20 )
   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
  </tr>
  <tr>
-  <td class="header">FIN 2-04 Vybrané aktíva a pasíva podnikate¾ského subjektu za
+  <td class="header">FIN 2-04 Vybrané aktíva a pasíva NÚJ za
    <span style="color:#39f;"><?php echo "$cislo_oc. štvrrok";?></span>
   </td>
   <td>
@@ -1932,276 +1889,260 @@ $source="vykaz_fin204no_2016.php";
 <?php if ( $strana == 2 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 2.strana 265kB">
-<span class="text-echo" style="top:143px; left:666px; font-size:14px;"><?php echo $skutku; ?></span>
+<span class="text-echo" style="top:184px; left:666px; font-size:14px;"><?php echo $skutku; ?></span>
 
-<!-- 4.1.Vybrane aktiva -->
+<!-- 2.1.Vybrane aktiva -->
 <!-- 1.DnHM -->
-<span class="text-echo" style="top:233px; right:339px; font-size:12px;"><?php echo $r01; ?></span>
-<span class="text-echo" style="top:233px; right:262px; font-size:12px;"><?php echo $rk01; ?></span>
-<span class="text-echo" style="top:233px; right:185px; font-size:12px;"><?php echo $rn01; ?></span>
-<span class="text-echo" style="top:233px; right:50px; font-size:12px;"><?php echo $rm01; ?></span>
-<input type="text" name="r02" id="r02" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:254px; left:541px;"/>
-<input type="text" name="rk02" id="rk02" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:254px; left:618px;"/>
-<input type="text" name="rn02" id="rn02" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:254px; left:695px;"/>
-<input type="text" name="rm02" id="rm02" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:254px; left:773px;"/>
-<input type="text" name="r03" id="r03" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:279px; left:541px;"/>
-<input type="text" name="rk03" id="rk03" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:279px; left:618px;"/>
-<input type="text" name="rn03" id="rn03" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:279px; left:695px;"/>
-<input type="text" name="rm03" id="rm03" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:279px; left:773px;"/>
-<input type="text" name="r04" id="r04" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:304px; left:541px;"/>
-<input type="text" name="rk04" id="rk04" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:304px; left:618px;"/>
-<input type="text" name="rn04" id="rn04" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:304px; left:695px;"/>
-<input type="text" name="rm04" id="rm04" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:304px; left:773px;"/>
-<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:329px; left:541px;"/>
-<input type="text" name="rk05" id="rk05" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:329px; left:618px;"/>
-<input type="text" name="rn05" id="rn05" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:329px; left:695px;"/>
-<input type="text" name="rm05" id="rm05" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:329px; left:773px;"/>
+<span class="text-echo" style="top:274px; right:339px; font-size:12px;"><?php echo $r01; ?></span>
+<span class="text-echo" style="top:274px; right:262px; font-size:12px;"><?php echo $rk01; ?></span>
+<span class="text-echo" style="top:274px; right:185px; font-size:12px;"><?php echo $rn01; ?></span>
+<span class="text-echo" style="top:274px; right:50px; font-size:12px;"><?php echo $rm01; ?></span>
+<input type="text" name="r02" id="r02" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:295px; left:541px;"/>
+<input type="text" name="rk02" id="rk02" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:295px; left:618px;"/>
+<input type="text" name="rn02" id="rn02" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:295px; left:695px;"/>
+<input type="text" name="rm02" id="rm02" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:295px; left:773px;"/>
+<input type="text" name="r03" id="r03" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:320px; left:541px;"/>
+<input type="text" name="rk03" id="rk03" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:320px; left:618px;"/>
+<input type="text" name="rn03" id="rn03" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:320px; left:695px;"/>
+<input type="text" name="rm03" id="rm03" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:320px; left:773px;"/>
+<input type="text" name="r04" id="r04" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:345px; left:541px;"/>
+<input type="text" name="rk04" id="rk04" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:345px; left:618px;"/>
+<input type="text" name="rn04" id="rn04" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:345px; left:695px;"/>
+<input type="text" name="rm04" id="rm04" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:345px; left:773px;"/>
+<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:370px; left:541px;"/>
+<input type="text" name="rk05" id="rk05" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:370px; left:618px;"/>
+<input type="text" name="rn05" id="rn05" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:370px; left:695px;"/>
+<input type="text" name="rm05" id="rm05" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:370px; left:773px;"/>
 <!-- 6.DHM -->
-<span class="text-echo" style="top:358px; right:339px; font-size:12px;"><?php echo $r06; ?></span>
-<span class="text-echo" style="top:358px; right:262px; font-size:12px;"><?php echo $rk06; ?></span>
-<span class="text-echo" style="top:358px; right:185px; font-size:12px;"><?php echo $rn06; ?></span>
-<span class="text-echo" style="top:358px; right:50px; font-size:12px;"><?php echo $rm06; ?></span>
-<input type="text" name="r07" id="r07" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:379px; left:541px;"/>
-<input type="text" name="rk07" id="rk07" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:379px; left:618px;"/>
-<input type="text" name="rn07" id="rn07" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:379px; left:695px;"/>
-<input type="text" name="rm07" id="rm07" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:379px; left:773px;"/>
-<input type="text" name="r08" id="r08" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:403px; left:541px;"/>
-<input type="text" name="rk08" id="rk08" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:403px; left:618px;"/>
-<input type="text" name="rn08" id="rn08" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:403px; left:695px;"/>
-<input type="text" name="rm08" id="rm08" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:403px; left:773px;"/>
-<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:428px; left:541px;"/>
-<input type="text" name="rk09" id="rk09" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:428px; left:618px;"/>
-<input type="text" name="rn09" id="rn09" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:428px; left:695px;"/>
-<input type="text" name="rm09" id="rm09" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:428px; left:773px;"/>
-<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:453px; left:541px;"/>
-<input type="text" name="rk10" id="rk10" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:453px; left:618px;"/>
-<input type="text" name="rn10" id="rn10" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:453px; left:695px;"/>
-<input type="text" name="rm10" id="rm10" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:453px; left:773px;"/>
-<input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:478px; left:541px;"/>
-<input type="text" name="rk11" id="rk11" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:478px; left:618px;"/>
-<input type="text" name="rn11" id="rn11" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:478px; left:695px;"/>
-<input type="text" name="rm11" id="rm11" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:478px; left:773px;"/>
-<input type="text" name="r12" id="r12" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:503px; left:541px;"/>
-<input type="text" name="rk12" id="rk12" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:503px; left:618px;"/>
-<input type="text" name="rn12" id="rn12" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:503px; left:695px;"/>
-<input type="text" name="rm12" id="rm12" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:503px; left:773px;"/>
-<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:528px; left:541px;"/>
-<input type="text" name="rk13" id="rk13" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:528px; left:618px;"/>
-<input type="text" name="rn13" id="rn13" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:528px; left:695px;"/>
-<input type="text" name="rm13" id="rm13" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:528px; left:773px;"/>
-<input type="text" name="r14" id="r14" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:553px; left:541px;"/>
-<input type="text" name="rk14" id="rk14" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:553px; left:618px;"/>
-<input type="text" name="rn14" id="rn14" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:553px; left:695px;"/>
-<input type="text" name="rm14" id="rm14" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:553px; left:773px;"/>
-<input type="text" name="r15" id="r15" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:577px; left:541px;"/>
-<input type="text" name="rk15" id="rk15" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:577px; left:618px;"/>
-<input type="text" name="rn15" id="rn15" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:577px; left:695px;"/>
-<input type="text" name="rm15" id="rm15" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:577px; left:773px;"/>
-<input type="text" name="r16" id="r16" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:602px; left:541px;"/>
-<input type="text" name="rk16" id="rk16" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:602px; left:618px;"/>
-<input type="text" name="rn16" id="rn16" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:602px; left:695px;"/>
-<input type="text" name="rm16" id="rm16" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:602px; left:773px;"/>
-<!-- 17.DFM -->
-<span class="text-echo" style="top:631px; right:339px; font-size:12px;"><?php echo $r17; ?></span>
-<span class="text-echo" style="top:631px; right:262px; font-size:12px;"><?php echo $rk17; ?></span>
-<span class="text-echo" style="top:631px; right:185px; font-size:12px;"><?php echo $rn17; ?></span>
-<span class="text-echo" style="top:631px; right:50px; font-size:12px;"><?php echo $rm17; ?></span>
-<input type="text" name="r18" id="r18" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:652px; left:541px;"/>
-<input type="text" name="rk18" id="rk18" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:652px; left:618px;"/>
-<input type="text" name="rn18" id="rn18" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:652px; left:695px;"/>
-<input type="text" name="rm18" id="rm18" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:652px; left:773px;"/>
-<input type="text" name="r19" id="r19" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:677px; left:541px;"/>
-<input type="text" name="rk19" id="rk19" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:677px; left:618px;"/>
-<input type="text" name="rn19" id="rn19" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:677px; left:695px;"/>
-<input type="text" name="rm19" id="rm19" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:677px; left:773px;"/>
-<input type="text" name="r20" id="r20" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:702px; left:541px;"/>
-<input type="text" name="rk20" id="rk20" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:702px; left:618px;"/>
-<input type="text" name="rn20" id="rn20" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:702px; left:695px;"/>
-<input type="text" name="rm20" id="rm20" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:702px; left:773px;"/>
-<input type="text" name="r21" id="r21" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:727px; left:541px;"/>
-<input type="text" name="rk21" id="rk21" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:727px; left:618px;"/>
-<input type="text" name="rn21" id="rn21" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:727px; left:695px;"/>
-<input type="text" name="rm21" id="rm21" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:727px; left:773px;"/>
-<input type="text" name="r22" id="r22" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:752px; left:541px;"/>
-<input type="text" name="rk22" id="rk22" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:752px; left:618px;"/>
-<input type="text" name="rn22" id="rn22" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:752px; left:695px;"/>
-<input type="text" name="rm22" id="rm22" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:752px; left:773px;"/>
-<!-- 23.ZASOBY -->
-<input type="text" name="r23" id="r23" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:777px; left:541px;"/>
-<input type="text" name="rk23" id="rk23" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:777px; left:618px;"/>
-<input type="text" name="rn23" id="rn23" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:777px; left:695px;"/>
-<input type="text" name="rm23" id="rm23" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:777px; left:773px;"/>
-<!-- 24.POHLADAVKY -->
-<span class="text-echo" style="top:805px; right:339px; font-size:12px;"><?php echo $r24; ?></span>
-<span class="text-echo" style="top:805px; right:262px; font-size:12px;"><?php echo $rk24; ?></span>
-<span class="text-echo" style="top:805px; right:185px; font-size:12px;"><?php echo $rn24; ?></span>
-<span class="text-echo" style="top:805px; right:50px; font-size:12px;"><?php echo $rm24; ?></span>
-<input type="text" name="r25" id="r25" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:826px; left:541px;"/>
-<input type="text" name="rk25" id="rk25" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:826px; left:618px;"/>
-<input type="text" name="rn25" id="rn25" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:826px; left:695px;"/>
-<input type="text" name="rm25" id="rm25" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:826px; left:773px;"/>
-<input type="text" name="r26" id="r26" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:851px; left:541px;"/>
-<input type="text" name="rk26" id="rk26" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:851px; left:618px;"/>
-<input type="text" name="rn26" id="rn26" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:851px; left:695px;"/>
-<input type="text" name="rm26" id="rm26" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:851px; left:773px;"/>
-<input type="text" name="r27" id="r27" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:876px; left:541px;"/>
-<input type="text" name="rk27" id="rk27" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:876px; left:618px;"/>
-<input type="text" name="rn27" id="rn27" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:876px; left:695px;"/>
-<input type="text" name="rm27" id="rm27" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:876px; left:773px;"/>
-<input type="text" name="r28" id="r28" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:901px; left:541px;"/>
-<input type="text" name="rk28" id="rk28" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:901px; left:618px;"/>
-<input type="text" name="rn28" id="rn28" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:901px; left:695px;"/>
-<input type="text" name="rm28" id="rm28" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:901px; left:773px;"/>
-<input type="text" name="r29" id="r29" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:925px; left:541px;"/>
-<input type="text" name="rk29" id="rk29" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:925px; left:618px;"/>
-<input type="text" name="rn29" id="rn29" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:925px; left:695px;"/>
-<input type="text" name="rm29" id="rm29" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:925px; left:773px;"/>
-<input type="text" name="r30" id="r30" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:951px; left:541px;"/>
-<input type="text" name="rk30" id="rk30" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:951px; left:618px;"/>
-<input type="text" name="rn30" id="rn30" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:951px; left:695px;"/>
-<input type="text" name="rm30" id="rm30" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:951px; left:773px;"/>
-<input type="text" name="r31" id="r31" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:976px; left:541px;"/>
-<input type="text" name="rk31" id="rk31" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:976px; left:618px;"/>
-<input type="text" name="rn31" id="rn31" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:976px; left:695px;"/>
-<input type="text" name="rm31" id="rm31" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:976px; left:773px;"/>
-<input type="text" name="r32" id="r32" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1000px; left:541px;"/>
-<input type="text" name="rk32" id="rk32" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1000px; left:618px;"/>
-<input type="text" name="rn32" id="rn32" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1000px; left:695px;"/>
-<input type="text" name="rm32" id="rm32" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1000px; left:773px;"/>
-<input type="text" name="r33" id="r33" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1025px; left:541px;"/>
-<input type="text" name="rk33" id="rk33" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1025px; left:618px;"/>
-<input type="text" name="rn33" id="rn33" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1025px; left:695px;"/>
-<input type="text" name="rm33" id="rm33" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1025px; left:773px;"/>
-<input type="text" name="r34" id="r34" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1052px; left:541px;"/>
-<input type="text" name="rk34" id="rk34" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1052px; left:618px;"/>
-<input type="text" name="rn34" id="rn34" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1052px; left:695px;"/>
-<input type="text" name="rm34" id="rm34" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1052px; left:773px;"/>
-<input type="text" name="r35" id="r35" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1079px; left:541px;"/>
-<input type="text" name="rk35" id="rk35" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1079px; left:618px;"/>
-<input type="text" name="rn35" id="rn35" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1079px; left:695px;"/>
-<input type="text" name="rm35" id="rm35" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1079px; left:773px;"/>
-<!-- 36.FU -->
-<span class="text-echo" style="top:1108px; right:339px; font-size:12px;"><?php echo $r36; ?></span>
-<span class="text-echo" style="top:1108px; right:262px; font-size:12px;"><?php echo $rk36; ?></span>
-<span class="text-echo" style="top:1108px; right:185px; font-size:12px;"><?php echo $rn36; ?></span>
-<span class="text-echo" style="top:1108px; right:50px; font-size:12px;"><?php echo $rm36; ?></span>
-<input type="text" name="r37" id="r37" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1129px; left:541px;"/>
-<input type="text" name="rk37" id="rk37" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1129px; left:618px;"/>
-<input type="text" name="rn37" id="rn37" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1129px; left:695px;"/>
-<input type="text" name="rm37" id="rm37" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1129px; left:773px;"/>
-<input type="text" name="r38" id="r38" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1154px; left:541px;"/>
-<input type="text" name="rk38" id="rk38" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1154px; left:618px;"/>
-<input type="text" name="rn38" id="rn38" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1154px; left:695px;"/>
-<input type="text" name="rm38" id="rm38" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1154px; left:773px;"/>
-<input type="text" name="r39" id="r39" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1179px; left:541px;"/>
-<input type="text" name="rk39" id="rk39" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1179px; left:618px;"/>
-<input type="text" name="rn39" id="rn39" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1179px; left:695px;"/>
-<input type="text" name="rm39" id="rm39" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1179px; left:773px;"/>
-<input type="text" name="r40" id="r40" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1203px; left:541px;"/>
-<input type="text" name="rk40" id="rk40" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1203px; left:618px;"/>
-<input type="text" name="rn40" id="rn40" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1203px; left:695px;"/>
-<input type="text" name="rm40" id="rm40" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1203px; left:773px;"/>
-<input type="text" name="r41" id="r41" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1228px; left:541px;"/>
-<input type="text" name="rk41" id="rk41" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1228px; left:618px;"/>
-<input type="text" name="rn41" id="rn41" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1228px; left:695px;"/>
-<input type="text" name="rm41" id="rm41" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1228px; left:773px;"/>
-<!-- 42.CAS.ROZLISENIE -->
-<input type="text" name="r42" id="r42" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1253px; left:541px;"/>
-<input type="text" name="rk42" id="rk42" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1253px; left:618px;"/>
-<input type="text" name="rn42" id="rn42" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1253px; left:695px;"/>
-<input type="text" name="rm42" id="rm42" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1253px; left:773px;"/>
-<!-- 43.AKTIVA SPOLU -->
-<span class="text-echo" style="top:1282px; right:339px; font-size:12px;"><?php echo $r43; ?></span>
-<span class="text-echo" style="top:1282px; right:262px; font-size:12px;"><?php echo $rk43; ?></span>
-<span class="text-echo" style="top:1282px; right:185px; font-size:12px;"><?php echo $rn43; ?></span>
-<span class="text-echo" style="top:1282px; right:50px; font-size:12px;"><?php echo $rm43; ?></span>
+<span class="text-echo" style="top:398px; right:339px; font-size:12px;"><?php echo $r06; ?></span>
+<span class="text-echo" style="top:398px; right:262px; font-size:12px;"><?php echo $rk06; ?></span>
+<span class="text-echo" style="top:398px; right:185px; font-size:12px;"><?php echo $rn06; ?></span>
+<span class="text-echo" style="top:398px; right:50px; font-size:12px;"><?php echo $rm06; ?></span>
+<input type="text" name="r07" id="r07" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:419px; left:541px;"/>
+<input type="text" name="rk07" id="rk07" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:419px; left:618px;"/>
+<input type="text" name="rn07" id="rn07" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:419px; left:695px;"/>
+<input type="text" name="rm07" id="rm07" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:419px; left:773px;"/>
+<input type="text" name="r08" id="r08" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:444px; left:541px;"/>
+<input type="text" name="rk08" id="rk08" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:444px; left:618px;"/>
+<input type="text" name="rn08" id="rn08" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:444px; left:695px;"/>
+<input type="text" name="rm08" id="rm08" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:444px; left:773px;"/>
+<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:469px; left:541px;"/>
+<input type="text" name="rk09" id="rk09" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:469px; left:618px;"/>
+<input type="text" name="rn09" id="rn09" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:469px; left:695px;"/>
+<input type="text" name="rm09" id="rm09" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:469px; left:773px;"/>
+<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:494px; left:541px;"/>
+<input type="text" name="rk10" id="rk10" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:494px; left:618px;"/>
+<input type="text" name="rn10" id="rn10" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:494px; left:695px;"/>
+<input type="text" name="rm10" id="rm10" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:494px; left:773px;"/>
+<input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:519px; left:541px;"/>
+<input type="text" name="rk11" id="rk11" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:519px; left:618px;"/>
+<input type="text" name="rn11" id="rn11" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:519px; left:695px;"/>
+<input type="text" name="rm11" id="rm11" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:519px; left:773px;"/>
+<input type="text" name="r12" id="r12" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:544px; left:541px;"/>
+<input type="text" name="rk12" id="rk12" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:544px; left:618px;"/>
+<input type="text" name="rn12" id="rn12" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:544px; left:695px;"/>
+<input type="text" name="rm12" id="rm12" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:544px; left:773px;"/>
+<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:568px; left:541px;"/>
+<input type="text" name="rk13" id="rk13" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:568px; left:618px;"/>
+<input type="text" name="rn13" id="rn13" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:568px; left:695px;"/>
+<input type="text" name="rm13" id="rm13" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:568px; left:773px;"/>
+<input type="text" name="r14" id="r14" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:593px; left:541px;"/>
+<input type="text" name="rk14" id="rk14" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:593px; left:618px;"/>
+<input type="text" name="rn14" id="rn14" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:593px; left:695px;"/>
+<input type="text" name="rm14" id="rm14" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:593px; left:773px;"/>
+<input type="text" name="r15" id="r15" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:618px; left:541px;"/>
+<input type="text" name="rk15" id="rk15" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:618px; left:618px;"/>
+<input type="text" name="rn15" id="rn15" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:618px; left:695px;"/>
+<input type="text" name="rm15" id="rm15" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:618px; left:773px;"/>
+<!-- 16.DFM -->
+<span class="text-echo" style="top:647px; right:339px; font-size:12px;"><?php echo $r16; ?></span>
+<span class="text-echo" style="top:647px; right:262px; font-size:12px;"><?php echo $rk16; ?></span>
+<span class="text-echo" style="top:647px; right:185px; font-size:12px;"><?php echo $rn16; ?></span>
+<span class="text-echo" style="top:647px; right:50px; font-size:12px;"><?php echo $rm16; ?></span>
+<input type="text" name="r17" id="r17" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:668px; left:541px;"/>
+<input type="text" name="rk17" id="rk17" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:668px; left:618px;"/>
+<input type="text" name="rn17" id="rn17" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:668px; left:695px;"/>
+<input type="text" name="rm17" id="rm17" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:668px; left:773px;"/>
+<input type="text" name="r18" id="r18" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:693px; left:541px;"/>
+<input type="text" name="rk18" id="rk18" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:693px; left:618px;"/>
+<input type="text" name="rn18" id="rn18" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:693px; left:695px;"/>
+<input type="text" name="rm18" id="rm18" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:693px; left:773px;"/>
+<input type="text" name="r19" id="r19" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:718px; left:541px;"/>
+<input type="text" name="rk19" id="rk19" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:718px; left:618px;"/>
+<input type="text" name="rn19" id="rn19" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:718px; left:695px;"/>
+<input type="text" name="rm19" id="rm19" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:718px; left:773px;"/>
+<input type="text" name="r20" id="r20" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:743px; left:541px;"/>
+<input type="text" name="rk20" id="rk20" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:743px; left:618px;"/>
+<input type="text" name="rn20" id="rn20" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:743px; left:695px;"/>
+<input type="text" name="rm20" id="rm20" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:743px; left:773px;"/>
+<input type="text" name="r21" id="r21" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:770px; left:541px;"/>
+<input type="text" name="rk21" id="rk21" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:770px; left:618px;"/>
+<input type="text" name="rn21" id="rn21" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:770px; left:695px;"/>
+<input type="text" name="rm21" id="rm21" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:770px; left:773px;"/>
+<!-- 22.ZASOBY -->
+<input type="text" name="r22" id="r22" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:797px; left:541px;"/>
+<input type="text" name="rk22" id="rk22" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:797px; left:618px;"/>
+<input type="text" name="rn22" id="rn22" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:797px; left:695px;"/>
+<input type="text" name="rm22" id="rm22" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:797px; left:773px;"/>
+<!-- 23.POHLADAVKY -->
+<span class="text-echo" style="top:826px; right:339px; font-size:12px;"><?php echo $r23; ?></span>
+<span class="text-echo" style="top:826px; right:262px; font-size:12px;"><?php echo $rk23; ?></span>
+<span class="text-echo" style="top:826px; right:185px; font-size:12px;"><?php echo $rn23; ?></span>
+<span class="text-echo" style="top:826px; right:50px; font-size:12px;"><?php echo $rm23; ?></span>
+<input type="text" name="r24" id="r24" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:846px; left:541px;"/>
+<input type="text" name="rk24" id="rk24" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:846px; left:618px;"/>
+<input type="text" name="rn24" id="rn24" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:846px; left:695px;"/>
+<input type="text" name="rm24" id="rm24" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:846px; left:773px;"/>
+<input type="text" name="r25" id="r25" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:871px; left:541px;"/>
+<input type="text" name="rk25" id="rk25" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:871px; left:618px;"/>
+<input type="text" name="rn25" id="rn25" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:871px; left:695px;"/>
+<input type="text" name="rm25" id="rm25" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:871px; left:773px;"/>
+<input type="text" name="r26" id="r26" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:896px; left:541px;"/>
+<input type="text" name="rk26" id="rk26" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:896px; left:618px;"/>
+<input type="text" name="rn26" id="rn26" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:896px; left:695px;"/>
+<input type="text" name="rm26" id="rm26" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:896px; left:773px;"/>
+<input type="text" name="r27" id="r27" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:923px; left:541px;"/>
+<input type="text" name="rk27" id="rk27" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:923px; left:618px;"/>
+<input type="text" name="rn27" id="rn27" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:923px; left:695px;"/>
+<input type="text" name="rm27" id="rm27" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:923px; left:773px;"/>
+<input type="text" name="r28" id="r28" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:950px; left:541px;"/>
+<input type="text" name="rk28" id="rk28" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:950px; left:618px;"/>
+<input type="text" name="rn28" id="rn28" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:950px; left:695px;"/>
+<input type="text" name="rm28" id="rm28" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:950px; left:773px;"/>
+<input type="text" name="r29" id="r29" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:975px; left:541px;"/>
+<input type="text" name="rk29" id="rk29" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:975px; left:618px;"/>
+<input type="text" name="rn29" id="rn29" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:975px; left:695px;"/>
+<input type="text" name="rm29" id="rm29" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:975px; left:773px;"/>
+<input type="text" name="r30" id="r30" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1002px; left:541px;"/>
+<input type="text" name="rk30" id="rk30" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1002px; left:618px;"/>
+<input type="text" name="rn30" id="rn30" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1002px; left:695px;"/>
+<input type="text" name="rm30" id="rm30" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1002px; left:773px;"/>
+<input type="text" name="r31" id="r31" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1029px; left:541px;"/>
+<input type="text" name="rk31" id="rk31" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1029px; left:618px;"/>
+<input type="text" name="rn31" id="rn31" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1029px; left:695px;"/>
+<input type="text" name="rm31" id="rm31" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1029px; left:773px;"/>
+<input type="text" name="r32" id="r32" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1054px; left:541px;"/>
+<input type="text" name="rk32" id="rk32" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1054px; left:618px;"/>
+<input type="text" name="rn32" id="rn32" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1054px; left:695px;"/>
+<input type="text" name="rm32" id="rm32" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1054px; left:773px;"/>
+<!-- 33.FU -->
+<span class="text-echo" style="top:1083px; right:339px; font-size:12px;"><?php echo $r33; ?></span>
+<span class="text-echo" style="top:1083px; right:262px; font-size:12px;"><?php echo $rk33; ?></span>
+<span class="text-echo" style="top:1083px; right:185px; font-size:12px;"><?php echo $rn33; ?></span>
+<span class="text-echo" style="top:1083px; right:50px; font-size:12px;"><?php echo $rm33; ?></span>
+<input type="text" name="r34" id="r34" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1103px; left:541px;"/>
+<input type="text" name="rk34" id="rk34" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1103px; left:618px;"/>
+<input type="text" name="rn34" id="rn34" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1103px; left:695px;"/>
+<input type="text" name="rm34" id="rm34" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1103px; left:773px;"/>
+<input type="text" name="r35" id="r35" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1128px; left:541px;"/>
+<input type="text" name="rk35" id="rk35" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1128px; left:618px;"/>
+<input type="text" name="rn35" id="rn35" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1128px; left:695px;"/>
+<input type="text" name="rm35" id="rm35" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1128px; left:773px;"/>
+<input type="text" name="r36" id="r36" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1153px; left:541px;"/>
+<input type="text" name="rk36" id="rk36" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1153px; left:618px;"/>
+<input type="text" name="rn36" id="rn36" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1153px; left:695px;"/>
+<input type="text" name="rm36" id="rm36" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1153px; left:773px;"/>
+<input type="text" name="r37" id="r37" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1178px; left:541px;"/>
+<input type="text" name="rk37" id="rk37" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1178px; left:618px;"/>
+<input type="text" name="rn37" id="rn37" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1178px; left:695px;"/>
+<input type="text" name="rm37" id="rm37" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1178px; left:773px;"/>
+<input type="text" name="r38" id="r38" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1203px; left:541px;"/>
+<input type="text" name="rk38" id="rk38" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1203px; left:618px;"/>
+<input type="text" name="rn38" id="rn38" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1203px; left:695px;"/>
+<input type="text" name="rm38" id="rm38" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1203px; left:773px;"/>
+<!-- 39.CAS.ROZLISENIE -->
+<input type="text" name="r39" id="r39" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1228px; left:541px;"/>
+<input type="text" name="rk39" id="rk39" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1228px; left:618px;"/>
+<input type="text" name="rn39" id="rn39" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1228px; left:695px;"/>
+<input type="text" name="rm39" id="rm39" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1228px; left:773px;"/>
+<!-- 40.AKTIVA SPOLU -->
+<span class="text-echo" style="top:1256px; right:339px; font-size:12px;"><?php echo $r40; ?></span>
+<span class="text-echo" style="top:1256px; right:262px; font-size:12px;"><?php echo $rk40; ?></span>
+<span class="text-echo" style="top:1256px; right:185px; font-size:12px;"><?php echo $rn40; ?></span>
+<span class="text-echo" style="top:1256px; right:50px; font-size:12px;"><?php echo $rm40; ?></span>
 <?php                     } ?>
 
 
 <?php if ( $strana == 3 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 3.strana 265kB">
-<span class="text-echo" style="top:95px; left:672px; font-size:14px;"><?php echo $skutku; ?></span>
+<span class="text-echo" style="top:94px; left:672px; font-size:14px;"><?php echo $skutku; ?></span>
 
-<!-- 4.2.Vybrane pasiva -->
-<!-- 44.VI -->
-<span class="text-echo" style="top:168px; right:186px; font-size:14px;"><?php echo $r44; ?></span>
-<span class="text-echo" style="top:168px; right:50px; font-size:14px;"><?php echo $rm44; ?></span>
-<input type="text" name="r45" id="r45" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:191px; left:600px;"/>
-<input type="text" name="rm45" id="rm45" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:191px; left:785px;"/>
-<input type="text" name="r46" id="r46" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:218px; left:600px;"/>
-<input type="text" name="rm46" id="rm46" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:218px; left:785px;"/>
-<input type="text" name="r47" id="r47" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:245px; left:600px;"/>
-<input type="text" name="rm47" id="rm47" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:245px; left:785px;"/>
-<input type="text" name="r48" id="r48" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:270px; left:600px;"/>
-<input type="text" name="rm48" id="rm48" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:270px; left:785px;"/>
-<!-- 49.REZERVY -->
-<input type="text" name="r49" id="r49" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:294px; left:600px;"/>
-<input type="text" name="rm49" id="rm49" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:294px; left:785px;"/>
-<!-- 50.ZAVAZKY -->
-<span class="text-echo" style="top:321px; right:186px; font-size:14px;"><?php echo $r50; ?></span>
-<span class="text-echo" style="top:321px; right:50px; font-size:14px;"><?php echo $rm50; ?></span>
-<input type="text" name="r51" id="r51" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:344px; left:600px;"/>
-<input type="text" name="rm51" id="rm51" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:344px; left:785px;"/>
-<input type="text" name="r52" id="r52" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:369px; left:600px;"/>
-<input type="text" name="rm52" id="rm52" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:369px; left:785px;"/>
-<input type="text" name="r53" id="r53" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:394px; left:600px;"/>
-<input type="text" name="rm53" id="rm53" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:394px; left:785px;"/>
-<input type="text" name="r54" id="r54" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:418px; left:600px;"/>
-<input type="text" name="rm54" id="rm54" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:418px; left:785px;"/>
-<input type="text" name="r55" id="r55" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:444px; left:600px;"/>
-<input type="text" name="rm55" id="rm55" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:444px; left:785px;"/>
-<input type="text" name="r56" id="r56" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:468px; left:600px;"/>
-<input type="text" name="rm56" id="rm56" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:468px; left:785px;"/>
-<input type="text" name="r57" id="r57" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:493px; left:600px;"/>
-<input type="text" name="rm57" id="rm57" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:493px; left:785px;"/>
-<input type="text" name="r58" id="r58" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:518px; left:600px;"/>
-<input type="text" name="rm58" id="rm58" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:518px; left:785px;"/>
-<input type="text" name="r59" id="r59" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:543px; left:600px;"/>
-<input type="text" name="rm59" id="rm59" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:543px; left:785px;"/>
-<input type="text" name="r60" id="r60" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:568px; left:600px;"/>
-<input type="text" name="rm60" id="rm60" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:568px; left:785px;"/>
-<input type="text" name="r61" id="r61" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:593px; left:600px;"/>
-<input type="text" name="rm61" id="rm61" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:593px; left:785px;"/>
-<input type="text" name="r62" id="r62" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:618px; left:600px;"/>
-<input type="text" name="rm62" id="rm62" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:618px; left:785px;"/>
-<input type="text" name="r63" id="r63" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:642px; left:600px;"/>
-<input type="text" name="rm63" id="rm63" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:642px; left:785px;"/>
-<input type="text" name="r64" id="r64" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:667px; left:600px;"/>
-<input type="text" name="rm64" id="rm64" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:667px; left:785px;"/>
-<input type="text" name="r65" id="r65" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:694px; left:600px;"/>
-<input type="text" name="rm65" id="rm65" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:694px; left:785px;"/>
-<input type="text" name="r66" id="r66" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:721px; left:600px;"/>
-<input type="text" name="rm66" id="rm66" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:721px; left:785px;"/>
-<input type="text" name="r67" id="r67" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:746px; left:600px;"/>
-<input type="text" name="rm67" id="rm67" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:746px; left:785px;"/>
-<input type="text" name="r68" id="r68" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:771px; left:600px;"/>
-<input type="text" name="rm68" id="rm68" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:771px; left:785px;"/>
-<input type="text" name="r69" id="r69" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:798px; left:600px;"/>
-<input type="text" name="rm69" id="rm69" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:798px; left:785px;"/>
-<input type="text" name="r70" id="r70" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:827px; left:600px;"/>
-<input type="text" name="rm70" id="rm70" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:827px; left:785px;"/>
-<input type="text" name="r71" id="r71" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:854px; left:600px;"/>
-<input type="text" name="rm71" id="rm71" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:854px; left:785px;"/>
-<input type="text" name="r72" id="r72" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:879px; left:600px;"/>
-<input type="text" name="rm72" id="rm72" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:879px; left:785px;"/>
-<!-- 73.BANK.UVERY -->
-<span class="text-echo" style="top:906px; right:186px; font-size:14px;"><?php echo $r73; ?></span>
-<span class="text-echo" style="top:906px; right:50px; font-size:14px;"><?php echo $rm73; ?></span>
-<input type="text" name="r74" id="r74" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:929px; left:600px;"/>
-<input type="text" name="rm74" id="rm74" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:929px; left:785px;"/>
-<input type="text" name="r75" id="r75" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:956px; left:600px;"/>
-<input type="text" name="rm75" id="rm75" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:956px; left:785px;"/>
-<input type="text" name="r76" id="r76" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:983px; left:600px;"/>
-<input type="text" name="rm76" id="rm76" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:983px; left:785px;"/>
-<input type="text" name="r77" id="r77" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1007px; left:600px;"/>
-<input type="text" name="rm77" id="rm77" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1007px; left:785px;"/>
-<!-- 78.CAS.ROZLISENIE -->
-<input type="text" name="r78" id="r78" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1032px; left:600px;"/>
-<input type="text" name="rm78" id="rm78" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1032px; left:785px;"/>
-<!-- 79.PASIVA SPOLU -->
-<span class="text-echo" style="top:1059px; right:186px; font-size:14px;"><?php echo $r79; ?></span>
-<span class="text-echo" style="top:1059px; right:50px; font-size:14px;"><?php echo $rm79; ?></span>
+<!-- 2.2.Vybrane pasiva -->
+<!-- 41.VLASTNE ZDROJE -->
+<span class="text-echo" style="top:168px; right:186px; font-size:14px;"><?php echo $r41; ?></span>
+<span class="text-echo" style="top:168px; right:50px; font-size:14px;"><?php echo $rm41; ?></span>
+<input type="text" name="r42" id="r42" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:191px; left:600px;"/>
+<input type="text" name="rm42" id="rm42" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:191px; left:785px;"/>
+<input type="text" name="r43" id="r43" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:215px; left:600px;"/>
+<input type="text" name="rm43" id="rm43" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:215px; left:785px;"/>
+<input type="text" name="r44" id="r44" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:240px; left:600px;"/>
+<input type="text" name="rm44" id="rm44" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:240px; left:785px;"/>
+<!-- 45.REZERVY -->
+<input type="text" name="r45" id="r45" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:265px; left:600px;"/>
+<input type="text" name="rm45" id="rm45" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:265px; left:785px;"/>
+<!-- 46.ZAVAZKY -->
+<span class="text-echo" style="top:292px; right:186px; font-size:14px;"><?php echo $r46; ?></span>
+<span class="text-echo" style="top:292px; right:50px; font-size:14px;"><?php echo $rm46; ?></span>
+<input type="text" name="r47" id="r47" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:315px; left:600px;"/>
+<input type="text" name="rm47" id="rm47" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:315px; left:785px;"/>
+<input type="text" name="r48" id="r48" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:340px; left:600px;"/>
+<input type="text" name="rm48" id="rm48" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:340px; left:785px;"/>
+<input type="text" name="r49" id="r49" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:365px; left:600px;"/>
+<input type="text" name="rm49" id="rm49" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:365px; left:785px;"/>
+<input type="text" name="r50" id="r50" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:389px; left:600px;"/>
+<input type="text" name="rm50" id="rm50" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:389px; left:785px;"/>
+<input type="text" name="r51" id="r51" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:415px; left:600px;"/>
+<input type="text" name="rm51" id="rm51" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:415px; left:785px;"/>
+<input type="text" name="r52" id="r52" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:439px; left:600px;"/>
+<input type="text" name="rm52" id="rm52" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:439px; left:785px;"/>
+<input type="text" name="r53" id="r53" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:464px; left:600px;"/>
+<input type="text" name="rm53" id="rm53" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:464px; left:785px;"/>
+<input type="text" name="r54" id="r54" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:489px; left:600px;"/>
+<input type="text" name="rm54" id="rm54" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:489px; left:785px;"/>
+<input type="text" name="r55" id="r55" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:514px; left:600px;"/>
+<input type="text" name="rm55" id="rm55" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:514px; left:785px;"/>
+<input type="text" name="r56" id="r56" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:538px; left:600px;"/>
+<input type="text" name="rm56" id="rm56" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:538px; left:785px;"/>
+<input type="text" name="r57" id="r57" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:564px; left:600px;"/>
+<input type="text" name="rm57" id="rm57" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:564px; left:785px;"/>
+<input type="text" name="r58" id="r58" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:588px; left:600px;"/>
+<input type="text" name="rm58" id="rm58" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:588px; left:785px;"/>
+<input type="text" name="r59" id="r59" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:613px; left:600px;"/>
+<input type="text" name="rm59" id="rm59" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:613px; left:785px;"/>
+<input type="text" name="r60" id="r60" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:638px; left:600px;"/>
+<input type="text" name="rm60" id="rm60" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:638px; left:785px;"/>
+<input type="text" name="r61" id="r61" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:665px; left:600px;"/>
+<input type="text" name="rm61" id="rm61" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:665px; left:785px;"/>
+<input type="text" name="r62" id="r62" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:694px; left:600px;"/>
+<input type="text" name="rm62" id="rm62" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:694px; left:785px;"/>
+<input type="text" name="r63" id="r63" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:721px; left:600px;"/>
+<input type="text" name="rm63" id="rm63" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:721px; left:785px;"/>
+<input type="text" name="r64" id="r64" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:746px; left:600px;"/>
+<input type="text" name="rm64" id="rm64" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:746px; left:785px;"/>
+<input type="text" name="r65" id="r65" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:771px; left:600px;"/>
+<input type="text" name="rm65" id="rm65" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:771px; left:785px;"/>
+<input type="text" name="r66" id="r66" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:796px; left:600px;"/>
+<input type="text" name="rm66" id="rm66" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:796px; left:785px;"/>
+<input type="text" name="r67" id="r67" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:821px; left:600px;"/>
+<input type="text" name="rm67" id="rm67" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:821px; left:785px;"/>
+<!-- 68.BANK.UVERY -->
+<span class="text-echo" style="top:848px; right:186px; font-size:14px;"><?php echo $r68; ?></span>
+<span class="text-echo" style="top:848px; right:50px; font-size:14px;"><?php echo $rm68; ?></span>
+<input type="text" name="r69" id="r69" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:870px; left:600px;"/>
+<input type="text" name="rm69" id="rm69" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:870px; left:785px;"/>
+<input type="text" name="r70" id="r70" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:895px; left:600px;"/>
+<input type="text" name="rm70" id="rm70" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:895px; left:785px;"/>
+<input type="text" name="r71" id="r71" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:920px; left:600px;"/>
+<input type="text" name="rm71" id="rm71" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:920px; left:785px;"/>
+<input type="text" name="r72" id="r72" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:945px; left:600px;"/>
+<input type="text" name="rm72" id="rm72" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:945px; left:785px;"/>
+<!-- 73.CAS.ROZLISENIE -->
+<input type="text" name="r73" id="r73" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:970px; left:600px;"/>
+<input type="text" name="rm73" id="rm73" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:970px; left:785px;"/>
+<!-- 74.PASIVA SPOLU -->
+<span class="text-echo" style="top:997px; right:186px; font-size:14px;"><?php echo $r74; ?></span>
+<span class="text-echo" style="top:997px; right:50px; font-size:14px;"><?php echo $rm74; ?></span>
 <?php                     } ?>
 
 <div class="navbar">
@@ -2733,7 +2674,7 @@ $pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 $pdf->SetY(10);
 
 //zostatok k
-$pdf->Cell(195,17," ","$rmc1",1,"L");
+$pdf->Cell(195,26.5," ","$rmc1",1,"L");
 $pdf->Cell(136,3," ","$rmc1",0,"R");$pdf->Cell(10,4,"$skutku","$rmc",1,"C");
 
 //VYBRANE AKTIVA 
@@ -2777,9 +2718,7 @@ $r37=$hlavicka->r37; if ( $hlavicka->r37 == 0 ) $r37="";
 $r38=$hlavicka->r38; if ( $hlavicka->r38 == 0 ) $r38="";
 $r39=$hlavicka->r39; if ( $hlavicka->r39 == 0 ) $r39="";
 $r40=$hlavicka->r40; if ( $hlavicka->r40 == 0 ) $r40="";
-$r41=$hlavicka->r41; if ( $hlavicka->r41 == 0 ) $r41="";
-$r42=$hlavicka->r42; if ( $hlavicka->r42 == 0 ) $r42="";
-$r43=$hlavicka->r43; if ( $hlavicka->r43 == 0 ) $r43="";
+
 
 $rk01=$hlavicka->rk01; if ( $hlavicka->rk01 == 0 ) $rk01="";
 $rk02=$hlavicka->rk02; if ( $hlavicka->rk02 == 0 ) $rk02="";
@@ -2821,9 +2760,6 @@ $rk37=$hlavicka->rk37; if ( $hlavicka->rk37 == 0 ) $rk37="";
 $rk38=$hlavicka->rk38; if ( $hlavicka->rk38 == 0 ) $rk38="";
 $rk39=$hlavicka->rk39; if ( $hlavicka->rk39 == 0 ) $rk39="";
 $rk40=$hlavicka->rk40; if ( $hlavicka->rk40 == 0 ) $rk40="";
-$rk41=$hlavicka->rk41; if ( $hlavicka->rk41 == 0 ) $rk41="";
-$rk42=$hlavicka->rk42; if ( $hlavicka->rk42 == 0 ) $rk42="";
-$rk43=$hlavicka->rk43; if ( $hlavicka->rk43 == 0 ) $rk43="";
 
 $rn01=$hlavicka->rn01; if ( $hlavicka->rn01 == 0 ) $rn01="";
 $rn02=$hlavicka->rn02; if ( $hlavicka->rn02 == 0 ) $rn02="";
@@ -2865,9 +2801,6 @@ $rn37=$hlavicka->rn37; if ( $hlavicka->rn37 == 0 ) $rn37="";
 $rn38=$hlavicka->rn38; if ( $hlavicka->rn38 == 0 ) $rn38="";
 $rn39=$hlavicka->rn39; if ( $hlavicka->rn39 == 0 ) $rn39="";
 $rn40=$hlavicka->rn40; if ( $hlavicka->rn40 == 0 ) $rn40="";
-$rn41=$hlavicka->rn41; if ( $hlavicka->rn41 == 0 ) $rn41="";
-$rn42=$hlavicka->rn42; if ( $hlavicka->rn42 == 0 ) $rn42="";
-$rn43=$hlavicka->rn43; if ( $hlavicka->rn43 == 0 ) $rn43="";
 
 $rm01=$hlavicka->rm01; if ( $hlavicka->rm01 == 0 ) $rm01="";
 $rm02=$hlavicka->rm02; if ( $hlavicka->rm02 == 0 ) $rm02="";
@@ -2909,9 +2842,7 @@ $rm37=$hlavicka->rm37; if ( $hlavicka->rm37 == 0 ) $rm37="";
 $rm38=$hlavicka->rm38; if ( $hlavicka->rm38 == 0 ) $rm38="";
 $rm39=$hlavicka->rm39; if ( $hlavicka->rm39 == 0 ) $rm39="";
 $rm40=$hlavicka->rm40; if ( $hlavicka->rm40 == 0 ) $rm40="";
-$rm41=$hlavicka->rm41; if ( $hlavicka->rm41 == 0 ) $rm41="";
-$rm42=$hlavicka->rm42; if ( $hlavicka->rm42 == 0 ) $rm42="";
-$rm43=$hlavicka->rm43; if ( $hlavicka->rm43 == 0 ) $rm43="";
+
 $pdf->Cell(195,15," ","$rmc1",1,"L");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
 $pdf->Cell(17,6,"$r01","$rmc",0,"R");$pdf->Cell(17,6,"$rk01","$rmc",0,"R");
@@ -2941,8 +2872,8 @@ $pdf->Cell(109,4," ","$rmc1",0,"C");
 $pdf->Cell(17,6,"$r09","$rmc",0,"R");$pdf->Cell(17,6,"$rk09","$rmc",0,"R");
 $pdf->Cell(17,6,"$rn09","$rmc",0,"R");$pdf->Cell(30,6,"$rm09","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
-$pdf->Cell(17,6,"$r10","$rmc",0,"R");$pdf->Cell(17,6,"$rk10","$rmc",0,"R");
-$pdf->Cell(17,6,"$rn10","$rmc",0,"R");$pdf->Cell(30,6,"$rm10","$rmc",1,"R");
+$pdf->Cell(17,5,"$r10","$rmc",0,"R");$pdf->Cell(17,5,"$rk10","$rmc",0,"R");
+$pdf->Cell(17,5,"$rn10","$rmc",0,"R");$pdf->Cell(30,5,"$rm10","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
 $pdf->Cell(17,6,"$r11","$rmc",0,"R");$pdf->Cell(17,6,"$rk11","$rmc",0,"R");
 $pdf->Cell(17,6,"$rn11","$rmc",0,"R");$pdf->Cell(30,6,"$rm11","$rmc",1,"R");
@@ -2953,8 +2884,8 @@ $pdf->Cell(109,4," ","$rmc1",0,"C");
 $pdf->Cell(17,6,"$r13","$rmc",0,"R");$pdf->Cell(17,6,"$rk13","$rmc",0,"R");
 $pdf->Cell(17,6,"$rn13","$rmc",0,"R");$pdf->Cell(30,6,"$rm13","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
-$pdf->Cell(17,5,"$r14","$rmc",0,"R");$pdf->Cell(17,5,"$rk14","$rmc",0,"R");
-$pdf->Cell(17,5,"$rn14","$rmc",0,"R");$pdf->Cell(30,5,"$rm14","$rmc",1,"R");
+$pdf->Cell(17,6,"$r14","$rmc",0,"R");$pdf->Cell(17,6,"$rk14","$rmc",0,"R");
+$pdf->Cell(17,6,"$rn14","$rmc",0,"R");$pdf->Cell(30,6,"$rm14","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
 $pdf->Cell(17,6,"$r15","$rmc",0,"R");$pdf->Cell(17,6,"$rk15","$rmc",0,"R");
 $pdf->Cell(17,6,"$rn15","$rmc",0,"R");$pdf->Cell(30,6,"$rm15","$rmc",1,"R");
@@ -2980,8 +2911,8 @@ $pdf->Cell(109,4," ","$rmc1",0,"C");
 $pdf->Cell(17,6,"$r22","$rmc",0,"R");$pdf->Cell(17,6,"$rk22","$rmc",0,"R");
 $pdf->Cell(17,6,"$rn22","$rmc",0,"R");$pdf->Cell(30,6,"$rm22","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
-$pdf->Cell(17,5,"$r23","$rmc",0,"R");$pdf->Cell(17,5,"$rk23","$rmc",0,"R");
-$pdf->Cell(17,5,"$rn23","$rmc",0,"R");$pdf->Cell(30,5,"$rm23","$rmc",1,"R");
+$pdf->Cell(17,6,"$r23","$rmc",0,"R");$pdf->Cell(17,6,"$rk23","$rmc",0,"R");
+$pdf->Cell(17,6,"$rn23","$rmc",0,"R");$pdf->Cell(30,6,"$rm23","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
 $pdf->Cell(17,6,"$r24","$rmc",0,"R");$pdf->Cell(17,6,"$rk24","$rmc",0,"R");
 $pdf->Cell(17,6,"$rn24","$rmc",0,"R");$pdf->Cell(30,6,"$rm24","$rmc",1,"R");
@@ -2992,17 +2923,17 @@ $pdf->Cell(109,4," ","$rmc1",0,"C");
 $pdf->Cell(17,5,"$r26","$rmc",0,"R");$pdf->Cell(17,5,"$rk26","$rmc",0,"R");
 $pdf->Cell(17,5,"$rn26","$rmc",0,"R");$pdf->Cell(30,5,"$rm26","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
-$pdf->Cell(17,6,"$r27","$rmc",0,"R");$pdf->Cell(17,6,"$rk27","$rmc",0,"R");
-$pdf->Cell(17,6,"$rn27","$rmc",0,"R");$pdf->Cell(30,6,"$rm27","$rmc",1,"R");
+$pdf->Cell(17,7,"$r27","$rmc",0,"R");$pdf->Cell(17,7,"$rk27","$rmc",0,"R");
+$pdf->Cell(17,7,"$rn27","$rmc",0,"R");$pdf->Cell(30,7,"$rm27","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
 $pdf->Cell(17,6,"$r28","$rmc",0,"R");$pdf->Cell(17,6,"$rk28","$rmc",0,"R");
 $pdf->Cell(17,6,"$rn28","$rmc",0,"R");$pdf->Cell(30,6,"$rm28","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
-$pdf->Cell(17,6,"$r29","$rmc",0,"R");$pdf->Cell(17,6,"$rk29","$rmc",0,"R");
-$pdf->Cell(17,6,"$rn29","$rmc",0,"R");$pdf->Cell(30,6,"$rm29","$rmc",1,"R");
+$pdf->Cell(17,5,"$r29","$rmc",0,"R");$pdf->Cell(17,5,"$rk29","$rmc",0,"R");
+$pdf->Cell(17,5,"$rn29","$rmc",0,"R");$pdf->Cell(30,5,"$rm29","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
-$pdf->Cell(17,5,"$r30","$rmc",0,"R");$pdf->Cell(17,5,"$rk30","$rmc",0,"R");
-$pdf->Cell(17,5,"$rn30","$rmc",0,"R");$pdf->Cell(30,5,"$rm30","$rmc",1,"R");
+$pdf->Cell(17,6,"$r30","$rmc",0,"R");$pdf->Cell(17,6,"$rk30","$rmc",0,"R");
+$pdf->Cell(17,6,"$rn30","$rmc",0,"R");$pdf->Cell(30,6,"$rm30","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
 $pdf->Cell(17,6,"$r31","$rmc",0,"R");$pdf->Cell(17,6,"$rk31","$rmc",0,"R");
 $pdf->Cell(17,6,"$rn31","$rmc",0,"R");$pdf->Cell(30,6,"$rm31","$rmc",1,"R");
@@ -3016,11 +2947,11 @@ $pdf->Cell(109,4," ","$rmc1",0,"C");
 $pdf->Cell(17,7,"$r34","$rmc",0,"R");$pdf->Cell(17,7,"$rk34","$rmc",0,"R");
 $pdf->Cell(17,7,"$rn34","$rmc",0,"R");$pdf->Cell(30,7,"$rm34","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
-$pdf->Cell(17,6,"$r35","$rmc",0,"R");$pdf->Cell(17,6,"$rk35","$rmc",0,"R");
-$pdf->Cell(17,6,"$rn35","$rmc",0,"R");$pdf->Cell(30,6,"$rm35","$rmc",1,"R");
+$pdf->Cell(17,5,"$r35","$rmc",0,"R");$pdf->Cell(17,5,"$rk35","$rmc",0,"R");
+$pdf->Cell(17,5,"$rn35","$rmc",0,"R");$pdf->Cell(30,5,"$rm35","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
-$pdf->Cell(17,5,"$r36","$rmc",0,"R");$pdf->Cell(17,5,"$rk36","$rmc",0,"R");
-$pdf->Cell(17,5,"$rn36","$rmc",0,"R");$pdf->Cell(30,5,"$rm36","$rmc",1,"R");
+$pdf->Cell(17,6,"$r36","$rmc",0,"R");$pdf->Cell(17,6,"$rk36","$rmc",0,"R");
+$pdf->Cell(17,6,"$rn36","$rmc",0,"R");$pdf->Cell(30,6,"$rm36","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
 $pdf->Cell(17,6,"$r37","$rmc",0,"R");$pdf->Cell(17,6,"$rk37","$rmc",0,"R");
 $pdf->Cell(17,6,"$rn37","$rmc",0,"R");$pdf->Cell(30,6,"$rm37","$rmc",1,"R");
@@ -3034,14 +2965,6 @@ $pdf->Cell(109,4," ","$rmc1",0,"C");
 $pdf->Cell(17,6,"$r40","$rmc",0,"R");$pdf->Cell(17,6,"$rk40","$rmc",0,"R");
 $pdf->Cell(17,6,"$rn40","$rmc",0,"R");$pdf->Cell(30,6,"$rm40","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");
-$pdf->Cell(17,6,"$r41","$rmc",0,"R");$pdf->Cell(17,6,"$rk41","$rmc",0,"R");
-$pdf->Cell(17,6,"$rn41","$rmc",0,"R");$pdf->Cell(30,6,"$rm41","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");
-$pdf->Cell(17,5,"$r42","$rmc",0,"R");$pdf->Cell(17,5,"$rk42","$rmc",0,"R");
-$pdf->Cell(17,5,"$rn42","$rmc",0,"R");$pdf->Cell(30,5,"$rm42","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");
-$pdf->Cell(17,6,"$r43","$rmc",0,"R");$pdf->Cell(17,6,"$rk43","$rmc",0,"R");
-$pdf->Cell(17,6,"$rn43","$rmc",0,"R");$pdf->Cell(30,6,"$rm43","$rmc",1,"R");
                                        }
 
 if ( $strana == 3 OR $strana == 9999 ) {
@@ -3060,6 +2983,9 @@ $pdf->Cell(195,6," ","$rmc1",1,"L");
 $pdf->Cell(137,4," ","$rmc1",0,"R");$pdf->Cell(10,4,"$skutku","$rmc",1,"C");
 
 //VYBRANE PASIVA
+$r41=$hlavicka->r41; if ( $hlavicka->r41 == 0 ) $r41="";
+$r42=$hlavicka->r42; if ( $hlavicka->r42 == 0 ) $r42="";
+$r43=$hlavicka->r43; if ( $hlavicka->r43 == 0 ) $r43="";
 $r44=$hlavicka->r44; if ( $hlavicka->r44 == 0 ) $r44="";
 $r45=$hlavicka->r45; if ( $hlavicka->r45 == 0 ) $r45="";
 $r46=$hlavicka->r46; if ( $hlavicka->r46 == 0 ) $r46="";
@@ -3097,6 +3023,9 @@ $r77=$hlavicka->r77; if ( $hlavicka->r77 == 0 ) $r77="";
 $r78=$hlavicka->r78; if ( $hlavicka->r78 == 0 ) $r78="";
 $r79=$hlavicka->r79; if ( $hlavicka->r79 == 0 ) $r79="";
 
+$rm41=$hlavicka->rm41; if ( $hlavicka->rm41 == 0 ) $rm41="";
+$rm42=$hlavicka->rm42; if ( $hlavicka->rm42 == 0 ) $rm42="";
+$rm43=$hlavicka->rm43; if ( $hlavicka->rm43 == 0 ) $rm43="";
 $rm44=$hlavicka->rm44; if ( $hlavicka->rm44 == 0 ) $rm44="";
 $rm45=$hlavicka->rm45; if ( $hlavicka->rm45 == 0 ) $rm45="";
 $rm46=$hlavicka->rm46; if ( $hlavicka->rm46 == 0 ) $rm46="";
@@ -3134,42 +3063,40 @@ $rm77=$hlavicka->rm77; if ( $hlavicka->rm77 == 0 ) $rm77="";
 $rm78=$hlavicka->rm78; if ( $hlavicka->rm78 == 0 ) $rm78="";
 $rm79=$hlavicka->rm79; if ( $hlavicka->rm79 == 0 ) $rm79="";
 $pdf->Cell(195,12," ","$rmc1",1,"L");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r44","$rmc",0,"R");$pdf->Cell(30,6,"$rm44","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r45","$rmc",0,"R");$pdf->Cell(30,5,"$rm45","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,7,"$r46","$rmc",0,"R");$pdf->Cell(30,7,"$rm46","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r41","$rmc",0,"R");$pdf->Cell(30,5,"$rm41","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r42","$rmc",0,"R");$pdf->Cell(30,6,"$rm42","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r43","$rmc",0,"R");$pdf->Cell(30,6,"$rm43","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r44","$rmc",0,"R");$pdf->Cell(30,5,"$rm44","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r45","$rmc",0,"R");$pdf->Cell(30,6,"$rm45","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r46","$rmc",0,"R");$pdf->Cell(30,6,"$rm46","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r47","$rmc",0,"R");$pdf->Cell(30,6,"$rm47","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r48","$rmc",0,"R");$pdf->Cell(30,6,"$rm48","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r49","$rmc",0,"R");$pdf->Cell(30,5,"$rm49","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r48","$rmc",0,"R");$pdf->Cell(30,5,"$rm48","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r49","$rmc",0,"R");$pdf->Cell(30,6,"$rm49","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r50","$rmc",0,"R");$pdf->Cell(30,6,"$rm50","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r51","$rmc",0,"R");$pdf->Cell(30,6,"$rm51","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r52","$rmc",0,"R");$pdf->Cell(30,5,"$rm52","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r51","$rmc",0,"R");$pdf->Cell(30,5,"$rm51","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r52","$rmc",0,"R");$pdf->Cell(30,6,"$rm52","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r53","$rmc",0,"R");$pdf->Cell(30,6,"$rm53","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r54","$rmc",0,"R");$pdf->Cell(30,6,"$rm54","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r55","$rmc",0,"R");$pdf->Cell(30,5,"$rm55","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r54","$rmc",0,"R");$pdf->Cell(30,5,"$rm54","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r55","$rmc",0,"R");$pdf->Cell(30,6,"$rm55","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r56","$rmc",0,"R");$pdf->Cell(30,6,"$rm56","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r57","$rmc",0,"R");$pdf->Cell(30,6,"$rm57","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r58","$rmc",0,"R");$pdf->Cell(30,5,"$rm58","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r57","$rmc",0,"R");$pdf->Cell(30,5,"$rm57","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r58","$rmc",0,"R");$pdf->Cell(30,6,"$rm58","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r59","$rmc",0,"R");$pdf->Cell(30,6,"$rm59","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r60","$rmc",0,"R");$pdf->Cell(30,6,"$rm60","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r61","$rmc",0,"R");$pdf->Cell(30,5,"$rm61","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6.5,"$r61","$rmc",0,"R");$pdf->Cell(30,6.5,"$rm61","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r62","$rmc",0,"R");$pdf->Cell(30,6,"$rm62","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r63","$rmc",0,"R");$pdf->Cell(30,6,"$rm63","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r64","$rmc",0,"R");$pdf->Cell(30,6,"$rm64","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r65","$rmc",0,"R");$pdf->Cell(30,6,"$rm65","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5.5,"$r65","$rmc",0,"R");$pdf->Cell(30,5.5,"$rm65","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r66","$rmc",0,"R");$pdf->Cell(30,6,"$rm66","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r67","$rmc",0,"R");$pdf->Cell(30,6,"$rm67","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r67","$rmc",0,"R");$pdf->Cell(30,5,"$rm67","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r68","$rmc",0,"R");$pdf->Cell(30,5,"$rm68","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r69","$rmc",0,"R");$pdf->Cell(30,6,"$rm69","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,7,"$r70","$rmc",0,"R");$pdf->Cell(30,7,"$rm70","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,7,"$r69","$rmc",0,"R");$pdf->Cell(30,7,"$rm69","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5.5,"$r70","$rmc",0,"R");$pdf->Cell(30,5.5,"$rm70","$rmc",1,"R");
 $pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r71","$rmc",0,"R");$pdf->Cell(30,6,"$rm71","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r72","$rmc",0,"R");$pdf->Cell(30,6,"$rm72","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r73","$rmc",0,"R");$pdf->Cell(30,5,"$rm73","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r74","$rmc",0,"R");$pdf->Cell(30,6,"$rm74","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r75","$rmc",0,"R");$pdf->Cell(30,6,"$rm75","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r76","$rmc",0,"R");$pdf->Cell(30,6,"$rm76","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r77","$rmc",0,"R");$pdf->Cell(30,6,"$rm77","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r78","$rmc",0,"R");$pdf->Cell(30,6,"$rm78","$rmc",1,"R");
-$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r79","$rmc",0,"R");$pdf->Cell(30,6,"$rm79","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5,"$r72","$rmc",0,"R");$pdf->Cell(30,5,"$rm72","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,6,"$r73","$rmc",0,"R");$pdf->Cell(30,6,"$rm73","$rmc",1,"R");
+$pdf->Cell(109,4," ","$rmc1",0,"C");$pdf->Cell(51,5.5,"$r74","$rmc",0,"R");$pdf->Cell(30,5.5,"$rm74","$rmc",1,"R");
                                           }
 }
 $i = $i + 1;
