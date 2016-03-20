@@ -62,7 +62,7 @@ $sql = "SELECT * FROM F".$kli_vxcf."_genfin204no ";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
-$copern=1002;
+$copern=1001;
 $niejegen=1;
 }
 //koniec ak nie je generovanie daj standardne
@@ -71,18 +71,6 @@ $niejegen=1;
 //Tabulka generovania
 if ( $copern == 1001 )
 {
-?>
-<script type="text/javascript">
-if( !confirm ("Chcete naèíta štandardné generovanie vıkazu FIN 2-04 NO ?") )
-         { window.close()  }
-else
-         { location.href='vykaz_fin204no_2016.php?copern=1002&page=1&drupoh=1' }
-</script>
-<?php
-    }
-
-    if ( $copern == 1002 )
-    {
 
 $sql = "DROP TABLE F$kli_vxcf"."_genfin204no";
 $vysledok = mysql_query("$sql");
@@ -99,6 +87,7 @@ crf204nuj_no;
 
 $sql = 'CREATE TABLE F'.$kli_vxcf.'_genfin204no'.$sqlt;
 $vysledek = mysql_query("$sql");
+//echo $sql;
 
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '012', '2' ); "; $ulozene = mysql_query("$sqult"); 
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '014', '2' ); "; $ulozene = mysql_query("$sqult");
@@ -267,10 +256,11 @@ $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '249', '72'
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '383', '73' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '384', '73' ); "; $ulozene = mysql_query("$sqult");
 
-if ( $niejegen == 0 ) {
+$nacitajgen = 1*$_REQUEST['nacitajgen'];
+if ( $nacitajgen == 1 ) {
 ?>
 <script type="text/javascript">
- window.open('../ucto/fin_cis.php?copern=308&drupoh=92&page=1&sysx=UCT', '_self');
+window.open('../ucto/fin_cis.php?copern=308&drupoh=92&page=1&sysx=UCT', '_self');
 </script>
 <?php
 exit;

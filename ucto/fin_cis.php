@@ -69,11 +69,17 @@ $minul=0;
 
 if( $drupoh == 92 )
 {
-$uctsys="_genfin204no";
+$uctsys="genfin204no";
 $gener=1;
 $minul=0;
 }
 
+if( $drupoh == 93 )
+{
+$uctsys="genfin304";
+$gener=1;
+$minul=0;
+}
 
 if( $gener == 1 )
 {
@@ -86,19 +92,6 @@ $sqlt = <<<uctmzd
    PRIMARY KEY(cpl)
 );
 uctmzd;
-
-if( $drupoh == 95 OR $drupoh == 195 )
-     {
-$sqlt = <<<uctmzd
-(
-   cpl         int not null auto_increment,
-   dok         VARCHAR(10),
-   ucm         DECIMAL(10,0),
-   ucd         DECIMAL(10,0),
-   PRIMARY KEY(cpl)
-);
-uctmzd;
-     }
 
 
 $sql = 'CREATE TABLE F'.$kli_vxcf.'_'.$uctsys.$sqlt;
@@ -145,82 +138,9 @@ $databaza="";
 $dtbzx = include("../cis/oddel_dtbz1.php");
 
 
-$dsqlt = "TRUNCATE F$kli_vxcf"."_".$uctsys." ";
-$dsql = mysql_query("$dsqlt");
 
-if( $drupoh != 93 AND $drupoh != 94 AND $drupoh != 193 AND $drupoh != 194 )
-{
-$dsqlt = "INSERT INTO F$kli_vxcf"."_".$uctsys." SELECT * FROM ".$databaza."F$h_ycf"."_".$uctsys." ";
-$dsql = mysql_query("$dsqlt");
-}
 
-if( $drupoh == 93 )
-{
 
-$ix=45;
-while( $ix > 0 )
-  {
-$ixn=$ix;
-if( $ix < 10 ) $ixn="0".$ix;
-$dsqlt = "INSERT INTO F$kli_vxcf"."_pos_muj2014 SELECT '0', '".$ix."', rn".$ixn." FROM ".$databaza."F$h_ycf"."_prcsuv1000ahas".$kli_uzid." WHERE rn".$ixn." != 0 ";   
-$dsql = mysql_query("$dsqlt");
-
-$ix=$ix-1;
-  }
-
-}
-
-if( $drupoh == 94 )
-{
-
-$ix=38;
-while( $ix > 0 )
-  {
-$ixn=$ix;
-if( $ix < 10 ) $ixn="0".$ix;
-$dsqlt = "INSERT INTO F$kli_vxcf"."_pov_muj2014 SELECT '0', '".$ix."', r".$ixn." FROM ".$databaza."F$h_ycf"."_prcvyk1000ziss".$kli_uzid." WHERE r".$ixn." != 0 ";   
-$dsql = mysql_query("$dsqlt");
-
-$ix=$ix-1;
-  }
-
-}
-
-if( $drupoh == 193 )
-{
-
-$ix=145;
-while( $ix > 0 )
-  {
-$ixn=$ix;
-if( $ix < 10 ) $ixn="0".$ix;
-$dsqlt = "INSERT INTO F$kli_vxcf"."_pos_pod2014 SELECT '0', '".$ix."', r".$ixn." FROM ".$databaza."F$h_ycf"."_prcsuv1000ahas".$kli_uzid." WHERE r".$ixn." != 0 ";
-if( $ix < 79 )
-      {
-$dsqlt = "INSERT INTO F$kli_vxcf"."_pos_pod2014 SELECT '0', '".$ix."', rn".$ixn." FROM ".$databaza."F$h_ycf"."_prcsuv1000ahas".$kli_uzid." WHERE rn".$ixn." != 0 ";   
-      }
-$dsql = mysql_query("$dsqlt");
-
-$ix=$ix-1;
-  }
-
-}
-
-if( $drupoh == 194 )
-{
-
-$ix=61;
-while( $ix > 0 )
-  {
-$ixn=$ix;
-if( $ix < 10 ) $ixn="0".$ix;
-$dsqlt = "INSERT INTO F$kli_vxcf"."_pov_pod2014 SELECT '0', '".$ix."', r".$ixn." FROM ".$databaza."F$h_ycf"."_prcvyk1000ziss".$kli_uzid." WHERE r".$ixn." != 0 ";   
-$dsql = mysql_query("$dsqlt");
-
-$ix=$ix-1;
-  }
-
-}
 
 $copern=308;
     }
@@ -243,201 +163,39 @@ else
     if ( $copern == 156 )
     {
 
-if ( $drupoh == 96 ) {
-$sql = "DELETE FROM F$kli_vxcf"."_uctparzaok_muj2014 ";
-$vysledok = mysql_query("$sql");
+if( $drupoh == 91 )
+      {
+?>
+<script type="text/javascript">
+window.open('vykaz_fin204pod_2016.php?cislo_oc=1&copern=1001&drupoh=1&fmzdy=&page=1&subor=0&strana=1&nacitajgen=1', '_self' ); 
+</script>
+<?php
+      }
 
-$sql = "INSERT INTO F".$kli_vxcf."_uctparzaok_muj2014 (uce, crs) VALUE ('15', '17') ";
-$ulozene = mysql_query("$sql");
+if( $drupoh == 92 )
+      {
+?>
+<script type="text/javascript">
+window.open('vykaz_fin204no_2016.php?cislo_oc=1&copern=1001&drupoh=1&fmzdy=&page=1&subor=0&strana=1&nacitajgen=1', '_self' ); 
+</script>
+<?php
+      }
 
-$uprav=1;
-                     }
+if( $drupoh == 93 )
+      {
+?>
+<script type="text/javascript">
+window.open('vykaz_fin304_2016.php?cislo_oc=1&copern=1001&drupoh=1&fmzdy=&page=1&subor=0&strana=1&nacitajgen=1', '_self' ); 
+</script>
+<?php
+      }
 
-if ( $drupoh == 91 ) {
-
-$sql = "DELETE FROM F$kli_vxcf"."_crs_muj2014 ";
-$vysledok = mysql_query("$sql");
-
-$subor = fopen("../import/crs_muj$kli_vrok.csv", "r");
-while (! feof($subor))
-     {
-  $riadok = fgets($subor, 500);
-  //print "$riadok<br />";
-  $pole = explode(";", $riadok);
-
-  $x_uce = $pole[0];
-  $x_crs = $pole[1];
-  $x_kon = $pole[2];
- 
-$c_uce=1*$x_uce;
-
-if( $c_uce > 0 )
-{
-$sqult = "INSERT INTO F$kli_vxcf"."_crs_muj2014 ( uce,crs )".
-" VALUES ( '$x_uce', '$x_crs' ); "; 
-
-$ulozene = mysql_query("$sqult"); 
-}
-     }
-                     }
-
-if ( $drupoh == 92 ) {
-
-$sql = "DELETE FROM F$kli_vxcf"."_crv_muj2014 ";
-$vysledok = mysql_query("$sql");
-
-$subor = fopen("../import/crv_muj$kli_vrok.csv", "r");
-while (! feof($subor))
-     {
-  $riadok = fgets($subor, 500);
-  //print "$riadok<br />";
-  $pole = explode(";", $riadok);
-
-  $x_uce = $pole[0];
-  $x_crs = $pole[1];
-  $x_kon = $pole[2];
- 
-$c_uce=1*$x_uce;
-
-if( $c_uce > 0 )
-{
-$sqult = "INSERT INTO F$kli_vxcf"."_crv_muj2014 ( uce,crs )".
-" VALUES ( '$x_uce', '$x_crs' ); "; 
-
-$ulozene = mysql_query("$sqult"); 
-}
-     }
-                     }
-
-if ( $drupoh == 95 ) {
-
-$sql = "DELETE FROM F$kli_vxcf"."_uctsyngensuv_muj2014 ";
-$vysledok = mysql_query("$sql");
-
-$subor = fopen("../import/uctsyngensuv_muj$kli_vrok.csv", "r");
-while (! feof($subor))
-     {
-  $riadok = fgets($subor, 500);
-  //print "$riadok<br />";
-  $pole = explode(";", $riadok);
-
-  $x_dok = $pole[0];
-  $x_ucm = $pole[1];
-  $x_ucd = $pole[2];
-  $x_kon = $pole[3];
- 
-$c_dok=1*$x_dok;
-
-if( $c_dok > 0 )
-{
-$sqult = "INSERT INTO F$kli_vxcf"."_uctsyngensuv_muj2014 ( dok,ucm,ucd )".
-" VALUES ( '$x_dok', '$x_ucm', '$x_ucd' ); "; 
-
-$ulozene = mysql_query("$sqult"); 
-}
-     }
-                     }
-
-if ( $drupoh == 196 ) {
-$sql = "DELETE FROM F$kli_vxcf"."_uctparzaok_pod2014 ";
-$vysledok = mysql_query("$sql");
-
-$sql = "INSERT INTO F".$kli_vxcf."_uctparzaok_pod2014 (uce, crs) VALUE ('35', '26') ";
-$ulozene = mysql_query("$sql");
-
-$uprav=1;
-                     }
-
-if ( $drupoh == 191 ) {
-
-$sql = "DELETE FROM F$kli_vxcf"."_crs_pod2014 ";
-$vysledok = mysql_query("$sql");
-
-$subor = fopen("../import/crs_pod$kli_vrok.csv", "r");
-while (! feof($subor))
-     {
-  $riadok = fgets($subor, 500);
-  //print "$riadok<br />";
-  $pole = explode(";", $riadok);
-
-  $x_uce = $pole[0];
-  $x_crs = $pole[1];
-  $x_kon = $pole[2];
-
-$c_uce=1*$x_uce;
-
-if( $c_uce > 0 )
-{
-$sqult = "INSERT INTO F$kli_vxcf"."_crs_pod2014 ( uce,crs )".
-" VALUES ( '$x_uce', '$x_crs' ); ";
-
-$ulozene = mysql_query("$sqult");
-}
-     }
-                     }
-
-if ( $drupoh == 192 ) {
-
-$sql = "DELETE FROM F$kli_vxcf"."_crv_pod2014 ";
-$vysledok = mysql_query("$sql");
-
-$subor = fopen("../import/crv_pod$kli_vrok.csv", "r");
-while (! feof($subor))
-     {
-  $riadok = fgets($subor, 500);
-  //print "$riadok<br />";
-  $pole = explode(";", $riadok);
-
-  $x_uce = $pole[0];
-  $x_crs = $pole[1];
-  $x_kon = $pole[2];
-
-$c_uce=1*$x_uce;
-
-if( $c_uce > 0 )
-{
-$sqult = "INSERT INTO F$kli_vxcf"."_crv_pod2014 ( uce,crs )".
-" VALUES ( '$x_uce', '$x_crs' ); ";
-
-$ulozene = mysql_query("$sqult");
-}
-     }
-                     }
-
-if ( $drupoh == 195 ) {
-
-$sql = "DELETE FROM F$kli_vxcf"."_uctsyngensuv_pod2014 ";
-$vysledok = mysql_query("$sql");
-
-$subor = fopen("../import/uctsyngensuv_pod$kli_vrok.csv", "r");
-while (! feof($subor))
-     {
-  $riadok = fgets($subor, 500);
-  //print "$riadok<br />";
-  $pole = explode(";", $riadok);
-
-  $x_dok = $pole[0];
-  $x_ucm = $pole[1];
-  $x_ucd = $pole[2];
-  $x_kon = $pole[3];
-
-$c_dok=1*$x_dok;
-
-if( $c_dok > 0 )
-{
-$sqult = "INSERT INTO F$kli_vxcf"."_uctsyngensuv_pod2014 ( dok,ucm,ucd )".
-" VALUES ( '$x_dok', '$x_ucm', '$x_ucd' ); ";
-
-$ulozene = mysql_query("$sqult");
-}
-     }
-                     }
-
+exit;
 $copern=308;
     }
 //koniec nacitania standartneho generovania
 
-//nacitanie standartneho generovania
+//zmazat generovanie
     if ( $copern == 1316 )
     {
 ?>
@@ -454,78 +212,22 @@ else
     {
 
 
-if ( $drupoh == 91 )  {
-
-$sql = "DELETE FROM F$kli_vxcf"."_crs_muj2014 ";
+if( $drupoh == 91 )
+      {
+$sql = "DELETE FROM F$kli_vxcf"."_genfin204pod ";
 $vysledok = mysql_query("$sql");
-
-                      }
-
-if ( $drupoh == 92 )  {
-
-$sql = "DELETE FROM F$kli_vxcf"."_crv_muj2014 ";
+      }
+if( $drupoh == 92 )
+      {
+$sql = "DELETE FROM F$kli_vxcf"."_genfin204no ";
 $vysledok = mysql_query("$sql");
-
-                      }
-
-if ( $drupoh == 93 )  {
-
-$sql = "DELETE FROM F$kli_vxcf"."_pos_muj2014 ";
+      }
+if( $drupoh == 93 )
+      {
+$sql = "DELETE FROM F$kli_vxcf"."_genfin304 ";
 $vysledok = mysql_query("$sql");
+      }
 
-                      }
-
-if ( $drupoh == 94 )  {
-
-$sql = "DELETE FROM F$kli_vxcf"."_pov_muj2014 ";
-$vysledok = mysql_query("$sql");
-
-                      }
-
-if ( $drupoh == 95 )  {
-
-$sql = "DELETE FROM F$kli_vxcf"."_uctsyngensuv_muj2014 ";
-$vysledok = mysql_query("$sql");
-
-
-                      }
-
-
-if ( $drupoh == 191 ) {
-
-$sql = "DELETE FROM F$kli_vxcf"."_crs_pod2014 ";
-$vysledok = mysql_query("$sql");
-
-                      }
-
-if ( $drupoh == 192 ) {
-
-$sql = "DELETE FROM F$kli_vxcf"."_crv_pod2014 ";
-$vysledok = mysql_query("$sql");
-
-
-                      }
-
-if ( $drupoh == 193 )  {
-
-$sql = "DELETE FROM F$kli_vxcf"."_pos_pod2014 ";
-$vysledok = mysql_query("$sql");
-
-                       }
-
-if ( $drupoh == 194 )  {
-
-$sql = "DELETE FROM F$kli_vxcf"."_pov_pod2014 ";
-$vysledok = mysql_query("$sql");
-
-                       }
-
-if ( $drupoh == 195 ) {
-
-$sql = "DELETE FROM F$kli_vxcf"."_uctsyngensuv_pod2014 ";
-$vysledok = mysql_query("$sql");
-
-                      }
 
 $copern=308;
     }
@@ -559,16 +261,7 @@ $h_crs = 1*$_REQUEST['h_crs'];
 $h_ucd = 1*$_REQUEST['h_ucd'];
 
 if( $gener == 1 ) {
-if( $drupoh == 96 OR $drupoh == 196 )
-     {
-$ulozttx = "DELETE FROM F$kli_vxcf"."_$uctsys ";
-if( $c_uce > 0 ) { $ulozenx = mysql_query("$ulozttx"); }
-     } 
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); ";
-if( $drupoh == 95 OR $drupoh == 195 )
-     {
-$ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, ucm, ucd ) VALUES ( '$h_uce', '$h_crs', '$h_ucd'  ); ";
-     } 
                   }
 if( $minul == 1 ) {
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, hod ) VALUES ( '$h_uce', '$h_crs'  ); "; 
@@ -889,9 +582,6 @@ div.alert-warning {
 <?php if ( $copern == 308 AND $uprav >= 0 AND $drupoh >= 91 ) { ?>
    document.formv1.h_uce.value = '<?php echo "$h_uce";?>';
    document.formv1.h_crs.value = '<?php echo "$h_crs";?>';
-<?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
-   document.formv1.h_ucd.value = '<?php echo "$h_ucd";?>';
-<?php                      } ?>
    document.formv1.uloz.disabled = true;
    document.forms.formv1.h_uce.focus();
    document.forms.formv1.h_uce.select();
@@ -1023,17 +713,12 @@ div.alert-warning {
    <span class="subheader">
 <?php
 if ( $drupoh >= 91 AND $drupoh <= 96 ) echo "";
-if ( $drupoh >= 191 AND $drupoh <= 196 ) echo "";
 ?>
    </span> - nastavenie
   </td>
   <td>
    <div class="bar-btn-form-tool">
-   <ul class="toleft legend-vykazy">
-    <li><span class="darkgreen">&nbsp;</span>S = S˙vaha</li>
-    <li><span class="purple">&nbsp;</span>V = V˝kaz ziskov a str·t</li>
-    <li><span class="darkgray">&nbsp;</span>S˙vaha + V˝kaz ziskov a str·t</li>
-   </ul>
+
 <?php if( $drupoh != 96 AND drupoh != 196 ) { ?>
     <img src="../obr/ikony/trash_blue_icon.png" onclick="ZmazVsetky();" title="Vymazaù vöetky poloûky"
      class="btn-form-tool" style="margin:0;">
@@ -1061,7 +746,7 @@ $source="../ucto/fin_cis.php?copern=308";
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=91', '_self');"
   title="F204pod" class="<?php echo $clas1; ?> darkgreen">F204pod - Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=93', '_self');"
-  title="S˙vaha - predch·dzaj˙ce ˙ËtovnÈ obdobie" class="<?php echo $clas2; ?> darkgreen">S - Predch·dz. obdobie</a>
+  title="F304 - Generovanie" class="<?php echo $clas2; ?> darkgreen">F304 - Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=92', '_self');"
   title="F204no" class="<?php echo $clas3; ?> purple">F204no - Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=94', '_self');"
@@ -1071,20 +756,6 @@ $source="../ucto/fin_cis.php?copern=308";
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=96&uprav=1', '_self');"
   title="S˙vaha a VZaS - zaokr˙hlenie" class="<?php echo $clas6; ?> darkgray">Zaokr˙hlenie S + V</a>
 <?php                                        } ?>
-<?php if ( $drupoh >= 191 AND $drupoh <= 196 ) { ?>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=191', '_self');"
-  title="S˙vaha - generovanie" class="<?php echo $clas1; ?> darkgreen">S - Generovanie</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=193', '_self');"
-  title="S˙vaha - predch·dzaj˙ce ˙ËtovnÈ obdobie" class="<?php echo $clas2; ?> darkgreen">S - Predch·dz. obdobie</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=192', '_self');"
-  title="VZaS - generovanie" class="<?php echo $clas3; ?> purple">V - Generovanie</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=194', '_self');"
-  title="VZaS - predch·dzaj˙ce ˙ËtovnÈ obdobie" class="<?php echo $clas4; ?> purple">V - Predch·dz. obdobie</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=195', '_self');"
-  title="S˙vaha - syntetickÈ generovanie AktÌv a PasÌv" class="<?php echo $clas5; ?> darkgreen">S - Generovanie A / P</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=196&uprav=1', '_self');"
-  title="S˙vaha a VZaS - zaokr˙hlenie" class="<?php echo $clas6; ?> darkgray">Zaokr˙hlenie S + V</a>
-<?php                                          } ?>
 </div>
 
 <div class="content">
@@ -1092,7 +763,7 @@ $source="../ucto/fin_cis.php?copern=308";
   <h2>
 <?php
 if ( $drupoh == 91 OR $drupoh == 191 ) { echo "FIN204POD - generovanie"; }
-if ( $drupoh == 93 OR $drupoh == 193 ) { echo "S˙vaha - predch·dzaj˙ce ˙ËtovnÈ obdobie"; }
+if ( $drupoh == 93 OR $drupoh == 193 ) { echo "F304 - Generovanie"; }
 if ( $drupoh == 92 OR $drupoh == 192 ) { echo "FIN204NO - generovanie"; }
 if ( $drupoh == 94 OR $drupoh == 194 ) { echo "V˝kaz ziskov a str·t - predch·dzaj˙ce ˙ËtovnÈ obdobie"; }
 if ( $drupoh == 95 OR $drupoh == 195 ) { echo "S˙vaha - syntetickÈ generovanie AktÌv a PasÌv"; }
@@ -1114,7 +785,7 @@ if( $xtrd3 == 5 ) { $triedenie="BY ucd "; $xtrd3x=6;}
 if( $xtrd3 == 6 ) { $triedenie="BY ucd DESC "; $xtrd3x=5;}
 $xtrd1=$xtrd1x; $xtrd2=$xtrd2x; $xtrd3=$xtrd3x;
 //uprava vykazu 91-95,191-195
-if ( $drupoh >= 91 AND $drupoh != 96 AND $drupoh != 196 )
+if ( $drupoh >= 91 )
 {
 if ( $gener == 1 ) {
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER $triedenie";
@@ -1122,9 +793,6 @@ $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER $triedenie";
 if ( $minul == 1 ) {
 $sqltt = "SELECT cpl, dok AS uce, hod AS crs FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER $triedenie";
                    }
-if ( $drupoh == 95 OR $drupoh == 195 ) {
-$sqltt = "SELECT cpl, dok AS uce, ucm AS crs, ucd FROM F$kli_vxcf"."_$uctsys WHERE cpl > 0 ORDER $triedenie";
-                                       }
 $sql = mysql_query("$sqltt");
 //echo $sqltt;
 
@@ -1132,7 +800,7 @@ $sql = mysql_query("$sqltt");
 $cpol = mysql_num_rows($sql);
 $i = 0;
 
-$varcolspan = 2; if ( $drupoh == 95 OR $drupoh == 195 ) $varcolspan = 1;
+$varcolspan = 2; 
 ?>
 <FORM name="formv1" method="post" action="fin_cis.php?copern=315&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd=0">
  <table class="vertical toleft">
@@ -1146,15 +814,8 @@ $varcolspan = 2; if ( $drupoh == 95 OR $drupoh == 195 ) $varcolspan = 1;
 if ( $gener == 1 )
 {
 ?>
-<?php if ( $drupoh != 95 AND $drupoh != 96 AND $drupoh != 195 AND $drupoh != 196 ) { ?>
   <th><a href="#" title="Zoradiù" class="sort-field" onclick="window.open('fin_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd1=<?php echo $xtrd1;?>&xtrd2=0&xtrd3=0', '_self');">⁄Ëet</a></th>
   <th colspan="2"><a href="#" title="Zoradiù" class="sort-field" onclick="window.open('fin_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd2=<?php echo $xtrd2;?>&xtrd1=0&xtrd3=0', '_self');">»Ìslo riadku</a></th>
-<?php                                                                              } ?>
-<?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
-  <th><a href="#" title="Zoradiù" class="sort-field" onclick="window.open('fin_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd1=<?php echo $xtrd1;?>&xtrd2=0&xtrd3=0', '_self');">⁄Ëet</a></th> <!-- dopyt, sort nie je funkËnÈ -->
-  <th><a href="#" title="Zoradiù" class="sort-field" onclick="window.open('fin_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd2=<?php echo $xtrd2;?>&xtrd1=0&xtrd3=0', '_self');">AktÌva</a></th>
-  <th><a href="#" title="Zoradiù" class="sort-field" onclick="window.open('fin_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd3=<?php echo $xtrd3;?>&xtrd1=0&xtrd2=0', '_self');">PasÌva</a></th>
-<?php                                        } ?>
 <?php
 }
 ?>
@@ -1173,16 +834,8 @@ if ( $gener == 1 )
    <input type="text" name="h_crs" id="h_crs" class="field" 
 <?php if ( $drupoh != 93 AND $drupoh != 94 AND $drupoh != 193 AND $drupoh != 194 ) { ?> onkeyup="KontrolaCisla(this, Cele)" <?php } ?>
 <?php if ( $drupoh == 93 OR  $drupoh == 94 OR  $drupoh == 193 OR  $drupoh == 194 ) { ?> onkeyup="KontrolaDcisla(this, Desc)" <?php } ?>
-<?php if ( $drupoh != 95 AND $drupoh != 195 ) { ?> onKeyDown="return CrsEnter(event.which)" <?php } ?>
-<?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?> onKeyDown="return Crs95Enter(event.which)" <?php } ?>
    />
   </td>
-<?php if ( $drupoh == 95 OR $drupoh == 195 ) { ?>
-  <td >
-   <input type="text" name="h_ucd" id="h_ucd" onkeyup="KontrolaCisla(this, Cele)"
-    onKeyDown="return UcdEnter(event.which)" class="field"/>
-  </td>
-<?php                                        } ?>
   <td>
    <div onmouseover="Fx.style.display='none';" class="wrap-area-uloz">&nbsp;</div>
    <div onmouseover="return Povol_uloz();" class="area-uloz">
@@ -1313,19 +966,14 @@ if ( $drupoh == 196 ) $titlevzas = "26";
 
 <?php
 $vartitle = "ËÌselnÌk";
-if ( $drupoh == 93 OR $drupoh == 193 OR $drupoh == 94 OR $drupoh == 194 ) $vartitle = "hodnoty";
 ?>
-<?php if ( $kli_vrok > 2013 AND  $drupoh != 93 AND $drupoh != 193 AND $drupoh != 94 AND $drupoh != 194 ) { ?>
+<?php if ( $drupoh >= 91 ) { ?>
  <a href='fin_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
   title="NaËÌtaù <?php echo $vartitle; ?> generovania z firmy predch·dzaj˙ceho ˙ËtovnÈho obdobia"
   class="btn-down-x26 toright">Generovanie <?php echo $kli_minrok; ?></a>
 <?php                         } ?>
-<?php if ( $kli_vrok > 2013 AND ( $drupoh == 93 OR $drupoh == 193 OR $drupoh == 94 OR $drupoh == 194 ) ) { ?>
- <a href='fin_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
-  title="NaËÌtaù <?php echo $vartitle; ?> v stÂpci bezprostredne predch. obdobie z firmy predch·dzaj˙ceho ˙ËtovnÈho obdobia"
-  class="btn-down-x26 toright">Minul˝ rok</a>
-<?php                         } ?>
-<?php if ( $drupoh != 93 AND $drupoh != 193 AND $drupoh != 94 AND $drupoh != 194 ) { ?>
+
+<?php if ( $drupoh >= 91 ) { ?>
  <a href='fin_cis.php?drupoh=<?php echo $drupoh; ?>&copern=155&page=1'
   title="NaËÌtaù ötandardn˝ ËÌselnÌk" class="btn-down-x26 toright">ätandardn˝</a>
 <?php                                                                              } ?>
