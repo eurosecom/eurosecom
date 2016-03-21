@@ -19,11 +19,15 @@ if (!isset($kli_vxcf)) $kli_vxcf = 1;
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=0;
+$rmc=1;
 $rmc1=0;
 
 $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
+
+//.jpg podklad
+$jpg_cesta="../dokumenty/statistika2015/roc_opu201/roc_opu201_v15";
+$jpg_popis="tlaËivo RoËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch v obchode, pohostinstve a ubytovanÌ RoË OPU 2-01 ".$kli_vrok;
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -57,6 +61,7 @@ $modul=178;
 //modul 178
 if( $modul == 178 )
 {
+
 //178.modul  
 
 $r01=0; 
@@ -567,7 +572,6 @@ $vytvor = mysql_query("$vsql");
 $ttvv = "INSERT INTO F$kli_vxcf"."_statistika_opu201 ( ico ) VALUES ( '0' )";
 $ttqq = mysql_query("$ttvv");
 }
-
 
 //1.strana, 2.strana je hore vyssie
 $sql = "SELECT odoslane FROM F$kli_vxcf"."_statistika_opu201 ";
@@ -2276,7 +2280,6 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 ADD m128r599 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 }
-
 $sql = "SELECT m128r600 FROM F$kli_vxcf"."_statistika_opu201 WHERE ico=0";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
@@ -2309,7 +2312,6 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 ADD m128r600 DECIMAL(10,0) D
 $vysledek = mysql_query("$sql");
 }
 //koniec pracovny subor
-
 
 
 //nacitaj mzdy
@@ -2523,9 +2525,11 @@ if( $citajvsetkymoduly == 1 ) { $strana=3; }
 //zapis upravene udaje
 if ( $copern == 103 )
      {
+//1.strana
 $odoslane = strip_tags($_REQUEST['odoslane']);
 $odoslane_sql=SqlDatum($odoslane);
-
+$cinnost = strip_tags($_REQUEST['cinnost']);
+//2.strana
 $mod100041ano = strip_tags($_REQUEST['mod100041ano']);
 $mod100041nie = strip_tags($_REQUEST['mod100041nie']);
 $mod100042ano = strip_tags($_REQUEST['mod100042ano']);
@@ -2533,7 +2537,6 @@ $mod100042nie = strip_tags($_REQUEST['mod100042nie']);
 $mod100043ano = strip_tags($_REQUEST['mod100043ano']);
 $mod100043nie = strip_tags($_REQUEST['mod100043nie']);
 
-//2.strana
 $mod100038 = strip_tags($_REQUEST['mod100038']);
 $mod100039 = strip_tags($_REQUEST['mod100039']);
 $mod100040 = strip_tags($_REQUEST['mod100040']);
@@ -3403,17 +3406,18 @@ $uprav="NO";
 
 if ( $strana == 1 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu201 SET ".
-" odoslane='$odoslane_sql', mod100041ano='$mod100041ano', mod100041nie='$mod100041nie', ".
-" mod100042ano='$mod100042ano', mod100042nie='$mod100042nie', ".
-" mod100043ano='$mod100043ano', mod100043nie='$mod100043nie'  ".
+" odoslane='$odoslane_sql', cinnost='$cinnost' ".
 " WHERE ico >= 0 ";
                     }
 
 if ( $strana == 2 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu201 SET ".
-" mod100038='$mod100038', mod100039='$mod100039', mod100040='$mod100040', mod100089='$mod100089', ".
+" mod100041ano='$mod100041ano', mod100041nie='$mod100041nie',
+
+mod100038='$mod100038', mod100039='$mod100039', mod100040='$mod100040', mod100089='$mod100089', ".
 " mod100090='$mod100090', mod100091='$mod100091', mod100037='$mod100037', ".
-" mod100036kal='$mod100036kal', mod100036hos='$mod100036hos', mod100069ano='$mod100069ano', mod100069nie='$mod100069nie', ".
+" mod100042ano='$mod100042ano', mod100042nie='$mod100042nie', mod100043ano='$mod100043ano', mod100043nie='$mod100043nie'
+mod100036kal='$mod100036kal', mod100036hos='$mod100036hos', mod100069ano='$mod100069ano', mod100069nie='$mod100069nie', ".
 " mod100086ano='$mod100086ano', mod100086nie='$mod100086nie', mod100087ano='$mod100087ano', mod100087nie='$mod100087nie', ".
 " mod100088ano='$mod100088ano', mod100088nie='$mod100088nie' ".
 " WHERE ico >= 0";
@@ -3797,9 +3801,10 @@ if ( $copern >= 1 )
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_statistika_opu201 WHERE ico >= 0";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
-
+//1.strana
 $odoslane_sk = SkDatum($fir_riadok->odoslane);
-
+$cinnost = $fir_riadok->cinnost;
+//2.strana
 $mod100041ano = $fir_riadok->mod100041ano;
 $mod100041nie = $fir_riadok->mod100041nie;
 $mod100042ano = $fir_riadok->mod100042ano;
@@ -3807,7 +3812,6 @@ $mod100042nie = $fir_riadok->mod100042nie;
 $mod100043ano = $fir_riadok->mod100043ano;
 $mod100043nie = $fir_riadok->mod100043nie;
 
-//2.strana
 $mod100038 = $fir_riadok->mod100038;
 $mod100039 = $fir_riadok->mod100039;
 $mod100040 = $fir_riadok->mod100040;
@@ -4684,6 +4688,13 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_treximafir ");
   $riaddok=mysql_fetch_object($sqldok);
   $okres=$riaddok->uzemie;
   }
+
+//6-miestne ico
+$fir_ficox=$fir_fico;
+if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
+
+//sknace bez bodiek
+$sknace=str_replace(".", "", $fir_sknace);
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -4707,7 +4718,6 @@ form input[type=text] {
 
 <script type="text/javascript">
 <?php
-//od tadeto dole to uz rob ty
 //uprava
   if ( $copern == 102 )
   {
@@ -4715,16 +4725,17 @@ form input[type=text] {
   function ObnovUI()
   {
 <?php if ( $strana == 1 ) { ?>
-   document.formv1.odoslane.value = '<?php echo "$odoslane_sk";?>';
+   document.formv1.odoslane.value = '<?php echo "$odoslane_sk"; ?>';
+   document.formv1.cinnost.value = '<?php echo "$cinnost"; ?>';
+<?php                     } ?>
+
+<?php if ( $strana == 2 ) { ?>
 <?php if ( $mod100041ano == 1 ) { echo "document.formv1.mod100041ano.checked='checked'; "; } ?>
 <?php if ( $mod100041nie == 1 ) { echo "document.formv1.mod100041nie.checked='checked'; "; } ?>
 <?php if ( $mod100042ano == 1 ) { echo "document.formv1.mod100042ano.checked='checked'; "; } ?>
 <?php if ( $mod100042nie == 1 ) { echo "document.formv1.mod100042nie.checked='checked'; "; } ?>
 <?php if ( $mod100043ano == 1 ) { echo "document.formv1.mod100043ano.checked='checked'; "; } ?>
 <?php if ( $mod100043nie == 1 ) { echo "document.formv1.mod100043nie.checked='checked'; "; } ?>
-<?php                     } ?>
-
-<?php if ( $strana == 2 ) { ?>
    document.formv1.mod100038.value = '<?php echo "$mod100038";?>';
    document.formv1.mod100039.value = '<?php echo "$mod100039";?>';
    document.formv1.mod100037.value = '<?php echo "$mod100037";?>';
@@ -5617,15 +5628,18 @@ form input[type=text] {
 
   function CisCPAp2()
   {
-   window.open('../dokumenty/statistika2014/cpa_ciselnik_pril2v13.pdf', '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+   window.open('../dokumenty/statistika2014/cpa_ciselnik_pril2v13.pdf',
+'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
   function CisCPAp1()
   {
-   window.open('../dokumenty/statistika2014/cpa_ciselnik_pril1v13.pdf', '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+   window.open('../dokumenty/statistika2014/cpa_ciselnik_pril1v13.pdf',
+'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
   function MetodVypln()
   {
-   window.open('../dokumenty/statistika2014/opu201/opu201v14_metod_pokyny.pdf', '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+   window.open('<?php echo $jpg_cesta; ?>_metodika.pdf',
+'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
   function TlacVykaz()
   {
@@ -5633,7 +5647,8 @@ form input[type=text] {
   }
   function StatUdajeFirma()
   {
-   window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0', '_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0',
+'_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
   }
   function NacitajMzdy()
   {
@@ -5647,6 +5662,72 @@ form input[type=text] {
   {
    window.open('../ucto/uobrat.php?modul=' + modul + '&copern=200&drupoh=1&page=1&typ=PDF&cstat=10201&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
   }
+
+//bud alebo checkbox v module 100041
+  function klikm100041ano()
+  {
+   document.formv1.mod100041nie.checked = false;
+  }
+  function klikm100041nie()
+  {
+   document.formv1.mod100041ano.checked = false;
+  }
+//bud alebo checkbox v module 100042
+  function klikm100042ano()
+  {
+   document.formv1.mod100042nie.checked = false;
+  }
+  function klikm100042nie()
+  {
+   document.formv1.mod100042ano.checked = false;
+  }
+//bud alebo checkbox v module 100043
+  function klikm100043ano()
+  {
+   document.formv1.mod100043nie.checked = false;
+  }
+  function klikm100043nie()
+  {
+   document.formv1.mod100043ano.checked = false;
+  }
+//bud alebo checkbox v module 100036
+  function klikm100036kal()
+  {
+   document.formv1.mod100036hos.checked = false;
+  }
+  function klikm100036hos()
+  {
+   document.formv1.mod100036kal.checked = false;
+  }
+//bud alebo checkbox v module 100069
+  function klikm100069ano()
+  {
+   document.formv1.mod100069nie.checked = false;
+  }
+  function klikm100069nie()
+  {
+   document.formv1.mod100069ano.checked = false;
+  }
+//bud alebo checkbox v module 100087
+  function klikm100087ano()
+  {
+   document.formv1.mod100087nie.checked = false;
+  }
+  function klikm100087nie()
+  {
+   document.formv1.mod100087ano.checked = false;
+  }
+//bud alebo checkbox v module 100088
+  function klikm100088ano()
+  {
+   document.formv1.mod100088nie.checked = false;
+  }
+  function klikm100088nie()
+  {
+   document.formv1.mod100088ano.checked = false;
+  }
+
+
 </script>
 </HEAD>
 <BODY onload="ObnovUI();">
@@ -5669,7 +5750,8 @@ if ( $copern == 102 )
      title="»ÌselnÌk CPA - prÌloha Ë. 2" class="btn-form-tool">
     <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisCPAp1();"
      title="»ÌselnÌk CPA - prÌloha Ë. 1" class="btn-form-tool">
-    <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="MetodickÈ vysvetlivky k obsahu v˝kazu" class="btn-form-tool">
+    <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();"
+     title="MetodickÈ vysvetlivky k obsahu v˝kazu" class="btn-form-tool">
     <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajModuly();" title="NaËÌtaù ˙daje do vöetk˝ch modulov" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
    </div>
@@ -5713,7 +5795,7 @@ $source="statistika_opu201.php?";
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=11', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=12', '_self');" class="<?php echo $clas12; ?> toleft">12</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=13', '_self');" class="<?php echo $clas13; ?> toleft">13</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=14', '_self');" class="<?php echo $clas14; ?> toleft">14</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=14', '_self');" class="<?php echo $clas14; ?> toleft">14</a> <!-- dopyt, potom schovaù -->
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=14', '_blank');" class="<?php echo $clas14; ?> toright">14</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=13', '_blank');" class="<?php echo $clas13; ?> toright">13</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=12', '_blank');" class="<?php echo $clas12; ?> toright">12</a>
@@ -5731,288 +5813,180 @@ $source="statistika_opu201.php?";
  <h6 class="toright">TlaËiù:</h6>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 </div>
-<?php
-$kli_vrokx = substr($kli_vrok,2,2);
-$mesiacx=$mesiac; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
-$fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
-?>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str1.jpg"
- alt="tlaËivo RoËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 1.strana 441kB" class="form-background">
-<span class="text-echo" style="top:230px; left:475px; font-size:24px;"><?php echo $kli_vrok; ?></span>
-<span class="text-echo" style="top:306px; left:314px; font-size:18px; letter-spacing:23px;"><?php echo $kli_vrokx; ?></span>
-<span class="text-echo" style="top:306px; left:378px; font-size:18px; letter-spacing:23px;"><?php echo $mesiacx; ?></span>
-<span class="text-echo" style="top:306px; left:445px; font-size:18px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-<!-- ORGANIZACIA -->
-<span class="text-echo" style="top:693px; left:53px;"><?php echo $fir_fnaz; ?></span>
-<span class="text-echo" style="top:714px; left:53px;"><?php echo "$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
-<span class="text-echo" style="top:693px; left:808px;"><?php echo $okres; ?></span>
- <img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();" title="Nastaviù kÛd okresu"
-  class="btn-row-tool" style="top:690px; left:839px;">
+<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 1.strana 265kB">
+<span class="text-echo" style="top:283px; left:444px; font-size:18px; letter-spacing:27px;"><?php echo $fir_ficox; ?></span>
+
+<!-- Podnik -->
+<span class="text-echo" style="top:805px; left:53px;"><?php echo "$fir_fnaz $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
+<span class="text-echo" style="top:810px; left:808px;"><?php echo $okres; ?></span>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();" title="Nastaviù kÛd okresu"
+     class="btn-row-tool" style="top:808px; left:839px;">
+<span class="text-echo" style="top:867px; left:573px; font-size:16px; letter-spacing:25px;"><?php echo $sknace; ?></span>
+<input type="text" name="cinnost" id="cinnost" style="width:487px; top:860px; left:53px;"/>
 <!-- Vyplnil -->
-<span class="text-echo" style="top:764px; left:53px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo" style="top:780px; left:388px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo" style="top:830px; left:53px;"><?php echo $fir_fem1; ?></span>
+<span class="text-echo" style="top:940px; left:53px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo" style="top:954px; left:492px; font-size:15px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo" style="top:987px; left:53px;"><?php echo $fir_fem1; ?></span>
 <input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);"
- style="width:90px; top:827px; left:390px;"/>
+       style="width:90px; top:982px; left:390px;"/>
 
-<!-- modul 100041 -->
-<script>
-  function klikm100041ano()
-  {
-   document.formv1.mod100041nie.checked = false;
-  }
-  function klikm100041nie()
-  {
-   document.formv1.mod100041ano.checked = false;
-  }
-</script>
-<input type="checkbox" name="mod100041ano" value="1" onchange="klikm100041ano();"
- style="top:958px; left:839px;"/>
-<input type="checkbox" name="mod100041nie" value="1" onchange="klikm100041nie();"
- style="top:978px; left:839px;"/>
-
-<!-- modul 100042 -->
-<script>
-  function klikm100042ano()
-  {
-   document.formv1.mod100042nie.checked = false;
-  }
-  function klikm100042nie()
-  {
-   document.formv1.mod100042ano.checked = false;
-  }
-</script>
-<input type="checkbox" name="mod100042ano" value="1" onchange="klikm100042ano();"
- style="top:1068px; left:839px;"/>
-<input type="checkbox" name="mod100042nie" value="1" onchange="klikm100042nie();"
- style="top:1088px; left:839px;"/>
-
-<!-- modul 100043 -->
-<script>
-  function klikm100043ano()
-  {
-   document.formv1.mod100043nie.checked = false;
-  }
-  function klikm100043nie()
-  {
-   document.formv1.mod100043ano.checked = false;
-  }
-</script>
-<input type="checkbox" name="mod100043ano" value="1" onchange="klikm100043ano();"
- style="top:1178px; left:839px;"/>
-<input type="checkbox" name="mod100043nie" value="1" onchange="klikm100043nie();"
- style="top:1198px; left:839px;"/>
+<!-- modul 100307 -->
+<span class="text-echo center" style="width:499px; top:1156px; left:400px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo center" style="width:499px; top:1182px; left:400px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo center" style="width:499px; top:1208px; left:400px;"><?php echo $fir_fem1; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str2.jpg"
- alt="tlaËivo ätvrùroËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 2.strana 235kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 2.strana 235kB">
+<span class="text-echo" style="top:76px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 100315 -->
+<span class="text-echo center" style="top:202px; left:410px;"><?php echo $cinnost; ?></span>
+<?php
+$sknacesb=$fir_sknace;
+?>
+<span class="text-echo center" style="top:228px; left:630px;"><?php echo $sknacesb; ?></span>
+
+<!-- modul 2 -->
+<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:382px; left:773px;"/>
+<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:419px; left:773px;"/>
+
+<!-- modul 100041 -->
+<input type="checkbox" name="mod100041ano" value="1" onchange="klikm100041ano();" style="top:539px; left:839px;"/>
+<input type="checkbox" name="mod100041nie" value="1" onchange="klikm100041nie();" style="top:560px; left:839px;"/>
+
+<!-- modul 100042 -->
+<input type="checkbox" name="mod100042ano" value="1" onchange="klikm100042ano();" style="top:653px; left:839px;"/>
+<input type="checkbox" name="mod100042nie" value="1" onchange="klikm100042nie();" style="top:673px; left:839px;"/>
+
+<!-- modul 100043 -->
+<input type="checkbox" name="mod100043ano" value="1" onchange="klikm100043ano();" style="top:766px; left:839px;"/>
+<input type="checkbox" name="mod100043nie" value="1" onchange="klikm100043nie();" style="top:787px; left:839px;"/>
 
 <!-- modul 100038 -->
-<input type="text" name="mod100038" id="mod100038"
- style="width:253px; top:130px; left:643px;"/>
+<input type="text" name="mod100038" id="mod100038" style="width:253px; top:877px; left:643px;"/>
 
 <!-- modul 100039 -->
-<input type="text" name="mod100039" id="mod100039"
- style="width:253px; top:193px; left:643px;"/>
+<input type="text" name="mod100039" id="mod100039" style="width:253px; top:971px; left:643px;"/>
 
 <!-- modul 100040 -->
-<input type="text" name="mod100040" id="mod100040"
- style="width:253px; top:256px; left:643px;"/>
+<input type="text" name="mod100040" id="mod100040" style="width:253px; top:1046px; left:643px;"/>
 
 <!-- modul 100036 -->
-<script>
-  function klikm100036kal()
-  {
-   document.formv1.mod100036hos.checked = false;
-  }
-  function klikm100036hos()
-  {
-   document.formv1.mod100036kal.checked = false;
-  }
-</script>
-<input type="checkbox" name="mod100036kal" value="1" onchange="klikm100036kal();"
- style="top:322px; left:839px;"/>
-<input type="checkbox" name="mod100036hos" value="1" onchange="klikm100036hos();"
- style="top:343px; left:839px;"/>
+<input type="checkbox" name="mod100036kal" value="1" onchange="klikm100036kal();" style="top:1124px; left:839px;"/>
+<input type="checkbox" name="mod100036hos" value="1" onchange="klikm100036hos();" style="top:1145px; left:839px;"/>
 
 <!-- modul 100037 -->
-<input type="text" name="mod100037" id="mod100037"
- style="width:253px; top:421px; left:643px;"/>
-
-<!-- modul 100069 -->
-<script>
-  function klikm100069ano()
-  {
-   document.formv1.mod100069nie.checked = false;
-  }
-  function klikm100069nie()
-  {
-   document.formv1.mod100069ano.checked = false;
-  }
-</script>
-<input type="checkbox" name="mod100069ano" value="1" onchange="klikm100069ano();"
- style="top:549px; left:839px;"/>
-<input type="checkbox" name="mod100069nie" value="1" onchange="klikm100069nie();"
- style="top:569px; left:839px;"/>
-
-<!-- modul 100086 -->
-<script>
-  function klikm100086ano()
-  {
-   document.formv1.mod100086nie.checked = false;
-  }
-  function klikm100086nie()
-  {
-   document.formv1.mod100086ano.checked = false;
-  }
-</script>
-<input type="checkbox" name="mod100086ano" value="1" onchange="klikm100086ano();"
- style="top:632px; left:839px;"/>
-<input type="checkbox" name="mod100086nie" value="1" onchange="klikm100086nie();"
- style="top:652px; left:839px;"/>
-
-<!-- modul 100087 -->
-<script>
-  function klikm100087ano()
-  {
-   document.formv1.mod100087nie.checked = false;
-  }
-  function klikm100087nie()
-  {
-   document.formv1.mod100087ano.checked = false;
-  }
-</script>
-<input type="checkbox" name="mod100087ano" value="1" onchange="klikm100087ano();"
- style="top:747px; left:839px;"/>
-<input type="checkbox" name="mod100087nie" value="1" onchange="klikm100087nie();"
- style="top:767px; left:839px;"/>
-
-<!-- modul 100088 -->
-<script>
-  function klikm100088ano()
-  {
-   document.formv1.mod100088nie.checked = false;
-  }
-  function klikm100088nie()
-  {
-   document.formv1.mod100088ano.checked = false;
-  }
-</script>
-<input type="checkbox" name="mod100088ano" value="1" onchange="klikm100088ano();"
- style="top:890px; left:839px;"/>
-<input type="checkbox" name="mod100088nie" value="1" onchange="klikm100088nie();"
- style="top:911px; left:839px;"/>
-
-<!-- modul 100089 -->
-<input type="text" name="mod100089" id="mod100089"
- style="width:253px; top:1018px; left:643px;"/>
-
-<!-- modul 100090 -->
-<input type="text" name="mod100090" id="mod100090"
- style="width:253px; top:1113px; left:643px;"/>
-
-<!-- modul 100091 -->
-<input type="text" name="mod100091" id="mod100091"
- style="width:253px; top:1205px; left:643px;"/>
+<input type="text" name="mod100037" id="mod100037" style="width:253px; top:1236px; left:643px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 3 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str3.jpg"
- alt="tlaËivo ätvrùroËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 3.strana 235kB"
- class="form-background">
-<span class="text-echo" style="top:96px; left:435px; font-size:16px; letter-spacing:28px;"><?php echo $fir_ficox; ?></span>
+<img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 3.strana 235kB">
+<span class="text-echo" style="top:85px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
-<!-- modul 2 -->
-<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:281px; left:680px;"/>
-<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:307px; left:680px;"/>
+<!-- modul 100069 -->
+<input type="checkbox" name="mod100069ano" value="1" onchange="klikm100069ano();" style="top:199px; left:839px;"/>
+<input type="checkbox" name="mod100069nie" value="1" onchange="klikm100069nie();" style="top:219px; left:839px;"/>
+
+<!-- modul 100087 -->
+<input type="checkbox" name="mod100087ano" value="1" onchange="klikm100087ano();" style="top:312px; left:839px;"/>
+<input type="checkbox" name="mod100087nie" value="1" onchange="klikm100087nie();" style="top:333px; left:839px;"/>
+
+<!-- modul 100088 -->
+<input type="checkbox" name="mod100088ano" value="1" onchange="klikm100088ano();" style="top:469px; left:839px;"/>
+<input type="checkbox" name="mod100088nie" value="1" onchange="klikm100088nie();" style="top:489px; left:839px;"/>
+
+<!-- modul 100089 -->
+<input type="text" name="mod100089" id="mod100089" style="width:253px; top:609px; left:643px;"/>
+
+<!-- modul 100090 -->
+<input type="text" name="mod100090" id="mod100090" style="width:253px; top:716px; left:643px;"/>
+
+<!-- modul 100091 -->
+<input type="text" name="mod100091" id="mod100091" style="width:253px; top:821px; left:643px;"/>
 
 <!-- modul 398a -->
-<input type="text" name="m398r01" id="m398r01" style="width:100px; top:493px; left:680px;"/>
-<input type="text" name="m398r02" id="m398r02" style="width:100px; top:519px; left:680px;"/>
-<span class="text-echo" style="top:548px; right:165px;"><?php echo $m398r99; ?></span>
-
-<!-- modul 405a -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky"
- onclick="NacitajZobratovky(405);" style="top:601px; left:448px;" class="btn-row-tool">
-<input type="text" name="m405r01" id="m405r01" style="width:100px; top:698px; left:680px;"/>
-<input type="text" name="m405r02" id="m405r02" style="width:100px; top:724px; left:680px;"/>
-<input type="text" name="m405r03" id="m405r03" style="width:100px; top:750px; left:680px;"/>
-<input type="text" name="m405r04" id="m405r04" style="width:100px; top:776px; left:680px;"/>
-<input type="text" name="m405r05" id="m405r05" style="width:100px; top:807px; left:680px;"/>
-<input type="text" name="m405r06" id="m405r06" style="width:100px; top:844px; left:680px;"/>
-<span class="text-echo" style="top:880px; right:165px;"><?php echo $m405r99; ?></span>
-
-<!-- modul 558c -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky"
- onclick="NacitajZobratovky(558);" style="top:932px; left:385px;" class="btn-row-tool">
-<input type="text" name="m558r01" id="m558r01" style="width:100px; top:1029px; left:680px;"/>
-<input type="text" name="m558r02" id="m558r02" style="width:100px; top:1055px; left:680px;"/>
-<input type="text" name="m558r03" id="m558r03" style="width:100px; top:1081px; left:680px;"/>
-<input type="text" name="m558r04" id="m558r04" style="width:100px; top:1107px; left:680px;"/>
-<input type="text" name="m558r05" id="m558r05" style="width:100px; top:1133px; left:680px;"/>
-<input type="text" name="m558r06" id="m558r06" style="width:100px; top:1159px; left:680px;"/>
-<span class="text-echo" style="top:1188px; right:165px;"><?php echo $m558r99; ?></span>
+<input type="text" name="m398r01" id="m398r01" style="width:100px; top:1031px; left:680px;"/>
+<input type="text" name="m398r02" id="m398r02" style="width:100px; top:1057px; left:680px;"/>
+<span class="text-echo" style="top:1087px; right:165px;"><?php echo $m398r99; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 4 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str4.jpg"
- alt="tlaËivo ätvrùroËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 4.strana 279kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str4.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 4.strana 279kB">
+<span class="text-echo" style="top:76px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 405a -->
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky"
+     onclick="NacitajZobratovky(405);" style="top:115px; left:450px;" class="btn-row-tool">
+<input type="text" name="m405r01" id="m405r01" style="width:100px; top:207px; left:710px;"/>
+<input type="text" name="m405r02" id="m405r02" style="width:100px; top:232px; left:710px;"/>
+<input type="text" name="m405r03" id="m405r03" style="width:100px; top:258px; left:710px;"/>
+<input type="text" name="m405r04" id="m405r04" style="width:100px; top:284px; left:710px;"/>
+<input type="text" name="m405r05" id="m405r05" style="width:100px; top:310px; left:710px;"/>
+<input type="text" name="m405r06" id="m405r06" style="width:100px; top:336px; left:710px;"/>
+<span class="text-echo" style="top:366px; right:135px;"><?php echo $m405r99; ?></span>
+
+<!-- modul 558c -->
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky"
+     onclick="NacitajZobratovky(558);" style="top:408px; left:387px;" class="btn-row-tool">
+<input type="text" name="m558r01" id="m558r01" style="width:100px; top:500px; left:680px;"/>
+<input type="text" name="m558r02" id="m558r02" style="width:100px; top:527px; left:680px;"/>
+<input type="text" name="m558r03" id="m558r03" style="width:100px; top:552px; left:680px;"/>
+<input type="text" name="m558r04" id="m558r04" style="width:100px; top:578px; left:680px;"/>
+<input type="text" name="m558r05" id="m558r05" style="width:100px; top:604px; left:680px;"/>
+<input type="text" name="m558r06" id="m558r06" style="width:100px; top:630px; left:680px;"/>
+<span class="text-echo" style="top:660px; right:165px;"><?php echo $m558r99; ?></span>
 
 <!-- modul 580a -->
-<input type="text" name="m580r11" id="m580r11" style="width:100px; top:175px; left:590px;"/>
-<input type="text" name="m580r12" id="m580r12" style="width:100px; top:201px; left:590px;"/>
-<span class="text-echo" style="top:230px; right:253px;"><?php echo $m580r199; ?></span>
-<input type="text" name="m580r21" id="m580r21" style="width:100px; top:175px; left:765px;"/>
-<input type="text" name="m580r22" id="m580r22" style="width:100px; top:201px; left:765px;"/>
-<span class="text-echo" style="top:230px; right:79px;"><?php echo $m580r299; ?></span>
+<input type="text" name="m580r11" id="m580r11" style="width:100px; top:825px; left:590px;"/>
+<input type="text" name="m580r12" id="m580r12" style="width:100px; top:851px; left:590px;"/>
+<span class="text-echo" style="top:881px; right:255px;"><?php echo $m580r199; ?></span>
+<input type="text" name="m580r21" id="m580r21" style="width:100px; top:825px; left:765px;"/>
+<input type="text" name="m580r22" id="m580r22" style="width:100px; top:851px; left:765px;"/>
+<span class="text-echo" style="top:881px; right:80px;"><?php echo $m580r299; ?></span>
 
 <!-- modul 586b -->
 <img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky"
- onclick="NacitajZobratovky(586);" style="top:263px; left:337px;" class="btn-row-tool">
-<input type="text" name="m586r11" id="m586r11" style="width:100px; top:359px; left:590px;"/>
-<input type="text" name="m586r12" id="m586r12" style="width:100px; top:385px; left:590px;"/>
-<input type="text" name="m586r13" id="m586r13" style="width:100px; top:411px; left:590px;"/>
-<input type="text" name="m586r14" id="m586r14" style="width:100px; top:437px; left:590px;"/>
-<span class="text-echo" style="top:467px; right:253px;"><?php echo $m586r199; ?></span>
-<input type="text" name="m586r21" id="m586r21" style="width:100px; top:359px; left:765px;"/>
-<input type="text" name="m586r22" id="m586r22" style="width:100px; top:385px; left:765px;"/>
-<input type="text" name="m586r23" id="m586r23" style="width:100px; top:411px; left:765px;"/>
-<input type="text" name="m586r24" id="m586r24" style="width:100px; top:437px; left:765px;"/>
-<span class="text-echo" style="top:467px; right:79px;"><?php echo $m586r299; ?></span>
+     onclick="NacitajZobratovky(586);" style="top:923px; left:340px;" class="btn-row-tool">
+<input type="text" name="m586r11" id="m586r11" style="width:100px; top:1016px; left:590px;"/>
+<input type="text" name="m586r12" id="m586r12" style="width:100px; top:1041px; left:590px;"/>
+<input type="text" name="m586r13" id="m586r13" style="width:100px; top:1067px; left:590px;"/>
+<input type="text" name="m586r14" id="m586r14" style="width:100px; top:1093px; left:590px;"/>
+<span class="text-echo" style="top:1123px; right:253px;"><?php echo $m586r199; ?></span>
+<input type="text" name="m586r21" id="m586r21" style="width:100px; top:1016px; left:765px;"/>
+<input type="text" name="m586r22" id="m586r22" style="width:100px; top:1041px; left:765px;"/>
+<input type="text" name="m586r23" id="m586r23" style="width:100px; top:1067px; left:765px;"/>
+<input type="text" name="m586r24" id="m586r24" style="width:100px; top:1093px; left:765px;"/>
+<span class="text-echo" style="top:1123px; right:79px;"><?php echo $m586r299; ?></span>
+<?php                                        } ?>
 
-<!-- modul 100062 -->
-<script>
-  function klikm100062ano()
-  {
-   document.formv1.m100062nie.checked = false;
-  }
-  function klikm100062nie()
-  {
-   document.formv1.m100062ano.checked = false;
-  }
-</script>
-<input type="checkbox" name="m100062ano" value="1" onchange="klikm100062ano();"
- style="top:528px; left:839px;"/>
-<input type="checkbox" name="m100062nie" value="1" onchange="klikm100062nie();"
- style="top:548px; left:839px;"/>
+
+<?php if ( $strana == 5 OR $strana == 9999 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str5.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 5.strana 238kB">
+<span class="text-echo" style="top:76px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 585 -->
-<input type="text" name="m585r01" id="m585r01" style="width:100px; top:874px; left:680px;"/>
-<input type="text" name="m585r02" id="m585r02" style="width:100px; top:906px; left:680px;"/>
-<input type="text" name="m585r3k" id="m585r3k" style="width:112px; top:937px; left:397px;"/>
-<input type="text" name="m585r03" id="m585r03" style="width:100px; top:937px; left:680px;"/>
-<input type="text" name="m585r4k" id="m585r4k" style="width:112px; top:962px; left:397px;"/>
-<input type="text" name="m585r04" id="m585r04" style="width:100px; top:962px; left:680px;"/>
-<input type="text" name="m585r5k" id="m585r5k" style="width:112px; top:988px; left:397px;"/>
-<input type="text" name="m585r05" id="m585r05" style="width:100px; top:988px; left:680px;"/>
+<input type="text" name="m585r01" id="m585r01" style="width:100px; top:423px; left:700px;"/>
+<input type="text" name="m585r02" id="m585r02" style="width:100px; top:454px; left:700px;"/>
+<input type="text" name="m585r3k" id="m585r3k" style="width:112px; top:485px; left:420px;"/>
+<input type="text" name="m585r03" id="m585r03" style="width:100px; top:485px; left:700px;"/>
+<input type="text" name="m585r4k" id="m585r4k" style="width:112px; top:512px; left:420px;"/>
+<input type="text" name="m585r04" id="m585r04" style="width:100px; top:512px; left:700px;"/>
+<input type="text" name="m585r5k" id="m585r5k" style="width:112px; top:537px; left:420px;"/>
+<input type="text" name="m585r05" id="m585r05" style="width:100px; top:537px; left:700px;"/>
 
 <!-- modul 100044 -->
+<!-- dopyt, daù do .js -->
 <script>
   function klikm100044ano()
   {
@@ -6023,100 +5997,97 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
    document.formv1.m100044ano.checked = false;
   }
 </script>
-<input type="checkbox" name="m100044ano" value="1" onchange="klikm100044ano();"
- style="top:1153px; left:839px;"/>
-<input type="checkbox" name="m100044nie" value="1" onchange="klikm100044nie();"
- style="top:1173px; left:839px;"/>
+<input type="checkbox" name="m100044ano" value="1" onchange="klikm100044ano();" style="top:688px; left:839px;"/>
+<input type="checkbox" name="m100044nie" value="1" onchange="klikm100044nie();" style="top:708px; left:839px;"/>
+
+<!-- modul 571 -->
+<input type="text" name="m571r10" id="m571r10" style="width:103px; top:940px; left:50px;"/>
+<?php $cslr="1."; if ( $m571r10 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:942px; left:224px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r12" id="m571r12" style="width:102px; top:940px; left:266px;"/>
+<input type="text" name="m571r13" id="m571r13" style="width:58px; top:940px; left:378px;"/>
+<input type="text" name="m571r15" id="m571r15" style="width:81px; top:940px; left:514px;"/>
+<input type="text" name="m571r16" id="m571r16" style="width:80px; top:940px; left:605px;"/>
+<input type="text" name="m571r17" id="m571r17" style="width:105px; top:940px; left:696px;"/>
+<input type="text" name="m571r18" id="m571r18" style="width:79px; top:940px; left:812px;"/>
+<input type="text" name="m571r20" id="m571r20" style="width:103px; top:966px; left:50px;"/>
+<?php $cslr="2."; if ( $m571r20 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:968px; left:224px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r22" id="m571r22" style="width:102px; top:966px; left:266px;"/>
+<input type="text" name="m571r23" id="m571r23" style="width:58px; top:966px; left:378px;"/>
+<input type="text" name="m571r25" id="m571r25" style="width:81px; top:966px; left:514px;"/>
+<input type="text" name="m571r26" id="m571r26" style="width:80px; top:966px; left:605px;"/>
+<input type="text" name="m571r27" id="m571r27" style="width:105px; top:966px; left:696px;"/>
+<input type="text" name="m571r28" id="m571r28" style="width:79px; top:966px; left:812px;"/>
+<input type="text" name="m571r30" id="m571r30" style="width:103px; top:992px; left:50px;"/>
+<?php $cslr="3."; if ( $m571r30 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:995px; left:224px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r32" id="m571r32" style="width:102px; top:992px; left:266px;"/>
+<input type="text" name="m571r33" id="m571r33" style="width:58px; top:992px; left:378px;"/>
+<input type="text" name="m571r35" id="m571r35" style="width:81px; top:992px; left:514px;"/>
+<input type="text" name="m571r36" id="m571r36" style="width:80px; top:992px; left:605px;"/>
+<input type="text" name="m571r37" id="m571r37" style="width:105px; top:992px; left:696px;"/>
+<input type="text" name="m571r38" id="m571r38" style="width:79px; top:992px; left:812px;"/>
+<input type="text" name="m571r40" id="m571r40" style="width:103px; top:1018px; left:50px;"/>
+<?php $cslr="4."; if ( $m571r40 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:1020px; left:224px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r42" id="m571r42" style="width:102px; top:1018px; left:266px;"/>
+<input type="text" name="m571r43" id="m571r43" style="width:58px; top:1018px; left:378px;"/>
+<input type="text" name="m571r45" id="m571r45" style="width:81px; top:1018px; left:514px;"/>
+<input type="text" name="m571r46" id="m571r46" style="width:80px; top:1018px; left:605px;"/>
+<input type="text" name="m571r47" id="m571r47" style="width:105px; top:1018px; left:696px;"/>
+<input type="text" name="m571r48" id="m571r48" style="width:79px; top:1018px; left:812px;"/>
+<input type="text" name="m571r50" id="m571r50" style="width:103px; top:1045px; left:50px;"/>
+<?php $cslr="5."; if ( $m571r50 == '' ) { $cslr=""; } ?>
+ <span class="text-echo" style="top:1046px; left:224px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r52" id="m571r52" style="width:102px; top:1045px; left:266px;"/>
+<input type="text" name="m571r53" id="m571r53" style="width:58px; top:1045px; left:378px;"/>
+<input type="text" name="m571r55" id="m571r55" style="width:81px; top:1045px; left:514px;"/>
+<input type="text" name="m571r56" id="m571r56" style="width:80px; top:1045px; left:605px;"/>
+<input type="text" name="m571r57" id="m571r57" style="width:105px; top:1045px; left:696px;"/>
+<input type="text" name="m571r58" id="m571r58" style="width:79px; top:1045px; left:812px;"/>
+<input type="text" name="m571r60" id="m571r60" style="width:103px; top:1071px; left:50px;"/>
+<?php $cslr="6."; if ( $m571r60 == '' ) { $cslr=""; } ?>
+ <span class="text-echo" style="top:1072px; left:224px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r62" id="m571r62" style="width:102px; top:1071px; left:266px;"/>
+<input type="text" name="m571r63" id="m571r63" style="width:58px; top:1071px; left:378px;"/>
+<input type="text" name="m571r65" id="m571r65" style="width:81px; top:1071px; left:514px;"/>
+<input type="text" name="m571r66" id="m571r66" style="width:80px; top:1071px; left:605px;"/>
+<input type="text" name="m571r67" id="m571r67" style="width:105px; top:1071px; left:696px;"/>
+<input type="text" name="m571r68" id="m571r68" style="width:79px; top:1071px; left:812px;"/>
+<input type="text" name="m571r70" id="m571r70" style="width:103px; top:1097px; left:50px;"/>
+<?php $cslr="7."; if ( $m571r70 == '' ) { $cslr=""; } ?>
+ <span class="text-echo" style="top:1097px; left:224px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r72" id="m571r72" style="width:102px; top:1097px; left:266px;"/>
+<input type="text" name="m571r73" id="m571r73" style="width:58px; top:1097px; left:378px;"/>
+<input type="text" name="m571r75" id="m571r75" style="width:81px; top:1097px; left:514px;"/>
+<input type="text" name="m571r76" id="m571r76" style="width:80px; top:1097px; left:605px;"/>
+<input type="text" name="m571r77" id="m571r77" style="width:105px; top:1097px; left:696px;"/>
+<input type="text" name="m571r78" id="m571r78" style="width:79px; top:1097px; left:812px;"/>
+<input type="text" name="m571r80" id="m571r80" style="width:103px; top:1123px; left:50px;"/>
+<?php $cslr="8."; if ( $m571r80 == '' ) { $cslr=""; } ?>
+ <span class="text-echo" style="top:1123px; left:224px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r82" id="m571r82" style="width:102px; top:1123px; left:266px;"/>
+<input type="text" name="m571r83" id="m571r83" style="width:58px; top:1123px; left:378px;"/>
+<input type="text" name="m571r85" id="m571r85" style="width:81px; top:1123px; left:514px;"/>
+<input type="text" name="m571r86" id="m571r86" style="width:80px; top:1123px; left:605px;"/>
+<input type="text" name="m571r87" id="m571r87" style="width:105px; top:1123px; left:696px;"/>
+<input type="text" name="m571r88" id="m571r88" style="width:79px; top:1123px; left:812px;"/>
+<input type="text" name="m571r90" id="m571r90" style="width:103px; top:1150px; left:50px;"/>
+<?php $cslr="9."; if ( $m571r30 == '' ) { $cslr=""; } ?>
+ <span class="text-echo" style="top:1149px; left:224px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r92" id="m571r92" style="width:102px; top:1150px; left:266px;"/>
+<input type="text" name="m571r93" id="m571r93" style="width:58px; top:1150px; left:378px;"/>
+<input type="text" name="m571r95" id="m571r95" style="width:81px; top:1150px; left:514px;"/>
+<input type="text" name="m571r96" id="m571r96" style="width:80px; top:1150px; left:605px;"/>
+<input type="text" name="m571r97" id="m571r97" style="width:105px; top:1150px; left:696px;"/>
+<input type="text" name="m571r98" id="m571r98" style="width:79px; top:1150px; left:812px;"/>
 <?php                                        } ?>
 
 
-<?php if ( $strana == 5 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str5.jpg"
- alt="tlaËivo ätvrùroËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 5.strana 238kB" class="form-background">
-<span class="text-echo" style="top:85px; left:435px; font-size:16px; letter-spacing:28px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 571 -->
-<input type="text" name="m571r10" id="m571r10" style="width:115px; top:338px; left:50px;"/>
-<?php $cslr="1."; if ( $m571r10 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:342px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r12" id="m571r12" style="width:100px; top:338px; left:268px;"/>
-<input type="text" name="m571r13" id="m571r13" style="width:58px; top:338px; left:378px;"/>
-<input type="text" name="m571r15" id="m571r15" style="width:81px; top:338px; left:514px;"/>
-<input type="text" name="m571r16" id="m571r16" style="width:92px; top:338px; left:605px;"/>
-<input type="text" name="m571r17" id="m571r17" style="width:102px; top:338px; left:707px;"/>
-<input type="text" name="m571r18" id="m571r18" style="width:71px; top:338px; left:820px;"/>
-<input type="text" name="m571r20" id="m571r20" style="width:115px; top:364px; left:50px;"/>
-<?php $cslr="2."; if ( $m571r20 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:368px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r22" id="m571r22" style="width:100px; top:364px; left:268px;"/>
-<input type="text" name="m571r23" id="m571r23" style="width:58px; top:364px; left:378px;"/>
-<input type="text" name="m571r25" id="m571r25" style="width:81px; top:364px; left:514px;"/>
-<input type="text" name="m571r26" id="m571r26" style="width:92px; top:364px; left:605px;"/>
-<input type="text" name="m571r27" id="m571r27" style="width:102px; top:364px; left:707px;"/>
-<input type="text" name="m571r28" id="m571r28" style="width:71px; top:364px; left:820px;"/>
-<input type="text" name="m571r30" id="m571r30" style="width:115px; top:390px; left:50px;"/>
-<?php $cslr="3."; if ( $m571r30 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:395px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r32" id="m571r32" style="width:100px; top:390px; left:268px;"/>
-<input type="text" name="m571r33" id="m571r33" style="width:58px; top:390px; left:378px;"/>
-<input type="text" name="m571r35" id="m571r35" style="width:81px; top:390px; left:514px;"/>
-<input type="text" name="m571r36" id="m571r36" style="width:92px; top:390px; left:605px;"/>
-<input type="text" name="m571r37" id="m571r37" style="width:102px; top:390px; left:707px;"/>
-<input type="text" name="m571r38" id="m571r38" style="width:71px; top:390px; left:820px;"/>
-<input type="text" name="m571r40" id="m571r40" style="width:115px; top:416px; left:50px;"/>
-<?php $cslr="4."; if ( $m571r40 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:420px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r42" id="m571r42" style="width:100px; top:416px; left:268px;"/>
-<input type="text" name="m571r43" id="m571r43" style="width:58px; top:416px; left:378px;"/>
-<input type="text" name="m571r45" id="m571r45" style="width:81px; top:416px; left:514px;"/>
-<input type="text" name="m571r46" id="m571r46" style="width:92px; top:416px; left:605px;"/>
-<input type="text" name="m571r47" id="m571r47" style="width:102px; top:416px; left:707px;"/>
-<input type="text" name="m571r48" id="m571r48" style="width:71px; top:416px; left:820px;"/>
-<input type="text" name="m571r50" id="m571r50" style="width:115px; top:442px; left:50px;"/>
-<?php $cslr="5."; if ( $m571r50 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:446px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r52" id="m571r52" style="width:100px; top:442px; left:268px;"/>
-<input type="text" name="m571r53" id="m571r53" style="width:58px; top:442px; left:378px;"/>
-<input type="text" name="m571r55" id="m571r55" style="width:81px; top:442px; left:514px;"/>
-<input type="text" name="m571r56" id="m571r56" style="width:92px; top:442px; left:605px;"/>
-<input type="text" name="m571r57" id="m571r57" style="width:102px; top:442px; left:707px;"/>
-<input type="text" name="m571r58" id="m571r58" style="width:71px; top:442px; left:820px;"/>
-<input type="text" name="m571r60" id="m571r60" style="width:115px; top:468px; left:50px;"/>
-<?php $cslr="6."; if ( $m571r60 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:472px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r62" id="m571r62" style="width:100px; top:468px; left:268px;"/>
-<input type="text" name="m571r63" id="m571r63" style="width:58px; top:468px; left:378px;"/>
-<input type="text" name="m571r65" id="m571r65" style="width:81px; top:468px; left:514px;"/>
-<input type="text" name="m571r66" id="m571r66" style="width:92px; top:468px; left:605px;"/>
-<input type="text" name="m571r67" id="m571r67" style="width:102px; top:468px; left:707px;"/>
-<input type="text" name="m571r68" id="m571r68" style="width:71px; top:468px; left:820px;"/>
-<input type="text" name="m571r70" id="m571r70" style="width:115px; top:494px; left:50px;"/>
-<?php $cslr="7."; if ( $m571r70 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:497px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r72" id="m571r72" style="width:100px; top:494px; left:268px;"/>
-<input type="text" name="m571r73" id="m571r73" style="width:58px; top:494px; left:378px;"/>
-<input type="text" name="m571r75" id="m571r75" style="width:81px; top:494px; left:514px;"/>
-<input type="text" name="m571r76" id="m571r76" style="width:92px; top:494px; left:605px;"/>
-<input type="text" name="m571r77" id="m571r77" style="width:102px; top:494px; left:707px;"/>
-<input type="text" name="m571r78" id="m571r78" style="width:71px; top:494px; left:820px;"/>
-<input type="text" name="m571r80" id="m571r80" style="width:115px; top:519px; left:50px;"/>
-<?php $cslr="8."; if ( $m571r80 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:523px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r82" id="m571r82" style="width:100px; top:519px; left:268px;"/>
-<input type="text" name="m571r83" id="m571r83" style="width:58px; top:519px; left:378px;"/>
-<input type="text" name="m571r85" id="m571r85" style="width:81px; top:519px; left:514px;"/>
-<input type="text" name="m571r86" id="m571r86" style="width:92px; top:519px; left:605px;"/>
-<input type="text" name="m571r87" id="m571r87" style="width:102px; top:519px; left:707px;"/>
-<input type="text" name="m571r88" id="m571r88" style="width:71px; top:519px; left:820px;"/>
-<input type="text" name="m571r90" id="m571r90" style="width:115px; top:545px; left:50px;"/>
-<?php $cslr="9."; if ( $m571r30 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:549px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r92" id="m571r92" style="width:100px; top:545px; left:268px;"/>
-<input type="text" name="m571r93" id="m571r93" style="width:58px; top:545px; left:378px;"/>
-<input type="text" name="m571r95" id="m571r95" style="width:81px; top:545px; left:514px;"/>
-<input type="text" name="m571r96" id="m571r96" style="width:92px; top:545px; left:605px;"/>
-<input type="text" name="m571r97" id="m571r97" style="width:102px; top:545px; left:707px;"/>
-<input type="text" name="m571r98" id="m571r98" style="width:71px; top:545px; left:820px;"/>
+<?php if ( $strana == 6 OR $strana == 9999 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str6.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 6.strana 271kB">
 
 <!-- modul 516b -->
 <img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky"
@@ -6151,12 +6122,7 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <input type="text" name="m516r213" id="m516r213" style="width:100px; top:1090px; left:765px;"/>
 <input type="text" name="m516r214" id="m516r214" style="width:100px; top:1116px; left:765px;"/>
 <span class="text-echo" style="top:1146px; right:79px;"><?php echo $m516r299; ?></span>
-<?php                                        } ?>
 
-
-<?php if ( $strana == 6 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str6.jpg"
- alt="tlaËivo ätvrùroËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 6.strana 271kB" class="form-background">
 
 <!-- modul 513b -->
 <img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky"
@@ -6279,8 +6245,8 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 
 <?php if ( $strana == 7 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str7.jpg"
- alt="tlaËivo ätvrùroËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 7.strana 265kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str7.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 7.strana 265kB">
 <span class="text-echo" style="top:74px; left:435px; font-size:16px; letter-spacing:28px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 588 pokraË. -->
@@ -6348,6 +6314,23 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <input type="checkbox" name="m588r350" value="1" style="top:893px; left:833px;"/>
 <input type="checkbox" name="m588r351" value="1" style="top:918px; left:833px;"/>
 
+<!-- modul 100086 -->
+<script>
+  function klikm100086ano()
+  {
+   document.formv1.mod100086nie.checked = false;
+  }
+  function klikm100086nie()
+  {
+   document.formv1.mod100086ano.checked = false;
+  }
+</script>
+<input type="checkbox" name="mod100086ano" value="1" onchange="klikm100086ano();"
+ style="top:632px; left:839px;"/>
+<input type="checkbox" name="mod100086nie" value="1" onchange="klikm100086nie();"
+ style="top:652px; left:839px;"/>
+
+
 <!-- modul 177a -->
 <img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky"
  onclick="NacitajZobratovky(177);" style="top:946px; left:312px;" class="btn-row-tool">
@@ -6364,8 +6347,8 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 
 <?php if ( $strana == 8 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str8.jpg"
- alt="tlaËivo ätvrùroËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 8.strana 245kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str8.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 8.strana 245kB">
 
 <!-- modul 178a -->
 <img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky"
@@ -6398,6 +6381,24 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <input type="text" name="m179r02" id="m179r02" style="width:100px; top:858px; left:680px;"/>
 <span class="text-echo" style="top:888px; right:162px;"><?php echo $m179r99; ?></span>
 
+<!-- modul 100062 -->
+<script>
+  function klikm100062ano()
+  {
+   document.formv1.m100062nie.checked = false;
+  }
+  function klikm100062nie()
+  {
+   document.formv1.m100062ano.checked = false;
+  }
+</script>
+<input type="checkbox" name="m100062ano" value="1" onchange="klikm100062ano();"
+ style="top:528px; left:839px;"/>
+<input type="checkbox" name="m100062nie" value="1" onchange="klikm100062nie();"
+ style="top:548px; left:839px;"/>
+
+
+
 <!-- modul 182a -->
 <input type="text" name="m182r001" id="m182r001" style="width:350px; top:1029px; left:50px;"/>
 <input type="text" name="m182r002" id="m182r002" style="width:350px; top:1053px; left:50px;"/>
@@ -6425,8 +6426,8 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 
 <?php if ( $strana == 9 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str9.jpg"
- alt="tlaËivo ätvrùroËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 9.strana 225kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str9.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 9.strana 225kB">
 
 <!-- modul 183a -->
 <input type="text" name="m183r001" id="m183r001" style="width:350px; top:215px; left:50px;"/>
@@ -6504,12 +6505,12 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <input type="text" name="m184r309" id="m184r309" style="width:183px; top:927px; left:708px;"/>
 <input type="text" name="m184r310" id="m184r310" style="width:183px; top:954px; left:708px;"/>
 <span class="text-echo" style="top:984px; right:65px;"><?php echo $m184r399; ?></span>
-<?php                                        } ?>
+<?php                                         } ?>
 
 
 <?php if ( $strana == 10 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str10.jpg"
- alt="tlaËivo ätvrùroËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 10.strana 264kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str10.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 10.strana 264kB">
 
 <!-- modul 185a -->
 <input type="text" name="m185r001" id="m185r001" style="width:259px; top:180px; left:50px;"/>
@@ -6585,13 +6586,12 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <input type="text" name="m304r05" id="m304r05" style="width:140px; top:1111px; left:690px;"/>
 <input type="text" name="m304r06" id="m304r06" style="width:140px; top:1137px; left:690px;"/>
 <span class="text-echo" style="top:1167px; right:113px;"><?php echo $m304r99; ?></span>
-<?php                                        } ?>
+<?php                                         } ?>
 
 
 <?php if ( $strana == 11 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str11.jpg"
- alt="tlaËivo ätvrùroËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 11.strana 187kB"
- class="form-background" style="width:1250px; height:800px;">
+<img src="<?php echo $jpg_cesta; ?>_str11.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 11.strana 187kB">
 
 <!-- modul 527a -->
 <input type="text" name="m527r101" id="m527r101" style="width:64px; top:276px; left:299px;"/>
@@ -6638,8 +6638,8 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 
 <?php if ( $strana == 12 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str12.jpg"
- alt="tlaËivo ätvrùroËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 12.strana 164kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 12.strana 165kB">
 
 <!-- modul 474a -->
 <input type="text" name="m474r101" id="m474r101" style="width:100px; top:263px; left:516px;"/>
@@ -6667,12 +6667,12 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <input type="text" name="m474r306" id="m474r306" style="width:138px; top:393px; left:753px;"/>
 <input type="text" name="m474r307" id="m474r307" style="width:138px; top:419px; left:753px;"/>
 <span class="text-echo" style="top:448px; right:60px;"><?php echo $m474r399; ?></span>
-<?php                                        } ?>
+<?php                                         } ?>
 
 
 <?php if ( $strana == 13 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str13.jpg"
- alt="tlaËivo ätvrùroËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 13.strana 207kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str13.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 13.strana 207kB">
 
 <!-- modul 127 -->
 <input type="text" name="m127r001" id="m127r001" style="width:250px; top:364px; left:50px;"/>
@@ -6789,8 +6789,8 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 
 <?php if ( $strana == 14 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2014/opu201/opu201v14_str14.jpg"
- alt="tlaËivo ätvrùroËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch RoË OPU 2-01 14.strana 203kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str14.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 14.strana 205kB">
 
 <!-- modul 128 -->
 <input type="text" name="m128r101" id="m128r101" style="width:90px; top:291px; left:425px;"/>
@@ -6918,10 +6918,11 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str1.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str1.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
 
 //OBDOBIA
 $pdf->SetFont('arial','',15);
@@ -6998,10 +6999,14 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str2.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str2.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
+
+
+
 
 //modul 100038
 $mod100038=$hlavicka->mod100038;
@@ -7096,10 +7101,11 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str3.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str3.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str3.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str3.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
 
 //ico
 $pdf->Cell(190,5," ","$rmc1",1,"L");
@@ -7183,10 +7189,11 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str4.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str4.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str4.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str4.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
 
 //modul 580a
 $pdf->Cell(195,24," ","$rmc1",1,"L");
@@ -7277,10 +7284,11 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str5.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str5.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str5.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str5.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
 
 //ico
 $pdf->Cell(190,3," ","$rmc1",1,"L");
@@ -7499,10 +7507,13 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str6.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str6.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str6.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str6.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
+
+
 
 //modul 513b
 $m513r101=$hlavicka->m513r101; if ( $m513r101 == 0 ) $m513r101="";
@@ -7722,10 +7733,12 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str7.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str7.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str7.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str7.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
+
 
 //ico
 $pdf->Cell(190,0," ","$rmc1",1,"L");
@@ -7900,10 +7913,13 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str8.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str8.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str8.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str8.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
+
+
 
 //modul 178a
 $m178r01=$hlavicka->m178r01; if ( $m178r01 == 0 ) $m178r01="";
@@ -8019,10 +8035,13 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str9.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str9.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str9.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str9.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
+
+
 
 //modul 183a
 $m183r001=$hlavicka->m183r001;
@@ -8182,10 +8201,12 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str10.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str10.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str10.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str10.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
+
 
 //modul 185a
 $m185r001=$hlavicka->m185r001;
@@ -8331,10 +8352,11 @@ $pdf->AddPage(L);
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str11.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str11.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str11.jpg',8,8,298,199);
+$pdf->Image($jpg_cesta.'_str11.jpg',8,8,298,199); //dopyt, pozrieù nastavenie vts101
 }
+$pdf->SetY(10);
 
 //modul 527a
 $m527r101=$hlavicka->m527r101; if ( $m527r101 == 0 ) $m527r101="";
@@ -8409,10 +8431,13 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str12.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str12.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str12.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str12.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
+
+
 
 //modul 474a
 $m474r101=$hlavicka->m474r101; if ( $m474r101 == 0 ) $m474r101="";
@@ -8466,10 +8491,13 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str13.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str13.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str13.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str13.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
+
+
 
 //modul 127
 $m127r001=$hlavicka->m127r001;
@@ -8675,10 +8703,14 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/statistika2014/opu201/opu201v14_str14.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str14.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/statistika2014/opu201/opu201v14_str14.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str14.jpg',0,0,210,297);
 }
+$pdf->SetY(10);
+
+
+
 
 //modul 128
 $m128r101=$hlavicka->m128r101; if ( $m128r101 == 0 ) $m128r101="";
