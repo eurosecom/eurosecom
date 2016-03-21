@@ -57,7 +57,6 @@ $modul=178;
 //modul 178
 if( $modul == 178 )
 {
-
 //178.modul  
 
 $r01=0; 
@@ -568,6 +567,7 @@ $vytvor = mysql_query("$vsql");
 $ttvv = "INSERT INTO F$kli_vxcf"."_statistika_opu201 ( ico ) VALUES ( '0' )";
 $ttqq = mysql_query("$ttvv");
 }
+
 
 //1.strana, 2.strana je hore vyssie
 $sql = "SELECT odoslane FROM F$kli_vxcf"."_statistika_opu201 ";
@@ -2276,6 +2276,11 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 ADD m128r599 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 }
+
+$sql = "SELECT m128r600 FROM F$kli_vxcf"."_statistika_opu201 WHERE ico=0";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 MODIFY m128r101 DECIMAL(10,0) DEFAULT 0 ";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 MODIFY m128r102 DECIMAL(10,0) DEFAULT 0 ";
@@ -2300,7 +2305,11 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 MODIFY m128r111 DECIMAL(10,0
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 MODIFY m128r199 DECIMAL(10,0) DEFAULT 0 ";
 $vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 ADD m128r600 DECIMAL(10,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+}
 //koniec pracovny subor
+
 
 
 //nacitaj mzdy
