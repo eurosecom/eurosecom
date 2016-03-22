@@ -6088,118 +6088,187 @@ $sknacesb=$fir_sknace;
 <?php if ( $strana == 6 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str6.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 6.strana 271kB">
+<span class="text-echo" style="top:76px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 516b -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
- onclick="NacitajZobratovky(516);" style="top:678px; left:530px;" class="btn-row-tool">
-<input type="text" name="m516r101" id="m516r101" style="width:100px; top:780px; left:590px;"/>
-<input type="text" name="m516r102" id="m516r102" style="width:100px; top:806px; left:590px;"/>
-<input type="text" name="m516r103" id="m516r103" style="width:100px; top:831px; left:590px;"/>
-<input type="text" name="m516r104" id="m516r104" style="width:100px; top:857px; left:590px;"/>
-<input type="text" name="m516r105" id="m516r105" style="width:100px; top:883px; left:590px;"/>
-<input type="text" name="m516r106" id="m516r106" style="width:100px; top:909px; left:590px;"/>
-<input type="text" name="m516r107" id="m516r107" style="width:100px; top:935px; left:590px;"/>
-<input type="text" name="m516r108" id="m516r108" style="width:100px; top:961px; left:590px;"/>
-<input type="text" name="m516r109" id="m516r109" style="width:100px; top:987px; left:590px;"/>
-<input type="text" name="m516r110" id="m516r110" style="width:100px; top:1012px; left:590px;"/>
-<input type="text" name="m516r111" id="m516r111" style="width:100px; top:1038px; left:590px;"/>
-<input type="text" name="m516r112" id="m516r112" style="width:100px; top:1064px; left:590px;"/>
-<input type="text" name="m516r113" id="m516r113" style="width:100px; top:1090px; left:590px;"/>
-<input type="text" name="m516r114" id="m516r114" style="width:100px; top:1116px; left:590px;"/>
-<span class="text-echo" style="top:1146px; right:254px;"><?php echo $m516r199; ?></span>
-<input type="text" name="m516r201" id="m516r201" style="width:100px; top:780px; left:765px;"/>
-<input type="text" name="m516r202" id="m516r202" style="width:100px; top:806px; left:765px;"/>
-<input type="text" name="m516r203" id="m516r203" style="width:100px; top:831px; left:765px;"/>
-<input type="text" name="m516r204" id="m516r204" style="width:100px; top:857px; left:765px;"/>
-<input type="text" name="m516r205" id="m516r205" style="width:100px; top:883px; left:765px;"/>
-<input type="text" name="m516r206" id="m516r206" style="width:100px; top:909px; left:765px;"/>
-<input type="text" name="m516r207" id="m516r207" style="width:100px; top:935px; left:765px;"/>
-<input type="text" name="m516r208" id="m516r208" style="width:100px; top:961px; left:765px;"/>
-<input type="text" name="m516r209" id="m516r209" style="width:100px; top:987px; left:765px;"/>
-<input type="text" name="m516r210" id="m516r210" style="width:100px; top:1012px; left:765px;"/>
-<input type="text" name="m516r211" id="m516r211" style="width:100px; top:1038px; left:765px;"/>
-<input type="text" name="m516r212" id="m516r212" style="width:100px; top:1064px; left:765px;"/>
-<input type="text" name="m516r213" id="m516r213" style="width:100px; top:1090px; left:765px;"/>
-<input type="text" name="m516r214" id="m516r214" style="width:100px; top:1116px; left:765px;"/>
-<span class="text-echo" style="top:1146px; right:79px;"><?php echo $m516r299; ?></span>
+     onclick="NacitajZobratovky(516);" style="top:113px; left:532px;" class="btn-row-tool">
+<input type="text" name="m516r101" id="m516r101" style="width:100px; top:217px; left:555px;"/>
+<input type="text" name="m516r102" id="m516r102" style="width:100px; top:243px; left:555px;"/>
+<input type="text" name="m516r103" id="m516r103" style="width:100px; top:269px; left:555px;"/>
+<input type="text" name="m516r104" id="m516r104" style="width:100px; top:295px; left:555px;"/>
+<input type="text" name="m516r105" id="m516r105" style="width:100px; top:321px; left:555px;"/>
+<input type="text" name="m516r106" id="m516r106" style="width:100px; top:347px; left:555px;"/>
+<input type="text" name="m516r107" id="m516r107" style="width:100px; top:373px; left:555px;"/>
+<input type="text" name="m516r108" id="m516r108" style="width:100px; top:398px; left:555px;"/>
+<input type="text" name="m516r109" id="m516r109" style="width:100px; top:424px; left:555px;"/>
+<input type="text" name="m516r110" id="m516r110" style="width:100px; top:450px; left:555px;"/>
+<input type="text" name="m516r111" id="m516r111" style="width:100px; top:476px; left:555px;"/>
+<input type="text" name="m516r112" id="m516r112" style="width:100px; top:502px; left:555px;"/>
+<input type="text" name="m516r113" id="m516r113" style="width:100px; top:528px; left:555px;"/>
+<input type="text" name="m516r114" id="m516r114" style="width:100px; top:553px; left:555px;"/>
+<span class="text-echo" style="top:583px; right:290px;"><?php echo $m516r199; ?></span>
+<input type="text" name="m516r201" id="m516r201" style="width:100px; top:217px; left:750px;"/>
+<input type="text" name="m516r202" id="m516r202" style="width:100px; top:243px; left:750px;"/>
+<input type="text" name="m516r203" id="m516r203" style="width:100px; top:269px; left:750px;"/>
+<input type="text" name="m516r204" id="m516r204" style="width:100px; top:295px; left:750px;"/>
+<input type="text" name="m516r205" id="m516r205" style="width:100px; top:321px; left:750px;"/>
+<input type="text" name="m516r206" id="m516r206" style="width:100px; top:347px; left:750px;"/>
+<input type="text" name="m516r207" id="m516r207" style="width:100px; top:373px; left:750px;"/>
+<input type="text" name="m516r208" id="m516r208" style="width:100px; top:398px; left:750px;"/>
+<input type="text" name="m516r209" id="m516r209" style="width:100px; top:424px; left:750px;"/>
+<input type="text" name="m516r210" id="m516r210" style="width:100px; top:450px; left:750px;"/>
+<input type="text" name="m516r211" id="m516r211" style="width:100px; top:476px; left:750px;"/>
+<input type="text" name="m516r212" id="m516r212" style="width:100px; top:502px; left:750px;"/>
+<input type="text" name="m516r213" id="m516r213" style="width:100px; top:528px; left:750px;"/>
+<input type="text" name="m516r214" id="m516r214" style="width:100px; top:553px; left:750px;"/>
+<span class="text-echo" style="top:583px; right:95px;"><?php echo $m516r299; ?></span>
 
 
 <!-- modul 513b -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
- onclick="NacitajZobratovky(513);" style="top:78px; left:358px;" class="btn-row-tool">
-<input type="text" name="m513r101" id="m513r101" style="width:87px; top:203px; left:360px;"/>
-<input type="text" name="m513r102" id="m513r102" style="width:87px; top:227px; left:360px;"/>
-<input type="text" name="m513r103" id="m513r103" style="width:87px; top:251px; left:360px;"/>
-<input type="text" name="m513r104" id="m513r104" style="width:87px; top:275px; left:360px;"/>
-<input type="text" name="m513r105" id="m513r105" style="width:87px; top:299px; left:360px;"/>
-<input type="text" name="m513r106" id="m513r106" style="width:87px; top:330px; left:360px;"/>
-<input type="text" name="m513r107" id="m513r107" style="width:87px; top:366px; left:360px;"/>
-<input type="text" name="m513r108" id="m513r108" style="width:87px; top:396px; left:360px;"/>
-<input type="text" name="m513r109" id="m513r109" style="width:87px; top:427px; left:360px;"/>
-<input type="text" name="m513r110" id="m513r110" style="width:87px; top:457px; left:360px;"/>
-<span class="text-echo" style="top:485px; right:500px;"><?php echo $m513r199; ?></span>
-<input type="text" name="m513r201" id="m513r201" style="width:72px; top:203px; left:458px;"/>
-<input type="text" name="m513r202" id="m513r202" style="width:72px; top:227px; left:458px;"/>
-<input type="text" name="m513r203" id="m513r203" style="width:72px; top:251px; left:458px;"/>
-<input type="text" name="m513r204" id="m513r204" style="width:72px; top:275px; left:458px;"/>
-<input type="text" name="m513r205" id="m513r205" style="width:72px; top:299px; left:458px;"/>
-<input type="text" name="m513r206" id="m513r206" style="width:72px; top:330px; left:458px;"/>
-<input type="text" name="m513r207" id="m513r207" style="width:72px; top:366px; left:458px;"/>
-<input type="text" name="m513r208" id="m513r208" style="width:72px; top:396px; left:458px;"/>
-<input type="text" name="m513r209" id="m513r209" style="width:72px; top:427px; left:458px;"/>
-<input type="text" name="m513r210" id="m513r210" style="width:72px; top:457px; left:458px;"/>
-<span class="text-echo" style="top:485px; right:417px;"><?php echo $m513r299; ?></span>
-<input type="text" name="m513r301" id="m513r301" style="width:79px; top:203px; left:541px;"/>
-<input type="text" name="m513r302" id="m513r302" style="width:79px; top:227px; left:541px;"/>
-<input type="text" name="m513r303" id="m513r303" style="width:79px; top:251px; left:541px;"/>
-<input type="text" name="m513r304" id="m513r304" style="width:79px; top:275px; left:541px;"/>
-<input type="text" name="m513r305" id="m513r305" style="width:79px; top:299px; left:541px;"/>
-<input type="text" name="m513r306" id="m513r306" style="width:79px; top:330px; left:541px;"/>
-<input type="text" name="m513r307" id="m513r307" style="width:79px; top:366px; left:541px;"/>
-<input type="text" name="m513r308" id="m513r308" style="width:79px; top:396px; left:541px;"/>
-<input type="text" name="m513r309" id="m513r309" style="width:79px; top:427px; left:541px;"/>
-<input type="text" name="m513r310" id="m513r310" style="width:79px; top:457px; left:541px;"/>
-<span class="text-echo" style="top:485px; right:328px;"><?php echo $m513r399; ?></span>
-<input type="text" name="m513r401" id="m513r401" style="width:79px; top:203px; left:632px;"/>
-<input type="text" name="m513r402" id="m513r402" style="width:79px; top:227px; left:632px;"/>
-<input type="text" name="m513r403" id="m513r403" style="width:79px; top:251px; left:632px;"/>
-<input type="text" name="m513r404" id="m513r404" style="width:79px; top:275px; left:632px;"/>
-<input type="text" name="m513r405" id="m513r405" style="width:79px; top:299px; left:632px;"/>
-<input type="text" name="m513r406" id="m513r406" style="width:79px; top:330px; left:632px;"/>
-<input type="text" name="m513r407" id="m513r407" style="width:79px; top:366px; left:632px;"/>
-<input type="text" name="m513r408" id="m513r408" style="width:79px; top:396px; left:632px;"/>
-<input type="text" name="m513r409" id="m513r409" style="width:79px; top:427px; left:632px;"/>
-<input type="text" name="m513r410" id="m513r410" style="width:79px; top:457px; left:632px;"/>
-<span class="text-echo" style="top:485px; right:237px;"><?php echo $m513r499; ?></span>
-<input type="text" name="m513r501" id="m513r501" style="width:87px; top:203px; left:722px;"/>
-<input type="text" name="m513r502" id="m513r502" style="width:87px; top:227px; left:722px;"/>
-<input type="text" name="m513r503" id="m513r503" style="width:87px; top:251px; left:722px;"/>
-<input type="text" name="m513r504" id="m513r504" style="width:87px; top:275px; left:722px;"/>
-<input type="text" name="m513r505" id="m513r505" style="width:87px; top:299px; left:722px;"/>
-<input type="text" name="m513r506" id="m513r506" style="width:87px; top:330px; left:722px;"/>
-<input type="text" name="m513r507" id="m513r507" style="width:87px; top:366px; left:722px;"/>
-<input type="text" name="m513r508" id="m513r508" style="width:87px; top:396px; left:722px;"/>
-<input type="text" name="m513r509" id="m513r509" style="width:87px; top:427px; left:722px;"/>
-<input type="text" name="m513r510" id="m513r510" style="width:87px; top:457px; left:722px;"/>
-<span class="text-echo" style="top:485px; right:138px;"><?php echo $m513r599; ?></span>
-<input type="text" name="m513r601" id="m513r601" style="width:71px; top:203px; left:820px;"/>
-<input type="text" name="m513r602" id="m513r602" style="width:71px; top:227px; left:820px;"/>
-<input type="text" name="m513r603" id="m513r603" style="width:71px; top:251px; left:820px;"/>
-<input type="text" name="m513r604" id="m513r604" style="width:71px; top:275px; left:820px;"/>
-<input type="text" name="m513r605" id="m513r605" style="width:71px; top:299px; left:820px;"/>
-<input type="text" name="m513r606" id="m513r606" style="width:71px; top:330px; left:820px;"/>
-<input type="text" name="m513r607" id="m513r607" style="width:71px; top:366px; left:820px;"/>
-<input type="text" name="m513r608" id="m513r608" style="width:71px; top:396px; left:820px;"/>
-<input type="text" name="m513r609" id="m513r609" style="width:71px; top:427px; left:820px;"/>
-<input type="text" name="m513r610" id="m513r610" style="width:71px; top:457px; left:820px;"/>
-<span class="text-echo" style="top:485px; right:57px;"><?php echo $m513r699; ?></span>
+     onclick="NacitajZobratovky(513);" style="top:626px; left:361px;" class="btn-row-tool">
+<input type="text" name="m513r101" id="m513r101" style="width:91px; top:755px; left:368px;"/>
+<input type="text" name="m513r201" id="m513r201" style="width:61px; top:755px; left:469px;"/>
+<input type="text" name="m513r301" id="m513r301" style="width:79px; top:755px; left:541px;"/>
+<input type="text" name="m513r401" id="m513r401" style="width:75px; top:755px; left:632px;"/>
+<input type="text" name="m513r501" id="m513r501" style="width:91px; top:755px; left:718px;"/>
+<input type="text" name="m513r601" id="m513r601" style="width:71px; top:755px; left:820px;"/>
+<input type="text" name="m513r102" id="m513r102" style="width:91px; top:781px; left:368px;"/>
+<input type="text" name="m513r202" id="m513r202" style="width:61px; top:781px; left:469px;"/>
+<input type="text" name="m513r302" id="m513r302" style="width:79px; top:781px; left:541px;"/>
+<input type="text" name="m513r402" id="m513r402" style="width:75px; top:781px; left:632px;"/>
+<input type="text" name="m513r502" id="m513r502" style="width:91px; top:781px; left:718px;"/>
+<input type="text" name="m513r602" id="m513r602" style="width:71px; top:781px; left:820px;"/>
+<input type="text" name="m513r103" id="m513r103" style="width:91px; top:807px; left:368px;"/>
+<input type="text" name="m513r203" id="m513r203" style="width:61px; top:807px; left:469px;"/>
+<input type="text" name="m513r303" id="m513r303" style="width:79px; top:807px; left:541px;"/>
+<input type="text" name="m513r403" id="m513r403" style="width:75px; top:807px; left:632px;"/>
+<input type="text" name="m513r503" id="m513r503" style="width:91px; top:807px; left:718px;"/>
+<input type="text" name="m513r603" id="m513r603" style="width:71px; top:807px; left:820px;"/>
+<input type="text" name="m513r104" id="m513r104" style="width:91px; top:833px; left:368px;"/>
+<input type="text" name="m513r204" id="m513r204" style="width:61px; top:833px; left:469px;"/>
+<input type="text" name="m513r304" id="m513r304" style="width:79px; top:833px; left:541px;"/>
+<input type="text" name="m513r404" id="m513r404" style="width:75px; top:833px; left:632px;"/>
+<input type="text" name="m513r504" id="m513r504" style="width:91px; top:833px; left:718px;"/>
+<input type="text" name="m513r604" id="m513r604" style="width:71px; top:833px; left:820px;"/>
+<input type="text" name="m513r105" id="m513r105" style="width:91px; top:858px; left:368px;"/>
+<input type="text" name="m513r205" id="m513r205" style="width:61px; top:858px; left:469px;"/>
+<input type="text" name="m513r305" id="m513r305" style="width:79px; top:858px; left:541px;"/>
+<input type="text" name="m513r405" id="m513r405" style="width:75px; top:858px; left:632px;"/>
+<input type="text" name="m513r505" id="m513r505" style="width:91px; top:858px; left:718px;"/>
+<input type="text" name="m513r605" id="m513r605" style="width:71px; top:858px; left:820px;"/>
+<input type="text" name="m513r106" id="m513r106" style="width:91px; top:890px; left:368px;"/>
+<input type="text" name="m513r206" id="m513r206" style="width:61px; top:890px; left:469px;"/>
+<input type="text" name="m513r306" id="m513r306" style="width:79px; top:890px; left:541px;"/>
+<input type="text" name="m513r406" id="m513r406" style="width:75px; top:890px; left:632px;"/>
+<input type="text" name="m513r506" id="m513r506" style="width:91px; top:890px; left:718px;"/>
+<input type="text" name="m513r606" id="m513r606" style="width:71px; top:890px; left:820px;"/>
+<input type="text" name="m513r107" id="m513r107" style="width:91px; top:921px; left:368px;"/>
+<input type="text" name="m513r207" id="m513r207" style="width:61px; top:921px; left:469px;"/>
+<input type="text" name="m513r307" id="m513r307" style="width:79px; top:921px; left:541px;"/>
+<input type="text" name="m513r407" id="m513r407" style="width:75px; top:921px; left:632px;"/>
+<input type="text" name="m513r507" id="m513r507" style="width:91px; top:921px; left:718px;"/>
+<input type="text" name="m513r607" id="m513r607" style="width:71px; top:921px; left:820px;"/>
+<input type="text" name="m513r108" id="m513r108" style="width:91px; top:947px; left:368px;"/>
+<input type="text" name="m513r208" id="m513r208" style="width:61px; top:947px; left:469px;"/>
+<input type="text" name="m513r308" id="m513r308" style="width:79px; top:947px; left:541px;"/>
+<input type="text" name="m513r408" id="m513r408" style="width:75px; top:947px; left:632px;"/>
+<input type="text" name="m513r508" id="m513r508" style="width:91px; top:947px; left:718px;"/>
+<input type="text" name="m513r608" id="m513r608" style="width:71px; top:947px; left:820px;"/>
+<input type="text" name="m513r109" id="m513r109" style="width:91px; top:978px; left:368px;"/>
+<input type="text" name="m513r209" id="m513r209" style="width:61px; top:978px; left:469px;"/>
+<input type="text" name="m513r309" id="m513r309" style="width:79px; top:978px; left:541px;"/>
+<input type="text" name="m513r409" id="m513r409" style="width:75px; top:978px; left:632px;"/>
+<input type="text" name="m513r509" id="m513r509" style="width:91px; top:978px; left:718px;"/>
+<input type="text" name="m513r609" id="m513r609" style="width:71px; top:978px; left:820px;"/>
+<input type="text" name="m513r110" id="m513r110" style="width:91px; top:1009px; left:368px;"/>
+<input type="text" name="m513r210" id="m513r210" style="width:61px; top:457px; left:469px;"/> <!-- dopyt, zruši -->
+<input type="text" name="m513r310" id="m513r310" style="width:79px; top:1009px; left:541px;"/>
+<input type="text" name="m513r410" id="m513r410" style="width:75px; top:1009px; left:632px;"/>
+<input type="text" name="m513r510" id="m513r510" style="width:91px; top:1009px; left:718px;"/>
+<input type="text" name="m513r610" id="m513r610" style="width:71px; top:457px; left:820px;"/> <!-- dopyt, zruši -->
+<span class="text-echo" style="top:1039px; right:489px;"><?php echo $m513r199; ?></span>
+<span class="text-echo" style="top:1039px; right:417px;"><?php echo $m513r299; ?></span>
+<span class="text-echo" style="top:1039px; right:326px;"><?php echo $m513r399; ?></span>
+<span class="text-echo" style="top:1039px; right:239px;"><?php echo $m513r499; ?></span>
+<span class="text-echo" style="top:1039px; right:137px;"><?php echo $m513r599; ?></span>
+<span class="text-echo" style="top:1039px; right:56px;"><?php echo $m513r699; ?></span>
 
 <!-- modul 581a -->
-<input type="text" name="m581r01" id="m581r01" style="width:100px; top:602px; left:680px;"/>
-<input type="text" name="m581r02" id="m581r02" style="width:100px; top:626px; left:680px;"/>
-<span class="text-echo" style="top:654px; right:165px;"><?php echo $m581r99; ?></span>
+<input type="text" name="m581r01" id="m581r01" style="width:100px; top:1174px; left:680px;"/>
+<input type="text" name="m581r02" id="m581r02" style="width:100px; top:1200px; left:680px;"/>
+<span class="text-echo" style="top:1230px; right:165px;"><?php echo $m581r99; ?></span>
+<?php                                        } ?>
+
+
+<?php if ( $strana == 7 OR $strana == 9999 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str7.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 7.strana 265kB">
+<span class="text-echo" style="top:76px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 100301 -->
+<input type="checkbox" name="m100301r1" value="1" onchange="klikm100301ano();"
+       style="top:132px; left:839px;"/>
+<input type="checkbox" name="m100301r2" value="1" onchange="klikm100301nie();"
+       style="top:152px; left:839px;"/>
+
+<!-- modul 100302 -->
+<input type="text" name="m100302" id="m100302" style="width:253px; top:222px; left:643px;"/>
+
+<!-- modul 100303 -->
+<input type="checkbox" name="m100303r1" value="1" onchange="klikm100303ano();"
+       style="top:278px; left:839px;"/>
+<input type="checkbox" name="m100303r2" value="1" onchange="klikm100303nie();"
+       style="top:299px; left:839px;"/>
+
+<!-- modul 100304 -->
+<input type="text" name="m100304" id="m100304" style="width:253px; top:369px; left:643px;"/>
+
+<!-- modul 177a -->
+<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
+     onclick="NacitajZobratovky(177);" style="top:395px; left:313px;" class="btn-row-tool">
+<input type="text" name="m177r01" id="m177r01" style="width:100px; top:487px; left:680px;"/>
+<input type="text" name="m177r02" id="m177r02" style="width:100px; top:513px; left:680px;"/>
+<input type="text" name="m177r03" id="m177r03" style="width:100px; top:539px; left:680px;"/>
+<input type="text" name="m177r04" id="m177r04" style="width:100px; top:565px; left:680px;"/>
+<input type="text" name="m177r05" id="m177r05" style="width:100px; top:590px; left:680px;"/>
+<input type="text" name="m177r06" id="m177r06" style="width:100px; top:617px; left:680px;"/>
+<input type="text" name="m177r07" id="m177r07" style="width:100px; top:642px; left:680px;"/>
+<input type="text" name="m177r08" id="m177r08" style="width:100px; top:668px; left:680px;"/>
+<span class="text-echo" style="top:698px; right:165px;"><?php echo $m177r99; ?></span>
+
+<!-- modul 178a -->
+<!-- dopyt, iný výpoèet,naèítanie, zrušili niektoré riadky -->
+<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
+     onclick="NacitajZobratovky(178);" style="top:724px; left:530px;" class="btn-row-tool">
+<input type="text" name="m178r01" id="m178r01" style="width:100px; top:816px; left:680px;"/>
+<input type="text" name="m178r02" id="m178r02" style="width:100px; top:842px; left:680px;"/>
+<input type="text" name="m178r03" id="m178r03" style="width:100px; top:868px; left:680px;"/>
+<input type="text" name="m178r04" id="m178r04" style="width:100px; top:894px; left:680px;"/>
+<input type="text" name="m178r05" id="m178r05" style="width:100px; top:919px; left:680px;"/>
+<input type="text" name="m178r06" id="m178r06" style="width:100px; top:945px; left:680px;"/>
+<input type="text" name="m178r12" id="m178r12" style="width:100px; top:971px; left:680px;"/>
+<input type="text" name="m178r13" id="m178r13" style="width:100px; top:1002px; left:680px;"/>
+<input type="text" name="m178r14" id="m178r14" style="width:100px; top:1034px; left:680px;"/>
+<input type="text" name="m178r15" id="m178r15" style="width:100px; top:1060px; left:680px;"/>
+<input type="text" name="m178r16" id="m178r16" style="width:100px; top:1086px; left:680px;"/>
+<input type="text" name="m178r17" id="m178r17" style="width:100px; top:1111px; left:680px;"/>
+<input type="text" name="m178r18" id="m178r18" style="width:100px; top:1137px; left:680px;"/>
+<input type="text" name="m178r19" id="m178r19" style="width:100px; top:1163px; left:680px;"/>
+<input type="text" name="m178r20" id="m178r20" style="width:100px; top:1189px; left:680px;"/>
+<input type="text" name="m178r21" id="m178r21" style="width:100px; top:1215px; left:680px;"/>
+<span class="text-echo" style="top:1244px; right:165px;"><?php echo $m178r99; ?></span>
+<!-- dopyt, zrušené
+<input type="text" name="m178r07" id="m178r07" style="width:100px; top:971px; left:680px;"/>
+<input type="text" name="m178r08" id="m178r08" style="width:100px; top:1002px; left:680px;"/>
+<input type="text" name="m178r09" id="m178r09" style="width:100px; top:1034px; left:680px;"/>
+<input type="text" name="m178r10" id="m178r10" style="width:100px; top:1060px; left:680px;"/>
+<input type="text" name="m178r11" id="m178r11" style="width:100px; top:1086px; left:680px;"/>
+-->
 
 <!-- modul 588 -->
+<!-- dopyt, zruši
 <input type="checkbox" name="m588r201" value="1" style="top:795px; left:719px;"/>
 <input type="checkbox" name="m588r202" value="1" style="top:818px; left:719px;"/>
 <input type="checkbox" name="m588r203" value="1" style="top:843px; left:719px;"/>
@@ -6220,7 +6289,6 @@ $sknacesb=$fir_sknace;
 <input type="checkbox" name="m588r218" value="1" style="top:1204px; left:719px;"/>
 <input type="checkbox" name="m588r219" value="1" style="top:1228px; left:719px;"/>
 <input type="checkbox" name="m588r220" value="1" style="top:1252px; left:719px;"/>
-
 <input type="checkbox" name="m588r301" value="1" style="top:795px; left:833px;"/>
 <input type="checkbox" name="m588r302" value="1" style="top:818px; left:833px;"/>
 <input type="checkbox" name="m588r303" value="1" style="top:843px; left:833px;"/>
@@ -6241,16 +6309,10 @@ $sknacesb=$fir_sknace;
 <input type="checkbox" name="m588r318" value="1" style="top:1204px; left:833px;"/>
 <input type="checkbox" name="m588r319" value="1" style="top:1228px; left:833px;"/>
 <input type="checkbox" name="m588r320" value="1" style="top:1252px; left:833px;"/>
-<?php                                        } ?>
-
-
-<?php if ( $strana == 7 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str7.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 7.strana 265kB">
-<span class="text-echo" style="top:74px; left:435px; font-size:16px; letter-spacing:28px;"><?php echo $fir_ficox; ?></span>
-
+-->
 <!-- modul 588 pokraè. -->
-<input type="checkbox" name="m588r221" value="1" style="top:167px; left:719px;"/>
+<!-- dopyt, zruši
+ <input type="checkbox" name="m588r221" value="1" style="top:167px; left:719px;"/>
 <input type="checkbox" name="m588r222" value="1" style="top:192px; left:719px;"/>
 <input type="checkbox" name="m588r223" value="1" style="top:216px; left:719px;"/>
 <input type="checkbox" name="m588r224" value="1" style="top:240px; left:719px;"/>
@@ -6313,547 +6375,495 @@ $sknacesb=$fir_sknace;
 <input type="checkbox" name="m588r349" value="1" style="top:869px; left:833px;"/>
 <input type="checkbox" name="m588r350" value="1" style="top:893px; left:833px;"/>
 <input type="checkbox" name="m588r351" value="1" style="top:918px; left:833px;"/>
-
-<!-- modul 100086 -->
-<script>
-  function klikm100086ano()
-  {
-   document.formv1.mod100086nie.checked = false;
-  }
-  function klikm100086nie()
-  {
-   document.formv1.mod100086ano.checked = false;
-  }
-</script>
-<input type="checkbox" name="mod100086ano" value="1" onchange="klikm100086ano();"
- style="top:632px; left:839px;"/>
-<input type="checkbox" name="mod100086nie" value="1" onchange="klikm100086nie();"
- style="top:652px; left:839px;"/>
-
-
-<!-- modul 177a -->
-<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
- onclick="NacitajZobratovky(177);" style="top:946px; left:312px;" class="btn-row-tool">
-<input type="text" name="m177r01" id="m177r01" style="width:100px; top:1032px; left:680px;"/>
-<input type="text" name="m177r02" id="m177r02" style="width:100px; top:1056px; left:680px;"/>
-<input type="text" name="m177r03" id="m177r03" style="width:100px; top:1080px; left:680px;"/>
-<input type="text" name="m177r04" id="m177r04" style="width:100px; top:1105px; left:680px;"/>
-<input type="text" name="m177r05" id="m177r05" style="width:100px; top:1129px; left:680px;"/>
-<input type="text" name="m177r06" id="m177r06" style="width:100px; top:1153px; left:680px;"/>
-<input type="text" name="m177r07" id="m177r07" style="width:100px; top:1177px; left:680px;"/>
-<input type="text" name="m177r08" id="m177r08" style="width:100px; top:1202px; left:680px;"/>
-<span class="text-echo" style="top:1230px; right:165px;"><?php echo $m177r99; ?></span>
+-->
 <?php                                        } ?>
 
 
 <?php if ( $strana == 8 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str8.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 8.strana 245kB">
-
-<!-- modul 178a -->
-<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
- onclick="NacitajZobratovky(178);" style="top:78px; left:528px;" class="btn-row-tool">
-<input type="text" name="m178r01" id="m178r01" style="width:100px; top:164px; left:705px;"/>
-<input type="text" name="m178r02" id="m178r02" style="width:100px; top:188px; left:705px;"/>
-<input type="text" name="m178r03" id="m178r03" style="width:100px; top:212px; left:705px;"/>
-<input type="text" name="m178r04" id="m178r04" style="width:100px; top:236px; left:705px;"/>
-<input type="text" name="m178r05" id="m178r05" style="width:100px; top:260px; left:705px;"/>
-<input type="text" name="m178r06" id="m178r06" style="width:100px; top:284px; left:705px;"/>
-<input type="text" name="m178r07" id="m178r07" style="width:100px; top:315px; left:705px;"/>
-<input type="text" name="m178r08" id="m178r08" style="width:100px; top:345px; left:705px;"/>
-<input type="text" name="m178r09" id="m178r09" style="width:100px; top:369px; left:705px;"/>
-<input type="text" name="m178r10" id="m178r10" style="width:100px; top:393px; left:705px;"/>
-<input type="text" name="m178r11" id="m178r11" style="width:100px; top:417px; left:705px;"/>
-<input type="text" name="m178r12" id="m178r12" style="width:100px; top:441px; left:705px;"/>
-<input type="text" name="m178r13" id="m178r13" style="width:100px; top:472px; left:705px;"/>
-<input type="text" name="m178r14" id="m178r14" style="width:100px; top:502px; left:705px;"/>
-<input type="text" name="m178r15" id="m178r15" style="width:100px; top:526px; left:705px;"/>
-<input type="text" name="m178r16" id="m178r16" style="width:100px; top:550px; left:705px;"/>
-<input type="text" name="m178r17" id="m178r17" style="width:100px; top:575px; left:705px;"/>
-<input type="text" name="m178r18" id="m178r18" style="width:100px; top:599px; left:705px;"/>
-<input type="text" name="m178r19" id="m178r19" style="width:100px; top:623px; left:705px;"/>
-<input type="text" name="m178r20" id="m178r20" style="width:100px; top:647px; left:705px;"/>
-<input type="text" name="m178r21" id="m178r21" style="width:100px; top:671px; left:705px;"/>
-<span class="text-echo" style="top:699px; right:139px;"><?php echo $m178r99; ?></span>
+<span class="text-echo" style="top:94px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 179b -->
-<input type="text" name="m179r01" id="m179r01" style="width:100px; top:832px; left:680px;"/>
-<input type="text" name="m179r02" id="m179r02" style="width:100px; top:858px; left:680px;"/>
-<span class="text-echo" style="top:888px; right:162px;"><?php echo $m179r99; ?></span>
+<input type="text" name="m179r01" id="m179r01" style="width:100px; top:230px; left:680px;"/>
+<input type="text" name="m179r02" id="m179r02" style="width:100px; top:261px; left:680px;"/>
+<span class="text-echo" style="top:296px; right:164px;"><?php echo $m179r99; ?></span>
 
-<!-- modul 100062 -->
-<script>
-  function klikm100062ano()
-  {
-   document.formv1.m100062nie.checked = false;
-  }
-  function klikm100062nie()
-  {
-   document.formv1.m100062ano.checked = false;
-  }
-</script>
+<!-- dopyt, zruši
 <input type="checkbox" name="m100062ano" value="1" onchange="klikm100062ano();"
  style="top:528px; left:839px;"/>
 <input type="checkbox" name="m100062nie" value="1" onchange="klikm100062nie();"
- style="top:548px; left:839px;"/>
-
-
+ style="top:548px; left:839px;"/> -->
 
 <!-- modul 182a -->
-<input type="text" name="m182r001" id="m182r001" style="width:350px; top:1029px; left:50px;"/>
-<input type="text" name="m182r002" id="m182r002" style="width:350px; top:1053px; left:50px;"/>
-<input type="text" name="m182r003" id="m182r003" style="width:350px; top:1077px; left:50px;"/>
-<input type="text" name="m182r004" id="m182r004" style="width:350px; top:1101px; left:50px;"/>
-<input type="text" name="m182r005" id="m182r005" style="width:350px; top:1125px; left:50px;"/>
-<input type="text" name="m182r006" id="m182r006" style="width:350px; top:1149px; left:50px;"/>
-<input type="text" name="m182r007" id="m182r007" style="width:350px; top:1173px; left:50px;"/>
-<input type="text" name="m182r101" id="m182r101" style="width:156px; top:1029px; left:450px;"/>
-<input type="text" name="m182r102" id="m182r102" style="width:156px; top:1053px; left:450px;"/>
-<input type="text" name="m182r103" id="m182r103" style="width:156px; top:1077px; left:450px;"/>
-<input type="text" name="m182r104" id="m182r104" style="width:156px; top:1101px; left:450px;"/>
-<input type="text" name="m182r105" id="m182r105" style="width:156px; top:1125px; left:450px;"/>
-<input type="text" name="m182r106" id="m182r106" style="width:156px; top:1149px; left:450px;"/>
-<input type="text" name="m182r107" id="m182r107" style="width:156px; top:1173px; left:450px;"/>
-<input type="text" name="m182r201" id="m182r201" style="width:100px; top:1029px; left:705px;"/>
-<input type="text" name="m182r202" id="m182r202" style="width:100px; top:1053px; left:705px;"/>
-<input type="text" name="m182r203" id="m182r203" style="width:100px; top:1077px; left:705px;"/>
-<input type="text" name="m182r204" id="m182r204" style="width:100px; top:1101px; left:705px;"/>
-<input type="text" name="m182r205" id="m182r205" style="width:100px; top:1125px; left:705px;"/>
-<input type="text" name="m182r206" id="m182r206" style="width:100px; top:1149px; left:705px;"/>
-<input type="text" name="m182r207" id="m182r207" style="width:100px; top:1173px; left:705px;"/>
-<span class="text-echo" style="top:1200px; right:140px;"><?php echo $m182r299; ?></span>
+<input type="text" name="m182r001" id="m182r001" style="width:346px; top:463px; left:52px;"/>
+<input type="text" name="m182r101" id="m182r101" style="width:212px; top:463px; left:452px;"/>
+<input type="text" name="m182r201" id="m182r201" style="width:212px; top:463px; left:678px;"/>
+<input type="text" name="m182r002" id="m182r002" style="width:346px; top:493px; left:52px;"/>
+<input type="text" name="m182r102" id="m182r102" style="width:212px; top:493px; left:452px;"/>
+<input type="text" name="m182r202" id="m182r202" style="width:212px; top:493px; left:678px;"/>
+<input type="text" name="m182r003" id="m182r003" style="width:346px; top:524px; left:52px;"/>
+<input type="text" name="m182r103" id="m182r103" style="width:212px; top:524px; left:452px;"/>
+<input type="text" name="m182r203" id="m182r203" style="width:212px; top:524px; left:678px;"/>
+<input type="text" name="m182r004" id="m182r004" style="width:346px; top:554px; left:52px;"/>
+<input type="text" name="m182r104" id="m182r104" style="width:212px; top:554px; left:452px;"/>
+<input type="text" name="m182r204" id="m182r204" style="width:212px; top:554px; left:678px;"/>
+<input type="text" name="m182r005" id="m182r005" style="width:346px; top:585px; left:52px;"/>
+<input type="text" name="m182r105" id="m182r105" style="width:212px; top:585px; left:452px;"/>
+<input type="text" name="m182r205" id="m182r205" style="width:212px; top:585px; left:678px;"/>
+<input type="text" name="m182r006" id="m182r006" style="width:346px; top:615px; left:52px;"/>
+<input type="text" name="m182r106" id="m182r106" style="width:212px; top:615px; left:452px;"/>
+<input type="text" name="m182r206" id="m182r206" style="width:212px; top:615px; left:678px;"/>
+<input type="text" name="m182r007" id="m182r007" style="width:346px; top:646px; left:52px;"/>
+<input type="text" name="m182r107" id="m182r107" style="width:212px; top:646px; left:452px;"/>
+<input type="text" name="m182r207" id="m182r207" style="width:212px; top:646px; left:678px;"/>
+<span class="text-echo" style="top:681px; right:70px;"><?php echo $m182r299; ?></span>
+
+<!-- modul 183a -->
+<input type="text" name="m183r001" id="m183r001" style="width:346px; top:875px; left:52px;"/>
+<input type="text" name="m183r101" id="m183r101" style="width:212px; top:875px; left:452px;"/>
+<input type="text" name="m183r201" id="m183r201" style="width:212px; top:875px; left:678px;"/>
+<input type="text" name="m183r002" id="m183r002" style="width:346px; top:905px; left:52px;"/>
+<input type="text" name="m183r102" id="m183r102" style="width:212px; top:905px; left:452px;"/>
+<input type="text" name="m183r202" id="m183r202" style="width:212px; top:905px; left:678px;"/>
+<input type="text" name="m183r003" id="m183r003" style="width:346px; top:936px; left:52px;"/>
+<input type="text" name="m183r103" id="m183r103" style="width:212px; top:936px; left:452px;"/>
+<input type="text" name="m183r203" id="m183r203" style="width:212px; top:936px; left:678px;"/>
+<input type="text" name="m183r004" id="m183r004" style="width:346px; top:966px; left:52px;"/>
+<input type="text" name="m183r104" id="m183r104" style="width:212px; top:966px; left:452px;"/>
+<input type="text" name="m183r204" id="m183r204" style="width:212px; top:966px; left:678px;"/>
+<input type="text" name="m183r005" id="m183r005" style="width:346px; top:997px; left:52px;"/>
+<input type="text" name="m183r105" id="m183r105" style="width:212px; top:997px; left:452px;"/>
+<input type="text" name="m183r205" id="m183r205" style="width:212px; top:997px; left:678px;"/>
+<input type="text" name="m183r006" id="m183r006" style="width:346px; top:1028px; left:52px;"/>
+<input type="text" name="m183r106" id="m183r106" style="width:212px; top:1028px; left:452px;"/>
+<input type="text" name="m183r206" id="m183r206" style="width:212px; top:1028px; left:678px;"/>
+<input type="text" name="m183r007" id="m183r007" style="width:346px; top:1058px; left:52px;"/>
+<input type="text" name="m183r107" id="m183r107" style="width:212px; top:1058px; left:452px;"/>
+<input type="text" name="m183r207" id="m183r207" style="width:212px; top:1058px; left:678px;"/>
+<input type="text" name="m183r008" id="m183r008" style="width:346px; top:1089px; left:52px;"/>
+<input type="text" name="m183r108" id="m183r108" style="width:212px; top:1089px; left:452px;"/>
+<input type="text" name="m183r208" id="m183r208" style="width:212px; top:1089px; left:678px;"/>
+<input type="text" name="m183r009" id="m183r009" style="width:346px; top:1120px; left:52px;"/>
+<input type="text" name="m183r109" id="m183r109" style="width:212px; top:1120px; left:452px;"/>
+<input type="text" name="m183r209" id="m183r209" style="width:212px; top:1120px; left:678px;"/>
+<input type="text" name="m183r010" id="m183r010" style="width:346px; top:1150px; left:52px;"/>
+<input type="text" name="m183r110" id="m183r110" style="width:212px; top:1150px; left:452px;"/>
+<input type="text" name="m183r210" id="m183r210" style="width:212px; top:1150px; left:678px;"/>
+<span class="text-echo" style="top:1186px; right:70px;"><?php echo $m183r299; ?></span>
+
+<!-- dopyt, zruši
+<input type="checkbox" name="mod100086ano" value="1" onchange="klikm100086ano();"
+ style="top:632px; left:839px;"/>
+<input type="checkbox" name="mod100086nie" value="1" onchange="klikm100086nie();"
+ style="top:652px; left:839px;"/>
+-->
 <?php                                        } ?>
 
 
 <?php if ( $strana == 9 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str9.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 9.strana 225kB">
-
-<!-- modul 183a -->
-<input type="text" name="m183r001" id="m183r001" style="width:350px; top:215px; left:50px;"/>
-<input type="text" name="m183r002" id="m183r002" style="width:350px; top:242px; left:50px;"/>
-<input type="text" name="m183r003" id="m183r003" style="width:350px; top:268px; left:50px;"/>
-<input type="text" name="m183r004" id="m183r004" style="width:350px; top:293px; left:50px;"/>
-<input type="text" name="m183r005" id="m183r005" style="width:350px; top:319px; left:50px;"/>
-<input type="text" name="m183r006" id="m183r006" style="width:350px; top:345px; left:50px;"/>
-<input type="text" name="m183r007" id="m183r007" style="width:350px; top:371px; left:50px;"/>
-<input type="text" name="m183r008" id="m183r008" style="width:350px; top:397px; left:50px;"/>
-<input type="text" name="m183r009" id="m183r009" style="width:350px; top:423px; left:50px;"/>
-<input type="text" name="m183r010" id="m183r010" style="width:350px; top:449px; left:50px;"/>
-<input type="text" name="m183r101" id="m183r101" style="width:216px; top:215px; left:450px;"/>
-<input type="text" name="m183r102" id="m183r102" style="width:216px; top:242px; left:450px;"/>
-<input type="text" name="m183r103" id="m183r103" style="width:216px; top:268px; left:450px;"/>
-<input type="text" name="m183r104" id="m183r104" style="width:216px; top:293px; left:450px;"/>
-<input type="text" name="m183r105" id="m183r105" style="width:216px; top:319px; left:450px;"/>
-<input type="text" name="m183r106" id="m183r106" style="width:216px; top:345px; left:450px;"/>
-<input type="text" name="m183r107" id="m183r107" style="width:216px; top:371px; left:450px;"/>
-<input type="text" name="m183r108" id="m183r108" style="width:216px; top:397px; left:450px;"/>
-<input type="text" name="m183r109" id="m183r109" style="width:216px; top:423px; left:450px;"/>
-<input type="text" name="m183r110" id="m183r110" style="width:216px; top:449px; left:450px;"/>
-<input type="text" name="m183r201" id="m183r201" style="width:216px; top:215px; left:676px;"/>
-<input type="text" name="m183r202" id="m183r202" style="width:216px; top:242px; left:676px;"/>
-<input type="text" name="m183r203" id="m183r203" style="width:216px; top:268px; left:676px;"/>
-<input type="text" name="m183r204" id="m183r204" style="width:216px; top:293px; left:676px;"/>
-<input type="text" name="m183r205" id="m183r205" style="width:216px; top:319px; left:676px;"/>
-<input type="text" name="m183r206" id="m183r206" style="width:216px; top:345px; left:676px;"/>
-<input type="text" name="m183r207" id="m183r207" style="width:216px; top:371px; left:676px;"/>
-<input type="text" name="m183r208" id="m183r208" style="width:216px; top:397px; left:676px;"/>
-<input type="text" name="m183r209" id="m183r209" style="width:216px; top:423px; left:676px;"/>
-<input type="text" name="m183r210" id="m183r210" style="width:216px; top:449px; left:676px;"/>
-<span class="text-echo" style="top:479px; right:60px;"><?php echo $m183r299; ?></span>
+<span class="text-echo" style="top:94px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 184a -->
-<input type="text" name="m184r001" id="m184r001" style="width:259px; top:717px; left:50px;"/>
-<input type="text" name="m184r002" id="m184r002" style="width:259px; top:744px; left:50px;"/>
-<input type="text" name="m184r003" id="m184r003" style="width:259px; top:770px; left:50px;"/>
-<input type="text" name="m184r004" id="m184r004" style="width:259px; top:796px; left:50px;"/>
-<input type="text" name="m184r005" id="m184r005" style="width:259px; top:822px; left:50px;"/>
-<input type="text" name="m184r006" id="m184r006" style="width:259px; top:849px; left:50px;"/>
-<input type="text" name="m184r007" id="m184r007" style="width:259px; top:875px; left:50px;"/>
-<input type="text" name="m184r008" id="m184r008" style="width:259px; top:901px; left:50px;"/>
-<input type="text" name="m184r009" id="m184r009" style="width:259px; top:927px; left:50px;"/>
-<input type="text" name="m184r010" id="m184r010" style="width:259px; top:954px; left:50px;"/>
-<input type="text" name="m184r101" id="m184r101" style="width:121px; top:717px; left:360px;"/>
-<input type="text" name="m184r102" id="m184r102" style="width:121px; top:744px; left:360px;"/>
-<input type="text" name="m184r103" id="m184r103" style="width:121px; top:770px; left:360px;"/>
-<input type="text" name="m184r104" id="m184r104" style="width:121px; top:796px; left:360px;"/>
-<input type="text" name="m184r105" id="m184r105" style="width:121px; top:822px; left:360px;"/>
-<input type="text" name="m184r106" id="m184r106" style="width:121px; top:849px; left:360px;"/>
-<input type="text" name="m184r107" id="m184r107" style="width:121px; top:875px; left:360px;"/>
-<input type="text" name="m184r108" id="m184r108" style="width:121px; top:901px; left:360px;"/>
-<input type="text" name="m184r109" id="m184r109" style="width:121px; top:927px; left:360px;"/>
-<input type="text" name="m184r110" id="m184r110" style="width:121px; top:954px; left:360px;"/>
-<input type="text" name="m184r201" id="m184r201" style="width:204px; top:717px; left:492px;"/>
-<input type="text" name="m184r202" id="m184r202" style="width:204px; top:744px; left:492px;"/>
-<input type="text" name="m184r203" id="m184r203" style="width:204px; top:770px; left:492px;"/>
-<input type="text" name="m184r204" id="m184r204" style="width:204px; top:796px; left:492px;"/>
-<input type="text" name="m184r205" id="m184r205" style="width:204px; top:822px; left:492px;"/>
-<input type="text" name="m184r206" id="m184r206" style="width:204px; top:849px; left:492px;"/>
-<input type="text" name="m184r207" id="m184r207" style="width:204px; top:875px; left:492px;"/>
-<input type="text" name="m184r208" id="m184r208" style="width:204px; top:901px; left:492px;"/>
-<input type="text" name="m184r209" id="m184r209" style="width:204px; top:927px; left:492px;"/>
-<input type="text" name="m184r210" id="m184r210" style="width:204px; top:954px; left:492px;"/>
-<span class="text-echo" style="top:984px; right:258px;"><?php echo $m184r299; ?></span>
-<input type="text" name="m184r301" id="m184r301" style="width:183px; top:717px; left:708px;"/>
-<input type="text" name="m184r302" id="m184r302" style="width:183px; top:744px; left:708px;"/>
-<input type="text" name="m184r303" id="m184r303" style="width:183px; top:770px; left:708px;"/>
-<input type="text" name="m184r304" id="m184r304" style="width:183px; top:796px; left:708px;"/>
-<input type="text" name="m184r305" id="m184r305" style="width:183px; top:822px; left:708px;"/>
-<input type="text" name="m184r306" id="m184r306" style="width:183px; top:849px; left:708px;"/>
-<input type="text" name="m184r307" id="m184r307" style="width:183px; top:875px; left:708px;"/>
-<input type="text" name="m184r308" id="m184r308" style="width:183px; top:901px; left:708px;"/>
-<input type="text" name="m184r309" id="m184r309" style="width:183px; top:927px; left:708px;"/>
-<input type="text" name="m184r310" id="m184r310" style="width:183px; top:954px; left:708px;"/>
-<span class="text-echo" style="top:984px; right:65px;"><?php echo $m184r399; ?></span>
+<input type="text" name="m184r001" id="m184r001" style="width:255px; top:254px; left:52px;"/>
+<input type="text" name="m184r101" id="m184r101" style="width:128px; top:254px; left:362px;"/>
+<input type="text" name="m184r201" id="m184r201" style="width:189px; top:254px; left:505px;"/>
+<input type="text" name="m184r301" id="m184r301" style="width:181px; top:254px; left:709px;"/>
+<input type="text" name="m184r002" id="m184r002" style="width:255px; top:285px; left:52px;"/>
+<input type="text" name="m184r102" id="m184r102" style="width:128px; top:285px; left:362px;"/>
+<input type="text" name="m184r202" id="m184r202" style="width:189px; top:285px; left:505px;"/>
+<input type="text" name="m184r302" id="m184r302" style="width:181px; top:285px; left:708px;"/>
+<input type="text" name="m184r003" id="m184r003" style="width:255px; top:315px; left:52px;"/>
+<input type="text" name="m184r103" id="m184r103" style="width:128px; top:315px; left:362px;"/>
+<input type="text" name="m184r203" id="m184r203" style="width:189px; top:315px; left:505px;"/>
+<input type="text" name="m184r303" id="m184r303" style="width:181px; top:315px; left:709px;"/>
+<input type="text" name="m184r004" id="m184r004" style="width:255px; top:346px; left:52px;"/>
+<input type="text" name="m184r104" id="m184r104" style="width:128px; top:346px; left:362px;"/>
+<input type="text" name="m184r204" id="m184r204" style="width:189px; top:346px; left:505px;"/>
+<input type="text" name="m184r304" id="m184r304" style="width:181px; top:346px; left:709px;"/>
+<input type="text" name="m184r005" id="m184r005" style="width:255px; top:376px; left:52px;"/>
+<input type="text" name="m184r105" id="m184r105" style="width:128px; top:376px; left:362px;"/>
+<input type="text" name="m184r205" id="m184r205" style="width:189px; top:376px; left:505px;"/>
+<input type="text" name="m184r305" id="m184r305" style="width:181px; top:376px; left:709px;"/>
+<input type="text" name="m184r006" id="m184r006" style="width:255px; top:407px; left:52px;"/>
+<input type="text" name="m184r106" id="m184r106" style="width:128px; top:407px; left:362px;"/>
+<input type="text" name="m184r206" id="m184r206" style="width:189px; top:407px; left:505px;"/>
+<input type="text" name="m184r306" id="m184r306" style="width:181px; top:407px; left:709px;"/>
+<input type="text" name="m184r007" id="m184r007" style="width:255px; top:438px; left:52px;"/>
+<input type="text" name="m184r107" id="m184r107" style="width:128px; top:438px; left:362px;"/>
+<input type="text" name="m184r207" id="m184r207" style="width:189px; top:438px; left:505px;"/>
+<input type="text" name="m184r307" id="m184r307" style="width:181px; top:438px; left:709px;"/>
+<input type="text" name="m184r008" id="m184r008" style="width:255px; top:468px; left:52px;"/>
+<input type="text" name="m184r108" id="m184r108" style="width:128px; top:468px; left:362px;"/>
+<input type="text" name="m184r208" id="m184r208" style="width:189px; top:468px; left:505px;"/>
+<input type="text" name="m184r308" id="m184r308" style="width:181px; top:468px; left:709px;"/>
+<input type="text" name="m184r009" id="m184r009" style="width:255px; top:499px; left:52px;"/>
+<input type="text" name="m184r109" id="m184r109" style="width:128px; top:499px; left:362px;"/>
+<input type="text" name="m184r209" id="m184r209" style="width:189px; top:499px; left:505px;"/>
+<input type="text" name="m184r309" id="m184r309" style="width:181px; top:499px; left:709px;"/>
+<input type="text" name="m184r010" id="m184r010" style="width:255px; top:530px; left:52px;"/>
+<input type="text" name="m184r110" id="m184r110" style="width:128px; top:530px; left:362px;"/>
+<input type="text" name="m184r210" id="m184r210" style="width:189px; top:530px; left:505px;"/>
+<input type="text" name="m184r310" id="m184r310" style="width:181px; top:530px; left:709px;"/>
+<span class="text-echo" style="top:565px; right:255px;"><?php echo $m184r299; ?></span>
+<span class="text-echo" style="top:565px; right:60px;"><?php echo $m184r399; ?></span>
+
+<!-- modul 185a -->
+<input type="text" name="m185r001" id="m185r001" style="width:255px; top:790px; left:52px;"/>
+<input type="text" name="m185r101" id="m185r101" style="width:140px; top:790px; left:362px;"/>
+<input type="text" name="m185r201" id="m185r201" style="width:179px; top:790px; left:516px;"/>
+<input type="text" name="m185r301" id="m185r301" style="width:181px; top:790px; left:709px;"/>
+<input type="text" name="m185r002" id="m185r002" style="width:255px; top:820px; left:52px;"/>
+<input type="text" name="m185r102" id="m185r102" style="width:140px; top:820px; left:362px;"/>
+<input type="text" name="m185r202" id="m185r202" style="width:179px; top:820px; left:516px;"/>
+<input type="text" name="m185r302" id="m185r302" style="width:181px; top:820px; left:709px;"/>
+<input type="text" name="m185r003" id="m185r003" style="width:255px; top:851px; left:52px;"/>
+<input type="text" name="m185r103" id="m185r103" style="width:140px; top:851px; left:362px;"/>
+<input type="text" name="m185r203" id="m185r203" style="width:179px; top:851px; left:516px;"/>
+<input type="text" name="m185r303" id="m185r303" style="width:181px; top:851px; left:709px;"/>
+<input type="text" name="m185r004" id="m185r004" style="width:255px; top:882px; left:52px;"/>
+<input type="text" name="m185r104" id="m185r104" style="width:140px; top:882px; left:362px;"/>
+<input type="text" name="m185r204" id="m185r204" style="width:179px; top:882px; left:516px;"/>
+<input type="text" name="m185r304" id="m185r304" style="width:181px; top:882px; left:709px;"/>
+<input type="text" name="m185r005" id="m185r005" style="width:255px; top:913px; left:52px;"/>
+<input type="text" name="m185r105" id="m185r105" style="width:140px; top:913px; left:362px;"/>
+<input type="text" name="m185r205" id="m185r205" style="width:179px; top:913px; left:516px;"/>
+<input type="text" name="m185r305" id="m185r305" style="width:181px; top:913px; left:709px;"/>
+<input type="text" name="m185r006" id="m185r006" style="width:255px; top:943px; left:52px;"/>
+<input type="text" name="m185r106" id="m185r106" style="width:140px; top:943px; left:362px;"/>
+<input type="text" name="m185r206" id="m185r206" style="width:179px; top:943px; left:516px;"/>
+<input type="text" name="m185r306" id="m185r306" style="width:181px; top:943px; left:709px;"/>
+<input type="text" name="m185r007" id="m185r007" style="width:255px; top:974px; left:52px;"/>
+<input type="text" name="m185r107" id="m185r107" style="width:140px; top:974px; left:362px;"/>
+<input type="text" name="m185r207" id="m185r207" style="width:179px; top:974px; left:516px;"/>
+<input type="text" name="m185r307" id="m185r307" style="width:181px; top:974px; left:709px;"/>
+<span class="text-echo" style="top:1009px; right:260px;"><?php echo $m185r299; ?></span>
+<span class="text-echo" style="top:1009px; right:65px;"><?php echo $m185r399; ?></span>
 <?php                                         } ?>
 
 
 <?php if ( $strana == 10 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str10.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 10.strana 264kB">
-
-<!-- modul 185a -->
-<input type="text" name="m185r001" id="m185r001" style="width:259px; top:180px; left:50px;"/>
-<input type="text" name="m185r002" id="m185r002" style="width:259px; top:204px; left:50px;"/>
-<input type="text" name="m185r003" id="m185r003" style="width:259px; top:228px; left:50px;"/>
-<input type="text" name="m185r004" id="m185r004" style="width:259px; top:252px; left:50px;"/>
-<input type="text" name="m185r005" id="m185r005" style="width:259px; top:276px; left:50px;"/>
-<input type="text" name="m185r006" id="m185r006" style="width:259px; top:300px; left:50px;"/>
-<input type="text" name="m185r007" id="m185r007" style="width:259px; top:324px; left:50px;"/>
-<input type="text" name="m185r101" id="m185r101" style="width:122px; top:180px; left:360px;"/>
-<input type="text" name="m185r102" id="m185r102" style="width:122px; top:204px; left:360px;"/>
-<input type="text" name="m185r103" id="m185r103" style="width:122px; top:228px; left:360px;"/>
-<input type="text" name="m185r104" id="m185r104" style="width:122px; top:252px; left:360px;"/>
-<input type="text" name="m185r105" id="m185r105" style="width:122px; top:276px; left:360px;"/>
-<input type="text" name="m185r106" id="m185r106" style="width:122px; top:300px; left:360px;"/>
-<input type="text" name="m185r107" id="m185r107" style="width:122px; top:324px; left:360px;"/>
-<input type="text" name="m185r201" id="m185r201" style="width:204px; top:180px; left:492px;"/>
-<input type="text" name="m185r202" id="m185r202" style="width:204px; top:204px; left:492px;"/>
-<input type="text" name="m185r203" id="m185r203" style="width:204px; top:228px; left:492px;"/>
-<input type="text" name="m185r204" id="m185r204" style="width:204px; top:252px; left:492px;"/>
-<input type="text" name="m185r205" id="m185r205" style="width:204px; top:276px; left:492px;"/>
-<input type="text" name="m185r206" id="m185r206" style="width:204px; top:300px; left:492px;"/>
-<input type="text" name="m185r207" id="m185r207" style="width:204px; top:324px; left:492px;"/>
-<span class="text-echo" style="top:353px; right:260px;"><?php echo $m185r299; ?></span>
-<input type="text" name="m185r301" id="m185r301" style="width:185px; top:180px; left:707px;"/>
-<input type="text" name="m185r302" id="m185r302" style="width:185px; top:204px; left:707px;"/>
-<input type="text" name="m185r303" id="m185r303" style="width:185px; top:228px; left:707px;"/>
-<input type="text" name="m185r304" id="m185r304" style="width:185px; top:252px; left:707px;"/>
-<input type="text" name="m185r305" id="m185r305" style="width:185px; top:276px; left:707px;"/>
-<input type="text" name="m185r306" id="m185r306" style="width:185px; top:300px; left:707px;"/>
-<input type="text" name="m185r307" id="m185r307" style="width:185px; top:324px; left:707px;"/>
-<span class="text-echo" style="top:353px; right:65px;"><?php echo $m185r399; ?></span>
+<span class="text-echo" style="top:76px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 186a -->
-<input type="text" name="m186r001" id="m186r001" style="width:259px; top:577px; left:50px;"/>
-<input type="text" name="m186r002" id="m186r002" style="width:259px; top:602px; left:50px;"/>
-<input type="text" name="m186r003" id="m186r003" style="width:259px; top:626px; left:50px;"/>
-<input type="text" name="m186r004" id="m186r004" style="width:259px; top:650px; left:50px;"/>
-<input type="text" name="m186r005" id="m186r005" style="width:259px; top:674px; left:50px;"/>
-<input type="text" name="m186r006" id="m186r006" style="width:259px; top:698px; left:50px;"/>
-<input type="text" name="m186r007" id="m186r007" style="width:259px; top:722px; left:50px;"/>
-<input type="text" name="m186r101" id="m186r101" style="width:122px; top:577px; left:360px;"/>
-<input type="text" name="m186r102" id="m186r102" style="width:122px; top:602px; left:360px;"/>
-<input type="text" name="m186r103" id="m186r103" style="width:122px; top:626px; left:360px;"/>
-<input type="text" name="m186r104" id="m186r104" style="width:122px; top:650px; left:360px;"/>
-<input type="text" name="m186r105" id="m186r105" style="width:122px; top:674px; left:360px;"/>
-<input type="text" name="m186r106" id="m186r106" style="width:122px; top:698px; left:360px;"/>
-<input type="text" name="m186r107" id="m186r107" style="width:122px; top:722px; left:360px;"/>
-<input type="text" name="m186r201" id="m186r201" style="width:204px; top:577px; left:492px;"/>
-<input type="text" name="m186r202" id="m186r202" style="width:204px; top:602px; left:492px;"/>
-<input type="text" name="m186r203" id="m186r203" style="width:204px; top:626px; left:492px;"/>
-<input type="text" name="m186r204" id="m186r204" style="width:204px; top:650px; left:492px;"/>
-<input type="text" name="m186r205" id="m186r205" style="width:204px; top:674px; left:492px;"/>
-<input type="text" name="m186r206" id="m186r206" style="width:204px; top:698px; left:492px;"/>
-<input type="text" name="m186r207" id="m186r207" style="width:204px; top:722px; left:492px;"/>
-<span class="text-echo" style="top:750px; right:260px;"><?php echo $m186r299; ?></span>
-<input type="text" name="m186r301" id="m186r301" style="width:185px; top:577px; left:707px;"/>
-<input type="text" name="m186r302" id="m186r302" style="width:185px; top:602px; left:707px;"/>
-<input type="text" name="m186r303" id="m186r303" style="width:185px; top:626px; left:707px;"/>
-<input type="text" name="m186r304" id="m186r304" style="width:185px; top:650px; left:707px;"/>
-<input type="text" name="m186r305" id="m186r305" style="width:185px; top:674px; left:707px;"/>
-<input type="text" name="m186r306" id="m186r306" style="width:185px; top:698px; left:707px;"/>
-<input type="text" name="m186r307" id="m186r307" style="width:185px; top:722px; left:707px;"/>
-<span class="text-echo" style="top:750px; right:65px;"><?php echo $m186r399; ?></span>
+<input type="text" name="m186r001" id="m186r001" style="width:255px; top:219px; left:52px;"/>
+<input type="text" name="m186r101" id="m186r101" style="width:166px; top:219px; left:362px;"/>
+<input type="text" name="m186r201" id="m186r201" style="width:166px; top:219px; left:543px;"/>
+<input type="text" name="m186r301" id="m186r301" style="width:166px; top:219px; left:724px;"/>
+<input type="text" name="m186r002" id="m186r002" style="width:255px; top:249px; left:52px;"/>
+<input type="text" name="m186r102" id="m186r102" style="width:166px; top:249px; left:362px;"/>
+<input type="text" name="m186r202" id="m186r202" style="width:166px; top:249px; left:543px;"/>
+<input type="text" name="m186r302" id="m186r302" style="width:166px; top:249px; left:724px;"/>
+<input type="text" name="m186r003" id="m186r003" style="width:255px; top:280px; left:52px;"/>
+<input type="text" name="m186r103" id="m186r103" style="width:166px; top:280px; left:362px;"/>
+<input type="text" name="m186r203" id="m186r203" style="width:166px; top:280px; left:543px;"/>
+<input type="text" name="m186r303" id="m186r303" style="width:166px; top:280px; left:724px;"/>
+<input type="text" name="m186r004" id="m186r004" style="width:255px; top:310px; left:52px;"/>
+<input type="text" name="m186r104" id="m186r104" style="width:166px; top:310px; left:362px;"/>
+<input type="text" name="m186r204" id="m186r204" style="width:166px; top:310px; left:543px;"/>
+<input type="text" name="m186r304" id="m186r304" style="width:166px; top:310px; left:724px;"/>
+<input type="text" name="m186r005" id="m186r005" style="width:255px; top:341px; left:52px;"/>
+<input type="text" name="m186r105" id="m186r105" style="width:166px; top:341px; left:362px;"/>
+<input type="text" name="m186r205" id="m186r205" style="width:166px; top:341px; left:543px;"/>
+<input type="text" name="m186r305" id="m186r305" style="width:166px; top:341px; left:724px;"/>
+<input type="text" name="m186r006" id="m186r006" style="width:255px; top:372px; left:52px;"/>
+<input type="text" name="m186r106" id="m186r106" style="width:166px; top:372px; left:362px;"/>
+<input type="text" name="m186r206" id="m186r206" style="width:166px; top:372px; left:543px;"/>
+<input type="text" name="m186r306" id="m186r306" style="width:166px; top:372px; left:724px;"/>
+<input type="text" name="m186r007" id="m186r007" style="width:255px; top:402px; left:52px;"/>
+<input type="text" name="m186r107" id="m186r107" style="width:166px; top:402px; left:362px;"/>
+<input type="text" name="m186r207" id="m186r207" style="width:166px; top:402px; left:543px;"/>
+<input type="text" name="m186r307" id="m186r307" style="width:166px; top:402px; left:724px;"/>
+<span class="text-echo" style="top:438px; right:245px;"><?php echo $m186r299; ?></span>
+<span class="text-echo" style="top:438px; right:65px;"><?php echo $m186r399; ?></span>
 
 <!-- modul 304a -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z miezd"
- onclick="NacitajMzdy();" style="top:915px; left:377px;" class="btn-row-tool">
-<input type="text" name="m304r01" id="m304r01" style="width:140px; top:1008px; left:690px;"/>
-<input type="text" name="m304r02" id="m304r02" style="width:140px; top:1034px; left:690px;"/>
-<input type="text" name="m304r03" id="m304r03" style="width:140px; top:1060px; left:690px;"/>
-<input type="text" name="m304r04" id="m304r04" style="width:140px; top:1086px; left:690px;"/>
-<input type="text" name="m304r05" id="m304r05" style="width:140px; top:1111px; left:690px;"/>
-<input type="text" name="m304r06" id="m304r06" style="width:140px; top:1137px; left:690px;"/>
-<span class="text-echo" style="top:1167px; right:113px;"><?php echo $m304r99; ?></span>
+     onclick="NacitajMzdy();" style="top:596px; left:378px;" class="btn-row-tool">
+<input type="text" name="m304r01" id="m304r01" style="width:140px; top:707px; left:660px;"/>
+<input type="text" name="m304r02" id="m304r02" style="width:140px; top:737px; left:660px;"/>
+<input type="text" name="m304r03" id="m304r03" style="width:140px; top:768px; left:660px;"/>
+<input type="text" name="m304r04" id="m304r04" style="width:140px; top:798px; left:660px;"/>
+<input type="text" name="m304r05" id="m304r05" style="width:140px; top:829px; left:660px;"/>
+<input type="text" name="m304r06" id="m304r06" style="width:140px; top:860px; left:660px;"/>
+<span class="text-echo" style="top:895px; right:145px;"><?php echo $m304r99; ?></span>
 <?php                                         } ?>
 
 
 <?php if ( $strana == 11 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str11.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 11.strana 187kB">
+     alt="<?php echo $jpg_popis; ?> 11.strana 187kB" style="width:1250px; height:800px;">
+<span class="text-echo" style="top:85px; left:814px; font-size:16px; letter-spacing:22.5px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 527a -->
-<input type="text" name="m527r101" id="m527r101" style="width:64px; top:276px; left:299px;"/>
-<input type="text" name="m527r102" id="m527r102" style="width:64px; top:305px; left:299px;"/>
-<input type="text" name="m527r103" id="m527r103" style="width:64px; top:332px; left:299px;"/>
-<input type="text" name="m527r104" id="m527r104" style="width:64px; top:359px; left:299px;"/>
-<input type="text" name="m527r201" id="m527r201" style="width:114px; top:276px; left:374px;"/>
-<input type="text" name="m527r202" id="m527r202" style="width:114px; top:305px; left:374px;"/>
-<input type="text" name="m527r203" id="m527r203" style="width:114px; top:332px; left:374px;"/>
-<input type="text" name="m527r204" id="m527r204" style="width:114px; top:359px; left:374px;"/>
-<input type="text" name="m527r301" id="m527r301" style="width:72px; top:276px; left:500px;"/>
-<input type="text" name="m527r302" id="m527r302" style="width:72px; top:305px; left:500px;"/>
-<input type="text" name="m527r303" id="m527r303" style="width:72px; top:332px; left:500px;"/>
-<input type="text" name="m527r304" id="m527r304" style="width:72px; top:359px; left:500px;"/>
-<input type="text" name="m527r401" id="m527r401" style="width:72px; top:276px; left:584px;"/>
-<input type="text" name="m527r402" id="m527r402" style="width:72px; top:305px; left:584px;"/>
-<input type="text" name="m527r403" id="m527r403" style="width:72px; top:332px; left:584px;"/>
-<input type="text" name="m527r404" id="m527r404" style="width:72px; top:359px; left:584px;"/>
-<input type="text" name="m527r501" id="m527r501" style="width:93px; top:276px; left:669px;"/>
-<input type="text" name="m527r502" id="m527r502" style="width:93px; top:305px; left:669px;"/>
-<input type="text" name="m527r503" id="m527r503" style="width:93px; top:332px; left:669px;"/>
-<input type="text" name="m527r504" id="m527r504" style="width:93px; top:359px; left:669px;"/>
-<input type="text" name="m527r601" id="m527r601" style="width:72px; top:276px; left:774px;"/>
-<input type="text" name="m527r602" id="m527r602" style="width:72px; top:305px; left:774px;"/>
-<input type="text" name="m527r603" id="m527r603" style="width:72px; top:332px; left:774px;"/>
-<input type="text" name="m527r604" id="m527r604" style="width:72px; top:359px; left:774px;"/>
-<input type="text" name="m527r701" id="m527r701" style="width:83px; top:276px; left:858px;"/>
-<input type="text" name="m527r702" id="m527r702" style="width:83px; top:305px; left:858px;"/>
-<input type="text" name="m527r703" id="m527r703" style="width:83px; top:332px; left:858px;"/>
-<input type="text" name="m527r704" id="m527r704" style="width:83px; top:359px; left:858px;"/>
-<input type="text" name="m527r801" id="m527r801" style="width:72px; top:276px; left:953px;"/>
-<input type="text" name="m527r802" id="m527r802" style="width:72px; top:305px; left:953px;"/>
-<input type="text" name="m527r803" id="m527r803" style="width:72px; top:332px; left:953px;"/>
-<input type="text" name="m527r804" id="m527r804" style="width:72px; top:359px; left:953px;"/>
-<input type="text" name="m527r901" id="m527r901" style="width:72px; top:276px; left:1037px;"/>
-<input type="text" name="m527r902" id="m527r902" style="width:72px; top:305px; left:1037px;"/>
-<input type="text" name="m527r903" id="m527r903" style="width:72px; top:332px; left:1037px;"/>
-<input type="text" name="m527r904" id="m527r904" style="width:72px; top:359px; left:1037px;"/>
-<input type="text" name="m527r1001" id="m527r1001" style="width:73px; top:276px; left:1121px;"/>
-<input type="text" name="m527r1002" id="m527r1002" style="width:73px; top:305px; left:1121px;"/>
-<input type="text" name="m527r1003" id="m527r1003" style="width:73px; top:332px; left:1121px;"/>
-<input type="text" name="m527r1004" id="m527r1004" style="width:73px; top:359px; left:1121px;"/>
-<?php                                        } ?>
+<input type="text" name="m527r101" id="m527r101" style="width:69px; top:319px; left:302px;"/>
+<input type="text" name="m527r201" id="m527r201" style="width:90px; top:319px; left:386px;"/>
+<input type="text" name="m527r301" id="m527r301" style="width:80px; top:319px; left:491px;"/>
+<input type="text" name="m527r401" id="m527r401" style="width:71px; top:319px; left:585px;"/>
+<input type="text" name="m527r501" id="m527r501" style="width:92px; top:319px; left:669px;"/>
+<input type="text" name="m527r601" id="m527r601" style="width:70px; top:319px; left:775px;"/>
+<input type="text" name="m527r701" id="m527r701" style="width:81px; top:319px; left:859px;"/>
+<input type="text" name="m527r801" id="m527r801" style="width:70px; top:319px; left:954px;"/>
+<input type="text" name="m527r901" id="m527r901" style="width:81px; top:319px; left:1038px;"/>
+<input type="text" name="m527r1001" id="m527r1001" style="width:60px; top:319px; left:1133px;"/>
+
+<input type="text" name="m527r102" id="m527r102" style="width:69px; top:356px; left:302px;"/>
+<input type="text" name="m527r202" id="m527r202" style="width:90px; top:356px; left:386px;"/>
+<input type="text" name="m527r302" id="m527r302" style="width:80px; top:356px; left:491px;"/>
+<input type="text" name="m527r402" id="m527r402" style="width:71px; top:356px; left:585px;"/>
+<input type="text" name="m527r502" id="m527r502" style="width:92px; top:356px; left:669px;"/>
+<input type="text" name="m527r602" id="m527r602" style="width:70px; top:356px; left:775px;"/>
+<input type="text" name="m527r702" id="m527r702" style="width:81px; top:356px; left:859px;"/>
+<input type="text" name="m527r802" id="m527r802" style="width:70px; top:356px; left:954px;"/>
+<input type="text" name="m527r902" id="m527r902" style="width:81px; top:356px; left:1038px;"/>
+<input type="text" name="m527r1002" id="m527r1002" style="width:60px; top:356px; left:1133px;"/>
+
+<input type="text" name="m527r103" id="m527r103" style="width:69px; top:386px; left:302px;"/>
+<input type="text" name="m527r203" id="m527r203" style="width:90px; top:386px; left:386px;"/>
+<input type="text" name="m527r303" id="m527r303" style="width:80px; top:386px; left:491px;"/>
+<input type="text" name="m527r403" id="m527r403" style="width:71px; top:386px; left:585px;"/>
+<input type="text" name="m527r503" id="m527r503" style="width:92px; top:386px; left:669px;"/>
+<input type="text" name="m527r603" id="m527r603" style="width:70px; top:386px; left:775px;"/>
+<input type="text" name="m527r703" id="m527r703" style="width:81px; top:386px; left:859px;"/>
+<input type="text" name="m527r803" id="m527r803" style="width:70px; top:386px; left:954px;"/>
+<input type="text" name="m527r903" id="m527r903" style="width:81px; top:386px; left:1038px;"/>
+<input type="text" name="m527r1003" id="m527r1003" style="width:60px; top:386px; left:1133px;"/>
+
+<input type="text" name="m527r104" id="m527r104" style="width:69px; top:417px; left:302px;"/>
+<input type="text" name="m527r204" id="m527r204" style="width:90px; top:417px; left:386px;"/>
+<input type="text" name="m527r304" id="m527r304" style="width:80px; top:417px; left:491px;"/>
+<input type="text" name="m527r404" id="m527r404" style="width:71px; top:417px; left:585px;"/>
+<input type="text" name="m527r504" id="m527r504" style="width:92px; top:417px; left:669px;"/>
+<input type="text" name="m527r604" id="m527r604" style="width:70px; top:417px; left:775px;"/>
+<input type="text" name="m527r704" id="m527r704" style="width:81px; top:417px; left:859px;"/>
+<input type="text" name="m527r804" id="m527r804" style="width:70px; top:417px; left:954px;"/>
+<input type="text" name="m527r904" id="m527r904" style="width:81px; top:417px; left:1038px;"/>
+<input type="text" name="m527r1004" id="m527r1004" style="width:60px; top:417px; left:1133px;"/>
+<?php                                         } ?>
 
 
 <?php if ( $strana == 12 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 12.strana 165kB">
+<span class="text-echo" style="top:93px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 474a -->
-<input type="text" name="m474r101" id="m474r101" style="width:100px; top:263px; left:516px;"/>
-<input type="text" name="m474r102" id="m474r102" style="width:100px; top:289px; left:516px;"/>
-<input type="text" name="m474r103" id="m474r103" style="width:100px; top:315px; left:516px;"/>
-<input type="text" name="m474r104" id="m474r104" style="width:100px; top:341px; left:516px;"/>
-<input type="text" name="m474r105" id="m474r105" style="width:100px; top:367px; left:516px;"/>
-<input type="text" name="m474r106" id="m474r106" style="width:100px; top:393px; left:516px;"/>
-<input type="text" name="m474r107" id="m474r107" style="width:100px; top:419px; left:516px;"/>
-<span class="text-echo" style="top:448px; right:333px;"><?php echo $m474r199; ?></span>
-<input type="text" name="m474r201" id="m474r201" style="width:113px; top:263px; left:628px;"/>
-<input type="text" name="m474r202" id="m474r202" style="width:113px; top:289px; left:628px;"/>
-<input type="text" name="m474r203" id="m474r203" style="width:113px; top:315px; left:628px;"/>
-<input type="text" name="m474r204" id="m474r204" style="width:113px; top:341px; left:628px;"/>
-<input type="text" name="m474r205" id="m474r205" style="width:113px; top:367px; left:628px;"/>
-<input type="text" name="m474r206" id="m474r206" style="width:113px; top:393px; left:628px;"/>
-<input type="text" name="m474r207" id="m474r207" style="width:113px; top:419px; left:628px;"/>
-<span class="text-echo" style="top:448px; right:207px;"><?php echo $m474r299; ?></span>
-
-<input type="text" name="m474r301" id="m474r301" style="width:138px; top:263px; left:753px;"/>
-<input type="text" name="m474r302" id="m474r302" style="width:138px; top:289px; left:753px;"/>
-<input type="text" name="m474r303" id="m474r303" style="width:138px; top:315px; left:753px;"/>
-<input type="text" name="m474r304" id="m474r304" style="width:138px; top:341px; left:753px;"/>
-<input type="text" name="m474r305" id="m474r305" style="width:138px; top:367px; left:753px;"/>
-<input type="text" name="m474r306" id="m474r306" style="width:138px; top:393px; left:753px;"/>
-<input type="text" name="m474r307" id="m474r307" style="width:138px; top:419px; left:753px;"/>
-<span class="text-echo" style="top:448px; right:60px;"><?php echo $m474r399; ?></span>
+<input type="text" name="m474r101" id="m474r101" style="width:108px; top:286px; left:495px;"/>
+<input type="text" name="m474r201" id="m474r201" style="width:108px; top:286px; left:619px;"/>
+<input type="text" name="m474r301" id="m474r301" style="width:145px; top:286px; left:744px;"/>
+<input type="text" name="m474r102" id="m474r102" style="width:108px; top:321px; left:495px;"/>
+<input type="text" name="m474r202" id="m474r202" style="width:108px; top:321px; left:619px;"/>
+<input type="text" name="m474r302" id="m474r302" style="width:145px; top:321px; left:744px;"/>
+<input type="text" name="m474r103" id="m474r103" style="width:108px; top:356px; left:495px;"/>
+<input type="text" name="m474r203" id="m474r203" style="width:108px; top:356px; left:619px;"/>
+<input type="text" name="m474r303" id="m474r303" style="width:145px; top:356px; left:744px;"/>
+<input type="text" name="m474r104" id="m474r104" style="width:108px; top:391px; left:495px;"/>
+<input type="text" name="m474r204" id="m474r204" style="width:108px; top:391px; left:619px;"/>
+<input type="text" name="m474r304" id="m474r304" style="width:145px; top:391px; left:744px;"/>
+<input type="text" name="m474r105" id="m474r105" style="width:108px; top:426px; left:495px;"/>
+<input type="text" name="m474r205" id="m474r205" style="width:108px; top:426px; left:619px;"/>
+<input type="text" name="m474r305" id="m474r305" style="width:145px; top:426px; left:744px;"/>
+<input type="text" name="m474r106" id="m474r106" style="width:108px; top:461px; left:495px;"/>
+<input type="text" name="m474r206" id="m474r206" style="width:108px; top:461px; left:619px;"/>
+<input type="text" name="m474r306" id="m474r306" style="width:145px; top:461px; left:744px;"/>
+<!-- <input type="text" name="m474r107" id="m474r107" style="width:108px; top:490px; left:495px;"/> dopyt, zrušené -->
+<input type="text" name="m474r207" id="m474r207" style="width:108px; top:496px; left:619px;"/>
+<input type="text" name="m474r307" id="m474r307" style="width:145px; top:496px; left:744px;"/>
+<span class="text-echo" style="top:535px; right:345px;"><?php echo $m474r199; ?></span>
+<span class="text-echo" style="top:535px; right:220px;"><?php echo $m474r299; ?></span>
+<span class="text-echo" style="top:535px; right:58px;"><?php echo $m474r399; ?></span>
 <?php                                         } ?>
 
 
 <?php if ( $strana == 13 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str13.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 13.strana 207kB">
+<span class="text-echo" style="top:76px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 127 -->
-<input type="text" name="m127r001" id="m127r001" style="width:250px; top:364px; left:50px;"/>
-<input type="text" name="m127r002" id="m127r002" style="width:250px; top:392px; left:50px;"/>
-<input type="text" name="m127r003" id="m127r003" style="width:250px; top:421px; left:50px;"/>
-<input type="text" name="m127r004" id="m127r004" style="width:250px; top:449px; left:50px;"/>
-<input type="text" name="m127r005" id="m127r005" style="width:250px; top:478px; left:50px;"/>
-<input type="text" name="m127r006" id="m127r006" style="width:250px; top:506px; left:50px;"/>
-<input type="text" name="m127r007" id="m127r007" style="width:250px; top:535px; left:50px;"/>
-<input type="text" name="m127r008" id="m127r008" style="width:250px; top:563px; left:50px;"/>
-<input type="text" name="m127r009" id="m127r009" style="width:250px; top:592px; left:50px;"/>
-<input type="text" name="m127r010" id="m127r010" style="width:250px; top:620px; left:50px;"/>
-<input type="text" name="m127r011" id="m127r011" style="width:250px; top:649px; left:50px;"/>
-<input type="text" name="m127r012" id="m127r012" style="width:250px; top:677px; left:50px;"/>
-<input type="text" name="m127r013" id="m127r013" style="width:250px; top:706px; left:50px;"/>
-<input type="text" name="m127r014" id="m127r014" style="width:250px; top:734px; left:50px;"/>
-<input type="text" name="m127r015" id="m127r015" style="width:250px; top:763px; left:50px;"/>
-<input type="text" name="m127r101" id="m127r101" style="width:95px; top:364px; left:345px;"/>
-<input type="text" name="m127r102" id="m127r102" style="width:95px; top:392px; left:345px;"/>
-<input type="text" name="m127r103" id="m127r103" style="width:95px; top:421px; left:345px;"/>
-<input type="text" name="m127r104" id="m127r104" style="width:95px; top:449px; left:345px;"/>
-<input type="text" name="m127r105" id="m127r105" style="width:95px; top:478px; left:345px;"/>
-<input type="text" name="m127r106" id="m127r106" style="width:95px; top:506px; left:345px;"/>
-<input type="text" name="m127r107" id="m127r107" style="width:95px; top:535px; left:345px;"/>
-<input type="text" name="m127r108" id="m127r108" style="width:95px; top:563px; left:345px;"/>
-<input type="text" name="m127r109" id="m127r109" style="width:95px; top:592px; left:345px;"/>
-<input type="text" name="m127r110" id="m127r110" style="width:95px; top:620px; left:345px;"/>
-<input type="text" name="m127r111" id="m127r111" style="width:95px; top:649px; left:345px;"/>
-<input type="text" name="m127r112" id="m127r112" style="width:95px; top:677px; left:345px;"/>
-<input type="text" name="m127r113" id="m127r113" style="width:95px; top:706px; left:345px;"/>
-<input type="text" name="m127r114" id="m127r114" style="width:95px; top:734px; left:345px;"/>
-<input type="text" name="m127r115" id="m127r115" style="width:95px; top:763px; left:345px;"/>
-<input type="text" name="m127r201" id="m127r201" style="width:65px; top:364px; left:450px;"/>
-<input type="text" name="m127r202" id="m127r202" style="width:65px; top:392px; left:450px;"/>
-<input type="text" name="m127r203" id="m127r203" style="width:65px; top:421px; left:450px;"/>
-<input type="text" name="m127r204" id="m127r204" style="width:65px; top:449px; left:450px;"/>
-<input type="text" name="m127r205" id="m127r205" style="width:65px; top:478px; left:450px;"/>
-<input type="text" name="m127r206" id="m127r206" style="width:65px; top:506px; left:450px;"/>
-<input type="text" name="m127r207" id="m127r207" style="width:65px; top:535px; left:450px;"/>
-<input type="text" name="m127r208" id="m127r208" style="width:65px; top:563px; left:450px;"/>
-<input type="text" name="m127r209" id="m127r209" style="width:65px; top:592px; left:450px;"/>
-<input type="text" name="m127r210" id="m127r210" style="width:65px; top:620px; left:450px;"/>
-<input type="text" name="m127r211" id="m127r211" style="width:65px; top:649px; left:450px;"/>
-<input type="text" name="m127r212" id="m127r212" style="width:65px; top:677px; left:450px;"/>
-<input type="text" name="m127r213" id="m127r213" style="width:65px; top:706px; left:450px;"/>
-<input type="text" name="m127r214" id="m127r214" style="width:65px; top:734px; left:450px;"/>
-<input type="text" name="m127r215" id="m127r215" style="width:65px; top:763px; left:450px;"/>
-<span class="text-echo" style="top:795px; right:430px;"><?php echo $m127r299; ?></span>
-<input type="text" name="m127r301" id="m127r301" style="width:79px; top:364px; left:526px;"/>
-<input type="text" name="m127r302" id="m127r302" style="width:79px; top:392px; left:526px;"/>
-<input type="text" name="m127r303" id="m127r303" style="width:79px; top:421px; left:526px;"/>
-<input type="text" name="m127r304" id="m127r304" style="width:79px; top:449px; left:526px;"/>
-<input type="text" name="m127r305" id="m127r305" style="width:79px; top:478px; left:526px;"/>
-<input type="text" name="m127r306" id="m127r306" style="width:79px; top:506px; left:526px;"/>
-<input type="text" name="m127r307" id="m127r307" style="width:79px; top:535px; left:526px;"/>
-<input type="text" name="m127r308" id="m127r308" style="width:79px; top:563px; left:526px;"/>
-<input type="text" name="m127r309" id="m127r309" style="width:79px; top:592px; left:526px;"/>
-<input type="text" name="m127r310" id="m127r310" style="width:79px; top:620px; left:526px;"/>
-<input type="text" name="m127r311" id="m127r311" style="width:79px; top:649px; left:526px;"/>
-<input type="text" name="m127r312" id="m127r312" style="width:79px; top:677px; left:526px;"/>
-<input type="text" name="m127r313" id="m127r313" style="width:79px; top:706px; left:526px;"/>
-<input type="text" name="m127r314" id="m127r314" style="width:79px; top:734px; left:526px;"/>
-<input type="text" name="m127r315" id="m127r315" style="width:79px; top:763px; left:526px;"/>
-<span class="text-echo" style="top:795px; right:340px;"><?php echo $m127r399; ?></span>
-<input type="text" name="m127r401" id="m127r401" style="width:79px; top:364px; left:617px;"/>
-<input type="text" name="m127r402" id="m127r402" style="width:79px; top:392px; left:617px;"/>
-<input type="text" name="m127r403" id="m127r403" style="width:79px; top:421px; left:617px;"/>
-<input type="text" name="m127r404" id="m127r404" style="width:79px; top:449px; left:617px;"/>
-<input type="text" name="m127r405" id="m127r405" style="width:79px; top:478px; left:617px;"/>
-<input type="text" name="m127r406" id="m127r406" style="width:79px; top:506px; left:617px;"/>
-<input type="text" name="m127r407" id="m127r407" style="width:79px; top:535px; left:617px;"/>
-<input type="text" name="m127r408" id="m127r408" style="width:79px; top:563px; left:617px;"/>
-<input type="text" name="m127r409" id="m127r409" style="width:79px; top:592px; left:617px;"/>
-<input type="text" name="m127r410" id="m127r410" style="width:79px; top:620px; left:617px;"/>
-<input type="text" name="m127r411" id="m127r411" style="width:79px; top:649px; left:617px;"/>
-<input type="text" name="m127r412" id="m127r412" style="width:79px; top:677px; left:617px;"/>
-<input type="text" name="m127r413" id="m127r413" style="width:79px; top:706px; left:617px;"/>
-<input type="text" name="m127r414" id="m127r414" style="width:79px; top:734px; left:617px;"/>
-<input type="text" name="m127r415" id="m127r415" style="width:79px; top:763px; left:617px;"/>
-<span class="text-echo" style="top:795px; right:250px;"><?php echo $m127r499; ?></span>
-<input type="text" name="m127r501" id="m127r501" style="width:100px; top:364px; left:708px;"/>
-<input type="text" name="m127r502" id="m127r502" style="width:100px; top:392px; left:708px;"/>
-<input type="text" name="m127r503" id="m127r503" style="width:100px; top:421px; left:708px;"/>
-<input type="text" name="m127r504" id="m127r504" style="width:100px; top:449px; left:708px;"/>
-<input type="text" name="m127r505" id="m127r505" style="width:100px; top:478px; left:708px;"/>
-<input type="text" name="m127r506" id="m127r506" style="width:100px; top:506px; left:708px;"/>
-<input type="text" name="m127r507" id="m127r507" style="width:100px; top:535px; left:708px;"/>
-<input type="text" name="m127r508" id="m127r508" style="width:100px; top:563px; left:708px;"/>
-<input type="text" name="m127r509" id="m127r509" style="width:100px; top:592px; left:708px;"/>
-<input type="text" name="m127r510" id="m127r510" style="width:100px; top:620px; left:708px;"/>
-<input type="text" name="m127r511" id="m127r511" style="width:100px; top:649px; left:708px;"/>
-<input type="text" name="m127r512" id="m127r512" style="width:100px; top:677px; left:708px;"/>
-<input type="text" name="m127r513" id="m127r513" style="width:100px; top:706px; left:708px;"/>
-<input type="text" name="m127r514" id="m127r514" style="width:100px; top:734px; left:708px;"/>
-<input type="text" name="m127r515" id="m127r515" style="width:100px; top:763px; left:708px;"/>
-<span class="text-echo" style="top:795px; right:140px;"><?php echo $m127r599; ?></span>
-<input type="text" name="m127r601" id="m127r601" style="width:70px; top:364px; left:821px;"/>
-<input type="text" name="m127r602" id="m127r602" style="width:70px; top:392px; left:821px;"/>
-<input type="text" name="m127r603" id="m127r603" style="width:70px; top:421px; left:821px;"/>
-<input type="text" name="m127r604" id="m127r604" style="width:70px; top:449px; left:821px;"/>
-<input type="text" name="m127r605" id="m127r605" style="width:70px; top:478px; left:821px;"/>
-<input type="text" name="m127r606" id="m127r606" style="width:70px; top:506px; left:821px;"/>
-<input type="text" name="m127r607" id="m127r607" style="width:70px; top:535px; left:821px;"/>
-<input type="text" name="m127r608" id="m127r608" style="width:70px; top:563px; left:821px;"/>
-<input type="text" name="m127r609" id="m127r609" style="width:70px; top:592px; left:821px;"/>
-<input type="text" name="m127r610" id="m127r610" style="width:70px; top:620px; left:821px;"/>
-<input type="text" name="m127r611" id="m127r611" style="width:70px; top:649px; left:821px;"/>
-<input type="text" name="m127r612" id="m127r612" style="width:70px; top:677px; left:821px;"/>
-<input type="text" name="m127r613" id="m127r613" style="width:70px; top:706px; left:821px;"/>
-<input type="text" name="m127r614" id="m127r614" style="width:70px; top:734px; left:821px;"/>
-<input type="text" name="m127r615" id="m127r615" style="width:70px; top:763px; left:821px;"/>
-<span class="text-echo" style="top:795px; right:57px;"><?php echo $m127r699; ?></span>
+<input type="text" name="m127r001" id="m127r001" style="width:243px; top:361px; left:54px;"/>
+<input type="text" name="m127r101" id="m127r101" style="width:96px; top:361px; left:348px;"/>
+<input type="text" name="m127r201" id="m127r201" style="width:66px; top:361px; left:461px;"/>
+<input type="text" name="m127r301" id="m127r301" style="width:60px; top:361px; left:543px;"/>
+<input type="text" name="m127r401" id="m127r401" style="width:63px; top:361px; left:619px;"/>
+<input type="text" name="m127r501" id="m127r501" style="width:101px; top:361px; left:698px;"/>
+<input type="text" name="m127r601" id="m127r601" style="width:75px; top:361px; left:814px;"/>
+<input type="text" name="m127r002" id="m127r002" style="width:243px; top:396px; left:54px;"/>
+<input type="text" name="m127r102" id="m127r102" style="width:96px; top:396px; left:348px;"/>
+<input type="text" name="m127r202" id="m127r202" style="width:65px; top:396px; left:461px;"/>
+<input type="text" name="m127r302" id="m127r302" style="width:60px; top:396px; left:543px;"/>
+<input type="text" name="m127r402" id="m127r402" style="width:63px; top:396px; left:619px;"/>
+<input type="text" name="m127r502" id="m127r502" style="width:101px; top:396px; left:698px;"/>
+<input type="text" name="m127r602" id="m127r602" style="width:75px; top:396px; left:814px;"/>
+<input type="text" name="m127r003" id="m127r003" style="width:243px; top:431px; left:54px;"/>
+<input type="text" name="m127r103" id="m127r103" style="width:96px; top:431px; left:348px;"/>
+<input type="text" name="m127r203" id="m127r203" style="width:65px; top:431px; left:461px;"/>
+<input type="text" name="m127r303" id="m127r303" style="width:60px; top:431px; left:543px;"/>
+<input type="text" name="m127r403" id="m127r403" style="width:63px; top:431px; left:619px;"/>
+<input type="text" name="m127r503" id="m127r503" style="width:101px; top:431px; left:698px;"/>
+<input type="text" name="m127r603" id="m127r603" style="width:75px; top:431px; left:814px;"/>
+<input type="text" name="m127r004" id="m127r004" style="width:243px; top:466px; left:54px;"/>
+<input type="text" name="m127r104" id="m127r104" style="width:96px; top:466px; left:348px;"/>
+<input type="text" name="m127r204" id="m127r204" style="width:65px; top:466px; left:461px;"/>
+<input type="text" name="m127r304" id="m127r304" style="width:60px; top:466px; left:543px;"/>
+<input type="text" name="m127r404" id="m127r404" style="width:63px; top:466px; left:619px;"/>
+<input type="text" name="m127r504" id="m127r504" style="width:101px; top:466px; left:698px;"/>
+<input type="text" name="m127r604" id="m127r604" style="width:75px; top:466px; left:814px;"/>
+<input type="text" name="m127r005" id="m127r005" style="width:243px; top:501px; left:54px;"/>
+<input type="text" name="m127r105" id="m127r105" style="width:96px; top:501px; left:348px;"/>
+<input type="text" name="m127r205" id="m127r205" style="width:65px; top:501px; left:461px;"/>
+<input type="text" name="m127r305" id="m127r305" style="width:60px; top:501px; left:543px;"/>
+<input type="text" name="m127r405" id="m127r405" style="width:63px; top:501px; left:619px;"/>
+<input type="text" name="m127r505" id="m127r505" style="width:101px; top:501px; left:698px;"/>
+<input type="text" name="m127r605" id="m127r605" style="width:75px; top:501px; left:814px;"/>
+<input type="text" name="m127r006" id="m127r006" style="width:243px; top:536px; left:54px;"/>
+<input type="text" name="m127r106" id="m127r106" style="width:96px; top:536px; left:348px;"/>
+<input type="text" name="m127r206" id="m127r206" style="width:65px; top:536px; left:461px;"/>
+<input type="text" name="m127r306" id="m127r306" style="width:60px; top:536px; left:543px;"/>
+<input type="text" name="m127r406" id="m127r406" style="width:63px; top:536px; left:619px;"/>
+<input type="text" name="m127r506" id="m127r506" style="width:101px; top:536px; left:698px;"/>
+<input type="text" name="m127r606" id="m127r606" style="width:75px; top:536px; left:814px;"/>
+<input type="text" name="m127r007" id="m127r007" style="width:243px; top:572px; left:54px;"/>
+<input type="text" name="m127r107" id="m127r107" style="width:96px; top:572px; left:348px;"/>
+<input type="text" name="m127r207" id="m127r207" style="width:65px; top:572px; left:461px;"/>
+<input type="text" name="m127r307" id="m127r307" style="width:60px; top:572px; left:543px;"/>
+<input type="text" name="m127r407" id="m127r407" style="width:63px; top:572px; left:619px;"/>
+<input type="text" name="m127r507" id="m127r507" style="width:101px; top:572px; left:698px;"/>
+<input type="text" name="m127r607" id="m127r607" style="width:75px; top:572px; left:814px;"/>
+<input type="text" name="m127r008" id="m127r008" style="width:243px; top:607px; left:54px;"/>
+<input type="text" name="m127r108" id="m127r108" style="width:96px; top:607px; left:348px;"/>
+<input type="text" name="m127r208" id="m127r208" style="width:65px; top:607px; left:461px;"/>
+<input type="text" name="m127r308" id="m127r308" style="width:60px; top:607px; left:543px;"/>
+<input type="text" name="m127r408" id="m127r408" style="width:63px; top:607px; left:619px;"/>
+<input type="text" name="m127r508" id="m127r508" style="width:101px; top:607px; left:698px;"/>
+<input type="text" name="m127r608" id="m127r608" style="width:75px; top:607px; left:814px;"/>
+<input type="text" name="m127r009" id="m127r009" style="width:243px; top:642px; left:54px;"/>
+<input type="text" name="m127r109" id="m127r109" style="width:96px; top:642px; left:348px;"/>
+<input type="text" name="m127r209" id="m127r209" style="width:65px; top:642px; left:461px;"/>
+<input type="text" name="m127r309" id="m127r309" style="width:60px; top:642px; left:543px;"/>
+<input type="text" name="m127r409" id="m127r409" style="width:63px; top:642px; left:619px;"/>
+<input type="text" name="m127r509" id="m127r509" style="width:101px; top:642px; left:698px;"/>
+<input type="text" name="m127r609" id="m127r609" style="width:75px; top:642px; left:814px;"/>
+<input type="text" name="m127r010" id="m127r010" style="width:243px; top:677px; left:54px;"/>
+<input type="text" name="m127r110" id="m127r110" style="width:96px; top:677px; left:348px;"/>
+<input type="text" name="m127r210" id="m127r210" style="width:65px; top:677px; left:461px;"/>
+<input type="text" name="m127r310" id="m127r310" style="width:60px; top:677px; left:543px;"/>
+<input type="text" name="m127r410" id="m127r410" style="width:63px; top:677px; left:619px;"/>
+<input type="text" name="m127r510" id="m127r510" style="width:101px; top:677px; left:698px;"/>
+<input type="text" name="m127r610" id="m127r610" style="width:75px; top:677px; left:814px;"/>
+<input type="text" name="m127r011" id="m127r011" style="width:243px; top:712px; left:54px;"/>
+<input type="text" name="m127r111" id="m127r111" style="width:96px; top:712px; left:348px;"/>
+<input type="text" name="m127r211" id="m127r211" style="width:65px; top:712px; left:461px;"/>
+<input type="text" name="m127r311" id="m127r311" style="width:60px; top:712px; left:543px;"/>
+<input type="text" name="m127r411" id="m127r411" style="width:63px; top:712px; left:619px;"/>
+<input type="text" name="m127r511" id="m127r511" style="width:101px; top:712px; left:698px;"/>
+<input type="text" name="m127r611" id="m127r611" style="width:75px; top:712px; left:814px;"/>
+<input type="text" name="m127r012" id="m127r012" style="width:243px; top:747px; left:54px;"/>
+<input type="text" name="m127r112" id="m127r112" style="width:96px; top:747px; left:348px;"/>
+<input type="text" name="m127r212" id="m127r212" style="width:65px; top:747px; left:461px;"/>
+<input type="text" name="m127r312" id="m127r312" style="width:60px; top:747px; left:543px;"/>
+<input type="text" name="m127r412" id="m127r412" style="width:63px; top:747px; left:619px;"/>
+<input type="text" name="m127r512" id="m127r512" style="width:101px; top:747px; left:698px;"/>
+<input type="text" name="m127r612" id="m127r612" style="width:75px; top:747px; left:814px;"/>
+<input type="text" name="m127r013" id="m127r013" style="width:243px; top:782px; left:54px;"/>
+<input type="text" name="m127r113" id="m127r113" style="width:96px; top:782px; left:348px;"/>
+<input type="text" name="m127r213" id="m127r213" style="width:65px; top:782px; left:461px;"/>
+<input type="text" name="m127r313" id="m127r313" style="width:60px; top:782px; left:543px;"/>
+<input type="text" name="m127r413" id="m127r413" style="width:63px; top:782px; left:619px;"/>
+<input type="text" name="m127r513" id="m127r513" style="width:101px; top:782px; left:698px;"/>
+<input type="text" name="m127r613" id="m127r613" style="width:75px; top:782px; left:814px;"/>
+<input type="text" name="m127r014" id="m127r014" style="width:243px; top:817px; left:54px;"/>
+<input type="text" name="m127r114" id="m127r114" style="width:96px; top:817px; left:348px;"/>
+<input type="text" name="m127r214" id="m127r214" style="width:65px; top:817px; left:461px;"/>
+<input type="text" name="m127r314" id="m127r314" style="width:60px; top:817px; left:543px;"/>
+<input type="text" name="m127r414" id="m127r414" style="width:63px; top:817px; left:619px;"/>
+<input type="text" name="m127r514" id="m127r514" style="width:101px; top:817px; left:698px;"/>
+<input type="text" name="m127r614" id="m127r614" style="width:75px; top:817px; left:814px;"/>
+<input type="text" name="m127r015" id="m127r015" style="width:243px; top:852px; left:54px;"/>
+<input type="text" name="m127r115" id="m127r115" style="width:96px; top:852px; left:348px;"/>
+<input type="text" name="m127r215" id="m127r215" style="width:65px; top:852px; left:461px;"/>
+<input type="text" name="m127r315" id="m127r315" style="width:60px; top:852px; left:543px;"/>
+<input type="text" name="m127r415" id="m127r415" style="width:63px; top:852px; left:619px;"/>
+<input type="text" name="m127r515" id="m127r515" style="width:101px; top:852px; left:698px;"/>
+<input type="text" name="m127r615" id="m127r615" style="width:75px; top:852px; left:814px;"/>
+<span class="text-echo" style="top:892px; right:419px;"><?php echo $m127r299; ?></span>
+<span class="text-echo" style="top:892px; right:342px;"><?php echo $m127r399; ?></span>
+<span class="text-echo" style="top:892px; right:262px;"><?php echo $m127r499; ?></span>
+<span class="text-echo" style="top:892px; right:146px;"><?php echo $m127r599; ?></span>
+<span class="text-echo" style="top:892px; right:57px;"><?php echo $m127r699; ?></span>
 <?php                                         } ?>
 
 
 <?php if ( $strana == 14 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str14.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 14.strana 205kB">
+<span class="text-echo" style="top:93px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 128 -->
-<input type="text" name="m128r101" id="m128r101" style="width:90px; top:291px; left:425px;"/>
-<input type="text" name="m128r102" id="m128r102" style="width:90px; top:319px; left:425px;"/>
-<input type="text" name="m128r103" id="m128r103" style="width:90px; top:352px; left:425px;"/>
-<input type="text" name="m128r104" id="m128r104" style="width:90px; top:385px; left:425px;"/>
-<input type="text" name="m128r105" id="m128r105" style="width:90px; top:418px; left:425px;"/>
-<input type="text" name="m128r106" id="m128r106" style="width:90px; top:450px; left:425px;"/>
-<input type="text" name="m128r107" id="m128r107" style="width:90px; top:482px; left:425px;"/>
-<input type="text" name="m128r108" id="m128r108" style="width:90px; top:515px; left:425px;"/>
-<input type="text" name="m128r109" id="m128r109" style="width:90px; top:543px; left:425px;"/>
-<input type="text" name="m128r110" id="m128r110" style="width:90px; top:572px; left:425px;"/>
-<input type="text" name="m128r111" id="m128r111" style="width:90px; top:600px; left:425px;"/>
-<span class="text-echo" style="top:633px; right:430px;"><?php echo $m128r199; ?></span>
-<input type="text" name="m128r201" id="m128r201" style="width:80px; top:291px; left:526px;"/>
-<input type="text" name="m128r202" id="m128r202" style="width:80px; top:319px; left:526px;"/>
-<input type="text" name="m128r203" id="m128r203" style="width:80px; top:352px; left:526px;"/>
-<input type="text" name="m128r204" id="m128r204" style="width:80px; top:385px; left:526px;"/>
-<input type="text" name="m128r205" id="m128r205" style="width:80px; top:418px; left:526px;"/>
-<input type="text" name="m128r206" id="m128r206" style="width:80px; top:450px; left:526px;"/>
-<input type="text" name="m128r207" id="m128r207" style="width:80px; top:482px; left:526px;"/>
-<input type="text" name="m128r208" id="m128r208" style="width:80px; top:515px; left:526px;"/>
-<input type="text" name="m128r209" id="m128r209" style="width:80px; top:543px; left:526px;"/>
-<input type="text" name="m128r210" id="m128r210" style="width:80px; top:572px; left:526px;"/>
-<input type="text" name="m128r211" id="m128r211" style="width:80px; top:600px; left:526px;"/>
-<span class="text-echo" style="top:633px; right:341px;"><?php echo $m128r299; ?></span>
-<input type="text" name="m128r301" id="m128r301" style="width:79px; top:291px; left:617px;"/>
-<input type="text" name="m128r302" id="m128r302" style="width:79px; top:319px; left:617px;"/>
-<input type="text" name="m128r303" id="m128r303" style="width:79px; top:352px; left:617px;"/>
-<input type="text" name="m128r304" id="m128r304" style="width:79px; top:385px; left:617px;"/>
-<input type="text" name="m128r305" id="m128r305" style="width:79px; top:418px; left:617px;"/>
-<input type="text" name="m128r306" id="m128r306" style="width:79px; top:450px; left:617px;"/>
-<input type="text" name="m128r307" id="m128r307" style="width:79px; top:482px; left:617px;"/>
-<input type="text" name="m128r308" id="m128r308" style="width:79px; top:515px; left:617px;"/>
-<input type="text" name="m128r309" id="m128r309" style="width:79px; top:543px; left:617px;"/>
-<input type="text" name="m128r310" id="m128r310" style="width:79px; top:572px; left:617px;"/>
-<input type="text" name="m128r311" id="m128r311" style="width:79px; top:600px; left:617px;"/>
-<span class="text-echo" style="top:633px; right:250px;"><?php echo $m128r399; ?></span>
-<input type="text" name="m128r401" id="m128r401" style="width:100px; top:291px; left:708px;"/>
-<input type="text" name="m128r402" id="m128r402" style="width:100px; top:319px; left:708px;"/>
-<input type="text" name="m128r403" id="m128r403" style="width:100px; top:352px; left:708px;"/>
-<input type="text" name="m128r404" id="m128r404" style="width:100px; top:385px; left:708px;"/>
-<input type="text" name="m128r405" id="m128r405" style="width:100px; top:418px; left:708px;"/>
-<input type="text" name="m128r406" id="m128r406" style="width:100px; top:450px; left:708px;"/>
-<input type="text" name="m128r407" id="m128r407" style="width:100px; top:482px; left:708px;"/>
-<input type="text" name="m128r408" id="m128r408" style="width:100px; top:515px; left:708px;"/>
-<input type="text" name="m128r409" id="m128r409" style="width:100px; top:543px; left:708px;"/>
-<input type="text" name="m128r410" id="m128r410" style="width:100px; top:572px; left:708px;"/>
-<input type="text" name="m128r411" id="m128r411" style="width:100px; top:600px; left:708px;"/>
-<span class="text-echo" style="top:633px; right:138px;"><?php echo $m128r499; ?></span>
-
-<input type="text" name="m128r501" id="m128r501" style="width:71px; top:291px; left:821px;"/>
-<input type="text" name="m128r502" id="m128r502" style="width:71px; top:319px; left:821px;"/>
-<input type="text" name="m128r503" id="m128r503" style="width:71px; top:352px; left:821px;"/>
-<input type="text" name="m128r504" id="m128r504" style="width:71px; top:385px; left:821px;"/>
-<input type="text" name="m128r505" id="m128r505" style="width:71px; top:418px; left:821px;"/>
-<input type="text" name="m128r506" id="m128r506" style="width:71px; top:450px; left:821px;"/>
-<input type="text" name="m128r507" id="m128r507" style="width:71px; top:482px; left:821px;"/>
-<input type="text" name="m128r508" id="m128r508" style="width:71px; top:515px; left:821px;"/>
-<input type="text" name="m128r509" id="m128r509" style="width:71px; top:543px; left:821px;"/>
-<input type="text" name="m128r510" id="m128r510" style="width:71px; top:572px; left:821px;"/>
-<input type="text" name="m128r511" id="m128r511" style="width:71px; top:600px; left:821px;"/>
-<span class="text-echo" style="top:633px; right:58px;"><?php echo $m128r599; ?></span>
+<input type="text" name="m128r101" id="m128r101" style="width:90px; top:325px; left:425px;"/>
+<input type="text" name="m128r201" id="m128r201" style="width:87px; top:325px; left:505px;"/>
+<input type="text" name="m128r301" id="m128r301" style="width:76px; top:325px; left:607px;"/>
+<input type="text" name="m128r401" id="m128r401" style="width:99px; top:325px; left:697px;"/>
+<input type="text" name="m128r501" id="m128r501" style="width:78px; top:325px; left:811px;"/>
+<input type="text" name="m128r102" id="m128r102" style="width:76px; top:355px; left:415px;"/>
+<input type="text" name="m128r202" id="m128r202" style="width:87px; top:355px; left:505px;"/>
+<input type="text" name="m128r302" id="m128r302" style="width:76px; top:355px; left:607px;"/>
+<input type="text" name="m128r402" id="m128r402" style="width:99px; top:355px; left:697px;"/>
+<input type="text" name="m128r502" id="m128r502" style="width:78px; top:355px; left:811px;"/>
+<input type="text" name="m128r103" id="m128r103" style="width:76px; top:390px; left:415px;"/>
+<input type="text" name="m128r203" id="m128r203" style="width:87px; top:390px; left:505px;"/>
+<input type="text" name="m128r303" id="m128r303" style="width:76px; top:390px; left:607px;"/>
+<input type="text" name="m128r403" id="m128r403" style="width:99px; top:390px; left:697px;"/>
+<input type="text" name="m128r503" id="m128r503" style="width:78px; top:390px; left:811px;"/>
+<input type="text" name="m128r104" id="m128r104" style="width:76px; top:423px; left:415px;"/>
+<input type="text" name="m128r204" id="m128r204" style="width:87px; top:423px; left:505px;"/>
+<input type="text" name="m128r304" id="m128r304" style="width:76px; top:423px; left:607px;"/>
+<input type="text" name="m128r404" id="m128r404" style="width:99px; top:423px; left:697px;"/>
+<input type="text" name="m128r504" id="m128r504" style="width:78px; top:423px; left:811px;"/>
+<input type="text" name="m128r105" id="m128r105" style="width:76px; top:457px; left:415px;"/>
+<input type="text" name="m128r205" id="m128r205" style="width:87px; top:457px; left:505px;"/>
+<input type="text" name="m128r305" id="m128r305" style="width:76px; top:457px; left:607px;"/>
+<input type="text" name="m128r405" id="m128r405" style="width:99px; top:457px; left:697px;"/>
+<input type="text" name="m128r505" id="m128r505" style="width:78px; top:457px; left:811px;"/>
+<input type="text" name="m128r106" id="m128r106" style="width:76px; top:490px; left:415px;"/>
+<input type="text" name="m128r206" id="m128r206" style="width:87px; top:490px; left:505px;"/>
+<input type="text" name="m128r306" id="m128r306" style="width:76px; top:490px; left:607px;"/>
+<input type="text" name="m128r406" id="m128r406" style="width:99px; top:490px; left:697px;"/>
+<input type="text" name="m128r506" id="m128r506" style="width:78px; top:490px; left:811px;"/>
+<input type="text" name="m128r107" id="m128r107" style="width:76px; top:524px; left:415px;"/>
+<input type="text" name="m128r207" id="m128r207" style="width:87px; top:524px; left:505px;"/>
+<input type="text" name="m128r307" id="m128r307" style="width:76px; top:524px; left:607px;"/>
+<input type="text" name="m128r407" id="m128r407" style="width:99px; top:524px; left:697px;"/>
+<input type="text" name="m128r507" id="m128r507" style="width:78px; top:524px; left:811px;"/>
+<input type="text" name="m128r108" id="m128r108" style="width:76px; top:558px; left:415px;"/>
+<input type="text" name="m128r208" id="m128r208" style="width:87px; top:558px; left:505px;"/>
+<input type="text" name="m128r308" id="m128r308" style="width:76px; top:558px; left:607px;"/>
+<input type="text" name="m128r408" id="m128r408" style="width:99px; top:558px; left:697px;"/>
+<input type="text" name="m128r508" id="m128r508" style="width:78px; top:558px; left:811px;"/>
+<input type="text" name="m128r109" id="m128r109" style="width:76px; top:588px; left:415px;"/>
+<input type="text" name="m128r209" id="m128r209" style="width:87px; top:588px; left:505px;"/>
+<input type="text" name="m128r309" id="m128r309" style="width:76px; top:588px; left:607px;"/>
+<input type="text" name="m128r409" id="m128r409" style="width:99px; top:588px; left:697px;"/>
+<input type="text" name="m128r509" id="m128r509" style="width:78px; top:588px; left:811px;"/>
+<input type="text" name="m128r110" id="m128r110" style="width:76px; top:619px; left:415px;"/>
+<input type="text" name="m128r210" id="m128r210" style="width:87px; top:619px; left:505px;"/>
+<input type="text" name="m128r310" id="m128r310" style="width:76px; top:619px; left:607px;"/>
+<input type="text" name="m128r410" id="m128r410" style="width:99px; top:619px; left:697px;"/>
+<input type="text" name="m128r510" id="m128r510" style="width:78px; top:619px; left:811px;"/>
+<input type="text" name="m128r111" id="m128r111" style="width:76px; top:650px; left:415px;"/>
+<input type="text" name="m128r211" id="m128r211" style="width:87px; top:650px; left:505px;"/>
+<input type="text" name="m128r311" id="m128r311" style="width:76px; top:650px; left:607px;"/>
+<input type="text" name="m128r411" id="m128r411" style="width:99px; top:650px; left:697px;"/>
+<input type="text" name="m128r511" id="m128r511" style="width:78px; top:650px; left:811px;"/>
+<span class="text-echo" style="top:684px; right:455px;"><?php echo $m128r199; ?></span>
+<span class="text-echo" style="top:684px; right:353px;"><?php echo $m128r299; ?></span>
+<span class="text-echo" style="top:684px; right:263px;"><?php echo $m128r399; ?></span>
+<span class="text-echo" style="top:684px; right:150px;"><?php echo $m128r499; ?></span>
+<span class="text-echo" style="top:684px; right:57px;"><?php echo $m128r599; ?></span>
 <?php                                         } ?>
 
 <div class="navbar">
