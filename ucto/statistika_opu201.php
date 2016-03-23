@@ -162,7 +162,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu201 SET ".
 $upravene = mysql_query("$uprtxt"); 
  
 
-$strana=8;
+$strana=7;
 }
 //koniec modul178
 
@@ -362,7 +362,7 @@ if( $uce3 == '031' ) { $poccen=$poccen+$polozka->pmd; $prir=$prir+$polozka->omd;
 $i=$i+1;                   }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu201 SET ".
-" m513r110='$poccen' , m513r210='$pocops' , m513r310='$prir' , m513r410='$ubyt' , m513r510='$zoscen' , m513r610='$zosops' ".
+" m513r110='$poccen', m513r310='$prir' , m513r410='$ubyt' , m513r510='$zoscen' ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
 
@@ -402,7 +402,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu201 SET ".
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 
-$strana=5;
+$strana=6;
 }
 //koniec odpocitaj modul 516 
 
@@ -2311,6 +2311,29 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 ADD m128r600 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 }
+$sql = "SELECT m100304 FROM F$kli_vxcf"."_statistika_opu201 WHERE ico=0";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 ADD new2015 DECIMAL(2,0) DEFAULT 0 AFTER m128r199";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 MODIFY m585r01 VARCHAR(25) NOT NULL ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 ADD m100301r1 DECIMAL(2,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 ADD m100301r2 DECIMAL(2,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 ADD m100303r1 DECIMAL(2,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 ADD m100303r2 DECIMAL(2,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 ADD m100302 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_opu201 ADD m100304 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+
+}
+
 //koniec pracovny subor
 
 
@@ -3539,11 +3562,11 @@ $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu201 SET ".
 " m581r99=m581r01+m581r02, ".
 " m513r199=m513r101+m513r102+m513r103+m513r104+m513r105+m513r106+m513r107+m513r108+m513r109+m513r110, ". 
-" m513r299=m513r201+m513r202+m513r203+m513r204+m513r205+m513r206+m513r207+m513r208+m513r209+m513r210, ".
+" m513r299=m513r201+m513r202+m513r203+m513r204+m513r205+m513r206+m513r207+m513r208+m513r209, ".
 " m513r399=m513r301+m513r302+m513r303+m513r304+m513r305+m513r306+m513r307+m513r308+m513r309+m513r310, ".
 " m513r499=m513r401+m513r402+m513r403+m513r404+m513r405+m513r406+m513r407+m513r408+m513r409+m513r410, ".
 " m513r599=m513r501+m513r502+m513r503+m513r504+m513r505+m513r506+m513r507+m513r508+m513r509+m513r510, ".
-" m513r699=m513r601+m513r602+m513r603+m513r604+m513r605+m513r606+m513r607+m513r608+m513r609+m513r610  ".  
+" m513r699=m513r601+m513r602+m513r603+m513r604+m513r605+m513r606+m513r607+m513r608+m513r609  ".  
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
 
@@ -3555,8 +3578,8 @@ $upravene = mysql_query("$uprtxt");
 
 //8.strana
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu201 SET ".
-" m178r99=m178r01+m178r02+m178r03+m178r04+m178r05+m178r06+m178r07+m178r08+m178r09+m178r10  ".
-" +m178r11+m178r12+m178r13+m178r14+m178r15+m178r16+m178r17+m178r18+m178r19+m178r20+m178r21, ". 
+" m178r99=m178r01+m178r02+m178r03+m178r04+m178r05+m178r06  ".
+" +m178r12+m178r13+m178r14+m178r15+m178r16+m178r17+m178r18+m178r19+m178r20+m178r21, ". 
 " m179r99=m179r01+m179r02, ".
 " m182r299=m182r201+m182r202+m182r203+m182r204+m182r205+m182r206+m182r207 ".     
 " WHERE ico >= 0"; 
@@ -3582,7 +3605,7 @@ $upravene = mysql_query("$uprtxt");
 
 //12.strana
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu201 SET ".
-" m474r199=m474r101+m474r102+m474r103+m474r104+m474r105+m474r106+m474r107, ".
+" m474r199=m474r101+m474r102+m474r103+m474r104+m474r105+m474r106, ".
 " m474r299=m474r201+m474r202+m474r203+m474r204+m474r205+m474r206+m474r207, ".
 " m474r399=m474r301+m474r302+m474r303+m474r304+m474r305+m474r306+m474r307  ". 
 " WHERE ico >= 0"; 
