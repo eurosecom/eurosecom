@@ -744,13 +744,19 @@ $polozky[] = array("RS07905", "N", 15, 2);
 $polozky[] = array("RS07906", "N", 15, 2);
 
 // Získáme unikátní název DBF souboru
-$nazev_souboru = "../tmp/".uniqid("soubor", true) . ".dbf";
-$nazev_souboru = "../tmp/fin2pod.dbf";
-//echo $nazev_souboru;
 
-@unlink($nazev_souboru);
 
-//echo "idem dalej4";
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/FIN2POD_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/FIN2POD_".$kli_uzid."_".$hhmmss.".dbf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
+$nazev_souboru = $outfilex;
 
 //Vytvoøíme DBF soubor
 $dbf_soubor = dbase_create($nazev_souboru, $polozky);
@@ -783,7 +789,7 @@ while ($zaznam = @mysql_fetch_row($vysledek))
 
 /* Uživateli nabídneme soubor ke stažení - zašleme sadu pøíslušných hlavièek a následnì obsah celého souboru */
 //header("Content-Type: application/dbf");
-//header("Content-Disposition: attachment; filename=fin2pod.dbf"); 
+//header("Content-Disposition: attachment; filename=$nazev_souboru"); 
 //header("Content-Description: PHP Generated Data");
 //@readfile($nazev_souboru);
 
@@ -860,10 +866,10 @@ if( $copern == 1 )
 ?>
 <br />
 <br />
-Stiahnite si nižšie uvedený súbor na Váš lokálny disk  :
+Stiahnite si nižšie uvedený súbor na Váš lokálny disk, premenujte ho na FIN2POD.DBF a potom naèítajte na portál www.rissam.sk :
 <br />
 <br />
-<a href="../tmp/fin2pod.dbf">fin2pod.dbf</a>
+<a href="<?php echo $nazev_souboru; ?>"><?php echo $nazev_souboru; ?></a>
 
 
 <br />
