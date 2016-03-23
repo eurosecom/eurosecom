@@ -1846,8 +1846,11 @@ $source="vykaz_fin204no_2016.php";
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
 
-<?php if( $nacitavamhodnoty == 1 ) { echo "Naèítavam hodnoty"; } ?>
-
+<?php
+$alertnacitaj="";
+if ( $nacitavamhodnoty == 1 ) { $alertnacitaj="!!! Údaje sú naèítané !!!"; }
+?>
+ <div class="alert-pocitam"><?php echo $alertnacitaj; ?></div>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-top-formsave">
 </div>
 
