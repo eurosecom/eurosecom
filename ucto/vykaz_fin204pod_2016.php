@@ -180,6 +180,7 @@ $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '376', '32
 
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '358', '33' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '398', '33' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '395', '33' ); "; $ulozene = mysql_query("$sqult");
  
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '351', '34' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '354', '34' ); "; $ulozene = mysql_query("$sqult");
@@ -1101,6 +1102,67 @@ $oznac = mysql_query("$sqtoz");
 //HV
 $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rdk=48 WHERE LEFT(uce,1) = 5 OR LEFT(uce,1) = 6 ";
 $oznac = mysql_query("$sqtoz");
+
+
+
+//vypis negenerovane pohyby
+$vsql = "DROP TABLE F".$kli_vxcf."_prcfinneg".$kli_uzid." ";
+$vytvor = mysql_query("$vsql");
+
+$vsql = "CREATE TABLE F".$kli_vxcf."_prcfinneg".$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctprcvykaz$kli_uzid WHERE rdk = 0 ";
+$vytvor = mysql_query("$vsql");
+
+$vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,1) = 7 ";
+$vytvor = mysql_query("$vsql");
+$vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,1) = 8 ";
+$vytvor = mysql_query("$vsql");
+$vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,1) = 9 ";
+$vytvor = mysql_query("$vsql");
+$vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,3) = 428 ";
+$vytvor = mysql_query("$vsql");
+$vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,3) = 429 ";
+$vytvor = mysql_query("$vsql");
+$vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,3) = 431 ";
+$vytvor = mysql_query("$vsql");
+
+//generovane sumarne riadky
+$vsql = "INSERT INTO F".$kli_vxcf."_prcfinneg".$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctprcvykaz$kli_uzid ".
+" WHERE ( rdk = 1 OR rdk = 6 OR rdk = 17 OR rdk = 24 OR rdk = 36 OR rdk = 43 OR ".
+" rdk = 44 OR rdk = 50 OR rdk = 73 OR rdk = 79 OR rdk = 55 OR rdk = 58 OR rdk = 61 OR rdk = 70 ) ";
+$vytvor = mysql_query("$vsql");
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcfinneg$kli_uzid WHERE rdk >= 0 GROUP BY uce ";
+
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+
+if( $pol > 0 )
+          {
+
+$i=0;
+  while ($i <= $pol )
+  {
+
+
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+if( $hlavicka->rdk == 0 ) { echo "Negenerovaný úèet ".$hlavicka->uce." / èíslo riadku ".$hlavicka->rdk."<br />"; }
+if( $hlavicka->rdk != 0 ) { echo "Pravdepodobne generovanie v sumárnom riadku, úèet ".$hlavicka->uce." / èíslo riadku ".$hlavicka->rdk."<br />"; }
+
+}
+$i = $i + 1;
+
+  }
+
+$sqtoz = "DROP TABLE F$kli_vxcf"."_prcfinneg$kli_uzid ";
+$oznac = mysql_query("$sqtoz");
+exit;
+          }
+//koniec vypis negenerovane pohyby
+
+
 
 //rozdel do riadkov , vypocitaj netto
 
