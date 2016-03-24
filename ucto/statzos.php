@@ -469,6 +469,10 @@ window.open('../ucto/vykaz_fin404.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&f
 
 
 //vykaz Fin504
+<?php
+$rokfin504="_2016";
+?>
+
 
 function TlacFin504()
                 {
@@ -476,7 +480,7 @@ var h_oc = document.forms.formfin504.h_oc.value;
 var h_fmzdy = 0;
 
 
-window.open('../ucto/vykaz_fin504.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=é',
+window.open('../ucto/vykaz_fin504<?php echo $rokfin504; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=é',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -486,7 +490,7 @@ function UpravFin504()
 var h_oc = document.forms.formfin504.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin504.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+window.open('../ucto/vykaz_fin504<?php echo $rokfin504; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -1023,7 +1027,7 @@ if( $kli_vrok >= 2013 AND $dajfinvykazy == 1 ) {
 <a href="#" onClick="TlacFin504();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
 </td>
-<td class="bmenu" width="98%">Finanènı vıkaz o úveroch, dlhopisoch, zmenkách a finanènom prenájme subjektu verejnej správy FIN 5 - 04
+<td class="bmenu" width="98%">Finanènı vıkaz o dlhovıch nástrojoch a vybranıch záväzkoch FIN 5 - 04
  <select size="1" name="h_oc" id="h_oc" >
 <option value="1" >1.štvrrok</option>
 <option value="2" >2.štvrrok</option>
