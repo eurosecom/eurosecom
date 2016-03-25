@@ -1202,7 +1202,18 @@ function OverIcdphSK()
 //tlac do PDF
 if ( $xmlko == 0 )
 {
-if ( File_Exists("../tmp/kontroldph$kli_vume.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/kontroldph$kli_vume.$kli_uzid.pdf"); }
+
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/kontroldph".$kli_vume."_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/kontroldph".$kli_vume."_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -1789,12 +1800,12 @@ $pdf->Cell(50,4,"DPH","1",0,"L");$pdf->Cell(40,4,"$spoludphz","1",1,"R");
 
 if ( $copern == 20 )
 {
-$pdf->Output("../tmp/kontroldph$kli_vume.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 //otvor priznanie
 if ( $zandroidu == 0 OR $pdfand == 1 ) { ?>
 <script type="text/javascript">
-  var okno = window.open("../tmp/kontroldph<?php echo $kli_vume; ?>.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php                                  }
 }
@@ -2365,6 +2376,13 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET er1=9 WHERE ( kvodd = '
 " AND ( daz < '$dad0101' OR daz > '$dad3112' ) ";
 $oznac = mysql_query("$sqtoz");
 
+
+//je DPH a nie je zaklad
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET er1=10 WHERE kvsdn != 0 AND kvzdn = 0 AND kvodd != 'A2' ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET er1=10 WHERE kvsdn = 0 AND kvzdn != 0 AND kvodd != 'A2' ";
+$oznac = mysql_query("$sqtoz");
+
 //rozhranie jednotlivych er1
 //cpl	kvdic	cpid	er1	kvodd	kvicd	kvfak	kvpvf	kvsdn	kvszd	kvzdn	kvzkl	kvodn	kvkodt	kvdtov	kvmnot	kvmerj	kvcobr	
 //er2	er3	er4	zk0	zk1	zk2	dn1	dn2	ume	dat	daz	psys	r01	r02	r03	r04	r05	r06	
@@ -2429,6 +2447,9 @@ if( $j == 0 ) {
 <?php                            } ?>
 <?php if( $hlavicka->er1 == 9  ) { ?>
 <td class="bmenu" colspan="7">Dátum dodania pri faktúre mimo úètovný rok ?!?</td>
+<?php                            } ?>
+<?php if( $hlavicka->er1 == 10 ) { ?>
+<td class="bmenu" colspan="7">Nulový Základ alebo DPH ?!?</td>
 <?php                            } ?>
 <td class="bmenu" colspan="1" align="right"></td>
 </tr>

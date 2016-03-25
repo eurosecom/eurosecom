@@ -1749,7 +1749,15 @@ var sirkawic = screen.width-10;
 ?>
 <?php
 
-if (File_Exists ("../tmp/prizdph$kli_vume.$kli_uzid.pdf")) { $soubor = unlink("../tmp/prizdph$kli_vume.$kli_uzid.pdf"); }
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/prizdph".$kli_vume."_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/prizdph".$kli_vume."_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -4146,7 +4154,7 @@ if( $j > 40 ) { $j=0; $strana=$strana+1; }
 if( $copern == 10 OR $copern == 20 OR ( $copern == 40 AND $drupoh == 2 ) )
 {
 
-$pdf->Output("../tmp/prizdph$kli_vume.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 
 //potvrdenie o podani
@@ -4401,7 +4409,7 @@ if( $zandroidu == 0 OR $pdfand == 1 )
   { 
 ?> 
 <script type="text/javascript">
-  var okno = window.open("../tmp/prizdph<?php echo $kli_vume; ?>.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php
   }
