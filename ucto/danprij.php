@@ -911,6 +911,8 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
 </div>
 <a href="#" onclick="NacitajPoznamkyMUJ2014();" title="Naèíta údaje do poznámok"
    class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
+<a href="#" onclick="TlacPoznamkyMUJ2014();" title="export do PDF"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
 <a href="#" onclick="UpravPoznamkyMUJ2014();" title="Upravi hodnoty"
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </FORM>
