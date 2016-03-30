@@ -23,12 +23,12 @@ require_once("../pswd/password.php");
 $sDat = include("../funkcie/dat_sk_us.php");
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=0;
+$rmc=1;
 $rmc1=0;
 
 //.jpg podklad
-$jpg_cesta="../dokumenty/statistika2016/fin3-04/fin3-04_v16";
-$jpg_popis="Finanèný výkaz o vybraných údajoch z aktív a z pasív podnikate¾ského subjektu verejnej správy FIN 3-04 za rok ".$kli_vrok;
+$jpg_cesta="../dokumenty/statistika2016/fin304/fin3-04_v16";
+$jpg_popis="Finanèný výkaz o finanèných aktívach pod¾a sektorov subjektu verejnej správy FIN 3-04 za rok ".$kli_vrok;
 
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
@@ -259,7 +259,7 @@ $nacitajgen = 1*$_REQUEST['nacitajgen'];
 if ( $nacitajgen == 1 ) {
 ?>
 <script type="text/javascript">
-window.open('../ucto/fin_cis.php?copern=308&drupoh=93&page=1&sysx=UCT', '_self');
+ window.open('../ucto/fin_cis.php?copern=308&drupoh=93&page=1&sysx=UCT', '_self');
 </script>
 <?php
 exit;
@@ -296,7 +296,6 @@ $vsetkyprepocty=1;
 //koniec znovu nacitaj
 
 
-
 //zapis upravene udaje
 if ( $copern == 23 )
      {
@@ -312,150 +311,85 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin304 SET ".
                     }
 
 if ( $strana == 2 ) {
-$r01 = 1*$_REQUEST['r01']; $rk01 = 1*$_REQUEST['rk01']; $rn01 = 1*$_REQUEST['rn01']; $rm01 = 1*$_REQUEST['rm01'];
-$r02 = 1*$_REQUEST['r02']; $rk02 = 1*$_REQUEST['rk02']; $rn02 = 1*$_REQUEST['rn02']; $rm02 = 1*$_REQUEST['rm02'];
-$r03 = 1*$_REQUEST['r03']; $rk03 = 1*$_REQUEST['rk03']; $rn03 = 1*$_REQUEST['rn03']; $rm03 = 1*$_REQUEST['rm03'];
-$r04 = 1*$_REQUEST['r04']; $rk04 = 1*$_REQUEST['rk04']; $rn04 = 1*$_REQUEST['rn04']; $rm04 = 1*$_REQUEST['rm04'];
-$r05 = 1*$_REQUEST['r05']; $rk05 = 1*$_REQUEST['rk05']; $rn05 = 1*$_REQUEST['rn05']; $rm05 = 1*$_REQUEST['rm05'];
-$r06 = 1*$_REQUEST['r06']; $rk06 = 1*$_REQUEST['rk06']; $rn06 = 1*$_REQUEST['rn06']; $rm06 = 1*$_REQUEST['rm06'];
-$r07 = 1*$_REQUEST['r07']; $rk07 = 1*$_REQUEST['rk07']; $rn07 = 1*$_REQUEST['rn07']; $rm07 = 1*$_REQUEST['rm07'];
-$r08 = 1*$_REQUEST['r08']; $rk08 = 1*$_REQUEST['rk08']; $rn08 = 1*$_REQUEST['rn08']; $rm08 = 1*$_REQUEST['rm08'];
-$r09 = 1*$_REQUEST['r09']; $rk09 = 1*$_REQUEST['rk09']; $rn09 = 1*$_REQUEST['rn09']; $rm09 = 1*$_REQUEST['rm09'];
-$r10 = 1*$_REQUEST['r10']; $rk10 = 1*$_REQUEST['rk10']; $rn10 = 1*$_REQUEST['rn10']; $rm10 = 1*$_REQUEST['rm10'];
-$r11 = 1*$_REQUEST['r11']; $rk11 = 1*$_REQUEST['rk11']; $rn11 = 1*$_REQUEST['rn11']; $rm11 = 1*$_REQUEST['rm11'];
-$r12 = 1*$_REQUEST['r12']; $rk12 = 1*$_REQUEST['rk12']; $rn12 = 1*$_REQUEST['rn12']; $rm12 = 1*$_REQUEST['rm12'];
-$r13 = 1*$_REQUEST['r13']; $rk13 = 1*$_REQUEST['rk13']; $rn13 = 1*$_REQUEST['rn13']; $rm13 = 1*$_REQUEST['rm13'];
-$r14 = 1*$_REQUEST['r14']; $rk14 = 1*$_REQUEST['rk14']; $rn14 = 1*$_REQUEST['rn14']; $rm14 = 1*$_REQUEST['rm14'];
-$r15 = 1*$_REQUEST['r15']; $rk15 = 1*$_REQUEST['rk15']; $rn15 = 1*$_REQUEST['rn15']; $rm15 = 1*$_REQUEST['rm15'];
-$r16 = 1*$_REQUEST['r16']; $rk16 = 1*$_REQUEST['rk16']; $rn16 = 1*$_REQUEST['rn16']; $rm16 = 1*$_REQUEST['rm16'];
-$r17 = 1*$_REQUEST['r17']; $rk17 = 1*$_REQUEST['rk17']; $rn17 = 1*$_REQUEST['rn17']; $rm17 = 1*$_REQUEST['rm17'];
-$r18 = 1*$_REQUEST['r18']; $rk18 = 1*$_REQUEST['rk18']; $rn18 = 1*$_REQUEST['rn18']; $rm18 = 1*$_REQUEST['rm18'];
-$r19 = 1*$_REQUEST['r19']; $rk19 = 1*$_REQUEST['rk19']; $rn19 = 1*$_REQUEST['rn19']; $rm19 = 1*$_REQUEST['rm19'];
-$r20 = 1*$_REQUEST['r20']; $rk20 = 1*$_REQUEST['rk20']; $rn20 = 1*$_REQUEST['rn20']; $rm20 = 1*$_REQUEST['rm20'];
-$r21 = 1*$_REQUEST['r21']; $rk21 = 1*$_REQUEST['rk21']; $rn21 = 1*$_REQUEST['rn21']; $rm21 = 1*$_REQUEST['rm21'];
-$r22 = 1*$_REQUEST['r22']; $rk22 = 1*$_REQUEST['rk22']; $rn22 = 1*$_REQUEST['rn22']; $rm22 = 1*$_REQUEST['rm22'];
-$r23 = 1*$_REQUEST['r23']; $rk23 = 1*$_REQUEST['rk23']; $rn23 = 1*$_REQUEST['rn23']; $rm23 = 1*$_REQUEST['rm23'];
-$r24 = 1*$_REQUEST['r24']; $rk24 = 1*$_REQUEST['rk24']; $rn24 = 1*$_REQUEST['rn24']; $rm24 = 1*$_REQUEST['rm24'];
-$r25 = 1*$_REQUEST['r25']; $rk25 = 1*$_REQUEST['rk25']; $rn25 = 1*$_REQUEST['rn25']; $rm25 = 1*$_REQUEST['rm25'];
-$r26 = 1*$_REQUEST['r26']; $rk26 = 1*$_REQUEST['rk26']; $rn26 = 1*$_REQUEST['rn26']; $rm26 = 1*$_REQUEST['rm26'];
-$r27 = 1*$_REQUEST['r27']; $rk27 = 1*$_REQUEST['rk27']; $rn27 = 1*$_REQUEST['rn27']; $rm27 = 1*$_REQUEST['rm27'];
-$r28 = 1*$_REQUEST['r28']; $rk28 = 1*$_REQUEST['rk28']; $rn28 = 1*$_REQUEST['rn28']; $rm28 = 1*$_REQUEST['rm28'];
-$r29 = 1*$_REQUEST['r29']; $rk29 = 1*$_REQUEST['rk29']; $rn29 = 1*$_REQUEST['rn29']; $rm29 = 1*$_REQUEST['rm29'];
-$r30 = 1*$_REQUEST['r30']; $rk30 = 1*$_REQUEST['rk30']; $rn30 = 1*$_REQUEST['rn30']; $rm30 = 1*$_REQUEST['rm30'];
-$r31 = 1*$_REQUEST['r31']; $rk31 = 1*$_REQUEST['rk31']; $rn31 = 1*$_REQUEST['rn31']; $rm31 = 1*$_REQUEST['rm31'];
-$r32 = 1*$_REQUEST['r32']; $rk32 = 1*$_REQUEST['rk32']; $rn32 = 1*$_REQUEST['rn32']; $rm32 = 1*$_REQUEST['rm32'];
-$r33 = 1*$_REQUEST['r33']; $rk33 = 1*$_REQUEST['rk33']; $rn33 = 1*$_REQUEST['rn33']; $rm33 = 1*$_REQUEST['rm33'];
-$r34 = 1*$_REQUEST['r34']; $rk34 = 1*$_REQUEST['rk34']; $rn34 = 1*$_REQUEST['rn34']; $rm34 = 1*$_REQUEST['rm34'];
-$r35 = 1*$_REQUEST['r35']; $rk35 = 1*$_REQUEST['rk35']; $rn35 = 1*$_REQUEST['rn35']; $rm35 = 1*$_REQUEST['rm35'];
-$r36 = 1*$_REQUEST['r36']; $rk36 = 1*$_REQUEST['rk36']; $rn36 = 1*$_REQUEST['rn36']; $rm36 = 1*$_REQUEST['rm36'];
-$r37 = 1*$_REQUEST['r37']; $rk37 = 1*$_REQUEST['rk37']; $rn37 = 1*$_REQUEST['rn37']; $rm37 = 1*$_REQUEST['rm37'];
-$r38 = 1*$_REQUEST['r38']; $rk38 = 1*$_REQUEST['rk38']; $rn38 = 1*$_REQUEST['rn38']; $rm38 = 1*$_REQUEST['rm38'];
-$r39 = 1*$_REQUEST['r39']; $rk39 = 1*$_REQUEST['rk39']; $rn39 = 1*$_REQUEST['rn39']; $rm39 = 1*$_REQUEST['rm39'];
-$r40 = 1*$_REQUEST['r40']; $rk40 = 1*$_REQUEST['rk40']; $rn40 = 1*$_REQUEST['rn40']; $rm40 = 1*$_REQUEST['rm40'];
-$r41 = 1*$_REQUEST['r41']; $rk41 = 1*$_REQUEST['rk41']; $rn41 = 1*$_REQUEST['rn41']; $rm41 = 1*$_REQUEST['rm41'];
-$r42 = 1*$_REQUEST['r42']; $rk42 = 1*$_REQUEST['rk42']; $rn42 = 1*$_REQUEST['rn42']; $rm42 = 1*$_REQUEST['rm42'];
-$r43 = 1*$_REQUEST['r43']; $rk43 = 1*$_REQUEST['rk43']; $rn43 = 1*$_REQUEST['rn43']; $rm43 = 1*$_REQUEST['rm43'];
-
+$pocs01 = 1*$_REQUEST['pocs01'];
+$pocs02 = 1*$_REQUEST['pocs02'];
+$pocs03 = 1*$_REQUEST['pocs03'];
+$pocs04 = 1*$_REQUEST['pocs04'];
+$pocs05 = 1*$_REQUEST['pocs05'];
+$pocs06 = 1*$_REQUEST['pocs06'];
+$pocs07 = 1*$_REQUEST['pocs07'];
+$pocs08 = 1*$_REQUEST['pocs08'];
+$pocs09 = 1*$_REQUEST['pocs09'];
+$pocs10 = 1*$_REQUEST['pocs10'];
+$zvys01 = 1*$_REQUEST['zvys01'];
+$zvys02 = 1*$_REQUEST['zvys02'];
+$zvys03 = 1*$_REQUEST['zvys03'];
+$zvys04 = 1*$_REQUEST['zvys04'];
+$zvys05 = 1*$_REQUEST['zvys05'];
+$zvys06 = 1*$_REQUEST['zvys06'];
+$zvys07 = 1*$_REQUEST['zvys07'];
+$zvys08 = 1*$_REQUEST['zvys08'];
+$zvys09 = 1*$_REQUEST['zvys09'];
+$zvys10 = 1*$_REQUEST['zvys10'];
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin304 SET ".
-" r01='$r01', rk01='$rk01', rn01='$rn01', rm01='$rm01',
-  r02='$r02', rk02='$rk02', rn02='$rn02', rm02='$rm02',
-  r03='$r03', rk03='$rk03', rn03='$rn03', rm03='$rm03',
-  r04='$r04', rk04='$rk04', rn04='$rn04', rm04='$rm04',
-  r05='$r05', rk05='$rk05', rn05='$rn05', rm05='$rm05',
-  r06='$r06', rk06='$rk06', rn06='$rn06', rm06='$rm06',
-  r07='$r07', rk07='$rk07', rn07='$rn07', rm07='$rm07',
-  r08='$r08', rk08='$rk08', rn08='$rn08', rm08='$rm08',
-  r09='$r09', rk09='$rk09', rn09='$rn09', rm09='$rm09',
-  r10='$r10', rk10='$rk10', rn10='$rn10', rm10='$rm10',
-  r11='$r11', rk11='$rk11', rn11='$rn11', rm11='$rm11',
-  r12='$r12', rk12='$rk12', rn12='$rn12', rm12='$rm12',
-  r13='$r13', rk13='$rk13', rn13='$rn13', rm13='$rm13',
-  r14='$r14', rk14='$rk14', rn14='$rn14', rm14='$rm14',
-  r15='$r15', rk15='$rk15', rn15='$rn15', rm15='$rm15',
-  r16='$r16', rk16='$rk16', rn16='$rn16', rm16='$rm16',
-  r17='$r17', rk17='$rk17', rn17='$rn17', rm17='$rm17',
-  r18='$r18', rk18='$rk18', rn18='$rn18', rm18='$rm18',
-  r19='$r19', rk19='$rk19', rn19='$rn19', rm19='$rm19',
-  r20='$r20', rk20='$rk20', rn20='$rn20', rm20='$rm20',
-  r21='$r21', rk21='$rk21', rn21='$rn21', rm21='$rm21',
-  r22='$r22', rk22='$rk22', rn22='$rn22', rm22='$rm22',
-  r23='$r23', rk23='$rk23', rn23='$rn23', rm23='$rm23',
-  r24='$r24', rk24='$rk24', rn24='$rn24', rm24='$rm24',
-  r25='$r25', rk25='$rk25', rn25='$rn25', rm25='$rm25',
-  r26='$r26', rk26='$rk26', rn26='$rn26', rm26='$rm26',
-  r27='$r27', rk27='$rk27', rn27='$rn27', rm27='$rm27',
-  r28='$r28', rk28='$rk28', rn28='$rn28', rm28='$rm28',
-  r29='$r29', rk29='$rk29', rn29='$rn29', rm29='$rm29',
-  r30='$r30', rk30='$rk30', rn30='$rn30', rm30='$rm30',
-  r31='$r31', rk31='$rk31', rn31='$rn31', rm31='$rm31',
-  r32='$r32', rk32='$rk32', rn32='$rn32', rm32='$rm32',
-  r33='$r33', rk33='$rk33', rn33='$rn33', rm33='$rm33',
-  r34='$r34', rk34='$rk34', rn34='$rn34', rm34='$rm34',
-  r35='$r35', rk35='$rk35', rn35='$rn35', rm35='$rm35',
-  r36='$r36', rk36='$rk36', rn36='$rn36', rm36='$rm36',
-  r37='$r37', rk37='$rk37', rn37='$rn37', rm37='$rm37',
-  r38='$r38', rk38='$rk38', rn38='$rn38', rm38='$rm38',
-  r39='$r39', rk39='$rk39', rn39='$rn39', rm39='$rm39',
-  r40='$r40', rk40='$rk40', rn40='$rn40', rm40='$rm40',
-  r41='$r41', rk41='$rk41', rn41='$rn41', rm41='$rm41',
-  r42='$r42', rk42='$rk42', rn42='$rn42', rm42='$rm42',
-  r43='$r43', rk43='$rk43', rn43='$rn43', rm43='$rm43' ".
-" WHERE oc = $cislo_oc"; 
+" pocs01='$pocs01', pocs02='$pocs02', pocs03='$pocs03', pocs04='$pocs04', pocs05='$pocs05',
+  pocs06='$pocs06', pocs07='$pocs07', pocs08='$pocs08', pocs09='$pocs09', pocs10='$pocs10',
+  zvys01='$zvys01', zvys02='$zvys02', zvys03='$zvys03', zvys04='$zvys04', zvys05='$zvys05',
+  zvys06='$zvys06', zvys07='$zvys07', zvys08='$zvys08', zvys09='$zvys09', zvys10='$zvys10' ".
+" WHERE oc = $cislo_oc";
                     }
 
 if ( $strana == 3 ) {
-$r44 = 1*$_REQUEST['r44']; $rm44 = 1*$_REQUEST['rm44'];
-$r45 = 1*$_REQUEST['r45']; $rm45 = 1*$_REQUEST['rm45'];
-$r46 = 1*$_REQUEST['r46']; $rm46 = 1*$_REQUEST['rm46'];
-$r47 = 1*$_REQUEST['r47']; $rm47 = 1*$_REQUEST['rm47'];
-$r48 = 1*$_REQUEST['r48']; $rm48 = 1*$_REQUEST['rm48'];
-$r49 = 1*$_REQUEST['r49']; $rm49 = 1*$_REQUEST['rm49'];
-$r50 = 1*$_REQUEST['r50']; $rm50 = 1*$_REQUEST['rm50'];
-$r51 = 1*$_REQUEST['r51']; $rm51 = 1*$_REQUEST['rm51'];
-$r52 = 1*$_REQUEST['r52']; $rm52 = 1*$_REQUEST['rm52'];
-$r53 = 1*$_REQUEST['r53']; $rm53 = 1*$_REQUEST['rm53'];
-$r54 = 1*$_REQUEST['r54']; $rm54 = 1*$_REQUEST['rm54'];
-$r55 = 1*$_REQUEST['r55']; $rm55 = 1*$_REQUEST['rm55'];
-$r56 = 1*$_REQUEST['r56']; $rm56 = 1*$_REQUEST['rm56'];
-$r57 = 1*$_REQUEST['r57']; $rm57 = 1*$_REQUEST['rm57'];
-$r58 = 1*$_REQUEST['r58']; $rm58 = 1*$_REQUEST['rm58'];
-$r59 = 1*$_REQUEST['r59']; $rm59 = 1*$_REQUEST['rm59'];
-$r60 = 1*$_REQUEST['r60']; $rm60 = 1*$_REQUEST['rm60'];
-$r61 = 1*$_REQUEST['r61']; $rm61 = 1*$_REQUEST['rm61'];
-$r62 = 1*$_REQUEST['r62']; $rm62 = 1*$_REQUEST['rm62'];
-$r63 = 1*$_REQUEST['r63']; $rm63 = 1*$_REQUEST['rm63'];
-$r64 = 1*$_REQUEST['r64']; $rm64 = 1*$_REQUEST['rm64'];
-$r65 = 1*$_REQUEST['r65']; $rm65 = 1*$_REQUEST['rm65'];
-$r66 = 1*$_REQUEST['r66']; $rm66 = 1*$_REQUEST['rm66'];
-$r67 = 1*$_REQUEST['r67']; $rm67 = 1*$_REQUEST['rm67'];
-$r68 = 1*$_REQUEST['r68']; $rm68 = 1*$_REQUEST['rm68'];
-$r69 = 1*$_REQUEST['r69']; $rm69 = 1*$_REQUEST['rm69'];
-$r70 = 1*$_REQUEST['r70']; $rm70 = 1*$_REQUEST['rm70'];
-$r71 = 1*$_REQUEST['r71']; $rm71 = 1*$_REQUEST['rm71'];
-$r72 = 1*$_REQUEST['r72']; $rm72 = 1*$_REQUEST['rm72'];
-$r73 = 1*$_REQUEST['r73']; $rm73 = 1*$_REQUEST['rm73'];
-$r74 = 1*$_REQUEST['r74']; $rm74 = 1*$_REQUEST['rm74'];
-$r75 = 1*$_REQUEST['r75']; $rm75 = 1*$_REQUEST['rm75'];
-$r76 = 1*$_REQUEST['r76']; $rm76 = 1*$_REQUEST['rm76'];
-$r77 = 1*$_REQUEST['r77']; $rm77 = 1*$_REQUEST['rm77'];
-$r78 = 1*$_REQUEST['r78']; $rm78 = 1*$_REQUEST['rm78'];
-$r79 = 1*$_REQUEST['r79']; $rm79 = 1*$_REQUEST['rm79'];
-
+$znis01 = 1*$_REQUEST['znis01'];
+$znis02 = 1*$_REQUEST['znis02'];
+$znis03 = 1*$_REQUEST['znis03'];
+$znis04 = 1*$_REQUEST['znis04'];
+$znis05 = 1*$_REQUEST['znis05'];
+$znis06 = 1*$_REQUEST['znis06'];
+$znis07 = 1*$_REQUEST['znis07'];
+$znis08 = 1*$_REQUEST['znis08'];
+$znis09 = 1*$_REQUEST['znis09'];
+$znis10 = 1*$_REQUEST['znis10'];
+$oces01 = 1*$_REQUEST['oces01'];
+$oces02 = 1*$_REQUEST['oces02'];
+$oces03 = 1*$_REQUEST['oces03'];
+$oces04 = 1*$_REQUEST['oces04'];
+$oces05 = 1*$_REQUEST['oces05'];
+$oces06 = 1*$_REQUEST['oces06'];
+$oces07 = 1*$_REQUEST['oces07'];
+$oces08 = 1*$_REQUEST['oces08'];
+$oces09 = 1*$_REQUEST['oces09'];
+$oces10 = 1*$_REQUEST['oces10'];
+$osts01 = 1*$_REQUEST['osts01'];
+$osts02 = 1*$_REQUEST['osts02'];
+$osts03 = 1*$_REQUEST['osts03'];
+$osts04 = 1*$_REQUEST['osts04'];
+$osts05 = 1*$_REQUEST['osts05'];
+$osts06 = 1*$_REQUEST['osts06'];
+$osts07 = 1*$_REQUEST['osts07'];
+$osts08 = 1*$_REQUEST['osts08'];
+$osts09 = 1*$_REQUEST['osts09'];
+$osts10 = 1*$_REQUEST['osts10'];
+$zoss01 = 1*$_REQUEST['zoss01'];
+$zoss02 = 1*$_REQUEST['zoss02'];
+$zoss03 = 1*$_REQUEST['zoss03'];
+$zoss04 = 1*$_REQUEST['zoss04'];
+$zoss05 = 1*$_REQUEST['zoss05'];
+$zoss06 = 1*$_REQUEST['zoss06'];
+$zoss07 = 1*$_REQUEST['zoss07'];
+$zoss08 = 1*$_REQUEST['zoss08'];
+$zoss09 = 1*$_REQUEST['zoss09'];
+$zoss10 = 1*$_REQUEST['zoss10'];
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin304 SET ".
-" r44='$r44', rm44='$rm44', r45='$r45', rm45='$rm45', r46='$r46', rm46='$rm46',
-  r47='$r47', rm47='$rm47', r48='$r48', rm48='$rm48', r49='$r49', rm49='$rm49',
-  r50='$r50', rm50='$rm50', r51='$r51', rm51='$rm51', r52='$r52', rm52='$rm52',
-  r53='$r53', rm53='$rm53', r54='$r54', rm54='$rm54', r55='$r55', rm55='$rm55',
-  r56='$r56', rm56='$rm56', r57='$r57', rm57='$rm57', r58='$r58', rm58='$rm58',
-  r59='$r59', rm59='$rm59', r60='$r60', rm60='$rm60', r61='$r61', rm61='$rm61',
-  r62='$r62', rm62='$rm62', r63='$r63', rm63='$rm63', r64='$r64', rm64='$rm64',
-  r65='$r65', rm65='$rm65', r66='$r66', rm66='$rm66', r67='$r67', rm67='$rm67',
-  r68='$r68', rm68='$rm68', r69='$r69', rm69='$rm69', r70='$r70', rm70='$rm70',
-  r70='$r70', rm70='$rm70', r71='$r71', rm71='$rm71', r72='$r72', rm72='$rm72',
-  r73='$r73', rm73='$rm73', r74='$r74', rm74='$rm74', r75='$r75', rm75='$rm75',
-  r76='$r76', rm76='$rm76', r77='$r77', rm77='$rm77', r78='$r78', rm78='$rm78',
-  r79='$r79', rm79='$rm79' ".
-" WHERE oc = $cislo_oc"; 
+" znis01='$znis01', znis02='$znis02', znis03='$znis03', znis04='$znis04', znis05='$znis05',
+  znis06='$znis06', znis07='$znis07', znis08='$znis08', znis09='$znis09', znis10='$znis10',
+  oces01='$oces01', oces02='$oces02', oces03='$oces03', oces04='$oces04', oces05='$oces05',
+  oces06='$oces06', oces07='$oces07', oces08='$oces08', oces09='$oces09', oces10='$oces10',
+  osts01='$osts01', osts02='$osts02', osts03='$osts03', osts04='$osts04', osts05='$osts05',
+  osts06='$osts06', osts07='$osts07', osts08='$osts08', osts09='$osts09', osts10='$osts10',
+  zoss01='$zoss01', zoss02='$zoss02', zoss03='$zoss03', zoss04='$zoss04', zoss05='$zoss05',
+  zoss06='$zoss06', zoss07='$zoss07', zoss08='$zoss08', zoss09='$zoss09', zoss10='$zoss10' ".
+" WHERE oc = $cislo_oc";
                     }
 
 //echo $uprtxt;
@@ -463,7 +397,7 @@ $upravene = mysql_query("$uprtxt");
 
 $nepoc = 1*$_REQUEST['nepoc'];
 $vsetkyprepocty=1;
-if( $nepoc == 1 ) $vsetkyprepocty=0;
+if ( $nepoc == 1 ) $vsetkyprepocty=0;
 
 $copern=20;
 if (!$upravene):
@@ -492,7 +426,6 @@ if (!$vysledok)
 {
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctvykaz_fin304';
 $vysledok = mysql_query("$sqlt");
-
 
 $pocdes="10,2";
 $sqlt = <<<mzdprc
@@ -851,7 +784,7 @@ $oznac = mysql_query("$sqtoz");
 //koniec pracovneho suboru pre rocne 
 
 //vypocty
-if( $copern == 10 OR $copern == 20 )
+if ( $copern == 10 OR $copern == 20 )
 {
 
 //vypocitaj riadky strana 2
@@ -940,254 +873,70 @@ $daz_sk=SkDatum($daz);
 
 if ( $strana == 2 )
 {
-$r01 = $fir_riadok->r01;
-$rk01 = $fir_riadok->rk01;
-$rn01 = $fir_riadok->rn01;
-$rm01 = $fir_riadok->rm01;
-$r02 = $fir_riadok->r02;
-$rk02 = $fir_riadok->rk02;
-$rn02 = $fir_riadok->rn02;
-$rm02 = $fir_riadok->rm02;
-$r03 = $fir_riadok->r03;
-$rk03 = $fir_riadok->rk03;
-$rn03 = $fir_riadok->rn03;
-$rm03 = $fir_riadok->rm03;
-$r04 = $fir_riadok->r04;
-$rk04 = $fir_riadok->rk04;
-$rn04 = $fir_riadok->rn04;
-$rm04 = $fir_riadok->rm04;
-$r05 = $fir_riadok->r05;
-$rk05 = $fir_riadok->rk05;
-$rn05 = $fir_riadok->rn05;
-$rm05 = $fir_riadok->rm05;
-$r06 = $fir_riadok->r06;
-$rk06 = $fir_riadok->rk06;
-$rn06 = $fir_riadok->rn06;
-$rm06 = $fir_riadok->rm06;
-$r07 = $fir_riadok->r07;
-$rk07 = $fir_riadok->rk07;
-$rn07 = $fir_riadok->rn07;
-$rm07 = $fir_riadok->rm07;
-$r08 = $fir_riadok->r08;
-$rk08 = $fir_riadok->rk08;
-$rn08 = $fir_riadok->rn08;
-$rm08 = $fir_riadok->rm08;
-$r09 = $fir_riadok->r09;
-$rk09 = $fir_riadok->rk09;
-$rn09 = $fir_riadok->rn09;
-$rm09 = $fir_riadok->rm09;
-$r10 = $fir_riadok->r10;
-$rk10 = $fir_riadok->rk10;
-$rn10 = $fir_riadok->rn10;
-$rm10 = $fir_riadok->rm10;
-$r11 = $fir_riadok->r11;
-$rk11 = $fir_riadok->rk11;
-$rn11 = $fir_riadok->rn11;
-$rm11 = $fir_riadok->rm11;
-$r12 = $fir_riadok->r12;
-$rk12 = $fir_riadok->rk12;
-$rn12 = $fir_riadok->rn12;
-$rm12 = $fir_riadok->rm12;
-$r13 = $fir_riadok->r13;
-$rk13 = $fir_riadok->rk13;
-$rn13 = $fir_riadok->rn13;
-$rm13 = $fir_riadok->rm13;
-$r14 = $fir_riadok->r14;
-$rk14 = $fir_riadok->rk14;
-$rn14 = $fir_riadok->rn14;
-$rm14 = $fir_riadok->rm14;
-$r15 = $fir_riadok->r15;
-$rk15 = $fir_riadok->rk15;
-$rn15 = $fir_riadok->rn15;
-$rm15 = $fir_riadok->rm15;
-$r16 = $fir_riadok->r16;
-$rk16 = $fir_riadok->rk16;
-$rn16 = $fir_riadok->rn16;
-$rm16 = $fir_riadok->rm16;
-$r17 = $fir_riadok->r17;
-$rk17 = $fir_riadok->rk17;
-$rn17 = $fir_riadok->rn17;
-$rm17 = $fir_riadok->rm17;
-$r18 = $fir_riadok->r18;
-$rk18 = $fir_riadok->rk18;
-$rn18 = $fir_riadok->rn18;
-$rm18 = $fir_riadok->rm18;
-$r19 = $fir_riadok->r19;
-$rk19 = $fir_riadok->rk19;
-$rn19 = $fir_riadok->rn19;
-$rm19 = $fir_riadok->rm19;
-$r20 = $fir_riadok->r20;
-$rk20 = $fir_riadok->rk20;
-$rn20 = $fir_riadok->rn20;
-$rm20 = $fir_riadok->rm20;
-$r21 = $fir_riadok->r21;
-$rk21 = $fir_riadok->rk21;
-$rn21 = $fir_riadok->rn21;
-$rm21 = $fir_riadok->rm21;
-$r22 = $fir_riadok->r22;
-$rk22 = $fir_riadok->rk22;
-$rn22 = $fir_riadok->rn22;
-$rm22 = $fir_riadok->rm22;
-$r23 = $fir_riadok->r23;
-$rk23 = $fir_riadok->rk23;
-$rn23 = $fir_riadok->rn23;
-$rm23 = $fir_riadok->rm23;
-$r24 = $fir_riadok->r24;
-$rk24 = $fir_riadok->rk24;
-$rn24 = $fir_riadok->rn24;
-$rm24 = $fir_riadok->rm24;
-$r25 = $fir_riadok->r25;
-$rk25 = $fir_riadok->rk25;
-$rn25 = $fir_riadok->rn25;
-$rm25 = $fir_riadok->rm25;
-$r26 = $fir_riadok->r26;
-$rk26 = $fir_riadok->rk26;
-$rn26 = $fir_riadok->rn26;
-$rm26 = $fir_riadok->rm26;
-$r27 = $fir_riadok->r27;
-$rk27 = $fir_riadok->rk27;
-$rn27 = $fir_riadok->rn27;
-$rm27 = $fir_riadok->rm27;
-$r28 = $fir_riadok->r28;
-$rk28 = $fir_riadok->rk28;
-$rn28 = $fir_riadok->rn28;
-$rm28 = $fir_riadok->rm28;
-$r29 = $fir_riadok->r29;
-$rk29 = $fir_riadok->rk29;
-$rn29 = $fir_riadok->rn29;
-$rm29 = $fir_riadok->rm29;
-$r30 = $fir_riadok->r30;
-$rk30 = $fir_riadok->rk30;
-$rn30 = $fir_riadok->rn30;
-$rm30 = $fir_riadok->rm30;
-$r31 = $fir_riadok->r31;
-$rk31 = $fir_riadok->rk31;
-$rn31 = $fir_riadok->rn31;
-$rm31 = $fir_riadok->rm31;
-$r32 = $fir_riadok->r32;
-$rk32 = $fir_riadok->rk32;
-$rn32 = $fir_riadok->rn32;
-$rm32 = $fir_riadok->rm32;
-$r33 = $fir_riadok->r33;
-$rk33 = $fir_riadok->rk33;
-$rn33 = $fir_riadok->rn33;
-$rm33 = $fir_riadok->rm33;
-$r34 = $fir_riadok->r34;
-$rk34 = $fir_riadok->rk34;
-$rn34 = $fir_riadok->rn34;
-$rm34 = $fir_riadok->rm34;
-$r35 = $fir_riadok->r35;
-$rk35 = $fir_riadok->rk35;
-$rn35 = $fir_riadok->rn35;
-$rm35 = $fir_riadok->rm35;
-$r36 = $fir_riadok->r36;
-$rk36 = $fir_riadok->rk36;
-$rn36 = $fir_riadok->rn36;
-$rm36 = $fir_riadok->rm36;
-$r37 = $fir_riadok->r37;
-$rk37 = $fir_riadok->rk37;
-$rn37 = $fir_riadok->rn37;
-$rm37 = $fir_riadok->rm37;
-$r38 = $fir_riadok->r38;
-$rk38 = $fir_riadok->rk38;
-$rn38 = $fir_riadok->rn38;
-$rm38 = $fir_riadok->rm38;
-$r39 = $fir_riadok->r39;
-$rk39 = $fir_riadok->rk39;
-$rn39 = $fir_riadok->rn39;
-$rm39 = $fir_riadok->rm39;
-$r40 = $fir_riadok->r40;
-$rk40 = $fir_riadok->rk40;
-$rn40 = $fir_riadok->rn40;
-$rm40 = $fir_riadok->rm40;
-$r41 = $fir_riadok->r41;
-$rk41 = $fir_riadok->rk41;
-$rn41 = $fir_riadok->rn41;
-$rm41 = $fir_riadok->rm41;
-$r42 = $fir_riadok->r42;
-$rk42 = $fir_riadok->rk42;
-$rn42 = $fir_riadok->rn42;
-$rm42 = $fir_riadok->rm42;
-$r43 = $fir_riadok->r43;
-$rk43 = $fir_riadok->rk43;
-$rn43 = $fir_riadok->rn43;
-$rm43 = $fir_riadok->rm43;
+$pocs01 = $fir_riadok->pocs01;
+$pocs02 = $fir_riadok->pocs02;
+$pocs03 = $fir_riadok->pocs03;
+$pocs04 = $fir_riadok->pocs04;
+$pocs05 = $fir_riadok->pocs05;
+$pocs06 = $fir_riadok->pocs06;
+$pocs07 = $fir_riadok->pocs07;
+$pocs08 = $fir_riadok->pocs08;
+$pocs09 = $fir_riadok->pocs09;
+$pocs10 = $fir_riadok->pocs10;
+$zvys01 = $fir_riadok->zvys01;
+$zvys02 = $fir_riadok->zvys02;
+$zvys03 = $fir_riadok->zvys03;
+$zvys04 = $fir_riadok->zvys04;
+$zvys05 = $fir_riadok->zvys05;
+$zvys06 = $fir_riadok->zvys06;
+$zvys07 = $fir_riadok->zvys07;
+$zvys08 = $fir_riadok->zvys08;
+$zvys09 = $fir_riadok->zvys09;
+$zvys10 = $fir_riadok->zvys10;
 }
 
 if ( $strana == 3 )
 {
-$r44 = $fir_riadok->r44;
-$rm44 = $fir_riadok->rm44;
-$r45 = $fir_riadok->r45;
-$rm45 = $fir_riadok->rm45;
-$r46 = $fir_riadok->r46;
-$rm46 = $fir_riadok->rm46;
-$r47 = $fir_riadok->r47;
-$rm47 = $fir_riadok->rm47;
-$r48 = $fir_riadok->r48;
-$rm48 = $fir_riadok->rm48;
-$r49 = $fir_riadok->r49;
-$rm49 = $fir_riadok->rm49;
-$r50 = $fir_riadok->r50;
-$rm50 = $fir_riadok->rm50;
-$r51 = $fir_riadok->r51;
-$rm51 = $fir_riadok->rm51;
-$r52 = $fir_riadok->r52;
-$rm52 = $fir_riadok->rm52;
-$r53 = $fir_riadok->r53;
-$rm53 = $fir_riadok->rm53;
-$r54 = $fir_riadok->r54;
-$rm54 = $fir_riadok->rm54;
-$r55 = $fir_riadok->r55;
-$rm55 = $fir_riadok->rm55;
-$r56 = $fir_riadok->r56;
-$rm56 = $fir_riadok->rm56;
-$r57 = $fir_riadok->r57;
-$rm57 = $fir_riadok->rm57;
-$r58 = $fir_riadok->r58;
-$rm58 = $fir_riadok->rm58;
-$r59 = $fir_riadok->r59;
-$rm59 = $fir_riadok->rm59;
-$r60 = $fir_riadok->r60;
-$rm60 = $fir_riadok->rm60;
-$r61 = $fir_riadok->r61;
-$rm61 = $fir_riadok->rm61;
-$r62 = $fir_riadok->r62;
-$rm62 = $fir_riadok->rm62;
-$r63 = $fir_riadok->r63;
-$rm63 = $fir_riadok->rm63;
-$r64 = $fir_riadok->r64;
-$rm64 = $fir_riadok->rm64;
-$r65 = $fir_riadok->r65;
-$rm65 = $fir_riadok->rm65;
-$r66 = $fir_riadok->r66;
-$rm66 = $fir_riadok->rm66;
-$r67 = $fir_riadok->r67;
-$rm67 = $fir_riadok->rm67;
-$r68 = $fir_riadok->r68;
-$rm68 = $fir_riadok->rm68;
-$r69 = $fir_riadok->r69;
-$rm69 = $fir_riadok->rm69;
-$r70 = $fir_riadok->r70;
-$rm70 = $fir_riadok->rm70;
-$r71 = $fir_riadok->r71;
-$rm71 = $fir_riadok->rm71;
-$r72 = $fir_riadok->r72;
-$rm72 = $fir_riadok->rm72;
-$r73 = $fir_riadok->r73;
-$rm73 = $fir_riadok->rm73;
-$r74 = $fir_riadok->r74;
-$rm74 = $fir_riadok->rm74;
-$r75 = $fir_riadok->r75;
-$rm75 = $fir_riadok->rm75;
-$r76 = $fir_riadok->r76;
-$rm76 = $fir_riadok->rm76;
-$r77 = $fir_riadok->r77;
-$rm77 = $fir_riadok->rm77;
-$r78 = $fir_riadok->r78;
-$rm78 = $fir_riadok->rm78;
-$r79 = $fir_riadok->r79;
-$rm79 = $fir_riadok->rm79;
+$znis01 = $fir_riadok->znis01;
+$znis02 = $fir_riadok->znis02;
+$znis03 = $fir_riadok->znis03;
+$znis04 = $fir_riadok->znis04;
+$znis05 = $fir_riadok->znis05;
+$znis06 = $fir_riadok->znis06;
+$znis07 = $fir_riadok->znis07;
+$znis08 = $fir_riadok->znis08;
+$znis09 = $fir_riadok->znis09;
+$znis10 = $fir_riadok->znis10;
+$oces01 = $fir_riadok->oces01;
+$oces02 = $fir_riadok->oces02;
+$oces03 = $fir_riadok->oces03;
+$oces04 = $fir_riadok->oces04;
+$oces05 = $fir_riadok->oces05;
+$oces06 = $fir_riadok->oces06;
+$oces07 = $fir_riadok->oces07;
+$oces08 = $fir_riadok->oces08;
+$oces09 = $fir_riadok->oces09;
+$oces10 = $fir_riadok->oces10;
+$osts01 = $fir_riadok->osts01;
+$osts02 = $fir_riadok->osts02;
+$osts03 = $fir_riadok->osts03;
+$osts04 = $fir_riadok->osts04;
+$osts05 = $fir_riadok->osts05;
+$osts06 = $fir_riadok->osts06;
+$osts07 = $fir_riadok->osts07;
+$osts08 = $fir_riadok->osts08;
+$osts09 = $fir_riadok->osts09;
+$osts10 = $fir_riadok->osts10;
+$zoss01 = $fir_riadok->zoss01;
+$zoss02 = $fir_riadok->zoss02;
+$zoss03 = $fir_riadok->zoss03;
+$zoss04 = $fir_riadok->zoss04;
+$zoss05 = $fir_riadok->zoss05;
+$zoss06 = $fir_riadok->zoss06;
+$zoss07 = $fir_riadok->zoss07;
+$zoss08 = $fir_riadok->zoss08;
+$zoss09 = $fir_riadok->zoss09;
+$zoss10 = $fir_riadok->zoss10;
 }
 mysql_free_result($fir_vysledok);
     }
@@ -1197,7 +946,7 @@ mysql_free_result($fir_vysledok);
 $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 //skrateny datum k
-$skutku=substr($datum,0,6);
+//$skutku=substr($datum,0,6);
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -1210,8 +959,8 @@ img.btn-row-tool {
   height: 20px;
 }
 form input[type=text] {
-  height: 14px;
-  line-height: 14px;
+  height: 16px;
+  line-height: 16px;
   padding-left: 2px;
   border: 1px solid #39f;
   font-size: 12px;
@@ -1236,253 +985,69 @@ div.input-echo {
 <?php                     } ?>
 
 <?php if ( $strana == 2 ) { ?>
-//   document.formv1.r01.value = '<?php echo $r01;?>';
-//   document.formv1.rk01.value = '<?php echo $rk01;?>';
-//   document.formv1.rn01.value = '<?php echo $rn01;?>';
-//   document.formv1.rm01.value = '<?php echo $rm01;?>';
-   document.formv1.r02.value = '<?php echo $r02;?>';
-   document.formv1.rk02.value = '<?php echo $rk02;?>';
-   document.formv1.rn02.value = '<?php echo $rn02;?>';
-   document.formv1.rm02.value = '<?php echo $rm02;?>';
-   document.formv1.r03.value = '<?php echo $r03;?>';
-   document.formv1.rk03.value = '<?php echo $rk03;?>';
-   document.formv1.rn03.value = '<?php echo $rn03;?>';
-   document.formv1.rm03.value = '<?php echo $rm03;?>';
-   document.formv1.r04.value = '<?php echo $r04;?>';
-   document.formv1.rk04.value = '<?php echo $rk04;?>';
-   document.formv1.rn04.value = '<?php echo $rn04;?>';
-   document.formv1.rm04.value = '<?php echo $rm04;?>';
-   document.formv1.r05.value = '<?php echo $r05;?>';
-   document.formv1.rk05.value = '<?php echo $rk05;?>';
-   document.formv1.rn05.value = '<?php echo $rn05;?>';
-   document.formv1.rm05.value = '<?php echo $rm05;?>';
-//   document.formv1.r06.value = '<?php echo $r06;?>';
-//   document.formv1.rk06.value = '<?php echo $rk06;?>';
-//   document.formv1.rn06.value = '<?php echo $rn06;?>';
-//   document.formv1.rm06.value = '<?php echo $rm06;?>';
-   document.formv1.r07.value = '<?php echo $r07;?>';
-   document.formv1.rk07.value = '<?php echo $rk07;?>';
-   document.formv1.rn07.value = '<?php echo $rn07;?>';
-   document.formv1.rm07.value = '<?php echo $rm07;?>';
-   document.formv1.r08.value = '<?php echo $r08;?>';
-   document.formv1.rk08.value = '<?php echo $rk08;?>';
-   document.formv1.rn08.value = '<?php echo $rn08;?>';
-   document.formv1.rm08.value = '<?php echo $rm08;?>';
-   document.formv1.r09.value = '<?php echo $r09;?>';
-   document.formv1.rk09.value = '<?php echo $rk09;?>';
-   document.formv1.rn09.value = '<?php echo $rn09;?>';
-   document.formv1.rm09.value = '<?php echo $rm09;?>';
-   document.formv1.r10.value = '<?php echo $r10;?>';
-   document.formv1.rk10.value = '<?php echo $rk10;?>';
-   document.formv1.rn10.value = '<?php echo $rn10;?>';
-   document.formv1.rm10.value = '<?php echo $rm10;?>';
-   document.formv1.r11.value = '<?php echo $r11;?>';
-   document.formv1.rk11.value = '<?php echo $rk11;?>';
-   document.formv1.rn11.value = '<?php echo $rn11;?>';
-   document.formv1.rm11.value = '<?php echo $rm11;?>';
-   document.formv1.r12.value = '<?php echo $r12;?>';
-   document.formv1.rk12.value = '<?php echo $rk12;?>';
-   document.formv1.rn12.value = '<?php echo $rn12;?>';
-   document.formv1.rm12.value = '<?php echo $rm12;?>';
-   document.formv1.r13.value = '<?php echo $r13;?>';
-   document.formv1.rk13.value = '<?php echo $rk13;?>';
-   document.formv1.rn13.value = '<?php echo $rn13;?>';
-   document.formv1.rm13.value = '<?php echo $rm13;?>';
-   document.formv1.r14.value = '<?php echo $r14;?>';
-   document.formv1.rk14.value = '<?php echo $rk14;?>';
-   document.formv1.rn14.value = '<?php echo $rn14;?>';
-   document.formv1.rm14.value = '<?php echo $rm14;?>';
-   document.formv1.r15.value = '<?php echo $r15;?>';
-   document.formv1.rk15.value = '<?php echo $rk15;?>';
-   document.formv1.rn15.value = '<?php echo $rn15;?>';
-   document.formv1.rm15.value = '<?php echo $rm15;?>';
-   document.formv1.r16.value = '<?php echo $r16;?>';
-   document.formv1.rk16.value = '<?php echo $rk16;?>';
-   document.formv1.rn16.value = '<?php echo $rn16;?>';
-   document.formv1.rm16.value = '<?php echo $rm16;?>';
-//   document.formv1.r17.value = '<?php echo $r17;?>';
-//   document.formv1.rk17.value = '<?php echo $rk17;?>';
-//   document.formv1.rn17.value = '<?php echo $rn17;?>';
-//   document.formv1.rm17.value = '<?php echo $rm17;?>';
-   document.formv1.r18.value = '<?php echo $r18;?>';
-   document.formv1.rk18.value = '<?php echo $rk18;?>';
-   document.formv1.rn18.value = '<?php echo $rn18;?>';
-   document.formv1.rm18.value = '<?php echo $rm18;?>';
-   document.formv1.r19.value = '<?php echo $r19;?>';
-   document.formv1.rk19.value = '<?php echo $rk19;?>';
-   document.formv1.rn19.value = '<?php echo $rn19;?>';
-   document.formv1.rm19.value = '<?php echo $rm19;?>';
-   document.formv1.r20.value = '<?php echo $r20;?>';
-   document.formv1.rk20.value = '<?php echo $rk20;?>';
-   document.formv1.rn20.value = '<?php echo $rn20;?>';
-   document.formv1.rm20.value = '<?php echo $rm20;?>';
-   document.formv1.r21.value = '<?php echo $r21;?>';
-   document.formv1.rk21.value = '<?php echo $rk21;?>';
-   document.formv1.rn21.value = '<?php echo $rn21;?>';
-   document.formv1.rm21.value = '<?php echo $rm21;?>';
-   document.formv1.r22.value = '<?php echo $r22;?>';
-   document.formv1.rk22.value = '<?php echo $rk22;?>';
-   document.formv1.rn22.value = '<?php echo $rn22;?>';
-   document.formv1.rm22.value = '<?php echo $rm22;?>';
-   document.formv1.r23.value = '<?php echo $r23;?>';
-   document.formv1.rk23.value = '<?php echo $rk23;?>';
-   document.formv1.rn23.value = '<?php echo $rn23;?>';
-   document.formv1.rm23.value = '<?php echo $rm23;?>';
-//   document.formv1.r24.value = '<?php echo $r24;?>';
-//   document.formv1.rk24.value = '<?php echo $rk24;?>';
-//   document.formv1.rn24.value = '<?php echo $rn24;?>';
-//   document.formv1.rm24.value = '<?php echo $rm24;?>';
-   document.formv1.r25.value = '<?php echo $r25;?>';
-   document.formv1.rk25.value = '<?php echo $rk25;?>';
-   document.formv1.rn25.value = '<?php echo $rn25;?>';
-   document.formv1.rm25.value = '<?php echo $rm25;?>';
-   document.formv1.r26.value = '<?php echo $r26;?>';
-   document.formv1.rk26.value = '<?php echo $rk26;?>';
-   document.formv1.rn26.value = '<?php echo $rn26;?>';
-   document.formv1.rm26.value = '<?php echo $rm26;?>';
-   document.formv1.r27.value = '<?php echo $r27;?>';
-   document.formv1.rk27.value = '<?php echo $rk27;?>';
-   document.formv1.rn27.value = '<?php echo $rn27;?>';
-   document.formv1.rm27.value = '<?php echo $rm27;?>';
-   document.formv1.r28.value = '<?php echo $r28;?>';
-   document.formv1.rk28.value = '<?php echo $rk28;?>';
-   document.formv1.rn28.value = '<?php echo $rn28;?>';
-   document.formv1.rm28.value = '<?php echo $rm28;?>';
-   document.formv1.r29.value = '<?php echo $r29;?>';
-   document.formv1.rk29.value = '<?php echo $rk29;?>';
-   document.formv1.rn29.value = '<?php echo $rn29;?>';
-   document.formv1.rm29.value = '<?php echo $rm29;?>';
-   document.formv1.r30.value = '<?php echo $r30;?>';
-   document.formv1.rk30.value = '<?php echo $rk30;?>';
-   document.formv1.rn30.value = '<?php echo $rn30;?>';
-   document.formv1.rm30.value = '<?php echo $rm30;?>';
-   document.formv1.r31.value = '<?php echo $r31;?>';
-   document.formv1.rk31.value = '<?php echo $rk31;?>';
-   document.formv1.rn31.value = '<?php echo $rn31;?>';
-   document.formv1.rm31.value = '<?php echo $rm31;?>';
-   document.formv1.r32.value = '<?php echo $r32;?>';
-   document.formv1.rk32.value = '<?php echo $rk32;?>';
-   document.formv1.rn32.value = '<?php echo $rn32;?>';
-   document.formv1.rm32.value = '<?php echo $rm32;?>';
-   document.formv1.r33.value = '<?php echo $r33;?>';
-   document.formv1.rk33.value = '<?php echo $rk33;?>';
-   document.formv1.rn33.value = '<?php echo $rn33;?>';
-   document.formv1.rm33.value = '<?php echo $rm33;?>';
-   document.formv1.r34.value = '<?php echo $r34;?>';
-   document.formv1.rk34.value = '<?php echo $rk34;?>';
-   document.formv1.rn34.value = '<?php echo $rn34;?>';
-   document.formv1.rm34.value = '<?php echo $rm34;?>';
-   document.formv1.r35.value = '<?php echo $r35;?>';
-   document.formv1.rk35.value = '<?php echo $rk35;?>';
-   document.formv1.rn35.value = '<?php echo $rn35;?>';
-   document.formv1.rm35.value = '<?php echo $rm35;?>';
-//   document.formv1.r36.value = '<?php echo $r36;?>';
-//   document.formv1.rk36.value = '<?php echo $rk36;?>';
-//   document.formv1.rn36.value = '<?php echo $rn36;?>';
-//   document.formv1.rm36.value = '<?php echo $rm36;?>';
-   document.formv1.r37.value = '<?php echo $r37;?>';
-   document.formv1.rk37.value = '<?php echo $rk37;?>';
-   document.formv1.rn37.value = '<?php echo $rn37;?>';
-   document.formv1.rm37.value = '<?php echo $rm37;?>';
-   document.formv1.r38.value = '<?php echo $r38;?>';
-   document.formv1.rk38.value = '<?php echo $rk38;?>';
-   document.formv1.rn38.value = '<?php echo $rn38;?>';
-   document.formv1.rm38.value = '<?php echo $rm38;?>';
-   document.formv1.r39.value = '<?php echo $r39;?>';
-   document.formv1.rk39.value = '<?php echo $rk39;?>';
-   document.formv1.rn39.value = '<?php echo $rn39;?>';
-   document.formv1.rm39.value = '<?php echo $rm39;?>';
-   document.formv1.r40.value = '<?php echo $r40;?>';
-   document.formv1.rk40.value = '<?php echo $rk40;?>';
-   document.formv1.rn40.value = '<?php echo $rn40;?>';
-   document.formv1.rm40.value = '<?php echo $rm40;?>';
-   document.formv1.r41.value = '<?php echo $r41;?>';
-   document.formv1.rk41.value = '<?php echo $rk41;?>';
-   document.formv1.rn41.value = '<?php echo $rn41;?>';
-   document.formv1.rm41.value = '<?php echo $rm41;?>';
-   document.formv1.r42.value = '<?php echo $r42;?>';
-   document.formv1.rk42.value = '<?php echo $rk42;?>';
-   document.formv1.rn42.value = '<?php echo $rn42;?>';
-   document.formv1.rm42.value = '<?php echo $rm42;?>';
-//   document.formv1.r43.value = '<?php echo $r43;?>';
-//   document.formv1.rk43.value = '<?php echo $rk43;?>';
-//   document.formv1.rn43.value = '<?php echo $rn43;?>';
-//   document.formv1.rm43.value = '<?php echo $rm43;?>';
+   document.formv1.pocs01.value = '<?php echo $pocs01; ?>';
+   document.formv1.pocs02.value = '<?php echo $pocs02; ?>';
+   document.formv1.pocs03.value = '<?php echo $pocs03; ?>';
+   document.formv1.pocs04.value = '<?php echo $pocs04; ?>';
+   document.formv1.pocs05.value = '<?php echo $pocs05; ?>';
+   document.formv1.pocs06.value = '<?php echo $pocs06; ?>';
+   document.formv1.pocs07.value = '<?php echo $pocs07; ?>';
+   document.formv1.pocs08.value = '<?php echo $pocs08; ?>';
+   document.formv1.pocs09.value = '<?php echo $pocs09; ?>';
+   document.formv1.pocs10.value = '<?php echo $pocs10; ?>';
+   document.formv1.zvys01.value = '<?php echo $zvys01; ?>';
+   document.formv1.zvys02.value = '<?php echo $zvys02; ?>';
+   document.formv1.zvys03.value = '<?php echo $zvys03; ?>';
+   document.formv1.zvys04.value = '<?php echo $zvys04; ?>';
+   document.formv1.zvys05.value = '<?php echo $zvys05; ?>';
+   document.formv1.zvys06.value = '<?php echo $zvys06; ?>';
+   document.formv1.zvys07.value = '<?php echo $zvys07; ?>';
+   document.formv1.zvys08.value = '<?php echo $zvys08; ?>';
+   document.formv1.zvys09.value = '<?php echo $zvys09; ?>';
+   document.formv1.zvys10.value = '<?php echo $zvys10; ?>';
 <?php                     } ?>
 
 <?php if ( $strana == 3 ) { ?>
-//   document.formv1.r44.value = '<?php echo $r44;?>';
-//   document.formv1.rm44.value = '<?php echo $rm44;?>';
-   document.formv1.r45.value = '<?php echo $r45;?>';
-   document.formv1.rm45.value = '<?php echo $rm45;?>';
-   document.formv1.r46.value = '<?php echo $r46;?>';
-   document.formv1.rm46.value = '<?php echo $rm46;?>';
-   document.formv1.r47.value = '<?php echo $r47;?>';
-   document.formv1.rm47.value = '<?php echo $rm47;?>';
-   document.formv1.r48.value = '<?php echo $r48;?>';
-   document.formv1.rm48.value = '<?php echo $rm48;?>';
-   document.formv1.r49.value = '<?php echo $r49;?>';
-   document.formv1.rm49.value = '<?php echo $rm49;?>';
-//   document.formv1.r50.value = '<?php echo $r50;?>';
-//   document.formv1.rm50.value = '<?php echo $rm50;?>';
-   document.formv1.r51.value = '<?php echo $r51;?>';
-   document.formv1.rm51.value = '<?php echo $rm51;?>';
-   document.formv1.r52.value = '<?php echo $r52;?>';
-   document.formv1.rm52.value = '<?php echo $rm52;?>';
-   document.formv1.r53.value = '<?php echo $r53;?>';
-   document.formv1.rm53.value = '<?php echo $rm53;?>';
-   document.formv1.r54.value = '<?php echo $r54;?>';
-   document.formv1.rm54.value = '<?php echo $rm54;?>';
-   document.formv1.r55.value = '<?php echo $r55;?>';
-   document.formv1.rm55.value = '<?php echo $rm55;?>';
-   document.formv1.r56.value = '<?php echo $r56;?>';
-   document.formv1.rm56.value = '<?php echo $rm56;?>';
-   document.formv1.r57.value = '<?php echo $r57;?>';
-   document.formv1.rm57.value = '<?php echo $rm57;?>';
-   document.formv1.r58.value = '<?php echo $r58;?>';
-   document.formv1.rm58.value = '<?php echo $rm58;?>';
-   document.formv1.r59.value = '<?php echo $r59;?>';
-   document.formv1.rm59.value = '<?php echo $rm59;?>';
-   document.formv1.r60.value = '<?php echo $r60;?>';
-   document.formv1.rm60.value = '<?php echo $rm60;?>';
-   document.formv1.r61.value = '<?php echo $r61;?>';
-   document.formv1.rm61.value = '<?php echo $rm61;?>';
-   document.formv1.r62.value = '<?php echo $r62;?>';
-   document.formv1.rm62.value = '<?php echo $rm62;?>';
-   document.formv1.r63.value = '<?php echo $r63;?>';
-   document.formv1.rm63.value = '<?php echo $rm63;?>';
-   document.formv1.r64.value = '<?php echo $r64;?>';
-   document.formv1.rm64.value = '<?php echo $rm64;?>';
-   document.formv1.r65.value = '<?php echo $r65;?>';
-   document.formv1.rm65.value = '<?php echo $rm65;?>';
-   document.formv1.r66.value = '<?php echo $r66;?>';
-   document.formv1.rm66.value = '<?php echo $rm66;?>';
-   document.formv1.r67.value = '<?php echo $r67;?>';
-   document.formv1.rm67.value = '<?php echo $rm67;?>';
-   document.formv1.r68.value = '<?php echo $r68;?>';
-   document.formv1.rm68.value = '<?php echo $rm68;?>';
-   document.formv1.r69.value = '<?php echo $r69;?>';
-   document.formv1.rm69.value = '<?php echo $rm69;?>';
-   document.formv1.r70.value = '<?php echo $r70;?>';
-   document.formv1.rm70.value = '<?php echo $rm70;?>';
-   document.formv1.r71.value = '<?php echo $r71;?>';
-   document.formv1.rm71.value = '<?php echo $rm71;?>';
-   document.formv1.r72.value = '<?php echo $r72;?>';
-   document.formv1.rm72.value = '<?php echo $rm72;?>';
-//   document.formv1.r73.value = '<?php echo $r73;?>';
-//   document.formv1.rm73.value = '<?php echo $rm73;?>';
-   document.formv1.r74.value = '<?php echo $r74;?>';
-   document.formv1.rm74.value = '<?php echo $rm74;?>';
-   document.formv1.r75.value = '<?php echo $r75;?>';
-   document.formv1.rm75.value = '<?php echo $rm75;?>';
-   document.formv1.r76.value = '<?php echo $r76;?>';
-   document.formv1.rm76.value = '<?php echo $rm76;?>';
-   document.formv1.r77.value = '<?php echo $r77;?>';
-   document.formv1.rm77.value = '<?php echo $rm77;?>';
-   document.formv1.r78.value = '<?php echo $r78;?>';
-   document.formv1.rm78.value = '<?php echo $rm78;?>';
-//   document.formv1.r79.value = '<?php echo $r79;?>';
-//   document.formv1.rm79.value = '<?php echo $rm79;?>';
+   document.formv1.znis01.value = '<?php echo $znis01; ?>';
+   document.formv1.znis02.value = '<?php echo $znis02; ?>';
+   document.formv1.znis03.value = '<?php echo $znis03; ?>';
+   document.formv1.znis04.value = '<?php echo $znis04; ?>';
+   document.formv1.znis05.value = '<?php echo $znis05; ?>';
+   document.formv1.znis06.value = '<?php echo $znis06; ?>';
+   document.formv1.znis07.value = '<?php echo $znis07; ?>';
+   document.formv1.znis08.value = '<?php echo $znis08; ?>';
+   document.formv1.znis09.value = '<?php echo $znis09; ?>';
+   document.formv1.znis10.value = '<?php echo $znis10; ?>';
+   document.formv1.oces01.value = '<?php echo $oces01; ?>';
+   document.formv1.oces02.value = '<?php echo $oces02; ?>';
+   document.formv1.oces03.value = '<?php echo $oces03; ?>';
+   document.formv1.oces04.value = '<?php echo $oces04; ?>';
+   document.formv1.oces05.value = '<?php echo $oces05; ?>';
+   document.formv1.oces06.value = '<?php echo $oces06; ?>';
+   document.formv1.oces07.value = '<?php echo $oces07; ?>';
+   document.formv1.oces08.value = '<?php echo $oces08; ?>';
+   document.formv1.oces09.value = '<?php echo $oces09; ?>';
+   document.formv1.oces10.value = '<?php echo $oces10; ?>';
+   document.formv1.osts01.value = '<?php echo $osts01; ?>';
+   document.formv1.osts02.value = '<?php echo $osts02; ?>';
+   document.formv1.osts03.value = '<?php echo $osts03; ?>';
+   document.formv1.osts04.value = '<?php echo $osts04; ?>';
+   document.formv1.osts05.value = '<?php echo $osts05; ?>';
+   document.formv1.osts06.value = '<?php echo $osts06; ?>';
+   document.formv1.osts07.value = '<?php echo $osts07; ?>';
+   document.formv1.osts08.value = '<?php echo $osts08; ?>';
+   document.formv1.osts09.value = '<?php echo $osts09; ?>';
+   document.formv1.osts10.value = '<?php echo $osts10; ?>';
+   document.formv1.zoss01.value = '<?php echo $zoss01; ?>';
+   document.formv1.zoss02.value = '<?php echo $zoss02; ?>';
+   document.formv1.zoss03.value = '<?php echo $zoss03; ?>';
+   document.formv1.zoss04.value = '<?php echo $zoss04; ?>';
+   document.formv1.zoss05.value = '<?php echo $zoss05; ?>';
+   document.formv1.zoss06.value = '<?php echo $zoss06; ?>';
+   document.formv1.zoss07.value = '<?php echo $zoss07; ?>';
+   document.formv1.zoss08.value = '<?php echo $zoss08; ?>';
+   document.formv1.zoss09.value = '<?php echo $zoss09; ?>';
+   document.formv1.zoss10.value = '<?php echo $zoss10; ?>';
 <?php                     } ?>
     }
 <?php
@@ -1514,7 +1079,7 @@ div.input-echo {
   function TlacVykaz()
   {
    window.open('vykaz_fin304_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999',
- '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+'_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function Nacitaj()
   {
@@ -1536,7 +1101,7 @@ if ( $copern == 20 )
   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
  </tr>
  <tr>
-  <td class="header">FIN 3-04 Finanèný výkaz o finanèných aktívach pod¾a sektorov
+  <td class="header">FIN 3-04 Finanèné aktíva pod¾a sektorov za
    <span style="color:#39f;"><?php echo "$cislo_oc. štvrrok";?></span>
   </td>
   <td>
@@ -1549,9 +1114,19 @@ if ( $copern == 20 )
  </tr>
  </table>
 </div>
-<?php if ( $strana < 1 OR $strana > 3 ) $strana=1; ?>
+<?php if ( $strana < 1 OR $strana > 3 ) $strana=1; ?> <!-- dopyt, musí tu by? -->
+<!-- dopyt, vypisuje text: "Naèítavam hodnoty" a po naèítaní zruší "00.00.0000" v dátume vytvorenia i keï už vojdem do formulára, nevidím "00.00.0000" v daz -->
+<!-- dopyt, pozrie modify, zdá sa mi to pomalšie keï preklikávam ako pri opu -->
 
-<div id="content">
+<?php
+$sirka=950;
+$vyska=1300;
+if ( $strana == 2 OR $strana == 3 )
+{
+$sirka=1250; $vyska=920;
+}
+?>
+<div id="content" style="width:<?php echo $sirka; ?>px; height:<?php echo $vyska; ?>px;">
 <FORM name="formv1" method="post" action="../ucto/vykaz_fin304_2016.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive"; $clas3="noactive";
@@ -1571,7 +1146,7 @@ $source="vykaz_fin304_2016.php";
      alt="<?php echo $jpg_popis; ?> 1.strana 265kB">
 
 <span class="text-echo" style="top:153px; left:403px;"><?php echo $datum; ?></span>
-<span class="text-echo" style="top:271px; left:141px;">x</span>
+<span class="text-echo" style="top:301px; left:141px;">x</span>
 <span class="text-echo" style="top:516px; left:141px; letter-spacing:13.5px;"><?php echo $fir_ficox; ?></span>
 <span class="text-echo" style="top:516px; left:342px; letter-spacing:14px;"><?php echo $mesiac; ?></span>
 <span class="text-echo" style="top:516px; left:409px; letter-spacing:13.5px;"><?php echo $kli_vrok; ?></span>
@@ -1588,277 +1163,136 @@ $source="vykaz_fin304_2016.php";
 
 <?php if ( $strana == 2 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 2.strana 265kB">
-<span class="text-echo" style="top:143px; left:666px; font-size:14px;"><?php echo $skutku; ?></span>
+     alt="<?php echo $jpg_popis; ?> 2.strana 265kB" style="width:1250px; height:1000px;">
 
-<!-- 4.1.Vybrane aktiva -->
-<!-- 1.DnHM -->
-<span class="text-echo" style="top:233px; right:339px; font-size:12px;"><?php echo $r01; ?></span>
-<span class="text-echo" style="top:233px; right:262px; font-size:12px;"><?php echo $rk01; ?></span>
-<span class="text-echo" style="top:233px; right:185px; font-size:12px;"><?php echo $rn01; ?></span>
-<span class="text-echo" style="top:233px; right:50px; font-size:12px;"><?php echo $rm01; ?></span>
-<input type="text" name="r02" id="r02" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:254px; left:541px;"/>
-<input type="text" name="rk02" id="rk02" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:254px; left:618px;"/>
-<input type="text" name="rn02" id="rn02" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:254px; left:695px;"/>
-<input type="text" name="rm02" id="rm02" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:254px; left:773px;"/>
-<input type="text" name="r03" id="r03" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:279px; left:541px;"/>
-<input type="text" name="rk03" id="rk03" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:279px; left:618px;"/>
-<input type="text" name="rn03" id="rn03" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:279px; left:695px;"/>
-<input type="text" name="rm03" id="rm03" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:279px; left:773px;"/>
-<input type="text" name="r04" id="r04" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:304px; left:541px;"/>
-<input type="text" name="rk04" id="rk04" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:304px; left:618px;"/>
-<input type="text" name="rn04" id="rn04" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:304px; left:695px;"/>
-<input type="text" name="rm04" id="rm04" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:304px; left:773px;"/>
-<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:329px; left:541px;"/>
-<input type="text" name="rk05" id="rk05" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:329px; left:618px;"/>
-<input type="text" name="rn05" id="rn05" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:329px; left:695px;"/>
-<input type="text" name="rm05" id="rm05" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:329px; left:773px;"/>
-<!-- 6.DHM -->
-<span class="text-echo" style="top:358px; right:339px; font-size:12px;"><?php echo $r06; ?></span>
-<span class="text-echo" style="top:358px; right:262px; font-size:12px;"><?php echo $rk06; ?></span>
-<span class="text-echo" style="top:358px; right:185px; font-size:12px;"><?php echo $rn06; ?></span>
-<span class="text-echo" style="top:358px; right:50px; font-size:12px;"><?php echo $rm06; ?></span>
-<input type="text" name="r07" id="r07" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:379px; left:541px;"/>
-<input type="text" name="rk07" id="rk07" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:379px; left:618px;"/>
-<input type="text" name="rn07" id="rn07" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:379px; left:695px;"/>
-<input type="text" name="rm07" id="rm07" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:379px; left:773px;"/>
-<input type="text" name="r08" id="r08" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:403px; left:541px;"/>
-<input type="text" name="rk08" id="rk08" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:403px; left:618px;"/>
-<input type="text" name="rn08" id="rn08" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:403px; left:695px;"/>
-<input type="text" name="rm08" id="rm08" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:403px; left:773px;"/>
-<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:428px; left:541px;"/>
-<input type="text" name="rk09" id="rk09" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:428px; left:618px;"/>
-<input type="text" name="rn09" id="rn09" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:428px; left:695px;"/>
-<input type="text" name="rm09" id="rm09" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:428px; left:773px;"/>
-<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:453px; left:541px;"/>
-<input type="text" name="rk10" id="rk10" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:453px; left:618px;"/>
-<input type="text" name="rn10" id="rn10" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:453px; left:695px;"/>
-<input type="text" name="rm10" id="rm10" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:453px; left:773px;"/>
-<input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:478px; left:541px;"/>
-<input type="text" name="rk11" id="rk11" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:478px; left:618px;"/>
-<input type="text" name="rn11" id="rn11" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:478px; left:695px;"/>
-<input type="text" name="rm11" id="rm11" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:478px; left:773px;"/>
-<input type="text" name="r12" id="r12" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:503px; left:541px;"/>
-<input type="text" name="rk12" id="rk12" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:503px; left:618px;"/>
-<input type="text" name="rn12" id="rn12" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:503px; left:695px;"/>
-<input type="text" name="rm12" id="rm12" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:503px; left:773px;"/>
-<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:528px; left:541px;"/>
-<input type="text" name="rk13" id="rk13" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:528px; left:618px;"/>
-<input type="text" name="rn13" id="rn13" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:528px; left:695px;"/>
-<input type="text" name="rm13" id="rm13" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:528px; left:773px;"/>
-<input type="text" name="r14" id="r14" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:553px; left:541px;"/>
-<input type="text" name="rk14" id="rk14" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:553px; left:618px;"/>
-<input type="text" name="rn14" id="rn14" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:553px; left:695px;"/>
-<input type="text" name="rm14" id="rm14" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:553px; left:773px;"/>
-<input type="text" name="r15" id="r15" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:577px; left:541px;"/>
-<input type="text" name="rk15" id="rk15" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:577px; left:618px;"/>
-<input type="text" name="rn15" id="rn15" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:577px; left:695px;"/>
-<input type="text" name="rm15" id="rm15" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:577px; left:773px;"/>
-<input type="text" name="r16" id="r16" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:602px; left:541px;"/>
-<input type="text" name="rk16" id="rk16" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:602px; left:618px;"/>
-<input type="text" name="rn16" id="rn16" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:602px; left:695px;"/>
-<input type="text" name="rm16" id="rm16" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:602px; left:773px;"/>
-<!-- 17.DFM -->
-<span class="text-echo" style="top:631px; right:339px; font-size:12px;"><?php echo $r17; ?></span>
-<span class="text-echo" style="top:631px; right:262px; font-size:12px;"><?php echo $rk17; ?></span>
-<span class="text-echo" style="top:631px; right:185px; font-size:12px;"><?php echo $rn17; ?></span>
-<span class="text-echo" style="top:631px; right:50px; font-size:12px;"><?php echo $rm17; ?></span>
-<input type="text" name="r18" id="r18" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:652px; left:541px;"/>
-<input type="text" name="rk18" id="rk18" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:652px; left:618px;"/>
-<input type="text" name="rn18" id="rn18" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:652px; left:695px;"/>
-<input type="text" name="rm18" id="rm18" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:652px; left:773px;"/>
-<input type="text" name="r19" id="r19" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:677px; left:541px;"/>
-<input type="text" name="rk19" id="rk19" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:677px; left:618px;"/>
-<input type="text" name="rn19" id="rn19" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:677px; left:695px;"/>
-<input type="text" name="rm19" id="rm19" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:677px; left:773px;"/>
-<input type="text" name="r20" id="r20" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:702px; left:541px;"/>
-<input type="text" name="rk20" id="rk20" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:702px; left:618px;"/>
-<input type="text" name="rn20" id="rn20" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:702px; left:695px;"/>
-<input type="text" name="rm20" id="rm20" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:702px; left:773px;"/>
-<input type="text" name="r21" id="r21" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:727px; left:541px;"/>
-<input type="text" name="rk21" id="rk21" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:727px; left:618px;"/>
-<input type="text" name="rn21" id="rn21" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:727px; left:695px;"/>
-<input type="text" name="rm21" id="rm21" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:727px; left:773px;"/>
-<input type="text" name="r22" id="r22" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:752px; left:541px;"/>
-<input type="text" name="rk22" id="rk22" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:752px; left:618px;"/>
-<input type="text" name="rn22" id="rn22" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:752px; left:695px;"/>
-<input type="text" name="rm22" id="rm22" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:752px; left:773px;"/>
-<!-- 23.ZASOBY -->
-<input type="text" name="r23" id="r23" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:777px; left:541px;"/>
-<input type="text" name="rk23" id="rk23" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:777px; left:618px;"/>
-<input type="text" name="rn23" id="rn23" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:777px; left:695px;"/>
-<input type="text" name="rm23" id="rm23" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:777px; left:773px;"/>
-<!-- 24.POHLADAVKY -->
-<span class="text-echo" style="top:805px; right:339px; font-size:12px;"><?php echo $r24; ?></span>
-<span class="text-echo" style="top:805px; right:262px; font-size:12px;"><?php echo $rk24; ?></span>
-<span class="text-echo" style="top:805px; right:185px; font-size:12px;"><?php echo $rn24; ?></span>
-<span class="text-echo" style="top:805px; right:50px; font-size:12px;"><?php echo $rm24; ?></span>
-<input type="text" name="r25" id="r25" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:826px; left:541px;"/>
-<input type="text" name="rk25" id="rk25" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:826px; left:618px;"/>
-<input type="text" name="rn25" id="rn25" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:826px; left:695px;"/>
-<input type="text" name="rm25" id="rm25" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:826px; left:773px;"/>
-<input type="text" name="r26" id="r26" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:851px; left:541px;"/>
-<input type="text" name="rk26" id="rk26" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:851px; left:618px;"/>
-<input type="text" name="rn26" id="rn26" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:851px; left:695px;"/>
-<input type="text" name="rm26" id="rm26" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:851px; left:773px;"/>
-<input type="text" name="r27" id="r27" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:876px; left:541px;"/>
-<input type="text" name="rk27" id="rk27" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:876px; left:618px;"/>
-<input type="text" name="rn27" id="rn27" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:876px; left:695px;"/>
-<input type="text" name="rm27" id="rm27" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:876px; left:773px;"/>
-<input type="text" name="r28" id="r28" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:901px; left:541px;"/>
-<input type="text" name="rk28" id="rk28" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:901px; left:618px;"/>
-<input type="text" name="rn28" id="rn28" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:901px; left:695px;"/>
-<input type="text" name="rm28" id="rm28" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:901px; left:773px;"/>
-<input type="text" name="r29" id="r29" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:925px; left:541px;"/>
-<input type="text" name="rk29" id="rk29" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:925px; left:618px;"/>
-<input type="text" name="rn29" id="rn29" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:925px; left:695px;"/>
-<input type="text" name="rm29" id="rm29" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:925px; left:773px;"/>
-<input type="text" name="r30" id="r30" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:951px; left:541px;"/>
-<input type="text" name="rk30" id="rk30" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:951px; left:618px;"/>
-<input type="text" name="rn30" id="rn30" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:951px; left:695px;"/>
-<input type="text" name="rm30" id="rm30" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:951px; left:773px;"/>
-<input type="text" name="r31" id="r31" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:976px; left:541px;"/>
-<input type="text" name="rk31" id="rk31" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:976px; left:618px;"/>
-<input type="text" name="rn31" id="rn31" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:976px; left:695px;"/>
-<input type="text" name="rm31" id="rm31" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:976px; left:773px;"/>
-<input type="text" name="r32" id="r32" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1000px; left:541px;"/>
-<input type="text" name="rk32" id="rk32" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1000px; left:618px;"/>
-<input type="text" name="rn32" id="rn32" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1000px; left:695px;"/>
-<input type="text" name="rm32" id="rm32" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1000px; left:773px;"/>
-<input type="text" name="r33" id="r33" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1025px; left:541px;"/>
-<input type="text" name="rk33" id="rk33" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1025px; left:618px;"/>
-<input type="text" name="rn33" id="rn33" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1025px; left:695px;"/>
-<input type="text" name="rm33" id="rm33" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1025px; left:773px;"/>
-<input type="text" name="r34" id="r34" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1052px; left:541px;"/>
-<input type="text" name="rk34" id="rk34" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1052px; left:618px;"/>
-<input type="text" name="rn34" id="rn34" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1052px; left:695px;"/>
-<input type="text" name="rm34" id="rm34" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1052px; left:773px;"/>
-<input type="text" name="r35" id="r35" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1079px; left:541px;"/>
-<input type="text" name="rk35" id="rk35" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1079px; left:618px;"/>
-<input type="text" name="rn35" id="rn35" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1079px; left:695px;"/>
-<input type="text" name="rm35" id="rm35" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1079px; left:773px;"/>
-<!-- 36.FU -->
-<span class="text-echo" style="top:1108px; right:339px; font-size:12px;"><?php echo $r36; ?></span>
-<span class="text-echo" style="top:1108px; right:262px; font-size:12px;"><?php echo $rk36; ?></span>
-<span class="text-echo" style="top:1108px; right:185px; font-size:12px;"><?php echo $rn36; ?></span>
-<span class="text-echo" style="top:1108px; right:50px; font-size:12px;"><?php echo $rm36; ?></span>
-<input type="text" name="r37" id="r37" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1129px; left:541px;"/>
-<input type="text" name="rk37" id="rk37" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1129px; left:618px;"/>
-<input type="text" name="rn37" id="rn37" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1129px; left:695px;"/>
-<input type="text" name="rm37" id="rm37" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1129px; left:773px;"/>
-<input type="text" name="r38" id="r38" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1154px; left:541px;"/>
-<input type="text" name="rk38" id="rk38" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1154px; left:618px;"/>
-<input type="text" name="rn38" id="rn38" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1154px; left:695px;"/>
-<input type="text" name="rm38" id="rm38" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1154px; left:773px;"/>
-<input type="text" name="r39" id="r39" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1179px; left:541px;"/>
-<input type="text" name="rk39" id="rk39" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1179px; left:618px;"/>
-<input type="text" name="rn39" id="rn39" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1179px; left:695px;"/>
-<input type="text" name="rm39" id="rm39" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1179px; left:773px;"/>
-<input type="text" name="r40" id="r40" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1203px; left:541px;"/>
-<input type="text" name="rk40" id="rk40" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1203px; left:618px;"/>
-<input type="text" name="rn40" id="rn40" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1203px; left:695px;"/>
-<input type="text" name="rm40" id="rm40" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1203px; left:773px;"/>
-<input type="text" name="r41" id="r41" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1228px; left:541px;"/>
-<input type="text" name="rk41" id="rk41" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1228px; left:618px;"/>
-<input type="text" name="rn41" id="rn41" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1228px; left:695px;"/>
-<input type="text" name="rm41" id="rm41" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1228px; left:773px;"/>
-<!-- 42.CAS.ROZLISENIE -->
-<input type="text" name="r42" id="r42" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1253px; left:541px;"/>
-<input type="text" name="rk42" id="rk42" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1253px; left:618px;"/>
-<input type="text" name="rn42" id="rn42" onkeyup="CiarkaNaBodku(this);" style="width:67px; top:1253px; left:695px;"/>
-<input type="text" name="rm42" id="rm42" onkeyup="CiarkaNaBodku(this);" style="width:125px; top:1253px; left:773px;"/>
-<!-- 43.AKTIVA SPOLU -->
-<span class="text-echo" style="top:1282px; right:339px; font-size:12px;"><?php echo $r43; ?></span>
-<span class="text-echo" style="top:1282px; right:262px; font-size:12px;"><?php echo $rk43; ?></span>
-<span class="text-echo" style="top:1282px; right:185px; font-size:12px;"><?php echo $rn43; ?></span>
-<span class="text-echo" style="top:1282px; right:50px; font-size:12px;"><?php echo $rm43; ?></span>
+<!-- 1.STAV k 1.1. -->
+<span class="text-echo" style="top:232px; right:868px;"><?php echo $r01s01; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:784px;"><?php echo $r01s02; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:700px;"><?php echo $r01s03; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:616px;"><?php echo $r01s04; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:532px;"><?php echo $r01s05; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:439px;"><?php echo $r01s06; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:355px;"><?php echo $r01s07; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:246px;"><?php echo $r01s08; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:162px;"><?php echo $r01s09; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:70px;"><?php echo $r01s10; ?></span> <!-- dopyt, rozbeha -->
+<!-- 8.uzemna samosprava -->
+<?php $top=413; ?>
+<input type="text" name="pocs01" id="pocs01" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:295px;"/>
+<input type="text" name="pocs02" id="pocs02" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:388px;"/>
+<input type="text" name="pocs03" id="pocs03" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:472px;"/>
+<input type="text" name="pocs04" id="pocs04" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:556px;"/>
+<input type="text" name="pocs05" id="pocs05" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:640px;"/>
+<input type="text" name="pocs06" id="pocs06" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:725px;"/>
+<input type="text" name="pocs07" id="pocs07" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:817px;"/>
+<input type="text" name="pocs08" id="pocs08" onkeyup="CiarkaNaBodku(this);" style="width:98px; top:<?php echo $top; ?>px; left:902px;"/>
+<input type="text" name="pocs09" id="pocs09" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:1011px;"/>
+<input type="text" name="pocs10" id="pocs10" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:1095px;"/>
+
+<!-- 13.ZVYSENIE -->
+<span class="text-echo" style="top:592px; right:868px;"><?php echo $r13s01; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:784px;"><?php echo $r13s02; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:700px;"><?php echo $r13s03; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:616px;"><?php echo $r13s04; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:532px;"><?php echo $r13s05; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:439px;"><?php echo $r13s06; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:355px;"><?php echo $r13s07; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:246px;"><?php echo $r13s08; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:162px;"><?php echo $r13s09; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:232px; right:70px;"><?php echo $r13s10; ?></span> <!-- dopyt, rozbeha -->
+<!-- 20.uzemna samosprava -->
+<?php $top=772; ?>
+<input type="text" name="zvys01" id="zvys01" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:295px;"/>
+<input type="text" name="zvys02" id="zvys02" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:388px;"/>
+<input type="text" name="zvys03" id="zvys03" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:472px;"/>
+<input type="text" name="zvys04" id="zvys04" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:556px;"/>
+<input type="text" name="zvys05" id="zvys05" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:640px;"/>
+<input type="text" name="zvys06" id="zvys06" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:725px;"/>
+<input type="text" name="zvys07" id="zvys07" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:817px;"/>
+<input type="text" name="zvys08" id="zvys08" onkeyup="CiarkaNaBodku(this);" style="width:98px; top:<?php echo $top; ?>px; left:902px;"/>
+<input type="text" name="zvys09" id="zvys09" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:1011px;"/>
+<input type="text" name="zvys10" id="zvys10" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:1095px;"/>
+
+<!-- 25.ZNIZENIE -->
+<span class="text-echo" style="top:916px; right:868px;"><?php echo $r25s01; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:784px;"><?php echo $r25s02; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:700px;"><?php echo $r25s03; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:616px;"><?php echo $r25s04; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:532px;"><?php echo $r25s05; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:439px;"><?php echo $r25s06; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:355px;"><?php echo $r25s07; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:246px;"><?php echo $r25s08; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:162px;"><?php echo $r25s09; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:70px;"><?php echo $r25s10; ?></span> <!-- dopyt, rozbeha -->
 <?php                     } ?>
 
 
 <?php if ( $strana == 3 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 3.strana 265kB">
-<span class="text-echo" style="top:95px; left:672px; font-size:14px;"><?php echo $skutku; ?></span>
+     alt="<?php echo $jpg_popis; ?> 3.strana 265kB" style="width:1250px; height:1000px;">
 
-<!-- 4.2.Vybrane pasiva -->
-<!-- 44.VI -->
-<span class="text-echo" style="top:168px; right:186px; font-size:14px;"><?php echo $r44; ?></span>
-<span class="text-echo" style="top:168px; right:50px; font-size:14px;"><?php echo $rm44; ?></span>
-<input type="text" name="r45" id="r45" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:191px; left:600px;"/>
-<input type="text" name="rm45" id="rm45" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:191px; left:785px;"/>
-<input type="text" name="r46" id="r46" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:218px; left:600px;"/>
-<input type="text" name="rm46" id="rm46" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:218px; left:785px;"/>
-<input type="text" name="r47" id="r47" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:245px; left:600px;"/>
-<input type="text" name="rm47" id="rm47" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:245px; left:785px;"/>
-<input type="text" name="r48" id="r48" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:270px; left:600px;"/>
-<input type="text" name="rm48" id="rm48" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:270px; left:785px;"/>
-<!-- 49.REZERVY -->
-<input type="text" name="r49" id="r49" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:294px; left:600px;"/>
-<input type="text" name="rm49" id="rm49" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:294px; left:785px;"/>
-<!-- 50.ZAVAZKY -->
-<span class="text-echo" style="top:321px; right:186px; font-size:14px;"><?php echo $r50; ?></span>
-<span class="text-echo" style="top:321px; right:50px; font-size:14px;"><?php echo $rm50; ?></span>
-<input type="text" name="r51" id="r51" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:344px; left:600px;"/>
-<input type="text" name="rm51" id="rm51" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:344px; left:785px;"/>
-<input type="text" name="r52" id="r52" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:369px; left:600px;"/>
-<input type="text" name="rm52" id="rm52" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:369px; left:785px;"/>
-<input type="text" name="r53" id="r53" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:394px; left:600px;"/>
-<input type="text" name="rm53" id="rm53" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:394px; left:785px;"/>
-<input type="text" name="r54" id="r54" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:418px; left:600px;"/>
-<input type="text" name="rm54" id="rm54" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:418px; left:785px;"/>
-<input type="text" name="r55" id="r55" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:444px; left:600px;"/>
-<input type="text" name="rm55" id="rm55" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:444px; left:785px;"/>
-<input type="text" name="r56" id="r56" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:468px; left:600px;"/>
-<input type="text" name="rm56" id="rm56" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:468px; left:785px;"/>
-<input type="text" name="r57" id="r57" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:493px; left:600px;"/>
-<input type="text" name="rm57" id="rm57" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:493px; left:785px;"/>
-<input type="text" name="r58" id="r58" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:518px; left:600px;"/>
-<input type="text" name="rm58" id="rm58" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:518px; left:785px;"/>
-<input type="text" name="r59" id="r59" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:543px; left:600px;"/>
-<input type="text" name="rm59" id="rm59" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:543px; left:785px;"/>
-<input type="text" name="r60" id="r60" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:568px; left:600px;"/>
-<input type="text" name="rm60" id="rm60" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:568px; left:785px;"/>
-<input type="text" name="r61" id="r61" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:593px; left:600px;"/>
-<input type="text" name="rm61" id="rm61" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:593px; left:785px;"/>
-<input type="text" name="r62" id="r62" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:618px; left:600px;"/>
-<input type="text" name="rm62" id="rm62" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:618px; left:785px;"/>
-<input type="text" name="r63" id="r63" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:642px; left:600px;"/>
-<input type="text" name="rm63" id="rm63" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:642px; left:785px;"/>
-<input type="text" name="r64" id="r64" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:667px; left:600px;"/>
-<input type="text" name="rm64" id="rm64" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:667px; left:785px;"/>
-<input type="text" name="r65" id="r65" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:694px; left:600px;"/>
-<input type="text" name="rm65" id="rm65" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:694px; left:785px;"/>
-<input type="text" name="r66" id="r66" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:721px; left:600px;"/>
-<input type="text" name="rm66" id="rm66" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:721px; left:785px;"/>
-<input type="text" name="r67" id="r67" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:746px; left:600px;"/>
-<input type="text" name="rm67" id="rm67" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:746px; left:785px;"/>
-<input type="text" name="r68" id="r68" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:771px; left:600px;"/>
-<input type="text" name="rm68" id="rm68" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:771px; left:785px;"/>
-<input type="text" name="r69" id="r69" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:798px; left:600px;"/>
-<input type="text" name="rm69" id="rm69" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:798px; left:785px;"/>
-<input type="text" name="r70" id="r70" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:827px; left:600px;"/>
-<input type="text" name="rm70" id="rm70" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:827px; left:785px;"/>
-<input type="text" name="r71" id="r71" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:854px; left:600px;"/>
-<input type="text" name="rm71" id="rm71" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:854px; left:785px;"/>
-<input type="text" name="r72" id="r72" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:879px; left:600px;"/>
-<input type="text" name="rm72" id="rm72" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:879px; left:785px;"/>
-<!-- 73.BANK.UVERY -->
-<span class="text-echo" style="top:906px; right:186px; font-size:14px;"><?php echo $r73; ?></span>
-<span class="text-echo" style="top:906px; right:50px; font-size:14px;"><?php echo $rm73; ?></span>
-<input type="text" name="r74" id="r74" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:929px; left:600px;"/>
-<input type="text" name="rm74" id="rm74" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:929px; left:785px;"/>
-<input type="text" name="r75" id="r75" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:956px; left:600px;"/>
-<input type="text" name="rm75" id="rm75" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:956px; left:785px;"/>
-<input type="text" name="r76" id="r76" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:983px; left:600px;"/>
-<input type="text" name="rm76" id="rm76" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:983px; left:785px;"/>
-<input type="text" name="r77" id="r77" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1007px; left:600px;"/>
-<input type="text" name="rm77" id="rm77" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1007px; left:785px;"/>
-<!-- 78.CAS.ROZLISENIE -->
-<input type="text" name="r78" id="r78" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1032px; left:600px;"/>
-<input type="text" name="rm78" id="rm78" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1032px; left:785px;"/>
-<!-- 79.PASIVA SPOLU -->
-<span class="text-echo" style="top:1059px; right:186px; font-size:14px;"><?php echo $r79; ?></span>
-<span class="text-echo" style="top:1059px; right:50px; font-size:14px;"><?php echo $rm79; ?></span>
+<!-- 32.uzemna samosprava -->
+<?php $top=221; ?>
+<input type="text" name="znis01" id="znis01" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:295px;"/>
+<input type="text" name="znis02" id="znis02" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:388px;"/>
+<input type="text" name="znis03" id="znis03" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:472px;"/>
+<input type="text" name="znis04" id="znis04" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:556px;"/>
+<input type="text" name="znis05" id="znis05" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:640px;"/>
+<input type="text" name="znis06" id="znis06" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:725px;"/>
+<input type="text" name="znis07" id="znis07" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:817px;"/>
+<input type="text" name="znis08" id="znis08" onkeyup="CiarkaNaBodku(this);" style="width:98px; top:<?php echo $top; ?>px; left:902px;"/>
+<input type="text" name="znis09" id="znis09" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:1011px;"/>
+<input type="text" name="znis10" id="znis10" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:1095px;"/>
+
+<!-- 37.ZMENY V OCENENI -->
+<?php $top=357; ?>
+<input type="text" name="oces01" id="oces01" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:295px;"/>
+<input type="text" name="oces02" id="oces02" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:388px;"/>
+<input type="text" name="oces03" id="oces03" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:472px;"/>
+<input type="text" name="oces04" id="oces04" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:556px;"/>
+<input type="text" name="oces05" id="oces05" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:640px;"/>
+<input type="text" name="oces06" id="oces06" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:725px;"/>
+<input type="text" name="oces07" id="oces07" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:817px;"/>
+<input type="text" name="oces08" id="oces08" onkeyup="CiarkaNaBodku(this);" style="width:98px; top:<?php echo $top; ?>px; left:902px;"/>
+<input type="text" name="oces09" id="oces09" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:1011px;"/>
+<input type="text" name="oces10" id="oces10" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:1095px;"/>
+
+<!-- 38.OSTATNE ZMENY -->
+<?php $top=393; ?>
+<input type="text" name="osts01" id="osts01" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:295px;"/>
+<input type="text" name="osts02" id="osts02" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:388px;"/>
+<input type="text" name="osts03" id="osts03" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:472px;"/>
+<input type="text" name="osts04" id="osts04" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:556px;"/>
+<input type="text" name="osts05" id="osts05" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:640px;"/>
+<input type="text" name="osts06" id="osts06" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:725px;"/>
+<input type="text" name="osts07" id="osts07" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:817px;"/>
+<input type="text" name="osts08" id="osts08" onkeyup="CiarkaNaBodku(this);" style="width:98px; top:<?php echo $top; ?>px; left:902px;"/>
+<input type="text" name="osts09" id="osts09" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:1011px;"/>
+<input type="text" name="osts10" id="osts10" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:1095px;"/>
+
+<!-- 39.STAV k 31.12. -->
+<span class="text-echo" style="top:452px; right:868px;"><?php echo $r39s01; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:784px;"><?php echo $r39s02; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:700px;"><?php echo $r39s03; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:616px;"><?php echo $r39s04; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:532px;"><?php echo $r39s05; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:439px;"><?php echo $r39s06; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:355px;"><?php echo $r39s07; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:246px;"><?php echo $r39s08; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:162px;"><?php echo $r39s09; ?></span> <!-- dopyt, rozbeha -->
+<span class="text-echo" style="top:916px; right:70px;"><?php echo $r39s10; ?></span> <!-- dopyt, rozbeha -->
+<!-- 46.uzemna samosprava -->
+<?php $top=633; ?>
+<input type="text" name="zoss01" id="zoss01" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:295px;"/>
+<input type="text" name="zoss02" id="zoss02" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:388px;"/>
+<input type="text" name="zoss03" id="zoss03" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:472px;"/>
+<input type="text" name="zoss04" id="zoss04" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:556px;"/>
+<input type="text" name="zoss05" id="zoss05" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:640px;"/>
+<input type="text" name="zoss06" id="zoss06" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:725px;"/>
+<input type="text" name="zoss07" id="zoss07" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:817px;"/>
+<input type="text" name="zoss08" id="zoss08" onkeyup="CiarkaNaBodku(this);" style="width:98px; top:<?php echo $top; ?>px; left:902px;"/>
+<input type="text" name="zoss09" id="zoss09" onkeyup="CiarkaNaBodku(this);" style="width:73px; top:<?php echo $top; ?>px; left:1011px;"/>
+<input type="text" name="zoss10" id="zoss10" onkeyup="CiarkaNaBodku(this);" style="width:82px; top:<?php echo $top; ?>px; left:1095px;"/>
 <?php                     } ?>
 
 <div class="navbar">
