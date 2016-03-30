@@ -422,7 +422,7 @@ var h_oc = document.forms.formfin304.h_oc.value;
 var h_fmzdy = 0;
 
 
-window.open('../ucto/vykaz_fin304<?php echo $rokfin304; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=È',
+window.open('../ucto/vykaz_fin304<?php echo $rokfin304; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -432,7 +432,7 @@ function UpravFin304()
 var h_oc = document.forms.formfin304.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin304<?php echo $rokfin304; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+window.open('../ucto/vykaz_fin304<?php echo $rokfin304; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -453,7 +453,7 @@ var h_oc = document.forms.formfin404.h_oc.value;
 var h_fmzdy = 0;
 
 
-window.open('../ucto/vykaz_fin404.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=È',
+window.open('../ucto/vykaz_fin404.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -463,7 +463,7 @@ function UpravFin404()
 var h_oc = document.forms.formfin404.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin404.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+window.open('../ucto/vykaz_fin404.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -480,7 +480,7 @@ var h_oc = document.forms.formfin504.h_oc.value;
 var h_fmzdy = 0;
 
 
-window.open('../ucto/vykaz_fin504<?php echo $rokfin504; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=È',
+window.open('../ucto/vykaz_fin504<?php echo $rokfin504; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -490,26 +490,38 @@ function UpravFin504()
 var h_oc = document.forms.formfin504.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin504<?php echo $rokfin504; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+window.open('../ucto/vykaz_fin504<?php echo $rokfin504; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 
-//vykaz Fin6a04
+//vykaz Fin604
+<?php
+$rokfin604="_2016";
+?>
 
-function TlacFin6a04()
+function TlacFin604()
                 {
 var h_oc = document.forms.formfin604.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin6a04.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=È',
+window.open('../ucto/vykaz_fin604<?php echo $rokfin604; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 
-function SetFin6a04()
+//vykaz Fin704
+<?php
+$rokfin704="_2016";
+?>
+
+function TlacFin704()
                 {
-  window.open('../ucto/vykfin_cis.php?copern=308&drupoh=94', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+var h_oc = document.forms.formfin704.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 
@@ -1058,23 +1070,52 @@ if( $kli_vrok >= 2013 ) {
 <FORM name="formfin604" class="obyc" method="post" action="#" >
 <tr>
 <td class="bmenu" width="2%">
-<a href="#" onClick="TlacFin6a04();">
+<a href="#" onClick="TlacFin604();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
 </td>
-<td class="bmenu" width="98%">FinanËn˝ v˝kaz vybran˝ch ˙dajov z ˙ËtovnÌctva subjektu verejnej spr·vy FIN 6a - 04
+<td class="bmenu" width="98%">FinanËn˝ v˝kaz o bankov˝ch ˙Ëtoch a z·v‰zkoch FIN 6 - 04
  <select size="1" name="h_oc" id="h_oc" >
 <option value="1" >1.ötvrùrok</option>
 <option value="2" >2.ötvrùrok</option>
 <option value="3" >3.ötvrùrok</option>
 <option value="4" >4.ötvrùrok</option>
 </select>
-<a href="#" onClick="DbfFin6a04();">
+<a href="#" onClick="">
 <img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru' ></a>
 
 </td>
 <td class="bmenu" width="2%">
-<a href="#" onClick="SetFin6a04();">
-<img src='../obr/naradie.png' width=20 height=15 border=0 title='Hodnoty bezprostredne predch·dzaj˙ceho obdobia a generovanie v˝kazu' ></a>
+
+</td>
+
+<td class="bmenu" width="2%">
+
+</td>
+</tr>
+</FORM>
+</table>
+
+
+<table class="vstup" width="100%" >
+<FORM name="formfin704" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacFin704();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='VytlaËiù vo form·te PDF' ></a>
+</td>
+<td class="bmenu" width="98%">FinanËn˝ v˝kaz o vybran˝ch ˙dajoch z ˙ËtovnÌctva FIN 7 - 04
+ <select size="1" name="h_oc" id="h_oc" >
+<option value="1" >1.ötvrùrok</option>
+<option value="2" >2.ötvrùrok</option>
+<option value="3" >3.ötvrùrok</option>
+<option value="4" >4.ötvrùrok</option>
+</select>
+<a href="#" onClick="">
+<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF s˙boru' ></a>
+
+</td>
+<td class="bmenu" width="2%">
+
 </td>
 
 <td class="bmenu" width="2%">
