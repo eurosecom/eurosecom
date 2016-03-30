@@ -112,16 +112,6 @@ if ( $copern == 26 )
 //echo "citam";
 $nasielvyplnene=0;
 
-$sqlttt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin304 WHERE oc = $cislo_oc ";
-$sqldok = mysql_query("$sqlttt");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $nasielvyplnene=1;
-
-  $riaddok=mysql_fetch_object($sqldok);
-  $xokres=1*$riaddok->okres;
-  $xobec=1*$riaddok->obec;
-  }
 
 $sqtoz = "DELETE FROM F$kli_vxcf"."_uctvykaz_fin304 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
@@ -380,6 +370,7 @@ $sqldok = mysql_query("$sql");
   }
 if ( $jepotvrd == 0 ) $subor=1;
 
+$nacitavamhodnoty=0;
 //vytvor pracovny subor
 if ( $subor == 1 )
 {
@@ -399,7 +390,7 @@ $ttvv = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid ".
 //$ttqq = mysql_query("$ttvv");
 
 /////////////////////////////////nacitaj hodnoty z ucta do suboru
-echo "Naèítavam hodnoty";
+$nacitavamhodnoty=1;
 
 //zober pociatocny stav uctov
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
@@ -948,7 +939,7 @@ div.input-echo {
   }
   function Nacitaj()
   {
-   window.open('vykaz_fin304_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0',
+   window.open('vykaz_fin304_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0&strana=1',
 '_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
@@ -1001,6 +992,13 @@ $source="vykaz_fin304_2016.php";
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
+
+<?php
+$alertnacitaj="";
+if ( $nacitavamhodnoty == 1 ) { $alertnacitaj="!!! Údaje sú naèítané !!!"; }
+?>
+ <div class="alert-pocitam"><?php echo $alertnacitaj; ?></div>
+
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-top-formsave">
 </div>
 
