@@ -446,6 +446,9 @@ window.open('../ucto/vykaz_fin304<?php echo $rokfin304; ?>.php?cislo_oc=' + h_oc
                 }
 
 //vykaz Fin404
+<?php
+$rokfin404="_2016";
+?>
 
 function TlacFin404()
                 {
@@ -453,7 +456,7 @@ var h_oc = document.forms.formfin404.h_oc.value;
 var h_fmzdy = 0;
 
 
-window.open('../ucto/vykaz_fin404.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0',
+window.open('../ucto/vykaz_fin404<?php echo $rokfin304; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -463,7 +466,7 @@ function UpravFin404()
 var h_oc = document.forms.formfin404.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin404.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin404<?php echo $rokfin404; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -566,7 +569,7 @@ var h_oc = document.forms.formfin304.h_oc.value;
 var h_fmzdy = 0;
 
 
-window.open('fin304dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+window.open('fin304dbf_2016.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -576,7 +579,7 @@ var h_oc = document.forms.formfin404.h_oc.value;
 var h_fmzdy = 0;
 
 
-window.open('fin404dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+window.open('fin404dbf_2016.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -586,17 +589,17 @@ var h_oc = document.forms.formfin504.h_oc.value;
 var h_fmzdy = 0;
 
 
-window.open('fin504dbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+window.open('fin504dbf_2016.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-function DbfFin6a04()
+function DbfFin604()
                 {
-var h_oc = document.forms.formfin604.h_oc.value;
-var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin6a04.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0&dajdbf=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function DbfFin704()
+                {
 
                 }
 
@@ -1021,12 +1024,18 @@ if( $kli_vrok >= 2013 AND $dajfinvykazy == 1 ) {
 
 </td>
 <td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/fin_cis.php?copern=308&drupoh=94&page=1&sysx=UCT', '_blank' );">
+<img src='../obr/naradie.png' width=20 height=15 border=0 title='Generovanie' ></a>
+</td>
+
+<td class="bmenu" width="2%">
 <a href="#" onClick="UpravFin404();">
 <img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty ' ></a>
 </td>
 
 <td class="bmenu" width="2%">
-
+<a href="#" onClick="ZnovuFin404();">
+<img src='../obr/orig.png' width=20 height=15 border=0 title='Naèíta hodnoty  - môžete opakova viackrát' ></a>
 </td>
 </tr>
 </FORM>

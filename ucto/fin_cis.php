@@ -81,6 +81,13 @@ $gener=1;
 $minul=0;
 }
 
+if( $drupoh == 94 )
+{
+$uctsys="genfin404";
+$gener=1;
+$minul=0;
+}
+
 if( $gener == 1 )
 {
 
@@ -190,6 +197,15 @@ window.open('vykaz_fin304_2016.php?cislo_oc=1&copern=1001&drupoh=1&fmzdy=&page=1
 <?php
       }
 
+if( $drupoh == 94 )
+      {
+?>
+<script type="text/javascript">
+window.open('vykaz_fin404_2016.php?cislo_oc=1&copern=1001&drupoh=1&fmzdy=&page=1&subor=0&strana=1&nacitajgen=1', '_self' ); 
+</script>
+<?php
+      }
+
 exit;
 $copern=308;
     }
@@ -227,7 +243,11 @@ if( $drupoh == 93 )
 $sql = "DELETE FROM F$kli_vxcf"."_genfin304 ";
 $vysledok = mysql_query("$sql");
       }
-
+if( $drupoh == 94 )
+      {
+$sql = "DELETE FROM F$kli_vxcf"."_genfin404 ";
+$vysledok = mysql_query("$sql");
+      }
 
 $copern=308;
     }
@@ -287,11 +307,7 @@ $h_crs = 1*$_REQUEST['h_crs'];
 $h_ucd = 1*$_REQUEST['h_ucd'];
 
 if( $gener == 1 ) {
-$ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); ";
-if( $drupoh == 95 OR $drupoh == 195 )
-     {
-$ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, ucm, ucd ) VALUES ( '$h_uce', '$h_crs', '$h_ucd'  ); ";
-     }  
+$ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); "; 
                   }
 if( $minul == 1 ) {
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( dok, hod ) VALUES ( '$h_uce', '$h_crs'  ); "; 
@@ -310,10 +326,6 @@ if ( $copern == 308 AND $uprav == 1 AND $drupoh >= 91  )
       {
 $cislo_cpl = 1*strip_tags($_REQUEST['cislo_cpl']);
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl = $cislo_cpl  ";
-if( $drupoh == 96 OR $drupoh == 196 )
-    {
-$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl >= 0 ";
-    }
 //echo $sqltt;
 $sql = mysql_query("$sqltt"); 
   if (@$zaznam=mysql_data_seek($sql,0))
@@ -324,12 +336,6 @@ if( $gener == 1 ) {
 $h_uce = $riadok->uce;
 $h_crs = $riadok->crs;
 $ulozttt = "INSERT INTO F$kli_vxcf"."_$uctsys ( uce, crs ) VALUES ( '$h_uce', '$h_crs'  ); ";
-if( $drupoh == 95 OR $drupoh == 195 )
-     {
-$h_uce = $riadok->dok;
-$h_crs = $riadok->ucm;
-$h_ucd = $riadok->ucd;
-     }
                   }
 if( $minul == 1 ) {
 $h_uce = $riadok->dok;
@@ -339,23 +345,14 @@ $h_crs = $riadok->hod;
        }
 //koniec uprava nacitanie
 
-if ( $drupoh != 96 AND $drupoh != 196 AND $uprav == 1)
-    {
-$sqltx = "DELETE FROM F$kli_vxcf"."_$uctsys WHERE cpl = $cislo_cpl ";
-//echo $sqltx;
-$sqlx = mysql_query("$sqltx"); 
-    }
+
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
  <link rel="stylesheet" href="../css/reset.css" type="text/css">
  <link rel="stylesheet" href="../css/tlaciva.css" type="text/css">
 <title>EuroSecom -
-<?php
-if ( $drupoh >= 91 AND $drupoh <= 96 ) echo "MÚJ";
-if ( $drupoh >= 191 AND $drupoh <= 196 ) echo "PÚ";
-?>
-&nbsp;závierka nastavenie</title>
+&nbsp;nastavenie</title>
 <style type="text/css">
 ul.legend-vykazy { /* legenda k druhu vykazu */
   position: relative;
@@ -750,7 +747,7 @@ $source="../ucto/fin_cis.php?copern=308";
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=92', '_self');"
   title="F204no" class="<?php echo $clas3; ?> purple">F204no - Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=94', '_self');"
-  title="VZaS - predchádzajúce úètovné obdobie" class="<?php echo $clas4; ?> purple">V - Predchádz. obdobie</a>
+  title="F304 - Generovanie" class="<?php echo $clas4; ?> purple">F404 - Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=95', '_self');"
   title="Súvaha - syntetické generovanie Aktív a Pasív" class="<?php echo $clas5; ?> darkgreen">S - Generovanie A / P</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=96&uprav=1', '_self');"
@@ -765,7 +762,7 @@ $source="../ucto/fin_cis.php?copern=308";
 if ( $drupoh == 91 OR $drupoh == 191 ) { echo "FIN204POD - generovanie"; }
 if ( $drupoh == 93 OR $drupoh == 193 ) { echo "F304 - Generovanie"; }
 if ( $drupoh == 92 OR $drupoh == 192 ) { echo "FIN204NO - generovanie"; }
-if ( $drupoh == 94 OR $drupoh == 194 ) { echo "Vıkaz ziskov a strát - predchádzajúce úètovné obdobie"; }
+if ( $drupoh == 94 OR $drupoh == 194 ) { echo "F404 - Generovanie"; }
 if ( $drupoh == 95 OR $drupoh == 195 ) { echo "Súvaha - syntetické generovanie Aktív a Pasív"; }
 if ( $drupoh == 96 OR $drupoh == 196 ) { echo "Súvaha a Vıkaz ziskov a strát - zaokrúhlenie"; }
 ?>
@@ -890,84 +887,12 @@ $i = $i + 1;
 //koniec uprava vykazu 91-95,191-195
 ?>
 
-<?php
-//uprava vykazu drupoh 96,196
-if ( $drupoh == 96 OR $drupoh == 196 )
-{
-?>
-<FORM name="formv1" method="post" action="fin_cis.php?copern=315&uprav=0&drupoh=<?php echo $drupoh;?>">
- <table class="flat toleft">
- <thead>
- <tr>
-  <td style="width:35%;"></td><td style="width:25%;"></td><td style="width:40%;"></td>
- </tr>
- <tr>
-  <th>&nbsp;</th><th>Èíslo riadku</th><th>&nbsp;</th>
- </tr>
- </thead>
- <tbody>
- <tr>
-  <th>
-<?php
-if ( $drupoh == 96 ) $titlesuvaha = "15";
-if ( $drupoh == 196 ) $titlesuvaha = "35";
-?>
-   <span class="legend-criadok" title="Èíslo riadku aktív v Súvahe, kam má program zúètova rozdiel VH po zaokrúhlení Súvahy,
-    napr. è. <?php echo $titlesuvaha ?>">Súvaha</span>
-  </th>
-  <td>
-   <input type="text" name="h_uce" id="h_uce" onkeyup="KontrolaCisla(this, Cele)"
-    onKeyDown="return UceEnter(event.which)" class="field"/>
-  </td>
-  <th>
-   <div id="Cele" class="alert-warning" style="display:none;">Musí by celé èíslo</div>
-  </th>
- </tr>
- <tr>
-  <th>
-<?php
-if ( $drupoh == 96 ) $titlevzas = "17";
-if ( $drupoh == 196 ) $titlevzas = "26";
-?>
-   <span class="legend-criadok" title="Èíslo nákladového riadku vo Vıkaze ziskov, kam má program zúètova rozdiel VH po zaokrúhlení Súvahy a VZaS,
-    napr. è. <?php echo $titlevzas ?>">Vıkaz ziskov a strát</span>
-  </th>
-  <td>
-   <input type="text" name="h_crs" id="h_crs" onkeyup="KontrolaCisla(this, Cele2)"
-    onKeyDown="return Crs96Enter(event.which)" class="field"/>
-  </td>
-  <th>
-   <div id="Cele2" class="alert-warning" style="display:none;">Musí by celé èíslo</div>
-  </th>
- </tr>
- </tbody>
- <tfoot>
- <tr>
-  <td>&nbsp;</td>
-  <td>
-   <div onmouseover="Fx.style.display='none';" class="wrap-area-uloz">&nbsp;</div>
-   <div onmouseover="return Povol_uloz();" class="area-uloz">
-    <input type="submit" id="uloz" name="uloz" value="Uloi">
-   </div>
-  </td>
- <td>
-  <div id="Fx" class="alert-warning" style="display:none;">Vyplòte všetky poloky</div>
- </td>
- </tr>
- </tfoot>
- </table>
-</FORM>
-<!-- <span id="Desc" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Hodnota musí by desatinné èíslo</span> -->
-<?php
-}
-//koniec uprava vykazu drupoh 96,196
-?>
+
 
 <?php
 $vartitle = "èíselník";
 ?>
-<?php if ( $drupoh >= 91 ) { ?>
+<?php if ( $drupoh >= 91 AND $kli_vrok > 2016 ) { ?>
  <a href='fin_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
   title="Naèíta <?php echo $vartitle; ?> generovania z firmy predchádzajúceho úètovného obdobia"
   class="btn-down-x26 toright">Generovanie <?php echo $kli_minrok; ?></a>
