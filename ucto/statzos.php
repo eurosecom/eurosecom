@@ -470,6 +470,15 @@ window.open('../ucto/vykaz_fin404<?php echo $rokfin404; ?>.php?cislo_oc=' + h_oc
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function ZnovuFin404()
+                {
+var h_oc = document.forms.formfin404.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin404<?php echo $rokfin404; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 
 //vykaz Fin504
 <?php

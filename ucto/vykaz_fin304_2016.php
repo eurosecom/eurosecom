@@ -548,7 +548,7 @@ $rdk=$rdk+1;
 
 
 //sumar za riadky
-$dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid "." SELECT".
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx$kli_uzid "." SELECT".
 " 0,$cislo_oc,0,'','','0000-00-00',".
 " 0,1,uce,ucm,ucd,rdk,prv,hod,mdt,dal,".
 "SUM(pocs01),SUM(pocs02),SUM(pocs03),SUM(pocs04),SUM(pocs05),SUM(pocs06),SUM(pocs07),SUM(pocs08),SUM(pocs09),SUM(pocs10),".
@@ -559,21 +559,9 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid "." SELECT".
 "SUM(zoss01),SUM(zoss02),SUM(zoss03),SUM(zoss04),SUM(zoss05),SUM(zoss06),SUM(zoss07),SUM(zoss08),SUM(zoss09),SUM(zoss10),".
 "$fir_fico".
 " FROM F$kli_vxcf"."_uctprcvykaz$kli_uzid".
-" WHERE rdk > 0".
+" WHERE rdk >= 0".
 " GROUP BY prx".
 "";
-//echo $dsqlt;
-$dsql = mysql_query("$dsqlt");
-
-
-
-$dsqlt = "UPDATE F$kli_vxcf"."_uctprcvykaz".$kli_uzid." ".
-" SET r11=r11+r12, rk11=rk11+rk12, rn11=rn11+rn12  WHERE oc = $cislo_oc ";
-//echo $dsqlt;
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." ".
-" SELECT * FROM F$kli_vxcf"."_uctprcvykaz".$kli_uzid." WHERE oc = $cislo_oc ";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
