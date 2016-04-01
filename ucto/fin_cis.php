@@ -257,6 +257,18 @@ $copern=308;
 if ( $copern == 316 )
     {
 $cislo_cpl = strip_tags($_REQUEST['cislo_cpl']);
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$uctsys WHERE cpl = $cislo_cpl  ";
+//echo $sqltt;
+$sql = mysql_query("$sqltt"); 
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $h_uce=$riadok->uce;
+  $h_crs=$riadok->crs;
+  }
+
+
 $zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_$uctsys WHERE cpl='$cislo_cpl' "); 
 
 $copern=308;
@@ -867,7 +879,7 @@ $riadok=mysql_fetch_object($sql);
   <td style="text-align:right;"><?php echo $riadok->ucd;?>&nbsp;&nbsp;</td>
 <?php                                        } ?>
   <td style="text-align:center;">
-   <a href="#" onclick="UpravPolozku(<?php echo $riadok->cpl;?>);" title="Upravi" class="btn-edit"></a>
+
    <a href="#" onclick="ZmazPolozku(<?php echo $riadok->cpl;?>);" title="Vymaza" class="btn-cancel"></a>
   </td>
  </tr>
