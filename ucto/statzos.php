@@ -1,3 +1,4 @@
+<!doctype html>
 <HTML>
 <?php
 $sys = 'UCT';
@@ -11,7 +12,7 @@ if(!isset($kli_vduj)) $kli_vduj = 1;
        do
        {
 
-// cislo operacie
+//cislo operacie
 $copern = 1*$_REQUEST['copern'];
 $drupoh = 1*$_REQUEST['drupoh'];
 
@@ -24,9 +25,6 @@ require_once("../pswd/password.php");
   mysql_select_db($mysqldb);
 
 $citfir = include("../cis/citaj_fir.php");
-$mena1 = $fir_mena1;
-$mena2 = $fir_mena2;
-$kurz12 = $fir_kurz12;
 
 if ( $kli_vrok < 2016 )
 {
@@ -66,14 +64,157 @@ if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $dajfinvykazy=1; $volajfin1
  
 if( $_SERVER['SERVER_NAME'] == "localhost" ) { $dajfinvykazy=1; }
 ?> 
-
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
-  <link type="text/css" rel="stylesheet" href="../css/styl.css">
+<link rel="stylesheet" href="../css/reset.css">
 <title>Štatistika a výkazníctvo</title>
-  <style type="text/css">
-
-  </style>
+<style type="text/css">
+body {
+  min-width: 900px;
+  font-family: Arial, sans-serif;
+}
+strong {
+  font-weight: bold;
+}
+div.wrap-heading {
+  overflow: auto;
+  width: 98%;
+  padding: 0 1%;
+  background-color: #ffff90;
+  -webkit-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  -moz-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+}
+div.ilogin {
+  font-size: 11px;
+  background-color:;
+  height: 11px;
+  padding-top: 4px;
+}
+div.ilogin strong {
+  margin-left: 6px;
+  margin-right: 3px;
+}
+div.heading {
+  height: 36px;
+  overflow: hidden;
+}
+div.heading > h1 {
+  line-height: 36px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Times, 'Times New Roman', Georgia, serif;
+}
+dl.legend-area {
+  height: 14px;
+  line-height: 14px;
+  font-size: 12px;
+  position: relative;
+  top: 14px;
+}
+dl.legend-area > dt {
+  width:10px;
+  height:10px;
+  margin: 2px 5px 0 12px;
+}
+div.content {
+  margin-top: 14px;
+  width: 100%;
+}
+div.line-area {
+  overflow: auto;
+  width: 97%;
+  height: 32px;
+  margin: 0 auto 4px auto;
+  background-color: #fff;
+  padding: 4px;
+  border-radius: 3px;
+  clear: left;
+}
+.line-box {
+  display: block;
+  margin-right: 4px;
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  border-radius: 3px;
+}
+.line-box:hover {
+  opacity: 0.8;
+}
+body, .box-bluedefault {
+  background-color: #add8e6;
+}
+.box-blue {
+  background-color: #5fb3ce;
+}
+.box-brown {
+  background-color: #bcaaa4;
+}
+.box-green {
+  background-color:#a5d6a7;
+}
+.box-lightblue {
+  background-color:#90caf9;
+}
+.box-red {
+  background-color:#ef9a9a;
+}
+.line-box-text {
+  width: 630px;
+  height: 32px;
+  line-height: 32px;
+  padding-left: 4px;
+  font-size: 12px;
+}
+.line-box-text > div {
+  float: left;
+  margin-right: 12px;
+}
+.line-box-text > div > strong {
+  font-size: 14px;
+  color: #424242;
+}
+.line-box-text > div > select {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  padding: 2px;
+}
+.line-box-text > div > label {
+  display: block;
+  float: left;
+  margin-right: 4px;
+  line-height: 34px;
+}
+.line-box-text > div input[type=text] {
+  display: block;
+  float: left;
+  width: 75px;
+  margin-top: 5px;
+  padding: 2px 0;
+  font-size: 12px;
+  text-indent: 4px;
+}
+.line-box > img {
+  margin: 8px;
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+.toleft {
+  float: left;
+}
+.toright {
+  float: right;
+}
+.unhidden {
+  display: block;
+}
+.hidden {
+  display: none;
+}
+</style>
 <script type="text/javascript">
 //sirka a vyska okna
 var sirkawin = screen.width-10;
@@ -81,149 +222,85 @@ var vyskawin = screen.height-175;
 var vyskawic = screen.height;
 var sirkawic = screen.width-10;
 
+  function VyberVstup()
+  {
+  }
+
+//suhrnny DPH
+  function TlacSuhrn()
+  {
+   var h_oc = document.forms.formp3.h_oc.value;
+   var h_fmzdy = 0;
+   var h_drp = document.forms.formp3.h_drp.value;
+   var h_dap = document.forms.formp3.h_dap.value;
+   window.open('../ucto/suhrn_dph.php?cislo_oc=' + h_oc + '&h_drp=' + h_drp + '&h_dap=' + h_dap + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=é',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function SuborSuhrn()
+  {
+   var h_oc = document.forms.formp3.h_oc.value;
+   var h_fmzdy = 0;
+   var h_drp = document.forms.formp3.h_drp.value;
+   var h_dap = document.forms.formp3.h_dap.value;
+   window.open('../ucto/suhrn_dph.php?cislo_oc=' + h_oc + '&h_drp=' + h_drp + '&h_dap=' + h_dap + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=2',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function UpravSuhrn()
+  {
+   var h_oc = document.forms.formp3.h_oc.value;
+   var h_fmzdy = 0;
+   window.open('../ucto/suhrn_dph.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 
-function VyberVstup()
-                {
-
-                }
-
-
-//suhrn DPH
-
-function TlacSuhrn()
-                {
-var h_oc = document.forms.formp3.h_oc.value;
-var h_fmzdy = 0;
-var h_drp = document.forms.formp3.h_drp.value;
-var h_dap = document.forms.formp3.h_dap.value;
-
-
-window.open('../ucto/suhrn_dph.php?cislo_oc=' + h_oc + '&h_drp=' + h_drp + '&h_dap=' + h_dap + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=é',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function FDFSuhrn()
-                {
-var h_oc = document.forms.formp3.h_oc.value;
-var h_fmzdy = 0;
-var h_drp = document.forms.formp3.h_drp.value;
-var h_dap = document.forms.formp3.h_dap.value;
-
-
-window.open('../ucto/suhrn_dph.php?cislo_oc=' + h_oc + '&h_drp=' + h_drp + '&h_dap=' + h_dap + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-function SuborSuhrn()
-                {
-var h_oc = document.forms.formp3.h_oc.value;
-var h_fmzdy = 0;
-var h_drp = document.forms.formp3.h_drp.value;
-var h_dap = document.forms.formp3.h_dap.value;
-
-window.open('../ucto/suhrn_dph.php?cislo_oc=' + h_oc + '&h_drp=' + h_drp + '&h_dap=' + h_dap + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=2',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function UpravSuhrn()
-                {
-var h_oc = document.forms.formp3.h_oc.value;
-var h_fmzdy = 0;
-
-window.open('../ucto/suhrn_dph.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function ZnovuSuhrn()
-                {
-var h_oc = document.forms.formp3.h_oc.value;
-var h_fmzdy = 0;
-
-window.open('../ucto/suhrn_dph.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function TlacPotvrdPrehlad()
-                {
-  var okno = window.open("../tmp/potvrdpreh<?php echo $kli_vxcf; ?>.<?php echo $kli_uzid; ?>.pdf", '_blank', '<?php echo $tlcswin; ?>' );
-                }
-
-function TlacPotvrdSuhrn()
-                {
-  var okno = window.open("../tmp/potvrdsuhrn<?php echo $kli_vxcf; ?>.<?php echo $kli_uzid; ?>.pdf", '_blank', '<?php echo $tlcswin; ?>' );
-                }
-
-
-
-
-    
 //vykaz Hlaodpad
 <?php
 $rokodpad="";
-if( $kli_vrok < 2016 ) $rokodpad="_2015";
+if ( $kli_vrok < 2016 ) $rokodpad="_2015";
 ?>
+  function TlacHlaodpad()
+  {
+<?php if ( $tlacodpady == 1 ) { ?>
+   var h_oc = document.forms.formhlaodpad.h_oc.value;
+   var h_kmd = document.forms.formhlaodpad.h_kmd.value;
+   var h_zos = document.forms.formhlaodpad.h_zos.value;
+   var h_fmzdy = 0;
+   window.open('../ucto/vykaz_hlaodpad<?php echo $rokodpad; ?>.php?stvrtrok=' + h_oc + '&h_kmd=' + h_kmd + '&h_zos=' + h_zos + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+<?php                         } ?>
+  }
+  function UpravHlaodpad()
+  {
+   var h_oc = document.forms.formhlaodpad.h_oc.value;
+   var h_kmd = document.forms.formhlaodpad.h_kmd.value;
+   var h_fmzdy = 0;
+   window.open('../ucto/vykaz_hlaodpad<?php echo $rokodpad; ?>.php?stvrtrok=' + h_oc + '&h_kmd=' + h_kmd + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&zaciatok=1',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  }
+  function HelpHlaodpad()
+  {
+   window.open('../dokumenty/vykazy2010/navod_hlasenie.pdf',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function XLSHlaodpad()
+  {
+   window.open('../dokumenty/vykazy2010/xls_hlasenie.rar',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
-function TlacHlaodpad()
-                {
-
-<?php if( $tlacodpady == 1 ) { ?>
-
-var h_oc = document.forms.formhlaodpad.h_oc.value;
-var h_kmd = document.forms.formhlaodpad.h_kmd.value;
-var h_zos = document.forms.formhlaodpad.h_zos.value;
-var h_fmzdy = 0;
-
-window.open('../ucto/vykaz_hlaodpad<?php echo $rokodpad; ?>.php?stvrtrok=' + h_oc + '&h_kmd=' + h_kmd + '&h_zos=' + h_zos + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
-<?php                        } ?>
-
-                }
-
-
-function UpravHlaodpad()
-                {
-var h_oc = document.forms.formhlaodpad.h_oc.value;
-var h_kmd = document.forms.formhlaodpad.h_kmd.value;
-var h_fmzdy = 0;
-
-window.open('../ucto/vykaz_hlaodpad<?php echo $rokodpad; ?>.php?stvrtrok=' + h_oc + '&h_kmd=' + h_kmd + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&zaciatok=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function ZnovuHlaodpad()
-                {
-var h_oc = document.forms.formhlaodpad.h_oc.value;
-var h_kmd = document.forms.formhlaodpad.h_kmd.value;
-var h_fmzdy = 0;
-
-window.open('../ucto/vykaz_hlaodpad<?php echo $rokodpad; ?>.php?stvrtrok=' + h_oc + '&h_kmd=' + h_kmd + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function HelpHlaodpad()
-                {
-
-window.open('../dokumenty/vykazy2010/navod_hlasenie.pdf',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function XLSHlaodpad()
-                {
-
-window.open('../dokumenty/vykazy2010/xls_hlasenie.rar',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
+//vykaz E(MZSR)1-04
+  function Emzsr104Uprav()
+  {
+   window.open('../ucto/statistika_e104.php?copern=1&drupoh=1&page=1', '_blank');
+  }
 
 //statistika 1304
 <?php
 $rok1304="";
-if( $kli_vrok < 2016 ) $rok1304="_2015";
-if( $kli_vrok < 2014 ) $rok1304="_2013";
-if( $kli_vrok < 2012 ) $rok1304="_2011";
+if ( $kli_vrok < 2016 ) $rok1304="_2015";
+if ( $kli_vrok < 2014 ) $rok1304="_2013";
+if ( $kli_vrok < 2012 ) $rok1304="_2011";
 ?>
 
 function stat1304()
@@ -680,14 +757,38 @@ window.open('fin112nujpoddbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&
 
 
 <?php                        } ?>
-//koniec vykzy FIN NUJ 2013
+//koniec vykazy FIN NUJ 2013
 
 
 </script>
 </HEAD>
-<BODY class="white" >
+<BODY>
+<!-- zahlavie -->
+<div class="wrap-heading">
+ <div class="ilogin">
+  <h6 class="toleft">EuroSecom</h6>
+  <h6 class="toright">
+   <strong>UME</strong><?php echo $kli_vume; ?>
+   <strong>FIR</strong><?php echo "$kli_vxcf:$kli_nxcf"; ?>
+   <strong>login</strong><?php echo "$kli_uzmeno $kli_uzprie / $kli_uzid"; ?>
+  </h6>
+ </div>
+ <div class="heading">
+  <h1 class="toleft">Štatistika a výkazníctvo</h1>
+  <dl class="toright legend-area">
+ 	 <dt class="toleft box-blue"></dt><dd class="toleft">Zobraziť v pdf</dd>
+	 <dt class="toleft box-brown"></dt><dd class="toleft">Nastaviť</dd>
+	 <dt class="toleft box-green"></dt><dd class="toleft">Upraviť</dd>
+	 <dt class="toleft box-red"></dt><dd class="toleft">Export</dd>
+	 <dt class="toleft box-lightblue"></dt><dd class="toleft">Načítať</dd>
+  </dl>
+ </div>
+</div> <!-- .wrap-heading -->
 
-<?php 
+<div class="content">
+<?php $dnes = Date("d.m.Y", MkTime(date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
+
+<?php
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendens'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendensx'.$kli_uzid;
@@ -716,433 +817,391 @@ $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsy'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
-
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphs'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphsx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
-
 ?>
+<!-- suhrnny dph -->
+<div class="line-area" style="margin-bottom:8px;">
+<FORM name="formp3" method="post" action="#">
+<a href="#" onclick="TlacSuhrn();" title="Tlač vo formáte PDF - len pre informáciu musíte tlačiť z FDF alebo z WEBu www.drsr.sk <?php echo $mena1; ?>á + centy - zobraziť v PDF - zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a> <!-- dopyt, iný text v title -->
+<div class="toleft line-box-text">
+<div>
+ <strong>Súhrnný výkaz DPH</strong>
+ <img src="../obr/info.png" title="SVDPH verzia 10_1">
+</div>
+<div>
+ <select size="1" name="h_drp" id="h_drp">
+  <option value="1">Riadny</option>
+  <option value="2">Opravný</option>
+  <option value="3">Dodatočný</option>
+ </select>
+</div>
+<div>
+ <label for="h_zos">Zostavený:</label>
+ <input type="text" name="h_dap" id="h_dap" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
+        value="<?php echo $dnes; ?>"/>
+</div>
+<div>
+ <select size="1" name="h_oc" id="h_oc">
+  <option value="1">1. štvrťrok</option>
+  <option value="2">2. štvrťrok</option>
+  <option value="3">3. štvrťrok</option>
+  <option value="4">4. štvrťrok</option>
+  <option value="5">mesačný <?php echo $kli_vume; ?></option>
+ </select>
+</div>
+</div>
+<a href="#" onclick="SuborSuhrn();" title="Export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+</FORM>
+</div> <!-- .line-area suhrnny dph -->
 
+<div class="line-area">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Prod 13-04 <span style="font-weight:normal;">Štvrťročný výkaz produkčných odvetví v malých podnikoch</span></strong>
+ <img src="../obr/info.png" title="Prod 13-04 verzia 2016">
+</div>
+</div>
+<a href="#" onclick="stat1304();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area -->
 
+<div class="line-area">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>E (MZSR) 1-04 <span style="font-weight:normal;">Štvrťročný výkaz o ekonomike organizácií v zdravotníctve pre NO</span></strong>
+ <img src="../obr/info.png" title="E(MZSR) 1-04">
+</div>
+</div>
+<a href="#" onclick="Emzsr104Uprav();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area -->
 
+<div class="line-area">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Prod 3-04 <span style="font-weight:normal;">Štvrťročný výkaz produkčných odvetví</span></strong>
+ <img src="../obr/info.png" title="Prod 13-04 verzia 2016">
+</div>
+</div>
+<a href="#" onclick="stat304();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area -->
 
+<div class="line-area">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>VTS 1-12 <span style="font-weight:normal;">Mesačný výkaz vo vybraných trhových službách</span></strong>
+ <img src="../obr/info.png" title="VTS 1-12 verzia 2016">
+</div>
+</div>
+<a href="#" onclick="statvts112();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area -->
 
-<table class="h2" width="100%" >
-<tr>
-<td>EuroSecom  -  Finančné účtovníctvo - Štatistika a výkazníctvo</td>
-<td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
-</tr>
-</table>
-<br />
+<div class="line-area">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>OPU 1-12 <span style="font-weight:normal;">Mesačný výkaz v obchode, pohostinstve a v ubytovaní</span></strong>
+ <img src="../obr/info.png" title="OPU 1-12 verzia 2016">
+</div>
+</div>
+<a href="#" onclick="statOPU112();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area -->
 
+<div class="line-area">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Roč OPU 2-01 <span style="font-weight:normal;">Ročný výkaz produkčných odvetví v malých podnikoch v obchode ...</span></strong>
+ <img src="../obr/info.png" title="Roč OPU 2-01 verzia 2015">
+</div>
+</div>
+<a href="#" onclick="statopu201();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area -->
 
+<div class="line-area">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Roč VTS 1-01 <span style="font-weight:normal;">Ročný výkaz produkčných odvetví vo vybraných trhových službách</span></strong>
+ <img src="../obr/info.png" title="Roč VTS 1-01 verzia 2015">
+</div>
+</div>
+<a href="#" onclick="statvts101();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area -->
+
+<div class="line-area" style="margin-bottom:8px;">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Roč ZAV 1-01 <span style="font-weight:normal;">Ročný závodný výkaz produkčných odvetví</span></strong>
+ <img src="../obr/info.png" title="Roč ZAV 1-01 verzia 2015">
+</div>
+</div>
+<a href="#" onclick="statzav101();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area -->
 
 <?php
-$versuh="09_1";
-if( $kli_vrok > 2009 ) $versuh="10_1";
+//VYKAZY FIN NUJ rok 2016
+if ( $kli_vrok >= 2013 AND $dajfinvykazy == 1 )
+{
 ?>
-
-<table class="vstup" width="100%" >
-<FORM name="formp3" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacSuhrn();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Tlač vo formáte PDF - len pre informáciu musíte tlačiť z FDF alebo z WEBu www.drsr.sk' ></a>
-<td class="bmenu" width="2%">
-<a href="#" onClick="FDFSuhrn();">
-<img src='../obr/orig.png' width=20 height=15 border=0 title='Súbory FDF pre tlač vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="98%">Súhrnný výkaz Daň z pridanej hodnoty verzia SVDPHv<?php echo $versuh;?>
- <select size="1" name="h_drp" id="h_drp" >
-<option value="1" >Riadne</option>
-<option value="2" >Opravné</option>
-<option value="3" >Dodatočné</option>
-</select>
-<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Dátum: <input type="text" name="h_dap" id="h_dap" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
-
-<select size="1" name="h_oc" id="h_oc" >
-<option value="1" >1.štvrťrok</option>
-<option value="2" >2.štvrťrok</option>
-<option value="3" >3.štvrťrok</option>
-<option value="4" >4.štvrťrok</option>
-<option value="5" >mesačný <?php echo $kli_vume;?></option>
-</select>
-
- <a href="#" onClick="TlacPotvrdSuhrn();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť potvrdenie o podaní Súhrnného výkazu" ></a>
-
-<td class="bmenu" width="2%">
-<a href="#" onClick="SuborSuhrn();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='XML súbor pre elektronickú komunikáciu' ></a>
-</td>
-
-</tr>
+<div class="line-area"> <!-- fin 1-12 -->
+<FORM name="formfin112" method="post" action="#">
+<a href="#" onclick="TlacFin112();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>FIN 1-12 <span style="font-weight:normal;">Finančný výkaz o príjmoch, výdavkoch a finančných operáciách</span></strong>
+ <img src="../obr/info.png" title="FIN 1-12 verzia 2016">
+</div>
+<div>
+ <select size="1" name="h_oc" id="h_oc">
+  <option value="1">1.štvrťrok</option>
+  <option value="2">2.štvrťrok</option>
+  <option value="3">3.štvrťrok</option>
+  <option value="4">4.štvrťrok</option>
+ </select>
+</div>
+</div>
+<a href="#" onclick="ZnovuFin112();" title="Načítať údaje"
+   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
+<a href="#" onclick="DbfFin112nujpod();" title="Export do DBF"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravFin112();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </FORM>
-</table>
+</div> <!-- .line-area -->
 
+<div class="line-area">
+<FORM name="formfin204no16" method="post" action="#">
+<a href="#" onclick="TlacFin204no16();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>FIN 2-04 NO <span style="font-weight:normal;">Finančný výkaz o vybraných údajoch z aktív a z pasív</span></strong>
+ <img src="../obr/info.png" title="FIN 2-04 NO verzia 2016">
+</div>
+<div>
+ <select size="1" name="h_oc" id="h_oc">
+  <option value="1">1.štvrťrok</option>
+  <option value="2">2.štvrťrok</option>
+  <option value="3">3.štvrťrok</option>
+  <option value="4">4.štvrťrok</option>
+ </select>
+</div>
+</div>
+<a href="#" onclick="ZnovuFin204no16();" title="Načítať údaje"
+   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
+<a href="#" onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=92&page=1&sysx=UCT', '_blank');"
+   title="Nastaviť generovanie"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+<a href="#" onclick="DbfFin204no16();" title="Export do DBF"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravFin204no16();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</FORM>
+</div> <!-- .line-area -->
 
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="stat1304();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Vytvorenie štatistického výkazu P 13-04" ></a>
-</td>
-<td class="bmenu" width="90%">ŠTATISTIKA - Štvrťročný výkaz produkčných odvetví v malých podnikoch P13-04</td>
-</tr>
-</table>
+<div class="line-area">
+<FORM name="formfin204pod16" method="post" action="#">
+<a href="#" onclick="TlacFin204pod16();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>FIN 2-04 POD <span style="font-weight:normal;">Finančný výkaz o vybraných údajoch z aktív a z pasív</span></strong>
+ <img src="../obr/info.png" title="FIN 2-04 POD verzia 2016">
+</div>
+<div>
+ <select size="1" name="h_oc" id="h_oc">
+  <option value="1">1.štvrťrok</option>
+  <option value="2">2.štvrťrok</option>
+  <option value="3">3.štvrťrok</option>
+  <option value="4">4.štvrťrok</option>
+ </select>
+</div>
+</div>
+<a href="#" onclick="ZnovuFin204pod16();" title="Načítať údaje"
+   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
+<a href="#" onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=91&page=1&sysx=UCT', '_blank');"
+   title="Nastaviť generovanie"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+<a href="#" onclick="DbfFin204pod16();" title="Export do DBF"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravFin204pod16();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</FORM>
+</div> <!-- .line-area -->
 
+<div class="line-area">
+<FORM name="formfin304" method="post" action="#">
+<a href="#" onclick="TlacFin304();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>FIN 3-04 <span style="font-weight:normal;">Finančný výkaz o finančných aktívach podľa sektorov</span></strong>
+ <img src="../obr/info.png" title="FIN 3-04 verzia 2016">
+</div>
+<div>
+ <select size="1" name="h_oc" id="h_oc">
+  <option value="1">1.štvrťrok</option>
+  <option value="2">2.štvrťrok</option>
+  <option value="3">3.štvrťrok</option>
+  <option value="4">4.štvrťrok</option>
+ </select>
+</div>
+</div>
+<a href="#" onclick="ZnovuFin304();" title="Načítať údaje"
+   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
+<a href="#" onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=93&page=1&sysx=UCT', '_blank');"
+   title="Nastaviť generovanie"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+<a href="#" onclick="DbfFin304();" title="Export do DBF"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravFin304();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</FORM>
+</div> <!-- .line-area -->
 
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/statistika_e104.php?copern=1&drupoh=1&page=1', '_blank', '<?php echo $tlcuwin; ?>' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Vytvorenie štatistického výkazu E(MZ SR) 1-04" ></a>
-</td>
-<td class="bmenu" width="90%">ŠTATISTIKA - Štvrťročný výkaz o ekonomike organizácií v zdravotníctve pre neziskové organizácie E(MZ SR) 1-04</td>
-</tr>
-</table>
+<div class="line-area">
+<FORM name="formfin404" method="post" action="#">
+<a href="#" onclick="TlacFin404();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>FIN 4-04 <span style="font-weight:normal;">Finančný výkaz o finančných pasívach podľa sektorov</span></strong>
+ <img src="../obr/info.png" title="FIN 4-04 verzia 2016">
+</div>
+<div>
+ <select size="1" name="h_oc" id="h_oc">
+  <option value="1">1.štvrťrok</option>
+  <option value="2">2.štvrťrok</option>
+  <option value="3">3.štvrťrok</option>
+  <option value="4">4.štvrťrok</option>
+ </select>
+</div>
+</div>
+<a href="#" onclick="ZnovuFin404();" title="Načítať údaje"
+   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
+<a href="#" onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=94&page=1&sysx=UCT', '_blank');"
+   title="Nastaviť generovanie"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+<a href="#" onclick="DbfFin404();" title="Export do DBF"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravFin404();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</FORM>
+</div> <!-- .line-area -->
 
+<div class="line-area">
+<FORM name="formfin504" method="post" action="#">
+<a href="#" onclick="TlacFin504();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>FIN 5-04 <span style="font-weight:normal;">Finančný výkaz o dlhových nástrojoch a vybraných záväzkoch</span></strong>
+ <img src="../obr/info.png" title="FIN 5-04 verzia 2016">
+</div>
+<div>
+ <select size="1" name="h_oc" id="h_oc">
+  <option value="1">1.štvrťrok</option>
+  <option value="2">2.štvrťrok</option>
+  <option value="3">3.štvrťrok</option>
+  <option value="4">4.štvrťrok</option>
+ </select>
+</div>
+</div>
+<a href="#" onclick="" title="Načítať údaje"
+   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
+<a href="#" onclick=""
+   title="Nastaviť generovanie"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+<a href="#" onclick="DbfFin504();" title="Export do DBF"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravFin504();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</FORM>
+</div> <!-- .line-area -->
 
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="stat304();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Vytvorenie štatistického výkazu Prod 3-04" ></a>
-</td>
-<td class="bmenu" width="90%">ŠTATISTIKA - Štvrťročný výkaz produkčných odvetví Prod 3-04</td>
-</tr>
-</table>
-
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="statvts112();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Vytvorenie štatistického výkazu VTS 1-12" ></a>
-</td>
-<td class="bmenu" width="90%">ŠTATISTIKA - MESAČNÝ VÝKAZ VO VYBRANÝCH TRHOVÝCH SLUŽBÁCH VTS 1-12</td>
-</tr>
-</table>
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="statOPU112();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Vytvorenie štatistického výkazu OPU 1-12" ></a>
-</td>
-<td class="bmenu" width="90%">ŠTATISTIKA - MESAČNÝ VÝKAZ v obchode, pohostinstve a v ubytovaní OPU 1-12</td>
-</tr>
-</table>
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="statopu201();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Vytvorenie štatistického výkazu OPU 2-01" ></a>
-</td>
-<td class="bmenu" width="90%">ŠTATISTIKA - ROČNÝ VÝKAZ produkčných odvetví v malých podnikoch v obchode, pohostinstve a v ubytovaní OPU 2-01</td>
-</tr>
-</table>
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="statvts101();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Vytvorenie štatistického výkazu VTS 1-01" ></a>
-</td>
-<td class="bmenu" width="90%">ŠTATISTIKA - ROČNÝ VÝKAZ produkčných odvetví vo vybraných trhových službách VTS 1-01</td>
-</tr>
-</table>
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="statzav101();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Vytvorenie štatistického výkazu VTS 1-01" ></a>
-</td>
-<td class="bmenu" width="90%">ŠTATISTIKA - ROČNÝ závodný výkaz vo veľkých podnikoch ZAV 1-01</td>
-</tr>
-</table>
-
-
-
-<?php 
-//VYKAZY FIN NUJ rok2013
-if( $kli_vrok >= 2013 AND $dajfinvykazy == 1 ) { 
+<?php
+if ( $kli_vrok >= 2013 ) {
 ?>
-
-<table class="vstup" width="100%" >
-<FORM name="formfin112" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacFin112();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="98%">Finančný výkaz o plnení rozpočtu a o nerozpočtovaných pohyboch na účtoch subjektu verejnej správy FIN 1 - 12 NUJPOD
- <select size="1" name="h_oc" id="h_oc" >
-<option value="1" >1.štvrťrok</option>
-<option value="2" >2.štvrťrok</option>
-<option value="3" >3.štvrťrok</option>
-<option value="4" >4.štvrťrok</option>
-</select>
-<a href="#" onClick="DbfFin112nujpod();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru' ></a>
-
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="UpravFin112();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviť hodnoty ' ></a>
-</td>
-
-<td class="bmenu" width="2%">
-<a href="#" onClick="ZnovuFin112();">
-<img src='../obr/orig.png' width=20 height=15 border=0 title='Načítať hodnoty  - môžete opakovať viackrát' ></a>
-</td>
-</tr>
+<div class="line-area">
+<FORM name="formfin604" method="post" action="#">
+<a href="#" onclick="" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>FIN 6-04 <span style="font-weight:normal;">Finančný výkaz o bankových účtoch a záväzkoch</span></strong>
+ <img src="../obr/info.png" title="FIN 6-04 verzia 2016">
+</div>
+<div>
+ <select size="1" name="h_oc" id="h_oc">
+  <option value="1">1.štvrťrok</option>
+  <option value="2">2.štvrťrok</option>
+  <option value="3">3.štvrťrok</option>
+  <option value="4">4.štvrťrok</option>
+ </select>
+</div>
+</div>
+<a href="#" onclick="" title="Načítať údaje"
+   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
+<a href="#" onclick=""
+   title="Nastaviť generovanie"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+<a href="#" onclick="" title="Export do DBF"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </FORM>
-</table>
+</div> <!-- .line-area -->
 
-
-<table class="vstup" width="100%" >
-<FORM name="formfin204no16" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacFin204no16();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="98%">Finančný výkaz o vybraných údajoch z aktív a pasív subjektu verejnej správy FIN 2 - 04 NO
- <select size="1" name="h_oc" id="h_oc" >
-<option value="1" >1.štvrťrok</option>
-<option value="2" >2.štvrťrok</option>
-<option value="3" >3.štvrťrok</option>
-<option value="4" >4.štvrťrok</option>
-</select>
-<a href="#" onClick="DbfFin204no16();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru' ></a>
-
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/fin_cis.php?copern=308&drupoh=92&page=1&sysx=UCT', '_blank' );">
-<img src='../obr/naradie.png' width=20 height=15 border=0 title='Generovanie' ></a>
-</td>
-
-<td class="bmenu" width="2%">
-<a href="#" onClick="UpravFin204no16();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviť hodnoty ' ></a>
-</td>
-
-<td class="bmenu" width="2%">
-<a href="#" onClick="ZnovuFin204no16();">
-<img src='../obr/orig.png' width=20 height=15 border=0 title='Načítať hodnoty  - môžete opakovať viackrát' ></a>
-</td>
-</tr>
+<div class="line-area">
+<FORM name="formfin704" method="post" action="#">
+<a href="#" onclick="TlacFin704();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>FIN 7-04 <span style="font-weight:normal;">Finančný výkaz o vybraných údajoch z účtovníctva</span></strong>
+ <img src="../obr/info.png" title="FIN 7-04 verzia 2016">
+</div>
+<div>
+ <select size="1" name="h_oc" id="h_oc">
+  <option value="1">1.štvrťrok</option>
+  <option value="2">2.štvrťrok</option>
+  <option value="3">3.štvrťrok</option>
+  <option value="4">4.štvrťrok</option>
+ </select>
+</div>
+</div>
+<a href="#" onclick="" title="Načítať údaje"
+   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
+<a href="#" onclick=""
+   title="Nastaviť generovanie"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+<a href="#" onclick="" title="Export do DBF"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formfin204pod16" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacFin204pod16();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="98%">Finančný výkaz o vybraných údajoch z aktív a pasív subjektu verejnej správy FIN 2 - 04 POD
- <select size="1" name="h_oc" id="h_oc" >
-<option value="1" >1.štvrťrok</option>
-<option value="2" >2.štvrťrok</option>
-<option value="3" >3.štvrťrok</option>
-<option value="4" >4.štvrťrok</option>
-</select>
-<a href="#" onClick="DbfFin204pod16();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru' ></a>
-
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/fin_cis.php?copern=308&drupoh=91&page=1&sysx=UCT', '_blank' );">
-<img src='../obr/naradie.png' width=20 height=15 border=0 title='Generovanie' ></a>
-</td>
-
-<td class="bmenu" width="2%">
-<a href="#" onClick="UpravFin204pod16();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviť hodnoty ' ></a>
-</td>
-
-<td class="bmenu" width="2%">
-<a href="#" onClick="ZnovuFin204pod16();">
-<img src='../obr/orig.png' width=20 height=15 border=0 title='Načítať hodnoty  - môžete opakovať viackrát' ></a>
-</td>
-</tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formfin304" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacFin304();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="98%">Finančný výkaz o finančných aktívach podľa sektorov FIN 3 - 04
- <select size="1" name="h_oc" id="h_oc" >
-<option value="1" >1.štvrťrok</option>
-<option value="2" >2.štvrťrok</option>
-<option value="3" >3.štvrťrok</option>
-<option value="4" >4.štvrťrok</option>
-</select>
-<a href="#" onClick="DbfFin304();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru' ></a>
-
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/fin_cis.php?copern=308&drupoh=93&page=1&sysx=UCT', '_blank' );">
-<img src='../obr/naradie.png' width=20 height=15 border=0 title='Generovanie' ></a>
-</td>
-
-<td class="bmenu" width="2%">
-<a href="#" onClick="UpravFin304();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviť hodnoty ' ></a>
-</td>
-
-<td class="bmenu" width="2%">
-<a href="#" onClick="ZnovuFin304();">
-<img src='../obr/orig.png' width=20 height=15 border=0 title='Načítať hodnoty  - môžete opakovať viackrát' ></a>
-</td>
-</tr>
-</FORM>
-</table>
+</div> <!-- .line-area -->
 
 
-<table class="vstup" width="100%" >
-<FORM name="formfin404" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacFin404();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="98%">Finančný výkaz o finančných pasívach podľa sektorov FIN 4 - 04
- <select size="1" name="h_oc" id="h_oc" >
-<option value="1" >1.štvrťrok</option>
-<option value="2" >2.štvrťrok</option>
-<option value="3" >3.štvrťrok</option>
-<option value="4" >4.štvrťrok</option>
-</select>
-<a href="#" onClick="DbfFin404();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru' ></a>
-
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/fin_cis.php?copern=308&drupoh=94&page=1&sysx=UCT', '_blank' );">
-<img src='../obr/naradie.png' width=20 height=15 border=0 title='Generovanie' ></a>
-</td>
-
-<td class="bmenu" width="2%">
-<a href="#" onClick="UpravFin404();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviť hodnoty ' ></a>
-</td>
-
-<td class="bmenu" width="2%">
-<a href="#" onClick="ZnovuFin404();">
-<img src='../obr/orig.png' width=20 height=15 border=0 title='Načítať hodnoty  - môžete opakovať viackrát' ></a>
-</td>
-</tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formfin504" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacFin504();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="98%">Finančný výkaz o dlhových nástrojoch a vybraných záväzkoch FIN 5 - 04
- <select size="1" name="h_oc" id="h_oc" >
-<option value="1" >1.štvrťrok</option>
-<option value="2" >2.štvrťrok</option>
-<option value="3" >3.štvrťrok</option>
-<option value="4" >4.štvrťrok</option>
-</select>
-<a href="#" onClick="DbfFin504();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru' ></a>
-
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="UpravFin504();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upraviť hodnoty ' ></a>
-</td>
-
-<td class="bmenu" width="2%">
-
-</td>
-</tr>
-</FORM>
-</table>
-
-<?php 
-if( $kli_vrok >= 2013 ) { 
-?>
-
-<table class="vstup" width="100%" >
-<FORM name="formfin604" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacFin604();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="98%">Finančný výkaz o bankových účtoch a záväzkoch FIN 6 - 04
- <select size="1" name="h_oc" id="h_oc" >
-<option value="1" >1.štvrťrok</option>
-<option value="2" >2.štvrťrok</option>
-<option value="3" >3.štvrťrok</option>
-<option value="4" >4.štvrťrok</option>
-</select>
-<a href="#" onClick="">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru' ></a>
-
-</td>
-<td class="bmenu" width="2%">
-
-</td>
-
-<td class="bmenu" width="2%">
-
-</td>
-</tr>
-</FORM>
-</table>
-
-
-<table class="vstup" width="100%" >
-<FORM name="formfin704" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacFin704();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="98%">Finančný výkaz o vybraných údajoch z účtovníctva FIN 7 - 04
- <select size="1" name="h_oc" id="h_oc" >
-<option value="1" >1.štvrťrok</option>
-<option value="2" >2.štvrťrok</option>
-<option value="3" >3.štvrťrok</option>
-<option value="4" >4.štvrťrok</option>
-</select>
-<a href="#" onClick="">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru' ></a>
-
-</td>
-<td class="bmenu" width="2%">
-
-</td>
-
-<td class="bmenu" width="2%">
-
-</td>
-</tr>
-</FORM>
-</table>
-
+<!-- dopyt, toto mám upraviť, alebo nie, či som nemal ten vyššie fin 1-12 -->
 <table class="vstup" width="100%" >
 <FORM name="formfin1a12" class="obyc" method="post" action="#" >
 <tr>
@@ -1198,103 +1257,85 @@ $nedaj=1;
 </table>
 
 <?php 
-                        }
+                          }
 ?>
 
 <?php 
-//KONIEC VYKAZY FIN NUJ rok2013
-                       } 
+//KONIEC VYKAZY FIN NUJ rok2016
+}
 ?>
 
-
-
-<table class="vstup" width="100%" >
-<FORM name="formhlaodpad" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-
-<?php if( $tlacodpady == 1 ) { ?>
-
-<a href="#" onClick="TlacHlaodpad();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-
-<?php                        } ?>
-
-</td>
-<td class="bmenu" width="50%">HLÁSENIE o objeme výroby, dovozu, vývozu a reexportu
- <select size="1" name="h_oc" id="h_oc" >
-<option value="1" >1.štvrťrok</option>
-<option value="2" >2.štvrťrok</option>
-<option value="3" >3.štvrťrok</option>
-<option value="4" >4.štvrťrok</option>
-</select>
-
-<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Dátum podpisu: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
-
-</td>
-
-<td class="bmenu" width="48%">Komodita: 
- <select size="1" name="h_kmd" id="h_kmd" >
-<option value="0" >všetky komodity</option>
-<option value="1" >obaly z papiera</option>
-
-<option value="2" >obaly z plastov</option>
-
-<option value="3" >obaly z kovu Al</option>
-
-<option value="4" >obaly z kovu Fe</option>
-
-<option value="5" >obaly zo skla</option>
-
-<option value="6" >viacvrstv.obaly</option>
-
-<option value="7" >elektroz. tr1</option>
-<option value="8" >elektroz. tr2</option>
-<option value="9" >elektroz. tr3</option>
-<option value="10" >elektroz. tr4</option>
-<option value="11" >elektroz. tr5 sv.zdroje</option>
-<option value="12" >elektroz. tr6</option>
-<option value="13" >elektroz. tr7</option>
-<option value="14" >elektroz. tr8</option>
-<option value="15" >elektroz. tr9</option>
-<option value="16" >batérie pren.</option>
-<option value="17" >batérie priem.</option>
-<option value="18" >batérie auto</option>
-<option value="19" >pneumatiky</option>
-<option value="20" >oleje</option>
-<option value="21" >sklo tovar</option>
-<option value="22" >viacvrst.mat.</option>
-<option value="23" >papier tovar</option>
-<option value="24" >plasty tovar</option>
-<option value="25" >elektroz. tr5 svietidlá</option>
-</select>
-
-<a href="#" onClick="HelpHlaodpad();">HELP
-<img src='../obr/pdf.png' width=20 height=15 border=0 title='Návod na obsluhu hlásenia' ></a>
-
-<a href="#" onClick="XLSHlaodpad();">XLS
-<img src='../obr/orig.png' width=20 height=15 border=0 title='XLS súbory pre nahrávanie bez Internetu' ></a>
-
-</td>
-
-<td class="bmenu" width="2%">
-<a href="#" onClick="UpravHlaodpad();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Nahrávanie údajov ' ></a>
-</td>
-
-</tr>
+<div class="line-area"> <!-- dopyt, rozšíriť ľavú časť -->
+<FORM name="formhlaodpad" method="post" action="#">
+<?php if ( $tlacodpady == 1 ) { ?>
+<a href="#" onclick="TlacHlaodpad();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<?php                         } ?>
+<div class="toleft line-box-text">
+<div>
+ <strong>Hlásenie <span style="font-weight:normal;">o objeme výroby, dovozu, vývozu a reexportu</span></strong>
+ <img src="../obr/info.png" title="">
+</div>
+<div>
+ <select size="1" name="h_oc" id="h_oc">
+  <option value="1">1.štvrťrok</option>
+  <option value="2">2.štvrťrok</option>
+  <option value="3">3.štvrťrok</option>
+  <option value="4">4.štvrťrok</option>
+ </select>
+</div>
+<div>
+ <label for="h_zos">Podpis:</label>
+ <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
+        value="<?php echo $dnes; ?>"/>
+</div>
+<div>
+ <label for="h_kmd">Komodita:</label>
+ <select size="1" name="h_kmd" id="h_kmd">
+  <option value="0">všetky komodity</option>
+  <option value="1">obaly z papiera</option>
+  <option value="2">obaly z plastov</option>
+  <option value="3">obaly z kovu Al</option>
+  <option value="4">obaly z kovu Fe</option>
+  <option value="5">obaly zo skla</option>
+  <option value="6">viacvrstv.obaly</option>
+  <option value="7">elektroz. tr1</option>
+  <option value="8">elektroz. tr2</option>
+  <option value="9">elektroz. tr3</option>
+  <option value="10">elektroz. tr4</option>
+  <option value="11">elektroz. tr5 sv.zdroje</option>
+  <option value="12">elektroz. tr6</option>
+  <option value="13">elektroz. tr7</option>
+  <option value="14">elektroz. tr8</option>
+  <option value="15">elektroz. tr9</option>
+  <option value="16">batérie pren.</option>
+  <option value="17">batérie priem.</option>
+  <option value="18">batérie auto</option>
+  <option value="19">pneumatiky</option>
+  <option value="20">oleje</option>
+  <option value="21">sklo tovar</option>
+  <option value="22">viacvrst.mat.</option>
+  <option value="23">papier tovar</option>
+  <option value="24">plasty tovar</option>
+  <option value="25">elektroz. tr5 svietidlá</option>
+ </select>
+</div>
+</div>
+<a href="#" onclick="HelpHlaodpad();" title="Návod na obsluhu"
+   class="toleft line-box box-bluedefault"><img src="../obr/info.png"></a>
+<a href="#" onclick="XLSHlaodpad();" title="XLS súbory pre offline nahrávanie"
+   class="toleft line-box box-bluedefault"><img src="../obr/info.png"></a>
+<a href="#" onclick="UpravHlaodpad();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </FORM>
-</table>
+</div> <!-- .line-area -->
 
-
-<br /><br />
+</div> <!-- .content -->
 <?php
-// celkovy koniec dokumentu
+//celkovy koniec dokumentu
 
 $zmenume=1; $odkaz="../ucto/statzos.php?copern=1&drupoh=1&page=1&sysx=UCT";
-$cislista = include("uct_lista.php");
-
+$cislista = include("uct_lista_norm.php");
        } while (false);
 ?>
 </BODY>
