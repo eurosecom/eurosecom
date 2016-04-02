@@ -600,13 +600,6 @@ var vyskawin = screen.height-90;
   var okno = window.open('../sklad/zmenapriemer_pdf.php?copern=20&&xx=1',"_blank", 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
-    function KontrolaPoUme()
-    {
-    datum=document.ekont.h_datpo.value;
-
-    window.open('../sklad/sklad_kontrol.php?copern=50&drupoh=1&datum=' + datum + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-
-    }
 
 </script>
 </HEAD>
@@ -623,13 +616,17 @@ var vyskawin = screen.height-90;
 
 <?php
 //kontrola nahrate po datume
-if ( $copern == 1 )
+if ( $copern == 1 OR $copern == 25 )
      {
+
 $dnesoktime = Date ("d.m.Y H.s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
 ?>
 <div id="nastavdakx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 170px; left: 100px; width:500px; height:300px;">
-<table  class='ponuka' width='100%'><tr><td width='90%'>Menu EkoRobot</td>
+<table  class='ponuka' width='100%'>
+<FORM name='ekont' method='post' action='#' >
+<tr><td width='90%'>Menu EkoRobot</td>
+
 <td width='10%' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;' onClick='zhasni_menurobot();' title='Zhasni menu' ></td></tr>  
 
 <tr><td width='100%' class='ponuka' colspan='2'> 
@@ -652,10 +649,12 @@ Chcete zoznam presuniek materiálu  ?</a>
 
 <tr><td class='ponuka' colspan='2'>
 Chcete skontrolova 
-<a href="#" onClick="window.open('../sklad/sklad_kontrol.php?copern=40&drupoh=1&page=1', '_blank' )">
-doklady z <?php echo $vyb_ume; ?> nahraté po dátume <input type='text' name='h_datpo' id='h_datpo' size='15' maxlenght='15' value='<?php echo $dnesoktime; ?>' >
-</a> ?
-</td></tr> 
+<a href="#" onClick="KontrolaPoUme();", '_blank' )">
+doklady z <?php echo $vyb_ume; ?> nahraté po dátume</a> <input type='text' name='h_datpo' id='h_datpo' size='15' maxlenght='15' value='<?php echo $dnesoktime; ?>' >
+ ?
+</td>
+</FORM>
+</tr> 
 
 
 <tr><td width='100%' class='ponuka' colspan='2'> 
@@ -666,6 +665,17 @@ Priemerné ceny <?php echo $vyb_ume; ?> / nákupné ceny</a> ?
 
 </table>  
 </div>
+
+<script type="text/javascript">
+    function KontrolaPoUme()
+    {
+    var datum=document.ekont.h_datpo.value;
+
+    window.open('../sklad/sklad_kontrol.php?copern=50&drupoh=1&datum=' + datum + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+
+    }
+
+</script>
 <?php
      }
 //koniec kontrola nahrate po datume
@@ -744,7 +754,7 @@ if( $newmenu == 1 )
 
 <div id="progmenu1" style="cursor: hand; display: none; position: absolute; z-index: 300; top: 80; left: 20; width:300; height:150;">
 <table class='pmenu' width='100%'>
-<FORM name='znew' method='post' action='#' >
+<FORM name='znew1' method='post' action='#' >
 <tr><td width='90%' onClick='M1ZhasniMenu();'>Menu Vstup dát</td>
 <td width='10%' align='right' onClick='M1ZhasniMenu();'>
 <img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M1ZhasniMenu();' alt='Zhasni menu' ></td></tr>  
@@ -765,7 +775,7 @@ if( $newmenu == 1 )
 
 <div id="progmenu2" style="cursor: hand; display: none; position: absolute; z-index: 300; top: 80; left: 300; width:300; height:150;">
 <table class='pmenu' width='100%'>
-<FORM name='znew' method='post' action='#' >
+<FORM name='znew2' method='post' action='#' >
 <tr><td width='90%' onClick='M2ZhasniMenu();'>Menu Mesaèné spracovanie</td>
 <td width='10%' align='right' onClick='M2ZhasniMenu();'>
 <img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M2ZhasniMenu();' alt='Zhasni menu' ></td></tr>  
@@ -785,7 +795,7 @@ if( $newmenu == 1 )
 
 <div id="progmenu3" style="cursor: hand; display: none; position: absolute; z-index: 300; top: 80; left: 470; width:300; height:150;">
 <table class='pmenu' width='100%'>
-<FORM name='znew' method='post' action='#' >
+<FORM name='znew3' method='post' action='#' >
 <tr><td width='90%' onClick='M3ZhasniMenu();'>Menu Informácie a vıstupy</td>
 <td width='10%' align='right' onClick='M3ZhasniMenu();'>
 <img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M3ZhasniMenu();' alt='Zhasni menu' ></td></tr>  
@@ -812,7 +822,7 @@ if( $newmenu == 1 )
 
 <div id="progmenu4" style="cursor: hand; display: none; position: absolute; z-index: 300; top: 80; left: 740; width:300; height:150;">
 <table class='pmenu' width='100%'>
-<FORM name='znew' method='post' action='#' >
+<FORM name='znew4' method='post' action='#' >
 <tr><td width='90%' onClick='M4ZhasniMenu();'>Menu Nastavenia a sluby</td>
 <td width='10%' align='right' onClick='M4ZhasniMenu();'>
 <img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M4ZhasniMenu();' alt='Zhasni menu' ></td></tr>  
@@ -838,7 +848,7 @@ if( $newmenu == 1 )
 
 <div id="progmenu5" style="cursor: hand; display: none; position: absolute; z-index: 300; top: 80; left: 900; width:300; height:150;">
 <table class='pmenu' width='100%'>
-<FORM name='znew' method='post' action='#' >
+<FORM name='znew5' method='post' action='#' >
 <tr><td width='90%' onClick='M5ZhasniMenu();'>Menu Èíselníky a údrba</td>
 <td width='10%' align='right' onClick='M5ZhasniMenu();'>
 <img border=0 src='../obr/zmazuplne.png' style='width:15; height:15;' onClick='M5ZhasniMenu();' alt='Zhasni menu' ></td></tr>  
