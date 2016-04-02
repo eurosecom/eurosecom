@@ -599,6 +599,24 @@ window.open('../ucto/vykaz_fin604<?php echo $rokfin604; ?>.php?cislo_oc=' + h_oc
                 }
 
 
+function UpravFin604()
+                {
+var h_oc = document.forms.formfin604.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin604<?php echo $rokfin604; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function ZnovuFin604()
+                {
+var h_oc = document.forms.formfin604.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin604<?php echo $rokfin604; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 //vykaz Fin704
 <?php
 $rokfin704="_2016";
@@ -1142,7 +1160,7 @@ if ( $kli_vrok >= 2013 ) {
 ?>
 <div class="line-area">
 <FORM name="formfin604" method="post" action="#">
-<a href="#" onclick="" title="Zobrazi v PDF"
+<a href="#" onclick="TlacFin604();" title="Zobrazi v PDF"
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <div class="toleft line-box-text">
 <div>
@@ -1158,14 +1176,14 @@ if ( $kli_vrok >= 2013 ) {
  </select>
 </div>
 </div>
-<a href="#" onclick="" title="Naèíta údaje"
+<a href="#" onclick="ZnovuFin604();" title="Naèíta údaje"
    class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
 <a href="#" onclick=""
    title="Nastavi generovanie"
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
 <a href="#" onclick="" title="Export do DBF"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="" title="Upravi hodnoty"
+<a href="#" onclick="UpravFin604();" title="Upravi hodnoty"
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </FORM>
 </div> <!-- .line-area -->
