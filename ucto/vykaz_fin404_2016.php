@@ -81,8 +81,8 @@ crf204nuj_no;
 $sql = 'CREATE TABLE F'.$kli_vxcf.'_genfin404'.$sqlt;
 $vysledek = mysql_query("$sql");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '012', '2' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '014', '2' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '251', '2' ); "; $ulozene = mysql_query("$sqult"); 
+
 
 
 $nacitajgen = 1*$_REQUEST['nacitajgen'];
@@ -418,7 +418,7 @@ $nacitavamhodnoty=1;
 //zober pociatocny stav uctov
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " pmd,$cislo_oc,0,'','','0000-00-00',".
-" 0,0,uce,uce,0,0,0,0,pmd,0,".
+"1,0,uce,uce,0,0,0,0,pmd,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
@@ -432,7 +432,7 @@ $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " -pda,$cislo_oc,0,'','','0000-00-00',".
-" 0,0,uce,uce,0,0,0,0,0,pda,".
+"1,0,uce,uce,0,0,0,0,0,pda,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
@@ -473,7 +473,7 @@ if( $psys <= 6 )
 {
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,$cislo_oc,0,'','','0000-00-00',".
-"0,0,ucm,ucm,0,0,0,0,F$kli_vxcf"."_$uctovanie.hod,0,".
+"2,0,ucm,ucm,0,0,0,0,F$kli_vxcf"."_$uctovanie.hod,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
@@ -487,7 +487,7 @@ $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,$cislo_oc,0,'','','0000-00-00',".
-" 0,0,ucd,0,ucd,0,0,0,0,F$kli_vxcf"."_$uctovanie.hod,".
+"3,0,ucd,0,ucd,0,0,0,0,F$kli_vxcf"."_$uctovanie.hod,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
@@ -505,7 +505,7 @@ else
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,$cislo_oc,0,'','','0000-00-00',".
-" 0,0,ucm,ucm,0,0,0,0,SUM(hod),0,".
+"2,0,ucm,ucm,0,0,0,0,SUM(hod),0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
@@ -519,7 +519,7 @@ $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,$cislo_oc,0,'','','0000-00-00',".
-" 0,0,ucd,0,ucd,0,0,0,0,SUM(hod),".
+"3,0,ucd,0,ucd,0,0,0,0,SUM(hod),".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,".
@@ -547,29 +547,22 @@ $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid,F$kli_vxcf"."_genfin404".
 $oznac = mysql_query("$sqtoz");
 //exit;
 
-//rozdel do riadkov , vypocitaj netto
+
+//rozdel do riadkov 
 
 $rdk=1;
-while ($rdk <= 74 ) 
+while ($rdk <= 10 ) 
   {
 $crdk=$rdk;
 if( $rdk < 10 ) $crdk="0".$rdk;
 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=mdt-dal WHERE rdk = $rdk AND kor = 0 ";
-if( $rdk > 43 ) { $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=dal-mdt WHERE rdk = $rdk "; }
+$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET pocs$crdk=mdt-dal WHERE rdk = $rdk AND kor = 1 ";
 $oznac = mysql_query("$sqtoz");
 
-if( $rdk < 44 ) { 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rk$crdk=dal-mdt WHERE rdk = $rdk AND kor = 1 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET zvys$crdk=mdt-dal WHERE rdk = $rdk AND kor = 2 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rn$crdk=r$crdk-rk$crdk WHERE rdk > 0 ";
-$oznac = mysql_query("$sqtoz");
-
-                }
-
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rm$crdk=px08 WHERE rdk = $rdk ";
-if( $rdk > 43 ) { $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rm$crdk=-px08 WHERE rdk = $rdk "; }
+$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET znis$crdk=-(mdt-dal) WHERE rdk = $rdk AND kor = 3 ";
 $oznac = mysql_query("$sqtoz");
 
 $rdk=$rdk+1;
@@ -620,6 +613,22 @@ $dsql = mysql_query("$dsqlt");
 if ( $copern == 10 OR $copern == 20 )
 {
 
+
+$sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin404 SET ".
+" zoss01=pocs01+zvys01-znis01+oces01+osts01,  ".
+" zoss02=pocs02+zvys02-znis02+oces02+osts02,  ".
+" zoss03=pocs03+zvys03-znis03+oces03+osts03,  ".
+" zoss04=pocs04+zvys04-znis04+oces04+osts04,  ".
+" zoss05=pocs05+zvys05-znis05+oces05+osts05,  ".
+" zoss06=pocs06+zvys06-znis06+oces06+osts06,  ".
+" zoss07=pocs07+zvys07-znis07+oces07+osts07,  ".
+" zoss08=pocs08+zvys08-znis08+oces08+osts08,  ".
+" zoss09=pocs09+zvys09-znis09+oces09+osts09,  ".
+" zoss10=pocs10+zvys10-znis10+oces10+osts10,  ".
+" zoss11=pocs11+zvys11-znis11+oces11+osts11,  ".
+" zoss12=pocs12+zvys12-znis12+oces12+osts12   ".
+" WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 
 }
 //koniec vypocty
