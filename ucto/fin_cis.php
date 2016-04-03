@@ -88,6 +88,20 @@ $gener=1;
 $minul=0;
 }
 
+if( $drupoh == 96 )
+{
+$uctsys="genfin604";
+$gener=1;
+$minul=0;
+}
+
+if( $drupoh == 97 )
+{
+$uctsys="genfin704";
+$gener=1;
+$minul=0;
+}
+
 if( $gener == 1 )
 {
 
@@ -206,6 +220,24 @@ window.open('vykaz_fin404_2016.php?cislo_oc=1&copern=1001&drupoh=1&fmzdy=&page=1
 <?php
       }
 
+if( $drupoh == 96 )
+      {
+?>
+<script type="text/javascript">
+window.open('vykaz_fin604_2016.php?cislo_oc=1&copern=1001&drupoh=1&fmzdy=&page=1&subor=0&strana=1&nacitajgen=1', '_self' ); 
+</script>
+<?php
+      }
+
+if( $drupoh == 97 )
+      {
+?>
+<script type="text/javascript">
+window.open('vykaz_fin704_2016.php?cislo_oc=1&copern=1001&drupoh=1&fmzdy=&page=1&subor=0&strana=1&nacitajgen=1', '_self' ); 
+</script>
+<?php
+      }
+
 exit;
 $copern=308;
     }
@@ -246,6 +278,18 @@ $vysledok = mysql_query("$sql");
 if( $drupoh == 94 )
       {
 $sql = "DELETE FROM F$kli_vxcf"."_genfin404 ";
+$vysledok = mysql_query("$sql");
+      }
+
+if( $drupoh == 96 )
+      {
+$sql = "DELETE FROM F$kli_vxcf"."_genfin604 ";
+$vysledok = mysql_query("$sql");
+      }
+
+if( $drupoh == 97 )
+      {
+$sql = "DELETE FROM F$kli_vxcf"."_genfin704 ";
 $vysledok = mysql_query("$sql");
       }
 
@@ -745,8 +789,9 @@ if ( $drupoh == 91 OR $drupoh == 191 ) $clas1="active";
 if ( $drupoh == 93 OR $drupoh == 193 ) $clas2="active";
 if ( $drupoh == 92 OR $drupoh == 192 ) $clas3="active";
 if ( $drupoh == 94 OR $drupoh == 194 ) $clas4="active";
-if ( $drupoh == 95 OR $drupoh == 195 ) $clas5="active";
-if ( $drupoh == 96 OR $drupoh == 196 ) $clas6="active";
+
+if ( $drupoh == 96 OR $drupoh == 196 ) $clas5="active";
+if ( $drupoh == 97 OR $drupoh == 197 ) $clas6="active";
 $source="../ucto/fin_cis.php?copern=308";
 ?>
 
@@ -760,10 +805,10 @@ $source="../ucto/fin_cis.php?copern=308";
   title="F204no" class="<?php echo $clas3; ?> purple">F204no - Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=94', '_self');"
   title="F304 - Generovanie" class="<?php echo $clas4; ?> purple">F404 - Generovanie</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=95', '_self');"
-  title="Súvaha - syntetické generovanie Aktív a Pasív" class="<?php echo $clas5; ?> darkgreen">S - Generovanie A / P</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=96', '_self');"
+  title="F604 - Generovanie" class="<?php echo $clas5; ?> darkgreen">F604 - Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=96&uprav=1', '_self');"
-  title="Súvaha a VZaS - zaokrúhlenie" class="<?php echo $clas6; ?> darkgray">Zaokrúhlenie S + V</a>
+  title="F704 - Generovanie" class="<?php echo $clas6; ?> darkgray">F704 - Generovanie</a>
 <?php                                        } ?>
 </div>
 
@@ -775,8 +820,8 @@ if ( $drupoh == 91 OR $drupoh == 191 ) { echo "FIN204POD - generovanie"; }
 if ( $drupoh == 93 OR $drupoh == 193 ) { echo "F304 - Generovanie"; }
 if ( $drupoh == 92 OR $drupoh == 192 ) { echo "FIN204NO - generovanie"; }
 if ( $drupoh == 94 OR $drupoh == 194 ) { echo "F404 - Generovanie"; }
-if ( $drupoh == 95 OR $drupoh == 195 ) { echo "Súvaha - syntetické generovanie Aktív a Pasív"; }
-if ( $drupoh == 96 OR $drupoh == 196 ) { echo "Súvaha a Výkaz ziskov a strát - zaokrúhlenie"; }
+if ( $drupoh == 96 OR $drupoh == 196 ) { echo "F604 - Generovanie"; }
+if ( $drupoh == 97 OR $drupoh == 197 ) { echo "F704 - Generovanie"; }
 ?>
    <img src='../obr/info.png' title="EnterNext = klávesou ENTER prejdete na ïalšiu položku">
   </h2>

@@ -583,6 +583,9 @@ window.open('../ucto/vykaz_fin504<?php echo $rokfin504; ?>.php?cislo_oc=' + h_oc
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function ZnovuFin504()
+                {
+                }
 
 //vykaz Fin604
 <?php
@@ -631,7 +634,23 @@ window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function UpravFin704()
+                {
+var h_oc = document.forms.formfin704.h_oc.value;
+var h_fmzdy = 0;
 
+window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function ZnovuFin704()
+                {
+var h_oc = document.forms.formfin704.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
 
 //DBF
 
@@ -699,14 +718,23 @@ window.open('fin504dbf_2016.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&s
 
 function DbfFin604()
                 {
+var h_oc = document.forms.formfin604.h_oc.value;
+var h_fmzdy = 0;
 
+
+window.open('fin604dbf_2016.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function DbfFin704()
                 {
+var h_oc = document.forms.formfin704.h_oc.value;
+var h_fmzdy = 0;
 
+
+window.open('fin704dbf_2016.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
-
 
 //vykaz Fin1a12
 <?php
@@ -1143,7 +1171,7 @@ if ( $kli_vrok >= 2013 AND $dajfinvykazy == 1 )
  </select>
 </div>
 </div>
-<a href="#" onclick="" title="Naèíta údaje"
+<a href="#" onclick="ZnovuFin504();" title="Naèíta údaje"
    class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
 <a href="#" onclick=""
    title="Nastavi generovanie"
@@ -1178,10 +1206,10 @@ if ( $kli_vrok >= 2013 ) {
 </div>
 <a href="#" onclick="ZnovuFin604();" title="Naèíta údaje"
    class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-<a href="#" onclick=""
+<a href="#" onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=96&page=1&sysx=UCT', '_blank');"
    title="Nastavi generovanie"
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-<a href="#" onclick="" title="Export do DBF"
+<a href="#" onclick="DbfFin604();" title="Export do DBF"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
 <a href="#" onclick="UpravFin604();" title="Upravi hodnoty"
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
@@ -1206,14 +1234,14 @@ if ( $kli_vrok >= 2013 ) {
  </select>
 </div>
 </div>
-<a href="#" onclick="" title="Naèíta údaje"
+<a href="#" onclick="ZnovuFin704();" title="Naèíta údaje"
    class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-<a href="#" onclick=""
+<a href="#" onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=97&page=1&sysx=UCT', '_blank');"
    title="Nastavi generovanie"
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-<a href="#" onclick="" title="Export do DBF"
+<a href="#" onclick="DbfFin704();" title="Export do DBF"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="" title="Upravi hodnoty"
+<a href="#" onclick="UpravFin704();" title="Upravi hodnoty"
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </FORM>
 </div> <!-- .line-area -->
