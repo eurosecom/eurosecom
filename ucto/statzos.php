@@ -44,19 +44,28 @@ $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
+$dajstatvyk=1;
+if ( $_SERVER['SERVER_NAME'] == "www.enposro.sk" ) { $dajstatvyk=0; }
+
+$dajfinvykazy=0;
+$volajfin1a12=1;
+if ( $kli_nezis == 1 ) { $dajfinvykazy=1; $volajfin1a12=1; }
+if ( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $dajfinvykazy=1; $volajfin1a12=0; } 
+if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $dajfinvykazy=1; }
+if ( $_SERVER['SERVER_NAME'] == "www.enposro.sk" ) { $dajfinvykazy=0; }
+
+$dajhlaodpad=0;
+if ( $_SERVER['SERVER_NAME'] == "www.enposro.sk" ) { $dajhlaodpad=1; }
+if ( $_SERVER['SERVER_NAME'] == "www.zerotax.sk" ) { $dajhlaodpad=1; }
+if ( $_SERVER['SERVER_NAME'] == "www.ekorobot.sk" ) { $dajhlaodpad=1; }
+if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $dajhlaodpad=1; }
 
 $tlacodpady=1;
-
 if ( $_SERVER['SERVER_NAME'] == "www.enposro.sk" )
 { 
 if ( $kli_uzid != 17 AND $kli_uzid != 23 AND $kli_uzid != 57 AND $kli_uzid != 58 AND $kli_uzid != 141 ) { $tlacodpady=0; }
 }
-$dajfinvykazy=0;
-$volajfin1a12=1;
-if ( $kli_nezis == 1 ) { $dajfinvykazy=1; $volajfin1a12=1; }
-if ( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $dajfinvykazy=1; $volajfin1a12=0; }
- 
-if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $dajfinvykazy=1; }
+
 ?> 
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -208,9 +217,7 @@ body, .box-bluedefault {
 }
 </style>
 <script type="text/javascript">
-  function VyberVstup()
-  {
-  }
+
 
 //suhrnny DPH
   function TlacSuhrn()
@@ -755,10 +762,41 @@ window.open('fin112nujpoddbf.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&
 <?php                        } ?>
 //koniec vykazy FIN NUJ 2013
 
+<?php
+$cislo_stvrtrok=1;
+if( $kli_vmes > 3 ) { $cislo_stvrtrok=2; }
+if( $kli_vmes > 6 ) { $cislo_stvrtrok=3; }
+if( $kli_vmes > 9 ) { $cislo_stvrtrok=4; }
+?>
+
+function VyberVstup()
+                {
+
+<?php  if( $dajfinvykazy == 1 ) { ?>
+        document.forms.formfin1a12.h_oc.value='<?php echo $kli_vmes; ?>'; 
+        document.forms.formfin204no16.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
+        document.forms.formfin204pod16.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
+        document.forms.formfin304.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
+        document.forms.formfin404.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
+        document.forms.formfin504.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
+        document.forms.formfin604.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
+        document.forms.formfin704.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
+
+<?php                           } ?>
+<?php  if( $dajstatvyk == 1 ) { ?>
+
+<?php                         } ?>
+<?php  if( $dajhlaodpad == 1 ) { ?>
+        document.forms.formhlaodpad.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
+<?php                          } ?>
+
+                }
+
+
 
 </script>
 </HEAD>
-<BODY>
+<BODY onload="VyberVstup();" >
 <!-- zahlavie -->
 <div class="wrap-heading">
  <div class="ilogin">
@@ -817,6 +855,12 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphs'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphsx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
+?>
+
+<?php
+//VYKAZY STATISTICKE
+if ( $dajstatvyk == 1 )
+{
 ?>
 <!-- suhrnny dph -->
 <div class="line-area" style="margin-bottom:8px;">
@@ -940,17 +984,19 @@ $vysledok = mysql_query("$sqlt");
 </div>
 <img src='../obr/zoznam.png' onclick="statzav101();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
+<?php
+}
+?>
 
 <?php
 //VYKAZY FIN NUJ rok 2016
-if ( $kli_vrok >= 2013 AND $dajfinvykazy == 1 )
+if ( $dajfinvykazy == 1 )
 {
 ?>
 <div class="line-area"> <!-- fin 1-12 -->
 <FORM name="formfin1a12" method="post" action="#">
 <?php
-$nazfin1a12="FIN 1-12 NUJPOD";
-if ( $volajfin1a12 == 0 ) { $nazfin1a12="FIN 1-12";} //dopyt, môžem zruši, to "NUJPOD", aký má význam
+$nazfin1a12="FIN 1-12";
 ?>
 <img src='../obr/tlac.png' onclick="TlacFin1a12();" title="Zobrazi v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
@@ -1173,6 +1219,10 @@ if ( $kli_vrok >= 2013 ) {
 //KONIEC VYKAZY FIN NUJ rok2016
 }
 ?>
+
+<?php
+if( $dajhlaodpad == 1 ) { 
+?>
 <div class="line-area">
 <FORM name="formhlaodpad" method="post" action="#">
 <?php if ( $tlacodpady == 1 ) { ?>
@@ -1234,6 +1284,10 @@ if ( $kli_vrok >= 2013 ) {
 <img src='../obr/zoznam.png' onclick="UpravHlaodpad();" title="Upravi hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
+<?php
+$dajhlaodpad=0;
+                        } 
+?>
 
 </div> <!-- .content -->
 <?php
