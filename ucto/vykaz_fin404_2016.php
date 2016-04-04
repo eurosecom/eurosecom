@@ -81,9 +81,16 @@ crf204nuj_no;
 $sql = 'CREATE TABLE F'.$kli_vxcf.'_genfin404'.$sqlt;
 $vysledek = mysql_query("$sql");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '251', '2' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '241', '1' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '473', '1' ); "; $ulozene = mysql_query("$sqult"); 
 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '322', '3' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '473', '3' ); "; $ulozene = mysql_query("$sqult");
 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '461', '5' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '231', '5' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '232', '5' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '562', '6' ); "; $ulozene = mysql_query("$sqult");
 
 $nacitajgen = 1*$_REQUEST['nacitajgen'];
 if ( $nacitajgen == 1 ) {
@@ -556,13 +563,13 @@ while ($rdk <= 10 )
 $crdk=$rdk;
 if( $rdk < 10 ) $crdk="0".$rdk;
 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET pocs$crdk=mdt-dal WHERE rdk = $rdk AND kor = 1 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET pocs$crdk=dal-mdt WHERE rdk = $rdk AND kor = 1 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET zvys$crdk=mdt-dal WHERE rdk = $rdk AND kor = 2 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET zvys$crdk=dal-mdt WHERE rdk = $rdk AND kor = 2 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET znis$crdk=-(mdt-dal) WHERE rdk = $rdk AND kor = 3 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET znis$crdk=-(dal-mdt) WHERE rdk = $rdk AND kor = 3 ";
 $oznac = mysql_query("$sqtoz");
 
 $rdk=$rdk+1;
