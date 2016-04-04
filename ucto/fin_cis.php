@@ -8,7 +8,6 @@ if ( !$uziv ) exit;
 if (!isset($kli_vxcf)) $kli_vxcf = 1;
        do
        {
-
 //cislo operacie
 $copern = 1*$_REQUEST['copern'];
 $drupoh = 1*$_REQUEST['drupoh'];
@@ -46,14 +45,10 @@ $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
 
 $rozuct = $_REQUEST['rozuct'];
-if(!isset($rozuct)) $rozuct = 'NIE';
+if (!isset($rozuct)) $rozuct = 'NIE';
 $sysx = $_REQUEST['sysx'];
-if(!isset($sysx)) $sysx = 'INE';
-if( $sysx == 'UCT' ) $rozuct="ANO";
-
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
+if (!isset($sysx)) $sysx = 'INE';
+if ( $sysx == 'UCT' ) $rozuct="ANO";
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -400,53 +395,63 @@ $h_crs = $riadok->hod;
   }
        }
 //koniec uprava nacitanie
-
-
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link rel="stylesheet" href="../css/reset.css" type="text/css">
- <link rel="stylesheet" href="../css/tlaciva.css" type="text/css">
-<title>EuroSecom -
-&nbsp;nastavenie</title>
+<link rel="stylesheet" href="../css/reset.css" type="text/css">
+<link rel="stylesheet" href="../css/tlaciva.css" type="text/css">
+<title>EuroSecom - Fin.výkazy</title>
 <style type="text/css">
-ul.legend-vykazy { /* legenda k druhu vykazu */
-  position: relative;
-  top: 5px;
-  line-height: 20px;
-  font-size: 12px;
+body {
+  min-width: 900px;
+  font-family: Arial, sans-serif;
 }
-ul.legend-vykazy > li {
-  margin-right: 15px;
-  float: left;
+strong {
+  font-weight: bold;
 }
-ul.legend-vykazy span {
-  padding: 0px 3px;
-  margin-right: 5px;
+div.wrap-heading {
+  overflow: auto;
+  width: 98%;
+  padding: 0 1%;
+  background-color: #ffff90;
+  -webkit-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  -moz-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
 }
-.darkgreen {
-  background-color: #1ccba8;
-  color: #0c5445;
+div.ilogin {
+  font-size: 11px;
+  background-color:;
+  height: 11px;
+  padding-top: 4px;
 }
-.purple {
-  background-color: #a39dcd;
-  color: #433b74;
+div.ilogin strong {
+  margin-left: 6px;
+  margin-right: 3px;
 }
-.darkgray {
-  background-color: #b1bdbd;
-  color: #4a5758;
+div.heading {
+  height: 36px;
+  overflow: hidden;
 }
+div.heading > h1 {
+  line-height: 36px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Times, 'Times New Roman', Georgia, serif;
+}
+
+
+
 div.wrap-content { /* okolie tela */
   position: relative;
   width: 950px;
   margin: 15px auto;
 }
 div.content-navbar > a { /* zalozky v tele */
-  display: block;
   float: left;
   height: 12px;
   font-size: 12px;
-  padding: 6px 10px 4px 10px;
+  padding: 6px 12px 4px 12px;
+  color: #000;
 }
 div.content-navbar > a:hover, a.active, div.content {
   background-color: #fff;
@@ -461,6 +466,7 @@ div.content-heading > h2 { /* nadpis v tele */
   font-size: 16px;
   font-weight: bold;
 }
+
 /* TABLES */
 table.vertical, table.flat {
   width: 360px;
@@ -755,41 +761,45 @@ div.alert-warning {
 </script>
 </HEAD>
 <BODY id="white" onload="ObnovUI(); VyberVstup();">
-<div id="wrap-heading">
- <table id="heading">
- <tr>
-  <td class="ilogin">EuroSecom</td>
-  <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
- </tr>
- <tr>
-  <td class="header">FIN výkazy
-   <span class="subheader">
+<!-- zahlavie -->
+<div class="wrap-heading">
+ <div class="ilogin">
+  <h6 class="toleft">EuroSecom</h6>
+  <h6 class="toright">
+   <strong>UME</strong><?php echo $kli_vume; ?>
+   <strong>FIR</strong><?php echo "$kli_vxcf:$kli_nxcf"; ?>
+   <strong>login</strong><?php echo "$kli_uzmeno $kli_uzprie / $kli_uzid"; ?>
+  </h6>
+ </div>
+ <div class="heading">
+  <h1 class="toleft">Finanèné výkazy -
+   <span style="color:#39f;">
 <?php
-if ( $drupoh >= 91 AND $drupoh <= 96 ) echo "";
+if ( $drupoh >= 91 AND $drupoh <= 96 ) echo ""; //dopyt, èo je to za podmienku, je aktuálna
 ?>
-   </span> - nastavenie
-  </td>
-  <td>
-   <div class="bar-btn-form-tool">
-
-<?php if( $drupoh != 96 AND drupoh != 196 ) { ?>
+nastavenie generovania
+   </span>
+  </h1>
+   <div class="bar-btn-form-tool"> <!-- dopyt, prípadne zobra z tlaciva.css -->
+<?php if ( $drupoh != 96 AND drupoh != 196 ) { ?> <!-- dopyt, èo je to za podmienku, je aktuálna -->
     <img src="../obr/ikony/trash_blue_icon.png" onclick="ZmazVsetky();" title="Vymaza všetky položky"
      class="btn-form-tool" style="margin:0;">
-<?php                                       } ?>
+<?php                                        } ?>
    </div>
-  </td>
- </tr>
- </table>
-</div>
+ </div>
+</div> <!-- .wrap-heading -->
+
+
+
 
 <div class="wrap-content">
 <?php
-$clas1="darkgreen"; $clas2="darkgreen"; $clas3="purple"; $clas4="purple"; $clas5="darkgreen"; $clas6="darkgray";
+$clas1="noactive"; $clas2="noactive"; $clas3="noactive";
+$clas4="noactive"; $clas5="noactive"; $clas6="noactive";
 if ( $drupoh == 91 OR $drupoh == 191 ) $clas1="active";
-if ( $drupoh == 93 OR $drupoh == 193 ) $clas2="active";
-if ( $drupoh == 92 OR $drupoh == 192 ) $clas3="active";
+if ( $drupoh == 92 OR $drupoh == 192 ) $clas2="active";
+if ( $drupoh == 93 OR $drupoh == 193 ) $clas3="active";
 if ( $drupoh == 94 OR $drupoh == 194 ) $clas4="active";
-
 if ( $drupoh == 96 OR $drupoh == 196 ) $clas5="active";
 if ( $drupoh == 97 OR $drupoh == 197 ) $clas6="active";
 $source="../ucto/fin_cis.php?copern=308";
@@ -797,18 +807,18 @@ $source="../ucto/fin_cis.php?copern=308";
 
 <div class="content-navbar toright">
 <?php if ( $drupoh >= 91 AND $drupoh <= 96 ) { ?>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=91', '_self');"
-  title="F204pod" class="<?php echo $clas1; ?> darkgreen">F204pod - Generovanie</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=93', '_self');"
-  title="F304 - Generovanie" class="<?php echo $clas2; ?> darkgreen">F304 - Generovanie</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=92', '_self');"
-  title="F204no" class="<?php echo $clas3; ?> purple">F204no - Generovanie</a>
+    title="Fin 2-04 NO generovanie" class="<?php echo $clas2; ?>">Fin 2-04 NO</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=91', '_self');"
+    title="Fin 2-04 POD generovanie" class="<?php echo $clas1; ?>">Fin 2-04 POD</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=93', '_self');"
+    title="Fin 3-04 - generovanie" class="<?php echo $clas3; ?>">Fin 3-04</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=94', '_self');"
-  title="F304 - Generovanie" class="<?php echo $clas4; ?> purple">F404 - Generovanie</a>
+    title="Fin 4-04 - generovanie" class="<?php echo $clas4; ?>">Fin 4-04</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=96', '_self');"
-  title="F604 - Generovanie" class="<?php echo $clas5; ?> darkgreen">F604 - Generovanie</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=96&uprav=1', '_self');"
-  title="F704 - Generovanie" class="<?php echo $clas6; ?> darkgray">F704 - Generovanie</a>
+    title="Fin 6-04 - generovanie" class="<?php echo $clas5; ?>">Fin 6-04</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=97', '_self');"
+    title="Fin 7-04 - generovanie" class="<?php echo $clas6; ?>">Fin 7-04</a> <!-- dopyt, keï kliknem, tak sa nezobrazí lišta so záložkami -->
 <?php                                        } ?>
 </div>
 
@@ -816,12 +826,12 @@ $source="../ucto/fin_cis.php?copern=308";
  <div class="content-heading" style="height:30px;">
   <h2>
 <?php
-if ( $drupoh == 91 OR $drupoh == 191 ) { echo "FIN204POD - generovanie"; }
-if ( $drupoh == 93 OR $drupoh == 193 ) { echo "F304 - Generovanie"; }
-if ( $drupoh == 92 OR $drupoh == 192 ) { echo "FIN204NO - generovanie"; }
-if ( $drupoh == 94 OR $drupoh == 194 ) { echo "F404 - Generovanie"; }
-if ( $drupoh == 96 OR $drupoh == 196 ) { echo "F604 - Generovanie"; }
-if ( $drupoh == 97 OR $drupoh == 197 ) { echo "F704 - Generovanie"; }
+if ( $drupoh == 92 OR $drupoh == 192 ) { echo "Fin 2-04 NO - Generovanie"; }
+if ( $drupoh == 91 OR $drupoh == 191 ) { echo "Fin 2-04 POD - Generovanie"; }
+if ( $drupoh == 93 OR $drupoh == 193 ) { echo "Fin 3-04 - Generovanie"; }
+if ( $drupoh == 94 OR $drupoh == 194 ) { echo "Fin 4-04 - Generovanie"; }
+if ( $drupoh == 96 OR $drupoh == 196 ) { echo "Fin 6-04 - Generovanie"; }
+if ( $drupoh == 97 OR $drupoh == 197 ) { echo "Fin 7-04 - Generovanie"; }
 ?>
    <img src='../obr/info.png' title="EnterNext = klávesou ENTER prejdete na ïalšiu položku">
   </h2>
