@@ -4,14 +4,12 @@
 $sys = 'UCT';
 $urov = 1000;
 $uziv = include("../uziv.php");
-if( !$uziv ) exit;
-
-if(!isset($kli_vxcf)) $kli_vxcf = 1;
-if(!isset($kli_vduj)) $kli_vduj = 1;
+if ( !$uziv ) exit;
+if (!isset($kli_vxcf)) $kli_vxcf = 1;
+if (!isset($kli_vduj)) $kli_vduj = 1;
 
        do
        {
-
 //cislo operacie
 $copern = 1*$_REQUEST['copern'];
 $drupoh = 1*$_REQUEST['drupoh'];
@@ -37,32 +35,28 @@ exit;
 }
 
 $rozuct = $_REQUEST['rozuct'];
-if(!isset($rozuct)) $rozuct = 'NIE';
+if (!isset($rozuct)) $rozuct = 'NIE';
 $sysx = $_REQUEST['sysx'];
-if(!isset($sysx)) $sysx = 'INE';
-if( $sysx == 'UCT' ) $rozuct="ANO";
+if (!isset($sysx)) $sysx = 'INE';
+if ( $sysx == 'UCT' ) $rozuct="ANO";
 
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
 $tlacodpady=1;
 
-if( $_SERVER['SERVER_NAME'] == "www.enposro.sk" ) 
+if ( $_SERVER['SERVER_NAME'] == "www.enposro.sk" )
 { 
-if( $kli_uzid != 17 AND $kli_uzid != 23 AND $kli_uzid != 57 AND $kli_uzid != 58 AND $kli_uzid != 141 ) { $tlacodpady=0; }
+if ( $kli_uzid != 17 AND $kli_uzid != 23 AND $kli_uzid != 57 AND $kli_uzid != 58 AND $kli_uzid != 141 ) { $tlacodpady=0; }
 }
 $dajfinvykazy=0;
 $volajfin1a12=1;
-if( $kli_nezis == 1 ) { $dajfinvykazy=1; $volajfin1a12=1; }
-if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $dajfinvykazy=1; $volajfin1a12=0; }
+if ( $kli_nezis == 1 ) { $dajfinvykazy=1; $volajfin1a12=1; }
+if ( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $dajfinvykazy=1; $volajfin1a12=0; }
  
-if( $_SERVER['SERVER_NAME'] == "localhost" ) { $dajfinvykazy=1; }
+if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $dajfinvykazy=1; }
 ?> 
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -131,37 +125,8 @@ div.line-area {
   border-radius: 3px;
   clear: left;
 }
-.line-box {
-  display: block;
-  margin-right: 4px;
-  width: 32px;
-  height: 32px;
-  opacity: 1;
-  border-radius: 3px;
-}
-.line-box:hover {
-  opacity: 0.8;
-}
-body, .box-bluedefault {
-  background-color: #add8e6;
-}
-.box-blue {
-  background-color: #5fb3ce;
-}
-.box-brown {
-  background-color: #bcaaa4;
-}
-.box-green {
-  background-color:#a5d6a7;
-}
-.box-lightblue {
-  background-color:#90caf9;
-}
-.box-red {
-  background-color:#ef9a9a;
-}
 .line-box-text {
-  width: 630px;
+  width: 660px;
   height: 32px;
   line-height: 32px;
   padding-left: 4px;
@@ -174,6 +139,10 @@ body, .box-bluedefault {
 .line-box-text > div > strong {
   font-size: 14px;
   color: #424242;
+}
+.line-box-text > div > strong > span {
+  font-weight: normal;
+  margin-left: 4px;
 }
 .line-box-text > div > select {
   display: block;
@@ -196,11 +165,40 @@ body, .box-bluedefault {
   font-size: 12px;
   text-indent: 4px;
 }
-.line-box > img {
-  margin: 8px;
-  display: block;
+div.line-box {
+  margin-right: 4px;
+  width: 32px;
+  height: 32px;
+}
+img.line-box {
   width: 16px;
   height: 16px;
+  opacity: 1;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  margin-right: 4px;
+}
+img.line-box:hover {
+  opacity: 0.8;
+}
+body, .box-bluedefault {
+  background-color: #add8e6;
+}
+.box-blue {
+  background-color: #5fb3ce;
+}
+.box-brown {
+  background-color: #bcaaa4;
+}
+.box-green {
+  background-color:#a5d6a7;
+}
+.box-lightblue {
+  background-color:#90caf9;
+}
+.box-red {
+  background-color:#ef9a9a;
 }
 .toleft {
   float: left;
@@ -208,20 +206,8 @@ body, .box-bluedefault {
 .toright {
   float: right;
 }
-.unhidden {
-  display: block;
-}
-.hidden {
-  display: none;
-}
 </style>
 <script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height;
-var sirkawic = screen.width-10;
-
   function VyberVstup()
   {
   }
@@ -302,64 +288,58 @@ if ( $kli_vrok < 2016 ) $rok1304="_2015";
 if ( $kli_vrok < 2014 ) $rok1304="_2013";
 if ( $kli_vrok < 2012 ) $rok1304="_2011";
 ?>
-
-function stat1304()
-                {
-
-window.open('../ucto/statistika_p1304<?php echo $rok1304; ?>.php?copern=1&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
+  function stat1304()
+  {
+   window.open('../ucto/statistika_p1304<?php echo $rok1304; ?>.php?copern=1&drupoh=1&page=1',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 <?php
 $rokopu112="";
-if( $kli_vrok < 2016 ) $rokopu112="_2015";
-if( $kli_vrok < 2014 ) $rokopu112="_2013";
+if ( $kli_vrok < 2016 ) $rokopu112="_2015";
+if ( $kli_vrok < 2014 ) $rokopu112="_2013";
 ?>
-
-function statOPU112()
-                {
-
-window.open('../ucto/statistika_opu112<?php echo $rokopu112; ?>.php?copern=1&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
-
+  function statOPU112()
+  {
+   window.open('../ucto/statistika_opu112<?php echo $rokopu112; ?>.php?copern=1&drupoh=1&page=1',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 //statistika 304
 <?php
 $rok304="";
-if( $kli_vrok < 2016 ) $rok304="_2015";
-if( $kli_vrok < 2014 ) $rok304="_2013";
-if( $kli_vrok < 2013 ) $rok304="_2012";
+if ( $kli_vrok < 2016 ) $rok304="_2015";
+if ( $kli_vrok < 2014 ) $rok304="_2013";
+if ( $kli_vrok < 2013 ) $rok304="_2012";
 ?>
-
-function stat304()
-                {
-
-window.open('../ucto/statistika_p304<?php echo $rok304; ?>.php?copern=1&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
+  function stat304()
+  {
+   window.open('../ucto/statistika_p304<?php echo $rok304; ?>.php?copern=1&drupoh=1&page=1',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 //statistika vts112
 <?php
 $rokvts112="";
-if( $kli_vrok < 2016 ) $rokvts112="_2015";
-if( $kli_vrok < 2014 ) $rokvts112="_2013";
+if ( $kli_vrok < 2016 ) $rokvts112="_2015";
+if ( $kli_vrok < 2014 ) $rokvts112="_2013";
 ?>
-
-function statvts112()
-                {
-
-window.open('../ucto/statistika_vts112<?php echo $rokvts112; ?>.php?copern=1&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
+  function statvts112()
+  {
+   window.open('../ucto/statistika_vts112<?php echo $rokvts112; ?>.php?copern=1&drupoh=1&page=1',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 //statistika vts101
 <?php
 $rokvts101="";
-if( $kli_vrok < 2015 ) $rokvts101="_2014";
+if ( $kli_vrok < 2015 ) $rokvts101="_2014";
 ?>
-
-function statvts101()
-                {
-
-window.open('../ucto/statistika_vts101<?php echo $rokvts101; ?>.php?copern=1&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
+  function statvts101()
+  {
+   window.open('../ucto/statistika_vts101<?php echo $rokvts101; ?>.php?copern=1&drupoh=1&page=1',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 //opu201
 <?php
@@ -388,39 +368,9 @@ window.open('../ucto/statistika_zav101<?php echo $rokzav101; ?>.php?copern=1&dru
 //vykazy FinNUJ 2013
 <?php if( $kli_vrok >= 2013 ) { ?>
 
-//vykaz Fin112
-<?php
-$rokfin112="_2016";
-?>
-
-function TlacFin112()
-                {
-var h_oc = document.forms.formfin112.h_oc.value;
-var h_fmzdy = 0;
 
 
-window.open('../ucto/vykaz_fin112<?php echo $rokfin112; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&elsubor=é',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
 
-
-function UpravFin112()
-                {
-var h_oc = document.forms.formfin112.h_oc.value;
-var h_fmzdy = 0;
-
-window.open('../ucto/vykaz_fin112<?php echo $rokfin112; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function ZnovuFin112()
-                {
-var h_oc = document.forms.formfin112.h_oc.value;
-var h_fmzdy = 0;
-
-window.open('../ucto/vykaz_fin112<?php echo $rokfin112; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
 
 //vykaz Fin204no16
 <?php
@@ -871,8 +821,7 @@ $vysledok = mysql_query("$sqlt");
 <!-- suhrnny dph -->
 <div class="line-area" style="margin-bottom:8px;">
 <FORM name="formp3" method="post" action="#">
-<a href="#" onclick="TlacSuhrn();" title="Tlaè vo formáte PDF - len pre informáciu musíte tlaèi z FDF alebo z WEBu www.drsr.sk <?php echo $mena1; ?>á + centy - zobrazi v PDF - zobrazi v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a> <!-- dopyt, inı text v title -->
+<img src='../obr/tlac.png' onclick="TlacSuhrn();" title="Zobrazi v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
  <strong>Súhrnnı vıkaz DPH</strong>
@@ -892,16 +841,15 @@ $vysledok = mysql_query("$sqlt");
 </div>
 <div>
  <select size="1" name="h_oc" id="h_oc">
-  <option value="1">1. štvrrok</option>
-  <option value="2">2. štvrrok</option>
-  <option value="3">3. štvrrok</option>
-  <option value="4">4. štvrrok</option>
+  <option value="1">1.štvrrok</option>
+  <option value="2">2.štvrrok</option>
+  <option value="3">3.štvrrok</option>
+  <option value="4">4.štvrrok</option>
   <option value="5">mesaènı <?php echo $kli_vume; ?></option>
  </select>
 </div>
 </div>
-<a href="#" onclick="SuborSuhrn();" title="Export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<img src='../obr/export.png' onclick="SuborSuhrn();" title="Export do XML" class="toleft line-box box-red">
 </FORM>
 </div> <!-- .line-area suhrnny dph -->
 
@@ -909,96 +857,88 @@ $vysledok = mysql_query("$sqlt");
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
- <strong>Prod 13-04 <span style="font-weight:normal;">Štvrroènı vıkaz produkènıch odvetví v malıch podnikoch</span></strong>
+ <strong>Prod 13-04<span>Štvrroènı vıkaz produkènıch odvetví v malıch podnikoch</span></strong>
  <img src="../obr/info.png" title="Prod 13-04 verzia 2016">
 </div>
 </div>
-<a href="#" onclick="stat1304();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/zoznam.png' onclick="stat1304();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
 
 <div class="line-area">
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
- <strong>E (MZSR) 1-04 <span style="font-weight:normal;">Štvrroènı vıkaz o ekonomike organizácií v zdravotníctve pre NO</span></strong>
+ <strong>E (MZSR) 1-04<span>Štvrroènı vıkaz o ekonomike organizácií v zdravotníctve pre NO</span></strong>
  <img src="../obr/info.png" title="E(MZSR) 1-04">
 </div>
 </div>
-<a href="#" onclick="Emzsr104Uprav();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/zoznam.png' onclick="Emzsr104Uprav();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
 
 <div class="line-area">
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
- <strong>Prod 3-04 <span style="font-weight:normal;">Štvrroènı vıkaz produkènıch odvetví</span></strong>
+ <strong>Prod 3-04<span>Štvrroènı vıkaz produkènıch odvetví</span></strong>
  <img src="../obr/info.png" title="Prod 13-04 verzia 2016">
 </div>
 </div>
-<a href="#" onclick="stat304();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/zoznam.png' onclick="stat304();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
 
 <div class="line-area">
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
- <strong>VTS 1-12 <span style="font-weight:normal;">Mesaènı vıkaz vo vybranıch trhovıch slubách</span></strong>
+ <strong>VTS 1-12<span>Mesaènı vıkaz vo vybranıch trhovıch slubách</span></strong>
  <img src="../obr/info.png" title="VTS 1-12 verzia 2016">
 </div>
 </div>
-<a href="#" onclick="statvts112();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/zoznam.png' onclick="statvts112();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
 
 <div class="line-area">
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
- <strong>OPU 1-12 <span style="font-weight:normal;">Mesaènı vıkaz v obchode, pohostinstve a v ubytovaní</span></strong>
+ <strong>OPU 1-12<span>Mesaènı vıkaz v obchode, pohostinstve a v ubytovaní</span></strong>
  <img src="../obr/info.png" title="OPU 1-12 verzia 2016">
 </div>
 </div>
-<a href="#" onclick="statOPU112();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/zoznam.png' onclick="statOPU112();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
 
 <div class="line-area">
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
- <strong>Roè OPU 2-01 <span style="font-weight:normal;">Roènı vıkaz produkènıch odvetví v malıch podnikoch v obchode ...</span></strong>
+ <strong>Roè OPU 2-01<span>Roènı vıkaz produkènıch odvetví v malıch podnikoch v obchode, pohostinstve ...</span></strong>
  <img src="../obr/info.png" title="Roè OPU 2-01 verzia 2015">
 </div>
 </div>
-<a href="#" onclick="statopu201();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/zoznam.png' onclick="statopu201();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
 
 <div class="line-area">
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
- <strong>Roè VTS 1-01 <span style="font-weight:normal;">Roènı vıkaz produkènıch odvetví vo vybranıch trhovıch slubách</span></strong>
+ <strong>Roè VTS 1-01<span>Roènı vıkaz produkènıch odvetví vo vybranıch trhovıch slubách</span></strong>
  <img src="../obr/info.png" title="Roè VTS 1-01 verzia 2015">
 </div>
 </div>
-<a href="#" onclick="statvts101();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/zoznam.png' onclick="statvts101();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
 
 <div class="line-area" style="margin-bottom:8px;">
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
- <strong>Roè ZAV 1-01 <span style="font-weight:normal;">Roènı závodnı vıkaz produkènıch odvetví</span></strong>
+ <strong>Roè ZAV 1-01<span>Roènı závodnı vıkaz produkènıch odvetví</span></strong>
  <img src="../obr/info.png" title="Roè ZAV 1-01 verzia 2015">
 </div>
 </div>
-<a href="#" onclick="statzav101();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/zoznam.png' onclick="statzav101();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
 
 <?php
@@ -1007,39 +947,56 @@ if ( $kli_vrok >= 2013 AND $dajfinvykazy == 1 )
 {
 ?>
 <div class="line-area"> <!-- fin 1-12 -->
-<FORM name="formfin112" method="post" action="#">
-<a href="#" onclick="TlacFin112();" title="Zobrazi v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<FORM name="formfin1a12" method="post" action="#">
+<?php
+$nazfin1a12="FIN 1-12 NUJPOD";
+if ( $volajfin1a12 == 0 ) { $nazfin1a12="FIN 1-12";} //dopyt, môem zruši, to "NUJPOD", akı má vıznam
+?>
+<img src='../obr/tlac.png' onclick="TlacFin1a12();" title="Zobrazi v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
- <strong>FIN 1-12 <span style="font-weight:normal;">Finanènı vıkaz o príjmoch, vıdavkoch a finanènıch operáciách</span></strong>
- <img src="../obr/info.png" title="FIN 1-12 verzia 2016">
+ <strong>FIN 1-12<span>Finanènı vıkaz o príjmoch, vıdavkoch a finanènıch operáciách</span></strong>
+ <img src="../obr/info.png" title="<?php echo $nazfin1a12; ?> verzia 2016">
 </div>
 <div>
  <select size="1" name="h_oc" id="h_oc">
-  <option value="1">1.štvrrok</option>
-  <option value="2">2.štvrrok</option>
-  <option value="3">3.štvrrok</option>
-  <option value="4">4.štvrrok</option>
+  <option value="1">1.<?php echo $kli_vrok; ?></option>
+  <option value="2">2.<?php echo $kli_vrok; ?></option>
+  <option value="3">3.<?php echo $kli_vrok; ?></option>
+  <option value="4">4.<?php echo $kli_vrok; ?></option>
+  <option value="5">5.<?php echo $kli_vrok; ?></option>
+  <option value="6">6.<?php echo $kli_vrok; ?></option>
+  <option value="7">7.<?php echo $kli_vrok; ?></option>
+  <option value="8">8.<?php echo $kli_vrok; ?></option>
+  <option value="9">9.<?php echo $kli_vrok; ?></option>
+  <option value="10">10.<?php echo $kli_vrok; ?></option>
+  <option value="11">11.<?php echo $kli_vrok; ?></option>
+  <option value="12">12.<?php echo $kli_vrok; ?></option>
  </select>
 </div>
 </div>
-<a href="#" onclick="ZnovuFin112();" title="Naèíta údaje"
-   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-<a href="#" onclick="DbfFin112nujpod();" title="Export do DBF"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravFin112();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/vlozit.png' onclick="ZnovuFin1a12();" title="Naèíta údaje" class="toleft line-box box-lightblue">
+<?php if ( $kli_vrok < 2016 ) { ?>
+<img src='../obr/export.png' onclick="DbfFin1a12();" title="Export do DBF" class="toleft line-box box-red">
+<?php                         } ?>
+<?php if ( $kli_vrok >= 2016 ) { ?>
+<img src='../obr/export.png' onclick="DbfFin112nujpod();" title="Export do DBF" class="toleft line-box box-red">
+<?php                          } ?>
+<?php
+$nedaj=1;
+if ( $nedaj == 0 ) { ?>
+<img src='../obr/export.png' onclick="CsvFin1a12();" title="Export do CSV" class="toleft line-box box-red">
+<?php              } ?>
+<img src='../obr/zoznam.png' onclick="UpravFin1a12();" title="Upravi hodnoty" class="toleft line-box box-green">
 </FORM>
-</div> <!-- .line-area -->
+</div> <!-- .line-area fin 1-12 -->
 
 <div class="line-area">
 <FORM name="formfin204no16" method="post" action="#">
-<a href="#" onclick="TlacFin204no16();" title="Zobrazi v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<img src='../obr/tlac.png' onclick="TlacFin204no16();" title="Zobrazi v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
- <strong>FIN 2-04 NO <span style="font-weight:normal;">Finanènı vıkaz o vybranıch údajoch z aktív a z pasív</span></strong>
+ <strong>FIN 2-04 NO<span>Finanènı vıkaz o vybranıch údajoch z aktív a z pasív</span></strong>
  <img src="../obr/info.png" title="FIN 2-04 NO verzia 2016">
 </div>
 <div>
@@ -1051,25 +1008,20 @@ if ( $kli_vrok >= 2013 AND $dajfinvykazy == 1 )
  </select>
 </div>
 </div>
-<a href="#" onclick="ZnovuFin204no16();" title="Naèíta údaje"
-   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-<a href="#" onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=92&page=1&sysx=UCT', '_blank');"
-   title="Nastavi generovanie"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-<a href="#" onclick="DbfFin204no16();" title="Export do DBF"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravFin204no16();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/vlozit.png' onclick="ZnovuFin204no16();" title="Naèíta údaje" class="toleft line-box box-lightblue">
+<img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=92&page=1&sysx=UCT', '_blank');"
+     title="Nastavi generovanie" class="toleft line-box box-brown">
+<img src='../obr/export.png' onclick="DbfFin204no16();" title="Export do DBF" class="toleft line-box box-red">
+<img src='../obr/zoznam.png' onclick="UpravFin204no16();" title="Upravi hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
 
 <div class="line-area">
 <FORM name="formfin204pod16" method="post" action="#">
-<a href="#" onclick="TlacFin204pod16();" title="Zobrazi v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<img src='../obr/tlac.png' onclick="TlacFin204pod16();" title="Zobrazi v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
- <strong>FIN 2-04 POD <span style="font-weight:normal;">Finanènı vıkaz o vybranıch údajoch z aktív a z pasív</span></strong>
+ <strong>FIN 2-04 POD<span>Finanènı vıkaz o vybranıch údajoch z aktív a z pasív</span></strong>
  <img src="../obr/info.png" title="FIN 2-04 POD verzia 2016">
 </div>
 <div>
@@ -1081,25 +1033,20 @@ if ( $kli_vrok >= 2013 AND $dajfinvykazy == 1 )
  </select>
 </div>
 </div>
-<a href="#" onclick="ZnovuFin204pod16();" title="Naèíta údaje"
-   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-<a href="#" onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=91&page=1&sysx=UCT', '_blank');"
-   title="Nastavi generovanie"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-<a href="#" onclick="DbfFin204pod16();" title="Export do DBF"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravFin204pod16();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/vlozit.png' onclick="ZnovuFin204pod16();" title="Naèíta údaje" class="toleft line-box box-lightblue">
+<img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=91&page=1&sysx=UCT', '_blank');"
+     title="Nastavi generovanie" class="toleft line-box box-brown">
+<img src='../obr/export.png' onclick="DbfFin204pod16();" title="Export do DBF" class="toleft line-box box-red">
+<img src='../obr/zoznam.png' onclick="UpravFin204pod16();" title="Upravi hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
 
 <div class="line-area">
 <FORM name="formfin304" method="post" action="#">
-<a href="#" onclick="TlacFin304();" title="Zobrazi v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<img src='../obr/tlac.png' onclick="TlacFin304();" title="Zobrazi v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
- <strong>FIN 3-04 <span style="font-weight:normal;">Finanènı vıkaz o finanènıch aktívach pod¾a sektorov</span></strong>
+ <strong>FIN 3-04<span>Finanènı vıkaz o finanènıch aktívach pod¾a sektorov</span></strong>
  <img src="../obr/info.png" title="FIN 3-04 verzia 2016">
 </div>
 <div>
@@ -1111,25 +1058,20 @@ if ( $kli_vrok >= 2013 AND $dajfinvykazy == 1 )
  </select>
 </div>
 </div>
-<a href="#" onclick="ZnovuFin304();" title="Naèíta údaje"
-   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-<a href="#" onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=93&page=1&sysx=UCT', '_blank');"
-   title="Nastavi generovanie"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-<a href="#" onclick="DbfFin304();" title="Export do DBF"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravFin304();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/vlozit.png' onclick="ZnovuFin304();" title="Naèíta údaje" class="toleft line-box box-lightblue">
+<img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=93&page=1&sysx=UCT', '_blank');"
+     title="Nastavi generovanie" class="toleft line-box box-brown">
+<img src='../obr/export.png' onclick="DbfFin304();" title="Export do DBF" class="toleft line-box box-red">
+<img src='../obr/zoznam.png' onclick="UpravFin304();" title="Upravi hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
 
 <div class="line-area">
 <FORM name="formfin404" method="post" action="#">
-<a href="#" onclick="TlacFin404();" title="Zobrazi v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<img src='../obr/tlac.png' onclick="TlacFin404();" title="Zobrazi v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
- <strong>FIN 4-04 <span style="font-weight:normal;">Finanènı vıkaz o finanènıch pasívach pod¾a sektorov</span></strong>
+ <strong>FIN 4-04<span>Finanènı vıkaz o finanènıch pasívach pod¾a sektorov</span></strong>
  <img src="../obr/info.png" title="FIN 4-04 verzia 2016">
 </div>
 <div>
@@ -1141,25 +1083,20 @@ if ( $kli_vrok >= 2013 AND $dajfinvykazy == 1 )
  </select>
 </div>
 </div>
-<a href="#" onclick="ZnovuFin404();" title="Naèíta údaje"
-   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-<a href="#" onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=94&page=1&sysx=UCT', '_blank');"
-   title="Nastavi generovanie"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-<a href="#" onclick="DbfFin404();" title="Export do DBF"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravFin404();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/vlozit.png' onclick="ZnovuFin404();" title="Naèíta údaje" class="toleft line-box box-lightblue">
+<img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=94&page=1&sysx=UCT', '_blank');"
+     title="Nastavi generovanie" class="toleft line-box box-brown">
+<img src='../obr/export.png' onclick="DbfFin404();" title="Export do DBF" class="toleft line-box box-red">
+<img src='../obr/zoznam.png' onclick="UpravFin404();" title="Upravi hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
 
 <div class="line-area">
 <FORM name="formfin504" method="post" action="#">
-<a href="#" onclick="TlacFin504();" title="Zobrazi v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<img src='../obr/tlac.png' onclick="TlacFin504();" title="Zobrazi v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
- <strong>FIN 5-04 <span style="font-weight:normal;">Finanènı vıkaz o dlhovıch nástrojoch a vybranıch záväzkoch</span></strong>
+ <strong>FIN 5-04<span>Finanènı vıkaz o dlhovıch nástrojoch a vybranıch záväzkoch</span></strong>
  <img src="../obr/info.png" title="FIN 5-04 verzia 2016">
 </div>
 <div>
@@ -1171,15 +1108,9 @@ if ( $kli_vrok >= 2013 AND $dajfinvykazy == 1 )
  </select>
 </div>
 </div>
-<a href="#" onclick="ZnovuFin504();" title="Naèíta údaje"
-   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-<a href="#" onclick=""
-   title="Nastavi generovanie"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-<a href="#" onclick="DbfFin504();" title="Export do DBF"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravFin504();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/vlozit.png' onclick="ZnovuFin504();" title="Naèíta údaje" class="toleft line-box box-lightblue">
+<img src='../obr/export.png' onclick="DbfFin504();" title="Export do DBF" class="toleft line-box box-red">
+<img src='../obr/zoznam.png' onclick="UpravFin504();" title="Upravi hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
 
@@ -1188,11 +1119,10 @@ if ( $kli_vrok >= 2013 ) {
 ?>
 <div class="line-area">
 <FORM name="formfin604" method="post" action="#">
-<a href="#" onclick="TlacFin604();" title="Zobrazi v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<img src='../obr/tlac.png' onclick="TlacFin604();" title="Zobrazi v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
- <strong>FIN 6-04 <span style="font-weight:normal;">Finanènı vıkaz o bankovıch úètoch a záväzkoch</span></strong>
+ <strong>FIN 6-04<span>Finanènı vıkaz o bankovıch úètoch a záväzkoch</span></strong>
  <img src="../obr/info.png" title="FIN 6-04 verzia 2016">
 </div>
 <div>
@@ -1204,25 +1134,20 @@ if ( $kli_vrok >= 2013 ) {
  </select>
 </div>
 </div>
-<a href="#" onclick="ZnovuFin604();" title="Naèíta údaje"
-   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-<a href="#" onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=96&page=1&sysx=UCT', '_blank');"
-   title="Nastavi generovanie"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-<a href="#" onclick="DbfFin604();" title="Export do DBF"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravFin604();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/vlozit.png' onclick="ZnovuFin604();" title="Naèíta údaje" class="toleft line-box box-lightblue">
+<img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=96&page=1&sysx=UCT', '_blank');"
+     title="Nastavi generovanie" class="toleft line-box box-brown">
+<img src='../obr/export.png' onclick="DbfFin604();" title="Export do DBF" class="toleft line-box box-red">
+<img src='../obr/zoznam.png' onclick="UpravFin604();" title="Upravi hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
 
 <div class="line-area">
 <FORM name="formfin704" method="post" action="#">
-<a href="#" onclick="TlacFin704();" title="Zobrazi v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<img src='../obr/tlac.png' onclick="TlacFin704();" title="Zobrazi v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
- <strong>FIN 7-04 <span style="font-weight:normal;">Finanènı vıkaz o vybranıch údajoch z úètovníctva</span></strong>
+ <strong>FIN 7-04<span>Finanènı vıkaz o vybranıch údajoch z úètovníctva</span></strong>
  <img src="../obr/info.png" title="FIN 7-04 verzia 2016">
 </div>
 <div>
@@ -1234,92 +1159,28 @@ if ( $kli_vrok >= 2013 ) {
  </select>
 </div>
 </div>
-<a href="#" onclick="ZnovuFin704();" title="Naèíta údaje"
-   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-<a href="#" onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=97&page=1&sysx=UCT', '_blank');"
-   title="Nastavi generovanie"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-<a href="#" onclick="DbfFin704();" title="Export do DBF"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravFin704();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src='../obr/vlozit.png' onclick="ZnovuFin704();" title="Naèíta údaje" class="toleft line-box box-lightblue">
+<img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=97&page=1&sysx=UCT', '_blank');"
+     title="Nastavi generovanie" class="toleft line-box box-brown">
+<img src='../obr/export.png' onclick="DbfFin704();" title="Export do DBF" class="toleft line-box box-red">
+<img src='../obr/zoznam.png' onclick="UpravFin704();" title="Upravi hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
-
-
-<!-- dopyt, toto mám upravi, alebo nie, èi som nemal ten vyššie fin 1-12 -->
-<table class="vstup" width="100%" >
-<FORM name="formfin1a12" class="obyc" method="post" action="#" >
-<tr>
 <?php
-$nazfin1a12="FIN 1-12 NUJPOD";
-if( $volajfin1a12 == 0 ) { $nazfin1a12="FIN 1-12";}
+                         }
 ?>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacFin1a12();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="98%">Finanènı vıkaz o plnení rozpoètu a o nerozpoètovanıch pohyboch na úètoch subjektu verejnej správy <?php echo $nazfin1a12; ?>
- <select size="1" name="h_oc" id="h_oc" >
-<option value="1" >1.<?php echo $kli_vrok; ?></option>
-<option value="2" >2.<?php echo $kli_vrok; ?></option>
-<option value="3" >3.<?php echo $kli_vrok; ?></option>
-<option value="4" >4.<?php echo $kli_vrok; ?></option>
-<option value="5" >5.<?php echo $kli_vrok; ?></option>
-<option value="6" >6.<?php echo $kli_vrok; ?></option>
-<option value="7" >7.<?php echo $kli_vrok; ?></option>
-<option value="8" >8.<?php echo $kli_vrok; ?></option>
-<option value="9" >9.<?php echo $kli_vrok; ?></option>
-<option value="10" >10.<?php echo $kli_vrok; ?></option>
-<option value="11" >11.<?php echo $kli_vrok; ?></option>
-<option value="12" >12.<?php echo $kli_vrok; ?></option>
-</select>
-<?php if( $kli_vrok <  2016 ) { ?>
-<a href="#" onClick="DbfFin1a12();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru' ></a>
-<?php                         } ?>
-<?php if( $kli_vrok >= 2016 ) { ?>
-<a href="#" onClick="DbfFin112nujpod();">
-<img src='../obr/import.png' width=20 height=15 border=0 title='Import DBF súboru' ></a>
-<?php                         } ?>
 <?php
-$nedaj=1; 
-      if( $nedaj == 0 ) { ?>
-<a href="#" onClick="CsvFin1a12();">
-<img src='../obr/export.png' width=20 height=15 border=0 title='Export CSV súboru' ></a>
-<?php                  } ?>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="UpravFin1a12();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Upravi hodnoty ' ></a>
-</td>
-
-<td class="bmenu" width="2%">
-<a href="#" onClick="ZnovuFin1a12();">
-<img src='../obr/orig.png' width=20 height=15 border=0 title='Naèíta hodnoty  - môete opakova viackrát' ></a>
-</td>
-</tr>
-</FORM>
-</table>
-
-<?php 
-                          }
-?>
-
-<?php 
 //KONIEC VYKAZY FIN NUJ rok2016
 }
 ?>
-
-<div class="line-area"> <!-- dopyt, rozšíri ¾avú èas -->
+<div class="line-area">
 <FORM name="formhlaodpad" method="post" action="#">
 <?php if ( $tlacodpady == 1 ) { ?>
-<a href="#" onclick="TlacHlaodpad();" title="Zobrazi v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<img src='../obr/tlac.png' onclick="TlacHlaodpad();" title="Zobrazi v PDF" class="toleft line-box box-blue">
 <?php                         } ?>
-<div class="toleft line-box-text">
+<div class="toleft line-box-text" style="width:900px;">
 <div>
- <strong>Hlásenie <span style="font-weight:normal;">o objeme vıroby, dovozu, vıvozu a reexportu</span></strong>
+ <strong>Hlásenie<span>o objeme vıroby, dovozu, vıvozu a reexportu</span></strong>
  <img src="../obr/info.png" title="">
 </div>
 <div>
@@ -1367,12 +1228,10 @@ $nedaj=1;
  </select>
 </div>
 </div>
-<a href="#" onclick="HelpHlaodpad();" title="Návod na obsluhu"
-   class="toleft line-box box-bluedefault"><img src="../obr/info.png"></a>
-<a href="#" onclick="XLSHlaodpad();" title="XLS súbory pre offline nahrávanie"
-   class="toleft line-box box-bluedefault"><img src="../obr/info.png"></a>
-<a href="#" onclick="UpravHlaodpad();" title="Upravi hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+<img src="../obr/info.png" onclick="HelpHlaodpad();" title="Návod na obsluhu" class="toleft line-box box-bluedefault">
+<img src="../obr/info.png" onclick="XLSHlaodpad();" title="XLS súbory pre offline nahrávanie" class="toleft line-box box-bluedefault">
+<div class="toleft line-box"></div>
+<img src='../obr/zoznam.png' onclick="UpravHlaodpad();" title="Upravi hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
 
@@ -1382,7 +1241,7 @@ $nedaj=1;
 
 $zmenume=1; $odkaz="../ucto/statzos.php?copern=1&drupoh=1&page=1&sysx=UCT";
 $cislista = include("uct_lista_norm.php");
-       } while (false);
+       } while(false);
 ?>
 </BODY>
 </HTML>
