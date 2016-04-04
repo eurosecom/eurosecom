@@ -773,18 +773,12 @@ div.alert-warning {
  </div>
  <div class="heading">
   <h1 class="toleft">Finanèné výkazy -
-   <span style="color:#39f;">
-<?php
-if ( $drupoh >= 91 AND $drupoh <= 96 ) echo ""; //dopyt, èo je to za podmienku, je aktuálna
-?>
-nastavenie generovania
+   <span style="color:#39f;"> nastavenie generovania
    </span>
   </h1>
    <div class="bar-btn-form-tool"> <!-- dopyt, prípadne zobra z tlaciva.css -->
-<?php if ( $drupoh != 96 AND drupoh != 196 ) { ?> <!-- dopyt, èo je to za podmienku, je aktuálna -->
     <img src="../obr/ikony/trash_blue_icon.png" onclick="ZmazVsetky();" title="Vymaza všetky položky"
      class="btn-form-tool" style="margin:0;">
-<?php                                        } ?>
    </div>
  </div>
 </div> <!-- .wrap-heading -->
@@ -806,7 +800,7 @@ $source="../ucto/fin_cis.php?copern=308";
 ?>
 
 <div class="content-navbar toright">
-<?php if ( $drupoh >= 91 AND $drupoh <= 96 ) { ?>
+<?php if ( $drupoh >= 91 AND $drupoh <= 97 ) { ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=92', '_self');"
     title="Fin 2-04 NO generovanie" class="<?php echo $clas2; ?>">Fin 2-04 NO</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=91', '_self');"
