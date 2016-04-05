@@ -23,11 +23,11 @@ require_once("../pswd/password.php");
 $sDat = include("../funkcie/dat_sk_us.php");
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=0;
+$rmc=1;
 $rmc1=0;
 
 //.jpg podklad
-$jpg_cesta="../dokumenty/statistika2016/fin5-04/fin5-04_v16";
+$jpg_cesta="../dokumenty/statistika2016/fin504/fin5-04_v16";
 $jpg_popis="FinanËn˝ v˝kaz o dlhov˝ch n·strojoch a vybran˝ch z·v‰zkoch FIN 5-04 za rok ".$kli_vrok;
 
 $pole = explode(".", $kli_vume);
@@ -50,13 +50,7 @@ if ( $cislo_oc == 4 ) { $datum="31.12.".$kli_vrok; $mesiac="12"; $kli_vume="12."
 
 $vsetkyprepocty=0;
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
-
-// vymaz polozku
+//vymaz polozku
 if ( $copern == 316 )
     {
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
@@ -201,7 +195,7 @@ $vysledek = mysql_query("$sql");
 
 
 //vypocty
-if( $copern == 10 OR $copern == 20 )
+if ( $copern == 10 OR $copern == 20 )
 {
 
 
@@ -244,18 +238,14 @@ $skutku=substr($datum,0,6);
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
  <link rel="stylesheet" href="../css/reset.css">
  <link rel="stylesheet" href="../css/tlaciva.css">
-<title>V˝kaz FIN 2-04 POD</title>
+<title>V˝kaz FIN 5-04</title>
 <style type="text/css">
-img.btn-row-tool {
-  width: 20px;
-  height: 20px;
-}
 form input[type=text] {
-  height: 14px;
-  line-height: 14px;
-  padding-left: 2px;
+  height: 20px;
+  line-height: 20px;
+  padding-left: 4px;
   border: 1px solid #39f;
-  font-size: 12px;
+  font-size: 14px;
 }
 div.input-echo {
   position: absolute;
@@ -263,6 +253,20 @@ div.input-echo {
   background-color: #fff;
   font-weight: bold;
 }
+table.echo-zoznam {
+position: absolute; top: 194px; left: 83px;  font-size: 14px;
+
+}
+table.echo-zoznam td {
+  height: 26px;
+  line-height: 26px;
+  font-size: 15px;
+   border-bottom: 1px solid black;
+
+
+}
+
+
 </style>
 <script type="text/javascript">
 <?php
@@ -351,7 +355,7 @@ if ( $copern == 20 )
   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
  </tr>
  <tr>
-  <td class="header">FIN 5-04 FinanËn˝ v˝kaz o dlhov˝ch n·strojoch a vybran˝ch z·v‰zkoch za
+  <td class="header">FIN 5-04 DlhovÈ n·stroje a vybranÈ z·v‰zky za
    <span style="color:#39f;"><?php echo "$cislo_oc. ötvrùrok";?></span>
   </td>
   <td>
@@ -366,7 +370,15 @@ if ( $copern == 20 )
 </div>
 <?php if ( $strana < 1 OR $strana > 3 ) $strana=1; ?>
 
-<div id="content">
+<?php
+$sirka=950;
+$vyska=1300;
+if ( $strana == 2 )
+{
+$sirka=1250; $vyska=920;
+}
+?>
+<div id="content" style="width:<?php echo $sirka; ?>px; height:<?php echo $vyska; ?>px;">
 <FORM name="formv1" method="post" action="../ucto/vykaz_fin504_2016.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive"; $clas3="noactive";
@@ -390,7 +402,7 @@ if ( $nacitavamhodnoty == 1 ) { $alertnacitaj="!!! ⁄daje s˙ naËÌtanÈ !!!"; }
      alt="<?php echo $jpg_popis; ?> 1.strana 265kB">
 
 <span class="text-echo" style="top:153px; left:403px;"><?php echo $datum; ?></span>
-<span class="text-echo" style="top:271px; left:141px;">x</span>
+<span class="text-echo" style="top:361px; left:141px;">x</span>
 <span class="text-echo" style="top:516px; left:141px; letter-spacing:13.5px;"><?php echo $fir_ficox; ?></span>
 <span class="text-echo" style="top:516px; left:342px; letter-spacing:14px;"><?php echo $mesiac; ?></span>
 <span class="text-echo" style="top:516px; left:409px; letter-spacing:13.5px;"><?php echo $kli_vrok; ?></span>
@@ -406,13 +418,11 @@ if ( $nacitavamhodnoty == 1 ) { $alertnacitaj="!!! ⁄daje s˙ naËÌtanÈ !!!"; }
 
 
 <?php if ( $strana == 2 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 2.strana 265kB">
+<img src="<?php echo $jpg_cesta; ?>_str2_form.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 2.strana 265kB" style="width:1250px; height:1000px;">
 
-<table class="fmenu" width="100%" >
-
+<table class="echo-zoznam" style="">
 <?php
-
 $sluztt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin504  ".
 " WHERE oc >= 0 AND druh = 1 ORDER BY cpl ";
 
@@ -422,66 +432,59 @@ $slpol = mysql_num_rows($sluz);
 //zaciatok vypisu
 $i=0;
 $j=0;
-  while ($i <= $slpol )
+  while ( $i <= $slpol )
   {
-
   if (@$zaznam=mysql_data_seek($sluz,$i) OR $j == 0 )
 {
 $rsluz=mysql_fetch_object($sluz);
-
 ?>
-
 <tr>
-<td class="hvstup" colspan="1"><?php echo $rsluz->stlpa;?></td>
-<td class="hvstup" colspan="1"><?php echo $rsluz->stlpb;?></td>
-<td class="hvstup" colspan="1"><?php echo $rsluz->stlp1;?></td>
-<td class="hvstup" colspan="1"><?php echo $rsluz->stlp2;?></td>
+ <td class="center" style="width:190px; background-color:;"><?php echo $rsluz->stlpa; ?></td>
+ <td class="center" style="width:94px; background-color:;"><?php echo $rsluz->stlpb; ?></td>
+ <td class="center" style="width:117px; background-color:;"><?php echo $rsluz->stlp1; ?></td>
+ <td class="center" style="width:117px; background-color:;"><?php echo $rsluz->stlp2; ?></td>
+ <td class="center" style="width:93px; background-color:;"><?php echo $rsluz->stlp3; ?></td>
+ <td class="right" style="width:118px; background-color:;"><?php echo $rsluz->stlp4; ?>&nbsp;&nbsp;</td>
+ <td class="right" style="width:118px; background-color:;"><?php echo $rsluz->stlp5; ?>&nbsp;&nbsp;</td>
+ <td class="right" style="width:118px; background-color:;"><?php echo $rsluz->rs00003; ?>&nbsp;&nbsp;</td>
+ <td class="right" style="width:118px; background-color:;"><?php echo $rsluz->rs00004; ?>&nbsp;&nbsp;</td>
+ <td class="center" style="width:44px; background-color:; border:0;">
+ <a href='vykaz_fin504_2016.php?copern=316&cislo_cpl=<?php echo $rsluz->cpl;?>&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>'>
+<img src="../obr/ikony/xmark_lred_icon.png" title="Vymazaù riadok" style="width:16px; height:16px;"></a> <!-- dopyt, nemÙûe byù cez <img> ? -->
+</td> <!-- dopyt, zobrazuje sa img, aj keÔ nie s˙ uloûenÈ ˙daje -->
 
-<td class="hvstup" colspan="1"><?php echo $rsluz->stlp3;?></td>
-<td class="hvstup" colspan="1" align="right"><?php echo $rsluz->stlp4;?></td>
-<td class="hvstup" colspan="1" align="right"><?php echo $rsluz->stlp5;?></td>
-
-<td class="hvstup" colspan="1" align="right"><?php echo $rsluz->rs00003;?></td>
-<td class="hvstup" colspan="1" align="right"><?php echo $rsluz->rs00004;?>
-<a href='vykaz_fin504_2016.php?copern=316&cislo_cpl=<?php echo $rsluz->cpl;?>&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>'>
-<img src='../obr/zmaz.png' width=15 height=10 border=0 title="Vymazaù riadok" ></a>
-
-</td>
 </tr>
-
 <?php
 }
-
 $i = $i + 1;
 $j = $j + 1;
   }
-              
 ?>
-
-<tr>
-<td class="bmenu" colspan="1"><input type="text" name="stlpa" id="stlpa" size="10" /></td>
-<td class="bmenu" colspan="1"><input type="text" name="stlpb" id="stlpb" size="10" /></td>
-<td class="bmenu" colspan="1"><input type="text" name="stlp1" id="stlp1" size="10" /></td>
-
-<td class="bmenu" colspan="1"><input type="text" name="stlp2" id="stlp2" size="10" /></td>
-
-<td class="bmenu" colspan="1" align="right"><input type="text" name="stlp3" id="stlp3" size="10" /></td>
-<td class="bmenu" colspan="1" align="right"><input type="text" name="stlp4" id="stlp4" size="10" /></td>
-<td class="bmenu" colspan="1" align="right"><input type="text" name="stlp5" id="stlp5" size="10" /></td>
-<td class="bmenu" colspan="1" align="right"><input type="text" name="rs00003" id="rs00003" size="10" /></td>
-<td class="bmenu" colspan="1" align="right"><input type="text" name="rs00004" id="rs00004" size="10" /></td>
-</tr>
 </table>
+<?php
+$topx=291+$cpol*28;
+//191
+//$topx0=802+$cpol*28;
+//$topx1=830+$cpol*28;
+//$topx2=840+$cpol*28;
+//$cpol=1;
+?>
+<input type="text" name="stlpa" id="stlpa" style="width:174px; top:<?php echo $topx;?>px; left:89px;"/> <!-- dopyt, ned·me cez select? -->
+<input type="text" name="stlpb" id="stlpb" style="width:78px; top:<?php echo $topx;?>px; left:278px;"/> <!-- dopyt, ned·me cez select? -->
+<input type="text" name="stlp1" id="stlp1" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:370px;"/>
+<input type="text" name="stlp2" id="stlp2" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:488px;"/>
+<input type="text" name="stlp3" id="stlp3" style="width:78px; top:<?php echo $topx;?>px; left:606px;"/> <!-- dopyt, ned·me cez select? -->
+<input type="text" name="stlp4" id="stlp4" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:698px;"/>
+<input type="text" name="stlp5" id="stlp5" onkeyup="CiarkaNaBodku(this);" style="width:103px; top:<?php echo $topx;?>px; left:817px;"/>
+<input type="text" name="rs00003" id="rs00003" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:934px;"/>
+<input type="text" name="rs00004" id="rs00004" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:1052px;"/>
+
+
 
 <?php                     } ?>
-
-
-
-
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
-
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
 </div>
 
@@ -496,8 +499,7 @@ $j = $j + 1;
 /////////////////////////////////////////////////VYTLAC
 if ( $copern == 10 )
 {
-
-$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$hhmmss = Date ("is", MkTime(date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")) );
 
  $outfilexdel="../tmp/vykfin_".$kli_uzid."_*.*";
  foreach (glob("$outfilexdel") as $filename) {
@@ -505,7 +507,7 @@ $hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),
  }
 
 $outfilex="../tmp/vykfin_".$kli_uzid."_".$hhmmss.".pdf";
-if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -568,7 +570,7 @@ $pdf->Cell(78,6," ","$rmc1",0,"R");$pdf->Cell(22,4,"$text","$rmc",1,"C");
 
 //druh vykazu krizik
 $text="x";
-$pdf->Cell(195,24," ","$rmc1",1,"L");
+$pdf->Cell(195,44.5," ","$rmc1",1,"L");
 $pdf->Cell(20,4," ","$rmc1",0,"R");$pdf->Cell(4,3,"$text","$rmc",1,"C");
 
 //ico
@@ -582,7 +584,7 @@ $t05=substr($text,4,1);
 $t06=substr($text,5,1);
 $t07=substr($text,6,1);
 $t08=substr($text,7,1);
-$pdf->Cell(195,52," ","$rmc1",1,"L");
+$pdf->Cell(195,31.5," ","$rmc1",1,"L");
 $pdf->Cell(20,5," ","$rmc1",0,"R");
 $pdf->Cell(5,5,"$t01","$rmc",0,"C");$pdf->Cell(5,5,"$t02","$rmc",0,"C");
 $pdf->Cell(5,5,"$t03","$rmc",0,"C");$pdf->Cell(4,5,"$t04","$rmc",0,"C");
@@ -1024,18 +1026,18 @@ $pdf->Cell(195,12," ","$rmc1",1,"L");
 $pdf->Cell(40,5," ","$rmc1",0,"C");$pdf->Cell(22,4,"$daz","$rmc",1,"C");
 //koniec prva strana
 
-//druha strana
-$pdf->AddPage();
+
+$pdf->AddPage(L);
 $pdf->SetFont('arial','',8);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 if ( File_Exists($jpg_cesta.'_str2.jpg') )
 {
-$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str2.jpg',5,0,305,200);
 }
 $pdf->SetY(10);
 
-                                       }
+                                       } //dopyt, preËo je to z·tvorka aû nem· byù vyööie? inde to tak m·me, a druh· strana nie je oddelen·
 
 
 
