@@ -70,9 +70,7 @@ if ( $strana == 1 ) {
 $daz = $_REQUEST['daz'];
 $daz_sql = SqlDatum($daz);
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin504 SET ".
-" daz='$daz_sql' ".
-" WHERE oc = $cislo_oc";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin504 SET daz='$daz_sql' ";
 
 $upravene = mysql_query("$uprtxt");
  
@@ -206,7 +204,7 @@ if ( $copern == 10 OR $copern == 20 )
 //nacitaj udaje pre upravu
 if ( $copern == 20 )
     {
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin504 WHERE oc = $cislo_oc ";
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin504 ";
 
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
@@ -219,12 +217,49 @@ $daz_sk=SkDatum($daz);
 
 if ( $strana == 2 )
 {
-$r01 = $fir_riadok->r01;
+$stlpa = $fir_riadok->stlpa;
+if( $stlpa == '' ) { $stlpa="BU"; }
+$stlpb = $fir_riadok->stlpb;
+if( $stlpb == '' ) { $stlpb="EUR"; }
+
+$stlp1 = $fir_riadok->stlp1;
+$stlp2 = $fir_riadok->stlp2;
+if( $stlp1 == '' ) { $stlp1="RRRRMMDD"; }
+if( $stlp2 == '' ) { $stlp2="RRRRMMDD"; }
+
+$stlp3 = $fir_riadok->stlp3;
+if( $stlp3 == '' ) { $stlp3="F"; }
+
+$stlp4 = $fir_riadok->stlp4;
+$stlp5 = $fir_riadok->stlp5;
+$rs00003 = $fir_riadok->rs00003;
+$rs00004 = $fir_riadok->rs00004;
+if( $stlp4 == '' ) { $stlp4=0; }
+if( $stlp5 == '' ) { $stlp5=0; }
+if( $rs00003 == '' ) { $rs00003=0; }
+if( $rs00004 == '' ) { $rs00004=0; }
+
+
+$sqlxx = "SELECT SUM(stlp4) AS uhrn1, SUM(stlp5) AS uhrn2, SUM(rs00003) AS uhrn3, SUM(rs00004) AS uhrn4 FROM F$kli_vxcf"."_uctvykaz_fin504 ";
+$vysledokxx = mysql_query($sqlxx);
+if ( $vysledokxx ) {
+$riadokxx=mysql_fetch_object($vysledokxx);
+$uhrn1 = $riadokxx->uhrn1;
+$uhrn2 = $riadokxx->uhrn2;
+$uhrn3 = $riadokxx->uhrn3;
+$uhrn4 = $riadokxx->uhrn4;
+}
+if( $uhrn1 == '' ) { $uhrn1=0; }
+if( $uhrn2 == '' ) { $uhrn2=0; }
+if( $uhrn3 == '' ) { $uhrn3=0; }
+if( $uhrn4 == '' ) { $uhrn4=0; }
+
 
 }
 
 
 mysql_free_result($fir_vysledok);
+
     }
 //koniec nacitania
 
@@ -352,6 +387,13 @@ window.open('fin204poddbf_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&dru
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+  function Vymaz(cpl)
+  {
+   window.open('vykaz_fin504_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=316&drupoh=1&page=1&subor=0&strana=2&cislo_cpl=' + cpl + '&xx=1',
+'_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }
+
+
 </script>
 </HEAD>
 <BODY onload="ObnovUI();">
@@ -461,8 +503,8 @@ $rsluz=mysql_fetch_object($sluz);
  <td class="right" style="width:118px; background-color:;"><?php echo $rsluz->rs00003; ?>&nbsp;&nbsp;</td>
  <td class="right" style="width:118px; background-color:;"><?php echo $rsluz->rs00004; ?>&nbsp;&nbsp;</td>
  <td class="center" style="width:44px; background-color:; border:0;">
- <a href='vykaz_fin504_2016.php?copern=316&cislo_cpl=<?php echo $rsluz->cpl;?>&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>'>
-<img src="../obr/ikony/xmark_lred_icon.png" title="Vymaza riadok" style="width:16px; height:16px;"></a> <!-- dopyt, nemôže by cez <img> ? -->
+<img src="../obr/ikony/xmark_lred_icon.png" onclick="Vymaz(<?php echo $rsluz->cpl;?>);"
+title="Vymaza riadok" style="width:16px; height:16px;">
 </td>
 </tr>
 <?php
@@ -472,11 +514,9 @@ $j = $j + 1;
   }
 ?>
 <?php
-//uhrn
-$uhrn1=1100;
-$uhrn2=1200;
-$uhrn3=1300;
-$uhrn4=1400;
+//uhrny
+
+
 //$topx=180+25*$i;
 ?>
 <tr>
@@ -492,12 +532,14 @@ $uhrn4=1400;
 
 
 <?php
-$topx=162+25+30*$i;
+$topx=205+25.7*$i;
+if( $i > 10 ) { $topx=210+25.7*$i; }
+if( $i > 20 ) { $topx=220+25.7*$i; }
 ?>
 <select size="1" name="stlpa" id="stlpa" style="width:181px; top:<?php echo $topx;?>px; left:88px;">
+ <option value="BU">Bankové úvery (BU)</option>
  <option value="ED">Emitované dlhopisy (ED)</option>
  <option value="Z">Zmenky (Z)</option>
- <option value="BU">Bankové úvery (BU)</option>
  <option value="IDU">Investièné dodávate¾ské úvery (IDU)</option>
  <option value="DU">Dodávate¾ské úvery (DU)</option>
  <option value="SFRB">Úvery od Štátneho fondu rozvoja bývania (SFRB)</option>
@@ -508,26 +550,26 @@ $topx=162+25+30*$i;
  <option value="OST">Ostatné nebankové pôžièky (OST)</option>
  <option value="ZAB">Prijaté zábezpeky (ZAB)</option>
  <option value="VZPP">Vybrané záväzky a prijaté preddavky (VZPP)</option>
- <option value="0"></option>
+ <option value=""></option>
 </select>
 <select size="1" name="stlpb" id="stlpb" style="width:84px; top:<?php echo $topx;?>px; left:278px;">
- <option value="CZK">CZK</option>
  <option value="EUR">EUR</option>
+ <option value="CZK">CZK</option>
  <option value="GBP">GBP</option>
  <option value="HUF">HUF</option>
  <option value="PLN">PLN</option>
  <option value="SKK">SKK</option>
  <option value="USD">USD</option>
- <option value="0"></option>
+ <option value=""></option>
 </select>
 <input type="text" name="stlp1" id="stlp1" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:370px;"/>
 <input type="text" name="stlp2" id="stlp2" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:488px;"/>
 <select size="1" name="stlp3" id="stlp3" style="width:84px; top:<?php echo $topx;?>px; left:606px;">
  <option value="F">Fixný (F)</option>
  <option value="V">Variabilný (V)</option>
- <option value="0"></option>
+ <option value=""></option>
 </select>
-<input type="text" name="stlp4" id="stlp4" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:698px;"/>
+<input type="text" name="stlp4" id="stlp4" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:698px;" />
 <input type="text" name="stlp5" id="stlp5" onkeyup="CiarkaNaBodku(this);" style="width:103px; top:<?php echo $topx;?>px; left:817px;"/>
 <input type="text" name="rs00003" id="rs00003" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:934px;"/>
 <input type="text" name="rs00004" id="rs00004" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:1052px;"/>
