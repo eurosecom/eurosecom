@@ -253,19 +253,31 @@ div.input-echo {
   background-color: #fff;
   font-weight: bold;
 }
+form select {
+  position: absolute;
+  height: 24px;
+  font-size: 13px;
+}
 table.echo-zoznam {
-position: absolute; top: 194px; left: 83px;  font-size: 14px;
+position: absolute;
+top: 194px;
+left: 83px;
+
+
 
 }
 table.echo-zoznam td {
   height: 26px;
   line-height: 26px;
   font-size: 15px;
-   border-bottom: 1px solid black;
-
+  border-bottom: 1px solid black;
+}
+table.echo-zoznam th {
+  height: 24px;
+  line-height: 24px;
+  font-size: 13px;
 
 }
-
 
 </style>
 <script type="text/javascript">
@@ -421,7 +433,7 @@ if ( $nacitavamhodnoty == 1 ) { $alertnacitaj="!!! Údaje sú naèítané !!!"; }
 <img src="<?php echo $jpg_cesta; ?>_str2_form.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 2.strana 265kB" style="width:1250px; height:1000px;">
 
-<table class="echo-zoznam" style="">
+<table class="echo-zoznam">
 <?php
 $sluztt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin504  ".
 " WHERE oc >= 0 AND druh = 1 ORDER BY cpl ";
@@ -439,7 +451,7 @@ $j=0;
 $rsluz=mysql_fetch_object($sluz);
 ?>
 <tr>
- <td class="center" style="width:190px; background-color:;"><?php echo $rsluz->stlpa; ?></td>
+ <td class="center" style="width:190px;"><?php echo $rsluz->stlpa; ?></td>
  <td class="center" style="width:94px; background-color:;"><?php echo $rsluz->stlpb; ?></td>
  <td class="center" style="width:117px; background-color:;"><?php echo $rsluz->stlp1; ?></td>
  <td class="center" style="width:117px; background-color:;"><?php echo $rsluz->stlp2; ?></td>
@@ -451,8 +463,7 @@ $rsluz=mysql_fetch_object($sluz);
  <td class="center" style="width:44px; background-color:; border:0;">
  <a href='vykaz_fin504_2016.php?copern=316&cislo_cpl=<?php echo $rsluz->cpl;?>&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>'>
 <img src="../obr/ikony/xmark_lred_icon.png" title="Vymaza riadok" style="width:16px; height:16px;"></a> <!-- dopyt, nemôe by cez <img> ? -->
-</td> <!-- dopyt, zobrazuje sa img, aj keï nie sú uloené údaje -->
-
+</td>
 </tr>
 <?php
 }
@@ -460,41 +471,66 @@ $i = $i + 1;
 $j = $j + 1;
   }
 ?>
-</table>
-<?php
-$topx=291+$cpol*28;
-//191
-//$topx0=802+$cpol*28;
-//$topx1=830+$cpol*28;
-//$topx2=840+$cpol*28;
-//$cpol=1;
-$topx=200+25*$i;
-?>
-<input type="text" name="stlpa" id="stlpa" style="width:174px; top:<?php echo $topx;?>px; left:89px;"/> <!-- dopyt, nedáme cez select? -->
-<input type="text" name="stlpb" id="stlpb" style="width:78px; top:<?php echo $topx;?>px; left:278px;"/> <!-- dopyt, nedáme cez select? -->
-<input type="text" name="stlp1" id="stlp1" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:370px;"/>
-<input type="text" name="stlp2" id="stlp2" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:488px;"/>
-<input type="text" name="stlp3" id="stlp3" style="width:78px; top:<?php echo $topx;?>px; left:606px;"/> <!-- dopyt, nedáme cez select? -->
-<input type="text" name="stlp4" id="stlp4" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:698px;"/>
-<input type="text" name="stlp5" id="stlp5" onkeyup="CiarkaNaBodku(this);" style="width:103px; top:<?php echo $topx;?>px; left:817px;"/>
-<input type="text" name="rs00003" id="rs00003" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:934px;"/>
-<input type="text" name="rs00004" id="rs00004" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:1052px;"/>
-
-
 <?php
 //uhrn
 $uhrn1=1100;
 $uhrn2=1200;
 $uhrn3=1300;
 $uhrn4=1400;
-$topx=300+25*$i;
+//$topx=180+25*$i;
 ?>
 <tr>
- <td class="center" style="width:190px; background-color:;"><?php echo $uhrn1; ?></td>
- <td class="center" style="width:94px; background-color:;"><?php echo $uhrn2; ?></td>
- <td class="center" style="width:117px; background-color:;"><?php echo $uhrn3; ?></td>
- <td class="center" style="width:117px; background-color:;"><?php echo $uhrn4; ?></td>
-</tr>
+ <th colspan="5" style="width:611px;"></th>
+ <th class="right" style="width:118px; background-color:;"><?php echo $uhrn1; ?>&nbsp;&nbsp;</th>
+ <th class="right" style="width:118px; background-color:;"><?php echo $uhrn2; ?>&nbsp;&nbsp;</th>
+ <th class="right" style="width:118px; background-color:;"><?php echo $uhrn3; ?>&nbsp;&nbsp;</th>
+ <th class="right" style="width:118px; background-color:;"><?php echo $uhrn4; ?>&nbsp;&nbsp;</th>
+ <th style="border:0;"></th>
+</tr><!-- dopyt, ošetri, aby bolo vidie, iba keï je nahratı riadok -->
+</table>
+
+
+
+<?php
+$topx=162+25+30*$i;
+?>
+<select size="1" name="stlpa" id="stlpa" style="width:181px; top:<?php echo $topx;?>px; left:88px;">
+ <option value="ED">Emitované dlhopisy (ED)</option>
+ <option value="Z">Zmenky (Z)</option>
+ <option value="BU">Bankové úvery (BU)</option>
+ <option value="IDU">Investièné dodávate¾ské úvery (IDU)</option>
+ <option value="DU">Dodávate¾ské úvery (DU)</option>
+ <option value="SFRB">Úvery od Štátneho fondu rozvoja bıvania (SFRB)</option>
+ <option value="ENVF">Úvery od Environmentálneho fondu (ENVF)</option>
+ <option value="EPC">Úvery vyplıvajúce zo zmlúv o dodávke energetickıch sluieb (EPC)</option>
+ <option value="NFV">Návratné finanèné vıpomoci a ostatné pôièky prijaté od subjektov VS (NFV)</option>
+ <option value="FP">Finanènı prenájom (FP)</option>
+ <option value="OST">Ostatné nebankové pôièky (OST)</option>
+ <option value="ZAB">Prijaté zábezpeky (ZAB)</option>
+ <option value="VZPP">Vybrané záväzky a prijaté preddavky (VZPP)</option>
+ <option value="0"></option>
+</select>
+<select size="1" name="stlpb" id="stlpb" style="width:84px; top:<?php echo $topx;?>px; left:278px;">
+ <option value="CZK">CZK</option>
+ <option value="EUR">EUR</option>
+ <option value="GBP">GBP</option>
+ <option value="HUF">HUF</option>
+ <option value="PLN">PLN</option>
+ <option value="SKK">SKK</option>
+ <option value="USD">USD</option>
+ <option value="0"></option>
+</select>
+<input type="text" name="stlp1" id="stlp1" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:370px;"/>
+<input type="text" name="stlp2" id="stlp2" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:488px;"/>
+<select size="1" name="stlp3" id="stlp3" style="width:84px; top:<?php echo $topx;?>px; left:606px;">
+ <option value="F">Fixnı (F)</option>
+ <option value="V">Variabilnı (V)</option>
+ <option value="0"></option>
+</select>
+<input type="text" name="stlp4" id="stlp4" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:698px;"/>
+<input type="text" name="stlp5" id="stlp5" onkeyup="CiarkaNaBodku(this);" style="width:103px; top:<?php echo $topx;?>px; left:817px;"/>
+<input type="text" name="rs00003" id="rs00003" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:934px;"/>
+<input type="text" name="rs00004" id="rs00004" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:1052px;"/>
 
 
 
@@ -1053,8 +1089,7 @@ if ( File_Exists($jpg_cesta.'_str2.jpg') )
 $pdf->Image($jpg_cesta.'_str2.jpg',5,0,305,200);
 }
 $pdf->SetY(10);
-
-                                       } //dopyt, preèo je to zátvorka a nemá by vyššie? inde to tak máme, a druhá strana nie je oddelená
+                                       }
 
 
 
