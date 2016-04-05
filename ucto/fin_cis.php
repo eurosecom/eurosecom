@@ -399,12 +399,15 @@ $h_crs = $riadok->hod;
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
 <link rel="stylesheet" href="../css/reset.css" type="text/css">
-<link rel="stylesheet" href="../css/tlaciva.css" type="text/css">
 <title>EuroSecom - Fin.výkazy</title>
 <style type="text/css">
 body {
   min-width: 900px;
   font-family: Arial, sans-serif;
+  background-color: #add8e6;
+}
+a {
+  text-decoration: none;
 }
 strong {
   font-weight: bold;
@@ -438,8 +441,18 @@ div.heading > h1 {
   font-weight: bold;
   font-family: Times, 'Times New Roman', Georgia, serif;
 }
-
-
+div.bar-btn-form-tool {
+  position: absolute;
+  top: 23px;
+  right: 1%;
+}
+img.btn-form-tool {
+  float: right;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
 
 div.wrap-content { /* okolie tela */
   position: relative;
@@ -450,7 +463,7 @@ div.content-navbar > a { /* zalozky v tele */
   float: left;
   height: 12px;
   font-size: 12px;
-  padding: 6px 12px 4px 12px;
+  padding: 6px 12px 5px 12px;
   color: #000;
 }
 div.content-navbar > a:hover, a.active, div.content {
@@ -629,6 +642,12 @@ div.alert-warning {
   line-height: 24px;
   padding-left: 5px;
 }
+.toleft {
+  float: left;
+}
+.toright {
+  float: right;
+}
 </style>
 
 <script type="text/javascript">
@@ -773,18 +792,15 @@ div.alert-warning {
  </div>
  <div class="heading">
   <h1 class="toleft">Finančné výkazy -
-   <span style="color:#39f;"> nastavenie generovania
+   <span style="color:#39f;">nastavenie generovania
    </span>
   </h1>
-   <div class="bar-btn-form-tool"> <!-- dopyt, prípadne zobrať z tlaciva.css -->
-    <img src="../obr/ikony/trash_blue_icon.png" onclick="ZmazVsetky();" title="Vymazať všetky položky"
+   <div class="bar-btn-form-tool">
+    <img src="../obr/ikony/trash_blue_icon.png" onclick="ZmazVsetky();" title="Vymazať všetky položky z generovania"
      class="btn-form-tool" style="margin:0;">
    </div>
  </div>
 </div> <!-- .wrap-heading -->
-
-
-
 
 <div class="wrap-content">
 <?php
@@ -812,7 +828,7 @@ $source="../ucto/fin_cis.php?copern=308";
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=96', '_self');"
     title="Fin 6-04 - generovanie" class="<?php echo $clas5; ?>">Fin 6-04</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=97', '_self');"
-    title="Fin 7-04 - generovanie" class="<?php echo $clas6; ?>">Fin 7-04</a> <!-- dopyt, keď kliknem, tak sa nezobrazí lišta so záložkami -->
+    title="Fin 7-04 - generovanie" class="<?php echo $clas6; ?>">Fin 7-04</a>
 <?php                                        } ?>
 </div>
 
@@ -964,8 +980,8 @@ $vartitle = "číselník";
   title="Načítať štandardný číselník" class="btn-down-x26 toright">Štandardný</a>
 <?php                                                                              } ?>
 
-</div> <!-- koniec .content -->
-</div> <!-- koniec .wrap-content -->
+</div> <!-- .content -->
+</div> <!-- .wrap-content -->
 <?php
 //celkovy koniec dokumentu
        } while (false);
