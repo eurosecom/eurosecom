@@ -200,12 +200,20 @@ $polozky[] = array("RS00002", "N", 15, 2);
 $polozky[] = array("RS00003", "N", 15, 2);
 $polozky[] = array("RS00004", "N", 15, 2);
 
-// Získáme unikátní název DBF souboru
-$nazev_souboru = "../tmp/".uniqid("soubor", true) . ".dbf";
-$nazev_souboru = "../tmp/prijnujpod.dbf";
-//echo $nazev_souboru;
 
-@unlink($nazev_souboru);
+// Získáme unikátní název DBF souboru
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/PRIJNUJPOD_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/PRIJNUJPOD_".$kli_uzid."_".$hhmmss.".dbf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
+$nazev_souboru = $outfilex;
+
 
 //echo "idem dalej4";
 
@@ -240,7 +248,7 @@ while ($zaznam = @mysql_fetch_row($vysledek))
 
 /* Uživateli nabídneme soubor ke stažení - zašleme sadu pøíslušných hlavièek a následnì obsah celého souboru */
 //header("Content-Type: application/dbf");
-//header("Content-Disposition: attachment; filename=prijnujpod.dbf"); 
+//header("Content-Disposition: attachment; filename=$nazev_souboru"); 
 //header("Content-Description: PHP Generated Data");
 //@readfile($nazev_souboru);
 
@@ -376,11 +384,17 @@ $polozky2[] = array("RS00003", "N", 15, 2);
 $polozky2[] = array("RS00004", "N", 15, 2);
 
 // Získáme unikátní název DBF souboru
-$nazev_souboru2 = "../tmp/".uniqid("soubor", true) . ".dbf";
-$nazev_souboru2 = "../tmp/vydnujpod.dbf";
-//echo $nazev_souboru2;
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
-@unlink($nazev_souboru2);
+ $outfilexdel="../tmp/VYDNUJPOD_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/VYDNUJPOD_".$kli_uzid."_".$hhmmss.".dbf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
+$nazev_souboru2 = $outfilex;
 
 //echo "idem dalej4";
 
@@ -415,7 +429,7 @@ while ($zaznam = @mysql_fetch_row($vysledek))
 
 /* Uživateli nabídneme soubor ke stažení - zašleme sadu pøíslušných hlavièek a následnì obsah celého souboru */
 //header("Content-Type: application/dbf");
-//header("Content-Disposition: attachment; filename=vydnujpod.dbf"); 
+//header("Content-Disposition: attachment; filename=$nazev_souboru2"); 
 //header("Content-Description: PHP Generated Data");
 //@readfile($nazev_souboru2);
 
@@ -472,13 +486,13 @@ if( $copern == 1 )
 ?>
 <br />
 <br />
-Stiahnite si nižšie uvedené súbory na Váš lokálny disk  :
+Stiahnite si nižšie uvedené súbory na Váš lokálny disk, premenujte ich na PRIJNUJPOD.DBF a VZDNUJPOD.DBF a potom naèítajte na portál www.rissam.sk :
 <br />
 <br />
-<a href="../tmp/prijnujpod.dbf">prijnujpod.dbf</a>
+<a href="<?php echo $nazev_souboru; ?>"><?php echo $nazev_souboru; ?></a>
 <br />
 <br />
-<a href="../tmp/vydnujpod.dbf">vydnujpod.dbf</a>
+<a href="<?php echo $nazev_souboru2; ?>"><?php echo $nazev_souboru2; ?></a>
 
 <br />
 <br />

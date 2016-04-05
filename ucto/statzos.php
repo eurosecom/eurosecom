@@ -399,7 +399,7 @@ function UpravFin204no16()
 var h_oc = document.forms.formfin204no16.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin204no<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin204no<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -408,7 +408,7 @@ function ZnovuFin204no16()
 var h_oc = document.forms.formfin204no16.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin204no<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin204no<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -432,7 +432,7 @@ function UpravFin204pod16()
 var h_oc = document.forms.formfin204pod16.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin204pod<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin204pod<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -441,7 +441,7 @@ function ZnovuFin204pod16()
 var h_oc = document.forms.formfin204pod16.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin204pod<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin204pod<?php echo $rokfin204no; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -466,7 +466,7 @@ function UpravFin304()
 var h_oc = document.forms.formfin304.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin304<?php echo $rokfin304; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin304<?php echo $rokfin304; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -475,7 +475,7 @@ function ZnovuFin304()
 var h_oc = document.forms.formfin304.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin304<?php echo $rokfin304; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin304<?php echo $rokfin304; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -500,7 +500,7 @@ function UpravFin404()
 var h_oc = document.forms.formfin404.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin404<?php echo $rokfin404; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin404<?php echo $rokfin404; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -509,7 +509,7 @@ function ZnovuFin404()
 var h_oc = document.forms.formfin404.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin404<?php echo $rokfin404; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin404<?php echo $rokfin404; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -536,7 +536,7 @@ function UpravFin504()
 var h_oc = document.forms.formfin504.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin504<?php echo $rokfin504; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin504<?php echo $rokfin504; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -564,7 +564,7 @@ function UpravFin604()
 var h_oc = document.forms.formfin604.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin604<?php echo $rokfin604; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin604<?php echo $rokfin604; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -573,7 +573,7 @@ function ZnovuFin604()
 var h_oc = document.forms.formfin604.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin604<?php echo $rokfin604; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin604<?php echo $rokfin604; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -596,7 +596,7 @@ function UpravFin704()
 var h_oc = document.forms.formfin704.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -605,7 +605,7 @@ function ZnovuFin704()
 var h_oc = document.forms.formfin704.h_oc.value;
 var h_fmzdy = 0;
 
-window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=1',
+window.open('../ucto/vykaz_fin704<?php echo $rokfin704; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0&strana=2',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 

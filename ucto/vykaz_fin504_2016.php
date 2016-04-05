@@ -434,7 +434,7 @@ $i=0;
 $j=0;
   while ( $i <= $slpol )
   {
-  if (@$zaznam=mysql_data_seek($sluz,$i) OR $j == 0 )
+  if (@$zaznam=mysql_data_seek($sluz,$i))
 {
 $rsluz=mysql_fetch_object($sluz);
 ?>
@@ -468,6 +468,7 @@ $topx=291+$cpol*28;
 //$topx1=830+$cpol*28;
 //$topx2=840+$cpol*28;
 //$cpol=1;
+$topx=200+25*$i;
 ?>
 <input type="text" name="stlpa" id="stlpa" style="width:174px; top:<?php echo $topx;?>px; left:89px;"/> <!-- dopyt, nedáme cez select? -->
 <input type="text" name="stlpb" id="stlpb" style="width:78px; top:<?php echo $topx;?>px; left:278px;"/> <!-- dopyt, nedáme cez select? -->
@@ -478,6 +479,22 @@ $topx=291+$cpol*28;
 <input type="text" name="stlp5" id="stlp5" onkeyup="CiarkaNaBodku(this);" style="width:103px; top:<?php echo $topx;?>px; left:817px;"/>
 <input type="text" name="rs00003" id="rs00003" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:934px;"/>
 <input type="text" name="rs00004" id="rs00004" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:1052px;"/>
+
+
+<?php
+//uhrn
+$uhrn1=1100;
+$uhrn2=1200;
+$uhrn3=1300;
+$uhrn4=1400;
+$topx=300+25*$i;
+?>
+<tr>
+ <td class="center" style="width:190px; background-color:;"><?php echo $uhrn1; ?></td>
+ <td class="center" style="width:94px; background-color:;"><?php echo $uhrn2; ?></td>
+ <td class="center" style="width:117px; background-color:;"><?php echo $uhrn3; ?></td>
+ <td class="center" style="width:117px; background-color:;"><?php echo $uhrn4; ?></td>
+</tr>
 
 
 
