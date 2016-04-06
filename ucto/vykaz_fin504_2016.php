@@ -23,7 +23,7 @@ require_once("../pswd/password.php");
 $sDat = include("../funkcie/dat_sk_us.php");
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=1;
+$rmc=0;
 $rmc1=0;
 
 //.jpg podklad
@@ -294,12 +294,9 @@ form select {
   font-size: 13px;
 }
 table.echo-zoznam {
-position: absolute;
-top: 194px;
-left: 83px;
-
-
-
+  position: absolute;
+  top: 194px;
+  left: 83px;
 }
 table.echo-zoznam td {
   height: 26px;
@@ -308,12 +305,26 @@ table.echo-zoznam td {
   border-bottom: 1px solid black;
 }
 table.echo-zoznam th {
-  height: 24px;
-  line-height: 24px;
+  height: 22px;
+  line-height: 22px;
   font-size: 13px;
-
+  padding-top: 2px;
 }
-
+img.btn-cancel {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+  cursor: pointer;
+  opacity: 0.7;
+}
+img.btn-cancel:hover {
+  opacity: 1;
+}
+tr.zero-line > td { /* urcenie sirky stlpcov */
+  height: 0;
+  border: 0;
+  background-color: none;
+}
 </style>
 <script type="text/javascript">
 <?php
@@ -324,40 +335,32 @@ table.echo-zoznam th {
   function ObnovUI()
   {
 <?php if ( $strana == 1 ) { ?>
-   document.formv1.daz.value = '<?php echo $daz_sk;?>';
+   document.formv1.daz.value = '<?php echo $daz_sk; ?>';
 <?php                     } ?>
 
 <?php if ( $strana == 2 ) { ?>
-
-document.formv1.stlpa.value = '<?php echo $stlpa;?>';
-document.formv1.stlpb.value = '<?php echo $stlpb;?>';
-document.formv1.stlp1.value = '<?php echo $stlp1;?>';
-document.formv1.stlp2.value = '<?php echo $stlp2;?>';
-document.formv1.stlp3.value = '<?php echo $stlp3;?>';
-document.formv1.stlp4.value = '<?php echo $stlp4;?>';
-document.formv1.stlp5.value = '<?php echo $stlp5;?>';
-
-document.formv1.rs00003.value = '<?php echo $rs00003;?>';
-document.formv1.rs00004.value = '<?php echo $rs00004;?>';
-
-document.forms.formv1.stlpa.focus();
-document.forms.formv1.stlpa.select();
+   document.formv1.stlpa.value = '<?php echo $stlpa; ?>';
+   document.formv1.stlpb.value = '<?php echo $stlpb; ?>';
+   document.formv1.stlp1.value = '<?php echo $stlp1; ?>';
+   document.formv1.stlp2.value = '<?php echo $stlp2; ?>';
+   document.formv1.stlp3.value = '<?php echo $stlp3; ?>';
+   document.formv1.stlp4.value = '<?php echo $stlp4; ?>';
+   document.formv1.stlp5.value = '<?php echo $stlp5; ?>';
+   document.formv1.rs00003.value = '<?php echo $rs00003; ?>';
+   document.formv1.rs00004.value = '<?php echo $rs00004; ?>';
+   document.forms.formv1.stlpa.focus();
+   document.forms.formv1.stlpa.select();
 <?php                     } ?>
-    }
+  }
 <?php
 //koniec uprava
   }
 ?>
-<?php
-  if ( $copern != 20 )
-  { 
-?>
+<?php if ( $copern != 20 ) { ?>
   function ObnovUI()
   {
   }
-<?php
-  }
-?>
+<?php                      } ?>
 
 //Z ciarky na bodku
   function CiarkaNaBodku(Vstup)
@@ -373,27 +376,19 @@ document.forms.formv1.stlpa.select();
   function TlacVykaz()
   {
    window.open('vykaz_fin504_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999',
- '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+'_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
-  function Nacitaj()
+  function DbfFin204pod16()
   {
-   window.open('vykaz_fin504_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0&strana=1',
-'_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('fin204poddbf_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&drupoh=1&page=1&subor=0',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
-function DbfFin204pod16()
-                {
-window.open('fin204poddbf_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&drupoh=1&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
 
   function Vymaz(cpl)
   {
    window.open('vykaz_fin504_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=316&drupoh=1&page=1&subor=0&strana=2&cislo_cpl=' + cpl + '&xx=1',
 '_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
-
-
 </script>
 </HEAD>
 <BODY onload="ObnovUI();">
@@ -442,12 +437,6 @@ $source="vykaz_fin504_2016.php";
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
-
-<?php
-$alertnacitaj="";
-if ( $nacitavamhodnoty == 1 ) { $alertnacitaj="!!! Údaje sú naèítané !!!"; }
-?>
- <div class="alert-pocitam"><?php echo $alertnacitaj; ?></div>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-top-formsave">
 </div>
 
@@ -472,12 +461,24 @@ if ( $nacitavamhodnoty == 1 ) { $alertnacitaj="!!! Údaje sú naèítané !!!"; }
 
 
 <?php if ( $strana == 2 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str2_form.jpg" class="form-background"
+<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 2.strana 265kB" style="width:1250px; height:1000px;">
 
 <table class="echo-zoznam">
+<tr class="zero-line">
+ <td style="width:190px;"></td>
+ <td style="width:94px;"></td>
+ <td style="width:117px;"></td>
+ <td style="width:117px;"></td>
+ <td style="width:93px;"></td>
+ <td style="width:118px;"></td>
+ <td style="width:118px;"></td>
+ <td style="width:118px;"></td>
+ <td style="width:118px;"></td>
+ <td style="width:38px;"></td>
+</tr>
 <?php
-$sluztt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin504  ".
+$sluztt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin504".
 " WHERE oc >= 0 AND druh = 1 ORDER BY cpl ";
 
 $sluz = mysql_query("$sluztt");
@@ -493,19 +494,19 @@ $j=0;
 $rsluz=mysql_fetch_object($sluz);
 ?>
 <tr>
- <td class="center" style="width:190px;"><?php echo $rsluz->stlpa; ?></td>
- <td class="center" style="width:94px; background-color:;"><?php echo $rsluz->stlpb; ?></td>
- <td class="center" style="width:117px; background-color:;"><?php echo $rsluz->stlp1; ?></td>
- <td class="center" style="width:117px; background-color:;"><?php echo $rsluz->stlp2; ?></td>
- <td class="center" style="width:93px; background-color:;"><?php echo $rsluz->stlp3; ?></td>
- <td class="right" style="width:118px; background-color:;"><?php echo $rsluz->stlp4; ?>&nbsp;&nbsp;</td>
- <td class="right" style="width:118px; background-color:;"><?php echo $rsluz->stlp5; ?>&nbsp;&nbsp;</td>
- <td class="right" style="width:118px; background-color:;"><?php echo $rsluz->rs00003; ?>&nbsp;&nbsp;</td>
- <td class="right" style="width:118px; background-color:;"><?php echo $rsluz->rs00004; ?>&nbsp;&nbsp;</td>
- <td class="center" style="width:44px; background-color:; border:0;">
-<img src="../obr/ikony/xmark_lred_icon.png" onclick="Vymaz(<?php echo $rsluz->cpl;?>);"
-title="Vymaza riadok" style="width:16px; height:16px;">
-</td>
+ <td class="center"><?php echo $rsluz->stlpa; ?></td>
+ <td class="center"><?php echo $rsluz->stlpb; ?></td>
+ <td class="center"><?php echo $rsluz->stlp1; ?></td>
+ <td class="center"><?php echo $rsluz->stlp2; ?></td>
+ <td class="center"><?php echo $rsluz->stlp3; ?></td>
+ <td class="right"><?php echo $rsluz->stlp4; ?></td>
+ <td class="right"><?php echo $rsluz->stlp5; ?></td>
+ <td class="right"><?php echo $rsluz->rs00003; ?></td>
+ <td class="right"><?php echo $rsluz->rs00004; ?>&nbsp;</td>
+ <td class="center" style="border:0;">
+  <img src="../obr/ikony/xmark_lred_icon.png" onclick="Vymaz(<?php echo $rsluz->cpl;?>);"
+       title="Vymaza riadok" class="btn-cancel">
+ </td>
 </tr>
 <?php
 }
@@ -513,28 +514,24 @@ $i = $i + 1;
 $j = $j + 1;
   }
 ?>
-<?php
-//uhrny
-
-
-//$topx=180+25*$i;
-?>
 <tr>
- <th colspan="5" style="width:611px;"></th>
- <th class="right" style="width:118px; background-color:;"><?php echo $uhrn1; ?>&nbsp;&nbsp;</th>
- <th class="right" style="width:118px; background-color:;"><?php echo $uhrn2; ?>&nbsp;&nbsp;</th>
- <th class="right" style="width:118px; background-color:;"><?php echo $uhrn3; ?>&nbsp;&nbsp;</th>
- <th class="right" style="width:118px; background-color:;"><?php echo $uhrn4; ?>&nbsp;&nbsp;</th>
+ <th colspan="4"></th>
+ <th style="background-color:#ddd;">Úhrn</th>
+ <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn1; ?></th>
+ <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn2; ?></th>
+ <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn3; ?></th>
+ <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn4; ?>&nbsp;</th>
  <th style="border:0;"></th>
-</tr><!-- dopyt, ošetri, aby bolo vidie, iba keï je nahratý riadok -->
+</tr>
 </table>
 
-
-
 <?php
-$topx=205+25.7*$i;
-if( $i > 10 ) { $topx=210+25.7*$i; }
-if( $i > 20 ) { $topx=220+25.7*$i; }
+$topx=202+25.7*$i;
+if ( $i > 5 ) { $topx=207+25.7*$i; }
+if ( $i > 10 ) { $topx=214+25.7*$i; }
+if ( $i > 15 ) { $topx=219+25.7*$i; }
+if ( $i > 20 ) { $topx=225+25.7*$i; }
+if ( $i > 25 ) { $topx=231+25.7*$i; }
 ?>
 <select size="1" name="stlpa" id="stlpa" style="width:181px; top:<?php echo $topx;?>px; left:88px;">
  <option value="BU">Bankové úvery (BU)</option>
@@ -569,13 +566,10 @@ if( $i > 20 ) { $topx=220+25.7*$i; }
  <option value="V">Variabilný (V)</option>
  <option value=""></option>
 </select>
-<input type="text" name="stlp4" id="stlp4" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:698px;" />
+<input type="text" name="stlp4" id="stlp4" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:698px;"/>
 <input type="text" name="stlp5" id="stlp5" onkeyup="CiarkaNaBodku(this);" style="width:103px; top:<?php echo $topx;?>px; left:817px;"/>
 <input type="text" name="rs00003" id="rs00003" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:934px;"/>
 <input type="text" name="rs00004" id="rs00004" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:1052px;"/>
-
-
-
 <?php                     } ?>
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
@@ -1131,48 +1125,36 @@ if ( File_Exists($jpg_cesta.'_str2.jpg') )
 $pdf->Image($jpg_cesta.'_str2.jpg',5,0,305,200);
 }
 $pdf->SetY(10);
+$pdf->Cell(195,22.5," ","$rmc1",1,"L");
                                        }
-
-
-
+//dlhove nastroje a zavazky
 $stlpa=$hlavicka->stlpa;
 $stlpb=$hlavicka->stlpb;
 $stlp1=$hlavicka->stlp1;
 $stlp2=$hlavicka->stlp2;
 $stlp3=$hlavicka->stlp3;
-$stlp4=$hlavicka->stlp4;
-if( $hlavicka->stlp4 == 0 ) $stlp4="";
-$stlp5=$hlavicka->stlp5;
-if( $hlavicka->stlp5 == 0 ) $stlp5="";
-$stlp6=$hlavicka->stlp6;
-if( $hlavicka->stlp6 == 0 ) $stlp6="";
+$stlp4=$hlavicka->stlp4; if ( $hlavicka->stlp4 == 0 ) $stlp4="";
+$stlp5=$hlavicka->stlp5; if ( $hlavicka->stlp5 == 0 ) $stlp5="";
+$stlp6=$hlavicka->stlp6; if ( $hlavicka->stlp6 == 0 ) $stlp6=""; //dopyt, netlaèí, predtým nebolo aj sumár
+$stlp7=$hlavicka->stlp7; if ( $hlavicka->stlp7 == 0 ) $stlp7=""; //dopyt, netlaèí, predtým nebolo, aj sumár
 
-if( $hlavicka->px01 == 0 AND $i <= 7 )
-  {
-$pdf->Cell(9,6," ","$rmc",0,"C");
-$pdf->Cell(25,6,"$stlpa","$rmc",0,"L");$pdf->Cell(25,6,"$stlpb","$rmc",0,"C");$pdf->Cell(26,6,"$stlp1","$rmc",0,"C");$pdf->Cell(25,6,"$stlp2","$rmc",0,"C");
-$pdf->Cell(25,6,"$stlp3","$rmc",0,"C");$pdf->Cell(26,6,"$stlp4 ","$rmc",0,"R");$pdf->Cell(25,6,"$stlp5 ","$rmc",1,"R");
-  }
+if ( $hlavicka->px01 == 0 )
+     {
+$pdf->Cell(15.5,6," ","$rmc1",0,"C");
+$pdf->Cell(46.2,6,"$stlpa","1",0,"C");$pdf->Cell(22.6,6,"$stlpb","1",0,"C");
+$pdf->Cell(28.7,6,"$stlp1","1",0,"C");$pdf->Cell(28.8,6,"$stlp2","1",0,"C");
+$pdf->Cell(22.6,6,"$stlp3","1",0,"C");$pdf->Cell(28.8,6,"$stlp4","1",0,"R");
+$pdf->Cell(28.7,6,"$stlp5","1",0,"R");$pdf->Cell(28.8,6,"$stlp6","1",0,"R");
+$pdf->Cell(28.7,6,"$stlp7","1",1,"R");
+     }
 
-if( $hlavicka->px01 == 0 AND $i > 7 )
-  {
-$pdf->Cell(9,6," ","$rmc",0,"C");
-$pdf->Cell(25,6,"$stlpa","1",0,"L");$pdf->Cell(25,6,"$stlpb","1",0,"C");$pdf->Cell(26,6,"$stlp1","1",0,"C");$pdf->Cell(25,6,"$stlp2","1",0,"C");
-$pdf->Cell(25,6,"$stlp3","1",0,"C");$pdf->Cell(26,6,"$stlp4 ","1",0,"R");$pdf->Cell(25,6,"$stlp5 ","1",1,"R");
-  }
-
-if( $hlavicka->px01 == 1 )
-  {
-if( $pol <= 8 ) { $pdf->SetY(85); }
-$pdf->Cell(195,1,"                          ","$rmc",1,"L");
-$pdf->Cell(9,6," ","$rmc",0,"C");
+if ( $hlavicka->px01 == 1 )
+     {
 $pdf->SetFont('arial','B',10);
-$pdf->Cell(126,6,"Úhrn","$rmc",0,"L");$pdf->Cell(26,6,"$stlp4","$rmc",0,"R");$pdf->Cell(25,6,"$stlp5","$rmc",1,"R");
-  }
-
-
-
-
+$pdf->Cell(15.5,6," ","$rmc1",0,"C");$pdf->Cell(148.9,6,"Úhrn","1",0,"C");
+$pdf->Cell(28.8,6,"$stlp4","1",0,"R");$pdf->Cell(28.7,6,"$stlp5","1",0,"R");
+$pdf->Cell(28.8,6,"$stlp6","1",0,"R");$pdf->Cell(28.7,6,"$stlp7","1",1,"R");
+     }
 }
 $i = $i + 1;
   }
@@ -1180,7 +1162,7 @@ $pdf->Output("$outfilex");
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("<?php echo $outfilex; ?>","_self");
+  var okno = window.open("<?php echo $outfilex; ?>", "_self");
 </script>
 
 <?php
