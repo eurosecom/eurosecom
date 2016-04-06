@@ -28,7 +28,7 @@ if ( $kli_vrok < 2016 )
 {
 ?>
 <script type="text/javascript">
-  var okno = window.open("../ucto/statzos2015.php?copern=1&drupoh=1&page=1&sysx=UCT","_self");
+  var okno = window.open("../ucto/statzos2015.php?copern=1&drupoh=1&page=1&sysx=UCT", "_self");
 </script>
 <?php
 exit;
@@ -540,9 +540,6 @@ window.open('../ucto/vykaz_fin504<?php echo $rokfin504; ?>.php?cislo_oc=' + h_oc
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-function ZnovuFin504()
-                {
-                }
 
 //vykaz Fin604
 <?php
@@ -1154,7 +1151,7 @@ if ( $nedaj == 0 ) { ?>
  </select>
 </div>
 </div>
-<img src='../obr/vlozit.png' onclick="ZnovuFin504();" title="Naèíta údaje" class="toleft line-box box-lightblue">
+<div class="toleft line-box"></div>
 <img src='../obr/export.png' onclick="DbfFin504();" title="Export do DBF" class="toleft line-box box-red">
 <img src='../obr/zoznam.png' onclick="UpravFin504();" title="Upravi hodnoty" class="toleft line-box box-green">
 </FORM>
