@@ -1262,12 +1262,20 @@ $kli_vxr=substr($kli_vrok,2,2);;
 if( $kli_vmes < 10 ) $kli_vmes = ""."0".$kli_vmes;
 
 
-$nazsub="STABILITA".$kli_vmes.$kli_vxr;
+$hhmmss = Date ("is", MkTime(date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")) );
+
+ $outfilexdel="../tmp/STABILITA".$kli_vmes.$kli_vxr."_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/STABILITA".$kli_vmes.$kli_vxr."_".$kli_uzid."_".$hhmmss.".xml";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
 
 
-if (File_Exists ("../tmp/$nazsub.xml")) { $soubor = unlink("../tmp/$nazsub.xml"); }
+$nazsub=$outfilex;
 
-$soubor = fopen("../tmp/$nazsub.xml", "a+");
+$soubor = fopen($nazsub, "a+");
 
 /////////////NACITANIE UDAJOV O DDP
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdcisddp WHERE nddp LIKE '%STABILITA%' ");
@@ -1357,7 +1365,11 @@ if( $ddpssy == 0 ) $ddpssy=$kli_vmes.$kli_vrok;
   fwrite($soubor, $text);
   $text = "<nazovorganizacie>$fir_fnaz</nazovorganizacie>"."\r\n";
   fwrite($soubor, $text);
-  $text = "<cislouctu>$fir_fuc1/$fir_fnm1</cislouctu>"."\r\n";
+
+$bankazam=$fir_fuc1/$fir_fnm1;
+if( $kli_vrok > 2015 ) { $bankazam=$fir_fib1; }
+
+  $text = "<cislouctu>".$bankazam."</cislouctu>"."\r\n";
   fwrite($soubor, $text);
   $text = "</organizacia>"."\r\n";
   fwrite($soubor, $text);
@@ -1495,7 +1507,7 @@ $j = $j + 1;
 fclose($soubor);
 ?>
 
-<a href="../tmp/<?php echo $nazsub; ?>.xml">../tmp/<?php echo $nazsub; ?>.xml</a>
+<a href="<?php echo $outfilex; ?>"><?php echo $outfilex; ?></a>
 
 
 <?php
