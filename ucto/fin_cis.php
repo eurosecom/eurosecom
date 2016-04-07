@@ -97,6 +97,13 @@ $gener=1;
 $minul=0;
 }
 
+if( $drupoh == 98 )
+{
+$uctsys="crf104nuj_no";
+$gener=1;
+$minul=0;
+}
+
 if( $gener == 1 )
 {
 
@@ -153,9 +160,14 @@ if ( $fir_allx11 > 0 ) $h_ycf=1*$fir_allx11;
 $databaza="";
 $dtbzx = include("../cis/oddel_dtbz1.php");
 
+if( $drupoh == 98 )
+  {
+$dsqlt = "TRUNCATE F$kli_vxcf"."_crf104nuj_no ";
+$dsql = mysql_query("$dsqlt");
 
-
-
+$dsqlt = "INSERT INTO F$kli_vxcf"."_crf104nuj_no SELECT * FROM ".$databaza."F$h_ycf"."_crf104nuj_no ";
+$dsql = mysql_query("$dsqlt");
+  }
 
 
 $copern=308;
@@ -285,6 +297,12 @@ $vysledok = mysql_query("$sql");
 if( $drupoh == 97 )
       {
 $sql = "DELETE FROM F$kli_vxcf"."_genfin704 ";
+$vysledok = mysql_query("$sql");
+      }
+
+if( $drupoh == 98 )
+      {
+$sql = "DELETE FROM F$kli_vxcf"."_crf104nuj_no ";
 $vysledok = mysql_query("$sql");
       }
 
@@ -812,6 +830,7 @@ if ( $drupoh == 93 OR $drupoh == 193 ) $clas3="active";
 if ( $drupoh == 94 OR $drupoh == 194 ) $clas4="active";
 if ( $drupoh == 96 OR $drupoh == 196 ) $clas5="active";
 if ( $drupoh == 97 OR $drupoh == 197 ) $clas6="active";
+if ( $drupoh == 98 OR $drupoh == 198 ) $clas7="active";
 $source="../ucto/fin_cis.php?copern=308";
 ?>
 
@@ -829,6 +848,8 @@ $source="../ucto/fin_cis.php?copern=308";
     title="Fin 6-04 - generovanie" class="<?php echo $clas5; ?>">Fin 6-04</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=97', '_self');"
     title="Fin 7-04 - generovanie" class="<?php echo $clas6; ?>">Fin 7-04</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=98', '_self');"
+    title="Fin 1-12 - generovanie" class="<?php echo $clas6; ?>">Fin 1-12</a>
 <?php                                        } ?>
 </div>
 
@@ -842,6 +863,7 @@ if ( $drupoh == 93 OR $drupoh == 193 ) { echo "Fin 3-04 - Generovanie"; }
 if ( $drupoh == 94 OR $drupoh == 194 ) { echo "Fin 4-04 - Generovanie"; }
 if ( $drupoh == 96 OR $drupoh == 196 ) { echo "Fin 6-04 - Generovanie"; }
 if ( $drupoh == 97 OR $drupoh == 197 ) { echo "Fin 7-04 - Generovanie"; }
+if ( $drupoh == 98 OR $drupoh == 198 ) { echo "Fin 1-12 - Generovanie"; }
 ?>
    <img src='../obr/info.png' title="EnterNext = klávesou ENTER prejdete na ïalšiu poloku">
   </h2>
@@ -969,13 +991,13 @@ $i = $i + 1;
 <?php
 $vartitle = "èíselník";
 ?>
-<?php if ( $drupoh >= 91 AND $kli_vrok > 2016 ) { ?>
+<?php if ( ( $drupoh >= 91 AND $kli_vrok > 2016 ) OR $drupoh == 98 ) { ?>
  <a href='fin_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
   title="Naèíta <?php echo $vartitle; ?> generovania z firmy predchádzajúceho úètovného obdobia"
   class="btn-down-x26 toright">Generovanie <?php echo $kli_minrok; ?></a>
 <?php                         } ?>
 
-<?php if ( $drupoh >= 91 ) { ?>
+<?php if ( $drupoh >= 91 AND $drupoh != 98 ) { ?>
  <a href='fin_cis.php?drupoh=<?php echo $drupoh; ?>&copern=155&page=1'
   title="Naèíta štandardnı èíselník" class="btn-down-x26 toright">Štandardnı</a>
 <?php                                                                              } ?>

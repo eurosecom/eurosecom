@@ -378,9 +378,9 @@ tr.zero-line > td { /* urcenie sirky stlpcov */
    window.open('vykaz_fin504_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999',
 '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
-  function DbfFin204pod16()
+  function DbfFin504()
   {
-   window.open('fin204poddbf_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&drupoh=1&page=1&subor=0',
+   window.open('fin504dbf_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&drupoh=1&page=1&subor=0',
 '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
@@ -410,7 +410,7 @@ if ( $copern == 20 )
   <td>
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
-    <img src="../obr/ikony/upbox_blue_icon.png" onclick="DbfFin204pod16();" title="Export do DBF" class="btn-form-tool">
+    <img src="../obr/ikony/upbox_blue_icon.png" onclick="DbfFin504();" title="Export do DBF" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
@@ -614,10 +614,11 @@ $vysledok = mysql_query("$sqlt");
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctprcvykazx'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctvykaz_fin504";
 $vytvor = mysql_query("$vsql");
 
+//cpl	px01	oc	druh	okres	obec	daz	stlpa	stlpb	stlp1	stlp2	stlp3	stlp4	stlp5	stlp6	xxb	rs00004	rs00003
 //sumare
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
 " 0,1,oc,druh,okres,obec,daz,".
-" '','',stlp1,stlp2,stlp3,SUM(stlp4),SUM(stlp5),SUM(stlp6),0,rs00003,rs00004 ".
+" '','',stlp1,stlp2,stlp3,SUM(stlp4),SUM(stlp5),0,0,SUM(rs00004),SUM(rs00003) ".
 " FROM F$kli_vxcf"."_uctvykaz_fin504".
 " WHERE druh = 1 ".
 " GROUP BY druh ".
@@ -1133,10 +1134,10 @@ $stlpb=$hlavicka->stlpb;
 $stlp1=$hlavicka->stlp1;
 $stlp2=$hlavicka->stlp2;
 $stlp3=$hlavicka->stlp3;
-$stlp4=$hlavicka->stlp4; if ( $hlavicka->stlp4 == 0 ) $stlp4="";
-$stlp5=$hlavicka->stlp5; if ( $hlavicka->stlp5 == 0 ) $stlp5="";
-$stlp6=$hlavicka->stlp6; if ( $hlavicka->stlp6 == 0 ) $stlp6=""; //dopyt, netlaèí, predtým nebolo aj sumár
-$stlp7=$hlavicka->stlp7; if ( $hlavicka->stlp7 == 0 ) $stlp7=""; //dopyt, netlaèí, predtým nebolo, aj sumár
+$stlp4=$hlavicka->stlp4; if ( $stlp4 == 0 ) $stlp4="";
+$stlp5=$hlavicka->stlp5; if ( $stlp5 == 0 ) $stlp5="";
+$stlp6=$hlavicka->rs00003; if ( $stlp6 == 0 ) $stlp6=""; 
+$stlp7=$hlavicka->rs00004; if ( $stlp7 == 0 ) $stlp7=""; 
 
 if ( $hlavicka->px01 == 0 )
      {

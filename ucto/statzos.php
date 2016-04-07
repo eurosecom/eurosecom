@@ -1019,6 +1019,8 @@ $nazfin1a12="FIN 1-12";
 </div>
 </div>
 <img src='../obr/vlozit.png' onclick="ZnovuFin1a12();" title="Naèíta údaje" class="toleft line-box box-lightblue">
+<img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=98&page=1&sysx=UCT', '_blank');"
+     title="Nastavi generovanie" class="toleft line-box box-brown">
 <?php if ( $kli_vrok < 2016 ) { ?>
 <img src='../obr/export.png' onclick="DbfFin1a12();" title="Export do DBF" class="toleft line-box box-red">
 <?php                         } ?>
