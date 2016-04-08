@@ -256,10 +256,7 @@ if( $uhrn4 == '' ) { $uhrn4=0; }
 
 
 }
-
-
 mysql_free_result($fir_vysledok);
-
     }
 //koniec nacitania
 
@@ -664,7 +661,7 @@ $pdf->Cell(195,44.5," ","$rmc1",1,"L");
 $pdf->Cell(20,4," ","$rmc1",0,"R");$pdf->Cell(4,3,"$text","$rmc",1,"C");
 
 //ico
-$text=$fir_fico;
+$text=$fir_ficox;
 $textx="12345678";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
