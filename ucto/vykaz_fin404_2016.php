@@ -23,7 +23,7 @@ require_once("../pswd/password.php");
 $sDat = include("../funkcie/dat_sk_us.php");
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=1;
+$rmc=0;
 $rmc1=0;
 
 //.jpg podklad
@@ -994,6 +994,7 @@ if ( $copern == 20 )
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
     <img src="../obr/ikony/download_blue_icon.png" onclick="Nacitaj();" title="Naèíta údaje" class="btn-form-tool">
+    <img src="../obr/ikony/upbox_blue_icon.png" onclick="" title="Export do DBF" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
@@ -1298,7 +1299,7 @@ $pdf->Cell(195,37.5," ","$rmc1",1,"L");
 $pdf->Cell(20,4," ","$rmc1",0,"R");$pdf->Cell(4,3,"$text","$rmc",1,"C");
 
 //ico
-$text=$fir_fico;
+$text=$fir_ficox;
 $textx="12345678";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
