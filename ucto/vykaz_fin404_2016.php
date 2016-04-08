@@ -972,6 +972,12 @@ div.input-echo {
    window.open('vykaz_fin404_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0&strana=1',
 '_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
+
+  function DbfFin404()
+  {
+   window.open('fin404dbf_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&drupoh=1&page=1&subor=0',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 </script>
 </HEAD>
 <BODY onload="ObnovUI();">
@@ -994,7 +1000,7 @@ if ( $copern == 20 )
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
     <img src="../obr/ikony/download_blue_icon.png" onclick="Nacitaj();" title="Naèíta údaje" class="btn-form-tool">
-    <img src="../obr/ikony/upbox_blue_icon.png" onclick="" title="Export do DBF" class="btn-form-tool">
+    <img src="../obr/ikony/upbox_blue_icon.png" onclick="DbfFin404();" title="Export do DBF" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
