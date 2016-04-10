@@ -94,7 +94,6 @@ $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '012', '2' 
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '014', '2' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '015', '2' ); "; $ulozene = mysql_query("$sqult"); 
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '072', '2' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '073', '2' ); "; $ulozene = mysql_query("$sqult"); 
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '074', '2' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '075', '2' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '079', '2' ); "; $ulozene = mysql_query("$sqult");
@@ -1047,6 +1046,8 @@ $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid,F$kli_vxcf"."_genfin204no".
 " WHERE F$kli_vxcf"."_uctprcvykaz$kli_uzid.uce = F$kli_vxcf"."_genfin204no.uce ";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
+
+
 //exit;
 
 //korekcia
@@ -1233,25 +1234,25 @@ if( $copern == 10 OR $copern == 20 )
 $vsldat="uctprcvykaz";
 $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin204no SET ".
 "r01=r02+r03+r04+r05, ".
-"r06=r07+r08+r09+r10+r11+r13+r14+r15, ".
+"r06=r07+r08+r09+r10+r11+r12+r13+r14+r15, ".
 "r16=r17+r18+r19+r20+r21, ".
 "r23=r24+r25+r26+r27+r28+r29+r30+r31+r32, ".
 "r33=r34+r35+r36+r37+r38, ". 
 
 "rk01=rk02+rk03+rk04+rk05, ".
-"rk06=rk07+rk08+rk09+rk10+rk11+rk13+rk14+rk15, ".
+"rk06=rk07+rk08+rk09+rk10+rk11+rk12+rk13+rk14+rk15, ".
 "rk16=rk17+rk18+rk19+rk20+rk21, ".
 "rk23=rk25+rk26+rk27+rk28+rk29+rk30+rk31+rk32+rk33+rk34+rk35, ".
 "rk33=rk34+rk35+rk36+rk37+rk38, ". 
 
 "rn01=rn02+rn03+rn04+rn05, ".
-"rn06=rn07+rn08+rn09+rn10+rn11+rn13+rn14+rn15, ".
+"rn06=rn07+rn08+rn09+rn10+rn11+rn12+rn13+rn14+rn15, ".
 "rn16=rn17+rn18+rn19+rn20+rn21, ".
 "rn23=rn24+rn25+rn26+rn27+rn28+rn29+rn30+rn31+rn32, ".
 "rn33=rn34+rn35+rn36+rn37+rn38, ". 
 
 "rm01=rm02+rm03+rm04+rm05, ".
-"rm06=rm07+rm08+rm09+rm10+rm11+rm13+rm14+rm15, ".
+"rm06=rm07+rm08+rm09+rm10+rm11+rm12+rm13+rm14+rm15, ".
 "rm16=rm17+rm18+rm19+rm20+rm21, ".
 "rm23=rm24+rm25+rm26+rm27+rm28+rm29+rm30+rm31+rm32, ".
 "rm33=rm34+rm35+rm36+rm37+rm38 ". 
@@ -1261,9 +1262,9 @@ $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin204no SET ".
 "r40=r01+r06+r16+r22+r23+r33+r39, ".
-"rk40=rk01+rk06+rk16+rk22+rk23+rk36+rk39, ".
-"rn40=rn01+rn06+rn16+rn22+rn23+rn36+rn39, ".
-"rm40=rm01+rm06+rm16+rm22+rm23+rm36+rm39  ".
+"rk40=rk01+rk06+rk16+rk22+rk23+rk33+rk39, ".
+"rn40=rn01+rn06+rn16+rn22+rn23+rn33+rn39, ".
+"rm40=rm01+rm06+rm16+rm22+rm23+rm33+rm39  ".
 " WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
@@ -1272,7 +1273,12 @@ $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin204no SET ".
 "r51=r52+r53, ".
 "r54=r55+r56, ".
 "r57=r58+r59, ".
-"r65=r66+r67 ".
+"r65=r66+r67, ".
+
+"rm51=rm52+rm53, ".
+"rm54=rm55+rm56, ".
+"rm57=rm58+rm59, ".
+"rm65=rm66+rm67 ".
 " WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
