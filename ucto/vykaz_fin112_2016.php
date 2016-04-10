@@ -27,8 +27,8 @@ $rmc=0;
 $rmc1=0;
 
 //.jpg podklad
-$jpg_cesta="../dokumenty/statistika2016/fin504/fin5-04_v16";
-$jpg_popis="Finanèný výkaz o dlhových nástrojoch a vybraných záväzkoch FIN 5-04 za rok ".$kli_vrok;
+$jpg_cesta="../dokumenty/statistika2016/fin112/fin1-12_v16";
+$jpg_popis="Finanèný výkaz o dlhových nástrojoch a vybraných záväzkoch FIN 1-12 za rok ".$kli_vrok;
 
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
@@ -717,33 +717,6 @@ $topx=200;
 <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:952px;"/>
 <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:1070px;"/>
 
-<?php
-
-$sqlxx = "SELECT SUM(schvaleny) AS uhrn1, SUM(zmeneny) AS uhrn2, SUM(predpoklad) AS uhrn3, SUM(skutocnost) AS uhrn4 FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE druh = 1 ";
-$vysledokxx = mysql_query($sqlxx);
-if ( $vysledokxx ) {
-$riadokxx=mysql_fetch_object($vysledokxx);
-$uhrn1 = $riadokxx->uhrn1;
-$uhrn2 = $riadokxx->uhrn2;
-$uhrn3 = $riadokxx->uhrn3;
-$uhrn4 = $riadokxx->uhrn4;
-}
-if( $uhrn1 == '' ) { $uhrn1=0; }
-if( $uhrn2 == '' ) { $uhrn2=0; }
-if( $uhrn3 == '' ) { $uhrn3=0; }
-if( $uhrn4 == '' ) { $uhrn4=0; }
-
-?>
-
-<tr>
- <th colspan="4"></th>
- <th style="background-color:#ddd;">Úhrn</th>
- <th class="right" style="width:118px; background-color:#ddd;" top:<?php echo $topx;?>px;><?php echo $uhrn1; ?></th>
- <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn2; ?></th>
- <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn3; ?></th>
- <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn4; ?>&nbsp;</th>
- <th style="border:0;"></th>
-</tr>
 
 
 <?php
@@ -785,6 +758,38 @@ $i = $i + 1;
 $j = $j + 1;
   }
 ?>
+
+
+<?php
+
+$sqlxx = "SELECT SUM(schvaleny) AS uhrn1, SUM(zmeneny) AS uhrn2, SUM(predpoklad) AS uhrn3, SUM(skutocnost) AS uhrn4 FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE druh = 1 ";
+$vysledokxx = mysql_query($sqlxx);
+if ( $vysledokxx ) {
+$riadokxx=mysql_fetch_object($vysledokxx);
+$uhrn1 = $riadokxx->uhrn1;
+$uhrn2 = $riadokxx->uhrn2;
+$uhrn3 = $riadokxx->uhrn3;
+$uhrn4 = $riadokxx->uhrn4;
+}
+if( $uhrn1 == '' ) { $uhrn1=0; }
+if( $uhrn2 == '' ) { $uhrn2=0; }
+if( $uhrn3 == '' ) { $uhrn3=0; }
+if( $uhrn4 == '' ) { $uhrn4=0; }
+
+?>
+
+<tr>
+ <th colspan="4"></th>
+ <th style="background-color:#ddd;">Úhrn</th>
+ <th class="right" style="width:118px; background-color:#ddd;" top:<?php echo $topx;?>px;><?php echo $uhrn1; ?></th>
+ <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn2; ?></th>
+ <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn3; ?></th>
+ <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn4; ?>&nbsp;</th>
+ <th style="border:0;"></th>
+</tr>
+
+
+
 </table>
 
 
@@ -819,70 +824,172 @@ if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
 
+
 $sirka_vyska="210,320";
 $velkost_strany = explode(",", $sirka_vyska);
+
 $pdf=new FPDF("P","mm", $velkost_strany );
 $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 
+
 //vytlac
+
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykazx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
-$vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctprcvykazx'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104";
+
+$vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctprcvykazx'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE druh = 5 ";
 $vytvor = mysql_query("$vsql");
 
-//cpl	px01	oc	druh	okres	obec	daz	stlpa	stlpb	stlp1	stlp2	stlp3	stlp4	stlp5	stlp6	xxb	rs00004	rs00003
+// cpl  px12  oc  druh  okres  obec  daz  kor  prx  uce  ucm  ucd  hod  mdt  dal  
+// program  zdroj  oddiel  xoddiel  skupina  trieda  podtrieda  polozka  xpolozka  podpolozka  nazov  schvaleny  zmeneny  skutocnost  ico  
+
+//prijmy
 //sumare
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
-" 0,1,oc,druh,okres,obec,daz,".
-" '','',stlp1,stlp2,stlp3,SUM(stlp4),SUM(stlp5),0,0,SUM(rs00004),SUM(rs00003) ".
+" 0,1,oc,druh,okres,obec,daz,kor,0,uce,ucm,ucd,0,0,0,".
+" program,zdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,'',".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
+" FROM F$kli_vxcf"."_uctvykaz_fin104".
+" WHERE druh = 1 OR druh = 3 ".
+" GROUP BY druh,zdroj,polozka".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+//exit;
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
+" 0,1,oc,druh,okres,obec,daz,kor,10,uce,ucm,ucd,0,0,0,".
+" program,zdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,'',".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
+" FROM F$kli_vxcf"."_uctvykaz_fin104".
+" WHERE druh = 1 OR druh = 3 ".
+" GROUP BY druh,zdroj,xpolozka".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
+" 0,1,oc,druh,okres,obec,daz,kor,200,uce,ucm,ucd,0,0,0,".
+" program,zdroj,'99999','99999',skupina,trieda,podtrieda,999999,999,podpolozka,'',".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 1 ".
-" GROUP BY druh ".
+" GROUP BY druh,zdroj".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
+" 0,1,oc,druh,okres,obec,daz,kor,500,uce,ucm,ucd,0,0,0,".
+" program,'99999','99999','99999',skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,'',".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
+" FROM F$kli_vxcf"."_uctvykaz_fin104".
+" WHERE druh = 1 OR druh = 3 ".
+" GROUP BY druh".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+//exit;
+
+//vydavky
+//sumare
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
+" 0,1,oc,druh,okres,obec,daz,kor,0,uce,ucm,ucd,0,0,0,".
+" program,zdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,'',".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
+" FROM F$kli_vxcf"."_uctvykaz_fin104".
+" WHERE druh = 2 OR druh = 4 ".
+" GROUP BY druh,zdroj,polozka".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
+" 0,1,oc,druh,okres,obec,daz,kor,10,uce,ucm,ucd,0,0,0,".
+" program,zdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,'',".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
+" FROM F$kli_vxcf"."_uctvykaz_fin104".
+" WHERE druh = 2 OR druh = 4 ".
+" GROUP BY druh,zdroj,xpolozka".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
+" 0,1,oc,druh,okres,obec,daz,kor,200,uce,ucm,ucd,0,0,0,".
+" program,zdroj,'99999','99999',skupina,trieda,podtrieda,999999,999,podpolozka,'',".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
+" FROM F$kli_vxcf"."_uctvykaz_fin104".
+" WHERE druh = 2 ".
+" GROUP BY druh,zdroj".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
 
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
+" 0,1,oc,druh,okres,obec,daz,kor,500,uce,ucm,ucd,0,0,0,".
+" program,'99999','99999','99999',skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,'',".
+"SUM(schvaleny),SUM(zmeneny),SUM(predpoklad),SUM(skutocnost),ico ".
+" FROM F$kli_vxcf"."_uctvykaz_fin104".
+" WHERE druh = 2 OR druh = 4  ".
+" GROUP BY druh".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+
+if ( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $fin1a12=0; }
+
 $sqltt = "SELECT * FROM F$kli_vxcf"."_uctprcvykazx".$kli_uzid." ".
-" WHERE F$kli_vxcf"."_uctprcvykazx$kli_uzid.oc >= 0  ORDER BY px01,cpl ";
+" WHERE F$kli_vxcf"."_uctprcvykazx$kli_uzid.oc >= 0  ORDER BY druh,zdroj,xpolozka,prx,polozka";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
-
 $i=0;
-$j=0; //zaciatok strany ak by som chcel strankovat
+$j=0;
+
   while ($i <= $pol )
   {
   if (@$zaznam=mysql_data_seek($sql,$i))
 {
 $hlavicka=mysql_fetch_object($sql);
 
-//prva strana
-if ( $i == 0 ) {
+$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+$dat_dat = SkDatum($hlavicka->da21 );
+if( $dat_dat == '0000-00-00' ) $dat_dat="";
+
+//prva strana j=0
+if ( $j == 0 ) {
+
+if ( $i == 0 )
+     {
 $pdf->AddPage();
-$pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str1.jpg') )
+if ( File_Exists($jpg_cesta.'.jpg') )
 {
-$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
 //obdobie k
+$pdf->SetFont('arial','',10);
 $text=$datum;
 $pdf->Cell(195,19," ","$rmc1",1,"L");
 $pdf->Cell(78,6," ","$rmc1",0,"R");$pdf->Cell(22,4,"$text","$rmc",1,"C");
 
 //druh vykazu krizik
 $text="x";
-$pdf->Cell(195,44.5," ","$rmc1",1,"L");
+$pdf->Cell(195,17," ","$rmc1",1,"L");
 $pdf->Cell(20,4," ","$rmc1",0,"R");$pdf->Cell(4,3,"$text","$rmc",1,"C");
 
 //ico
-$text=$fir_ficox;
+$text=$fir_fico;
 $textx="12345678";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -892,7 +999,7 @@ $t05=substr($text,4,1);
 $t06=substr($text,5,1);
 $t07=substr($text,6,1);
 $t08=substr($text,7,1);
-$pdf->Cell(195,31.5," ","$rmc1",1,"L");
+$pdf->Cell(195,59," ","$rmc1",1,"L");
 $pdf->Cell(20,5," ","$rmc1",0,"R");
 $pdf->Cell(5,5,"$t01","$rmc",0,"C");$pdf->Cell(5,5,"$t02","$rmc",0,"C");
 $pdf->Cell(5,5,"$t03","$rmc",0,"C");$pdf->Cell(4,5,"$t04","$rmc",0,"C");
@@ -970,7 +1077,7 @@ $pdf->Cell(5,5,"$t29","$rmc",0,"C");$pdf->Cell(5,5,"$t30","$rmc",0,"C");
 $pdf->Cell(5,5,"$t31","$rmc",1,"C");
 //
 $text=substr($fir_fnaz,31,30);;
-$text="Èý0123456789abcdefghijklmnoprstuv";
+$textx="Èý0123456789abcdefghijklmnoprstuv";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -1332,50 +1439,206 @@ $daz= SkDatum($hlavicka->daz);
 if ( $daz == '00.00.0000' ) $daz="";
 $pdf->Cell(195,12," ","$rmc1",1,"L");
 $pdf->Cell(40,5," ","$rmc1",0,"C");$pdf->Cell(22,4,"$daz","$rmc",1,"C");
-//koniec prva strana
+
+     }
+//koniec ak i=0 
 
 
-$pdf->AddPage(L);
-$pdf->SetFont('arial','',8);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str2.jpg') )
+
+
+
+//nova dalsia strana
+$pdf->AddPage();
+$pdf->SetFont('arial','',9);
+
+
+if( $hlavicka->druh == 1 AND $hlavicka->prx == 0 )
 {
-$pdf->Image($jpg_cesta.'_str2.jpg',5,0,305,200);
+$pdf->Cell(155,4,"Èas I. Príjmy a výdavky rozpoètu subjektu verejnej správy","0",0,"L");$pdf->Cell(30,4,"Strana: 2","0",1,"R");
+$pdf->Cell(155,4,"1.1. Príjmy","0",1,"L");
+
+$pdf->Cell(20,4," ","T",0,"L");$pdf->Cell(20,4,"Zdroj","T",0,"L");
+$pdf->Cell(35,4," ","T",0,"L");$pdf->Cell(35,4,"Položka+","T",0,"L");
+
+$pdf->Cell(25,4,"Schválený","T",0,"R");
+$pdf->Cell(25,4,"Rozpoèet","T",0,"R");$pdf->Cell(25,4,"Skutoènos","T",1,"R");
+
+
+$pdf->Cell(20,4," ","B",0,"L");$pdf->Cell(20,4," ","B",0,"L");
+$pdf->Cell(35,4," ","B",0,"L");$pdf->Cell(35,4,"podpoložka","B",0,"L");
+
+$pdf->Cell(25,4,"rozpoèet","B",0,"R");
+$pdf->Cell(25,4,"po zmenách","B",0,"R");$pdf->Cell(25,4," ","B",1,"R");
 }
-$pdf->SetY(10);
-$pdf->Cell(195,22.5," ","$rmc1",1,"L");
-                                       }
-//dlhove nastroje a zavazky
-$stlpa=$hlavicka->stlpa;
-$stlpb=$hlavicka->stlpb;
-$stlp1=$hlavicka->stlp1;
-$stlp2=$hlavicka->stlp2;
-$stlp3=$hlavicka->stlp3;
-$stlp4=$hlavicka->stlp4; if ( $stlp4 == 0 ) $stlp4="";
-$stlp5=$hlavicka->stlp5; if ( $stlp5 == 0 ) $stlp5="";
-$stlp6=$hlavicka->rs00003; if ( $stlp6 == 0 ) $stlp6=""; 
-$stlp7=$hlavicka->rs00004; if ( $stlp7 == 0 ) $stlp7=""; 
 
-if ( $hlavicka->px01 == 0 )
-     {
-$pdf->Cell(15.5,6," ","$rmc1",0,"C");
-$pdf->Cell(46.2,6,"$stlpa","1",0,"C");$pdf->Cell(22.6,6,"$stlpb","1",0,"C");
-$pdf->Cell(28.7,6,"$stlp1","1",0,"C");$pdf->Cell(28.8,6,"$stlp2","1",0,"C");
-$pdf->Cell(22.6,6,"$stlp3","1",0,"C");$pdf->Cell(28.8,6,"$stlp4","1",0,"R");
-$pdf->Cell(28.7,6,"$stlp5","1",0,"R");$pdf->Cell(28.8,6,"$stlp6","1",0,"R");
-$pdf->Cell(28.7,6,"$stlp7","1",1,"R");
-     }
 
-if ( $hlavicka->px01 == 1 )
-     {
-$pdf->SetFont('arial','B',10);
-$pdf->Cell(15.5,6," ","$rmc1",0,"C");$pdf->Cell(148.9,6,"Úhrn","1",0,"C");
-$pdf->Cell(28.8,6,"$stlp4","1",0,"R");$pdf->Cell(28.7,6,"$stlp5","1",0,"R");
-$pdf->Cell(28.8,6,"$stlp6","1",0,"R");$pdf->Cell(28.7,6,"$stlp7","1",1,"R");
-     }
+if( $hlavicka->druh == 2 AND $hlavicka->prx == 0 )
+{
+
+$pdf->Cell(155,4,"Èas I. Príjmy a výdavky rozpoètu subjektu verejnej správy","0",0,"L");$pdf->Cell(30,4,"Strana: 3","0",1,"R");
+$pdf->Cell(155,4,"1.2. Výdavky","0",1,"L");
+
+
+$pdf->Cell(20,4,"Program","T",0,"L");$pdf->Cell(20,4,"Zdroj","T",0,"L");
+$pdf->Cell(35,4,"Odd.skup.","T",0,"L");$pdf->Cell(35,4,"Položka+","T",0,"L");
+
+$pdf->Cell(25,4,"Schválený","T",0,"R");
+$pdf->Cell(25,4,"Rozpoèet","T",0,"R");$pdf->Cell(25,4,"Skutoènos","T",1,"R");
+
+
+$pdf->Cell(20,4," ","B",0,"L");$pdf->Cell(20,4," ","B",0,"L");
+$pdf->Cell(35,4,"tr.podtr.","B",0,"L");$pdf->Cell(35,4,"podpoložka","B",0,"L");
+
+$pdf->Cell(25,4,"rozpoèet","B",0,"R");
+$pdf->Cell(25,4,"po zmenách","B",0,"R");$pdf->Cell(25,4," ","B",1,"R");
+}
+
+
+
+if( $hlavicka->druh == 3 AND $hlavicka->prx == 0 )
+{
+$pdf->Cell(155,4,"Èas III. Podnikate¾ská èinnos subjektu verejnej správy","0",0,"L");$pdf->Cell(30,4,"Strana: 4","0",1,"R");
+$pdf->Cell(155,4,"3.1. Príjmy","0",1,"L");
+
+$pdf->Cell(20,4," ","T",0,"L");$pdf->Cell(20,4," ","T",0,"L");
+$pdf->Cell(35,4," ","T",0,"L");$pdf->Cell(35,4,"Položka+","T",0,"L");
+
+$pdf->Cell(25,4," ","T",0,"R");
+$pdf->Cell(25,4," ","T",0,"R");$pdf->Cell(25,4,"Skutoènos","T",1,"R");
+
+
+$pdf->Cell(20,4," ","B",0,"L");$pdf->Cell(20,4," ","B",0,"L");
+$pdf->Cell(35,4," ","B",0,"L");$pdf->Cell(35,4,"podpoložka","B",0,"L");
+
+$pdf->Cell(25,4," ","B",0,"R");
+$pdf->Cell(25,4," ","B",0,"R");$pdf->Cell(25,4," ","B",1,"R");
+
+}
+
+if( $hlavicka->druh == 4 AND $hlavicka->prx == 0 )
+{
+
+$pdf->Cell(155,4,"Èas III. Podnikate¾ská èinnos subjektu verejnej správy","0",0,"L");$pdf->Cell(30,4,"Strana: 5","0",1,"R");
+$pdf->Cell(155,4,"3.2. Výdavky","0",1,"L");
+
+
+$pdf->Cell(20,4," ","T",0,"L");$pdf->Cell(20,4," ","T",0,"L");
+$pdf->Cell(35,4,"Odd.skup.","T",0,"L");$pdf->Cell(35,4,"Položka+","T",0,"L");
+
+$pdf->Cell(25,4," ","T",0,"R");
+$pdf->Cell(25,4," ","T",0,"R");$pdf->Cell(25,4,"Skutoènos","T",1,"R");
+
+
+$pdf->Cell(20,4," ","B",0,"L");$pdf->Cell(20,4," ","B",0,"L");
+$pdf->Cell(35,4,"tr.podtr.","B",0,"L");$pdf->Cell(35,4,"podpoložka","B",0,"L");
+
+$pdf->Cell(25,4," ","B",0,"R");
+$pdf->Cell(25,4," ","B",0,"R");$pdf->Cell(25,4," ","B",1,"R");
+
+}
+
+
+
+               }
+//koniec j=0
+
+
+
+$schvaleny=$hlavicka->schvaleny;
+if( $hlavicka->schvaleny == 0 ) $schvaleny="";
+$zmeneny=$hlavicka->zmeneny;
+if( $hlavicka->zmeneny == 0 ) $zmeneny="";
+$predpoklad=$hlavicka->predpoklad;
+if( $hlavicka->predpoklad == 0 ) $predpoklad="";
+$skutocnost=$hlavicka->skutocnost;
+if( $hlavicka->skutocnost == 0 ) $skutocnost="";
+
+//prijem
+
+if( ( $hlavicka->druh == 1 OR $hlavicka->druh == 3 ) AND $hlavicka->prx == 0 )
+{
+$pdf->Cell(20,4," ","0",0,"L");$pdf->Cell(20,4,"$hlavicka->zdroj","0",0,"L");
+$pdf->Cell(35,4," ","0",0,"L");$pdf->Cell(35,4,"$hlavicka->polozka","0",0,"L");
+
+$pdf->Cell(25,4,"$schvaleny","0",0,"R");
+$pdf->Cell(25,4,"$zmeneny","0",0,"R");$pdf->Cell(25,4,"$skutocnost","0",1,"R");
+}
+
+if( ( $hlavicka->druh == 1 OR $hlavicka->druh == 3 ) AND $hlavicka->prx == 10 )
+{
+$pdf->Cell(20,4,"$hlavicka->program","T",0,"L");$pdf->Cell(20,4,"$hlavicka->zdroj","T",0,"L");
+$pdf->Cell(35,4," ","T",0,"L");$pdf->Cell(35,4,"$hlavicka->xpolozka","T",0,"L");
+
+$pdf->Cell(25,4,"$schvaleny","0",0,"R");
+$pdf->Cell(25,4,"$zmeneny","0",0,"R");$pdf->Cell(25,4,"$skutocnost","0",1,"R");
+}
+
+if( ( $hlavicka->druh == 1 OR $hlavicka->druh == 3 ) AND $hlavicka->prx == 200 )
+{
+$pdf->Cell(20,4,"$hlavicka->program","T",0,"L");$pdf->Cell(20,4,"$hlavicka->zdroj zdroj celkom","T",0,"L");
+$pdf->Cell(35,4," ","T",0,"L");$pdf->Cell(35,4," ","T",0,"L");
+
+$pdf->Cell(25,4,"$schvaleny","0",0,"R");
+$pdf->Cell(25,4,"$zmeneny","0",0,"R");$pdf->Cell(25,4,"$skutocnost","0",1,"R");
+}
+
+if( ( $hlavicka->druh == 1 OR $hlavicka->druh == 3 ) AND $hlavicka->prx == 500 )
+{
+$pdf->Cell(20,4,"ÚHRN","T",0,"L");$pdf->Cell(20,4," ","T",0,"L");
+$pdf->Cell(35,4," ","T",0,"L");$pdf->Cell(35,4," ","T",0,"L");
+
+$pdf->Cell(25,4,"$schvaleny","T",0,"R");
+$pdf->Cell(25,4,"$zmeneny","T",0,"R");$pdf->Cell(25,4,"$skutocnost","T",1,"R");
+$j=-1;
+}
+
+//vydaj
+
+if( ( $hlavicka->druh == 2 OR $hlavicka->druh == 4 ) AND $hlavicka->prx == 0 )
+{
+$pdf->Cell(20,4," ","0",0,"L");$pdf->Cell(20,4,"$hlavicka->zdroj","0",0,"L");
+$pdf->Cell(35,4," ","0",0,"L");$pdf->Cell(35,4,"$hlavicka->polozka","0",0,"L");
+
+$pdf->Cell(25,4,"$schvaleny","0",0,"R");
+$pdf->Cell(25,4,"$zmeneny","0",0,"R");$pdf->Cell(25,4,"$skutocnost","0",1,"R");
+}
+
+if( ( $hlavicka->druh == 2 OR $hlavicka->druh == 4 ) AND $hlavicka->prx == 10 )
+{
+$pdf->Cell(20,4," ","T",0,"L");$pdf->Cell(20,4,"$hlavicka->zdroj","T",0,"L");
+$pdf->Cell(35,4,"$hlavicka->oddiel","T",0,"L");$pdf->Cell(35,4,"$hlavicka->xpolozka","T",0,"L");
+
+$pdf->Cell(25,4,"$schvaleny","0",0,"R");
+$pdf->Cell(25,4,"$zmeneny","0",0,"R");$pdf->Cell(25,4,"$skutocnost","0",1,"R");
+}
+
+if( ( $hlavicka->druh == 2 OR $hlavicka->druh == 4 ) AND $hlavicka->prx == 200 )
+{
+$pdf->Cell(20,4," ","T",0,"L");$pdf->Cell(20,4,"$hlavicka->zdroj zdroj celkom","T",0,"L");
+$pdf->Cell(35,4," ","T",0,"L");$pdf->Cell(35,4," ","T",0,"L");
+
+$pdf->Cell(25,4,"$schvaleny","T",0,"R");
+$pdf->Cell(25,4,"$zmeneny","T",0,"R");$pdf->Cell(25,4,"$skutocnost","T",1,"R");
+}
+
+if( ( $hlavicka->druh == 2 OR $hlavicka->druh == 4 ) AND $hlavicka->prx == 500 )
+{
+$pdf->Cell(20,4,"ÚHRN","T",0,"L");$pdf->Cell(20,4," ","T",0,"L");
+$pdf->Cell(35,4," ","T",0,"L");$pdf->Cell(35,4," ","T",0,"L");
+
+$pdf->Cell(25,4,"$schvaleny","T",0,"R");
+$pdf->Cell(25,4,"$zmeneny","T",0,"R");$pdf->Cell(25,4,"$skutocnost","T",1,"R");
+$j=-1;
+}
+
+
+//koniec polozky
+
+
 }
 $i = $i + 1;
+$j = $j + 1;
+
   }
 $pdf->Output("$outfilex");
 ?>
