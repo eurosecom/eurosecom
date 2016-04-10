@@ -704,11 +704,53 @@ $source="vykaz_fin112_2016.php";
  <td style="width:118px;"></td>
  <td style="width:38px;"></td>
 </tr>
+
+<?php
+$topx=200;
+?>
+
+<input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:270px;"/>
+<input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:388px;"/>
+
+<input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:103px; top:<?php echo $topx;?>px; left:717px;"/>
+<input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:834px;"/>
+<input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:952px;"/>
+<input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:1070px;"/>
+
+<?php
+
+$sqlxx = "SELECT SUM(schvaleny) AS uhrn1, SUM(zmeneny) AS uhrn2, SUM(predpoklad) AS uhrn3, SUM(skutocnost) AS uhrn4 FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE druh = 1 ";
+$vysledokxx = mysql_query($sqlxx);
+if ( $vysledokxx ) {
+$riadokxx=mysql_fetch_object($vysledokxx);
+$uhrn1 = $riadokxx->uhrn1;
+$uhrn2 = $riadokxx->uhrn2;
+$uhrn3 = $riadokxx->uhrn3;
+$uhrn4 = $riadokxx->uhrn4;
+}
+if( $uhrn1 == '' ) { $uhrn1=0; }
+if( $uhrn2 == '' ) { $uhrn2=0; }
+if( $uhrn3 == '' ) { $uhrn3=0; }
+if( $uhrn4 == '' ) { $uhrn4=0; }
+
+?>
+
+<tr>
+ <th colspan="4"></th>
+ <th style="background-color:#ddd;">Úhrn</th>
+ <th class="right" style="width:118px; background-color:#ddd;" top:<?php echo $topx;?>px;><?php echo $uhrn1; ?></th>
+ <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn2; ?></th>
+ <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn3; ?></th>
+ <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn4; ?>&nbsp;</th>
+ <th style="border:0;"></th>
+</tr>
+
+
 <?php
 $sluztt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET kor=1*zdroj ";
 $sluz = mysql_query("$sluztt");
 
-$sluztt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE oc >= 0 AND druh = 1 ORDER BY druh,kor,xpolozka,polozka";
+$sluztt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE oc >= 0 AND druh = 1 ORDER BY cpl DESC ";
 
 $sluz = mysql_query("$sluztt");
 $slpol = mysql_num_rows($sluz);
@@ -743,33 +785,9 @@ $i = $i + 1;
 $j = $j + 1;
   }
 ?>
-<tr>
- <th colspan="4"></th>
- <th style="background-color:#ddd;">Úhrn</th>
- <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn1; ?></th>
- <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn2; ?></th>
- <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn3; ?></th>
- <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn4; ?>&nbsp;</th>
- <th style="border:0;"></th>
-</tr>
 </table>
 
-<?php
-$topx=202+25.7*$i;
-if ( $i > 5 ) { $topx=207+25.7*$i; }
-if ( $i > 10 ) { $topx=214+25.7*$i; }
-if ( $i > 15 ) { $topx=219+25.7*$i; }
-if ( $i > 20 ) { $topx=225+25.7*$i; }
-if ( $i > 25 ) { $topx=231+25.7*$i; }
-?>
 
-<input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:270px;"/>
-<input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:388px;"/>
-
-<input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:103px; top:<?php echo $topx;?>px; left:717px;"/>
-<input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:834px;"/>
-<input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:952px;"/>
-<input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:1070px;"/>
 <?php                     } ?>
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
