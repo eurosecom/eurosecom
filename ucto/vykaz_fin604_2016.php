@@ -83,8 +83,48 @@ $sql = 'CREATE TABLE F'.$kli_vxcf.'_genfin604'.$sqlt;
 $vysledek = mysql_query("$sql");
 
 
-$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '012', '2' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '014', '2' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '221', '1' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '211', '1' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '261', '1' ); "; $ulozene = mysql_query("$sqult");
+
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '231', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '232', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '241', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '249', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '321', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '322', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '323', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '324', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '325', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '326', '4' ); "; $ulozene = mysql_query("$sqult");
+
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '331', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '333', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '336', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '341', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '342', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '343', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '345', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '346', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '348', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '367', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '368', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '373', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '379', '4' ); "; $ulozene = mysql_query("$sqult");
+
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '395', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '398', '4' ); "; $ulozene = mysql_query("$sqult");
+
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '461', '4' ); "; $ulozene = mysql_query("$sqult");
+
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '472', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '473', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '474', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '475', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '476', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '478', '4' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin604 ( uce,crs ) VALUES ( '479', '4' ); "; $ulozene = mysql_query("$sqult");
+
 
 //sumar za ucet=ak jeden ucet v dvoch riadkoch tak zober jeden
 $sqult = "UPDATE F$kli_vxcf"."_genfin604 SET cpl01=1 "; $ulozene = mysql_query("$sqult");
@@ -421,27 +461,16 @@ $oznac = mysql_query("$sqtoz");
 //rozdel do riadkov , vypocitaj netto
 
 $rdk=1;
-while ($rdk <= 79 ) 
+while ($rdk <= 13 ) 
   {
 $crdk=$rdk;
 if( $rdk < 10 ) $crdk="0".$rdk;
 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=mdt-dal WHERE rdk = $rdk AND kor = 0 ";
-if( $rdk > 43 ) { $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=dal-mdt WHERE rdk = $rdk "; }
+$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=mdt-dal WHERE rdk = $rdk ";
+if( $rdk >= 4 ) { $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=dal-mdt WHERE rdk = $rdk "; }
 $oznac = mysql_query("$sqtoz");
 
-if( $rdk < 44 ) { 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rk$crdk=dal-mdt WHERE rdk = $rdk AND kor = 1 ";
-$oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rn$crdk=r$crdk-rk$crdk WHERE rdk > 0 ";
-$oznac = mysql_query("$sqtoz");
-
-                }
-
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rm$crdk=px08 WHERE rdk = $rdk ";
-if( $rdk > 43 ) { $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rm$crdk=-px08 WHERE rdk = $rdk "; }
-$oznac = mysql_query("$sqtoz");
 
 $rdk=$rdk+1;
   }
