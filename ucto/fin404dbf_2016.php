@@ -2948,7 +2948,7 @@ $vysledx = mysql_query("$sqlx");
 }
 //koniec vytvorenia
 
-//vloz vykaz do vytvorenej databazy riadky 37 oces, 38 osts, 44 zoss
+//vloz vykaz do vytvorenej databazy riadky 37 oces, 38 osts, 39 zoss, 44 zoss
 //"SUM(pocs01),SUM(pocs02),SUM(pocs03),SUM(pocs04),SUM(pocs05),SUM(pocs06),SUM(pocs07),SUM(pocs08),SUM(pocs09),SUM(pocs10),SUM(pocs11),SUM(pocs12),".
 //"SUM(zvys01),SUM(zvys02),SUM(zvys03),SUM(zvys04),SUM(zvys05),SUM(zvys06),SUM(zvys07),SUM(zvys08),SUM(zvys09),SUM(zvys10),SUM(zvys11),SUM(zvys12),".
 //"SUM(znis01),SUM(znis02),SUM(znis03),SUM(znis04),SUM(znis05),SUM(znis06),SUM(znis07),SUM(znis08),SUM(znis09),SUM(znis10),SUM(znis11),SUM(znis12),".
@@ -2964,7 +2964,9 @@ $dsqlt = "INSERT INTO fin4pdbf "." SELECT".
 "SUM(osts01),SUM(osts02),SUM(osts03),SUM(osts04),SUM(osts05),SUM(osts06),SUM(osts07),SUM(osts08),SUM(osts09),SUM(osts10),SUM(osts11),SUM(osts12),".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"SUM(zoss01),SUM(zoss02),SUM(zoss03),SUM(zoss04),SUM(zoss05),SUM(zoss06),SUM(zoss07),SUM(zoss08),SUM(zoss09),SUM(zoss10),SUM(zoss11),SUM(zoss12),".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
