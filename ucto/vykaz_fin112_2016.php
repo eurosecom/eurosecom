@@ -28,7 +28,7 @@ $rmc1=0;
 
 //.jpg podklad
 $jpg_cesta="../dokumenty/statistika2016/fin112/fin1-12_v16";
-$jpg_popis="FinanËn˝ v˝kaz o dlhov˝ch n·strojoch a vybran˝ch z·v‰zkoch FIN 1-12 za rok ".$kli_vrok;
+$jpg_popis="FinanËn˝ v˝kaz o prÌjmoch, v˝davkoch a finanËn˝ch oper·ci·ch FIN 1-12 za rok ".$kli_vrok;
 
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
@@ -58,7 +58,7 @@ if( $cislo_oc == 12 ) { $datum="31.12.".$kli_vrok; $mesiac="12"; $kli_vume="12."
 
 $vsetkyprepocty=0;
 
-// vymaz polozku
+//vymaz polozku
 if ( $copern == 316 )
     {
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
@@ -91,11 +91,10 @@ $copern=20;
 // zapis polozku
 if ( $copern == 23 )
     {
-
 $daz = $_REQUEST['daz'];
 $daz_sql = SqlDatum($daz);
-$zdroj = strip_tags($_REQUEST['zdroj']);
-$oddiel = strip_tags($_REQUEST['oddiel']);
+//$zdroj = strip_tags($_REQUEST['zdroj']);
+//$oddiel = strip_tags($_REQUEST['oddiel']);
 
 
 
@@ -120,8 +119,9 @@ $uprtxt = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 (oc,druh,zdroj,polozka,schv
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET ".
-" okres='', obec='', daz='$daz_sql', xpolozka=SUBSTRING(polozka,1,3), podpolozka=SUBSTRING(polozka,4,3), ".
-" xoddiel=SUBSTRING(oddiel,1,2), skupina=SUBSTRING(oddiel,4,1), trieda=SUBSTRING(oddiel,6,1), podtrieda=SUBSTRING(oddiel,8,1) ".
+" daz='$daz_sql' ".
+//" okres='', obec='', daz='$daz_sql', xpolozka=SUBSTRING(polozka,1,3), podpolozka=SUBSTRING(polozka,4,3), ".
+//" xoddiel=SUBSTRING(oddiel,1,2), skupina=SUBSTRING(oddiel,4,1), trieda=SUBSTRING(oddiel,6,1), podtrieda=SUBSTRING(oddiel,8,1) ".
 " WHERE oc >= 0 "; 
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
@@ -165,7 +165,7 @@ $upravene = mysql_query("$uprtxt");
 $copern=20;
 if (!$upravene):
 ?>
-<script type="text/javascript"> alert( "⁄DAJE NEBOLI UPRAVEN… " ) </script>
+<script type="text/javascript"> alert( "⁄DAJE NEBOLI UPRAVEN…" ) </script>
 <?php
 endif;
 if ($upravene):
@@ -331,7 +331,7 @@ $skutku=substr($datum,0,6);
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
  <link rel="stylesheet" href="../css/reset.css">
  <link rel="stylesheet" href="../css/tlaciva.css">
-<title>V˝kaz FIN 5-04</title>
+<title>V˝kaz FIN 1-12</title>
 <style type="text/css">
 form input[type=text] {
   height: 20px;
@@ -346,23 +346,47 @@ div.input-echo {
   background-color: #fff;
   font-weight: bold;
 }
-form select {
-  position: absolute;
-  height: 24px;
-  font-size: 13px;
+div.form-background-wide {
+  width: 1250px;
+  height: 1000px;
+  background-color: #fff;
+  clear: left;
 }
-table.echo-zoznam {
-  position: absolute;
-  top: 194px;
-  left: 83px;
+div.form-content-wide {
+  width: 1150px;
+  margin: 0 auto;
+  
 }
-table.echo-zoznam td {
+
+table.zoznam {
+  width: 100%;
+  
+}
+
+
+.normal-menu {
+
+}
+
+.fixne-menu {
+position: fixed;
+top: 0;
+left: 0;
+ width:100%;
+ background-color: #ddd;
+ z-index:1;
+  padding: 6px 0;
+}
+
+
+/* table.zoznam thead td {
   height: 26px;
   line-height: 26px;
   font-size: 15px;
-  border-bottom: 1px solid black;
+  background-color: #ddd;
 }
-table.echo-zoznam th {
+*/
+table.zoznam th {
   height: 22px;
   line-height: 22px;
   font-size: 13px;
@@ -378,10 +402,11 @@ img.btn-cancel {
 img.btn-cancel:hover {
   opacity: 1;
 }
+
+
 tr.zero-line > td { /* urcenie sirky stlpcov */
-  height: 0;
+  height: 2px;
   border: 0;
-  background-color: none;
 }
 </style>
 <script type="text/javascript">
@@ -514,8 +539,8 @@ document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
 document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
-        document.forms.formv1.zdroj.focus();
-        document.forms.formv1.zdroj.select();
+       // document.forms.formv1.zdroj.focus(); dopyt, potom zruöiù //
+        //document.forms.formv1.zdroj.select();
 
 
 <?php                                               } ?>
@@ -548,8 +573,8 @@ document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
  document.formv1.uloz.disabled = true;
-        document.forms.formv1.zdroj.focus();
-        document.forms.formv1.zdroj.select();
+        //document.forms.formv1.zdroj.focus();
+        //document.forms.formv1.zdroj.select();
 
 <?php                                               } ?>
 
@@ -631,7 +656,7 @@ if ( $copern == 20 )
   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
  </tr>
  <tr>
-  <td class="header">FIN 1-12 FinanËn˝ v˝kaz o prÌjmoch, v˝davkoch a fin. oper·ci·ch za
+  <td class="header">FIN 1-12 PrÌjmy, v˝davky a finanËnÈ oper·cie za
    <span style="color:#39f;"><?php echo "$cislo_oc. mesiac";?></span>
   </td>
   <td>
@@ -644,12 +669,12 @@ if ( $copern == 20 )
  </tr>
  </table>
 </div>
-<?php if ( $strana < 1 OR $strana > 3 ) $strana=1; ?>
+<?php if ( $strana < 1 OR $strana > 5 ) $strana=1; ?> <!-- dopyt, neviem, Ëi je v poriadku -->
 
 <?php
 $sirka=950;
 $vyska=1300;
-if ( $strana == 2 )
+if ( $strana == 2 OR $strana == 3 OR $strana == 4 OR $strana == 5 )
 {
 $sirka=1250; $vyska=920;
 }
@@ -657,14 +682,21 @@ $sirka=1250; $vyska=920;
 <div id="content" style="width:<?php echo $sirka; ?>px; height:<?php echo $vyska; ?>px;">
 <FORM name="formv1" method="post" action="../ucto/vykaz_fin112_2016.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana; ?>">
 <?php
-$clas1="noactive"; $clas2="noactive"; $clas3="noactive";
+$clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive"; $clas5="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
+if ( $strana == 3 ) $clas3="active"; if ( $strana == 4 ) $clas4="active";
+if ( $strana == 5 ) $clas5="active";
 $source="vykaz_fin112_2016.php";
 ?>
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas2; ?> toleft">PrÌjmy</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=3&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas3; ?> toleft">V˝davky</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=4&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas4; ?> toleft">PrÌjmovÈ oper·cie</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=5&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas5; ?> toleft">V˝davkovÈ oper·cie</a>
+<?php if ( $strana == 1 ) { ?>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+<?php                     } ?>
 </div>
 
 <?php if ( $strana == 1 ) { ?>
@@ -672,7 +704,7 @@ $source="vykaz_fin112_2016.php";
      alt="<?php echo $jpg_popis; ?> 1.strana 265kB">
 
 <span class="text-echo" style="top:153px; left:403px;"><?php echo $datum; ?></span>
-<span class="text-echo" style="top:361px; left:141px;">x</span>
+<span class="text-echo" style="top:241px; left:141px;">x</span>
 <span class="text-echo" style="top:516px; left:141px; letter-spacing:13.5px;"><?php echo $fir_ficox; ?></span>
 <span class="text-echo" style="top:516px; left:342px; letter-spacing:14px;"><?php echo $mesiac; ?></span>
 <span class="text-echo" style="top:516px; left:409px; letter-spacing:13.5px;"><?php echo $kli_vrok; ?></span>
@@ -688,37 +720,55 @@ $source="vykaz_fin112_2016.php";
 
 
 <?php if ( $strana == 2 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 2.strana 265kB" style="width:1250px; height:1000px;">
+<div class="form-background-wide">
+<div class="form-content-wide">
 
-<table class="echo-zoznam">
-<tr class="zero-line">
- <td style="width:190px;"></td>
- <td style="width:94px;"></td>
- <td style="width:117px;"></td>
- <td style="width:117px;"></td>
- <td style="width:93px;"></td>
- <td style="width:118px;"></td>
- <td style="width:118px;"></td>
- <td style="width:118px;"></td>
- <td style="width:118px;"></td>
- <td style="width:38px;"></td>
+<h2 style="font-size:14px; height:30px; line-height:30px; font-weight:bold; padding-top:15px;">»asù I. - PrÌjmy</h2>
+
+
+
+<div id="FixneMenu" >
+<table class="normal-menu" style="width:1150px; background-color:#ddd; height:24px; line-height:24px; text-align:center; font-size:12px;  margin:0 auto;
+ " >
+<tr  style=" ">
+ <td style="width:15%;">Zdroj.Typ zdroja</td>
+ <td style="width:15%;">Poloûka.Podpoloûka</td>
+ <td style="width:15%;">Schv·len˝ rozpoËet</td>
+ <td style="width:15%;">RozpoËet po zmen·ch</td>
+ <td style="width:15%;">OËak·van· udalosù</td>
+ <td style="width:15%;">SkutoËnosù k</td>
+ <td style="width:10%;"></td>
 </tr>
+</table>
+</div>
+
+
+
+<table class="zoznam">
+<thead style=" ">
+<tr class="zero-line">
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:10%;"></td>
+</tr>
+</thead>
+<script>
+    var menu = document.getElementById('FixneMenu');
+    window.onscroll = function () {
+      menu.className = (
+        document.documentElement.scrollTop + document.body.scrollTop > menu.parentNode.offsetTop
+        && document.documentElement.clientHeight > menu.offsetHeight
+      ) ? "fixne-menu" : "";
+    }
+</script>
 
 <?php
-$topx=200;
+//$topx=400;
 ?>
-
-<input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:270px;"/>
-<input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:388px;"/>
-
-<input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:103px; top:<?php echo $topx;?>px; left:717px;"/>
-<input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:834px;"/>
-<input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:952px;"/>
-<input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:1070px;"/>
-
-
-
 <?php
 $sluztt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET kor=1*zdroj ";
 $sluz = mysql_query("$sluztt");
@@ -737,31 +787,27 @@ $j=0;
 {
 $rsluz=mysql_fetch_object($sluz);
 ?>
+<tbody>
 <tr>
  <td class="center"><?php echo $rsluz->zdroj; ?></td>
  <td class="center"><?php echo $rsluz->polozka; ?></td>
- <td class="center"><?php echo $rsluz->nazov; ?></td>
- <td class="center"><?php echo $rsluz->schvaleny; ?></td>
- <td class="center"><?php echo $rsluz->zmeneny; ?></td>
+ <td class="right"><?php echo $rsluz->schvaleny; ?></td>
+ <td class="right"><?php echo $rsluz->zmeneny; ?></td>
  <td class="right"><?php echo $rsluz->predpoklad; ?></td>
  <td class="right"><?php echo $rsluz->skutocnost; ?></td>
- <td class="right"> </td>
- <td class="right"> </td>
  <td class="center" style="border:0;">
   <img src="../obr/ikony/xmark_lred_icon.png" onclick="Vymaz(<?php echo $rsluz->cpl;?>);"
        title="Vymazaù riadok" class="btn-cancel">
  </td>
 </tr>
+</tbody>
 <?php
 }
 $i = $i + 1;
 $j = $j + 1;
   }
 ?>
-
-
 <?php
-
 $sqlxx = "SELECT SUM(schvaleny) AS uhrn1, SUM(zmeneny) AS uhrn2, SUM(predpoklad) AS uhrn3, SUM(skutocnost) AS uhrn4 FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE druh = 1 ";
 $vysledokxx = mysql_query($sqlxx);
 if ( $vysledokxx ) {
@@ -771,33 +817,54 @@ $uhrn2 = $riadokxx->uhrn2;
 $uhrn3 = $riadokxx->uhrn3;
 $uhrn4 = $riadokxx->uhrn4;
 }
-if( $uhrn1 == '' ) { $uhrn1=0; }
-if( $uhrn2 == '' ) { $uhrn2=0; }
-if( $uhrn3 == '' ) { $uhrn3=0; }
-if( $uhrn4 == '' ) { $uhrn4=0; }
-
+if ( $uhrn1 == '' ) { $uhrn1=0; }
+if ( $uhrn2 == '' ) { $uhrn2=0; }
+if ( $uhrn3 == '' ) { $uhrn3=0; }
+if ( $uhrn4 == '' ) { $uhrn4=0; }
 ?>
-
+<tfoot>
 <tr>
- <th colspan="4"></th>
- <th style="background-color:#ddd;">⁄hrn</th>
- <th class="right" style="width:118px; background-color:#ddd;" top:<?php echo $topx;?>px;><?php echo $uhrn1; ?></th>
+ <th colspan="1"></th>
+ <th style="background-color:#ddd;">Spolu</th>
+ <th class="right" style="width:118px; background-color:#ddd;" top:<?php echo $topx;?>px;"><?php echo $uhrn1; ?></th>
  <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn2; ?></th>
  <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn3; ?></th>
  <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn4; ?>&nbsp;</th>
  <th style="border:0;"></th>
 </tr>
+</tfoot>
+
+<?php
+$topx=800;
+?>
+
+<input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:270px;"/>
+<input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:388px;"/>
+
+<input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:103px; top:<?php echo $topx;?>px; left:717px;"/>
+<input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:834px;"/>
+<input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:952px;"/>
+<input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:1070px;"/>
+
+
+
+
+
 
 
 
 </table>
 
 
+</div>
+</div> <!-- .form-background-wide -->
 <?php                     } ?>
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+<?php if ( $strana == 1 ) { ?>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+<?php                     } ?>
 </div>
 
 </FORM>
@@ -971,9 +1038,9 @@ if ( $i == 0 )
 $pdf->AddPage();
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'.jpg') )
+if ( File_Exists($jpg_cesta.'_str1.jpg') )
 {
-$pdf->Image($jpg_cesta.'.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
