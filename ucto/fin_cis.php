@@ -727,7 +727,7 @@ div.alert-warning {
 
   function UceEnter(e)
                 {
-  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
 
   if(k == 13 ){
         document.forms.formv1.h_crs.focus();
@@ -835,7 +835,9 @@ $source="../ucto/fin_cis.php?copern=308";
 ?>
 
 <div class="content-navbar toright">
-<?php if ( $drupoh >= 91 AND $drupoh <= 97 ) { ?>
+<?php if ( $drupoh >= 91 AND $drupoh <= 98 ) { ?>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=98', '_self');"
+    title="Fin 1-12 - generovanie" class="<?php echo $clas7; ?>">Fin 1-12</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=92', '_self');"
     title="Fin 2-04 NO generovanie" class="<?php echo $clas2; ?>">Fin 2-04 NO</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=91', '_self');"
@@ -848,8 +850,6 @@ $source="../ucto/fin_cis.php?copern=308";
     title="Fin 6-04 - generovanie" class="<?php echo $clas5; ?>">Fin 6-04</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=97', '_self');"
     title="Fin 7-04 - generovanie" class="<?php echo $clas6; ?>">Fin 7-04</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&drupoh=98', '_self');"
-    title="Fin 1-12 - generovanie" class="<?php echo $clas6; ?>">Fin 1-12</a>
 <?php                                        } ?>
 </div>
 
@@ -857,13 +857,13 @@ $source="../ucto/fin_cis.php?copern=308";
  <div class="content-heading" style="height:30px;">
   <h2>
 <?php
+if ( $drupoh == 98 OR $drupoh == 198 ) { echo "Fin 1-12 - Generovanie"; }
 if ( $drupoh == 92 OR $drupoh == 192 ) { echo "Fin 2-04 NO - Generovanie"; }
 if ( $drupoh == 91 OR $drupoh == 191 ) { echo "Fin 2-04 POD - Generovanie"; }
 if ( $drupoh == 93 OR $drupoh == 193 ) { echo "Fin 3-04 - Generovanie"; }
 if ( $drupoh == 94 OR $drupoh == 194 ) { echo "Fin 4-04 - Generovanie"; }
 if ( $drupoh == 96 OR $drupoh == 196 ) { echo "Fin 6-04 - Generovanie"; }
 if ( $drupoh == 97 OR $drupoh == 197 ) { echo "Fin 7-04 - Generovanie"; }
-if ( $drupoh == 98 OR $drupoh == 198 ) { echo "Fin 1-12 - Generovanie"; }
 ?>
    <img src='../obr/info.png' title="EnterNext = klávesou ENTER prejdete na ïalšiu položku">
   </h2>
@@ -909,9 +909,20 @@ $varcolspan = 2;
 <?php
 if ( $gener == 1 )
 {
+if ( $drupoh == 98 OR $drupoh == 198 ) { $stlpec1="Úèet"; $stlpec2="Rozpoètová položka"; }
+if ( $drupoh == 92 OR $drupoh == 192 ) { $stlpec1="Úèet"; $stlpec2="Riadok"; }
+if ( $drupoh == 91 OR $drupoh == 191 ) { $stlpec1="Úèet"; $stlpec2="Riadok"; }
+if ( $drupoh == 93 OR $drupoh == 193 ) { $stlpec1="Úèet"; $stlpec2="Ståpec"; }
+if ( $drupoh == 94 OR $drupoh == 194 ) { $stlpec1="Úèet"; $stlpec2="Ståpec"; }
+if ( $drupoh == 96 OR $drupoh == 196 ) { $stlpec1="Úèet"; $stlpec2="Riadok"; }
+if ( $drupoh == 97 OR $drupoh == 197 ) { $stlpec1="Úèet"; $stlpec2="Riadok"; }
 ?>
-  <th><a href="#" title="Zoradi" class="sort-field" onclick="window.open('fin_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd1=<?php echo $xtrd1;?>&xtrd2=0&xtrd3=0', '_self');">Úèet</a></th>
-  <th colspan="2"><a href="#" title="Zoradi" class="sort-field" onclick="window.open('fin_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd2=<?php echo $xtrd2;?>&xtrd1=0&xtrd3=0', '_self');">Èíslo riadku</a></th>
+  <th>
+   <a href="#" title="Zoradi" class="sort-field" onclick="window.open('fin_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd1=<?php echo $xtrd1;?>&xtrd2=0&xtrd3=0', '_self');"><?php echo $stlpec1; ?></a>
+  </th>
+  <th colspan="2">
+   <a href="#" title="Zoradi" class="sort-field" onclick="window.open('fin_cis.php?copern=308&uprav=<?php echo $uprav;?>&drupoh=<?php echo $drupoh;?>&xtrd2=<?php echo $xtrd2;?>&xtrd1=0&xtrd3=0', '_self');"><?php echo $stlpec2; ?></a>
+  </th>
 <?php
 }
 ?>
