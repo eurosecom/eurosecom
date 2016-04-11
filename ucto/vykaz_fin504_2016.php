@@ -89,14 +89,14 @@ $stlp2 = strip_tags($_REQUEST['stlp2']);
 $stlp3 = strip_tags($_REQUEST['stlp3']);
 $stlp4 = strip_tags($_REQUEST['stlp4']);
 $stlp5 = strip_tags($_REQUEST['stlp5']);
-$stlp1 = str_replace(".","",$stlp1);
-$stlp2 = str_replace(".","",$stlp2);
+$stlp1_sql = SqlDatum($stlp1);
+$stlp2_sql = SqlDatum($stlp2);
 
 $rs00003 = 1*strip_tags($_REQUEST['rs00003']);
 $rs00004 = 1*strip_tags($_REQUEST['rs00004']);
 
 $uprtxt = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin504 (oc,druh,stlpa,stlpb,stlp1,stlp2,stlp3,stlp4,stlp5,stlp6,rs00003,rs00004) VALUES ".
-" (  '$stvrtrok', 1, '$stlpa', '$stlpb', '$stlp1', '$stlp2', '$stlp3', '$stlp4', '$stlp5', '$stlp6', '$rs00003', '$rs00004' ) ";
+" (  '$stvrtrok', 1, '$stlpa', '$stlpb', '$stlp1_sql', '$stlp2_sql', '$stlp3', '$stlp4', '$stlp5', '$stlp6', '$rs00003', '$rs00004' ) ";
 if( $stlp5 >= 0 OR $stlp6 >= 0 ) { $upravene = mysql_query("$uprtxt"); } 
 
                     }
@@ -164,9 +164,9 @@ $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
 
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin504 MODIFY stlp1 VARCHAR(10) NOT NULL";
+$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin504 MODIFY stlp1 DATE NOT NULL";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin504 MODIFY stlp2 VARCHAR(10) NOT NULL";
+$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin504 MODIFY stlp2 DATE NOT NULL";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin504 MODIFY stlp3 VARCHAR(11) NOT NULL";
 $vysledek = mysql_query("$sql");
@@ -188,6 +188,22 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin504 ADD rs00004 DECIMAL(10,2) DEFAULT 0 AFTER xxb ";
 $vysledek = mysql_query("$sql");
 
+}
+
+
+$sql = "SELECT xxc FROM F".$kli_vxcf."_uctvykaz_fin504";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+
+$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin504 MODIFY stlp1 DATE NOT NULL";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin504 MODIFY stlp2 DATE NOT NULL";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin504 DROP xxb ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin504 ADD xxc DECIMAL(10,0) DEFAULT 0 AFTER stlp6";
+$vysledek = mysql_query("$sql");
 }
 //koniec vytvorenie 
 
@@ -222,10 +238,10 @@ if( $stlpa == '' ) { $stlpa="BU"; }
 $stlpb = $fir_riadok->stlpb;
 if( $stlpb == '' ) { $stlpb="EUR"; }
 
-$stlp1 = $fir_riadok->stlp1;
-$stlp2 = $fir_riadok->stlp2;
-if( $stlp1 == '' ) { $stlp1="RRRRMMDD"; }
-if( $stlp2 == '' ) { $stlp2="RRRRMMDD"; }
+$stlp1 = SkDatum($fir_riadok->stlp1);
+$stlp2 = SkDatum($fir_riadok->stlp2);
+if( $stlp1 == '' ) { $stlp1="00.00.0000"; }
+if( $stlp2 == '' ) { $stlp2="00.00.0000"; }
 
 $stlp3 = $fir_riadok->stlp3;
 if( $stlp3 == '' ) { $stlp3="F"; }
@@ -493,8 +509,8 @@ $rsluz=mysql_fetch_object($sluz);
 <tr>
  <td class="center"><?php echo $rsluz->stlpa; ?></td>
  <td class="center"><?php echo $rsluz->stlpb; ?></td>
- <td class="center"><?php echo $rsluz->stlp1; ?></td>
- <td class="center"><?php echo $rsluz->stlp2; ?></td>
+ <td class="center"><?php echo SkDatum($rsluz->stlp1); ?></td>
+ <td class="center"><?php echo SkDatum($rsluz->stlp2); ?></td>
  <td class="center"><?php echo $rsluz->stlp3; ?></td>
  <td class="right"><?php echo $rsluz->stlp4; ?></td>
  <td class="right"><?php echo $rsluz->stlp5; ?></td>
@@ -611,7 +627,7 @@ $vysledok = mysql_query("$sqlt");
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctprcvykazx'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctvykaz_fin504";
 $vytvor = mysql_query("$vsql");
 
-//cpl	px01	oc	druh	okres	obec	daz	stlpa	stlpb	stlp1	stlp2	stlp3	stlp4	stlp5	stlp6	xxb	rs00004	rs00003
+//cpl	px01	oc	druh	okres	obec	daz	stlpa	stlpb	stlp1	stlp2	stlp3	stlp4	stlp5	stlp6	xxc	rs00004	rs00003
 //sumare
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykazx".$kli_uzid." "." SELECT".
 " 0,1,oc,druh,okres,obec,daz,".
@@ -1128,8 +1144,10 @@ $pdf->Cell(195,22.5," ","$rmc1",1,"L");
 //dlhove nastroje a zavazky
 $stlpa=$hlavicka->stlpa;
 $stlpb=$hlavicka->stlpb;
-$stlp1=$hlavicka->stlp1;
-$stlp2=$hlavicka->stlp2;
+$stlp1=SkDatum($hlavicka->stlp1);
+$stlp2=SkDatum($hlavicka->stlp2);
+if( $stlp1 == '00.00.0000' ) { $stlp1=""; }
+if( $stlp2 == '00.00.0000' ) { $stlp2=""; }
 $stlp3=$hlavicka->stlp3;
 $stlp4=$hlavicka->stlp4; if ( $stlp4 == 0 ) $stlp4="";
 $stlp5=$hlavicka->stlp5; if ( $stlp5 == 0 ) $stlp5="";

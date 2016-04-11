@@ -126,8 +126,8 @@ DATMES          VARCHAR(2),
 TYPORG          VARCHAR(2),
 SYMBOL          VARCHAR(4),
 MENA            VARCHAR(3),
-DAT_CERP        VARCHAR(8),
-DAT_SPLAT       VARCHAR(8),
+DAT_CERP        VARCHAR(12),
+DAT_SPLAT       VARCHAR(12),
 UROK            VARCHAR(1),
 RS00001         DECIMAL(12,2),
 RS00002         DECIMAL(12,2),
@@ -155,10 +155,30 @@ $dsqlt = "INSERT INTO fin504dbf "." SELECT".
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+
+$dsqlt = "UPDATE fin504dbf "." SET DAT_CERP=REPLACE(DAT_CERP, '-', '') ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE fin504dbf "." SET DAT_SPLAT=REPLACE(DAT_SPLAT, '-', '') ";
+$dsql = mysql_query("$dsqlt");
+
 $dsqlt = "INSERT INTO fin504dbf "." SELECT".
 " ICO, DATROK, DATMES, TYPORG, '9', '', '', '', '', SUM(RS00001), SUM(RS00002), SUM(RS00003), SUM(RS00004) ".
 " FROM fin504dbf GROUP BY ICO ";
 $dsql = mysql_query("$dsqlt");
+
+
+$sqltt = "SELECT * FROM fin504dbf ";
+$sql = mysql_query("$sqltt");
+$pol = 1*mysql_num_rows($sql);
+if( $pol < 1 ) {
+
+$dsqlt = "INSERT INTO fin504dbf ".
+" ( ICO, DATROK, DATMES, TYPORG, SYMBOL, RS00001, RS00002, RS00003, RS00004 ) VALUES ".
+" ( '$fir_ficox','$kli_vrok','$mesiac','$typorg', '9', 0, 0, 0, 0 ) ";
+$dsql = mysql_query("$dsqlt");
+
+}
 
 //exit;
 
@@ -172,8 +192,8 @@ $polozky[] = array("DATMES", "C", 2);
 $polozky[] = array("TYPORG", "C", 2);
 $polozky[] = array("SYMBOL", "C", 4);
 $polozky[] = array("MENA", "C", 3);
-$polozky[] = array("DAT_CERP", "C", 8);
-$polozky[] = array("DAT_SPLAT", "C", 8);
+$polozky[] = array("DAT_CERP", "D", 12);
+$polozky[] = array("DAT_SPLAT", "D", 12);
 $polozky[] = array("UROK", "C", 1);
 $polozky[] = array("RS00001", "N", 15, 2);
 $polozky[] = array("RS00002", "N", 15, 2);
