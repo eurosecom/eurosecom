@@ -760,7 +760,7 @@ $source="vykaz_fin112_2016.php";
     var menu = document.getElementById('FixneMenu');
     window.onscroll = function () {
       menu.className = (
-        document.documentElement.scrollTop + document.body.scrollTop > menu.parentNode.offsetTop
+        document.documentElement.scrollTop + document.body.scrollTop > menu.parentNode.offsetTop + 70
         && document.documentElement.clientHeight > menu.offsetHeight
       ) ? "fixne-menu" : "";
     }
