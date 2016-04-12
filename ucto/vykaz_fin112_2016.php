@@ -355,63 +355,72 @@ div.form-background-wide {
 div.form-content-wide {
   width: 1150px;
   margin: 0 auto;
-  
 }
-
-table.zoznam {
-  width: 100%;
-  
-}
-
-
-.normal-menu {
-
-}
-
-.fixne-menu {
-position: fixed;
-top: 0;
-left: 0;
- width:100%;
- background-color: #ddd;
- z-index:1;
-  padding: 6px 0;
-}
-
-
-/* table.zoznam thead td {
-  height: 26px;
-  line-height: 26px;
+h2.form-header {
+  height: 30px;
+  line-height: 30px;
+  padding-top: 15px;
   font-size: 15px;
+}
+.fixne-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  padding: 6px 0;
   background-color: #ddd;
 }
-*/
-table.zoznam th {
-  height: 22px;
-  line-height: 22px;
-  font-size: 13px;
-  padding-top: 2px;
+table.table-heading {
+  width: 1150px;
+  background-color: #ddd;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  font-size: 11px;
+  margin: 0 auto;
 }
+table.zoznam tbody tr:hover {
+  background-color:#ddd;
+}
+table.zoznam tbody td {
+  font-size: 12px;
+  line-height: 20px;
+}
+table.zoznam tfoot th {
+  height: 24px;
+  line-height: 24px;
+  font-size: 11px;
+  background-color: #ddd;
+}
+table.zoznam tfoot td input[type=text] {
+  height: 18px;
+  line-height: 18px;
+  padding-left: 4px;
+  border: 1px solid #39f;
+  font-size: 14px;
+  position: static;
+  display: block;
+  margin: 6px auto;
+}
+/* dopyt, spraviù zebru */
+tr.zero-line > td { /* urcenie sirky stlpcov */
+  height: 0;
+}
+
 img.btn-cancel {
-  width: 16px;
-  height: 16px;
-  vertical-align: text-bottom;
+  width: 14px;
+  height: 14px;
+  position: relative;
+  top: 3px;
   cursor: pointer;
   opacity: 0.7;
 }
 img.btn-cancel:hover {
   opacity: 1;
 }
-
-
-tr.zero-line > td { /* urcenie sirky stlpcov */
-  height: 2px;
-  border: 0;
-}
 </style>
 <script type="text/javascript">
-
-
 <?php
 //uprava 
   if ( $copern == 20 )
@@ -722,41 +731,22 @@ $source="vykaz_fin112_2016.php";
 <?php if ( $strana == 2 ) { ?>
 <div class="form-background-wide">
 <div class="form-content-wide">
+ <h2 class="form-header">»asù I. - PrÌjmy</h2>
 
-<h2 style="font-size:14px; height:30px; line-height:30px; font-weight:bold; padding-top:15px;">»asù I. - PrÌjmy</h2>
-
-
-
-<div id="FixneMenu" >
-<table class="normal-menu" style="width:1150px; background-color:#ddd; height:24px; line-height:24px; text-align:center; font-size:12px;  margin:0 auto;
- " >
-<tr  style=" ">
- <td style="width:15%;">Zdroj.Typ zdroja</td>
- <td style="width:15%;">Poloûka.Podpoloûka</td>
- <td style="width:15%;">Schv·len˝ rozpoËet</td>
- <td style="width:15%;">RozpoËet po zmen·ch</td>
- <td style="width:15%;">OËak·van· udalosù</td>
- <td style="width:15%;">SkutoËnosù k</td>
- <td style="width:10%;"></td>
+<div id="FixneMenu">
+<table class="table-heading">
+<tr>
+ <th style="width:20%;">Zdroj.Typ zdroja</th>
+ <th style="width:15%;">Poloûka.Podpoloûka</th>
+ <th style="width:15%;">Schv·len˝ rozpoËet</th>
+ <th style="width:15%;">RozpoËet po zmen·ch</th>
+ <th style="width:15%;">OËak·van· skutoËnosù</th>
+ <th style="width:15%;">SkutoËnosù k</th> <!-- dopyt, dorobiù premenn˙ -->
+ <th style="width:5%;"></th>
 </tr>
 </table>
 </div>
-
-
-
-<table class="zoznam">
-<thead style=" ">
-<tr class="zero-line">
- <td style="width:15%;"></td>
- <td style="width:15%;"></td>
- <td style="width:15%;"></td>
- <td style="width:15%;"></td>
- <td style="width:15%;"></td>
- <td style="width:15%;"></td>
- <td style="width:10%;"></td>
-</tr>
-</thead>
-<script>
+<script type="text/javascript">
     var menu = document.getElementById('FixneMenu');
     window.onscroll = function () {
       menu.className = (
@@ -766,15 +756,22 @@ $source="vykaz_fin112_2016.php";
     }
 </script>
 
-<?php
-//$topx=400;
-?>
+<table class="zoznam" style="width:100%;">
+<thead>
+<tr class="zero-line">
+ <td style="width:20%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:5%;"></td>
+</tr>
+</thead>
 <?php
 $sluztt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET kor=1*zdroj ";
 $sluz = mysql_query("$sluztt");
-
 $sluztt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE oc >= 0 AND druh = 1 ORDER BY cpl DESC ";
-
 $sluz = mysql_query("$sluztt");
 $slpol = mysql_num_rows($sluz);
 
@@ -795,7 +792,7 @@ $rsluz=mysql_fetch_object($sluz);
  <td class="right"><?php echo $rsluz->zmeneny; ?></td>
  <td class="right"><?php echo $rsluz->predpoklad; ?></td>
  <td class="right"><?php echo $rsluz->skutocnost; ?></td>
- <td class="center" style="border:0;">
+ <td class="center">
   <img src="../obr/ikony/xmark_lred_icon.png" onclick="Vymaz(<?php echo $rsluz->cpl;?>);"
        title="Vymazaù riadok" class="btn-cancel">
  </td>
@@ -824,44 +821,367 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 ?>
 <tfoot>
 <tr>
- <th colspan="1"></th>
- <th style="background-color:#ddd;">Spolu</th>
- <th class="right" style="width:118px; background-color:#ddd;" top:<?php echo $topx;?>px;"><?php echo $uhrn1; ?></th>
- <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn2; ?></th>
- <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn3; ?></th>
- <th class="right" style="width:118px; background-color:#ddd;"><?php echo $uhrn4; ?>&nbsp;</th>
- <th style="border:0;"></th>
+ <th colspan="2" class="center">Spolu</th>
+ <th class="right"><?php echo $uhrn1; ?></th>
+ <th class="right"><?php echo $uhrn2; ?></th>
+ <th class="right"><?php echo $uhrn3; ?></th>
+ <th class="right"><?php echo $uhrn4; ?></th>
+ <th class="center">&nbsp;</th>
+</tr>
+<tr>
+ <td>
+  <input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+ </td>
+ <td>
+  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:103px;"/>
+ </td>
+ <td>
+  <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>&nbsp;</td>
+</tr>
+<tr>
+ <td>
+  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" style="height:24px; cursor:pointer;">
+ </td>
+ <td colspan="6">&nbsp;</td>
 </tr>
 </tfoot>
-
-<?php
-$topx=800;
-?>
-
-<input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:270px;"/>
-<input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:388px;"/>
-
-<input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:103px; top:<?php echo $topx;?>px; left:717px;"/>
-<input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:834px;"/>
-<input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:952px;"/>
-<input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px; top:<?php echo $topx;?>px; left:1070px;"/>
-
-
-
-
-
-
-
-
 </table>
-
 
 </div>
 </div> <!-- .form-background-wide -->
 <?php                     } ?>
+
+
+<?php if ( $strana == 3 ) { ?>
+<div class="form-background-wide">
+<div class="form-content-wide">
+ <h2 class="form-header">»asù I. - V˝davky</h2>
+
+<div id="FixneMenu">
+<table class="table-heading">
+<tr>
+ <th style="width:15%;">Zdroj.Typ zdroja</th>
+ <th style="width:15%;">Program</th>
+ <th style="width:15%;">Oddiel.Skupina.Trieda.Podtrieda</th>
+ <th style="width:10%;">Poloûka.Podpoloûka</th>
+ <th style="width:10%;">Schv·len˝ rozpoËet</th>
+ <th style="width:10%;">RozpoËet po zmen·ch</th>
+ <th style="width:10%;">OËak·van· skutoËnosù</th>
+ <th style="width:10%;">SkutoËnosù k</th> <!-- dopyt, dorobiù premenn˙ -->
+ <th style="width:5%;"></th>
+</tr>
+</table>
+</div>
+<script type="text/javascript">
+    var menu = document.getElementById('FixneMenu');
+    window.onscroll = function () {
+      menu.className = (
+        document.documentElement.scrollTop + document.body.scrollTop > menu.parentNode.offsetTop + 70
+        && document.documentElement.clientHeight > menu.offsetHeight
+      ) ? "fixne-menu" : "";
+    }
+</script>
+
+<table class="zoznam" style="width:100%;">
+<thead>
+<tr class="zero-line">
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:5%;"></td>
+</tr>
+</thead>
+<tbody>
+<tr>
+ <td class="center"><?php echo $rsluz->zdroj; ?></td>
+ <td></td>
+ <td></td>
+ <td class="center"><?php echo $rsluz->polozka; ?></td>
+ <td class="right"><?php echo $rsluz->schvaleny; ?></td>
+ <td class="right"><?php echo $rsluz->zmeneny; ?></td>
+ <td class="right"><?php echo $rsluz->predpoklad; ?></td>
+ <td class="right"><?php echo $rsluz->skutocnost; ?></td>
+ <td class="center">
+  <img src="../obr/ikony/xmark_lred_icon.png" onclick="Vymaz(<?php echo $rsluz->cpl;?>);"
+       title="Vymazaù riadok" class="btn-cancel">
+ </td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+ <th colspan="4" class="center">Spolu</th>
+ <th class="right"><?php echo $uhrn1; ?></th>
+ <th class="right"><?php echo $uhrn2; ?></th>
+ <th class="right"><?php echo $uhrn3; ?></th>
+ <th class="right"><?php echo $uhrn4; ?></th>
+ <th class="center">&nbsp;</th>
+</tr>
+<tr>
+ <td>
+  <input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+ </td>
+ <td></td>
+ <td></td>
+ <td>
+  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:103px;"/>
+ </td>
+ <td>
+  <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>&nbsp;</td>
+</tr>
+<tr>
+ <td>
+  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" style="height:24px; cursor:pointer;">
+ </td>
+ <td colspan="6">&nbsp;</td>
+</tr>
+</tfoot>
+</table>
+
+</div>
+</div> <!-- .form-background-wide -->
+<?php                     } ?>
+
+
+<?php if ( $strana == 4 ) { ?>
+<div class="form-background-wide">
+<div class="form-content-wide">
+ <h2 class="form-header">»asù II. - PrÌjmovÈ oper·cie</h2>
+
+<div id="FixneMenu">
+<table class="table-heading">
+<tr>
+ <th style="width:20%;">KÛd ˙Ëtu</th>
+ <th style="width:20%;">Zdroj</th>
+ <th style="width:15%;">Poloûka.Podpoloûka</th>
+ <th style="width:10%;">Schv·len˝ rozpoËet</th>
+ <th style="width:10%;">RozpoËet po zmen·ch</th>
+ <th style="width:10%;">OËak·van· udalosù</th>
+ <th style="width:10%;">SkutoËnosù k</th> <!-- dopyt, dorobiù premenn˙ -->
+ <th style="width:5%;"></th>
+</tr>
+</table>
+</div>
+<script type="text/javascript">
+    var menu = document.getElementById('FixneMenu');
+    window.onscroll = function () {
+      menu.className = (
+        document.documentElement.scrollTop + document.body.scrollTop > menu.parentNode.offsetTop + 70
+        && document.documentElement.clientHeight > menu.offsetHeight
+      ) ? "fixne-menu" : "";
+    }
+</script>
+
+<table class="zoznam" style="width:100%;">
+<thead style=" ">
+<tr class="zero-line">
+ <td style="width:20%;"></td>
+ <td style="width:20%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:5%;"></td>
+</tr>
+</thead>
+<tbody>
+<tr>
+ <td></td>
+ <td class="center"><?php echo $rsluz->zdroj; ?></td>
+ <td class="center"><?php echo $rsluz->polozka; ?></td>
+ <td class="right"><?php echo $rsluz->schvaleny; ?></td>
+ <td class="right"><?php echo $rsluz->zmeneny; ?></td>
+ <td class="right"><?php echo $rsluz->predpoklad; ?></td>
+ <td class="right"><?php echo $rsluz->skutocnost; ?></td>
+ <td class="center">
+  <img src="../obr/ikony/xmark_lred_icon.png" onclick="Vymaz(<?php echo $rsluz->cpl;?>);"
+       title="Vymazaù riadok" class="btn-cancel">
+ </td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+ <th colspan="3" class="center">Spolu</th>
+ <th class="right"><?php echo $uhrn1; ?></th>
+ <th class="right"><?php echo $uhrn2; ?></th>
+ <th class="right"><?php echo $uhrn3; ?></th>
+ <th class="right"><?php echo $uhrn4; ?></th>
+ <th class="center">&nbsp;</th>
+</tr>
+<tr>
+ <td></td>
+ <td>
+  <input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+ </td>
+ <td>
+  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:103px;"/>
+ </td>
+ <td>
+  <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>&nbsp;</td>
+</tr>
+<tr>
+ <td>
+  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" style="height:24px; cursor:pointer;">
+ </td>
+ <td colspan="6">&nbsp;</td>
+</tr>
+</tfoot>
+</table>
+
+</div>
+</div> <!-- .form-background-wide -->
+<?php                     } ?>
+
+
+<?php if ( $strana == 5 ) { ?>
+<div class="form-background-wide">
+<div class="form-content-wide">
+ <h2 class="form-header">»asù II. - V˝davkovÈ oper·cie</h2>
+
+<div id="FixneMenu">
+<table class="table-heading">
+<tr>
+ <th style="width:10%;">KÛd ˙Ëtu</th>
+ <th style="width:15%;">Zdroj</th>
+ <th style="width:15%;">Oddiel.Skupina.Trieda.Podtrieda</th>
+ <th style="width:15%;">Poloûka.Podpoloûka</th>
+ <th style="width:10%;">Schv·len˝ rozpoËet</th>
+ <th style="width:10%;">RozpoËet po zmen·ch</th>
+ <th style="width:10%;">OËak·van· skutoËnosù</th>
+ <th style="width:10%;">SkutoËnosù k</th> <!-- dopyt, dorobiù premenn˙ -->
+ <th style="width:5%;"></th>
+</tr>
+</table>
+</div>
+<script type="text/javascript">
+    var menu = document.getElementById('FixneMenu');
+    window.onscroll = function () {
+      menu.className = (
+        document.documentElement.scrollTop + document.body.scrollTop > menu.parentNode.offsetTop + 70
+        && document.documentElement.clientHeight > menu.offsetHeight
+      ) ? "fixne-menu" : "";
+    }
+</script>
+
+<table class="zoznam" style="width:100%;">
+<thead style=" ">
+<tr class="zero-line">
+ <td style="width:10%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:5%;"></td>
+</tr>
+</thead>
+<tbody>
+<tr>
+ <td></td>
+ <td class="center"><?php echo $rsluz->zdroj; ?></td>
+ <td></td>
+ <td class="center"><?php echo $rsluz->polozka; ?></td>
+ <td class="right"><?php echo $rsluz->schvaleny; ?></td>
+ <td class="right"><?php echo $rsluz->zmeneny; ?></td>
+ <td class="right"><?php echo $rsluz->predpoklad; ?></td>
+ <td class="right"><?php echo $rsluz->skutocnost; ?></td>
+ <td class="center">
+  <img src="../obr/ikony/xmark_lred_icon.png" onclick="Vymaz(<?php echo $rsluz->cpl;?>);"
+       title="Vymazaù riadok" class="btn-cancel">
+ </td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+ <th colspan="4" class="center">Spolu</th>
+ <th class="right"><?php echo $uhrn1; ?></th>
+ <th class="right"><?php echo $uhrn2; ?></th>
+ <th class="right"><?php echo $uhrn3; ?></th>
+ <th class="right"><?php echo $uhrn4; ?></th>
+ <th class="center">&nbsp;</th>
+</tr>
+<tr>
+ <td></td>
+ <td>
+  <input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+ </td>
+ <td></td>
+ <td>
+  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:103px;"/>
+ </td>
+ <td>
+  <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>&nbsp;</td>
+</tr>
+<tr>
+ <td>
+  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" style="height:24px; cursor:pointer;">
+ </td>
+ <td colspan="6">&nbsp;</td>
+</tr>
+</tfoot>
+</table>
+
+</div>
+</div> <!-- .form-background-wide -->
+<?php                     } ?>
+
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas2; ?> toleft">PrÌjmy</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=3&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas3; ?> toleft">V˝davky</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=4&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas4; ?> toleft">PrÌjmovÈ oper·cie</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=5&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas5; ?> toleft">V˝davkovÈ oper·cie</a>
 <?php if ( $strana == 1 ) { ?>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
 <?php                     } ?>
@@ -1705,7 +2025,6 @@ $j=-1;
 }
 $i = $i + 1;
 $j = $j + 1;
-
   }
 $pdf->Output("$outfilex");
 ?>
