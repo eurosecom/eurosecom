@@ -42,18 +42,18 @@ $strana = 1*$_REQUEST['strana'];
 if ( $strana == 0 ) $strana=9999;
 
 if ( $cislo_oc == 0 ) $cislo_oc=1;
-if ( $cislo_oc == 1 ) { $datum="31.01.".$kli_vrok; $mesiac="01"; $kli_vume="1.".$kli_vrok; }
-if ( $cislo_oc == 2 ) { $datum="28.02.".$kli_vrok; $mesiac="02"; $kli_vume="2.".$kli_vrok; }
-if ( $cislo_oc == 3 ) { $datum="31.03.".$kli_vrok; $mesiac="03"; $kli_vume="3.".$kli_vrok; }
-if ( $cislo_oc == 4 ) { $datum="30.04.".$kli_vrok; $mesiac="04"; $kli_vume="4.".$kli_vrok; }
-if ( $cislo_oc == 5 ) { $datum="31.05.".$kli_vrok; $mesiac="05"; $kli_vume="5.".$kli_vrok; }
-if ( $cislo_oc == 6 ) { $datum="30.06.".$kli_vrok; $mesiac="06"; $kli_vume="6.".$kli_vrok; }
-if ( $cislo_oc == 7 ) { $datum="31.07.".$kli_vrok; $mesiac="07"; $kli_vume="7.".$kli_vrok; }
-if ( $cislo_oc == 8 ) { $datum="31.08.".$kli_vrok; $mesiac="08"; $kli_vume="8.".$kli_vrok; }
-if ( $cislo_oc == 9 ) { $datum="30.09.".$kli_vrok; $mesiac="09"; $kli_vume="9.".$kli_vrok; }
-if ( $cislo_oc == 10 ) { $datum="31.10.".$kli_vrok; $mesiac="10"; $kli_vume="10.".$kli_vrok; }
-if ( $cislo_oc == 11 ) { $datum="30.11.".$kli_vrok; $mesiac="11"; $kli_vume="11.".$kli_vrok; }
-if ( $cislo_oc == 12 ) { $datum="31.12.".$kli_vrok; $mesiac="12"; $kli_vume="12.".$kli_vrok; }
+if( $cislo_oc == 1 ) { $datum="31.01.".$kli_vrok; $mesiac="01"; $kli_vume="1.".$kli_vrok; }
+if( $cislo_oc == 2 ) { $datum="28.02.".$kli_vrok; $mesiac="02"; $kli_vume="2.".$kli_vrok; }
+if( $cislo_oc == 3 ) { $datum="31.03.".$kli_vrok; $mesiac="03"; $kli_vume="3.".$kli_vrok; }
+if( $cislo_oc == 4 ) { $datum="30.04.".$kli_vrok; $mesiac="04"; $kli_vume="4.".$kli_vrok; }
+if( $cislo_oc == 5 ) { $datum="31.05.".$kli_vrok; $mesiac="05"; $kli_vume="5.".$kli_vrok; }
+if( $cislo_oc == 6 ) { $datum="30.06.".$kli_vrok; $mesiac="06"; $kli_vume="6.".$kli_vrok; }
+if( $cislo_oc == 7 ) { $datum="31.07.".$kli_vrok; $mesiac="07"; $kli_vume="7.".$kli_vrok; }
+if( $cislo_oc == 8 ) { $datum="31.08.".$kli_vrok; $mesiac="08"; $kli_vume="8.".$kli_vrok; }
+if( $cislo_oc == 9 ) { $datum="30.09.".$kli_vrok; $mesiac="09"; $kli_vume="9.".$kli_vrok; }
+if( $cislo_oc == 10 ) { $datum="31.10.".$kli_vrok; $mesiac="10"; $kli_vume="10.".$kli_vrok; }
+if( $cislo_oc == 11 ) { $datum="30.11.".$kli_vrok; $mesiac="11"; $kli_vume="11.".$kli_vrok; }
+if( $cislo_oc == 12 ) { $datum="31.12.".$kli_vrok; $mesiac="12"; $kli_vume="12.".$kli_vrok; }
 
 
 $vsetkyprepocty=0;
@@ -97,6 +97,10 @@ $zdroj = strip_tags($_REQUEST['zdroj']);
 $oddiel = strip_tags($_REQUEST['oddiel']);
 
 
+if( $strana == 1 )                     { 
+$uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET daz='$daz_sql' ";
+$upravene = mysql_query("$uprtxt"); 
+                                       }
 
 if ( $strana == 2 OR $strana == 4 )    {
 
@@ -291,6 +295,15 @@ if( $strana == 9999 ) $strana=1;
 //nacitaj udaje pre upravu
 if ( $copern == 20 )
     {
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104  ";
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
+$daz_sk = SkDatum($fir_riadok->daz);
+
+mysql_free_result($fir_vysledok);
+
+
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104set  ";
 
 $fir_vysledok = mysql_query($sqlfir);
@@ -302,6 +315,13 @@ $oddielx = $fir_riadok->oddiel;
 
 
 mysql_free_result($fir_vysledok);
+
+
+if( $schvaleny == '' ) { $schvaleny="0.00"; }
+if( $zmeneny == '' ) { $zmeneny="0.00"; }
+if( $predpoklad == '' ) { $predpoklad="0.00"; }
+if( $skutocnost == '' ) { $skutocnost="0.00"; }
+
     }
 //koniec nacitania
 
@@ -365,7 +385,7 @@ table.table-heading {
   margin: 0 auto;
 }
 table.zoznam tbody tr:hover {
-  background-color: #eee;
+  background-color:#ddd;
 }
 table.zoznam tbody td {
   font-size: 12px;
@@ -377,11 +397,6 @@ table.zoznam tfoot th {
   font-size: 11px;
   background-color: #ddd;
 }
-table.zoznam tfoot td {
-  text-align: center;
-  height: 22px;
-  padding-top: 4px;
-}
 table.zoznam tfoot td input[type=text] {
   height: 18px;
   line-height: 18px;
@@ -389,16 +404,14 @@ table.zoznam tfoot td input[type=text] {
   border: 1px solid #39f;
   font-size: 14px;
   position: static;
+  display: block;
+  margin: 6px auto;
 }
-input.btn-rowsave {
-  height: 22px;
-  cursor: pointer;
-  position: relative;
-  top: -1px;
-}
+/* dopyt, spraviù zebru */
 tr.zero-line > td { /* urcenie sirky stlpcov */
   height: 0;
 }
+
 img.btn-cancel {
   width: 14px;
   height: 14px;
@@ -528,6 +541,16 @@ function SkutocnostEnter(e)
     function ObnovUI()
     {
 
+<?php if ( $strana == 1 )                           { ?>
+
+<?php if( $zdroj == '' ) { $zdroj=$zdrojx; } ?>
+
+document.formv1.daz.value = '<?php echo $daz_sk;?>';
+
+
+
+<?php                                               } ?>
+
 <?php if ( $strana == 2 )                           { ?>
 
 <?php if( $zdroj == '' ) { $zdroj=$zdrojx; } ?>
@@ -572,6 +595,9 @@ document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
 
 document.formv1.polozka.value = '<?php echo $polozka;?>';
+document.formv1.schvaleny.value = '<?php echo $schvaleny;?>';
+document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
+document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
         //document.formv1.uloz.disabled = true;
@@ -587,6 +613,9 @@ document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
 document.formv1.oddiel.value = '<?php echo $oddiel;?>';
 document.formv1.polozka.value = '<?php echo $polozka;?>';
+document.formv1.schvaleny.value = '<?php echo $schvaleny;?>';
+document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
+document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
         //document.formv1.uloz.disabled = true;
@@ -641,7 +670,7 @@ window.open('fin112nujpoddbf.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&drupo
 
   function Vymaz(cpl)
   {
-   window.open('vykaz_fin112_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=316&drupoh=1&page=1&subor=0&strana=2&cislo_cpl=' + cpl + '&xx=1',
+   window.open('vykaz_fin112_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=316&drupoh=1&page=1&subor=0&strana=<?php echo $strana; ?>&cislo_cpl=' + cpl + '&xx=1',
 '_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
@@ -672,7 +701,6 @@ if ( $copern == 20 )
  </tr>
  </table>
 </div>
-<?php if ( $strana < 1 OR $strana > 5 ) $strana=1; ?> <!-- dopyt, neviem, Ëi je v poriadku OK -->
 
 <?php
 $sirka=950;
@@ -730,27 +758,36 @@ $source="vykaz_fin112_2016.php";
 <div id="FixneMenu">
 <table class="table-heading">
 <tr>
- <th style="width:15%;">Zdroj</th>
+ <th style="width:20%;">Zdroj.Typ zdroja</th>
  <th style="width:15%;">Poloûka.Podpoloûka</th>
  <th style="width:15%;">Schv·len˝ rozpoËet</th>
  <th style="width:15%;">RozpoËet po zmen·ch</th>
  <th style="width:15%;">OËak·van· skutoËnosù</th>
- <th style="width:15%;">SkutoËnosù k <?php echo $skutku; ?></th>
- <th style="width:10%;"></th>
+ <th style="width:15%;">SkutoËnosù k <?php echo $datum; ?></th> <!-- dopyt, dorobiù premenn˙ -->
+ <th style="width:5%;"></th>
 </tr>
 </table>
 </div>
+<script type="text/javascript">
+    var menu = document.getElementById('FixneMenu');
+    window.onscroll = function () {
+      menu.className = (
+        document.documentElement.scrollTop + document.body.scrollTop > menu.parentNode.offsetTop + 70
+        && document.documentElement.clientHeight > menu.offsetHeight
+      ) ? "fixne-menu" : "";
+    }
+</script>
 
 <table class="zoznam" style="width:100%;">
 <thead>
 <tr class="zero-line">
+ <td style="width:20%;"></td>
  <td style="width:15%;"></td>
  <td style="width:15%;"></td>
  <td style="width:15%;"></td>
  <td style="width:15%;"></td>
  <td style="width:15%;"></td>
- <td style="width:15%;"></td>
- <td style="width:10%;"></td>
+ <td style="width:5%;"></td>
 </tr>
 </thead>
 <?php
@@ -798,7 +835,7 @@ $uhrn1 = $riadokxx->uhrn1;
 $uhrn2 = $riadokxx->uhrn2;
 $uhrn3 = $riadokxx->uhrn3;
 $uhrn4 = $riadokxx->uhrn4;
-                   }
+}
 if ( $uhrn1 == '' ) { $uhrn1=0; }
 if ( $uhrn2 == '' ) { $uhrn2=0; }
 if ( $uhrn3 == '' ) { $uhrn3=0; }
@@ -811,30 +848,34 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
  <th class="right"><?php echo $uhrn2; ?></th>
  <th class="right"><?php echo $uhrn3; ?></th>
  <th class="right"><?php echo $uhrn4; ?></th>
- <th>&nbsp;</th>
+ <th class="center">&nbsp;</th>
 </tr>
 <tr>
  <td>
   <input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
  <td>
-  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
  <td>
-  <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:103px;"/>
  </td>
  <td>
-  <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
  <td>
-  <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
  <td>
-  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
+ <td>&nbsp;</td>
+</tr>
+<tr>
  <td>
-  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" class="btn-rowsave">
+  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" style="height:24px; cursor:pointer;">
  </td>
+ <td colspan="6">&nbsp;</td>
 </tr>
 </tfoot>
 </table>
@@ -852,29 +893,40 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 <div id="FixneMenu">
 <table class="table-heading">
 <tr>
- <th style="width:14%;">Zdroj</th>
- <th style="width:14%;">Oddiel</th>
- <th style="width:14%;">Poloûka.Podpoloûka</th>
- <th style="width:12%;">Schv·len˝ rozpoËet</th>
- <th style="width:12%;">RozpoËet po zmen·ch</th>
- <th style="width:12%;">OËak·van· skutoËnosù</th>
- <th style="width:12%;">SkutoËnosù k <?php echo $skutku; ?></th>
- <th style="width:8%;"></th>
+ <th style="width:15%;"> </th>
+ <th style="width:15%;">Zdroj.Typ zdroja</th>
+ <th style="width:15%;">Oddiel.Skupina.Trieda.Podtrieda</th>
+ <th style="width:10%;">Poloûka.Podpoloûka</th>
+ <th style="width:10%;">Schv·len˝ rozpoËet</th>
+ <th style="width:10%;">RozpoËet po zmen·ch</th>
+ <th style="width:10%;">OËak·van· skutoËnosù</th>
+ <th style="width:10%;">SkutoËnosù k</th> <!-- dopyt, dorobiù premenn˙ -->
+ <th style="width:5%;"></th>
 </tr>
 </table>
 </div>
+<script type="text/javascript">
+    var menu = document.getElementById('FixneMenu');
+    window.onscroll = function () {
+      menu.className = (
+        document.documentElement.scrollTop + document.body.scrollTop > menu.parentNode.offsetTop + 70
+        && document.documentElement.clientHeight > menu.offsetHeight
+      ) ? "fixne-menu" : "";
+    }
+</script>
 
 <table class="zoznam" style="width:100%;">
 <thead>
 <tr class="zero-line">
- <td style="width:14%;"></td>
- <td style="width:14%;"></td>
- <td style="width:14%;"></td>
- <td style="width:12%;"></td>
- <td style="width:12%;"></td>
- <td style="width:12%;"></td>
- <td style="width:12%;"></td>
- <td style="width:8%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:5%;"></td>
 </tr>
 </thead>
 <?php
@@ -895,8 +947,9 @@ $rsluz=mysql_fetch_object($sluz);
 ?>
 <tbody>
 <tr>
- <td class="center"><?php echo $rsluz->zdroj; ?></td>
- <td class="center"><?php echo $rsluz->oddiel; ?></td>
+ <td> </td>
+ <td><?php echo $rsluz->zdroj; ?></td>
+ <td><?php echo $rsluz->oddiel; ?></td>
  <td class="center"><?php echo $rsluz->polozka; ?></td>
  <td class="right"><?php echo $rsluz->schvaleny; ?></td>
  <td class="right"><?php echo $rsluz->zmeneny; ?></td>
@@ -931,14 +984,15 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 ?>
 <tfoot>
 <tr>
- <th colspan="3" class="center">Spolu</th>
+ <th colspan="4" class="center">Spolu</th>
  <th class="right"><?php echo $uhrn1; ?></th>
  <th class="right"><?php echo $uhrn2; ?></th>
  <th class="right"><?php echo $uhrn3; ?></th>
  <th class="right"><?php echo $uhrn4; ?></th>
- <th>&nbsp;</th>
+ <th class="center">&nbsp;</th>
 </tr>
 <tr>
+ <td></td>
  <td>
   <input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
@@ -946,23 +1000,27 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
   <input type="text" name="oddiel" id="zoddiel" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
  <td>
-  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
  <td>
-  <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:103px;"/>
  </td>
  <td>
-  <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
  <td>
-  <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
  <td>
-  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
+ <td>&nbsp;</td>
+</tr>
+<tr>
  <td>
-  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" class="btn-rowsave">
+  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" style="height:24px; cursor:pointer;">
  </td>
+ <td colspan="6">&nbsp;</td>
 </tr>
 </tfoot>
 </table>
@@ -980,25 +1038,38 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 <div id="FixneMenu">
 <table class="table-heading">
 <tr>
- <th style="width:30%;">Poloûka.Podpoloûka</th>
- <th style="width:15%;">Schv·len˝ rozpoËet</th>
- <th style="width:15%;">RozpoËet po zmen·ch</th>
- <th style="width:15%;">OËak·van· skutoËnosù</th>
- <th style="width:15%;">SkutoËnosù k <?php echo $skutku; ?></th>
- <th style="width:10%;"></th>
+ <th style="width:20%;"> </th>
+ <th style="width:20%;"> </th>
+ <th style="width:15%;">Poloûka.Podpoloûka</th>
+ <th style="width:10%;">Schv·len˝ rozpoËet</th>
+ <th style="width:10%;">RozpoËet po zmen·ch</th>
+ <th style="width:10%;">OËak·van· udalosù</th>
+ <th style="width:10%;">SkutoËnosù k</th> <!-- dopyt, dorobiù premenn˙ -->
+ <th style="width:5%;"></th>
 </tr>
 </table>
 </div>
+<script type="text/javascript">
+    var menu = document.getElementById('FixneMenu');
+    window.onscroll = function () {
+      menu.className = (
+        document.documentElement.scrollTop + document.body.scrollTop > menu.parentNode.offsetTop + 70
+        && document.documentElement.clientHeight > menu.offsetHeight
+      ) ? "fixne-menu" : "";
+    }
+</script>
 
 <table class="zoznam" style="width:100%;">
-<thead>
+<thead style=" ">
 <tr class="zero-line">
- <td style="width:30%;"></td>
- <td style="width:15%;"></td>
- <td style="width:15%;"></td>
- <td style="width:15%;"></td>
+ <td style="width:20%;"></td>
+ <td style="width:20%;"></td>
  <td style="width:15%;"></td>
  <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:5%;"></td>
 </tr>
 </thead>
 <?php
@@ -1019,6 +1090,8 @@ $rsluz=mysql_fetch_object($sluz);
 ?>
 <tbody>
 <tr>
+ <td></td>
+ <td class="center"> </td>
  <td class="center"><?php echo $rsluz->polozka; ?></td>
  <td class="right"><?php echo $rsluz->schvaleny; ?></td>
  <td class="right"><?php echo $rsluz->zmeneny; ?></td>
@@ -1053,32 +1126,38 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 ?>
 <tfoot>
 <tr>
- <th class="center">Spolu</th>
+ <th colspan="3" class="center">Spolu</th>
  <th class="right"><?php echo $uhrn1; ?></th>
  <th class="right"><?php echo $uhrn2; ?></th>
  <th class="right"><?php echo $uhrn3; ?></th>
  <th class="right"><?php echo $uhrn4; ?></th>
- <th>&nbsp;</th>
+ <th class="center">&nbsp;</th>
+</tr>
+<tr>
+ <td></td>
+ <td></td>
+ <td>
+  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:103px;"/>
+ </td>
+ <td>
+  <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>
+  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
+ </td>
+ <td>&nbsp;</td>
 </tr>
 <tr>
  <td>
-  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" style="height:24px; cursor:pointer;">
  </td>
- <td>
-  <input type="text" name="schvaleny" id="schvaleny" disabled="disabled" style="width:80px;"/>
- </td>
- <td>
-  <input type="text" name="zmeneny" id="zmeneny" disabled="disabled" style="width:80px;"/>
- </td>
- <td>
-  <input type="text" name="predpoklad" id="predpoklad" disabled="disabled" style="width:80px;"/>
- </td>
- <td>
-  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
- </td>
- <td>
-  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" class="btn-rowsave">
- </td>
+ <td colspan="6">&nbsp;</td>
 </tr>
 </tfoot>
 </table>
@@ -1096,27 +1175,40 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 <div id="FixneMenu">
 <table class="table-heading">
 <tr>
- <th style="width:20%;">Oddiel</th>
- <th style="width:20%;">Poloûka.Podpoloûka</th>
- <th style="width:13%;">Schv·len˝ rozpoËet</th>
- <th style="width:13%;">RozpoËet po zmen·ch</th>
- <th style="width:13%;">OËak·van· skutoËnosù</th>
- <th style="width:13%;">SkutoËnosù k <?php echo $skutku; ?></th>
- <th style="width:8%;"></th>
+ <th style="width:10%;"> </th>
+ <th style="width:15%;"> </th>
+ <th style="width:15%;">Oddiel.Skupina.Trieda.Podtrieda</th>
+ <th style="width:15%;">Poloûka.Podpoloûka</th>
+ <th style="width:10%;">Schv·len˝ rozpoËet</th>
+ <th style="width:10%;">RozpoËet po zmen·ch</th>
+ <th style="width:10%;">OËak·van· skutoËnosù</th>
+ <th style="width:10%;">SkutoËnosù k</th> <!-- dopyt, dorobiù premenn˙ -->
+ <th style="width:5%;"></th>
 </tr>
 </table>
 </div>
+<script type="text/javascript">
+    var menu = document.getElementById('FixneMenu');
+    window.onscroll = function () {
+      menu.className = (
+        document.documentElement.scrollTop + document.body.scrollTop > menu.parentNode.offsetTop + 70
+        && document.documentElement.clientHeight > menu.offsetHeight
+      ) ? "fixne-menu" : "";
+    }
+</script>
 
 <table class="zoznam" style="width:100%;">
-<thead>
+<thead style=" ">
 <tr class="zero-line">
- <td style="width:20%;"></td>
- <td style="width:20%;"></td>
- <td style="width:13%;"></td>
- <td style="width:13%;"></td>
- <td style="width:13%;"></td>
- <td style="width:13%;"></td>
- <td style="width:8%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:15%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:10%;"></td>
+ <td style="width:5%;"></td>
 </tr>
 </thead>
 <?php
@@ -1137,6 +1229,8 @@ $rsluz=mysql_fetch_object($sluz);
 ?>
 <tbody>
 <tr>
+ <td></td>
+ <td class="center"></td>
  <td class="center"><?php echo $rsluz->oddiel; ?></td>
  <td class="center"><?php echo $rsluz->polozka; ?></td>
  <td class="right"><?php echo $rsluz->schvaleny; ?></td>
@@ -1172,7 +1266,7 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 ?>
 <tfoot>
 <tr>
- <th colspan="2" class="center">Spolu</th>
+ <th colspan="4" class="center">Spolu</th>
  <th class="right"><?php echo $uhrn1; ?></th>
  <th class="right"><?php echo $uhrn2; ?></th>
  <th class="right"><?php echo $uhrn3; ?></th>
@@ -1180,27 +1274,33 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
  <th class="center">&nbsp;</th>
 </tr>
 <tr>
+ <td></td>
+ <td></td>
  <td>
   <input type="text" name="oddiel" id="oddiel" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
  <td>
-  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
  <td>
-  <input type="text" name="schvaleny" id="schvaleny" disabled="disabled" style="width:80px;"/>
+  <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:103px;"/>
  </td>
  <td>
-  <input type="text" name="zmeneny" id="zmeneny" disabled="disabled" style="width:80px;"/>
+  <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
  <td>
-  <input type="text" name="predpoklad" id="predpoklad" disabled="disabled" style="width:80px;"/>
+  <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
  <td>
-  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
+ <td>&nbsp;</td>
+</tr>
+<tr>
  <td>
-  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" class="btn-rowsave">
+  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" style="height:24px; cursor:pointer;">
  </td>
+ <td colspan="6">&nbsp;</td>
 </tr>
 </tfoot>
 </table>
@@ -1209,17 +1309,7 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 </div> <!-- .form-background-wide -->
 <?php                     } ?>
 
-<script type="text/javascript">
-    var menu = document.getElementById('FixneMenu');
-    window.onscroll = function () {
-      menu.className = (
-        document.documentElement.scrollTop + document.body.scrollTop > menu.parentNode.offsetTop + 70
-        && document.documentElement.clientHeight > menu.offsetHeight
-      ) ? "fixne-menu" : "";
-    }
-</script>
-
-<div class="navbar" style="padding-bottom:30px; overflow:auto;">
+<div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas2; ?> toleft">PrÌjmy</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=3&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas3; ?> toleft">V˝davky</a>
@@ -2081,8 +2171,6 @@ $pdf->Output("$outfilex");
 /////////////////////////////////////////KONIEC VYTLACENIA 
 ?>
 
-
-
 <?php
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykaz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
@@ -2092,7 +2180,7 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykazz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
 //celkovy koniec
-//$cislista = include("uct_lista_norm.php");
+$cislista = include("uct_lista_norm.php");
 } while (false);
 ?>
 </BODY>
