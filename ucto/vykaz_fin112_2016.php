@@ -93,8 +93,8 @@ if ( $copern == 23 )
     {
 $daz = $_REQUEST['daz'];
 $daz_sql = SqlDatum($daz);
-//$zdroj = strip_tags($_REQUEST['zdroj']);
-//$oddiel = strip_tags($_REQUEST['oddiel']);
+$zdroj = strip_tags($_REQUEST['zdroj']);
+$oddiel = strip_tags($_REQUEST['oddiel']);
 
 
 
@@ -109,7 +109,7 @@ $skutocnost = 1*$_REQUEST['skutocnost'];
 $druh=$strana-1;
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104set SET zdroj='$zdroj' ";
-$upravene = mysql_query("$uprtxt");
+if( $zdroj > 0 ) { $upravene = mysql_query("$uprtxt"); }
 
 
 $uprtxt = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 (oc,druh,zdroj,polozka,schvaleny,zmeneny,predpoklad,skutocnost) VALUES ".
@@ -117,15 +117,6 @@ $uprtxt = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 (oc,druh,zdroj,polozka,schv
 
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
-
-$uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET ".
-" daz='$daz_sql' ".
-//" okres='', obec='', daz='$daz_sql', xpolozka=SUBSTRING(polozka,1,3), podpolozka=SUBSTRING(polozka,4,3), ".
-//" xoddiel=SUBSTRING(oddiel,1,2), skupina=SUBSTRING(oddiel,4,1), trieda=SUBSTRING(oddiel,6,1), podtrieda=SUBSTRING(oddiel,8,1) ".
-" WHERE oc >= 0 "; 
-//echo $uprtxt;
-$upravene = mysql_query("$uprtxt");
-
 
 
                        }
@@ -142,22 +133,18 @@ $skutocnost = 1*$_REQUEST['skutocnost'];
 
 $druh=$strana-1;
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104set SET zdroj='$zdroj', oddiel='$oddiel' ";
-$upravene = mysql_query("$uprtxt");
+$uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104set SET zdroj='$zdroj'  ";
+if( $zdroj > 0 ) { $upravene = mysql_query("$uprtxt"); }
 
+$uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104set SET oddiel='$oddiel' ";
+if( $oddiel > 0 ) { $upravene = mysql_query("$uprtxt"); }
 
 $uprtxt = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 (oc,druh,zdroj,oddiel,polozka,schvaleny,zmeneny,predpoklad,skutocnost) VALUES ".
-" (  '$stvrtrok', '$druh', '$zdroj', '$oddiel', '$polozka', '$schvaleny', '$zmeneny', '$predpoklad', '$skutocnost' ) ";
+" (  '$cislo_oc', '$druh', '$zdroj', '$oddiel', '$polozka', '$schvaleny', '$zmeneny', '$predpoklad', '$skutocnost' ) ";
 
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET ".
-" okres='$okres', obec='$obec', daz='$daz_sql', xpolozka=SUBSTRING(polozka,1,3), podpolozka=SUBSTRING(polozka,4,3), ".
-" xoddiel=SUBSTRING(oddiel,1,2), skupina=SUBSTRING(oddiel,4,1), trieda=SUBSTRING(oddiel,6,1), podtrieda=SUBSTRING(oddiel,8,1) ".
-" WHERE oc >= 0 "; 
-//echo $uprtxt;
-$upravene = mysql_query("$uprtxt");
 
                        }
 
@@ -548,9 +535,31 @@ document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
 document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
-       // document.forms.formv1.zdroj.focus(); dopyt, potom zruöiù //
-        //document.forms.formv1.zdroj.select();
+        //document.formv1.uloz.disabled = true;
+        document.forms.formv1.zdroj.focus(); 
+        document.forms.formv1.zdroj.select();
 
+
+<?php                                               } ?>
+
+
+
+<?php if ( $strana == 3 )                           { ?>
+
+<?php if( $zdroj == '' ) { $zdroj=$zdrojx; } ?>
+<?php if( $oddiel == '' ) { $oddiel=$oddielx; } ?>
+
+document.formv1.zdroj.value = '<?php echo $zdroj;?>';
+document.formv1.oddiel.value = '<?php echo $oddiel;?>';
+document.formv1.polozka.value = '<?php echo $polozka;?>';
+document.formv1.schvaleny.value = '<?php echo $schvaleny;?>';
+document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
+document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
+document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
+
+
+        document.forms.formv1.zdroj.focus();
+        document.forms.formv1.zdroj.select();
 
 <?php                                               } ?>
 
@@ -561,41 +570,22 @@ document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 document.formv1.polozka.value = '<?php echo $polozka;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
-
+        //document.formv1.uloz.disabled = true;
         document.forms.formv1.polozka.focus();
         document.forms.formv1.polozka.select();
 
 
 <?php                                               } ?>
 
-<?php if ( $strana == 3 )                           { ?>
-
-<?php if( $zdroj == '' ) { $zdroj=$zdrojx; } ?>
-<?php if( $oddiel == '' ) { $zdroj=$oddielx; } ?>
-
-document.formv1.zdroj.value = '<?php echo $zdroj;?>';
-document.formv1.oddiel.value = '<?php echo $oddiel;?>';
-document.formv1.polozka.value = '<?php echo $polozka;?>';
-document.formv1.schvaleny.value = '<?php echo $schvaleny;?>';
-document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
-document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
-document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
-
- document.formv1.uloz.disabled = true;
-        //document.forms.formv1.zdroj.focus();
-        //document.forms.formv1.zdroj.select();
-
-<?php                                               } ?>
-
 <?php if ( $strana == 5 )                           { ?>
 
-<?php if( $oddiel == '' ) { $zdroj=$oddielx; } ?>
+<?php if( $oddiel == '' ) { $oddiel=$oddielx; } ?>
 
 document.formv1.oddiel.value = '<?php echo $oddiel;?>';
 document.formv1.polozka.value = '<?php echo $polozka;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
- document.formv1.uloz.disabled = true;
+        //document.formv1.uloz.disabled = true;
         document.forms.formv1.oddiel.focus();
         document.forms.formv1.oddiel.select();
 <?php                                                } ?>
@@ -678,7 +668,7 @@ if ( $copern == 20 )
  </tr>
  </table>
 </div>
-<?php if ( $strana < 1 OR $strana > 5 ) $strana=1; ?> <!-- dopyt, neviem, Ëi je v poriadku -->
+<?php if ( $strana < 1 OR $strana > 5 ) $strana=1; ?> <!-- dopyt, neviem, Ëi je v poriadku OK -->
 
 <?php
 $sirka=950;
@@ -741,7 +731,7 @@ $source="vykaz_fin112_2016.php";
  <th style="width:15%;">Schv·len˝ rozpoËet</th>
  <th style="width:15%;">RozpoËet po zmen·ch</th>
  <th style="width:15%;">OËak·van· skutoËnosù</th>
- <th style="width:15%;">SkutoËnosù k</th> <!-- dopyt, dorobiù premenn˙ -->
+ <th style="width:15%;">SkutoËnosù k <?php echo $datum; ?></th> <!-- dopyt, dorobiù premenn˙ -->
  <th style="width:5%;"></th>
 </tr>
 </table>
@@ -771,7 +761,7 @@ $source="vykaz_fin112_2016.php";
 <?php
 $sluztt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET kor=1*zdroj ";
 $sluz = mysql_query("$sluztt");
-$sluztt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE oc >= 0 AND druh = 1 ORDER BY cpl DESC ";
+$sluztt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE oc >= 0 AND druh = 1 ORDER BY cpl ";
 $sluz = mysql_query("$sluztt");
 $slpol = mysql_num_rows($sluz);
 
@@ -871,8 +861,8 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 <div id="FixneMenu">
 <table class="table-heading">
 <tr>
+ <th style="width:15%;"> </th>
  <th style="width:15%;">Zdroj.Typ zdroja</th>
- <th style="width:15%;">Program</th>
  <th style="width:15%;">Oddiel.Skupina.Trieda.Podtrieda</th>
  <th style="width:10%;">Poloûka.Podpoloûka</th>
  <th style="width:10%;">Schv·len˝ rozpoËet</th>
@@ -907,11 +897,27 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
  <td style="width:5%;"></td>
 </tr>
 </thead>
+<?php
+$sluztt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET kor=1*zdroj ";
+$sluz = mysql_query("$sluztt");
+$sluztt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE oc >= 0 AND druh = 2 ORDER BY cpl ";
+$sluz = mysql_query("$sluztt");
+$slpol = mysql_num_rows($sluz);
+
+//zaciatok vypisu
+$i=0;
+$j=0;
+  while ( $i <= $slpol )
+  {
+  if (@$zaznam=mysql_data_seek($sluz,$i))
+{
+$rsluz=mysql_fetch_object($sluz);
+?>
 <tbody>
 <tr>
- <td class="center"><?php echo $rsluz->zdroj; ?></td>
- <td></td>
- <td></td>
+ <td> </td>
+ <td><?php echo $rsluz->zdroj; ?></td>
+ <td><?php echo $rsluz->oddiel; ?></td>
  <td class="center"><?php echo $rsluz->polozka; ?></td>
  <td class="right"><?php echo $rsluz->schvaleny; ?></td>
  <td class="right"><?php echo $rsluz->zmeneny; ?></td>
@@ -923,6 +929,27 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
  </td>
 </tr>
 </tbody>
+<?php
+}
+$i = $i + 1;
+$j = $j + 1;
+  }
+?>
+<?php
+$sqlxx = "SELECT SUM(schvaleny) AS uhrn1, SUM(zmeneny) AS uhrn2, SUM(predpoklad) AS uhrn3, SUM(skutocnost) AS uhrn4 FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE druh = 2 ";
+$vysledokxx = mysql_query($sqlxx);
+if ( $vysledokxx ) {
+$riadokxx=mysql_fetch_object($vysledokxx);
+$uhrn1 = $riadokxx->uhrn1;
+$uhrn2 = $riadokxx->uhrn2;
+$uhrn3 = $riadokxx->uhrn3;
+$uhrn4 = $riadokxx->uhrn4;
+}
+if ( $uhrn1 == '' ) { $uhrn1=0; }
+if ( $uhrn2 == '' ) { $uhrn2=0; }
+if ( $uhrn3 == '' ) { $uhrn3=0; }
+if ( $uhrn4 == '' ) { $uhrn4=0; }
+?>
 <tfoot>
 <tr>
  <th colspan="4" class="center">Spolu</th>
@@ -933,11 +960,13 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
  <th class="center">&nbsp;</th>
 </tr>
 <tr>
+ <td></td>
  <td>
   <input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
- <td></td>
- <td></td>
+ <td>
+  <input type="text" name="oddiel" id="zoddiel" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+ </td>
  <td>
   <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
@@ -977,8 +1006,8 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 <div id="FixneMenu">
 <table class="table-heading">
 <tr>
- <th style="width:20%;">KÛd ˙Ëtu</th>
- <th style="width:20%;">Zdroj</th>
+ <th style="width:20%;"> </th>
+ <th style="width:20%;"> </th>
  <th style="width:15%;">Poloûka.Podpoloûka</th>
  <th style="width:10%;">Schv·len˝ rozpoËet</th>
  <th style="width:10%;">RozpoËet po zmen·ch</th>
@@ -1011,10 +1040,26 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
  <td style="width:5%;"></td>
 </tr>
 </thead>
+<?php
+$sluztt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET kor=1*zdroj ";
+$sluz = mysql_query("$sluztt");
+$sluztt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE oc >= 0 AND druh = 3 ORDER BY cpl ";
+$sluz = mysql_query("$sluztt");
+$slpol = mysql_num_rows($sluz);
+
+//zaciatok vypisu
+$i=0;
+$j=0;
+  while ( $i <= $slpol )
+  {
+  if (@$zaznam=mysql_data_seek($sluz,$i))
+{
+$rsluz=mysql_fetch_object($sluz);
+?>
 <tbody>
 <tr>
  <td></td>
- <td class="center"><?php echo $rsluz->zdroj; ?></td>
+ <td class="center"> </td>
  <td class="center"><?php echo $rsluz->polozka; ?></td>
  <td class="right"><?php echo $rsluz->schvaleny; ?></td>
  <td class="right"><?php echo $rsluz->zmeneny; ?></td>
@@ -1026,6 +1071,27 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
  </td>
 </tr>
 </tbody>
+<?php
+}
+$i = $i + 1;
+$j = $j + 1;
+  }
+?>
+<?php
+$sqlxx = "SELECT SUM(schvaleny) AS uhrn1, SUM(zmeneny) AS uhrn2, SUM(predpoklad) AS uhrn3, SUM(skutocnost) AS uhrn4 FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE druh = 3 ";
+$vysledokxx = mysql_query($sqlxx);
+if ( $vysledokxx ) {
+$riadokxx=mysql_fetch_object($vysledokxx);
+$uhrn1 = $riadokxx->uhrn1;
+$uhrn2 = $riadokxx->uhrn2;
+$uhrn3 = $riadokxx->uhrn3;
+$uhrn4 = $riadokxx->uhrn4;
+}
+if ( $uhrn1 == '' ) { $uhrn1=0; }
+if ( $uhrn2 == '' ) { $uhrn2=0; }
+if ( $uhrn3 == '' ) { $uhrn3=0; }
+if ( $uhrn4 == '' ) { $uhrn4=0; }
+?>
 <tfoot>
 <tr>
  <th colspan="3" class="center">Spolu</th>
@@ -1037,9 +1103,7 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 </tr>
 <tr>
  <td></td>
- <td>
-  <input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
- </td>
+ <td></td>
  <td>
   <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
@@ -1079,8 +1143,8 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 <div id="FixneMenu">
 <table class="table-heading">
 <tr>
- <th style="width:10%;">KÛd ˙Ëtu</th>
- <th style="width:15%;">Zdroj</th>
+ <th style="width:10%;"> </th>
+ <th style="width:15%;"> </th>
  <th style="width:15%;">Oddiel.Skupina.Trieda.Podtrieda</th>
  <th style="width:15%;">Poloûka.Podpoloûka</th>
  <th style="width:10%;">Schv·len˝ rozpoËet</th>
@@ -1115,11 +1179,27 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
  <td style="width:5%;"></td>
 </tr>
 </thead>
+<?php
+$sluztt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET kor=1*zdroj ";
+$sluz = mysql_query("$sluztt");
+$sluztt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE oc >= 0 AND druh = 4 ORDER BY cpl ";
+$sluz = mysql_query("$sluztt");
+$slpol = mysql_num_rows($sluz);
+
+//zaciatok vypisu
+$i=0;
+$j=0;
+  while ( $i <= $slpol )
+  {
+  if (@$zaznam=mysql_data_seek($sluz,$i))
+{
+$rsluz=mysql_fetch_object($sluz);
+?>
 <tbody>
 <tr>
  <td></td>
- <td class="center"><?php echo $rsluz->zdroj; ?></td>
- <td></td>
+ <td class="center"></td>
+ <td class="center"><?php echo $rsluz->oddiel; ?></td>
  <td class="center"><?php echo $rsluz->polozka; ?></td>
  <td class="right"><?php echo $rsluz->schvaleny; ?></td>
  <td class="right"><?php echo $rsluz->zmeneny; ?></td>
@@ -1131,6 +1211,27 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
  </td>
 </tr>
 </tbody>
+<?php
+}
+$i = $i + 1;
+$j = $j + 1;
+  }
+?>
+<?php
+$sqlxx = "SELECT SUM(schvaleny) AS uhrn1, SUM(zmeneny) AS uhrn2, SUM(predpoklad) AS uhrn3, SUM(skutocnost) AS uhrn4 FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE druh = 4 ";
+$vysledokxx = mysql_query($sqlxx);
+if ( $vysledokxx ) {
+$riadokxx=mysql_fetch_object($vysledokxx);
+$uhrn1 = $riadokxx->uhrn1;
+$uhrn2 = $riadokxx->uhrn2;
+$uhrn3 = $riadokxx->uhrn3;
+$uhrn4 = $riadokxx->uhrn4;
+}
+if ( $uhrn1 == '' ) { $uhrn1=0; }
+if ( $uhrn2 == '' ) { $uhrn2=0; }
+if ( $uhrn3 == '' ) { $uhrn3=0; }
+if ( $uhrn4 == '' ) { $uhrn4=0; }
+?>
 <tfoot>
 <tr>
  <th colspan="4" class="center">Spolu</th>
@@ -1142,10 +1243,10 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 </tr>
 <tr>
  <td></td>
- <td>
-  <input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
- </td>
  <td></td>
+ <td>
+  <input type="text" name="oddiel" id="oddiel" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+ </td>
  <td>
   <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:104px;"/>
  </td>
