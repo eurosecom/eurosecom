@@ -97,6 +97,10 @@ $zdroj = strip_tags($_REQUEST['zdroj']);
 $oddiel = strip_tags($_REQUEST['oddiel']);
 
 
+if( $strana == 1 )                     { 
+$uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET daz='$daz_sql' ";
+$upravene = mysql_query("$uprtxt"); 
+                                       }
 
 if ( $strana == 2 OR $strana == 4 )    {
 
@@ -291,6 +295,15 @@ if( $strana == 9999 ) $strana=1;
 //nacitaj udaje pre upravu
 if ( $copern == 20 )
     {
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104  ";
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
+$daz_sk = SkDatum($fir_riadok->daz);
+
+mysql_free_result($fir_vysledok);
+
+
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104set  ";
 
 $fir_vysledok = mysql_query($sqlfir);
@@ -302,6 +315,13 @@ $oddielx = $fir_riadok->oddiel;
 
 
 mysql_free_result($fir_vysledok);
+
+
+if( $schvaleny == '' ) { $schvaleny="0.00"; }
+if( $zmeneny == '' ) { $zmeneny="0.00"; }
+if( $predpoklad == '' ) { $predpoklad="0.00"; }
+if( $skutocnost == '' ) { $skutocnost="0.00"; }
+
     }
 //koniec nacitania
 
@@ -528,6 +548,16 @@ function SkutocnostEnter(e)
     function ObnovUI()
     {
 
+<?php if ( $strana == 1 )                           { ?>
+
+<?php if( $zdroj == '' ) { $zdroj=$zdrojx; } ?>
+
+document.formv1.daz.value = '<?php echo $daz_sk;?>';
+
+
+
+<?php                                               } ?>
+
 <?php if ( $strana == 2 )                           { ?>
 
 <?php if( $zdroj == '' ) { $zdroj=$zdrojx; } ?>
@@ -572,6 +602,9 @@ document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
 
 document.formv1.polozka.value = '<?php echo $polozka;?>';
+document.formv1.schvaleny.value = '<?php echo $schvaleny;?>';
+document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
+document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
         //document.formv1.uloz.disabled = true;
@@ -587,6 +620,9 @@ document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
 document.formv1.oddiel.value = '<?php echo $oddiel;?>';
 document.formv1.polozka.value = '<?php echo $polozka;?>';
+document.formv1.schvaleny.value = '<?php echo $schvaleny;?>';
+document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
+document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
         //document.formv1.uloz.disabled = true;
@@ -641,7 +677,7 @@ window.open('fin112nujpoddbf.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&drupo
 
   function Vymaz(cpl)
   {
-   window.open('vykaz_fin112_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=316&drupoh=1&page=1&subor=0&strana=2&cislo_cpl=' + cpl + '&xx=1',
+   window.open('vykaz_fin112_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=316&drupoh=1&page=1&subor=0&strana=<?php echo $strana; ?>&cislo_cpl=' + cpl + '&xx=1',
 '_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
@@ -672,7 +708,6 @@ if ( $copern == 20 )
  </tr>
  </table>
 </div>
-<?php if ( $strana < 1 OR $strana > 5 ) $strana=1; ?> <!-- dopyt, neviem, èi je v poriadku OK -->
 
 <?php
 $sirka=950;
