@@ -676,6 +676,13 @@ window.open('../ucto/saldo_alch05.php?h_uce=' + h_uce + '&h_obd=' + h_obd + '&co
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function HlaPoh()
+                {
+
+window.open('../ucto/hlasenie_euler.php?copern=20&drupoh=1&page=1&strana=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 function PoZaBanka()
                 {
 var h_deal = document.forms.formdeal.h_deal.value;
@@ -761,6 +768,8 @@ ICDEAL<img src='../obr/tlac.png' onClick="NeuhIcoRozdelDeal();" width=15 height=
 DEAU<img src='../obr/tlac.png' onClick="Uhdealerov();" width=15 height=15 border=0 alt='Tlaè úhrad odberate¾ských faktúr pod¾a DEALEROV' title='Tlaè úhrad odberate¾ských faktúr pod¾a DEALEROV' >
 
 NAJV<img src='../obr/tlac.png' onClick="NajOdb();" width=15 height=15 border=0 alt='Tlaè zoznamu najvýznamnejších odberate¾ov/dodávate¾ov v roku' title='Tlaè zoznamu najvýznamnejších odberate¾ov/dodávate¾ov v roku' >
+
+HLSP<img src='../obr/tlac.png' onClick="HlaPoh();" width=15 height=15 border=0 title='Hlásenie poh¾adávok poisovòa Euler Hermes' >
 
 <?php                    } ?>
 
