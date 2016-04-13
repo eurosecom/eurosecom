@@ -57,6 +57,422 @@ if ( $cislo_oc == 12 ) { $datum="31.12.".$kli_vrok; $mesiac="12"; $kli_vume="12.
 
 
 $vsetkyprepocty=0;
+//nacitaj data
+if ( $copern == 26 )
+    {
+
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobrats'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsy'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$sqlt = <<<prcuobrats
+(
+   psys         INT,
+   uro          INT(8),
+   cpl          int not null auto_increment,
+   ume          FLOAT(8,4),
+   dat          DATE,
+   dok          INT(8),
+   uce          VARCHAR(10),
+   ur1          INT(10),
+   puc          VARCHAR(10),
+   ucm          VARCHAR(10),
+   ucd          VARCHAR(10),
+   rdp          INT(2),
+   ico          INT(10),
+   fak          INT(10),
+   str          INT,
+   zak          INT,
+   hod          DECIMAL(10,2),
+   mdt          DECIMAL(10,2),
+   dal          DECIMAL(10,2),
+   zos          DECIMAL(10,2),
+   pop          VARCHAR(80),
+   pox          INT(10),
+   pmd          DECIMAL(10,2),
+   pdl          DECIMAL(10,2),
+   bmd          DECIMAL(10,2),
+   bdl          DECIMAL(10,2),
+   omd          DECIMAL(10,2),
+   odl          DECIMAL(10,2),
+   zmd          DECIMAL(10,2),
+   zdl          DECIMAL(10,2),
+   podnk        DECIMAL(10,0) DEFAULT 0,
+   uhrad        VARCHAR(10),
+   zdroj        VARCHAR(10),
+   poloz        DECIMAL(10,0) DEFAULT 0,
+   rpje         DECIMAL(10,0) DEFAULT 0,
+   PRIMARY KEY(cpl)
+);
+prcuobrats;
+
+$vsql = 'CREATE TABLE F'.$kli_vxcf.'_prcuobrats'.$kli_uzid.$sqlt;
+$vytvor = mysql_query("$vsql");
+$vsql = 'CREATE TABLE F'.$kli_vxcf.'_prcuobratsy'.$kli_uzid.$sqlt;
+$vytvor = mysql_query("$vsql");
+
+$umex=$kli_vume;
+
+$psys=1;
+ while ($psys <= 9 ) 
+ {
+//zober prijmove pokl
+if( $psys == 1 ) { $uctovanie="uctpokuct"; $doklad="pokpri"; }
+//zober vydavkove pokl
+if( $psys == 2 ) { $uctovanie="uctpokuct"; $doklad="pokvyd"; }
+//zober bankove
+if( $psys == 3 ) { $uctovanie="uctban"; $doklad="banvyp"; }
+//zober vseobecne
+if( $psys == 4 ) { $uctovanie="uctvsdp"; $doklad="uctvsdh"; }
+//zober odberatelske
+if( $psys == 5 ) { $uctovanie="uctodb"; $doklad="fakodb"; }
+//zober dodavatelske
+if( $psys == 6 ) { $uctovanie="uctdod"; $doklad="fakdod"; }
+//zober majetok
+if( $psys == 7 ) { $uctovanie="uctmaj"; }
+//zober majetok
+if( $psys == 8 ) { $uctovanie="uctskl"; }
+//zober mzdy
+if( $psys == 9 ) { $uctovanie="uctmzd"; }
+
+if( $psys <= 6 )
+{
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobratsy$kli_uzid"." SELECT".
+" $psys,1,0,ume,dat,F$kli_vxcf"."_$uctovanie.dok,ucm,1,ucd,ucm,ucd,rdp,F$kli_vxcf"."_$uctovanie.ico,F$kli_vxcf"."_$uctovanie.fak,".
+"F$kli_vxcf"."_$uctovanie.str,F$kli_vxcf"."_$uctovanie.zak,F$kli_vxcf"."_$uctovanie.hod,F$kli_vxcf"."_$uctovanie.hod,".
+"0,0,F$kli_vxcf"."_$doklad.txp,1,0,0,0,0,0,0,0,0,0,0,0,0,0".
+" FROM F$kli_vxcf"."_$uctovanie,F$kli_vxcf"."_$doklad".
+" WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ( ucm > 0 OR ucd > 0 ) AND ume <= $umex ";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+}
+else
+{
+//tu budu podsystemy
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobratsy$kli_uzid"." SELECT".
+" $psys,1,0,ume,dat,dok,ucm,1,ucd,ucm,ucd,rdp,ico,fak,".
+"str,zak,hod,hod,".
+"0,0,pop,1,0,0,0,0,0,0,0,0,0,0,0,0,0".
+" FROM F$kli_vxcf"."_$uctovanie".
+" WHERE ume <= $umex ";
+$dsql = mysql_query("$dsqlt");
+
+}
+$psys=$psys+1;
+  }
+
+
+
+//tu daj prec madat 3kovych uctov ale nie 346 zuctovanie dotacii proti 691
+$sqtoz = "DELETE FROM F$kli_vxcf"."_prcuobratsy$kli_uzid WHERE LEFT(ucm,1) = 3 AND LEFT(ucd,1) != 5 AND LEFT(ucd,1) != 6 ";
+$oznac = mysql_query("$sqtoz");
+
+
+//vloz stranu dal
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobratsy$kli_uzid"." SELECT".
+" psys,1,0,ume,dat,dok,ucd,1,ucm,ucm,ucd,rdp,ico,fak,str,zak,-(hod),0,hod,0,pop,pox,0,0,0,0,0,0,0,0,podnk,uhrad,zdroj,poloz,rpje".
+" FROM F$kli_vxcf"."_prcuobratsy$kli_uzid".
+" WHERE ume <= $umex AND psys > 0 ";
+" ";
+$dsql = mysql_query("$dsqlt");
+
+
+if( $_SERVER['SERVER_NAME'] == "www.eurodpsgbely.sk" ) 
+{
+$dfzdroj=41; 
+$sqtoz = "DELETE FROM F$kli_vxcf"."_prcuobratsy$kli_uzid WHERE LEFT(ucm,5) = 37810 ";
+$oznac = mysql_query("$sqtoz");
+}
+
+
+
+if( $_SERVER['SERVER_NAME'] == "www.eurodpsgbely.sk" ) 
+{  
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid SET zdroj=46 WHERE uce = 66510 ";
+$oznac = mysql_query("$sqtoz");
+}
+
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid SET rpje=1 WHERE poloz > 0 ";
+$oznac = mysql_query("$sqtoz");
+
+//oznac podnikatelsku cinnost podla zak
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid SET pdnk=0 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid,F$kli_vxcf"."_zak ".
+" SET podnk=F$kli_vxcf"."_zak.uzk ".
+" WHERE F$kli_vxcf"."_prcuobratsy$kli_uzid.str = F$kli_vxcf"."_zak.str AND F$kli_vxcf"."_prcuobratsy$kli_uzid.zak = F$kli_vxcf"."_zak.zak";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) 
+{  
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid SET podnk=2 WHERE LEFT(uce,3) = 551 ";
+$oznac = mysql_query("$sqtoz");
+}
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid SET podnk=0 WHERE podnk != 2 ";
+$oznac = mysql_query("$sqtoz");
+
+
+//sumar za podnk,ucty,dok,zdroj,polozku
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobrats$kli_uzid "." SELECT".
+" psys,1,0,ume,dat,0,uce,999,puc,ucm,ucd,rdp,1,fak,str,zak,SUM(hod),SUM(mdt),SUM(dal),SUM(mdt-dal),pop,1,".
+"SUM(pmd),SUM(pdl),SUM(bmd),SUM(bdl),SUM(omd),SUM(odl),SUM(zmd),SUM(zdl),podnk,uhrad,zdroj,poloz,rpje".
+" FROM F$kli_vxcf"."_prcuobratsy$kli_uzid".
+" WHERE cpl >= 0 AND ".
+" ( LEFT(uce,1) = 3 OR LEFT(uce,1) = 5 OR LEFT(uce,1) = 6 OR LEFT(uce,1) = 8 OR LEFT(uce,1) = 9 ) ".
+" GROUP BY podnk,uce,dok,zdroj,poloz ".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+//nastav crv podla uce,3
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid,F$kli_vxcf"."_crf104nuj_no".
+" SET poloz=F$kli_vxcf"."_crf104nuj_no.crs".
+" WHERE LEFT(F$kli_vxcf"."_prcuobrats$kli_uzid.uce,3) = LEFT(F$kli_vxcf"."_crf104nuj_no.uce,3) AND F$kli_vxcf"."_crf104nuj_no.uce < 999 AND rpje = 0";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+//nastav crv podla uce
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid,F$kli_vxcf"."_crf104nuj_no".
+" SET poloz=F$kli_vxcf"."_crf104nuj_no.crs".
+" WHERE F$kli_vxcf"."_prcuobrats$kli_uzid.uce = F$kli_vxcf"."_crf104nuj_no.uce AND rpje = 0";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+//vymaz 3kove ucty ak nemaju polozku 
+$sqtoz = "DELETE FROM F$kli_vxcf"."_prcuobrats$kli_uzid WHERE LEFT(uce,1) = 3 AND poloz = 0 ";
+$oznac = mysql_query("$sqtoz");
+
+//exit;
+
+//psys  uro  cpl  ume  dat  dok  uce  ur1  puc  ucm  ucd  rdp  ico  fak  str  zak  hod  mdt  dal  zos  pop  pox  
+//pmd  pdl  bmd  bdl  omd  odl  zmd  zdl  uhrad  zdroj  poloz  rpje 
+//tu nastav presun zo zdroj1 a polozka1 na zdroj2 a polozka2 ak uce, dok, hod == 0 
+
+//sem este presun z zdroja,polozky na novy zdroj,polozku opravene vyssie
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobrats$kli_uzid "." SELECT".
+" 9,1,0,'$kli_vume','0000-00-00',1,'0',1,'0','0','0',0,0,0,0,0,".
+"-(hox),0,0,0,'',1,".
+"0,0,0,0,0,0,0,0,podnk,'',crz,rpz,0".
+" FROM F$kli_vxcf"."_crf104nuj_nozdrdok ".
+" WHERE crz > 0 AND rpz > 0 AND crs > 0 AND rpx > 0 ".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobrats$kli_uzid "." SELECT".
+" 9,1,0,'$kli_vume','0000-00-00',1,'0',1,'0','0','0',0,0,0,0,0,".
+"hox,0,0,0,'',1,".
+"0,0,0,0,0,0,0,0,podnk,'',crs,rpx,0".
+" FROM F$kli_vxcf"."_crf104nuj_nozdrdok ".
+" WHERE crz > 0 AND rpz > 0 AND crs > 0 AND rpx > 0 ".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+//exit;
+
+$zdroj3pol=1;
+if( $zdroj3pol == 1 )
+    {  
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=41 WHERE poloz > 0 ";
+
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 ) ) 
+{ 
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=46 WHERE poloz > 0 "; 
+}
+
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) 
+{ 
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=41 WHERE poloz > 0 "; 
+}
+
+$oznac = mysql_query("$sqtoz");
+
+
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) 
+{ 
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 610 AND str = 24 "; 
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 620 AND str = 24 "; 
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 641  "; 
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 310  "; 
+$oznac = mysql_query("$sqtoz");
+
+}
+
+    }
+
+//kontrola na generovanie
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobrats$kli_uzid WHERE poloz = 0 GROUP BY uce";
+$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
+if( $pol > 0 ) {
+$i=0; while ($i <= $pol )  {
+if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); echo "Nastavte rozpoètovú položku pre úèet ".$polozka->uce."<br />"; }
+$i=$i+1;                   }
+exit;
+               }
+
+//exit;
+//koniec kontrola na generovanie 
+
+//sumar za rozp.polozky a zdroj
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobrats$kli_uzid "." SELECT".
+" 999,1,0,ume,dat,dok,uce,999,puc,ucm,ucd,rdp,1,fak,str,0,SUM(hod),SUM(mdt),SUM(dal),SUM(mdt-dal),pop,1,".
+"SUM(pmd),SUM(pdl),SUM(bmd),SUM(bdl),SUM(omd),SUM(odl),SUM(zmd),SUM(zdl),podnk,uhrad,zdroj,poloz,rpje".
+" FROM F$kli_vxcf"."_prcuobrats$kli_uzid".
+" WHERE cpl >= 0 AND poloz > 0 ".
+" GROUP BY podnk,poloz,zdroj ".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prcuobrats$kli_uzid "." WHERE psys != 999 ";
+$dsql = mysql_query("$dsqlt");
+
+//exit;
+
+//prenes do rozpoctu ale opacne nacitaj schvaleny a po zmenach do tohoto a zober skutocne z tohoto
+//cpl  px12  oc  druh  okres  obec  daz  kor  prx  uce  ucm  ucd  hod  mdt  dal  
+//program  zdroj  oddiel  xoddiel  skupina  trieda  podtrieda  polozka  xpolozka  podpolozka  nazov  schvaleny  zmeneny  skutocnost  ico  
+
+$sqtoz = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 SELECT ".
+"0,px12,oc,druh,okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal, ".
+"program,$dfzdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,0,ico ".
+" FROM F$kli_vxcf"."_uctvykaz_fin104 ".
+" WHERE zdroj = 41 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 SELECT ".
+"0,px12,oc,druh,okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal, ".
+"program,41,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,0,ico ".
+" FROM F$kli_vxcf"."_uctvykaz_fin104 ".
+" WHERE zdroj = $dfzdroj ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 SELECT ".
+"0,px12,oc,druh,okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal, ".
+"program,71,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,0,ico ".
+" FROM F$kli_vxcf"."_uctvykaz_fin104 ".
+" WHERE zdroj = $dfzdroj ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 SELECT ".
+"0,px12,oc,druh,okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal, ".
+"program,111,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,0,ico ".
+" FROM F$kli_vxcf"."_uctvykaz_fin104 ".
+" WHERE zdroj = $dfzdroj ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 SELECT ".
+"0,px12,oc,(druh+2),okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal, ".
+"'','',oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,0,0,0,0,ico ".
+" FROM F$kli_vxcf"."_uctvykaz_fin104 ".
+" WHERE druh <= 2 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 SELECT ".
+"0,1,oc,druh,okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal, ".
+"program,zdroj,oddiel,xoddiel,skupina,trieda,podtrieda,polozka,xpolozka,podpolozka,nazov,sum(schvaleny),sum(zmeneny),sum(predpoklad),0,ico ".
+" FROM F$kli_vxcf"."_uctvykaz_fin104 ".
+" GROUP BY druh,zdroj,polozka ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "DELETE FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE px12 = 0 ";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+//exit;
+
+$nostp = $_REQUEST['nostp'];
+$nostp=trim($nostp);
+
+$sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, oddiel='10.7.0.2' ";
+$oznac = mysql_query("$sqtoz");
+
+if( $nostp != "" ) 
+{
+$sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, oddiel='$nostp' ";
+$oznac = mysql_query("$sqtoz");
+}
+
+if( $_SERVER['SERVER_NAME'] == "www.eurodpsgbely.sk" ) 
+{
+$sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, oddiel='10.1.2.2' ";
+$oznac = mysql_query("$sqtoz");
+}
+
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) 
+{
+$sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, program='9.2', oddiel='0.8.2.0' ";
+$oznac = mysql_query("$sqtoz");
+}
+
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 )) 
+{
+$sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, program='', oddiel='0.7.2.2' ";
+$oznac = mysql_query("$sqtoz");
+}
+
+$sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104,F$kli_vxcf"."_prcuobrats$kli_uzid".
+" SET F$kli_vxcf"."_uctvykaz_fin104.skutocnost=F$kli_vxcf"."_prcuobrats$kli_uzid.hod, zak=7777 ".
+" WHERE F$kli_vxcf"."_uctvykaz_fin104.polozka = F$kli_vxcf"."_prcuobrats$kli_uzid".".poloz ".
+" AND F$kli_vxcf"."_uctvykaz_fin104.zdroj = F$kli_vxcf"."_prcuobrats$kli_uzid".".zdroj ".
+" AND F$kli_vxcf"."_uctvykaz_fin104.druh <= 2 AND F$kli_vxcf"."_prcuobrats$kli_uzid".".podnk = 0 ";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104,F$kli_vxcf"."_prcuobrats$kli_uzid".
+" SET F$kli_vxcf"."_uctvykaz_fin104.skutocnost=F$kli_vxcf"."_prcuobrats$kli_uzid.hod, zak=7777 ".
+" WHERE F$kli_vxcf"."_uctvykaz_fin104.polozka = F$kli_vxcf"."_prcuobrats$kli_uzid".".poloz ".
+" AND F$kli_vxcf"."_uctvykaz_fin104.druh > 2 AND F$kli_vxcf"."_prcuobrats$kli_uzid".".podnk = 2 ";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+//exit;
+
+$sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET skutocnost=-skutocnost WHERE druh = 1 OR druh = 3 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "DELETE FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE schvaleny = 0 AND zmeneny = 0 AND skutocnost = 0 ";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+//kontrola na pritomnost polozky v rozpocte
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobrats$kli_uzid WHERE zak != 7777 AND hod != 0 ";
+$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
+if( $pol > 0 ) {
+$i=0; while ($i <= $pol )  {
+if (@$zaznam=mysql_data_seek($sql,$i)) 
+{ $polozka=mysql_fetch_object($sql); echo "Rozpoètová položka zdroj=".$polozka->zdroj." položka=".$polozka->poloz." nie je v rozpoète ! <br />"; }
+$i=$i+1;                   }
+exit;
+               }
+
+//exit;
+//koniec kontrola na pritomnost polozky v rozpocte
+
+
+
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobrats'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsy'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$copern=20;
+$strana=2;
+    }
+//koniec nacitaj data
 
 //vymaz polozku
 if ( $copern == 316 )
