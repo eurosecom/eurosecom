@@ -714,7 +714,13 @@ $sirka=950;
 $vyska=1300;
 if ( $strana == 2 OR $strana == 3 OR $strana == 4 OR $strana == 5 )
 {
+$druhx=$strana-1;
+$sluzttp = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE oc >= 0 AND druh = $druhx ORDER BY cpl ";
+$sluzp = mysql_query("$sluzttp");
+$slpop = mysql_num_rows($sluzp);
+
 $sirka=1250; $vyska=920;
+if( $slpop > 40 ) { $sirka=1250; $vyska=1000; }
 }
 ?>
 <div id="content" style="width:<?php echo $sirka; ?>px; height:<?php echo $vyska; ?>px;">
