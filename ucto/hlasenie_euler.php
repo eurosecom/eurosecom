@@ -934,7 +934,9 @@ $pdf->AddFont('arial','','arial.php');
 
 //vytlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler".
-" WHERE F$kli_vxcf"."_ucthlasenie_euler.oc = 1 ORDER BY ico ";
+" LEFT JOIN F$kli_vxcf"."_ico".
+" ON F$kli_vxcf"."_ucthlasenie_euler.ico=F$kli_vxcf"."_ico.ico".
+" WHERE F$kli_vxcf"."_ucthlasenie_euler.oc = 1 ORDER BY F$kli_vxcf"."_ucthlasenie_euler.ico ";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
