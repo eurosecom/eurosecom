@@ -352,19 +352,18 @@ div.input-echo {
 }
 div.form-background-wide {
   width: 1250px;
-  height: 1000px;
   background-color: #fff;
   clear: left;
 }
 div.form-content-wide {
   width: 1150px;
   margin: 0 auto;
+  padding: 20px 0 30px 0;
 }
 h2.form-header {
-  height: 30px;
-  line-height: 30px;
-  padding-top: 15px;
+  height: 23px;
   font-size: 15px;
+  background-color: ;
 }
 .fixne-menu {
   position: fixed;
@@ -398,20 +397,14 @@ table.zoznam tfoot th {
   background-color: #ddd;
 }
 table.zoznam tfoot td {
-  text-align: center;
-  height: 22px;
-  padding-top: 4px;
+  height: 24px;
+  padding-top: 6px;
 }
 table.zoznam tfoot td input[type=text] {
-  height: 18px;
-  line-height: 18px;
-  padding-left: 4px;
-  border: 1px solid #39f;
-  font-size: 14px;
   position: static;
 }
 input.btn-rowsave {
-  height: 22px;
+  height: 24px;
   cursor: pointer;
   position: relative;
   top: -1px;
@@ -441,7 +434,7 @@ img.btn-cancel:hover {
 
 function ProgramEnter(e)
                 {
-  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
 
   if(k == 13 ){
         document.forms.formv1.zdroj.focus();
@@ -449,25 +442,24 @@ function ProgramEnter(e)
               }
                 }
 
-function ZdrojEnter(e)
-                {
-  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
-
-  if(k == 13 ){
-        <?php if ( $strana == 2 ) { ?>
+  function ZdrojEnter(e)
+  {
+   var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
+   if ( k == 13 ) {
+<?php if ( $strana == 2 ) { ?>
         document.forms.formv1.polozka.focus();
         document.forms.formv1.polozka.select();
-        <?php                     } ?>
-        <?php if ( $strana == 3 ) { ?>
+<?php                     } ?>
+<?php if ( $strana == 3 ) { ?>
         document.forms.formv1.oddiel.focus();
         document.forms.formv1.oddiel.select();
-        <?php                     } ?>
-              }
-                }
+<?php                     } ?>
+                  }
+  }
 
 function OddielEnter(e)
                 {
-  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
 
   if(k == 13 ){
         document.forms.formv1.polozka.focus();
@@ -477,7 +469,7 @@ function OddielEnter(e)
 
 function PolozkaEnter(e)
                 {
-  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
 
   if(k == 13 ){
         <?php if ( $strana <= 3 ) { ?>
@@ -494,7 +486,7 @@ function PolozkaEnter(e)
 
 function SchvalenyEnter(e)
                 {
-  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
 
   if(k == 13 ){
         document.formv1.zmeneny.value=document.formv1.schvaleny.value; 
@@ -505,7 +497,7 @@ function SchvalenyEnter(e)
 
 function ZmenenyEnter(e)
                 {
-  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
 
   if(k == 13 ){
         document.forms.formv1.predpoklad.focus();
@@ -515,7 +507,7 @@ function ZmenenyEnter(e)
 
 function PredpokladEnter(e)
                 {
-  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
 
   if(k == 13 ){
         document.forms.formv1.skutocnost.focus();
@@ -525,7 +517,7 @@ function PredpokladEnter(e)
 
 function SkutocnostEnter(e)
                 {
-  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
 
   if(k == 13 ){
 
@@ -591,7 +583,7 @@ document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
 document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
-
+//document.formv1.uloz.disabled = true;
         document.forms.formv1.zdroj.focus();
         document.forms.formv1.zdroj.select();
 
@@ -697,6 +689,8 @@ if ( $copern == 20 )
  <tr>
   <td class="header">FIN 1-12 Príjmy, vıdavky a finanèné operácie za
    <span style="color:#39f;"><?php echo "$cislo_oc. mesiac";?></span>
+   <img src='../obr/info.png' style="width:12px; height:12px;"
+        title="EnterNext = na ïalšiu poloku môete prejs klávesou Enter">
   </td>
   <td>
    <div class="bar-btn-form-tool">
@@ -711,19 +705,12 @@ if ( $copern == 20 )
 
 <?php
 $sirka=950;
-$vyska=1300;
 if ( $strana == 2 OR $strana == 3 OR $strana == 4 OR $strana == 5 )
 {
-$druhx=$strana-1;
-$sluzttp = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE oc >= 0 AND druh = $druhx ORDER BY cpl ";
-$sluzp = mysql_query("$sluzttp");
-$slpop = mysql_num_rows($sluzp);
-
-$sirka=1250; $vyska=920;
-if( $slpop > 40 ) { $sirka=1250; $vyska=1000; }
+$sirka=1250;
 }
 ?>
-<div id="content" style="width:<?php echo $sirka; ?>px; height:<?php echo $vyska; ?>px;">
+<div id="content" style="width:<?php echo $sirka; ?>px; overflow:auto; padding-bottom:5px;">
 <FORM name="formv1" method="post" action="../ucto/vykaz_fin112_2016.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive"; $clas5="noactive";
@@ -766,7 +753,7 @@ $source="vykaz_fin112_2016.php";
 <?php if ( $strana == 2 ) { ?>
 <div class="form-background-wide">
 <div class="form-content-wide">
- <h2 class="form-header">Èas I. - Príjmy</h2>
+ <h2 class="form-header">Èas I. - <strong>Príjmy</strong></h2>
 
 <div id="FixneMenu">
 <table class="table-heading">
@@ -855,25 +842,25 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
  <th>&nbsp;</th>
 </tr>
 <tr>
- <td>
-  <input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+ <td class="center">
+  <input type="text" name="zdroj" id="zdroj" onkeydown="ZdrojEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
- <td>
+ <td class="center">
   <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td>
+ <td class="center">
   <INPUT type="submit" id="uloz" name="uloz" value="Uloi" class="btn-rowsave">
  </td>
 </tr>
@@ -888,7 +875,7 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 <?php if ( $strana == 3 ) { ?>
 <div class="form-background-wide">
 <div class="form-content-wide">
- <h2 class="form-header">Èas I. - Vıdavky</h2>
+ <h2 class="form-header">Èas I. - <strong>Vıdavky</strong></h2>
 
 <div id="FixneMenu">
 <table class="table-heading">
@@ -980,28 +967,28 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
  <th>&nbsp;</th>
 </tr>
 <tr>
- <td>
+ <td class="center">
   <input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
- <td>
+ <td class="center">
   <input type="text" name="oddiel" id="zoddiel" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
- <td>
+ <td class="center">
   <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td>
+ <td class="center">
   <INPUT type="submit" id="uloz" name="uloz" value="Uloi" class="btn-rowsave">
  </td>
 </tr>
@@ -1016,7 +1003,7 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 <?php if ( $strana == 4 ) { ?>
 <div class="form-background-wide">
 <div class="form-content-wide">
- <h2 class="form-header">Èas II. - Príjmové operácie</h2>
+ <h2 class="form-header">Èas II. - <strong>Príjmové operácie</strong></h2>
 
 <div id="FixneMenu">
 <table class="table-heading">
@@ -1102,22 +1089,22 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
  <th>&nbsp;</th>
 </tr>
 <tr>
- <td>
+ <td class="center">
   <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="schvaleny" id="schvaleny" disabled="disabled" style="width:80px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="zmeneny" id="zmeneny" disabled="disabled" style="width:80px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="predpoklad" id="predpoklad" disabled="disabled" style="width:80px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td>
+ <td class="center">
   <INPUT type="submit" id="uloz" name="uloz" value="Uloi" class="btn-rowsave">
  </td>
 </tr>
@@ -1132,7 +1119,7 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 <?php if ( $strana == 5 ) { ?>
 <div class="form-background-wide">
 <div class="form-content-wide">
- <h2 class="form-header">Èas II. - Vıdavkové operácie</h2>
+ <h2 class="form-header">Èas II. - <strong>Vıdavkové operácie</strong></h2>
 
 <div id="FixneMenu">
 <table class="table-heading">
@@ -1221,25 +1208,25 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
  <th class="center">&nbsp;</th>
 </tr>
 <tr>
- <td>
+ <td class="center">
   <input type="text" name="oddiel" id="oddiel" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
- <td>
+ <td class="center">
   <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="schvaleny" id="schvaleny" disabled="disabled" style="width:80px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="zmeneny" id="zmeneny" disabled="disabled" style="width:80px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="predpoklad" id="predpoklad" disabled="disabled" style="width:80px;"/>
  </td>
- <td>
+ <td class="right">
   <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td>
+ <td class="center">
   <INPUT type="submit" id="uloz" name="uloz" value="Uloi" class="btn-rowsave">
  </td>
 </tr>
@@ -1250,6 +1237,7 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 </div> <!-- .form-background-wide -->
 <?php                     } ?>
 
+<?php if ( $strana != 1 ) { ?>
 <script type="text/javascript">
     var menu = document.getElementById('FixneMenu');
     window.onscroll = function () {
@@ -1259,8 +1247,9 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
       ) ? "fixne-menu" : "";
     }
 </script>
+<?php                     } ?>
 
-<div class="navbar" style="padding-bottom:30px; overflow:auto;">
+<div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas2; ?> toleft">Príjmy</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=3&cislo_oc=<?php echo $cislo_oc; ?>', '_self');" class="<?php echo $clas3; ?> toleft">Vıdavky</a>
