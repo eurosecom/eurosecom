@@ -472,11 +472,19 @@ function PolozkaEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
 
   if(k == 13 ){
-        <?php if ( $strana <= 3 ) { ?>
+        <?php if ( $strana == 2 ) { ?>
         document.forms.formv1.schvaleny.focus();
         document.forms.formv1.schvaleny.select();
         <?php                     } ?>
-        <?php if ( $strana >  3 ) { ?>
+        <?php if ( $strana == 3 ) { ?>
+        document.forms.formv1.schvaleny.focus();
+        document.forms.formv1.schvaleny.select();
+        <?php                     } ?>
+        <?php if ( $strana == 4 ) { ?>
+        document.forms.formv1.skutocnost.focus();
+        document.forms.formv1.skutocnost.select();
+        <?php                     } ?>
+        <?php if ( $strana == 5 ) { ?>
         document.forms.formv1.skutocnost.focus();
         document.forms.formv1.skutocnost.select();
         <?php                     } ?>
@@ -561,7 +569,7 @@ document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
 document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
-        //document.formv1.uloz.disabled = true;
+        document.formv1.uloz.disabled = true;
         document.forms.formv1.zdroj.focus(); 
         document.forms.formv1.zdroj.select();
 
@@ -583,7 +591,7 @@ document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
 document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
-//document.formv1.uloz.disabled = true;
+        document.formv1.uloz.disabled = true;
         document.forms.formv1.zdroj.focus();
         document.forms.formv1.zdroj.select();
 
@@ -599,7 +607,7 @@ document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
 document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
-        //document.formv1.uloz.disabled = true;
+        document.formv1.uloz.disabled = true;
         document.forms.formv1.polozka.focus();
         document.forms.formv1.polozka.select();
 
@@ -617,13 +625,18 @@ document.formv1.zmeneny.value = '<?php echo $zmeneny;?>';
 document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
-        //document.formv1.uloz.disabled = true;
+        document.formv1.uloz.disabled = true;
         document.forms.formv1.oddiel.focus();
         document.forms.formv1.oddiel.select();
 <?php                                                } ?>
 
+    }
 
-
+    function Povol_uloz()
+    {
+    var okvstup=1;
+    if ( document.formv1.polozka.value == "" ) { okvstup=0; }
+    if ( okvstup == 1 ) { document.formv1.uloz.disabled = false; return (true); }
     }
 
 <?php
@@ -846,22 +859,22 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
   <input type="text" name="zdroj" id="zdroj" onkeydown="ZdrojEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
  <td class="center">
-  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+  <input type="text" name="polozka" id="polozka" onkeydown="PolozkaEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
  <td class="right">
-  <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="schvaleny" id="schvaleny" onkeydown="SchvalenyEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
  <td class="right">
-  <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="zmeneny" id="zmeneny"  onkeydown="ZmenenyEnter(event.which)"  onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
  <td class="right">
-  <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="predpoklad" id="predpoklad"  onkeydown="PredpokladEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
  <td class="right">
-  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="skutocnost" id="skutocnost"  onkeydown="SkutocnostEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td class="center">
-  <INPUT type="submit" id="uloz" name="uloz" value="Uloži" class="btn-rowsave">
+ <td class="center" onmouseover="return Povol_uloz();">
+  <INPUT type="submit" id="uloz" name="uloz" value="Uloži" class="btn-rowsave" >
  </td>
 </tr>
 </tfoot>
@@ -968,27 +981,27 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 </tr>
 <tr>
  <td class="center">
-  <input type="text" name="zdroj" id="zdroj" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+  <input type="text" name="zdroj" id="zdroj" onkeydown="ZdrojEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
  <td class="center">
-  <input type="text" name="oddiel" id="zoddiel" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+  <input type="text" name="oddiel" id="oddiel" onkeydown="OddielEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
  <td class="center">
-  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+  <input type="text" name="polozka" id="polozka" onkeydown="PolozkaEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
  <td class="right">
-  <input type="text" name="schvaleny" id="schvaleny" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="schvaleny" id="schvaleny" onkeydown="SchvalenyEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
  <td class="right">
-  <input type="text" name="zmeneny" id="zmeneny" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="zmeneny" id="zmeneny"  onkeydown="ZmenenyEnter(event.which)"  onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
  <td class="right">
-  <input type="text" name="predpoklad" id="predpoklad" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="predpoklad" id="predpoklad"  onkeydown="PredpokladEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
  <td class="right">
-  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="skutocnost" id="skutocnost"  onkeydown="SkutocnostEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td class="center">
+ <td class="center" onmouseover="return Povol_uloz();">
   <INPUT type="submit" id="uloz" name="uloz" value="Uloži" class="btn-rowsave">
  </td>
 </tr>
@@ -1090,7 +1103,7 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 </tr>
 <tr>
  <td class="center">
-  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+  <input type="text" name="polozka" id="polozka" onkeydown="PolozkaEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
  <td class="right">
   <input type="text" name="schvaleny" id="schvaleny" disabled="disabled" style="width:80px;"/>
@@ -1102,9 +1115,9 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
   <input type="text" name="predpoklad" id="predpoklad" disabled="disabled" style="width:80px;"/>
  </td>
  <td class="right">
-  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="skutocnost" id="skutocnost" onkeydown="SkutocnostEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td class="center">
+ <td class="center" onmouseover="return Povol_uloz();">
   <INPUT type="submit" id="uloz" name="uloz" value="Uloži" class="btn-rowsave">
  </td>
 </tr>
@@ -1209,10 +1222,10 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 </tr>
 <tr>
  <td class="center">
-  <input type="text" name="oddiel" id="oddiel" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+  <input type="text" name="oddiel" id="oddiel" onkeydown="OddielEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
  <td class="center">
-  <input type="text" name="polozka" id="polozka" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
+  <input type="text" name="polozka" id="polozka" onkeydown="PolozkaEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:100px;"/>
  </td>
  <td class="right">
   <input type="text" name="schvaleny" id="schvaleny" disabled="disabled" style="width:80px;"/>
@@ -1224,9 +1237,9 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
   <input type="text" name="predpoklad" id="predpoklad" disabled="disabled" style="width:80px;"/>
  </td>
  <td class="right">
-  <input type="text" name="skutocnost" id="skutocnost" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+  <input type="text" name="skutocnost" id="skutocnost" onkeydown="SkutocnostEnter(event.which)" onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
  </td>
- <td class="center">
+ <td class="center" onmouseover="return Povol_uloz();">
   <INPUT type="submit" id="uloz" name="uloz" value="Uloži" class="btn-rowsave">
  </td>
 </tr>
