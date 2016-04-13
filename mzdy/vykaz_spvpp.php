@@ -425,8 +425,16 @@ window.close();
 <?php
 exit;
      }
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
-if ( File_Exists("../tmp/vykazSP.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/vykazSP.$kli_uzid.pdf"); }
+ $outfilexdel="../tmp/vykazsp_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/vykazsp_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -677,7 +685,7 @@ $pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(15,6,"$pocetstran","$rmc",0,"C");$
 $i = $i + 1;
   }
 
-$pdf->Output("../tmp/vykazSP.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
@@ -699,7 +707,7 @@ $vysledok = mysql_query("$sqlt");
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/vykazSP.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 <?php
@@ -723,7 +731,16 @@ window.close();
 exit;
      }
 
-if ( File_Exists("../tmp/prilohaSP.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/prilohaSP.$kli_uzid.pdf"); }
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/prilsp_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/prilsp_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -1138,11 +1155,11 @@ $pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(16,6,"$strana","$rmc",0,"C");$pdf-
 $j=0;
 }
 
-$pdf->Output("../tmp/prilohaSP.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/prilohaSP.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 <?php
@@ -1210,15 +1227,18 @@ $kli_vrok=$pole[1];
 $kli_vxr=substr($kli_vrok,2,2);;
 if ( $kli_vmes < 10 ) $kli_vmes = ""."0".$kli_vmes;
 
-$hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
-$idx=$kli_uzid.$hhmm;
-$nazsub="prilVP".$kli_vmes."_id".$idx;
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
-//$nazsub="pril".$kli_vmes;
+ $outfilexdel="../tmp/pril".$kli_vmes."_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
 
+$outfilex="../tmp/pril".$kli_vmes."_".$kli_uzid."_".$hhmmss.".xml";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
-if ( File_Exists("../tmp/$nazsub.xml") ) { $soubor = unlink("../tmp/$nazsub.xml"); }
-     $soubor = fopen("../tmp/$nazsub.xml", "a+");
+$nazsub=$outfilex;
+$soubor = fopen("$nazsub", "a+");
 
 /////////////NACITANIE CISLA PLATITELA,NAZVU Z CISELNIKA ZP
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_zdravpois WHERE zdrv=$cislo_zdrv ");
@@ -1641,7 +1661,27 @@ if( $pocdni == 0 )
   {
 $sqldok = mysql_query("SELECT * FROM kalendar WHERE ume = $hlavicka->umeo ");
 $pocdni = 1*mysql_num_rows($sqldok);
+
+//ak dohoda kratsia ako tento mesiac vypocitat dni poistenia
+$datpx=$kli_vrok."-".$kli_vmes."-01";
+$datkx=$kli_vrok."-".$kli_vmes."-".$pocdni;
+//echo $hlavicka->dan."<br />";
+//echo $hlavicka->dav."<br />";
+$sttoc = "SELECT * FROM F$kli_vxcf"."_$mzdkun WHERE oc = $hlavicka->oc AND dan >= '$datpx' AND dav <= '$datkx' AND dav != '0000-00-00' ";
+$sqloc = mysql_query("$sttoc");
+//echo $sttoc."<br />";
+$pococ = 1*mysql_num_rows($sqloc);
+if( $pococ == 1 )
+    {
+$sttoc = "SELECT * FROM kalendar WHERE ume = $hlavicka->umeo AND dat >= '$hlavicka->dan' AND dat <= '$hlavicka->dav' ";
+$sqloc = mysql_query("$sttoc");
+//echo $sttoc."<br />";
+$pocdni = 1*mysql_num_rows($sqloc);
+    }
+//koniec ak dohoda kratsia ako tento mesiac vypocitat dni poistenia
+
   }
+//koniec ak pocdni=0
 
 if( $niezaklad == 1 )
   {
@@ -1736,7 +1776,7 @@ $j = $j + 1;
 fclose($soubor);
 ?>
 
-<a href="../tmp/<?php echo $nazsub; ?>.xml">../tmp/<?php echo $nazsub; ?>.xml</a>
+<a href="<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>
 <br />
 <br />
 <br />
