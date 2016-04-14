@@ -185,6 +185,21 @@ $copern=20;
 }
 //koniec zoznam z archivu
 
+
+$oddb31=0;
+if( $kli_vrok == 2016 ) 
+  {
+$ume1="3.".$kli_vrok;
+if( $cislo_stvrt > 1 ) { $oddb31=1; }
+if( $cislo_ume > $ume1 ) { $oddb31=1; }
+  }
+if( $kli_vrok >  2016 ) 
+  {
+$oddb31=1;
+  }
+//echo $cislo_ume." ".$cislo_stvrt." ".$kli_vrok." ".$oddb31;
+//exit;
+
 //datum odpoctu v dodav
 $sql = "SELECT prx6 FROM F$kli_vxcf"."_uctvykdpha7new ";
 $vysledok = mysql_query($sql);
@@ -997,6 +1012,16 @@ $i = $i + 1;
 
 //koniec v oddiele B1,B2,C1 oprav datum dodania ak sz4 != daz AND sz4 != 0000-00-00 andrejko
 
+//namiesto B3 daj B31
+if( $oddb31 == 1 )
+  {
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET kvodd = 'B31' WHERE kvodd = 'B3' ";
+$oznac = mysql_query("$sqtoz");
+
+  }
+//koniec namiesto B3 daj B31
+
 //presun do tlacovej tabulky
 $sqtoz = "DROP TABLE F$kli_vxcf"."_prcprizdphst$kli_uzid ";
 $oznac = mysql_query("$sqtoz");
@@ -1044,7 +1069,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
 "SUM(r31),SUM(r32),SUM(r33),SUM(r34),SUM(r35),SUM(r36),SUM(r37),SUM(r38),SUM(kvzdn10),SUM(kvsdn10),SUM(kvzdn20),SUM(kvsdn20),".
 "fic".
 " FROM F$kli_vxcf"."_prcprizdphs$kli_uzid ".
-" WHERE kvodd = 'B3' OR kvodd = 'D1' OR kvodd = 'D2' ".
+" WHERE kvodd = 'B3' OR kvodd = 'B31' OR kvodd = 'D1' OR kvodd = 'D2' ".
 " GROUP BY dok ".
 "";
 $dsql = mysql_query("$dsqlt");
@@ -1094,7 +1119,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
 "SUM(r31),SUM(r32),SUM(r33),SUM(r34),SUM(r35),SUM(r36),SUM(r37),SUM(r38),SUM(kvzdn10),SUM(kvsdn10),SUM(kvzdn20),SUM(kvsdn20),".
 "fic".
 " FROM F$kli_vxcf"."_prcprizdphst$kli_uzid ".
-" WHERE dok >= 0 AND kvodd != 'B3' AND kvodd != 'D1' AND kvodd != 'D2' ".
+" WHERE dok >= 0 AND kvodd != 'B3' AND kvodd != 'B31' AND kvodd != 'D1' AND kvodd != 'D2' ".
 " GROUP BY kvodd ".
 "";
 $dsql = mysql_query("$dsqlt");
@@ -1108,7 +1133,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
 "SUM(r31),SUM(r32),SUM(r33),SUM(r34),SUM(r35),SUM(r36),SUM(r37),SUM(r38),SUM(kvzdn10),SUM(kvsdn10),SUM(kvzdn20),SUM(kvsdn20),".
 "fic".
 " FROM F$kli_vxcf"."_prcprizdphst$kli_uzid ".
-" WHERE dok >= 0 AND ( kvodd = 'B3' OR kvodd = 'D1' OR kvodd = 'D2' ) ".
+" WHERE dok >= 0 AND ( kvodd = 'B3' OR kvodd = 'B31' OR kvodd = 'D1' OR kvodd = 'D2' ) ".
 " GROUP BY kvodd ".
 "";
 $dsql = mysql_query("$dsqlt");                                                   
@@ -1429,6 +1454,28 @@ $pdf->Cell(70,4,"1","$rmc1",0,"C",true);$pdf->Cell(70,4,"2","$rmc1",0,"C",true);
 $pdf->Cell(190,0.5,"     ","0",1,"L");
                                 }
 
+if ( $hlavicka->kvodd == "B31" ) {
+$textb3="Údaje zo všetkých prijatých zjednodušených faktúr pod¾a § 74 ods. 3 písm. a) až c) zákona, z ktorých príjemca plnenia uplatòuje odpoèítanie dane";
+$textb3s1p1="Celková suma základov dane";
+$textb3s1p2="v eurách";
+$textb3s2p1="Celková suma dane";
+$textb3s2p2="v eurách";
+$textb3s3p1="Celková suma odpoèítanej dane";
+$textb3s3p2="v eurách";
+$textb3s4p1="Kód opravy";
+$textb3s4p2="(èíslo dokladu)";
+$pdf->SetY(6);
+$pdf->Cell(277,4.5," ","$rmc",1,"L");
+$pdf->MultiCell(277,4,"B.3. $textb3","$rmc1",1,"C");
+$pdf->Cell(190,0.5,"     ","$rmc",1,"L");
+$pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(67,3.5," ","LTR",1,"C");
+$pdf->Cell(70,3.5,"$textb3s1p1","L",0,"C");$pdf->Cell(70,3.5,"$textb3s2p1","L",0,"C");$pdf->Cell(70,3.5,"$textb3s3p1","L",0,"C");$pdf->Cell(67,3.5,"$textb3s4p1","LR",1,"C");
+$pdf->Cell(70,3.5,"$textb3s1p2","L",0,"C");$pdf->Cell(70,3.5,"$textb3s2p2","L",0,"C");$pdf->Cell(70,3.5,"$textb3s3p2","L",0,"C");$pdf->Cell(67,3.5,"$textb3s4p2","LR",1,"C");
+$pdf->Cell(70,3.5," ","L",0,"C");$pdf->Cell(70,3.5," ","L",0,"C");$pdf->Cell(70,3.5," ","L",0,"C");$pdf->Cell(67,3.5," ","LR",1,"C");
+$pdf->Cell(70,4,"1","$rmc1",0,"C",true);$pdf->Cell(70,4,"2","$rmc1",0,"C",true);$pdf->Cell(70,4,"3","$rmc1",0,"C",true);$pdf->Cell(67,4,"4","$rmc1",1,"C",true);
+$pdf->Cell(190,0.5,"     ","0",1,"L");
+                                }
+
 if ( $hlavicka->kvodd == "C1" ) {
 $textc="Údaje z faktúry pod¾a § 71 ods. 2 zákona, ktorá mení pôvodnú faktúru (ïalej len „opravná faktúra“)";
 $textc1="Údaje z vyhotovenej opravnej faktúry";
@@ -1683,7 +1730,24 @@ $pdf->Cell(22,4,"SPOLU do XML","$rmc",0,"L");$pdf->Cell(48,4,"$hlavicka->kvzdn",
 $pdf->Cell(68,4,"$hlavicka->kvsdn","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"L");
 $pdf->Cell(68,4,"$hlavicka->kvodn","$rmc",0,"R");$pdf->Cell(2,4," ","0",0,"L");
 $dphb3=$hlavicka->kvodn;
-$pdf->Cell(0,4," ","0",1,"R"); //dopyt, èo je toto
+$pdf->Cell(0,4," ","0",1,"R"); 
+$rmc=0;
+                                                          }
+
+if ( $hlavicka->psys < 30 AND $hlavicka->kvodd == "B31" ) {
+$pdf->Cell(8,4,"$hlavicka->kvodd","$rmc",0,"L");$pdf->Cell(62,4,"$hlavicka->kvzdn","$rmc",0,"R");
+$pdf->Cell(68,4,"$hlavicka->kvsdn","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"L");
+$pdf->Cell(68,4,"$hlavicka->kvodn","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"L");
+$pdf->Cell(67,4,"$hlavicka->dok","$rmc",1,"C");
+                                                         }
+
+if ( $hlavicka->psys == 30 AND $hlavicka->kvodd == "B31" ) {
+$rmc="TB";
+$pdf->Cell(22,4,"SPOLU do XML","$rmc",0,"L");$pdf->Cell(48,4,"$hlavicka->kvzdn","$rmc",0,"R");
+$pdf->Cell(68,4,"$hlavicka->kvsdn","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"L");
+$pdf->Cell(68,4,"$hlavicka->kvodn","$rmc",0,"R");$pdf->Cell(2,4," ","0",0,"L");
+$dphb3=$hlavicka->kvodn;
+$pdf->Cell(0,4," ","0",1,"R"); 
 $rmc=0;
                                                           }
 
@@ -1880,7 +1944,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET kvpvf=REPLACE(kvpvf, ' ', '') WHERE kvpvf != '' ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET kvdic='', kvicd='', kvfak=''  WHERE kvodd = 'B3' OR kvodd = 'D1' OR kvodd = 'D2' ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET kvdic='', kvicd='', kvfak=''  WHERE kvodd = 'B3' OR kvodd = 'B31' OR kvodd = 'D1' OR kvodd = 'D2' ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET kvpvf='' WHERE kvodd != 'C1' AND kvodd != 'C2' ";
@@ -2156,6 +2220,14 @@ if( $hlavicka->kvodd == "B3" )
   {
 
   $text = "  <B3 Z=\"".$hlavicka->kvzdn."\" D=\"".$hlavicka->kvsdn."\" O=\"".$hlavicka->kvodn."\" ";
+  if( $ajkopr == 0 ) { $text=$text." />"."\r\n"; fwrite($soubor, $text); }
+  if( $ajkopr == 1 ) { $text=$text." KOpr=\"".$kopr."\" />"."\r\n"; fwrite($soubor, $text); }
+  }
+
+if( $hlavicka->kvodd == "B31" )
+  {
+
+  $text = "  <B31 Z=\"".$hlavicka->kvzdn."\" D=\"".$hlavicka->kvsdn."\" O=\"".$hlavicka->kvodn."\" ";
   if( $ajkopr == 0 ) { $text=$text." />"."\r\n"; fwrite($soubor, $text); }
   if( $ajkopr == 1 ) { $text=$text." KOpr=\"".$kopr."\" />"."\r\n"; fwrite($soubor, $text); }
   }

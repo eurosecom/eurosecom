@@ -30,6 +30,20 @@ $xpov = 1*$_REQUEST['xpov'];
 $xdod = 1*$_REQUEST['xdod'];
 //$ddosql = SqlDatum($_REQUEST['xddo']);
 
+$oddb31=0;
+if( $kli_vrok == 2016 ) 
+  {
+$ume1="3.".$kli_vrok;
+if( $xstv > 1 ) { $oddb31=1; }
+if( $xume > $ume1 ) { $oddb31=1; }
+  }
+if( $kli_vrok >  2016 ) 
+  {
+$oddb31=1;
+  }
+//echo $xume." ".$xstv." ".$kli_vrok." ".$oddb31;
+//exit;
+
 $sqlt = "CREATE TABLE F".$kli_vxcf."_archivdphkvdphmanual SELECT * FROM F".$kli_vxcf."_archivdphkvdph WHERE cpl < 0 ";
 $vysledok = mysql_query("$sqlt");
 
@@ -84,7 +98,7 @@ $xxpov = 1*$_REQUEST['xxpov'];
 if( !confirm ("Chcete uloi tieto riadky KVDPH ako prídavok ku KVDPH s ID èíslom <?php echo $xxpov; ?> ?") )
          { var okno = window.close();  }
 else
-  var okno = window.open("kontrolnydph2014_manual.php?copern=28002&xxpov=<?php echo $xxpov; ?>","_self");
+  var okno = window.open("kontrolnydph2014_manual.php?copern=28002&xxpov=<?php echo $xxpov; ?>&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>","_self");
 </script>
 <?php
 $copern=1;
@@ -167,6 +181,18 @@ if( $copern == 15009 )
 $sqty = "INSERT INTO F$kli_vxcf"."_archivdphkvdphmanual ( kvodd,kvcobr,kvzdn20,kvsdn20,kvzdn10,kvsdn10,er1 )".
 " VALUES ('D2', '$kvcobr', '$kvzdn20', '$kvsdn20', '$kvzdn10', '$kvsdn10','$kver1' ) ";
   }
+
+if( $copern == 15011 )
+  {
+$sqty = "INSERT INTO F$kli_vxcf"."_archivdphkvdphmanual ( kvodd,kvzdn,kvsdn,kvszd,kvodn,er1 )".
+" VALUES ('B31', '$kvzdn', '$kvsdn', '$kvszd', '$kvodn', '$kver1' ) ";
+  }
+if( $copern == 15012 )
+  {
+$sqty = "INSERT INTO F$kli_vxcf"."_archivdphkvdphmanual ( kvodd,kvzdn,kvsdn,kvszd,kvodn,er1 )".
+" VALUES ('B32', '$kvzdn', '$kvsdn', '$kvszd', '$kvodn', '$kver1' ) ";
+  }
+
 $ulozene = mysql_query("$sqty");
 //echo $sqty;
 
@@ -194,7 +220,7 @@ if ( $copern == 16099 )
 if( !confirm ("Chcete zmaza všetky poloky z manuálneho dodatoèného KV DPH ?") )
          { var okno = window.close();  }
 else
-  var okno = window.open("kontrolnydph2014_manual.php?copern=16089","_self");
+  var okno = window.open("kontrolnydph2014_manual.php?copern=16089&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>","_self");
 </script>
 <?php
 $copern=1;
@@ -228,7 +254,7 @@ $cislo_druh=3;
 if( !confirm ("Chcete naèíta rozdiely oproti pôvodnému KV DPH è. <?php echo $cislo_cpop; ?> ?") )
          { var okno = window.close();  }
 else
-  var okno = window.open("kontrolnydph2014_manual.php?copern=18089&cislo_cpop=<?php echo $cislo_cpop; ?>&cislo_cpid=<?php echo $cislo_cpid; ?>&cislo_ume=<?php echo $cislo_ume; ?>&cislo_druh=3&cislo_stvrt=<?php echo $cislo_stvrt; ?>","_self");
+  var okno = window.open("kontrolnydph2014_manual.php?copern=18089&cislo_cpop=<?php echo $cislo_cpop; ?>&cislo_cpid=<?php echo $cislo_cpid; ?>&cislo_ume=<?php echo $cislo_ume; ?>&cislo_druh=3&cislo_stvrt=<?php echo $cislo_stvrt; ?>&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>","_self");
 </script>
 <?php
 $copern=1;
@@ -492,6 +518,24 @@ table.ponuka th {
 
     }
 
+    function Povol_uloz11()
+    {
+    var okvstup=1;
+
+    if ( okvstup == 1 ) { document.fhlv11.uloz11.disabled = false; return (true); }
+       else { document.fhlv11.uloz11.disabled = true;  return (false) ; }
+
+    }
+
+    function Povol_uloz12()
+    {
+    var okvstup=1;
+
+    if ( okvstup == 1 ) { document.fhlv12.uloz12.disabled = false; return (true); }
+       else { document.fhlv12.uloz12.disabled = true;  return (false) ; }
+
+    }
+
   function VyberVstup()
   {
    document.fhlv0.xume.value = '<?php echo "$xume";?>';
@@ -506,11 +550,18 @@ table.ponuka th {
     document.fhlv2.uloz2.disabled = true;
     document.fhlv3.uloz3.disabled = true;
     document.fhlv4.uloz4.disabled = true;
+
+<?php if( $oddb31 == 0 ) { ?>
     document.fhlv5.uloz5.disabled = true;
+<?php                    } ?>
     document.fhlv6.uloz6.disabled = true;
     document.fhlv7.uloz7.disabled = true;
     document.fhlv8.uloz8.disabled = true;
     document.fhlv9.uloz9.disabled = true;
+<?php if( $oddb31 == 1 ) { ?>
+    document.fhlv11.uloz11.disabled = true;
+    document.fhlv12.uloz12.disabled = true;
+<?php                    } ?>
     document.fh1v1.kvicd.focus();
     document.fh1v1.kvicd.select();
   }
@@ -804,6 +855,71 @@ table.ponuka th {
         document.forms.fhlv5.submit(); return (true);
                  }
   }
+
+//oddiel B.3.1
+  function kvzdnb31Enter(e)
+  {
+   var k = (navigator.appName=="Netscape") ? e : event.keyCode;
+   if ( k == 13 ){
+        document.forms.fhlv11.kvsdn.focus();
+        document.forms.fhlv11.kvsdn.select();
+                 }
+  }
+  function kvsdnb31Enter(e)
+  {
+   var k = (navigator.appName=="Netscape") ? e : event.keyCode;
+   if ( k == 13 ){
+        document.forms.fhlv11.kvodn.focus();
+        document.forms.fhlv11.kvodn.select();
+                 }
+  }
+  function kvodnb31Enter(e)
+  {
+   var k = (navigator.appName=="Netscape") ? e : event.keyCode;
+   if ( k == 13 ){
+        document.forms.fhlv11.kver1.focus();
+        document.forms.fhlv11.kver1.select();
+                 }
+  }
+  function kver1b31Enter(e)
+  {
+   var k = (navigator.appName=="Netscape") ? e : event.keyCode;
+   if ( k == 13 ){
+        document.forms.fhlv11.submit(); return (true);
+                 }
+  }
+//oddiel B.3.2
+  function kvzdnb32Enter(e)
+  {
+   var k = (navigator.appName=="Netscape") ? e : event.keyCode;
+   if ( k == 13 ){
+        document.forms.fhlv12.kvsdn.focus();
+        document.forms.fhlv12.kvsdn.select();
+                 }
+  }
+  function kvsdnb32Enter(e)
+  {
+   var k = (navigator.appName=="Netscape") ? e : event.keyCode;
+   if ( k == 13 ){
+        document.forms.fhlv12.kvodn.focus();
+        document.forms.fhlv12.kvodn.select();
+                 }
+  }
+  function kvodnb32Enter(e)
+  {
+   var k = (navigator.appName=="Netscape") ? e : event.keyCode;
+   if ( k == 13 ){
+        document.forms.fhlv12.kver1.focus();
+        document.forms.fhlv12.kver1.select();
+                 }
+  }
+  function kver1b32Enter(e)
+  {
+   var k = (navigator.appName=="Netscape") ? e : event.keyCode;
+   if ( k == 13 ){
+        document.forms.fhlv12.submit(); return (true);
+                 }
+  }
 //oddiel C.1
   function kvicdc1Enter(e)
   {
@@ -1047,7 +1163,7 @@ table.ponuka th {
 
   function New()
   {
-   window.open('kontrolnydph2014_manual.php?copern=16099', '_self', 'width=1050, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('kontrolnydph2014_manual.php?copern=16099&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>', '_self', 'width=1050, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function vytvorXML()
   {
@@ -1116,6 +1232,20 @@ table.ponuka th {
    document.forms.fhlv5.kvsdn.value = suma;
    document.forms.fhlv5.kvodn.value = odn;
      }
+   if( oddiel == "B31" )
+     {
+   document.forms.fhlv11.kvodd.value = oddiel;
+   document.forms.fhlv11.kvzdn.value = zkl;
+   document.forms.fhlv11.kvsdn.value = suma;
+   document.forms.fhlv11.kvodn.value = odn;
+     }
+   if( oddiel == "B32" )
+     {
+   document.forms.fhlv12.kvodd.value = oddiel;
+   document.forms.fhlv12.kvzdn.value = zkl;
+   document.forms.fhlv12.kvsdn.value = suma;
+   document.forms.fhlv12.kvodn.value = odn;
+     }
    if( oddiel == "C1" )
      {
    document.forms.fhlv6.kvodd.value = oddiel;
@@ -1164,14 +1294,14 @@ table.ponuka th {
   function vymazatCpl(cpl)
   {
    var cislo_cpl=cpl;
-   window.open('kontrolnydph2014_manual.php?copern=16001&cislo_cpl='+ cislo_cpl + '&xx=1', '_self');
+   window.open('kontrolnydph2014_manual.php?copern=16001&cislo_cpl='+ cislo_cpl + '&xx=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>', '_self');
   }
 
   function SavePridavok(cpl)
   {
    var xxpov = document.fhlv0.xpov.value;
    if( xxpov > 0 ) {
-   window.open('kontrolnydph2014_manual.php?copern=28001&xxpov=' + xxpov + '&xx=1', '_self');
+   window.open('kontrolnydph2014_manual.php?copern=28001&xxpov=' + xxpov + '&xx=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>', '_self');
                    }
   }
 
@@ -1183,7 +1313,7 @@ var cislo_druh = druh;
 var stvrtrok = stvrtrok;
 var cislo_cpop = cpop;
 
-window.open('../ucto/kontrolnydph2014_manual.php?copern=18099&drupoh=1&page=1&typ=PDF&xmlko=1&cislo_cpop=' + cislo_cpop + '&cislo_cpid=' + cislo_cpid + '&cislo_ume=' + cislo_ume + '&cislo_druh=' + cislo_druh + '&cislo_stvrt=' + stvrtrok + '&rozdiel=0&poslidomanual=1',
+window.open('../ucto/kontrolnydph2014_manual.php?copern=18099&drupoh=1&page=1&typ=PDF&xmlko=1&cislo_cpop=' + cislo_cpop + '&cislo_cpid=' + cislo_cpid + '&cislo_ume=' + cislo_ume + '&cislo_druh=' + cislo_druh + '&cislo_stvrt=' + stvrtrok + '&rozdiel=0&poslidomanual=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>',
  '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -1212,7 +1342,7 @@ window.open('../ucto/kontrolnydph2014_manual.php?copern=18099&drupoh=1&page=1&ty
     <div class="bar-btn-form-tool">
      <img src="../obr/ikony/floppy_blue_icon.png" onclick="SavePridavok();" title="Uloi tieto riadky KVDPH ako prídavok ku KVDPH s ID èíslom zadanım v inpute ID pôvodného KVDPH:" class="btn-form-tool">
 
-     <img src="../obr/ikony/download_blue_icon.png" onclick="RozdielyKvXml(17,'5.2014',3,0,'',16);" title="Naèíta rozdielové riadky oproti pôvodnému KVDPH" class="btn-form-tool">
+     <img src="../obr/ikony/download_blue_icon.png" onclick="RozdielyKvXml(<?php echo $xdod; ?>,'<?php echo $xume; ?>',3,<?php echo $xstv; ?>,'',<?php echo $xpov; ?>);" title="Naèíta rozdielové riadky oproti pôvodnému KVDPH" class="btn-form-tool">
      <img src="../obr/ikony/upbox_blue_icon.png" onclick="vytvorXML();" title="Export do XML" class="btn-form-tool">
      <img src="../obr/ikony/trash_blue_icon.png" onclick="New();" title="Vymaza všetky poloky" class="btn-form-tool">
      <!-- dopyt, dorobi pouèenie len k dodatoènému -->
@@ -1228,7 +1358,7 @@ window.open('../ucto/kontrolnydph2014_manual.php?copern=18099&drupoh=1&page=1&ty
 <div id="content">
 
 <table class="uvod">
-<FORM name="fhlv0" method="post" action="kontrolnydph2014_manual.php?copern=15000&page=1">
+<FORM name="fhlv0" method="post" action="kontrolnydph2014_manual.php?copern=15000&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
 <tr>
  <td width="40%">
 <?php
@@ -1271,7 +1401,7 @@ if ( $i == 0 )
 <caption>
  <strong>A.1.</strong>Údaje z vyhotovenej fa., kt. platite¾ dane vyhotovil pod¾a § 71 a 75 zák., pri kt. je osobou povinnou plati daò (okrem zjednodušenej fa. a fa. o dodaní plnení oslobod. od dane)
 </caption>
-<FORM name="fhlv1" method="post" action="kontrolnydph2014_manual.php?copern=15001&page=1">
+<FORM name="fhlv1" method="post" action="kontrolnydph2014_manual.php?copern=15001&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
 <tr>
  <th width="5%">Oddiel</th>
  <th width="15%">IÈDPH odberate¾a</th>
@@ -1350,7 +1480,7 @@ if ( $i == 0 )
  <strong>A.2.</strong>Údaje z vyhotovenej fa., kt. platite¾ dane vyhotovil pod¾a § 71 a 75 zákona, pri ktorıch je osobou povinnou plati daò príjemca plnenia pod¾a § 69 ods. 12 písm. f) a i) zákona
 </caption>
 <tr>
-<FORM name="fhlv2" method="post" action="kontrolnydph2014_manual.php?copern=15002&page=1">
+<FORM name="fhlv2" method="post" action="kontrolnydph2014_manual.php?copern=15002&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
  <th width="5%">Oddiel</th>
  <th width="10%">IÈDPH odberate¾a</th>
  <th width="14%">Èíslo faktúry</th>
@@ -1433,7 +1563,7 @@ if ( $i == 0 )
  <strong>B.1.</strong>Údaje z prijatej faktúry, pri kt. je platite¾om dane príjemca plnenia pod¾a § 69 ods. 2, 3, 6, 7 a 9 a 12 zákona (okrem faktúry o dodaní plnení oslobodenıch od dane)
 </caption>
 <tr>
-<FORM name="fhlv3" method="post" action="kontrolnydph2014_manual.php?copern=15003&page=1">
+<FORM name="fhlv3" method="post" action="kontrolnydph2014_manual.php?copern=15003&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
  <th width="5%">Oddiel</th>
  <th width="12%">IÈDPH dodávate¾a</th>
  <th width="13%">Èíslo faktúry</th>
@@ -1514,7 +1644,7 @@ if ( $i == 0 )
  <strong>B.2.</strong>Údaje z prijatej faktúry, z ktorej príjemca plnenia uplatòuje odpoèítanie dane a ktorú vyhotovil platite¾ dane, ktorı je osobou povinnou plati daò pod¾a § 69 ods. 1 zákona
 </caption>
 <tr>
-<FORM name="fhlv4" method="post" action="kontrolnydph2014_manual.php?copern=15004&page=1">
+<FORM name="fhlv4" method="post" action="kontrolnydph2014_manual.php?copern=15004&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
  <th width="5%">Oddiel</th>
  <th width="12%">IÈDPH dodávate¾a</th>
  <th width="13%">Èíslo faktúry</th>
@@ -1580,6 +1710,7 @@ $i = $i + 1;
 
 <?php
 //////ODDIEL B3
+if( $oddb31 == 0 ) {
 $sqltt = "SELECT * FROM F$kli_vxcf"."_archivdphkvdphmanual WHERE kvodd = 'B3' ORDER BY kvodd ";
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -1595,7 +1726,7 @@ if ( $i == 0 )
  <strong>B.3.</strong>Údaje zo všetkıch prijatıch zjednodušenıch faktúr pod¾a § 74 ods. 3 písm. a) a c) zákona, z ktorıch príjemca plnenia uplatòuje odpoèítanie dane
 </caption>
 <tr>
-<FORM name="fhlv5" method="post" action="kontrolnydph2014_manual.php?copern=15005&page=1">
+<FORM name="fhlv5" method="post" action="kontrolnydph2014_manual.php?copern=15005&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
  <th width="15%">Oddiel</th>
  <th width="20%">Základ dane (ZD)</th>
  <th width="20%">Suma dane (SD)</th>
@@ -1645,7 +1776,148 @@ $i = $i + 1;
  <input type="submit" id="uloz5" name="uloz5" value="Uloi" onmouseover="return Povol_uloz5();" >
  <SPAN id="uvolni5" onmouseover="return Povol_uloz5();">&nbsp;</SPAN>
 </FORM>
+<?php              } ?>
 
+<?php
+//////ODDIEL B31
+if( $oddb31 == 1 ) {
+$sqltt = "SELECT * FROM F$kli_vxcf"."_archivdphkvdphmanual WHERE kvodd = 'B31' ORDER BY kvodd ";
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+$strana=1;
+$i=0;
+  while ($i <= $pol )
+  {
+if ( $i == 0 )
+     {
+?>
+<table class="oddiel">
+<caption>
+ <strong>B.3.1</strong>Údaje zo všetkıch prijatıch zjednodušenıch faktúr pod¾a § 74 ods. 3 písm. a) a c) zákona, z ktorıch príjemca plnenia uplatòuje odpoèítanie dane
+</caption>
+<tr>
+<FORM name="fhlv11" method="post" action="kontrolnydph2014_manual.php?copern=15011&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
+ <th width="15%">Oddiel</th>
+ <th width="20%">Základ dane (ZD)</th>
+ <th width="20%">Suma dane (SD)</th>
+ <th width="20%">Odpoèítaná daò</th>
+ <th width="20%">Kód opravy</th>
+ <th width="5%"></th>
+</tr>
+<?php
+     }
+//koniec i=0
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$polozka=mysql_fetch_object($sql);
+?>
+<tr>
+ <td><?php echo $polozka->kvodd;?></td>
+ <td style="text-align:right;"><?php echo $polozka->kvzdn;?>&nbsp;</td>
+ <td style="text-align:right;"><?php echo $polozka->kvsdn;?>&nbsp;</td>
+ <td style="text-align:right;"><?php echo $polozka->kvodn;?>&nbsp;</td>
+ <td><?php echo $polozka->er1;?></td>
+ <td>
+  <img src="../obr/ikony/xmark_lred_icon.png" onclick="vymazatCpl(<?php echo $polozka->cpl;?>);" title="Vymaza riadok">
+ </td>
+</tr>
+<?php
+}
+$i = $i + 1;
+  }
+?>
+<tr>
+ <td>
+  <input type="hidden" name="kvodd" id="kvodd" value="B31"/>
+  <img src='../obr/hladaj.png' onclick="myKVDPH.style.display=''; volajKvdph('B31');" title="H¾ada v KVDPH">
+ </td>
+ <td><input type="text" name="kvzdn" id="kvzdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzdnb13Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td><input type="text" name="kvsdn" id="kvsdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvsdnb31Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td><input type="text" name="kvodn" id="kvodn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvodnb31Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td>
+  <select class="hmenu" size="1" name="kver1" id="kver1" onkeydown="kver1b31Enter(event.which);">
+   <option value="1">1=zmazaná poloka</option>
+   <option value="2">2=nová poloka</option>
+  </select>
+ </td>
+ <td></td>
+</tr>
+</table>
+ <input type="submit" id="uloz11" name="uloz11" value="Uloi" onmouseover="return Povol_uloz11();" >
+ <SPAN id="uvolni11" onmouseover="return Povol_uloz11();">&nbsp;</SPAN>
+</FORM>
+<?php              } ?>
+
+
+<?php
+//////ODDIEL B32
+if( $oddb31 == 1 ) {
+$sqltt = "SELECT * FROM F$kli_vxcf"."_archivdphkvdphmanual WHERE kvodd = 'B32' ORDER BY kvodd ";
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+$strana=1;
+$i=0;
+  while ($i <= $pol )
+  {
+if ( $i == 0 )
+     {
+?>
+<table class="oddiel">
+<caption>
+ <strong>B.3.2</strong>Údaje zo všetkıch prijatıch zjednodušenıch faktúr pod¾a § 74 ods. 3 písm. a) a c) zákona, z ktorıch príjemca plnenia uplatòuje odpoèítanie dane
+</caption>
+<tr>
+<FORM name="fhlv12" method="post" action="kontrolnydph2014_manual.php?copern=15012&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
+ <th width="15%">Oddiel</th>
+ <th width="20%">Základ dane (ZD)</th>
+ <th width="20%">Suma dane (SD)</th>
+ <th width="20%">Odpoèítaná daò</th>
+ <th width="20%">Kód opravy</th>
+ <th width="5%"></th>
+</tr>
+<?php
+     }
+//koniec i=0
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$polozka=mysql_fetch_object($sql);
+?>
+<tr>
+ <td><?php echo $polozka->kvodd;?></td>
+ <td style="text-align:right;"><?php echo $polozka->kvzdn;?>&nbsp;</td>
+ <td style="text-align:right;"><?php echo $polozka->kvsdn;?>&nbsp;</td>
+ <td style="text-align:right;"><?php echo $polozka->kvodn;?>&nbsp;</td>
+ <td><?php echo $polozka->er1;?></td>
+ <td>
+  <img src="../obr/ikony/xmark_lred_icon.png" onclick="vymazatCpl(<?php echo $polozka->cpl;?>);" title="Vymaza riadok">
+ </td>
+</tr>
+<?php
+}
+$i = $i + 1;
+  }
+?>
+<tr>
+ <td>
+  <input type="hidden" name="kvodd" id="kvodd" value="B32"/>
+  <img src='../obr/hladaj.png' onclick="myKVDPH.style.display=''; volajKvdph('B32');" title="H¾ada v KVDPH">
+ </td>
+ <td><input type="text" name="kvzdn" id="kvzdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzdnb32Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td><input type="text" name="kvsdn" id="kvsdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvsdnb32Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td><input type="text" name="kvodn" id="kvodn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvodnb32Enter(event.which);" maxlength="12" style="width:80px;"/></td>
+ <td>
+  <select class="hmenu" size="1" name="kver1" id="kver1" onkeydown="kver1b32Enter(event.which);">
+   <option value="1">1=zmazaná poloka</option>
+   <option value="2">2=nová poloka</option>
+  </select>
+ </td>
+ <td></td>
+</tr>
+</table>
+ <input type="submit" id="uloz12" name="uloz12" value="Uloi" onmouseover="return Povol_uloz12();" >
+ <SPAN id="uvolni12" onmouseover="return Povol_uloz12();">&nbsp;</SPAN>
+</FORM>
+<?php              } ?>
 
 <?php
 //////ODDIEL C1
@@ -1664,7 +1936,7 @@ if ( $i == 0 )
  <strong>C.1.</strong>Údaje z vyhotovenej opravnej faktúry (pod¾a § 71 ods. 2 zákona, ktorá mení pôvodnú faktúru - ïalej len "opravná faktúra")
 </caption>
 <tr>
-<FORM name="fhlv6" method="post" action="kontrolnydph2014_manual.php?copern=15006&page=1">
+<FORM name="fhlv6" method="post" action="kontrolnydph2014_manual.php?copern=15006&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
  <th width="5%">Oddiel</th>
  <th width="10%">IÈDPH odberat.</th>
  <th width="10%">Èíslo oprav.fa.</th>
@@ -1754,7 +2026,7 @@ if ( $i == 0 )
  <strong>C.2.</strong>Údaje z prijatej opravnej faktúry
 </caption>
 <tr>
-<FORM name="fhlv7" method="post" action="kontrolnydph2014_manual.php?copern=15007&page=1">
+<FORM name="fhlv7" method="post" action="kontrolnydph2014_manual.php?copern=15007&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
  <th width="5%">Oddiel</th>
  <th width="12%">IÈDPH dodávate¾a</th>
  <th width="13%">Èíslo opravnej fa.</th>
@@ -1835,7 +2107,7 @@ if ( $i == 0 )
  <strong>D.1.</strong>Údaje o dodaní tovarov a sluieb inıch ako uvedenıch v èasti A., z kt. je platite¾ dane povinnı platí daò - Údaje o obratoch evidovanıch všetkımi ERP
 </caption>
 <tr>
-<FORM name="fhlv8" method="post" action="kontrolnydph2014_manual.php?copern=15008&page=1">
+<FORM name="fhlv8" method="post" action="kontrolnydph2014_manual.php?copern=15008&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
  <th width="5%">Oddiel</th>
  <th width="15%">Celková suma obratov</th>
  <th width="15%">Celková suma ZD 20% DPH</th>
@@ -1910,7 +2182,7 @@ if ( $i == 0 )
  <strong>D.2.</strong>Údaje o dodaní tovarov a sluieb inıch ako uvedenıch v èasti A., ktoré sa neevidujú ERP
 </caption>
 <tr>
-<FORM name="fhlv9" method="post" action="kontrolnydph2014_manual.php?copern=15009&page=1">
+<FORM name="fhlv9" method="post" action="kontrolnydph2014_manual.php?copern=15009&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
  <th width="10%">Oddiel</th>
  <th width="16%">Celkovı suma ZD 20% DPH</th>
  <th width="16%">Celkovı SD 20% DPH</th>
