@@ -1716,7 +1716,7 @@ $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 $strana=1;
 $i=0;
-  while ($i <= $pol )
+  while ( $i <= $pol )
   {
 if ( $i == 0 )
      {
@@ -1780,7 +1780,7 @@ $i = $i + 1;
 
 <?php
 //////ODDIEL B31
-if( $oddb31 == 1 ) {
+if ( $oddb31 == 1 ) {
 $sqltt = "SELECT * FROM F$kli_vxcf"."_archivdphkvdphmanual WHERE kvodd = 'B31' ORDER BY kvodd ";
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -1793,16 +1793,17 @@ if ( $i == 0 )
 ?>
 <table class="oddiel">
 <caption>
- <strong>B.3.1</strong>Údaje zo všetkých prijatých zjednodušených faktúr pod¾a § 74 ods. 3 písm. a) až c) zákona, z ktorých príjemca plnenia uplatòuje odpoèítanie dane
+ <strong>B.3.1</strong>Údaje zo všetkých prijatých zjednodušených faktúr pod¾a § 74 ods. 3 písm. a) až c) zákona,
+z kt. príjemca plnenia uplatòuje odpoèítanie dane (ak je celková suma odpoèítanej dane za príslušné zdaòovacie obdobie menej ako 3 000 eur)
 </caption>
 <tr>
 <FORM name="fhlv11" method="post" action="kontrolnydph2014_manual.php?copern=15011&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
- <th width="15%">Oddiel</th>
- <th width="20%">Základ dane (ZD)</th>
- <th width="20%">Suma dane (SD)</th>
- <th width="20%">Odpoèítaná daò</th>
- <th width="20%">Kód opravy</th>
- <th width="5%"></th>
+ <th width="6%">Oddiel</th>
+ <th width="22%">Základ dane (ZD)</th>
+ <th width="22%">Suma dane (SD)</th>
+ <th width="22%">Odpoèítaná daò</th>
+ <th width="22%">Kód opravy</th>
+ <th width="6%"></th>
 </tr>
 <?php
      }
@@ -1846,7 +1847,7 @@ $i = $i + 1;
  <input type="submit" id="uloz11" name="uloz11" value="Uloži" onmouseover="return Povol_uloz11();" >
  <SPAN id="uvolni11" onmouseover="return Povol_uloz11();">&nbsp;</SPAN>
 </FORM>
-<?php              } ?>
+<?php               } ?>
 
 
 <?php
@@ -1865,14 +1866,16 @@ if ( $i == 0 )
 <table class="oddiel">
 <caption>
  <strong>B.3.2</strong>Údaje zo všetkých prijatých zjednodušených faktúr pod¾a § 74 ods. 3 písm. a) až c) zákona, z ktorých príjemca plnenia uplatòuje odpoèítanie dane
+(ak je celková suma odpoèítanej dane za príslušné zdaòovacie obdobie 3000 eur a viac)
 </caption>
 <tr>
 <FORM name="fhlv12" method="post" action="kontrolnydph2014_manual.php?copern=15012&page=1&xume=<?php echo $xume; ?>&xstv=<?php echo $xstv; ?>">
- <th width="15%">Oddiel</th>
- <th width="20%">Základ dane (ZD)</th>
- <th width="20%">Suma dane (SD)</th>
- <th width="20%">Odpoèítaná daò</th>
- <th width="20%">Kód opravy</th>
+ <th width="5%">Oddiel</th>
+ <th width="18%">IÈDPH dodávate¾a</th>
+ <th width="18%">Základ dane (ZD)</th>
+ <th width="18%">Suma dane (SD)</th>
+ <th width="18%">Odpoèítaná daò</th>
+ <th width="18%">Kód opravy</th>
  <th width="5%"></th>
 </tr>
 <?php
@@ -1883,11 +1886,12 @@ if ( $i == 0 )
 $polozka=mysql_fetch_object($sql);
 ?>
 <tr>
- <td><?php echo $polozka->kvodd;?></td>
- <td style="text-align:right;"><?php echo $polozka->kvzdn;?>&nbsp;</td>
- <td style="text-align:right;"><?php echo $polozka->kvsdn;?>&nbsp;</td>
- <td style="text-align:right;"><?php echo $polozka->kvodn;?>&nbsp;</td>
- <td><?php echo $polozka->er1;?></td>
+ <td><?php echo $polozka->kvodd; ?></td>
+ <td style="text-align:center;"><?php echo $polozka->kvicd; ?></td>
+ <td style="text-align:right;"><?php echo $polozka->kvzdn; ?>&nbsp;</td>
+ <td style="text-align:right;"><?php echo $polozka->kvsdn; ?>&nbsp;</td>
+ <td style="text-align:right;"><?php echo $polozka->kvodn; ?>&nbsp;</td>
+ <td><?php echo $polozka->er1; ?></td>
  <td>
   <img src="../obr/ikony/xmark_lred_icon.png" onclick="vymazatCpl(<?php echo $polozka->cpl;?>);" title="Vymaza riadok">
  </td>
@@ -1902,6 +1906,7 @@ $i = $i + 1;
   <input type="hidden" name="kvodd" id="kvodd" value="B32"/>
   <img src='../obr/hladaj.png' onclick="myKVDPH.style.display=''; volajKvdph('B32');" title="H¾ada v KVDPH">
  </td>
+ <td><input type="text" name="kvicd" id="kvicd" onkeydown="kvicdb2Enter(event.which);" maxlength="20" style="width:100px;"/></td>
  <td><input type="text" name="kvzdn" id="kvzdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvzdnb32Enter(event.which);" maxlength="12" style="width:80px;"/></td>
  <td><input type="text" name="kvsdn" id="kvsdn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvsdnb32Enter(event.which);" maxlength="12" style="width:80px;"/></td>
  <td><input type="text" name="kvodn" id="kvodn" onkeyup="CiarkaNaBodku(this);" onkeydown="kvodnb32Enter(event.which);" maxlength="12" style="width:80px;"/></td>
