@@ -1477,24 +1477,26 @@ $pdf->Cell(190,0.5,"     ","0",1,"L");
                                  }
 
 if ( $hlavicka->kvodd == "B32" ) {
-$textb3="Údaje zo všetkých prijatých zjednodušených faktúr pod¾a § 74 ods. 3 písm. a) až c) zákona, z ktorých príjemca plnenia uplatòuje odpoèítanie dane (ak je celková suma odpoèítanej dane za príslušné zdaòovacie obdobie menej ako 3 000 eur)";
-$textb3s1p1="Celková suma základov dane";
-$textb3s1p2="v eurách";
-$textb3s2p1="Celková suma dane";
+$textb3="Údaje zo všetkých prijatých zjednodušených faktúr pod¾a § 74 ods. 3 písm. a) až c) zákona, z ktorých príjemca plnenia uplatòuje odpoèítanie dane (ak je celková suma odpoèítanej dane za príslušné zdaòovacie obdobie 3 000 eur a viac)";
+$textb3s1p1="Identifikaèné èíslo pre daò";
+$textb3s1p2="dodávate¾a";
+$textb3s2p1="Celková suma základov dane";
 $textb3s2p2="v eurách";
-$textb3s3p1="Celková suma odpoèítanej dane";
+$textb3s3p1="Celková suma dane";
 $textb3s3p2="v eurách";
-$textb3s4p1="Kód opravy";
-$textb3s4p2="(èíslo dokladu)";
+$textb3s4p1="Celková suma odpoèítanej dane";
+$textb3s4p2="v eurách";
+$textb3s5p1="Kód opravy";
+$textb3s5p2="(èíslo dokladu)";
 $pdf->SetY(6);
 $pdf->Cell(277,4.5," ","$rmc",1,"L");
 $pdf->MultiCell(277,4,"B.3.2. $textb3","$rmc1",1,"C");
 $pdf->Cell(190,0.5,"     ","$rmc",1,"L");
-$pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(67,3.5," ","LTR",1,"C");
-$pdf->Cell(70,3.5,"$textb3s1p1","L",0,"C");$pdf->Cell(70,3.5,"$textb3s2p1","L",0,"C");$pdf->Cell(70,3.5,"$textb3s3p1","L",0,"C");$pdf->Cell(67,3.5,"$textb3s4p1","LR",1,"C");
-$pdf->Cell(70,3.5,"$textb3s1p2","L",0,"C");$pdf->Cell(70,3.5,"$textb3s2p2","L",0,"C");$pdf->Cell(70,3.5,"$textb3s3p2","L",0,"C");$pdf->Cell(67,3.5,"$textb3s4p2","LR",1,"C");
-$pdf->Cell(70,3.5," ","L",0,"C");$pdf->Cell(70,3.5," ","L",0,"C");$pdf->Cell(70,3.5," ","L",0,"C");$pdf->Cell(67,3.5," ","LR",1,"C");
-$pdf->Cell(70,4,"1","$rmc1",0,"C",true);$pdf->Cell(70,4,"2","$rmc1",0,"C",true);$pdf->Cell(70,4,"3","$rmc1",0,"C",true);$pdf->Cell(67,4,"4","$rmc1",1,"C",true);
+$pdf->Cell(56,3.5," ","LT",0,"C");$pdf->Cell(56,3.5," ","LT",0,"C");$pdf->Cell(56,3.5," ","LT",0,"C");$pdf->Cell(56,3.5," ","LT",0,"C");$pdf->Cell(53,3.5," ","LTR",1,"C");
+$pdf->Cell(56,3.5,"$textb3s1p1","L",0,"C");$pdf->Cell(56,3.5,"$textb3s2p1","L",0,"C");$pdf->Cell(56,3.5,"$textb3s3p1","L",0,"C");$pdf->Cell(56,3.5,"$textb3s4p1","L",0,"C");$pdf->Cell(53,3.5,"$textb3s5p1","LR",1,"C");
+$pdf->Cell(56,3.5,"$textb3s1p2","L",0,"C");$pdf->Cell(56,3.5,"$textb3s2p2","L",0,"C");$pdf->Cell(56,3.5,"$textb3s3p2","L",0,"C");$pdf->Cell(56,3.5,"$textb3s4p2","L",0,"C");$pdf->Cell(53,3.5,"$textb3s5p2","LR",1,"C");
+$pdf->Cell(56,3.5," ","L",0,"C");$pdf->Cell(56,3.5," ","L",0,"C");$pdf->Cell(56,3.5," ","L",0,"C");$pdf->Cell(56,3.5," ","L",0,"C");$pdf->Cell(53,3.5," ","LR",1,"C");
+$pdf->Cell(56,4,"1","$rmc1",0,"C",true);$pdf->Cell(56,4,"2","$rmc1",0,"C",true);$pdf->Cell(56,4,"3","$rmc1",0,"C",true);$pdf->Cell(56,4,"4","$rmc1",0,"C",true);$pdf->Cell(53,4,"5","$rmc1",1,"C",true);
 $pdf->Cell(190,0.5,"     ","0",1,"L");
                                 }
 
@@ -1683,7 +1685,7 @@ if ( $hlavicka->psys == 30 AND $hlavicka->kvodd == "A1" ) {
 $rmc="TB";
 $pdf->Cell(8,4," ","0",0,"R");$pdf->Cell(152,4,"SPOLU DPH","$rmc",0,"R");$pdf->Cell(38,4,"$hlavicka->kvsdn","$rmc",0,"R");$pdf->Cell(2,4," ","0",0,"R");
 $dpha1=$hlavicka->kvsdn;
-$pdf->Cell(0,4," ","0",1,"R"); //dopyt, èo je toto
+$pdf->Cell(0,4," ","0",1,"R");
 $rmc=0;
                                                           }
 
@@ -1715,7 +1717,7 @@ $rmc="TB";
 $pdf->Cell(8,4," ","0",0,"R");$pdf->Cell(202,4,"SPOLU DPH","$rmc",0,"R");
 $pdf->Cell(33,4,"$hlavicka->kvodn","$rmc",0,"R");$pdf->Cell(2,4," ","0",0,"L");
 $dphb1=$hlavicka->kvodn;
-$pdf->Cell(0,4," ","0",1,"R"); //dopyt, èo je toto
+$pdf->Cell(0,4," ","0",1,"R");
 $rmc=0;
                                                           }
 
@@ -1773,17 +1775,18 @@ $pdf->Cell(0,4," ","0",1,"R");
 $rmc=0;
                                                           }
 if ( $hlavicka->psys < 30 AND $hlavicka->kvodd == "B32" ) {
-$pdf->Cell(8,4,"$hlavicka->kvodd","$rmc",0,"L");$pdf->Cell(27,4,"$hlavicka->kvicd","$rmc",0,"L");$pdf->Cell(62,4,"$hlavicka->kvzdn","$rmc",0,"R");
-$pdf->Cell(68,4,"$hlavicka->kvsdn","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"L");
-$pdf->Cell(68,4,"$hlavicka->kvodn","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"L");
-$pdf->Cell(67,4,"$hlavicka->dok","$rmc",1,"C");
+$pdf->Cell(8,4,"$hlavicka->kvodd","$rmc",0,"L");$pdf->Cell(48,4,"$hlavicka->kvicd","$rmc",0,"L");
+$pdf->Cell(56,4,"$hlavicka->kvzdn","$rmc",0,"R");$pdf->Cell(56,4,"$hlavicka->kvsdn","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"L");
+$pdf->Cell(54,4,"$hlavicka->kvodn","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"L");
+$pdf->Cell(51,4,"$hlavicka->dok","$rmc",1,"C");
                                                          }
 
 if ( $hlavicka->psys == 30 AND $hlavicka->kvodd == "B32" ) {
 $rmc="TB";
-$pdf->Cell(22,4,"SPOLU do XML","$rmc",0,"L");$pdf->Cell(48,4,"$hlavicka->kvzdn","$rmc",0,"R");
-$pdf->Cell(68,4,"$hlavicka->kvsdn","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"L");
-$pdf->Cell(68,4,"$hlavicka->kvodn","$rmc",0,"R");$pdf->Cell(2,4," ","0",0,"L");
+$pdf->Cell(8,4," ","0",0,"R");
+$pdf->Cell(48,4,"SPOLU do XML","$rmc",0,"L");$pdf->Cell(56,4,"$hlavicka->kvzdn","$rmc",0,"R");
+$pdf->Cell(56,4,"$hlavicka->kvsdn","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"L");
+$pdf->Cell(54,4,"$hlavicka->kvodn","$rmc",0,"R");$pdf->Cell(2,4," ","0",0,"L");
 $dphb3=$hlavicka->kvodn;
 $pdf->Cell(0,4," ","0",1,"R"); 
 $rmc=0;
@@ -1810,7 +1813,7 @@ $rmc="TB";
 $pdf->Cell(8,4," ","0",0,"R");$pdf->Cell(93,4,"SPOLU DPH","$rmc",0,"R");
 $pdf->Cell(23,4,"$hlavicka->kvsdn","$rmc",0,"R");
 $dphc1=$hlavicka->kvsdn;
-$pdf->Cell(0,4," ","0",1,"R"); //dopyt, èo je toto
+$pdf->Cell(0,4," ","0",1,"R");
 $rmc=0;
                                                           }
 
@@ -1830,7 +1833,7 @@ $rmc="TB";
 $pdf->Cell(8,4," ","0",0,"R");$pdf->Cell(202,4,"SPOLU DPH","$rmc",0,"R");
 $pdf->Cell(33,4,"$hlavicka->kvodn","$rmc",0,"R");$pdf->Cell(2,4," ","0",0,"L");
 $dphc2=$hlavicka->kvodn;
-$pdf->Cell(0,4," ","0",1,"R"); //dopyt, èo je toto
+$pdf->Cell(0,4," ","0",1,"R");
 $rmc=0;
                                                           }
 
@@ -1852,7 +1855,7 @@ $pdf->Cell(44,4,"$hlavicka->kvzdn10","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"
 $pdf->Cell(44,4,"$hlavicka->kvsdn10","$rmc",0,"R");$pdf->Cell(2,4," ","0",0,"R");
 $dphd1s20=$hlavicka->kvsdn20;
 $dphd1s10=$hlavicka->kvsdn10;
-$pdf->Cell(0,4," ","0",1,"R"); //dopyt, èo je toto
+$pdf->Cell(0,4," ","0",1,"R");
 $rmc=0;
                                                           }
 
@@ -1872,7 +1875,7 @@ $pdf->Cell(54,4,"$hlavicka->kvzdn10","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"
 $pdf->Cell(54,4,"$hlavicka->kvsdn10","$rmc",0,"R");$pdf->Cell(2,4," ","$0",0,"R");
 $dphd2s20=$hlavicka->kvsdn20;
 $dphd2s10=$hlavicka->kvsdn10;
-$pdf->Cell(0,4," ","0",1,"R"); //dopyt, èo je toto
+$pdf->Cell(0,4," ","0",1,"R");
 $rmc=0;
                                                           }
 }
