@@ -1476,6 +1476,28 @@ $pdf->Cell(70,4,"1","$rmc1",0,"C",true);$pdf->Cell(70,4,"2","$rmc1",0,"C",true);
 $pdf->Cell(190,0.5,"     ","0",1,"L");
                                 }
 
+if ( $hlavicka->kvodd == "B32" ) {
+$textb3="Údaje zo všetkých prijatých zjednodušených faktúr pod¾a § 74 ods. 3 písm. a) až c) zákona, z ktorých príjemca plnenia uplatòuje odpoèítanie dane";
+$textb3s1p1="Celková suma základov dane";
+$textb3s1p2="v eurách";
+$textb3s2p1="Celková suma dane";
+$textb3s2p2="v eurách";
+$textb3s3p1="Celková suma odpoèítanej dane";
+$textb3s3p2="v eurách";
+$textb3s4p1="Kód opravy";
+$textb3s4p2="(èíslo dokladu)";
+$pdf->SetY(6);
+$pdf->Cell(277,4.5," ","$rmc",1,"L");
+$pdf->MultiCell(277,4,"B.3. $textb3","$rmc1",1,"C");
+$pdf->Cell(190,0.5,"     ","$rmc",1,"L");
+$pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(67,3.5," ","LTR",1,"C");
+$pdf->Cell(70,3.5,"$textb3s1p1","L",0,"C");$pdf->Cell(70,3.5,"$textb3s2p1","L",0,"C");$pdf->Cell(70,3.5,"$textb3s3p1","L",0,"C");$pdf->Cell(67,3.5,"$textb3s4p1","LR",1,"C");
+$pdf->Cell(70,3.5,"$textb3s1p2","L",0,"C");$pdf->Cell(70,3.5,"$textb3s2p2","L",0,"C");$pdf->Cell(70,3.5,"$textb3s3p2","L",0,"C");$pdf->Cell(67,3.5,"$textb3s4p2","LR",1,"C");
+$pdf->Cell(70,3.5," ","L",0,"C");$pdf->Cell(70,3.5," ","L",0,"C");$pdf->Cell(70,3.5," ","L",0,"C");$pdf->Cell(67,3.5," ","LR",1,"C");
+$pdf->Cell(70,4,"1","$rmc1",0,"C",true);$pdf->Cell(70,4,"2","$rmc1",0,"C",true);$pdf->Cell(70,4,"3","$rmc1",0,"C",true);$pdf->Cell(67,4,"4","$rmc1",1,"C",true);
+$pdf->Cell(190,0.5,"     ","0",1,"L");
+                                }
+
 if ( $hlavicka->kvodd == "C1" ) {
 $textc="Údaje z faktúry pod¾a § 71 ods. 2 zákona, ktorá mení pôvodnú faktúru (ïalej len „opravná faktúra“)";
 $textc1="Údaje z vyhotovenej opravnej faktúry";
