@@ -1331,10 +1331,10 @@ $texta2s4p1="Základ dane";
 $texta2s4p2="v eurách";
 $texta2s5p1="Èíselný kód tovaru pod¾a";
 $texta2s5p2="Spoloèného colného sadzobníka";
-$texta2s5p3="[len tovar pod¾a § 69";
+$texta2s5p3="[tovar pod¾a § 69";
 $texta2s5p4="ods. 12 písm. f) a g) zákona]";
 $texta2s6p1="Druh tovaru";
-$texta2s6p2="[len tovar pod¾a §";
+$texta2s6p2="[tovar pod¾a §";
 $texta2s6p3="69 ods. 12 písm. h) a";
 $texta2s6p4="i) zákona]";
 $texta2s7p1="Množstvo tovaru";
@@ -1455,7 +1455,7 @@ $pdf->Cell(190,0.5,"     ","0",1,"L");
                                 }
 
 if ( $hlavicka->kvodd == "B31" ) {
-$textb3="Údaje zo všetkých prijatých zjednodušených faktúr pod¾a § 74 ods. 3 písm. a) až c) zákona, z ktorých príjemca plnenia uplatòuje odpoèítanie dane";
+$textb3="Údaje zo všetkých prijatých zjednodušených faktúr pod¾a § 74 ods. 3 písm. a) až c) zákona, z ktorých príjemca plnenia uplatòuje odpoèítanie dane (ak je celková suma odpoèítanej dane za príslušné zdaòovacie obdobie menej ako 3 000 eur)";
 $textb3s1p1="Celková suma základov dane";
 $textb3s1p2="v eurách";
 $textb3s2p1="Celková suma dane";
@@ -1466,7 +1466,7 @@ $textb3s4p1="Kód opravy";
 $textb3s4p2="(èíslo dokladu)";
 $pdf->SetY(6);
 $pdf->Cell(277,4.5," ","$rmc",1,"L");
-$pdf->MultiCell(277,4,"B.3. $textb3","$rmc1",1,"C");
+$pdf->MultiCell(277,4,"B.3.1. $textb3","$rmc1",1,"C");
 $pdf->Cell(190,0.5,"     ","$rmc",1,"L");
 $pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(67,3.5," ","LTR",1,"C");
 $pdf->Cell(70,3.5,"$textb3s1p1","L",0,"C");$pdf->Cell(70,3.5,"$textb3s2p1","L",0,"C");$pdf->Cell(70,3.5,"$textb3s3p1","L",0,"C");$pdf->Cell(67,3.5,"$textb3s4p1","LR",1,"C");
@@ -1474,10 +1474,10 @@ $pdf->Cell(70,3.5,"$textb3s1p2","L",0,"C");$pdf->Cell(70,3.5,"$textb3s2p2","L",0
 $pdf->Cell(70,3.5," ","L",0,"C");$pdf->Cell(70,3.5," ","L",0,"C");$pdf->Cell(70,3.5," ","L",0,"C");$pdf->Cell(67,3.5," ","LR",1,"C");
 $pdf->Cell(70,4,"1","$rmc1",0,"C",true);$pdf->Cell(70,4,"2","$rmc1",0,"C",true);$pdf->Cell(70,4,"3","$rmc1",0,"C",true);$pdf->Cell(67,4,"4","$rmc1",1,"C",true);
 $pdf->Cell(190,0.5,"     ","0",1,"L");
-                                }
+                                 }
 
 if ( $hlavicka->kvodd == "B32" ) {
-$textb3="Údaje zo všetkých prijatých zjednodušených faktúr pod¾a § 74 ods. 3 písm. a) až c) zákona, z ktorých príjemca plnenia uplatòuje odpoèítanie dane";
+$textb3="Údaje zo všetkých prijatých zjednodušených faktúr pod¾a § 74 ods. 3 písm. a) až c) zákona, z ktorých príjemca plnenia uplatòuje odpoèítanie dane (ak je celková suma odpoèítanej dane za príslušné zdaòovacie obdobie menej ako 3 000 eur)";
 $textb3s1p1="Celková suma základov dane";
 $textb3s1p2="v eurách";
 $textb3s2p1="Celková suma dane";
@@ -1488,7 +1488,7 @@ $textb3s4p1="Kód opravy";
 $textb3s4p2="(èíslo dokladu)";
 $pdf->SetY(6);
 $pdf->Cell(277,4.5," ","$rmc",1,"L");
-$pdf->MultiCell(277,4,"B.3. $textb3","$rmc1",1,"C");
+$pdf->MultiCell(277,4,"B.3.2. $textb3","$rmc1",1,"C");
 $pdf->Cell(190,0.5,"     ","$rmc",1,"L");
 $pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(70,3.5," ","LT",0,"C");$pdf->Cell(67,3.5," ","LTR",1,"C");
 $pdf->Cell(70,3.5,"$textb3s1p1","L",0,"C");$pdf->Cell(70,3.5,"$textb3s2p1","L",0,"C");$pdf->Cell(70,3.5,"$textb3s3p1","L",0,"C");$pdf->Cell(67,3.5,"$textb3s4p1","LR",1,"C");
@@ -1520,10 +1520,10 @@ $textc1s6p2="dane";
 $textc1s6p3="%";
 $textc1s7p1="Èíselný kód tovaru pod¾a";
 $textc1s7p2="Spoloèného colného sadzobníka";
-$textc1s7p3="[len tovar pod¾a § 69 ods. 12";
+$textc1s7p3="[tovar pod¾a § 69 ods. 12";
 $textc1s7p4="písm. f) a g) zákona]";
 $textc1s8p1="Druh tovaru";
-$textc1s8p2="[len tovar pod¾a";
+$textc1s8p2="[tovar pod¾a";
 $textc1s8p3="§ 69 ods. 12 písm.";
 $textc1s8p4="h) a i) zákona]";
 $textc1s9p1="Rozdiel množstva";
