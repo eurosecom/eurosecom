@@ -50,6 +50,24 @@ $xml = 1*$_REQUEST['xml'];
 $rmc=0;
 $rmc1=0;
 
+//nacitanie zo salda
+    if ( $copern == 3155 ) { ?>
+<script type="text/javascript">
+if( !confirm ("Chcete naËÌtaù ˙daje zo saldokonta ? ") )
+         { window.close() }
+else
+         { location.href='hlasenie_euler.php?copern=3156&page=1&drupoh=1&cislo_oc=<?php echo $cislo_oc; ?>' }
+</script>
+<?php                      }
+
+    if ( $copern == 3156 )
+    {
+
+
+$copern=20;
+$strana=5;
+    }
+//nacitanie zo salda
 
 //uprav 
     if ( $copern == 346 )
@@ -254,6 +272,16 @@ $vytvor = mysql_query("$vsql");
 
 $sql = "INSERT INTO F".$kli_vxcf."_ucthlasenie_euler (oc,konx1) VALUES ( 9999, 0 ) ";
 $vysledok = mysql_query($sql);
+}
+
+$sql = "SELECT euid FROM F".$kli_vxcf."_ucthlasenie_euler";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD ktos VARCHAR(40) NOT NULL AFTER ico";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD euid DECIMAL(10,0) DEFAULT 0 AFTER ico";
+$vysledek = mysql_query("$sql");
 }
 //koniec vytvorenie priznaniedmv
 
@@ -587,7 +615,7 @@ div.input-echo {
   {
    window.open('../ucto/hlasenie_euler.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
-  function NacitajMinRok()
+  function NacitajSaldo()
   {
    window.open('../ucto/hlasenie_euler.php?cislo_oc=<?php echo $cislo_oc;?>&copern=3155&drupoh=1&page=1', '_self', 'width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes')
   }
@@ -649,9 +677,9 @@ div.input-echo {
   {
    window.open('../ucto/hlasenie_euler.php?copern=336&uprav=0', '_self' )
   }
-  function DMVdoXML()
+  function doCSV()
   {
-   window.open('../ucto/priznaniedmv_xml2015.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+   window.open('../ucto/hlasenie_euler.php?copern=11&page=1&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
@@ -681,21 +709,10 @@ div.input-echo {
    <td class="header">Euler <?php echo $kli_vrok; ?></td>
    <td>
     <div class="bar-btn-form-tool">
-     <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();"
-          title="NaËÌtaù ˙daje z minulÈho roka" class="btn-form-tool">
-     <img src="../obr/ikony/info_blue_icon.png" onclick="Sadzby2015();"
-          title="RoËnÈ sadzby dane" class="btn-form-tool">
-     <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();"
-          title="PouËenie na vyplnenie" class="btn-form-tool">
-<?php if ( $strana == 5 ) { ?>
-    <img src="../obr/ikony/calculator_blue_icon.png" onclick="dajVsetky();"
-      title="Pre VäETKY VOZIDL¡ doplniù sadzbu dane do r. 12 podæa druhu vozidla,
-             +nastaviù r.13 checkbox,
-             +vypoËÌtaù poËet mesiacov r.19,
-             +vypoËÌtaù r.14,16,18,20,21" class="btn-form-tool">
-<?php                     } ?>
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML();"
-          title="Export do XML" class="btn-form-tool">
+     <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajSaldo();"
+          title="NaËÌtaù ˙daje zo salda" class="btn-form-tool">
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="doCSV();"
+          title="Export do CSV" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV();"
           title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
     </div>
@@ -725,7 +742,7 @@ $source="../ucto/hlasenie_euler.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 </div>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str1.jpg"
+<img src="../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str1.jpg"
      alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2015 1.strana" class="form-background">
 
 <span class="text-echo" style="top:223px; left:61px;"><?php if ( $fir_uctt03 == 999 ) echo "x"; ?></span>
@@ -770,7 +787,7 @@ $source="../ucto/hlasenie_euler.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str2.jpg"
+<img src="../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str1.jpg"
      alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2015 2.strana 380kB" class="form-background">
 <span class="text-echo" style="top:75px; left:406px;"><?php echo $fir_fdic;?></span>
 
@@ -807,7 +824,7 @@ $source="../ucto/hlasenie_euler.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 
 
 <?php if ( $strana == 3 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_str3.jpg"
+<img src="../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str1.jpg"
      alt="tlaËivo DaÚ z motorov˝ch vozidiel pre rok 2015 3.strana 380kB" class="form-background">
 <span class="text-echo" style="top:75px; left:458px;"><?php echo $fir_fdic; ?></span>
 
@@ -820,15 +837,19 @@ $source="../ucto/hlasenie_euler.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 
 <?php if ( $strana == 5 OR $strana == 9999 ) {
 //VYPIS ZOZNAMU VOZIDIEL
-$sluztt = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE oc = 1 ORDER BY ico ";
+$sluztt = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler ".
+" LEFT JOIN F$kli_vxcf"."_ico".
+" ON F$kli_vxcf"."_ucthlasenie_euler.ico=F$kli_vxcf"."_ico.ico".
+" WHERE F$kli_vxcf"."_ucthlasenie_euler.oc = 1 ORDER BY F$kli_vxcf"."_ucthlasenie_euler.ico ";
+
 //echo $sluztt;
 $sluz = mysql_query("$sluztt");
 $slpol = mysql_num_rows($sluz);
 ?>
 <div class="wrap-vozidla">
- <a href="#" onclick="NoveVzd();" title="Pridaù vozidlo" class="btn-item-new" >+ Vozidlo</a>
+ <a href="#" onclick="NoveVzd();" title="Pridaù I»O" class="btn-item-new" >+ I»O</a>
 <table class="vozidla">
-<caption>Zoznam odberateæov</caption>
+<caption>Zoznam I»O</caption>
 <tr class="zero-line">
  <td style="width:12%;"></td><td style="width:29%;"></td><td style="width:4%;"></td>
  <td style="width:12%;"></td><td style="width:10%;"></td><td style="width:12%;"></td>
@@ -836,17 +857,17 @@ $slpol = mysql_num_rows($sluz);
 </tr>
 <tr>
  <th rowspan="2">iËo</th>
- <th rowspan="2" align="left">ZnaËka</th>
- <th rowspan="2">Katg.</th>
- <th>Prv·</th>
- <th colspan="2">DaÚov· povinnosù</th>
- <th rowspan="2" align="right">DaÚ</th>
+ <th rowspan="2" align="left">n·zov</th>
+ <th rowspan="2">euid</th>
+ <th> </th>
+ <th colspan="2"> </th>
+ <th rowspan="2" align="right"> </th>
  <th rowspan="2">&nbsp;</th>
 </tr>
 <tr>
- <th style="padding-bottom:1px;">evidencia</th>
- <th style="padding-bottom:1px;">Vznik</th>
- <th style="padding-bottom:1px;">Z·nik</th>
+ <th style="padding-bottom:1px;"> </th>
+ <th style="padding-bottom:1px;"> </th>
+ <th style="padding-bottom:1px;"> </th>
 </tr>
 <?php
 $i=0;
@@ -859,22 +880,16 @@ $cisloi=$i+1;
 ?>
 <tr class="body"> 
  <td align="left"><?php echo $cisloi.". ".$rsluz->ico; ?></td>
- <td><?php echo $rsluz->vzzn; ?></td>
- <td align="center"><?php echo $rsluz->vzkat; ?></td>
- <td align="center">
-<?php if ( SkDatum($rsluz->da1) == '00.00.0000' ) { ?>
- <img src="../obr/pozor.png" style="width:14px; height:14px;"
-      title="Pozor, nie je vyplnen˝ d·tum prvej evidencie. Program nevypoËÌta spr·vne v˝öku dane">
-<?php                                             } ?>
-<?php echo SkDatum($rsluz->da1); ?>
- </td>
- <td align="center"><?php echo SkDatum($rsluz->datz); ?></td>
+ <td><?php echo $rsluz->nai; ?></td>
+ <td align="center"><?php echo $rsluz->euid; ?></td>
+ <td align="center"></td>
+ <td align="center"> </td>
  <td align="center">
   <img src="../obr/ikony/list_blue_icon.png" onclick="VytvorOznamZanik(<?php echo $rsluz->cpl; ?>);"
        title="Vytvoriù ozn·menie o z·niku daÚovej povinnosti">
     <?php echo SkDatum($rsluz->datk); ?>
  </td>
- <td align="right" style=""><?php echo $rsluz->r21; ?></td>
+ <td align="right" style=""> </td>
  <td align="center">
   <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl; ?>);"
        title="Upraviù">&nbsp;&nbsp;&nbsp;
@@ -989,9 +1004,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists ('../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str2.jpg') )
+if ( File_Exists ('../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str1.jpg') )
 {
-$pdf->Image('../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str2.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -1037,7 +1052,73 @@ $pdf->Output("$outfilex");
 ?>
 
 
+<?php
+/////////////////////////////////////////////////export csv
+if ( $copern == 11 )
+{
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
+ $outfilexdel="../tmp/euler_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/euler_".$kli_uzid."_".$hhmmss.".csv";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
+
+$soubor = fopen("$outfilex", "a+");
+
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE ico > 0 ORDER BY ico ";
+$sql = mysql_query("$sqltt");
+if($sql)                                                     
+$pol = mysql_num_rows($sql);
+
+$i=0;
+  while ($i <= $pol )
+  {
+
+
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+$dob_sk=SkDatum($hlavicka->dob);
+
+
+if( $i == 0 )
+     {
+  $text = "ico".";"."cislo_faktury".";"."vystavena".";"."splatna".";"."bez_dph".";"."s_dph".";"."\r\n"; 
+
+  fwrite($soubor, $text);
+
+     }
+
+$cen=$hlavicka->cen; $ecen=str_replace(".",",",$cen); 
+$ced=$hlavicka->cen_dan; $eced=str_replace(".",",",$ced); 
+
+
+
+  $text = $hlavicka->ico.";".$hlavicka->fak.";".$dat.";".$das.";".$ebez.";".$sdph."\r\n"; 
+  //if( $i == 0 ) { $text = "112233;7800345;12.01.2016;26.01.2016;10000;12000"."\r\n"; }
+
+  fwrite($soubor, $text);
+
+}
+$i = $i + 1;
+  }
+
+fclose($soubor);
+?>
+<br />
+<br />
+<br />
+<a href="<?php echo $outfilex; ?>"><?php echo $outfilex; ?></a>
+<?php
+}
+/////////////////////////////////////////export csv
+?>
 
 
 

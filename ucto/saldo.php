@@ -679,7 +679,7 @@ window.open('../ucto/saldo_alch05.php?h_uce=' + h_uce + '&h_obd=' + h_obd + '&co
 function HlaPoh()
                 {
 
-window.open('../ucto/hlasenie_euler.php?copern=20&drupoh=1&page=1&strana=1',
+window.open('../ucto/hlasenie_euler.php?copern=20&drupoh=1&page=1&strana=5',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
