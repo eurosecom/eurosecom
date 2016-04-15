@@ -1016,7 +1016,7 @@ $i = $i + 1;
 if( $oddb31 == 1 )
   {
 
-$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET kvodd = 'B31' WHERE kvodd = 'B3' ";
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET kvodd = 'B32' WHERE kvodd = 'B3' ";
 $oznac = mysql_query("$sqtoz");
 
   }
@@ -1069,7 +1069,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
 "SUM(r31),SUM(r32),SUM(r33),SUM(r34),SUM(r35),SUM(r36),SUM(r37),SUM(r38),SUM(kvzdn10),SUM(kvsdn10),SUM(kvzdn20),SUM(kvsdn20),".
 "fic".
 " FROM F$kli_vxcf"."_prcprizdphs$kli_uzid ".
-" WHERE kvodd = 'B3' OR kvodd = 'B31' OR kvodd = 'D1' OR kvodd = 'D2' ".
+" WHERE kvodd = 'B3' OR kvodd = 'B31' OR kvodd = 'B32' OR kvodd = 'D1' OR kvodd = 'D2' ".
 " GROUP BY dok ".
 "";
 $dsql = mysql_query("$dsqlt");
@@ -1119,7 +1119,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
 "SUM(r31),SUM(r32),SUM(r33),SUM(r34),SUM(r35),SUM(r36),SUM(r37),SUM(r38),SUM(kvzdn10),SUM(kvsdn10),SUM(kvzdn20),SUM(kvsdn20),".
 "fic".
 " FROM F$kli_vxcf"."_prcprizdphst$kli_uzid ".
-" WHERE dok >= 0 AND kvodd != 'B3' AND kvodd != 'B31' AND kvodd != 'D1' AND kvodd != 'D2' ".
+" WHERE dok >= 0 AND kvodd != 'B3' AND kvodd != 'B31' AND kvodd != 'B32' AND kvodd != 'D1' AND kvodd != 'D2' ".
 " GROUP BY kvodd ".
 "";
 $dsql = mysql_query("$dsqlt");
@@ -1133,7 +1133,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
 "SUM(r31),SUM(r32),SUM(r33),SUM(r34),SUM(r35),SUM(r36),SUM(r37),SUM(r38),SUM(kvzdn10),SUM(kvsdn10),SUM(kvzdn20),SUM(kvsdn20),".
 "fic".
 " FROM F$kli_vxcf"."_prcprizdphst$kli_uzid ".
-" WHERE dok >= 0 AND ( kvodd = 'B3' OR kvodd = 'B31' OR kvodd = 'D1' OR kvodd = 'D2' ) ".
+" WHERE dok >= 0 AND ( kvodd = 'B3' OR kvodd = 'B31' OR kvodd = 'B32' OR kvodd = 'D1' OR kvodd = 'D2' ) ".
 " GROUP BY kvodd ".
 "";
 $dsql = mysql_query("$dsqlt");                                                   
@@ -1772,6 +1772,22 @@ $dphb3=$hlavicka->kvodn;
 $pdf->Cell(0,4," ","0",1,"R"); 
 $rmc=0;
                                                           }
+if ( $hlavicka->psys < 30 AND $hlavicka->kvodd == "B32" ) {
+$pdf->Cell(8,4,"$hlavicka->kvodd","$rmc",0,"L");$pdf->Cell(27,4,"$hlavicka->kvicd","$rmc",0,"L");$pdf->Cell(62,4,"$hlavicka->kvzdn","$rmc",0,"R");
+$pdf->Cell(68,4,"$hlavicka->kvsdn","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"L");
+$pdf->Cell(68,4,"$hlavicka->kvodn","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"L");
+$pdf->Cell(67,4,"$hlavicka->dok","$rmc",1,"C");
+                                                         }
+
+if ( $hlavicka->psys == 30 AND $hlavicka->kvodd == "B32" ) {
+$rmc="TB";
+$pdf->Cell(22,4,"SPOLU do XML","$rmc",0,"L");$pdf->Cell(48,4,"$hlavicka->kvzdn","$rmc",0,"R");
+$pdf->Cell(68,4,"$hlavicka->kvsdn","$rmc",0,"R");$pdf->Cell(2,4," ","$rmc",0,"L");
+$pdf->Cell(68,4,"$hlavicka->kvodn","$rmc",0,"R");$pdf->Cell(2,4," ","0",0,"L");
+$dphb3=$hlavicka->kvodn;
+$pdf->Cell(0,4," ","0",1,"R"); 
+$rmc=0;
+                                                          }
 
 if ( $hlavicka->psys < 30 AND $hlavicka->kvodd == "C1" ) {
 $pdf->Cell(8,4,"$hlavicka->kvodd","$rmc",0,"L");$pdf->Cell(22,4,"$hlavicka->kvicd","$rmc",0,"L");
@@ -1967,6 +1983,9 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET kvpvf=REPLACE(kvpvf, ' 
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET kvdic='', kvicd='', kvfak=''  WHERE kvodd = 'B3' OR kvodd = 'B31' OR kvodd = 'D1' OR kvodd = 'D2' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET kvfak='' WHERE kvodd = 'B32' ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET kvpvf='' WHERE kvodd != 'C1' AND kvodd != 'C2' ";
@@ -2250,6 +2269,14 @@ if( $hlavicka->kvodd == "B31" )
   {
 
   $text = "  <B31 Z=\"".$hlavicka->kvzdn."\" D=\"".$hlavicka->kvsdn."\" O=\"".$hlavicka->kvodn."\" ";
+  if( $ajkopr == 0 ) { $text=$text." />"."\r\n"; fwrite($soubor, $text); }
+  if( $ajkopr == 1 ) { $text=$text." KOpr=\"".$kopr."\" />"."\r\n"; fwrite($soubor, $text); }
+  }
+
+if( $hlavicka->kvodd == "B32" )
+  {
+
+  $text = "  <B32 Dod=\"".$hlavicka->kvicd."\" Z=\"".$hlavicka->kvzdn."\" D=\"".$hlavicka->kvsdn."\" O=\"".$hlavicka->kvodn."\" ";
   if( $ajkopr == 0 ) { $text=$text." />"."\r\n"; fwrite($soubor, $text); }
   if( $ajkopr == 1 ) { $text=$text." KOpr=\"".$kopr."\" />"."\r\n"; fwrite($soubor, $text); }
   }
