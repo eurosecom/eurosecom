@@ -687,7 +687,7 @@ $crdk=$rdk;
 if( $rdk < 10 ) $crdk="0".$rdk;
 
 $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=mdt-dal WHERE rdk = $rdk AND kor = 0 ";
-if( $rdk == 1 OR $rdk == 2 OR $rdk == 4 OR $rdk == 5 OR $rdk == 20 OR $rdk == 23 OR $rdk == 24 OR $rdk == 22 OR $rdk == 28 OR $rdk == 29 OR $rdk == 31 OR $rdk == 33 OR $rdk == 35 OR $rdk == 38 ) 
+if( $rdk == 1 OR $rdk == 2 OR $rdk == 4 OR $rdk == 5 OR $rdk == 20 OR $rdk == 23 OR $rdk == 24 OR $rdk == 25 OR $rdk == 28 OR $rdk == 29 OR $rdk == 31 OR $rdk == 33 OR $rdk == 35 OR $rdk == 38 ) 
   { 
 $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=dal-mdt WHERE rdk = $rdk AND kor = 0 "; 
   }
@@ -695,7 +695,7 @@ $oznac = mysql_query("$sqtoz");
 
 
 $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rm$crdk=mdt-dal WHERE rdk = $rdk AND kor = 1 ";
-if( $rdk == 1 OR $rdk == 2 OR $rdk == 4 OR $rdk == 5 OR $rdk == 20 OR $rdk == 23 OR $rdk == 24 OR $rdk == 22 OR $rdk == 28 OR $rdk == 29 OR $rdk == 31 OR $rdk == 33 OR $rdk == 35 OR $rdk == 38 ) 
+if( $rdk == 1 OR $rdk == 2 OR $rdk == 4 OR $rdk == 5 OR $rdk == 20 OR $rdk == 23 OR $rdk == 24 OR $rdk == 25 OR $rdk == 28 OR $rdk == 29 OR $rdk == 31 OR $rdk == 33 OR $rdk == 35 OR $rdk == 38 ) 
   { 
 $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rm$crdk=dal-mdt WHERE rdk = $rdk AND kor = 1 "; 
   }
