@@ -1012,15 +1012,27 @@ $i = $i + 1;
 
 //koniec v oddiele B1,B2,C1 oprav datum dodania ak sz4 != daz AND sz4 != 0000-00-00 andrejko
 
-//namiesto B3 daj B31
+//namiesto B3 daj B31,B32
+$skvodn=0;
 if( $oddb31 == 1 )
   {
 
-$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET kvodd = 'B32' WHERE kvodd = 'B3' ";
+$skvodn=0;
+$sqldok = mysql_query("SELECT SUM(kvodn) AS skvodn FROM F$kli_vxcf"."_prcprizdphs$kli_uzid  WHERE kvodd = 'B3' ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $skvodn=1*$riaddok->skvodn;
+  }
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET kvodd = 'B31' WHERE kvodd = 'B3' ";
 $oznac = mysql_query("$sqtoz");
 
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET kvodd = 'B32' WHERE kvodd = 'B31' ";
+if( $skvodn >= 3000 ) { $oznac = mysql_query("$sqtoz"); }
+
   }
-//koniec namiesto B3 daj B31
+//koniec namiesto B3 daj B31,B32
 
 //presun do tlacovej tabulky
 $sqtoz = "DROP TABLE F$kli_vxcf"."_prcprizdphst$kli_uzid ";
@@ -1133,16 +1145,43 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
 "SUM(r31),SUM(r32),SUM(r33),SUM(r34),SUM(r35),SUM(r36),SUM(r37),SUM(r38),SUM(kvzdn10),SUM(kvsdn10),SUM(kvzdn20),SUM(kvsdn20),".
 "fic".
 " FROM F$kli_vxcf"."_prcprizdphst$kli_uzid ".
-" WHERE dok >= 0 AND ( kvodd = 'B3' OR kvodd = 'B31' OR kvodd = 'B32' OR kvodd = 'D1' OR kvodd = 'D2' ) ".
+" WHERE dok >= 0 AND ( kvodd = 'B3' OR kvodd = 'B31' OR kvodd = 'D1' OR kvodd = 'D2' ) ".
 " GROUP BY kvodd ".
 "";
-$dsql = mysql_query("$dsqlt");                                                   
+$dsql = mysql_query("$dsqlt");
+
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
+" 0,kvdic,cpid,0,kvodd,kvicd,kvfak,kvpvf,SUM(kvsdn),kvszd,SUM(kvzdn),SUM(kvzkl),SUM(kvodn),kvkodt,kvdtov,SUM(kvmnot),kvmerj,SUM(kvcobr),0,0,0,0,0,0,0,0,ume,dat,daz,30,SUM(r01),SUM(r02),SUM(r03),SUM(r04),SUM(r05),SUM(r06),SUM(r07),SUM(r08),SUM(r09),SUM(r10),".
+"SUM(hod),rdp,rdk,xrz,xrd,xsz,ucm,ucd,ico,fak,999999999,".
+"SUM(r11),SUM(r12),SUM(r13),SUM(r14),SUM(r15),SUM(r16),SUM(r17),SUM(r18),SUM(r19),SUM(r20),".
+"SUM(r21),SUM(r22),SUM(r23),SUM(r24),SUM(r25),SUM(r26),SUM(r27),SUM(r28),SUM(r29),SUM(r30),".
+"SUM(r31),SUM(r32),SUM(r33),SUM(r34),SUM(r35),SUM(r36),SUM(r37),SUM(r38),SUM(kvzdn10),SUM(kvsdn10),SUM(kvzdn20),SUM(kvsdn20),".
+"fic".
+" FROM F$kli_vxcf"."_prcprizdphst$kli_uzid ".
+" WHERE dok >= 0 AND kvodd = 'B32' ".
+" GROUP BY kvodd ".
+"";
+if( $skvodn >= 3000 ) { $dsql = mysql_query("$dsqlt"); } 
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
+" 0,kvdic,cpid,0,kvodd,kvicd,kvfak,kvpvf,SUM(kvsdn),kvszd,SUM(kvzdn),SUM(kvzkl),SUM(kvodn),kvkodt,kvdtov,SUM(kvmnot),kvmerj,SUM(kvcobr),0,0,9,0,0,0,0,0,ume,dat,daz,60,SUM(r01),SUM(r02),SUM(r03),SUM(r04),SUM(r05),SUM(r06),SUM(r07),SUM(r08),SUM(r09),SUM(r10),".
+"SUM(hod),rdp,rdk,xrz,xrd,xsz,ucm,ucd,ico,fak,999999999,".
+"SUM(r11),SUM(r12),SUM(r13),SUM(r14),SUM(r15),SUM(r16),SUM(r17),SUM(r18),SUM(r19),SUM(r20),".
+"SUM(r21),SUM(r22),SUM(r23),SUM(r24),SUM(r25),SUM(r26),SUM(r27),SUM(r28),SUM(r29),SUM(r30),".
+"SUM(r31),SUM(r32),SUM(r33),SUM(r34),SUM(r35),SUM(r36),SUM(r37),SUM(r38),SUM(kvzdn10),SUM(kvsdn10),SUM(kvzdn20),SUM(kvsdn20),".
+"fic".
+" FROM F$kli_vxcf"."_prcprizdphst$kli_uzid ".
+" WHERE dok >= 0 AND kvodd = 'B32' AND psys != 30 ".
+" GROUP BY kvodd,kvicd ".
+"";
+if( $skvodn >= 3000 ) { $dsql = mysql_query("$dsqlt"); }                                                
 
 //tlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcprizdphst".$kli_uzid.
 " LEFT JOIN F$kli_vxcf"."_ico".
 " ON F$kli_vxcf"."_prcprizdphst$kli_uzid".".ico=F$kli_vxcf"."_ico.ico".
-" WHERE psys < 999 ".
+" WHERE psys < 999 AND psys != 60 ".
 " ORDER BY kvodd,dok,kvszd";
 //echo $sqltt;
 $sql = mysql_query("$sqltt");
@@ -1989,6 +2028,12 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET kvdic='', kvicd='', kvf
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET kvfak='' WHERE kvodd = 'B32' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "DELETE FROM F$kli_vxcf"."_prcprizdphst$kli_uzid WHERE kvodd = 'B32' AND psys = 30 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET psys=30 WHERE kvodd = 'B32' AND psys = 60 ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET kvpvf='' WHERE kvodd != 'C1' AND kvodd != 'C2' ";
