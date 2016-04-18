@@ -221,7 +221,24 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD dath DATE NOT NULL AFTER ico";
 $vysledek = mysql_query("$sql");
 }
-//koniec vytvorenie priznaniedmv
+$sql = "SELECT dalinf FROM F".$kli_vxcf."_ucthlasenie_euler";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD sumvmh DECIMAL(10,2) DEFAULT 0 AFTER konx1";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD povins DECIMAL(2,0) DEFAULT 0 AFTER konx1";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD dovnez VARCHAR(80) NOT NULL AFTER konx1";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD upomky DECIMAL(2,0) DEFAULT 0 AFTER konx1";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD dohspl DECIMAL(2,0) DEFAULT 0 AFTER konx1";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD dalinf TEXT NOT NULL AFTER konx1";
+$vysledek = mysql_query("$sql");
+}
+//koniec vytvorenie 
 
 
 
