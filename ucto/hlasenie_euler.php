@@ -43,8 +43,12 @@ $xml = 1*$_REQUEST['xml'];
 $cislo_ico = 1*$_REQUEST['cislo_ico'];
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=0;
+$rmc=1;
 $rmc1=0;
+
+//.jpg podklad
+$jpg_cesta="../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler";
+$jpg_popis="tlaèivo Hlásenie poh¾adávok po splatnosti Euler Hermes za rok ".$kli_vrok;
 
 //nacitanie zo salda
     if ( $copern == 3155 ) { ?>
@@ -238,7 +242,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD dalinf TEXT NOT NULL AFTER konx1";
 $vysledek = mysql_query("$sql");
 }
-//koniec vytvorenie 
+//koniec vytvorenie
 
 
 
@@ -265,17 +269,34 @@ $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
 if ( $strana == 1 ) {
-
+$fir_pripoisteny="Èýpripoisteny"; //dopyt, potorm zaramova skúšobné údaje
+$fir_zmluva="Èýzmluva";
+$fir_kontakt="Èýkontakt";
+$fir_konemail="Kontakt@email.sk";
+$fir_kontel="034/1234567";
+$fir_konfax="035/7654321";
+$ico_nai="Èýdlžnik";
+$ico_uli="Èýdlžnikadresa 15";
+$ico_psc="00110";
+$ico_mes="Èýdlžnikmesto";
+$ico_stat="Èýdlžnikštát";
 $ico = $fir_riadok->ico;
 $ktos = $fir_riadok->ktos;
 $euid = $fir_riadok->euid;
-$dath = $fir_riadok->dath;
-$dathsk=SkDatum($dath);
+$ico_konemail="DLZNIK@email.sk";
+$ico_kontel="011/1122334";
+$ico_konfax="011/2211334";
+$ico_allsaldo="12346.11";
 
                     }
 
 if ( $strana == 2 ) {
+$dath = $fir_riadok->dath;
+$dathsk=SkDatum($dath);
 
+
+$podpisujuci="Èýpodpisujuci";
+$podpispozicia="Èýpozicia";
 
                     }
 
@@ -285,14 +306,18 @@ $sqlfir = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $cislo_ico";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
-$ico_nai = $fir_riadok->nai;
+$ico_nai = $fir_riadok->nai; //dopyt, nefunguje
 $ico_mes = $fir_riadok->mes;
 $ico_uli = $fir_riadok->uli;
 
-mysql_free_result($fir_vysledok);
 
+
+mysql_free_result($fir_vysledok);
      }
 //koniec nacitania
+
+//6-miestne ico
+$fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 ?>
 <HEAD>
@@ -301,6 +326,8 @@ mysql_free_result($fir_vysledok);
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - Euler</title>
 <style type="text/css">
+
+
 div.sadzby-area {
   position: absolute;
   background-color: #ffff90;
@@ -443,10 +470,7 @@ table.vozidla td img {
   vertical-align: text-bottom;
   cursor: pointer;
 }
-span.text-echo {
-  font-size: 18px;
-  letter-spacing: 13px;
-}
+
 div.input-echo {
   position: absolute;
   font-size: 18px;
@@ -591,10 +615,10 @@ if ( $strana == 4 ) $clas4="active"; if ( $strana == 5 ) $clas5="active";
 $source="../ucto/hlasenie_euler.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0&cislo_ico=".$cislo_ico."";
 ?>
 <div class="navbar">
-<?php if( $strana  < 5 ) { ?>
+<?php if ( $strana  < 5 ) { ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
-<?php                    } ?>
+<?php                     } ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">Odberatelia</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
@@ -603,39 +627,60 @@ $source="../ucto/hlasenie_euler.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 </div>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str1.jpg"
-     alt="tlaèivo Daò z motorových vozidiel pre rok 2015 1.strana" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 1.strana 265kB">
 
+<!-- 1.Vase udaje -->
+<span class="text-echo" style="top:272px; left:256px;"><?php echo $fir_fnaz; ?></span>
+<span class="text-echo" style="top:303px; left:256px;"><?php echo $fir_pripoisteny; ?></span>
+<span class="text-echo" style="top:334px; left:256px;"><?php echo $fir_zmluva; ?></span>
+<span class="text-echo" style="top:365px; left:256px;"><?php echo $fir_kontakt; ?></span>
+<span class="text-echo" style="top:396px; left:256px;"><?php echo $fir_konemail; ?></span>
+<span class="text-echo" style="top:426px; left:256px;"><?php echo $fir_kontel; ?></span>
+<span class="text-echo" style="top:426px; left:635px;"><?php echo $fir_konfax; ?></span>
 
-<span class="text-echo" style="top:293px; left:56px;"><?php echo $fir_fdic;?></span>
+<!-- 2.Udaje o dlznikovi -->
+<span class="text-echo" style="top:577px; left:256px;"><?php echo $ico_nai; ?></span>
+<span class="text-echo" style="top:608px; left:256px;"><?php echo $ico_uli; ?></span>
+<span class="text-echo" style="top:608px; left:635px;"><?php echo $ico_psc; ?></span>
+<span class="text-echo" style="top:639px; left:256px;"><?php echo $ico_mes; ?></span>
+<span class="text-echo" style="top:639px; left:635px;"><?php echo $ico_stat; ?></span>
+<input type="text" name="ico" id="ico" style="width:100px; top:663px; left:250px;"/>
+<input type="text" name="euid" id="euid" style="width:235px; top:663px; left:630px;"/>
+<input type="text" name="ktos" id="ktos" style="width:300px; top:694px; left:250px;"/>
+<span class="text-echo" style="top:732px; left:256px;"><?php echo $ico_konemail; ?></span>
+<span class="text-echo" style="top:764px; left:256px;"><?php echo $ico_kontel; ?></span>
+<span class="text-echo" style="top:764px; left:635px;"><?php echo $ico_konfax; ?></span>
 
-
-
-<!-- Vase udaje = Alchem -->
-<div class="input-echo" style="width:842px; top:589px; left:52px;"><?php echo $fir_fnaz; ?></div>
-<div class="input-echo" style="width:635px; top:702px; left:52px;"><?php echo $fir_fuli; ?></div>
-
-<!-- Udaje o dlznikovi -->
-<input type="text" name="ico" id="ico" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:200px; left:696px;"/>
-<input type="text" name="euid" id="euid" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:232px; left:696px;"/>
-<input type="text" name="ktos" id="ktos" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:274px; left:696px;"/>
-
-<div class="input-echo" style="width:842px; top:889px; left:52px;"><?php echo $ico_fnai; ?></div>
-<div class="input-echo" style="width:635px; top:902px; left:52px;"><?php echo $ico_uli; ?></div>
-<div class="input-echo" style="width:635px; top:1002px; left:52px;"><?php echo $ico_mes; ?></div>
-
+<!-- 3.Neuhradene faktury -->
+<span class="text-echo" style="top:824px; right:86px;"><?php echo $ico_allsaldo; ?></span>
+<span class="text-echo" style="top:894px; left:110px;">viï príloha</span>
+<span class="text-echo" style="top:1194px; right:86px;"><?php echo $spolu_sdph; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str2.jpg"
-     alt="tlaèivo Daò z motorových vozidiel pre rok 2015 2.strana 380kB" class="form-background">
-<span class="text-echo" style="top:75px; left:406px;"><?php echo $fir_fdic;?></span>
+<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 2.strana 265kB">
 
+<!-- 4.Inkaso pohladavok -->
+<input type="text" name="sumvmh" id="sumvmh" onkeyup="CiarkaNaBodku(this);" style="width:142px; top:176px; left:243px;"/>
+<span class="text-echo" style="top:184px; left:565px;">EUR</span>
+<input type="checkbox" name="povins1" value="1" style="top:261px; left:394px;"/> <!-- dopyt, dorobi funkciu na prepínanie -->
+<input type="checkbox" name="povins2" value="1" style="top:261px; left:472px;"/>
 
+<!-- 5.Dalsie informacie -->
+<input type="text" name="dovnez" id="dovnez" style="width:621px; top:360px; left:243px;"/>
+<input type="checkbox" name="upomky" value="1" style="top:407px; left:500px;"/>
+<input type="checkbox" name="dohspl" value="1" style="top:407px; left:661px;"/>
+<textarea name="osobit" id="osobit" style="width:781px; height:230px; top:478px; left:83px;"><?php echo $dalinf; ?></textarea>
+
+<!-- 6.Prehlasenie -->
+<span class="text-echo" style="top:831px; left:248px;"><?php echo $podpisujuci; ?></span>
+<span class="text-echo" style="top:861px; left:248px;"><?php echo $podpispozicia; ?></span>
+<span class="text-echo" style="top:891px; left:248px;"><?php echo $fir_fnaz; ?></span>
+<input type="text" name="dath" id="dath" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:948px; left:666px;"/>
 <?php                                        } ?>
-
-
 
 
 <?php if ( $strana == 5 OR $strana == 9999 ) {
