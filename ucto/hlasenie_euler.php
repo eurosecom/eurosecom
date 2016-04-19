@@ -41,6 +41,7 @@ $zoznamaut=1;
 
 $xml = 1*$_REQUEST['xml'];
 $cislo_ico = 1*$_REQUEST['cislo_ico'];
+$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 
 //ramcek fpdf 1=zap,0=vyp
 $rmc=1;
@@ -72,7 +73,7 @@ $strana=5;
 //uprav 
     if ( $copern == 346 )
     {
-$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
+
 $copern=20;
 $zoznamaut=0;
     }
@@ -137,22 +138,40 @@ if ( $strana == 1 ) {
 $ico = strip_tags($_REQUEST['ico']);
 $ktos = strip_tags($_REQUEST['ktos']);
 $euid = strip_tags($_REQUEST['euid']);
-$dath = strip_tags($_REQUEST['dath']);
-$dathsql=SqlDatum($dath);
-$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 $cislo_ico=$ico;
 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET ".
 " dath='$dathsql', ".
-" ktos='$ktos', euid='$ruid', ico='$ico' ".
+" ktos='$ktos', euid='$euid', ico='$ico' ".
 " WHERE oc = 1 AND cpl = $cislo_cpl ";
-echo $uprtxt;
+//echo $uprtxt;
+
 
                     }
 
 if ( $strana == 2 ) {
 
+$povins1 = strip_tags($_REQUEST['povins1']);
+$povins2 = strip_tags($_REQUEST['povins2']);
+$povins=0;
+if( $povins2 == 1 ) { $povins=1; }
+$sumvmh = strip_tags($_REQUEST['sumvmh']);
+$dovnez = strip_tags($_REQUEST['dovnez']);
+$upomky = strip_tags($_REQUEST['upomky']);
+$dohspl = $_REQUEST['dohspl'];
+$dalinf = $_REQUEST['dalinf'];
+
+$dath = strip_tags($_REQUEST['dath']);
+$dathsql=SqlDatum($dath);
+
+
+$uprtxt = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET ".
+" sumvmh='$sumvmh',  povins='$povins', dovnez='$dovnez', upomky='$upomky', ".
+" dohspl='$dohspl', dalinf='$dalinf', ".
+" dath='$dathsql' ".
+" WHERE oc = 1 AND cpl = $cislo_cpl ";
+//echo $uprtxt;
 
                     }
 
@@ -268,6 +287,8 @@ $sqlfir = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE oc = 1 AND cpl = 
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
+$cislo_ico=$fir_riadok->ico;
+
 if ( $strana == 1 ) {
 $fir_pripoisteny="»˝pripoisteny"; //dopyt, potorm zaramovaù sk˙öobnÈ ˙daje
 $fir_zmluva="»˝zmluva";
@@ -283,9 +304,7 @@ $ico_stat="»˝dlûniköt·t";
 $ico = $fir_riadok->ico;
 $ktos = $fir_riadok->ktos;
 $euid = $fir_riadok->euid;
-$ico_konemail="DLZNIK@email.sk";
-$ico_kontel="011/1122334";
-$ico_konfax="011/2211334";
+
 $ico_allsaldo="12346.11";
 
                     }
@@ -293,6 +312,21 @@ $ico_allsaldo="12346.11";
 if ( $strana == 2 ) {
 $dath = $fir_riadok->dath;
 $dathsk=SkDatum($dath);
+
+$sumvmh = $fir_riadok->sumvmh;
+$povins = $fir_riadok->povins;
+$povins1=1;
+$povins2=0;
+if( $povins == 1 ) { 
+$povins1=0;
+$povins2=1;
+}
+
+$dovnez = $fir_riadok->dovnez;
+$upomky = $fir_riadok->upomky;
+$dohspl = $fir_riadok->dohspl;
+$dalinf = $fir_riadok->dalinf;
+$dath = $fir_riadok->dath;
 
 
 $podpisujuci="»˝podpisujuci";
@@ -306,10 +340,14 @@ $sqlfir = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $cislo_ico";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
-$ico_nai = $fir_riadok->nai; //dopyt, nefunguje
+$ico_nai = $fir_riadok->nai; //dopyt, nefunguje FUNGUJE ALE ico MUSI BYT V CISELNIKU ico
 $ico_mes = $fir_riadok->mes;
 $ico_uli = $fir_riadok->uli;
-
+$ico_psc = $fir_riadok->psc;
+$ico_konemail = $fir_riadok->em1;
+$ico_kontel = $fir_riadok->tel;
+$ico_konfax = $fir_riadok->fax;
+$ico_stat="SR";
 
 
 mysql_free_result($fir_vysledok);
@@ -503,7 +541,12 @@ div.input-echo {
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
 
-
+   document.formv1.sumvmh.value = '<?php echo "$sumvmh";?>';
+<?php if ( $povins1 == 1 ) { ?> document.formv1.povins1.checked = "checked"; <?php } ?>
+<?php if ( $povins2 == 1 ) { ?> document.formv1.povins2.checked = "checked"; <?php } ?>
+   document.formv1.dovnez.value = '<?php echo "$dovnez";?>';
+<?php if ( $upomky == 1 ) { ?> document.formv1.upomky.checked = "checked"; <?php } ?>
+<?php if ( $dohspl == 1 ) { ?> document.formv1.dohspl.checked = "checked"; <?php } ?>
 
 
 <?php                                        } ?>
@@ -528,9 +571,14 @@ div.input-echo {
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-  function TlacDMV()
+  function TlacHlasenie()
   {
    window.open('../ucto/hlasenie_euler.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function TlacHlasenieIco( cpl )
+  {
+  var cislo_cpl = cpl;
+   window.open('../ucto/hlasenie_euler.php?cislo_oc=<?php echo $cislo_oc;?>&cislo_cpl=' + cislo_cpl + '&copern=10&drupoh=1&page=1&subor=0&strana=9999', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function NacitajSaldo()
   {
@@ -597,7 +645,7 @@ div.input-echo {
           title="NaËÌtaù ˙daje zo salda" class="btn-form-tool">
      <img src="../obr/ikony/upbox_blue_icon.png" onclick="doCSV();"
           title="Export do CSV" class="btn-form-tool">
-     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV();"
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacHlasenie();"
           title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
     </div>
    </td>
@@ -612,7 +660,7 @@ $clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive"; $cla
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active"; if ( $strana == 3 ) $clas3="active";
 if ( $strana == 4 ) $clas4="active"; if ( $strana == 5 ) $clas5="active";
 
-$source="../ucto/hlasenie_euler.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0&cislo_ico=".$cislo_ico."";
+$source="../ucto/hlasenie_euler.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0&cislo_ico=".$cislo_ico."&cislo_cpl=".$cislo_cpl."";
 ?>
 <div class="navbar">
 <?php if ( $strana  < 5 ) { ?>
@@ -673,7 +721,7 @@ $source="../ucto/hlasenie_euler.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 <input type="text" name="dovnez" id="dovnez" style="width:621px; top:360px; left:243px;"/>
 <input type="checkbox" name="upomky" value="1" style="top:407px; left:500px;"/>
 <input type="checkbox" name="dohspl" value="1" style="top:407px; left:661px;"/>
-<textarea name="osobit" id="osobit" style="width:781px; height:230px; top:478px; left:83px;"><?php echo $dalinf; ?></textarea>
+<textarea name="dalinf" id="dalinf" style="width:781px; height:230px; top:478px; left:83px;"><?php echo $dalinf; ?></textarea>
 
 <!-- 6.Prehlasenie -->
 <span class="text-echo" style="top:831px; left:248px;"><?php echo $podpisujuci; ?></span>
@@ -743,7 +791,7 @@ mysql_free_result($fir_vysledok);
  <td align="center"></td>
  <td align="center"> </td>
  <td align="center">
-  <img src="../obr/ikony/list_blue_icon.png" onclick="VytvorOznamZanik(<?php echo $rsluz->cpl; ?>);"
+  <img src="../obr/ikony/list_blue_icon.png" onclick="TlacHlasenieIco(<?php echo $rsluz->cpl; ?>);"
        title="Vytvoriù PDF a CSV hl·senie pre I»O <?php echo $rsluz->ico; ?>">
     <?php echo SkDatum($rsluz->dath); ?>
  </td>
@@ -811,9 +859,7 @@ $pdf->AddFont('arial','','arial.php');
 
 //vytlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler".
-" LEFT JOIN F$kli_vxcf"."_ico".
-" ON F$kli_vxcf"."_ucthlasenie_euler.ico=F$kli_vxcf"."_ico.ico".
-" WHERE F$kli_vxcf"."_ucthlasenie_euler.oc = 1 ORDER BY F$kli_vxcf"."_ucthlasenie_euler.ico ";
+" WHERE oc = 1 AND cpl = $cislo_cpl ORDER BY ico ";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -825,6 +871,21 @@ $j=0; //zaciatok strany ak by som chcel strankovat
   if (@$zaznam=mysql_data_seek($sql,$i))
 {
 $hlavicka=mysql_fetch_object($sql);
+
+
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $hlavicka->ico ";
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
+$ico_nai = $fir_riadok->nai;
+$ico_mes = $fir_riadok->mes;
+$ico_uli = $fir_riadok->uli;
+$ico_psc = $fir_riadok->psc;
+$ico_konemail = $fir_riadok->em1;
+$ico_kontel = $fir_riadok->tel;
+$ico_konfax = $fir_riadok->fax;
+$ico_stat="SR";
+
 
 
 if ( $strana == 1 OR $strana == 9999 ) {
@@ -859,6 +920,13 @@ $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t05","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t07","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t08","$rmc",0,"C");
 $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(5,7,"$t09","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t10","$rmc",1,"C");
 
+
+$pdf->Cell(40,7,"$hlavicka->ktos","$rmc",1,"C");
+$pdf->Cell(40,7,"$ico_nai","$rmc",1,"C");
+$pdf->Cell(40,7,"$ico_mes","$rmc",1,"C");
+
+
+
                                        } //koniec 1.strany
 
 if ( $strana == 2 OR $strana == 9999 ) {
@@ -866,9 +934,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists ('../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str1.jpg') )
+if ( File_Exists ('../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str2.jpg') )
 {
-$pdf->Image('../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str1.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str2.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
