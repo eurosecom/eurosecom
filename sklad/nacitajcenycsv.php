@@ -127,8 +127,13 @@ if( $polozka == 1 )
   $x_min = $pole[2];
   $x_dph = $pole[3];
 
+  $x_idod = 1*$pole[4];
+  $x_nat4 = 1*$pole[5];
+  $x_pdod= $pole[6];
+
 $x_ced=str_replace(",",".",$x_ced);
 $x_min=str_replace(",",".",$x_min);
+$x_pdod=str_replace(",",".",$x_pdod);
 
 $sqlttt = "UPDATE F$kli_vxcf"."_sklcis SET ced='$x_ced' WHERE cis = $x_cis ";
 if( $x_cis > 0 ) { $ulozene = mysql_query("$sqlttt"); }
@@ -150,7 +155,10 @@ if( $x_cis > 0 ) { $ulozene = mysql_query("$sqlttt"); }
 //if( $x_cis > 0 ) { $ulozene = mysql_query("$sqlttt"); }
 
 $sqlttt = "UPDATE F$kli_vxcf"."_sklcisudaje SET cxc01='$x_min' WHERE xcis = $x_cis ";
-if( $x_cis > 0 ) { $ulozene = mysql_query("$sqlttt"); }
+if( $x_cis > 0 AND $fir_fico != 46614478 ) { $ulozene = mysql_query("$sqlttt"); }
+
+$sqlttt = "UPDATE F$kli_vxcf"."_sklcisudaje SET cxc01='$x_min', idod='$x_idod', xnat4='$x_nat4', pdod='$x_pdod' WHERE xcis = $x_cis ";
+if( $fir_fico == 46614478 ) { $ulozene = mysql_query("$sqlttt"); }
 
           }
 //koniec polozka
