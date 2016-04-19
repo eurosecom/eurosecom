@@ -135,6 +135,10 @@ $zoznamaut=1;
 if ( $copern == 23 )
      {
 if ( $strana == 1 ) {
+$mnin1 = strip_tags($_REQUEST['mnin1']);
+$mnin2 = strip_tags($_REQUEST['mnin2']);
+$mnin=0;
+if( $mnin1 == 1 ) { $mnin=1; }
 $ico = strip_tags($_REQUEST['ico']);
 $ktos = strip_tags($_REQUEST['ktos']);
 $euid = strip_tags($_REQUEST['euid']);
@@ -142,7 +146,7 @@ $cislo_ico=$ico;
 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET ".
-" dath='$dathsql', ".
+" mnin='$mnin', ".
 " ktos='$ktos', euid='$euid', ico='$ico' ".
 " WHERE oc = 1 AND cpl = $cislo_cpl ";
 //echo $uprtxt;
@@ -155,7 +159,7 @@ if ( $strana == 2 ) {
 $povins1 = strip_tags($_REQUEST['povins1']);
 $povins2 = strip_tags($_REQUEST['povins2']);
 $povins=0;
-if( $povins2 == 1 ) { $povins=1; }
+if( $povins1 == 1 ) { $povins=1; }
 $sumvmh = strip_tags($_REQUEST['sumvmh']);
 $dovnez = strip_tags($_REQUEST['dovnez']);
 $upomky = strip_tags($_REQUEST['upomky']);
@@ -244,7 +248,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD dath DATE NOT NULL AFTER ico";
 $vysledek = mysql_query("$sql");
 }
-$sql = "SELECT dalinf FROM F".$kli_vxcf."_ucthlasenie_euler";
+$sql = "SELECT mnin FROM F".$kli_vxcf."_ucthlasenie_euler";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -259,6 +263,8 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD dohspl DECIMAL(2,0) DEFAULT 0 AFTER konx1";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD dalinf TEXT NOT NULL AFTER konx1";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD mnin DECIMAL(2,0) DEFAULT 0 AFTER konx1";
 $vysledek = mysql_query("$sql");
 }
 //koniec vytvorenie
@@ -299,6 +305,12 @@ if ( $strana == 1 ) {
 $ico = $fir_riadok->ico;
 $ktos = $fir_riadok->ktos;
 $euid = $fir_riadok->euid;
+$mnin1=1;
+$mnin2=0;
+if ( $mnin == 0 ) {
+$mnin1=0;
+$mnin2=1;
+                    }
 
 //$ico_allsaldo="12346.11";
                     }
@@ -311,7 +323,7 @@ $sumvmh = $fir_riadok->sumvmh;
 $povins = $fir_riadok->povins;
 $povins1=1;
 $povins2=0;
-if ( $povins == 1 ) {
+if ( $povins == 0 ) {
 $povins1=0;
 $povins2=1;
                     }
@@ -530,6 +542,8 @@ div.input-echo {
    document.formv1.ico.value = '<?php echo "$ico";?>';
    document.formv1.euid.value = '<?php echo "$euid";?>';
    document.formv1.ktos.value = '<?php echo "$ktos";?>';
+<?php if ( $mnin1 == 1 ) { ?> document.formv1.mnin1.checked = "checked"; <?php } ?>
+<?php if ( $mnin2 == 1 ) { ?> document.formv1.mnin2.checked = "checked"; <?php } ?>
 
 <?php                                        } ?>
 
@@ -1008,8 +1022,8 @@ $pdf->Cell(44,5," ","$rmc1",0,"C");$pdf->Cell(32.5,6,"$text1","$rmc",0,"R");
 $pdf->Cell(23,5," ","$rmc1",0,"C");$pdf->Cell(38,6,"$text2","$rmc",1,"C");
 //Poverenie
 //dopyt, nefunguje
-$text1="x"; if ( $hlavicka->povins1 == 0 ) $text1=" ";
-$text2="x"; if ( $hlavicka->povins2 == 0 ) $text2=" ";
+$text1="x"; $text2=" ";
+if ( $hlavicka->povins == 0 ) { $text1=" "; $text2="x"; }
 $pdf->Cell(195,12," ","$rmc1",1,"L");
 $pdf->Cell(76.5,5," ","$rmc1",0,"C");$pdf->Cell(5.5,6,"$text1","$rmc",0,"C");
 $pdf->Cell(12,5," ","$rmc1",0,"C");$pdf->Cell(5.5,6,"$text2","$rmc",1,"C");
