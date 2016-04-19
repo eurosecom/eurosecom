@@ -1383,10 +1383,12 @@ $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin204pod SET ".
 "r55=r56+r57, ".
 "r58=r59+r60, ".
 "r61=r62+r63, ".
+"r70=r71+r72, ".
 
 "rm55=rm56+rm57, ".
 "rm58=rm59+rm60, ".
-"rm61=rm62+rm63  ".
+"rm61=rm62+rm63, ".
+"rm70=rm71+rm72  ".
 " WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
