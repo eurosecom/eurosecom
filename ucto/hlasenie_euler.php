@@ -290,23 +290,17 @@ $fir_riadok=mysql_fetch_object($fir_vysledok);
 $cislo_ico=$fir_riadok->ico;
 
 if ( $strana == 1 ) {
-$fir_pripoisteny="Èýpripoisteny"; //dopyt, potorm zaramova skúšobné údaje
-$fir_zmluva="Èýzmluva";
-$fir_kontakt="Èýkontakt";
-$fir_konemail="Kontakt@email.sk";
-$fir_kontel="034/1234567";
-$fir_konfax="035/7654321";
-$ico_nai="Èýdlžnik";
-$ico_uli="Èýdlžnikadresa 15";
-$ico_psc="00110";
-$ico_mes="Èýdlžnikmesto";
-$ico_stat="Èýdlžnikštát";
+//$fir_pripoisteny="Èýpripoisteny";
+//$fir_zmluva="Èýzmluva";
+//$fir_kontakt="Èýkontakt";
+//$fir_konemail="Kontakt@email.sk";
+//$fir_kontel="034/1234567";
+//$fir_konfax="035/7654321";
 $ico = $fir_riadok->ico;
 $ktos = $fir_riadok->ktos;
 $euid = $fir_riadok->euid;
 
-$ico_allsaldo="12346.11";
-
+//$ico_allsaldo="12346.11";
                     }
 
 if ( $strana == 2 ) {
@@ -317,10 +311,10 @@ $sumvmh = $fir_riadok->sumvmh;
 $povins = $fir_riadok->povins;
 $povins1=1;
 $povins2=0;
-if( $povins == 1 ) { 
+if ( $povins == 1 ) {
 $povins1=0;
 $povins2=1;
-}
+                    }
 
 $dovnez = $fir_riadok->dovnez;
 $upomky = $fir_riadok->upomky;
@@ -329,8 +323,8 @@ $dalinf = $fir_riadok->dalinf;
 $dath = $fir_riadok->dath;
 
 
-$podpisujuci="Èýpodpisujuci";
-$podpispozicia="Èýpozicia";
+//$podpisujuci="Èýpodpisujuci";
+//$podpispozicia="Èýpozicia";
 
                     }
 
@@ -340,7 +334,7 @@ $sqlfir = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $cislo_ico";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
-$ico_nai = $fir_riadok->nai; //dopyt, nefunguje FUNGUJE ALE ico MUSI BYT V CISELNIKU ico
+$ico_nai = $fir_riadok->nai;
 $ico_mes = $fir_riadok->mes;
 $ico_uli = $fir_riadok->uli;
 $ico_psc = $fir_riadok->psc;
@@ -547,7 +541,7 @@ div.input-echo {
    document.formv1.dovnez.value = '<?php echo "$dovnez";?>';
 <?php if ( $upomky == 1 ) { ?> document.formv1.upomky.checked = "checked"; <?php } ?>
 <?php if ( $dohspl == 1 ) { ?> document.formv1.dohspl.checked = "checked"; <?php } ?>
-
+   document.formv1.dath.value = '<?php echo "$dathsk";?>';
 
 <?php                                        } ?>
 
@@ -872,7 +866,6 @@ $j=0; //zaciatok strany ak by som chcel strankovat
 {
 $hlavicka=mysql_fetch_object($sql);
 
-
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $hlavicka->ico ";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
@@ -886,89 +879,188 @@ $ico_kontel = $fir_riadok->tel;
 $ico_konfax = $fir_riadok->fax;
 $ico_stat="SR";
 
-
-
 if ( $strana == 1 OR $strana == 9999 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
-$pdf->SetLeftMargin(8);
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-
-if ( File_Exists('../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str1.jpg') )
+if ( File_Exists($jpg_cesta.'_str1.jpg') )
 {
-$pdf->Image('../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str1.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
-//dic 
-$pdf->Cell(195,20," ","$rmc1",1,"L");
-$textxx="0123456789";
-$text=$hlavicka->ico;
-$t01=substr($text,0,1);
-$t02=substr($text,1,1);
-$t03=substr($text,2,1);
-$t04=substr($text,3,1);
-$t05=substr($text,4,1);
-$t06=substr($text,5,1);
-$t07=substr($text,6,1);
-$t08=substr($text,7,1);
-$t09=substr($text,8,1);
-$t10=substr($text,9,1);
-$pdf->Cell(81,7," ","$rmc1",0,"R");$pdf->Cell(4,7,"$t01","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t02","$rmc",0,"C");
-$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t03","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t04","$rmc",0,"C");
-$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t05","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t06","$rmc",0,"C");
-$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t07","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t08","$rmc",0,"C");
-$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(5,7,"$t09","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t10","$rmc",1,"C");
+//1.VASE UDAJE
+//Poisteny
+$text=$fir_fnaz;
+$textx="0123456789abcdefghijklmnoprstuv";
+$pdf->Cell(195,45.5," ","$rmc1",1,"L");
+$pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(137,6,"$text","$rmc",1,"L");
+//Pripoisteny
+$text="";
+$textx="0123456789abcdefghijklmnoprstuv";
+$pdf->Cell(195,1," ","$rmc1",1,"L");
+$pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(137,6,"$text","$rmc",1,"L");
+//Poistna zmluva
+$text="";
+$textx="0123456789abcdefghijklmnoprstuv";
+$pdf->Cell(195,1," ","$rmc1",1,"L");
+$pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(137,6,"$text","$rmc",1,"L");
+//Kontaktna osoba
+$text="";
+$textx="0123456789abcdefghijklmnoprstuv";
+$pdf->Cell(195,1," ","$rmc1",1,"L");
+$pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(137,6,"$text","$rmc",1,"L");
+//Email
+$text="";
+$textx="0123456789abcdefghijklmnoprstuv";
+$pdf->Cell(195,1," ","$rmc1",1,"L");
+$pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(137,6,"$text","$rmc",1,"L");
+//Telefon a Fax
+$text1="";
+$text2="";
+$textx="0123456789abcdefghijklmnoprstuv";
+$pdf->Cell(195,1," ","$rmc1",1,"L");
+$pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text1","$rmc",0,"L");
+$pdf->Cell(31,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text2","$rmc",1,"L");
+//Mandatorne inkaso
+$text="";
+$textx="x";
+$pdf->Cell(195,4," ","$rmc1",1,"L");
+$pdf->Cell(75,5," ","$rmc1",0,"C");$pdf->Cell(5.5,6,"$text","$rmc",0,"C");
+$pdf->Cell(12,5," ","$rmc1",0,"C");$pdf->Cell(6,6,"$text","$rmc",1,"C");
 
+//2.DLZNIK
+//Dlznik
+$text=$ico_nai;
+$pdf->Cell(195,18.5," ","$rmc1",1,"L");
+$pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(137,6,"$text","$rmc",1,"L");
+//Adresa a PSC
+$text1=$ico_uli;
+$text2=$ico_psc;
+$pdf->Cell(195,1," ","$rmc1",1,"L");
+$pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text1","$rmc",0,"L");
+$pdf->Cell(31,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text2","$rmc",1,"L");
+//Mesto a Krajina
+$text1=$ico_mes;
+$text2=$ico_stat;
+$pdf->Cell(195,1," ","$rmc1",1,"L");
+$pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text1","$rmc",0,"L");
+$pdf->Cell(31,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text2","$rmc",1,"L");
+//ICO a Euler ID
+$text1=$hlavicka->ico;
+$text2=$hlavicka->euid;
+$pdf->Cell(195,1," ","$rmc1",1,"L");
+$pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text1","$rmc",0,"L");
+$pdf->Cell(31,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text2","$rmc",1,"L");
+//Kontaktna osoba
+$text=$hlavicka->ktos;
+$pdf->Cell(195,1.5," ","$rmc1",1,"L");
+$pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(137,6,"$text","$rmc",1,"L");
+//Email
+$text=$ico_konemail;
+$pdf->Cell(195,1," ","$rmc1",1,"L");
+$pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(137,6,"$text","$rmc",1,"L");
+//Telefon a Fax
+$text1=$ico_kontel;
+$text2=$ico_konfax;
+$text="";
+$pdf->Cell(195,1," ","$rmc1",1,"L");
+$pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text1","$rmc",0,"L");
+$pdf->Cell(31,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text2","$rmc",1,"L");
 
-$pdf->Cell(40,7,"$hlavicka->ktos","$rmc",1,"C");
-$pdf->Cell(40,7,"$ico_nai","$rmc",1,"C");
-$pdf->Cell(40,7,"$ico_mes","$rmc",1,"C");
-
-
-
+//3.NEUHRADENE
+//Celkove saldo
+$text="";
+$textx="0123456789";
+$pdf->Cell(195,8," ","$rmc1",1,"L");
+$pdf->Cell(148.5,5," ","$rmc1",0,"C");$pdf->Cell(34,6,"$text","$rmc",1,"R");
+//Cislo faktury
+$text="viï príloha";
+$pdf->Cell(195,10," ","$rmc1",1,"L");
+$pdf->Cell(8.5,5," ","$rmc1",0,"C");$pdf->Cell(34,6,"$text","$rmc",1,"C");
+//Spolu bez/s dph
+$text="";
+$textx="0123456789";
+$pdf->SetY(266);
+$pdf->Cell(113.5,5," ","$rmc1",0,"C");$pdf->Cell(34,6,"$text","$rmc",0,"R");
+$pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(34,6,"$text","$rmc",1,"R");
                                        } //koniec 1.strany
 
 if ( $strana == 2 OR $strana == 9999 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',10);
-$pdf->SetLeftMargin(8);
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists ('../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str2.jpg') )
+if ( File_Exists($jpg_cesta.'_str2.jpg') )
 {
-$pdf->Image('../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler_str2.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
-//dic horne
-$pdf->Cell(195,20," ","$rmc1",1,"L");
-$textxx="0123456789";
-$text=$hlavicka->ico;
-$t01=substr($text,0,1);
-$t02=substr($text,1,1);
-$t03=substr($text,2,1);
-$t04=substr($text,3,1);
-$t05=substr($text,4,1);
-$t06=substr($text,5,1);
-$t07=substr($text,6,1);
-$t08=substr($text,7,1);
-$t09=substr($text,8,1);
-$t10=substr($text,9,1);
-$pdf->Cell(81,7," ","$rmc1",0,"R");$pdf->Cell(4,7,"$t01","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t02","$rmc",0,"C");
-$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t03","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t04","$rmc",0,"C");
-$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t05","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t06","$rmc",0,"C");
-$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t07","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t08","$rmc",0,"C");
-$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(5,7,"$t09","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t10","$rmc",1,"C");
+//4.INKASO
+//Suma a Mena
+$text1=$hlavicka->sumvmh;
+$text2="EUR";
+$textx="0123456789";
+$pdf->Cell(195,25," ","$rmc1",1,"L");
+$pdf->Cell(44,5," ","$rmc1",0,"C");$pdf->Cell(32.5,6,"$text1","$rmc",0,"R");
+$pdf->Cell(23,5," ","$rmc1",0,"C");$pdf->Cell(38,6,"$text2","$rmc",1,"C");
+//Poverenie
+//dopyt, nefunguje
+$text1="x"; if ( $hlavicka->povins1 == 0 ) $text1=" ";
+$text2="x"; if ( $hlavicka->povins2 == 0 ) $text2=" ";
+$pdf->Cell(195,12," ","$rmc1",1,"L");
+$pdf->Cell(76.5,5," ","$rmc1",0,"C");$pdf->Cell(5.5,6,"$text1","$rmc",0,"C");
+$pdf->Cell(12,5," ","$rmc1",0,"C");$pdf->Cell(5.5,6,"$text2","$rmc",1,"C");
+
+//5.DALSIE INFO
+//Dovod
+$text=$hlavicka->dovnez;
+$pdf->Cell(195,18," ","$rmc1",1,"L");
+$pdf->Cell(44,5," ","$rmc1",0,"C");$pdf->Cell(138,6,"$text","$rmc",1,"L");
+//Opatrenia
+$text1="x"; if ( $hlavicka->upomky == 0 ) $text1=" ";
+$text2="x"; if ( $hlavicka->dohspl == 0 ) $text2=" ";
+$pdf->Cell(195,4," ","$rmc1",1,"L");
+$pdf->Cell(100,5," ","$rmc1",0,"C");$pdf->Cell(5.5,5,"$text1","$rmc",0,"C");
+$pdf->Cell(30,5," ","$rmc1",0,"C");$pdf->Cell(6,5,"$text2","$rmc",1,"C");
+//Dalsie
+$pdf->Cell(190,12," ","$rmc1",1,"L");
+$pole = explode("\r\n", $hlavicka->dalinf); //dopyt, skontrolova
+$ipole=1;
+foreach( $pole as $hodnota ) {
+$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(174,7,"$hodnota","$rmc",1,"L");
+$ipole=$ipole+1;
+                             }
+
+//6.PREHLASENIE
+//Podpisujuci
+$text="";
+$textx="0123456789abcdefghijklmnoprstuv";
+$pdf->SetY(183);
+$pdf->Cell(44,5," ","$rmc1",0,"C");$pdf->Cell(138,6,"$text","$rmc",1,"L");
+//Pozicia
+$text="";
+$textx="0123456789abcdefghijklmnoprstuv";
+$pdf->Cell(195,1," ","$rmc1",1,"L");
+$pdf->Cell(44,5," ","$rmc1",0,"C");$pdf->Cell(138,6,"$text","$rmc",1,"L");
+//Pozicia
+$text=$fir_fnaz;
+$textx="0123456789abcdefghijklmnoprstuv";
+$pdf->Cell(195,1," ","$rmc1",1,"L");
+$pdf->Cell(44,5," ","$rmc1",0,"C");$pdf->Cell(138,6,"$text","$rmc",1,"L");
+//Datum
+$text=SkDatum($hlavicka->dath);
+//if ( $text == '00.00.0000' ) { $text=" " }
+$pdf->Cell(195,8.5," ","$rmc1",1,"L");
+$pdf->Cell(137.5,5," ","$rmc1",0,"C");$pdf->Cell(40,6,"$text","$rmc",1,"C");
 
                                        } //koniec 2.strany
-
-
 }
 $i = $i + 1;
   }
 $pdf->Output("$outfilex");
-
-
 ?>
 
 <?php if ( $xml == 0 ) { ?>
@@ -994,8 +1086,7 @@ $hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),
  }
 
 $outfilex="../tmp/euler_".$kli_uzid."_".$hhmmss.".csv";
-if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
-
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
 
 $soubor = fopen("$outfilex", "a+");
 
@@ -1008,21 +1099,16 @@ $pol = mysql_num_rows($sql);
 $i=0;
   while ($i <= $pol )
   {
-
-
   if (@$zaznam=mysql_data_seek($sql,$i))
 {
 $hlavicka=mysql_fetch_object($sql);
 
 $dob_sk=SkDatum($hlavicka->dob);
 
-
-if( $i == 0 )
+if ( $i == 0 )
      {
-  $text = "ico".";"."cislo_faktury".";"."vystavena".";"."splatna".";"."bez_dph".";"."s_dph".";"."\r\n"; 
-
-  fwrite($soubor, $text);
-
+$text = "ico".";"."cislo_faktury".";"."vystavena".";"."splatna".";"."bez_dph".";"."s_dph".";"."\r\n";
+fwrite($soubor, $text);
      }
 
 $cen=$hlavicka->cen; $ecen=str_replace(".",",",$cen); 
