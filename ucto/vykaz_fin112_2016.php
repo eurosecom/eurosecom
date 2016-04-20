@@ -839,6 +839,40 @@ img.btn-cancel {
 img.btn-cancel:hover {
   opacity: 1;
 }
+span:after, a:before, a:after {
+  display: inline-block;
+  content: '';
+  background-repeat: no-repeat;
+}
+a.btn-down-x26 { /* tlacidlo nacitaj min.rok */
+  display: block;
+  line-height: 26px;
+  padding: 0 9px 0 7px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #39f;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  position: relative;
+  top: -7px;
+  -moz-opacity: 0.7;
+  -khtml-opacity: 0.7;
+  opacity: 0.7;
+}
+a.btn-down-x26:before {
+  background-image: url(../obr/ikony/download6_white_x16.png);
+  width: 16px;
+  height: 16px;
+  vertical-align: -4px;
+  margin-right: 3px;
+}
+a.btn-down-x26:hover {
+  -moz-opacity: 1;
+  -khtml-opacity: 1;
+  opacity: 1;
+}
 </style>
 <script type="text/javascript">
 <?php
@@ -1182,8 +1216,8 @@ $source="vykaz_fin112_2016.php";
 <?php if ( $strana == 2 ) { ?>
 <div class="form-background-wide">
 <div class="form-content-wide">
- <h2 class="form-header">Èas I. - <strong>Príjmy</strong></h2>
-
+ <h2 class="form-header toleft">Èas I. - <strong>Príjmy</strong></h2>
+ <a href="" title="Naèíta rozpoèet z minulého roka" class="toright btn-down-x26">Rozpoèet minulı rok</a>
 <div id="FixneMenu">
 <table class="table-heading">
 <tr>
@@ -1304,8 +1338,8 @@ if ( $uhrn4 == '' ) { $uhrn4=0; }
 <?php if ( $strana == 3 ) { ?>
 <div class="form-background-wide">
 <div class="form-content-wide">
- <h2 class="form-header">Èas I. - <strong>Vıdavky</strong></h2>
-
+ <h2 class="toleft form-header">Èas I. - <strong>Vıdavky</strong></h2>
+ <a href="" title="Naèíta rozpoèet z minulého roka" class="toright btn-down-x26">Rozpoèet minulı rok</a>
 <div id="FixneMenu">
 <table class="table-heading">
 <tr>
