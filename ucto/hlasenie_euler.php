@@ -44,7 +44,7 @@ $cislo_ico = 1*$_REQUEST['cislo_ico'];
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=1;
+$rmc=0;
 $rmc1=0;
 
 //.jpg podklad
@@ -54,7 +54,7 @@ $jpg_popis="tlaËivo Hl·senie pohæad·vok po splatnosti Euler Hermes za rok ".$kli
 //nacitanie zo salda
     if ( $copern == 3155 ) { ?>
 <script type="text/javascript">
-if( !confirm ("Chcete naËÌtaù ˙daje zo saldokonta ? ") )
+if( !confirm ("Chcete naËÌtaù ˙daje zo saldokonta ?") )
          { window.close() }
 else
          { location.href='hlasenie_euler.php?copern=3156&page=1&drupoh=1&cislo_oc=<?php echo $cislo_oc; ?>' }
@@ -138,7 +138,7 @@ if ( $strana == 1 ) {
 $mnin1 = strip_tags($_REQUEST['mnin1']);
 $mnin2 = strip_tags($_REQUEST['mnin2']);
 $mnin=0;
-if( $mnin1 == 1 ) { $mnin=1; }
+if ( $mnin1 == 1 ) { $mnin=1; }
 $ico = strip_tags($_REQUEST['ico']);
 $ktos = strip_tags($_REQUEST['ktos']);
 $euid = strip_tags($_REQUEST['euid']);
@@ -592,23 +592,6 @@ div.input-echo {
   {
    window.open('../ucto/hlasenie_euler.php?cislo_oc=<?php echo $cislo_oc;?>&copern=3155&drupoh=1&page=1', '_self', 'width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes')
   }
-  function PoucVyplnenie()
-  {
-   window.open('../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function Sadzby2015()
-  {
-   window.open('../dokumenty/dan_z_prijmov2015/dpdmv2015/dmv_v15_sadzby.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
-  }
-
-  function cezucet()
-  {
-   document.formv1.post.checked = false;
-  }
-  function cezpostu()
-  {
-   document.formv1.ucet.checked = false;
-  }
 
 
   function UpravVzd(cpl, ico)
@@ -631,7 +614,6 @@ div.input-echo {
    window.open('../ucto/hlasenie_euler.php?copern=11&page=1&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-
 </script>
 </HEAD>
 <BODY id="white" onload="ObnovUI();">
@@ -694,6 +676,8 @@ $source="../ucto/hlasenie_euler.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 <span class="text-echo" style="top:396px; left:256px;"><?php echo $fir_konemail; ?></span>
 <span class="text-echo" style="top:426px; left:256px;"><?php echo $fir_kontel; ?></span>
 <span class="text-echo" style="top:426px; left:635px;"><?php echo $fir_konfax; ?></span>
+<input type="checkbox" name="mnin1" value="1" style="top:468px; left:387px;"/> <!-- dopyt, dorobiù funkciu na prepÌnanie -->
+<input type="checkbox" name="mnin2" value="1" style="top:468px; left:467px;"/>
 
 <!-- 2.Udaje o dlznikovi -->
 <span class="text-echo" style="top:577px; left:256px;"><?php echo $ico_nai; ?></span>
@@ -938,11 +922,12 @@ $pdf->Cell(195,1," ","$rmc1",1,"L");
 $pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text1","$rmc",0,"L");
 $pdf->Cell(31,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text2","$rmc",1,"L");
 //Mandatorne inkaso
-$text="";
-$textx="x";
+$text1="x"; $text2="x";
+if ( $hlavicka->mnin1 == 0 ) { $text1=" "; }
+if ( $hlavicka->mnin2 == 0 ) { $text2=" "; }
 $pdf->Cell(195,4," ","$rmc1",1,"L");
-$pdf->Cell(75,5," ","$rmc1",0,"C");$pdf->Cell(5.5,6,"$text","$rmc",0,"C");
-$pdf->Cell(12,5," ","$rmc1",0,"C");$pdf->Cell(6,6,"$text","$rmc",1,"C");
+$pdf->Cell(75,5," ","$rmc1",0,"C");$pdf->Cell(5.5,6,"$text1","$rmc",0,"C");
+$pdf->Cell(12,5," ","$rmc1",0,"C");$pdf->Cell(6,6,"$text2","$rmc",1,"C");
 
 //2.DLZNIK
 //Dlznik
@@ -1021,7 +1006,6 @@ $pdf->Cell(195,25," ","$rmc1",1,"L");
 $pdf->Cell(44,5," ","$rmc1",0,"C");$pdf->Cell(32.5,6,"$text1","$rmc",0,"R");
 $pdf->Cell(23,5," ","$rmc1",0,"C");$pdf->Cell(38,6,"$text2","$rmc",1,"C");
 //Poverenie
-//dopyt, nefunguje
 $text1="x"; $text2=" ";
 if ( $hlavicka->povins == 0 ) { $text1=" "; $text2="x"; }
 $pdf->Cell(195,12," ","$rmc1",1,"L");
