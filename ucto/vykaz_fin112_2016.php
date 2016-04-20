@@ -56,6 +56,77 @@ if ( $cislo_oc == 11 ) { $datum="30.11.".$kli_vrok; $mesiac="11"; $kli_vume="11.
 if ( $cislo_oc == 12 ) { $datum="31.12.".$kli_vrok; $mesiac="12"; $kli_vume="12.".$kli_vrok; }
 
 
+
+//nacitanie minuleho roka do DMV
+    if ( $copern == 3155 ) { ?>
+<script type="text/javascript">
+if( !confirm ("Chcete naËÌtaù rozpoËet z firmy minulÈho roka ? ") )
+         { window.close() }
+else
+         { location.href='vykaz_fin112_2016.php?copern=3156&page=1&drupoh=1&cislo_oc=<?php echo $cislo_oc; ?>' }
+</script>
+<?php                      }
+
+    if ( $copern == 3156 )
+    {
+$h_ycf=0;
+if ( $fir_allx11 > 0 ) $h_ycf=1*$fir_allx11;
+
+$databaza="";
+$dtb2 = include("../cis/oddel_dtbz1.php");
+
+
+$uprtxt = "DROP TABLE F$kli_vxcf"."_uctvykaz_fin104x".$kli_uzid." ";
+$upravene = mysql_query("$uprtxt");
+$uprtxt = "CREATE TABLE F$kli_vxcf"."_uctvykaz_fin104x".$kli_uzid." SELECT * FROM ".$databaza."F$h_ycf"."_uctvykaz_fin104 WHERE druh < 3 ";
+$upravene = mysql_query("$uprtxt");
+
+
+$uprtxt = "DELETE FROM F$kli_vxcf"."_uctvykaz_fin104 ";
+$upravene = mysql_query("$uprtxt");
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104x".$kli_uzid." WHERE druh < 3 ORDER BY druh,cpl ";
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+//echo $uprtxt."<br />";
+
+$i=0;
+  while ($i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+$uprtxt = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 ( oc, druh, zdroj, oddiel, polozka, schvaleny, zmeneny, skutocnost ) VALUES ".
+" ( '$hlavicka->oc', '$hlavicka->druh', '$hlavicka->zdroj', '$hlavicka->oddiel', '$hlavicka->polozka', '$hlavicka->schvaleny', ".
+" '$hlavicka->zmeneny', '$hlavicka->skutocnost' ) ";
+$upravene = mysql_query("$uprtxt");
+
+//echo $uprtxt."<br />";
+
+}
+$i=$i+1;
+  }
+
+if( $kli_vrok == 2016 )
+  {
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET oc = 1 ";
+//$upravene = mysql_query("$uprtxt");
+
+
+  }
+
+$uprtxt = "DROP TABLE F$kli_vxcf"."_uctvykaz_fin104x".$kli_uzid." ";
+$upravene = mysql_query("$uprtxt");
+
+$copern=20;
+$strana=2;
+//exit;
+//koniec nacitania rozpoctu minuleho roka 
+    }
+
+
 $vsetkyprepocty=0;
 //nacitaj data
 if ( $copern == 26 )
@@ -462,6 +533,8 @@ exit;
 //exit;
 //koniec kontrola na pritomnost polozky v rozpocte
 
+$sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
 
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobrats'.$kli_uzid;
@@ -1135,6 +1208,12 @@ window.open('fin112nujpoddbf.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&drupo
    window.open('vykaz_fin112_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=316&drupoh=1&page=1&subor=0&strana=<?php echo $strana; ?>&cislo_cpl=' + cpl + '&xx=1',
 '_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
+
+  function CitajMinuly()
+  {
+   window.open('vykaz_fin112_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=3155&drupoh=1&page=1&subor=0&strana=2&xx=1',
+'_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }
 </script>
 </HEAD>
 <BODY onload="ObnovUI();">
@@ -1217,7 +1296,7 @@ $source="vykaz_fin112_2016.php";
 <div class="form-background-wide">
 <div class="form-content-wide">
  <h2 class="form-header toleft">»asù I. - <strong>PrÌjmy</strong></h2>
- <a href="" title="NaËÌtaù rozpoËet z minulÈho roka" class="toright btn-down-x26">RozpoËet minul˝ rok</a>
+ <a href="#" onclick="CitajMinuly();" title="NaËÌtaù rozpoËet z minulÈho roka" class="toright btn-down-x26">RozpoËet minul˝ rok</a>
 <div id="FixneMenu">
 <table class="table-heading">
 <tr>
