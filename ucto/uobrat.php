@@ -56,8 +56,16 @@ $vyb_umek=$h_obdk.".".$kli_vrok;
 $copern=$copern-1;
 }
 
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
-if (File_Exists ("../tmp/uobrat.$kli_uzid.pdf")) { $soubor = unlink("../tmp/uobrat.$kli_uzid.pdf"); }
+ $outfilexdel="../tmp/uobrat_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/uobrat_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -1172,10 +1180,10 @@ if( $typ == 'PDF' )
 $zostxx = include("../cis/zostxx.php");
 //koniec tlac textu na zostavy
 
-$pdf->Output("../tmp/uobrat.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 ?> 
 <script type="text/javascript">
-  var okno = window.open("../tmp/uobrat.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php
 }

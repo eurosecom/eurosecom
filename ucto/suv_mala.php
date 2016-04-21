@@ -39,34 +39,14 @@ $mena1 = $fir_mena1;
 $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
 
-$h_obdp = 1*$_REQUEST['h_obdp'];
-$h_obdk = 1*$_REQUEST['h_obdk'];
-if( $h_obdp == 0 ) $h_obdp=1;
-if( $h_obdk == 0 ) $h_obdk=12;
-
-$mes_obdp=$h_obdp.".".$kli_vrok;
-$mes_obdk=$h_obdk.".".$kli_vrok;
-//zmaz < $obdp len ak je z mesacnych
-
-$obdx = 1*$_REQUEST['obdx'];
-
-if( $alchem == 1 AND $kli_uzid == 17 AND $kli_vxcf == 513 )
-{
-$uprtxt = "UPDATE F513_uctpokuct,F513_uctpopisy SET ".
-" F513_uctpokuct.pop=F513_uctpopisy.pop ".
-" WHERE F513_uctpokuct.dok=F513_uctpopisy.dok AND F513_uctpokuct.ucm=F513_uctpopisy.ucm AND ".
-" F513_uctpokuct.ucd=F513_uctpopisy.ucd AND F513_uctpokuct.hod=F513_uctpopisy.hod AND F513_uctpokuct.pop = '' "; 
-//$upravene = mysql_query("$uprtxt");
-}
-
 $hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
- $outfilexdel="../tmp/vysled_".$kli_uzid."_*.*";
+ $outfilexdel="../tmp/suvaha_".$kli_uzid."_*.*";
  foreach (glob("$outfilexdel") as $filename) {
     unlink($filename);
  }
 
-$outfilex="../tmp/vysled_".$kli_uzid."_".$hhmmss.".pdf";
+$outfilex="../tmp/suvaha_".$kli_uzid."_".$hhmmss.".pdf";
 if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
@@ -100,7 +80,7 @@ $sqlt = <<<prcuobrats
    ucd          VARCHAR(10),
    rdp          INT(2),
    ico          INT(10),
-   fak          INT(10),
+   fak          VARCHAR(10),
    str          INT,
    zak          INT,
    hod          DECIMAL(10,2),
@@ -177,17 +157,14 @@ if( $psys == 8 ) { $uctovanie="uctskl"; }
 //zober mzdy
 if( $psys == 9 ) { $uctovanie="uctmzd"; }
 
-//echo $vyb_ume;
-
 if( $psys <= 6 )
 {
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobrats$kli_uzid"." SELECT".
 " $psys,1,0,ume,dat,F$kli_vxcf"."_$uctovanie.dok,ucm,1,ucd,ucm,ucd,rdp,F$kli_vxcf"."_$uctovanie.ico,F$kli_vxcf"."_$uctovanie.fak,".
-"F$kli_vxcf"."_$uctovanie.str,F$kli_vxcf"."_$uctovanie.zak,sum(F$kli_vxcf"."_$uctovanie.hod),SUM(F$kli_vxcf"."_$uctovanie.hod),".
+"F$kli_vxcf"."_$uctovanie.str,F$kli_vxcf"."_$uctovanie.zak,F$kli_vxcf"."_$uctovanie.hod,F$kli_vxcf"."_$uctovanie.hod,".
 "0,0,F$kli_vxcf"."_$doklad.txp,1,0,0,0,0,0,0,0,0".
 " FROM F$kli_vxcf"."_$uctovanie,F$kli_vxcf"."_$doklad".
-" WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ( ucm > 0 OR ucd > 0 ) AND ume <= $vyb_ume GROUP BY ume,ucm,ucd";
-//echo $dsqlt;
+" WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ( ucm > 0 OR ucd > 0 ) AND ume <= $vyb_ume";
 $dsql = mysql_query("$dsqlt");
 }
 else
@@ -196,32 +173,23 @@ else
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobrats$kli_uzid"." SELECT".
 " $psys,1,0,ume,dat,dok,ucm,1,ucd,ucm,ucd,rdp,ico,fak,".
-"str,zak,SUM(hod),SUM(hod),".
+"str,zak,hod,hod,".
 "0,0,pop,1,0,0,0,0,0,0,0,0".
 " FROM F$kli_vxcf"."_$uctovanie".
-" WHERE ume <= $vyb_ume  GROUP BY ume,ucm,ucd";
+" WHERE ume <= $vyb_ume";
 $dsql = mysql_query("$dsqlt");
 
 }
 $psys=$psys+1;
   }
 
-//exit;
-
-if( $obdx == 1 AND $h_obdp > 1 )
-{
-
-$dsqlt = "DELETE FROM F$kli_vxcf"."_prcuobrats$kli_uzid  WHERE ume < $mes_obdp ";
-$dsql = mysql_query("$dsqlt");
-
-}
 
 
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>Výsledovka</title>
+<title>Súvaha</title>
   <style type="text/css">
 td.hvstup_zlte  { background-color:#ffff90; color:black; font-weight:bold;
                   height:12px; font-size:12px; }
@@ -249,7 +217,7 @@ if( $typ == 'HTML' )
 ?>
 <table class="h2" width="100%" >
 <tr>
-<td>EuroSecom  -  Výsledovka PU</td>
+<td>EuroSecom  -  Súvaha PU</td>
 <td align="right"><span class="login"><?php echo "UME $vyb_ume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
 </table>
@@ -261,9 +229,9 @@ if( $typ == 'HTML' )
 <?php
 //vloz stranu dal
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobrats$kli_uzid"." SELECT".
-" psys,1,0,ume,dat,dok,ucd,1,ucm,ucm,ucd,rdp,ico,fak,str,zak,SUM(hod),0,SUM(hod),0,pop,pox,0,0,0,0,0,0,0,0".
+" psys,1,0,ume,dat,dok,ucd,1,ucm,ucm,ucd,rdp,ico,fak,str,zak,hod,0,hod,0,pop,pox,0,0,0,0,0,0,0,0".
 " FROM F$kli_vxcf"."_prcuobrats$kli_uzid".
-" WHERE ume <= $vyb_ume AND psys > 0 GROUP BY ume,ucm,ucd";
+" WHERE ume <= $vyb_ume AND psys > 0 ";
 " ";
 $dsql = mysql_query("$dsqlt");
 
@@ -285,7 +253,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobratsy$kli_uzid "." SELECT".
 "SUM(pmd),SUM(pdl),SUM(bmd),SUM(bdl),SUM(omd),SUM(odl),SUM(zmd),SUM(zdl)".
 " FROM F$kli_vxcf"."_prcuobrats$kli_uzid".
 " WHERE cpl >= 0 AND ".
-" ( LEFT(uce,1) = 5 OR LEFT(uce,1) = 6 OR LEFT(uce,1) = 8 OR LEFT(uce,1) = 9 ) ".
+" ( LEFT(uce,1) != 5 AND LEFT(uce,1) != 6 AND LEFT(uce,1) != 8 AND LEFT(uce,1) != 9 ) ".
 " GROUP BY uce".
 "";
 //echo $dsqlt;
@@ -298,7 +266,7 @@ $dsql = mysql_query("$dsqlt");
 //sumar za vsetko
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobratsy$kli_uzid "." SELECT".
 " psys,1999,0,ume,dat,dok,0,1,puc,ucm,ucd,rdp,ico,fak,str,zak,SUM(hod),SUM(mdt),SUM(dal),SUM(mdt-dal),pop,1999,".
-"SUM(pmd),SUM(pdl),0,SUM(bdl-bmd),SUM(omd),SUM(odl),0,SUM(zdl-zmd)".
+"SUM(pmd),SUM(pdl),SUM(bmd),SUM(bdl),SUM(omd),SUM(odl),SUM(zmd),SUM(zdl)".
 " FROM F$kli_vxcf"."_prcuobratsy$kli_uzid".
 " WHERE ur1 = 999".
 " GROUP BY pox".
@@ -306,16 +274,6 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobratsy$kli_uzid "." SELECT".
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
-//hosp vysledok pred zdanenim
-$dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobratsy$kli_uzid "." SELECT".
-" psys,1888,0,ume,dat,dok,0,1,puc,ucm,ucd,rdp,ico,fak,str,zak,SUM(hod),SUM(mdt),SUM(dal),SUM(mdt-dal),pop,1888,".
-"SUM(pmd),SUM(pdl),SUM(bmd),SUM(bdl),SUM(omd),SUM(odl),SUM(zmd),SUM(zdl)".
-" FROM F$kli_vxcf"."_prcuobratsy$kli_uzid".
-" WHERE ur1 = 999 AND LEFT(uce,2) != 59 ".
-" GROUP BY pox".
-"";
-//echo $dsqlt;
-$dsql = mysql_query("$dsqlt");
 
 //sumar za naklady 5,8
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobratsy$kli_uzid "." SELECT".
@@ -362,11 +320,6 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid SET zdl=-zmd, zmd=0 WHERE cpl >= 0 AND ur1 = 998 AND zmd < 0 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid SET bmd=bmd-bdl, bdl=0 WHERE cpl >= 0 AND ur1 = 998 ";
-$dsql = mysql_query("$dsqlt");
-
-$dsqlt = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid SET bdl=-bmd, bmd=0 WHERE cpl >= 0 AND ur1 = 998 AND bmd < 0 ";
-$dsql = mysql_query("$dsqlt");
 }
 
 //vloz pre ocislovanie poloziek
@@ -379,172 +332,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobratsx$kli_uzid"." SELECT".
 $dsql = mysql_query("$dsqlt");
 
 //HV zisk
-$dsqlt = "UPDATE F$kli_vxcf"."_prcuobratsx$kli_uzid SET odl=zdl-zmd WHERE cpl >= 0";
+$dsqlt = "UPDATE F$kli_vxcf"."_prcuobratsx$kli_uzid SET odl=zmd-zdl WHERE cpl >= 0";
 $dsql = mysql_query("$dsqlt");
-
-//zapis do statistickej zostavy rocny r101
-$cstat = 1*$_REQUEST['cstat'];
-if( $cstat == 10101 )
-{
-?>
-<script type="text/javascript">
-
-window.open('../ucto/statistika_r101nacitaj.php?copern=1&drupoh=1&page=1&zvysl=1', '_self' )
-
-</script>
-<?php
-exit;
-}
-//koniec zapis do statistickej zostavy rocny r101
-
-//zapis do statistickej TABLE a prepni do stat zostavy modul 82
-$cstat = 1*$_REQUEST['cstat'];
-if( $cstat == 1304 )
-{
-$r01=0; $r02=0; $r03=0; $r04=0; $r05=0; $r06=0; $r07=0; $r08=0; $r09=0; $r10=0; $r99=0; 
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE uro = 998 ";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-if (@$zaznam=mysql_data_seek($sql,0)) { $polozka=mysql_fetch_object($sql); $r01=$polozka->zdl-$polozka->zmd; }
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 601 OR LEFT(uce,3) = 602 OR LEFT(uce,3) = 606 )";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-$i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r02=$r02+$polozka->zdl-$polozka->zmd; }
-$i=$i+1;                   }
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 604 OR LEFT(uce,3) = 607 )";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-$i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r03=$r03+$polozka->zdl-$polozka->zmd; }
-$i=$i+1;                   }
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND LEFT(uce,1) = 5 AND LEFT(uce,2) != 59 ";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-$i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r04=$r04+$polozka->zmd-$polozka->zdl; }
-$i=$i+1;                   }
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND (  LEFT(uce,3) = 501 OR LEFT(uce,3) = 502 OR LEFT(uce,3) = 503 OR LEFT(uce,2) = 51 )";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-$i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r05=$r05+$polozka->zmd-$polozka->zdl; }
-$i=$i+1;                   }
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND (  LEFT(uce,3) = 549 OR LEFT(uce,3) = 582 )";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-$i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r06=$r06+$polozka->zmd-$polozka->zdl; }
-$i=$i+1;                   }
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 504 OR LEFT(uce,3) = 507 )";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-$i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r07=$r07+$polozka->zmd-$polozka->zdl; }
-$i=$i+1;                   }
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND  LEFT(uce,3) = 551 ";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-$i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r08=$r08+$polozka->zmd-$polozka->zdl; }
-$i=$i+1;                   }
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ".
-" ( LEFT(uce,3) = 601 OR LEFT(uce,3) = 602 OR LEFT(uce,3) = 604 OR LEFT(uce,3) = 606 OR LEFT(uce,3) = 607 ".
-" OR LEFT(uce,3) = 504 OR LEFT(uce,2) = 61 OR LEFT(uce,2) = 62 )";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-$i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r09=$r09+$polozka->zdl-$polozka->zmd; }
-$i=$i+1;                   }
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE uro = 1888 ";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-if (@$zaznam=mysql_data_seek($sql,0)) { $polozka=mysql_fetch_object($sql); $r10=$polozka->zdl-$polozka->zmd; }
-
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
-" mod82r01='$r01', mod82r02='$r02', mod82r03='$r03', mod82r04='$r04', mod82r05='$r05', mod82r06='$r06', mod82r07='$r07', mod82r08='$r08', ".
-" mod82r09='$r09', mod82r10='$r10',".
-" mod82r99=mod82r01+mod82r02+mod82r03+mod82r04+mod82r05+mod82r06+mod82r07+mod82r08+mod82r09+mod82r10".
-" WHERE ico >= 0"; 
-//echo $uprtxt;
-//exit;
-$upravene = mysql_query("$uprtxt");
-
-$rok1304="";
-if( $kli_vrok < 2016 ) $rok1304="_2015";
-if( $kli_vrok < 2014 ) $rok1304="_2013";
-if( $kli_vrok < 2012 ) $rok1304="_2011";  
-?>
-<script type="text/javascript">
-
-window.open('../ucto/statistika_p1304<?php echo $rok1304; ?>.php?copern=1&drupoh=1&page=1&modul=82', '_self' )
-
-</script>
-<?php
-}
-
-//zapis do statistickej TABLE a prepni do stat zostavy modul 145(82)
-$cstat = 1*$_REQUEST['cstat'];
-if( $cstat == 304 )
-{
-$r01=0; $r02=0; $r03=0; $r04=0; $r05=0; $r06=0; $r07=0; $r08=0; $r09=0; $r10=0; $r99=0; 
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE uro = 998 ";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-if (@$zaznam=mysql_data_seek($sql,0)) { $polozka=mysql_fetch_object($sql); $r01=$polozka->zdl-$polozka->zmd; }
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 601 OR LEFT(uce,3) = 602 OR LEFT(uce,3) = 604 )";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-$i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r02=$r02+$polozka->zdl-$polozka->zmd; }
-$i=$i+1;                   }
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND (  LEFT(uce,1) = 5 AND LEFT(uce,2) != 59 )";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-$i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r03=$r03+$polozka->zmd-$polozka->zdl; }
-$i=$i+1;                   }
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE uro = 1888 ";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-if (@$zaznam=mysql_data_seek($sql,0)) { $polozka=mysql_fetch_object($sql); $r04=$polozka->zdl-$polozka->zmd; }
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 601 OR LEFT(uce,3) = 602 OR LEFT(uce,3) = 604 ".
-"  OR LEFT(uce,2) = 61 OR LEFT(uce,2) = 62 OR LEFT(uce,3) = 504 OR LEFT(uce,3) = 501 OR LEFT(uce,3) = 502 OR LEFT(uce,3) = 503 OR LEFT(uce,2) = 51 )";
-$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
-$i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r05=$r05+$polozka->zdl-$polozka->zmd; }
-$i=$i+1;                   }
-
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
-" mod82r01='$r01', mod82r02='$r02', mod82r03='$r03', mod82r04='$r04', mod82r05='$r05', mod82r06='$r06', mod82r07='$r07', mod82r08='$r08', ".
-" mod82r09='$r09', mod82r10='$r10',".
-" mod82r99=mod82r01+mod82r02+mod82r03+mod82r04+mod82r05+mod82r06+mod82r07+mod82r08+mod82r09+mod82r10, mod82r04=mod82r01-mod82r03 ".
-" WHERE ico >= 0"; 
-$upravene = mysql_query("$uprtxt");  
-
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
-" mod82r04=mod82r01-mod82r03 ".
-" WHERE ico >= 0"; 
-$upravene = mysql_query("$uprtxt"); 
-
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
-" mod82r99=mod82r01+mod82r02+mod82r03+mod82r04+mod82r05+mod82r06+mod82r07+mod82r08+mod82r09+mod82r10 ".
-" WHERE ico >= 0"; 
-$upravene = mysql_query("$uprtxt");
-
-$rok304="";
-if( $kli_vrok < 2016 ) $rok304="_2015";
-if( $kli_vrok < 2014 ) $rok304="_2013";
-if( $kli_vrok < 2013 ) $rok304="_2012";  
-?>
-<script type="text/javascript">
-
-window.open('../ucto/statistika_p304<?php echo $rok304; ?>.php?copern=1&drupoh=1&page=1&modul=82', '_self' )
-
-</script>
-<?php
-}
 
 $osnova=5;
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ( ur1 = 999 AND uce > 99999 ) ";
@@ -556,11 +345,17 @@ if( $osnova == 5 AND $synt == 1 )
 {
 $sqltt = "UPDATE F$kli_vxcf"."_prcuobratsx$kli_uzid SET fak=100*fak WHERE ( ur1 = 998 ) ";
 $sql = mysql_query("$sqltt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prcuobratsx$kli_uzid SET fak=CONCAT('0', fak) WHERE ur1 = 998 AND fak >= 1111 AND fak <= 9999 ";
+$dsql = mysql_query("$dsqlt");
 }
 if( $osnova == 6 AND $synt == 1 )
 {
 $sqltt = "UPDATE F$kli_vxcf"."_prcuobratsx$kli_uzid SET fak=1000*fak WHERE ( ur1 = 998 ) ";
 $sql = mysql_query("$sqltt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prcuobratsx$kli_uzid SET fak=CONCAT('0', fak) WHERE ur1 = 998 AND fak >= 11111 AND fak <= 99999 ";
+$dsql = mysql_query("$dsqlt");
 }
 
 if( $synt == 0 )
@@ -577,6 +372,7 @@ $sqltt = "SELECT ".
 }
 if( $synt == 1 )
 {
+
 $sqltt = "SELECT ".
 " F$kli_vxcf"."_prcuobratsx$kli_uzid.uce, F$kli_vxcf"."_uctosnova.nuc, F$kli_vxcf"."_prcuobratsx$kli_uzid.pmd, pdl,".
 " bmd,bdl,omd,odl,zmd,zdl,ur1,uro,ico,fak ".
@@ -614,30 +410,14 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 $pdf->SetRightMargin(10);
 
-if( $synt == 0 )
-{
-$pdf->Cell(110,5,"Výsledovka za $mes_obdp / $mes_obdk","LTB",0,"L");
-$pdf->Cell(0,5,"FIR$kli_vxcf $kli_nxcf strana $strana","RTB",1,"R");
-
-$pdf->SetFont('arial','',8);
-$pdf->Cell(15,4,"Úèet","1",0,"R");
-$pdf->Cell(110,4,"Popis","1",0,"L");
-$pdf->Cell(30,4,"$vyb_ume MáDa","1",0,"R");$pdf->Cell(30,4,"$vyb_ume Dal","1",0,"R");$pdf->Cell(30,4,"$vyb_ume Rozdiel","1",0,"R");
-$pdf->Cell(32,4,"Celý rok MáDa","1",0,"R");$pdf->Cell(0,4,"Celý rok Dal","1",1,"R");
-}
-
-if( $synt == 1 )
-{
-$pdf->Cell(110,5,"Výsledovka za $mes_obdp / $mes_obdk","LTB",0,"L");
+$pdf->Cell(110,5,"Súvaha za $vyb_ume","LTB",0,"L");
 $pdf->Cell(167,5,"FIR$kli_vxcf $kli_nxcf strana $strana","RTB",1,"R");
 
 $pdf->SetFont('arial','',8);
 $pdf->Cell(19,4,"Úèet","1",0,"R");
 $pdf->Cell(128,4,"Popis","1",0,"L");
 $pdf->Cell(30,4,"Bežný mesiac MáDa","1",0,"R");$pdf->Cell(30,4,"Bežný mesiac Dal","1",0,"R");
-$pdf->Cell(35,4,"Celý rok MáDa","1",0,"R");$pdf->Cell(35,4,"Celý rok Dal","1",1,"R");
-}
-
+$pdf->Cell(35,4,"Zostatok MáDa","1",0,"R");$pdf->Cell(35,4,"Zostatok Dal","1",1,"R");
 
 $j=1;
 }
@@ -658,11 +438,6 @@ $polozka=mysql_fetch_object($sql);
 
 //ak je nulova polozka daj medzeru
 
-$mesroz=$polozka->bmd-$polozka->bdl;
-$Cislo=$mesroz+"";
-$mesroz=sprintf("%0.2f", $Cislo);
-if( $mesroz == 0 ) $mesroz="";
-
 $h_hod=$polozka->hod;
 if( $polozka->hod == 0 ) $h_hod="";
 
@@ -671,86 +446,24 @@ if( $polozka->hod == 0 ) $h_hod="";
   $rok=$rok-2000;
   $datsk = sprintf("%02d.%02d.%02d", $den, $mes, $rok);
 
-$nuc=substr($polozka->nuc,0,110);
-
 //zaciatok analyticka
 if( $typ == 'PDF' AND $synt == 0 )
 {
 if( $polozka->ur1 == 999 )
    {
 //tlac sumaz za ucet
-$pdf->Cell(15,4,"$polozka->uce","0",0,"R");
-$pdf->Cell(110,4,"$nuc","0",0,"L");
-$pdf->Cell(30,4,"$polozka->bmd","0",0,"R");$pdf->Cell(30,4,"$polozka->bdl","0",0,"R");$pdf->Cell(30,4,"$mesroz","0",0,"R");
-$pdf->Cell(32,4,"$polozka->zmd","0",0,"R");$pdf->Cell(0,4,"$polozka->zdl","0",1,"R");
+$pdf->Cell(19,4,"$polozka->uce","0",0,"R");
+$pdf->Cell(128,4,"$polozka->nuc","0",0,"L");
+$pdf->Cell(30,4,"$polozka->bmd","0",0,"R");$pdf->Cell(30,4,"$polozka->bdl","0",0,"R");
+$pdf->Cell(35,4,"$polozka->zmd","0",0,"R");$pdf->Cell(35,4,"$polozka->zdl","0",1,"R");
 $j = $j + 1;
    }
 
 if( $polozka->ur1 == 998 AND $polozka->ico > 1 )
    {
 //tlac sumar za SU
-$pdf->Cell(15,4," ","T",0,"R");
-$pdf->Cell(110,4,"SU$polozka->fak","T",0,"L");
-$pdf->Cell(30,4,"$polozka->bmd","T",0,"R");$pdf->Cell(30,4,"$polozka->bdl","T",0,"R");$pdf->Cell(30,4,"$mesroz","T",0,"R");
-$pdf->Cell(32,4,"$polozka->zmd","T",0,"R");$pdf->Cell(0,4,"$polozka->zdl","T",1,"R");
-$j = $j + 1;
-   }
-
-
-if( $polozka->uro == 997 )
-   {
-//tlac sumare trieda 5
-$pdf->Cell(277,2," ","0",1,"R");
-$pdf->Cell(50,4,"Celkom trieda 5","T",0,"L");
-$pdf->Cell(75,4," ","T",0,"R");
-$pdf->Cell(30,4,"$polozka->bmd","T",0,"R");$pdf->Cell(30,4,"$polozka->bdl","T",0,"R");$pdf->Cell(30,4,"$mesroz","T",0,"R");
-$pdf->Cell(32,4,"$polozka->zmd","T",0,"R");$pdf->Cell(0,4,"$polozka->zdl","T",1,"R");
-$j = $j + 1;
-   }
-
-if( $polozka->uro == 998 )
-   {
-//tlac sumare trieda 6
-$pdf->Cell(277,2," ","0",1,"R");
-$pdf->Cell(50,4,"Celkom trieda 6","T",0,"L");
-$pdf->Cell(75,4," ","T",0,"R");
-$pdf->Cell(30,4,"$polozka->bmd","T",0,"R");$pdf->Cell(30,4,"$polozka->bdl","T",0,"R");$pdf->Cell(30,4,"$mesroz","T",0,"R");
-$pdf->Cell(32,4,"$polozka->zmd","T",0,"R");$pdf->Cell(0,4,"$polozka->zdl","T",1,"R");
-$j = $j + 1;
-   }
-
-if( $polozka->uro == 1888 )
-   {
-//tlac sumare VSETKO
-$hvpz=$polozka->odl;
-
-   }
-
-if( $polozka->uro == 1999 )
-   {
-//tlac sumare VSETKO
-$pdf->Cell(277,2," ","0",1,"R");
-$pdf->Cell(50,4,"Celkom všetky úèty","LTB",0,"L");
-$pdf->Cell(75,4," ","RTB",0,"R");
-$pdf->Cell(30,4,"$polozka->bmd","1",0,"R");$pdf->Cell(30,4,"$polozka->bdl","1",0,"R");$pdf->Cell(30,4," ","1",0,"R");
-$pdf->Cell(32,4,"$polozka->zmd","1",0,"R");$pdf->Cell(0,4,"$polozka->zdl","1",1,"R");
-
-$pdf->Cell(70,4,"Hospodársky výsledok pred zdanením: ","1",0,"L");$pdf->Cell(40,4,"$hvpz","1",1,"R");
-$pdf->Cell(70,4,"Hospodársky výsledok po zdanení: ","1",0,"L");$pdf->Cell(40,4,"$polozka->odl","1",1,"R");
-$j = $j + 1;
-   }
-}
-//koniec analyticka
-
-//zaciatok synteticka
-if( $typ == 'PDF' AND $synt == 1 )
-{
-
-if( $polozka->ur1 == 998 )
-   {
-//tlac sumar za SU
-$pdf->Cell(19,4,"$polozka->fak","T",0,"R");
-$pdf->Cell(128,4,"$polozka->nuc","T",0,"L");
+$pdf->Cell(19,4," ","T",0,"R");
+$pdf->Cell(128,4,"SU$polozka->fak","T",0,"L");
 $pdf->Cell(30,4,"$polozka->bmd","T",0,"R");$pdf->Cell(30,4,"$polozka->bdl","T",0,"R");
 $pdf->Cell(35,4,"$polozka->zmd","T",0,"R");$pdf->Cell(35,4,"$polozka->zdl","T",1,"R");
 $j = $j + 1;
@@ -795,15 +508,48 @@ $pdf->Cell(98,4," ","RTB",0,"R");
 $pdf->Cell(30,4,"$polozka->bmd","1",0,"R");$pdf->Cell(30,4,"$polozka->bdl","1",0,"R");
 $pdf->Cell(35,4,"$polozka->zmd","1",0,"R");$pdf->Cell(35,4,"$polozka->zdl","1",1,"R");
 $pdf->Cell(35,4," ","0",1,"R");
-$pdf->Cell(70,4,"Hospodársky výsledok pred zdanením: ","1",0,"L");$pdf->Cell(40,4,"$hvpz","1",1,"R");
-$pdf->Cell(70,4,"Hospodársky výsledok po zdanení: ","1",0,"L");$pdf->Cell(40,4,"$polozka->odl","1",1,"R");
+$pdf->Cell(70,4,"Hospodársky výsledok : ","1",0,"L");$pdf->Cell(40,4,"$polozka->odl","1",1,"R");
+$j = $j + 1;
+   }
+}
+//koniec analyticka
+
+//zaciatok synteticka
+if( $typ == 'PDF' AND $synt == 1 )
+{
+
+if( $polozka->ur1 == 998 )
+   {
+//tlac sumar za SU
+$pdf->Cell(19,4,"$polozka->fak","T",0,"R");
+$pdf->Cell(128,4,"$polozka->nuc","T",0,"L");
+$pdf->Cell(30,4,"$polozka->bmd","T",0,"R");$pdf->Cell(30,4,"$polozka->bdl","T",0,"R");
+$pdf->Cell(35,4,"$polozka->zmd","T",0,"R");$pdf->Cell(35,4,"$polozka->zdl","T",1,"R");
+$j = $j + 1;
+   }
+
+
+if( $polozka->uro == 1888 )
+   {
+//tlac sumare VSETKO
+$hvpz=$polozka->odl;
+
+   }
+
+if( $polozka->uro == 1999 )
+   {
+//tlac sumare VSETKO
+$pdf->Cell(277,2," ","0",1,"R");
+$pdf->Cell(49,4,"Celkom všetky úèty","LTB",0,"L");
+$pdf->Cell(98,4," ","RTB",0,"R");
+$pdf->Cell(30,4,"$polozka->bmd","1",0,"R");$pdf->Cell(30,4,"$polozka->bdl","1",0,"R");
+$pdf->Cell(35,4,"$polozka->zmd","1",0,"R");$pdf->Cell(35,4,"$polozka->zdl","1",1,"R");
+$pdf->Cell(35,4," ","0",1,"R");
+$pdf->Cell(70,4,"Hospodársky výsledok : ","1",0,"L");$pdf->Cell(40,4,"$polozka->odl","1",1,"R");
 $j = $j + 1;
    }
 }
 //koniec synteticka
-
-
-
 
 }
 $i = $i + 1;
@@ -818,7 +564,7 @@ $par=0;
 }
 
 //koniec stranky
-if( $j >= 34 )
+if( $j >= 36 )
       {
 $strana=$strana+1;
 $j=0;
