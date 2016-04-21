@@ -305,6 +305,7 @@ if ( $strana == 1 ) {
 $ico = $fir_riadok->ico;
 $ktos = $fir_riadok->ktos;
 $euid = $fir_riadok->euid;
+$mnin = $fir_riadok->mnin;
 $mnin1=1;
 $mnin2=0;
 if ( $mnin == 0 ) {
@@ -922,9 +923,8 @@ $pdf->Cell(195,1," ","$rmc1",1,"L");
 $pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text1","$rmc",0,"L");
 $pdf->Cell(31,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text2","$rmc",1,"L");
 //Mandatorne inkaso
-$text1="x"; $text2="x";
-if ( $hlavicka->mnin1 == 0 ) { $text1=" "; }
-if ( $hlavicka->mnin2 == 0 ) { $text2=" "; }
+$text1="x"; $text2=" ";
+if ( $hlavicka->mnin == 0 ) { $text1=" "; $text2="x"; }
 $pdf->Cell(195,4," ","$rmc1",1,"L");
 $pdf->Cell(75,5," ","$rmc1",0,"C");$pdf->Cell(5.5,6,"$text1","$rmc",0,"C");
 $pdf->Cell(12,5," ","$rmc1",0,"C");$pdf->Cell(6,6,"$text2","$rmc",1,"C");
