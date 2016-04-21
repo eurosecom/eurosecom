@@ -6,6 +6,7 @@ do
 $sys = 'UCT';
 $urov = 2000;
 if( $_SERVER['SERVER_NAME'] == "www.medosro.sk" ) { $urov=5000; }
+$cslm=402200;
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 

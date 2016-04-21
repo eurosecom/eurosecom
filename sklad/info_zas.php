@@ -5,6 +5,7 @@ do
 {
 $sys = 'SKL';
 $urov = 2000;
+$cslm=403200;
 $copern = $_REQUEST['copern'];
 $tis = $_REQUEST['tis'];
 if(!isset($tis)) $tis = 0;

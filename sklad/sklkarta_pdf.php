@@ -7,6 +7,7 @@
 $sys = 'SKL';
 $urov = 2000;
 $clsm = 920;
+$cslm=403101;
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 

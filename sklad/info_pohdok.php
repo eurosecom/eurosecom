@@ -5,13 +5,12 @@ do
 {
 $sys = 'SKL';
 $urov = 1000;
-$cslm=401102;
+$cslm=403204;
 $copern = $_REQUEST['copern'];
 $drupoh = $_REQUEST['drupoh'];
 
-$cislo_dok = 1*$_REQUEST['cislo_dok'];
-$lenjeden=0;
-if( $cislo_dok > 0 ) $lenjeden=1;
+$cislo_poh = 1*$_REQUEST['cislo_poh'];
+
 
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
@@ -33,25 +32,74 @@ $kurz12 = $fir_kurz12;
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
-
-$tlacR=1;
-
-$cislo_doklady = $_REQUEST['cislo_doklady'];
+////////////////////////////////////////////////////////datum pociatku a konca vzdaja
 
 
-$ajpoznam=0; $poznampod=0;
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_skldokset$kli_uzid WHERE id = $kli_uzid ORDER BY id DESC LIMIT 1");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
+$sqlt = 'DROP TABLE prcdatum'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$sqlt = <<<prcdatum
+(
+   datp          DATE,
+   datk          DATE,
+   fic          INT
+);
+prcdatum;
+
+$vsql = 'CREATE TABLE prcdatum'.$kli_uzid.$sqlt;
+$vytvor = mysql_query("$vsql");
+
+$h_obdp = 1*$_REQUEST['h_obdp'];
+$h_obdk = 1*$_REQUEST['h_obdk'];
+
+
+$h_obdpume=$h_obdp.".".$kli_vrok;
+$pole = explode(".", $h_obdpume);
+$mesp_dph=$pole[0];
+$rokp_dph=$pole[1];
+
+$datp_dph=$rokp_dph.'-'.$mesp_dph.'-01';
+
+//echo $h_obdp;
+//echo $h_obdp;
+
+$h_obdkume=$h_obdk.".".$kli_vrok;
+$pole = explode(".", $h_obdkume);
+$mesk_dph=$pole[0];
+$rokk_dph=$pole[1];
+
+$datk_dph=$rokk_dph.'-'.$mesk_dph.'-01';
+
+$ttvv = "INSERT INTO prcdatum".$kli_uzid." ( datp,datk,fic ) VALUES ( '$datp_dph', '$datk_dph', 0 )";
+$ttqq = mysql_query("$ttvv");
+
+$dsqlt = "UPDATE prcdatum".$kli_uzid.
+" SET datp='$datp_dph',  datk=LAST_DAY('$datk_dph')".
+" WHERE fic >= 0 ".
+"";
+$dsql = mysql_query("$dsqlt");
+
+//exit;
+
+$sql = mysql_query("SELECT * FROM prcdatum$kli_uzid");
+  if (@$zaznam=mysql_data_seek($sql,0))
   {
-  $riaddok=mysql_fetch_object($sqldok);
-  $ajpoznam=1*$riaddok->ajpoznam;
-  $poznampod=1*$riaddok->poznampod;
-
+  $riadok=mysql_fetch_object($sql);
+  $datp_dph=$riadok->datp;
+  $datk_dph=$riadok->datk;
   }
+
+$sqlt = 'DROP TABLE prcdatum'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+////////////////////////////////////////////////////////koniec datum pociatku a konca vzdaja
+
+$lenjeden=0;
+$viacdokladov=1; 
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
+<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Tlaè-V</title>
   <style type="text/css">
@@ -91,9 +139,6 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_skldokset$kli_uzid WHERE id =
 // na sirku okraje vl=15 vp=15 hr=15 dl=15  
 
 
-if ( $drupoh == 1 ) $tabl = "sklpri";
-if ( $drupoh == 2 ) $tabl = "sklvyd";
-if ( $drupoh == 3 ) $tabl = "sklpre";
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_zozprc'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
@@ -124,44 +169,35 @@ zozprc;
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_zozprc'.$kli_uzid.$sqlt;
 $vytvor = mysql_query("$vsql");
 
-$podmdok=" AND ume = $kli_vume ";
-if( $lenjeden == 1 ) $podmdok=" AND dok = ".$cislo_dok;
 
-
-$viacdokladov=0;
-$pole = explode("-", $cislo_doklady);
-$doklad1=1*$pole[0];
-$doklad2=1*$pole[1];
-if( $doklad1 > 0 AND $doklad2 > 0 ) 
-{
-$viacdokladov=1;
-$podmdok="AND dok >= ".$doklad1." AND dok <= ".$doklad2;
-//$podmdok1="F$kli_vxcf"."_zozprc".$kli_uzid.".dok >= ".$doklad1." AND F$kli_vxcf"."_zozprc".$kli_uzid.".dok <= ".$doklad2;
-$lenjeden=0;
-}
-
-
-if( $drupoh == 1 OR $drupoh == 2 )
+if( $drupoh == 1 )
 {
 $dsqlt = "INSERT INTO F$kli_vxcf"."_zozprc$kli_uzid".
 " SELECT 1,cpl,ume,dat,dok,poz,skl,poh,ico,fak,str,zak,cis,mno,cen,(mno*cen),unk,id ".
-" FROM F$kli_vxcf"."_$tabl WHERE cis > 0 $podmdok ".
+" FROM F$kli_vxcf"."_sklpri WHERE cis > 0 AND dat >= '$datp_dph' AND dat <= '$datk_dph' AND poh = $cislo_poh ".
 " ORDER BY dok,cpl".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 //exit;
-}
-if( $drupoh == 3 )
-{
+
 $dsqlt = "INSERT INTO F$kli_vxcf"."_zozprc$kli_uzid".
-" SELECT 1,cpl,ume,dat,dok,poz,skl,poh,ico,sk2,str,zak,cis,mno,cen,(mno*cen),unk,id ".
-" FROM F$kli_vxcf"."_$tabl WHERE cis > 0 $podmdok ".
+" SELECT 1,cpl,ume,dat,dok,poz,skl,poh,ico,fak,str,zak,cis,mno,cen,(mno*cen),unk,id ".
+" FROM F$kli_vxcf"."_sklvyd WHERE cis > 0 AND dat >= '$datp_dph' AND dat <= '$datk_dph' AND poh = $cislo_poh ".
+" ORDER BY dok,cpl".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_zozprc$kli_uzid".
+" SELECT 1,cpl,ume,dat,dok,poz,skl,poh,ico,fak,str,zak,cis,mno,cen,(mno*cen),unk,id ".
+" FROM F$kli_vxcf"."_sklfak WHERE cis > 0 AND dat >= '$datp_dph' AND dat <= '$datk_dph' AND poh = $cislo_poh ".
 " ORDER BY dok,cpl".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 }
+
 
 //group za dok
 $dsqlt = "INSERT INTO F$kli_vxcf"."_zozprc".$kli_uzid.
@@ -195,7 +231,7 @@ $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 
 
-if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 3 )
+if ( $drupoh == 1 )
   {
 $sqltt = "SELECT * FROM F$kli_vxcf"."_zozprc".$kli_uzid.
 " LEFT JOIN F$kli_vxcf"."_ico".
@@ -242,9 +278,8 @@ $pdf->SetFont('arial','',10);
 
 if( $lenjeden == 0 AND $viacdokladov == 0 )
 {
-if ( $drupoh == 1 )  { $pdf->Cell(90,6,"Zoznam príjemok za $kli_vume","LTB",0,"L"); }
-if ( $drupoh == 2 )  { $pdf->Cell(90,6,"Zoznam výdajok za $kli_vume","LTB",0,"L"); }
-if ( $drupoh == 3 )  { $pdf->Cell(90,6,"Zoznam presunov za $kli_vume","LTB",0,"L"); }
+if ( $drupoh == 1 )  { $pdf->Cell(90,6,"Zoznam dokladov za $kli_vume","LTB",0,"L"); }
+
 $pdf->Cell(0,6,"$kli_nxcf strana $strana","RTB",1,"R");
 
 $pdf->SetFont('arial','',8);
@@ -260,9 +295,7 @@ $pdf->Cell(0,5,"STR/ZÁK","1",1,"R");
 
 if( $lenjeden == 0 AND $viacdokladov == 1 )
 {
-if ( $drupoh == 1 )  { $pdf->Cell(90,6,"Zoznam príjemok $doklad1 / $doklad2","LTB",0,"L"); }
-if ( $drupoh == 2 )  { $pdf->Cell(90,6,"Zoznam výdajok $doklad1 / $doklad2","LTB",0,"L"); }
-if ( $drupoh == 3 )  { $pdf->Cell(90,6,"Zoznam presunov $doklad1 / $doklad2","LTB",0,"L"); }
+if ( $drupoh == 1 )  { $pdf->Cell(90,6,"Zoznam dokladov","LTB",0,"L"); }
 $pdf->Cell(0,6,"$kli_nxcf strana $strana","RTB",1,"R");
 
 $pdf->SetFont('arial','',8);
@@ -277,32 +310,7 @@ $pdf->Cell(0,5,"STR/ZÁK","1",1,"R");
 }
 
 
-if( $lenjeden == 1 )
-{
-if ( $drupoh == 1 )  { $pdf->Cell(90,8,"PRÍJEMKA è.$cislo_dok","LTB",0,"L"); }
-if ( $drupoh == 2 )  { $pdf->Cell(90,8,"VÝDAJKA è.$cislo_dok","LTB",0,"L"); }
-if ( $drupoh == 3 )  { $pdf->Cell(90,8,"PRESUNKA è.$cislo_dok","LTB",0,"L"); }
-$pdf->Cell(0,8,"$kli_nxcf strana $strana","RTB",1,"R");
 
-$pdf->SetFont('arial','',8);
-
-$dat_sk=SkDatum($riadok->dat);
-
-if( $drupoh != 3 )
-  {
-$pdf->Cell(10,5,"SKL","1",0,"R");$pdf->Cell(20,5,"Dátum","1",0,"R");
-$pdf->Cell(10,5,"Pohyb","1",0,"R");
-$pdf->Cell(80,5,"Dodávate¾/Odberate¾","1",0,"L");$pdf->Cell(20,5,"Faktúra","1",0,"R");
-$pdf->Cell(0,5,"Unikód","1",1,"L");
-  }
-if( $drupoh == 3 )
-  {
-$pdf->Cell(10,5,"SKL","1",0,"R");$pdf->Cell(20,5,"Dátum","1",0,"R");
-$pdf->Cell(10,5,"Pohyb","1",0,"R");
-$pdf->Cell(80,5,"Presun na sklad","1",0,"L");$pdf->Cell(20,5," ","1",0,"R");
-$pdf->Cell(0,5,"Unikód","1",1,"L");
-  }
-}
 
 
 
@@ -329,30 +337,7 @@ $pdf->Cell(25,5,"Cena/MJ","0",0,"R");$pdf->Cell(25,5,"Množstvo MJ","0",0,"R");$p
 }
 
 
-if( $riadok->pox == 0 AND $lenjeden == 1 )
-{
 
-$pdf->SetFont('arial','',8);
-
-if( $drupoh != 3 )
-  {
-$pdf->Cell(10,5,"$riadok->skl","1",0,"R");$pdf->Cell(20,5,"$dat_sk","1",0,"R");
-$pdf->Cell(10,5,"$riadok->poh","1",0,"R");$pdf->Cell(80,5,"$riadok->ico $riadok->nai","1",0,"L");$pdf->Cell(20,5,"$riadok->fak","1",0,"R");
-$pdf->Cell(0,5,"$riadok->unk","1",1,"L");
-  }
-if( $drupoh == 3 )
-  {
-$pdf->Cell(10,5,"$riadok->skl","1",0,"R");$pdf->Cell(20,5,"$dat_sk","1",0,"R");
-$pdf->Cell(10,5,"$riadok->poh","1",0,"R");$pdf->Cell(80,5,"$riadok->fak","1",0,"L");$pdf->Cell(20,5," ","1",0,"R");
-$pdf->Cell(0,5,"$riadok->unk","1",1,"L");
-  }
-
-$pdf->Cell(0,5," ","0",1,"R");
-
-$pdf->Cell(10,5,"STR","B",0,"R");$pdf->Cell(10,5,"ZAK","B",0,"R");
-$pdf->Cell(30,5,"CIS","B",0,"R");$pdf->Cell(60,5,"Názov","B",0,"L");
-$pdf->Cell(25,5,"Cena/MJ","B",0,"R");$pdf->Cell(25,5,"Množstvo MJ","B",0,"R");$pdf->Cell(0,5,"Hodnota $mena1","B",1,"R");
-}
 
 
 if( $riadok->pox == 1 AND $lenjeden == 0 )
@@ -360,51 +345,14 @@ if( $riadok->pox == 1 AND $lenjeden == 0 )
 
 $pdf->SetFont('arial','',8);
 
-if( $ajpoznam == 1 AND $poznampod == 0 AND trim($riadok->poz) != '' ) {
-
-$pdf->Cell(10,5," ","0",0,"R");$pdf->Cell(10,5," ","0",0,"R");
-$pdf->Cell(30,5," ","0",0,"R");$pdf->Cell(60,5,"$riadok->poz","0",1,"L");
-$j=$j+1;
-                                         }
-
 $pdf->Cell(10,5,"$riadok->str","0",0,"R");$pdf->Cell(10,5,"$riadok->zak","0",0,"R");
 $pdf->Cell(30,5,"$riadok->cis","0",0,"R");$pdf->Cell(60,5,"$riadok->nat","0",0,"L");
 $pdf->Cell(25,5,"$riadok->cen","0",0,"R");$pdf->Cell(25,5,"$riadok->mno $riadok->mer","0",0,"R");$pdf->Cell(0,5,"$riadok->hod","0",1,"R");
 
-if( $ajpoznam == 1 AND $poznampod == 1 AND trim($riadok->poz) != '' ) {
-
-$pdf->Cell(10,5," ","0",0,"R");$pdf->Cell(10,5," ","0",0,"R");
-$pdf->Cell(30,5," ","0",0,"R");$pdf->Cell(60,5,"$riadok->poz","0",1,"L");
-$j=$j+1;
-                                         }
-
 }
 
 
-if( $riadok->pox == 1 AND $lenjeden == 1 )
-{
 
-$pdf->SetFont('arial','',8);
-
-if( $ajpoznam == 1 AND $poznampod == 0 AND trim($riadok->poz) != '' ) {
-
-$pdf->Cell(10,5," ","0",0,"R");$pdf->Cell(10,5," ","0",0,"R");
-$pdf->Cell(30,5," ","0",0,"R");$pdf->Cell(60,5,"$riadok->poz","0",1,"L");
-$j=$j+1;
-                                         }
-
-$pdf->Cell(10,5,"$riadok->str","0",0,"R");$pdf->Cell(10,5,"$riadok->zak","0",0,"R");
-$pdf->Cell(30,5,"$riadok->cis","0",0,"R");$pdf->Cell(60,5,"$riadok->nat","0",0,"L");
-$pdf->Cell(25,5,"$riadok->cen","0",0,"R");$pdf->Cell(25,5,"$riadok->mno $riadok->mer","0",0,"R");$pdf->Cell(0,5,"$riadok->hod","0",1,"R");
-
-if( $ajpoznam == 1 AND $poznampod == 1 AND trim($riadok->poz) != '' ) {
-
-$pdf->Cell(10,5," ","0",0,"R");$pdf->Cell(10,5," ","0",0,"R");
-$pdf->Cell(30,5," ","0",0,"R");$pdf->Cell(60,5,"$riadok->poz","0",1,"L");
-$j=$j+1;
-                                         }
-
-}
 
 
 if( $riadok->pox == 8 )
@@ -430,27 +378,6 @@ $pdf->Cell(40,5,"$riadok->mno","TB",0,"R");$pdf->Cell(20,5," ","TB",0,"R");$pdf-
 $j=$j+1;
 }
 
-if( $riadok->pox == 9 AND $lenjeden == 1 )
-{
-
-$prie = "";
-$meno = "";
-$sqlpoktt = "SELECT * FROM klienti WHERE id_klienta=$riadok->id ";
-$sqlpok = mysql_query("$sqlpoktt"); 
-  if (@$zaznam=mysql_data_seek($sqlpok,0))
-  {
-  $riadokpok=mysql_fetch_object($sqlpok);
-$prie = $riadokpok->priezvisko;
-$meno = $riadokpok->meno;
-  }
-
-$pdf->SetFont('arial','',9);
-
-$pdf->Cell(0,10," ","0",1,"R");
-$pdf->Cell(60,8,"Vystavil(a): $prie $meno","1",0,"L");
-$pdf->Cell(60,8,"Vydal:","1",0,"L");$pdf->Cell(0,8,"Prijal:","1",1,"L");
-$j=$j+1;
-}
 
 }
 $i = $i + 1;
@@ -459,80 +386,6 @@ if( $j > 40 ) $j=0;
 
   }
 
-
-$kuch=0;
-$cislonormy=$cislo_dok-($kli_vxcf*10000);
-$sqltt = "SELECT * FROM F$kli_vxcf"."_kuchobjp ".
-" LEFT JOIN F$kli_vxcf"."_kuchrecepth".
-" ON F$kli_vxcf"."_kuchobjp.rcis=F$kli_vxcf"."_kuchrecepth.crcp".
-" LEFT JOIN F$kli_vxcf"."_kuchobjh".
-" ON F$kli_vxcf"."_kuchobjp.dok=F$kli_vxcf"."_kuchobjh.dok".
-" WHERE F$kli_vxcf"."_kuchobjp.dok = $cislonormy ".
-" ORDER BY F$kli_vxcf"."_kuchobjp.dok,druhp,rcis ";
-
-$sqldok = mysql_query("$sqltt");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $kuch=1;
-  }
-
-
-if( $kuch == 1 )
-          {
-
-$tov = mysql_query("$sqltt");
-$tvpol = mysql_num_rows($tov);
-
-//echo $sqltt;
-//exit;
-
-$j=0;           
-$i=0;
-  while ($i <= $tvpol )
-  {
-
-  if (@$zaznam=mysql_data_seek($tov,$i))
-{
-$riadok=mysql_fetch_object($tov);
-
-//hlavicka strany
-if ( $j == 0 )
-     {
-
-$pdf->Cell(0,5," ","0",1,"C");
-$pdf->Cell(0,6,"Stravný list $cislonormy $riadok->txp","0",1,"L");
-$pdf->Cell(0,1,"","0",1,"L");
-
-     }
-//koniec hlavicky j=0
-
-$vaha=1*$riadok->rmno;
-$mnozstvo=1*$riadok->jmno;
-
-$nazov=$riadok->rnaz;
-
-$pdf->Cell(10,5," ","0",0,"L");
-$pdf->Cell(30,5,"$vaha $riadok->rmer","0",0,"L"); 
-
-
-$pdf->Cell(80,5,"$nazov","0",0,"L");
-$pdf->Cell(30,5,"$mnozstvo ks","0",0,"R"); 
-
-
-
-$pdf->Cell(0,5," ","0",1,"R");
-
-
-}
-$i = $i + 1;
-$j = $j + 1;
-
-
-  }
-
-//if( $kuch == 1 )
-          }
 
 $pdf->Output("../tmp/zoznam$kli_uzid.pdf");
 

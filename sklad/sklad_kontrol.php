@@ -5,6 +5,7 @@ do
 {
 $sys = 'SKL';
 $urov = 1000;
+$cslm=400001;
 $copern = $_REQUEST['copern'];
 $drupoh = $_REQUEST['drupoh'];
 $h_drp = $_REQUEST['h_drp'];
