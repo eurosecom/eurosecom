@@ -169,7 +169,7 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
-  $cicz=$riaddok->cicz;
+  $cicz=trim($riaddok->cicz);
   }
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdevidencny".

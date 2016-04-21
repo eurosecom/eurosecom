@@ -163,7 +163,7 @@ $uva_hod = strip_tags($_REQUEST['uva_hod']);
 $min_mzda = strip_tags($_REQUEST['min_mzda']);
 $dan_perc = strip_tags($_REQUEST['dan_perc']);
 
-$cicz = strip_tags($_REQUEST['cicz']);
+$cicz = trim(strip_tags($_REQUEST['cicz']));
 
 $uprav="NO";
 
