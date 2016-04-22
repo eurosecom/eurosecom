@@ -466,8 +466,8 @@ $citreg = include("../doprava/citaj_reg.php");
 $tabltovar = "sklfak";
 $zastovar = "sklzas";
 $h_skl=$fir_xfa05;
-$h_tlsl=1;
-$h_tltv=0;
+$h_tlsl=0;
+$h_tltv=1;
 $rozuct='NIE';
 $sysx='INE';
 if( $regpok == 1 ) 
@@ -476,7 +476,7 @@ $tablsluzby = "fakslu";
 $cissluzby = "sluzby";
 $h_tlsl = 1*$_REQUEST['h_tlsl'];
 $h_tltv = 1*$_REQUEST['h_tltv'];
-if( $h_tlsl == 0 AND $h_tltv == 0 ) { $h_tlsl=1; $h_tltv=0; } 
+if( $h_tlsl == 0 AND $h_tltv == 0 ) { $h_tlsl=0; $h_tltv=1; } 
   }
 }
 
@@ -6527,12 +6527,20 @@ if ( $copern == 7 AND $drupoh == 1 )
      }
 ?>
 <?php
-if ( $copern == 7  )
+if ( $copern == 7 AND $drupoh != 42 )
      {
 ?>
 <a href="#" onClick="window.open('obalka.php?copern=10&drupoh=<?php echo $drupoh;?>&page=1&cislo_dok=<?php echo $riadok->dok;?>',
  '_blank', '<?php echo $tlcuwin; ?>' )">
 <img src='../obr/obalka.jpg' width=20 height=12 border=0 alt="Vytlaèi obálku" title="Vytlaèi obálku" ></a>
+<?php
+     }
+?>
+<?php
+if ( $copern == 7 AND $drupoh == 42 )
+     {
+?>
+<a href="../tmp/registruj<?php echo $riadok->dok;?>" >registruj<?php echo $riadok->dok;?></a>
 <?php
      }
 ?>
