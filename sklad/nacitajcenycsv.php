@@ -7,6 +7,7 @@
 $sys = 'FAK';
 $urov = 2000;
 $clsm = 820;
+$cslm=404200;
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 

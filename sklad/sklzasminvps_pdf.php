@@ -9,6 +9,7 @@
 $sys = 'SKL';
 $urov = 2000;
 $clsm = 920;
+$cslm=403210;
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 
@@ -118,7 +119,7 @@ $pdf->AddFont('arial','','arial.php');
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_sklprc'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_sklprcd'.$kli_uzid;
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_sklprcdminzas'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
 $sqlt = <<<sklprc
@@ -143,7 +144,7 @@ sklprc;
 
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_sklprc'.$kli_uzid.$sqlt;
 $vytvor = mysql_query("$vsql");
-$vsql = 'CREATE TABLE F'.$kli_vxcf.'_sklprcd'.$kli_uzid.$sqlt;
+$vsql = 'CREATE TABLE F'.$kli_vxcf.'_sklprcdminzas'.$kli_uzid.$sqlt;
 $vytvor = mysql_query("$vsql");
 
 
@@ -182,7 +183,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_sklprc$kli_uzid".
 $dsql = mysql_query("$dsqlt");
 
 //group za cis
-$dsqlt = "INSERT INTO F$kli_vxcf"."_sklprcd$kli_uzid".
+$dsqlt = "INSERT INTO F$kli_vxcf"."_sklprcdminzas$kli_uzid".
 " SELECT druh,0,0,ume,dat,skl,cis,0,mno,cen,SUM(zas),0,0,0,0 FROM F$kli_vxcf"."_sklprc$kli_uzid ".
 " GROUP BY cis".
 "";
@@ -190,23 +191,23 @@ $dsql = mysql_query("$dsqlt");
 
 
 //dopln min.zasobu z cisudaje do hod
-$dsqlt = "UPDATE F$kli_vxcf"."_sklprcd$kli_uzid SET hod=0 "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_sklprcdminzas$kli_uzid SET hod=0 "; $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_sklprcd$kli_uzid,F$kli_vxcf"."_sklcisudaje ".
+$dsqlt = "UPDATE F$kli_vxcf"."_sklprcdminzas$kli_uzid,F$kli_vxcf"."_sklcisudaje ".
 " SET hod=cxc01, ddv=idod ".
-" WHERE F$kli_vxcf"."_sklprcd$kli_uzid.cis=F$kli_vxcf"."_sklcisudaje.xcis ";
+" WHERE F$kli_vxcf"."_sklprcdminzas$kli_uzid.cis=F$kli_vxcf"."_sklcisudaje.xcis ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_sklprcd$kli_uzid SET vdj=hod-zas ";
+$dsqlt = "UPDATE F$kli_vxcf"."_sklprcdminzas$kli_uzid SET vdj=hod-zas ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_sklprcd$kli_uzid WHERE vdj <= 0 ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_sklprcdminzas$kli_uzid WHERE vdj <= 0 ";
 $dsql = mysql_query("$dsqlt");
 
 
 //group za ddv
-$dsqlt = "INSERT INTO F$kli_vxcf"."_sklprcd$kli_uzid".
-" SELECT druh,0,1,ume,dat,skl,cis,ddv,mno,cen,SUM(zas),0,0,0,0 FROM F$kli_vxcf"."_sklprcd$kli_uzid ".
+$dsqlt = "INSERT INTO F$kli_vxcf"."_sklprcdminzas$kli_uzid".
+" SELECT druh,0,1,ume,dat,skl,cis,ddv,mno,cen,SUM(zas),0,0,0,0 FROM F$kli_vxcf"."_sklprcdminzas$kli_uzid ".
 " GROUP BY ddv ".
 "";
 $dsql = mysql_query("$dsqlt");
@@ -218,11 +219,11 @@ $neparne=1;
 
 if ( $copern == 20 OR $copern == 10 OR $copern == 30 )
   {
-$sqltt = "SELECT * FROM F$kli_vxcf"."_sklprcd$kli_uzid".
+$sqltt = "SELECT * FROM F$kli_vxcf"."_sklprcdminzas$kli_uzid".
 " LEFT JOIN F$kli_vxcf"."_sklcis".
-" ON F$kli_vxcf"."_sklprcd$kli_uzid.cis=F$kli_vxcf"."_sklcis.cis".
+" ON F$kli_vxcf"."_sklprcdminzas$kli_uzid.cis=F$kli_vxcf"."_sklcis.cis".
 " WHERE pox >= 0  ".
-" ORDER BY ddv,pox,F$kli_vxcf"."_sklprcd$kli_uzid.cis ";
+" ORDER BY ddv,pox,F$kli_vxcf"."_sklprcdminzas$kli_uzid.cis ";
   }
 
 
@@ -332,18 +333,24 @@ $kli_vxr=substr($kli_vrok,2,2);;
 if( $kli_vmes < 10 ) $kli_vmes = ""."0".$kli_vmes;
 
 
-$nazsub="stavminzasob";
+ $outfilexdel="../tmp/stavminzasob_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex2="../tmp/stavminzasob_".$kli_uzid."_".$hhmmss.".csv";
+if (File_Exists ("$outfilex2")) { $soubor = unlink("$outfilex2"); }
 
 
-if (File_Exists ("../tmp/$nazsub.csv")) { $soubor = unlink("../tmp/$nazsub.csv"); }
+$nazsub=$outfilex2;
 
-$soubor = fopen("../tmp/$nazsub.csv", "a+");
+$soubor = fopen("$nazsub", "a+");
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_sklprcd$kli_uzid".
+$sqltt = "SELECT * FROM F$kli_vxcf"."_sklprcdminzas$kli_uzid".
 " LEFT JOIN F$kli_vxcf"."_sklcis".
-" ON F$kli_vxcf"."_sklprcd$kli_uzid.cis=F$kli_vxcf"."_sklcis.cis".
-" WHERE hod > 0 AND pox = 0 AND pox1 = 0 ".
-" ORDER BY pox,F$kli_vxcf"."_sklprcd$kli_uzid.cis ";
+" ON F$kli_vxcf"."_sklprcdminzas$kli_uzid.cis=F$kli_vxcf"."_sklcis.cis".
+" WHERE pox = 0  ".
+" ORDER BY ddv,pox,F$kli_vxcf"."_sklprcdminzas$kli_uzid.cis ";
 
 //echo $sqltt;
 $sql = mysql_query("$sqltt");
@@ -376,7 +383,7 @@ $xhod=$hlavicka->hod; $hod=str_replace(".",",",$xhod);
 
 if( $i == 0 )
      {
-  $text = "sklad".";"."cislo".";"."nazov".";"."mj".";"."zasoba"; 
+  $text = "dod ico".";"."sklad".";"."cislo".";"."nazov".";"."mj".";"."zasoba"; 
   $text = $text.";"."hodnota".";"."objednat"."\r\n"; 
 
   fwrite($soubor, $text);
@@ -385,7 +392,7 @@ if( $i == 0 )
 
 
 
-  $text = $hlavicka->skl.";".$hlavicka->cis.";"."$hlavicka->nat".";"."$hlavicka->mer".";"."$zas"; 
+  $text = $hlavicka->ddv.";".$hlavicka->skl.";".$hlavicka->cis.";"."$hlavicka->nat".";"."$hlavicka->mer".";"."$zas"; 
   $text = $text.";"."$hod".";"."$obj"."\r\n";  
 
   fwrite($soubor, $text);
@@ -399,7 +406,7 @@ $j = $j + 1;
 fclose($soubor);
 ?>
 
-<a href="../tmp/<?php echo $nazsub; ?>.csv">../tmp/<?php echo $nazsub; ?>.csv</a>
+<a href="<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>
 
 <?php
 exit;
@@ -411,7 +418,7 @@ $pdf->Output("$outfilex");
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_sklprc'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_sklprcd'.$kli_uzid;
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_sklprcdminzas'.$kli_uzid;
 //$vysledok = mysql_query("$sqlt");
 
 ?> 
