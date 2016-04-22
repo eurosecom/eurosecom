@@ -7,6 +7,11 @@
 $sys = 'SKL';
 $urov = 2000;
 $cslm=401101;
+$drupoh = strip_tags($_REQUEST['drupoh']);
+if( $drupoh == 1 ) { $cslm=401111; }
+if( $drupoh == 2 ) { $cslm=401112; }
+if( $drupoh == 3 ) { $cslm=401113; }
+
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 
