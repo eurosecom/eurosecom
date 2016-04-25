@@ -364,6 +364,11 @@ if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" )
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=41 WHERE poloz > 0 "; 
 }
 
+if( $_SERVER['SERVER_NAME'] == "www.mpsbm.sk" ) 
+{ 
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=71 WHERE poloz > 0 "; 
+}
+
 $oznac = mysql_query("$sqtoz");
 
 
@@ -473,6 +478,12 @@ $oznac = mysql_query("$sqtoz");
 if( $nostp != "" ) 
 {
 $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, oddiel='$nostp' ";
+$oznac = mysql_query("$sqtoz");
+}
+
+if( $_SERVER['SERVER_NAME'] == "www.mpsbm.sk" ) 
+{
+$sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, oddiel='04.1.1' ";
 $oznac = mysql_query("$sqtoz");
 }
 

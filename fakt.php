@@ -32,6 +32,7 @@ if( !$uziv ) exit;
   $ajeshop=0;
   if (File_Exists ("eshop/index.php")) { $ajeshop=1; }
 
+
 $mysqldbfir=$mysqldb;
 $mysqldbdata=$mysqldb;
 $dtb2 = include("oddel_dtb1.php");
@@ -86,6 +87,9 @@ $cit_nas = include("cis/citaj_nas.php");
   $ajnajom=0;
   if (File_Exists ("secomnajom/najom.php")) { $ajnajom=1; }
   if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $vyb_xcf != 514 AND $vyb_xcf != 614 AND $vyb_xcf != 714 ) { $ajnajom=0; }
+  if( $vyb_xcf != 2686 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=0; }
+  if( $vyb_xcf == 2686 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=1; }
+
 
 $cook=0;
 if( $cook == 1 )

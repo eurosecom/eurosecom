@@ -696,6 +696,18 @@ window.open('../ucto/saldo_metalco01.php?uhr=1&pol=0&dea=0&h_deal=' + h_deal + '
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function Pol30()
+                {
+var h_deal = document.forms.formdeal.h_deal.value;
+var h_uce = document.forms.forms1.h_uce.value;
+var h_ico = document.forms.forms1.h_ico.value;
+var h_obd = document.forms.forms1.h_obd.value;
+var h_dsp = document.forms.forms2.h_dsp.value;
+var h_spl = document.forms.forms2.h_spl.value;
+
+window.open('../ucto/saldo_alchem.php?pol=1&dea=0&h_uce=' + h_uce + '&h_ico=' + h_ico + '&h_obd=' + h_obd + '&h_spl=' + h_spl + '&h_dsp=' + h_dsp + '&copern=11&drupoh=1&page=1&analyzy=<?php echo $analyzy; ?>&pol30=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
 
 //Z ciarky na bodku
   function CiarkaNaBodku(Vstup)
@@ -770,6 +782,8 @@ DEAU<img src='../obr/tlac.png' onClick="Uhdealerov();" width=15 height=15 border
 NAJV<img src='../obr/tlac.png' onClick="NajOdb();" width=15 height=15 border=0 alt='Tlaè zoznamu najvýznamnejších odberate¾ov/dodávate¾ov v roku' title='Tlaè zoznamu najvýznamnejších odberate¾ov/dodávate¾ov v roku' >
 
 HLSP<img src='../obr/tlac.png' onClick="HlaPoh();" width=15 height=15 border=0 title='Hlásenie poh¾adávok poisovòa Euler Hermes' >
+
+PO30<img src='../obr/tlac.png' onClick="Pol30();" width=15 height=15 border=0 title='Poh¾adávky tohtoroèné 30 dní po lehote' >
 
 <?php                    } ?>
 
