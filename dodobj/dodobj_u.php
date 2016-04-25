@@ -729,9 +729,13 @@ $dsql = mysql_query("$dsqlt");
 <div style="width:100%; margin-top:5px; ">
 <h3>Objednávka è. <span style="background-color:#FFFF90; padding:0 7px;"><?php echo $cislo_dok; ?></span></h3>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<?php if( $vseobj == 0 ) { ?>
-<a href="#" onclick="TlacOBJ(<?php echo $cislo_dok; ?>);"><img src='../obr/tlac.png' width=20 height=15 title='Tlaèi objednávku' ></a>
-<?php                    } ?>
+<?php if ( $vseobj == 0 ) { ?>
+<a href="#" onclick="TlacOBJ(<?php echo $cislo_dok; ?>);"><img src='../obr/tlac.png' width=20 height=15 title='Zobrazi objednávku v PDF'></a> <!-- dopyt, musí tu by <a>? -->
+<?php                     } ?>
+&nbsp;
+<a href="#" onclick=";"><img src='../obr/tlac.png' width=20 height=15 title='Zobrazi objednávku bez nákupných cien v PDF'></a>
+&nbsp;
+<a href="#" onclick=";"><img src="../obr/vlozit.png" width=20 height=15 title='Naèíta položky zo zostavy o vyhodnotení minimálnych zásob za  '></a> <!-- dopyt, dorobi premennú pre ièo a názov -->
 </div>
 
 <?php
