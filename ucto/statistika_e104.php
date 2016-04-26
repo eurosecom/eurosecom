@@ -2618,12 +2618,22 @@ $pdf->Output("../tmp/statistika.$kli_uzid.pdf");
 if( $copern == 12 )
           {
 
-$nazsub=$fir_fico."_".$kli_vrok."_".$stvrtrok;
+
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/".$fir_fico."_".$kli_vrok."_".$stvrtrok."_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/".$fir_fico."_".$kli_vrok."_".$stvrtrok."_".$kli_uzid."_".$hhmmss.".xml";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
 
-if (File_Exists ("../tmp/$nazsub.xml")) { $soubor = unlink("../tmp/$nazsub.xml"); }
+$nazsub=$outfilex;
 
-$soubor = fopen("../tmp/$nazsub.xml", "a+");
+
+$soubor = fopen("$nazsub", "a+");
 
 
 //hlavicka
@@ -2677,6 +2687,9 @@ $fir_fnazutf = $retezec = iconv("CP1250", "UTF-8", $fir_fnaz);
   $text = "<NAZOV>".$fir_fnazutf."</NAZOV>"."\r\n";
   fwrite($soubor, $text);
 
+if( $kli_vrok < 2016 )
+       {
+
 $fir_fmesutf = $retezec = iconv("CP1250", "UTF-8", $fir_fmes); 
 
   $text = "<OBEC>504203</OBEC>"."\r\n";
@@ -2691,6 +2704,11 @@ $fir_fuliutf = $retezec = iconv("CP1250", "UTF-8", $fir_fuli);
   $text = "<PSC>".$fir_fpsc."</PSC>"."\r\n";
   fwrite($soubor, $text);
 
+
+       }
+
+
+
 $kli_uzprieutf = iconv("CP1250", "UTF-8", $fir_mzdt05); 
 $kli_telutf = iconv("CP1250", "UTF-8", $fir_mzdt04);
 
@@ -2702,6 +2720,14 @@ $kli_telutf = iconv("CP1250", "UTF-8", $fir_mzdt04);
   fwrite($soubor, $text);
   $text = "<POZNAMKA>Poznamka</POZNAMKA>"."\r\n";
   fwrite($soubor, $text);
+
+
+  if( $kli_vrok >= 2016 )
+       {
+  $text = "<SIDSJ_OBEC_KOD_ST>SK0215504203</SIDSJ_OBEC_KOD_ST>"."\r\n";
+  fwrite($soubor, $text);
+       }
+
 
   $text = "<DARY>".$hlavicka->mod4104r01s1."</DARY>"."\r\n";
   fwrite($soubor, $text);
@@ -3795,7 +3821,7 @@ $j = $j + 1;
 fclose($soubor);
 ?>
 
-<a href="../tmp/<?php echo $nazsub; ?>.xml">../tmp/<?php echo $nazsub; ?>.xml</a>
+<a href="<?php echo $outfilex; ?>"><?php echo $outfilex; ?></a>
 
 
 <?php

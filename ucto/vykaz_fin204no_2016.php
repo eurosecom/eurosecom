@@ -2436,7 +2436,7 @@ $pdf->Cell(5,5,"$t29","$rmc",0,"C");$pdf->Cell(5,5,"$t30","$rmc",0,"C");
 $pdf->Cell(5,5,"$t31","$rmc",1,"C");
 //
 $text=substr($fir_fnaz,31,30);;
-$text="Èý0123456789abcdefghijklmnoprstuv";
+//$text="Èý0123456789abcdefghijklmnoprstuv";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
