@@ -65,6 +65,126 @@ else
     {
 
 
+//http://localhost/ucto/saldo_alchem.php?pol=1&dea=0&h_uce=31100&h_ico=&h_obd=0&h_spl=0&h_dsp=26.04.2016&copern=11&drupoh=1&page=1&analyzy=0&pol30=1
+
+$sqlt = "DROP TABLE F".$kli_vxcf."_ucthlasenie_eulerfak".$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$sqlt = <<<prsaldo
+(
+   cplf         int not null auto_increment,
+   pox1        INT,
+   pox2        INT,
+   pox         INT,
+   drupoh      INT,
+   uce         VARCHAR(10),
+   puc         DECIMAL(10,0),
+   ume         FLOAT(8,4),
+   dat         DATE,
+   das         DATE,
+   daz         DATE,
+   dok         INT(8),
+   ico         DECIMAL(10,0),
+   fak         DECIMAL(10,0),
+   poz         VARCHAR(80),
+   ksy         VARCHAR(10),
+   ssy         DECIMAL(10,0),
+   hdp         DECIMAL(10,2),
+   hdu         DECIMAL(10,2),
+   hod         DECIMAL(10,2),
+   uhr         DECIMAL(10,2),
+   zos         DECIMAL(10,2),
+   dau         DATE,
+   PRIMARY KEY(cplf)
+);
+prsaldo;
+
+$vsql = "CREATE TABLE F".$kli_vxcf."_ucthlasenie_eulerfak".$kli_uzid.$sqlt;
+$vytvor = mysql_query("$vsql");
+
+
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid".
+" SELECT 0,0,0,1,drupoh,uce,0,ume,dat,das,daz,dok,ico,fak,".
+"poz,ksy,ssy,SUM(hdp),SUM(hdu),SUM(hod),SUM(uhr),SUM(zos),dau".
+" FROM F$kli_vxcf"."_prsaldoicofak$kli_uzid".
+" WHERE LEFT(uce,3) = 311 ".
+" GROUP BY uce,ico,fak";
+$dsql = mysql_query("$dsqlt");
+
+$tovtt = "DELETE FROM F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid WHERE zos <= 0 ";
+$tov = mysql_query("$tovtt");
+
+$dnes = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+$sqtoz = "UPDATE F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid SET puc=TO_DAYS('$dnes')-TO_DAYS(das) WHERE hod != 0";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid SET puc=0 WHERE puc < 0 ";
+$oznac = mysql_query("$sqtoz");
+
+$tovtt = "DELETE FROM F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid WHERE dat < '2016-02-01' ";
+$tov = mysql_query("$tovtt");
+
+$tovtt = "DELETE FROM F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid WHERE puc < 30 ";
+$tov = mysql_query("$tovtt");
+
+$sqlt = "DROP TABLE F".$kli_vxcf."_ucthlasenie_eulerfak";
+$vysledok = mysql_query("$sqlt");
+
+$vsql = "CREATE TABLE F".$kli_vxcf."_ucthlasenie_eulerfak SELECT * FROM F".$kli_vxcf."_ucthlasenie_eulerfak".$kli_uzid;
+$vytvor = mysql_query("$vsql");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_ucthlasenie_eulerfak SET hdp=zos/1.2 ";
+$dsql = mysql_query("$dsqlt");
+
+$sqlt = "DROP TABLE F".$kli_vxcf."_ucthlasenie_eulerfak".$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET dsuma=0, dbdph=0 ";
+$dsql = mysql_query("$dsqlt");
+
+$sqlttt = "SELECT SUM(zos) AS sumzos, SUM(hdp) AS sumhdp, ico FROM F$kli_vxcf"."_ucthlasenie_eulerfak GROUP BY ico ";
+$sql = mysql_query("$sqlttt");
+$cpol = mysql_num_rows($sql);
+$i=0;
+
+while ($i <= $cpol )
+{
+  if (@$zaznam=mysql_data_seek($sql,$i))
+    {
+  $riadok=mysql_fetch_object($sql);
+
+$jeico=0;
+$sqltt2 = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE ico = $riadok->ico ORDER BY ico DESC LIMIT 1"; 
+$sqldo2 = mysql_query("$sqltt2");
+ if (@$zaznam=mysql_data_seek($sqldo2,0))
+ {
+ $riaddo2=mysql_fetch_object($sqldo2);
+ $jeico=1;
+ }
+
+$sqli = "INSERT INTO F".$kli_vxcf."_ucthlasenie_euler (oc, ico, konx1) VALUES ( 1, '$riadok->ico', 0 ) ";
+if( $jeico == 0 ) { $vysledok = mysql_query($sqli); }
+
+$dsqlt = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET dsuma='$riadok->sumzos', dbdph='$riadok->sumhdp' WHERE ico = $riadok->ico ";
+$dsql = mysql_query("$dsqlt");
+
+
+
+    }
+$i=$i+1;
+}
+
+$dsqlt = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET dath='$dnes' ";
+$dsql = mysql_query("$dsqlt");
+
+
+
+//echo $dsqlt; 
+//exit;
+
+
 $copern=20;
 $strana=5;
     }
@@ -248,7 +368,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD dath DATE NOT NULL AFTER ico";
 $vysledek = mysql_query("$sql");
 }
-$sql = "SELECT mnin FROM F".$kli_vxcf."_ucthlasenie_euler";
+$sql = "SELECT dbdph FROM F".$kli_vxcf."_ucthlasenie_euler";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -265,6 +385,8 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD dalinf TEXT NOT NULL AFTER konx1";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD mnin DECIMAL(2,0) DEFAULT 0 AFTER konx1";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD dbdph DECIMAL(10,2) DEFAULT 0 AFTER konx1";
 $vysledek = mysql_query("$sql");
 }
 //koniec vytvorenie
@@ -746,7 +868,7 @@ $slpol = mysql_num_rows($sluz);
  <th rowspan="2" align="left">názov</th>
  <th rowspan="2">euid</th>
  <th> </th>
- <th colspan="2"> </th>
+ <th colspan="2">suma</th>
  <th rowspan="2" align="right"> </th>
  <th rowspan="2">&nbsp;</th>
 </tr>
@@ -781,7 +903,7 @@ mysql_free_result($fir_vysledok);
  <td align="left"><?php echo $cisloi.". ".$rsluz->ico; ?></td>
  <td><?php echo $ico_nai; ?></td>
  <td align="center"><?php echo $rsluz->euid; ?></td>
- <td align="center"></td>
+ <td align="center"><?php echo $rsluz->dsuma; ?></td>
  <td align="center"> </td>
  <td align="center">
   <img src="../obr/ikony/list_blue_icon.png" onclick="TlacHlasenieIco(<?php echo $rsluz->cpl; ?>);"
@@ -831,14 +953,50 @@ $i=$i+1;
 /////////////////////////////////////////////////VYTLAC
 if ( $copern == 10 )
 {
+
+$ddir="../dokumenty/FIR".$kli_vxcf."/euler";
+mkdir ($ddir, 0777);
+
 $hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
- $outfilexdel="../tmp/euler_".$kli_uzid."_*.*";
+ $outfilexdel="../dokumenty/FIR".$kli_vxcf."/euler/hlasenie_*.*";
  foreach (glob("$outfilexdel") as $filename) {
     unlink($filename);
  }
 
-$outfilex="../tmp/euler_".$kli_uzid."_".$hhmmss.".pdf";
+
+$sqltt5 = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE dsuma > 0 ORDER BY ico ";
+if( $cislo_cpl > 0 ) 
+{
+$sqltt5 = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE cpl = $cislo_cpl ORDER BY ico ";
+}
+$sql5 = mysql_query("$sqltt5");                                                   
+$pol5 = mysql_num_rows($sql5);
+
+$i5=0;
+  while ($i5 <= $pol5 )
+  {
+  if (@$zaznam=mysql_data_seek($sql5,$i5))
+{
+$hlavicka5=mysql_fetch_object($sql5);
+
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $hlavicka5->ico ";
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
+$ico_nai = $fir_riadok->nai;
+$ico_mes = $fir_riadok->mes;
+$ico_uli = $fir_riadok->uli;
+$ico_psc = $fir_riadok->psc;
+$ico_konemail = $fir_riadok->em1;
+$ico_kontel = $fir_riadok->tel;
+$ico_konfax = $fir_riadok->fax;
+$ico_stat="SR";
+
+//urob jedno pdf
+
+
+$outfilex="../dokumenty/FIR".$kli_vxcf."/euler/hlasenie_".$ico_nai.".pdf";
 if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
      define('FPDF_FONTPATH','../fpdf/font/');
@@ -851,8 +1009,7 @@ $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 
 //vytlac
-$sqltt = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler".
-" WHERE oc = 1 AND cpl = $cislo_cpl ORDER BY ico ";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE oc = 1 AND ico = $hlavicka5->ico ORDER BY ico ";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -865,18 +1022,6 @@ $j=0; //zaciatok strany ak by som chcel strankovat
 {
 $hlavicka=mysql_fetch_object($sql);
 
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $hlavicka->ico ";
-$fir_vysledok = mysql_query($sqlfir);
-$fir_riadok=mysql_fetch_object($fir_vysledok);
-
-$ico_nai = $fir_riadok->nai;
-$ico_mes = $fir_riadok->mes;
-$ico_uli = $fir_riadok->uli;
-$ico_psc = $fir_riadok->psc;
-$ico_konemail = $fir_riadok->em1;
-$ico_kontel = $fir_riadok->tel;
-$ico_konfax = $fir_riadok->fax;
-$ico_stat="SR";
 
 if ( $strana == 1 OR $strana == 9999 ) {
 $pdf->AddPage();
@@ -949,6 +1094,7 @@ $pdf->Cell(31,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text2","$rmc",1,"L");
 //ICO a Euler ID
 $text1=$hlavicka->ico;
 $text2=$hlavicka->euid;
+if( $text2 == 0 ) {  $text2=""; }
 $pdf->Cell(195,1," ","$rmc1",1,"L");
 $pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text1","$rmc",0,"L");
 $pdf->Cell(31,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text2","$rmc",1,"L");
@@ -979,10 +1125,12 @@ $text="viï príloha";
 $pdf->Cell(195,10," ","$rmc1",1,"L");
 $pdf->Cell(8.5,5," ","$rmc1",0,"C");$pdf->Cell(34,6,"$text","$rmc",1,"C");
 //Spolu bez/s dph
-$text="";
+$text=$hlavicka->dbdph;
 $textx="0123456789";
 $pdf->SetY(266);
 $pdf->Cell(113.5,5," ","$rmc1",0,"C");$pdf->Cell(34,6,"$text","$rmc",0,"R");
+
+$text=$hlavicka->dsuma;
 $pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(34,6,"$text","$rmc",1,"R");
                                        } //koniec 1.strany
 
@@ -1059,12 +1207,27 @@ $pdf->Cell(137.5,5," ","$rmc1",0,"C");$pdf->Cell(40,6,"$text","$rmc",1,"C");
 $i = $i + 1;
   }
 $pdf->Output("$outfilex");
+
+
+//koniec urob jedno pdf
+
+}
+$i5 = $i5 + 1;
+  }
+
 ?>
 
-<?php if ( $xml == 0 ) { ?>
+<?php if ( $xml == 0 AND $cislo_cpl > 0 ) { ?>
 <script type="text/javascript">
   var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
+<?php                  } ?>
+<?php if ( $xml == 0 AND $cislo_cpl == 0 ) { ?>
+
+<br /><br /><br /><br />
+  PDF Hlásenia vytvorené.
+<br /><br /><br /><br />
+
 <?php                  } ?>
 <?php
 }
@@ -1078,18 +1241,51 @@ if ( $copern == 11 )
 {
 $hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
- $outfilexdel="../tmp/euler_".$kli_uzid."_*.*";
+$ddir="../dokumenty/FIR".$kli_vxcf."/euler";
+mkdir ($ddir, 0777);
+
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../dokumenty/FIR".$kli_vxcf."/euler/saldo_*.*";
  foreach (glob("$outfilexdel") as $filename) {
     unlink($filename);
  }
 
-$outfilex="../tmp/euler_".$kli_uzid."_".$hhmmss.".csv";
+
+
+$sqltt5 = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE dsuma > 0 ORDER BY ico ";
+$sql5 = mysql_query("$sqltt5");                                                   
+$pol5 = mysql_num_rows($sql5);
+
+$i5=0;
+  while ($i5 <= $pol5 )
+  {
+  if (@$zaznam=mysql_data_seek($sql5,$i5))
+{
+$hlavicka5=mysql_fetch_object($sql5);
+
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $hlavicka5->ico ";
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
+$ico_nai = $fir_riadok->nai;
+$ico_mes = $fir_riadok->mes;
+$ico_uli = $fir_riadok->uli;
+$ico_psc = $fir_riadok->psc;
+$ico_konemail = $fir_riadok->em1;
+$ico_kontel = $fir_riadok->tel;
+$ico_konfax = $fir_riadok->fax;
+$ico_stat="SR";
+
+//urob jedno csv
+
+$outfilex="../dokumenty/FIR".$kli_vxcf."/euler/saldo_".$ico_nai.".csv";
 if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
 
 $soubor = fopen("$outfilex", "a+");
 
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE ico > 0 ORDER BY ico ";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_eulerfak WHERE ico = $hlavicka5->ico ORDER BY fak ";
 $sql = mysql_query("$sqltt");
 if($sql)                                                     
 $pol = mysql_num_rows($sql);
@@ -1101,20 +1297,24 @@ $i=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
-$dob_sk=SkDatum($hlavicka->dob);
 
 if ( $i == 0 )
      {
-$text = "ico".";"."cislo_faktury".";"."vystavena".";"."splatna".";"."bez_dph".";"."s_dph".";"."\r\n";
+$text = $ico_nai."\r\n";
+fwrite($soubor, $text);
+
+$text = "cislo_faktury".";"."vystavena".";"."splatna".";"."bez_dph".";"."s_dph".";"."\r\n";
 fwrite($soubor, $text);
      }
 
-$cen=$hlavicka->cen; $ecen=str_replace(".",",",$cen); 
-$ced=$hlavicka->cen_dan; $eced=str_replace(".",",",$ced); 
+$dat=SkDatum($hlavicka->dat);
+$das=SkDatum($hlavicka->das);
+$cen=$hlavicka->zos; $ecen=str_replace(".",",",$cen); 
+$ced=$hlavicka->hdp; $eced=str_replace(".",",",$ced); 
 
 
 
-  $text = $hlavicka->ico.";".$hlavicka->fak.";".$dat.";".$das.";".$ebez.";".$sdph."\r\n"; 
+  $text = $hlavicka->fak.";".$dat.";".$das.";".$eced.";".$ecen."\r\n"; 
   //if( $i == 0 ) { $text = "112233;7800345;12.01.2016;26.01.2016;10000;12000"."\r\n"; }
 
   fwrite($soubor, $text);
@@ -1124,11 +1324,18 @@ $i = $i + 1;
   }
 
 fclose($soubor);
+
+//koniec urob jedno csv
+
+}
+$i5 = $i5 + 1;
+  }
+
+
 ?>
-<br />
-<br />
-<br />
-<a href="<?php echo $outfilex; ?>"><?php echo $outfilex; ?></a>
+<br /><br /><br /><br />
+  CSV Hlásenia vytvorené.
+<br /><br /><br /><br />
 <?php
 }
 /////////////////////////////////////////export csv
@@ -1145,7 +1352,6 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
 //celkovy koniec dokumentu
-$cislista = include("uct_lista_norm.php");
 } while (false);
 ?>
 </BODY>
