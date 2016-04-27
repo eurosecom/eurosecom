@@ -543,6 +543,18 @@ function statvts101()
 window.open('../ucto/statistika_vts101<?php echo $rokvts101; ?>.php?copern=1&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
                 }
 
+//statistika vts201
+<?php
+$rokvts201="";
+if( $kli_vrok < 2015 ) $rokvts201="_2014";
+?>
+
+function statvts201()
+                {
+
+window.open('../ucto/statistika_vts201<?php echo $rokvts201; ?>.php?copern=1&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+                }
+
 //opu201
 <?php
 $rokopu201="";
@@ -1055,8 +1067,18 @@ if( $kli_vrok > 2009 ) $versuh="10_1";
 <table class="vstup" width="100%" >
 <tr>
 <td class="bmenu" width="2%">
+<a href="#" onClick="statvts201();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Vytvorenie štatistického výkazu VTS 2-01" ></a>
+</td>
+<td class="bmenu" width="90%">ŠTATISTIKA - ROÈNÝ VÝKAZ produkèných odvetví v malých podnikoch vo vybraných trhových službách VTS 2-01</td>
+</tr>
+</table>
+
+<table class="vstup" width="100%" >
+<tr>
+<td class="bmenu" width="2%">
 <a href="#" onClick="statzav101();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Vytvorenie štatistického výkazu VTS 1-01" ></a>
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Vytvorenie štatistického výkazu ZAV 1-01" ></a>
 </td>
 <td class="bmenu" width="90%">ŠTATISTIKA - ROÈNÝ závodný výkaz vo ve¾kých podnikoch ZAV 1-01</td>
 </tr>

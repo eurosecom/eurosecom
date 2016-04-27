@@ -348,6 +348,17 @@ if ( $kli_vrok < 2015 ) $rokvts101="_2014";
 '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
+//statistika vts201
+<?php
+$rokvts201="";
+if ( $kli_vrok < 2015 ) $rokvts201="_2014";
+?>
+  function statvts201()
+  {
+   window.open('../ucto/statistika_vts201<?php echo $rokvts201; ?>.php?copern=1&drupoh=1&page=1',
+'_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+
 //opu201
 <?php
 $rokopu201="";
@@ -969,6 +980,17 @@ if ( $dajstatvyk == 1 )
 </div>
 </div>
 <img src='../obr/zoznam.png' onclick="statvts101();" title="Upravi hodnoty" class="toleft line-box box-green">
+</div> <!-- .line-area -->
+
+<div class="line-area">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Roè VTS 2-01<span>Roèný výkaz produkèných odvetví v malých podnikoch vo vybraných trhových službách</span></strong>
+ <img src="../obr/info.png" title="Roè VTS 2-01 verzia 2015">
+</div>
+</div>
+<img src='../obr/zoznam.png' onclick="statvts201();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
 
 <div class="line-area" style="margin-bottom:8px;">
