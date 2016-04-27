@@ -493,8 +493,6 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - Euler</title>
 <style type="text/css">
-
-
 div.sadzby-area {
   position: absolute;
   background-color: #ffff90;
@@ -579,7 +577,7 @@ table.sadzby td {
 }
 tr.zero-line > td {
   border: 0 !important;
-  height: 0 !important;
+  height: 12px !important;
 }
 div.wrap-vozidla {
   overflow: auto;
@@ -589,10 +587,9 @@ div.wrap-vozidla {
 table.vozidla {
   width: 900px;
   margin: 16px auto;
-  background-color: ;
 }
 table.vozidla caption {
-  height: 20px;
+  height: 22px;
   font-weight: bold;
   font-size: 14px;
   text-align: left;
@@ -600,7 +597,7 @@ table.vozidla caption {
 a.btn-item-new {
   position: absolute;
   top: 35px;
-  left: 150px;
+  left: 160px;
   cursor: pointer;
   font-weight: bold;
   color: #fff;
@@ -620,7 +617,6 @@ table.vozidla tr.body:hover {
 }
 table.vozidla th {
   height: 14px;
-  vertical-align: middle;
   font-size: 11px;
   font-weight: bold;
   color: #999;
@@ -637,7 +633,6 @@ table.vozidla td img {
   vertical-align: text-bottom;
   cursor: pointer;
 }
-
 div.input-echo {
   position: absolute;
   font-size: 18px;
@@ -769,9 +764,9 @@ div.input-echo {
 <div id="content">
 <FORM name="formv1" method="post" action="hlasenie_euler.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&cislo_cpl=<?php echo $cislo_cpl;?>&strana=<?php echo $strana;?>">
 <?php
-$clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive"; $clas5="noactive";
-if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active"; if ( $strana == 3 ) $clas3="active";
-if ( $strana == 4 ) $clas4="active"; if ( $strana == 5 ) $clas5="active";
+$clas1="noactive"; $clas2="noactive"; $clas5="noactive";
+if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
+if ( $strana == 5 ) $clas5="active";
 
 $source="../ucto/hlasenie_euler.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0&cislo_ico=".$cislo_ico."&cislo_cpl=".$cislo_cpl."";
 ?>
@@ -780,7 +775,7 @@ $source="../ucto/hlasenie_euler.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
 <?php                     } ?>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">Odberatelia</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">Zoznam</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
  <h6 class="toright">TlaËiù:</h6>
@@ -855,27 +850,22 @@ $sluz = mysql_query("$sluztt");
 $slpol = mysql_num_rows($sluz);
 ?>
 <div class="wrap-vozidla">
- <a href="#" onclick="NoveVzd();" title="Pridaù I»O" class="btn-item-new" >+ I»O</a>
+ <a href="#" onclick="NoveVzd();" title="Pridaù I»O" class="btn-item-new" >+ DlûnÌk</a>
 <table class="vozidla">
-<caption>Zoznam I»O</caption>
+<caption>Zoznam dlûnÌkov</caption>
 <tr class="zero-line">
- <td style="width:12%;"></td><td style="width:29%;"></td><td style="width:4%;"></td>
- <td style="width:12%;"></td><td style="width:10%;"></td><td style="width:12%;"></td>
- <td style="width:9%;"></td><td style="width:12%;"></td>
+ <td style="width:4%;"></td><td style="width:9%;"></td><td style="width:37%;"></td>
+ <td style="width:10%;"></td><td style="width:12%;"></td><td style="width:18%;"></td>
+ <td style="width:10%;"></td>
 </tr>
 <tr>
- <th rowspan="2">iËo</th>
- <th rowspan="2" align="left">n·zov</th>
- <th rowspan="2">euid</th>
- <th> </th>
- <th colspan="2">suma</th>
- <th rowspan="2" align="right"> </th>
- <th rowspan="2">&nbsp;</th>
-</tr>
-<tr>
- <th style="padding-bottom:1px;"> </th>
- <th style="padding-bottom:1px;"> </th>
- <th style="padding-bottom:1px;"> </th>
+ <th>&nbsp;</th>
+ <th>iËo</th>
+ <th class="left">n·zov</th>
+ <th>euid</th>
+ <th>suma</th>
+ <th>vytvorenÈ</th>
+ <th>&nbsp;</th>
 </tr>
 <?php
 $i=0;
@@ -886,8 +876,6 @@ $i=0;
 $rsluz=mysql_fetch_object($sluz);
 $cisloi=$i+1;
 
-
-
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $rsluz->ico ";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
@@ -897,25 +885,21 @@ $ico_mes = $fir_riadok->mes;
 $ico_uli = $fir_riadok->uli;
 
 mysql_free_result($fir_vysledok);
-
 ?>
 <tr class="body"> 
- <td align="left"><?php echo $cisloi.". ".$rsluz->ico; ?></td>
+ <td class="center" style="border-top:0; font-size:12px; color:#999; font-weight: ;"><?php echo "$cisloi."; ?></td>
+ <td>&nbsp;<?php echo $rsluz->ico; ?></td>
  <td><?php echo $ico_nai; ?></td>
- <td align="center"><?php echo $rsluz->euid; ?></td>
- <td align="center"><?php echo $rsluz->dsuma; ?></td>
- <td align="center"> </td>
- <td align="center">
+ <td class="center"><?php echo $rsluz->euid; ?></td>
+ <td class="right"><?php echo $rsluz->dsuma; ?>&nbsp;&nbsp;</td>
+ <td class="center">
   <img src="../obr/ikony/list_blue_icon.png" onclick="TlacHlasenieIco(<?php echo $rsluz->cpl; ?>);"
-       title="Vytvoriù PDF a CSV hl·senie pre I»O <?php echo $rsluz->ico; ?>">
-    <?php echo SkDatum($rsluz->dath); ?>
+       title="Vytvoriù PDF a CSV hl·senie pre I»O <?php echo $rsluz->ico; ?>">&nbsp;&nbsp;<?php echo SkDatum($rsluz->dath); ?>
  </td>
- <td align="right" style=""> </td>
  <td align="center">
 <?php
 $icox=1*$rsluz->ico;
 ?>
-
   <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl; ?>, <?php echo $icox; ?>);"
        title="Upraviù">&nbsp;&nbsp;&nbsp;
   <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl; ?>, '<?php echo $icox; ?>');"
@@ -932,9 +916,12 @@ $i=$i+1;
 <?php                                        } ?>
 
 <div class="navbar">
+<?php if ( $strana  < 5 ) { ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">Odberatelia</a>
+<?php                     } ?>
+
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">Zoznam</a>
 <?php if ( $strana != 5 ) { ?>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
 <?php                     } ?>
