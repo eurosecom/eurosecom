@@ -35,12 +35,20 @@ if( $hladaj_uce == 0 ) $hladaj_uce=31100;
 
 $somvprirskl=0;
 
+$citfir = include("../cis/citaj_fir.php");
+$opakujinput=1;
+if( $fir_fico == 46614478 ) { $opakujinput=0; }
 
+if( $fir_fico == '46614478' )
+  {
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_dodavobj MODIFY xcep decimal(10,4) DEFAULT 0 "; 
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_dodavobj MODIFY xced decimal(10,4) DEFAULT 0 "; 
+$sqldok = mysql_query("$sqlttt");
+  }
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
-
-
 
 //oznac vybavena
 if( $copern == 8801 )
@@ -144,6 +152,7 @@ $zmtz=1;
 }
 //koniec zmena ico,odbm
 
+$zmazalsom=0;
 //zmazat polozku z obj uplne
 if( $copern == 6001 )
 {
@@ -163,6 +172,20 @@ if( $copern == 6002 )
 {
 $plux = 1*$_REQUEST['plux'];
 $cislo_dok = 1*$_REQUEST['cislo_dok'];
+
+$xcisz=0; $xnatz=""; $xcedz=0; $xmnoz=0;
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_dodavobj  WHERE xcpo = $plux ";
+$sqldok = mysql_query("$sqlfir");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $xcisz=1*$riaddok->xcis;
+  $xnatz=$riaddok->xnat;
+  $xcedz=1*$riaddok->xced;
+  $xmnoz=1*$riaddok->xmno;
+  }
+
+$zmazalsom=1;
 
 $dsqlt = "DELETE FROM F$kli_vxcf"."_dodavobj  WHERE xcpo = $plux ";
 $dsql = mysql_query("$dsqlt");
@@ -443,6 +466,13 @@ var plux = plu;
 window.open('dodobj_t.php?copern=1&drupoh=1&page=1&cislo_dok=' + plux + '&ffd=0&tlacobj=1&zmtz=<?php echo $zmtz; ?>', '_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function TlacOBJnoprice(plu)
+                {
+var plux = plu;
+
+window.open('dodobj_t.php?copern=1&drupoh=1&page=1&cislo_dok=' + plux + '&ffd=0&tlacobj=1&zmtz=<?php echo $zmtz; ?>&noprice=1', '_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 function NovaOBJ()
                 {
 window.open('dodobj.php?copern=7701&drupoh=1&page=1&plux=0&ffd=0&zmtz=<?php echo $zmtz; ?>', '_self', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes' );
@@ -585,6 +615,7 @@ Vstup.value=Vstup.value.replace(",",".");
 </script>
 
 <script type="text/javascript" src="spr_ico_xml.js"></script>
+<script type="text/javascript" src="spr_plu_xml.js"></script>
 
 
 <script type="text/javascript">
@@ -618,6 +649,9 @@ Vstup.value=Vstup.value.replace(",",".");
 ?>
     function ObnovUI()
     {
+
+<?php if( $opakujinput == 1 ){ ?>
+
     document.formv1.xcis.value = '<?php echo "$xcis";?>';
     document.formv1.xnat.value = '<?php echo "$xnat";?>';
     document.formv1.xced.value = '<?php echo "$xced";?>';
@@ -626,6 +660,25 @@ Vstup.value=Vstup.value.replace(",",".");
     document.formv1.uloz.disabled = true;
     document.formv1.xnat.focus();
     document.formv1.xnat.select();
+
+<?php                        } ?>
+
+<?php if( $zmazalsom == 1 ){ ?>
+
+    document.formv1.xcis.value = '<?php echo "$xcisz";?>';
+    document.formv1.xnat.value = '<?php echo "$xnatz";?>';
+    document.formv1.xced.value = '<?php echo "$xcedz";?>';
+    document.formv1.xmno.value = '<?php echo "$xmnoz";?>';
+
+<?php                        } ?>
+
+<?php if( $opakujinput == 0 ){ ?>
+
+    document.formv1.uloz.disabled = true;
+    document.formv1.xnat.focus();
+    document.formv1.xnat.select();
+
+<?php                        } ?>
     
     }
 <?php
@@ -701,6 +754,18 @@ $vytvor = mysql_query("$vsql");
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcv'.$kli_uzid.$sqlt;
 $vytvor = mysql_query("$vsql");
 
+if( $fir_fico == '46614478' )
+  {
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcx$kli_uzid MODIFY xced decimal(10,4) DEFAULT 0 "; 
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcu$kli_uzid MODIFY xced decimal(10,4) DEFAULT 0 "; 
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcx$kli_uzid MODIFY xced decimal(10,4) DEFAULT 0 "; 
+$sqldok = mysql_query("$sqlttt");
+  }
+
 $tlacobj = 1*$_REQUEST['tlacobj'];
 
 
@@ -733,9 +798,9 @@ $dsql = mysql_query("$dsqlt");
 <a href="#" onclick="TlacOBJ(<?php echo $cislo_dok; ?>);"><img src='../obr/tlac.png' width=20 height=15 title='Zobrazi objednávku v PDF'></a> <!-- dopyt, musí tu by <a>? -->
 <?php                     } ?>
 &nbsp;
-<a href="#" onclick=";"><img src='../obr/tlac.png' width=20 height=15 title='Zobrazi objednávku bez nákupných cien v PDF'></a>
+<a href="#" onclick="TlacOBJnoprice(<?php echo $cislo_dok; ?>);;"><img src='../obr/tlac.png' width=20 height=15 title='Zobrazi objednávku bez nákupných cien v PDF'></a>
 &nbsp;
-<a href="#" onclick=";"><img src="../obr/vlozit.png" width=20 height=15 title='Naèíta položky zo zostavy o vyhodnotení minimálnych zásob za  '></a> <!-- dopyt, dorobi premennú pre ièo a názov -->
+<a href="#" onclick=";"><img src="../obr/vlozit.png" width=20 height=15 title='Naèíta položky zo zostavy o vyhodnotení minimálnych zásob za <?php echo $nai; ?> '></a> <!-- dopyt, dorobi premennú pre ièo a názov -->
 </div>
 
 <?php
@@ -912,7 +977,29 @@ echo $poznx." ...";
 <th class="bmenu headpol">Množstvo</th>
 <th class="bmenu headpol" colspan="2">Hodnota</th>
 </tr>
+<script type="text/javascript">
 
+function hladPLU()
+                {
+	myDivElement.style.display=''; 
+	volajSlu();
+
+                }
+
+
+function vykonajPlu(slu,nazov,dph,cenap,cenad,cenan,zas,mer)
+                {
+        document.forms.formv1.xcis.value = slu;
+        document.forms.formv1.xnat.value = nazov;
+        document.forms.formv1.xced.value = cenan;
+        document.forms.formv1.xmno.value = zas;
+
+        myDivElement.style.display='none';
+        document.forms.formv1.xced.focus();
+        document.forms.formv1.xced.select();
+                }
+
+</script>
 <?php
 if ( $copern == 2 )
      {
@@ -920,7 +1007,9 @@ if ( $copern == 2 )
 <FORM name="formv1" method="post" action="dodobj_u.php?copern=22&cislo_dok=<?php echo $cislo_dok; ?>" >
 <tr>
 <td align="center"><input type="text" name="xcis" id="xcis" style="width:60%; text-align:center;" onKeyDown="return xCisEnter(event.which)" /></td>
-<td><input type="text" name="xnat" id="xnat" style="width:90%; padding-left:1px;" onKeyDown="return xNatEnter(event.which)" /></td>
+<td>
+ <img src='../obr/hladaj.png' width='14' height='14' onclick="hladPLU();" title='Hlada položku' > 
+ <input type="text" name="xnat" id="xnat" style="width:90%; padding-left:1px;" onKeyDown="return xNatEnter(event.which)" /></td>
 <td align="center" class="bmenu"><input type="text" name="xced" id="xced" class="fillrg" onKeyDown="return xCedEnter(event.which)" /></td>
 <td align="center" class="bmenu"><input type="text" name="xmno" id="xmno" class="fillrg" onKeyDown="return xMnoEnter(event.which)" /></td>
 <td align="center" class="bmenu" colspan="2"><input type="text" name="xhdd" id="xhdd" class="fillrg" style="width:90%;" onKeyDown="return xHddEnter(event.which)"/></td>
@@ -932,6 +1021,7 @@ if ( $copern == 2 )
 </td>
 <tr>
 </FORM>
+<div id='myDivElement' style="display: none;" >
 <?php
      }
 //koniec copern=2

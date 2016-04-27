@@ -19,6 +19,7 @@ $copern = 1*$_REQUEST['copern'];
 $drupoh = 1*$_REQUEST['drupoh'];
 $html = 1*$_REQUEST['html'];
 $cislo_dok = 1*$_REQUEST['cislo_dok'];
+$noprice = 1*$_REQUEST['noprice'];
 
   require_once("../pswd/password.php");
   @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
@@ -75,7 +76,15 @@ var sirkawic = screen.width-10;
 <br />
 
 <?php
-if (File_Exists ("../tmp/mzdtlac$kli_uzid.pdf")) { $soubor = unlink("../tmp/mzdtlac$kli_uzid.pdf"); }
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/dodobj_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/dodobj_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -123,6 +132,18 @@ $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcu'.$kli_uzid.$sqlt;
 $vytvor = mysql_query("$vsql");
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcv'.$kli_uzid.$sqlt;
 $vytvor = mysql_query("$vsql");
+
+if( $fir_fico == '46614478' )
+  {
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcx$kli_uzid MODIFY xced decimal(10,4) DEFAULT 0 "; 
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcu$kli_uzid MODIFY xced decimal(10,4) DEFAULT 0 "; 
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcx$kli_uzid MODIFY xced decimal(10,4) DEFAULT 0 "; 
+$sqldok = mysql_query("$sqlttt");
+  }
 
 $tlacobj = 1*$_REQUEST['tlacobj'];
 
@@ -334,10 +355,12 @@ if( $xcis == 0 ) { $xcistlac=""; }
 
 $cenatlac=$riadok->xced;
 if( $riadok->xced == 0 ) { $cenatlac=""; }
+if( $noprice == 1 ) { $cenatlac="_ . _"; }
 $mnotlac=$riadok->xmno;
 if( $riadok->xmno == 0 ) { $mnotlac=""; }
 $hodnotatlac=$riadok->xhdd;
 if( $riadok->xhdd == 0 ) { $hodnotatlac=""; }
+if( $noprice == 1 ) { $hodnotatlac="_ . _"; }
 
 $pdf->Cell(1,5,"","$rmc",0,"L");$pdf->Cell(115,5,"$xcistlac $nat","$rmc",0,"L");$pdf->Cell(25,5,"$cenatlac","0",0,"R");$pdf->Cell(20,5,"$mnotlac","0",0,"R");
 $pdf->Cell(24,5,"$hodnotatlac","0",1,"R");
@@ -349,7 +372,11 @@ $pdf->Cell(185,2," ","T",1,"R");
 $pdf->SetFont('arial','',12);
 $pdf->Cell(140,7,"Celkom","$rmc",0,"L");
 $pdf->SetFont('arial','B',12);
-$pdf->Cell(45,7,"$riadok->xhdd EUR","0",1,"R");
+
+$celkomeur=$riadok->xhdd." EUR";
+if( $noprice == 1 ) { $celkomeur="_ . _ EUR"; }
+
+$pdf->Cell(45,7,"$celkomeur","0",1,"R");
 $pdf->Cell(140,1," ","$rmc",0,"L");$pdf->Cell(45,1," ","T",1,"R");
 $pdf->Cell(140,1," ","$rmc",0,"L");$pdf->Cell(45,1," ","T",1,"R");
 
@@ -415,7 +442,7 @@ $ipole=$ipole+1;
                                  }
     }
 
-$pdf->Output("../tmp/mzdtlac.$kli_uzid.pdf"); 
+$pdf->Output("$outfilex"); 
 
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcx'.$kli_uzid;
@@ -426,7 +453,7 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcu'.$kli_uzid;
 ?> 
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/mzdtlac.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
        
 <?php
