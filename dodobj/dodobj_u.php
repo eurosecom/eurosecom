@@ -490,9 +490,8 @@ div.heading > h1 {
   font-family: Times, 'Times New Roman', Georgia, serif;
 }
 div.content {
-  margin: 14px auto;
+  margin: 14px 2%;
   width: 96%;
-  overflow: hidden;
   padding-bottom: 40px;
   position: relative;
 }
@@ -539,6 +538,7 @@ table.form-polozky tbody td {
   font-size: 12px;
   background-color: #fff;
   border-left: 2px solid lightblue;
+  border-bottom: 2px solid lightblue;
   height: 12px;
   padding-bottom: 3px;
 }
@@ -646,7 +646,6 @@ div.alert-red {
   z-index: 10;
 }
 div.alert-ponuka {
-  width: 100%;
   z-index: 10;
   position: absolute;
 }
@@ -988,7 +987,7 @@ window.open('dodobj_u.php?copern=191918&drupoh=1&page=1&cislo_dok='+ dokx + '&ak
 </div>
 
 <div class="content">
-<div id="myIcoElement" class="alert-ponuka" style="top:80px; left:65%;"></div> <!-- ponuka ico -->
+<div id="myIcoElement" class="alert-ponuka" style="top:78px; left:65%;"></div> <!-- ponuka ico -->
 <?php
 if ( $docasnemazanie == 0 )
      {
@@ -1068,7 +1067,7 @@ $dsql = mysql_query("$dsqlt");
 ?>
 
 <!-- zahlavie objednavky -->
-<table class="form-head" style="width:100%; overflow:auto;">
+<table class="form-head" style="width:100%;">
 <thead>
 <tr class="zero-line">
  <td width="12%"></td><td width="23%"></td><td width="30%"></td>
@@ -1137,13 +1136,13 @@ if ( $copern == 1 )
  <td rowspan="3">&nbsp;</td>
  <th>
   <img src='../obr/ziarovka.png' onclick="newIco();" title="Vloži nové IÈO do databázy"
-       style="width:15px; height:15px;">
+       style="width:15px; height:15px; cursor:pointer;">
 Dodávate¾ - <span style="font-weight:normal;">IÈO</span>
  </th>
  <td>
   <input type="text" name="xice" id="xice" maxlength="8" onKeyDown="return xIceEnter(event.which)"
          style="width:70px;"/>&nbsp;
-  <img src='../obr/hladaj.png' onclick="volajIco();" title="H¾ada IÈO alebo názov firmy" style="width:16px; height:16px;">
+  <img src='../obr/hladaj.png' onclick="volajIco();" title="H¾ada IÈO alebo názov firmy" style="width:16px; height:16px; cursor:pointer;">
  </td>
 </tr>
 <tr>
@@ -1284,6 +1283,7 @@ echo $poznx." ...";
 </table>
 
 <div class="form-content" style="margin-top:8px; position:relative;">
+<div id='myDivElement' class="alert-ponuka" style="width:100%; top:80px;"></div> <!-- ponuka poloziek -->
  <h3 style="height:25px; font-size:18px;">&nbsp;Objednávame si u Vás:</h3>
 <!-- polozky objednavky -->
 <table class="form-polozky" style="width:100%; background-color:lightblue;">
@@ -1356,7 +1356,6 @@ if ( $copern == 2 )
  </th>
 </tr>
 </FORM>
-<div id='myDivElement' class="alert-ponuka" style="display:none; top:80px;"></div> <!-- ponuka poloziek -->
 <?php
      }
 //koniec copern=2
@@ -1404,11 +1403,10 @@ if ( $riadok->pox == 10 ) {
 <tfoot>
 <tr>
 <?php if ( $vseobj == 0 ) { ?><th colspan="3" class="left">&nbsp;&nbsp;Sumár objednávky è. <?php echo $riadok->xdok; ?></th><?php } ?>
-
  <td></td>
  <td class="right"><?php echo $riadok->xmno; ?></td>
  <td></td>
- <td class="right"><?php echo $riadok->xhdd; ?></td>
+ <td class="right" style="background-color:#FFFF90; border-bottom:2px solid lightblue; border-left:2px solid lightblue;"><?php echo $riadok->xhdd; ?>&nbsp;</td>
  <td></td>
 </tr>
 <tr>
