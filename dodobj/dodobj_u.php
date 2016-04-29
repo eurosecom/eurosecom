@@ -1,17 +1,17 @@
+<!doctype html>
 <HTML>
 <?php
 
-// celkovy zaciatok dokumentu
+//celkovy zaciatok dokumentu
        do
        {
-
 $zmtz=1;
 
 $sys = 'SKL';
 $urov = 2000;
 $clsm = 960;
 $uziv = include("../uziv.php");
-if( !$uziv ) exit;
+if ( !$uziv ) exit;
 
 // cislo operacie
 $copern = 1*$_REQUEST['copern'];
@@ -318,68 +318,229 @@ if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok);
 $onai = $fir_riadok->onai; $ona2 = $fir_riadok->ona2; $ouli = $fir_riadok->ouli;
 $opsc = $fir_riadok->opsc; $omes = $fir_riadok->omes; 
 }
-
-
     }
 //koniec nacitania
-
-
-
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
-  <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>Dodávateľská objednávka</title>
+ <link rel="stylesheet" href="../css/reset.css" type="text/css">
+<title>Dodávateľská objednávka | EuroSecom</title>
 <style type="text/css">
-img { border:none; }
-h3 {
-  margin: 0;
-  padding: 4px 10px;
-  background-color: lightblue;
-  width: 230px;
-  letter-spacing: 1px;
-  float: left;
-  font-size:16px;
+body {
+  min-width: 980px;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
 }
+strong {
+  font-weight: bold;
+}
+.toleft {
+  float: left;
+}
+.toright {
+  float: right;
+}
+.center {
+  text-align: center;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+div.wrap-heading {
+  overflow: auto;
+  width: 98%;
+  padding: 0 1%;
+  background-color: #ffff90;
+  -webkit-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  -moz-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+}
+div.ilogin {
+  font-size: 11px;
+  background-color:;
+  height: 11px;
+  padding-top: 4px;
+}
+div.ilogin strong {
+  margin-left: 6px;
+  margin-right: 3px;
+}
+div.heading {
+  height: 36px;
+  overflow: hidden;
+}
+div.heading > h1 {
+  line-height: 36px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Times, 'Times New Roman', Georgia, serif;
+}
+div.content {
+  margin: 14px auto;
+  width: 96%;
+  overflow: hidden;
+  padding-bottom: 40px;
+  position: relative;
+}
+tr.zero-line > td { /* urcenie sirky stlpcov */
+  height: 0 !important;
+}
+table.form-head thead td, table.form-head thead th {
+  background-color: #add8e6;
+}
+table.form-head thead th {
+  height: 17px;
+}
+table.form-head tbody td, table.form-head tbody th {
+  background-color: #add8e6;
+  font-size: 11px;
+  height: 17px;
+}
+table.form-head tbody th, table.form-head thead th {
+  text-align: right;
+}
+
+table.form-head tbody input[type=text] {
+  font-size: 12px;
+  height: 12px;
+  padding: 3px 0 2px 3px;
+  margin-left: 6px;
+}
+table.form-head tfoot td {
+  background-color: #add8e6;
+}
+
+table.form-polozky thead th {
+  border-bottom: 2px solid #ffff90;
+  padding-bottom: 3px;
+  font-size: 11px;
+  height: 12px;
+  padding-top: 8px;
+}
+table.form-polozky tbody th {
+  padding-top: 4px;
+
+}
+table.form-polozky tbody td {
+  font-size: 12px;
+  background-color: #fff;
+  border-left: 2px solid lightblue;
+  height: 12px;
+  padding-bottom: 3px;
+}
+table.form-polozky tfoot th {
+  height: 12px;
+  font-size: 12px;
+  padding: 8px 0 7px 0;
+}
+table.form-polozky tfoot td {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+table.form-polozky tbody input[type=text] {
+  font-size: 12px;
+  height: 12px;
+  padding: 3px 0 2px 3px;
+}
+
+a.form-head-tool {
+  display: block;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+a.form-head-tool > img {
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0 3px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+
 a.btn-prepni {
-  font-size:14px;
-  text-decoration:none;
-  color:white;
-  padding:3px 15px;  
+  font-size: 14px;
+  text-decoration: none;
+  color: white;
+  padding: 4px 15px;
   background-color: #ABD159;  
-  border:1px solid #86A83D;
-  font-family:Helvetica, Geneva, Verdana, sans-serif;
-  position:relative;
+  border: 1px solid #86A83D;
 }
 a.btn-prephead {
-  text-decoration:none;
-  font-size:13px;  
-  font-family: Arial;
+  text-decoration: none;
+  font-size: 13px;
+  display: block;
   border: 2px solid #3389a6;
+  border-radius: 6px;
   background-color: #86c5da;
   width: 80px;
-  padding: 5px 2px 5px 2px;
-  display:block;
+  line-height: 16px;
+  padding: 4px 2px 3px 2px;
   color: #3389a6;
-  border-radius: 6px;
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
+  top: 30px;
 }
-input.fill { padding-left: 1px; }
+
 div.nofill {
-  background-color: white;
-  font-weight: normal;
-  padding: 1px 0 1px 2px;
+  background-color: #fff;
+  padding: 3px 0 2px 4px;
+  margin-left: 6px;
+  font-size: 12px;
 }
-input.fillrg {
-  width:90%;
-  text-align:right;
-  padding-right:2px;           
+table.ponuka {
+  width: 100%;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #ffff90;
+}
+table.ponuka td {
+  height: 16px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border: 2px solid #ffff90;
+  background-color:
+}
+table.ponuka tr {
+  background-color: #fff;
+}
+table.ponuka tr:hover {
+  background-color: #eee;
+}
+
+table.ponuka td > input[type=image] {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 3px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+div.alert-red {
+  width: 350px;
+  line-height: 26px;
+  background-color:red;
+  font-weight:bold;
+  font-size: 14px;
+  text-indent: 10px;
+  border-radius: 3px;
+  z-index: 10;
+}
+div.alert-ponuka {
+  width: 100%;
+  z-index: 10;
+  position: absolute;
 }
 
 
-.headpol {
-  border-bottom:2px solid #FFFF90;
-  padding-bottom: 2px;
-}
 #Okno{ display: none; cursor: hand; width: 150px;
              position: absolute; top: 0; left: 0;
              border: "1 solid";
@@ -636,6 +797,7 @@ Vstup.value=Vstup.value.replace(",",".");
     document.formv1.uloz.disabled = true;    
     document.formv1.xdatv.focus();
     document.formv1.xdatv.select();
+
     }
 <?php
 //koniec uprava
@@ -660,10 +822,9 @@ Vstup.value=Vstup.value.replace(",",".");
     document.formv1.uloz.disabled = true;
     document.formv1.xnat.focus();
     document.formv1.xnat.select();
-
 <?php                        } ?>
 
-<?php if( $zmazalsom == 1 ){ ?>
+<?php if ( $zmazalsom == 1 ) { ?>
 
     document.formv1.xcis.value = '<?php echo "$xcisz";?>';
     document.formv1.xnat.value = '<?php echo "$xnatz";?>';
@@ -672,13 +833,11 @@ Vstup.value=Vstup.value.replace(",",".");
 
 <?php                        } ?>
 
-<?php if( $opakujinput == 0 ){ ?>
-
+<?php if ( $opakujinput == 0 ) { ?>
     document.formv1.uloz.disabled = true;
     document.formv1.xnat.focus();
     document.formv1.xnat.select();
-
-<?php                        } ?>
+<?php                          } ?>
     
     }
 <?php
@@ -686,34 +845,32 @@ Vstup.value=Vstup.value.replace(",",".");
   }
 ?>
 </script>
-
 </HEAD>
 
-<BODY class="white" onload="ObnovUI();" >
-<span style="position:absolute; top:130px; left:52%; z-index:3000;"> 
-<span id="myIcoElement"></span>
-</span>
-<span style="position:absolute; top: 185; left:50%; z-index:3000;"> 
-<div id="myOdbmElement"></div>
-</span> <!-- upraviť -->
-<div id="robotmenu" style="display: none; position:absolute; z-index:1; top:100px; right:15%;">zobrazene menu</div>
+<BODY onload="ObnovUI();">
+<!-- zahlavie -->
+<div class="wrap-heading">
+ <div class="ilogin">
+  <h6 class="toleft">EuroSecom</h6>
+  <h6 class="toright">
+   <strong>UME</strong><?php echo $kli_vume; ?>
+   <strong>FIR</strong><?php echo "$kli_vxcf:$kli_nxcf"; ?>
+   <strong>login</strong><?php echo "$kli_uzmeno $kli_uzprie / $kli_uzid"; ?>
+  </h6>
+ </div>
+ <div class="heading">
+  <h1 class="toleft">Dodávateľská objednávka</h1>
+  <a href="#" onclick="SpatZoznam();" class="toright btn-prepni" style="position:relative; top:6px;">
+   <img src="../obr/back_white.png" title="Späť na zoznam objednávok"
+        style="width:16px; height:16px; vertical-align:middle;">&nbsp;Zoznam</a>
+ </div>
+</div>
 
-<table class="h2" width="100%">
-<tr>
-<td align="left">EuroSecom - Dodávateľská objednávka</td>
-<td align="right">
-<a href="#" onclick="SpatZoznam();" class="btn-prepni" >
-<img src="../obr/back_white.png" alt="Späť na zoznam objednávok" title="Späť na zoznam objednávok" height="16" width="16" style="vertical-align:middle;">
-Zoznam</a>
-</td>
-</tr>
-</table>
-
+<div class="content">
+<div id="myIcoElement" class="alert-ponuka" style="top:80px; left:65%;"></div> <!-- ponuka ico -->
 <?php
-
-if( $docasnemazanie == 0 ) 
+if ( $docasnemazanie == 0 )
      {
-
 $vsql = 'DROP TABLE F'.$kli_vxcf.'_mzdprcx'.$kli_uzid;
 $vytvor = mysql_query("$vsql");
 $vsql = 'DROP TABLE F'.$kli_vxcf.'_mzdprcu'.$kli_uzid;
@@ -780,8 +937,6 @@ $dsql = mysql_query("$dsqlt");
 //exit;
      }
 
-
-
 //group vsetko
 $podmgrp=" xdok";
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcx".$kli_uzid.
@@ -791,26 +946,38 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcx".$kli_uzid.
 $dsql = mysql_query("$dsqlt");
 ?>
 
-<div style="width:100%; margin-top:5px; ">
-<h3>Objednávka č. <span style="background-color:#FFFF90; padding:0 7px;"><?php echo $cislo_dok; ?></span></h3>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!-- zahlavie objednavky -->
+<table class="form-head" style="width:100%; overflow:auto;">
+<thead>
+<tr class="zero-line">
+ <td width="12%"></td><td width="23%"></td><td width="30%"></td>
+ <td width="12%"></td><td width="23%"></td>
+</tr>
+<tr>
+ <th style="font-size:14px;"><span style="position:relative; top:6px;">Objednávka č.</span></th>
+ <td style="font-size:14px;">
+   <div style="width:20px; text-align:center; background-color:#ffff90; padding:3px 0 2px 0; margin-left:6px; position:relative; top:7px;"><?php echo $cislo_dok; ?></div>
+ </td>
+ <td colspan="3" style="background-color:#fff;">&nbsp;
 <?php if ( $vseobj == 0 ) { ?>
-<a href="#" onclick="TlacOBJ(<?php echo $cislo_dok; ?>);"><img src='../obr/tlac.png' width=20 height=15 title='Zobraziť objednávku v PDF'></a> <!-- dopyt, musí tu byť <a>? -->
+  <a href="#" onclick="TlacOBJ(<?php echo $cislo_dok; ?>);" class="toleft form-head-tool"><img src='../obr/tlac.png' title='Zobraziť objednávku v PDF'>
+  </a> <!-- dopyt, musí tu byť <a>? -->
 <?php                     } ?>
-&nbsp;
-<a href="#" onclick="TlacOBJnoprice(<?php echo $cislo_dok; ?>);;"><img src='../obr/tlac.png' width=20 height=15 title='Zobraziť objednávku bez nákupných cien v PDF'></a>
-&nbsp;
-<a href="#" onclick=";"><img src="../obr/vlozit.png" width=20 height=15 title='Načítať položky zo zostavy o vyhodnotení minimálnych zásob za <?php echo $nai; ?> '></a> <!-- dopyt, dorobiť premennú pre ičo a názov -->
-</div>
-
+  <a href="#" onclick="TlacOBJnoprice(<?php echo $cislo_dok; ?>);" class="toleft form-head-tool"><img src='../obr/tlac.png' title='Zobraziť objednávku bez nákupných cien v PDF'></a>
+  <a href="#" onclick=";" class="toleft form-head-tool"><img src="../obr/vlozit.png" title='Načítať položky zo zostavy o vyhodnotení minimálnych zásob za <?php echo $nai; ?>'></a>
+ </td>
+</tr>
+</thead>
+<tbody>
+<tr>
+ <td colspan="5" style="height:4px;"></td>
+</tr>
 <?php
-
 $sqltt = "SELECT * ".
 " FROM F$kli_vxcf"."_mzdprcx".$kli_uzid.
 " LEFT JOIN F$kli_vxcf"."_sklcis".
 " ON F$kli_vxcf"."_mzdprcx".$kli_uzid.".xcis=F$kli_vxcf"."_sklcis.cis".
 " WHERE ( xdok > 0 ) ORDER BY pox,xcpl ";
-
 
 //echo $sqltt;
 //exit;
@@ -818,13 +985,11 @@ $sqltt = "SELECT * ".
 $tov = mysql_query("$sqltt");
 $tvpol = mysql_num_rows($tov);
 
-
 $strana=0;
 $j=0;           
 $i=0;
   while ($i <= $tvpol )
   {
-
   if (@$zaznam=mysql_data_seek($tov,$i))
 {
 $riadok=mysql_fetch_object($tov);
@@ -836,45 +1001,61 @@ if ( $j == 0 )
         {
 ?>
 
-<table class="fmenu" width="100%" style="border:none; border-collapse:collapse;">
-<tr>
-<td width="12%"></td><td width="30%"></td><td width="13%"></td><td width="15%"></td><td width="30%"></td>
-</tr>
 <?php
 //hlavicka vyplnatelna
 if ( $copern == 1 )
      {
 ?>
-
-<FORM name="formv1" method="post" action="dodobj_u.php?copern=11&cislo_dok=<?php echo $cislo_dok; ?>" >
+<FORM name="formv1" method="post" action="dodobj_u.php?copern=11&cislo_dok=<?php echo $cislo_dok; ?>">
 <tr>
-<td class="bmenu" align="right">Dátum vystavenia</td>
-<td class="bmenu"><input type="text" name="xdatv" id="xdatv" class="fill" size="10" maxlength="10" onKeyDown="return xDatvEnter(event.which);" onkeyup="CiarkaNaBodku(this, event.which);" /></td>
-<td rowspan="5">&nbsp;</td>
-<td class="bmenu" align="right">
-<img src='../obr/ziarovka.png' onclick="newIco();" width="12" height="12" title="Vložiť nové IČO do databázy" >
-Dodávateľ - <span style="font-weight:normal;">IČO</span></td>
-<td class="bmenu">
-<input type="text" name="xice" id="xice" class="fill" size="10" maxlength="8" onKeyDown="return xIceEnter(event.which)" />
-<img src='../obr/hladaj.png' onclick="volajIco();" title="Hľadať IČO alebo názov firmy" > 
-</td>
+ <th>Dátum vystavenia</th>
+ <td>
+  <input type="text" name="xdatv" id="xdatv" maxlength="10" onKeyDown="return xDatvEnter(event.which);"
+         onkeyup="CiarkaNaBodku(this, event.which);" style="width:80px;"/>
+ </td>
+ <td rowspan="3">&nbsp;</td>
+ <th>
+  <img src='../obr/ziarovka.png' onclick="newIco();" title="Vložiť nové IČO do databázy"
+       style="width:15px; height:15px;">
+Dodávateľ - <span style="font-weight:normal;">IČO</span>
+ </th>
+ <td>
+  <input type="text" name="xice" id="xice" maxlength="8" onKeyDown="return xIceEnter(event.which)"
+         style="width:70px;"/>&nbsp;
+  <img src='../obr/hladaj.png' onclick="volajIco();" title="Hľadať IČO alebo názov firmy" style="width:16px; height:16px;">
+ </td>
 </tr>
 <tr>
-<td class="bmenu" align="right">Dátum dodania</td>
-<td class="bmenu"><input type="text" name="xdatd" id="xdatd" class="fill" size="10" maxlength="10" onKeyDown="return xDatdEnter(event.which);" onkeyup="CiarkaNaBodku(this);" /></td>
-<td class="bmenu" align="right"><span style="font-weight:normal;" >Firma</span></td>
-<td class="bmenu"><input type="text" name="xfir" id="xfir" class="fill" size="30" onKeyDown="return xFirEnter(event.which)" /></td>
+ <th>Dátum dodania</th>
+ <td>
+  <input type="text" name="xdatd" id="xdatd" maxlength="10" onKeyDown="return xDatdEnter(event.which);"
+         onkeyup="CiarkaNaBodku(this);" style="width:80px;"/>
+ </td>
+ <th><span style="font-weight:normal;">Firma</span></th>
+ <td>
+  <input type="text" name="xfir" id="xfir" onKeyDown="return xFirEnter(event.which)"
+         style="width:160px;"/>
+ </td>
 </tr>
 <tr>
-<td class="bmenu" align="right">Spôsob platby</td>
-<td class="bmenu"><input type="text" name="xplat" id="xplat" class="fill" size="20" onKeyDown="return xPlatEnter(event.which)" /></td>
-<td class="bmenu" align="right">Doprava</td>
-<td class="bmenu"><input type="text" name="xdop" id="xdop" class="fill" size="10" onKeyDown="return xDopEnter(event.which)" /></td>
+ <th>Spôsob platby</th>
+ <td>
+  <input type="text" name="xplat" id="xplat" onKeyDown="return xPlatEnter(event.which)"
+         style="width:160px;"/>
+ </td>
+ <th>Doprava</th>
+ <td>
+  <input type="text" name="xdop" id="xdop" onKeyDown="return xDopEnter(event.which)"
+         style="width:160px;"/>
+ </td>
 </tr>
 <tr>
-<td class="bmenu" align="right" >
-<img src='../obr/orig.png' width=20 height=15 onclick="textObj('<?php echo $cislo_dok;?>')" title="Poznámka k objednávke" >&nbsp;Poznámka</td>
-<td class="fmenu" rowspan="2" style="position:relative; left:4px; ">
+ <th rowspan="2">
+  <img src='../obr/orig.png' onclick="textObj('<?php echo $cislo_dok;?>')"
+       title="Poznámka k objednávke" style="width:20px; height:15px; cursor:pointer;">&nbsp;Poznámka
+ </th>
+ <td rowspan="2">
+<span style="margin-left:7px; background-color:#fff; font-size:12px; padding:2px;">
 <?php
 //poznamka
 $poznx="";
@@ -884,59 +1065,68 @@ if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); $poznx = $fi
 $poznx=substr($poznx,0,80);
 echo $poznx." ...";
 ?>
-</td>
-<td class="bmenu" colspan="2"></td>
+</span>
+ </td>
+ <td rowspan="2">
+  <div id="uvolni" onmouseover="document.formv1.uloz.disabled = false;"
+       style="width:120px; line-height:27px; position:relative; top:22px; text-align:center; margin:0 auto;">
+<INPUT type="submit" id="uloz" name="uloz" value="Uložiť hlavičku" style="cursor:pointer; padding:2px 5px;">
+</div>
+ </td>
+ <td colspan="2">&nbsp;</td>
 </tr>
 <tr>
-<td class="bmenu"></td>
-<td class="bmenu" align="right">Stav&nbsp;</td>
-<td class="bmenu"><input type="text" name="xstav" id="xstav" class="fill" size="10" onKeyDown="return xStavEnter(event.which)" /></td>
-</tr>
-<tr>
-<td colspan="5" style="height:3px; background-color:lightblue;"></td>
-</tr>
-<tr>
-<td class="fmenu" colspan="5" align="right">
-<SPAN id="uvolni" onmouseover="document.formv1.uloz.disabled = false;">&nbsp;</SPAN>
-<INPUT type="submit" id="uloz" name="uloz" value="Uložiť hlavičku"></td>
+ <th>Stav</th>
+ <td>
+  <input type="text" name="xstav" id="xstav" onKeyDown="return xStavEnter(event.which)"
+         style="width:160px;"/>
+ </td>
 </tr>
 </FORM>
-
 <?php
 //koniec hlavicka vyplnatelna copern=1   
      }
 ?>
-
 
 <?php
 //hlavicka vypis
 if ( $copern == 2 )
      {
 ?>
-<tr><td colspan="5" style="height:2px; background-color:lightblue;"></td></tr>
 <tr>
-<td class="bmenu" align="right">Dátum vystavenia&nbsp;</td>
-<td><div class="nofill" style="width:100px;" ><?php echo $xdatvsk; ?></div></td>
-<td rowspan="5" align="center">
-<a href="dodobj_u.php?copern=1&drupoh=1&page=1&cislo_dok=<?php echo $cislo_dok; ?>&ffd=0&tlacobj=1&zmtz=1" class="btn-prephead" ><span style="font-weight:normal;">upraviť</span> hlavičku</a>
-</td>
-<td class="bmenu" align="right">Dodávateľ - <span style="font-weight:normal;">IČO</span>&nbsp;</td>
-<td class="bmenu" rowspan="2"><div class="nofill" style="width:250px; height:32px;"><?php echo $ico; ?><br><?php echo $nai; ?> <?php echo $na2; ?></div></td>
+ <th>Dátum vystavenia</th>
+ <td>
+  <div class="nofill" style="width:100px;"><?php echo $xdatvsk; ?></div>
+ </td>
+ <td rowspan="5">
+  <a href="dodobj_u.php?copern=1&drupoh=1&page=1&cislo_dok=<?php echo $cislo_dok; ?>&ffd=0&tlacobj=1&zmtz=1" class="btn-prephead">Upraviť hlavičku</a>
+ </td>
+ <th>Dodávateľ</th>
+ <td class="bmenu" rowspan="2">
+  <div class="nofill" style="width:250px; line-height:15px;"><?php echo $ico; ?><br><?php echo $nai; ?> <?php echo $na2; ?></div>
+ </td>
 </tr>
 <tr>
-<td class="bmenu" align="right">Dátum dodania&nbsp;</td>
-<td class="bmenu"><div class="nofill" style="width:100px;" ><?php echo $xdatdsk; ?></div></td>
-<td class="bmenu" align="right"><span style="font-weight:normal;">Firma</span>&nbsp;</td>
+ <th>Dátum dodania</th>
+ <td>
+  <div class="nofill" style="width:100px;" ><?php echo $xdatdsk; ?></div>
+ </td>
+ <th></th>
 </tr>
 <tr>
-<td class="bmenu" align="right">Spôsob platby&nbsp;</td>
-<td class="bmenu"><div class="nofill" style="width:200px;"><?php echo $xplat; ?>&nbsp;</div></td>
-<td class="bmenu" align="right">Doprava&nbsp;</td>
-<td class="bmenu"><div class="nofill" style="width:200px;"><?php echo $xdop; ?>&nbsp;</div></td>
+ <th>Spôsob platby</th>
+ <td>
+  <div class="nofill" style="width:200px;"><?php echo $xplat; ?>&nbsp;</div>
+ </td>
+ <th>Doprava</th>
+ <td>
+  <div class="nofill" style="width:200px;"><?php echo $xdop; ?>&nbsp;</div>
+ </td>
 </tr>
 <tr>
-<td class="bmenu" align="right">Poznámka&nbsp;</td>
-<td class="bmenu" rowspan="2"><div class="nofill" style="width:250px; height:32px;" >
+ <th>Poznámka</th>
+ <td rowspan="2">
+<div class="nofill" style="width:250px; height:32px;">
 <?php
 //poznamka
 $poznx="";
@@ -946,88 +1136,110 @@ if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); $poznx = $fi
 $poznx=substr($poznx,0,80);
 echo $poznx." ...";
 ?>
-</div></td>
-<td class="bmenu" colspan="2"></td>
+</div>
+ </td>
+ <td colspan="2"></td>
 </tr>
 <tr>
-<td class="bmenu"></td>
-<td class="bmenu" align="right">Stav&nbsp;</td>
-<td class="bmenu"><div class="nofill" style="width:100px;" ><?php echo $xstav; ?>&nbsp;</div></td>
+ <td class="bmenu"></td>
+ <th>Stav</th>
+ <td>
+  <div class="nofill" style="width:100px;" ><?php echo $xstav; ?>&nbsp;</div>
+ </td>
 </tr>
-<tr><td colspan="5" style="height:2px;" ></td></tr>
 <tr>
-<td class="fmenu" colspan="5" align="right"></td>
+ <td colspan="5" style="height:2px;" ></td>
 </tr>
 <?php
 //koniec hlavicka vypis copern=2   
      }
 ?>
+</tbody>
+<tfoot>
+<tr>
+ <td colspan="5" style="height:4px;"></td>
+</tr>
+</tfoot>
 </table>
 
-<h4 style="margin:-20px 0 0 1%; width:99%; padding:10px 0 3px 0; font-size:18px;" >Objednávame si u Vás:</h4>
-
-<table class="fmenu" width="100%" style="border:none;" >
-<tr>
-<td width="8%"></td><td width="51%"></td><td width="15%"></td><td width="10%"></td><td width="12%"></td><td width="4%"></td>
+<div class="form-content" style="margin-top:8px; position:relative;">
+ <h3 style="height:25px; font-size:18px;">&nbsp;Objednávame si u Vás:</h3>
+<!-- polozky objednavky -->
+<table class="form-polozky" style="width:100%; background-color:lightblue;">
+<thead>
+<tr class="zero-line">
+ <td width="8%"></td><td width="40%"></td><td width="8%"></td><td width="12%"></td>
+ <td width="10%"></td><td width="7%"></td><td width="10%"></td><td width="5%"></td>
 </tr>
 <tr>
-<th class="bmenu headpol">číslo položky</th>
-<td class="bmenu headpol">&nbsp;Položka</td>
-<th class="bmenu headpol">Jednotková cena</th>
-<th class="bmenu headpol">Množstvo</th>
-<th class="bmenu headpol" colspan="2">Hodnota</th>
+ <th>Číslo</th>
+ <th class="left">Názov</th>
+ <th>DPH</th>
+ <th>Jednotková Cena</th>
+ <th>Množstvo</th>
+ <th>M.j.</th>
+ <th>Hodnota</th>
+ <th></th>
 </tr>
+</thead>
+<tbody>
 <script type="text/javascript">
+  function hladPLU()
+  {
+	 myDivElement.style.display='';
+	 volajSlu();
+  }
+  function vykonajPlu(slu,nazov,dph,cenap,cenad,cenan,zas,mer)
+  {
+   document.forms.formv1.xcis.value = slu;
+   document.forms.formv1.xnat.value = nazov;
+   document.forms.formv1.xced.value = cenan;
+   document.forms.formv1.xmno.value = zas;
 
-function hladPLU()
-                {
-	myDivElement.style.display=''; 
-	volajSlu();
-
-                }
-
-
-function vykonajPlu(slu,nazov,dph,cenap,cenad,cenan,zas,mer)
-                {
-        document.forms.formv1.xcis.value = slu;
-        document.forms.formv1.xnat.value = nazov;
-        document.forms.formv1.xced.value = cenan;
-        document.forms.formv1.xmno.value = zas;
-
-        myDivElement.style.display='none';
-        document.forms.formv1.xced.focus();
-        document.forms.formv1.xced.select();
-                }
-
+   myDivElement.style.display='none';
+   document.forms.formv1.xced.focus();
+   document.forms.formv1.xced.select();
+  }
 </script>
 <?php
 if ( $copern == 2 )
      {
 ?>
-<FORM name="formv1" method="post" action="dodobj_u.php?copern=22&cislo_dok=<?php echo $cislo_dok; ?>" >
+<FORM name="formv1" method="post" action="dodobj_u.php?copern=22&cislo_dok=<?php echo $cislo_dok; ?>">
 <tr>
-<td align="center"><input type="text" name="xcis" id="xcis" style="width:60%; text-align:center;" onKeyDown="return xCisEnter(event.which)" /></td>
-<td>
- <img src='../obr/hladaj.png' width='14' height='14' onclick="hladPLU();" title='Hladať položku' > 
- <input type="text" name="xnat" id="xnat" style="width:90%; padding-left:1px;" onKeyDown="return xNatEnter(event.which)" /></td>
-<td align="center" class="bmenu"><input type="text" name="xced" id="xced" class="fillrg" onKeyDown="return xCedEnter(event.which)" /></td>
-<td align="center" class="bmenu"><input type="text" name="xmno" id="xmno" class="fillrg" onKeyDown="return xMnoEnter(event.which)" /></td>
-<td align="center" class="bmenu" colspan="2"><input type="text" name="xhdd" id="xhdd" class="fillrg" style="width:90%;" onKeyDown="return xHddEnter(event.which)"/></td>
+ <th>
+  <input type="text" name="xcis" id="xcis" onKeyDown="return xCisEnter(event.which)" style="width:40px;"/>
+ </th>
+ <th class="left">
+  <img src='../obr/hladaj.png' onclick="hladPLU();" title='Hladať položku' style="width:15px; height:15px; cursor:pointer;">
+  <input type="text" name="xnat" id="xnat" onKeyDown="return xNatEnter(event.which)" style="width:90%;"/>
+ </th>
+ <th></th>
+ <th class="center">
+  <input type="text" name="xced" id="xced" onKeyDown="return xCedEnter(event.which)" style="width:70px;"/>
+ </th>
+ <th class="center">
+  <input type="text" name="xmno" id="xmno" onKeyDown="return xMnoEnter(event.which)" style="width:60px;"/>
+ </th>
+ <th></th>
+ <th class="center">
+  <input type="text" name="xhdd" id="xhdd" style="width:70px;" onKeyDown="return xHddEnter(event.which)"/>
+ </th>
+ <th></th>
 </tr>
 <tr>
-<td class="bmenu" colspan="2">
-<INPUT type="submit" id="uloz" name="uloz" value="Uložiť položku">
-<SPAN id="uvolni" onmouseover="document.formv1.uloz.disabled = false;">&nbsp;</SPAN>
-</td>
-<tr>
+ <th colspan="8" style="padding-bottom:4px;">
+<div id="uvolni" onmouseover="document.formv1.uloz.disabled = false;" style="width:90px; line-height:28px; text-align:center;">
+<INPUT type="submit" id="uloz" name="uloz" value="Uložiť">
+</div>
+ </th>
+</tr>
 </FORM>
-<div id='myDivElement' style="display: none;" >
+<div id='myDivElement' class="alert-ponuka" style="display:none; top:80px;"></div> <!-- ponuka poloziek -->
 <?php
      }
 //koniec copern=2
 ?>
-
-
 <?php
         }
 //koniec hlavicky j=0
@@ -1039,58 +1251,63 @@ if ( $copern == 2 )
 if ( $copern == 1 OR $copern == 2 )
      {
 ?>
-
 <?php
-if( $riadok->pox == 1 AND $riadok->xsx2 == 0 )
+if ( $riadok->pox == 1 AND $riadok->xsx2 == 0 )
 {
 ?>
 <tr>
-<td class="hvstup" align="center"><?php echo $riadok->xcis; ?></td>
-<td class="hvstup" >&nbsp;<?php echo $riadok->xnat; ?></td>
-<td class="hvstup" align="right"><?php echo $riadok->xced; ?>&nbsp;</td>
-<td class="hvstup" align="right"><?php echo $riadok->xmno; ?>&nbsp;</td>
-<td class="hvstup" align="right"><?php echo $riadok->xhdd; ?>&nbsp;</td>
-<td class="hvstup" align="center">
-<?php if( $vseobj == 0 AND $somvprirskl == 0 ) { ?>
-<a href="#" onclick="ZmazPolozkuUplne(<?php echo $riadok->xcpl; ?>,<?php echo $riadok->xdok; ?>);">
-<img src='../obr/zmazuplne.png' width=20 height=15 title='Zmazať položku z objednávky' ></a>
-<?php                                          } ?>
-</td>
+ <td class="center"><?php echo $riadok->xcis; ?></td>
+ <td>&nbsp;&nbsp;<?php echo $riadok->xnat; ?></td>
+ <td></td> <!-- dopyt, výpis dph -->
+ <td class="right"><?php echo $riadok->xced; ?>&nbsp;</td>
+ <td class="right"><?php echo $riadok->xmno; ?>&nbsp;</td>
+ <td></td> <!-- dopyt, výpis mernej -->
+ <td class="right"><?php echo $riadok->xhdd; ?>&nbsp;</td>
+ <td class="center" style="background-color:lightblue; border:none;">
+<?php if ( $vseobj == 0 AND $somvprirskl == 0 ) { ?>
+  <a href="#" onclick="ZmazPolozkuUplne(<?php echo $riadok->xcpl; ?>,<?php echo $riadok->xdok; ?>);">
+   <img src='../obr/zmazuplne.png' width=20 height=15 title='Zmazať položku z objednávky' >
+  </a>
+<?php                                           } ?>
+ </td>
 </tr>
 <?php
 }
-
-//koniec polozky vypis    
+//koniec polozky vypis
      }
 ?>
+</tbody>
 <?php
-
-if( $riadok->pox == 10 )
-{
+if ( $riadok->pox == 10 ) {
 ?>
+<tfoot>
 <tr>
-<?php if( $vseobj == 0 ) { ?><td class="bmenu" colspan="2">Sumár objednávky č. <?php echo $riadok->xdok; ?></td><?php } ?>
-<?php if( $vseobj == 1 ) { ?><td class="bmenu" colspan="2">Celkom všetky objednávky</td><?php } ?> <!-- toto je čo -->
-<td class="bmenu"></td>
-<td class="bmenu" align="right"><?php echo $riadok->xmno; ?></td>
-<td class="pvstuz" align="right" style="font-size:16px;" ><?php echo $riadok->xhdd; ?>&nbsp;</td>
+<?php if ( $vseobj == 0 ) { ?><th colspan="3" class="left">&nbsp;&nbsp;Sumár objednávky č. <?php echo $riadok->xdok; ?></th><?php } ?>
+<?php if ( $vseobj == 1 ) { ?><th colspan="3" class="left">Celkom všetky objednávky</th><?php } ?> <!-- dopyt toto je čo -->
+ <td></td>
+ <td class="right"><?php echo $riadok->xmno; ?></td>
+ <td></td>
+ <td class="right" style="background-color:#FFFF90; border:2px solid lightblue; border-right:0;"><?php echo $riadok->xhdd; ?>&nbsp;</td>
+ <td></td>
 </tr>
+<tr>
+ <td colspan="8" style="height:4px;"></td>
+</tr>
+</tfoot>
 <?php
-
-}
-
-
+                          }
 }
 $i = $i + 1;
 $j = $j + 1;
-if( $j > 30 AND $html == 0 ) $j=0;
-
+if ( $j > 30 AND $html == 0 ) $j=0;
   }
-
-
 ?>
+
 </table>
-<div style="width:100%; margin-top:10px; " ><a href="#" onclick="NovaOBJ();" class="btn-prepni" >&nbsp;&nbsp;<strong>Nová</strong>&nbsp;objednávka&nbsp;&nbsp;</a></div>
+</div>  <!-- .form-content -->
+
+<a href="#" onclick="NovaOBJ();" class="btn-prepni" style="float:right; position:relative; top:5px;"><strong>Nová</strong>&nbsp;objednávka</a>
+</div> <!-- .content -->
 
 <?php
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcx'.$kli_uzid;
@@ -1100,7 +1317,7 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcu'.$kli_uzid;
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcv'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
-// celkovy koniec dokumentu
+//celkovy koniec dokumentu
        } while (false);
 ?>
 </BODY>

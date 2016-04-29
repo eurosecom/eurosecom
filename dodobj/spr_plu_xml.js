@@ -169,13 +169,13 @@ function tabulkaXML()
     ggg = pol07Array.item(i).firstChild.data;
     }
 
-  var html = "<table  class='ponuka' width='100%'>";  
+  var html = "<table class='ponuka'>";
   // iterate through the arrays and create an HTML structure
   for (var i=0; i<pol01Array.length; i++)
     {
     html += "<tr>"+
-            "<td width='6%' class='ponuka'>" + pol01Array.item(i).firstChild.data + "</td>" +
-            "<td width='2%'><input type='image' src='../obr/ok.png'" +
+            "<td width='8%' class='center'>" + pol01Array.item(i).firstChild.data + "</td>" +
+            "<td width='40%'><input type='image' src='../obr/ok.png'" +
             " onclick='vykonajPlu(\"" + pol01Array.item(i).firstChild.data + "\"," +
             "\"" + pol02Array.item(i).firstChild.data + "\"," +
             "\"" + pol03Array.item(i).firstChild.data + "\"," +
@@ -183,14 +183,14 @@ function tabulkaXML()
             "\"" + pol05Array.item(i).firstChild.data + "\"," +
             "\"" + pol09Array.item(i).firstChild.data + "\"," +
             "\"" + pol10Array.item(i).firstChild.data + "\"," +
-            "\"" + pol06Array.item(i).firstChild.data +"\" );' />" +
-            "<td width='31%' class='ponuka'>" + pol02Array.item(i).firstChild.data + "</td>" + 
-            "<td width='4%' class='ponuka'>" + pol03Array.item(i).firstChild.data + "</td>" +
-            "<td width='8%'>NC=" + pol09Array.item(i).firstChild.data + "</td>" +
-            "<td width='8%'>ZÁS=" + pol10Array.item(i).firstChild.data + "</td>" +
-            "<td width='4%' class='ponuka'>" + pol06Array.item(i).firstChild.data + "</td>" +
-            "<td width='8%'></td>" +
-            "<td width='13%'></td>" +
+            "\"" + pol06Array.item(i).firstChild.data +"\" );'/>" +
+            "" + pol02Array.item(i).firstChild.data + "</td>" +
+            "<td width='8%' class='center'>" + pol03Array.item(i).firstChild.data + "</td>" +
+            "<td width='12%' class='right'>NC = " + pol09Array.item(i).firstChild.data + "&nbsp;</td>" +
+            "<td width='10%' class='right'>ZÁS = " + pol10Array.item(i).firstChild.data + "&nbsp;</td>" +
+            "<td width='7%' class='center'>" + pol06Array.item(i).firstChild.data + "</td>" +
+            "<td width='10%'></td>" +
+            "<td width='5%'></td>" +
             "</tr>";
     }
 
@@ -201,8 +201,8 @@ function tabulkaXML()
 
   if ( ggg == 0 ) 
   {
-  var html = "<span id='slu0' style='width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;'>" +
-  " Položka nie je v èíselníku</span>";  
+  var html = "<div id='slu0' class='alert-red'>" +
+  " Položka nie je v èíselníku</div>";
   myDivElement.style.display='';
   }
 
@@ -257,5 +257,3 @@ function vypisXML()
   // display the HTML output
   myDiv.innerHTML = html;
 }
-
-

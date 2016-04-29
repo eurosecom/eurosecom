@@ -139,26 +139,25 @@ function tabulka_icoXML()
     nazov = pol02Array.item(i).firstChild.data;
     }
 
-  var html = "<table class='fmenu'>";  
+  var html = "<table class='ponuka' style='width:450px;'>";
     html += "<tr>"+
-            "<td width='10%' class='bmenu' ></td>" +
-            "<td width='5%' class='bmenu' ></td>" +
-            "<td width='40%' class='bmenu' ></td>" +
-            "<td width='45%' class='bmenu' ><a href='#' onclick=\"myIcoElement.style.display='none';\" >Zhasni</a></td>" +
+            "<td width='15%'></td>" +
+            "<td width='55%'></td>" +
+            "<td width='30%' class='center' style'height:18px;'>&nbsp;<a href='#' onclick=\"myIcoElement.style.display='none';\">Zhasni</a></td>" +
             "</tr>";
 
 
   // iterate through the arrays and create an HTML structure
   for (var i=0; i<pol07Array.length; i++)
     {
-    html += "<tr height='30'>"+
-            "<td align='center' class='pvstuz' >" + pol01Array.item(i).firstChild.data + "</td>" +
-            "<td align='center' class='pvstuz' ><input type='image' style='width:20px; height:20px;' src='../obr/ok.png'" +
+    html += "<tr>"+
+            "<td class='right'>" + pol01Array.item(i).firstChild.data + "&nbsp;</td>" +
+            "<td><input type='image' src='../obr/ok.png' title='Vybrať'" +
             " onclick='vykonajIco(\"" + pol01Array.item(i).firstChild.data + "\"," +
             "\"" + pol02Array.item(i).firstChild.data + "\"," +
             "\"" + pol03Array.item(i).firstChild.data +"\" );' />" +
-            "<td class='pvstuz' >" + pol02Array.item(i).firstChild.data + "</td>" + 
-            "<td class='pvstuz' >" + pol03Array.item(i).firstChild.data + "</td>" +
+            "" + pol02Array.item(i).firstChild.data + "</td>" + 
+            "<td>&nbsp;" + pol03Array.item(i).firstChild.data + "</td>" +
             "</tr>";
     }
 
