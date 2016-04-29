@@ -50,6 +50,117 @@ $sqldok = mysql_query("$sqlttt");
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
+//nacitaj min zasoby
+if( $copern == 191918 )
+{
+$cislo_dok = 1*$_REQUEST['cislo_dok'];
+$akeico = 1*$_REQUEST['akeico'];
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete naËÌtaù zo zostavy minim·lnych z·sob do objedn·vky Ë.<?php echo $cislo_dok; ?> ?") )
+         {  }
+else
+  var okno = window.open("dodobj_u.php?copern=191919&drupoh=1&page=1&cislo_dok=<?php echo $cislo_dok; ?>&zmtz=<?php echo $zmtz; ?>&akeico=<?php echo $akeico; ?>","_self");
+</script>
+<?php
+//echo "rus";
+$copern=1;
+$page=1;
+$zmtz=1;
+$tlacobj=1;
+$drupoh=1;
+//exit;
+}
+if( $copern == 191919 )
+{
+
+$cislo_dok = 1*$_REQUEST['cislo_dok'];
+$akeico = 1*$_REQUEST['akeico'];
+
+$sqltt2 = "SELECT * FROM F$kli_vxcf"."_dodavobj WHERE xdok = $cislo_dok AND xsx2 = 9 "; 
+$sqldo2 = mysql_query("$sqltt2");
+ if (@$zaznam=mysql_data_seek($sqldo2,0))
+ {
+ $riaddo2=mysql_fetch_object($sqldo2);
+ $xdatd=$riaddo2->xdatd;
+ $xdatv=$riaddo2->xdatv;
+ $xstav=$riaddo2->xstav;
+
+ }
+
+
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_sklprcdminzas$kli_uzid  WHERE ddv = $akeico AND pox = 0 ORDER BY cis ";
+
+//echo $sqlttt."<br />";
+//exit;
+
+$sql = mysql_query("$sqlttt");
+$cpol = mysql_num_rows($sql);
+$i=0;
+
+
+while ($i <= $cpol )
+{
+  if (@$zaznam=mysql_data_seek($sql,$i))
+    {
+  $riadok=mysql_fetch_object($sql);
+
+
+//`f93_sklprcdminzas38` 
+//druh	pox1	pox	ume	dat	skl	cis	ddv	mno	cen	zas	hod	vdj	prj	pcs
+
+//dodavobj
+//xdok	xdatd	xdatv	xfak	xsx1	xsx2	xsx3	xdx1	xdx2	xdx3	xice	xodbm	xcpo	xcpl	
+//xcis	xnat	xdph	xcep	xced	xmno	xhdb	xhdd	xid	xdatm	xplat	xfir	xodm	xdop	xstav
+
+$cisnaz="";
+$sqltt2 = "SELECT * FROM F$kli_vxcf"."_sklcis WHERE cis = $riadok->cis "; 
+$sqldo2 = mysql_query("$sqltt2");
+ if (@$zaznam=mysql_data_seek($sqldo2,0))
+ {
+ $riaddo2=mysql_fetch_object($sqldo2);
+ $cisnaz=$riaddo2->nat;
+
+ }
+
+$ciscen=0; $prodnum="";
+$sqltt2 = "SELECT * FROM F$kli_vxcf"."_sklcisudaje WHERE xcis = $riadok->cis "; 
+$sqldo2 = mysql_query("$sqltt2");
+ if (@$zaznam=mysql_data_seek($sqldo2,0))
+ {
+ $riaddo2=mysql_fetch_object($sqldo2);
+ $ciscen=$riaddo2->pdod;
+ $prodnum=trim($riaddo2->xnat4);
+
+ }
+
+$cenax=$riadok->cen; 
+if( $fir_fico == 46614478 ) 
+{
+$cenax=$ciscen;
+if( $prodnum != "" AND $prodnum != 0 ) { $cisnaz="ProdNm ".$prodnum." ".$cisnaz; }
+} 
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_dodavobj ( xdatd, xdatv, xstav, xdok, xfak, xice, xodbm, xsx3, xcis, xnat, xid, xdatm, xmno, xdph, xcep, xced, xhdb, xhdd ) ".
+" VALUES ( '$xdatd', '$xdatv', '$xstav', '$cislo_dok', '0', '$akeico', '0', '0', '$riadok->cis', '$cisnaz', '$kli_uzid', now(), '$riadok->vdj', '20', '$cenax', '0', '0', '0'  ) ";
+$dsql = mysql_query("$dsqlt"); 
+//echo $dsqlt."<br />";
+
+    }
+$i=$i+1;
+}
+
+
+$dsqlt = "UPDATE F$kli_vxcf"."_dodavobj SET xced=xcep, xhdb=xmno*xcep, xhdd=xmno*xced WHERE xdok = $cislo_dok ";
+$dsql = mysql_query("$dsqlt"); 
+
+$html=1;
+$copern=2;
+$tlacobj=1;
+$zmtz=1;
+}
+//koniec nacitaj min zasoby
+
 //oznac vybavena
 if( $copern == 8801 )
 {
@@ -840,6 +951,16 @@ Vstup.value=Vstup.value.replace(",",".");
 <?php                          } ?>
     
     }
+
+function NacitajMin(dok, ico)
+                {
+
+var dokx = dok;
+var akeicox = ico;
+
+window.open('dodobj_u.php?copern=191918&drupoh=1&page=1&cislo_dok='+ dokx + '&akeico='+ akeicox + '&zmtz=<?php echo $zmtz; ?>', '_self' );
+                }
+
 <?php
 //koniec uprava
   }
@@ -964,7 +1085,7 @@ $dsql = mysql_query("$dsqlt");
   </a> <!-- dopyt, musÌ tu byù <a>? -->
 <?php                     } ?>
   <a href="#" onclick="TlacOBJnoprice(<?php echo $cislo_dok; ?>);" class="toleft form-head-tool"><img src='../obr/tlac.png' title='Zobraziù objedn·vku bez n·kupn˝ch cien v PDF'></a>
-  <a href="#" onclick=";" class="toleft form-head-tool"><img src="../obr/vlozit.png" title='NaËÌtaù poloûky zo zostavy o vyhodnotenÌ minim·lnych z·sob za <?php echo $nai; ?>'></a>
+  <a href="#" onclick="NacitajMin(<?php echo $cislo_dok; ?>, <?php echo $ico; ?>);" class="toleft form-head-tool"><img src="../obr/vlozit.png" title='NaËÌtaù poloûky zo zostavy o vyhodnotenÌ minim·lnych z·sob za <?php echo $nai; ?>'></a>
  </td>
 </tr>
 </thead>
@@ -1258,10 +1379,10 @@ if ( $riadok->pox == 1 AND $riadok->xsx2 == 0 )
 <tr>
  <td class="center"><?php echo $riadok->xcis; ?></td>
  <td>&nbsp;&nbsp;<?php echo $riadok->xnat; ?></td>
- <td></td> <!-- dopyt, v˝pis dph -->
+ <td class="center"><?php echo $riadok->xdph; ?></td>
  <td class="right"><?php echo $riadok->xced; ?>&nbsp;</td>
  <td class="right"><?php echo $riadok->xmno; ?>&nbsp;</td>
- <td></td> <!-- dopyt, v˝pis mernej -->
+ <td class="center"><?php echo $riadok->mer; ?></td> 
  <td class="right"><?php echo $riadok->xhdd; ?>&nbsp;</td>
  <td class="center" style="background-color:lightblue; border:none;">
 <?php if ( $vseobj == 0 AND $somvprirskl == 0 ) { ?>
@@ -1283,11 +1404,11 @@ if ( $riadok->pox == 10 ) {
 <tfoot>
 <tr>
 <?php if ( $vseobj == 0 ) { ?><th colspan="3" class="left">&nbsp;&nbsp;Sum·r objedn·vky Ë. <?php echo $riadok->xdok; ?></th><?php } ?>
-<?php if ( $vseobj == 1 ) { ?><th colspan="3" class="left">Celkom vöetky objedn·vky</th><?php } ?> <!-- dopyt toto je Ëo -->
+
  <td></td>
  <td class="right"><?php echo $riadok->xmno; ?></td>
  <td></td>
- <td class="right" style="background-color:#FFFF90; border:2px solid lightblue; border-right:0;"><?php echo $riadok->xhdd; ?>&nbsp;</td>
+ <td class="right"><?php echo $riadok->xhdd; ?></td>
  <td></td>
 </tr>
 <tr>

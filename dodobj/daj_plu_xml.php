@@ -146,6 +146,26 @@ $sqldoks = mysql_query("$sqlttts");
   }
     }
 
+
+$ciscen=0; $prodnum="";
+$sqltt2 = "SELECT * FROM F$kli_vxcf"."_sklcisudaje WHERE xcis = $cislotov "; 
+$sqldo2 = mysql_query("$sqltt2");
+ if (@$zaznam=mysql_data_seek($sqldo2,0))
+ {
+ $riaddo2=mysql_fetch_object($sqldo2);
+ $ciscen=$riaddo2->pdod;
+ $prodnum=trim($riaddo2->xnat4);
+ }
+
+$cenax=$riadok->cen; 
+if( $fir_fico == 46614478 ) 
+{
+$cenax=$ciscen;
+if( $prodnum != "" AND $prodnum != 0 ) { $cisnaz="ProdNm ".$prodnum." ".$cisnaz; }
+} 
+
+
+
 $txp01 = $retezec = iconv("CP1250", "UTF-8", $riadok->cis); 
 $txp02 = $retezec = iconv("CP1250", "UTF-8", $riadok->nat); 
 $txp03 = $retezec = iconv("CP1250", "UTF-8", $riadok->dph); 
@@ -154,7 +174,7 @@ $txp05 = $retezec = iconv("CP1250", "UTF-8", $cenad);
 $txp06 = $retezec = iconv("CP1250", "UTF-8", $riadok->mer); 
 
 $txp08 = $retezec = iconv("CP1250", "UTF-8", $riadok->skl); 
-$txp09 = $retezec = iconv("CP1250", "UTF-8", $riadok->cen); 
+$txp09 = $retezec = iconv("CP1250", "UTF-8", $cenax); 
 $txp10 = $retezec = iconv("CP1250", "UTF-8", $zasoba); 
 
 }

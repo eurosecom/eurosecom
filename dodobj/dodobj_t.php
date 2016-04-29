@@ -350,6 +350,8 @@ $xcis=$xcisx;
 if( $xcis == 0 ) { $nat=$riadok->xnat; $xcis=0; }
   }
 
+if( $fir_fico == 46614478 ) { $nat=$riadok->xnat; }
+
 $xcistlac=$xcis;
 if( $xcis == 0 ) { $xcistlac=""; }
 
@@ -362,8 +364,8 @@ $hodnotatlac=$riadok->xhdd;
 if( $riadok->xhdd == 0 ) { $hodnotatlac=""; }
 if( $noprice == 1 ) { $hodnotatlac="_ . _"; }
 
-$pdf->Cell(1,5,"","$rmc",0,"L");$pdf->Cell(115,5,"$xcistlac $nat","$rmc",0,"L");$pdf->Cell(25,5,"$cenatlac","0",0,"R");$pdf->Cell(20,5,"$mnotlac","0",0,"R");
-$pdf->Cell(24,5,"$hodnotatlac","0",1,"R");
+$pdf->Cell(1,5,"","$rmc",0,"L");$pdf->Cell(115,5,"$xcistlac $nat","$rmc",0,"L");$pdf->Cell(25,5,"$cenatlac","0",0,"R");$pdf->Cell(16,5,"$mnotlac","0",0,"R");
+$pdf->Cell(4,5,"$riadok->mer","0",0,"R");$pdf->Cell(24,5,"$hodnotatlac","0",1,"R");
 }
 if( $riadok->pox == 10 AND $drupoh == 1 )
 {
