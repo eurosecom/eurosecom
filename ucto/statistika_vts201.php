@@ -440,7 +440,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET ".
 $upravene = mysql_query("$uprtxt");
 
 
-$strana=3;
+$strana=4;
 }
 //koniec uobrat.php modul 405
 
@@ -473,7 +473,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET ".
 $upravene = mysql_query("$uprtxt");
 
 
-$strana=3;
+$strana=4;
 }
 //koniec uobrat.php modul 558
 
@@ -2330,9 +2330,20 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts201 ADD m100302 DECIMAL(10,0) DE
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts201 ADD m100304 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
 $vysledek = mysql_query("$sql");
-
 }
-
+$sql = "SELECT m514r99 FROM F$kli_vxcf"."_statistika_vts201 WHERE ico=0";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts201 ADD m514r01 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts201 ADD m514r02 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts201 ADD m514r03 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts201 ADD m514r99 DECIMAL(10,2) DEFAULT 0 AFTER new2015";
+$vysledek = mysql_query("$sql");
+}
 //koniec pracovny subor
 
 
@@ -3086,6 +3097,11 @@ $m474r305 = strip_tags($_REQUEST['m474r305']);
 $m474r306 = strip_tags($_REQUEST['m474r306']);
 $m474r307 = strip_tags($_REQUEST['m474r307']);
 $m474r399 = strip_tags($_REQUEST['m474r399']);
+
+$m514r01 = strip_tags($_REQUEST['m514r01']);
+$m514r02 = strip_tags($_REQUEST['m514r02']);
+$m514r03 = strip_tags($_REQUEST['m514r03']);
+$m514r99 = strip_tags($_REQUEST['m514r99']);
 //13.strana
 $m127r001 = strip_tags($_REQUEST['m127r001']);
 $m127r002 = strip_tags($_REQUEST['m127r002']);
@@ -3462,7 +3478,8 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET ".
   m474r201='$m474r201', m474r202='$m474r202', m474r203='$m474r203', m474r204='$m474r204',
   m474r205='$m474r205', m474r206='$m474r206', m474r207='$m474r207', m474r299='$m474r299',
   m474r301='$m474r301', m474r302='$m474r302', m474r303='$m474r303', m474r304='$m474r304',
-  m474r305='$m474r305', m474r306='$m474r306', m474r307='$m474r307', m474r399='$m474r399' ".
+  m474r305='$m474r305', m474r306='$m474r306', m474r307='$m474r307', m474r399='$m474r399',
+  m514r01='$m514r01',  m514r02='$m514r02',  m514r03='$m514r03',  m514r99='$m514r99' ".
 " WHERE ico >= 0 ";
                      }
 
@@ -3518,7 +3535,6 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET ".
   m128r509='$m128r509', m128r510='$m128r510', m128r511='$m128r511', m128r599='$m128r599' ".
 " WHERE ico >= 0 ";
                      }
-
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 $copern=102;
@@ -3607,6 +3623,11 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET ".
 " m474r199=m474r101+m474r102+m474r103+m474r104+m474r105+m474r106, ".
 " m474r299=m474r201+m474r202+m474r203+m474r204+m474r205+m474r206+m474r207, ".
 " m474r399=m474r301+m474r302+m474r303+m474r304+m474r305+m474r306+m474r307  ". 
+" WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET ".
+" m514r99=m514r01+m514r02+m514r03  ". 
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
 
@@ -4165,6 +4186,11 @@ $m474r305 = $fir_riadok->m474r305;
 $m474r306 = $fir_riadok->m474r306;
 $m474r307 = $fir_riadok->m474r307;
 $m474r399 = $fir_riadok->m474r399;
+
+$m514r01 = $fir_riadok->m514r01;
+$m514r02 = $fir_riadok->m514r02;
+$m514r03 = $fir_riadok->m514r03;
+$m514r99 = $fir_riadok->m514r99;
 //13.strana
 $m127r001 = $fir_riadok->m127r001;
 $m127r002 = $fir_riadok->m127r002;
@@ -4923,6 +4949,10 @@ form input[type=text] {
    document.formv1.m474r306.value = '<?php echo "$m474r306";?>';
    document.formv1.m474r307.value = '<?php echo "$m474r307";?>';
 //document.formv1.m474r399.value = '<?php echo "$m474r399";?>';
+
+   document.formv1.m514r01.value = '<?php echo "$m514r01";?>';
+   document.formv1.m514r02.value = '<?php echo "$m514r02";?>';
+   document.formv1.m514r03.value = '<?php echo "$m514r03";?>';
 <?php                      } ?>
 
 <?php if ( $strana == 13 ) { ?>
@@ -5151,11 +5181,11 @@ form input[type=text] {
   }
   function NacitajModuly()
   {
-   window.open('../ucto/uobrat.php?modul=9200&copern=200&drupoh=1&page=1&typ=PDF&cstat=10201&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
+   window.open('../ucto/uobrat.php?modul=9200&copern=200&drupoh=1&page=1&typ=PDF&cstat=50201&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
   }
   function NacitajZobratovky(modul)
   {
-   window.open('../ucto/uobrat.php?modul=' + modul + '&copern=200&drupoh=1&page=1&typ=PDF&cstat=10201&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
+   window.open('../ucto/uobrat.php?modul=' + modul + '&copern=200&drupoh=1&page=1&typ=PDF&cstat=50201&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
   }
 
 //bud alebo checkbox v module 100041
