@@ -107,10 +107,11 @@ $vytvor = mysql_query("$vsql");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid".
 " SELECT 0,0,0,1,drupoh,uce,0,ume,dat,das,daz,dok,ico,fak,".
 "poz,ksy,ssy,SUM(hdp),SUM(hdu),SUM(hod),SUM(uhr),SUM(zos),dau".
-" FROM F$kli_vxcf"."_prsaldoicofak$kli_uzid".
+" FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid".
 " WHERE LEFT(uce,3) = 311 ".
 " GROUP BY uce,ico,fak";
 $dsql = mysql_query("$dsqlt");
+
 
 $tovtt = "DELETE FROM F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid WHERE zos <= 0 ";
 $tov = mysql_query("$tovtt");
@@ -121,13 +122,13 @@ $sqtoz = "UPDATE F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid SET puc=TO_DAYS('$d
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid SET puc=0 WHERE puc < 0 ";
-$oznac = mysql_query("$sqtoz");
+//$oznac = mysql_query("$sqtoz");
 
 $tovtt = "DELETE FROM F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid WHERE dat < '2016-02-01' ";
-$tov = mysql_query("$tovtt");
+//$tov = mysql_query("$tovtt");
 
 $tovtt = "DELETE FROM F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid WHERE puc < 30 ";
-$tov = mysql_query("$tovtt");
+//$tov = mysql_query("$tovtt");
 
 $sqlt = "DROP TABLE F".$kli_vxcf."_ucthlasenie_eulerfak";
 $vysledok = mysql_query("$sqlt");
@@ -318,7 +319,9 @@ endif;
 
 //vypocty
 
-
+$dsqlt = "UPDATE F$kli_vxcf"."_ucthlasenie_euler,F$kli_vxcf"."_ico ".
+"SET zorad=nai WHERE F$kli_vxcf"."_ucthlasenie_euler.ico=F$kli_vxcf"."_ico.ico ";
+$dsql = mysql_query("$dsqlt");
 
 //koniec vypocty
 
@@ -387,6 +390,15 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD mnin DECIMAL(2,0) DEFAULT 0 AFTER konx1";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD dbdph DECIMAL(10,2) DEFAULT 0 AFTER konx1";
+$vysledek = mysql_query("$sql");
+}
+$sql = "SELECT nahl FROM F".$kli_vxcf."_ucthlasenie_euler";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD zorad VARCHAR(40) NOT NULL AFTER ico";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_ucthlasenie_euler ADD nahl DECIMAL(2,0) DEFAULT 0 AFTER ico";
 $vysledek = mysql_query("$sql");
 }
 //koniec vytvorenie
@@ -843,7 +855,7 @@ $source="../ucto/hlasenie_euler.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 
 <?php if ( $strana == 5 OR $strana == 9999 ) {
 //VYPIS ZOZNAMU 
-$sluztt = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE oc = 1 ORDER BY ico ";
+$sluztt = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE oc = 1 ORDER BY zorad,ico ";
 
 //echo $sluztt;
 $sluz = mysql_query("$sluztt");
