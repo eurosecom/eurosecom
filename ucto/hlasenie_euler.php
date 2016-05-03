@@ -901,7 +901,9 @@ mysql_free_result($fir_vysledok);
 <tr class="body"> 
  <td class="center" style="border-top:0; font-size:12px; color:#999; font-weight: ;"><?php echo "$cisloi."; ?></td>
  <td>&nbsp;<?php echo $rsluz->ico; ?></td>
- <td><?php echo $ico_nai; ?></td>
+ <td>
+  <input type="checkbox" title="Prida do hlásenia" style="position:relative; top:1px;">&nbsp;<?php echo $ico_nai; ?>
+ </td>
  <td class="center"><?php echo $rsluz->euid; ?></td>
  <td class="right"><?php echo $rsluz->dsuma; ?>&nbsp;&nbsp;</td>
  <td class="center">
