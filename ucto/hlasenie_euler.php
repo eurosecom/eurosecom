@@ -51,6 +51,37 @@ $rmc1=0;
 $jpg_cesta="../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler";
 $jpg_popis="tlaèivo Hlásenie poh¾adávok po splatnosti Euler Hermes za rok ".$kli_vrok;
 
+//pridaj Hla 
+    if ( $copern == 416 )
+    {
+$cislo_ico = $_REQUEST['cislo_ico'];
+
+$nahlx=0;
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE ico = $cislo_ico ORDER BY ico LIMIT 1";
+$sqldok = mysql_query("$sqlttt");
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+ $nahlx=1*$riaddok->nahl;
+ }
+
+if( $nahlx == 0 )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET nahl=1 WHERE ico = $cislo_ico ";
+$oznac = mysql_query("$sqtoz");
+  }
+if( $nahlx == 1 )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET nahl=0 WHERE ico = $cislo_ico ";
+$oznac = mysql_query("$sqtoz");
+  }
+
+$copern=20;
+$strana=5;
+$zoznamaut=1;
+    }
+//pridaj Hla
+
 //nacitanie zo salda
     if ( $copern == 3155 ) { ?>
 <script type="text/javascript">
@@ -177,7 +208,7 @@ $dsql = mysql_query("$dsqlt");
 $i=$i+1;
 }
 
-$dsqlt = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET dath='$dnes' ";
+$dsqlt = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET dath='$dnes', nahl=0 ";
 $dsql = mysql_query("$dsqlt");
 
 
@@ -744,6 +775,12 @@ div.input-echo {
    window.open('../ucto/hlasenie_euler.php?copern=11&page=1&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
+
+  function pridajHla(ico)
+  {
+   var cislo_ico = ico;
+   window.open('../ucto/hlasenie_euler.php?copern=416&cislo_ico='+ cislo_ico + '&uprav=0', '_self' )
+  }
 </script>
 </HEAD>
 <BODY id="white" onload="ObnovUI();">
@@ -902,7 +939,9 @@ mysql_free_result($fir_vysledok);
  <td class="center" style="border-top:0; font-size:12px; color:#999; font-weight: ;"><?php echo "$cisloi."; ?></td>
  <td>&nbsp;<?php echo $rsluz->ico; ?></td>
  <td>
-  <input type="checkbox" title="Prida do hlásenia" style="position:relative; top:1px;">&nbsp;<?php echo $ico_nai; ?>
+  <input type="checkbox" name="nahl<?php echo $rsluz->ico; ?>" value="1" 
+<?php if ( $rsluz->nahl == 1 ) { ?> checked="checked" <?php } ?>
+onclick="pridajHla(<?php echo $rsluz->ico; ?>);" title="Prida do hlásenia" style="position:relative; top:1px;">&nbsp;<?php echo $ico_nai; ?>
  </td>
  <td class="center"><?php echo $rsluz->euid; ?></td>
  <td class="right"><?php echo $rsluz->dsuma; ?>&nbsp;&nbsp;</td>
@@ -1254,7 +1293,7 @@ $hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),
 
 
 
-$sqltt5 = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE dsuma > 0 ORDER BY ico ";
+$sqltt5 = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE dsuma > 0 AND nahl = 1 ORDER BY ico ";
 $sql5 = mysql_query("$sqltt5");                                                   
 $pol5 = mysql_num_rows($sql5);
 
@@ -1269,9 +1308,9 @@ $sqlfir = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $hlavicka5->ico ";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
-$ico_nai = $fir_riadok->nai;
-$ico_mes = $fir_riadok->mes;
-$ico_uli = $fir_riadok->uli;
+$ico_nai = trim($fir_riadok->nai);
+$ico_mes = trim($fir_riadok->mes);
+$ico_uli = trim($fir_riadok->uli);
 $ico_psc = $fir_riadok->psc;
 $ico_konemail = $fir_riadok->em1;
 $ico_kontel = $fir_riadok->tel;
@@ -1301,7 +1340,7 @@ $hlavicka=mysql_fetch_object($sql);
 
 if ( $i == 0 )
      {
-$text = $ico_nai."\r\n";
+$text = "$ico_nai, $ico_uli, $ico_mes, $ico_psc, email $ico_konemail, tel $ico_kontel, ico $hlavicka5->ico "."\r\n";
 fwrite($soubor, $text);
 
 $text = "cislo_faktury".";"."vystavena".";"."splatna".";"."bez_dph".";"."s_dph".";"."\r\n";
