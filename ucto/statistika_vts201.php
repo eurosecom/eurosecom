@@ -19,7 +19,7 @@ if (!isset($kli_vxcf)) $kli_vxcf = 1;
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=1;
+$rmc=0;
 $rmc1=0;
 
 $citfir = include("../cis/citaj_fir.php");
@@ -6078,11 +6078,10 @@ $sknacesb=$fir_sknace;
 <span class="text-echo" style="top:535px; right:58px;"><?php echo $m474r399; ?></span>
 
 <!-- modul 514 -->
-<!-- dopyt, nový modul -->
-<input type="text" name="m514r01" id="m514r01" style="width:215px; top:770px; left:675px;"/>
-<input type="text" name="m514r02" id="m514r02" style="width:215px; top:800px; left:675px;"/>
-<input type="text" name="m514r03" id="m514r03" style="width:215px; top:831px; left:675px;"/>
-<span class="text-echo" style="top:866px; right:58px;">0<?php echo $m514r99; ?></span>
+<input type="text" name="m514r01" id="m514r01" onkeyup="CiarkaNaBodku(this);" style="width:215px; top:770px; left:675px;"/>
+<input type="text" name="m514r02" id="m514r02" onkeyup="CiarkaNaBodku(this);" style="width:215px; top:800px; left:675px;"/>
+<input type="text" name="m514r03" id="m514r03" onkeyup="CiarkaNaBodku(this);" style="width:215px; top:831px; left:675px;"/>
+<span class="text-echo" style="top:866px; right:58px;"><?php echo $m514r99; ?></span>
 <?php                                         } ?>
 
 

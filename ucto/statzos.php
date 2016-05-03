@@ -986,7 +986,7 @@ if ( $dajstatvyk == 1 )
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
- <strong>Roè VTS 2-01<span>Roèný výkaz produkèných odvetví v malých podnikoch vo vybraných trhových službách</span></strong>
+ <strong>Roè VTS 2-01<span>Roèný výkaz produkèných odvetví v malých podnikoch vo vybr. trhových službách</span></strong>
  <img src="../obr/info.png" title="Roè VTS 2-01 verzia 2015">
 </div>
 </div>
@@ -1175,6 +1175,7 @@ if ( $nedaj == 0 ) { ?>
  </select>
 </div>
 </div>
+<div class="toleft line-box"></div>
 <div class="toleft line-box"></div>
 <img src='../obr/export.png' onclick="DbfFin504();" title="Export do DBF" class="toleft line-box box-red">
 <img src='../obr/zoznam.png' onclick="UpravFin504();" title="Upravi hodnoty" class="toleft line-box box-green">
