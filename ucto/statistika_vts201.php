@@ -6078,6 +6078,8 @@ $sknacesb=$fir_sknace;
 <span class="text-echo" style="top:535px; right:58px;"><?php echo $m474r399; ?></span>
 
 <!-- modul 514 -->
+<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
+     onclick="NacitajZobratovky(514);" style="top:660px; left:517px;" class="btn-row-tool">
 <input type="text" name="m514r01" id="m514r01" onkeyup="CiarkaNaBodku(this);" style="width:215px; top:770px; left:675px;"/>
 <input type="text" name="m514r02" id="m514r02" onkeyup="CiarkaNaBodku(this);" style="width:215px; top:800px; left:675px;"/>
 <input type="text" name="m514r03" id="m514r03" onkeyup="CiarkaNaBodku(this);" style="width:215px; top:831px; left:675px;"/>
