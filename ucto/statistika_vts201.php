@@ -525,6 +525,78 @@ $strana=4;
 }
 //koniec uobrat.php modul 586
 
+//prepnute z uobrat.php modul 514 
+if( $citajvsetkymoduly == 1 ) { $modul=514; }
+if( $modul == 514 )
+{
+$mx514r01; $mx514r02;
+
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prcuobrats$kli_uzid"." WHERE ur1 != 1 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prcuobrats$kli_uzid"." WHERE LEFT(uce,3) != 601 AND LEFT(uce,3) != 602 AND LEFT(uce,3) != 604 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobrats$kli_uzid"." SELECT".
+" psys,2,0,ume,dat,dok,ucd,1,ucm,ucm,ucd,rdp,ico,fak,str,zak,SUM(hod),SUM(mdt),SUM(dal),0,pop,pox,0,0,0,0,0,0,0,0".
+" FROM F$kli_vxcf"."_prcuobrats$kli_uzid".
+" WHERE uro = 1 ".
+" GROUP BY uce,ico ";
+" ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prcuobrats$kli_uzid"." WHERE uro != 2 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid"." SET fak = 0 ";
+$dsql = mysql_query("$dsqlt");
+
+
+$dsqlt = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid,F$kli_vxcf"."_ico ".
+" SET fak = 1 ".
+" WHERE F$kli_vxcf"."_prcuobrats$kli_uzid.ico=F$kli_vxcf"."_ico.ico AND LEFT(icd,2) != 'SK' AND icd != ''  ";
+$dsql = mysql_query("$dsqlt");
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobrats$kli_uzid WHERE uro = 2 AND fak = 0 AND ( LEFT(uce,3) = 601 OR LEFT(uce,3) = 602 OR LEFT(uce,3) = 604 )";
+$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
+//echo $sqltt;
+$i=0; while ($i <= $pol )  {
+if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $mx514r01=$mx514r01+$polozka->dal-$polozka->mdt; }
+$i=$i+1;                   }
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobrats$kli_uzid WHERE uro = 2 AND fak = 1 AND ( LEFT(uce,3) = 601 OR LEFT(uce,3) = 602 OR LEFT(uce,3) = 604 )";
+$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
+//echo $sqltt;
+$i=0; while ($i <= $pol )  {
+if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $mx514r02=$mx514r02+$polozka->dal-$polozka->mdt; }
+$i=$i+1;                   }
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET ".
+" m514r01='$mx514r01', m514r02='$mx514r02', m514r03=0 ".
+" WHERE ico >= 0"; 
+//echo $uprtxt;
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET m514r99=m514r01+m514r02+m514r03 WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET m514r03=100*(m514r02/m514r99) WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET m514r01=100-m514r03 WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET m514r02=m514r03 WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET m514r03=0 WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+$strana=12;
+}
+//koniec odpocitaj modul 514 
+
 //pracovny subor statistika_vts201
 $sql = "SELECT konx FROM F$kli_vxcf"."_statistika_vts201 WHERE ico=0";
 $vysledok = mysql_query("$sql");
