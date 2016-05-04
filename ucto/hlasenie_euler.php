@@ -814,14 +814,16 @@ div.input-echo {
    <td class="header">Euler <?php echo $kli_vrok; ?></td>
    <td>
     <div class="bar-btn-form-tool">
+     <img src="../obr/ikony/floppy_blue_icon.png" onclick="doZIP();"
+          title="Uloži hlásenia do ZIP" class="btn-form-tool">
+     <img src="../obr/ikony/iconmonstr-file-12-32.png" onclick="doCSV();"
+          title="Vytvori hlásenia v CSV" class="btn-form-tool">
      <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajSaldo();"
           title="Naèíta údaje zo salda" class="btn-form-tool">
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick="doCSV();"
-          title="Export do CSV" class="btn-form-tool">
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick="doZIP();"
-          title="Export do ZIP" class="btn-form-tool">
-     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacHlasenie();"
+<!-- dopyt, hidden
+      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacHlasenie();"
           title="Zobrazi všetky strany v PDF" class="btn-form-tool">
+-->
     </div>
    </td>
   </tr>
