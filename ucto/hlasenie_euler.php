@@ -47,6 +47,17 @@ $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 $rmc=0;
 $rmc1=0;
 
+if (File_Exists ("../ucto/hlasenie_eulerzip.php")) 
+{
+if (File_Exists ("../tmp/hlasenie_eulerzip.php")) 
+ {
+$soubor = unlink("../tmp/hlasenie_eulerzip.php"); 
+ }
+copy("../ucto/hlasenie_eulerzip.php", "../tmp/hlasenie_eulerzip.php");
+}
+
+
+
 //.jpg podklad
 $jpg_cesta="../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler";
 $jpg_popis="tlaèivo Hlásenie poh¾adávok po splatnosti Euler Hermes za rok ".$kli_vrok;
@@ -775,6 +786,11 @@ div.input-echo {
    window.open('../ucto/hlasenie_euler.php?copern=11&page=1&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
+  function doZIP()
+  {
+   window.open('../tmp/hlasenie_eulerzip.php?copern=11&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
   function pridajHla(ico)
   {
@@ -802,6 +818,8 @@ div.input-echo {
           title="Naèíta údaje zo salda" class="btn-form-tool">
      <img src="../obr/ikony/upbox_blue_icon.png" onclick="doCSV();"
           title="Export do CSV" class="btn-form-tool">
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="doZIP();"
+          title="Export do ZIP" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacHlasenie();"
           title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
@@ -1286,11 +1304,15 @@ mkdir ($ddir, 0777);
 
 $hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
- $outfilexdel="../dokumenty/FIR".$kli_vxcf."/euler/saldo_*.*";
+ $outfilexdel="../dokumenty/FIR".$kli_vxcf."/euler/hlasenie_*.*";
  foreach (glob("$outfilexdel") as $filename) {
     unlink($filename);
  }
 
+ $outfilexdel="../dokumenty/FIR".$kli_vxcf."/euler/saldo_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
 
 
 $sqltt5 = "SELECT * FROM F$kli_vxcf"."_ucthlasenie_euler WHERE dsuma > 0 AND nahl = 1 ORDER BY ico ";
@@ -1319,7 +1341,10 @@ $ico_stat="SR";
 
 //urob jedno csv
 
-$outfilex="../dokumenty/FIR".$kli_vxcf."/euler/saldo_".$ico_nai.".csv";
+$ico_naib = StrTr($ico_nai, "áäèïéìëí¾òôóöàøšúùüıÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜİ","aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
+
+
+$outfilex="../dokumenty/FIR".$kli_vxcf."/euler/saldo_".$ico_naib.".csv";
 if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
 
 $soubor = fopen("$outfilex", "a+");
@@ -1365,6 +1390,7 @@ $i = $i + 1;
 
 fclose($soubor);
 
+
 //koniec urob jedno csv
 
 }
@@ -1377,6 +1403,9 @@ $i5 = $i5 + 1;
   CSV Hlásenia vytvorené.
 <br /><br /><br /><br />
 <?php
+
+
+
 }
 /////////////////////////////////////////export csv
 ?>
