@@ -130,6 +130,9 @@ if (!$vysledok):
 $kalend = include("cis/kalendar.php");
 endif;
 
+$nerob=1;
+if( $nerob == 0 )
+    {
 if(isset($mysqldb2010))
 {
 $sql = "SELECT m062016 FROM $mysqldb2010.kalendar";
@@ -207,6 +210,8 @@ $sqlfir = "CREATE TABLE $mysqldb2015.kalendar SELECT * FROM kalendar";
 $fir_vysledok = mysql_query($sqlfir);
                }
 }
+    }
+//ak nerob==0
 
 //echo $mysqldb;
 
