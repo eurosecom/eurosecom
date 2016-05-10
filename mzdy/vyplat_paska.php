@@ -2283,7 +2283,16 @@ $dsql = mysql_query("$dsqlt");
 
 <?php
 //tlac pasky
-if (File_Exists ("../tmp/mzdpasky$kli_uzid.pdf")) { $soubor = unlink("../tmp/mzdpasky$kli_uzid.pdf"); }
+
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/mzdpasky_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/mzdpasky_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -2880,7 +2889,7 @@ $vysledok = mysql_query("$sqlt");
 //koniec zalohovania databaz pri ostrom
 
 
-$pdf->Output("../tmp/mzdpasky$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvy'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
@@ -2916,7 +2925,7 @@ if( $odmailuj == 1 )
                 {
 ?>
 <script type="text/javascript">
-  var okno = window.open("../mzdy/mail_paska.php?&copern=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&posem=1","_self");
+  var okno = window.open("../mzdy/mail_paska.php?&copern=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&posem=1&outfilex=<?php echo $outfilex; ?>","_self");
 </script>
 <?php
                 }
@@ -2924,7 +2933,7 @@ if( $odmailuj == 1 )
 ?> 
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/mzdpasky<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 ?>
