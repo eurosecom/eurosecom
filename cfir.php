@@ -670,6 +670,11 @@ $copern=1;
   window.open('cfir_u.php?copern=1007&cisloold=' + cisloold + '&cislonew=' + cislonew + '&tt=1','_self'); 
   }
 
+  function DeleneDtb()
+  { 
+  window.open('../cis/delenedtb.php?copern=1','_blank','width=980, height=800, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes'); 
+  }
+
   </script>
 
 </HEAD>
@@ -697,8 +702,14 @@ $konc =($pols*($page-1))+($pols-1);
 <tr>
 <td>EuroSecom  -  Èíselník úètovných jednotiek
 
-<img src='../obr/naradie.png' width=15 height=12 border=1 onClick='Servis();' alt='Informaèný a reklamný systém' >
-
+<?php if( $kli_uzidall > 500000 )
+  {
+?>
+<img src='../obr/naradie.png' width=15 height=12 border=1 onClick='Servis();' title='Informaèný a reklamný systém' >
+<?php
+  }
+?>
+<img src='../obr/naradie.png' width=15 height=12 border=1 onClick='DeleneDtb();' title='Nové nastavenie delených databáz' >
 </td>
 <td align="right"><span class="login"><?php echo "login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
@@ -893,7 +904,7 @@ if ( $kli_uzall > 500000 )
   {
 ?>
 <a href='cfir.php?copern=66&page=<?php echo $page;?>&cislo_xcf=<?php echo $riadok->xcf;?>&nazov_xcf=<?php echo $riadok->naz;?>'>
- <img src='obr/odstran.png' width=20 height=20 border=0 alt="Vymaza všetky tabulky vybranej firmy"></a>
+ <img src='obr/odstran.png' width=20 height=20 border=0 title="Vymaza všetky tabulky vybranej firmy"></a>
 <?php
   }
 ?>
