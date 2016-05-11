@@ -651,7 +651,7 @@ $dsql = mysql_query("$dsqlt");
 }
 
 //vyplata na ucet 
-if( $emotrans == 1 )
+if( $emotrans == 1 AND $kli_vrok < 2016 )
 {
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprc3".
 " SELECT 17,ume,'$dat_odp','$dok_odp',17,0,0,0,oc,0,0,0,0,0,0,0,sum_ban,0,$puczam,333000 FROM F$kli_vxcf"."_mzdzalsum WHERE sum_ban > 0 AND $podm_obd ";

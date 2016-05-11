@@ -620,6 +620,7 @@ if ( $copern == 1 OR $copern == 25 )
      {
 
 $dnesoktime = Date ("d.m.Y H.s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$dnesokdate = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
 ?>
 <div id="nastavdakx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 170px; left: 100px; width:500px; height:300px;">
@@ -653,7 +654,6 @@ Chcete skontrolova
 doklady z <?php echo $vyb_ume; ?> nahraté po dátume</a> <input type='text' name='h_datpo' id='h_datpo' size='15' maxlenght='15' value='<?php echo $dnesoktime; ?>' >
  ?
 </td>
-</FORM>
 </tr> 
 
 
@@ -662,6 +662,15 @@ Chcete skontrolova
 <a href="#" onClick="ZmenyPriemerne();">
 Priemerné ceny <?php echo $vyb_ume; ?> / nákupné ceny</a> ? 
 </td></tr>
+
+<tr><td class='ponuka' colspan='2'>
+Chcete  
+<a href="#" onClick="SkladMonitor();", '_blank' )">
+monitor skladovıch pohybov </a> <input type='text' name='h_datmn' id='h_datmn' size='11' maxlenght='10' value='<?php echo $dnesokdate; ?>' >
+ ?
+</td>
+</FORM>
+</tr> 
 
 </table>  
 </div>
@@ -672,6 +681,14 @@ Priemerné ceny <?php echo $vyb_ume; ?> / nákupné ceny</a> ?
     var datum=document.ekont.h_datpo.value;
 
     window.open('../sklad/sklad_kontrol.php?copern=50&drupoh=1&datum=' + datum + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+
+    }
+
+    function SkladMonitor()
+    {
+    var datum=document.ekont.h_datmn.value;
+
+    window.open('../sklad/sklad_monitor.php?copern=50&drupoh=1&datum=' + datum + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
 
     }
 

@@ -75,9 +75,6 @@ $emailkomu="andrejd@edcom.sk";
 $emailodkoho="edcom@edcom.sk";
 $nazov=" ";
 
-$predmet=$fir_fnaz.", ".$fir_fmes." VYPLATNA PASKA za $kli_vume ";
-$text="V prílohe Vám posielame vıplatnú pásku za obdobie $kli_vume "."\n";
-
 
 require_once("activeMailLib.php");
 $att1=$outfilex;//set a valid file path
@@ -106,6 +103,14 @@ $riaddok=mysql_fetch_object($sqlmax);
    $prie=$riaddok->prie;
    $meno=$riaddok->meno;
 
+$predmet=$fir_fnaz.", ".$fir_fmes." VYPLATNA PASKA za $kli_vume ";
+$text="V prílohe Vám posielame vıplatnú pásku za obdobie $kli_vume do poštovej schránky $emailkomu"."\n";
+
+
+//s kopiou na urcenu adresu
+if( $_SERVER['SERVER_NAME'] == "www.edcom.sk" ) { $emailkomu = array($riaddok->zema, "andrejd@edcom.sk"); }
+
+
 
 if( $emailodkoho == '' )
 {
@@ -129,7 +134,7 @@ $email->From("$emailodkoho");//set a valid E-mail
 $email->Subject("$predmet");
 $email->Message("$text");
 $email->Attachment($att1,"paska$kli_vume.pdf");
-$email->To("$emailkomu");//set a valid E-mail
+$email->To($emailkomu);//set a valid E-mail
 $email->Send();
 
 

@@ -6,7 +6,6 @@
        {
 $sys = 'SKL';
 $urov = 3000;
-$cslm=404300;
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 
@@ -496,13 +495,13 @@ if ( $copern != 5 AND $copern != 6 AND $copern != 8 )
 <th class="hmenu">»Ìslo pohybu<th class="hmenu">N·zov pohybu
 <th class="hmenu">Druh
  <img src='../obr/info.png' width=10 height=10 border=0
- alt="Poloûka Druh pohybu znamen· 1 aû 4=prÌjmovÈ pohyby , 5=presun , 6 aû 9=v˝dajovÈ pohyby.">
+ title="Poloûka Druh pohybu znamen· 1 aû 4=prÌjmovÈ pohyby , 5=presun , 6 aû 9=v˝dajovÈ pohyby.">
 <th class="hmenu">UCM
  <img src='../obr/info.png' width=10 height=10 border=0
- alt="Poloûku UCM program pouûÌva pre ˙Ëtovanie M·Daù v˝daja , proti˙Ëet berie z ËÌselnÌka skladov.">
+ title="Poloûku UCM program pouûÌva pre ˙Ëtovanie M·Daù v˝daja , proti˙Ëet berie z ËÌselnÌka skladov.">
 <th class="hmenu">UCD
  <img src='../obr/info.png' width=10 height=10 border=0
- alt="Poloûku UCD program pouûÌva pre ˙Ëtovanie Dal prÌjmu , proti˙Ëet berie z ËÌselnÌka skladov.">
+ title="Poloûku UCD program pouûÌva pre ˙Ëtovanie Dal prÌjmu , proti˙Ëet berie z ËÌselnÌka skladov.">
 <th class="hmenu">Parametre
 <th class="hmenu">Uprav<th class="hmenu">Zmaû
 </tr>

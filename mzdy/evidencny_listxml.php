@@ -535,7 +535,7 @@ fclose($soubor);
 
 <br />
 <br />
-Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a naèítajte na www.drsr.sk alebo do aplikácie eDane :
+Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a naèítajte na www.socpoist.sk :
 <br />
 <br />
 <a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
