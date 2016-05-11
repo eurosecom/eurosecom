@@ -561,6 +561,11 @@ $upravene = mysql_query("$sqtu");
 $sqlpr = 'DROP TABLE F'.$kli_vxcf.'_sklzaspriemer';
 if( $fir_xsk04 == 1 AND $drupoh == 1 ) { $vyslpr = mysql_query("$sqlpr"); }
 
+$sqtyx = "INSERT INTO F$kli_vxcf"."_sklpohall ( dok,skl,dat,ume,poh,sk2,ico,fak,unk,poz,str,zak,cis,cen,mno,id,mn2 )".
+" VALUES ($cislo_dok, $cislo_skl, '', '', $h_poh, '$h_sk2', $h_ico, $h_fak, '$h_unk', 'DELETE cpl $cislo_cpl', '$h_str',".
+" '$h_zak', $h_cis, $h_cen, $h_mno, $kli_uzid, $h_mn2 );"; 
+$ulozenex = mysql_query("$sqtyx");
+
 $zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_$tabl WHERE ( cpl='$cislo_cpl' )"); 
 $copern=1;
 $vymazanie=1;
@@ -666,6 +671,11 @@ $sqlpr = 'DROP TABLE F'.$kli_vxcf.'_sklzaspriemer';
 if( $vymazpriemer == 1 ) { $vyslpr = mysql_query("$sqlpr"); }
 
 $h_pon = strip_tags($_REQUEST['h_pon']);
+
+$sqtyx = "INSERT INTO F$kli_vxcf"."_sklpohall ( dok,skl,dat,ume,poh,sk2,ico,fak,unk,poz,str,zak,cis,cen,mno,id,mn2 )".
+" VALUES ($cislo_dok, $cislo_skl, '', '', $h_poh, '$h_sk2', $h_ico, $h_fak, '$h_unk', 'UPDATE cpl $cislo_cpl', '$h_str',".
+" '$h_zak', $h_cis, $h_cen, $h_mno, $kli_uzid, $h_mn2 );"; 
+$ulozenex = mysql_query("$sqtyx");
 
 $upravene = mysql_query("UPDATE F$kli_vxcf"."_$tabl SET cis='$h_cis', cen='$h_cen', mno='$h_mno', poz='$h_pon' WHERE cpl='$cislo_cpl'");  
 $copern=8;

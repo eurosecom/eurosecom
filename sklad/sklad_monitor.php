@@ -58,6 +58,12 @@ $vsql = "INSERT INTO F".$kli_vxcf."_prcsklmon".$kli_uzid." SELECT ".
 " FROM F".$kli_vxcf."_sklfak WHERE cis > 0 AND datm >= '$datumsql00' AND datm <= '$datumsql24' ";
 $vytvor = mysql_query("$vsql");
 
+$vsql = "INSERT INTO F".$kli_vxcf."_prcsklmon".$kli_uzid." SELECT ".
+" cpl, ume, dat, dok, doq, skl, 999, ico, fak, unk, poz, str, zak, ". 
+" cis, mno, cen, id, sk2, datm, me2, mn2 ".
+" FROM F".$kli_vxcf."_sklpohall WHERE cis > 0 AND datm >= '$datumsql00' AND datm <= '$datumsql24' AND LEFT(poz,6) = 'DELETE' ";
+$vytvor = mysql_query("$vsql");
+
 
 $vsql = "UPDATE F".$kli_vxcf."_prcsklmon".$kli_uzid.",F".$kli_vxcf."_sklcph ".
 " SET doq=drp WHERE  F".$kli_vxcf."_prcsklmon".$kli_uzid.".poh=F".$kli_vxcf."_sklcph.poh ";
@@ -75,11 +81,18 @@ $vytvor = mysql_query("$vsql");
 $vsql = "UPDATE F".$kli_vxcf."_prcsklmon".$kli_uzid." SET doq=23 WHERE poh = 92 ";
 $vytvor = mysql_query("$vsql");
 
+//vymazane polozky
+$vsql = "UPDATE F".$kli_vxcf."_prcsklmon".$kli_uzid." SET doq=999 WHERE poh = 999 ";
+$vytvor = mysql_query("$vsql");
+
 //sklpri 	cpl	ume	dat	dok	doq	skl	poh	ico	fak	unk	poz	str	zak	
 //cis	mno	cen	id	sk2	datm	me2	mn2
 
 //sklfak	cpl	ume	dat	dok	doq	skl	poh	ico	fak	unk	dol	prf	poz	str	zak	
 //cis	nat	dph	mer	pop	mno	cen	cep	ced	id	sk2	datm	me2	mn2 
+
+//sklpohall	cpl	ume	dat	dok	doq	skl	poh	ico	fak	unk	poz	str	zak	
+//cis	mno	cen	id	sk2	datm	me2	mn2
 
 ?>
 
@@ -255,6 +268,13 @@ if( $par == 1 ) { $hvstup="hvstup_bsede"; }
 <img src='../obr/zoznam.png' onClick="" width=15 height=10 border=0 title="Doklad z ERP nemôete znovu tlaèi" ></a>
 <?php 
   } ?>
+
+<?php if( $hlavicka->doq == 999 )
+  { ?>
+<img src='../obr/zoznam.png' onClick="" width=15 height=10 border=0 title="Vymazaná poloka z dokladu <?php echo $hlavicka->dok;?>, nemôete znovu tlaèi" ></a>
+<?php 
+  } ?>
+
 / <?php echo $hlavicka->id; ?>
 </td>
 <td class="<?php echo $hvstup; ?>" align="right"><?php echo $hlavicka->poh; ?></td>
