@@ -47,11 +47,12 @@ if( $copern == 1003 )
   $h_podp=strip_tags($_REQUEST['h_podp']);
   $h_tstr=strip_tags($_REQUEST['h_tstr']);
   $h_tzak=strip_tags($_REQUEST['h_tzak']);
+  $h_uonk0=strip_tags($_REQUEST['h_uonk0']);
 
 
 
-$ulozttt = "INSERT INTO F$kli_vxcf"."_uctimportorange ( xtel, xpot, unak, udph, ddph, uonk, uodp, dodp, podp, tstr, tzak ) ".
-" VALUES ( '$h_xtel', '$h_xpot', '$h_unak', '$h_udph', '$h_ddph', '$h_uonk', '$h_uodp', '$h_dodp', '$h_podp', '$h_tstr', '$h_tzak' ); ";
+$ulozttt = "INSERT INTO F$kli_vxcf"."_uctimportorange ( xtel, xpot, unak, udph, ddph, uonk, uonk0, uodp, dodp, podp, tstr, tzak ) ".
+" VALUES ( '$h_xtel', '$h_xpot', '$h_unak', '$h_udph', '$h_ddph', '$h_uonk', '$h_uonk0','$h_uodp', '$h_dodp', '$h_podp', '$h_tstr', '$h_tzak' ); ";
 $vysledok = mysql_query("$ulozttt"); 
 
 $copern=1001;
@@ -74,6 +75,7 @@ $sqlico = mysql_query("SELECT * FROM F$kli_vxcf"."_uctimportorange WHERE porx = 
   $udphx=$riadico->udph;
   $ddphx=$riadico->ddph;
   $uonkx=$riadico->uonk;
+  $uonk0x=$riadico->uonk0;
   $uodpx=$riadico->uodp;
   $dodpx=$riadico->dodp;
   $podpx=$riadico->podp;
@@ -92,7 +94,7 @@ $copern=1001;
 
 
 
-$sql = "SELECT tzak FROM F$kli_vxcf"."_uctimportorange  ";
+$sql = "SELECT uonk0 FROM F$kli_vxcf"."_uctimportorange  ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -108,6 +110,7 @@ $sqlt = <<<statistika_p1304
    unak         VARCHAR(10) NOT NULL DEFAULT '51800',
    udph         VARCHAR(10) NOT NULL DEFAULT '34300',
    ddph         DECIMAL(4,0) DEFAULT 25,
+   uonk0        VARCHAR(10) NOT NULL DEFAULT '51800',
    uonk         VARCHAR(10) NOT NULL DEFAULT '51899',
    uodp         VARCHAR(10) NOT NULL DEFAULT '34300',
    dodp         DECIMAL(4,0) DEFAULT 27,
@@ -127,7 +130,7 @@ $vytvor = mysql_query("$vsql");
 $vsql = "DROP TABLE F".$kli_vxcf."_importorange".$kli_uzid." ";
 $vytvor = mysql_query("$vsql");
 
-$sql = "SELECT zklu FROM F$kli_vxcf"."_importorange".$kli_uzid." ";
+$sql = "SELECT zkl0 FROM F$kli_vxcf"."_importorange".$kli_uzid." ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -141,6 +144,7 @@ $sqlt = <<<statistika_p1304
    dat          DATE NOT NULL,
    daz          DATE NOT NULL,
    das          DATE NOT NULL,
+   zkl0         DECIMAL(10,2) DEFAULT 0,
    zkl          DECIMAL(10,2) DEFAULT 0,
    dph          DECIMAL(10,2) DEFAULT 0,
    zklo         DECIMAL(10,2) DEFAULT 0,
@@ -154,6 +158,7 @@ $sqlt = <<<statistika_p1304
    unak         VARCHAR(10) NOT NULL DEFAULT '51800',
    udph         VARCHAR(10) NOT NULL DEFAULT '34300',
    ddph         DECIMAL(4,0) DEFAULT 25,
+   uonk0        VARCHAR(10) NOT NULL DEFAULT '51800',
    uonk         VARCHAR(10) NOT NULL DEFAULT '51899',
    uodp         VARCHAR(10) NOT NULL DEFAULT '34300',
    dodp         DECIMAL(4,0) DEFAULT 27,
@@ -241,12 +246,22 @@ $p2szd = explode("</VPER>", $p1szd[1]);
 $szd=$p2szd[0];
 
 
+$p1vatl1 = explode("<VATL>", $value);
+$p2vatl1 = explode("</VATL>", $p1vatl1[1]);
+
+$p1zkl0 = explode("<VBASE>", $p2vatl1[0]);
+$p2zkl0 = explode("</VBASE>", $p1zkl0[1]);
+$zkl0=$p2zkl0[0];
+
+
+//echo $zkl0."\r\n";
+
 $text=$value."\r\n";
 if( $i > 0 ) 
     {
 
-$vsql = "INSERT INTO F".$kli_vxcf."_importorange$kli_uzid ( riadok, fak, vsy, tel, dat, daz, das, zkl, dph, szd, cel ) VALUES ".
-" ( '$text', '$fak', '$vsy', '$tel', '$datsql', '$dazsql', '$dassql', '$zkl', '$dph', '$szd', '$cel' ) ";
+$vsql = "INSERT INTO F".$kli_vxcf."_importorange$kli_uzid ( riadok, fak, vsy, tel, dat, daz, das, zkl, dph, szd, cel, zkl0 ) VALUES ".
+" ( '$text', '$fak', '$vsy', '$tel', '$datsql', '$dazsql', '$dassql', '$zkl', '$dph', '$szd', '$cel', '$zkl0' ) ";
 $vytvor = mysql_query("$vsql");
 
     }
@@ -257,6 +272,8 @@ $i=$i+1;
 
 fclose($soubox);
 
+
+
 //exit;
 
 
@@ -266,6 +283,7 @@ $sqty = "UPDATE F$kli_vxcf"."_importorange$kli_uzid,F$kli_vxcf"."_uctimportorang
 " F$kli_vxcf"."_importorange$kli_uzid.udph=F$kli_vxcf"."_uctimportorange.udph, ".
 " F$kli_vxcf"."_importorange$kli_uzid.ddph=F$kli_vxcf"."_uctimportorange.ddph, ".
 " F$kli_vxcf"."_importorange$kli_uzid.uonk=F$kli_vxcf"."_uctimportorange.uonk, ".
+" F$kli_vxcf"."_importorange$kli_uzid.uonk0=F$kli_vxcf"."_uctimportorange.uonk0, ".
 " F$kli_vxcf"."_importorange$kli_uzid.uodp=F$kli_vxcf"."_uctimportorange.uodp, ".
 " F$kli_vxcf"."_importorange$kli_uzid.dodp=F$kli_vxcf"."_uctimportorange.dodp, ".
 " F$kli_vxcf"."_importorange$kli_uzid.podp=F$kli_vxcf"."_uctimportorange.podp, ".
@@ -275,14 +293,21 @@ $sqty = "UPDATE F$kli_vxcf"."_importorange$kli_uzid,F$kli_vxcf"."_uctimportorang
 //echo $sqty; 
 $ulozene = mysql_query("$sqty");
 
+$sqty = "UPDATE F$kli_vxcf"."_importorange$kli_uzid SET zkl0=0 WHERE zkl0 = zkl ";
+$ulozene = mysql_query("$sqty");
+
+$sqty = "UPDATE F$kli_vxcf"."_importorange$kli_uzid SET zkl=zkl-zkl0 WHERE zkl0 != 0 ";
+$ulozene = mysql_query("$sqty");
 
 $sqty = "UPDATE F$kli_vxcf"."_importorange$kli_uzid SET zklo=podp*zkl/100, dpho=podp*dph/100 WHERE podp > 0 ";
 $ulozene = mysql_query("$sqty");
 $sqty = "UPDATE F$kli_vxcf"."_importorange$kli_uzid SET zklu=zkl-zklo, dphu=dph-dpho WHERE porc > 0 ";
 $ulozene = mysql_query("$sqty");
 
+//exit;
+
           $ixx=0;
-          $vyslettt = "SELECT * FROM F$kli_vxcf"."_importorange$kli_uzid WHERE porc > 0 ORDER BY porc ";
+          $vyslettt = "SELECT * FROM F$kli_vxcf"."_importorange$kli_uzid WHERE porc > 0 ORDER BY tel ";
           $vysledok = mysql_query("$vyslettt");
           while ($riadok = mysql_fetch_object($vysledok))
           {
@@ -298,9 +323,9 @@ $sqldok2 = mysql_query("SELECT * FROM F$kli_vxcf"."_fakdod WHERE dok > 0 ORDER B
   $cislo_new=$riaddok2->dok+1;
   }
 
-$pole = explode(".", $kli_vume);
-$kli_vmesx=$pole[0];
-$kli_vrokx=$pole[1];
+$pole = explode("-", $datsql);
+$kli_vmesx=$pole[1];
+$kli_vrokx=$pole[0];
 
 $ume=$kli_vmesx.".".$kli_vrokx;
 $textp="Orange ".$riadok->tel." ".$riadok->xpot;
@@ -310,6 +335,7 @@ $ico=35697270;
 //poz	str	zak	txz	txp	zk0	zk1	zk2	zk3	zk4	dn1	dn2	dn3	dn4	sp1	sp2	sz1	sz2	sz3	sz4	
 //zk0u	zk1u	zk2u	dn1u	dn2u	sp0u	sp1u	sp2u	hodu	hod	hodm	kurz	mena	zmen	odbm	zal	zao	ruc	uhr	
 //id	datm
+
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_fakdod (uce, ume, dat, das, daz, sz4, dok, doq, ico, sz3, fak, txp, zk2, dn2, hod, id ) ".
 " VALUES ".
@@ -327,6 +353,7 @@ $dsql = mysql_query("$dsqlt");
   $udph=1*$riadok->udph;
   $ddph=1*$riadok->ddph;
   $uonk=1*$riadok->uonk;
+  $uonk0=1*$riadok->uonk0;
   $uodp=1*$riadok->uodp;
   $dodp=1*$riadok->dodp;
   $tstr=1*$riadok->tstr;
@@ -336,6 +363,7 @@ if( $unak == 0 ) { $unak=51800; }
 if( $udph == 0 ) { $udph=34300; }
 if( $ddph == 0 ) { $ddph=25; }
 if( $uonk == 0 ) { $uonk=51899; }
+if( $uonk0 == 0 ) { $uonk0=51800; }
 if( $uodp == 0 ) { $uodp=34300; }
 if( $dodp == 0 ) { $dodp=27; }
  
@@ -381,6 +409,15 @@ if( $ixx >= 0 ) { $ulozene = mysql_query("$sqty"); }
 }
 
 
+if( $riadok->zkl0 != 0 )
+{
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctdod ( dok,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$cislo_new', '12', '$uonk0', '$cislo_uce', '1', '0', '$riadok->zkl0', '$ico', '$riadok->vsy', '', '$tstr',".
+" '$tzak', '', '$kli_uzid' );"; 
+if( $ixx >= 0 ) { $ulozene = mysql_query("$sqty"); } 
+}
+
 
 $ixx=$ixx+1;
           }
@@ -415,6 +452,7 @@ $ixx=$ixx+1;
     document.formv1.h_udph.value = '<?php echo "$udphx";?>';
     document.formv1.h_ddph.value = '<?php echo "$ddphx";?>';
     document.formv1.h_uonk.value = '<?php echo "$uonkx";?>';
+    document.formv1.h_uonk0.value = '<?php echo "$uonk0x";?>';
     document.formv1.h_uodp.value = '<?php echo "$uodpx";?>';
     document.formv1.h_dodp.value = '<?php echo "$dodpx";?>';
     document.formv1.h_podp.value = '<?php echo "$podpx";?>';
@@ -496,6 +534,7 @@ if ($_REQUEST["odeslano"]!=1)
         <td  width="10%" align="left" >unak</td>
         <td  width="10%" align="left" >udph</td>
         <td  width="10%" align="left" >ddph</td>
+        <td  width="10%" align="left" >uonk0</td>
         <td  width="10%" align="left" >uonk</td>
         <td  width="10%" align="left" >uodp</td>
         <td  width="10%" align="left" >dodp</td>
@@ -534,6 +573,7 @@ $hlavicka=mysql_fetch_object($sql);
         <td  colspan="1" align="left" ><?php echo $hlavicka->unak; ?></td>
         <td  colspan="1" align="left" ><?php echo $hlavicka->udph; ?></td>
         <td  colspan="1" align="left" ><?php echo $hlavicka->ddph; ?></td>
+        <td  colspan="1" align="left" ><?php echo $hlavicka->uonk0; ?></td>
         <td  colspan="1" align="left" ><?php echo $hlavicka->uonk; ?></td>
         <td  colspan="1" align="left" ><?php echo $hlavicka->uodp; ?></td>
         <td  colspan="1" align="left" ><?php echo $hlavicka->dodp; ?></td>
@@ -557,6 +597,7 @@ $i=$i+1;
         <td  colspan="1" align="left" ><input type="text" name="h_unak" id="h_unak" size="10"/></td>
         <td  colspan="1" align="left" ><input type="text" name="h_udph" id="h_udph" size="10"/></td>
         <td  colspan="1" align="left" ><input type="text" name="h_ddph" id="h_ddph" size="10"/></td>
+        <td  colspan="1" align="left" ><input type="text" name="h_uonk0" id="h_uonk0" size="10"/></td>
         <td  colspan="1" align="left" ><input type="text" name="h_uonk" id="h_uonk" size="10"/></td>
         <td  colspan="1" align="left" ><input type="text" name="h_uodp" id="h_uodp" size="10"/></td>
         <td  colspan="1" align="left" ><input type="text" name="h_dodp" id="h_dodp" size="10"/></td>
