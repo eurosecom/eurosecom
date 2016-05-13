@@ -232,8 +232,9 @@ if( $agrostav == 1 AND $cuce3 == 378 ) $xdruh=6;
 if( $autovalas == 1 AND $cuce3 == 335 ) $xdruh=6;
 if( $autovalas == 1 AND $cuce3 == 379 ) $xdruh=6;
 if( $autovalas == 1 AND $cuce3 == 335 ) $xdruh=5;
-$h_icoq = 1*$_REQUEST['h_icoq'];
+if( $ekorobot == 1 AND $h_uce == 31410 ) $xdruh=6;
 }
+$h_icoq = 1*$_REQUEST['h_icoq'];
 
 if( $nasiel == 1 )
   {
@@ -770,7 +771,7 @@ function VzpFak(ico,fak,strana,zos)
 var proti = document.forms.formd2.proti.value;
 var vseob = document.forms.formd2.vseob.value;
 
-window.open('../ucto/saldo_zapocet.php?preuct=<?php echo $preuct;?>&h_uce=<?php echo $h_uce;?>&h_ico=<?php echo $h_ico;?>&h_fak=' + fak + '&h_zos=' + zos + '&h_obd=<?php echo $h_obd;?>&cislo_strana=' + strana + '&proti=' + proti + '&vseob=' + vseob + '&copern=1111&drupoh=1&page=1&cinnost=8', '_self' );
+window.open('../ucto/saldo_zapocet.php?preuct=<?php echo $preuct;?>&h_uce=<?php echo $h_uce;?>&h_ico=<?php echo $h_ico;?>&h_icoq=' + ico + '&h_fak=' + fak + '&h_zos=' + zos + '&h_obd=<?php echo $h_obd;?>&cislo_strana=' + strana + '&proti=' + proti + '&vseob=' + vseob + '&copern=1111&drupoh=1&page=1&cinnost=8', '_self' );
 
                 }
 

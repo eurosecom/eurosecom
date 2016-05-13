@@ -210,13 +210,13 @@ $p1fak = explode("<IN>", $value);
 $p2fak = explode("</IN>", $p1fak[1]);
 $fak=$p2fak[0];
 
-$p1dat = explode("<BDATE>", $value);
-$p2dat = explode("</BDATE>", $p1dat[1]);
+$p1dat = explode("<IDATE>", $value);
+$p2dat = explode("</IDATE>", $p1dat[1]);
 $datsk=$p2dat[0];
 $datsql=SqlDatum($datsk);
 
-$p1daz = explode("<IDATE>", $value);
-$p2daz = explode("</IDATE>", $p1daz[1]);
+$p1daz = explode("<BDATE>", $value);
+$p2daz = explode("</BDATE>", $p1daz[1]);
 $dazsk=$p2daz[0];
 $dazsql=Sqldatum($dazsk);
 
