@@ -20,6 +20,65 @@ if(!isset($kli_vxcf)) $kli_vxcf = 1;
   mysql_select_db($mysqldb);
 
 
+//nove smerovanie databaz podla roka
+if(!isset($mysqldb2016)) { $mysqldb2016=$mysqldb; }
+if(isset($mysqldb2016)) 
+  {
+
+mysql_select_db($mysqldb2016);
+
+$sql = "SELECT db2019 FROM $mysqldb2016.dtbset ";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+
+$vsql = "DROP TABLE ".$mysqldb2016.".dtbset ";
+$vytvor = mysql_query("$vsql");
+
+$sqlt = <<<mzdprc
+(
+   db2010       VARCHAR(20) NOT NULL,
+   db2011       VARCHAR(20) NOT NULL,
+   db2012       VARCHAR(20) NOT NULL,
+   db2013       VARCHAR(20) NOT NULL,
+   db2014       VARCHAR(20) NOT NULL,
+   db2015       VARCHAR(20) NOT NULL,
+   db2016       VARCHAR(20) NOT NULL, 
+   db2017       VARCHAR(20) NOT NULL, 
+   db2018       VARCHAR(20) NOT NULL, 
+   db2019       VARCHAR(20) NOT NULL 
+);
+mzdprc;
+
+$vsql = "CREATE TABLE ".$mysqldb2016.".dtbset ".$sqlt;
+$vytvor = mysql_query("$vsql");
+
+if(!isset($mysqldb2010)) { $mysqldb2010=$mysqldb; }
+if(!isset($mysqldb2011)) { $mysqldb2011=$mysqldb; }
+if(!isset($mysqldb2012)) { $mysqldb2012=$mysqldb; }
+if(!isset($mysqldb2013)) { $mysqldb2013=$mysqldb; }
+if(!isset($mysqldb2014)) { $mysqldb2014=$mysqldb; }
+if(!isset($mysqldb2015)) { $mysqldb2015=$mysqldb; }
+if(!isset($mysqldb2016)) { $mysqldb2016=$mysqldb; }
+if(!isset($mysqldb2017)) { $mysqldb2017=$mysqldb2016; }
+if(!isset($mysqldb2018)) { $mysqldb2018=$mysqldb2016; }
+if(!isset($mysqldb2019)) { $mysqldb2019=$mysqldb2016; }
+
+$vsql = "INSERT INTO ".$mysqldb2016.".dtbset ( db2010, db2011, db2012, db2013, db2014, db2015, db2016, db2017, db2018, db2019) VALUES ".
+" ( '$mysqldb2010', '$mysqldb2011', '$mysqldb2012', '$mysqldb2013', '$mysqldb2014', '$mysqldb2015', '$mysqldb2016', '$mysqldb2017', '$mysqldb2018', '$mysqldb2019' ) ";
+$vytvor = mysql_query("$vsql");
+}
+
+  }
+
+$sql = "SELECT dbmain FROM $mysqldb2016.dtbset ";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE ".$mysqldb2016.".dtbset ADD dbmain VARCHAR(30) DEFAULT '2016' AFTER db2019";
+$vysledek = mysql_query("$sql");
+}
+
 // cislo operacie
 $copern = 1*$_REQUEST['copern'];
 if( $copern == 1 ) { $copern=2; }
@@ -37,11 +96,11 @@ $db2016 = strip_tags($_REQUEST['db2016']);
 $db2017 = strip_tags($_REQUEST['db2017']);
 $db2018 = strip_tags($_REQUEST['db2018']);
 $db2019 = strip_tags($_REQUEST['db2019']);
-
+$dbmain = strip_tags($_REQUEST['dbmain']);
 
 $upravttt = "UPDATE ".$mysqldb2016.".dtbset SET ".
 " db2010='$db2010', db2011='$db2011', db2012='$db2012', db2013='$db2013', db2014='$db2014', db2015='$db2015', ".
-" db2016='$db2016', db2017='$db2017', db2018='$db2018', db2019='$db2019' ";  
+" db2016='$db2016', db2017='$db2017', db2018='$db2018', db2019='$db2019', dbmain='$dbmain' ";  
 //echo $upravttt;
 $upravene = mysql_query("$upravttt"); 
 $copern=2;
@@ -75,7 +134,7 @@ $db2016 = $riadok->db2016;
 $db2017 = $riadok->db2017;
 $db2018 = $riadok->db2018;
 $db2019 = $riadok->db2019;
-
+$dbmain = $riadok->dbmain;
 
 //koniec nacitania
 
@@ -109,6 +168,7 @@ $db2019 = $riadok->db2019;
     document.formv1.db2017.value = '<?php echo "$db2017";?>';
     document.formv1.db2018.value = '<?php echo "$db2018";?>';
     document.formv1.db2019.value = '<?php echo "$db2019";?>';
+    document.formv1.dbmain.value = '<?php echo "$dbmain";?>';
 
 
     }
@@ -182,6 +242,8 @@ if ( $copern == 2 )
 <tr>
 <td class="bmenu" colspan="1">DB 2016</td>
 <td class="fmenu" colspan="2"><input type="text" name="db2016" id="db2016" size="20"/> </td>
+<td class="bmenu" colspan="1">Main DB</td>
+<td class="fmenu" colspan="2"><input type="text" name="dbmain" id="dbmain" size="20"/> </td>
 </tr>
 <tr>
 <td class="bmenu" colspan="1">DB 2017</td>

@@ -1,3 +1,159 @@
+16.05.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- Príprava pre nastavenie delenıch databáz v èíselníku firiem
+- SKLAD monitor dnešnıch pohybov v hlavnom menu ekorobot
+- SKLAD update a mazanie poloiek v skladovıch dokladoch ide do _sklpohall tabulky o pohyboch v sklade
+- SKLAD delete z tabulky _sklpohall ide do skladového monitora
+- UCTO vzájomnı zápoèet doplní ièo aj bez vıberu jednotlivého ièa tak ako v ruènom spárovaní
+- Ucto Import XML faktúr z ORANGE
+
+11.05.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY oprava evidenènı list info text pri exporte do xml
+- MZDY oprava chachovanej pasky do mailu
+- MZDY zrušené natvrdo úètovanie bankovıch vıplat na 333000 na emotranssro.sk
+
+06.05.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO naèítanie odpisov majetku do DPPO oprava
+- Verzia 2016_02, odpojenı kalendár v databázach 2015 a nišie
+
+03.05.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO štatistika VTS 201 JPG a skript, úprava uobrat.php pre naèítanie údajov 
+
+27.04.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO automaticke úètovanie ïalšie samozdanenia ( napr. 32, 82 )
+- FAKT eshop na educto.sk len firma 2686
+- MZDY delenú èas príjmu z roku 2015 do priemerov 2016 naèítava aj z minulého roku4
+- UCTO saldo po30 pre Alchem doménu 
+- MZDY vıplatná páska ochrana proti cache
+- UCTO v štatistike menu príprava na vıkaz VTS 201
+
+22.04.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- FAKT defaut èíselník tovaru po vytvorení nového dokladu v ERP
+- SKLAD nové pridelenie cslm pre skriptz v sklade
+- SKLAD oddelenie prístupov cslm príjemky, vıdajky, presunky
+
+21.04.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO FIN 112 prenos rozpoètu z firmy minulého roka
+- MZDY XML evidenènı list problém s medzerou v ICZ
+- UCTO Obratovka, súvaha malé a vısledovka malá ochrana proti cache
+
+19.04.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY XML Vıkaz PP pre nepravidelné príjmy, ak je kratšia zmluva ako mesiac oprav dni poistenia pod¾a nástupu a vıstupu v údajoch zamestnanca
+- UCTO FIN 704 export do DBF odskúšanı na RIS SAM ok
+- UCTO FIn 204no aj pod naèítanie HV z firmy minulého roka pri naèítaní ostatnıch údajov
+- UCTO FIn 204pod dogenerovanie štandartného a export do DBF odskúšanı na RIS SAM ok
+- UCTO KVDPH od 1.4.2016 B31 a B32
+- UCTO saldo ikonka Alchem hlásenie Euler
+
+13.04.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO FIN 604 štandartné generovanie a naèítanie, export do DBF neodskúšanı na RIS SAM pkse nerobí 
+- UCTO FIN 704 štandartné generovanie a naèítanie, export do DBF neodskúšanı na RIS SAM pkse nerobí 
+- UCTO FIN 112 novı skript a export do DBF odskúšanı na RIS SAM ok
+
+11.04.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY DDP Stabilita XML export do tagu cislouctu dáva IBAN1 z údajov o firme
+- UCTO FIN 404 skript komplet aj export do DBF, export ešte neodskúšanı na RIS SAM
+- MZDY Roèné hlásenie, po naèítaní údajov z formu nejde do blanku ale selfu
+- UCTO FIN 112 èíselník generovania volanı z statzos.php
+- UCTO FIN 604, 704 JPG, skripty aj export do DBF 
+- UCTO FIN 504 export do DBF
+- UCTO FIN 204NO export do DBF odskúšanı na RIS SAM ok
+- UCTO FIN 304 export do DBF odskúšanı na RIS SAM ok
+- UCTO fin_cis.php názvy stlpcov
+- UCTO tlaè faktúr na príkaze na úhradu zo zoznamu príkazov, zoradené pod¾a abecedy dodávate¾a
+- UCTO FIN 404 export do DBF odskúšanı na RIS SAM ok
+- UCTO FIN 504 export do DBF odskúšanı na RIS SAM ok
+
+06.04.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO fincis.php pre finanèné vıkazy FIN
+- UCTO FIN 112 export do dbf ochrana proti cache
+- UCTO statzos.php 2.strana po volaní úprava a naèítanie, fin504 nemá naèítanie
+- UCTO FIN 304 export do DBF
+- UCTO FIN 504 JPG aj skripty, export do DBF ešte nie je
+
+04.04.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO štatistika menu vıkaz FIN 304 oprava
+- UCTO Poznámky POD zrušená tlaè bez 1. strany a od 2016 lebo to uívatelia ešte pıtajú
+- UCTO štatistika FIN 204 NO aj POD ošetrenie štvrrok a preklikávanie strán
+- UCTO Štatistika menu, novı FIN 404
+- SKLAD kontrola dokladov nahratıch po dátume
+- UCTO štatistika FIN 304 a 404 JPG aj skripty, export do DBF ešte nie je
+- UCTO statzos.php novı face
+
+30.03.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- SKLAD export èíselníka zásob do XML bez diakritiky
+- UCTO štatistika roènı OPU 201 skript komplet
+- UCTO Poznámky POD zrušená tlaè bez 1. strany
+- UCTO menu Dan z príjmov pridaná ikona export Poznámok MUJ do PDF
+
+29.03.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO štatistika FIn 204 POD aj NO rozchodená ikonka export do DBF z formu
+- UCTO Štatistika menu, novı FIN 504
+- UCTO Priznanie DPH a KVDPH PDF - ochrana proti cacheovaniu
+- UCTO štatistika FIN 112 oprava písmena pod názvom
+
+23.03.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO Saldokonto PDF nespárované, všetko a všetky poloky - ochrana proti cacheovaniu
+- UCTO štatistika FIN 204 NO aj POD skripty PDF, FORM aj DBF, kontrola generovania
+- UCTO fin 204pod a fin204no ochrana proti cache PDF aj DBF
+
+22.03.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO Štatistika menu, novı FIN 304
+- UCTO Štatistika roènı OPU 201 len JPG, skript ešte nie
+
+18.03.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- SKLAD biomeat.sk odblokovanie a úprava naèítanie ceny a dph z CSV
+- UCTO štatistika vts 101 skript
+- UCTO Poznámky MUJ naèítanie z minulého roka, kontrola èi existujú Poznámky MUJ v minulom roku
+
+
+16.03.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- KVDPH kontrola nulovı Základ alebo DPH zrušená pre oddiel A2=faktúry s prenosom DPH na obilie, elezo...
+
+14.03.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- štatistika FIN 204 NO aj POD len nové JPG nie skripty
+- volanie Nájomnıch zmlúv vo firme 714 na europkse.sk
+- MZDY kontrola IBANov, odkaz na trvalé poloky
+- MZDY trvalé ak vyplním IBAN vypoèíta a uloí aj úèet a num
+- MZDY z trvalıch do prikazu na úhradu len ak iban sa nerovná nule a nie je prázdny
+- UCTO roèná štatistika VTS 101 naèítanie modulu 586 presmerované do SUVAHA POD, úprava ukladania údajov modul 586
+- UCTO Poznamky POD naèítanie minulého roka kliknutím na ikonku na strane pri tabulke, návrat do Poznámok verzia 2013
+- UCTO Poznámky MUJ naèítanie minulého roka kliknutím na ikonku na strane pri tabulke, v roku 2014 z POD a v roku 2015 u z MUJ minulého roka
+- UCTO Poznámky NUJ 2015 štandartné texty
+- Kalendár So a Ne 4.2016 a 6.2016
+- UCTO DPPO 2015 export XML nedávaj prázdnych prijímate¾ov a oprava suma za všetkıch prijímate¾ov
+- MZDY Potvrdenie o zaplatení 2percent rok 2015 z menu tlaèil staré tlaèivo, z úpravy RZ tlaèil OK
+
+09.03.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO štatistické FIN 304 a 404 odkaz v statzos.php
+- MZDY vyhlásenie NÈZD 2016 zabudnuté èı
+- MZDY RZ 2015 doplnenı tutul pred zamestnancom
+- UCTO Poznámky POD 3-04 pre likvidované firmy na zerotax.sk
+- UCTO Priznanie DPPO 2015 riadok 410 problém ak r400 je menší ako nula
+
+07.03.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY Konate¾ pomer 3 odvádza do UP, po vstupe do miezd program nastaví fir_up=1
+
+04.03.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO finanèná kontrola az od 2016
+- UCTO Uzávierka JU prenos ståpec mbezp. predch. obdobie z firmy minulého roka, musí tam by spracovaná uzávierka v celıch Eur
+- UCTO DPPO 2015 vıpoèet daòovej licencie ( 480, 960, 2880 eur alebo polovica ) v riadku 810 pod¾a checkboxov na 1.strane
+- UCTO roè štatistika vts 101 len JPG nové, skript nie
+
+03.03.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- KVDPH kontrola nulovı Základ alebo DPH
+- UCTO finanèná kontrola na dokladoch pre smmgbely ièo a ochrana proti cache na PDF pokl., bank. a všeob. dokladoch a faktúrach
+- UCTO DPPO 2015 upgrade príloh
+- UCTO DPPO 2015 naèítanie odpisov oprava
+- UCTO DP FOB poèet príloh XML aj PDF
+
+02.03.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO hlásenie o objeme vıroby... zmenšené písmo na názov a adresu firmy dovozcu, vıvozcu...
+- UCTO ak ièdph pre odbm 1 zobrazí v rozúètovaní správne ièdph, link overovanie hore zrušenı
+- UCTO oddelené skripty pre FIN 204 pre rok 2016
+- ANALYZY popis k vytváraniu hlavnej knihy polokovitej v exporte do CSV DU
+- MZDY potvrdenie FO 2015 a 2016 úprava nápoèet obdobia 01-12... pod¾a dátumu nástupu a ukonèenia PP v údajoch o zamestnancovi
+- ANALYZY danove odpisy do exportu majetku CSV
+
 29.02.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - UCTO Roè štatistika ZAV 101 jpg aj skript komplet
 - UCTO NUJ FIN 1-12 jph nové

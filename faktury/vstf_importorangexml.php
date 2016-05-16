@@ -49,7 +49,8 @@ if( $copern == 1003 )
   $h_tzak=strip_tags($_REQUEST['h_tzak']);
   $h_uonk0=strip_tags($_REQUEST['h_uonk0']);
 
-
+$h_xtel=str_replace(" ","",$h_xtel);
+$h_xtel=str_replace("/","",$h_xtel);
 
 $ulozttt = "INSERT INTO F$kli_vxcf"."_uctimportorange ( xtel, xpot, unak, udph, ddph, uonk, uonk0, uodp, dodp, podp, tstr, tzak ) ".
 " VALUES ( '$h_xtel', '$h_xpot', '$h_unak', '$h_udph', '$h_ddph', '$h_uonk', '$h_uonk0','$h_uodp', '$h_dodp', '$h_podp', '$h_tstr', '$h_tzak' ); ";
@@ -273,8 +274,39 @@ $i=$i+1;
 fclose($soubox);
 
 
+$jedefault=0;
+$sqlico = mysql_query("SELECT * FROM F$kli_vxcf"."_uctimportorange WHERE xtel = '' ");
+  if (@$zaznam=mysql_data_seek($sqlico,0))
+  {
+  $riadico=mysql_fetch_object($sqlico);
+  $xpotxx=$riadico->xpot;
+  $unakxx=$riadico->unak;
+  $udphxx=$riadico->udph;
+  $ddphxx=$riadico->ddph;
+  $uonkxx=$riadico->uonk;
+  $uonk0xx=$riadico->uonk0;
+  $uodpxx=$riadico->uodp;
+  $dodpxx=$riadico->dodp;
+  $podpxx=$riadico->podp;
+  $tstrxx=$riadico->tstr;
+  $tzakxx=$riadico->tzak;
+  if( $unakxx > 0 ) { $jedefault=1; }
+  }
 
-//exit;
+$sqty = "UPDATE F$kli_vxcf"."_importorange$kli_uzid SET ".
+" xpot='$xpotxx', ".
+" unak='$unakxx', ".
+" udph='$udphxx', ".
+" ddph='$ddphxx', ".
+" uonk='$uonkxx', ".
+" uonk0='$uonk0xx', ".
+" uodp='$uodpxx', ".
+" dodp='$dodpxx', ".
+" podp='$podpxx', ".
+" tstr='$tstrxx', ".
+" tzak='$tzakxx'  ";
+//echo $sqty; 
+if( $jedefault == 1 ) { $ulozene = mysql_query("$sqty"); }
 
 
 $sqty = "UPDATE F$kli_vxcf"."_importorange$kli_uzid,F$kli_vxcf"."_uctimportorange SET ".
