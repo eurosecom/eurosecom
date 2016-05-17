@@ -205,6 +205,18 @@ if( $i == 0 )
 $p1vsy = explode("<CN>", $value);
 $p2vsy = explode("</CN>", $p1vsy[1]);
 $vsy=$p2vsy[0];
+
+$p1ico = explode("<ICO>", $value);
+$p2ico = explode("</ICO>", $p1ico[1]);
+$mojeico=1*$p2ico[0];
+
+if( $mojeico != $fir_fico )
+    {
+echo "IÈO odberate¾a na Orange faktúre ".$mojeico." nie je rovnaké ako IÈO v údajoch o firme ".$fir_fico;
+exit;
+    }
+
+
   }
 
 $p1fak = explode("<IN>", $value);
