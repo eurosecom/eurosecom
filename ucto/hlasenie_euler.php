@@ -150,7 +150,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid".
 " SELECT 0,0,0,1,drupoh,uce,0,ume,dat,das,daz,dok,ico,fak,".
 "poz,ksy,ssy,SUM(hdp),SUM(hdu),SUM(hod),SUM(uhr),SUM(zos),dau".
 " FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid".
-" WHERE LEFT(uce,3) = 311 ".
+" WHERE LEFT(uce,3) = 311 AND pox = 1 ".
 " GROUP BY uce,ico,fak";
 $dsql = mysql_query("$dsqlt");
 
@@ -163,14 +163,6 @@ $dnes = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d")
 $sqtoz = "UPDATE F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid SET puc=TO_DAYS('$dnes')-TO_DAYS(das) WHERE hod != 0";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid SET puc=0 WHERE puc < 0 ";
-//$oznac = mysql_query("$sqtoz");
-
-$tovtt = "DELETE FROM F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid WHERE dat < '2016-02-01' ";
-//$tov = mysql_query("$tovtt");
-
-$tovtt = "DELETE FROM F$kli_vxcf"."_ucthlasenie_eulerfak$kli_uzid WHERE puc < 30 ";
-//$tov = mysql_query("$tovtt");
 
 $sqlt = "DROP TABLE F".$kli_vxcf."_ucthlasenie_eulerfak";
 $vysledok = mysql_query("$sqlt");
@@ -219,7 +211,10 @@ $dsql = mysql_query("$dsqlt");
 $i=$i+1;
 }
 
-$dsqlt = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET dath='$dnes', nahl=0 ";
+//zmena filozofie = nechám oznaèenie nahlásenia
+//$dsqlt = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET dath='$dnes', nahl=0 ";
+
+$dsqlt = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET dath='$dnes' ";
 $dsql = mysql_query("$dsqlt");
 
 
