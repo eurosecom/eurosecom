@@ -199,8 +199,9 @@ $sqldo2 = mysql_query("$sqltt2");
  $jeico=1;
  }
 
+//zmen filozofie nenacitavam, ktori nie su v zozname
 $sqli = "INSERT INTO F".$kli_vxcf."_ucthlasenie_euler (oc, ico, konx1) VALUES ( 1, '$riadok->ico', 0 ) ";
-if( $jeico == 0 ) { $vysledok = mysql_query($sqli); }
+if( $jeico == 1000 ) { $vysledok = mysql_query($sqli); }
 
 $dsqlt = "UPDATE F$kli_vxcf"."_ucthlasenie_euler SET dsuma='$riadok->sumzos', dbdph='$riadok->sumhdp' WHERE ico = $riadok->ico ";
 $dsql = mysql_query("$dsqlt");

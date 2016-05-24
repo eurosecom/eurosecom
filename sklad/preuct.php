@@ -432,6 +432,18 @@ sklprc;
           }
 //koniec uprava poliklinika senica
 
+//uprava zs senica
+if( $fir_fico == "37990845" )
+          {
+
+$dsqlt = "UPDATE F$kli_vxcf"."_sklprc2 SET ucm=501998 WHERE skl = 1 AND  LEFT(ucm,3) = 501 "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_sklprc2 SET ucm=501999 WHERE skl = 2 AND  LEFT(ucm,3) = 501 "; $dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_sklprc2 WHERE LEFT(ucd,3) = 111 "; $dsql = mysql_query("$dsqlt");
+
+          }
+//koniec uprava zs senica
+
 //uprava polnohospodarska cinnost
 if( $polno == 1 )  {
 //rd castkov
