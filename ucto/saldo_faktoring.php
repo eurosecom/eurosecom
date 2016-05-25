@@ -948,10 +948,10 @@ function Vzpp()
     var htmlvzpp = "<table  class='ponuka' width='100%'><tr><td width='90%'>Text Z·poËtu - pred poloûkami "
 
     htmlvzpp += "<img border=0 src='../obr/ok.png' style='width:12; height:12;'";
-    htmlvzpp += "onClick='UlozVzpp();' alt='Uloû zmeny v texte' ></td>";
+    htmlvzpp += "onClick='UlozVzpp();' title='Uloû zmeny v texte' ></td>";
 
     htmlvzpp += "<td width='10%' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:12; height:12;'";
-    htmlvzpp += "onClick='ZhasniVzpp();' alt='Zhasni okno a neuloû zmeny v texte' ></td></tr>";  
+    htmlvzpp += "onClick='ZhasniVzpp();' title='Zhasni okno a neuloû zmeny v texte' ></td></tr>";  
 
     htmlvzpp += "<tr><FORM name='fhoddok' class='obyc' method='post' action='#' >";
     htmlvzpp += "<td width='100%' class='obyc' align='left'>";
@@ -1011,10 +1011,10 @@ function Vzpz()
     var htmlvzpz = "<table  class='ponuka' width='100%'><tr><td width='90%'>Text z·poËtu - za poloûkami "
 
     htmlvzpz += "<img border=0 src='../obr/ok.png' style='width:12; height:12;'";
-    htmlvzpz += "onClick='UlozVzpz();' alt='Uloû zmeny v texte' ></td>";
+    htmlvzpz += "onClick='UlozVzpz();' title='Uloû zmeny v texte' ></td>";
 
     htmlvzpz += "<td width='10%' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:12; height:12;'";
-    htmlvzpz += "onClick='ZhasniVzpz();' alt='Zhasni okno a neuloû zmeny v texte' ></td></tr>";  
+    htmlvzpz += "onClick='ZhasniVzpz();' title='Zhasni okno a neuloû zmeny v texte' ></td></tr>";  
 
     htmlvzpz += "<tr><FORM name='fhoddok' class='obyc' method='post' action='#' >";
     htmlvzpz += "<td width='100%' class='obyc' align='left'>";
@@ -1083,7 +1083,7 @@ var dajid = "ZP" + uhr_cpl;
   htmluhr += " <input class='hvstup' type='text' name='n_hod' id='n_hod' size='10' onkeyup='CiarkaNaBodku(this)' value='" + uhr_sum + "' /> ";
 
   htmluhr += " <img border=0 src='../obr/ok.png' style='width:12; height:15;' ";
-  htmluhr += " alt='Uloûiù upraven˙ hodnotu' ";
+  htmluhr += " title='Uloûiù upraven˙ hodnotu' ";
   htmluhr += " onClick=\"UlozHod(" + uhr_cpl + "," + uhr_sum + ");\"></td></FORM></tr></table>";
 
   myUhrad.innerHTML = htmluhr;
@@ -1119,7 +1119,7 @@ var dajid = "CM" + uhr_cpl;
   htmluhm += " hodnota<input class='hvstup' type='text' name='n_hom' id='n_hom' size='8' onkeyup='CiarkaNaBodku(this)' value='" + uhr_hodm + "' /> ";
 
   htmluhm += " <img border=0 src='../obr/ok.png' style='width:12; height:15;' ";
-  htmluhm += " alt='Uloûiù upravenÈ hodnoty' ";
+  htmluhm += " title='Uloûiù upravenÈ hodnoty' ";
   htmluhm += " onClick=\"UlozHom(" + uhr_cpl + ");\"></td></FORM></tr></table>";
 
   myUhram.innerHTML = htmluhm;
@@ -1185,7 +1185,7 @@ var dajis = "SP" + uhr_cpl;
   htmluhs += " <input class='hvstup' type='text' name='n_spl' id='n_spl' size='10' onkeyup='CiarkaNaBodku(this)' value='" + uhr_spl + "' /> ";
 
   htmluhs += " <img border=0 src='../obr/ok.png' style='width:12; height:15;' ";
-  htmluhs += " alt='Uloûiù upraven˙ splatnosù' ";
+  htmluhs += " title='Uloûiù upraven˙ splatnosù' ";
   htmluhs += " onClick=\"UlozSpl(" + uhr_cpl + ",'" + uhr_spl + "');\"></td></FORM></tr></table>";
 
   myUhras.innerHTML = htmluhs;
@@ -1280,10 +1280,10 @@ if( $vsetko == 1 ) {
 <td colspan='1' align='left'>
 <a href="#" onClick="window.open('../ucto/saldo_faktoring.php?preuct=<?php echo $preuct;?>&cislo_strana=<?php echo $cislo_stranp;?>&h_uce=<?php echo $h_uce;?>&h_ico=<?php echo $h_ico;?>&h_obd=<?php echo $h_obd;?>&copern=11&drupoh=1&page=1&cinnost=<?php echo $cinnost; ?>',
  '_self' );">
-<img src='../obr/prev.png' width=10 height=10 border=0 alt='Strana <?php echo $cislo_stranp; ?>' ></a>
+<img src='../obr/prev.png' width=10 height=10 border=0 title='Strana <?php echo $cislo_stranp; ?>' ></a>
 <a href="#" onClick="window.open('../ucto/saldo_faktoring.php?preuct=<?php echo $preuct;?>&cislo_strana=<?php echo $cislo_strand;?>&h_uce=<?php echo $h_uce;?>&h_ico=<?php echo $h_ico;?>&h_obd=<?php echo $h_obd;?>&copern=11&drupoh=1&page=1&cinnost=<?php echo $cinnost; ?>',
  '_self' );">
-<img src='../obr/next.png' width=10 height=10 border=0 alt='Strana <?php echo $cislo_strand; ?>' ></a>
+<img src='../obr/next.png' width=10 height=10 border=0 title='Strana <?php echo $cislo_strand; ?>' ></a>
 </td>
 <td colspan='5' align='right'><?php echo "FIR".$kli_vxcf." ".$kli_nxcf." strana ".$strana; ?></td>
 </tr> 
@@ -1358,16 +1358,18 @@ $fspl_sk=SkDatum($rsluz->fspl);
 <td width='10%' align='right'>
 <img src='../obr/zoznam.png' width=15 height=12 border=1 
  onClick="TlacVseo(<?php echo $vseob; ?>);" 
- alt='TlaËiù vöeobecn˝ doklad' >
+ title='TlaËiù vöeobecn˝ doklad' >
 <a href='vspk_u.php?sysx=UCT&rozuct=NIE&copern=8&drupoh=5&page=1&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $vseob;?>'>
-<img src='../obr/uprav.png' width=15 height=12 border=1 alt="⁄prava dokladu" ></a>
+<img src='../obr/uprav.png' width=15 height=12 border=1 title="⁄prava dokladu" ></a>
 <img src='../obr/tlac.png' width=15 height=12 border=1 
  onClick="TlacVzp(<?php echo $rsluz->ico; ?>,<?php echo $vseob; ?>);" 
- alt='TlaËiù faktoringov˙ zmluvu' >
+ title='TlaËiù faktoringov˙ zmluvu' >
 </td>
 </tr>
 <?php                } ?>
 <tr>
+<?php $xckmpx=$ip+1; ?>
+<FORM name="formsx<?php echo $xckmpx; ?>" class="obyc" method="post" action="#" >
 <td width='10%' align='right' class="fmenu" >
 <div class='nekliknute' id='CM<?php echo $rsluz->cpl; ?>' >
 <?php echo $rsluz->dok; ?>
@@ -1378,44 +1380,105 @@ $menax=$rsluz->mena;
 ?>
 <a href="#" onClick="upravMENU(<?php echo $rsluz->cpl; ?>,<?php echo $kurzx; ?>,<?php echo $hodmx; ?>,'<?php echo $menax; ?>');">
 <img src='../obr/banky/dollar2.jpg' 
- width=20 height=12 border=0 alt='Upraviù Hodnotu v cudzej mene <?php echo $rsluz->hodm; ?> <?php echo $rsluz->mena; ?>' ></a>
+ width=20 height=12 border=0 title='Upraviù Hodnotu v cudzej mene <?php echo $rsluz->hodm; ?> <?php echo $rsluz->mena; ?>' ></a>
 </div>
 </td>
 <td width='9%' align='right' class="fmenu" ><?php echo $rsluz->ucm; ?></td>
 <td width='9%' align='right' class="fmenu" ><?php echo $rsluz->ucd; ?></td>
 
 <td width='10%' align='right' class="fmenu" >
-<?php if( $fspl_sk != '' ) { ?>
-<div class='nekliknute' id='SP<?php echo $rsluz->cpl; ?>' >
+
+
+<div id="SPL<?php echo $xckmpx; ?>" >
+
 <?php echo $fspl_sk; ?>
- <img src='../obr/uprav.png' width=15 height=12 border=1 
- onClick="UpravSpl(<?php echo $rsluz->cpl; ?>,'<?php echo $fspl_sk; ?>');" 
- alt='Upraviù splatnosù poloûky' >
+ <img src='../obr/uprav.png' width=15 height=12 border=1 onClick="SPL<?php echo $xckmpx; ?>.style.display='none'; SPLX<?php echo $xckmpx; ?>.style.display='';"
+ title='Upraviù splatnosù poloûky' >
+
 </div>
-<?php                      } ?>
+
+<div id="SPLX<?php echo $xckmpx; ?>" style="display:none; " >
+
+ <input class='hvstup' type='text' name='n_mnozsl' id='n_mnozsl' size='8' value="<?php echo $fspl_sk; ?>" />
+
+ <img src="../obr/ok.png" onClick="UlozSTZLX<?php echo $xckmpx; ?>(<?php echo $rsluz->dok; ?>, <?php echo $rsluz->cpl; ?> );" width=15 height=10 border=1 
+title="Uloûiù splatnosù poloûky" >
+
+</div>
+
+
+
 </td>
 
 <td width='10%' align='right' class="fmenu" ><?php echo $rsluz->fak; ?>
  <img src='../obr/ok.png' width=15 height=12 border=1 
  onClick="UpravPol(<?php echo $rsluz->ico; ?>,<?php echo $rsluz->fak; ?>,<?php echo $strana; ?>,<?php echo $rsluz->cpl; ?>);" 
- alt='PrispÙsobiù poloûku zo vöeobecnÈho dokladu na rozdiel=0' >
+ title='PrispÙsobiù poloûku zo vöeobecnÈho dokladu na rozdiel=0' >
 </td>
 <td width='10%' align='right' class="fmenu" ><?php echo $rsluz->ico; ?></td>
 
 <td width='10%' align='right' class="fmenu" >
-<div class='nekliknute' id='ZP<?php echo $rsluz->cpl; ?>' >
+
+
+
+
+
+
+<div id="SP<?php echo $xckmpx; ?>" >
+
 <?php echo $rsluz->hod; ?>
- <img src='../obr/uprav.png' width=15 height=12 border=1 
- onClick="UpravHod(<?php echo $rsluz->cpl; ?>,<?php echo $rsluz->hod; ?>);" 
- alt='Upraviù hodnotu poloûky' >
+ <img src='../obr/uprav.png' width=15 height=12 border=1 onClick="SP<?php echo $xckmpx; ?>.style.display='none'; SPX<?php echo $xckmpx; ?>.style.display='';"
+ title='Upraviù hodnotu poloûky' >
+
 </div>
+
+<div id="SPX<?php echo $xckmpx; ?>" style="display:none; " >
+
+ <input class='hvstup' type='text' name='n_mnozs' id='n_mnozs' size='8' value="<?php echo $rsluz->hod;?>" />
+
+ <img src="../obr/ok.png" onClick="UlozSTZX<?php echo $xckmpx; ?>(<?php echo $rsluz->dok; ?>, <?php echo $rsluz->cpl; ?> );" width=15 height=10 border=1 title="Uloûiù poloûku" >
+
+</div>
+
+
+
+
 </td>
 <td width='2%' align='left' class="fmenu" >
  <img src='../obr/zmazuplne.png' width=15 height=12 border=1 
  onClick="ZmazPol(<?php echo $rsluz->ico; ?>,<?php echo $rsluz->fak; ?>,<?php echo $strana; ?>,<?php echo $rsluz->cpl; ?>);" 
- alt='Zmazaù poloûku zo vöeobecnÈho dokladu a z·poËtu' >
+ title='Zmazaù poloûku zo vöeobecnÈho dokladu a z·poËtu' >
 </td>
+</FORM>
 </tr>
+<script type="text/javascript">
+function UlozSTZX<?php echo $xckmpx; ?>(doklad,cpl)
+{
+
+var n_cpl = cpl;
+var n_mnozs = document.forms.formsx<?php echo $xckmpx; ?>.n_mnozs.value;
+var vseob= doklad;
+
+
+window.open('saldo_faktoring.php?preuct=<?php echo $preuct;?>&copern=618&h_cpl=' + n_cpl + '&n_hod=' + n_mnozs + '&drupoh=<?php echo $drupoh; ?>&cinnost=<?php echo $cinnost; ?>&h_vseob=' + vseob + '&h_uce=<?php echo $h_uce; ?>&h_ico=<?php echo $h_ico; ?>&h_obd=<?php echo $h_obd; ?>', '_self' );
+
+            
+}
+
+function UlozSTZLX<?php echo $xckmpx; ?>(doklad,cpl)
+{
+
+var n_cpl = cpl;
+var n_mnozs = document.forms.formsx<?php echo $xckmpx; ?>.n_mnozsl.value;
+var vseob= doklad;
+
+
+window.open('saldo_faktoring.php?preuct=<?php echo $preuct;?>&copern=3618&h_cpl=' + n_cpl + '&n_spl=' + n_mnozs + '&drupoh=<?php echo $drupoh; ?>&cinnost=<?php echo $cinnost; ?>&h_vseob=' + vseob + '&h_uce=<?php echo $h_uce; ?>&h_ico=<?php echo $h_ico; ?>&h_obd=<?php echo $h_obd; ?>', '_self' );
+
+
+            
+}
+</script>
 <?php
 }
 $ip = $ip + 1;
@@ -1441,10 +1504,10 @@ $dnes_sk=SkDatum($dnes);
 <td class="hmenu" colspan="10">
  <img src='../obr/ziarovka.png' width=15 height=12 border=1 
  onClick="NastavPoh();" 
- alt='Nastaviù ˙Ëty post˙penia pohæad·vok' >
+ title='Nastaviù ˙Ëty post˙penia pohæad·vok' >
  <img src='../obr/ziarovka.png' width=15 height=12 border=1 
  onClick="NastavZav();" 
- alt='Nastaviù ˙Ëty post˙penia z·v‰zkov' >
+ title='Nastaviù ˙Ëty post˙penia z·v‰zkov' >
 
  <input type="hidden" name="rozdiel" id="rozdiel" value="<?php echo $rozdiel;?>" />
  »Ìslo vöeob.dokladu: 
@@ -1458,7 +1521,7 @@ $dnes_sk=SkDatum($dnes);
 
 <img src='../obr/vlozit.png' width=15 height=12 border=1 
  onClick="NastavVseob(<?php echo $h_ico; ?>,0,<?php echo $strana; ?>,<?php echo $vseob; ?>);" 
- alt='Nastaviù ËÌslo vöeobecnÈho dokladu' >
+ title='Nastaviù ËÌslo vöeobecnÈho dokladu' >
 <td class="hmenu" colspan="2">
 <td class="hmenu" colspan="2">
 </FORM>
@@ -1470,10 +1533,10 @@ $dnes_sk=SkDatum($dnes);
 <?php if( $h_ico == 0 ) { ?>
 <a href="#" onClick="window.open('../ucto/saldo_faktoring.php?preuct=<?php echo $preuct;?>&cislo_strana=<?php echo $cislo_stranp;?>&h_uce=<?php echo $h_uce;?>&h_ico=<?php echo $h_ico;?>&h_obd=<?php echo $h_obd;?>&copern=11&drupoh=1&page=1&cinnost=<?php echo $cinnost; ?>',
  '_self' );">
-<img src='../obr/prev.png' width=10 height=10 border=0 alt='Strana <?php echo $cislo_stranp; ?>' ></a>
+<img src='../obr/prev.png' width=10 height=10 border=0 title='Strana <?php echo $cislo_stranp; ?>' ></a>
 <a href="#" onClick="window.open('../ucto/saldo_faktoring.php?preuct=<?php echo $preuct;?>&cislo_strana=<?php echo $cislo_strand;?>&h_uce=<?php echo $h_uce;?>&h_ico=<?php echo $h_ico;?>&h_obd=<?php echo $h_obd;?>&copern=11&drupoh=1&page=1&cinnost=<?php echo $cinnost; ?>',
  '_self' );">
-<img src='../obr/next.png' width=10 height=10 border=0 alt='Strana <?php echo $cislo_strand; ?>' ></a>
+<img src='../obr/next.png' width=10 height=10 border=0 title='Strana <?php echo $cislo_strand; ?>' ></a>
 <?php                   } ?>
 </td>
 <td colspan='5' align='right'><?php echo "FIR".$kli_vxcf." ".$kli_nxcf." strana ".$strana; ?></td>
@@ -1557,7 +1620,7 @@ if( $rtov->pox1 > 0 ) { $hvstup='hvstup_bred'; }
 <a href="#" onClick="window.open('../ucto/vspk_u.php?sysx=UCT&hladaj_uce=<?php echo $rtov->uce; ?>
 &rozuct=ANO&copern=8&drupoh=1&page=1&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $rtov->dok; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<input type='image' src='../obr/zoznam.png' width=15 height=12 border=0 alt='⁄prava prÌjmovÈho pokladniËnÈho dokladu'></a>
+<input type='image' src='../obr/zoznam.png' width=15 height=12 border=0 title='⁄prava prÌjmovÈho pokladniËnÈho dokladu'></a>
 <a href="#" onClick="window.open('../ucto/vspk_t.php?copern=20&drupoh=1&page=1&sysx=UCT&rozuct=ANO&cislo_dok=<?php echo $rtov->dok; ?>
 ', '_blank', 'width=800, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )"><?php echo $rtov->dok; ?></a>
 <?php                              } ?>
@@ -1566,7 +1629,7 @@ if( $rtov->pox1 > 0 ) { $hvstup='hvstup_bred'; }
 <a href="#" onClick="window.open('../ucto/vspk_u.php?sysx=UCT&hladaj_uce=<?php echo $rtov->uce; ?>
 &rozuct=ANO&copern=8&drupoh=2&page=1&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $rtov->dok; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<input type='image' src='../obr/zoznam.png' width=15 height=12 border=0 alt='⁄prava v˝davkovÈho pokladniËnÈho dokladu'></a>
+<input type='image' src='../obr/zoznam.png' width=15 height=12 border=0 title='⁄prava v˝davkovÈho pokladniËnÈho dokladu'></a>
 <a href="#" onClick="window.open('../ucto/vspk_t.php?copern=20&drupoh=2&page=1&sysx=UCT&rozuct=ANO&cislo_dok=<?php echo $rtov->dok; ?>
 ', '_blank', 'width=800, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )"><?php echo $rtov->dok; ?></a>
 <?php                              } ?>
@@ -1575,7 +1638,7 @@ if( $rtov->pox1 > 0 ) { $hvstup='hvstup_bred'; }
 <a href="#" onClick="window.open('../ucto/vspk_u.php?sysx=UCT&hladaj_uce=<?php echo $rtov->uce; ?>
 &rozuct=ANO&copern=8&drupoh=4&page=1&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $rtov->dok; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<input type='image' src='../obr/zoznam.png' width=15 height=12 border=0 alt='⁄prava bankovÈho dokladu'></a>
+<input type='image' src='../obr/zoznam.png' width=15 height=12 border=0 title='⁄prava bankovÈho dokladu'></a>
 <a href="#" onClick="window.open('../ucto/vspk_t.php?copern=20&drupoh=4&page=1&sysx=UCT&rozuct=ANO&cislo_dok=<?php echo $rtov->dok; ?>
 ', '_blank', 'width=800, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )"><?php echo $rtov->dok; ?></a>
 <?php                              } ?>
@@ -1584,7 +1647,7 @@ if( $rtov->pox1 > 0 ) { $hvstup='hvstup_bred'; }
 <a href="#" onClick="window.open('../ucto/vspk_u.php?sysx=UCT&hladaj_uce=<?php echo $rtov->uce; ?>
 &rozuct=ANO&copern=8&drupoh=5&page=1&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $rtov->dok; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<input type='image' src='../obr/zoznam.png' width=15 height=12 border=0 alt='⁄prava vöeobecnÈho ˙ËtovnÈho dokladu'></a>
+<input type='image' src='../obr/zoznam.png' width=15 height=12 border=0 title='⁄prava vöeobecnÈho ˙ËtovnÈho dokladu'></a>
 <a href="#" onClick="window.open('../ucto/vspk_t.php?copern=20&drupoh=5&page=1&sysx=UCT&rozuct=ANO&cislo_dok=<?php echo $rtov->dok; ?>
 ', '_blank', 'width=800, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )"><?php echo $rtov->dok; ?></a>
 <?php                              } ?>
@@ -1593,7 +1656,7 @@ if( $rtov->pox1 > 0 ) { $hvstup='hvstup_bred'; }
 <a href="#" onClick="window.open('../faktury/vstf_t.php?sysx=UCT&hladaj_uce=<?php echo $rtov->uce; ?>
 &rozuct=ANO&copern=20&drupoh=1&page=1&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $rtov->dok; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<input type='image' src='../obr/zoznam.png' width=15 height=12 border=0 alt='⁄prava roz˙Ëtovania odberateæskej fakt˙ry'></a>
+<input type='image' src='../obr/zoznam.png' width=15 height=12 border=0 title='⁄prava roz˙Ëtovania odberateæskej fakt˙ry'></a>
 <a href="#" onClick="window.open('../faktury/vstf_t.php?copern=20&drupoh=1&page=1&pocstav=0&cislo_dok=<?php echo $rtov->dok; ?>
 ', '_blank', 'width=800, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )"><?php echo $rtov->dok; ?></a>
 <?php                              } ?>
@@ -1602,7 +1665,7 @@ if( $rtov->pox1 > 0 ) { $hvstup='hvstup_bred'; }
 <a href="#" onClick="window.open('../faktury/vstf_t.php?sysx=UCT&hladaj_uce=<?php echo $rtov->uce; ?>
 &rozuct=ANO&copern=20&drupoh=2&page=1&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $rtov->dok; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<input type='image' src='../obr/zoznam.png' width=15 height=12 border=0 alt='⁄prava roz˙Ëtovania dod·vateæskej fakt˙ry'></a>
+<input type='image' src='../obr/zoznam.png' width=15 height=12 border=0 title='⁄prava roz˙Ëtovania dod·vateæskej fakt˙ry'></a>
 <a href="#" onClick="window.open('../faktury/vstf_t.php?copern=20&drupoh=2&page=1&pocstav=0&cislo_dok=<?php echo $rtov->dok; ?>
 ', '_blank', 'width=800, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )"><?php echo $rtov->dok; ?></a>
 <?php                              } ?>
@@ -1634,7 +1697,7 @@ if( $preuct == 1 ) $courob="Od˙Ëtovat zostatok";
 ?>
 <img src='../obr/pdf.png' width=10 height=10 border=1 
 onClick="VzpFak(<?php echo $rtov->ico; ?>,<?php echo $rtov->fak; ?>,<?php echo $strana; ?>,<?php echo $rtov->zos; ?>,'<?php echo $rtov->das; ?>');"
- alt='<?php echo $courob; ?> doklad <?php echo $rtov->dok; ?>' >
+ title='<?php echo $courob; ?> doklad <?php echo $rtov->dok; ?>' >
 <?php
            }
 ?>
@@ -1653,7 +1716,7 @@ if( $cinnost == 6 )
 ?>
 <img src='../obr/zmazuplne.png' width=10 height=10 border=0 
  onClick="ZmazVzp(<?php echo $rtov->ico; ?>,<?php echo $rtov->fak; ?>,<?php echo $strana; ?>);" 
- alt='Zmazaù poloûku zo z·poËtu, NIE zo saldokonta ani z ˙Ëtovania' >
+ title='Zmazaù poloûku zo z·poËtu, NIE zo saldokonta ani z ˙Ëtovania' >
 <?php
            }
 ?>
@@ -1686,7 +1749,7 @@ if( $cinnost == 6 )
 ?>
 <img src='../obr/pdf.png' width=10 height=10 border=1
 onClick="VzpIco(<?php echo $rtov->ico; ?>,<?php echo $rtov->fak; ?>,<?php echo $strana; ?>);"
- alt='Vytvoriù PDF z·poËet pre I»O <?php echo $rtov->ico; ?>' >
+ title='Vytvoriù PDF z·poËet pre I»O <?php echo $rtov->ico; ?>' >
 
 <?php
            }
@@ -1729,10 +1792,10 @@ if( $cinnost == 6 )
 ?>
 <a href="#" onClick="window.open('../ucto/saldo_faktoring.php?preuct=<?php echo $preuct;?>&cislo_strana=<?php echo $cislo_stranp;?>&h_uce=<?php echo $h_uce;?>&h_ico=<?php echo $h_ico;?>&h_obd=<?php echo $h_obd;?>&copern=11&drupoh=1&page=1&cinnost=<?php echo $cinnost; ?>',
  '_self' );">
-<img src='../obr/prev.png' width=10 height=10 border=0 alt='Strana <?php echo $cislo_stranp; ?>' ></a>
+<img src='../obr/prev.png' width=10 height=10 border=0 title='Strana <?php echo $cislo_stranp; ?>' ></a>
 <a href="#" onClick="window.open('../ucto/saldo_faktoring.php?preuct=<?php echo $preuct;?>&cislo_strana=<?php echo $cislo_strand;?>&h_uce=<?php echo $h_uce;?>&h_ico=<?php echo $h_ico;?>&h_obd=<?php echo $h_obd;?>&copern=11&drupoh=1&page=1&cinnost=<?php echo $cinnost; ?>',
  '_self' );">
-<img src='../obr/next.png' width=10 height=10 border=0 alt='Strana <?php echo $cislo_strand; ?>' ></a>
+<img src='../obr/next.png' width=10 height=10 border=0 title='Strana <?php echo $cislo_strand; ?>' ></a>
 <?php
      }
 ?>
