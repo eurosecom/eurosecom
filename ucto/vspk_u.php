@@ -3162,6 +3162,11 @@ if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 3 OR $drupoh == 4 OR $drupoh == 
   hodprevz.style.display='';
   }
 
+  function zobraz_robotmenudiv()
+  { 
+  hodprevz.style.display='';
+  }
+
   function zhasni_menurobot()
   { 
   robotmenu.style.display='none';
@@ -3221,48 +3226,7 @@ $i=$i+1;
 
 <?php                    } ?>
 
-<?php if( $copern == 7 AND $kli_vduj == 0 AND ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 5 OR $drupoh == 4 ) ) { ?>
-<?php 
-$drupohxx=$drupoh; 
-if( $drupoh == 1 ) { $drupohxx=21; }
-if( $drupoh == 2 ) { $drupohxx=22; }
-?>
-<?php
-$nuctpoh="";
-if( $_SESSION['kli_vrok'] < 2011 ) { $nuctpoh="2010"; }
-$ductpoh="";
-if( $fir_uctx03 == 1 ) { $ductpoh="F".$kli_vxcf."_"; $nuctpoh=""; }
 
-$sqltt = "SELECT * FROM $ductpoh"."uctpohyby$nuctpoh WHERE ucto = '$kli_vduj' AND druh = '$drupohxx' ORDER BY cpoh";
-$sql = mysql_query("$sqltt");
-
-$cpol = mysql_num_rows($sql);
-$i=0;
-
-   while ($i <= $cpol )
-   {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-?>
-
-    var toprobotmenu = toprobot - <?php echo $cpol; ?>*19;
-
-    if( toprobot < 100 ) { toprobot=100; }
-
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
-htmlmenu += "<a href=\"#\" onClick=\"volajAutoUCT(10,<?php echo $drupohxx; ?>,<?php echo $riadok->cpoh; ?>)\">" +
-"Chcete za˙Ëtovaù <?php echo $riadok->pohp; ?> ?</a>";
-    htmlmenu += "</td></tr>";
-
-<?php
-  }
-$i=$i+1;
-   }
-?>
-
-
-<?php                    } ?>
 
 <?php if( $copern == 7 AND $kli_vduj == 9 ) { ?>
 
@@ -3308,57 +3272,7 @@ htmlmenu += "<a href=\"#\" onClick=\"volajAutoUCT(19,<?php echo $drupoh+200; ?>,
 <?php                                       } ?>
 
 
-<?php if( $copern == 7 AND $kli_vduj == 9 AND ( $drupoh == 5 OR $drupoh == 4 ) ) { ?>
 
-<?php
-$nuctpoh="";
-if( $_SESSION['kli_vrok'] < 2011 ) { $nuctpoh="2010"; }
-$ductpoh="";
-if( $fir_uctx03 == 1 ) { $ductpoh="F".$kli_vxcf."_"; $nuctpoh=""; }
-
-$sqltt = "SELECT * FROM $ductpoh"."uctpohyby$nuctpoh WHERE ucto = '$kli_vduj' AND druh = '$drupoh' ORDER BY cpoh";
-$sql = mysql_query("$sqltt");
-
-$cpol = mysql_num_rows($sql);
-$i=0;
-
-   while ($i <= $cpol )
-   {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-?>
-
-    var toprobotmenu = toprobot - <?php echo $cpol; ?>*19;
-
-    if( toprobot < 100 ) { toprobot=100; }
-
-    htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
-htmlmenu += "<a href=\"#\" onClick=\"volajAutoUCT(29,<?php echo $drupoh; ?>,<?php echo $riadok->cpoh; ?>)\">" +
-"Chcete za˙Ëtovaù <?php echo $riadok->pohp; ?> ?</a>";
-    htmlmenu += "</td></tr>";
-
-<?php
-  }
-$i=$i+1;
-   }
-?>
-
-    htmlmenu += "<tr><FORM name='fhoddok' class='obyc' method='post' action='#' ><td width='100%' colspan='2'>H1: ";
-    htmlmenu += "<input type='text' name='h_hod1' id='h_hod1' size='6' value=\"<?php echo $hod1;?>\" ";
-    htmlmenu += "onclick=\"Fx.style.display='none';\" onkeyup=\"KontrolaDcisla(this, Des)\" /> ";
-
-    htmlmenu += "H2: <input type='text' name='h_hod2' id='h_hod2' size='6' value=\"<?php echo $hod2;?>\" ";
-    htmlmenu += "onclick=\"Fx.style.display='none';\" onkeyup=\"KontrolaDcisla(this, Des)\" /> ";
-
-    htmlmenu += "H3: <input type='text' name='h_hod3' id='h_hod3' size='6' value=\"<?php echo $hod3;?>\" ";
-    htmlmenu += "onclick=\"Fx.style.display='none';\" onkeyup=\"KontrolaDcisla(this, Des)\" /> ";
-
-    htmlmenu += "H4: <input type='text' name='h_hod4' id='h_hod4' size='6' value=\"<?php echo $hod4;?>\" ";
-    htmlmenu += "onclick=\"Fx.style.display='none';\" onkeyup=\"KontrolaDcisla(this, Des)\" /> ";
-    htmlmenu += "</td></FORM></tr>";
-
-<?php                    } ?>
 
 
     htmlmenu += "</table>";  
@@ -3860,6 +3774,102 @@ onload="window.scrollTo(0, 3000); ObnovUI(); VyberVstup(); <?php if( $copern == 
  <?php if( $copern == 7 AND $tlacitkoenter == 1 ) { echo " polohaen3(); "; } ?>
 " >
 
+
+<?php
+if (  $copern == 7 AND $drupoh < 4  )
+     {
+//nastavenie parametrov 
+
+
+?>
+<div id="nastavfakx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 300px; left: 10px; width:600px; height:100px;">
+<table  class='ponuka' width='100%'>
+<tr><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td></tr>
+
+<tr><td colspan='3'>Nastavenie pokladniËnÈho dokladu uzv(<?php echo $kli_uzid; ?>)</td>
+<td colspan='2' align='right'><img border=0 src='../obr/zmazuplne.png' style="width:10; height:10;" onClick="nastavfakx.style.display='none';" title='Zhasni menu' ></td></tr>  
+                    
+<tr><FORM name='enast' method='post' action='#' ><td class='ponuka' colspan='5'>
+<a href="#" onClick="NacitajPol(<?php echo $kli_uzid; ?>, <?php echo $hladaj_uce; ?>, <?php echo $drupoh; ?>);"> Chcete uloûiù nastavenie pokladniËnÈho dokladu ?</a></td></tr>
+
+<tr><td class='ponuka' colspan='1'><input type='checkbox' name='zmd' value='1' > PeËiatka  
+<img border=0 src='../obr/zoznam.png' style='width:15; height:15;' onClick='PecSubor();' title='NaËÌtanie JPG s˙boru peËiatky' > 
+<td class='ponuka' colspan='1'> öÌrka<input type='text' name='h_ucm1' id='h_ucm1' size='4' maxlenght='4' value='' >40
+<td class='ponuka' colspan='1'> v˝öka<input type='text' name='h_ucm2' id='h_ucm2' size='4' maxlenght='4' value='' >20
+<td class='ponuka' colspan='1'> zæava<input type='text' name='h_ucm3' id='h_ucm3' size='4' maxlenght='4' value='' >155
+<td class='ponuka' colspan='1'> zhora<input type='text' name='h_ucm4' id='h_ucm4' size='4' maxlenght='4' value='' >130</td>
+</tr>
+
+<tr><td class='ponuka' colspan='1'><input type='checkbox' name='zdl' value='1' > Logo  
+<img border=0 src='../obr/zoznam.png' style='width:15; height:15;' onClick='LogoSubor();' title='NaËÌtanie JPG s˙boru loga' > 
+<td class='ponuka' colspan='1'> öÌrka<input type='text' name='h_ico1' id='h_ico1' size='4' maxlenght='4' value='' >180
+<td class='ponuka' colspan='1'> v˝öka<input type='text' name='h_ico2' id='h_ico2' size='4' maxlenght='4' value='' >20
+<td class='ponuka' colspan='1'> zæava<input type='text' name='h_ico3' id='h_ico3' size='4' maxlenght='4' value='' >15
+<td class='ponuka' colspan='1'> zhora<input type='text' name='h_ico4' id='h_ico4' size='4' maxlenght='4' value='' >10</td>
+</tr>
+
+<tr><td class='ponuka' colspan='5'> 
+   x1 <input type='text' name='h_ucm5' id='h_ucm5' size='4' maxlenght='4' value='' >
+ | x2 <input type='text' name='h_ico5' id='h_ico5' size='4' maxlenght='4' value='' > </td></tr> 
+<tr><td class='ponuka' colspan='5'> 
+   netlaËiù ˙ËtovnÈ poloûky  <input type='checkbox' name='omd' value='1' > | x3 <input type='checkbox' name='odl' value='1' >
+ | x4 <input type='checkbox' name='pmd' value='1' > | x5 <input type='checkbox' name='pdl' value='1' > 
+</td></tr> 
+</FORM></table>
+</div>
+
+<script type="text/javascript">
+//uloz subor
+function LogoSubor()
+                {
+window.open('../cis/ulozhlavicku.php?copern=1998&drupoh=1&page=1','_blank');
+                }
+
+function PecSubor()
+                {
+window.open('../cis/ulozhlavicku.php?copern=1997&drupoh=1&page=1','_blank');
+                }
+
+//zapis nastavenie
+function NacitajPol( premx, hladajucex, drupohx )
+                {
+var doklad = document.forms.forms1.h_dok.value;
+
+var ucm1 = document.forms.enast.h_ucm1.value;
+var ucm2 = document.forms.enast.h_ucm2.value;
+var ucm3 = document.forms.enast.h_ucm3.value;
+var ucm4 = document.forms.enast.h_ucm4.value;
+var ucm5 = document.forms.enast.h_ucm5.value;
+var ico1 = document.forms.enast.h_ico1.value;
+var ico2 = document.forms.enast.h_ico2.value;
+var ico3 = document.forms.enast.h_ico3.value;
+var ico4 = document.forms.enast.h_ico4.value;
+var ico5 = document.forms.enast.h_ico5.value;
+var premenna = premx;
+var zmd = 0;
+if( document.enast.zmd.checked ) zmd=1;
+var zdl = 0;
+if( document.enast.zdl.checked ) zdl=1;
+var omd = 0;
+if( document.enast.omd.checked ) omd=1;
+var odl = 0;
+if( document.enast.odl.checked ) odl=1;
+var pmd = 0;
+if( document.enast.pmd.checked ) pmd=1;
+var pdl = 0;
+if( document.enast.pdl.checked ) pdl=1;
+
+window.open('pok_setuloz.php?cislo_dok=' + doklad + '&drupoh=' + drupohx + '&hladaj_uce=' + hladajucex + '&h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&premenna=' + premenna + '&copern=900', '_self' );
+                }
+
+
+</script>
+<?php
+     }
+?>
+
+
+
 <?php if( $tlacitkoenter == 1 ) {  ?>
 
 <div id="tlacitkoEnter" style="cursor: hand; display: none; position: absolute; z-index: 400; top: 95; left: 405; width:80; height:25;">
@@ -3900,6 +3910,92 @@ onclick="Fx.style.display='none';" onkeyup="KontrolaDcisla(this, Des)" />
 
 </tr>
 </FORM></table>
+
+<table  class='ponuka' width='100%'><tr><td width='90%'>Menu EkoRobot</td>
+<td width='10%' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;' onClick='zhasni_menurobot();' title='Zhasni menu' ></td></tr>  
+
+<?php if( $copern == 7 AND $kli_vduj == 9 AND ( $drupoh == 5 OR $drupoh == 4 ) ) { ?>
+
+<?php
+$nuctpoh="";
+if( $_SESSION['kli_vrok'] < 2011 ) { $nuctpoh="2010"; }
+$ductpoh="";
+if( $fir_uctx03 == 1 ) { $ductpoh="F".$kli_vxcf."_"; $nuctpoh=""; }
+
+$sqltt = "SELECT * FROM $ductpoh"."uctpohyby$nuctpoh WHERE ucto = '$kli_vduj' AND druh = '$drupoh' ORDER BY cpoh";
+$sql = mysql_query("$sqltt");
+
+$cpol = mysql_num_rows($sql);
+$i=0;
+
+   while ($i <= $cpol )
+   {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+  {
+$riadok=mysql_fetch_object($sql);
+?>
+
+
+<tr><td width='100%' class='ponuka' colspan='2'> 
+<a href="#" onClick="volajAutoUCT(29,<?php echo $drupoh; ?>,<?php echo $riadok->cpoh; ?>)">
+Chcete za˙Ëtovaù <?php echo $riadok->pohp; ?> ?</a>
+</td></tr>
+
+<?php
+  }
+$i=$i+1;
+   }
+
+      }
+//end copern = 7...
+?>
+
+
+<?php if( $copern == 7 AND $kli_vduj == 0 AND ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 5 OR $drupoh == 4 ) ) { ?>
+<?php 
+$drupohxx=$drupoh; 
+if( $drupoh == 1 ) { $drupohxx=21; }
+if( $drupoh == 2 ) { $drupohxx=22; }
+?>
+<?php
+$nuctpoh="";
+if( $_SESSION['kli_vrok'] < 2011 ) { $nuctpoh="2010"; }
+$ductpoh="";
+if( $fir_uctx03 == 1 ) { $ductpoh="F".$kli_vxcf."_"; $nuctpoh=""; }
+
+$sqltt = "SELECT * FROM $ductpoh"."uctpohyby$nuctpoh WHERE ucto = '$kli_vduj' AND druh = '$drupohxx' ORDER BY cpoh";
+$sql = mysql_query("$sqltt");
+
+$cpol = mysql_num_rows($sql);
+$i=0;
+
+   while ($i <= $cpol )
+   {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+  {
+$riadok=mysql_fetch_object($sql);
+
+
+?>
+
+<tr><td width='100%' class='ponuka' colspan='2'> 
+<a href="#" onClick="volajAutoUCT(10,<?php echo $drupohxx; ?>,<?php echo $riadok->cpoh; ?>)">
+Chcete za˙Ëtovaù <?php echo $riadok->pohp; ?> ?</a>
+</td></tr>
+
+<?php
+  }
+$i=$i+1;
+   }
+
+}
+//koniec copern=7...
+?>
+
+</table>
+
+
+
 </div>
 <script type="text/javascript">
 
@@ -4179,12 +4275,24 @@ zobrazene menu
 zobrazeny vysledok
 </div>
 
+<?php
+$akemenu="zobraz_robotmenu()";
+if( $copern == 7 AND $kli_vduj == 0 AND ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 5 OR $drupoh == 4 ) ) 
+     {
+$akemenu="zobraz_robotmenudiv()";
+     }
+if( $copern == 7 AND $kli_vduj == 9 AND ( $drupoh == 5 OR $drupoh == 4 ) ) 
+     {
+$akemenu="zobraz_robotmenu()";
+     }
+?>
 <div id="robotokno" style="cursor: hand; display: none; position: absolute; z-index: 300; top: 200; left: 40; ">
-<img border=0 src='../obr/robot/robot3.jpg' style='width:40; height:80;' onClick="zobraz_robotmenu();"
+<img border=0 src='../obr/robot/robot3.jpg' style='width:40; height:80;' onClick="<?php echo $akemenu; ?>;"
  alt='Dobr˝ deÚ , ja som V·ö EkoRobot , ak m·te ot·zku alebo nejakÈ ûelanie kliknite na mÚa prosÌm 1x myöou' >
 <img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;' onClick="zhasnirobot();"
  alt='Zhasni EkoRobota' title='Zhasni EkoRobota' >
 </div>
+
 
 <table class="h2" width="100%" >
 <tr>
@@ -6029,6 +6137,7 @@ if(  $riadok->zk0 !=0 )
 <?php
 if ( $copern == 7 AND $drupoh < 4  )
      {
+
 $peciatkaano=0;
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_pokladnicaset$kli_uzid ";
 $sqldok = mysql_query("$sqlttt");
@@ -6040,7 +6149,7 @@ $sqldok = mysql_query("$sqlttt");
 ?>
 <script type="text/javascript" src="pok_set.js"></script>
 <td class="pvstup" width="15%" >
-&nbsp&nbsp<img src='../obr/naradie.png' onClick="NacitajPokset(<?php echo $kli_uzid;?>, <?php echo $hladaj_uce;?>, <?php echo $drupoh;?> );" width=15 height=15 border=0 title="Nastaviù parametre pokladniËnÈho dokladu" ></a>
+&nbsp&nbsp<img src='../obr/naradie.png' onClick="nastavfakx.style.display=''; volajPokset(<?php echo $kli_uzid;?>);" width=15 height=15 border=0 title="Nastaviù parametre pokladniËnÈho dokladu" ></a>
 &nbsp&nbsp
 <input type="checkbox" name="h_razitko" value="1" /> peËiatka
 <?php
