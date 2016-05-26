@@ -74,7 +74,7 @@ $i=$i+1;                   }
 
 $r02=0; 
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 518 )";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 511 OR LEFT(uce,3) = 512 OR LEFT(uce,3) = 513 OR LEFT(uce,3) = 518 )";
 $sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
 $i=0; while ($i <= $pol )  {
 if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r02=$r02+$polozka->omd-$polozka->odl; }
@@ -82,7 +82,7 @@ $i=$i+1;                   }
 
 $r03=0; 
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 503 OR LEFT(uce,3) = 511 )";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 503 )";
 $sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
 $i=0; while ($i <= $pol )  {
 if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r03=$r03+$polozka->omd-$polozka->odl; }
@@ -90,20 +90,65 @@ $i=$i+1;                   }
 
 $r04=0; 
 
+if( $poliklinikase == 0 ) 
+    {
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 549 OR LEFT(uce,3) = 582 )";
 $sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
 $i=0; while ($i <= $pol )  {
 if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r04=$r04+$polozka->omd-$polozka->odl; }
 $i=$i+1;                   }
+    }
+if( $poliklinikase == 1 ) 
+    {
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND LEFT(uce,3) = 548 ";
+$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
+$i=0; while ($i <= $pol )  {
+if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r04=$r04+$polozka->omd-$polozka->odl; }
+$i=$i+1;                   }
+    }
 
 
 $r06=0; 
 
+if( $poliklinikase == 0 ) 
+    {
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 527 )";
 $sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
 $i=0; while ($i <= $pol )  {
 if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r06=$r06+$polozka->omd-$polozka->odl; }
 $i=$i+1;                   }
+    }
+if( $poliklinikase == 1 ) 
+    {
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,6) = 527400 )";
+$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
+$i=0; while ($i <= $pol )  {
+if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r06=$r06+$polozka->omd-$polozka->odl; }
+$i=$i+1;                   }
+    }
+
+
+$r09=0; 
+
+
+if( $poliklinikase == 1 ) 
+    {
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,6) = 527701 OR LEFT(uce,6) = 527702 )";
+$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
+$i=0; while ($i <= $pol )  {
+if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r09=$r09+$polozka->omd-$polozka->odl; }
+$i=$i+1;                   }
+    }
+
+
+$r10=0; 
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 525 )";
+$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
+$i=0; while ($i <= $pol )  {
+if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r10=$r10+$polozka->omd-$polozka->odl; }
+$i=$i+1;                   }
+
 
 
 $r13=0; 
@@ -151,7 +196,9 @@ $r21=$r21+$polozka->zmd-$polozka->zdl; }
 $i=$i+1;                   }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET ".
-" m178r01='$r01', m178r02='$r02', m178r03='$r03', m178r04='$r04', m178r06='$r06', m178r13='$r13', m178r16='$r16', m178r17='$r17', m178r18='$r18', m178r19='$r19', ".
+" m178r01='$r01', m178r02='$r02', m178r03='$r03', m178r04='$r04', m178r06='$r06', ".
+" m178r14='$r09', m178r15='$r10',  ".
+" m178r13='$r13', m178r16='$r16', m178r17='$r17', m178r18='$r18', m178r19='$r19', ".
 " m178r20='$r20', m178r21='$r21' ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt"); 
@@ -231,7 +278,34 @@ $strana=7;
 }
 //koniec modul177
 
+//modul 179
+if( $citajvsetkymoduly == 1 ) { $modul=179; }
+if( $modul == 179 )
+{
 
+//179.modul 
+
+$r01=0; 
+
+$r02=0; 
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,6) = 531000 OR LEFT(uce,6) = 538100 )";
+$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
+$i=0; while ($i <= $pol )  {
+if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $r02=$r02+$polozka->omd-$polozka->odl; }
+$i=$i+1;                   }
+
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET ".
+" m179r01='$r01', m179r02='$r02' WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt"); 
+ 
+
+
+
+$strana=8;
+}
+//koniec modul179
 
 //prepnute z uobrat.php modul 513 
 if( $citajvsetkymoduly == 1 ) { $modul=513; }
@@ -313,6 +387,8 @@ $upravene = mysql_query("$uprtxt");
 
 $poccen=0; $pocops=0; $prir=0; $ubyt=0; $zoscen=0; $zosops=0;
 
+if( $poliklinikase == 0 ) 
+    {
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 022 OR LEFT(uce,3) = 082 )";
 $sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
 $i=0; while ($i <= $pol )  {
@@ -324,10 +400,78 @@ if( $uce3 == '082' ) { $pocops=$pocops+$polozka->pdl; $zosops=$zosops+$polozka->
 					}
 $i=$i+1;                   }
 
+    }
+if( $poliklinikase == 1 ) 
+    {
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 022 OR LEFT(uce,3) = 023 OR LEFT(uce,3) = 028 ".
+" OR LEFT(uce,3) = 082 OR LEFT(uce,3) = 083 OR LEFT(uce,3) = 088 )";
+$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
+$i=0; while ($i <= $pol )  {
+if (@$zaznam=mysql_data_seek($sql,$i)) 	{ 
+$polozka=mysql_fetch_object($sql);
+$uce2=substr($polozka->uce,0,2); 
+if( $uce2 == '02' ) { $poccen=$poccen+$polozka->pmd; $prir=$prir+$polozka->omd; $ubyt=$ubyt+$polozka->odl; $zoscen=$zoscen+$polozka->zmd; }
+if( $uce2 == '08' ) { $pocops=$pocops+$polozka->pdl; $zosops=$zosops+$polozka->zdl; } 
+					}
+$i=$i+1;                   }
+
+    }
+
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET ".
 " m513r106='$poccen' , m513r206='$pocops' , m513r306='$prir' , m513r406='$ubyt' , m513r506='$zoscen' , m513r606='$zosops' ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
+
+
+
+
+$poccen=0; $pocops=0; $prir=0; $ubyt=0; $zoscen=0; $zosops=0;
+
+if( $poliklinikase == 1 ) 
+    {
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 022 OR LEFT(uce,3) = 082 )";
+$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
+$i=0; while ($i <= $pol )  {
+if (@$zaznam=mysql_data_seek($sql,$i)) 	{ 
+$polozka=mysql_fetch_object($sql);
+$uce2=substr($polozka->uce,0,2); 
+if( $uce2 == '02' ) { $poccen=$poccen+$polozka->pmd; $prir=$prir+$polozka->omd; $ubyt=$ubyt+$polozka->odl; $zoscen=$zoscen+$polozka->zmd; }
+if( $uce2 == '08' ) { $pocops=$pocops+$polozka->pdl; $zosops=$zosops+$polozka->zdl; } 
+					}
+$i=$i+1;                   }
+
+    }
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET ".
+" m513r107='$poccen' , m513r207='$pocops' , m513r307='$prir' , m513r407='$ubyt' , m513r507='$zoscen' , m513r607='$zosops' ".
+" WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+
+
+$poccen=0; $pocops=0; $prir=0; $ubyt=0; $zoscen=0; $zosops=0;
+
+if( $poliklinikase == 1 ) 
+    {
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 023 OR LEFT(uce,3) = 083 )";
+$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
+$i=0; while ($i <= $pol )  {
+if (@$zaznam=mysql_data_seek($sql,$i)) 	{ 
+$polozka=mysql_fetch_object($sql);
+$uce2=substr($polozka->uce,0,2); 
+if( $uce2 == '02' ) { $poccen=$poccen+$polozka->pmd; $prir=$prir+$polozka->omd; $ubyt=$ubyt+$polozka->odl; $zoscen=$zoscen+$polozka->zmd; }
+if( $uce2 == '08' ) { $pocops=$pocops+$polozka->pdl; $zosops=$zosops+$polozka->zdl; } 
+					}
+$i=$i+1;                   }
+
+    }
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET ".
+" m513r108='$poccen' , m513r208='$pocops' , m513r308='$prir' , m513r408='$ubyt' , m513r508='$zoscen' , m513r608='$zosops' ".
+" WHERE ico >= 0"; 
+$upravene = mysql_query("$uprtxt");
+
+
 
 
 $poccen=0; $pocops=0; $prir=0; $ubyt=0; $zoscen=0; $zosops=0;
@@ -494,6 +638,9 @@ if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $mx5
 if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $mx586r21=$mx586r21+$polozka->zmd-$polozka->zdl; }
 $i=$i+1;                   }
 
+
+if( $poliklinikase == 0 ) 
+    {
 //321, 324, 325, 326, úèty 367, 368, úèty 331, 333, 377, 379,
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 321 OR LEFT(uce,3) = 324 ".
 "  OR LEFT(uce,3) = 325 OR LEFT(uce,3) = 326 OR LEFT(uce,3) = 367 OR LEFT(uce,3) = 368 OR LEFT(uce,3) = 331 OR LEFT(uce,3) = 333 ".
@@ -504,6 +651,22 @@ $i=0; while ($i <= $pol )  {
 if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $mx586r12=$mx586r12+$polozka->pdl-$polozka->pmd; }
 if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $mx586r22=$mx586r22+$polozka->zdl-$polozka->zmd; }
 $i=$i+1;                   }
+
+    }
+if( $poliklinikase == 1 ) 
+    {
+//321,331,336,341,342,343,379,472
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 321 OR LEFT(uce,3) = 331 ".
+"  OR LEFT(uce,3) = 336 OR LEFT(uce,3) = 341 OR LEFT(uce,3) = 342 OR LEFT(uce,3) = 343 OR LEFT(uce,3) = 379 OR LEFT(uce,3) = 472 )";
+$sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
+//echo $sqltt;
+$i=0; while ($i <= $pol )  {
+if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $mx586r12=$mx586r12+$polozka->pdl-$polozka->pmd; }
+if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $mx586r22=$mx586r22+$polozka->zdl-$polozka->zmd; }
+$i=$i+1;                   }
+
+    }
+
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 544 OR LEFT(uce,3) = 545 )";
 $sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
@@ -5874,6 +6037,8 @@ $sknacesb=$fir_sknace;
 <span class="text-echo" style="top:94px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 179b -->
+<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
+     onclick="NacitajZobratovky(179);" style="top:170px; left:380px;" class="btn-row-tool">
 <input type="text" name="m179r01" id="m179r01" style="width:100px; top:230px; left:680px;"/>
 <input type="text" name="m179r02" id="m179r02" style="width:100px; top:261px; left:680px;"/>
 <span class="text-echo" style="top:296px; right:164px;"><?php echo $m179r99; ?></span>
