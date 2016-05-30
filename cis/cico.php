@@ -433,6 +433,13 @@ $h_ib1 = $h_ib1."-".$h_st1;
 $h_ib2 = $h_ib2."-".$h_st2;
 $h_ib3 = $h_ib3."-".$h_st3;
 
+$h_ib1=str_replace(" ","",$h_ib1);
+$h_ib1=strtoupper($h_ib1);
+$h_ib2=str_replace(" ","",$h_ib2);
+$h_ib2=strtoupper($h_ib2);
+$h_ib3=str_replace(" ","",$h_ib3);
+$h_ib3=strtoupper($h_ib3);
+
 $uloztt = "INSERT INTO F$kli_vxcf"."_ico".
 " ( ico,dic,icd,nai,na2,uli,psc,mes,tel,fax,em1,em2,em3,dns,www,uc1,nm1,uc2,nm2,uc3,nm3,ib1,ib2,ib3 )".
 " VALUES ($h_ico, '$h_dic', '$h_icd', '$h_nai', '$h_na2', '$h_uli', '$h_psc', '$h_mes',".
@@ -519,6 +526,13 @@ $h_st3 = strip_tags($_REQUEST['h_st3']);
 $h_ib1 = $h_ib1."-".$h_st1;
 $h_ib2 = $h_ib2."-".$h_st2;
 $h_ib3 = $h_ib3."-".$h_st3;
+
+$h_ib1=str_replace(" ","",$h_ib1);
+$h_ib1=strtoupper($h_ib1);
+$h_ib2=str_replace(" ","",$h_ib2);
+$h_ib2=strtoupper($h_ib2);
+$h_ib3=str_replace(" ","",$h_ib3);
+$h_ib3=strtoupper($h_ib3);
 
 $h_datm = Date ("Y-m-d H:i:s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 $upravttt = "UPDATE F$kli_vxcf"."_ico SET ico='$h_ico', dic='$h_dic', icd='$h_icd',
