@@ -6,6 +6,7 @@
        {
 $sys = 'ALL';
 $urov = 2000;
+$cslm=101904;
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 

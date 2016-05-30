@@ -12,9 +12,19 @@ echo "    		 	cslm=999998	Ëas keÔ bolo odblokovanÈ cez cslm=999999"."<br />";
 echo " "."<br />";
 
 echo "UCTO ( pr·va pre ALL treba nastaviù na 1000 ak chce len prezeraù aby sa nedostal do ËÌselnÌkov a pr·va pre UCT treba nastaviù na 3000 na prezeranie )"."<br />";
+
+echo "../ucto/vstpok.php 	cslm=101300	Zoznam pokladniËn˝ch, bankov˝ch a vöeobecn˝ch dokladov"."<br />";
 echo "../ucto/meszos.php 	cslm=100020	Vytvorenie mesacnych uctovnych zostav"."<br />";
+echo "../ucto/statzos.php 	cslm=102200	ätatistika a v˝kaznÌctvo"."<br />";
 echo "../ucto/danprij.php 	cslm=100040	Priznanie k dani z prijmov"."<br />";
 echo "../ucto/vspk_u.php 	cslm=100080	Uprava, mazanie POKLADNICA, BANKA, VSEOB"."<br />";
+echo " "."<br />";
+
+echo "../ucto/uctpohyby.php 	cslm=103200	V˝pis ˙Ëtovn˝ch pohybov"."<br />";
+echo "../ucto/hladajdok.php 	cslm=103300	Prehæad·vanie dokladov"."<br />";
+echo "../ucto/cudzie.php 	cslm=103400	Cudzie meny"."<br />";
+echo "../ucto/vstpru.php 	cslm=103500	PrÌkazy na ˙hradu"."<br />";
+echo "../ucto/prhdok.php 	cslm=103600	Zoznamy dokladov"."<br />";
 echo " "."<br />";
 
 echo "../faktury/dodb.php 	cslm=101801	Druhy odberatelskych faktur"."<br />";
@@ -32,6 +42,9 @@ echo "../ucto/uctosnova.php 	cslm=100720	Uctova osnova"."<br />";
 echo " "."<br />";
 
 echo "../cis/ufir.php 		cslm=101901	Udaje o firme a parametre vsetkych programov ucto,mzdy.him,sklad,fakt..."."<br />";
+echo "../cis/cico.php 		cslm=101902	»ÌselnÌk I»O"."<br />";
+echo "../cis/cstr.php 		cslm=101903	»ÌselnÌk stredÌsk"."<br />";
+echo "../cis/czak.php 		cslm=101904	»ÌselnÌk z·kaziek"."<br />";
 echo " "."<br />";
 
 

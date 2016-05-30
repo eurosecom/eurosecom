@@ -3,6 +3,7 @@
 <?php
 $sys = 'UCT';
 $urov = 1000;
+$cslm=102200;
 $uziv = include("../uziv.php");
 if ( !$uziv ) exit;
 if (!isset($kli_vxcf)) $kli_vxcf = 1;

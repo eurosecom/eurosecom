@@ -10,6 +10,7 @@ $sys = 'UCT';
 if( $_SERVER['SERVER_NAME'] == "www.stavoimpexsro.sk" ) { $sys = 'MZD'; }
 $urov = 1100;
 if( $copern == 10 ) $urov = 1000;
+$cslm=103500;
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 

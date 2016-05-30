@@ -8,6 +8,7 @@ $copern = 1*$_REQUEST['copern'];
 $sys = $_REQUEST['sys'];
 if(!isset($sys)) $sys = 'ALL';
 $urov = 2000;
+$cslm=101902;
 if( $sys == 'ALL' )
 {
 $uziv = include("../uziv.php");
