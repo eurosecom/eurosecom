@@ -30,6 +30,41 @@ if( $kli_vduj == 9 ) { $podvojne=0; }
 
 $citfir = include("../cis/citaj_fir.php");
 
+//nacitanie nastavenia z minuleho roka 
+    if ( $copern == 4055 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete naËÌtaù nastavenie z minulÈho roka ?") )
+         { window.close()  }
+else
+         { location.href='vspk_importxml.php?copern=4056&drupoh=<?php echo $drupoh;?>&page=1&cislo_dok=<?php echo $cislo_dok;?>&cislo_uce=<?php echo $cislo_uce;?>'  }
+</script>
+<?php
+    }
+
+    if ( $copern == 4056 )
+    {
+
+$h_ycf=0;
+if( $fir_allx11 > 0 ) $h_ycf=1*$fir_allx11;
+
+$databaza="";
+$dtb2 = include("../cis/oddel_dtbz1.php");
+
+
+$dsqlt = "TRUNCATE F$kli_vxcf"."_uctimportbankyuce ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctimportbankyuce SELECT * FROM ".$databaza."F$h_ycf"."_uctimportbankyuce ";
+$dsql = mysql_query("$dsqlt");
+
+
+$copern=1001;
+//koniec nacitanie nastaveni z minuleho roka
+    }
+
+
 //uloz polozku
 if( $copern == 1003 )
 {
@@ -503,7 +538,13 @@ if ($_REQUEST["odeslano"]!=1)
 <a href="#" onClick="window.open('vspk_u.php?sysx=UCT&hladaj_uce=<?php echo $cislo_uce; ?>&rozuct=ANO&copern=8&drupoh=4&page=1&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $cislo_dok; ?>&h_ico=&h_uce=<?php echo $cislo_uce; ?>&h_unk=', '_self' )">
 <img src='../obr/zoznam.png' width=15 height=15 border=0 title="Sp‰ù do ˙Ëtovania bankovÈho v˝pisu" ></a></td>
 
-        <td  width="20%" align="left" >IBAN</td>
+        <td  width="20%" align="left" >IBAN
+
+<a href="#" onClick="window.open('vspk_importxml.php?copern=4055&drupoh=<?php echo $drupoh;?>&page=1&cislo_dok=<?php echo $cislo_dok;?>
+&cislo_uce=<?php echo $cislo_uce;?>', '_self' )">
+<img src='../obr/import.png' width=15 height=15 border=0 title="NaËÌtaù nastavenie z minulÈho roka" ></a>
+
+</td>
         <td  width="10%" align="left" >VSY</td>
         <td  width="10%" align="left" >˙Ëet Kredit</td>
         <td  width="10%" align="left" >˙Ëet Debet</td>
