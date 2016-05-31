@@ -3,7 +3,8 @@
 $sys = 'ALL';
 $urov = 25000;
 $dopln = 1*$_REQUEST['dopln'];
-if( $dopln == 1 ) { $urov = 3000; }
+if( $dopln == 1  ) { $urov = 2000; $sys = 'UCT'; }
+if( $dopln == 27 ) { $urov = 2000; $sys = 'UCT'; }
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 
