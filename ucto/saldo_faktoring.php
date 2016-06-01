@@ -919,229 +919,30 @@ window.open('../ucto/faktoring.php?copern=10&vseob=<?php echo $vseob; ?>&drupoh=
  '_blank', 'width=800, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes'  );
                 }
 
-function TlacVseo(vseob)
+function TlacVseoOld(vseob)
                 {
 
 window.open('vspk_t.php?sysx=UCT&rozuct=ANO&copern=20&drupoh=5&page=1&cislo_dok=<?php echo $vseob; ?>',
  '_blank', 'width=800, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes'  );
                 }
 
-//vzaj pred
+function TlacVseo(vseob)
+    {
+    var hladaj_dok = 1;
+    var drupohx = 5;
+    var cislo_dok = vseob;
+    window.open('vspk_pdf.php?sysx=UCT&rozuct=ANO&hladaj_dok=' + hladaj_dok + '&copern=20&drupoh=' + drupohx + '&page=&cislo_dok=' + cislo_dok + '&fff=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
 
-function Vzpp()
-                {
-  textvzpz.style.display='none';
-  textpenp.style.display='none'; 
-  textpenz.style.display='none';  
-
-  var h_vzppx = '<?php echo $h_vzpp; ?>';
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-  var h_vzppx = h_vzppx.replace("<br />","\r")
-
-  mytextvzpp = document.getElementById("textvzpp");
-
-    var htmlvzpp = "<table  class='ponuka' width='100%'><tr><td width='90%'>Text Zápoètu - pred položkami "
-
-    htmlvzpp += "<img border=0 src='../obr/ok.png' style='width:12; height:12;'";
-    htmlvzpp += "onClick='UlozVzpp();' title='Ulož zmeny v texte' ></td>";
-
-    htmlvzpp += "<td width='10%' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:12; height:12;'";
-    htmlvzpp += "onClick='ZhasniVzpp();' title='Zhasni okno a neulož zmeny v texte' ></td></tr>";  
-
-    htmlvzpp += "<tr><FORM name='fhoddok' class='obyc' method='post' action='#' >";
-    htmlvzpp += "<td width='100%' class='obyc' align='left'>";
-    htmlvzpp += "<textarea name='h_vzpp' id='h_vzpp' rows='12' cols='118' >" + h_vzppx.replace("<br />","\r") + "</textarea>";
-    htmlvzpp += "</td></FORM></tr>";
-
-    htmlvzpp += "</table>";  
+    }
 
 
-  mytextvzpp.innerHTML = htmlvzpp;
-  textvzpp.style.display='';                
-                }
-
-function ZhasniVzpp()
-                {
-  textvzpp.style.display='none';                
-                }
-
-function UlozVzpp()
-                {
-  textvzpp.style.display='none';                
-
-//var h_vzppe = document.forms.fhoddok.h_vzpp.value;
-//var h_vzppe = escape( h_vzpp );
-  var h_vzppe = document.forms.fhoddok.h_vzpp.value.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-  var h_vzppe = h_vzppe.replace("\r","<br />");
-
-window.open('../ucto/saldo_faktoring.php?h_vzpp=' + h_vzppe + '&h_uce=<?php echo $h_uce; ?>&h_ico=<?php echo $h_ico; ?>&h_obd=<?php echo $h_obd; ?>&copern=1011&drupoh=1&page=1&cinnost=<?php echo $cinnost; ?>',
- '_self' );
-                }
-
-//vzaj za
-
-function Vzpz()
-                {
-  textvzpp.style.display='none';
-  textpenp.style.display='none'; 
-  textpenz.style.display='none'; 
-
-  var h_vzpzx = '<?php echo $h_vzpz; ?>';
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-  var h_vzpzx = h_vzpzx.replace("<br />","\r")
-
-  mytextvzpz = document.getElementById("textvzpz");
-
-    var htmlvzpz = "<table  class='ponuka' width='100%'><tr><td width='90%'>Text zápoètu - za položkami "
-
-    htmlvzpz += "<img border=0 src='../obr/ok.png' style='width:12; height:12;'";
-    htmlvzpz += "onClick='UlozVzpz();' title='Ulož zmeny v texte' ></td>";
-
-    htmlvzpz += "<td width='10%' align='right'><img border=0 src='../obr/zmazuplne.png' style='width:12; height:12;'";
-    htmlvzpz += "onClick='ZhasniVzpz();' title='Zhasni okno a neulož zmeny v texte' ></td></tr>";  
-
-    htmlvzpz += "<tr><FORM name='fhoddok' class='obyc' method='post' action='#' >";
-    htmlvzpz += "<td width='100%' class='obyc' align='left'>";
-    htmlvzpz += "<textarea name='h_vzpz' id='h_vzpz' rows='12' cols='118' >" + h_vzpzx.replace("<br />","\r") + "</textarea>";
-    htmlvzpz += "</td></FORM></tr>";
-
-    htmlvzpz += "</table>";  
-
-
-  mytextvzpz.innerHTML = htmlvzpz;
-  textvzpz.style.display='';                
-                }
-
-function ZhasniVzpz()
-                {
-  textvzpz.style.display='none';                
-                }
-
-function UlozVzpz()
-                {
-  textvzpz.style.display='none';                
-
-  var h_vzpze = document.forms.fhoddok.h_vzpz.value.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-  var h_vzpze = h_vzpze.replace("\r","<br />");
-
-window.open('../ucto/saldo_faktoring.php?h_vzpz=' + h_vzpze + '&h_uce=<?php echo $h_uce; ?>&h_ico=<?php echo $h_ico; ?>&h_obd=<?php echo $h_obd; ?>&copern=2011&drupoh=1&page=1&cinnost=<?php echo $cinnost; ?>',
- '_self' );
-                }
 
 function NastavZaciatok()
                 {
 <?php if( $preuct == 0 AND $h_ico > 0 ) { echo "document.forms.semskoc.sem.focus();"; } ?>
                 }
 
-function UlozHod(cpl,suma)
-                {
-var proti = document.forms.formd2.proti.value;
-var vseob = document.forms.formd2.vseob.value;
-var n_hod = document.forms.fhodnew.n_hod.value;
-var proti2 = document.forms.formd2.proti2.value;
-var ucet2 = document.forms.formd2.ucet2.value;
 
-window.open('../ucto/saldo_faktoring.php?preuct=<?php echo $preuct;?>&copern=618&h_cpl=' + cpl + '&n_hod=' + n_hod + '&drupoh=<?php echo $drupoh; ?>&cinnost=<?php echo $cinnost; ?>&h_vseob=' + vseob + '&h_proti=' + proti + '&ucet2=' + ucet2 + '&proti2=' + proti2 + '&h_uce=<?php echo $h_uce; ?>&h_ico=<?php echo $h_ico; ?>&h_obd=<?php echo $h_obd; ?>', '_self' );
-
-                }
-
-function UpravHod(cpl,suma)
-                {
-
-var uhr_cpl = cpl;
-var uhr_sum = suma;
-
-var dajid = "ZP" + uhr_cpl; 
-
-  myUhrad = document.getElementById( dajid );
-  var htmluhr = " ";
-
-  htmluhr += " <table><tr><FORM name='fhodnew' class='obyc' method='post' action='#' ><td>";
-
-  htmluhr += " <input class='hvstup' type='text' name='n_hod' id='n_hod' size='10' onkeyup='CiarkaNaBodku(this)' value='" + uhr_sum + "' /> ";
-
-  htmluhr += " <img border=0 src='../obr/ok.png' style='width:12; height:15;' ";
-  htmluhr += " title='Uloži upravenú hodnotu' ";
-  htmluhr += " onClick=\"UlozHod(" + uhr_cpl + "," + uhr_sum + ");\"></td></FORM></tr></table>";
-
-  myUhrad.innerHTML = htmluhr;
-  myUhrad.className='kliknute';
-
-  document.forms.fhodnew.n_hod.focus();
-  document.forms.fhodnew.n_hod.select();
-                }
-
-    function CiarkaNaBodku(Vstup)
-    {
-     if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-    }
-
-function upravMENU(cpl,kurz,hodm,mena)
-                {
-
-var uhr_cpl = cpl;
-var uhr_kurz = kurz;
-var uhr_hodm = hodm;
-var uhr_mena = mena;
-
-var dajid = "CM" + uhr_cpl; 
-
-
-  myUhram = document.getElementById( dajid );
-  var htmluhm = " ";
-
-  htmluhm += " <table><tr><FORM name='fhodmnew' class='obyc' method='post' action='#' ><td>";
-
-  htmluhm += " <input class='hvstup' type='text' name='n_mem' id='n_mem' size='3' onkeyup='CiarkaNaBodku(this)' value='" + uhr_mena + "' /> ";
-  htmluhm += " kurz<input class='hvstup' type='text' name='n_kum' id='n_kum' size='8' onkeyup='CiarkaNaBodku(this)' value='" + uhr_kurz + "' /> ";
-  htmluhm += " hodnota<input class='hvstup' type='text' name='n_hom' id='n_hom' size='8' onkeyup='CiarkaNaBodku(this)' value='" + uhr_hodm + "' /> ";
-
-  htmluhm += " <img border=0 src='../obr/ok.png' style='width:12; height:15;' ";
-  htmluhm += " title='Uloži upravené hodnoty' ";
-  htmluhm += " onClick=\"UlozHom(" + uhr_cpl + ");\"></td></FORM></tr></table>";
-
-  myUhram.innerHTML = htmluhm;
-  myUhram.className='kliknute';
-
-  document.forms.fhodmnew.n_hom.focus();
-  document.forms.fhodmnew.n_hom.select();
-                }
-
-function UlozHom(cpl)
-                {
-var proti = document.forms.formd2.proti.value;
-var vseob = document.forms.formd2.vseob.value;
-var n_hodm = document.forms.fhodmnew.n_hom.value;
-var n_kurz = document.forms.fhodmnew.n_kum.value;
-var n_mena = document.forms.fhodmnew.n_mem.value;
-var proti2 = document.forms.formd2.proti2.value;
-var ucet2 = document.forms.formd2.ucet2.value;
-
-window.open('../ucto/saldo_faktoring.php?preuct=<?php echo $preuct;?>&copern=1618&h_cpl=' + cpl + '&n_hodm=' + n_hodm + '&n_kurz=' + n_kurz + '&n_mena=' + n_mena + '&drupoh=<?php echo $drupoh; ?>&cinnost=<?php echo $cinnost; ?>&h_vseob=' + vseob + '&h_proti=' + proti + '&ucet2=' + ucet2 + '&proti2=' + proti2 + '&h_uce=<?php echo $h_uce; ?>&h_ico=<?php echo $h_ico; ?>&h_obd=<?php echo $h_obd; ?>', '_self' );
-
-                }
 
 function NastavPoh()
                 {
@@ -1157,44 +958,13 @@ document.forms.formd2.proti2.value=39500;
 document.forms.formd2.ucet2.value=32500;
                 }
 
-function UlozSpl(cpl,splat)
-                {
-var proti = document.forms.formd2.proti.value;
-var vseob = document.forms.formd2.vseob.value;
-var n_spl = document.forms.fhosnew.n_spl.value;
-var proti2 = document.forms.formd2.proti2.value;
-var ucet2 = document.forms.formd2.ucet2.value;
 
-window.open('../ucto/saldo_faktoring.php?preuct=<?php echo $preuct;?>&copern=3618&h_cpl=' + cpl + '&n_spl=' + n_spl + '&drupoh=<?php echo $drupoh; ?>&cinnost=<?php echo $cinnost; ?>&h_vseob=' + vseob + '&h_proti=' + proti + '&ucet2=' + ucet2 + '&proti2=' + proti2 + '&h_uce=<?php echo $h_uce; ?>&h_ico=<?php echo $h_ico; ?>&h_obd=<?php echo $h_obd; ?>', '_self' );
 
-                }
-
-function UpravSpl(cpl,splat)
-                {
-
-var uhr_cpl = cpl;
-var uhr_spl = splat;
-
-var dajis = "SP" + uhr_cpl; 
-
-  myUhras = document.getElementById( dajis );
-  var htmluhs = " ";
-
-  htmluhs += " <table><tr><FORM name='fhosnew' class='obyc' method='post' action='#' ><td>";
-
-  htmluhs += " <input class='hvstup' type='text' name='n_spl' id='n_spl' size='10' onkeyup='CiarkaNaBodku(this)' value='" + uhr_spl + "' /> ";
-
-  htmluhs += " <img border=0 src='../obr/ok.png' style='width:12; height:15;' ";
-  htmluhs += " title='Uloži upravenú splatnos' ";
-  htmluhs += " onClick=\"UlozSpl(" + uhr_cpl + ",'" + uhr_spl + "');\"></td></FORM></tr></table>";
-
-  myUhras.innerHTML = htmluhs;
-  myUhras.className='kliknute';
-
-  document.forms.fhosnew.n_spl.focus();
-  document.forms.fhosnew.n_spl.select();
-                }
-
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
+  }
     
 </script>
 </HEAD>
@@ -1378,9 +1148,6 @@ $kurzx=$rsluz->kurz;
 $hodmx=$rsluz->hodm;
 $menax=$rsluz->mena;
 ?>
-<a href="#" onClick="upravMENU(<?php echo $rsluz->cpl; ?>,<?php echo $kurzx; ?>,<?php echo $hodmx; ?>,'<?php echo $menax; ?>');">
-<img src='../obr/banky/dollar2.jpg' 
- width=20 height=12 border=0 title='Upravi Hodnotu v cudzej mene <?php echo $rsluz->hodm; ?> <?php echo $rsluz->mena; ?>' ></a>
 </div>
 </td>
 <td width='9%' align='right' class="fmenu" ><?php echo $rsluz->ucm; ?></td>
@@ -1399,7 +1166,7 @@ $menax=$rsluz->mena;
 
 <div id="SPLX<?php echo $xckmpx; ?>" style="display:none; " >
 
- <input class='hvstup' type='text' name='n_mnozsl' id='n_mnozsl' size='8' value="<?php echo $fspl_sk; ?>" />
+ <input class='hvstup' type='text' name='n_mnozsl' id='n_mnozsl' size='8' value="<?php echo $fspl_sk; ?>" onkeyup="CiarkaNaBodku(this);" />
 
  <img src="../obr/ok.png" onClick="UlozSTZLX<?php echo $xckmpx; ?>(<?php echo $rsluz->dok; ?>, <?php echo $rsluz->cpl; ?> );" width=15 height=10 border=1 
 title="Uloži splatnos položky" >
@@ -1410,11 +1177,7 @@ title="Uloži splatnos položky" >
 
 </td>
 
-<td width='10%' align='right' class="fmenu" ><?php echo $rsluz->fak; ?>
- <img src='../obr/ok.png' width=15 height=12 border=1 
- onClick="UpravPol(<?php echo $rsluz->ico; ?>,<?php echo $rsluz->fak; ?>,<?php echo $strana; ?>,<?php echo $rsluz->cpl; ?>);" 
- title='Prispôsobi položku zo všeobecného dokladu na rozdiel=0' >
-</td>
+<td width='10%' align='right' class="fmenu" ><?php echo $rsluz->fak; ?></td>
 <td width='10%' align='right' class="fmenu" ><?php echo $rsluz->ico; ?></td>
 
 <td width='10%' align='right' class="fmenu" >
@@ -1434,7 +1197,7 @@ title="Uloži splatnos položky" >
 
 <div id="SPX<?php echo $xckmpx; ?>" style="display:none; " >
 
- <input class='hvstup' type='text' name='n_mnozs' id='n_mnozs' size='8' value="<?php echo $rsluz->hod;?>" />
+ <input class='hvstup' type='text' name='n_mnozs' id='n_mnozs' size='8' value="<?php echo $rsluz->hod;?>" onkeyup="CiarkaNaBodku(this);" />
 
  <img src="../obr/ok.png" onClick="UlozSTZX<?php echo $xckmpx; ?>(<?php echo $rsluz->dok; ?>, <?php echo $rsluz->cpl; ?> );" width=15 height=10 border=1 title="Uloži položku" >
 
