@@ -35,7 +35,14 @@ if( !$uziv ) exit;
 
 $mysqldbfir=$mysqldb;
 $mysqldbdata=$mysqldb;
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+$dtb2 = include("oddel_dtb1new.php");
+          }
+else
+          {
 $dtb2 = include("oddel_dtb1.php");
+          }
 
   @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
   if (!$spojeni):
@@ -106,7 +113,14 @@ $_SESSION['kli_vume'] = $vyb_ume;
 $_SESSION['kli_vrok'] = $vyb_rok;
 $_SESSION['kli_vduj'] = $vyb_duj;
 
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+$dtb2 = include("oddel_dtb2new.php");
+          }
+else
+          {
 $dtb2 = include("oddel_dtb2.php");
+          }
 
   mysql_select_db($mysqldbdata);
 $vrz = include("verzia.php");

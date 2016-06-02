@@ -14,7 +14,7 @@ $copern = $_REQUEST['copern'];
 $cislo_xcf = $_REQUEST['cislo_xcf'];
 $naz_xcf = $_REQUEST['naz_xcf'];
 $naz_rok = 1*($_REQUEST['naz_rok']);
-if( $naz_rok == 0 ) { $naz_rok=2015;  }
+if( $naz_rok == 0 ) { $naz_rok=2016;  }
 $naz_duj = 1*($_REQUEST['naz_duj']);
 $naz_dtb = $_REQUEST['naz_dtb'];
 $naz_prav = $_REQUEST['naz_prav'];
@@ -27,7 +27,14 @@ if ( $copern == 5 )
   {
 require_once("pswd/password.php");
 
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+$dtb2 = include("oddel_dtb3new.php");
+          }
+else
+          {
 $dtb2 = include("oddel_dtb3.php");
+          }
 
 @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
   if (!$spojeni):
@@ -59,7 +66,7 @@ $copern=8;
 $page=1;
 $cislo_xcf=$cislonew;
 $naz_xcf="";
-$naz_rok="2015";
+$naz_rok="2016";
 $naz_prav="";
 $naz_duj="9";
 $naz_dtb="";
@@ -273,6 +280,9 @@ if ( $copern == 5 || $copern == 8 )
 
 <TD class="fmenu">
          <SELECT name="h_rok" id="h_rok">
+         <OPTION value="2016">
+         2016
+         </OPTION>
          <OPTION value="2015">
          2015
          </OPTION>

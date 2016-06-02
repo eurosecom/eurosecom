@@ -12,7 +12,15 @@ if( !$uziv ) exit;
 
   require_once("pswd/password.php");
 
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+$dtb2 = include("oddel_dtb3new.php");
+          }
+else
+          {
 $dtb2 = include("oddel_dtb3.php");
+          }
+
 
   @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
   if (!$spojeni):
@@ -27,7 +35,7 @@ $copern = 1*$_REQUEST['copern'];
 $sql = "ALTER TABLE klienti MODIFY txt1 VARCHAR(85) ";
 $vysledek = mysql_query("$sql");
 
-if( $oddel2014 == 1 )
+if( $oddel2015 == 1 )
 {
 echo "modify primary, timestamp";
 $sql = "ALTER TABLE dlogin MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
@@ -332,6 +340,15 @@ if(!isset($mysqldb2014)) { $oddel2014=0; }
 if( $oddel2014 == 1 ) {
 $sqlttt=" DROP TABLE `".$mysqldb2014."`.`klienti` "; $sql = mysql_query("$sqlttt");
 $sqlttt=" CREATE TABLE `".$mysqldb2014."`.`klienti` SELECT * FROM `".$mysqldb2015."`.`klienti` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+                      }
+
+$oddel2015=0;
+if (File_Exists ("pswd/oddelena2015db2016.php")) { $oddel2015=1; }
+if(!isset($mysqldb2015)) { $oddel2015=0; }
+if( $oddel2015 == 1 ) {
+$sqlttt=" DROP TABLE `".$mysqldb2015."`.`klienti` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2015."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
 //echo $sqlttt;
                       }
 

@@ -9,7 +9,7 @@ if( $alert == 1 )
  {
 ?>
 <script type="text/javascript">
-alert ("POZOR ! V utorok 15.12.2015 od 00.00 do 12.00 hod. bude na Vašej doméne prebiehať údržba a aplikácia nebude funkčná. \r Ospravedlňujeme sa za krátkodobú prekážku v práci.");
+alert ("POZOR ! Dnes v štvrtok 2.6.2016 od 20.00 hod. do piatka 3.6.2016 20.00 hod. bude na Vašej doméne prebiehať údržba a aplikácia nebude funkčná. \r Ospravedlňujeme sa za krátkodobú prekážku v práci.");
 </script>
 <?php
  }

@@ -12,7 +12,14 @@ if( !$uziv ) exit;
 
 require_once("pswd/password.php");
 
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+$dtb2 = include("oddel_dtb3new.php");
+          }
+else
+          {
 $dtb2 = include("oddel_dtb3.php");
+          }
 
 @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
   if (!$spojeni):
