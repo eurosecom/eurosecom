@@ -97,6 +97,8 @@ uctmzd;
 $sql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprb'.$kli_uzid.$sqlt;
 $ulozene = mysql_query("$sql");
 
+if( $fir_fico == 45741093 ) { $fir_fico=36084514; }
+
 $zdravprac=0;
 if( $fir_fico == 36084514 OR $fir_fico == 37986708 OR $fir_fico == 37986830 OR $kli_nezis == 1 )
 {
@@ -143,8 +145,22 @@ if( $kli_vmesx > 9 ) { $mes1="7.".$kli_vrok; $mes2="8.".$kli_vrok; $mes3="9.".$k
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprb".$kli_uzid." SELECT 0,oc,kc,0,0 FROM F$kli_vxcfxy"."_mzdzalvy WHERE dm = 308 AND ume >= $mes1 AND ume <= $mes3 ";
 $dsql = mysql_query("$dsqlt");
+if( $fir_fico != 36084514 )
+       {
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprb".$kli_uzid." SELECT 0,oc,0,hod,0 FROM F$kli_vxcfxy"."_mzdzalvy WHERE dm >= 101 AND dm <= 104 AND ume >= $mes1 AND ume <= $mes3 ";
 $dsql = mysql_query("$dsqlt");
+       }
+
+//uprava dps gbely
+if( $fir_fico == 36084514 )
+       {
+$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprb".$kli_uzid." SELECT 0,oc,0,1,0 FROM F$kli_vxcfxy"."_mzdzalkun WHERE ume >= $mes1 AND ume <= $mes3 AND pom != 9 ";
+$dsql = mysql_query("$dsqlt");
+
+
+       }
+//koniec uprava dps gbely
+
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprb".$kli_uzid." SELECT 1,oc,SUM(kc),SUM(hh),0 FROM F$kli_vxcf"."_mzdprb".$kli_uzid." WHERE prx = 0 GROUP BY oc";
 $dsql = mysql_query("$dsqlt");
 $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprb".$kli_uzid." WHERE prx = 0";
@@ -191,7 +207,7 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun,F$kli_vxcf"."_mzdprc".$kli_uzid." SET sz3=
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun,F$kli_vxcf"."_mzdprb".$kli_uzid." SET sz3=sz3+kc/3 WHERE F$kli_vxcf"."_mzdkun.oc = F$kli_vxcf"."_mzdprb".$kli_uzid.".oc ";
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun,F$kli_vxcf"."_mzdprb".$kli_uzid." SET sz3=sz3+kc/hh WHERE F$kli_vxcf"."_mzdkun.oc = F$kli_vxcf"."_mzdprb".$kli_uzid.".oc AND hh > 0 ";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
@@ -199,13 +215,12 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz4=sz3 WHERE oc > 0 ";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/163 WHERE oc > 0 AND oc != 41 AND oc != 19 ";
-//echo $dsqlt;
-$dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/174 WHERE oc > 0 AND uva = 8.0  "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/168 WHERE oc > 0 AND uva = 7.75 "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/163 WHERE oc > 0 AND uva = 7.5  "; $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/119.53 WHERE oc = 41 OR oc = 19 ";
-//echo $dsqlt;
-$dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/119.53 WHERE oc > 0 AND uva = 5.5 "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/119.53 WHERE oc > 0 AND uva < 5.5 "; $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz4=sz4/($pracsviat*uva) WHERE oc > 0 AND uva > 0 ";
 //echo $dsqlt;

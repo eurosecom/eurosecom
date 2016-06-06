@@ -109,7 +109,7 @@ $text="V prílohe Vám posielame výplatnú pásku za obdobie $kli_vume do poštovej s
 
 //s kopiou na urcenu adresu
 if( $_SERVER['SERVER_NAME'] == "www.edcom.sk" ) { $emailkomu = array($riaddok->zema, "andrejd@edcom.sk"); }
-
+if( $_SERVER['SERVER_NAME'] == "www.euroalchem.sk" ) { $emailkomu = array($riaddok->zema, "pasky@euroalchem.sk"); }
 
 
 if( $emailodkoho == '' )
