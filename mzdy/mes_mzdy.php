@@ -1078,14 +1078,63 @@ window.open('mesacnadavka_tlac.php?&copern=11&cislo_oc=' + cislo_oc + '&page=1',
 
 function vlozDMN()
                     {
-window.open('vloz_dmn.php?copern=1', '_self' )
+
+var cislo_ocx=1*document.forms1.h_ico.value;
+
+window.open('vloz_dmn.php?copern=1&cislo_oc=' + cislo_ocx + '&xx=1', '_self' )
                     }
 
   </script>
+<script type="text/javascript" src="vlozdmn_citaj.js"></script>
 </HEAD>
 <BODY class="white" id="white" onload="VyberVstup();
 <?php if( $tlacitkoenter == 1 ) { echo " ukaztlacitkoEnter(); "; } ?>
 " >
+
+
+<?php
+if (  $copern == 1 )
+     {
+//nastavenie parametrov 
+?>
+<div id="nastavfakx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 300px; left: 10px; width:600px; height:100px;">
+<table  class='ponuka' width='100%'>
+<tr><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td></tr>
+
+<tr><td colspan='3'>Nastavenie proramovanıch poloiek do mesaènej dávky</td>
+<td colspan='2' align='right'><img border=0 src='../obr/zmazuplne.png' style="width:10; height:10;" onClick="nastavfakx.style.display='none';" title='Zhasni menu' ></td></tr>  
+                    
+<tr><FORM name='enast' method='post' action='#' ><td class='ponuka' colspan='5'>
+<a href="#" onClick="ulozPol();"> Chcete uloi nastavenie programovanıch poloiek ?</a></td></tr>
+
+<tr><td class='ponuka' colspan='1'><input type='checkbox' name='ajstravne' value='1' > Stravné lístky </td></tr>
+
+<tr><td class='ponuka' colspan='5'><input type='checkbox' name='premie' value='1' > Prémie z dm 101 a 107 v mesaènej dávke, ak v údajoch o zamestnancovi sz1 > 0, percento prémií = sz3</tr>
+
+
+</FORM></table>
+</div>
+
+<script type="text/javascript">
+
+//zapis nastavenie
+function ulozPol()
+                {
+
+var ucm1 = 0;
+var ajstravne = 0;
+if( document.enast.ajstravne.checked ) ajstravne=1;
+var premie = 0;
+if( document.enast.premie.checked ) premie=1;
+
+window.open('vlozdmn_setuloz.php?cislo_oc=<?php echo $cislo_oc; ?>&h_ucm1=' + ucm1 + '&ajstravne=' + ajstravne + '&premie=' + premie + '&copern=900', '_self' );
+                }
+
+</script>
+<?php
+     }
+?>
+
 
 <table class="h2" width="100%" >
 <tr>
@@ -1361,6 +1410,10 @@ $hvstup="hvstuz";
 
 <td  width="10%" align="right" >
 <img border=0 src='../obr/vlozit.png' onclick='vlozDMN();' style='width:12; height:12;' title='Vloi do mesaènej dávky naprogramované zloky mzdy' >
+</td>
+
+<td  width="10%" align="right" >
+<img border=0 src='../obr/naradie.png' onclick="nastavfakx.style.display=''; nacitajSet(<?php echo $cislo_oc;?>);" style='width:12; height:12;' title='Nastavi programované zloky mzdy do mesaènej dávky' >
 </td>
 
 </tr>
