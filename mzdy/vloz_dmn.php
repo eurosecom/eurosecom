@@ -251,6 +251,28 @@ $neplat=$neplat+$neplx;
 $in2 = $in2 + 1;
   }
 
+//nepritomna neplatene a absencia 502, 503
+$in2=0;
+$sqln2 = "SELECT * FROM F$kli_vxcf"."_$tabldavka WHERE oc = $cislo_oc AND dm >= 502 AND dm <= 503  ";
+$tovn2 = mysql_query("$sqln2");
+$tvpn2 = mysql_num_rows($tovn2);
+          
+  while ($in2 < $tvpn2 )
+  {
+
+  if (@$zaznam=mysql_data_seek($tovn2,$in))
+{
+$riadokn2=mysql_fetch_object($tovn2);
+
+$neplx=$riadokn2->dni-0.0049;
+$neplx=round($neplx, 0);
+$neplat=$neplat+$neplx;
+
+}
+$in2 = $in2 + 1;
+  }
+
+
 //nepritomna dovolenka 506,507
 if( $ajdv == 0 )
           {
@@ -266,7 +288,7 @@ $tvpn2 = mysql_num_rows($tovn2);
 {
 $riadokn2=mysql_fetch_object($tovn2);
 
-$neplx=$riadokn2->dni-0.049;
+$neplx=$riadokn2->dni-0.0049;
 $neplx=round($neplx, 0);
 $neplat=$neplat+$neplx;
 
@@ -292,7 +314,7 @@ $tvpn2 = mysql_num_rows($tovn2);
 {
 $riadokn2=mysql_fetch_object($tovn2);
 
-$neplx=$riadokn2->dni-0.049;
+$neplx=$riadokn2->dni-0.0049;
 $neplx=round($neplx, 0);
 $neplat=$neplat+$neplx;
 
