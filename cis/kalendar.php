@@ -3071,7 +3071,7 @@ $i = $i + 1;
 
 //sviatky 2016
 $uprt = "UPDATE kalendar SET svt=1".
-" WHERE dat = '2016-01-01' OR dat = '2016-01-06' OR dat = '2016-05-25' OR dat = '2016-03-28' ".
+" WHERE dat = '2016-01-01' OR dat = '2016-01-06' OR dat = '2016-03-25' OR dat = '2016-03-28' ".
 " OR dat = '2016-05-01' OR dat = '2016-05-08' OR dat = '2016-07-05' ".
 " OR dat = '2016-08-29' OR dat = '2016-09-01' OR dat = '2016-09-15' ".
 " OR dat = '2016-11-01' OR dat = '2016-11-17' ".

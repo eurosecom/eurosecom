@@ -507,6 +507,10 @@ $vytvor = mysql_query("$vsql");
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcneody'.$kli_uzid.$sqlt;
 $vytvor = mysql_query("$vsql");
 
+//oprava kalendar
+$uprt = "UPDATE kalendar SET svt=0 WHERE dat = '2016-05-25' ";
+$upravene = mysql_query("$uprt");
+
 
 //VYPOCET LEN KED NEOSTRE ALEBO OSTRE
 if( $copern != 11 )
