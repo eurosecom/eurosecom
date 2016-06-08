@@ -32,12 +32,17 @@ if( $copern == 900 )
 $ucm1 = $_REQUEST['h_ucm1'];
 $ajstravne = 1*$_REQUEST['ajstravne'];
 $premie = 1*$_REQUEST['premie'];
+$ajsv = 1*$_REQUEST['ajsv'];
+$ajdv = 1*$_REQUEST['ajdv'];
+$ajnh = 1*$_REQUEST['ajnh'];
+$eurl = 1*$_REQUEST['eurl'];
+$minm = 1*$_REQUEST['minm'];
 
 $ttvv = "DELETE FROM F$kli_vxcf"."_vlozdmnset ";
 $ttqq = mysql_query("$ttvv");
 
-$ttvv = "INSERT INTO F$kli_vxcf"."_vlozdmnset ( polozka,ucm1,ajstravne,premie ) ".
-" VALUES ( '1', '$ucm1', '$ajstravne', '$premie' )";
+$ttvv = "INSERT INTO F$kli_vxcf"."_vlozdmnset ( polozka,ucm1,ajstravne,premie, ajsv, ajdv, ajnh, eurl, minm ) ".
+" VALUES ( '1', '$ucm1', '$ajstravne', '$premie', '$ajsv', '$ajdv', '$ajnh', '$eurl', '$minm' )";
 $ttqq = mysql_query("$ttvv");
 //echo $ttvv;
 //exit;

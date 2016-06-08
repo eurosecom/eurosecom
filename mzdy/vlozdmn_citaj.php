@@ -28,7 +28,7 @@ require_once("../pswd/password.php");
   endif;
   mysql_select_db($mysqldb);
 
-$sql = "SELECT premie FROM F$kli_vxcf"."_vlozdmnset ";
+$sql = "SELECT minm FROM F$kli_vxcf"."_vlozdmnset ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -41,6 +41,11 @@ $sqlt = <<<statistika_p1304
    polozka      VARCHAR(10) not null,
    ucm1         VARCHAR(10) not null,
    ajstravne    DECIMAL(1,0) DEFAULT 0,
+   eurl         DECIMAL(10,2) DEFAULT 0,
+   ajsv         DECIMAL(1,0) DEFAULT 0,
+   ajdv         DECIMAL(1,0) DEFAULT 0,
+   ajnh         DECIMAL(1,0) DEFAULT 0,
+   minm         DECIMAL(1,0) DEFAULT 0,
    premie       DECIMAL(1,0) DEFAULT 0
 );
 statistika_p1304;
@@ -63,7 +68,7 @@ $prm4 = $_GET['prm4'];
 $sqltt = "SELECT * FROM F$kli_vxcf"."_vlozdmnset ";
 $sql = mysql_query("$sqltt");
 
-$ucm1=0; $ajstravne=0; $premie=0;
+$ucm1=0; $ajstravne=0; $premie=0; $ajsv=0; $ajdv=0; $ajnh=0; $eurl=0; $minm=0;
 
 $cpol = 1;
 $i=0;
@@ -77,7 +82,12 @@ $riadok=mysql_fetch_object($sql);
 
 $ucm1=1*$riadok->ucm1;
 $ajstravne=1*$riadok->ajstravne;
+$eurl=1*$riadok->eurl;
+$ajsv=1*$riadok->ajsv;
+$ajdv=1*$riadok->ajdv;
+$ajnh=1*$riadok->ajnh;
 $premie=1*$riadok->premie;
+$minm=1*$riadok->minm;
 
 
   }
@@ -89,10 +99,11 @@ $i = $i + 1;
 $txp01 = $retezec = iconv("CP1250", "UTF-8", $ucm1); 
 $txp02 = $retezec = iconv("CP1250", "UTF-8", $ajstravne); 
 $txp03 = $retezec = iconv("CP1250", "UTF-8", $premie); 
-$txp04 = $retezec = iconv("CP1250", "UTF-8", 0); 
-$txp05 = $retezec = iconv("CP1250", "UTF-8", 0); 
-$txp06 = $retezec = iconv("CP1250", "UTF-8", 0); 
-$txp08 = $retezec = iconv("CP1250", "UTF-8", 0); 
+$txp04 = $retezec = iconv("CP1250", "UTF-8", $eurl); 
+$txp05 = $retezec = iconv("CP1250", "UTF-8", $ajsv); 
+$txp06 = $retezec = iconv("CP1250", "UTF-8", $ajdv); 
+$txp07 = $retezec = iconv("CP1250", "UTF-8", $ajnh); 
+$txp08 = $retezec = iconv("CP1250", "UTF-8", $minm); 
 $txp09 = $retezec = iconv("CP1250", "UTF-8", 0); 
 $txp10 = $retezec = iconv("CP1250", "UTF-8", 0); 
 $txp11 = $retezec = iconv("CP1250", "UTF-8", 0); 
@@ -137,7 +148,7 @@ $pol06->appendChild($pol06Text);
 
 // create the pol07 element for the veta
 $pol07 = $dom->createElement('pol07');
-$pol07Text = $dom->createTextNode($cpol);
+$pol07Text = $dom->createTextNode($txp07);
 $pol07->appendChild($pol07Text);
 
 // create the pol08 element for the veta

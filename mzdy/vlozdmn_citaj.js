@@ -142,15 +142,14 @@ function tabulka_FaksetXML()
   pol17Array = xmlRoot.getElementsByTagName("pol17");
   pol18Array = xmlRoot.getElementsByTagName("pol18");
   // generate HTML output
-  var ggg = 0;
   var ucm1 = 0;
   var ajstravne = 0;
   var premie = 0;
-  var ucm4 = 0;
-  var ucm5 = 0;
-  var ico1 = 0;
-  var ico2 = 0;
-  var ico3 = 0;
+  var eurl = 0;
+  var ajsv = 0;
+  var ajdv = 0;
+  var ajnh = 0;
+  var minm = 0;
   var ico4 = 0;
   var ico5 = 0;
   var zmd = 1;
@@ -161,14 +160,15 @@ function tabulka_FaksetXML()
   var pdl = 0;
   for (var i=0; i<pol01Array.length; i++)
     {
-    ggg = pol07Array.item(i).firstChild.data;
     var ucm1 = pol01Array.item(i).firstChild.data;
     var ajstravne = pol02Array.item(i).firstChild.data;
     var premie = pol03Array.item(i).firstChild.data;
-    var ucm4 = pol04Array.item(i).firstChild.data;
-    var ucm5 = pol06Array.item(i).firstChild.data;
+    var eurl = pol04Array.item(i).firstChild.data;
+    var ajsv = pol05Array.item(i).firstChild.data;
+    var ajdv = pol06Array.item(i).firstChild.data;
+    var ajnh = pol07Array.item(i).firstChild.data;
+    var minm = pol08Array.item(i).firstChild.data;
 
-    var ico1 = pol08Array.item(i).firstChild.data;
     var ico2 = pol09Array.item(i).firstChild.data;
     var ico3 = pol10Array.item(i).firstChild.data;
     var ico4 = pol11Array.item(i).firstChild.data;
@@ -182,9 +182,13 @@ function tabulka_FaksetXML()
     var pdl = pol18Array.item(i).firstChild.data;
     }
     
-
+document.enast.eurl.value = eurl;
 if( ajstravne == 1 ) { document.enast.ajstravne.checked = 'checked'; }
 if( premie == 1 ) { document.enast.premie.checked = 'checked'; }
 
+if( ajsv == 1 ) { document.enast.ajsv.checked = 'checked'; }
+if( ajdv == 1 ) { document.enast.ajdv.checked = 'checked'; }
+if( ajnh == 1 ) { document.enast.ajnh.checked = 'checked'; }
+if( minm == 1 ) { document.enast.minm.checked = 'checked'; }
 
 }

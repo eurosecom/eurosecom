@@ -1102,14 +1102,42 @@ if (  $copern == 1 )
 <tr><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td></tr>
 
 <tr><td colspan='3'>Nastavenie proramovanıch poloiek do mesaènej dávky</td>
-<td colspan='2' align='right'><img border=0 src='../obr/zmazuplne.png' style="width:10; height:10;" onClick="nastavfakx.style.display='none';" title='Zhasni menu' ></td></tr>  
+<td colspan='2' align='right'><img border=0 src='../obr/zmazuplne.png' style="width:12; height:12;" onClick="nastavfakx.style.display='none';" title='Zhasni menu' ></td></tr>  
                     
 <tr><FORM name='enast' method='post' action='#' ><td class='ponuka' colspan='5'>
-<a href="#" onClick="ulozPol();"> Chcete uloi nastavenie programovanıch poloiek ?</a></td></tr>
+<a href="#" onClick="ulozPol();"> Chcete uloi nastavenie programovanıch poloiek ?</a>
+<img border=0 src='../obr/ok.png' style="width:12; height:12;" onClick="ulozPol();" title="Uloi nastavenie programovanıch poloiek." >
 
-<tr><td class='ponuka' colspan='1'><input type='checkbox' name='ajstravne' value='1' > Stravné lístky </td></tr>
+</td></tr>
 
-<tr><td class='ponuka' colspan='5'><input type='checkbox' name='premie' value='1' > Prémie z dm 101 a 107 v mesaènej dávke, ak v údajoch o zamestnancovi sz1 > 0, percento prémií = sz3</tr>
+<tr>
+<td class='ponuka' colspan='1'><input type='checkbox' name='ajstravne' value='1' > Stravné lístky </td>
+</tr>
+
+<tr>
+<td class='ponuka' colspan='1'> minM<input type='checkbox' name='minm' value='1' >
+<img border=0 src='../obr/info.png' style="width:10; height:10;" title="Zráa stravné lístky za minulı mesiac, inak za mesiac, za ktorı nahrávate vıplatu" >
+</td>
+<td class='ponuka' colspan='1'>Eur/ks<input type='text' name='eurl' id='eurl' size='5' maxlenght='5' value='' >
+<img border=0 src='../obr/info.png' style="width:10; height:10;" title="Ko¾ko zrazi Eur na jeden stravnı lístok = 45% z hodnoty lístka" >
+</td>
+<td class='ponuka' colspan='1'>ajSV<input type='checkbox' name='ajsv' value='1' >
+<img border=0 src='../obr/info.png' style="width:10; height:10;" title="Zamestnávate¾ platí stravnı lístok aj sviatky dm 510" >
+</td>
+<td class='ponuka' colspan='1'>ajDV<input type='checkbox' name='ajdv' value='1' >
+<img border=0 src='../obr/info.png' style="width:10; height:10;" title="Zamestnávate¾ platí stravnı lístok aj na dovolenku dm 506, 507" >
+</td>
+<td class='ponuka' colspan='1'>ajNH<input type='checkbox' name='ajnh' value='1' >
+<img border=0 src='../obr/info.png' style="width:10; height:10;" title="Zamestnávate¾ platí stravnı lístok aj na náhrady 518, 519 a 520" >
+</td>
+</tr>
+
+<tr>
+<td class='ponuka' colspan='5'><input type='checkbox' name='premie' value='1' > Prémie  
+<img border=0 src='../obr/info.png' style="width:10; height:10;" title="Vypoèíta prémie na dm 304 z dm 101 a 107 v mesaènej dávke, 
+ak má zamestnanec v údajoch o zamestnancovi sz1 > 0, percento prémií = sz3" >
+</td>
+</tr>
 
 
 </FORM></table>
@@ -1123,11 +1151,20 @@ function ulozPol()
 
 var ucm1 = 0;
 var ajstravne = 0;
-if( document.enast.ajstravne.checked ) ajstravne=1;
+if( document.enast.ajstravne.checked ) { ajstravne=1; }
 var premie = 0;
-if( document.enast.premie.checked ) premie=1;
+if( document.enast.premie.checked ) { premie=1; }
+var eurl = document.enast.eurl.value;
+var ajsv = 0;
+if( document.enast.ajsv.checked ) { ajsv=1; }
+var ajdv = 0;
+if( document.enast.ajdv.checked ) { ajdv=1; }
+var ajnh = 0;
+if( document.enast.ajnh.checked ) { ajnh=1; }
+var minm = 0;
+if( document.enast.minm.checked ) { minm=1; }
 
-window.open('vlozdmn_setuloz.php?cislo_oc=<?php echo $cislo_oc; ?>&h_ucm1=' + ucm1 + '&ajstravne=' + ajstravne + '&premie=' + premie + '&copern=900', '_self' );
+window.open('vlozdmn_setuloz.php?cislo_oc=<?php echo $cislo_oc; ?>&minm=' + minm + '&ajstravne=' + ajstravne + '&premie=' + premie + '&eurl=' + eurl +  '&ajsv=' + ajsv +  '&ajdv=' + ajdv +  '&ajnh=' + ajnh + '&copern=900', '_self' );
                 }
 
 </script>
