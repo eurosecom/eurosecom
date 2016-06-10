@@ -37,12 +37,13 @@ $ajdv = 1*$_REQUEST['ajdv'];
 $ajnh = 1*$_REQUEST['ajnh'];
 $eurl = 1*$_REQUEST['eurl'];
 $minm = 1*$_REQUEST['minm'];
+$vsdn = 1*$_REQUEST['vsdn'];
 
 $ttvv = "DELETE FROM F$kli_vxcf"."_vlozdmnset ";
 $ttqq = mysql_query("$ttvv");
 
-$ttvv = "INSERT INTO F$kli_vxcf"."_vlozdmnset ( polozka,ucm1,ajstravne,premie, ajsv, ajdv, ajnh, eurl, minm ) ".
-" VALUES ( '1', '$ucm1', '$ajstravne', '$premie', '$ajsv', '$ajdv', '$ajnh', '$eurl', '$minm' )";
+$ttvv = "INSERT INTO F$kli_vxcf"."_vlozdmnset ( polozka,ucm1,ajstravne,premie, ajsv, ajdv, ajnh, eurl, minm, vsdn ) ".
+" VALUES ( '1', '$ucm1', '$ajstravne', '$premie', '$ajsv', '$ajdv', '$ajnh', '$eurl', '$minm', '$vsdn' )";
 $ttqq = mysql_query("$ttvv");
 //echo $ttvv;
 //exit;

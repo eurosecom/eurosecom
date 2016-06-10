@@ -152,6 +152,7 @@ $sqldok = mysql_query("$sqlttt");
   $ajnh=1*$riaddok->ajnh;
   $minm=1*$riaddok->minm;
   $eurl=1*$riaddok->eurl;
+  $vsdn=1*$riaddok->vsdn;
   }
 
 
@@ -200,18 +201,47 @@ $kli_mrokx=$kli_vrokx;
 if( $kli_mmesx == 0 ) { $kli_mmesx=12; $kli_mrokx=$kli_vrokx-1; }
 
 $kli_akyume=$kli_mmesx.".".$kli_mrokx;
-
+$kli_vmesx=$kli_mmesx;
+$kli_vrokx=$kli_mrokx;
   }
+
+if( $vsdn == 1 ) { $ajdv=1; $ajnh=1; }
 
 
 //pocet dni v mesiaci
+
+$poslden=31;
+$sql22t = "SELECT * FROM kalendar WHERE ume = $kli_akyume ";
+$sql22 = mysql_query("$sql22t");
+$poslden = 1*mysql_num_rows($sql22);
+
+$datum01=$kli_vrokx."-".$kli_vmesx."-01";
+$datum31=$kli_vrokx."-".$kli_vmesx."-".$poslden;
+
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE dan > '$datum01' AND dan <= '$datum31' ";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $datum01=$riaddok->dan;
+  }
+
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE dav < '$datum31' AND dav != '0000-00-00' AND dav >= '$datum01' ";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $datum31=$riaddok->dav;
+  }
+
 $mnoz=0;
-$sql22t = "SELECT * FROM kalendar WHERE ume = $kli_akyume AND akyden >= 1 AND akyden <= 5 ";
+$sql22t = "SELECT * FROM kalendar WHERE ume = $kli_akyume AND akyden >= 1 AND akyden <= 5 AND dat >= '$datum01' AND dat <= '$datum31' ";
 
 if( $ajsv == 0 )
   {
-$sql22t = "SELECT * FROM kalendar WHERE ume = $kli_akyume AND akyden >= 1 AND akyden <= 5 AND svt = 0 ";
-
+$sql22t = "SELECT * FROM kalendar WHERE ume = $kli_akyume AND akyden >= 1 AND akyden <= 5 AND svt = 0 AND dat >= '$datum01' AND dat <= '$datum31' ";
+//echo $sql22t;
+//exit;
   }
 
 $sql22 = mysql_query("$sql22t");
@@ -223,6 +253,8 @@ if( $minm == 1 ) { $tabldavka="mzdzalmes"; }
 
 $neplat=0;
 //nepritomna nemoc 801,802,803,804
+if( $vsdn == 0 ) 
+    {
 $in2=0;
 $sqln2 = "SELECT * FROM F$kli_vxcf"."_$tabldavka WHERE oc = $cislo_oc AND dm >= 801 AND dm <= 804 AND dp != '0000-00-00' AND dk != '0000-00-00' ";
 $tovn2 = mysql_query("$sqln2");
@@ -250,8 +282,11 @@ $neplat=$neplat+$neplx;
 }
 $in2 = $in2 + 1;
   }
+    }
 
 //nepritomna neplatene a absencia 502, 503
+if( $vsdn == 0 ) 
+    {
 $in2=0;
 $sqln2 = "SELECT * FROM F$kli_vxcf"."_$tabldavka WHERE oc = $cislo_oc AND dm >= 502 AND dm <= 503  ";
 $tovn2 = mysql_query("$sqln2");
@@ -271,7 +306,7 @@ $neplat=$neplat+$neplx;
 }
 $in2 = $in2 + 1;
   }
-
+    }
 
 //nepritomna dovolenka 506,507
 if( $ajdv == 0 )

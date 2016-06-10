@@ -28,7 +28,7 @@ require_once("../pswd/password.php");
   endif;
   mysql_select_db($mysqldb);
 
-$sql = "SELECT minm FROM F$kli_vxcf"."_vlozdmnset ";
+$sql = "SELECT vsdn FROM F$kli_vxcf"."_vlozdmnset ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -41,11 +41,12 @@ $sqlt = <<<statistika_p1304
    polozka      VARCHAR(10) not null,
    ucm1         VARCHAR(10) not null,
    ajstravne    DECIMAL(1,0) DEFAULT 0,
-   eurl         DECIMAL(10,2) DEFAULT 0,
+   eurl         DECIMAL(10,4) DEFAULT 0,
    ajsv         DECIMAL(1,0) DEFAULT 0,
    ajdv         DECIMAL(1,0) DEFAULT 0,
    ajnh         DECIMAL(1,0) DEFAULT 0,
    minm         DECIMAL(1,0) DEFAULT 0,
+   vsdn         DECIMAL(1,0) DEFAULT 0,
    premie       DECIMAL(1,0) DEFAULT 0
 );
 statistika_p1304;
@@ -68,7 +69,7 @@ $prm4 = $_GET['prm4'];
 $sqltt = "SELECT * FROM F$kli_vxcf"."_vlozdmnset ";
 $sql = mysql_query("$sqltt");
 
-$ucm1=0; $ajstravne=0; $premie=0; $ajsv=0; $ajdv=0; $ajnh=0; $eurl=0; $minm=0;
+$ucm1=0; $ajstravne=0; $premie=0; $ajsv=0; $ajdv=0; $ajnh=0; $eurl=0; $minm=0; $vsdn=0;
 
 $cpol = 1;
 $i=0;
@@ -88,6 +89,7 @@ $ajdv=1*$riadok->ajdv;
 $ajnh=1*$riadok->ajnh;
 $premie=1*$riadok->premie;
 $minm=1*$riadok->minm;
+$vsdn=1*$riadok->vsdn;
 
 
   }
@@ -104,7 +106,7 @@ $txp05 = $retezec = iconv("CP1250", "UTF-8", $ajsv);
 $txp06 = $retezec = iconv("CP1250", "UTF-8", $ajdv); 
 $txp07 = $retezec = iconv("CP1250", "UTF-8", $ajnh); 
 $txp08 = $retezec = iconv("CP1250", "UTF-8", $minm); 
-$txp09 = $retezec = iconv("CP1250", "UTF-8", 0); 
+$txp09 = $retezec = iconv("CP1250", "UTF-8", $vsdn); 
 $txp10 = $retezec = iconv("CP1250", "UTF-8", 0); 
 $txp11 = $retezec = iconv("CP1250", "UTF-8", 0); 
 $txp12 = $retezec = iconv("CP1250", "UTF-8", 0); 

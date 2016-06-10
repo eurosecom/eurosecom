@@ -150,7 +150,7 @@ function tabulka_FaksetXML()
   var ajdv = 0;
   var ajnh = 0;
   var minm = 0;
-  var ico4 = 0;
+  var vsdn = 0;
   var ico5 = 0;
   var zmd = 1;
   var zdl = 0;
@@ -169,7 +169,7 @@ function tabulka_FaksetXML()
     var ajnh = pol07Array.item(i).firstChild.data;
     var minm = pol08Array.item(i).firstChild.data;
 
-    var ico2 = pol09Array.item(i).firstChild.data;
+    var vsdn = pol09Array.item(i).firstChild.data;
     var ico3 = pol10Array.item(i).firstChild.data;
     var ico4 = pol11Array.item(i).firstChild.data;
     var ico5 = pol12Array.item(i).firstChild.data;
@@ -190,5 +190,6 @@ if( ajsv == 1 ) { document.enast.ajsv.checked = 'checked'; }
 if( ajdv == 1 ) { document.enast.ajdv.checked = 'checked'; }
 if( ajnh == 1 ) { document.enast.ajnh.checked = 'checked'; }
 if( minm == 1 ) { document.enast.minm.checked = 'checked'; }
+if( vsdn == 1 ) { document.enast.vsdn.checked = 'checked'; }
 
 }
