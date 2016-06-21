@@ -1365,7 +1365,7 @@ $pdf->Cell(190,4," ","$rmc1",1,"L");
 $pdf->Cell(27,5," ","$rmc1",0,"L");$pdf->Cell(54,4,"$hlavicka->zuli","$rmc",0,"L");
 $pdf->Cell(37,5," ","$rmc1",0,"L");$pdf->Cell(24,4,"$hlavicka->zcdm","$rmc",0,"L");
 $pdf->Cell(11,5," ","$rmc1",0,"L");$pdf->Cell(32,4,"$hlavicka->zpsc","$rmc",1,"L");
-$pdf->Cell(27,5," ","$rmc1",0,"L");$pdf->Cell(75,4,"Èý$hlavicka->zmes","$rmc",0,"L");
+$pdf->Cell(27,5," ","$rmc1",0,"L");$pdf->Cell(75,4,"$hlavicka->zmes","$rmc",0,"L");
 $pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(75,4,"$zstat","$rmc",1,"L");
 $pdf->Cell(190,2.5," ","$rmc1",1,"L");
 $text="x";
