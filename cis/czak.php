@@ -41,7 +41,7 @@ $mena1 = $fir_mena1;
 $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
 
-if( $sekov == 1 AND $copern == 1 AND $kli_vxcf == 520 )
+if( $sekov == 1 AND $copern == 1 AND $kli_vxcf == 521 )
      {
 $databaza="";
 
@@ -57,7 +57,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_zakpovodne ADD plati DECIMAL(3,0) DEFAULT 0 FIRST";
 $vysledek = mysql_query("$sql");
 
-$sql = "CREATE TABLE F".$kli_vxcf."_zakprenos SELECT * FROM ".$databaza."F235_zak WHERE zak >= 0";
+$sql = "CREATE TABLE F".$kli_vxcf."_zakprenos SELECT * FROM ".$databaza."F236_zak WHERE zak >= 0";
 $vysledek = mysql_query("$sql");
 
 $sql = "ALTER TABLE F$kli_vxcf"."_zakprenos ADD plati DECIMAL(3,0) DEFAULT 0 FIRST";
@@ -85,7 +85,7 @@ $vysledok = mysql_query("$sqlt");
 $sqlt = "DROP TABLE F".$kli_vxcf."_zakpovodne";
 $vysledok = mysql_query("$sqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_zak WHERE str = 10 AND zak < 140000";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_zak WHERE str = 10 AND zak < 150000";
 $dsql = mysql_query("$dsqlt");
      }
 
