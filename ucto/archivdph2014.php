@@ -398,6 +398,74 @@ $vysledek = mysql_query("$sql");
 //koniec dopln zozicdph k 150220
 
 
+
+//dopln zozicdph k 160531
+$sql = "SELECT * FROM zozicdph01new160531 ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+
+$sqlt = "ALTER TABLE zozicdph01 DROP xuli ";
+$vysledot = mysql_query("$sqlt");
+$sqlt = "ALTER TABLE zozicdph01 DROP xmes ";
+$vysledot = mysql_query("$sqlt");
+$sqlt = "ALTER TABLE zozicdph01 DROP xnaz ";
+$vysledot = mysql_query("$sqlt");
+
+echo "doplnam icdph 2016.";
+
+if( file_exists("../import/zozicdph_plus160531.csv")) 
+        {
+
+//echo "idem 2016";
+$subor = fopen("../import/zozicdph_plus160531.csv", "r");
+while (! feof($subor))
+     {
+//1011111111
+//1022222222
+
+//echo "idem2";
+  $riadok = fgets($subor, 500);
+  //print "$riadok<br />";
+  $pole = explode(";", $riadok);
+
+  $x_icd =  $pole[0];
+  $x_icd =str_replace("SK","",$x_icd );
+  //echo "x".$x_icd."x<br />";
+
+
+$c_icd=1*$x_icd;
+
+if( $c_icd > 0 )
+{
+$sqult = "INSERT INTO zozicdph01 ( xicd )".
+" VALUES ( '$x_icd' ); "; 
+
+$ulozene = mysql_query("$sqult"); 
+}
+     }
+//koniec while
+
+$sqlt = <<<vtvmzd
+(
+   xcf         INT,
+   id          INT,
+   datm        TIMESTAMP(14)
+);
+vtvmzd;
+
+$sql = "CREATE TABLE zozicdph01new160531 ".$sqlt;
+$vysledek = mysql_query("$sql");
+
+        }
+//koniec ak existuje csv
+
+}
+//koniec dopln zozicdph k 160531
+
+
+
+
 //kontrola DU
 if( $kli_vrok == 2012  )
  {
