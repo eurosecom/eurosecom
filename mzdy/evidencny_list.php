@@ -51,12 +51,14 @@ $rokm3=$kli_vrok-3;
 $rokm4=$kli_vrok-4;
 $rokm5=$kli_vrok-5;
 $rokm6=$kli_vrok-6;
+$rokm7=$kli_vrok-7;
 $xrok=$rokm1;
 if( $rok == 2 ) { $xrok=$rokm2; }
 if( $rok == 3 ) { $xrok=$rokm3; }
 if( $rok == 4 ) { $xrok=$rokm4; }
 if( $rok == 5 ) { $xrok=$rokm5; }
 if( $rok == 6 ) { $xrok=$rokm6; }
+if( $rok == 7 ) { $xrok=$rokm7; }
 ?>
 <script type="text/javascript">
 if( !confirm ("Chcete naËÌtaù hodnoty roku <?php echo $xrok; ?> do evidenËnÈho listu z firmy <?php echo $fir; ?> ? ") )
@@ -176,6 +178,9 @@ $sqldok = mysql_query("$sqlttt");
   $kr08=$riaddok->kr08;
   $kr09=$riaddok->kr09;
   $kr10=$riaddok->kr10;
+  $kr11=$riaddok->kr11;
+  $kr12=$riaddok->kr12;
+  $kr13=$riaddok->kr13;
 $uzjezaznam=1;
   }
 
@@ -364,7 +369,8 @@ if( ( $kr11 == 0 OR $kr11 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt =
 " kr11='$kli_vrokx', vz11='$vymzak', zp11='$znakpoistenia', dp11='$datpoc', dk11='$datkon', kd11='$kaldni', vv11='$vylkc' WHERE oc = $cislo_oc"; }
 if( ( $kr12 == 0 OR $kr12 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
 " kr12='$kli_vrokx', vz12='$vymzak', zp12='$znakpoistenia', dp12='$datpoc', dk12='$datkon', kd12='$kaldni', vv12='$vylkc' WHERE oc = $cislo_oc"; }
-
+if( ( $kr13 == 0 OR $kr13 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+" kr13='$kli_vrokx', vz13='$vymzak', zp13='$znakpoistenia', dp13='$datpoc', dk13='$datkon', kd13='$kaldni', vv13='$vylkc' WHERE oc = $cislo_oc"; }
 
 $upravene = mysql_query("$uprtxt"); 
 
