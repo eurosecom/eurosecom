@@ -1,22 +1,14 @@
 <?php
+//ckli.php, ckli_u.php, cfir.php a cfir_u.php... v roote
+//Nastavenie $mysqldb pre editovanie tabulky fir a klienti
 
-$oddel2010=0;
-if (File_Exists ("pswd/oddelena2010db2011.php")) { $oddel2010=1; }
-if( $oddel2010 == 1 ) { $mysqldb=$mysqldb2011; }
-$oddel2011=0;
-if (File_Exists ("pswd/oddelena2011db2012.php")) { $oddel2011=1; }
-if( $oddel2011 == 1 ) { $mysqldb=$mysqldb2012; }
-$oddel2012=0;
-if (File_Exists ("pswd/oddelena2012db2013.php")) { $oddel2012=1; }
-if( $oddel2012 == 1 ) { $mysqldb=$mysqldb2013; }
-$oddel2013=0;
-if (File_Exists ("pswd/oddelena2013db2014.php")) { $oddel2013=1; }
-if( $oddel2013 == 1 ) { $mysqldb=$mysqldb2014; }
-$oddel2014=0;
-if (File_Exists ("pswd/oddelena2014db2015.php")) { $oddel2014=1; }
-if( $oddel2014 == 1 ) { $mysqldb=$mysqldb2015; }
-$oddel2015=0;
-if (File_Exists ("pswd/oddelena2015db2016.php")) { $oddel2015=1; }
-if( $oddel2015 == 1 ) { $mysqldb=$mysqldb2016; }
+
+$mysqldb=$mysqldb2016; 
+if(  $dbmain == 2017 ) { $mysqldb=$mysqldb2017; }
+if(  $dbmain == 2018 ) { $mysqldb=$mysqldb2018; }
+if(  $dbmain == 2019 ) { $mysqldb=$mysqldb2019; }
+
+//echo " db ".$mysqldb;
+
 
 ?>

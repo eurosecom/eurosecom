@@ -12,6 +12,8 @@ if( !$uziv ) exit;
 
   require_once("pswd/password.php");
 
+$newdelenie=0;
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
 if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
           {
 $dtb2 = include("oddel_dtb3new.php");
@@ -37,6 +39,10 @@ $vysledek = mysql_query("$sql");
 
 if( $oddel2015 == 1 )
 {
+
+if( $newdelenie == 0 )
+          {
+
 echo "modify primary, timestamp";
 $sql = "ALTER TABLE dlogin MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
 $vysledek = mysql_query("$sql");
@@ -86,6 +92,9 @@ $sql = "ALTER TABLE skluzid MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DE
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE uctpohyby MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
 $vysledek = mysql_query("$sql");
+
+          }
+//if( $newdelenie == 0 )
 
 
 }
@@ -316,6 +325,11 @@ if ($upravene):
 echo "POLOŽKA ID:$cislo_id UPRAVENÁ ";
 endif;
 
+
+if( $newdelenie == 0 )
+          {
+echo "ukladam.";
+
 $oddel2012=0;
 if (File_Exists ("pswd/oddelena2012db2013.php")) { $oddel2012=1; }
 if(!isset($mysqldb2012)) { $oddel2012=0; }
@@ -351,6 +365,10 @@ $sqlttt=" DROP TABLE `".$mysqldb2015."`.`klienti` "; $sql = mysql_query("$sqlttt
 $sqlttt=" CREATE TABLE `".$mysqldb2015."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
 //echo $sqlttt;
                       }
+
+          }
+//if( $newdelenie == 0 )
+
 
   }
 
