@@ -2712,10 +2712,10 @@ $hlavicka->f1a115hnyg46nyg46="1234.56";
 $hlavicka->f1a115inyg46nyg46="1234.56";
 
 $pdf->Cell(46,5,"     ","$rmc1",0,"L");
-$pdf->Cell(18,9,"$hlavicka->f1a114b","$rmc",0,"R");$pdf->Cell(16,9,"$hlavicka->f1a114c","$rmc",0,"R");
-$pdf->Cell(15,9,"$hlavicka->f1a114d","$rmc",0,"R");$pdf->Cell(17,9,"$hlavicka->f1a114e","$rmc",0,"R");
-$pdf->Cell(13,9,"$hlavicka->f1a114f","$rmc",0,"R");$pdf->Cell(15,9,"$hlavicka->f1a114g","$rmc",0,"R");
-$pdf->Cell(20,9,"$hlavicka->f1a114h","$rmc",0,"R");$pdf->Cell(15,9,"$hlavicka->f1a114i","$rmc",1,"R");
+$pdf->Cell(18,9,"$hlavicka->f1a115b","$rmc",0,"R");$pdf->Cell(16,9,"$hlavicka->f1a115c","$rmc",0,"R");
+$pdf->Cell(15,9,"$hlavicka->f1a115d","$rmc",0,"R");$pdf->Cell(17,9,"$hlavicka->f1a115e","$rmc",0,"R");
+$pdf->Cell(13,9,"$hlavicka->f1a115f","$rmc",0,"R");$pdf->Cell(15,9,"$hlavicka->f1a115g","$rmc",0,"R");
+$pdf->Cell(20,9,"$hlavicka->f1a115h","$rmc",0,"R");$pdf->Cell(15,9,"$hlavicka->f1a115i","$rmc",1,"R");
 
 
 $pdf->SetFont('arial','',9);
