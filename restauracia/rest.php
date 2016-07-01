@@ -31,7 +31,15 @@ if( !$uziv ) exit;
 
 $mysqldbfir=$mysqldb;
 $mysqldbdata=$mysqldb;
+
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+$dtb2 = include("../cis/oddel_dtbm1new.php");
+          }
+else
+          {
 $dtb2 = include("../cis/oddel_dtbm1.php");
+          }
 
   @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
   if (!$spojeni):
@@ -83,8 +91,14 @@ $_SESSION['kli_nxcf'] = $vyb_naz;
 $_SESSION['kli_vume'] = $vyb_ume;
 $_SESSION['kli_vrok'] = $vyb_rok;
 
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+$dtb2 = include("../cis/oddel_dtbm2new.php");
+          }
+else
+          {
 $dtb2 = include("../cis/oddel_dtbm2.php");
-
+          }
 
 $sqlfir = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_vtvrest ";
 if( $copern == 1 OR $copern == 25 )
@@ -639,6 +653,9 @@ if( $newmenu == 1 )
 
 <tr><td width='100%' colspan='2' onClick="InfoTovar();" onmouseover="MZvyrazni(this);" onmouseout="MNeZvyrazni(this);">
 <a href="#" >Vyhodnotenie a štatistiky predaja tovaru</a></td></tr>
+<tr><td width='100%' colspan='2' onClick="OdpisSklad();" onmouseover="MZvyrazni(this);" onmouseout="MNeZvyrazni(this);">
+<a href="#" >Odpísanie predaného tovaru zo skladu</a></td></tr>
+
 
 </FORM>
 </table>
@@ -817,7 +834,8 @@ $kli_fmin4=$pole4[0];
 $kli_fmax4=$pole4[1];
 $cislo=1*$kli_fmin4;
 if( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin4 AND xcf <= $kli_fmax4 )";
-//echo $akefirmy;
+
+if( $akefirmy == "( xcf >= 0 AND xcf <= 0 )" ) { $setuzfir = include("../cis/vybuzfir.php"); }
 
 $sql = mysql_query("SELECT xcf,naz FROM $mysqldbfir.fir WHERE ( $akefirmy ) AND SUBSTRING(prav,$kli_uzid,1) != 'n' ORDER BY xcf");
 // celkom poloziek
