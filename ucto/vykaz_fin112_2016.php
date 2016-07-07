@@ -354,6 +354,11 @@ if( $zdroj3pol == 1 )
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=41 WHERE poloz > 0 ";
 
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $fir_fico == 37990845 ) 
+{ 
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=46 WHERE poloz > 0 "; 
+}
+
 if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 ) ) 
 { 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=46 WHERE poloz > 0 "; 

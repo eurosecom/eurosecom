@@ -3321,6 +3321,81 @@ $sqlttt = "UPDATE kalendar SET sood=sood+1, sodo=sodo+1 WHERE ume = 5.2016 AND d
 // koniec $sql = "SELECT m092016 FROM kalendar";
      }
 
+$sql = "SELECT m122016 FROM kalendar";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+     {
+echo "So a Ne 10-12.2016"."<br />";
+
+$i=1;
+while ($i <= 3 )
+ {
+
+if( $i == 1 ) { $kli_vumeabc="10.2016"; }
+if( $i == 2 ) { $kli_vumeabc="11.2016"; }
+if( $i == 3 ) { $kli_vumeabc="12.2016"; }
+
+$sqlttt = "UPDATE kalendar SET m092012=WEEK(dat) WHERE ume = $kli_vumeabc ";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE kalendar SET m092012=m092012-1 WHERE ume = $kli_vumeabc AND akyden = 7 ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "SELECT * FROM kalendar WHERE ume = $kli_vumeabc ORDER BY dat";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $akyden=1*$riaddok->akyden;
+  $tyzden=1*$riaddok->m092012;
+  }
+
+$sqlttt = "UPDATE kalendar SET m082012=m092012-$tyzden WHERE ume = $kli_vumeabc ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "SELECT * FROM kalendar WHERE ume = $kli_vumeabc AND akyden = 6 ";
+$sqldok = mysql_query("$sqlttt"); $pocetsobot = 1*mysql_num_rows($sqldok);
+
+$sqlttt = "SELECT * FROM kalendar WHERE ume = $kli_vumeabc AND akyden = 7 ";
+$sqldok = mysql_query("$sqlttt"); $pocetnedel = 1*mysql_num_rows($sqldok);
+
+$sqlttt = "UPDATE kalendar SET sodo=$pocetsobot-m082012 WHERE ume = $kli_vumeabc ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE kalendar SET nedo=$pocetnedel-m082012 WHERE ume = $kli_vumeabc ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE kalendar SET sodo=sodo-1 WHERE ume = $kli_vumeabc AND akyden = 7 ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE kalendar SET neod=nedo, sood=sodo WHERE ume = $kli_vumeabc ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE kalendar SET sood=sood-1 WHERE ume = $kli_vumeabc AND akyden = 6 ";
+$sqldok = mysql_query("$sqlttt");
+$sqlttt = "UPDATE kalendar SET neod=neod-1 WHERE ume = $kli_vumeabc AND akyden = 7 ";
+$sqldok = mysql_query("$sqlttt");
+
+$sqlttt = "UPDATE kalendar SET m082012=0, m092012=0 WHERE ume = $kli_vumeabc ";
+$sqldok = mysql_query("$sqlttt");
+
+$pole = explode(".", $kli_vumeabc);
+$kli_vmes=$pole[0];
+$kli_vrok=$pole[1];
+$pridaj="m".$kli_vmes.$kli_vrok;
+
+$sql = "ALTER TABLE kalendar ADD $pridaj INT(2) DEFAULT 0 AFTER sood";
+$vysledek = mysql_query("$sql");
+
+$i=$i+1;
+ }
+
+//pozor ak je prva nedela v mesiaci zmen datum na posledny den mesiaca 30, 31
+$sqlttt = "UPDATE kalendar SET sood=sood+1, sodo=sodo+1 WHERE ume = 5.2016 AND dat <= '2016-05-31' ";
+//$sqldok = mysql_query("$sqlttt");
+
+// koniec $sql = "SELECT m122016 FROM kalendar";
+     }
+
 $vtvkal = 1;
 return $vtvkal;
 ?>
