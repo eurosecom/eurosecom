@@ -414,7 +414,7 @@ $vysledot = mysql_query("$sqlt");
 
 echo "doplnam icdph 2016.";
 
-if( file_exists("../import/zozicdph_plus160531.csv")) 
+if( file_exists("../import/zozicdph_plus160531.csv") AND $kli_vrok > 2015 ) 
         {
 
 //echo "idem 2016";
@@ -446,6 +446,9 @@ $ulozene = mysql_query("$sqult");
      }
 //koniec while
 
+        }
+//koniec ak existuje csv
+
 $sqlt = <<<vtvmzd
 (
    xcf         INT,
@@ -457,8 +460,6 @@ vtvmzd;
 $sql = "CREATE TABLE zozicdph01new160531 ".$sqlt;
 $vysledek = mysql_query("$sql");
 
-        }
-//koniec ak existuje csv
 
 }
 //koniec dopln zozicdph k 160531
