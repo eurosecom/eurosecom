@@ -30,6 +30,38 @@ if( $kli_vduj == 9 ) { $podvojne=0; }
 
 $citfir = include("../cis/citaj_fir.php");
 
+//nacitanie zrazok z miezd
+    if ( $copern == 5055 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete naèíta IBANy zráok zamestnancov z miezd ? ") )
+         { window.close()  }
+else
+         { location.href='vspk_importxml.php?copern=5056&drupoh=<?php echo $drupoh;?>&page=1&cislo_dok=<?php echo $cislo_dok;?>&cislo_uce=<?php echo $cislo_uce;?>'  }
+</script>
+<?php
+    }
+
+    if ( $copern == 5056 )
+    {
+
+
+
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_uctimportbankyuce WHERE uced = '37900' AND popx = 'zrazky mzdy' ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_uctimportbankyuce SELECT ".
+" '0', trx4, '0', '0', '37900', 'zrazky mzdy' ".
+" FROM F$kli_vxcf"."_mzdtrn WHERE trx4 != '' AND trx4 != '0' ";
+$dsql = mysql_query("$dsqlt");
+
+
+$copern=1001;
+//koniec nacitanie zrazok z miezd
+    }
+
 //nacitanie nastavenia z minuleho roka 
     if ( $copern == 4055 )
     {
@@ -548,7 +580,13 @@ if ($_REQUEST["odeslano"]!=1)
         <td  width="10%" align="left" >VSY</td>
         <td  width="10%" align="left" >úèet Kredit</td>
         <td  width="10%" align="left" >úèet Debet</td>
-        <td  width="20%" align="left" >popis</td>
+        <td  width="20%" align="left" >popis
+
+<a href="#" onClick="window.open('vspk_importxml.php?copern=5055&drupoh=<?php echo $drupoh;?>&page=1&cislo_dok=<?php echo $cislo_dok;?>
+&cislo_uce=<?php echo $cislo_uce;?>', '_self' )">
+<img src='../obr/vlozit.png' width=15 height=15 border=0 title="Naèíta IBANy pre zráky zamestnancov z miezd" ></a>
+
+</td>
         <td  width="5%" align="left" >Zmaza</td>
 
 

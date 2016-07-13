@@ -2105,6 +2105,7 @@ $ukazzmaz=1;
 if( $drupoh == 42 ) { $nezar = 1*$riadok->ruc; }
 if( $drupoh == 42 AND $nezar != 0 ) { $ukazzmaz = 0; }
 if( $drupoh == 42 AND $kli_uzid == 17 ) { $ukazzmaz = 1; }
+if( $drupoh == 42 AND $kli_uzid == 114 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ukazzmaz = 1; }
 
 if( $copern != 10 AND $ukazzmaz == 1  )
 {
