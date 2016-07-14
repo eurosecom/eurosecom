@@ -434,7 +434,7 @@ $nasieluce=1;
 
 if( $nasieluce == 0 AND trim($riadok->iban) == '' ) 
   {
-$sqlfir6 = "SELECT * FROM F$kli_vxcf"."_uctimportbankyuce WHERE ibanx = '' ";
+$sqlfir6 = "SELECT * FROM F$kli_vxcf"."_uctimportbankyuce WHERE ibanx = '' AND popx != 'ksy 0038 mzdy' ";
 $fir_vysledok6 = mysql_query($sqlfir6);
 $polico6 = 1*mysql_num_rows($fir_vysledok6);
 if( $polico6 > 0 ) 
