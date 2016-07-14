@@ -179,7 +179,7 @@ $vytvor = mysql_query("$vsql");
 
 }
 
-$sql = "SELECT pops FROM F$kli_vxcf"."_importbanky".$kli_uzid." ";
+$sql = "SELECT ksy FROM F$kli_vxcf"."_importbanky".$kli_uzid." ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -201,6 +201,7 @@ $sqlt = <<<statistika_p1304
    iban         VARCHAR(50) NOT NULL,
    info         VARCHAR(50) NOT NULL,
    vsy          DECIMAL(12,0) DEFAULT 0,
+   ksy          VARCHAR(10) NOT NULL,
    riadok       VARCHAR(250) NOT NULL,
    PRIMARY KEY(porc)
 );
@@ -266,12 +267,15 @@ $p1vsy = explode("/VS", $info);
 $p2vsy = explode("/SS", $p1vsy[1]);
 $vsy=$p2vsy[0];
 
+$p1ksy = explode("/KS", $info);
+$ksy=trim($p1ksy[1]);
+
 $text=$value."\r\n";
 if( $i > 0 ) 
     {
 
-$vsql = "INSERT INTO F".$kli_vxcf."_importbanky$kli_uzid ( riadok, dat, suma, pohyb, iban, name, pops, info, vsy ) VALUES ".
-" ( '$text', '$dat', '$suma', '$pohyb', '$iban', '$name', '$pops', '$info', '$vsy' ) ";
+$vsql = "INSERT INTO F".$kli_vxcf."_importbanky$kli_uzid ( riadok, dat, suma, pohyb, iban, name, pops, info, vsy, ksy ) VALUES ".
+" ( '$text', '$dat', '$suma', '$pohyb', '$iban', '$name', '$pops', '$info', '$vsy', '$ksy' ) ";
 $vytvor = mysql_query("$vsql");
 
     }
@@ -408,6 +412,24 @@ $ucproti = $fir_riadok5->ucex;
 $ucprotidebet = $fir_riadok5->uced;
 $nasieluce=1;
 }
+  }
+
+if( $nasieluce == 0 AND $riadok->iban != '' AND $riadok->ksy == '0038' ) 
+  {
+
+$sqlfir7 = "SELECT * FROM F$kli_vxcf"."_uctimportbankyuce WHERE ibanx = '' AND popx LIKE 'ksy 0038 mzdy' ";
+//echo $sqlfir7;
+$fir_vysledok7 = mysql_query($sqlfir7);
+$polico7 = 1*mysql_num_rows($fir_vysledok7);
+if( $polico7 > 0 ) 
+{
+$fir_riadok7=mysql_fetch_object($fir_vysledok7);
+
+$ucproti = $fir_riadok7->ucex;
+$ucprotidebet = $fir_riadok7->uced;
+$nasieluce=1;
+}
+
   }
 
 if( $nasieluce == 0 AND trim($riadok->iban) == '' ) 
