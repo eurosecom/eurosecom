@@ -83,6 +83,61 @@ $vysledek = mysql_query("$sql");
 $copern = 1*$_REQUEST['copern'];
 if( $copern == 1 ) { $copern=2; }
 
+
+//zaloz db
+if ( $copern == 99001 )
+    {
+$h_dbmain = strip_tags($_REQUEST['h_dbmain']);
+
+
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete zaloûiù datab·zu pre rok <?php echo $h_dbmain; ?> ? ") )
+         { location.href='delenedtb.php?copern=2'  }
+else
+         { location.href='delenedtb.php?h_dbmain=<?php echo $h_dbmain; ?>&copern=99002'  }
+</script>
+<?php
+    }
+
+    if ( $copern == 99002 )
+    {
+$h_dbmain = strip_tags($_REQUEST['h_dbmain']);
+
+if( $h_dbmain <= 2015 ) 
+ {
+echo "Datab·za pre rok ".$h_dbmain." ???";
+exit;
+ }
+
+if( $h_dbmain >  2019 ) 
+ {
+echo "Datab·za pre rok ".$h_dbmain." ???";
+exit;
+ }
+
+if( $h_dbmain <= 2016 ) { $databazakam=$mysqldb2016; $databazaodkial=$mysqldb2015; }
+if( $h_dbmain == 2017 ) { $databazakam=$mysqldb2017; $databazaodkial=$mysqldb2016; }
+if( $h_dbmain == 2018 ) { $databazakam=$mysqldb2018; $databazaodkial=$mysqldb2017; }
+if( $h_dbmain >= 2019 ) { $databazakam=$mysqldb2019; $databazaodkial=$mysqldb2018; }
+
+$pocp=0;
+$poslhh = "SELECT * FROM ".$databazakam.".klienti ";
+$posl = mysql_query("$poslhh"); 
+if( $posl ) { $pocp = 1*mysql_num_rows($posl); }
+if( $pocp >= 1 ) 
+  {
+echo "Datab·za ".$databazakam." pre rok ".$h_dbmain." uû bola zaloûen·. NemÙûete opakovaù zaloûenie datab·zy.";
+exit;
+  }
+
+
+
+
+$copern=2;
+    }
+//koniec zaloz db
+
 //zapis upravene udaje
 if ( $copern == 3 )
     {
@@ -186,6 +241,13 @@ $dbmain = $riadok->dbmain;
   }
 
 
+  function VytvorMain()
+  { 
+
+  var h_dbmain = document.forms.formv1.dbmain.value;
+
+  window.open('delenedtb.php?h_dbmain=' + h_dbmain + '&copern=99001', '_self'  );
+  }
 
 </script>
 </HEAD>
@@ -243,7 +305,11 @@ if ( $copern == 2 )
 <td class="bmenu" colspan="1">DB 2016</td>
 <td class="fmenu" colspan="2"><input type="text" name="db2016" id="db2016" size="20"/> </td>
 <td class="bmenu" colspan="1">Main DB</td>
-<td class="fmenu" colspan="2"><input type="text" name="dbmain" id="dbmain" size="20"/> </td>
+<td class="fmenu" colspan="2"><input type="text" name="dbmain" id="dbmain" size="20"/> 
+
+<img border=0 src='../obr/vlozit.png' style='width:14px; height:14px;' onClick="VytvorMain();" title='Zaloûiù Main DB datab·zu, musÌ byù vytvoren· v phpMyadmin' ></td></tr>  
+
+</td>
 </tr>
 <tr>
 <td class="bmenu" colspan="1">DB 2017</td>
