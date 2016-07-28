@@ -58,7 +58,6 @@ $mena1 = $fir_mena1;
 $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
 
-
 $tlaclenpdf=1;
 if( $kli_vrok < 2014 ) { $tlaclenpdf=0; }
 if( $_SESSION['nieie'] == 1 ) { $tlaclenpdf=1; }
@@ -4145,9 +4144,11 @@ window.open('../cis/cico.php?sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct
     <?php                    }  ?>
 </script>
 
-<?php if ( $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' ) { ?>
+<?php if ( $copern == 7 AND ( $drupoh == 1 OR $drupoh == 42 ) AND $sysx != 'UCT' ) { ?>
 <script type="text/javascript" src="fak_setx.js"></script>
+<?php if ( $drupoh == 1 ) { ?>
 <script type="text/javascript" src="vyvoz_setx.js"></script>
+<?php                     } ?>
 <?php                                                         } ?>
 
 <script type='text/javascript'>
@@ -4792,7 +4793,7 @@ window.open('vyvoz_setulozx.php?cislo_dok=' + doklad + '&h_ucm1=' + ucm1 + '&h_u
 
 
 <?php
-if ( $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' )
+if ( $copern == 7 AND ( $drupoh == 1 OR $drupoh == 42 ) AND $sysx != 'UCT' )
      {
 //nastavenie parametrov faktury
 ?>
@@ -4876,7 +4877,7 @@ if( document.enast.pmd.checked ) pmd=1;
 var pdl = 0;
 if( document.enast.pdl.checked ) pdl=1;
 
-window.open('fak_setuloz.php?cislo_dok=' + doklad + '&h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&premenna=' + premenna + '&copern=900', '_self' );
+window.open('fak_setuloz.php?drupoh=<?php echo $drupoh; ?>&cislo_dok=' + doklad + '&h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&premenna=' + premenna + '&copern=900', '_self' );
                 }
 
 //zlava
@@ -4908,7 +4909,7 @@ if( document.enast.pmd.checked ) pmd=1;
 var pdl = 0;
 if( document.enast.pdl.checked ) pdl=1;
 
-window.open('fak_setuloz.php?cislo_dok=' + doklad + '&h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&premenna=' + premenna + '&copern=900&zlava=1', '_self' );
+window.open('fak_setuloz.php?drupoh=<?php echo $drupoh; ?>&cislo_dok=' + doklad + '&h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&premenna=' + premenna + '&copern=900&zlava=1', '_self' );
                 }
 </script>
 <?php
@@ -7519,17 +7520,28 @@ if ( $copern != 6 AND $_SESSION['nieie'] == 1 AND $pocstav == 0 )
 <tr>
 <td class="pvstup" width="10%" >&nbsp;
 <?php
-if ( $copern == 7 AND $drupoh == 1 AND $sysx != 'UCT' )
+if ( $copern == 7 AND ( $drupoh == 1 OR $drupoh == 42 ) AND $sysx != 'UCT' )
      {
 ?>
+<?php if( $drupoh == 1 ) { ?>
 <a href="#" onClick="window.open('vstf_import.php?copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>
 &cislo_dok=<?php echo $riadok->dok;?>&hladaj_uce=<?php echo $hladaj_uce; ?>', '_self', '<?php echo $tlcuwin; ?>' )">
 <img src='../obr/import.png' width=15 height=15 border=0 alt="Naèíta položky faktúry z CSV cis;nat;dph;cep;ced;mno;mer" title="Naèíta položky faktúry z CSV cis;nat;dph;cep;ced;mno;mer" ></a>
 &nbsp&nbsp&nbsp
+<?php                    } ?>
 <img src='../obr/naradie.png' onClick="nastavfakx.style.display=''; volajFakset(<?php echo $kli_uzid;?>);" width=15 height=15 border=0 title="Nastavi parametre faktúry" ></a>
+<?php if( $drupoh == 1 ) { ?>
 &nbsp&nbsp&nbsp
 <img src='../obr/auta/auto3.jpg' onClick="nastavpex.style.display=''; volajVyvozsetx(<?php echo $kli_uzid;?>);" width=20 height=15 border=0 title="Vytlaèi potvrdenie o vývoze tovaru" ></a>
 
+<?php                    } ?>
+<?php if( $drupoh == 1 ) { ?>
+&nbsp&nbsp&nbsp
+<a href="#" onClick="window.open('vstf_exportxml.php?copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>
+&cislo_dok=<?php echo $riadok->dok;?>&hladaj_uce=<?php echo $hladaj_uce; ?>', '_blank', '_blank'
+, 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/export.png' width=15 height=15 border=0 title="Export faktúry do XML" ></a>
+<?php                    } ?>
 <?php
      }
 ?>

@@ -1852,6 +1852,10 @@ if ( $drupoh == 2 )
 <a href="#" onClick="window.open('vstf_importorangexml.php?copern=1&drupoh=<?php echo $drupoh;?>&page=1&cislo_uce=<?php echo $hladaj_uce;?>', '_self' )">
 <img src='../obr/import.png' width=15 height=15 border=0 title="Import ORANGE faktúr" ></a>
 </td>
+<td class="hmenu">
+<a href="#" onClick="window.open('vstf_importfakxml.php?copern=1&drupoh=<?php echo $drupoh;?>&page=1&cislo_uce=<?php echo $hladaj_uce;?>', '_self' )">
+<img src='../obr/import.png' width=15 height=15 border=0 title="Import XML faktúr" ></a>
+</td>
 <?php
   }
 ?>
