@@ -1812,6 +1812,21 @@ $pdf->Image('../dokumenty/FIR'.$kli_vxcf.'/razitko'.$kli_uzid.'.jpg',$rozmerhlv1
 }
           }
 
+$qrcode = 1*$_REQUEST['qrcode'];
+if( $_SERVER['SERVER_NAME'] == "localhost"  ) { $qrcode = 1; } 
+if( $_SERVER['SERVER_NAME'] == "www.ala.sk"  ) { $qrcode = 1; } 
+if( $mini == 0 AND $qrcode == 1 AND $rozuct != 'ANO' )
+          {
+
+if (File_Exists ('../dokumenty/FIR'.$kli_vxcf.'/qrcode/qr'.$cislo_dok.'.jpg'))
+{
+$rozmerqr1="15"; $rozmerqr2="225"; $rozmerqr3="45"; $rozmerqr4="45";
+
+
+$pdf->Image('../dokumenty/FIR'.$kli_vxcf.'/qrcode/qr'.$cislo_dok.'.jpg',$rozmerqr1,$rozmerqr2,$rozmerqr3,$rozmerqr4);
+}
+          }
+
 if( $mini == 0 )
           {
 $koniec=270;

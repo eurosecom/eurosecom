@@ -120,6 +120,21 @@ $www = iconv("CP1250", "UTF-8", $www);
 
 $prodnai="<?xml version = \"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>"."\n";
 $prodnai=$prodnai."<inv>"."\n";
+
+$prodnai=$prodnai."<fak>".$vsyx."</fak>"."\n";
+$prodnai=$prodnai."<dat>".$datx."</dat>"."\n";
+$prodnai=$prodnai."<das>".$dasx."</das>"."\n";
+$prodnai=$prodnai."<daz>".$dazx."</daz>"."\n";
+$prodnai=$prodnai."<vsy>".$vsyx."</vsy>"."\n";
+$prodnai=$prodnai."<ksy>".$ksyx."</ksy>"."\n";
+$prodnai=$prodnai."<ssy>".$ssyx."</ssy>"."\n";
+$prodnai=$prodnai."<zk0>".$zk0."</zk0>"."\n";
+$prodnai=$prodnai."<zk1>".$zk1."</zk1>"."\n";
+$prodnai=$prodnai."<zk2>".$zk2."</zk2>"."\n";
+$prodnai=$prodnai."<dn1>".$dn1."</dn1>"."\n";
+$prodnai=$prodnai."<dn2>".$dn2."</dn2>"."\n";
+$prodnai=$prodnai."<hod>".$hod."</hod>"."\n";
+
 $prodnai=$prodnai."<ico>".$result["ico"]."</ico>"."\n";
 $prodnai=$prodnai."<dic>".$result["dic"]."</dic>"."\n";
 $prodnai=$prodnai."<icd>".$result["icd"]."</icd>"."\n";
@@ -131,22 +146,6 @@ $prodnai=$prodnai."<tel>".$tel."</tel>"."\n";
 $prodnai=$prodnai."<ema>".$mail."</ema>"."\n";
 $prodnai=$prodnai."<iba>".$h_ib1."</iba>"."\n";
 $prodnai=$prodnai."<bic>".$h_st1."</bic>"."\n";
-
-$prodnai=$prodnai."<fak>".$vsyx."</fak>"."\n";
-
-$prodnai=$prodnai."<dat>".$datx."</dat>"."\n";
-$prodnai=$prodnai."<das>".$dasx."</das>"."\n";
-$prodnai=$prodnai."<daz>".$dazx."</daz>"."\n";
-$prodnai=$prodnai."<vsy>".$vsyx."</vsy>"."\n";
-$prodnai=$prodnai."<ksy>".$ksyx."</ksy>"."\n";
-$prodnai=$prodnai."<ssy>".$ssyx."</ssy>"."\n";
-
-$prodnai=$prodnai."<zk0>".$zk0."</zk0>"."\n";
-$prodnai=$prodnai."<zk1>".$zk1."</zk1>"."\n";
-$prodnai=$prodnai."<zk2>".$zk2."</zk2>"."\n";
-$prodnai=$prodnai."<dn1>".$dn1."</dn1>"."\n";
-$prodnai=$prodnai."<dn2>".$dn2."</dn2>"."\n";
-$prodnai=$prodnai."<hod>".$hod."</hod>"."\n";
 
 $prodnai=$prodnai."<oico>".$oico."</oico>"."\n";
 $prodnai=$prodnai."<odic>".$odic."</odic>"."\n";
