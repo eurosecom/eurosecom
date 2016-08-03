@@ -496,6 +496,11 @@ $ulozene = mysql_query("$sqty");
           //koniec cyklu
 
 
+if( $fir_fico == 45232903 )
+{
+$sqty = "UPDATE F$kli_vxcf"."_uctban SET str=111 wHERE ucm = 56810 AND dok = ".$cislo_dok." "; 
+$ulozene = mysql_query("$sqty"); 
+}
 
 
 //exit;
