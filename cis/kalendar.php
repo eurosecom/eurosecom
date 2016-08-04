@@ -3396,6 +3396,57 @@ $sqlttt = "UPDATE kalendar SET sood=sood+1, sodo=sodo+1 WHERE ume = 5.2016 AND d
 // koniec $sql = "SELECT m122016 FROM kalendar";
      }
 
+
+//OD TADETO LEN JEDEN RAZ rok 2017
+$sql = "SELECT rok2017 FROM kalendar";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+     {
+
+echo "Vytvaram Kalendar 2017"."<br />";
+
+$den=1;
+$i=0;
+  while ($i <= 364 )
+  {
+
+$datum = Date ("Y-m-d", MkTime (0,0,0,1,$den+$i,2017)); 
+//echo $datum;
+$pole = explode("-", $datum);
+$h_ume = $pole[1].".".$pole[0];
+
+$ttvv = "INSERT INTO kalendar ( dat,ume,akyden,svt ) VALUES ( '$datum', '$h_ume', '0', '0' )";
+$ttqq = mysql_query("$ttvv");
+
+$i = $i + 1;
+  }
+
+//sviatky 2015
+$uprt = "UPDATE kalendar SET svt=1".
+" WHERE dat = '2017-01-01' OR dat = '2017-01-06' OR dat = '2017-04-14' OR dat = '2017-04-17' ".
+" OR dat = '2017-05-01' OR dat = '2017-05-08' OR dat = '2017-07-05' ".
+" OR dat = '2017-08-29' OR dat = '2017-09-01' OR dat = '2017-09-15' ".
+" OR dat = '2017-11-01' OR dat = '2017-11-17' ".
+" OR dat = '2017-12-24' OR dat = '2017-12-25' OR dat = '2017-12-26' ";
+$upravene = mysql_query("$uprt");
+
+
+$uprt = "UPDATE kalendar SET akyden=DAYOFWEEK(dat)".
+" WHERE ume > 0 ";
+$upravene = mysql_query("$uprt");
+$uprt = "UPDATE kalendar SET akyden=8".
+" WHERE akyden = 1 ";
+$upravene = mysql_query("$uprt");
+$uprt = "UPDATE kalendar SET akyden=akyden-1".
+" WHERE akyden > 0 ";
+$upravene = mysql_query("$uprt");
+
+$sql = "ALTER TABLE kalendar ADD rok2017 DECIMAL(4,0) DEFAULT 2017 AFTER svt";
+$vysledek = mysql_query("$sql");
+
+     }
+//koniec OD TADETO LEN JEDEN RAZ rok 2017
+
 $vtvkal = 1;
 return $vtvkal;
 ?>

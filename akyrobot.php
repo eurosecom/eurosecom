@@ -23,9 +23,9 @@ if( $dnes == '31.12.'.$aky_rok ) $robot3="robot3_silvester";
 
 
 //2016
-if( $dnes == '25.03.2016' ) $robot3="robot3_velkanoc";
-if( $dnes == '26.03.2016' ) $robot3="robot3_velkanoc";
-if( $dnes == '27.03.2016' ) $robot3="robot3_velkanoc";
-if( $dnes == '28.03.2016' ) $robot3="robot3_velkanoc";
+if( $dnes == '14.04.2017' ) $robot3="robot3_velkanoc";
+if( $dnes == '15.04.2017' ) $robot3="robot3_velkanoc";
+if( $dnes == '16.04.2017' ) $robot3="robot3_velkanoc";
+if( $dnes == '17.04.2017' ) $robot3="robot3_velkanoc";
 
 ?>

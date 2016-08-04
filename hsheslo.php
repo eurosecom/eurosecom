@@ -124,7 +124,7 @@ if( !$uziv ) exit;
   $kli_uzprie = $_SESSION['kli_uzprie'];
   $verzia = $_SESSION['verzia'];
 
-$sql = "SELECT m122016 FROM kalendar";
+$sql = "SELECT rok2017 FROM kalendar";
 $vysledok = mysql_query($sql);
 if (!$vysledok):
 $kalend = include("cis/kalendar.php");
