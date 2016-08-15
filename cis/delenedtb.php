@@ -131,7 +131,142 @@ echo "Databáza ".$databazakam." pre rok ".$h_dbmain." už bola založená. Nemôžete
 exit;
   }
 
+//zacni vytvarat
 
+$mysqldbkam=$databazakam;
+$mysqldbodkial=$databazaodkial;
+
+$sqlttt=" CREATE TABLE `".$mysqldbkam."`.`dlogin` SELECT * FROM `".$mysqldbodkial."`.`dlogin` WHERE id < 0"; $sql = mysql_query("$sqlttt");
+echo $sqlttt."<br />";
+$sqlttt=" CREATE TABLE `".$mysqldbkam."`.`druzis` SELECT * FROM `".$mysqldbodkial."`.`druzis` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldbkam."`.`ezak` SELECT * FROM `".$mysqldbodkial."`.`ezak` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldbkam."`.`fir` SELECT * FROM `".$mysqldbodkial."`.`fir` "; $sql = mysql_query("$sqlttt");
+
+$sqlttt=" CREATE TABLE `".$mysqldbkam."`.`h4blogin` SELECT * FROM `".$mysqldbodkial."`.`h4blogin` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldbkam."`.`h4bregister` SELECT * FROM `".$mysqldbodkial."`.`h4bregister` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldbkam."`.`h4bregister_rgp` SELECT * FROM `".$mysqldbodkial."`.`h4bregister_rgp` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldbkam."`.`infotext` SELECT * FROM `".$mysqldbodkial."`.`infotext` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".ipxok_no SELECT * FROM ".$mysqldbodkial.".ipxok_no "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".kalendar SELECT * FROM ".$mysqldbodkial.".kalendar "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldbkam."`.`klienti` SELECT * FROM `".$mysqldbodkial."`.`klienti` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".krtgrd SELECT * FROM ".$mysqldbodkial.".krtgrd "; $sql = mysql_query("$sqlttt");
+
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".majmajpol SELECT * FROM ".$mysqldbodkial.".majmajpol "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".menp SELECT * FROM ".$mysqldbodkial.".menp "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".mzddmn SELECT * FROM ".$mysqldbodkial.".mzddmn "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".mzdkunes SELECT * FROM ".$mysqldbodkial.".mzdkunes "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".mzdpomer SELECT * FROM ".$mysqldbodkial.".mzdpomer "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".mzdzampol SELECT * FROM ".$mysqldbodkial.".mzdzampol "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".nas_id SELECT * FROM ".$mysqldbodkial.".nas_id "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".personal_dok SELECT * FROM ".$mysqldbodkial.".personal_dok "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".poslanemail SELECT * FROM ".$mysqldbodkial.".poslanemail "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".skluzid SELECT * FROM ".$mysqldbodkial.".skluzid "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".treximafir SELECT * FROM ".$mysqldbodkial.".treximafir "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".treximaoc SELECT * FROM ".$mysqldbodkial.".treximaoc "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".uctpohyby SELECT * FROM ".$mysqldbodkial.".uctpohyby "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".uctpohyby2010 SELECT * FROM ".$mysqldbodkial.".uctpohyby2010 "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".uctpohyby2011 SELECT * FROM ".$mysqldbodkial.".uctpohyby2011 "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".uctpoznamkypo SELECT * FROM ".$mysqldbodkial.".uctpoznamkypo "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".ucttopman SELECT * FROM ".$mysqldbodkial.".ucttopman "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".vtvtab SELECT * FROM ".$mysqldbodkial.".vtvtab "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".webslu SELECT * FROM ".$mysqldbodkial.".webslu "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".spravy SELECT * FROM ".$mysqldbodkial.".spravy "; $sql = mysql_query("$sqlttt");
+
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".uctosnova_PU SELECT * FROM ".$mysqldbodkial.".uctosnova_PU "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".uctosnova_JU SELECT * FROM ".$mysqldbodkial.".uctosnova_JU "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".mzddmn SELECT * FROM ".$mysqldbodkial.".mzddmn "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".mzdpomer SELECT * FROM ".$mysqldbodkial.".mzdpomer "; $sql = mysql_query("$sqlttt");
+
+$sqlttt=" CREATE TABLE ".$mysqldbkam.".firuz SELECT * FROM ".$mysqldbodkial.".firuz "; $sql = mysql_query("$sqlttt");
+
+$sqltt = "CREATE TABLE ".$mysqldbkam.".zozicdph01 SELECT * FROM ".$mysqldbodkial.".zozicdph01 ";
+$tov = mysql_query("$sqltt");
+
+$sqlttx = "SELECT * FROM zozicdph01 ";
+
+$tov = mysql_query("$sqlttx");
+$tvpol = mysql_num_rows($tov);
+//echo $sqltt."<br />"."pol ".$tvpol."<br />";
+
+$sqlt = <<<vtvmzd
+(
+   xcf         INT,
+   id          INT,
+   datm        TIMESTAMP(14)
+);
+vtvmzd;
+
+$sql = "CREATE TABLE ".$mysqldbkam.".zozicdph01new20032014 ".$sqlt;
+//echo $sql."<br />";
+$vysledek = mysql_query("$sql");
+
+$sql = "CREATE TABLE ".$mysqldbkam.".zozicdph01new30052014 ".$sqlt;
+//echo $sql."<br />";
+$vysledek = mysql_query("$sql");
+
+$sql = "CREATE TABLE ".$mysqldbkam.".zozicdph01new150220 ".$sqlt;
+//echo $sql."<br />";
+$vysledek = mysql_query("$sql");
+
+$sql = "CREATE TABLE ".$mysqldbkam.".zozicdph01new160531 ".$sqlt;
+//echo $sql."<br />";
+$vysledek = mysql_query("$sql");
+
+
+echo "modify primary, timestamp"."<br />";
+
+
+$sql = "ALTER TABLE ".$mysqldbkam.".dlogin MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE ".$mysqldbkam.".ezak MODIFY ez_id int PRIMARY KEY auto_increment ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE ".$mysqldbkam.".ezak MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE ".$mysqldbkam.".fir MODIFY xcf int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE ".$mysqldbkam.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE ".$mysqldbkam.".h4bregister MODIFY rcpl int PRIMARY KEY auto_increment ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE ".$mysqldbkam.".h4bregister_rgp MODIFY rcpl int PRIMARY KEY auto_increment ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE ".$mysqldbkam.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE ".$mysqldbkam.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE ".$mysqldbkam.".krtgrd MODIFY id int UNIQUE ";
+//$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE ".$mysqldbkam.".personal_dok MODIFY cpl int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE ".$mysqldbkam.".uctpoznamkypo MODIFY oc int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE ".$mysqldbkam.".ucttopman MODIFY cpl int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE ".$mysqldbkam.".mzddmn MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE ".$mysqldbkam.".mzdpomer MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE ".$mysqldbkam.".nas_id MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE ".$mysqldbkam.".poslanemail MODIFY kedye timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE ".$mysqldbkam.".skluzid MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE ".$mysqldbkam.".uctpohyby MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+echo "Databaza 2017 zalozena.<br />";
 
 
 $copern=2;

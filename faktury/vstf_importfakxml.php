@@ -1,14 +1,94 @@
-<HTML>
 <?php
 
-// celkovy zaciatok dokumentu
-       do
-       {
-$sys = 'ALL';
+$zandroidu=1*$_REQUEST['zandroidu'];
+if( $zandroidu == 1 )
+  {
+error_reporting(0);
+
+//z delinfofak.php
+//server
+if (isset($_REQUEST['serverx'])) { $serverx = $_REQUEST['serverx']; }
+$poles = explode("/", $serverx);
+$servxxx=$poles[0];
+$adrsxxx=$poles[1];
+
+//userhash
+$userhash = $_REQUEST['userhash'];
+
+require_once('../androidfanti/MCrypt.php');
+$mcrypt = new MCrypt();
+//#Encrypt
+//$encrypted = $mcrypt->encrypt("Text to encrypt");
+$encrypted=$userhash;
+#Decrypt
+$userxplus = $mcrypt->decrypt($encrypted);
+
+//user
+//if (isset($_REQUEST['userx'])) { $userx = $_REQUEST['userx']; }
+$userx=$userxplus;
+$poleu = explode("/", $userx);
+$nickxxx=$poleu[1];
+$usidxxx=1*$poleu[3];
+$pswdxxx=$poleu[5];
+$fakx=1*$poleu[10];
+
+
+//prmall firma a rok
+if (isset($_REQUEST['prmall'])) { $prmall = $_REQUEST['prmall']; }
+$poler = explode("/", $prmall);
+$firxxx=1*$poler[1];
+$kli_vrok=1*$poler[3];
+$ftpqr=$poler[5];
+
+// include db connect class
+$dbcon="../".$adrsxxx."/db_connect.php";
+require_once "$dbcon";
+ 
+// connecting to db
+$db = new DB_CONNECT();
+
+//nastav databazu
+$dbsed="../".$adrsxxx."/nastavdbase.php";
+$sDat = include("$dbsed");
+$databaza=$databaza.".";
+
+$kli_vxcf=DB_FIR;
+if( $firxxx > 0 ) { $kli_vxcf=$firxxx; }
+
+
+// include mozem?
+$cslm=910005;
+$dbmoz="../androidfanti/mozem.php";
+$sDat = include("$dbmoz");
+
+if( $mozem == 0 ) { $icox=0; }
+
+$ftpqrdecode=trim(urldecode($ftpqr));
+
+$_REQUEST["odeslano"]=1;
+$_REQUEST['copern']=1;
+$kli_vxcf=126;
+$_REQUEST['cislo_uce']=32100;
+
+  }
+
+if( $zandroidu == 0 )
+  {
+?>
+<HTML>
+<?php
+$sys = 'UCT';
 $urov = 1000;
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
+  }
 
+
+       do
+       {
+
+if( $zandroidu == 0 )
+    {
 if(!isset($kli_vxcf)) $kli_vxcf = 1;
 
   require_once("../pswd/password.php");
@@ -18,6 +98,7 @@ if(!isset($kli_vxcf)) $kli_vxcf = 1;
     exit;
   endif;
   mysql_select_db($mysqldb);
+    }
 
 // cislo operacie
 //copern=1 z bankoveho
@@ -183,9 +264,11 @@ $nazovsuboru="importfak".$kli_uzid.".xml";
 $obsah="";
 $i=1;
 
+if( $zandroidu == 1 ) { $nazovsuboru="importfak17.xml"; }
+
 if ($_REQUEST["odeslano"]==1) 
 {     
-  if (move_uploaded_file($_FILES['original']['tmp_name'], "../tmp/$nazovsuboru")) 
+  if (move_uploaded_file($_FILES['original']['tmp_name'], "../tmp/$nazovsuboru") OR $zandroidu == 1 ) 
   { 
 //tu bude import
 
@@ -209,7 +292,7 @@ $p1ico = explode("<ico>", $value);
 $p2ico = explode("</ico>", $p1ico[1]);
 $mojeico=1*$p2ico[0];
 
-if( $mojeico != $fir_fico )
+if( $mojeico != $fir_fico AND $zandroidu == 0 )
     {
 echo "IÈO odberate¾a na faktúre ".$mojeico." nie je rovnaké ako IÈO v údajoch o firme ".$fir_fico;
 exit;
@@ -503,7 +586,8 @@ $ixx=$ixx+1;
 
 }
 //koniec if odeslano
-
+if( $zandroidu == 0 )
+  {
 
 ?>
 <HEAD>
@@ -686,12 +770,16 @@ $i=$i+1;
 //koniec copern == 1001
 } 
 //koniec if neodeslano
+
+
+  }
+//koniec $zandroidu == 0
 ?>
 
 <?php
 //prepni spat
 
-if( $copern == 1 AND $_REQUEST["odeslano"] == 1 )
+if( $copern == 1 AND $_REQUEST["odeslano"] == 1 AND $zandroidu == 0 )
 {
 ?>
 <script type="text/javascript">
@@ -703,6 +791,24 @@ window.open('vstfak.php?copern=1&drupoh=1002&page=1&pocstav=0&hladaj_uce=<?php e
 }
 ?>
 
+<?php
+//nmessage do androidu
+
+if( $copern == 1 AND $zandroidu == 1 )
+{
+
+$response = array();
+$product = array();
+$product["nai"] = $cislo_new;            
+// success
+$response["success"] = 1;
+// user node
+$response["product"] = array();
+array_push($response["product"], $product);
+// echoing JSON response
+echo json_encode($response);
+}
+?>
 
 <?php
 exit;
@@ -710,6 +816,12 @@ exit;
 //koniec prepni do faktury
 // celkovy koniec dokumentu
        } while (false);
+
+if( $zandroidu == 0 ) 
+    {
 ?>
 </BODY>
 </HTML>
+<?php
+    }
+?>
