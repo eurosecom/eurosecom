@@ -626,7 +626,7 @@ var h_uce = document.forms.forms1.h_uce.value;
 var h_ico = document.forms.forms1.h_ico.value;
 var h_obd = document.forms.forms1.h_obd.value;
 
-window.open('../ucto/saldo_alch06.php?h_deal=0&h_uce=' + h_uce + '&h_ico=' + h_ico + '&h_obd=0&copern=11&drupoh=1&page=1&analyzy=<?php echo $analyzy; ?>',
+window.open('../ucto/saldo_alch06.php?h_deal=0&h_uce=' + h_uce + '&h_ico=' + h_ico + '&h_obd=' + h_obd + '&copern=11&drupoh=1&page=1&analyzy=<?php echo $analyzy; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
