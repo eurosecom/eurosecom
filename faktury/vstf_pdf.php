@@ -791,6 +791,7 @@ $nazov1r=$hlavicka->nai;
 $nazov2r=$hlavicka->na2;
 $dlzkana2=strlen($hlavicka->na2);
 if( $dlzkana2 < 10 ) { $nazov1r=$hlavicka->nai.$hlavicka->na2; $nazov2r=""; }
+if( $hlavicka->ico == 31355161 ) { $nazov2r="STRABAG Pozemné a inžinierske stavite¾stvo s.r.o."; }
 
 $pdf->Cell(90,6,"$nazov1r ","0",1,"L");
 if( $nazov2r != "" )

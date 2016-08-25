@@ -2030,9 +2030,9 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4101n12=-hodx WHERE ( LEFT(ucdx,6) = 511100 OR LEFT(ucdx,6) = 511400 OR LEFT(ucdx,6) = 511200 )"; 
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4101n14=hodx WHERE ( LEFT(ucmx,6) = 501221 OR LEFT(ucmx,6) = 501241 )"; 
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4101n14=hodx WHERE LEFT(ucmx,6) = 501221 "; 
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4101n14=-hodx WHERE ( LEFT(ucdx,6) = 501221 OR LEFT(ucdx,6) = 501241  )"; 
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4101n14=-hodx WHERE LEFT(ucdx,6) = 501221 "; 
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4101n15=hodx WHERE ( LEFT(ucmx,6) = 501212 OR LEFT(ucmx,6) = 501222 OR LEFT(ucmx,6) = 501232 OR LEFT(ucmx,6) = 501241 )"; 
