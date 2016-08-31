@@ -128,19 +128,26 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+//dopln str,zak z mzdkun ak str=0 
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdprcvypl".$kli_uzid.",F$kli_vxcf"."_mzdkun".
+" SET str=stz ".
+" WHERE F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".oc = F$kli_vxcf"."_mzdkun.oc AND str = 0 ".
+"";
+$dsql = mysql_query("$dsqlt");
+
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT oc,dok,dat,ume,dm,dp,dk,SUM(dni),SUM(hod),mnz,saz,SUM(kc),0,str,zak,stj,9".
 " FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " WHERE oc >= 0".
-" GROUP BY dm";
+" GROUP BY str,dm";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
+<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>Mzdové zložky</title>
+<title>STR - Mzdové zložky</title>
   <style type="text/css">
     #Okno{ display: none; cursor: hand; width: 150px;
              position: absolute; top: 0; left: 0;
@@ -196,8 +203,10 @@ $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid".
 " ON F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".oc=F$kli_vxcf"."_$mzdkun.oc".
 " LEFT JOIN F$kli_vxcf"."_mzddmn".
 " ON F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".dm=F$kli_vxcf"."_mzddmn.dm".
+" LEFT JOIN F$kli_vxcf"."_str".
+" ON F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".str=F$kli_vxcf"."_str.str".
 " WHERE F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".oc >= 0 AND F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".dm > 0".
-" ORDER BY F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".dm,konx,prie,meno,stj,str,zak";
+" ORDER BY F$kli_vxcf"."_mzdprcvypl$kli_uzid".".str,F$kli_vxcf"."_mzdprcvypl".$kli_uzid.".dm,konx,prie,meno";
 
 //echo $sqltt;
 
@@ -224,11 +233,6 @@ if( $rtov_hod == '0' ) { $h_hod=""; }
 $h_kc=$rtov->kc;
 if( $rtov_kc == '0' ) { $h_kc=""; }
 
-$h_dp = SkDatum($rtov->dp);
-if( $h_dp == '00.00.0000' ) { $h_dp=""; }
-$h_dk = SkDatum($rtov->dk);
-if( $h_dk == '00.00.0000' ) { $h_dk=""; }
-
 //hlavicka strany
 if ( $j == 0 )
      {
@@ -239,11 +243,12 @@ $pdf->SetLeftMargin(15);
 $pdf->SetTopMargin(15); 
 
 $pdf->SetFont('arial','',10);
-$pdf->Cell(90,6,"Mzdové zložky $kli_vume","LTB",0,"L");
+$pdf->Cell(90,6,"Mzdové zložky za STREDISKÁ obdobie $kli_vume","LTB",0,"L");
 $pdf->Cell(90,6,"$kli_nxcf strana $strana","RTB",1,"R");
 
-$pdf->SetFont('arial','',9);
+$pdf->Cell(115,6,"STREDISKO $rtov->str $rtov->nst","0",1,"L");
 
+$pdf->SetFont('arial','',9);
 $pdf->Cell(15,6,"DM","1",0,"R");$pdf->Cell(40,6,"Meno","1",0,"R");
 $pdf->Cell(20,6,"Dni","1",0,"R");$pdf->Cell(20,6,"Hodiny","1",0,"R");$pdf->Cell(25,6,"Suma","1",1,"R");
 
@@ -259,13 +264,8 @@ if( $rtov->konx == 0 )
 $pdf->SetFont('arial','',9);
 
 $pdf->Cell(15,6,"$rtov->dm","0",0,"R");$pdf->Cell(40,6,"$rtov->oc $rtov->prie $rtov->meno $rtov->titl","0",0,"L");
-$pdf->Cell(20,6,"$h_dni","0",0,"R");$pdf->Cell(20,6,"$h_hod","0",0,"R");$pdf->Cell(25,6,"$rtov->kc","0",0,"R");
+$pdf->Cell(20,6,"$h_dni","0",0,"R");$pdf->Cell(20,6,"$h_hod","0",0,"R");$pdf->Cell(25,6,"$rtov->kc","0",1,"R");
 
-if( $rtov->stj != 0 ) { $pdf->Cell(15,6,"stj$rtov->stj/str$rtov->str/zak$rtov->zak","0",0,"L"); }
-
-if( $h_dp != '' AND $rtov->dm != 513 ) { $pdf->Cell(0,6,"$h_dp - $h_dk","0",1,"L"); }
-if( $h_dp != '' AND $rtov->dm == 513 ) { $pdf->Cell(0,6,"$rtov->saz $h_dp - $h_dk rdč:$rtov->rdc $rtov->rdk","0",1,"L"); }
-if( $h_dp == '' ) { $pdf->Cell(0,6," ","0",1,"R"); }
 }
 
 
