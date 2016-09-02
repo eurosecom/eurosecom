@@ -11,6 +11,7 @@ if(!isset($tis)) $tis = 0;
 $fort = $_REQUEST['fort'];
 if(!isset($fort)) $fort = 1;
 
+$cslm=100020;
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
 

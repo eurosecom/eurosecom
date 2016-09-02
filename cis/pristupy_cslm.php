@@ -14,7 +14,10 @@ echo " "."<br />";
 echo "UCTO ( práva pre ALL treba nastavi na 1000 ak chce len prezera aby sa nedostal do èíselníkov a práva pre UCT treba nastavi na 3000 na prezeranie )"."<br />";
 
 echo "../ucto/vstpok.php 	cslm=101300	Zoznam pokladniènıch, bankovıch a všeobecnıch dokladov"."<br />";
-echo "../ucto/meszos.php 	cslm=100020	Vytvorenie mesacnych uctovnych zostav"."<br />";
+echo "../ucto/meszos.php 	cslm=100020	Vytvorenie mesacnych uctovnych zostav, Úètovnı denník, VZaS, Súvaha"."<br />";
+echo "../ucto/udennik.php 	cslm=100020	 "."<br />";
+echo "../ucto/suvaha_pod2014.php cslm=100020	 "."<br />";
+echo "../ucto/vykzis_pod2014.php cslm=100020	 "."<br />";
 echo "../ucto/statzos.php 	cslm=102200	Štatistika a vıkazníctvo"."<br />";
 echo "../ucto/danprij.php 	cslm=100040	Priznanie k dani z prijmov"."<br />";
 echo "../ucto/vspk_u.php 	cslm=100080	Uprava, mazanie POKLADNICA, BANKA, VSEOB"."<br />";
