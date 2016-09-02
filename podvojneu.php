@@ -1065,13 +1065,13 @@ htmlmenu += "<a href=\"#\" onClick=\"window.open('../ucto/udennik.php?copern=10&
     htmlmenu += "</td></tr>";
 
     htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
-htmlmenu += "<a href=\"#\" onClick=\"window.open('../ucto/vykzis.php?copern=10&drupoh=1&page=1&tis=0', '_blank','<?php echo $tlcswin; ?>' )\">" +
-"Chcete vytlaèi Vıkaz ziskov a strát Úè POD 2-01 verzia UVPOD2v07_2 ?</a>";
+htmlmenu += "<a href=\"#\" onClick=\"window.open('../ucto/vykzis_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=&h_sch=&h_drp=&page=1&lensuv=0&lenvzs=1', '_blank','<?php echo $tlcswin; ?>' )\">" +
+"Chcete vytlaèi Vıkaz ziskov a strát Úè POD 2-01 ?</a>";
     htmlmenu += "</td></tr>";
 
     htmlmenu += "<tr><td width='100%' class='ponuka' colspan='2'>"; 
-htmlmenu += "<a href=\"#\" onClick=\"window.open('../ucto/suvaha.php?copern=10&drupoh=1&page=1&tis=0', '_blank','<?php echo $tlcswin; ?>' )\">" +
-"Chcete vytlaèi Súvahu Úè POD 1-01 verzia UVPOD1v07_1 ?</a>";
+htmlmenu += "<a href=\"#\" onClick=\"window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=&h_sch=&h_drp=&page=1&lensuv=1&lenvzs=0', '_blank','<?php echo $tlcswin; ?>' )\">" +
+"Chcete vytlaèi Súvahu Úè POD 1-01 ?</a>";
     htmlmenu += "</td></tr>";
 
 <?php                      } 
