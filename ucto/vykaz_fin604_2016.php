@@ -201,13 +201,14 @@ $r10 = 1*$_REQUEST['r10']; $rm10 = 1*$_REQUEST['rm10'];
 $r11 = 1*$_REQUEST['r11']; $rm11 = 1*$_REQUEST['rm11'];
 $r12 = 1*$_REQUEST['r12']; $rm12 = 1*$_REQUEST['rm12'];
 $r13 = 1*$_REQUEST['r13']; $rm13 = 1*$_REQUEST['rm13'];
+$r14 = 1*$_REQUEST['r14']; $rm14 = 1*$_REQUEST['rm14'];
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin604 SET ".
 " r01='$r01', rm01='$rm01', r02='$r02', rm02='$rm02', r03='$r03', rm03='$rm03',
   r04='$r04', rm04='$rm04', r05='$r05', rm05='$rm05', r06='$r06', rm06='$rm06',
   r07='$r07', rm07='$rm07', r08='$r08', rm08='$rm08', r09='$r09', rm09='$rm09',
   r10='$r10', rm10='$rm10', r11='$r11', rm11='$rm11', r12='$r12', rm12='$rm12',
-  r13='$r13', rm13='$rm13' ".
+  r13='$r13', rm13='$rm13', r14='$r14', rm14='$rm14' ".
 " WHERE oc = $cislo_oc"; 
                     }
 //echo $uprtxt;
@@ -238,7 +239,7 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykazz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
 
-$sql = "SELECT px08 FROM F".$kli_vxcf."_uctvykaz_fin604";
+$sql = "SELECT rm14 FROM F".$kli_vxcf."_uctvykaz_fin604";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -280,6 +281,7 @@ $sqlt = <<<mzdprc
    r11          DECIMAL($pocdes),
    r12          DECIMAL($pocdes),
    r13          DECIMAL($pocdes),
+   r14          DECIMAL($pocdes),
    rm01          DECIMAL($pocdes),
    rm02          DECIMAL($pocdes),
    rm03          DECIMAL($pocdes),
@@ -293,6 +295,7 @@ $sqlt = <<<mzdprc
    rm11          DECIMAL($pocdes),
    rm12          DECIMAL($pocdes),
    rm13          DECIMAL($pocdes),
+   rm14          DECIMAL($pocdes),
    ico           INT
 );
 mzdprc;
@@ -352,8 +355,8 @@ $nacitavamhodnoty=1;
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " pmd,$cislo_oc,0,'','','0000-00-00',".
 " 0,0,uce,uce,0,0,0,0,pmd,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "$fir_fico FROM F$kli_vxcf"."_uctosnova".
 " WHERE F$kli_vxcf"."_uctosnova.pmd != 0";
 //echo $dsqlt;
@@ -399,8 +402,8 @@ if( $psys <= 6 )
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,$cislo_oc,0,'','','0000-00-00',".
 "0,0,ucm,ucm,0,0,0,0,F$kli_vxcf"."_$uctovanie.hod,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM F$kli_vxcf"."_$uctovanie,F$kli_vxcf"."_$doklad".
 " WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ucm > 0 AND ume <= $kli_vume";
 //echo $dsqlt;
@@ -409,8 +412,8 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,$cislo_oc,0,'','','0000-00-00',".
 " 0,0,ucd,0,ucd,0,0,0,0,F$kli_vxcf"."_$uctovanie.hod,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM F$kli_vxcf"."_$uctovanie,F$kli_vxcf"."_$doklad".
 " WHERE F$kli_vxcf"."_$uctovanie.dok=F$kli_vxcf"."_$doklad.dok AND ucd > 0 AND ume <= $kli_vume";
 $dsql = mysql_query("$dsqlt");
@@ -423,8 +426,8 @@ else
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,$cislo_oc,0,'','','0000-00-00',".
 " 0,0,ucm,ucm,0,0,0,0,SUM(hod),0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM F$kli_vxcf"."_$uctovanie".
 " WHERE ( ucm > 0 AND ume <= $kli_vume ) GROUP BY F$kli_vxcf"."_$uctovanie.ucm";
 //echo $dsqlt;
@@ -433,8 +436,8 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid"." SELECT".
 " 0,$cislo_oc,0,'','','0000-00-00',".
 " 0,0,ucd,0,ucd,0,0,0,0,SUM(hod),".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 " $fir_fico FROM F$kli_vxcf"."_$uctovanie".
 " WHERE ( ucd > 0 AND ume <= $kli_vume ) GROUP BY F$kli_vxcf"."_$uctovanie.ucd";
 $dsql = mysql_query("$dsqlt");
@@ -461,7 +464,7 @@ $oznac = mysql_query("$sqtoz");
 //rozdel do riadkov , vypocitaj netto
 
 $rdk=1;
-while ($rdk <= 13 ) 
+while ($rdk <= 14 ) 
   {
 $crdk=$rdk;
 if( $rdk < 10 ) $crdk="0".$rdk;
@@ -481,8 +484,8 @@ $rdk=$rdk+1;
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctprcvykaz$kli_uzid "." SELECT".
 " 0,$cislo_oc,0,'','','0000-00-00',".
 " 0,1,uce,ucm,ucd,rdk,prv,hod,mdt,dal,".
-"SUM(r01),SUM(r02),SUM(r03),SUM(r04),SUM(r05),SUM(r06),SUM(r07),SUM(r08),SUM(r09),SUM(r10),SUM(r11),SUM(r12),SUM(r13), ".
-"SUM(rm01),SUM(rm02),SUM(rm03),SUM(rm04),SUM(rm05),SUM(rm06),SUM(rm07),SUM(rm08),SUM(rm09),SUM(rm10),SUM(rm11),SUM(rm12),SUM(rm13), ".
+"SUM(r01),SUM(r02),SUM(r03),SUM(r04),SUM(r05),SUM(r06),SUM(r07),SUM(r08),SUM(r09),SUM(r10),SUM(r11),SUM(r12),SUM(r13),SUM(r14), ".
+"SUM(rm01),SUM(rm02),SUM(rm03),SUM(rm04),SUM(rm05),SUM(rm06),SUM(rm07),SUM(rm08),SUM(rm09),SUM(rm10),SUM(rm11),SUM(rm12),SUM(rm13),SUM(rm14), ".
 "$fir_fico".
 " FROM F$kli_vxcf"."_uctprcvykaz$kli_uzid".
 " WHERE rdk >= 0".
@@ -565,6 +568,8 @@ $r12 = $fir_riadok->r12;
 $rm12 = $fir_riadok->rm12;
 $r13 = $fir_riadok->r13;
 $rm13 = $fir_riadok->rm13;
+$r14 = $fir_riadok->r14;
+$rm14 = $fir_riadok->rm14;
 }
 mysql_free_result($fir_vysledok);
     }
@@ -639,6 +644,8 @@ div.input-echo {
    document.formv1.rm12.value = '<?php echo $rm12;?>';
    document.formv1.r13.value = '<?php echo $r13;?>';
    document.formv1.rm13.value = '<?php echo $rm13;?>';
+   document.formv1.r14.value = '<?php echo $r14;?>';
+   document.formv1.rm14.value = '<?php echo $rm14;?>';
 <?php                     } ?>
     }
 <?php
@@ -784,6 +791,8 @@ if ( $nacitavamhodnoty == 1 ) { $alertnacitaj="!!! Údaje sú naèítané !!!"; }
 <input type="text" name="rm12" id="rm12" onkeyup="CiarkaNaBodku(this);" style="width:123px; top:569px; left:750px;"/>
 <input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="width:123px; top:600px; left:614px;"/>
 <input type="text" name="rm13" id="rm13" onkeyup="CiarkaNaBodku(this);" style="width:123px; top:600px; left:750px;"/>
+<input type="text" name="r14" id="r14" onkeyup="CiarkaNaBodku(this);" style="width:123px; top:631px; left:614px;"/>
+<input type="text" name="rm14" id="rm14" onkeyup="CiarkaNaBodku(this);" style="width:123px; top:631px; left:750px;"/>
 <?php                     } ?>
 
 <div class="navbar">
@@ -1336,6 +1345,7 @@ $r10=$hlavicka->r10; if ( $hlavicka->r10 == 0 ) $r10="";
 $r11=$hlavicka->r11; if ( $hlavicka->r11 == 0 ) $r11="";
 $r12=$hlavicka->r12; if ( $hlavicka->r12 == 0 ) $r12="";
 $r13=$hlavicka->r13; if ( $hlavicka->r13 == 0 ) $r13="";
+$r14=$hlavicka->r14; if ( $hlavicka->r14 == 0 ) $r14="";
 $rm01=$hlavicka->rm01; if ( $hlavicka->rm01 == 0 ) $rm01="";
 $rm02=$hlavicka->rm02; if ( $hlavicka->rm02 == 0 ) $rm02="";
 $rm03=$hlavicka->rm03; if ( $hlavicka->rm03 == 0 ) $rm03="";
@@ -1349,6 +1359,7 @@ $rm10=$hlavicka->rm10; if ( $hlavicka->rm10 == 0 ) $rm10="";
 $rm11=$hlavicka->rm11; if ( $hlavicka->rm11 == 0 ) $rm11="";
 $rm12=$hlavicka->rm12; if ( $hlavicka->rm12 == 0 ) $rm12="";
 $rm13=$hlavicka->rm13; if ( $hlavicka->rm13 == 0 ) $rm13="";
+$rm14=$hlavicka->rm14; if ( $hlavicka->rm14 == 0 ) $rm14="";
 $pdf->Cell(195,37," ","$rmc1",1,"L");
 $pdf->Cell(125,4," ","$rmc1",0,"C");$pdf->Cell(30,7,"$r01","$rmc",0,"R");$pdf->Cell(30,7,"$rm01","$rmc",1,"R");
 $pdf->Cell(125,4," ","$rmc1",0,"C");$pdf->Cell(30,7,"$r02","$rmc",0,"R");$pdf->Cell(30,7,"$rm02","$rmc",1,"R");
@@ -1363,6 +1374,7 @@ $pdf->Cell(125,4," ","$rmc1",0,"C");$pdf->Cell(30,7,"$r10","$rmc",0,"R");$pdf->C
 $pdf->Cell(125,4," ","$rmc1",0,"C");$pdf->Cell(30,7,"$r11","$rmc",0,"R");$pdf->Cell(30,7,"$rm11","$rmc",1,"R");
 $pdf->Cell(125,4," ","$rmc1",0,"C");$pdf->Cell(30,7,"$r12","$rmc",0,"R");$pdf->Cell(30,7,"$rm12","$rmc",1,"R");
 $pdf->Cell(125,4," ","$rmc1",0,"C");$pdf->Cell(30,7,"$r13","$rmc",0,"R");$pdf->Cell(30,7,"$rm13","$rmc",1,"R");
+$pdf->Cell(125,4," ","$rmc1",0,"C");$pdf->Cell(30,7,"$r14","$rmc",0,"R");$pdf->Cell(30,7,"$rm14","$rmc",1,"R");
                                        }
 }
 $i = $i + 1;

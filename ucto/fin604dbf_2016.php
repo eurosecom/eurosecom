@@ -143,7 +143,9 @@ RS01102         DECIMAL(12,2),
 RS01201         DECIMAL(12,2),
 RS01202         DECIMAL(12,2),
 RS01301         DECIMAL(12,2),
-RS01302         DECIMAL(12,2)
+RS01302         DECIMAL(12,2),
+RS01401         DECIMAL(12,2),
+RS01402         DECIMAL(12,2)
 
 );
 fin6dbf;
@@ -171,7 +173,8 @@ $dsqlt = "INSERT INTO fin6dbf "." SELECT".
 " r10,rm10,".
 " r11,rm11,".
 " r12,rm12,".
-" r13,rm13 ".
+" r13,rm13,".
+" r14,rm14 ".
 
 " FROM F$kli_vxcf"."_uctvykaz_fin604".
 " WHERE oc = $cislo_oc ";
@@ -214,7 +217,8 @@ $polozky[] = array("RS01201", "N", 15, 2);
 $polozky[] = array("RS01202", "N", 15, 2);
 $polozky[] = array("RS01301", "N", 15, 2);
 $polozky[] = array("RS01302", "N", 15, 2);
-
+$polozky[] = array("RS01401", "N", 15, 2);
+$polozky[] = array("RS01402", "N", 15, 2);
 // Získáme unikátní název DBF souboru
 
 
