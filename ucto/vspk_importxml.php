@@ -305,9 +305,12 @@ $xvsy=1*$riadok->vsy;
 $tabulka="odb";
 if( $riadok->pohyb == 'DBIT' ) { $tabulka="dod"; }
 
+$rovnvsy=0;
 $ucproti=26100;
 $ucprotidebet=26100; 
 $sqlico = mysql_query("SELECT uce,ico,hod,dn1,dn2 FROM F$kli_vxcf"."_fak".$tabulka." WHERE fak = $xvsy ");
+$rovnvsy = 1*mysql_num_rows($sqlico);
+//echo $rovnvsy;
   if (@$zaznam=mysql_data_seek($sqlico,0))
   {
   $riadico=mysql_fetch_object($sqlico);
@@ -414,7 +417,7 @@ $nasieluce=1;
 }
   }
 
-if( $nasieluce == 0 AND $riadok->iban != '' AND $riadok->ksy == '0038' ) 
+if( $nasieluce >= 0 AND $riadok->iban != '' AND $riadok->ksy == '0038' ) 
   {
 
 $sqlfir7 = "SELECT * FROM F$kli_vxcf"."_uctimportbankyuce WHERE ibanx = '' AND popx LIKE 'ksy 0038 mzdy' ";
@@ -428,6 +431,8 @@ $fir_riadok7=mysql_fetch_object($fir_vysledok7);
 $ucproti = $fir_riadok7->ucex;
 $ucprotidebet = $fir_riadok7->uced;
 $nasieluce=1;
+$ico = $fir_fico;
+$nasielico=1;
 }
 
   }
@@ -480,6 +485,15 @@ $sqty = "INSERT INTO F$kli_vxcf"."_uctban ( dok,ddu,poh,ucm,ucd,rdp,dph,hod,ico,
 $ulozene = mysql_query("$sqty"); 
 }
 
+if( $nasielico == 1 AND $rovnvsy > 1 )
+{
+$x_txx="*** ".$rovnvsy." rovnaké vsy ".$riadok->vsy;
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctban ( dok,ddu,poh,ucm,ucd,rdp,dph,hod,ico,fak,pop,str,zak,unk,id )".
+" VALUES ('$cislo_dok', '$riadok->dat', '551', '0', '0', '0', '0', '0', '0', '0', '$x_txx',".
+" '0', '0', '', '$kli_uzid' );"; 
+$ulozene = mysql_query("$sqty"); 
+}
 
 if( $podvojne == 1 )
 {

@@ -1628,8 +1628,10 @@ $uhradit = 1*$hlavicka->hod-1*$hlavicka->zal;
 $Cislo=$uhradit+"";
 $sUhradit=sprintf("%0.2f", $Cislo);
 
+$pdf->SetFont('arial','B',12);
 $pdf->Cell(72,5,"K úhrade zostáva ","0",0,"L");$pdf->Cell(15,5," ","0",0,"R");
 $pdf->Cell(31,5," ","0",0,"R");$pdf->Cell(31,5," ","0",0,"R");$pdf->Cell(31,5,"$sUhradit $mena1","0",1,"R");
+$pdf->SetFont('arial','',10);
 
 if( $hlavicka->ruc != 0 ) 
    {
