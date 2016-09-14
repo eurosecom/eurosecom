@@ -42,6 +42,12 @@ $fir = 1*$_REQUEST['fir'];
 
 $lenjedenrok=0;
 
+$strana = 1*$_REQUEST['strana'];
+if( $strana == 0 ) { $strana=1; }
+$tablmzdevid="mzdevidencny";
+if( $strana == 2 ) { $tablmzdevid="mzdevidencnys2"; }
+
+
 //nacitanie jedneho roka do evidencneho listu
     if ( $copern == 4155 )
     {
@@ -64,7 +70,7 @@ if( $rok == 7 ) { $xrok=$rokm7; }
 if( !confirm ("Chcete naËÌtaù hodnoty roku <?php echo $xrok; ?> do evidenËnÈho listu z firmy <?php echo $fir; ?> ? ") )
          { window.close()  }
 else
-         { location.href='evidencny_list.php?copern=4156&page=1&drupoh=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=<?php echo $rok; ?>&fir=<?php echo $fir; ?>'  }
+         { location.href='evidencny_list.php?strana=<?php echo $strana; ?>&strana=<?php echo $strana; ?>&copern=4156&page=1&drupoh=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=<?php echo $rok; ?>&fir=<?php echo $fir; ?>'  }
 </script>
 <?php
     }
@@ -85,7 +91,7 @@ $lenjedenrok=$rok;
 if( !confirm ("Chcete vymazaù hodnoty evidenËnÈho listu ? ") )
          { window.close()  }
 else
-         { location.href='evidencny_list.php?copern=6156&page=1&drupoh=1&cislo_oc=<?php echo $cislo_oc; ?>'  }
+         { location.href='evidencny_list.php?strana=<?php echo $strana; ?>&copern=6156&page=1&drupoh=1&cislo_oc=<?php echo $cislo_oc; ?>'  }
 </script>
 <?php
     }
@@ -93,7 +99,7 @@ else
     if ( $copern == 6156 )
     {
 
-$sqlttt = "DELETE FROM F$kli_vxcf"."_mzdevidencny WHERE oc = $cislo_oc ";
+$sqlttt = "DELETE FROM F$kli_vxcf"."_$tablmzdevid WHERE oc = $cislo_oc ";
 $sqldok = mysql_query("$sqlttt");
 
 
@@ -110,7 +116,7 @@ $copern=20;
 if( !confirm ("Chcete naËÌtaù hodnoty celÈho evidenËnÈho listu z firmy minulÈho roka ? ") )
          { window.close()  }
 else
-         { location.href='evidencny_list.php?copern=3156&page=1&drupoh=1&cislo_oc=<?php echo $cislo_oc; ?>'  }
+         { location.href='evidencny_list.php?strana=<?php echo $strana; ?>&copern=3156&page=1&drupoh=1&cislo_oc=<?php echo $cislo_oc; ?>'  }
 </script>
 <?php
     }
@@ -147,10 +153,10 @@ if ( $kli_vrok > 2015 )
 if ( File_Exists("../pswd/oddelena2015db2016.php") ) { $databaza=$mysqldb2015."."; }
 }
 
-$uprtxt = "DELETE FROM F$kli_vxcf"."_mzdevidencny WHERE oc = $cislo_oc ";
+$uprtxt = "DELETE FROM F$kli_vxcf"."_$tablmzdevid WHERE oc = $cislo_oc ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "INSERT INTO F$kli_vxcf"."_mzdevidencny SELECT * FROM ".$databaza."F$h_ycf"."_mzdevidencny WHERE oc = $cislo_oc ";
+$uprtxt = "INSERT INTO F$kli_vxcf"."_$tablmzdevid SELECT * FROM ".$databaza."F$h_ycf"."_$tablmzdevid WHERE oc = $cislo_oc ";
 $upravene = mysql_query("$uprtxt"); 
 
 $copern=26;
@@ -162,7 +168,7 @@ $copern=26;
 if ( $copern == 26 )
     {
 $uzjezaznam=0;
-$sqlttt = "SELECT * FROM F$kli_vxcf"."_mzdevidencny WHERE oc = ".$cislo_oc;
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_$tablmzdevid WHERE oc = ".$cislo_oc;
 $sqldok = mysql_query("$sqlttt");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
@@ -345,31 +351,31 @@ if( $lenjedenrok == 7 ) { $kli_vrokx=$rokm7; }
 }
 
 $uzje=0;
-if( ( $kr01 == 0 OR $kr01 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+if( ( $kr01 == 0 OR $kr01 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " kr01='$kli_vrokx', vz01='$vymzak', zp01='$znakpoistenia', dp01='$datpoc', dk01='$datkon', kd01='$kaldni', vv01='$vylkc' WHERE oc = $cislo_oc"; }
-if( ( $kr02 == 0 OR $kr02 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+if( ( $kr02 == 0 OR $kr02 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " kr02='$kli_vrokx', vz02='$vymzak', zp02='$znakpoistenia', dp02='$datpoc', dk02='$datkon', kd02='$kaldni', vv02='$vylkc' WHERE oc = $cislo_oc"; }
-if( ( $kr03 == 0 OR $kr03 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+if( ( $kr03 == 0 OR $kr03 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " kr03='$kli_vrokx', vz03='$vymzak', zp03='$znakpoistenia', dp03='$datpoc', dk03='$datkon', kd03='$kaldni', vv03='$vylkc' WHERE oc = $cislo_oc"; }
-if( ( $kr04 == 0 OR $kr04 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+if( ( $kr04 == 0 OR $kr04 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " kr04='$kli_vrokx', vz04='$vymzak', zp04='$znakpoistenia', dp04='$datpoc', dk04='$datkon', kd04='$kaldni', vv04='$vylkc' WHERE oc = $cislo_oc"; }
-if( ( $kr05 == 0 OR $kr05 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+if( ( $kr05 == 0 OR $kr05 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " kr05='$kli_vrokx', vz05='$vymzak', zp05='$znakpoistenia', dp05='$datpoc', dk05='$datkon', kd05='$kaldni', vv05='$vylkc' WHERE oc = $cislo_oc"; }
-if( ( $kr06 == 0 OR $kr06 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+if( ( $kr06 == 0 OR $kr06 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " kr06='$kli_vrokx', vz06='$vymzak', zp06='$znakpoistenia', dp06='$datpoc', dk06='$datkon', kd06='$kaldni', vv06='$vylkc' WHERE oc = $cislo_oc"; }
-if( ( $kr07 == 0 OR $kr07 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+if( ( $kr07 == 0 OR $kr07 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " kr07='$kli_vrokx', vz07='$vymzak', zp07='$znakpoistenia', dp07='$datpoc', dk07='$datkon', kd07='$kaldni', vv07='$vylkc' WHERE oc = $cislo_oc"; }
-if( ( $kr08 == 0 OR $kr08 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+if( ( $kr08 == 0 OR $kr08 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " kr08='$kli_vrokx', vz08='$vymzak', zp08='$znakpoistenia', dp08='$datpoc', dk08='$datkon', kd08='$kaldni', vv08='$vylkc' WHERE oc = $cislo_oc"; }
-if( ( $kr09 == 0 OR $kr09 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+if( ( $kr09 == 0 OR $kr09 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " kr09='$kli_vrokx', vz09='$vymzak', zp09='$znakpoistenia', dp09='$datpoc', dk09='$datkon', kd09='$kaldni', vv09='$vylkc' WHERE oc = $cislo_oc"; }
-if( ( $kr10 == 0 OR $kr10 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+if( ( $kr10 == 0 OR $kr10 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " kr10='$kli_vrokx', vz10='$vymzak', zp10='$znakpoistenia', dp10='$datpoc', dk10='$datkon', kd10='$kaldni', vv10='$vylkc' WHERE oc = $cislo_oc"; }
-if( ( $kr11 == 0 OR $kr11 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+if( ( $kr11 == 0 OR $kr11 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " kr11='$kli_vrokx', vz11='$vymzak', zp11='$znakpoistenia', dp11='$datpoc', dk11='$datkon', kd11='$kaldni', vv11='$vylkc' WHERE oc = $cislo_oc"; }
-if( ( $kr12 == 0 OR $kr12 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+if( ( $kr12 == 0 OR $kr12 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " kr12='$kli_vrokx', vz12='$vymzak', zp12='$znakpoistenia', dp12='$datpoc', dk12='$datkon', kd12='$kaldni', vv12='$vylkc' WHERE oc = $cislo_oc"; }
-if( ( $kr13 == 0 OR $kr13 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+if( ( $kr13 == 0 OR $kr13 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " kr13='$kli_vrokx', vz13='$vymzak', zp13='$znakpoistenia', dp13='$datpoc', dk13='$datkon', kd13='$kaldni', vv13='$vylkc' WHERE oc = $cislo_oc"; }
 
 $upravene = mysql_query("$uprtxt"); 
@@ -482,6 +488,7 @@ $vv13 = strip_tags($_REQUEST['vv13']);
 
 $pozn = strip_tags($_REQUEST['pozn']);
 $str2 = strip_tags($_REQUEST['str2']);
+
 $oprav = strip_tags($_REQUEST['oprav']);
 $predo = strip_tags($_REQUEST['predo']);
 
@@ -519,7 +526,7 @@ $datum = strip_tags($_REQUEST['datum']);
 $datum_sql=SqlDatum($datum);
 
 
-$uprtxt = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+$uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " dp01='$dp01_sql', dk01='$dk01_sql', dp02='$dp02_sql', dk02='$dk02_sql', dp03='$dp03_sql', dk03='$dk03_sql', dp04='$dp04_sql', dk04='$dk04_sql', ".
 " dp05='$dp05_sql', dk05='$dk05_sql', dp06='$dp06_sql', dk06='$dk06_sql', dp07='$dp07_sql', dk07='$dk07_sql', dp08='$dp08_sql', dk08='$dk08_sql', ".
 " dp09='$dp09_sql', dk09='$dk09_sql', dp10='$dp10_sql', dk10='$dk10_sql', dp11='$dp11_sql', dk11='$dk11_sql', dp12='$dp12_sql', dk12='$dk12_sql', ".
@@ -661,21 +668,21 @@ $sqlt = <<<mzdprc
 );
 mzdprc;
 
-$vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid.$sqlt;
+$vsql = "CREATE TABLE F".$kli_vxcf."_mzdprcvypl".$kli_uzid.$sqlt;
 $vytvor = mysql_query("$vsql");
-$vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid.$sqlt;
+$vsql = "CREATE TABLE F".$kli_vxcf."_mzdprcvyplx".$kli_uzid.$sqlt;
 $vytvor = mysql_query("$vsql");
-$vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdevidencny'.$sqlt;
+$vsql = "CREATE TABLE F".$kli_vxcf."_$tablmzdevid".$sqlt;
 $vytvor = mysql_query("$vsql");
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdevidencny ADD pozn VARCHAR(80) AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_$tablmzdevid ADD pozn VARCHAR(80) AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdevidencny ADD predo VARCHAR(50) NOT NULL AFTER datum";
+$sql = "ALTER TABLE F$kli_vxcf"."_$tablmzdevid ADD predo VARCHAR(50) NOT NULL AFTER datum";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdevidencny ADD oprav DECIMAL(2,0) DEFAULT 0 AFTER datum";
+$sql = "ALTER TABLE F$kli_vxcf"."_$tablmzdevid ADD oprav DECIMAL(2,0) DEFAULT 0 AFTER datum";
 $vysledek = mysql_query("$sql");
 
 $jepotvrd=0;
-$sql = "SELECT * FROM F$kli_vxcf"."_mzdevidencny WHERE oc = $cislo_oc";
+$sql = "SELECT * FROM F$kli_vxcf"."_$tablmzdevid WHERE oc = $cislo_oc";
 $sqldok = mysql_query("$sql");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
@@ -688,7 +695,7 @@ if( $subor == 1 )
 {
 
 //zober data z kun
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdevidencny".
+$dsqlt = "INSERT INTO F$kli_vxcf"."_$tablmzdevid".
 " SELECT oc,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "'','','','','','','','','','','','','',".
@@ -723,7 +730,7 @@ if( $copern == 10 )
 {
 
 //urob sucet
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdevidencny".
+$sqtoz = "UPDATE F$kli_vxcf"."_$tablmzdevid".
 " SET vzspolu=vz01+vz02+vz03+vz04+vz05+vz06+vz07+vz08+vz09+vz10+vz11+vz12 WHERE oc >= 0";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
@@ -741,10 +748,10 @@ $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 
 //vytlac
-$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdevidencny".
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$tablmzdevid".
 " LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON F$kli_vxcf"."_mzdevidencny.oc=F$kli_vxcf"."_mzdkun.oc".
-" WHERE F$kli_vxcf"."_mzdevidencny.oc = $cislo_oc AND konx = 1 ORDER BY konx,prie,meno";
+" ON F$kli_vxcf"."_$tablmzdevid.oc=F$kli_vxcf"."_mzdkun.oc".
+" WHERE F$kli_vxcf"."_$tablmzdevid.oc = $cislo_oc AND konx = 1 ORDER BY konx,prie,meno";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -1387,10 +1394,10 @@ $pdf->Output("../tmp/evidlist.$kli_uzid.pdf");
 //nacitaj udaje pre upravu
 if ( $copern == 20 )
     {
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdevidencny".
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_$tablmzdevid".
 " LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON F$kli_vxcf"."_mzdevidencny.oc=F$kli_vxcf"."_mzdkun.oc".
-" WHERE F$kli_vxcf"."_mzdevidencny.oc = $cislo_oc AND konx = 1 ORDER BY konx,prie,meno";
+" ON F$kli_vxcf"."_$tablmzdevid.oc=F$kli_vxcf"."_mzdkun.oc".
+" WHERE F$kli_vxcf"."_$tablmzdevid.oc = $cislo_oc AND konx = 1 ORDER BY konx,prie,meno";
 
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
@@ -1519,7 +1526,7 @@ if ( $datum == '00.00.0000' )
 { 
 $datum=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
 $datumsql=SqlDatum($datum);
-$sqlx = "UPDATE F$kli_vxcf"."_mzdevidencny SET datum='$datumsql' ";
+$sqlx = "UPDATE F$kli_vxcf"."_$tablmzdevid SET datum='$datumsql' ";
 $vysledekx = mysql_query("$sqlx");
 }
 
@@ -1759,16 +1766,16 @@ var sirkawic = screen.width-10;
 
   function prevOC(prevoc)
   {
-   window.open('evidencny_list.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + prevoc + '', '_self');
+   window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + prevoc + '', '_self');
   }
   function nextOC(nextoc)
   {
-   window.open('evidencny_list.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + nextoc + '', '_self');
+   window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=20&drupoh=1&page=1&subor=0&cislo_oc=' + nextoc + '', '_self');
   }
 
   function ZnovuPotvrdenie()
   {
-   window.open('../mzdy/evidencny_list.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=26&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>',
+   window.open('../mzdy/evidencny_list.php?strana=<?php echo $strana; ?>&cislo_oc=<?php echo $cislo_oc; ?>&copern=26&drupoh=1&page=1&subor=0&fmzdy=<?php echo $kli_vxcf; ?>',
  '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function NavodVyplnenie()
@@ -1778,7 +1785,7 @@ var sirkawic = screen.width-10;
   }
   function tlacpdf(oc)
   {
-   window.open('evidencny_list.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=' + oc + '&xx=1',
+   window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=10&drupoh=1&page=1&subor=0&cislo_oc=' + oc + '&xx=1',
  '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function XMLEvidencny()
@@ -1968,7 +1975,7 @@ if ( $copern == 20 )
    <td>
     <div class="bar-btn-form-tool">
 <img src="../obr/ikony/xmark_lred_icon.png" title="Vymazaù hodnoty evidenËnÈho listu"
- onclick="window.open('evidencny_list.php?copern=6155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self')"
+ onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=6155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self')"
  class="btn-form-tool">
 
 <p class="toright nacitaj-bar">
@@ -1977,49 +1984,58 @@ if ( $copern == 20 )
 
 
 <?php if ( $firm1 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=1&fir=<?php echo $firm1; ?>', '_self')"
+ <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=1&fir=<?php echo $firm1; ?>', '_self')"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm1; ?> a firmy Ë. <?php echo $firm1; ?> - len rok <?php echo $rokm1; ?>'>
   <?php echo "$rokm1,$firm1"; ?>
  </a>
 <?php                   } ?>
+
+<?php
+$source="evidencny_list.php?drupoh=1&page=1&cislo_oc=".$cislo_oc;
+?>
+
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+ 
+
 
 <?php if ( $copern == 20 )
 {
 //toto musime doriesit
 ?>
 <?php if ( $firm2 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=2&fir=<?php echo $firm2; ?>', '_self')"
+ <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=2&fir=<?php echo $firm2; ?>', '_self')"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm2; ?> a firmy Ë. <?php echo $firm2; ?> - len rok <?php echo $rokm2; ?>'>
   <?php echo "$rokm2,$firm2"; ?>
  </a>
 <?php                   } ?>
 <?php if ( $firm3 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=3&fir=<?php echo $firm3; ?>', '_self')"
+ <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=3&fir=<?php echo $firm3; ?>', '_self')"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm3; ?> a firmy Ë. <?php echo $firm3; ?> - len rok <?php echo $rokm3; ?>'>
   <?php echo "$rokm3,$firm3"; ?>
  </a>
 <?php                   } ?>
 <?php if ( $firm4 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=4&fir=<?php echo $firm4; ?>', '_self')"
+ <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=4&fir=<?php echo $firm4; ?>', '_self')"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm4; ?> a firmy Ë. <?php echo $firm4; ?> - len rok <?php echo $rokm4; ?>'>
   <?php echo "$rokm4,$firm4"; ?>
  </a>
 <?php                   } ?>
 <?php if ( $firm5 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=5&fir=<?php echo $firm5; ?>', '_self')"
+ <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=5&fir=<?php echo $firm5; ?>', '_self')"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm5; ?> a firmy Ë. <?php echo $firm5; ?> - len rok <?php echo $rokm5; ?>'>
   <?php echo "$rokm5,$firm5"; ?>
  </a>
 <?php                   } ?>
 <?php if ( $firm6 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=6&fir=<?php echo $firm6; ?>', '_self')"
+ <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=6&fir=<?php echo $firm6; ?>', '_self')"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm6; ?> a firmy Ë. <?php echo $firm6; ?> - len rok <?php echo $rokm6; ?>'>
   <?php echo "$rokm6,$firm6"; ?>
  </a>
 <?php                   } ?>
 
 <?php if ( $firm7 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=7&fir=<?php echo $firm7; ?>', '_self')"
+ <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=7&fir=<?php echo $firm7; ?>', '_self')"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm7; ?> a firmy Ë. <?php echo $firm7; ?> - len rok <?php echo $rokm7; ?>'>
   <?php echo "$rokm7,$firm7"; ?>
  </a>
@@ -2042,7 +2058,7 @@ if ( $copern == 20 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="evidencny_list.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
+<FORM name="formv1" method="post" action="evidencny_list.php?strana=<?php echo $strana; ?>&copern=23&cislo_oc=<?php echo $cislo_oc;?>">
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave" style="top:4px;">
 <img src="../dokumenty/mzdy_potvrdenia/evidencny_list/evidencny_list.jpg"
      alt="tlaËivo EvidenËn˝ list dÙchodkovÈho poistenia 231kB" class="form-background">
