@@ -1575,6 +1575,20 @@ p.nacitaj-bar > a {
 p.nacitaj-bar > a:hover {
   border-bottom: 1px solid #39f;
 }
+
+.bkm-vertical-area {
+  position:absolute;
+  top: 0;
+  left: -30px;
+  text-align: center;
+}
+.bkm-vertical-area > a {
+  display: block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+}
 </style>
 <script type="text/javascript">
 //sirka a vyska okna
@@ -1966,7 +1980,7 @@ if ( $copern == 20 )
    <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
   </tr>
   <tr>
-   <td class="header">Evidenènı list dôchodkov. poist. - <span class="subheader"><?php echo "$oc $meno $prie";?></span>
+   <td class="header">Evidenènı list DP - <span class="subheader"><?php echo "$oc $meno $prie";?></span>
 <?php if ( $novy == 0 ) { ?>
     <img src='../obr/prev.png' onclick="prevOC(<?php echo $prev_oc; ?>);" title="Os.è. <?php echo $prev_oc; ?>" class="navoc-icon">
     <img src='../obr/next.png' onclick="nextOC(<?php echo $next_oc; ?>);" title="Os.è. <?php echo $next_oc; ?>" class="navoc-icon">
@@ -1989,15 +2003,6 @@ if ( $copern == 20 )
   <?php echo "$rokm1,$firm1"; ?>
  </a>
 <?php                   } ?>
-
-<?php
-$source="evidencny_list.php?drupoh=1&page=1&cislo_oc=".$cislo_oc;
-?>
-
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- 
-
 
 <?php if ( $copern == 20 )
 {
@@ -2045,12 +2050,9 @@ $source="evidencny_list.php?drupoh=1&page=1&cislo_oc=".$cislo_oc;
 }
 ?>
 </p>
-     <img src="../obr/ikony/info_blue_icon.png" onclick="NavodVyplnenie();"
-          title="Pouèenie na vyplnenie" class="btn-form-tool">
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick="XMLEvidencny();"
-          title="Export do XML" class="btn-form-tool">
-     <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacpdf(<?php echo $cislo_oc; ?>);"
-          title="Zobrazi v PDF" class="btn-form-tool">
+     <img src="../obr/ikony/info_blue_icon.png" onclick="NavodVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="XMLEvidencny();" title="Export do XML" class="btn-form-tool">
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacpdf(<?php echo $cislo_oc; ?>);" title="Zobrazi v PDF" class="btn-form-tool">
     </div>
    </td>
   </tr>
@@ -2062,6 +2064,22 @@ $source="evidencny_list.php?drupoh=1&page=1&cislo_oc=".$cislo_oc;
  <INPUT type="submit" id="uloz" name="uloz" value="Uloi zmeny" class="btn-top-formsave" style="top:4px;">
 <img src="../dokumenty/mzdy_potvrdenia/evidencny_list/evidencny_list.jpg"
      alt="tlaèivo Evidenènı list dôchodkového poistenia 231kB" class="form-background">
+
+<!-- prepinanie stran -->
+<div class="bkm-vertical-area">
+<?php
+$clas1="noactive"; $clas2="noactive";
+if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
+$source="evidencny_list.php?drupoh=1&page=1&cislo_oc=".$cislo_oc;
+?>
+
+<?php if ( $strana != 1 ) { ?>
+<a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');"
+   title="Prejs na stranu" class="<?php echo $clas1; ?>">1</a>
+<a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');"
+   title="Prejs na stranu" class="<?php echo $clas2; ?>">2</a>
+<?php                     } ?>
+</div>
 
 <!-- vyplneny -->
 <input type="checkbox" name="str2" value="1" style="top:143px; left:260px;"/>
@@ -2084,6 +2102,12 @@ $source="evidencny_list.php?drupoh=1&page=1&cislo_oc=".$cislo_oc;
 <span class="text-echo" style="top:407px; left:652px;"><?php echo $dav_sk; ?></span>
 
 <!-- II. Obdobia poistenia ... -->
+<?php
+$source="evidencny_list.php?drupoh=1&page=1&cislo_oc=".$cislo_oc;
+?>
+<!-- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');">1</a> -->
+<a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" title="Prejs na vypåòanie 14 a viac období"
+   style="position:absolute; top:463px; left:850px; color:#39f; font-size:12px; font-weight:bold;">viac období</a>
 <img src="../obr/ikony/info_blue_icon.png" class="btn-row-tool" style="top:465px; left:127px;"
      title="A = zamestnanec, MD = materská dovolenka, RD = rodièovská dovolenka, VS = vojenská sluba, CS = civilná sluba">
 <!-- 1.riadok -->
