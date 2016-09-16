@@ -172,10 +172,19 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
   $cicz=trim($riaddok->cicz);
   }
 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdevidencny".
+
+$xstr=1;
+  while ( $xstr <= 2 )
+  {
+
+
+if( $xstr == 1 ) { $tablmzdevid="mzdevidencny"; }
+if( $xstr == 2 ) { $tablmzdevid="mzdevidencnys2"; }
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_$tablmzdevid".
 " LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON F$kli_vxcf"."_mzdevidencny.oc=F$kli_vxcf"."_mzdkun.oc".
-" WHERE F$kli_vxcf"."_mzdevidencny.oc = $cislo_oc AND konx = 1 ORDER BY konx,prie,meno";
+" ON F$kli_vxcf"."_$tablmzdevid.oc=F$kli_vxcf"."_mzdkun.oc".
+" WHERE F$kli_vxcf"."_$tablmzdevid.oc = $cislo_oc AND konx = 1 ORDER BY konx,prie,meno";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -189,8 +198,9 @@ $j=0; //zaciatok strany ak by som chcel strankovat
 $hlavicka=mysql_fetch_object($sql);
 $obdobie=$kli_vmes;
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+ 
 
-if ( $j == 0 )
+if ( $xstr == 1 )
 {
   $text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\r\n";
   fwrite($soubor, $text);
@@ -299,7 +309,6 @@ if( $hlavicka->oprav == 1 ) { $opravx="1"; }
   $text = " </poistVztah> "."\r\n";
   fwrite($soubor, $text);
 
-//andrej
 
   $dad=SkDatum($hlavicka->dar);
   if( $dad != '00.00.0000' ) {
@@ -308,7 +317,11 @@ if( $hlavicka->oprav == 1 ) { $opravx="1"; }
   if( $dad == '00.00.0000' ) {
   $text = "   <obdobiaPoist>"."\r\n"; fwrite($soubor, $text);
                              }
-  
+
+}
+//koniec ak xstr=1
+
+ 
 $riadok=1;
 $dajriadok=0;
 while( $riadok <= 13 )
@@ -477,6 +490,18 @@ $riadok=$riadok+1;
           }
 
 
+
+
+
+}
+$i = $i + 1;
+$j = $j + 1;
+  }
+
+
+$xstr = $xstr + 1;
+  }
+
   $text = "   </obdobiaPoist>"."\r\n"; fwrite($soubor, $text);
 
   $text = " </eldpZec> "."\r\n";
@@ -513,15 +538,6 @@ if ( $mailfosoba == '' ) { $mailfosoba=$fir_fem1; }
   $text = "   <telCislo><![CDATA[".$hodnota."]]></telCislo> "."\r\n"; fwrite($soubor, $text);
   $text = " </kontakt> "."\r\n";
   fwrite($soubor, $text);
-
-}
-//koniec ak j=0
-
-}
-$i = $i + 1;
-$j = $j + 1;
-  }
-
 
   $text = "</spELDPZec> "."\r\n";
   fwrite($soubor, $text);
