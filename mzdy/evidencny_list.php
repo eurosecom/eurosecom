@@ -102,6 +102,9 @@ else
 $sqlttt = "DELETE FROM F$kli_vxcf"."_$tablmzdevid WHERE oc = $cislo_oc ";
 $sqldok = mysql_query("$sqlttt");
 
+$strana=1;
+$tablmzdevid="mzdevidencny";
+
 
 $copern=20;
     }
@@ -525,6 +528,15 @@ $dp13_sql=SqlDatum($dp13);
 $datum = strip_tags($_REQUEST['datum']);
 $datum_sql=SqlDatum($datum);
 
+$uprtxt2 = "UPDATE F$kli_vxcf"."_mzdevidencnys2 SET ".
+" pozn='$pozn', oprav='$oprav', predo='$predo', datum='$datum_sql', str2='$str2'  ".
+" WHERE oc = $cislo_oc"; 
+$upravene2 = mysql_query("$uprtxt2");
+
+$uprtxt2 = "UPDATE F$kli_vxcf"."_mzdevidencny SET ".
+" pozn='$pozn', oprav='$oprav', predo='$predo', datum='$datum_sql', str2='$str2'  ".
+" WHERE oc = $cislo_oc"; 
+$upravene2 = mysql_query("$uprtxt2");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " dp01='$dp01_sql', dk01='$dk01_sql', dp02='$dp02_sql', dk02='$dk02_sql', dp03='$dp03_sql', dk03='$dk03_sql', dp04='$dp04_sql', dk04='$dk04_sql', ".
@@ -540,8 +552,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
 " vv01='$vv01', vv02='$vv02', vv03='$vv03', vv04='$vv04', vv05='$vv05', vv06='$vv06', ".
 " vv07='$vv07', vv08='$vv08', vv09='$vv09', vv10='$vv10', vv11='$vv11', vv12='$vv12', vv13='$vv13', ".
 " vz01='$vz01', vz02='$vz02', vz03='$vz03', vz04='$vz04', vz05='$vz05', vz06='$vz06', ".
-" vz07='$vz07', vz08='$vz08', vz09='$vz09', vz10='$vz10', vz11='$vz11', vz12='$vz12', vz13='$vz13', ".
-" pozn='$pozn', oprav='$oprav', predo='$predo', datum='$datum_sql', str2='$str2'  ".
+" vz07='$vz07', vz08='$vz08', vz09='$vz09', vz10='$vz10', vz11='$vz11', vz12='$vz12', vz13='$vz13' ".
 " WHERE oc = $cislo_oc"; 
 //echo $uprtxt;
 //exit;
@@ -730,14 +741,26 @@ if( $copern == 10 )
 {
 
 //urob sucet
-$sqtoz = "UPDATE F$kli_vxcf"."_$tablmzdevid".
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdevidencny ".
 " SET vzspolu=vz01+vz02+vz03+vz04+vz05+vz06+vz07+vz08+vz09+vz10+vz11+vz12 WHERE oc >= 0";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdevidencnys2 ".
+" SET vzspolu=vz01+vz02+vz03+vz04+vz05+vz06+vz07+vz08+vz09+vz10+vz11+vz12 WHERE oc >= 0";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
 
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
-if ( File_Exists("../tmp/evidlist.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/evidlist.$kli_uzid.pdf"); }
+ $outfilexdel="../tmp/evidlist_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/evidlist_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -746,6 +769,27 @@ $velkost_strany = explode(",", $sirka_vyska);
 $pdf=new FPDF("P","mm", $velkost_strany );
 $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
+
+$xstr=1;
+  while ( $xstr <= 2 )
+  {
+
+$uzje2str=0;
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_mzdevidencnys2 WHERE oc = ".$cislo_oc;
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $uzje2str=1;
+  }
+
+$tlacstr=1;
+if( $xstr == 1 ) { $tablmzdevid="mzdevidencny"; }
+if( $xstr == 2 ) { $tablmzdevid="mzdevidencnys2"; }
+
+if( $xstr == 2 AND $uzje2str == 0 ) { $tlacstr=0; }
+
+if( $tlacstr == 1 ) {
 
 //vytlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$tablmzdevid".
@@ -1381,11 +1425,21 @@ $pdf->Cell(23,6,"$datum1$datum2$datum3","$rmc",0,"C");
 }
 $i = $i + 1;
   }
-$pdf->Output("../tmp/evidlist.$kli_uzid.pdf");
+
+
+
+//if( $tlacstr == 1 ) {
+                      }
+
+$xstr = $xstr + 1;
+  }
+
+
+$pdf->Output("$outfilex");
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/evidlist.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php
 }
@@ -2071,14 +2125,25 @@ if ( $copern == 20 )
 $clas1="noactive"; $clas2="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 $source="evidencny_list.php?drupoh=1&page=1&cislo_oc=".$cislo_oc;
+
+
+$uzje2str=0;
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_mzdevidencnys2 WHERE oc = ".$cislo_oc;
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $uzje2str=1;
+  }
+
 ?>
 
-<?php if ( $strana != 1 ) { ?>
+<?php if ( $uzje2str == 1 ) { ?>
 <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');"
    title="Prejsù na stranu" class="<?php echo $clas1; ?>">1</a>
 <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');"
    title="Prejsù na stranu" class="<?php echo $clas2; ?>">2</a>
-<?php                     } ?>
+<?php                       } ?>
 </div>
 
 <!-- vyplneny -->
