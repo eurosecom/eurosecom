@@ -1293,10 +1293,10 @@ if( $dajhlaodpad == 1 ) {
   <option value="18">batérie auto</option>
   <option value="19">pneumatiky</option>
   <option value="20">oleje</option>
-  <option value="21">sklo tovar</option>
-  <option value="22">viacvrst.mat.</option>
-  <option value="23">papier tovar</option>
-  <option value="24">plasty tovar</option>
+  <option value="21">sklo neobal</option>
+  <option value="22">viacvr.mat.neobal</option>
+  <option value="23">papier neobal</option>
+  <option value="24">plast neobal</option>
   <option value="25">elektroz. tr5 svietidlá</option>
  </select>
 </div>
