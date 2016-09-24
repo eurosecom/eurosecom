@@ -2552,6 +2552,12 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET er1=10 WHERE kvsdn = 0 AND kvzdn != 0 AND kvodd != 'A2' ";
 $oznac = mysql_query("$sqtoz");
 
+
+//odber.faktura v A2 nema icdph
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET er1=11 WHERE kvodd = 'A2' AND kvicd = '' AND psys = 15 ";
+$oznac = mysql_query("$sqtoz");
+
+
 //rozhranie jednotlivych er1
 //cpl	kvdic	cpid	er1	kvodd	kvicd	kvfak	kvpvf	kvsdn	kvszd	kvzdn	kvzkl	kvodn	kvkodt	kvdtov	kvmnot	kvmerj	kvcobr	
 //er2	er3	er4	zk0	zk1	zk2	dn1	dn2	ume	dat	daz	psys	r01	r02	r03	r04	r05	r06	
@@ -2619,6 +2625,9 @@ if( $j == 0 ) {
 <?php                            } ?>
 <?php if( $hlavicka->er1 == 10 ) { ?>
 <td class="bmenu" colspan="7">Nulový Základ alebo DPH ?!?</td>
+<?php                            } ?>
+<?php if( $hlavicka->er1 == 11 ) { ?>
+<td class="bmenu" colspan="7">Faktúra z oddielu A2 nemá ièDPH</td>
 <?php                            } ?>
 <td class="bmenu" colspan="1" align="right"></td>
 </tr>
