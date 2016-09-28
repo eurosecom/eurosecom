@@ -1,6 +1,6 @@
 <HTML>
 <?php
-//VYHODNOTENIE UHRAD ZA DEALEROV ALCHEM "HNOJIVA" 2016
+//VYHODNOTENIE UHRAD ZA DEALEROV ALCHEM "HNOJIVA" 2015
 $sys = 'UCT';
 $urov = 1000;
 $analyzy = 1*$_REQUEST['analyzy']; 
@@ -56,16 +56,7 @@ $kurz12 = $fir_kurz12;
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
-
-$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-
- $outfilexdel="../tmp/saldo_".$kli_uzid."_*.*";
- foreach (glob("$outfilexdel") as $filename) {
-    unlink($filename);
- }
-
-$outfilex="../tmp/saldo_".$kli_uzid."_".$hhmmss.".pdf";
-if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+if (File_Exists ("../tmp/saldo.$kli_uzid.pdf")) { $soubor = unlink("../tmp/saldo.$kli_uzid.pdf"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -231,9 +222,9 @@ $uctpol="prsaldoicofaknesp".$kli_uzid;
 }
 //koniec zober vsetky
 
-//ikony JARH,JESH  hnojivá 2016
-//platia èísla faktúr 3268...
-//ikona JSOH – hnojivá odklad 2015, platia èísla 3258...
+//ikony JARH,JESH  hnojivá 2015
+//platia èísla faktúr 3258...
+//ikona JSOH – hnojivá odklad 2014, platia èísla 3248...
 
 
 //zober len faktury
@@ -245,14 +236,14 @@ $oznac = mysql_query("$sqtoz");
 
 if( $h_jar != 3 )
 {
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3268001 AND fak <= 3268999 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3258001 AND fak <= 3258999 ";
 $dsql = mysql_query("$dsqlt");
 
 }
 
 if( $h_jar == 3 )
 {
-$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3258001 AND fak <= 3258999 ";
+$dsqlt = "UPDATE F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid SET pox1=0 WHERE fak >= 3248001 AND fak <= 3248999 ";
 $dsql = mysql_query("$dsqlt");
 
 }
@@ -269,18 +260,18 @@ $dsql = mysql_query("$dsqlt");
 
 if( $h_jar == 1 )
 {
-$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2016-01-01' OR dat > '2016-06-30'";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2015-01-01' OR dat > '2015-06-30'";
 $dsql = mysql_query("$dsqlt");
 }
 if( $h_jar == 2 )
 {
-$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2016-07-01' OR dat > '2016-12-31' OR das > '2017-03-31' ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2015-07-01' OR dat > '2015-12-31' OR das > '2016-03-31' ";
 $dsql = mysql_query("$dsqlt");
 }
 if( $h_jar == 3 )
 {
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2015-01-01' OR dat > '2015-12-31' OR das <= '2016-01-31' ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE dat < '2014-01-01' OR dat > '2014-12-31' OR das <= '2015-01-31' ";
 $dsql = mysql_query("$dsqlt");
 }
 
@@ -523,9 +514,9 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 $pdf->SetRightMargin(10);
 
-if( $h_jar == 1 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JAR 2016","0",0,"L"); }
-if( $h_jar == 2 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JESEÒ 2016","0",0,"L"); }
-if( $h_jar == 3 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JESEÒ 2015 odkladové","0",0,"L"); }
+if( $h_jar == 1 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JAR 2015","0",0,"L"); }
+if( $h_jar == 2 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JESEÒ 2015","0",0,"L"); }
+if( $h_jar == 3 ) { $pdf->Cell(90,5,"Vyhodnotenie predaja HNOJÍV za dealerov - JESEÒ 2014 odkladové","0",0,"L"); }
 
 $pdf->Cell(0,5,"FIR$kli_vxcf $kli_nxcf strana $strana","0",1,"R");
 
@@ -719,13 +710,14 @@ $pdf->Cell(105,5,"Prázdna zostava","0",1,"R");
 }
 
 
-$pdf->Output("$outfilex");
+
+$pdf->Output("../tmp/saldo.$kli_uzid.pdf")
 
 
 ?> 
 
 <script type="text/javascript">
-  var okno = window.open("<?php echo $outfilex; ?>","_self");
+  var okno = window.open("../tmp/saldo.<?php echo $kli_uzid; ?>.pdf","_self");
 </script>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
