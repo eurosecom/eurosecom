@@ -27,6 +27,7 @@ $cislo_dok = 1*$_REQUEST['cislo_dok'];
 $hladaj_uce = 1*$_REQUEST['hladaj_uce'];
 $h_sys = 1*$_REQUEST['h_sys'];
 $h_obdp = 1*$_REQUEST['h_obdp'];
+$docsv = 1*$_REQUEST['docsv'];
 
 $citfir = include("../cis/citaj_fir.php");
 $citfir = include("../cis/citaj_nas.php");
@@ -45,20 +46,36 @@ else
 exit;
 }
 
+
 //tlacove okno
 $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
-if( $copern == 55 )
+if( $copern == 55 AND $docsv == 0 )
 {
 ?>
 <script type="text/javascript">
 if( !confirm ("Chcete za˙Ëtovaù fakt˙ry z podsystÈmu <?php echo $h_sys; ?> Odbyt, fakt˙ry za obdobie <?php echo $h_obdp; ?>.<?php echo $kli_vrok; ?> ?") )
          { window.close();  }
 else
-  var okno = window.open("../faktury/int_fakt.php?copern=56&page=1&h_sys=<?php echo $h_sys; ?>&h_obdp=<?php echo $h_obdp; ?>&drupoh=1&uprav=1","_self");
+  var okno = window.open("../faktury/int_fakt.php?copern=56&page=1&h_sys=<?php echo $h_sys; ?>&h_obdp=<?php echo $h_obdp; ?>&drupoh=1&uprav=1&docsv=0","_self");
+</script>
+
+<?php
+exit;
+}
+
+
+if( $copern == 55 AND $docsv == 1 )
+{
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete exportovaù odberateæskÈ fakt˙ry za obdobie <?php echo $h_obdp; ?>.<?php echo $kli_vrok; ?> do CSV ?") )
+         { window.close();  }
+else
+  var okno = window.open("../faktury/int_fakt.php?copern=56&page=1&h_sys=<?php echo $h_sys; ?>&h_obdp=<?php echo $h_obdp; ?>&drupoh=1&uprav=1&docsv=1","_self");
 </script>
 
 <?php
@@ -246,6 +263,21 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctodb".$kli_uzid." ".
 $dsql = mysql_query("$dsqlt");
 
 
+
+//export do csv
+if( $docsv == 1 )
+{
+?>
+<script type="text/javascript">
+    window.open('int_faktdocsv.php?copern=1&drupoh=1&page=1&page=1&tlacitR=1', '_self' );
+</script>
+<?php
+exit;
+}
+?>
+
+
+
 //daj to do rozuctovania
 
 $dsqlt = "DELETE FROM F$kli_vxcf"."_uctodb WHERE poh=$pohcis ";
@@ -426,6 +458,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctdod".$kli_uzid." ".
 " WHERE dn1 != 0 GROUP BY dok ";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
+
 
 //daj to do rozuctovania
 

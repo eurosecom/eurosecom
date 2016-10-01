@@ -63,6 +63,10 @@ if (!$vysledok):
 $vtvskl = include("../sklad/vtvskl.php");
 endif;
 
+$pole = explode(".", $kli_vume);
+$kli_vmes=$pole[0];
+$kli_vrok=$pole[1];
+
 //datove struktury mes.vykaz dph
 $sql = "SELECT prx6 FROM F$kli_vxcf"."_uctvykdpha2new ";
 $vysledok = mysql_query($sql);
@@ -1442,6 +1446,15 @@ if( $fir_xfa01 == 2 )
     }
 <?php                       } ?>
 
+
+function ExportFakturyCsv()
+                {
+
+window.open('../faktury/int_fakt.php?copern=55&page=1&h_sys=85&h_obdp=<?php echo $kli_vmes; ?>&drupoh=1&uprav=1&docsv=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+
   </script>
 </HEAD>
 <BODY class="white" onload="ObnovUI(); VyberVstup();" >
@@ -1855,6 +1868,19 @@ if ( $drupoh == 2 )
 <td class="hmenu">
 <a href="#" onClick="window.open('vstf_importfakxml.php?copern=1&drupoh=<?php echo $drupoh;?>&page=1&cislo_uce=<?php echo $hladaj_uce;?>', '_self' )">
 <img src='../obr/import.png' width=15 height=15 border=0 title="Import XML faktúr" ></a>
+</td>
+<?php
+  }
+?>
+
+
+<?php
+if ( $drupoh == 1 AND $pocstav != 1 )
+  {
+?>
+<td class="hmenu">
+<a href="#" onClick="ExportFakturyCsv();">
+<img src='../obr/export.png' width=15 height=15 border=0 title="Export odberate¾ských faktúr za <?php echo $kli_vume;?> do CSV" ></a>
 </td>
 <?php
   }
