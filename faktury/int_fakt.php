@@ -75,7 +75,7 @@ if( $copern == 55 AND $docsv == 1 )
 if( !confirm ("Chcete exportovaù odberateæskÈ fakt˙ry za obdobie <?php echo $h_obdp; ?>.<?php echo $kli_vrok; ?> do CSV ?") )
          { window.close();  }
 else
-  var okno = window.open("../faktury/int_fakt.php?copern=56&page=1&h_sys=<?php echo $h_sys; ?>&h_obdp=<?php echo $h_obdp; ?>&drupoh=1&uprav=1&docsv=1","_self");
+  var okno = window.open("../faktury/int_fakt.php?copern=56&page=1&h_sys=55&h_obdp=<?php echo $h_obdp; ?>&drupoh=1&uprav=1&docsv=1","_self");
 </script>
 
 <?php

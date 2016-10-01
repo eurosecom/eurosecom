@@ -18,6 +18,9 @@ $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 $kli_vrokx=$kli_vrok-2000;
 
+//datumove funkcie
+$sDat = include("../funkcie/dat_sk_us.php");
+
 $hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
  $outfilexdel="../tmp/uct".$kli_vrokx."".$kli_vmes."_".$kli_uzid."_*.*";
@@ -28,27 +31,105 @@ $hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),
 $outfilex="../tmp/uct".$kli_vrokx."".$kli_vmes."_".$kli_uzid."_".$hhmmss.".csv";
 if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
+//pocet dni v mesiaci
+$pocetdni=31;
+$sqltt = "SELECT * FROM kalendar WHERE ume = $kli_vume ";
+$sql = mysql_query("$sqltt");
+$pocetdni = mysql_num_rows($sql);
+
+
+$denprvy=$kli_vrok."-".$kli_vmes."-01";
+$denposledny=$kli_vrok."-".$kli_vmes."-".$pocetdni;
+
+
 $nazovsuboru=$outfilex;
 $soubor = fopen("$nazovsuboru", "a+");
 
-
-  $text = "101;##########Tabulka F$kli_vxcf"."_ico"."\r\n";
-  fwrite($soubor, $text);
-  $text = "0;ico;dic;icd;nai;na2;uli;psc;mes;tel;fax;em1;em2;em3;www;uc1;nm1;ib1;uc2;nm2;ib2;uc3;nm3;ib3;dns;datm"."\r\n";
-  fwrite($soubor, $text);
-  $vysledok = mysql_query("SELECT * FROM F$kli_vxcf"."_ico ORDER BY ico");
+  $vysledtt = "SELECT * FROM F$kli_vxcf"."_fakodb WHERE dat >= '$denprvy' AND dat <= '$denposledny' ORDER BY dok ";
+  $vysledok = mysql_query("$vysledtt");
   while ($riadok = mysql_fetch_object($vysledok))
   {
-  $text = "1";
+
+$riadok->sys=55;
+
+$datsk=SkDatum($riadok->dat);
+$dazsk=SkDatum($riadok->daz);
+$dassk=SkDatum($riadok->das);
+
   
-  $text = $text.";".$riadok->ico.";".$riadok->dic.";".$riadok->icd.";".$riadok->nai.";".$riadok->na2.";".$riadok->uli.";".$riadok->psc;
-  $text = $text.";".$riadok->mes.";".$riadok->tel.";".$riadok->fax.";".$riadok->em1.";".$riadok->em2.";".$riadok->em3.";".$riadok->www;
-  $text = $text.";".$riadok->uc1.";".$riadok->nm1.";".$riadok->ib1.";".$riadok->uc2.";".$riadok->nm2.";".$riadok->ib2.";".$riadok->uc3;
-  $text = $text.";".$riadok->nm3.";".$riadok->ib3.";".$riadok->dns.";".$riadok->datm;
+  $text = $riadok->uce.";".$riadok->dok.";".$dazsk.";".$riadok->fak;
+  $text = $text.";".$riadok->ico.";".$riadok->ksy.";".$riadok->ssy.";".$dassk;
+  $text = $text.";".$riadok->hod.";".$riadok->pop.";".$riadok->pom.";".$datsk;
+  $text = $text.";".$riadok->ume.";".$riadok->dpr.";".$riadok->hou.";".$riadok->kod;
+  $text = $text.";".$riadok->uhr.";".$riadok->duh.";".$riadok->sys.";".$riadok->zk0;
+  $text = $text.";".$riadok->zk1.";".$riadok->dn1.";".$riadok->zk2.";".$riadok->dn2;
+  $text = $text.";".$riadok->mena.";".$riadok->hodm.";".$riadok->kurz.";".$riadok->sz3;
+  $text = $text.";".$riadok->dav.";".$riadok->kon;
 
   $text = $text."\r\n";
   fwrite($soubor, $text);
+
   }
+
+
+$text = "endodber"."\r\n";
+fwrite($soubor, $text);
+
+$text = "endpohuc"."\r\n";
+fwrite($soubor, $text);
+
+
+$vysledttf = "SELECT * FROM F$kli_vxcf"."_fakodb WHERE dat >= '$denprvy' AND dat <= '$denposledny' ORDER BY dok ";
+$vysledokf = mysql_query("$vysledttf");
+while ($riadokf = mysql_fetch_object($vysledokf))
+{
+
+  $vysledtt = "SELECT * FROM F$kli_vxcf"."_uctodb".$kli_uzid." WHERE dok = $riadokf->dok ORDER BY ico";
+  $vysledok = mysql_query("$vysledtt");
+  while ($riadok = mysql_fetch_object($vysledok))
+  {
+
+$riadok->sys=55;
+  
+  $text = $riadok->dok.";".$riadok->ico.";".$riadok->cpr.";".$riadok->fak;
+  $text = $text.";".$riadok->ucm.";".$riadok->ucd.";".$riadok->hod.";".$riadok->suh;
+  $text = $text.";".$riadok->pop.";".$riadok->str.";".$riadok->zak.";".$riadok->ume;
+  $text = $text.";".$riadok->dat.";".$riadok->rdp.";".$riadok->upl.";".$riadok->zme;
+  $text = $text.";".$riadok->kod.";".$riadok->sys.";".$riadok->kon;
+
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  }
+
+}
+
+
+$text = "enducfak"."\r\n";
+fwrite($soubor, $text);
+
+$vysledttf = "SELECT * FROM F$kli_vxcf"."_fakodb WHERE dat >= '$denprvy' AND dat <= '$denposledny' ORDER BY dok ";
+$vysledokf = mysql_query("$vysledttf");
+while ($riadokf = mysql_fetch_object($vysledokf))
+{
+
+  $vysledok = mysql_query("SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $riadokf->ico ORDER BY ico");
+  while ($riadok = mysql_fetch_object($vysledok))
+  {
+  
+  $text = $riadok->ico.";".$riadok->icd.";".$riadok->nai.";".$riadok->uli.";;";
+  $text = $text.";".$riadok->psc.";".$riadok->mes.";".$riadok->tel.";".$riadok->fax.";".$riadok->kon;
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+  }
+
+}
+
+$text = "endico"."\r\n";
+fwrite($soubor, $text);
+
+$text = "endsklfak"."\r\n";
+fwrite($soubor, $text);
 
 fclose($soubor);
 
