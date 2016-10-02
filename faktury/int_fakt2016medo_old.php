@@ -1,6 +1,7 @@
 <HTML>
 <?php
 
+// prenos do ucta pred zmenou NM do GB ucta
 // celkovy zaciatok dokumentu
        do
        {
@@ -40,9 +41,8 @@ if($urob) { echo "Zaúètovanie faktúr SYS$h_sys v období $kli_vume je zablokované
 
 if( $medo == 1 ) {
 if( $kli_vxcf != 72 AND $kli_vxcf != 73 ) { echo "SYS $h_sys nemôžete prevádza do  FIR $kli_vxcf ."; exit; } 
-if( $kli_vxcf == 72 AND $h_sys == 646 ) { echo "SYS $h_sys nemôžete prevádza do  FIR $kli_vxcf ."; exit; } 
 if( $kli_vxcf == 72 AND $h_sys == 676 ) { echo "SYS $h_sys nemôžete prevádza do  FIR $kli_vxcf ."; exit; } 
-if( $kli_vxcf == 73 AND $h_sys != 646 AND $h_sys != 676 ) { echo "SYS $h_sys nemôžete prevádza do  FIR $kli_vxcf ."; exit; } 
+if( $kli_vxcf == 73 AND $h_sys != 676 ) { echo "SYS $h_sys nemôžete prevádza do  FIR $kli_vxcf ."; exit; } 
                  }
 //$h_sys=74;
 
@@ -88,13 +88,6 @@ $dzk2=55;
 if( $h_sys == 687 ) 
 {
 $uzk2="60217";
-$udn2="34350";
-$udn1="34310";
-$dzk2=55;
-}
-if( $h_sys == 646 ) 
-{
-$uzk2="60219";
 $udn2="34350";
 $udn1="34310";
 $dzk2=55;
@@ -409,7 +402,6 @@ window.open('db_dokladov.php?vloz_dok=' + dok + '&cislo_dok=<?php echo $cislo_do
 if( $copern == 56 AND $medo == 1 )
 {
 $uceodb="31100";
-if( $h_sys == 646 ) $uceodb="31149";
 if( $h_sys == 656 ) $uceodb="31149";
 if( $h_sys == 687 ) $uceodb="31147";
 if( $h_sys == 606 ) $uceodb="31144";

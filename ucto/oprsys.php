@@ -2276,6 +2276,7 @@ if($urob) { $blok675=" - BLOKOVANÉ"; }
 <?php if( $medo == 1 AND $kli_vrok == 2016 ) { ?>
 <?php
 $blok606="";
+$blok646="";
 $blok656="";
 $blok687="";
 $blok676="";
@@ -2283,6 +2284,10 @@ $blok676="";
 $sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak606_".$h_obdp." ";
 $urob = mysql_query("$sql");
 if($urob) { $blok606=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak646_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok646=" - BLOKOVANÉ"; }
 
 $sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak656_".$h_obdp." ";
 $urob = mysql_query("$sql");
@@ -2298,6 +2303,7 @@ if($urob) { $blok676=" - BLOKOVANÉ"; }
 ?>
 
 <option value="606" >SYS 606 Ubytovanie <?php echo $blok606;?></option>
+<option value="646" >SYS 646 FastFood NM GastroBENE <?php echo $blok646;?></option>
 <option value="656" >SYS 656 FastFood NM <?php echo $blok656;?></option>
 <option value="687" >SYS 687 ZK Vrbové <?php echo $blok687;?></option>
 <option value="676" >SYS 676 GastroBENE <?php echo $blok676;?></option>
