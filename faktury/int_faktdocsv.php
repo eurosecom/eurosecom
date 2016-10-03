@@ -117,7 +117,7 @@ while ($riadokf = mysql_fetch_object($vysledokf))
   while ($riadok = mysql_fetch_object($vysledok))
   {
   
-  $text = $riadok->ico.";".$riadok->icd.";".$riadok->nai.";".$riadok->uli.";;";
+  $text = $riadok->ico.";".$riadok->icd.";".$riadok->nai.";".$riadok->uli.";";
   $text = $text.";".$riadok->psc.";".$riadok->mes.";".$riadok->tel.";".$riadok->fax.";".$riadok->kon;
   $text = $text."\r\n";
   fwrite($soubor, $text);
