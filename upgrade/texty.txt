@@ -1,3 +1,35 @@
+5.10.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO aktivácia programu odmeòovania za hnojivá Alchem 2016
+- FAKT export odberate¾ských faktúr z odbytu do CSV súboru so štruktúrou pre naèítanie 
+  externých odberate¾ských faktúr
+- UCTO Medo s.r.o. nastavenie prenosu faktúr firmy 646 do firmy 73
+- CIS èíselník klientov a užívate¾ov po zmene na oddelených databázach kopíruj do 2017, 2018, 2019 databázy z hlavnej 2016
+- MZDY dochádzka odstránenie diakritiky z predmetu mailu
+
+27.9.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO Hlásenie odpad - premenovanie názvy komodít
+- UCTO KVDPH upozornenie Faktúra z oddielu A2 nemá ièDPH
+
+16.9.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO automatické naèítanie SEPA XML bankovéhpo výpisu, ak je ksy 0038 neh¾adaj ièo ale úètuj mzdy
+- FAKT tlaè riadku "K úhrade zostáva" hrubo a rovnakou ve¾kosou ako riadok "Celkom hodnota Eur"
+- MZDY evidenèný list dôchodkového na 2 strany
+
+9.9.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO zmena výkazu FIN 604, pridaný riadok
+- FAKT upravené naèítanie dodávate¾skej faktúry z XML súboru 
+
+5.9.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO Poliklinika Se oprava výkazu NZCIS presun zo ståpca 14 do 15
+- FAK názov za iÈO 31355161 sa nezmestí ani do nai a na2, natvrdo vypísaný na faktúre
+- MZDY zostava zložiek odstránená strana so zamestnancami èo nastúpili v mesiaci
+- UCTO robot menu odkaz na novú Súvahu a VZaS
+
+22.8.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO úprava sadokontnej zostavy UHR, pod¾a nastavenia obdobi do Všetko, 01.2016, 02.2016..... RAMEX úprava
+- verzia 2016_09 
+- CIS kalendár soboty a nedele 1 až 3.2017
+
 15.8.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - UCTO import XML faktúr z QR kódu v androide
 - nové oddelenie databáz - vytvorenie databázy 2017 v èíselníku firiem ak uzall >= 100000
