@@ -250,7 +250,7 @@ if( $mail == 1 ) {
 
 if( $drupoh == 1 )
 {
-$predmet="Žiados o dovolenku ".$dat_dat;
+$predmet="Ziadost o dovolenku ".$dat_dat;
 $text=$riadok->prie." ".$riadok->meno." osè.".$riadok->oc."\n";
 $text=$text.$riadok->stz." ".$riadok->nst." "."\n\n";
 $text=$text."Žiadam o dovolenku na zotavenie za kalendárny rok ".$kli_vrok."\n";
@@ -260,7 +260,7 @@ $hlavicky="";
 }
 if( $drupoh == 2 OR $drupoh == 4 )
 {
-$predmet="Žiados o priepustku ".$dat_dat;
+$predmet="Ziadost o priepustku ".$dat_dat;
 $text=$riadok->prie." ".$riadok->meno." osè.".$riadok->oc."\n";
 $text=$text.$riadok->stz." ".$riadok->nst." "."\n\n";
 $text=$text."Žiadam o priepustku zo zamestnania ".$riadok->hodxb." hodín na deò ".$daod_sk."\n";
@@ -268,7 +268,7 @@ $hlavicky="";
 }
 if( $drupoh == 3 )
 {
-$predmet="Žiados o pracovné vo¾no ".$dat_dat;
+$predmet="Ziadost o pracovne volno ".$dat_dat;
 $text=$riadok->prie." ".$riadok->meno." osè.".$riadok->oc."\n";
 $text=$text.$riadok->stz." ".$riadok->nst." "."\n\n";
 $text=$text."Žiadam o pracovné vo¾no ".$riadok->hodxb." hodín na deò ".$daod_sk."\n";
