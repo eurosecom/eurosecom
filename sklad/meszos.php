@@ -109,6 +109,18 @@ $dsqlt = "UPDATE F$kli_vxcf"."_sklfak,F$kli_vxcf"."_sklzaspriemer SET F$kli_vxcf
 " WHERE F$kli_vxcf"."_sklfak.cis=F$kli_vxcf"."_sklzaspriemer.cis AND F$kli_vxcf"."_sklfak.cen=0 ";
 $dsql = mysql_query("$dsqlt");
 
+
+//prerob vydajne ceny ploty skala
+if( $kli_vxcf == 268616861686 )
+  {
+//echo "idem";
+$dsqlt = "UPDATE F$kli_vxcf"."_sklvyd,F$kli_vxcf"."_sklzaspriemer SET F$kli_vxcf"."_sklvyd.cen=F$kli_vxcf"."_sklzaspriemer.cen ".
+" WHERE F$kli_vxcf"."_sklvyd.cis=F$kli_vxcf"."_sklzaspriemer.cis AND F$kli_vxcf"."_sklvyd.cen=0 ";
+$dsql = mysql_query("$dsqlt");
+
+  }
+
+
 if( $tvpolxc > 0 )
   {
 $dsqlt = "DROP TABLE F$kli_vxcf"."_sklzaspriemer ";

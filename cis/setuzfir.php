@@ -24,7 +24,18 @@ require_once("../pswd/password.php");
   mysql_select_db($mysqldb);
 
 $mysqldbfir="";
-$dtb2 = include("oddel_dtbm1.php");
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+$dtb2 = include("../cis/oddel_dtbm1new.php");
+          }
+else
+          {
+$dtb2 = include("../cis/oddel_dtbm1.php");
+          }
+
+$newdelenie=0;
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
+$kopiruj=0;
 
 //Tabulka firuz
 $sql = "SELECT * FROM $mysqldbfir.firuz ";
@@ -56,6 +67,7 @@ if ( $copern == 316 )
 $cplf = 1*strip_tags($_REQUEST['cplf']);
 $zmazane = mysql_query("DELETE FROM $mysqldbfir.firuz WHERE cplf='$cplf' "); 
 
+$kopiruj=1;
 $copern=1;
 if (!$zmazane):
 ?>
@@ -80,6 +92,7 @@ $ulozttt = "INSERT INTO $mysqldbfir.firuz ( uzid, fiod, fido ) VALUES ( '$uzid',
 $ulozene = mysql_query("$ulozttt"); 
 $copern=308;
 $uprav=0;
+$kopiruj=1;
 
 if (!$ulozene):
 ?>
@@ -91,9 +104,52 @@ $uloz="OK";
 endif;
     }
 //koniec ulozenia 
-
-
 ?> 
+
+
+<?php
+if( $newdelenie == 1 AND $kopiruj == 1 )
+          {
+
+if( $mysqldb2016 != $mysqldb2017 AND $mysqldb2017 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2017."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2017."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2017.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2018 AND $mysqldb2018 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2018."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2018."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2018.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2019 AND $mysqldb2019 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2019."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2019."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2019.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+                                   }
+
+
+          }
+//if( $newdelenie == 1 )
+?>
+
 
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
