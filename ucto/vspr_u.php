@@ -1799,7 +1799,11 @@ if ( $copern != 6 AND $copern != 87 )
 ?>
 <a href="#" onClick="window.open('vspriban_pdf.php?sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>
 &cislo_dok=<?php echo $riadok->dok;?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=12 border=0 title="VytlaËiù doklad s IBAN" >TlaËiù IBAN</a>
+<img src='../obr/tlac.png' width=20 height=12 border=0 title="VytlaËiù doklad s IBAN" >TlaË IBAN</a>
+
+<a href="#" onClick="window.open('vspriban_pdf.php?sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>
+&cislo_dok=<?php echo $riadok->dok;?>&ajtext=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=12 border=0 title="VytlaËiù doklad s IBAN aj doplÚuj˙ci text" ></a>
 
 <?php
      }

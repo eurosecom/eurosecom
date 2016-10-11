@@ -21,6 +21,7 @@ $drupoh = 1*$_REQUEST['drupoh'];
 $cislo_dok = $_REQUEST['cislo_dok'];
 $ajtext = 1*$_REQUEST['ajtext'];
 
+
 $citnas = include("../cis/citaj_nas.php");
 $citfir = include("../cis/citaj_fir.php");
 $mena1 = $fir_mena1;
@@ -30,7 +31,16 @@ $kurz12 = $fir_kurz12;
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
-if ( File_Exists("../tmp/priku$cislo_dok.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/priku$cislo_dok.$kli_uzid.pdf"); }
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/priku_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/priku_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -230,11 +240,11 @@ $pdf->Cell(26,6,"$Hcelkomstrana","0",0,"R");
   }
 //koniec hlavicky
 
-$pdf->Output("../tmp/priku$cislo_dok.$kli_uzid.pdf")
+$pdf->Output("$outfilex");
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/priku<?php echo $cislo_dok; ?>.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
