@@ -19,6 +19,7 @@ require_once("../pswd/password.php");
 $copern = 1*$_REQUEST['copern'];
 $drupoh = 1*$_REQUEST['drupoh'];
 $cislo_dok = $_REQUEST['cislo_dok'];
+//stlpec doplnujuci text
 $ajtext = 1*$_REQUEST['ajtext'];
 
 
@@ -39,12 +40,15 @@ $hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),dat
  }
 
 $outfilex="../tmp/priku_".$kli_uzid."_".$hhmmss.".pdf";
-if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
-
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
-$pdf=new FPDF("P","mm","A4");
+
+if ( $ajtext == 0 ) { $pdf=new FPDF("P","mm", "A4" ); }
+if ( $ajtext == 1 ) { $pdf=new FPDF("L","mm", "A4" ); } 
+
+
 $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 $pdf->AddPage();
@@ -149,15 +153,16 @@ $celkomstrana=$celkomstrana+$rtov->hodm;
 $Cislo=$celkomstrana+"";
 $Hcelkomstrana=sprintf("%0.2f", $Cislo);
 
+
 $twib=trim($rtov->twib);
 
-if ( $twib == '' OR $ajtext == 0 )
+if ( $ajtext == 0 )
      {
 $pdf->Cell(56,6,"$rtov->iban","1",0,"L");$pdf->Cell(26,6,"$rtov->pbic","B",0,"C");$pdf->Cell(26,6,"$rtov->hodm","1",0,"R");
 $pdf->Cell(24,6,"$rtov->vsy","1",0,"C");$pdf->Cell(24,6,"$rtov->ssy","1",0,"C");$pdf->Cell(24,6,"$rtov->ksy","1",1,"C");
      }
 
-if ( $twib != '' AND $ajtext == 1 )
+if ( $ajtext == 1 )
      {
 $pdf->Cell(60,6,"$rtov->iban","1",0,"L");$pdf->Cell(30,6,"$rtov->hodm","1",0,"R");
 $pdf->Cell(30,6,"$rtov->vsy","1",0,"C");$pdf->Cell(30,3,"$rtov->ssy","T",0,"C");$pdf->Cell(30,3,"$rtov->ksy","LTR",1,"C");
@@ -191,6 +196,7 @@ $pdf->Cell(35,6,"Dòa:","0",0,"L");$pdf->Cell(75,6," ","0",0,"R");$pdf->Cell(70,6
 $pdf->Cell(35,6," ","0",0,"L");$pdf->Cell(75,6," ","0",0,"R");$pdf->Cell(70,6,"podpis,peèiatka príkazcu","T",1,"C");
 
 $koniec=270;
+if ( $ajtext == 1 ) { $koniec=170; }
 $pdf->SetY($koniec);
 $pdf->Line(15, $koniec, 195, $koniec); 
 $pdf->SetY($koniec+2);
@@ -225,6 +231,7 @@ $pdf->Cell(35,6,"Dòa:","0",0,"L");$pdf->Cell(75,6," ","0",0,"R");$pdf->Cell(70,6
 $pdf->Cell(35,6," ","0",0,"L");$pdf->Cell(75,6," ","0",0,"R");$pdf->Cell(70,6,"podpis, peèiatka príkazcu","T",1,"C");
 
 $koniec=270;
+if ( $ajtext == 1 ) { $koniec=170; }
 $pdf->SetY($koniec);
 $pdf->Line(15, $koniec, 195, $koniec); 
 $pdf->SetY($koniec+2);
