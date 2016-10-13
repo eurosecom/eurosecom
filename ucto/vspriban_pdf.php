@@ -45,8 +45,8 @@ if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
      require('../fpdf/fpdf.php');
 
 
-if ( $ajtext == 0 ) { $pdf=new FPDF("P","mm", "A4" ); }
-if ( $ajtext == 1 ) { $pdf=new FPDF("L","mm", "A4" ); } 
+if ( $ajtext == 0 ) { $pdf=new FPDF("P","mm","A4"); }
+if ( $ajtext == 1 ) { $pdf=new FPDF("L","mm","A4"); }
 
 
 $pdf->Open();
@@ -121,34 +121,53 @@ $pdf->SetFont('arial','',10);
 $sety=10;
 $pdf->SetY($sety);
 }
-//nadpis
+//NADPIS
+//nazov banky
 $pdf->SetFont('arial','',14);
 $pdf->Cell(70,6,"$hlavicka->nban","0",0,"L");
+//druh prikazu
+if ( $ajtext == 0 ) { $sirka_nadpis="110"; }
+if ( $ajtext == 1 ) { $sirka_nadpis="0"; }
 $pdf->SetFont('arial','',12);
-if ( $jednapolozka != 1 ) $pdf->Cell(110,5,"Hromadný príkaz na úhradu","0",1,"R");
-if ( $jednapolozka == 1 ) $pdf->Cell(110,5,"Príkaz na úhradu","0",1,"R");
+if ( $jednapolozka != 1 ) $pdf->Cell($sirka_nadpis,5,"Hromadný príkaz na úhradu","0",1,"R");
+if ( $jednapolozka == 1 ) $pdf->Cell($sirka_nadpis,5,"Príkaz na úhradu","0",1,"R");
 $pdf->Cell(70,6," ","0",0,"L");
-if ( $jednapolozka != 1 ) $pdf->Cell(110,5,"Bulk Payment Order","0",1,"R");
-if ( $jednapolozka == 1 ) $pdf->Cell(110,5,"Payment Order","0",1,"R");
+if ( $jednapolozka != 1 ) $pdf->Cell($sirka_nadpis,5,"Bulk Payment Order","0",1,"R");
+if ( $jednapolozka == 1 ) $pdf->Cell($sirka_nadpis,5,"Payment Order","0",1,"R");
 $pdf->SetFont('arial','',9);
 
-//zahlavie
+//ZAHLAVIE
 $pdf->Cell(180,5," ","0",1,"L");
-$pdf->Cell(82,7,"IBAN - BIC platite¾a / Payer´s IBAN - BIC","1",0,"C");$pdf->Cell(26,3.5,"Celková suma","T",0,"C");$pdf->Cell(20,3.5,"Mena","LT",0,"C");$pdf->Cell(28,3.5,"Dátum splatnosti","LTR",1,"C");
+$pdf->Cell(82,7,"IBAN - BIC platite¾a / Payer´s IBAN - BIC","1",0,"C");$pdf->Cell(26,3.5,"Celková suma","T",0,"C");
+$pdf->Cell(20,3.5,"Mena","LT",0,"C");$pdf->Cell(28,3.5,"Dátum splatnosti","LTR",1,"C");
 $pdf->Cell(82,0," ","0",0,"C");$pdf->Cell(26,3.5,"Total Amount","R",0,"C");$pdf->Cell(20,3.5,"Currency ","0",0,"C");$pdf->Cell(28,3.5,"Due Date","LR",1,"C");
 $pdf->SetFont('arial','',10);
 $pdf->Cell(82,7,"$hlavicka->iban - $hlavicka->twib","1",0,"C");$pdf->Cell(26,7," ","1",0,"C");$pdf->Cell(20,7,"$hlavicka->mena","1",0,"C");$pdf->Cell(28,7,"$dat_sk","1",1,"C");
 $pdf->SetFont('arial','',9);
 
-//polozky
+//POLOZKY
 $pdf->Cell(180,3," ","0",1,"L");
-$pdf->Cell(56,7,"IBAN príjemcu / Beneficiary´s IBAN","LTR",0,"C");$pdf->Cell(26,3.5,"BIC príjemcu","RT",0,"C");$pdf->Cell(26,7,"Suma / Amount","LT",0,"C");$pdf->Cell(24,3.5,"Variabilný sym.","LT",0,"C");
+//zahlavie poloziek
+if ( $ajtext == 0 ) {
+$pdf->Cell(56,7,"IBAN príjemcu / Beneficiary´s IBAN","LTR",0,"C");$pdf->Cell(26,3.5,"BIC príjemcu","RT",0,"C");
+$pdf->Cell(26,7,"Suma / Amount","LT",0,"C");$pdf->Cell(24,3.5,"Variabilný sym.","LT",0,"C");
 $pdf->Cell(24,3.5,"Špecifický sym.","LT",0,"C");$pdf->Cell(24,3.5,"Konštantný sym.","LTR",1,"C");
-$pdf->Cell(56,0," ","0",0,"C");$pdf->Cell(26,3.5,"Beneficiary´s BIC","RB",0,"C");$pdf->Cell(26,0," ","0",0,"C");$pdf->Cell(24,3.5,"Variable sym.","L",0,"C");$pdf->Cell(24,3.5,"Specific sym.","L",0,"C");
+$pdf->Cell(56,0," ","0",0,"C");$pdf->Cell(26,3.5,"Beneficiary´s BIC","RB",0,"C");$pdf->Cell(26,0," ","0",0,"C");
+$pdf->Cell(24,3.5,"Variable sym.","L",0,"C");$pdf->Cell(24,3.5,"Specific sym.","L",0,"C");
 $pdf->Cell(24,3.5,"Constant sym.","LR",1,"C");
-
+                    }
+if ( $ajtext == 1 ) {
+$pdf->Cell(53,7,"IBAN príjemcu / Beneficiary´s IBAN","LTRB",0,"C");$pdf->Cell(29,3.5,"BIC príjemcu","RT",0,"C");
+$pdf->Cell(26,7,"Suma / Amount","LTB",0,"C");$pdf->Cell(26,3.5,"Variabilný sym.","LT",0,"C");
+$pdf->Cell(26,3.5,"Špecifický sym.","LT",0,"C");$pdf->Cell(26,3.5,"Konštantný sym.","LTR",0,"C");
+$pdf->Cell(0,7,"Doplòujúci text / Remittance information","LTRB",1,"C");
+$pdf->Cell(180,-3.5," ","0",1,"L");
+$pdf->Cell(53,0," ","0",0,"C");$pdf->Cell(29,3.5,"Beneficiary´s BIC","RB",0,"C");$pdf->Cell(26,0," ","0",0,"C");
+$pdf->Cell(26,3.5,"Variable sym.","LB",0,"C");$pdf->Cell(26,3.5,"Specific sym.","LB",0,"C");
+$pdf->Cell(26,3.5,"Constant sym.","LRB",0,"C");$pdf->Cell(0,0," ","",1,"C");
+$pdf->Cell(180,3.5," ","0",1,"L");
+                    }
 }
-
 $celkomstrana=$celkomstrana+$rtov->hodm;
 $Cislo=$celkomstrana+"";
 $Hcelkomstrana=sprintf("%0.2f", $Cislo);
@@ -164,10 +183,9 @@ $pdf->Cell(24,6,"$rtov->vsy","1",0,"C");$pdf->Cell(24,6,"$rtov->ssy","1",0,"C");
 
 if ( $ajtext == 1 )
      {
-$pdf->Cell(60,6,"$rtov->iban","1",0,"L");$pdf->Cell(30,6,"$rtov->hodm","1",0,"R");
-$pdf->Cell(30,6,"$rtov->vsy","1",0,"C");$pdf->Cell(30,3,"$rtov->ssy","T",0,"C");$pdf->Cell(30,3,"$rtov->ksy","LTR",1,"C");
-$pdf->Cell(40,3," ","0",0,"R");$pdf->Cell(20,3," ","0",0,"R");$pdf->Cell(30,3," ","0",0,"R");$pdf->Cell(30,6," ","0",0,"R");
-$pdf->Cell(60,3,"$twib","RB",1,"L");
+$pdf->Cell(53,6,"$rtov->iban","1",0,"C");$pdf->Cell(29,6,"$rtov->pbic","B",0,"C");$pdf->Cell(26,6,"$rtov->hodm","1",0,"R");
+$pdf->Cell(26,6,"$rtov->vsy","1",0,"C");$pdf->Cell(26,6,"$rtov->ssy","TB",0,"C");$pdf->Cell(26,6,"$rtov->ksy","1",0,"C");
+$pdf->Cell(0,6,"$twib","RB",1,"L");
      }
 
 }
@@ -181,27 +199,35 @@ if ( $j == $polozieknastranu ) { $j=0; }
 
 //popis pod polozkami
 if ( $j == 0 AND $i < $tvpol ) {
+if ( $ajtext == 0 ) {
 $pdf->Cell(56,6," ","LR",0,"R");$pdf->Cell(26,6," ","LR",0,"R");$pdf->Cell(26,6," ","LR",0,"R");
 $pdf->Cell(24,6," ","LR",0,"R");$pdf->Cell(24,6," ","LR",0,"R");$pdf->Cell(24,6," ","LR",1,"R");
-
 $pdf->Cell(56,6," ","LRB",0,"R");$pdf->Cell(26,6," ","LRB",0,"R");$pdf->Cell(26,6," ","LRB",0,"R");
 $pdf->Cell(24,6," ","LRB",0,"R");$pdf->Cell(24,6," ","LRB",0,"R");$pdf->Cell(24,6," ","LRB",1,"R");
-
+                    }
+if ( $ajtext == 1 ) {
+$pdf->Cell(53,12," ","LRB",0,"R");$pdf->Cell(29,12," ","LRB",0,"R");$pdf->Cell(26,12," ","LRB",0,"R");
+$pdf->Cell(26,12," ","LRB",0,"R");$pdf->Cell(26,12," ","LRB",0,"R");$pdf->Cell(26,12," ","LRB",0,"R");
+$pdf->Cell(0,12," ","LRB",1,"R");
+                    }
 $pdf->Cell(35,6," ","0",1,"R");
 $pdf->Cell(35,6,"Doruèil:","0",1,"L");
 if ( $sekov == 1 ) {
 $pdf->Cell(35,6,"Miesto: $fir_fmes","0",0,"L");$pdf->Cell(75,6," ","0",0,"L");$pdf->Cell(70,6," ","0",1,"R");
                    }
 $pdf->Cell(35,6,"Dòa:","0",0,"L");$pdf->Cell(75,6," ","0",0,"R");$pdf->Cell(70,6," ","0",1,"R");
-$pdf->Cell(35,6," ","0",0,"L");$pdf->Cell(75,6," ","0",0,"R");$pdf->Cell(70,6,"podpis,peèiatka príkazcu","T",1,"C");
+//podpis,peciatka
+if ( $ajtext == 0 ) { $medzera="75"; }
+if ( $ajtext == 1 ) { $medzera="155"; }
+$pdf->Cell(35,6," ","0",0,"L");$pdf->Cell($medzera,6," ","0",0,"R");$pdf->Cell(70,6,"podpis,peèiatka príkazcu","T",1,"C");
 
 $koniec=270;
-if ( $ajtext == 1 ) { $koniec=170; }
+if ( $ajtext == 1 ) { $koniec=180; }
 $pdf->SetY($koniec);
-$pdf->Line(15, $koniec, 195, $koniec); 
+$pdf->Line(15, $koniec, 195, $koniec);
 $pdf->SetY($koniec+2);
 $pdf->SetFont('arial','',6);
-$pdf->Cell(180,3,"Vystavil(a): $hlavicka->meno $hlavicka->priezvisko / $hlavicka->id ","0",1,"L");
+$pdf->Cell(180,3,"Vystavil(a): $hlavicka->meno $hlavicka->priezvisko / $hlavicka->id","0",1,"L");
 
 $sumary=33;
 $sumarx=87;
