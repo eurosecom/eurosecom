@@ -235,7 +235,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " uceb,numb,vsy,ksy,ssy,".
 " 0,0,'',trx4,trx3,5".
 " FROM F$kli_vxcf"."_mzdzaltrn".
-" WHERE ume = $kli_vume AND uceb != '' AND numb != '0000' AND kc > 0 $podmexe ".
+" WHERE ume = $kli_vume AND trx4 != '' AND trx4 != '0' AND kc > 0 $podmexe ".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
@@ -253,7 +253,50 @@ if( $alchem == 1 )
      {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET twib='mzdy' WHERE oc > 0 ";
 $oznac = mysql_query("$sqtoz");
+     }
+
+$textoc=0;
+if( $_SERVER['SERVER_NAME'] == "www.medosro.sk" ) { $textoc=0; }
+if( $textoc == 1 )
+     {
+
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE oc > 0 ORDER BY oc ";
+$sql = mysql_query("$sqlttt");
+$cpol = mysql_num_rows($sql);
+$i=0;
+
+while ($i <= $cpol )
+{
+  if (@$zaznam=mysql_data_seek($sql,$i))
+    {
+  $riadok=mysql_fetch_object($sql);
+
+
+$textmzdy="mzda";
+$sqltt2 = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $riadok->oc ORDER BY oc DESC LIMIT 1"; 
+$sqldo2 = mysql_query("$sqltt2");
+ if (@$zaznam=mysql_data_seek($sqldo2,0))
+ {
+ $riaddo2=mysql_fetch_object($sqldo2);
+ $textmzdy="mzda ".$riaddo2->prie." ".$riaddo2->meno;
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET twib='$textmzdy' WHERE oc = $riaddo2->oc ";
+$oznac = mysql_query("$sqtoz");
+
+ }
+
+
+
     }
+$i=$i+1;
+}
+
+
+
+     }
+//koniec textoc = 1
+
+//exit;
 
 
 $wyplmiesto = 1*$_REQUEST['wyplmiesto'];
