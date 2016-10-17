@@ -1398,7 +1398,7 @@ if( $kli_vrok < 2013 ) { $jedrok=""; }
 //if( $_SERVER['SERVER_NAME'] == "localhost" ) { $jedrok="2013"; }
 ?>
 
-<table class="vstup" width="100%" >
+<table class="vstup" width="100%" style="display:none;">
 <td class="bmenu" width="2%">
 <a href="#" onClick="window.open('../ucto/vprivyd<?php echo $jedrok; ?>.php?copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi vo formáte PDF v eurocentoch" ></a>
@@ -1411,7 +1411,7 @@ if( $kli_vrok < 2013 ) { $jedrok=""; }
 </tr>
 </table>
 
-<table class="vstup" width="100%" >
+<table class="vstup" width="100%" style="display:none;">
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="window.open('../ucto/vmajzav<?php echo $jedrok; ?>.php?copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
