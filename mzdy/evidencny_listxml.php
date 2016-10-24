@@ -305,7 +305,15 @@ if( $hlavicka->oprav == 1 ) { $opravx="1"; }
   $dan=SkDatum($hlavicka->dan);
   $text = "   <datVzniku><![CDATA[".$dan."]]></datVzniku> "."\r\n"; fwrite($soubor, $text);
   $dav=SkDatum($hlavicka->dav);
+
+if( $dav != '00.00.0000' )
+  {
   $text = "   <datZaniku><![CDATA[".$dav."]]></datZaniku> "."\r\n"; fwrite($soubor, $text);
+  }
+if( $dav == '00.00.0000' )
+  {
+  $text = "   <trva>1</trva> "."\r\n"; fwrite($soubor, $text);
+  }
   $text = " </poistVztah> "."\r\n";
   fwrite($soubor, $text);
 
