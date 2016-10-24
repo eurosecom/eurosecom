@@ -614,9 +614,7 @@ $pdf->Cell(15,4,"$rtov->ume","0",0,"R");$pdf->Cell(20,4,"$rtov->dok","0",0,"R");
 $pdf->Cell(10,4,"$pospl","0",0,"R");
 
 $odkaz="../ucto/saldo_htm.php?copern=12&h_uce=".$rtov->uce."&h_ico=".$rtov->ico."&h_obd=0&cislo_fak=".$rtov->fak."&drupoh=1&ajspat=1";
-if( $_SESSION['chrome'] == 1 ) {
-$odkaz=$_SERVER['SERVER_NAME']."/ucto/saldo_htm.php?copern=12&h_uce=".$rtov->uce."&h_ico=".$rtov->ico."&h_obd=0&cislo_fak=".$rtov->fak."&drupoh=1&ajspat=1";
-                               }
+
 
 $pdf->Cell(20,4,"$rtov->fak","0",0,"R",0,$odkaz);
 $pdf->Cell(25,4,"$rtov->hod","0",0,"R");$pdf->Cell(25,4,"$rtov->uhr","0",0,"R");$pdf->Cell(0,4,"$rtov->zos","0",1,"R");
@@ -919,10 +917,8 @@ $pdf->Cell(90,4,"IÈO: $rtov->ico, $rtov->nai, $rtov->mes","0",0,"L");
 $pdf->Cell(15,4,"$rtov->ume","0",0,"R");$pdf->Cell(20,4,"$rtov->dok","0",0,"R");$pdf->Cell(20,4,"$dat_sk","0",0,"L");$pdf->Cell(20,4,"$das_sk","0",0,"L");
 $pdf->Cell(10,4,"$pospl","0",0,"R");
 
-$odkaz="../ucto/saldo_htm.php?copern=12&h_uce=".$rtov->uce."&h_ico=".$rtov->ico."&h_obd=0&cislo_fak=".$rtov->fak."&drupoh=1&ajspat=1";
-if( $_SESSION['chrome'] == 1 ) {
-$odkaz=$_SERVER['SERVER_NAME']."/ucto/saldo_htm.php?copern=12&h_uce=".$rtov->uce."&h_ico=".$rtov->ico."&h_obd=0&cislo_fak=".$rtov->fak."&drupoh=1&ajspat=1";
-                               }
+$odkaz="../ucto/saldo_htm.php?copern=12&h_uce=".$rtov->uce."&h_ico=".$rtov->ico."&h_obd=0&cislo_fak=".$rtov->fak."&drupoh=1&ajspat=1&pdfx=$outfilex";
+
 
 $pdf->Cell(20,4,"$rtov->fak","0",0,"R",0,$odkaz);
 $pdf->Cell(25,4,"$rtov->hod","0",0,"R");$pdf->Cell(25,4,"$rtov->uhr","0",0,"R");$pdf->Cell(0,4,"$rtov->zos","0",1,"R");

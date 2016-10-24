@@ -447,6 +447,10 @@ if (File_Exists ("../tmp/dsaldo.$kli_uzid.pdf")) { $soubor = unlink("../tmp/dsal
 $ajspat = 1*$_REQUEST['ajspat'];
 if( $ajspat == 1 ) {
 
+$pdfx = $_REQUEST['pdfx'];
+//echo $pdfx;
+//exit;
+
 if (File_Exists ("../tmp/dsaldo.$cislo_fak.$kli_uzid.pdf")) { $soubor = unlink("../tmp/dsaldo.$cislo_fak.$kli_uzid.pdf"); }
                    }
 
@@ -1952,10 +1956,7 @@ $pdf->SetRightMargin(10);
 if( $vsetko == 1 ) { $pdf->Cell(90,5,"Saldokonto za fakt˙ru $cislo_fak","LTB",0,"L"); }
 if( $ajspat == 1 ) { 
 
-$odkaz="../tmp/saldo.".$kli_uzid.".pdf";
-if( $_SESSION['chrome'] == 1 ) {
-$odkaz=$_SERVER['SERVER_NAME']."/tmp/saldo.".$kli_uzid.".pdf";
-                               }
+$odkaz = $pdfx;
 
 $pdf->Cell(20,5,"Sp‰ù","TB",0,"L",0,$odkaz); }
 
