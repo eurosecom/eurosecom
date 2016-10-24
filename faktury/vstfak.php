@@ -2392,7 +2392,7 @@ if( $sys != 'DOP' AND $sysx != 'UCT' )
 {
 if( $copern == 1 ) { 
 $zmenume=1; 
-$odkaz="../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=$vyroba&copern=1&drupoh=$drupoh&page=1&sysx=$sysx&hladaj_uce=$hladaj_uce&rozuct=$rozuct"; 
+$odkaz="../faktury/vstfak.php?regpok=$regpok&vyroba=$vyroba&copern=1&drupoh=$drupoh&page=1&sysx=$sysx&hladaj_uce=$hladaj_uce&rozuct=$rozuct"; 
                    }
 
 $cislista = include("fak_lista.php");
