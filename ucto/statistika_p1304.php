@@ -1313,7 +1313,7 @@ $source="statistika_p1304.php?";
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <h6 class="toleft" style="margin-left:580px; padding-right:5px;">Archív:</h6>
+ <h6 class="toleft" style="margin-left:550px; padding-right:5px;">Archív:</h6>
 <?php
 $tvpol=0;
 $sqltt = "SELECT * FROM F".$kli_vxcf."_statistika_p1304arch WHERE psys >= 1 ";
