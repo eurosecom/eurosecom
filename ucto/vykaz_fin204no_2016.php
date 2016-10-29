@@ -205,6 +205,9 @@ $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '415', '42'
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '421', '43' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '423', '43' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '427', '43' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '428', '43' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '429', '43' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '431', '43' ); "; $ulozene = mysql_query("$sqult");
 
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '323', '45' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204no ( uce,crs ) VALUES ( '451', '45' ); "; $ulozene = mysql_query("$sqult");
@@ -1114,8 +1117,6 @@ $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid,F$kli_vxcf"."_genfin204no".
 $oznac = mysql_query("$sqtoz");
 
 
-//exit;
-
 //korekcia
 $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid".
 " SET kor=1".
@@ -1148,12 +1149,7 @@ $vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,1) = 8
 $vytvor = mysql_query("$vsql");
 $vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,1) = 9 ";
 $vytvor = mysql_query("$vsql");
-$vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,3) = 428 ";
-$vytvor = mysql_query("$vsql");
-$vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,3) = 429 ";
-$vytvor = mysql_query("$vsql");
-$vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,3) = 431 ";
-$vytvor = mysql_query("$vsql");
+
 
 //generovane sumarne riadky
 $vsql = "INSERT INTO F".$kli_vxcf."_prcfinneg".$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctprcvykaz$kli_uzid ".

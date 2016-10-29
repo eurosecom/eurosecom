@@ -231,6 +231,9 @@ $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '421', '47
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '422', '47' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '423', '47' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '427', '47' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '428', '47' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '429', '47' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '431', '47' ); "; $ulozene = mysql_query("$sqult");
 
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '323', '49' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin204pod ( uce,crs ) VALUES ( '451', '49' ); "; $ulozene = mysql_query("$sqult");
@@ -1192,12 +1195,7 @@ $vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,1) = 8
 $vytvor = mysql_query("$vsql");
 $vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,1) = 9 ";
 $vytvor = mysql_query("$vsql");
-$vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,3) = 428 ";
-$vytvor = mysql_query("$vsql");
-$vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,3) = 429 ";
-$vytvor = mysql_query("$vsql");
-$vsql = "DELETE FROM F".$kli_vxcf."_prcfinneg".$kli_uzid." WHERE LEFT(uce,3) = 431 ";
-$vytvor = mysql_query("$vsql");
+
 
 //generovane sumarne riadky
 $vsql = "INSERT INTO F".$kli_vxcf."_prcfinneg".$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctprcvykaz$kli_uzid ".
