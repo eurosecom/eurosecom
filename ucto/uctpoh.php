@@ -234,7 +234,7 @@ $cislo_cpoh = strip_tags($_REQUEST['cislo_cpoh']);
 
 ?>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Úètovné pohyby</title>
   <style type="text/css">
