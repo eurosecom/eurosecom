@@ -429,23 +429,48 @@ $sqldok = mysql_query("$sqlttt");
   $riaddok=mysql_fetch_object($sqldok);
   $zaklad2t=1*$riaddok->zaklad2t;
   }
-$zk2=0;
-$sqlttt = "SELECT zk2 FROM F$kli_vxcf"."_fakodb WHERE dok = $cislo_dok ";
+
+$zaklad0s=0;
+$sqlttt = "SELECT SUM(hodb) AS zaklad0s FROM F$kli_vxcf"."_faksluprc$kli_uzid WHERE dok = $cislo_dok AND dph = 0 GROUP BY dok ";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $zaklad0s=1*$riaddok->zaklad0s;
+  }
+$zaklad0t=0;
+$sqlttt = "SELECT SUM(hodb) AS zaklad0t FROM F$kli_vxcf"."_sklfakprc$kli_uzid WHERE dok = $cislo_dok AND dph = 0 GROUP BY dok ";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $zaklad0t=1*$riaddok->zaklad0t;
+  }
+
+
+$zk2=0; $zk0=0;
+$sqlttt = "SELECT zk0, zk2 FROM F$kli_vxcf"."_fakodb WHERE dok = $cislo_dok ";
 $sqldok = mysql_query("$sqlttt");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
   $zk2=1*$riaddok->zk2;
+  $zk0=1*$riaddok->zk0;
   }
 
-if( $kli_uzid == 171717171717 )
+if( $kli_uzid == 383838838383838 )
 {
-//echo $zaklad2s." ".$zaklad2t." ".$zk2;
+//echo $zaklad0s." ".$zaklad0t." ".$zk0;
 //exit;
 }
 $rozdiel=$zk2-$zaklads2-$zakladt2;
 
 $sqlttt = "UPDATE F$kli_vxcf"."_fakodb SET zk2=($zaklad2s+$zaklad2t)  WHERE dok = $cislo_dok ";
+if( $rozdiel != 0 ) { $sqldok = mysql_query("$sqlttt"); }
+
+$rozdiel=$zk0-$zaklads0-$zakladt0;
+
+$sqlttt = "UPDATE F$kli_vxcf"."_fakodb SET zk0=($zaklad0s+$zaklad0t)  WHERE dok = $cislo_dok ";
 if( $rozdiel != 0 ) { $sqldok = mysql_query("$sqlttt"); }
      }
 
