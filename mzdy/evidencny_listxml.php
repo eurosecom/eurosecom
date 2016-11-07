@@ -1,9 +1,8 @@
 <HTML>
 <?php
-
 do
 {
-$sys = 'UCT';
+$sys = 'MZD';
 $urov = 1000;
 $copern = $_REQUEST['copern'];
 $drupoh = $_REQUEST['drupoh'];
