@@ -256,7 +256,7 @@ $oznac = mysql_query("$sqtoz");
      }
 
 $textoc=0;
-if( $_SERVER['SERVER_NAME'] == "www.medosro.sk" ) { $textoc=0; }
+if( $_SERVER['SERVER_NAME'] == "www.medosro.sk" ) { $textoc=1; }
 if( $textoc == 1 )
      {
 
