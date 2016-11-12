@@ -358,6 +358,11 @@ $kli_vmcf=$fir_allx11;
 if ( $minuly == 0 ) { $kli_mrok=$kli_vrok; $kli_vmcf=$kli_vxcf; }
 
 $databaza="";
+$newdelenie=0;
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
+
+if ( $newdelenie == 0 ) 
+          {
 if ( $minuly == 1 AND $kli_vrok > 2010 )
 {
 if ( File_Exists("../pswd/oddelena2010db2011.php") ) { $databaza=$mysqldb2010."."; }
@@ -382,7 +387,22 @@ if ( $minuly == 1 AND $kli_vrok > 2015 )
 {
 if ( File_Exists("../pswd/oddelena2015db2016.php") ) { $databaza=$mysqldb2015."."; }
 }
-//echo $minuly;
+          }
+
+if ( $newdelenie == 1 ) 
+          {
+if ( $minuly == 1 )
+  {
+
+$dtb2 = include("../cis/oddel_dtbz1.php");
+
+  }
+          }
+
+
+//echo "minuly ".$minuly." databaza ".$databaza;
+//exit;
+
 
 //bezny rok
 
