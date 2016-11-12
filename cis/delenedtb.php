@@ -287,6 +287,8 @@ $db2017 = strip_tags($_REQUEST['db2017']);
 $db2018 = strip_tags($_REQUEST['db2018']);
 $db2019 = strip_tags($_REQUEST['db2019']);
 $dbmain = strip_tags($_REQUEST['dbmain']);
+//dbmain musi byt 2016, tam je original fir a klienti
+$dbmain = "2016";
 
 $upravttt = "UPDATE ".$mysqldb2016.".dtbset SET ".
 " db2010='$db2010', db2011='$db2011', db2012='$db2012', db2013='$db2013', db2014='$db2014', db2015='$db2015', ".
@@ -442,7 +444,7 @@ if ( $copern == 2 )
 <td class="bmenu" colspan="1">Main DB</td>
 <td class="fmenu" colspan="2"><input type="text" name="dbmain" id="dbmain" size="20"/> 
 
-<img border=0 src='../obr/vlozit.png' style='width:14px; height:14px;' onClick="VytvorMain();" title='Založi Main DB databázu, musí by vytvorená v phpMyadmin' ></td></tr>  
+<img border=0 src='../obr/vlozit.png' style='width:14px; height:14px;' onClick="VytvorMain();" title='Main DB musí by stále 2016. Len pri založení treba vloži rok, ktorý sa zakladá. Zakladaná databáza, musí by vytvorená v phpMyadmin' ></td></tr>  
 
 </td>
 </tr>
