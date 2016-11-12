@@ -407,11 +407,29 @@ if ( $obdobie == 2 ) { $kli_vrokxx=$kli_vrok-1; }
 if ( $obdobie == 3 ) { $kli_vrokxx=$kli_vrok-2; }
 
 $databaza="";
+$newdelenie=0;
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
+
+if ( $newdelenie == 0 ) 
+          {
 if ( $kli_vrokxx == 2011 ) { if ( File_Exists("../pswd/oddelena2011db2012.php") ) { $databaza=$mysqldb2011."."; } }
 if ( $kli_vrokxx == 2012 ) { if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2012."."; } }
 if ( $kli_vrokxx == 2013 ) { if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; } }
 if ( $kli_vrokxx == 2014 ) { if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; } }
 if ( $kli_vrokxx == 2015 ) { if ( File_Exists("../pswd/oddelena2015db2016.php") ) { $databaza=$mysqldb2015."."; } }
+          }
+
+if ( $newdelenie == 1 ) 
+          {
+$kli_vrokuloz=$kli_vrok;
+$kli_vrok=$kli_vrokxx;
+$dtb2 = include("../cis/oddel_dtbz2.php");
+$kli_vrok=$kli_vrokuloz;
+          }
+
+//echo "databak".$databaza;
+//exit;
+
 
 //zober data z kun
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplx".$kli_uzid.
@@ -623,6 +641,11 @@ $vytvor = mysql_query("$vsql");
 
 
 $databaza=""; $databazamin=""; $databazamin2=""; 
+$newdelenie=0;
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
+
+if ( $newdelenie == 0 ) 
+          {
 if( $kli_vrok == 2014 ) 
 { 
 if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databazamin=$mysqldb2013."."; }
@@ -638,6 +661,29 @@ if( $kli_vrok == 2016 )
 if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databazamin=$mysqldb2015."."; }
 if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databazamin2=$mysqldb2014."."; } 
 }
+          }
+
+if ( $newdelenie == 1 ) 
+          {
+$kli_vrokuloz=$kli_vrok;
+$kli_vrok=$kli_vrok-1;
+$dtb2 = include("../cis/oddel_dtbz2.php");
+$databazamin=$databaza;
+$kli_vrok=$kli_vrokuloz;
+
+$kli_vrokuloz=$kli_vrok;
+$kli_vrok=$kli_vrok-2;
+$dtb2 = include("../cis/oddel_dtbz2.php");
+$databazamin2=$databaza;
+$kli_vrok=$kli_vrokuloz;
+
+$databaza="";
+          }
+
+//echo "databak ".$databaza."databam ".$databazamin."databam2 ".$databazamin2;
+//exit;
+
+
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplnxx".$kli_uzid.
 " SELECT oc,".
@@ -1845,6 +1891,12 @@ var sirkawic = screen.width-10;
    document.formv1.invalid.checked = false;
    document.formv1.vysdch.checked = false;
   }
+
+  function ZnovuPotvrdenie()
+  {
+  window.open('potvrd_nezd2014.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=26&drupoh=1&page=1&subor=1', '_self');
+  }
+
 </script>
 </HEAD>
 <BODY id="white" onload="ObnovUI();">
@@ -1868,6 +1920,7 @@ if ( $copern == 20 )
    </td>
    <td>
     <div class="bar-btn-form-tool">
+     <img src="../obr/ikony/download_blue_icon.png" onclick="ZnovuPotvrdenie();" title="Naèíta údaje o obdobiach vylúèenia povinnosti plati poistné" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacZiadostRZ();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
    </td>
@@ -2002,10 +2055,23 @@ $fir_allx11 = 1*$fir_riadok->allx11;
 if ( $fir_allx11 > 0 ) { $firm2=$fir_allx11; }
 
 $databaza="";
+$newdelenie=0;
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
+
+if ( $newdelenie == 0 ) 
+          {
 if ( $kli_vrok == 2013 ) { if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2012."."; } }
 if ( $kli_vrok == 2014 ) { if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; } }
 if ( $kli_vrok == 2015 ) { if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; } }
 if ( $kli_vrok == 2016 ) { if ( File_Exists("../pswd/oddelena2015db2016.php") ) { $databaza=$mysqldb2015."."; } }
+          }
+
+if ( $newdelenie == 1 ) 
+          {
+$dtb2 = include("../cis/oddel_dtbz1.php");
+          }
+
+//echo "databak".$databaza;
 
 if ( $firm2 > 0 )
 {
