@@ -1,4 +1,6 @@
 <?php
+//echo "idem";
+
 $kli_vxcfsklx=1*$kli_vxcfskl;
 if( $kli_vxcfsklx == 0 ) { $kli_vxcfskl=$kli_vxcf; }
 

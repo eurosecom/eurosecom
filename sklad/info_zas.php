@@ -50,9 +50,50 @@ $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resiza
 $tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
+//kliknutie na ikonku prepocitaj priemerne ceny
+if( $copern == 1001 ) 
+{ 
+$dsqlt = "DROP TABLE F$kli_vxcf"."_sklzaspriemer ";
+$dsql = mysql_query("$dsqlt");
+$copern=1;
+}
+
+$textpr="";
 //pozri do sklfak a oprav nulove cen
 if( $fir_xsk04 == 1 ) {
 
+
+$novepriemer=0;
+$dsqltt = "SELECT * FROM F$kli_vxcf"."_sklzaspriemer ";
+$dsqlc = mysql_query("$dsqltt");
+if(!$dsqlc) { $novepriemer=1; }
+
+
+$sqltt = "UPDATE F$kli_vxcf"."_sklzasprcas SET datzaok=now() ";
+$sql = mysql_query("$sqltt");
+$sqltt = "UPDATE F$kli_vxcf"."_sklzasprcas SET cislzaok=UNIX_TIMESTAMP(datzaok) ";
+$sql = mysql_query("$sqltt");
+
+$sqltt = "UPDATE F$kli_vxcf"."_sklzasprcas SET cislrozd=cislzaok-cislcent ";
+$sql = mysql_query("$sqltt");
+
+$cislrozd=0;
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_sklzasprcas ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $cislrozd=1*$riaddok->cislrozd;
+  }
+
+//echo "rozd".$cislrozd;
+if( $cislrozd > 10000 ) { $novepriemer=1; }
+$textpr=$textpr." rozd ".$cislrozd;
+
+if( $novepriemer == 1 )
+  {
+//echo "idem1";
+//echo "Nové priemerné ceny";
+$textpr="Nové priemerné ceny 1";
 
 $dsqlt = "DROP TABLE F$kli_vxcf"."_sklzaspriemer ";
 $dsql = mysql_query("$dsqlt");
@@ -60,13 +101,41 @@ $dsql = mysql_query("$dsqlt");
 $kli_vxcfskl=$kli_vxcf;
 $priemer = include("sklzaspriemer.php");
 
+$vsql = 'DROP TABLE F'.$kli_vxcf.'_sklzasprcas';
+$vytvor = mysql_query("$vsql"); 
 
-$sqlttxc = "SELECT * FROM F$kli_vxcf"."_sklfak WHERE cen = 0  ";
-$tovxc = mysql_query("$sqlttxc");
-$tvpolxc = mysql_num_rows($tovxc);
+$sqlt = <<<uctcrv
+(
+   datprvy      TIMESTAMP(14),
+   hospcent     DECIMAL(10,2) DEFAULT 0,
+   datcent      TIMESTAMP(14),
+   cislcent     DECIMAL(10,0) DEFAULT 0,
+   umecent      DECIMAL(10,4) DEFAULT 0,
+   hospzaok     DECIMAL(10,2) DEFAULT 0,
+   datzaok      TIMESTAMP(14),
+   cislzaok     DECIMAL(10,0) DEFAULT 0,
+   umezaok      DECIMAL(10,4) DEFAULT 0,
+   hospeura     DECIMAL(10,0) DEFAULT 0,
+   hosprozd     DECIMAL(10,2) DEFAULT 0,
+   cislrozd     DECIMAL(10,0) DEFAULT 0,
+   umerozd      DECIMAL(10,4) DEFAULT 0,
+   cxx          INT DEFAULT 0
+);
+uctcrv;
+
+$vsql = 'CREATE TABLE F'.$kli_vxcf.'_sklzasprcas'.$sqlt;
+$vytvor = mysql_query("$vsql");
 
 
-if( $kli_uzid > 0 )
+$ttvv = "INSERT INTO F$kli_vxcf"."_sklzasprcas ( datcent ) VALUES ( now() )";
+$ttqq = mysql_query("$ttvv");
+$sqltt = "UPDATE F$kli_vxcf"."_sklzasprcas SET cislcent=UNIX_TIMESTAMP(datcent) ";
+$sql = mysql_query("$sqltt");
+
+  }
+
+
+if( $kli_uzid > 0 AND $novepriemer == 1 )
  {
 
 $sqlttx = "SELECT * FROM F$kli_vxcf"."_sklcis WHERE tl3 = 1  ";
@@ -93,7 +162,7 @@ $posl = mysql_query("$poslhh");
   }
 
 $cenahranica1=0.4*$cenazprijmu; $cenahranica2=1.5*$cenazprijmu;
-if( $_SERVER['SERVER_NAME'] == "www.mlynzahorie.sk" ) { $cenahranica1=0.9*$cenazprijmu; $cenahranica2=1.1*$cenazprijmu; }
+if( $_SERVER['SERVER_NAME'] == "www.mlynzahorie.sk" ) { $cenahranica1=0.95*$cenazprijmu; $cenahranica2=1.05*$cenazprijmu; }
 
 if( $cenazprijmu > 0 )
   {
@@ -109,18 +178,45 @@ $ix=$ix+1;
  }
 //koniec ak kliuzid > 0
 
+$novepriemer=0;
+$sqlttxc = "SELECT * FROM F$kli_vxcf"."_sklfak WHERE cen = 0 AND cis > 0 ";
+$tovxc = mysql_query("$sqlttxc");
+$tvpolxc = mysql_num_rows($tovxc);
+if( $tvpolxc > 0 ) { $novepriemer=1; } 
+
+
+if( $novepriemer == 1 )
+  {
 $dsqlt = "UPDATE F$kli_vxcf"."_sklfak,F$kli_vxcf"."_sklzaspriemer SET F$kli_vxcf"."_sklfak.cen=F$kli_vxcf"."_sklzaspriemer.cen ".
 " WHERE F$kli_vxcf"."_sklfak.cis=F$kli_vxcf"."_sklzaspriemer.cis AND F$kli_vxcf"."_sklfak.cen=0 ";
 $dsql = mysql_query("$dsqlt");
+  }
 
-if( $tvpolxc > 0 )
+//prerob vydajne ceny ploty skala
+if( $kli_vxcf == 268616861686 )
   {
+//echo "idem";
+$dsqlt = "UPDATE F$kli_vxcf"."_sklvyd,F$kli_vxcf"."_sklzaspriemer SET F$kli_vxcf"."_sklvyd.cen=F$kli_vxcf"."_sklzaspriemer.cen ".
+" WHERE F$kli_vxcf"."_sklvyd.cis=F$kli_vxcf"."_sklzaspriemer.cis AND F$kli_vxcf"."_sklvyd.cen=0 ";
+$dsql = mysql_query("$dsqlt");
+
+  }
+
+
+if( $novepriemer == 1 )
+  {
+//echo "idem2";
+//echo "Nové priemerné ceny";
+$textpr="Nové priemerné ceny 2";
+
 $dsqlt = "DROP TABLE F$kli_vxcf"."_sklzaspriemer ";
 $dsql = mysql_query("$dsqlt");
 
 $kli_vxcfskl=$kli_vxcf;
 $priemer = include("sklzaspriemer.php");
   }
+
+
                       }
 //koniec pozri do sklfak a oprav nulove cen
 
@@ -367,7 +463,10 @@ function VyberVstup()
 <tr>
 
 <td>EuroSecom  -  Informácie o zásobách
-
+<?php if( $fir_xsk04 == 1 ) { ?>
+<a href="#" onClick="window.open('info_zas.php?copern=1001&drupoh=1&page=1','_self' );" >
+<input type='image' src='../obr/ok.png' width=20 height=20 border=0 title="Prepoèítaj priemerné ceny <?php echo $textpr; ?>"></a>
+<?php                       } ?>
 </td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
