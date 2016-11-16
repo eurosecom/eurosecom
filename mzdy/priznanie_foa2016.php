@@ -706,23 +706,6 @@ $vytvor = mysql_query("$vsql");
 }
 //koniec vytvorenie priznaniefoa
 
-$sql = "SELECT oznucet FROM F".$kli_vxcf."_mzdpriznanie_foa";
-$vysledok = mysql_query($sql);
-if (!$vysledok)
-{
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD prp DECIMAL(4,0) DEFAULT 0 AFTER des2";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD zstat VARCHAR(30) NOT NULL AFTER des2";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD nrz DECIMAL(4,0) DEFAULT 0 AFTER des2";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD ddp DATE NOT NULL AFTER des2";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD det4 DECIMAL(4,0) DEFAULT 0 AFTER des2";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD oznucet DECIMAL(4,0) DEFAULT 0 AFTER des2";
-$vysledek = mysql_query("$sql");
-}
 $sql = "SELECT spln3 FROM F".$kli_vxcf."_mzdpriznanie_foa";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
@@ -742,6 +725,23 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD spln3 DECIMAL(2,0) DEFAULT 0 AFTER upl50";
 $vysledek = mysql_query("$sql");
 }
+$sql = "SELECT oznucet FROM F".$kli_vxcf."_mzdpriznanie_foa";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD prp DECIMAL(4,0) DEFAULT 0 AFTER des2";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD zstat VARCHAR(30) NOT NULL AFTER des2";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD nrz DECIMAL(4,0) DEFAULT 0 AFTER des2";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD ddp DATE NOT NULL AFTER des2";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD det4 DECIMAL(4,0) DEFAULT 0 AFTER des2";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD oznucet DECIMAL(4,0) DEFAULT 0 AFTER des2";
+$vysledek = mysql_query("$sql");
+}
 $sql = "SELECT xstat FROM F".$kli_vxcf."_mzdpriznanie_foa";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
@@ -755,6 +755,7 @@ $sql = "SELECT dbic FROM F".$kli_vxcf."_mzdpriznanie_foa";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
+//echo "idem 2013";
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD new2013 DECIMAL(2,0) NOT NULL AFTER udnr";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa MODIFY r28 DECIMAL(10,2) DEFAULT 0";
@@ -798,6 +799,7 @@ $sql = "SELECT pzvd3 FROM F".$kli_vxcf."_mzdpriznanie_foa";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
+//echo "idem 2013.2";
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD pzvd1 DECIMAL(10,2) DEFAULT 0 AFTER new2013";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD pzvd2 DECIMAL(10,2) DEFAULT 0 AFTER new2013";
@@ -811,6 +813,7 @@ $sql = "SELECT r79 FROM F".$kli_vxcf."_mzdpriznanie_foa";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
+//echo "idem 2014";
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD new2014 DECIMAL(2,0) NOT NULL AFTER pzks3";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD r78 DECIMAL(10,2) DEFAULT 0 AFTER new2014";
@@ -826,10 +829,11 @@ $vysledek = mysql_query("$sql");
 }
 
 //zmeny pre rok 2015
-$sql = "SELECT dic FROM F".$kli_vxcf."_mzdpriznanie_foa";
+$sql = "SELECT fdic FROM F".$kli_vxcf."_mzdpriznanie_foa";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
+//echo "idem 2015";
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD new2015 DECIMAL(2,0) NOT NULL AFTER r78";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_foa ADD zslu DECIMAL(2,0) DEFAULT 0 AFTER new2015";
