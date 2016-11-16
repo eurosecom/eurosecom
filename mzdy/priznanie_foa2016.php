@@ -22,7 +22,7 @@ require_once("../pswd/password.php");
 
 //ramcek fpdf 1=zap,0=vyp
 $rmc=0;
-$rmc1=0;
+$rmc1=1;
 
 //$zablokovane=1;
 if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
@@ -36,6 +36,7 @@ window.close();
 <?php
 exit;
      }
+$citfir = include("../cis/citaj_fir.php");
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -43,7 +44,10 @@ $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
-$citfir = include("../cis/citaj_fir.php");
+//.jpg podklad
+$jpg_cesta="../dokumenty/dan_z_prijmov2016/dpfoa2016/dpfoa_v16";
+$jpg_popis="tlaèivo Daò z príjmov FO typ A pre rok ".$kli_vrok;
+
 
 $cislo_oc = $_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
@@ -1769,7 +1773,7 @@ if ( $copern == 20 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="priznanie_foa2016.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>">
+<FORM name="formv1" method="post" action="priznanie_foa2016.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive"; $clas5="noactive"; $clas6="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active"; if ( $strana == 3 ) $clas3="active";
@@ -1801,9 +1805,8 @@ $source="../mzdy/priznanie_foa2016.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
  <div class="alert-pocitam"><?php echo "$alertprepocet";?></div>
 </div>
 
-<?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/dpfoa2015/dpfoa_v15_str1.jpg"
-     alt="tlaèivo Daò z príjmov FO typ A pre rok 2015 1.strana 282kB" class="form-background">
+<?php if ( $strana == 1 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str1.jpg" alt="<?php echo $jpg_popis; ?> 1.strana 229kB" class="form-background">
 
 <input type="text" name="fdic" id="fdic" style="width:220px; top:260px; left:51px;"/>
 <input type="text" name="dar" id="dar" onkeyup="CiarkaNaBodku(this);"
@@ -1858,8 +1861,7 @@ $t02=substr($rokp,3,1);
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/dpfoa2015/dpfoa_v15_str2.jpg"
-     alt="tlaèivo Daò z príjmov FO typ A pre rok 2015 2.strana 250kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str2.jpg" alt="<?php echo $jpg_popis; ?> 2.strana 244kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fdic; ?></span>
 
 <!-- III. ODDIEL -->
@@ -1950,8 +1952,7 @@ $t02=substr($rokp,3,1);
 
 
 <?php if ( $strana == 3 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/dpfoa2015/dpfoa_v15_str3.jpg"
-     alt="tlaèivo Daò z príjmov FO typ A pre rok 2013 3.strana 250kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str3.jpg" alt="<?php echo $jpg_popis; ?> 3.strana 235kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fdic; ?></span>
 
 <!-- VI. ODDIEL -->
@@ -1991,8 +1992,7 @@ $t02=substr($rokp,3,1);
 
 
 <?php if ( $strana == 4 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/dpfoa2015/dpfoa_v15_str4.jpg"
-     alt="tlaèivo Daò z príjmov FO typ A pre rok 2015 4.strana 250kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str4.jpg" alt="<?php echo $jpg_popis; ?> 4.strana 255kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fdic; ?></span>
 
 <!-- VI. ODDIEL pokracovanie -->
@@ -2015,8 +2015,7 @@ $t02=substr($rokp,3,1);
 
 
 <?php if ( $strana == 5 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/dpfoa2015/dpfoa_v15_str5.jpg"
-     alt="tlaèivo Daò z príjmov FO typ A pre rok 2015 5.strana 250kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str5.jpg" alt="<?php echo $jpg_popis; ?> 5.strana 201kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fdic; ?></span>
 
 <!-- VIII. ODDIEL -->
@@ -2059,8 +2058,7 @@ $t02=substr($rokp,3,1);
 
 
 <?php if ( $strana == 6 OR $strana == 9999 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/dpfoa2015/dpfoa_v15_str6.jpg"
-     alt="tlaèivo Daò z príjmov FO typ A pre rok 2015 6.strana 250kB" class="form-background">
+<img src="<?php echo $jpg_cesta; ?>_str6.jpg" alt="<?php echo $jpg_popis; ?> 6.strana 189kB" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fdic; ?></span>
 
 <!-- X. ODDIEL -->
@@ -2138,11 +2136,11 @@ $hlavicka=mysql_fetch_object($sql);
 if ( $strana == 1 OR $strana == 9999 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(8);
+$pdf->SetLeftMargin(10); //dopyt, menil som skontrolova vytlaèené, èi sedí
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfoa2015/dpfoa_v15_str1.jpg') )
+if ( File_Exists($jpg_cesta.'_str1.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfoa2015/dpfoa_v15_str1.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
