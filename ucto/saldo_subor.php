@@ -62,11 +62,18 @@ $vytvor = mysql_query("$vsql");
 $podmucm="( LEFT(ucm,2) = 31 OR LEFT(ucm,2) = 32 )";
 $podmucd="( LEFT(ucd,2) = 31 OR LEFT(ucd,2) = 32 )";
 $aj37=0;
-if( $agrostav == 1 OR $autovalas == 1 OR $delisasro == 1 OR $metalco == 1 OR $polno == 1 OR $lsucto == 1 OR $sekov == 1 OR $alchem == 1 )
+if( $agrostav == 1 OR $autovalas == 1 OR $delisasro == 1 OR $metalco == 1 OR $polno == 1 OR $lsucto == 1 OR $sekov == 1 )
 {
 //echo "idem";
 $podmucm="( LEFT(ucm,2) = 31 OR LEFT(ucm,2) = 32 OR LEFT(ucm,2) = 37 OR LEFT(ucm,3) = 335 OR LEFT(ucm,2) = 47 OR LEFT(ucm,3) = 391 )";
 $podmucd="( LEFT(ucd,2) = 31 OR LEFT(ucd,2) = 32 OR LEFT(ucd,2) = 37 OR LEFT(ucd,3) = 335 OR LEFT(ucd,2) = 47 OR LEFT(ucd,3) = 391 )";
+$aj37=1;
+}
+if( $alchem == 1 )
+{
+//echo "idem";
+$podmucm="( LEFT(ucm,2) = 31 OR LEFT(ucm,2) = 32 OR LEFT(ucm,2) = 37 OR LEFT(ucm,3) = 335 OR LEFT(ucm,2) = 47 OR LEFT(ucm,3) = 391 OR LEFT(ucm,3) = 351 )";
+$podmucd="( LEFT(ucd,2) = 31 OR LEFT(ucd,2) = 32 OR LEFT(ucd,2) = 37 OR LEFT(ucd,3) = 335 OR LEFT(ucd,2) = 47 OR LEFT(ucd,3) = 391 OR LEFT(ucd,3) = 351 )";
 $aj37=1;
 }
 

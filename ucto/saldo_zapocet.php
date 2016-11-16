@@ -215,6 +215,8 @@ $nasiel=1;
 $xdruh=5;
 $cuce=1*substr($h_uce,0,3);
 if( $cuce >= 321 ) $xdruh=6;
+if( $cuce == 351 ) $xdruh=5;
+//echo $xdruh;
 $h_icoq=$h_ico;
 if( $preuct == 1 )
 {
@@ -1320,8 +1322,8 @@ $rsluz=mysql_fetch_object($sluz);
 
 $cucm=1*substr($rsluz->ucm,0,3);
 $cucd=1*substr($rsluz->ucd,0,3);
-if( $cucd == 311 ) { $suma311=$suma311+$rsluz->hod; $rozdiel=$rozdiel+$rsluz->hod; }
-if( $cucm == 321 ) { $suma321=$suma321+$rsluz->hod; $rozdiel=$rozdiel-$rsluz->hod; }
+if( $cucd == 311 OR $cucd == 351 ) { $suma311=$suma311+$rsluz->hod; $rozdiel=$rozdiel+$rsluz->hod; }
+if( $cucm == 321 OR $cucm == 351 ) { $suma321=$suma321+$rsluz->hod; $rozdiel=$rozdiel-$rsluz->hod; }
 
 $Cislo=$rozdiel+"";
 $rozdiel=sprintf("%0.2f", $Cislo);
