@@ -2,6 +2,7 @@
 //buduci rok
 if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
           {
+if( $kli_vrok <  2010 ) { $databaza=$mysqldb2010."."; }
 if( $kli_vrok == 2010 ) { $databaza=$mysqldb2011."."; }
 if( $kli_vrok == 2011 ) { $databaza=$mysqldb2012."."; }
 if( $kli_vrok == 2012 ) { $databaza=$mysqldb2013."."; }
