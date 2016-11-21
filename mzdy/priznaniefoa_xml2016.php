@@ -99,7 +99,7 @@ if ( $copern == 10 AND $elsubor == 2  )
 if ( File_Exists("../tmp/$nazsub") ) { $soubor = unlink("../tmp/$nazsub"); }
 $soubor = fopen("../tmp/$nazsub", "a+");
 
-//rok2015
+//rok2016
 $sqlt = <<<mzdprc
 (
 
@@ -122,6 +122,34 @@ $hlavicka=mysql_fetch_object($sql);
 
 $obdobie=$kli_vmes;
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+//zaciatok divu upozornenie nejako formatovat a nejako umiestnit
+$upozorni=0;
+?>
+
+<div id="upozornenie" name="upozornenie" style="display:none;">
+
+<?php if ( $hlavicka->druh == 3 AND $hlavicka->ddp == '0000.00.00' ) { 
+$upozorni=1;
+echo "Dodatocne a nie je datum dodatocneho"."<br />";
+} ?>
+
+<?php if ( $hlavicka->upl50 == 1 AND $hlavicka->r75 != 0 ) { 
+$upozorni=1;
+echo "Checkbox upl50 a hodnota r75"."<br />";
+} ?>
+
+<?php if ( $hlavicka->dat == '0000-00-00' ) { 
+$upozorni=1;
+echo "Datum ?"."<br />";                                                                    
+} ?>
+</div>
+
+<script type="text/javascript">
+<?php if ( $upozorni == 1 ) { echo "upozornenie.style.display='';"; } ?>
+</script>
+<?php
+//koniec divu upozornenie
 
 if ( $j == 0 )
      {

@@ -1342,12 +1342,13 @@ $udnr = $fir_riadok->udnr;
 $pril = $fir_riadok->pril;
 $dat = $fir_riadok->dat;
 $datsk=Skdatum($dat);
+//takto to uzivatelia nechcu, ak nezadaju tak chcu nevyplnit v tlaci a v xml upozorni
 if ( $datsk == '00.00.0000' ) 
 { 
-$datsk=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
-$datsql=SqlDatum($datsk);
-$sqlx = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET dat='$datsql' ";
-$vysledekx = mysql_query("$sqlx");
+//$datsk=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+//$datsql=SqlDatum($datsk);
+//$sqlx = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET dat='$datsql' ";
+//$vysledekx = mysql_query("$sqlx");
 }
 $zdbo = $fir_riadok->zdbo;
 $zpre = $fir_riadok->zpre;
