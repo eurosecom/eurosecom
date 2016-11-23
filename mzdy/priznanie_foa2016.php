@@ -1109,7 +1109,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r62=0 WHERE oc = $cislo_oc A
 $oznac = mysql_query("$sqtoz");
 
 //dan na uhradu, preplatok 2016
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r66=0, r65=r56-r57+r59+r61-r63-r64+r47 WHERE oc = $cislo_oc ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r66=0, r65=r56-r57+r59+r61-r63-r63a-r64+r47 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r66=-r65, r65=0 WHERE oc = $cislo_oc AND r65 < 0 ";
 $oznac = mysql_query("$sqtoz");
