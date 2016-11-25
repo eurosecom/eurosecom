@@ -2071,7 +2071,7 @@ $miliondan = 1*$_REQUEST['miliondan'];
 if ( $miliondan == 1 ) { $prepocitaj=1; }
 if ( $namanzelku == 1 ) { $prepocitaj=1; }
 
-//vsetky vypocty su upravene na rok 2015 
+//vsetky vypocty su upravene na rok 2016 
 //vypocty
 //odstavene vypocty
 //$prepocitaj=0;
@@ -2157,7 +2157,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r69=t3p17, r70=t3v17, r71=r6
 $oznac = mysql_query("$sqtoz");
 
 
-//vypocet zakladu dane str8 2015
+//str 8 vypocet zakladu dane 2016
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r72=r36+r57 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
@@ -2167,13 +2167,13 @@ if ( $miliondan == 1 )
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
-//max.nezdanitelna cast na danovnika za 2015
+//max.nezdanitelna cast na danovnika za 2016
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r73=3803.33 WHERE oc = $cislo_oc  ";
 $oznac = mysql_query("$sqtoz");
 
-//milionarska dan 2015
+//milionarska dan 2016
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=8755.578-(r72/4) WHERE oc = $cislo_oc AND r72 > 19809.00 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob".
@@ -2184,11 +2184,11 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r73=0 WHERE oc = $cislo_oc AND r72 >= 35022.32 ";
 $oznac = mysql_query("$sqtoz");
      }
-//koniec max.nezdanitelna cast na danovnika za 2015
+//koniec max.nezdanitelna cast na danovnika za 2016
 
 if ( $namanzelku == 1 )
      {
-//nezdanitelna cast na manzelku 2015
+//nezdanitelna cast na manzelku 2016
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
@@ -2217,10 +2217,10 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r74=0 WHERE oc = $cislo_oc AND r72 >= 50235.63 ";
 $oznac = mysql_query("$sqtoz");
      }
-//nezdanitelna 2015
+//nezdanitelna na manzelku 2016
 
 
-//vypocet zakladu dane (str 8) 2015
+//str 8 vypocet zakladu dane 2016
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r77=r73+r74+r75+r76  WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r77=r72  WHERE oc = $cislo_oc AND r77 > r72 ";
@@ -2232,78 +2232,96 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r78=0 WHERE oc = $cislo_oc AND r78 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r80=r78+r65+r68+r71+r79 WHERE oc = $cislo_oc ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r80=r78+r65+r71+r79 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r80=0 WHERE oc = $cislo_oc AND r80 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
 
-//dan z prijmu 2015
+//str 8 dan z prijmu 2016
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=r80*19/100 WHERE oc = $cislo_oc AND r80 <= 35022.31 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=(35022.31*19/100)+((r80-35022.31)*25/100) WHERE oc = $cislo_oc AND r80 > 35022.31 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob".
-" SET des2=des6*100, r81=floor(des2), r81=r81/100 WHERE oc = $cislo_oc";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des2=des6*100, r81=floor(des2), r81=r81/100 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r90=r81 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
-//dan po vynati prijmov 2015 dan zo zakladu na r83 nepocitam
+//str 8 dan po vynati prijmov 2016 dan zo zakladu na r83 nepocitam
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r83=r80-r82 WHERE oc = $cislo_oc AND r82 > 0 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r83=0 WHERE oc = $cislo_oc AND r83 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//dan po vynati prijmov a zapocte 2015
+//str 8 dan po zapocte 2016
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r90=r84-r89 WHERE oc = $cislo_oc AND r83 > 0 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r90=r81-r89 WHERE oc = $cislo_oc AND r83 = 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//dan celkom 2015
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r94=r90-r93 WHERE oc = $cislo_oc ";
+//str 8 dan z osobitneho zakladu dane na r68
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=r68*19/100 WHERE oc = $cislo_oc AND r68 > 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des2=des6*100, r91=floor(des2), r91=r91/100 WHERE oc = $cislo_oc AND r68 > 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r93=r68-r92 WHERE oc = $cislo_oc AND r68 > 0 AND r92 > 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r93=0 WHERE oc = $cislo_oc AND r68 > 0 AND r93 < 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r100=r91-r99 WHERE oc = $cislo_oc AND r68 > 0 AND r91 > 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r100=r94-r99 WHERE oc = $cislo_oc AND r68 > 0 AND r94 > 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r104=r100-r103 WHERE oc = $cislo_oc AND r68 > 0 ";
+$oznac = mysql_query("$sqtoz");
+
+
+//str 9 dan celkom 2016
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r105=r90+r104 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
 //vynuluj zuctovanie bonusu
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r96=0, r98=0, r99=0, r100=0  WHERE oc = $cislo_oc ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r107=0, r109=0, r110=0, r111=0, r100=0  WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
-//dan znizena o dan. bonusu 2015
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r96=r94-r95 WHERE oc = $cislo_oc ";
+//dan znizena o dan. bonusu 2016
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r107=r105-r106 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r96=0 WHERE oc = $cislo_oc AND r96 < 0 ";
-$oznac = mysql_query("$sqtoz");
-
-//vysporiadanie danoveho bonusu 2015
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r98=r95-r97  WHERE oc = $cislo_oc ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r98=0 WHERE oc = $cislo_oc AND r98 < 0 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r99=r98-r94  WHERE oc = $cislo_oc ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r99=0 WHERE oc = $cislo_oc AND r99 < 0 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r100=r97-r95  WHERE oc = $cislo_oc ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r100=0 WHERE oc = $cislo_oc AND r100 < 0 ";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r107=0 WHERE oc = $cislo_oc AND r107 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//zapl.dan z urok.prijmov 2015
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r108=r92-r93  WHERE oc = $cislo_oc ";
+//vysporiadanie danoveho bonusu 2016
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r109=r106-r108  WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r109=0 WHERE oc = $cislo_oc AND r109 < 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r110=r109-r105  WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r110=0 WHERE oc = $cislo_oc AND r110 < 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r111=r108-r106  WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r111=0 WHERE oc = $cislo_oc AND r111 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//dan na uhradu, preplatok 2015
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r110=0, r109=r94-r95+r97+r99+r101-r102-r103-r104-r105-r106-r107-r108 WHERE oc = $cislo_oc ";
+//zapl.dan z urok.prijmov 2016
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r119=r102-r9103  WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r110=-r109, r109=0 WHERE oc = $cislo_oc AND r109 < 0 ";
+
+//str 10 dan na uhradu, preplatok 2016
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r121=0, r120=r105-r106+r108+r110+r112-r113-r114-r115-r116-r117-r118-r119 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r121=-r120, r120=0 WHERE oc = $cislo_oc AND r120 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
 
-//str 12 Priloha 1 o projektoch 2015
+//str 12 Priloha 1 o projektoch 2016
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET prpods=prpod1+prpod2+prpod3+prpod4+prpod5 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET prpodv=prpods WHERE oc = $cislo_oc ";
@@ -2313,7 +2331,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET prpcp=1, prppp=1 WHERE prpods > 0 AND oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
-//str13 Priloha 2 socialne a zdravotne poistenie 2015
+//str13 Priloha 2 socialne a zdravotne poistenie 2016
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET sz2=sz1p1-sz1v1, sz3=0  WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET sz3=-sz2, sz2=0  WHERE oc = $cislo_oc AND sz2 < 0";
