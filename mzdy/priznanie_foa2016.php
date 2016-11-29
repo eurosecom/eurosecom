@@ -211,33 +211,34 @@ $darsql=SqlDatum($dar);
 $druh = 1*$_REQUEST['druh'];
 $ddp = $_REQUEST['ddp'];
 $ddpsql=SqlDatum($ddp);
-$dprie = strip_tags($_REQUEST['dprie']);
-$dmeno = strip_tags($_REQUEST['dmeno']);
-$dtitl = strip_tags($_REQUEST['dtitl']);
-$dtitz = strip_tags($_REQUEST['dtitz']);
-$duli = strip_tags($_REQUEST['duli']);
-$dcdm = strip_tags($_REQUEST['dcdm']);
-$dpsc = strip_tags($_REQUEST['dpsc']);
-$dmes = strip_tags($_REQUEST['dmes']);
-$xstat = strip_tags($_REQUEST['xstat']);
+$dprie = trim(strip_tags($_REQUEST['dprie']));
+$dmeno = trim(strip_tags($_REQUEST['dmeno']));
+$dtitl = trim(strip_tags($_REQUEST['dtitl']));
+$dtitz = trim(strip_tags($_REQUEST['dtitz']));
+$duli = trim(strip_tags($_REQUEST['duli']));
+$dcdm = trim(strip_tags($_REQUEST['dcdm']));
+$dpsc = trim(strip_tags($_REQUEST['dpsc']));
+$dmes = trim(strip_tags($_REQUEST['dmes']));
+$xstat = trim(strip_tags($_REQUEST['xstat']));
 $nrz = 1*$_REQUEST['nrz'];
-$d2uli = strip_tags($_REQUEST['d2uli']);
-$d2cdm = strip_tags($_REQUEST['d2cdm']);
-$d2psc = strip_tags($_REQUEST['d2psc']);
-$d2mes = strip_tags($_REQUEST['d2mes']);
-$zprie = strip_tags($_REQUEST['zprie']);
-$zmeno = strip_tags($_REQUEST['zmeno']);
-$ztitl = strip_tags($_REQUEST['ztitl']);
-$ztitz = strip_tags($_REQUEST['ztitz']);
-$zrdc = strip_tags($_REQUEST['zrdc']);
-$zrdk = strip_tags($_REQUEST['zrdk']);
-$zuli = strip_tags($_REQUEST['zuli']);
-$zcdm = strip_tags($_REQUEST['zcdm']);
-$zpsc = strip_tags($_REQUEST['zpsc']);
-$zmes = strip_tags($_REQUEST['zmes']);
-$zstat = strip_tags($_REQUEST['zstat']);
+$d2uli = trim(strip_tags($_REQUEST['d2uli']));
+$d2cdm = trim(strip_tags($_REQUEST['d2cdm']));
+$d2psc = trim(strip_tags($_REQUEST['d2psc']));
+$d2mes = trim(strip_tags($_REQUEST['d2mes']));
+$zprie = trim(strip_tags($_REQUEST['zprie']));
+$zmeno = trim(strip_tags($_REQUEST['zmeno']));
+$ztitl = trim(strip_tags($_REQUEST['ztitl']));
+$ztitz = trim(strip_tags($_REQUEST['ztitz']));
+$zrdc = trim(strip_tags($_REQUEST['zrdc']));
+$zrdk = trim(strip_tags($_REQUEST['zrdk']));
+$zuli = trim(strip_tags($_REQUEST['zuli']));
+$zcdm = trim(strip_tags($_REQUEST['zcdm']));
+$zpsc = trim(strip_tags($_REQUEST['zpsc']));
+$zmes = trim(strip_tags($_REQUEST['zmes']));
+$zstat = trim(strip_tags($_REQUEST['zstat']));
 $dtel = strip_tags($_REQUEST['dtel']);
-$dmailfax = strip_tags($_REQUEST['dmailfax']);
+$dtel = str_replace(" ","",strip_tags($_REQUEST['dtel']));
+$dmailfax = trim(strip_tags($_REQUEST['dmailfax']));
 //$d2tel = strip_tags($_REQUEST['d2tel']);
 //$d2fax = strip_tags($_REQUEST['d2fax']);
 //$d3uli = strip_tags($_REQUEST['d3uli']);
@@ -261,12 +262,13 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET ".
 $r27 = 1*$_REQUEST['r27'];
 $r28 = 1*$_REQUEST['r28'];
 //$r29 = $_REQUEST['r29'];
-$mprie = strip_tags($_REQUEST['mprie']);
-$mrod = strip_tags($_REQUEST['mrod']);
+$mprie = trim(strip_tags($_REQUEST['mprie']));
+$mrod = trim(strip_tags($_REQUEST['mrod']));
 $mpri = 1*$_REQUEST['mpri'];
 $mpom = 1*$_REQUEST['mpom'];
-$d1prie = strip_tags($_REQUEST['d1prie']);
-$d1rod = strip_tags($_REQUEST['d1rod']);
+if ( $mpom > 12 ) { $mpom = 12; }
+$d1prie = trim(strip_tags($_REQUEST['d1prie']));
+$d1rod = trim(strip_tags($_REQUEST['d1rod']));
 $d1pomc = 1*$_REQUEST['d1pomc'];
 $d1pom1 = 1*$_REQUEST['d1pom1'];
 $d1pom2 = 1*$_REQUEST['d1pom2'];
@@ -280,8 +282,9 @@ $d1pom9 = 1*$_REQUEST['d1pom9'];
 $d1pom10 = 1*$_REQUEST['d1pom10'];
 $d1pom11 = 1*$_REQUEST['d1pom11'];
 $d1pom12 = 1*$_REQUEST['d1pom12'];
-$d2prie = strip_tags($_REQUEST['d2prie']);
-$d2rod = strip_tags($_REQUEST['d2rod']);
+if ( $d1pomc == 1 ) { $d1pom1=0; $d1pom2=0; $d1pom3=0; $d1pom4=0; $d1pom5=0; $d1pom6=0; $d1pom7=0; $d1pom8=0; $d1pom9=0; $d1pom10=0; $d1pom11=0; $d1pom12=0; }
+$d2prie = trim(strip_tags($_REQUEST['d2prie']));
+$d2rod = trim(strip_tags($_REQUEST['d2rod']));
 $d2pomc = 1*$_REQUEST['d2pomc'];
 $d2pom1 = 1*$_REQUEST['d2pom1'];
 $d2pom2 = 1*$_REQUEST['d2pom2'];
@@ -295,8 +298,9 @@ $d2pom9 = 1*$_REQUEST['d2pom9'];
 $d2pom10 = 1*$_REQUEST['d2pom10'];
 $d2pom11 = 1*$_REQUEST['d2pom11'];
 $d2pom12 = 1*$_REQUEST['d2pom12'];
-$d3prie = strip_tags($_REQUEST['d3prie']);
-$d3rod = strip_tags($_REQUEST['d3rod']);
+if ( $d2pomc == 1 ) { $d2pom1=0; $d2pom2=0; $d2pom3=0; $d2pom4=0; $d2pom5=0; $d2pom6=0; $d2pom7=0; $d2pom8=0; $d2pom9=0; $d2pom10=0; $d2pom11=0; $d2pom12=0; }
+$d3prie = trim(strip_tags($_REQUEST['d3prie']));
+$d3rod = trim(strip_tags($_REQUEST['d3rod']));
 $d3pomc = 1*$_REQUEST['d3pomc'];
 $d3pom1 = 1*$_REQUEST['d3pom1'];
 $d3pom2 = 1*$_REQUEST['d3pom2'];
@@ -310,8 +314,9 @@ $d3pom9 = 1*$_REQUEST['d3pom9'];
 $d3pom10 = 1*$_REQUEST['d3pom10'];
 $d3pom11 = 1*$_REQUEST['d3pom11'];
 $d3pom12 = 1*$_REQUEST['d3pom12'];
-$d4prie = strip_tags($_REQUEST['d4prie']);
-$d4rod = strip_tags($_REQUEST['d4rod']);
+if ( $d3pomc == 1 ) { $d3pom1=0; $d3pom2=0; $d3pom3=0; $d3pom4=0; $d3pom5=0; $d3pom6=0; $d3pom7=0; $d3pom8=0; $d3pom9=0; $d3pom10=0; $d3pom11=0; $d3pom12=0; }
+$d4prie = trim(strip_tags($_REQUEST['d4prie']));
+$d4rod = trim(strip_tags($_REQUEST['d4rod']));
 $d4pomc = 1*$_REQUEST['d4pomc'];
 $d4pom1 = 1*$_REQUEST['d4pom1'];
 $d4pom2 = 1*$_REQUEST['d4pom2'];
@@ -325,6 +330,7 @@ $d4pom9 = 1*$_REQUEST['d4pom9'];
 $d4pom10 = 1*$_REQUEST['d4pom10'];
 $d4pom11 = 1*$_REQUEST['d4pom11'];
 $d4pom12 = 1*$_REQUEST['d4pom12'];
+if ( $d4pomc == 1 ) { $d4pom1=0; $d4pom2=0; $d4pom3=0; $d4pom4=0; $d4pom5=0; $d4pom6=0; $d4pom7=0; $d4pom8=0; $d4pom9=0; $d4pom10=0; $d4pom11=0; $d4pom12=0; }
 $det4 = 1*$_REQUEST['det4'];
 $r32 = 1*$_REQUEST['r32'];
 $r32a = 1*$_REQUEST['r32a'];
@@ -359,6 +365,7 @@ $r42 = 1*$_REQUEST['r42'];
 $r43 = 1*$_REQUEST['r43'];
 $r44 = 1*$_REQUEST['r44'];
 $r45 = 1*$_REQUEST['r45'];
+if ( $r45 > 12 ) { $r45 = 12; }
 //$r45a = $_REQUEST['r45a'];
 //$r45b = $_REQUEST['r45b'];
 //$r45c = $_REQUEST['r45c'];
@@ -412,29 +419,29 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET ".
 $upl50 = 1*$_REQUEST['upl50'];
 $spln3 = 1*$_REQUEST['spln3'];
 $r75 = 1*$_REQUEST['r75'];
-$pico = strip_tags($_REQUEST['pico']);
-$psid = strip_tags($_REQUEST['psid']);
-$pfor = strip_tags($_REQUEST['pfor']);
-$pmen = strip_tags($_REQUEST['pmen']);
-$puli = strip_tags($_REQUEST['puli']);
-$pcdm = strip_tags($_REQUEST['pcdm']);
-$ppsc = strip_tags($_REQUEST['ppsc']);
-$pmes = strip_tags($_REQUEST['pmes']);
+$pico = trim(strip_tags($_REQUEST['pico']));
+$psid = trim(strip_tags($_REQUEST['psid']));
+$pfor = trim(strip_tags($_REQUEST['pfor']));
+$pmen = trim(strip_tags($_REQUEST['pmen']));
+$puli = trim(strip_tags($_REQUEST['puli']));
+$pcdm = trim(strip_tags($_REQUEST['pcdm']));
+$ppsc = trim(strip_tags($_REQUEST['ppsc']));
+$pmes = trim(strip_tags($_REQUEST['pmes']));
 $uoso = 1*$_REQUEST['uoso'];
 $zslu = 1*$_REQUEST['zslu'];
-$pzks1 = strip_tags($_REQUEST['pzks1']);
+$pzks1 = trim(strip_tags($_REQUEST['pzks1']));
 //$pzst1 = strip_tags($_REQUEST['pzst1']);
 $pzpr1 = 1*$_REQUEST['pzpr1'];
 $pzvd1 = 1*$_REQUEST['pzvd1'];
-$pzks2 = strip_tags($_REQUEST['pzks2']);
+$pzks2 = trim(strip_tags($_REQUEST['pzks2']));
 //$pzst2 = strip_tags($_REQUEST['pzst2']);
 $pzpr2 = 1*$_REQUEST['pzpr2'];
 $pzvd2 = 1*$_REQUEST['pzvd2'];
-$pzks3 = strip_tags($_REQUEST['pzks3']);
+$pzks3 = trim(strip_tags($_REQUEST['pzks3']));
 //$pzst3 = strip_tags($_REQUEST['pzst3']);
 $pzpr3 = 1*$_REQUEST['pzpr3'];
 $pzvd3 = 1*$_REQUEST['pzvd3'];
-$osob = strip_tags($_REQUEST['osob']);
+$osob = trim(strip_tags($_REQUEST['osob']));
 
 if ( $strana == 5 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET ".
@@ -445,7 +452,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET ".
 " WHERE oc = $cislo_oc";
                     }
 
-$sdnr = strip_tags($_REQUEST['sdnr']);
+$sdnr = trim(strip_tags($_REQUEST['sdnr']));
 $udnr = 1*$_REQUEST['udnr'];
 $pril = 1*$_REQUEST['pril'];
 $dat = $_REQUEST['dat'];
@@ -456,13 +463,13 @@ $zpre = 1*$_REQUEST['zpre'];
 $zprp = 1*$_REQUEST['zprp'];
 $post = 1*$_REQUEST['post'];
 $ucet = 1*$_REQUEST['ucet'];
-$diban = strip_tags($_REQUEST['diban']);
+$diban = trim(strip_tags($_REQUEST['diban']));
 //$dbic = strip_tags($_REQUEST['dbic']);
 //$uceb = strip_tags($_REQUEST['uceb']);
 //$numb = strip_tags($_REQUEST['numb']);
 $da2 = $_REQUEST['da2'];
 $da2sql=Sqldatum($da2);
-$pomv = strip_tags($_REQUEST['pomv']);
+$pomv = trim(strip_tags($_REQUEST['pomv']));
 //$post2 = 1*$_REQUEST['post2'];
 //$ucet2 = 1*$_REQUEST['ucet2'];
 //$uceb2 = strip_tags($_REQUEST['uceb2']);
@@ -1628,7 +1635,6 @@ if ( $copern == 20 )
    document.formv1.pzks3.value = '<?php echo "$pzks3";?>';
    document.formv1.pzpr3.value = '<?php echo "$pzpr3";?>';
    document.formv1.pzvd3.value = '<?php echo "$pzvd3";?>';
-//   document.formv1.osob.value = '<?php echo "$osob";?>';
 <?php                                        } ?>
 
 <?php if ( $strana == 6 OR $strana == 9999 ) { ?>
@@ -1805,8 +1811,8 @@ $source="../mzdy/priznanie_foa2016.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&su
 
 <?php if ( $strana == 1 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str1.jpg" alt="<?php echo $jpg_popis; ?> 1.strana 229kB" class="form-background">
-<input type="text" name="fdic" id="fdic" style="width:220px; top:260px; left:51px;"/>
-<input type="text" name="dar" id="dar" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:318px; left:51px;"/>
+<input type="text" name="fdic" id="fdic" maxlength="10" style="width:220px; top:260px; left:51px;"/>
+<input type="text" name="dar" id="dar" maxlength="10" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:318px; left:51px;"/>
 <!-- Druh priznania -->
 <input type="radio" id="druh1" name="druh" value="1" style="top:265px; left:440px;"/>
 <input type="radio" id="druh2" name="druh" value="2" style="top:290px; left:440px;"/>
@@ -1827,7 +1833,7 @@ $t02=substr($rokp,3,1);
 <!-- Adresa trvaleho pobytu -->
 <input type="text" name="duli" id="duli" style="width:635px; top:483px; left:51px;"/>
 <input type="text" name="dcdm" id="dcdm" style="width:175px; top:483px; left:718px;"/>
-<input type="text" name="dpsc" id="dpsc" style="width:107px; top:538px; left:51px;"/>
+<input type="text" name="dpsc" id="dpsc" maxlength="5" style="width:107px; top:538px; left:51px;"/>
 <input type="text" name="dmes" id="dmes" style="width:451px; top:538px; left:178px;"/>
 <input type="text" name="xstat" id="xstat" style="width:245px; top:538px; left:648px;"/>
 <!-- nerezident -->
@@ -1835,7 +1841,7 @@ $t02=substr($rokp,3,1);
 <!-- Adresa pobytu na uzemi SR -->
 <input type="text" name="d2uli" id="d2uli" style="width:635px; top:643px; left:51px;"/>
 <input type="text" name="d2cdm" id="d2cdm" style="width:175px; top:643px; left:718px;"/>
-<input type="text" name="d2psc" id="d2psc" style="width:107px; top:698px; left:51px;"/>
+<input type="text" name="d2psc" id="d2psc" maxlength="5" style="width:107px; top:698px; left:51px;"/>
 <input type="text" name="d2mes" id="d2mes" style="width:451px; top:698px; left:178px;"/>
 
 <!-- II.ODDIEL -->
@@ -1843,11 +1849,11 @@ $t02=substr($rokp,3,1);
 <input type="text" name="zmeno" id="zmeno" style="width:244px; top:806px; left:430px;"/>
 <input type="text" name="ztitl" id="ztitl" style="width:112px; top:806px; left:694px;"/>
 <input type="text" name="ztitz" id="ztitz" style="width:66px; top:806px; left:827px;"/>
-<input type="text" name="zrdc" id="zrdc" style="width:129px; top:860px; left:51px;"/>
-<input type="text" name="zrdk" id="zrdk" style="width:84px; top:860px; left:212px;"/>
+<input type="text" name="zrdc" id="zrdc" maxlength="6" style="width:129px; top:860px; left:51px;"/>
+<input type="text" name="zrdk" id="zrdk" maxlength="4" style="width:84px; top:860px; left:212px;"/>
 <input type="text" name="zuli" id="zuli" style="width:357px; top:860px; left:328px;"/>
 <input type="text" name="zcdm" id="zcdm" style="width:175px; top:860px; left:718px;"/>
-<input type="text" name="zpsc" id="zpsc" style="width:107px; top:915px; left:51px;"/>
+<input type="text" name="zpsc" id="zpsc" maxlength="5" style="width:107px; top:915px; left:51px;"/>
 <input type="text" name="zmes" id="zmes" style="width:451px; top:915px; left:178px;"/>
 <input type="text" name="zstat" id="zstat" style="width:245px; top:915px; left:648px;"/>
 <!-- telefon a fax FO -->
@@ -1864,14 +1870,14 @@ $t02=substr($rokp,3,1);
 <input type="checkbox" name="r27" value="1" style="top:232px; left:695px;"/>
 <input type="text" name="r28" id="r28" onkeyup="CiarkaNaBodku(this);" style="width:174px; top:274px; left:650px;"/>
 <input type="text" name="mprie" id="mprie" style="width:340px; top:362px; left:51px;"/>
-<input type="text" name="mrod" id="mrod" style="width:240px; top:362px; left:413px;"/>
+<input type="text" name="mrod" id="mrod" maxlength="10" style="width:240px; top:362px; left:413px;"/>
 <input type="text" name="mpri" id="mpri" onkeyup="CiarkaNaBodku(this);" style="width:153px; top:362px; left:671px;"/>
 <input type="text" name="mpom" id="mpom" style="width:38px; top:362px; left:850px;"/>
 
 <!-- IV.ODDIEL -->
 <!-- 1.riadok -->
 <input type="text" name="d1prie" id="d1prie" style="width:243px; top:555px; left:47px;"/>
-<input type="text" name="d1rod" id="d1rod" style="width:240px; top:555px; left:304px;"/>
+<input type="text" name="d1rod" id="d1rod" maxlength="10" style="width:240px; top:555px; left:304px;"/>
 <input type="checkbox" name="d1pomc" value="1" style="top:566px; left:562px;"/>
 <input type="checkbox" name="d1pom1" value="1" style="top:566px; left:598px;"/>
 <input type="checkbox" name="d1pom2" value="1" style="top:566px; left:623px;"/>
@@ -1887,7 +1893,7 @@ $t02=substr($rokp,3,1);
 <input type="checkbox" name="d1pom12" value="1" style="top:566px; left:877px;"/>
 <!-- 2.riadok -->
 <input type="text" name="d2prie" id="d2prie" style="width:243px; top:599px; left:47px;"/>
-<input type="text" name="d2rod" id="d2rod" style="width:240px; top:599px; left:304px;"/>
+<input type="text" name="d2rod" id="d2rod" maxlength="10" style="width:240px; top:599px; left:304px;"/>
 <input type="checkbox" name="d2pomc" value="1" style="top:611px; left:562px;"/>
 <input type="checkbox" name="d2pom1" value="1" style="top:611px; left:598px;"/>
 <input type="checkbox" name="d2pom2" value="1" style="top:611px; left:623px;"/>
@@ -1903,7 +1909,7 @@ $t02=substr($rokp,3,1);
 <input type="checkbox" name="d2pom12" value="1" style="top:611px; left:877px;"/>
 <!-- 3.riadok -->
 <input type="text" name="d3prie" id="d3prie" style="width:243px; top:644px; left:47px;"/>
-<input type="text" name="d3rod" id="d3rod" style="width:240px; top:644px; left:304px;"/>
+<input type="text" name="d3rod" id="d3rod" maxlength="10" style="width:240px; top:644px; left:304px;"/>
 <input type="checkbox" name="d3pomc" value="1" style="top:655px; left:562px;"/>
 <input type="checkbox" name="d3pom1" value="1" style="top:655px; left:598px;"/>
 <input type="checkbox" name="d3pom2" value="1" style="top:655px; left:623px;"/>
@@ -1919,7 +1925,7 @@ $t02=substr($rokp,3,1);
 <input type="checkbox" name="d3pom12" value="1" style="top:655px; left:877px;"/>
 <!-- 4.riadok -->
 <input type="text" name="d4prie" id="d4prie" style="width:243px; top:688px; left:47px;"/>
-<input type="text" name="d4rod" id="d4rod" style="width:240px; top:688px; left:304px;"/>
+<input type="text" name="d4rod" id="d4rod" maxlength="10" style="width:240px; top:688px; left:304px;"/>
 <input type="checkbox" name="d4pomc" value="1" style="top:700px; left:562px;"/>
 <input type="checkbox" name="d4pom1" value="1" style="top:700px; left:598px;"/>
 <input type="checkbox" name="d4pom2" value="1" style="top:700px; left:623px;"/>
@@ -1964,7 +1970,7 @@ $t02=substr($rokp,3,1);
 <input type="text" name="r42" id="r42" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:395px; left:477px;"/>
 <input type="text" name="r43" id="r43" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:440px; left:477px;"/>
 <input type="text" name="r44" id="r44" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:480px; left:569px;"/>
-<input type="text" name="r45" id="r45" style="width:35px; top:521px; left:616px;"/>
+<input type="text" name="r45" id="r45" maxlength="2" style="width:35px; top:521px; left:616px;"/>
 <input type="text" name="r46" id="r46" onkeyup="CiarkaNaBodku(this);" style="width:129px; top:561px; left:591px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="zamestnanecka();" title="Doplni zamestnaneckú prémiu"
       class="btn-row-tool" style="top:562px; left:736px;">
@@ -1993,17 +1999,17 @@ $t02=substr($rokp,3,1);
 <!-- VI.ODDIEL pokracovanie -->
 <input type="text" name="r62" id="r62" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:117px; left:581px;"/>
 <input type="text" name="r63" id="r63" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:157px; left:489px;"/>
-<input type="text" name="r63a" id="r63a" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:197px; left:489px;"/> <!-- dopyt, novinka -->
+<input type="text" name="r63a" id="r63a" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:197px; left:489px;"/>
 <input type="text" name="r64" id="r64" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:238px; left:489px;"/>
-<input type="text" name="r65" id="r65" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:283px; left:489px;"/> <!-- dopyt, iný výpoèet s r.63a -->
-<input type="text" name="r66" id="r66" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:332px; left:489px;"/> <!-- dopyt, iný výpoèet s r.63a -->
+<input type="text" name="r65" id="r65" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:283px; left:489px;"/>
+<input type="text" name="r66" id="r66" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:332px; left:489px;"/>
 
 <!-- VII.ODDIEL -->
-<input type="text" name="r67" id="r67" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:761px; left:541px;"/> <!-- dopyt, iný výpoèet -->
+<input type="text" name="r67" id="r67" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:761px; left:541px;"/>
 <input type="text" name="r68" id="r68" onkeyup="CiarkaNaBodku(this);" style="width:265px; top:816px; left:519px;"/>
-<input type="text" name="r69" id="r69" onkeyup="CiarkaNaBodku(this);" style="width:265px; top:866px; left:519px;"/> <!-- dopyt, iný výpoèet -->
-<input type="text" name="r70" id="r70" onkeyup="CiarkaNaBodku(this);" style="width:265px; top:947px; left:519px;"/> <!-- dopyt, iný výpoèet -->
-<input type="text" name="r71" id="r71" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:1032px; left:632px;"/> <!-- dopyt, iný výpoèet -->
+<input type="text" name="r69" id="r69" onkeyup="CiarkaNaBodku(this);" style="width:265px; top:866px; left:519px;"/>
+<input type="text" name="r70" id="r70" onkeyup="CiarkaNaBodku(this);" style="width:265px; top:947px; left:519px;"/>
+<input type="text" name="r71" id="r71" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:1032px; left:632px;"/>
 <input type="text" name="r72" id="r72" onkeyup="CiarkaNaBodku(this);" style="width:173px; top:1084px; left:611px;"/>
 <input type="text" name="r73" id="r73" onkeyup="CiarkaNaBodku(this);" style="width:131px; top:1131px; left:653px;"/>
 <input type="text" name="r74" id="r74" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:1177px; left:633px;"/>
@@ -2017,16 +2023,15 @@ $t02=substr($rokp,3,1);
 <!-- VIII.ODDIEL -->
 <input type="checkbox" name="upl50" value="1" style="top:156px; left:59px;"/>
 <input type="checkbox" name="spln3" value="1" style="top:156px; left:295px;"/>
-<input type="text" name="r75" id="r75" onkeyup="CiarkaNaBodku(this);"
-       style="width:197px; top:198px; left:316px;"/>
+<input type="text" name="r75" id="r75" onkeyup="CiarkaNaBodku(this);" style="width:197px; top:198px; left:316px;"/>
 <!-- Prijimatel -->
-<input type="text" name="pico" id="pico" style="width:175px; top:285px; left:51px;"/>
-<input type="text" name="psid" id="psid" style="width:83px; top:285px; left:258px;"/>
+<input type="text" name="pico" id="pico" maxlength="8" style="width:175px; top:285px; left:51px;"/>
+<input type="text" name="psid" id="psid" maxlength="4" style="width:83px; top:285px; left:258px;"/>
 <input type="text" name="pfor" id="pfor" style="width:520px; top:285px; left:373px;"/>
 <input type="text" name="pmen" id="pmen" style="width:842px; top:339px; left:51px;"/>
 <input type="text" name="puli" id="puli" style="width:635px; top:449px; left:51px;"/>
 <input type="text" name="pcdm" id="pcdm" style="width:175px; top:449px; left:718px;"/>
-<input type="text" name="ppsc" id="ppsc" style="width:106px; top:500px; left:51px;"/>
+<input type="text" name="ppsc" id="ppsc" maxlength="5" style="width:106px; top:500px; left:51px;"/>
 <input type="text" name="pmes" id="pmes" style="width:703px; top:500px; left:190px;"/>
 <input type="checkbox" name="zslu" value="1" style="top:543px; left:59px;"/>
 
@@ -2034,13 +2039,13 @@ $t02=substr($rokp,3,1);
 <input type="checkbox" name="uoso" value="1" style="top:655px; left:59px;"/>
 <img src="../obr/ikony/info_blue_icon.png" title="Štatistický èíselník krajín"
      onclick="CisKrajin();" class="btn-row-tool" style="top:759px; left:7px;">
-<input type="text" name="pzks1" id="pzks1" style="width:61px; top:758px; left:51px;"/>
+<input type="text" name="pzks1" id="pzks1" maxlength="3" style="width:61px; top:758px; left:51px;"/>
 <input type="text" name="pzpr1" id="pzpr1" onkeyup="CiarkaNaBodku(this);" style="width:231px; top:758px; left:135px;"/>
 <input type="text" name="pzvd1" id="pzvd1" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:758px; left:389px;"/>
-<input type="text" name="pzks2" id="pzks2" style="width:61px; top:798px; left:51px;"/>
+<input type="text" name="pzks2" id="pzks2" maxlength="3" style="width:61px; top:798px; left:51px;"/>
 <input type="text" name="pzpr2" id="pzpr2" onkeyup="CiarkaNaBodku(this);" style="width:231px; top:798px; left:135px;"/>
 <input type="text" name="pzvd2" id="pzvd2" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:798px; left:389px;"/>
-<input type="text" name="pzks3" id="pzks3" style="width:61px; top:838px; left:51px;"/>
+<input type="text" name="pzks3" id="pzks3" maxlength="3" style="width:61px; top:838px; left:51px;"/>
 <input type="text" name="pzpr3" id="pzpr3" onkeyup="CiarkaNaBodku(this);" style="width:231px; top:838px; left:135px;"/>
 <input type="text" name="pzvd3" id="pzvd3" onkeyup="CiarkaNaBodku(this);" style="width:162px; top:838px; left:389px;"/>
 <textarea name="osob" id="osob" style="width:838px; height:308px; top:919px; left:53px;"><?php echo $osob; ?></textarea>
@@ -2054,8 +2059,8 @@ $t02=substr($rokp,3,1);
 <!-- X.ODDIEL -->
 <input type="text" name="sdnr" id="sdnr" style="width:842px; top:176px; left:51px;"/>
 <input type="text" name="udnr" id="udnr" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:217px; left:648px;"/>
-<input type="text" name="pril" id="pril" style="width:35px; top:311px; left:179px;"/>
-<input type="text" name="dat" id="dat" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:383px; left:277px;"/>
+<input type="text" name="pril" id="pril" maxlength="2" style="width:35px; top:311px; left:179px;"/>
+<input type="text" name="dat" id="dat" maxlength="10" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:383px; left:277px;"/>
 
 <!-- XI.ODDIEL -->
 <input type="checkbox" name="zdbo" value="1" style="top:496px; left:59px;"/>
@@ -2064,7 +2069,7 @@ $t02=substr($rokp,3,1);
 <input type="checkbox" name="post" value="1" onchange="klikpost();" style="top:602px; left:116px;"/>
 <input type="checkbox" name="ucet" value="1" onchange="klikucet();" style="top:602px; left:323px;"/>
 <input type="text" name="diban" id="diban" style="width:773px; top:634px; left:116px;"/>
-<input type="text" name="da2" id="da2" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:734px; left:116px;"/>
+<input type="text" name="da2" id="da2" maxlength="10" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:734px; left:116px;"/>
 
 <!-- XII.ODDIEL -->
 <textarea name="pomv" id="pomv" style="width:838px; height:404px; top:835px; left:53px;"><?php echo $pomv; ?></textarea>
@@ -2159,7 +2164,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(190,7," ","$rmc1",1,"L");
 $text="01012010";
 $text=SKDatum($hlavicka->dar);
-if ( $text =='00.00.0000' OR $hlavicka->nrz == 0 ) $text="";
+if ( $text =='00.00.0000' ) $text=""; //OR $hlavicka->nrz == 0
 $pole = explode(".", $text);
 $text=$pole[0].$pole[1].$pole[2];
 $t01=substr($text,0,1);
@@ -2196,7 +2201,7 @@ $pdf->Cell(173,6," ","$rmc1",0,"C");$pdf->Cell(5,7,"$t01","$rmc",0,"R");$pdf->Ce
 //datum dodatocneho
 $pdf->SetY(68);
 $text="";
-if ( $hlavicka->druh == 3 ) $text=SkDatum($hlavicka->ddp);
+$text=SkDatum($hlavicka->ddp); //if ( $hlavicka->druh == 3 )
 if ( $text == '00.00.0000' ) { $text=""; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -2328,7 +2333,7 @@ $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t07","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(190,5," ","$rmc1",1,"L");
 $text="12345";
 $text=$hlavicka->dpsc;
-$text=str_replace(" ","",$text);
+//$text=str_replace(" ","",$text);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -2759,7 +2764,7 @@ $pdf->Cell(144,7," ","$rmc1",0,"L");$pdf->Cell(4,4,"$text","$rmc",1,"C");
 $pdf->Cell(195,6," ","$rmc1",1,"L");
 $text="0123456";
 $hodx=100*$hlavicka->r28;
-if ( $hlavicka->r27 == 0 ) $hodx="";
+//if ( $hlavicka->r27 == 0 ) $hodx="";
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 7s",$hodx);
 $t01=substr($text,0,1);
@@ -2856,7 +2861,7 @@ if ( $hlavicka->d1pom9 == 1 ) $t09="x";
 if ( $hlavicka->d1pom10 == 1 ) $t10="x";
 if ( $hlavicka->d1pom11 == 1 ) $t11="x";
 if ( $hlavicka->d1pom12 == 1 ) $t12="x";
-if ( $hlavicka->d1pomc == 1 ) { $tc="x"; $t01=" "; $t02=" "; $t03=" "; $t04=" "; $t05=" "; $t06=" "; $t07=" "; $t08=" "; $t09=" "; $t10=" "; $t11=" "; $t12=" "; }
+if ( $hlavicka->d1pomc == 1 ) $tc="x";
 $pdf->Cell(3,6," ","$rmc1",0,"L");$pdf->Cell(3,8,"$tc","$rmc",0,"C");
 $pdf->Cell(5,9," ","$rmc1",0,"C");$pdf->Cell(3,8,"$t01","$rmc",0,"C");$pdf->Cell(2,19," ","$rmc1",0,"C");$pdf->Cell(4,8,"$t02","$rmc",0,"C");
 $pdf->Cell(2,9," ","$rmc1",0,"C");$pdf->Cell(3,8,"$t03","$rmc",0,"C");$pdf->Cell(3,9," ","$rmc1",0,"C");$pdf->Cell(3,8,"$t04","$rmc",0,"R");
@@ -2902,7 +2907,7 @@ if ( $hlavicka->d2pom9 == 1 ) $t09="x";
 if ( $hlavicka->d2pom10 == 1 ) $t10="x";
 if ( $hlavicka->d2pom11 == 1 ) $t11="x";
 if ( $hlavicka->d2pom12 == 1 ) $t12="x";
-if ( $hlavicka->d2pomc == 1 ) { $tc="x"; $t01=" "; $t02=" "; $t03=" "; $t04=" "; $t05=" "; $t06=" "; $t07=" "; $t08=" "; $t09=" "; $t10=" "; $t11=" "; $t12=" "; }
+if ( $hlavicka->d2pomc == 1 ) $tc="x";
 $pdf->Cell(3,6," ","$rmc1",0,"L");$pdf->Cell(3,8,"$tc","$rmc",0,"C");
 $pdf->Cell(5,9," ","$rmc1",0,"C");$pdf->Cell(3,8,"$t01","$rmc",0,"C");$pdf->Cell(2,19," ","$rmc1",0,"C");$pdf->Cell(4,8,"$t02","$rmc",0,"C");
 $pdf->Cell(2,9," ","$rmc1",0,"C");$pdf->Cell(3,8,"$t03","$rmc",0,"C");$pdf->Cell(3,9," ","$rmc1",0,"C");$pdf->Cell(3,8,"$t04","$rmc",0,"R");
@@ -2948,7 +2953,7 @@ if ( $hlavicka->d3pom9 == 1 ) $t09="x";
 if ( $hlavicka->d3pom10 == 1 ) $t10="x";
 if ( $hlavicka->d3pom11 == 1 ) $t11="x";
 if ( $hlavicka->d3pom12 == 1 ) $t12="x";
-if ( $hlavicka->d3pomc == 1 ) { $tc="x"; $t01=" "; $t02=" "; $t03=" "; $t04=" "; $t05=" "; $t06=" "; $t07=" "; $t08=" "; $t09=" "; $t10=" "; $t11=" "; $t12=" "; }
+if ( $hlavicka->d3pomc == 1 ) $tc="x";
 $pdf->Cell(3,6," ","$rmc1",0,"L");$pdf->Cell(3,9,"$tc","$rmc",0,"C");
 $pdf->Cell(5,9," ","$rmc1",0,"C");$pdf->Cell(3,9,"$t01","$rmc",0,"C");$pdf->Cell(2,19," ","$rmc1",0,"C");$pdf->Cell(4,9,"$t02","$rmc",0,"C");
 $pdf->Cell(2,9," ","$rmc1",0,"C");$pdf->Cell(3,9,"$t03","$rmc",0,"C");$pdf->Cell(3,9," ","$rmc1",0,"C");$pdf->Cell(3,9,"$t04","$rmc",0,"R");
@@ -2994,7 +2999,7 @@ if ( $hlavicka->d4pom9 == 1 ) $t09="x";
 if ( $hlavicka->d4pom10 == 1 ) $t10="x";
 if ( $hlavicka->d4pom11 == 1 ) $t11="x";
 if ( $hlavicka->d4pom12 == 1 ) $t12="x";
-if ( $hlavicka->d4pomc == 1 ) { $tc="x"; $t01=" "; $t02=" "; $t03=" "; $t04=" "; $t05=" "; $t06=" "; $t07=" "; $t08=" "; $t09=" "; $t10=" "; $t11=" "; $t12=" "; }
+if ( $hlavicka->d4pomc == 1 ) $tc="x";
 $pdf->Cell(3,6," ","$rmc1",0,"L");$pdf->Cell(3,7,"$tc","$rmc",0,"C");
 $pdf->Cell(5,9," ","$rmc1",0,"C");$pdf->Cell(3,7,"$t01","$rmc",0,"C");$pdf->Cell(2,19," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t02","$rmc",0,"C");
 $pdf->Cell(2,9," ","$rmc1",0,"C");$pdf->Cell(3,7,"$t03","$rmc",0,"C");$pdf->Cell(3,9," ","$rmc1",0,"C");$pdf->Cell(3,7,"$t04","$rmc",0,"R");
@@ -4103,8 +4108,6 @@ $pdf->Cell(190,6," ","$rmc1",1,"L");
 $text="01234567";
 $hodx=100*$hlavicka->r75;
 if ( $hodx == 0 ) $hodx="";
-if ( $hlavicka->upl50 == 1 ) $hodx="";
-if ( $hlavicka->druh == 3 ) $hodx="";
 $text=sprintf("% 8s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -4125,8 +4128,6 @@ $pdf->Cell(195,14," ","$rmc1",1,"L");
 $text="0123456789xy";
 $text=$hlavicka->pico;
 if ( $hlavicka->pico < 1000000 AND $hlavicka->pico > 1 ) { $text="00".$hlavicka->pico; }
-if ( $hlavicka->upl50 == 1 ) $text="";
-if ( $hlavicka->druh == 3 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4136,8 +4137,6 @@ $t06=substr($text,5,1);
 $t07=substr($text,6,1);
 $t08=substr($text,7,1);
 $text=$hlavicka->psid;
-if ( $hlavicka->upl50 == 1 ) $text="";
-if ( $hlavicka->druh == 3 ) $text="";
 $t09=substr($text,0,1);
 $t10=substr($text,1,1);
 $t11=substr($text,2,1);
@@ -4151,8 +4150,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t11","$rmc",0,"C");$pdf->Cell
 //76pravna forma
 $text="ABCDEFGHIJKLMNOPRSTUVXY";
 $text=$hlavicka->pfor;
-if ( $hlavicka->upl50 == 1 ) $text="";
-if ( $hlavicka->druh == 3 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4193,8 +4190,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t23","$rmc",1,"C");
 $pdf->Cell(195,6," ","$rmc1",1,"L");
 $text="ABCDEFGHIJKLMNOPRSTUVXYZW+-1234567890";
 $text=$hlavicka->pmen;
-if ( $hlavicka->upl50 == 1 ) $text="";
-if ( $hlavicka->druh == 3 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4255,8 +4250,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t37","$rmc",1,"C");
 $pdf->Cell(195,3," ","$rmc1",1,"L");
 $text="ABCDEFGHIJKLMNOPRSTUVXYZW+-1234567890";
 $text="";
-if ( $hlavicka->upl50 == 1 ) $text="";
-if ( $hlavicka->druh == 3 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4318,8 +4311,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t37","$rmc",1,"C");
 $pdf->Cell(195,10," ","$rmc1",1,"L");
 $text="ABCDEFGHIJKLMNOPRSTUVXYZW+-1";
 $text=$hlavicka->puli;
-if ( $hlavicka->upl50 == 1 ) $text="";
-if ( $hlavicka->druh == 3 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4366,8 +4357,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t27","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(2,7," ","$rmc1",0,"L");
 $text="12345678";
 $text=$hlavicka->pcdm;
-if ( $hlavicka->upl50 == 1 ) $text="";
-if ( $hlavicka->druh == 3 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4385,9 +4374,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(190,7," ","$rmc1",1,"L");
 $text="12345";
 $text=$hlavicka->ppsc;
-$text=str_replace(" ","",$text);
-if ( $hlavicka->upl50 == 1 ) $text="";
-if ( $hlavicka->druh == 3 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4399,8 +4385,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");
 //76obec
 $text="ABCDEFGHIJKLMNOPRSTUVXY12345678";
 $text=$hlavicka->pmes;
-if ( $hlavicka->upl50 == 1 ) $text="";
-if ( $hlavicka->druh == 3 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4466,7 +4450,6 @@ $pdf->Cell(3,5," ","$rmc1",0,"R");$pdf->Cell(4,5,"$text","$rmc",1,"C");
 //kod statu 1
 $pdf->Cell(190,19," ","$rmc1",1,"L");
 $text=$hlavicka->pzks1;
-if ( $hlavicka->nrz != 1 ) $text=" ";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4475,7 +4458,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"R");
 //prijmy 1
 $text="0123456789";
 $hodx=100*$hlavicka->pzpr1;
-if ( $hodx == 0 OR $hlavicka->nrz != 1 ) $hodx="";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -4495,7 +4478,7 @@ $pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 //vydavky1
 $text="0123456789";
 $hodx=100*$hlavicka->pzvd1;
-if ( $hodx == 0 OR $hlavicka->nrz != 1 ) $hodx="";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 7s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -4512,7 +4495,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",1,"C");
 //kod statu 2
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $text=$hlavicka->pzks2;
-if ( $hlavicka->nrz != 1 ) $text=" ";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4521,7 +4503,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"R");
 //prijmy 2
 $text="0123456789";
 $hodx=100*$hlavicka->pzpr2;
-if ( $hodx == 0 OR $hlavicka->nrz != 1 ) $hodx="";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -4541,7 +4523,7 @@ $pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 //vydavky2
 $text="0123456789";
 $hodx=100*$hlavicka->pzvd2;
-if ( $hodx == 0 OR $hlavicka->nrz != 1 ) $hodx="";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 7s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -4558,7 +4540,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",1,"C");
 //kod statu 3
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $text=$hlavicka->pzks3;
-if ( $hlavicka->nrz != 1 ) $text=" ";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4567,7 +4548,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"R");
 //prijmy 3
 $text="0123456789";
 $hodx=100*$hlavicka->pzpr3;
-if ( $hodx == 0 OR $hlavicka->nrz != 1 ) $hodx="";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -4587,7 +4568,7 @@ $pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 //vydavky3
 $text="0123456789";
 $hodx=100*$hlavicka->pzvd3;
-if ( $hodx == 0 OR $hlavicka->nrz != 1 ) $hodx="";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 7s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -4604,7 +4585,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",1,"C");
 //IX.ODDIEL
 //osobitne zaznamy
 $pdf->Cell(190,13," ","$rmc1",1,"L");
-if ( $hlavicka->uoso == 0 ) $hlavicka->osob="";
 $poleosob = explode("\r\n", $hlavicka->osob);
 if ( $poleosob[0] != '' )
      {
@@ -4651,7 +4631,6 @@ $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(5,7,"$t09","$rmc",0,"C");$pdf->Cell
 //77 stat danovej rezidencie
 $pdf->Cell(190,18," ","$rmc1",1,"L");
 $text=$hlavicka->sdnr;
-if ( $hlavicka->nrz == 0 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4713,7 +4692,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t37","$rmc",1,"C");
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $text="+0123456789";
 $hodx=100*$hlavicka->udnr;
-if ( $hodx == 0 OR $hlavicka->nrz == 0 ) $hodx="";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -4778,12 +4757,6 @@ $text=" ";
 if ( $hlavicka->zprp == 1 ) $text="x";
 $pdf->Cell(3,5," ","$rmc1",0,"R");$pdf->Cell(4,4,"$text","$rmc",1,"C");
 
-if ( $hlavicka->zdbo == 0 AND $hlavicka->zpre == 0 AND $hlavicka->zprp == 0 )
-{
-$hlavicka->ucet="0";
-$hlavicka->post="0";
-$hlavicka->da2="";
-}
 //postovou poukazkou ci na ucet
 $pdf->Cell(190,5," ","$rmc1",1,"L");
 $textp=" ";
@@ -4794,8 +4767,7 @@ $pdf->Cell(16,5," ","$rmc1",0,"R");$pdf->Cell(4,4,"$textp","$rmc",0,"L");$pdf->C
 
 //iban
 $pdf->Cell(190,4," ","$rmc1",1,"L");
-$text=" ";
-if ( $hlavicka->ucet == 1 ) $text=$hlavicka->diban;
+$text=$hlavicka->diban;
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
