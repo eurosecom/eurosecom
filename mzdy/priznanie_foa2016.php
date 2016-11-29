@@ -1170,13 +1170,9 @@ $dtitl = $fir_riadok->dtitl;
 $dtitz = $fir_riadok->dtitz;
 $rdc = $fir_riadok->rdc;
 $rdk = $fir_riadok->rdk;
-$fdic = 1*$fir_riadok->fdic;
-if ( $fdic == 0 ) 
-{ 
-$fdic=$frdc.$frdk; 
-$sqlx = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET fdic='$fdic' ";
-$vysledekx = mysql_query("$sqlx");
-}
+$fdic = $fir_riadok->fdic;
+if( $fdic == 0 ) { $fdic = ""; }
+
 
 $dar = $fir_riadok->dar;
 $darsk=SkDatum($dar);
@@ -2156,6 +2152,7 @@ $pdf->SetY(10);
 //rodne cislo
 $pdf->Cell(190,45," ","$rmc1",1,"L");
 $text="1234567890";
+if( $hlavicka->fdic == 0 ) { $hlavicka->fdic = ""; }
 $text=$hlavicka->fdic;
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);

@@ -372,7 +372,7 @@ if ( $j == 0 )
 
   $text = " <hlavicka>"."\r\n"; fwrite($soubor, $text);
 
-$rodneCislo=$hlavicka->rdc.$hlavicka->rdk;
+$rodneCislo=$hlavicka->fdic;
   $text = "  <rodneCislo><![CDATA[".$rodneCislo."]]></rodneCislo>"."\r\n"; fwrite($soubor, $text);
 
 $datumNarodenia=SkDatum($hlavicka->dar);
