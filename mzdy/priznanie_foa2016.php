@@ -519,7 +519,7 @@ $sqlt = <<<mzdprc
    druh         DECIMAL(10,0) DEFAULT 0,
    rdc          VARCHAR(6) NOT NULL,
    rdk          VARCHAR(4) NOT NULL,
-   dar          DATE,
+   dar          DATE NOT NULL,
    dprie        VARCHAR(30) NOT NULL,
    dmeno        VARCHAR(30) NOT NULL,
    dtitl        VARCHAR(30) NOT NULL,
@@ -676,21 +676,21 @@ $sqlt = <<<mzdprc
    uoso         DECIMAL(2,0) DEFAULT 0,
    osob         TEXT,
    pril         DECIMAL(2,0) DEFAULT 0,
-   dat          DATE,
+   dat          DATE NOT NULL,
    zdbo         DECIMAL(2,0) DEFAULT 0,
    zrbo         DECIMAL(2,0) DEFAULT 0,
    post         DECIMAL(2,0) DEFAULT 0,
    ucet         DECIMAL(2,0) DEFAULT 0,
    uceb         VARCHAR(30) NOT NULL,
    numb         VARCHAR(10) NOT NULL,
-   da2          DATE,
+   da2          DATE NOT NULL,
    zpre         DECIMAL(2,0) DEFAULT 0,
    zprp         DECIMAL(2,0) DEFAULT 0,
    post2        DECIMAL(2,0) DEFAULT 0,
    ucet2        DECIMAL(2,0) DEFAULT 0,
    uceb2        VARCHAR(30) NOT NULL,
    numb2        VARCHAR(10) NOT NULL,
-   da3          DATE,
+   da3          DATE NOT NULL,
    pomv         TEXT,
    px17          DECIMAL(10,2) DEFAULT 0,
    r71          DECIMAL(10,2) DEFAULT 0,
@@ -892,10 +892,23 @@ $sqldok = mysql_query("$sql");
   $rdc=$riaddok->rdc;
   $rdk=$riaddok->rdk;
   $dar=$riaddok->dar;
+
+  if( $rdc != '' ) { $dar=""; }
   }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_mzdtextmzd WHERE invt = $cislo_oc";
+$sqldok = mysql_query("$sql");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $zstat=$riaddok->zstat;
+
+  if( $zstat == '' ) { $zstat="SR"; }
+  }
+
 $ttvv = "INSERT INTO F$kli_vxcf"."_mzdprcvypl$kli_uzid ".
-" ( druh,oc,dmeno,dprie,dtitl,rdc,rdk,dar,duli,dcdm,dpsc,dmes,dtel  ) VALUES ".
-" ( 1, '$cislo_oc', '$meno', '$prie', '$titl', '$rdc', '$rdk', '$dar', '$zuli', '$zcdm', '$zpsc', '$zmes', '$ztel'  )";
+" ( druh,oc,dmeno,dprie,dtitl,rdc,rdk,dar,duli,dcdm,dpsc,dmes,dtel,xstat,da2,dat  ) VALUES ".
+" ( 1, '$cislo_oc', '$meno', '$prie', '$titl', '$rdc', '$rdk', '$dar', '$zuli', '$zcdm', '$zpsc', '$zmes', '$ztel', '$zstat', '0000-00-00', '0000-00-00'  )";
 $ttqq = mysql_query("$ttvv");
 
 //uloz do priznania

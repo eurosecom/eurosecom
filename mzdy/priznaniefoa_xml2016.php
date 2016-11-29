@@ -145,7 +145,7 @@ dl.legend-area > dt {
    <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
   </tr>
   <tr>
-   <td class="header">Daò z príjmov FOA / Export XML - <span class="subheader"><?php echo "$oc $meno $prie";?></span></td> <!-- dopyt, rozbeha "oc" -->
+   <td class="header">Daò z príjmov FOA / Export XML - <span class="subheader"><?php echo "$cislo_oc $meno $prie";?></span></td> <!-- dopyt, rozbeha "oc" -->
    <td></td>
   </tr>
  </table>
