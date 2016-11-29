@@ -271,8 +271,8 @@ $darsql=SqlDatum($dar);
 $druh = 1*$_REQUEST['druh'];
 $ddp = $_REQUEST['ddp'];
 $ddpsql=SqlDatum($ddp);
-$cinnost = strip_tags($_REQUEST['cinnost']);
-$dprie = strip_tags($_REQUEST['dprie']);
+$cinnost = trim(strip_tags($_REQUEST['cinnost']));
+//$dprie = strip_tags($_REQUEST['dprie']);
 //$dmeno = strip_tags($_REQUEST['dmeno']);
 //$dtitl = strip_tags($_REQUEST['dtitl']);
 //$dtitz = strip_tags($_REQUEST['dtitz']);
@@ -283,27 +283,27 @@ $dprie = strip_tags($_REQUEST['dprie']);
 //$xstat = strip_tags($_REQUEST['xstat']);
 $nrz = 1*$_REQUEST['nrz'];
 $prp = 1*$_REQUEST['prp'];
-$d2uli = strip_tags($_REQUEST['d2uli']);
-$d2cdm = strip_tags($_REQUEST['d2cdm']);
-$d2psc = strip_tags($_REQUEST['d2psc']);
-$d2mes = strip_tags($_REQUEST['d2mes']);
+$d2uli = trim(strip_tags($_REQUEST['d2uli']));
+$d2cdm = trim(strip_tags($_REQUEST['d2cdm']));
+$d2psc = trim(strip_tags($_REQUEST['d2psc']));
+$d2mes = trim(strip_tags($_REQUEST['d2mes']));
 //$d2tel = strip_tags($_REQUEST['d2tel']);
 //$d2fax = strip_tags($_REQUEST['d2fax']);
 //$oznucet = 1*$_REQUEST['oznucet'];
-$zprie = strip_tags($_REQUEST['zprie']);
-$zmeno = strip_tags($_REQUEST['zmeno']);
-$ztitl = strip_tags($_REQUEST['ztitl']);
-$ztitz = strip_tags($_REQUEST['ztitz']);
-$zrdc = strip_tags($_REQUEST['zrdc']);
-$zrdk = strip_tags($_REQUEST['zrdk']);
-$zuli = strip_tags($_REQUEST['zuli']);
-$zcdm = strip_tags($_REQUEST['zcdm']);
-$zpsc = strip_tags($_REQUEST['zpsc']);
-$zmes = strip_tags($_REQUEST['zmes']);
+$zprie = trim(strip_tags($_REQUEST['zprie']));
+$zmeno = trim(strip_tags($_REQUEST['zmeno']));
+$ztitl = trim(strip_tags($_REQUEST['ztitl']));
+$ztitz = trim(strip_tags($_REQUEST['ztitz']));
+$zrdc = trim(strip_tags($_REQUEST['zrdc']));
+$zrdk = trim(strip_tags($_REQUEST['zrdk']));
+$zuli = trim(strip_tags($_REQUEST['zuli']));
+$zcdm = trim(strip_tags($_REQUEST['zcdm']));
+$zpsc = trim(strip_tags($_REQUEST['zpsc']));
+$zmes = trim(strip_tags($_REQUEST['zmes']));
 //$ztel = strip_tags($_REQUEST['ztel']);
-$zstat = strip_tags($_REQUEST['zstat']);
-$dtel = strip_tags($_REQUEST['dtel']);
-$dmailfax = strip_tags($_REQUEST['dmailfax']);
+$zstat = trim(strip_tags($_REQUEST['zstat']));
+$dtel = str_replace(" ","",strip_tags($_REQUEST['dtel']));
+$dmailfax = trim(strip_tags($_REQUEST['dmailfax']));
 //$d3uli = strip_tags($_REQUEST['d3uli']);
 //$d3cdm = strip_tags($_REQUEST['d3cdm']);
 //$d3psc = strip_tags($_REQUEST['d3psc']);
@@ -328,70 +328,75 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
 if ( $strana == 2 ) {
 $r29 = 1*$_REQUEST['r29'];
 $r30 = 1*$_REQUEST['r30'];
-$mprie = strip_tags($_REQUEST['mprie']);
-$mrod = strip_tags($_REQUEST['mrod']);
+$mprie = trim(strip_tags($_REQUEST['mprie']));
+$mrod = trim(strip_tags($_REQUEST['mrod']));
 $mpri = 1*$_REQUEST['mpri'];
-$mpom = strip_tags($_REQUEST['mpom']);
-$d1prie = strip_tags($_REQUEST['d1prie']);
-$d1rod = strip_tags($_REQUEST['d1rod']);
-$d1pomc = strip_tags($_REQUEST['d1pomc']);
-$d1pom1 = strip_tags($_REQUEST['d1pom1']);
-$d1pom2 = strip_tags($_REQUEST['d1pom2']);
-$d1pom3 = strip_tags($_REQUEST['d1pom3']);
-$d1pom4 = strip_tags($_REQUEST['d1pom4']);
-$d1pom5 = strip_tags($_REQUEST['d1pom5']);
-$d1pom6 = strip_tags($_REQUEST['d1pom6']);
-$d1pom7 = strip_tags($_REQUEST['d1pom7']);
-$d1pom8 = strip_tags($_REQUEST['d1pom8']);
-$d1pom9 = strip_tags($_REQUEST['d1pom9']);
-$d1pom10 = strip_tags($_REQUEST['d1pom10']);
-$d1pom11 = strip_tags($_REQUEST['d1pom11']);
-$d1pom12 = strip_tags($_REQUEST['d1pom12']);
-$d2prie = strip_tags($_REQUEST['d2prie']);
-$d2rod = strip_tags($_REQUEST['d2rod']);
-$d2pomc = strip_tags($_REQUEST['d2pomc']);
-$d2pom1 = strip_tags($_REQUEST['d2pom1']);
-$d2pom2 = strip_tags($_REQUEST['d2pom2']);
-$d2pom3 = strip_tags($_REQUEST['d2pom3']);
-$d2pom4 = strip_tags($_REQUEST['d2pom4']);
-$d2pom5 = strip_tags($_REQUEST['d2pom5']);
-$d2pom6 = strip_tags($_REQUEST['d2pom6']);
-$d2pom7 = strip_tags($_REQUEST['d2pom7']);
-$d2pom8 = strip_tags($_REQUEST['d2pom8']);
-$d2pom9 = strip_tags($_REQUEST['d2pom9']);
-$d2pom10 = strip_tags($_REQUEST['d2pom10']);
-$d2pom11 = strip_tags($_REQUEST['d2pom11']);
-$d2pom12 = strip_tags($_REQUEST['d2pom12']);
-$d3prie = strip_tags($_REQUEST['d3prie']);
-$d3rod = strip_tags($_REQUEST['d3rod']);
-$d3pomc = strip_tags($_REQUEST['d3pomc']);
-$d3pom1 = strip_tags($_REQUEST['d3pom1']);
-$d3pom2 = strip_tags($_REQUEST['d3pom2']);
-$d3pom3 = strip_tags($_REQUEST['d3pom3']);
-$d3pom4 = strip_tags($_REQUEST['d3pom4']);
-$d3pom5 = strip_tags($_REQUEST['d3pom5']);
-$d3pom6 = strip_tags($_REQUEST['d3pom6']);
-$d3pom7 = strip_tags($_REQUEST['d3pom7']);
-$d3pom8 = strip_tags($_REQUEST['d3pom8']);
-$d3pom9 = strip_tags($_REQUEST['d3pom9']);
-$d3pom10 = strip_tags($_REQUEST['d3pom10']);
-$d3pom11 = strip_tags($_REQUEST['d3pom11']);
-$d3pom12 = strip_tags($_REQUEST['d3pom12']);
-$d4prie = strip_tags($_REQUEST['d4prie']);
-$d4rod = strip_tags($_REQUEST['d4rod']);
-$d4pomc = strip_tags($_REQUEST['d4pomc']);
-$d4pom1 = strip_tags($_REQUEST['d4pom1']);
-$d4pom2 = strip_tags($_REQUEST['d4pom2']);
-$d4pom3 = strip_tags($_REQUEST['d4pom3']);
-$d4pom4 = strip_tags($_REQUEST['d4pom4']);
-$d4pom5 = strip_tags($_REQUEST['d4pom5']);
-$d4pom6 = strip_tags($_REQUEST['d4pom6']);
-$d4pom7 = strip_tags($_REQUEST['d4pom7']);
-$d4pom8 = strip_tags($_REQUEST['d4pom8']);
-$d4pom9 = strip_tags($_REQUEST['d4pom9']);
-$d4pom10 = strip_tags($_REQUEST['d4pom10']);
-$d4pom11 = strip_tags($_REQUEST['d4pom11']);
-$d4pom12 = strip_tags($_REQUEST['d4pom12']);
+$mpom = 1*$_REQUEST['mpom'];
+if ( $mpom > 12 ) { $mpom = 12; }
+$d1prie = trim(strip_tags($_REQUEST['d1prie']));
+$d1rod = trim(strip_tags($_REQUEST['d1rod']));
+$d1pomc = 1*$_REQUEST['d1pomc'];
+$d1pom1 = 1*$_REQUEST['d1pom1'];
+$d1pom2 = 1*$_REQUEST['d1pom2'];
+$d1pom3 = 1*$_REQUEST['d1pom3'];
+$d1pom4 = 1*$_REQUEST['d1pom4'];
+$d1pom5 = 1*$_REQUEST['d1pom5'];
+$d1pom6 = 1*$_REQUEST['d1pom6'];
+$d1pom7 = 1*$_REQUEST['d1pom7'];
+$d1pom8 = 1*$_REQUEST['d1pom8'];
+$d1pom9 = 1*$_REQUEST['d1pom9'];
+$d1pom10 = 1*$_REQUEST['d1pom10'];
+$d1pom11 = 1*$_REQUEST['d1pom11'];
+$d1pom12 = 1*$_REQUEST['d1pom12'];
+if ( $d1pomc == 1 ) { $d1pom1=0; $d1pom2=0; $d1pom3=0; $d1pom4=0; $d1pom5=0; $d1pom6=0; $d1pom7=0; $d1pom8=0; $d1pom9=0; $d1pom10=0; $d1pom11=0; $d1pom12=0; }
+$d2prie = trim(strip_tags($_REQUEST['d2prie']));
+$d2rod = trim(strip_tags($_REQUEST['d2rod']));
+$d2pomc = 1*$_REQUEST['d2pomc'];
+$d2pom1 = 1*$_REQUEST['d2pom1'];
+$d2pom2 = 1*$_REQUEST['d2pom2'];
+$d2pom3 = 1*$_REQUEST['d2pom3'];
+$d2pom4 = 1*$_REQUEST['d2pom4'];
+$d2pom5 = 1*$_REQUEST['d2pom5'];
+$d2pom6 = 1*$_REQUEST['d2pom6'];
+$d2pom7 = 1*$_REQUEST['d2pom7'];
+$d2pom8 = 1*$_REQUEST['d2pom8'];
+$d2pom9 = 1*$_REQUEST['d2pom9'];
+$d2pom10 = 1*$_REQUEST['d2pom10'];
+$d2pom11 = 1*$_REQUEST['d2pom11'];
+$d2pom12 = 1*$_REQUEST['d2pom12'];
+if ( $d2pomc == 1 ) { $d2pom1=0; $d2pom2=0; $d2pom3=0; $d2pom4=0; $d2pom5=0; $d2pom6=0; $d2pom7=0; $d2pom8=0; $d2pom9=0; $d2pom10=0; $d2pom11=0; $d2pom12=0; }
+$d3prie = trim(strip_tags($_REQUEST['d3prie']));
+$d3rod = trim(strip_tags($_REQUEST['d3rod']));
+$d3pomc = 1*$_REQUEST['d3pomc'];
+$d3pom1 = 1*$_REQUEST['d3pom1'];
+$d3pom2 = 1*$_REQUEST['d3pom2'];
+$d3pom3 = 1*$_REQUEST['d3pom3'];
+$d3pom4 = 1*$_REQUEST['d3pom4'];
+$d3pom5 = 1*$_REQUEST['d3pom5'];
+$d3pom6 = 1*$_REQUEST['d3pom6'];
+$d3pom7 = 1*$_REQUEST['d3pom7'];
+$d3pom8 = 1*$_REQUEST['d3pom8'];
+$d3pom9 = 1*$_REQUEST['d3pom9'];
+$d3pom10 = 1*$_REQUEST['d3pom10'];
+$d3pom11 = 1*$_REQUEST['d3pom11'];
+$d3pom12 = 1*$_REQUEST['d3pom12'];
+if ( $d3pomc == 1 ) { $d3pom1=0; $d3pom2=0; $d3pom3=0; $d3pom4=0; $d3pom5=0; $d3pom6=0; $d3pom7=0; $d3pom8=0; $d3pom9=0; $d3pom10=0; $d3pom11=0; $d3pom12=0; }
+$d4prie = trim(strip_tags($_REQUEST['d4prie']));
+$d4rod = trim(strip_tags($_REQUEST['d4rod']));
+$d4pomc = 1*$_REQUEST['d4pomc'];
+$d4pom1 = 1*$_REQUEST['d4pom1'];
+$d4pom2 = 1*$_REQUEST['d4pom2'];
+$d4pom3 = 1*$_REQUEST['d4pom3'];
+$d4pom4 = 1*$_REQUEST['d4pom4'];
+$d4pom5 = 1*$_REQUEST['d4pom5'];
+$d4pom6 = 1*$_REQUEST['d4pom6'];
+$d4pom7 = 1*$_REQUEST['d4pom7'];
+$d4pom8 = 1*$_REQUEST['d4pom8'];
+$d4pom9 = 1*$_REQUEST['d4pom9'];
+$d4pom10 = 1*$_REQUEST['d4pom10'];
+$d4pom11 = 1*$_REQUEST['d4pom11'];
+$d4pom12 = 1*$_REQUEST['d4pom12'];
+if ( $d4pomc == 1 ) { $d4pom1=0; $d4pom2=0; $d4pom3=0; $d4pom4=0; $d4pom5=0; $d4pom6=0; $d4pom7=0; $d4pom8=0; $d4pom9=0; $d4pom10=0; $d4pom11=0; $d4pom12=0; }
 $r33 = 1*$_REQUEST['r33'];
 $r34 = 1*$_REQUEST['r34'];
 $r34a = 1*$_REQUEST['r34a'];
@@ -464,7 +469,9 @@ $uppr4 = 1*$_REQUEST['uppr4'];
 $uvp61 = 1*$_REQUEST['uvp61'];
 $uvp64 = 1*$_REQUEST['uvp64'];
 $uvp61m = 1*$_REQUEST['uvp61m'];
+if ( $uvp61m > 12 ) { $uvp61m = 12; }
 $uvp64m = 1*$_REQUEST['uvp64m'];
+if ( $uvp64m > 12 ) { $uvp64m = 12; }
 
 $uos61 = 1*$_REQUEST['uos61'];
 $uos64 = 1*$_REQUEST['uos64'];
@@ -729,7 +736,7 @@ $r124 = 1*$_REQUEST['r124'];
 $r125 = 1*$_REQUEST['r125'];
 $r126 = 1*$_REQUEST['r126'];
 $r127 = 1*$_REQUEST['r127'];
-$sdnr = strip_tags($_REQUEST['sdnr']);
+$sdnr = trim(strip_tags($_REQUEST['sdnr']));
 $r129 = 1*$_REQUEST['r129'];
 $r130 = 1*$_REQUEST['r130'];
 //$udnr = $_REQUEST['udnr'];
@@ -746,55 +753,55 @@ $nrzsprev = 1*$_REQUEST['nrzsprev'];
 $upl50 = 1*$_REQUEST['upl50'];
 $spl3d = 1*$_REQUEST['spl3d'];
 $r134 = 1*$_REQUEST['r134'];
-$pico = strip_tags($_REQUEST['pico']);
-$psid = strip_tags($_REQUEST['psid']);
-$pfor = strip_tags($_REQUEST['pfor']);
-$pmen = strip_tags($_REQUEST['pmen']);
-$puli = strip_tags($_REQUEST['puli']);
-$pcdm = strip_tags($_REQUEST['pcdm']);
-$ppsc = strip_tags($_REQUEST['ppsc']);
-$pmes = strip_tags($_REQUEST['pmes']);
+$pico = trim(strip_tags($_REQUEST['pico']));
+$psid = trim(strip_tags($_REQUEST['psid']));
+$pfor = trim(strip_tags($_REQUEST['pfor']));
+$pmen = trim(strip_tags($_REQUEST['pmen']));
+$puli = trim(strip_tags($_REQUEST['puli']));
+$pcdm = trim(strip_tags($_REQUEST['pcdm']));
+$ppsc = trim(strip_tags($_REQUEST['ppsc']));
+$pmes = trim(strip_tags($_REQUEST['pmes']));
 $zslu = 1*$_REQUEST['zslu'];
 $uoso = 1*$_REQUEST['uoso'];
-$pzks1 = strip_tags($_REQUEST['pzks1']);
-$pdrp1 = strip_tags($_REQUEST['pdrp1']);
-$pdro1 = strip_tags($_REQUEST['pdro1']);
-$pdrm1 = strip_tags($_REQUEST['pdrm1']);
+$pzks1 = trim(strip_tags($_REQUEST['pzks1']));
+$pdrp1 = trim(strip_tags($_REQUEST['pdrp1']));
+$pdro1 = trim(strip_tags($_REQUEST['pdro1']));
+$pdrm1 = trim(strip_tags($_REQUEST['pdrm1']));
 $pzpr1 = 1*$_REQUEST['pzpr1'];
 $pzvd1 = 1*$_REQUEST['pzvd1'];
 $pzthvd1 = 1*$_REQUEST['pzthvd1'];
-$pzks2 = strip_tags($_REQUEST['pzks2']);
-$pdrp2 = strip_tags($_REQUEST['pdrp2']);
-$pdro2 = strip_tags($_REQUEST['pdro2']);
-$pdrm2 = strip_tags($_REQUEST['pdrm2']);
+$pzks2 = trim(strip_tags($_REQUEST['pzks2']));
+$pdrp2 = trim(strip_tags($_REQUEST['pdrp2']));
+$pdro2 = trim(strip_tags($_REQUEST['pdro2']));
+$pdrm2 = trim(strip_tags($_REQUEST['pdrm2']));
 $pzpr2 = 1*$_REQUEST['pzpr2'];
 $pzvd2 = 1*$_REQUEST['pzvd2'];
 $pzthvd2 = 1*$_REQUEST['pzthvd2'];
-$pzks3 = strip_tags($_REQUEST['pzks3']);
-$pdrp3 = strip_tags($_REQUEST['pdrp3']);
-$pdro3 = strip_tags($_REQUEST['pdro3']);
-$pdrm3 = strip_tags($_REQUEST['pdrm3']);
+$pzks3 = trim(strip_tags($_REQUEST['pzks3']));
+$pdrp3 = trim(strip_tags($_REQUEST['pdrp3']));
+$pdro3 = trim(strip_tags($_REQUEST['pdro3']));
+$pdrm3 = trim(strip_tags($_REQUEST['pdrm3']));
 $pzpr3 = 1*$_REQUEST['pzpr3'];
 $pzvd3 = 1*$_REQUEST['pzvd3'];
 $pzthvd3 = 1*$_REQUEST['pzthvd3'];
-$pzks4 = strip_tags($_REQUEST['pzks4']);
-$pdrp4 = strip_tags($_REQUEST['pdrp4']);
-$pdro4 = strip_tags($_REQUEST['pdro4']);
-$pdrm4 = strip_tags($_REQUEST['pdrm4']);
+$pzks4 = trim(strip_tags($_REQUEST['pzks4'])) ;
+$pdrp4 = trim(strip_tags($_REQUEST['pdrp4']));
+$pdro4 = trim(strip_tags($_REQUEST['pdro4']));
+$pdrm4 = trim(strip_tags($_REQUEST['pdrm4']));
 $pzpr4 = 1*$_REQUEST['pzpr4'];
 $pzvd4 = 1*$_REQUEST['pzvd4'];
 $pzthvd4 = 1*$_REQUEST['pzthvd4'];
-$pzks5 = strip_tags($_REQUEST['pzks5']);
-$pdrp5 = strip_tags($_REQUEST['pdrp5']);
-$pdro5 = strip_tags($_REQUEST['pdro5']);
-$pdrm5 = strip_tags($_REQUEST['pdrm5']);
+$pzks5 = trim(strip_tags($_REQUEST['pzks5']));
+$pdrp5 = trim(strip_tags($_REQUEST['pdrp5']));
+$pdro5 = trim(strip_tags($_REQUEST['pdro5']));
+$pdrm5 = trim(strip_tags($_REQUEST['pdrm5']));
 $pzpr5 = 1*$_REQUEST['pzpr5'];
 $pzvd5 = 1*$_REQUEST['pzvd5'];
 $pzthvd5 = 1*$_REQUEST['pzthvd5'];
-$pzks6 = strip_tags($_REQUEST['pzks6']);
-$pdrp6 = strip_tags($_REQUEST['pdrp6']);
-$pdro6 = strip_tags($_REQUEST['pdro6']);
-$pdrm6 = strip_tags($_REQUEST['pdrm6']);
+$pzks6 = trim(strip_tags($_REQUEST['pzks6']));
+$pdrp6 = trim(strip_tags($_REQUEST['pdrp6']));
+$pdro6 = trim(strip_tags($_REQUEST['pdro6']));
+$pdrm6 = trim(strip_tags($_REQUEST['pdrm6']));
 $pzpr6 = 1*$_REQUEST['pzpr6'];
 $pzvd6 = 1*$_REQUEST['pzvd6'];
 $pzthvd6 = 1*$_REQUEST['pzthvd6'];
@@ -812,7 +819,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
                      }
 
 if ( $strana == 12 ) {
-$osob = strip_tags($_REQUEST['osob']);
+$osob = trim(strip_tags($_REQUEST['osob']));
 $pril = 1*$_REQUEST['pril']; if ( $pril < 2 ) { $pril=2; }
 $dat = $_REQUEST['dat'];
 $datsql=Sqldatum($dat);
@@ -821,7 +828,7 @@ $zdbo = 1*$_REQUEST['zdbo'];
 $zpre = 1*$_REQUEST['zpre'];
 $post = 1*$_REQUEST['post'];
 $ucet = 1*$_REQUEST['ucet'];
-$diban = strip_tags($_REQUEST['diban']);
+$diban = trim(strip_tags($_REQUEST['diban']));
 //$dbic = strip_tags($_REQUEST['dbic']);
 //$uceb = strip_tags($_REQUEST['uceb']);
 //$numb = strip_tags($_REQUEST['numb']);
@@ -876,7 +883,7 @@ $prpod2 = 1*$_REQUEST['prpod2'];
 $prpod3 = 1*$_REQUEST['prpod3'];
 $prpod4 = 1*$_REQUEST['prpod4'];
 $prpod5 = 1*$_REQUEST['prpod5'];
-$prptxt = strip_tags($_REQUEST['prptxt']);
+$prptxt = trim(strip_tags($_REQUEST['prptxt']));
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
 " prpdzc='$prpdzcsql', prptxt='$prptxt', ".
 " prpzo1='$prpzo1sql', prpzo2='$prpzo2sql', prpzo3='$prpzo3sql', prpzo4='$prpzo4sql', prpzo5='$prpzo5sql', ".
@@ -955,7 +962,7 @@ $sqlt = <<<mzdprc
    oznucet      INT DEFAULT 0,
    rdc          VARCHAR(6) NOT NULL,
    rdk          VARCHAR(4) NOT NULL,
-   dar          DATE,
+   dar          DATE NOT NULL,
    dprie        VARCHAR(30) NOT NULL,
    dmeno        VARCHAR(30) NOT NULL,
    dtitl        VARCHAR(30) NOT NULL,
@@ -1117,21 +1124,21 @@ $sqlt = <<<mzdprc
    uoso         DECIMAL(2,0) DEFAULT 0,
    osob         TEXT,
    pril         DECIMAL(2,0) DEFAULT 0,
-   dat          DATE,
+   dat          DATE NOT NULL,
    zdbo         DECIMAL(2,0) DEFAULT 0,
    zrbo         DECIMAL(2,0) DEFAULT 0,
    post         DECIMAL(2,0) DEFAULT 0,
    ucet         DECIMAL(2,0) DEFAULT 0,
    uceb         VARCHAR(30) NOT NULL,
    numb         VARCHAR(10) NOT NULL,
-   da2          DATE,
+   da2          DATE NOT NULL,
    zpre         DECIMAL(2,0) DEFAULT 0,
    zprp         DECIMAL(2,0) DEFAULT 0,
    post2        DECIMAL(2,0) DEFAULT 0,
    ucet2        DECIMAL(2,0) DEFAULT 0,
    uceb2        VARCHAR(30) NOT NULL,
    numb2        VARCHAR(10) NOT NULL,
-   da3          DATE,
+   da3          DATE NOT NULL,
    pomv         TEXT,
    px17          DECIMAL(10,2) DEFAULT 0
 );
@@ -4279,7 +4286,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(190,7," ","$rmc1",1,"L");
 $text="01012010";
 $text=SKDatum($hlavicka->dar);
-if ( $text =='00.00.0000' OR $hlavicka->nrz == 0 ) $text="";
+if ( $text =='00.00.0000' ) $text="";
 $pole = explode(".", $text);
 $text=$pole[0].$pole[1].$pole[2];
 $t01=substr($text,0,1);
@@ -4315,8 +4322,7 @@ $pdf->Cell(175,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t01","$rmc",0,"C");$pdf->Ce
 
 //datum dodatocneho
 $pdf->SetY(65);
-$text="";
-if ( $hlavicka->druh == 3 ) $text=SkDatum($hlavicka->ddp);
+$text=SkDatum($hlavicka->ddp);
 if ( $text == '00.00.0000' ) { $text=""; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);

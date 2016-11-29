@@ -81,34 +81,88 @@ $dstat = $riadok->dstat;
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>FOB xml | EuroSecom</title>
-<style type="text/css">
-td.hvstup_zlte  { background-color:#ffff90; color:black; font-weight:bold;
-                  height:12px; font-size:12px; }
-td.hvstup_tzlte { background-color:#ecaa12; color:black; font-weight:bold;
-                  height:12px; font-size:12px; }
-td.hvstup_bsede { background-color:#eaeaea; color:black; font-weight:normal;
-                  height:12px; font-size:12px; }
-td.hvstup_bred { background-color:#ff6c6c; color:black; font-weight:normal;
-                  height:12px; font-size:12px; }
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/tlaciva.css">
+<title>EuroSecom - FOB xml export</title>
+<style>
+#content {
+  box-sizing: border-box;
+  background-color: white;
+  padding: 30px 25px;
+   -webkit-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  -moz-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+}
+#content > p {
+  line-height: 22px;
+  font-size: 14px;
+}
+#content > p > a {
+  color: #00e;
+}
+#content > p > a:hover {
+  text-decoration: underline;
+}
+#upozornenie > h2 {
+  line-height: 20px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  overflow: auto;
+}
+#upozornenie > h2 > strong {
+  font-size: 16px;
+  font-weight: bold;
+}
+#upozornenie > ul > li {
+  line-height: 18px;
+  margin: 10px 0;
+  font-size: 13px;
+}
+.red {
+  border-left: 4px solid #f22613;
+  text-indent: 8px;
+}
+.orange {
+  border-left: 4px solid #f89406;
+  text-indent: 8px;
+}
+dl.legend-area {
+  height: 14px;
+  line-height: 14px;
+  font-size: 11px;
+  position: relative;
+  top: 5px;
+}
+dl.legend-area > dt {
+  width:10px;
+  height:10px;
+  margin: 2px 5px 0 12px;
+}
+.box-red {
+  background-color: #f22613;
+}
+.box-orange {
+  background-color: #f89406;
+}
+.header-section {
+  padding-top: 5px;
+}
 </style>
-<script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height;
-var sirkawic = screen.width-10;
-</script>
 </HEAD>
-<BODY class="white">
-<table class="h2" width="100%">
- <tr>
-  <td>EuroSecom  -  Priznanie k dani z príjmu FO typ B rok <?php echo $kli_vrok; ?> export do XML</td>
-  <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid";?></span></td>
- </tr>
-</table>
-
+<BODY>
+<div id="wrap-heading">
+ <table id="heading">
+  <tr>
+   <td class="ilogin">EuroSecom</td>
+   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
+  </tr>
+  <tr>
+   <td class="header">Daň z príjmov FOB / Export XML - <span class="subheader"><?php echo "$dmeno $dprie";?></span></td>
+   <td></td>
+  </tr>
+ </table>
+</div>
+<div id="content">
 <?php
 //XML SUBOR elsubor=2
 if ( $copern == 10 AND $elsubor == 2  )
@@ -116,7 +170,18 @@ if ( $copern == 10 AND $elsubor == 2  )
 //prva strana
 if ( File_Exists("../tmp/$nazsub") ) { $soubor = unlink("../tmp/$nazsub"); }
      $soubor = fopen("../tmp/$nazsub", "a+");
+?>
+<?php if ( $elsubor == 2 ) { ?>
+<p>Stiahnite si nižšie uvedený súbor <strong>.xml</strong> do Vášho počítača a načítajte ho na
+<a href="https://www.financnasprava.sk/sk/titulna-stranka" target="_blank" title="Stránka Finančnej správy">www.financnasprava.sk</a>
+  alebo do aplikácie eDane:
+</p>
+<p>
+<a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
+</p>
+<?php                      } ?>
 
+<?php
 //rok2015
 $sqlt = <<<mzdprc
 (
@@ -142,6 +207,189 @@ $hlavicka=mysql_fetch_object($sql);
 $obdobie=$kli_vmes;
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
+/////////////////////////////////////////////////////////////////////UPOZORNENIE
+$upozorni=0;
+?>
+<div id="upozornenie" style="display:none;">
+<h2>
+<strong class="toleft">Upozornenie</strong>
+<dl class="toright legend-area">
+ <dt class="toleft box-red"></dt><dd class="toleft">kritické</dd>
+ <dt class="toleft box-orange"></dt><dd class="toleft">logické</dd>
+</dl>
+</h2>
+<ul id="alertpage1" style="display:none;">
+<li class="header-section">STRANA 1</li>
+<li class="red">
+<?php if ( $hlavicka->fdic == "" AND $hlavicka->dar == '0000-00-00' )
+{
+$upozorni=1;
+echo "Nie je vyplnené <strong>DIČ</strong> daňovníka.";
+}
+?>
+</li>
+<li class="red">
+<?php if ( $hlavicka->dar != '0000-00-00' AND $fir_fdic != "" )
+{
+$upozorni=1;
+echo "Súčasne vyplnené <strong>dič</strong> aj <strong>dátum narodenia</strong> daňovníka.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->druh == 3 AND $hlavicka->ddp == '0000-00-00' )
+{
+$upozorni=1;
+echo "Pri <strong>dodatočnom</strong> daňovom priznaní <strong> nie je vyplnený dátum</strong> zistenia skutočnosti na podanie dodatočného priznania.";
+}
+?>
+</li>
+<li class="red">
+<?php if ( ( $hlavicka->druh == 1 OR $hlavicka->druh == 2 ) AND $hlavicka->ddp != '0000-00-00' )
+{
+$upozorni=1;
+echo "Vyplnený <strong>dátum</strong> zistenia skutočnosti na podanie dodatočného priznania, ale <strong>nie je</strong> vybraté dodatočné daňové priznanie.";
+}
+?>
+</li>
+<li class="red">
+<?php if ( $hlavicka->dprie == "" OR $hlavicka->dmeno == "" )
+{
+$upozorni=1;
+echo "Nie je vyplnené <strong>priezvisko alebo meno</strong> daňovníka.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->dcdm == "" OR $hlavicka->dpsc == "" OR $hlavicka->dmes == "" OR $hlavicka->xstat == "" ) {
+$upozorni=1;
+echo "Nie je vyplnená celá <strong>adresa trvalého pobytu</strong> daňovníka.";
+} ?>
+</li>
+</ul>
+<ul id="alertpage2" style="display:none;">
+<li class="header-section">STRANA 2</li>
+<li class="orange">
+<?php if ( $hlavicka->r27 == 0 AND $hlavicka->r28 != 0 )
+{
+$upozorni=2;
+echo "Vyplnená <strong>úhrnná suma dôchodku</strong> v bode 28, avšak nie je zaškrtnuté <strong>poberanie dôchodku</strong> v bode 27.";
+}
+?>
+</li>
+</ul>
+<ul id="alertpage4" style="display:none;">
+<li class="header-section">STRANA 4</li>
+<li class="orange">
+<?php if ( $hlavicka->druh != 3 AND ( $hlavicka->r67 != 0 OR $hlavicka->r68 != 0 OR $hlavicka->r69 != 0 OR $hlavicka->r70 != 0 OR $hlavicka->r71 != 0 OR $hlavicka->r72 != 0 OR $hlavicka->r73 != 0 OR $hlavicka->r74 != 0 ) )
+{
+$upozorni=4;
+echo "Vyplnené riadky <strong>VII.oddielu</strong>, ale <strong>nie je</strong> vybraté dodatočné daňové priznanie na 1.strane.";
+}
+?>
+</li>
+</ul>
+<ul id="alertpage5" style="display:none;">
+<li class="header-section">STRANA 5</li>
+<li class="orange">
+<?php if ( $hlavicka->upl50 == 1 AND ( $hlavicka->spln3 == 1 OR $hlavicka->r75 != 0 OR $hlavicka->zslu != 0 ) )
+{
+$upozorni=5;
+echo "<strong>Neuplatňujem postup</strong> podľa § 50 zákona a zároveň sú vyplnené hodnoty súvisiace s poukázaním.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->upl50 == 1 AND ( $hlavicka->pico != 0 OR $hlavicka->psid != 0 OR $hlavicka->pfor != "" OR $hlavicka->pmen != "" OR $hlavicka->puli != "" OR $hlavicka->pcdm != "" OR $hlavicka->ppsc != "" OR $hlavicka->pmes != "" ) )
+{
+$upozorni=5;
+echo "<strong>Neuplatňujem postup</strong> podľa § 50 zákona a zároveň sú vyplnené <strong>údaje o prijímateľovi</strong> v bode 76.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->r75 != 0 AND ( $hlavicka->pico == 0 OR $hlavicka->psid == 0 OR $hlavicka->pfor == "" OR $hlavicka->pmen == "" ) )
+{
+$upozorni=5;
+echo "Nie sú vyplnené <strong>údaje o príjimateľovi</strong> v bode 76.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->uoso == 0 AND $hlavicka->osob != "" )
+{
+$upozorni=5;
+echo "Vyplnené <strong>osobitné záznamy</strong>, ale <strong>nie je vybraté uvádzam</strong> osobitné záznamy.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->nrz == 0 AND ( $hlavicka->pzks1 != "" OR $hlavicka->pzpr1 != 0 OR $hlavicka->pzvd1 != 0 OR $hlavicka->pzks2 != "" OR $hlavicka->pzpr2 != 0 OR $hlavicka->pzvd2 != 0 OR $hlavicka->pzks3 != "" OR $hlavicka->pzpr3 != 0 OR $hlavicka->pzvd3 != 0 ) )
+{
+$upozorni=5;
+echo "V IX.oddiele vyplnené <strong>údaje o príjmoch nerezidenta</strong>, ale nie je vybratý nerezident <strong>v bode 11 na 1.strane</strong>.";
+} ?>
+</li>
+</ul>
+<ul id="alertpage6" style="display:none;">
+<li class="header-section">STRANA 6</li>
+<li class="orange">
+<?php if ( $hlavicka->nrz == 0 AND ( $hlavicka->sdnr != "" OR $hlavicka->udnr != 0 ) )
+{
+$upozorni=6;
+echo "V X.oddiele vyplnené <strong>údaje nerezidenta</strong>, ale nie je vybratý nerezident <strong>v bode 11 na 1.strane</strong>.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->dat == '0000-00-00' )
+{
+$upozorni=6;
+echo "Nie je vyplnený <strong>dátum vyhlásenia</strong> daňového priznania.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( ( $hlavicka->zdbo == 0 AND $hlavicka->zpre == 0 AND $hlavicka->zprp == 0 ) AND ( $hlavicka->post == 1 OR $hlavicka->ucet == 1 OR $hlavicka->diban != "" OR $hlavicka->da2 != '0000-00-00' ) )
+{
+$upozorni=6;
+echo "V <strong>XI.oddiele nežiadam</strong> o vyplatenie / vrátenie, ale sú vyplnené hodnoty súvisiace s vyplatením / vrátením(napr. spôsob, iban alebo dátum).";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( ( $hlavicka->zdbo == 1 OR $hlavicka->zpre == 1 OR $hlavicka->zprp == 1 ) AND $hlavicka->da2 == '0000-00-00' )
+{
+$upozorni=6;
+echo "V <strong>XI.oddiele žiadam</strong> o vyplatenie / vrátenie, ale nie je vyplnený <strong>dátum</strong> vyplatenia / vrátenia.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( ( $hlavicka->zdbo == 1 OR $hlavicka->zpre == 1 OR $hlavicka->zprp == 1 ) AND $hlavicka->ucet == 1 AND $hlavicka->diban == "" ) {
+$upozorni=6;
+echo "V <strong>XI.oddiele žiadam</strong> o vyplatenie / vrátenie na účet, ale nie je vyplnený <strong>IBAN</strong> účtu na vyplatenie / vrátenie.";
+} ?>
+</li>
+</ul>
+</div>
+<script type="text/javascript">
+<?php if ( $upozorni == 1 OR $upozorni == 2 OR $upozorni == 4 OR $upozorni == 5 OR $upozorni == 6 )
+{
+ echo "upozornenie.style.display='block';";
+}
+?>
+<?php if ( $upozorni == 1 ) { echo "alertpage1.style.display='block';"; } ?>
+<?php if ( $upozorni == 2 ) { echo "alertpage2.style.display='block';"; } ?>
+<?php if ( $upozorni == 4 ) { echo "alertpage4.style.display='block';"; } ?>
+<?php if ( $upozorni == 5 ) { echo "alertpage5.style.display='block';"; } ?>
+<?php if ( $upozorni == 6 ) { echo "alertpage6.style.display='block';"; } ?>
+</script>
+<?php
+//koniec upozornenie
+
+
+
 if ( $j == 0 )
      {
   $text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\r\n"; fwrite($soubor, $text);
@@ -151,8 +399,7 @@ if ( $j == 0 )
 
 $dic=$fir_fdic;
   $text = "  <dic><![CDATA[".$dic."]]></dic>"."\r\n"; fwrite($soubor, $text);
-$datumNarodenia="";
-if ( $hlavicka->nrz == 1 ) $datumNarodenia=SkDatum($hlavicka->dar);
+$datumNarodenia=SkDatum($hlavicka->dar);
 if ( $datumNarodenia == '00.00.0000' ) $datumNarodenia="";
   $text = "  <datumNarodenia><![CDATA[".$datumNarodenia."]]></datumNarodenia>"."\r\n"; fwrite($soubor, $text);
 
@@ -168,8 +415,7 @@ if ( $hlavicka->druh == 3 ) { $rdp="0"; $odp="0"; $ddp="1"; }
   $text = "  <zdanovacieObdobie>"."\r\n"; fwrite($soubor, $text);
 $rok=$kli_vrok;
   $text = "   <rok><![CDATA[".$rok."]]></rok>"."\r\n"; fwrite($soubor, $text);
-$datumDDP="";
-if ( $ddp == 1 ) $datumDDP=SkDatum($hlavicka->ddp);
+$datumDDP=SkDatum($hlavicka->ddp);
 if ( $datumDDP == '00.00.0000' ) $datumDDP="";
   $text = "   <datumDDP><![CDATA[".$datumDDP."]]></datumDDP>"."\r\n"; fwrite($soubor, $text);
   $text = "  </zdanovacieObdobie>"."\r\n"; fwrite($soubor, $text);
@@ -1599,28 +1845,16 @@ $j = $j + 1;
   }
 fclose($soubor);
 ?>
-
-
-<?php if ( $elsubor == 2 ) { ?>
-<br />
-<br />
-Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a načítajte na www.financnasprava.sk alebo do aplikácie eDane:
-<br />
-<br />
-<a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
-<br />
-<br />
-<?php                      } ?>
-
 <?php
 //mysql_free_result($vysledok);
      }
 //koniec XML SUBOR
-
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphsx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
-
-// celkovy koniec dokumentu
+?>
+</div> <!-- #content -->
+<?php
+//celkovy koniec dokumentu
 } while (false);
 ?>
 </BODY>
