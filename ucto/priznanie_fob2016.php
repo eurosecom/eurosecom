@@ -271,8 +271,8 @@ $darsql=SqlDatum($dar);
 $druh = 1*$_REQUEST['druh'];
 $ddp = $_REQUEST['ddp'];
 $ddpsql=SqlDatum($ddp);
-$cinnost = strip_tags($_REQUEST['cinnost']);
-$dprie = strip_tags($_REQUEST['dprie']);
+$cinnost = trim(strip_tags($_REQUEST['cinnost']));
+//$dprie = strip_tags($_REQUEST['dprie']);
 //$dmeno = strip_tags($_REQUEST['dmeno']);
 //$dtitl = strip_tags($_REQUEST['dtitl']);
 //$dtitz = strip_tags($_REQUEST['dtitz']);
@@ -283,27 +283,27 @@ $dprie = strip_tags($_REQUEST['dprie']);
 //$xstat = strip_tags($_REQUEST['xstat']);
 $nrz = 1*$_REQUEST['nrz'];
 $prp = 1*$_REQUEST['prp'];
-$d2uli = strip_tags($_REQUEST['d2uli']);
-$d2cdm = strip_tags($_REQUEST['d2cdm']);
-$d2psc = strip_tags($_REQUEST['d2psc']);
-$d2mes = strip_tags($_REQUEST['d2mes']);
+$d2uli = trim(strip_tags($_REQUEST['d2uli']));
+$d2cdm = trim(strip_tags($_REQUEST['d2cdm']));
+$d2psc = trim(strip_tags($_REQUEST['d2psc']));
+$d2mes = trim(strip_tags($_REQUEST['d2mes']));
 //$d2tel = strip_tags($_REQUEST['d2tel']);
 //$d2fax = strip_tags($_REQUEST['d2fax']);
 //$oznucet = 1*$_REQUEST['oznucet'];
-$zprie = strip_tags($_REQUEST['zprie']);
-$zmeno = strip_tags($_REQUEST['zmeno']);
-$ztitl = strip_tags($_REQUEST['ztitl']);
-$ztitz = strip_tags($_REQUEST['ztitz']);
-$zrdc = strip_tags($_REQUEST['zrdc']);
-$zrdk = strip_tags($_REQUEST['zrdk']);
-$zuli = strip_tags($_REQUEST['zuli']);
-$zcdm = strip_tags($_REQUEST['zcdm']);
-$zpsc = strip_tags($_REQUEST['zpsc']);
-$zmes = strip_tags($_REQUEST['zmes']);
+$zprie = trim(strip_tags($_REQUEST['zprie']));
+$zmeno = trim(strip_tags($_REQUEST['zmeno']));
+$ztitl = trim(strip_tags($_REQUEST['ztitl']));
+$ztitz = trim(strip_tags($_REQUEST['ztitz']));
+$zrdc = trim(strip_tags($_REQUEST['zrdc']));
+$zrdk = trim(strip_tags($_REQUEST['zrdk']));
+$zuli = trim(strip_tags($_REQUEST['zuli']));
+$zcdm = trim(strip_tags($_REQUEST['zcdm']));
+$zpsc = trim(strip_tags($_REQUEST['zpsc']));
+$zmes = trim(strip_tags($_REQUEST['zmes']));
 //$ztel = strip_tags($_REQUEST['ztel']);
-$zstat = strip_tags($_REQUEST['zstat']);
-$dtel = strip_tags($_REQUEST['dtel']);
-$dmailfax = strip_tags($_REQUEST['dmailfax']);
+$zstat = trim(strip_tags($_REQUEST['zstat']));
+$dtel = str_replace(" ","",strip_tags($_REQUEST['dtel']));
+$dmailfax = trim(strip_tags($_REQUEST['dmailfax']));
 //$d3uli = strip_tags($_REQUEST['d3uli']);
 //$d3cdm = strip_tags($_REQUEST['d3cdm']);
 //$d3psc = strip_tags($_REQUEST['d3psc']);
@@ -328,70 +328,75 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
 if ( $strana == 2 ) {
 $r29 = 1*$_REQUEST['r29'];
 $r30 = 1*$_REQUEST['r30'];
-$mprie = strip_tags($_REQUEST['mprie']);
-$mrod = strip_tags($_REQUEST['mrod']);
+$mprie = trim(strip_tags($_REQUEST['mprie']));
+$mrod = trim(strip_tags($_REQUEST['mrod']));
 $mpri = 1*$_REQUEST['mpri'];
-$mpom = strip_tags($_REQUEST['mpom']);
-$d1prie = strip_tags($_REQUEST['d1prie']);
-$d1rod = strip_tags($_REQUEST['d1rod']);
-$d1pomc = strip_tags($_REQUEST['d1pomc']);
-$d1pom1 = strip_tags($_REQUEST['d1pom1']);
-$d1pom2 = strip_tags($_REQUEST['d1pom2']);
-$d1pom3 = strip_tags($_REQUEST['d1pom3']);
-$d1pom4 = strip_tags($_REQUEST['d1pom4']);
-$d1pom5 = strip_tags($_REQUEST['d1pom5']);
-$d1pom6 = strip_tags($_REQUEST['d1pom6']);
-$d1pom7 = strip_tags($_REQUEST['d1pom7']);
-$d1pom8 = strip_tags($_REQUEST['d1pom8']);
-$d1pom9 = strip_tags($_REQUEST['d1pom9']);
-$d1pom10 = strip_tags($_REQUEST['d1pom10']);
-$d1pom11 = strip_tags($_REQUEST['d1pom11']);
-$d1pom12 = strip_tags($_REQUEST['d1pom12']);
-$d2prie = strip_tags($_REQUEST['d2prie']);
-$d2rod = strip_tags($_REQUEST['d2rod']);
-$d2pomc = strip_tags($_REQUEST['d2pomc']);
-$d2pom1 = strip_tags($_REQUEST['d2pom1']);
-$d2pom2 = strip_tags($_REQUEST['d2pom2']);
-$d2pom3 = strip_tags($_REQUEST['d2pom3']);
-$d2pom4 = strip_tags($_REQUEST['d2pom4']);
-$d2pom5 = strip_tags($_REQUEST['d2pom5']);
-$d2pom6 = strip_tags($_REQUEST['d2pom6']);
-$d2pom7 = strip_tags($_REQUEST['d2pom7']);
-$d2pom8 = strip_tags($_REQUEST['d2pom8']);
-$d2pom9 = strip_tags($_REQUEST['d2pom9']);
-$d2pom10 = strip_tags($_REQUEST['d2pom10']);
-$d2pom11 = strip_tags($_REQUEST['d2pom11']);
-$d2pom12 = strip_tags($_REQUEST['d2pom12']);
-$d3prie = strip_tags($_REQUEST['d3prie']);
-$d3rod = strip_tags($_REQUEST['d3rod']);
-$d3pomc = strip_tags($_REQUEST['d3pomc']);
-$d3pom1 = strip_tags($_REQUEST['d3pom1']);
-$d3pom2 = strip_tags($_REQUEST['d3pom2']);
-$d3pom3 = strip_tags($_REQUEST['d3pom3']);
-$d3pom4 = strip_tags($_REQUEST['d3pom4']);
-$d3pom5 = strip_tags($_REQUEST['d3pom5']);
-$d3pom6 = strip_tags($_REQUEST['d3pom6']);
-$d3pom7 = strip_tags($_REQUEST['d3pom7']);
-$d3pom8 = strip_tags($_REQUEST['d3pom8']);
-$d3pom9 = strip_tags($_REQUEST['d3pom9']);
-$d3pom10 = strip_tags($_REQUEST['d3pom10']);
-$d3pom11 = strip_tags($_REQUEST['d3pom11']);
-$d3pom12 = strip_tags($_REQUEST['d3pom12']);
-$d4prie = strip_tags($_REQUEST['d4prie']);
-$d4rod = strip_tags($_REQUEST['d4rod']);
-$d4pomc = strip_tags($_REQUEST['d4pomc']);
-$d4pom1 = strip_tags($_REQUEST['d4pom1']);
-$d4pom2 = strip_tags($_REQUEST['d4pom2']);
-$d4pom3 = strip_tags($_REQUEST['d4pom3']);
-$d4pom4 = strip_tags($_REQUEST['d4pom4']);
-$d4pom5 = strip_tags($_REQUEST['d4pom5']);
-$d4pom6 = strip_tags($_REQUEST['d4pom6']);
-$d4pom7 = strip_tags($_REQUEST['d4pom7']);
-$d4pom8 = strip_tags($_REQUEST['d4pom8']);
-$d4pom9 = strip_tags($_REQUEST['d4pom9']);
-$d4pom10 = strip_tags($_REQUEST['d4pom10']);
-$d4pom11 = strip_tags($_REQUEST['d4pom11']);
-$d4pom12 = strip_tags($_REQUEST['d4pom12']);
+$mpom = 1*$_REQUEST['mpom'];
+if ( $mpom > 12 ) { $mpom = 12; }
+$d1prie = trim(strip_tags($_REQUEST['d1prie']));
+$d1rod = trim(strip_tags($_REQUEST['d1rod']));
+$d1pomc = 1*$_REQUEST['d1pomc'];
+$d1pom1 = 1*$_REQUEST['d1pom1'];
+$d1pom2 = 1*$_REQUEST['d1pom2'];
+$d1pom3 = 1*$_REQUEST['d1pom3'];
+$d1pom4 = 1*$_REQUEST['d1pom4'];
+$d1pom5 = 1*$_REQUEST['d1pom5'];
+$d1pom6 = 1*$_REQUEST['d1pom6'];
+$d1pom7 = 1*$_REQUEST['d1pom7'];
+$d1pom8 = 1*$_REQUEST['d1pom8'];
+$d1pom9 = 1*$_REQUEST['d1pom9'];
+$d1pom10 = 1*$_REQUEST['d1pom10'];
+$d1pom11 = 1*$_REQUEST['d1pom11'];
+$d1pom12 = 1*$_REQUEST['d1pom12'];
+if ( $d1pomc == 1 ) { $d1pom1=0; $d1pom2=0; $d1pom3=0; $d1pom4=0; $d1pom5=0; $d1pom6=0; $d1pom7=0; $d1pom8=0; $d1pom9=0; $d1pom10=0; $d1pom11=0; $d1pom12=0; }
+$d2prie = trim(strip_tags($_REQUEST['d2prie']));
+$d2rod = trim(strip_tags($_REQUEST['d2rod']));
+$d2pomc = 1*$_REQUEST['d2pomc'];
+$d2pom1 = 1*$_REQUEST['d2pom1'];
+$d2pom2 = 1*$_REQUEST['d2pom2'];
+$d2pom3 = 1*$_REQUEST['d2pom3'];
+$d2pom4 = 1*$_REQUEST['d2pom4'];
+$d2pom5 = 1*$_REQUEST['d2pom5'];
+$d2pom6 = 1*$_REQUEST['d2pom6'];
+$d2pom7 = 1*$_REQUEST['d2pom7'];
+$d2pom8 = 1*$_REQUEST['d2pom8'];
+$d2pom9 = 1*$_REQUEST['d2pom9'];
+$d2pom10 = 1*$_REQUEST['d2pom10'];
+$d2pom11 = 1*$_REQUEST['d2pom11'];
+$d2pom12 = 1*$_REQUEST['d2pom12'];
+if ( $d2pomc == 1 ) { $d2pom1=0; $d2pom2=0; $d2pom3=0; $d2pom4=0; $d2pom5=0; $d2pom6=0; $d2pom7=0; $d2pom8=0; $d2pom9=0; $d2pom10=0; $d2pom11=0; $d2pom12=0; }
+$d3prie = trim(strip_tags($_REQUEST['d3prie']));
+$d3rod = trim(strip_tags($_REQUEST['d3rod']));
+$d3pomc = 1*$_REQUEST['d3pomc'];
+$d3pom1 = 1*$_REQUEST['d3pom1'];
+$d3pom2 = 1*$_REQUEST['d3pom2'];
+$d3pom3 = 1*$_REQUEST['d3pom3'];
+$d3pom4 = 1*$_REQUEST['d3pom4'];
+$d3pom5 = 1*$_REQUEST['d3pom5'];
+$d3pom6 = 1*$_REQUEST['d3pom6'];
+$d3pom7 = 1*$_REQUEST['d3pom7'];
+$d3pom8 = 1*$_REQUEST['d3pom8'];
+$d3pom9 = 1*$_REQUEST['d3pom9'];
+$d3pom10 = 1*$_REQUEST['d3pom10'];
+$d3pom11 = 1*$_REQUEST['d3pom11'];
+$d3pom12 = 1*$_REQUEST['d3pom12'];
+if ( $d3pomc == 1 ) { $d3pom1=0; $d3pom2=0; $d3pom3=0; $d3pom4=0; $d3pom5=0; $d3pom6=0; $d3pom7=0; $d3pom8=0; $d3pom9=0; $d3pom10=0; $d3pom11=0; $d3pom12=0; }
+$d4prie = trim(strip_tags($_REQUEST['d4prie']));
+$d4rod = trim(strip_tags($_REQUEST['d4rod']));
+$d4pomc = 1*$_REQUEST['d4pomc'];
+$d4pom1 = 1*$_REQUEST['d4pom1'];
+$d4pom2 = 1*$_REQUEST['d4pom2'];
+$d4pom3 = 1*$_REQUEST['d4pom3'];
+$d4pom4 = 1*$_REQUEST['d4pom4'];
+$d4pom5 = 1*$_REQUEST['d4pom5'];
+$d4pom6 = 1*$_REQUEST['d4pom6'];
+$d4pom7 = 1*$_REQUEST['d4pom7'];
+$d4pom8 = 1*$_REQUEST['d4pom8'];
+$d4pom9 = 1*$_REQUEST['d4pom9'];
+$d4pom10 = 1*$_REQUEST['d4pom10'];
+$d4pom11 = 1*$_REQUEST['d4pom11'];
+$d4pom12 = 1*$_REQUEST['d4pom12'];
+if ( $d4pomc == 1 ) { $d4pom1=0; $d4pom2=0; $d4pom3=0; $d4pom4=0; $d4pom5=0; $d4pom6=0; $d4pom7=0; $d4pom8=0; $d4pom9=0; $d4pom10=0; $d4pom11=0; $d4pom12=0; }
 $r33 = 1*$_REQUEST['r33'];
 $r34 = 1*$_REQUEST['r34'];
 $r34a = 1*$_REQUEST['r34a'];
@@ -464,7 +469,9 @@ $uppr4 = 1*$_REQUEST['uppr4'];
 $uvp61 = 1*$_REQUEST['uvp61'];
 $uvp64 = 1*$_REQUEST['uvp64'];
 $uvp61m = 1*$_REQUEST['uvp61m'];
+if ( $uvp61m > 12 ) { $uvp61m = 12; }
 $uvp64m = 1*$_REQUEST['uvp64m'];
+if ( $uvp64m > 12 ) { $uvp64m = 12; }
 
 $uos61 = 1*$_REQUEST['uos61'];
 $uos64 = 1*$_REQUEST['uos64'];
@@ -729,7 +736,7 @@ $r124 = 1*$_REQUEST['r124'];
 $r125 = 1*$_REQUEST['r125'];
 $r126 = 1*$_REQUEST['r126'];
 $r127 = 1*$_REQUEST['r127'];
-$sdnr = strip_tags($_REQUEST['sdnr']);
+$sdnr = trim(strip_tags($_REQUEST['sdnr']));
 $r129 = 1*$_REQUEST['r129'];
 $r130 = 1*$_REQUEST['r130'];
 //$udnr = $_REQUEST['udnr'];
@@ -746,55 +753,55 @@ $nrzsprev = 1*$_REQUEST['nrzsprev'];
 $upl50 = 1*$_REQUEST['upl50'];
 $spl3d = 1*$_REQUEST['spl3d'];
 $r134 = 1*$_REQUEST['r134'];
-$pico = strip_tags($_REQUEST['pico']);
-$psid = strip_tags($_REQUEST['psid']);
-$pfor = strip_tags($_REQUEST['pfor']);
-$pmen = strip_tags($_REQUEST['pmen']);
-$puli = strip_tags($_REQUEST['puli']);
-$pcdm = strip_tags($_REQUEST['pcdm']);
-$ppsc = strip_tags($_REQUEST['ppsc']);
-$pmes = strip_tags($_REQUEST['pmes']);
+$pico = trim(strip_tags($_REQUEST['pico']));
+$psid = trim(strip_tags($_REQUEST['psid']));
+$pfor = trim(strip_tags($_REQUEST['pfor']));
+$pmen = trim(strip_tags($_REQUEST['pmen']));
+$puli = trim(strip_tags($_REQUEST['puli']));
+$pcdm = trim(strip_tags($_REQUEST['pcdm']));
+$ppsc = trim(strip_tags($_REQUEST['ppsc']));
+$pmes = trim(strip_tags($_REQUEST['pmes']));
 $zslu = 1*$_REQUEST['zslu'];
 $uoso = 1*$_REQUEST['uoso'];
-$pzks1 = strip_tags($_REQUEST['pzks1']);
-$pdrp1 = strip_tags($_REQUEST['pdrp1']);
-$pdro1 = strip_tags($_REQUEST['pdro1']);
-$pdrm1 = strip_tags($_REQUEST['pdrm1']);
+$pzks1 = trim(strip_tags($_REQUEST['pzks1']));
+$pdrp1 = trim(strip_tags($_REQUEST['pdrp1']));
+$pdro1 = trim(strip_tags($_REQUEST['pdro1']));
+$pdrm1 = trim(strip_tags($_REQUEST['pdrm1']));
 $pzpr1 = 1*$_REQUEST['pzpr1'];
 $pzvd1 = 1*$_REQUEST['pzvd1'];
 $pzthvd1 = 1*$_REQUEST['pzthvd1'];
-$pzks2 = strip_tags($_REQUEST['pzks2']);
-$pdrp2 = strip_tags($_REQUEST['pdrp2']);
-$pdro2 = strip_tags($_REQUEST['pdro2']);
-$pdrm2 = strip_tags($_REQUEST['pdrm2']);
+$pzks2 = trim(strip_tags($_REQUEST['pzks2']));
+$pdrp2 = trim(strip_tags($_REQUEST['pdrp2']));
+$pdro2 = trim(strip_tags($_REQUEST['pdro2']));
+$pdrm2 = trim(strip_tags($_REQUEST['pdrm2']));
 $pzpr2 = 1*$_REQUEST['pzpr2'];
 $pzvd2 = 1*$_REQUEST['pzvd2'];
 $pzthvd2 = 1*$_REQUEST['pzthvd2'];
-$pzks3 = strip_tags($_REQUEST['pzks3']);
-$pdrp3 = strip_tags($_REQUEST['pdrp3']);
-$pdro3 = strip_tags($_REQUEST['pdro3']);
-$pdrm3 = strip_tags($_REQUEST['pdrm3']);
+$pzks3 = trim(strip_tags($_REQUEST['pzks3']));
+$pdrp3 = trim(strip_tags($_REQUEST['pdrp3']));
+$pdro3 = trim(strip_tags($_REQUEST['pdro3']));
+$pdrm3 = trim(strip_tags($_REQUEST['pdrm3']));
 $pzpr3 = 1*$_REQUEST['pzpr3'];
 $pzvd3 = 1*$_REQUEST['pzvd3'];
 $pzthvd3 = 1*$_REQUEST['pzthvd3'];
-$pzks4 = strip_tags($_REQUEST['pzks4']);
-$pdrp4 = strip_tags($_REQUEST['pdrp4']);
-$pdro4 = strip_tags($_REQUEST['pdro4']);
-$pdrm4 = strip_tags($_REQUEST['pdrm4']);
+$pzks4 = trim(strip_tags($_REQUEST['pzks4'])) ;
+$pdrp4 = trim(strip_tags($_REQUEST['pdrp4']));
+$pdro4 = trim(strip_tags($_REQUEST['pdro4']));
+$pdrm4 = trim(strip_tags($_REQUEST['pdrm4']));
 $pzpr4 = 1*$_REQUEST['pzpr4'];
 $pzvd4 = 1*$_REQUEST['pzvd4'];
 $pzthvd4 = 1*$_REQUEST['pzthvd4'];
-$pzks5 = strip_tags($_REQUEST['pzks5']);
-$pdrp5 = strip_tags($_REQUEST['pdrp5']);
-$pdro5 = strip_tags($_REQUEST['pdro5']);
-$pdrm5 = strip_tags($_REQUEST['pdrm5']);
+$pzks5 = trim(strip_tags($_REQUEST['pzks5']));
+$pdrp5 = trim(strip_tags($_REQUEST['pdrp5']));
+$pdro5 = trim(strip_tags($_REQUEST['pdro5']));
+$pdrm5 = trim(strip_tags($_REQUEST['pdrm5']));
 $pzpr5 = 1*$_REQUEST['pzpr5'];
 $pzvd5 = 1*$_REQUEST['pzvd5'];
 $pzthvd5 = 1*$_REQUEST['pzthvd5'];
-$pzks6 = strip_tags($_REQUEST['pzks6']);
-$pdrp6 = strip_tags($_REQUEST['pdrp6']);
-$pdro6 = strip_tags($_REQUEST['pdro6']);
-$pdrm6 = strip_tags($_REQUEST['pdrm6']);
+$pzks6 = trim(strip_tags($_REQUEST['pzks6']));
+$pdrp6 = trim(strip_tags($_REQUEST['pdrp6']));
+$pdro6 = trim(strip_tags($_REQUEST['pdro6']));
+$pdrm6 = trim(strip_tags($_REQUEST['pdrm6']));
 $pzpr6 = 1*$_REQUEST['pzpr6'];
 $pzvd6 = 1*$_REQUEST['pzvd6'];
 $pzthvd6 = 1*$_REQUEST['pzthvd6'];
@@ -812,7 +819,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
                      }
 
 if ( $strana == 12 ) {
-$osob = strip_tags($_REQUEST['osob']);
+$osob = trim(strip_tags($_REQUEST['osob']));
 $pril = 1*$_REQUEST['pril']; if ( $pril < 2 ) { $pril=2; }
 $dat = $_REQUEST['dat'];
 $datsql=Sqldatum($dat);
@@ -821,7 +828,7 @@ $zdbo = 1*$_REQUEST['zdbo'];
 $zpre = 1*$_REQUEST['zpre'];
 $post = 1*$_REQUEST['post'];
 $ucet = 1*$_REQUEST['ucet'];
-$diban = strip_tags($_REQUEST['diban']);
+$diban = trim(strip_tags($_REQUEST['diban']));
 //$dbic = strip_tags($_REQUEST['dbic']);
 //$uceb = strip_tags($_REQUEST['uceb']);
 //$numb = strip_tags($_REQUEST['numb']);
@@ -876,7 +883,7 @@ $prpod2 = 1*$_REQUEST['prpod2'];
 $prpod3 = 1*$_REQUEST['prpod3'];
 $prpod4 = 1*$_REQUEST['prpod4'];
 $prpod5 = 1*$_REQUEST['prpod5'];
-$prptxt = strip_tags($_REQUEST['prptxt']);
+$prptxt = trim(strip_tags($_REQUEST['prptxt']));
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
 " prpdzc='$prpdzcsql', prptxt='$prptxt', ".
 " prpzo1='$prpzo1sql', prpzo2='$prpzo2sql', prpzo3='$prpzo3sql', prpzo4='$prpzo4sql', prpzo5='$prpzo5sql', ".
@@ -955,7 +962,7 @@ $sqlt = <<<mzdprc
    oznucet      INT DEFAULT 0,
    rdc          VARCHAR(6) NOT NULL,
    rdk          VARCHAR(4) NOT NULL,
-   dar          DATE,
+   dar          DATE NOT NULL,
    dprie        VARCHAR(30) NOT NULL,
    dmeno        VARCHAR(30) NOT NULL,
    dtitl        VARCHAR(30) NOT NULL,
@@ -1117,21 +1124,21 @@ $sqlt = <<<mzdprc
    uoso         DECIMAL(2,0) DEFAULT 0,
    osob         TEXT,
    pril         DECIMAL(2,0) DEFAULT 0,
-   dat          DATE,
+   dat          DATE NOT NULL,
    zdbo         DECIMAL(2,0) DEFAULT 0,
    zrbo         DECIMAL(2,0) DEFAULT 0,
    post         DECIMAL(2,0) DEFAULT 0,
    ucet         DECIMAL(2,0) DEFAULT 0,
    uceb         VARCHAR(30) NOT NULL,
    numb         VARCHAR(10) NOT NULL,
-   da2          DATE,
+   da2          DATE NOT NULL,
    zpre         DECIMAL(2,0) DEFAULT 0,
    zprp         DECIMAL(2,0) DEFAULT 0,
    post2        DECIMAL(2,0) DEFAULT 0,
    ucet2        DECIMAL(2,0) DEFAULT 0,
    uceb2        VARCHAR(30) NOT NULL,
    numb2        VARCHAR(10) NOT NULL,
-   da3          DATE,
+   da3          DATE NOT NULL,
    pomv         TEXT,
    px17          DECIMAL(10,2) DEFAULT 0
 );
@@ -2934,7 +2941,7 @@ div.input-echo {
 var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
 
 <?php
-//uprava sadzby strana 1
+//uprava sadzby
   if ( $copern == 20 )
   {
 ?>
@@ -3278,8 +3285,12 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
    document.formv1.r131.value = '<?php echo "$r131"; ?>';
 <?php if ( $ldnr == 1 ) { ?> document.formv1.ldnr.checked = "checked"; <?php } ?>
    document.formv1.nrzsprev.value = '<?php echo "$nrzsprev";?>';
-<?php if ( $upl50 == 1 ) { ?> document.formv1.upl50.checked = "checked"; <?php } ?>
-<?php if ( $spl3d == 1 ) { ?> document.formv1.spl3d.checked = "checked"; <?php } ?>
+//<?php if ( $upl50 == 1 ) { ?> document.formv1.upl50.checked = "checked"; <?php } ?>
+//<?php if ( $spl3d == 1 ) { ?> document.formv1.spl3d.checked = "checked"; <?php } ?>
+
+<?php if ( $upl50 == 1 ) { echo "document.formv1.upl50.checked='checked';"; } ?>
+<?php if ( $spl3d == 1 ) { echo "document.formv1.spl3d.checked='checked';"; } ?>
+
    document.formv1.r134.value = '<?php echo "$r134"; ?>';
    document.formv1.pico.value = '<?php echo "$pico"; ?>';
    document.formv1.psid.value = '<?php echo "$psid"; ?>';
@@ -3394,8 +3405,6 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
    document.formv1.sz16.value = '<?php echo "$sz16";?>';
    document.formv1.szdat.value = '<?php echo "$szdatsk";?>';
 <?php if ( $vpdu == 1 ) { ?> document.formv1.vpdu.checked = "checked"; <?php } ?>
-
-
 <?php                                         } ?>
   }
 <?php
@@ -3429,7 +3438,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
   }
   function PoucVyplnenie()
   {
-   window.open('<?php echo $jpg_cesta; ?>_poucenie.pdf', '_blank', param);
+   window.open('<?php echo $jpg_cesta; ?>_poucenie.pdf', '_blank', param); //dopyt, aktualizovaù
   }
   function vypocetOP()
   {
@@ -3463,6 +3472,16 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
   function CisKrajin()
   {
    window.open('../cis/ciselnik_krajin.pdf', '_blank', param);
+  }
+
+//neuplatnujem vs. poukazujem 3%
+  function KlikNeuplAno()
+  {
+   document.formv1.spl3d.checked = false;
+  }
+  function KlikNeuplNie()
+  {
+   document.formv1.upl50.checked = false;
   }
 </script>
 </HEAD>
@@ -3751,14 +3770,14 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="t1v7" id="t1v7" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:484px; left:661px;"/>
 <input type="text" name="t1p8" id="t1p8" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:524px; left:410px;"/>
 <input type="text" name="t1v8" id="t1v8" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:524px; left:661px;"/>
-<input type="text" name="t1p9" id="t1p9" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:567px; left:410px;"/> <!-- dopyt, novinka -->
-<input type="text" name="t1v9" id="t1v9" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:567px; left:661px;"/> <!-- dopyt, novinka -->
+<input type="text" name="t1p9" id="t1p9" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:567px; left:410px;"/>
+<input type="text" name="t1v9" id="t1v9" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:567px; left:661px;"/>
 <div class="input-echo right" style="width:230px; top:610px; left:413px;"><?php echo $t1p10; ?>&nbsp;</div>
 <div class="input-echo right" style="width:230px; top:610px; left:662px;"><?php echo $t1v10; ?>&nbsp;</div>
 <input type="text" name="t1p11" id="t1p11" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:650px; left:410px;"/>
 <input type="text" name="t1v11" id="t1v11" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:650px; left:661px;"/>
-<input type="text" name="t1p12" id="t1p12" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:691px; left:410px;"/> <!-- dopyt, in˝ v˝poËet -->
-<input type="text" name="t1v12" id="t1v12" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:691px; left:661px;"/> <!-- dopyt, in˝ v˝poËet -->
+<input type="text" name="t1p12" id="t1p12" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:691px; left:410px;"/>
+<input type="text" name="t1v12" id="t1v12" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:691px; left:661px;"/>
 <div class="input-echo right" style="width:230px; top:732px; left:413px;"><?php echo $t1p13; ?>&nbsp;</div>
 <div class="input-echo right" style="width:230px; top:732px; left:662px;"><?php echo $t1v13; ?>&nbsp;</div>
 
@@ -3805,11 +3824,11 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r37" id="r37" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:733px; left:500px;"/>
 <input type="text" name="r38" id="r38" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:771px; left:500px;"/>
 <input type="text" name="r39" id="r39" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:811px; left:500px;"/>
- <input type="text" name="r39pu" id="r39pu" onkeyup="CiarkaNaBodku(this);" style="width:130px; top:811px; left:762px;"/> <!-- dopyt, Ëo je toto -->
+ <input type="text" name="r39pu" id="r39pu" onkeyup="CiarkaNaBodku(this);" style="width:130px; top:811px; left:762px;"/>
  <img src="../obr/ikony/info_blue_icon.png" class="btn-row-tool" style="top:812px; left:913px;"
       title="Ak FO vedie podvojnÈ ˙ËtovnÌctvo vyplnÌ ZISK v tejto poloûke, nie v riadku 37,38,39,40 a tabuæku Ë. 1 v VI. oddiele na strane 3. nevypÂÚa.">
 <input type="text" name="r40" id="r40" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:850px; left:500px;"/>
-<input type="text" name="r40pu" id="r40pu" onkeyup="CiarkaNaBodku(this);" style="width:130px; top:850px; left:762px;"/> <!-- dopyt, Ëo je toto -->
+<input type="text" name="r40pu" id="r40pu" onkeyup="CiarkaNaBodku(this);" style="width:130px; top:850px; left:762px;"/>
  <img src="../obr/ikony/info_blue_icon.png" class="btn-row-tool" style="top:852px; left:913px;"
       title="Ak FO vedie podvojnÈ ˙ËtovnÌctvo vyplnÌ STRATU v tejto poloûke, nie v riadku 37,38,39,40 a tabuæku Ë. 1 v VI. oddiele na strane 3. nevypÂÚa.">
 <input type="text" name="r41" id="r41" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:896px; left:500px;"/>
@@ -3831,7 +3850,7 @@ $sn1c=substr($sknacec,0,1);
 <!-- VI.ODDIEL pokracovanie -->
 <!-- prehlad straty pokracovanie -->
 <input type="text" name="r49" id="r49" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:115px; left:507px;"/>
-<input type="text" name="r50" id="r50" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:155px; left:507px;"/> <!-- dopyt, zmeniù typ polÌËka -->
+<input type="text" name="r50" id="r50" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:155px; left:507px;"/>
 <input type="text" name="r51" id="r51" maxlength="4" style="width:80px; top:196px; left:381px;"/>
 <input type="text" name="r52" id="r52" maxlength="4" style="width:80px; top:235px; left:381px;"/>
 <input type="text" name="r53" id="r53" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:277px; left:506px;"/>
@@ -3924,10 +3943,10 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="t3p13" id="t3p13" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:494px; left:411px;"/>
 <input type="text" name="t3v13" id="t3v13" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:494px; left:661px;"/>
 <input type="text" name="t3p14" id="t3p14" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:538px; left:411px;"/>
-<input type="text" name="t3v14" id="t3v14" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:538px; left:661px;"/> <!-- dopyt, novinka -->
-<input type="text" name="t3p15" id="t3p15" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:582px; left:411px;"/> <!-- dopyt, novinka -->
-<input type="text" name="t3v15" id="t3v15" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:582px; left:661px;"/> <!-- dopyt, novinka -->
-<input type="text" name="t3p16" id="t3p16" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:626px; left:411px;"/> <!-- dopyt, novinka -->
+<input type="text" name="t3v14" id="t3v14" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:538px; left:661px;"/>
+<input type="text" name="t3p15" id="t3p15" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:582px; left:411px;"/>
+<input type="text" name="t3v15" id="t3v15" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:582px; left:661px;"/>
+<input type="text" name="t3p16" id="t3p16" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:626px; left:411px;"/>
 <div class="input-echo right" style="width:230px; top:672px; left:413px;"><?php echo $t3p17; ?>&nbsp;</div>
 <div class="input-echo right" style="width:230px; top:672px; left:662px;"><?php echo $t3v17; ?>&nbsp;</div>
 
@@ -3966,7 +3985,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r89" id="r89" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:899px; left:488px;"/>
 <input type="text" name="r90" id="r90" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:943px; left:488px;"/>
 <input type="text" name="r91" id="r91" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:988px; left:488px;"/>
-<input type="text" name="r92" id="r92" onkeyup="CiarkaNaBodku(this);" style="width:262px; top:1027px; left:470px;"/> <!-- dopyt, mÙûe byù aj mÌnus -->
+<input type="text" name="r92" id="r92" onkeyup="CiarkaNaBodku(this);" style="width:262px; top:1027px; left:470px;"/>
 <input type="text" name="r93" id="r93" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1077px; left:488px;"/>
 <input type="text" name="r94" id="r94" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1130px; left:488px;"/>
 <?php                     } ?>
@@ -3999,9 +4018,9 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r114" id="r114" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:999px; left:500px;"/>
 <input type="text" name="r115" id="r115" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1045px; left:500px;"/>
 <input type="text" name="r116" id="r116" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1085px; left:500px;"/>
-<input type="text" name="r117" id="r117" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1125px; left:500px;"/> <!-- dopyt, novinka -->
-<input type="text" name="r118" id="r118" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1165px; left:500px;"/> <!-- dopyt, in˝ typ -->
-<input type="text" name="r119" id="r119" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1205px; left:500px;"/> <!-- dopyt, in˝ typ -->
+<input type="text" name="r117" id="r117" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1125px; left:500px;"/>
+<input type="text" name="r118" id="r118" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1165px; left:500px;"/>
+<input type="text" name="r119" id="r119" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1205px; left:500px;"/>
 <?php                     } ?>
 
 
@@ -4010,21 +4029,21 @@ $sn1c=substr($sknacec,0,1);
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
 
 <!-- IX.ODDIEL pokracovanie -->
-<input type="text" name="r120" id="r120" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:123px; left:499px;"/> <!-- dopyt, in˝ typ -->
-<input type="text" name="r121" id="r121" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:176px; left:499px;"/> <!-- dopyt, novinka -->
+<input type="text" name="r120" id="r120" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:123px; left:499px;"/>
+<input type="text" name="r121" id="r121" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:176px; left:499px;"/>
 
 <!-- X.ODDIEL -->
-<input type="text" name="r122" id="r122" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:774px; left:648px;"/> <!-- dopyt, novinka -->
+<input type="text" name="r122" id="r122" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:774px; left:648px;"/>
 <input type="text" name="r123" id="r123" onkeyup="CiarkaNaBodku(this);" style="width:264px; top:817px; left:628px;"/>
-<input type="text" name="r124" id="r124" onkeyup="CiarkaNaBodku(this);" style="width:264px; top:859px; left:628px;"/> <!-- dopyt, novinka -->
-<input type="text" name="r125" id="r125" onkeyup="CiarkaNaBodku(this);" style="width:264px; top:915px; left:628px;"/> <!-- dopyt, novinka -->
-<input type="text" name="r126" id="r126" onkeyup="CiarkaNaBodku(this);" style="width:153px; top:971px; left:739px;"/> <!-- dopyt, novinka -->
-<input type="text" name="r127" id="r127" onkeyup="CiarkaNaBodku(this);" style="width:172px; top:1017px; left:720px;"/> <!-- dopyt, novinka -->
+<input type="text" name="r124" id="r124" onkeyup="CiarkaNaBodku(this);" style="width:264px; top:859px; left:628px;"/>
+<input type="text" name="r125" id="r125" onkeyup="CiarkaNaBodku(this);" style="width:264px; top:915px; left:628px;"/>
+<input type="text" name="r126" id="r126" onkeyup="CiarkaNaBodku(this);" style="width:153px; top:971px; left:739px;"/>
+<input type="text" name="r127" id="r127" onkeyup="CiarkaNaBodku(this);" style="width:172px; top:1017px; left:720px;"/>
 
 <!-- XI.ODDIEL -->
 <input type="text" name="sdnr" id="sdnr" style="width:842px; top:1138px; left:51px;"/>
-<input type="text" name="r129" id="r129" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:1179px; left:648px;"/> <!-- dopyt, novinka -->
-<input type="text" name="r130" id="r130" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:1218px; left:648px;"/> <!-- dopyt, novinka -->
+<input type="text" name="r129" id="r129" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:1179px; left:648px;"/>
+<input type="text" name="r130" id="r130" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:1218px; left:648px;"/>
 <?php                      } ?>
 
 
@@ -4038,9 +4057,9 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="nrzsprev" id="nrzsprev" maxlength="2" style="width:37px; top:156px; left:855px;"/>
 
 <!-- XII.ODDIEL -->
-<input type="checkbox" name="upl50" value="1" style="top:313px; left:59px;"/>
-<input type="checkbox" name="spl3d" value="1" style="top:313px; left:295px;"/>
-<input type="text" name="r134" id="r134" onkeyup="CiarkaNaBodku(this);" style="width:197px; top:355px; left:316px;"/> <!-- dopyt, novinka -->
+<input type="checkbox" name="upl50" value="1" onchange="KlikNeuplAno();" style="top:313px; left:59px;"/>
+<input type="checkbox" name="spl3d" value="1" onchange="KlikNeuplNie();" style="top:313px; left:295px;"/>
+<input type="text" name="r134" id="r134" onkeyup="CiarkaNaBodku(this);" style="width:197px; top:355px; left:316px;"/>
 <!-- Prijimatel -->
 <input type="text" name="pico" id="pico" maxlength="8" style="width:175px; top:440px; left:51px;"/>
 <input type="text" name="psid" id="psid" maxlength="4" style="width:83px; top:440px; left:258px;"/>
@@ -4059,42 +4078,42 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="pzks1" id="pzks1" maxlength="3" style="width:59px; top:913px; left:51px;"/>
 <input type="text" name="pdrp1" id="pdrp1" style="width:14px; top:913px; left:131px;"/>
 <input type="text" name="pdro1" id="pdro1" style="width:14px; top:913px; left:164px;"/>
-<input type="text" name="pdrm1" id="pdrm1" style="width:14px; top:913px; left:200px;"/> <!-- dopyt, novinka -->
+<input type="text" name="pdrm1" id="pdrm1" style="width:14px; top:913px; left:200px;"/>
 <input type="text" name="pzpr1" id="pzpr1" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:913px; left:234px;"/>
 <input type="text" name="pzvd1" id="pzvd1" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:913px; left:483px;"/>
 <input type="text" name="pzthvd1" id="pzthvd1" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:913px; left:731px;"/>
 <input type="text" name="pzks2" id="pzks2" maxlength="3" style="width:59px; top:952px; left:51px;"/>
 <input type="text" name="pdrp2" id="pdrp2" style="width:14px; top:952px; left:131px;"/>
 <input type="text" name="pdro2" id="pdro2" style="width:14px; top:952px; left:164px;"/>
-<input type="text" name="pdrm2" id="pdrm2" style="width:14px; top:952px; left:200px;"/> <!-- dopyt, novinka -->
+<input type="text" name="pdrm2" id="pdrm2" style="width:14px; top:952px; left:200px;"/>
 <input type="text" name="pzpr2" id="pzpr2" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:952px; left:234px;"/>
 <input type="text" name="pzvd2" id="pzvd2" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:952px; left:483px;"/>
 <input type="text" name="pzthvd2" id="pzthvd2" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:952px; left:731px;"/>
 <input type="text" name="pzks3" id="pzks3" maxlength="3" style="width:59px; top:992px; left:51px;"/>
 <input type="text" name="pdrp3" id="pdrp3" style="width:14px; top:992px; left:131px;"/>
 <input type="text" name="pdro3" id="pdro3" style="width:14px; top:992px; left:164px;"/>
-<input type="text" name="pdrm3" id="pdrm3" style="width:14px; top:992px; left:200px;"/> <!-- dopyt, novinka -->
+<input type="text" name="pdrm3" id="pdrm3" style="width:14px; top:992px; left:200px;"/>
 <input type="text" name="pzpr3" id="pzpr3" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:992px; left:234px;"/>
 <input type="text" name="pzvd3" id="pzvd3" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:992px; left:483px;"/>
 <input type="text" name="pzthvd3" id="pzthvd3" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:992px; left:731px;"/>
 <input type="text" name="pzks4" id="pzks4" maxlength="3" style="width:59px; top:1032px; left:51px;"/>
 <input type="text" name="pdrp4" id="pdrp4" style="width:14px; top:1032px; left:131px;"/>
 <input type="text" name="pdro4" id="pdro4" style="width:14px; top:1032px; left:164px;"/>
-<input type="text" name="pdrm4" id="pdrm4" style="width:14px; top:1032px; left:200px;"/> <!-- dopyt, novinka -->
+<input type="text" name="pdrm4" id="pdrm4" style="width:14px; top:1032px; left:200px;"/>
 <input type="text" name="pzpr4" id="pzpr4" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1032px; left:234px;"/>
 <input type="text" name="pzvd4" id="pzvd4" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1032px; left:483px;"/>
 <input type="text" name="pzthvd4" id="pzthvd4" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:1032px; left:731px;"/>
 <input type="text" name="pzks5" id="pzks5" maxlength="3" style="width:59px; top:1072px; left:51px;"/>
 <input type="text" name="pdrp5" id="pdrp5" style="width:14px; top:1072px; left:131px;"/>
 <input type="text" name="pdro5" id="pdro5" style="width:14px; top:1072px; left:164px;"/>
-<input type="text" name="pdrm5" id="pdrm5" style="width:14px; top:1072px; left:200px;"/> <!-- dopyt, novinka -->
+<input type="text" name="pdrm5" id="pdrm5" style="width:14px; top:1072px; left:200px;"/>
 <input type="text" name="pzpr5" id="pzpr5" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1072px; left:234px;"/>
 <input type="text" name="pzvd5" id="pzvd5" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1072px; left:483px;"/>
 <input type="text" name="pzthvd5" id="pzthvd5" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:1072px; left:731px;"/>
 <input type="text" name="pzks6" id="pzks6" maxlength="3" style="width:59px; top:1113px; left:51px;"/>
 <input type="text" name="pdrp6" id="pdrp6" style="width:14px; top:1113px; left:131px;"/>
 <input type="text" name="pdro6" id="pdro6" style="width:14px; top:1113px; left:164px;"/>
-<input type="text" name="pdrm6" id="pdrm6" style="width:14px; top:1113px; left:200px;"/> <!-- dopyt, novinka -->
+<input type="text" name="pdrm6" id="pdrm6" style="width:14px; top:1113px; left:200px;"/>
 <input type="text" name="pzpr6" id="pzpr6" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1113px; left:234px;"/>
 <input type="text" name="pzvd6" id="pzvd6" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1113px; left:483px;"/>
 <input type="text" name="pzthvd6" id="pzthvd6" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:1113px; left:731px;"/>
@@ -4257,8 +4276,6 @@ $pdf->SetY(10);
 $pdf->Cell(190,43," ","$rmc1",1,"L");
 $text="1234567890";
 $text=$fir_fdic;
-$fdicc=1*$fir_fdic;
-if ( $fdicc <= 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4279,7 +4296,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(190,7," ","$rmc1",1,"L");
 $text="01012010";
 $text=SKDatum($hlavicka->dar);
-if ( $text =='00.00.0000' OR $hlavicka->nrz == 0 ) $text="";
+if ( $text =='00.00.0000' ) $text="";
 $pole = explode(".", $text);
 $text=$pole[0].$pole[1].$pole[2];
 $t01=substr($text,0,1);
@@ -4315,8 +4332,7 @@ $pdf->Cell(175,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t01","$rmc",0,"C");$pdf->Ce
 
 //datum dodatocneho
 $pdf->SetY(65);
-$text="";
-if ( $hlavicka->druh == 3 ) $text=SkDatum($hlavicka->ddp);
+$text=SkDatum($hlavicka->ddp);
 if ( $text == '00.00.0000' ) { $text=""; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -4892,8 +4908,6 @@ $pdf->SetY(10);
 $pdf->Cell(195,0," ","$rmc1",1,"L");
 $text="0123456789";
 $text=$fir_fdic;
-$fdicc=1*$fir_fdic;
-if ( $fdicc <= 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -4920,7 +4934,7 @@ $pdf->Cell(157,5," ","$rmc1",0,"L");$pdf->Cell(5,5,"$text","$rmc",1,"C");
 $pdf->Cell(195,6," ","$rmc1",1,"L");
 $text="1234567";
 $hodx=100*$hlavicka->r30;
-if ( $hodx == 0 OR $hlavicka->r29 == 0 ) $hodx="";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 7s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -4985,7 +4999,7 @@ $pdf->Cell(5,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell
 
 //32Danovy bonus
 //priezvisko a meno1
-$pdf->Cell(195,48,"                          ","$rmc1",1,"L");
+$pdf->Cell(195,48," ","$rmc1",1,"L");
 $text=$hlavicka->d1prie;
 $pdf->Cell(2,7," ","$rmc1",0,"R");$pdf->Cell(56,7,"$text","$rmc",0,"L");
 //rodne cislo1
@@ -5009,11 +5023,19 @@ $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t09","$rmc",0,"C");$pdf->Cell
 //v mesiacoch1
 $pdf->SetY(147);
 $tc=" "; $t01=""; $t02=""; $t03=""; $t04=""; $t05=""; $t06=""; $t07=""; $t08=""; $t09=""; $t10=""; $t11=""; $t12="";
-if ( $hlavicka->d1pom1 == 1 ) $t01="x"; if ( $hlavicka->d1pom2 == 1 ) $t02="x"; if ( $hlavicka->d1pom3 == 1 ) $t03="x";
-if ( $hlavicka->d1pom4 == 1 ) $t04="x"; if ( $hlavicka->d1pom5 == 1 ) $t05="x"; if ( $hlavicka->d1pom6 == 1 ) $t06="x";
-if ( $hlavicka->d1pom7 == 1 ) $t07="x"; if ( $hlavicka->d1pom8 == 1 ) $t08="x"; if ( $hlavicka->d1pom9 == 1 ) $t09="x";
-if ( $hlavicka->d1pom10 == 1 ) $t10="x"; if ( $hlavicka->d1pom11 == 1 ) $t11="x"; if ( $hlavicka->d1pom12 == 1 ) $t12="x";
-if ( $hlavicka->d1pomc == 1 ) { $tc="x"; $t01=" "; $t02=" "; $t03=" "; $t04=" "; $t05=" "; $t06=" "; $t07=" "; $t08=" "; $t09=" "; $t10=" "; $t11=" "; $t12=" "; }
+if ( $hlavicka->d1pom1 == 1 ) $t01="x";
+if ( $hlavicka->d1pom2 == 1 ) $t02="x";
+if ( $hlavicka->d1pom3 == 1 ) $t03="x";
+if ( $hlavicka->d1pom4 == 1 ) $t04="x";
+if ( $hlavicka->d1pom5 == 1 ) $t05="x";
+if ( $hlavicka->d1pom6 == 1 ) $t06="x";
+if ( $hlavicka->d1pom7 == 1 ) $t07="x";
+if ( $hlavicka->d1pom8 == 1 ) $t08="x";
+if ( $hlavicka->d1pom9 == 1 ) $t09="x";
+if ( $hlavicka->d1pom10 == 1 ) $t10="x";
+if ( $hlavicka->d1pom11 == 1 ) $t11="x";
+if ( $hlavicka->d1pom12 == 1 ) $t12="x";
+if ( $hlavicka->d1pomc == 1 ) $tc="x";
 $pdf->Cell(117,3," ","$rmc1",0,"C");$pdf->Cell(3,4,"$tc","$rmc",0,"C");
 $pdf->Cell(5,3," ","$rmc1",0,"C");$pdf->Cell(3,4,"$t01","$rmc",0,"C");$pdf->Cell(3,3," ","$rmc1",0,"C");$pdf->Cell(3,4,"$t02","$rmc",0,"C");
 $pdf->Cell(2,3," ","$rmc1",0,"C");$pdf->Cell(3,4,"$t03","$rmc",0,"C");$pdf->Cell(3,3," ","$rmc1",0,"C");$pdf->Cell(3,4,"$t04","$rmc",0,"R");
@@ -5046,11 +5068,19 @@ $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t09","$rmc",0,"C");$pdf->Cell
 //v mesiacoch2
 $pdf->SetY(158);
 $tc=" "; $t01=""; $t02=""; $t03=""; $t04=""; $t05=""; $t06=""; $t07=""; $t08=""; $t09=""; $t10=""; $t11=""; $t12="";
-if ( $hlavicka->d2pom1 == 1 ) $t01="x"; if ( $hlavicka->d2pom2 == 1 ) $t02="x"; if ( $hlavicka->d2pom3 == 1 ) $t03="x";
-if ( $hlavicka->d2pom4 == 1 ) $t04="x"; if ( $hlavicka->d2pom5 == 1 ) $t05="x"; if ( $hlavicka->d2pom6 == 1 ) $t06="x";
-if ( $hlavicka->d2pom7 == 1 ) $t07="x"; if ( $hlavicka->d2pom8 == 1 ) $t08="x"; if ( $hlavicka->d2pom9 == 1 ) $t09="x";
-if ( $hlavicka->d2pom10 == 1 ) $t10="x"; if ( $hlavicka->d2pom11 == 1 ) $t11="x"; if ( $hlavicka->d2pom12 == 1 ) $t12="x";
-if ( $hlavicka->d2pomc == 1 ) { $tc="x"; $t01=" "; $t02=" "; $t03=" "; $t04=" "; $t05=" "; $t06=" "; $t07=" "; $t08=" "; $t09=" "; $t10=" "; $t11=" "; $t12=" "; }
+if ( $hlavicka->d2pom1 == 1 ) $t01="x";
+if ( $hlavicka->d2pom2 == 1 ) $t02="x";
+if ( $hlavicka->d2pom3 == 1 ) $t03="x";
+if ( $hlavicka->d2pom4 == 1 ) $t04="x";
+if ( $hlavicka->d2pom5 == 1 ) $t05="x";
+if ( $hlavicka->d2pom6 == 1 ) $t06="x";
+if ( $hlavicka->d2pom7 == 1 ) $t07="x";
+if ( $hlavicka->d2pom8 == 1 ) $t08="x";
+if ( $hlavicka->d2pom9 == 1 ) $t09="x";
+if ( $hlavicka->d2pom10 == 1 ) $t10="x";
+if ( $hlavicka->d2pom11 == 1 ) $t11="x";
+if ( $hlavicka->d2pom12 == 1 ) $t12="x";
+if ( $hlavicka->d2pomc == 1 ) $tc="x";
 $pdf->Cell(117,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$tc","$rmc",0,"C");
 $pdf->Cell(5,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$t01","$rmc",0,"C");$pdf->Cell(3,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$t02","$rmc",0,"C");
 $pdf->Cell(2,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$t03","$rmc",0,"C");$pdf->Cell(3,3," ","$rmc1",0,"C");$pdf->Cell(3,3,"$t04","$rmc",0,"R");
@@ -5084,11 +5114,19 @@ $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t09","$rmc",0,"C");$pdf->Cell
 //v mesiacoch3
 $pdf->SetY(167);
 $tc=" "; $t01=""; $t02=""; $t03=""; $t04=""; $t05=""; $t06=""; $t07=""; $t08=""; $t09=""; $t10=""; $t11=""; $t12="";
-if ( $hlavicka->d3pom1 == 1 ) $t01="x"; if ( $hlavicka->d3pom2 == 1 ) $t02="x"; if ( $hlavicka->d3pom3 == 1 ) $t03="x";
-if ( $hlavicka->d3pom4 == 1 ) $t04="x"; if ( $hlavicka->d3pom5 == 1 ) $t05="x"; if ( $hlavicka->d3pom6 == 1 ) $t06="x";
-if ( $hlavicka->d3pom7 == 1 ) $t07="x"; if ( $hlavicka->d3pom8 == 1 ) $t08="x"; if ( $hlavicka->d3pom9 == 1 ) $t09="x";
-if ( $hlavicka->d3pom10 == 1 ) $t10="x"; if ( $hlavicka->d3pom11 == 1 ) $t11="x"; if ( $hlavicka->d3pom12 == 1 ) $t12="x";
-if ( $hlavicka->d3pomc == 1 ) { $tc="x"; $t01=" "; $t02=" "; $t03=" "; $t04=" "; $t05=" "; $t06=" "; $t07=" "; $t08=" "; $t09=" "; $t10=" "; $t11=" "; $t12=" "; }
+if ( $hlavicka->d3pom1 == 1 ) $t01="x";
+if ( $hlavicka->d3pom2 == 1 ) $t02="x";
+if ( $hlavicka->d3pom3 == 1 ) $t03="x";
+if ( $hlavicka->d3pom4 == 1 ) $t04="x";
+if ( $hlavicka->d3pom5 == 1 ) $t05="x";
+if ( $hlavicka->d3pom6 == 1 ) $t06="x";
+if ( $hlavicka->d3pom7 == 1 ) $t07="x";
+if ( $hlavicka->d3pom8 == 1 ) $t08="x";
+if ( $hlavicka->d3pom9 == 1 ) $t09="x";
+if ( $hlavicka->d3pom10 == 1 ) $t10="x";
+if ( $hlavicka->d3pom11 == 1 ) $t11="x";
+if ( $hlavicka->d3pom12 == 1 ) $t12="x";
+if ( $hlavicka->d3pomc == 1 ) $tc="x";
 $pdf->Cell(117,3," ","$rmc1",0,"C");$pdf->Cell(3,4,"$tc","$rmc",0,"C");
 $pdf->Cell(5,3," ","$rmc1",0,"C");$pdf->Cell(3,4,"$t01","$rmc",0,"C");$pdf->Cell(3,3," ","$rmc1",0,"C");$pdf->Cell(3,4,"$t02","$rmc",0,"C");
 $pdf->Cell(2,3," ","$rmc1",0,"C");$pdf->Cell(3,4,"$t03","$rmc",0,"C");$pdf->Cell(3,3," ","$rmc1",0,"C");$pdf->Cell(3,4,"$t04","$rmc",0,"R");
@@ -5122,11 +5160,19 @@ $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t09","$rmc",0,"C");$pdf->Cell
 //v mesiacoch4
 $pdf->SetY(178);
 $tc=" "; $t01=""; $t02=""; $t03=""; $t04=""; $t05=""; $t06=""; $t07=""; $t08=""; $t09=""; $t10=""; $t11=""; $t12="";
-if ( $hlavicka->d4pom1 == 1 ) $t01="x"; if ( $hlavicka->d4pom2 == 1 ) $t02="x"; if ( $hlavicka->d4pom3 == 1 ) $t03="x";
-if ( $hlavicka->d4pom4 == 1 ) $t04="x"; if ( $hlavicka->d4pom5 == 1 ) $t05="x"; if ( $hlavicka->d4pom6 == 1 ) $t06="x";
-if ( $hlavicka->d4pom7 == 1 ) $t07="x"; if ( $hlavicka->d4pom8 == 1 ) $t08="x"; if ( $hlavicka->d4pom9 == 1 ) $t09="x";
-if ( $hlavicka->d4pom10 == 1 ) $t10="x"; if ( $hlavicka->d4pom11 == 1 ) $t11="x"; if ( $hlavicka->d4pom12 == 1 ) $t12="x";
-if ( $hlavicka->d4pomc == 1 ) { $tc="x"; $t01=" "; $t02=" "; $t03=" "; $t04=" "; $t05=" "; $t06=" "; $t07=" "; $t08=" "; $t09=" "; $t10=" "; $t11=" "; $t12=" "; }
+if ( $hlavicka->d4pom1 == 1 ) $t01="x";
+if ( $hlavicka->d4pom2 == 1 ) $t02="x";
+if ( $hlavicka->d4pom3 == 1 ) $t03="x";
+if ( $hlavicka->d4pom4 == 1 ) $t04="x";
+if ( $hlavicka->d4pom5 == 1 ) $t05="x";
+if ( $hlavicka->d4pom6 == 1 ) $t06="x";
+if ( $hlavicka->d4pom7 == 1 ) $t07="x";
+if ( $hlavicka->d4pom8 == 1 ) $t08="x";
+if ( $hlavicka->d4pom9 == 1 ) $t09="x";
+if ( $hlavicka->d4pom10 == 1 ) $t10="x";
+if ( $hlavicka->d4pom11 == 1 ) $t11="x";
+if ( $hlavicka->d4pom12 == 1 ) $t12="x";
+if ( $hlavicka->d4pomc == 1 ) $tc="x";
 $pdf->Cell(117,3," ","$rmc1",0,"C");$pdf->Cell(3,2,"$tc","$rmc",0,"C");
 $pdf->Cell(5,3," ","$rmc1",0,"C");$pdf->Cell(3,2,"$t01","$rmc",0,"C");$pdf->Cell(3,3," ","$rmc1",0,"C");$pdf->Cell(3,2,"$t02","$rmc",0,"C");
 $pdf->Cell(2,3," ","$rmc1",0,"C");$pdf->Cell(3,2,"$t03","$rmc",0,"C");$pdf->Cell(3,3," ","$rmc1",0,"C");$pdf->Cell(3,2,"$t04","$rmc",0,"R");
@@ -5241,8 +5287,6 @@ $pdf->SetY(10);
 $pdf->Cell(190,0," ","$rmc1",1,"L");
 $text="0123456789";
 $text=$fir_fdic;
-$fdicc=1*$fir_fdic;
-if ( $fdicc <= 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -5975,8 +6019,6 @@ $pdf->SetY(10);
 $pdf->Cell(195,0," ","$rmc1",1,"L");
 $text="0123456789";
 $text=$fir_fdic;
-$fdicc=1*$fir_fdic;
-if ( $fdicc <= 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -6488,8 +6530,6 @@ $pdf->SetY(10);
 $pdf->Cell(190,0," ","$rmc1",1,"L");
 $text="0123456789";
 $text=$fir_fdic;
-$fdicc=1*$fir_fdic;
-if ( $fdicc <= 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -6511,7 +6551,6 @@ $pdf->Cell(190,4," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r49;
 if ( $hodx == 0 ) $hodx="";
-//if ( $hodx < 0 ) $hodx=-$hodx;
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -6927,8 +6966,6 @@ $pdf->SetY(10);
 $pdf->Cell(195,0," ","$rmc1",1,"L");
 $text="0123456789";
 $text=$fir_fdic;
-$fdicc=1*$fir_fdic;
-if ( $fdicc <= 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -7599,8 +7636,6 @@ $pdf->SetY(10);
 $pdf->Cell(190,0," ","$rmc1",1,"L");
 $text="0123456789";
 $text=$fir_fdic;
-$fdicc=1*$fir_fdic;
-if ( $fdicc <= 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -8269,8 +8304,6 @@ $pdf->SetY(10);
 $pdf->Cell(195,1," ","$rmc1",1,"L");
 $text="0123456789";
 $text=$fir_fdic;
-$fdicc=1*$fir_fdic;
-if ( $fdicc <= 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -8785,8 +8818,6 @@ $pdf->SetY(10);
 $pdf->Cell(190,0," ","$rmc1",1,"L");
 $text="0123456789";
 $text=$fir_fdic;
-$fdicc=1*$fir_fdic;
-if ( $fdicc <= 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -9117,7 +9148,6 @@ $pdf->Cell(190,4," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r109;
 if ( $hodx == 0 ) $hodx="";
-if ( $hodx == 0 AND $hlavicka->r110 == 0 ) $hodx="000";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -9371,8 +9401,6 @@ $pdf->SetY(10);
 $pdf->Cell(195,1," ","$rmc1",1,"L");
 $text="0123456789";
 $text=$fir_fdic;
-$fdicc=1*$fir_fdic;
-if ( $fdicc <= 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -9395,6 +9423,7 @@ $pdf->Cell(190,6," ","$rmc1",1,"L");
 $text="0123456789";
 $hodx=100*$hlavicka->r120;
 if ( $hodx == 0 ) $hodx="";
+if ( $hodx == 0 AND $hlavicka->r110 == 0 ) $hodx="000";
 $text=sprintf("% 10s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -9441,7 +9470,6 @@ $text="0123456789";
 $hodx=100*$hlavicka->r122;
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
-if ( $hlavicka->druh != 3 ) { $text=""; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -9466,7 +9494,6 @@ if ( $hodx == 0 ) $hodx="";
 $znamienko="";
 if ( $hodx < 0 ) { $hodx=-$hodx; $znamienko="-"; }
 $text=sprintf("% 10s",$hodx);
-if ( $hlavicka->druh != 3 ) { $text=""; $znamienko=""; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -9492,7 +9519,6 @@ if ( $hodx == 0 ) $hodx="";
 $znamienko="";
 if ( $hodx < 0 ) { $hodx=-$hodx; $znamienko="-"; }
 $text=sprintf("% 10s",$hodx);
-if ( $hlavicka->druh != 3 ) { $text=""; $znamienko=""; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -9518,7 +9544,6 @@ if ( $hodx == 0 ) $hodx="";
 $znamienko="";
 if ( $hodx < 0 ) { $hodx=-$hodx; $znamienko="-"; }
 $text=sprintf("% 10s",$hodx);
-if ( $hlavicka->druh != 3 ) { $text=""; $znamienko=""; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -9544,7 +9569,6 @@ if ( $hodx == 0 ) $hodx="";
 $znamienko="";
 if ( $hodx < 0 ) { $hodx=-$hodx; $znamienko="-"; }
 $text=sprintf("% 6s",$hodx);
-if ( $hlavicka->druh != 3 ) { $text=""; $znamienko=""; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -9566,7 +9590,6 @@ if ( $hodx == 0 ) $hodx="";
 $znamienko="";
 if ( $hodx < 0 ) { $hodx=-$hodx; $znamienko="-"; }
 $text=sprintf("% 6s",$hodx);
-if ( $hlavicka->druh != 3 ) { $text=""; $znamienko=""; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -9585,7 +9608,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",1,"C");
 //128stat rezidencie
 $pdf->Cell(190,22," ","$rmc1",1,"L");
 $text=$hlavicka->sdnr;
-if ( $hlavicka->nrz == 0 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -9649,7 +9671,6 @@ $text="-012345";
 $hodx=100*$hlavicka->r129;
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
-if ( $hlavicka->nrz == 0 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -9672,7 +9693,6 @@ $text="-012345";
 $hodx=100*$hlavicka->r130;
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
-if ( $hlavicka->nrz == 0 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -9705,8 +9725,6 @@ $pdf->SetY(10);
 $pdf->Cell(195,1," ","$rmc1",1,"L");
 $text="0123456789";
 $text=$fir_fdic;
-$fdicc=1*$fir_fdic;
-if ( $fdicc <= 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -9729,7 +9747,6 @@ $text="-012345";
 $hodx=100*$hlavicka->r131;
 if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 10s",$hodx);
-if ( $hlavicka->nrz == 0 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -9749,14 +9766,13 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"R");$pdf->Cell
 //polozka132
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $text="x";
-if ( $hlavicka->nrz == 0 OR $hlavicka->ldnr == 0 ) $text="";
+if ( $hlavicka->ldnr == 0 ) $text="";
 $pdf->Cell(84,4," ","$rmc1",0,"R");$pdf->Cell(3,4,"$text","$rmc",0,"C");
 
 //polozka133
 $text="+0123456789";
 $hodx=$hlavicka->nrzsprev;
 $text=sprintf("% 2s",$hodx);
-if ( $hlavicka->nrz == 0 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $pdf->Cell(94,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",1,"C");
@@ -10577,7 +10593,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t09","$rmc",0,"C");$pdf->Cell
 
 //osobitne zaznamy
 $pdf->Cell(190,26," ","$rmc1",1,"L");
-//if ( $hlavicka->uoso != 1 ) $hlavicka->osob=" ";
 $poleosob = explode("\r\n", $hlavicka->osob);
 if ( $poleosob[0] != '' )
      {
@@ -10618,26 +10633,21 @@ $pdf->Cell(13,7," ","$rmc1",0,"C");$pdf->Cell(5,7,"$t05","$rmc",0,"C");$pdf->Cel
 //XIV. ODDIEL
 //ziadam o
 $pdf->Cell(190,12," ","$rmc1",1,"L");
-$text1=" ";
-if ( $hlavicka->zdbo == 1 ) $text1="x";
-$text3=" ";
-if ( $hlavicka->zpre == 1 ) $text3="x";
+$text1=" "; if ( $hlavicka->zdbo == 1 ) $text1="x";
+$text3=" "; if ( $hlavicka->zpre == 1 ) $text3="x";
 $pdf->Cell(5,5," ","$rmc1",0,"R");$pdf->Cell(4,4,"$text1","$rmc",1,"R");
 $pdf->Cell(190,3," ","$rmc1",1,"L");
 $pdf->Cell(5,5," ","$rmc1",0,"R");$pdf->Cell(4,4,"$text3","$rmc",1,"R");
 
 //postovou poukazkou ci na ucet
 $pdf->Cell(190,5," ","$rmc1",1,"L");
-$textp=" ";
-if ( $hlavicka->post == 1 ) $textp="x";
-$textb=" ";
-if ( $hlavicka->ucet == 1 ) $textb="x";
+$textp=" "; if ( $hlavicka->post == 1 ) $textp="x";
+$textb=" "; if ( $hlavicka->ucet == 1 ) $textb="x";
 $pdf->Cell(18,5," ","$rmc1",0,"R");$pdf->Cell(4,5,"$textp","$rmc",0,"L");$pdf->Cell(42,5," ","$rmc1",0,"R");$pdf->Cell(4,5,"$textb","$rmc",1,"L");
 
 //iban
 $pdf->Cell(190,4," ","$rmc1",1,"L");
-$text=" ";
-if ( $hlavicka->ucet == 1 ) $text=$hlavicka->diban;
+$text=$hlavicka->diban;
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -10724,8 +10734,6 @@ $pdf->SetY(10);
 $pdf->Cell(195,1," ","$rmc1",1,"L");
 $text="0123456789";
 $text=$fir_fdic;
-$fdicc=1*$fir_fdic;
-if ( $fdicc <= 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -11249,8 +11257,6 @@ $pdf->SetY(10);
 $pdf->Cell(195,1," ","$rmc1",1,"L");
 $text="0123456789";
 $text=$fir_fdic;
-$fdicc=1*$fir_fdic;
-if ( $fdicc <= 0 ) { $text=$hlavicka->rdc.$hlavicka->rdk; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);

@@ -81,34 +81,87 @@ $dstat = $riadok->dstat;
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>FOB xml | EuroSecom</title>
-<style type="text/css">
-td.hvstup_zlte  { background-color:#ffff90; color:black; font-weight:bold;
-                  height:12px; font-size:12px; }
-td.hvstup_tzlte { background-color:#ecaa12; color:black; font-weight:bold;
-                  height:12px; font-size:12px; }
-td.hvstup_bsede { background-color:#eaeaea; color:black; font-weight:normal;
-                  height:12px; font-size:12px; }
-td.hvstup_bred { background-color:#ff6c6c; color:black; font-weight:normal;
-                  height:12px; font-size:12px; }
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/tlaciva.css">
+<title>EuroSecom - FOB xml export</title>
+<style>
+#content {
+  box-sizing: border-box;
+  background-color: white;
+  padding: 30px 25px;
+   -webkit-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  -moz-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+}
+#content > p {
+  line-height: 22px;
+  font-size: 14px;
+}
+#content > p > a {
+  color: #00e;
+}
+#content > p > a:hover {
+  text-decoration: underline;
+}
+#upozornenie > h2 {
+  line-height: 20px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  overflow: auto;
+}
+#upozornenie > h2 > strong {
+  font-size: 16px;
+  font-weight: bold;
+}
+#upozornenie > ul > li {
+  line-height: 18px;
+  margin: 10px 0;
+  font-size: 13px;
+}
+.red {
+  border-left: 4px solid #f22613;
+  text-indent: 8px;
+}
+.orange {
+  border-left: 4px solid #f89406;
+  text-indent: 8px;
+}
+dl.legend-area {
+  height: 14px;
+  line-height: 14px;
+  font-size: 11px;
+  position: relative;
+  top: 5px;
+}
+dl.legend-area > dt {
+  width:10px;
+  height:10px;
+  margin: 2px 5px 0 12px;
+}
+.box-red {
+  background-color: #f22613;
+}
+.box-orange {
+  background-color: #f89406;
+}
+.header-section {
+  padding-top: 5px;
+}
 </style>
-<script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height;
-var sirkawic = screen.width-10;
-</script>
 </HEAD>
-<BODY class="white">
-<table class="h2" width="100%">
- <tr>
-  <td>EuroSecom  -  Priznanie k dani z príjmu FO typ B rok <?php echo $kli_vrok; ?> export do XML</td>
-  <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid";?></span></td>
- </tr>
-</table>
-
+<BODY>
+<div id="wrap-heading">
+ <table id="heading">
+  <tr>
+   <td class="ilogin">EuroSecom</td>
+   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
+  </tr>
+  <tr>
+   <td class="header">Daň z príjmov FOB / Export XML - <span class="subheader"><?php echo "$dmeno $dprie";?></span></td>
+   <td></td>
+  </tr>
+ </table>
+</div>
 <?php
 //XML SUBOR elsubor=2
 if ( $copern == 10 AND $elsubor == 2  )
@@ -116,8 +169,10 @@ if ( $copern == 10 AND $elsubor == 2  )
 //prva strana
 if ( File_Exists("../tmp/$nazsub") ) { $soubor = unlink("../tmp/$nazsub"); }
      $soubor = fopen("../tmp/$nazsub", "a+");
+?>
 
-//rok2015
+<?php
+//rok2016
 $sqlt = <<<mzdprc
 (
 
@@ -142,17 +197,16 @@ $hlavicka=mysql_fetch_object($sql);
 $obdobie=$kli_vmes;
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
+
 if ( $j == 0 )
      {
   $text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\r\n"; fwrite($soubor, $text);
   $text = "<dokument>"."\r\n"; fwrite($soubor, $text);		
-
   $text = " <hlavicka>"."\r\n"; fwrite($soubor, $text);
 
 $dic=$fir_fdic;
   $text = "  <dic><![CDATA[".$dic."]]></dic>"."\r\n"; fwrite($soubor, $text);
-$datumNarodenia="";
-if ( $hlavicka->nrz == 1 ) $datumNarodenia=SkDatum($hlavicka->dar);
+$datumNarodenia=SkDatum($hlavicka->dar);
 if ( $datumNarodenia == '00.00.0000' ) $datumNarodenia="";
   $text = "  <datumNarodenia><![CDATA[".$datumNarodenia."]]></datumNarodenia>"."\r\n"; fwrite($soubor, $text);
 
@@ -168,8 +222,7 @@ if ( $hlavicka->druh == 3 ) { $rdp="0"; $odp="0"; $ddp="1"; }
   $text = "  <zdanovacieObdobie>"."\r\n"; fwrite($soubor, $text);
 $rok=$kli_vrok;
   $text = "   <rok><![CDATA[".$rok."]]></rok>"."\r\n"; fwrite($soubor, $text);
-$datumDDP="";
-if ( $ddp == 1 ) $datumDDP=SkDatum($hlavicka->ddp);
+$datumDDP=SkDatum($hlavicka->ddp);
 if ( $datumDDP == '00.00.0000' ) $datumDDP="";
   $text = "   <datumDDP><![CDATA[".$datumDDP."]]></datumDDP>"."\r\n"; fwrite($soubor, $text);
   $text = "  </zdanovacieObdobie>"."\r\n"; fwrite($soubor, $text);
@@ -258,13 +311,11 @@ $mail=iconv("CP1250", "UTF-8", $hlavicka->dmailfax);
   $text = " </hlavicka>"."\r\n"; fwrite($soubor, $text);
 
 //telo
-
   $text = " <telo>"."\r\n"; fwrite($soubor, $text);
 
 $riadok=$hlavicka->r29;
   $text = "  <r29><![CDATA[".$riadok."]]></r29>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->r30;
-if ( $hlavicka->r29 == 0 ) $riadok="";
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r30><![CDATA[".$riadok."]]></r30>"."\r\n"; fwrite($soubor, $text);
  
@@ -291,40 +342,28 @@ if ( $riadok == 0 ) $riadok="";
 $m00=$hlavicka->d1pomc;
   $text = "    <m00><![CDATA[".$m00."]]></m00>"."\r\n"; fwrite($soubor, $text);
 $m01=$hlavicka->d1pom1;
-if ( $hlavicka->d1pomc == 1 ) $m01="";
   $text = "    <m01><![CDATA[".$m01."]]></m01>"."\r\n"; fwrite($soubor, $text);
 $m02=$hlavicka->d1pom2;
-if ( $hlavicka->d1pomc == 1 ) $m02="";
   $text = "    <m02><![CDATA[".$m02."]]></m02>"."\r\n"; fwrite($soubor, $text);
 $m03=$hlavicka->d1pom3;
-if ( $hlavicka->d1pomc == 1 ) $m03="";
   $text = "    <m03><![CDATA[".$m03."]]></m03>"."\r\n"; fwrite($soubor, $text);
 $m04=$hlavicka->d1pom4;
-if ( $hlavicka->d1pomc == 1 ) $m04="";
   $text = "    <m04><![CDATA[".$m04."]]></m04>"."\r\n"; fwrite($soubor, $text);
 $m05=$hlavicka->d1pom5;
-if ( $hlavicka->d1pomc == 1 ) $m05="";
   $text = "    <m05><![CDATA[".$m05."]]></m05>"."\r\n"; fwrite($soubor, $text);
 $m06=$hlavicka->d1pom6;
-if ( $hlavicka->d1pomc == 1 ) $m06="";
   $text = "    <m06><![CDATA[".$m06."]]></m06>"."\r\n"; fwrite($soubor, $text);
 $m07=$hlavicka->d1pom7;
-if ( $hlavicka->d1pomc == 1 ) $m07="";
   $text = "    <m07><![CDATA[".$m07."]]></m07>"."\r\n"; fwrite($soubor, $text);
 $m08=$hlavicka->d1pom8;
-if ( $hlavicka->d1pomc == 1 ) $m08="";
   $text = "    <m08><![CDATA[".$m08."]]></m08>"."\r\n"; fwrite($soubor, $text);
 $m09=$hlavicka->d1pom9;
-if ( $hlavicka->d1pomc == 1 ) $m09="";
   $text = "    <m09><![CDATA[".$m09."]]></m09>"."\r\n"; fwrite($soubor, $text);
 $m10=$hlavicka->d1pom10;
-if ( $hlavicka->d1pomc == 1 ) $m10="";
   $text = "    <m10><![CDATA[".$m10."]]></m10>"."\r\n"; fwrite($soubor, $text);
 $m11=$hlavicka->d1pom11;
-if ( $hlavicka->d1pomc == 1 ) $m11="";
   $text = "    <m11><![CDATA[".$m11."]]></m11>"."\r\n"; fwrite($soubor, $text);
 $m12=$hlavicka->d1pom12;
-if ( $hlavicka->d1pomc == 1 ) $m12="";
   $text = "    <m12><![CDATA[".$m12."]]></m12>"."\r\n"; fwrite($soubor, $text);
   $text = "   </dieta>"."\r\n"; fwrite($soubor, $text);
 
@@ -337,40 +376,28 @@ if ( $riadok == 0 ) $riadok="";
 $m00=$hlavicka->d2pomc;
   $text = "    <m00><![CDATA[".$m00."]]></m00>"."\r\n"; fwrite($soubor, $text);
 $m01=$hlavicka->d2pom1;
-if ( $hlavicka->d2pomc == 1 ) $m01="";
   $text = "    <m01><![CDATA[".$m01."]]></m01>"."\r\n"; fwrite($soubor, $text);
 $m02=$hlavicka->d2pom2;
-if ( $hlavicka->d2pomc == 1 ) $m02="";
   $text = "    <m02><![CDATA[".$m02."]]></m02>"."\r\n"; fwrite($soubor, $text);
 $m03=$hlavicka->d2pom3;
-if ( $hlavicka->d2pomc == 1 ) $m03="";
   $text = "    <m03><![CDATA[".$m03."]]></m03>"."\r\n"; fwrite($soubor, $text);
 $m04=$hlavicka->d2pom4;
-if ( $hlavicka->d2pomc == 1 ) $m04="";
   $text = "    <m04><![CDATA[".$m04."]]></m04>"."\r\n"; fwrite($soubor, $text);
 $m05=$hlavicka->d2pom5;
-if ( $hlavicka->d2pomc == 1 ) $m05="";
   $text = "    <m05><![CDATA[".$m05."]]></m05>"."\r\n"; fwrite($soubor, $text);
 $m06=$hlavicka->d2pom6;
-if ( $hlavicka->d2pomc == 1 ) $m06="";
   $text = "    <m06><![CDATA[".$m06."]]></m06>"."\r\n"; fwrite($soubor, $text);
 $m07=$hlavicka->d2pom7;
-if ( $hlavicka->d2pomc == 1 ) $m07="";
   $text = "    <m07><![CDATA[".$m07."]]></m07>"."\r\n"; fwrite($soubor, $text);
 $m08=$hlavicka->d2pom8;
-if ( $hlavicka->d2pomc == 1 ) $m08="";
   $text = "    <m08><![CDATA[".$m08."]]></m08>"."\r\n"; fwrite($soubor, $text);
 $m09=$hlavicka->d2pom9;
-if ( $hlavicka->d2pomc == 1 ) $m09="";
   $text = "    <m09><![CDATA[".$m09."]]></m09>"."\r\n"; fwrite($soubor, $text);
 $m10=$hlavicka->d2pom10;
-if ( $hlavicka->d2pomc == 1 ) $m10="";
   $text = "    <m10><![CDATA[".$m10."]]></m10>"."\r\n"; fwrite($soubor, $text);
 $m11=$hlavicka->d2pom11;
-if ( $hlavicka->d2pomc == 1 ) $m11="";
   $text = "    <m11><![CDATA[".$m11."]]></m11>"."\r\n"; fwrite($soubor, $text);
 $m12=$hlavicka->d2pom12;
-if ( $hlavicka->d2pomc == 1 ) $m12="";
   $text = "    <m12><![CDATA[".$m12."]]></m12>"."\r\n"; fwrite($soubor, $text);
   $text = "   </dieta>"."\r\n"; fwrite($soubor, $text);
 
@@ -383,40 +410,28 @@ if ( $riadok == 0 ) $riadok="";
 $m00=1*$hlavicka->d3pomc;
   $text = "    <m00><![CDATA[".$m00."]]></m00>"."\r\n"; fwrite($soubor, $text);
 $m01=1*$hlavicka->d3pom1;
-if ( $hlavicka->d3pomc == 1 ) $m01="";
   $text = "    <m01><![CDATA[".$m01."]]></m01>"."\r\n"; fwrite($soubor, $text);
 $m02=1*$hlavicka->d3pom2;
-if ( $hlavicka->d3pomc == 1 ) $m02="";
   $text = "    <m02><![CDATA[".$m02."]]></m02>"."\r\n"; fwrite($soubor, $text);
 $m03=1*$hlavicka->d3pom3;
-if ( $hlavicka->d3pomc == 1 ) $m03="";
   $text = "    <m03><![CDATA[".$m03."]]></m03>"."\r\n"; fwrite($soubor, $text);
 $m04=1*$hlavicka->d3pom4;
-if ( $hlavicka->d3pomc == 1 ) $m04="";
   $text = "    <m04><![CDATA[".$m04."]]></m04>"."\r\n"; fwrite($soubor, $text);
 $m05=1*$hlavicka->d3pom5;
-if ( $hlavicka->d3pomc == 1 ) $m05="";
   $text = "    <m05><![CDATA[".$m05."]]></m05>"."\r\n"; fwrite($soubor, $text);
 $m06=1*$hlavicka->d3pom6;
-if ( $hlavicka->d3pomc == 1 ) $m06="";
   $text = "    <m06><![CDATA[".$m06."]]></m06>"."\r\n"; fwrite($soubor, $text);
 $m07=1*$hlavicka->d3pom7;
-if ( $hlavicka->d3pomc == 1 ) $m07="";
   $text = "    <m07><![CDATA[".$m07."]]></m07>"."\r\n"; fwrite($soubor, $text);
 $m08=1*$hlavicka->d3pom8;
-if ( $hlavicka->d3pomc == 1 ) $m08="";
   $text = "    <m08><![CDATA[".$m08."]]></m08>"."\r\n"; fwrite($soubor, $text);
 $m09=1*$hlavicka->d3pom9;
-if ( $hlavicka->d3pomc == 1 ) $m09="";
   $text = "    <m09><![CDATA[".$m09."]]></m09>"."\r\n"; fwrite($soubor, $text);
 $m10=1*$hlavicka->d3pom10;
-if ( $hlavicka->d3pomc == 1 ) $m10="";
   $text = "    <m10><![CDATA[".$m10."]]></m10>"."\r\n"; fwrite($soubor, $text);
 $m11=1*$hlavicka->d3pom11;
-if ( $hlavicka->d3pomc == 1 ) $m11="";
   $text = "    <m11><![CDATA[".$m11."]]></m11>"."\r\n"; fwrite($soubor, $text);
 $m12=1*$hlavicka->d3pom12;
-if ( $hlavicka->d3pomc == 1 ) $m12="";
   $text = "    <m12><![CDATA[".$m12."]]></m12>"."\r\n"; fwrite($soubor, $text);
   $text = "   </dieta>"."\r\n"; fwrite($soubor, $text);
 
@@ -429,40 +444,28 @@ if ( $riadok == 0 ) $riadok="";
 $m00=1*$hlavicka->d4pomc;
   $text = "    <m00><![CDATA[".$m00."]]></m00>"."\r\n"; fwrite($soubor, $text);
 $m01=1*$hlavicka->d4pom1;
-if ( $hlavicka->d4pomc == 1 ) $m01="";
   $text = "    <m01><![CDATA[".$m01."]]></m01>"."\r\n"; fwrite($soubor, $text);
 $m02=1*$hlavicka->d4pom2;
-if ( $hlavicka->d4pomc == 1 ) $m02="";
   $text = "    <m02><![CDATA[".$m02."]]></m02>"."\r\n"; fwrite($soubor, $text);
 $m03=1*$hlavicka->d4pom3;
-if ( $hlavicka->d4pomc == 1 ) $m03="";
   $text = "    <m03><![CDATA[".$m03."]]></m03>"."\r\n"; fwrite($soubor, $text);
 $m04=1*$hlavicka->d4pom4;
-if ( $hlavicka->d4pomc == 1 ) $m04="";
   $text = "    <m04><![CDATA[".$m04."]]></m04>"."\r\n"; fwrite($soubor, $text);
 $m05=1*$hlavicka->d4pom5;
-if ( $hlavicka->d4pomc == 1 ) $m05="";
   $text = "    <m05><![CDATA[".$m05."]]></m05>"."\r\n"; fwrite($soubor, $text);
 $m06=1*$hlavicka->d4pom6;
-if ( $hlavicka->d4pomc == 1 ) $m06="";
   $text = "    <m06><![CDATA[".$m06."]]></m06>"."\r\n"; fwrite($soubor, $text);
 $m07=1*$hlavicka->d4pom7;
-if ( $hlavicka->d4pomc == 1 ) $m07="";
   $text = "    <m07><![CDATA[".$m07."]]></m07>"."\r\n"; fwrite($soubor, $text);
 $m08=1*$hlavicka->d4pom8;
-if ( $hlavicka->d4pomc == 1 ) $m08="";
   $text = "    <m08><![CDATA[".$m08."]]></m08>"."\r\n"; fwrite($soubor, $text);
 $m09=1*$hlavicka->d4pom9;
-if ( $hlavicka->d4pomc == 1 ) $m09="";
   $text = "    <m09><![CDATA[".$m09."]]></m09>"."\r\n"; fwrite($soubor, $text);
 $m10=1*$hlavicka->d4pom10;
-if ( $hlavicka->d4pomc == 1 ) $m10="";
   $text = "    <m10><![CDATA[".$m10."]]></m10>"."\r\n"; fwrite($soubor, $text);
 $m11=1*$hlavicka->d4pom11;
-if ( $hlavicka->d4pomc == 1 ) $m11="";
   $text = "    <m11><![CDATA[".$m11."]]></m11>"."\r\n"; fwrite($soubor, $text);
 $m12=1*$hlavicka->d4pom12;
-if ( $hlavicka->d4pomc == 1 ) $m12="";
   $text = "    <m12><![CDATA[".$m12."]]></m12>"."\r\n"; fwrite($soubor, $text);
   $text = "   </dieta>"."\r\n"; fwrite($soubor, $text);
   $text = "  </r32>"."\r\n"; fwrite($soubor, $text);
@@ -1376,12 +1379,10 @@ if ( $riadok == 0 ) $riadok="";
   $text = "   </udajeOprijmoch>"."\r\n"; fwrite($soubor, $text);
 
 $zaznamy=iconv("CP1250", "UTF-8", $hlavicka->osob);
-//if ( $uvadza == 0 ) $zaznamy="";
   $text = "   <zaznamy><![CDATA[".$zaznamy."]]></zaznamy>"."\r\n"; fwrite($soubor, $text);
   $text = "  </osobitneZaznamy>"."\r\n"; fwrite($soubor, $text);
 
 $riadok=$hlavicka->pril;
-if( $riadok < 2 ) { $riadok=2; }
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r125><![CDATA[".$riadok."]]></r125>"."\r\n"; fwrite($soubor, $text);
 
@@ -1395,17 +1396,13 @@ $vyplatbonus=$hlavicka->zdbo;
 $vratpreplatok=$hlavicka->zpre;
   $text = "   <vratitDanPreplatok><![CDATA[".$vratpreplatok."]]></vratitDanPreplatok>"."\r\n"; fwrite($soubor, $text);
   $text = "   <sposobPlatby>"."\r\n";   fwrite($soubor, $text);
-$poukazka="0";
-if ( $vyplatbonus == 1 OR $vratpreplatok == 1 ) $poukazka=$hlavicka->post;
+$poukazka=$hlavicka->post;
   $text = "    <poukazka><![CDATA[".$poukazka."]]></poukazka>"."\r\n"; fwrite($soubor, $text);
-$ucet="0";
-if ( $vyplatbonus == 1 OR $vratpreplatok == 1 ) $ucet=$hlavicka->ucet;
-if ( $poukazka == 1 ) $ucet="0";
+$ucet=$hlavicka->ucet;
   $text = "    <ucet><![CDATA[".$ucet."]]></ucet>"."\r\n"; fwrite($soubor, $text);
   $text = "   </sposobPlatby>"."\r\n"; fwrite($soubor, $text);
   $text = "   <bankovyUcet>"."\r\n"; fwrite($soubor, $text);
 $iban=$hlavicka->diban;
-if ( $ucet == 0 ) $iban="";
   $text = "    <IBAN><![CDATA[".$iban."]]></IBAN>"."\r\n"; fwrite($soubor, $text);
 
 $pole = explode("-", $hlavicka->uceb);
@@ -1420,8 +1417,8 @@ $kodBanky=$hlavicka->numb;
 if ( $ucet == 0 ) $kodBanky="";
   $text = "    <kodBanky><![CDATA[".$kodBanky."]]></kodBanky>"."\r\n"; fwrite($soubor, $text);
   $text = "   </bankovyUcet>"."\r\n"; fwrite($soubor, $text);
-$datum="";
-if ( $vyplatbonus == 1 OR $vratpreplatok == 1 ) $datum=SKDatum($hlavicka->da2);
+
+$datum=SKDatum($hlavicka->da2);
 if ( $datum =='00.00.0000' ) $datum="";
   $text = "   <datum><![CDATA[".$datum."]]></datum>"."\r\n"; fwrite($soubor, $text);
   $text = "  </danovyPreplatokBonus>"."\r\n"; fwrite($soubor, $text);
@@ -1592,35 +1589,220 @@ if ( $datum =='00.00.0000' ) $datum="";
   $text = "</dokument>"."\r\n"; fwrite($soubor, $text);
      }
 //koniec ak j=0
-
 }
 $i = $i + 1;
 $j = $j + 1;
   }
 fclose($soubor);
 ?>
-
-
+<div id="content">
 <?php if ( $elsubor == 2 ) { ?>
-<br />
-<br />
-Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a načítajte na www.financnasprava.sk alebo do aplikácie eDane:
-<br />
-<br />
+<p>Stiahnite si nižšie uvedený súbor <strong>.xml</strong> do Vášho počítača a načítajte ho na
+<a href="https://www.financnasprava.sk/sk/titulna-stranka" target="_blank" title="Stránka Finančnej správy">www.financnasprava.sk</a> alebo do aplikácie eDane:
+</p>
+<p>
 <a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
-<br />
-<br />
+</p>
 <?php                      } ?>
 
+<?php
+/////////////////////////////////////////////////////////////////////UPOZORNENIE
+$upozorni1=0; $upozorni2=0; $upozorni10=0; $upozorni11=0; $upozorni12=0;
+?>
+<div id="upozornenie" style="display:none;">
+<h2>
+<strong class="toleft">Upozornenie</strong>
+<dl class="toright legend-area">
+ <dt class="toleft box-red"></dt><dd class="toleft">kritické</dd>
+ <dt class="toleft box-orange"></dt><dd class="toleft">logické</dd>
+</dl>
+</h2>
+<ul id="alertpage1" style="display:none;">
+<li class="header-section">STRANA 1</li>
+<li class="red">
+<?php if ( $hlavicka->fdic == "0" AND $hlavicka->dar == '0000-00-00' )
+{
+$upozorni1=1;
+echo "Nie je vyplnené <strong>DIČ</strong> daňovníka.";
+}
+?>
+</li>
+<li class="red">
+<?php if ( $hlavicka->dar != '0000-00-00' AND $hlavicka->fdic != "0" )
+{
+$upozorni1=1;
+echo "Súčasne vyplnené <strong>dič</strong> aj <strong>dátum narodenia</strong> daňovníka.";
+}
+?>
+</li>
+<li class="red">
+<?php if ( $hlavicka->nrz == 1 AND $hlavicka->dar == '0000-00-00' )
+{
+$upozorni1=1;
+echo "Pri <strong>nerezidentovi</strong> (bod 12) nie je vyplnený jeho <strong>dátum narodenia</strong> v bode 2.";
+}
+?>
+</li>
+<li class="red">
+<?php if ( $hlavicka->druh == 3 AND $hlavicka->ddp == '0000-00-00' )
+{
+$upozorni1=1;
+echo "Pri <strong>dodatočnom</strong> daňovom priznaní <strong> nie je vyplnený dátum</strong> zistenia skutočnosti na podanie dodatočného priznania.";
+}
+?>
+</li>
+<li class="red">
+<?php if ( ( $hlavicka->druh == 1 OR $hlavicka->druh == 2 ) AND $hlavicka->ddp != '0000-00-00' )
+{
+$upozorni1=1;
+echo "Vyplnený <strong>dátum</strong> zistenia skutočnosti na podanie dodatočného priznania, ale <strong>nie je</strong> vybraté dodatočné daňové priznanie.";
+}
+?>
+</li>
+<li class="red">
+<?php if ( $dprie == "" OR $dmeno == "" )
+{
+$upozorni1=1;
+echo "Nie je vyplnené <strong>priezvisko alebo meno</strong> daňovníka.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $dcdm == "" OR $dpsc == "" OR $dmes == "" OR $dstat == "" ) {
+$upozorni1=1;
+echo "Nie je vyplnená celá <strong>adresa trvalého pobytu</strong> daňovníka.";
+} ?>
+</li>
+</ul>
+<ul id="alertpage2" style="display:none;">
+<li class="header-section">STRANA 2</li>
+<li class="orange">
+<?php if ( $hlavicka->r29 == 0 AND $hlavicka->r30 != 0 )
+{
+$upozorni2=1;
+echo "Vyplnená <strong>úhrnná suma dôchodku</strong> v bode 30, avšak nie je zaškrtnuté <strong>poberanie dôchodku</strong> v bode 29.";
+}
+?>
+</li>
+</ul>
+<ul id="alertpage10" style="display:none;">
+<li class="header-section">STRANA 10</li>
+<li class="orange">
+<?php if ( $hlavicka->druh != 3 AND ( $hlavicka->r122 != 0 OR $hlavicka->r123 != 0 OR $hlavicka->r124 != 0 OR $hlavicka->r125 != 0 OR $hlavicka->r126 != 0 OR $hlavicka->r127 != 0 ) )
+{
+$upozorni10=1;
+echo "Vyplnené riadky <strong>X.oddielu</strong>, ale <strong>nie je</strong> vybraté dodatočné daňové priznanie na 1.strane.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->nrz == 0 AND ( $hlavicka->sdnr != "" OR $hlavicka->r129 != 0 OR $hlavicka->r130 != 0 ) )
+{
+$upozorni10=1;
+echo "V <strong>XI.oddiele</strong> vyplnené <strong>údaje nerezidenta</strong>, ale nie je vybratý nerezident <strong>v bode 12 na 1.strane</strong>.";
+}
+?>
+</li>
+</ul>
+<ul id="alertpage11" style="display:none;">
+<li class="header-section">STRANA 11</li>
+<li class="orange">
+<?php if ( $hlavicka->nrz == 0 AND ( $hlavicka->r131 != 0 OR $hlavicka->ldnr != 0 OR $hlavicka->nrzsprev != 0 ) )
+{
+$upozorni11=1;
+echo "V <strong>XI.oddiele</strong> vyplnené <strong>údaje nerezidenta</strong>, ale nie je vybratý nerezident <strong>v bode 12 na 1.strane</strong>.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->upl50 == 1 AND $hlavicka->r134 != 0 )
+{
+$upozorni11=1;
+echo "<strong>Neuplatňujem postup</strong> podľa § 50 zákona a zároveň poukazujem sumu v <strong>bode 134</strong>.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->upl50 == 1 AND ( $hlavicka->pico != 0 OR $hlavicka->psid != 0 OR $hlavicka->pfor != "" OR $hlavicka->pmen != "" OR $hlavicka->puli != "" OR $hlavicka->pcdm != "" OR $hlavicka->ppsc != "" OR $hlavicka->pmes != "" ) )
+{
+$upozorni11=1;
+echo "<strong>Neuplatňujem postup</strong> podľa § 50 zákona a zároveň sú vyplnené <strong>údaje o prijímateľovi</strong> v bode 134.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->r134 != 0 AND $hlavicka->upl50 == 0 AND ( $hlavicka->pico == 0 OR $hlavicka->psid == 0 OR $hlavicka->pfor == "" OR $hlavicka->pmen == "" ) )
+{
+$upozorni11=1;
+echo "Nie sú vyplnené <strong>údaje o príjimateľovi</strong> v bode 135.";
+}
+?>
+</li>
+</ul>
+<ul id="alertpage12" style="display:none;">
+<li class="header-section">STRANA 12</li>
+<li class="orange">
+<?php if ( $hlavicka->uoso == 0 AND $hlavicka->osob != "" )
+{
+$upozorni12=1;
+echo "Vyplnené <strong>osobitné záznamy</strong>, ale <strong>nie je vybraté uvádzam</strong> osobitné záznamy na strane 11.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->dat == '0000-00-00' )
+{
+$upozorni12=1;
+echo "Nie je vyplnený <strong>dátum vyhlásenia</strong> daňového priznania.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( ( $hlavicka->zdbo == 0 AND $hlavicka->zpre == 0 ) AND ( $hlavicka->post == 1 OR $hlavicka->ucet == 1 OR $hlavicka->diban != "" OR $hlavicka->da2 != '0000-00-00' ) )
+{
+$upozorni12=1;
+echo "V <strong>XIV.oddiele nežiadam</strong> o vyplatenie / vrátenie, ale sú vyplnené hodnoty súvisiace s vyplatením / vrátením(napr. spôsob, iban alebo dátum).";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( ( $hlavicka->zdbo == 1 OR $hlavicka->zpre == 1 ) AND $hlavicka->da2 == '0000-00-00' )
+{
+$upozorni12=1;
+echo "V <strong>XIV.oddiele žiadam</strong> o vyplatenie / vrátenie, ale nie je vyplnený <strong>dátum</strong> vyplatenia / vrátenia.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( ( $hlavicka->zdbo == 1 OR $hlavicka->zpre == 1 ) AND $hlavicka->ucet == 1 AND $hlavicka->diban == "" ) {
+$upozorni6=1;
+echo "V <strong>XIV.oddiele žiadam</strong> o vyplatenie / vrátenie na účet, ale nie je vyplnený <strong>IBAN</strong> účtu na vyplatenie / vrátenie.";
+} ?>
+</li>
+</ul>
+</div> <!-- #upozornenie -->
+
+<script type="text/javascript">
+<?php
+if ( $upozorni1 == 1 OR $upozorni2 == 1 OR $upozorni10 == 1 OR $upozorni11 == 1 OR $upozorni12 == 1 )
+     { echo "upozornenie.style.display='block';"; }
+if ( $upozorni1 == 1 ) { echo "alertpage1.style.display='block';"; } 
+if ( $upozorni2 == 1 ) { echo "alertpage2.style.display='block';"; } 
+if ( $upozorni10 == 1 ) { echo "alertpage10.style.display='block';"; }
+if ( $upozorni11 == 1 ) { echo "alertpage11.style.display='block';"; }
+if ( $upozorni12 == 1 ) { echo "alertpage12.style.display='block';"; }
+?>
+</script>
+
+</div> <!-- #content -->
 <?php
 //mysql_free_result($vysledok);
      }
 //koniec XML SUBOR
-
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphsx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
-// celkovy koniec dokumentu
+//celkovy koniec dokumentu
 } while (false);
 ?>
 </BODY>
