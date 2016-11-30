@@ -1624,8 +1624,8 @@ if ( $copern == 20 )
 <?php                                        } ?>
 
 <?php if ( $strana == 5 OR $strana == 9999 ) { ?>
-<?php if ( $upl50 == 1 ) { ?> document.formv1.upl50.checked = "checked"; <?php } ?>
-<?php if ( $spln3 == 1 ) { ?> document.formv1.spln3.checked = "checked"; <?php } ?>
+<?php if ( $upl50 == 1 ) { echo "document.formv1.upl50.checked='checked';"; } ?>
+<?php if ( $spln3 == 1 ) { echo "document.formv1.spln3.checked='checked';"; } ?>
    document.formv1.r75.value = '<?php echo "$r75";?>';
    document.formv1.pico.value = '<?php echo "$pico";?>';
    document.formv1.psid.value = '<?php echo "$psid";?>';
@@ -1697,7 +1697,7 @@ if ( $copern == 20 )
   }
   function PoucVyplnenie()
   {
-   window.open('<?php echo $jpg_cesta; ?>_poucenie.pdf', '_blank', param); //dopyt, dorobiù
+   window.open('<?php echo $jpg_cesta; ?>_poucenie.pdf', '_blank', param);
   }
   function NacitajPriPred()
   {
@@ -1748,6 +1748,15 @@ if ( $copern == 20 )
   function CisKrajin()
   {
    window.open('../cis/ciselnik_krajin.pdf', '_blank', param);
+  }
+//neuplatnujem vs. poukazujem 3%
+  function KlikNeuplAno()
+  {
+   document.formv1.spln3.checked = false;
+  }
+  function KlikNeuplNie()
+  {
+   document.formv1.upl50.checked = false;
   }
 </script>
 </HEAD>
@@ -2032,8 +2041,8 @@ $t02=substr($rokp,3,1);
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fdic; ?></span>
 
 <!-- VIII.ODDIEL -->
-<input type="checkbox" name="upl50" value="1" style="top:156px; left:59px;"/>
-<input type="checkbox" name="spln3" value="1" style="top:156px; left:295px;"/>
+<input type="checkbox" name="upl50" value="1" onchange="KlikNeuplAno();" style="top:156px; left:59px;"/>
+<input type="checkbox" name="spln3" value="1" onchange="KlikNeuplNie();" style="top:156px; left:295px;"/>
 <input type="text" name="r75" id="r75" onkeyup="CiarkaNaBodku(this);" style="width:197px; top:198px; left:316px;"/>
 <!-- Prijimatel -->
 <input type="text" name="pico" id="pico" maxlength="8" style="width:175px; top:285px; left:51px;"/>

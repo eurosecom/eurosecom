@@ -150,7 +150,6 @@ dl.legend-area > dt {
   </tr>
  </table>
 </div>
-<div id="content">
 <?php
 //XML SUBOR elsubor=2
 if ( $copern == 10 AND $elsubor == 2  )
@@ -159,15 +158,7 @@ if ( $copern == 10 AND $elsubor == 2  )
 if ( File_Exists("../tmp/$nazsub") ) { $soubor = unlink("../tmp/$nazsub"); }
 $soubor = fopen("../tmp/$nazsub", "a+");
 ?>
-<?php if ( $elsubor == 2 ) { ?>
-<p>Stiahnite si nižšie uvedený súbor <strong>.xml</strong> do Vášho poèítaèa a naèítajte ho na
-<a href="https://www.financnasprava.sk/sk/titulna-stranka" target="_blank" title="Stránka Finanènej správy">www.financnasprava.sk</a>
-  alebo do aplikácie eDane:
-</p>
-<p>
-<a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
-</p>
-<?php                      } ?>
+
 <?php
 //rok2016
 $sqlt = <<<mzdprc
@@ -192,196 +183,9 @@ $hlavicka=mysql_fetch_object($sql);
 
 $obdobie=$kli_vmes;
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+?>
 
-/////////////////////////////////////////////////////////////////////UPOZORNENIE
-$upozorni=0; $upozorni1=0; $upozorni2=0; $upozorni4=0; $upozorni5=0; $upozorni6=0;
-?>
-<div id="upozornenie" style="display:none;">
-<h2>
-<strong class="toleft">Upozornenie</strong>
-<dl class="toright legend-area">
- <dt class="toleft box-red"></dt><dd class="toleft">kritické</dd>
- <dt class="toleft box-orange"></dt><dd class="toleft">logické</dd>
-</dl>
-</h2>
-<ul id="alertpage1" style="display:none;">
-<li class="header-section">STRANA 1</li>
-<li class="red">
-<?php if ( $hlavicka->fdic == "0" AND $hlavicka->dar == '0000-00-00' )
-{
-$upozorni1=1;
-echo "Nie je vyplnené <strong>DIÈ</strong> daòovníka.";
-}
-?>
-</li>
-<li class="red">
-<?php if ( $hlavicka->dar != '0000-00-00' AND $hlavicka->fdic != "0" )
-{
-$upozorni1=1;
-echo "Súèasne vyplnené <strong>diè</strong> aj <strong>dátum narodenia</strong> daòovníka.";
-}
-?>
-</li>
-<li class="red">
-<?php if ( $hlavicka->nrz == 1 AND $hlavicka->dar == '0000-00-00' )
-{
-$upozorni1=1;
-echo "Pri <strong>nerezidentovi</strong> (bod 11) nie je vyplnený jeho <strong>dátum narodenia</strong> v bode 2.";
-}
-?>
-</li>
-<li class="red">
-<?php if ( $hlavicka->druh == 3 AND $hlavicka->ddp == '0000-00-00' )
-{
-$upozorni1=1;
-echo "Pri <strong>dodatoènom</strong> daòovom priznaní <strong> nie je vyplnený dátum</strong> zistenia skutoènosti na podanie dodatoèného priznania.";
-}
-?>
-</li>
-<li class="red">
-<?php if ( ( $hlavicka->druh == 1 OR $hlavicka->druh == 2 ) AND $hlavicka->ddp != '0000-00-00' )
-{
-$upozorni1=1;
-echo "Vyplnený <strong>dátum</strong> zistenia skutoènosti na podanie dodatoèného priznania, ale <strong>nie je</strong> vybraté dodatoèné daòové priznanie.";
-}
-?>
-</li>
-<li class="red">
-<?php if ( $hlavicka->dprie == "" OR $hlavicka->dmeno == "" )
-{
-$upozorni1=1;
-echo "Nie je vyplnené <strong>priezvisko alebo meno</strong> daòovníka.";
-}
-?>
-</li>
-<li class="orange">
-<?php if ( $hlavicka->dcdm == "" OR $hlavicka->dpsc == "" OR $hlavicka->dmes == "" OR $hlavicka->xstat == "" ) {
-$upozorni1=1;
-echo "Nie je vyplnená celá <strong>adresa trvalého pobytu</strong> daòovníka.";
-} ?>
-</li>
-</ul>
-<ul id="alertpage2" style="display:none;">
-<li class="header-section">STRANA 2</li>
-<li class="orange">
-<?php if ( $hlavicka->r27 == 0 AND $hlavicka->r28 != 0 )
-{
-$upozorni2=1;
-echo "Vyplnená <strong>úhrnná suma dôchodku</strong> v bode 28, avšak nie je zaškrtnuté <strong>poberanie dôchodku</strong> v bode 27.";
-}
-?>
-</li>
-</ul>
-<ul id="alertpage4" style="display:none;">
-<li class="header-section">STRANA 4</li>
-<li class="orange">
-<?php if ( $hlavicka->druh != 3 AND ( $hlavicka->r67 != 0 OR $hlavicka->r68 != 0 OR $hlavicka->r69 != 0 OR $hlavicka->r70 != 0 OR $hlavicka->r71 != 0 OR $hlavicka->r72 != 0 OR $hlavicka->r73 != 0 OR $hlavicka->r74 != 0 ) )
-{
-$upozorni4=1;
-echo "Vyplnené riadky <strong>VII.oddielu</strong>, ale <strong>nie je</strong> vybraté dodatoèné daòové priznanie na 1.strane.";
-}
-?>
-</li>
-</ul>
-<ul id="alertpage5" style="display:none;">
-<li class="header-section">STRANA 5</li>
-<li class="orange">
-<?php if ( $hlavicka->upl50 == 1 AND ( $hlavicka->spln3 == 1 OR $hlavicka->r75 != 0 OR $hlavicka->zslu != 0 ) )
-{
-$upozorni5=1;
-echo "<strong>Neuplatòujem postup</strong> pod¾a § 50 zákona a zároveò sú vyplnené hodnoty súvisiace s poukázaním.";
-}
-?>
-</li>
-<li class="orange">
-<?php if ( $hlavicka->upl50 == 1 AND ( $hlavicka->pico != 0 OR $hlavicka->psid != 0 OR $hlavicka->pfor != "" OR $hlavicka->pmen != "" OR $hlavicka->puli != "" OR $hlavicka->pcdm != "" OR $hlavicka->ppsc != "" OR $hlavicka->pmes != "" ) )
-{
-$upozorni5=1;
-echo "<strong>Neuplatòujem postup</strong> pod¾a § 50 zákona a zároveò sú vyplnené <strong>údaje o prijímate¾ovi</strong> v bode 76.";
-}
-?>
-</li>
-<li class="orange">
-<?php if ( $hlavicka->r75 != 0 AND ( $hlavicka->pico == 0 OR $hlavicka->psid == 0 OR $hlavicka->pfor == "" OR $hlavicka->pmen == "" ) )
-{
-$upozorni5=1;
-echo "Nie sú vyplnené <strong>údaje o príjimate¾ovi</strong> v bode 76.";
-}
-?>
-</li>
-<li class="orange">
-<?php if ( $hlavicka->uoso == 0 AND $hlavicka->osob != "" )
-{
-$upozorni5=1;
-echo "Vyplnené <strong>osobitné záznamy</strong>, ale <strong>nie je vybraté uvádzam</strong> osobitné záznamy.";
-}
-?>
-</li>
-<li class="orange">
-<?php if ( $hlavicka->nrz == 0 AND ( $hlavicka->pzks1 != "" OR $hlavicka->pzpr1 != 0 OR $hlavicka->pzvd1 != 0 OR $hlavicka->pzks2 != "" OR $hlavicka->pzpr2 != 0 OR $hlavicka->pzvd2 != 0 OR $hlavicka->pzks3 != "" OR $hlavicka->pzpr3 != 0 OR $hlavicka->pzvd3 != 0 ) )
-{
-$upozorni5=1;
-echo "V IX.oddiele vyplnené <strong>údaje o príjmoch nerezidenta</strong>, ale nie je vybratý nerezident <strong>v bode 11 na 1.strane</strong>.";
-} ?>
-</li>
-</ul>
-<ul id="alertpage6" style="display:none;">
-<li class="header-section">STRANA 6</li>
-<li class="orange">
-<?php if ( $hlavicka->nrz == 0 AND ( $hlavicka->sdnr != "" OR $hlavicka->udnr != 0 ) )
-{
-$upozorni6=1;
-echo "V X.oddiele vyplnené <strong>údaje nerezidenta</strong>, ale nie je vybratý nerezident <strong>v bode 11 na 1.strane</strong>.";
-}
-?>
-</li>
-<li class="orange">
-<?php if ( $hlavicka->dat == '0000-00-00' )
-{
-$upozorni6=1;
-echo "Nie je vyplnený <strong>dátum vyhlásenia</strong> daòového priznania.";
-}
-?>
-</li>
-<li class="orange">
-<?php if ( ( $hlavicka->zdbo == 0 AND $hlavicka->zpre == 0 AND $hlavicka->zprp == 0 ) AND ( $hlavicka->post == 1 OR $hlavicka->ucet == 1 OR $hlavicka->diban != "" OR $hlavicka->da2 != '0000-00-00' ) )
-{
-$upozorni6=1;
-echo "V <strong>XI.oddiele nežiadam</strong> o vyplatenie / vrátenie, ale sú vyplnené hodnoty súvisiace s vyplatením / vrátením(napr. spôsob, iban alebo dátum).";
-}
-?>
-</li>
-<li class="orange">
-<?php if ( ( $hlavicka->zdbo == 1 OR $hlavicka->zpre == 1 OR $hlavicka->zprp == 1 ) AND $hlavicka->da2 == '0000-00-00' )
-{
-$upozorni6=1;
-echo "V <strong>XI.oddiele žiadam</strong> o vyplatenie / vrátenie, ale nie je vyplnený <strong>dátum</strong> vyplatenia / vrátenia.";
-}
-?>
-</li>
-<li class="orange">
-<?php if ( ( $hlavicka->zdbo == 1 OR $hlavicka->zpre == 1 OR $hlavicka->zprp == 1 ) AND $hlavicka->ucet == 1 AND $hlavicka->diban == "" ) {
-$upozorni6=1;
-echo "V <strong>XI.oddiele žiadam</strong> o vyplatenie / vrátenie na úèet, ale nie je vyplnený <strong>IBAN</strong> úètu na vyplatenie / vrátenie.";
-} ?>
-</li>
-</ul>
-</div>
-<script type="text/javascript">
-<?php if ( $upozorni1 == 1 OR $upozorni2 == 1 OR $upozorni4 == 1 OR $upozorni5 == 1 OR $upozorni6 == 1 )
-{
- echo "upozornenie.style.display='block';";
-}
-?>
-<?php if ( $upozorni1 == 1 ) { echo "alertpage1.style.display='block';"; } ?>
-<?php if ( $upozorni2 == 1 ) { echo "alertpage2.style.display='block';"; } ?>
-<?php if ( $upozorni4 == 1 ) { echo "alertpage4.style.display='block';"; } ?>
-<?php if ( $upozorni5 == 1 ) { echo "alertpage5.style.display='block';"; } ?>
-<?php if ( $upozorni6 == 1 ) { echo "alertpage6.style.display='block';"; } ?>
-</script>
 <?php
-//koniec upozornenie
-
 if ( $j == 0 )
      {
   $text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\r\n"; fwrite($soubor, $text);
@@ -1011,6 +815,205 @@ $j = $j + 1;
   }
 fclose($soubor);
 ?>
+<div id="content">
+<?php if ( $elsubor == 2 ) { ?>
+<p>Stiahnite si nižšie uvedený súbor <strong>.xml</strong> do Vášho poèítaèa a naèítajte ho na
+<a href="https://www.financnasprava.sk/sk/titulna-stranka" target="_blank" title="Stránka Finanènej správy">www.financnasprava.sk</a> alebo do aplikácie eDane:
+</p>
+<p>
+<a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
+</p>
+<?php                      } ?>
+
+<?php
+/////////////////////////////////////////////////////////////////////UPOZORNENIE
+$upozorni1=0; $upozorni2=0; $upozorni4=0; $upozorni5=0; $upozorni6=0;
+?>
+<div id="upozornenie" style="display:none;">
+<h2>
+<strong class="toleft">Upozornenie</strong>
+<dl class="toright legend-area">
+ <dt class="toleft box-red"></dt><dd class="toleft">kritické</dd>
+ <dt class="toleft box-orange"></dt><dd class="toleft">logické</dd>
+</dl>
+</h2>
+<ul id="alertpage1" style="display:none;">
+<li class="header-section">STRANA 1</li>
+<li class="red">
+<?php if ( $hlavicka->fdic == "0" AND $hlavicka->dar == '0000-00-00' )
+{
+$upozorni1=1;
+echo "Nie je vyplnené <strong>DIÈ</strong> daòovníka.";
+}
+?>
+</li>
+<li class="red">
+<?php if ( $hlavicka->dar != '0000-00-00' AND $hlavicka->fdic != "0" )
+{
+$upozorni1=1;
+echo "Súèasne vyplnené <strong>diè</strong> aj <strong>dátum narodenia</strong> daòovníka.";
+}
+?>
+</li>
+<li class="red">
+<?php if ( $hlavicka->nrz == 1 AND $hlavicka->dar == '0000-00-00' )
+{
+$upozorni1=1;
+echo "Pri <strong>nerezidentovi</strong> (bod 11) nie je vyplnený jeho <strong>dátum narodenia</strong> v bode 2.";
+}
+?>
+</li>
+<li class="red">
+<?php if ( $hlavicka->druh == 3 AND $hlavicka->ddp == '0000-00-00' )
+{
+$upozorni1=1;
+echo "Pri <strong>dodatoènom</strong> daòovom priznaní <strong> nie je vyplnený dátum</strong> zistenia skutoènosti na podanie dodatoèného priznania.";
+}
+?>
+</li>
+<li class="red">
+<?php if ( ( $hlavicka->druh == 1 OR $hlavicka->druh == 2 ) AND $hlavicka->ddp != '0000-00-00' )
+{
+$upozorni1=1;
+echo "Vyplnený <strong>dátum</strong> zistenia skutoènosti na podanie dodatoèného priznania, ale <strong>nie je</strong> vybraté dodatoèné daòové priznanie.";
+}
+?>
+</li>
+<li class="red">
+<?php if ( $hlavicka->dprie == "" OR $hlavicka->dmeno == "" )
+{
+$upozorni1=1;
+echo "Nie je vyplnené <strong>priezvisko alebo meno</strong> daòovníka.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->dcdm == "" OR $hlavicka->dpsc == "" OR $hlavicka->dmes == "" OR $hlavicka->xstat == "" ) {
+$upozorni1=1;
+echo "Nie je vyplnená celá <strong>adresa trvalého pobytu</strong> daòovníka.";
+} ?>
+</li>
+</ul>
+<ul id="alertpage2" style="display:none;">
+<li class="header-section">STRANA 2</li>
+<li class="orange">
+<?php if ( $hlavicka->r27 == 0 AND $hlavicka->r28 != 0 )
+{
+$upozorni2=1;
+echo "Vyplnená <strong>úhrnná suma dôchodku</strong> v bode 28, avšak nie je zaškrtnuté <strong>poberanie dôchodku</strong> v bode 27.";
+}
+?>
+</li>
+</ul>
+<ul id="alertpage4" style="display:none;">
+<li class="header-section">STRANA 4</li>
+<li class="orange">
+<?php if ( $hlavicka->druh != 3 AND ( $hlavicka->r67 != 0 OR $hlavicka->r68 != 0 OR $hlavicka->r69 != 0 OR $hlavicka->r70 != 0 OR $hlavicka->r71 != 0 OR $hlavicka->r72 != 0 OR $hlavicka->r73 != 0 OR $hlavicka->r74 != 0 ) )
+{
+$upozorni4=1;
+echo "Vyplnené riadky <strong>VII.oddielu</strong>, ale <strong>nie je</strong> vybraté dodatoèné daòové priznanie na 1.strane.";
+}
+?>
+</li>
+</ul>
+<ul id="alertpage5" style="display:none;">
+<li class="header-section">STRANA 5</li>
+<li class="orange">
+<?php if ( $hlavicka->upl50 == 1 AND $hlavicka->r75 != 0 )
+{
+$upozorni5=1;
+echo "<strong>Neuplatòujem postup</strong> pod¾a § 50 zákona a zároveò poukazujem sumu v <strong>bode 75</strong>.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->upl50 == 1 AND ( $hlavicka->pico != 0 OR $hlavicka->psid != 0 OR $hlavicka->pfor != "" OR $hlavicka->pmen != "" OR $hlavicka->puli != "" OR $hlavicka->pcdm != "" OR $hlavicka->ppsc != "" OR $hlavicka->pmes != "" ) )
+{
+$upozorni5=1;
+echo "<strong>Neuplatòujem postup</strong> pod¾a § 50 zákona a zároveò sú vyplnené <strong>údaje o prijímate¾ovi</strong> v bode 76.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->r75 != 0 AND $hlavicka->upl50 == 0 AND ( $hlavicka->pico == 0 OR $hlavicka->psid == 0 OR $hlavicka->pfor == "" OR $hlavicka->pmen == "" ) )
+{
+$upozorni5=1;
+echo "Nie sú vyplnené <strong>údaje o príjimate¾ovi</strong> v bode 76.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->uoso == 0 AND $hlavicka->osob != "" )
+{
+$upozorni5=1;
+echo "Vyplnené <strong>osobitné záznamy</strong>, ale <strong>nie je vybraté uvádzam</strong> osobitné záznamy.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->nrz == 0 AND ( $hlavicka->pzks1 != "" OR $hlavicka->pzpr1 != 0 OR $hlavicka->pzvd1 != 0 OR $hlavicka->pzks2 != "" OR $hlavicka->pzpr2 != 0 OR $hlavicka->pzvd2 != 0 OR $hlavicka->pzks3 != "" OR $hlavicka->pzpr3 != 0 OR $hlavicka->pzvd3 != 0 ) )
+{
+$upozorni5=1;
+echo "V IX.oddiele vyplnené <strong>údaje o príjmoch nerezidenta</strong>, ale nie je vybratý nerezident <strong>v bode 11 na 1.strane</strong>.";
+} ?>
+</li>
+</ul>
+<ul id="alertpage6" style="display:none;">
+<li class="header-section">STRANA 6</li>
+<li class="orange">
+<?php if ( $hlavicka->nrz == 0 AND ( $hlavicka->sdnr != "" OR $hlavicka->udnr != 0 ) )
+{
+$upozorni6=1;
+echo "V X.oddiele vyplnené <strong>údaje nerezidenta</strong>, ale nie je vybratý nerezident <strong>v bode 11 na 1.strane</strong>.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->dat == '0000-00-00' )
+{
+$upozorni6=1;
+echo "Nie je vyplnený <strong>dátum vyhlásenia</strong> daòového priznania.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( ( $hlavicka->zdbo == 0 AND $hlavicka->zpre == 0 AND $hlavicka->zprp == 0 ) AND ( $hlavicka->post == 1 OR $hlavicka->ucet == 1 OR $hlavicka->diban != "" OR $hlavicka->da2 != '0000-00-00' ) )
+{
+$upozorni6=1;
+echo "V <strong>XI.oddiele nežiadam</strong> o vyplatenie / vrátenie, ale sú vyplnené hodnoty súvisiace s vyplatením / vrátením(napr. spôsob, iban alebo dátum).";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( ( $hlavicka->zdbo == 1 OR $hlavicka->zpre == 1 OR $hlavicka->zprp == 1 ) AND $hlavicka->da2 == '0000-00-00' )
+{
+$upozorni6=1;
+echo "V <strong>XI.oddiele žiadam</strong> o vyplatenie / vrátenie, ale nie je vyplnený <strong>dátum</strong> vyplatenia / vrátenia.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( ( $hlavicka->zdbo == 1 OR $hlavicka->zpre == 1 OR $hlavicka->zprp == 1 ) AND $hlavicka->ucet == 1 AND $hlavicka->diban == "" ) {
+$upozorni6=1;
+echo "V <strong>XI.oddiele žiadam</strong> o vyplatenie / vrátenie na úèet, ale nie je vyplnený <strong>IBAN</strong> úètu na vyplatenie / vrátenie.";
+} ?>
+</li>
+</ul>
+</div> <!-- #upozornenie -->
+
+<script type="text/javascript">
+<?php
+if ( $upozorni1 == 1 OR $upozorni2 == 1 OR $upozorni4 == 1 OR $upozorni5 == 1 OR $upozorni6 == 1 )
+     { echo "upozornenie.style.display='block';"; }
+if ( $upozorni1 == 1 ) { echo "alertpage1.style.display='block';"; }
+if ( $upozorni2 == 1 ) { echo "alertpage2.style.display='block';"; }
+if ( $upozorni4 == 1 ) { echo "alertpage4.style.display='block';"; }
+if ( $upozorni5 == 1 ) { echo "alertpage5.style.display='block';"; }
+if ( $upozorni6 == 1 ) { echo "alertpage6.style.display='block';"; }
+?>
+</script>
+</div> <!-- #content -->
+
 <?php
 //mysql_free_result($vysledok);
      }
@@ -1018,9 +1021,7 @@ fclose($soubor);
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphsx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
-?>
-</div>
-<?php
+
 //celkovy koniec dokumentu
 } while (false);
 ?>
