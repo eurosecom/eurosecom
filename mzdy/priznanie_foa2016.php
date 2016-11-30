@@ -906,9 +906,11 @@ $sqldok = mysql_query("$sql");
   if( $zstat == '' ) { $zstat="SR"; }
   }
 
+$fdicx=$rdc.$rdk;
+
 $ttvv = "INSERT INTO F$kli_vxcf"."_mzdprcvypl$kli_uzid ".
-" ( druh,oc,dmeno,dprie,dtitl,rdc,rdk,dar,duli,dcdm,dpsc,dmes,dtel,xstat,da2,dat  ) VALUES ".
-" ( 1, '$cislo_oc', '$meno', '$prie', '$titl', '$rdc', '$rdk', '$dar', '$zuli', '$zcdm', '$zpsc', '$zmes', '$ztel', '$zstat', '0000-00-00', '0000-00-00'  )";
+" ( druh,oc,dmeno,dprie,dtitl,rdc,rdk,dar,duli,dcdm,dpsc,dmes,dtel,xstat,da2,dat,fdic  ) VALUES ".
+" ( 1, '$cislo_oc', '$meno', '$prie', '$titl', '$rdc', '$rdk', '$dar', '$zuli', '$zcdm', '$zpsc', '$zmes', '$ztel', '$zstat', '0000-00-00', '0000-00-00', '$fdicx'  )";
 $ttqq = mysql_query("$ttvv");
 
 //uloz do priznania
