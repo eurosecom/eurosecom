@@ -2124,7 +2124,16 @@ $t02=substr($rokp,3,1);
 /////////////////////////////////////////////////VYTLAC ROCNE
 if ( $copern == 10 )
 {
-if ( File_Exists("../tmp/priznaniefoa.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/priznaniefoa.$kli_uzid.pdf"); }
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/priznaniefoa_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/priznaniefoa_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -4875,7 +4884,7 @@ $ipole=$ipole+1;
   }
 $i = $i + 1;
   }
-$pdf->Output("../tmp/priznaniefoa.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 //potvrdenie o podani
 if ( $copern == 10 )
@@ -4962,7 +4971,7 @@ $pdf->Output("../tmp/potvrdfoa$kli_vxcf.$kli_uzid.pdf");
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/priznaniefoa.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 <?php

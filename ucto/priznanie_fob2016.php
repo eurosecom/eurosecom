@@ -4227,7 +4227,19 @@ $sn1c=substr($sknacec,0,1);
 /////////////////////////////////////////////////VYTLAC ROCNE
 if ( $copern == 10 )
 {
-if ( File_Exists ("../tmp/priznaniefob.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/priznaniefob.$kli_uzid.pdf"); }
+
+
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/priznaniefob_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/priznaniefob_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -11651,7 +11663,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell
   }
 $i = $i + 1;
   }
-$pdf->Output("../tmp/priznaniefob.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 //pdf potvrdenie
 if ( $copern == 10 ) {
@@ -11737,7 +11749,7 @@ $pdf->Output("../tmp/potvrdfob$kli_vxcf.$kli_uzid.pdf");
 ?>
 
 <?php if ( $xml == 0 ) { ?>
-<script type="text/javascript"> var okno = window.open("../tmp/priznaniefob.<?php echo $kli_uzid; ?>.pdf","_self"); </script>
+<script type="text/javascript"> var okno = window.open("<?php echo $outfilex; ?>","_self"); </script>
 <?php                  } ?>
 
 <?php
