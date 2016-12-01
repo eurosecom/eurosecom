@@ -3438,7 +3438,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
   }
   function PoucVyplnenie()
   {
-   window.open('<?php echo $jpg_cesta; ?>_poucenie.pdf', '_blank', param); //dopyt, aktualizovaù
+   window.open('<?php echo $jpg_cesta; ?>_poucenie.pdf', '_blank', param);
   }
   function vypocetOP()
   {
@@ -11664,10 +11664,9 @@ $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
-
-if ( File_Exists('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_potvrdenie.jpg') )
+if ( File_Exists($jpg_cesta.'_potvrdenie.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2015/dpfob2015/dpfob_v15_potvrdenie.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_potvrdenie.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -11717,26 +11716,29 @@ $pdf->Cell(14,6," ","$rmc1",0,"L");$pdf->Cell(46,8,"$dstat","$rmc",1,"L");
 
 //udaje o danovom priznani
 $pdf->Cell(190,13," ","$rmc1",1,"L");
+$r68=$hlavicka->r68; if ( $r68 == 0 ) $r68="";
 $r80=$hlavicka->r80; if ( $r80 == 0 ) $r80="";
-$r94=$hlavicka->r94; if ( $r94 == 0 ) $r94="";
-$r109=$hlavicka->r109; if ( $r109 == 0 ) { $r109=""; }
-$r110=$hlavicka->r110; if ( $r110 == 0 ) { $r110=""; }
-$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,6,"$r80","$rmc",1,"R");
+$r105=$hlavicka->r105; if ( $r105 == 0 ) $r105="";
+$r120=$hlavicka->r120; if ( $r120 == 0 ) { $r120=""; }
+$r121=$hlavicka->r121; if ( $r121 == 0 ) { $r121=""; }
+$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,6,"$r68","$rmc",1,"R");
 $pdf->Cell(190,0," ","$rmc1",1,"L");
-$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,5,"$r94","$rmc",1,"R");
+$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,5,"$r80","$rmc",1,"R");
 $pdf->Cell(190,0," ","$rmc1",1,"L");
-$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,5,"$r109","$rmc",1,"R");
+$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,5,"$r105","$rmc",1,"R");
 $pdf->Cell(190,0," ","$rmc1",1,"L");
-$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,6,"$r110","$rmc",1,"R");
+$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,6,"$r120","$rmc",1,"R");
+$pdf->Cell(190,0," ","$rmc1",1,"L");
+$pdf->Cell(125,6," ","$rmc1",0,"L");$pdf->Cell(51,5,"$r121","$rmc",1,"R");
 
 $pdf->Output("../tmp/potvrdfob$kli_vxcf.$kli_uzid.pdf");
                      } //koniec pdf potvrdenie
 //exit;
 ?>
 
-<?php if( $xml == 0 ) { ?>
+<?php if ( $xml == 0 ) { ?>
 <script type="text/javascript"> var okno = window.open("../tmp/priznaniefob.<?php echo $kli_uzid; ?>.pdf","_self"); </script>
-<?php                 } ?>
+<?php                  } ?>
 
 <?php
 }
