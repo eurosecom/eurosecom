@@ -1542,7 +1542,7 @@ $source="../mzdy/rocne_dane2016.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">Potvrdenie 2%</a>
  <a href="#" onclick="ZoznamRocnezucto();" class="toleft">Zamestnanci</a>
- <a href="#" onclick="window.open('../mzdy/potvrdenie_2pdane2013.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0', '_blank');" class="<?php echo $clas3; ?> toright">Potvrdenie 2%</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=90&strana=1', '_blank');" class="<?php echo $clas3; ?> toright">Potvrdenie 2%</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
  <h6 class="toright">TlaËiù:</h6>
@@ -1692,15 +1692,15 @@ $source="../mzdy/rocne_dane2016.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 
 
 <input type="text" name="dmeno" id="dmeno" value="<?php echo $dmeno; ?>" disabled="disabled" class="nofill" style="width:164px; top:482px; left:408px;"/>
-<input type="text" name="dtitul" id="dtitul" value="<?php echo $dtitul; ?>" disabled="disabled" class="nofill" style="width:120px; top:482px; left:587px;"/>
+<input type="text" name="dtitul" id="dtitul" value="<?php echo $dtitl; ?>" disabled="disabled" class="nofill" style="width:120px; top:482px; left:587px;"/>
 <!-- PO -->
-<input type="text" name="fir_fnaz" id="fir_fnaz" value="<?php echo $naz; ?>" disabled="disabled" class="nofill" style="width:670px; top:540px; left:164px;"/>
+<input type="text" name="fir_fnaz" id="fir_fnaz" value="<?php echo $fir_fnaz; ?>" disabled="disabled" class="nofill" style="width:670px; top:540px; left:164px;"/>
 <!-- Adresa -->
-<input type="text" name="uli" id="uli" value="<?php echo $uli; ?>" disabled="disabled" class="nofill" style="width:328px; top:598px; left:155px;"/>
-<input type="text" name="cdm" id="cdm" value="<?php echo $cdm; ?>" disabled="disabled" class="nofill" style="width:116px; top:598px; left:535px;"/>
-<input type="text" name="psc" id="psc" value="<?php echo $psc; ?>" disabled="disabled" class="nofill" style="width:70px; top:598px; left:700px;"/>
-<input type="text" name="mes" id="mes" value="<?php echo $mes; ?>" disabled="disabled" class="nofill" style="width:325px; top:633px; left:158px;"/>
-<input type="text" name="fstat" id="fstat" value="<?php echo $fstat; ?>" disabled="disabled" class="nofill" style="width:200px; top:633px; left:530px;"/>
+<input type="text" name="uli" id="uli" value="<?php echo $duli; ?>" disabled="disabled" class="nofill" style="width:328px; top:598px; left:155px;"/>
+<input type="text" name="cdm" id="cdm" value="<?php echo $dcdm; ?>" disabled="disabled" class="nofill" style="width:116px; top:598px; left:535px;"/>
+<input type="text" name="psc" id="psc" value="<?php echo $dpsc; ?>" disabled="disabled" class="nofill" style="width:70px; top:598px; left:700px;"/>
+<input type="text" name="mes" id="mes" value="<?php echo $dmes; ?>" disabled="disabled" class="nofill" style="width:325px; top:633px; left:158px;"/>
+<input type="text" name="fstat" id="fstat" value="<?php echo $dstat; ?>" disabled="disabled" class="nofill" style="width:200px; top:633px; left:530px;"/>
 <!-- danove -->
 <input type="text" name="fir_fdic" id="fir_fdic" value="<?php echo $fir_fdic; ?>" disabled="disabled" class="nofill" style="width:201px; top:668px; left:153px;"/>
 <input type="text" name="$fir_uctt01" id="fir_uctt01" value="<?php echo $fir_uctt01; ?>" disabled="disabled" class="nofill" style="width:200px; top:668px; left:570px;"/>
@@ -2012,6 +2012,169 @@ $pdf->Output("../tmp/rocnedane.$kli_uzid.pdf");
 }
 /////////////////////////////////////////KONIEC VYTLACENIA ROCNEHO
 ?>
+
+<?php
+/////////////////////////////////////////////////VYTLAC Potvrdenie o zaplatenÌ dane z prÌjmov zo z·vislej Ëinnosti
+if ( $copern == 90 )
+{
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdrocnedane2strana WHERE oc = $cislo_oc ";
+
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
+$zp2dat = $fir_riadok->zp2dat;
+$zp2datsk =SkDatum($zp2dat);
+$zp2dak = $fir_riadok->zp2dak;
+$zp2daksk =SkDatum($zp2dak);
+$zp2hod = $fir_riadok->zp2hod;
+if ( $fir_riadok->zp2hod == 0 ) $zp2hod="";
+if ( $fir_riadok->zp2dat == '0000-00-00' ) $zp2datsk="";
+if ( $fir_riadok->zp2dak == '0000-00-00' ) $zp2daksk="";
+mysql_free_result($fir_vysledok);
+
+if ( File_Exists("../tmp/potvrdzapldan.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/potvrdzapldan.$kli_uzid.pdf"); }
+     define('FPDF_FONTPATH','../fpdf/font/');
+     require('../fpdf/fpdf.php');
+
+$sirka_vyska="210,320";
+$velkost_strany = explode(",", $sirka_vyska);
+$pdf=new FPDF("P","mm", $velkost_strany);
+$pdf->Open();
+$pdf->AddFont('arial','','arial.php');
+
+
+//statna prislusnost z statistiky treximaoc
+$statznec="SK";
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_treximaoc WHERE idec = $cislo_oc LIMIT 1 "; $sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $statznec=trim($riaddok->stprisl);
+  }
+if ( $statznec == '' ) { $statznec="SK"; }
+
+//titul za zo ziadosti o rz
+$titulza="";
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_rocneziadost WHERE oc = $cislo_oc LIMIT 1 "; $sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $titulza=trim($riaddok->ztitl);
+  }
+
+//vytlac
+$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdrocnedane".
+" LEFT JOIN F$kli_vxcf"."_mzdkun".
+" ON F$kli_vxcf"."_mzdrocnedane.oc=F$kli_vxcf"."_mzdkun.oc".
+" WHERE F$kli_vxcf"."_mzdrocnedane.oc = $cislo_oc AND konx1 = 2 ORDER BY konx1,prie,meno";
+
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+
+$i=0;
+$j=0; //zaciatok strany ak by som chcel strankovat
+  while ( $i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+  $ozam_np = $hlavicka->ozam_np;
+  $pole = explode(".", $ozam_np);
+  $Cozam_np = $pole[0];
+  $Dozam_np = substr($pole[1],0,1);
+
+$pdf->AddPage();
+$pdf->SetFont('arial','',10);
+$pdf->SetLeftMargin(8);
+$pdf->SetTopMargin(10);
+
+if ( File_Exists('../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/rz/rz_potvrdenie_dane_v13.jpg') AND $i == 0 )
+{
+$pdf->Image('../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/rz/rz_potvrdenie_dane_v13.jpg',0,0,210,297);
+}
+
+//za rok
+$pdf->Cell(190,23," ","$rmc1",1,"L");
+$pdf->Cell(155,4," ","$rmc1",0,"L");$pdf->Cell(35,7,"$kli_vrok","$rmc",0,"L");
+
+//I. ZAMESTNANEC
+$pdf->Cell(190,26," ","$rmc1",1,"L");
+$pdf->Cell(18,4," ","$rmc1",0,"L");$pdf->Cell(63,6,"$hlavicka->prie","$rmc",0,"L");$pdf->Cell(2,4," ","$rmc1",0,"L");$pdf->Cell(35,6,"$hlavicka->meno","$rmc",0,"L");
+$dar=SkDatum($hlavicka->dar);
+$tlacrd="$hlavicka->rdc / $hlavicka->rdk";
+if ( $tlacrd == "0 / " ) { $tlacrd="$dar"; }
+$pdf->Cell(24,4," ","$rmc1",0,"L");$pdf->Cell(34,6,"$tlacrd","$rmc",1,"L");
+$pdf->SetFont('arial','',8);
+$pdf->Cell(190,1,"                          ","$rmc1",1,"L");
+$pdf->Cell(42,4," ","$rmc1",0,"L");$pdf->Cell(25,4,"$hlavicka->titl","$rmc",0,"L");$pdf->Cell(63,4," ","$rmc1",0,"L");$pdf->Cell(27,4,"$titulza","$rmc",1,"L");
+$pdf->Cell(190,5,"                          ","$rmc1",1,"L");
+$pdf->Cell(26,5," ","$rmc1",0,"L");$pdf->Cell(75,5,"$hlavicka->zuli","$rmc",0,"L");$pdf->Cell(9,5," ","$rmc1",0,"L");$pdf->Cell(28,5,"$hlavicka->zcdm","$rmc",0,"L");
+$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(32,5,"$hlavicka->zpsc","$rmc",1,"L");
+$pdf->Cell(27,5," ","$rmc1",0,"L");$pdf->Cell(74,4,"$hlavicka->zmes","$rmc",0,"L");$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(70,4,"$statznec","$rmc",1,"L");
+$pdf->SetFont('arial','',10);
+
+//II. ZAMESTNAVATEL
+
+//FO
+$pdf->Cell(190,19,"                          ","$rmc1",1,"L");
+$pdf->Cell(18,4," ","$rmc1",0,"L");$pdf->Cell(63,7,"$dprie","$rmc",0,"L");$pdf->Cell(2,4," ","$rmc1",0,"L");$pdf->Cell(35,7,"$dmeno","$rmc",0,"L");
+$pdf->Cell(5,4," ","$rmc1",0,"L");$pdf->Cell(50,7,"$dtitl $dtitz","$rmc",1,"L");
+//PO
+$pdf->Cell(190,3,"                          ","$rmc1",1,"L");
+$pdf->Cell(28,4," ","$rmc1",0,"L");$pdf->Cell(150,7,"$fir_fnaz","$rmc",1,"L");
+//adresa
+$pdf->Cell(190,4,"                          ","$rmc1",1,"L");
+$pdf->Cell(26,5," ","$rmc1",0,"L");$pdf->Cell(75,6,"$duli","$rmc",0,"L");$pdf->Cell(9,5," ","$rmc1",0,"L");$pdf->Cell(28,6,"$dcdm","$rmc",0,"L");
+$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(32,6,"$dpsc","$rmc",1,"L");
+$pdf->Cell(27,5," ","$rmc1",0,"L");$pdf->Cell(74,4,"$dmes","$rmc",0,"L");$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(69,4,"$dstat","$rmc",1,"L");
+//danove
+$pdf->Cell(26,5," ","$rmc1",0,"L");$pdf->Cell(46,7,"$fir_fdic","$rmc",0,"L");$pdf->Cell(45,5," ","$rmc1",0,"L");$pdf->Cell(61,7,"DaÚov˝ ˙rad $fir_uctt01","$rmc",1,"L");
+
+//UDAJE
+$pdf->Cell(190,10,"                          ","$rmc1",1,"L");
+$r06=$hlavicka->r06;
+$Cislo=$r06+"";
+$r06=sprintf("%0.2f", $Cislo);
+if ( $r06 == 0.00 ) $r06="";
+$r10=$hlavicka->r10;
+$Cislo=$r10+"";
+$r10=sprintf("%0.2f", $Cislo);
+if ( $hlavicka->r10 == 0.00 ) $r10="";
+$roz=$hlavicka->r06-$hlavicka->r10;
+if ( $roz < 0 ) $roz=0;
+$Cislo=$roz+"";
+$roz=sprintf("%0.2f", $Cislo);
+if ( $roz == 0.00 ) $roz="";
+$r17n=$hlavicka->r17n;
+$Cislo=$r17n+"";
+$r17n=sprintf("%0.2f", $Cislo);
+if ( $hlavicka->r17n == 0.00 ) $r17n="";
+$pdf->Cell(150,11," ","$rmc1",0,"L");$pdf->Cell(28,10,"$r06","$rmc",1,"R");
+$pdf->Cell(150,10," ","$rmc1",0,"L");$pdf->Cell(28,11,"$r10","$rmc",1,"R");
+$pdf->Cell(150,10," ","$rmc1",0,"L");$pdf->Cell(28,10,"$roz","$rmc",1,"R");
+$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(28,7,"$r17n","$rmc",1,"R");
+$pdf->Cell(158,7," ","$rmc1",0,"L");$pdf->Cell(20,6,"$zp2daksk","$rmc",1,"R");
+$pdf->Cell(150,6," ","$rmc1",0,"L");$pdf->Cell(28,8,"$zp2hod","$rmc",1,"R");
+
+//Vypracoval
+$pdf->Cell(190,19,"                          ","$rmc1",1,"L");
+$pdf->Cell(50,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$kli_uzprie $kli_uzmeno","$rmc",0,"L");$pdf->Cell(8,5," ","$rmc1",0,"L");$pdf->Cell(42,5,"$zp2datsk","$rmc",1,"C");
+}
+$i = $i + 1;
+  }
+$pdf->Output("../tmp/potvrdzapldan.$kli_uzid.pdf");
+?>
+
+<script type="text/javascript">
+ var okno = window.open("../tmp/potvrdzapldan.<?php echo $kli_uzid; ?>.pdf","_self");
+</script>
+
+<?php
+}
+/////////////////////////////////////////KONIEC VYTLACENIA Potvrdenie o zaplatenÌ dane z prÌjmov zo z·vislej Ëinnosti
+?>
+
 
 <?php
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
