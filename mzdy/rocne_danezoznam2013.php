@@ -24,11 +24,6 @@ require_once("../pswd/password.php");
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
-
 $citfir = include("../cis/citaj_fir.php");
 
 $pole = explode(".", $kli_vume);
@@ -36,20 +31,22 @@ $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
 $rokrocnezuc=$kli_vrok;
-if( $rokrocnezuc < 2011 ) { $rokrocnezuc="";  }
-if( $rokrocnezuc == 2011 ) { $rokrocnezuc="2011";  }
-if( $rokrocnezuc == 2012 ) { $rokrocnezuc="2012";  }
-if( $rokrocnezuc == 2013 ) { $rokrocnezuc="2013";  }
-if( $rokrocnezuc == 2014 ) { $rokrocnezuc="2014";  }
-if( $rokrocnezuc >= 2015 ) { $rokrocnezuc="2015";  }
+if ( $rokrocnezuc < 2011 ) { $rokrocnezuc=""; }
+if ( $rokrocnezuc == 2011 ) { $rokrocnezuc="2011"; }
+if ( $rokrocnezuc == 2012 ) { $rokrocnezuc="2012"; }
+if ( $rokrocnezuc == 2013 ) { $rokrocnezuc="2013"; }
+if ( $rokrocnezuc == 2014 ) { $rokrocnezuc="2014"; }
+if ( $rokrocnezuc == 2015 ) { $rokrocnezuc="2015"; }
+if ( $rokrocnezuc >= 2016 ) { $rokrocnezuc="2016"; }
 
 $rokrocnezucz=$kli_vrok;
-if( $rokrocnezucz < 2011 ) { $rokrocnezucz="";  }
-if( $rokrocnezucz == 2011 ) { $rokrocnezucz="2011";  }
-if( $rokrocnezucz == 2012 ) { $rokrocnezucz="2012";  }
-if( $rokrocnezucz == 2013 ) { $rokrocnezucz="2013";  }
-if( $rokrocnezucz == 2014 ) { $rokrocnezucz="2013";  }
-if( $rokrocnezucz >= 2015 ) { $rokrocnezucz="2013";  }
+if ( $rokrocnezucz < 2011 ) { $rokrocnezucz=""; }
+if ( $rokrocnezucz == 2011 ) { $rokrocnezucz="2011"; }
+if ( $rokrocnezucz == 2012 ) { $rokrocnezucz="2012"; }
+if ( $rokrocnezucz == 2013 ) { $rokrocnezucz="2013"; }
+if ( $rokrocnezucz == 2014 ) { $rokrocnezucz="2013"; }
+if ( $rokrocnezucz == 2015 ) { $rokrocnezucz="2013"; }
+if ( $rokrocnezucz >= 2016 ) { $rokrocnezucz="2013"; }
 
 //toto neviem preco tam bolo ???!!???
 $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdrocnedane WHERE r00 > 999998 ";
@@ -139,28 +136,25 @@ table.zoznam tfoot td {
 </style>
 
 <script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height;
-var sirkawic = screen.width-10;
+//parameter okna
+var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
 
 //Rocne zuctovanie
   function TlacRZ( h_oc )
   {
-   window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&page=1&subor=0', '_blank', 'width=1050, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&page=1&subor=0', '_blank', param);
   }
   function UpravRZ( h_oc )
   {
-   window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&page=1&subor=0', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&page=1&subor=0', '_self');
   }
   function ZnovuRZ( h_oc )
   {
-   window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&page=1&subor=0', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=26&drupoh=1&page=1&subor=0', '_self', param);
   }
   function TlacZoznamRZ()
   {
-   window.open('../mzdy/rocne_danezoznam<?php echo $rokrocnezucz; ?>.php?copern=11&drupoh=1&page=1&subor=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/rocne_danezoznam<?php echo $rokrocnezucz; ?>.php?copern=11&drupoh=1&page=1&subor=0', '_blank', param);
   }
 </script>
 </HEAD>
@@ -173,7 +167,7 @@ var sirkawic = screen.width-10;
   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
  </tr>
  <tr>
-  <td class="header">Roèné zúètovanie dane z príjmov - Zamestnanci</td> <!-- Zoznam vykonaných roèných zúètovaní dane z príjmu, dopyt zruši -->
+  <td class="header">Roèné zúètovanie dane z príjmov - <span class="subheader">Zamestnanci</span></td>
   <td>
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacZoznamRZ();" title="Zobrazi zoznam v PDF" class="btn-form-tool">
