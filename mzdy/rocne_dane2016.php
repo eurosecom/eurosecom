@@ -1237,6 +1237,41 @@ $sqlttt = "SELECT * FROM F$kli_vxcf"."_rocneziadost WHERE oc = $cislo_oc LIMIT 1
   $riaddok=mysql_fetch_object($sqldok);
   $titulza=trim($riaddok->ztitl);
   }
+
+//FO-Priezvisko,Meno,Titul a trvaly pobyt z ufirdalsie
+if ( $fir_uctt03 == 999 )
+{
+$sqlc = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE icox = 0";
+$vysledokc = mysql_query($sqlc);
+if ( $vysledokc )
+     {
+$riadokc=mysql_fetch_object($vysledokc);
+$dprie = $riadokc->dprie;
+$dmeno = $riadokc->dmeno;
+$dtitl = $riadokc->dtitl;
+$dtitz = $riadokc->dtitz;
+$duli = $riadokc->duli;
+$dcdm = $riadokc->dcdm;
+$dpsc = $riadokc->dpsc;
+$dmes = $riadokc->dmes;
+$dstat = $riadokc->dstat;
+$dtel = $riadokc->dtel;
+//$dfax = $riadokc->dfax;
+     }
+}
+if ( $fir_uctt03 != 999 )
+{
+$dmeno=""; $dprie=""; $dtitl=""; $dtitz="";
+$duli=$fir_fuli; $dcdm=$fir_fcdm; $dmes=$fir_fmes; $dpsc=$fir_fpsc;
+$dtel=$fir_ftel; $dfax=$fir_ffax; $dstat="Slovensko";
+}
+$fir_uctt03tlac=$fir_uctt03;
+if ( $fir_uctt03 == 999 )
+{
+$fir_fnaz=""; $fir_uctt03tlac="";
+}
+
+
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
