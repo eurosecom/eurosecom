@@ -225,7 +225,8 @@ if( $rokrocnezucz == 2011 ) { $rokrocnezucz="2011";  }
 if( $rokrocnezucz == 2012 ) { $rokrocnezucz="2012";  }
 if( $rokrocnezucz == 2013 ) { $rokrocnezucz="2013";  }
 if( $rokrocnezucz == 2014 ) { $rokrocnezucz="2013";  }
-if( $rokrocnezucz >= 2015 ) { $rokrocnezucz="2013";  }
+if( $rokrocnezucz == 2015 ) { $rokrocnezucz="2013";  }
+if( $rokrocnezucz >= 2016 ) { $rokrocnezucz="2013";  }
 ?>
 
 function ZoznamRocnezucto()
@@ -252,8 +253,15 @@ function TlacPotvrd2pdane()
                 {
 var h_oc = document.forms.formrz1.h_oc.value;
 
+<?php if( $kli_vrok <= 2015 ) { ?>
 window.open('../mzdy/potvrdenie_2pdane<?php echo $rokrocnezuczp; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+<?php                         } ?>
+<?php if( $kli_vrok >= 2016 ) { ?>
+window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=90&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+<?php                         } ?>
+
                 }
 
 

@@ -1735,7 +1735,16 @@ if ( $zpr03 <= 0 ) { $zpr03=""; }
 /////////////////////////////////////////////////VYTLAC ROCNE
 if ( $copern == 10 )
 {
-if ( File_Exists("../tmp/rocnedane.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/rocnedane.$kli_uzid.pdf"); }
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/rzdane_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/rzdane_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -1993,11 +2002,12 @@ $pdf->Cell(10,5," ","$rmc1",0,"R");$pdf->Cell(27,6,"$da2kedsk","$rmc",1,"C");
 $i2 = $i2 + 1;
   }
                                        } //koniec 2.strany
-$pdf->Output("../tmp/rocnedane.$kli_uzid.pdf");
+
+$pdf->Output("$outfilex");
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/rocnedane.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 <?php
@@ -2024,7 +2034,16 @@ if ( $fir_riadok->zp2dat == '0000-00-00' ) $zp2datsk="";
 if ( $fir_riadok->zp2dak == '0000-00-00' ) $zp2daksk="";
 mysql_free_result($fir_vysledok);
 
-if ( File_Exists("../tmp/potvrdzapldan.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/potvrdzapldan.$kli_uzid.pdf"); }
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/potvrdzapldan_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/potvrdzapldan_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -2154,11 +2173,11 @@ $pdf->Cell(50,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$kli_uzprie $kli_uzmeno","$r
 }
 $i = $i + 1;
   }
-$pdf->Output("../tmp/potvrdzapldan.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 ?>
 
 <script type="text/javascript">
- var okno = window.open("../tmp/potvrdzapldan.<?php echo $kli_uzid; ?>.pdf","_self");
+ var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 <?php
