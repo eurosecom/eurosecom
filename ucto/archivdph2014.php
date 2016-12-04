@@ -1132,6 +1132,25 @@ $ttqq = mysql_query("$ttvv");
 }
 
 
+
+$sql = "SELECT * FROM F$kli_vxcf"."_archivdphdalsie ";
+$vysledok = mysql_query("$sql"); 
+if (!$vysledok)
+          {
+
+$sqlt = <<<crs_no
+(
+   cpid         INT(11) DEFAULT 0,
+   xplc         DECIMAL(10,0) DEFAULT 0
+);
+crs_no;
+
+$sql = "CREATE TABLE F$kli_vxcf"."_archivdphdalsie ".$sqlt;
+$vysledek = mysql_query("$sql");
+          }
+
+
+
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">

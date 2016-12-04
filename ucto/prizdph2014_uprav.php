@@ -896,6 +896,7 @@ $stvrtrokx=$stvrtrok;
 <span class="text-echo" style="top:264px; left:774px;"><?php echo $stvrtrokx; ?></span>
 <span class="text-echo" style="top:264px; left:829px;"><?php echo $kli_vrok; ?></span>
 
+<!-- druh osoby radio na všetky možnosti -->
 <!-- typ platitela = natvrdo 1.moznost -->
 <span class="text-echo" style="top:323px; left:358px;">x</span>
 
