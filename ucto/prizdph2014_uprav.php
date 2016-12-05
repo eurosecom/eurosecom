@@ -896,9 +896,13 @@ $stvrtrokx=$stvrtrok;
 <span class="text-echo" style="top:264px; left:774px;"><?php echo $stvrtrokx; ?></span>
 <span class="text-echo" style="top:264px; left:829px;"><?php echo $kli_vrok; ?></span>
 
-<!-- druh osoby radio na všetky možnosti -->
-<!-- typ platitela = natvrdo 1.moznost -->
-<span class="text-echo" style="top:323px; left:358px;">x</span>
+<!-- druh osoby -->
+<input type="radio" id="druh1" name="druh" value="1" style="top:324px; left:352px;"/>
+<input type="radio" id="druh2" name="druh" value="2" style="top:348px; left:352px;"/>
+<input type="radio" id="druh3" name="druh" value="3" style="top:372px; left:352px;"/>
+<input type="radio" id="druh4" name="druh" value="4" style="top:398px; left:352px;"/>
+<input type="radio" id="druh5" name="druh" value="5" style="top:423px; left:352px;"/>
+
 
 <!-- FO / PO -->
 <span class="text-echo-field" style="top:474px; left:39px; width:876px;"><?php echo $fir_fnaz; ?></span>
