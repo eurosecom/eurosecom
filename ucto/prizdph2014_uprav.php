@@ -376,6 +376,17 @@ $uprtxt = "UPDATE F$kli_vxcf"."_archivdph SET cpop='$cpop',".
                    }
 if( $strana == 1 ) {
 
+$xplc = 1*$_REQUEST['xplc'];
+
+
+$uprtx2 = "DELETE FROM F$kli_vxcf"."_archivdphdalsie WHERE cpid = $cislo_cpid ";
+$upraven2 = mysql_query("$uprtx2");
+$uprtx2 = "INSERT INTO F$kli_vxcf"."_archivdphdalsie ( cpid, xplc ) VALUES ( '$cislo_cpid', '$xplc' ) ";
+$upraven2 = mysql_query("$uprtx2"); 
+//echo $uprtx2;
+//exit;
+
+
 $uprtxt = "UPDATE F$kli_vxcf"."_archivdph SET ".
 " dad='$dad_sql' ".
 " WHERE cpid = $cislo_cpid  "; 
@@ -491,6 +502,17 @@ $koefmin=1*$fir_riadokk->koefmin;
 $druhykoef=$fir_riadokk->druhykoef;
 
 mysql_free_result($fir_vysledokk);
+
+
+$sqlfird = "SELECT * FROM F$kli_vxcf"."_archivdphdalsie WHERE  cpid = $cislo_cpid ";
+
+$fir_vysledokd = mysql_query($sqlfird);
+$fir_riadokd=mysql_fetch_object($fir_vysledokd);
+
+$xplc=1*$fir_riadokd->xplc;
+
+mysql_free_result($fir_vysledokd);
+
     }
 //koniec nacitania
 
@@ -700,6 +722,12 @@ var sirkawic = screen.width-10;
 <?php                     } ?>
 <?php if ( $strana == 1 ) { ?>
    document.formv1.dad.value = '<?php echo "$dad_sk";?>';
+<?php if ( $xplc == 0 ) { ?> document.formv1.xplc1.checked = 'true'; <?php } ?>
+<?php if ( $xplc == 1 ) { ?> document.formv1.xplc1.checked = 'true'; <?php } ?>
+<?php if ( $xplc == 2 ) { ?> document.formv1.xplc2.checked = 'true'; <?php } ?>
+<?php if ( $xplc == 3 ) { ?> document.formv1.xplc3.checked = 'true'; <?php } ?>
+<?php if ( $xplc == 4 ) { ?> document.formv1.xplc4.checked = 'true'; <?php } ?>
+<?php if ( $xplc == 5 ) { ?> document.formv1.xplc5.checked = 'true'; <?php } ?>
 <?php                     } ?>
   }
 <?php
@@ -897,11 +925,11 @@ $stvrtrokx=$stvrtrok;
 <span class="text-echo" style="top:264px; left:829px;"><?php echo $kli_vrok; ?></span>
 
 <!-- druh osoby -->
-<input type="radio" id="druh1" name="druh" value="1" style="top:324px; left:352px;"/>
-<input type="radio" id="druh2" name="druh" value="2" style="top:348px; left:352px;"/>
-<input type="radio" id="druh3" name="druh" value="3" style="top:372px; left:352px;"/>
-<input type="radio" id="druh4" name="druh" value="4" style="top:398px; left:352px;"/>
-<input type="radio" id="druh5" name="druh" value="5" style="top:423px; left:352px;"/>
+<input type="radio" id="xplc1" name="xplc" value="1" style="top:324px; left:352px;"/>
+<input type="radio" id="xplc2" name="xplc" value="2" style="top:348px; left:352px;"/>
+<input type="radio" id="xplc3" name="xplc" value="3" style="top:372px; left:352px;"/>
+<input type="radio" id="xplc4" name="xplc" value="4" style="top:398px; left:352px;"/>
+<input type="radio" id="xplc5" name="xplc" value="5" style="top:423px; left:352px;"/>
 
 
 <!-- FO / PO -->

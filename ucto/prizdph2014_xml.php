@@ -422,13 +422,29 @@ if( $h_drp == 3 ) { $dodat="1"; $datumdodat=SKDatum($dadod); }
   $text = "      <datumZisteniaDdp><![CDATA[".$datumdodat."]]></datumZisteniaDdp>"."\r\n";   fwrite($soubor, $text);	
   $text = "    </typDP>"."\r\n";   fwrite($soubor, $text);		
 
+//krizik platitel
+$sqlfird = "SELECT * FROM F$kli_vxcf"."_archivdphdalsie WHERE  cpid = $cislo_cpid ";
+
+$fir_vysledokd = mysql_query($sqlfird);
+$fir_riadokd=mysql_fetch_object($fir_vysledokd);
+
+$xplc=1*$fir_riadokd->xplc;
+
+mysql_free_result($fir_vysledokd);
+
+$plat1="1"; $plat2="0"; $plat3="0"; $plat4="0"; $plat5="0";
+if( $xplc == 2 ) { $plat1="0"; $plat2="1"; $plat3="0"; $plat4="0"; $plat5="0"; }
+if( $xplc == 3 ) { $plat1="0"; $plat2="0"; $plat3="1"; $plat4="0"; $plat5="0"; }
+if( $xplc == 4 ) { $plat1="0"; $plat2="0"; $plat3="0"; $plat4="1"; $plat5="0"; }
+if( $xplc == 5 ) { $plat1="0"; $plat2="0"; $plat3="0"; $plat4="0"; $plat5="1"; }
+
 
   $text = "    <osoba>"."\r\n";   fwrite($soubor, $text);			
-  $text = "      <platitel><![CDATA[1]]></platitel>"."\r\n";   fwrite($soubor, $text);			
-  $text = "      <registrovana><![CDATA[0]]></registrovana>"."\r\n";   fwrite($soubor, $text);			
-  $text = "      <inaPovinna><![CDATA[0]]></inaPovinna>"."\r\n";   fwrite($soubor, $text);		
-  $text = "      <zdanitelna><![CDATA[0]]></zdanitelna>"."\r\n";   fwrite($soubor, $text);	
-  $text = "      <zastupca><![CDATA[0]]></zastupca>"."\r\n";   fwrite($soubor, $text);	
+  $text = "      <platitel><![CDATA[".$plat1."]]></platitel>"."\r\n";   fwrite($soubor, $text);			
+  $text = "      <registrovana><![CDATA[".$plat2."]]></registrovana>"."\r\n";   fwrite($soubor, $text);			
+  $text = "      <inaPovinna><![CDATA[".$plat3."]]></inaPovinna>"."\r\n";   fwrite($soubor, $text);		
+  $text = "      <zdanitelna><![CDATA[".$plat4."]]></zdanitelna>"."\r\n";   fwrite($soubor, $text);	
+  $text = "      <zastupca><![CDATA[".$plat5."]]></zastupca>"."\r\n";   fwrite($soubor, $text);	
   $text = "    </osoba>"."\r\n";   fwrite($soubor, $text);	
 
 

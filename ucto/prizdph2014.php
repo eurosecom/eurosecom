@@ -1904,15 +1904,39 @@ $pdf->Cell(4,6,"$da8","$rmc",0,"C");
 $pdf->Cell(1,7," ","$rmc",1,"C");
 
 //krizik platitel
-$pdf->Cell(65,8,"     ","$rmc",0,"L");
+$sqlfird = "SELECT * FROM F$kli_vxcf"."_archivdphdalsie WHERE  cpid = $cislo_cpid ";
 
-$pdf->Cell(5,2," ","$rmc",0,"L");
-$pdf->Cell(5,2," ","$rmc",2,"L");$pdf->Cell(3,5,"x","$rmc",0,"C");
+$fir_vysledokd = mysql_query($sqlfird);
+$fir_riadokd=mysql_fetch_object($fir_vysledokd);
+
+$xplc=1*$fir_riadokd->xplc;
+
+mysql_free_result($fir_vysledokd);
+
+$plat1="x"; $plat2=" "; $plat3=" "; $plat4=" "; $plat5=" ";
+if( $xplc == 2 ) { $plat1=" "; $plat2="x"; $plat3=" "; $plat4=" "; $plat5=" "; }
+if( $xplc == 3 ) { $plat1=" "; $plat2=" "; $plat3="x"; $plat4=" "; $plat5=" "; }
+if( $xplc == 4 ) { $plat1=" "; $plat2=" "; $plat3=" "; $plat4="x"; $plat5=" "; }
+if( $xplc == 5 ) { $plat1=" "; $plat2=" "; $plat3=" "; $plat4=" "; $plat5="x"; }
+
+$pdf->Cell(1,1," ","$rmc",1,"C");
+$pdf->Cell(2,2," ","$rmc",1,"C");
+$pdf->Cell(69,2," ","$rmc",0,"L");$pdf->Cell(2,2,"$plat1","$rmc",1,"L");
+$pdf->Cell(2,4," ","$rmc",1,"C");
+$pdf->Cell(69,2," ","$rmc",0,"L");$pdf->Cell(2,2,"$plat2","$rmc",1,"L");
+$pdf->Cell(2,3," ","$rmc",1,"C");
+$pdf->Cell(69,2," ","$rmc",0,"L");$pdf->Cell(2,2,"$plat3","$rmc",1,"L");
+$pdf->Cell(2,4," ","$rmc",1,"C");
+$pdf->Cell(69,2," ","$rmc",0,"L");$pdf->Cell(2,2,"$plat4","$rmc",1,"L");
+$pdf->Cell(2,3," ","$rmc",1,"C");
+$pdf->Cell(69,2," ","$rmc",0,"L");$pdf->Cell(2,2,"$plat5","$rmc",1,"L");
 
 $pdf->Cell(1,5," ","$rmc",1,"C");
 
+//DU
+$pdf->SetY(73);
 $pdf->Cell(3,8," ","$rmc",0,"R");$pdf->Cell(0,8,"$fir_uctt01","$rmc",1,"L");
-$pdf->Cell(190,21,"     ","$rmc",1,"L");
+$pdf->Cell(190,22,"     ","$rmc",1,"L");
 
 //nazov
 
