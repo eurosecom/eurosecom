@@ -295,7 +295,6 @@ fclose($soubox);
           {
           //zaciatok cyklu
 
-
 //hladanie ico
 
 $ico=0;
@@ -307,7 +306,8 @@ if( $riadok->pohyb == 'DBIT' ) { $tabulka="dod"; }
 
 $rovnvsy=0;
 $ucproti=26100;
-$ucprotidebet=26100; 
+$ucprotidebet=26100;
+$hdp=0; 
 $sqlico = mysql_query("SELECT uce,ico,hod,dn1,dn2 FROM F$kli_vxcf"."_fak".$tabulka." WHERE fak = $xvsy ");
 $rovnvsy = 1*mysql_num_rows($sqlico);
 //echo $rovnvsy;
@@ -505,10 +505,45 @@ $sqty = "INSERT INTO F$kli_vxcf"."_uctban SELECT ".
 $ulozene = mysql_query("$sqty"); 
 }
 
+if( $podvojne == 0 )
+{
+
+$zaklad=0;
+$kolkojedph=1*$hdp;
+
+if( $nasieluce == 0 ) { $kolkojedph=0; }
+if( $kolkojedph >= $riadok->suma ) { $kolkojedph=$riadok->suma; }
+
+$zaklad=$riadok->suma-$kolkojedph;
+
+$sqty = "UPDATE F".$kli_vxcf."_importbanky$kli_uzid SET ucd='60' WHERE LEFT(ucd,3) = 311 AND porc = $riadok->porc ";
+$ulozene = mysql_query("$sqty");
+$sqty = "UPDATE F".$kli_vxcf."_importbanky$kli_uzid SET ucm='22' WHERE LEFT(ucm,3) = 321 AND porc = $riadok->porc ";
+$ulozene = mysql_query("$sqty");
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctban SELECT ".
+" '$cislo_dok',dat,'551',0,ucm,ucd,'1','0','$zaklad',0,0,'',0,ico,vsy,'',0,0,'','$kli_uzid',now() ".
+" FROM F".$kli_vxcf."_importbanky$kli_uzid ".
+" WHERE ( pohyb = 'CRDT' OR pohyb = 'DBIT' ) AND porc = $riadok->porc ";
+//echo $sqty; 
+$ulozene = mysql_query("$sqty"); 
+
+if( $riadok->pohyb == "DBIT" ) { $ucm="34399"; $ucd=$cislo_uce; $h_ucz=22; }
+if( $riadok->pohyb == "CRDT" ) { $ucm=$cislo_uce; $ucd="34399"; $h_ucz=60; }
+
+$sqty = "INSERT INTO F$kli_vxcf"."_uctban SELECT ".
+" '$cislo_dok',dat,'551',0,'$ucm','$ucd','1','0','$kolkojedph',0,0,'',0,ico,vsy,'',0,0,'','$kli_uzid',now() ".
+" FROM F".$kli_vxcf."_importbanky$kli_uzid ".
+" WHERE ( pohyb = 'CRDT' OR pohyb = 'DBIT' ) AND porc = $riadok->porc ";
+//echo $sqty; 
+if( $kolkojedph != 0 ) { $ulozene = mysql_query("$sqty"); }
+
+}
+
 
           }
           //koniec cyklu
-
+//exit;
 
 if( $fir_fico == 45232903 )
 {
