@@ -1,0 +1,45 @@
+A_text1;3. Dátum zaloenia: dd.mm.rrrr###rn######rn###4. Dátum zápisu do OR: dd.mm.rrrr###rn######rn###5. Opis hospodárskej èinnosti:###rn######rn###-ve¾koobchodná a maloobchodná èinnos  v rozsahu vo¾nıch ivností###rn######rn######rn######rn######rn######rn###6. Priemernı poèet zamestnancov ..###rn###    z toho vedúcich zametnancov ..###rn######rn###7. Úètovná jednotka nie je neobmedzene ruèiacim spoloèníkom v inıch úètovnıch jednotkách.###rn######rn###8. Spoloènos zostavuje riadnu úètovnú závierku k 31.12.2017 .###rn######rn###9. Spoloènos vznikla dd.mm.rrrr###rn######rn###;koniec
+B_text1;konatelia  (od: dd.mm.rrrr) ###rn######rn###1. titul meno priezvisko, adresa trvalého bydliska###rn###Vznik funkcie: dd.mm.rrrr###rn### ###rn######rn###2. titul meno priezvisko, adresa trvalého bydliska###rn###Vznik funkcie: dd.mm.rrrr###rn### ###rn######rn######rn######rn###;koniec
+B_text2;###rn######rn######rn###;koniec
+C_text1;Úètovná jednotka nie je súèasou konsolidovaného celku.###rn###;koniec
+E_text1;Spoloènos nepretrite pokraèovala vo svojej èinnosti od 1.1.2017 do 31.12.2017.;koniec
+E_text2;Úètovná jednotka nevykonala iadne zmeny úètovnıch zásad a úètovnıch metód.###rn######rn###Úètovná jednotka oceòovala majetok a záväzky###rn###        - ku dòu uskutoènenie úètovného prípadu###rn######rn###Ku dòu uskutoènenia úètovného prípadu oceòovala úètovná jednotka majetok a záväzky obstarávacou cenou###rn###        - dlhodobı nehmotnı majetok obstaranı kúpou###rn###        - dlhodobı hmotnı majetok obstaranı kúpou###rn###        - dlhodobı finanènı majetok###rn###        - zásoby obstarané kúpou###rn###        - poh¾adávky pri odplatnom nadobudnutí###rn###        - záväzky pri ich prevzatí###rn###        - krátkodobı finanènı majetok obstaranı kúpou###rn######rn###Obstarávacia cena je cena, za ktorú sa majetok obstaral a náklady súviace s jeho obstaraním. ###rn###Vyskytujúce sa náklady súvisiace s obstaraním v úètovnej jednotke:###rn###         - provízia###rn###         - dopravné###rn###         - poistné###rn###         - iné###rn######rn###;koniec
+E_text3;Úètovná jednotka stanovila internım predpisom pravidlá pre úètovanie dlhodobého majetku.###rn######rn###Nehmotnı majetok, ktorého ocenenie sa rovná sume xy EUR, alebo nišie sa úètuje ###rn###na archu úètu 518 - Ostatné sluby. ###rn###Nehmotnı majetok, ktorého ocenenie je vyššie, zaradila úètovná jednotka do dlhodobého nehmotného majetku.###rn###Hmotnı majetok, ktorého ocenenie sa rovná sume xy EUR, alebo nišie úètuje ###rn###úètovná jednotka na archu úètu zásob. ###rn###Hmotnı majetok, ktorého ocenenie je vyššie, zaradila úètovná jednotka do dlhodobého hmotného majetku.###rn######rn###Úètovná jednotka zostavila pre bené úètovné obdobie odpisovı plán pre dlhodobı ###rn###majetok, ktorı obsahuje dobu odpisovania, sadzby odpisov a odpisové metódy###rn######rn###Úètovná jednotka stanovila internım predpisom, e úètovné odpisy dlhodobého ###rn###majetku sa rovnajú daòovım odpisom;koniec
+F_text1;;koniec
+F_text10;Úètovná jednotka nemá dlhodobı finanènı majetok, na ktorı je zriadené záloné ###rn###právo alebo pri ktorom má ÚJ obmedzené právo s ním naklada.###rn###Vıpis dlhodobého finanèného majetku, na ktorı je zriadené záloné ###rn###právo alebo pri ktorom má ÚJ obmedzené právo s ním naklada.###rn###;koniec
+F_text14;;koniec
+F_text15;Úètovná jednotka netvorila opravné poloky k zásobám.;koniec
+F_text16;Úètovná jednotka nemá zásoby, na ktoré je zriadené záloné ###rn###právo alebo pri ktorıch má ÚJ obmedzené právo s ním naklada.###rn###Vıpis zásob, na ktoré je zriadené záloné právo ###rn###alebo pri ktorıch má ÚJ obmedzené právo s ním naklada.###rn###;koniec
+F_text17;Úètovná jednotka nemá zákazkovú vırobu, ktorá ku dòu zostavenia úètovnej závierky nebola ukonèená.;koniec
+F_text18;;koniec
+F_text2;;koniec
+F_text21;Úètovná jednotka netvorila opravné poloky k poh¾adávkam.;koniec
+F_text24;Úètovná jednotka nemá poh¾adávky kryté zálonım právom alebo inou formou ###rn###zabezpeèenia, na ktoré je zriadené záloné právo alebo, pri ktorıch ###rn###má ÚJ obmedzené právo s ním naklada.###rn###Vıpis poh¾adávok krytıch zálonım právom alebo inou formou zabezpeèenia, na ktoré ###rn###je zriadené záloné právo alebo, pri ktorıch má ÚJ obmedzené právo s ním naklada.###rn###;koniec
+F_text25;;koniec
+F_text27;Úètovná jednotka netvorila opravné poloky ku krátkodobému finanènému majetku.;koniec
+F_text28;Úètovná jednotka nemá KFM, na ktorı je zriadené záloné ###rn###právo alebo pri ktorom má ÚJ obmedzené právo s ním naklada.###rn###Vıpis poloiek KFM, na ktoré je zriadené záloné právo ###rn###alebo pri ktorom má ÚJ obmedzené právo s ním naklada.###rn###;koniec
+F_text3;;koniec
+F_text30;;koniec
+F_text31;;koniec
+F_text4;Úètovná jednotka nemá dlhodobı nehmotnı majetok, na ktorı je zriadené záloné ###rn###právo alebo pri ktorom má ÚJ obmedzené právo s ním naklada.###rn###Vıpis dlhodobého nehmotného majetku, na ktorı je zriadené záloné ###rn###právo alebo pri ktorom má ÚJ obmedzené právo s ním naklada.###rn###;koniec
+F_text5;;koniec
+F_text7;Úètovná jednotka nemá dlhodobı hmotnı majetok, na ktorı je zriadené záloné ###rn###právo alebo pri ktorom má ÚJ obmedzené právo s ním naklada.###rn###Vıpis dlhodobého hmotného majetku, na ktorı je zriadené záloné ###rn###právo alebo pri ktorom má ÚJ obmedzené právo s ním naklada.###rn######rn###;koniec
+F_text8;Ocenenie dlhodobého finanèného majetku ku dòu, ku ktorému sa zostavuje úètovná závierka reálnou hodnotou ###rn###alebo metódou vlastného imania, prièom sa uvádza vplyv takéhoto ocenenia na vısledok###rn###hospodárenia a na vıšku vlastného imania.;koniec
+F_text9;;koniec
+G_text1;;koniec
+G_text10;Úètovná jednotka nevydala v úètovnom období iadne dlhopisy.###rn###;koniec
+G_text11;;koniec
+G_text14;;koniec
+G_text16;Úètovná jednotka netvorila v úètovnom období finanèné deriváty.###rn###;koniec
+G_text17;Úètovná jednotka nemá majetok zabezpeèenı derivátmi.###rn###;koniec
+G_text18;Úètovná jednotka nemá majetok prenajatı formou finanèného prenájmu.;koniec
+G_text4;;koniec
+G_text7;###rn###;koniec
+G_text8;###rn######rn###;koniec
+G_text9;;koniec
+H_text1;;koniec
+I_text1;###r###;koniec
+K_text1;;koniec
+L_text1;Úètovná jednotka nemá podmienené záväzky.###rn###;koniec
+L_text4;Úètovná jednotka nemá podmienenı majetok.###rn###;koniec
+P_text1;;koniec

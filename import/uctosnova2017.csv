@@ -1,0 +1,257 @@
+224;##########Tabulka F3001_uctosnova 
+0;uce;nuc;crv;crs;pmd;pda;prm1;prm2;prm3;prm4;ucc
+1;01100;Zriaïovacie náklady;0;4;0.00;0.00;0;0;;;1100
+1;01200;Aktivované náklady na vıvoj;0;4;0.00;0.00;0;0;;;1200
+1;01300;Softvér;0;5;0.00;0.00;0;0;;;1300
+1;01400;Ocenite¾né práva;0;6;0.00;0.00;0;0;;;1400
+1;01500;Goodwill;0;7;0.00;0.00;0;0;;;1500
+1;01900;Ostatnı dlhodobı nehmotnı majetok;0;8;0.00;0.00;0;0;;;1900
+1;02100;Stavby;0;13;0.00;0.00;0;0;;;2100
+1;02200;Samostatné hnute¾né veci a súbory hnute¾nıch vecí;0;14;0.00;0.00;0;0;;;2200
+1;02500;Pestovate¾ské celky trvalıch porastov;0;15;0.00;0.00;0;0;;;2500
+1;02600;Základné stádo a ané zvieratá;0;16;0.00;0.00;0;0;;;2600
+1;02900;Ostatnı dlhodobı hmotnı majetok;0;17;0.00;0.00;0;0;;;2900
+1;03100;Pozemky;0;12;0.00;0.00;0;0;;;3100
+1;03200;Umelecké diela a zbierky;0;17;0.00;0.00;0;0;;;3200
+1;04100;Obstaranie dlhodobého nehmotného majetku;0;9;0.00;0.00;0;0;;;4100
+1;04200;Obstaranie dlhodobého hmotného majetku;0;18;0.00;0.00;0;0;;;4200
+1;04300;Obstaranie dlhodobého finanèného majetku;0;28;0.00;0.00;0;0;;;4300
+1;05100;Poskytnuté preddavky na dlhodobı nehmotnı majetok;0;10;0.00;0.00;0;0;;;5100
+1;05200;Poskytnuté preddavky na dlhodobı hmotnı majetok;0;19;0.00;0.00;0;0;;;5200
+1;05300;Poskytnuté preddavky na dlhodobı finanènı majetok;0;29;0.00;0.00;0;0;;;5300
+1;06100;Podielové cenné papiere a podiely v ovládanej osobe;0;22;0.00;0.00;0;0;;;6100
+1;06200;Podielové cenné papiere a podiely v spoloènosti s podstatnım vplyvom;0;23;0.00;0.00;0;0;;;6200
+1;06300;Realizovate¾né cenné papiere a podiely;0;24;0.00;0.00;0;0;;;6300
+1;06500;Dlhové cenné papiere drané do splatnosti;0;24;0.00;0.00;0;0;;;6500
+1;06600;Pôièky úètovnej jednotke  v konsolidovanom celku;0;25;0.00;0.00;0;0;;;6600
+1;06700;Ostatné pôièky;0;27;0.00;0.00;0;0;;;6700
+1;06900;Ostatnı dlhodobı finanènı majetok;0;26;0.00;0.00;0;0;;;6900
+1;07100;Oprávky k zriaïovacím nákladom;0;4;0.00;0.00;0;0;;;7100
+1;07200;Oprávky k aktivovanım nákladom na vıvoj;0;4;0.00;0.00;0;0;;;7200
+1;07300;Oprávky k softvéru;0;5;0.00;0.00;0;0;;;7300
+1;07400;Oprávky k ocenite¾nım právam;0;6;0.00;0.00;0;0;;;7400
+1;07500;Oprávky ku goodwillu;0;7;0.00;0.00;0;0;;;7500
+1;07900;Oprávky k ostatnému dlhodobému nehmotnému majetku;0;8;0.00;0.00;0;0;;;7900
+1;08100;Oprávky k stavbám;0;13;0.00;0.00;0;0;;;8100
+1;08200;Oprávky k samostatnım hnute¾nım veciam a k súboru hnute¾nıch vecí;0;14;0.00;0.00;0;0;;;8200
+1;08500;Oprávky k pestovate¾skım celkom trvalıch porastov;0;15;0.00;0.00;0;0;;;8500
+1;08600;Oprávky k základnému stádu a anım zvieratám;0;16;0.00;0.00;0;0;;;8600
+1;08900;Oprávky k ostatnému dlhodobému hmotnému majetku;0;17;0.00;0.00;0;0;;;8900
+1;09100;Opravná poloka k dlhodobému nehmotnému majetku;0;8;0.00;0.00;0;0;;;9100
+1;09200;Opravná poloka k dlhodobému hmotnému majetku;0;17;0.00;0.00;0;0;;;9200
+1;09300;Opravná poloka k nedokonèenému dlhodobému nehmotnému majetku;0;9;0.00;0.00;0;0;;;9300
+1;09400;Opravná poloka k nedokonèenému dlhodobému hmotnému majetku;0;18;0.00;0.00;0;0;;;9400
+1;09500;Opravná poloka k poskytnutım preddavkom na dlhodobı majetok;0;19;0.00;0.00;0;0;;;9500
+1;09600;Opravná poloka k dlhodobému finanènému majetku;0;26;0.00;0.00;0;0;;;9600
+1;09700;Opravná poloka k nadobudnutému majetku;0;20;0.00;0.00;0;0;;;9700
+1;09800;Oprávky k opravnej poloke k nadobudnutému majetku;0;20;0.00;0.00;0;0;;;9800
+1;11100;Obstaranie materiálu;0;32;0.00;0.00;0;0;;;11100
+1;11200;Materiál na sklade;0;32;0.00;0.00;0;0;;;11200
+1;11900;Materiál na ceste;0;32;0.00;0.00;0;0;;;11900
+1;12100;Nedokonèená vıroba;0;33;0.00;0.00;0;0;;;12100
+1;12200;Polotovary vlastnej vıroby;0;33;0.00;0.00;0;0;;;12200
+1;12300;Vırobky;0;34;0.00;0.00;0;0;;;12300
+1;12400;Zvieratá;0;35;0.00;0.00;0;0;;;12400
+1;13100;Obstaranie tovaru;0;36;0.00;0.00;0;0;;;13100
+1;13200;Tovar na sklade a v predajniach;0;36;0.00;0.00;0;0;;;13200
+1;13900;Tovar na ceste;0;36;0.00;0.00;0;0;;;13900
+1;19100;Opravná poloka k materiálu;0;32;0.00;0.00;0;0;;;19100
+1;19200;Opravná poloka k nedokonèenej vırobe;0;33;0.00;0.00;0;0;;;19200
+1;19300;Opravná poloka k polotovarom vlastnej vıroby;0;33;0.00;0.00;0;0;;;19300
+1;19400;Opravná poloka k vırobkom;0;34;0.00;0.00;0;0;;;19400
+1;19500;Opravná poloka k zvieratám;0;35;0.00;0.00;0;0;;;19500
+1;19600;Opravná poloka k tovaru;0;36;0.00;0.00;0;0;;;19600
+1;21100;Pokladnica;0;56;0.00;0.00;0;0;;;21100
+1;21300;Ceniny;0;56;0.00;0.00;0;0;;;21300
+1;22100;Bankové úèty;0;57;0.00;0.00;0;0;;;22100
+1;23100;Krátkodobé bankové úvery;0;120;0.00;0.00;0;0;;;23100
+1;23200;Eskontné úvery;0;120;0.00;0.00;0;0;;;23200
+1;24100;Vydané krátkodobé dlhopisy;0;117;0.00;0.00;0;0;;;24100
+1;24900;Ostatné krátkodobé finanèné vıpomoci;0;117;0.00;0.00;0;0;;;24900
+1;25100;Majetkové cenné papiere na obchodovanie;0;59;0.00;0.00;0;0;;;25100
+1;25200;Vlastné akcie a vlastné obchodné podiely;0;70;0.00;0.00;0;0;;;25200
+1;25300;Dlhové cenné papiere na obchodovanie;0;59;0.00;0.00;0;0;;;25300
+1;25500;Vlastné dlhopisy;0;102;0.00;0.00;0;0;;;25500
+1;25600;Dlhové cenné papiere so splatnosou do jedného roka drané do splatnosti;0;59;0.00;0.00;0;0;;;25600
+1;25700;Ostatné realizovate¾né cenné papiere;0;59;0.00;0.00;0;0;;;25700
+1;25900;Obstaranie krátkodobého finanèného majetku;0;60;0.00;0.00;0;0;;;25900
+1;26100;Peniaze na ceste;0;57;0.00;0.00;0;0;;;26100
+1;29100;Opravné poloky ku krátkodobému finanènému majetku;0;59;0.00;0.00;0;0;;;29100
+1;31100;Odberatelia;0;47;0.00;0.00;0;0;;;31100
+1;31200;Zmenky na inkaso;0;47;0.00;0.00;0;0;;;31200
+1;31300;Poh¾adávky za eskontované cenné papiere;0;47;0.00;0.00;0;0;;;31300
+1;31400;Poskytnuté preddavky;0;47;0.00;0.00;0;0;;;31400
+1;31500;Ostatné poh¾adávky;0;47;0.00;0.00;0;0;;;31500
+1;32100;Dodávatelia;0;107;0.00;0.00;0;0;;;32100
+1;32200;Zmenky na úhradu;0;107;0.00;0.00;0;0;;;32200
+1;32300;Krátkodobé rezervy;0;93;0.00;0.00;0;0;;;32300
+1;32400;Prijaté preddavky;0;107;0.00;0.00;0;0;;;32400
+1;32500;Ostatné záväzky;0;107;0.00;0.00;0;0;;;32500
+1;32600;Nevyfakturované dodávky;0;109;0.00;0.00;0;0;;;32600
+1;33100;Zamestnanci;0;113;0.00;0.00;0;0;;;33100
+1;33300;Ostatné záväzky voèi zamestnancom;0;113;0.00;0.00;0;0;;;33300
+1;33500;Poh¾adávky voèi zamestnancom;0;54;0.00;0.00;0;0;;;33500
+1;33600;Zúètovanie s orgánmi sociálneho zabezpeèenia a zdravotného poistenia;0;114;0.00;0.00;0;0;;;33600
+1;34100;Daò z príjmov;0;115;0.00;0.00;0;0;;;34100
+1;34200;Ostatné priame dane;0;115;0.00;0.00;0;0;;;34200
+1;34300;Daò z pridanej hodnoty;0;115;0.00;0.00;0;0;;;34300
+1;34500;Ostatné dane a poplatky;0;115;0.00;0.00;0;0;;;34500
+1;34600;Dotácie zo štátneho rozpoètu;0;115;0.00;0.00;0;0;;;34600
+1;34700;Ostatné dotácie;0;115;0.00;0.00;0;0;;;34700
+1;35100;Poh¾adávky v rámci konsolidovaného celku;0;49;0.00;0.00;0;0;;;35100
+1;35300;Poh¾adávky za upísané vlastné imanie;0;72;0.00;0.00;0;0;;;35300
+1;35400;Poh¾adávky voèi spoloèníkom a èlenom pri úhrade straty;0;51;0.00;0.00;0;0;;;35400
+1;35500;Ostatné poh¾adávky voèi spoloèníkom a èlenom;0;51;0.00;0.00;0;0;;;35500
+1;35800;Poh¾adávky voèi úèastníkom zdruenia;0;51;0.00;0.00;0;0;;;35800
+1;36100;Záväzky v rámci konsolidovaného celku;0;111;0.00;0.00;0;0;;;36100
+1;36400;Záväzky voèi spoloèníkom a èlenom pri rozde¾ovaní zisku;0;112;0.00;0.00;0;0;;;36400
+1;36500;Ostatné záväzky voèi spoloèníkom a èlenom;0;112;0.00;0.00;0;0;;;36500
+1;36600;Záväzky voèi spoloèníkom a èlenom zo závislej èinnosti;0;112;0.00;0.00;0;0;;;36600
+1;36700;Záväzky z upísanıch nesplatenıch cennıch papierov a vkladov;0;112;0.00;0.00;0;0;;;36700
+1;36800;Záväzky voèi úèastníkom zdruenia;0;112;0.00;0.00;0;0;;;36800
+1;37100;Poh¾adávky z predaja podniku;0;44;0.00;0.00;0;0;;;37100
+1;37200;Záväzky z kúpy podniku;0;0;0.00;0.00;0;0;;;37200
+1;37300;Poh¾adávky a záväzky z pevnıch termínovanıch operácií;0;0;0.00;0.00;0;0;;;37300
+1;37400;Poh¾adávky z prenájmu;0;0;0.00;0.00;0;0;;;37400
+1;37500;Poh¾adávky z vydanıch dlhopisov;0;54;0.00;0.00;0;0;;;37500
+1;37600;Nakúpené opcie;0;0;0.00;0.00;0;0;;;37600
+1;37700;Predané opcie;0;0;0.00;0.00;0;0;;;37700
+1;37800;Iné poh¾adávky;0;54;0.00;0.00;0;0;;;37800
+1;37900;Iné záväzky;0;116;0.00;0.00;0;0;;;37900
+1;38100;Náklady budúcich období;0;63;0.00;0.00;0;0;;;38100
+1;38200;Komplexné náklady budúcich období;0;63;0.00;0.00;0;0;;;38200
+1;38300;Vıdavky budúcich období;0;123;0.00;0.00;0;0;;;38300
+1;38400;Vınosy budúcich období;0;125;0.00;0.00;0;0;;;38400
+1;38500;Príjmy budúcich období;0;65;0.00;0.00;0;0;;;38500
+1;39100;Opravná poloka k poh¾adávkam;0;47;0.00;0.00;0;0;;;39100
+1;39500;Vnútorné zúètovanie;0;116;0.00;0.00;0;0;;;39500
+1;39800;Spojovací úèet pri zdruení;0;112;0.00;0.00;0;0;;;39800
+1;41100;Základné imanie;0;69;0.00;0.00;0;0;;;41100
+1;41200;Emisné áio;0;74;0.00;0.00;0;0;;;41200
+1;41300;Ostatné kapitálové fondy;0;75;0.00;0.00;0;0;;;41300
+1;41400;Oceòovacie rozdiely z precenenia majetku a záväzkov;0;77;0.00;0.00;0;0;;;41400
+1;41500;Oceòovacie rozdiely z kapitálovıch úèastín;0;78;0.00;0.00;0;0;;;41500
+1;41600;Oceòovacie rozdiely z precenenia pri splynutí a rozdelení;0;79;0.00;0.00;0;0;;;41600
+1;41700;Zákonnı rezervnı fond z kapitálovıch vkladov;0;76;0.00;0.00;0;0;;;41700
+1;41800;Nedelite¾nı fond z kapitálovıch vkladov;0;76;0.00;0.00;0;0;;;41800
+1;41900;Zmeny základného imania;0;71;0.00;0.00;0;0;;;41900
+1;42100;Zákonnı rezervnı fond;0;81;0.00;0.00;0;0;;;42100
+1;42200;Nedelite¾nı fond;0;82;0.00;0.00;0;0;;;42200
+1;42300;Štatutárne fondy;0;83;0.00;0.00;0;0;;;42300
+1;42700;Ostatné fondy;0;83;0.00;0.00;0;0;;;42700
+1;42800;Nerozdelenı zisk minulıch rokov;0;85;0.00;0.00;0;0;;;42800
+1;42900;Neuhradená strata minulıch rokov;0;86;0.00;0.00;0;0;;;42900
+1;43100;Vısledok hospodárenia v schva¾ovaní;0;85;0.00;0.00;0;0;;;43100
+1;45100;Rezervy zákonné;0;90;0.00;0.00;0;0;;;45100
+1;45900;Ostatné rezervy;0;92;0.00;0.00;0;0;;;45900
+1;46100;Bankové úvery;0;119;0.00;0.00;0;0;;;46100
+1;47100;Dlhodobé záväzky v rámci konsolidovaného celku;0;99;0.00;0.00;0;0;;;47100
+1;47200;Záväzky zo sociálneho fondu;0;103;0.00;0.00;0;0;;;47200
+1;47300;Vydané dlhopisy;0;102;0.00;0.00;0;0;;;47300
+1;47400;Záväzky z prenájmu;0;104;0.00;0.00;0;0;;;47400
+1;47500;Dlhodobé prijaté preddavky;0;100;0.00;0.00;0;0;;;47500
+1;47600;Dlhodobé nevyfakturované dodávky;0;97;0.00;0.00;0;0;;;47600
+1;47800;Dlhodobé zmenky na úhradu;0;101;0.00;0.00;0;0;;;47800
+1;47900;Ostatné dlhodobé záväzky;0;95;0.00;0.00;0;0;;;47900
+1;48100;Odloenı daòovı záväzok a odloená daòová poh¾adávka;0;0;0.00;0.00;0;0;;;48100
+1;49100;Vlastné imanie fyzickej osoby – podnikate¾a;0;69;0.00;0.00;0;0;;;49100
+1;50100;Spotreba materiálu;9;0;0.00;0.00;0;0;;;50100
+1;50200;Spotreba energie;9;0;0.00;0.00;0;0;;;50200
+1;50300;Spotreba ostatnıch neskladovate¾nıch dodávok;9;0;0.00;0.00;0;0;;;50300
+1;50400;Predanı tovar;2;0;0.00;0.00;0;0;;;50400
+1;51100;Opravy a udriavanie;10;0;0.00;0.00;0;0;;;51100
+1;51200;Cestovné;10;0;0.00;0.00;0;0;;;51200
+1;51300;Náklady na reprezentáciu;10;0;0.00;0.00;0;0;;;51300
+1;51800;Ostatné sluby;10;0;0.00;0.00;0;0;;;51800
+1;52100;Mzdové náklady;13;0;0.00;0.00;0;0;;;52100
+1;52200;Príjmy spoloèníkov a èlenov zo závislej èinnosti;13;0;0.00;0.00;0;0;;;52200
+1;52300;Odmeny èlenom orgánov spoloènosti a drustva;14;0;0.00;0.00;0;0;;;52300
+1;52400;Zákonné sociálne zabezpeèenie;15;0;0.00;0.00;0;0;;;52400
+1;52500;Ostatné sociálne zabezpeèenie;15;0;0.00;0.00;0;0;;;52500
+1;52600;Sociálne náklady fyzickej osoby –podnikate¾a;15;0;0.00;0.00;0;0;;;52600
+1;52700;Zákonné sociálne náklady;16;0;0.00;0.00;0;0;;;52700
+1;52800;Ostatné sociálne náklady;16;0;0.00;0.00;0;0;;;52800
+1;53100;Cestná daò;17;0;0.00;0.00;0;0;;;53100
+1;53200;Daò z nehnute¾nosti;17;0;0.00;0.00;0;0;;;53200
+1;53800;Ostatné dane a poplatky;17;0;0.00;0.00;0;0;;;53800
+1;54100;Zostatková cena predaného dlhodobého nehmotného majetku a dlhodobého hmotného majetku;20;0;0.00;0.00;0;0;;;54100
+1;54200;Predanı materiál;20;0;0.00;0.00;0;0;;;54200
+1;54300;Dary;23;0;0.00;0.00;0;0;;;54300
+1;54400;Zmluvné pokuty, penále a úroky z omeškania;23;0;0.00;0.00;0;0;;;54400
+1;54500;Ostatné pokuty, penále a úroky z omeškania;23;0;0.00;0.00;0;0;;;54500
+1;54600;Odpis poh¾adávky;23;0;0.00;0.00;0;0;;;54600
+1;54800;Ostatné náklady na hospodársku èinnos;23;0;0.00;0.00;0;0;;;54800
+1;54900;Manká a škody;23;0;0.00;0.00;0;0;;;54900
+1;55100;Odpisy dlhodobého nehmotného majetku a dlhodobého hmotného majetku;18;0;0.00;0.00;0;0;;;55100
+1;55200;Tvorba zákonnıch rezerv;23;0;0.00;0.00;0;0;;;55200
+1;55400;Tvorba ostatnıch rezerv;23;0;0.00;0.00;0;0;;;55400
+1;55500;Zúètovanie komplexnıch nákladov budúcich období;23;0;0.00;0.00;0;0;;;55500
+1;55700;Zúètovanie oprávky k opravnej poloke k nadobudnutému majetku;23;0;0.00;0.00;0;0;;;55700
+1;55800;Tvorba zákonnıch opravnıch poloiek;23;0;0.00;0.00;0;0;;;55800
+1;55900;Tvorba ostatnıch opravnıch poloiek;23;0;0.00;0.00;0;0;;;55900
+1;56100;Predané cenné papiere a podiely;28;0;0.00;0.00;0;0;;;56100
+1;56200;Úroky;39;0;0.00;0.00;0;0;;;56200
+1;56300;Kurzové straty;41;0;0.00;0.00;0;0;;;56300
+1;56400;Náklady na precenenie cennıch papierov;36;0;0.00;0.00;0;0;;;56400
+1;56600;Náklady na krátkodobı finanènı majetok;34;0;0.00;0.00;0;0;;;56600
+1;56700;Náklady na derivátové operácie;36;0;0.00;0.00;0;0;;;56700
+1;56800;Ostatné finanèné náklady;43;0;0.00;0.00;0;0;;;56800
+1;56900;Manká a škody na finanènom majetku;43;0;0.00;0.00;0;0;;;56900
+1;57400;Tvorba rezerv;43;0;0.00;0.00;0;0;;;57400
+1;57900;Tvorba opravnıch poloiek;43;0;0.00;0.00;0;0;;;57900
+1;58100;Náklady na zmenu metódy;53;0;0.00;0.00;0;0;;;58100
+1;58200;Škody;53;0;0.00;0.00;0;0;;;58200
+1;58400;Tvorba rezerv;53;0;0.00;0.00;0;0;;;58400
+1;58800;Ostatné mimoriadne náklady;53;0;0.00;0.00;0;0;;;58800
+1;58900;Tvorba opravnıch poloiek;53;0;0.00;0.00;0;0;;;58900
+1;59100;Splatná daò z príjmov z benej èinnosti;49;0;0.00;0.00;0;0;;;59100
+1;59200;Odloená daò z príjmov z benej èinnosti;50;0;0.00;0.00;0;0;;;59200
+1;59300;Splatná daò z príjmov z mimoriadnej èinnosti;56;0;0.00;0.00;0;0;;;59300
+1;59400;Odloená daò z príjmov z mimoriadnej èinnosti;57;0;0.00;0.00;0;0;;;59400
+1;59500;Dodatoèné odvody dane z príjmov;49;0;0.00;0.00;0;0;;;59500
+1;59600;Prevod podielov na vısledku hospodárenia spoloèníkom;60;0;0.00;0.00;0;0;;;59600
+1;59700;Prevod nákladov na hospodársku èinnos;25;0;0.00;0.00;0;0;;;59700
+1;59800;Prevod finanènıch nákladov;45;0;0.00;0.00;0;0;;;59800
+1;60100;Trby za vlastné vırobky;5;0;0.00;0.00;0;0;;;60100
+1;60200;Trby z predaja sluieb;5;0;0.00;0.00;0;0;;;60200
+1;60400;Trby za tovar;1;0;0.00;0.00;0;0;;;60400
+1;61100;Zmena stavu nedokonèenej vıroby;6;0;0.00;0.00;0;0;;;61100
+1;61200;Zmena stavu polotovarov;6;0;0.00;0.00;0;0;;;61200
+1;61300;Zmena stavu vırobkov;6;0;0.00;0.00;0;0;;;61300
+1;61400;Zmena stavu zvierat;6;0;0.00;0.00;0;0;;;61400
+1;62100;Aktivácia materiálu a tovaru;7;0;0.00;0.00;0;0;;;62100
+1;62200;Aktivácia vnútroorganizaènıch sluieb;7;0;0.00;0.00;0;0;;;62200
+1;62300;Aktivácia dlhodobého nehmotného majetku;7;0;0.00;0.00;0;0;;;62300
+1;62400;Aktivácia dlhodobého hmotného majetku;7;0;0.00;0.00;0;0;;;62400
+1;64100;Trby z predaja dlhodobého nehmotného majetku a dlhodobého hmotného majetku;19;0;0.00;0.00;0;0;;;64100
+1;64200;Trby z predaja materiálu;19;0;0.00;0.00;0;0;;;64200
+1;64400;Zmluvné pokuty, penále a úroky z omeškania;22;0;0.00;0.00;0;0;;;64400
+1;64500;Ostatné pokuty, penále a úroky z omeškania;22;0;0.00;0.00;0;0;;;64500
+1;64600;Vınosy z odpísanıch poh¾adávok;22;0;0.00;0.00;0;0;;;64600
+1;64800;Ostatné vınosy z hospodárskej èinnosti;22;0;0.00;0.00;0;0;;;64800
+1;65200;Zúètovanie zákonnıch rezerv;22;0;0.00;0.00;0;0;;;65200
+1;65400;Zúètovanie ostatnıch rezerv;22;0;0.00;0.00;0;0;;;65400
+1;65500;Zúètovanie komplexnıch nákladov budúcich období;22;0;0.00;0.00;0;0;;;65500
+1;65700;Zúètovanie oprávky k opravnej poloke k nadobudnutému majetku;22;0;0.00;0.00;0;0;;;65700
+1;65800;Zúètovanie zákonnıch opravnıch poloiek;22;0;0.00;0.00;0;0;;;65800
+1;65900;Zúètovanie ostatnıch opravnıch poloiek;22;0;0.00;0.00;0;0;;;65900
+1;66100;Trby z predaja cennıch papierov a podielov;27;0;0.00;0.00;0;0;;;66100
+1;66200;Úroky;38;0;0.00;0.00;0;0;;;66200
+1;66300;Kurzové zisky;40;0;0.00;0.00;0;0;;;66300
+1;66400;Vınosy z precenenia cennıch papierov;35;0;0.00;0.00;0;0;;;66400
+1;66500;Vınosy z dlhodobého finanèného majetku;30;0;0.00;0.00;0;0;;;66500
+1;66600;Vınosy z krátkodobého finanèného majetku;33;0;0.00;0.00;0;0;;;66600
+1;66700;Vınosy z derivátovıch operácií;35;0;0.00;0.00;0;0;;;66700
+1;66800;Ostatné finanèné vınosy;42;0;0.00;0.00;0;0;;;66800
+1;67400;Zúètovanie rezerv;42;0;0.00;0.00;0;0;;;67400
+1;67900;Zúètovanie opravnıch poloiek;42;0;0.00;0.00;0;0;;;67900
+1;68100;Vınosy zo zmeny metódy;52;0;0.00;0.00;0;0;;;68100
+1;68200;Náhrady škôd;52;0;0.00;0.00;0;0;;;68200
+1;68400;Zúètovanie rezerv;52;0;0.00;0.00;0;0;;;68400
+1;68800;Ostatné mimoriadne vınosy;52;0;0.00;0.00;0;0;;;68800
+1;68900;Zúètovanie opravnıch poloiek;52;0;0.00;0.00;0;0;;;68900
+1;69700;Prevod vınosov z hospodárskej èinnosti;24;0;0.00;0.00;0;0;;;69700
+1;69800;Prevod finanènıch vınosov;44;0;0.00;0.00;0;0;;;69800
+1;70100;Zaèiatoènı úèet súvahovı;0;0;0.00;0.00;0;0;;;70100
+1;70200;Koneènı úèet súvahovı;0;0;0.00;0.00;0;0;;;70200
+1;71000;Úèet ziskov a strát;0;0;0.00;0.00;0;0;;;71000
