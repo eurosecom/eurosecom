@@ -56,15 +56,15 @@ $databaza=$mysqldb2015.".";
 echo "db".$databaza;
   }
 
-//znovu prenos z 2014 do 2015 UCTO a MAJ ak nastavena firma minuleho roku 2014 a rok 2014 v udajoch o firme, a cislo firmy 2015 musi byt vacsie ako cislo firmy 2014
+//znovu prenos z 2015 do 2016 UCTO a MAJ ak nastavena firma minuleho roku 2015 a rok 2015 v udajoch o firme, a cislo firmy 2016 musi byt vacsie ako cislo firmy 2015
 $aj2013=0;
-if( $fir_allx11 > 0 AND $fir_allx11 < $kli_vxcf AND $kli_vrok == 2015 AND $fir_allx12 == 2014 )
+if( $fir_allx11 > 0 AND $fir_allx11 < $kli_vxcf AND $kli_vrok == 2016 AND $fir_allx12 == 2015 )
 {
 if( $copern == 2 OR $copern == 10   )  { $aj2013=1; }
 if( $copernx == 2 OR $copernx == 10 )  { $aj2013=1; }
 }
 
-//ak chcem dovolit natvrdo prenos z 2014 do 2015, inak dovoli v UCTO a MAJ ak nastavena firma roku 2014 a rok 2014 v udajoch o firme
+//ak chcem dovolit natvrdo prenos z 2015 do 2016, inak dovoli v UCTO a MAJ ak nastavena firma roku 2015 a rok 2015 v udajoch o firme
 if( $kli_vxcf == 0 )
   {
 $aj2013=1;
@@ -72,29 +72,29 @@ $aj2013=1;
 
 //echo $kli_vrok;
 
-if( $kli_vrok == 2015 AND $aj2013 == 0 )
+if( $kli_vrok == 2016 AND $aj2013 == 0 )
     {
 ?>
 <script type="text/javascript">
-alert ("                   POZOR ! \r MusÌte byù vo firme roku 2016 ! ");
+alert ("                   POZOR ! \r MusÌte byù vo firme roku 2017 ! ");
 window.close();
 </script>
 <?php
 exit;
     }
-//koniec ak nie je firma roku 2016
+//koniec ak nie je firma roku 2017
 
 
 
-if( $kli_vrok == 2015 AND $upozorni2013 == 1 )
+if( $kli_vrok == 2016 AND $upozorni2013 == 1 )
     {
 ?>
 <script type="text/javascript">
-alert ("           POZOR !!! Nie ste vo firme roku 2016 !  \r  Chcete znovu pren·öaù ˙daje do roku 2015 z roku 2014 ??? ");
+alert ("           POZOR !!! Nie ste vo firme roku 2017 !  \r  Chcete znovu pren·öaù ˙daje do roku 2016 z roku 2015 ??? ");
 </script>
 <?php
     }
-//koniec ak nie je firma roku 2016
+//koniec ak nie je firma roku 2017
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -297,28 +297,28 @@ window.open('../cis/prenos_poc.php?h_ycf=' + h_ycf + '&h_xcf=<?php echo $kli_vxc
 function HelpUcto()
                 {
 
-window.open('../cis/Prenos_UCTO_2016.pdf',
+window.open('../cis/Prenos_UCTO_2017.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function HelpMaj()
                 {
 
-window.open('../cis/Prenos_MAJETOK_2016.pdf',
+window.open('../cis/Prenos_MAJETOK_2017.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function HelpMzdy()
                 {
 
-window.open('../cis/Prenos_MZDY_2016.pdf',
+window.open('../cis/Prenos_MZDY_2017.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function HelpSklad()
                 {
 
-window.open('../cis/Prenos_SKLAD_a_FAKTURY_2016.pdf',
+window.open('../cis/Prenos_SKLAD_a_FAKTURY_2017.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -1012,6 +1012,18 @@ $vysledek = mysql_query("$sql");
 }
 
 if( $kli_vrok == 2016 )
+{
+$sql = "DROP TABLE F".$kli_vxcf."_uctvykdpha2new ";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F".$kli_vxcf."_uctvykdpha3new ";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F".$kli_vxcf."_uctvykdpha4new ";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F".$kli_vxcf."_uctvykdpha8new ";
+$vysledek = mysql_query("$sql");
+}
+
+if( $kli_vrok == 2017 )
 {
 $sql = "DROP TABLE F".$kli_vxcf."_uctvykdpha2new ";
 $vysledek = mysql_query("$sql");
@@ -3442,6 +3454,52 @@ $dsql = mysql_query("$dsqlt");
 
 }
 
+
+if( $kli_vrok == 2017 )
+{
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017c";
+$vysledek = mysql_query("$sql");
+
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_sepa012017a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_sepa012017b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_sepa012017c";
+$vysledek = mysql_query("$sql");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdtrn,F$kli_vxcf"."_mzdkun ".
+" SET mn=9999 ".
+" WHERE F$kli_vxcf"."_mzdtrn.oc=F$kli_vxcf"."_mzdkun.oc ".
+" AND F$kli_vxcf"."_mzdkun.pom = 9 AND F$kli_vxcf"."_mzdkun.dav < '2016-01-01' AND F$kli_vxcf"."_mzdkun.dav != '0000-00-00' ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzddeti,F$kli_vxcf"."_mzdkun ".
+" SET p4=9 ".
+" WHERE F$kli_vxcf"."_mzddeti.oc=F$kli_vxcf"."_mzdkun.oc ".
+" AND F$kli_vxcf"."_mzdkun.pom = 9 AND F$kli_vxcf"."_mzdkun.dav < '2016-01-01' AND F$kli_vxcf"."_mzdkun.dav != '0000-00-00' ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdddp,F$kli_vxcf"."_mzdkun ".
+" SET pd4=9 ".
+" WHERE F$kli_vxcf"."_mzdddp.oc=F$kli_vxcf"."_mzdkun.oc ".
+" AND F$kli_vxcf"."_mzdkun.pom = 9 AND F$kli_vxcf"."_mzdkun.dav < '2016-01-01' AND F$kli_vxcf"."_mzdkun.dav != '0000-00-00' ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_mzdtrn WHERE mn = 9999 "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "DELETE FROM F$kli_vxcf"."_mzddeti WHERE p4 = 9 "; $dsql = mysql_query("$dsqlt");
+$dsqlt = "DELETE FROM F$kli_vxcf"."_mzdddp WHERE pd4 = 9 "; $dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_mzdkun WHERE pom = 9 AND dav < '2016-01-01' AND dav != '0000-00-00' ";
+$dsql = mysql_query("$dsqlt");
+
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 echo "MZDY prenesenÈ.<br />";
@@ -3542,6 +3600,16 @@ $vyb_xcfs=$kli_vxcf;
 $setprm = include("../mzdy/set2016parametre.php");
     }
 //uprava parametrov miezd na aktualny stav od 1.1.2016
+
+//uprava parametrov miezd na aktualny stav od 1.1.2017
+if( $kli_vrok == 2017 )
+    {
+$vyb_roks=2017;
+$mysqldbdatas="";
+$vyb_xcfs=$kli_vxcf;
+$setprm = include("../mzdy/set2017parametre.php");
+    }
+//uprava parametrov miezd na aktualny stav od 1.1.2017
 
 echo "Prenos Trexima.<br />";
 $dsqlt = "DROP TABLE F$kli_vxcf"."_treximafir ";
@@ -3706,6 +3774,38 @@ $vysledek = mysql_query("$sql");
 $sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012016pomer_e";
 $vysledek = mysql_query("$sql");
 $sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012016pomer_f";
+$vysledek = mysql_query("$sql");
+}
+
+if( $kli_vrok == 2017 )
+{
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017c";
+$vysledek = mysql_query("$sql");
+
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_sepa012017a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_sepa012017b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_sepa012017c";
+$vysledek = mysql_query("$sql");
+
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017pomer_a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017pomer_b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017pomer_c";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017pomer_d";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017pomer_e";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017pomer_f";
 $vysledek = mysql_query("$sql");
 }
 
