@@ -1,3 +1,64 @@
+- CIS v ../cis/citajrok.php nastavenı pod¾a domény rok, ktorı a všetky menšie nemá program ponúka vo vıbere firmy 
+  Pouíva bude tam kde sú staršie roky odloené v eszalohy.sk. Firmy zostanú v èíselníku firiem a nebude ich ponúka
+  vo vıbere firiem.
+- UCTO import SEPA bankovıch vıpisov XML aj v jednoduchom úètovníctve
+- CIS v èíselníku firiem rok 2017 pri vytváraní firmy
+- CIS prenos PS medzi rokmi, upozornenie ak nie je rok 2017. Ucto a Maj ak ak nastavena firma minuleho roku 2015 
+   a rok 2015 v udajoch o firme, a cislo firmy 2016 musi byt vacsie ako cislo firmy 2015 tak upozorní ale po OK
+   pustí znovu prenos. V Sklade a Mzdy nedovolí v iadnom prípade.
+- MZDY príprava reštartu parametrov miezd na rok 2017.
+- MZDY FOA export do XML pod¾a XSD z portálu FS
+
+07.12.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO Priznanie DPH v archíve nastavenie druhu osoby na 1. strane, form, PDF aj XML
+- UCTO Priznanie FOB skript, zatia¾ blokované XML
+- MZDY Priznanie FOA skript, zatia¾ blokované XML
+
+05.12.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY Alchem dm 928 z mesaènej dávky nespracovanej na ostro do príkazu na úhradu
+- MZDY RZ dane zo závislej èinnosti JPG aj skripty komplet
+
+01.12.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO DPFOB nové JPG
+- MZDY DPFOA nové JPG
+
+29.11.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO Alchem s.r.o. úèet 351 do saldokonta a vzájomnıch zápoètov
+- MZDY Evidenènı list naèítanie minulıch rokov, úprava pre nové delenie databáz 
+- MZDY VSZP pri dohodároch od 1.9.2016 konrolujú príjem v ståpci Iné príjmy nie Príjem OP
+
+
+14.11.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY príkaz na úhradu miezd text na poloke mzda priezvisko meno pre doménu www.medosro.sk zapnute texty
+- MZDY oprava: nechcelo urobi .xml, ak prihlásenı nemá prístup 1000 do úètovníctva, teraz staèí 1000 do miezd
+- MZDY Potvrdenie zamestnávate¾a na úèely nároku na dávku v nezamestnanosti úprava pre nové delenie databáz 
+- MZDY Potvrdenie zamestnávate¾a o zamestnancovi na úèely uplatnenia nároku na nemocenskú dávku úprava pre nové delenie databáz 
+- CIS Nové oddelené databázy ak v ../pswd existuje súbor newdeleniedtb.ano
+  Main DB musí by stále 2016. Len pri zaloení treba vloi rok, ktorı sa zakladá. Zakladaná databáza, musí by vytvorená v phpMyadmin
+- SKL ikonka na prepoèítavanie priemernıch cien v Mesaènıch zostavách a Info o zásobách, inak prepoèíta len ak bola príjemka
+  alebo ak neprepoèítal dlhšie ako 1 hodinu
+
+4.11.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- FAKT kontrola celkovej sumy na základe 0 dph 
+- UCT Pohyby ekorobota - zmena charsetu
+
+31.10.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- UCTO vıkazy FIN 204 NO a POD do štandartného generovania doplnené úèty 428, 429 a 431, zapnuté upozornenie na
+  negenerované súvahové úèty
+
+27.10.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- MZDY príkaz na úhradu miezd text na poloke mzda priezvisko meno pre doménu www.medosro.sk
+- UCTO mesaèné zostavy JU, od roku 2016 skryté VoPaV a VoM verzia 2013
+- MZDY elektronickı evidenènı list, ak zamestnanec nemá vyplnenı dátum ukonèenia PP v údajoch o zamestnancovi, program 
+  dá do XML súboru namiesto tagu "datumZanik" tag "trva"=1
+- FAKT opravenı problém s prepínaním úètovného mesiaca next a prev
+- UCTO opravenı problém saldo za faktúru a spä
+- UCTO štatistika 1304 viac miesta pre archív
+
+14.10.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+- SKLAD do vıpoètu priemernej ceny neberie vıdajky, ktoré majú nulovú cenu
+- UCTO príkaz na úhradu s IBANom aj doplòujúci text pri tlaèi do PDF
+
 5.10.2016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - UCTO aktivácia programu odmeòovania za hnojivá Alchem 2016
 - FAKT export odberate¾skıch faktúr z odbytu do CSV súboru so štruktúrou pre naèítanie 
