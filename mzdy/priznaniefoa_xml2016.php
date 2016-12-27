@@ -299,7 +299,7 @@ $priezvisko=iconv("CP1250", "UTF-8", $hlavicka->mprie);
 $rodneCislo=$hlavicka->mrod;
   $text = "   <rodneCislo><![CDATA[".$rodneCislo."]]></rodneCislo>"."\r\n"; fwrite($soubor, $text);
 $vlastnePrijmy=$hlavicka->mpri;
-if ( $hlavicka->mpri == 0 ) $vlastnePrijmy="";
+if ( $hlavicka->mpri == 0 ) $vlastnePrijmy="0.00";
   $text = "   <vlastnePrijmy><![CDATA[".$vlastnePrijmy."]]></vlastnePrijmy>"."\r\n"; fwrite($soubor, $text);
 $pocetMesiacov=$hlavicka->mpom;
 if ( $hlavicka->mpom == 0 ) $pocetMesiacov="";
@@ -587,6 +587,10 @@ $riadok=$hlavicka->r63;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r63><![CDATA[".$riadok."]]></r63>"."\r\n"; fwrite($soubor, $text);
 
+$riadok=$hlavicka->r63a;
+if ( $riadok == 0 ) $riadok="";
+  $text = "  <r63a><![CDATA[".$riadok."]]></r63a>"."\r\n"; fwrite($soubor, $text);
+
 $riadok=$hlavicka->r64;
 if ( $riadok == 0 ) $riadok="";
   $text = "  <r64><![CDATA[".$riadok."]]></r64>"."\r\n"; fwrite($soubor, $text);
@@ -744,6 +748,9 @@ $iban=$hlavicka->diban;
 
 //tagy predcislieUctu, cisloUctu a kodBanky vymazali z XSD 2016, keï sa to snažím naèíta do FOA2015 tak ich chce, uvidíme až dorobia FOA 2016
 // na portály FS
+$nerob=0;
+if( $nerob == 0 )
+  {
 $pole = explode("-", $hlavicka->uceb);
 $predcislieUctu=$pole[0];
 $cisloUctu=$pole[1];
@@ -757,6 +764,7 @@ if ( $ucet == 0 ) $cisloUctu="";
 $kodBanky=$hlavicka->numb;
 if ( $ucet == 0 ) $kodBanky="";
   $text = "    <kodBanky><![CDATA[".$kodBanky."]]></kodBanky>"."\r\n"; fwrite($soubor, $text);
+  }
 
   $text = "   </bankovyUcet>"."\r\n"; fwrite($soubor, $text);
 

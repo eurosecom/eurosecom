@@ -965,6 +965,9 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa".
 " SET des2=des6*100, des2=ceil(des2), r37=des2/100  WHERE oc = $cislo_oc AND r36 > 19809.00 ";
 $oznac = mysql_query("$sqtoz");
 
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r37=r37-r28 WHERE oc = $cislo_oc AND r27 = 1 AND r28 > 0 ";
+$oznac = mysql_query("$sqtoz");
+
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r37=0 WHERE oc = $cislo_oc AND r37 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -1004,6 +1007,9 @@ $oznac = mysql_query("$sqtoz");
 
 //nezdanitelne polozky 2016
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r41=r37+r38+r39+r40 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r41=r36 WHERE oc = $cislo_oc AND r41 > r36 ";
 $oznac = mysql_query("$sqtoz");
 
 //zaklad po odpocitani 2016
