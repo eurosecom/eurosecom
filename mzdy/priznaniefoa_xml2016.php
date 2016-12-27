@@ -26,7 +26,7 @@ require_once("../pswd/password.php");
   endif;
   mysql_select_db($mysqldb);
 
-$zablokovane=1;
+$zablokovane=0;
 if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
 if ( $zablokovane == 1 )
      {
@@ -741,6 +741,23 @@ $ucet=$hlavicka->ucet;
   $text = "   <bankovyUcet>"."\r\n"; fwrite($soubor, $text);
 $iban=$hlavicka->diban;
   $text = "    <IBAN><![CDATA[".$iban."]]></IBAN>"."\r\n"; fwrite($soubor, $text);
+
+//tagy predcislieUctu, cisloUctu a kodBanky vymazali z XSD 2016, keï sa to snažím naèíta do FOA2015 tak ich chce, uvidíme až dorobia FOA 2016
+// na portály FS
+$pole = explode("-", $hlavicka->uceb);
+$predcislieUctu=$pole[0];
+$cisloUctu=$pole[1];
+if( $pole[1] == '' ) { $cisloUctu=$pole[0]; $predcislieUctu=""; }
+
+if ( $ucet == 0 ) $predcislieUctu="";
+  $text = "    <predcislieUctu><![CDATA[".$predcislieUctu."]]></predcislieUctu>"."\r\n"; fwrite($soubor, $text);
+
+if ( $ucet == 0 ) $cisloUctu="";
+  $text = "    <cisloUctu><![CDATA[".$cisloUctu."]]></cisloUctu>"."\r\n"; fwrite($soubor, $text);
+$kodBanky=$hlavicka->numb;
+if ( $ucet == 0 ) $kodBanky="";
+  $text = "    <kodBanky><![CDATA[".$kodBanky."]]></kodBanky>"."\r\n"; fwrite($soubor, $text);
+
   $text = "   </bankovyUcet>"."\r\n"; fwrite($soubor, $text);
 
 $datum=SKDatum($hlavicka->da2);
