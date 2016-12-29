@@ -947,6 +947,14 @@ echo "Nie je vyplnený <strong>dátum vyhlásenia</strong> daòového priznania.";
 }
 ?>
 </li>
+<li class="orange"> <!-- dopyt, nie je funkèné -->
+<?php if ( $hlavicka->dat > $dat_dat )
+{
+$upozorni6=1;
+echo "<strong>Dátum vyhlásenia</strong> nemôže by vyšší ako aktuálny dátum.";
+}
+?>
+</li>
 <li class="orange">
 <?php if ( ( $hlavicka->zdbo == 0 AND $hlavicka->zpre == 0 AND $hlavicka->zprp == 0 ) AND ( $hlavicka->post == 1 OR $hlavicka->ucet == 1 OR $hlavicka->diban != "" OR $hlavicka->da2 != '0000-00-00' ) )
 {
@@ -960,6 +968,14 @@ echo "V <strong>XI.oddiele nežiadam</strong> o vyplatenie / vrátenie, ale sú vyp
 {
 $upozorni6=1;
 echo "V <strong>XI.oddiele žiadam</strong> o vyplatenie / vrátenie, ale nie je vyplnený <strong>dátum</strong> vyplatenia / vrátenia.";
+}
+?>
+</li>
+<li class="orange"> <!-- dopyt, nie je funkèné -->
+<?php if ( $hlavicka->da2 > $dat_dat )
+{
+$upozorni6=1;
+echo "<strong>Dátum vrátenia</strong> nemôže by vyšší ako aktuálny dátum.";
 }
 ?>
 </li>
