@@ -183,6 +183,7 @@ $hlavicka=mysql_fetch_object($sql);
 
 $obdobie=$kli_vmes;
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$dat_datsql = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 ?>
 
 <?php
@@ -947,8 +948,18 @@ echo "Nie je vyplnenı <strong>dátum vyhlásenia</strong> daòového priznania.";
 }
 ?>
 </li>
-<li class="orange"> <!-- dopyt, nie je funkèné -->
-<?php if ( $hlavicka->dat > $dat_dat )
+<li class="orange">
+<?php
+$wrongdat=1; 
+$sqlico = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdpriznanie_foa WHERE oc = $cislo_oc AND dat <= '$dat_datsql' ");
+  if (@$zaznam=mysql_data_seek($sqlico,0))
+  {
+  $riadico=mysql_fetch_object($sqlico);
+  $ibanx=$riadico->ibanx;
+  $wrongdat=0;
+  }
+
+if ( $wrongdat == 1 )
 {
 $upozorni6=1;
 echo "<strong>Dátum vyhlásenia</strong> nemôe by vyšší ako aktuálny dátum.";
@@ -971,11 +982,21 @@ echo "V <strong>XI.oddiele iadam</strong> o vyplatenie / vrátenie, ale nie je v
 }
 ?>
 </li>
-<li class="orange"> <!-- dopyt, nie je funkèné -->
-<?php if ( $hlavicka->da2 > $dat_dat )
+<li class="orange">
+<?php
+$wrongdat=1; 
+$sqlico = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdpriznanie_foa WHERE oc = $cislo_oc AND da2 <= '$dat_datsql' ");
+  if (@$zaznam=mysql_data_seek($sqlico,0))
+  {
+  $riadico=mysql_fetch_object($sqlico);
+  $ibanx=$riadico->ibanx;
+  $wrongdat=0;
+  }
+
+if ( $wrongdat == 1 )
 {
 $upozorni6=1;
-echo "<strong>Dátum vrátenia</strong> nemôe by vyšší ako aktuálny dátum.";
+echo "<strong>Dátum iadosti o vrátenie</strong> nemôe by vyšší ako aktuálny dátum.";
 }
 ?>
 </li>
