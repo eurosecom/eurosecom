@@ -91,6 +91,6 @@ $sql = "ALTER TABLE F$kli_vxcf"."_zdravpois MODIFY pt3 VARCHAR(35) NOT NULL ";
 $vysledek = mysql_query("$sql");
 
 
-$sql = "CREATE TABLE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm_sepa012016a".$sqlt;
+$sql = "CREATE TABLE ".$mysqldbdatas.".F$vyb_xcfs"."_mzdprm_sepa012017a".$sqlt;
 $vysledek = mysql_query("$sql");
 ?>

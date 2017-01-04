@@ -1648,7 +1648,7 @@ $vysledek = mysql_query("$sql");
 
 
 $pocp=0;
-$poslhh = "SELECT * FROM F".$h_ycf."_ubythostia ";
+$poslhh = "SELECT * FROM ".$databaza."F".$h_ycf."_ubythostia ";
 $posl = mysql_query("$poslhh"); 
 if( $posl ) { $pocp = mysql_num_rows($posl); }
 
@@ -1662,38 +1662,38 @@ echo "Prenos Ubytovania .<br />";
 $sqlt = "DROP TABLE F".$kli_vxcf."_uhot ";
 $vysledok = mysql_query("$sqlt");
 
-$sql = "CREATE TABLE F".$kli_vxcf."_uhot SELECT * FROM F".$h_ycf."_uhot ";
+$sql = "CREATE TABLE F".$kli_vxcf."_uhot SELECT * FROM ".$databaza."F".$h_ycf."_uhot ";
 $vysledek = mysql_query("$sql");
 
 
 $sqlt = "TRUNCATE F".$kli_vxcf."_ubythostia ";
 $vysledok = mysql_query("$sqlt");
 
-$sql = "INSERT INTO F".$kli_vxcf."_ubythostia SELECT * FROM F".$h_ycf."_ubythostia ";
+$sql = "INSERT INTO F".$kli_vxcf."_ubythostia SELECT * FROM ".$databaza."F".$h_ycf."_ubythostia ";
 $vysledek = mysql_query("$sql");
 
 $sqlt = "TRUNCATE F".$kli_vxcf."_ubytdalsihostia ";
 $vysledok = mysql_query("$sqlt");
 
-$sql = "INSERT INTO F".$kli_vxcf."_ubytdalsihostia SELECT * FROM F".$h_ycf."_ubytdalsihostia ";
+$sql = "INSERT INTO F".$kli_vxcf."_ubytdalsihostia SELECT * FROM ".$databaza."F".$h_ycf."_ubytdalsihostia ";
 $vysledek = mysql_query("$sql");
 
 $sqlt = "TRUNCATE F".$kli_vxcf."_ubytcis ";
 $vysledok = mysql_query("$sqlt");
 
-$sql = "INSERT INTO F".$kli_vxcf."_ubytcis SELECT * FROM F".$h_ycf."_ubytcis ";
+$sql = "INSERT INTO F".$kli_vxcf."_ubytcis SELECT * FROM ".$databaza."F".$h_ycf."_ubytcis ";
 $vysledek = mysql_query("$sql");
 
 $sqlt = "TRUNCATE F".$kli_vxcf."_ubytcisudaje ";
 $vysledok = mysql_query("$sqlt");
 
-$sql = "INSERT INTO F".$kli_vxcf."_ubytcisudaje SELECT * FROM F".$h_ycf."_ubytcisudaje ";
+$sql = "INSERT INTO F".$kli_vxcf."_ubytcisudaje SELECT * FROM ".$databaza."F".$h_ycf."_ubytcisudaje ";
 $vysledek = mysql_query("$sql");
 
 $sqlt = "TRUNCATE F".$kli_vxcf."_ubytizby ";
 $vysledok = mysql_query("$sqlt");
 
-$sql = "INSERT INTO F".$kli_vxcf."_ubytizby SELECT * FROM F".$h_ycf."_ubytizby ";
+$sql = "INSERT INTO F".$kli_vxcf."_ubytizby SELECT * FROM ".$databaza."F".$h_ycf."_ubytizby ";
 $vysledek = mysql_query("$sql");
 
 $ddir="../dokumenty/FIR".$kli_vxcf."/obr_izby";
@@ -1724,25 +1724,25 @@ $i=$i+1;
 $sqlt = "TRUNCATE F".$kli_vxcf."_ubytizbapolozky ";
 $vysledok = mysql_query("$sqlt");
 
-$sql = "INSERT INTO F".$kli_vxcf."_ubytizbapolozky SELECT * FROM F".$h_ycf."_ubytizbapolozky ";
+$sql = "INSERT INTO F".$kli_vxcf."_ubytizbapolozky SELECT * FROM ".$databaza."F".$h_ycf."_ubytizbapolozky ";
 $vysledek = mysql_query("$sql");
 
 $sqlt = "TRUNCATE F".$kli_vxcf."_ubytktgtov ";
 $vysledok = mysql_query("$sqlt");
 
-$sql = "INSERT INTO F".$kli_vxcf."_ubytktgtov SELECT * FROM F".$h_ycf."_ubytktgtov ";
+$sql = "INSERT INTO F".$kli_vxcf."_ubytktgtov SELECT * FROM ".$databaza."F".$h_ycf."_ubytktgtov ";
 $vysledek = mysql_query("$sql");
 
 $sqlt = "DROP TABLE F".$kli_vxcf."_ubytdruhubyt ";
 $vysledok = mysql_query("$sqlt");
 
-$sql = "CREATE TABLE F".$kli_vxcf."_ubytdruhubyt SELECT * FROM F".$h_ycf."_ubytdruhubyt ";
+$sql = "CREATE TABLE F".$kli_vxcf."_ubytdruhubyt SELECT * FROM ".$databaza."F".$h_ycf."_ubytdruhubyt ";
 $vysledek = mysql_query("$sql");
 
 $sqlt = "TRUNCATE F".$kli_vxcf."_ubytzamestnanci ";
 $vysledok = mysql_query("$sqlt");
 
-$sql = "INSERT INTO F".$kli_vxcf."_ubytzamestnanci SELECT * FROM F".$h_ycf."_ubytzamestnanci ";
+$sql = "INSERT INTO F".$kli_vxcf."_ubytzamestnanci SELECT * FROM ".$databaza."F".$h_ycf."_ubytzamestnanci ";
 $vysledek = mysql_query("$sql");
 
 
@@ -3605,7 +3605,7 @@ $setprm = include("../mzdy/set2016parametre.php");
 if( $kli_vrok == 2017 )
     {
 $vyb_roks=2017;
-$mysqldbdatas="";
+$mysqldbdatas=$mysqldb;
 $vyb_xcfs=$kli_vxcf;
 $setprm = include("../mzdy/set2017parametre.php");
     }
@@ -3807,6 +3807,7 @@ $sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017pomer_e";
 $vysledek = mysql_query("$sql");
 $sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017pomer_f";
 $vysledek = mysql_query("$sql");
+
 }
 
 $ajdban=0;

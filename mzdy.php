@@ -1082,10 +1082,11 @@ $setprm = include("mzdy/sepa2016.php");
 //uprava sepa od 1.1.2016
 
 //uprava parametrov miezd na aktualny stav od 1.1.2017
-$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_new012017a";
+$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_new012017b";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
+//echo "idem prm17";
 $vyb_roks=$vyb_rok;
 $mysqldbdatas=$mysqldbdata;
 $vyb_xcfs=$vyb_xcf;
@@ -1098,6 +1099,7 @@ $sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_sepa012017a";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
+//echo "idem sepa17";
 $vyb_roks=$vyb_rok;
 $mysqldbdatas=$mysqldbdata;
 $vyb_xcfs=$vyb_xcf;
