@@ -23,7 +23,7 @@ require_once("../pswd/password.php");
   endif;
   mysql_select_db($mysqldb);
 
-$mysqldbfir="";
+$mysqldbfir=$mysqldb;
 if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
           {
 $dtb2 = include("../cis/oddel_dtbm1new.php");
@@ -111,6 +111,17 @@ endif;
 if( $newdelenie == 1 AND $kopiruj == 1 )
           {
 
+if( $mysqldb2016 != $mysqldb2015 AND $mysqldb2015 != '' ) {
+
+$sqlttt=" DROP TABLE `".$mysqldb2015."`.`firuz` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2015."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2015.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
+
+                                   }
+
 if( $mysqldb2016 != $mysqldb2017 AND $mysqldb2017 != '' ) {
 
 $sqlttt=" DROP TABLE `".$mysqldb2017."`.`firuz` "; $sql = mysql_query("$sqlttt");
@@ -119,7 +130,6 @@ $sqlttt=" CREATE TABLE `".$mysqldb2017."`.`firuz` SELECT * FROM `".$mysqldb2016.
 
 $sql = "ALTER TABLE ".$mysqldb2017.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
 $vysledek = mysql_query("$sql");
-
 
                                    }
 

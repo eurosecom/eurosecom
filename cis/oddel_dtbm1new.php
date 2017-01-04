@@ -1,6 +1,6 @@
 <?php
 //../kuch/kuch.php, ../rest.rest.php, ../ubyt/ubyt.php 
-//Nastavenie $mysqldbfir pre fir a nas tabulku to je vzdy main databaza
+//Nastavenie $mysqldbfir pre uzfir, menp a nas tabulku to je vzdy main databaza
 //Nastavenie $mysqldbdata pre ostatne datove tabulky podla roka 
 //echo $dbmain; 
 

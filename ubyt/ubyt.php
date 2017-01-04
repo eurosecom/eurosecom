@@ -76,7 +76,7 @@ $trans = mysql_query($query);
 }
      }
 
-$cit_nas = include("../cis/citaj_nas.php");
+$cit_nas = include("../cis/citaj_nasm.php");
 
 $cook=0;
 if( $cook == 1 )
