@@ -253,9 +253,22 @@ $nacitajpav=1;
 $copern=20;
 
 }
-//koniec copern=200 nacitaj prijmy a vydaje
+//koniec copern=209 nastav sz9 = r35 
 
+//nacitaj prijmy a vydaje
+$nacitajsz9=0;
+if ( $copern == 209 )
+{
+$nacitajsz9=1;
+$copern=20;
 
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
+" sz9=r35 ".
+" WHERE oc >= 0 ";
+$upravene = mysql_query("$uprtxt");
+
+}
+//koniec copern=209 nastav sz9 = r35
 
 //znovu nacitaj
 if ( $copern == 26 ) { $copern=20; }
@@ -3452,6 +3465,10 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
   {
    window.open('../ucto/priznanie_fob2016.php?strana=3&copern=200&drupoh=1&page=1&typ=PDF&dppo=1', '_self');
   }
+  function NacitajSz9()
+  {
+   window.open('../ucto/priznanie_fob2016.php?strana=14&copern=209&drupoh=1&page=14&typ=PDF&dppo=1', '_self');
+  }
   function UpravFO()
   {
    window.open('../cis/ufirdalsie.php?copern=402', '_blank');
@@ -4186,6 +4203,9 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="sz6" id="sz6" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:468px; left:517px;"/>
 <input type="text" name="sz7" id="sz7" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:530px; left:517px;"/>
 <input type="text" name="sz8" id="sz8" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:687px; left:517px;"/>
+
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajSz9();"
+     title="Naèíta zaplatené poistné z riadka è. 35 na strane 2." class="btn-row-tool" style="top:762px; left:800px;">
 <input type="text" name="sz9" id="sz9" onkeyup="CiarkaNaBodku(this);" style="width:177px; top:762px; left:532px;"/>
 <input type="text" name="sz10" id="sz10" onkeyup="CiarkaNaBodku(this);" style="width:177px; top:802px; left:532px;"/>
 <input type="text" name="sz11" id="sz11" onkeyup="CiarkaNaBodku(this);" style="width:177px; top:841px; left:532px;"/>
