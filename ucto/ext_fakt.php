@@ -57,6 +57,16 @@ if( $fir_fico == 36276693 AND $kli_vrok == 2016 )
 exit;
 }
 
+if( $fir_fico == 31416853 AND $kli_vrok != 2017 ) { echo $kli_vrok." ??"; exit; }
+if( $fir_fico == 31416853 AND $kli_vrok == 2017 ) 
+{
+?>
+<script type="text/javascript">
+  var okno = window.open("ext_fakt31416853sys59.php?copern=55&page=1&h_sys=59&h_obdp=<?php echo $h_obdp; ?>&drupoh=1&uprav=1","_self");
+</script>
+<?php
+exit;
+}
 
 //naimportovanie ext.faktur
 if ( $copern == 55 )
