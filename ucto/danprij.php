@@ -464,6 +464,23 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
+//OZNAMENIE UPRAVY ZAKLADU DANE  
+  function TlacOzn176()
+  {
+   window.open('../ucto/oznamenie_uprzd.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function UpravOzn176()
+  {
+   var h_oc = 0;
+   window.open('../ucto/oznamenie_uprzd.php?copern=20&drupoh=1&page=1&strana=5',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function Ozn176doXML()
+  {
+   window.open('../ucto/oznamenie_uprzdxml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 </script>
 </HEAD>
@@ -1423,6 +1440,22 @@ if ( $copern == 1 AND $kli_vduj == 9 )
 <a href="#" onclick="VseobdoXML();" title="export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
 <a href="#" onclick="UpravVseob();" title="Upravi hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div>
+
+
+<div class="line-area"> <!-- podanie ozn176-->
+<div class="toleft line-box"></div>
+<a href="#" onclick="TlacOzn176();" title="Zobrazi v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>Oznámenie o vykonaní úpravy základu dane </strong> 
+</div>
+</div>
+<a href="#" onclick="Ozn176doXML();" title="export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravOzn176();" title="Upravi hodnoty"
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </div>
 
