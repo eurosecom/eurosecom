@@ -1945,10 +1945,10 @@ echo "Riadok 35 zo strany 2 sa musí rovna <strong>riadku 9</strong> v Prílohe 2
 ?>
 </li>
 <li class="orange">
-<?php if ( $hlavicka->psp6 != 0 AND ( $hlavicka->sz12 == 0 OR $hlavicka->sz14 == 0 ) )
+<?php if ( $hlavicka->psp6 != ( $hlavicka->sz12 + $hlavicka->sz14 ) )
 {
 $upozorni14=1;
-echo "Na strane 3 pri vyplnenom riadku preukázate¾né zaplatené poistné musí by vyplnenı <strong>riadok 12 alebo 14</strong> v Prílohe 2 priznania.";
+echo "Hodnota v riadku \"preukázate¾né zaplatené poistné\" na strane 3 sa musí rovna <strong>riadok 12 + 14</strong> v Prílohe 2 priznania.";
 }
 ?>
 </li>

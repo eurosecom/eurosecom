@@ -3769,7 +3769,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="t1v2" id="t1v2" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:279px; left:661px;"/>
 <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajVHpredDanou();"
      title="Naèíta príjmy, vıdavky a zaplatené poistné SP a ZP zo ivnosti do tabu¾ky è.1 (VI.oddiel FOB 3. strana).
-            Musíte ma spracovanı Vıkaz o príjmoch a vıdavkoch za 12.2014" class="btn-row-tool" style="top:280px; left:910px;">
+            Musíte ma spracovanı Vıkaz o príjmoch a vıdavkoch za 12.<?php echo $kli_vrok; ?>" class="btn-row-tool" style="top:280px; left:910px;">
 <input type="text" name="t1p3" id="t1p3" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:318px; left:410px;"/>
 <input type="text" name="t1v3" id="t1v3" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:318px; left:661px;"/>
 <input type="text" name="t1p4" id="t1p4" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:359px; left:410px;"/>
