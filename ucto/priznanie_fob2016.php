@@ -3437,10 +3437,6 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-  function reNacitaj()
-  {
-   window.open('../ucto/priznanie_fob2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0&prepocitaj=1', '_self');
-  }
   function TlacFOB()
   {
    window.open('../ucto/priznanie_fob2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999', '_blank', param);
@@ -3535,8 +3531,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
     <div class="bar-btn-form-tool">
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
      <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="Naèíta údaje z minulého roka" class="btn-form-tool">
-     <img src="../obr/ikony/reload_blue_icon.png" onclick="reNacitaj();" title="Znovu naèíta hodnoty do priznania" class="btn-form-tool">
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick="FOBdoXML();" title="Export do XML" class="btn-form-tool"> 
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="FOBdoXML();" title="Export do XML" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacFOB();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
    </td>

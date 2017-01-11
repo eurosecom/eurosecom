@@ -196,7 +196,7 @@ $hlavicka=mysql_fetch_object($sql);
 
 $obdobie=$kli_vmes;
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-
+$dat_datsql = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
 if ( $j == 0 )
      {
@@ -1835,6 +1835,23 @@ echo "Nie je vyplnenı <strong>dátum vyhlásenia</strong> daòového priznania.";
 ?>
 </li>
 <li class="orange">
+<?php
+$wrongdat=1;
+$sqlico = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob WHERE dat <= '$dat_datsql' ");
+  if (@$zaznam=mysql_data_seek($sqlico,0))
+  {
+  $riadico=mysql_fetch_object($sqlico);
+  $ibanx=$riadico->ibanx;
+  $wrongdat=0;
+  }
+if ( $wrongdat == 1 )
+{
+$upozorni12=1;
+echo "<strong>Dátum vyhlásenia</strong> nemôe by vyšší ako aktuálny dátum.";
+}
+?>
+</li>
+<li class="orange">
 <?php if ( ( $hlavicka->zdbo == 0 AND $hlavicka->zpre == 0 ) AND ( $hlavicka->post == 1 OR $hlavicka->ucet == 1 OR $hlavicka->diban != "" OR $hlavicka->da2 != '0000-00-00' ) )
 {
 $upozorni12=1;
@@ -1851,23 +1868,103 @@ echo "V <strong>XIV.oddiele iadam</strong> o vyplatenie / vrátenie, ale nie je 
 ?>
 </li>
 <li class="orange">
+<?php
+$wrongdat=1;
+$sqlico = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob WHERE da2 <= '$dat_datsql' ");
+  if (@$zaznam=mysql_data_seek($sqlico,0))
+  {
+  $riadico=mysql_fetch_object($sqlico);
+  $ibanx=$riadico->ibanx;
+  $wrongdat=0;
+  }
+if ( $wrongdat == 1 )
+{
+$upozorni12=1;
+echo "<strong>Dátum iadosti o vrátenie</strong> nemôe by vyšší ako aktuálny dátum.";
+}
+?>
+</li>
+<li class="orange">
+<?php
+$wrongdat=1;
+$sqlico = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob WHERE dat <= '$dat_datsql' ");
+  if (@$zaznam=mysql_data_seek($sqlico,0))
+  {
+  $riadico=mysql_fetch_object($sqlico);
+  $ibanx=$riadico->ibanx;
+  $wrongdat=0;
+  }
+if ( $wrongdat == 1 )
+{
+$upozorni12=1;
+echo "<strong>Dátum iadosti o vrátenie</strong> nemôe by vyšší ako aktuálny dátum.";
+}
+?>
+</li>
+<li class="orange">
 <?php if ( ( $hlavicka->zdbo == 1 OR $hlavicka->zpre == 1 ) AND $hlavicka->ucet == 1 AND $hlavicka->diban == "" ) {
 $upozorni6=1;
 echo "V <strong>XIV.oddiele iadam</strong> o vyplatenie / vrátenie na úèet, ale nie je vyplnenı <strong>IBAN</strong> úètu na vyplatenie / vrátenie.";
 } ?>
 </li>
 </ul>
+
+<ul id="alertpage14" style="display:none;">
+<li class="header-section">STRANA 14 - PRÍLOHA 2</li>
+<li class="orange">
+<?php
+$wrongdat=1;
+$sqlico = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob WHERE szdat <= '$dat_datsql' ");
+  if (@$zaznam=mysql_data_seek($sqlico,0))
+  {
+  $riadico=mysql_fetch_object($sqlico);
+  $ibanx=$riadico->ibanx;
+  $wrongdat=0;
+  }
+if ( $wrongdat == 1 )
+{
+$upozorni14=1;
+echo "<strong>Dátum v prílohe 2</strong> nemôe by vyšší ako aktuálny dátum.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->sz9 != 0 AND $hlavicka->szdat == '0000-00-00' )
+{
+$upozorni14=1;
+echo "Je vyplnenı riadok 9, ale chıba vyplnenı <strong>dátum</strong>.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->r35 != $hlavicka->sz9 )
+{
+$upozorni14=1;
+echo "Riadok 35 zo strany 2 sa musí rovna <strong>riadku 9</strong> v Prílohe 2 priznania.";
+}
+?>
+</li>
+<li class="orange">
+<?php if ( $hlavicka->psp6 != 0 AND ( $hlavicka->sz12 == 0 OR $hlavicka->sz14 == 0 ) )
+{
+$upozorni14=1;
+echo "Na strane 3 pri vyplnenom riadku preukázate¾né zaplatené poistné musí by vyplnenı <strong>riadok 12 alebo 14</strong> v Prílohe 2 priznania.";
+}
+?>
+</li>
+</ul>
 </div> <!-- #upozornenie -->
 
 <script type="text/javascript">
 <?php
-if ( $upozorni1 == 1 OR $upozorni2 == 1 OR $upozorni10 == 1 OR $upozorni11 == 1 OR $upozorni12 == 1 )
+if ( $upozorni1 == 1 OR $upozorni2 == 1 OR $upozorni10 == 1 OR $upozorni11 == 1 OR $upozorni12 == 1 OR $upozorni14 == 1 )
      { echo "upozornenie.style.display='block';"; }
 if ( $upozorni1 == 1 ) { echo "alertpage1.style.display='block';"; } 
 if ( $upozorni2 == 1 ) { echo "alertpage2.style.display='block';"; } 
 if ( $upozorni10 == 1 ) { echo "alertpage10.style.display='block';"; }
 if ( $upozorni11 == 1 ) { echo "alertpage11.style.display='block';"; }
 if ( $upozorni12 == 1 ) { echo "alertpage12.style.display='block';"; }
+if ( $upozorni14 == 1 ) { echo "alertpage14.style.display='block';"; }
 ?>
 </script>
 
