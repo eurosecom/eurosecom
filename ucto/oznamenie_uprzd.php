@@ -76,7 +76,7 @@ $sqldok = mysql_query("$sqlttt");
  $cislo_cpl=$riaddok->cpl;
  }
 $copern=20;
-$strana=2;
+$strana=3;
 $zoznamaut=0;
 $_REQUEST['cislo_cpl']=$cislo_cpl;
     }
@@ -137,6 +137,16 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctoznamenie_uprzd SET ".
 
                     }
 
+if ( $strana == 3 ) {
+
+$rdc3 = strip_tags($_REQUEST['rdc3']);
+
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctoznamenie_uprzd SET ".
+" rdc3='$rdc3' ".
+" WHERE oc = 9999 ";
+
+                    }
 
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
@@ -222,6 +232,11 @@ $rdc3 = $fir_riadok->rdc3;
 
                     }
 
+if ( $strana == 3 ) {
+
+$rdc3 = $fir_riadok->rdc3;
+
+                    }
 
 mysql_free_result($fir_vysledok);
      }
@@ -444,6 +459,11 @@ div.input-echo {
 
 <?php                                        } ?>
 
+<?php if ( $strana == 3 OR $strana == 9999 ) { ?>
+
+   document.formv1.rdc3.value = '<?php echo "$rdc3";?>';
+
+<?php                                        } ?>
 
    }
 <?php
@@ -585,6 +605,17 @@ $source="../ucto/oznamenie_uprzd.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subo
 <?php                                        } ?>
 
 
+<?php if ( $strana == 3 OR $strana == 9999 ) { ?>
+<img src="../dokumenty/dan_z_prijmov2016/ozn176v16/ozn176_v16_str1.jpg"
+     alt="tlaèivo Daò z motorových vozidiel pre rok 2015 2.strana 380kB" class="form-background">
+<span class="text-echo" style="top:75px; left:406px;"><?php echo $fir_fdic;?></span>
+
+
+<input type="text" name="d3prie" id="d3prie" style="width:359px; top:100px; left:51px;"/>
+
+<?php                                        } ?>
+
+
 <?php if ( $strana == 5 OR $strana == 9999 ) {
 //VYPIS ZOZNAMU 
 $sluztt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 1 ORDER BY ico ";
@@ -602,12 +633,12 @@ $slpol = mysql_num_rows($sluz);
  <td style="width:9%;"></td><td style="width:12%;"></td>
 </tr>
 <tr>
- <th rowspan="2">ièo</th>
- <th rowspan="2">diè</th>
- <th rowspan="2">názov</th>
+ <th>ièo</th>
+ <th>diè</th>
+ <th>názov</th>
  <th>ulica</th>
  <th>mesto</th>
- <th colspan="2">suma</th>
+ <th>suma</th>
 </tr>
 <?php
 $i=0;
@@ -625,6 +656,12 @@ $cisloi=$i+1;
  <td align="center"><?php echo $uli; ?></td>
  <td align="center"><?php echo $mes; ?></td>
  <td align="right" style="">x<?php echo $rsluz->suma; ?></td>
+<td align="center">
+  <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl; ?>);"
+       title="Upravi">&nbsp;&nbsp;&nbsp;
+  <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl; ?>, '<?php echo $rsluz->vzspz; ?>');"
+       title="Vymaza">
+ </td>
 </tr>
 <?php
  }
