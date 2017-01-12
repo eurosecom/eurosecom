@@ -290,6 +290,7 @@ if( $hlavicka->oprav == 1 ) { $opravx="1"; }
   $hodnota=iconv("CP1250", "UTF-8", $hlavicka->zmes);
   $text = "   <obec><![CDATA[".$hodnota."]]></obec> "."\r\n"; fwrite($soubor, $text);
   $hodnota=iconv("CP1250", "UTF-8", $hlavicka->zpsc);
+  $hodnota = str_replace(" ","",$hodnota);
   $text = "   <psc><![CDATA[".$hodnota."]]></psc> "."\r\n"; fwrite($soubor, $text);
   $hodnota=iconv("CP1250", "UTF-8", "SK");
   $text = "   <stat><![CDATA[".$hodnota."]]></stat> "."\r\n"; fwrite($soubor, $text);
