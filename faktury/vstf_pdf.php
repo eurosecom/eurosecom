@@ -853,6 +853,57 @@ $pdf->Cell(180,1," ","T",1,"L");
 //$pdf->SetY(92);
 $pdf->Cell(180,4,"$bankovespojenie","0",1,"L");
 
+//fir_uc1fk az fir_uc3fk z _fakodbucb ak existuje
+if( $mini == 0 AND $drupoh == 1 )
+    {
+
+$jeodbucb=0;
+$sqlttu = "SELECT * FROM F$kli_vxcf"."_fakodbucb WHERE dok = $hlavicka->dok ";
+$sqldou = mysql_query("$sqlttu");
+  if (@$zaznam=mysql_data_seek($sqldou,0))
+  {
+  $riaddou=mysql_fetch_object($sqldou);
+  $jeodbucb=1;
+  }
+
+if( $jeodbucb == 0 )
+          {
+
+$sqltdef = <<<prsaldo
+(
+   dok         DECIMAL(10,0),
+   u1f         DECIMAL(2,0),
+   u2f         DECIMAL(2,0),
+   u3f         DECIMAL(2,0)
+);
+prsaldo;
+
+$vsql = "CREATE TABLE F".$kli_vxcf."_fakodbucb ".$sqltdef;
+$vytvor = mysql_query("$vsql");
+
+$vsql = "INSERT INTO F".$kli_vxcf."_fakodbucb ( dok, u1f, u2f, u3f ) VALUES ('$hlavicka->dok', '$fir_uc1fk', '$fir_uc2fk', '$fir_uc3fk') ";
+$vytvor = mysql_query("$vsql");
+
+          }
+
+
+$sqlttu = "SELECT * FROM F$kli_vxcf"."_fakodbucb WHERE dok = $hlavicka->dok ";
+$sqldou = mysql_query("$sqlttu");
+  if (@$zaznam=mysql_data_seek($sqldou,0))
+  {
+  $riaddou=mysql_fetch_object($sqldou);
+  $fir_uc1fk=$riaddou->u1f;
+  $fir_uc2fk=$riaddou->u2f;
+  $fir_uc3fk=$riaddou->u3f;
+  }
+
+//echo $jeodbucb;
+//exit;
+
+    }
+//koniec fir_uc1fk az fir_uc3fk z _fakodbucb ak existuje
+if( $fir_uc1fk == 0 AND $fir_uc2fk == 0 AND $fir_uc3fk == 0 ) { $fir_uc1fk=1; }
+
 $pdf->SetFont('arial','',9);
 if( $fir_uc1fk == 1 )
 {
