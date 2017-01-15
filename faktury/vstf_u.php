@@ -4795,7 +4795,51 @@ window.open('vyvoz_setulozx.php?cislo_dok=' + doklad + '&h_ucm1=' + ucm1 + '&h_u
 <?php
 if ( $copern == 7 AND ( $drupoh == 1 OR $drupoh == 42 ) AND $sysx != 'UCT' )
      {
-//nastavenie parametrov faktury
+//nastavenie parametrov faktury a bankovych uctov pre fakturu
+
+$jeodbucb=0;
+$sqlttu = "SELECT * FROM F$kli_vxcf"."_fakodbucb WHERE dok = $cislo_dok ";
+$sqldou = mysql_query("$sqlttu");
+  if (@$zaznam=mysql_data_seek($sqldou,0))
+  {
+  $riaddou=mysql_fetch_object($sqldou);
+  $jeodbucb=1;
+  }
+
+if( $jeodbucb == 0 )
+          {
+
+$sqltdef = <<<prsaldo
+(
+   dok         DECIMAL(10,0),
+   u1f         DECIMAL(2,0),
+   u2f         DECIMAL(2,0),
+   u3f         DECIMAL(2,0)
+);
+prsaldo;
+
+$vsql = "CREATE TABLE F".$kli_vxcf."_fakodbucb ".$sqltdef;
+$vytvor = mysql_query("$vsql");
+
+$vsql = "INSERT INTO F".$kli_vxcf."_fakodbucb ( dok, u1f, u2f, u3f ) VALUES ('$cislo_dok', '$fir_uc1fk', '$fir_uc2fk', '$fir_uc3fk') ";
+$vytvor = mysql_query("$vsql");
+
+          }
+
+
+$sqlttu = "SELECT * FROM F$kli_vxcf"."_fakodbucb WHERE dok = $cislo_dok ";
+$sqldou = mysql_query("$sqlttu");
+  if (@$zaznam=mysql_data_seek($sqldou,0))
+  {
+  $riaddou=mysql_fetch_object($sqldou);
+  $fir_uc1fk=$riaddou->u1f;
+  $fir_uc2fk=$riaddou->u2f;
+  $fir_uc3fk=$riaddou->u3f;
+  }
+
+
+//koniec fir_uc1fk az fir_uc3fk z _fakodbucb ak existuje
+
 ?>
 <div id="nastavfakx" style="cursor: hand; display: none; position: absolute; z-index: 500; top: 300px; left: 10px; width:600px; height:100px;">
 <table  class='ponuka' width='100%'>
@@ -4834,6 +4878,16 @@ Z¾ava % <input type='text' name='h_ico5' id='h_ico5' size='4' maxlenght='4' valu
  | zahranièná faktúra <input type='checkbox' name='odl' value='1' > </td></tr>
 <tr><td class='ponuka' colspan='5'> | Text za (pred rozpisom DPH) <input type='checkbox' name='pmd' value='1' > 
 </td></tr> 
+<?php
+$fir_uc1xx=substr($fir_fib1,0,8);
+$fir_uc2xx=substr($fir_fib2,0,8);
+$fir_uc3xx=substr($fir_fib3,0,8);
+?>
+<tr><td class='ponuka' colspan='5'> banka uèet 1 <input type='checkbox' name='u1f' value='1' > <?php echo $fir_uc1xx; ?>...
+ | uèet 2 <input type='checkbox' name='u2f' value='1' > <?php echo $fir_uc2xx; ?>... 
+ | uèet 3 <input type='checkbox' name='u3f' value='1' > <?php echo $fir_uc3xx; ?>...</td>
+</tr> 
+
 </FORM></table>
 </div>
 <script type="text/javascript">
@@ -4876,8 +4930,14 @@ var pmd = 0;
 if( document.enast.pmd.checked ) pmd=1;
 var pdl = 0;
 if( document.enast.pdl.checked ) pdl=1;
+var u1f = 0;
+if( document.enast.u1f.checked ) u1f=1;
+var u2f = 0;
+if( document.enast.u2f.checked ) u2f=1;
+var u3f = 0;
+if( document.enast.u3f.checked ) u3f=1;
 
-window.open('fak_setuloz.php?drupoh=<?php echo $drupoh; ?>&cislo_dok=' + doklad + '&h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&premenna=' + premenna + '&copern=900', '_self' );
+window.open('fak_setuloz.php?drupoh=<?php echo $drupoh; ?>&u1f=' + u1f + '&u2f=' + u2f + '&u3f=' + u3f + '&cislo_dok=' + doklad + '&h_ucm1=' + ucm1 + '&h_ucm2=' + ucm2 + '&h_ucm3=' + ucm3 + '&h_ucm4=' + ucm4 + '&h_ucm5=' + ucm5 + '&h_ico1=' + ico1 + '&h_ico2=' + ico2 + '&h_ico3=' + ico3 + '&h_ico4=' + ico4 + '&h_ico5=' + ico5 + '&zmd=' + zmd + '&zdl=' + zdl + '&omd=' + omd + '&odl=' + odl + '&pmd=' + pmd + '&pdl=' + pdl + '&premenna=' + premenna + '&copern=900', '_self' );
                 }
 
 //zlava
@@ -7529,7 +7589,7 @@ if ( $copern == 7 AND ( $drupoh == 1 OR $drupoh == 42 ) AND $sysx != 'UCT' )
 <img src='../obr/import.png' width=15 height=15 border=0 alt="Naèíta položky faktúry z CSV cis;nat;dph;cep;ced;mno;mer" title="Naèíta položky faktúry z CSV cis;nat;dph;cep;ced;mno;mer" ></a>
 &nbsp&nbsp&nbsp
 <?php                    } ?>
-<img src='../obr/naradie.png' onClick="nastavfakx.style.display=''; volajFakset(<?php echo $kli_uzid;?>);" width=15 height=15 border=0 title="Nastavi parametre faktúry" ></a>
+<img src='../obr/naradie.png' onClick="nastavfakx.style.display=''; volajFakset(<?php echo $kli_uzid;?>, <?php echo $cislo_dok;?>);" width=15 height=15 border=0 title="Nastavi parametre faktúry" ></a>
 <?php if( $drupoh == 1 ) { ?>
 &nbsp&nbsp&nbsp
 <img src='../obr/auta/auto3.jpg' onClick="nastavpex.style.display=''; volajVyvozsetx(<?php echo $kli_uzid;?>);" width=20 height=15 border=0 title="Vytlaèi potvrdenie o vývoze tovaru" ></a>
