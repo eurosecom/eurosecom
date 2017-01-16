@@ -41,9 +41,9 @@ if( $fir_fico == 46614478 ) { $opakujinput=0; }
 
 if( $fir_fico == '46614478' )
   {
-$sqlttt = "ALTER TABLE F".$kli_vxcf."_dodavobj MODIFY xcep decimal(10,4) DEFAULT 0 "; 
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_dodavobj MODIFY xcep decimal(10,4) DEFAULT 0 ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "ALTER TABLE F".$kli_vxcf."_dodavobj MODIFY xced decimal(10,4) DEFAULT 0 "; 
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_dodavobj MODIFY xced decimal(10,4) DEFAULT 0 ";
 $sqldok = mysql_query("$sqlttt");
   }
 
@@ -77,7 +77,7 @@ if( $copern == 191919 )
 $cislo_dok = 1*$_REQUEST['cislo_dok'];
 $akeico = 1*$_REQUEST['akeico'];
 
-$sqltt2 = "SELECT * FROM F$kli_vxcf"."_dodavobj WHERE xdok = $cislo_dok AND xsx2 = 9 "; 
+$sqltt2 = "SELECT * FROM F$kli_vxcf"."_dodavobj WHERE xdok = $cislo_dok AND xsx2 = 9 ";
 $sqldo2 = mysql_query("$sqltt2");
  if (@$zaznam=mysql_data_seek($sqldo2,0))
  {
@@ -106,15 +106,15 @@ while ($i <= $cpol )
   $riadok=mysql_fetch_object($sql);
 
 
-//`f93_sklprcdminzas38` 
+//`f93_sklprcdminzas38`
 //druh	pox1	pox	ume	dat	skl	cis	ddv	mno	cen	zas	hod	vdj	prj	pcs
 
 //dodavobj
-//xdok	xdatd	xdatv	xfak	xsx1	xsx2	xsx3	xdx1	xdx2	xdx3	xice	xodbm	xcpo	xcpl	
+//xdok	xdatd	xdatv	xfak	xsx1	xsx2	xsx3	xdx1	xdx2	xdx3	xice	xodbm	xcpo	xcpl
 //xcis	xnat	xdph	xcep	xced	xmno	xhdb	xhdd	xid	xdatm	xplat	xfir	xodm	xdop	xstav
 
 $cisnaz="";
-$sqltt2 = "SELECT * FROM F$kli_vxcf"."_sklcis WHERE cis = $riadok->cis "; 
+$sqltt2 = "SELECT * FROM F$kli_vxcf"."_sklcis WHERE cis = $riadok->cis ";
 $sqldo2 = mysql_query("$sqltt2");
  if (@$zaznam=mysql_data_seek($sqldo2,0))
  {
@@ -124,7 +124,7 @@ $sqldo2 = mysql_query("$sqltt2");
  }
 
 $ciscen=0; $prodnum="";
-$sqltt2 = "SELECT * FROM F$kli_vxcf"."_sklcisudaje WHERE xcis = $riadok->cis "; 
+$sqltt2 = "SELECT * FROM F$kli_vxcf"."_sklcisudaje WHERE xcis = $riadok->cis ";
 $sqldo2 = mysql_query("$sqltt2");
  if (@$zaznam=mysql_data_seek($sqldo2,0))
  {
@@ -134,16 +134,16 @@ $sqldo2 = mysql_query("$sqltt2");
 
  }
 
-$cenax=$riadok->cen; 
-if( $fir_fico == 46614478 ) 
+$cenax=$riadok->cen;
+if( $fir_fico == 46614478 )
 {
 $cenax=$ciscen;
 if( $prodnum != "" AND $prodnum != 0 ) { $cisnaz="ProdNm ".$prodnum." ".$cisnaz; }
-} 
+}
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_dodavobj ( xdatd, xdatv, xstav, xdok, xfak, xice, xodbm, xsx3, xcis, xnat, xid, xdatm, xmno, xdph, xcep, xced, xhdb, xhdd ) ".
 " VALUES ( '$xdatd', '$xdatv', '$xstav', '$cislo_dok', '0', '$akeico', '0', '0', '$riadok->cis', '$cisnaz', '$kli_uzid', now(), '$riadok->vdj', '20', '$cenax', '0', '0', '0'  ) ";
-$dsql = mysql_query("$dsqlt"); 
+$dsql = mysql_query("$dsqlt");
 //echo $dsqlt."<br />";
 
     }
@@ -152,7 +152,7 @@ $i=$i+1;
 
 
 $dsqlt = "UPDATE F$kli_vxcf"."_dodavobj SET xced=xcep, xhdb=xmno*xcep, xhdd=xmno*xced WHERE xdok = $cislo_dok ";
-$dsql = mysql_query("$dsqlt"); 
+$dsql = mysql_query("$dsqlt");
 
 $html=1;
 $copern=2;
@@ -168,7 +168,7 @@ $cislo_dok=1*$_REQUEST['cislo_dok'];
 $h_fak=1*$_REQUEST['h_fak'];
 
 $dsqlt = "UPDATE F$kli_vxcf"."_dodavobj SET xfak='$h_fak' WHERE xdok = $cislo_dok ";
-$dsql = mysql_query("$dsqlt"); 
+$dsql = mysql_query("$dsqlt");
 //echo $dsqlt;
 
 ?>
@@ -185,7 +185,7 @@ if( $copern == 7701 )
 $cislo_dok=1*$_REQUEST['cislo_dok'];
 
 $fir_ficox=$fir_fico;
-$sqlttt = "SELECT * FROM F$kli_vxcf"."_dodavobj WHERE xdok = $cislo_dok ORDER BY xdok DESC LIMIT 1"; 
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_dodavobj WHERE xdok = $cislo_dok ORDER BY xdok DESC LIMIT 1";
 $sqldok = mysql_query("$sqlttt");
  if (@$zaznam=mysql_data_seek($sqldok,0))
  {
@@ -208,13 +208,13 @@ $fir_vysledok = mysql_query($sqlfir);
 if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); $xeid = 1*$fir_riadok->ez_id; }
 if( $xeid > 0 ) { $kli_uzidxx=$xeid; }
 
-//xdok  xfak  xsx1  xsx2  xsx3  xdx1  xdx2  xdx3  xice  xodbm  xcpo  xcpl  xcis  xnat  xdph  xcep  xced  xmno  xhdb  xhdd  xid  xdatm  
+//xdok  xfak  xsx1  xsx2  xsx3  xdx1  xdx2  xdx3  xice  xodbm  xcpo  xcpl  xcis  xnat  xdph  xcep  xced  xmno  xhdb  xhdd  xid  xdatm
 $xsx3=0;
 if( $cisplu == 0 ) { $xsx3=1; }
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_dodavobj ( xdok, xfak, xice, xodbm, xsx3, xcis, xnat, xid, xdatm, xmno, xdph, xcep, xced, xhdb, xhdd ) ".
 " VALUES ( $cislo_dok, 0, '$fir_ficox', 0, '$xsx3', '$cisplu', '$popisplu', $kli_uzidxx, now(), '$mnoplu', '$dphplu', '$cepplu', '$cedplu', '$hdb', '$hdd'  ) ";
-$dsql = mysql_query("$dsqlt"); 
+$dsql = mysql_query("$dsqlt");
 //echo $dsqlt;
 
 $html=1;
@@ -252,7 +252,7 @@ $setico=1*$_REQUEST['h_icoset'];
 $setobdm=1*$_REQUEST['h_odbmset'];
 $cislo_dok = 1*$_REQUEST['cislo_dok'];
 
-$sqlttt = "UPDATE F$kli_vxcf"."_dodavobj SET xice=$setico, xodbm=$setobdm WHERE xdok = $cislo_dok "; 
+$sqlttt = "UPDATE F$kli_vxcf"."_dodavobj SET xice=$setico, xodbm=$setobdm WHERE xdok = $cislo_dok ";
 $sqldok = mysql_query("$sqlttt");
 
 //echo $sqlttt;
@@ -326,9 +326,9 @@ $xstav = strip_tags($_REQUEST['xstav']);
 
 $uprav="NO";
 $uprtxt = "UPDATE F$kli_vxcf"."_dodavobj SET ".
-" xdatv='$xdatvsql', xdatd='$xdatdsql', xplat='$xplat', xice='$xice', xfir='$xfir', xodm='$xodm', xdop='$xdop', xstav='$xstav' ". 
+" xdatv='$xdatvsql', xdatd='$xdatdsql', xplat='$xplat', xice='$xice', xfir='$xfir', xodm='$xodm', xdop='$xdop', xstav='$xstav' ".
 " WHERE xdok = $cislo_dok ";
-$upravene = mysql_query("$uprtxt");  
+$upravene = mysql_query("$uprtxt");
 //echo $uprtxt;
 $copern=2;
 if (!$upravene):
@@ -340,7 +340,7 @@ if ($upravene):
 $uprav="OK";
 endif;
     }
-//koniec zapisu upravenu hlavicku 
+//koniec zapisu upravenu hlavicku
 
 
 //zapis upravenu polozku
@@ -353,7 +353,7 @@ $xced = strip_tags($_REQUEST['xced']);
 $xmno = strip_tags($_REQUEST['xmno']);
 $xhdd = strip_tags($_REQUEST['xhdd']);
 
-$sqlttt = "SELECT * FROM F$kli_vxcf"."_dodavobj WHERE xdok = $cislo_dok ORDER BY xdok DESC LIMIT 1"; 
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_dodavobj WHERE xdok = $cislo_dok ORDER BY xdok DESC LIMIT 1";
 $sqldok = mysql_query("$sqlttt");
  if (@$zaznam=mysql_data_seek($sqldok,0))
  {
@@ -366,11 +366,11 @@ $sqldok = mysql_query("$sqlttt");
  $xplat=$riaddok->xplat;
  }
 
-$kli_uzidxx=$kli_uzid; 
+$kli_uzidxx=$kli_uzid;
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_dodavobj ( xdok, xdatv, xdatd, xice,  xsx2, xsx3, xcis, xnat, xced, xmno, xdop, xstav, xplat, xid, xdatm, xhdd ) ".
 " VALUES ( $cislo_dok, '$xdatv', '$xdatd', '$xice', 0, 0, '$xcis', '$xnat', '$xced', '$xmno', '$xdop', '$xstav', '$xplat', $kli_uzidxx, now(), ($xmno*$xced) ) ";
-$dsql = mysql_query("$dsqlt"); 
+$dsql = mysql_query("$dsqlt");
 
 //echo $dsqlt;
 $copern=2;
@@ -383,14 +383,14 @@ if ($upravene):
 $uprav="OK";
 endif;
     }
-//koniec zapisu upravenu polozku 
+//koniec zapisu upravenu polozku
 
 //nacitaj udaje
 if ( $copern == 1 OR $copern == 2 )
     {
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_dodavobj WHERE xdok = $cislo_dok ORDER BY xcpo DESC";
 $fir_vysledok = mysql_query($sqlfir);
-$fir_riadok=mysql_fetch_object($fir_vysledok);    
+$fir_riadok=mysql_fetch_object($fir_vysledok);
 
 //echo $sqlfir;
 
@@ -415,7 +415,7 @@ mysql_free_result($fir_vysledok);
 
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $xice ";
 $fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); 
+if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok);
 
 $ico = $fir_riadok->ico; $dic = $fir_riadok->dic; $icd = $fir_riadok->icd;
 $nai = $fir_riadok->nai; $na2 = $fir_riadok->na2; $uli = $fir_riadok->uli;
@@ -424,10 +424,10 @@ $psc = $fir_riadok->psc; $mes = $fir_riadok->mes; $tel = $fir_riadok->tel; $fax 
 
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_icoodbm WHERE ico = $xice AND odbm = $xodbm ";
 $fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); 
+if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok);
 
 $onai = $fir_riadok->onai; $ona2 = $fir_riadok->ona2; $ouli = $fir_riadok->ouli;
-$opsc = $fir_riadok->opsc; $omes = $fir_riadok->omes; 
+$opsc = $fir_riadok->opsc; $omes = $fir_riadok->omes;
 }
     }
 //koniec nacitania
@@ -579,7 +579,7 @@ a.btn-prepni {
   text-decoration: none;
   color: white;
   padding: 4px 15px;
-  background-color: #ABD159;  
+  background-color: #ABD159;
   border: 1px solid #86A83D;
 }
 a.btn-prephead {
@@ -669,9 +669,16 @@ var sirkawin = screen.width-10;
 var vyskawin = screen.height-175;
 var vyskawic = screen.height;
 var sirkawic = screen.width-10;
-    
+
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
+  }
+
+
 <?php  if( $zmtz == 1 ) { ?>
-   
+
 
 function ZmazPolozku(plu, dok)
                 {
@@ -879,10 +886,10 @@ function CiarkaNaBodku(Vstup, e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k != 13 ){
-Vstup.value=Vstup.value.replace(",","."); 
+Vstup.value=Vstup.value.replace(",",".");
               }
     }
-                
+
 </script>
 
 <script type="text/javascript" src="spr_ico_xml.js"></script>
@@ -893,7 +900,7 @@ Vstup.value=Vstup.value.replace(",",".");
 <?php
 //uprava hlavicka
   if ( $copern == 1 )
-  { 
+  {
 ?>
     function ObnovUI()
     {
@@ -904,7 +911,7 @@ Vstup.value=Vstup.value.replace(",",".");
     document.formv1.xfir.value = '<?php echo "$nai";?>';
     document.formv1.xdop.value = '<?php echo "$xdop";?>';
     document.formv1.xstav.value = '<?php echo "$xstav";?>';
-    document.formv1.uloz.disabled = true;    
+    document.formv1.uloz.disabled = true;
     document.formv1.xdatv.focus();
     document.formv1.xdatv.select();
 
@@ -917,7 +924,7 @@ Vstup.value=Vstup.value.replace(",",".");
 <?php
 //uprava polozky
   if ( $copern == 2 )
-  { 
+  {
 ?>
     function ObnovUI()
     {
@@ -948,7 +955,7 @@ Vstup.value=Vstup.value.replace(",",".");
     document.formv1.xnat.focus();
     document.formv1.xnat.select();
 <?php                          } ?>
-    
+
     }
 
 function NacitajMin(dok, ico)
@@ -1033,13 +1040,13 @@ $vytvor = mysql_query("$vsql");
 
 if( $fir_fico == '46614478' )
   {
-$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcx$kli_uzid MODIFY xced decimal(10,4) DEFAULT 0 "; 
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcx$kli_uzid MODIFY xced decimal(10,4) DEFAULT 0 ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcu$kli_uzid MODIFY xced decimal(10,4) DEFAULT 0 "; 
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcu$kli_uzid MODIFY xced decimal(10,4) DEFAULT 0 ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcx$kli_uzid MODIFY xced decimal(10,4) DEFAULT 0 "; 
+$sqlttt = "ALTER TABLE F".$kli_vxcf."_mzdprcx$kli_uzid MODIFY xced decimal(10,4) DEFAULT 0 ";
 $sqldok = mysql_query("$sqlttt");
   }
 
@@ -1106,7 +1113,7 @@ $tov = mysql_query("$sqltt");
 $tvpol = mysql_num_rows($tov);
 
 $strana=0;
-$j=0;           
+$j=0;
 $i=0;
   while ($i <= $tvpol )
   {
@@ -1204,7 +1211,7 @@ echo $poznx." ...";
 </tr>
 </FORM>
 <?php
-//koniec hlavicka vyplnatelna copern=1   
+//koniec hlavicka vyplnatelna copern=1
      }
 ?>
 
@@ -1271,7 +1278,7 @@ echo $poznx." ...";
  <td colspan="5" style="height:2px;" ></td>
 </tr>
 <?php
-//koniec hlavicka vypis copern=2   
+//koniec hlavicka vypis copern=2
      }
 ?>
 </tbody>
@@ -1337,14 +1344,14 @@ if ( $copern == 2 )
  </th>
  <th></th>
  <th class="center">
-  <input type="text" name="xced" id="xced" onKeyDown="return xCedEnter(event.which)" style="width:70px;"/>
+  <input type="text" name="xced" id="xced" onkeyup="CiarkaNaBodku(this);" onKeyDown="return xCedEnter(event.which)" style="width:70px;"/>
  </th>
  <th class="center">
-  <input type="text" name="xmno" id="xmno" onKeyDown="return xMnoEnter(event.which)" style="width:60px;"/>
+  <input type="text" name="xmno" id="xmno" onkeyup="CiarkaNaBodku(this);" onKeyDown="return xMnoEnter(event.which)" style="width:60px;"/>
  </th>
  <th></th>
  <th class="center">
-  <input type="text" name="xhdd" id="xhdd" style="width:70px;" onKeyDown="return xHddEnter(event.which)"/>
+  <input type="text" name="xhdd" id="xhdd" style="width:70px;" onkeyup="CiarkaNaBodku(this);" onKeyDown="return xHddEnter(event.which)"/>
  </th>
  <th></th>
 </tr>
@@ -1381,7 +1388,7 @@ if ( $riadok->pox == 1 AND $riadok->xsx2 == 0 )
  <td class="center"><?php echo $riadok->xdph; ?></td>
  <td class="right"><?php echo $riadok->xced; ?>&nbsp;</td>
  <td class="right"><?php echo $riadok->xmno; ?>&nbsp;</td>
- <td class="center"><?php echo $riadok->mer; ?></td> 
+ <td class="center"><?php echo $riadok->mer; ?></td>
  <td class="right"><?php echo $riadok->xhdd; ?>&nbsp;</td>
  <td class="center" style="background-color:lightblue; border:none;">
 <?php if ( $vseobj == 0 AND $somvprirskl == 0 ) { ?>
