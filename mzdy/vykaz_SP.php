@@ -666,6 +666,13 @@ if( $denvyplaty == '31.06.2016' ) { $denvyplaty="30.06.2016"; }
 if( $denvyplaty == '31.09.2016' ) { $denvyplaty="30.09.2016"; }
 if( $denvyplaty == '31.11.2016' ) { $denvyplaty="30.11.2016"; }
 
+if( $denvyplaty == '30.02.2017' ) { $denvyplaty="28.02.2017"; }
+if( $denvyplaty == '31.02.2017' ) { $denvyplaty="28.02.2017"; }
+if( $denvyplaty == '31.04.2017' ) { $denvyplaty="30.04.2017"; }
+if( $denvyplaty == '31.06.2017' ) { $denvyplaty="30.06.2017"; }
+if( $denvyplaty == '31.09.2017' ) { $denvyplaty="30.09.2017"; }
+if( $denvyplaty == '31.11.2017' ) { $denvyplaty="30.11.2017"; }
+
 $pdf->Cell(6,6," ","$rmc1",0,"L");$pdf->Cell(42,6,"$denvyplaty","$rmc",0,"C");
 
 //typ vykazu
@@ -1662,6 +1669,13 @@ if( $denvyplaty == '31.04.2016' ) { $denvyplaty="30.04.2016"; }
 if( $denvyplaty == '31.06.2016' ) { $denvyplaty="30.06.2016"; }
 if( $denvyplaty == '31.09.2016' ) { $denvyplaty="30.09.2016"; }
 if( $denvyplaty == '31.11.2016' ) { $denvyplaty="30.11.2016"; }
+
+if( $denvyplaty == '30.02.2017' ) { $denvyplaty="28.02.2017"; }
+if( $denvyplaty == '31.02.2017' ) { $denvyplaty="28.02.2017"; }
+if( $denvyplaty == '31.04.2017' ) { $denvyplaty="30.04.2017"; }
+if( $denvyplaty == '31.06.2017' ) { $denvyplaty="30.06.2017"; }
+if( $denvyplaty == '31.09.2017' ) { $denvyplaty="30.09.2017"; }
+if( $denvyplaty == '31.11.2017' ) { $denvyplaty="30.11.2017"; }
 
   $text = "<denVyplaty>".$denvyplaty."</denVyplaty>"."\r\n";
   fwrite($soubor, $text);
