@@ -57,8 +57,10 @@ if( $fir_fico == 36276693 AND $kli_vrok == 2016 )
 exit;
 }
 
+//exit;
+
 if( $fir_fico == 31416853 AND $kli_vrok != 2017 ) { echo $kli_vrok." ??"; exit; }
-if( $fir_fico == 31416853 AND $kli_vrok == 2017 ) 
+if( $fir_fico == 31416853 AND $kli_vrok == 2017 AND $h_sys == 59 ) 
 {
 ?>
 <script type="text/javascript">
