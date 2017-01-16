@@ -64,7 +64,7 @@ if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $dajhlaodpad=1; }
 $tlacodpady=1;
 if ( $_SERVER['SERVER_NAME'] == "www.enposro.sk" )
 { 
-if ( $kli_uzid != 17 AND $kli_uzid != 23 AND $kli_uzid != 57 AND $kli_uzid != 58 AND $kli_uzid != 141 ) { $tlacodpady=0; }
+if ( $kli_uzid != 17 AND $kli_uzid != 23 AND $kli_uzid != 57 AND $kli_uzid != 58 AND $kli_uzid != 141 AND $kli_uzid != 164 ) { $tlacodpady=0; }
 }
 
 ?> 
