@@ -36,5 +36,7 @@
 1;260;Daò na výstupe 10% opravná faktúra;10;1;2;0;0;0;0;0;C1;
 1;335;Samozdanenie na vstupe  20% príjemca=platite¾ §69 ods. 12 písm.f-i;20;9;21;0;0;0;0;1;B1;
 1;361;Daò na výstupe 0% príjemca=platite¾ §69 ods. 12 písm.f-i;0;0;0;0;0;0;0;0;A2;
+1;371;Daò na výstupe 0% príjemca=platite¾ §69 ods. 12 písm.j;0;0;0;0;;;;0;A2;
 1;385;Samozdanenie na výstupe 20% príjemca=platite¾ §69 ods. 12 písm.f-i;20;0;10;0;0;0;0;1;;
 1;461;Daò na výstupe opravná faktúra 0% príjemca=platite¾ §69 ods. 12 písm.f;0;0;0;0;0;0;0;0;C1;
+1;471;Daò na výstupe opravná faktúra 0% príjemca=platite¾ §69 ods. 12 písm.j;0;0;0;0;;;;0;C1;
