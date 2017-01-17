@@ -2414,9 +2414,45 @@ $sZostdov=sprintf("%0.2f", $Cislo);
 
 $pdf->SetFont('arial','',10);
 $pdf->Cell(80,6,"$kli_vume $fir_fnaz","T",0,"L");
-$pdf->Cell(100,6,"OSÈ: $hlavicka->oc $hlavicka->titl $hlavicka->meno $hlavicka->prie STR: $hlavicka->stz ZÁK: $hlavicka->zkz VM: $hlavicka->wms","T",1,"R");
+$pdf->Cell(100,5,"OSÈ: $hlavicka->oc $hlavicka->titl $hlavicka->meno $hlavicka->prie STR: $hlavicka->stz ZÁK: $hlavicka->zkz VM: $hlavicka->wms","T",1,"R");
 
-$pdf->Cell(20,2,"","0",1,"L");
+//$pdf->Cell(20,3,"","0",1,"L");
+$pdf->SetFont('arial','',7);
+
+//precitaj cerpane lekar
+$lek_cerp=0; $lek_nrk=7;
+$sqldok = mysql_query("SELECT SUM(dni) AS cerlek, dm, oc, ume FROM F$kli_vxcf"."_mzdzalvy WHERE dm = 518 AND oc = $hlavicka->oc AND ume <= $kli_vume GROUP BY oc,dm ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $lek_cerp=$lek_cerp+$riaddok->cerlek;
+  }
+$sqldok = mysql_query("SELECT SUM(dni) AS cerlek, dm, oc, ume FROM F$kli_vxcf"."_mzdprcvy$kli_uzid WHERE dm = 518 AND oc = $hlavicka->oc AND ume <= $kli_vume GROUP BY oc,dm ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $lek_cerp=$lek_cerp+$riaddok->cerlek;
+  }
+//precitaj cerpane doprovod
+$dop_cerp=0; $dop_nrk=7;
+$sqldok = mysql_query("SELECT SUM(dni) AS cerdop, dm, oc, ume FROM F$kli_vxcf"."_mzdzalvy WHERE dm = 519 AND oc = $hlavicka->oc AND ume <= $kli_vume GROUP BY oc,dm ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $dop_cerp=$dop_cerp+$riaddok->cerdop;
+  }
+$sqldok = mysql_query("SELECT SUM(dni) AS cerdop, dm, oc, ume FROM F$kli_vxcf"."_mzdprcvy$kli_uzid WHERE dm = 519 AND oc = $hlavicka->oc AND ume <= $kli_vume GROUP BY oc,dm ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $dop_cerp=$dop_cerp+$riaddok->cerdop;
+  }
+
+$textlekdop="Lekár dni - nárok $lek_nrk èerpané $lek_cerp, Doprovod dni - nárok $dop_nrk èerpané $dop_cerp";
+
+$pdf->Cell(80,3," ","0",0,"L");
+$pdf->Cell(100,3,"$textlekdop","0",1,"R");
+
 
 $pdf->SetFont('arial','',8);
 $pdf->Cell(80,4,"Prac.pomer: $hlavicka->pom Úväzok: $hlavicka->suva hod/deò PrNah: $hlavicka->znah","0",0,"L");
