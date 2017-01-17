@@ -835,6 +835,14 @@ $oznac = mysql_query("$sqtoz");
           }
 //koniec dopln tovar do A2
 
+//od 1.1.2017 371 stavebne prace prenos do A2
+if( $kli_vrok >= 2017 )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphs$kli_uzid SET kvzdn=hod, kvzkl=hod WHERE rdp = 371 OR rdp = 471 ";
+$oznac = mysql_query("$sqtoz");
+  }
+//exit;
+
 //dopln tovar do C1
 if( $aj361 == 1 )
           {
@@ -1359,6 +1367,10 @@ $pdf->Cell(190,0.5,"     ","0",1,"L");
 
 if ( $hlavicka->kvodd == "A2" ) {
 $texta2="Údaje z vyhotovenej faktúry o dodaní tovarov, ktorú bol platite¾ dane povinnı vyhotovi pod¾a § 71 a 75 zákona, pri ktorıch je osobou povinnou plati daò príjemca plnenia pod¾a § 69 ods. 12 písm. f) a i) zákona";
+if( $kli_vrok > 2016 )
+  {
+$texta2="Údaje z vyhotovenej faktúry o dodaní tovarov, ktorú bol platite¾ dane povinnı vyhotovi pod¾a § 71 a 75 zákona, pri ktorıch je osobou povinnou plati daò príjemca plnenia pod¾a § 69 ods. 12 písm. f) a j) zákona";
+  }
 $texta2s1p1="Identifikaèné èíslo";
 $texta2s1p2="pre daò odberate¾a";
 $texta2s2p1="Poradové èíslo";
