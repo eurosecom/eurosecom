@@ -44,7 +44,7 @@ $tlctwin="width=300, height=' + vyskawin + ', top=0, left=400, status=yes, resiz
  </div>
 <?php                                       } ?>
 
- <a href="#" onclick="window.open('../cis/cico.php?copern=1&page=1', '_blank', '<?php echo $ulisswin; ?>')">
+ <a href="#" onclick="window.open('../cis/cico.php?copern=1&page=1', '_blank' )">
   <img src='../obr/firmy.png' title="Èíselník IÈO">IÈO</a>
  <a href='../cis/cstr.php?copern=1&page=1' target="_blank"><img src="../obr/klienti.png" title="Èíselník stredísk">STR</a>
  <a href='../cis/czak.php?copern=1&page=1' target="_blank"><img src="../obr/firmy.png" title="Èíselník zákaziek">ZÁK</a>
