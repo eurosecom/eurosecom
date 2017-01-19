@@ -42,6 +42,7 @@ if ( $strana == 0 ) $strana=1;
 $zoznamaut=1;
 
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
+if ( $strana == 5 ) { $_REQUEST['cislo_cpl']=0; }
 
 $xml = 1*$_REQUEST['xml'];
 
@@ -49,6 +50,41 @@ $xml = 1*$_REQUEST['xml'];
 $rmc=0;
 $rmc1=0;
 
+//nastav dic
+    if ( $copern == 1001 )
+    {
+$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
+$icoset = 1*$_REQUEST['icoset'];
+
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $icoset ";
+$sqldok = mysql_query("$sqlttt");
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+ $zodic=$riaddok->dic;
+ $zonaz=$riaddok->nai;
+ $zouli=$riaddok->uli;
+ $zomes=$riaddok->mes;
+ $zopsc=$riaddok->psc;
+ $zostat="SR";
+ }
+
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctoznamenie_uprzd SET ".
+" zodic='$zodic', zonaz='$zonaz', ".
+" zouli='$zouli', zocdm='$zocdm', zopsc='$zopsc', zomes='$zomes', zostat='$zostat', ".
+" zoulava30a='$zoulava30a', zoulava30b='$zoulava30b', suma='$suma', datum='$datumsql' ".
+" WHERE oc = 1 AND cpl = $cislo_cpl ";
+
+$upravene = mysql_query("$uprtxt");
+
+
+
+$copern=20;
+$strana=1;
+$zoznamaut=0;
+    }
+//koniec nastav dic
 
 //uprav vozidlo
     if ( $copern == 346 )
@@ -85,10 +121,10 @@ $_REQUEST['cislo_cpl']=$cislo_cpl;
     if ( $copern == 316 )
     {
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
-$cislo_ico = 1*$_REQUEST['cislo_ico'];
+$cislo_dic = 1*$_REQUEST['cislo_dic'];
 ?>
 <script type="text/javascript">
-if( !confirm ("Chcete vymazaù diË <?php echo $cislo_ico; ?> ?") ) //dopyt, aktualizovaù na diË
+if( !confirm ("Chcete vymazaù diË <?php echo $cislo_dic; ?> ?") ) //dopyt, aktualizovaù na diË
          { location.href='oznamenie_uprzd.php?cislo_oc=9999&drupoh=1&page=1&subor=0&copern=20&strana=5&cislo_cpl=<?php echo $cislo_cpl; ?>' }
 else
          { location.href='oznamenie_uprzd.php?copern=3166&page=1&drupoh=1&cislo_cpl=<?php echo $cislo_cpl; ?>' }
@@ -193,15 +229,11 @@ $sql = "INSERT INTO F".$kli_vxcf."_uctoznamenie_uprzd (oc,konx1) VALUES ( 9999, 
 $vysledok = mysql_query($sql);
 }
 
-$sql = "SELECT vypr FROM F".$kli_vxcf."_uctoznamenie_uprzd";
+$sql = "SELECT ulava30b FROM F".$kli_vxcf."_uctoznamenie_uprzd";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
 $sql = "ALTER TABLE F$kli_vxcf"."_uctoznamenie_uprzd ADD zodic DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctoznamenie_uprzd ADD ulava30a DECIMAL(4,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctoznamenie_uprzd ADD ulava30b DECIMAL(4,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctoznamenie_uprzd ADD zoprie VARCHAR(40) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
@@ -228,6 +260,10 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctoznamenie_uprzd ADD zoulava30b DECIMAL(4,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctoznamenie_uprzd ADD vypr VARCHAR(40) NOT NULL AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctoznamenie_uprzd ADD ulava30a DECIMAL(4,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctoznamenie_uprzd ADD ulava30b DECIMAL(4,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 }
 //koniec vytvorenie
@@ -438,9 +474,9 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-  function TlacDMV()
+  function TlacDMV(cpl)
   {
-   window.open('../ucto/oznamenie_uprzd.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999&cislo_cpl=<?php echo $cislo_cpl; ?>', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/oznamenie_uprzd.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999&cislo_cpl=' + cpl + '&tt=1', '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
 
   function PoucVyplnenie()
@@ -452,10 +488,10 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
    var cislo_cpl = cpl;
    window.open('../ucto/oznamenie_uprzd.php?copern=346&cislo_cpl='+ cislo_cpl + '&uprav=0', '_self' )
   }
-  function ZmazVzd(cpl, cislo_ico)
+  function ZmazVzd(cpl, cislo_dic)
   {
    var cislo_cpl = cpl;
-   window.open('../ucto/oznamenie_uprzd.php?copern=316&cislo_cpl='+ cislo_cpl + '&cislo_ico='+ cislo_ico + '&uprav=0', '_self' )
+   window.open('../ucto/oznamenie_uprzd.php?copern=316&cislo_cpl='+ cislo_cpl + '&cislo_dic='+ cislo_dic + '&uprav=0', '_self' )
   }
   function NoveVzd()
   {
@@ -486,7 +522,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="PouËenie na vyplnenie" class="btn-form-tool">
      <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML();"
           title="Export do XML" class="btn-form-tool"> <!-- dopyt, aktualizovaù -->
-     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV();" title="Zobraziù vöetky strany v PDF" class="btn-form-tool"> <!-- dopyt, aktualizovaù, keÔ bude viacero subjektov, aby tlaËilo poËet subjektov x 2strany, v hlaviËke formul·ra len 2 strany + v zozname pridaù tlaËiareÚ -->
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV(<?php echo $cislo_cpl; ?>);" title="Zobraziù vöetky strany v PDF" class="btn-form-tool"> <!-- dopyt, aktualizovaù, keÔ bude viacero subjektov, aby tlaËilo poËet subjektov x 2strany, v hlaviËke formul·ra len 2 strany + v zozname pridaù tlaËiareÚ -->
     </div>
    </td>
   </tr>
@@ -540,9 +576,8 @@ $source="../ucto/oznamenie_uprzd.php?cislo_oc=1&drupoh=1&page=1&subor=0&cislo_cp
 <input type="checkbox" name="ulava30b" value="1" style="top:743px; left:54px;"> <!-- dopyt, rozbehaù -->
 
 <!-- II.ODDIEL -->
-<input type="text" name="zodic" id="zodic" style="width:220px; top:823px; left:52px;"/>
-<img src='../obr/ikony/searchl_blue_icon.png' onclick="myIcoElement.style.display='block';" title="Vyhæadaù DI»" style="width: 20px; height: 20px; position: absolute; top: 826px; left:290px; cursor: pointer;" >
-<div id="myIcoElement" style="background-color: white; position: absolute; top:826px; left:320px; display: none;">menu</div>
+<input type="text" name="zodic" id="zodic" style="width:220px; top:823px; left:52px;" onclick="myIcoElement.style.display='none';"/>
+
 <!-- FO -->
 <input type="text" name="zoprie" id="zoprie" style="width:357px; top:901px; left:52px;"/> <!-- dopyt, rozbehaù -->
 <input type="text" name="zomeno" id="zomeno" style="width:243px; top:901px; left:431px;"/> <!-- dopyt, rozbehaù -->
@@ -580,7 +615,7 @@ $source="../ucto/oznamenie_uprzd.php?cislo_oc=1&drupoh=1&page=1&subor=0&cislo_cp
 
 <?php if ( $strana == 5 OR $strana == 9999 ) {
 //VYPIS ZOZNAMU
-$sluztt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 1 ORDER BY ico ";
+$sluztt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 1 ORDER BY zodic ";
 //echo $sluztt;
 $sluz = mysql_query("$sluztt");
 $slpol = mysql_num_rows($sluz);
@@ -618,8 +653,8 @@ $cisloi=$i+1;
  <td align="right"><?php echo $rsluz->suma; ?></td>
  <td align="center">
   <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl; ?>);" title="Upraviù">&nbsp;&nbsp;&nbsp;
-  <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl; ?>, '<?php echo $rsluz->ico; ?>');" title="Vymazaù">&nbsp;&nbsp;&nbsp;
-  <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV();" title="Zobraziù v PDF">
+  <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl; ?>, '<?php echo $rsluz->zodic; ?>');" title="Vymazaù">&nbsp;&nbsp;&nbsp;
+  <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV(<?php echo $rsluz->cpl; ?>);" title="Zobraziù v PDF">
  </td>
 </tr>
 <?php
@@ -643,6 +678,41 @@ $i=$i+1;
 </div>
 
 </FORM>
+
+
+<?php if ( $strana == 1 ) { ?>
+
+<img src='../obr/ikony/searchl_blue_icon.png' onclick="volajIcox();" title="Vyhæadaù DI»" style="width: 20px; height: 20px; position: absolute; top: 826px; left:290px; cursor: pointer;" >
+<div id="myIcoElement" style="background-color: white; position: absolute; top:826px; left:320px; display: none;">menu</div>
+
+<script type="text/javascript" src="oznamenie_uprzd_jsico.js"></script>
+<script type="text/javascript">
+
+
+//co urobi po potvrdeni ok z tabulky ico
+function vykonajIco(ico,dic,nazov,ulica,mesto,psc)
+                {
+document.forms.formv1.zodic.value = dic;
+document.forms.formv1.zonaz.value = nazov;
+document.forms.formv1.zodic.focus();
+document.forms.formv1.zodic.select();
+myIcoElement.style.display='none';
+
+window.open('oznamenie_uprzd.php?copern=1001&icoset=' + ico + '&cislo_cpl=<?php echo $cislo_cpl; ?>', '_self' );
+
+
+                }
+
+
+  function volajIcox()
+  {                 
+  if( document.forms.formv1.zodic.value != "" ) { volajIco(); }
+  }
+
+</script>
+<?php                    } ?>
+
+
 </div> <!-- koniec #content -->
 <?php
 //mysql_free_result($vysledok);
@@ -675,8 +745,9 @@ $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 
 //vytlac
-$sqltt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd".
-" WHERE F$kli_vxcf"."_uctoznamenie_uprzd.oc = 9999 ORDER BY oc";
+$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 1 AND cpl = $cislo_cpl ORDER BY zodic ";
+if( $cislo_cpl == 0 ) { $sqltt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 1 AND cpl > 0 ORDER BY zodic "; }
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -987,11 +1058,11 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t11","$rmc",1,"C");
 //Ulava
 //dopyt, nefunkËnÈ obidve
 $pdf->Cell(190,3," ","$rmc1",1,"L");
-$text="x ";
+$text=" ";
 if ( $hlavicka->ulava30a == 1 ) { $text="x"; }
 $pdf->Cell(5,6," ","$rmc1",0,"C");$pdf->Cell(3,3,"$text","$rmc",1,"C");
 $pdf->Cell(190,2," ","$rmc1",1,"L");
-$text="x ";
+$text=" ";
 if ( $hlavicka->ulava30b == 1 ) { $text="x"; }
 $pdf->Cell(5,6," ","$rmc1",0,"C");$pdf->Cell(3,3,"$text","$rmc",1,"C");
 
