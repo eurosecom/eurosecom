@@ -296,8 +296,10 @@ $fir_riadok=mysql_fetch_object($fir_vysledok);
 if ( $strana == 1 ) {
 $obod = $fir_riadok->obod;
 $obodsk=SkDatum($obod);
+if( $obodsk == '00.00.0000' ) { $obodsk="01.01.".$kli_vrok;}
 $obdo = $fir_riadok->obdo;
 $obdosk=SkDatum($obdo);
+if( $obdosk == '00.00.0000' ) { $obdosk="31.12.".$kli_vrok;}
 $zodic = $fir_riadok->zodic;
 $ulava30a = $fir_riadok->ulava30a;
 $ulava30b = $fir_riadok->ulava30b;
@@ -520,7 +522,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
   }
   function DMVdoXML()
   {
-   window.open('../ucto/oznamenie_uprzd.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&cislo_cpl=<?php echo $cislo_cpl; ?>',
+   window.open('../ucto/oznamenie_uprzdxml.php?copern=10&page=1&sysx=UCT&drupoh=1&uprav=1&cislo_cpl=<?php echo $cislo_cpl; ?>',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>

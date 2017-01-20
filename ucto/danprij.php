@@ -476,11 +476,7 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
    window.open('../ucto/oznamenie_uprzd.php?copern=20&drupoh=1&page=1&strana=5',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
-  function Ozn176doXML()
-  {
-   window.open('../ucto/oznamenie_uprzdxml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
+
 
 </script>
 </HEAD>
@@ -1453,8 +1449,6 @@ if ( $copern == 1 AND $kli_vduj == 9 )
  <strong>Oznámenie o vykonaní úpravy základu dane </strong> 
 </div>
 </div>
-<a href="#" onclick="Ozn176doXML();" title="export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
 <a href="#" onclick="UpravOzn176();" title="Upravi hodnoty"
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </div>
