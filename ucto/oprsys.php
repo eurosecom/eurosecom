@@ -53,6 +53,8 @@ $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resiza
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
+if( $fir_fico == 36084212 ) { $poliklinikase=1; }
+
 $berext=0;
 if( $poliklinikase == 1 AND $fir_fico == 36084212 ) { $berext=1; }
 //$berext=1;
@@ -1956,6 +1958,14 @@ window.open('../faktury/int_fakt2016pkse.php?copern=55&page=1&h_sys=' + h_sys + 
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 <?php                                          } ?>
 
+<?php if( $berext == 1 AND $kli_vrok == 2017 ) { ?>
+var h_obdp = document.forms.formct2.h_obdp.value;
+var h_sys = document.forms.formct2.h_sys.value;
+
+window.open('../faktury/int_fakt2017pkse.php?copern=55&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+<?php                                          } ?>
+
                 }
 
 function ZablokujFaktury()
@@ -2404,6 +2414,32 @@ if($urob) { $blok714=" - BLOKOVAN…"; }
 <option value="712" >SYS 712 OstatnÈ <?php echo $blok712;?></option>
 <option value="714" >SYS 714 N·jomnÈ <?php echo $blok714;?></option>
 <?php                                         } ?>
+
+<?php if( $berext == 1 AND $kli_vrok == 2017 ) { ?>
+<?php
+$blok811="";
+$blok812="";
+$blok814="";
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak811_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok811=" - BLOKOVAN…"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak812_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok812=" - BLOKOVAN…"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak814_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok814=" - BLOKOVAN…"; }
+
+?>
+
+<option value="811" >SYS 811 Zdrav.starostlivosù <?php echo $blok811;?></option>
+<option value="812" >SYS 812 OstatnÈ <?php echo $blok812;?></option>
+<option value="814" >SYS 814 N·jomnÈ <?php echo $blok814;?></option>
+<?php                                         } ?>
+
 
 </select>
 </td>
