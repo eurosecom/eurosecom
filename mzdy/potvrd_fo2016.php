@@ -856,7 +856,7 @@ $oznac = mysql_query("$sqtoz");
 
 //vdanovy bonus spolu r11
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpotvrdenieFO".
-" SET r08=r07sum1+r07sum2+r07sum3+r07sum4+r07sum5+r07sum6  WHERE oc = $cislo_oc";
+" SET r08=r07sum1+r07sum2+r07sum3+r07sum4+r07sum5+r07sum6+r07sum7 WHERE oc = $cislo_oc";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 ?>
