@@ -1,6 +1,7 @@
 <!doctype html>
 <HTML>
 <?php
+//dmv 2015 a 2016
 do
 {
 $sys = 'UCT';
@@ -309,10 +310,11 @@ $i=0;
 $hlavicka=mysql_fetch_object($sql);
 
 $uprtxt = "INSERT INTO F$kli_vxcf"."_uctpriznanie_dmv ( oc, druh, vzdnp, vzdno, vznpr, vzchm, vzobm, vzkat, vzdru, vzzn, vzspz, ".
-" datz, r49, r50, vzvyk, dnvnk, da1 ) VALUES ".
+" datz, r49, r50, vzvyk, dnvnk, da1, oslbd, r15s1zni50a, r15s1zni50b, r15s1zni50c ) VALUES ".
 " ( '$hlavicka->oc', '$hlavicka->druh', '$hlavicka->vzdnp', '$hlavicka->vzdno', '$hlavicka->vznpr', '$hlavicka->vzchm', '$hlavicka->vzobm', ".
 " '$hlavicka->vzkat', '$hlavicka->vzdru', '$hlavicka->vzzn', '$hlavicka->vzspz', '$hlavicka->datz', '$hlavicka->r49', '$hlavicka->r50', ".
-" '$hlavicka->vzvyk', '$hlavicka->dnvnk', '$hlavicka->da1' ) ";
+" '$hlavicka->vzvyk', '$hlavicka->dnvnk', '$hlavicka->da1', ".
+" '$hlavicka->oslbd', '$hlavicka->r15s1zni50a', '$hlavicka->r15s1zni50b', '$hlavicka->r15s1zni50c' ) ";
 $upravene = mysql_query("$uprtxt");
 }
 $i=$i+1;
@@ -3802,7 +3804,7 @@ $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t09","$rmc",0,"R");$pdf->Cell
 $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t11","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t12","$rmc",0,"C");
 $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,7,"$t13","$rmc",0,"C");
 //email / fax
-$pdf->Cell(7,7," ","$rmc1",0,"C");$pdf->Cell(115,7,"$hlavicka->zoema;","$rmc",1,"L");
+$pdf->Cell(7,7," ","$rmc1",0,"C");$pdf->Cell(115,7,"$hlavicka->zoema","$rmc",1,"L");
                                        } //koniec 1.strany
 
 if ( $strana == 2 OR $strana == 9999 ) {
