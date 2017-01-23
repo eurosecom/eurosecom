@@ -43,8 +43,9 @@ $elsubor=2;
 
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>DMV XML</title>
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/tlaciva.css">
+<title>EuroSecom - DMV xml export</title>
 <script type="text/javascript">
 </script>
 <style>
@@ -112,16 +113,21 @@ dl.legend-area > dt {
 }
 </style>
 </HEAD>
-<BODY class="white">
-<table class="h2" width="100%" >
- <tr>
-  <td>EuroSecom - Priznanie DMV <?php echo $kli_vrok; ?> export do XML</td>
-  <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
- </tr>
-</table>
-
+<BODY>
+<div id="wrap-heading">
+ <table id="heading">
+  <tr>
+   <td class="ilogin">EuroSecom</td>
+   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
+  </tr>
+  <tr>
+   <td class="header">Daň z motorových vozidiel / export do XML</td>
+   <td></td>
+  </tr>
+ </table>
+</div>
 <?php
-///////////////////////////////////////////////////TLAC a VYTVORENIE XML SUBORU PRE ELEKTRONIKU elsubor=1,2
+///////////////////////////////////////////////////VYTVORENIE XML SUBORU PRE ELEKTRONIKU elsubor=1,2
 if ( $copern == 10 AND $elsubor == 2 )
     {
 //prva strana
@@ -130,7 +136,6 @@ $soubor = fopen("../tmp/$nazsub", "a+");
 
 $sqlt = <<<mzdprc
 (
-
 //NOVA SCHEMA DMV 2015 ulozena do suboru z financneho portalu
 
 <?xml version="1.0" encoding="utf-8"?>
@@ -823,31 +828,26 @@ $iv = $iv + 1;
 $jv = $jv + 1;
 if ( $jv == 2 ) { $jv=0; }
   }
-
   $text = " </telo>"."\r\n"; fwrite($soubor, $text);
   $text = "</dokument>"."\r\n"; fwrite($soubor, $text);
 
 fclose($soubor);
 ?>
-
-
-
+<div id="content">
 <?php if ( $elsubor == 2 ) { ?>
-
-<br />
-<br />
-Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a načítajte na www.drsr.sk alebo do aplikácie eDane :
-<br />
-<br />
+<p>
+<p>Stiahnite si nižšie uvedený súbor <strong>.xml</strong> do Vášho počítača a načítajte ho na
+<a href="https://www.financnasprava.sk/sk/titulna-stranka" target="_blank" title="Stránka Finančnej správy">www.financnasprava.sk</a> alebo do aplikácie eDane:
+</p>
+<p>
 <a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
-<br />
-<br />
+</p>
 
 <?php                      } ?>
 
 <?php
 /////////////////////////////////////////////////////////////////////UPOZORNENIE
-$upozorni1=0; $upozorni2=0; $upozorni10=0; $upozorni11=0; $upozorni12=0;
+$upozorni1=0; $upozorni2=0; $upozorni3=0; $upozorni4=0;
 ?>
 <div id="upozornenie" style="display:none;">
 <h2>
@@ -869,10 +869,8 @@ echo "Nie je vyplnené <strong>zdaňovacie obdobie</strong> daňového priznania.";
 </li>
 </ul>
 
-
 <ul id="alertpage3" style="display:none;">
 <li class="header-section">Príloha za vozidlá</li>
-
 <?php
 $sqlttw = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE F$kli_vxcf"."_uctpriznanie_dmv.oc = 1 ORDER BY vzspz";
 $sqlw = mysql_query("$sqlttw");
@@ -896,7 +894,7 @@ if ( $hlavickaw->vzkat == 'O' AND $hlavickaw->vzobm != 0 ) { $wrongprm=1; $text3
 if ( $hlavickaw->vzkat == 'M' AND ( $hlavickaw->vzchm != 0 OR $hlavickaw->vznpr != 0 )) { $wrongprm=1; $text3=4;}
 if ( $hlavickaw->vzkat == 'L' AND ( $hlavickaw->vzchm != 0 OR $hlavickaw->vznpr != 0 )) { $wrongprm=1; $text3=4;}
 
-if ( $hlavickaw->vzvyk != 'O' AND $hlavickaw->r15s1zni50a != 1 ) { $wrongprm=1; $text3=5;}
+if ( $hlavickaw->vzvyk != 0 AND $hlavickaw->r15s1zni50a != 1 ) { $wrongprm=1; $text3=5;}
 if ( $wrongprm == 1 )
       {
 ?>
@@ -930,9 +928,7 @@ echo "<strong>Vozidlo $hlavickaw->vzspz </strong> výkon motora v kW vypĺňajte le
 $iw = $iw + 1;
   }
 ?>
-
 </ul>
-
 </div> <!-- #upozornenie -->
 
 <script type="text/javascript">
@@ -945,18 +941,18 @@ if ( $upozorni3 == 1 ) { echo "alertpage3.style.display='block';"; }
 ?>
 </script>
 
-
+</div> <!-- #content -->
 <?php
 //mysql_free_result($vysledok);
     }
-/////////////////////////////////////////////////////koniec TLAC a VYTVORENIE XML SUBORU PRE ELEKTRONIKU
+/////////////////////////////////////////////////////koniec VYTVORENIE XML SUBORU PRE ELEKTRONIKU
 
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphsx'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
 
-// celkovy koniec dokumentu
+//celkovy koniec dokumentu
        } while (false);
 ?>
 </BODY>
