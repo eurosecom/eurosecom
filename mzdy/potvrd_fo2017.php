@@ -1405,7 +1405,8 @@ $pdf->Cell(169,6," ","$rmc1",0,"L");$pdf->Cell(16,8,"$r06sum","$rmc",1,"R");
 //$pdf->Cell(169,6," ","$rmc1",0,"L");$pdf->Cell(16,8,"$r10","$rmc",1,"R");
 $pdf->Cell(169,6," ","$rmc1",0,"L");$pdf->Cell(16,9,"$r10dds","$rmc",1,"R");
 //dan.bonus
-$pdf->Cell(190,12," ","$rmc1",1,"L");
+$pdf->SetFont('arial','',9);
+$pdf->Cell(190,11.5," ","$rmc1",1,"L");
 $pdf->Cell(27,4," ","$rmc1",0,"L");
 $pdf->Cell(93,5,"$hlavicka->r07det1","$rmc",0,"L");$pdf->Cell(22,5,"$hlavicka->r07rod1","$rmc",0,"C");
 $pdf->Cell(25,5,"$hlavicka->r07mes1","$rmc",0,"C");$pdf->Cell(17,5,"$r07sum1","$rmc",1,"R");
@@ -1419,15 +1420,16 @@ $pdf->Cell(27,4," ","$rmc1",0,"L");
 $pdf->Cell(93,4,"$hlavicka->r07det4","$rmc",0,"L");$pdf->Cell(22,4,"$hlavicka->r07rod4","$rmc",0,"C");
 $pdf->Cell(25,4,"$hlavicka->r07mes4","$rmc",0,"C");$pdf->Cell(17,4,"$r07sum4","$rmc",1,"R");
 $pdf->Cell(27,4," ","$rmc1",0,"L");
-$pdf->Cell(93,4,"$hlavicka->r07det5","$rmc",0,"L");$pdf->Cell(22,4,"$hlavicka->r07rod5","$rmc",0,"C");
-$pdf->Cell(25,4,"$hlavicka->r07mes5","$rmc",0,"C");$pdf->Cell(17,4,"$r07sum5","$rmc",1,"R");
+$pdf->Cell(93,5,"$hlavicka->r07det5","$rmc",0,"L");$pdf->Cell(22,5,"$hlavicka->r07rod5","$rmc",0,"C");
+$pdf->Cell(25,5,"$hlavicka->r07mes5","$rmc",0,"C");$pdf->Cell(17,5,"$r07sum5","$rmc",1,"R");
 $pdf->Cell(27,4," ","$rmc1",0,"L");
-$pdf->Cell(93,5,"$hlavicka->r07det6","$rmc",0,"L");$pdf->Cell(22,5,"$hlavicka->r07rod6","$rmc",0,"C");
-$pdf->Cell(25,5,"$hlavicka->r07mes6","$rmc",0,"C");$pdf->Cell(17,5,"$r07sum6","$rmc",1,"R");
+$pdf->Cell(93,4,"$hlavicka->r07det6","$rmc",0,"L");$pdf->Cell(22,4,"$hlavicka->r07rod6","$rmc",0,"C");
+$pdf->Cell(25,4,"$hlavicka->r07mes6","$rmc",0,"C");$pdf->Cell(17,4,"$r07sum6","$rmc",1,"R");
 $pdf->Cell(27,4," ","$rmc1",0,"L");
 $pdf->Cell(93,4,"$hlavicka->r07det7","$rmc",0,"L");$pdf->Cell(22,4,"$hlavicka->r07rod7","$rmc",0,"C");
 $pdf->Cell(25,4,"$hlavicka->r07mes7","$rmc",0,"C");$pdf->Cell(17,4,"$r07sum7","$rmc",1,"R");
 $pdf->Cell(167,6," ","$rmc1",0,"L");$pdf->Cell(17,4,"$r08","$rmc",1,"R");
+$pdf->SetFont('arial','',10);
 
 //III.ZAMESTNAVATEL
 $pdf->Cell(190,14," ","$rmc1",1,"L");
@@ -1437,7 +1439,7 @@ $pdf->Cell(19,4," ","$rmc1",0,"L");$pdf->Cell(165,5,"$bydliskosidlo","$rmc",1,"L
 
 //VYPRACOVAL
 //V a Dna
-$pdf->Cell(190,4," ","$rmc1",1,"L");
+$pdf->Cell(190,4.5," ","$rmc1",1,"L");
 $datvsk=SkDatum($hlavicka->datv);
 $dat_dat=$datvsk; if ( $dat_dat == '00.00.0000' ) $dat_dat="";
 $pdf->Cell(17,5," ","$rmc1",0,"L");$pdf->Cell(45,5,"$fir_fmes","$rmc",0,"L");
