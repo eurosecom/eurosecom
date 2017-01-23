@@ -2103,6 +2103,8 @@ div.input-echo {
 <?php if ( $strana == 3 OR $strana == 9999 ) { ?>
    urobVzdru();
    document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
+   document.formv1.da1.focus();
+   document.formv1.da1.select();
 <?php                                        } ?>
 
 <?php if ( $strana == 4 OR $strana == 9999 ) { ?>
@@ -3124,7 +3126,7 @@ $slpol = mysql_num_rows($sluz);
 <tr>
  <th rowspan="2">E»V</th>
  <th rowspan="2" align="left">ZnaËka</th>
- <th rowspan="2">Katg.</th>
+ <th rowspan="2">Druh</th>
  <th>Prv·</th>
  <th colspan="2">DaÚov· povinnosù</th>
  <th rowspan="2" align="right">DaÚ</th>
@@ -3143,11 +3145,13 @@ $i=0;
  {
 $rsluz=mysql_fetch_object($sluz);
 $cisloi=$i+1;
+$tsumadane=$tsumadane+$rsluz->r21;
+$tsumadane2=sprintf("%0.2f", $tsumadane);
 ?>
 <tr class="body"> 
  <td align="left"><?php echo $cisloi.". ".$rsluz->vzspz; ?></td>
  <td><?php echo $rsluz->vzzn; ?></td>
- <td align="center"><?php echo $rsluz->vzkat; ?></td>
+ <td align="center"><?php echo $rsluz->vzdru; ?></td>
  <td align="center">
 <?php if ( SkDatum($rsluz->da1) == '00.00.0000' ) { ?>
  <img src="../obr/pozor.png" style="width:14px; height:14px;"
@@ -3173,7 +3177,20 @@ $cisloi=$i+1;
  }
 $i=$i+1;
    }
+if( $tsumadane2 == 0 ) { $tsumadane2="0"; }
+if( $cisloi == 0 ) { $cisloi="0"; }
+//end of while
 ?>
+<tr class="body"> 
+ <td colspan="2" align="left">SPOLU poËet vozidiel <?php echo $cisloi; ?></td>
+
+ <td align="center"></td>
+ <td align="center"></td>
+ <td align="center"></td>
+ <td align="center"></td>
+ <td align="right" style=""><?php echo $tsumadane2; ?></td>
+ <td align="center"></td>
+</tr>
  </table>
 </div>
 <?php                                        } ?>

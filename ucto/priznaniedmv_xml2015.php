@@ -46,12 +46,71 @@ $elsubor=2;
  <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>DMV XML</title>
 <script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height;
-var sirkawic = screen.width-10;
 </script>
+<style>
+#content {
+  box-sizing: border-box;
+  background-color: white;
+  padding: 30px 25px;
+   -webkit-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  -moz-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+}
+#content > p {
+  line-height: 22px;
+  font-size: 14px;
+}
+#content > p > a {
+  color: #00e;
+}
+#content > p > a:hover {
+  text-decoration: underline;
+}
+#upozornenie > h2 {
+  line-height: 20px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  overflow: auto;
+}
+#upozornenie > h2 > strong {
+  font-size: 16px;
+  font-weight: bold;
+}
+#upozornenie > ul > li {
+  line-height: 18px;
+  margin: 10px 0;
+  font-size: 13px;
+}
+.red {
+  border-left: 4px solid #f22613;
+  text-indent: 8px;
+}
+.orange {
+  border-left: 4px solid #f89406;
+  text-indent: 8px;
+}
+dl.legend-area {
+  height: 14px;
+  line-height: 14px;
+  font-size: 11px;
+  position: relative;
+  top: 5px;
+}
+dl.legend-area > dt {
+  width:10px;
+  height:10px;
+  margin: 2px 5px 0 12px;
+}
+.box-red {
+  background-color: #f22613;
+}
+.box-orange {
+  background-color: #f89406;
+}
+.header-section {
+  padding-top: 5px;
+}
+</style>
 </HEAD>
 <BODY class="white">
 <table class="h2" width="100%" >
@@ -786,8 +845,105 @@ Stiahnite si nišie uvedenı súbor XML na Váš lokálny disk a naèítajte na www.drs
 
 <?php                      } ?>
 
-<div id="myBANKADelement"></div>
-<div id="jeBANKADelement"></div>
+<?php
+/////////////////////////////////////////////////////////////////////UPOZORNENIE
+$upozorni1=0; $upozorni2=0; $upozorni10=0; $upozorni11=0; $upozorni12=0;
+?>
+<div id="upozornenie" style="display:none;">
+<h2>
+<strong class="toleft">Upozornenie</strong>
+<dl class="toright legend-area">
+ <dt class="toleft box-red"></dt><dd class="toleft">kritické</dd>
+ <dt class="toleft box-orange"></dt><dd class="toleft">logické</dd>
+</dl>
+</h2>
+<ul id="alertpage1" style="display:none;">
+<li class="header-section">STRANA 1</li>
+<li class="red">
+<?php if ( $hlavicka->zoo == '0000-00-00' )
+{
+$upozorni1=1;
+echo "Nie je vyplnené <strong>zdaòovacie obdobie</strong> daòového priznania.";
+}
+?>
+</li>
+</ul>
+
+
+<ul id="alertpage3" style="display:none;">
+<li class="header-section">Príloha za vozidlá</li>
+
+<?php
+$sqlttw = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv WHERE F$kli_vxcf"."_uctpriznanie_dmv.oc = 1 ORDER BY vzspz";
+$sqlw = mysql_query("$sqlttw");
+$polw = mysql_num_rows($sqlw);
+$iw=0; 
+  while ( $iw < $polw )
+  {
+@$zaznam=mysql_data_seek($sqlw,$iw);
+$hlavickaw=mysql_fetch_object($sqlw);
+$wrongprm=0;
+$text3=0;
+if ( $hlavickaw->vzkat == 'M' AND $hlavickaw->vzobm == 0 ) { $wrongprm=1; $text3=1;}
+if ( $hlavickaw->vzkat == 'L' AND $hlavickaw->vzobm == 0 ) { $wrongprm=1; $text3=1;}
+
+if ( $hlavickaw->vzkat == 'N' AND ( $hlavickaw->vzchm == 0 OR $hlavickaw->vznpr == 0 )) { $wrongprm=1; $text3=2;}
+if ( $hlavickaw->vzkat == 'O' AND ( $hlavickaw->vzchm == 0 OR $hlavickaw->vznpr == 0 )) { $wrongprm=1; $text3=2;}
+
+if ( $hlavickaw->vzkat == 'N' AND $hlavickaw->vzobm != 0 ) { $wrongprm=1; $text3=3;}
+if ( $hlavickaw->vzkat == 'O' AND $hlavickaw->vzobm != 0 ) { $wrongprm=1; $text3=3;}
+
+if ( $hlavickaw->vzkat == 'M' AND ( $hlavickaw->vzchm != 0 OR $hlavickaw->vznpr != 0 )) { $wrongprm=1; $text3=4;}
+if ( $hlavickaw->vzkat == 'L' AND ( $hlavickaw->vzchm != 0 OR $hlavickaw->vznpr != 0 )) { $wrongprm=1; $text3=4;}
+
+if ( $hlavickaw->vzvyk != 'O' AND $hlavickaw->r15s1zni50a != 1 ) { $wrongprm=1; $text3=5;}
+if ( $wrongprm == 1 )
+      {
+?>
+<li class="red">
+<?php
+$upozorni3=1;
+if ( $text3 == 1 )
+         {
+echo "<strong>Vozidlo $hlavickaw->vzspz </strong> pri kategórii L,M vyplòte zdvihovı objem.";
+         }
+if ( $text3 == 2 )
+         {
+echo "<strong>Vozidlo $hlavickaw->vzspz </strong> pri kategórii N,O vyplòte hmotnos a  poèet náprav.";
+         }
+if ( $text3 == 3 )
+         {
+echo "<strong>Vozidlo $hlavickaw->vzspz </strong> pri kategórii N,O nevyplòujte zdvihovı objem.";
+         }
+if ( $text3 == 4 )
+         {
+echo "<strong>Vozidlo $hlavickaw->vzspz </strong> pri kategórii L,M nevyplòujte hmotnos a  poèet náprav.";
+         }
+if ( $text3 == 5 )
+         {
+echo "<strong>Vozidlo $hlavickaw->vzspz </strong> vıkon motora v kW vypåòajte len u hybridnıch alebo elektro vozidiel.";
+         }
+?>
+</li>
+<?php
+      }
+$iw = $iw + 1;
+  }
+?>
+
+</ul>
+
+</div> <!-- #upozornenie -->
+
+<script type="text/javascript">
+<?php
+if ( $upozorni1 == 1 OR $upozorni2 == 1 OR $upozorni3 == 1 OR $upozorni4 == 1 )
+     { echo "upozornenie.style.display='block';"; }
+if ( $upozorni1 == 1 ) { echo "alertpage1.style.display='block';"; } 
+if ( $upozorni4 == 1 ) { echo "alertpage4.style.display='block';"; } 
+if ( $upozorni3 == 1 ) { echo "alertpage3.style.display='block';"; }
+?>
+</script>
 
 
 <?php
