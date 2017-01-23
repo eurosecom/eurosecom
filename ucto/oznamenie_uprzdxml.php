@@ -202,21 +202,144 @@ $dat_datsql = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),dat
 if ( $j == 0 )
      {
   $text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\r\n"; fwrite($soubor, $text);
-  $text = "<dokument>"."\r\n"; fwrite($soubor, $text);		
-  $text = " <hlavicka>"."\r\n"; fwrite($soubor, $text);
-
+  $text = "<dokument>"."\r\n"; fwrite($soubor, $text);
+  $text = "<hlavicka>"."\r\n"; fwrite($soubor, $text);
 $dic=$fir_fdic;
-  $text = "  <dic><![CDATA[".$dic."]]></dic>"."\r\n"; fwrite($soubor, $text);
-$datumNarodenia=SkDatum($hlavicka->dar);
-if ( $datumNarodenia == '00.00.0000' ) $datumNarodenia="";
-  $text = "  <datumNarodenia><![CDATA[".$datumNarodenia."]]></datumNarodenia>"."\r\n"; fwrite($soubor, $text);
+  $text = " <dic><![CDATA[".$dic."]]></dic>"."\r\n"; fwrite($soubor, $text);
 
-  $text = " </hlavicka>"."\r\n"; fwrite($soubor, $text);
+  $text = " <zaObdobie>"."\r\n"; fwrite($soubor, $text);
+$hodnota=SkDatum($hlavicka->obod);
+if ( $hodnota == '00.00.0000' ) { $hodnota="01.01.".$kli_vrok; }
+  $text = "  <datumOd><![CDATA[".$hodnota."]]></datumOd>"."\r\n"; fwrite($soubor, $text);
+$hodnota=SkDatum($hlavicka->obdo);
+if ( $hodnota == '00.00.0000' ) { $hodnota="31.12.".$kli_vrok; }
+  $text = "  <datumDo><![CDATA[".$hodnota."]]></datumDo>"."\r\n"; fwrite($soubor, $text);
+  $text = " </zaObdobie>"."\r\n"; fwrite($soubor, $text);
 
-//telo
-  $text = " <telo>"."\r\n"; fwrite($soubor, $text);
+//udaje o FO z ufirdalsie
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_ufirdalsie";
+$fir_vysledok = mysql_query($sqlfir);
+if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); }
+$dmeno = $fir_riadok->dmeno;
+$dprie = $fir_riadok->dprie;
+$dtitl = $fir_riadok->dtitl;
+$dtitz = $fir_riadok->dtitz;
+$duli = $fir_riadok->duli;
+$dcdm = $fir_riadok->dcdm;
+$dmes = $fir_riadok->dmes;
+$dpsc = $fir_riadok->dpsc;
+$dstat = $fir_riadok->dstat;
+if ( $fir_uctt03 != 999 )
+{
+$duli = $fir_fuli;
+$dcdm = $fir_fcdm;
+$dmes = $fir_fmes;
+$dpsc = $fir_fpsc;
+$dstat = "SK";
+}
+//I.ODDIEL
+  $text = " <fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $dprie);
+  $text = "  <priezvisko><![CDATA[".$hodnota."]]></priezvisko>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $dmeno);
+  $text = "  <meno><![CDATA[".$hodnota."]]></meno>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $dtitl);
+  $text = "  <titulPred><![CDATA[".$hodnota."]]></titulPred>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $dtitz);
+  $text = "  <titulZa><![CDATA[".$hodnota."]]></titulZa>"."\r\n"; fwrite($soubor, $text);
+  $text = " </fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
 
-  $text = " </telo>"."\r\n"; fwrite($soubor, $text);
+  $text = " <pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <obchodneMeno>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $fir_fnaz);
+if ( $fir_uctt03 == 999 ) { $hodnota=""; }
+  $text = "   <riadok><![CDATA[".$hodnota."]]></riadok>"."\r\n"; fwrite($soubor, $text);
+$hodnota="";
+  $text = "   <riadok><![CDATA[".$hodnota."]]></riadok>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </obchodneMeno>"."\r\n"; fwrite($soubor, $text);
+  $text = " </pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
+
+  $text = " <sidlo>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $duli);
+  $text = "  <ulica><![CDATA[".$hodnota."]]></ulica>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$dcdm;
+  $text = "  <supisneOrientacneCislo><![CDATA[".$hodnota."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$dpsc;
+  $text = "  <psc><![CDATA[".$hodnota."]]></psc>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $dmes);
+  $text = "  <obec><![CDATA[".$hodnota."]]></obec>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $dstat);
+  $text = "  <stat><![CDATA[".$hodnota."]]></stat>"."\r\n"; fwrite($soubor, $text);
+  $text = " </sidlo>"."\r\n"; fwrite($soubor, $text);
+
+$hodnota=1*$hlavicka->ulava30a;
+  $text = " <ulava30a><![CDATA[".$hodnota."]]></ulava30a>"."\r\n"; fwrite($soubor, $text);
+$hodnota=1*$hlavicka->ulava30b;
+  $text = " <ulava30b><![CDATA[".$hodnota."]]></ulava30b>"."\r\n"; fwrite($soubor, $text);
+  $text = "</hlavicka>"."\r\n"; fwrite($soubor, $text);
+
+//II.ODDIEL
+  $text = "<zavislaOsoba>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->zodic;
+  $text = " <dic><![CDATA[".$hodnota."]]></dic>"."\r\n"; fwrite($soubor, $text);
+  $text = " <fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zoprie);
+  $text = "  <priezvisko><![CDATA[".$hodnota."]]></priezvisko>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zomeno);
+  $text = "  <meno><![CDATA[".$hodnota."]]></meno>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zotitl);
+  $text = "  <titulPred><![CDATA[".$hodnota."]]></titulPred>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zotitz);
+  $text = "  <titulZa><![CDATA[".$hodnota."]]></titulZa>"."\r\n"; fwrite($soubor, $text);
+  $text = " </fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
+
+  $text = " <pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <obchodneMeno>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zonaz);
+  $text = "   <riadok><![CDATA[".$hodnota."]]></riadok>"."\r\n"; fwrite($soubor, $text);
+$hodnota="";
+  $text = "   <riadok><![CDATA[".$hodnota."]]></riadok>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </obchodneMeno>"."\r\n"; fwrite($soubor, $text);
+  $text = " </pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
+
+  $text = " <sidlo>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zouli);
+  $text = "  <ulica><![CDATA[".$hodnota."]]></ulica>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->zocdm;
+  $text = "  <supisneOrientacneCislo><![CDATA[".$hodnota."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->zopsc;
+  $text = "  <psc><![CDATA[".$hodnota."]]></psc>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zomes);
+  $text = "  <obec><![CDATA[".$hodnota."]]></obec>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zostat);
+  $text = "  <stat><![CDATA[".$hodnota."]]></stat>"."\r\n"; fwrite($soubor, $text);
+  $text = " </sidlo>"."\r\n"; fwrite($soubor, $text);
+
+$hodnota=1*$hlavicka->zoulava30a;
+  $text = " <ulava30a><![CDATA[".$hodnota."]]></ulava30a>"."\r\n"; fwrite($soubor, $text);
+$hodnota=1*$hlavicka->zoulava30b;
+  $text = " <ulava30b><![CDATA[".$hodnota."]]></ulava30b>"."\r\n"; fwrite($soubor, $text);
+  $text = "</zavislaOsoba>"."\r\n"; fwrite($soubor, $text);
+
+//III.ODDIEL
+  $text = " <upravaZakladu>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->suma;
+if ( $hodnota == 0 ) $hodnota="";
+  $text = "  <suma><![CDATA[".$hodnota."]]></suma>"."\r\n"; fwrite($soubor, $text);
+  $text = " </upravaZakladu>"."\r\n"; fwrite($soubor, $text);
+
+  $text = " <vypracoval>"."\r\n"; fwrite($soubor, $text);
+$hodnota=iconv("CP1250", "UTF-8", $fir_mzdt05);
+  $text = "  <vypracoval><![CDATA[".$hodnota."]]></vypracoval>"."\r\n"; fwrite($soubor, $text);
+
+$hodnota=SkDatum($hlavicka->datum);
+  $text = "  <dna><![CDATA[".$hodnota."]]></dna>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$fir_mzdt04;
+  $text = "  <telefon><![CDATA[".$hodnota."]]></telefon>"."\r\n"; fwrite($soubor, $text);
+$hodnota="1";
+  $text = "  <podpis><![CDATA[".$hodnota."]]></podpis>"."\r\n"; fwrite($soubor, $text);
+  $text = " </vypracoval>"."\r\n"; fwrite($soubor, $text);
+
   $text = "</dokument>"."\r\n"; fwrite($soubor, $text);
      }
 //koniec ak j=0

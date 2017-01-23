@@ -543,9 +543,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
    <td>
     <div class="bar-btn-form-tool">
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML();"
-          title="Export do XML" class="btn-form-tool"> <!-- dopyt, aktualizova -->
-     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV(<?php echo $cislo_cpl; ?>);" title="Zobrazi všetky strany v PDF" class="btn-form-tool"> <!-- dopyt, v chrome nefunguje -->
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV(<?php echo $cislo_cpl; ?>);" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
    </td>
   </tr>
@@ -648,7 +646,7 @@ $slpol = mysql_num_rows($sluz);
 <caption>Zoznam subjektov</caption>
 <tr class="zero-line">
  <td style="width:4%;"></td><td style="width:11%;"></td><td style="width:32%;"></td>
- <td style="width:23%;"></td><td style="width:12%;"></td><td style="width:18%;"></td>
+ <td style="width:23%;"></td><td style="width:10%;"></td><td style="width:20%;"></td>
 </tr>
 <tr>
  <th>#</th>
@@ -673,11 +671,12 @@ $cisloi=$i+1;
  <td><?php echo $rsluz->zonaz.$rsluz->zoprie." ".$rsluz->zomeno; ?></td>
  <td><?php echo $rsluz->smes; ?></td>
  <td align="right"><?php echo $rsluz->suma; ?></td>
- <td align="center">
+ <td align="right">
   <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl; ?>);" title="Upravi">&nbsp;&nbsp;&nbsp;
   <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl; ?>, '<?php echo $rsluz->zodic; ?>');" title="Vymaza">&nbsp;&nbsp;&nbsp;
-  <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV(<?php echo $rsluz->cpl; ?>);" title="Zobrazi v PDF">
- </td>
+  <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV(<?php echo $rsluz->cpl; ?>);" title="Zobrazi v PDF">&nbsp;&nbsp;&nbsp;
+  <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML();" title="Export do XML"> <!-- dopyt, aktualizova -->
+&nbsp;&nbsp;&nbsp;</td>
 </tr>
 <?php
  }
