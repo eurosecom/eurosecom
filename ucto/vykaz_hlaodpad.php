@@ -600,7 +600,9 @@ $pdf->Cell(3,6," ","$rmc1",0,"C");$pdf->Cell(4,4,"$t07","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(4,4,"$t09","$rmc",0,"C");$pdf->Cell(4,4,"$t10","$rmc",0,"C");
 
 //datum podpisu zavodu
-$text=$h_zos;
+$h_zoszv=$h_zos;
+if( trim($zav_fnaz) == '' ) { $h_zoszv=""; }
+$text=$h_zoszv;
 $textx="0123456789";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
