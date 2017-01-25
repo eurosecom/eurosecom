@@ -2115,6 +2115,7 @@ div.input-echo {
 <?php if ( $strana == 3 OR $strana == 9999 ) { ?>
    urobVzdru();
    document.formv1.vzdru.value = '<?php echo "$vzdru";?>';
+<?php if ( $datprerus == 1 ) { ?> document.formv1.datprerus.checked = 'checked'; <?php } ?>
    document.formv1.da1.focus();
    document.formv1.da1.select();
 <?php                                        } ?>
@@ -4288,6 +4289,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(195,4," ","$rmc1",1,"L");
 $text=SKDatum($hlavickav->datz);
 if ( $text =='00.00.0000' ) $text="";
+if ( $hlavickav->datprerus == 1 ) $text="";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,3,1);

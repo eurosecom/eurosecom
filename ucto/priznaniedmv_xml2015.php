@@ -687,6 +687,7 @@ if ( $hodnota =='00.00.0000' ) $hodnota="";
   $text = "    <r01><![CDATA[".$hodnota."]]></r01>"."\r\n"; fwrite($soubor, $text);
 $hodnota=SKDatum($hlavickav->datz);
 if ( $hodnota =='00.00.0000' ) $hodnota="";
+if ( $hlavickav->datprerus == 1 ) $hodnota="";
   $text = "    <r02vzniku><![CDATA[".$hodnota."]]></r02vzniku>"."\r\n"; fwrite($soubor, $text);
 $hodnota=SKDatum($hlavickav->datk);
 if ( $hodnota =='00.00.0000' ) $hodnota="";
