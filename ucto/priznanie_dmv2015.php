@@ -523,6 +523,7 @@ $r13s1zvy10 = 1*$_REQUEST['r13s1zvy10'];
 $r13s1zvy20 = 1*$_REQUEST['r13s1zvy20'];
 $r13s2zvy10 = 1*$_REQUEST['r13s2zvy10'];
 $r13s2zvy20 = 1*$_REQUEST['r13s2zvy20'];
+$datprerus = 1*$_REQUEST['datprerus'];
 
 $druh3=0;
 if ( $druh31 == 1 ) { $druh3=1; }
@@ -595,7 +596,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dmv SET ".
 " r13s1zni25='$r13s1zni25', r13s1zni20='$r13s1zni20', r13s1zni15='$r13s1zni15', ".
 " r13s2zni25='$r13s2zni25', r13s2zni20='$r13s2zni20', r13s2zni15='$r13s2zni15', ".
 " r13s1zvy10='$r13s1zvy10', r13s1zvy20='$r13s1zvy20', r13s2zvy10='$r13s2zvy10', r13s2zvy20='$r13s2zvy20', ".
-" r14s1='$r14s1', r14s2='$r14s2', ".
+" r14s1='$r14s1', r14s2='$r14s2', datprerus='$datprerus', ".
 " r15s1zni50a='$r15s1zni50a', r15s1zni50b='$r15s1zni50b', r15s1zni50c='$r15s1zni50c', ".
 " r16s1='$r16s1', r16s2='$r16s2', r17kombi='$r17kombi', r18s1='$r18s1', r18s2='$r18s2', ".
 " r19s1mes='$r19s1mes', r19s2mes='$r19s2mes', r19s1dni='$r19s1dni', r19s2dni='$r19s2dni', ".
@@ -1669,6 +1670,16 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD r13s2zni0 DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
 $vysledek = mysql_query("$sql");
 }
+
+//zmeny rok 2016
+$sql = "SELECT datprerus FROM F".$kli_vxcf."_uctpriznanie_dmv";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dmv ADD datprerus DECIMAL(2,0) DEFAULT 0 AFTER new2015 ";
+$vysledek = mysql_query("$sql");
+}
+
 //koniec uprav def. tabulky
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctpriznanie_dmv";
 $vytvor = mysql_query("$vsql");
@@ -1815,6 +1826,7 @@ $r20s1 = $fir_riadok->r20s1;
 $r20s2 = $fir_riadok->r20s2;
 $mesad1 = $fir_riadok->mesad1;
 $mesad2 = $fir_riadok->mesad2;
+$datprerus = 1*$fir_riadok->datprerus;
 }
 
 if ( $strana == 4 ) {
@@ -2511,12 +2523,11 @@ $source="../ucto/priznanie_dmv".$rokdmv.".php?cislo_oc=".$cislo_oc."&drupoh=1&pa
 <span class="text-echo" style="top:75px; left:458px;"><?php echo $fir_fdic; ?></span>
 <!-- III. ODDIEL -->
 <!-- 01 a 02 riadok -->
-<input type="text" name="da1" id="da1" value="<?php echo $da1sk; ?>"
-       onkeyup="CiarkaNaBodku(this);" style="width:196px; top:162px; left:381px;"/>
-<input type="text" name="datz" id="datz" value="<?php echo $datzsk; ?>"
-       onkeyup="CiarkaNaBodku(this);" style="width:196px; top:203px; left:381px;"/>
-<input type="text" name="datk" id="datk" value="<?php echo $datksk; ?>"
-       onkeyup="CiarkaNaBodku(this);" style="width:196px; top:244px; left:381px;"/>
+<input type="text" name="da1" id="da1" value="<?php echo $da1sk; ?>" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:162px; left:381px;"/>
+<input type="text" name="datz" id="datz" value="<?php echo $datzsk; ?>" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:203px; left:381px;"/>
+<input type="checkbox" name="datprerus" value="1" style="top:208px; left:594px;"/>
+<label for="datprerus" style="position:absolute; top:202px; left:618px; font-size:12px; background-color:white; line-height:30px; padding:0 5px;">kliknite, ak nechcete vyplniù d·tum pri preruöov. obdobiach</label>
+<input type="text" name="datk" id="datk" value="<?php echo $datksk; ?>" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:244px; left:381px;"/>
 <!-- 03 a 04 riadok -->
 <select size="1" name="vzkat" id="vzkat" onchange="urobVzdru();"
         style="width:38px; top:285px; left:435px;">
@@ -2946,27 +2957,17 @@ $source="../ucto/priznanie_dmv".$rokdmv.".php?cislo_oc=".$cislo_oc."&drupoh=1&pa
 
 <!-- 13 riadok -->
 <!-- znizenie sadzby -->
-<input type="checkbox" name="r13s1zni25" id="r13s1zni25" value="1" onclick="zni25s1();"
-       style="top:613px; left:303px;"/>
-<input type="checkbox" name="r13s1zni20" id="r13s1zni20" value="1" onclick="zni20s1();"
-       style="top:613px; left:343px;"/>
-<input type="checkbox" name="r13s1zni15" id="r13s1zni15" value="1" onclick="zni15s1();"
-       style="top:613px; left:384px;"/>
-<input type="checkbox" name="r13s2zni25" id="r13s2zni25" value="1" onclick="zni25s2();"
-       style="top:613px; left:460px;"/>
-<input type="checkbox" name="r13s2zni20" id="r13s2zni20" value="1" onclick="zni20s2();"
-       style="top:613px; left:500px;"/>
-<input type="checkbox" name="r13s2zni15" id="r13s2zni15" value="1" onclick="zni15s2();"
-       style="top:613px; left:540px;"/>
+<input type="checkbox" name="r13s1zni25" id="r13s1zni25" value="1" onclick="zni25s1();" style="top:613px; left:303px;"/>
+<input type="checkbox" name="r13s1zni20" id="r13s1zni20" value="1" onclick="zni20s1();" style="top:613px; left:343px;"/>
+<input type="checkbox" name="r13s1zni15" id="r13s1zni15" value="1" onclick="zni15s1();" style="top:613px; left:384px;"/>
+<input type="checkbox" name="r13s2zni25" id="r13s2zni25" value="1" onclick="zni25s2();" style="top:613px; left:460px;"/>
+<input type="checkbox" name="r13s2zni20" id="r13s2zni20" value="1" onclick="zni20s2();" style="top:613px; left:500px;"/>
+<input type="checkbox" name="r13s2zni15" id="r13s2zni15" value="1" onclick="zni15s2();" style="top:613px; left:540px;"/>
 <!-- zvysenie sadzby -->
-<input type="checkbox" name="r13s1zvy10" id="r13s1zvy10" value="1" onclick="zvy10s1();"
-       style="top:652px; left:343px;"/>
-<input type="checkbox" name="r13s1zvy20" id="r13s1zvy20" value="1" onclick="zvy20s1();"
-       style="top:652px; left:384px;"/>
-<input type="checkbox" name="r13s2zvy10" id="r13s2zvy10" value="1" onclick="zvy10s2();"
-       style="top:652px; left:500px;"/>
-<input type="checkbox" name="r13s2zvy20" id="r13s2zvy20" value="1" onclick="zvy20s2();"
-       style="top:652px; left:540px;"/>
+<input type="checkbox" name="r13s1zvy10" id="r13s1zvy10" value="1" onclick="zvy10s1();" style="top:652px; left:343px;"/>
+<input type="checkbox" name="r13s1zvy20" id="r13s1zvy20" value="1" onclick="zvy20s1();" style="top:652px; left:384px;"/>
+<input type="checkbox" name="r13s2zvy10" id="r13s2zvy10" value="1" onclick="zvy10s2();" style="top:652px; left:500px;"/>
+<input type="checkbox" name="r13s2zvy20" id="r13s2zvy20" value="1" onclick="zvy20s2();" style="top:652px; left:540px;"/>
  <img src="../obr/ikony/info_blue_icon.png" title="PoËet mesiacov od prvej evidencie vozidla"
       onclick="document.getElementById('tooltip-r13').className='unhidden tooltip-left';"
       class="btn-row-tool" style="top:642px; left:600px;">
