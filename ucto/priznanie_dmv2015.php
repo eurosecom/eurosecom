@@ -3119,12 +3119,13 @@ $slpol = mysql_num_rows($sluz);
 <table class="vozidla">
 <caption>Zoznam vozidiel</caption>
 <tr class="zero-line">
- <td style="width:12%;"></td><td style="width:29%;"></td><td style="width:4%;"></td>
- <td style="width:12%;"></td><td style="width:10%;"></td><td style="width:12%;"></td>
- <td style="width:9%;"></td><td style="width:12%;"></td>
+ <td style="width:3%;"></td><td style="width:9%;"></td><td style="width:29%;"></td>
+ <td style="width:4%;"></td><td style="width:12%;"></td><td style="width:10%;"></td>
+ <td style="width:12%;"></td><td style="width:9%;"></td><td style="width:12%;"></td>
 </tr>
 <tr>
- <th rowspan="2">EÈV</th>
+ <th rowspan="2">#</th>
+ <th rowspan="2" align="left">EÈV</th>
  <th rowspan="2" align="left">Znaèka</th>
  <th rowspan="2">Druh</th>
  <th>Prvá</th>
@@ -3149,7 +3150,8 @@ $tsumadane=$tsumadane+$rsluz->r21;
 $tsumadane2=sprintf("%0.2f", $tsumadane);
 ?>
 <tr class="body"> 
- <td align="left"><?php echo $cisloi.". ".$rsluz->vzspz; ?></td>
+ <td align="center" style="color:#999;"><?php echo $cisloi; ?>.</td>
+ <td align="left"><?php echo $rsluz->vzspz; ?></td>
  <td><?php echo $rsluz->vzzn; ?></td>
  <td align="center"><?php echo $rsluz->vzdru; ?></td>
  <td align="center">
@@ -3181,16 +3183,12 @@ if( $tsumadane2 == 0 ) { $tsumadane2="0"; }
 if( $cisloi == 0 ) { $cisloi="0"; }
 //end of while
 ?>
-<tr class="body"> 
- <td colspan="2" align="left">SPOLU poèet vozidiel <?php echo $cisloi; ?></td>
-
- <td align="center"></td>
- <td align="center"></td>
- <td align="center"></td>
- <td align="center"></td>
- <td align="right" style=""><?php echo $tsumadane2; ?></td>
- <td align="center"></td>
-</tr>
+ <tr>
+ <td align="center" style="color:#999;">=</td>
+ <td align="left" colspan="6" style="color:#999;">Spolu vozidlá&nbsp;&nbsp;&nbsp;<strong><?php echo $cisloi; ?></strong></td>
+ <td align="right" style="color:#999;"><strong><?php echo $tsumadane2; ?></strong></td>
+ <td>&nbsp;</td>
+ </tr>
  </table>
 </div>
 <?php                                        } ?>
