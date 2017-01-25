@@ -287,14 +287,14 @@ $vysledek = mysql_query("$sql");
 
 <?php
 //nacitaj udaje pre upravu
-if ( $copern == 20 )
+if ( $copern == 20 OR $copern == 110 )
      {
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd".
 " WHERE oc = 1 AND cpl = $cislo_cpl ";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
-if ( $strana == 1 ) {
+if ( $strana == 1 OR $strana == 9999 ) {
 $obod = $fir_riadok->obod;
 $obodsk=SkDatum($obod);
 if( $obodsk == '00.00.0000' ) { $obodsk="01.01.".$kli_vrok;}
@@ -311,7 +311,7 @@ $zotitz = $fir_riadok->zotitz;
 $zonaz = $fir_riadok->zonaz;
                     }
 
-if ( $strana == 2 ) {
+if ( $strana == 2 OR $strana == 9999) {
 $zouli = $fir_riadok->zouli;
 $zocdm = $fir_riadok->zocdm;
 $zopsc = $fir_riadok->zopsc;
@@ -577,7 +577,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
   function DMVdoXML(cpl, cislo_dic)
   {
    var cislo_cpl = cpl;
-   window.open('../ucto/oznamenie_uprzd.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&cislo_cpl=' + cislo_cpl + '&cislo_dic=' + cislo_dic + '&elsubor=2',
+   window.open('../ucto/oznamenie_uprzd.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&cislo_cpl=' + cislo_cpl + '&cislo_dic=' + cislo_dic + '&elsubor=2&strana=9999',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
@@ -586,6 +586,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
 <?php
   if ( $copern == 20 )
   {
+if( $strana == 5 ) { $cislo_cpl=0; }
 ?>
 <div id="wrap-heading">
  <table id="heading">
@@ -1533,7 +1534,7 @@ $cislo_dic = 1*$_REQUEST['cislo_dic'];
    <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
   </tr>
   <tr>
-   <td class="header">Ozn·menie o ˙prave ZD / Export XML - <span class="subheader"><?php echo $cislo_dic." ".$rsluz->zonaz.$rsluz->zoprie." ".$rsluz->zomeno; ?></span></td> <!-- dopyt, rozbehaù n·zov subjektu -->
+   <td class="header">Ozn·menie o ˙prave ZD / Export XML - <span class="subheader"><?php echo $cislo_dic." ".$zonaz.$zoprie." ".$zomeno; ?></span></td> <!-- dopyt, rozbehaù n·zov subjektu -->
    <td></td>
   </tr>
  </table>
@@ -1796,7 +1797,7 @@ echo "Subjekt s diË $hlavicka->zodic nem· vyplnenÈ <strong>diË</strong> z·vislej
 <?php
 }
 ?>
-<?php if ( ( $hlavicka->zoprie == ' ' AND $hlavicka->zomeno == ' ' ) OR $hlavicka->zonaz == ' ' ) //dopyt, help, zobraziù keÔ nemaj˙ vyplnenÈ prie a meno alebo n·zov
+<?php if ( trim($hlavicka->zoprie) == '' AND trim($hlavicka->zomeno) == '' AND trim($hlavicka->zonaz) == '' )
 {
 ?>
 <li class="red">
@@ -1808,7 +1809,7 @@ echo "Subjekt s diË $hlavicka->zodic nem· vyplnenÈ <strong>priezvisko, meno aleb
 <?php
 }
 ?>
-<?php if ( ( $hlavicka->zoprie != '' OR $hlavicka->zomeno != '' ) AND $hlavicka->zonaz != '' ) //dopyt, help s podmienkou nesmie byù
+<?php if ( $hlavicka->zoprie != '' AND $hlavicka->zomeno != ''  AND $hlavicka->zonaz != '' )
 {
 ?>
 <li class="red">
@@ -1829,7 +1830,7 @@ echo "Subjekt s diË $hlavicka->zodic m· s˙Ëasne vyplnenÈ <strong>priezvisko, men
 ?>
 <li class="red">
 <?php
-$upozorni1=1;
+$upozorni2=1;
 echo "Subjekt s diË $hlavicka->zodic nem· vyplnen˙ poloûku <strong>obec</strong> v adrese z·vislej osoby v II.oddiele ozn·menia.";
 ?>
 </li>
