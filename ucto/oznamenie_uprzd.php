@@ -366,10 +366,6 @@ $fir_fnaz = "";
  <link rel="stylesheet" href="../css/reset.css">
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - Oznámenie o úprave ZD</title>
-<?php
-if ( $copern != 110 )
-     {
-?>
 <style type="text/css">
 tr.zero-line > td {
   border: 0 !important;
@@ -447,23 +443,6 @@ div.input-echo {
 .tooltip-body ul li strong {
   font-size: 14px;
 }
-</style>
-<?php
-     }
-?>
-<?php
-if ( $copern == 110 )
-     {
-?>
-<style>
-#content {
-  box-sizing: border-box;
-  background-color: white;
-  padding: 30px 25px;
-   -webkit-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
-  -moz-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
-  box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
-}
 #content > p {
   line-height: 22px;
   font-size: 14px;
@@ -519,9 +498,6 @@ dl.legend-area > dt {
   padding-top: 5px;
 }
 </style>
-<?php
-     }
-?>
 <script type="text/javascript">
 //parameter okna
 var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
@@ -731,7 +707,7 @@ $slpol = mysql_num_rows($sluz);
  <th>#</th>
  <th align="left">DIÈ</th>
  <th align="left">Názov</th>
- <th align="left">Mesto</th>
+ <th align="left">Obec</th>
  <th align="right">Suma úpravy</th>
  <th>&nbsp;</th>
 </tr>
@@ -748,13 +724,13 @@ $cisloi=$i+1;
  <td align="center"><?php echo "$cisloi."; ?></td>
  <td><?php echo $rsluz->zodic; ?></td>
  <td><?php echo $rsluz->zonaz.$rsluz->zoprie." ".$rsluz->zomeno; ?></td>
- <td><?php echo $rsluz->smes; ?></td>
+ <td><?php echo $rsluz->zomes; ?></td>
  <td align="right"><?php echo $rsluz->suma; ?></td>
  <td align="right">
   <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravVzd(<?php echo $rsluz->cpl; ?>);" title="Upravi">&nbsp;&nbsp;&nbsp;
   <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazVzd(<?php echo $rsluz->cpl; ?>, '<?php echo $rsluz->zodic; ?>');" title="Vymaza">&nbsp;&nbsp;&nbsp;
   <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV(<?php echo $rsluz->cpl; ?>);" title="Zobrazi v PDF">&nbsp;&nbsp;&nbsp;
-  <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML(<?php echo $rsluz->cpl; ?>, '<?php echo $rsluz->zodic; ?>');" title="Export do XML"> <!-- dopyt, aktualizova -->
+  <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML(<?php echo $rsluz->cpl; ?>, '<?php echo $rsluz->zodic; ?>');" title="Export do XML">
 &nbsp;&nbsp;&nbsp;</td>
 </tr>
 <?php
@@ -811,9 +787,7 @@ window.open('oznamenie_uprzd.php?copern=1001&icoset=' + ico + '&cislo_cpl=<?php 
 
 </script>
 <?php                    } ?>
-
-
-</div> <!-- koniec #content -->
+</div> <!-- #content formulár -->
 <?php
 //mysql_free_result($vysledok);
   }
@@ -898,7 +872,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell
 
 //za zdanovacie obdobie
 $text=SkDatum($hlavicka->obod);
-if ( $text =='00.00.0000' ) $text="01.01.".$kli_vrok;
+//if ( $text =='00.00.0000' ) $text="01.01.".$kli_vrok;
 //$text="01.01.2016";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -910,7 +884,7 @@ $pdf->Cell(27,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t01","$rmc",0,"R");$pdf->Cel
 $pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(13,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",0,"C");
 $text=SkDatum($hlavicka->obdo);
-if ( $text =='00.00.0000' ) $text="31.12.".$kli_vrok;
+//if ( $text =='00.00.0000' ) $text="31.12.".$kli_vrok;
 //$text="31.12.2016";
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -1559,14 +1533,14 @@ $cislo_dic = 1*$_REQUEST['cislo_dic'];
    <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
   </tr>
   <tr>
-   <td class="header">Oznámenie v176 / Export XML - <span class="subheader"><?php echo "DIÈ $cislo_dic";?></span></td>
+   <td class="header">Oznámenie o úprave ZD / Export XML - <span class="subheader"><?php echo $cislo_dic." ".$rsluz->zonaz.$rsluz->zoprie." ".$rsluz->zomeno; ?></span></td> <!-- dopyt, rozbeha názov subjektu -->
    <td></td>
   </tr>
  </table>
 </div>
 <?php
 
-$hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+$hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 $idx=$kli_uzid.$hhmm;
 
 $nazsub="OZNAMENIEv176_".$kli_vrok."_".$idx.".xml";
@@ -1634,10 +1608,10 @@ $dic=$fir_fdic;
 
   $text = " <zaObdobie>"."\r\n"; fwrite($soubor, $text);
 $hodnota=SkDatum($hlavicka->obod);
-if ( $hodnota == '00.00.0000' ) { $hodnota="01.01.".$kli_vrok; }
+//if ( $hodnota == '00.00.0000' ) { $hodnota="01.01.".$kli_vrok; }
   $text = "  <datumOd><![CDATA[".$hodnota."]]></datumOd>"."\r\n"; fwrite($soubor, $text);
 $hodnota=SkDatum($hlavicka->obdo);
-if ( $hodnota == '00.00.0000' ) { $hodnota="31.12.".$kli_vrok; }
+//if ( $hodnota == '00.00.0000' ) { $hodnota="31.12.".$kli_vrok; }
   $text = "  <datumDo><![CDATA[".$hodnota."]]></datumDo>"."\r\n"; fwrite($soubor, $text);
   $text = " </zaObdobie>"."\r\n"; fwrite($soubor, $text);
 
@@ -1774,7 +1748,7 @@ $j = $j + 1;
   }
 fclose($soubor);
 ?>
-<div id="content">
+<div id="content" style="box-sizing: border-box; background-color: white; padding: 30px 25px;">
 <?php if ( $elsubor == 2 ) { ?>
 <p>Stiahnite si nižšie uvedený súbor <strong>.xml</strong> do Vášho poèítaèa a naèítajte ho na
 <a href="https://www.financnasprava.sk/sk/titulna-stranka" target="_blank" title="Stránka Finanènej správy">www.financnasprava.sk</a> alebo do aplikácie eDane:
@@ -1786,7 +1760,7 @@ fclose($soubor);
 
 <?php
 /////////////////////////////////////////////////////////////////////UPOZORNENIE
-$upozorni1=0; $upozorni2=0; $upozorni3=0; 
+$upozorni1=0; $upozorni2=0;
 ?>
 <div id="upozornenie" style="display:none;">
 <h2>
@@ -1798,31 +1772,77 @@ $upozorni1=0; $upozorni2=0; $upozorni3=0;
 </h2>
 <ul id="alertpage1" style="display:none;">
 <li class="header-section">STRANA 1</li>
-
-<?php if ( $hlavicka->obod == '0000-00-00' OR $hlavicka->obodo == '0000-00-00' )
+<?php if ( $hlavicka->obod == '0000-00-00' OR $hlavicka->obdo == '0000-00-00' )
 {
 ?>
 <li class="red">
 <?php
 $upozorni1=1;
-echo "DIÈ $hlavicka->zodic, nie je vyplnené <strong>zdaòovacie obdobie</strong> oznámenia.";
+echo "Subjekt s diè $hlavicka->zodic nemá vyplnené <strong>za zdaòovacie obdobie</strong> oznámenia.";
 ?>
 </li>
 <?php
 }
 ?>
-
+<?php if ( $hlavicka->zodic == '0' )
+{
+?>
+<li class="red">
+<?php
+$upozorni1=1;
+echo "Subjekt s diè $hlavicka->zodic nemá vyplnené <strong>diè</strong> závislej osoby v II.oddiele oznámenia.";
+?>
+</li>
+<?php
+}
+?>
+<?php if ( ( $hlavicka->zoprie == ' ' AND $hlavicka->zomeno == ' ' ) OR $hlavicka->zonaz == ' ' ) //dopyt, help, zobrazi keï nemajú vyplnené prie a meno alebo názov
+{
+?>
+<li class="red">
+<?php
+$upozorni1=1;
+echo "Subjekt s diè $hlavicka->zodic nemá vyplnené <strong>priezvisko, meno alebo názov</strong> závislej osoby v II.oddiele oznámenia.";
+?>
+</li>
+<?php
+}
+?>
+<?php if ( ( $hlavicka->zoprie != '' OR $hlavicka->zomeno != '' ) AND $hlavicka->zonaz != '' ) //dopyt, help s podmienkou nesmie by
+{
+?>
+<li class="red">
+<?php
+$upozorni1=1;
+echo "Subjekt s diè $hlavicka->zodic má súèasne vyplnené <strong>priezvisko, meno a názov</strong> závislej osoby v II.oddiele oznámenia.";
+?>
+</li>
+<?php
+}
+?>
 </ul>
 
 <ul id="alertpage2" style="display:none;">
 <li class="header-section">STRANA 2</li>
+<?php if ( $hlavicka->zomes == '' )
+{
+?>
+<li class="red">
+<?php
+$upozorni1=1;
+echo "Subjekt s diè $hlavicka->zodic nemá vyplnenú položku <strong>obec</strong> v adrese závislej osoby v II.oddiele oznámenia.";
+?>
+</li>
+<?php
+}
+?>
 <?php if ( $hlavicka->suma == 0 )
 {
 ?>
 <li class="red">
 <?php
 $upozorni2=1;
-echo "DIÈ $hlavicka->zodic, nie je vyplnená <strong>suma</strong> oznámenia.";
+echo "Subjekt s diè $hlavicka->zodic nemá vyplnenú <strong>sumu úpravy základu dane</strong> v III. oddiele oznámenia.";
 ?>
 </li>
 <?php
@@ -1833,26 +1853,21 @@ echo "DIÈ $hlavicka->zodic, nie je vyplnená <strong>suma</strong> oznámenia.";
 ?>
 <li class="red">
 <?php
-$upozorni1=1;
-echo "DIÈ $hlavicka->zodic, nie je vyplnený <strong>dátum vypracovania</strong> oznámenia.";
+$upozorni2=1;
+echo "Subjekt s diè $hlavicka->zodic nemá vyplnený <strong>dátum vypracovania</strong> oznámenia.";
 ?>
 </li>
 <?php
 }
 ?>
-
 </ul>
-
-
 </div> <!-- #upozornenie -->
 
 <script type="text/javascript">
 <?php
-if ( $upozorni1 == 1 OR $upozorni2 == 1 OR $upozorni3 == 1  ) { echo "upozornenie.style.display='block';"; }
-if ( $upozorni1 == 1 ) { echo "alertpage1.style.display='block';"; } 
-if ( $upozorni2 == 1 ) { echo "alertpage2.style.display='block';"; } 
-if ( $upozorni3 == 1 ) { echo "alertpage3.style.display='block';"; }
-
+if ( $upozorni1 == 1 OR $upozorni2 == 1 ) { echo "upozornenie.style.display='block';"; }
+if ( $upozorni1 == 1 ) { echo "alertpage1.style.display='block';"; }
+if ( $upozorni2 == 1 ) { echo "alertpage2.style.display='block';"; }
 ?>
 </script>
 
