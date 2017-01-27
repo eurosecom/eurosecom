@@ -598,6 +598,9 @@ if( $strana == 5 ) { $cislo_cpl=0; }
    <td class="header">Oznámenie o úprave základu dane <?php echo $kli_vrok; ?></td>
    <td>
     <div class="bar-btn-form-tool">
+<?php if ( $strana != 5 ) { ?>
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML();" title="Export do XML" class="btn-form-tool">
+<?php } ?>
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV(<?php echo $cislo_cpl; ?>);" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
@@ -1534,7 +1537,7 @@ $cislo_dic = 1*$_REQUEST['cislo_dic'];
    <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
   </tr>
   <tr>
-   <td class="header">Oznámenie o úprave ZD / Export XML - <span class="subheader"><?php echo $cislo_dic." ".$zonaz.$zoprie." ".$zomeno; ?></span></td> <!-- dopyt, rozbeha názov subjektu -->
+   <td class="header">Oznámenie o úprave ZD / Export XML - <span class="subheader"><?php echo $cislo_dic." ".$zonaz.$zoprie." ".$zomeno; ?></span></td>
    <td></td>
   </tr>
  </table>
