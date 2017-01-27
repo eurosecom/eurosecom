@@ -32,8 +32,8 @@ $docsv = 1*$_REQUEST['docsv'];
 $citfir = include("../cis/citaj_fir.php");
 $citfir = include("../cis/citaj_nas.php");
 
-if( $fir_fico == 44551142 AND $kli_vrok != 2016 ) { echo $kli_vrok." ??"; exit; }
-if( $fir_fico == 44551142 AND $kli_vrok == 2016 ) 
+if( $fir_fico == 44551142 AND $kli_vrok != 2017 ) { echo $kli_vrok." ??"; exit; }
+if( $fir_fico == 44551142 AND $kli_vrok == 2017 ) 
 {
 ?>
 <script type="text/javascript">

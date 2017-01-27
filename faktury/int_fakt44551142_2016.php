@@ -1,7 +1,7 @@
 <HTML>
 <?php
 
-//toto je prenos faktur EDcom do firmy 37 z 137 rok 2017
+//toto je prenos faktur EDcom do firmy 36 z 136 rok 2016
 // celkovy zaciatok dokumentu
        do
        {
@@ -35,10 +35,9 @@ $citfir = include("../cis/citaj_nas.php");
 if( $kli_vrok == 2014 ) { $h_sys=134; }
 if( $kli_vrok == 2015 ) { $h_sys=135; }
 if( $kli_vrok == 2016 ) { $h_sys=136; }
-if( $kli_vrok == 2017 ) { $h_sys=137; }
 
-if( $kli_vxcf != 37 )    { echo "SYS $h_sys nemôžete prevádza do  FIR $kli_vxcf ."; exit; } 
-if( $kli_vxcf == 37 AND $h_sys != 137 ) { echo "SYS $h_sys nemôžete prevádza do  FIR $kli_vxcf ."; exit; } 
+if( $kli_vxcf != 36 )    { echo "SYS $h_sys nemôžete prevádza do  FIR $kli_vxcf ."; exit; } 
+if( $kli_vxcf == 36 AND $h_sys != 136 ) { echo "SYS $h_sys nemôžete prevádza do  FIR $kli_vxcf ."; exit; } 
 
 
 //tlacove okno

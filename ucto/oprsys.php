@@ -1926,6 +1926,14 @@ window.open('../faktury/int_fakt2016medo.php?copern=55&page=1&h_sys=' + h_sys + 
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 <?php                                       } ?>
 
+<?php if( $medo == 1 AND $kli_vrok == 2017 ) { ?>
+var h_obdp = document.forms.formct2.h_obdp.value;
+var h_sys = document.forms.formct2.h_sys.value;
+
+window.open('../faktury/int_fakt2017medo.php?copern=55&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+<?php                                       } ?>
+
 <?php if( $berext == 1 AND $kli_vrok == 2013 ) { ?>
 var h_obdp = document.forms.formct2.h_obdp.value;
 var h_sys = document.forms.formct2.h_sys.value;
@@ -2319,7 +2327,41 @@ if($urob) { $blok676=" - BLOKOVANÉ"; }
 <option value="676" >SYS 676 GastroBENE <?php echo $blok676;?></option>
 <?php                                         } ?>
 
+<?php if( $medo == 1 AND $kli_vrok == 2017 ) { ?>
+<?php
+$blok607="";
+$blok647="";
+$blok657="";
+$blok677="";
+$blok688="";
 
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak607_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok607=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak647_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok647=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak657_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok657=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak677_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok677=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak688_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok688=" - BLOKOVANÉ"; }
+?>
+
+<option value="607" >SYS 607 Ubytovanie <?php echo $blok607;?></option>
+<option value="647" >SYS 647 FastFood NM GastroBENE <?php echo $blok647;?></option>
+<option value="657" >SYS 657 FastFood NM <?php echo $blok657;?></option>
+<option value="677" >SYS 677 GastroBENE <?php echo $blok677;?></option>
+<option value="688" >SYS 688 ZK Vrbové <?php echo $blok688;?></option>
+<?php                                         } ?>
 
 <?php if( $berext == 1 AND $kli_vrok == 2013 ) { ?>
 <?php

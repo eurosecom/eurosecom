@@ -1,7 +1,7 @@
 <HTML>
 <?php
 
-//toto je prenos faktur EDcom do firmy 37 z 137 rok 2017
+// prenos faktur na domene medosro.sk do uctovnictva rok 2017
 // celkovy zaciatok dokumentu
        do
        {
@@ -31,15 +31,21 @@ $h_obdp = 1*$_REQUEST['h_obdp'];
 
 $citfir = include("../cis/citaj_fir.php");
 $citfir = include("../cis/citaj_nas.php");
+$medo=1;
 
-if( $kli_vrok == 2014 ) { $h_sys=134; }
-if( $kli_vrok == 2015 ) { $h_sys=135; }
-if( $kli_vrok == 2016 ) { $h_sys=136; }
-if( $kli_vrok == 2017 ) { $h_sys=137; }
+if( $medo == 1 ) {
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak".$h_sys."_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { echo "Za˙Ëtovanie fakt˙r SYS$h_sys v obdobÌ $kli_vume je zablokovanÈ"; exit; } 
+                 }
 
-if( $kli_vxcf != 37 )    { echo "SYS $h_sys nemÙûete prev·dzaù do  FIR $kli_vxcf ."; exit; } 
-if( $kli_vxcf == 37 AND $h_sys != 137 ) { echo "SYS $h_sys nemÙûete prev·dzaù do  FIR $kli_vxcf ."; exit; } 
-
+if( $medo == 1 ) {
+if( $kli_vxcf != 75 AND $kli_vxcf != 76 ) { echo "SYS $h_sys nemÙûete prev·dzaù do  FIR $kli_vxcf ."; exit; } 
+if( $kli_vxcf == 75 AND $h_sys == 647 ) { echo "SYS $h_sys nemÙûete prev·dzaù do  FIR $kli_vxcf ."; exit; } 
+if( $kli_vxcf == 75 AND $h_sys == 677 ) { echo "SYS $h_sys nemÙûete prev·dzaù do  FIR $kli_vxcf ."; exit; } 
+if( $kli_vxcf == 76 AND $h_sys != 647 AND $h_sys != 677 ) { echo "SYS $h_sys nemÙûete prev·dzaù do  FIR $kli_vxcf ."; exit; } 
+                 }
+//$h_sys=74;
 
 //tlacove okno
 $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
@@ -47,36 +53,74 @@ $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resiza
 $tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
+if( $copern == 55 )
+{
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete za˙Ëtovaù fakt˙ry z podsystÈmu <?php echo $h_sys; ?> Odbyt, fakt˙ry za obdobie <?php echo $h_obdp; ?>.<?php echo $kli_vrok; ?> ?") )
+         { window.close();  }
+else
+  var okno = window.open("../faktury/int_fakt2017medo.php?copern=56&page=1&h_sys=<?php echo $h_sys; ?>&h_obdp=<?php echo $h_obdp; ?>&drupoh=1&uprav=1","_self");
+</script>
 
-///////zauctuj sluzbove faktury z inej FIR ako UCTO
-if( $copern == 56  )
+<?php
+exit;
+}
+
+
+if( $copern == 56 AND $medo == 41 )
+{
+echo "Prebieha nastavovanie ˙Ëtovania fakt˙r z podsystÈmov, pre viac inform·ciÌ volajte spr·vcu aplik·cie.";
+
+exit;
+}
+
+
+///////zauctuj medo sluzbove faktury z inej FIR ako UCTO
+if( $copern == 56 AND $medo == 1 )
 {
 
 //echo "uctujem";
 
-$uzk2="60200";
-$uzk1="60200";
-$uzk0="60200";
-$udn2="34300";
-$udn1="34300";
+$uzk2="60217";
+$udn2="34350";
+$udn1="34310";
 $dzk2=55;
-$dzk1=60;
-$dzk0=51;
-if( $h_sys == 511 ) 
+if( $h_sys == 688 ) 
 {
-$uzk2="395000";
-$udn2="343550";
-$udn1="343550";
+$uzk2="60217";
+$udn2="34350";
+$udn1="34310";
 $dzk2=55;
 }
-if( $h_sys == 512 ) 
+if( $h_sys == 647 ) 
 {
-$uzk2="395000";
-$udn2="343550";
-$udn1="343550";
+$uzk2="60219";
+$udn2="34350";
+$udn1="34310";
 $dzk2=55;
 }
-
+if( $h_sys == 657 ) 
+{
+$uzk2="60219";
+$udn2="34350";
+$udn1="34310";
+$dzk2=55;
+}
+if( $h_sys == 607 ) 
+{
+$uzk2="60230";
+$udn2="34350";
+$udn1="34310";
+$dzk2=55;
+}
+if( $h_sys == 677 ) 
+{
+$uzk2="60210";
+$udn2="34350";
+$udn1="34310";
+$dzk2=55;
+}
 
 $sql = 'DROP TABLE F'.$kli_vxcf.'_uctodbx'.$kli_uzid.' ';
 $vsql = mysql_query("$sql");
@@ -152,7 +196,7 @@ $sql = mysql_query("SELECT * FROM prcdatum$kli_uzid");
 $sqlt = 'DROP TABLE prcdatum'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
-$podmdat=" daz >= '".$datp_ume."' AND daz <= '".$datk_ume."' ";
+$podmdat=" dat >= '".$datp_ume."' AND dat <= '".$datk_ume."' ";
 
 
 //fakslu
@@ -176,6 +220,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uctodbx".$kli_uzid." ".
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+//exit;
+
 $dsqlt = "UPDATE F$kli_vxcf"."_uctodbx".$kli_uzid." SET ucd=$uzk2, rdp=$dzk2 WHERE dph=$fir_dph2 OR dph=19 ";
 $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_uctodbx".$kli_uzid." SET ucd=$uzk1, rdp=$dzk1 WHERE dph=$fir_dph1 ";
@@ -192,7 +238,6 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_uctodbx".$kli_uzid." SET zak=zakx WHERE zak = 0 AND zakx != 0 ";
 $dsql = mysql_query("$dsqlt");
 
-//exit;
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctodbx".$kli_uzid." ".
 " SELECT 1,slu,strx,zakx,dok,poh,0,ucm,ucd,rdp,dph,sum(hod),ico,fak,pop,str,zak,unk,".
@@ -222,10 +267,6 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "DELETE FROM F$kli_vxcf"."_uctodbx".$kli_uzid."  WHERE prx=0 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "UPDATE F$kli_vxcf"."_uctodbx".$kli_uzid." SET ucm='31100' WHERE poh = $pohcis";
-$dsql = mysql_query("$dsqlt");
-
-
 //daj do faktur fakodb
 $dsqlt = "DELETE FROM F$kli_vxcf"."_fakodb WHERE skl=$pohcis ";
 $dsql = mysql_query("$dsqlt");
@@ -237,8 +278,8 @@ $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_fakodb ".
 " SELECT ".
-"uce,ume,daz,dav,das,daz,dok,dok,'$pohcis',poh,ico,fak,dol,prf,obj,unk,dpr,ksy,ssy,poz,str,zak,txz,txp,zk0,zk1,zk2,zk3,zk4,".  
-"dn1,dn2,dn3,dn4,sp1,sp2,sz1,sz2,fak,sz4,zk0u,zk1u,zk2u,dn1u,dn2u,sp0u,sp1u,sp2u,hodu,hod,hodm,kurz,mena,zmen,odbm,".  
+"uce,ume,dat,dav,das,daz,dok,dok,'$pohcis',poh,ico,fak,dol,prf,obj,unk,dpr,ksy,ssy,poz,str,zak,txz,txp,zk0,zk1,zk2,zk3,zk4,".  
+"dn1,dn2,dn3,dn4,sp1,sp2,sz1,sz2,sz3,sz4,zk0u,zk1u,zk2u,dn1u,dn2u,sp0u,sp1u,sp2u,hodu,hod,hodm,kurz,mena,zmen,odbm,".  
 "zal,zao,ruc,uhr,".
 " $kli_uzid,now() ".
 " FROM ".$databaza."F$kli_vzcf"."_fakodb ".
@@ -246,9 +287,13 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_fakodb ".
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+//exit;
 
 //daj to do rozuctovania uctodb
-$dsqlt = "DELETE FROM F$kli_vxcf"."_uctodb WHERE poh=$pohcis AND ( LEFT(ucm,3) = 311 OR LEFT(ucm,3) = 315 ) ";
+$dsqlt = "UPDATE F$kli_vxcf"."_uctodbx".$kli_uzid." SET ucm='31100' WHERE poh = $pohcis";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_uctodb WHERE poh=$pohcis ";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_uctodb ".
@@ -309,7 +354,7 @@ $urob = mysql_query("$sql");
 
 <?php
 }
-///////koniec zauctuj sluzbove faktury z inej FIR ako UCTO
+///////koniec zauctuj medo sluzbove faktury z inej FIR ako UCTO
 
 
 ?>
@@ -337,6 +382,12 @@ var vyskawin = screen.height-175;
 var vyskawic = screen.height;
 var sirkawic = screen.width-10;
 
+function TlacDok( dok )
+                {
+
+window.open('db_dokladov.php?vloz_dok=' + dok + '&cislo_dok=<?php echo $cislo_dok;?>&hladaj_uce=<?php echo $hladaj_uce;?>&copern=50&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1050, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
     
 
 </script>
@@ -356,11 +407,14 @@ var sirkawic = screen.width-10;
 
 
 <?php
-if( $copern == 56 )
+if( $copern == 56 AND $medo == 1 )
 {
 $uceodb="31100";
-if( $h_sys == 511 ) $uceodb="311100";
-if( $h_sys == 512 ) $uceodb="311100";
+if( $h_sys == 647 ) $uceodb="31149";
+if( $h_sys == 657 ) $uceodb="31149";
+if( $h_sys == 688 ) $uceodb="31147";
+if( $h_sys == 607 ) $uceodb="31144";
+if( $h_sys == 677 ) $uceodb="31100";
 
 $sql = 'DROP TABLE F'.$kli_vxcf.'_uctodbx'.$kli_uzid.' ';
 $vsql = mysql_query("$sql");
@@ -372,7 +426,7 @@ $vsql = mysql_query("$sql");
 ?>
 OK
 <script type="text/javascript">
-    window.open('../faktury/vstfak.php?copern=1&drupoh=1001&page=1&pocstav=0', '_self' );
+    window.open('../ucto/rozdok.php?copern=101&drupoh=1&page=1&cislo_uce=<?php echo $uceodb;?>&hladaj_dok=&page=1&tlacitR=1', '_self' );
 </script>
 <?php
 }
