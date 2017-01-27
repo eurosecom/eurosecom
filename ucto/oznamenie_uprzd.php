@@ -599,7 +599,7 @@ if( $strana == 5 ) { $cislo_cpl=0; }
    <td>
     <div class="bar-btn-form-tool">
 <?php if ( $strana != 5 ) { ?>
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML();" title="Export do XML" class="btn-form-tool">
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="DMVdoXML(<?php echo $cislo_cpl; ?>, '<?php echo $zodic; ?>');" title="Export do XML" class="btn-form-tool">
 <?php } ?>
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacDMV(<?php echo $cislo_cpl; ?>);" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
@@ -1819,6 +1819,19 @@ echo "Subjekt s diè $hlavicka->zodic nemá vyplnené <strong>priezvisko, meno aleb
 <?php
 $upozorni1=1;
 echo "Subjekt s diè $hlavicka->zodic má súèasne vyplnené <strong>priezvisko, meno a názov</strong> závislej osoby v II.oddiele oznámenia.";
+?>
+</li>
+<?php
+}
+?>
+<?php if ( $hlavicka->zonaz == '' AND (( $hlavicka->zoprie != '' AND $hlavicka->zomeno == '' ) OR 
+ ( $hlavicka->zoprie == '' AND $hlavicka->zomeno != '' )) )
+{
+?>
+<li class="red">
+<?php
+$upozorni1=1;
+echo "Subjekt s diè $hlavicka->zodic pri fyzickej osobe musíte vyplni <strong>priezvisko aj meno</strong> závislej osoby v II.oddiele oznámenia.";
 ?>
 </li>
 <?php
