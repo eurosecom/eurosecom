@@ -34,6 +34,9 @@ $dtb2 = include("oddel_dtb3.php");
 // cislo operacie
 $copern = 1*$_REQUEST['copern'];
 
+$min_uzall=50000;
+if( $kli_uzall >= 100000 ) { $min_uzall=999999;}
+
 $sql = "ALTER TABLE klienti MODIFY txt1 VARCHAR(85) ";
 $vysledek = mysql_query("$sql");
 
@@ -313,6 +316,9 @@ if (!$spojeni):
     exit;
 endif;
 mysql_select_db($mysqldb);
+
+if( $h_all > 10000 AND $kli_uzall < 100000 ) { $h_all=10000; }
+
 $upravene = mysql_query("UPDATE klienti SET uziv_meno='$h_uzm', uziv_heslo='$h_uzh', priezvisko='$h_prie', meno='$h_meno',
  all_prav='$h_all', uct_prav='$h_uct', mzd_prav='$h_mzd', skl_prav='$h_skl', him_prav='$h_him', dop_prav='$h_dop',
  vyr_prav='$h_vyr', fak_prav='$h_fak', ana_prav='$h_ana', txt1='$h_txt1', cis1='$cis1' WHERE id_klienta=$cislo_id"); 
@@ -403,6 +409,9 @@ if (!$spojeni):
     exit;
 endif;
 mysql_select_db($mysqldb);
+
+if( $h_all > 10000 AND $kli_uzall < 100000 ) { $h_all=10000; }
+
 $ulozene = mysql_query("INSERT INTO klienti ( uziv_meno,uziv_heslo,priezvisko,meno,all_prav,uct_prav,mzd_prav,skl_prav,him_prav,dop_prav,
 vyr_prav,fak_prav,ana_prav,txt1,cis1 ) VALUES ('$h_uzm', '$h_uzh', '$h_prie', '$h_meno', '$h_all', '$h_uct', '$h_mzd', '$h_skl', '$h_him',
  '$h_dop', '$h_vyr', '$h_fak', '$h_ana', '$h_txt1', '$cis1'); "); 
@@ -566,7 +575,8 @@ if ( $copern != 1 && $copern != 2 && $copern != 3 && $copern != 4 && $copern != 
 // zobraz vsetko co je v tabulke
 if ( $copern == 1 || $copern == 2 || $copern == 3 || $copern == 4 || $copern == 5 || $copern == 6 || $copern == 8 || $copern == 7 )
   {
-$sql = mysql_query("SELECT * FROM klienti ORDER BY id_klienta");
+$sql = mysql_query("SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY id_klienta ");
+//echo "SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY id_klienta ";
   }
 // zobraz hladanie
 if ( $copern == 9 )
@@ -574,8 +584,8 @@ if ( $copern == 9 )
 
 $hladaj_naz = $_REQUEST['hladaj_naz'];
 
-if ( $hladaj_naz != "" ) $sql = mysql_query("SELECT * FROM klienti WHERE ( uziv_meno LIKE '%$hladaj_naz%' OR priezvisko LIKE '%$hladaj_naz%' ) ORDER BY id_klienta");
-if ( $hladaj_naz == "" ) $sql = mysql_query("SELECT * FROM klienti ORDER BY id_klienta");
+if ( $hladaj_naz != "" ) $sql = mysql_query("SELECT * FROM klienti WHERE ( uziv_meno LIKE '%$hladaj_naz%' OR priezvisko LIKE '%$hladaj_naz%' ) AND all_prav < $min_uzall ORDER BY id_klienta");
+if ( $hladaj_naz == "" ) $sql = mysql_query("SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY id_klienta");
   }
 // celkom poloziek
 $cpol = mysql_num_rows($sql);

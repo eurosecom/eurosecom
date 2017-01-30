@@ -51,6 +51,8 @@ $dtb2 = include("oddel_dtb3.php");
   endif;
   mysql_select_db($mysqldb);
 
+$min_uzall=50000;
+if( $kli_uzall >= 100000 ) { $min_uzall=999999;}
 
 //tlacove okno
 $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
@@ -432,7 +434,7 @@ if ( $copern == 5 )
   endif;
   mysql_select_db($mysqldb);
 
-$sql = mysql_query("SELECT * FROM klienti ORDER BY datm DESC LIMIT 20");
+$sql = mysql_query("SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY datm DESC LIMIT 20");
 // celkom poloziek
 $cpol = mysql_num_rows($sql);
 ?>
