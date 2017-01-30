@@ -1409,7 +1409,16 @@ if ( $riadok->pox == 10 ) {
 ?>
 <tfoot>
 <tr>
-<?php if ( $vseobj == 0 ) { ?><th colspan="3" class="left">&nbsp;&nbsp;Sumár objednávky è. <?php echo $riadok->xdok; ?></th><?php } ?>
+<?php if ( $vseobj == 0 ) { ?>
+<?php if ( $fir_fico == '36268399' ) { ?>
+<th colspan="3" class="left">&nbsp;&nbsp;Sumár objednávky è. <?php echo $riadok->xdok; ?>&nbsp;s dph</th>
+<?php                                } ?>
+<?php if ( $fir_fico != '36268399' ) { ?>
+<th colspan="3" class="left">&nbsp;&nbsp;Sumár objednávky è. <?php echo $riadok->xdok; ?></th>
+<?php                                } ?>
+
+
+<?php } ?>
  <td></td>
  <td class="right"><?php echo $riadok->xmno; ?></td>
  <td></td>

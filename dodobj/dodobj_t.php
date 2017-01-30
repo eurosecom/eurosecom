@@ -372,7 +372,12 @@ if( $riadok->pox == 10 AND $drupoh == 1 )
 $pdf->Cell(185,1,"                          ","$rmc",1,"L");
 $pdf->Cell(185,2," ","T",1,"R");
 $pdf->SetFont('arial','',12);
+if ( $fir_fico == '36268399' ) {
+$pdf->Cell(140,7,"Celkom s dph","$rmc",0,"L");
+                                }
+if ( $fir_fico != '36268399' ) {
 $pdf->Cell(140,7,"Celkom","$rmc",0,"L");
+                                }
 $pdf->SetFont('arial','B',12);
 
 $celkomeur=$riadok->xhdd." EUR";
