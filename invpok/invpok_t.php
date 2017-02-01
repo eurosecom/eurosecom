@@ -217,7 +217,15 @@ $j = $j + 1;
 if( $alchem == 1 )
     {
 
-$pdf->Cell(30,5,"Alchem text","$rmc",1,"L");
+if( $riadok->invrozdiel == 0 )
+  {
+$pdf->Cell(30,5,"Alchem text suhlasi","$rmc",1,"L");
+  }
+
+if( $riadok->invrozdiel != 0 )
+  {
+$pdf->Cell(30,5,"Alchem text nesuhlasi","$rmc",1,"L");
+  }
 
     }
 
