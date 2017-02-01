@@ -803,6 +803,14 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
    window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
+  function KompletMUJ2014docsv()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/uzavierka_muj2014csv.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
   function GenSuvMuj()
   { 
    window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93',
@@ -1074,6 +1082,14 @@ if ( $kli_nezis == 1 )
    window.open('../ucto/uzavierka_nuj2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
+  function KompletNUJ2013docsv()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   var h_sch = document.forms.formuznuj.h_sch.value;
+   var h_drp = document.forms.formuznuj.h_drp.value;
+   window.open('../ucto/uzavierka_nuj2013csv.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
   function NechcemStranyNUJ2013()
   {
    window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
@@ -1316,6 +1332,14 @@ if ( $copern == 1 AND $kli_vduj == 9 )
    var h_sch = document.forms.formuznoj.h_sch.value;
    var h_drp = document.forms.formuznoj.h_drp.value;
   window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletNO2013docsv()
+  {
+   var h_zos = document.forms.formuznoj.h_zos.value;
+   var h_sch = document.forms.formuznoj.h_sch.value;
+   var h_drp = document.forms.formuznoj.h_drp.value;
+  window.open('../ucto/uzavierka_no2013csv.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
