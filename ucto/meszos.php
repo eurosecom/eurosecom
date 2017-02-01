@@ -478,7 +478,12 @@ if( $copern == 1 AND $kli_vduj != 9 )
 ?>
 <table class="h2" width="100%" >
 <tr>
-<td>EuroSecom  -  Finanèné úètovníctvo - Mesaèné zostavy PU</td>
+<td>EuroSecom  -  Finanèné úètovníctvo - Mesaèné zostavy PU
+
+<a href="#" onClick="window.open('../analyzy/danovy_csv.php?copern=1&drupoh=1&page=1', '_self' )">
+<img src='../obr/export.png' width=20 height=15 border=0 title='Prejs do exportu pre DÚ do CSV' ></a>
+
+</td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
 </table>

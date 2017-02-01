@@ -68,6 +68,9 @@ var sirkawic = screen.width-10;
 
 <td>EuroSecom  -  Export pre DÚ do CSV
 
+<a href="#" onClick="window.open('../ucto/meszos.php?copern=1&drupoh=1&page=1&sysx=UCT', '_self' )">
+<img src='../obr/export.png' width=20 height=15 border=0 title='Prejs do mesaèných úètovných zostáv' ></a>
+
 </td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
