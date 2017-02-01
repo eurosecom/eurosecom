@@ -199,38 +199,40 @@ $pdf->Cell(30,6,"0,01 ","1",0,"R");$pdf->Cell(30,6,"$riadok->ks1ec ","1",0,"R");
 $pdf->SetFont('arial','B',11);
 $pdf->Cell(35,5," ","$rmc",0,"L");$pdf->Cell(60,5," ","$rmc",0,"R");$pdf->Cell(30,8,"$riadok->sumaspolu","$rmc",1,"R");
 
-$pdf->Cell(190,15,"                          ","$rmc",1,"L");
+$pdf->Cell(190,15," ","$rmc",1,"L");
 $pdf->SetFont('arial','',8);
 $pdf->Cell(35,5,"Rozdiel:","$rmc",0,"L");
 $pdf->SetFont('arial','B',11);
 $pdf->Cell(30,5,"$riadok->invrozdiel","$rmc",1,"L");
-
      }
 //koniec hlavicky j=0
-
 }
 $i = $i + 1;
 $j = $j + 1;
-
   }
 
-if( $alchem == 1 )
-    {
+if ( $alchem == 1 )
+     {
+$pdf->SetFont('arial','',11);
+$pdf->SetY(235);
+$pdf->Cell(30,5,"Fyzický stav pokladniènej hotovosti  s ú h l a s í  –  n e s ú h l a s í  s úètovným stavom.","$rmc",1,"L");
+$pdf->Cell(190,15," ","$rmc",1,"L");
+$pdf->Cell(30,5,"$fir_fmes, dòa:  $skinvdatskc","$rmc",1,"L");
+$pdf->Cell(190,7," ","$rmc",1,"L");
+$pdf->Cell(30,5,"Podpisy  ...............................................................","$rmc",1,"L");
 
-if( $riadok->invrozdiel == 0 )
-  {
-$pdf->Cell(30,5,"Alchem text suhlasi","$rmc",1,"L");
-  }
-
-if( $riadok->invrozdiel != 0 )
-  {
-$pdf->Cell(30,5,"Alchem text nesuhlasi","$rmc",1,"L");
-  }
-
+if ( $riadok->invrozdiel != 0 ) {
+$pdf->SetY(235);
+$pdf->SetX(72);
+$pdf->Cell(30,5,"=========","$rmc",1,"L");
+                                }
+if ( $riadok->invrozdiel == 0 ) {
+$pdf->SetY(235);
+$pdf->SetX(97);
+$pdf->Cell(30,5,"============","$rmc",1,"L");
+                                }
     }
-
-
-$pdf->Output("../tmp/mzdtlac.$kli_uzid.pdf"); 
+$pdf->Output("../tmp/mzdtlac.$kli_uzid.pdf");
 
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcx'.$kli_uzid;
