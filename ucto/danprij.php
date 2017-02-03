@@ -891,6 +891,10 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
 <a href="#" onclick="KompletMUJ2014doxml();" title="Export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="KompletMUJ2014docsv();" title="Export do CSV"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+
+
 </FORM>
 
 <div class="toright" style="width:216px; margin-right:-4px;">
@@ -1136,6 +1140,8 @@ if ( $kli_nezis == 1 )
 </div>
 <a href="#" onclick="KompletNUJ2013doxml();" title="Export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="KompletNUJ2013docsv();" title="Export do CSV"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
 </FORM>
 
 <div class="toright" style="width:216px; margin-right:-4px;">
@@ -1372,6 +1378,8 @@ if ( $copern == 1 AND $kli_vduj == 9 )
 </div>
 </div>
 <a href="#" onclick="KompletNO2013doxml();" title="Export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="KompletNO2013docsv();" title="Export do CSV"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
  <a href="#" onclick="GenMajZavNOJU();" title="Nastavenie generovania riadkov výkazu o majetku a záväzkov NÚJ"
     class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
