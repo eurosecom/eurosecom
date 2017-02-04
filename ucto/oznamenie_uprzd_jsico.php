@@ -28,13 +28,6 @@ require_once("../pswd/password.php");
   endif;
   mysql_select_db($mysqldb);
 
-$citwebs = include("../funkcie/citaj_webs.php");
-$kli_vxcf=$webs_fir;
-if( $kli_vxcf == 0 ) exit;
-
-$citfir = include("../cis/citaj_fir.php");
-$tried="nai";
-if( $slovakiaplay == 1 ) $tried="ico";
 
 $prm1 = $_GET['prm1'];
 $prm2 = $_GET['prm2'];
@@ -50,11 +43,11 @@ $sql = mysql_query("$sqltt");
 
 if( $prm1 != "" ) 
 { 
-$sqltt = "SELECT * FROM F$kli_vxcf"."_ico WHERE ( dic LIKE '%$prm1%' OR nai LIKE '%$prm1%' OR ico = $cprm1 ) ORDER BY nai";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_ico WHERE ( dic LIKE '%$prm1%' OR nai LIKE '%$prm1%' ) ORDER BY nai";
 $sql = mysql_query("$sqltt");
 }
 
-
+//echo $sqltt;
 
 $cpol = mysql_num_rows($sql);
 $i=0;
