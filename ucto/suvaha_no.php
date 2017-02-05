@@ -878,6 +878,44 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "CREATE TABLE F$kli_vxcf"."_prcsuvahasneg".$kli_uzid." SELECT * FROM F".$kli_vxcf."_prcsuvahas".$kli_uzid." WHERE rdk = 0 ";
 $oznac = mysql_query("$sqtoz");
 
+//vypis negenerovane pohyby
+$sqtoz = "DELETE FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE LEFT(uce,1) = 5 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "DELETE FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE LEFT(uce,1) = 6 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "DELETE FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE LEFT(uce,1) = 7 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "DELETE FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE LEFT(uce,1) = 8 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE rdk = 0 GROUP BY uce ";
+
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+
+if( $pol > 0 )
+          {
+
+$i=0;
+  while ($i <= $pol )
+  {
+
+
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+
+echo "Negenerované ".$hlavicka->uce." / rdk ".$hlavicka->rdk."<br />";
+
+}
+$i = $i + 1;
+
+  }
+exit;
+          }
+//koniec if( $pol > 0 )
+
 //sumar za riadky
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcsuvahas$kli_uzid "." SELECT".
 " 0,1,uce,ucm,ucd,rdk,prv,hod,mdt,dal,".
