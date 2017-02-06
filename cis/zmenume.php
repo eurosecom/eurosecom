@@ -39,7 +39,7 @@ $mysqldbfir=$mysqldb;
 
 $mysqldbdatax=$mysqldbdata;
 
-$dtb2 = include("oddel_dtbm1.php");
+$dtb2 = include("oddel_dtbm1new.php");
 
 $mysqldbdata=$mysqldbdatax;
 
