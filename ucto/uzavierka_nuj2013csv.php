@@ -170,7 +170,7 @@ $sqlt = <<<mzdprc
 mzdprc;
 
 
-//hlavicka
+//hlavicka a suvaha
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuvahas".$kli_uzid.
 " LEFT JOIN F$kli_vxcf"."_uctpocsuvahano_stl".
 " ON F$kli_vxcf"."_prcsuvahas$kli_uzid.prx=F$kli_vxcf"."_uctpocsuvahano_stl.fic".
@@ -198,17 +198,206 @@ if ( $j == 0 )
   $text = "\"ico\",\"rok\",\"mesiac\""."\r\n"; fwrite($soubor, $text);
   $text = "\"".$fir_fico."\",\"".$kli_vrok."\",\"".$kli_vmes."\""."\r\n"; fwrite($soubor, $text);
 
+  $text = "\"uctovna-zavierka,1\""."\r\n"; fwrite($soubor, $text);		
+  $text = "\"typ-uz\",\"zaciatok-bezneho-obdobia\",\"koniec-bezneho-obdobia\",\"zaciatok-predch-obdobia\",\"koniec-predch-obdobia\",\"stav-uz\",\"datum-zostavenia\",\"datum-schvalenia\""."\r\n"; fwrite($soubor, $text);
+
+$h_zos = $_REQUEST['h_zos'];
+$h_sch = $_REQUEST['h_sch'];
+$h_drp = $_REQUEST['h_drp'];
+
+$riadnamimoriadna="R";
+if ( $h_drp == 2 ) { $riadnamimoriadna="M"; }
+$zossch="Z";
+if ( $h_sch != '' )
+{
+$zossch="S"; 
+}
+
+$datzos=$h_zos;
+$pole = explode(".", $datzos);
+$den=$pole[0];
+$mesiac=$pole[1];
+$rok=$pole[2];
+$datzos=$rok.$mesiac.$den;
+if ( $datzos =='00000000' ) { $datzos=""; }
+
+$datsch=$h_sch;
+$pole = explode(".", $datsch);
+$den=$pole[0];
+$mesiac=$pole[1];
+$rok=$pole[2];
+$datsch=$rok.$mesiac.$den;
+if ( $datsch =='00000000' ) { $datsch=""; }
+
+
+//nacitaj obdobia z ufirdalsie
+$pole = explode(".", $kli_vume);
+$kli_vmesx=$pole[0];
+$kli_vrokx=$pole[1];
+if( $kli_vmesx < 10 ) { $kli_vmesx="0".$kli_vmesx; }
+$kli_mrokx=$kli_vrokx-1;
+
+$datbodsk="01.01.".$kli_vrokx; $datbdosk="31.12.".$kli_vrokx; $datmodsk="01.01.".$kli_mrokx; $datmdosk="31.12.".$kli_mrokx;
+$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+
+if( $riadok->datbod != '0000-00-00' )
+     {
+  $datbodsk=SkDatum($riadok->datbod);
+  $datbdosk=SkDatum($riadok->datbdo);
+  $datmodsk=SkDatum($riadok->datmod);
+  $datmdosk=SkDatum($riadok->datmdo);
+     }
+  }
+
+$zacb=$datbodsk;
+$pole = explode(".", $zacb);
+$den=$pole[0];
+$mesiac=$pole[1];
+$rok=$pole[2];
+$zacb=$rok.$mesiac.$den;
+if ( $zacb =='00000000' ) { $zacb=""; }
+
+$konb=$datbdosk;
+$pole = explode(".", $konb);
+$den=$pole[0];
+$mesiac=$pole[1];
+$rok=$pole[2];
+$konb=$rok.$mesiac.$den;
+if ( $konb =='00000000' ) { $konb=""; }
+
+$zacp=$datmodsk;
+$pole = explode(".", $zacp);
+$den=$pole[0];
+$mesiac=$pole[1];
+$rok=$pole[2];
+$zacp=$rok.$mesiac.$den;
+if ( $zacp =='00000000' ) { $zacp=""; }
+
+$konp=$datmdosk;
+$pole = explode(".", $konp);
+$den=$pole[0];
+$mesiac=$pole[1];
+$rok=$pole[2];
+$konp=$rok.$mesiac.$den;
+if ( $konp =='00000000' ) { $konp=""; }
+
+  $text = "\"".$riadnamimoriadna."\",\"".$zacb."\",\"".$konb."\",\"".$zacp."\",\"".$konp."\",\"".$zossch."\",\"".$datzos."\",\"".$datsch."\""."\r\n"; fwrite($soubor, $text);
+
+
+  $text = "\"uctovna-jednotka,1\""."\r\n"; fwrite($soubor, $text);		
+  $text = "\"dic\",\"sid\",\"sk-nace\",\"ulica\",\"popisne-cislo\",\"psc\",\"obec-nazov\",\"telefon\",\"fax\",\"email\""."\r\n"; fwrite($soubor, $text);
+
+$dic=iconv("CP1250", "UTF-8", $fir_fdic);
+$sid="";
+$sknace=trim($fir_sknace);
+$sknace = str_replace(".","",$sknace);
+$ulica=trim(iconv("CP1250", "UTF-8", $fir_fuli));
+$popisnecislo=iconv("CP1250", "UTF-8", $fir_fcdm);
+$sknace = trim(str_replace(".","",$fir_sknace));
+$psc = trim(str_replace(" ","",$fir_fpsc));
+$obecnazov=iconv("CP1250", "UTF-8", $fir_fmes);
+$telefon = trim(str_replace(" ","",$fir_ftel));
+$telefon = trim(str_replace("/","",$telefon));
+$fax = trim(str_replace(" ","",$fir_ffax));
+$fax = trim(str_replace("/","",$fax));
+$email = iconv("CP1250", "UTF-8", $fir_fema);
+
+  $text = "\"".$dic."\",\"".$sid."\",\"".$sknace."\",\"".$ulica."\",\"".$popisnecislo."\",\"".$psc."\",\"".$obecnazov."\",\"".$telefon."\",\"".$fax."\",\"".$email."\""."\r\n"; fwrite($soubor, $text);
+
+
+  $text = "\"suvaha-aktiva,60\""."\r\n"; fwrite($soubor, $text);		
+  $text = "\"R\",\"S1\",\"S2\",\"S3\",\"S4\""."\r\n"; fwrite($soubor, $text);
+
+  $text = "\"R1\",\"".$hlavicka->r01."\",\"".$hlavicka->rk01."\",\"".$hlavicka->rn01."\",\"".$hlavicka->rm01."\""."\r\n"; fwrite($soubor, $text);
+
+//doplnit az po riadok 60
+
+  $text = "\"R60\",\"".$hlavicka->r60."\",\"".$hlavicka->rk60."\",\"".$hlavicka->rn60."\",\"".$hlavicka->rm60."\""."\r\n"; fwrite($soubor, $text);
+
+
+
+  $text = "\"suvaha-pasiva,44\""."\r\n"; fwrite($soubor, $text);		
+  $text = "\"R\",\"S5\",\"S6\""."\r\n"; fwrite($soubor, $text);
+
+  $text = "\"R61\",\"".$hlavicka->r61."\",\"".$hlavicka->rm61."\""."\r\n"; fwrite($soubor, $text);
+
+//doplnit az po riadok 104
+
+  $text = "\"R104\",\"".$hlavicka->r104."\",\"".$hlavicka->rm104."\""."\r\n"; fwrite($soubor, $text);
+
+
      }
 //koniec ak j=0
-
-
-
-
 
 }
 $i = $i + 1;
 $j = $j + 1;
   }
+//koniec hlavicka  a suvaha
+
+//vzas
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prcvykziss".$kli_uzid.
+" LEFT JOIN F$kli_vxcf"."_uctpocvziskovno_stl".
+" ON F$kli_vxcf"."_prcvykziss$kli_uzid.prx=F$kli_vxcf"."_uctpocvziskovno_stl.fic".
+" WHERE prx = 1 "."";
+
+
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+
+$i=0;
+$j=0; //zaciatok strany ak by som chcel strankovat
+  while ( $i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+$obdobie=$kli_vmes;
+$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$dat_datsql = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+if ( $j == 0 )
+     {
+
+  $text = "\"vzas-naklady,38\""."\r\n"; fwrite($soubor, $text);		
+  $text = "\"R\",\"S1\",\"S2\",\"S3\",\"S4\""."\r\n"; fwrite($soubor, $text);
+
+  $text = "\"R1\",\"".$hlavicka->r01."\",\"".$hlavicka->rpc01."\",\"".$hlavicka->rsp01."\",\"".$hlavicka->rm01."\""."\r\n"; fwrite($soubor, $text);
+
+//doplnit az po riadok 38
+
+  $text = "\"R38\",\"".$hlavicka->r38."\",\"".$hlavicka->rpc38."\",\"".$hlavicka->rsp38."\",\"".$hlavicka->rm38."\""."\r\n"; fwrite($soubor, $text);
+
+
+
+  $text = "\"vzas-vynosy,40\""."\r\n"; fwrite($soubor, $text);		
+  $text = "\"R\",\"S1\",\"S2\",\"S3\",\"S4\""."\r\n"; fwrite($soubor, $text);
+
+  $text = "\"R39\",\"".$hlavicka->r39."\",\"".$hlavicka->rpc39."\",\"".$hlavicka->rsp39."\",\"".$hlavicka->rm39."\""."\r\n"; fwrite($soubor, $text);
+
+//doplnit az po riadok 78
+
+  $text = "\"R78\",\"".$hlavicka->r78."\",\"".$hlavicka->rpc78."\",\"".$hlavicka->rsp78."\",\"".$hlavicka->rm78."\""."\r\n"; fwrite($soubor, $text);
+
+
+
+
+     }
+//koniec ak j=0
+
+}
+$i = $i + 1;
+$j = $j + 1;
+  }
+//koniec vzas
+
+
+
+
 fclose($soubor);
 ?>
 <div id="content">
