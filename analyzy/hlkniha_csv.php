@@ -9,6 +9,7 @@ $copern = 1*$_REQUEST['copern'];
 $drupoh = 1*$_REQUEST['drupoh'];
 $vsetko = 1*$_REQUEST['vsetko'];
 $podlastr = 1*$_REQUEST['podlastr'];
+$len5xx = 1*$_REQUEST['len5xx'];
 
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
@@ -199,10 +200,17 @@ if (File_Exists ("../tmp/$nazsub.csv")) { $soubor = unlink("../tmp/$nazsub.csv")
 
 $soubor = fopen("../tmp/$nazsub.csv", "a+");
 
+if( $len5xx == 1 )
+{
+$sqltt = "DELETE FROM F$kli_vxcf"."_prctopmany$kli_uzid WHERE LEFT(ucm,1) != 5 AND LEFT(ucd,1) != 5 ";
+$sql = mysql_query("$sqltt");
+}
 
-
-$sqltt = "SELECT * FROM F$kli_vxcf"."_prctopmany$kli_uzid".
-" WHERE hod != 0 ORDER BY ume,dat ";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prctopmany$kli_uzid WHERE hod != 0 ORDER BY ume,dat ";
+if( $len5xx == 1 )
+{
+$sqltt = "SELECT * FROM F$kli_vxcf"."_prctopmany$kli_uzid WHERE hod != 0 ORDER BY ucm,dat,dok ";
+}
 //echo $sqltt;
 
 if( $podlastr == 1 )

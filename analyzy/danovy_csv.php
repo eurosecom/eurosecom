@@ -133,16 +133,20 @@ Export Hlavná kniha sumárna do CSV súboru
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="window.open('hlkniha_csv.php?copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytvori vo formáte CSV celý rok <?php echo $kli_vrok; ?>, nemusíte pred tým vytvára žiadnu zostavu' ></a>
-<td class="bmenu" width="98%">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytvori vo formáte CSV celý rok <?php echo $kli_vrok; ?>, nemusíte pred tým vytvára žiadnu zostavu, triedenie dátum, doklad' ></a>
+<td class="bmenu" width="96%">
 Export Hlavnej knihy položkovej do CSV súboru
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('hlkniha_csv.php?copern=10&drupoh=1&page=1&len5xx=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytvori vo formáte CSV celý rok <?php echo $kli_vrok; ?>, nemusíte pred tým vytvára žiadnu zostavu, len úèty 5xx, triedenie úèet máda, dátum, doklad' ></a>
+
 </table>
 
 <table class="vstup" width="100%" >
 <tr>
 <td class="bmenu" width="2%">
 <a href="#" onClick="window.open('knihafaktur_csv.php?copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytvori vo formáte CSV' ></a>
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytvori vo formáte CSV celý rok <?php echo $kli_vrok; ?>, nemusíte pred tým vytvára žiadnu zostavu' ></a>
 <td class="bmenu" width="98%">
 Export Knihy faktúr do CSV súboru
 </table>
