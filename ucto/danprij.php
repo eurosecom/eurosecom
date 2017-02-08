@@ -1383,7 +1383,7 @@ if ( $copern == 1 AND $kli_vduj == 9 )
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
  <a href="#" onclick="GenMajZavNOJU();" title="Nastavenie generovania riadkov výkazu o majetku a záväzkov NÚJ"
     class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
- <a href="#" onclick="GenMajZavNOJU();" title="Nastavenie predchádzajúceho obdobia výkazu o majetku a záväzkov NÚJ"
+ <a href="#" onclick="PredMajZavNOJU();" title="Nastavenie predchádzajúceho obdobia výkazu o majetku a záväzkov NÚJ"
     class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
  <a href="#" onclick="GenPriVydNOJU();" title="Nastavenie generovania riadkov výkazu o príjmoch a výdavkoch NÚJ"
     class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
