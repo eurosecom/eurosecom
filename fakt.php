@@ -35,9 +35,11 @@ if( !$uziv ) exit;
 
 $mysqldbfir=$mysqldb;
 $mysqldbdata=$mysqldb;
+$oddelnew=0;
 if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
           {
 $dtb2 = include("oddel_dtb1new.php");
+$oddelnew=1;
           }
 else
           {
@@ -87,16 +89,41 @@ if ( !$ulozene )
 $query="ROLLBACK;";
 $trans = mysql_query($query);
 }
+
+if( $oddelnew == 1 )
+  {
+$zmazane = mysql_query("DELETE FROM $mysqldb2010.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2010.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$zmazane = mysql_query("DELETE FROM $mysqldb2011.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2011.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$zmazane = mysql_query("DELETE FROM $mysqldb2012.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2012.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$zmazane = mysql_query("DELETE FROM $mysqldb2013.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2013.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$zmazane = mysql_query("DELETE FROM $mysqldb2014.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2014.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$zmazane = mysql_query("DELETE FROM $mysqldb2015.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2015.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+$zmazane = mysql_query("DELETE FROM $mysqldb2016.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2016.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+$zmazane = mysql_query("DELETE FROM $mysqldb2017.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2017.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+$zmazane = mysql_query("DELETE FROM $mysqldb2018.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2018.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+$zmazane = mysql_query("DELETE FROM $mysqldb2019.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2019.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+  }
+
      }
 
 $cit_nas = include("cis/citaj_nas.php");
 
   $ajnajom=0;
   if (File_Exists ("secomnajom/najom.php")) { $ajnajom=1; }
-  if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $vyb_xcf != 514 AND $vyb_xcf != 614 AND $vyb_xcf != 714 ) { $ajnajom=0; }
-  if( $vyb_xcf != 2686 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=0; }
+  if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $vyb_xcf == 814 ) { $ajnajom=1; }
+  if( $vyb_xcf != 2686 AND $vyb_xcf != 2687 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=0; }
   if( $vyb_xcf == 2686 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=1; }
-
+  if( $vyb_xcf == 2687 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=1; }
 
 $cook=0;
 if( $cook == 1 )
@@ -609,6 +636,7 @@ htmlmenu += "<a href=\"#\" onClick=\"window.open('../faktury/vstf_u.php?pocstav=
   <?php
   $ajregistracka=0;
   if (File_Exists ("dokumenty/FIR$vyb_xcf/ajregistracka.ano")) { $ajregistracka=1; }
+if( $vyb_xcf == 2687 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajregistracka=1; }
   if( $ajregistracka == 1 ) {
   $sql = mysql_query("SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_dpok WHERE drpk = 9");
   if (@$zaznam=mysql_data_seek($sql,0))
