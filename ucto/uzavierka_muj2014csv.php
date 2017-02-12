@@ -186,6 +186,12 @@ $hlavicka=mysql_fetch_object($sql);
 
 
 //suvaha minuly rok
+$rm01="0"; $rm02="0"; $rm03="0"; $rm04="0"; $rm05="0"; $rm06="0"; $rm07="0"; $rm08="0"; $rm09="0"; $rm10="0";
+$rm11="0"; $rm12="0"; $rm13="0"; $rm14="0"; $rm15="0"; $rm16="0"; $rm17="0"; $rm18="0"; $rm19="0"; $rm20="0";
+$rm21="0"; $rm22="0"; $rm23="0"; $rm24="0"; $rm25="0"; $rm26="0"; $rm27="0"; $rm28="0"; $rm29="0"; $rm30="0";
+$rm31="0"; $rm32="0"; $rm33="0"; $rm34="0"; $rm35="0"; $rm36="0"; $rm37="0"; $rm38="0"; $rm39="0"; $rm40="0";
+$rm41="0"; $rm42="0"; $rm43="0"; $rm44="0"; $rm45="0";
+
 $sqlttps = "SELECT * FROM F$kli_vxcf"."_pos_muj2014 WHERE dok > 0 ORDER BY dok ";
 $sqlps = mysql_query("$sqlttps");
 $polps = mysql_num_rows($sqlps);
@@ -348,7 +354,7 @@ if ( $konp =='00000000' ) { $konp=""; }
 
 
   $text = "\"uctovna-jednotka,1\""."\r\n"; fwrite($soubor, $text);		
-  $text = "\"dic\",\"sk-nace\",\"ulica\",\"popisne-cislo\",\"psc\",\"obec-nazov\",\"telefon\",\"fax\",\"email\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"dic\",\"sk-nace\",\"ulica\",\"popisne-cislo\",\"psc\",\"obec-nazov\",\"obchodny-register\",\"telefon\",\"fax\",\"email\""."\r\n"; fwrite($soubor, $text);
 
 $dic=iconv("CP1250", "UTF-8", $fir_fdic);
 $sknace=trim($fir_sknace);
@@ -362,9 +368,9 @@ $telefon = trim(str_replace(" ","",$fir_ftel));
 $telefon = trim(str_replace("/","",$telefon));
 $fax = trim(str_replace(" ","",$fir_ffax));
 $fax = trim(str_replace("/","",$fax));
-$email = iconv("CP1250", "UTF-8", $fir_fema);
+$email = iconv("CP1250", "UTF-8", $fir_fem1);
 
-  $text = "\"".$dic."\",\"".$sknace."\",\"".$ulica."\",\"".$popisnecislo."\",\"".$psc."\",\"".$obecnazov."\",\"".$telefon."\",\"".$fax."\",\"".$email."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"".$dic."\",\"".$sknace."\",\"".$ulica."\",\"".$popisnecislo."\",\"".$psc."\",\"".$obecnazov."\",\"".$register."\",\"".$telefon."\",\"".$fax."\",\"".$email."\""."\r\n"; fwrite($soubor, $text);
 
 
   $text = "\"suvaha-aktiva,23\""."\r\n"; fwrite($soubor, $text);		
@@ -401,17 +407,6 @@ $email = iconv("CP1250", "UTF-8", $fir_fema);
   $text = "\"suvaha-pasiva,22\""."\r\n"; fwrite($soubor, $text);		
   $text = "\"R\",\"S3\",\"S4\""."\r\n"; fwrite($soubor, $text);
 
-  $text = "\"R24\",\"".$hlavicka->rn24."\",\"".$rm24."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R25\",\"".$hlavicka->rn25."\",\"".$rm25."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R26\",\"".$hlavicka->rn26."\",\"".$rm26."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R27\",\"".$hlavicka->rn27."\",\"".$rm27."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R28\",\"".$hlavicka->rn28."\",\"".$rm28."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R29\",\"".$hlavicka->rn29."\",\"".$rm29."\""."\r\n"; fwrite($soubor, $text);
-
-  $text = "\"R20\",\"".$hlavicka->rn20."\",\"".$rm20."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R21\",\"".$hlavicka->rn21."\",\"".$rm21."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R22\",\"".$hlavicka->rn22."\",\"".$rm22."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R23\",\"".$hlavicka->rn23."\",\"".$rm23."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R24\",\"".$hlavicka->rn24."\",\"".$rm24."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R25\",\"".$hlavicka->rn25."\",\"".$rm25."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R26\",\"".$hlavicka->rn26."\",\"".$rm26."\""."\r\n"; fwrite($soubor, $text);
@@ -463,10 +458,10 @@ $hlavicka=mysql_fetch_object($sql);
 
 
 //poc.stav vzas
-$rm01=""; $rm02=""; $rm03=""; $rm04=""; $rm05=""; $rm06=""; $rm07=""; $rm08=""; $rm09=""; $rm10="";
-$rm11=""; $rm12=""; $rm13=""; $rm14=""; $rm15=""; $rm16=""; $rm17=""; $rm18=""; $rm19=""; $rm20="";
-$rm21=""; $rm22=""; $rm23=""; $rm24=""; $rm25=""; $rm26=""; $rm27=""; $rm28=""; $rm29=""; $rm30="";
-$rm31=""; $rm32=""; $rm33=""; $rm34=""; $rm35=""; $rm36=""; $rm37=""; $rm38="";
+$rm01="0"; $rm02="0"; $rm03="0"; $rm04="0"; $rm05="0"; $rm06="0"; $rm07="0"; $rm08="0"; $rm09="0"; $rm10="0";
+$rm11="0"; $rm12="0"; $rm13="0"; $rm14="0"; $rm15="0"; $rm16="0"; $rm17="0"; $rm18="0"; $rm19="0"; $rm20="0";
+$rm21="0"; $rm22="0"; $rm23="0"; $rm24="0"; $rm25="0"; $rm26="0"; $rm27="0"; $rm28="0"; $rm29="0"; $rm30="0";
+$rm31="0"; $rm32="0"; $rm33="0"; $rm34="0"; $rm35="0"; $rm36="0"; $rm37="0"; $rm38="0";
 
 $sqlttpv = "SELECT * FROM F$kli_vxcf"."_pov_muj2014 WHERE dok > 0 ORDER BY dok "; 
 $sqlpv = mysql_query("$sqlttpv");
@@ -556,25 +551,25 @@ if ( $j == 0 )
   $text = "\"R18\",\"".$hlavicka->r18."\",\"".$rm18."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R19\",\"".$hlavicka->r19."\",\"".$rm19."\""."\r\n"; fwrite($soubor, $text);
 
-  $text = "\"R20\",\"".$hlavicka->r10."\",\"".$rm20."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R21\",\"".$hlavicka->r11."\",\"".$rm21."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R22\",\"".$hlavicka->r12."\",\"".$rm22."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R23\",\"".$hlavicka->r13."\",\"".$rm23."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R24\",\"".$hlavicka->r14."\",\"".$rm24."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R25\",\"".$hlavicka->r15."\",\"".$rm25."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R26\",\"".$hlavicka->r16."\",\"".$rm26."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R27\",\"".$hlavicka->r17."\",\"".$rm27."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R28\",\"".$hlavicka->r18."\",\"".$rm28."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R29\",\"".$hlavicka->r19."\",\"".$rm29."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R20\",\"".$hlavicka->r20."\",\"".$rm20."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R21\",\"".$hlavicka->r21."\",\"".$rm21."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R22\",\"".$hlavicka->r22."\",\"".$rm22."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R23\",\"".$hlavicka->r23."\",\"".$rm23."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R24\",\"".$hlavicka->r24."\",\"".$rm24."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R25\",\"".$hlavicka->r25."\",\"".$rm25."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R26\",\"".$hlavicka->r26."\",\"".$rm26."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R27\",\"".$hlavicka->r27."\",\"".$rm27."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R28\",\"".$hlavicka->r28."\",\"".$rm28."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R29\",\"".$hlavicka->r29."\",\"".$rm29."\""."\r\n"; fwrite($soubor, $text);
 
-  $text = "\"R30\",\"".$hlavicka->r10."\",\"".$rm30."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R31\",\"".$hlavicka->r11."\",\"".$rm31."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R32\",\"".$hlavicka->r12."\",\"".$rm32."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R33\",\"".$hlavicka->r13."\",\"".$rm33."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R34\",\"".$hlavicka->r14."\",\"".$rm34."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R35\",\"".$hlavicka->r15."\",\"".$rm35."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R36\",\"".$hlavicka->r16."\",\"".$rm36."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R37\",\"".$hlavicka->r17."\",\"".$rm37."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R30\",\"".$hlavicka->r30."\",\"".$rm30."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R31\",\"".$hlavicka->r31."\",\"".$rm31."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R32\",\"".$hlavicka->r32."\",\"".$rm32."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R33\",\"".$hlavicka->r33."\",\"".$rm33."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R34\",\"".$hlavicka->r34."\",\"".$rm34."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R35\",\"".$hlavicka->r35."\",\"".$rm35."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R36\",\"".$hlavicka->r36."\",\"".$rm36."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R37\",\"".$hlavicka->r37."\",\"".$rm37."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R38\",\"".$hlavicka->r38."\",\"".$rm38."\""."\r\n"; fwrite($soubor, $text);
 
 
@@ -595,8 +590,10 @@ fclose($soubor);
 ?>
 <div id="content">
 <?php if ( $elsubor == 2 ) { ?>
-<p>Stiahnite si nišie uvedenı súbor <strong>.csv</strong> do Vášho poèítaèa a naèítajte ho na
-<a href="https://www.rissam.sk/vpn/rissam.html" target="_blank" title="Stránka RIS pre Samosprávu">RIS pre Samosprávu</a> :
+<p>Stiahnite si nišie uvedenı súbor <strong><?php echo $nazsub; ?></strong> do Vášho poèítaèa s názvom UZ_MUJ.csv a naèítajte ho na
+<a href="https://www.rissam.sk/vpn/rissam.html" target="_blank" title="Stránka RIS pre Samosprávu">RIS pre Samosprávu</a>.
+<br />
+K naèítaniu MUj uzávierky vo formáte CSV na RISSAM budete ešte potrebova Poznámky MUJ vo formáte PDF a Úvodnú stranu uzávierky MUJ vo formáte PDF.
 </p>
 <p>
 <a href="<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>
