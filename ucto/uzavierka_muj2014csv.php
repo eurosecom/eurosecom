@@ -364,11 +364,13 @@ $popisnecislo=iconv("CP1250", "UTF-8", $fir_fcdm);
 $sknace = trim(str_replace(".","",$fir_sknace));
 $psc = trim(str_replace(" ","",$fir_fpsc));
 $obecnazov=iconv("CP1250", "UTF-8", $fir_fmes);
+$register=iconv("CP1250", "UTF-8", $fir_obreg);
 $telefon = trim(str_replace(" ","",$fir_ftel));
 $telefon = trim(str_replace("/","",$telefon));
 $fax = trim(str_replace(" ","",$fir_ffax));
 $fax = trim(str_replace("/","",$fax));
 $email = iconv("CP1250", "UTF-8", $fir_fem1);
+
 
   $text = "\"".$dic."\",\"".$sknace."\",\"".$ulica."\",\"".$popisnecislo."\",\"".$psc."\",\"".$obecnazov."\",\"".$register."\",\"".$telefon."\",\"".$fax."\",\"".$email."\""."\r\n"; fwrite($soubor, $text);
 
@@ -593,7 +595,7 @@ fclose($soubor);
 <p>Stiahnite si nišie uvedenı súbor <strong><?php echo $nazsub; ?></strong> do Vášho poèítaèa s názvom UZ_MUJ.csv a naèítajte ho na
 <a href="https://www.rissam.sk/vpn/rissam.html" target="_blank" title="Stránka RIS pre Samosprávu">RIS pre Samosprávu</a>.
 <br />
-K naèítaniu MUj uzávierky vo formáte CSV na RISSAM budete ešte potrebova Poznámky MUJ vo formáte PDF a Úvodnú stranu uzávierky MUJ vo formáte PDF.
+K naèítaniu MUJ uzávierky vo formáte CSV na RISSAM budete ešte potrebova Poznámky MUJ vo formáte PDF a Úvodnú stranu uzávierky MUJ vo formáte PDF.
 </p>
 <p>
 <a href="<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>
@@ -615,14 +617,21 @@ $upozorni1=0; $upozorni2=0; $upozorni10=0; $upozorni11=0; $upozorni12=0;
 <ul id="alertpage1" style="display:none;">
 <li class="header-section">STRANA 1</li>
 <li class="red">
-<?php if ( $hlavicka->fdic == "0" AND $hlavicka->dar == '0000-00-00' )
+<?php if ( trim($h_zos) == "" )
 {
 $upozorni1=1;
-echo "Nie je vyplnené <strong>DIÈ</strong> daòovníka.";
+echo "Nie je vyplnenı <strong>dátum zostavenia</strong> uzávierky.";
 }
 ?>
 </li>
-
+<li class="red">
+<?php if ( trim($h_sch) == "" )
+{
+$upozorni1=1;
+echo "Nie je vyplnenı <strong>dátum schválenia</strong> uzávierky.";
+}
+?>
+</li>
 </ul>
 
 </div> <!-- #upozornenie -->
