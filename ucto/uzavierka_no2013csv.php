@@ -299,7 +299,7 @@ $telefon = trim(str_replace(" ","",$fir_ftel));
 $telefon = trim(str_replace("/","",$telefon));
 $fax = trim(str_replace(" ","",$fir_ffax));
 $fax = trim(str_replace("/","",$fax));
-$email = iconv("CP1250", "UTF-8", $fir_fema);
+$email = iconv("CP1250", "UTF-8", $fir_fem1);
 
   $text = "\"".$dic."\",\"".$sid."\",\"".$sknace."\",\"".$ulica."\",\"".$popisnecislo."\",\"".$psc."\",\"".$obecnazov."\",\"".$telefon."\",\"".$fax."\",\"".$email."\""."\r\n"; fwrite($soubor, $text);
 
@@ -309,12 +309,12 @@ $email = iconv("CP1250", "UTF-8", $fir_fema);
 
   $text = "\"R1\",\"".$hlavicka->r01."\",\"".$hlavicka->rpc01."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R2\",\"".$hlavicka->r02."\",\"".$hlavicka->rpc02."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R3\",\"".$hlavicka->r03."\",\"".$hlavicka->rpc03."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R3\",\"".$hlavicka->r03."\","."\r\n"; fwrite($soubor, $text);
   $text = "\"R4\",\"".$hlavicka->r04."\",\"".$hlavicka->rpc04."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R5\",\"".$hlavicka->r05."\",\"".$hlavicka->rpc05."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R5\",\"".$hlavicka->r05."\","."\r\n"; fwrite($soubor, $text);
   $text = "\"R6\",\"".$hlavicka->r06."\",\"".$hlavicka->rpc06."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R7\",\"".$hlavicka->r07."\",\"".$hlavicka->rpc07."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R8\",\"".$hlavicka->r08."\",\"".$hlavicka->rpc08."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R7\",\"".$hlavicka->r07."\","."\r\n"; fwrite($soubor, $text);
+  $text = "\"R8\",\"".$hlavicka->r08."\","."\r\n"; fwrite($soubor, $text);
   $text = "\"R9\",\"".$hlavicka->r09."\",\"".$hlavicka->rpc09."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R10\",\"".$hlavicka->r10."\",\"".$hlavicka->rpc10."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R11\",\"".$hlavicka->r11."\",\"".$hlavicka->rpc11."\""."\r\n"; fwrite($soubor, $text);
@@ -369,6 +369,44 @@ $j=0; //zaciatok strany ak by som chcel strankovat
 {
 $hlavicka=mysql_fetch_object($sql);
 
+//majzav minuly rok
+$rm01="0"; $rm02="0"; $rm03="0"; $rm04="0"; $rm05="0"; $rm06="0"; $rm07="0"; $rm08="0"; $rm09="0"; $rm10="0";
+$rm11="0"; $rm12="0"; $rm13="0"; $rm14="0"; $rm15="0"; $rm16="0"; $rm17="0"; 
+
+$sqlttps = "SELECT * FROM F$kli_vxcf"."_uctpocmajzavnoju WHERE dok > 0 ORDER BY dok ";
+$sqlps = mysql_query("$sqlttps");
+$polps = mysql_num_rows($sqlps);
+
+$ips=0;
+  while ($ips <= $polps )
+  {
+  if (@$zaznam=mysql_data_seek($sqlps,$ips))
+{
+$hlavickps=mysql_fetch_object($sqlps);
+
+$riadok=1*$hlavickps->dok;
+if ( $riadok ==  1 ) { $rm01=1*$hlavickps->hod; }
+if ( $riadok ==  2 ) { $rm02=1*$hlavickps->hod; }
+if ( $riadok ==  3 ) { $rm03=1*$hlavickps->hod; }
+if ( $riadok ==  4 ) { $rm04=1*$hlavickps->hod; }
+if ( $riadok ==  5 ) { $rm05=1*$hlavickps->hod; }
+if ( $riadok ==  6 ) { $rm06=1*$hlavickps->hod; }
+if ( $riadok ==  7 ) { $rm07=1*$hlavickps->hod; }
+if ( $riadok ==  8 ) { $rm08=1*$hlavickps->hod; }
+if ( $riadok ==  9 ) { $rm09=1*$hlavickps->hod; }
+if ( $riadok == 10 ) { $rm10=1*$hlavickps->hod; }
+if ( $riadok == 11 ) { $rm11=1*$hlavickps->hod; }
+if ( $riadok == 12 ) { $rm12=1*$hlavickps->hod; }
+if ( $riadok == 13 ) { $rm13=1*$hlavickps->hod; }
+if ( $riadok == 14 ) { $rm14=1*$hlavickps->hod; }
+if ( $riadok == 15 ) { $rm15=1*$hlavickps->hod; }
+if ( $riadok == 16 ) { $rm16=1*$hlavickps->hod; }
+if ( $riadok == 17 ) { $rm17=1*$hlavickps->hod; }
+
+}
+$ips = $ips + 1;
+  }
+
 $obdobie=$kli_vmes;
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 $dat_datsql = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
@@ -379,29 +417,29 @@ if ( $j == 0 )
   $text = "\"vomaz-majetok,11\""."\r\n"; fwrite($soubor, $text);		
   $text = "\"R\",\"S1\",\"S2\""."\r\n"; fwrite($soubor, $text);
 
-  $text = "\"R1\",\"".$hlavicka->r01."\",\"".$hlavicka->rm01."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R2\",\"".$hlavicka->r02."\",\"".$hlavicka->rm02."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R3\",\"".$hlavicka->r03."\",\"".$hlavicka->rm03."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R4\",\"".$hlavicka->r04."\",\"".$hlavicka->rm04."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R5\",\"".$hlavicka->r05."\",\"".$hlavicka->rm05."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R6\",\"".$hlavicka->r06."\",\"".$hlavicka->rm06."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R7\",\"".$hlavicka->r07."\",\"".$hlavicka->rm07."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R8\",\"".$hlavicka->r08."\",\"".$hlavicka->rm08."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R9\",\"".$hlavicka->r09."\",\"".$hlavicka->rm09."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R10\",\"".$hlavicka->r10."\",\"".$hlavicka->rm10."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R11\",\"".$hlavicka->r11."\",\"".$hlavicka->rm11."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R1\",\"".$hlavicka->r01."\",\"".$rm01."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R2\",\"".$hlavicka->r02."\",\"".$rm02."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R3\",\"".$hlavicka->r03."\",\"".$rm03."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R4\",\"".$hlavicka->r04."\",\"".$rm04."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R5\",\"".$hlavicka->r05."\",\"".$rm05."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R6\",\"".$hlavicka->r06."\",\"".$rm06."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R7\",\"".$hlavicka->r07."\",\"".$rm07."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R8\",\"".$hlavicka->r08."\",\"".$rm08."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R9\",\"".$hlavicka->r09."\",\"".$rm09."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R10\",\"".$hlavicka->r10."\",\"".$rm10."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R11\",\"".$hlavicka->r11."\",\"".$rm11."\""."\r\n"; fwrite($soubor, $text);
 
 
 
   $text = "\"vomaz-zavazky,6\""."\r\n"; fwrite($soubor, $text);		
   $text = "\"R\",\"S3\",\"S4\""."\r\n"; fwrite($soubor, $text);
 
-  $text = "\"R12\",\"".$hlavicka->r12."\",\"".$hlavicka->rm12."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R13\",\"".$hlavicka->r13."\",\"".$hlavicka->rm13."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R14\",\"".$hlavicka->r14."\",\"".$hlavicka->rm14."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R15\",\"".$hlavicka->r15."\",\"".$hlavicka->rm15."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R16\",\"".$hlavicka->r16."\",\"".$hlavicka->rm16."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R17\",\"".$hlavicka->r17."\",\"".$hlavicka->rm17."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R12\",\"".$hlavicka->r12."\",\"".$rm12."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R13\",\"".$hlavicka->r13."\",\"".$rm13."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R14\",\"".$hlavicka->r14."\",\"".$rm14."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R15\",\"".$hlavicka->r15."\",\"".$rm15."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R16\",\"".$hlavicka->r16."\",\"".$rm16."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R17\",\"".$hlavicka->r17."\",\"".$rm17."\""."\r\n"; fwrite($soubor, $text);
 
 
 
@@ -421,8 +459,10 @@ fclose($soubor);
 ?>
 <div id="content">
 <?php if ( $elsubor == 2 ) { ?>
-<p>Stiahnite si nišie uvedenı súbor <strong>.csv</strong> do Vášho poèítaèa a naèítajte ho na
-<a href="https://www.rissam.sk/vpn/rissam.html" target="_blank" title="Stránka RIS pre Samosprávu">RIS pre Samosprávu</a> :
+<p>Stiahnite si nišie uvedenı súbor <strong><?php echo $nazsub; ?></strong> do Vášho poèítaèa s názvom UZ_NO.csv a naèítajte ho na
+<a href="https://www.rissam.sk/vpn/rissam.html" target="_blank" title="Stránka RIS pre Samosprávu">RIS pre Samosprávu</a>.
+<br />
+K naèítaniu NO uzávierky vo formáte CSV na RISSAM budete ešte potrebova Úvodnú stranu uzávierky NO vo formáte PDF.
 </p>
 <p>
 <a href="<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>
@@ -444,14 +484,21 @@ $upozorni1=0; $upozorni2=0; $upozorni10=0; $upozorni11=0; $upozorni12=0;
 <ul id="alertpage1" style="display:none;">
 <li class="header-section">STRANA 1</li>
 <li class="red">
-<?php if ( $hlavicka->fdic == "0" AND $hlavicka->dar == '0000-00-00' )
+<?php if ( trim($h_zos) == "" )
 {
 $upozorni1=1;
-echo "Nie je vyplnené <strong>DIÈ</strong> daòovníka.";
+echo "Nie je vyplnenı <strong>dátum zostavenia</strong> uzávierky.";
 }
 ?>
 </li>
-
+<li class="red">
+<?php if ( trim($h_sch) == "" )
+{
+$upozorni1=1;
+echo "Nie je vyplnenı <strong>dátum schválenia</strong> uzávierky.";
+}
+?>
+</li>
 </ul>
 
 </div> <!-- #upozornenie -->
