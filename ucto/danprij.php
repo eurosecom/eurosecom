@@ -675,6 +675,10 @@ if ( $kli_vrok >= 2013 AND $ajpod == 1 )
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
 <a href="#" onclick="KompletPOD2014doxml();" title="Export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="" title="Zobrazi úvodnú stranu vo formáte PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<a href="#" onclick="" title="Export do CSV"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
 </FORM>
 
 <div class="toright" style="width:190px; margin-right:-4px;">
@@ -1148,6 +1152,8 @@ if ( $kli_nezis == 1 )
 </div>
 <a href="#" onclick="KompletNUJ2013doxml();" title="Export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="" title="Zobrazi úvodnú stranu vo formáte PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <a href="#" onclick="KompletNUJ2013docsv();" title="Export do CSV"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
 </FORM>
@@ -1357,8 +1363,8 @@ if ( $copern == 1 AND $kli_vduj == 9 )
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 </script>
-
-<div class="line-area" style="margin-bottom:8px;"> <!-- uct.zavierka ju nuj -->
+ <!-- uct.zavierka ju nuj -->
+<div class="line-area" style="margin-bottom:8px;">
 <FORM name="formuznoj" method="post" action="#">
 <a href="#" onclick="KompletNO2013();" title="<?php echo $mena1; ?>á + centy - zobrazi v PDF"
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
@@ -1387,6 +1393,8 @@ if ( $copern == 1 AND $kli_vduj == 9 )
 </div>
 <a href="#" onclick="KompletNO2013doxml();" title="Export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="" title="Zobrazi úvodnú stranu vo formáte PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <a href="#" onclick="KompletNO2013docsv();" title="Export do CSV"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
  <a href="#" onclick="GenMajZavNOJU();" title="Nastavenie generovania riadkov výkazu o majetku a záväzkov NÚJ"
