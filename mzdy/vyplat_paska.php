@@ -2431,7 +2431,7 @@ $sqldok = mysql_query("SELECT SUM(dni) AS cerlek, dm, oc, ume FROM F$kli_vxcf"."
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
-  $lek_cerp=$lek_cerp+$riaddok->cerlek;
+  if( $copern != 11 ) { $lek_cerp=$lek_cerp+$riaddok->cerlek; }
   }
 //precitaj cerpane doprovod
 $dop_cerp=0; $dop_nrk=7;
@@ -2445,7 +2445,7 @@ $sqldok = mysql_query("SELECT SUM(dni) AS cerdop, dm, oc, ume FROM F$kli_vxcf"."
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
-  $dop_cerp=$dop_cerp+$riaddok->cerdop;
+  if( $copern != 11 ) { $dop_cerp=$dop_cerp+$riaddok->cerdop; }
   }
 
 $textlekdop="Lekár dni - nárok $lek_nrk èerpané $lek_cerp, Doprovod dni - nárok $dop_nrk èerpané $dop_cerp";
