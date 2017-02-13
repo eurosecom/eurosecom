@@ -891,10 +891,10 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
 <a href="#" onclick="KompletMUJ2014doxml();" title="Export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="" title="Zobrazi úvodnú stranu vo formáte PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <a href="#" onclick="KompletMUJ2014docsv();" title="Export do CSV"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
-
-
 </FORM>
 
 <div class="toright" style="width:216px; margin-right:-4px;">
