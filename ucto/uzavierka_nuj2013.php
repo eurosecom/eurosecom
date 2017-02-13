@@ -14,6 +14,7 @@ if(!isset($fort)) $fort = 1;
 $h_zos = $_REQUEST['h_zos'];
 $h_sch = $_REQUEST['h_sch'];
 $h_drp = $_REQUEST['h_drp'];
+$len1 = 1*$_REQUEST['len1'];
 
 $uziv = include("../uziv.php");
 if( !$uziv ) exit;
@@ -1385,6 +1386,8 @@ $pdf->SetX(130);$pdf->Cell(85,5,"                                               
 $pdf->SetX(130);$pdf->Cell(85,5,"                                                                                               ","0",1,"L",0,$odkaz);
 
 //strana 2
+if( $len1 == 0 )
+  {
 $pdf->AddPage();
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
@@ -2348,6 +2351,8 @@ $i = $i + 1;
   }
 //koniec while vykazziskov
 
+//koniec ak if( $len1 == 0 )
+  }
 
 $pdf->Output("$outfilex");
 

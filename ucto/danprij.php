@@ -1090,6 +1090,14 @@ if ( $kli_nezis == 1 )
    window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
+  function KompletNUJ2013len1()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   var h_sch = document.forms.formuznuj.h_sch.value;
+   var h_drp = document.forms.formuznuj.h_drp.value;
+   window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&len1=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
   function KompletNUJ2013doxml()
   {
    var h_zos = document.forms.formuznuj.h_zos.value;
@@ -1152,7 +1160,7 @@ if ( $kli_nezis == 1 )
 </div>
 <a href="#" onclick="KompletNUJ2013doxml();" title="Export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="" title="Zobrazi úvodnú stranu vo formáte PDF"
+<a href="#" onclick="KompletNUJ2013len1();" title="Zobrazi úvodnú stranu vo formáte PDF"
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <a href="#" onclick="KompletNUJ2013docsv();" title="Export do CSV"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
@@ -1346,6 +1354,14 @@ if ( $copern == 1 AND $kli_vduj == 9 )
    window.open('../ucto/privyd_noju.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
+  function KompletNO2013len1()
+  {
+   var h_zos = document.forms.formuznoj.h_zos.value;
+   var h_sch = document.forms.formuznoj.h_sch.value;
+   var h_drp = document.forms.formuznoj.h_drp.value;
+   window.open('../ucto/privyd_noju.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&len1=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
   function KompletNO2013doxml()
   {
    var h_zos = document.forms.formuznoj.h_zos.value;
@@ -1393,7 +1409,7 @@ if ( $copern == 1 AND $kli_vduj == 9 )
 </div>
 <a href="#" onclick="KompletNO2013doxml();" title="Export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="" title="Zobrazi úvodnú stranu vo formáte PDF"
+<a href="#" onclick="KompletNO2013len1();" title="Zobrazi úvodnú stranu vo formáte PDF"
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <a href="#" onclick="KompletNO2013docsv();" title="Export do CSV"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>

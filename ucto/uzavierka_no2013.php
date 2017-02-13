@@ -11,6 +11,7 @@ if (!isset($tis)) $tis = 0;
 $h_zos = $_REQUEST['h_zos'];
 $h_sch = $_REQUEST['h_sch'];
 $h_drp = $_REQUEST['h_drp'];
+$len1 = 1*$_REQUEST['len1'];
 
 $uziv = include("../uziv.php");
 if ( !$uziv ) exit;
@@ -733,6 +734,8 @@ $pdf->SetX(130);$pdf->Cell(85,5,"                                               
 
 
 //strana 2 prijmy a vydavky
+if( $len1 == 0 )
+  {
 $pdf->AddPage();
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
@@ -1043,6 +1046,8 @@ $pdf->Cell(108,6," ","$rmc1",0,"C");$pdf->Cell(33,8,"$r17","$rmc",0,"R");$pdf->C
 $i = $i + 1;
   }
 //koniec while majzav
+//koniec ak len1 = 0 if( $len1 == 0 )
+  }
 
 $pdf->Output("../tmp/uzavierka.$kli_uzid.pdf");
 ?>
