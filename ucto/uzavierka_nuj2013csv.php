@@ -198,7 +198,7 @@ $rm41="0"; $rm42="0"; $rm43="0"; $rm44="0"; $rm45="0"; $rm46="0"; $rm47="0"; $rm
 $rm51="0"; $rm52="0"; $rm53="0"; $rm54="0"; $rm55="0"; $rm56="0"; $rm57="0"; $rm58="0"; $rm59="0"; $rm60="0";
 $rm61="0"; $rm62="0"; $rm63="0"; $rm64="0"; $rm65="0"; $rm66="0"; $rm67="0"; $rm68="0"; $rm69="0"; $rm70="0";
 $rm71="0"; $rm72="0"; $rm73="0"; $rm74="0"; $rm75="0"; $rm76="0"; $rm77="0"; $rm78="0"; $rm79="0"; $rm80="0";
-$rm81="0"; $rm82="0"; $rm83="0"; $rm84="0"; $rm85="0"; $rm86="0"; $rm87="0"; $rm88="0"; $rm89="0"; $rm00="0";
+$rm81="0"; $rm82="0"; $rm83="0"; $rm84="0"; $rm85="0"; $rm86="0"; $rm87="0"; $rm88="0"; $rm89="0"; $rm90="0";
 $rm91="0"; $rm92="0"; $rm93="0"; $rm94="0"; $rm95="0"; $rm96="0"; $rm97="0"; $rm98="0"; $rm99="0"; $rm100="0";
 $rm101="0"; $rm102="0"; $rm103="0"; $rm104="0"; 
 
@@ -466,8 +466,9 @@ $email = iconv("CP1250", "UTF-8", $fir_fem1);
   $text = "\"R8\",\"".$hlavicka->r08."\",\"".$hlavicka->rk08."\",\"".$hlavicka->rn08."\",\"".$rm08."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R9\",\"".$hlavicka->r09."\",\"".$hlavicka->rk09."\",\"".$hlavicka->rn09."\",\"".$rm09."\""."\r\n"; fwrite($soubor, $text);
 
-  $text = "\"R10\",\"".$hlavicka->r10."\",\"".$hlavicka->rk10."\",\"".$hlavicka->rn10."\",\"".$rm10."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R11\",\"".$hlavicka->r11."\",\"".$hlavicka->rk11."\",\"".$hlavicka->rn11."\",\"".$rm11."\""."\r\n"; fwrite($soubor, $text);
+//na riadku r10,r11 je krizik v korekcii tzn. nevyplna sa, rovnako 45 az 47 a 52 az 54
+  $text = "\"R10\",\"".$hlavicka->r10."\",,\"".$hlavicka->rn10."\",\"".$rm10."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R11\",\"".$hlavicka->r11."\",,\"".$hlavicka->rn11."\",\"".$rm11."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R12\",\"".$hlavicka->r12."\",\"".$hlavicka->rk12."\",\"".$hlavicka->rn12."\",\"".$rm12."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R13\",\"".$hlavicka->r13."\",\"".$hlavicka->rk13."\",\"".$hlavicka->rn13."\",\"".$rm13."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R14\",\"".$hlavicka->r14."\",\"".$hlavicka->rk14."\",\"".$hlavicka->rn14."\",\"".$rm14."\""."\r\n"; fwrite($soubor, $text);
@@ -504,17 +505,17 @@ $email = iconv("CP1250", "UTF-8", $fir_fem1);
   $text = "\"R42\",\"".$hlavicka->r42."\",\"".$hlavicka->rk42."\",\"".$hlavicka->rn42."\",\"".$rm42."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R43\",\"".$hlavicka->r43."\",\"".$hlavicka->rk43."\",\"".$hlavicka->rn43."\",\"".$rm43."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R44\",\"".$hlavicka->r44."\",\"".$hlavicka->rk44."\",\"".$hlavicka->rn44."\",\"".$rm44."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R45\",\"".$hlavicka->r45."\",\"".$hlavicka->rk45."\",\"".$hlavicka->rn45."\",\"".$rm45."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R46\",\"".$hlavicka->r46."\",\"".$hlavicka->rk46."\",\"".$hlavicka->rn46."\",\"".$rm46."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R47\",\"".$hlavicka->r47."\",\"".$hlavicka->rk47."\",\"".$hlavicka->rn47."\",\"".$rm47."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R45\",\"".$hlavicka->r45."\",,\"".$hlavicka->rn45."\",\"".$rm45."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R46\",\"".$hlavicka->r46."\",,\"".$hlavicka->rn46."\",\"".$rm46."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R47\",\"".$hlavicka->r47."\",,\"".$hlavicka->rn47."\",\"".$rm47."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R48\",\"".$hlavicka->r48."\",\"".$hlavicka->rk48."\",\"".$hlavicka->rn48."\",\"".$rm48."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R49\",\"".$hlavicka->r49."\",\"".$hlavicka->rk49."\",\"".$hlavicka->rn49."\",\"".$rm49."\""."\r\n"; fwrite($soubor, $text);
 
   $text = "\"R50\",\"".$hlavicka->r50."\",\"".$hlavicka->rk50."\",\"".$hlavicka->rn50."\",\"".$rm50."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R51\",\"".$hlavicka->r51."\",\"".$hlavicka->rk51."\",\"".$hlavicka->rn51."\",\"".$rm51."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R52\",\"".$hlavicka->r52."\",\"".$hlavicka->rk52."\",\"".$hlavicka->rn52."\",\"".$rm52."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R53\",\"".$hlavicka->r53."\",\"".$hlavicka->rk53."\",\"".$hlavicka->rn53."\",\"".$rm53."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R54\",\"".$hlavicka->r54."\",\"".$hlavicka->rk54."\",\"".$hlavicka->rn54."\",\"".$rm54."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R52\",\"".$hlavicka->r52."\",,\"".$hlavicka->rn52."\",\"".$rm52."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R53\",\"".$hlavicka->r53."\",,\"".$hlavicka->rn53."\",\"".$rm53."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R54\",\"".$hlavicka->r54."\",,\"".$hlavicka->rn54."\",\"".$rm54."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R55\",\"".$hlavicka->r55."\",\"".$hlavicka->rk55."\",\"".$hlavicka->rn55."\",\"".$rm55."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R56\",\"".$hlavicka->r56."\",\"".$hlavicka->rk56."\",\"".$hlavicka->rn56."\",\"".$rm56."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R57\",\"".$hlavicka->r57."\",\"".$hlavicka->rk57."\",\"".$hlavicka->rn57."\",\"".$rm57."\""."\r\n"; fwrite($soubor, $text);
@@ -744,26 +745,26 @@ if ( $j == 0 )
   $text = "\"R18\",\"".$hlavicka->r18."\",\"".$hlavicka->rpc18."\",\"".$hlavicka->rsp18."\",\"".$rm18."\""."\r\n"; fwrite($soubor, $text);
   $text = "\"R19\",\"".$hlavicka->r19."\",\"".$hlavicka->rpc19."\",\"".$hlavicka->rsp19."\",\"".$rm19."\""."\r\n"; fwrite($soubor, $text);
 
-  $text = "\"R20\",\"".$hlavicka->r10."\",\"".$hlavicka->rpc20."\",\"".$hlavicka->rsp20."\",\"".$rm20."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R21\",\"".$hlavicka->r11."\",\"".$hlavicka->rpc21."\",\"".$hlavicka->rsp21."\",\"".$rm21."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R22\",\"".$hlavicka->r12."\",\"".$hlavicka->rpc22."\",\"".$hlavicka->rsp22."\",\"".$rm22."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R23\",\"".$hlavicka->r13."\",\"".$hlavicka->rpc23."\",\"".$hlavicka->rsp23."\",\"".$rm23."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R24\",\"".$hlavicka->r14."\",\"".$hlavicka->rpc24."\",\"".$hlavicka->rsp24."\",\"".$rm24."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R25\",\"".$hlavicka->r15."\",\"".$hlavicka->rpc25."\",\"".$hlavicka->rsp25."\",\"".$rm25."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R26\",\"".$hlavicka->r16."\",\"".$hlavicka->rpc26."\",\"".$hlavicka->rsp26."\",\"".$rm26."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R27\",\"".$hlavicka->r17."\",\"".$hlavicka->rpc27."\",\"".$hlavicka->rsp27."\",\"".$rm27."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R28\",\"".$hlavicka->r18."\",\"".$hlavicka->rpc28."\",\"".$hlavicka->rsp28."\",\"".$rm28."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R29\",\"".$hlavicka->r19."\",\"".$hlavicka->rpc29."\",\"".$hlavicka->rsp29."\",\"".$rm29."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R20\",\"".$hlavicka->r20."\",\"".$hlavicka->rpc20."\",\"".$hlavicka->rsp20."\",\"".$rm20."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R21\",\"".$hlavicka->r21."\",\"".$hlavicka->rpc21."\",\"".$hlavicka->rsp21."\",\"".$rm21."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R22\",\"".$hlavicka->r22."\",\"".$hlavicka->rpc22."\",\"".$hlavicka->rsp22."\",\"".$rm22."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R23\",\"".$hlavicka->r23."\",\"".$hlavicka->rpc23."\",\"".$hlavicka->rsp23."\",\"".$rm23."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R24\",\"".$hlavicka->r24."\",\"".$hlavicka->rpc24."\",\"".$hlavicka->rsp24."\",\"".$rm24."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R25\",\"".$hlavicka->r25."\",\"".$hlavicka->rpc25."\",\"".$hlavicka->rsp25."\",\"".$rm25."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R26\",\"".$hlavicka->r26."\",\"".$hlavicka->rpc26."\",\"".$hlavicka->rsp26."\",\"".$rm26."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R27\",\"".$hlavicka->r27."\",\"".$hlavicka->rpc27."\",\"".$hlavicka->rsp27."\",\"".$rm27."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R28\",\"".$hlavicka->r28."\",\"".$hlavicka->rpc28."\",\"".$hlavicka->rsp28."\",\"".$rm28."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R29\",\"".$hlavicka->r29."\",\"".$hlavicka->rpc29."\",\"".$hlavicka->rsp29."\",\"".$rm29."\""."\r\n"; fwrite($soubor, $text);
 
-  $text = "\"R30\",\"".$hlavicka->r10."\",\"".$hlavicka->rpc30."\",\"".$hlavicka->rsp30."\",\"".$rm30."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R31\",\"".$hlavicka->r11."\",\"".$hlavicka->rpc31."\",\"".$hlavicka->rsp31."\",\"".$rm31."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R32\",\"".$hlavicka->r12."\",\"".$hlavicka->rpc32."\",\"".$hlavicka->rsp32."\",\"".$rm32."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R33\",\"".$hlavicka->r13."\",\"".$hlavicka->rpc33."\",\"".$hlavicka->rsp33."\",\"".$rm33."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R34\",\"".$hlavicka->r14."\",\"".$hlavicka->rpc34."\",\"".$hlavicka->rsp34."\",\"".$rm34."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R35\",\"".$hlavicka->r15."\",\"".$hlavicka->rpc35."\",\"".$hlavicka->rsp35."\",\"".$rm35."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R36\",\"".$hlavicka->r16."\",\"".$hlavicka->rpc36."\",\"".$hlavicka->rsp36."\",\"".$rm36."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R37\",\"".$hlavicka->r17."\",\"".$hlavicka->rpc37."\",\"".$hlavicka->rsp37."\",\"".$rm37."\""."\r\n"; fwrite($soubor, $text);
-  $text = "\"R38\",\"".$hlavicka->r18."\",\"".$hlavicka->rpc38."\",\"".$hlavicka->rsp38."\",\"".$rm38."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R30\",\"".$hlavicka->r30."\",\"".$hlavicka->rpc30."\",\"".$hlavicka->rsp30."\",\"".$rm30."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R31\",\"".$hlavicka->r31."\",\"".$hlavicka->rpc31."\",\"".$hlavicka->rsp31."\",\"".$rm31."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R32\",\"".$hlavicka->r32."\",\"".$hlavicka->rpc32."\",\"".$hlavicka->rsp32."\",\"".$rm32."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R33\",\"".$hlavicka->r33."\",\"".$hlavicka->rpc33."\",\"".$hlavicka->rsp33."\",\"".$rm33."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R34\",\"".$hlavicka->r34."\",\"".$hlavicka->rpc34."\",\"".$hlavicka->rsp34."\",\"".$rm34."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R35\",\"".$hlavicka->r35."\",\"".$hlavicka->rpc35."\",\"".$hlavicka->rsp35."\",\"".$rm35."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R36\",\"".$hlavicka->r36."\",\"".$hlavicka->rpc36."\",\"".$hlavicka->rsp36."\",\"".$rm36."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R37\",\"".$hlavicka->r37."\",\"".$hlavicka->rpc37."\",\"".$hlavicka->rsp37."\",\"".$rm37."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"R38\",\"".$hlavicka->r38."\",\"".$hlavicka->rpc38."\",\"".$hlavicka->rsp38."\",\"".$rm38."\""."\r\n"; fwrite($soubor, $text);
 
 
   $text = "\"vzas-vynosy,40\""."\r\n"; fwrite($soubor, $text);		

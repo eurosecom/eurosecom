@@ -795,6 +795,14 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
    window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=1&lenvzs=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
+  function KompletMUJ2014uvodna()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=0&lenvzs=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
   function KompletMUJ2014doxml()
   {
    var h_zos = document.forms.formuzmuj.h_zos.value;
@@ -891,7 +899,7 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
 <a href="#" onclick="KompletMUJ2014doxml();" title="Export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="" title="Zobrazi úvodnú stranu vo formáte PDF"
+<a href="#" onclick="KompletMUJ2014uvodna();" title="Zobrazi úvodnú stranu vo formáte PDF"
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <a href="#" onclick="KompletMUJ2014docsv();" title="Export do CSV"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
