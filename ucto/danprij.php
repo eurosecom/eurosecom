@@ -592,6 +592,14 @@ if ( $kli_vrok >= 2013 AND $ajpod == 1 )
    window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=1&lenvzs=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
+  function KompletPOD2014len1()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/uzavierka_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=0&lenvzs=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
   function KompletPOD2014cele()
   {
    var h_zos = document.forms.formuzpod.h_zos.value;
@@ -611,6 +619,14 @@ if ( $kli_vrok >= 2013 AND $ajpod == 1 )
    var h_sch = document.forms.formuzpod.h_sch.value;
    var h_drp = document.forms.formuzpod.h_drp.value;
    window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletPOD2014docsv()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/uzavierka_pod2014csv.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function GenSuvPod()
@@ -675,9 +691,9 @@ if ( $kli_vrok >= 2013 AND $ajpod == 1 )
    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
 <a href="#" onclick="KompletPOD2014doxml();" title="Export do XML"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="" title="Zobrazi úvodnú stranu vo formáte PDF"
+<a href="#" onclick="KompletPOD2014len1();" title="Zobrazi úvodnú stranu vo formáte PDF"
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<a href="#" onclick="" title="Export do CSV"
+<a href="#" onclick="KompletPOD2014docsv();" title="Export do CSV"
    class="toleft line-box box-red"><img src='../obr/export.png'></a>
 </FORM>
 

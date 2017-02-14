@@ -301,7 +301,7 @@ $fax = trim(str_replace(" ","",$fir_ffax));
 $fax = trim(str_replace("/","",$fax));
 $email = iconv("CP1250", "UTF-8", $fir_fem1);
 
-  $text = "\"".$dic."\",\"".$sid."\",\"".$sknace."\",\"".$ulica."\",\"".$popisnecislo."\",\"".$psc."\",\"".$obecnazov."\",\"".$telefon."\",\"".$fax."\",\"".$email."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"".$dic."\",\"".$sid."\",\"".$sknace."\",\"".$ulica."\",\"".$popisnecislo."\",\"".$psc."\",\"".$obecnazov."\",\"".$telefon."\",,\"".$email."\""."\r\n"; fwrite($soubor, $text);
 
 
   $text = "\"vopav-prijmy,16\""."\r\n"; fwrite($soubor, $text);		

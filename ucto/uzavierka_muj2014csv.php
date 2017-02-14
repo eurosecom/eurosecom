@@ -372,7 +372,7 @@ $fax = trim(str_replace("/","",$fax));
 $email = iconv("CP1250", "UTF-8", $fir_fem1);
 
 
-  $text = "\"".$dic."\",\"".$sknace."\",\"".$ulica."\",\"".$popisnecislo."\",\"".$psc."\",\"".$obecnazov."\",\"".$register."\",\"".$telefon."\",\"".$fax."\",\"".$email."\""."\r\n"; fwrite($soubor, $text);
+  $text = "\"".$dic."\",\"".$sknace."\",\"".$ulica."\",\"".$popisnecislo."\",\"".$psc."\",\"".$obecnazov."\",\"".$register."\",\"".$telefon."\",,\"".$email."\""."\r\n"; fwrite($soubor, $text);
 
 
   $text = "\"suvaha-aktiva,23\""."\r\n"; fwrite($soubor, $text);		
