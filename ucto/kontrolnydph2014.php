@@ -1122,7 +1122,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphst$kli_uzid "." SELECT".
 "'$fir_fico'".
 " FROM F$kli_vxcf"."_archivdphkvdphmanualplus$cislo_cpid ".
 " WHERE er1 = 2 ".
-" GROUP BY dok ".
+" GROUP BY kvodd,kvfak ".
 "";
 $dsql = mysql_query("$dsqlt");
   }
