@@ -169,6 +169,61 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_crf104nuj_no SELECT * FROM ".$databaza."F$h_
 $dsql = mysql_query("$dsqlt");
   }
 
+if( $drupoh == 91 )
+  {
+$dsqlt = "TRUNCATE F$kli_vxcf"."_genfin204pod ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_genfin204pod SELECT * FROM ".$databaza."F$h_ycf"."_genfin204pod ";
+$dsql = mysql_query("$dsqlt");
+  }
+
+if( $drupoh == 92 )
+  {
+$dsqlt = "TRUNCATE F$kli_vxcf"."_genfin204no ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_genfin204no SELECT * FROM ".$databaza."F$h_ycf"."_genfin204no ";
+$dsql = mysql_query("$dsqlt");
+  }
+
+if( $drupoh == 93 )
+  {
+$dsqlt = "TRUNCATE F$kli_vxcf"."_genfin304 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_genfin304 SELECT * FROM ".$databaza."F$h_ycf"."_genfin304 ";
+$dsql = mysql_query("$dsqlt");
+//echo $dsqlt;
+  }
+
+if( $drupoh == 94 )
+  {
+$dsqlt = "TRUNCATE F$kli_vxcf"."_genfin404 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_genfin404 SELECT * FROM ".$databaza."F$h_ycf"."_genfin404 ";
+$dsql = mysql_query("$dsqlt");
+  }
+
+if( $drupoh == 96 )
+  {
+$dsqlt = "TRUNCATE F$kli_vxcf"."_genfin604 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_genfin604 SELECT * FROM ".$databaza."F$h_ycf"."_genfin604 ";
+$dsql = mysql_query("$dsqlt");
+  }
+
+if( $drupoh == 97 )
+  {
+$dsqlt = "TRUNCATE F$kli_vxcf"."_genfin704 ";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_genfin704 SELECT * FROM ".$databaza."F$h_ycf"."_genfin704 ";
+$dsql = mysql_query("$dsqlt");
+  }
+
 
 $copern=308;
     }
