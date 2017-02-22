@@ -2882,7 +2882,7 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcvyk1000ziss'.$kli_uzid;
   var okno = window.open("../tmp/vykzis.<?php echo $kli_uzid; ?>.pdf","_self");
 </script>
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=Windows 1250">
+<META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Vykaz Ziskov PDF</title>
   <style type="text/css">

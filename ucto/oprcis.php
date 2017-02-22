@@ -313,7 +313,33 @@ $copern=308;
 //koniec nacitanie generovania 104 z minuleho roka
     }
 
+//nacitanie standartnej generovania SUVAHA NUJ
+    if ( $copern == 155 AND $drupoh == 96 )
+    {
+?>
+<script type="text/javascript">
+if( !confirm ("Chcete naèíta štandartnı èíselník generovania Súvaha NUJ ?") )
+         { window.close()  }
+else
+         { location.href='oprcis.php?copern=156&page=1&drupoh=96'  }
+</script>
+<?php
+    }
 
+    if ( $copern == 156 AND $drupoh == 96 )
+    {
+
+$sql = "DROP TABLE F$kli_vxcf"."_crs_no";
+$vysledok = mysql_query("$sql");
+
+
+echo "Zatvorte okno generovania a kliknite na vytvorenie Súvahy NUJ - Program naèíta štandartnı èíselník generovania ";
+exit;
+
+
+$copern=308;
+//koniec nacitania standartnej generovania SUVAHA NUJ
+    }
 
 //nacitanie standartnej generovania FIN 2 - 04 NUJ
     if ( $copern == 155 AND $drupoh == 83 )
@@ -336,7 +362,7 @@ $vysledok = mysql_query("$sql");
 $sql = "DROP TABLE F$kli_vxcf"."_crf204nuj_nopre2011";
 $vysledok = mysql_query("$sql");
 
-echo "Zatvorte okno generovania a skliknite na naèítanie hodnôt do vıkazu FIN 2 - 04 NUJ - Program naèíta štandartnı èíselník generovania FIN 2 - 04 NUJ";
+echo "Zatvorte okno generovania a kliknite na naèítanie hodnôt do vıkazu FIN 2 - 04 NUJ - Program naèíta štandartnı èíselník generovania FIN 2 - 04 NUJ";
 exit;
 
 
@@ -365,7 +391,7 @@ $vysledok = mysql_query("$sql");
 $sql = "DROP TABLE F$kli_vxcf"."_crf204pod_nopre2011";
 $vysledok = mysql_query("$sql");
 
-echo "Zatvorte okno generovania a skliknite na naèítanie hodnôt do vıkazu FIN 2 - 04 POD - Program naèíta štandartnı èíselník generovania FIN 2 - 04 POD";
+echo "Zatvorte okno generovania a kliknite na naèítanie hodnôt do vıkazu FIN 2 - 04 POD - Program naèíta štandartnı èíselník generovania FIN 2 - 04 POD";
 exit;
 
 
@@ -394,7 +420,7 @@ $vysledok = mysql_query("$sql");
 $sql = "DROP TABLE F$kli_vxcf"."_crf704_nopre2011";
 $vysledok = mysql_query("$sql");
 
-echo "Zatvorte okno generovania a skliknite na naèítanie hodnôt do vıkazu FIN 7 - 04 - Program naèíta štandartnı èíselník generovania FIN 7 - 04";
+echo "Zatvorte okno generovania a kliknite na naèítanie hodnôt do vıkazu FIN 7 - 04 - Program naèíta štandartnı èíselník generovania FIN 7 - 04";
 exit;
 
 

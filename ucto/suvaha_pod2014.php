@@ -1614,7 +1614,7 @@ $sqltt = "SELECT * FROM F$kli_vxcf"."_prcsuvahasneg$kli_uzid WHERE ".
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
 
-if( $pol > 0 )
+if( $pol > 0 AND $lensuv == 1 AND $lenvzs == 1 )
           {
 
 $i=0;
