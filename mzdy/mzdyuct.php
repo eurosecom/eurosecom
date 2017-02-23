@@ -154,8 +154,8 @@ if( $ucf_zp == 0 AND $ucf_np == 0 AND $ucf_sp == 0 AND $fir_allx11 > 0 ) { $prob
 //echo "riesim problem";
 
 $databaza="";
-if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; }
-
+$dtb2 = include("../cis/oddel_dtbz1.php");
+echo $databaza;
 
 $dsqlt = "DROP TABLE F$kli_vxcf"."_mzducty ";
 $dsql = mysql_query("$dsqlt");
@@ -253,6 +253,9 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdprc,F$kli_vxcf"."_mzddmn".
 $dsql = mysql_query("$dsqlt");
 
 //////////////////////////////nacitaj ucty miezd
+//aupc je pocet miest za syntetikou v príjmových dm 101, 506...
+//aupcz je pocet miest za syntetikou v zrážkových dm 901, 902...
+$aupc=100; $aupcz=100;
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzducty WHERE ucty = 1");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
@@ -283,6 +286,8 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzducty WHERE ucty = 1");
   $ucz_rf=$riaddok->ucz_rf;
   $aupc=100;
   if( $riaddok->ucf_zp > 66666 ) { $aupc=1000; }
+  $aupcz=$aupc;
+  if( $riaddok->ucz_zp < 99999 ) { $aupcz=100; }
   $puczam=1*$riaddok->puc_zam;
   $puckon=1*$riaddok->puc_kon;
   $ucmsoc=1*$riaddok->ucm_soc;
@@ -300,7 +305,7 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdprc,F$kli_vxcf"."_mzddmn".
 "";
 $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdprc,F$kli_vxcf"."_mzddmn".
-" SET ucd=(su*$aupc)+au, ucm=$puczam ".
+" SET ucd=(su*$aupcz)+au, ucm=$puczam ".
 " WHERE F$kli_vxcf"."_mzdprc.br = 3 AND kon = 0 AND F$kli_vxcf"."_mzdprc.dmn = F$kli_vxcf"."_mzddmn.dm".
 "";
 $dsql = mysql_query("$dsqlt");
@@ -312,7 +317,7 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdprc,F$kli_vxcf"."_mzddmn".
 "";
 $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdprc,F$kli_vxcf"."_mzddmn".
-" SET ucd=(suc*$aupc)+auc, ucm=$puckon ".
+" SET ucd=(suc*$aupcz)+auc, ucm=$puckon ".
 " WHERE F$kli_vxcf"."_mzdprc.br = 3 AND kon = 1 AND F$kli_vxcf"."_mzdprc.dmn = F$kli_vxcf"."_mzddmn.dm".
 "";
 $dsql = mysql_query("$dsqlt");
