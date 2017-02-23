@@ -761,10 +761,45 @@ $i=$i+1;
 
 
 <?php if ( $strana == 1 ) { ?>
-
-<img src='../obr/ikony/searchl_blue_icon.png' onclick="volajIcox();" title="Vyh¾ada DIÈ" style="width: 20px; height: 20px; position: absolute; top: 826px; left:290px; cursor: pointer;" >
+<script src="../jquery/jquery-3.1.1.js"></script>
+<img src='../obr/ikony/searchl_blue_icon.png' id="buttjson" name="buttjson" title="Vyh¾ada DIÈ" style="width: 20px; height: 20px; position: absolute; top: 826px; left:290px; cursor: pointer;" >
 <div id="myIcoElement" style="background-color: white; position: absolute; top:826px; left:320px; display: none;">menu</div>
+<script type="text/javascript">
 
+$("#buttjson").click(function( event ) {
+      $( "#myIcoElement" ).empty();
+      $( "#myIcoElement" ).show( "fast", function() {
+          // Animation complete.
+      });
+      event.preventDefault();
+
+        var jsonAPI = "oznamenie_uprzd_jsonico.php";
+        var zodic = $( "#zodic" ).val();
+        if ($.trim($("#zodic").val()) != '') {
+          $.getJSON(jsonAPI, {
+              tags: "xxxxxx",
+              prm1: zodic
+          })
+              .done(function (data) {
+                  $("<div>DIÈ Názov Ulica Mesto PSÈ</div>").appendTo("#myIcoElement");
+                  $.each(data.firmy, function (i, item) {
+                      $("<div>" + item.dic + " "
+                          + "<input type='image' src='../obr/ok.png' onclick=\"vykonajIco(" +
+                          "'" +item.ico + "','" + item.dic + "','" + item.nai + "','" + item.uli + "','" + item.mes + "','" + item.psc + "'" +
+                          ")\"  >" + " "
+                          + item.nai + " " + item.uli + " " + item.mes + " " + item.psc + "</div>").appendTo("#myIcoElement");
+                      if (i === 300) {
+                          return false;
+                      }
+                  });
+              });
+        }
+
+});
+
+
+
+</script>
 <script type="text/javascript" src="oznamenie_uprzd_jsico.js"></script>
 <script type="text/javascript">
 
