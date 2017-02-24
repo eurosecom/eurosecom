@@ -781,17 +781,19 @@ $("#buttjson").click(function( event ) {
               prm1: zodic
           })
               .done(function (data) {
-                  $("<div>DIÈ Názov Ulica Mesto PSÈ</div>").appendTo("#myIcoElement");
+                  $("<table class='odb-ponuka'><tr><td width='10%'></td><td width='5%'></td><td width='25%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td></tr>").appendTo("#myIcoElement");
+                  $("<tr><th>DIÈ</th><th></th><th align='left'>Názov</th><th align='left'>Ulica</th><th align='left'>Mesto</th><th align='left'>PSÈ</th></tr>").appendTo("#myIcoElement");
                   $.each(data.firmy, function (i, item) {
-                      $("<div>" + item.dic + " "
-                          + "<input type='image' src='../obr/ok.png' onclick=\"vykonajIco(" +
-                          "'" +item.ico + "','" + item.dic + "','" + item.nai + "','" + item.uli + "','" + item.mes + "','" + item.psc + "'" +
-                          ")\"  >" + " "
-                          + item.nai + " " + item.uli + " " + item.mes + " " + item.psc + "</div>").appendTo("#myIcoElement");
+                      $("<tr><td> " + item.dic + "</td><td> "
+                          + "<input type='image' src='../obr/ok.png' onclick=\"vykonajIco("
+                          + "'" +item.ico + "','" + item.dic + "','" + item.nai + "','" + item.uli + "','" + item.mes + "','" + item.psc + "'"
+                          + ")\"  >" + " "
+                          + "</td><td> " + item.nai + "</td><td> " + item.uli + "</td><td> " + item.mes + "</td><td> " + item.psc + "</td></tr>").appendTo("#myIcoElement");
                       if (i === 300) {
                           return false;
                       }
                   });
+                  $("</table>").appendTo("#myIcoElement");
               });
         }
 
@@ -800,7 +802,6 @@ $("#buttjson").click(function( event ) {
 
 
 </script>
-<script type="text/javascript" src="oznamenie_uprzd_jsico.js"></script>
 <script type="text/javascript">
 
 
@@ -817,12 +818,6 @@ window.open('oznamenie_uprzd.php?copern=1001&icoset=' + ico + '&cislo_cpl=<?php 
 
 
                 }
-
-
-  function volajIcox()
-  {
-  if( document.forms.formv1.zodic.value != "" ) { volajIco(); }
-  }
 
 </script>
 <?php                    } ?>
