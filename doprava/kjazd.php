@@ -38,6 +38,12 @@ $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resiz
 $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
+$sql = "SELECT * FROM F$kli_vxcf"."_dopknjrepoc ";
+$vysledok = mysql_query($sql);
+if ($vysledok)
+{
+if( $copern == 1 ) { $_REQUEST['repoc']=1; }
+}
 $repoc = 1*$_REQUEST['repoc'];
 if( $repoc == 1 ) 
 {
@@ -80,6 +86,9 @@ $dsql = mysql_query("$dsqlt");
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_kjzprcgg'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
+
+$sql = "DROP TABLE F$kli_vxcf"."_dopknjrepoc ";
+$vysledok = mysql_query($sql);
 }
 
 $tlacitkoenter=0;
@@ -639,6 +648,20 @@ if( $oprava == 1 )
  {
 $cplstz = 1*$_REQUEST['cplstz'];
 $upravit=1;
+
+$sqlt = <<<sklprc
+(
+   pox         DECIMAL(10,0) DEFAULT 0,
+   dok         DECIMAL(10,0) DEFAULT 0,
+   kms         DECIMAL(10,0) DEFAULT 0,
+   kmn         DECIMAL(10,0) DEFAULT 0,
+   kon         DECIMAL(10,0) DEFAULT 0
+);
+sklprc;
+
+$vsql = "CREATE TABLE F".$kli_vxcf."_dopknjrepoc ".$sqlt;
+$vytvor = mysql_query("$vsql");
+
  }
 
 $n_dat = $_REQUEST['n_dat'];
