@@ -935,12 +935,21 @@ $kli_vrok=$pole[1];
 if( $kli_vmes < 10 ) $kli_vmes = ""."0".$kli_vmes;
 
 
-$nazsub=$cfuct."mzd".$kli_vmes;
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/".$cfuct."mzd".$kli_vmes."_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/".$cfuct."mzd".$kli_vmes."_".$kli_uzid."_".$hhmmss.".txt";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
 
 
-if (File_Exists ("../tmp/$nazsub.txt")) { $soubor = unlink("../tmp/$nazsub.txt"); }
+$nazsub=$outfilex;
 
-$soubor = fopen("../tmp/$nazsub.txt", "a+");
+
+$soubor = fopen("$nazsub", "a+");
 
 
   $vysledok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprc2");
@@ -958,7 +967,9 @@ fclose($soubor);
 
 ///////////////////////////////////zostava zauctovania pdf1
 
-if (File_Exists ("../tmp/$nazsub.pdf")) { $soubor = unlink("../tmp/$nazsub.pdf"); }
+
+$outfilex1="../tmp/".$cfuct."mzd".$kli_vmes."_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex1") ) { $soubor = unlink("$outfilex1"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -1050,14 +1061,19 @@ $j = $j + 1;
 $pdf->SetFont('arial','',10);
 $pdf->Cell(140,5,"Celkom za doklad","LTB",0,"L");$pdf->Cell(105,5,"$sCelkom","RTB",1,"R");
 
-$pdf->Output("../tmp/$nazsub.pdf");
+$pdf->Output("$outfilex1");
 
 ///////////////////////////////////koniec zostava zauctovania pdf1
 
 ///////////////////////////////////zostava zauctovania pdf2
-$nazsub2=$cfuct."mzds".$kli_vmes;
 
-if (File_Exists ("../tmp/$nazsub2.pdf")) { $soubor = unlink("../tmp/$nazsub2.pdf"); }
+ $outfilexdel2="../tmp/".$cfuct."mzds".$kli_vmes."_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel2") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex2="../tmp/".$cfuct."mzds".$kli_vmes."_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex2") ) { $soubor = unlink("$outfilex2"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -1171,18 +1187,18 @@ $j = $j + 1;
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcuct';
 $vysledok = mysql_query("$sqlt");
 
-$pdf->Output("../tmp/$nazsub2.pdf");
+$pdf->Output("$outfilex2");
 
 ///////////////////////////////////koniec zostava zauctovania pdf2
 
 ?>
-<a href="../tmp/<?php echo $nazsub; ?>.pdf">Zostava zaúètovania PDF v.1</a><br />
+<a href="<?php echo $outfilex1; ?>">Zostava zaúètovania PDF v.1</a><br />
 <br />
 <br />
-<a href="../tmp/<?php echo $nazsub2; ?>.pdf">Zostava zaúètovania PDF v.2</a><br />
+<a href="<?php echo $outfilex2; ?>">Zostava zaúètovania PDF v.2</a><br />
 <br />
 <br />
-<a href="../tmp/<?php echo $nazsub; ?>.txt">../tmp/<?php echo $nazsub; ?>.txt</a>
+<a href="<?php echo $outfilex; ?>"><?php echo $outfilex; ?></a>
 
 
 <?php
