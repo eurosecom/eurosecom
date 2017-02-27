@@ -781,6 +781,7 @@ $("#buttjson").click(function( event ) {
               prm1: zodic
           })
               .done(function (data) {
+                  $("<div class='div-ponuka'>").appendTo("#myIcoElement");
                   $("<table class='odb-ponuka'><tr><td width='10%'></td><td width='5%'></td><td width='25%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td></tr>").appendTo("#myIcoElement");
                   $("<tr><th>DIÈ</th><th></th><th align='left'>Názov</th><th align='left'>Ulica</th><th align='left'>Mesto</th><th align='left'>PSÈ</th></tr>").appendTo("#myIcoElement");
                   $.each(data.firmy, function (i, item) {
@@ -794,6 +795,7 @@ $("#buttjson").click(function( event ) {
                       }
                   });
                   $("</table>").appendTo("#myIcoElement");
+                  $("</div>").appendTo("#myIcoElement");
               });
         }
 
