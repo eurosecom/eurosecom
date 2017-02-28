@@ -781,21 +781,21 @@ $("#buttjson").click(function( event ) {
               prm1: zodic
           })
               .done(function (data) {
-                  $("<div class='div-ponuka'>").appendTo("#myIcoElement");
-                  $("<table class='odb-ponuka'><tr><td width='10%'></td><td width='5%'></td><td width='25%'></td><td width='20%'></td><td width='20%'></td><td width='20%'></td></tr>").appendTo("#myIcoElement");
-                  $("<tr><th>DIÈ</th><th></th><th align='left'>Názov</th><th align='left'>Ulica</th><th align='left'>Mesto</th><th align='left'>PSÈ</th></tr>").appendTo("#myIcoElement");
+                  $("<div id='divponuka' class='div-ponuka'></div>").appendTo("#myIcoElement");
+                  $("<table id='tableponuka' class='odb-ponuka'><tr><td width='10%'></td><td width='5%'></td><td width='25%'></td>" +
+"<td width='20%'></td><td width='20%'></td><td width='20%'></td></tr>"
++ "<tr><th>DIÈ</th><th></th><th align='left'>Názov</th><th align='left'>Ulica</th><th align='left'>" + 
+"Mesto</th><th align='left'>PSÈ</th></tr></table>").appendTo("#divponuka");
                   $.each(data.firmy, function (i, item) {
                       $("<tr><td> " + item.dic + "</td><td> "
                           + "<input type='image' src='../obr/ok.png' onclick=\"vykonajIco("
                           + "'" +item.ico + "','" + item.dic + "','" + item.nai + "','" + item.uli + "','" + item.mes + "','" + item.psc + "'"
                           + ")\"  >" + " "
-                          + "</td><td> " + item.nai + "</td><td> " + item.uli + "</td><td> " + item.mes + "</td><td> " + item.psc + "</td></tr>").appendTo("#myIcoElement");
+                          + "</td><td> " + item.nai + "</td><td> " + item.uli + "</td><td> " + item.mes + "</td><td> " + item.psc + "</td></tr>").appendTo("#tableponuka");
                       if (i === 300) {
                           return false;
                       }
                   });
-                  $("</table>").appendTo("#myIcoElement");
-                  $("</div>").appendTo("#myIcoElement");
               });
         }
 
