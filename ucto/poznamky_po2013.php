@@ -16277,7 +16277,7 @@ window.open('../ucto/poznamky_po2013nacitaj.php?copern=1999&stranax=' + strana +
    <td class="header">Poznámky k úètovnej závierke PÚ</td>
    <td>
     <div class="bar-btn-form-tool">
-<?php if( $kli_vrok < 2016 ) { ?>
+<?php if( $kli_vrok < 2090 ) { ?>
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacPoznamky2013bez1();"
       title="Zobrazi všetky - bez prvej strany - v PDF" class="btn-form-tool"
       style="width:16px; height:16px; margin-top:2px;">
