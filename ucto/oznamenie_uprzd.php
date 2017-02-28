@@ -761,48 +761,103 @@ $i=$i+1;
 
 
 <?php if ( $strana == 1 ) { ?>
-<script src="../jquery/jquery-3.1.1.js"></script>
+<script src="../jquery/jquery-3.1.1.min.js"></script>
 <img src='../obr/ikony/searchl_blue_icon.png' id="buttjson" name="buttjson" title="Vyh¾ada DIÈ" style="width: 20px; height: 20px; position: absolute; top: 826px; left:290px; cursor: pointer;" >
-<div id="myIcoElement" style="background-color: white; position: absolute; top:826px; left:320px; display: none;">menu</div>
+<div id="myIcoElement"></div>
+<style>
+.div-ponuka {
+  position: absolute;
+  top: 854px;
+  left: 52px;
+  padding: 7px 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-bottom: 1px solid #c4c4c4;
+  border-left: 1px solid #d3d3d3;
+  border-right: 1px solid #d3d3d3;
+  border-top: 1px solid #d3d3d3;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.07);
+  border-radius: 2px;
+  overflow: auto;
+  max-height: 450px;
+}
+.odb-ponuka tr {
+  background-color: #fff;
+  border-bottom: 1px solid lightblue;
+  line-height: 26px;
+}
+.odb-ponuka tr:last-child {
+  border-bottom: 0;
+}
+.odb-ponuka tr:first-child:hover {
+  background-color: transparent;
+}
+.odb-ponuka tr:hover {
+  background-color: #eee;
+}
+.odb-ponuka th {
+  font-size: 11px;
+  text-align: left;
+  height: 14px;
+  padding: 0 7px;
+}
+.odb-ponuka td {
+  padding: 0 7px;
+  font-size: 12px;
+}
+.odb-ponuka td img {
+  cursor: pointer;
+  display: inline-block;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  position: relative;
+  top: 5px;
+}
+</style>
 <script type="text/javascript">
-
-$("#buttjson").click(function( event ) {
-      $( "#myIcoElement" ).empty();
-      $( "#myIcoElement" ).show( "fast", function() {
-          // Animation complete.
-      });
-      event.preventDefault();
-
-        var jsonAPI = "oznamenie_uprzd_jsonico.php";
-        var zodic = $( "#zodic" ).val();
-        if ($.trim($("#zodic").val()) != '') {
-          $.getJSON(jsonAPI, {
-              tags: "xxxxxx",
-              prm1: zodic
+  $("#buttjson").click(function( event )
+  {
+    $( "#myIcoElement" ).empty();
+    $( "#myIcoElement" ).show( "fast", function()
+       {
+    // Animation complete.
+       });
+       event.preventDefault();
+       var jsonAPI = "oznamenie_uprzd_jsonico.php";
+       var zodic = $( "#zodic" ).val();
+       if ($.trim($("#zodic").val()) != '')
+       {
+         $.getJSON(jsonAPI, {
+           tags: "xxxxxx",
+           prm1: zodic
           })
-              .done(function (data) {
-                  $("<div id='divponuka' class='div-ponuka'></div>").appendTo("#myIcoElement");
-                  $("<table id='tableponuka' class='odb-ponuka'><tr><td width='10%'></td><td width='5%'></td><td width='25%'></td>" +
-"<td width='20%'></td><td width='20%'></td><td width='20%'></td></tr>"
-+ "<tr><th>DIÈ</th><th></th><th align='left'>Názov</th><th align='left'>Ulica</th><th align='left'>" + 
-"Mesto</th><th align='left'>PSÈ</th></tr></table>").appendTo("#divponuka");
-                  $.each(data.firmy, function (i, item) {
-                      $("<tr><td> " + item.dic + "</td><td> "
-                          + "<input type='image' src='../obr/ok.png' onclick=\"vykonajIco("
-                          + "'" +item.ico + "','" + item.dic + "','" + item.nai + "','" + item.uli + "','" + item.mes + "','" + item.psc + "'"
-                          + ")\"  >" + " "
-                          + "</td><td> " + item.nai + "</td><td> " + item.uli + "</td><td> " + item.mes + "</td><td> " + item.psc + "</td></tr>").appendTo("#tableponuka");
-                      if (i === 300) {
-                          return false;
-                      }
-                  });
-              });
-        }
-
-});
-
-
-
+           .done(function (data)
+           {
+             $("<div id='divponuka' class='div-ponuka'></div>").appendTo("#myIcoElement");
+             $("<table id='tableponuka' class='odb-ponuka'>" +
+                "<tr>" +
+                 "<th style=''>DIÈ</th>" +
+                 "<th style=''>Názov</th>" +
+                 "<th style=''>Ulica</th>" +
+                 "<th style=''>Mesto</th>" +
+                 "<th style=''>PSÈ</th>" +
+                 "<th style=''></th>" +
+                "</tr>" +
+               "</table>").appendTo("#divponuka");
+             $.each(data.firmy, function (i, item) {
+               $("<tr>" +
+                  "<td>" + item.dic + "</td>" +
+                  "<td>" + item.nai + "</td>" +
+                  "<td>" + item.uli + "</td>" +
+                  "<td>" + item.mes + "</td>" +
+                  "<td>" + item.psc + "</td>" +
+                  "<td><img src='../obr/ok.png' title='Vybra' onclick=\"vykonajIco('" + item.ico + "','" + item.dic + "','" + item.nai + "','" + item.uli + "','" + item.mes + "','" + item.psc + "')\"></td>" +
+                 "</tr>").appendTo("#tableponuka");
+                 if (i === 300) { return false; } });
+           });
+         }
+  });
 </script>
 <script type="text/javascript">
 
