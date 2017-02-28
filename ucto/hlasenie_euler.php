@@ -56,7 +56,15 @@ $soubor = unlink("../tmp/hlasenie_eulerzip.php");
 copy("../ucto/hlasenie_eulerzip.php", "../tmp/hlasenie_eulerzip.php");
 }
 
-
+//natvrdo text
+//$fir_pripoisteny="Èýpripoisteny";
+$fir_zmluva="2551055.000";
+$fir_kontakt="Eva Kubíková";
+$fir_konemail="alchemse@alchem.sk, alchem2@alchem.sk";
+$fir_kontel="0905/341883";
+//$fir_konfax="035/7654321";
+$podpisujuci="Alfonz Hrnèirík";
+$podpispozicia="konate¾";
 
 //.jpg podklad
 $jpg_cesta="../dokumenty/statistika2016/hlasenie_pohladavok/hlasenie_euler";
@@ -468,12 +476,9 @@ $fir_riadok=mysql_fetch_object($fir_vysledok);
 $cislo_ico=$fir_riadok->ico;
 
 if ( $strana == 1 ) {
-//$fir_pripoisteny="Èýpripoisteny";
-//$fir_zmluva="Èýzmluva";
-//$fir_kontakt="Èýkontakt";
-//$fir_konemail="Kontakt@email.sk";
-//$fir_kontel="034/1234567";
-//$fir_konfax="035/7654321";
+
+
+
 $ico = $fir_riadok->ico;
 $ktos = $fir_riadok->ktos;
 $euid = $fir_riadok->euid;
@@ -508,8 +513,7 @@ $dalinf = $fir_riadok->dalinf;
 $dath = $fir_riadok->dath;
 
 
-//$podpisujuci="Èýpodpisujuci";
-//$podpispozicia="Èýpozicia";
+
 
                     }
 
@@ -1102,23 +1106,23 @@ $textx="0123456789abcdefghijklmnoprstuv";
 $pdf->Cell(195,1," ","$rmc1",1,"L");
 $pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(137,6,"$text","$rmc",1,"L");
 //Poistna zmluva
-$text="";
+$text=$fir_zmluva;
 $textx="0123456789abcdefghijklmnoprstuv";
 $pdf->Cell(195,1," ","$rmc1",1,"L");
 $pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(137,6,"$text","$rmc",1,"L");
 //Kontaktna osoba
-$text="";
+$text=$fir_kontakt;
 $textx="0123456789abcdefghijklmnoprstuv";
 $pdf->Cell(195,1," ","$rmc1",1,"L");
 $pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(137,6,"$text","$rmc",1,"L");
 //Email
-$text="";
+$text=$fir_konemail;
 $textx="0123456789abcdefghijklmnoprstuv";
 $pdf->Cell(195,1," ","$rmc1",1,"L");
 $pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(137,6,"$text","$rmc",1,"L");
 //Telefon a Fax
-$text1="";
-$text2="";
+$text1=$fir_kontel;
+$text2=$fir_konfax;
 $textx="0123456789abcdefghijklmnoprstuv";
 $pdf->Cell(195,1," ","$rmc1",1,"L");
 $pdf->Cell(45.5,5," ","$rmc1",0,"C");$pdf->Cell(53,6,"$text1","$rmc",0,"L");
@@ -1238,12 +1242,12 @@ $ipole=$ipole+1;
 
 //6.PREHLASENIE
 //Podpisujuci
-$text="";
+$text=$podpisujuci;
 $textx="0123456789abcdefghijklmnoprstuv";
 $pdf->SetY(183);
 $pdf->Cell(44,5," ","$rmc1",0,"C");$pdf->Cell(138,6,"$text","$rmc",1,"L");
 //Pozicia
-$text="";
+$text=$podpispozicia;
 $textx="0123456789abcdefghijklmnoprstuv";
 $pdf->Cell(195,1," ","$rmc1",1,"L");
 $pdf->Cell(44,5," ","$rmc1",0,"C");$pdf->Cell(138,6,"$text","$rmc",1,"L");
