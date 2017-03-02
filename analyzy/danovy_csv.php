@@ -542,11 +542,17 @@ if( $i == 0 )
 
      }
 
-$cen=$hlavicka->hod; $ecen=str_replace(".",",",$cen); 
+$pmdt=$hlavicka->pmdt; $pmdt=str_replace(".",",",$pmdt); 
+$pdal=$hlavicka->pdal; $pdal=str_replace(".",",",$pdal);
 
+$omdt=$hlavicka->omdt; $omdt=str_replace(".",",",$omdt); 
+$odal=$hlavicka->odal; $odal=str_replace(".",",",$odal);
 
-  $text = $hlavicka->uce.";".$hlavicka->nuc.";".$hlavicka->pmdt.";".$hlavicka->pdal.";".$hlavicka->omdt.";";
-  $text = $text.$hlavicka->odal.";".$hlavicka->zmdt.";".$hlavicka->zdal."\r\n"; 
+$zmdt=$hlavicka->zmdt; $zmdt=str_replace(".",",",$zmdt); 
+$zdal=$hlavicka->zdal; $zdal=str_replace(".",",",$zdal);
+
+  $text = $hlavicka->uce.";".$hlavicka->nuc.";".$pmdt.";".$pdal.";".$omdt.";";
+  $text = $text.$odal.";".$zmdt.";".$zdal."\r\n"; 
 
   fwrite($soubor, $text);
 
