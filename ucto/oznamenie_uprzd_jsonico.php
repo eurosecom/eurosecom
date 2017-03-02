@@ -14,25 +14,10 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
-$diak=2;
+
+require_once("../cis/dtb_charset.php");
 //ÈŒ¼¾šèžýáí
 
-//pre educto.sk eurosecomvirtualnyserver.ano diak=0
-$eurosecomvirtualnyserver=0;
-if( file_exists("pswd/eurosecomvirtualnyserver.ano")) { $eurosecomvirtualnyserver=1; }
-if( file_exists("../pswd/eurosecomvirtualnyserver.ano")) { $eurosecomvirtualnyserver=1; }
-if( $eurosecomvirtualnyserver == 1 ) { $diak=0; }
-
-//pre ekorobot eurosecom2015virtualnyserver.ano diak=???
-$eurosecom2015virtualnyserver=0;
-if( file_exists("pswd/eurosecom2015virtualnyserver.ano")) { $eurosecom2015virtualnyserver=1; }
-if( file_exists("../pswd/eurosecom2015virtualnyserver.ano")) { $eurosecom2015virtualnyserver=1; }
-if( $eurosecom2015virtualnyserver == 1 ) 
-{ 
-$diak=2;
-$sqltt="SET NAMES cp1250";
-$result = mysqli_query($mysqli, "$sqltt");
-}
 
 $prm1 = $_GET['prm1'];
 $prm2 = $_GET['prm2'];
@@ -65,12 +50,12 @@ while ($row = $result->fetch_array()) {
     $mesx = $row["mes"];
 
 
-if( $diak == 1 ) {
+if( $dtbcharset == 1 ) {
     $naix = iconv("UTF-8", "CP1250", $naix);
     $ulix = iconv("UTF-8", "CP1250", $ulix);
     $mesx = iconv("UTF-8", "CP1250", $mesx);
                  }
-if( $diak == 2 ) {
+if( $dtbcharset == 2 ) {
     $naix = iconv("CP1250", "UTF-8", $naix);
     $ulix = iconv("CP1250", "UTF-8", $ulix);
     $mesx = iconv("CP1250", "UTF-8", $mesx);
