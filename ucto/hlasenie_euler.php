@@ -1054,9 +1054,11 @@ $ico_konfax = $fir_riadok->fax;
 $ico_stat="SR";
 
 //urob jedno pdf
+$ico_naibez = StrTr($ico_nai, "áäèïéìëí¾òôóöàøšúùüıÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜİ",
+"aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
 
 
-$outfilex="../dokumenty/FIR".$kli_vxcf."/euler/hlasenie_".$ico_nai.".pdf";
+$outfilex="../dokumenty/FIR".$kli_vxcf."/euler/hlasenie_".$ico_naibez.".pdf";
 if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
      define('FPDF_FONTPATH','../fpdf/font/');
