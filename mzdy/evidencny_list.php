@@ -30,6 +30,9 @@ $kli_vrok=$pole[1];
 
 $citfir = include("../cis/citaj_fir.php");
 
+$setuzrok = include("../cis/citajrok.php");
+//echo $citajrok;
+
 //ramcek fpdf 1=zap,0=vyp
 $rmc=0;
 $rmc1=0;
@@ -50,6 +53,25 @@ if( $strana == 2 ) { $tablmzdevid="mzdevidencnys2"; }
 $newdelenie=0;
 if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
 
+//zapis nastavenia zaloh
+if( $copern == 3618 )
+{
+
+$fir2014 = 1*$_REQUEST['fir2014'];
+$fir2013 = 1*$_REQUEST['fir2013'];
+$fir2012 = 1*$_REQUEST['fir2012'];
+$fir2011 = 1*$_REQUEST['fir2011'];
+$fir2010 = 1*$_REQUEST['fir2010'];
+$fir2009 = 1*$_REQUEST['fir2009'];
+
+$sqty = "UPDATE F$kli_vxcf"."_mzdevidzalset SET ".
+" fir2014='$fir2014', fir2013='$fir2013', fir2012='$fir2012', fir2011='$fir2011', fir2010='$fir2010', fir2009='$fir2009' "; 
+$ulozene = mysql_query("$sqty"); 
+
+$strana=1;
+$copern=20;
+}
+//koniec zapis nastavenia zaloh
 
 //nacitanie jedneho roka do evidencneho listu
     if ( $copern == 4155 )
@@ -2166,6 +2188,107 @@ if ( $next_oc > 9999 ) $next_oc=9999;
 if ( $copern == 20 )
     {
 ?>
+
+<?php if( $citajrok >= 0 )        { ?>
+<?php
+
+$sql = "SELECT fir2009 FROM F$kli_vxcf"."_mzdevidzalset ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+
+$vsql = "DROP TABLE F".$kli_vxcf."_mzdevidzalset ";
+$vytvor = mysql_query("$vsql");
+
+$sqlt = <<<statistika_p1304
+(
+   fir2014         DECIMAL(8,0) DEFAULT 0,
+   fir2013         DECIMAL(8,0) DEFAULT 0,
+   fir2012         DECIMAL(8,0) DEFAULT 0,
+   fir2011         DECIMAL(8,0) DEFAULT 0,
+   fir2010         DECIMAL(8,0) DEFAULT 0,
+   fir2009         DECIMAL(8,0) DEFAULT 0
+);
+statistika_p1304;
+
+$vsql = "CREATE TABLE F".$kli_vxcf."_mzdevidzalset ".$sqlt;
+$vytvor = mysql_query("$vsql");
+
+$vsql = "INSERT INTO F".$kli_vxcf."_mzdevidzalset (fir2014, fir2013, fir2012, fir2011, fir2010, fir2009 ) VALUES ( '0', '0', '0', '0', '0', '0' ) ";
+$vytvor = mysql_query("$vsql");
+
+}
+$fir2014=0; $fir2013=0; $fir2012=0; $fir2011=0; $fir2010=0; $fir2009=0; 
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdevidzalset ");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $fir2014=1*$riaddok->fir2014;
+  $fir2013=1*$riaddok->fir2013;
+  $fir2012=1*$riaddok->fir2012;
+  $fir2011=1*$riaddok->fir2011;
+  $fir2010=1*$riaddok->fir2010;
+  $fir2009=1*$riaddok->fir2009;
+  }
+
+$i=1;
+?>
+<div id="nastavdakx<?php echo $i;?>" style="display:none;" >
+<table>
+<tr>
+<FORM name='fhosnew<?php echo $i;?>' class='obyc' method='post' action='#' >
+<td class='hvstup_zlte' width='10%' ><img border=1 src='../obr/zmaz.png' style='width:20; height:15;' title='Zhasni položku' onClick="nastavdakx<?php echo $i;?>.style.display='none';">
+
+ <td class='bmenu' width='10%' align='right' >
+ è.fir2014<input class='hvstup' type='text' name='fir2014' id='fir2014' size='8' value='<?php echo $fir2014;?>' /></td>
+
+ <td class='bmenu' width='10%' align='right' >
+ è.fir2013<input class='hvstup' type='text' name='fir2013' id='fir2013' size='8' value='<?php echo $fir2013;?>' /></td>
+
+ <td class='bmenu' width='10%' align='right' >
+ è.fir2012<input class='hvstup' type='text' name='fir2012' id='fir2012' size='8' value='<?php echo $fir2012;?>' /></td>
+
+ <td class='bmenu' width='10%' align='right' >
+ è.fir2011<input class='hvstup' type='text' name='fir2011' id='fir2011' size='8' value='<?php echo $fir2011;?>' /></td>
+
+ <td class='bmenu' width='10%' align='right' >
+ è.fir2010<input class='hvstup' type='text' name='fir2010' id='fir2010' size='8' value='<?php echo $fir2010;?>' /></td>
+
+
+ <td class='bmenu' width='10%' align='right' >
+ è.fir2009<input class='hvstup' type='text' name='fir2009' id='fir2009' size='8' value='<?php echo $fir2009;?>' /></td>
+
+<td class='bmenu' width='30%' >
+<img border=1 src='../obr/ok.png' style='width:20; height:15;' title='Uloži nastavenie' onClick="UlozZalset<?php echo $i;?>();"></td>
+</FORM>
+</tr>
+</table>
+</div>
+<script type="text/javascript">
+
+
+
+function UlozZalset<?php echo $i;?>()
+                {
+
+var fir2014 = document.forms.fhosnew<?php echo $i;?>.fir2014.value;
+var fir2013 = document.forms.fhosnew<?php echo $i;?>.fir2013.value;
+var fir2012 = document.forms.fhosnew<?php echo $i;?>.fir2012.value;
+var fir2011 = document.forms.fhosnew<?php echo $i;?>.fir2011.value;
+var fir2010 = document.forms.fhosnew<?php echo $i;?>.fir2010.value;
+var fir2009 = document.forms.fhosnew<?php echo $i;?>.fir2009.value;
+
+window.open('evidencny_list.php?copern=3618&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc;?>&fir2014=' + fir2014 + '&fir2013=' + fir2013 + '&fir2012=' + fir2012 + '&fir2011=' + fir2011 + '&fir2010=' + fir2010 + '&fir2009=' + fir2009 + '&tt=1', '_self' );
+
+                }
+
+
+</script>
+
+
+<?php                      } ?>
+
+
 <div id="wrap-heading">
  <table id="heading">
   <tr>
@@ -2180,7 +2303,14 @@ if ( $copern == 20 )
 <?php                   } ?>
    </td>
    <td>
+
     <div class="bar-btn-form-tool">
+<?php if( $citajrok >= 0 )        { ?>
+<img src="../obr/ikony/pencil3_blue_x16.png" title="Nastavenie záloh"
+ onClick="nastavdakx1.style.display='';"
+ class="btn-form-tool">
+<?php                            } ?>
+
 <img src="../obr/ikony/xmark_lred_icon.png" title="Vymaza hodnoty evidenèného listu"
  onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=6155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>', '_self')"
  class="btn-form-tool">
