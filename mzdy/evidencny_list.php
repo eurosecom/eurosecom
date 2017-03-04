@@ -64,7 +64,7 @@ $fir2011 = 1*$_REQUEST['fir2011'];
 $fir2010 = 1*$_REQUEST['fir2010'];
 $fir2009 = 1*$_REQUEST['fir2009'];
 
-$sqty = "UPDATE F$kli_vxcf"."_mzdevidzalset SET ".
+$sqty = "UPDATE F$kli_vxcf"."_mzdevidzalset SET nacitane=1, ".
 " fir2014='$fir2014', fir2013='$fir2013', fir2012='$fir2012', fir2011='$fir2011', fir2010='$fir2010', fir2009='$fir2009' "; 
 $ulozene = mysql_query("$sqty"); 
 
@@ -2189,10 +2189,10 @@ if ( $copern == 20 )
     {
 ?>
 
-<?php if( $citajrok >= 0 )        { ?>
+<?php if( $citajrok > 0 )        { ?>
 <?php
 
-$sql = "SELECT fir2009 FROM F$kli_vxcf"."_mzdevidzalset ";
+$sql = "SELECT nacitane FROM F$kli_vxcf"."_mzdevidzalset ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -2202,6 +2202,7 @@ $vytvor = mysql_query("$vsql");
 
 $sqlt = <<<statistika_p1304
 (
+   nacitane        DECIMAL(2,0) DEFAULT 0,
    fir2014         DECIMAL(8,0) DEFAULT 0,
    fir2013         DECIMAL(8,0) DEFAULT 0,
    fir2012         DECIMAL(8,0) DEFAULT 0,
@@ -2229,10 +2230,51 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdevidzalset ");
   $fir2011=1*$riaddok->fir2011;
   $fir2010=1*$riaddok->fir2010;
   $fir2009=1*$riaddok->fir2009;
+  $nacitane=1*$riaddok->nacitane;
   }
 
 $i=1;
 ?>
+<?php if( $nacitane == 0 ) { ?>
+<script src="../jquery/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+//alert("»Ìtam z www.eszalohy.sk");
+(function() {
+
+        var flickerAPI = "http://www.eszalohy.sk/app/getzalsetjsonp.php";
+        $.ajax({
+            url: flickerAPI,
+            dataType: "jsonp",
+            type: 'GET',
+            jsonpCallback: 'jsonCallback',
+            success: function (data) {
+                $.each(data.firmy, function (i, item) {
+                    $("#fir2014").val(item.fir2014);
+                    $("#fir2013").val(item.fir2013);
+                    $("#fir2012").val(item.fir2012);
+                    $("#fir2011").val(item.fir2011);
+                    $("#fir2010").val(item.fir2010);
+                    $("#fir2009").val(item.fir2009);
+                    UlozZalset1();
+                })
+
+                console.log( "success" );
+                //alert(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log( "error" );
+                alert("Error");
+            }
+        });
+    })();
+
+});
+
+</script>
+<?php                      } ?>
 <div id="nastavdakx<?php echo $i;?>" style="display:none;" >
 <table>
 <tr>
@@ -2305,7 +2347,7 @@ window.open('evidencny_list.php?copern=3618&drupoh=1&page=1&subor=0&cislo_oc=<?p
    <td>
 
     <div class="bar-btn-form-tool">
-<?php if( $citajrok >= 0 )        { ?>
+<?php if( $citajrok > 0 )        { ?>
 <img src="../obr/ikony/pencil3_blue_x16.png" title="Nastavenie z·loh"
  onClick="nastavdakx1.style.display='';"
  class="btn-form-tool">
