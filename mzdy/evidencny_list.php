@@ -2278,8 +2278,8 @@ $( document ).ready(function() {
 <style>
 .menu {
   box-sizing: border-box;
-  overflow:auto;
-  padding: 12px 10px 5px 15px;
+  overflow: auto;
+  padding: 16px 10px 7px 15px;
   background-color: #fff;
   border-bottom: 1px solid #c4c4c4;
   border-left: 1px solid #d3d3d3;
@@ -2295,15 +2295,9 @@ $( document ).ready(function() {
   overflow: auto;
   font-size: 14px;
   height: 26px;
-  background-color:;
 }
 .menu-content {
   width: 200px;
-  background-color:;
-}
-.menu-content tbody {
-  position: relative;
-  top: 5px;
 }
 .menu-content th {
   line-height: 26px;
@@ -2313,28 +2307,28 @@ $( document ).ready(function() {
   border-bottom: 6px solid #fff;
 }
 .menu-content td {
-  line-height: 24px;
   font-size: 14px;
-  padding: 3px 0;
+  line-height: 24px;
+  border-bottom: 6px solid #fff;
 }
 .menu-content label {
-  text-indent: 5px;
-  display: inline-block;
+  padding-left: 10px;
 }
 .menu-content input {
+  position: static !important;
   font-size: 12px;
   width: 80px;
 }
 </style>
 <div id="nastavdakx<?php echo $i;?>" class="menu popup" style="display:none;">
+<FORM name="fhosnew<?php echo $i; ?>" method="post" action="#">
 <h2 class="menu-header">Nastavenie naèítania
  <img src="../obr/zmaz.png" onclick="nastavdakx<?php echo $i;?>.style.display='none'; btnsetzalohy.style.backgroundColor='';"
       title="Zavrie menu" style="width:18px; height:18px; cursor:pointer; display:inline-block; float:right; margin-top:0px;">
 </h2>
-<FORM name="fhosnew<?php echo $i; ?>" method="post" action="#">
  <table class="menu-content">
  <thead>
-  <th style="width:40%; text-indent:5px;">Rok</th>
+  <th style="width:40%; text-indent:10px;">Rok</th>
   <th style="width:60%;">Firma èíslo</th>
  </thead>
  <tbody>
