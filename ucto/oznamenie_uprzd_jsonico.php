@@ -71,6 +71,7 @@ if( $dtbcharset == 2 ) {
     array_push($response["firmy"], $firma);
 }
 
+$result->close();
 $mysqli->close();
 // echoing JSON response
 echo json_encode($response);
