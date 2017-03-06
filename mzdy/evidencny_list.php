@@ -2275,43 +2275,106 @@ $( document ).ready(function() {
 
 </script>
 <?php                      } ?>
-<div id="nastavdakx<?php echo $i;?>" style="display:none;" >
-<table>
-<tr>
-<FORM name='fhosnew<?php echo $i;?>' class='obyc' method='post' action='#' >
-<td class='hvstup_zlte' width='10%' ><img border=1 src='../obr/zmaz.png' style='width:20; height:15;' title='Zhasni poloûku' onClick="nastavdakx<?php echo $i;?>.style.display='none';">
-
- <td class='bmenu' width='10%' align='right' >
- Ë.fir2014<input class='hvstup' type='text' name='fir2014' id='fir2014' size='8' value='<?php echo $fir2014;?>' /></td>
-
- <td class='bmenu' width='10%' align='right' >
- Ë.fir2013<input class='hvstup' type='text' name='fir2013' id='fir2013' size='8' value='<?php echo $fir2013;?>' /></td>
-
- <td class='bmenu' width='10%' align='right' >
- Ë.fir2012<input class='hvstup' type='text' name='fir2012' id='fir2012' size='8' value='<?php echo $fir2012;?>' /></td>
-
- <td class='bmenu' width='10%' align='right' >
- Ë.fir2011<input class='hvstup' type='text' name='fir2011' id='fir2011' size='8' value='<?php echo $fir2011;?>' /></td>
-
- <td class='bmenu' width='10%' align='right' >
- Ë.fir2010<input class='hvstup' type='text' name='fir2010' id='fir2010' size='8' value='<?php echo $fir2010;?>' /></td>
-
-
- <td class='bmenu' width='10%' align='right' >
- Ë.fir2009<input class='hvstup' type='text' name='fir2009' id='fir2009' size='8' value='<?php echo $fir2009;?>' /></td>
-
-<td class='bmenu' width='30%' >
-<img border=1 src='../obr/ok.png' style='width:20; height:15;' title='Uloûiù nastavenie' onClick="UlozZalset<?php echo $i;?>();"></td>
+<style>
+.menu {
+  box-sizing: border-box;
+  overflow:auto;
+  padding: 12px 10px 5px 15px;
+  background-color: #fff;
+  border-bottom: 1px solid #c4c4c4;
+  border-left: 1px solid #d3d3d3;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.07);
+}
+.popup {
+  position: absolute;
+  top: 51px;
+  right: 1%;
+  z-index: 10;
+}
+.menu-header {
+  overflow: auto;
+  font-size: 14px;
+  height: 26px;
+  background-color:;
+}
+.menu-content {
+  width: 200px;
+  background-color:;
+}
+.menu-content tbody {
+  position: relative;
+  top: 5px;
+}
+.menu-content th {
+  line-height: 26px;
+  font-size: 12px;
+  background-color: #eee;
+  text-align: left;
+  border-bottom: 6px solid #fff;
+}
+.menu-content td {
+  line-height: 24px;
+  font-size: 14px;
+  padding: 3px 0;
+}
+.menu-content label {
+  text-indent: 5px;
+  display: inline-block;
+}
+.menu-content input {
+  font-size: 12px;
+  width: 80px;
+}
+</style>
+<div id="nastavdakx<?php echo $i;?>" class="menu popup" style="display:none;">
+<h2 class="menu-header">Nastavenie naËÌtania
+ <img src="../obr/zmaz.png" onclick="nastavdakx<?php echo $i;?>.style.display='none'; btnsetzalohy.style.backgroundColor='';"
+      title="Zavrieù menu" style="width:18px; height:18px; cursor:pointer; display:inline-block; float:right; margin-top:0px;">
+</h2>
+<FORM name="fhosnew<?php echo $i; ?>" method="post" action="#">
+ <table class="menu-content">
+ <thead>
+  <th style="width:40%; text-indent:5px;">Rok</th>
+  <th style="width:60%;">Firma ËÌslo</th>
+ </thead>
+ <tbody>
+ <tr>
+  <td><label for="fir2014">2014</label></td>
+  <td><input type='text' name='fir2014' id='fir2014' value='<?php echo $fir2014;?>'/></td>
+ </tr>
+ <tr>
+  <td><label for="fir2013">2013</label></td>
+  <td><input type='text' name='fir2013' id='fir2013' value='<?php echo $fir2013;?>'/></td>
+ </tr>
+ <tr>
+  <td><label for="fir2012">2012</label></td>
+  <td><input type='text' name='fir2012' id='fir2012' value='<?php echo $fir2012;?>'/></td>
+ </tr>
+ <tr>
+  <td><label for="fir2011">2011</label></td>
+  <td><input type='text' name='fir2011' id='fir2011' value='<?php echo $fir2011;?>'/></td>
+ </tr>
+ <tr>
+  <td><label for="fir2010">2010</label></td>
+  <td><input type='text' name='fir2010' id='fir2010' value='<?php echo $fir2010;?>'/></td>
+ </tr>
+ <tr>
+  <td><label for="fir2009">2009</label></td>
+  <td><input type='text' name='fir2009' id='fir2009' value='<?php echo $fir2009;?>'/></td>
+ </tr>
+ </tbody>
+ <tfoot>
+ <tr>
+  <td>&nbsp;</td>
+  <td><button type="submit" onclick="UlozZalset<?php echo $i;?>();" style="width:86px; cursor:pointer;">Uloûiù</button></td>
+ </tr>
+ </tfoot>
+ </table>
 </FORM>
-</tr>
-</table>
-</div>
+</div> <!-- .menu.popup -->
 <script type="text/javascript">
-
-
-
-function UlozZalset<?php echo $i;?>()
-                {
+  function UlozZalset<?php echo $i;?>()
+  {
 
 var fir2014 = document.forms.fhosnew<?php echo $i;?>.fir2014.value;
 var fir2013 = document.forms.fhosnew<?php echo $i;?>.fir2013.value;
@@ -2326,11 +2389,7 @@ window.open('evidencny_list.php?copern=3618&drupoh=1&page=1&subor=0&cislo_oc=<?p
 
 
 </script>
-
-
 <?php                      } ?>
-
-
 <div id="wrap-heading">
  <table id="heading">
   <tr>
@@ -2345,12 +2404,12 @@ window.open('evidencny_list.php?copern=3618&drupoh=1&page=1&subor=0&cislo_oc=<?p
 <?php                   } ?>
    </td>
    <td>
-
     <div class="bar-btn-form-tool">
-<?php if( $citajrok > 0 )        { ?>
-<img src="../obr/ikony/pencil3_blue_x16.png" title="Nastavenie z·loh"
- onClick="nastavdakx1.style.display='';"
- class="btn-form-tool">
+<?php if ( $citajrok > 0 )        { ?>
+<a id="btnsetzalohy" href="#" title="Nastaviù naËÌtanie" onclick="nastavdakx1.style.display=''; btnsetzalohy.style.backgroundColor='white';"
+   class="btn-form-tool toright" style=" width:36px; height:36px; background-color:; position:relative; top:-8px;">
+<img src="../obr/ikony/tools5_blue_x32.png" style="width:20px; height:20px; display:inline-block; margin:8px;">
+</a>
 <?php                            } ?>
 
 <img src="../obr/ikony/xmark_lred_icon.png" title="Vymazaù hodnoty evidenËnÈho listu"
