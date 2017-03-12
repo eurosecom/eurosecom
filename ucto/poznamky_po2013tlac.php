@@ -542,6 +542,7 @@ if( $kli_vxcf == 854 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $prieb
 if( $kli_vxcf == 855 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
 if( $kli_vxcf == 856 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
 if( $kli_vxcf == 857 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
+if( $kli_vxcf == 858 AND $_SERVER['SERVER_NAME'] == "www.zerotax.sk" )  { $priebeznauzav=1; $kli_vrokxd=2013; }
 //if( $kli_vxcf == 73  AND $_SERVER['SERVER_NAME'] == "localhost" )       { $priebeznauzav=1; $kli_vrokxd=2013; }
 
 if ( ( $strana == 1 OR $strana == 9999 ) AND $kli_vrokxd >= 2014 AND $bez1 == 0 ) {
