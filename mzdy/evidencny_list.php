@@ -53,6 +53,74 @@ if( $strana == 2 ) { $tablmzdevid="mzdevidencnys2"; }
 $newdelenie=0;
 if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
 
+//zapis hodnoty nacitane z eszalohy.sk
+if( $copern == 4220 )
+{
+
+$kli_vrokx = $_REQUEST['hodrok'];
+$znakpoistenia = $_REQUEST['hodznak'];
+$datpoc = $_REQUEST['hodpoc'];
+$datkon = $_REQUEST['hodkon'];
+$vymzak = $_REQUEST['hodvzak'];
+$kaldni = $_REQUEST['hoddvyl'];
+$vylkc = $_REQUEST['hodzvyl'];
+
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_$tablmzdevid WHERE oc = ".$cislo_oc;
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $vz01=$riaddok->vz01;
+  $kr01=$riaddok->kr01;
+  $kr02=$riaddok->kr02;
+  $kr03=$riaddok->kr03;
+  $kr04=$riaddok->kr04;
+  $kr05=$riaddok->kr05;
+  $kr06=$riaddok->kr06;
+  $kr07=$riaddok->kr07;
+  $kr08=$riaddok->kr08;
+  $kr09=$riaddok->kr09;
+  $kr10=$riaddok->kr10;
+  $kr11=$riaddok->kr11;
+  $kr12=$riaddok->kr12;
+  $kr13=$riaddok->kr13;
+  }
+
+$uzje=0;
+if( ( $kr01 == 0 OR $kr01 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
+" kr01='$kli_vrokx', vz01='$vymzak', zp01='$znakpoistenia', dp01='$datpoc', dk01='$datkon', kd01='$kaldni', vv01='$vylkc' WHERE oc = $cislo_oc"; }
+if( ( $kr02 == 0 OR $kr02 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
+" kr02='$kli_vrokx', vz02='$vymzak', zp02='$znakpoistenia', dp02='$datpoc', dk02='$datkon', kd02='$kaldni', vv02='$vylkc' WHERE oc = $cislo_oc"; }
+if( ( $kr03 == 0 OR $kr03 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
+" kr03='$kli_vrokx', vz03='$vymzak', zp03='$znakpoistenia', dp03='$datpoc', dk03='$datkon', kd03='$kaldni', vv03='$vylkc' WHERE oc = $cislo_oc"; }
+if( ( $kr04 == 0 OR $kr04 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
+" kr04='$kli_vrokx', vz04='$vymzak', zp04='$znakpoistenia', dp04='$datpoc', dk04='$datkon', kd04='$kaldni', vv04='$vylkc' WHERE oc = $cislo_oc"; }
+if( ( $kr05 == 0 OR $kr05 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
+" kr05='$kli_vrokx', vz05='$vymzak', zp05='$znakpoistenia', dp05='$datpoc', dk05='$datkon', kd05='$kaldni', vv05='$vylkc' WHERE oc = $cislo_oc"; }
+if( ( $kr06 == 0 OR $kr06 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
+" kr06='$kli_vrokx', vz06='$vymzak', zp06='$znakpoistenia', dp06='$datpoc', dk06='$datkon', kd06='$kaldni', vv06='$vylkc' WHERE oc = $cislo_oc"; }
+if( ( $kr07 == 0 OR $kr07 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
+" kr07='$kli_vrokx', vz07='$vymzak', zp07='$znakpoistenia', dp07='$datpoc', dk07='$datkon', kd07='$kaldni', vv07='$vylkc' WHERE oc = $cislo_oc"; }
+if( ( $kr08 == 0 OR $kr08 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
+" kr08='$kli_vrokx', vz08='$vymzak', zp08='$znakpoistenia', dp08='$datpoc', dk08='$datkon', kd08='$kaldni', vv08='$vylkc' WHERE oc = $cislo_oc"; }
+if( ( $kr09 == 0 OR $kr09 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
+" kr09='$kli_vrokx', vz09='$vymzak', zp09='$znakpoistenia', dp09='$datpoc', dk09='$datkon', kd09='$kaldni', vv09='$vylkc' WHERE oc = $cislo_oc"; }
+if( ( $kr10 == 0 OR $kr10 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
+" kr10='$kli_vrokx', vz10='$vymzak', zp10='$znakpoistenia', dp10='$datpoc', dk10='$datkon', kd10='$kaldni', vv10='$vylkc' WHERE oc = $cislo_oc"; }
+if( ( $kr11 == 0 OR $kr11 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
+" kr11='$kli_vrokx', vz11='$vymzak', zp11='$znakpoistenia', dp11='$datpoc', dk11='$datkon', kd11='$kaldni', vv11='$vylkc' WHERE oc = $cislo_oc"; }
+if( ( $kr12 == 0 OR $kr12 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
+" kr12='$kli_vrokx', vz12='$vymzak', zp12='$znakpoistenia', dp12='$datpoc', dk12='$datkon', kd12='$kaldni', vv12='$vylkc' WHERE oc = $cislo_oc"; }
+if( ( $kr13 == 0 OR $kr13 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt = "UPDATE F$kli_vxcf"."_$tablmzdevid SET ".
+" kr13='$kli_vrokx', vz13='$vymzak', zp13='$znakpoistenia', dp13='$datpoc', dk13='$datkon', kd13='$kaldni', vv13='$vylkc' WHERE oc = $cislo_oc"; }
+
+$upravene = mysql_query("$uprtxt");
+//echo $uprtxt;
+
+$copern=20;
+}
+//koniec zapis hodnoty nacitane z eszalohy.sk
+
 //zapis nastavenia zaloh
 if( $copern == 3618 )
 {
@@ -74,40 +142,16 @@ $copern=20;
 //koniec zapis nastavenia zaloh
 
 //nacitanie jedneho roka do evidencneho listu
-    if ( $copern == 4155 )
-    {
-$rokm1=$kli_vrok-1;
-$rokm2=$kli_vrok-2;
-$rokm3=$kli_vrok-3;
-$rokm4=$kli_vrok-4;
-$rokm5=$kli_vrok-5;
-$rokm6=$kli_vrok-6;
-$rokm7=$kli_vrok-7;
-$rokm8=$kli_vrok-8;
-$rokm9=$kli_vrok-9;
-$rokm10=$kli_vrok-10;
-$xrok=$rokm1;
-if( $rok == 2 ) { $xrok=$rokm2; }
-if( $rok == 3 ) { $xrok=$rokm3; }
-if( $rok == 4 ) { $xrok=$rokm4; }
-if( $rok == 5 ) { $xrok=$rokm5; }
-if( $rok == 6 ) { $xrok=$rokm6; }
-if( $rok == 7 ) { $xrok=$rokm7; }
-if( $rok == 8 ) { $xrok=$rokm8; }
-if( $rok == 9 ) { $xrok=$rokm9; }
-if( $rok == 10 ) { $xrok=$rokm10; }
-?>
-<script type="text/javascript">
-if( !confirm ("Chcete naËÌtaù hodnoty roku <?php echo $xrok; ?> do evidenËnÈho listu z firmy <?php echo $fir; ?> ? ") )
-         { window.close()  }
-else
-         { location.href='evidencny_list.php?strana=<?php echo $strana; ?>&strana=<?php echo $strana; ?>&copern=4156&page=1&drupoh=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=<?php echo $rok; ?>&fir=<?php echo $fir; ?>'  }
-</script>
-<?php
-    }
+if ( $copern == 4156 )
+{
+$citajzeszalohy = 1*$_REQUEST['citajzeszalohy'];
+$zozalohy=0;
+if( $citajzeszalohy == 1 ) { $zozalohy=1; }
+$odkadecit="";
+if( $zozalohy == 1 AND $xrok <= 2014 ){ $odkadecit=" z eszalohy.sk "; }
 
-    if ( $copern == 4156 )
-    {
+$rok = 1*$_REQUEST['rok'];
+
 $copern=26;
 $lenjedenrok=$rok;
     }
@@ -268,33 +312,13 @@ $xrok=$kli_vrok;
 
 $databaza="";
 
-if ( $newdelenie == 0 ) 
-          {
-if ( $xrok < 2016 AND $lenjedenrok > 0 )
-{
-if ( File_Exists("../pswd/oddelena2015db2016.php") ) { $databaza=$mysqldb2015."."; }
-}
-if ( $xrok < 2015 AND $lenjedenrok > 0 )
-{
-if ( File_Exists("../pswd/oddelena2014db2015.php") ) { $databaza=$mysqldb2014."."; }
-}
-if ( $xrok < 2014 AND $lenjedenrok > 0 )
-{
-if ( File_Exists("../pswd/oddelena2013db2014.php") ) { $databaza=$mysqldb2013."."; }
-}
-if ( $xrok < 2013 AND $lenjedenrok > 0 )
-{
-if ( File_Exists("../pswd/oddelena2012db2013.php") ) { $databaza=$mysqldb2012."."; }
-} 
-if ( $xrok < 2012 AND $lenjedenrok > 0 )
-{
-if (File_Exists("../pswd/oddelena2011db2012.php") ) { $databaza=$mysqldb2011."."; }
-} 
-if ( $xrok < 2011 AND $lenjedenrok > 0 )
-{
-if ( File_Exists("../pswd/oddelena2010db2011.php") ) { $databaza=$mysqldb2010."."; }
-}                     
-          }
+
+$zozalohyx=1*$zozalohy;
+$xrokx=1*$xrok;
+//echo "zozalohy ".$zozalohyx." xrok ".$xrokx;
+if ( $zozalohy == 0 OR $xrokx > 2014 ) 
+                    {
+
 if ( $newdelenie == 1 ) 
           {
 $kli_vrokuloz=$kli_vrok;
@@ -457,8 +481,73 @@ if( ( $kr13 == 0 OR $kr13 == $kli_vrokx ) AND  $uzje == 0 ) { $uzje=1; $uprtxt =
 " kr13='$kli_vrokx', vz13='$vymzak', zp13='$znakpoistenia', dp13='$datpoc', dk13='$datkon', kd13='$kaldni', vv13='$vylkc' WHERE oc = $cislo_oc"; }
 
 $upravene = mysql_query("$uprtxt"); 
+//echo $uprtxt;
 
-                        }
+//koniec ( $zozalohy == 0 OR $xrokx > 2014 ) 
+                    }
+if ( $zozalohy == 1 AND $xrokx <= 2014 ) 
+                    {
+$mojadomena=$_SERVER['SERVER_NAME'];
+$polemojadomena = explode(".", $mojadomena);
+$xxx=$polemojadomena[0];
+$mojadomenanaz=$polemojadomena[1];
+if( $_SERVER['SERVER_NAME'] == "localhost" ) { $mojadomenanaz="eurosecom"; }
+$firma2014naeszalohy=$fir;
+//echo $mojadomenanaz;
+//echo $firma2014naeszalohy
+?>
+<script src="../jquery/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+//alert("»Ìtam z www.eszalohy.sk");
+(function() {
+
+        var flickerAPI = "http://www.eszalohy.sk/mzdy/evidgetzalhodjsonp.php?alchem=<?php echo $alchem;?>&firx=<?php echo $firma2014naeszalohy;?>&rokx=<?php echo $xrok;?>&zaloha=<?php echo $mojadomenanaz;?>&cislo_oc=<?php echo $cislo_oc;?>";
+        $.ajax({
+            url: flickerAPI,
+            dataType: "jsonp",
+            type: 'GET',
+            jsonpCallback: 'jsonCallback',
+            success: function (data) {
+                $.each(data.firmy, function (i, item) {
+
+                    UlozHodnoty(item.rok, item.znak, item.datpoc, item.datkon, item.vzak, item.vzvyl, item.dnvyl );
+                })
+
+                console.log( "success" );
+                //alert(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log( "error nacitaj evidencny list z firmy <?php echo $firma2014naeszalohy;?>" );
+                alert("Error nacitaj evidencny list z firmy <?php echo $firma2014naeszalohy;?>");
+            }
+        });
+    })();
+
+});
+
+</script>
+<script type="text/javascript">
+  function UlozHodnoty(rok, znak, datpoc, datkon, vzak, vzvyl, dnvyl)
+  {
+
+   window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4220&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc; ?>&hodrok=' + rok + '&hodznak=' + znak + '&hodpoc=' + datpoc + '&hodkon=' + datkon + '&hodvzak=' + vzak + '&hodzvyl=' + vzvyl + '&hoddvyl=' + dnvyl + '&tt=1', '_self');
+
+  }
+
+
+</script>
+<?php
+
+                    }
+//koniec ( $zozalohy == 1 AND $xrokx <= 2014 ) 
+
+
+//koniec uzjezaznam = 1
+               }
+
 $copern=20;
     }
 //koniec znovu nacitaj
@@ -1936,6 +2025,19 @@ var sirkawic = screen.width-10;
    window.open('../mzdy/evidencny_listxml.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=10&drupoh=1&page=1&subor=0&fmzdy=83',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
                 }
+
+
+  function nacitajRok(xrok, rok, fir, akocit, odkadecit )
+  {
+if( !confirm ("Chcete naËÌtaù hodnoty roku " + xrok + " do evidenËnÈho listu z firmy " + fir + " " + odkadecit + "  ? ") )
+         {   
+         }
+else
+         { 
+   window.open('evidencny_list.php?citajzeszalohy=' + akocit + '&strana=<?php echo $strana; ?>&copern=4156&page=1&drupoh=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=' + rok + '&fir=' + fir + '&tt=1', '_self');
+         }
+  }
+
 </script>
 <?php
 $rokm1=$kli_vrok-1;
@@ -2187,10 +2289,22 @@ if ( $next_oc > 9999 ) $next_oc=9999;
 //uprav udaje
 if ( $copern == 20 )
     {
+$jeajrok2014=0;
+$firma2014naeszalohy=0;
 ?>
 
 <?php if( $citajrok > 0 )        { ?>
 <?php
+if( $rokm1 == 2014 AND $firm1 > 0 ) { $jeajrok2014=1; $firma2014naeszalohy=$firm1; }
+if( $rokm2 == 2014 AND $firm2 > 0 ) { $jeajrok2014=1; $firma2014naeszalohy=$firm2; }
+if( $rokm3 == 2014 AND $firm3 > 0 ) { $jeajrok2014=1; $firma2014naeszalohy=$firm3; }
+if( $rokm4 == 2014 AND $firm4 > 0 ) { $jeajrok2014=1; $firma2014naeszalohy=$firm4; }
+if( $rokm5 == 2014 AND $firm5 > 0 ) { $jeajrok2014=1; $firma2014naeszalohy=$firm5; }
+if( $rokm6 == 2014 AND $firm6 > 0 ) { $jeajrok2014=1; $firma2014naeszalohy=$firm6; }
+if( $rokm7 == 2014 AND $firm7 > 0 ) { $jeajrok2014=1; $firma2014naeszalohy=$firm7; }
+if( $rokm8 == 2014 AND $firm8 > 0 ) { $jeajrok2014=1; $firma2014naeszalohy=$firm8; }
+if( $rokm9 == 2014 AND $firm9 > 0 ) { $jeajrok2014=1; $firma2014naeszalohy=$firm9; }
+if( $rokm10 == 2014 AND $firm10 > 0 ) { $jeajrok2014=1; $firma2014naeszalohy=$firm10; }
 
 $sql = "SELECT nacitane FROM F$kli_vxcf"."_mzdevidzalset ";
 $vysledok = mysql_query("$sql");
@@ -2234,8 +2348,15 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdevidzalset ");
   }
 
 $i=1;
+$mojadomena=$_SERVER['SERVER_NAME'];
+$polemojadomena = explode(".", $mojadomena);
+$xxx=$polemojadomena[0];
+$mojadomenanaz=$polemojadomena[1];
+if( $_SERVER['SERVER_NAME'] == "localhost" ) { $mojadomenanaz="eurosecom"; }
+//echo $mojadomenanaz;
+//echo $firma2014naeszalohy
 ?>
-<?php if( $nacitane == 0 ) { ?>
+<?php if( $nacitane == 0 AND $citajrok > 0 AND $jeajrok2014 == 1 ) { ?>
 <script src="../jquery/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 
@@ -2244,7 +2365,7 @@ $( document ).ready(function() {
 //alert("»Ìtam z www.eszalohy.sk");
 (function() {
 
-        var flickerAPI = "http://www.eszalohy.sk/app/getzalsetjsonp.php";
+        var flickerAPI = "http://www.eszalohy.sk/mzdy/evidgetzalsetjsonp.php?f2014=<?php echo $firma2014naeszalohy;?>&zaloha=<?php echo $mojadomenanaz;?>";
         $.ajax({
             url: flickerAPI,
             dataType: "jsonp",
@@ -2415,8 +2536,26 @@ window.open('evidencny_list.php?copern=3618&drupoh=1&page=1&subor=0&cislo_oc=<?p
  <a href="#" onclick="ZnovuPotvrdenie();" title="NaËÌtaù hodnoty roku <?php echo $kli_vrok; ?>"><?php echo $kli_vrok; ?></a>
 
 
+<?php 
+//ak je zaloha na eszalohy.sk
+if( $nacitane == 1 AND $citajrok > 0 AND $jeajrok2014 == 1 ) 
+{ 
+if( $rokm1 == 2014 ) { $citajzeszalohy=1; $firm1=$fir2014; $firm2=$fir2013; $firm3=$fir2012; $firm4=$fir2011; $firm5=$fir2010; $firm6=$fir2009; }
+if( $rokm2 == 2014 ) { $citajzeszalohy=1; $firm2=$fir2014; $firm3=$fir2013; $firm4=$fir2012; $firm5=$fir2011; $firm6=$fir2010; $firm7=$fir2009; }
+if( $rokm3 == 2014 ) { $citajzeszalohy=1; $firm3=$fir2014; $firm4=$fir2013; $firm5=$fir2012; $firm6=$fir2011; $firm7=$fir2010; $firm8=$fir2009; }
+if( $rokm4 == 2014 ) { $citajzeszalohy=1; $firm4=$fir2014; $firm5=$fir2013; $firm6=$fir2012; $firm7=$fir2011; $firm8=$fir2010; $firm9=$fir2009; }
+if( $rokm5 == 2014 ) { $citajzeszalohy=1; $firm5=$fir2014; $firm6=$fir2013; $firm7=$fir2012; $firm8=$fir2011; $firm9=$fir2010; $firm10=$fir2009; }
+if( $rokm6 == 2014 ) { $citajzeszalohy=1; $firm6=$fir2014; $firm7=$fir2013; $firm8=$fir2012; $firm9=$fir2011; $firm10=$fir2010; }
+if( $rokm7 == 2014 ) { $citajzeszalohy=1; $firm7=$fir2014; $firm8=$fir2013; $firm9=$fir2012; $firm10=$fir2011; }
+if( $rokm8 == 2014 ) { $citajzeszalohy=1; $firm8=$fir2014; $firm9=$fir2013; $firm10=$fir2012; }
+if( $rokm9 == 2014 ) { $citajzeszalohy=1; $firm9=$fir2014; $firm10=$fir2013;  }
+}
+$akocit=0;
+?>
+
 <?php if ( $firm1 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=1&fir=<?php echo $firm1; ?>', '_self')"
+<?php $odkadecit=""; if( $citajzeszalohy == 1 AND $rokm1 <= 2014 ){ $odkadecit=" z eszalohy.sk "; $akocit=1; } ?>
+ <a href="#" onclick="nacitajRok(<?php echo $rokm1; ?>, 1, <?php echo $firm1; ?>, <?php echo $akocit; ?>, '<?php echo $odkadecit; ?>');"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm1; ?> a firmy Ë. <?php echo $firm1; ?> - len rok <?php echo $rokm1; ?>'>
   <?php echo "$rokm1,$firm1"; ?>
  </a>
@@ -2424,62 +2563,70 @@ window.open('evidencny_list.php?copern=3618&drupoh=1&page=1&subor=0&cislo_oc=<?p
 
 <?php if ( $copern == 20 )
 {
-//toto musime doriesit
 ?>
 <?php if ( $firm2 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=2&fir=<?php echo $firm2; ?>', '_self')"
+<?php $odkadecit=""; if( $citajzeszalohy == 1 AND $rokm2 <= 2014 ){ $odkadecit=" z eszalohy.sk "; $akocit=1; } ?>
+ <a href="#" onclick="nacitajRok(<?php echo $rokm2; ?>, 2, <?php echo $firm2; ?>, <?php echo $akocit; ?>, '<?php echo $odkadecit; ?>');"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm2; ?> a firmy Ë. <?php echo $firm2; ?> - len rok <?php echo $rokm2; ?>'>
   <?php echo "$rokm2,$firm2"; ?>
  </a>
 <?php                   } ?>
 <?php if ( $firm3 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=3&fir=<?php echo $firm3; ?>', '_self')"
+<?php $odkadecit=""; if( $citajzeszalohy == 1 AND $rokm3 <= 2014 ){ $odkadecit=" z eszalohy.sk "; $akocit=1; } ?>
+ <a href="#" onclick="nacitajRok(<?php echo $rokm3; ?>, 3, <?php echo $firm3; ?>, <?php echo $akocit; ?>, '<?php echo $odkadecit; ?>');"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm3; ?> a firmy Ë. <?php echo $firm3; ?> - len rok <?php echo $rokm3; ?>'>
   <?php echo "$rokm3,$firm3"; ?>
  </a>
 <?php                   } ?>
 <?php if ( $firm4 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=4&fir=<?php echo $firm4; ?>', '_self')"
+<?php $odkadecit=""; if( $citajzeszalohy == 1 AND $rokm4 <= 2014 ){ $odkadecit=" z eszalohy.sk "; $akocit=1; } ?>
+ <a href="#"  onclick="nacitajRok(<?php echo $rokm4; ?>, 4, <?php echo $firm4; ?>, <?php echo $akocit; ?>, '<?php echo $odkadecit; ?>');"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm4; ?> a firmy Ë. <?php echo $firm4; ?> - len rok <?php echo $rokm4; ?>'>
   <?php echo "$rokm4,$firm4"; ?>
  </a>
 <?php                   } ?>
 <?php if ( $firm5 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=5&fir=<?php echo $firm5; ?>', '_self')"
+<?php $odkadecit=""; if( $citajzeszalohy == 1 AND $rokm5 <= 2014 ){ $odkadecit=" z eszalohy.sk "; $akocit=1; } ?>
+ <a href="#"  onclick="nacitajRok(<?php echo $rokm5; ?>, 5, <?php echo $firm5; ?>, <?php echo $akocit; ?>, '<?php echo $odkadecit; ?>');"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm5; ?> a firmy Ë. <?php echo $firm5; ?> - len rok <?php echo $rokm5; ?>'>
   <?php echo "$rokm5,$firm5"; ?>
  </a>
 <?php                   } ?>
 <?php if ( $firm6 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=6&fir=<?php echo $firm6; ?>', '_self')"
+<?php $odkadecit=""; if( $citajzeszalohy == 1 AND $rokm6 <= 2014 ){ $odkadecit=" z eszalohy.sk "; $akocit=1; } ?>
+ <a href="#"  onclick="nacitajRok(<?php echo $rokm6; ?>, 6, <?php echo $firm6; ?>, <?php echo $akocit; ?>, '<?php echo $odkadecit; ?>');"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm6; ?> a firmy Ë. <?php echo $firm6; ?> - len rok <?php echo $rokm6; ?>'>
   <?php echo "$rokm6,$firm6"; ?>
  </a>
 <?php                   } ?>
 
 <?php if ( $firm7 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=7&fir=<?php echo $firm7; ?>', '_self')"
+<?php $odkadecit=""; if( $citajzeszalohy == 1 AND $rokm7 <= 2014 ){ $odkadecit=" z eszalohy.sk "; $akocit=1; } ?>
+ <a href="#"  onclick="nacitajRok(<?php echo $rokm7; ?>, 7, <?php echo $firm7; ?>, <?php echo $akocit; ?>, '<?php echo $odkadecit; ?>');"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm7; ?> a firmy Ë. <?php echo $firm7; ?> - len rok <?php echo $rokm7; ?>'>
   <?php echo "$rokm7,$firm7"; ?>
  </a>
 <?php                   } ?>
 
 <?php if ( $firm8 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=8&fir=<?php echo $firm8; ?>', '_self')"
+<?php $odkadecit=""; if( $citajzeszalohy == 1 AND $rokm8 <= 2014 ){ $odkadecit=" z eszalohy.sk "; $akocit=1; } ?>
+ <a href="#"  onclick="nacitajRok(<?php echo $rokm8; ?>, 8, <?php echo $firm8; ?>, <?php echo $akocit; ?>, '<?php echo $odkadecit; ?>');"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm8; ?> a firmy Ë. <?php echo $firm8; ?> - len rok <?php echo $rokm8; ?>'>
   <?php echo "$rokm8,$firm8"; ?>
  </a>
 <?php                   } ?>
 
 <?php if ( $firm9 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=9&fir=<?php echo $firm9; ?>', '_self')"
+<?php $odkadecit=""; if( $citajzeszalohy == 1 AND $rokm9 <= 2014 ){ $odkadecit=" z eszalohy.sk "; $akocit=1; } ?>
+ <a href="#"  onclick="nacitajRok(<?php echo $rokm9; ?>, 9, <?php echo $firm9; ?>, <?php echo $akocit; ?>, '<?php echo $odkadecit; ?>');"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm9; ?> a firmy Ë. <?php echo $firm9; ?> - len rok <?php echo $rokm9; ?>'>
   <?php echo "$rokm9,$firm9"; ?>
  </a>
 <?php                   } ?>
 
 <?php if ( $firm10 > 0 ) { ?>
- <a href="#" onclick="window.open('evidencny_list.php?strana=<?php echo $strana; ?>&copern=4155&drupoh=1&page=1&cislo_oc=<?php echo $cislo_oc; ?>&rok=10&fir=<?php echo $firm10; ?>', '_self')"
+<?php $odkadecit=""; if( $citajzeszalohy == 1 AND $rokm10 <= 2014 ){ $odkadecit=" z eszalohy.sk "; $akocit=1; } ?>
+ <a href="#"  onclick="nacitajRok(<?php echo $rokm10; ?>, 10, <?php echo $firm10; ?>, <?php echo $akocit; ?>, '<?php echo $odkadecit; ?>');"
   title='NaËÌtaù hodnoty evidenËnÈho listu z <?php echo $rokm10; ?> a firmy Ë. <?php echo $firm10; ?> - len rok <?php echo $rokm10; ?>'>
   <?php echo "$rokm10,$firm10"; ?>
  </a>
