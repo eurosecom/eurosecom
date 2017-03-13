@@ -934,6 +934,8 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_uctpriznanie_po");
   if ( $h_riadok == 12 ) { $ucetx=$riaddok->a1u12; }
   if ( $h_riadok == 13 ) { $ucetx=$riaddok->a1u13; }
   if ( $h_riadok == 14 ) { $ucetx=$riaddok->a1u14; }
+  if ( $h_riadok == 15 ) { $ucetx=$riaddok->a1u15; }
+  if ( $h_riadok == 16 ) { $ucetx=$riaddok->a1u16; }
   }
 
 $podmmd="( ucm > 0 )";
@@ -994,7 +996,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prizprac$kli_uzid "." SELECT".
 $dsql = mysql_query("$dsqlt");
 //exit;
 
-$a1r01=0; $a1r02=0; $a1r03=0; $a1r04=0; $a1r05=0; $a1r06=0; $a1r07=0; $a1r08=0; $a1r09=0; $a1r10=0; $a1r11=0; $a1r12=0; $a1r13=0; $a1r14=0; 
+$a1r01=0; $a1r02=0; $a1r03=0; $a1r04=0; $a1r05=0; $a1r06=0; $a1r07=0; $a1r08=0; $a1r09=0; $a1r10=0; 
+$a1r11=0; $a1r12=0; $a1r13=0; $a1r14=0; $a1r15=0; $a1r16=0; 
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prizprac$kli_uzid WHERE drh = 998";
 $sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
@@ -1015,6 +1018,8 @@ if ( $h_riadok == 11 ) { $a1r11=$a1r11+$polozka->hox; }
 if ( $h_riadok == 12 ) { $a1r12=$a1r12+$polozka->hox; }
 if ( $h_riadok == 13 ) { $a1r13=$a1r13+$polozka->hox; }
 if ( $h_riadok == 14 ) { $a1r14=$a1r14+$polozka->hox; }
+if ( $h_riadok == 15 ) { $a1r15=$a1r15+$polozka->hox; }
+if ( $h_riadok == 16 ) { $a1r16=$a1r16+$polozka->hox; }
                                        }
 $i=$i+1;                  }
 
@@ -1033,10 +1038,12 @@ if ( $h_riadok == 11 ) { $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET a1r
 if ( $h_riadok == 12 ) { $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET a1r12='$a1r12', psys=0  WHERE ico >= 0"; }
 if ( $h_riadok == 13 ) { $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET a1r13='$a1r13', psys=0  WHERE ico >= 0"; }
 if ( $h_riadok == 14 ) { $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET a1r14='$a1r14', psys=0  WHERE ico >= 0"; }
+if ( $h_riadok == 15 ) { $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET a1r15='$a1r15', psys=0  WHERE ico >= 0"; }
+if ( $h_riadok == 16 ) { $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET a1r16='$a1r16', psys=0  WHERE ico >= 0"; }
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" a1r15=a1r01+a1r02+a1r03+a1r04+a1r05+a1r06+a1r07+a1r08+a1r09+a1r10+a1r11+a1r12+a1r13+a1r14, r130=a1r15 WHERE ico >= 0"; 
+" a1r17=a1r01+a1r02+a1r03+a1r04+a1r05+a1r06+a1r07+a1r08+a1r09+a1r10+a1r11+a1r12+a1r13+a1r14+a1r15+a1r16, r130=a1r17 WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");  
 //echo $uprtxt;
 //exit;
