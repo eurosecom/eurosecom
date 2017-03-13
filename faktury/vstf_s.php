@@ -162,12 +162,37 @@ if( $zmluva == 1 ) { $d="dd"; }
 $lenvymaz=0;
 if( $snazov == 'vymazat' ) { $lenvymaz=1; }
 
-if( $lenvymaz == 0 AND $copern != 334 AND $copern != 335 ) {
+if( $lenvymaz == 0 AND $copern != 334 AND $copern != 335 AND $copern != 131 ) {
 
 $ddir="../dokumenty/FIR".$kli_vxcf."/".$adrdok;
 if (!File_Exists ("$ddir")) { mkdir ($ddir, 0777); }
 
   if (move_uploaded_file($_FILES['original']['tmp_name'], "../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.$styp")) 
+  { 
+?>
+<script type="text/javascript" > 
+alert ("Súbor <?php echo $_FILES['original']['name']; ?> bol správne uložený do databázy .");
+window.close();
+</script>
+<?php
+  }
+                                        }
+if( $lenvymaz == 0 AND $copern == 131 ) {
+
+$hhmmss = Date ("His", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.$styp")) { $soubor = unlink("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.$styp"); }
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.jpg")) { $soubor = unlink("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.jpg"); }
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.png")) { $soubor = unlink("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.png"); }
+
+ $outfilexdel="../dokumenty/FIR".$kli_vxcf."/".$adrdok."/".$d.$cislo_dok."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+ $savefilex="../dokumenty/FIR".$kli_vxcf."/".$adrdok."/".$d.$cislo_dok."_".$hhmmss.".".$styp;
+
+  if (move_uploaded_file($_FILES['original']['tmp_name'], $savefilex)) 
   { 
 ?>
 <script type="text/javascript" > 
@@ -199,7 +224,7 @@ window.close();
 <?php
   }
                                         }
-if( $lenvymaz == 1 AND $copern != 334 AND $copern != 335 ) {
+if( $lenvymaz == 1 AND $copern != 334 AND $copern != 335 AND $copern != 131 ) {
 if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.$styp")) { $soubor = unlink("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.$styp"); }
 if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.jpg")) { $soubor = unlink("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.jpg"); }
 if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.png")) { $soubor = unlink("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.png"); }
@@ -209,7 +234,24 @@ alert ("Obrázok bol vymazaný .");
 window.close();
 </script>
 <?php
-                                        }; 
+                                        };
+if( $lenvymaz == 1 AND $copern == 131 ) {
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.$styp")) { $soubor = unlink("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.$styp"); }
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.jpg")) { $soubor = unlink("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.jpg"); }
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.png")) { $soubor = unlink("../dokumenty/FIR$kli_vxcf/$adrdok/$d$cislo_dok.png"); }
+
+ $outfilexdel="../dokumenty/FIR".$kli_vxcf."/".$adrdok."/".$d.$cislo_dok."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+?>
+<script type="text/javascript" > 
+alert ("Obrázok bol vymazaný .");
+window.close();
+</script>
+<?php
+                                        };
 if( $lenvymaz == 1 AND $copern == 334 ) {
 if (File_Exists ("../dokumenty/FIR$kli_vxcf/hlavickaweb.jpg")) { $soubor = unlink("../dokumenty/FIR$kli_vxcf/hlavickaweb.jpg"); }
 ?>
