@@ -2169,9 +2169,11 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET hr10=hr01+h1r02-h2r02+h1r03-
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
 
-//////////////////strana 9 2015
+//////////////////strana 9 2016
 if ( $nacitajdanlicencia == 1 )
   {
+$licencia2015 = 1*$_REQUEST['licencia2015'];
+
 
 $h_ycf=0;
 if ( $fir_allx11 > 0 ) $h_ycf=1*$fir_allx11;
@@ -2179,23 +2181,50 @@ if ( $fir_allx11 > 0 ) $h_ycf=1*$fir_allx11;
 $databaza="";
 $dtb2 = include("../cis/oddel_dtbz1.php");
 
-$dl2014=0;
-$sqlttt = "SELECT r830, obdo, obod FROM ".$databaza."F$h_ycf"."_uctpriznanie_po ";
+$dl2014=0; $dl2015=0; $k2r01=0; $k3r01=0; $k4r01=0; $k5r01=0; 
+$sqlttt = "SELECT r830, r820, obdo, obod, k2r01, k3r01, k4r01, k5r01, k1od, k1do FROM ".$databaza."F$h_ycf"."_uctpriznanie_po ";
 $sqldok = mysql_query("$sqlttt");
+//echo $sqlttt;
  if (@$zaznam=mysql_data_seek($sqldok,0))
  {
  $riaddok=mysql_fetch_object($sqldok);
  $dl2014=1*$riaddok->r830;
+ $dl2015=1*$riaddok->r820;
  $obod=$riaddok->obod;
  $obdo=$riaddok->obdo;
+ $k1od=$riaddok->k1od;
+ $k1do=$riaddok->k1do;
+ $k2r01=1*$riaddok->k2r01;
+ $k3r01=1*$riaddok->k3r01;
+ $k4r01=1*$riaddok->k4r01;
+ $k5r01=1*$riaddok->k5r01;
  }
+if( $licencia2015 == 0 )
+    {
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k2r01='$dl2014', k1od='$obod', k1do='$obdo', psys=0  WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt"); 
+    }
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k2r01='$dl2014', k1od='$obod', k1do='$obdo', ".
-" psys=0 ".
+if( $licencia2015 == 1 )
+    {
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" k2r01='$k2r01', k3r01='$k3r01'+'$k4r01', k4r01=0, k1od='$k1od', k1do='$k1do', ".
+" psys=0  ".
 " WHERE ico >= 0"; 
-//echo $uprtxt;
-$upravene = mysql_query("$uprtxt");
 
+if( $k5r01 > 0 ) { $upravene = mysql_query("$uprtxt"); }
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k2r02='$dl2015', k4r02=0, k2od='$obod', k2do='$obdo', ".
+" psys=0  ".
+" WHERE ico >= 0"; 
+if( $k5r01 > 0 ) { $upravene = mysql_query("$uprtxt"); }
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k2r01='$dl2015', k4r01=0, k2od='$obod', k2do='$obdo', ".
+" psys=0  ".
+" WHERE ico >= 0"; 
+if( $k5r01 == 0 ) { $upravene = mysql_query("$uprtxt"); }
+
+    }
 
   }
 
@@ -3083,6 +3112,11 @@ if ( $copern == 102 )
    window.open('priznanie_po2015.php?copern=101&strana=<?php echo $strana; ?>&nacitajdanlicencia=1', '_self');
   }
 
+  function NacitajDanLicencia2015()
+  {
+   window.open('priznanie_po2015.php?copern=101&strana=<?php echo $strana; ?>&nacitajdanlicencia=1&licencia2015=1', '_self');
+  }
+
 </script>
 </HEAD>
 <BODY onload="ObnovUI(); <?php if ( $copern == 102 AND ( $strana == 2 OR $strana == 4 OR $strana == 6 ) ) ?>">
@@ -3586,9 +3620,11 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="k1od" id="k1od" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:244px; left:62px;"/>
 <input type="text" name="k1do" id="k1do" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:282px; left:62px;"/>
 
+<?php if ( $kli_vrok == 2015 ) { ?>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajDanLicencia();"
-      title="Naèíta výšku kladného rozdielu medzi daòovou licenciou a daòou, ktorú možno zapoèíta v roku 2015 z r.830 Priznania DPPO 2014"
+      title="Naèíta výšku kladného rozdielu medzi daòovou licenciou a daòou, ktorú možno zapoèíta v roku 2016 z r.830 Priznania DPPO 2014"
       class="btn-row-tool" style="top:282px; left:280px;">
+<?php                          } ?>
 
 <input type="text" name="k2r01" id="k2r01" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:244px; left:276px;"/>
 <input type="text" name="k3r01" id="k3r01" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:244px; left:436px;"/>
@@ -3597,6 +3633,13 @@ $sn1c=substr($sknacec,0,1);
 <!-- riadok 2 -->
 <input type="text" name="k2od" id="k2od" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:321px; left:62px;"/>
 <input type="text" name="k2do" id="k2do" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:360px; left:62px;"/>
+
+<?php if ( $kli_vrok >= 2016 ) { ?>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajDanLicencia2015();"
+      title="Naèíta výšku kladného rozdielu medzi daòovou licenciou a daòou, ktorú možno zapoèíta v roku 2016 z r.820 a tabu¾ky K z Priznania DPPO 2015"
+      class="btn-row-tool" style="top:360px; left:280px;">
+<?php                          } ?>
+
 <input type="text" name="k2r02" id="k2r02" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:321px; left:276px;"/>
 <input type="text" name="k3r02" id="k3r02" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:321px; left:436px;"/>
 <input type="text" name="k4r02" id="k4r02" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:321px; left:595px;"/>
