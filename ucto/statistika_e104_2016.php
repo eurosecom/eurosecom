@@ -249,9 +249,6 @@ $vysledek = mysql_query("$sql");
 //koniec pracovny subor
 
 
-//new2016
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_e104 ADD mod4102s15 VARCHAR(90) AFTER mod4102s14";
-$vysledek = mysql_query("$sql");
 
 
 
@@ -289,7 +286,7 @@ $mod4102s11 = strip_tags($_REQUEST['mod4102s11']);
 $mod4102s12 = strip_tags($_REQUEST['mod4102s12']);
 $mod4102s13 = strip_tags($_REQUEST['mod4102s13']);
 $mod4102s14 = strip_tags($_REQUEST['mod4102s14']);
-$mod4102s15 = strip_tags($_REQUEST['mod4102s15']);
+
 
 $uprav="NO";
 
@@ -301,7 +298,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_e104 SET ".
 " mod4101s16='$mod4101s16', ".
 " mod4102s01='$mod4102s01',mod4102s02='$mod4102s02',mod4102s03='$mod4102s03',mod4102s04='$mod4102s04',mod4102s05='$mod4102s05',  ".
 " mod4102s06='$mod4102s06',mod4102s07='$mod4102s07',mod4102s08='$mod4102s08',mod4102s09='$mod4102s09',mod4102s10='$mod4102s10',  ".
-" mod4102s11='$mod4102s11',mod4102s12='$mod4102s12',mod4102s13='$mod4102s13',mod4102s14='$mod4102s14',mod4102s15='$mod4102s15' ".
+" mod4102s11='$mod4102s11',mod4102s12='$mod4102s12',mod4102s13='$mod4102s13',mod4102s14='$mod4102s14' ".
 " WHERE stvrtrok = $stvrtrok"; 
 
 //echo $uprtxt;
@@ -539,7 +536,6 @@ $mod4102s11 = $fir_riadok->mod4102s11;
 $mod4102s12 = $fir_riadok->mod4102s12;
 $mod4102s13 = $fir_riadok->mod4102s13;
 $mod4102s14 = $fir_riadok->mod4102s14;
-$mod4102s15 = $fir_riadok->mod4102s15;
 
 
 $mod4103r01s1 = $fir_riadok->mod4103r01s1;
@@ -732,7 +728,6 @@ var sirkawic = screen.width-10;
     document.formv1.mod4102s12.value = '<?php echo "$mod4102s12";?>';
     document.formv1.mod4102s13.value = '<?php echo "$mod4102s13";?>';
     document.formv1.mod4102s14.value = '<?php echo "$mod4102s14";?>';
-    document.formv1.mod4102s15.value = '<?php echo "$mod4102s15";?>';
 
     }
 <?php
@@ -916,9 +911,9 @@ var sirkawic = screen.width-10;
 }
 ?>
   <a href="#" onClick="window.open('../ucto/statistika_e104.php?copern=11&drupoh=1&page=1&typ=PDF', '_blank', '<?php echo $tlcswin; ?>' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi celý výkaz vo formáte PDF' ></a>
+<img src='../obr/tlac.png' width=20 height=15 border=0 alt='Vytlaèi celý výkaz vo formáte PDF' ></a>
   <a href="#" onClick="window.open('../ucto/statistika_e104.php?copern=12&drupoh=1&page=1&typ=PDF', '_blank', '<?php echo $tlcswin; ?>' )">
-<img src='../obr/orig.png' width=20 height=15 border=0 title='Vytvori XMLsúbor na odoslanie' ></a>
+<img src='../obr/orig.png' width=20 height=15 border=0 alt='Vytvori XMLsúbor na odoslanie' ></a>
 </td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
@@ -1032,39 +1027,36 @@ if ( $copern == 1 OR $copern == 3 )
 <tr><td class="fmenu" colspan="3">4. Tržby od ZP za deò pobytu v stacionáry</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s04";?></td></tr>
 
-
-<tr><td class="fmenu" colspan="3">5. Tržby od ZP za body</td>
+<tr><td class="fmenu" colspan="3">5. Tržby od ZP za výkony jednodnòovej starostlivosti</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s05";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">6. Tržby od ZP za kapitáciu/paušál</td>
+<tr><td class="fmenu" colspan="3">6. Tržby od ZP za body</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s06";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">7. Tržby od ZP za iné</td>
+<tr><td class="fmenu" colspan="3">7. Tržby od ZP za kapitáciu/paušál</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s07";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">8. Tržby od obyv. za lieky</td>
+<tr><td class="fmenu" colspan="3">8. Tržby od ZP za iné</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s08";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">9. Tržby od obyv. za zdravotnícke pomôcky</td>
+<tr><td class="fmenu" colspan="3">9. Tržby od obyv. za lieky</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s09";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">10. Tržby od obyv. za doplnkový sortiment lekární</td>
+<tr><td class="fmenu" colspan="3">10. Tržby od obyv. za zdravotnícke pomôcky</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s10";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">11. Tržby od obyv. za iné</td>
+<tr><td class="fmenu" colspan="3">11. Tržby od obyv. za doplnkový sortiment lekární</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s11";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">12. Prevádzkové dotácie od zriaïovate¾a</td>
+<tr><td class="fmenu" colspan="3">12. Tržby od obyv. za iné</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s12";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">13. Ostatné výnosy</td>
+<tr><td class="fmenu" colspan="3">13. Prevádzkové dotácie od zriaïovate¾a</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s13";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">14. Tržby ZP km min.</td>
+<tr><td class="fmenu" colspan="3">14. Ostatné výnosy</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s14";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">15. Tržby ZP výkon</td>
-<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s15";?></td></tr>
 </FORM>
 
 </table>
@@ -1439,38 +1431,36 @@ if ( $copern == 2 )
 <tr><td class="fmenu" colspan="3">4. Tržby od ZP za deò pobytu v stacionáry</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s04" id="mod4102s04" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">5. Tržby od ZP za body</td>
+<tr><td class="fmenu" colspan="3">5. Tržby od ZP za výkony jednodnòovej starostlivosti</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s05" id="mod4102s05" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">6. Tržby od ZP za kapitáciu/paušál</td>
+<tr><td class="fmenu" colspan="3">6. Tržby od ZP za body</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s06" id="mod4102s06" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">7. Tržby od ZP za iné</td>
+<tr><td class="fmenu" colspan="3">7. Tržby od ZP za kapitáciu/paušál</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s07" id="mod4102s07" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">8. Tržby od obyv. za lieky</td>
+<tr><td class="fmenu" colspan="3">8. Tržby od ZP za iné</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s08" id="mod4102s08" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">9. Tržby od obyv. za zdravotnícke pomôcky</td>
+<tr><td class="fmenu" colspan="3">9. Tržby od obyv. za lieky</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s09" id="mod4102s09" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">10. Tržby od obyv. za doplnkový sortiment lekární</td>
+<tr><td class="fmenu" colspan="3">10. Tržby od obyv. za zdravotnícke pomôcky</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s10" id="mod4102s10" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">11. Tržby od obyv. za iné</td>
+<tr><td class="fmenu" colspan="3">11. Tržby od obyv. za doplnkový sortiment lekární</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s11" id="mod4102s11" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">12. Prevádzkové dotácie od zriaïovate¾a</td>
+<tr><td class="fmenu" colspan="3">12. Tržby od obyv. za iné</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s12" id="mod4102s12" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">13. Ostatné výnosy</td>
+<tr><td class="fmenu" colspan="3">13. Prevádzkové dotácie od zriaïovate¾a</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s13" id="mod4102s13" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">14. Tržby ZP km min</td>
+<tr><td class="fmenu" colspan="3">14. Ostatné výnosy</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s14" id="mod4102s14" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">15. Tržby ZP výkon</td>
-<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s15" id="mod4102s15" size="90"/></td></tr>
 
 <tr>
 <td class="obyc" colspan="2"><INPUT type="submit" id="uloz" name="uloz" value="Uloži úpravy"></td>
@@ -1769,15 +1759,7 @@ if ( $copern == 102 )
 //zostava PDF a odoslanie
 if( $copern == 11 OR $copern == 12 )
           {
-$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-
- $outfilexdel="../tmp/state101_".$kli_uzid."_*.*";
- foreach (glob("$outfilexdel") as $filename) {
-    unlink($filename);
- }
-
-$outfilex="../tmp/state101_".$kli_uzid."_".$hhmmss.".pdf";
-if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+if (File_Exists ("../tmp/statistika.$kli_uzid.pdf")) { $soubor = unlink("../tmp/statistika.$kli_uzid.pdf"); }
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -1830,7 +1812,6 @@ $sqlt = <<<statistika_e104
    mod4102s12       DECIMAL(10,2) DEFAULT 0,
    mod4102s13       DECIMAL(10,2) DEFAULT 0,
    mod4102s14       DECIMAL(10,2) DEFAULT 0,
-   mod4102s15       DECIMAL(10,2) DEFAULT 0,
    mod4101n01       DECIMAL(10,2) DEFAULT 0,
    mod4101n02       DECIMAL(10,2) DEFAULT 0,
    mod4101n03       DECIMAL(10,2) DEFAULT 0,
@@ -1861,7 +1842,6 @@ $sqlt = <<<statistika_e104
    mod4102n12       DECIMAL(10,2) DEFAULT 0,
    mod4102n13       DECIMAL(10,2) DEFAULT 0,
    mod4102n14       DECIMAL(10,2) DEFAULT 0,
-   mod4102n15       DECIMAL(10,2) DEFAULT 0,
    icox             DECIMAL(8,0)
 );  
 statistika_e104;
@@ -1869,92 +1849,87 @@ statistika_e104;
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_statistika_e104prac'.$sqlt;
 $vytvor = mysql_query("$vsql");
 
-if( $_SERVER['SERVER_NAME'] == "europkse.sk" ) { $_SERVER['SERVER_NAME'] == "www.europkse.sk"; }
-
-$akazak=" >= 0 ";
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" ) { $akazak=" > 0 "; }
-
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statistika_e104prac SELECT".
 " 1,F$kli_vxcf"."_uctpokuct.str,F$kli_vxcf"."_uctpokuct.zak,F$kli_vxcf"."_uctpokuct.zak,ucm,ucd,F$kli_vxcf"."_uctpokuct.hod,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0".
 " FROM F$kli_vxcf"."_pokpri,F$kli_vxcf"."_uctpokuct".
-" WHERE F$kli_vxcf"."_pokpri.dok=F$kli_vxcf"."_uctpokuct.dok AND ume >= $vyb_ump AND ume <= $vyb_umk AND F$kli_vxcf"."_uctpokuct.zak $akazak".
+" WHERE F$kli_vxcf"."_pokpri.dok=F$kli_vxcf"."_uctpokuct.dok AND ume >= $vyb_ump AND ume <= $vyb_umk AND F$kli_vxcf"."_uctpokuct.zak > 0".
 "";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statistika_e104prac SELECT".
 " 1,F$kli_vxcf"."_uctpokuct.str,F$kli_vxcf"."_uctpokuct.zak,F$kli_vxcf"."_uctpokuct.zak,ucm,ucd,F$kli_vxcf"."_uctpokuct.hod,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0".
 " FROM F$kli_vxcf"."_pokvyd,F$kli_vxcf"."_uctpokuct".
-" WHERE F$kli_vxcf"."_pokvyd.dok=F$kli_vxcf"."_uctpokuct.dok AND ume >= $vyb_ump AND ume <= $vyb_umk AND F$kli_vxcf"."_uctpokuct.zak $akazak".
+" WHERE F$kli_vxcf"."_pokvyd.dok=F$kli_vxcf"."_uctpokuct.dok AND ume >= $vyb_ump AND ume <= $vyb_umk AND F$kli_vxcf"."_uctpokuct.zak > 0".
 "";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statistika_e104prac SELECT".
 " 1,F$kli_vxcf"."_uctban.str,F$kli_vxcf"."_uctban.zak,F$kli_vxcf"."_uctban.zak,ucm,ucd,F$kli_vxcf"."_uctban.hod,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0".
 " FROM F$kli_vxcf"."_banvyp,F$kli_vxcf"."_uctban".
-" WHERE F$kli_vxcf"."_banvyp.dok=F$kli_vxcf"."_uctban.dok AND ume >= $vyb_ump AND ume <= $vyb_umk AND F$kli_vxcf"."_uctban.zak $akazak".
+" WHERE F$kli_vxcf"."_banvyp.dok=F$kli_vxcf"."_uctban.dok AND ume >= $vyb_ump AND ume <= $vyb_umk AND F$kli_vxcf"."_uctban.zak > 0".
 "";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statistika_e104prac SELECT".
 " 1,F$kli_vxcf"."_uctvsdp.str,F$kli_vxcf"."_uctvsdp.zak,F$kli_vxcf"."_uctvsdp.zak,ucm,ucd,F$kli_vxcf"."_uctvsdp.hod,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0".
 " FROM F$kli_vxcf"."_uctvsdh,F$kli_vxcf"."_uctvsdp".
-" WHERE F$kli_vxcf"."_uctvsdh.dok=F$kli_vxcf"."_uctvsdp.dok AND ume >= $vyb_ump AND ume <= $vyb_umk AND F$kli_vxcf"."_uctvsdp.zak $akazak".
+" WHERE F$kli_vxcf"."_uctvsdh.dok=F$kli_vxcf"."_uctvsdp.dok AND ume >= $vyb_ump AND ume <= $vyb_umk AND F$kli_vxcf"."_uctvsdp.zak > 0".
 "";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statistika_e104prac SELECT".
 " 1,F$kli_vxcf"."_uctdod.str,F$kli_vxcf"."_uctdod.zak,F$kli_vxcf"."_uctdod.zak,ucm,ucd,F$kli_vxcf"."_uctdod.hod,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0".
 " FROM F$kli_vxcf"."_fakdod,F$kli_vxcf"."_uctdod".
-" WHERE F$kli_vxcf"."_fakdod.dok=F$kli_vxcf"."_uctdod.dok AND ume >= $vyb_ump AND ume <= $vyb_umk AND F$kli_vxcf"."_uctdod.zak $akazak".
+" WHERE F$kli_vxcf"."_fakdod.dok=F$kli_vxcf"."_uctdod.dok AND ume >= $vyb_ump AND ume <= $vyb_umk AND F$kli_vxcf"."_uctdod.zak > 0".
 "";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statistika_e104prac SELECT".
 " 1,F$kli_vxcf"."_uctodb.str,F$kli_vxcf"."_uctodb.zak,F$kli_vxcf"."_uctodb.zak,ucm,ucd,F$kli_vxcf"."_uctodb.hod,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0".
 " FROM F$kli_vxcf"."_fakodb,F$kli_vxcf"."_uctodb".
-" WHERE F$kli_vxcf"."_fakodb.dok=F$kli_vxcf"."_uctodb.dok AND ume >= $vyb_ump AND ume <= $vyb_umk AND F$kli_vxcf"."_uctodb.zak $akazak".
+" WHERE F$kli_vxcf"."_fakodb.dok=F$kli_vxcf"."_uctodb.dok AND ume >= $vyb_ump AND ume <= $vyb_umk AND F$kli_vxcf"."_uctodb.zak > 0".
 "";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statistika_e104prac SELECT".
 " 1,str,zak,zak,ucm,ucd,hod,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0".
 " FROM F$kli_vxcf"."_uctskl".
-" WHERE ume >= $vyb_ump AND ume <= $vyb_umk AND zak $akazak".
+" WHERE ume >= $vyb_ump AND ume <= $vyb_umk AND zak > 0".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
@@ -1962,12 +1937,12 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statistika_e104prac SELECT".
 " 1,str,zak,zak,ucm,ucd,hod,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0".
 " FROM F$kli_vxcf"."_uctmaj".
-" WHERE ume >= $vyb_ump AND ume <= $vyb_umk AND zak $akazak".
+" WHERE ume >= $vyb_ump AND ume <= $vyb_umk AND zak > 0".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
@@ -1975,12 +1950,12 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statistika_e104prac SELECT".
 " 1,str,zak,zak,ucm,ucd,hod,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "0".
 " FROM F$kli_vxcf"."_uctmzd".
-" WHERE ume >= $vyb_ump AND ume <= $vyb_umk AND zak $akazak".
+" WHERE ume >= $vyb_ump AND ume <= $vyb_umk AND zak > 0".
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
@@ -1989,24 +1964,14 @@ $dsqlt = "DELETE FROM F$kli_vxcf"."_statistika_e104prac WHERE LEFT(ucm,1) != 5 A
 $dsql = mysql_query("$dsqlt");
 
 //vypocitaj nstr
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" ) 
-{ 
 $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET nstr=LEFT(zakx,4) WHERE zakx > 99999"; 
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET nstr=LEFT(zakx,3) WHERE zakx <= 99999"; 
 $oznac = mysql_query("$sqtoz");
-}
-else
-{
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET nstr=2000 WHERE zakx >= 0 "; 
-$oznac = mysql_query("$sqtoz");
-}
 
 if( $copern == 12 )
           {
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" ) 
-{ 
 $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET strx=0"; 
 $oznac = mysql_query("$sqtoz");
 
@@ -2015,21 +1980,12 @@ $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET strx=SUBSTRING(zakx,4,2) WHERE zakx <= 99999"; 
 $oznac = mysql_query("$sqtoz");
-}
-else
-{
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET strx=2000 WHERE zakx >= 0 "; 
-$oznac = mysql_query("$sqtoz");
-}
           }
 
 //exit;
 
 //nastav do stlpca
 //naklady
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" ) 
-{
-//europkse
 
 $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4101n01=hodx WHERE LEFT(ucmx,3) = 521 "; $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4101n01=-hodx WHERE LEFT(ucdx,3) = 521 "; $oznac = mysql_query("$sqtoz");
@@ -2083,76 +2039,6 @@ $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4101n15=hodx WHERE ( L
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4101n15=-hodx WHERE ( LEFT(ucdx,6) = 501212 OR LEFT(ucdx,6) = 501222 OR LEFT(ucdx,6) = 501232 OR LEFT(ucdx,6) = 501241 )"; 
 $oznac = mysql_query("$sqtoz");
- 
-
-//end europkse
-}
-else
-{
-//nie europkse
-
-$i=1;
-while ($i <= 15 )
-{
-
-$podmuce="";
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_statistika_e104 WHERE stvrtrok = $stvrtrok ORDER BY ico DESC LIMIT 1");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-if( $i ==  1 ) { $podmuce=$riaddok->mod4101s01; }
-if( $i ==  2 ) { $podmuce=$riaddok->mod4101s02; }
-if( $i ==  3 ) { $podmuce=$riaddok->mod4101s03; }
-if( $i ==  4 ) { $podmuce=$riaddok->mod4101s04; }
-if( $i ==  5 ) { $podmuce=$riaddok->mod4101s05; }
-if( $i ==  6 ) { $podmuce=$riaddok->mod4101s06; }
-if( $i ==  7 ) { $podmuce=$riaddok->mod4101s07; }
-if( $i ==  8 ) { $podmuce=$riaddok->mod4101s08; }
-if( $i ==  9 ) { $podmuce=$riaddok->mod4101s09; }
-if( $i == 10 ) { $podmuce=$riaddok->mod4101s10; }
-if( $i == 11 ) { $podmuce=$riaddok->mod4101s11; }
-if( $i == 12 ) { $podmuce=$riaddok->mod4101s12; }
-if( $i == 13 ) { $podmuce=$riaddok->mod4101s13; }
-if( $i == 14 ) { $podmuce=$riaddok->mod4101s14; }
-if( $i == 15 ) { $podmuce=$riaddok->mod4101s15; }
-if( $i == 16 ) { $podmuce=""; }
-  }
-
-if( $i ==  1 ) { $napocrx="mod4101n01"; }
-if( $i ==  2 ) { $napocrx="mod4101n02"; }
-if( $i ==  3 ) { $napocrx="mod4101n03"; }
-if( $i ==  4 ) { $napocrx="mod4101n04"; }
-if( $i ==  5 ) { $napocrx="mod4101n05"; }
-if( $i ==  6 ) { $napocrx="mod4101n06"; }
-if( $i ==  7 ) { $napocrx="mod4101n07"; }
-if( $i ==  8 ) { $napocrx="mod4101n08"; }
-if( $i ==  9 ) { $napocrx="mod4101n09"; }
-if( $i == 10 ) { $napocrx="mod4101n10"; }
-if( $i == 11 ) { $napocrx="mod4101n11"; }
-if( $i == 12 ) { $napocrx="mod4101n12"; }
-if( $i == 13 ) { $napocrx="mod4101n13"; }
-if( $i == 14 ) { $napocrx="mod4101n14"; }
-if( $i == 15 ) { $napocrx="mod4101n15"; }
-if( $i == 16 ) { $napocrx=""; }
-
-$poleuce = explode(",", $podmuce);
-
-//echo $podmuce."<br />";
-foreach ($poleuce as $akyuc ) {
-
-//echo $akyuc."<br />";
-
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET ".$napocrx."=hodx WHERE ucmx = ".$akyuc." "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET ".$napocrx."=-hodx WHERE ucdx = ".$akyuc." "; $oznac = mysql_query("$sqtoz");
-
-  }
-
-
-$i=$i+1;
-}
-
-  }
-//koniec nie europkse
 
 $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4101n16=hodx WHERE ( LEFT(ucmx,1) = 5 )"; 
 $oznac = mysql_query("$sqtoz");
@@ -2166,126 +2052,53 @@ $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET ".
 $oznac = mysql_query("$sqtoz");
 
 //vynosy
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" ) 
-{
-//europkse
 
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n02=-hodx WHERE ( LEFT(ucmx,6) = 602101 )"; 
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n04=-hodx WHERE ( LEFT(ucmx,6) = 602101 )"; 
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n02=hodx WHERE ( LEFT(ucdx,6) = 602101 )"; 
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n04=hodx WHERE ( LEFT(ucdx,6) = 602101 )"; 
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n05=-hodx WHERE ( LEFT(ucmx,6) = 602103 OR LEFT(ucmx,6) = 602113 OR LEFT(ucmx,6) = 602203".
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n06=-hodx WHERE ( LEFT(ucmx,6) = 602103 OR LEFT(ucmx,6) = 602113 OR LEFT(ucmx,6) = 602203".
 " OR LEFT(ucmx,6) = 602303 OR LEFT(ucmx,6) = 602403 )"; 
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n05=hodx WHERE ( LEFT(ucdx,6) = 602103 OR LEFT(ucdx,6) = 602113 OR LEFT(ucdx,6) = 602203".
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n06=hodx WHERE ( LEFT(ucdx,6) = 602103 OR LEFT(ucdx,6) = 602113 OR LEFT(ucdx,6) = 602203".
 " OR LEFT(ucdx,6) = 602303 OR LEFT(ucdx,6) = 602403 )"; 
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n06=-hodx WHERE ( LEFT(ucmx,6) = 602104 OR LEFT(ucmx,6) = 602114 OR LEFT(ucmx,6) = 602204".
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n07=-hodx WHERE ( LEFT(ucmx,6) = 602104 OR LEFT(ucmx,6) = 602114 OR LEFT(ucmx,6) = 602204".
 " OR LEFT(ucmx,6) = 602304 OR LEFT(ucmx,6) = 602404 )"; 
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n06=hodx WHERE ( LEFT(ucdx,6) = 602104 OR LEFT(ucdx,6) = 602114 OR LEFT(ucdx,6) = 602204".
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n07=hodx WHERE ( LEFT(ucdx,6) = 602104 OR LEFT(ucdx,6) = 602114 OR LEFT(ucdx,6) = 602204".
 " OR LEFT(ucdx,6) = 602304 OR LEFT(ucdx,6) = 602404 )"; 
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n07=-hodx WHERE ( LEFT(ucmx,6) = 602105 OR LEFT(ucmx,6) = 602115 OR LEFT(ucmx,6) = 602205".
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n08=-hodx WHERE ( LEFT(ucmx,6) = 602105 OR LEFT(ucmx,6) = 602115 OR LEFT(ucmx,6) = 602205".
 " OR LEFT(ucmx,6) = 602305 OR LEFT(ucmx,6) = 602405 OR LEFT(ucmx,6) = 602106 OR LEFT(ucmx,6) = 602107 OR LEFT(ucmx,6) = 6024116 OR LEFT(ucmx,6) = 602117".
 " OR LEFT(ucmx,6) = 602206 OR LEFT(ucmx,6) = 602207 OR LEFT(ucmx,6) = 602306 OR LEFT(ucmx,6) = 602307 )"; 
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n07=hodx WHERE ( LEFT(ucdx,6) = 602105 OR LEFT(ucdx,6) = 602115 OR LEFT(ucdx,6) = 602205".
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n08=hodx WHERE ( LEFT(ucdx,6) = 602105 OR LEFT(ucdx,6) = 602115 OR LEFT(ucdx,6) = 602205".
 " OR LEFT(ucdx,6) = 602305 OR LEFT(ucdx,6) = 602405 OR LEFT(ucdx,6) = 602106 OR LEFT(ucdx,6) = 602107 OR LEFT(ucdx,6) = 6024116 OR LEFT(ucdx,6) = 602117".
 " OR LEFT(ucdx,6) = 602206 OR LEFT(ucdx,6) = 602207 OR LEFT(ucdx,6) = 602306 OR LEFT(ucdx,6) = 602307 )"; 
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n11=-hodx WHERE ( LEFT(ucmx,6) = 602097 )"; 
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n12=-hodx WHERE ( LEFT(ucmx,6) = 602097 )"; 
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n11=hodx WHERE ( LEFT(ucdx,6) = 602097 )"; 
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n12=hodx WHERE ( LEFT(ucdx,6) = 602097 )"; 
 $oznac = mysql_query("$sqtoz");
 
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n12=-hodx WHERE ( LEFT(ucmx,6) = 691100 )"; 
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n13=-hodx WHERE ( LEFT(ucmx,6) = 691100 )"; 
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n12=hodx WHERE ( LEFT(ucdx,6) = 691100 )"; 
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n13=hodx WHERE ( LEFT(ucdx,6) = 691100 )"; 
 $oznac = mysql_query("$sqtoz");
- 
 
-//end europkse
-}
-else
-{
-//nie europkse
-
-$i=1;
-while ($i <= 15 )
-{
-
-$podmuce="";
-$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_statistika_e104 WHERE stvrtrok = $stvrtrok ORDER BY ico DESC LIMIT 1");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-if( $i ==  1 ) { $podmuce=$riaddok->mod4102s01; }
-if( $i ==  2 ) { $podmuce=$riaddok->mod4102s02; }
-if( $i ==  3 ) { $podmuce=$riaddok->mod4102s03; }
-if( $i ==  4 ) { $podmuce=$riaddok->mod4102s04; }
-if( $i ==  5 ) { $podmuce=$riaddok->mod4102s05; }
-if( $i ==  6 ) { $podmuce=$riaddok->mod4102s06; }
-if( $i ==  7 ) { $podmuce=$riaddok->mod4102s07; }
-if( $i ==  8 ) { $podmuce=$riaddok->mod4102s08; }
-if( $i ==  9 ) { $podmuce=$riaddok->mod4102s09; }
-if( $i == 10 ) { $podmuce=$riaddok->mod4102s10; }
-if( $i == 11 ) { $podmuce=$riaddok->mod4102s11; }
-if( $i == 12 ) { $podmuce=$riaddok->mod4102s12; }
-if( $i == 13 ) { $podmuce=""; }
-if( $i == 14 ) { $podmuce=$riaddok->mod4102s14; }
-if( $i == 15 ) { $podmuce=$riaddok->mod4102s15; }
-
-  }
-
-if( $i ==  1 ) { $napocrx="mod4102n01"; }
-if( $i ==  2 ) { $napocrx="mod4102n02"; }
-if( $i ==  3 ) { $napocrx="mod4102n03"; }
-if( $i ==  4 ) { $napocrx="mod4102n04"; }
-if( $i ==  5 ) { $napocrx="mod4102n05"; }
-if( $i ==  6 ) { $napocrx="mod4102n06"; }
-if( $i ==  7 ) { $napocrx="mod4102n07"; }
-if( $i ==  8 ) { $napocrx="mod4102n08"; }
-if( $i ==  9 ) { $napocrx="mod4102n09"; }
-if( $i == 10 ) { $napocrx="mod4102n10"; }
-if( $i == 11 ) { $napocrx="mod4102n11"; }
-if( $i == 12 ) { $napocrx="mod4102n12"; }
-if( $i == 13 ) { $napocrx=""; }
-if( $i == 14 ) { $napocrx="mod4102n14"; }
-if( $i == 15 ) { $napocrx="mod4102n15"; }
-
-
-$poleuce = explode(",", $podmuce);
-
-//echo $podmuce."<br />";
-foreach ($poleuce as $akyuc ) {
-
-//echo $akyuc."<br />";
-
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET ".$napocrx."=-hodx WHERE ucmx = ".$akyuc." "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET ".$napocrx."=hodx WHERE ucdx = ".$akyuc." "; $oznac = mysql_query("$sqtoz");
-
-  }
-
-
-$i=$i+1;
-}
-
-  }
-//koniec nie europkse
-
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n13=-hodx WHERE ( LEFT(ucmx,1) = 6 )"; 
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n14=-hodx WHERE ( LEFT(ucmx,1) = 6 )"; 
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n13=hodx WHERE ( LEFT(ucdx,1) = 6 )"; 
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n14=hodx WHERE ( LEFT(ucdx,1) = 6 )"; 
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET ".
-" mod4102n13=mod4102n13-mod4102n12-mod4102n11-mod4102n10-mod4102n09-mod4102n08-mod4102n07, ".
-" mod4102n13=mod4102n13-mod4102n06-mod4102n05-mod4102n04-mod4102n03-mod4102n02-mod4102n01-mod4102n14-mod4102n15 ".
+" mod4102n14=mod4102n14-mod4102n13-mod4102n12-mod4102n11-mod4102n10-mod4102n09-mod4102n08-mod4102n07, ".
+" mod4102n14=mod4102n14-mod4102n06-mod4102n05-mod4102n04-mod4102n03-mod4102n02-mod4102n01 ".
 " WHERE icox >= 0"; 
 $oznac = mysql_query("$sqtoz");
 
@@ -2296,11 +2109,11 @@ if( $copern == 11 )
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statistika_e104prac SELECT".
 " 2,strx,zakx,nstr,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "SUM(mod4101n01),SUM(mod4101n02),SUM(mod4101n03),SUM(mod4101n04),SUM(mod4101n05),SUM(mod4101n06),SUM(mod4101n07),SUM(mod4101n08),".
 "SUM(mod4101n09),SUM(mod4101n10),SUM(mod4101n11),SUM(mod4101n12),SUM(mod4101n13),SUM(mod4101n14),SUM(mod4101n15),SUM(mod4101n16),".
 "SUM(mod4102n01),SUM(mod4102n02),SUM(mod4102n03),SUM(mod4102n04),SUM(mod4102n05),SUM(mod4102n06),SUM(mod4102n07),SUM(mod4102n08),".
-"SUM(mod4102n09),SUM(mod4102n10),SUM(mod4102n11),SUM(mod4102n12),SUM(mod4102n13),SUM(mod4102n14),SUM(mod4102n15),".
+"SUM(mod4102n09),SUM(mod4102n10),SUM(mod4102n11),SUM(mod4102n12),SUM(mod4102n13),SUM(mod4102n14),".
 "icox".
 " FROM F$kli_vxcf"."_statistika_e104prac".
 " WHERE nstr >= 0 ".
@@ -2315,11 +2128,11 @@ if( $copern == 12 )
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statistika_e104prac SELECT".
 " 2,strx,zakx,nstr,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "SUM(mod4101n01),SUM(mod4101n02),SUM(mod4101n03),SUM(mod4101n04),SUM(mod4101n05),SUM(mod4101n06),SUM(mod4101n07),SUM(mod4101n08),".
 "SUM(mod4101n09),SUM(mod4101n10),SUM(mod4101n11),SUM(mod4101n12),SUM(mod4101n13),SUM(mod4101n14),SUM(mod4101n15),SUM(mod4101n16),".
 "SUM(mod4102n01),SUM(mod4102n02),SUM(mod4102n03),SUM(mod4102n04),SUM(mod4102n05),SUM(mod4102n06),SUM(mod4102n07),SUM(mod4102n08),".
-"SUM(mod4102n09),SUM(mod4102n10),SUM(mod4102n11),SUM(mod4102n12),SUM(mod4102n13),SUM(mod4102n14),SUM(mod4102n15),".
+"SUM(mod4102n09),SUM(mod4102n10),SUM(mod4102n11),SUM(mod4102n12),SUM(mod4102n13),SUM(mod4102n14),".
 "icox".
 " FROM F$kli_vxcf"."_statistika_e104prac".
 " WHERE nstr >= 0 ".
@@ -2332,11 +2145,11 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statistika_e104prac SELECT".
 " 2,strx,zakx,99999999,0,0,0,".
 "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
-"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
+"0,0,0,0,0,0,0,0,0,0,0,0,0,0,".
 "SUM(mod4101n01),SUM(mod4101n02),SUM(mod4101n03),SUM(mod4101n04),SUM(mod4101n05),SUM(mod4101n06),SUM(mod4101n07),SUM(mod4101n08),".
 "SUM(mod4101n09),SUM(mod4101n10),SUM(mod4101n11),SUM(mod4101n12),SUM(mod4101n13),SUM(mod4101n14),SUM(mod4101n15),SUM(mod4101n16),".
 "SUM(mod4102n01),SUM(mod4102n02),SUM(mod4102n03),SUM(mod4102n04),SUM(mod4102n05),SUM(mod4102n06),SUM(mod4102n07),SUM(mod4102n08),".
-"SUM(mod4102n09),SUM(mod4102n10),SUM(mod4102n11),SUM(mod4102n12),SUM(mod4102n13),SUM(mod4102n14),SUM(mod4102n15),".
+"SUM(mod4102n09),SUM(mod4102n10),SUM(mod4102n11),SUM(mod4102n12),SUM(mod4102n13),SUM(mod4102n14),".
 "icox".
 " FROM F$kli_vxcf"."_statistika_e104prac".
 " WHERE prx = 2 ".
@@ -2351,7 +2164,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET ".
 " mod4101s11=mod4101n11, mod4101s12=mod4101n12, mod4101s13=mod4101n13, mod4101s14=mod4101n14, mod4101s15=mod4101n15, mod4101s16=mod4101n16, ".
 " mod4102s01=mod4102n01, mod4102s02=mod4102n02, mod4102s03=mod4102n03, mod4102s04=mod4102n04, mod4102s05=mod4102n05, mod4102s06=mod4102n06, ".
 " mod4102s07=mod4102n07, mod4102s08=mod4102n08, mod4102s09=mod4102n09, mod4102s10=mod4102n10, ".
-" mod4102s11=mod4102n11, mod4102s12=mod4102n12, mod4102s13=mod4102n13, mod4102s14=mod4102n14, mod4102s15=mod4102n15 ".
+" mod4102s11=mod4102n11, mod4102s12=mod4102n12, mod4102s13=mod4102n13, mod4102s14=mod4102n14 ".
 " WHERE prx = 2 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -2488,7 +2301,6 @@ $mod4102s11=$hlavicka->mod4102s11; if( $mod4102s11 == 0 ) { $mod4102s11=""; }
 $mod4102s12=$hlavicka->mod4102s12; if( $mod4102s12 == 0 ) { $mod4102s12=""; }
 $mod4102s13=$hlavicka->mod4102s13; if( $mod4102s13 == 0 ) { $mod4102s13=""; }
 $mod4102s14=$hlavicka->mod4102s14; if( $mod4102s14 == 0 ) { $mod4102s14=""; }
-$mod4102s15=$hlavicka->mod4102s15; if( $mod4102s15 == 0 ) { $mod4102s15=""; }
 
 $nstr=1*$hlavicka->nstr; if( $nstr == 0 ) { $nstr=""; }
 
@@ -2512,17 +2324,17 @@ $pdf->Cell(190,6,"4102. modul Výnosy v EUR","0",1,"L");
 $pdf->SetFont('arial','',7);
 $pdf->Cell(15,5,"STR","1",0,"C");$pdf->Cell(5,5,"l.r.","1",0,"C");$pdf->Cell(15,5,"ukon.hosp.","1",0,"C");
 $pdf->Cell(15,5,"oš.dni","1",0,"C");$pdf->Cell(15,5,"prip.pol.","1",0,"C");$pdf->Cell(15,5,"deò v stac.","1",0,"C");
-$pdf->Cell(15,5,"body","1",0,"C");$pdf->Cell(15,5,"kapitácia","1",0,"C");
+$pdf->Cell(15,5,"jednodò.star.","1",0,"C");$pdf->Cell(15,5,"body","1",0,"C");$pdf->Cell(15,5,"kapitácia","1",0,"C");
 $pdf->Cell(15,5,"iné","1",0,"C");$pdf->Cell(15,5,"lieky","1",0,"C");$pdf->Cell(15,5,"zdr.pom.","1",0,"C");
 $pdf->Cell(15,5,"dopl.lek.","1",0,"C");$pdf->Cell(15,5,"iné","1",0,"C");$pdf->Cell(15,5,"dotácie","1",0,"C");
-$pdf->Cell(15,5,"Ostatné","1",0,"C");$pdf->Cell(15,5,"ZP km min","1",0,"C");$pdf->Cell(15,5,"ZP výkony","1",1,"C");
+$pdf->Cell(15,5,"Ostatné","1",1,"C");
 
 $pdf->Cell(15,5,"  ","1",0,"C");$pdf->Cell(5,5,"a","1",0,"C");$pdf->Cell(15,5,"1","1",0,"C");
 $pdf->Cell(15,5,"2","1",0,"C");$pdf->Cell(15,5,"3","1",0,"C");$pdf->Cell(15,5,"4","1",0,"C");
 $pdf->Cell(15,5,"5","1",0,"C");$pdf->Cell(15,5,"6","1",0,"C");$pdf->Cell(15,5,"7","1",0,"C");
 $pdf->Cell(15,5,"8","1",0,"C");$pdf->Cell(15,5,"9","1",0,"C");$pdf->Cell(15,5,"10","1",0,"C");
 $pdf->Cell(15,5,"11","1",0,"C");$pdf->Cell(15,5,"12","1",0,"C");$pdf->Cell(15,5,"13","1",0,"C");
-$pdf->Cell(15,5,"14","1",0,"C");$pdf->Cell(15,5,"15","1",1,"C");
+$pdf->Cell(15,5,"14","1",1,"C");
 
      }
 
@@ -2536,14 +2348,14 @@ $pdf->Cell(15,5,"$mod4102s02","1",0,"R");$pdf->Cell(15,5,"$mod4102s03","1",0,"R"
 $pdf->Cell(15,5,"$mod4102s05","1",0,"R");$pdf->Cell(15,5,"$mod4102s06","1",0,"R");$pdf->Cell(15,5,"$mod4102s07","1",0,"R");
 $pdf->Cell(15,5,"$mod4102s08","1",0,"R");$pdf->Cell(15,5,"$mod4102s09","1",0,"R");$pdf->Cell(15,5,"$mod4102s10","1",0,"R");
 $pdf->Cell(15,5,"$mod4102s11","1",0,"R");$pdf->Cell(15,5,"$mod4102s12","1",0,"R");$pdf->Cell(15,5,"$mod4102s13","1",0,"R");
-$pdf->Cell(15,5,"$mod4102s14","1",0,"R");$pdf->Cell(15,5,"$mod4102s15","1",1,"R");
+$pdf->Cell(15,5,"$mod4102s14","1",1,"R");
 
 
 if( $nstr == 99999999 ) {
 
 $celkvynosy=$hlavicka->mod4102s01+$hlavicka->mod4102s02+$hlavicka->mod4102s03+$hlavicka->mod4102s04+$hlavicka->mod4102s05+$hlavicka->mod4102s06;
 $celkvynosy=$celkvynosy+$hlavicka->mod4102s07+$hlavicka->mod4102s08+$hlavicka->mod4102s09+$hlavicka->mod4102s10+$hlavicka->mod4102s11;
-$celkvynosy=$celkvynosy+$hlavicka->mod4102s12+$hlavicka->mod4102s13+$hlavicka->mod4102s14+$hlavicka->mod4102s15;
+$celkvynosy=$celkvynosy+$hlavicka->mod4102s12+$hlavicka->mod4102s13+$hlavicka->mod4102s14;
 
 $pdf->Cell(35,5,"Celkom výnosy","1",0,"R");$pdf->Cell(15,5,"$celkvynosy","1",1,"R");
 
@@ -2791,11 +2603,11 @@ $i = $i + 1;
 
   }
 
-$pdf->Output("$outfilex");
+$pdf->Output("../tmp/statistika.$kli_uzid.pdf");
 
 ?> 
 <script type="text/javascript">
-  var okno = window.open("<?php echo $outfilex; ?>","_self");
+  var okno = window.open("../tmp/statistika.<?php echo $kli_uzid; ?>.pdf","_self");
 </script>
 <?php
           }
@@ -3069,7 +2881,7 @@ $hlavicka=mysql_fetch_object($sql);
 if( $hlavicka->mod4102s01 != 0 OR $hlavicka->mod4102s02 != 0 OR $hlavicka->mod4102s03 != 0 OR $hlavicka->mod4102s04 != 0 OR
  $hlavicka->mod4102s05 != 0 OR $hlavicka->mod4102s06 != 0 OR $hlavicka->mod4102s07 != 0 OR $hlavicka->mod4102s08 != 0 OR
  $hlavicka->mod4102s09 != 0 OR $hlavicka->mod4102s10 != 0 OR $hlavicka->mod4102s11 != 0 OR $hlavicka->mod4102s12 != 0 OR
- $hlavicka->mod4102s13 != 0 OR $hlavicka->mod4102s14 != 0 OR $hlavicka->mod4102s15 != 0 )
+ $hlavicka->mod4102s13 != 0 OR $hlavicka->mod4102s14 != 0 )
           {
 
 
@@ -3107,38 +2919,45 @@ if( $hlavicka->nstr < 1000 ) $cislostrediska="0".$hlavicka->nstr;
   $text = "<TRZBY_ZP_STAC_DEN>".$hlavicka->mod4102s04."</TRZBY_ZP_STAC_DEN>"."\r\n";
   fwrite($soubor, $text);
 
+//tuto polozku od 1.1.2015 zrusili
+//$text = "<TRZBY_ZP_JEDEN_ST>".$hlavicka->mod4102s05."</TRZBY_ZP_JEDEN_ST>"."\r\n";
+//fwrite($soubor, $text);
 
-  $text = "<TRZBY_ZP_BODY>".$hlavicka->mod4102s05."</TRZBY_ZP_BODY>"."\r\n";
+  $text = "<TRZBY_ZP_BODY>".$hlavicka->mod4102s06."</TRZBY_ZP_BODY>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<TRZBY_ZP_KAP_PAUS>".$hlavicka->mod4102s06."</TRZBY_ZP_KAP_PAUS>"."\r\n";
+  $text = "<TRZBY_ZP_KAP_PAUS>".$hlavicka->mod4102s07."</TRZBY_ZP_KAP_PAUS>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<TRZBY_ZP_INE>".$hlavicka->mod4102s07."</TRZBY_ZP_INE>"."\r\n";
+  $text = "<TRZBY_ZP_INE>".$hlavicka->mod4102s08."</TRZBY_ZP_INE>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<TRZBY_OB_LIEKY>".$hlavicka->mod4102s08."</TRZBY_OB_LIEKY>"."\r\n";
+  $text = "<TRZBY_OB_LIEKY>".$hlavicka->mod4102s09."</TRZBY_OB_LIEKY>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<TRZBY_OB_ZDR_POM>".$hlavicka->mod4102s09."</TRZBY_OB_ZDR_POM>"."\r\n";
+  $text = "<TRZBY_OB_ZDR_POM>".$hlavicka->mod4102s10."</TRZBY_OB_ZDR_POM>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<TRZBY_OB_DOP_SORT>".$hlavicka->mod4102s10."</TRZBY_OB_DOP_SORT>"."\r\n";
+  $text = "<TRZBY_OB_DOP_SORT>".$hlavicka->mod4102s11."</TRZBY_OB_DOP_SORT>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<TRZBY_OB_INE>".$hlavicka->mod4102s11."</TRZBY_OB_INE>"."\r\n";
+  $text = "<TRZBY_OB_INE>".$hlavicka->mod4102s12."</TRZBY_OB_INE>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<PREVADZ_DOTACIE_ZR>".$hlavicka->mod4102s12."</PREVADZ_DOTACIE_ZR>"."\r\n";
+  $text = "<PREVADZ_DOTACIE_ZR>".$hlavicka->mod4102s13."</PREVADZ_DOTACIE_ZR>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<VYNOSY_OST>".$hlavicka->mod4102s13."</VYNOSY_OST>"."\r\n";
+  $text = "<VYNOSY_OST>".$hlavicka->mod4102s14."</VYNOSY_OST>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<TRZBY_ZP_KM_MIN>".$hlavicka->mod4102s14."</TRZBY_ZP_KM_MIN>"."\r\n";
+//nova polozka TRZBY_ZP_KM_MIN pridana od 1.1.2012 ale kedze Poliklinika SE ich urcite nema (trzby za letove hodiny ??? ) dam nulu nerozsirujem tabulku
+
+  $text = "<TRZBY_ZP_KM_MIN>0</TRZBY_ZP_KM_MIN>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<TRZBY_ZP_VYKON>".$hlavicka->mod4102s15."</TRZBY_ZP_VYKON>"."\r\n";
+//nova polozka TRZBY_ZP_VYKON pridana od 1.1.2015 
+
+  $text = "<TRZBY_ZP_VYKON>0</TRZBY_ZP_VYKON>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "</OE_01_02>"."\r\n";
@@ -4013,9 +3832,9 @@ fclose($soubor);
 
 <div id="robotokno" style="cursor: hand; display: none; position: absolute; z-index: 200; top: 200; left: 40; width:60; height:100;">
 <img border=0 src='../obr/robot/robot3.jpg' style='' onClick="zobraz_robotmenu();"
- title='Dobrý deò , ja som Váš EkoRobot , ak máte otázku alebo nejaké želanie kliknite na mòa prosím 1x myšou' >
+ alt='Dobrý deò , ja som Váš EkoRobot , ak máte otázku alebo nejaké želanie kliknite na mòa prosím 1x myšou' >
 <img border=0 src='../obr/zmazuplne.png' style='width:10; height:10;' onClick="zhasnirobot();"
- title='Zhasni EkoRobota' >
+ alt='Zhasni EkoRobota' >
 </div>
 <div id="robotmenu" style="cursor: hand; display: none; position: absolute; z-index: 300; top: 160; left: 90; width:200; height:100;">
 zobrazene menu
