@@ -42,6 +42,8 @@ $sql = "ALTER TABLE $mysqldbfir.menp ADD datm timestamp ON UPDATE CURRENT_TIMEST
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE $mysqldbfir.menp MODIFY sys VARCHAR(50) NOT NULL ";
 $vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE $mysqldbfir.menp MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
 
 //vymazanie 
 if ( $copern == 316 )
@@ -68,7 +70,7 @@ endif;
 if ( $copern == 1316 )
     {
 $datm = strip_tags($_REQUEST['datm']);
-$zmazane = mysql_query("DELETE FROM dlogin WHERE datm='$datm' "); 
+$zmazane = mysql_query("DELETE FROM $mysqldbfir.dlogin WHERE datm='$datm' "); 
 
 $copern=1001;
 if (!$zmazane):
@@ -288,7 +290,7 @@ $i = $i + 1;
 
 if( $copern > 1000 ) {
 
-$sqltt = "SELECT * FROM dlogin WHERE id >= 0 ORDER BY datm DESC LIMIT 400";
+$sqltt = "SELECT * FROM $mysqldbfir.dlogin WHERE id >= 0 ORDER BY datm DESC LIMIT 400";
 $sql = mysql_query("$sqltt");
 
 // celkom poloziek

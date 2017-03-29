@@ -20,13 +20,16 @@ if( !$uziv ) exit;
 
 $databaza="";
 $dtb2 = include("oddel_dtbz3.php");
+if( $_SERVER['SERVER_NAME'] == "www.edcom.sk" ) { $databaza=$mysqldb2017.".";  }
 
-
+//echo $databaza;
 $spravy="spravy";
 $firspr = 1*$_REQUEST['firspr'];
 if( $firspr == 1 ) { $spravy="F".$kli_vxcf."_uzivspravy"; }
 
 
+$sql = "ALTER TABLE ".$databaza."$spravy MODIFY cpt int PRIMARY KEY not null auto_increment ";
+$vysledek = mysql_query("$sql");
 
 //urob texty bez diakritiky
 $xxdd=0;
