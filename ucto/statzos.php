@@ -363,6 +363,7 @@ if ( $kli_vrok < 2015 ) $rokvts201="_2014";
 //opu201
 <?php
 $rokopu201="";
+if( $kli_vrok < 2016 ) $rokopu201="_2015";
 if( $kli_vrok < 2015 ) $rokopu201="_2014";
 ?>
 
@@ -966,7 +967,7 @@ if ( $dajstatvyk == 1 )
 <div class="toleft line-box-text">
 <div>
  <strong>Roè OPU 2-01<span>Roèný výkaz produkèných odvetví v malých podnikoch v obchode, pohostinstve ...</span></strong>
- <img src="../obr/info.png" title="Roè OPU 2-01 verzia 2015">
+ <img src="../obr/info.png" title="Roè OPU 2-01 verzia <?php echo $kli_vrok; ?>">
 </div>
 </div>
 <img src='../obr/zoznam.png' onclick="statopu201();" title="Upravi hodnoty" class="toleft line-box box-green">
