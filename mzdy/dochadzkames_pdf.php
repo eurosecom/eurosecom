@@ -579,6 +579,9 @@ $oznac = mysql_query("$sqtoz");
 $ix=$ix+1;
   }
 
+//echo $sqtoz;
+//exit;
+
 $kli_vmesx=$kli_vmes;
 if( $kli_vmes < 10 ) { $kli_vmesx="0".$kli_vmes; }
 

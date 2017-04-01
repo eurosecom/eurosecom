@@ -666,16 +666,16 @@ $id=$id+1;
 //koniec vyries dm201 prescas kolko hodin 10 urob 10cyklov a pridaj nahodne k dnu
 
 //napln do mzddochadzka
-//mzddochadzka ume oc dmxa dmxb daod dado dnixa dnixb hodxa hodxb xtxt datm datn cplxb polprc 
+//mzddochadzka ume oc dmxa dmxb daod dado dnixa dnixb hodxa hodxb xtxt datm datn cplxb polprc keyf
 //9.2013 3 506 0 2013-09-09 2013-09-09 1.00 0.00 0.00 8.00   2013-09-18 12:26:14 0000-00-00 00:00:00 1 0.00 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzddochadzka ".
-" SELECT ume,oc,dm,0,dap,dak,dni,0,0,hod,'',now(),'0000-00-00 00:00:00',0,0 ".
+" SELECT ume,oc,dm,0,dap,dak,dni,0,0,hod,'',now(),'0000-00-00 00:00:00',0,0,'' ".
 " FROM F$kli_vxcf"."_mzdprcv".$kli_uzid." ".
 " WHERE ume = $kli_vume  ";
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzddochadzka ".
-" SELECT ume,oc,dm,0,dap,dak,dni,0,0,hod,'',now(),'0000-00-00 00:00:00',0,0 ".
+" SELECT ume,oc,dm,0,dap,dak,dni,0,0,hod,'',now(),'0000-00-00 00:00:00',0,0,'' ".
 " FROM F$kli_vxcf"."_mzdprcx".$kli_uzid." ".
 " WHERE ume = $kli_vume  ";
 $dsql = mysql_query("$dsqlt");

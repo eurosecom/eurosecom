@@ -127,6 +127,13 @@ if (!$vysledok){
 $sql = "ALTER TABLE F".$kli_vxcf."_mzddochadzka ADD datn TIMESTAMP(14) AFTER datm";
 $vysledek = mysql_query("$sql");
                }
+$sql = "SELECT keyf FROM F".$kli_vxcf."_mzddochadzka ";
+$vysledok = mysql_query($sql);
+if (!$vysledok){
+
+$sql = "ALTER TABLE F".$kli_vxcf."_mzddochadzka ADD keyf VARCHAR(50) NOT NULL AFTER polprc";
+$vysledek = mysql_query("$sql");
+               }
 
 $sql = "SELECT mdov FROM F".$kli_vxcf."_mzddochadzkaset ";
 $vysledok = mysql_query($sql);

@@ -55,6 +55,8 @@ $vytvor = mysql_query("$vsql");
 
 $sql = "ALTER TABLE F$kli_vxcf"."_dochprc$kli_uzid ADD datnz TIMESTAMP(14) not null AFTER datn";
 $vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_dochprc$kli_uzid DROP keyf ";
+$vysledek = mysql_query("$sql");
 
 ?>
 <HEAD>
