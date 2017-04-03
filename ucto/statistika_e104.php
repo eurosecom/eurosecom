@@ -1999,7 +1999,7 @@ $oznac = mysql_query("$sqtoz");
 }
 else
 {
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET nstr=2000 WHERE zakx >= 0 "; 
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET nstr=2008 WHERE zakx >= 0 "; 
 $oznac = mysql_query("$sqtoz");
 }
 
@@ -2018,7 +2018,7 @@ $oznac = mysql_query("$sqtoz");
 }
 else
 {
-$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET strx=2000 WHERE zakx >= 0 "; 
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET strx=2008 WHERE zakx >= 0 "; 
 $oznac = mysql_query("$sqtoz");
 }
           }
