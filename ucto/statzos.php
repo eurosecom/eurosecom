@@ -341,6 +341,7 @@ if ( $kli_vrok < 2014 ) $rokvts112="_2013";
 //statistika vts101
 <?php
 $rokvts101="";
+if ( $kli_vrok < 2016 ) $rokvts101="_2015";
 if ( $kli_vrok < 2015 ) $rokvts101="_2014";
 ?>
   function statvts101()
@@ -978,7 +979,7 @@ if ( $dajstatvyk == 1 )
 <div class="toleft line-box-text">
 <div>
  <strong>Roè VTS 1-01<span>Roèný výkaz produkèných odvetví vo vybraných trhových službách</span></strong>
- <img src="../obr/info.png" title="Roè VTS 1-01 verzia 2015">
+ <img src="../obr/info.png" title="Roè VTS 1-01 verzia <?php echo $kli_vrok; ?>">
 </div>
 </div>
 <img src='../obr/zoznam.png' onclick="statvts101();" title="Upravi hodnoty" class="toleft line-box box-green">
