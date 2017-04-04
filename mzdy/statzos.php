@@ -273,6 +273,7 @@ window.open('../mzdy/konto_prac.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h
 
 <?php
 $rokunp101="";
+if( $kli_vrok < 2016 ) $rokunp101="_2015";
 if( $kli_vrok < 2015 ) $rokunp101="_2014";
 if( $kli_vrok < 2014 ) $rokunp101="_2013";
 if( $kli_vrok < 2012 ) $rokunp101="_2011";

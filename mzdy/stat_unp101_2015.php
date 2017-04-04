@@ -1,7 +1,7 @@
 <!doctype html>
 <HTML>
 <?php
-//celkovy zaciatok dokumentu UNP 101 2016
+//celkovy zaciatok dokumentu UNP 101 rok 2015
 do
 {
 $sys = 'MZD';
@@ -635,7 +635,7 @@ $vsql = 'DROP TABLE F'.$kli_vxcf.'_statprac';
 $vytvor = mysql_query("$vsql");
 ?>
 <script type="text/javascript">
- window.open('stat_unp101.php?copern=1&drupoh=1&page=1&strana=<?php echo $strana; ?>', '_self')
+ window.open('stat_unp101_2015.php?copern=1&drupoh=1&page=1&strana=<?php echo $strana; ?>', '_self')
 </script>
 <?php
 }
@@ -1036,7 +1036,7 @@ form input[type=text] {
   }
   function TlacVykaz()
   {
-   window.open('../mzdy/stat_unp101.php?copern=11&strana=9999', '_blank');
+   window.open('../mzdy/stat_unp101_2015.php?copern=11&strana=9999', '_blank');
   }
   function StatUdajeFirma()
   {
@@ -1050,12 +1050,7 @@ form input[type=text] {
   }
   function NacitajMzdy()
   {
-   window.open('../mzdy/stat_unp101.php?copern=200&drupoh=1&page=1&typ=PDF&cstat=101&vyb_ume=<?php echo $kli_vume; ?>&strana=<?php echo $strana; ?>&h_mfir=<?php echo $kli_vxcf; ?>', '_self');
-  }
-  function doXML()
-  {
-   window.open('stat_unp101xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/stat_unp101_2015.php?copern=200&drupoh=1&page=1&typ=PDF&cstat=101&vyb_ume=<?php echo $kli_vume; ?>&strana=<?php echo $strana; ?>&h_mfir=<?php echo $kli_vxcf; ?>', '_self');
   }
 </script>
 </HEAD>
@@ -1078,7 +1073,6 @@ if ( $copern == 1  )
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Metodické vysvetlivky k obsahu výkazu" class="btn-form-tool">
     <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMzdy();" title="Naèíta údaje z miezd" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
-    <img src="../obr/ikony/upbox_blue_icon.png" onclick="doXML();" title="Export do XML" class="btn-form-tool">
    </div>
   </td>
  </tr>
@@ -1086,12 +1080,12 @@ if ( $copern == 1  )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="stat_unp101.php?copern=3&strana=<?php echo "$strana"; ?>">
+<FORM name="formv1" method="post" action="stat_unp101_2015.php?copern=3&strana=<?php echo "$strana"; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive"; $clas3="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 if ( $strana == 3 ) $clas3="active";
-$source="stat_unp101.php";
+$source="stat_unp101_2015.php";
 ?>
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=1&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
