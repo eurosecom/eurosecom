@@ -353,6 +353,7 @@ if ( $kli_vrok < 2015 ) $rokvts101="_2014";
 //statistika vts201
 <?php
 $rokvts201="";
+if ( $kli_vrok < 2016 ) $rokvts201="_2015";
 if ( $kli_vrok < 2015 ) $rokvts201="_2014";
 ?>
   function statvts201()
@@ -990,7 +991,7 @@ if ( $dajstatvyk == 1 )
 <div class="toleft line-box-text">
 <div>
  <strong>Roè VTS 2-01<span>Roèný výkaz produkèných odvetví v malých podnikoch vo vybr. trhových službách</span></strong>
- <img src="../obr/info.png" title="Roè VTS 2-01 verzia 2015">
+ <img src="../obr/info.png" title="Roè VTS 2-01 verzia <?php echo $kli_vrok; ?>">
 </div>
 </div>
 <img src='../obr/zoznam.png' onclick="statvts201();" title="Upravi hodnoty" class="toleft line-box box-green">
@@ -1001,7 +1002,7 @@ if ( $dajstatvyk == 1 )
 <div class="toleft line-box-text">
 <div>
  <strong>Roè ZAV 1-01<span>Roèný závodný výkaz produkèných odvetví</span></strong>
- <img src="../obr/info.png" title="Roè ZAV 1-01 verzia 2015">
+ <img src="../obr/info.png" title="Roè ZAV 1-01 verzia <?php echo $kli_vrok; ?>">
 </div>
 </div>
 <img src='../obr/zoznam.png' onclick="statzav101();" title="Upravi hodnoty" class="toleft line-box box-green">

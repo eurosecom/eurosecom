@@ -1,7 +1,7 @@
 <!doctype html>
 <HTML>
 <?php
-//celkovy zaciatok dokumentu VTS201 rok 2016
+//celkovy zaciatok dokumentu VTS201 rok 2015
 do
 {
 $sys = 'UCT';
@@ -5403,7 +5403,7 @@ form input[type=text] {
 
   function TlacVykaz()
   {
-   window.open('../ucto/statistika_vts201.php?copern=11&strana=9999', '_blank');
+   window.open('../ucto/statistika_vts201_2015.php?copern=11&strana=9999', '_blank');
   }
   function StatUdajeFirma()
   {
@@ -5412,7 +5412,7 @@ form input[type=text] {
   }
   function NacitajMzdy()
   {
-   window.open('../ucto/statistika_vts201.php?copern=200&drupoh=1&page=1', '_self');
+   window.open('../ucto/statistika_vts201_2015.php?copern=200&drupoh=1&page=1', '_self');
   }
   function NacitajModuly()
   {
@@ -5553,7 +5553,7 @@ $vyska=1300;
 if ( $strana == 11 ) { $sirka=1250; $vyska=800; }
 ?>
 <div id="content" style="width:<?php echo $sirka; ?>px; height:<?php echo $vyska; ?>px;">
-<FORM name="formv1" method="post" action="statistika_vts201.php?copern=103&strana=<?php echo $strana; ?>">
+<FORM name="formv1" method="post" action="statistika_vts201_2015.php?copern=103&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive";
 $clas5="noactive"; $clas6="noactive"; $clas7="noactive"; $clas8="noactive";
@@ -5564,7 +5564,7 @@ if ( $strana == 5 ) $clas5="active"; if ( $strana == 6 ) $clas6="active";
 if ( $strana == 7 ) $clas7="active"; if ( $strana == 8 ) $clas8="active";
 if ( $strana == 9 ) $clas9="active"; if ( $strana == 10 ) $clas10="active";
 if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
-$source="statistika_vts201.php?";
+$source="statistika_vts201_2015.php?";
 ?>
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
