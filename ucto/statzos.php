@@ -378,6 +378,7 @@ window.open('../ucto/statistika_opu201<?php echo $rokopu201; ?>.php?copern=1&dru
 //statistika zav101
 <?php
 $rokzav101="";
+if( $kli_vrok < 2016 ) $rokzav101="_2015";
 if( $kli_vrok < 2015 ) $rokzav101="_2014";
 ?>
 

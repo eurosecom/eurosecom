@@ -534,6 +534,7 @@ window.open('../ucto/statistika_vts112<?php echo $rokvts112; ?>.php?copern=1&dru
 //statistika vts101
 <?php
 $rokvts101="";
+if( $kli_vrok < 2016 ) $rokvts101="_2015";
 if( $kli_vrok < 2015 ) $rokvts101="_2014";
 ?>
 
@@ -546,6 +547,7 @@ window.open('../ucto/statistika_vts101<?php echo $rokvts101; ?>.php?copern=1&dru
 //statistika vts201
 <?php
 $rokvts201="";
+if( $kli_vrok < 2016 ) $rokvts201="_2015";
 if( $kli_vrok < 2015 ) $rokvts201="_2014";
 ?>
 
@@ -558,6 +560,7 @@ window.open('../ucto/statistika_vts201<?php echo $rokvts201; ?>.php?copern=1&dru
 //opu201
 <?php
 $rokopu201="";
+if( $kli_vrok < 2016 ) $rokopu201="_2015";
 if( $kli_vrok < 2015 ) $rokopu201="_2014";
 ?>
 
@@ -570,6 +573,7 @@ window.open('../ucto/statistika_opu201<?php echo $rokopu201; ?>.php?copern=1&dru
 //statistika zav101
 <?php
 $rokzav101="";
+if( $kli_vrok < 2016 ) $rokzav101="_2015";
 if( $kli_vrok < 2015 ) $rokzav101="_2014";
 ?>
 
