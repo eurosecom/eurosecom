@@ -26,7 +26,7 @@ $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
 
 //.jpg podklad
-$jpg_cesta="../dokumenty/statistika2015/roc_vts101/roc_vts101_v15";
+$jpg_cesta="../dokumenty/statistika2016/roc_vts101/roc_vts101_v16";
 $jpg_popis="tlaèivo Roèný výkaz produkèných odvetví vo vybraných trhových službách Roè VTS 1-01 ".$kli_vrok;
 
 //datumove funkcie
@@ -262,7 +262,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
-$strana=13; 
+$strana=13;
 }
 //koniec modul 514
 
@@ -869,7 +869,7 @@ $sql = "SELECT mod100043nie FROM F$kli_vxcf"."_statistika_vts101 WHERE ico=0";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
-echo "def1<br />"; 
+echo "def1<br />";
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101 ADD odoslane DATE NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101 ADD mod100041ano DECIMAL(2,0) DEFAULT 0 AFTER konx";
@@ -3645,8 +3645,8 @@ $dsql = mysql_query("$dsqlt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statprac,F$kli_vxcf"."_mzdpomer SET ".
 " dhpom=pm_doh, zena=SUBSTRING(rodc,3,2) ".
-" WHERE F$kli_vxcf"."_statprac.pom = F$kli_vxcf"."_mzdpomer.pm"; 
-$upravene = mysql_query("$uprtxt");  
+" WHERE F$kli_vxcf"."_statprac.pom = F$kli_vxcf"."_mzdpomer.pm";
+$upravene = mysql_query("$uprtxt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statprac "." SELECT".
 " 999,oc,ume,rodc,zena,pom,dhpom,SUM(pocet), ".
@@ -3657,7 +3657,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_statprac "." SELECT".
 $dsql = mysql_query("$dsqlt");
 
 
-$r01=0; $r01m01=0; $r01m02=0; $r01m03=0; $r01m04=0; $r01m05=0; $r01m06=0; $r01m07=0; $r01m08=0; $r01m09=0; $r01m10=0; $r01m11=0; $r01m12=0; $r03=0; 
+$r01=0; $r01m01=0; $r01m02=0; $r01m03=0; $r01m04=0; $r01m05=0; $r01m06=0; $r01m07=0; $r01m08=0; $r01m09=0; $r01m10=0; $r01m11=0; $r01m12=0; $r03=0;
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_statprac WHERE drh = 999 AND ume = 1.".$kli_vrok." AND dhpom = 0";
 $sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
@@ -3746,7 +3746,7 @@ $i=$i+1;                   }
 $r01=($r01m01+$r01m02+$r01m03+$r01m04+$r01m05+$r01m06+$r01m07+$r01m08+$r01m09+$r01m10+$r01m11+$r01m12)/12;
 
 
-//odpracovane hodiny a eur 
+//odpracovane hodiny a eur
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statprac "." SELECT".
 " 0,oc,ume,'',0,vpom,0,1, ".
 "dm,dni,hod,kc,$fir_fico".
@@ -3765,8 +3765,8 @@ $dsql = mysql_query("$dsqlt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statprac,F$kli_vxcf"."_mzdpomer SET ".
 " dhpom=pm_doh ".
-" WHERE F$kli_vxcf"."_statprac.pom = F$kli_vxcf"."_mzdpomer.pm"; 
-$upravene = mysql_query("$uprtxt");  
+" WHERE F$kli_vxcf"."_statprac.pom = F$kli_vxcf"."_mzdpomer.pm";
+$upravene = mysql_query("$uprtxt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statprac "." SELECT".
 " 555,oc,ume,rodc,zena,pom,dhpom,pocet, ".
@@ -3776,7 +3776,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_statprac "." SELECT".
 " GROUP BY ume,dhpom,dm";
 $dsql = mysql_query("$dsqlt");
 
-$r04=0; 
+$r04=0;
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_statprac WHERE drh = 555 AND dhpom = 0 AND ( ( dm > 100 AND dm < 111 ) OR dm = 132 OR dm = 209 )";
 $sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
@@ -3796,10 +3796,10 @@ $i=$i+1;                   }
 //zapis do statistiky
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 " m304r01='$r01', m304r02='$r02', m304r03='$r03', m304r04='$r04', m304r06='$r06' ".
-" WHERE ico >= 0"; 
-$upravene = mysql_query("$uprtxt");  
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
 //echo $uprtxt;
-//exit; 
+//exit;
 
 $copern=102;
 $strana=10;
@@ -5032,8 +5032,8 @@ endif;
 //4.strana
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 " m398r991=m398r11+m398r21, m398r992=m398r12+m398r22, m398r993=m398r13+m398r23, m398r994=m398r14+m398r24  ".
-" WHERE ico >= 0"; 
-$upravene = mysql_query("$uprtxt"); 
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
 
 //4.strana
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
@@ -5064,7 +5064,7 @@ $upravene = mysql_query("$uprtxt");
 //6.strana
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 " m581r99=m581r1+m581r2+m581r3+m581r4+m581r5+m581r6+m581r7+m581r8+m581r12 ".
-" WHERE ico >= 0"; 
+" WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
 //7.strana
@@ -7034,7 +7034,7 @@ form input[type=text] {
 
   function CisCPAp1()
   {
-   window.open('../dokumenty/statistika2014/cpa_ciselnik_pril1v13.pdf', '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+   window.open('../dokumenty/statistika2016/cpa_ciselnik_pril1_v16.pdf', '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
   function MetodVypln()
   {
@@ -7221,7 +7221,7 @@ if ( $copern == 102 )
 <?php
 $sirka=950;
 $vyska=1300;
-if ( $strana == 7 OR $strana == 8 OR $strana == 11 OR $strana == 12 )
+if ( $strana == 9 OR $strana == 10 OR $strana == 12 OR $strana == 13 )
 {
 $sirka=1250; $vyska=920;
 }
@@ -7267,1084 +7267,1027 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 1.strana 265kB">
 
-<span class="text-echo" style="top:278px; left:445px; font-size:18px; letter-spacing:27px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:359px; left:467px; font-size:18px; letter-spacing:24px;"><?php echo $fir_ficox; ?></span>
 <!-- ORGANIZACIA -->
-<span class="text-echo" style="top:805px; left:53px;"><?php echo "$fir_fnaz $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
+<span class="text-echo" style="top:923px; left:55px; line-height: 20px;"><?php echo "$fir_fnaz<br>$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
+<span class="text-echo" style="top:940px; left:806px;"><?php echo $okres; ?></span>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();" title="Nastavi kód okresu" class="btn-row-tool" style="top:937px; left:839px;">
 <!-- sknace -->
-<input type="text" name="cinnost" id="cinnost" style="width:487px; top:857px; left:53px;"/>
-<span class="text-echo" style="top:863px; left:573px; font-size:16px; letter-spacing:25px;"><?php echo $sknace; ?></span>
-<span class="text-echo" style="top:810px; left:808px;"><?php echo $okres; ?></span>
-<img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();" title="Nastavi kód okresu"
-     class="btn-row-tool" style="top:809px; left:839px;">
-<!-- Vyplnil -->
-<span class="text-echo" style="top:935px; left:53px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo" style="top:945px; left:388px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo" style="top:992px; left:53px;"><?php echo $fir_fem1; ?></span>
-<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);"
-       style="width:90px; top:989px; left:390px;"/>
+<input type="text" name="cinnost" id="cinnost" style="width:380px; top:1000px; left:55px;"/>
+<span class="text-echo" style="top:1004px; left:501px; font-size:18px; letter-spacing:33px;"><?php echo $sknace; ?></span>
 
-<!-- modul 100307 -->
-<span class="text-echo center" style="width:499px; top:1156px; left:400px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo center" style="width:499px; top:1182px; left:400px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo center" style="width:499px; top:1208px; left:400px;"><?php echo $fir_fem1; ?></span>
+<!-- Vyplnil -->
+<span class="text-echo" style="top:1072px; left:55px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo" style="width:499px; top:1082px; left:480px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo" style="width:499px; top:1116px; left:55px;"><?php echo $fir_fem1; ?></span>
+<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);" style="width:90px; top:1113px; left:390px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 2.strana 256kB">
+<span class="text-echo" style="top:82px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 100315 -->
-<span class="text-echo center" style="top:184px; left:410px;"><?php echo $cinnost; ?></span>
+<span class="text-echo" style="top:262px; left:411px;"><?php echo $cinnost; ?></span>
 <?php
-$sknacesb=$fir_sknace;
+$sknace=str_replace(".", "", $fir_sknace);
 ?>
-<span class="text-echo center" style="top:210px; left:630px;"><?php echo $sknacesb; ?></span>
+<span class="text-echo center" style="top:288px; left:630px;"><?php echo $sknace; ?></span>
 
 <!-- modul 2 -->
-<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:373px; left:750px;"/>
-<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:411px; left:750px;"/>
+<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:461px; left:730px;"/>
+<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:497px; left:730px;"/>
 
 <!-- modul 100041 -->
-<input type="checkbox" name="mod100041ano" value="1" onchange="klikm100041ano();"
-       style="top:539px; left:839px;"/>
-<input type="checkbox" name="mod100041nie" value="1" onchange="klikm100041nie();"
-       style="top:560px; left:839px;"/>
+<input type="checkbox" name="mod100041ano" value="1" onchange="klikm100041ano();" style="top:642px; left:839px;"/>
+<input type="checkbox" name="mod100041nie" value="1" onchange="klikm100041nie();" style="top:663px; left:839px;"/>
 
 <!-- modul 100042 -->
-<input type="checkbox" name="mod100042ano" value="1" onchange="klikm100042ano();"
-       style="top:653px; left:839px;"/>
-<input type="checkbox" name="mod100042nie" value="1" onchange="klikm100042nie();"
-       style="top:673px; left:839px;"/>
+<input type="checkbox" name="mod100042ano" value="1" onchange="klikm100042ano();" style="top:756px; left:839px;"/>
+<input type="checkbox" name="mod100042nie" value="1" onchange="klikm100042nie();" style="top:777px; left:839px;"/>
 
 <!-- modul 100043 -->
-<input type="checkbox" name="mod100043ano" value="1" onchange="klikm100043ano();"
-       style="top:766px; left:839px;"/>
-<input type="checkbox" name="mod100043nie" value="1" onchange="klikm100043nie();"
-       style="top:787px; left:839px;"/>
+<input type="checkbox" name="mod100043ano" value="1" onchange="klikm100043ano();" style="top:870px; left:839px;"/>
+<input type="checkbox" name="mod100043nie" value="1" onchange="klikm100043nie();" style="top:890px; left:839px;"/>
 
 <!-- modul 100008 -->
-<input type="text" name="m1100r4" id="m1100r4" maxlength="8" style="width:100px; top:894px; left:640px;"/>
-<input type="text" name="m1100r5" id="m1100r5" maxlength="8" style="width:100px; top:921px; left:640px;"/>
-<input type="text" name="m1100r6" id="m1100r6" maxlength="8" style="width:100px; top:950px; left:640px;"/>
-<input type="text" name="m1100r7" id="m1100r7" maxlength="8" style="width:100px; top:979px; left:640px;"/>
-<input type="text" name="m1100r8" id="m1100r8" maxlength="8" style="width:100px; top:1007px; left:640px;"/>
-<input type="text" name="m1100r9" id="m1100r9" maxlength="8" style="width:100px; top:1035px; left:640px;"/>
-<input type="text" name="m1100r10" id="m1100r10" maxlength="8" style="width:100px; top:1064px; left:640px;"/>
-<input type="text" name="m1100r11" id="m1100r11" maxlength="8" style="width:100px; top:1093px; left:640px;"/>
-<input type="text" name="m1100r12" id="m1100r12" maxlength="8" style="width:100px; top:1121px; left:640px;"/>
-<input type="text" name="m1100r13" id="m1100r13" maxlength="8" style="width:100px; top:1150px; left:640px;"/>
-
-<!-- modul 100036 -->
-<input type="checkbox" name="mod100036kal" value="1" onchange="klikm100036kal();"
-       style="top:1223px; left:839px;"/>
-<input type="checkbox" name="mod100036hos" value="1" onchange="klikm100036hos();"
-       style="top:1243px; left:839px;"/>
+<input type="text" name="m1100r4" id="m1100r4" maxlength="8" style="width:100px; top:997px; left:640px;"/>
+<input type="text" name="m1100r5" id="m1100r5" maxlength="8" style="width:100px; top:1025px; left:640px;"/>
+<input type="text" name="m1100r6" id="m1100r6" maxlength="8" style="width:100px; top:1052px; left:640px;"/>
+<input type="text" name="m1100r7" id="m1100r7" maxlength="8" style="width:100px; top:1080px; left:640px;"/>
+<input type="text" name="m1100r8" id="m1100r8" maxlength="8" style="width:100px; top:1107px; left:640px;"/>
+<input type="text" name="m1100r9" id="m1100r9" maxlength="8" style="width:100px; top:1134px; left:640px;"/>
+<input type="text" name="m1100r10" id="m1100r10" maxlength="8" style="width:100px; top:1162px; left:640px;"/>
+<input type="text" name="m1100r11" id="m1100r11" maxlength="8" style="width:100px; top:1190px; left:640px;"/>
+<input type="text" name="m1100r12" id="m1100r12" maxlength="8" style="width:100px; top:1216px; left:640px;"/>
+<input type="text" name="m1100r13" id="m1100r13" maxlength="8" style="width:100px; top:1244px; left:640px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 3 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 3.strana 244kB">
-<span class="text-echo" style="top:85px; left:479px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 3.strana 244kB">
+<span class="text-echo" style="top:100px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 100036 -->
+<input type="checkbox" name="mod100036kal" value="1" onchange="klikm100036kal();" style="top:205px; left:839px;"/>
+<input type="checkbox" name="mod100036hos" value="1" onchange="klikm100036hos();" style="top:225px; left:839px;"/>
 
 <!-- modul 100037 -->
-<input type="text" name="mod100037" id="mod100037" style="width:253px; top:160px; left:643px;"/>
+<input type="text" name="mod100037" id="mod100037" style="width:253px; top:333px; left:643px;"/>
 
 <!-- modul 100214 -->
-<input type="text" name="m100214r01" id="m100214r01" style="width:100px; top:277px; left:670px;"/>
-<input type="text" name="m100214r02" id="m100214r02" style="width:100px; top:303px; left:670px;"/>
+<input type="text" name="m100214r01" id="m100214r01" style="width:100px; top:486px; left:670px;"/>
+<input type="text" name="m100214r02" id="m100214r02" style="width:100px; top:514px; left:670px;"/>
 
 <!-- modul 100069 -->
-<input type="checkbox" name="mod100069ano" value="1" onchange="klikm100069ano();"
-       style="top:443px; left:839px;"/>
-<input type="checkbox" name="mod100069nie" value="1" onchange="klikm100069nie();"
-       style="top:463px; left:839px;"/>
+<input type="checkbox" name="mod100069ano" value="1" onchange="klikm100069ano();" style="top:670px; left:839px;"/>
+<input type="checkbox" name="mod100069nie" value="1" onchange="klikm100069nie();" style="top:691px; left:839px;"/>
 
 <!-- modul 100073 -->
-<input type="text" name="m1101r2" id="m1101r2" onkeyup="CiarkaNaBodku(this);"
-       style="width:253px; top:536px; left:643px;"/>
+<input type="text" name="m1101r2" id="m1101r2" onkeyup="CiarkaNaBodku(this);" style="width:253px; top:765px; left:643px;"/>
 
 <!-- modul 100074 -->
-<input type="text" name="m1101r3" id="m1101r3" style="width:253px; top:722px; left:643px;"/>
+<input type="text" name="m1101r3" id="m1101r3" style="width:253px; top:972px; left:643px;"/>
 
 <!-- modul 100071 -->
-<input type="checkbox" name="m1101r4a" value="1" onclick="klikm1101r4ano();"
-       style="top:782px; left:839px;"/>
-<input type="checkbox" name="m1101r4b" value="1" onclick="klikm1101r4nie();"
-       style="top:803px; left:839px;"/>
+<input type="checkbox" name="m1101r4a" value="1" onclick="klikm1101r4ano();" style="top:1053px; left:839px;"/>
+<input type="checkbox" name="m1101r4b" value="1" onclick="klikm1101r4nie();" style="top:1073px; left:839px;"/>
 
 <!-- modul 100075 -->
-<input type="checkbox" name="m1101r5a" value="1" onclick="klikm1101r5ano();"
-       style="top:903px; left:839px;"/>
-<input type="checkbox" name="m1101r5b" value="1" onclick="klikm1101r5nie();"
-       style="top:924px; left:839px;"/>
-
-<!-- modul 100079 -->
-<input type="checkbox" name="m1101r6a" value="1" onclick="klikm1101r6ano();"
-       style="top:1027px; left:839px;"/>
-<input type="checkbox" name="m1101r6b" value="1" onclick="klikm1101r6nie();"
-       style="top:1048px; left:839px;"/>
-
-<!-- modul 100082 -->
-<input type="checkbox" name="m1101r7a" value="1" onclick="klikm1101r7ano();"
-       style="top:1183px; left:839px;"/>
-<input type="checkbox" name="m1101r7b" value="1" onclick="klikm1101r7nie();"
-       style="top:1204px; left:839px;"/>
+<input type="checkbox" name="m1101r5a" value="1" onclick="klikm1101r5ano();" style="top:1195px; left:839px;"/>
+<input type="checkbox" name="m1101r5b" value="1" onclick="klikm1101r5nie();" style="top:1215px; left:839px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 4 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str4.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 4.strana 232kB">
+<img src="<?php echo $jpg_cesta; ?>_str4.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 4.strana 232kB">
+<span class="text-echo" style="top:100px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 100079 -->
+<input type="checkbox" name="m1101r6a" value="1" onclick="klikm1101r6ano();" style="top:195px; left:839px;"/>
+<input type="checkbox" name="m1101r6b" value="1" onclick="klikm1101r6nie();" style="top:215px; left:839px;"/>
+
+<!-- modul 100082 -->
+<input type="checkbox" name="m1101r7a" value="1" onclick="klikm1101r7ano();" style="top:369px; left:839px;"/>
+<input type="checkbox" name="m1101r7b" value="1" onclick="klikm1101r7nie();" style="top:389px; left:839px;"/>
+
+<!-- modul 100417 -->
+<input type="checkbox" name="m100417r7a" value="1" onclick="klikm100417r7ano();" style="top:525px; left:839px;"/>
+<input type="checkbox" name="m100417r7b" value="1" onclick="klikm100417r7nie();" style="top:545px; left:839px;"/>
+
+<!-- modul 100418 -->
+<input type="text" name="m100418" id="m100418" style="width:253px; top:654px; left:643px;"/>
 
 <!-- modul 398 -->
-<input type="text" name="m398r11" id="m398r11" style="width:100px; top:268px; left:437px;"/>
-<input type="text" name="m398r12" id="m398r12" style="width:90px; top:268px; left:549px;"/>
-<input type="text" name="m398r13" id="m398r13" style="width:112px; top:268px; left:651px;"/>
-<input type="text" name="m398r14" id="m398r14" style="width:115px; top:268px; left:776px;"/>
-<input type="text" name="m398r21" id="m398r21" style="width:100px; top:296px; left:437px;"/>
-<input type="text" name="m398r22" id="m398r22" style="width:90px; top:296px; left:549px;"/>
-<input type="text" name="m398r23" id="m398r23" style="width:112px; top:296px; left:651px;"/>
-<input type="text" name="m398r24" id="m398r24" style="width:115px; top:296px; left:776px;"/>
-<span class="text-echo" style="top:329px; right:410px;"><?php echo $m398r991; ?></span>
-<span class="text-echo" style="top:329px; right:308px;"><?php echo $m398r992; ?></span>
-<span class="text-echo" style="top:329px; right:184px;"><?php echo $m398r993; ?></span>
-<span class="text-echo" style="top:329px; right:56px;"><?php echo $m398r994; ?></span>
+<input type="text" name="m398r11" id="m398r11" style="width:101px; top:933px; left:451px;"/>
+<input type="text" name="m398r12" id="m398r12" style="width:100px; top:933px; left:565px;"/>
+<input type="text" name="m398r13" id="m398r13" style="width:101px; top:933px; left:677px;"/>
+<input type="text" name="m398r14" id="m398r14" style="width:101px; top:933px; left:790px;"/>
+<input type="text" name="m398r21" id="m398r21" style="width:101px; top:961px; left:451px;"/>
+<input type="text" name="m398r22" id="m398r22" style="width:100px; top:961px; left:565px;"/>
+<input type="text" name="m398r23" id="m398r23" style="width:101px; top:961px; left:677px;"/>
+<input type="text" name="m398r24" id="m398r24" style="width:101px; top:961px; left:790px;"/>
+<span class="text-echo" style="top:992px; right:395px;"><?php echo $m398r991; ?></span>
+<span class="text-echo" style="top:992px; right:282px;"><?php echo $m398r992; ?></span>
+<span class="text-echo" style="top:992px; right:170px;"><?php echo $m398r993; ?></span>
+<span class="text-echo" style="top:992px; right:56px;"><?php echo $m398r994; ?></span>
 
 <!-- modul 100131 -->
-<input type="checkbox" name="m1005r1a" value="1" onclick="klikm1005r1ano();"
-       style="top:434px; left:839px;"/>
-<input type="checkbox" name="m1005r1b" value="1" onclick="klikm1005r1nie();"
-       style="top:455px; left:839px;"/>
-
-
-<!-- modul 405 -->
-<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
-     onclick="NacitajZobratovky(405);" style="top:505px; left:450px;" class="btn-row-tool">
-<input type="text" name="m405r11" id="m405r11" style="width:100px; top:624px; left:590px;"/>
-<input type="text" name="m405r12" id="m405r12" style="width:100px; top:624px; left:760px;"/>
-<input type="text" name="m405r21" id="m405r21" style="width:100px; top:652px; left:590px;"/>
-<input type="text" name="m405r31" id="m405r31" style="width:100px; top:681px; left:590px;"/>
-<input type="text" name="m405r32" id="m405r32" style="width:100px; top:681px; left:760px;"/>
-<input type="text" name="m405r41" id="m405r41" style="width:100px; top:709px; left:590px;"/>
-<input type="text" name="m405r51" id="m405r51" style="width:100px; top:738px; left:590px;"/>
-<input type="text" name="m405r61" id="m405r61" style="width:100px; top:770px; left:590px;"/>
-<input type="text" name="m405r71" id="m405r71" style="width:100px; top:803px; left:590px;"/>
-<input type="text" name="m405r81" id="m405r81" style="width:100px; top:831px; left:590px;"/>
-<input type="text" name="m405r82" id="m405r82" style="width:100px; top:831px; left:760px;"/>
-<span class="text-echo" style="top:864px; right:255px;"><?php echo $m405r991; ?></span>
-<span class="text-echo" style="top:864px; right:84px;"><?php echo $m405r992; ?></span>
-
-<!-- modul 406 -->
-<input type="text" name="m406r1" id="m406r1" style="width:100px; top:1001px; left:630px;"/>
-<input type="text" name="m406r2" id="m406r2" style="width:100px; top:1029px; left:630px;"/>
-<input type="text" name="m406r3" id="m406r3" style="width:100px; top:1057px; left:630px;"/>
-<input type="text" name="m406r4" id="m406r4" style="width:100px; top:1086px; left:630px;"/>
-<input type="text" name="m406r5" id="m406r5" style="width:100px; top:1114px; left:630px;"/>
-<input type="text" name="m406r6" id="m406r6" style="width:100px; top:1143px; left:630px;"/>
-<input type="text" name="m406r7" id="m406r7" style="width:100px; top:1171px; left:630px;"/>
-<span class="text-echo" style="top:1204px; right:215px;"><?php echo $m406r99; ?></span>
+<input type="checkbox" name="m1005r1a" value="1" onclick="klikm1005r1ano();" style="top:1141px; left:839px;"/>
+<input type="checkbox" name="m1005r1b" value="1" onclick="klikm1005r1nie();" style="top:1162px; left:839px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 5 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str5.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 5.strana 268kB">
-<span class="text-echo" style="top:76px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:100px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
-<!-- modul 558 -->
-<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
-     onclick="NacitajZobratovky(558);" style="top:108px; left:387px;" class="btn-row-tool">
-<input type="text" name="m558r1" id="m558r1" style="width:100px; top:195px; left:680px;"/>
-<input type="text" name="m558r2" id="m558r2" style="width:100px; top:219px; left:680px;"/>
-<input type="text" name="m558r3" id="m558r3" style="width:100px; top:243px; left:680px;"/>
-<input type="text" name="m558r4" id="m558r4" style="width:100px; top:267px; left:680px;"/>
-<input type="text" name="m558r5" id="m558r5" style="width:100px; top:291px; left:680px;"/>
-<input type="text" name="m558r6" id="m558r6" style="width:100px; top:315px; left:680px;"/>
-<input type="text" name="m558r7" id="m558r7" style="width:100px; top:339px; left:680px;"/>
-<input type="text" name="m558r8" id="m558r8" style="width:100px; top:363px; left:680px;"/>
-<input type="text" name="m558r9" id="m558r9" style="width:100px; top:387px; left:680px;"/>
-<input type="text" name="m558r10" id="m558r10" style="width:100px; top:411px; left:680px;"/>
-<input type="text" name="m558r11" id="m558r11" style="width:100px; top:435px; left:680px;"/>
-<input type="text" name="m558r12" id="m558r12" style="width:100px; top:460px; left:680px;"/>
-<input type="text" name="m558r13" id="m558r13" style="width:100px; top:484px; left:680px;"/>
-<input type="text" name="m558r14" id="m558r14" style="width:100px; top:508px; left:680px;"/>
-<input type="text" name="m558r15" id="m558r15" style="width:100px; top:532px; left:680px;"/>
-<input type="text" name="m558r16" id="m558r16" style="width:100px; top:556px; left:680px;"/>
-<input type="text" name="m558r17" id="m558r17" style="width:100px; top:580px; left:680px;"/>
-<input type="text" name="m558r18" id="m558r18" style="width:100px; top:604px; left:680px;"/>
-<span class="text-echo" style="top:633px; right:170px;"><?php echo $m558r99; ?></span>
+<!-- modul 405 -->
+<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky" onclick="NacitajZobratovky(405);" style="top:157px; left:450px;" class="btn-row-tool">
+<input type="text" name="m405r11" id="m405r11" style="width:100px; top:297px; left:590px;"/>
+<input type="text" name="m405r12" id="m405r12" style="width:100px; top:297px; left:760px;"/>
+<input type="text" name="m405r21" id="m405r21" style="width:100px; top:325px; left:590px;"/>
+<input type="text" name="m405r31" id="m405r31" style="width:100px; top:352px; left:590px;"/>
+<input type="text" name="m405r32" id="m405r32" style="width:100px; top:352px; left:760px;"/>
+<input type="text" name="m405r41" id="m405r41" style="width:100px; top:380px; left:590px;"/>
+<input type="text" name="m405r51" id="m405r51" style="width:100px; top:412px; left:590px;"/>
+<input type="text" name="m405r61" id="m405r61" style="width:100px; top:450px; left:590px;"/>
+<input type="text" name="m405r71" id="m405r71" style="width:100px; top:480px; left:590px;"/>
+<input type="text" name="m405r81" id="m405r81" style="width:100px; top:508px; left:590px;"/>
+<input type="text" name="m405r82" id="m405r82" style="width:100px; top:508px; left:760px;"/>
+<span class="text-echo" style="top:539px; right:255px;"><?php echo $m405r991; ?></span>
+<span class="text-echo" style="top:539px; right:84px;"><?php echo $m405r992; ?></span>
 
-<!-- modul 585 -->
-<input type="text" name="m585r01" id="m585r01" style="width:100px; top:981px; left:680px;"/>
-<input type="text" name="m585r02" id="m585r02" style="width:100px; top:1012px; left:680px;"/>
-<input type="text" name="m585r3k" id="m585r3k" style="width:112px; top:1045px; left:397px;"/>
-<input type="text" name="m585r03" id="m585r03" style="width:100px; top:1045px; left:680px;"/>
-<input type="text" name="m585r4k" id="m585r4k" style="width:112px; top:1075px; left:397px;"/>
-<input type="text" name="m585r04" id="m585r04" style="width:100px; top:1075px; left:680px;"/>
-<input type="text" name="m585r5k" id="m585r5k" style="width:112px; top:1106px; left:397px;"/>
-<input type="text" name="m585r05" id="m585r05" style="width:100px; top:1106px; left:680px;"/>
-
-<!-- modul 100044 -->
-<input type="checkbox" name="m100044ano" value="1" onchange="klikm100044ano();"
-       style="top:1238px; left:839px;"/>
-<input type="checkbox" name="m100044nie" value="1" onchange="klikm100044nie();"
-       style="top:1259px; left:839px;"/>
+<!-- modul 406 -->
+<input type="text" name="m406r1" id="m406r1" style="width:100px; top:705px; left:670px;"/>
+<input type="text" name="m406r2" id="m406r2" style="width:100px; top:732px; left:670px;"/>
+<input type="text" name="m406r3" id="m406r3" style="width:100px; top:760px; left:670px;"/>
+<input type="text" name="m406r4" id="m406r4" style="width:100px; top:787px; left:670px;"/>
+<input type="text" name="m406r5" id="m406r5" style="width:100px; top:815px; left:670px;"/>
+<input type="text" name="m406r6" id="m406r6" style="width:100px; top:842px; left:670px;"/>
+<input type="text" name="m406r7" id="m406r7" style="width:100px; top:869px; left:670px;"/>
+<input type="text" name="m406r8" id="m406r8" style="width:100px; top:897px; left:670px;"/>
+<input type="text" name="m406r9" id="m406r9" style="width:100px; top:924px; left:670px;"/>
+<span class="text-echo" style="top:1038px; right:180px;"><?php echo $m406r99; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 6 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str6.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 6.strana 228kB">
+<img src="<?php echo $jpg_cesta; ?>_str6.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 6.strana 228kB">
+<span class="text-echo" style="top:100px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
-<!-- modul 571 -->
-<input type="text" name="m571r10" id="m571r10" style="width:115px; top:261px; left:50px;"/>
-<?php $cslr="1."; if ( $m571r10 == '' ) { $cslr=""; } ?>
-<span class="text-echo" style="top:266px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r12" id="m571r12" style="width:133px; top:262px; left:269px;"/>
-<input type="text" name="m571r13" id="m571r13" style="width:58px; top:262px; left:412px;"/>
-<input type="text" name="m571r15" id="m571r15" style="width:58px; top:262px; left:548px;"/>
-<input type="text" name="m571r16" id="m571r16" style="width:80px; top:262px; left:616px;"/>
-<input type="text" name="m571r17" id="m571r17" style="width:103px; top:262px; left:707px;"/>
-<input type="text" name="m571r18" id="m571r18" style="width:71px; top:262px; left:820px;"/>
-<input type="text" name="m571r20" id="m571r20" style="width:115px; top:288px; left:50px;"/>
-<?php $cslr="2."; if ( $m571r20 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:292px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r22" id="m571r22" style="width:133px; top:288px; left:269px;"/>
-<input type="text" name="m571r23" id="m571r23" style="width:58px; top:288px; left:412px;"/>
-<input type="text" name="m571r25" id="m571r25" style="width:58px; top:288px; left:548px;"/>
-<input type="text" name="m571r26" id="m571r26" style="width:80px; top:288px; left:616px;"/>
-<input type="text" name="m571r27" id="m571r27" style="width:103px; top:288px; left:707px;"/>
-<input type="text" name="m571r28" id="m571r28" style="width:71px; top:288px; left:820px;"/>
-<input type="text" name="m571r30" id="m571r30" style="width:115px; top:314px; left:50px;"/>
-<?php $cslr="3."; if ( $m571r30 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:318px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r32" id="m571r32" style="width:133px; top:314px; left:269px;"/>
-<input type="text" name="m571r33" id="m571r33" style="width:58px; top:314px; left:412px;"/>
-<input type="text" name="m571r35" id="m571r35" style="width:58px; top:314px; left:548px;"/>
-<input type="text" name="m571r36" id="m571r36" style="width:80px; top:314px; left:616px;"/>
-<input type="text" name="m571r37" id="m571r37" style="width:103px; top:314px; left:707px;"/>
-<input type="text" name="m571r38" id="m571r38" style="width:71px; top:314px; left:820px;"/>
-<input type="text" name="m571r40" id="m571r40" style="width:115px; top:339px; left:50px;"/>
-<?php $cslr="4."; if ( $m571r40 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:343px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r42" id="m571r42" style="width:133px; top:340px; left:269px;"/>
-<input type="text" name="m571r43" id="m571r43" style="width:58px; top:340px; left:412px;"/>
-<input type="text" name="m571r45" id="m571r45" style="width:58px; top:340px; left:548px;"/>
-<input type="text" name="m571r46" id="m571r46" style="width:80px; top:340px; left:616px;"/>
-<input type="text" name="m571r47" id="m571r47" style="width:103px; top:340px; left:707px;"/>
-<input type="text" name="m571r48" id="m571r48" style="width:71px; top:340px; left:820px;"/>
-<input type="text" name="m571r50" id="m571r50" style="width:115px; top:366px; left:50px;"/>
-<?php $cslr="5."; if ( $m571r50 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:370px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r52" id="m571r52" style="width:133px; top:365px; left:269px;"/>
-<input type="text" name="m571r53" id="m571r53" style="width:58px; top:365px; left:412px;"/>
-<input type="text" name="m571r55" id="m571r55" style="width:58px; top:365px; left:548px;"/>
-<input type="text" name="m571r56" id="m571r56" style="width:80px; top:365px; left:616px;"/>
-<input type="text" name="m571r57" id="m571r57" style="width:103px; top:365px; left:707px;"/>
-<input type="text" name="m571r58" id="m571r58" style="width:71px; top:365px; left:820px;"/>
-<input type="text" name="m571r60" id="m571r60" style="width:115px; top:391px; left:50px;"/>
-<?php $cslr="6."; if ( $m571r60 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:395px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r62" id="m571r62" style="width:133px; top:391px; left:269px;"/>
-<input type="text" name="m571r63" id="m571r63" style="width:58px; top:391px; left:412px;"/>
-<input type="text" name="m571r65" id="m571r65" style="width:58px; top:391px; left:548px;"/>
-<input type="text" name="m571r66" id="m571r66" style="width:80px; top:391px; left:616px;"/>
-<input type="text" name="m571r67" id="m571r67" style="width:103px; top:391px; left:707px;"/>
-<input type="text" name="m571r68" id="m571r68" style="width:71px; top:391px; left:820px;"/>
-<input type="text" name="m571r70" id="m571r70" style="width:115px; top:417px; left:50px;"/>
-<?php $cslr="7."; if ( $m571r70 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:421px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r72" id="m571r72" style="width:133px; top:417px; left:269px;"/>
-<input type="text" name="m571r73" id="m571r73" style="width:58px; top:417px; left:412px;"/>
-<input type="text" name="m571r75" id="m571r75" style="width:58px; top:417px; left:548px;"/>
-<input type="text" name="m571r76" id="m571r76" style="width:80px; top:417px; left:616px;"/>
-<input type="text" name="m571r77" id="m571r77" style="width:103px; top:417px; left:707px;"/>
-<input type="text" name="m571r78" id="m571r78" style="width:71px; top:417px; left:820px;"/>
-<input type="text" name="m571r80" id="m571r80" style="width:115px; top:443px; left:50px;"/>
-<?php $cslr="8."; if ( $m571r80 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:447px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r82" id="m571r82" style="width:133px; top:443px; left:269px;"/>
-<input type="text" name="m571r83" id="m571r83" style="width:58px; top:443px; left:412px;"/>
-<input type="text" name="m571r85" id="m571r85" style="width:58px; top:443px; left:548px;"/>
-<input type="text" name="m571r86" id="m571r86" style="width:80px; top:443px; left:616px;"/>
-<input type="text" name="m571r87" id="m571r87" style="width:103px; top:443px; left:707px;"/>
-<input type="text" name="m571r88" id="m571r88" style="width:71px; top:443px; left:820px;"/>
-<input type="text" name="m571r90" id="m571r90" style="width:115px; top:469px; left:50px;"/>
-<?php $cslr="9."; if ( $m571r90 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:473px; left:224px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r92" id="m571r92" style="width:133px; top:469px; left:269px;"/>
-<input type="text" name="m571r93" id="m571r93" style="width:58px; top:469px; left:412px;"/>
-<input type="text" name="m571r95" id="m571r95" style="width:58px; top:469px; left:548px;"/>
-<input type="text" name="m571r96" id="m571r96" style="width:80px; top:469px; left:616px;"/>
-<input type="text" name="m571r97" id="m571r97" style="width:103px; top:469px; left:707px;"/>
-<input type="text" name="m571r98" id="m571r98" style="width:71px; top:469px; left:820px;"/>
+<!-- modul 558 -->
+<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky" onclick="NacitajZobratovky(558);" style="top:139px; left:387px;" class="btn-row-tool">
+<input type="text" name="m558r1" id="m558r1" style="width:100px; top:233px; left:680px;"/>
+<input type="text" name="m558r2" id="m558r2" style="width:100px; top:265px; left:680px;"/>
+<input type="text" name="m558r3" id="m558r3" style="width:100px; top:296px; left:680px;"/>
+<input type="text" name="m558r4" id="m558r4" style="width:100px; top:321px; left:680px;"/>
+<input type="text" name="m558r5" id="m558r5" style="width:100px; top:347px; left:680px;"/>
+<input type="text" name="m558r6" id="m558r6" style="width:100px; top:373px; left:680px;"/>
+<input type="text" name="m558r7" id="m558r7" style="width:100px; top:399px; left:680px;"/>
+<input type="text" name="m558r8" id="m558r8" style="width:100px; top:424px; left:680px;"/>
+<input type="text" name="m558r9" id="m558r9" style="width:100px; top:450px; left:680px;"/>
+<input type="text" name="m558r10" id="m558r10" style="width:100px; top:475px; left:680px;"/>
+<input type="text" name="m558r11" id="m558r11" style="width:100px; top:501px; left:680px;"/>
+<input type="text" name="m558r12" id="m558r12" style="width:100px; top:526px; left:680px;"/>
+<input type="text" name="m558r13" id="m558r13" style="width:100px; top:552px; left:680px;"/>
+<input type="text" name="m558r14" id="m558r14" style="width:100px; top:578px; left:680px;"/>
+<input type="text" name="m558r15" id="m558r15" style="width:100px; top:604px; left:680px;"/>
+<input type="text" name="m558r16" id="m558r16" style="width:100px; top:629px; left:680px;"/>
+<input type="text" name="m558r17" id="m558r17" style="width:100px; top:655px; left:680px;"/>
+<input type="text" name="m558r18" id="m558r18" style="width:100px; top:680px; left:680px;"/>
+<span class="text-echo" style="top:710px; right:170px;"><?php echo $m558r99; ?></span>
 
-<!-- modul 581 -->
-<input type="text" name="m581r1" id="m581r1" style="width:100px; top:692px; left:680px;"/>
-<input type="text" name="m581r2" id="m581r2" style="width:100px; top:718px; left:680px;"/>
-<input type="text" name="m581r3" id="m581r3" style="width:100px; top:743px; left:680px;"/>
-<input type="text" name="m581r4" id="m581r4" style="width:100px; top:770px; left:680px;"/>
-<input type="text" name="m581r5" id="m581r5" style="width:100px; top:795px; left:680px;"/>
-<input type="text" name="m581r6" id="m581r6" style="width:100px; top:821px; left:680px;"/>
-<input type="text" name="m581r7" id="m581r7" style="width:100px; top:847px; left:680px;"/>
-<input type="text" name="m581r8" id="m581r8" style="width:100px; top:873px; left:680px;"/>
-<input type="text" name="m581r12" id="m581r12" style="width:100px; top:899px; left:680px;"/>
-<span class="text-echo" style="top:929px; right:165px;"><?php echo $m581r99; ?></span>
-
-<!-- modul 100301 -->
-<input type="checkbox" name="m100301r1" value="1" onchange="klikm100301ano();"
-       style="top:992px; left:839px;"/>
-<input type="checkbox" name="m100301r2" value="1" onchange="klikm100301nie();"
-       style="top:1012px; left:839px;"/>
-
-<!-- modul 100302 -->
-<input type="text" name="m100302" id="m100302" style="width:253px; top:1087px; left:643px;"/>
-
-<!-- modul 100303 -->
-<input type="checkbox" name="m100303r1" value="1" onchange="klikm100303ano();"
-       style="top:1146px; left:839px;"/>
-<input type="checkbox" name="m100303r2" value="1" onchange="klikm100303nie();"
-       style="top:1166px; left:839px;"/>
-
-<!-- modul 100304 -->
-<input type="text" name="m100304" id="m100304" style="width:253px; top:1240px; left:643px;"/>
+<!-- modul 585 -->
+<input type="text" name="m585r01" id="m585r01" style="width:100px; top:1097px; left:680px;"/>
+<input type="text" name="m585r02" id="m585r02" style="width:100px; top:1129px; left:680px;"/>
+<input type="text" name="m585r3k" id="m585r3k" style="width:90px; top:1160px; left:420px;"/>
+<input type="text" name="m585r03" id="m585r03" style="width:100px; top:1160px; left:680px;"/>
+<input type="text" name="m585r4k" id="m585r4k" style="width:90px; top:1185px; left:420px;"/>
+<input type="text" name="m585r04" id="m585r04" style="width:100px; top:1185px; left:680px;"/>
+<input type="text" name="m585r5k" id="m585r5k" style="width:90px; top:1211px; left:420px;"/>
+<input type="text" name="m585r05" id="m585r05" style="width:100px; top:1211px; left:680px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 7 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str7.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 7.strana 259kB" style="width:1250px; height:1000px;">
-<span class="text-echo" style="top:84px; left:937px; font-size:16px; letter-spacing:14px;"><?php echo $fir_ficox; ?></span>
+<img src="<?php echo $jpg_cesta; ?>_str7.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 7.strana 259kB">
+<span class="text-echo" style="top:100px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
-<!-- modul 513 -->
-<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
-     onclick="NacitajZobratovky(513);" class="btn-row-tool" style="top:114px; left:237px;">
-<input type="text" name="m513r11" id="m513r11" style="width:89px; top:258px; left:375px;"/>
-<input type="text" name="m513r12" id="m513r12" style="width:75px; top:258px; left:471px;"/>
-<input type="text" name="m513r13" id="m513r13" style="width:67px; top:258px; left:553px;"/>
-<input type="text" name="m513r14" id="m513r14" style="width:105px; top:258px; left:627px;"/>
-<input type="text" name="m513r15" id="m513r15" style="width:82px; top:258px; left:739px;"/>
-<input type="text" name="m513r16" id="m513r16" style="width:105px; top:258px; left:828px;"/>
-<input type="text" name="m513r17" id="m513r17" style="width:82px; top:258px; left:940px;"/>
-<input type="text" name="m513r18" id="m513r18" style="width:74px; top:258px; left:1029px;"/>
-<input type="text" name="m513r19" id="m513r19" style="width:100px; top:258px; left:1111px;"/>
-<input type="text" name="m513r21" id="m513r21" style="width:89px; top:281px; left:375px;"/>
-<input type="text" name="m513r22" id="m513r22" style="width:75px; top:281px; left:471px;"/>
-<input type="text" name="m513r23" id="m513r23" style="width:67px; top:281px; left:553px;"/>
-<input type="text" name="m513r24" id="m513r24" style="width:105px; top:281px; left:627px;"/>
-<input type="text" name="m513r25" id="m513r25" style="width:82px; top:281px; left:739px;"/>
-<input type="text" name="m513r26" id="m513r26" style="width:105px; top:281px; left:828px;"/>
-<input type="text" name="m513r27" id="m513r27" style="width:82px; top:281px; left:940px;"/>
-<input type="text" name="m513r28" id="m513r28" style="width:74px; top:281px; left:1029px;"/>
-<input type="text" name="m513r29" id="m513r29" style="width:100px; top:281px; left:1111px;"/>
-<input type="text" name="m513r31" id="m513r31" style="width:89px; top:305px; left:375px;"/>
-<input type="text" name="m513r32" id="m513r32" style="width:75px; top:305px; left:471px;"/>
-<input type="text" name="m513r33" id="m513r33" style="width:67px; top:305px; left:553px;"/>
-<input type="text" name="m513r34" id="m513r34" style="width:105px; top:305px; left:627px;"/>
-<input type="text" name="m513r35" id="m513r35" style="width:82px; top:305px; left:739px;"/>
-<input type="text" name="m513r36" id="m513r36" style="width:105px; top:305px; left:828px;"/>
-<input type="text" name="m513r37" id="m513r37" style="width:82px; top:305px; left:940px;"/>
-<input type="text" name="m513r38" id="m513r38" style="width:74px; top:305px; left:1029px;"/>
-<input type="text" name="m513r39" id="m513r39" style="width:100px; top:305px; left:1111px;"/>
-<input type="text" name="m513r41" id="m513r41" style="width:89px; top:328px; left:375px;"/>
-<input type="text" name="m513r42" id="m513r42" style="width:75px; top:328px; left:471px;"/>
-<input type="text" name="m513r43" id="m513r43" style="width:67px; top:328px; left:553px;"/>
-<input type="text" name="m513r44" id="m513r44" style="width:105px; top:328px; left:627px;"/>
-<input type="text" name="m513r45" id="m513r45" style="width:82px; top:328px; left:739px;"/>
-<input type="text" name="m513r46" id="m513r46" style="width:105px; top:328px; left:828px;"/>
-<input type="text" name="m513r47" id="m513r47" style="width:82px; top:328px; left:940px;"/>
-<input type="text" name="m513r48" id="m513r48" style="width:74px; top:328px; left:1029px;"/>
-<input type="text" name="m513r49" id="m513r49" style="width:100px; top:328px; left:1111px;"/>
-<input type="text" name="m513r51" id="m513r51" style="width:89px; top:351px; left:375px;"/>
-<input type="text" name="m513r52" id="m513r52" style="width:75px; top:351px; left:471px;"/>
-<input type="text" name="m513r53" id="m513r53" style="width:67px; top:351px; left:553px;"/>
-<input type="text" name="m513r54" id="m513r54" style="width:105px; top:351px; left:627px;"/>
-<input type="text" name="m513r55" id="m513r55" style="width:82px; top:351px; left:739px;"/>
-<input type="text" name="m513r56" id="m513r56" style="width:105px; top:351px; left:828px;"/>
-<input type="text" name="m513r57" id="m513r57" style="width:82px; top:351px; left:940px;"/>
-<input type="text" name="m513r58" id="m513r58" style="width:74px; top:351px; left:1029px;"/>
-<input type="text" name="m513r59" id="m513r59" style="width:100px; top:351px; left:1111px;"/>
-<input type="text" name="m513r61" id="m513r61" style="width:89px; top:375px; left:375px;"/>
-<input type="text" name="m513r62" id="m513r62" style="width:75px; top:375px; left:471px;"/>
-<input type="text" name="m513r63" id="m513r63" style="width:67px; top:375px; left:553px;"/>
-<input type="text" name="m513r64" id="m513r64" style="width:105px; top:375px; left:627px;"/>
-<input type="text" name="m513r65" id="m513r65" style="width:82px; top:375px; left:739px;"/>
-<input type="text" name="m513r66" id="m513r66" style="width:105px; top:375px; left:828px;"/>
-<input type="text" name="m513r67" id="m513r67" style="width:82px; top:375px; left:940px;"/>
-<input type="text" name="m513r68" id="m513r68" style="width:74px; top:375px; left:1029px;"/>
-<input type="text" name="m513r69" id="m513r69" style="width:100px; top:375px; left:1111px;"/>
-<input type="text" name="m513r71" id="m513r71" style="width:89px; top:399px; left:375px;"/>
-<input type="text" name="m513r72" id="m513r72" style="width:75px; top:399px; left:471px;"/>
-<input type="text" name="m513r73" id="m513r73" style="width:67px; top:399px; left:553px;"/>
-<input type="text" name="m513r74" id="m513r74" style="width:105px; top:399px; left:627px;"/>
-<input type="text" name="m513r75" id="m513r75" style="width:82px; top:399px; left:739px;"/>
-<input type="text" name="m513r76" id="m513r76" style="width:105px; top:399px; left:828px;"/>
-<input type="text" name="m513r77" id="m513r77" style="width:82px; top:399px; left:940px;"/>
-<input type="text" name="m513r78" id="m513r78" style="width:74px; top:399px; left:1029px;"/>
-<input type="text" name="m513r79" id="m513r79" style="width:100px; top:399px; left:1111px;"/>
-<input type="text" name="m513r81" id="m513r81" style="width:89px; top:423px; left:375px;"/>
-<input type="text" name="m513r82" id="m513r82" style="width:75px; top:423px; left:471px;"/>
-<input type="text" name="m513r83" id="m513r83" style="width:67px; top:423px; left:553px;"/>
-<input type="text" name="m513r84" id="m513r84" style="width:105px; top:423px; left:627px;"/>
-<input type="text" name="m513r85" id="m513r85" style="width:82px; top:423px; left:739px;"/>
-<input type="text" name="m513r86" id="m513r86" style="width:105px; top:423px; left:828px;"/>
-<input type="text" name="m513r87" id="m513r87" style="width:82px; top:423px; left:940px;"/>
-<input type="text" name="m513r88" id="m513r88" style="width:74px; top:423px; left:1029px;"/>
-<input type="text" name="m513r89" id="m513r89" style="width:100px; top:423px; left:1111px;"/>
-<input type="text" name="m513r91" id="m513r91" style="width:89px; top:446px; left:375px;"/>
-<input type="text" name="m513r92" id="m513r92" style="width:75px; top:446px; left:471px;"/>
-<input type="text" name="m513r93" id="m513r93" style="width:67px; top:446px; left:553px;"/>
-<input type="text" name="m513r94" id="m513r94" style="width:105px; top:446px; left:627px;"/>
-<input type="text" name="m513r95" id="m513r95" style="width:82px; top:446px; left:739px;"/>
-<input type="text" name="m513r96" id="m513r96" style="width:105px; top:446px; left:828px;"/>
-<input type="text" name="m513r97" id="m513r97" style="width:82px; top:446px; left:940px;"/>
-<input type="text" name="m513r98" id="m513r98" style="width:74px; top:446px; left:1029px;"/>
-<input type="text" name="m513r99" id="m513r99" style="width:100px; top:446px; left:1111px;"/>
-<input type="text" name="m513r101" id="m513r101" style="width:89px; top:470px; left:375px;"/>
-<input type="text" name="m513r102" id="m513r102" style="width:75px; top:470px; left:471px;"/>
-<input type="text" name="m513r103" id="m513r103" style="width:67px; top:470px; left:553px;"/>
-<input type="text" name="m513r104" id="m513r104" style="width:105px; top:470px; left:627px;"/>
-<input type="text" name="m513r105" id="m513r105" style="width:82px; top:470px; left:739px;"/>
-<input type="text" name="m513r106" id="m513r106" style="width:105px; top:470px; left:828px;"/>
-<input type="text" name="m513r107" id="m513r107" style="width:82px; top:470px; left:940px;"/>
-<input type="text" name="m513r108" id="m513r108" style="width:74px; top:470px; left:1029px;"/>
-<input type="text" name="m513r109" id="m513r109" style="width:100px; top:470px; left:1111px;"/>
-<input type="text" name="m513r111" id="m513r111" style="width:89px; top:493px; left:375px;"/>
-<input type="text" name="m513r112" id="m513r112" style="width:75px; top:493px; left:471px;"/>
-<input type="text" name="m513r113" id="m513r113" style="width:67px; top:493px; left:553px;"/>
-<input type="text" name="m513r114" id="m513r114" style="width:105px; top:493px; left:627px;"/>
-<input type="text" name="m513r115" id="m513r115" style="width:82px; top:493px; left:739px;"/>
-<input type="text" name="m513r116" id="m513r116" style="width:105px; top:493px; left:828px;"/>
-<input type="text" name="m513r117" id="m513r117" style="width:82px; top:493px; left:940px;"/>
-<input type="text" name="m513r118" id="m513r118" style="width:74px; top:493px; left:1029px;"/>
-<input type="text" name="m513r119" id="m513r119" style="width:100px; top:493px; left:1111px;"/>
-<input type="text" name="m513r121" id="m513r121" style="width:89px; top:516px; left:375px;"/>
-<input type="text" name="m513r122" id="m513r122" style="width:75px; top:516px; left:471px;"/>
-<input type="text" name="m513r123" id="m513r123" style="width:67px; top:516px; left:553px;"/>
-<input type="text" name="m513r124" id="m513r124" style="width:105px; top:516px; left:627px;"/>
-<input type="text" name="m513r125" id="m513r125" style="width:82px; top:516px; left:739px;"/>
-<input type="text" name="m513r126" id="m513r126" style="width:105px; top:516px; left:828px;"/>
-<input type="text" name="m513r127" id="m513r127" style="width:82px; top:516px; left:940px;"/>
-<input type="text" name="m513r128" id="m513r128" style="width:74px; top:516px; left:1029px;"/>
-<input type="text" name="m513r129" id="m513r129" style="width:100px; top:516px; left:1111px;"/>
-<input type="text" name="m513r131" id="m513r131" style="width:89px; top:548px; left:375px;"/>
-<input type="text" name="m513r132" id="m513r132" style="width:75px; top:548px; left:471px;"/>
-<input type="text" name="m513r133" id="m513r133" style="width:67px; top:548px; left:553px;"/>
-<input type="text" name="m513r134" id="m513r134" style="width:105px; top:548px; left:627px;"/>
-<input type="text" name="m513r135" id="m513r135" style="width:82px; top:548px; left:739px;"/>
-<input type="text" name="m513r136" id="m513r136" style="width:105px; top:548px; left:828px;"/>
-<input type="text" name="m513r137" id="m513r137" style="width:82px; top:548px; left:940px;"/>
-<input type="text" name="m513r138" id="m513r138" style="width:74px; top:548px; left:1029px;"/>
-<input type="text" name="m513r139" id="m513r139" style="width:100px; top:548px; left:1111px;"/>
-<input type="text" name="m513r141" id="m513r141" style="width:89px; top:579px; left:375px;"/>
-<input type="text" name="m513r142" id="m513r142" style="width:75px; top:579px; left:471px;"/>
-<input type="text" name="m513r143" id="m513r143" style="width:67px; top:579px; left:553px;"/>
-<input type="text" name="m513r144" id="m513r144" style="width:105px; top:579px; left:627px;"/>
-<input type="text" name="m513r145" id="m513r145" style="width:82px; top:579px; left:739px;"/>
-<input type="text" name="m513r146" id="m513r146" style="width:105px; top:579px; left:828px;"/>
-<input type="text" name="m513r147" id="m513r147" style="width:82px; top:579px; left:940px;"/>
-<input type="text" name="m513r148" id="m513r148" style="width:74px; top:579px; left:1029px;"/>
-<input type="text" name="m513r149" id="m513r149" style="width:100px; top:579px; left:1111px;"/>
-<input type="text" name="m513r151" id="m513r151" style="width:89px; top:603px; left:375px;"/>
-<input type="text" name="m513r152" id="m513r152" style="width:75px; top:603px; left:471px;"/>
-<input type="text" name="m513r153" id="m513r153" style="width:67px; top:603px; left:553px;"/>
-<input type="text" name="m513r154" id="m513r154" style="width:105px; top:603px; left:627px;"/>
-<input type="text" name="m513r155" id="m513r155" style="width:82px; top:603px; left:739px;"/>
-<input type="text" name="m513r156" id="m513r156" style="width:105px; top:603px; left:828px;"/>
-<input type="text" name="m513r157" id="m513r157" style="width:82px; top:603px; left:940px;"/>
-<input type="text" name="m513r158" id="m513r158" style="width:74px; top:603px; left:1029px;"/>
-<input type="text" name="m513r159" id="m513r159" style="width:100px; top:603px; left:1111px;"/>
-<input type="text" name="m513r161" id="m513r161" style="width:89px; top:626px; left:375px;"/>
-<input type="text" name="m513r162" id="m513r162" style="width:75px; top:626px; left:471px;"/>
-<input type="text" name="m513r163" id="m513r163" style="width:67px; top:626px; left:553px;"/>
-<input type="text" name="m513r164" id="m513r164" style="width:105px; top:626px; left:627px;"/>
-<input type="text" name="m513r165" id="m513r165" style="width:82px; top:626px; left:739px;"/>
-<input type="text" name="m513r166" id="m513r166" style="width:105px; top:626px; left:828px;"/>
-<input type="text" name="m513r167" id="m513r167" style="width:82px; top:626px; left:940px;"/>
-<input type="text" name="m513r168" id="m513r168" style="width:74px; top:626px; left:1029px;"/>
-<input type="text" name="m513r169" id="m513r169" style="width:100px; top:626px; left:1111px;"/>
-<input type="text" name="m513r171" id="m513r171" style="width:89px; top:650px; left:375px;"/>
-<input type="text" name="m513r173" id="m513r173" style="width:67px; top:650px; left:553px;"/>
-<input type="text" name="m513r174" id="m513r174" style="width:105px; top:650px; left:627px;"/>
-<input type="text" name="m513r175" id="m513r175" style="width:82px; top:650px; left:739px;"/>
-<input type="text" name="m513r176" id="m513r176" style="width:105px; top:650px; left:828px;"/>
-<input type="text" name="m513r177" id="m513r177" style="width:82px; top:650px; left:940px;"/>
-<input type="text" name="m513r181" id="m513r181" style="width:89px; top:673px; left:375px;"/>
-<input type="text" name="m513r183" id="m513r183" style="width:67px; top:673px; left:553px;"/>
-<input type="text" name="m513r184" id="m513r184" style="width:105px; top:673px; left:627px;"/>
-<input type="text" name="m513r185" id="m513r185" style="width:82px; top:673px; left:739px;"/>
-<input type="text" name="m513r186" id="m513r186" style="width:105px; top:673px; left:828px;"/>
-<input type="text" name="m513r187" id="m513r187" style="width:82px; top:673px; left:940px;"/>
-<input type="text" name="m513r191" id="m513r191" style="width:89px; top:697px; left:375px;"/>
-<input type="text" name="m513r193" id="m513r193" style="width:67px; top:697px; left:553px;"/>
-<input type="text" name="m513r194" id="m513r194" style="width:105px; top:697px; left:627px;"/>
-<input type="text" name="m513r195" id="m513r195" style="width:82px; top:697px; left:739px;"/>
-<input type="text" name="m513r196" id="m513r196" style="width:105px; top:697px; left:828px;"/>
-<input type="text" name="m513r197" id="m513r197" style="width:82px; top:697px; left:940px;"/>
-<input type="text" name="m513r201" id="m513r201" style="width:89px; top:721px; left:375px;"/>
-<input type="text" name="m513r203" id="m513r203" style="width:67px; top:721px; left:553px;"/>
-<input type="text" name="m513r204" id="m513r204" style="width:105px; top:721px; left:627px;"/>
-<input type="text" name="m513r205" id="m513r205" style="width:82px; top:721px; left:739px;"/>
-<input type="text" name="m513r206" id="m513r206" style="width:105px; top:721px; left:828px;"/>
-<input type="text" name="m513r207" id="m513r207" style="width:82px; top:721px; left:940px;"/>
-<input type="text" name="m513r211" id="m513r211" style="width:89px; top:744px; left:375px;"/>
-<input type="text" name="m513r213" id="m513r213" style="width:67px; top:744px; left:553px;"/>
-<input type="text" name="m513r214" id="m513r214" style="width:105px; top:744px; left:627px;"/>
-<input type="text" name="m513r215" id="m513r215" style="width:82px; top:744px; left:739px;"/>
-<input type="text" name="m513r216" id="m513r216" style="width:105px; top:744px; left:828px;"/>
-<input type="text" name="m513r217" id="m513r217" style="width:82px; top:744px; left:940px;"/>
-<input type="text" name="m513r221" id="m513r221" style="width:89px; top:768px; left:375px;"/>
-<input type="text" name="m513r222" id="m513r222" style="width:75px; top:768px; left:471px;"/>
-<input type="text" name="m513r223" id="m513r223" style="width:67px; top:768px; left:553px;"/>
-<input type="text" name="m513r224" id="m513r224" style="width:105px; top:768px; left:627px;"/>
-<input type="text" name="m513r225" id="m513r225" style="width:82px; top:768px; left:739px;"/>
-<input type="text" name="m513r226" id="m513r226" style="width:105px; top:768px; left:828px;"/>
-<input type="text" name="m513r227" id="m513r227" style="width:82px; top:768px; left:940px;"/>
-<input type="text" name="m513r228" id="m513r228" style="width:74px; top:768px; left:1029px;"/>
-<input type="text" name="m513r229" id="m513r229" style="width:100px; top:768px; left:1111px;"/>
-<span class="text-echo" style="top:795px; right:785px;"><?php echo $m513r991; ?></span>
-<span class="text-echo" style="top:795px; right:703px;"><?php echo $m513r992; ?></span>
-<span class="text-echo" style="top:795px; right:628px;"><?php echo $m513r993; ?></span>
-<span class="text-echo" style="top:795px; right:518px;"><?php echo $m513r994; ?></span>
-<span class="text-echo" style="top:795px; right:428px;"><?php echo $m513r995; ?></span>
-<span class="text-echo" style="top:795px; right:316px;"><?php echo $m513r996; ?></span>
-<span class="text-echo" style="top:795px; right:227px;"><?php echo $m513r997; ?></span>
-<span class="text-echo" style="top:795px; right:145px;"><?php echo $m513r998; ?></span>
-<span class="text-echo" style="top:795px; right:38px;"><?php echo $m513r999; ?></span>
+<!-- modul 100044 -->
+<input type="checkbox" name="m100044ano" value="1" onchange="klikm100044ano();" style="top:230px; left:839px;"/>
+<input type="checkbox" name="m100044nie" value="1" onchange="klikm100044nie();" style="top:251px; left:839px;"/>
+
+<!-- modul 571 -->
+<input type="text" name="m571r10" id="m571r10" style="width:90px; top:483px; left:51px;"/>
+<?php $cslr="1."; if ( $m571r10 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:487px; left:217px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r12" id="m571r12" style="width:90px; top:483px; left:266px;"/>
+<input type="text" name="m571r13" id="m571r13" style="width:70px; top:483px; left:368px;"/>
+<input type="text" name="m571r15" id="m571r15" style="width:56px; top:483px; left:515px;"/>
+<input type="text" name="m571r16" id="m571r16" style="width:90px; top:483px; left:583px;"/>
+<input type="text" name="m571r17" id="m571r17" style="width:101px; top:483px; left:685px;"/>
+<input type="text" name="m571r18" id="m571r18" style="width:92px; top:483px; left:798px;"/>
+<input type="text" name="m571r20" id="m571r20" style="width:90px; top:511px; left:51px;"/>
+<?php $cslr="2."; if ( $m571r20 == '' ) { $cslr=""; } ?>
+ <span class="text-echo" style="top:515px; left:217px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r22" id="m571r22" style="width:90px; top:511px; left:266px;"/>
+<input type="text" name="m571r23" id="m571r23" style="width:70px; top:511px; left:368px;"/>
+<input type="text" name="m571r25" id="m571r25" style="width:56px; top:511px; left:515px;"/>
+<input type="text" name="m571r26" id="m571r26" style="width:90px; top:511px; left:583px;"/>
+<input type="text" name="m571r27" id="m571r27" style="width:101px; top:511px; left:685px;"/>
+<input type="text" name="m571r28" id="m571r28" style="width:92px; top:511px; left:798px;"/>
+<input type="text" name="m571r30" id="m571r30" style="width:90px; top:538px; left:51px;"/>
+<?php $cslr="3."; if ( $m571r30 == '' ) { $cslr=""; } ?>
+ <span class="text-echo" style="top:543px; left:217px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r32" id="m571r32" style="width:90px; top:538px; left:266px;"/>
+<input type="text" name="m571r33" id="m571r33" style="width:70px; top:538px; left:368px;"/>
+<input type="text" name="m571r35" id="m571r35" style="width:56px; top:538px; left:515px;"/>
+<input type="text" name="m571r36" id="m571r36" style="width:90px; top:538px; left:583px;"/>
+<input type="text" name="m571r37" id="m571r37" style="width:101px; top:538px; left:685px;"/>
+<input type="text" name="m571r38" id="m571r38" style="width:92px; top:538px; left:798px;"/>
+<input type="text" name="m571r40" id="m571r40" style="width:90px; top:566px; left:51px;"/>
+<?php $cslr="4."; if ( $m571r40 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:571px; left:217px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r42" id="m571r42" style="width:90px; top:566px; left:266px;"/>
+<input type="text" name="m571r43" id="m571r43" style="width:70px; top:566px; left:368px;"/>
+<input type="text" name="m571r45" id="m571r45" style="width:56px; top:566px; left:515px;"/>
+<input type="text" name="m571r46" id="m571r46" style="width:90px; top:566px; left:583px;"/>
+<input type="text" name="m571r47" id="m571r47" style="width:101px; top:566px; left:685px;"/>
+<input type="text" name="m571r48" id="m571r48" style="width:92px; top:566px; left:798px;"/>
+<input type="text" name="m571r50" id="m571r50" style="width:90px; top:593px; left:51px;"/>
+<?php $cslr="5."; if ( $m571r50 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:598px; left:217px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r52" id="m571r52" style="width:90px; top:593px; left:266px;"/>
+<input type="text" name="m571r53" id="m571r53" style="width:70px; top:593px; left:368px;"/>
+<input type="text" name="m571r55" id="m571r55" style="width:56px; top:593px; left:515px;"/>
+<input type="text" name="m571r56" id="m571r56" style="width:90px; top:593px; left:583px;"/>
+<input type="text" name="m571r57" id="m571r57" style="width:101px; top:593px; left:685px;"/>
+<input type="text" name="m571r58" id="m571r58" style="width:92px; top:593px; left:798px;"/>
+<input type="text" name="m571r60" id="m571r60" style="width:90px; top:621px; left:51px;"/>
+<?php $cslr="6."; if ( $m571r60 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:625px; left:217px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r62" id="m571r62" style="width:90px; top:621px; left:266px;"/>
+<input type="text" name="m571r63" id="m571r63" style="width:70px; top:621px; left:368px;"/>
+<input type="text" name="m571r65" id="m571r65" style="width:56px; top:621px; left:515px;"/>
+<input type="text" name="m571r66" id="m571r66" style="width:90px; top:621px; left:583px;"/>
+<input type="text" name="m571r67" id="m571r67" style="width:101px; top:621px; left:685px;"/>
+<input type="text" name="m571r68" id="m571r68" style="width:92px; top:621px; left:798px;"/>
+<input type="text" name="m571r70" id="m571r70" style="width:90px; top:648px; left:51px;"/>
+<?php $cslr="7."; if ( $m571r70 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:652px; left:217px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r72" id="m571r72" style="width:90px; top:648px; left:266px;"/>
+<input type="text" name="m571r73" id="m571r73" style="width:70px; top:648px; left:368px;"/>
+<input type="text" name="m571r75" id="m571r75" style="width:56px; top:648px; left:515px;"/>
+<input type="text" name="m571r76" id="m571r76" style="width:90px; top:648px; left:583px;"/>
+<input type="text" name="m571r77" id="m571r77" style="width:101px; top:648px; left:685px;"/>
+<input type="text" name="m571r78" id="m571r78" style="width:92px; top:648px; left:798px;"/>
+<input type="text" name="m571r80" id="m571r80" style="width:90px; top:675px; left:51px;"/>
+<?php $cslr="8."; if ( $m571r80 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:680px; left:217px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r82" id="m571r82" style="width:90px; top:675px; left:266px;"/>
+<input type="text" name="m571r83" id="m571r83" style="width:70px; top:675px; left:368px;"/>
+<input type="text" name="m571r85" id="m571r85" style="width:56px; top:675px; left:515px;"/>
+<input type="text" name="m571r86" id="m571r86" style="width:90px; top:675px; left:583px;"/>
+<input type="text" name="m571r87" id="m571r87" style="width:101px; top:675px; left:685px;"/>
+<input type="text" name="m571r88" id="m571r88" style="width:92px; top:675px; left:798px;"/>
+<input type="text" name="m571r90" id="m571r90" style="width:90px; top:703px; left:51px;"/>
+<?php $cslr="9."; if ( $m571r90 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:707px; left:217px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r92" id="m571r92" style="width:90px; top:703px; left:266px;"/>
+<input type="text" name="m571r93" id="m571r93" style="width:70px; top:703px; left:368px;"/>
+<input type="text" name="m571r95" id="m571r95" style="width:56px; top:703px; left:515px;"/>
+<input type="text" name="m571r96" id="m571r96" style="width:90px; top:703px; left:583px;"/>
+<input type="text" name="m571r97" id="m571r97" style="width:101px; top:703px; left:685px;"/>
+<input type="text" name="m571r98" id="m571r98" style="width:92px; top:703px; left:798px;"/>
+
+<!-- modul 581 -->
+<input type="text" name="m581r1" id="m581r1" style="width:100px; top:978px; left:680px;"/>
+<input type="text" name="m581r2" id="m581r2" style="width:100px; top:1005px; left:680px;"/>
+<input type="text" name="m581r3" id="m581r3" style="width:100px; top:1033px; left:680px;"/>
+<input type="text" name="m581r4" id="m581r4" style="width:100px; top:1060px; left:680px;"/>
+<input type="text" name="m581r5" id="m581r5" style="width:100px; top:1087px; left:680px;"/>
+<input type="text" name="m581r6" id="m581r6" style="width:100px; top:1115px; left:680px;"/>
+<input type="text" name="m581r7" id="m581r7" style="width:100px; top:1142px; left:680px;"/>
+<input type="text" name="m581r8" id="m581r8" style="width:100px; top:1170px; left:680px;"/>
+<input type="text" name="m581r12" id="m581r12" style="width:100px; top:1197px; left:680px;"/>
+<span class="text-echo" style="top:1229px; right:165px;"><?php echo $m581r99; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 8 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str8.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 8.strana 245kB" style="width:1250px; height:1000px;">
+<img src="<?php echo $jpg_cesta; ?>_str8.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 8.strana 245kB">
+<span class="text-echo" style="top:100px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
-<!-- modul 516 -->
-<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
-     onclick="NacitajZobratovky(516);" class="btn-row-tool" style="top:75px; left:352px;">
-<input type="text" name="m516r11" id="m516r11" style="width:109px; top:219px; left:386px;"/>
-<input type="text" name="m516r12" id="m516r12" style="width:109px; top:219px; left:505px;"/>
-<input type="text" name="m516r13" id="m516r13" style="width:109px; top:219px; left:624px;"/>
-<input type="text" name="m516r14" id="m516r14" style="width:109px; top:219px; left:743px;"/>
-<input type="text" name="m516r15" id="m516r15" style="width:109px; top:219px; left:862px;"/>
-<input type="text" name="m516r16" id="m516r16" style="width:109px; top:219px; left:981px;"/>
-<input type="text" name="m516r17" id="m516r17" style="width:109px; top:219px; left:1100px;"/>
-<input type="text" name="m516r21" id="m516r21" style="width:109px; top:243px; left:386px;"/>
-<input type="text" name="m516r22" id="m516r22" style="width:109px; top:243px; left:505px;"/>
-<input type="text" name="m516r23" id="m516r23" style="width:109px; top:243px; left:624px;"/>
-<input type="text" name="m516r24" id="m516r24" style="width:109px; top:243px; left:743px;"/>
-<input type="text" name="m516r25" id="m516r25" style="width:109px; top:243px; left:862px;"/>
-<input type="text" name="m516r26" id="m516r26" style="width:109px; top:243px; left:981px;"/>
-<input type="text" name="m516r27" id="m516r27" style="width:109px; top:243px; left:1100px;"/>
-<input type="text" name="m516r31" id="m516r31" style="width:109px; top:266px; left:386px;"/>
-<input type="text" name="m516r32" id="m516r32" style="width:109px; top:266px; left:505px;"/>
-<input type="text" name="m516r33" id="m516r33" style="width:109px; top:266px; left:624px;"/>
-<input type="text" name="m516r34" id="m516r34" style="width:109px; top:266px; left:743px;"/>
-<input type="text" name="m516r35" id="m516r35" style="width:109px; top:266px; left:862px;"/>
-<input type="text" name="m516r36" id="m516r36" style="width:109px; top:266px; left:981px;"/>
-<input type="text" name="m516r37" id="m516r37" style="width:109px; top:266px; left:1100px;"/>
-<input type="text" name="m516r41" id="m516r41" style="width:109px; top:290px; left:386px;"/>
-<input type="text" name="m516r42" id="m516r42" style="width:109px; top:290px; left:505px;"/>
-<input type="text" name="m516r43" id="m516r43" style="width:109px; top:290px; left:624px;"/>
-<input type="text" name="m516r44" id="m516r44" style="width:109px; top:290px; left:743px;"/>
-<input type="text" name="m516r45" id="m516r45" style="width:109px; top:290px; left:862px;"/>
-<input type="text" name="m516r46" id="m516r46" style="width:109px; top:290px; left:981px;"/>
-<input type="text" name="m516r47" id="m516r47" style="width:109px; top:290px; left:1100px;"/>
-<input type="text" name="m516r51" id="m516r51" style="width:109px; top:313px; left:386px;"/>
-<input type="text" name="m516r53" id="m516r53" style="width:109px; top:313px; left:624px;"/>
-<input type="text" name="m516r54" id="m516r54" style="width:109px; top:313px; left:743px;"/>
-<input type="text" name="m516r55" id="m516r55" style="width:109px; top:313px; left:862px;"/>
-<input type="text" name="m516r57" id="m516r57" style="width:109px; top:313px; left:1100px;"/>
-<input type="text" name="m516r61" id="m516r61" style="width:109px; top:337px; left:386px;"/>
-<input type="text" name="m516r62" id="m516r62" style="width:109px; top:337px; left:505px;"/>
-<input type="text" name="m516r63" id="m516r63" style="width:109px; top:337px; left:624px;"/>
-<input type="text" name="m516r64" id="m516r64" style="width:109px; top:337px; left:743px;"/>
-<input type="text" name="m516r65" id="m516r65" style="width:109px; top:337px; left:862px;"/>
-<input type="text" name="m516r66" id="m516r66" style="width:109px; top:337px; left:981px;"/>
-<input type="text" name="m516r67" id="m516r67" style="width:109px; top:337px; left:1100px;"/>
-<input type="text" name="m516r71" id="m516r71" style="width:109px; top:360px; left:386px;"/>
-<input type="text" name="m516r72" id="m516r72" style="width:109px; top:360px; left:505px;"/>
-<input type="text" name="m516r73" id="m516r73" style="width:109px; top:360px; left:624px;"/>
-<input type="text" name="m516r74" id="m516r74" style="width:109px; top:360px; left:743px;"/>
-<input type="text" name="m516r75" id="m516r75" style="width:109px; top:360px; left:862px;"/>
-<input type="text" name="m516r76" id="m516r76" style="width:109px; top:360px; left:981px;"/>
-<input type="text" name="m516r77" id="m516r77" style="width:109px; top:360px; left:1100px;"/>
-<input type="text" name="m516r81" id="m516r81" style="width:109px; top:384px; left:386px;"/>
-<input type="text" name="m516r82" id="m516r82" style="width:109px; top:384px; left:505px;"/>
-<input type="text" name="m516r83" id="m516r83" style="width:109px; top:384px; left:624px;"/>
-<input type="text" name="m516r84" id="m516r84" style="width:109px; top:384px; left:743px;"/>
-<input type="text" name="m516r85" id="m516r85" style="width:109px; top:384px; left:862px;"/>
-<input type="text" name="m516r86" id="m516r86" style="width:109px; top:384px; left:981px;"/>
-<input type="text" name="m516r87" id="m516r87" style="width:109px; top:384px; left:1100px;"/>
-<input type="text" name="m516r91" id="m516r91" style="width:109px; top:408px; left:386px;"/>
-<input type="text" name="m516r92" id="m516r92" style="width:109px; top:408px; left:505px;"/>
-<input type="text" name="m516r93" id="m516r93" style="width:109px; top:408px; left:624px;"/>
-<input type="text" name="m516r94" id="m516r94" style="width:109px; top:408px; left:743px;"/>
-<input type="text" name="m516r95" id="m516r95" style="width:109px; top:408px; left:862px;"/>
-<input type="text" name="m516r96" id="m516r96" style="width:109px; top:408px; left:981px;"/>
-<input type="text" name="m516r97" id="m516r97" style="width:109px; top:408px; left:1100px;"/>
-<input type="text" name="m516r101" id="m516r101" style="width:109px; top:431px; left:386px;"/>
-<input type="text" name="m516r102" id="m516r102" style="width:109px; top:431px; left:505px;"/>
-<input type="text" name="m516r103" id="m516r103" style="width:109px; top:431px; left:624px;"/>
-<input type="text" name="m516r104" id="m516r104" style="width:109px; top:431px; left:743px;"/>
-<input type="text" name="m516r105" id="m516r105" style="width:109px; top:431px; left:862px;"/>
-<input type="text" name="m516r106" id="m516r106" style="width:109px; top:431px; left:981px;"/>
-<input type="text" name="m516r107" id="m516r107" style="width:109px; top:431px; left:1100px;"/>
-<input type="text" name="m516r111" id="m516r111" style="width:109px; top:455px; left:386px;"/>
-<input type="text" name="m516r112" id="m516r112" style="width:109px; top:455px; left:505px;"/>
-<input type="text" name="m516r113" id="m516r113" style="width:109px; top:455px; left:624px;"/>
-<input type="text" name="m516r114" id="m516r114" style="width:109px; top:455px; left:743px;"/>
-<input type="text" name="m516r115" id="m516r115" style="width:109px; top:455px; left:862px;"/>
-<input type="text" name="m516r116" id="m516r116" style="width:109px; top:455px; left:981px;"/>
-<input type="text" name="m516r117" id="m516r117" style="width:109px; top:455px; left:1100px;"/>
-<input type="text" name="m516r121" id="m516r121" style="width:109px; top:478px; left:386px;"/>
-<input type="text" name="m516r122" id="m516r122" style="width:109px; top:478px; left:505px;"/>
-<input type="text" name="m516r123" id="m516r123" style="width:109px; top:478px; left:624px;"/>
-<input type="text" name="m516r124" id="m516r124" style="width:109px; top:478px; left:743px;"/>
-<input type="text" name="m516r125" id="m516r125" style="width:109px; top:478px; left:862px;"/>
-<input type="text" name="m516r126" id="m516r126" style="width:109px; top:478px; left:981px;"/>
-<input type="text" name="m516r127" id="m516r127" style="width:109px; top:478px; left:1100px;"/>
-<input type="text" name="m516r131" id="m516r131" style="width:109px; top:509px; left:386px;"/>
-<input type="text" name="m516r132" id="m516r132" style="width:109px; top:509px; left:505px;"/>
-<input type="text" name="m516r133" id="m516r133" style="width:109px; top:509px; left:624px;"/>
-<input type="text" name="m516r134" id="m516r134" style="width:109px; top:509px; left:743px;"/>
-<input type="text" name="m516r135" id="m516r135" style="width:109px; top:509px; left:862px;"/>
-<input type="text" name="m516r136" id="m516r136" style="width:109px; top:509px; left:981px;"/>
-<input type="text" name="m516r137" id="m516r137" style="width:109px; top:509px; left:1100px;"/>
-<input type="text" name="m516r141" id="m516r141" style="width:109px; top:539px; left:386px;"/>
-<input type="text" name="m516r142" id="m516r142" style="width:109px; top:539px; left:505px;"/>
-<input type="text" name="m516r143" id="m516r143" style="width:109px; top:539px; left:624px;"/>
-<input type="text" name="m516r144" id="m516r144" style="width:109px; top:539px; left:743px;"/>
-<input type="text" name="m516r145" id="m516r145" style="width:109px; top:539px; left:862px;"/>
-<input type="text" name="m516r146" id="m516r146" style="width:109px; top:539px; left:981px;"/>
-<input type="text" name="m516r147" id="m516r147" style="width:109px; top:539px; left:1100px;"/>
-<input type="text" name="m516r151" id="m516r151" style="width:109px; top:562px; left:386px;"/>
-<input type="text" name="m516r152" id="m516r152" style="width:109px; top:562px; left:505px;"/>
-<input type="text" name="m516r153" id="m516r153" style="width:109px; top:562px; left:624px;"/>
-<input type="text" name="m516r154" id="m516r154" style="width:109px; top:562px; left:743px;"/>
-<input type="text" name="m516r155" id="m516r155" style="width:109px; top:562px; left:862px;"/>
-<input type="text" name="m516r156" id="m516r156" style="width:109px; top:562px; left:981px;"/>
-<input type="text" name="m516r157" id="m516r157" style="width:109px; top:562px; left:1100px;"/>
-<input type="text" name="m516r161" id="m516r161" style="width:109px; top:586px; left:386px;"/>
-<input type="text" name="m516r162" id="m516r162" style="width:109px; top:586px; left:505px;"/>
-<input type="text" name="m516r163" id="m516r163" style="width:109px; top:586px; left:624px;"/>
-<input type="text" name="m516r164" id="m516r164" style="width:109px; top:586px; left:743px;"/>
-<input type="text" name="m516r165" id="m516r165" style="width:109px; top:586px; left:862px;"/>
-<input type="text" name="m516r166" id="m516r166" style="width:109px; top:586px; left:981px;"/>
-<input type="text" name="m516r167" id="m516r167" style="width:109px; top:586px; left:1100px;"/>
-<input type="text" name="m516r171" id="m516r171" style="width:109px; top:609px; left:386px;"/>
-<input type="text" name="m516r172" id="m516r172" style="width:109px; top:609px; left:505px;"/>
-<input type="text" name="m516r174" id="m516r174" style="width:109px; top:609px; left:743px;"/>
-<input type="text" name="m516r175" id="m516r175" style="width:109px; top:609px; left:862px;"/>
-<input type="text" name="m516r177" id="m516r177" style="width:109px; top:609px; left:1100px;"/>
-<input type="text" name="m516r181" id="m516r181" style="width:109px; top:633px; left:386px;"/>
-<input type="text" name="m516r182" id="m516r182" style="width:109px; top:633px; left:505px;"/>
-<input type="text" name="m516r184" id="m516r184" style="width:109px; top:633px; left:743px;"/>
-<input type="text" name="m516r185" id="m516r185" style="width:109px; top:633px; left:862px;"/>
-<input type="text" name="m516r187" id="m516r187" style="width:109px; top:633px; left:1100px;"/>
-<input type="text" name="m516r191" id="m516r191" style="width:109px; top:656px; left:386px;"/>
-<input type="text" name="m516r192" id="m516r192" style="width:109px; top:656px; left:505px;"/>
-<input type="text" name="m516r194" id="m516r194" style="width:109px; top:656px; left:743px;"/>
-<input type="text" name="m516r195" id="m516r195" style="width:109px; top:656px; left:862px;"/>
-<input type="text" name="m516r197" id="m516r197" style="width:109px; top:656px; left:1100px;"/>
-<input type="text" name="m516r201" id="m516r201" style="width:109px; top:680px; left:386px;"/>
-<input type="text" name="m516r202" id="m516r202" style="width:109px; top:680px; left:505px;"/>
-<input type="text" name="m516r204" id="m516r204" style="width:109px; top:680px; left:743px;"/>
-<input type="text" name="m516r205" id="m516r205" style="width:109px; top:680px; left:862px;"/>
-<input type="text" name="m516r206" id="m516r206" style="width:109px; top:680px; left:981px;"/>
-<input type="text" name="m516r207" id="m516r207" style="width:109px; top:680px; left:1100px;"/>
-<input type="text" name="m516r211" id="m516r211" style="width:109px; top:703px; left:386px;"/>
-<input type="text" name="m516r212" id="m516r212" style="width:109px; top:703px; left:505px;"/>
-<input type="text" name="m516r214" id="m516r214" style="width:109px; top:703px; left:743px;"/>
-<input type="text" name="m516r215" id="m516r215" style="width:109px; top:703px; left:862px;"/>
-<input type="text" name="m516r216" id="m516r216" style="width:109px; top:703px; left:981px;"/>
-<input type="text" name="m516r217" id="m516r217" style="width:109px; top:703px; left:1100px;"/>
-<input type="text" name="m516r221" id="m516r221" style="width:109px; top:727px; left:386px;"/>
-<input type="text" name="m516r222" id="m516r222" style="width:109px; top:727px; left:505px;"/>
-<input type="text" name="m516r223" id="m516r223" style="width:109px; top:727px; left:624px;"/>
-<input type="text" name="m516r224" id="m516r224" style="width:109px; top:727px; left:743px;"/>
-<input type="text" name="m516r225" id="m516r225" style="width:109px; top:727px; left:862px;"/>
-<input type="text" name="m516r226" id="m516r226" style="width:109px; top:727px; left:981px;"/>
-<input type="text" name="m516r227" id="m516r227" style="width:109px; top:727px; left:1100px;"/>
-<span class="text-echo" style="top:754px; right:753px;"><?php echo $m516r991; ?></span>
-<span class="text-echo" style="top:754px; right:634px;"><?php echo $m516r992; ?></span>
-<span class="text-echo" style="top:754px; right:514px;"><?php echo $m516r993; ?></span>
-<span class="text-echo" style="top:754px; right:395px;"><?php echo $m516r994; ?></span>
-<span class="text-echo" style="top:754px; right:276px;"><?php echo $m516r995; ?></span>
-<span class="text-echo" style="top:754px; right:157px;"><?php echo $m516r996; ?></span>
-<span class="text-echo" style="top:754px; right:39px;"><?php echo $m516r997; ?></span>
+<!-- modul 100301 -->
+<input type="checkbox" name="m100301r1" value="1" onchange="klikm100301ano();" style="top:199px; left:839px;"/>
+<input type="checkbox" name="m100301r2" value="1" onchange="klikm100301nie();" style="top:220px; left:839px;"/>
+
+<!-- modul 100302 -->
+<input type="text" name="m100302" id="m100302" style="width:253px; top:329px; left:643px;"/>
+
+<!-- modul 100303 -->
+<input type="checkbox" name="m100303r1" value="1" onchange="klikm100303ano();" style="top:424px; left:839px;"/>
+<input type="checkbox" name="m100303r2" value="1" onchange="klikm100303nie();" style="top:445px; left:839px;"/>
+
+<!-- modul 100304 -->
+<input type="text" name="m100304" id="m100304" style="width:253px; top:553px; left:643px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 9 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str9.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 9.strana 237kB">
+<img src="<?php echo $jpg_cesta; ?>_str9.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 9.strana 237kB" style="width:1250px; height:1000px;">
+<span class="text-echo" style="top:91px; left:944px; font-size:12px; letter-spacing:15px;"><?php echo $fir_ficox; ?></span>
 
-<!-- modul 100305 -->
-<input type="text" name="m100305r1" id="m100305r1" style="width:109px; top:220px; left:503px;"/>
-<input type="text" name="m100305r2" id="m100305r2" style="width:109px; top:220px; left:639px;"/>
-<input type="text" name="m100305r3" id="m100305r3" style="width:109px; top:220px; left:775px;"/>
-
-<!-- modul 586 -->
-<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje zo Súvahy POD"
-     onclick="NacitajZosuvahy(586);" style="top:285px; left:338px;" class="btn-row-tool">
-<input type="text" name="m586r11" id="m586r11" style="width:100px; top:391px; left:596px;"/>
-<input type="text" name="m586r12" id="m586r12" style="width:100px; top:391px; left:760px;"/>
-<input type="text" name="m586r21" id="m586r21" style="width:100px; top:419px; left:596px;"/>
-<input type="text" name="m586r22" id="m586r22" style="width:100px; top:419px; left:760px;"/>
-<input type="text" name="m586r31" id="m586r31" style="width:100px; top:447px; left:596px;"/>
-<input type="text" name="m586r32" id="m586r32" style="width:100px; top:447px; left:760px;"/>
-<input type="text" name="m586r41" id="m586r41" style="width:100px; top:476px; left:596px;"/>
-<input type="text" name="m586r42" id="m586r42" style="width:100px; top:476px; left:760px;"/>
-<input type="text" name="m586r51" id="m586r51" style="width:100px; top:504px; left:596px;"/>
-<input type="text" name="m586r52" id="m586r52" style="width:100px; top:504px; left:760px;"/>
-<input type="text" name="m586r61" id="m586r61" style="width:100px; top:533px; left:596px;"/>
-<input type="text" name="m586r62" id="m586r62" style="width:100px; top:533px; left:760px;"/>
-<input type="text" name="m586r71" id="m586r71" style="width:100px; top:561px; left:596px;"/>
-<input type="text" name="m586r72" id="m586r72" style="width:100px; top:561px; left:760px;"/>
-<input type="text" name="m586r81" id="m586r81" style="width:100px; top:590px; left:596px;"/>
-<input type="text" name="m586r82" id="m586r82" style="width:100px; top:590px; left:760px;"/>
-<input type="text" name="m586r91" id="m586r91" style="width:100px; top:618px; left:596px;"/>
-<input type="text" name="m586r92" id="m586r92" style="width:100px; top:618px; left:760px;"/>
-<input type="text" name="m586r101" id="m586r101" style="width:100px; top:647px; left:596px;"/>
-<input type="text" name="m586r102" id="m586r102" style="width:100px; top:647px; left:760px;"/>
-<input type="text" name="m586r111" id="m586r111" style="width:100px; top:675px; left:596px;"/>
-<input type="text" name="m586r112" id="m586r112" style="width:100px; top:675px; left:760px;"/>
-<input type="text" name="m586r121" id="m586r121" style="width:100px; top:704px; left:596px;"/>
-<input type="text" name="m586r122" id="m586r122" style="width:100px; top:704px; left:760px;"/>
-<input type="text" name="m586r131" id="m586r131" style="width:100px; top:732px; left:596px;"/>
-<input type="text" name="m586r132" id="m586r132" style="width:100px; top:732px; left:760px;"/>
-<input type="text" name="m586r141" id="m586r141" style="width:100px; top:761px; left:596px;"/>
-<input type="text" name="m586r142" id="m586r142" style="width:100px; top:761px; left:760px;"/>
-<input type="text" name="m586r151" id="m586r151" style="width:100px; top:789px; left:596px;"/>
-<input type="text" name="m586r152" id="m586r152" style="width:100px; top:789px; left:760px;"/>
-<input type="text" name="m586r161" id="m586r161" style="width:100px; top:818px; left:596px;"/>
-<input type="text" name="m586r162" id="m586r162" style="width:100px; top:818px; left:760px;"/>
-<input type="text" name="m586r171" id="m586r171" style="width:100px; top:846px; left:596px;"/>
-<input type="text" name="m586r172" id="m586r172" style="width:100px; top:846px; left:760px;"/>
-<input type="text" name="m586r181" id="m586r181" style="width:100px; top:875px; left:596px;"/>
-<input type="text" name="m586r182" id="m586r182" style="width:100px; top:875px; left:760px;"/>
-<input type="text" name="m586r191" id="m586r191" style="width:100px; top:903px; left:596px;"/>
-<input type="text" name="m586r192" id="m586r192" style="width:100px; top:903px; left:760px;"/>
-<input type="text" name="m586r201" id="m586r201" style="width:100px; top:932px; left:596px;"/>
-<input type="text" name="m586r202" id="m586r202" style="width:100px; top:932px; left:760px;"/>
-<input type="text" name="m586r211" id="m586r211" style="width:100px; top:960px; left:596px;"/>
-<input type="text" name="m586r212" id="m586r212" style="width:100px; top:960px; left:760px;"/>
-<input type="text" name="m586r221" id="m586r221" style="width:100px; top:989px; left:596px;"/>
-<input type="text" name="m586r222" id="m586r222" style="width:100px; top:989px; left:760px;"/>
-<input type="text" name="m586r231" id="m586r231" style="width:100px; top:1017px; left:596px;"/>
-<input type="text" name="m586r232" id="m586r232" style="width:100px; top:1017px; left:760px;"/>
-<input type="text" name="m586r241" id="m586r241" style="width:100px; top:1046px; left:596px;"/>
-<input type="text" name="m586r242" id="m586r242" style="width:100px; top:1046px; left:760px;"/>
-<span class="text-echo" style="top:1078px; right:250px;"><?php echo $m586r991; ?></span>
-<span class="text-echo" style="top:1078px; right:80px;"><?php echo $m586r992; ?></span>
+<!-- modul 513 -->
+<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky" onclick="NacitajZobratovky(513);" class="btn-row-tool" style="top:115px; left:237px;">
+<input type="text" name="m513r11" id="m513r11" style="width:104px; top:275px; left:391px;"/>
+<input type="text" name="m513r12" id="m513r12" style="width:77px; top:275px; left:505px;"/>
+<input type="text" name="m513r13" id="m513r13" style="width:73px; top:275px; left:591px;"/>
+<input type="text" name="m513r14" id="m513r14" style="width:90px; top:275px; left:673px;"/>
+<input type="text" name="m513r15" id="m513r15" style="width:80px; top:275px; left:772px;"/>
+<input type="text" name="m513r16" id="m513r16" style="width:99px; top:275px; left:862px;"/>
+<input type="text" name="m513r17" id="m513r17" style="width:73px; top:275px; left:970px;"/>
+<input type="text" name="m513r18" id="m513r18" style="width:68px; top:275px; left:1052px;"/>
+<input type="text" name="m513r19" id="m513r19" style="width:80px; top:275px; left:1129px;"/>
+<input type="text" name="m513r21" id="m513r21" style="width:104px; top:300px; left:391px;"/>
+<input type="text" name="m513r22" id="m513r22" style="width:77px; top:300px; left:505px;"/>
+<input type="text" name="m513r23" id="m513r23" style="width:73px; top:300px; left:591px;"/>
+<input type="text" name="m513r24" id="m513r24" style="width:90px; top:300px; left:673px;"/>
+<input type="text" name="m513r25" id="m513r25" style="width:80px; top:300px; left:772px;"/>
+<input type="text" name="m513r26" id="m513r26" style="width:99px; top:300px; left:862px;"/>
+<input type="text" name="m513r27" id="m513r27" style="width:73px; top:300px; left:970px;"/>
+<input type="text" name="m513r28" id="m513r28" style="width:68px; top:300px; left:1052px;"/>
+<input type="text" name="m513r29" id="m513r29" style="width:80px; top:300px; left:1129px;"/>
+<input type="text" name="m513r31" id="m513r31" style="width:104px; top:325px; left:391px;"/>
+<input type="text" name="m513r32" id="m513r32" style="width:77px; top:325px; left:505px;"/>
+<input type="text" name="m513r33" id="m513r33" style="width:73px; top:325px; left:591px;"/>
+<input type="text" name="m513r34" id="m513r34" style="width:90px; top:325px; left:673px;"/>
+<input type="text" name="m513r35" id="m513r35" style="width:80px; top:325px; left:772px;"/>
+<input type="text" name="m513r36" id="m513r36" style="width:99px; top:325px; left:862px;"/>
+<input type="text" name="m513r37" id="m513r37" style="width:73px; top:325px; left:970px;"/>
+<input type="text" name="m513r38" id="m513r38" style="width:68px; top:325px; left:1052px;"/>
+<input type="text" name="m513r39" id="m513r39" style="width:80px; top:325px; left:1129px;"/>
+<input type="text" name="m513r41" id="m513r41" style="width:104px; top:349px; left:391px;"/>
+<input type="text" name="m513r42" id="m513r42" style="width:77px; top:349px; left:505px;"/>
+<input type="text" name="m513r43" id="m513r43" style="width:73px; top:349px; left:591px;"/>
+<input type="text" name="m513r44" id="m513r44" style="width:90px; top:349px; left:673px;"/>
+<input type="text" name="m513r45" id="m513r45" style="width:80px; top:349px; left:772px;"/>
+<input type="text" name="m513r46" id="m513r46" style="width:99px; top:349px; left:862px;"/>
+<input type="text" name="m513r47" id="m513r47" style="width:73px; top:349px; left:970px;"/>
+<input type="text" name="m513r48" id="m513r48" style="width:68px; top:349px; left:1052px;"/>
+<input type="text" name="m513r49" id="m513r49" style="width:80px; top:349px; left:1129px;"/>
+<input type="text" name="m513r51" id="m513r51" style="width:104px; top:374px; left:391px;"/>
+<input type="text" name="m513r52" id="m513r52" style="width:77px; top:374px; left:505px;"/>
+<input type="text" name="m513r53" id="m513r53" style="width:73px; top:374px; left:591px;"/>
+<input type="text" name="m513r54" id="m513r54" style="width:90px; top:374px; left:673px;"/>
+<input type="text" name="m513r55" id="m513r55" style="width:80px; top:374px; left:772px;"/>
+<input type="text" name="m513r56" id="m513r56" style="width:99px; top:374px; left:862px;"/>
+<input type="text" name="m513r57" id="m513r57" style="width:73px; top:374px; left:970px;"/>
+<input type="text" name="m513r58" id="m513r58" style="width:68px; top:374px; left:1052px;"/>
+<input type="text" name="m513r59" id="m513r59" style="width:80px; top:374px; left:1129px;"/>
+<input type="text" name="m513r61" id="m513r61" style="width:104px; top:398px; left:391px;"/>
+<input type="text" name="m513r62" id="m513r62" style="width:77px; top:398px; left:505px;"/>
+<input type="text" name="m513r63" id="m513r63" style="width:73px; top:398px; left:591px;"/>
+<input type="text" name="m513r64" id="m513r64" style="width:90px; top:398px; left:673px;"/>
+<input type="text" name="m513r65" id="m513r65" style="width:80px; top:398px; left:772px;"/>
+<input type="text" name="m513r66" id="m513r66" style="width:99px; top:398px; left:862px;"/>
+<input type="text" name="m513r67" id="m513r67" style="width:73px; top:398px; left:970px;"/>
+<input type="text" name="m513r68" id="m513r68" style="width:68px; top:398px; left:1052px;"/>
+<input type="text" name="m513r69" id="m513r69" style="width:80px; top:398px; left:1129px;"/>
+<input type="text" name="m513r71" id="m513r71" style="width:104px; top:423px; left:391px;"/>
+<input type="text" name="m513r72" id="m513r72" style="width:77px; top:423px; left:505px;"/>
+<input type="text" name="m513r73" id="m513r73" style="width:73px; top:423px; left:591px;"/>
+<input type="text" name="m513r74" id="m513r74" style="width:90px; top:423px; left:673px;"/>
+<input type="text" name="m513r75" id="m513r75" style="width:80px; top:423px; left:772px;"/>
+<input type="text" name="m513r76" id="m513r76" style="width:99px; top:423px; left:862px;"/>
+<input type="text" name="m513r77" id="m513r77" style="width:73px; top:423px; left:970px;"/>
+<input type="text" name="m513r78" id="m513r78" style="width:68px; top:423px; left:1052px;"/>
+<input type="text" name="m513r79" id="m513r79" style="width:80px; top:423px; left:1129px;"/>
+<input type="text" name="m513r81" id="m513r81" style="width:104px; top:447px; left:391px;"/>
+<input type="text" name="m513r82" id="m513r82" style="width:77px; top:447px; left:505px;"/>
+<input type="text" name="m513r83" id="m513r83" style="width:73px; top:447px; left:591px;"/>
+<input type="text" name="m513r84" id="m513r84" style="width:90px; top:447px; left:673px;"/>
+<input type="text" name="m513r85" id="m513r85" style="width:80px; top:447px; left:772px;"/>
+<input type="text" name="m513r86" id="m513r86" style="width:99px; top:447px; left:862px;"/>
+<input type="text" name="m513r87" id="m513r87" style="width:73px; top:447px; left:970px;"/>
+<input type="text" name="m513r88" id="m513r88" style="width:68px; top:447px; left:1052px;"/>
+<input type="text" name="m513r89" id="m513r89" style="width:80px; top:447px; left:1129px;"/>
+<input type="text" name="m513r91" id="m513r91" style="width:104px; top:471px; left:391px;"/>
+<input type="text" name="m513r92" id="m513r92" style="width:77px; top:471px; left:505px;"/>
+<input type="text" name="m513r93" id="m513r93" style="width:73px; top:471px; left:591px;"/>
+<input type="text" name="m513r94" id="m513r94" style="width:90px; top:471px; left:673px;"/>
+<input type="text" name="m513r95" id="m513r95" style="width:80px; top:471px; left:772px;"/>
+<input type="text" name="m513r96" id="m513r96" style="width:99px; top:471px; left:862px;"/>
+<input type="text" name="m513r97" id="m513r97" style="width:73px; top:471px; left:970px;"/>
+<input type="text" name="m513r98" id="m513r98" style="width:68px; top:471px; left:1052px;"/>
+<input type="text" name="m513r99" id="m513r99" style="width:80px; top:471px; left:1129px;"/>
+<input type="text" name="m513r101" id="m513r101" style="width:104px; top:496px; left:391px;"/>
+<input type="text" name="m513r102" id="m513r102" style="width:77px; top:496px; left:505px;"/>
+<input type="text" name="m513r103" id="m513r103" style="width:73px; top:496px; left:591px;"/>
+<input type="text" name="m513r104" id="m513r104" style="width:90px; top:496px; left:673px;"/>
+<input type="text" name="m513r105" id="m513r105" style="width:80px; top:496px; left:772px;"/>
+<input type="text" name="m513r106" id="m513r106" style="width:99px; top:496px; left:862px;"/>
+<input type="text" name="m513r107" id="m513r107" style="width:73px; top:496px; left:970px;"/>
+<input type="text" name="m513r108" id="m513r108" style="width:68px; top:496px; left:1052px;"/>
+<input type="text" name="m513r109" id="m513r109" style="width:80px; top:496px; left:1129px;"/>
+<input type="text" name="m513r111" id="m513r111" style="width:104px; top:520px; left:391px;"/>
+<input type="text" name="m513r112" id="m513r112" style="width:77px; top:520px; left:505px;"/>
+<input type="text" name="m513r113" id="m513r113" style="width:73px; top:520px; left:591px;"/>
+<input type="text" name="m513r114" id="m513r114" style="width:90px; top:520px; left:673px;"/>
+<input type="text" name="m513r115" id="m513r115" style="width:80px; top:520px; left:772px;"/>
+<input type="text" name="m513r116" id="m513r116" style="width:99px; top:520px; left:862px;"/>
+<input type="text" name="m513r117" id="m513r117" style="width:73px; top:520px; left:970px;"/>
+<input type="text" name="m513r118" id="m513r118" style="width:68px; top:520px; left:1052px;"/>
+<input type="text" name="m513r119" id="m513r119" style="width:80px; top:520px; left:1129px;"/>
+<input type="text" name="m513r121" id="m513r121" style="width:104px; top:545px; left:391px;"/>
+<input type="text" name="m513r122" id="m513r122" style="width:77px; top:545px; left:505px;"/>
+<input type="text" name="m513r123" id="m513r123" style="width:73px; top:545px; left:591px;"/>
+<input type="text" name="m513r124" id="m513r124" style="width:90px; top:545px; left:673px;"/>
+<input type="text" name="m513r125" id="m513r125" style="width:80px; top:545px; left:772px;"/>
+<input type="text" name="m513r126" id="m513r126" style="width:99px; top:545px; left:862px;"/>
+<input type="text" name="m513r127" id="m513r127" style="width:73px; top:545px; left:970px;"/>
+<input type="text" name="m513r128" id="m513r128" style="width:68px; top:545px; left:1052px;"/>
+<input type="text" name="m513r129" id="m513r129" style="width:80px; top:545px; left:1129px;"/>
+<input type="text" name="m513r131" id="m513r131" style="width:104px; top:571px; left:391px;"/>
+<input type="text" name="m513r132" id="m513r132" style="width:77px; top:571px; left:505px;"/>
+<input type="text" name="m513r133" id="m513r133" style="width:73px; top:571px; left:591px;"/>
+<input type="text" name="m513r134" id="m513r134" style="width:90px; top:571px; left:673px;"/>
+<input type="text" name="m513r135" id="m513r135" style="width:80px; top:571px; left:772px;"/>
+<input type="text" name="m513r136" id="m513r136" style="width:99px; top:571px; left:862px;"/>
+<input type="text" name="m513r137" id="m513r137" style="width:73px; top:571px; left:970px;"/>
+<input type="text" name="m513r138" id="m513r138" style="width:68px; top:571px; left:1052px;"/>
+<input type="text" name="m513r139" id="m513r139" style="width:80px; top:571px; left:1129px;"/>
+<input type="text" name="m513r141" id="m513r141" style="width:104px; top:598px; left:391px;"/>
+<input type="text" name="m513r142" id="m513r142" style="width:77px; top:598px; left:505px;"/>
+<input type="text" name="m513r143" id="m513r143" style="width:73px; top:598px; left:591px;"/>
+<input type="text" name="m513r144" id="m513r144" style="width:90px; top:598px; left:673px;"/>
+<input type="text" name="m513r145" id="m513r145" style="width:80px; top:598px; left:772px;"/>
+<input type="text" name="m513r146" id="m513r146" style="width:99px; top:598px; left:862px;"/>
+<input type="text" name="m513r147" id="m513r147" style="width:73px; top:598px; left:970px;"/>
+<input type="text" name="m513r148" id="m513r148" style="width:68px; top:598px; left:1052px;"/>
+<input type="text" name="m513r149" id="m513r149" style="width:80px; top:598px; left:1129px;"/>
+<input type="text" name="m513r151" id="m513r151" style="width:104px; top:622px; left:391px;"/>
+<input type="text" name="m513r152" id="m513r152" style="width:77px; top:622px; left:505px;"/>
+<input type="text" name="m513r153" id="m513r153" style="width:73px; top:622px; left:591px;"/>
+<input type="text" name="m513r154" id="m513r154" style="width:90px; top:622px; left:673px;"/>
+<input type="text" name="m513r155" id="m513r155" style="width:80px; top:622px; left:772px;"/>
+<input type="text" name="m513r156" id="m513r156" style="width:99px; top:622px; left:862px;"/>
+<input type="text" name="m513r157" id="m513r157" style="width:73px; top:622px; left:970px;"/>
+<input type="text" name="m513r158" id="m513r158" style="width:68px; top:622px; left:1052px;"/>
+<input type="text" name="m513r159" id="m513r159" style="width:80px; top:622px; left:1129px;"/>
+<input type="text" name="m513r161" id="m513r161" style="width:104px; top:647px; left:391px;"/>
+<input type="text" name="m513r162" id="m513r162" style="width:77px; top:647px; left:505px;"/>
+<input type="text" name="m513r163" id="m513r163" style="width:73px; top:647px; left:591px;"/>
+<input type="text" name="m513r164" id="m513r164" style="width:90px; top:647px; left:673px;"/>
+<input type="text" name="m513r165" id="m513r165" style="width:80px; top:647px; left:772px;"/>
+<input type="text" name="m513r166" id="m513r166" style="width:99px; top:647px; left:862px;"/>
+<input type="text" name="m513r167" id="m513r167" style="width:73px; top:647px; left:970px;"/>
+<input type="text" name="m513r168" id="m513r168" style="width:68px; top:647px; left:1052px;"/>
+<input type="text" name="m513r169" id="m513r169" style="width:80px; top:647px; left:1129px;"/>
+<input type="text" name="m513r171" id="m513r171" style="width:104px; top:671px; left:391px;"/>
+<input type="text" name="m513r173" id="m513r173" style="width:73px; top:671px; left:591px;"/>
+<input type="text" name="m513r174" id="m513r174" style="width:90px; top:671px; left:673px;"/>
+<input type="text" name="m513r175" id="m513r175" style="width:80px; top:671px; left:772px;"/>
+<input type="text" name="m513r176" id="m513r176" style="width:99px; top:671px; left:862px;"/>
+<input type="text" name="m513r177" id="m513r177" style="width:73px; top:671px; left:970px;"/>
+<input type="text" name="m513r181" id="m513r181" style="width:104px; top:695px; left:391px;"/>
+<input type="text" name="m513r183" id="m513r183" style="width:73px; top:695px; left:591px;"/>
+<input type="text" name="m513r184" id="m513r184" style="width:90px; top:695px; left:673px;"/>
+<input type="text" name="m513r185" id="m513r185" style="width:80px; top:695px; left:772px;"/>
+<input type="text" name="m513r186" id="m513r186" style="width:99px; top:695px; left:862px;"/>
+<input type="text" name="m513r187" id="m513r187" style="width:73px; top:695px; left:970px;"/>
+<input type="text" name="m513r191" id="m513r191" style="width:104px; top:720px; left:391px;"/>
+<input type="text" name="m513r193" id="m513r193" style="width:73px; top:720px; left:591px;"/>
+<input type="text" name="m513r194" id="m513r194" style="width:90px; top:720px; left:673px;"/>
+<input type="text" name="m513r195" id="m513r195" style="width:80px; top:720px; left:772px;"/>
+<input type="text" name="m513r196" id="m513r196" style="width:99px; top:720px; left:862px;"/>
+<input type="text" name="m513r197" id="m513r197" style="width:73px; top:720px; left:970px;"/>
+<input type="text" name="m513r201" id="m513r201" style="width:104px; top:744px; left:391px;"/>
+<input type="text" name="m513r203" id="m513r203" style="width:73px; top:744px; left:591px;"/>
+<input type="text" name="m513r204" id="m513r204" style="width:90px; top:744px; left:673px;"/>
+<input type="text" name="m513r205" id="m513r205" style="width:80px; top:744px; left:772px;"/>
+<input type="text" name="m513r206" id="m513r206" style="width:99px; top:744px; left:862px;"/>
+<input type="text" name="m513r207" id="m513r207" style="width:73px; top:744px; left:970px;"/>
+<input type="text" name="m513r211" id="m513r211" style="width:104px; top:768px; left:391px;"/>
+<input type="text" name="m513r213" id="m513r213" style="width:73px; top:768px; left:591px;"/>
+<input type="text" name="m513r214" id="m513r214" style="width:90px; top:768px; left:673px;"/>
+<input type="text" name="m513r215" id="m513r215" style="width:80px; top:768px; left:772px;"/>
+<input type="text" name="m513r216" id="m513r216" style="width:99px; top:768px; left:862px;"/>
+<input type="text" name="m513r217" id="m513r217" style="width:73px; top:768px; left:970px;"/>
+<input type="text" name="m513r221" id="m513r221" style="width:104px; top:793px; left:391px;"/>
+<input type="text" name="m513r222" id="m513r222" style="width:77px; top:793px; left:505px;"/>
+<input type="text" name="m513r223" id="m513r223" style="width:73px; top:793px; left:591px;"/>
+<input type="text" name="m513r224" id="m513r224" style="width:90px; top:793px; left:673px;"/>
+<input type="text" name="m513r225" id="m513r225" style="width:80px; top:793px; left:772px;"/>
+<input type="text" name="m513r226" id="m513r226" style="width:99px; top:793px; left:862px;"/>
+<input type="text" name="m513r227" id="m513r227" style="width:73px; top:793px; left:970px;"/>
+<input type="text" name="m513r228" id="m513r228" style="width:68px; top:793px; left:1052px;"/>
+<input type="text" name="m513r229" id="m513r229" style="width:80px; top:793px; left:1129px;"/>
+<span class="text-echo" style="top:822px; right:754px;"><?php echo $m513r991; ?></span>
+<span class="text-echo" style="top:822px; right:666px;"><?php echo $m513r992; ?></span>
+<span class="text-echo" style="top:822px; right:585px;"><?php echo $m513r993; ?></span>
+<span class="text-echo" style="top:822px; right:485px;"><?php echo $m513r994; ?></span>
+<span class="text-echo" style="top:822px; right:395px;"><?php echo $m513r995; ?></span>
+<span class="text-echo" style="top:822px; right:288px;"><?php echo $m513r996; ?></span>
+<span class="text-echo" style="top:822px; right:205px;"><?php echo $m513r997; ?></span>
+<span class="text-echo" style="top:822px; right:128px;"><?php echo $m513r998; ?></span>
+<span class="text-echo" style="top:822px; right:38px;"><?php echo $m513r999; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 10 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str10.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 10.strana 237kB">
+     alt="<?php echo $jpg_popis; ?> 10.strana 237kB" style="width:1250px; height:1000px;">
+<span class="text-echo" style="top:91px; left:944px; font-size:12px; letter-spacing:15px;"><?php echo $fir_ficox; ?></span>
 
-<!-- modul 19 -->
-<input type="text" name="m19r1" id="m19r1" onkeyup="CiarkaNaBodku(this);"
-       style="width:100px; top:236px; left:720px;"/>
-<input type="text" name="m19r2" id="m19r2" onkeyup="CiarkaNaBodku(this);"
-       style="width:100px; top:264px; left:720px;"/>
-<input type="text" name="m19r3" id="m19r3" onkeyup="CiarkaNaBodku(this);"
-       style="width:100px; top:292px; left:720px;"/>
-<input type="text" name="m19r4" id="m19r4" onkeyup="CiarkaNaBodku(this);"
-       style="width:100px; top:321px; left:720px;"/>
-<input type="text" name="m19r5" id="m19r5" onkeyup="CiarkaNaBodku(this);"
-       style="width:100px; top:349px; left:720px;"/>
-<input type="text" name="m19r6" id="m19r6" style="width:100px; top:378px; left:720px;"/>
-<input type="text" name="m19r7" id="m19r7" style="width:100px; top:406px; left:720px;"/>
-<input type="text" name="m19r8" id="m19r8" onkeyup="CiarkaNaBodku(this);"
-       style="width:100px; top:435px; left:720px;"/>
-<input type="text" name="m19r9" id="m19r9" onkeyup="CiarkaNaBodku(this);"
-       style="width:100px; top:470px; left:720px;"/>
-<input type="text" name="m19r10" id="m19r10" onkeyup="CiarkaNaBodku(this);"
-       style="width:100px; top:505px; left:720px;"/>
-<input type="text" name="m19r11" id="m19r11" onkeyup="CiarkaNaBodku(this);"
-       style="width:100px; top:534px; left:720px;"/>
-<input type="text" name="m19r12" id="m19r12" onkeyup="CiarkaNaBodku(this);"
-       style="width:100px; top:572px; left:720px;"/>
-<span class="text-echo" style="top:614px; right:130px;"><?php echo $m19r99; ?></span>
-
-<!-- modul 100103 -->
-<input type="checkbox" name="m1527r1a" value="1" onclick="klikm1527r1ano();"
-       style="top:785px; left:839px;"/>
-<input type="checkbox" name="m1527r1b" value="1" onclick="klikm1527r1nie();"
-       style="top:805px; left:839px;"/>
-
+<!-- modul 516 -->
+<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky" onclick="NacitajZobratovky(516);" class="btn-row-tool" style="top:112px; left:352px;">
+<input type="text" name="m516r11" id="m516r11" style="width:109px; top:283px; left:386px;"/>
+<input type="text" name="m516r12" id="m516r12" style="width:109px; top:283px; left:505px;"/>
+<input type="text" name="m516r13" id="m516r13" style="width:109px; top:283px; left:624px;"/>
+<input type="text" name="m516r14" id="m516r14" style="width:109px; top:283px; left:743px;"/>
+<input type="text" name="m516r15" id="m516r15" style="width:109px; top:283px; left:862px;"/>
+<input type="text" name="m516r16" id="m516r16" style="width:109px; top:283px; left:981px;"/>
+<input type="text" name="m516r17" id="m516r17" style="width:109px; top:283px; left:1100px;"/>
+<input type="text" name="m516r21" id="m516r21" style="width:109px; top:307px; left:386px;"/>
+<input type="text" name="m516r22" id="m516r22" style="width:109px; top:307px; left:505px;"/>
+<input type="text" name="m516r23" id="m516r23" style="width:109px; top:307px; left:624px;"/>
+<input type="text" name="m516r24" id="m516r24" style="width:109px; top:307px; left:743px;"/>
+<input type="text" name="m516r25" id="m516r25" style="width:109px; top:307px; left:862px;"/>
+<input type="text" name="m516r26" id="m516r26" style="width:109px; top:307px; left:981px;"/>
+<input type="text" name="m516r27" id="m516r27" style="width:109px; top:307px; left:1100px;"/>
+<input type="text" name="m516r31" id="m516r31" style="width:109px; top:332px; left:386px;"/>
+<input type="text" name="m516r32" id="m516r32" style="width:109px; top:332px; left:505px;"/>
+<input type="text" name="m516r33" id="m516r33" style="width:109px; top:332px; left:624px;"/>
+<input type="text" name="m516r34" id="m516r34" style="width:109px; top:332px; left:743px;"/>
+<input type="text" name="m516r35" id="m516r35" style="width:109px; top:332px; left:862px;"/>
+<input type="text" name="m516r36" id="m516r36" style="width:109px; top:332px; left:981px;"/>
+<input type="text" name="m516r37" id="m516r37" style="width:109px; top:332px; left:1100px;"/>
+<input type="text" name="m516r41" id="m516r41" style="width:109px; top:356px; left:386px;"/>
+<input type="text" name="m516r42" id="m516r42" style="width:109px; top:356px; left:505px;"/>
+<input type="text" name="m516r43" id="m516r43" style="width:109px; top:356px; left:624px;"/>
+<input type="text" name="m516r44" id="m516r44" style="width:109px; top:356px; left:743px;"/>
+<input type="text" name="m516r45" id="m516r45" style="width:109px; top:356px; left:862px;"/>
+<input type="text" name="m516r46" id="m516r46" style="width:109px; top:356px; left:981px;"/>
+<input type="text" name="m516r47" id="m516r47" style="width:109px; top:356px; left:1100px;"/>
+<input type="text" name="m516r51" id="m516r51" style="width:109px; top:380px; left:386px;"/>
+<input type="text" name="m516r53" id="m516r53" style="width:109px; top:380px; left:624px;"/>
+<input type="text" name="m516r54" id="m516r54" style="width:109px; top:380px; left:743px;"/>
+<input type="text" name="m516r55" id="m516r55" style="width:109px; top:380px; left:862px;"/>
+<input type="text" name="m516r57" id="m516r57" style="width:109px; top:380px; left:1100px;"/>
+<input type="text" name="m516r61" id="m516r61" style="width:109px; top:405px; left:386px;"/>
+<input type="text" name="m516r62" id="m516r62" style="width:109px; top:405px; left:505px;"/>
+<input type="text" name="m516r63" id="m516r63" style="width:109px; top:405px; left:624px;"/>
+<input type="text" name="m516r64" id="m516r64" style="width:109px; top:405px; left:743px;"/>
+<input type="text" name="m516r65" id="m516r65" style="width:109px; top:405px; left:862px;"/>
+<input type="text" name="m516r66" id="m516r66" style="width:109px; top:405px; left:981px;"/>
+<input type="text" name="m516r67" id="m516r67" style="width:109px; top:405px; left:1100px;"/>
+<input type="text" name="m516r71" id="m516r71" style="width:109px; top:430px; left:386px;"/>
+<input type="text" name="m516r72" id="m516r72" style="width:109px; top:430px; left:505px;"/>
+<input type="text" name="m516r73" id="m516r73" style="width:109px; top:430px; left:624px;"/>
+<input type="text" name="m516r74" id="m516r74" style="width:109px; top:430px; left:743px;"/>
+<input type="text" name="m516r75" id="m516r75" style="width:109px; top:430px; left:862px;"/>
+<input type="text" name="m516r76" id="m516r76" style="width:109px; top:430px; left:981px;"/>
+<input type="text" name="m516r77" id="m516r77" style="width:109px; top:430px; left:1100px;"/>
+<input type="text" name="m516r81" id="m516r81" style="width:109px; top:454px; left:386px;"/>
+<input type="text" name="m516r82" id="m516r82" style="width:109px; top:454px; left:505px;"/>
+<input type="text" name="m516r83" id="m516r83" style="width:109px; top:454px; left:624px;"/>
+<input type="text" name="m516r84" id="m516r84" style="width:109px; top:454px; left:743px;"/>
+<input type="text" name="m516r85" id="m516r85" style="width:109px; top:454px; left:862px;"/>
+<input type="text" name="m516r86" id="m516r86" style="width:109px; top:454px; left:981px;"/>
+<input type="text" name="m516r87" id="m516r87" style="width:109px; top:454px; left:1100px;"/>
+<input type="text" name="m516r91" id="m516r91" style="width:109px; top:478px; left:386px;"/>
+<input type="text" name="m516r92" id="m516r92" style="width:109px; top:478px; left:505px;"/>
+<input type="text" name="m516r93" id="m516r93" style="width:109px; top:478px; left:624px;"/>
+<input type="text" name="m516r94" id="m516r94" style="width:109px; top:478px; left:743px;"/>
+<input type="text" name="m516r95" id="m516r95" style="width:109px; top:478px; left:862px;"/>
+<input type="text" name="m516r96" id="m516r96" style="width:109px; top:478px; left:981px;"/>
+<input type="text" name="m516r97" id="m516r97" style="width:109px; top:478px; left:1100px;"/>
+<input type="text" name="m516r101" id="m516r101" style="width:109px; top:502px; left:386px;"/>
+<input type="text" name="m516r102" id="m516r102" style="width:109px; top:502px; left:505px;"/>
+<input type="text" name="m516r103" id="m516r103" style="width:109px; top:502px; left:624px;"/>
+<input type="text" name="m516r104" id="m516r104" style="width:109px; top:502px; left:743px;"/>
+<input type="text" name="m516r105" id="m516r105" style="width:109px; top:502px; left:862px;"/>
+<input type="text" name="m516r106" id="m516r106" style="width:109px; top:502px; left:981px;"/>
+<input type="text" name="m516r107" id="m516r107" style="width:109px; top:502px; left:1100px;"/>
+<input type="text" name="m516r111" id="m516r111" style="width:109px; top:528px; left:386px;"/>
+<input type="text" name="m516r112" id="m516r112" style="width:109px; top:528px; left:505px;"/>
+<input type="text" name="m516r113" id="m516r113" style="width:109px; top:528px; left:624px;"/>
+<input type="text" name="m516r114" id="m516r114" style="width:109px; top:528px; left:743px;"/>
+<input type="text" name="m516r115" id="m516r115" style="width:109px; top:528px; left:862px;"/>
+<input type="text" name="m516r116" id="m516r116" style="width:109px; top:528px; left:981px;"/>
+<input type="text" name="m516r117" id="m516r117" style="width:109px; top:528px; left:1100px;"/>
+<input type="text" name="m516r121" id="m516r121" style="width:109px; top:552px; left:386px;"/>
+<input type="text" name="m516r122" id="m516r122" style="width:109px; top:552px; left:505px;"/>
+<input type="text" name="m516r123" id="m516r123" style="width:109px; top:552px; left:624px;"/>
+<input type="text" name="m516r124" id="m516r124" style="width:109px; top:552px; left:743px;"/>
+<input type="text" name="m516r125" id="m516r125" style="width:109px; top:552px; left:862px;"/>
+<input type="text" name="m516r126" id="m516r126" style="width:109px; top:552px; left:981px;"/>
+<input type="text" name="m516r127" id="m516r127" style="width:109px; top:552px; left:1100px;"/>
+<input type="text" name="m516r131" id="m516r131" style="width:109px; top:578px; left:386px;"/>
+<input type="text" name="m516r132" id="m516r132" style="width:109px; top:578px; left:505px;"/>
+<input type="text" name="m516r133" id="m516r133" style="width:109px; top:578px; left:624px;"/>
+<input type="text" name="m516r134" id="m516r134" style="width:109px; top:578px; left:743px;"/>
+<input type="text" name="m516r135" id="m516r135" style="width:109px; top:578px; left:862px;"/>
+<input type="text" name="m516r136" id="m516r136" style="width:109px; top:578px; left:981px;"/>
+<input type="text" name="m516r137" id="m516r137" style="width:109px; top:578px; left:1100px;"/>
+<input type="text" name="m516r141" id="m516r141" style="width:109px; top:604px; left:386px;"/>
+<input type="text" name="m516r142" id="m516r142" style="width:109px; top:604px; left:505px;"/>
+<input type="text" name="m516r143" id="m516r143" style="width:109px; top:604px; left:624px;"/>
+<input type="text" name="m516r144" id="m516r144" style="width:109px; top:604px; left:743px;"/>
+<input type="text" name="m516r145" id="m516r145" style="width:109px; top:604px; left:862px;"/>
+<input type="text" name="m516r146" id="m516r146" style="width:109px; top:604px; left:981px;"/>
+<input type="text" name="m516r147" id="m516r147" style="width:109px; top:604px; left:1100px;"/>
+<input type="text" name="m516r151" id="m516r151" style="width:109px; top:629px; left:386px;"/>
+<input type="text" name="m516r152" id="m516r152" style="width:109px; top:629px; left:505px;"/>
+<input type="text" name="m516r153" id="m516r153" style="width:109px; top:629px; left:624px;"/>
+<input type="text" name="m516r154" id="m516r154" style="width:109px; top:629px; left:743px;"/>
+<input type="text" name="m516r155" id="m516r155" style="width:109px; top:629px; left:862px;"/>
+<input type="text" name="m516r156" id="m516r156" style="width:109px; top:629px; left:981px;"/>
+<input type="text" name="m516r157" id="m516r157" style="width:109px; top:629px; left:1100px;"/>
+<input type="text" name="m516r161" id="m516r161" style="width:109px; top:653px; left:386px;"/>
+<input type="text" name="m516r162" id="m516r162" style="width:109px; top:653px; left:505px;"/>
+<input type="text" name="m516r163" id="m516r163" style="width:109px; top:653px; left:624px;"/>
+<input type="text" name="m516r164" id="m516r164" style="width:109px; top:653px; left:743px;"/>
+<input type="text" name="m516r165" id="m516r165" style="width:109px; top:653px; left:862px;"/>
+<input type="text" name="m516r166" id="m516r166" style="width:109px; top:653px; left:981px;"/>
+<input type="text" name="m516r167" id="m516r167" style="width:109px; top:653px; left:1100px;"/>
+<input type="text" name="m516r171" id="m516r171" style="width:109px; top:678px; left:386px;"/>
+<input type="text" name="m516r172" id="m516r172" style="width:109px; top:678px; left:505px;"/>
+<input type="text" name="m516r174" id="m516r174" style="width:109px; top:678px; left:743px;"/>
+<input type="text" name="m516r175" id="m516r175" style="width:109px; top:678px; left:862px;"/>
+<input type="text" name="m516r177" id="m516r177" style="width:109px; top:678px; left:1100px;"/>
+<input type="text" name="m516r181" id="m516r181" style="width:109px; top:702px; left:386px;"/>
+<input type="text" name="m516r182" id="m516r182" style="width:109px; top:702px; left:505px;"/>
+<input type="text" name="m516r184" id="m516r184" style="width:109px; top:702px; left:743px;"/>
+<input type="text" name="m516r185" id="m516r185" style="width:109px; top:702px; left:862px;"/>
+<input type="text" name="m516r187" id="m516r187" style="width:109px; top:702px; left:1100px;"/>
+<input type="text" name="m516r191" id="m516r191" style="width:109px; top:727px; left:386px;"/>
+<input type="text" name="m516r192" id="m516r192" style="width:109px; top:727px; left:505px;"/>
+<input type="text" name="m516r194" id="m516r194" style="width:109px; top:727px; left:743px;"/>
+<input type="text" name="m516r195" id="m516r195" style="width:109px; top:727px; left:862px;"/>
+<input type="text" name="m516r197" id="m516r197" style="width:109px; top:727px; left:1100px;"/>
+<input type="text" name="m516r201" id="m516r201" style="width:109px; top:751px; left:386px;"/>
+<input type="text" name="m516r202" id="m516r202" style="width:109px; top:751px; left:505px;"/>
+<input type="text" name="m516r204" id="m516r204" style="width:109px; top:751px; left:743px;"/>
+<input type="text" name="m516r205" id="m516r205" style="width:109px; top:751px; left:862px;"/>
+<input type="text" name="m516r206" id="m516r206" style="width:109px; top:751px; left:981px;"/>
+<input type="text" name="m516r207" id="m516r207" style="width:109px; top:751px; left:1100px;"/>
+<input type="text" name="m516r211" id="m516r211" style="width:109px; top:776px; left:386px;"/>
+<input type="text" name="m516r212" id="m516r212" style="width:109px; top:776px; left:505px;"/>
+<input type="text" name="m516r214" id="m516r214" style="width:109px; top:776px; left:743px;"/>
+<input type="text" name="m516r215" id="m516r215" style="width:109px; top:776px; left:862px;"/>
+<input type="text" name="m516r216" id="m516r216" style="width:109px; top:776px; left:981px;"/>
+<input type="text" name="m516r217" id="m516r217" style="width:109px; top:776px; left:1100px;"/>
+<input type="text" name="m516r221" id="m516r221" style="width:109px; top:800px; left:386px;"/>
+<input type="text" name="m516r222" id="m516r222" style="width:109px; top:800px; left:505px;"/>
+<input type="text" name="m516r223" id="m516r223" style="width:109px; top:800px; left:624px;"/>
+<input type="text" name="m516r224" id="m516r224" style="width:109px; top:800px; left:743px;"/>
+<input type="text" name="m516r225" id="m516r225" style="width:109px; top:800px; left:862px;"/>
+<input type="text" name="m516r226" id="m516r226" style="width:109px; top:800px; left:981px;"/>
+<input type="text" name="m516r227" id="m516r227" style="width:109px; top:800px; left:1100px;"/>
+<span class="text-echo" style="top:829px; right:753px;"><?php echo $m516r991; ?></span>
+<span class="text-echo" style="top:829px; right:634px;"><?php echo $m516r992; ?></span>
+<span class="text-echo" style="top:829px; right:514px;"><?php echo $m516r993; ?></span>
+<span class="text-echo" style="top:829px; right:395px;"><?php echo $m516r994; ?></span>
+<span class="text-echo" style="top:829px; right:276px;"><?php echo $m516r995; ?></span>
+<span class="text-echo" style="top:829px; right:157px;"><?php echo $m516r996; ?></span>
+<span class="text-echo" style="top:829px; right:39px;"><?php echo $m516r997; ?></span>
 <?php                                         } ?>
 
 
 <?php if ( $strana == 11 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str11.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 11.strana 246kB" style="width:1250px; height:1000px;">
+<img src="<?php echo $jpg_cesta; ?>_str11.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 11.strana 246kB">
+<span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
-<!-- modul 527 -->
-<input type="text" name="m527r11" id="m527r11" style="width:74px; top:272px; left:331px;"/>
-<input type="text" name="m527r12" id="m527r12" style="width:95px; top:272px; left:415px;"/>
-<input type="text" name="m527r13" id="m527r13" style="width:64px; top:272px; left:520px;"/>
-<input type="text" name="m527r14" id="m527r14" style="width:64px; top:272px; left:594px;"/>
-<input type="text" name="m527r15" id="m527r15" style="width:96px; top:272px; left:667px;"/>
-<input type="text" name="m527r16" id="m527r16" style="width:84px; top:272px; left:773px;"/>
-<input type="text" name="m527r17" id="m527r17" style="width:73px; top:272px; left:868px;"/>
-<input type="text" name="m527r18" id="m527r18" style="width:74px; top:272px; left:952px;"/>
-<input type="text" name="m527r19" id="m527r19" style="width:74px; top:272px; left:1036px;"/>
-<input type="text" name="m527r110" id="m527r110" style="width:75px; top:272px; left:1120px;"/>
-<input type="text" name="m527r21" id="m527r21" style="width:74px; top:307px; left:331px;"/>
-<input type="text" name="m527r22" id="m527r22" style="width:95px; top:307px; left:415px;"/>
-<input type="text" name="m527r23" id="m527r23" style="width:64px; top:307px; left:520px;"/>
-<input type="text" name="m527r24" id="m527r24" style="width:64px; top:307px; left:594px;"/>
-<input type="text" name="m527r25" id="m527r25" style="width:96px; top:307px; left:667px;"/>
-<input type="text" name="m527r26" id="m527r26" style="width:84px; top:307px; left:773px;"/>
-<input type="text" name="m527r27" id="m527r27" style="width:73px; top:307px; left:868px;"/>
-<input type="text" name="m527r28" id="m527r28" style="width:74px; top:307px; left:952px;"/>
-<input type="text" name="m527r29" id="m527r29" style="width:74px; top:307px; left:1036px;"/>
-<input type="text" name="m527r210" id="m527r210" style="width:75px; top:307px; left:1120px;"/>
-<input type="text" name="m527r31" id="m527r31" style="width:74px; top:338px; left:331px;"/>
-<input type="text" name="m527r32" id="m527r32" style="width:95px; top:338px; left:415px;"/>
-<input type="text" name="m527r33" id="m527r33" style="width:64px; top:338px; left:520px;"/>
-<input type="text" name="m527r34" id="m527r34" style="width:64px; top:338px; left:594px;"/>
-<input type="text" name="m527r35" id="m527r35" style="width:96px; top:338px; left:667px;"/>
-<input type="text" name="m527r36" id="m527r36" style="width:84px; top:338px; left:773px;"/>
-<input type="text" name="m527r37" id="m527r37" style="width:73px; top:338px; left:868px;"/>
-<input type="text" name="m527r38" id="m527r38" style="width:74px; top:338px; left:952px;"/>
-<input type="text" name="m527r39" id="m527r39" style="width:74px; top:338px; left:1036px;"/>
-<input type="text" name="m527r310" id="m527r310" style="width:75px; top:338px; left:1120px;"/>
-<input type="text" name="m527r41" id="m527r41" style="width:74px; top:374px; left:331px;"/>
-<input type="text" name="m527r42" id="m527r42" style="width:95px; top:374px; left:415px;"/>
-<input type="text" name="m527r43" id="m527r43" style="width:64px; top:374px; left:520px;"/>
-<input type="text" name="m527r44" id="m527r44" style="width:64px; top:374px; left:594px;"/>
-<input type="text" name="m527r45" id="m527r45" style="width:96px; top:374px; left:667px;"/>
-<input type="text" name="m527r46" id="m527r46" style="width:84px; top:374px; left:773px;"/>
-<input type="text" name="m527r47" id="m527r47" style="width:73px; top:374px; left:868px;"/>
-<input type="text" name="m527r48" id="m527r48" style="width:74px; top:374px; left:952px;"/>
-<input type="text" name="m527r49" id="m527r49" style="width:74px; top:374px; left:1036px;"/>
-<input type="text" name="m527r410" id="m527r410" style="width:75px; top:374px; left:1120px;"/>
-<input type="text" name="m527r51" id="m527r51" style="width:74px; top:414px; left:331px;"/>
-<input type="text" name="m527r52" id="m527r52" style="width:95px; top:414px; left:415px;"/>
-<input type="text" name="m527r53" id="m527r53" style="width:64px; top:414px; left:520px;"/>
-<input type="text" name="m527r54" id="m527r54" style="width:64px; top:414px; left:594px;"/>
-<input type="text" name="m527r55" id="m527r55" style="width:96px; top:414px; left:667px;"/>
-<input type="text" name="m527r56" id="m527r56" style="width:84px; top:414px; left:773px;"/>
-<input type="text" name="m527r57" id="m527r57" style="width:73px; top:414px; left:868px;"/>
-<input type="text" name="m527r58" id="m527r58" style="width:74px; top:414px; left:952px;"/>
-<input type="text" name="m527r59" id="m527r59" style="width:74px; top:414px; left:1036px;"/>
-<input type="text" name="m527r510" id="m527r510" style="width:75px; top:414px; left:1120px;"/>
-<input type="text" name="m527r61" id="m527r61" style="width:74px; top:449px; left:331px;"/>
-<input type="text" name="m527r62" id="m527r62" style="width:95px; top:449px; left:415px;"/>
-<input type="text" name="m527r63" id="m527r63" style="width:64px; top:449px; left:520px;"/>
-<input type="text" name="m527r64" id="m527r64" style="width:64px; top:449px; left:594px;"/>
-<input type="text" name="m527r65" id="m527r65" style="width:96px; top:449px; left:667px;"/>
-<input type="text" name="m527r66" id="m527r66" style="width:84px; top:449px; left:773px;"/>
-<input type="text" name="m527r67" id="m527r67" style="width:73px; top:449px; left:868px;"/>
-<input type="text" name="m527r68" id="m527r68" style="width:74px; top:449px; left:952px;"/>
-<input type="text" name="m527r69" id="m527r69" style="width:74px; top:449px; left:1036px;"/>
-<input type="text" name="m527r610" id="m527r610" style="width:75px; top:449px; left:1120px;"/>
-<input type="text" name="m527r71" id="m527r71" style="width:74px; top:495px; left:331px;"/>
-<input type="text" name="m527r72" id="m527r72" style="width:95px; top:495px; left:415px;"/>
-<input type="text" name="m527r73" id="m527r73" style="width:64px; top:495px; left:520px;"/>
-<input type="text" name="m527r74" id="m527r74" style="width:64px; top:495px; left:594px;"/>
-<input type="text" name="m527r75" id="m527r75" style="width:96px; top:495px; left:667px;"/>
-<input type="text" name="m527r76" id="m527r76" style="width:84px; top:495px; left:773px;"/>
-<input type="text" name="m527r77" id="m527r77" style="width:73px; top:495px; left:868px;"/>
-<input type="text" name="m527r78" id="m527r78" style="width:74px; top:495px; left:952px;"/>
-<input type="text" name="m527r79" id="m527r79" style="width:74px; top:495px; left:1036px;"/>
-<input type="text" name="m527r710" id="m527r710" style="width:75px; top:495px; left:1120px;"/>
-<input type="text" name="m527r81" id="m527r81" style="width:74px; top:544px; left:331px;"/>
-<input type="text" name="m527r82" id="m527r82" style="width:95px; top:544px; left:415px;"/>
-<input type="text" name="m527r83" id="m527r83" style="width:64px; top:544px; left:520px;"/>
-<input type="text" name="m527r84" id="m527r84" style="width:64px; top:544px; left:594px;"/>
-<input type="text" name="m527r85" id="m527r85" style="width:96px; top:544px; left:667px;"/>
-<input type="text" name="m527r86" id="m527r86" style="width:84px; top:544px; left:773px;"/>
-<input type="text" name="m527r87" id="m527r87" style="width:73px; top:544px; left:868px;"/>
-<input type="text" name="m527r88" id="m527r88" style="width:74px; top:544px; left:952px;"/>
-<input type="text" name="m527r89" id="m527r89" style="width:74px; top:544px; left:1036px;"/>
-<input type="text" name="m527r810" id="m527r810" style="width:75px; top:544px; left:1120px;"/>
-<input type="text" name="m527r91" id="m527r91" style="width:74px; top:587px; left:331px;"/>
-<input type="text" name="m527r92" id="m527r92" style="width:95px; top:587px; left:415px;"/>
-<input type="text" name="m527r93" id="m527r93" style="width:64px; top:587px; left:520px;"/>
-<input type="text" name="m527r94" id="m527r94" style="width:64px; top:587px; left:594px;"/>
-<input type="text" name="m527r95" id="m527r95" style="width:96px; top:587px; left:667px;"/>
-<input type="text" name="m527r96" id="m527r96" style="width:84px; top:587px; left:773px;"/>
-<input type="text" name="m527r97" id="m527r97" style="width:73px; top:587px; left:868px;"/>
-<input type="text" name="m527r98" id="m527r98" style="width:74px; top:587px; left:952px;"/>
-<input type="text" name="m527r99" id="m527r99" style="width:74px; top:587px; left:1036px;"/>
-<input type="text" name="m527r910" id="m527r910" style="width:75px; top:587px; left:1120px;"/>
-<input type="text" name="m527r101" id="m527r101" style="width:74px; top:638px; left:331px;"/>
-<input type="text" name="m527r102" id="m527r102" style="width:95px; top:638px; left:415px;"/>
-<input type="text" name="m527r103" id="m527r103" style="width:64px; top:638px; left:520px;"/>
-<input type="text" name="m527r104" id="m527r104" style="width:64px; top:638px; left:594px;"/>
-<input type="text" name="m527r105" id="m527r105" style="width:96px; top:638px; left:667px;"/>
-<input type="text" name="m527r106" id="m527r106" style="width:84px; top:638px; left:773px;"/>
-<input type="text" name="m527r107" id="m527r107" style="width:73px; top:638px; left:868px;"/>
-<input type="text" name="m527r108" id="m527r108" style="width:74px; top:638px; left:952px;"/>
-<input type="text" name="m527r109" id="m527r109" style="width:74px; top:638px; left:1036px;"/>
-<input type="text" name="m527r1010" id="m527r1010" style="width:75px; top:638px; left:1120px;"/>
-<input type="text" name="m527r111" id="m527r111" style="width:74px; top:678px; left:331px;"/>
-<input type="text" name="m527r112" id="m527r112" style="width:95px; top:678px; left:415px;"/>
-<input type="text" name="m527r113" id="m527r113" style="width:64px; top:678px; left:520px;"/>
-<input type="text" name="m527r114" id="m527r114" style="width:64px; top:678px; left:594px;"/>
-<input type="text" name="m527r115" id="m527r115" style="width:96px; top:678px; left:667px;"/>
-<input type="text" name="m527r116" id="m527r116" style="width:84px; top:678px; left:773px;"/>
-<input type="text" name="m527r117" id="m527r117" style="width:73px; top:678px; left:868px;"/>
-<input type="text" name="m527r118" id="m527r118" style="width:74px; top:678px; left:952px;"/>
-<input type="text" name="m527r119" id="m527r119" style="width:74px; top:678px; left:1036px;"/>
-<input type="text" name="m527r1110" id="m527r1110" style="width:75px; top:678px; left:1120px;"/>
-<input type="text" name="m527r121" id="m527r121" style="width:74px; top:710px; left:331px;"/>
-<input type="text" name="m527r122" id="m527r122" style="width:95px; top:710px; left:415px;"/>
-<input type="text" name="m527r123" id="m527r123" style="width:64px; top:710px; left:520px;"/>
-<input type="text" name="m527r124" id="m527r124" style="width:64px; top:710px; left:594px;"/>
-<input type="text" name="m527r125" id="m527r125" style="width:96px; top:710px; left:667px;"/>
-<input type="text" name="m527r126" id="m527r126" style="width:84px; top:710px; left:773px;"/>
-<input type="text" name="m527r127" id="m527r127" style="width:73px; top:710px; left:868px;"/>
-<input type="text" name="m527r128" id="m527r128" style="width:74px; top:710px; left:952px;"/>
-<input type="text" name="m527r129" id="m527r129" style="width:74px; top:710px; left:1036px;"/>
-<input type="text" name="m527r1210" id="m527r1210" style="width:75px; top:710px; left:1120px;"/>
-<input type="text" name="m527r131" id="m527r131" style="width:74px; top:741px; left:331px;"/>
-<input type="text" name="m527r132" id="m527r132" style="width:95px; top:741px; left:415px;"/>
-<input type="text" name="m527r133" id="m527r133" style="width:64px; top:741px; left:520px;"/>
-<input type="text" name="m527r134" id="m527r134" style="width:64px; top:741px; left:594px;"/>
-<input type="text" name="m527r135" id="m527r135" style="width:96px; top:741px; left:667px;"/>
-<input type="text" name="m527r136" id="m527r136" style="width:84px; top:741px; left:773px;"/>
-<input type="text" name="m527r137" id="m527r137" style="width:73px; top:741px; left:868px;"/>
-<input type="text" name="m527r138" id="m527r138" style="width:74px; top:741px; left:952px;"/>
-<input type="text" name="m527r139" id="m527r139" style="width:74px; top:741px; left:1036px;"/>
-<input type="text" name="m527r1310" id="m527r1310" style="width:75px; top:741px; left:1120px;"/>
-<input type="text" name="m527r141" id="m527r141" style="width:74px; top:772px; left:331px;"/>
-<input type="text" name="m527r142" id="m527r142" style="width:95px; top:772px; left:415px;"/>
-<input type="text" name="m527r143" id="m527r143" style="width:64px; top:772px; left:520px;"/>
-<input type="text" name="m527r144" id="m527r144" style="width:64px; top:772px; left:594px;"/>
-<input type="text" name="m527r145" id="m527r145" style="width:96px; top:772px; left:667px;"/>
-<input type="text" name="m527r146" id="m527r146" style="width:84px; top:772px; left:773px;"/>
-<input type="text" name="m527r147" id="m527r147" style="width:73px; top:772px; left:868px;"/>
-<input type="text" name="m527r148" id="m527r148" style="width:74px; top:772px; left:952px;"/>
-<input type="text" name="m527r149" id="m527r149" style="width:74px; top:772px; left:1036px;"/>
-<input type="text" name="m527r1410" id="m527r1410" style="width:75px; top:772px; left:1120px;"/>
-<input type="text" name="m527r151" id="m527r151" style="width:74px; top:815px; left:331px;"/>
-<input type="text" name="m527r152" id="m527r152" style="width:95px; top:815px; left:415px;"/>
-<input type="text" name="m527r153" id="m527r153" style="width:64px; top:815px; left:520px;"/>
-<input type="text" name="m527r154" id="m527r154" style="width:64px; top:815px; left:594px;"/>
-<input type="text" name="m527r155" id="m527r155" style="width:96px; top:815px; left:667px;"/>
-<input type="text" name="m527r156" id="m527r156" style="width:84px; top:815px; left:773px;"/>
-<input type="text" name="m527r157" id="m527r157" style="width:73px; top:815px; left:868px;"/>
-<input type="text" name="m527r158" id="m527r158" style="width:74px; top:815px; left:952px;"/>
-<input type="text" name="m527r159" id="m527r159" style="width:74px; top:815px; left:1036px;"/>
-<input type="text" name="m527r1510" id="m527r1510" style="width:75px; top:815px; left:1120px;"/>
-<input type="text" name="m527r161" id="m527r161" style="width:74px; top:873px; left:331px;"/>
-<input type="text" name="m527r162" id="m527r162" style="width:95px; top:873px; left:415px;"/>
-<input type="text" name="m527r163" id="m527r163" style="width:64px; top:873px; left:520px;"/>
-<input type="text" name="m527r164" id="m527r164" style="width:64px; top:873px; left:594px;"/>
-<input type="text" name="m527r165" id="m527r165" style="width:96px; top:873px; left:667px;"/>
-<input type="text" name="m527r166" id="m527r166" style="width:84px; top:873px; left:773px;"/>
-<input type="text" name="m527r167" id="m527r167" style="width:73px; top:873px; left:868px;"/>
-<input type="text" name="m527r168" id="m527r168" style="width:74px; top:873px; left:952px;"/>
-<input type="text" name="m527r169" id="m527r169" style="width:74px; top:873px; left:1036px;"/>
-<input type="text" name="m527r1610" id="m527r1610" style="width:75px; top:873px; left:1120px;"/>
-<input type="text" name="m527r171" id="m527r171" style="width:74px; top:927px; left:331px;"/>
-<input type="text" name="m527r172" id="m527r172" style="width:95px; top:927px; left:415px;"/>
-<input type="text" name="m527r173" id="m527r173" style="width:64px; top:927px; left:520px;"/>
-<input type="text" name="m527r174" id="m527r174" style="width:64px; top:927px; left:594px;"/>
-<input type="text" name="m527r175" id="m527r175" style="width:96px; top:927px; left:667px;"/>
-<input type="text" name="m527r176" id="m527r176" style="width:84px; top:927px; left:773px;"/>
-<input type="text" name="m527r177" id="m527r177" style="width:73px; top:927px; left:868px;"/>
-<input type="text" name="m527r178" id="m527r178" style="width:74px; top:927px; left:952px;"/>
-<input type="text" name="m527r179" id="m527r179" style="width:74px; top:927px; left:1036px;"/>
-<input type="text" name="m527r1710" id="m527r1710" style="width:75px; top:927px; left:1120px;"/>
+<!-- modul 100305 -->
+<input type="text" name="m100305r1" id="m100305r1" style="width:109px; top:224px; left:503px;"/>
+<input type="text" name="m100305r2" id="m100305r2" style="width:109px; top:224px; left:639px;"/>
+<input type="text" name="m100305r3" id="m100305r3" style="width:109px; top:224px; left:775px;"/>
+
+<!-- modul 586 -->
+<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje zo Súvahy POD" onclick="NacitajZosuvahy(586);" style="top:272px; left:338px;" class="btn-row-tool">
+<input type="text" name="m586r11" id="m586r11" style="width:100px; top:366px; left:596px;"/>
+<input type="text" name="m586r12" id="m586r12" style="width:100px; top:366px; left:760px;"/>
+<input type="text" name="m586r21" id="m586r21" style="width:100px; top:392px; left:596px;"/>
+<input type="text" name="m586r22" id="m586r22" style="width:100px; top:392px; left:760px;"/>
+<input type="text" name="m586r31" id="m586r31" style="width:100px; top:418px; left:596px;"/>
+<input type="text" name="m586r32" id="m586r32" style="width:100px; top:418px; left:760px;"/>
+<input type="text" name="m586r41" id="m586r41" style="width:100px; top:444px; left:596px;"/>
+<input type="text" name="m586r42" id="m586r42" style="width:100px; top:444px; left:760px;"/>
+<input type="text" name="m586r51" id="m586r51" style="width:100px; top:470px; left:596px;"/>
+<input type="text" name="m586r52" id="m586r52" style="width:100px; top:470px; left:760px;"/>
+<input type="text" name="m586r61" id="m586r61" style="width:100px; top:496px; left:596px;"/>
+<input type="text" name="m586r62" id="m586r62" style="width:100px; top:496px; left:760px;"/>
+<input type="text" name="m586r71" id="m586r71" style="width:100px; top:522px; left:596px;"/>
+<input type="text" name="m586r72" id="m586r72" style="width:100px; top:522px; left:760px;"/>
+<input type="text" name="m586r81" id="m586r81" style="width:100px; top:548px; left:596px;"/>
+<input type="text" name="m586r82" id="m586r82" style="width:100px; top:548px; left:760px;"/>
+<input type="text" name="m586r91" id="m586r91" style="width:100px; top:573px; left:596px;"/>
+<input type="text" name="m586r92" id="m586r92" style="width:100px; top:573px; left:760px;"/>
+<input type="text" name="m586r101" id="m586r101" style="width:100px; top:599px; left:596px;"/>
+<input type="text" name="m586r102" id="m586r102" style="width:100px; top:599px; left:760px;"/>
+<input type="text" name="m586r111" id="m586r111" style="width:100px; top:625px; left:596px;"/>
+<input type="text" name="m586r112" id="m586r112" style="width:100px; top:625px; left:760px;"/>
+<input type="text" name="m586r121" id="m586r121" style="width:100px; top:656px; left:596px;"/>
+<input type="text" name="m586r122" id="m586r122" style="width:100px; top:656px; left:760px;"/>
+<input type="text" name="m586r131" id="m586r131" style="width:100px; top:688px; left:596px;"/>
+<input type="text" name="m586r132" id="m586r132" style="width:100px; top:688px; left:760px;"/>
+<input type="text" name="m586r141" id="m586r141" style="width:100px; top:714px; left:596px;"/>
+<input type="text" name="m586r142" id="m586r142" style="width:100px; top:714px; left:760px;"/>
+<input type="text" name="m586r151" id="m586r151" style="width:100px; top:739px; left:596px;"/>
+<input type="text" name="m586r152" id="m586r152" style="width:100px; top:739px; left:760px;"/>
+<input type="text" name="m586r161" id="m586r161" style="width:100px; top:765px; left:596px;"/>
+<input type="text" name="m586r162" id="m586r162" style="width:100px; top:765px; left:760px;"/>
+<input type="text" name="m586r171" id="m586r171" style="width:100px; top:791px; left:596px;"/>
+<input type="text" name="m586r172" id="m586r172" style="width:100px; top:791px; left:760px;"/>
+<input type="text" name="m586r181" id="m586r181" style="width:100px; top:817px; left:596px;"/>
+<input type="text" name="m586r182" id="m586r182" style="width:100px; top:817px; left:760px;"/>
+<input type="text" name="m586r191" id="m586r191" style="width:100px; top:843px; left:596px;"/>
+<input type="text" name="m586r192" id="m586r192" style="width:100px; top:843px; left:760px;"/>
+<input type="text" name="m586r201" id="m586r201" style="width:100px; top:869px; left:596px;"/>
+<input type="text" name="m586r202" id="m586r202" style="width:100px; top:869px; left:760px;"/>
+<input type="text" name="m586r211" id="m586r211" style="width:100px; top:894px; left:596px;"/>
+<input type="text" name="m586r212" id="m586r212" style="width:100px; top:894px; left:760px;"/>
+<input type="text" name="m586r221" id="m586r221" style="width:100px; top:920px; left:596px;"/>
+<input type="text" name="m586r222" id="m586r222" style="width:100px; top:920px; left:760px;"/>
+<input type="text" name="m586r231" id="m586r231" style="width:100px; top:946px; left:596px;"/>
+<input type="text" name="m586r232" id="m586r232" style="width:100px; top:946px; left:760px;"/>
+<input type="text" name="m586r241" id="m586r241" style="width:100px; top:972px; left:596px;"/>
+<input type="text" name="m586r242" id="m586r242" style="width:100px; top:972px; left:760px;"/>
+<span class="text-echo" style="top:1003px; right:250px;"><?php echo $m586r991; ?></span>
+<span class="text-echo" style="top:1003px; right:80px;"><?php echo $m586r992; ?></span>
+
+<!-- modul 100103 -->
+<input type="checkbox" name="m1527r1a" value="1" onclick="klikm1527r1ano();" style="top:1192px; left:839px;"/>
+<input type="checkbox" name="m1527r1b" value="1" onclick="klikm1527r1nie();" style="top:1212px; left:839px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 12 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 12.strana 256kB" style="width:1250px; height:1000px;">
+<img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 12.strana 256kB" style="width:1250px; height:1000px;">
+<span class="text-echo" style="top:77px; left:810px; font-size:16px; letter-spacing:23px;"><?php echo $fir_ficox; ?></span>
 
-<!-- modul 527 pokrac. -->
-<input type="text" name="m527r181" id="m527r181" style="width:74px; top:252px; left:331px;"/>
-<input type="text" name="m527r182" id="m527r182" style="width:95px; top:252px; left:415px;"/>
-<input type="text" name="m527r183" id="m527r183" style="width:64px; top:252px; left:520px;"/>
-<input type="text" name="m527r184" id="m527r184" style="width:64px; top:252px; left:594px;"/>
-<input type="text" name="m527r185" id="m527r185" style="width:96px; top:252px; left:667px;"/>
-<input type="text" name="m527r186" id="m527r186" style="width:84px; top:252px; left:773px;"/>
-<input type="text" name="m527r187" id="m527r187" style="width:73px; top:252px; left:868px;"/>
-<input type="text" name="m527r188" id="m527r188" style="width:74px; top:252px; left:952px;"/>
-<input type="text" name="m527r1810" id="m527r1810" style="width:75px; top:252px; left:1120px;"/>
-<input type="text" name="m527r191" id="m527r191" style="width:74px; top:306px; left:331px;"/>
-<input type="text" name="m527r192" id="m527r192" style="width:95px; top:306px; left:415px;"/>
-<input type="text" name="m527r193" id="m527r193" style="width:64px; top:306px; left:520px;"/>
-<input type="text" name="m527r194" id="m527r194" style="width:64px; top:306px; left:594px;"/>
-<input type="text" name="m527r195" id="m527r195" style="width:96px; top:306px; left:667px;"/>
-<input type="text" name="m527r196" id="m527r196" style="width:84px; top:306px; left:773px;"/>
-<input type="text" name="m527r197" id="m527r197" style="width:73px; top:306px; left:868px;"/>
-<input type="text" name="m527r198" id="m527r198" style="width:74px; top:306px; left:952px;"/>
-<input type="text" name="m527r1910" id="m527r1910" style="width:75px; top:306px; left:1120px;"/>
-<input type="text" name="m527r201" id="m527r201" style="width:74px; top:393px; left:331px;"/>
-<input type="text" name="m527r202" id="m527r202" style="width:95px; top:393px; left:415px;"/>
-<input type="text" name="m527r203" id="m527r203" style="width:64px; top:393px; left:520px;"/>
-<input type="text" name="m527r204" id="m527r204" style="width:64px; top:393px; left:594px;"/>
-<input type="text" name="m527r205" id="m527r205" style="width:96px; top:393px; left:667px;"/>
-<input type="text" name="m527r206" id="m527r206" style="width:84px; top:393px; left:773px;"/>
-<input type="text" name="m527r207" id="m527r207" style="width:73px; top:393px; left:868px;"/>
-<input type="text" name="m527r208" id="m527r208" style="width:74px; top:393px; left:952px;"/>
-<input type="text" name="m527r2010" id="m527r2010" style="width:75px; top:393px; left:1120px;"/>
-<input type="text" name="m527r211" id="m527r211" style="width:74px; top:486px; left:331px;"/>
-<input type="text" name="m527r212" id="m527r212" style="width:95px; top:486px; left:415px;"/>
-<input type="text" name="m527r213" id="m527r213" style="width:64px; top:486px; left:520px;"/>
-<input type="text" name="m527r214" id="m527r214" style="width:64px; top:486px; left:594px;"/>
-<input type="text" name="m527r215" id="m527r215" style="width:96px; top:486px; left:667px;"/>
-<input type="text" name="m527r216" id="m527r216" style="width:84px; top:486px; left:773px;"/>
-<input type="text" name="m527r217" id="m527r217" style="width:73px; top:486px; left:868px;"/>
-<input type="text" name="m527r218" id="m527r218" style="width:74px; top:486px; left:952px;"/>
-<input type="text" name="m527r2110" id="m527r2110" style="width:75px; top:486px; left:1120px;"/>
-<input type="text" name="m527r221" id="m527r221" style="width:74px; top:568px; left:331px;"/>
-<input type="text" name="m527r222" id="m527r222" style="width:95px; top:568px; left:415px;"/>
-<input type="text" name="m527r223" id="m527r223" style="width:64px; top:568px; left:520px;"/>
-<input type="text" name="m527r224" id="m527r224" style="width:64px; top:568px; left:594px;"/>
-<input type="text" name="m527r225" id="m527r225" style="width:96px; top:568px; left:667px;"/>
-<input type="text" name="m527r226" id="m527r226" style="width:84px; top:568px; left:773px;"/>
-<input type="text" name="m527r227" id="m527r227" style="width:73px; top:568px; left:868px;"/>
-<input type="text" name="m527r228" id="m527r228" style="width:74px; top:568px; left:952px;"/>
-<input type="text" name="m527r2210" id="m527r2210" style="width:75px; top:568px; left:1120px;"/>
-<input type="text" name="m527r231" id="m527r231" style="width:74px; top:640px; left:331px;"/>
-<input type="text" name="m527r232" id="m527r232" style="width:95px; top:640px; left:415px;"/>
-<input type="text" name="m527r233" id="m527r233" style="width:64px; top:640px; left:520px;"/>
-<input type="text" name="m527r234" id="m527r234" style="width:64px; top:640px; left:594px;"/>
-<input type="text" name="m527r235" id="m527r235" style="width:96px; top:640px; left:667px;"/>
-<input type="text" name="m527r236" id="m527r236" style="width:84px; top:640px; left:773px;"/>
-<input type="text" name="m527r237" id="m527r237" style="width:73px; top:640px; left:868px;"/>
-<input type="text" name="m527r238" id="m527r238" style="width:74px; top:640px; left:952px;"/>
-<input type="text" name="m527r2310" id="m527r2310" style="width:75px; top:640px; left:1120px;"/>
-<input type="text" name="m527r241" id="m527r241" style="width:74px; top:702px; left:331px;"/>
-<input type="text" name="m527r242" id="m527r242" style="width:95px; top:702px; left:415px;"/>
-<input type="text" name="m527r243" id="m527r243" style="width:64px; top:702px; left:520px;"/>
-<input type="text" name="m527r244" id="m527r244" style="width:64px; top:702px; left:594px;"/>
-<input type="text" name="m527r245" id="m527r245" style="width:96px; top:702px; left:667px;"/>
-<input type="text" name="m527r246" id="m527r246" style="width:84px; top:702px; left:773px;"/>
-<input type="text" name="m527r247" id="m527r247" style="width:73px; top:702px; left:868px;"/>
-<input type="text" name="m527r248" id="m527r248" style="width:74px; top:702px; left:952px;"/>
-<input type="text" name="m527r2410" id="m527r2410" style="width:75px; top:702px; left:1120px;"/>
-<span class="text-echo" style="top:747px; right:841px;"><?php echo $m527r991; ?></span>
-<span class="text-echo" style="top:747px; right:736px;"><?php echo $m527r992; ?></span>
-<span class="text-echo" style="top:747px; right:663px;"><?php echo $m527r993; ?></span>
-<span class="text-echo" style="top:747px; right:589px;"><?php echo $m527r994; ?></span>
-<span class="text-echo" style="top:747px; right:484px;"><?php echo $m527r995; ?></span>
-<span class="text-echo" style="top:747px; right:389px;"><?php echo $m527r996; ?></span>
-<span class="text-echo" style="top:747px; right:305px;"><?php echo $m527r997; ?></span>
-<span class="text-echo" style="top:747px; right:221px;"><?php echo $m527r998; ?></span>
-<span class="text-echo" style="top:747px; right:138px;"><?php echo $m527r999; ?></span>
-<span class="text-echo" style="top:747px; right:52px;"><?php echo $m527r9910; ?></span>
+<!-- modul 527 -->
+<input type="text" name="m527r11" id="m527r11" style="width:62px; top:299px; left:319px;"/>
+<input type="text" name="m527r12" id="m527r12" style="width:94px; top:299px; left:392px;"/>
+<input type="text" name="m527r13" id="m527r13" style="width:63px; top:299px; left:497px;"/>
+<input type="text" name="m527r14" id="m527r14" style="width:83px; top:299px; left:571px;"/>
+<input type="text" name="m527r15" id="m527r15" style="width:93px; top:299px; left:666px;"/>
+<input type="text" name="m527r16" id="m527r16" style="width:73px; top:299px; left:771px;"/>
+<input type="text" name="m527r17" id="m527r17" style="width:83px; top:299px; left:855px;"/>
+<input type="text" name="m527r18" id="m527r18" style="width:73px; top:299px; left:950px;"/>
+<input type="text" name="m527r19" id="m527r19" style="width:73px; top:299px; left:1034px;"/>
+<input type="text" name="m527r110" id="m527r110" style="width:62px; top:299px; left:1119px;"/>
+<input type="text" name="m527r21" id="m527r21" style="width:62px; top:332px; left:319px;"/>
+<input type="text" name="m527r22" id="m527r22" style="width:94px; top:332px; left:392px;"/>
+<input type="text" name="m527r23" id="m527r23" style="width:63px; top:332px; left:497px;"/>
+<input type="text" name="m527r24" id="m527r24" style="width:83px; top:332px; left:571px;"/>
+<input type="text" name="m527r25" id="m527r25" style="width:93px; top:332px; left:666px;"/>
+<input type="text" name="m527r26" id="m527r26" style="width:73px; top:332px; left:771px;"/>
+<input type="text" name="m527r27" id="m527r27" style="width:83px; top:332px; left:855px;"/>
+<input type="text" name="m527r28" id="m527r28" style="width:73px; top:332px; left:950px;"/>
+<input type="text" name="m527r29" id="m527r29" style="width:73px; top:332px; left:1034px;"/>
+<input type="text" name="m527r210" id="m527r210" style="width:62px; top:332px; left:1119px;"/>
+<input type="text" name="m527r31" id="m527r31" style="width:62px; top:360px; left:319px;"/>
+<input type="text" name="m527r32" id="m527r32" style="width:94px; top:360px; left:392px;"/>
+<input type="text" name="m527r33" id="m527r33" style="width:63px; top:360px; left:497px;"/>
+<input type="text" name="m527r34" id="m527r34" style="width:83px; top:360px; left:571px;"/>
+<input type="text" name="m527r35" id="m527r35" style="width:93px; top:360px; left:666px;"/>
+<input type="text" name="m527r36" id="m527r36" style="width:73px; top:360px; left:771px;"/>
+<input type="text" name="m527r37" id="m527r37" style="width:83px; top:360px; left:855px;"/>
+<input type="text" name="m527r38" id="m527r38" style="width:73px; top:360px; left:950px;"/>
+<input type="text" name="m527r39" id="m527r39" style="width:73px; top:360px; left:1034px;"/>
+<input type="text" name="m527r310" id="m527r310" style="width:62px; top:360px; left:1119px;"/>
+<input type="text" name="m527r41" id="m527r41" style="width:62px; top:394px; left:319px;"/>
+<input type="text" name="m527r42" id="m527r42" style="width:94px; top:394px; left:392px;"/>
+<input type="text" name="m527r43" id="m527r43" style="width:63px; top:394px; left:497px;"/>
+<input type="text" name="m527r44" id="m527r44" style="width:83px; top:394px; left:571px;"/>
+<input type="text" name="m527r45" id="m527r45" style="width:93px; top:394px; left:666px;"/>
+<input type="text" name="m527r46" id="m527r46" style="width:73px; top:394px; left:771px;"/>
+<input type="text" name="m527r47" id="m527r47" style="width:83px; top:394px; left:855px;"/>
+<input type="text" name="m527r48" id="m527r48" style="width:73px; top:394px; left:950px;"/>
+<input type="text" name="m527r49" id="m527r49" style="width:73px; top:394px; left:1034px;"/>
+<input type="text" name="m527r410" id="m527r410" style="width:62px; top:394px; left:1119px;"/>
+<input type="text" name="m527r51" id="m527r51" style="width:62px; top:435px; left:319px;"/>
+<input type="text" name="m527r52" id="m527r52" style="width:94px; top:435px; left:392px;"/>
+<input type="text" name="m527r53" id="m527r53" style="width:63px; top:435px; left:497px;"/>
+<input type="text" name="m527r54" id="m527r54" style="width:83px; top:435px; left:571px;"/>
+<input type="text" name="m527r55" id="m527r55" style="width:93px; top:435px; left:666px;"/>
+<input type="text" name="m527r56" id="m527r56" style="width:73px; top:435px; left:771px;"/>
+<input type="text" name="m527r57" id="m527r57" style="width:83px; top:435px; left:855px;"/>
+<input type="text" name="m527r58" id="m527r58" style="width:73px; top:435px; left:950px;"/>
+<input type="text" name="m527r59" id="m527r59" style="width:73px; top:435px; left:1034px;"/>
+<input type="text" name="m527r510" id="m527r510" style="width:62px; top:435px; left:1119px;"/>
+<input type="text" name="m527r61" id="m527r61" style="width:62px; top:468px; left:319px;"/>
+<input type="text" name="m527r62" id="m527r62" style="width:94px; top:468px; left:392px;"/>
+<input type="text" name="m527r63" id="m527r63" style="width:63px; top:468px; left:497px;"/>
+<input type="text" name="m527r64" id="m527r64" style="width:83px; top:468px; left:571px;"/>
+<input type="text" name="m527r65" id="m527r65" style="width:93px; top:468px; left:666px;"/>
+<input type="text" name="m527r66" id="m527r66" style="width:73px; top:468px; left:771px;"/>
+<input type="text" name="m527r67" id="m527r67" style="width:83px; top:468px; left:855px;"/>
+<input type="text" name="m527r68" id="m527r68" style="width:73px; top:468px; left:950px;"/>
+<input type="text" name="m527r69" id="m527r69" style="width:73px; top:468px; left:1034px;"/>
+<input type="text" name="m527r610" id="m527r610" style="width:62px; top:468px; left:1119px;"/>
+<input type="text" name="m527r71" id="m527r71" style="width:62px; top:514px; left:319px;"/>
+<input type="text" name="m527r72" id="m527r72" style="width:94px; top:514px; left:392px;"/>
+<input type="text" name="m527r73" id="m527r73" style="width:63px; top:514px; left:497px;"/>
+<input type="text" name="m527r74" id="m527r74" style="width:83px; top:514px; left:571px;"/>
+<input type="text" name="m527r75" id="m527r75" style="width:93px; top:514px; left:666px;"/>
+<input type="text" name="m527r76" id="m527r76" style="width:73px; top:514px; left:771px;"/>
+<input type="text" name="m527r77" id="m527r77" style="width:83px; top:514px; left:855px;"/>
+<input type="text" name="m527r78" id="m527r78" style="width:73px; top:514px; left:950px;"/>
+<input type="text" name="m527r79" id="m527r79" style="width:73px; top:514px; left:1034px;"/>
+<input type="text" name="m527r710" id="m527r710" style="width:62px; top:514px; left:1119px;"/>
+<input type="text" name="m527r81" id="m527r81" style="width:62px; top:562px; left:319px;"/>
+<input type="text" name="m527r82" id="m527r82" style="width:94px; top:562px; left:392px;"/>
+<input type="text" name="m527r83" id="m527r83" style="width:63px; top:562px; left:497px;"/>
+<input type="text" name="m527r84" id="m527r84" style="width:83px; top:562px; left:571px;"/>
+<input type="text" name="m527r85" id="m527r85" style="width:93px; top:562px; left:666px;"/>
+<input type="text" name="m527r86" id="m527r86" style="width:73px; top:562px; left:771px;"/>
+<input type="text" name="m527r87" id="m527r87" style="width:83px; top:562px; left:855px;"/>
+<input type="text" name="m527r88" id="m527r88" style="width:73px; top:562px; left:950px;"/>
+<input type="text" name="m527r89" id="m527r89" style="width:73px; top:562px; left:1034px;"/>
+<input type="text" name="m527r810" id="m527r810" style="width:62px; top:562px; left:1119px;"/>
+<input type="text" name="m527r91" id="m527r91" style="width:62px; top:602px; left:319px;"/>
+<input type="text" name="m527r92" id="m527r92" style="width:94px; top:602px; left:392px;"/>
+<input type="text" name="m527r93" id="m527r93" style="width:63px; top:602px; left:497px;"/>
+<input type="text" name="m527r94" id="m527r94" style="width:83px; top:602px; left:571px;"/>
+<input type="text" name="m527r95" id="m527r95" style="width:93px; top:602px; left:666px;"/>
+<input type="text" name="m527r96" id="m527r96" style="width:73px; top:602px; left:771px;"/>
+<input type="text" name="m527r97" id="m527r97" style="width:83px; top:602px; left:855px;"/>
+<input type="text" name="m527r98" id="m527r98" style="width:73px; top:602px; left:950px;"/>
+<input type="text" name="m527r99" id="m527r99" style="width:73px; top:602px; left:1034px;"/>
+<input type="text" name="m527r910" id="m527r910" style="width:62px; top:602px; left:1119px;"/>
+<input type="text" name="m527r101" id="m527r101" style="width:62px; top:642px; left:319px;"/>
+<input type="text" name="m527r102" id="m527r102" style="width:94px; top:642px; left:392px;"/>
+<input type="text" name="m527r103" id="m527r103" style="width:63px; top:642px; left:497px;"/>
+<input type="text" name="m527r104" id="m527r104" style="width:83px; top:642px; left:571px;"/>
+<input type="text" name="m527r105" id="m527r105" style="width:93px; top:642px; left:666px;"/>
+<input type="text" name="m527r106" id="m527r106" style="width:73px; top:642px; left:771px;"/>
+<input type="text" name="m527r107" id="m527r107" style="width:83px; top:642px; left:855px;"/>
+<input type="text" name="m527r108" id="m527r108" style="width:73px; top:642px; left:950px;"/>
+<input type="text" name="m527r109" id="m527r109" style="width:73px; top:642px; left:1034px;"/>
+<input type="text" name="m527r1010" id="m527r1010" style="width:62px; top:642px; left:1119px;"/>
+<input type="text" name="m527r111" id="m527r111" style="width:62px; top:676px; left:319px;"/>
+<input type="text" name="m527r112" id="m527r112" style="width:94px; top:676px; left:392px;"/>
+<input type="text" name="m527r113" id="m527r113" style="width:63px; top:676px; left:497px;"/>
+<input type="text" name="m527r114" id="m527r114" style="width:83px; top:676px; left:571px;"/>
+<input type="text" name="m527r115" id="m527r115" style="width:93px; top:676px; left:666px;"/>
+<input type="text" name="m527r116" id="m527r116" style="width:73px; top:676px; left:771px;"/>
+<input type="text" name="m527r117" id="m527r117" style="width:83px; top:676px; left:855px;"/>
+<input type="text" name="m527r118" id="m527r118" style="width:73px; top:676px; left:950px;"/>
+<input type="text" name="m527r119" id="m527r119" style="width:73px; top:676px; left:1034px;"/>
+<input type="text" name="m527r1110" id="m527r1110" style="width:62px; top:676px; left:1119px;"/>
+<input type="text" name="m527r121" id="m527r121" style="width:62px; top:704px; left:319px;"/>
+<input type="text" name="m527r122" id="m527r122" style="width:94px; top:704px; left:392px;"/>
+<input type="text" name="m527r123" id="m527r123" style="width:63px; top:704px; left:497px;"/>
+<input type="text" name="m527r124" id="m527r124" style="width:83px; top:704px; left:571px;"/>
+<input type="text" name="m527r125" id="m527r125" style="width:93px; top:704px; left:666px;"/>
+<input type="text" name="m527r126" id="m527r126" style="width:73px; top:704px; left:771px;"/>
+<input type="text" name="m527r127" id="m527r127" style="width:83px; top:704px; left:855px;"/>
+<input type="text" name="m527r128" id="m527r128" style="width:73px; top:704px; left:950px;"/>
+<input type="text" name="m527r129" id="m527r129" style="width:73px; top:704px; left:1034px;"/>
+<input type="text" name="m527r1210" id="m527r1210" style="width:62px; top:704px; left:1119px;"/>
+<input type="text" name="m527r131" id="m527r131" style="width:62px; top:732px; left:319px;"/>
+<input type="text" name="m527r132" id="m527r132" style="width:94px; top:732px; left:392px;"/>
+<input type="text" name="m527r133" id="m527r133" style="width:63px; top:732px; left:497px;"/>
+<input type="text" name="m527r134" id="m527r134" style="width:83px; top:732px; left:571px;"/>
+<input type="text" name="m527r135" id="m527r135" style="width:93px; top:732px; left:666px;"/>
+<input type="text" name="m527r136" id="m527r136" style="width:73px; top:732px; left:771px;"/>
+<input type="text" name="m527r137" id="m527r137" style="width:83px; top:732px; left:855px;"/>
+<input type="text" name="m527r138" id="m527r138" style="width:73px; top:732px; left:950px;"/>
+<input type="text" name="m527r139" id="m527r139" style="width:73px; top:732px; left:1034px;"/>
+<input type="text" name="m527r1310" id="m527r1310" style="width:62px; top:732px; left:1119px;"/>
+<input type="text" name="m527r141" id="m527r141" style="width:62px; top:760px; left:319px;"/>
+<input type="text" name="m527r142" id="m527r142" style="width:94px; top:760px; left:392px;"/>
+<input type="text" name="m527r143" id="m527r143" style="width:63px; top:760px; left:497px;"/>
+<input type="text" name="m527r144" id="m527r144" style="width:83px; top:760px; left:571px;"/>
+<input type="text" name="m527r145" id="m527r145" style="width:93px; top:760px; left:666px;"/>
+<input type="text" name="m527r146" id="m527r146" style="width:73px; top:760px; left:771px;"/>
+<input type="text" name="m527r147" id="m527r147" style="width:83px; top:760px; left:855px;"/>
+<input type="text" name="m527r148" id="m527r148" style="width:73px; top:760px; left:950px;"/>
+<input type="text" name="m527r149" id="m527r149" style="width:73px; top:760px; left:1034px;"/>
+<input type="text" name="m527r1410" id="m527r1410" style="width:62px; top:760px; left:1119px;"/>
+<input type="text" name="m527r151" id="m527r151" style="width:62px; top:794px; left:319px;"/>
+<input type="text" name="m527r152" id="m527r152" style="width:94px; top:794px; left:392px;"/>
+<input type="text" name="m527r153" id="m527r153" style="width:63px; top:794px; left:497px;"/>
+<input type="text" name="m527r154" id="m527r154" style="width:83px; top:794px; left:571px;"/>
+<input type="text" name="m527r155" id="m527r155" style="width:93px; top:794px; left:666px;"/>
+<input type="text" name="m527r156" id="m527r156" style="width:73px; top:794px; left:771px;"/>
+<input type="text" name="m527r157" id="m527r157" style="width:83px; top:794px; left:855px;"/>
+<input type="text" name="m527r158" id="m527r158" style="width:73px; top:794px; left:950px;"/>
+<input type="text" name="m527r159" id="m527r159" style="width:73px; top:794px; left:1034px;"/>
+<input type="text" name="m527r1510" id="m527r1510" style="width:62px; top:794px; left:1119px;"/>
+<input type="text" name="m527r161" id="m527r161" style="width:62px; top:845px; left:319px;"/>
+<input type="text" name="m527r162" id="m527r162" style="width:94px; top:845px; left:392px;"/>
+<input type="text" name="m527r163" id="m527r163" style="width:63px; top:845px; left:497px;"/>
+<input type="text" name="m527r164" id="m527r164" style="width:83px; top:845px; left:571px;"/>
+<input type="text" name="m527r165" id="m527r165" style="width:93px; top:845px; left:666px;"/>
+<input type="text" name="m527r166" id="m527r166" style="width:73px; top:845px; left:771px;"/>
+<input type="text" name="m527r167" id="m527r167" style="width:83px; top:845px; left:855px;"/>
+<input type="text" name="m527r168" id="m527r168" style="width:73px; top:845px; left:950px;"/>
+<input type="text" name="m527r169" id="m527r169" style="width:73px; top:845px; left:1034px;"/>
+<input type="text" name="m527r1610" id="m527r1610" style="width:62px; top:845px; left:1119px;"/>
+<input type="text" name="m527r171" id="m527r171" style="width:62px; top:893px; left:319px;"/>
+<input type="text" name="m527r172" id="m527r172" style="width:94px; top:893px; left:392px;"/>
+<input type="text" name="m527r173" id="m527r173" style="width:63px; top:893px; left:497px;"/>
+<input type="text" name="m527r174" id="m527r174" style="width:83px; top:893px; left:571px;"/>
+<input type="text" name="m527r175" id="m527r175" style="width:93px; top:893px; left:666px;"/>
+<input type="text" name="m527r176" id="m527r176" style="width:73px; top:893px; left:771px;"/>
+<input type="text" name="m527r177" id="m527r177" style="width:83px; top:893px; left:855px;"/>
+<input type="text" name="m527r178" id="m527r178" style="width:73px; top:893px; left:950px;"/>
+<input type="text" name="m527r179" id="m527r179" style="width:73px; top:893px; left:1034px;"/>
+<input type="text" name="m527r1710" id="m527r1710" style="width:62px; top:893px; left:1119px;"/>
 <?php                                         } ?>
 
 
 <?php if ( $strana == 13 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str13.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 13.strana 237kB">
+     alt="<?php echo $jpg_popis; ?> 13.strana 237kB" style="width:1250px; height:1000px;">
+<span class="text-echo" style="top:94px; left:810px; font-size:16px; letter-spacing:23px;"><?php echo $fir_ficox; ?></span>
+
+<!-- modul 527 pokrac. -->
+<input type="text" name="m527r181" id="m527r181" style="width:62px; top:319px; left:319px;"/>
+<input type="text" name="m527r182" id="m527r182" style="width:94px; top:319px; left:392px;"/>
+<input type="text" name="m527r183" id="m527r183" style="width:63px; top:319px; left:497px;"/>
+<input type="text" name="m527r184" id="m527r184" style="width:83px; top:319px; left:571px;"/>
+<input type="text" name="m527r185" id="m527r185" style="width:93px; top:319px; left:666px;"/>
+<input type="text" name="m527r186" id="m527r186" style="width:73px; top:319px; left:771px;"/>
+<input type="text" name="m527r187" id="m527r187" style="width:83px; top:319px; left:855px;"/>
+<input type="text" name="m527r188" id="m527r188" style="width:73px; top:319px; left:950px;"/>
+<input type="text" name="m527r1810" id="m527r1810" style="width:62px; top:319px; left:1119px;"/>
+<input type="text" name="m527r191" id="m527r191" style="width:62px; top:365px; left:319px;"/>
+<input type="text" name="m527r192" id="m527r192" style="width:94px; top:365px; left:392px;"/>
+<input type="text" name="m527r193" id="m527r193" style="width:63px; top:365px; left:497px;"/>
+<input type="text" name="m527r194" id="m527r194" style="width:83px; top:365px; left:571px;"/>
+<input type="text" name="m527r195" id="m527r195" style="width:93px; top:365px; left:666px;"/>
+<input type="text" name="m527r196" id="m527r196" style="width:73px; top:365px; left:771px;"/>
+<input type="text" name="m527r197" id="m527r197" style="width:83px; top:365px; left:855px;"/>
+<input type="text" name="m527r198" id="m527r198" style="width:73px; top:365px; left:950px;"/>
+<input type="text" name="m527r1910" id="m527r1910" style="width:62px; top:365px; left:1119px;"/>
+<input type="text" name="m527r201" id="m527r201" style="width:62px; top:433px; left:319px;"/>
+<input type="text" name="m527r202" id="m527r202" style="width:94px; top:433px; left:392px;"/>
+<input type="text" name="m527r203" id="m527r203" style="width:63px; top:433px; left:497px;"/>
+<input type="text" name="m527r204" id="m527r204" style="width:83px; top:433px; left:571px;"/>
+<input type="text" name="m527r205" id="m527r205" style="width:93px; top:433px; left:666px;"/>
+<input type="text" name="m527r206" id="m527r206" style="width:73px; top:433px; left:771px;"/>
+<input type="text" name="m527r207" id="m527r207" style="width:83px; top:433px; left:855px;"/>
+<input type="text" name="m527r208" id="m527r208" style="width:73px; top:433px; left:950px;"/>
+<input type="text" name="m527r2010" id="m527r2010" style="width:62px; top:433px; left:1119px;"/>
+<input type="text" name="m527r211" id="m527r211" style="width:62px; top:514px; left:319px;"/>
+<input type="text" name="m527r212" id="m527r212" style="width:94px; top:514px; left:392px;"/>
+<input type="text" name="m527r213" id="m527r213" style="width:63px; top:514px; left:497px;"/>
+<input type="text" name="m527r214" id="m527r214" style="width:83px; top:514px; left:571px;"/>
+<input type="text" name="m527r215" id="m527r215" style="width:93px; top:514px; left:666px;"/>
+<input type="text" name="m527r216" id="m527r216" style="width:73px; top:514px; left:771px;"/>
+<input type="text" name="m527r217" id="m527r217" style="width:83px; top:514px; left:855px;"/>
+<input type="text" name="m527r218" id="m527r218" style="width:73px; top:514px; left:950px;"/>
+<input type="text" name="m527r2110" id="m527r2110" style="width:62px; top:514px; left:1119px;"/>
+<input type="text" name="m527r221" id="m527r221" style="width:62px; top:580px; left:319px;"/>
+<input type="text" name="m527r222" id="m527r222" style="width:94px; top:580px; left:392px;"/>
+<input type="text" name="m527r223" id="m527r223" style="width:63px; top:580px; left:497px;"/>
+<input type="text" name="m527r224" id="m527r224" style="width:83px; top:580px; left:571px;"/>
+<input type="text" name="m527r225" id="m527r225" style="width:93px; top:580px; left:666px;"/>
+<input type="text" name="m527r226" id="m527r226" style="width:73px; top:580px; left:771px;"/>
+<input type="text" name="m527r227" id="m527r227" style="width:83px; top:580px; left:855px;"/>
+<input type="text" name="m527r228" id="m527r228" style="width:73px; top:580px; left:950px;"/>
+<input type="text" name="m527r2210" id="m527r2210" style="width:62px; top:580px; left:1119px;"/>
+<input type="text" name="m527r231" id="m527r231" style="width:62px; top:640px; left:319px;"/>
+<input type="text" name="m527r232" id="m527r232" style="width:94px; top:640px; left:392px;"/>
+<input type="text" name="m527r233" id="m527r233" style="width:63px; top:640px; left:497px;"/>
+<input type="text" name="m527r234" id="m527r234" style="width:83px; top:640px; left:571px;"/>
+<input type="text" name="m527r235" id="m527r235" style="width:93px; top:640px; left:666px;"/>
+<input type="text" name="m527r236" id="m527r236" style="width:73px; top:640px; left:771px;"/>
+<input type="text" name="m527r237" id="m527r237" style="width:83px; top:640px; left:855px;"/>
+<input type="text" name="m527r238" id="m527r238" style="width:73px; top:640px; left:950px;"/>
+<input type="text" name="m527r2310" id="m527r2310" style="width:62px; top:640px; left:1119px;"/>
+<input type="text" name="m527r241" id="m527r241" style="width:62px; top:690px; left:319px;"/>
+<input type="text" name="m527r242" id="m527r242" style="width:94px; top:690px; left:392px;"/>
+<input type="text" name="m527r243" id="m527r243" style="width:63px; top:690px; left:497px;"/>
+<input type="text" name="m527r244" id="m527r244" style="width:83px; top:690px; left:571px;"/>
+<input type="text" name="m527r245" id="m527r245" style="width:93px; top:690px; left:666px;"/>
+<input type="text" name="m527r246" id="m527r246" style="width:73px; top:690px; left:771px;"/>
+<input type="text" name="m527r247" id="m527r247" style="width:83px; top:690px; left:855px;"/>
+<input type="text" name="m527r248" id="m527r248" style="width:73px; top:690px; left:950px;"/>
+<input type="text" name="m527r2410" id="m527r2410" style="width:62px; top:690px; left:1119px;"/>
+<span class="text-echo" style="top:728px; right:866px;"><?php echo $m527r991; ?></span>
+<span class="text-echo" style="top:728px; right:760px;"><?php echo $m527r992; ?></span>
+<span class="text-echo" style="top:728px; right:687px;"><?php echo $m527r993; ?></span>
+<span class="text-echo" style="top:728px; right:592px;"><?php echo $m527r994; ?></span>
+<span class="text-echo" style="top:728px; right:486px;"><?php echo $m527r995; ?></span>
+<span class="text-echo" style="top:728px; right:403px;"><?php echo $m527r996; ?></span>
+<span class="text-echo" style="top:728px; right:308px;"><?php echo $m527r997; ?></span>
+<span class="text-echo" style="top:728px; right:223px;"><?php echo $m527r998; ?></span>
+<span class="text-echo" style="top:728px; right:139px;"><?php echo $m527r999; ?></span>
+<span class="text-echo" style="top:728px; right:65px;"><?php echo $m527r9910; ?></span>
 
 <!-- modul 474 -->
-<input type="text" name="m474r11" id="m474r11" style="width:101px; top:262px; left:559px;"/>
+<!-- <input type="text" name="m474r11" id="m474r11" style="width:101px; top:262px; left:559px;"/>
 <input type="text" name="m474r12" id="m474r12" style="width:101px; top:262px; left:673px;"/>
 <input type="text" name="m474r13" id="m474r13" style="width:101px; top:262px; left:787px;"/>
 <input type="text" name="m474r21" id="m474r21" style="width:101px; top:292px; left:559px;"/>
@@ -8366,15 +8309,15 @@ $sknacesb=$fir_sknace;
 <input type="text" name="m474r73" id="m474r73" style="width:101px; top:445px; left:787px;"/>
 <span class="text-echo" style="top:480px; right:287px;"><?php echo $m474r991; ?></span>
 <span class="text-echo" style="top:480px; right:172px;"><?php echo $m474r992; ?></span>
-<span class="text-echo" style="top:480px; right:59px;"><?php echo $m474r993; ?></span>
+<span class="text-echo" style="top:480px; right:59px;"><?php echo $m474r993; ?></span> -->
 
 <!-- modul 514 -->
-<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
+<!-- <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
      onclick="NacitajZobratovky(514);" style="top:563px; left:514px;" class="btn-row-tool">
 <input type="text" name="m514r1" id="m514r1" style="width:100px; top:660px; left:720px;"/>
 <input type="text" name="m514r2" id="m514r2" style="width:100px; top:690px; left:720px;"/>
 <input type="text" name="m514r3" id="m514r3" style="width:100px; top:721px; left:720px;"/>
-<span class="text-echo" style="top:756px; right:130px;"><?php echo $m514r99; ?></span>
+<span class="text-echo" style="top:756px; right:130px;"><?php echo $m514r99; ?></span> -->
 <?php                                         } ?>
 
 <div class="navbar">
