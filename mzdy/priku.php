@@ -140,7 +140,7 @@ var sirkawic = screen.width-10;
 
 <?php
 //tuto nacitam udaje z miezd do prikp
-if( $copern == 1 OR $copern == 2 OR $copern == 3 OR $copern == 4 OR $copern == 5 )
+if( $copern == 1 OR $copern == 2 OR $copern == 3 OR $copern == 4 OR $copern == 5 OR $copern == 6 )
      {
 //prac.subor
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
@@ -179,6 +179,11 @@ $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvyplz'.$kli_uzid.$sqlt;
 $exekucie=0;
 if( $copern == 5 AND $wedgb == 1 ) { $copern=1; $exekucie=1; }
 
+if( $_SERVER['SERVER_NAME'] == "www.vppsro.sk" ) { $alchem=1; }
+
+$alch928=0;
+if( $copern == 6 AND $alchem == 1 ) { $copern=1; $alch928=1; }
+
 //zamestnanci
 if( $copern == 1 )
      {
@@ -192,6 +197,24 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
+
+if( $alch928 == 1 )
+      {
+$sql = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE oc >= 0 ";
+$vysledek = mysql_query("$sql");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
+" SELECT kc,oc,$cislo_dok,".
+" '','',0,'','',".
+" 0,0,'','','',1".
+" FROM F$kli_vxcf"."_mzdmes ".
+" WHERE ume = $kli_vume AND dm = 928 ".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+//exit;
+
+      }
 
 //dopln udaje kun do vy
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
@@ -686,7 +709,7 @@ $vysledok = mysql_query("$sqlt");
 //koniec nacitania miezd
 
 //uhrad mzdy prepni naspat do prikazu
-if( $copern == 1 OR $copern == 2 OR $copern == 3 OR $copern == 4 )
+if( $copern == 1 OR $copern == 2 OR $copern == 3 OR $copern == 4 OR $copern == 6 )
      {
 
 ?>

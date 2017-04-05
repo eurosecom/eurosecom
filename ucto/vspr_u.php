@@ -1875,7 +1875,18 @@ if ( $copern == 7 AND $agrostav == 1 )
 </tr>
 <tr>
 <td class="pvstup" width="15%" >&nbsp;<?php echo $Odberatel; ?> Názov:</td>
-<td class="hvstup" width="25%" ><?php echo $riadok->nai; ?></td>
+<td class="hvstup" width="25%" ><?php echo $riadok->nai; ?>
+<?php
+if( $_SERVER['SERVER_NAME'] == "www.vppsro.sk" ) { $alchem=1; }
+if ( $alchem == 1 )
+  {
+?>
+<a href="#" onClick="window.open('../mzdy/priku.php?copern=6&drupoh=1&page=1&cislo_dok=<?php echo $riadok->dok;?>&hladaj_uce=<?php echo $riadok->uce;?>', '_self' )">
+<img src='../obr/vlozit.png' width=15 height=15 border=0 title="Uhradi zálohu 928 v mesaènej dávke" ></a>
+<?php
+  }
+?>
+</td>
 <td class="bmenu" width="10%" >
 <?php
 if ( $copern == 7 AND $merkfood == 1 )
