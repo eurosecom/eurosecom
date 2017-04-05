@@ -30,7 +30,7 @@ $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
 
 //.jpg podklad
-$jpg_cesta="../dokumenty/statistika2015/unp101/unp101_v15";
+$jpg_cesta="../dokumenty/statistika2016/unp101/unp101_v16";
 $jpg_popis="tlaèivo Roèný výkaz o úplných nákladoch práce ÚNP 1-01 ".$kli_vrok;
 
 
@@ -240,6 +240,16 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_unp101 MODIFY s1r006 DECIMAL(10,1) DEFAULT 0 ";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_unp101 MODIFY s2r099 DECIMAL(10,1) DEFAULT 0 ";
+$vysledek = mysql_query("$sql");
+}
+//new 2016
+$sql = "SELECT s2r068 FROM F$kli_vxcf"."_statistika_unp101 WHERE ico=0";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_unp101 ADD new2016 DECIMAL(2,0) DEFAULT 0 AFTER ico ";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_unp101 ADD s2r068 DECIMAL(10,0) DEFAULT 0 AFTER new2016";
 $vysledek = mysql_query("$sql");
 }
 //koniec vytvor tabulku v databaze
@@ -715,6 +725,7 @@ $s2r064 = strip_tags($_REQUEST['s2r064']);
 $s2r065 = strip_tags($_REQUEST['s2r065']);
 $s2r066 = strip_tags($_REQUEST['s2r066']);
 $s2r067 = strip_tags($_REQUEST['s2r067']);
+$s2r068 = strip_tags($_REQUEST['s2r068']);
 $s2r099 = strip_tags($_REQUEST['s2r099']);
 $uprav="NO";
 
@@ -735,14 +746,14 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_unp101 SET ".
 " s2r021='$s2r021', s2r022='$s2r022', s2r023='$s2r023', s2r024='$s2r024', ".
 " s2r025='$s2r025', s2r026='$s2r026', s2r027='$s2r027', s2r028='$s2r028', ".
 " s2r029='$s2r029', s2r030='$s2r030', s2r031='$s2r031', s2r032='$s2r032', ".
-" s2r033='$s2r033', s2r034='$s2r034', ".
+" s2r033='$s2r033', s2r034='$s2r034', s2r035='$s2r035', s2r036='$s2r036', ".
 " konx8=0 ".
 " WHERE ico >= 0 ";
                     }
 
 if ( $strana == 3 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_unp101 SET ".
-" s2r035='$s2r035', s2r036='$s2r036', s2r037='$s2r037', ".
+" s2r037='$s2r037', ".
 " s2r038='$s2r038', s2r039='$s2r039', s2r040='$s2r040', s2r041='$s2r041', ".
 " s2r042='$s2r042', s2r043='$s2r043', s2r044='$s2r044', s2r045='$s2r045', ".
 " s2r046='$s2r046', s2r047='$s2r047', s2r048='$s2r048', s2r049='$s2r049', ".
@@ -750,7 +761,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_unp101 SET ".
 " s2r054='$s2r054', s2r055='$s2r055', s2r056='$s2r056', s2r057='$s2r057', ".
 " s2r058='$s2r058', s2r059='$s2r059', s2r060='$s2r060', s2r061='$s2r061', ".
 " s2r062='$s2r062', s2r063='$s2r063', s2r064='$s2r064', s2r065='$s2r065', ".
-" s2r066='$s2r066', s2r067='$s2r067', s2r099='$s2r099', ".
+" s2r066='$s2r066', s2r067='$s2r067', s2r068='$s2r068', s2r099='$s2r099', ".
 " konx8=0 ".
 " WHERE ico >= 0 ";
                     }
@@ -810,7 +821,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_unp101 SET ".
 "+s2r031+s2r032+s2r033+s2r034+s2r035+s2r036+s2r037+s2r038+s2r039+s2r040".
 "+s2r041+s2r042+s2r043+s2r044+s2r045+s2r046+s2r047+s2r048+s2r049+s2r050".
 "+s2r051+s2r052+s2r053+s2r054+s2r055+s2r056+s2r057+s2r058+s2r059+s2r060".
-"+s2r061+s2r062+s2r063+s2r064+s2r065+s2r066+s2r067, ".
+"+s2r061+s2r062+s2r063+s2r064+s2r065+s2r066+s2r067+s2r068, ".
 " konx8=0 ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt"); 
@@ -894,6 +905,7 @@ $s2r064 = $fir_riadok->s2r064;
 $s2r065 = $fir_riadok->s2r065;
 $s2r066 = $fir_riadok->s2r066;
 $s2r067 = $fir_riadok->s2r067;
+$s2r068 = $fir_riadok->s2r068;
 $s2r099 = $fir_riadok->s2r099;
 mysql_free_result($fir_vysledok);
      }
@@ -979,11 +991,12 @@ form input[type=text] {
    document.formv1.s2r032.value = '<?php echo "$s2r032";?>';
    document.formv1.s2r033.value = '<?php echo "$s2r033";?>';
    document.formv1.s2r034.value = '<?php echo "$s2r034";?>';
+   document.formv1.s2r035.value = '<?php echo "$s2r035";?>';
+   document.formv1.s2r036.value = '<?php echo "$s2r036";?>';
 <?php                     } ?>
 
 <?php if ( $strana == 3 ) { ?>
-   document.formv1.s2r035.value = '<?php echo "$s2r035";?>';
-   document.formv1.s2r036.value = '<?php echo "$s2r036";?>';
+
    document.formv1.s2r037.value = '<?php echo "$s2r037";?>';
    document.formv1.s2r038.value = '<?php echo "$s2r038";?>';
  //document.formv1.s2r039.value = '<?php echo "$s2r039";?>';
@@ -1015,6 +1028,7 @@ form input[type=text] {
  //document.formv1.s2r065.value = '<?php echo "$s2r065";?>';
    document.formv1.s2r066.value = '<?php echo "$s2r066";?>';
  //document.formv1.s2r067.value = '<?php echo "$s2r067";?>';
+   document.formv1.s2r068.value = '<?php echo "$s2r068";?>';
  //document.formv1.s2r099.value = '<?php echo "$s2r099";?>';
 <?php                     } ?>
   }
@@ -1187,6 +1201,8 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <input type="text" name="s2r032" id="s2r032" style="width:100px; top:1145px; left:700px;"/>
 <input type="text" name="s2r033" id="s2r033" style="width:100px; top:1171px; left:700px;"/>
 <input type="text" name="s2r034" id="s2r034" style="width:100px; top:1203px; left:700px;"/>
+<input type="text" name="s2r035" id="s2r035" style="width:100px; top:1223px; left:700px;"/>
+<input type="text" name="s2r036" id="s2r036" style="width:100px; top:1243px; left:700px;"/>
 <?php                                        } ?>
 
 
@@ -1195,8 +1211,7 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
      alt="<?php echo $jpg_popis; ?> 3.strana 257kB">
 
 <!-- modul 378 pokrac. casti D -->
-<input type="text" name="s2r035" id="s2r035" style="width:100px; top:127px; left:700px;"/>
-<input type="text" name="s2r036" id="s2r036" style="width:100px; top:159px; left:700px;"/>
+
 <input type="text" name="s2r037" id="s2r037" style="width:100px; top:184px; left:700px;"/>
 <input type="text" name="s2r038" id="s2r038" style="width:100px; top:211px; left:700px;"/>
 <span class="text-echo" style="top:247px; right:144px;"><?php echo $s2r039; ?></span>
@@ -1228,7 +1243,8 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <span class="text-echo" style="top:1016px; right:144px;"><?php echo $s2r065; ?></span>
 <input type="text" name="s2r066" id="s2r066" style="width:100px; top:1042px; left:700px;"/>
 <span class="text-echo" style="top:1073px; right:144px;"><?php echo $s2r067; ?></span>
-<span class="text-echo" style="top:1100px; right:144px;"><?php echo $s2r099; ?></span>
+<input type="text" name="s2r068" id="s2r068" style="width:100px; top:1093px; left:700px;"/>
+<span class="text-echo" style="top:1113px; right:144px;"><?php echo $s2r099; ?></span>
 <?php                                        } ?>
 
 <div class="navbar">

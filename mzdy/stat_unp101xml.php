@@ -253,7 +253,106 @@ if ( $j == 0 )
   $text = "<unp xsi:schemaLocation=\"http://www.trexima.sk/xsd/unp/1 unp.xsd\" 
           xmlns=\"http://www.trexima.sk/xsd/unp/1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"."\r\n"; fwrite($soubor, $text);
 
+  $text = "<subor>"."\r\n"; fwrite($soubor, $text);
 
+$zistovanie=iconv("CP1250", "UTF-8", "ÚNP 1-01");
+
+  $text = "<zistovanie>".$zistovanie."</zistovanie>"."\r\n"; fwrite($soubor, $text);
+  $text = "<obdobie>".$kli_vrok."</obdobie>"."\r\n"; fwrite($soubor, $text);
+  $text = "<sw_firma>EDcom s.r.o.</sw_firma>"."\r\n"; fwrite($soubor, $text);
+  $text = "<program>EuroSecom</program>"."\r\n"; fwrite($soubor, $text);
+  $text = "<verzia>2017_04</verzia>"."\r\n"; fwrite($soubor, $text);
+  $text = "</subor>"."\r\n"; fwrite($soubor, $text);
+  $text = "<respondent>"."\r\n"; fwrite($soubor, $text);
+  $text = "<ico>".$fir_fico."</ico>"."\r\n"; fwrite($soubor, $text);
+
+$nazov=iconv("CP1250", "UTF-8", $fir_fnaz);
+
+  $text = "<nazov>".$nazov."</nazov>"."\r\n"; fwrite($soubor, $text);
+
+$ulcis=iconv("CP1250", "UTF-8", $fir_fuli."".$fir_fcdm);
+
+  $text = "<ul_cis>".$ulcis."</ul_cis>"."\r\n"; fwrite($soubor, $text);
+
+$obec=iconv("CP1250", "UTF-8", $fir_fmes);
+
+  $text = "<obec>".$obec."</obec>"."\r\n"; fwrite($soubor, $text);
+
+$psc = str_replace(" ","",$fir_fpsc);
+$psc=iconv("CP1250", "UTF-8", $psc);
+
+  $text = "<psc>".$psc."</psc>"."\r\n"; fwrite($soubor, $text);
+
+
+  $text = "<PF>".$hlavicka->s1r001."</PF>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PFP>".$hlavicka->s1r002."</PFP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PFS>".$hlavicka->s1r003."</PFS>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PP>".$hlavicka->s1r004."</PP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PU>".$hlavicka->s1r005."</PU>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PUP>".$hlavicka->s1r006."</PUP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<T>".$hlavicka->s1r007."</T>"."\r\n"; fwrite($soubor, $text);
+  $text = "<TP>".$hlavicka->s1r008."</TP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<TS>".$hlavicka->s1r009."</TS>"."\r\n"; fwrite($soubor, $text);
+  $text = "<TU>".$hlavicka->s1r010."</TU>"."\r\n"; fwrite($soubor, $text);
+  $text = "<TCP>".$hlavicka->s1r011."</TCP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<TPP>".$hlavicka->s1r012."</TPP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<TSP>".$hlavicka->s1r013."</TSP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<TUP>".$hlavicka->s1r014."</TUP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<MZ>".$hlavicka->s2r015."</MZ>"."\r\n"; fwrite($soubor, $text);
+  $text = "<MR>".$hlavicka->s2r016."</MR>"."\r\n"; fwrite($soubor, $text);
+  $text = "<MN>".$hlavicka->s2r017."</MN>"."\r\n"; fwrite($soubor, $text);
+  $text = "<MOC>".$hlavicka->s2r018."</MOC>"."\r\n"; fwrite($soubor, $text);
+  $text = "<MOM>".$hlavicka->s2r019."</MOM>"."\r\n"; fwrite($soubor, $text);
+  $text = "<MOD>".$hlavicka->s2r020."</MOD>"."\r\n"; fwrite($soubor, $text);
+  $text = "<MP>".$hlavicka->s2r021."</MP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<MA>".$hlavicka->s2r022."</MA>"."\r\n"; fwrite($soubor, $text);
+  $text = "<MO>".$hlavicka->s2r023."</MO>"."\r\n"; fwrite($soubor, $text);
+  $text = "<MZDY>".$hlavicka->s2r024."</MZDY>"."\r\n"; fwrite($soubor, $text);
+  $text = "<N>".$hlavicka->s2r025."</N>"."\r\n"; fwrite($soubor, $text);
+  $text = "<NV>".$hlavicka->s2r026."</NV>"."\r\n"; fwrite($soubor, $text);
+  $text = "<ND>".$hlavicka->s2r027."</ND>"."\r\n"; fwrite($soubor, $text);
+  $text = "<NP>".$hlavicka->s2r028."</NP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<NS>".$hlavicka->s2r029."</NS>"."\r\n"; fwrite($soubor, $text);
+  $text = "<SP>".$hlavicka->s2r030."</SP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PH>".$hlavicka->s2r031."</PH>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PLZ>".$hlavicka->s2r032."</PLZ>"."\r\n"; fwrite($soubor, $text);
+  $text = "<OPN>".$hlavicka->s2r033."</OPN>"."\r\n"; fwrite($soubor, $text);
+  $text = "<VV>".$hlavicka->s2r034."</VV>"."\r\n"; fwrite($soubor, $text);
+  $text = "<FV>".$hlavicka->s2r035."</FV>"."\r\n"; fwrite($soubor, $text);
+  $text = "<FB>".$hlavicka->s2r036."</FB>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PPA>".$hlavicka->s2r037."</PPA>"."\r\n"; fwrite($soubor, $text);
+  $text = "<OU>".$hlavicka->s2r038."</OU>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PNPS>".$hlavicka->s2r039."</PNPS>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PZP>".$hlavicka->s2r040."</PZP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PDP>".$hlavicka->s2r041."</PDP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PIP>".$hlavicka->s2r042."</PIP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PUS>".$hlavicka->s2r043."</PUS>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PNP>".$hlavicka->s2r044."</PNP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PZDP>".$hlavicka->s2r045."</PZDP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PPN>".$hlavicka->s2r046."</PPN>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PGP>".$hlavicka->s2r047."</PGP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<DSP>".$hlavicka->s2r048."</DSP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<DDP>".$hlavicka->s2r049."</DDP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<SD>".$hlavicka->s2r050."</SD>"."\r\n"; fwrite($soubor, $text);
+  $text = "<ODS>".$hlavicka->s2r051."</ODS>"."\r\n"; fwrite($soubor, $text);
+  $text = "<NPN>".$hlavicka->s2r052."</NPN>"."\r\n"; fwrite($soubor, $text);
+  $text = "<DMV>".$hlavicka->s2r053."</DMV>"."\r\n"; fwrite($soubor, $text);
+  $text = "<DZ>".$hlavicka->s2r054."</DZ>"."\r\n"; fwrite($soubor, $text);
+  $text = "<NUC>".$hlavicka->s2r055."</NUC>"."\r\n"; fwrite($soubor, $text);
+  $text = "<SVS>".$hlavicka->s2r056."</SVS>"."\r\n"; fwrite($soubor, $text);
+  $text = "<ST>".$hlavicka->s2r057."</ST>"."\r\n"; fwrite($soubor, $text);
+  $text = "<OPZ>".$hlavicka->s2r058."</OPZ>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PSO>".$hlavicka->s2r059."</PSO>"."\r\n"; fwrite($soubor, $text);
+  $text = "<NSVP>".$hlavicka->s2r060."</NSVP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<NSZ>".$hlavicka->s2r061."</NSZ>"."\r\n"; fwrite($soubor, $text);
+  $text = "<PSS>".$hlavicka->s2r062."</PSS>"."\r\n"; fwrite($soubor, $text);
+  $text = "<ONN>".$hlavicka->s2r063."</ONN>"."\r\n"; fwrite($soubor, $text);
+  $text = "<NBZ>".$hlavicka->s2r064."</NBZ>"."\r\n"; fwrite($soubor, $text);
+  $text = "<NNPS>".$hlavicka->s2r065."</NNPS>"."\r\n"; fwrite($soubor, $text);
+  $text = "<SVP>".$hlavicka->s2r066."</SVP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<CNP>".$hlavicka->s2r067."</CNP>"."\r\n"; fwrite($soubor, $text);
+  $text = "<ZZS>".$hlavicka->s2r068."</ZZS>"."\r\n"; fwrite($soubor, $text);
+  $text = "</respondent>"."\r\n"; fwrite($soubor, $text);
 
   $text = "</unp>"."\r\n"; fwrite($soubor, $text);
 }

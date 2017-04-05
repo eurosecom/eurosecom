@@ -179,7 +179,7 @@ $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvyplz'.$kli_uzid.$sqlt;
 $exekucie=0;
 if( $copern == 5 AND $wedgb == 1 ) { $copern=1; $exekucie=1; }
 
-if( $_SERVER['SERVER_NAME'] == "www.vppsro.sk" ) { $alchem=1; }
+if( $copern == 6 AND $_SERVER['SERVER_NAME'] == "www.vppsro.sk" ) { $alchem=1; }
 
 $alch928=0;
 if( $copern == 6 AND $alchem == 1 ) { $copern=1; $alch928=1; }
