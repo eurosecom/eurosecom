@@ -1,7 +1,7 @@
 <!doctype html>
 <HTML>
 <?php
-//celkovy zaciatok dokumentu P304 2017
+//celkovy zaciatok dokumentu P304 2016
 do
 {
 $sys = 'UCT';
@@ -26,7 +26,7 @@ $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
 
 //.jpg podklad
-$jpg_cesta="../dokumenty/statistika2017/prod304/prod304_v17";
+$jpg_cesta="../dokumenty/statistika2016/prod304/prod304_v16";
 $jpg_popis="tlaèivo Štvrroèný výkaz produkèných odvetví Prod 3-04 ".$kli_vrok;
 
 //datumove funkcie
@@ -164,7 +164,7 @@ $oznac = mysql_query("$sqtoz");
      }
 $sql = "DROP TABLE F".$kli_vxcf."_statistika_p304archx ";
 $vysledek = mysql_query("$sql");
-$strana=6;
+$strana=5;
 $copern=402;
 }
 //koniec modul1004
@@ -283,7 +283,7 @@ $sql = "DROP TABLE F".$kli_vxcf."_statistika_p304archx ";
 $vysledek = mysql_query("$sql"); 
 
 
-$strana=5;
+$strana=4;
 $copern=402;
 }
 //koniec modul1003
@@ -455,7 +455,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt"); 
 
-$strana=3;
+$strana=2;
 }
 //koniec odpocitaj modul 112 z uobrat.php
 
@@ -728,7 +728,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");
 
-$strana=4;
+$strana=3;
 }
 //koniec odpocitaj modul 545 z uobrat.php
 
@@ -791,7 +791,7 @@ $oznac = mysql_query("$sqtoz");
 $sql = "DROP TABLE F".$kli_vxcf."_statistika_p304archx ";
 $vysledek = mysql_query("$sql");
 
-$strana=4;
+$strana=3;
 }
 //koniec odpocitaj modul 1545 z suvaha.php
 
@@ -1517,7 +1517,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 " mod5r01='$r01', mod5r02='$r02', mod5r06='$r02k', mod5r07='$r03', mod5r13=mod5r06, mod5r10='$r07', mod5r11='$r08', mod5r12='$r09',".
 " mod5r15='$r10', mod5r16='$r11', mod5r17='$r12', mod5r18='$r13', mod5r19='$r14', mod5r20='$r15', mod5r08='$skrat',".
 " mod5r21='$r16', mod5r22='$r17', mod5r23='$r19', mod5r24='$r18', mod5r25='$r20',".
-" mod5r99=mod5r01+mod5r02+mod5r06+mod5r07+mod5r08+mod5r10,".
+" mod5r99=mod5r01+mod5r02+mod5r03+mod5r04+mod5r05+mod5r06+mod5r07+mod5r08+mod5r10,".
 " mod5r99=mod5r99+mod5r11+mod5r12+mod5r13+mod5r14+mod5r15+mod5r16+mod5r17+mod5r18+mod5r19+mod5r20+mod5r22+mod5r23+mod5r24+mod5r25".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");  
@@ -1530,7 +1530,7 @@ $vsql = 'DROP TABLE F'.$kli_vxcf.'_statprac';
 //$vytvor = mysql_query("$vsql");
 
 $copern=102;
-$strana=7;
+$strana=6;
 }
 //koniec nacitanie modul 5 z miezd
 
@@ -1727,26 +1727,20 @@ $mod5r99 = strip_tags($_REQUEST['mod5r99']);
 if ( $strana == 1 ) {
 $copern=102;
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
-" odoslane='$odoslane_sql' ".
+" odoslane='$odoslane_sql', cinnost='$cinnost' ".
 " WHERE ico >= 0";
                     }
 
 if ( $strana == 2 ) {
 $copern=102;
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
-" cinnost='$cinnost', mod2r01='$mod2r01', mod2r02='$mod2r02', ".
+" mod2r01='$mod2r01', mod2r02='$mod2r02', ".
 " m100065ano='$m100065ano', m100065nie='$m100065nie', ".
 " mod82r01='$mod82r01', mod82r02='$mod82r02', mod82r03='$mod82r03', mod82r04='$mod82r04', mod82r05='$mod82r05', ".
 " mod82r99=mod82r01+mod82r02+mod82r03+mod82r04+mod82r05, ".
 " mod82r012='$mod82r012', mod82r032='$mod82r032', mod82r042='$mod82r042', ".
 " mod82r992=mod82r012+mod82r032+mod82r042, ".
-" mod113ano='$mod113ano', mod113nie='$mod113nie' ".
-" WHERE ico >= 0";
-                    }
-
-if ( $strana == 3 ) {
-$copern=102;
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
+" mod113ano='$mod113ano', mod113nie='$mod113nie', ".
 " mod112r01a1='$mod112r01a1', mod112r02a1='$mod112r02a1', mod112r03a1='$mod112r03a1', ".
 " mod112r04a1='$mod112r04a1', mod112r05a1='$mod112r05a1', mod112r06a1='$mod112r06a1', ".
 " mod112r07a1='$mod112r07a1', mod112r08a1='$mod112r08a1', mod112r09a1='$mod112r09a1', ".
@@ -1767,10 +1761,10 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 " mod112r07a4='$mod112r07a4', mod112r08a4='$mod112r08a4', mod112r09a4='$mod112r09a4', ".
 " mod112r10a4='$mod112r10a4', mod112r11a4='$mod112r11a4', mod112r12a4='$mod112r12a4', ".
 " mod112r99a4=mod112r01a4+mod112r02a4+mod112r03a4+mod112r04a4+mod112r05a4+mod112r06a4+mod112r07a4+mod112r08a4+mod112r09a4+mod112r10a4+mod112r11a4+mod112r12a4 ".
-" WHERE ico >= 0"; 
+" WHERE ico >= 0";
                     }
 
-if ( $strana == 4 ) {
+if ( $strana == 3 ) {
 $copern=102;
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 " mod545r01a1='$mod545r01a1', mod545r02a1='$mod545r02a1', mod545r03a1='$mod545r03a1', ".
@@ -1800,7 +1794,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 " WHERE ico >= 0"; 
                     }
 
-if ( $strana == 5 ) {
+if ( $strana == 4 ) {
 $copern=402;
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 " mod1003s02='$mod1003s02', mod1003s03='$mod1003s03', mod1003s04='$mod1003s04', ".
@@ -1808,7 +1802,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 " WHERE ico >= 0";
                     }
 
-if ( $strana == 6 ) {
+if ( $strana == 5 ) {
 $copern=402;
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 " mod1004s02='$mod1004s02', mod1004s03='$mod1004s03', mod1004s04='$mod1004s04', ".
@@ -1817,7 +1811,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 " WHERE ico >= 0";
                     }
 
-if ( $strana == 7 ) {
+if ( $strana == 6 ) {
 $copern=102;
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p304 SET ".
 " mod5r01='$mod5r01', mod5r02='$mod5r02', mod5r03='$mod5r03', mod5r04='$mod5r04', ".
@@ -2092,10 +2086,10 @@ a.archiv-link {
   {
 <?php if ( $strana == 1 ) { ?>
    document.formv1.odoslane.value = '<?php echo "$odoslane_sk"; ?>';
+   document.formv1.cinnost.value = '<?php echo "$cinnost"; ?>';
 <?php                     } ?>
 
 <?php if ( $strana == 2 ) { ?>
-   document.formv1.cinnost.value = '<?php echo "$cinnost"; ?>';
    document.formv1.mod2r01.value = '<?php echo "$mod2r01";?>';
    document.formv1.mod2r02.value = '<?php echo "$mod2r02";?>';
 <?php if ( $m100065ano == 1 ) { echo "document.formv1.m100065ano.checked='checked';"; } ?>
@@ -2114,9 +2108,7 @@ a.archiv-link {
 
 <?php if ( $mod113ano == 1 ) { echo "document.formv1.mod113ano.checked='checked';"; } ?>
 <?php if ( $mod113nie == 1 ) { echo "document.formv1.mod113nie.checked='checked';"; } ?>
-<?php                     } ?>
 
-<?php if ( $strana == 3 ) { ?>
    document.formv1.mod112r01a1.value = '<?php echo "$mod112r01a1";?>';
    document.formv1.mod112r02a1.value = '<?php echo "$mod112r02a1";?>';
    document.formv1.mod112r03a1.value = '<?php echo "$mod112r03a1";?>';
@@ -2172,8 +2164,7 @@ a.archiv-link {
  //document.formv1.mod112r99a4.value = '<?php echo "$mod112r99a4";?>';
 <?php                     } ?>
 
-
-<?php if ( $strana == 4 ) { ?>
+<?php if ( $strana == 3 ) { ?>
    document.formv1.mod545r01a1.value = '<?php echo "$mod545r01a1";?>';
    document.formv1.mod545r02a1.value = '<?php echo "$mod545r02a1";?>';
    document.formv1.mod545r03a1.value = '<?php echo "$mod545r03a1";?>';
@@ -2232,12 +2223,12 @@ a.archiv-link {
  //document.formv1.mod545r99a2.value = '<?php echo "$mod545r99a2";?>';
 <?php                     } ?>
 
-<?php if ( $strana == 7 ) { ?>
+<?php if ( $strana == 6 ) { ?>
    document.formv1.mod5r01.value = '<?php echo "$mod5r01";?>';
    document.formv1.mod5r02.value = '<?php echo "$mod5r02";?>';
-   //document.formv1.mod5r03.value = '<?php echo "$mod5r03";?>';
-   //document.formv1.mod5r04.value = '<?php echo "$mod5r04";?>';
-   //document.formv1.mod5r05.value = '<?php echo "$mod5r05";?>';
+   document.formv1.mod5r03.value = '<?php echo "$mod5r03";?>';
+   document.formv1.mod5r04.value = '<?php echo "$mod5r04";?>';
+   document.formv1.mod5r05.value = '<?php echo "$mod5r05";?>';
    document.formv1.mod5r06.value = '<?php echo "$mod5r06";?>';
    document.formv1.mod5r07.value = '<?php echo "$mod5r07";?>';
    document.formv1.mod5r08.value = '<?php echo "$mod5r08";?>';
@@ -2271,7 +2262,7 @@ a.archiv-link {
 ?>
   function ObnovUI()
   {
-<?php if ( $strana == 5 ) { ?>
+<?php if ( $strana == 4 ) { ?>
   //document.formv1.mod1003s01.value = '<?php echo "$mod1003s01";?>';
    document.formv1.mod1003s02.value = '<?php echo "$mod1003s02";?>';
    document.formv1.mod1003s03.value = '<?php echo "$mod1003s03";?>';
@@ -2282,7 +2273,7 @@ a.archiv-link {
   //document.formv1.mod1003naz.value = '<?php echo "$mod1003naz";?>';
 <?php                     } ?>
 
-<?php if ( $strana == 6 ) { ?>
+<?php if ( $strana == 5 ) { ?>
   //document.formv1.mod1004s01.value = '<?php echo "$mod1004s01";?>';
    document.formv1.mod1004s02.value = '<?php echo "$mod1004s02";?>';
    document.formv1.mod1004s03.value = '<?php echo "$mod1004s03";?>';
@@ -2328,11 +2319,11 @@ a.archiv-link {
 
   function TlacVykaz()
   {
-   window.open('../ucto/statistika_p304.php?copern=11&strana=9999', '_blank');
+   window.open('../ucto/statistika_p304_2016.php?copern=11&strana=9999', '_blank');
   }
 //  function TlacVykazSirka()
 //  {
-//   window.open('../ucto/statistika_p304.php?copern=11&strana=9998', '_blank');
+//   window.open('../ucto/statistika_p304_2016.php?copern=11&strana=9998', '_blank');
 //  }
   function StatUdajeFirma()
   {
@@ -2340,7 +2331,7 @@ a.archiv-link {
   }
   function NacitajMzdy()
   {
-   window.open('../ucto/statistika_p304.php?copern=200&drupoh=1&page=1&typ=PDF&cstat=304&vyb_ume=<?php echo $vyb_umk; ?>', '_self');
+   window.open('../ucto/statistika_p304_2016.php?copern=200&drupoh=1&page=1&typ=PDF&cstat=304&vyb_ume=<?php echo $vyb_umk; ?>', '_self');
   }
   function NacitajObratovkaM112()
   {
@@ -2369,7 +2360,7 @@ a.archiv-link {
 
   function zarch( stvrtrok )
   {
-   window.open('../ucto/statistika_p304.php?copern=11&strana=9999&drupoh=1&page=1&typ=PDF&zarchivu=1&stvarch=' + stvrtrok +  '&xxx=1', '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+   window.open('../ucto/statistika_p304_2016.php?copern=11&strana=9999&drupoh=1&page=1&typ=PDF&zarchivu=1&stvarch=' + stvrtrok +  '&xxx=1', '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
 
 //bud alebo checkbox v module 100065
@@ -2421,26 +2412,25 @@ if ( $copern == 102 OR $copern == 402 )
 <?php
 $sirka=950;
 $vyska=1300;
-if ( $strana == 5 OR $strana == 6 ) { $sirka=1250; $vyska=900; }
+if ( $strana == 4 OR $strana == 5 ) { $sirka=1250; $vyska=900; }
 ?>
 <div id="content" style="width:<?php echo $sirka; ?>px; height:<?php echo $vyska; ?>px;">
-<FORM name="formv1" method="post" action="statistika_p304.php?copern=103&strana=<?php echo $strana; ?>">
+<FORM name="formv1" method="post" action="statistika_p304_2016.php?copern=103&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive";
 $clas5="noactive"; $clas6="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 if ( $strana == 3 ) $clas3="active"; if ( $strana == 4 ) $clas4="active";
-if ( $strana == 5 ) $clas5="active"; if ( $strana == 6 ) $clas6="active"; if ( $strana == 7 ) $clas7="active";
-$source="statistika_p304.php?";
+if ( $strana == 5 ) $clas5="active"; if ( $strana == 6 ) $clas6="active";
+$source="statistika_p304_2016.php?";
 ?>
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=402&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=402&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=402&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=7', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
 <?php
 $tvpol=0;
 $sqltt = "SELECT * FROM F".$kli_vxcf."_statistika_p304arch WHERE psys >= 1 ORDER BY psys ";
@@ -2467,7 +2457,6 @@ echo "<a href='#' onclick='zarch(".$rtov->psys.")' title='Kópia výkazu z archívu
 $i=$i+1;
    }
 ?>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=7', '_blank');" class="<?php echo $clas7; ?> toright">7</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=6', '_blank');" class="<?php echo $clas6; ?> toright">6</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=5', '_blank');" class="<?php echo $clas5; ?> toright">5</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=4', '_blank');" class="<?php echo $clas4; ?> toright">4</a>
@@ -2506,17 +2495,15 @@ $kli_vrokx = substr($kli_vrok,2,2);
 <span class="text-echo center" style="width:499px; top:1015px; left:400px;"><?php echo $fir_mzdt04; ?></span>
 <span class="text-echo center" style="width:499px; top:1038px; left:400px;"><?php echo $fir_fem1; ?></span>
 
-
+<!-- modul 100340 -->
+<input type="text" name="cinnost" id="cinnost" style="width:488px; top:1149px; left:403px;"/>
+<span class="text-echo center" style="width:499px; top:1177px; left:400px;"><?php echo $sknace; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 2.strana 187kB">
-
-<!-- modul 100340 -->
-<input type="text" name="cinnost" id="cinnost" style="width:488px; top:1149px; left:403px;"/>
-<span class="text-echo center" style="width:499px; top:1177px; left:400px;"><?php echo $sknace; ?></span>
 
 <!-- modul 2 -->
 <input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:133px; left:778px;"/>
@@ -2548,13 +2535,6 @@ $kli_vrokx = substr($kli_vrok,2,2);
        style="width:100px; top:646px; left:796px;"/>
 <input type="checkbox" name="mod113nie" value="1" onchange="klikm113nie();"
        style="width:100px; top:666px; left:796px;"/>
-
-
-<?php                                        } ?>
-
-<?php if ( $strana == 3 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 3.strana 187kB">
 
 <!-- modul 112 -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
@@ -2615,9 +2595,9 @@ $kli_vrokx = substr($kli_vrok,2,2);
 <?php                                        } ?>
 
 
-<?php if ( $strana == 4 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str4.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 4.strana 162kB">
+<?php if ( $strana == 3 OR $strana == 9999 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 3.strana 162kB">
 
 <!-- modul 146 -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
@@ -2683,9 +2663,9 @@ $kli_vrokx = substr($kli_vrok,2,2);
 <?php                                        } ?>
 
 
-<?php if ( $strana == 5 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str5.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 5.strana 272kB" style="width:1250px; height:900px;">
+<?php if ( $strana == 4 OR $strana == 9999 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str4.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 4.strana 272kB" style="width:1250px; height:900px;">
 
 <span class="text-echo" style="top:63px; left:544px; font-size:18px;">1</span>
 <span class="text-echo" style="top:63px; left:741px; font-size:18px; letter-spacing:24px;"><?php echo $fir_ficox; ?></span>
@@ -2709,9 +2689,9 @@ $kli_vrokx = substr($kli_vrok,2,2);
 <?php                                        } ?>
 
 
-<?php if ( $strana == 6 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str6.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 6.strana 272kB" style="width:1250px; height:900px;">
+<?php if ( $strana == 5 OR $strana == 9999 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str5.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 5.strana 272kB" style="width:1250px; height:900px;">
 
 <!-- modul 1004 -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Obratovky"
@@ -2736,34 +2716,37 @@ $kli_vrokx = substr($kli_vrok,2,2);
 <?php                                        } ?>
 
 
-<?php if ( $strana == 7 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str7.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 7.strana 272kB">
+<?php if ( $strana == 6 OR $strana == 9999 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str6.jpg" class="form-background"
+     alt="<?php echo $jpg_popis; ?> 6.strana 272kB">
 
 <!-- modul 5 -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z miezd"
      onclick="NacitajMzdy();" class="btn-row-tool" style="top:105px; left:378px;">
-<input type="text" name="mod5r01" id="mod5r01" onkeyup="CiarkaNaBodku(this);" style="width:206px; top:255px; left:685px;"/>
-<input type="text" name="mod5r02" id="mod5r02" style="width:206px; top:285px; left:685px;"/>
-<input type="text" name="mod5r06" id="mod5r06" style="width:206px; top:318px; left:685px;"/>
-<input type="text" name="mod5r07" id="mod5r07" style="width:206px; top:358px; left:685px;"/>
-<input type="text" name="mod5r08" id="mod5r08" style="width:206px; top:389px; left:685px;"/>
-<input type="text" name="mod5r10" id="mod5r10" style="width:206px; top:420px; left:685px;"/>
-<input type="text" name="mod5r11" id="mod5r11" style="width:206px; top:452px; left:685px;"/>
-<input type="text" name="mod5r12" id="mod5r12" style="width:206px; top:489px; left:685px;"/>
-<input type="text" name="mod5r13" id="mod5r13" style="width:206px; top:525px; left:685px;"/>
-<input type="text" name="mod5r14" id="mod5r14" style="width:206px; top:566px; left:685px;"/>
-<input type="text" name="mod5r15" id="mod5r15" style="width:206px; top:586px; left:685px;"/>
-<input type="text" name="mod5r16" id="mod5r16" style="width:206px; top:627px; left:685px;"/>
-<input type="text" name="mod5r17" id="mod5r17" style="width:206px; top:658px; left:685px;"/>
-<input type="text" name="mod5r18" id="mod5r18" style="width:206px; top:688px; left:685px;"/>
-<input type="text" name="mod5r19" id="mod5r19" style="width:206px; top:719px; left:685px;"/>
-<input type="text" name="mod5r20" id="mod5r20" style="width:206px; top:749px; left:685px;"/>
-<input type="text" name="mod5r22" id="mod5r22" style="width:206px; top:780px; left:685px;"/>
-<input type="text" name="mod5r23" id="mod5r23" style="width:206px; top:811px; left:685px;"/>
-<input type="text" name="mod5r24" id="mod5r24" style="width:206px; top:842px; left:685px;"/>
-<input type="text" name="mod5r25" id="mod5r25" style="width:206px; top:870px; left:685px;"/>
-<span class="text-echo" style="top:911px; right:57px;"><?php echo $mod5r99; ?></span>
+<input type="text" name="mod5r01" id="mod5r01" onkeyup="CiarkaNaBodku(this);" style="width:206px; top:225px; left:685px;"/>
+<input type="text" name="mod5r02" id="mod5r02" style="width:206px; top:255px; left:685px;"/>
+<input type="text" name="mod5r03" id="mod5r03" style="width:206px; top:286px; left:685px;"/>
+<input type="text" name="mod5r04" id="mod5r04" style="width:206px; top:316px; left:685px;"/>
+<input type="text" name="mod5r05" id="mod5r05" style="width:206px; top:347px; left:685px;"/>
+<input type="text" name="mod5r06" id="mod5r06" style="width:206px; top:378px; left:685px;"/>
+<input type="text" name="mod5r07" id="mod5r07" style="width:206px; top:408px; left:685px;"/>
+<input type="text" name="mod5r08" id="mod5r08" style="width:206px; top:439px; left:685px;"/>
+<input type="text" name="mod5r10" id="mod5r10" style="width:206px; top:470px; left:685px;"/>
+<input type="text" name="mod5r11" id="mod5r11" style="width:206px; top:512px; left:685px;"/>
+<input type="text" name="mod5r12" id="mod5r12" style="width:206px; top:559px; left:685px;"/>
+<input type="text" name="mod5r13" id="mod5r13" style="width:206px; top:595px; left:685px;"/>
+<input type="text" name="mod5r14" id="mod5r14" style="width:206px; top:626px; left:685px;"/>
+<input type="text" name="mod5r15" id="mod5r15" style="width:206px; top:656px; left:685px;"/>
+<input type="text" name="mod5r16" id="mod5r16" style="width:206px; top:687px; left:685px;"/>
+<input type="text" name="mod5r17" id="mod5r17" style="width:206px; top:718px; left:685px;"/>
+<input type="text" name="mod5r18" id="mod5r18" style="width:206px; top:748px; left:685px;"/>
+<input type="text" name="mod5r19" id="mod5r19" style="width:206px; top:779px; left:685px;"/>
+<input type="text" name="mod5r20" id="mod5r20" style="width:206px; top:809px; left:685px;"/>
+<input type="text" name="mod5r22" id="mod5r22" style="width:206px; top:840px; left:685px;"/>
+<input type="text" name="mod5r23" id="mod5r23" style="width:206px; top:871px; left:685px;"/>
+<input type="text" name="mod5r24" id="mod5r24" style="width:206px; top:902px; left:685px;"/>
+<input type="text" name="mod5r25" id="mod5r25" style="width:206px; top:940px; left:685px;"/>
+<span class="text-echo" style="top:981px; right:57px;"><?php echo $mod5r99; ?></span>
 <?php                                        } ?>
 
 
@@ -2774,10 +2757,9 @@ $kli_vrokx = substr($kli_vrok,2,2);
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=402&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=402&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=402&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=7', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-bottom-formsave">
 </div>
 
