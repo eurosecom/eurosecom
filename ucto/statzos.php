@@ -292,6 +292,7 @@ if ( $kli_vrok < 2016 ) $rokodpad="_2015";
 //statistika 1304
 <?php
 $rok1304="";
+if ( $kli_vrok < 2017 ) $rok1304="_2016";
 if ( $kli_vrok < 2016 ) $rok1304="_2015";
 if ( $kli_vrok < 2014 ) $rok1304="_2013";
 if ( $kli_vrok < 2012 ) $rok1304="_2011";
@@ -915,7 +916,7 @@ if ( $dajstatvyk == 1 )
 <div class="toleft line-box-text">
 <div>
  <strong>Prod 13-04<span>Štvrroènı vıkaz produkènıch odvetví v malıch podnikoch</span></strong>
- <img src="../obr/info.png" title="Prod 13-04 verzia 2016">
+ <img src="../obr/info.png" title="Prod 13-04 verzia <?php echo $kli_vrok; ?>">
 </div>
 </div>
 <img src='../obr/zoznam.png' onclick="stat1304();" title="Upravi hodnoty" class="toleft line-box box-green">
@@ -937,7 +938,7 @@ if ( $dajstatvyk == 1 )
 <div class="toleft line-box-text">
 <div>
  <strong>Prod 3-04<span>Štvrroènı vıkaz produkènıch odvetví</span></strong>
- <img src="../obr/info.png" title="Prod 13-04 verzia 2016">
+ <img src="../obr/info.png" title="Prod 3-04 verzia <?php echo $kli_vrok; ?>">
 </div>
 </div>
 <img src='../obr/zoznam.png' onclick="stat304();" title="Upravi hodnoty" class="toleft line-box box-green">

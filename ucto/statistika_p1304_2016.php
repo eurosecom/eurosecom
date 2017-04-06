@@ -1,7 +1,7 @@
 <!doctype html>
 <HTML>
 <?php
-//celkovy zaciatok dokumentu P1304 rok 2017
+//celkovy zaciatok dokumentu P1304 rok 2016
 do
 {
 $sys = 'UCT';
@@ -39,7 +39,7 @@ if ( $kli_vmes > 6 ) { $stvrtrok=3; $vyb_ump="7.".$kli_vrok; $vyb_ums="8.".$kli_
 if ( $kli_vmes > 9 ) { $stvrtrok=4; $vyb_ump="10.".$kli_vrok; $vyb_ums="11.".$kli_vrok; $vyb_umk="12.".$kli_vrok; $mesiac="12"; }
 
 //.jpg podklad
-$jpg_cesta="../dokumenty/statistika2017/prod1304/prod1304_v17";
+$jpg_cesta="../dokumenty/statistika2016/prod1304/prod1304_v16";
 $jpg_popis="tlaèivo Štvrroèný výkaz produkèných odvetví v malých podnikoch Prod 13-04 ".$kli_vrok;
 
 
@@ -821,10 +821,10 @@ $i=$i+1;                   }
 //zapis do statistiky
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 " mod143r01='$r01', mod143r02='$r01k', mod143r03='$r03', mod143r05=mod143r02, mod143r07='$r07', mod143r08='$r08', mod143r09='$r09',".
-" mod143r10='$r10', mod143r11='$r11', mod143r12='$r12', mod143r14='$r14', mod143r15='$r15',".
+" mod143r10='$r10', mod143r11='$r11', mod143r12='$r12', mod143r13='$r13', mod143r14='$r14', mod143r15='$r15',".
 " mod143r16='$r16', mod143r17='$r17', mod143r18='$r18', mod143r19='$r19', mod143r20='$r20',".
 " mod143r99=mod143r01+mod143r05+mod143r06+mod143r07+mod143r08+mod143r09+mod143r10,".
-" mod143r99=mod143r99+mod143r12+mod143r14+mod143r15+mod143r20".
+" mod143r99=mod143r99+mod143r12+mod143r13+mod143r14+mod143r15+mod143r20".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");  
 //echo $uprtxt;
@@ -834,7 +834,7 @@ $vsql = 'DROP TABLE F'.$kli_vxcf.'_statprac';
 //$vytvor = mysql_query("$vsql");
 ?>
 <script type="text/javascript">
- window.open('../ucto/statistika_p1304.php?copern=102&drupoh=1&page=1&strana=4', '_self' )
+ window.open('../ucto/statistika_p1304_2016.php?copern=102&drupoh=1&page=1&strana=4', '_self' )
 </script>
 <?php
 }
@@ -928,7 +928,7 @@ $mod143r09 = strip_tags($_REQUEST['mod143r09']);
 $mod143r10 = strip_tags($_REQUEST['mod143r10']);
 //$mod143r11 = strip_tags($_REQUEST['mod143r11']);
 $mod143r12 = strip_tags($_REQUEST['mod143r12']);
-//$mod143r13 = strip_tags($_REQUEST['mod143r13']);
+$mod143r13 = strip_tags($_REQUEST['mod143r13']);
 $mod143r14 = strip_tags($_REQUEST['mod143r14']);
 $mod143r15 = strip_tags($_REQUEST['mod143r15']);
 //$mod143r16 = strip_tags($_REQUEST['mod143r16']);
@@ -979,10 +979,10 @@ if ( $strana == 4 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 " mod143r01='$mod143r01', mod143r05='$mod143r05', mod143r06='$mod143r06', mod143r07='$mod143r07', ".
 " mod143r08='$mod143r08', mod143r09='$mod143r09', mod143r10='$mod143r10', mod143r12='$mod143r12', ".
-" mod143r14='$mod143r14', mod143r15='$mod143r15', ".
+" mod143r13='$mod143r13', mod143r14='$mod143r14', mod143r15='$mod143r15', ".
 " mod143r20='$mod143r20',  ".
 " mod143r99=mod143r01+mod143r05+mod143r06+mod143r07+mod143r08+mod143r09+mod143r10, ".
-" mod143r99=mod143r99+mod143r12+mod143r14+mod143r15+mod143r20 ".
+" mod143r99=mod143r99+mod143r12+mod143r13+mod143r14+mod143r15+mod143r20 ".
 " WHERE ico >= 0";
                     }
 
@@ -1012,7 +1012,7 @@ $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 " mod143r99=mod143r01+mod143r05+mod143r06+mod143r07+mod143r08+mod143r09+mod143r10,".
-" mod143r99=mod143r99+mod143r12+mod143r14+mod143r15+mod143r20,".
+" mod143r99=mod143r99+mod143r12+mod143r13+mod143r14+mod143r15+mod143r20,".
 " mod545r99a1=mod545r03a1+mod545r04a1+mod545r05a1+mod545r06a1,".
 " mod545r99a2=mod545r03a2+mod545r04a2+mod545r05a2+mod545r06a2 ".
 " WHERE ico >= 0"; 
@@ -1213,6 +1213,7 @@ a.archiv-link {
    document.formv1.mod143r09.value = '<?php echo "$mod143r09";?>';
    document.formv1.mod143r10.value = '<?php echo "$mod143r10";?>';
    document.formv1.mod143r12.value = '<?php echo "$mod143r12";?>';
+   document.formv1.mod143r13.value = '<?php echo "$mod143r13";?>';
    document.formv1.mod143r14.value = '<?php echo "$mod143r14";?>';
    document.formv1.mod143r15.value = '<?php echo "$mod143r15";?>';
    document.formv1.mod143r20.value = '<?php echo "$mod143r20";?>';
@@ -1235,7 +1236,7 @@ a.archiv-link {
   }
   function TlacVykaz()
   {
-   window.open('../ucto/statistika_p1304.php?copern=11&strana=9999', '_blank');
+   window.open('../ucto/statistika_p1304_2016.php?copern=11&strana=9999', '_blank');
   }
   function StatUdajeFirma()
   {
@@ -1244,11 +1245,11 @@ a.archiv-link {
   }
   function NacitajMzdy()
   {
-   window.open('../ucto/statistika_p1304.php?h_mfir=<?php echo $kli_vxcf; ?>&copern=200&drupoh=1&page=1&typ=PDF&cstat=1304&vyb_ume=<?php echo $vyb_umk; ?>', '_self');
+   window.open('../ucto/statistika_p1304_2016.php?h_mfir=<?php echo $kli_vxcf; ?>&copern=200&drupoh=1&page=1&typ=PDF&cstat=1304&vyb_ume=<?php echo $vyb_umk; ?>', '_self');
   }
   function zarch( stvrtrok )
   {
-   window.open('../ucto/statistika_p1304.php?copern=11&drupoh=1&page=1&typ=PDF&zarchivu=1&stvarch=' + stvrtrok +  '&xxx=1',
+   window.open('../ucto/statistika_p1304_2016.php?copern=11&drupoh=1&page=1&typ=PDF&zarchivu=1&stvarch=' + stvrtrok +  '&xxx=1',
 '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
   function NacitajMod82()
@@ -1300,12 +1301,12 @@ if ( $copern == 102 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="statistika_p1304.php?copern=103&strana=<?php echo $strana; ?>">
+<FORM name="formv1" method="post" action="statistika_p1304_2016.php?copern=103&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 if ( $strana == 3 ) $clas3="active"; if ( $strana == 4 ) $clas4="active";
-$source="statistika_p1304.php?";
+$source="statistika_p1304_2016.php?";
 ?>
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
@@ -1455,17 +1456,18 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <!-- modul 143 -->
 <img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z miezd"
      onclick="NacitajMzdy();" style="top:85px; left:443px;" class="btn-row-tool">
-<input type="text" name="mod143r01" id="mod143r01" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:262px; left:720px;"/>
-<input type="text" name="mod143r05" id="mod143r05" style="width:100px; top:297px; left:720px;"/>
-<input type="text" name="mod143r06" id="mod143r06" style="width:100px; top:328px; left:720px;"/>
-<input type="text" name="mod143r07" id="mod143r07" style="width:100px; top:359px; left:720px;"/>
-<input type="text" name="mod143r08" id="mod143r08" style="width:100px; top:396px; left:720px;"/>
-<input type="text" name="mod143r09" id="mod143r09" style="width:100px; top:439px; left:720px;"/>
-<input type="text" name="mod143r10" id="mod143r10" style="width:100px; top:476px; left:720px;"/>
-<input type="text" name="mod143r12" id="mod143r12" style="width:100px; top:497px; left:720px;"/>
-<input type="text" name="mod143r14" id="mod143r14" style="width:100px; top:528px; left:720px;"/>
-<input type="text" name="mod143r15" id="mod143r15" style="width:100px; top:559px; left:720px;"/>
-<input type="text" name="mod143r20" id="mod143r20" style="width:100px; top:586px; left:720px;"/>
+<input type="text" name="mod143r01" id="mod143r01" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:202px; left:720px;"/>
+<input type="text" name="mod143r05" id="mod143r05" style="width:100px; top:237px; left:720px;"/>
+<input type="text" name="mod143r06" id="mod143r06" style="width:100px; top:268px; left:720px;"/>
+<input type="text" name="mod143r07" id="mod143r07" style="width:100px; top:299px; left:720px;"/>
+<input type="text" name="mod143r08" id="mod143r08" style="width:100px; top:336px; left:720px;"/>
+<input type="text" name="mod143r09" id="mod143r09" style="width:100px; top:379px; left:720px;"/>
+<input type="text" name="mod143r10" id="mod143r10" style="width:100px; top:416px; left:720px;"/>
+<input type="text" name="mod143r12" id="mod143r12" style="width:100px; top:447px; left:720px;"/>
+<input type="text" name="mod143r13" id="mod143r13" style="width:100px; top:478px; left:720px;"/>
+<input type="text" name="mod143r14" id="mod143r14" style="width:100px; top:508px; left:720px;"/>
+<input type="text" name="mod143r15" id="mod143r15" style="width:100px; top:539px; left:720px;"/>
+<input type="text" name="mod143r20" id="mod143r20" style="width:100px; top:576px; left:720px;"/>
 <span class="text-echo" style="top:618px; right:125px;"><?php echo $mod143r99; ?></span>
 <?php                                        } ?>
 
@@ -1797,6 +1799,7 @@ $pdf->Cell(128,6," ","$rmc1",0,"L");$pdf->Cell(55,10,"$mod143r08","$rmc",1,"R");
 $pdf->Cell(128,9," ","$rmc1",0,"L");$pdf->Cell(55,10,"$mod143r09","$rmc",1,"R");
 $pdf->Cell(128,6," ","$rmc1",0,"L");$pdf->Cell(55,8,"$mod143r10","$rmc",1,"R");
 $pdf->Cell(128,6," ","$rmc1",0,"L");$pdf->Cell(55,6,"$mod143r12","$rmc",1,"R");
+$pdf->Cell(128,7," ","$rmc1",0,"L");$pdf->Cell(55,7,"$mod143r13","$rmc",1,"R");
 $pdf->Cell(128,7," ","$rmc1",0,"L");$pdf->Cell(55,7,"$mod143r14","$rmc",1,"R");
 $pdf->Cell(128,6," ","$rmc1",0,"L");$pdf->Cell(55,7,"$mod143r15","$rmc",1,"R");
 $pdf->Cell(128,7," ","$rmc1",0,"L");$pdf->Cell(55,10,"$mod143r20","$rmc",1,"R");
