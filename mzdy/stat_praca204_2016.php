@@ -1,7 +1,7 @@
 <!doctype html>
 <HTML>
 <?php
-//celkovy zaciatok dokumentu PRACA 204 rok 2017
+//celkovy zaciatok dokumentu PRACA 204 rok 2016
 do
 {
 $sys = 'MZD';
@@ -49,7 +49,7 @@ $modul = 1*$_REQUEST['modul'];
 $sDat = include("../funkcie/dat_sk_us.php");
 
 //.jpg podklad
-$jpg_cesta="../dokumenty/statistika2017/praca204/praca204_v17";
+$jpg_cesta="../dokumenty/statistika2016/praca204/praca204_v16";
 $jpg_popis="tlaèivo Štvrroèný výkaz o práci Práca 2-04 ".$kli_vrok;
 
 if ( $copern == 101 ) { $copern=102; }
@@ -367,7 +367,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_praca204 SET ".
 " mod5r01='$r01', mod5r02='$r01', mod5r06='$r01k', mod5r07='$r03', mod5r13=mod5r06, mod5r10='$r07', mod5r11='$r08', mod5r12='$r09',".
 " mod5r15='$r10', mod5r16='$r11', mod5r17='$r12', mod5r18='$r13', mod5r19='$r14', mod5r20='$r15', mod5r08='$skrat',".
 " mod5r21='$r16', mod5r22='$r17', mod5r23='$r19', mod5r24='$r18', mod5r25='$r20',".
-" mod5r99=mod5r01+mod5r02+mod5r06+mod5r07+mod5r08+mod5r10,".
+" mod5r99=mod5r01+mod5r02+mod5r03+mod5r04+mod5r05+mod5r06+mod5r07+mod5r08+mod5r10,".
 " mod5r99=mod5r99+mod5r11+mod5r12+mod5r13+mod5r14+mod5r15+mod5r16+mod5r17+mod5r18+mod5r19+mod5r20+mod5r22+mod5r23+mod5r24+mod5r25".
 " WHERE ico >= 0"; 
 $upravene = mysql_query("$uprtxt");  
@@ -379,7 +379,7 @@ $vsql = 'DROP TABLE F'.$kli_vxcf.'_statprac';
 ?>
 
 <script type="text/javascript">
- window.open('../mzdy/stat_praca204.php?copern=101&drupoh=1&page=1&strana=2', '_self')
+ window.open('../mzdy/stat_praca204_2016.php?copern=101&drupoh=1&page=1&strana=2', '_self')
 </script>
 <?php
 }
@@ -435,7 +435,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_praca204 SET ".
 " mod5r06='$mod5r06',mod5r07='$mod5r07',mod5r08='$mod5r08',mod5r09='$mod5r09',mod5r10='$mod5r10', mod5r25='$mod5r25',  ".
 " mod5r11='$mod5r11',mod5r12='$mod5r12',mod5r13='$mod5r13',mod5r14='$mod5r14',mod5r15='$mod5r15', mod5r23='$mod5r23', mod5r24='$mod5r24',  ".
 " mod5r16='$mod5r16',mod5r17='$mod5r17',mod5r18='$mod5r18',mod5r19='$mod5r19',mod5r20='$mod5r20', mod5r21='$mod5r21', mod5r22='$mod5r22',  ".
-" mod5r99=mod5r01+mod5r02+mod5r06+mod5r07+mod5r08+mod5r10,".
+" mod5r99=mod5r01+mod5r02+mod5r03+mod5r04+mod5r05+mod5r06+mod5r07+mod5r08+mod5r10,".
 " mod5r99=mod5r99+mod5r11+mod5r12+mod5r13+mod5r14+mod5r15+mod5r16+mod5r17+mod5r18+mod5r19+mod5r20+mod5r22+mod5r23+mod5r24+mod5r25".
 " WHERE ico >= 0"; 
                    }
@@ -540,6 +540,9 @@ form input[type=text] {
 <?php if ( $strana == 2 ) { ?>
    document.formv1.mod5r01.value = '<?php echo "$mod5r01";?>';
    document.formv1.mod5r02.value = '<?php echo "$mod5r02";?>';
+   document.formv1.mod5r03.value = '<?php echo "$mod5r03";?>';
+   document.formv1.mod5r04.value = '<?php echo "$mod5r04";?>';
+   document.formv1.mod5r05.value = '<?php echo "$mod5r05";?>';
    document.formv1.mod5r06.value = '<?php echo "$mod5r06";?>';
    document.formv1.mod5r07.value = '<?php echo "$mod5r07";?>';
    document.formv1.mod5r08.value = '<?php echo "$mod5r08";?>';
@@ -587,7 +590,7 @@ form input[type=text] {
   }
   function TlacVykaz()
   {
-   window.open('../mzdy/stat_praca204.php?copern=11&drupoh=1&page=1&typ=PDF&strana=9999',
+   window.open('../mzdy/stat_praca204_2016.php?copern=11&drupoh=1&page=1&typ=PDF&strana=9999',
 '_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
   }
   function UdajeFirma()
@@ -597,7 +600,7 @@ form input[type=text] {
   }
   function NacitajMzdy()
   {
-   window.open('../mzdy/stat_praca204.php?copern=200&drupoh=1&page=1&typ=PDF&cstat=1304&vyb_ume=<?php echo $vyb_umk; ?>&strana=<?php echo $strana; ?>', '_self');
+   window.open('../mzdy/stat_praca204_2016.php?copern=200&drupoh=1&page=1&typ=PDF&cstat=1304&vyb_ume=<?php echo $vyb_umk; ?>&strana=<?php echo $strana; ?>', '_self');
   }
 </script>
 </HEAD>
@@ -627,11 +630,11 @@ if ( $copern == 102 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="stat_praca204.php?copern=103&strana=<?php echo $strana; ?>">
+<FORM name="formv1" method="post" action="stat_praca204_2016.php?copern=103&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
-$source="stat_praca204.php?cislo_oc=".$cislo_oc."";
+$source="stat_praca204_2016.php?cislo_oc=".$cislo_oc."";
 ?>
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
@@ -688,6 +691,9 @@ $source="stat_praca204.php?cislo_oc=".$cislo_oc."";
 <!-- modul 5 -->
 <input type="text" name="mod5r01" id="mod5r01" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:567px; left:740px;"/>
 <input type="text" name="mod5r02" id="mod5r02" style="width:100px; top:593px; left:740px;"/>
+<input type="text" name="mod5r03" id="mod5r03" style="width:100px; top:619px; left:740px;"/>
+<input type="text" name="mod5r04" id="mod5r04" style="width:100px; top:645px; left:740px;"/>
+<input type="text" name="mod5r05" id="mod5r05" style="width:100px; top:671px; left:740px;"/>
 <input type="text" name="mod5r06" id="mod5r06" style="width:100px; top:696px; left:740px;"/>
 <input type="text" name="mod5r07" id="mod5r07" style="width:100px; top:722px; left:740px;"/>
 <input type="text" name="mod5r08" id="mod5r08" style="width:100px; top:748px; left:740px;"/>
@@ -896,6 +902,9 @@ $pdf->Cell(141,5," ","$rmc1",0,"C");$pdf->Cell(48,9,"$mod2r02","$rmc",1,"C");
 $pdf->Cell(190,35.5," ","$rmc1",1,"L");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r01","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r02","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r03","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r04","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r05","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r06","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r07","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(44,6,"$mod5r08","$rmc",1,"R");

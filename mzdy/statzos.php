@@ -123,6 +123,7 @@ window.open('../mzdy/trexima.php?cislo_oc=' + h_oc + '&copern=101&drupoh=1&fmzdy
 
 <?php
 $rokpraca204="";
+if( $kli_vrok < 2017 ) $rokpraca204="_2016";
 if( $kli_vrok < 2016 ) $rokpraca204="_2015";
 if( $kli_vrok < 2014 ) $rokpraca204="_2013";
 if( $kli_vrok < 2012 ) $rokpraca204="_2011";
