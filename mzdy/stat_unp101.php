@@ -1121,6 +1121,8 @@ $source="stat_unp101.php";
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 1.strana 272kB">
+<!-- ROK -->
+<span class="text-echo" style="top:220px; left:500px;"><?php echo "$kli_vrok"; ?></span>
 <?php
 $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 ?>
