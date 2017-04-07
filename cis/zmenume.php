@@ -102,6 +102,19 @@ $kli_vume=$kli_pume;
 }
 //koniec zmen mesiac
 
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+$ulozttt = "UPDATE $mysqldb2010.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2011.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2012.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2013.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2014.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2015.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2016.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2017.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2018.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+$ulozttt = "UPDATE $mysqldb2019.nas_id SET ume='$kli_vume' WHERE id=$kli_uzid "; $ulozene = mysql_query("$ulozttt");
+          }
 
 session_start();    
 $_SESSION['kli_vume'] = $kli_vume;
