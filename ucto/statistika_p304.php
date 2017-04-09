@@ -2827,8 +2827,8 @@ if ( $zarchivu == 1 AND $stvarch == 1 ) { $A=0; $B=3; }
 if ( $zarchivu == 1 AND $stvarch == 2 ) { $A=0; $B=6; }
 if ( $zarchivu == 1 AND $stvarch == 3 ) { $A=0; $B=9; }
 if ( $zarchivu == 1 AND $stvarch == 4 ) { $A=1; $B=2; }
-$pdf->Cell(190,42," ","$rmc1",1,"L");
-$pdf->Cell(48,5," ","$rmc1",0,"L");$pdf->Cell(8,7,"$A","$rmc",0,"C");$pdf->Cell(7,7,"$B","$rmc",0,"C");
+$pdf->Cell(190,68," ","$rmc1",1,"L");
+$pdf->Cell(46,5," ","$rmc1",0,"L");$pdf->Cell(7,7,"$A","$rmc",0,"C");$pdf->Cell(8,7,"$B","$rmc",0,"C");
 //ico
 $fir_ficx=$fir_fico;
 $cfico=1*$fir_fico;
@@ -2841,35 +2841,24 @@ $E=substr($fir_ficx,4,1);
 $F=substr($fir_ficx,5,1);
 $G=substr($fir_ficx,6,1);
 $H=substr($fir_ficx,7,1);
-$pdf->Cell(8,7,"$A","$rmc",0,"C");$pdf->Cell(8,7,"$B","$rmc",0,"C");
-$pdf->Cell(9,7,"$C","$rmc",0,"C");$pdf->Cell(8,7,"$D","$rmc",0,"C");
-$pdf->Cell(8,7,"$E","$rmc",0,"C");$pdf->Cell(8,7,"$F","$rmc",0,"C");
-$pdf->Cell(8,7,"$G","$rmc",0,"C");$pdf->Cell(8,7,"$H","$rmc",1,"C");
+$pdf->Cell(7,7,"$A","$rmc",0,"C");$pdf->Cell(8,7,"$B","$rmc",0,"C");
+$pdf->Cell(7,7,"$C","$rmc",0,"C");$pdf->Cell(8,7,"$D","$rmc",0,"C");
+$pdf->Cell(7,7,"$E","$rmc",0,"C");$pdf->Cell(8,7,"$F","$rmc",0,"C");
+$pdf->Cell(7,7,"$G","$rmc",0,"C");$pdf->Cell(8,7,"$H","$rmc",1,"C");
 
 //ORGANIZACIA
-$pdf->Cell(190,106," ","$rmc1",1,"L");
+$pdf->Cell(190,126," ","$rmc1",1,"L");
 $pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(153,4,"$fir_fnaz","$rmc",0,"L");$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(34,4,"$okres","$rmc",1,"C");
 $pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(153,6,"$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",1,"L");
 
 //VYPLNIL
-$pdf->Cell(195,6," ","$rmc1",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(60,5,"$fir_mzdt05","$rmc",0,"L");
-$pdf->Cell(14,5," ","$rmc1",0,"L");$pdf->Cell(43,11,"$fir_mzdt04","$rmc",1,"L");
-$pdf->Cell(195,0," ","$rmc1",1,"L");
+$pdf->Cell(195,7," ","$rmc1",1,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(70,5,"$fir_mzdt05","$rmc",0,"L");
+$pdf->Cell(4,5," ","$rmc1",0,"L");$pdf->Cell(43,11,"$fir_mzdt04","$rmc",1,"L");
+$pdf->Cell(195,3," ","$rmc1",1,"L");
 $pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(72,6,"$fir_fem1","$rmc",0,"L");
 //odoslane
-$pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(43,6,"$odoslane_sk","$rmc",1,"C");
-
-//modul 100307
-$pdf->Cell(195,22," ","$rmc1",1,"L");
-$pdf->Cell(78,5," ","$rmc1",0,"C");$pdf->Cell(111,5.5,"$fir_mzdt05","$rmc",1,"C");
-$pdf->Cell(78,5," ","$rmc1",0,"C");$pdf->Cell(111,6,"$fir_mzdt04","$rmc",1,"C");
-$pdf->Cell(78,5," ","$rmc1",0,"C");$pdf->Cell(111,5,"$fir_fem1","$rmc",1,"C");
-
-//modul 100340
-$pdf->Cell(195,21," ","$rmc1",1,"L");
-$pdf->Cell(78,5," ","$rmc1",0,"C");$pdf->Cell(111,5,"$cinnost","$rmc",1,"C");
-$pdf->Cell(78,5," ","$rmc1",0,"C");$pdf->Cell(111,5,"$sknace","$rmc",1,"C");
+$pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(43,6,"$odoslane_sk","$rmc",1,"L");
                                        }
 
 if ( $strana == 2 OR $strana == 9999 ) {
@@ -2883,21 +2872,26 @@ $pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
+//modul 100340
+$pdf->Cell(195,45," ","$rmc1",1,"L");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,7,"$cinnost","$rmc",1,"L");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,8,"$sknace","$rmc",1,"C");
+
 //modul 2
 $mod2r01=$hlavicka->mod2r01;
 if ( $mod2r01 == 0 ) $mod2r01="";
 $mod2r02=$hlavicka->mod2r02;
 if ( $mod2r02 == 0 ) $mod2r02="";
-$pdf->Cell(195,14," ","$rmc1",1,"L");
-$pdf->Cell(158,5," ","$rmc1",0,"C");$pdf->Cell(31,7,"$mod2r01","$rmc",1,"C");
-$pdf->Cell(158,5," ","$rmc1",0,"C");$pdf->Cell(31,7,"$mod2r02","$rmc",1,"C");
+$pdf->Cell(195,36," ","$rmc1",1,"L");
+$pdf->Cell(134,5," ","$rmc1",0,"C");$pdf->Cell(55,8,"$mod2r01","$rmc",1,"C");
+$pdf->Cell(134,5," ","$rmc1",0,"C");$pdf->Cell(55,8,"$mod2r02","$rmc",1,"C");
 
 //modul 100065
 $m100065ano=" ";
 $m100065nie=" ";
 if ( $hlavicka->m100065ano == 1 ) { $m100065ano="x"; }
 if ( $hlavicka->m100065nie == 1 ) { $m100065nie="x"; }
-$pdf->Cell(190,20," ","$rmc1",1,"L");
+$pdf->Cell(190,31," ","$rmc1",1,"L");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m100065ano","$rmc",1,"C");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m100065nie","$rmc",1,"C");
 
@@ -2914,22 +2908,34 @@ $mod82r032=$hlavicka->mod82r032; if ( $hlavicka->mod82r032 == 0 ) $mod82r032="";
 $mod82r042=$hlavicka->mod82r042; if ( $hlavicka->mod82r042 == 0 ) $mod82r042="";
 $mod82r992=$hlavicka->mod82r992;
 //if ( $hlavicka->mod82r992 == 0 ) $mod82r992="";
-$pdf->Cell(195,34," ","$rmc1",1,"L");
-$pdf->Cell(83,6," ","$rmc1",0,"L");$pdf->Cell(52,6,"$mod82r01","$rmc",0,"R");$pdf->Cell(52,6,"$mod82r012","$rmc",1,"R");
-$pdf->Cell(83,6," ","$rmc1",0,"L");$pdf->Cell(52,6,"$mod82r02","$rmc",0,"R");$pdf->Cell(38,6," ","$rmc",1,"R");
-$pdf->Cell(83,6," ","$rmc1",0,"L");$pdf->Cell(52,5,"$mod82r03","$rmc",0,"R");$pdf->Cell(52,5,"$mod82r032","$rmc",1,"R");
-$pdf->Cell(83,6," ","$rmc1",0,"L");$pdf->Cell(52,5,"$mod82r04","$rmc",0,"R");$pdf->Cell(52,5,"$mod82r042","$rmc",1,"R");
-$pdf->Cell(83,6," ","$rmc1",0,"L");$pdf->Cell(52,5,"$mod82r05","$rmc",0,"R");$pdf->Cell(38,5," ","$rmc",1,"R");
-$pdf->Cell(83,6," ","$rmc1",0,"L");$pdf->Cell(52,7,"$mod82r99","$rmc",0,"R");$pdf->Cell(52,7,"$mod82r992","$rmc",1,"R");
+$pdf->Cell(195,46," ","$rmc1",1,"L");
+$pdf->Cell(114,6," ","$rmc1",0,"L");$pdf->Cell(36,7,"$mod82r01","$rmc",0,"R");$pdf->Cell(36,7,"$mod82r012","$rmc",1,"R");
+$pdf->Cell(114,6," ","$rmc1",0,"L");$pdf->Cell(36,6,"$mod82r02","$rmc",0,"R");$pdf->Cell(36,6," ","$rmc",1,"R");
+$pdf->Cell(114,6," ","$rmc1",0,"L");$pdf->Cell(36,7,"$mod82r03","$rmc",0,"R");$pdf->Cell(36,7,"$mod82r032","$rmc",1,"R");
+$pdf->Cell(114,6," ","$rmc1",0,"L");$pdf->Cell(36,6,"$mod82r04","$rmc",0,"R");$pdf->Cell(36,6,"$mod82r042","$rmc",1,"R");
+$pdf->Cell(114,6," ","$rmc1",0,"L");$pdf->Cell(36,6,"$mod82r05","$rmc",0,"R");$pdf->Cell(36,6," ","$rmc",1,"R");
+$pdf->Cell(114,6," ","$rmc1",0,"L");$pdf->Cell(36,7,"$mod82r99","$rmc",0,"R");$pdf->Cell(36,7,"$mod82r992","$rmc",1,"R");
 
 //modul 100064
 $mod113ano=" ";
 $mod113nie=" ";
 if ( $hlavicka->mod113ano == 1 ) { $mod113ano="x"; }
 if ( $hlavicka->mod113nie == 1 ) { $mod113nie="x"; }
-$pdf->Cell(190,7," ","$rmc1",1,"L");
+$pdf->Cell(190,21," ","$rmc1",1,"L");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$mod113ano","$rmc",1,"C");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$mod113nie","$rmc",1,"C");
+                                       }
+
+if ( $strana == 3 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_cesta.'_str3.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_cesta.'_str3.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
 
 //modul 112
 $mod112r01a1=$hlavicka->mod112r01a1; if ( $hlavicka->mod112r01a1 == 0 ) $mod112r01a1="";
@@ -2990,59 +2996,59 @@ $mod112r12a4=$hlavicka->mod112r12a4; if ( $hlavicka->mod112r12a4 == 0 ) $mod112r
 $mod112r13a4=$hlavicka->mod112r13a4; if ( $hlavicka->mod112r13a4 == 0 ) $mod112r13a4="";
 $mod112r99a4=$hlavicka->mod112r99a4;
 //if ( $hlavicka->mod112r99a4 == 0 ) $mod112r99a4="";
-$pdf->Cell(195,48," ","$rmc1",1,"L");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,6,"$mod112r01a1","$rmc",0,"R");$pdf->Cell(27,6,"$mod112r01a2","$rmc",0,"R");
-$pdf->Cell(28,6,"$mod112r01a3","$rmc",0,"R");$pdf->Cell(23,6,"$mod112r01a4","$rmc",1,"R");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,6,"$mod112r02a1","$rmc",0,"R");$pdf->Cell(27,6,"$mod112r02a2","$rmc",0,"R");
-$pdf->Cell(28,6,"$mod112r02a3","$rmc",0,"R");$pdf->Cell(23,6,"$mod112r02a4","$rmc",1,"R");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,5,"$mod112r03a1","$rmc",0,"R");$pdf->Cell(27,5,"$mod112r03a2","$rmc",0,"R");
-$pdf->Cell(28,5,"$mod112r03a3","$rmc",0,"R");$pdf->Cell(23,5,"$mod112r03a4","$rmc",1,"R");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,6,"$mod112r04a1","$rmc",0,"R");$pdf->Cell(27,6,"$mod112r04a2","$rmc",0,"R");
-$pdf->Cell(28,6,"$mod112r04a3","$rmc",0,"R");$pdf->Cell(23,6,"$mod112r04a4","$rmc",1,"R");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,5,"$mod112r05a1","$rmc",0,"R");$pdf->Cell(27,5,"$mod112r05a2","$rmc",0,"R");
-$pdf->Cell(28,5,"$mod112r05a3","$rmc",0,"R");$pdf->Cell(23,5,"$mod112r05a4","$rmc",1,"R");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,6,"$mod112r06a1","$rmc",0,"R");$pdf->Cell(27,6,"$mod112r06a2","$rmc",0,"R");
-$pdf->Cell(28,6,"$mod112r06a3","$rmc",0,"R");$pdf->Cell(23,6,"$mod112r06a4","$rmc",1,"R");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,5,"$mod112r07a1","$rmc",0,"R");$pdf->Cell(27,5,"$mod112r07a2","$rmc",0,"R");
-$pdf->Cell(28,5,"$mod112r07a3","$rmc",0,"R");$pdf->Cell(23,5,"$mod112r07a4","$rmc",1,"R");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,6,"$mod112r08a1","$rmc",0,"R");$pdf->Cell(27,6,"$mod112r08a2","$rmc",0,"R");
-$pdf->Cell(28,6,"$mod112r08a3","$rmc",0,"R");$pdf->Cell(23,6,"$mod112r08a4","$rmc",1,"R");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,5,"$mod112r09a1","$rmc",0,"R");$pdf->Cell(27,5,"$mod112r09a2","$rmc",0,"R");
-$pdf->Cell(28,5,"$mod112r09a3","$rmc",0,"R");$pdf->Cell(23,5,"$mod112r09a4","$rmc",1,"R");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,6,"$mod112r10a1","$rmc",0,"R");$pdf->Cell(27,6," ","$rmc",0,"R");
-$pdf->Cell(28,6,"$mod112r10a3","$rmc",0,"R");$pdf->Cell(23,6,"$mod112r10a4","$rmc",1,"R");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,5,"$mod112r11a1","$rmc",0,"R");$pdf->Cell(27,5," ","$rmc",0,"R");
-$pdf->Cell(28,5,"$mod112r11a3","$rmc",0,"R");$pdf->Cell(23,5,"$mod112r11a4","$rmc",1,"R");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,6,"$mod112r12a1","$rmc",0,"R");$pdf->Cell(27,6,"$mod112r12a2","$rmc",0,"R");
-$pdf->Cell(28,6,"$mod112r12a3","$rmc",0,"R");$pdf->Cell(23,6,"$mod112r12a4","$rmc",1,"R");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,8,"$mod112r13a1","$rmc",0,"R");$pdf->Cell(27,8,"$mod112r13a2","$rmc",0,"R");
-$pdf->Cell(28,8,"$mod112r13a3","$rmc",0,"R");$pdf->Cell(23,8," ","$rmc",1,"R");
-$pdf->Cell(91,6," ","$rmc1",0,"L");
-$pdf->Cell(20,6,"$mod112r99a1","$rmc",0,"R");$pdf->Cell(27,6,"$mod112r99a2","$rmc",0,"R");
-$pdf->Cell(28,6,"$mod112r99a3","$rmc",0,"R");$pdf->Cell(23,6,"$mod112r99a4","$rmc",1,"R");
+$pdf->Cell(195,58," ","$rmc1",1,"L");
+$pdf->Cell(85,6," ","$rmc1",0,"L");
+$pdf->Cell(26,7,"$mod112r01a1","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r01a2","$rmc",0,"R");
+$pdf->Cell(26,7,"$mod112r01a3","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r01a4","$rmc",1,"R");
+$pdf->Cell(85,7," ","$rmc1",0,"L");
+$pdf->Cell(26,7,"$mod112r02a1","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r02a2","$rmc",0,"R");
+$pdf->Cell(26,7,"$mod112r02a3","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r02a4","$rmc",1,"R");
+$pdf->Cell(85,7," ","$rmc1",0,"L");
+$pdf->Cell(26,7,"$mod112r03a1","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r03a2","$rmc",0,"R");
+$pdf->Cell(26,7,"$mod112r03a3","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r03a4","$rmc",1,"R");
+$pdf->Cell(85,7," ","$rmc1",0,"L");
+$pdf->Cell(26,7,"$mod112r04a1","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r04a2","$rmc",0,"R");
+$pdf->Cell(26,7,"$mod112r04a3","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r04a4","$rmc",1,"R");
+$pdf->Cell(85,7," ","$rmc1",0,"L");
+$pdf->Cell(26,9,"$mod112r05a1","$rmc",0,"R");$pdf->Cell(26,9,"$mod112r05a2","$rmc",0,"R");
+$pdf->Cell(26,9,"$mod112r05a3","$rmc",0,"R");$pdf->Cell(26,9,"$mod112r05a4","$rmc",1,"R");
+$pdf->Cell(85,7," ","$rmc1",0,"L");
+$pdf->Cell(26,7,"$mod112r06a1","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r06a2","$rmc",0,"R");
+$pdf->Cell(26,7,"$mod112r06a3","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r06a4","$rmc",1,"R");
+$pdf->Cell(85,7," ","$rmc1",0,"L");
+$pdf->Cell(26,7,"$mod112r07a1","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r07a2","$rmc",0,"R");
+$pdf->Cell(26,7,"$mod112r07a3","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r07a4","$rmc",1,"R");
+$pdf->Cell(85,7," ","$rmc1",0,"L");
+$pdf->Cell(26,8,"$mod112r08a1","$rmc",0,"R");$pdf->Cell(26,8,"$mod112r08a2","$rmc",0,"R");
+$pdf->Cell(26,8,"$mod112r08a3","$rmc",0,"R");$pdf->Cell(26,8,"$mod112r08a4","$rmc",1,"R");
+$pdf->Cell(85,7," ","$rmc1",0,"L");
+$pdf->Cell(26,7,"$mod112r09a1","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r09a2","$rmc",0,"R");
+$pdf->Cell(26,7,"$mod112r09a3","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r09a4","$rmc",1,"R");
+$pdf->Cell(85,7," ","$rmc1",0,"L");
+$pdf->Cell(26,8,"$mod112r10a1","$rmc",0,"R");$pdf->Cell(26,8," ","$rmc",0,"R");
+$pdf->Cell(26,8,"$mod112r10a3","$rmc",0,"R");$pdf->Cell(26,8,"$mod112r10a4","$rmc",1,"R");
+$pdf->Cell(85,7," ","$rmc1",0,"L");
+$pdf->Cell(26,7,"$mod112r11a1","$rmc",0,"R");$pdf->Cell(26,7," ","$rmc",0,"R");
+$pdf->Cell(26,7,"$mod112r11a3","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r11a4","$rmc",1,"R");
+$pdf->Cell(85,7," ","$rmc1",0,"L");
+$pdf->Cell(26,7,"$mod112r12a1","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r12a2","$rmc",0,"R");
+$pdf->Cell(26,7,"$mod112r12a3","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r12a4","$rmc",1,"R");
+$pdf->Cell(85,7," ","$rmc1",0,"L");
+$pdf->Cell(26,8,"$mod112r13a1","$rmc",0,"R");$pdf->Cell(26,8,"$mod112r13a2","$rmc",0,"R");
+$pdf->Cell(26,8,"$mod112r13a3","$rmc",0,"R");$pdf->Cell(26,8," ","$rmc",1,"R");
+$pdf->Cell(85,7," ","$rmc1",0,"L");
+$pdf->Cell(26,7,"$mod112r99a1","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r99a2","$rmc",0,"R");
+$pdf->Cell(26,7,"$mod112r99a3","$rmc",0,"R");$pdf->Cell(26,7,"$mod112r99a4","$rmc",1,"R");
                                        }
 
-if ( $strana == 3 OR $strana == 9999 ) {
+if ( $strana == 4 OR $strana == 9999 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str3.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str4.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str3.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str4.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -3121,23 +3127,23 @@ $mod146r22a2=$hlavicka->mod146r22a2; if ( $hlavicka->mod146r22a2 == 0 ) $mod146r
 $mod146r23a2=$hlavicka->mod146r23a2; if ( $hlavicka->mod146r23a2 == 0 ) $mod146r23a2="";
 $mod146r24a2=$hlavicka->mod146r24a2; if ( $hlavicka->mod146r24a2 == 0 ) $mod146r24a2="";
 $mod146r25a2=$hlavicka->mod146r25a2; if ( $hlavicka->mod146r25a2 == 0 ) $mod146r25a2="";
-$pdf->Cell(195,32," ","$rmc1",1,"L");
+$pdf->Cell(195,42," ","$rmc1",1,"L");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
-$pdf->Cell(38,6,"$mod545r01a1","$rmc",0,"R");$pdf->Cell(38,6,"$mod545r01a2","$rmc",1,"R");
+$pdf->Cell(38,7,"$mod545r01a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod545r01a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
-$pdf->Cell(38,7,"$mod545r02a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod545r02a2","$rmc",1,"R");
+$pdf->Cell(38,8,"$mod545r02a1","$rmc",0,"R");$pdf->Cell(38,8,"$mod545r02a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod545r03a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod545r03a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod545r04a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod545r04a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
-$pdf->Cell(38,7,"$mod545r05a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod545r05a2","$rmc",1,"R");
+$pdf->Cell(38,8,"$mod545r05a1","$rmc",0,"R");$pdf->Cell(38,8,"$mod545r05a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod545r06a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod545r06a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod545r07a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod545r07a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
-$pdf->Cell(38,7,"$mod545r08a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod545r08a2","$rmc",1,"R");
+$pdf->Cell(38,8,"$mod545r08a1","$rmc",0,"R");$pdf->Cell(38,8,"$mod545r08a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod545r09a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod545r09a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
@@ -3145,7 +3151,7 @@ $pdf->Cell(38,7,"$mod545r10a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod545r10a2","$rm
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod146r11a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r11a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
-$pdf->Cell(38,7,"$mod146r12a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r12a2","$rmc",1,"R");
+$pdf->Cell(38,8,"$mod146r12a1","$rmc",0,"R");$pdf->Cell(38,8,"$mod146r12a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod146r13a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r13a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
@@ -3153,19 +3159,19 @@ $pdf->Cell(38,7,"$mod146r14a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r14a2","$rm
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod146r15a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r15a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
-$pdf->Cell(38,7,"$mod146r16a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r16a2","$rmc",1,"R");
+$pdf->Cell(38,8,"$mod146r16a1","$rmc",0,"R");$pdf->Cell(38,8,"$mod146r16a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod146r17a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r17a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod146r18a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r18a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
-$pdf->Cell(38,7,"$mod146r19a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r19a2","$rmc",1,"R");
+$pdf->Cell(38,8,"$mod146r19a1","$rmc",0,"R");$pdf->Cell(38,8,"$mod146r19a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod146r20a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r20a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod146r21a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r21a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
-$pdf->Cell(38,7,"$mod146r22a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r22a2","$rmc",1,"R");
+$pdf->Cell(38,8,"$mod146r22a1","$rmc",0,"R");$pdf->Cell(38,8,"$mod146r22a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod146r23a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r23a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
@@ -3173,21 +3179,21 @@ $pdf->Cell(38,7,"$mod146r24a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r24a2","$rm
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod146r25a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod146r25a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
-$pdf->Cell(38,7,"$mod545r11a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod545r11a2","$rmc",1,"R");
+$pdf->Cell(38,8,"$mod545r11a1","$rmc",0,"R");$pdf->Cell(38,8,"$mod545r11a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod545r12a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod545r12a2","$rmc",1,"R");
 $pdf->Cell(113,6," ","$rmc1",0,"L");
 $pdf->Cell(38,7,"$mod545r99a1","$rmc",0,"R");$pdf->Cell(38,7,"$mod545r99a2","$rmc",1,"R");
                                        }
 
-if ( $strana == 4 OR $strana == 9999 ) {
+if ( $strana == 5 OR $strana == 9999 ) {
 $pdf->AddPage(L);
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str4.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str5.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str4.jpg',0,0,297,209);
+$pdf->Image($jpg_cesta.'_str5.jpg',0,0,297,209);
 }
 $pdf->SetY(10);
 
@@ -3203,7 +3209,7 @@ $E=substr($fir_ficx,4,1);
 $F=substr($fir_ficx,5,1);
 $G=substr($fir_ficx,6,1);
 $H=substr($fir_ficx,7,1);
-$pdf->Cell(195,-2," ","$rmc1",1,"L");
+$pdf->Cell(195,2," ","$rmc1",1,"L");
 $pdf->Cell(115,6," ","$rmc1",0,"L");$pdf->Cell(11,6,"1","$rmc",0,"C");$pdf->Cell(37,6," ","$rmc1",0,"L");
 $pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");
 $pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(9,6,"$D","$rmc",0,"C");
@@ -3217,26 +3223,26 @@ $mod1003s04=$hlavicka->mod1003s04; if ( $hlavicka->mod1003s04 == 0 ) $mod1003s04
 $mod1003s05=$hlavicka->mod1003s05; if ( $hlavicka->mod1003s05 == 0 ) $mod1003s05="";
 $mod1003s06=$hlavicka->mod1003s06; if ( $hlavicka->mod1003s06 == 0 ) $mod1003s06="";
 $mod1003s07=$hlavicka->mod1003s07; if ( $hlavicka->mod1003s07 == 0 ) $mod1003s07="";
-$pdf->Cell(195,49," ","$rmc1",1,"L");
+$pdf->Cell(195,50," ","$rmc1",1,"L");
 $pdf->Cell(11,7," ","$rmc1",0,"L");$pdf->Cell(20,6,"$cslr1","$rmc",0,"C");
-$pdf->Cell(32,6,"$mod1003s02","$rmc",0,"R");$pdf->Cell(33,6,"$mod1003s03","$rmc",0,"R");
-$pdf->Cell(44,6,"$mod1003s04","$rmc",0,"R");$pdf->Cell(46,6,"$mod1003s05","$rmc",0,"R");
-$pdf->Cell(47,6,"$mod1003s06","$rmc",0,"R");$pdf->Cell(43,6,"$mod1003s07","$rmc",1,"R");
-$pdf->SetY(182);
+$pdf->Cell(32,6,"$mod1003s02","$rmc",0,"R");$pdf->Cell(35,6,"$mod1003s03","$rmc",0,"R");
+$pdf->Cell(40,6,"$mod1003s04","$rmc",0,"R");$pdf->Cell(45,6,"$mod1003s05","$rmc",0,"R");
+$pdf->Cell(48,6,"$mod1003s06","$rmc",0,"R");$pdf->Cell(44,6,"$mod1003s07","$rmc",1,"R");
+$pdf->SetY(183);
 $pdf->Cell(31,6," ","$rmc1",0,"L");$pdf->Cell(32,6,"$mod1003s02","$rmc",0,"R");
-$pdf->Cell(33,6,"$mod1003s03","$rmc",0,"R");$pdf->Cell(44,6,"$mod1003s04","$rmc",0,"R");
-$pdf->Cell(46,6,"$mod1003s05","$rmc",0,"R");$pdf->Cell(47,6,"$mod1003s06","$rmc",0,"R");
-$pdf->Cell(43,6,"$mod1003s07","$rmc",1,"R");
+$pdf->Cell(35,6,"$mod1003s03","$rmc",0,"R");$pdf->Cell(40,6,"$mod1003s04","$rmc",0,"R");
+$pdf->Cell(45,6,"$mod1003s05","$rmc",0,"R");$pdf->Cell(48,6,"$mod1003s06","$rmc",0,"R");
+$pdf->Cell(44,6,"$mod1003s07","$rmc",1,"R");
                                        }
 
-if ( $strana == 5 OR $strana == 9999 ) {
+if ( $strana == 6 OR $strana == 9999 ) {
 $pdf->AddPage(L);
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str5.jpg') AND $i == 0 )
+if ( File_Exists($jpg_cesta.'_str6.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str5.jpg',0,0,297,209);
+$pdf->Image($jpg_cesta.'_str6.jpg',0,0,297,209);
 }
 $pdf->SetY(10);
 
@@ -3250,27 +3256,27 @@ $mod1004s07=$hlavicka->mod1004s07; if ( $hlavicka->mod1004s07 == 0 ) $mod1004s07
 $mod1004s08=$hlavicka->mod1004s08; if ( $hlavicka->mod1004s08 == 0 ) $mod1004s08="";
 $mod1004s09=$hlavicka->mod1004s09; if ( $hlavicka->mod1004s09 == 0 ) $mod1004s09="";
 $pdf->Cell(195,53," ","$rmc1",1,"L");
-$pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(20,6,"$cslr1","$rmc",0,"C");
-$pdf->Cell(32,6,"$mod1004s02","$rmc",0,"R");$pdf->Cell(30,6,"$mod1004s03","$rmc",0,"R");
-$pdf->Cell(37,6,"$mod1004s04","$rmc",0,"R");$pdf->Cell(31,6,"$mod1004s05","$rmc",0,"R");
-$pdf->Cell(27,6,"$mod1004s06","$rmc",0,"R");$pdf->Cell(28,6,"$mod1004s07","$rmc",0,"R");
-$pdf->Cell(32,6,"$mod1004s08","$rmc",0,"R");$pdf->Cell(28,6,"$mod1004s09","$rmc",1,"R");
-$pdf->SetY(182);
-$pdf->Cell(13,6," ","$rmc1",0,"L");$pdf->Cell(18,6," ","$rmc",0,"C");
-$pdf->Cell(32,6,"$mod1004s02","$rmc",0,"R");$pdf->Cell(30,6,"$mod1004s03","$rmc",0,"R");
-$pdf->Cell(37,6,"$mod1004s04","$rmc",0,"R");$pdf->Cell(31,6,"$mod1004s05","$rmc",0,"R");
-$pdf->Cell(27,6,"$mod1004s06","$rmc",0,"R");$pdf->Cell(28,6,"$mod1004s07","$rmc",0,"R");
-$pdf->Cell(32,6,"$mod1004s08","$rmc",0,"R");$pdf->Cell(28,6,"$mod1004s09","$rmc",1,"R");
+$pdf->Cell(8,6," ","$rmc1",0,"L");$pdf->Cell(23,6,"$cslr1","$rmc",0,"C");
+$pdf->Cell(32,6,"$mod1004s02","$rmc",0,"R");$pdf->Cell(32,6,"$mod1004s03","$rmc",0,"R");
+$pdf->Cell(38,6,"$mod1004s04","$rmc",0,"R");$pdf->Cell(33,6,"$mod1004s05","$rmc",0,"R");
+$pdf->Cell(25,6,"$mod1004s06","$rmc",0,"R");$pdf->Cell(27,6,"$mod1004s07","$rmc",0,"R");
+$pdf->Cell(28,6,"$mod1004s08","$rmc",0,"R");$pdf->Cell(29,6,"$mod1004s09","$rmc",1,"R");
+$pdf->SetY(183);
+$pdf->Cell(8,6," ","$rmc1",0,"L");$pdf->Cell(23,6," ","$rmc",0,"C");
+$pdf->Cell(32,6,"$mod1004s02","$rmc",0,"R");$pdf->Cell(32,6,"$mod1004s03","$rmc",0,"R");
+$pdf->Cell(38,6,"$mod1004s04","$rmc",0,"R");$pdf->Cell(33,6,"$mod1004s05","$rmc",0,"R");
+$pdf->Cell(25,6,"$mod1004s06","$rmc",0,"R");$pdf->Cell(27,6,"$mod1004s07","$rmc",0,"R");
+$pdf->Cell(28,6,"$mod1004s08","$rmc",0,"R");$pdf->Cell(29,6,"$mod1004s09","$rmc",1,"R");
                                        }
 
-if ( $strana == 6 OR $strana == 9999 ) {
+if ( $strana == 7 OR $strana == 9999 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 if ( File_Exists($jpg_cesta.'_str6.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str6.jpg',0,0,210,297);
+$pdf->Image($jpg_cesta.'_str7.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -3302,18 +3308,15 @@ $mod5r24=$hlavicka->mod5r24; if ( $hlavicka->mod5r24 == 0 ) $mod5r24="";
 $mod5r25=$hlavicka->mod5r25; if ( $hlavicka->mod5r25 == 0 ) $mod5r25="";
 $mod5r99=$hlavicka->mod5r99;
 //if ( $hlavicka->mod5r99 == 0 ) $mod5r99="";
-$pdf->Cell(195,35," ","$rmc1",1,"L");
-$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r01","$rmc",1,"R");
+$pdf->Cell(195,42," ","$rmc1",1,"L");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,8,"$mod5r01","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r02","$rmc",1,"R");
-$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r03","$rmc",1,"R");
-$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r04","$rmc",1,"R");
-$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r05","$rmc",1,"R");
-$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r06","$rmc",1,"R");
-$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r07","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,8,"$mod5r06","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,8,"$mod5r07","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r08","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r10","$rmc",1,"R");
-$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,11,"$mod5r11","$rmc",1,"R");
-$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,10,"$mod5r12","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,9,"$mod5r11","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,9,"$mod5r12","$rmc",1,"R");
 $pdf->Cell(141,7," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r13","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r14","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,8,"$mod5r15","$rmc",1,"R");
@@ -3321,11 +3324,11 @@ $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r16","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r17","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r18","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r19","$rmc",1,"R");
-$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r20","$rmc",1,"R");
-$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r22","$rmc",1,"R");
-$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r23","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,8,"$mod5r20","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,8,"$mod5r22","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,8,"$mod5r23","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r24","$rmc",1,"R");
-$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,10,"$mod5r25","$rmc",1,"R");
+$pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,9,"$mod5r25","$rmc",1,"R");
 $pdf->Cell(141,6," ","$rmc1",0,"L");$pdf->Cell(47,7,"$mod5r99","$rmc",1,"R");
                                        }
 }
