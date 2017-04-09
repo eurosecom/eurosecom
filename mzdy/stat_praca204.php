@@ -200,8 +200,8 @@ $dsql = mysql_query("$dsqlt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statprac,F$kli_vxcf"."_mzdpomer SET ".
 " dhpom=pm_doh, zena=SUBSTRING(rodc,3,2) ".
-" WHERE F$kli_vxcf"."_statprac.pom = F$kli_vxcf"."_mzdpomer.pm"; 
-$upravene = mysql_query("$uprtxt");  
+" WHERE F$kli_vxcf"."_statprac.pom = F$kli_vxcf"."_mzdpomer.pm";
+$upravene = mysql_query("$uprtxt");
 
 /////////////NACITANIE prac.uvazku standartneho
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
@@ -212,7 +212,7 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
   }
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statprac SET uvap=uvax/$uva_hod ";
-$upravene = mysql_query("$uprtxt");  
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statprac SET skrat=1 WHERE uvap < 0.8 ";
 $upravene = mysql_query("$uprtxt");
@@ -301,8 +301,8 @@ $dsql = mysql_query("$dsqlt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statprac,F$kli_vxcf"."_mzdpomer SET ".
 " dhpom=pm_doh ".
-" WHERE F$kli_vxcf"."_statprac.pom = F$kli_vxcf"."_mzdpomer.pm"; 
-$upravene = mysql_query("$uprtxt");  
+" WHERE F$kli_vxcf"."_statprac.pom = F$kli_vxcf"."_mzdpomer.pm";
+$upravene = mysql_query("$uprtxt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statprac "." SELECT".
 " 555,oc,ume,rodc,zena,pom,dhpom,pocet, ".
@@ -369,8 +369,8 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_praca204 SET ".
 " mod5r21='$r16', mod5r22='$r17', mod5r23='$r19', mod5r24='$r18', mod5r25='$r20',".
 " mod5r99=mod5r01+mod5r02+mod5r06+mod5r07+mod5r08+mod5r10,".
 " mod5r99=mod5r99+mod5r11+mod5r12+mod5r13+mod5r14+mod5r15+mod5r16+mod5r17+mod5r18+mod5r19+mod5r20+mod5r22+mod5r23+mod5r24+mod5r25".
-" WHERE ico >= 0"; 
-$upravene = mysql_query("$uprtxt");  
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
 //echo $uprtxt;
 //exit;
 
@@ -426,7 +426,7 @@ $uprav="NO";
 if ( $strana == 1 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_praca204 SET ".
 " odoslane='$odoslane_sql' ".
-" WHERE ico >= 0"; 
+" WHERE ico >= 0";
                     }
 if ( $strana == 2 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_praca204 SET ".
@@ -437,7 +437,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_praca204 SET ".
 " mod5r16='$mod5r16',mod5r17='$mod5r17',mod5r18='$mod5r18',mod5r19='$mod5r19',mod5r20='$mod5r20', mod5r21='$mod5r21', mod5r22='$mod5r22',  ".
 " mod5r99=mod5r01+mod5r02+mod5r06+mod5r07+mod5r08+mod5r10,".
 " mod5r99=mod5r99+mod5r11+mod5r12+mod5r13+mod5r14+mod5r15+mod5r16+mod5r17+mod5r18+mod5r19+mod5r20+mod5r22+mod5r23+mod5r24+mod5r25".
-" WHERE ico >= 0"; 
+" WHERE ico >= 0";
                    }
 
 //echo $uprtxt;
@@ -529,7 +529,7 @@ form input[type=text] {
 <?php
 //uprava
   if ( $copern == 102 )
-  { 
+  {
 ?>
   function ObnovUI()
   {
@@ -641,32 +641,24 @@ $source="stat_praca204.php?cislo_oc=".$cislo_oc."";
  <h6 class="toright">TlaËiù:</h6>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 </div>
-
-<?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 1.strana 240kB">
 <?php
  $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
  $kli_vrokx = substr($kli_vrok,2,2);
 ?>
-<span class="text-echo" style="top:245px; left:326px; font-size:18px; letter-spacing:35px;"><?php echo $mesiac; ?></span>
-<span class="text-echo" style="top:245px; left:418px; font-size:18px; letter-spacing:38px;"><?php echo $fir_ficox; ?></span>
-<!-- ORGANIZACIA -->
-<span class="text-echo" style="top:932px; left:60px;"><?php echo "$fir_fnaz $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
-<span class="text-echo" style="top:932px; left:808px;"><?php echo $okres; ?></span>
- <img src="../obr/ikony/pencil_blue_icon.png" onclick="UdajeFirma();" title="Nastaviù kÛd okresu"
-      class="btn-row-tool" style="top:930px; left:842px;">
-<!-- Vyplnil -->
-<span class="text-echo" style="top:985px; left:60px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo" style="top:997px; left:485px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo" style="top:1018px; left:110px;"><?php echo $fir_fem1; ?></span>
-<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);"
-       style="width:80px; top:1020px; left:495px;"/>
 
-<!-- modul 100307 -->
-<span class="text-echo center" style="width:488px; top:1165px; left:412px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo center" style="width:488px; top:1192px; left:412px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo center" style="width:488px; top:1217px; left:412px;"><?php echo $fir_fem1; ?></span>
+<?php if ( $strana == 1 OR $strana == 9999 ) { ?>
+<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 1.strana 240kB">
+<span class="text-echo" style="top:348px; left:338px; font-size:18px; letter-spacing:34px;"><?php echo $mesiac; ?></span>
+<span class="text-echo" style="top:348px; left:429px; font-size:18px; letter-spacing:37px;"><?php echo $fir_ficox; ?></span>
+<!-- ORGANIZACIA -->
+<span class="text-echo" style="top:1061px; left:55px; line-height: 20px;"><?php echo "$fir_fnaz<br>$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
+<span class="text-echo" style="top:1070px; left:806px;"><?php echo $okres; ?></span>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();" title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:1068px; left:839px;">
+<!-- Vyplnil -->
+<span class="text-echo" style="top:1138px; left:55px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo" style="width:499px; top:1156px; left:390px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo" style="width:499px; top:1202px; left:55px;"><?php echo $fir_fem1; ?></span>
+<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);" style="width:90px; top:1198px; left:390px;"/>
 <?php                                        } ?>
 
 
@@ -676,43 +668,36 @@ $source="stat_praca204.php?cislo_oc=".$cislo_oc."";
 
 <!-- modul 100164 -->
 <?php $fir_sknacex=str_replace(".","",$fir_sknace); ?>
-<span class="text-echo" style="top:165px; left:770px;"><?php echo $fir_sknacex; ?></span>
-<span class="text-echo" style="top:192px; left:778px;"><?php echo $okres; ?></span>
- <img src="../obr/ikony/pencil_blue_icon.png" onclick="UdajeFirma();"
-      title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:189px; left:810px;">
+<span class="text-echo" style="top:199px; left:770px;"><?php echo $fir_sknacex; ?></span>
+<span class="text-echo" style="top:226px; left:778px;"><?php echo $okres; ?></span>
+ <img src="../obr/ikony/pencil_blue_icon.png" onclick="UdajeFirma();" title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:223px; left:810px;">
 
 <!-- modul 2 -->
-<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:342px; left:740px;"/>
-<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:382px; left:740px;"/>
+<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:400px; left:740px;"/>
+<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:436px; left:740px;"/>
 
 <!-- modul 5 -->
-<input type="text" name="mod5r01" id="mod5r01" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:567px; left:740px;"/>
-<input type="text" name="mod5r02" id="mod5r02" style="width:100px; top:593px; left:740px;"/>
-<input type="text" name="mod5r06" id="mod5r06" style="width:100px; top:696px; left:740px;"/>
-<input type="text" name="mod5r07" id="mod5r07" style="width:100px; top:722px; left:740px;"/>
-<input type="text" name="mod5r08" id="mod5r08" style="width:100px; top:748px; left:740px;"/>
-<!-- riadky 9 - 11 -->
-<input type="text" name="mod5r10" id="mod5r10" style="width:100px; top:774px; left:740px;"/>
-<input type="text" name="mod5r11" id="mod5r11" style="width:100px; top:806px; left:740px;"/>
-<input type="text" name="mod5r12" id="mod5r12" style="width:100px; top:843px; left:740px;"/>
-<!-- riadky 12 - 14 -->
-<input type="text" name="mod5r13" id="mod5r13" style="width:100px; top:873px; left:740px;"/>
-<input type="text" name="mod5r14" id="mod5r14" style="width:100px; top:899px; left:740px;"/>
-<input type="text" name="mod5r15" id="mod5r15" style="width:100px; top:925px; left:740px;"/>
-<!-- riadky 15 - 17 -->
-<input type="text" name="mod5r16" id="mod5r16" style="width:100px; top:951px; left:740px;"/>
-<input type="text" name="mod5r17" id="mod5r17" style="width:100px; top:977px; left:740px;"/>
-<input type="text" name="mod5r18" id="mod5r18" style="width:100px; top:1003px; left:740px;"/>
-<!-- riadky 18 - 20 -->
-<input type="text" name="mod5r19" id="mod5r19" style="width:100px; top:1028px; left:740px;"/>
-<input type="text" name="mod5r20" id="mod5r20" style="width:100px; top:1055px; left:740px;"/>
-<input type="text" name="mod5r22" id="mod5r22" style="width:100px; top:1080px; left:740px;"/>
-<!-- riadky 21 - 23 -->
-<input type="text" name="mod5r23" id="mod5r23" style="width:100px; top:1106px; left:740px;"/>
-<input type="text" name="mod5r24" id="mod5r24" style="width:100px; top:1132px; left:740px;"/>
-<input type="text" name="mod5r25" id="mod5r25" style="width:100px; top:1164px; left:740px;"/>
-<!-- kontrolny sucet -->
-<input type="text" name="mod5r99" id="mod5r99" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1195px; left:740px;"/>
+<input type="text" name="mod5r01" id="mod5r01" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:639px; left:680px;"/>
+<input type="text" name="mod5r02" id="mod5r02" style="width:100px; top:665px; left:680px;"/>
+<input type="text" name="mod5r06" id="mod5r06" style="width:100px; top:696px; left:680px;"/>
+<input type="text" name="mod5r07" id="mod5r07" style="width:100px; top:728px; left:680px;"/>
+<input type="text" name="mod5r08" id="mod5r08" style="width:100px; top:759px; left:680px;"/>
+<input type="text" name="mod5r10" id="mod5r10" style="width:100px; top:790px; left:680px;"/>
+<input type="text" name="mod5r11" id="mod5r11" style="width:100px; top:822px; left:680px;"/>
+<input type="text" name="mod5r12" id="mod5r12" style="width:100px; top:858px; left:680px;"/>
+<input type="text" name="mod5r13" id="mod5r13" style="width:100px; top:889px; left:680px;"/>
+<input type="text" name="mod5r14" id="mod5r14" style="width:100px; top:915px; left:680px;"/>
+<input type="text" name="mod5r15" id="mod5r15" style="width:100px; top:941px; left:680px;"/>
+<input type="text" name="mod5r16" id="mod5r16" style="width:100px; top:967px; left:680px;"/>
+<input type="text" name="mod5r17" id="mod5r17" style="width:100px; top:993px; left:680px;"/>
+<input type="text" name="mod5r18" id="mod5r18" style="width:100px; top:1019px; left:680px;"/>
+<input type="text" name="mod5r19" id="mod5r19" style="width:100px; top:1045px; left:680px;"/>
+<input type="text" name="mod5r20" id="mod5r20" style="width:100px; top:1076px; left:680px;"/>
+<input type="text" name="mod5r22" id="mod5r22" style="width:100px; top:1112px; left:680px;"/>
+<input type="text" name="mod5r23" id="mod5r23" style="width:100px; top:1143px; left:680px;"/>
+<input type="text" name="mod5r24" id="mod5r24" style="width:100px; top:1170px; left:680px;"/>
+<input type="text" name="mod5r25" id="mod5r25" style="width:100px; top:1201px; left:680px;"/>
+<input type="text" name="mod5r99" id="mod5r99" onkeyup="CiarkaNaBodku(this);" style="width:100px; top:1232px; left:680px;"/>
 <?php                                        } ?>
 
 <div class="navbar">
@@ -745,7 +730,7 @@ $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 
 //vytlac
-$sqltt = "UPDATE F$kli_vxcf"."_statistika_praca204 SET psys=$stvrtrok "; 
+$sqltt = "UPDATE F$kli_vxcf"."_statistika_praca204 SET psys=$stvrtrok ";
 $sql = mysql_query("$sqltt");
 $sqltt = "SELECT * FROM F$kli_vxcf"."_statistika_praca204 WHERE ico >= 0 "."";
 
