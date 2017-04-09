@@ -1126,31 +1126,31 @@ $source="stat_unp101.php";
 <?php
 $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 ?>
-<span class="text-echo" style="top:308px; left:252px; font-size:18px; letter-spacing:25px;">12</span>
-<span class="text-echo" style="top:308px; left:321px; font-size:18px; letter-spacing:22px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:319px; left:262px; font-size:18px; letter-spacing:25px;">12</span>
+<span class="text-echo" style="top:319px; left:331px; font-size:18px; letter-spacing:24px;"><?php echo $fir_ficox; ?></span>
 <!-- ORGANIZACIA -->
 <span class="text-echo" style="top:840px; left:54px;"><?php echo "$fir_fnaz $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
 <span class="text-echo" style="top:840px; left:815px;"><?php echo $okres; ?></span>
 <img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();"
      title="Nastavi kód okresu" class="btn-row-tool" style="top:838px; left:846px;">
 <!-- Vyplnil -->
-<span class="text-echo" style="top:890px; left:54px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo" style="top:903px; left:487px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo" style="top:937px; left:54px;"><?php echo $fir_fem1; ?></span>
+<span class="text-echo" style="top:930px; left:54px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo" style="top:930px; left:400px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo" style="top:975px; left:54px;"><?php echo $fir_fem1; ?></span>
 <input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);"
-       style="width:80px; top:932px; left:390px;"/>
+       style="width:80px; top:975px; left:400px;"/>
 
 <!-- modul 100231 -->
 <?php $fir_sknacex=str_replace(".","",$fir_sknace); ?>
-<span class="text-echo" style="top:1136px; left:403px;"><?php echo $fir_sknacex; ?></span>
-<span class="text-echo" style="top:1136px; left:547px;"><?php echo $okres; ?></span>
-<span class="text-echo" style="top:1136px; left:690px;"><?php echo $drvlst; ?></span>
+<span class="text-echo" style="top:1160px; left:403px;"><?php echo $fir_sknacex; ?></span>
+<span class="text-echo" style="top:1160px; left:547px;"><?php echo $okres; ?></span>
+<span class="text-echo" style="top:1160px; left:690px;"><?php echo $drvlst; ?></span>
  <img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();"
-      title="Nastavi kód DRVLST" class="btn-row-tool" style="top:1134px; left:705px;">
-<span class="text-echo" style="top:1136px; left:820px;"><?php echo $fir_uctt03; ?></span>
+      title="Nastavi kód DRVLST" class="btn-row-tool" style="top:1160px; left:705px;">
+<span class="text-echo" style="top:1160px; left:820px;"><?php echo $fir_uctt03; ?></span>
  <img src="../obr/ikony/pencil_blue_icon.png" onclick="UdajeFirma();"
-      title="Nastavi kód FORMA" class="btn-row-tool" style="top:1134px; left:852px;">
-<input type="text" name="cinnost" id="cinnost" style="width:460px; top:1167px; left:435px;"/>
+      title="Nastavi kód FORMA" class="btn-row-tool" style="top:1160px; left:852px;">
+<input type="text" name="cinnost" id="cinnost" style="width:460px; top:1190px; left:435px;"/>
 <?php                                        } ?>
 
 
@@ -1176,35 +1176,35 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 <input type="text" name="s1r007" id="s1r007" style="width:100px; top:395px; left:700px;"/>
 <input type="text" name="s1r008" id="s1r008" style="width:100px; top:443px; left:700px;"/>
 <input type="text" name="s1r009" id="s1r009" style="width:100px; top:480px; left:700px;"/>
-<input type="text" name="s1r010" id="s1r010" style="width:100px; top:517px; left:700px;"/>
+<input type="text" name="s1r010" id="s1r010" style="width:100px; top:515px; left:700px;"/>
 <!-- cast C -->
-<input type="text" name="s1r011" id="s1r011" style="width:100px; top:555px; left:700px;"/>
-<input type="text" name="s1r012" id="s1r012" style="width:100px; top:590px; left:700px;"/>
-<input type="text" name="s1r013" id="s1r013" style="width:100px; top:627px; left:700px;"/>
-<input type="text" name="s1r014" id="s1r014" style="width:100px; top:664px; left:700px;"/>
+<input type="text" name="s1r011" id="s1r011" style="width:100px; top:553px; left:700px;"/>
+<input type="text" name="s1r012" id="s1r012" style="width:100px; top:580px; left:700px;"/>
+<input type="text" name="s1r013" id="s1r013" style="width:100px; top:606px; left:700px;"/>
+<input type="text" name="s1r014" id="s1r014" style="width:100px; top:638px; left:700px;"/>
 <!-- cast D -->
-<input type="text" name="s2r015" id="s2r015" style="width:100px; top:700px; left:700px;"/>
-<input type="text" name="s2r016" id="s2r016" style="width:100px; top:731px; left:700px;"/>
-<input type="text" name="s2r017" id="s2r017" style="width:100px; top:757px; left:700px;"/>
-<input type="text" name="s2r018" id="s2r018" style="width:100px; top:783px; left:700px;"/>
-<input type="text" name="s2r019" id="s2r019" style="width:100px; top:809px; left:700px;"/>
-<input type="text" name="s2r020" id="s2r020" style="width:100px; top:835px; left:700px;"/>
-<input type="text" name="s2r021" id="s2r021" style="width:100px; top:860px; left:700px;"/>
-<input type="text" name="s2r022" id="s2r022" style="width:100px; top:886px; left:700px;"/>
-<input type="text" name="s2r023" id="s2r023" style="width:100px; top:912px; left:700px;"/>
-<span class="text-echo" style="top:942px; right:144px;"><?php echo $s2r024; ?></span>
-<input type="text" name="s2r025" id="s2r025" style="width:100px; top:964px; left:700px;"/>
-<input type="text" name="s2r026" id="s2r026" style="width:100px; top:990px; left:700px;"/>
-<input type="text" name="s2r027" id="s2r027" style="width:100px; top:1016px; left:700px;"/>
-<input type="text" name="s2r028" id="s2r028" style="width:100px; top:1041px; left:700px;"/>
-<input type="text" name="s2r029" id="s2r029" style="width:100px; top:1067px; left:700px;"/>
-<input type="text" name="s2r030" id="s2r030" style="width:100px; top:1093px; left:700px;"/>
-<input type="text" name="s2r031" id="s2r031" style="width:100px; top:1119px; left:700px;"/>
-<input type="text" name="s2r032" id="s2r032" style="width:100px; top:1145px; left:700px;"/>
-<input type="text" name="s2r033" id="s2r033" style="width:100px; top:1171px; left:700px;"/>
-<input type="text" name="s2r034" id="s2r034" style="width:100px; top:1203px; left:700px;"/>
-<input type="text" name="s2r035" id="s2r035" style="width:100px; top:1223px; left:700px;"/>
-<input type="text" name="s2r036" id="s2r036" style="width:100px; top:1243px; left:700px;"/>
+<input type="text" name="s2r015" id="s2r015" style="width:100px; top:670px; left:700px;"/>
+<input type="text" name="s2r016" id="s2r016" style="width:100px; top:703px; left:700px;"/>
+<input type="text" name="s2r017" id="s2r017" style="width:100px; top:730px; left:700px;"/>
+<input type="text" name="s2r018" id="s2r018" style="width:100px; top:758px; left:700px;"/>
+<input type="text" name="s2r019" id="s2r019" style="width:100px; top:783px; left:700px;"/>
+<input type="text" name="s2r020" id="s2r020" style="width:100px; top:810px; left:700px;"/>
+<input type="text" name="s2r021" id="s2r021" style="width:100px; top:836px; left:700px;"/>
+<input type="text" name="s2r022" id="s2r022" style="width:100px; top:860px; left:700px;"/>
+<input type="text" name="s2r023" id="s2r023" style="width:100px; top:887px; left:700px;"/>
+<span class="text-echo" style="top:917px; right:144px;"><?php echo $s2r024; ?></span>
+<input type="text" name="s2r025" id="s2r025" style="width:100px; top:934px; left:700px;"/>
+<input type="text" name="s2r026" id="s2r026" style="width:100px; top:960px; left:700px;"/>
+<input type="text" name="s2r027" id="s2r027" style="width:100px; top:986px; left:700px;"/>
+<input type="text" name="s2r028" id="s2r028" style="width:100px; top:1017px; left:700px;"/>
+<input type="text" name="s2r029" id="s2r029" style="width:100px; top:1042px; left:700px;"/>
+<input type="text" name="s2r030" id="s2r030" style="width:100px; top:1064px; left:700px;"/>
+<input type="text" name="s2r031" id="s2r031" style="width:100px; top:1091px; left:700px;"/>
+<input type="text" name="s2r032" id="s2r032" style="width:100px; top:1117px; left:700px;"/>
+<input type="text" name="s2r033" id="s2r033" style="width:100px; top:1145px; left:700px;"/>
+<input type="text" name="s2r034" id="s2r034" style="width:100px; top:1170px; left:700px;"/>
+<input type="text" name="s2r035" id="s2r035" style="width:100px; top:1201px; left:700px;"/>
+<input type="text" name="s2r036" id="s2r036" style="width:100px; top:1232px; left:700px;"/>
 <?php                                        } ?>
 
 
@@ -1214,39 +1214,40 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 <!-- modul 378 pokrac. casti D -->
 
-<input type="text" name="s2r037" id="s2r037" style="width:100px; top:184px; left:700px;"/>
-<input type="text" name="s2r038" id="s2r038" style="width:100px; top:211px; left:700px;"/>
-<span class="text-echo" style="top:247px; right:144px;"><?php echo $s2r039; ?></span>
-<input type="text" name="s2r040" id="s2r040" style="width:100px; top:279px; left:700px;"/>
-<input type="text" name="s2r041" id="s2r041" style="width:100px; top:310px; left:700px;"/>
-<input type="text" name="s2r042" id="s2r042" style="width:100px; top:335px; left:700px;"/>
-<input type="text" name="s2r043" id="s2r043" style="width:100px; top:361px; left:700px;"/>
-<input type="text" name="s2r044" id="s2r044" style="width:100px; top:387px; left:700px;"/>
-<input type="text" name="s2r045" id="s2r045" style="width:100px; top:413px; left:700px;"/>
-<input type="text" name="s2r046" id="s2r046" style="width:100px; top:439px; left:700px;"/>
-<input type="text" name="s2r047" id="s2r047" style="width:100px; top:465px; left:700px;"/>
-<input type="text" name="s2r048" id="s2r048" style="width:100px; top:496px; left:700px;"/>
-<input type="text" name="s2r049" id="s2r049" style="width:100px; top:527px; left:700px;"/>
-<input type="text" name="s2r050" id="s2r050" style="width:100px; top:553px; left:700px;"/>
-<input type="text" name="s2r051" id="s2r051" style="width:100px; top:579px; left:700px;"/>
-<input type="text" name="s2r052" id="s2r052" style="width:100px; top:611px; left:700px;"/>
-<input type="text" name="s2r053" id="s2r053" style="width:100px; top:642px; left:700px;"/>
-<input type="text" name="s2r054" id="s2r054" style="width:100px; top:673px; left:700px;"/>
-<input type="text" name="s2r055" id="s2r055" style="width:100px; top:710px; left:700px;"/>
-<input type="text" name="s2r056" id="s2r056" style="width:100px; top:741px; left:700px;"/>
-<input type="text" name="s2r057" id="s2r057" style="width:100px; top:766px; left:700px;"/>
-<input type="text" name="s2r058" id="s2r058" style="width:100px; top:793px; left:700px;"/>
-<input type="text" name="s2r059" id="s2r059" style="width:100px; top:824px; left:700px;"/>
-<span class="text-echo" style="top:866px; right:144px;"><?php echo $s2r060; ?></span>
-<input type="text" name="s2r061" id="s2r061" style="width:100px; top:891px; left:700px;"/>
-<input type="text" name="s2r062" id="s2r062" style="width:100px; top:923px; left:700px;"/>
-<input type="text" name="s2r063" id="s2r063" style="width:100px; top:955px; left:700px;"/>
-<input type="text" name="s2r064" id="s2r064" style="width:100px; top:980px; left:700px;"/>
-<span class="text-echo" style="top:1016px; right:144px;"><?php echo $s2r065; ?></span>
-<input type="text" name="s2r066" id="s2r066" style="width:100px; top:1042px; left:700px;"/>
-<span class="text-echo" style="top:1073px; right:144px;"><?php echo $s2r067; ?></span>
-<input type="text" name="s2r068" id="s2r068" style="width:100px; top:1093px; left:700px;"/>
-<span class="text-echo" style="top:1113px; right:144px;"><?php echo $s2r099; ?></span>
+<input type="text" name="s2r037" id="s2r037" style="width:100px; top:140px; left:700px;"/>
+<input type="text" name="s2r038" id="s2r038" style="width:100px; top:168px; left:700px;"/>
+<span class="text-echo" style="top:204px; right:144px;"><?php echo $s2r039; ?></span>
+<input type="text" name="s2r040" id="s2r040" style="width:100px; top:234px; left:700px;"/>
+<input type="text" name="s2r041" id="s2r041" style="width:100px; top:264px; left:700px;"/>
+<input type="text" name="s2r042" id="s2r042" style="width:100px; top:292px; left:700px;"/>
+<input type="text" name="s2r043" id="s2r043" style="width:100px; top:317px; left:700px;"/>
+<input type="text" name="s2r044" id="s2r044" style="width:100px; top:344px; left:700px;"/>
+<input type="text" name="s2r045" id="s2r045" style="width:100px; top:370px; left:700px;"/>
+<input type="text" name="s2r046" id="s2r046" style="width:100px; top:396px; left:700px;"/>
+<input type="text" name="s2r047" id="s2r047" style="width:100px; top:423px; left:700px;"/>
+<input type="text" name="s2r048" id="s2r048" style="width:100px; top:453px; left:700px;"/>
+<input type="text" name="s2r049" id="s2r049" style="width:100px; top:483px; left:700px;"/>
+<input type="text" name="s2r050" id="s2r050" style="width:100px; top:510px; left:700px;"/>
+<input type="text" name="s2r051" id="s2r051" style="width:100px; top:537px; left:700px;"/>
+<input type="text" name="s2r052" id="s2r052" style="width:100px; top:567px; left:700px;"/>
+<input type="text" name="s2r053" id="s2r053" style="width:100px; top:597px; left:700px;"/>
+<input type="text" name="s2r054" id="s2r054" style="width:100px; top:627px; left:700px;"/>
+<input type="text" name="s2r055" id="s2r055" style="width:100px; top:662px; left:700px;"/>
+<input type="text" name="s2r056" id="s2r056" style="width:100px; top:693px; left:700px;"/>
+<input type="text" name="s2r057" id="s2r057" style="width:100px; top:718px; left:700px;"/>
+<input type="text" name="s2r058" id="s2r058" style="width:100px; top:745px; left:700px;"/>
+<input type="text" name="s2r059" id="s2r059" style="width:100px; top:773px; left:700px;"/>
+<span class="text-echo" style="top:806px; right:144px;"><?php echo $s2r060; ?></span>
+<input type="text" name="s2r061" id="s2r061" style="width:100px; top:835px; left:700px;"/>
+<input type="text" name="s2r062" id="s2r062" style="width:100px; top:867px; left:700px;"/>
+<input type="text" name="s2r063" id="s2r063" style="width:100px; top:899px; left:700px;"/>
+<input type="text" name="s2r064" id="s2r064" style="width:100px; top:924px; left:700px;"/>
+<span class="text-echo" style="top:956px; right:144px;"><?php echo $s2r065; ?></span>
+
+<input type="text" name="s2r066" id="s2r066" style="width:100px; top:985px; left:700px;"/>
+<span class="text-echo" style="top:1016px; right:144px;"><?php echo $s2r067; ?></span>
+<input type="text" name="s2r068" id="s2r068" style="width:100px; top:1044px; left:700px;"/>
+<span class="text-echo" style="top:1078px; right:144px;"><?php echo $s2r099; ?></span>
 <?php                                        } ?>
 
 <div class="navbar">
@@ -1306,13 +1307,18 @@ $pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
-//Mesiac
+//Mesiac a rok
 $mesiacx=$mesiac;
 if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
 $A="1";
 $B="2";
-$pdf->Cell(190,53," ","$rmc1",1,"L");
-$pdf->Cell(43,5," ","$rmc1",0,"L");$pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
+
+$pdf->Cell(190,34," ","$rmc1",1,"L");
+$pdf->Cell(93,6," ","$rmc1",0,"L");$pdf->Cell(15,6,"$kli_vrok","$rmc",0,"C");
+$pdf->Cell(190,21," ","$rmc1",1,"L");
+
+
+$pdf->Cell(45,5," ","$rmc1",0,"L");$pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
 //ICO
 $fir_ficx=$fir_fico;
 $cfico=1*$fir_fico;
@@ -1327,7 +1333,7 @@ $G=substr($fir_ficx,6,1);
 $H=substr($fir_ficx,7,1);
 $pdf->Cell(8,8,"$A","$rmc",0,"C");$pdf->Cell(7,8,"$B","$rmc",0,"C");
 $pdf->Cell(7,8,"$C","$rmc",0,"C");$pdf->Cell(7,8,"$D","$rmc",0,"C");
-$pdf->Cell(7,8,"$E","$rmc",0,"C");$pdf->Cell(7,8,"$F","$rmc",0,"C");
+$pdf->Cell(9,8,"$E","$rmc",0,"C");$pdf->Cell(7,8,"$F","$rmc",0,"C");
 $pdf->Cell(7,8,"$G","$rmc",0,"C");$pdf->Cell(8,8,"$H","$rmc",1,"C");
 
 //podnik a okres
@@ -1336,15 +1342,16 @@ $pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(153,5,"$fir_fnaz, $fir_fuli $fir_fc
 $pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(34,5,"$okres","$rmc",1,"C");
 
 //VYPLNIL
-$pdf->Cell(195,6," ","$rmc1",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(74,6,"$fir_mzdt05","$rmc",0,"L");
-$pdf->Cell(44,11,"$fir_mzdt04","$rmc",1,"R");
+$pdf->Cell(199,13," ","$rmc1",1,"L");
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(74,6,"$fir_mzdt05","$rmc",0,"L");
+$pdf->Cell(20,6,"$fir_mzdt04","$rmc",1,"R");
+$pdf->Cell(199,5," ","$rmc1",1,"L");
 $pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(74,6,"$fir_fem1","$rmc",0,"L");
 //Odoslane
-$pdf->Cell(44,6,"$odoslane_sk","$rmc",1,"C");
+$pdf->Cell(20,6,"$odoslane_sk","$rmc",1,"C");
 
 //modul 100231
-$pdf->Cell(195,37," ","$rmc1",1,"L");
+$pdf->Cell(195,33," ","$rmc1",1,"L");
 $sknace=str_replace(".", "", $fir_sknace);
 $pdf->Cell(69,5," ","$rmc1",0,"C");$pdf->Cell(30,9,"$sknace","$rmc",0,"C");
 $pdf->Cell(30,9,"$okres","$rmc",0,"C");
@@ -1422,7 +1429,7 @@ $pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,9,"$text","$rmc",1,"R");
 $s1r011=$hlavicka->s1r011;
 if ( $hlavicka->s1r011 == 0 ) $s1r011="";
 $text=$s1r011;
-$pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,9,"$text","$rmc",1,"R");
+$pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,6,"$text","$rmc",1,"R");
 
 $s1r012=$hlavicka->s1r012;
 if ( $hlavicka->s1r012 == 0 ) $s1r012="";
@@ -1432,7 +1439,7 @@ $pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,7,"$text","$rmc",1,"R");
 $s1r013=$hlavicka->s1r013;
 if ( $hlavicka->s1r013 == 0 ) $s1r013="";
 $text=$s1r013;
-$pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,9,"$text","$rmc",1,"R");
+$pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,7,"$text","$rmc",1,"R");
 
 $s1r014=$hlavicka->s1r014;
 if ( $hlavicka->s1r014 == 0 ) $s1r014="";
@@ -1452,7 +1459,7 @@ $pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,5,"$text","$rmc",1,"R");
 $s2r017=$hlavicka->s2r017;
 if ( $hlavicka->s2r017 == 0 ) $s2r017="";
 $text=$s2r017;
-$pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,7,"$text","$rmc",1,"R");
+$pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,6,"$text","$rmc",1,"R");
 
 $s2r018=$hlavicka->s2r018;
 if ( $hlavicka->s2r018 == 0 ) $s2r018="";
@@ -1537,7 +1544,18 @@ $pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,5,"$text","$rmc",1,"R");
 $s2r034=$hlavicka->s2r034;
 if ( $hlavicka->s2r034 == 0 ) $s2r034="";
 $text=$s2r034;
+$pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,7,"$text","$rmc",1,"R");
+
+$s2r035=$hlavicka->s2r035;
+if ( $hlavicka->s2r035 == 0 ) $s2r035="";
+$text=$s2r035;
 $pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,8,"$text","$rmc",1,"R");
+
+$s2r036=$hlavicka->s2r036;
+if ( $hlavicka->s2r036 == 0 ) $s2r036="";
+$text=$s2r036;
+$pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,6,"$text","$rmc",1,"R");
+
                                        }
 
 if ( $strana == 3 OR $strana == 9999 ) {
@@ -1550,18 +1568,10 @@ if ( File_Exists($jpg_cesta.'_str3.jpg') AND $i == 0 )
 $pdf->Image($jpg_cesta.'_str3.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
-$pdf->Cell(195,12," ","$rmc1",1,"L");
+$pdf->Cell(195,16," ","$rmc1",1,"L");
 
 //modul 378, cast D - pokracovanie
-$s2r035=$hlavicka->s2r035;
-if ( $hlavicka->s2r035 == 0 ) $s2r035="";
-$text=$s2r035;
-$pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,8,"$text","$rmc",1,"R");
 
-$s2r036=$hlavicka->s2r036;
-if ( $hlavicka->s2r036 == 0 ) $s2r036="";
-$text=$s2r036;
-$pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,6,"$text","$rmc",1,"R");
 
 $s2r037=$hlavicka->s2r037;
 if ( $hlavicka->s2r037 == 0 ) $s2r037="";
@@ -1676,7 +1686,7 @@ $pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,6,"$text","$rmc",1,"R");
 $s2r059=$hlavicka->s2r059;
 if ( $hlavicka->s2r059 == 0 ) $s2r059="";
 $text=$s2r059;
-$pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,8,"$text","$rmc",1,"R");
+$pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,6,"$text","$rmc",1,"R");
 
 $s2r060=$hlavicka->s2r060;
 if ( $hlavicka->s2r060 == 0 ) $s2r060="";
@@ -1715,6 +1725,11 @@ $pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,6,"$text","$rmc",1,"R");
 $s2r067=$hlavicka->s2r067;
 if ( $hlavicka->s2r067 == 0 ) $s2r067="";
 $text=$s2r067;
+$pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,6,"$text","$rmc",1,"R");
+
+$s2r068=$hlavicka->s2r068;
+if ( $hlavicka->s2r068 == 0 ) $s2r068="";
+$text=$s2r068;
 $pdf->Cell(146,7," ","$rmc1",0,"L");$pdf->Cell(40,6,"$text","$rmc",1,"R");
 
 $s2r099=$hlavicka->s2r099;
