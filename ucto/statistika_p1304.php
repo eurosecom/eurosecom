@@ -209,8 +209,8 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 " mod112r99a2=mod112r01a2+mod112r02a2+mod112r03a2+mod112r04a2+mod112r05a2+mod112r06a2+mod112r07a2+mod112r08a2+mod112r09a2+mod112r10a2+mod112r11a2+mod112r12a2,".
 " mod112r99a3=mod112r01a3+mod112r02a3+mod112r03a3+mod112r04a3+mod112r05a3+mod112r06a3+mod112r07a3+mod112r08a3+mod112r09a3+mod112r10a3+mod112r11a3+mod112r12a3,".
 " mod112r99a4=mod112r01a4+mod112r02a4+mod112r03a4+mod112r05a4+mod112r06a4+mod112r07a4+mod112r10a4 ".
-" WHERE ico >= 0"; 
-$upravene = mysql_query("$uprtxt"); 
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 " mod82r99=mod82r01+mod82r02+mod82r03+mod82r04+mod82r05+mod82r06+mod82r07+mod82r08+mod82r09+mod82r10, ".
@@ -303,7 +303,7 @@ $vysledek = mysql_query("$sql");
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 " mod545r99a1=mod545r03a1+mod545r04a1+mod545r05a1+mod545r06a1,".
 " mod545r99a2=mod545r03a2+mod545r04a2+mod545r05a2+mod545r06a2 ".
-" WHERE ico >= 0"; 
+" WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 $strana=3;
 $copern=102;
@@ -361,7 +361,7 @@ $vysledek = mysql_query("$sql");
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 " mod545r99a1=mod545r03a1+mod545r04a1+mod545r05a1+mod545r06a1,".
 " mod545r99a2=mod545r03a2+mod545r04a2+mod545r05a2+mod545r06a2 ".
-" WHERE ico >= 0"; 
+" WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 $strana=3;
 $copern=102;
@@ -685,8 +685,8 @@ $dsql = mysql_query("$dsqlt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statprac,F$kli_vxcf"."_mzdpomer SET ".
 " dhpom=pm_doh, zena=SUBSTRING(rodc,3,2) ".
-" WHERE F$kli_vxcf"."_statprac.pom = F$kli_vxcf"."_mzdpomer.pm"; 
-$upravene = mysql_query("$uprtxt");  
+" WHERE F$kli_vxcf"."_statprac.pom = F$kli_vxcf"."_mzdpomer.pm";
+$upravene = mysql_query("$uprtxt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statprac "." SELECT".
 " 999,oc,ume,rodc,zena,pom,dhpom,SUM(pocet), ".
@@ -757,8 +757,8 @@ $dsql = mysql_query("$dsqlt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statprac,F$kli_vxcf"."_mzdpomer SET ".
 " dhpom=pm_doh ".
-" WHERE F$kli_vxcf"."_statprac.pom = F$kli_vxcf"."_mzdpomer.pm"; 
-$upravene = mysql_query("$uprtxt");  
+" WHERE F$kli_vxcf"."_statprac.pom = F$kli_vxcf"."_mzdpomer.pm";
+$upravene = mysql_query("$uprtxt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_statprac "." SELECT".
 " 555,oc,ume,rodc,zena,pom,dhpom,pocet, ".
@@ -825,8 +825,8 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 " mod143r16='$r16', mod143r17='$r17', mod143r18='$r18', mod143r19='$r19', mod143r20='$r20',".
 " mod143r99=mod143r01+mod143r05+mod143r06+mod143r07+mod143r08+mod143r09+mod143r10,".
 " mod143r99=mod143r99+mod143r12+mod143r14+mod143r15+mod143r20".
-" WHERE ico >= 0"; 
-$upravene = mysql_query("$uprtxt");  
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
 //echo $uprtxt;
 //exit;
 
@@ -1007,16 +1007,16 @@ $vysledek = mysql_query("$sql");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 " mod82r99=mod82r01+mod82r02+mod82r03+mod82r04+mod82r05+mod82r06+mod82r07+mod82r08+mod82r09+mod82r10".
-" WHERE ico >= 0"; 
-$upravene = mysql_query("$uprtxt"); 
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET ".
 " mod143r99=mod143r01+mod143r05+mod143r06+mod143r07+mod143r08+mod143r09+mod143r10,".
 " mod143r99=mod143r99+mod143r12+mod143r14+mod143r15+mod143r20,".
 " mod545r99a1=mod545r03a1+mod545r04a1+mod545r05a1+mod545r06a1,".
 " mod545r99a2=mod545r03a2+mod545r04a2+mod545r05a2+mod545r06a2 ".
-" WHERE ico >= 0"; 
-$upravene = mysql_query("$uprtxt"); 
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
 //koniec vypocty
 
 
@@ -1312,7 +1312,7 @@ $source="statistika_p1304.php?";
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <h6 class="toleft" style="margin-left:580px; padding-right:5px;">Archív:</h6>
+ <h6 class="toleft" style="margin-left:450px; padding-right:5px;">Archív:</h6>
 <?php
 $tvpol=0;
 $sqltt = "SELECT * FROM F".$kli_vxcf."_statistika_p1304arch WHERE psys >= 1 ";
@@ -1504,14 +1504,14 @@ $stvarch = 1*strip_tags($_REQUEST['stvarch']);
 //vytlac
 if ( $zarchivu == 0 )
      {
-$sqltt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET psys=$stvrtrok "; 
+$sqltt = "UPDATE F$kli_vxcf"."_statistika_p1304 SET psys=$stvrtrok ";
 $sql = mysql_query("$sqltt");
 $sqltt = "SELECT * FROM F$kli_vxcf"."_statistika_p1304 WHERE ico >= 0 "."";
      }
 
 if ( $zarchivu == 1 )
      {
-$sqltt = "SELECT * FROM F$kli_vxcf"."_statistika_p1304arch WHERE psys = $stvarch "; 
+$sqltt = "SELECT * FROM F$kli_vxcf"."_statistika_p1304arch WHERE psys = $stvarch ";
 $stvrtrok=$stvarch;
 $psys=$stvarch;
      }
@@ -1822,7 +1822,7 @@ $vysledek = mysql_query("$sql");
 $sql = "INSERT INTO F".$kli_vxcf."_statistika_p1304arch SELECT * FROM F".$kli_vxcf."_statistika_p1304 WHERE psys=$stvrtrok";
 $vysledek = mysql_query("$sql");
     }
-?> 
+?>
 <script type="text/javascript">
  var okno = window.open("../tmp/statistika.<?php echo $kli_uzid; ?>.pdf","_self");
 </script>
