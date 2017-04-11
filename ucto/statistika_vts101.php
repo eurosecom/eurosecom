@@ -3909,6 +3909,8 @@ $m406r4 = strip_tags($_REQUEST['m406r4']);
 $m406r5 = strip_tags($_REQUEST['m406r5']);
 $m406r6 = strip_tags($_REQUEST['m406r6']);
 $m406r7 = strip_tags($_REQUEST['m406r7']);
+$m406r8 = strip_tags($_REQUEST['m406r8']);
+$m406r9 = strip_tags($_REQUEST['m406r9']);
 $m406r99 = strip_tags($_REQUEST['m406r99']);
 //6.strana
 $m558r1 = strip_tags($_REQUEST['m558r1']);
@@ -4726,10 +4728,12 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
   m406r1='$m406r1', m406r2='$m406r2', m406r3='$m406r3', m406r4='$m406r4', m406r5='$m406r5',
   m406r6='$m406r6', m406r7='$m406r7', m406r99='$m406r99' ".
 " WHERE ico >= 0 ";
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
 " m406r8='$m406r8', m406r9='$m406r9' ".
 " WHERE ico >= 0";
+//echo $uprtxt;
                     }
 
 if ( $strana == 6 ) {
@@ -5008,12 +5012,12 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 $upravene = mysql_query("$uprtxt");
 
 //4.strana
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" m406r99=m406r1+m406r2+m406r3+m406r4+m406r5+m406r6+m406r7, ".
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101, F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m406r99=m406r1+m406r2+m406r3+m406r4+m406r5+m406r6+m406r7+m406r8+m406r9, ".
 " m405r81=m405r11-m405r31, m405r82=m405r12-m405r32, ".
 " m405r991=m405r11+m405r21+m405r31+m405r41+m405r51+m405r61+m405r71+m405r81, ".
 " m405r992=m405r12+m405r32+m405r82  ".
-" WHERE ico >= 0";
+" WHERE F$kli_vxcf"."_statistika_vts101.ico >= 0";
 $upravene = mysql_query("$uprtxt");
 //5.strana
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
