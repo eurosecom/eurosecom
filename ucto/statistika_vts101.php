@@ -19,7 +19,7 @@ if (!isset($kli_vxcf)) $kli_vxcf = 1;
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=0;
+$rmc=1;
 $rmc1=0;
 
 $citfir = include("../cis/citaj_fir.php");
@@ -3594,8 +3594,24 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m586r242 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
 $vysledek = mysql_query("$sql");
 }
-
-
+//novinky 2016
+$sql = "SELECT m406r9 FROM F$kli_vxcf"."_statistika_vts101s2 WHERE ico=0";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD new2016 DECIMAL(2,0) DEFAULT 0 AFTER ico";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m100417ano DECIMAL(2,0) DEFAULT 0 AFTER new2016";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m100417nie DECIMAL(2,0) DEFAULT 0 AFTER new2016";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m100418 DECIMAL(10,0) DEFAULT 0 AFTER new2016";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m406r8 DECIMAL(10,0) DEFAULT 0 AFTER new2016";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_vts101s2 ADD m406r9 DECIMAL(10,0) DEFAULT 0 AFTER new2016";
+$vysledek = mysql_query("$sql");
+}
 //koniec vytvorenia definicie
 
 
@@ -3833,9 +3849,9 @@ $m1100r10 = strip_tags($_REQUEST['m1100r10']);
 $m1100r11 = strip_tags($_REQUEST['m1100r11']);
 $m1100r12 = strip_tags($_REQUEST['m1100r12']);
 $m1100r13 = strip_tags($_REQUEST['m1100r13']);
+//3.strana
 $mod100036kal = strip_tags($_REQUEST['mod100036kal']);
 $mod100036hos = strip_tags($_REQUEST['mod100036hos']);
-//3.strana
 $mod100037 = strip_tags($_REQUEST['mod100037']);
 $m100214r01 = strip_tags($_REQUEST['m100214r01']);
 $m100214r02 = strip_tags($_REQUEST['m100214r02']);
@@ -3847,14 +3863,17 @@ $m1101r4a = strip_tags($_REQUEST['m1101r4a']);
 $m1101r4b = strip_tags($_REQUEST['m1101r4b']);
 $m1101r5a = strip_tags($_REQUEST['m1101r5a']);
 $m1101r5b = strip_tags($_REQUEST['m1101r5b']);
-$m1101r6a = strip_tags($_REQUEST['m1101r6a']);
-$m1101r6b = strip_tags($_REQUEST['m1101r6b']);
-$m1101r7a = strip_tags($_REQUEST['m1101r7a']);
-$m1101r7b = strip_tags($_REQUEST['m1101r7b']);
 //$m1101r8a = strip_tags($_REQUEST['m1101r8a']);
 //$m1101r8b = strip_tags($_REQUEST['m1101r8b']);
 
 //4.strana
+$m1101r6a = strip_tags($_REQUEST['m1101r6a']);
+$m1101r6b = strip_tags($_REQUEST['m1101r6b']);
+$m1101r7a = strip_tags($_REQUEST['m1101r7a']);
+$m1101r7b = strip_tags($_REQUEST['m1101r7b']);
+$m100417ano = strip_tags($_REQUEST['m100417ano']);
+$m100417nie = strip_tags($_REQUEST['m100417nie']);
+$m100418 = strip_tags($_REQUEST['m100418']);
 $m398r11 = strip_tags($_REQUEST['m398r11']);
 $m398r12 = strip_tags($_REQUEST['m398r12']);
 $m398r13 = strip_tags($_REQUEST['m398r13']);
@@ -3869,6 +3888,7 @@ $m398r993 = strip_tags($_REQUEST['m398r993']);
 $m398r994 = strip_tags($_REQUEST['m398r994']);
 $m1005r1a = strip_tags($_REQUEST['m1005r1a']);
 $m1005r1b = strip_tags($_REQUEST['m1005r1b']);
+//5.strana
 $m405r11 = strip_tags($_REQUEST['m405r11']);
 $m405r12 = strip_tags($_REQUEST['m405r12']);
 $m405r21 = strip_tags($_REQUEST['m405r21']);
@@ -3890,7 +3910,7 @@ $m406r5 = strip_tags($_REQUEST['m406r5']);
 $m406r6 = strip_tags($_REQUEST['m406r6']);
 $m406r7 = strip_tags($_REQUEST['m406r7']);
 $m406r99 = strip_tags($_REQUEST['m406r99']);
-//5.strana
+//6.strana
 $m558r1 = strip_tags($_REQUEST['m558r1']);
 $m558r2 = strip_tags($_REQUEST['m558r2']);
 $m558r3 = strip_tags($_REQUEST['m558r3']);
@@ -3918,9 +3938,9 @@ $m585r05 = strip_tags($_REQUEST['m585r05']);
 $m585r3k = strip_tags($_REQUEST['m585r3k']);
 $m585r4k = strip_tags($_REQUEST['m585r4k']);
 $m585r5k = strip_tags($_REQUEST['m585r5k']);
+//7.strana
 $m100044ano = strip_tags($_REQUEST['m100044ano']);
 $m100044nie = strip_tags($_REQUEST['m100044nie']);
-//6.strana
 $m571r10 = strip_tags($_REQUEST['m571r10']);
 $m571r12 = strip_tags($_REQUEST['m571r12']);
 $m571r13 = strip_tags($_REQUEST['m571r13']);
@@ -3999,13 +4019,14 @@ $m581r8 = strip_tags($_REQUEST['m581r8']);
 //$m581r11 = strip_tags($_REQUEST['m581r11']);
 $m581r12 = strip_tags($_REQUEST['m581r12']);
 $m581r99 = strip_tags($_REQUEST['m581r99']);
+//8.strana
 $m100301r1 = strip_tags($_REQUEST['m100301r1']);
 $m100301r2 = strip_tags($_REQUEST['m100301r2']);
+$m100302 = strip_tags($_REQUEST['m100302']);
 $m100303r1 = strip_tags($_REQUEST['m100303r1']);
 $m100303r2 = strip_tags($_REQUEST['m100303r2']);
-$m100302 = strip_tags($_REQUEST['m100302']);
 $m100304 = strip_tags($_REQUEST['m100304']);
-//7.strana
+//9.strana
 $m513r11 = strip_tags($_REQUEST['m513r11']);
 $m513r12 = strip_tags($_REQUEST['m513r12']);
 $m513r13 = strip_tags($_REQUEST['m513r13']);
@@ -4185,7 +4206,6 @@ $m513r222 = strip_tags($_REQUEST['m513r222']);
 $m513r223 = strip_tags($_REQUEST['m513r223']);
 $m513r224 = strip_tags($_REQUEST['m513r224']);
 $m513r225 = strip_tags($_REQUEST['m513r225']);
-$m513r226 = strip_tags($_REQUEST['m513r226']);
 $m513r227 = strip_tags($_REQUEST['m513r227']);
 $m513r228 = strip_tags($_REQUEST['m513r228']);
 $m513r229 = strip_tags($_REQUEST['m513r229']);
@@ -4198,7 +4218,7 @@ $m513r996 = strip_tags($_REQUEST['m513r996']);
 $m513r997 = strip_tags($_REQUEST['m513r997']);
 $m513r998 = strip_tags($_REQUEST['m513r998']);
 $m513r999 = strip_tags($_REQUEST['m513r999']);
-//8.strana
+//10.strana
 $m516r11 = strip_tags($_REQUEST['m516r11']);
 $m516r12 = strip_tags($_REQUEST['m516r12']);
 $m516r13 = strip_tags($_REQUEST['m516r13']);
@@ -4350,7 +4370,7 @@ $m516r994 = strip_tags($_REQUEST['m516r994']);
 $m516r995 = strip_tags($_REQUEST['m516r995']);
 $m516r996 = strip_tags($_REQUEST['m516r996']);
 $m516r997 = strip_tags($_REQUEST['m516r997']);
-//9.strana
+//11.strana
 $m100305r1 = strip_tags($_REQUEST['m100305r1']);
 $m100305r2 = strip_tags($_REQUEST['m100305r2']);
 $m100305r3 = strip_tags($_REQUEST['m100305r3']);
@@ -4404,23 +4424,9 @@ $m586r241 = strip_tags($_REQUEST['m586r241']);
 $m586r242 = strip_tags($_REQUEST['m586r242']);
 $m586r991 = strip_tags($_REQUEST['m586r991']);
 $m586r992 = strip_tags($_REQUEST['m586r992']);
-//10.strana
-$m19r1 = strip_tags($_REQUEST['m19r1']);
-$m19r2 = strip_tags($_REQUEST['m19r2']);
-$m19r3 = strip_tags($_REQUEST['m19r3']);
-$m19r4 = strip_tags($_REQUEST['m19r4']);
-$m19r5 = strip_tags($_REQUEST['m19r5']);
-$m19r6 = strip_tags($_REQUEST['m19r6']);
-$m19r7 = strip_tags($_REQUEST['m19r7']);
-$m19r8 = strip_tags($_REQUEST['m19r8']);
-$m19r9 = strip_tags($_REQUEST['m19r9']);
-$m19r10 = strip_tags($_REQUEST['m19r10']);
-$m19r11 = strip_tags($_REQUEST['m19r11']);
-$m19r12 = strip_tags($_REQUEST['m19r12']);
-$m19r99 = strip_tags($_REQUEST['m19r99']);
 $m1527r1a = strip_tags($_REQUEST['m1527r1a']);
 $m1527r1b = strip_tags($_REQUEST['m1527r1b']);
-//11.strana
+//12.strana
 $m527r11 = strip_tags($_REQUEST['m527r11']);
 $m527r12 = strip_tags($_REQUEST['m527r12']);
 $m527r13 = strip_tags($_REQUEST['m527r13']);
@@ -4591,7 +4597,7 @@ $m527r177 = strip_tags($_REQUEST['m527r177']);
 $m527r178 = strip_tags($_REQUEST['m527r178']);
 $m527r179 = strip_tags($_REQUEST['m527r179']);
 $m527r1710 = strip_tags($_REQUEST['m527r1710']);
-//12.strana
+//13.strana
 $m527r181 = strip_tags($_REQUEST['m527r181']);
 $m527r182 = strip_tags($_REQUEST['m527r182']);
 $m527r183 = strip_tags($_REQUEST['m527r183']);
@@ -4665,34 +4671,6 @@ $m527r997 = strip_tags($_REQUEST['m527r997']);
 $m527r998 = strip_tags($_REQUEST['m527r998']);
 $m527r999 = strip_tags($_REQUEST['m527r999']);
 $m527r9910 = strip_tags($_REQUEST['m527r9910']);
-//13.strana
-$m474r11 = strip_tags($_REQUEST['m474r11']);
-$m474r12 = strip_tags($_REQUEST['m474r12']);
-$m474r13 = strip_tags($_REQUEST['m474r13']);
-$m474r21 = strip_tags($_REQUEST['m474r21']);
-$m474r22 = strip_tags($_REQUEST['m474r22']);
-$m474r23 = strip_tags($_REQUEST['m474r23']);
-$m474r31 = strip_tags($_REQUEST['m474r31']);
-$m474r32 = strip_tags($_REQUEST['m474r32']);
-$m474r33 = strip_tags($_REQUEST['m474r33']);
-$m474r41 = strip_tags($_REQUEST['m474r41']);
-$m474r42 = strip_tags($_REQUEST['m474r42']);
-$m474r43 = strip_tags($_REQUEST['m474r43']);
-$m474r51 = strip_tags($_REQUEST['m474r51']);
-$m474r52 = strip_tags($_REQUEST['m474r52']);
-$m474r53 = strip_tags($_REQUEST['m474r53']);
-$m474r61 = strip_tags($_REQUEST['m474r61']);
-$m474r62 = strip_tags($_REQUEST['m474r62']);
-$m474r63 = strip_tags($_REQUEST['m474r63']);
-$m474r72 = strip_tags($_REQUEST['m474r72']);
-$m474r73 = strip_tags($_REQUEST['m474r73']);
-$m474r991 = strip_tags($_REQUEST['m474r991']);
-$m474r992 = strip_tags($_REQUEST['m474r992']);
-$m474r993 = strip_tags($_REQUEST['m474r993']);
-$m514r1 = strip_tags($_REQUEST['m514r1']);
-$m514r2 = strip_tags($_REQUEST['m514r2']);
-$m514r3 = strip_tags($_REQUEST['m514r3']);
-$m514r99 = strip_tags($_REQUEST['m514r99']);
 $uprav="NO";
 
 if ( $strana == 1 ) {
@@ -4709,37 +4687,52 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
   mod100043ano='$mod100043ano', mod100043nie='$mod100043nie',
   m1100r4='$m1100r4', m1100r5='$m1100r5', m1100r6='$m1100r6', m1100r7='$m1100r7',
   m1100r8='$m1100r8', m1100r9='$m1100r9', m1100r10='$m1100r10', m1100r11='$m1100r11',
-  m1100r12='$m1100r12', m1100r13='$m1100r13',
-  mod100036kal='$mod100036kal', mod100036hos='$mod100036hos' ".
+  m1100r12='$m1100r12', m1100r13='$m1100r13' ".
 " WHERE ico >= 0";
                     }
 
 if ( $strana == 3 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" mod100037='$mod100037', m100214r01='$m100214r01', m100214r02='$m100214r02',
+" mod100036kal='$mod100036kal', mod100036hos='$mod100036hos',
+  mod100037='$mod100037', m100214r01='$m100214r01', m100214r02='$m100214r02',
   mod100069ano='$mod100069ano', mod100069nie='$mod100069nie',
   m1101r2='$m1101r2', m1101r3='$m1101r3', m1101r4a='$m1101r4a', m1101r4b='$m1101r4b',
-  m1101r5a='$m1101r5a', m1101r5b='$m1101r5b', m1101r6a='$m1101r6a', m1101r6b='$m1101r6b',
-  m1101r7a='$m1101r7a', m1101r7b='$m1101r7b' ".
+  m1101r5a='$m1101r5a', m1101r5b='$m1101r5b' ".
 " WHERE ico >= 0";
                     }
 
 if ( $strana == 4 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" m398r11='$m398r11', m398r12='$m398r12', m398r13='$m398r13', m398r14='$m398r14',
+" m1101r6a='$m1101r6a', m1101r6b='$m1101r6b',
+  m1101r7a='$m1101r7a', m1101r7b='$m1101r7b',
+  m398r11='$m398r11', m398r12='$m398r12', m398r13='$m398r13', m398r14='$m398r14',
   m398r21='$m398r21', m398r22='$m398r22', m398r23='$m398r23', m398r24='$m398r24',
   m398r991='$m398r991', m398r992='$m398r992', m398r993='$m398r993', m398r994='$m398r994',
-  m1005r1a='$m1005r1a', m1005r1b='$m1005r1b',
-  m405r11='$m405r11', m405r12='$m405r12', m405r21='$m405r21',
+  m1005r1a='$m1005r1a', m1005r1b='$m1005r1b' ".
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m100417ano='$m100417ano', m100417nie='$m100417nie', m100418='$m100418' ".
+" WHERE ico >= 0";
+                    }
+
+if ( $strana == 5 ) {
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
+" m405r11='$m405r11', m405r12='$m405r12', m405r21='$m405r21',
   m405r31='$m405r31', m405r32='$m405r32', m405r41='$m405r41',
   m405r51='$m405r51', m405r61='$m405r61', m405r71='$m405r71',
   m405r81='$m405r81', m405r82='$m405r82', m405r991='$m405r991', m405r992='$m405r992',
   m406r1='$m406r1', m406r2='$m406r2', m406r3='$m406r3', m406r4='$m406r4', m406r5='$m406r5',
   m406r6='$m406r6', m406r7='$m406r7', m406r99='$m406r99' ".
+" WHERE ico >= 0 ";
+
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m406r8='$m406r8', m406r9='$m406r9' ".
 " WHERE ico >= 0";
                     }
 
-if ( $strana == 5 ) {
+if ( $strana == 6 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 " m558r1='$m558r1', m558r2='$m558r2', m558r3='$m558r3', m558r4='$m558r4',
   m558r5='$m558r5', m558r6='$m558r6', m558r7='$m558r7', m558r8='$m558r8',
@@ -4747,22 +4740,15 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
   m558r13='$m558r13', m558r14='$m558r14', m558r15='$m558r15', m558r16='$m558r16',
   m558r17='$m558r17', m558r18='$m558r18', m558r99='$m558r99',
   m585r01='$m585r01', m585r02='$m585r02', m585r03='$m585r03', m585r04='$m585r04',
-  m585r05='$m585r05', m585r3k='$m585r3k', m585r4k='$m585r4k', m585r5k='$m585r5k',
-  m100044ano='$m100044ano', m100044nie='$m100044nie' ".
+  m585r05='$m585r05', m585r3k='$m585r3k', m585r4k='$m585r4k', m585r5k='$m585r5k' ".
 " WHERE ico >= 0 ";
+// $upravene = mysql_query("$uprtxt");
                     }
 
-if ( $strana == 6 ) {
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
-" m100301r1='$m100301r1', m100301r2='$m100301r2',
-  m100303r1='$m100303r1', m100303r2='$m100303r2',
-  m100302='$m100302', m100304='$m100304' ".
-" WHERE ico >= 0 ";
-
-$upravene = mysql_query("$uprtxt");
-
+if ( $strana == 7 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
-" m571r10='$m571r10', m571r12='$m571r12', m571r13='$m571r13', m571r15='$m571r15',
+" m100044ano='$m100044ano', m100044nie='$m100044nie',
+  m571r10='$m571r10', m571r12='$m571r12', m571r13='$m571r13', m571r15='$m571r15',
   m571r16='$m571r16', m571r17='$m571r17', m571r18='$m571r18',
   m571r20='$m571r20', m571r22='$m571r22', m571r23='$m571r23', m571r25='$m571r25',
   m571r26='$m571r26', m571r27='$m571r27', m571r28='$m571r28',
@@ -4786,7 +4772,15 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 " WHERE ico >= 0 ";
                     }
 
-if ( $strana == 7 ) {
+if ( $strana == 8 ) {
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m100301r1='$m100301r1', m100301r2='$m100301r2',
+  m100303r1='$m100303r1', m100303r2='$m100303r2',
+  m100302='$m100302', m100304='$m100304' ".
+" WHERE ico >= 0 ";
+                    }
+
+if ( $strana == 9 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 " m513r11='$m513r11', m513r12='$m513r12', m513r13='$m513r13', m513r14='$m513r14',
   m513r15='$m513r15', m513r16='$m513r16', m513r17='$m513r17', m513r18='$m513r18',
@@ -4839,7 +4833,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 " WHERE ico >= 0 ";
                     }
 
-if ( $strana == 8 ) {
+if ( $strana == 10 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 " m516r11='$m516r11', m516r12='$m516r12', m516r13='$m516r13', m516r14='$m516r14',
   m516r15='$m516r15', m516r16='$m516r16', m516r17='$m516r17', m516r21='$m516r21',
@@ -4880,41 +4874,33 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
   m516r991='$m516r991', m516r992='$m516r992', m516r993='$m516r993', m516r994='$m516r994',
   m516r995='$m516r995', m516r996='$m516r996', m516r997='$m516r997' ".
 " WHERE ico >= 0 ";
-                    }
+                     }
 
-if ( $strana == 9 ) {
+if ( $strana == 11 ) {
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
+" m100305r1='$m100305r1', m100305r2='$m100305r2', m100305r3='$m100305r3',
+  m586r31='$m586r31', m586r32='$m586r32', m586r41='$m586r41', m586r42='$m586r42',
+  m586r51='$m586r51', m586r52='$m586r52', m586r61='$m586r61', m586r62='$m586r62',
+  m586r71='$m586r71', m586r72='$m586r72', m586r81='$m586r81', m586r82='$m586r82',
+  m586r91='$m586r91', m586r92='$m586r92',
+  m586r101='$m586r101', m586r102='$m586r102', m586r111='$m586r111', m586r112='$m586r112',
+  m586r121='$m586r121', m586r122='$m586r122', m586r161='$m586r161', m586r162='$m586r162',
+  m586r171='$m586r171', m586r172='$m586r172', m586r181='$m586r181', m586r182='$m586r182',
+  m586r211='$m586r211', m586r212='$m586r212', m586r221='$m586r221', m586r222='$m586r222',
+  m586r231='$m586r231', m586r232='$m586r232', m586r241='$m586r241', m586r242='$m586r242',
+  m1527r1a='$m1527r1a', m1527r1b='$m1527r1b' ".
+" WHERE ico >= 0 ";
+$upravene = mysql_query("$uprtxt");
+
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101 SET ".
 " m586r11='$m586r11', m586r12='$m586r12', m586r21='$m586r21', m586r22='$m586r22',
   m586r131='$m586r131', m586r132='$m586r132', m586r141='$m586r141', m586r142='$m586r142',
   m586r151='$m586r151', m586r152='$m586r152',m586r191='$m586r191', m586r192='$m586r192',
   m586r201='$m586r201', m586r202='$m586r202', m586r991='$m586r991', m586r992='$m586r992' ".
 " WHERE ico >= 0 ";
-
-$upravene = mysql_query("$uprtxt");
-
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
-" m100305r1='$m100305r1', m100305r2='$m100305r2', m100305r3='$m100305r3',
-  m586r31='$m586r31', m586r32='$m586r32', m586r41='$m586r41', m586r42='$m586r42',
-  m586r51='$m586r51', m586r52='$m586r52', m586r61='$m586r61', m586r62='$m586r62',
-  m586r71='$m586r71', m586r72='$m586r72', m586r81='$m586r81', m586r82='$m586r82',
-  m586r91='$m586r91', m586r92='$m586r92', m586r101='$m586r101',  m586r102='$m586r102', m586r111='$m586r111', m586r112='$m586r112',
-  m586r121='$m586r121', m586r122='$m586r122', m586r161='$m586r161', m586r162='$m586r162',
-  m586r171='$m586r171', m586r172='$m586r172', m586r181='$m586r181', m586r182='$m586r182',
-  m586r211='$m586r211', m586r212='$m586r212', m586r221='$m586r221', m586r222='$m586r222',
-  m586r231='$m586r231', m586r232='$m586r232', m586r241='$m586r241', m586r242='$m586r242' ".
-" WHERE ico >= 0 ";
-                    }
-
-if ( $strana == 10 ) {
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
-" m19r1='$m19r1', m19r2='$m19r2', m19r3='$m19r3', m19r4='$m19r4', m19r5='$m19r5',
-  m19r6='$m19r6', m19r7='$m19r7', m19r8='$m19r8', m19r9='$m19r9', m19r10='$m19r10',
-  m19r11='$m19r11', m19r12='$m19r12', m19r99='$m19r99',
-  m1527r1a='$m1527r1a', m1527r1b='$m1527r1b' ".
-" WHERE ico >= 0 ";
                      }
 
-if ( $strana == 11 ) {
+if ( $strana == 12 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
 " m527r11='$m527r11', m527r12='$m527r12', m527r13='$m527r13', m527r14='$m527r14',
   m527r15='$m527r15', m527r16='$m527r16', m527r17='$m527r17', m527r18='$m527r18',
@@ -4970,7 +4956,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
 " WHERE ico >= 0 ";
                      }
 
-if ( $strana == 12 ) {
+if ( $strana == 13 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
 " m527r181='$m527r181', m527r182='$m527r182', m527r183='$m527r183', m527r184='$m527r184',
   m527r185='$m527r185', m527r186='$m527r186', m527r187='$m527r187', m527r188='$m527r188',
@@ -4996,20 +4982,6 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
   m527r991='$m527r991', m527r992='$m527r992', m527r993='$m527r993', m527r994='$m527r994',
   m527r995='$m527r995', m527r996='$m527r996', m527r997='$m527r997', m527r998='$m527r998',
   m527r999='$m527r999', m527r9910='$m527r9910' ".
-" WHERE ico >= 0 ";
-                     }
-
-if ( $strana == 13 ) {
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts101s2 SET ".
-" m474r11='$m474r11', m474r12='$m474r12', m474r13='$m474r13',
-  m474r21='$m474r21', m474r22='$m474r22', m474r23='$m474r23',
-  m474r31='$m474r31', m474r32='$m474r32', m474r33='$m474r33',
-  m474r41='$m474r41', m474r42='$m474r42', m474r43='$m474r43',
-  m474r51='$m474r51', m474r52='$m474r52', m474r53='$m474r53',
-  m474r61='$m474r61', m474r62='$m474r62', m474r63='$m474r63',
-  m474r72='$m474r72', m474r73='$m474r73',
-  m474r991='$m474r991', m474r992='$m474r992', m474r993='$m474r993',
-  m514r1='$m514r1', m514r2='$m514r2', m514r3='$m514r3', m514r99='$m514r99' ".
 " WHERE ico >= 0 ";
                      }
 
@@ -5209,9 +5181,9 @@ $m1100r10 = $fir_riadok->m1100r10;
 $m1100r11 = $fir_riadok->m1100r11;
 $m1100r12 = $fir_riadok->m1100r12;
 $m1100r13 = $fir_riadok->m1100r13;
+//3.strana
 $mod100036kal = $fir_riadok->mod100036kal;
 $mod100036hos = $fir_riadok->mod100036hos;
-//3.strana
 $mod100037 = $fir_riadok->mod100037;
 $m100214r01 = $fir_riadok->m100214r01;
 $m100214r02 = $fir_riadok->m100214r02;
@@ -5223,11 +5195,11 @@ $m1101r4a = $fir_riadok->m1101r4a;
 $m1101r4b = $fir_riadok->m1101r4b;
 $m1101r5a = $fir_riadok->m1101r5a;
 $m1101r5b = $fir_riadok->m1101r5b;
+//4.strana
 $m1101r6a = $fir_riadok->m1101r6a;
 $m1101r6b = $fir_riadok->m1101r6b;
 $m1101r7a = $fir_riadok->m1101r7a;
 $m1101r7b = $fir_riadok->m1101r7b;
-//4.strana
 $m398r11 = $fir_riadok->m398r11;
 $m398r12 = $fir_riadok->m398r12;
 $m398r13 = $fir_riadok->m398r13;
@@ -5242,6 +5214,7 @@ $m398r993 = $fir_riadok->m398r993;
 $m398r994 = $fir_riadok->m398r994;
 $m1005r1a = $fir_riadok->m1005r1a;
 $m1005r1b = $fir_riadok->m1005r1b;
+//5.strana
 $m405r11 = $fir_riadok->m405r11;
 $m405r12 = $fir_riadok->m405r12;
 $m405r21 = $fir_riadok->m405r21;
@@ -5263,7 +5236,7 @@ $m406r5 = $fir_riadok->m406r5;
 $m406r6 = $fir_riadok->m406r6;
 $m406r7 = $fir_riadok->m406r7;
 $m406r99 = $fir_riadok->m406r99;
-//5.strana
+//6.strana
 $m558r1 = $fir_riadok->m558r1;
 $m558r2 = $fir_riadok->m558r2;
 $m558r3 = $fir_riadok->m558r3;
@@ -5291,9 +5264,9 @@ $m585r05 = $fir_riadok->m585r05;
 $m585r3k = $fir_riadok->m585r3k;
 $m585r4k = $fir_riadok->m585r4k;
 $m585r5k = $fir_riadok->m585r5k;
+//7.strana
 $m100044ano = $fir_riadok->m100044ano;
 $m100044nie = $fir_riadok->m100044nie;
-//6.strana
 $m571r10 = $fir_riadok->m571r10;
 $m571r12 = $fir_riadok->m571r12;
 $m571r13 = $fir_riadok->m571r13;
@@ -5367,7 +5340,7 @@ $m581r7 = $fir_riadok->m581r7;
 $m581r8 = $fir_riadok->m581r8;
 $m581r12 = $fir_riadok->m581r12;
 $m581r99 = $fir_riadok->m581r99;
-//7.strana
+//9.strana
 $m513r11 = $fir_riadok->m513r11;
 $m513r12 = $fir_riadok->m513r12;
 $m513r13 = $fir_riadok->m513r13;
@@ -5560,7 +5533,7 @@ $m513r996 = $fir_riadok->m513r996;
 $m513r997 = $fir_riadok->m513r997;
 $m513r998 = $fir_riadok->m513r998;
 $m513r999 = $fir_riadok->m513r999;
-//8.strana
+//10.strana
 $m516r11 = $fir_riadok->m516r11;
 $m516r12 = $fir_riadok->m516r12;
 $m516r13 = $fir_riadok->m516r13;
@@ -5712,7 +5685,7 @@ $m516r994 = $fir_riadok->m516r994;
 $m516r995 = $fir_riadok->m516r995;
 $m516r996 = $fir_riadok->m516r996;
 $m516r997 = $fir_riadok->m516r997;
-//9.strana
+//11.strana
 $m586r11 = $fir_riadok->m586r11;
 $m586r12 = $fir_riadok->m586r12;
 $m586r21 = $fir_riadok->m586r21;
@@ -5733,15 +5706,21 @@ $m586r992 = $fir_riadok->m586r992;
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_statistika_vts101s2 WHERE ico >= 0";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
-//6.strana
+//4.strana
+$m100417ano = $fir_riadok->m100417ano;
+$m100417nie = $fir_riadok->m100417nie;
+$m100418 = $fir_riadok->m100418;
+//5.strana
+$m406r8 = $fir_riadok->m406r8;
+$m406r9 = $fir_riadok->m406r9;
+//8.strana
 $m100301r1 = $fir_riadok->m100301r1;
 $m100301r2 = $fir_riadok->m100301r2;
 $m100303r1 = $fir_riadok->m100303r1;
 $m100303r2 = $fir_riadok->m100303r2;
 $m100302 = $fir_riadok->m100302;
 $m100304 = $fir_riadok->m100304;
-
-//9.strana
+//11.strana
 $m100305r1 = $fir_riadok->m100305r1;
 $m100305r2 = $fir_riadok->m100305r2;
 $m100305r3 = $fir_riadok->m100305r3;
@@ -5779,23 +5758,9 @@ $m586r231 = $fir_riadok->m586r231;
 $m586r232 = $fir_riadok->m586r232;
 $m586r241 = $fir_riadok->m586r241;
 $m586r242 = $fir_riadok->m586r242;
-//10.strana
-$m19r1 = $fir_riadok->m19r1;
-$m19r2 = $fir_riadok->m19r2;
-$m19r3 = $fir_riadok->m19r3;
-$m19r4 = $fir_riadok->m19r4;
-$m19r5 = $fir_riadok->m19r5;
-$m19r6 = $fir_riadok->m19r6;
-$m19r7 = $fir_riadok->m19r7;
-$m19r8 = $fir_riadok->m19r8;
-$m19r9 = $fir_riadok->m19r9;
-$m19r10 = $fir_riadok->m19r10;
-$m19r11 = $fir_riadok->m19r11;
-$m19r12 = $fir_riadok->m19r12;
-$m19r99 = $fir_riadok->m19r99;
 $m1527r1a = $fir_riadok->m1527r1a;
 $m1527r1b = $fir_riadok->m1527r1b;
-//11.strana
+//12.strana
 $m527r11 = $fir_riadok->m527r11;
 $m527r12 = $fir_riadok->m527r12;
 $m527r13 = $fir_riadok->m527r13;
@@ -5966,7 +5931,7 @@ $m527r177 = $fir_riadok->m527r177;
 $m527r178 = $fir_riadok->m527r178;
 $m527r179 = $fir_riadok->m527r179;
 $m527r1710 = $fir_riadok->m527r1710;
-//12.strana
+//13.strana
 $m527r181 = $fir_riadok->m527r181;
 $m527r182 = $fir_riadok->m527r182;
 $m527r183 = $fir_riadok->m527r183;
@@ -6040,35 +6005,6 @@ $m527r997 = $fir_riadok->m527r997;
 $m527r998 = $fir_riadok->m527r998;
 $m527r999 = $fir_riadok->m527r999;
 $m527r9910 = $fir_riadok->m527r9910;
-//13.strana
-$m474r11 = $fir_riadok->m474r11;
-$m474r12 = $fir_riadok->m474r12;
-$m474r13 = $fir_riadok->m474r13;
-$m474r21 = $fir_riadok->m474r21;
-$m474r22 = $fir_riadok->m474r22;
-$m474r23 = $fir_riadok->m474r23;
-$m474r31 = $fir_riadok->m474r31;
-$m474r32 = $fir_riadok->m474r32;
-$m474r33 = $fir_riadok->m474r33;
-$m474r41 = $fir_riadok->m474r41;
-$m474r42 = $fir_riadok->m474r42;
-$m474r43 = $fir_riadok->m474r43;
-$m474r51 = $fir_riadok->m474r51;
-$m474r52 = $fir_riadok->m474r52;
-$m474r53 = $fir_riadok->m474r53;
-$m474r61 = $fir_riadok->m474r61;
-$m474r62 = $fir_riadok->m474r62;
-$m474r63 = $fir_riadok->m474r63;
-$m474r72 = $fir_riadok->m474r72;
-$m474r73 = $fir_riadok->m474r73;
-$m474r991 = $fir_riadok->m474r991;
-$m474r992 = $fir_riadok->m474r992;
-$m474r993 = $fir_riadok->m474r993;
-$m514r1 = $fir_riadok->m514r1;
-$m514r2 = $fir_riadok->m514r2;
-$m514r3 = $fir_riadok->m514r3;
-$m514r99 = $fir_riadok->m514r99;
-
 mysql_free_result($fir_vysledok);
      }
 //koniec nacitania
@@ -6084,6 +6020,9 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_treximafir ");
 
 //sknace bez bodiek
 $sknace=str_replace(".", "", $fir_sknace);
+
+//6-miestne ico
+$fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -6141,15 +6080,11 @@ form input[type=text] {
    document.formv1.m1100r11.value = '<?php echo "$m1100r11";?>';
    document.formv1.m1100r12.value = '<?php echo "$m1100r12";?>';
    document.formv1.m1100r13.value = '<?php echo "$m1100r13";?>';
-
-
-<?php if ( $mod100036kal == 1 ) { echo "document.formv1.mod100036kal.checked='checked';"; } ?>
-<?php if ( $mod100036hos == 1 ) { echo "document.formv1.mod100036hos.checked='checked';"; } ?>
-
-
 <?php                     } ?>
 
 <?php if ( $strana == 3 ) { ?>
+<?php if ( $mod100036kal == 1 ) { echo "document.formv1.mod100036kal.checked='checked';"; } ?>
+<?php if ( $mod100036hos == 1 ) { echo "document.formv1.mod100036hos.checked='checked';"; } ?>
    document.formv1.mod100037.value = '<?php echo "$mod100037";?>';
    document.formv1.m100214r01.value = '<?php echo "$m100214r01";?>';
    document.formv1.m100214r02.value = '<?php echo "$m100214r02";?>';
@@ -6161,13 +6096,16 @@ form input[type=text] {
 <?php if ( $m1101r4b == 1 ) { echo "document.formv1.m1101r4b.checked='checked';"; } ?>
 <?php if ( $m1101r5a == 1 ) { echo "document.formv1.m1101r5a.checked='checked';"; } ?>
 <?php if ( $m1101r5b == 1 ) { echo "document.formv1.m1101r5b.checked='checked';"; } ?>
+<?php                     } ?>
+
+<?php if ( $strana == 4 ) { ?>
 <?php if ( $m1101r6a == 1 ) { echo "document.formv1.m1101r6a.checked='checked';"; } ?>
 <?php if ( $m1101r6b == 1 ) { echo "document.formv1.m1101r6b.checked='checked';"; } ?>
 <?php if ( $m1101r7a == 1 ) { echo "document.formv1.m1101r7a.checked='checked';"; } ?>
 <?php if ( $m1101r7b == 1 ) { echo "document.formv1.m1101r7b.checked='checked';"; } ?>
-<?php                     } ?>
-
-<?php if ( $strana == 4 ) { ?>
+<?php if ( $m100417ano == 1 ) { echo "document.formv1.m100417ano.checked='checked';"; } ?>
+<?php if ( $m100417nie == 1 ) { echo "document.formv1.m100417nie.checked='checked';"; } ?>
+   document.formv1.m100418.value = '<?php echo "$m100418";?>';
    document.formv1.m398r11.value = '<?php echo "$m398r11";?>';
    document.formv1.m398r12.value = '<?php echo "$m398r12";?>';
    document.formv1.m398r13.value = '<?php echo "$m398r13";?>';
@@ -6182,6 +6120,9 @@ form input[type=text] {
  //document.formv1.m398r994.value = '<?php echo "$m398r994";?>';
 <?php if ( $m1005r1a == 1 ) { echo "document.formv1.m1005r1a.checked='checked';"; } ?>
 <?php if ( $m1005r1b == 1 ) { echo "document.formv1.m1005r1b.checked='checked';"; } ?>
+<?php                     } ?>
+
+<?php if ( $strana == 5 ) { ?>
    document.formv1.m405r11.value = '<?php echo "$m405r11";?>';
    document.formv1.m405r12.value = '<?php echo "$m405r12";?>';
    document.formv1.m405r21.value = '<?php echo "$m405r21";?>';
@@ -6202,10 +6143,12 @@ form input[type=text] {
    document.formv1.m406r5.value = '<?php echo "$m406r5";?>';
    document.formv1.m406r6.value = '<?php echo "$m406r6";?>';
    document.formv1.m406r7.value = '<?php echo "$m406r7";?>';
+   document.formv1.m406r8.value = '<?php echo "$m406r8";?>';
+   document.formv1.m406r9.value = '<?php echo "$m406r9";?>';
  //document.formv1.m406r99.value = '<?php echo "$m406r99";?>';
 <?php                     } ?>
 
-<?php if ( $strana == 5 ) { ?>
+<?php if ( $strana == 6 ) { ?>
    document.formv1.m558r1.value = '<?php echo "$m558r1";?>';
    document.formv1.m558r2.value = '<?php echo "$m558r2";?>';
    document.formv1.m558r3.value = '<?php echo "$m558r3";?>';
@@ -6233,11 +6176,11 @@ form input[type=text] {
    document.formv1.m585r3k.value = '<?php echo "$m585r3k";?>';
    document.formv1.m585r4k.value = '<?php echo "$m585r4k";?>';
    document.formv1.m585r5k.value = '<?php echo "$m585r5k";?>';
-<?php if ( $m100044ano == 1 ) { echo "document.formv1.m100044ano.checked='checked';"; } ?>
-<?php if ( $m100044nie == 1 ) { echo "document.formv1.m100044nie.checked='checked';"; } ?>
 <?php                     } ?>
 
-<?php if ( $strana == 6 ) { ?>
+<?php if (  $strana == 7 ) { ?>
+<?php if ( $m100044ano == 1 ) { echo "document.formv1.m100044ano.checked='checked';"; } ?>
+<?php if ( $m100044nie == 1 ) { echo "document.formv1.m100044nie.checked='checked';"; } ?>
    document.formv1.m571r10.value = '<?php echo "$m571r10";?>';
    document.formv1.m571r12.value = '<?php echo "$m571r12";?>';
    document.formv1.m571r13.value = '<?php echo "$m571r13";?>';
@@ -6311,15 +6254,18 @@ form input[type=text] {
    document.formv1.m581r8.value = '<?php echo "$m581r8";?>';
    document.formv1.m581r12.value = '<?php echo "$m581r12";?>';
  //document.formv1.m581r99.value = '<?php echo "$m581r99";?>';
+<?php                     } ?>
+
+<?php if ( $strana == 8 ) { ?>
 <?php if ( $m100301r1 == 1 ) { echo "document.formv1.m100301r1.checked='checked';"; } ?>
 <?php if ( $m100301r2 == 1 ) { echo "document.formv1.m100301r2.checked='checked';"; } ?>
+   document.formv1.m100302.value = '<?php echo "$m100302"; ?>';
 <?php if ( $m100303r1 == 1 ) { echo "document.formv1.m100303r1.checked='checked';"; } ?>
 <?php if ( $m100303r2 == 1 ) { echo "document.formv1.m100303r2.checked='checked';"; } ?>
-   document.formv1.m100302.value = '<?php echo "$m100302"; ?>';
    document.formv1.m100304.value = '<?php echo "$m100304"; ?>';
 <?php                     } ?>
 
-<?php if (  $strana == 7 ) { ?>
+<?php if ( $strana == 9 ) { ?>
    document.formv1.m513r11.value = '<?php echo "$m513r11";?>';
    document.formv1.m513r12.value = '<?php echo "$m513r12";?>';
    document.formv1.m513r13.value = '<?php echo "$m513r13";?>';
@@ -6514,7 +6460,7 @@ form input[type=text] {
  //document.formv1.m513r999.value = '<?php echo "$m513r999";?>';
 <?php                     } ?>
 
-<?php if ( $strana == 8 ) { ?>
+<?php if ( $strana == 10 ) { ?>
    document.formv1.m516r11.value = '<?php echo "$m516r11";?>';
    document.formv1.m516r12.value = '<?php echo "$m516r12";?>';
    document.formv1.m516r13.value = '<?php echo "$m516r13";?>';
@@ -6666,9 +6612,9 @@ form input[type=text] {
  //document.formv1.m516r995.value = '<?php echo "$m516r995";?>';
  //document.formv1.m516r996.value = '<?php echo "$m516r996";?>';
  //document.formv1.m516r997.value = '<?php echo "$m516r997";?>';
-<?php                     } ?>
+<?php                      } ?>
 
-<?php if ( $strana == 9 ) { ?>
+<?php if ( $strana == 11 ) { ?>
    document.formv1.m100305r1.value = '<?php echo "$m100305r1";?>';
    document.formv1.m100305r2.value = '<?php echo "$m100305r2";?>';
    document.formv1.m100305r3.value = '<?php echo "$m100305r3";?>';
@@ -6722,27 +6668,11 @@ form input[type=text] {
    document.formv1.m586r242.value = '<?php echo "$m586r242";?>';
  //document.formv1.m586r991.value = '<?php echo "$m586r991";?>';
  //document.formv1.m586r992.value = '<?php echo "$m586r992";?>';
-<?php                     } ?>
-
-<?php if ( $strana == 10 ) { ?>
-   document.formv1.m19r1.value = '<?php echo "$m19r1";?>';
-   document.formv1.m19r2.value = '<?php echo "$m19r2";?>';
-   document.formv1.m19r3.value = '<?php echo "$m19r3";?>';
-   document.formv1.m19r4.value = '<?php echo "$m19r4";?>';
-   document.formv1.m19r5.value = '<?php echo "$m19r5";?>';
-   document.formv1.m19r6.value = '<?php echo "$m19r6";?>';
-   document.formv1.m19r7.value = '<?php echo "$m19r7";?>';
-   document.formv1.m19r8.value = '<?php echo "$m19r8";?>';
-   document.formv1.m19r9.value = '<?php echo "$m19r9";?>';
-   document.formv1.m19r10.value = '<?php echo "$m19r10";?>';
-   document.formv1.m19r11.value = '<?php echo "$m19r11";?>';
-   document.formv1.m19r12.value = '<?php echo "$m19r12";?>';
- //document.formv1.m19r99.value = '<?php echo "$m19r99";?>';
 <?php if ( $m1527r1a == 1 ) { echo "document.formv1.m1527r1a.checked='checked';"; } ?>
 <?php if ( $m1527r1b == 1 ) { echo "document.formv1.m1527r1b.checked='checked';"; } ?>
 <?php                      } ?>
 
-<?php if ( $strana == 11 ) { ?>
+<?php if ( $strana == 12 ) { ?>
    document.formv1.m527r11.value = '<?php echo "$m527r11";?>';
    document.formv1.m527r12.value = '<?php echo "$m527r12";?>';
    document.formv1.m527r13.value = '<?php echo "$m527r13";?>';
@@ -6913,9 +6843,22 @@ form input[type=text] {
    document.formv1.m527r178.value = '<?php echo "$m527r178";?>';
    document.formv1.m527r179.value = '<?php echo "$m527r179";?>';
    document.formv1.m527r1710.value = '<?php echo "$m527r1710";?>';
+   // document.formv1.m19r1.value = '<?php echo "$m19r1";?>';
+   // document.formv1.m19r2.value = '<?php echo "$m19r2";?>';
+   // document.formv1.m19r3.value = '<?php echo "$m19r3";?>';
+   // document.formv1.m19r4.value = '<?php echo "$m19r4";?>';
+   // document.formv1.m19r5.value = '<?php echo "$m19r5";?>';
+   // document.formv1.m19r6.value = '<?php echo "$m19r6";?>';
+   // document.formv1.m19r7.value = '<?php echo "$m19r7";?>';
+   // document.formv1.m19r8.value = '<?php echo "$m19r8";?>';
+   // document.formv1.m19r9.value = '<?php echo "$m19r9";?>';
+   // document.formv1.m19r10.value = '<?php echo "$m19r10";?>';
+   // document.formv1.m19r11.value = '<?php echo "$m19r11";?>';
+   // document.formv1.m19r12.value = '<?php echo "$m19r12";?>';
+ //document.formv1.m19r99.value = '<?php echo "$m19r99";?>';
 <?php                      } ?>
 
-<?php if ( $strana == 12 ) { ?>
+<?php if ( $strana == 13 ) { ?>
    document.formv1.m527r181.value = '<?php echo "$m527r181";?>';
    document.formv1.m527r182.value = '<?php echo "$m527r182";?>';
    document.formv1.m527r183.value = '<?php echo "$m527r183";?>';
@@ -6989,35 +6932,33 @@ form input[type=text] {
  //document.formv1.m527r998.value = '<?php echo "$m527r998";?>';
  //document.formv1.m527r999.value = '<?php echo "$m527r999";?>';
  //document.formv1.m527r9910.value = '<?php echo "$m527r9910";?>';
-<?php                      } ?>
 
-<?php if ( $strana == 13 ) { ?>
-   document.formv1.m474r11.value = '<?php echo "$m474r11";?>';
-   document.formv1.m474r12.value = '<?php echo "$m474r12";?>';
-   document.formv1.m474r13.value = '<?php echo "$m474r13";?>';
-   document.formv1.m474r21.value = '<?php echo "$m474r21";?>';
-   document.formv1.m474r22.value = '<?php echo "$m474r22";?>';
-   document.formv1.m474r23.value = '<?php echo "$m474r23";?>';
-   document.formv1.m474r31.value = '<?php echo "$m474r31";?>';
-   document.formv1.m474r32.value = '<?php echo "$m474r32";?>';
-   document.formv1.m474r33.value = '<?php echo "$m474r33";?>';
-   document.formv1.m474r41.value = '<?php echo "$m474r41";?>';
-   document.formv1.m474r42.value = '<?php echo "$m474r42";?>';
-   document.formv1.m474r43.value = '<?php echo "$m474r43";?>';
-   document.formv1.m474r51.value = '<?php echo "$m474r51";?>';
-   document.formv1.m474r52.value = '<?php echo "$m474r52";?>';
-   document.formv1.m474r53.value = '<?php echo "$m474r53";?>';
-   document.formv1.m474r61.value = '<?php echo "$m474r61";?>';
-   document.formv1.m474r62.value = '<?php echo "$m474r62";?>';
-   document.formv1.m474r63.value = '<?php echo "$m474r63";?>';
-   document.formv1.m474r72.value = '<?php echo "$m474r72";?>';
-   document.formv1.m474r73.value = '<?php echo "$m474r73";?>';
+   // document.formv1.m474r11.value = '<?php echo "$m474r11";?>';
+   // document.formv1.m474r12.value = '<?php echo "$m474r12";?>';
+   // document.formv1.m474r13.value = '<?php echo "$m474r13";?>';
+   // document.formv1.m474r21.value = '<?php echo "$m474r21";?>';
+   // document.formv1.m474r22.value = '<?php echo "$m474r22";?>';
+   // document.formv1.m474r23.value = '<?php echo "$m474r23";?>';
+   // document.formv1.m474r31.value = '<?php echo "$m474r31";?>';
+   // document.formv1.m474r32.value = '<?php echo "$m474r32";?>';
+   // document.formv1.m474r33.value = '<?php echo "$m474r33";?>';
+   // document.formv1.m474r41.value = '<?php echo "$m474r41";?>';
+   // document.formv1.m474r42.value = '<?php echo "$m474r42";?>';
+   // document.formv1.m474r43.value = '<?php echo "$m474r43";?>';
+   // document.formv1.m474r51.value = '<?php echo "$m474r51";?>';
+   // document.formv1.m474r52.value = '<?php echo "$m474r52";?>';
+   // document.formv1.m474r53.value = '<?php echo "$m474r53";?>';
+   // document.formv1.m474r61.value = '<?php echo "$m474r61";?>';
+   // document.formv1.m474r62.value = '<?php echo "$m474r62";?>';
+   // document.formv1.m474r63.value = '<?php echo "$m474r63";?>';
+   // document.formv1.m474r72.value = '<?php echo "$m474r72";?>';
+   // document.formv1.m474r73.value = '<?php echo "$m474r73";?>';
  //document.formv1.m474r991.value = '<?php echo "$m474r991";?>';
  //document.formv1.m474r992.value = '<?php echo "$m474r992";?>';
  //document.formv1.m474r993.value = '<?php echo "$m474r993";?>';
-   document.formv1.m514r1.value = '<?php echo "$m514r1";?>';
-   document.formv1.m514r2.value = '<?php echo "$m514r2";?>';
-   document.formv1.m514r3.value = '<?php echo "$m514r3";?>';
+   // document.formv1.m514r1.value = '<?php echo "$m514r1";?>';
+   // document.formv1.m514r2.value = '<?php echo "$m514r2";?>';
+   // document.formv1.m514r3.value = '<?php echo "$m514r3";?>';
  //document.formv1.m514r99.value = '<?php echo "$m514r99";?>';
 <?php                      } ?>
   }
@@ -7188,6 +7129,15 @@ form input[type=text] {
   {
    document.formv1.m100303r1.checked = false;
   }
+//bud alebo checkbox v module 100417
+  function klikm100417ano()
+  {
+   document.formv1.m100417nie.checked = false;
+  }
+  function klikm100417nie()
+  {
+   document.formv1.m100417ano.checked = false;
+  }
 </script>
 </HEAD>
 <BODY onload="ObnovUI();">
@@ -7217,7 +7167,6 @@ if ( $copern == 102 )
  </tr>
  </table>
 </div>
-
 <?php
 $sirka=950;
 $vyska=1300;
@@ -7232,15 +7181,14 @@ $sirka=1250; $vyska=920;
 $clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive";
 $clas5="noactive"; $clas6="noactive"; $clas7="noactive"; $clas8="noactive";
 $clas9="noactive"; $clas10="noactive"; $clas11="noactive"; $clas12="noactive";
-$clas13="noactive"; $clas14="noactive"; $clas15="noactive";
+$clas13="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 if ( $strana == 3 ) $clas3="active"; if ( $strana == 4 ) $clas4="active";
 if ( $strana == 5 ) $clas5="active"; if ( $strana == 6 ) $clas6="active";
 if ( $strana == 7 ) $clas7="active"; if ( $strana == 8 ) $clas8="active";
 if ( $strana == 9 ) $clas9="active"; if ( $strana == 10 ) $clas10="active";
 if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
-if ( $strana == 13 ) $clas13="active"; if ( $strana == 14 ) $clas14="active";
-if ( $strana == 15 ) $clas15="active";
+if ( $strana == 13 ) $clas13="active";
 $source="statistika_vts101.php?";
 ?>
 <div class="navbar">
@@ -7257,11 +7205,23 @@ $source="statistika_vts101.php?";
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=11', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=12', '_self');" class="<?php echo $clas12; ?> toleft">12</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=13', '_self');" class="<?php echo $clas13; ?> toleft">13</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=13', '_blank');" class="<?php echo $clas13; ?> toright">13</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=12', '_blank');" class="<?php echo $clas12; ?> toright">12</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=11', '_blank');" class="<?php echo $clas11; ?> toright">11</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=10', '_blank');" class="<?php echo $clas10; ?> toright">10</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=9', '_blank');" class="<?php echo $clas9; ?> toright">9</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=8', '_blank');" class="<?php echo $clas8; ?> toright">8</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=7', '_blank');" class="<?php echo $clas7; ?> toright">7</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=6', '_blank');" class="<?php echo $clas6; ?> toright">6</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=5', '_blank');" class="<?php echo $clas5; ?> toright">5</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=4', '_blank');" class="<?php echo $clas4; ?> toright">4</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=3', '_blank');" class="<?php echo $clas3; ?> toright">3</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
+ <h6 class="toright">TlaËiù:</h6>
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 </div>
-<?php
-$fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
-?>
+
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
@@ -7374,8 +7334,8 @@ $sknace=str_replace(".", "", $fir_sknace);
 <input type="checkbox" name="m1101r7b" value="1" onclick="klikm1101r7nie();" style="top:389px; left:839px;"/>
 
 <!-- modul 100417 -->
-<input type="checkbox" name="m100417r7a" value="1" onclick="klikm100417r7ano();" style="top:525px; left:839px;"/>
-<input type="checkbox" name="m100417r7b" value="1" onclick="klikm100417r7nie();" style="top:545px; left:839px;"/>
+<input type="checkbox" name="m100417ano" value="1" onclick="klikm100417ano();" style="top:525px; left:839px;"/>
+<input type="checkbox" name="m100417nie" value="1" onclick="klikm100417nie();" style="top:545px; left:839px;"/>
 
 <!-- modul 100418 -->
 <input type="text" name="m100418" id="m100418" style="width:253px; top:654px; left:643px;"/>
@@ -8397,57 +8357,50 @@ $pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 $pdf->SetY(10);
 
 //ico
-$fir_ficx=$fir_fico;
-$cfico=1*$fir_fico;
-if ( $cfico < 999999 ) $fir_ficx="00".$fir_fico;
-$A=substr($fir_ficx,0,1);
-$B=substr($fir_ficx,1,1);
-$C=substr($fir_ficx,2,1);
-$D=substr($fir_ficx,3,1);
-$E=substr($fir_ficx,4,1);
-$F=substr($fir_ficx,5,1);
-$G=substr($fir_ficx,6,1);
-$H=substr($fir_ficx,7,1);
-$pdf->Cell(190,47," ","$rmc1",1,"L");
-$pdf->Cell(85,7," ","$rmc1",0,"L");
-$pdf->Cell(8,7,"$A","$rmc",0,"C");$pdf->Cell(9,7,"$B","$rmc",0,"C");
-$pdf->Cell(8,7,"$C","$rmc",0,"C");$pdf->Cell(8,7,"$D","$rmc",0,"C");
-$pdf->Cell(8,7,"$E","$rmc",0,"C");$pdf->Cell(8,7,"$F","$rmc",0,"C");
-$pdf->Cell(8,7,"$G","$rmc",0,"C");$pdf->Cell(9,7,"$H","$rmc",1,"C");
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,65," ","$rmc1",1,"L");
+$pdf->Cell(91,7," ","$rmc1",0,"L");
+$pdf->Cell(7,7,"$A","$rmc",0,"C");$pdf->Cell(8,7,"$B","$rmc",0,"C");
+$pdf->Cell(7,7,"$C","$rmc",0,"C");$pdf->Cell(8,7,"$D","$rmc",0,"C");
+$pdf->Cell(7,7,"$E","$rmc",0,"C");$pdf->Cell(8,7,"$F","$rmc",0,"C");
+$pdf->Cell(7,7,"$G","$rmc",0,"C");$pdf->Cell(8,7,"$H","$rmc",1,"C");
 
 //ORGANIZACIA
-$pdf->Cell(190,113," ","$rmc1",1,"L");
-$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(153,7,"$fir_fnaz, $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",0,"L");
-$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(34,7,"$okres","$rmc",1,"C");
-
+$pdf->Cell(190,124," ","$rmc1",1,"L");
+$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(153,4,"$fir_fnaz","$rmc",1,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(153,6,"$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",0,"L");$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(34,4,"$okres","$rmc",1,"C");
 //SKNACE
-$pdf->Cell(190,6," ","$rmc1",1,"L");
-$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(111,7,"$hlavicka->cinnost","$rmc",0,"L");
 $text=$sknace;
 $A=substr($text,0,1);
 $B=substr($text,1,1);
 $C=substr($text,2,1);
 $D=substr($text,3,1);
 $E=substr($text,4,1);
-$pdf->Cell(2,6," ","$rmc1",0,"L");
-$pdf->Cell(7,7,"$A","$rmc",0,"C");$pdf->Cell(8,7,"$B","$rmc",0,"C");
-$pdf->Cell(7,7,"$C","$rmc",0,"C");$pdf->Cell(8,7,"$D","$rmc",0,"C");
-$pdf->Cell(7,7,"$E","$rmc",1,"C");
+$pdf->Cell(190,8," ","$rmc1",1,"L");
+$pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(95,7,"$hlavicka->cinnost","$rmc",0,"L");
+$pdf->Cell(1,6," ","$rmc1",0,"L");
+$pdf->Cell(10,8,"$A","$rmc",0,"C");$pdf->Cell(9,8,"$B","$rmc",0,"C");
+$pdf->Cell(10,8,"$C","$rmc",0,"C");$pdf->Cell(9,8,"$D","$rmc",0,"C");
+$pdf->Cell(10,8,"$E","$rmc",1,"C");
 
 //VYPLNIL
-$pdf->Cell(195,10," ","$rmc1",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(60,5,"$fir_mzdt05","$rmc",0,"L");
-$pdf->Cell(14,5," ","$rmc1",0,"L");$pdf->Cell(43,11,"$fir_mzdt04","$rmc",1,"L");
-$pdf->Cell(195,2," ","$rmc1",1,"L");
+$pdf->Cell(195,9," ","$rmc1",1,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(73,5,"$fir_mzdt05","$rmc",0,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");
+$pdf->SetFont('arial','',10);
+$pdf->Cell(43,9,"$fir_mzdt04","$rmc",1,"R");
+$pdf->SetFont('arial','',12);
+$pdf->Cell(195,1," ","$rmc1",1,"L");
 $pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(72,6,"$fir_fem1","$rmc",0,"L");
 //odoslane
 $pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(43,6,"$odoslane_sk","$rmc",1,"C");
-
-//modul 100307
-$pdf->Cell(195,31," ","$rmc1",1,"L");
-$pdf->Cell(83,5," ","$rmc1",0,"L");$pdf->Cell(106,7,"$fir_mzdt05","$rmc",1,"C");
-$pdf->Cell(83,5," ","$rmc1",0,"L");$pdf->Cell(106,5,"$fir_mzdt04","$rmc",1,"C");
-$pdf->Cell(83,5," ","$rmc1",0,"L");$pdf->Cell(106,6,"$fir_fem1","$rmc",1,"C");
                                        }
 
 if ( $strana == 2 OR $strana == 9999 ) {
@@ -8461,26 +8414,42 @@ $pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,2," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
+
 //modul 100315
-$pdf->Cell(195,25," ","$rmc1",1,"L");
-$pdf->Cell(79,5," ","$rmc1",0,"L");$pdf->Cell(110,7,"$cinnost","$rmc",1,"C");
-$pdf->Cell(79,5," ","$rmc1",0,"L");$pdf->Cell(110,5,"$fir_sknace","$rmc",1,"C");
+$pdf->Cell(195,35," ","$rmc1",1,"L");
+$pdf->Cell(79,5," ","$rmc1",0,"L");$pdf->Cell(110,6,"$cinnost","$rmc",1,"C");
+$pdf->Cell(79,5," ","$rmc1",0,"L");$pdf->Cell(110,6,"$fir_sknace","$rmc",1,"C");
 
 //modul 2
 $mod2r01=$hlavicka->mod2r01; if ( $mod2r01 == 0 ) $mod2r01="";
 $mod2r02=$hlavicka->mod2r02; if ( $mod2r02 == 0 ) $mod2r02="";
-$pdf->Cell(195,31," ","$rmc1",1,"L");
-$pdf->Cell(146,5," ","$rmc1",0,"C");$pdf->Cell(43,9,"$mod2r01","$rmc",1,"C");
-$pdf->Cell(146,5," ","$rmc1",0,"C");$pdf->Cell(43,8,"$mod2r02","$rmc",1,"C");
+$pdf->Cell(195,33," ","$rmc1",1,"L");
+$pdf->Cell(134,5," ","$rmc1",0,"C");$pdf->Cell(54,9,"$mod2r01","$rmc",1,"C");
+$pdf->Cell(134,5," ","$rmc1",0,"C");$pdf->Cell(54,8,"$mod2r02","$rmc",1,"C");
 
 //modul 100041
 $mod100041ano=" ";
 $mod100041nie=" ";
 if ( $hlavicka->mod100041ano == 1 ) { $mod100041ano="x"; }
 if ( $hlavicka->mod100041nie == 1 ) { $mod100041nie="x"; }
-$pdf->Cell(190,23," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$mod100041ano","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$mod100041nie","$rmc",1,"C");
+$pdf->Cell(190,26," ","$rmc1",1,"L");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$mod100041ano","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$mod100041nie","$rmc",1,"C");
 
 //modul 100042
 $mod100042ano=" ";
@@ -8488,15 +8457,15 @@ $mod100042nie=" ";
 if ( $hlavicka->mod100042ano == 1 ) { $mod100042ano="x"; }
 if ( $hlavicka->mod100042nie == 1 ) { $mod100042nie="x"; }
 $pdf->Cell(190,17," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$mod100042ano","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$mod100042nie","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$mod100042ano","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$mod100042nie","$rmc",1,"C");
 
 //modul 100043
 $mod100043ano=" ";
 $mod100043nie=" ";
 if ( $hlavicka->mod100043ano == 1 ) { $mod100043ano="x"; }
 if ( $hlavicka->mod100043nie == 1 ) { $mod100043nie="x"; }
-$pdf->Cell(190,16," ","$rmc1",1,"L");
+$pdf->Cell(190,17," ","$rmc1",1,"L");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$mod100043ano","$rmc",1,"C");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$mod100043nie","$rmc",1,"C");
 
@@ -8514,23 +8483,14 @@ $m1100r13=$hlavicka->m1100r13; if ( $m1100r13 == 0 ) $m1100r13="";
 $pdf->Cell(195,20," ","$rmc1",1,"L");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,7,"$m1100r4","$rmc",1,"C");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m1100r5","$rmc",1,"C");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,7,"$m1100r6","$rmc",1,"C");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m1100r6","$rmc",1,"C");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m1100r7","$rmc",1,"C");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,7,"$m1100r8","$rmc",1,"C");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m1100r9","$rmc",1,"C");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,7,"$m1100r10","$rmc",1,"C");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m1100r10","$rmc",1,"C");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m1100r11","$rmc",1,"C");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,7,"$m1100r12","$rmc",1,"C");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,7,"$m1100r13","$rmc",1,"C");
-
-//modul 100036
-$mod100036kal=" ";
-$mod100036hos=" ";
-if ( $hlavicka->mod100036kal == 1 ) { $mod100036kal="x"; }
-if ( $hlavicka->mod100036hos == 1 ) { $mod100036hos="x"; }
-$pdf->Cell(190,10," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$mod100036kal","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$mod100036hos","$rmc",1,"C");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m1100r13","$rmc",1,"C");
                                        }
 
 if ( $strana == 3 OR $strana == 9999 ) {
@@ -8545,45 +8505,51 @@ $pdf->Image($jpg_cesta.'_str3.jpg',0,0,210,297);
 $pdf->SetY(10);
 
 //ico
-$pdf->Cell(190,3," ","$rmc1",1,"L");
-$fir_ficx=$fir_fico;
-$cfico=1*$fir_fico;
-if ( $cfico < 999999 ) $fir_ficx="00".$fir_fico;
-$A=substr($fir_ficx,0,1);
-$B=substr($fir_ficx,1,1);
-$C=substr($fir_ficx,2,1);
-$D=substr($fir_ficx,3,1);
-$E=substr($fir_ficx,4,1);
-$F=substr($fir_ficx,5,1);
-$G=substr($fir_ficx,6,1);
-$H=substr($fir_ficx,7,1);
-$pdf->Cell(93,3," ","$rmc1",0,"L");
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,6," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
 $pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
 $pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
 $pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
 $pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
 
+//modul 100036
+$mod100036kal=" ";
+$mod100036hos=" ";
+if ( $hlavicka->mod100036kal == 1 ) { $mod100036kal="x"; }
+if ( $hlavicka->mod100036hos == 1 ) { $mod100036hos="x"; }
+$pdf->Cell(190,19," ","$rmc1",1,"L");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$mod100036kal","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$mod100036hos","$rmc",1,"C");
+
 //modul 100037
 $pdf->SetFont('arial','',10);
 $mod100037=$hlavicka->mod100037;
 if ( $hlavicka->mod100037 == 0 ) $mod100037="";
-$pdf->Cell(190,12," ","$rmc1",1,"L");
+$pdf->Cell(190,21," ","$rmc1",1,"L");
 $pdf->Cell(133,6," ","$rmc1",0,"L");$pdf->Cell(56,5,"$mod100037","$rmc",1,"C");
 $pdf->SetFont('arial','',12);
 
 //modul 100214
 $m100214r01=$hlavicka->m100214r01; if ( $m100214r01 == 0 ) $m100214r01="";
 $m100214r02=$hlavicka->m100214r02; if ( $m100214r02 == 0 ) $m100214r02="";
-$pdf->Cell(190,21," ","$rmc1",1,"L");
+$pdf->Cell(190,29," ","$rmc1",1,"L");
 $pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(76,6,"$m100214r01","$rmc",1,"C");
-$pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(76,6,"$m100214r02","$rmc",1,"C");
+$pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(76,7,"$m100214r02","$rmc",1,"C");
 
 //modul 100069
 $mod100069ano=" ";
 $mod100069nie=" ";
 if ( $hlavicka->mod100069ano == 1 ) { $mod100069ano="x"; }
 if ( $hlavicka->mod100069nie == 1 ) { $mod100069nie="x"; }
-$pdf->Cell(190,27," ","$rmc1",1,"L");
+$pdf->Cell(190,30," ","$rmc1",1,"L");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$mod100069ano","$rmc",1,"C");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$mod100069nie","$rmc",1,"C");
 
@@ -8597,7 +8563,7 @@ $pdf->Cell(133,6," ","$rmc1",0,"L");$pdf->Cell(56,6,"$m1101r2","$rmc",1,"C");
 //modul 100074
 $m1101r3=1*$hlavicka->m1101r3;
 if ( $hlavicka->m1101r3 == 0 ) $m1101r3="";
-$pdf->Cell(190,37," ","$rmc1",1,"L");
+$pdf->Cell(190,42," ","$rmc1",1,"L");
 $pdf->Cell(133,6," ","$rmc1",0,"L");$pdf->Cell(56,5,"$m1101r3","$rmc",1,"C");
 $pdf->SetFont('arial','',12);
 
@@ -8606,36 +8572,18 @@ $m1101r4a=" ";
 $m1101r4b=" ";
 if ( $hlavicka->m1101r4a == 1 ) { $m1101r4a="x"; }
 if ( $hlavicka->m1101r4b == 1 ) { $m1101r4b="x"; }
-$pdf->Cell(190,8," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1101r4a","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1101r4b","$rmc",1,"C");
+$pdf->Cell(190,13," ","$rmc1",1,"L");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1101r4a","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1101r4b","$rmc",1,"C");
 
 //modul 100075
 $m1101r5a=" ";
 $m1101r5b=" ";
 if ( $hlavicka->m1101r5a == 1 ) { $m1101r5a="x"; }
 if ( $hlavicka->m1101r5b == 1 ) { $m1101r5b="x"; }
-$pdf->Cell(190,19," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1101r5a","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1101r5b","$rmc",1,"C");
-
-//modul 100079
-$m1101r6a=" ";
-$m1101r6b=" ";
-if ( $hlavicka->m1101r6a == 1 ) { $m1101r6a="x"; }
-if ( $hlavicka->m1101r6b == 1 ) { $m1101r6b="x"; }
-$pdf->Cell(190,19," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1101r6a","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1101r6b","$rmc",1,"C");
-
-//modul 100082
-$m1101r7a=" ";
-$m1101r7b=" ";
-if ( $hlavicka->m1101r7a == 1 ) { $m1101r7a="x"; }
-if ( $hlavicka->m1101r7b == 1 ) { $m1101r7b="x"; }
-$pdf->Cell(190,27," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1101r7a","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1101r7b","$rmc",1,"C");
+$pdf->Cell(190,23," ","$rmc1",1,"L");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1101r5a","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1101r5b","$rmc",1,"C");
                                        }
 
 if ( $strana == 4 OR $strana == 9999 ) {
@@ -8648,6 +8596,57 @@ if ( File_Exists($jpg_cesta.'_str4.jpg') AND $i == 0 )
 $pdf->Image($jpg_cesta.'_str4.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
+
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,6," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
+
+//modul 100079
+$m1101r6a=" ";
+$m1101r6b=" ";
+if ( $hlavicka->m1101r6a == 1 ) { $m1101r6a="x"; }
+if ( $hlavicka->m1101r6b == 1 ) { $m1101r6b="x"; }
+$pdf->Cell(190,17," ","$rmc1",1,"L");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1101r6a","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5.5,"$m1101r6b","$rmc",1,"C");
+
+//modul 100082
+$m1101r7a=" ";
+$m1101r7b=" ";
+if ( $hlavicka->m1101r7a == 1 ) { $m1101r7a="x"; }
+if ( $hlavicka->m1101r7b == 1 ) { $m1101r7b="x"; }
+$pdf->Cell(190,30," ","$rmc1",1,"L");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4.5,"$m1101r7a","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1101r7b","$rmc",1,"C");
+
+//modul 100417
+$m100417ano=" ";
+$m100417nie=" ";
+if ( $hlavicka2->m100417ano == 1 ) { $m100417ano="x"; }
+if ( $hlavicka2->m100417nie == 1 ) { $m100417nie="x"; }
+$pdf->Cell(190,26," ","$rmc1",1,"L");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m100417ano","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m100417nie","$rmc",1,"C");
+
+//modul 100418
+$pdf->SetFont('arial','',10);
+$m100418=$hlavicka2->m100418;
+if ( $hlavicka2->m100418 == 0 ) $m100418="";
+$pdf->Cell(190,21," ","$rmc1",1,"L");
+$pdf->Cell(133,6," ","$rmc1",0,"L");$pdf->Cell(56,5,"$m100418","$rmc",1,"C");
+$pdf->SetFont('arial','',12);
 
 //modul 398
 $m398r11=$hlavicka->m398r11; if ( $m398r11 == 0 ) $m398r11="";
@@ -8666,25 +8665,53 @@ $m398r993=$hlavicka->m398r993;
 //if ( $m398r993 == 0 ) $m398r993="";
 $m398r994=$hlavicka->m398r994;
 //if ( $m398r994 == 0 ) $m398r994="";
-$pdf->Cell(195,45," ","$rmc1",1,"L");
-$pdf->Cell(86,5," ","$rmc1",0,"C");
-$pdf->Cell(25,7,"$m398r11","$rmc",0,"R");$pdf->Cell(22,7,"$m398r12","$rmc",0,"R");
-$pdf->Cell(28,7,"$m398r13","$rmc",0,"R");$pdf->Cell(28,7,"$m398r14","$rmc",1,"R");
-$pdf->Cell(86,5," ","$rmc1",0,"C");
-$pdf->Cell(25,6,"$m398r21","$rmc",0,"R");$pdf->Cell(22,6,"$m398r22","$rmc",0,"R");
-$pdf->Cell(28,6,"$m398r23","$rmc",0,"R");$pdf->Cell(28,6,"$m398r24","$rmc",1,"R");
-$pdf->Cell(86,5," ","$rmc1",0,"C");
-$pdf->Cell(25,7,"$m398r991","$rmc",0,"R");$pdf->Cell(22,7,"$m398r992","$rmc",0,"R");
-$pdf->Cell(28,7,"$m398r993","$rmc",0,"R");$pdf->Cell(28,7,"$m398r994","$rmc",1,"R");
+$pdf->Cell(195,58," ","$rmc1",1,"L");
+$pdf->Cell(89,5," ","$rmc1",0,"C");
+$pdf->Cell(25,7,"$m398r11","$rmc",0,"R");$pdf->Cell(25,7,"$m398r12","$rmc",0,"R");
+$pdf->Cell(25,7,"$m398r13","$rmc",0,"R");$pdf->Cell(25,7,"$m398r14","$rmc",1,"R");
+$pdf->Cell(89,5," ","$rmc1",0,"C");
+$pdf->Cell(25,6,"$m398r21","$rmc",0,"R");$pdf->Cell(25,6,"$m398r22","$rmc",0,"R");
+$pdf->Cell(25,6,"$m398r23","$rmc",0,"R");$pdf->Cell(25,6,"$m398r24","$rmc",1,"R");
+$pdf->Cell(89,5," ","$rmc1",0,"C");
+$pdf->Cell(25,7,"$m398r991","$rmc",0,"R");$pdf->Cell(25,7,"$m398r992","$rmc",0,"R");
+$pdf->Cell(25,7,"$m398r993","$rmc",0,"R");$pdf->Cell(25,7,"$m398r994","$rmc",1,"R");
 
 //modul 100131
 $m1005r1a=" ";
 $m1005r1b=" ";
 if ( $hlavicka->m1005r1a == 1 ) { $m1005r1a="x"; }
 if ( $hlavicka->m1005r1b == 1 ) { $m1005r1b="x"; }
-$pdf->Cell(190,19," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1005r1a","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1005r1b","$rmc",1,"C");
+$pdf->Cell(190,28," ","$rmc1",1,"L");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m1005r1a","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m1005r1b","$rmc",1,"C");
+                                       }
+
+if ( $strana == 5 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_cesta.'_str5.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_cesta.'_str5.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+//ico
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(190,6," ","$rmc1",1,"L");
+$pdf->Cell(93,7," ","$rmc1",0,"L");
+$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
+$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
+$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
+$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
 
 //modul 405
 $m405r11=$hlavicka->m405r11; if ( $m405r11 == 0 ) $m405r11="";
@@ -8702,25 +8729,16 @@ $m405r991=$hlavicka->m405r991;
 //if ( $m405r991 == 0 ) $m405r991="";
 $m405r992=$hlavicka->m405r992;
 //if ( $m405r992 == 0 ) $m405r992="";
-$pdf->Cell(195,34," ","$rmc1",1,"L");
-$pdf->Cell(113,5," ","$rmc1",0,"C");
-$pdf->Cell(38,6,"$m405r11","$rmc",0,"R");$pdf->Cell(38,6,"$m405r12","$rmc",1,"R");
-$pdf->Cell(113,5," ","$rmc1",0,"C");
-$pdf->Cell(38,7,"$m405r21","$rmc",1,"R");
-$pdf->Cell(113,5," ","$rmc1",0,"C");
-$pdf->Cell(38,6,"$m405r31","$rmc",0,"R");$pdf->Cell(38,6,"$m405r32","$rmc",1,"R");
-$pdf->Cell(113,5," ","$rmc1",0,"C");
-$pdf->Cell(38,7,"$m405r41","$rmc",1,"R");
-$pdf->Cell(113,5," ","$rmc1",0,"C");
-$pdf->Cell(38,6,"$m405r51","$rmc",1,"R");
-$pdf->Cell(113,5," ","$rmc1",0,"C");
-$pdf->Cell(38,8,"$m405r61","$rmc",1,"R");
-$pdf->Cell(113,5," ","$rmc1",0,"C");
-$pdf->Cell(38,7,"$m405r71","$rmc",1,"R");
-$pdf->Cell(113,5," ","$rmc1",0,"C");
-$pdf->Cell(38,7,"$m405r81","$rmc",0,"R");$pdf->Cell(38,7,"$m405r82","$rmc",1,"R");
-$pdf->Cell(113,5," ","$rmc1",0,"C");
-$pdf->Cell(38,6,"$m405r991","$rmc",0,"R");$pdf->Cell(38,6,"$m405r992","$rmc",1,"R");
+$pdf->Cell(195,40," ","$rmc1",1,"L");
+$pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(38,6,"$m405r11","$rmc",0,"R");$pdf->Cell(38,6,"$m405r12","$rmc",1,"R");
+$pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(38,7,"$m405r21","$rmc",1,"R");
+$pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(38,6,"$m405r31","$rmc",0,"R");$pdf->Cell(38,6,"$m405r32","$rmc",1,"R");
+$pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(38,7,"$m405r41","$rmc",1,"R");
+$pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(38,8,"$m405r51","$rmc",1,"R");
+$pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(38,8,"$m405r61","$rmc",1,"R");
+$pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(38,7,"$m405r71","$rmc",1,"R");
+$pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(38,6,"$m405r81","$rmc",0,"R");$pdf->Cell(38,6,"$m405r82","$rmc",1,"R");
+$pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(38,6,"$m405r991","$rmc",0,"R");$pdf->Cell(38,6,"$m405r992","$rmc",1,"R");
 
 //modul 406
 $m406r1=$hlavicka->m406r1; if ( $m406r1 == 0 ) $m406r1="";
@@ -8730,6 +8748,8 @@ $m406r4=$hlavicka->m406r4; if ( $m406r4 == 0 ) $m406r4="";
 $m406r5=$hlavicka->m406r5; if ( $m406r5 == 0 ) $m406r5="";
 $m406r6=$hlavicka->m406r6; if ( $m406r6 == 0 ) $m406r6="";
 $m406r7=$hlavicka->m406r7; if ( $m406r7 == 0 ) $m406r7="";
+$m406r8=$hlavicka2->m406r8; if ( $m406r8 == 0 ) $m406r8="";
+$m406r9=$hlavicka2->m406r9; if ( $m406r9 == 0 ) $m406r9="";
 $m406r99=$hlavicka->m406r99;
 //if ( $m406r99 == 0 ) $m406r99="";
 $pdf->Cell(195,26," ","$rmc1",1,"L");
@@ -8740,38 +8760,9 @@ $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(70,7,"$m406r4","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(70,6,"$m406r5","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(70,7,"$m406r6","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(70,6,"$m406r7","$rmc",1,"R");
+$pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(70,6,"$m406r8","$rmc",1,"R");
+$pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(70,6,"$m406r9","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"R");$pdf->Cell(70,7,"$m406r99","$rmc",1,"R");
-                                       }
-
-if ( $strana == 5 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str5.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str5.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$pdf->Cell(190,1," ","$rmc1",1,"L");
-$fir_ficx=$fir_fico;
-$cfico=1*$fir_fico;
-if ( $cfico < 999999 ) $fir_ficx="00".$fir_fico;
-$A=substr($fir_ficx,0,1);
-$B=substr($fir_ficx,1,1);
-$C=substr($fir_ficx,2,1);
-$D=substr($fir_ficx,3,1);
-$E=substr($fir_ficx,4,1);
-$F=substr($fir_ficx,5,1);
-$G=substr($fir_ficx,6,1);
-$H=substr($fir_ficx,7,1);
-$pdf->Cell(93,5," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(7,6,"$B","$rmc",0,"C");
-$pdf->Cell(8,6,"$C","$rmc",0,"C");$pdf->Cell(7,6,"$D","$rmc",0,"C");
-$pdf->Cell(8,6,"$E","$rmc",0,"C");$pdf->Cell(7,6,"$F","$rmc",0,"C");
-$pdf->Cell(8,6,"$G","$rmc",0,"C");$pdf->Cell(7,6,"$H","$rmc",1,"C");
 
 //modul 558
 $m558r1=$hlavicka->m558r1; if ( $m558r1 == 0 ) $m558r1="";
