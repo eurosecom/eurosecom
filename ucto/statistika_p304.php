@@ -3193,7 +3193,7 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 if ( File_Exists($jpg_cesta.'_str5.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str5.jpg',0,0,297,209);
+$pdf->Image($jpg_cesta.'_str5.jpg',0,0,297,204);
 }
 $pdf->SetY(10);
 
@@ -3223,7 +3223,7 @@ $mod1003s04=$hlavicka->mod1003s04; if ( $hlavicka->mod1003s04 == 0 ) $mod1003s04
 $mod1003s05=$hlavicka->mod1003s05; if ( $hlavicka->mod1003s05 == 0 ) $mod1003s05="";
 $mod1003s06=$hlavicka->mod1003s06; if ( $hlavicka->mod1003s06 == 0 ) $mod1003s06="";
 $mod1003s07=$hlavicka->mod1003s07; if ( $hlavicka->mod1003s07 == 0 ) $mod1003s07="";
-$pdf->Cell(195,50," ","$rmc1",1,"L");
+$pdf->Cell(195,49," ","$rmc1",1,"L");
 $pdf->Cell(11,7," ","$rmc1",0,"L");$pdf->Cell(20,6,"$cslr1","$rmc",0,"C");
 $pdf->Cell(32,6,"$mod1003s02","$rmc",0,"R");$pdf->Cell(35,6,"$mod1003s03","$rmc",0,"R");
 $pdf->Cell(40,6,"$mod1003s04","$rmc",0,"R");$pdf->Cell(45,6,"$mod1003s05","$rmc",0,"R");
@@ -3242,7 +3242,7 @@ $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 if ( File_Exists($jpg_cesta.'_str6.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str6.jpg',0,0,297,209);
+$pdf->Image($jpg_cesta.'_str6.jpg',0,0,297,206);
 }
 $pdf->SetY(10);
 
@@ -3255,13 +3255,13 @@ $mod1004s06=$hlavicka->mod1004s06; if ( $hlavicka->mod1004s06 == 0 ) $mod1004s06
 $mod1004s07=$hlavicka->mod1004s07; if ( $hlavicka->mod1004s07 == 0 ) $mod1004s07="";
 $mod1004s08=$hlavicka->mod1004s08; if ( $hlavicka->mod1004s08 == 0 ) $mod1004s08="";
 $mod1004s09=$hlavicka->mod1004s09; if ( $hlavicka->mod1004s09 == 0 ) $mod1004s09="";
-$pdf->Cell(195,53," ","$rmc1",1,"L");
+$pdf->Cell(195,52," ","$rmc1",1,"L");
 $pdf->Cell(8,6," ","$rmc1",0,"L");$pdf->Cell(23,6,"$cslr1","$rmc",0,"C");
 $pdf->Cell(32,6,"$mod1004s02","$rmc",0,"R");$pdf->Cell(32,6,"$mod1004s03","$rmc",0,"R");
 $pdf->Cell(38,6,"$mod1004s04","$rmc",0,"R");$pdf->Cell(33,6,"$mod1004s05","$rmc",0,"R");
 $pdf->Cell(25,6,"$mod1004s06","$rmc",0,"R");$pdf->Cell(27,6,"$mod1004s07","$rmc",0,"R");
 $pdf->Cell(28,6,"$mod1004s08","$rmc",0,"R");$pdf->Cell(29,6,"$mod1004s09","$rmc",1,"R");
-$pdf->SetY(183);
+$pdf->SetY(181);
 $pdf->Cell(8,6," ","$rmc1",0,"L");$pdf->Cell(23,6," ","$rmc",0,"C");
 $pdf->Cell(32,6,"$mod1004s02","$rmc",0,"R");$pdf->Cell(32,6,"$mod1004s03","$rmc",0,"R");
 $pdf->Cell(38,6,"$mod1004s04","$rmc",0,"R");$pdf->Cell(33,6,"$mod1004s05","$rmc",0,"R");
