@@ -592,26 +592,26 @@ $strana=4;
 if( $citajvsetkymoduly == 1 ) { $modul=558; }
 if ( $modul == 558 )
 {
-$mx558r03=0;$mx558r04=0;;
+$mx558r05=0;$mx558r04=0;;
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 644 OR LEFT(uce,3) = 645 )";
 $sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
 //echo $sqltt;
 $i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $mx558r03=$mx558r03+$polozka->zdl-$polozka->zmd; }
+if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $mx558r04=$mx558r04+$polozka->zdl-$polozka->zmd; }
 $i=$i+1;                   }
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobratsx$kli_uzid WHERE ur1 = 999 AND ( LEFT(uce,3) = 544 OR LEFT(uce,3) = 545 )";
 $sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
 //echo $sqltt;
 $i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $mx558r04=$mx558r04+$polozka->zmd-$polozka->zdl; }
+if (@$zaznam=mysql_data_seek($sql,$i)) { $polozka=mysql_fetch_object($sql); $mx558r05=$mx558r05+$polozka->zmd-$polozka->zdl; }
 $i=$i+1;                   }
 
 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_vts201 SET ".
-" m558r03='$mx558r03', m558r04='$mx558r04' ".
+" m558r05='$mx558r03', m558r04='$mx558r04' ".
 " WHERE ico >= 0";
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
