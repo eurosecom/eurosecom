@@ -1,0 +1,580 @@
+table.tovkosik tfoot, td.info-ceny, span.firma-value, strong, b {
+  color: #000;
+}
+b, td.hodnsdph {
+  font-weight: bolder;
+}
+table.tovkosik tfoot {
+  font-size: 17px;
+}
+body, div.cennik-head, div.ktg-head, div.button-dokosika {
+  text-align: center;
+}
+body, #wrap-content {
+  background-image: url(../obr/eshop/gridme.png);
+} 
+body { 
+  padding: 0;
+  font-family: Tahoma, Arial, Helvetica, Verdana;
+}
+#content, span.puntik-bezdph, td.cwhite, div.kosik-area, div.kosik-area1, table.regmenu {
+  background-color: #FFF;
+}
+body, fieldset, h2, h3, p, select, textarea, ul {
+  margin: 0;
+}
+form {
+  display: inline;
+}
+img, select, input.povi, input.norm {
+  border: none;
+}
+table {
+  border-collapse: collapse;
+}
+textarea {
+  overflow: auto;
+  padding: 3px;
+}
+ul, div.ktg-menu {
+  list-style-type: none;
+}
+#wrap-content, #wrap-header, body, table, #wrap-footer {
+  width: 100%;
+}
+table.prmprodukt, table.zakaznik-area, th.tovkosik-total, div.ktg, div.cennik, td.tovdokosika, td.podkos, div.foot-text {
+  background-color: #F7F8F3;
+}
+#wrap-footer, .cenasdph, div.popprodukt-text, div.tovkosik-tool, input.obnovit, div.logged, table.odb-ponuka, table.odb-ponuka1, img.odbfind, a.regcancel, div.save-note,
+span.popprodh, span.prmprodukt, span.tovkosik, img.tov-dokosika, li.allktg, li.login-popis, div.kosik-area1, input.find-box, input.finder, div.kosik-area, a.regbut, a.video {
+  position: relative;
+}
+#wrap-footer {
+  top: 20px;
+}
+#content, #footer, #header {
+  width: 900px;
+  margin: 0 auto;
+}
+#content, #footer, #header, table.zakaznik-area th {
+  padding-top: 5px;
+}
+#wrap-header, div.logged {
+  padding-bottom: 2px;
+}
+table.list-finding {
+  margin-top: -2px;
+}
+#footer, div.cennik-menu, div.ktg-menu, table.list-finding {
+  border-top: 2px solid #849953;
+}
+caption.prmprodk, div.popprodukt-head, h3.zakaznik-head, table.nevobj, table.nevobj caption {
+  border-bottom: 2px solid #849953;
+}
+#header {
+  padding-bottom: 1px;
+}
+.cenabezdph, td.hodnsdph {
+  padding-right: 2px;
+}
+.cenabezdph, .tovzasoba, span.tov-def, span.zakz-def, table.nevobj, div.ktg-box, td.tovnazov, div.cennik-head, div.ktg-head, a.viewobj, a.regbut {
+  font-size: 13px;
+}
+div.cennik-head, div.ktg-head {
+  line-height: 30px;
+}
+.cenasdph, .tovnazov, caption.tovkos, div.infotov-header, div.logged, div.objfirma, span.firma-value, span.nevobj-popis, div.save-note input,
+span.popprodh, span.prmprodukt, span.sumanevobj, span.tov-value, span.zakz-value, table.nevobj caption span, td.found span, td.tov-value, td.tovnazov a, span.pvn,
+li.actktg, li.noactktg:hover, div.kosik-info, div.kosik-info1, div.cennik-head, div.ktg-head, a.viewobj, a.myobjednavky, a.mynopayfak, a.regcancel, td.tuko, a.regbut {
+  font-weight: bold;
+}
+.cenasdph, .tovnazov, span.sumanevobj, td.found, td.hodnsdph, textarea, a.myobjednavky, a.mynopayfak {
+  font-size: 14px;
+}
+.cenasdph, span.sumanevobj, span.puntik-sdph {
+  background-color: #12B473;
+}
+.cenasdph { 
+  top: 3px;
+}
+.tovzasoba {
+  padding-right: 4px;
+}
+div.logged, div.objiceny, table.list-finding th, table.tovkosik thead, td.tovpopis, strong, div.kosik-info, table.regmenu {
+  font-size: 11px;
+}
+caption.prmprodk, caption.tovkos, div.infotov-header, div.objfirma, h2.obj-head, div.foot-text, table.nevobj caption, div.kosik-info1, div.logged,
+h2.vaskosik-head, div.kosik-area, div.kosik-info, div.kosik-area1 {
+  text-align: left;
+}
+.tovkod, .tovnazov, div.objfirma, span.tov-value, span.zakz-value, table.nevobj tfoot, td.cpage, td.tov-value, td.tovnazov a, textarea, a.viewobj, a.npage, td.reghead {
+  color: #849953;
+}
+div.logged {
+  width: 250px;
+  top: 2px;
+}
+.tovnazov, div.uvod-nadpis, table.tovkosik tfoot {
+  font-family: verdana, Geneva, Tahoma, sans-serif;
+}
+div.tovkosik-tool, td.info-ceny, div.save-note {
+  text-align: right;
+}
+.tovkod, li.login-popis, span.nevobj-popis, div.kosik-info1, a.regcancel, table.odb-ponuka, table.odb-ponuka1 {
+  font-size: 12px;
+}
+div.objfirma, div.uvod-nadpis, h3.zakaznik-head span, span.firma-value, span.popprodh, span.prmprodukt, span.tovkosik, table.nevobj caption, td.nofinding,
+div.cennik-head, div.ktg-head {
+  letter-spacing: 1px;
+}
+caption.tovkos, div.uvod-nadpis, span.popprodh, span.prmprodukt, table.nevobj caption, b {
+  font-size: 18px;
+}
+div.uvod-nadpis {
+  padding: 8px 0;
+  word-spacing: 2px;
+}
+div.foot-text, a.regcancel, a.regbut, div.save-note input {
+  font-family: arial, sans-serif;
+}
+div.objfirma, input.tov-mnovkosiku, div.foot-text, table.nevobj tfoot, td.nofinding, td.tovdokosika input {
+  font-size: 16px;
+}
+div.foot-text { padding: 5px 0; }    
+div.cennik-head, div.ktg-head, h3.zakaznik-head span, span.popprodh, span.prmprodukt, span.sumanevobj, span.tovkosik, table.nevobj caption, div.save-note input,
+table.tovkosik thead, th.nevobj-total, li.login-popis, h2.obj-head, .cenasdph, div.logged, div.logged a, h2.vaskosik-head, table.list-finding th, div.infotov-header, a.myobjednavky, a.mynopayfak, a.regbut {
+  color: #FFF;
+}
+div.cennik-head, div.ktg-head, h3.zakaznik-head span, span.popprodh, span.prmprodukt, span.tovkosik, table.list-finding th, table.nevobj caption span,
+table.tovkosik thead, th.nevobj-total, #wrap-header, a.myobjednavky, a.mynopayfak, input.obnovit, a.regbut, a.video, div.save-note input {
+  background-color: #849953;
+}
+div.popprodukt-text {
+  padding: 3px 0;
+  top: -8px;
+}
+div.ktg-menu {
+  padding: 2px 0 0 2px;
+}
+div.cennik-menu {
+  padding: 8px 3px;
+}
+div.findarea { 
+  height: 40px;
+}
+input.find-box, div.kosik-info1, div.kosik-info, li.allktg {
+  padding-left: 2px;
+}
+input.find-box {
+  width: 150px;
+  top: -2px;
+  top: 3px\9; /* hack IE8- */
+  padding-top: 7px\9; /* hack IE8- */
+}
+div.tovkosik-tool {
+  top: 22px;
+}
+div.infotov-header, div.objfirma, div.objiceny {
+  position: absolute;
+}
+div.infotov-header {
+  font-size: 1.5em;
+  top: 24px;
+  margin-bottom: -10px;
+}
+div.popprodukt-head {
+  margin-bottom: 8px;
+}
+img.firlogo {
+  width: 280px;
+  height: 70px;
+}
+img.firlogo {
+  border: 1px solid #FFF;
+}
+img.kosik, img.tov-dokosika, li.allktg, input.finder, li.actktg, li.noactktg, div.button-dokosika img, img.odbfind, div.save-note input {
+  cursor: pointer;
+}
+img.tov-dokosika {
+  top: 3px;
+}
+div.kosik-info1 {
+  margin-right: 15px;
+}
+img.objednat {
+  margin-top: 8px;
+}
+h3.zakaznik-head, td.found {
+  padding-top: 15px;
+}
+input.obnovit {
+  top: 7px;
+  width: 32px;
+}
+input.finder {
+  width: 60px;
+  top: -3px;
+  top: 3px\9; /* hack IE8- */
+  margin-left: -6px;
+  background: #849953 url(../obr/eshop/search_icon.png) no-repeat 50% 50%;
+}
+td.nofinding {
+  padding: 50px 0;
+}
+table.list-finding thead, table.tovkosik thead {
+  line-height: 18px;
+}
+td.info-ceny {
+  font-size: 9px;
+}
+input.find-box {
+  -webkit-border-top-left-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+input.tov-mnovkosiku, table.pagination a, td.tovdokosika input {
+  vertical-align: middle;
+}
+.tovkod {
+  padding: 5px 2px 0;
+}
+input.tov-mnovkosiku, input.obnovit, td.tovdokosika input, input.find-box, input.finder, a.viewobj {
+  height: 30px;
+}
+input.tov-mnovkosiku, td.tovdokosika input {
+  width: 50px;
+  border: 1px solid #12B473;
+  padding-left: 4px;
+  padding-top: 5px\9; /* hack IE8- */
+}
+input.tov-mnovkosiku {
+  margin-top: -4px;
+  margin-top: 0\9; /* hack IE8- */
+}
+div.button-dokosika {
+  padding: 3px 10px 2px 4px;
+}
+td.tovpopis, div.ktg-box {
+  padding-left: 5px;
+}
+table.pagination {
+  margin: 40px 0 10px;
+  height: 36px;
+}
+h2.obj-head, h2.vaskosik-head {
+  padding: 10px 2px 2px 0;
+}
+h3.zakaznik-head {
+  width: 60%;
+}
+h3.zakaznik-head span {
+  padding: 2px 5px 0;
+}
+table.zakaznik-area, div.kosik-info1, div.kosik-info, img.kosik {
+  margin-top: 2px;
+}
+span.tov-value, span.zakz-value, table.pagination, td.found span, td.tov-value, input.find-box, a.npage, td.reghead {
+  font-size: 15px;
+}
+span.firma-value {
+  font-size: 20px;
+}
+table.tovkosik {
+  margin-bottom: 20px;
+}
+span.tovkosik {
+  padding: 5px 10px 6px;
+  top: -6px;
+  top: -5px\9; /* hack IE8- */
+}
+table.tovkosik tfoot {
+  line-height: 35px;
+}
+th.tovkosik-total {
+  font-size: 1.3em;
+  padding-right: 50px;
+}
+table.infotov {
+  margin: 8px 0 5px;
+}
+table.prmprodukt {
+  margin: 5px 0 30px;
+}
+span.popprodh, span.prmprodukt {
+  padding: 3px 6px;
+  padding-bottom: 1px\9; /* hack IE8- */
+  height: 28px;
+  top: -3px;
+  top: 0\9; /* hack IE8- */
+}
+table.nevobj {
+  line-height: 18px;
+}
+table.nevobj caption {
+  padding: 3px 0 5px;
+}
+table.nevobj caption span {
+  padding: 2px 5px 5px;
+}
+span.sumanevobj {
+  padding: 2px 4px;
+}
+th.nevobj-total {
+  padding: 2px;
+}
+div.objfirma {
+  margin-left: 5px;
+}
+div.objfirma {
+  top: 60px;
+}
+div.objiceny {
+  top: 98px;
+  margin-left: 820px;
+}
+div.kosik-info1, div.kosik-info, a.video {
+  float: right;
+}
+li.login-popis {
+  margin-bottom: -18px;
+}
+div.ktg-box {
+  line-height: 22px;
+  margin-left: -15px\9; /* hack IE8- */
+}
+div.ktg-menu {
+  min-height: 200px;
+/*  height: 200px\9;  hack IE8- */
+}
+td.leftnav {
+  padding-right: 10px;
+}
+li.allktg {
+  top: -34px;
+  left: 125px;
+  margin-bottom: -32px;
+}
+div.kosik-area {
+  width: 250px;
+  top: 6px;
+}
+div.kosik-info, div.kosik-info1 {
+  color: #12B473;
+}
+div.kosik-info {
+  margin-right: 5px;
+}
+strong {
+  font-weight: normal;
+  width: 30px;
+}
+img.kosik {
+  margin-left: 2px;
+} 
+div.kosik-area1 {
+  width: 314px;
+  top: 4px;
+}
+div.kosik-area1, div.kosik-area {
+  height: 34px;
+}
+div.kosik-info1, div.kosik-info {
+  line-height: 15px;
+  width: 55%;
+}
+td.tovdokosika {
+  padding:2px 0;
+}
+a.npage:hover, a.regcancel:hover, div.logged a:hover {
+  text-decoration: underline;
+}
+a.myobjednavky, a.mynopayfak {
+  height: 32px;
+}
+a.myobjednavky, a.mynopayfak, a.regbut, div.save-note input {
+  border: 2px solid #5E6D3B;
+}
+a.myobjednavky {
+  padding: 7px 12px;
+}
+a.mynopayfak {
+  padding: 7px 28px 7px 29px;
+}
+a.viewobj {
+  padding: 4px 6px;
+}
+div.wrap-viewobj {
+  margin-top: 5px;
+  margin-top: -1px\9; /* hack IE8- */
+  margin-bottom: 12px;
+  margin-bottom: 6px\9; /* hack IE8- */
+}
+a.viewobj, a.myobjednavky, a.mynopayfak, a.npage, a.regcancel, a.regbut, div.logged a {
+  text-decoration: none;
+}
+a.viewobj, input.finder, input.find-box, table.regmenu {
+  border: 2px solid #849953;
+}
+a.viewobj, a.myobjednavky, a.mynopayfak, a.video, div.save-note input {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+a.video {
+  top: -47px;
+}
+table.regmenu {
+  width: 430px;
+}
+input.norm, input.povi {
+  padding-left: 2px;
+}
+input.norm, table.odb-ponuka1 {
+  background-color: #F7F8F3;
+}
+input.povi, table.odb-ponuka {
+  background-color: #E2E5D3;
+}
+.regbut {
+  padding: 6px 7px;
+  height: 1px;
+  right: 8px;
+  top: 10px;
+  top: 1px\9; /* hack IE8- */
+}
+td.reghead {
+  padding-left: 12px;
+}
+span.pvn {
+  color: #FF0000;
+}
+a.regcancel {
+  padding: 4px 6px;
+  color: #CC0000;
+  left: -2px;
+}
+img.odbfind {
+  margin-left: 4px;
+  top: 2px;
+}
+table.odb-ponuka, table.odb-ponuka1 {
+  width: 600px;
+  top: 10px;
+  left: -152px;
+}
+table.odb-ponuka th {
+  font-size: 10px;
+}
+div.save-note {
+  margin: 10px auto; 
+  right: 79px;
+}
+div.save-note input {
+  width: 80px; 
+  height: 30px;
+}
+span.tuko { font-weight: bold; }
+a.login-textbtn {
+  color: #fff;
+  text-decoration: none;
+  font: bold 13px arial, sans-serif; 
+}
+a.reg-textbtn {
+  color: #fff;
+  text-decoration: none;
+  font: normal 13px arial, sans-serif;
+}
+a.adminreg-textbtn {
+  color: #888;
+  text-decoration: none;
+  font: normal 13px arial, sans-serif;
+}
+#loginbox {
+  display: none;
+  z-index: 100;
+  position: absolute;
+  top: 28px;
+  right: 25%\9; /* hack IE8- */
+  width: 200px;
+  padding: 5px 10px;
+  border: 2px solid #849953;
+  background-color: #fff;
+  text-align: left;
+}
+#loginbox div {
+  height: 30px;
+  line-height: 30px;
+}
+#loginbox img.imglabel {
+  display: block;
+  float: left;
+  position: relative;
+  top: 3px;
+  width: 20px;
+  height: 20px;
+  margin-right:3px;
+}
+#loginbox input.loginvypln {
+  display: block;
+  float: left;
+  width: 70%;
+  border: 1px solid #849953;
+  padding-left: 2px;
+}
+img.cancel-btn {
+  display: block;
+  float: right;
+  width: 20px;
+  height: 20px;
+  margin-right: 3px;
+  cursor: pointer;
+}
+input.login-btn {
+  height: 28px;
+  margin-left: 23px;
+  border: none;
+  background-color: #849953;
+  text-decoration: none;
+  color: #fff;
+  font-size:13px;
+  font-weight:bold;
+}
+table.foot-links {
+  width: 100%;
+  margin-top: 5px;
+  font-size: 13px;
+}
+table.foot-links a {
+  text-decoration: none;
+  color: #849953;
+}
+table.foot-links a:hover { text-decoration: underline; }
+table.contactbox {
+  width: 100%;
+  background-color: #849953;
+  color: white;
+  font-size:13px;
+}
+div.mnozedit-box {
+  display: none;
+  position: relative;
+  top: -19px;
+  width: 120px;
+  height: 30px;
+  background-color: #849953;
+}
+div.mnozedit-box > img {
+  position: relative;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+div.mnozedit-box > input {
+  height: 26px;
+  margin-top: 2px;
+  padding-left: 2px;
+}
