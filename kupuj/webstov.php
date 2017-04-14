@@ -31,6 +31,11 @@ if ( $copern !== 99 )
 if ( $_SERVER['SERVER_NAME'] == "www.ala.sk" ) { mysql_query("SET NAMES cp1250"); }
 $citwebs = include("../funkcie/citaj_webs.php");
 
+$eurosecom2015virtualnyserver=0;
+if( file_exists("pswd/eurosecom2015virtualnyserver.ano")) { $eurosecom2015virtualnyserver=1; }
+if( file_exists("../pswd/eurosecom2015virtualnyserver.ano")) { $eurosecom2015virtualnyserver=1; }
+if( $eurosecom2015virtualnyserver == 1 ) { mysql_query("SET NAMES cp1250"); }
+
 // cislo operacie
 $copern = $_REQUEST['copern'];
 $page = $_REQUEST['page'];
