@@ -9779,8 +9779,7 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 
 <?php if ( $strana == 5 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str5.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 5.strana 270kB">
+<img src="<?php echo $jpg_cesta; ?>_str5.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 5.strana 270kB">
 <span class="text-echo" style="top:75px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 182 -->
@@ -10025,1212 +10024,1207 @@ $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 
 <?php if ( $strana == 6 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str6.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 6.strana 237kB">
+<img src="<?php echo $jpg_cesta; ?>_str6.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 6.strana 237kB">
+<span class="text-echo" style="top:95px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 183 -->
-<input type="text" name="m183r11" id="m183r11" style="width:138px; top:201px; left:91px;"/>
-<input type="text" name="m183r12" id="m183r12" style="width:162px; top:201px; left:240px;"/>
-<input type="text" name="m183r13" id="m183r13" style="width:149px; top:201px; left:412px;"/>
-<input type="text" name="m183r14" id="m183r14" style="width:317px; top:201px; left:571px;"/>
-<input type="text" name="m183r21" id="m183r21" style="width:138px; top:229px; left:91px;"/>
-<input type="text" name="m183r22" id="m183r22" style="width:162px; top:229px; left:240px;"/>
-<input type="text" name="m183r23" id="m183r23" style="width:149px; top:229px; left:412px;"/>
-<input type="text" name="m183r24" id="m183r24" style="width:317px; top:229px; left:571px;"/>
-<input type="text" name="m183r31" id="m183r31" style="width:138px; top:258px; left:91px;"/>
-<input type="text" name="m183r32" id="m183r32" style="width:162px; top:258px; left:240px;"/>
-<input type="text" name="m183r33" id="m183r33" style="width:149px; top:258px; left:412px;"/>
-<input type="text" name="m183r34" id="m183r34" style="width:317px; top:258px; left:571px;"/>
-<input type="text" name="m183r41" id="m183r41" style="width:138px; top:286px; left:91px;"/>
-<input type="text" name="m183r42" id="m183r42" style="width:162px; top:286px; left:240px;"/>
-<input type="text" name="m183r43" id="m183r43" style="width:149px; top:286px; left:412px;"/>
-<input type="text" name="m183r44" id="m183r44" style="width:317px; top:286px; left:571px;"/>
-<input type="text" name="m183r51" id="m183r51" style="width:138px; top:315px; left:91px;"/>
-<input type="text" name="m183r52" id="m183r52" style="width:162px; top:315px; left:240px;"/>
-<input type="text" name="m183r53" id="m183r53" style="width:149px; top:315px; left:412px;"/>
-<input type="text" name="m183r54" id="m183r54" style="width:317px; top:315px; left:571px;"/>
-<input type="text" name="m183r61" id="m183r61" style="width:138px; top:343px; left:91px;"/>
-<input type="text" name="m183r62" id="m183r62" style="width:162px; top:343px; left:240px;"/>
-<input type="text" name="m183r63" id="m183r63" style="width:149px; top:343px; left:412px;"/>
-<input type="text" name="m183r64" id="m183r64" style="width:317px; top:343px; left:571px;"/>
-<input type="text" name="m183r71" id="m183r71" style="width:138px; top:372px; left:91px;"/>
-<input type="text" name="m183r72" id="m183r72" style="width:162px; top:372px; left:240px;"/>
-<input type="text" name="m183r73" id="m183r73" style="width:149px; top:372px; left:412px;"/>
-<input type="text" name="m183r74" id="m183r74" style="width:317px; top:372px; left:571px;"/>
-<input type="text" name="m183r81" id="m183r81" style="width:138px; top:400px; left:91px;"/>
-<input type="text" name="m183r82" id="m183r82" style="width:162px; top:400px; left:240px;"/>
-<input type="text" name="m183r83" id="m183r83" style="width:149px; top:400px; left:412px;"/>
-<input type="text" name="m183r84" id="m183r84" style="width:317px; top:400px; left:571px;"/>
-<input type="text" name="m183r91" id="m183r91" style="width:138px; top:429px; left:91px;"/>
-<input type="text" name="m183r92" id="m183r92" style="width:162px; top:429px; left:240px;"/>
-<input type="text" name="m183r93" id="m183r93" style="width:149px; top:429px; left:412px;"/>
-<input type="text" name="m183r94" id="m183r94" style="width:317px; top:429px; left:571px;"/>
-<input type="text" name="m183r101" id="m183r101" style="width:138px; top:457px; left:91px;"/>
-<input type="text" name="m183r102" id="m183r102" style="width:162px; top:457px; left:240px;"/>
-<input type="text" name="m183r103" id="m183r103" style="width:149px; top:457px; left:412px;"/>
-<input type="text" name="m183r104" id="m183r104" style="width:317px; top:457px; left:571px;"/>
-<input type="text" name="m183r111" id="m183r111" style="width:138px; top:486px; left:91px;"/>
-<input type="text" name="m183r112" id="m183r112" style="width:162px; top:486px; left:240px;"/>
-<input type="text" name="m183r113" id="m183r113" style="width:149px; top:486px; left:412px;"/>
-<input type="text" name="m183r114" id="m183r114" style="width:317px; top:486px; left:571px;"/>
-<input type="text" name="m183r121" id="m183r121" style="width:138px; top:514px; left:91px;"/>
-<input type="text" name="m183r122" id="m183r122" style="width:162px; top:514px; left:240px;"/>
-<input type="text" name="m183r123" id="m183r123" style="width:149px; top:514px; left:412px;"/>
-<input type="text" name="m183r124" id="m183r124" style="width:317px; top:514px; left:571px;"/>
-<input type="text" name="m183r131" id="m183r131" style="width:138px; top:543px; left:91px;"/>
-<input type="text" name="m183r132" id="m183r132" style="width:162px; top:543px; left:240px;"/>
-<input type="text" name="m183r133" id="m183r133" style="width:149px; top:543px; left:412px;"/>
-<input type="text" name="m183r134" id="m183r134" style="width:317px; top:543px; left:571px;"/>
-<input type="text" name="m183r141" id="m183r141" style="width:138px; top:571px; left:91px;"/>
-<input type="text" name="m183r142" id="m183r142" style="width:162px; top:571px; left:240px;"/>
-<input type="text" name="m183r143" id="m183r143" style="width:149px; top:571px; left:412px;"/>
-<input type="text" name="m183r144" id="m183r144" style="width:317px; top:571px; left:571px;"/>
-<input type="text" name="m183r151" id="m183r151" style="width:138px; top:600px; left:91px;"/>
-<input type="text" name="m183r152" id="m183r152" style="width:162px; top:600px; left:240px;"/>
-<input type="text" name="m183r153" id="m183r153" style="width:149px; top:600px; left:412px;"/>
-<input type="text" name="m183r154" id="m183r154" style="width:317px; top:600px; left:571px;"/>
-<input type="text" name="m183r161" id="m183r161" style="width:138px; top:628px; left:91px;"/>
-<input type="text" name="m183r162" id="m183r162" style="width:162px; top:628px; left:240px;"/>
-<input type="text" name="m183r163" id="m183r163" style="width:149px; top:628px; left:412px;"/>
-<input type="text" name="m183r164" id="m183r164" style="width:317px; top:628px; left:571px;"/>
-<input type="text" name="m183r171" id="m183r171" style="width:138px; top:657px; left:91px;"/>
-<input type="text" name="m183r172" id="m183r172" style="width:162px; top:657px; left:240px;"/>
-<input type="text" name="m183r173" id="m183r173" style="width:149px; top:657px; left:412px;"/>
-<input type="text" name="m183r174" id="m183r174" style="width:317px; top:657px; left:571px;"/>
-<input type="text" name="m183r181" id="m183r181" style="width:138px; top:685px; left:91px;"/>
-<input type="text" name="m183r182" id="m183r182" style="width:162px; top:685px; left:240px;"/>
-<input type="text" name="m183r183" id="m183r183" style="width:149px; top:685px; left:412px;"/>
-<input type="text" name="m183r184" id="m183r184" style="width:317px; top:685px; left:571px;"/>
-<input type="text" name="m183r191" id="m183r191" style="width:138px; top:714px; left:91px;"/>
-<input type="text" name="m183r192" id="m183r192" style="width:162px; top:714px; left:240px;"/>
-<input type="text" name="m183r193" id="m183r193" style="width:149px; top:714px; left:412px;"/>
-<input type="text" name="m183r194" id="m183r194" style="width:317px; top:714px; left:571px;"/>
-<input type="text" name="m183r201" id="m183r201" style="width:138px; top:742px; left:91px;"/>
-<input type="text" name="m183r202" id="m183r202" style="width:162px; top:742px; left:240px;"/>
-<input type="text" name="m183r203" id="m183r203" style="width:149px; top:742px; left:412px;"/>
-<input type="text" name="m183r204" id="m183r204" style="width:317px; top:742px; left:571px;"/>
-<input type="text" name="m183r211" id="m183r211" style="width:138px; top:770px; left:91px;"/>
-<input type="text" name="m183r212" id="m183r212" style="width:162px; top:770px; left:240px;"/>
-<input type="text" name="m183r213" id="m183r213" style="width:149px; top:770px; left:412px;"/>
-<input type="text" name="m183r214" id="m183r214" style="width:317px; top:770px; left:571px;"/>
-<input type="text" name="m183r221" id="m183r221" style="width:138px; top:799px; left:91px;"/>
-<input type="text" name="m183r222" id="m183r222" style="width:162px; top:799px; left:240px;"/>
-<input type="text" name="m183r223" id="m183r223" style="width:149px; top:799px; left:412px;"/>
-<input type="text" name="m183r224" id="m183r224" style="width:317px; top:799px; left:571px;"/>
-<input type="text" name="m183r231" id="m183r231" style="width:138px; top:828px; left:91px;"/>
-<input type="text" name="m183r232" id="m183r232" style="width:162px; top:828px; left:240px;"/>
-<input type="text" name="m183r233" id="m183r233" style="width:149px; top:828px; left:412px;"/>
-<input type="text" name="m183r234" id="m183r234" style="width:317px; top:828px; left:571px;"/>
-<input type="text" name="m183r241" id="m183r241" style="width:138px; top:856px; left:91px;"/>
-<input type="text" name="m183r242" id="m183r242" style="width:162px; top:856px; left:240px;"/>
-<input type="text" name="m183r243" id="m183r243" style="width:149px; top:856px; left:412px;"/>
-<input type="text" name="m183r244" id="m183r244" style="width:317px; top:856px; left:571px;"/>
-<input type="text" name="m183r251" id="m183r251" style="width:138px; top:885px; left:91px;"/>
-<input type="text" name="m183r252" id="m183r252" style="width:162px; top:885px; left:240px;"/>
-<input type="text" name="m183r253" id="m183r253" style="width:149px; top:885px; left:412px;"/>
-<input type="text" name="m183r254" id="m183r254" style="width:317px; top:885px; left:571px;"/>
-<input type="text" name="m183r261" id="m183r261" style="width:138px; top:913px; left:91px;"/>
-<input type="text" name="m183r262" id="m183r262" style="width:162px; top:913px; left:240px;"/>
-<input type="text" name="m183r263" id="m183r263" style="width:149px; top:913px; left:412px;"/>
-<input type="text" name="m183r264" id="m183r264" style="width:317px; top:913px; left:571px;"/>
-<input type="text" name="m183r271" id="m183r271" style="width:138px; top:942px; left:91px;"/>
-<input type="text" name="m183r272" id="m183r272" style="width:162px; top:942px; left:240px;"/>
-<input type="text" name="m183r273" id="m183r273" style="width:149px; top:942px; left:412px;"/>
-<input type="text" name="m183r274" id="m183r274" style="width:317px; top:942px; left:571px;"/>
-<input type="text" name="m183r281" id="m183r281" style="width:138px; top:970px; left:91px;"/>
-<input type="text" name="m183r282" id="m183r282" style="width:162px; top:970px; left:240px;"/>
-<input type="text" name="m183r283" id="m183r283" style="width:149px; top:970px; left:412px;"/>
-<input type="text" name="m183r284" id="m183r284" style="width:317px; top:970px; left:571px;"/>
-<input type="text" name="m183r291" id="m183r291" style="width:138px; top:999px; left:91px;"/>
-<input type="text" name="m183r292" id="m183r292" style="width:162px; top:999px; left:240px;"/>
-<input type="text" name="m183r293" id="m183r293" style="width:149px; top:999px; left:412px;"/>
-<input type="text" name="m183r294" id="m183r294" style="width:317px; top:999px; left:571px;"/>
-<input type="text" name="m183r301" id="m183r301" style="width:138px; top:1027px; left:91px;"/>
-<input type="text" name="m183r302" id="m183r302" style="width:162px; top:1027px; left:240px;"/>
-<input type="text" name="m183r303" id="m183r303" style="width:149px; top:1027px; left:412px;"/>
-<input type="text" name="m183r304" id="m183r304" style="width:317px; top:1027px; left:571px;"/>
-<span class="text-echo" style="top:1060px; right:546px;"><?php echo $m183r992; ?></span>
-<span class="text-echo" style="top:1060px; right:388px;"><?php echo $m183r993; ?></span>
-<span class="text-echo" style="top:1060px; right:60px;"><?php echo $m183r994; ?></span>
+<input type="text" name="m183r11" id="m183r11" style="width:138px; top:319px; left:91px;"/>
+<input type="text" name="m183r12" id="m183r12" style="width:138px; top:319px; left:240px;"/>
+<input type="text" name="m183r13" id="m183r13" style="width:138px; top:319px; left:389px;"/>
+<input type="text" name="m183r14" id="m183r14" style="width:349px; top:319px; left:539px;"/>
+<input type="text" name="m183r21" id="m183r21" style="width:138px; top:347px; left:91px;"/>
+<input type="text" name="m183r22" id="m183r22" style="width:138px; top:347px; left:240px;"/>
+<input type="text" name="m183r23" id="m183r23" style="width:138px; top:347px; left:389px;"/>
+<input type="text" name="m183r24" id="m183r24" style="width:349px; top:347px; left:539px;"/>
+<input type="text" name="m183r31" id="m183r31" style="width:138px; top:374px; left:91px;"/>
+<input type="text" name="m183r32" id="m183r32" style="width:138px; top:374px; left:240px;"/>
+<input type="text" name="m183r33" id="m183r33" style="width:138px; top:374px; left:389px;"/>
+<input type="text" name="m183r34" id="m183r34" style="width:349px; top:374px; left:539px;"/>
+<input type="text" name="m183r41" id="m183r41" style="width:138px; top:401px; left:91px;"/>
+<input type="text" name="m183r42" id="m183r42" style="width:138px; top:401px; left:240px;"/>
+<input type="text" name="m183r43" id="m183r43" style="width:138px; top:401px; left:389px;"/>
+<input type="text" name="m183r44" id="m183r44" style="width:349px; top:401px; left:539px;"/>
+<input type="text" name="m183r51" id="m183r51" style="width:138px; top:429px; left:91px;"/>
+<input type="text" name="m183r52" id="m183r52" style="width:138px; top:429px; left:240px;"/>
+<input type="text" name="m183r53" id="m183r53" style="width:138px; top:429px; left:389px;"/>
+<input type="text" name="m183r54" id="m183r54" style="width:349px; top:429px; left:539px;"/>
+<input type="text" name="m183r61" id="m183r61" style="width:138px; top:456px; left:91px;"/>
+<input type="text" name="m183r62" id="m183r62" style="width:138px; top:456px; left:240px;"/>
+<input type="text" name="m183r63" id="m183r63" style="width:138px; top:456px; left:389px;"/>
+<input type="text" name="m183r64" id="m183r64" style="width:349px; top:456px; left:539px;"/>
+<input type="text" name="m183r71" id="m183r71" style="width:138px; top:483px; left:91px;"/>
+<input type="text" name="m183r72" id="m183r72" style="width:138px; top:483px; left:240px;"/>
+<input type="text" name="m183r73" id="m183r73" style="width:138px; top:483px; left:389px;"/>
+<input type="text" name="m183r74" id="m183r74" style="width:349px; top:483px; left:539px;"/>
+<input type="text" name="m183r81" id="m183r81" style="width:138px; top:511px; left:91px;"/>
+<input type="text" name="m183r82" id="m183r82" style="width:138px; top:511px; left:240px;"/>
+<input type="text" name="m183r83" id="m183r83" style="width:138px; top:511px; left:389px;"/>
+<input type="text" name="m183r84" id="m183r84" style="width:349px; top:511px; left:539px;"/>
+<input type="text" name="m183r91" id="m183r91" style="width:138px; top:539px; left:91px;"/>
+<input type="text" name="m183r92" id="m183r92" style="width:138px; top:539px; left:240px;"/>
+<input type="text" name="m183r93" id="m183r93" style="width:138px; top:539px; left:389px;"/>
+<input type="text" name="m183r94" id="m183r94" style="width:349px; top:539px; left:539px;"/>
+<input type="text" name="m183r101" id="m183r101" style="width:138px; top:566px; left:91px;"/>
+<input type="text" name="m183r102" id="m183r102" style="width:138px; top:566px; left:240px;"/>
+<input type="text" name="m183r103" id="m183r103" style="width:138px; top:566px; left:389px;"/>
+<input type="text" name="m183r104" id="m183r104" style="width:349px; top:566px; left:539px;"/>
+<input type="text" name="m183r111" id="m183r111" style="width:138px; top:593px; left:91px;"/>
+<input type="text" name="m183r112" id="m183r112" style="width:138px; top:593px; left:240px;"/>
+<input type="text" name="m183r113" id="m183r113" style="width:138px; top:593px; left:389px;"/>
+<input type="text" name="m183r114" id="m183r114" style="width:349px; top:593px; left:539px;"/>
+<input type="text" name="m183r121" id="m183r121" style="width:138px; top:621px; left:91px;"/>
+<input type="text" name="m183r122" id="m183r122" style="width:138px; top:621px; left:240px;"/>
+<input type="text" name="m183r123" id="m183r123" style="width:138px; top:621px; left:389px;"/>
+<input type="text" name="m183r124" id="m183r124" style="width:349px; top:621px; left:539px;"/>
+<input type="text" name="m183r131" id="m183r131" style="width:138px; top:648px; left:91px;"/>
+<input type="text" name="m183r132" id="m183r132" style="width:138px; top:648px; left:240px;"/>
+<input type="text" name="m183r133" id="m183r133" style="width:138px; top:648px; left:389px;"/>
+<input type="text" name="m183r134" id="m183r134" style="width:349px; top:648px; left:539px;"/>
+<input type="text" name="m183r141" id="m183r141" style="width:138px; top:676px; left:91px;"/>
+<input type="text" name="m183r142" id="m183r142" style="width:138px; top:676px; left:240px;"/>
+<input type="text" name="m183r143" id="m183r143" style="width:138px; top:676px; left:389px;"/>
+<input type="text" name="m183r144" id="m183r144" style="width:349px; top:676px; left:539px;"/>
+<input type="text" name="m183r151" id="m183r151" style="width:138px; top:703px; left:91px;"/>
+<input type="text" name="m183r152" id="m183r152" style="width:138px; top:703px; left:240px;"/>
+<input type="text" name="m183r153" id="m183r153" style="width:138px; top:703px; left:389px;"/>
+<input type="text" name="m183r154" id="m183r154" style="width:349px; top:703px; left:539px;"/>
+<input type="text" name="m183r161" id="m183r161" style="width:138px; top:730px; left:91px;"/>
+<input type="text" name="m183r162" id="m183r162" style="width:138px; top:730px; left:240px;"/>
+<input type="text" name="m183r163" id="m183r163" style="width:138px; top:730px; left:389px;"/>
+<input type="text" name="m183r164" id="m183r164" style="width:349px; top:730px; left:539px;"/>
+<input type="text" name="m183r171" id="m183r171" style="width:138px; top:758px; left:91px;"/>
+<input type="text" name="m183r172" id="m183r172" style="width:138px; top:758px; left:240px;"/>
+<input type="text" name="m183r173" id="m183r173" style="width:138px; top:758px; left:389px;"/>
+<input type="text" name="m183r174" id="m183r174" style="width:349px; top:758px; left:539px;"/>
+<input type="text" name="m183r181" id="m183r181" style="width:138px; top:785px; left:91px;"/>
+<input type="text" name="m183r182" id="m183r182" style="width:138px; top:785px; left:240px;"/>
+<input type="text" name="m183r183" id="m183r183" style="width:138px; top:785px; left:389px;"/>
+<input type="text" name="m183r184" id="m183r184" style="width:349px; top:785px; left:539px;"/>
+<input type="text" name="m183r191" id="m183r191" style="width:138px; top:813px; left:91px;"/>
+<input type="text" name="m183r192" id="m183r192" style="width:138px; top:813px; left:240px;"/>
+<input type="text" name="m183r193" id="m183r193" style="width:138px; top:813px; left:389px;"/>
+<input type="text" name="m183r194" id="m183r194" style="width:349px; top:813px; left:539px;"/>
+<input type="text" name="m183r201" id="m183r201" style="width:138px; top:840px; left:91px;"/>
+<input type="text" name="m183r202" id="m183r202" style="width:138px; top:840px; left:240px;"/>
+<input type="text" name="m183r203" id="m183r203" style="width:138px; top:840px; left:389px;"/>
+<input type="text" name="m183r204" id="m183r204" style="width:349px; top:840px; left:539px;"/>
+<input type="text" name="m183r211" id="m183r211" style="width:138px; top:867px; left:91px;"/>
+<input type="text" name="m183r212" id="m183r212" style="width:138px; top:867px; left:240px;"/>
+<input type="text" name="m183r213" id="m183r213" style="width:138px; top:867px; left:389px;"/>
+<input type="text" name="m183r214" id="m183r214" style="width:349px; top:867px; left:539px;"/>
+<input type="text" name="m183r221" id="m183r221" style="width:138px; top:895px; left:91px;"/>
+<input type="text" name="m183r222" id="m183r222" style="width:138px; top:895px; left:240px;"/>
+<input type="text" name="m183r223" id="m183r223" style="width:138px; top:895px; left:389px;"/>
+<input type="text" name="m183r224" id="m183r224" style="width:349px; top:895px; left:539px;"/>
+<input type="text" name="m183r231" id="m183r231" style="width:138px; top:922px; left:91px;"/>
+<input type="text" name="m183r232" id="m183r232" style="width:138px; top:922px; left:240px;"/>
+<input type="text" name="m183r233" id="m183r233" style="width:138px; top:922px; left:389px;"/>
+<input type="text" name="m183r234" id="m183r234" style="width:349px; top:922px; left:539px;"/>
+<input type="text" name="m183r241" id="m183r241" style="width:138px; top:950px; left:91px;"/>
+<input type="text" name="m183r242" id="m183r242" style="width:138px; top:950px; left:240px;"/>
+<input type="text" name="m183r243" id="m183r243" style="width:138px; top:950px; left:389px;"/>
+<input type="text" name="m183r244" id="m183r244" style="width:349px; top:950px; left:539px;"/>
+<input type="text" name="m183r251" id="m183r251" style="width:138px; top:977px; left:91px;"/>
+<input type="text" name="m183r252" id="m183r252" style="width:138px; top:977px; left:240px;"/>
+<input type="text" name="m183r253" id="m183r253" style="width:138px; top:977px; left:389px;"/>
+<input type="text" name="m183r254" id="m183r254" style="width:349px; top:977px; left:539px;"/>
+<input type="text" name="m183r261" id="m183r261" style="width:138px; top:1005px; left:91px;"/>
+<input type="text" name="m183r262" id="m183r262" style="width:138px; top:1005px; left:240px;"/>
+<input type="text" name="m183r263" id="m183r263" style="width:138px; top:1005px; left:389px;"/>
+<input type="text" name="m183r264" id="m183r264" style="width:349px; top:1005px; left:539px;"/>
+<input type="text" name="m183r271" id="m183r271" style="width:138px; top:1032px; left:91px;"/>
+<input type="text" name="m183r272" id="m183r272" style="width:138px; top:1032px; left:240px;"/>
+<input type="text" name="m183r273" id="m183r273" style="width:138px; top:1032px; left:389px;"/>
+<input type="text" name="m183r274" id="m183r274" style="width:349px; top:1032px; left:539px;"/>
+<input type="text" name="m183r281" id="m183r281" style="width:138px; top:1059px; left:91px;"/>
+<input type="text" name="m183r282" id="m183r282" style="width:138px; top:1059px; left:240px;"/>
+<input type="text" name="m183r283" id="m183r283" style="width:138px; top:1059px; left:389px;"/>
+<input type="text" name="m183r284" id="m183r284" style="width:349px; top:1059px; left:539px;"/>
+<input type="text" name="m183r291" id="m183r291" style="width:138px; top:1087px; left:91px;"/>
+<input type="text" name="m183r292" id="m183r292" style="width:138px; top:1087px; left:240px;"/>
+<input type="text" name="m183r293" id="m183r293" style="width:138px; top:1087px; left:389px;"/>
+<input type="text" name="m183r294" id="m183r294" style="width:349px; top:1087px; left:539px;"/>
+<input type="text" name="m183r301" id="m183r301" style="width:138px; top:1114px; left:91px;"/>
+<input type="text" name="m183r302" id="m183r302" style="width:138px; top:1114px; left:240px;"/>
+<input type="text" name="m183r303" id="m183r303" style="width:138px; top:1114px; left:389px;"/>
+<input type="text" name="m183r304" id="m183r304" style="width:349px; top:1114px; left:539px;"/>
+<span class="text-echo" style="top:1146px; right:572px;"><?php echo $m183r992; ?></span>
+<span class="text-echo" style="top:1146px; right:422px;"><?php echo $m183r993; ?></span>
+<span class="text-echo" style="top:1146px; right:61px;"><?php echo $m183r994; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 7 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str7.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 7.strana 267kB">
+<img src="<?php echo $jpg_cesta; ?>_str7.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 7.strana 267kB">
+<span class="text-echo" style="top:97px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 184 -->
-<input type="text" name="m184r11" id="m184r11" style="width:107px; top:237px; left:91px;"/>
-<input type="text" name="m184r12" id="m184r12" style="width:102px; top:237px; left:209px;"/>
-<input type="text" name="m184r13" id="m184r13" style="width:101px; top:237px; left:323px;"/>
-<input type="text" name="m184r14" id="m184r14" style="width:203px; top:237px; left:436px;"/>
-<input type="text" name="m184r15" id="m184r15" style="width:112px; top:237px; left:651px;"/>
-<input type="text" name="m184r16" id="m184r16" style="width:112px; top:237px; left:776px;"/>
-<input type="text" name="m184r21" id="m184r21" style="width:107px; top:265px; left:91px;"/>
-<input type="text" name="m184r22" id="m184r22" style="width:102px; top:265px; left:209px;"/>
-<input type="text" name="m184r23" id="m184r23" style="width:101px; top:265px; left:323px;"/>
-<input type="text" name="m184r24" id="m184r24" style="width:203px; top:265px; left:436px;"/>
-<input type="text" name="m184r25" id="m184r25" style="width:112px; top:265px; left:651px;"/>
-<input type="text" name="m184r26" id="m184r26" style="width:112px; top:265px; left:776px;"/>
-<input type="text" name="m184r31" id="m184r31" style="width:107px; top:294px; left:91px;"/>
-<input type="text" name="m184r32" id="m184r32" style="width:102px; top:294px; left:209px;"/>
-<input type="text" name="m184r33" id="m184r33" style="width:101px; top:294px; left:323px;"/>
-<input type="text" name="m184r34" id="m184r34" style="width:203px; top:294px; left:436px;"/>
-<input type="text" name="m184r35" id="m184r35" style="width:112px; top:294px; left:651px;"/>
-<input type="text" name="m184r36" id="m184r36" style="width:112px; top:294px; left:776px;"/>
-<input type="text" name="m184r41" id="m184r41" style="width:107px; top:322px; left:91px;"/>
-<input type="text" name="m184r42" id="m184r42" style="width:102px; top:322px; left:209px;"/>
-<input type="text" name="m184r43" id="m184r43" style="width:101px; top:322px; left:323px;"/>
-<input type="text" name="m184r44" id="m184r44" style="width:203px; top:322px; left:436px;"/>
-<input type="text" name="m184r45" id="m184r45" style="width:112px; top:322px; left:651px;"/>
-<input type="text" name="m184r46" id="m184r46" style="width:112px; top:322px; left:776px;"/>
-<input type="text" name="m184r51" id="m184r51" style="width:107px; top:350px; left:91px;"/>
-<input type="text" name="m184r52" id="m184r52" style="width:102px; top:350px; left:209px;"/>
-<input type="text" name="m184r53" id="m184r53" style="width:101px; top:350px; left:323px;"/>
-<input type="text" name="m184r54" id="m184r54" style="width:203px; top:350px; left:436px;"/>
-<input type="text" name="m184r55" id="m184r55" style="width:112px; top:350px; left:651px;"/>
-<input type="text" name="m184r56" id="m184r56" style="width:112px; top:350px; left:776px;"/>
-<input type="text" name="m184r61" id="m184r61" style="width:107px; top:379px; left:91px;"/>
-<input type="text" name="m184r62" id="m184r62" style="width:102px; top:379px; left:209px;"/>
-<input type="text" name="m184r63" id="m184r63" style="width:101px; top:379px; left:323px;"/>
-<input type="text" name="m184r64" id="m184r64" style="width:203px; top:379px; left:436px;"/>
-<input type="text" name="m184r65" id="m184r65" style="width:112px; top:379px; left:651px;"/>
-<input type="text" name="m184r66" id="m184r66" style="width:112px; top:379px; left:776px;"/>
-<input type="text" name="m184r71" id="m184r71" style="width:107px; top:408px; left:91px;"/>
-<input type="text" name="m184r72" id="m184r72" style="width:102px; top:408px; left:209px;"/>
-<input type="text" name="m184r73" id="m184r73" style="width:101px; top:408px; left:323px;"/>
-<input type="text" name="m184r74" id="m184r74" style="width:203px; top:408px; left:436px;"/>
-<input type="text" name="m184r75" id="m184r75" style="width:112px; top:408px; left:651px;"/>
-<input type="text" name="m184r76" id="m184r76" style="width:112px; top:408px; left:776px;"/>
-<input type="text" name="m184r81" id="m184r81" style="width:107px; top:436px; left:91px;"/>
-<input type="text" name="m184r82" id="m184r82" style="width:102px; top:436px; left:209px;"/>
-<input type="text" name="m184r83" id="m184r83" style="width:101px; top:436px; left:323px;"/>
-<input type="text" name="m184r84" id="m184r84" style="width:203px; top:436px; left:436px;"/>
-<input type="text" name="m184r85" id="m184r85" style="width:112px; top:436px; left:651px;"/>
-<input type="text" name="m184r86" id="m184r86" style="width:112px; top:436px; left:776px;"/>
-<input type="text" name="m184r91" id="m184r91" style="width:107px; top:465px; left:91px;"/>
-<input type="text" name="m184r92" id="m184r92" style="width:102px; top:465px; left:209px;"/>
-<input type="text" name="m184r93" id="m184r93" style="width:101px; top:465px; left:323px;"/>
-<input type="text" name="m184r94" id="m184r94" style="width:203px; top:465px; left:436px;"/>
-<input type="text" name="m184r95" id="m184r95" style="width:112px; top:465px; left:651px;"/>
-<input type="text" name="m184r96" id="m184r96" style="width:112px; top:465px; left:776px;"/>
-<input type="text" name="m184r101" id="m184r101" style="width:107px; top:493px; left:91px;"/>
-<input type="text" name="m184r102" id="m184r102" style="width:102px; top:493px; left:209px;"/>
-<input type="text" name="m184r103" id="m184r103" style="width:101px; top:493px; left:323px;"/>
-<input type="text" name="m184r104" id="m184r104" style="width:203px; top:493px; left:436px;"/>
-<input type="text" name="m184r105" id="m184r105" style="width:112px; top:493px; left:651px;"/>
-<input type="text" name="m184r106" id="m184r106" style="width:112px; top:493px; left:776px;"/>
-<input type="text" name="m184r111" id="m184r111" style="width:107px; top:521px; left:91px;"/>
-<input type="text" name="m184r112" id="m184r112" style="width:102px; top:521px; left:209px;"/>
-<input type="text" name="m184r113" id="m184r113" style="width:101px; top:521px; left:323px;"/>
-<input type="text" name="m184r114" id="m184r114" style="width:203px; top:521px; left:436px;"/>
-<input type="text" name="m184r115" id="m184r115" style="width:112px; top:521px; left:651px;"/>
-<input type="text" name="m184r116" id="m184r116" style="width:112px; top:521px; left:776px;"/>
-<input type="text" name="m184r121" id="m184r121" style="width:107px; top:550px; left:91px;"/>
-<input type="text" name="m184r122" id="m184r122" style="width:102px; top:550px; left:209px;"/>
-<input type="text" name="m184r123" id="m184r123" style="width:101px; top:550px; left:323px;"/>
-<input type="text" name="m184r124" id="m184r124" style="width:203px; top:550px; left:436px;"/>
-<input type="text" name="m184r125" id="m184r125" style="width:112px; top:550px; left:651px;"/>
-<input type="text" name="m184r126" id="m184r126" style="width:112px; top:550px; left:776px;"/>
-<input type="text" name="m184r131" id="m184r131" style="width:107px; top:578px; left:91px;"/>
-<input type="text" name="m184r132" id="m184r132" style="width:102px; top:578px; left:209px;"/>
-<input type="text" name="m184r133" id="m184r133" style="width:101px; top:578px; left:323px;"/>
-<input type="text" name="m184r134" id="m184r134" style="width:203px; top:578px; left:436px;"/>
-<input type="text" name="m184r135" id="m184r135" style="width:112px; top:578px; left:651px;"/>
-<input type="text" name="m184r136" id="m184r136" style="width:112px; top:578px; left:776px;"/>
-<input type="text" name="m184r141" id="m184r141" style="width:107px; top:607px; left:91px;"/>
-<input type="text" name="m184r142" id="m184r142" style="width:102px; top:607px; left:209px;"/>
-<input type="text" name="m184r143" id="m184r143" style="width:101px; top:607px; left:323px;"/>
-<input type="text" name="m184r144" id="m184r144" style="width:203px; top:607px; left:436px;"/>
-<input type="text" name="m184r145" id="m184r145" style="width:112px; top:607px; left:651px;"/>
-<input type="text" name="m184r146" id="m184r146" style="width:112px; top:607px; left:776px;"/>
-<input type="text" name="m184r151" id="m184r151" style="width:107px; top:635px; left:91px;"/>
-<input type="text" name="m184r152" id="m184r152" style="width:102px; top:635px; left:209px;"/>
-<input type="text" name="m184r153" id="m184r153" style="width:101px; top:635px; left:323px;"/>
-<input type="text" name="m184r154" id="m184r154" style="width:203px; top:635px; left:436px;"/>
-<input type="text" name="m184r155" id="m184r155" style="width:112px; top:635px; left:651px;"/>
-<input type="text" name="m184r156" id="m184r156" style="width:112px; top:635px; left:776px;"/>
-<input type="text" name="m184r161" id="m184r161" style="width:107px; top:664px; left:91px;"/>
-<input type="text" name="m184r162" id="m184r162" style="width:102px; top:664px; left:209px;"/>
-<input type="text" name="m184r163" id="m184r163" style="width:101px; top:664px; left:323px;"/>
-<input type="text" name="m184r164" id="m184r164" style="width:203px; top:664px; left:436px;"/>
-<input type="text" name="m184r165" id="m184r165" style="width:112px; top:664px; left:651px;"/>
-<input type="text" name="m184r166" id="m184r166" style="width:112px; top:664px; left:776px;"/>
-<input type="text" name="m184r171" id="m184r171" style="width:107px; top:692px; left:91px;"/>
-<input type="text" name="m184r172" id="m184r172" style="width:102px; top:692px; left:209px;"/>
-<input type="text" name="m184r173" id="m184r173" style="width:101px; top:692px; left:323px;"/>
-<input type="text" name="m184r174" id="m184r174" style="width:203px; top:692px; left:436px;"/>
-<input type="text" name="m184r175" id="m184r175" style="width:112px; top:692px; left:651px;"/>
-<input type="text" name="m184r176" id="m184r176" style="width:112px; top:692px; left:776px;"/>
-<input type="text" name="m184r181" id="m184r181" style="width:107px; top:721px; left:91px;"/>
-<input type="text" name="m184r182" id="m184r182" style="width:102px; top:721px; left:209px;"/>
-<input type="text" name="m184r183" id="m184r183" style="width:101px; top:721px; left:323px;"/>
-<input type="text" name="m184r184" id="m184r184" style="width:203px; top:721px; left:436px;"/>
-<input type="text" name="m184r185" id="m184r185" style="width:112px; top:721px; left:651px;"/>
-<input type="text" name="m184r186" id="m184r186" style="width:112px; top:721px; left:776px;"/>
-<input type="text" name="m184r191" id="m184r191" style="width:107px; top:749px; left:91px;"/>
-<input type="text" name="m184r192" id="m184r192" style="width:102px; top:749px; left:209px;"/>
-<input type="text" name="m184r193" id="m184r193" style="width:101px; top:749px; left:323px;"/>
-<input type="text" name="m184r194" id="m184r194" style="width:203px; top:749px; left:436px;"/>
-<input type="text" name="m184r195" id="m184r195" style="width:112px; top:749px; left:651px;"/>
-<input type="text" name="m184r196" id="m184r196" style="width:112px; top:749px; left:776px;"/>
-<input type="text" name="m184r201" id="m184r201" style="width:107px; top:778px; left:91px;"/>
-<input type="text" name="m184r202" id="m184r202" style="width:102px; top:778px; left:209px;"/>
-<input type="text" name="m184r203" id="m184r203" style="width:101px; top:778px; left:323px;"/>
-<input type="text" name="m184r204" id="m184r204" style="width:203px; top:778px; left:436px;"/>
-<input type="text" name="m184r205" id="m184r205" style="width:112px; top:778px; left:651px;"/>
-<input type="text" name="m184r206" id="m184r206" style="width:112px; top:778px; left:776px;"/>
-<input type="text" name="m184r211" id="m184r211" style="width:107px; top:806px; left:91px;"/>
-<input type="text" name="m184r212" id="m184r212" style="width:102px; top:806px; left:209px;"/>
-<input type="text" name="m184r213" id="m184r213" style="width:101px; top:806px; left:323px;"/>
-<input type="text" name="m184r214" id="m184r214" style="width:203px; top:806px; left:436px;"/>
-<input type="text" name="m184r215" id="m184r215" style="width:112px; top:806px; left:651px;"/>
-<input type="text" name="m184r216" id="m184r216" style="width:112px; top:806px; left:776px;"/>
-<input type="text" name="m184r221" id="m184r221" style="width:107px; top:835px; left:91px;"/>
-<input type="text" name="m184r222" id="m184r222" style="width:102px; top:835px; left:209px;"/>
-<input type="text" name="m184r223" id="m184r223" style="width:101px; top:835px; left:323px;"/>
-<input type="text" name="m184r224" id="m184r224" style="width:203px; top:835px; left:436px;"/>
-<input type="text" name="m184r225" id="m184r225" style="width:112px; top:835px; left:651px;"/>
-<input type="text" name="m184r226" id="m184r226" style="width:112px; top:835px; left:776px;"/>
-<input type="text" name="m184r231" id="m184r231" style="width:107px; top:863px; left:91px;"/>
-<input type="text" name="m184r232" id="m184r232" style="width:102px; top:863px; left:209px;"/>
-<input type="text" name="m184r233" id="m184r233" style="width:101px; top:863px; left:323px;"/>
-<input type="text" name="m184r234" id="m184r234" style="width:203px; top:863px; left:436px;"/>
-<input type="text" name="m184r235" id="m184r235" style="width:112px; top:863px; left:651px;"/>
-<input type="text" name="m184r236" id="m184r236" style="width:112px; top:863px; left:776px;"/>
-<input type="text" name="m184r241" id="m184r241" style="width:107px; top:892px; left:91px;"/>
-<input type="text" name="m184r242" id="m184r242" style="width:102px; top:892px; left:209px;"/>
-<input type="text" name="m184r243" id="m184r243" style="width:101px; top:892px; left:323px;"/>
-<input type="text" name="m184r244" id="m184r244" style="width:203px; top:892px; left:436px;"/>
-<input type="text" name="m184r245" id="m184r245" style="width:112px; top:892px; left:651px;"/>
-<input type="text" name="m184r246" id="m184r246" style="width:112px; top:892px; left:776px;"/>
-<input type="text" name="m184r251" id="m184r251" style="width:107px; top:920px; left:91px;"/>
-<input type="text" name="m184r252" id="m184r252" style="width:102px; top:920px; left:209px;"/>
-<input type="text" name="m184r253" id="m184r253" style="width:101px; top:920px; left:323px;"/>
-<input type="text" name="m184r254" id="m184r254" style="width:203px; top:920px; left:436px;"/>
-<input type="text" name="m184r255" id="m184r255" style="width:112px; top:920px; left:651px;"/>
-<input type="text" name="m184r256" id="m184r256" style="width:112px; top:920px; left:776px;"/>
-<input type="text" name="m184r261" id="m184r261" style="width:107px; top:949px; left:91px;"/>
-<input type="text" name="m184r262" id="m184r262" style="width:102px; top:949px; left:209px;"/>
-<input type="text" name="m184r263" id="m184r263" style="width:101px; top:949px; left:323px;"/>
-<input type="text" name="m184r264" id="m184r264" style="width:203px; top:949px; left:436px;"/>
-<input type="text" name="m184r265" id="m184r265" style="width:112px; top:949px; left:651px;"/>
-<input type="text" name="m184r266" id="m184r266" style="width:112px; top:949px; left:776px;"/>
-<input type="text" name="m184r271" id="m184r271" style="width:107px; top:977px; left:91px;"/>
-<input type="text" name="m184r272" id="m184r272" style="width:102px; top:977px; left:209px;"/>
-<input type="text" name="m184r273" id="m184r273" style="width:101px; top:977px; left:323px;"/>
-<input type="text" name="m184r274" id="m184r274" style="width:203px; top:977px; left:436px;"/>
-<input type="text" name="m184r275" id="m184r275" style="width:112px; top:977px; left:651px;"/>
-<input type="text" name="m184r276" id="m184r276" style="width:112px; top:977px; left:776px;"/>
-<input type="text" name="m184r281" id="m184r281" style="width:107px; top:1006px; left:91px;"/>
-<input type="text" name="m184r282" id="m184r282" style="width:102px; top:1006px; left:209px;"/>
-<input type="text" name="m184r283" id="m184r283" style="width:101px; top:1006px; left:323px;"/>
-<input type="text" name="m184r284" id="m184r284" style="width:203px; top:1006px; left:436px;"/>
-<input type="text" name="m184r285" id="m184r285" style="width:112px; top:1006px; left:651px;"/>
-<input type="text" name="m184r286" id="m184r286" style="width:112px; top:1006px; left:776px;"/>
-<input type="text" name="m184r291" id="m184r291" style="width:107px; top:1034px; left:91px;"/>
-<input type="text" name="m184r292" id="m184r292" style="width:102px; top:1034px; left:209px;"/>
-<input type="text" name="m184r293" id="m184r293" style="width:101px; top:1034px; left:323px;"/>
-<input type="text" name="m184r294" id="m184r294" style="width:203px; top:1034px; left:436px;"/>
-<input type="text" name="m184r295" id="m184r295" style="width:112px; top:1034px; left:651px;"/>
-<input type="text" name="m184r296" id="m184r296" style="width:112px; top:1034px; left:776px;"/>
-<input type="text" name="m184r301" id="m184r301" style="width:107px; top:1063px; left:91px;"/>
-<input type="text" name="m184r302" id="m184r302" style="width:102px; top:1063px; left:209px;"/>
-<input type="text" name="m184r303" id="m184r303" style="width:101px; top:1063px; left:323px;"/>
-<input type="text" name="m184r304" id="m184r304" style="width:203px; top:1063px; left:436px;"/>
-<input type="text" name="m184r305" id="m184r305" style="width:112px; top:1063px; left:651px;"/>
-<input type="text" name="m184r306" id="m184r306" style="width:112px; top:1063px; left:776px;"/>
-<input type="text" name="m184r311" id="m184r311" style="width:107px; top:1091px; left:91px;"/>
-<input type="text" name="m184r312" id="m184r312" style="width:102px; top:1091px; left:209px;"/>
-<input type="text" name="m184r313" id="m184r313" style="width:101px; top:1091px; left:323px;"/>
-<input type="text" name="m184r314" id="m184r314" style="width:203px; top:1091px; left:436px;"/>
-<input type="text" name="m184r315" id="m184r315" style="width:112px; top:1091px; left:651px;"/>
-<input type="text" name="m184r316" id="m184r316" style="width:112px; top:1091px; left:776px;"/>
-<input type="text" name="m184r321" id="m184r321" style="width:107px; top:1120px; left:91px;"/>
-<input type="text" name="m184r322" id="m184r322" style="width:102px; top:1120px; left:209px;"/>
-<input type="text" name="m184r323" id="m184r323" style="width:101px; top:1120px; left:323px;"/>
-<input type="text" name="m184r324" id="m184r324" style="width:203px; top:1120px; left:436px;"/>
-<input type="text" name="m184r325" id="m184r325" style="width:112px; top:1120px; left:651px;"/>
-<input type="text" name="m184r326" id="m184r326" style="width:112px; top:1120px; left:776px;"/>
-<span class="text-echo" style="top:1152px; right:637px;"><?php echo $m184r992; ?></span>
-<span class="text-echo" style="top:1152px; right:524px;"><?php echo $m184r993; ?></span>
-<span class="text-echo" style="top:1152px; right:309px;"><?php echo $m184r994; ?></span>
-<span class="text-echo" style="top:1152px; right:184px;"><?php echo $m184r995; ?></span>
-<span class="text-echo" style="top:1152px; right:60px;"><?php echo $m184r996; ?></span>
+<input type="text" name="m184r11" id="m184r11" style="width:92px; top:299px; left:98px;"/>
+<input type="text" name="m184r12" id="m184r12" style="width:99px; top:299px; left:201px;"/>
+<input type="text" name="m184r13" id="m184r13" style="width:102px; top:299px; left:311px;"/>
+<input type="text" name="m184r14" id="m184r14" style="width:227px; top:299px; left:424px;"/>
+<input type="text" name="m184r15" id="m184r15" style="width:113px; top:299px; left:662px;"/>
+<input type="text" name="m184r16" id="m184r16" style="width:102px; top:299px; left:786px;"/>
+<input type="text" name="m184r21" id="m184r21" style="width:92px; top:325px; left:98px;"/>
+<input type="text" name="m184r22" id="m184r22" style="width:99px; top:325px; left:201px;"/>
+<input type="text" name="m184r23" id="m184r23" style="width:102px; top:325px; left:311px;"/>
+<input type="text" name="m184r24" id="m184r24" style="width:227px; top:325px; left:424px;"/>
+<input type="text" name="m184r25" id="m184r25" style="width:113px; top:325px; left:662px;"/>
+<input type="text" name="m184r26" id="m184r26" style="width:102px; top:325px; left:786px;"/>
+<input type="text" name="m184r31" id="m184r31" style="width:92px; top:352px; left:98px;"/>
+<input type="text" name="m184r32" id="m184r32" style="width:99px; top:352px; left:201px;"/>
+<input type="text" name="m184r33" id="m184r33" style="width:102px; top:352px; left:311px;"/>
+<input type="text" name="m184r34" id="m184r34" style="width:227px; top:352px; left:424px;"/>
+<input type="text" name="m184r35" id="m184r35" style="width:113px; top:352px; left:662px;"/>
+<input type="text" name="m184r36" id="m184r36" style="width:102px; top:352px; left:786px;"/>
+<input type="text" name="m184r41" id="m184r41" style="width:92px; top:377px; left:98px;"/>
+<input type="text" name="m184r42" id="m184r42" style="width:99px; top:377px; left:201px;"/>
+<input type="text" name="m184r43" id="m184r43" style="width:102px; top:377px; left:311px;"/>
+<input type="text" name="m184r44" id="m184r44" style="width:227px; top:377px; left:424px;"/>
+<input type="text" name="m184r45" id="m184r45" style="width:113px; top:377px; left:662px;"/>
+<input type="text" name="m184r46" id="m184r46" style="width:102px; top:377px; left:786px;"/>
+<input type="text" name="m184r51" id="m184r51" style="width:92px; top:404px; left:98px;"/>
+<input type="text" name="m184r52" id="m184r52" style="width:99px; top:404px; left:201px;"/>
+<input type="text" name="m184r53" id="m184r53" style="width:102px; top:404px; left:311px;"/>
+<input type="text" name="m184r54" id="m184r54" style="width:227px; top:404px; left:424px;"/>
+<input type="text" name="m184r55" id="m184r55" style="width:113px; top:404px; left:662px;"/>
+<input type="text" name="m184r56" id="m184r56" style="width:102px; top:404px; left:786px;"/>
+<input type="text" name="m184r61" id="m184r61" style="width:92px; top:430px; left:98px;"/>
+<input type="text" name="m184r62" id="m184r62" style="width:99px; top:430px; left:201px;"/>
+<input type="text" name="m184r63" id="m184r63" style="width:102px; top:430px; left:311px;"/>
+<input type="text" name="m184r64" id="m184r64" style="width:227px; top:430px; left:424px;"/>
+<input type="text" name="m184r65" id="m184r65" style="width:113px; top:430px; left:662px;"/>
+<input type="text" name="m184r66" id="m184r66" style="width:102px; top:430px; left:786px;"/>
+<input type="text" name="m184r71" id="m184r71" style="width:92px; top:456px; left:98px;"/>
+<input type="text" name="m184r72" id="m184r72" style="width:99px; top:456px; left:201px;"/>
+<input type="text" name="m184r73" id="m184r73" style="width:102px; top:456px; left:311px;"/>
+<input type="text" name="m184r74" id="m184r74" style="width:227px; top:456px; left:424px;"/>
+<input type="text" name="m184r75" id="m184r75" style="width:113px; top:456px; left:662px;"/>
+<input type="text" name="m184r76" id="m184r76" style="width:102px; top:456px; left:786px;"/>
+<input type="text" name="m184r81" id="m184r81" style="width:92px; top:482px; left:98px;"/>
+<input type="text" name="m184r82" id="m184r82" style="width:99px; top:482px; left:201px;"/>
+<input type="text" name="m184r83" id="m184r83" style="width:102px; top:482px; left:311px;"/>
+<input type="text" name="m184r84" id="m184r84" style="width:227px; top:482px; left:424px;"/>
+<input type="text" name="m184r85" id="m184r85" style="width:113px; top:482px; left:662px;"/>
+<input type="text" name="m184r86" id="m184r86" style="width:102px; top:482px; left:786px;"/>
+<input type="text" name="m184r91" id="m184r91" style="width:92px; top:508px; left:98px;"/>
+<input type="text" name="m184r92" id="m184r92" style="width:99px; top:508px; left:201px;"/>
+<input type="text" name="m184r93" id="m184r93" style="width:102px; top:508px; left:311px;"/>
+<input type="text" name="m184r94" id="m184r94" style="width:227px; top:508px; left:424px;"/>
+<input type="text" name="m184r95" id="m184r95" style="width:113px; top:508px; left:662px;"/>
+<input type="text" name="m184r96" id="m184r96" style="width:102px; top:508px; left:786px;"/>
+<input type="text" name="m184r101" id="m184r101" style="width:92px; top:534px; left:98px;"/>
+<input type="text" name="m184r102" id="m184r102" style="width:99px; top:534px; left:201px;"/>
+<input type="text" name="m184r103" id="m184r103" style="width:102px; top:534px; left:311px;"/>
+<input type="text" name="m184r104" id="m184r104" style="width:227px; top:534px; left:424px;"/>
+<input type="text" name="m184r105" id="m184r105" style="width:113px; top:534px; left:662px;"/>
+<input type="text" name="m184r106" id="m184r106" style="width:102px; top:534px; left:786px;"/>
+<input type="text" name="m184r111" id="m184r111" style="width:92px; top:560px; left:98px;"/>
+<input type="text" name="m184r112" id="m184r112" style="width:99px; top:560px; left:201px;"/>
+<input type="text" name="m184r113" id="m184r113" style="width:102px; top:560px; left:311px;"/>
+<input type="text" name="m184r114" id="m184r114" style="width:227px; top:560px; left:424px;"/>
+<input type="text" name="m184r115" id="m184r115" style="width:113px; top:560px; left:662px;"/>
+<input type="text" name="m184r116" id="m184r116" style="width:102px; top:560px; left:786px;"/>
+<input type="text" name="m184r121" id="m184r121" style="width:92px; top:586px; left:98px;"/>
+<input type="text" name="m184r122" id="m184r122" style="width:99px; top:586px; left:201px;"/>
+<input type="text" name="m184r123" id="m184r123" style="width:102px; top:586px; left:311px;"/>
+<input type="text" name="m184r124" id="m184r124" style="width:227px; top:586px; left:424px;"/>
+<input type="text" name="m184r125" id="m184r125" style="width:113px; top:586px; left:662px;"/>
+<input type="text" name="m184r126" id="m184r126" style="width:102px; top:586px; left:786px;"/>
+<input type="text" name="m184r131" id="m184r131" style="width:92px; top:612px; left:98px;"/>
+<input type="text" name="m184r132" id="m184r132" style="width:99px; top:612px; left:201px;"/>
+<input type="text" name="m184r133" id="m184r133" style="width:102px; top:612px; left:311px;"/>
+<input type="text" name="m184r134" id="m184r134" style="width:227px; top:612px; left:424px;"/>
+<input type="text" name="m184r135" id="m184r135" style="width:113px; top:612px; left:662px;"/>
+<input type="text" name="m184r136" id="m184r136" style="width:102px; top:612px; left:786px;"/>
+<input type="text" name="m184r141" id="m184r141" style="width:92px; top:638px; left:98px;"/>
+<input type="text" name="m184r142" id="m184r142" style="width:99px; top:638px; left:201px;"/>
+<input type="text" name="m184r143" id="m184r143" style="width:102px; top:638px; left:311px;"/>
+<input type="text" name="m184r144" id="m184r144" style="width:227px; top:638px; left:424px;"/>
+<input type="text" name="m184r145" id="m184r145" style="width:113px; top:638px; left:662px;"/>
+<input type="text" name="m184r146" id="m184r146" style="width:102px; top:638px; left:786px;"/>
+<input type="text" name="m184r151" id="m184r151" style="width:92px; top:665px; left:98px;"/>
+<input type="text" name="m184r152" id="m184r152" style="width:99px; top:665px; left:201px;"/>
+<input type="text" name="m184r153" id="m184r153" style="width:102px; top:665px; left:311px;"/>
+<input type="text" name="m184r154" id="m184r154" style="width:227px; top:665px; left:424px;"/>
+<input type="text" name="m184r155" id="m184r155" style="width:113px; top:665px; left:662px;"/>
+<input type="text" name="m184r156" id="m184r156" style="width:102px; top:665px; left:786px;"/>
+<input type="text" name="m184r161" id="m184r161" style="width:92px; top:691px; left:98px;"/>
+<input type="text" name="m184r162" id="m184r162" style="width:99px; top:691px; left:201px;"/>
+<input type="text" name="m184r163" id="m184r163" style="width:102px; top:691px; left:311px;"/>
+<input type="text" name="m184r164" id="m184r164" style="width:227px; top:691px; left:424px;"/>
+<input type="text" name="m184r165" id="m184r165" style="width:113px; top:691px; left:662px;"/>
+<input type="text" name="m184r166" id="m184r166" style="width:102px; top:691px; left:786px;"/>
+<input type="text" name="m184r171" id="m184r171" style="width:92px; top:717px; left:98px;"/>
+<input type="text" name="m184r172" id="m184r172" style="width:99px; top:717px; left:201px;"/>
+<input type="text" name="m184r173" id="m184r173" style="width:102px; top:717px; left:311px;"/>
+<input type="text" name="m184r174" id="m184r174" style="width:227px; top:717px; left:424px;"/>
+<input type="text" name="m184r175" id="m184r175" style="width:113px; top:717px; left:662px;"/>
+<input type="text" name="m184r176" id="m184r176" style="width:102px; top:717px; left:786px;"/>
+<input type="text" name="m184r181" id="m184r181" style="width:92px; top:743px; left:98px;"/>
+<input type="text" name="m184r182" id="m184r182" style="width:99px; top:743px; left:201px;"/>
+<input type="text" name="m184r183" id="m184r183" style="width:102px; top:743px; left:311px;"/>
+<input type="text" name="m184r184" id="m184r184" style="width:227px; top:743px; left:424px;"/>
+<input type="text" name="m184r185" id="m184r185" style="width:113px; top:743px; left:662px;"/>
+<input type="text" name="m184r186" id="m184r186" style="width:102px; top:743px; left:786px;"/>
+<input type="text" name="m184r191" id="m184r191" style="width:92px; top:769px; left:98px;"/>
+<input type="text" name="m184r192" id="m184r192" style="width:99px; top:769px; left:201px;"/>
+<input type="text" name="m184r193" id="m184r193" style="width:102px; top:769px; left:311px;"/>
+<input type="text" name="m184r194" id="m184r194" style="width:227px; top:769px; left:424px;"/>
+<input type="text" name="m184r195" id="m184r195" style="width:113px; top:769px; left:662px;"/>
+<input type="text" name="m184r196" id="m184r196" style="width:102px; top:769px; left:786px;"/>
+<input type="text" name="m184r201" id="m184r201" style="width:92px; top:795px; left:98px;"/>
+<input type="text" name="m184r202" id="m184r202" style="width:99px; top:795px; left:201px;"/>
+<input type="text" name="m184r203" id="m184r203" style="width:102px; top:795px; left:311px;"/>
+<input type="text" name="m184r204" id="m184r204" style="width:227px; top:795px; left:424px;"/>
+<input type="text" name="m184r205" id="m184r205" style="width:113px; top:795px; left:662px;"/>
+<input type="text" name="m184r206" id="m184r206" style="width:102px; top:795px; left:786px;"/>
+<input type="text" name="m184r211" id="m184r211" style="width:92px; top:821px; left:98px;"/>
+<input type="text" name="m184r212" id="m184r212" style="width:99px; top:821px; left:201px;"/>
+<input type="text" name="m184r213" id="m184r213" style="width:102px; top:821px; left:311px;"/>
+<input type="text" name="m184r214" id="m184r214" style="width:227px; top:821px; left:424px;"/>
+<input type="text" name="m184r215" id="m184r215" style="width:113px; top:821px; left:662px;"/>
+<input type="text" name="m184r216" id="m184r216" style="width:102px; top:821px; left:786px;"/>
+<input type="text" name="m184r221" id="m184r221" style="width:92px; top:847px; left:98px;"/>
+<input type="text" name="m184r222" id="m184r222" style="width:99px; top:847px; left:201px;"/>
+<input type="text" name="m184r223" id="m184r223" style="width:102px; top:847px; left:311px;"/>
+<input type="text" name="m184r224" id="m184r224" style="width:227px; top:847px; left:424px;"/>
+<input type="text" name="m184r225" id="m184r225" style="width:113px; top:847px; left:662px;"/>
+<input type="text" name="m184r226" id="m184r226" style="width:102px; top:847px; left:786px;"/>
+<input type="text" name="m184r231" id="m184r231" style="width:92px; top:873px; left:98px;"/>
+<input type="text" name="m184r232" id="m184r232" style="width:99px; top:873px; left:201px;"/>
+<input type="text" name="m184r233" id="m184r233" style="width:102px; top:873px; left:311px;"/>
+<input type="text" name="m184r234" id="m184r234" style="width:227px; top:873px; left:424px;"/>
+<input type="text" name="m184r235" id="m184r235" style="width:113px; top:873px; left:662px;"/>
+<input type="text" name="m184r236" id="m184r236" style="width:102px; top:873px; left:786px;"/>
+<input type="text" name="m184r241" id="m184r241" style="width:92px; top:899px; left:98px;"/>
+<input type="text" name="m184r242" id="m184r242" style="width:99px; top:899px; left:201px;"/>
+<input type="text" name="m184r243" id="m184r243" style="width:102px; top:899px; left:311px;"/>
+<input type="text" name="m184r244" id="m184r244" style="width:227px; top:899px; left:424px;"/>
+<input type="text" name="m184r245" id="m184r245" style="width:113px; top:899px; left:662px;"/>
+<input type="text" name="m184r246" id="m184r246" style="width:102px; top:899px; left:786px;"/>
+<input type="text" name="m184r251" id="m184r251" style="width:92px; top:926px; left:98px;"/>
+<input type="text" name="m184r252" id="m184r252" style="width:99px; top:926px; left:201px;"/>
+<input type="text" name="m184r253" id="m184r253" style="width:102px; top:926px; left:311px;"/>
+<input type="text" name="m184r254" id="m184r254" style="width:227px; top:926px; left:424px;"/>
+<input type="text" name="m184r255" id="m184r255" style="width:113px; top:926px; left:662px;"/>
+<input type="text" name="m184r256" id="m184r256" style="width:102px; top:926px; left:786px;"/>
+<input type="text" name="m184r261" id="m184r261" style="width:92px; top:951px; left:98px;"/>
+<input type="text" name="m184r262" id="m184r262" style="width:99px; top:951px; left:201px;"/>
+<input type="text" name="m184r263" id="m184r263" style="width:102px; top:951px; left:311px;"/>
+<input type="text" name="m184r264" id="m184r264" style="width:227px; top:951px; left:424px;"/>
+<input type="text" name="m184r265" id="m184r265" style="width:113px; top:951px; left:662px;"/>
+<input type="text" name="m184r266" id="m184r266" style="width:102px; top:951px; left:786px;"/>
+<input type="text" name="m184r271" id="m184r271" style="width:92px; top:978px; left:98px;"/>
+<input type="text" name="m184r272" id="m184r272" style="width:99px; top:978px; left:201px;"/>
+<input type="text" name="m184r273" id="m184r273" style="width:102px; top:978px; left:311px;"/>
+<input type="text" name="m184r274" id="m184r274" style="width:227px; top:978px; left:424px;"/>
+<input type="text" name="m184r275" id="m184r275" style="width:113px; top:978px; left:662px;"/>
+<input type="text" name="m184r276" id="m184r276" style="width:102px; top:978px; left:786px;"/>
+<input type="text" name="m184r281" id="m184r281" style="width:92px; top:1004px; left:98px;"/>
+<input type="text" name="m184r282" id="m184r282" style="width:99px; top:1004px; left:201px;"/>
+<input type="text" name="m184r283" id="m184r283" style="width:102px; top:1004px; left:311px;"/>
+<input type="text" name="m184r284" id="m184r284" style="width:227px; top:1004px; left:424px;"/>
+<input type="text" name="m184r285" id="m184r285" style="width:113px; top:1004px; left:662px;"/>
+<input type="text" name="m184r286" id="m184r286" style="width:102px; top:1004px; left:786px;"/>
+<input type="text" name="m184r291" id="m184r291" style="width:92px; top:1030px; left:98px;"/>
+<input type="text" name="m184r292" id="m184r292" style="width:99px; top:1030px; left:201px;"/>
+<input type="text" name="m184r293" id="m184r293" style="width:102px; top:1030px; left:311px;"/>
+<input type="text" name="m184r294" id="m184r294" style="width:227px; top:1030px; left:424px;"/>
+<input type="text" name="m184r295" id="m184r295" style="width:113px; top:1030px; left:662px;"/>
+<input type="text" name="m184r296" id="m184r296" style="width:102px; top:1030px; left:786px;"/>
+<input type="text" name="m184r301" id="m184r301" style="width:92px; top:1056px; left:98px;"/>
+<input type="text" name="m184r302" id="m184r302" style="width:99px; top:1056px; left:201px;"/>
+<input type="text" name="m184r303" id="m184r303" style="width:102px; top:1056px; left:311px;"/>
+<input type="text" name="m184r304" id="m184r304" style="width:227px; top:1056px; left:424px;"/>
+<input type="text" name="m184r305" id="m184r305" style="width:113px; top:1056px; left:662px;"/>
+<input type="text" name="m184r306" id="m184r306" style="width:102px; top:1056px; left:786px;"/>
+<input type="text" name="m184r311" id="m184r311" style="width:92px; top:1082px; left:98px;"/>
+<input type="text" name="m184r312" id="m184r312" style="width:99px; top:1082px; left:201px;"/>
+<input type="text" name="m184r313" id="m184r313" style="width:102px; top:1082px; left:311px;"/>
+<input type="text" name="m184r314" id="m184r314" style="width:227px; top:1082px; left:424px;"/>
+<input type="text" name="m184r315" id="m184r315" style="width:113px; top:1082px; left:662px;"/>
+<input type="text" name="m184r316" id="m184r316" style="width:102px; top:1082px; left:786px;"/>
+<input type="text" name="m184r321" id="m184r321" style="width:92px; top:1108px; left:98px;"/>
+<input type="text" name="m184r322" id="m184r322" style="width:99px; top:1108px; left:201px;"/>
+<input type="text" name="m184r323" id="m184r323" style="width:102px; top:1108px; left:311px;"/>
+<input type="text" name="m184r324" id="m184r324" style="width:227px; top:1108px; left:424px;"/>
+<input type="text" name="m184r325" id="m184r325" style="width:113px; top:1108px; left:662px;"/>
+<input type="text" name="m184r326" id="m184r326" style="width:102px; top:1108px; left:786px;"/>
+<span class="text-echo" style="top:1139px; right:649px;"><?php echo $m184r992; ?></span>
+<span class="text-echo" style="top:1139px; right:536px;"><?php echo $m184r993; ?></span>
+<span class="text-echo" style="top:1139px; right:299px;"><?php echo $m184r994; ?></span>
+<span class="text-echo" style="top:1139px; right:175px;"><?php echo $m184r995; ?></span>
+<span class="text-echo" style="top:1139px; right:62px;"><?php echo $m184r996; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 8 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str8.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 8.strana 254kB">
+<img src="<?php echo $jpg_cesta; ?>_str8.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 8.strana 254kB">
+<span class="text-echo" style="top:78px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 185 -->
-<input type="text" name="m185r11" id="m185r11" style="width:107px; top:219px; left:91px;"/>
-<input type="text" name="m185r12" id="m185r12" style="width:113px; top:219px; left:209px;"/>
-<input type="text" name="m185r13" id="m185r13" style="width:101px; top:219px; left:334px;"/>
-<input type="text" name="m185r14" id="m185r14" style="width:112px; top:219px; left:448px;"/>
-<input type="text" name="m185r15" id="m185r15" style="width:113px; top:219px; left:572px;"/>
-<input type="text" name="m185r16" id="m185r16" style="width:90px; top:219px; left:696px;"/>
-<input type="text" name="m185r17" id="m185r17" style="width:90px; top:219px; left:798px;"/>
-<input type="text" name="m185r21" id="m185r21" style="width:107px; top:247px; left:91px;"/>
-<input type="text" name="m185r22" id="m185r22" style="width:113px; top:247px; left:209px;"/>
-<input type="text" name="m185r23" id="m185r23" style="width:101px; top:247px; left:334px;"/>
-<input type="text" name="m185r24" id="m185r24" style="width:112px; top:247px; left:448px;"/>
-<input type="text" name="m185r25" id="m185r25" style="width:113px; top:247px; left:572px;"/>
-<input type="text" name="m185r26" id="m185r26" style="width:90px; top:247px; left:696px;"/>
-<input type="text" name="m185r27" id="m185r27" style="width:90px; top:247px; left:798px;"/>
-<input type="text" name="m185r31" id="m185r31" style="width:107px; top:276px; left:91px;"/>
-<input type="text" name="m185r32" id="m185r32" style="width:113px; top:276px; left:209px;"/>
-<input type="text" name="m185r33" id="m185r33" style="width:101px; top:276px; left:334px;"/>
-<input type="text" name="m185r34" id="m185r34" style="width:112px; top:276px; left:448px;"/>
-<input type="text" name="m185r35" id="m185r35" style="width:113px; top:276px; left:572px;"/>
-<input type="text" name="m185r36" id="m185r36" style="width:90px; top:276px; left:696px;"/>
-<input type="text" name="m185r37" id="m185r37" style="width:90px; top:276px; left:798px;"/>
-<input type="text" name="m185r41" id="m185r41" style="width:107px; top:304px; left:91px;"/>
-<input type="text" name="m185r42" id="m185r42" style="width:113px; top:304px; left:209px;"/>
-<input type="text" name="m185r43" id="m185r43" style="width:101px; top:304px; left:334px;"/>
-<input type="text" name="m185r44" id="m185r44" style="width:112px; top:304px; left:448px;"/>
-<input type="text" name="m185r45" id="m185r45" style="width:113px; top:304px; left:572px;"/>
-<input type="text" name="m185r46" id="m185r46" style="width:90px; top:304px; left:696px;"/>
-<input type="text" name="m185r47" id="m185r47" style="width:90px; top:304px; left:798px;"/>
-<input type="text" name="m185r51" id="m185r51" style="width:107px; top:332px; left:91px;"/>
-<input type="text" name="m185r52" id="m185r52" style="width:113px; top:332px; left:209px;"/>
-<input type="text" name="m185r53" id="m185r53" style="width:101px; top:332px; left:334px;"/>
-<input type="text" name="m185r54" id="m185r54" style="width:112px; top:332px; left:448px;"/>
-<input type="text" name="m185r55" id="m185r55" style="width:113px; top:332px; left:572px;"/>
-<input type="text" name="m185r56" id="m185r56" style="width:90px; top:332px; left:696px;"/>
-<input type="text" name="m185r57" id="m185r57" style="width:90px; top:332px; left:798px;"/>
-<input type="text" name="m185r61" id="m185r61" style="width:107px; top:361px; left:91px;"/>
-<input type="text" name="m185r62" id="m185r62" style="width:113px; top:361px; left:209px;"/>
-<input type="text" name="m185r63" id="m185r63" style="width:101px; top:361px; left:334px;"/>
-<input type="text" name="m185r64" id="m185r64" style="width:112px; top:361px; left:448px;"/>
-<input type="text" name="m185r65" id="m185r65" style="width:113px; top:361px; left:572px;"/>
-<input type="text" name="m185r66" id="m185r66" style="width:90px; top:361px; left:696px;"/>
-<input type="text" name="m185r67" id="m185r67" style="width:90px; top:361px; left:798px;"/>
-<input type="text" name="m185r71" id="m185r71" style="width:107px; top:390px; left:91px;"/>
-<input type="text" name="m185r72" id="m185r72" style="width:113px; top:390px; left:209px;"/>
-<input type="text" name="m185r73" id="m185r73" style="width:101px; top:390px; left:334px;"/>
-<input type="text" name="m185r74" id="m185r74" style="width:112px; top:390px; left:448px;"/>
-<input type="text" name="m185r75" id="m185r75" style="width:113px; top:390px; left:572px;"/>
-<input type="text" name="m185r76" id="m185r76" style="width:90px; top:390px; left:696px;"/>
-<input type="text" name="m185r77" id="m185r77" style="width:90px; top:390px; left:798px;"/>
-<input type="text" name="m185r81" id="m185r81" style="width:107px; top:418px; left:91px;"/>
-<input type="text" name="m185r82" id="m185r82" style="width:113px; top:418px; left:209px;"/>
-<input type="text" name="m185r83" id="m185r83" style="width:101px; top:418px; left:334px;"/>
-<input type="text" name="m185r84" id="m185r84" style="width:112px; top:418px; left:448px;"/>
-<input type="text" name="m185r85" id="m185r85" style="width:113px; top:418px; left:572px;"/>
-<input type="text" name="m185r86" id="m185r86" style="width:90px; top:418px; left:696px;"/>
-<input type="text" name="m185r87" id="m185r87" style="width:90px; top:418px; left:798px;"/>
-<input type="text" name="m185r91" id="m185r91" style="width:107px; top:446px; left:91px;"/>
-<input type="text" name="m185r92" id="m185r92" style="width:113px; top:446px; left:209px;"/>
-<input type="text" name="m185r93" id="m185r93" style="width:101px; top:446px; left:334px;"/>
-<input type="text" name="m185r94" id="m185r94" style="width:112px; top:446px; left:448px;"/>
-<input type="text" name="m185r95" id="m185r95" style="width:113px; top:446px; left:572px;"/>
-<input type="text" name="m185r96" id="m185r96" style="width:90px; top:446px; left:696px;"/>
-<input type="text" name="m185r97" id="m185r97" style="width:90px; top:446px; left:798px;"/>
-<input type="text" name="m185r101" id="m185r101" style="width:107px; top:475px; left:91px;"/>
-<input type="text" name="m185r102" id="m185r102" style="width:113px; top:475px; left:209px;"/>
-<input type="text" name="m185r103" id="m185r103" style="width:101px; top:475px; left:334px;"/>
-<input type="text" name="m185r104" id="m185r104" style="width:112px; top:475px; left:448px;"/>
-<input type="text" name="m185r105" id="m185r105" style="width:113px; top:475px; left:572px;"/>
-<input type="text" name="m185r106" id="m185r106" style="width:90px; top:475px; left:696px;"/>
-<input type="text" name="m185r107" id="m185r107" style="width:90px; top:475px; left:798px;"/>
-<input type="text" name="m185r111" id="m185r111" style="width:107px; top:504px; left:91px;"/>
-<input type="text" name="m185r112" id="m185r112" style="width:113px; top:504px; left:209px;"/>
-<input type="text" name="m185r113" id="m185r113" style="width:101px; top:504px; left:334px;"/>
-<input type="text" name="m185r114" id="m185r114" style="width:112px; top:504px; left:448px;"/>
-<input type="text" name="m185r115" id="m185r115" style="width:113px; top:504px; left:572px;"/>
-<input type="text" name="m185r116" id="m185r116" style="width:90px; top:504px; left:696px;"/>
-<input type="text" name="m185r117" id="m185r117" style="width:90px; top:504px; left:798px;"/>
-<input type="text" name="m185r121" id="m185r121" style="width:107px; top:532px; left:91px;"/>
-<input type="text" name="m185r122" id="m185r122" style="width:113px; top:532px; left:209px;"/>
-<input type="text" name="m185r123" id="m185r123" style="width:101px; top:532px; left:334px;"/>
-<input type="text" name="m185r124" id="m185r124" style="width:112px; top:532px; left:448px;"/>
-<input type="text" name="m185r125" id="m185r125" style="width:113px; top:532px; left:572px;"/>
-<input type="text" name="m185r126" id="m185r126" style="width:90px; top:532px; left:696px;"/>
-<input type="text" name="m185r127" id="m185r127" style="width:90px; top:532px; left:798px;"/>
-<input type="text" name="m185r131" id="m185r131" style="width:107px; top:560px; left:91px;"/>
-<input type="text" name="m185r132" id="m185r132" style="width:113px; top:560px; left:209px;"/>
-<input type="text" name="m185r133" id="m185r133" style="width:101px; top:560px; left:334px;"/>
-<input type="text" name="m185r134" id="m185r134" style="width:112px; top:560px; left:448px;"/>
-<input type="text" name="m185r135" id="m185r135" style="width:113px; top:560px; left:572px;"/>
-<input type="text" name="m185r136" id="m185r136" style="width:90px; top:560px; left:696px;"/>
-<input type="text" name="m185r137" id="m185r137" style="width:90px; top:560px; left:798px;"/>
-<input type="text" name="m185r141" id="m185r141" style="width:107px; top:589px; left:91px;"/>
-<input type="text" name="m185r142" id="m185r142" style="width:113px; top:589px; left:209px;"/>
-<input type="text" name="m185r143" id="m185r143" style="width:101px; top:589px; left:334px;"/>
-<input type="text" name="m185r144" id="m185r144" style="width:112px; top:589px; left:448px;"/>
-<input type="text" name="m185r145" id="m185r145" style="width:113px; top:589px; left:572px;"/>
-<input type="text" name="m185r146" id="m185r146" style="width:90px; top:589px; left:696px;"/>
-<input type="text" name="m185r147" id="m185r147" style="width:90px; top:589px; left:798px;"/>
-<input type="text" name="m185r151" id="m185r151" style="width:107px; top:617px; left:91px;"/>
-<input type="text" name="m185r152" id="m185r152" style="width:113px; top:617px; left:209px;"/>
-<input type="text" name="m185r153" id="m185r153" style="width:101px; top:617px; left:334px;"/>
-<input type="text" name="m185r154" id="m185r154" style="width:112px; top:617px; left:448px;"/>
-<input type="text" name="m185r155" id="m185r155" style="width:113px; top:617px; left:572px;"/>
-<input type="text" name="m185r156" id="m185r156" style="width:90px; top:617px; left:696px;"/>
-<input type="text" name="m185r157" id="m185r157" style="width:90px; top:617px; left:798px;"/>
-<input type="text" name="m185r161" id="m185r161" style="width:107px; top:646px; left:91px;"/>
-<input type="text" name="m185r162" id="m185r162" style="width:113px; top:646px; left:209px;"/>
-<input type="text" name="m185r163" id="m185r163" style="width:101px; top:646px; left:334px;"/>
-<input type="text" name="m185r164" id="m185r164" style="width:112px; top:646px; left:448px;"/>
-<input type="text" name="m185r165" id="m185r165" style="width:113px; top:646px; left:572px;"/>
-<input type="text" name="m185r166" id="m185r166" style="width:90px; top:646px; left:696px;"/>
-<input type="text" name="m185r167" id="m185r167" style="width:90px; top:646px; left:798px;"/>
-<input type="text" name="m185r171" id="m185r171" style="width:107px; top:675px; left:91px;"/>
-<input type="text" name="m185r172" id="m185r172" style="width:113px; top:675px; left:209px;"/>
-<input type="text" name="m185r173" id="m185r173" style="width:101px; top:675px; left:334px;"/>
-<input type="text" name="m185r174" id="m185r174" style="width:112px; top:675px; left:448px;"/>
-<input type="text" name="m185r175" id="m185r175" style="width:113px; top:675px; left:572px;"/>
-<input type="text" name="m185r176" id="m185r176" style="width:90px; top:675px; left:696px;"/>
-<input type="text" name="m185r177" id="m185r177" style="width:90px; top:675px; left:798px;"/>
-<input type="text" name="m185r181" id="m185r181" style="width:107px; top:703px; left:91px;"/>
-<input type="text" name="m185r182" id="m185r182" style="width:113px; top:703px; left:209px;"/>
-<input type="text" name="m185r183" id="m185r183" style="width:101px; top:703px; left:334px;"/>
-<input type="text" name="m185r184" id="m185r184" style="width:112px; top:703px; left:448px;"/>
-<input type="text" name="m185r185" id="m185r185" style="width:113px; top:703px; left:572px;"/>
-<input type="text" name="m185r186" id="m185r186" style="width:90px; top:703px; left:696px;"/>
-<input type="text" name="m185r187" id="m185r187" style="width:90px; top:703px; left:798px;"/>
-<input type="text" name="m185r191" id="m185r191" style="width:107px; top:731px; left:91px;"/>
-<input type="text" name="m185r192" id="m185r192" style="width:113px; top:731px; left:209px;"/>
-<input type="text" name="m185r193" id="m185r193" style="width:101px; top:731px; left:334px;"/>
-<input type="text" name="m185r194" id="m185r194" style="width:112px; top:731px; left:448px;"/>
-<input type="text" name="m185r195" id="m185r195" style="width:113px; top:731px; left:572px;"/>
-<input type="text" name="m185r196" id="m185r196" style="width:90px; top:731px; left:696px;"/>
-<input type="text" name="m185r197" id="m185r197" style="width:90px; top:731px; left:798px;"/>
-<input type="text" name="m185r201" id="m185r201" style="width:107px; top:760px; left:91px;"/>
-<input type="text" name="m185r202" id="m185r202" style="width:113px; top:760px; left:209px;"/>
-<input type="text" name="m185r203" id="m185r203" style="width:101px; top:760px; left:334px;"/>
-<input type="text" name="m185r204" id="m185r204" style="width:112px; top:760px; left:448px;"/>
-<input type="text" name="m185r205" id="m185r205" style="width:113px; top:760px; left:572px;"/>
-<input type="text" name="m185r206" id="m185r206" style="width:90px; top:760px; left:696px;"/>
-<input type="text" name="m185r207" id="m185r207" style="width:90px; top:760px; left:798px;"/>
-<input type="text" name="m185r211" id="m185r211" style="width:107px; top:788px; left:91px;"/>
-<input type="text" name="m185r212" id="m185r212" style="width:113px; top:788px; left:209px;"/>
-<input type="text" name="m185r213" id="m185r213" style="width:101px; top:788px; left:334px;"/>
-<input type="text" name="m185r214" id="m185r214" style="width:112px; top:788px; left:448px;"/>
-<input type="text" name="m185r215" id="m185r215" style="width:113px; top:788px; left:572px;"/>
-<input type="text" name="m185r216" id="m185r216" style="width:90px; top:788px; left:696px;"/>
-<input type="text" name="m185r217" id="m185r217" style="width:90px; top:788px; left:798px;"/>
-<input type="text" name="m185r221" id="m185r221" style="width:107px; top:817px; left:91px;"/>
-<input type="text" name="m185r222" id="m185r222" style="width:113px; top:817px; left:209px;"/>
-<input type="text" name="m185r223" id="m185r223" style="width:101px; top:817px; left:334px;"/>
-<input type="text" name="m185r224" id="m185r224" style="width:112px; top:817px; left:448px;"/>
-<input type="text" name="m185r225" id="m185r225" style="width:113px; top:817px; left:572px;"/>
-<input type="text" name="m185r226" id="m185r226" style="width:90px; top:817px; left:696px;"/>
-<input type="text" name="m185r227" id="m185r227" style="width:90px; top:817px; left:798px;"/>
-<input type="text" name="m185r231" id="m185r231" style="width:107px; top:845px; left:91px;"/>
-<input type="text" name="m185r232" id="m185r232" style="width:113px; top:845px; left:209px;"/>
-<input type="text" name="m185r233" id="m185r233" style="width:101px; top:845px; left:334px;"/>
-<input type="text" name="m185r234" id="m185r234" style="width:112px; top:845px; left:448px;"/>
-<input type="text" name="m185r235" id="m185r235" style="width:113px; top:845px; left:572px;"/>
-<input type="text" name="m185r236" id="m185r236" style="width:90px; top:845px; left:696px;"/>
-<input type="text" name="m185r237" id="m185r237" style="width:90px; top:845px; left:798px;"/>
-<input type="text" name="m185r241" id="m185r241" style="width:107px; top:874px; left:91px;"/>
-<input type="text" name="m185r242" id="m185r242" style="width:113px; top:874px; left:209px;"/>
-<input type="text" name="m185r243" id="m185r243" style="width:101px; top:874px; left:334px;"/>
-<input type="text" name="m185r244" id="m185r244" style="width:112px; top:874px; left:448px;"/>
-<input type="text" name="m185r245" id="m185r245" style="width:113px; top:874px; left:572px;"/>
-<input type="text" name="m185r246" id="m185r246" style="width:90px; top:874px; left:696px;"/>
-<input type="text" name="m185r247" id="m185r247" style="width:90px; top:874px; left:798px;"/>
-<input type="text" name="m185r251" id="m185r251" style="width:107px; top:902px; left:91px;"/>
-<input type="text" name="m185r252" id="m185r252" style="width:113px; top:902px; left:209px;"/>
-<input type="text" name="m185r253" id="m185r253" style="width:101px; top:902px; left:334px;"/>
-<input type="text" name="m185r254" id="m185r254" style="width:112px; top:902px; left:448px;"/>
-<input type="text" name="m185r255" id="m185r255" style="width:113px; top:902px; left:572px;"/>
-<input type="text" name="m185r256" id="m185r256" style="width:90px; top:902px; left:696px;"/>
-<input type="text" name="m185r257" id="m185r257" style="width:90px; top:902px; left:798px;"/>
-<input type="text" name="m185r261" id="m185r261" style="width:107px; top:931px; left:91px;"/>
-<input type="text" name="m185r262" id="m185r262" style="width:113px; top:931px; left:209px;"/>
-<input type="text" name="m185r263" id="m185r263" style="width:101px; top:931px; left:334px;"/>
-<input type="text" name="m185r264" id="m185r264" style="width:112px; top:931px; left:448px;"/>
-<input type="text" name="m185r265" id="m185r265" style="width:113px; top:931px; left:572px;"/>
-<input type="text" name="m185r266" id="m185r266" style="width:90px; top:931px; left:696px;"/>
-<input type="text" name="m185r267" id="m185r267" style="width:90px; top:931px; left:798px;"/>
-<input type="text" name="m185r271" id="m185r271" style="width:107px; top:959px; left:91px;"/>
-<input type="text" name="m185r272" id="m185r272" style="width:113px; top:959px; left:209px;"/>
-<input type="text" name="m185r273" id="m185r273" style="width:101px; top:959px; left:334px;"/>
-<input type="text" name="m185r274" id="m185r274" style="width:112px; top:959px; left:448px;"/>
-<input type="text" name="m185r275" id="m185r275" style="width:113px; top:959px; left:572px;"/>
-<input type="text" name="m185r276" id="m185r276" style="width:90px; top:959px; left:696px;"/>
-<input type="text" name="m185r277" id="m185r277" style="width:90px; top:959px; left:798px;"/>
-<input type="text" name="m185r281" id="m185r281" style="width:107px; top:988px; left:91px;"/>
-<input type="text" name="m185r282" id="m185r282" style="width:113px; top:988px; left:209px;"/>
-<input type="text" name="m185r283" id="m185r283" style="width:101px; top:988px; left:334px;"/>
-<input type="text" name="m185r284" id="m185r284" style="width:112px; top:988px; left:448px;"/>
-<input type="text" name="m185r285" id="m185r285" style="width:113px; top:988px; left:572px;"/>
-<input type="text" name="m185r286" id="m185r286" style="width:90px; top:988px; left:696px;"/>
-<input type="text" name="m185r287" id="m185r287" style="width:90px; top:988px; left:798px;"/>
-<input type="text" name="m185r291" id="m185r291" style="width:107px; top:1016px; left:91px;"/>
-<input type="text" name="m185r292" id="m185r292" style="width:113px; top:1016px; left:209px;"/>
-<input type="text" name="m185r293" id="m185r293" style="width:101px; top:1016px; left:334px;"/>
-<input type="text" name="m185r294" id="m185r294" style="width:112px; top:1016px; left:448px;"/>
-<input type="text" name="m185r295" id="m185r295" style="width:113px; top:1016px; left:572px;"/>
-<input type="text" name="m185r296" id="m185r296" style="width:90px; top:1016px; left:696px;"/>
-<input type="text" name="m185r297" id="m185r297" style="width:90px; top:1016px; left:798px;"/>
-<input type="text" name="m185r301" id="m185r301" style="width:107px; top:1045px; left:91px;"/>
-<input type="text" name="m185r302" id="m185r302" style="width:113px; top:1045px; left:209px;"/>
-<input type="text" name="m185r303" id="m185r303" style="width:101px; top:1045px; left:334px;"/>
-<input type="text" name="m185r304" id="m185r304" style="width:112px; top:1045px; left:448px;"/>
-<input type="text" name="m185r305" id="m185r305" style="width:113px; top:1045px; left:572px;"/>
-<input type="text" name="m185r306" id="m185r306" style="width:90px; top:1045px; left:696px;"/>
-<input type="text" name="m185r307" id="m185r307" style="width:90px; top:1045px; left:798px;"/>
-<span class="text-echo" style="top:1078px; right:627px;"><?php echo $m185r992; ?></span>
-<span class="text-echo" style="top:1078px; right:514px;"><?php echo $m185r993; ?></span>
-<span class="text-echo" style="top:1078px; right:388px;"><?php echo $m185r994; ?></span>
-<span class="text-echo" style="top:1078px; right:263px;"><?php echo $m185r995; ?></span>
-<span class="text-echo" style="top:1078px; right:162px;"><?php echo $m185r996; ?></span>
-<span class="text-echo" style="top:1078px; right:60px;"><?php echo $m185r997; ?></span>
+<input type="text" name="m185r11" id="m185r11" style="width:87px; top:289px; left:100px;"/>
+<input type="text" name="m185r12" id="m185r12" style="width:103px; top:289px; left:197px;"/>
+<input type="text" name="m185r13" id="m185r13" style="width:102px; top:289px; left:311px;"/>
+<input type="text" name="m185r14" id="m185r14" style="width:113px; top:289px; left:424px;"/>
+<input type="text" name="m185r15" id="m185r15" style="width:113px; top:289px; left:549px;"/>
+<input type="text" name="m185r16" id="m185r16" style="width:102px; top:289px; left:673px;"/>
+<input type="text" name="m185r17" id="m185r17" style="width:101px; top:289px; left:787px;"/>
+<input type="text" name="m185r21" id="m185r21" style="width:87px; top:317px; left:100px;"/>
+<input type="text" name="m185r22" id="m185r22" style="width:103px; top:317px; left:197px;"/>
+<input type="text" name="m185r23" id="m185r23" style="width:102px; top:317px; left:311px;"/>
+<input type="text" name="m185r24" id="m185r24" style="width:113px; top:317px; left:424px;"/>
+<input type="text" name="m185r25" id="m185r25" style="width:113px; top:317px; left:549px;"/>
+<input type="text" name="m185r26" id="m185r26" style="width:102px; top:317px; left:673px;"/>
+<input type="text" name="m185r27" id="m185r27" style="width:101px; top:317px; left:787px;"/>
+<input type="text" name="m185r31" id="m185r31" style="width:87px; top:344px; left:100px;"/>
+<input type="text" name="m185r32" id="m185r32" style="width:103px; top:344px; left:197px;"/>
+<input type="text" name="m185r33" id="m185r33" style="width:102px; top:344px; left:311px;"/>
+<input type="text" name="m185r34" id="m185r34" style="width:113px; top:344px; left:424px;"/>
+<input type="text" name="m185r35" id="m185r35" style="width:113px; top:344px; left:549px;"/>
+<input type="text" name="m185r36" id="m185r36" style="width:102px; top:344px; left:673px;"/>
+<input type="text" name="m185r37" id="m185r37" style="width:101px; top:344px; left:787px;"/>
+<input type="text" name="m185r41" id="m185r41" style="width:87px; top:371px; left:100px;"/>
+<input type="text" name="m185r42" id="m185r42" style="width:103px; top:371px; left:197px;"/>
+<input type="text" name="m185r43" id="m185r43" style="width:102px; top:371px; left:311px;"/>
+<input type="text" name="m185r44" id="m185r44" style="width:113px; top:371px; left:424px;"/>
+<input type="text" name="m185r45" id="m185r45" style="width:113px; top:371px; left:549px;"/>
+<input type="text" name="m185r46" id="m185r46" style="width:102px; top:371px; left:673px;"/>
+<input type="text" name="m185r47" id="m185r47" style="width:101px; top:371px; left:787px;"/>
+<input type="text" name="m185r51" id="m185r51" style="width:87px; top:399px; left:100px;"/>
+<input type="text" name="m185r52" id="m185r52" style="width:103px; top:399px; left:197px;"/>
+<input type="text" name="m185r53" id="m185r53" style="width:102px; top:399px; left:311px;"/>
+<input type="text" name="m185r54" id="m185r54" style="width:113px; top:399px; left:424px;"/>
+<input type="text" name="m185r55" id="m185r55" style="width:113px; top:399px; left:549px;"/>
+<input type="text" name="m185r56" id="m185r56" style="width:102px; top:399px; left:673px;"/>
+<input type="text" name="m185r57" id="m185r57" style="width:101px; top:399px; left:787px;"/>
+<input type="text" name="m185r61" id="m185r61" style="width:87px; top:426px; left:100px;"/>
+<input type="text" name="m185r62" id="m185r62" style="width:103px; top:426px; left:197px;"/>
+<input type="text" name="m185r63" id="m185r63" style="width:102px; top:426px; left:311px;"/>
+<input type="text" name="m185r64" id="m185r64" style="width:113px; top:426px; left:424px;"/>
+<input type="text" name="m185r65" id="m185r65" style="width:113px; top:426px; left:549px;"/>
+<input type="text" name="m185r66" id="m185r66" style="width:102px; top:426px; left:673px;"/>
+<input type="text" name="m185r67" id="m185r67" style="width:101px; top:426px; left:787px;"/>
+<input type="text" name="m185r71" id="m185r71" style="width:87px; top:454px; left:100px;"/>
+<input type="text" name="m185r72" id="m185r72" style="width:103px; top:454px; left:197px;"/>
+<input type="text" name="m185r73" id="m185r73" style="width:102px; top:454px; left:311px;"/>
+<input type="text" name="m185r74" id="m185r74" style="width:113px; top:454px; left:424px;"/>
+<input type="text" name="m185r75" id="m185r75" style="width:113px; top:454px; left:549px;"/>
+<input type="text" name="m185r76" id="m185r76" style="width:102px; top:454px; left:673px;"/>
+<input type="text" name="m185r77" id="m185r77" style="width:101px; top:454px; left:787px;"/>
+<input type="text" name="m185r81" id="m185r81" style="width:87px; top:481px; left:100px;"/>
+<input type="text" name="m185r82" id="m185r82" style="width:103px; top:481px; left:197px;"/>
+<input type="text" name="m185r83" id="m185r83" style="width:102px; top:481px; left:311px;"/>
+<input type="text" name="m185r84" id="m185r84" style="width:113px; top:481px; left:424px;"/>
+<input type="text" name="m185r85" id="m185r85" style="width:113px; top:481px; left:549px;"/>
+<input type="text" name="m185r86" id="m185r86" style="width:102px; top:481px; left:673px;"/>
+<input type="text" name="m185r87" id="m185r87" style="width:101px; top:481px; left:787px;"/>
+<input type="text" name="m185r91" id="m185r91" style="width:87px; top:508px; left:100px;"/>
+<input type="text" name="m185r92" id="m185r92" style="width:103px; top:508px; left:197px;"/>
+<input type="text" name="m185r93" id="m185r93" style="width:102px; top:508px; left:311px;"/>
+<input type="text" name="m185r94" id="m185r94" style="width:113px; top:508px; left:424px;"/>
+<input type="text" name="m185r95" id="m185r95" style="width:113px; top:508px; left:549px;"/>
+<input type="text" name="m185r96" id="m185r96" style="width:102px; top:508px; left:673px;"/>
+<input type="text" name="m185r97" id="m185r97" style="width:101px; top:508px; left:787px;"/>
+<input type="text" name="m185r101" id="m185r101" style="width:87px; top:535px; left:100px;"/>
+<input type="text" name="m185r102" id="m185r102" style="width:103px; top:535px; left:197px;"/>
+<input type="text" name="m185r103" id="m185r103" style="width:102px; top:535px; left:311px;"/>
+<input type="text" name="m185r104" id="m185r104" style="width:113px; top:535px; left:424px;"/>
+<input type="text" name="m185r105" id="m185r105" style="width:113px; top:535px; left:549px;"/>
+<input type="text" name="m185r106" id="m185r106" style="width:102px; top:535px; left:673px;"/>
+<input type="text" name="m185r107" id="m185r107" style="width:101px; top:535px; left:787px;"/>
+<input type="text" name="m185r111" id="m185r111" style="width:87px; top:563px; left:100px;"/>
+<input type="text" name="m185r112" id="m185r112" style="width:103px; top:563px; left:197px;"/>
+<input type="text" name="m185r113" id="m185r113" style="width:102px; top:563px; left:311px;"/>
+<input type="text" name="m185r114" id="m185r114" style="width:113px; top:563px; left:424px;"/>
+<input type="text" name="m185r115" id="m185r115" style="width:113px; top:563px; left:549px;"/>
+<input type="text" name="m185r116" id="m185r116" style="width:102px; top:563px; left:673px;"/>
+<input type="text" name="m185r117" id="m185r117" style="width:101px; top:563px; left:787px;"/>
+<input type="text" name="m185r121" id="m185r121" style="width:87px; top:590px; left:100px;"/>
+<input type="text" name="m185r122" id="m185r122" style="width:103px; top:590px; left:197px;"/>
+<input type="text" name="m185r123" id="m185r123" style="width:102px; top:590px; left:311px;"/>
+<input type="text" name="m185r124" id="m185r124" style="width:113px; top:590px; left:424px;"/>
+<input type="text" name="m185r125" id="m185r125" style="width:113px; top:590px; left:549px;"/>
+<input type="text" name="m185r126" id="m185r126" style="width:102px; top:590px; left:673px;"/>
+<input type="text" name="m185r127" id="m185r127" style="width:101px; top:590px; left:787px;"/>
+<input type="text" name="m185r131" id="m185r131" style="width:87px; top:618px; left:100px;"/>
+<input type="text" name="m185r132" id="m185r132" style="width:103px; top:618px; left:197px;"/>
+<input type="text" name="m185r133" id="m185r133" style="width:102px; top:618px; left:311px;"/>
+<input type="text" name="m185r134" id="m185r134" style="width:113px; top:618px; left:424px;"/>
+<input type="text" name="m185r135" id="m185r135" style="width:113px; top:618px; left:549px;"/>
+<input type="text" name="m185r136" id="m185r136" style="width:102px; top:618px; left:673px;"/>
+<input type="text" name="m185r137" id="m185r137" style="width:101px; top:618px; left:787px;"/>
+<input type="text" name="m185r141" id="m185r141" style="width:87px; top:646px; left:100px;"/>
+<input type="text" name="m185r142" id="m185r142" style="width:103px; top:646px; left:197px;"/>
+<input type="text" name="m185r143" id="m185r143" style="width:102px; top:646px; left:311px;"/>
+<input type="text" name="m185r144" id="m185r144" style="width:113px; top:646px; left:424px;"/>
+<input type="text" name="m185r145" id="m185r145" style="width:113px; top:646px; left:549px;"/>
+<input type="text" name="m185r146" id="m185r146" style="width:102px; top:646px; left:673px;"/>
+<input type="text" name="m185r147" id="m185r147" style="width:101px; top:646px; left:787px;"/>
+<input type="text" name="m185r151" id="m185r151" style="width:87px; top:673px; left:100px;"/>
+<input type="text" name="m185r152" id="m185r152" style="width:103px; top:673px; left:197px;"/>
+<input type="text" name="m185r153" id="m185r153" style="width:102px; top:673px; left:311px;"/>
+<input type="text" name="m185r154" id="m185r154" style="width:113px; top:673px; left:424px;"/>
+<input type="text" name="m185r155" id="m185r155" style="width:113px; top:673px; left:549px;"/>
+<input type="text" name="m185r156" id="m185r156" style="width:102px; top:673px; left:673px;"/>
+<input type="text" name="m185r157" id="m185r157" style="width:101px; top:673px; left:787px;"/>
+<input type="text" name="m185r161" id="m185r161" style="width:87px; top:700px; left:100px;"/>
+<input type="text" name="m185r162" id="m185r162" style="width:103px; top:700px; left:197px;"/>
+<input type="text" name="m185r163" id="m185r163" style="width:102px; top:700px; left:311px;"/>
+<input type="text" name="m185r164" id="m185r164" style="width:113px; top:700px; left:424px;"/>
+<input type="text" name="m185r165" id="m185r165" style="width:113px; top:700px; left:549px;"/>
+<input type="text" name="m185r166" id="m185r166" style="width:102px; top:700px; left:673px;"/>
+<input type="text" name="m185r167" id="m185r167" style="width:101px; top:700px; left:787px;"/>
+<input type="text" name="m185r171" id="m185r171" style="width:87px; top:727px; left:100px;"/>
+<input type="text" name="m185r172" id="m185r172" style="width:103px; top:727px; left:197px;"/>
+<input type="text" name="m185r173" id="m185r173" style="width:102px; top:727px; left:311px;"/>
+<input type="text" name="m185r174" id="m185r174" style="width:113px; top:727px; left:424px;"/>
+<input type="text" name="m185r175" id="m185r175" style="width:113px; top:727px; left:549px;"/>
+<input type="text" name="m185r176" id="m185r176" style="width:102px; top:727px; left:673px;"/>
+<input type="text" name="m185r177" id="m185r177" style="width:101px; top:727px; left:787px;"/>
+<input type="text" name="m185r181" id="m185r181" style="width:87px; top:755px; left:100px;"/>
+<input type="text" name="m185r182" id="m185r182" style="width:103px; top:755px; left:197px;"/>
+<input type="text" name="m185r183" id="m185r183" style="width:102px; top:755px; left:311px;"/>
+<input type="text" name="m185r184" id="m185r184" style="width:113px; top:755px; left:424px;"/>
+<input type="text" name="m185r185" id="m185r185" style="width:113px; top:755px; left:549px;"/>
+<input type="text" name="m185r186" id="m185r186" style="width:102px; top:755px; left:673px;"/>
+<input type="text" name="m185r187" id="m185r187" style="width:101px; top:755px; left:787px;"/>
+<input type="text" name="m185r191" id="m185r191" style="width:87px; top:782px; left:100px;"/>
+<input type="text" name="m185r192" id="m185r192" style="width:103px; top:782px; left:197px;"/>
+<input type="text" name="m185r193" id="m185r193" style="width:102px; top:782px; left:311px;"/>
+<input type="text" name="m185r194" id="m185r194" style="width:113px; top:782px; left:424px;"/>
+<input type="text" name="m185r195" id="m185r195" style="width:113px; top:782px; left:549px;"/>
+<input type="text" name="m185r196" id="m185r196" style="width:102px; top:782px; left:673px;"/>
+<input type="text" name="m185r197" id="m185r197" style="width:101px; top:782px; left:787px;"/>
+<input type="text" name="m185r201" id="m185r201" style="width:87px; top:810px; left:100px;"/>
+<input type="text" name="m185r202" id="m185r202" style="width:103px; top:810px; left:197px;"/>
+<input type="text" name="m185r203" id="m185r203" style="width:102px; top:810px; left:311px;"/>
+<input type="text" name="m185r204" id="m185r204" style="width:113px; top:810px; left:424px;"/>
+<input type="text" name="m185r205" id="m185r205" style="width:113px; top:810px; left:549px;"/>
+<input type="text" name="m185r206" id="m185r206" style="width:102px; top:810px; left:673px;"/>
+<input type="text" name="m185r207" id="m185r207" style="width:101px; top:810px; left:787px;"/>
+<input type="text" name="m185r211" id="m185r211" style="width:87px; top:837px; left:100px;"/>
+<input type="text" name="m185r212" id="m185r212" style="width:103px; top:837px; left:197px;"/>
+<input type="text" name="m185r213" id="m185r213" style="width:102px; top:837px; left:311px;"/>
+<input type="text" name="m185r214" id="m185r214" style="width:113px; top:837px; left:424px;"/>
+<input type="text" name="m185r215" id="m185r215" style="width:113px; top:837px; left:549px;"/>
+<input type="text" name="m185r216" id="m185r216" style="width:102px; top:837px; left:673px;"/>
+<input type="text" name="m185r217" id="m185r217" style="width:101px; top:837px; left:787px;"/>
+<input type="text" name="m185r221" id="m185r221" style="width:87px; top:865px; left:100px;"/>
+<input type="text" name="m185r222" id="m185r222" style="width:103px; top:865px; left:197px;"/>
+<input type="text" name="m185r223" id="m185r223" style="width:102px; top:865px; left:311px;"/>
+<input type="text" name="m185r224" id="m185r224" style="width:113px; top:865px; left:424px;"/>
+<input type="text" name="m185r225" id="m185r225" style="width:113px; top:865px; left:549px;"/>
+<input type="text" name="m185r226" id="m185r226" style="width:102px; top:865px; left:673px;"/>
+<input type="text" name="m185r227" id="m185r227" style="width:101px; top:865px; left:787px;"/>
+<input type="text" name="m185r231" id="m185r231" style="width:87px; top:892px; left:100px;"/>
+<input type="text" name="m185r232" id="m185r232" style="width:103px; top:892px; left:197px;"/>
+<input type="text" name="m185r233" id="m185r233" style="width:102px; top:892px; left:311px;"/>
+<input type="text" name="m185r234" id="m185r234" style="width:113px; top:892px; left:424px;"/>
+<input type="text" name="m185r235" id="m185r235" style="width:113px; top:892px; left:549px;"/>
+<input type="text" name="m185r236" id="m185r236" style="width:102px; top:892px; left:673px;"/>
+<input type="text" name="m185r237" id="m185r237" style="width:101px; top:892px; left:787px;"/>
+<input type="text" name="m185r241" id="m185r241" style="width:87px; top:919px; left:100px;"/>
+<input type="text" name="m185r242" id="m185r242" style="width:103px; top:919px; left:197px;"/>
+<input type="text" name="m185r243" id="m185r243" style="width:102px; top:919px; left:311px;"/>
+<input type="text" name="m185r244" id="m185r244" style="width:113px; top:919px; left:424px;"/>
+<input type="text" name="m185r245" id="m185r245" style="width:113px; top:919px; left:549px;"/>
+<input type="text" name="m185r246" id="m185r246" style="width:102px; top:919px; left:673px;"/>
+<input type="text" name="m185r247" id="m185r247" style="width:101px; top:919px; left:787px;"/>
+<input type="text" name="m185r251" id="m185r251" style="width:87px; top:947px; left:100px;"/>
+<input type="text" name="m185r252" id="m185r252" style="width:103px; top:947px; left:197px;"/>
+<input type="text" name="m185r253" id="m185r253" style="width:102px; top:947px; left:311px;"/>
+<input type="text" name="m185r254" id="m185r254" style="width:113px; top:947px; left:424px;"/>
+<input type="text" name="m185r255" id="m185r255" style="width:113px; top:947px; left:549px;"/>
+<input type="text" name="m185r256" id="m185r256" style="width:102px; top:947px; left:673px;"/>
+<input type="text" name="m185r257" id="m185r257" style="width:101px; top:947px; left:787px;"/>
+<input type="text" name="m185r261" id="m185r261" style="width:87px; top:974px; left:100px;"/>
+<input type="text" name="m185r262" id="m185r262" style="width:103px; top:974px; left:197px;"/>
+<input type="text" name="m185r263" id="m185r263" style="width:102px; top:974px; left:311px;"/>
+<input type="text" name="m185r264" id="m185r264" style="width:113px; top:974px; left:424px;"/>
+<input type="text" name="m185r265" id="m185r265" style="width:113px; top:974px; left:549px;"/>
+<input type="text" name="m185r266" id="m185r266" style="width:102px; top:974px; left:673px;"/>
+<input type="text" name="m185r267" id="m185r267" style="width:101px; top:974px; left:787px;"/>
+<input type="text" name="m185r271" id="m185r271" style="width:87px; top:1002px; left:100px;"/>
+<input type="text" name="m185r272" id="m185r272" style="width:103px; top:1002px; left:197px;"/>
+<input type="text" name="m185r273" id="m185r273" style="width:102px; top:1002px; left:311px;"/>
+<input type="text" name="m185r274" id="m185r274" style="width:113px; top:1002px; left:424px;"/>
+<input type="text" name="m185r275" id="m185r275" style="width:113px; top:1002px; left:549px;"/>
+<input type="text" name="m185r276" id="m185r276" style="width:102px; top:1002px; left:673px;"/>
+<input type="text" name="m185r277" id="m185r277" style="width:101px; top:1002px; left:787px;"/>
+<input type="text" name="m185r281" id="m185r281" style="width:87px; top:1029px; left:100px;"/>
+<input type="text" name="m185r282" id="m185r282" style="width:103px; top:1029px; left:197px;"/>
+<input type="text" name="m185r283" id="m185r283" style="width:102px; top:1029px; left:311px;"/>
+<input type="text" name="m185r284" id="m185r284" style="width:113px; top:1029px; left:424px;"/>
+<input type="text" name="m185r285" id="m185r285" style="width:113px; top:1029px; left:549px;"/>
+<input type="text" name="m185r286" id="m185r286" style="width:102px; top:1029px; left:673px;"/>
+<input type="text" name="m185r287" id="m185r287" style="width:101px; top:1029px; left:787px;"/>
+<input type="text" name="m185r291" id="m185r291" style="width:87px; top:1057px; left:100px;"/>
+<input type="text" name="m185r292" id="m185r292" style="width:103px; top:1057px; left:197px;"/>
+<input type="text" name="m185r293" id="m185r293" style="width:102px; top:1057px; left:311px;"/>
+<input type="text" name="m185r294" id="m185r294" style="width:113px; top:1057px; left:424px;"/>
+<input type="text" name="m185r295" id="m185r295" style="width:113px; top:1057px; left:549px;"/>
+<input type="text" name="m185r296" id="m185r296" style="width:102px; top:1057px; left:673px;"/>
+<input type="text" name="m185r297" id="m185r297" style="width:101px; top:1057px; left:787px;"/>
+<input type="text" name="m185r301" id="m185r301" style="width:87px; top:1084px; left:100px;"/>
+<input type="text" name="m185r302" id="m185r302" style="width:103px; top:1084px; left:197px;"/>
+<input type="text" name="m185r303" id="m185r303" style="width:102px; top:1084px; left:311px;"/>
+<input type="text" name="m185r304" id="m185r304" style="width:113px; top:1084px; left:424px;"/>
+<input type="text" name="m185r305" id="m185r305" style="width:113px; top:1084px; left:549px;"/>
+<input type="text" name="m185r306" id="m185r306" style="width:102px; top:1084px; left:673px;"/>
+<input type="text" name="m185r307" id="m185r307" style="width:101px; top:1084px; left:787px;"/>
+<span class="text-echo" style="top:1116px; right:648px;"><?php echo $m185r992; ?></span>
+<span class="text-echo" style="top:1116px; right:535px;"><?php echo $m185r993; ?></span>
+<span class="text-echo" style="top:1116px; right:410px;"><?php echo $m185r994; ?></span>
+<span class="text-echo" style="top:1116px; right:285px;"><?php echo $m185r995; ?></span>
+<span class="text-echo" style="top:1116px; right:173px;"><?php echo $m185r996; ?></span>
+<span class="text-echo" style="top:1116px; right:60px;"><?php echo $m185r997; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 9 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str9.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 9.strana 254kB">
+<img src="<?php echo $jpg_cesta; ?>_str9.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 9.strana 254kB">
+<span class="text-echo" style="top:97px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 186 -->
-<input type="text" name="m186r11" id="m186r11" style="width:107px; top:228px; left:91px;"/>
-<input type="text" name="m186r12" id="m186r12" style="width:113px; top:228px; left:209px;"/>
-<input type="text" name="m186r13" id="m186r13" style="width:101px; top:228px; left:334px;"/>
-<input type="text" name="m186r14" id="m186r14" style="width:112px; top:228px; left:448px;"/>
-<input type="text" name="m186r15" id="m186r15" style="width:112px; top:228px; left:572px;"/>
-<input type="text" name="m186r16" id="m186r16" style="width:90px; top:228px; left:696px;"/>
-<input type="text" name="m186r17" id="m186r17" style="width:90px; top:228px; left:798px;"/>
-<input type="text" name="m186r21" id="m186r21" style="width:107px; top:256px; left:91px;"/>
-<input type="text" name="m186r22" id="m186r22" style="width:113px; top:256px; left:209px;"/>
-<input type="text" name="m186r23" id="m186r23" style="width:101px; top:256px; left:334px;"/>
-<input type="text" name="m186r24" id="m186r24" style="width:112px; top:256px; left:448px;"/>
-<input type="text" name="m186r25" id="m186r25" style="width:112px; top:256px; left:572px;"/>
-<input type="text" name="m186r26" id="m186r26" style="width:90px; top:256px; left:696px;"/>
-<input type="text" name="m186r27" id="m186r27" style="width:90px; top:256px; left:798px;"/>
-<input type="text" name="m186r31" id="m186r31" style="width:107px; top:284px; left:91px;"/>
-<input type="text" name="m186r32" id="m186r32" style="width:113px; top:284px; left:209px;"/>
-<input type="text" name="m186r33" id="m186r33" style="width:101px; top:284px; left:334px;"/>
-<input type="text" name="m186r34" id="m186r34" style="width:112px; top:284px; left:448px;"/>
-<input type="text" name="m186r35" id="m186r35" style="width:112px; top:284px; left:572px;"/>
-<input type="text" name="m186r36" id="m186r36" style="width:90px; top:284px; left:696px;"/>
-<input type="text" name="m186r37" id="m186r37" style="width:90px; top:284px; left:798px;"/>
-<input type="text" name="m186r41" id="m186r41" style="width:107px; top:313px; left:91px;"/>
-<input type="text" name="m186r42" id="m186r42" style="width:113px; top:313px; left:209px;"/>
-<input type="text" name="m186r43" id="m186r43" style="width:101px; top:313px; left:334px;"/>
-<input type="text" name="m186r44" id="m186r44" style="width:112px; top:313px; left:448px;"/>
-<input type="text" name="m186r45" id="m186r45" style="width:112px; top:313px; left:572px;"/>
-<input type="text" name="m186r46" id="m186r46" style="width:90px; top:313px; left:696px;"/>
-<input type="text" name="m186r47" id="m186r47" style="width:90px; top:313px; left:798px;"/>
-<input type="text" name="m186r51" id="m186r51" style="width:107px; top:341px; left:91px;"/>
-<input type="text" name="m186r52" id="m186r52" style="width:113px; top:341px; left:209px;"/>
-<input type="text" name="m186r53" id="m186r53" style="width:101px; top:341px; left:334px;"/>
-<input type="text" name="m186r54" id="m186r54" style="width:112px; top:341px; left:448px;"/>
-<input type="text" name="m186r55" id="m186r55" style="width:112px; top:341px; left:572px;"/>
-<input type="text" name="m186r56" id="m186r56" style="width:90px; top:341px; left:696px;"/>
-<input type="text" name="m186r57" id="m186r57" style="width:90px; top:341px; left:798px;"/>
-<input type="text" name="m186r61" id="m186r61" style="width:107px; top:370px; left:91px;"/>
-<input type="text" name="m186r62" id="m186r62" style="width:113px; top:370px; left:209px;"/>
-<input type="text" name="m186r63" id="m186r63" style="width:101px; top:370px; left:334px;"/>
-<input type="text" name="m186r64" id="m186r64" style="width:112px; top:370px; left:448px;"/>
-<input type="text" name="m186r65" id="m186r65" style="width:112px; top:370px; left:572px;"/>
-<input type="text" name="m186r66" id="m186r66" style="width:90px; top:370px; left:696px;"/>
-<input type="text" name="m186r67" id="m186r67" style="width:90px; top:370px; left:798px;"/>
-<input type="text" name="m186r71" id="m186r71" style="width:107px; top:399px; left:91px;"/>
-<input type="text" name="m186r72" id="m186r72" style="width:113px; top:399px; left:209px;"/>
-<input type="text" name="m186r73" id="m186r73" style="width:101px; top:399px; left:334px;"/>
-<input type="text" name="m186r74" id="m186r74" style="width:112px; top:399px; left:448px;"/>
-<input type="text" name="m186r75" id="m186r75" style="width:112px; top:399px; left:572px;"/>
-<input type="text" name="m186r76" id="m186r76" style="width:90px; top:399px; left:696px;"/>
-<input type="text" name="m186r77" id="m186r77" style="width:90px; top:399px; left:798px;"/>
-<input type="text" name="m186r81" id="m186r81" style="width:107px; top:427px; left:91px;"/>
-<input type="text" name="m186r82" id="m186r82" style="width:113px; top:427px; left:209px;"/>
-<input type="text" name="m186r83" id="m186r83" style="width:101px; top:427px; left:334px;"/>
-<input type="text" name="m186r84" id="m186r84" style="width:112px; top:427px; left:448px;"/>
-<input type="text" name="m186r85" id="m186r85" style="width:112px; top:427px; left:572px;"/>
-<input type="text" name="m186r86" id="m186r86" style="width:90px; top:427px; left:696px;"/>
-<input type="text" name="m186r87" id="m186r87" style="width:90px; top:427px; left:798px;"/>
-<input type="text" name="m186r91" id="m186r91" style="width:107px; top:455px; left:91px;"/>
-<input type="text" name="m186r92" id="m186r92" style="width:113px; top:455px; left:209px;"/>
-<input type="text" name="m186r93" id="m186r93" style="width:101px; top:455px; left:334px;"/>
-<input type="text" name="m186r94" id="m186r94" style="width:112px; top:455px; left:448px;"/>
-<input type="text" name="m186r95" id="m186r95" style="width:112px; top:455px; left:572px;"/>
-<input type="text" name="m186r96" id="m186r96" style="width:90px; top:455px; left:696px;"/>
-<input type="text" name="m186r97" id="m186r97" style="width:90px; top:455px; left:798px;"/>
-<input type="text" name="m186r101" id="m186r101" style="width:107px; top:484px; left:91px;"/>
-<input type="text" name="m186r102" id="m186r102" style="width:113px; top:484px; left:209px;"/>
-<input type="text" name="m186r103" id="m186r103" style="width:101px; top:484px; left:334px;"/>
-<input type="text" name="m186r104" id="m186r104" style="width:112px; top:484px; left:448px;"/>
-<input type="text" name="m186r105" id="m186r105" style="width:112px; top:484px; left:572px;"/>
-<input type="text" name="m186r106" id="m186r106" style="width:90px; top:484px; left:696px;"/>
-<input type="text" name="m186r107" id="m186r107" style="width:90px; top:484px; left:798px;"/>
-<input type="text" name="m186r111" id="m186r111" style="width:107px; top:512px; left:91px;"/>
-<input type="text" name="m186r112" id="m186r112" style="width:113px; top:512px; left:209px;"/>
-<input type="text" name="m186r113" id="m186r113" style="width:101px; top:512px; left:334px;"/>
-<input type="text" name="m186r114" id="m186r114" style="width:112px; top:512px; left:448px;"/>
-<input type="text" name="m186r115" id="m186r115" style="width:112px; top:512px; left:572px;"/>
-<input type="text" name="m186r116" id="m186r116" style="width:90px; top:512px; left:696px;"/>
-<input type="text" name="m186r117" id="m186r117" style="width:90px; top:512px; left:798px;"/>
-<input type="text" name="m186r121" id="m186r121" style="width:107px; top:541px; left:91px;"/>
-<input type="text" name="m186r122" id="m186r122" style="width:113px; top:541px; left:209px;"/>
-<input type="text" name="m186r123" id="m186r123" style="width:101px; top:541px; left:334px;"/>
-<input type="text" name="m186r124" id="m186r124" style="width:112px; top:541px; left:448px;"/>
-<input type="text" name="m186r125" id="m186r125" style="width:112px; top:541px; left:572px;"/>
-<input type="text" name="m186r126" id="m186r126" style="width:90px; top:541px; left:696px;"/>
-<input type="text" name="m186r127" id="m186r127" style="width:90px; top:541px; left:798px;"/>
-<input type="text" name="m186r131" id="m186r131" style="width:107px; top:569px; left:91px;"/>
-<input type="text" name="m186r132" id="m186r132" style="width:113px; top:569px; left:209px;"/>
-<input type="text" name="m186r133" id="m186r133" style="width:101px; top:569px; left:334px;"/>
-<input type="text" name="m186r134" id="m186r134" style="width:112px; top:569px; left:448px;"/>
-<input type="text" name="m186r135" id="m186r135" style="width:112px; top:569px; left:572px;"/>
-<input type="text" name="m186r136" id="m186r136" style="width:90px; top:569px; left:696px;"/>
-<input type="text" name="m186r137" id="m186r137" style="width:90px; top:569px; left:798px;"/>
-<input type="text" name="m186r141" id="m186r141" style="width:107px; top:598px; left:91px;"/>
-<input type="text" name="m186r142" id="m186r142" style="width:113px; top:598px; left:209px;"/>
-<input type="text" name="m186r143" id="m186r143" style="width:101px; top:598px; left:334px;"/>
-<input type="text" name="m186r144" id="m186r144" style="width:112px; top:598px; left:448px;"/>
-<input type="text" name="m186r145" id="m186r145" style="width:112px; top:598px; left:572px;"/>
-<input type="text" name="m186r146" id="m186r146" style="width:90px; top:598px; left:696px;"/>
-<input type="text" name="m186r147" id="m186r147" style="width:90px; top:598px; left:798px;"/>
-<input type="text" name="m186r151" id="m186r151" style="width:107px; top:627px; left:91px;"/>
-<input type="text" name="m186r152" id="m186r152" style="width:113px; top:627px; left:209px;"/>
-<input type="text" name="m186r153" id="m186r153" style="width:101px; top:627px; left:334px;"/>
-<input type="text" name="m186r154" id="m186r154" style="width:112px; top:627px; left:448px;"/>
-<input type="text" name="m186r155" id="m186r155" style="width:112px; top:627px; left:572px;"/>
-<input type="text" name="m186r156" id="m186r156" style="width:90px; top:627px; left:696px;"/>
-<input type="text" name="m186r157" id="m186r157" style="width:90px; top:627px; left:798px;"/>
-<input type="text" name="m186r161" id="m186r161" style="width:107px; top:655px; left:91px;"/>
-<input type="text" name="m186r162" id="m186r162" style="width:113px; top:655px; left:209px;"/>
-<input type="text" name="m186r163" id="m186r163" style="width:101px; top:655px; left:334px;"/>
-<input type="text" name="m186r164" id="m186r164" style="width:112px; top:655px; left:448px;"/>
-<input type="text" name="m186r165" id="m186r165" style="width:112px; top:655px; left:572px;"/>
-<input type="text" name="m186r166" id="m186r166" style="width:90px; top:655px; left:696px;"/>
-<input type="text" name="m186r167" id="m186r167" style="width:90px; top:655px; left:798px;"/>
-<input type="text" name="m186r171" id="m186r171" style="width:107px; top:683px; left:91px;"/>
-<input type="text" name="m186r172" id="m186r172" style="width:113px; top:683px; left:209px;"/>
-<input type="text" name="m186r173" id="m186r173" style="width:101px; top:683px; left:334px;"/>
-<input type="text" name="m186r174" id="m186r174" style="width:112px; top:683px; left:448px;"/>
-<input type="text" name="m186r175" id="m186r175" style="width:112px; top:683px; left:572px;"/>
-<input type="text" name="m186r176" id="m186r176" style="width:90px; top:683px; left:696px;"/>
-<input type="text" name="m186r177" id="m186r177" style="width:90px; top:683px; left:798px;"/>
-<input type="text" name="m186r181" id="m186r181" style="width:107px; top:712px; left:91px;"/>
-<input type="text" name="m186r182" id="m186r182" style="width:113px; top:712px; left:209px;"/>
-<input type="text" name="m186r183" id="m186r183" style="width:101px; top:712px; left:334px;"/>
-<input type="text" name="m186r184" id="m186r184" style="width:112px; top:712px; left:448px;"/>
-<input type="text" name="m186r185" id="m186r185" style="width:112px; top:712px; left:572px;"/>
-<input type="text" name="m186r186" id="m186r186" style="width:90px; top:712px; left:696px;"/>
-<input type="text" name="m186r187" id="m186r187" style="width:90px; top:712px; left:798px;"/>
-<input type="text" name="m186r191" id="m186r191" style="width:107px; top:740px; left:91px;"/>
-<input type="text" name="m186r192" id="m186r192" style="width:113px; top:740px; left:209px;"/>
-<input type="text" name="m186r193" id="m186r193" style="width:101px; top:740px; left:334px;"/>
-<input type="text" name="m186r194" id="m186r194" style="width:112px; top:740px; left:448px;"/>
-<input type="text" name="m186r195" id="m186r195" style="width:112px; top:740px; left:572px;"/>
-<input type="text" name="m186r196" id="m186r196" style="width:90px; top:740px; left:696px;"/>
-<input type="text" name="m186r197" id="m186r197" style="width:90px; top:740px; left:798px;"/>
-<input type="text" name="m186r201" id="m186r201" style="width:107px; top:769px; left:91px;"/>
-<input type="text" name="m186r202" id="m186r202" style="width:113px; top:769px; left:209px;"/>
-<input type="text" name="m186r203" id="m186r203" style="width:101px; top:769px; left:334px;"/>
-<input type="text" name="m186r204" id="m186r204" style="width:112px; top:769px; left:448px;"/>
-<input type="text" name="m186r205" id="m186r205" style="width:112px; top:769px; left:572px;"/>
-<input type="text" name="m186r206" id="m186r206" style="width:90px; top:769px; left:696px;"/>
-<input type="text" name="m186r207" id="m186r207" style="width:90px; top:769px; left:798px;"/>
-<input type="text" name="m186r211" id="m186r211" style="width:107px; top:797px; left:91px;"/>
-<input type="text" name="m186r212" id="m186r212" style="width:113px; top:797px; left:209px;"/>
-<input type="text" name="m186r213" id="m186r213" style="width:101px; top:797px; left:334px;"/>
-<input type="text" name="m186r214" id="m186r214" style="width:112px; top:797px; left:448px;"/>
-<input type="text" name="m186r215" id="m186r215" style="width:112px; top:797px; left:572px;"/>
-<input type="text" name="m186r216" id="m186r216" style="width:90px; top:797px; left:696px;"/>
-<input type="text" name="m186r217" id="m186r217" style="width:90px; top:797px; left:798px;"/>
-<input type="text" name="m186r221" id="m186r221" style="width:107px; top:826px; left:91px;"/>
-<input type="text" name="m186r222" id="m186r222" style="width:113px; top:826px; left:209px;"/>
-<input type="text" name="m186r223" id="m186r223" style="width:101px; top:826px; left:334px;"/>
-<input type="text" name="m186r224" id="m186r224" style="width:112px; top:826px; left:448px;"/>
-<input type="text" name="m186r225" id="m186r225" style="width:112px; top:826px; left:572px;"/>
-<input type="text" name="m186r226" id="m186r226" style="width:90px; top:826px; left:696px;"/>
-<input type="text" name="m186r227" id="m186r227" style="width:90px; top:826px; left:798px;"/>
-<input type="text" name="m186r231" id="m186r231" style="width:107px; top:854px; left:91px;"/>
-<input type="text" name="m186r232" id="m186r232" style="width:113px; top:854px; left:209px;"/>
-<input type="text" name="m186r233" id="m186r233" style="width:101px; top:854px; left:334px;"/>
-<input type="text" name="m186r234" id="m186r234" style="width:112px; top:854px; left:448px;"/>
-<input type="text" name="m186r235" id="m186r235" style="width:112px; top:854px; left:572px;"/>
-<input type="text" name="m186r236" id="m186r236" style="width:90px; top:854px; left:696px;"/>
-<input type="text" name="m186r237" id="m186r237" style="width:90px; top:854px; left:798px;"/>
-<input type="text" name="m186r241" id="m186r241" style="width:107px; top:883px; left:91px;"/>
-<input type="text" name="m186r242" id="m186r242" style="width:113px; top:883px; left:209px;"/>
-<input type="text" name="m186r243" id="m186r243" style="width:101px; top:883px; left:334px;"/>
-<input type="text" name="m186r244" id="m186r244" style="width:112px; top:883px; left:448px;"/>
-<input type="text" name="m186r245" id="m186r245" style="width:112px; top:883px; left:572px;"/>
-<input type="text" name="m186r246" id="m186r246" style="width:90px; top:883px; left:696px;"/>
-<input type="text" name="m186r247" id="m186r247" style="width:90px; top:883px; left:798px;"/>
-<input type="text" name="m186r251" id="m186r251" style="width:107px; top:911px; left:91px;"/>
-<input type="text" name="m186r252" id="m186r252" style="width:113px; top:911px; left:209px;"/>
-<input type="text" name="m186r253" id="m186r253" style="width:101px; top:911px; left:334px;"/>
-<input type="text" name="m186r254" id="m186r254" style="width:112px; top:911px; left:448px;"/>
-<input type="text" name="m186r255" id="m186r255" style="width:112px; top:911px; left:572px;"/>
-<input type="text" name="m186r256" id="m186r256" style="width:90px; top:911px; left:696px;"/>
-<input type="text" name="m186r257" id="m186r257" style="width:90px; top:911px; left:798px;"/>
-<input type="text" name="m186r261" id="m186r261" style="width:107px; top:940px; left:91px;"/>
-<input type="text" name="m186r262" id="m186r262" style="width:113px; top:940px; left:209px;"/>
-<input type="text" name="m186r263" id="m186r263" style="width:101px; top:940px; left:334px;"/>
-<input type="text" name="m186r264" id="m186r264" style="width:112px; top:940px; left:448px;"/>
-<input type="text" name="m186r265" id="m186r265" style="width:112px; top:940px; left:572px;"/>
-<input type="text" name="m186r266" id="m186r266" style="width:90px; top:940px; left:696px;"/>
-<input type="text" name="m186r267" id="m186r267" style="width:90px; top:940px; left:798px;"/>
-<input type="text" name="m186r271" id="m186r271" style="width:107px; top:968px; left:91px;"/>
-<input type="text" name="m186r272" id="m186r272" style="width:113px; top:968px; left:209px;"/>
-<input type="text" name="m186r273" id="m186r273" style="width:101px; top:968px; left:334px;"/>
-<input type="text" name="m186r274" id="m186r274" style="width:112px; top:968px; left:448px;"/>
-<input type="text" name="m186r275" id="m186r275" style="width:112px; top:968px; left:572px;"/>
-<input type="text" name="m186r276" id="m186r276" style="width:90px; top:968px; left:696px;"/>
-<input type="text" name="m186r277" id="m186r277" style="width:90px; top:968px; left:798px;"/>
-<input type="text" name="m186r281" id="m186r281" style="width:107px; top:997px; left:91px;"/>
-<input type="text" name="m186r282" id="m186r282" style="width:113px; top:997px; left:209px;"/>
-<input type="text" name="m186r283" id="m186r283" style="width:101px; top:997px; left:334px;"/>
-<input type="text" name="m186r284" id="m186r284" style="width:112px; top:997px; left:448px;"/>
-<input type="text" name="m186r285" id="m186r285" style="width:112px; top:997px; left:572px;"/>
-<input type="text" name="m186r286" id="m186r286" style="width:90px; top:997px; left:696px;"/>
-<input type="text" name="m186r287" id="m186r287" style="width:90px; top:997px; left:798px;"/>
-<input type="text" name="m186r291" id="m186r291" style="width:107px; top:1025px; left:91px;"/>
-<input type="text" name="m186r292" id="m186r292" style="width:113px; top:1025px; left:209px;"/>
-<input type="text" name="m186r293" id="m186r293" style="width:101px; top:1025px; left:334px;"/>
-<input type="text" name="m186r294" id="m186r294" style="width:112px; top:1025px; left:448px;"/>
-<input type="text" name="m186r295" id="m186r295" style="width:112px; top:1025px; left:572px;"/>
-<input type="text" name="m186r296" id="m186r296" style="width:90px; top:1025px; left:696px;"/>
-<input type="text" name="m186r297" id="m186r297" style="width:90px; top:1025px; left:798px;"/>
-<input type="text" name="m186r301" id="m186r301" style="width:107px; top:1054px; left:91px;"/>
-<input type="text" name="m186r302" id="m186r302" style="width:113px; top:1054px; left:209px;"/>
-<input type="text" name="m186r303" id="m186r303" style="width:101px; top:1054px; left:334px;"/>
-<input type="text" name="m186r304" id="m186r304" style="width:112px; top:1054px; left:448px;"/>
-<input type="text" name="m186r305" id="m186r305" style="width:112px; top:1054px; left:572px;"/>
-<input type="text" name="m186r306" id="m186r306" style="width:90px; top:1054px; left:696px;"/>
-<input type="text" name="m186r307" id="m186r307" style="width:90px; top:1054px; left:798px;"/>
-<span class="text-echo" style="top:1087px; right:628px;"><?php echo $m186r992; ?></span>
-<span class="text-echo" style="top:1087px; right:515px;"><?php echo $m186r993; ?></span>
-<span class="text-echo" style="top:1087px; right:389px;"><?php echo $m186r994; ?></span>
-<span class="text-echo" style="top:1087px; right:264px;"><?php echo $m186r995; ?></span>
-<span class="text-echo" style="top:1087px; right:162px;"><?php echo $m186r996; ?></span>
-<span class="text-echo" style="top:1087px; right:60px;"><?php echo $m186r997; ?></span>
+<input type="text" name="m186r11" id="m186r11" style="width:87px; top:289px; left:100px;"/>
+<input type="text" name="m186r12" id="m186r12" style="width:103px; top:289px; left:197px;"/>
+<input type="text" name="m186r13" id="m186r13" style="width:102px; top:289px; left:311px;"/>
+<input type="text" name="m186r14" id="m186r14" style="width:114px; top:289px; left:424px;"/>
+<input type="text" name="m186r15" id="m186r15" style="width:115px; top:289px; left:548px;"/>
+<input type="text" name="m186r16" id="m186r16" style="width:102px; top:289px; left:673px;"/>
+<input type="text" name="m186r17" id="m186r17" style="width:101px; top:289px; left:787px;"/>
+<input type="text" name="m186r21" id="m186r21" style="width:87px; top:316px; left:100px;"/>
+<input type="text" name="m186r22" id="m186r22" style="width:103px; top:316px; left:197px;"/>
+<input type="text" name="m186r23" id="m186r23" style="width:102px; top:316px; left:311px;"/>
+<input type="text" name="m186r24" id="m186r24" style="width:114px; top:316px; left:424px;"/>
+<input type="text" name="m186r25" id="m186r25" style="width:115px; top:316px; left:548px;"/>
+<input type="text" name="m186r26" id="m186r26" style="width:102px; top:316px; left:673px;"/>
+<input type="text" name="m186r27" id="m186r27" style="width:101px; top:316px; left:787px;"/>
+<input type="text" name="m186r31" id="m186r31" style="width:87px; top:344px; left:100px;"/>
+<input type="text" name="m186r32" id="m186r32" style="width:103px; top:344px; left:197px;"/>
+<input type="text" name="m186r33" id="m186r33" style="width:102px; top:344px; left:311px;"/>
+<input type="text" name="m186r34" id="m186r34" style="width:114px; top:344px; left:424px;"/>
+<input type="text" name="m186r35" id="m186r35" style="width:115px; top:344px; left:548px;"/>
+<input type="text" name="m186r36" id="m186r36" style="width:102px; top:344px; left:673px;"/>
+<input type="text" name="m186r37" id="m186r37" style="width:101px; top:344px; left:787px;"/>
+<input type="text" name="m186r41" id="m186r41" style="width:87px; top:371px; left:100px;"/>
+<input type="text" name="m186r42" id="m186r42" style="width:103px; top:371px; left:197px;"/>
+<input type="text" name="m186r43" id="m186r43" style="width:102px; top:371px; left:311px;"/>
+<input type="text" name="m186r44" id="m186r44" style="width:114px; top:371px; left:424px;"/>
+<input type="text" name="m186r45" id="m186r45" style="width:115px; top:371px; left:548px;"/>
+<input type="text" name="m186r46" id="m186r46" style="width:102px; top:371px; left:673px;"/>
+<input type="text" name="m186r47" id="m186r47" style="width:101px; top:371px; left:787px;"/>
+<input type="text" name="m186r51" id="m186r51" style="width:87px; top:399px; left:100px;"/>
+<input type="text" name="m186r52" id="m186r52" style="width:103px; top:399px; left:197px;"/>
+<input type="text" name="m186r53" id="m186r53" style="width:102px; top:399px; left:311px;"/>
+<input type="text" name="m186r54" id="m186r54" style="width:114px; top:399px; left:424px;"/>
+<input type="text" name="m186r55" id="m186r55" style="width:115px; top:399px; left:548px;"/>
+<input type="text" name="m186r56" id="m186r56" style="width:102px; top:399px; left:673px;"/>
+<input type="text" name="m186r57" id="m186r57" style="width:101px; top:399px; left:787px;"/>
+<input type="text" name="m186r61" id="m186r61" style="width:87px; top:426px; left:100px;"/>
+<input type="text" name="m186r62" id="m186r62" style="width:103px; top:426px; left:197px;"/>
+<input type="text" name="m186r63" id="m186r63" style="width:102px; top:426px; left:311px;"/>
+<input type="text" name="m186r64" id="m186r64" style="width:114px; top:426px; left:424px;"/>
+<input type="text" name="m186r65" id="m186r65" style="width:115px; top:426px; left:548px;"/>
+<input type="text" name="m186r66" id="m186r66" style="width:102px; top:426px; left:673px;"/>
+<input type="text" name="m186r67" id="m186r67" style="width:101px; top:426px; left:787px;"/>
+<input type="text" name="m186r71" id="m186r71" style="width:87px; top:454px; left:100px;"/>
+<input type="text" name="m186r72" id="m186r72" style="width:103px; top:454px; left:197px;"/>
+<input type="text" name="m186r73" id="m186r73" style="width:102px; top:454px; left:311px;"/>
+<input type="text" name="m186r74" id="m186r74" style="width:114px; top:454px; left:424px;"/>
+<input type="text" name="m186r75" id="m186r75" style="width:115px; top:454px; left:548px;"/>
+<input type="text" name="m186r76" id="m186r76" style="width:102px; top:454px; left:673px;"/>
+<input type="text" name="m186r77" id="m186r77" style="width:101px; top:454px; left:787px;"/>
+<input type="text" name="m186r81" id="m186r81" style="width:87px; top:481px; left:100px;"/>
+<input type="text" name="m186r82" id="m186r82" style="width:103px; top:481px; left:197px;"/>
+<input type="text" name="m186r83" id="m186r83" style="width:102px; top:481px; left:311px;"/>
+<input type="text" name="m186r84" id="m186r84" style="width:114px; top:481px; left:424px;"/>
+<input type="text" name="m186r85" id="m186r85" style="width:115px; top:481px; left:548px;"/>
+<input type="text" name="m186r86" id="m186r86" style="width:102px; top:481px; left:673px;"/>
+<input type="text" name="m186r87" id="m186r87" style="width:101px; top:481px; left:787px;"/>
+<input type="text" name="m186r91" id="m186r91" style="width:87px; top:508px; left:100px;"/>
+<input type="text" name="m186r92" id="m186r92" style="width:103px; top:508px; left:197px;"/>
+<input type="text" name="m186r93" id="m186r93" style="width:102px; top:508px; left:311px;"/>
+<input type="text" name="m186r94" id="m186r94" style="width:114px; top:508px; left:424px;"/>
+<input type="text" name="m186r95" id="m186r95" style="width:115px; top:508px; left:548px;"/>
+<input type="text" name="m186r96" id="m186r96" style="width:102px; top:508px; left:673px;"/>
+<input type="text" name="m186r97" id="m186r97" style="width:101px; top:508px; left:787px;"/>
+<input type="text" name="m186r101" id="m186r101" style="width:87px; top:536px; left:100px;"/>
+<input type="text" name="m186r102" id="m186r102" style="width:103px; top:536px; left:197px;"/>
+<input type="text" name="m186r103" id="m186r103" style="width:102px; top:536px; left:311px;"/>
+<input type="text" name="m186r104" id="m186r104" style="width:114px; top:536px; left:424px;"/>
+<input type="text" name="m186r105" id="m186r105" style="width:115px; top:536px; left:548px;"/>
+<input type="text" name="m186r106" id="m186r106" style="width:102px; top:536px; left:673px;"/>
+<input type="text" name="m186r107" id="m186r107" style="width:101px; top:536px; left:787px;"/>
+<input type="text" name="m186r111" id="m186r111" style="width:87px; top:563px; left:100px;"/>
+<input type="text" name="m186r112" id="m186r112" style="width:103px; top:563px; left:197px;"/>
+<input type="text" name="m186r113" id="m186r113" style="width:102px; top:563px; left:311px;"/>
+<input type="text" name="m186r114" id="m186r114" style="width:114px; top:563px; left:424px;"/>
+<input type="text" name="m186r115" id="m186r115" style="width:115px; top:563px; left:548px;"/>
+<input type="text" name="m186r116" id="m186r116" style="width:102px; top:563px; left:673px;"/>
+<input type="text" name="m186r117" id="m186r117" style="width:101px; top:563px; left:787px;"/>
+<input type="text" name="m186r121" id="m186r121" style="width:87px; top:591px; left:100px;"/>
+<input type="text" name="m186r122" id="m186r122" style="width:103px; top:591px; left:197px;"/>
+<input type="text" name="m186r123" id="m186r123" style="width:102px; top:591px; left:311px;"/>
+<input type="text" name="m186r124" id="m186r124" style="width:114px; top:591px; left:424px;"/>
+<input type="text" name="m186r125" id="m186r125" style="width:115px; top:591px; left:548px;"/>
+<input type="text" name="m186r126" id="m186r126" style="width:102px; top:591px; left:673px;"/>
+<input type="text" name="m186r127" id="m186r127" style="width:101px; top:591px; left:787px;"/>
+<input type="text" name="m186r131" id="m186r131" style="width:87px; top:618px; left:100px;"/>
+<input type="text" name="m186r132" id="m186r132" style="width:103px; top:618px; left:197px;"/>
+<input type="text" name="m186r133" id="m186r133" style="width:102px; top:618px; left:311px;"/>
+<input type="text" name="m186r134" id="m186r134" style="width:114px; top:618px; left:424px;"/>
+<input type="text" name="m186r135" id="m186r135" style="width:115px; top:618px; left:548px;"/>
+<input type="text" name="m186r136" id="m186r136" style="width:102px; top:618px; left:673px;"/>
+<input type="text" name="m186r137" id="m186r137" style="width:101px; top:618px; left:787px;"/>
+<input type="text" name="m186r141" id="m186r141" style="width:87px; top:645px; left:100px;"/>
+<input type="text" name="m186r142" id="m186r142" style="width:103px; top:645px; left:197px;"/>
+<input type="text" name="m186r143" id="m186r143" style="width:102px; top:645px; left:311px;"/>
+<input type="text" name="m186r144" id="m186r144" style="width:114px; top:645px; left:424px;"/>
+<input type="text" name="m186r145" id="m186r145" style="width:115px; top:645px; left:548px;"/>
+<input type="text" name="m186r146" id="m186r146" style="width:102px; top:645px; left:673px;"/>
+<input type="text" name="m186r147" id="m186r147" style="width:101px; top:645px; left:787px;"/>
+<input type="text" name="m186r151" id="m186r151" style="width:87px; top:673px; left:100px;"/>
+<input type="text" name="m186r152" id="m186r152" style="width:103px; top:673px; left:197px;"/>
+<input type="text" name="m186r153" id="m186r153" style="width:102px; top:673px; left:311px;"/>
+<input type="text" name="m186r154" id="m186r154" style="width:114px; top:673px; left:424px;"/>
+<input type="text" name="m186r155" id="m186r155" style="width:115px; top:673px; left:548px;"/>
+<input type="text" name="m186r156" id="m186r156" style="width:102px; top:673px; left:673px;"/>
+<input type="text" name="m186r157" id="m186r157" style="width:101px; top:673px; left:787px;"/>
+<input type="text" name="m186r161" id="m186r161" style="width:87px; top:700px; left:100px;"/>
+<input type="text" name="m186r162" id="m186r162" style="width:103px; top:700px; left:197px;"/>
+<input type="text" name="m186r163" id="m186r163" style="width:102px; top:700px; left:311px;"/>
+<input type="text" name="m186r164" id="m186r164" style="width:114px; top:700px; left:424px;"/>
+<input type="text" name="m186r165" id="m186r165" style="width:115px; top:700px; left:548px;"/>
+<input type="text" name="m186r166" id="m186r166" style="width:102px; top:700px; left:673px;"/>
+<input type="text" name="m186r167" id="m186r167" style="width:101px; top:700px; left:787px;"/>
+<input type="text" name="m186r171" id="m186r171" style="width:87px; top:728px; left:100px;"/>
+<input type="text" name="m186r172" id="m186r172" style="width:103px; top:728px; left:197px;"/>
+<input type="text" name="m186r173" id="m186r173" style="width:102px; top:728px; left:311px;"/>
+<input type="text" name="m186r174" id="m186r174" style="width:114px; top:728px; left:424px;"/>
+<input type="text" name="m186r175" id="m186r175" style="width:115px; top:728px; left:548px;"/>
+<input type="text" name="m186r176" id="m186r176" style="width:102px; top:728px; left:673px;"/>
+<input type="text" name="m186r177" id="m186r177" style="width:101px; top:728px; left:787px;"/>
+<input type="text" name="m186r181" id="m186r181" style="width:87px; top:755px; left:100px;"/>
+<input type="text" name="m186r182" id="m186r182" style="width:103px; top:755px; left:197px;"/>
+<input type="text" name="m186r183" id="m186r183" style="width:102px; top:755px; left:311px;"/>
+<input type="text" name="m186r184" id="m186r184" style="width:114px; top:755px; left:424px;"/>
+<input type="text" name="m186r185" id="m186r185" style="width:115px; top:755px; left:548px;"/>
+<input type="text" name="m186r186" id="m186r186" style="width:102px; top:755px; left:673px;"/>
+<input type="text" name="m186r187" id="m186r187" style="width:101px; top:755px; left:787px;"/>
+<input type="text" name="m186r191" id="m186r191" style="width:87px; top:782px; left:100px;"/>
+<input type="text" name="m186r192" id="m186r192" style="width:103px; top:782px; left:197px;"/>
+<input type="text" name="m186r193" id="m186r193" style="width:102px; top:782px; left:311px;"/>
+<input type="text" name="m186r194" id="m186r194" style="width:114px; top:782px; left:424px;"/>
+<input type="text" name="m186r195" id="m186r195" style="width:115px; top:782px; left:548px;"/>
+<input type="text" name="m186r196" id="m186r196" style="width:102px; top:782px; left:673px;"/>
+<input type="text" name="m186r197" id="m186r197" style="width:101px; top:782px; left:787px;"/>
+<input type="text" name="m186r201" id="m186r201" style="width:87px; top:810px; left:100px;"/>
+<input type="text" name="m186r202" id="m186r202" style="width:103px; top:810px; left:197px;"/>
+<input type="text" name="m186r203" id="m186r203" style="width:102px; top:810px; left:311px;"/>
+<input type="text" name="m186r204" id="m186r204" style="width:114px; top:810px; left:424px;"/>
+<input type="text" name="m186r205" id="m186r205" style="width:115px; top:810px; left:548px;"/>
+<input type="text" name="m186r206" id="m186r206" style="width:102px; top:810px; left:673px;"/>
+<input type="text" name="m186r207" id="m186r207" style="width:101px; top:810px; left:787px;"/>
+<input type="text" name="m186r211" id="m186r211" style="width:87px; top:837px; left:100px;"/>
+<input type="text" name="m186r212" id="m186r212" style="width:103px; top:837px; left:197px;"/>
+<input type="text" name="m186r213" id="m186r213" style="width:102px; top:837px; left:311px;"/>
+<input type="text" name="m186r214" id="m186r214" style="width:114px; top:837px; left:424px;"/>
+<input type="text" name="m186r215" id="m186r215" style="width:115px; top:837px; left:548px;"/>
+<input type="text" name="m186r216" id="m186r216" style="width:102px; top:837px; left:673px;"/>
+<input type="text" name="m186r217" id="m186r217" style="width:101px; top:837px; left:787px;"/>
+<input type="text" name="m186r221" id="m186r221" style="width:87px; top:865px; left:100px;"/>
+<input type="text" name="m186r222" id="m186r222" style="width:103px; top:865px; left:197px;"/>
+<input type="text" name="m186r223" id="m186r223" style="width:102px; top:865px; left:311px;"/>
+<input type="text" name="m186r224" id="m186r224" style="width:114px; top:865px; left:424px;"/>
+<input type="text" name="m186r225" id="m186r225" style="width:115px; top:865px; left:548px;"/>
+<input type="text" name="m186r226" id="m186r226" style="width:102px; top:865px; left:673px;"/>
+<input type="text" name="m186r227" id="m186r227" style="width:101px; top:865px; left:787px;"/>
+<input type="text" name="m186r231" id="m186r231" style="width:87px; top:892px; left:100px;"/>
+<input type="text" name="m186r232" id="m186r232" style="width:103px; top:892px; left:197px;"/>
+<input type="text" name="m186r233" id="m186r233" style="width:102px; top:892px; left:311px;"/>
+<input type="text" name="m186r234" id="m186r234" style="width:114px; top:892px; left:424px;"/>
+<input type="text" name="m186r235" id="m186r235" style="width:115px; top:892px; left:548px;"/>
+<input type="text" name="m186r236" id="m186r236" style="width:102px; top:892px; left:673px;"/>
+<input type="text" name="m186r237" id="m186r237" style="width:101px; top:892px; left:787px;"/>
+<input type="text" name="m186r241" id="m186r241" style="width:87px; top:920px; left:100px;"/>
+<input type="text" name="m186r242" id="m186r242" style="width:103px; top:920px; left:197px;"/>
+<input type="text" name="m186r243" id="m186r243" style="width:102px; top:920px; left:311px;"/>
+<input type="text" name="m186r244" id="m186r244" style="width:114px; top:920px; left:424px;"/>
+<input type="text" name="m186r245" id="m186r245" style="width:115px; top:920px; left:548px;"/>
+<input type="text" name="m186r246" id="m186r246" style="width:102px; top:920px; left:673px;"/>
+<input type="text" name="m186r247" id="m186r247" style="width:101px; top:920px; left:787px;"/>
+<input type="text" name="m186r251" id="m186r251" style="width:87px; top:947px; left:100px;"/>
+<input type="text" name="m186r252" id="m186r252" style="width:103px; top:947px; left:197px;"/>
+<input type="text" name="m186r253" id="m186r253" style="width:102px; top:947px; left:311px;"/>
+<input type="text" name="m186r254" id="m186r254" style="width:114px; top:947px; left:424px;"/>
+<input type="text" name="m186r255" id="m186r255" style="width:115px; top:947px; left:548px;"/>
+<input type="text" name="m186r256" id="m186r256" style="width:102px; top:947px; left:673px;"/>
+<input type="text" name="m186r257" id="m186r257" style="width:101px; top:947px; left:787px;"/>
+<input type="text" name="m186r261" id="m186r261" style="width:87px; top:974px; left:100px;"/>
+<input type="text" name="m186r262" id="m186r262" style="width:103px; top:974px; left:197px;"/>
+<input type="text" name="m186r263" id="m186r263" style="width:102px; top:974px; left:311px;"/>
+<input type="text" name="m186r264" id="m186r264" style="width:114px; top:974px; left:424px;"/>
+<input type="text" name="m186r265" id="m186r265" style="width:115px; top:974px; left:548px;"/>
+<input type="text" name="m186r266" id="m186r266" style="width:102px; top:974px; left:673px;"/>
+<input type="text" name="m186r267" id="m186r267" style="width:101px; top:974px; left:787px;"/>
+<input type="text" name="m186r271" id="m186r271" style="width:87px; top:1002px; left:100px;"/>
+<input type="text" name="m186r272" id="m186r272" style="width:103px; top:1002px; left:197px;"/>
+<input type="text" name="m186r273" id="m186r273" style="width:102px; top:1002px; left:311px;"/>
+<input type="text" name="m186r274" id="m186r274" style="width:114px; top:1002px; left:424px;"/>
+<input type="text" name="m186r275" id="m186r275" style="width:115px; top:1002px; left:548px;"/>
+<input type="text" name="m186r276" id="m186r276" style="width:102px; top:1002px; left:673px;"/>
+<input type="text" name="m186r277" id="m186r277" style="width:101px; top:1002px; left:787px;"/>
+<input type="text" name="m186r281" id="m186r281" style="width:87px; top:1029px; left:100px;"/>
+<input type="text" name="m186r282" id="m186r282" style="width:103px; top:1029px; left:197px;"/>
+<input type="text" name="m186r283" id="m186r283" style="width:102px; top:1029px; left:311px;"/>
+<input type="text" name="m186r284" id="m186r284" style="width:114px; top:1029px; left:424px;"/>
+<input type="text" name="m186r285" id="m186r285" style="width:115px; top:1029px; left:548px;"/>
+<input type="text" name="m186r286" id="m186r286" style="width:102px; top:1029px; left:673px;"/>
+<input type="text" name="m186r287" id="m186r287" style="width:101px; top:1029px; left:787px;"/>
+<input type="text" name="m186r291" id="m186r291" style="width:87px; top:1056px; left:100px;"/>
+<input type="text" name="m186r292" id="m186r292" style="width:103px; top:1056px; left:197px;"/>
+<input type="text" name="m186r293" id="m186r293" style="width:102px; top:1056px; left:311px;"/>
+<input type="text" name="m186r294" id="m186r294" style="width:114px; top:1056px; left:424px;"/>
+<input type="text" name="m186r295" id="m186r295" style="width:115px; top:1056px; left:548px;"/>
+<input type="text" name="m186r296" id="m186r296" style="width:102px; top:1056px; left:673px;"/>
+<input type="text" name="m186r297" id="m186r297" style="width:101px; top:1056px; left:787px;"/>
+<input type="text" name="m186r301" id="m186r301" style="width:87px; top:1084px; left:100px;"/>
+<input type="text" name="m186r302" id="m186r302" style="width:103px; top:1084px; left:197px;"/>
+<input type="text" name="m186r303" id="m186r303" style="width:102px; top:1084px; left:311px;"/>
+<input type="text" name="m186r304" id="m186r304" style="width:114px; top:1084px; left:424px;"/>
+<input type="text" name="m186r305" id="m186r305" style="width:115px; top:1084px; left:548px;"/>
+<input type="text" name="m186r306" id="m186r306" style="width:102px; top:1084px; left:673px;"/>
+<input type="text" name="m186r307" id="m186r307" style="width:101px; top:1084px; left:787px;"/>
+<span class="text-echo" style="top:1116px; right:648px;"><?php echo $m186r992; ?></span>
+<span class="text-echo" style="top:1116px; right:536px;"><?php echo $m186r993; ?></span>
+<span class="text-echo" style="top:1116px; right:411px;"><?php echo $m186r994; ?></span>
+<span class="text-echo" style="top:1116px; right:285px;"><?php echo $m186r995; ?></span>
+<span class="text-echo" style="top:1116px; right:173px;"><?php echo $m186r996; ?></span>
+<span class="text-echo" style="top:1116px; right:60px;"><?php echo $m186r997; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 10 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str10.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 10.strana 240kB">
+<img src="<?php echo $jpg_cesta; ?>_str10.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 10.strana 240kB">
+<span class="text-echo" style="top:79px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 187 -->
-<input type="text" name="m187r1" id="m187r1" style="width:100px; top:168px; left:675px;"/>
+<input type="text" name="m187r1" id="m187r1" style="width:100px; top:208px; left:675px;"/>
 
 <!-- modul 100101 -->
-<input type="checkbox" name="m1590r1a" value="1" onclick="klikm1590r1ano();"
-       style="top:290px; left:839px;"/>
-<input type="checkbox" name="m1590r1b" value="1" onclick="klikm1590r1nie();"
-       style="top:311px; left:839px;"/>
+<input type="checkbox" name="m1590r1a" value="1" onclick="klikm1590r1ano();" style="top:322px; left:839px;"/>
+<input type="checkbox" name="m1590r1b" value="1" onclick="klikm1590r1nie();" style="top:342px; left:839px;"/>
 
 <!-- modul 100102 -->
-<input type="checkbox" name="m1590r2a" value="1" onclick="klikm1590r2ano();"
-       style="top:438px; left:839px;"/>
-<input type="checkbox" name="m1590r2b" value="1" onclick="klikm1590r2nie();"
-       style="top:458px; left:839px;"/>
+<input type="checkbox" name="m1590r2a" value="1" onclick="klikm1590r2ano();" style="top:469px; left:839px;"/>
+<input type="checkbox" name="m1590r2b" value="1" onclick="klikm1590r2nie();" style="top:490px; left:839px;"/>
 
 <!-- modul 590 -->
-<input type="text" name="m590r11" id="m590r11" style="width:154px; top:677px; left:90px;"/>
-<input type="text" name="m590r12" id="m590r12" style="width:161px; top:677px; left:253px;"/>
-<input type="text" name="m590r13" id="m590r13" style="width:149px; top:677px; left:423px;"/>
-<input type="text" name="m590r14" id="m590r14" style="width:149px; top:677px; left:582px;"/>
-<input type="text" name="m590r15" id="m590r15" style="width:149px; top:677px; left:740px;"/>
-<input type="text" name="m590r21" id="m590r21" style="width:154px; top:703px; left:90px;"/>
-<input type="text" name="m590r22" id="m590r22" style="width:161px; top:703px; left:253px;"/>
-<input type="text" name="m590r23" id="m590r23" style="width:149px; top:703px; left:423px;"/>
-<input type="text" name="m590r24" id="m590r24" style="width:149px; top:703px; left:582px;"/>
-<input type="text" name="m590r25" id="m590r25" style="width:149px; top:703px; left:740px;"/>
-<input type="text" name="m590r31" id="m590r31" style="width:154px; top:729px; left:90px;"/>
-<input type="text" name="m590r32" id="m590r32" style="width:161px; top:729px; left:253px;"/>
-<input type="text" name="m590r33" id="m590r33" style="width:149px; top:729px; left:423px;"/>
-<input type="text" name="m590r34" id="m590r34" style="width:149px; top:729px; left:582px;"/>
-<input type="text" name="m590r35" id="m590r35" style="width:149px; top:729px; left:740px;"/>
-<input type="text" name="m590r41" id="m590r41" style="width:154px; top:755px; left:90px;"/>
-<input type="text" name="m590r42" id="m590r42" style="width:161px; top:755px; left:253px;"/>
-<input type="text" name="m590r43" id="m590r43" style="width:149px; top:755px; left:423px;"/>
-<input type="text" name="m590r44" id="m590r44" style="width:149px; top:755px; left:582px;"/>
-<input type="text" name="m590r45" id="m590r45" style="width:149px; top:755px; left:740px;"/>
-<input type="text" name="m590r51" id="m590r51" style="width:154px; top:782px; left:90px;"/>
-<input type="text" name="m590r52" id="m590r52" style="width:161px; top:782px; left:253px;"/>
-<input type="text" name="m590r53" id="m590r53" style="width:149px; top:782px; left:423px;"/>
-<input type="text" name="m590r54" id="m590r54" style="width:149px; top:782px; left:582px;"/>
-<input type="text" name="m590r55" id="m590r55" style="width:149px; top:782px; left:740px;"/>
-<input type="text" name="m590r61" id="m590r61" style="width:154px; top:808px; left:90px;"/>
-<input type="text" name="m590r62" id="m590r62" style="width:161px; top:808px; left:253px;"/>
-<input type="text" name="m590r63" id="m590r63" style="width:149px; top:808px; left:423px;"/>
-<input type="text" name="m590r64" id="m590r64" style="width:149px; top:808px; left:582px;"/>
-<input type="text" name="m590r65" id="m590r65" style="width:149px; top:808px; left:740px;"/>
-<input type="text" name="m590r71" id="m590r71" style="width:154px; top:834px; left:90px;"/>
-<input type="text" name="m590r72" id="m590r72" style="width:161px; top:834px; left:253px;"/>
-<input type="text" name="m590r73" id="m590r73" style="width:149px; top:834px; left:423px;"/>
-<input type="text" name="m590r74" id="m590r74" style="width:149px; top:834px; left:582px;"/>
-<input type="text" name="m590r75" id="m590r75" style="width:149px; top:834px; left:740px;"/>
-<input type="text" name="m590r81" id="m590r81" style="width:154px; top:860px; left:90px;"/>
-<input type="text" name="m590r82" id="m590r82" style="width:161px; top:860px; left:253px;"/>
-<input type="text" name="m590r83" id="m590r83" style="width:149px; top:860px; left:423px;"/>
-<input type="text" name="m590r84" id="m590r84" style="width:149px; top:860px; left:582px;"/>
-<input type="text" name="m590r85" id="m590r85" style="width:149px; top:860px; left:740px;"/>
-<input type="text" name="m590r91" id="m590r91" style="width:154px; top:886px; left:90px;"/>
-<input type="text" name="m590r92" id="m590r92" style="width:161px; top:886px; left:253px;"/>
-<input type="text" name="m590r93" id="m590r93" style="width:149px; top:886px; left:423px;"/>
-<input type="text" name="m590r94" id="m590r94" style="width:149px; top:886px; left:582px;"/>
-<input type="text" name="m590r95" id="m590r95" style="width:149px; top:886px; left:740px;"/>
-<input type="text" name="m590r101" id="m590r101" style="width:154px; top:913px; left:90px;"/>
-<input type="text" name="m590r102" id="m590r102" style="width:161px; top:913px; left:253px;"/>
-<input type="text" name="m590r103" id="m590r103" style="width:149px; top:913px; left:423px;"/>
-<input type="text" name="m590r104" id="m590r104" style="width:149px; top:913px; left:582px;"/>
-<input type="text" name="m590r105" id="m590r105" style="width:149px; top:913px; left:740px;"/>
-<input type="text" name="m590r111" id="m590r111" style="width:154px; top:939px; left:90px;"/>
-<input type="text" name="m590r112" id="m590r112" style="width:161px; top:939px; left:253px;"/>
-<input type="text" name="m590r113" id="m590r113" style="width:149px; top:939px; left:423px;"/>
-<input type="text" name="m590r114" id="m590r114" style="width:149px; top:939px; left:582px;"/>
-<input type="text" name="m590r115" id="m590r115" style="width:149px; top:939px; left:740px;"/>
-<input type="text" name="m590r121" id="m590r121" style="width:154px; top:965px; left:90px;"/>
-<input type="text" name="m590r122" id="m590r122" style="width:161px; top:965px; left:253px;"/>
-<input type="text" name="m590r123" id="m590r123" style="width:149px; top:965px; left:423px;"/>
-<input type="text" name="m590r124" id="m590r124" style="width:149px; top:965px; left:582px;"/>
-<input type="text" name="m590r125" id="m590r125" style="width:149px; top:965px; left:740px;"/>
-<input type="text" name="m590r131" id="m590r131" style="width:154px; top:992px; left:90px;"/>
-<input type="text" name="m590r132" id="m590r132" style="width:161px; top:992px; left:253px;"/>
-<input type="text" name="m590r133" id="m590r133" style="width:149px; top:992px; left:423px;"/>
-<input type="text" name="m590r134" id="m590r134" style="width:149px; top:992px; left:582px;"/>
-<input type="text" name="m590r135" id="m590r135" style="width:149px; top:992px; left:740px;"/>
-<input type="text" name="m590r141" id="m590r141" style="width:154px; top:1018px; left:90px;"/>
-<input type="text" name="m590r142" id="m590r142" style="width:161px; top:1018px; left:253px;"/>
-<input type="text" name="m590r143" id="m590r143" style="width:149px; top:1018px; left:423px;"/>
-<input type="text" name="m590r144" id="m590r144" style="width:149px; top:1018px; left:582px;"/>
-<input type="text" name="m590r145" id="m590r145" style="width:149px; top:1018px; left:740px;"/>
-<input type="text" name="m590r151" id="m590r151" style="width:154px; top:1044px; left:90px;"/>
-<input type="text" name="m590r152" id="m590r152" style="width:161px; top:1044px; left:253px;"/>
-<input type="text" name="m590r153" id="m590r153" style="width:149px; top:1044px; left:423px;"/>
-<input type="text" name="m590r154" id="m590r154" style="width:149px; top:1044px; left:582px;"/>
-<input type="text" name="m590r155" id="m590r155" style="width:149px; top:1044px; left:740px;"/>
-<input type="text" name="m590r161" id="m590r161" style="width:154px; top:1070px; left:90px;"/>
-<input type="text" name="m590r162" id="m590r162" style="width:161px; top:1070px; left:253px;"/>
-<input type="text" name="m590r163" id="m590r163" style="width:149px; top:1070px; left:423px;"/>
-<input type="text" name="m590r164" id="m590r164" style="width:149px; top:1070px; left:582px;"/>
-<input type="text" name="m590r165" id="m590r165" style="width:149px; top:1070px; left:740px;"/>
-<input type="text" name="m590r171" id="m590r171" style="width:154px; top:1097px; left:90px;"/>
-<input type="text" name="m590r172" id="m590r172" style="width:161px; top:1097px; left:253px;"/>
-<input type="text" name="m590r173" id="m590r173" style="width:149px; top:1097px; left:423px;"/>
-<input type="text" name="m590r174" id="m590r174" style="width:149px; top:1097px; left:582px;"/>
-<input type="text" name="m590r175" id="m590r175" style="width:149px; top:1097px; left:740px;"/>
-<input type="text" name="m590r181" id="m590r181" style="width:154px; top:1123px; left:90px;"/>
-<input type="text" name="m590r182" id="m590r182" style="width:161px; top:1123px; left:253px;"/>
-<input type="text" name="m590r183" id="m590r183" style="width:149px; top:1123px; left:423px;"/>
-<input type="text" name="m590r184" id="m590r184" style="width:149px; top:1123px; left:582px;"/>
-<input type="text" name="m590r185" id="m590r185" style="width:149px; top:1123px; left:740px;"/>
-<input type="text" name="m590r191" id="m590r191" style="width:154px; top:1149px; left:90px;"/>
-<input type="text" name="m590r192" id="m590r192" style="width:161px; top:1149px; left:253px;"/>
-<input type="text" name="m590r193" id="m590r193" style="width:149px; top:1149px; left:423px;"/>
-<input type="text" name="m590r194" id="m590r194" style="width:149px; top:1149px; left:582px;"/>
-<input type="text" name="m590r195" id="m590r195" style="width:149px; top:1149px; left:740px;"/>
-<input type="text" name="m590r201" id="m590r201" style="width:154px; top:1175px; left:90px;"/>
-<input type="text" name="m590r202" id="m590r202" style="width:161px; top:1175px; left:253px;"/>
-<input type="text" name="m590r203" id="m590r203" style="width:149px; top:1175px; left:423px;"/>
-<input type="text" name="m590r204" id="m590r204" style="width:149px; top:1175px; left:582px;"/>
-<input type="text" name="m590r205" id="m590r205" style="width:149px; top:1175px; left:740px;"/>
-<span class="text-echo" style="top:1206px; right:535px;"><?php echo $m590r992; ?></span>
-<span class="text-echo" style="top:1206px; right:376px;"><?php echo $m590r993; ?></span>
-<span class="text-echo" style="top:1206px; right:218px;"><?php echo $m590r994; ?></span>
-<span class="text-echo" style="top:1206px; right:60px;"><?php echo $m590r995; ?></span>
+<input type="text" name="m590r11" id="m590r11" style="width:124px; top:707px; left:100px;"/>
+<input type="text" name="m590r12" id="m590r12" style="width:178px; top:707px; left:235px;"/>
+<input type="text" name="m590r13" id="m590r13" style="width:159px; top:707px; left:424px;"/>
+<input type="text" name="m590r14" id="m590r14" style="width:147px; top:707px; left:594px;"/>
+<input type="text" name="m590r15" id="m590r15" style="width:136px; top:707px; left:752px;"/>
+<input type="text" name="m590r21" id="m590r21" style="width:124px; top:732px; left:100px;"/>
+<input type="text" name="m590r22" id="m590r22" style="width:178px; top:732px; left:235px;"/>
+<input type="text" name="m590r23" id="m590r23" style="width:159px; top:732px; left:424px;"/>
+<input type="text" name="m590r24" id="m590r24" style="width:147px; top:732px; left:594px;"/>
+<input type="text" name="m590r25" id="m590r25" style="width:136px; top:732px; left:752px;"/>
+<input type="text" name="m590r31" id="m590r31" style="width:124px; top:758px; left:100px;"/>
+<input type="text" name="m590r32" id="m590r32" style="width:178px; top:758px; left:235px;"/>
+<input type="text" name="m590r33" id="m590r33" style="width:159px; top:758px; left:424px;"/>
+<input type="text" name="m590r34" id="m590r34" style="width:147px; top:758px; left:594px;"/>
+<input type="text" name="m590r35" id="m590r35" style="width:136px; top:758px; left:752px;"/>
+<input type="text" name="m590r41" id="m590r41" style="width:124px; top:783px; left:100px;"/>
+<input type="text" name="m590r42" id="m590r42" style="width:178px; top:783px; left:235px;"/>
+<input type="text" name="m590r43" id="m590r43" style="width:159px; top:783px; left:424px;"/>
+<input type="text" name="m590r44" id="m590r44" style="width:147px; top:783px; left:594px;"/>
+<input type="text" name="m590r45" id="m590r45" style="width:136px; top:783px; left:752px;"/>
+<input type="text" name="m590r51" id="m590r51" style="width:124px; top:808px; left:100px;"/>
+<input type="text" name="m590r52" id="m590r52" style="width:178px; top:808px; left:235px;"/>
+<input type="text" name="m590r53" id="m590r53" style="width:159px; top:808px; left:424px;"/>
+<input type="text" name="m590r54" id="m590r54" style="width:147px; top:808px; left:594px;"/>
+<input type="text" name="m590r55" id="m590r55" style="width:136px; top:808px; left:752px;"/>
+<input type="text" name="m590r61" id="m590r61" style="width:124px; top:833px; left:100px;"/>
+<input type="text" name="m590r62" id="m590r62" style="width:178px; top:833px; left:235px;"/>
+<input type="text" name="m590r63" id="m590r63" style="width:159px; top:833px; left:424px;"/>
+<input type="text" name="m590r64" id="m590r64" style="width:147px; top:833px; left:594px;"/>
+<input type="text" name="m590r65" id="m590r65" style="width:136px; top:833px; left:752px;"/>
+<input type="text" name="m590r71" id="m590r71" style="width:124px; top:859px; left:100px;"/>
+<input type="text" name="m590r72" id="m590r72" style="width:178px; top:859px; left:235px;"/>
+<input type="text" name="m590r73" id="m590r73" style="width:159px; top:859px; left:424px;"/>
+<input type="text" name="m590r74" id="m590r74" style="width:147px; top:859px; left:594px;"/>
+<input type="text" name="m590r75" id="m590r75" style="width:136px; top:859px; left:752px;"/>
+<input type="text" name="m590r81" id="m590r81" style="width:124px; top:884px; left:100px;"/>
+<input type="text" name="m590r82" id="m590r82" style="width:178px; top:884px; left:235px;"/>
+<input type="text" name="m590r83" id="m590r83" style="width:159px; top:884px; left:424px;"/>
+<input type="text" name="m590r84" id="m590r84" style="width:147px; top:884px; left:594px;"/>
+<input type="text" name="m590r85" id="m590r85" style="width:136px; top:884px; left:752px;"/>
+<input type="text" name="m590r91" id="m590r91" style="width:124px; top:909px; left:100px;"/>
+<input type="text" name="m590r92" id="m590r92" style="width:178px; top:909px; left:235px;"/>
+<input type="text" name="m590r93" id="m590r93" style="width:159px; top:909px; left:424px;"/>
+<input type="text" name="m590r94" id="m590r94" style="width:147px; top:909px; left:594px;"/>
+<input type="text" name="m590r95" id="m590r95" style="width:136px; top:909px; left:752px;"/>
+<input type="text" name="m590r101" id="m590r101" style="width:124px; top:934px; left:100px;"/>
+<input type="text" name="m590r102" id="m590r102" style="width:178px; top:934px; left:235px;"/>
+<input type="text" name="m590r103" id="m590r103" style="width:159px; top:934px; left:424px;"/>
+<input type="text" name="m590r104" id="m590r104" style="width:147px; top:934px; left:594px;"/>
+<input type="text" name="m590r105" id="m590r105" style="width:136px; top:934px; left:752px;"/>
+<input type="text" name="m590r111" id="m590r111" style="width:124px; top:960px; left:100px;"/>
+<input type="text" name="m590r112" id="m590r112" style="width:178px; top:960px; left:235px;"/>
+<input type="text" name="m590r113" id="m590r113" style="width:159px; top:960px; left:424px;"/>
+<input type="text" name="m590r114" id="m590r114" style="width:147px; top:960px; left:594px;"/>
+<input type="text" name="m590r115" id="m590r115" style="width:136px; top:960px; left:752px;"/>
+<input type="text" name="m590r121" id="m590r121" style="width:124px; top:985px; left:100px;"/>
+<input type="text" name="m590r122" id="m590r122" style="width:178px; top:985px; left:235px;"/>
+<input type="text" name="m590r123" id="m590r123" style="width:159px; top:985px; left:424px;"/>
+<input type="text" name="m590r124" id="m590r124" style="width:147px; top:985px; left:594px;"/>
+<input type="text" name="m590r125" id="m590r125" style="width:136px; top:985px; left:752px;"/>
+<input type="text" name="m590r131" id="m590r131" style="width:124px; top:1010px; left:100px;"/>
+<input type="text" name="m590r132" id="m590r132" style="width:178px; top:1010px; left:235px;"/>
+<input type="text" name="m590r133" id="m590r133" style="width:159px; top:1010px; left:424px;"/>
+<input type="text" name="m590r134" id="m590r134" style="width:147px; top:1010px; left:594px;"/>
+<input type="text" name="m590r135" id="m590r135" style="width:136px; top:1010px; left:752px;"/>
+<input type="text" name="m590r141" id="m590r141" style="width:124px; top:1035px; left:100px;"/>
+<input type="text" name="m590r142" id="m590r142" style="width:178px; top:1035px; left:235px;"/>
+<input type="text" name="m590r143" id="m590r143" style="width:159px; top:1035px; left:424px;"/>
+<input type="text" name="m590r144" id="m590r144" style="width:147px; top:1035px; left:594px;"/>
+<input type="text" name="m590r145" id="m590r145" style="width:136px; top:1035px; left:752px;"/>
+<input type="text" name="m590r151" id="m590r151" style="width:124px; top:1061px; left:100px;"/>
+<input type="text" name="m590r152" id="m590r152" style="width:178px; top:1061px; left:235px;"/>
+<input type="text" name="m590r153" id="m590r153" style="width:159px; top:1061px; left:424px;"/>
+<input type="text" name="m590r154" id="m590r154" style="width:147px; top:1061px; left:594px;"/>
+<input type="text" name="m590r155" id="m590r155" style="width:136px; top:1061px; left:752px;"/>
+<input type="text" name="m590r161" id="m590r161" style="width:124px; top:1086px; left:100px;"/>
+<input type="text" name="m590r162" id="m590r162" style="width:178px; top:1086px; left:235px;"/>
+<input type="text" name="m590r163" id="m590r163" style="width:159px; top:1086px; left:424px;"/>
+<input type="text" name="m590r164" id="m590r164" style="width:147px; top:1086px; left:594px;"/>
+<input type="text" name="m590r165" id="m590r165" style="width:136px; top:1086px; left:752px;"/>
+<input type="text" name="m590r171" id="m590r171" style="width:124px; top:1111px; left:100px;"/>
+<input type="text" name="m590r172" id="m590r172" style="width:178px; top:1111px; left:235px;"/>
+<input type="text" name="m590r173" id="m590r173" style="width:159px; top:1111px; left:424px;"/>
+<input type="text" name="m590r174" id="m590r174" style="width:147px; top:1111px; left:594px;"/>
+<input type="text" name="m590r175" id="m590r175" style="width:136px; top:1111px; left:752px;"/>
+<input type="text" name="m590r181" id="m590r181" style="width:124px; top:1136px; left:100px;"/>
+<input type="text" name="m590r182" id="m590r182" style="width:178px; top:1136px; left:235px;"/>
+<input type="text" name="m590r183" id="m590r183" style="width:159px; top:1136px; left:424px;"/>
+<input type="text" name="m590r184" id="m590r184" style="width:147px; top:1136px; left:594px;"/>
+<input type="text" name="m590r185" id="m590r185" style="width:136px; top:1136px; left:752px;"/>
+<input type="text" name="m590r191" id="m590r191" style="width:124px; top:1162px; left:100px;"/>
+<input type="text" name="m590r192" id="m590r192" style="width:178px; top:1162px; left:235px;"/>
+<input type="text" name="m590r193" id="m590r193" style="width:159px; top:1162px; left:424px;"/>
+<input type="text" name="m590r194" id="m590r194" style="width:147px; top:1162px; left:594px;"/>
+<input type="text" name="m590r195" id="m590r195" style="width:136px; top:1162px; left:752px;"/>
+<input type="text" name="m590r201" id="m590r201" style="width:124px; top:1187px; left:100px;"/>
+<input type="text" name="m590r202" id="m590r202" style="width:178px; top:1187px; left:235px;"/>
+<input type="text" name="m590r203" id="m590r203" style="width:159px; top:1187px; left:424px;"/>
+<input type="text" name="m590r204" id="m590r204" style="width:147px; top:1187px; left:594px;"/>
+<input type="text" name="m590r205" id="m590r205" style="width:136px; top:1187px; left:752px;"/>
+<span class="text-echo" style="top:1218px; right:535px;"><?php echo $m590r992; ?></span>
+<span class="text-echo" style="top:1218px; right:376px;"><?php echo $m590r993; ?></span>
+<span class="text-echo" style="top:1218px; right:218px;"><?php echo $m590r994; ?></span>
+<span class="text-echo" style="top:1218px; right:60px;"><?php echo $m590r995; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 11 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str11.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 11.strana 277kB">
+<img src="<?php echo $jpg_cesta; ?>_str11.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 11.strana 277kB">
+<span class="text-echo" style="top:79px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 304 -->
-<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z Miezd"
-     onclick="NacitajMzdy();" style="top:104px; left:378px;" class="btn-row-tool">
-<input type="text" name="m304r1" id="m304r1" style="width:100px; top:202px; left:755px;"/>
-<input type="text" name="m304r2" id="m304r2" style="width:100px; top:231px; left:755px;"/>
-<input type="text" name="m304r3" id="m304r3" style="width:100px; top:262px; left:755px;"/>
-<input type="text" name="m304r4" id="m304r4" style="width:100px; top:293px; left:755px;"/>
-<input type="text" name="m304r5" id="m304r5" style="width:100px; top:323px; left:755px;"/>
-<input type="text" name="m304r6" id="m304r6" style="width:100px; top:354px; left:755px;"/>
-<input type="text" name="m304r7" id="m304r7" style="width:100px; top:385px; left:755px;"/>
-<input type="text" name="m304r8" id="m304r8" style="width:100px; top:425px; left:755px;"/>
-<input type="text" name="m304r9" id="m304r9" style="width:100px; top:464px; left:755px;"/>
-<input type="text" name="m304r10" id="m304r10" style="width:100px; top:494px; left:755px;"/>
-<input type="text" name="m304r11" id="m304r11" style="width:100px; top:525px; left:755px;"/>
-<input type="text" name="m304r12" id="m304r12" style="width:100px; top:556px; left:755px;"/>
-<input type="text" name="m304r13" id="m304r13" style="width:100px; top:586px; left:755px;"/>
-<input type="text" name="m304r14" id="m304r14" style="width:100px; top:617px; left:755px;"/>
-<input type="text" name="m304r15" id="m304r15" style="width:100px; top:647px; left:755px;"/>
-<input type="text" name="m304r16" id="m304r16" style="width:100px; top:678px; left:755px;"/>
-<span class="text-echo" style="top:713px; right:95px;"><?php echo $m304r99; ?></span>
+<img src="../obr/ikony/download_blue_icon.png" title="Naèíta údaje z miezd" onclick="NacitajMzdy();" style="top:158px; left:378px;" class="btn-row-tool">
+<input type="text" name="m304r1" id="m304r1" style="width:100px; top:282px; left:755px;"/>
+<input type="text" name="m304r2" id="m304r2" style="width:100px; top:314px; left:755px;"/>
+<input type="text" name="m304r3" id="m304r3" style="width:100px; top:346px; left:755px;"/>
+<input type="text" name="m304r4" id="m304r4" style="width:100px; top:378px; left:755px;"/>
+<input type="text" name="m304r5" id="m304r5" style="width:100px; top:410px; left:755px;"/>
+<input type="text" name="m304r6" id="m304r6" style="width:100px; top:442px; left:755px;"/>
+<input type="text" name="m304r7" id="m304r7" style="width:100px; top:476px; left:755px;"/>
+<input type="text" name="m304r8" id="m304r8" style="width:100px; top:512px; left:755px;"/>
+<input type="text" name="m304r9" id="m304r9" style="width:100px; top:547px; left:755px;"/>
+<input type="text" name="m304r10" id="m304r10" style="width:100px; top:579px; left:755px;"/>
+<input type="text" name="m304r11" id="m304r11" style="width:100px; top:610px; left:755px;"/>
+<input type="text" name="m304r12" id="m304r12" style="width:100px; top:642px; left:755px;"/>
+<input type="text" name="m304r13" id="m304r13" style="width:100px; top:674px; left:755px;"/>
+<input type="text" name="m304r14" id="m304r14" style="width:100px; top:706px; left:755px;"/>
+<input type="text" name="m304r15" id="m304r15" style="width:100px; top:737px; left:755px;"/>
+<input type="text" name="m304r16" id="m304r16" style="width:100px; top:769px; left:755px;"/>
+<span class="text-echo" style="top:805px; right:95px;"><?php echo $m304r99; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 12 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 12.strana 274kB">
+<img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 12.strana 274kB">
+<span class="text-echo" style="top:77px; left:480px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 110 -->
-<input type="text" name="m110r12" id="m110r12" style="width:58px; top:240px; left:359px;"/>
-<input type="text" name="m110r13" id="m110r13" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:240px; left:427px;"/>
-<input type="text" name="m110r14" id="m110r14" style="width:58px; top:240px; left:495px;"/>
-<input type="text" name="m110r15" id="m110r15" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:240px; left:563px;"/>
-<input type="text" name="m110r16" id="m110r16" style="width:58px; top:240px; left:631px;"/>
-<input type="text" name="m110r17" id="m110r17" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:240px; left:698px;"/>
-<input type="text" name="m110r18" id="m110r18" style="width:58px; top:240px; left:766px;"/>
-<input type="text" name="m110r19" id="m110r19" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:240px; left:834px;"/>
-<input type="text" name="m110r22" id="m110r22" style="width:58px; top:266px; left:359px;"/>
-<input type="text" name="m110r23" id="m110r23" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:266px; left:427px;"/>
-<input type="text" name="m110r24" id="m110r24" style="width:58px; top:266px; left:495px;"/>
-<input type="text" name="m110r25" id="m110r25" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:266px; left:563px;"/>
-<input type="text" name="m110r26" id="m110r26" style="width:58px; top:266px; left:631px;"/>
-<input type="text" name="m110r27" id="m110r27" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:266px; left:698px;"/>
-<input type="text" name="m110r28" id="m110r28" style="width:58px; top:266px; left:766px;"/>
-<input type="text" name="m110r29" id="m110r29" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:266px; left:834px;"/>
-<input type="text" name="m110r32" id="m110r32" style="width:58px; top:292px; left:359px;"/>
-<input type="text" name="m110r33" id="m110r33" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:292px; left:427px;"/>
-<input type="text" name="m110r34" id="m110r34" style="width:58px; top:292px; left:495px;"/>
-<input type="text" name="m110r35" id="m110r35" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:292px; left:563px;"/>
-<input type="text" name="m110r36" id="m110r36" style="width:58px; top:292px; left:631px;"/>
-<input type="text" name="m110r37" id="m110r37" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:292px; left:698px;"/>
-<input type="text" name="m110r38" id="m110r38" style="width:58px; top:292px; left:766px;"/>
-<input type="text" name="m110r39" id="m110r39" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:292px; left:834px;"/>
-<input type="text" name="m110r42" id="m110r42" style="width:58px; top:319px; left:359px;"/>
-<input type="text" name="m110r43" id="m110r43" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:319px; left:427px;"/>
-<input type="text" name="m110r44" id="m110r44" style="width:58px; top:319px; left:495px;"/>
-<input type="text" name="m110r45" id="m110r45" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:319px; left:563px;"/>
-<input type="text" name="m110r46" id="m110r46" style="width:58px; top:319px; left:631px;"/>
-<input type="text" name="m110r47" id="m110r47" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:319px; left:698px;"/>
-<input type="text" name="m110r48" id="m110r48" style="width:58px; top:319px; left:766px;"/>
-<input type="text" name="m110r49" id="m110r49" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:319px; left:834px;"/>
-<input type="text" name="m110r52" id="m110r52" style="width:58px; top:345px; left:359px;"/>
-<input type="text" name="m110r53" id="m110r53" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:345px; left:427px;"/>
-<input type="text" name="m110r54" id="m110r54" style="width:58px; top:345px; left:495px;"/>
-<input type="text" name="m110r55" id="m110r55" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:345px; left:563px;"/>
-<input type="text" name="m110r56" id="m110r56" style="width:58px; top:345px; left:631px;"/>
-<input type="text" name="m110r57" id="m110r57" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:345px; left:698px;"/>
-<input type="text" name="m110r58" id="m110r58" style="width:58px; top:345px; left:766px;"/>
-<input type="text" name="m110r59" id="m110r59" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:345px; left:834px;"/>
-<input type="text" name="m110r62" id="m110r62" style="width:58px; top:371px; left:359px;"/>
-<input type="text" name="m110r63" id="m110r63" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:371px; left:427px;"/>
-<input type="text" name="m110r64" id="m110r64" style="width:58px; top:371px; left:495px;"/>
-<input type="text" name="m110r65" id="m110r65" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:371px; left:563px;"/>
-<input type="text" name="m110r66" id="m110r66" style="width:58px; top:371px; left:631px;"/>
-<input type="text" name="m110r67" id="m110r67" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:371px; left:698px;"/>
-<input type="text" name="m110r68" id="m110r68" style="width:58px; top:371px; left:766px;"/>
-<input type="text" name="m110r69" id="m110r69" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:371px; left:834px;"/>
-<input type="text" name="m110r72" id="m110r72" style="width:58px; top:397px; left:359px;"/>
-<input type="text" name="m110r73" id="m110r73" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:397px; left:427px;"/>
-<input type="text" name="m110r74" id="m110r74" style="width:58px; top:397px; left:495px;"/>
-<input type="text" name="m110r75" id="m110r75" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:397px; left:563px;"/>
-<input type="text" name="m110r76" id="m110r76" style="width:58px; top:397px; left:631px;"/>
-<input type="text" name="m110r77" id="m110r77" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:397px; left:698px;"/>
-<input type="text" name="m110r78" id="m110r78" style="width:58px; top:397px; left:766px;"/>
-<input type="text" name="m110r79" id="m110r79" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:397px; left:834px;"/>
-<input type="text" name="m110r82" id="m110r82" style="width:58px; top:423px; left:359px;"/>
-<input type="text" name="m110r83" id="m110r83" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:423px; left:427px;"/>
-<input type="text" name="m110r84" id="m110r84" style="width:58px; top:423px; left:495px;"/>
-<input type="text" name="m110r85" id="m110r85" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:423px; left:563px;"/>
-<input type="text" name="m110r86" id="m110r86" style="width:58px; top:423px; left:631px;"/>
-<input type="text" name="m110r87" id="m110r87" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:423px; left:698px;"/>
-<input type="text" name="m110r88" id="m110r88" style="width:58px; top:423px; left:766px;"/>
-<input type="text" name="m110r89" id="m110r89" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:423px; left:834px;"/>
-<input type="text" name="m110r92" id="m110r92" style="width:58px; top:450px; left:359px;"/>
-<input type="text" name="m110r93" id="m110r93" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:450px; left:427px;"/>
-<input type="text" name="m110r94" id="m110r94" style="width:58px; top:450px; left:495px;"/>
-<input type="text" name="m110r95" id="m110r95" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:450px; left:563px;"/>
-<input type="text" name="m110r96" id="m110r96" style="width:58px; top:450px; left:631px;"/>
-<input type="text" name="m110r97" id="m110r97" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:450px; left:698px;"/>
-<input type="text" name="m110r98" id="m110r98" style="width:58px; top:450px; left:766px;"/>
-<input type="text" name="m110r99" id="m110r99" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:450px; left:834px;"/>
-<input type="text" name="m110r102" id="m110r102" style="width:58px; top:480px; left:359px;"/>
-<input type="text" name="m110r103" id="m110r103" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:480px; left:427px;"/>
-<input type="text" name="m110r104" id="m110r104" style="width:58px; top:480px; left:495px;"/>
-<input type="text" name="m110r105" id="m110r105" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:480px; left:563px;"/>
-<input type="text" name="m110r106" id="m110r106" style="width:58px; top:480px; left:631px;"/>
-<input type="text" name="m110r107" id="m110r107" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:480px; left:698px;"/>
-<input type="text" name="m110r108" id="m110r108" style="width:58px; top:480px; left:766px;"/>
-<input type="text" name="m110r109" id="m110r109" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:480px; left:834px;"/>
-<input type="text" name="m110r112" id="m110r112" style="width:58px; top:509px; left:359px;"/>
-<input type="text" name="m110r113" id="m110r113" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:509px; left:427px;"/>
-<input type="text" name="m110r114" id="m110r114" style="width:58px; top:509px; left:495px;"/>
-<input type="text" name="m110r115" id="m110r115" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:509px; left:563px;"/>
-<input type="text" name="m110r116" id="m110r116" style="width:58px; top:509px; left:631px;"/>
-<input type="text" name="m110r117" id="m110r117" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:509px; left:698px;"/>
-<input type="text" name="m110r118" id="m110r118" style="width:58px; top:509px; left:766px;"/>
-<input type="text" name="m110r119" id="m110r119" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:509px; left:834px;"/>
-<input type="text" name="m110r122" id="m110r122" style="width:58px; top:535px; left:359px;"/>
-<input type="text" name="m110r123" id="m110r123" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:535px; left:427px;"/>
-<input type="text" name="m110r124" id="m110r124" style="width:58px; top:535px; left:495px;"/>
-<input type="text" name="m110r125" id="m110r125" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:535px; left:563px;"/>
-<input type="text" name="m110r126" id="m110r126" style="width:58px; top:535px; left:631px;"/>
-<input type="text" name="m110r127" id="m110r127" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:535px; left:698px;"/>
-<input type="text" name="m110r128" id="m110r128" style="width:58px; top:535px; left:766px;"/>
-<input type="text" name="m110r129" id="m110r129" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:535px; left:834px;"/>
-<input type="text" name="m110r132" id="m110r132" style="width:58px; top:561px; left:359px;"/>
-<input type="text" name="m110r133" id="m110r133" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:561px; left:427px;"/>
-<input type="text" name="m110r134" id="m110r134" style="width:58px; top:561px; left:495px;"/>
-<input type="text" name="m110r135" id="m110r135" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:561px; left:563px;"/>
-<input type="text" name="m110r136" id="m110r136" style="width:58px; top:561px; left:631px;"/>
-<input type="text" name="m110r137" id="m110r137" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:561px; left:698px;"/>
-<input type="text" name="m110r138" id="m110r138" style="width:58px; top:561px; left:766px;"/>
-<input type="text" name="m110r139" id="m110r139" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:561px; left:834px;"/>
-<input type="text" name="m110r142" id="m110r142" style="width:58px; top:591px; left:359px;"/>
-<input type="text" name="m110r143" id="m110r143" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:591px; left:427px;"/>
-<input type="text" name="m110r144" id="m110r144" style="width:58px; top:591px; left:495px;"/>
-<input type="text" name="m110r145" id="m110r145" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:591px; left:563px;"/>
-<input type="text" name="m110r146" id="m110r146" style="width:58px; top:591px; left:631px;"/>
-<input type="text" name="m110r147" id="m110r147" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:591px; left:698px;"/>
-<input type="text" name="m110r148" id="m110r148" style="width:58px; top:591px; left:766px;"/>
-<input type="text" name="m110r149" id="m110r149" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:591px; left:834px;"/>
-<input type="text" name="m110r152" id="m110r152" style="width:58px; top:620px; left:359px;"/>
-<input type="text" name="m110r153" id="m110r153" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:620px; left:427px;"/>
-<input type="text" name="m110r154" id="m110r154" style="width:58px; top:620px; left:495px;"/>
-<input type="text" name="m110r155" id="m110r155" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:620px; left:563px;"/>
-<input type="text" name="m110r156" id="m110r156" style="width:58px; top:620px; left:631px;"/>
-<input type="text" name="m110r157" id="m110r157" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:620px; left:698px;"/>
-<input type="text" name="m110r158" id="m110r158" style="width:58px; top:620px; left:766px;"/>
-<input type="text" name="m110r159" id="m110r159" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:620px; left:834px;"/>
-<input type="text" name="m110r162" id="m110r162" style="width:58px; top:647px; left:359px;"/>
-<input type="text" name="m110r163" id="m110r163" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:647px; left:427px;"/>
-<input type="text" name="m110r164" id="m110r164" style="width:58px; top:647px; left:495px;"/>
-<input type="text" name="m110r165" id="m110r165" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:647px; left:563px;"/>
-<input type="text" name="m110r166" id="m110r166" style="width:58px; top:647px; left:631px;"/>
-<input type="text" name="m110r167" id="m110r167" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:647px; left:698px;"/>
-<input type="text" name="m110r168" id="m110r168" style="width:58px; top:647px; left:766px;"/>
-<input type="text" name="m110r169" id="m110r169" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:647px; left:834px;"/>
-<input type="text" name="m110r172" id="m110r172" style="width:58px; top:673px; left:359px;"/>
-<input type="text" name="m110r173" id="m110r173" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:673px; left:427px;"/>
-<input type="text" name="m110r174" id="m110r174" style="width:58px; top:673px; left:495px;"/>
-<input type="text" name="m110r175" id="m110r175" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:673px; left:563px;"/>
-<input type="text" name="m110r176" id="m110r176" style="width:58px; top:673px; left:631px;"/>
-<input type="text" name="m110r177" id="m110r177" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:673px; left:698px;"/>
-<input type="text" name="m110r178" id="m110r178" style="width:58px; top:673px; left:766px;"/>
-<input type="text" name="m110r179" id="m110r179" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:673px; left:834px;"/>
-<input type="text" name="m110r182" id="m110r182" style="width:58px; top:699px; left:359px;"/>
-<input type="text" name="m110r183" id="m110r183" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:699px; left:427px;"/>
-<input type="text" name="m110r184" id="m110r184" style="width:58px; top:699px; left:495px;"/>
-<input type="text" name="m110r185" id="m110r185" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:699px; left:563px;"/>
-<input type="text" name="m110r186" id="m110r186" style="width:58px; top:699px; left:631px;"/>
-<input type="text" name="m110r187" id="m110r187" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:699px; left:698px;"/>
-<input type="text" name="m110r188" id="m110r188" style="width:58px; top:699px; left:766px;"/>
-<input type="text" name="m110r189" id="m110r189" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:699px; left:834px;"/>
-<input type="text" name="m110r192" id="m110r192" style="width:58px; top:726px; left:359px;"/>
-<input type="text" name="m110r193" id="m110r193" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:726px; left:427px;"/>
-<input type="text" name="m110r194" id="m110r194" style="width:58px; top:726px; left:495px;"/>
-<input type="text" name="m110r195" id="m110r195" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:726px; left:563px;"/>
-<input type="text" name="m110r196" id="m110r196" style="width:58px; top:726px; left:631px;"/>
-<input type="text" name="m110r197" id="m110r197" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:726px; left:698px;"/>
-<input type="text" name="m110r198" id="m110r198" style="width:58px; top:726px; left:766px;"/>
-<input type="text" name="m110r199" id="m110r199" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:726px; left:834px;"/>
-<input type="text" name="m110r202" id="m110r202" style="width:58px; top:752px; left:359px;"/>
-<input type="text" name="m110r203" id="m110r203" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:752px; left:427px;"/>
-<input type="text" name="m110r204" id="m110r204" style="width:58px; top:752px; left:495px;"/>
-<input type="text" name="m110r205" id="m110r205" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:752px; left:563px;"/>
-<input type="text" name="m110r206" id="m110r206" style="width:58px; top:752px; left:631px;"/>
-<input type="text" name="m110r207" id="m110r207" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:752px; left:698px;"/>
-<input type="text" name="m110r208" id="m110r208" style="width:58px; top:752px; left:766px;"/>
-<input type="text" name="m110r209" id="m110r209" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:752px; left:834px;"/>
-<input type="text" name="m110r212" id="m110r212" style="width:58px; top:778px; left:359px;"/>
-<input type="text" name="m110r213" id="m110r213" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:778px; left:427px;"/>
-<input type="text" name="m110r214" id="m110r214" style="width:58px; top:778px; left:495px;"/>
-<input type="text" name="m110r215" id="m110r215" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:778px; left:563px;"/>
-<input type="text" name="m110r216" id="m110r216" style="width:58px; top:778px; left:631px;"/>
-<input type="text" name="m110r217" id="m110r217" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:778px; left:698px;"/>
-<input type="text" name="m110r218" id="m110r218" style="width:58px; top:778px; left:766px;"/>
-<input type="text" name="m110r219" id="m110r219" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:778px; left:834px;"/>
-<input type="text" name="m110r222" id="m110r222" style="width:58px; top:804px; left:359px;"/>
-<input type="text" name="m110r224" id="m110r224" style="width:58px; top:804px; left:495px;"/>
-<input type="text" name="m110r226" id="m110r226" style="width:58px; top:804px; left:631px;"/>
-<input type="text" name="m110r228" id="m110r228" style="width:58px; top:804px; left:766px;"/>
-<input type="text" name="m110r232" id="m110r232" style="width:58px; top:830px; left:359px;"/>
-<input type="text" name="m110r234" id="m110r234" style="width:58px; top:830px; left:495px;"/>
-<input type="text" name="m110r236" id="m110r236" style="width:58px; top:830px; left:631px;"/>
-<input type="text" name="m110r238" id="m110r238" style="width:58px; top:830px; left:766px;"/>
-<input type="text" name="m110r242" id="m110r242" style="width:58px; top:857px; left:359px;"/>
-<input type="text" name="m110r243" id="m110r243" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:857px; left:427px;"/>
-<input type="text" name="m110r244" id="m110r244" style="width:58px; top:857px; left:495px;"/>
-<input type="text" name="m110r245" id="m110r245" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:857px; left:563px;"/>
-<input type="text" name="m110r246" id="m110r246" style="width:58px; top:857px; left:631px;"/>
-<input type="text" name="m110r247" id="m110r247" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:857px; left:698px;"/>
-<input type="text" name="m110r248" id="m110r248" style="width:58px; top:857px; left:766px;"/>
-<input type="text" name="m110r249" id="m110r249" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:857px; left:834px;"/>
-<input type="text" name="m110r252" id="m110r252" style="width:58px; top:883px; left:359px;"/>
-<input type="text" name="m110r253" id="m110r253" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:883px; left:427px;"/>
-<input type="text" name="m110r254" id="m110r254" style="width:58px; top:883px; left:495px;"/>
-<input type="text" name="m110r255" id="m110r255" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:883px; left:563px;"/>
-<input type="text" name="m110r256" id="m110r256" style="width:58px; top:883px; left:631px;"/>
-<input type="text" name="m110r257" id="m110r257" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:883px; left:698px;"/>
-<input type="text" name="m110r258" id="m110r258" style="width:58px; top:883px; left:766px;"/>
-<input type="text" name="m110r259" id="m110r259" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:883px; left:834px;"/>
-<input type="text" name="m110r262" id="m110r262" style="width:58px; top:909px; left:359px;"/>
-<input type="text" name="m110r263" id="m110r263" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:909px; left:427px;"/>
-<input type="text" name="m110r264" id="m110r264" style="width:58px; top:909px; left:495px;"/>
-<input type="text" name="m110r265" id="m110r265" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:909px; left:563px;"/>
-<input type="text" name="m110r266" id="m110r266" style="width:58px; top:909px; left:631px;"/>
-<input type="text" name="m110r267" id="m110r267" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:909px; left:698px;"/>
-<input type="text" name="m110r268" id="m110r268" style="width:58px; top:909px; left:766px;"/>
-<input type="text" name="m110r269" id="m110r269" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:909px; left:834px;"/>
-<input type="text" name="m110r272" id="m110r272" style="width:58px; top:935px; left:359px;"/>
-<input type="text" name="m110r273" id="m110r273" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:935px; left:427px;"/>
-<input type="text" name="m110r274" id="m110r274" style="width:58px; top:935px; left:495px;"/>
-<input type="text" name="m110r275" id="m110r275" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:935px; left:563px;"/>
-<input type="text" name="m110r276" id="m110r276" style="width:58px; top:935px; left:631px;"/>
-<input type="text" name="m110r277" id="m110r277" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:935px; left:698px;"/>
-<input type="text" name="m110r278" id="m110r278" style="width:58px; top:935px; left:766px;"/>
-<input type="text" name="m110r279" id="m110r279" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:935px; left:834px;"/>
-<input type="text" name="m110r282" id="m110r282" style="width:58px; top:962px; left:359px;"/>
-<input type="text" name="m110r283" id="m110r283" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:962px; left:427px;"/>
-<input type="text" name="m110r284" id="m110r284" style="width:58px; top:962px; left:495px;"/>
-<input type="text" name="m110r285" id="m110r285" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:962px; left:563px;"/>
-<input type="text" name="m110r286" id="m110r286" style="width:58px; top:962px; left:631px;"/>
-<input type="text" name="m110r287" id="m110r287" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:962px; left:698px;"/>
-<input type="text" name="m110r288" id="m110r288" style="width:58px; top:962px; left:766px;"/>
-<input type="text" name="m110r289" id="m110r289" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:962px; left:834px;"/>
-<input type="text" name="m110r292" id="m110r292" style="width:58px; top:988px; left:359px;"/>
-<input type="text" name="m110r293" id="m110r293" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:988px; left:427px;"/>
-<input type="text" name="m110r294" id="m110r294" style="width:58px; top:988px; left:495px;"/>
-<input type="text" name="m110r295" id="m110r295" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:988px; left:563px;"/>
-<input type="text" name="m110r296" id="m110r296" style="width:58px; top:988px; left:631px;"/>
-<input type="text" name="m110r297" id="m110r297" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:988px; left:698px;"/>
-<input type="text" name="m110r298" id="m110r298" style="width:58px; top:988px; left:766px;"/>
-<input type="text" name="m110r299" id="m110r299" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:988px; left:834px;"/>
-<input type="text" name="m110r302" id="m110r302" style="width:58px; top:1014px; left:359px;"/>
-<input type="text" name="m110r303" id="m110r303" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:1014px; left:427px;"/>
-<input type="text" name="m110r304" id="m110r304" style="width:58px; top:1014px; left:495px;"/>
-<input type="text" name="m110r305" id="m110r305" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:1014px; left:563px;"/>
-<input type="text" name="m110r306" id="m110r306" style="width:58px; top:1014px; left:631px;"/>
-<input type="text" name="m110r307" id="m110r307" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:1014px; left:698px;"/>
-<input type="text" name="m110r308" id="m110r308" style="width:58px; top:1014px; left:766px;"/>
-<input type="text" name="m110r309" id="m110r309" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:1014px; left:834px;"/>
-<input type="text" name="m110r312" id="m110r312" style="width:58px; top:1040px; left:359px;"/>
-<input type="text" name="m110r313" id="m110r313" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:1040px; left:427px;"/>
-<input type="text" name="m110r314" id="m110r314" style="width:58px; top:1040px; left:495px;"/>
-<input type="text" name="m110r315" id="m110r315" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:1040px; left:563px;"/>
-<input type="text" name="m110r316" id="m110r316" style="width:58px; top:1040px; left:631px;"/>
-<input type="text" name="m110r317" id="m110r317" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:1040px; left:698px;"/>
-<input type="text" name="m110r318" id="m110r318" style="width:58px; top:1040px; left:766px;"/>
-<input type="text" name="m110r319" id="m110r319" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:1040px; left:834px;"/>
-<input type="text" name="m110r322" id="m110r322" style="width:58px; top:1067px; left:359px;"/>
-<input type="text" name="m110r323" id="m110r323" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:1067px; left:427px;"/>
-<input type="text" name="m110r324" id="m110r324" style="width:58px; top:1067px; left:495px;"/>
-<input type="text" name="m110r325" id="m110r325" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:1067px; left:563px;"/>
-<input type="text" name="m110r326" id="m110r326" style="width:58px; top:1067px; left:631px;"/>
-<input type="text" name="m110r327" id="m110r327" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:1067px; left:698px;"/>
-<input type="text" name="m110r328" id="m110r328" style="width:58px; top:1067px; left:766px;"/>
-<input type="text" name="m110r329" id="m110r329" onkeyup="CiarkaNaBodku(this);" style="width:58px; top:1067px; left:834px;"/>
-<input type="text" name="m110r332" id="m110r332" style="width:58px; top:1092px; left:359px;"/>
-<input type="text" name="m110r334" id="m110r334" style="width:58px; top:1092px; left:495px;"/>
-<input type="text" name="m110r336" id="m110r336" style="width:58px; top:1092px; left:631px;"/>
-<input type="text" name="m110r338" id="m110r338" style="width:58px; top:1092px; left:766px;"/>
-<input type="text" name="m110r342" id="m110r342" style="width:58px; top:1116px; left:359px;"/>
-<input type="text" name="m110r344" id="m110r344" style="width:58px; top:1116px; left:495px;"/>
-<input type="text" name="m110r346" id="m110r346" style="width:58px; top:1116px; left:631px;"/>
-<input type="text" name="m110r348" id="m110r348" style="width:58px; top:1116px; left:766px;"/>
-<span class="text-echo" style="top:1146px; right:528px;"><?php echo $m110r992; ?></span>
-<span class="text-echo" style="top:1146px; right:460px;"><?php echo $m110r993; ?></span>
-<span class="text-echo" style="top:1146px; right:392px;"><?php echo $m110r994; ?></span>
-<span class="text-echo" style="top:1146px; right:324px;"><?php echo $m110r995; ?></span>
-<span class="text-echo" style="top:1146px; right:256px;"><?php echo $m110r996; ?></span>
-<span class="text-echo" style="top:1146px; right:189px;"><?php echo $m110r997; ?></span>
-<span class="text-echo" style="top:1146px; right:120px;"><?php echo $m110r998; ?></span>
-<span class="text-echo" style="top:1146px; right:53px;"><?php echo $m110r999; ?></span>
+<input type="text" name="m110r12" id="m110r12" style="width:58px; top:297px; left:344px;"/>
+<input type="text" name="m110r13" id="m110r13" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:297px; left:413px;"/>
+<input type="text" name="m110r14" id="m110r14" style="width:68px; top:297px; left:481px;"/>
+<input type="text" name="m110r15" id="m110r15" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:297px; left:560px;"/>
+<input type="text" name="m110r16" id="m110r16" style="width:57px; top:297px; left:628px;"/>
+<input type="text" name="m110r17" id="m110r17" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:297px; left:696px;"/>
+<input type="text" name="m110r18" id="m110r18" style="width:68px; top:297px; left:775px;"/>
+<input type="text" name="m110r19" id="m110r19" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:297px; left:854px;"/>
+<input type="text" name="m110r22" id="m110r22" style="width:58px; top:320px; left:344px;"/>
+<input type="text" name="m110r23" id="m110r23" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:320px; left:413px;"/>
+<input type="text" name="m110r24" id="m110r24" style="width:68px; top:320px; left:481px;"/>
+<input type="text" name="m110r25" id="m110r25" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:320px; left:560px;"/>
+<input type="text" name="m110r26" id="m110r26" style="width:57px; top:320px; left:628px;"/>
+<input type="text" name="m110r27" id="m110r27" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:320px; left:696px;"/>
+<input type="text" name="m110r28" id="m110r28" style="width:68px; top:320px; left:775px;"/>
+<input type="text" name="m110r29" id="m110r29" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:320px; left:854px;"/>
+<input type="text" name="m110r32" id="m110r32" style="width:58px; top:343px; left:344px;"/>
+<input type="text" name="m110r33" id="m110r33" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:343px; left:413px;"/>
+<input type="text" name="m110r34" id="m110r34" style="width:68px; top:343px; left:481px;"/>
+<input type="text" name="m110r35" id="m110r35" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:343px; left:560px;"/>
+<input type="text" name="m110r36" id="m110r36" style="width:57px; top:343px; left:628px;"/>
+<input type="text" name="m110r37" id="m110r37" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:343px; left:696px;"/>
+<input type="text" name="m110r38" id="m110r38" style="width:68px; top:343px; left:775px;"/>
+<input type="text" name="m110r39" id="m110r39" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:343px; left:854px;"/>
+<input type="text" name="m110r42" id="m110r42" style="width:58px; top:366px; left:344px;"/>
+<input type="text" name="m110r43" id="m110r43" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:366px; left:413px;"/>
+<input type="text" name="m110r44" id="m110r44" style="width:68px; top:366px; left:481px;"/>
+<input type="text" name="m110r45" id="m110r45" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:366px; left:560px;"/>
+<input type="text" name="m110r46" id="m110r46" style="width:57px; top:366px; left:628px;"/>
+<input type="text" name="m110r47" id="m110r47" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:366px; left:696px;"/>
+<input type="text" name="m110r48" id="m110r48" style="width:68px; top:366px; left:775px;"/>
+<input type="text" name="m110r49" id="m110r49" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:366px; left:854px;"/>
+<input type="text" name="m110r52" id="m110r52" style="width:58px; top:389px; left:344px;"/>
+<input type="text" name="m110r53" id="m110r53" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:389px; left:413px;"/>
+<input type="text" name="m110r54" id="m110r54" style="width:68px; top:389px; left:481px;"/>
+<input type="text" name="m110r55" id="m110r55" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:389px; left:560px;"/>
+<input type="text" name="m110r56" id="m110r56" style="width:57px; top:389px; left:628px;"/>
+<input type="text" name="m110r57" id="m110r57" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:389px; left:696px;"/>
+<input type="text" name="m110r58" id="m110r58" style="width:68px; top:389px; left:775px;"/>
+<input type="text" name="m110r59" id="m110r59" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:389px; left:854px;"/>
+<input type="text" name="m110r62" id="m110r62" style="width:58px; top:412px; left:344px;"/>
+<input type="text" name="m110r63" id="m110r63" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:412px; left:413px;"/>
+<input type="text" name="m110r64" id="m110r64" style="width:68px; top:412px; left:481px;"/>
+<input type="text" name="m110r65" id="m110r65" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:412px; left:560px;"/>
+<input type="text" name="m110r66" id="m110r66" style="width:57px; top:412px; left:628px;"/>
+<input type="text" name="m110r67" id="m110r67" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:412px; left:696px;"/>
+<input type="text" name="m110r68" id="m110r68" style="width:68px; top:412px; left:775px;"/>
+<input type="text" name="m110r69" id="m110r69" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:412px; left:854px;"/>
+<input type="text" name="m110r72" id="m110r72" style="width:58px; top:435px; left:344px;"/>
+<input type="text" name="m110r73" id="m110r73" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:435px; left:413px;"/>
+<input type="text" name="m110r74" id="m110r74" style="width:68px; top:435px; left:481px;"/>
+<input type="text" name="m110r75" id="m110r75" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:435px; left:560px;"/>
+<input type="text" name="m110r76" id="m110r76" style="width:57px; top:435px; left:628px;"/>
+<input type="text" name="m110r77" id="m110r77" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:435px; left:696px;"/>
+<input type="text" name="m110r78" id="m110r78" style="width:68px; top:435px; left:775px;"/>
+<input type="text" name="m110r79" id="m110r79" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:435px; left:854px;"/>
+<input type="text" name="m110r82" id="m110r82" style="width:58px; top:458px; left:344px;"/>
+<input type="text" name="m110r83" id="m110r83" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:458px; left:413px;"/>
+<input type="text" name="m110r84" id="m110r84" style="width:68px; top:458px; left:481px;"/>
+<input type="text" name="m110r85" id="m110r85" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:458px; left:560px;"/>
+<input type="text" name="m110r86" id="m110r86" style="width:57px; top:458px; left:628px;"/>
+<input type="text" name="m110r87" id="m110r87" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:458px; left:696px;"/>
+<input type="text" name="m110r88" id="m110r88" style="width:68px; top:458px; left:775px;"/>
+<input type="text" name="m110r89" id="m110r89" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:458px; left:854px;"/>
+<input type="text" name="m110r92" id="m110r92" style="width:58px; top:481px; left:344px;"/>
+<input type="text" name="m110r93" id="m110r93" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:481px; left:413px;"/>
+<input type="text" name="m110r94" id="m110r94" style="width:68px; top:481px; left:481px;"/>
+<input type="text" name="m110r95" id="m110r95" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:481px; left:560px;"/>
+<input type="text" name="m110r96" id="m110r96" style="width:57px; top:481px; left:628px;"/>
+<input type="text" name="m110r97" id="m110r97" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:481px; left:696px;"/>
+<input type="text" name="m110r98" id="m110r98" style="width:68px; top:481px; left:775px;"/>
+<input type="text" name="m110r99" id="m110r99" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:481px; left:854px;"/>
+<input type="text" name="m110r102" id="m110r102" style="width:58px; top:509px; left:344px;"/>
+<input type="text" name="m110r103" id="m110r103" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:509px; left:413px;"/>
+<input type="text" name="m110r104" id="m110r104" style="width:68px; top:509px; left:481px;"/>
+<input type="text" name="m110r105" id="m110r105" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:509px; left:560px;"/>
+<input type="text" name="m110r106" id="m110r106" style="width:57px; top:509px; left:628px;"/>
+<input type="text" name="m110r107" id="m110r107" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:509px; left:696px;"/>
+<input type="text" name="m110r108" id="m110r108" style="width:68px; top:509px; left:775px;"/>
+<input type="text" name="m110r109" id="m110r109" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:509px; left:854px;"/>
+<input type="text" name="m110r112" id="m110r112" style="width:58px; top:536px; left:344px;"/>
+<input type="text" name="m110r113" id="m110r113" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:536px; left:413px;"/>
+<input type="text" name="m110r114" id="m110r114" style="width:68px; top:536px; left:481px;"/>
+<input type="text" name="m110r115" id="m110r115" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:536px; left:560px;"/>
+<input type="text" name="m110r116" id="m110r116" style="width:57px; top:536px; left:628px;"/>
+<input type="text" name="m110r117" id="m110r117" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:536px; left:696px;"/>
+<input type="text" name="m110r118" id="m110r118" style="width:68px; top:536px; left:775px;"/>
+<input type="text" name="m110r119" id="m110r119" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:536px; left:854px;"/>
+<input type="text" name="m110r122" id="m110r122" style="width:58px; top:560px; left:344px;"/>
+<input type="text" name="m110r123" id="m110r123" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:560px; left:413px;"/>
+<input type="text" name="m110r124" id="m110r124" style="width:68px; top:560px; left:481px;"/>
+<input type="text" name="m110r125" id="m110r125" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:560px; left:560px;"/>
+<input type="text" name="m110r126" id="m110r126" style="width:57px; top:560px; left:628px;"/>
+<input type="text" name="m110r127" id="m110r127" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:560px; left:696px;"/>
+<input type="text" name="m110r128" id="m110r128" style="width:68px; top:560px; left:775px;"/>
+<input type="text" name="m110r129" id="m110r129" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:560px; left:854px;"/>
+<input type="text" name="m110r132" id="m110r132" style="width:58px; top:583px; left:344px;"/>
+<input type="text" name="m110r133" id="m110r133" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:583px; left:413px;"/>
+<input type="text" name="m110r134" id="m110r134" style="width:68px; top:583px; left:481px;"/>
+<input type="text" name="m110r135" id="m110r135" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:583px; left:560px;"/>
+<input type="text" name="m110r136" id="m110r136" style="width:57px; top:583px; left:628px;"/>
+<input type="text" name="m110r137" id="m110r137" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:583px; left:696px;"/>
+<input type="text" name="m110r138" id="m110r138" style="width:68px; top:583px; left:775px;"/>
+<input type="text" name="m110r139" id="m110r139" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:583px; left:854px;"/>
+<input type="text" name="m110r142" id="m110r142" style="width:58px; top:611px; left:344px;"/>
+<input type="text" name="m110r143" id="m110r143" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:611px; left:413px;"/>
+<input type="text" name="m110r144" id="m110r144" style="width:68px; top:611px; left:481px;"/>
+<input type="text" name="m110r145" id="m110r145" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:611px; left:560px;"/>
+<input type="text" name="m110r146" id="m110r146" style="width:57px; top:611px; left:628px;"/>
+<input type="text" name="m110r147" id="m110r147" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:611px; left:696px;"/>
+<input type="text" name="m110r148" id="m110r148" style="width:68px; top:611px; left:775px;"/>
+<input type="text" name="m110r149" id="m110r149" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:611px; left:854px;"/>
+<input type="text" name="m110r152" id="m110r152" style="width:58px; top:639px; left:344px;"/>
+<input type="text" name="m110r153" id="m110r153" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:639px; left:413px;"/>
+<input type="text" name="m110r154" id="m110r154" style="width:68px; top:639px; left:481px;"/>
+<input type="text" name="m110r155" id="m110r155" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:639px; left:560px;"/>
+<input type="text" name="m110r156" id="m110r156" style="width:57px; top:639px; left:628px;"/>
+<input type="text" name="m110r157" id="m110r157" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:639px; left:696px;"/>
+<input type="text" name="m110r158" id="m110r158" style="width:68px; top:639px; left:775px;"/>
+<input type="text" name="m110r159" id="m110r159" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:639px; left:854px;"/>
+<input type="text" name="m110r162" id="m110r162" style="width:58px; top:662px; left:344px;"/>
+<input type="text" name="m110r163" id="m110r163" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:662px; left:413px;"/>
+<input type="text" name="m110r164" id="m110r164" style="width:68px; top:662px; left:481px;"/>
+<input type="text" name="m110r165" id="m110r165" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:662px; left:560px;"/>
+<input type="text" name="m110r166" id="m110r166" style="width:57px; top:662px; left:628px;"/>
+<input type="text" name="m110r167" id="m110r167" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:662px; left:696px;"/>
+<input type="text" name="m110r168" id="m110r168" style="width:68px; top:662px; left:775px;"/>
+<input type="text" name="m110r169" id="m110r169" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:662px; left:854px;"/>
+<input type="text" name="m110r172" id="m110r172" style="width:58px; top:685px; left:344px;"/>
+<input type="text" name="m110r173" id="m110r173" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:685px; left:413px;"/>
+<input type="text" name="m110r174" id="m110r174" style="width:68px; top:685px; left:481px;"/>
+<input type="text" name="m110r175" id="m110r175" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:685px; left:560px;"/>
+<input type="text" name="m110r176" id="m110r176" style="width:57px; top:685px; left:628px;"/>
+<input type="text" name="m110r177" id="m110r177" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:685px; left:696px;"/>
+<input type="text" name="m110r178" id="m110r178" style="width:68px; top:685px; left:775px;"/>
+<input type="text" name="m110r179" id="m110r179" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:685px; left:854px;"/>
+<input type="text" name="m110r182" id="m110r182" style="width:58px; top:708px; left:344px;"/>
+<input type="text" name="m110r183" id="m110r183" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:708px; left:413px;"/>
+<input type="text" name="m110r184" id="m110r184" style="width:68px; top:708px; left:481px;"/>
+<input type="text" name="m110r185" id="m110r185" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:708px; left:560px;"/>
+<input type="text" name="m110r186" id="m110r186" style="width:57px; top:708px; left:628px;"/>
+<input type="text" name="m110r187" id="m110r187" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:708px; left:696px;"/>
+<input type="text" name="m110r188" id="m110r188" style="width:68px; top:708px; left:775px;"/>
+<input type="text" name="m110r189" id="m110r189" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:708px; left:854px;"/>
+<input type="text" name="m110r192" id="m110r192" style="width:58px; top:731px; left:344px;"/>
+<input type="text" name="m110r193" id="m110r193" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:731px; left:413px;"/>
+<input type="text" name="m110r194" id="m110r194" style="width:68px; top:731px; left:481px;"/>
+<input type="text" name="m110r195" id="m110r195" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:731px; left:560px;"/>
+<input type="text" name="m110r196" id="m110r196" style="width:57px; top:731px; left:628px;"/>
+<input type="text" name="m110r197" id="m110r197" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:731px; left:696px;"/>
+<input type="text" name="m110r198" id="m110r198" style="width:68px; top:731px; left:775px;"/>
+<input type="text" name="m110r199" id="m110r199" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:731px; left:854px;"/>
+<input type="text" name="m110r202" id="m110r202" style="width:58px; top:754px; left:344px;"/>
+<input type="text" name="m110r203" id="m110r203" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:754px; left:413px;"/>
+<input type="text" name="m110r204" id="m110r204" style="width:68px; top:754px; left:481px;"/>
+<input type="text" name="m110r205" id="m110r205" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:754px; left:560px;"/>
+<input type="text" name="m110r206" id="m110r206" style="width:57px; top:754px; left:628px;"/>
+<input type="text" name="m110r207" id="m110r207" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:754px; left:696px;"/>
+<input type="text" name="m110r208" id="m110r208" style="width:68px; top:754px; left:775px;"/>
+<input type="text" name="m110r209" id="m110r209" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:754px; left:854px;"/>
+<input type="text" name="m110r212" id="m110r212" style="width:58px; top:777px; left:344px;"/>
+<input type="text" name="m110r213" id="m110r213" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:777px; left:413px;"/>
+<input type="text" name="m110r214" id="m110r214" style="width:68px; top:777px; left:481px;"/>
+<input type="text" name="m110r215" id="m110r215" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:777px; left:560px;"/>
+<input type="text" name="m110r216" id="m110r216" style="width:57px; top:777px; left:628px;"/>
+<input type="text" name="m110r217" id="m110r217" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:777px; left:696px;"/>
+<input type="text" name="m110r218" id="m110r218" style="width:68px; top:777px; left:775px;"/>
+<input type="text" name="m110r219" id="m110r219" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:777px; left:854px;"/>
+<input type="text" name="m110r222" id="m110r222" style="width:58px; top:800px; left:344px;"/>
+<input type="text" name="m110r224" id="m110r224" style="width:68px; top:800px; left:481px;"/>
+<input type="text" name="m110r226" id="m110r226" style="width:57px; top:800px; left:628px;"/>
+<input type="text" name="m110r228" id="m110r228" style="width:68px; top:800px; left:775px;"/>
+<input type="text" name="m110r232" id="m110r232" style="width:58px; top:823px; left:344px;"/>
+<input type="text" name="m110r234" id="m110r234" style="width:68px; top:823px; left:481px;"/>
+<input type="text" name="m110r236" id="m110r236" style="width:57px; top:823px; left:628px;"/>
+<input type="text" name="m110r238" id="m110r238" style="width:68px; top:823px; left:775px;"/>
+<input type="text" name="m110r242" id="m110r242" style="width:58px; top:846px; left:344px;"/>
+<input type="text" name="m110r243" id="m110r243" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:846px; left:413px;"/>
+<input type="text" name="m110r244" id="m110r244" style="width:68px; top:846px; left:481px;"/>
+<input type="text" name="m110r245" id="m110r245" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:846px; left:560px;"/>
+<input type="text" name="m110r246" id="m110r246" style="width:57px; top:846px; left:628px;"/>
+<input type="text" name="m110r247" id="m110r247" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:846px; left:696px;"/>
+<input type="text" name="m110r248" id="m110r248" style="width:68px; top:846px; left:775px;"/>
+<input type="text" name="m110r249" id="m110r249" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:846px; left:854px;"/>
+<input type="text" name="m110r252" id="m110r252" style="width:58px; top:869px; left:344px;"/>
+<input type="text" name="m110r253" id="m110r253" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:869px; left:413px;"/>
+<input type="text" name="m110r254" id="m110r254" style="width:68px; top:869px; left:481px;"/>
+<input type="text" name="m110r255" id="m110r255" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:869px; left:560px;"/>
+<input type="text" name="m110r256" id="m110r256" style="width:57px; top:869px; left:628px;"/>
+<input type="text" name="m110r257" id="m110r257" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:869px; left:696px;"/>
+<input type="text" name="m110r258" id="m110r258" style="width:68px; top:869px; left:775px;"/>
+<input type="text" name="m110r259" id="m110r259" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:869px; left:854px;"/>
+<input type="text" name="m110r262" id="m110r262" style="width:58px; top:892px; left:344px;"/>
+<input type="text" name="m110r263" id="m110r263" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:892px; left:413px;"/>
+<input type="text" name="m110r264" id="m110r264" style="width:68px; top:892px; left:481px;"/>
+<input type="text" name="m110r265" id="m110r265" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:892px; left:560px;"/>
+<input type="text" name="m110r266" id="m110r266" style="width:57px; top:892px; left:628px;"/>
+<input type="text" name="m110r267" id="m110r267" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:892px; left:696px;"/>
+<input type="text" name="m110r268" id="m110r268" style="width:68px; top:892px; left:775px;"/>
+<input type="text" name="m110r269" id="m110r269" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:892px; left:854px;"/>
+<input type="text" name="m110r272" id="m110r272" style="width:58px; top:915px; left:344px;"/>
+<input type="text" name="m110r273" id="m110r273" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:915px; left:413px;"/>
+<input type="text" name="m110r274" id="m110r274" style="width:68px; top:915px; left:481px;"/>
+<input type="text" name="m110r275" id="m110r275" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:915px; left:560px;"/>
+<input type="text" name="m110r276" id="m110r276" style="width:57px; top:915px; left:628px;"/>
+<input type="text" name="m110r277" id="m110r277" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:915px; left:696px;"/>
+<input type="text" name="m110r278" id="m110r278" style="width:68px; top:915px; left:775px;"/>
+<input type="text" name="m110r279" id="m110r279" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:915px; left:854px;"/>
+<input type="text" name="m110r282" id="m110r282" style="width:58px; top:938px; left:344px;"/>
+<input type="text" name="m110r283" id="m110r283" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:938px; left:413px;"/>
+<input type="text" name="m110r284" id="m110r284" style="width:68px; top:938px; left:481px;"/>
+<input type="text" name="m110r285" id="m110r285" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:938px; left:560px;"/>
+<input type="text" name="m110r286" id="m110r286" style="width:57px; top:938px; left:628px;"/>
+<input type="text" name="m110r287" id="m110r287" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:938px; left:696px;"/>
+<input type="text" name="m110r288" id="m110r288" style="width:68px; top:938px; left:775px;"/>
+<input type="text" name="m110r289" id="m110r289" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:938px; left:854px;"/>
+<input type="text" name="m110r292" id="m110r292" style="width:58px; top:961px; left:344px;"/>
+<input type="text" name="m110r293" id="m110r293" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:961px; left:413px;"/>
+<input type="text" name="m110r294" id="m110r294" style="width:68px; top:961px; left:481px;"/>
+<input type="text" name="m110r295" id="m110r295" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:961px; left:560px;"/>
+<input type="text" name="m110r296" id="m110r296" style="width:57px; top:961px; left:628px;"/>
+<input type="text" name="m110r297" id="m110r297" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:961px; left:696px;"/>
+<input type="text" name="m110r298" id="m110r298" style="width:68px; top:961px; left:775px;"/>
+<input type="text" name="m110r299" id="m110r299" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:961px; left:854px;"/>
+<input type="text" name="m110r302" id="m110r302" style="width:58px; top:984px; left:344px;"/>
+<input type="text" name="m110r303" id="m110r303" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:984px; left:413px;"/>
+<input type="text" name="m110r304" id="m110r304" style="width:68px; top:984px; left:481px;"/>
+<input type="text" name="m110r305" id="m110r305" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:984px; left:560px;"/>
+<input type="text" name="m110r306" id="m110r306" style="width:57px; top:984px; left:628px;"/>
+<input type="text" name="m110r307" id="m110r307" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:984px; left:696px;"/>
+<input type="text" name="m110r308" id="m110r308" style="width:68px; top:984px; left:775px;"/>
+<input type="text" name="m110r309" id="m110r309" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:984px; left:854px;"/>
+<input type="text" name="m110r312" id="m110r312" style="width:58px; top:1007px; left:344px;"/>
+<input type="text" name="m110r313" id="m110r313" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:1007px; left:413px;"/>
+<input type="text" name="m110r314" id="m110r314" style="width:68px; top:1007px; left:481px;"/>
+<input type="text" name="m110r315" id="m110r315" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:1007px; left:560px;"/>
+<input type="text" name="m110r316" id="m110r316" style="width:57px; top:1007px; left:628px;"/>
+<input type="text" name="m110r317" id="m110r317" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:1007px; left:696px;"/>
+<input type="text" name="m110r318" id="m110r318" style="width:68px; top:1007px; left:775px;"/>
+<input type="text" name="m110r319" id="m110r319" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:1007px; left:854px;"/>
+<input type="text" name="m110r322" id="m110r322" style="width:58px; top:1030px; left:344px;"/>
+<input type="text" name="m110r323" id="m110r323" onkeyup="CiarkaNaBodku(this);" style="width:56px; top:1030px; left:413px;"/>
+<input type="text" name="m110r324" id="m110r324" style="width:68px; top:1030px; left:481px;"/>
+<input type="text" name="m110r325" id="m110r325" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:1030px; left:560px;"/>
+<input type="text" name="m110r326" id="m110r326" style="width:57px; top:1030px; left:628px;"/>
+<input type="text" name="m110r327" id="m110r327" onkeyup="CiarkaNaBodku(this);" style="width:68px; top:1030px; left:696px;"/>
+<input type="text" name="m110r328" id="m110r328" style="width:68px; top:1030px; left:775px;"/>
+<input type="text" name="m110r329" id="m110r329" onkeyup="CiarkaNaBodku(this);" style="width:57px; top:1030px; left:854px;"/>
+<input type="text" name="m110r332" id="m110r332" style="width:58px; top:1053px; left:344px;"/>
+<input type="text" name="m110r334" id="m110r334" style="width:68px; top:1053px; left:481px;"/>
+<input type="text" name="m110r336" id="m110r336" style="width:57px; top:1053px; left:628px;"/>
+<input type="text" name="m110r338" id="m110r338" style="width:68px; top:1053px; left:775px;"/>
+<input type="text" name="m110r342" id="m110r342" style="width:58px; top:1076px; left:344px;"/>
+<input type="text" name="m110r344" id="m110r344" style="width:68px; top:1076px; left:481px;"/>
+<input type="text" name="m110r346" id="m110r346" style="width:57px; top:1076px; left:628px;"/>
+<input type="text" name="m110r348" id="m110r348" style="width:68px; top:1076px; left:775px;"/>
+<span class="text-echo" style="top:1103px; right:544px;"><?php echo $m110r992; ?></span>
+<span class="text-echo" style="top:1103px; right:475px;"><?php echo $m110r993; ?></span>
+<span class="text-echo" style="top:1103px; right:395px;"><?php echo $m110r994; ?></span>
+<span class="text-echo" style="top:1103px; right:327px;"><?php echo $m110r995; ?></span>
+<span class="text-echo" style="top:1103px; right:260px;"><?php echo $m110r996; ?></span>
+<span class="text-echo" style="top:1103px; right:181px;"><?php echo $m110r997; ?></span>
+<span class="text-echo" style="top:1103px; right:102px;"><?php echo $m110r998; ?></span>
+<span class="text-echo" style="top:1103px; right:35px;"><?php echo $m110r999; ?></span>
 <?php                                        } ?>
 
 <div class="navbar">
