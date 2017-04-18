@@ -1,7 +1,7 @@
 <!doctype html>
 <HTML>
 <?php
-//celkovy zaciatok dokumentu  VTS112 rok 2016
+//celkovy zaciatok dokumentu VTS112 rok 2016
 do
 {
 $sys = 'UCT';
@@ -410,7 +410,7 @@ a.archiv-link {
   }
   function TlacVykaz()
   {
-   window.open('../ucto/statistika_vts112.php?copern=11&drupoh=1&page=1&typ=PDF', '_blank');
+   window.open('../ucto/statistika_vts112_2016.php?copern=11&drupoh=1&page=1&typ=PDF', '_blank');
   }
   function StatUdajeFirma()
   {
@@ -423,7 +423,7 @@ a.archiv-link {
   }
   function zarch( mesiac )
   {
-   window.open('../ucto/statistika_vts112.php?copern=11&drupoh=1&page=1&typ=PDF&zarchivu=1&mesarch=' + mesiac +  '&xxx=1',
+   window.open('../ucto/statistika_vts112_2016.php?copern=11&drupoh=1&page=1&typ=PDF&zarchivu=1&mesarch=' + mesiac +  '&xxx=1',
 '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
 </script>
@@ -453,11 +453,11 @@ if ( $copern == 2 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="statistika_vts112.php?copern=3&strana=<?php echo $strana; ?>">
+<FORM name="formv1" method="post" action="statistika_vts112_2016.php?copern=3&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
-$source="statistika_vts112.php";
+$source="statistika_vts112_2016.php";
 ?>
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>?copern=2&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>

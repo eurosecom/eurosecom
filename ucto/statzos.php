@@ -331,6 +331,7 @@ if ( $kli_vrok < 2013 ) $rok304="_2012";
 //statistika vts112
 <?php
 $rokvts112="";
+if ( $kli_vrok < 2017 ) $rokvts112="_2016";
 if ( $kli_vrok < 2016 ) $rokvts112="_2015";
 if ( $kli_vrok < 2014 ) $rokvts112="_2013";
 ?>
