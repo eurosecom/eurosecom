@@ -31,10 +31,10 @@ $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 $mesiac=$kli_vmes;
-$vyb_ump="1.".$kli_vrok; $vyb_umk=$kli_vmes.".".$kli_vrok; 
+$vyb_ump="1.".$kli_vrok; $vyb_umk=$kli_vmes.".".$kli_vrok;
 
 //.jpg podklad
-$jpg_cesta="../dokumenty/statistika2016/opu112/opu112_v16";
+$jpg_cesta="../dokumenty/statistika2017/opu112/opu112_v17";
 $jpg_popis="tlaËivo MesaËn˝ v˝kaz v obchode, pohostinstve ... OPU 1-12 ".$kli_vrok;
 
 $strana = 1*$_REQUEST['strana'];
@@ -48,7 +48,7 @@ $modul = 1*$_REQUEST['modul'];
 
 if ( $copern < 2 ) { $copern=2; };
 
-//prepnute z uobrat.php modul 124 
+//prepnute z uobrat.php modul 124
 if ( $modul == 124 )
 {
 $r124r01=0;$r124r02=0;$r124r03=0;$r124r04=0;$r124r99=0;
@@ -86,19 +86,19 @@ $i=$i+1;                   }
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET ".
 " mod124r01='$r124r01',mod124r02='$r124r02',mod124r03='$r124r03',mod124r04='$r124r04', ".
 " mod124r99=mod124r01+mod124r02+mod124r03+mod124r04 ".
-" WHERE umex = $kli_vume "; 
+" WHERE umex = $kli_vume ";
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET ".
 " mod124r02='$fir_dph2'*mod124r01/100 ".
-" WHERE umex = $kli_vume "; 
+" WHERE umex = $kli_vume ";
 $upravene = mysql_query("$uprtxt");
 
 //odpocitaj predchadzajuce
 $kolko=$kli_vmes-1;
 $ik=1;
-while ($ik <= $kolko )  
+while ($ik <= $kolko )
   {
 $umexx=$ik.".".$kli_vrok;
 
@@ -110,19 +110,19 @@ $sqtoz = "UPDATE F$kli_vxcf"."_statistika_opu112,F$kli_vxcf"."_statistika_opu112
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-$ik=$ik+1;                   
+$ik=$ik+1;
   }
 
 
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET mod124r99=mod124r01+mod124r02+mod124r03+mod124r04 WHERE umex = $kli_vume "; 
+$uprtxt = "UPDATE F$kli_vxcf"."_statistika_opu112 SET mod124r99=mod124r01+mod124r02+mod124r03+mod124r04 WHERE umex = $kli_vume ";
 $upravene = mysql_query("$uprtxt");
- 
+
 $strana=2;
 }
 //koniec odpocitaj modul 124 z uobrat.php
 
 
-//pracovny subor 
+//pracovny subor
 $sql = "SELECT umex FROM F$kli_vxcf"."_statistika_opu112 WHERE ico=0";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
@@ -166,13 +166,13 @@ $vysledek = mysql_query("$sql");
 //koniec pracovny subor
 
 $poslhh = "SELECT * FROM F$kli_vxcf"."_statistika_opu112 WHERE umex = $kli_vume ";
-$posl = mysql_query("$poslhh"); 
+$posl = mysql_query("$poslhh");
 $umesp = 1*mysql_num_rows($posl);
 
 if ( $umesp == 0 )
 {
 $poslhh = "INSERT INTO F$kli_vxcf"."_statistika_opu112 ( umex ) VALUES ( $kli_vume ) ";
-$posl = mysql_query("$poslhh"); 
+$posl = mysql_query("$poslhh");
 }
 
 //zapis upravene udaje
@@ -249,6 +249,13 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_treximafir ");
   $riaddok=mysql_fetch_object($sqldok);
   $okres=$riaddok->uzemie;
   }
+
+//mesiac
+$mesiacx=$mesiac;
+if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
+
+//6-miestne ico
+$fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -274,7 +281,7 @@ form input[type=text] {
 <?php
 //uprava
   if ( $copern == 2 )
-  { 
+  {
 ?>
   function ObnovUI()
   {
@@ -300,7 +307,7 @@ form input[type=text] {
 <?php
 //nie uprava
   if ( $copern != 2 AND $copern != 102 )
-  { 
+  {
 ?>
   function ObnovUI()
   {
@@ -370,68 +377,56 @@ $source="statistika_opu112.php?drupoh=1&page=1";
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=1&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=1&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+ <!-- hidden
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
  <h6 class="toright">TlaËiù:</h6>
+-->
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 </div>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 1.strana 302kB">
-<?php
-$mesiacx=$mesiac;
-if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
-$fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
-?>
-<span class="text-echo" style="top:290px; left:289px; font-size:18px; letter-spacing:30px;"><?php echo $mesiacx; ?></span>
-<span class="text-echo" style="top:290px; left:370px; font-size:18px; letter-spacing:34px;"><?php echo $fir_ficox; ?></span>
-<!-- ORGANIZACIA -->
-<span class="text-echo" style="top:823px; left:300px;"><?php echo $fir_fnaz; ?></span>
-<span class="text-echo" style="top:843px; left:300px;"><?php echo "$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
-<span class="text-echo" style="top:840px; left:840px;"><?php echo $okres; ?></span>
- <img src="../obr/ikony/pencil_blue_icon.png" onclick="UdajeFirma();"
-      title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:838px; left:872px;">
-<!-- Vyplnil -->
-<span class="text-echo" style="top:895px; left:55px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo" style="top:910px; left:390px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo" style="top:958px; left:55px;"><?php echo $fir_fem1; ?></span>
-<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);"
-       style="width:80px; top:956px; left:390px;"/>
+<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 1.strana 302kB">
 
-<!-- modul 100307 -->
-<span class="text-echo center" style="width:488px; top:1131px; left:412px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo center" style="width:488px; top:1158px; left:412px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo center" style="width:488px; top:1183px; left:412px;"><?php echo $fir_fem1; ?></span>
+<span class="text-echo" style="top:370px; left:263px; font-size:18px; letter-spacing:24px;"><?php echo $mesiacx; ?></span>
+<span class="text-echo" style="top:370px; left:332px; font-size:18px; letter-spacing:24px;"><?php echo $fir_ficox; ?></span>
+<!-- ORGANIZACIA -->
+<span class="text-echo" style="top:949px; left:55px; line-height: 20px;"><?php echo "$fir_fnaz<br>$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
+<span class="text-echo" style="top:960px; left:806px;"><?php echo $okres; ?></span>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();" title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:959px; left:840px;">
+
+<!-- Vyplnil -->
+<span class="text-echo" style="top:1030px; left:55px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo" style="width:499px; top:1043px; left:390px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo" style="width:499px; top:1093px; left:55px;"><?php echo $fir_fem1; ?></span>
+<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);" style="width:90px; top:1089px; left:390px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 2.strana 302kB">
+<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 2.strana 302kB">
 
 <!-- modul 100340 -->
-<input type="text" name="aktivita" id="aktivita" style="width:329px; top:179px; left:562px;"/>
+<input type="text" name="aktivita" id="aktivita" style="width:329px; top:270px; left:562px;"/>
 <?php
 $sknace=str_replace(".", "", $fir_sknace);
 ?>
-<span class="text-echo center" style="width:339px; top:211px; left:560px;"><?php echo $sknace; ?></span>
+<span class="text-echo center" style="width:339px; top:306px; left:560px;"><?php echo $sknace; ?></span>
 
 <!-- modul 2 -->
-<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:352px; left:765px;"/>
-<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:389px; left:765px;"/>
+<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:495px; left:730px;"/>
+<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:533px; left:730px;"/>
 
 <!-- modul 100055 -->
-<input type="text" name="predajdni" id="predajdni" style="width:100px; top:541px; left:725px;"/>
+<input type="text" name="predajdni" id="predajdni" style="width:100px; top:698px; left:725px;"/>
 
 <!-- modul 124 -->
-<input type="text" name="mod124r01" id="mod124r01" style="width:100px; top:714px; left:685px;"/>
-<input type="text" name="mod124r02" id="mod124r02" style="width:100px; top:742px; left:685px;"/>
-<input type="text" name="mod124r03" id="mod124r03" style="width:100px; top:770px; left:685px;"/>
-<input type="text" name="mod124r04" id="mod124r04" style="width:100px; top:799px; left:685px;"/>
-<span class="text-echo" style="top:832px; right:160px;"><?php echo $mod124r99; ?></span>
+<input type="text" name="mod124r01" id="mod124r01" style="width:100px; top:869px; left:685px;"/>
+<input type="text" name="mod124r02" id="mod124r02" style="width:100px; top:901px; left:685px;"/>
+<input type="text" name="mod124r03" id="mod124r03" style="width:100px; top:933px; left:685px;"/>
+<input type="text" name="mod124r04" id="mod124r04" style="width:100px; top:965px; left:685px;"/>
+<span class="text-echo" style="top:1001px; right:160px;"><?php echo $mod124r99; ?></span>
 <?php                                        } ?>
-
 
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=1&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
@@ -485,49 +480,38 @@ $pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
-//OBDOBIA
-$mesiacx=$mesiac;
-if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; }
+//mesiac
 $A=substr($mesiacx,0,1);
 $B=substr($mesiacx,1,1);
-$pdf->Cell(190,49," ","$rmc1",1,"L");
-$pdf->Cell(51,5," ","$rmc1",0,"L");$pdf->Cell(8,7,"$A","$rmc",0,"C");$pdf->Cell(9,7,"$B","$rmc",0,"C");
+$pdf->Cell(190,67," ","$rmc1",1,"L");
+$pdf->Cell(46,6," ","$rmc1",0,"L");$pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
 //ico
-$fir_ficx=$fir_fico;
-$cfico=1*$fir_fico;
-if ( $cfico < 999999 ) $fir_ficx="00".$fir_fico;
-$A=substr($fir_ficx,0,1);
-$B=substr($fir_ficx,1,1);
-$C=substr($fir_ficx,2,1);
-$D=substr($fir_ficx,3,1);
-$E=substr($fir_ficx,4,1);
-$F=substr($fir_ficx,5,1);
-$G=substr($fir_ficx,6,1);
-$H=substr($fir_ficx,7,1);
-$pdf->Cell(10,7,"$A","$rmc",0,"C");$pdf->Cell(10,7,"$B","$rmc",0,"C");
-$pdf->Cell(9,7,"$C","$rmc",0,"C");$pdf->Cell(10,7,"$D","$rmc",0,"C");
-$pdf->Cell(10,7,"$E","$rmc",0,"C");$pdf->Cell(9,7,"$F","$rmc",0,"C");
-$pdf->Cell(10,7,"$G","$rmc",0,"C");$pdf->Cell(10,7,"$H","$rmc",1,"C");
+$A=substr($fir_ficox,0,1);
+$B=substr($fir_ficox,1,1);
+$C=substr($fir_ficox,2,1);
+$D=substr($fir_ficox,3,1);
+$E=substr($fir_ficox,4,1);
+$F=substr($fir_ficox,5,1);
+$G=substr($fir_ficox,6,1);
+$H=substr($fir_ficox,7,1);
+$pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
+$pdf->Cell(7,8,"$C","$rmc",0,"C");$pdf->Cell(7.5,8,"$D","$rmc",0,"C");
+$pdf->Cell(7.5,8,"$E","$rmc",0,"C");$pdf->Cell(8,8,"$F","$rmc",0,"C");
+$pdf->Cell(7.5,8,"$G","$rmc",0,"C");$pdf->Cell(7.5,8,"$H","$rmc",1,"C");
 
 //ORGANIZACIA
-$pdf->Cell(190,116," ","$rmc1",1,"L");
-$pdf->Cell(55,4," ","$rmc1",0,"L");$pdf->Cell(99,4,"$fir_fnaz","$rmc",0,"L");$pdf->Cell(1,4," ","$rmc1",1,"L");
-$pdf->Cell(55,5," ","$rmc1",0,"L");$pdf->Cell(99,6,"$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",0,"L");
-$pdf->Cell(36,6,"$okres","$rmc",1,"C");
+$pdf->Cell(190,126," ","$rmc1",1,"L");
+$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(153,6,"$fir_fnaz","$rmc",1,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(153,5,"$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",0,"L");$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(34,4,"$okres","$rmc",1,"C");
 
 //VYPLNIL
-$pdf->Cell(195,6," ","$rmc1",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(73,6,"$fir_mzdt05","$rmc",0,"L");$pdf->Cell(2,5," ","$rmc1",0,"L");
-$pdf->Cell(40,13,"$fir_mzdt04","$rmc",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(72,8,"$fir_fem1","$rmc",0,"L");$pdf->Cell(2,5," ","$rmc1",0,"L");
+$pdf->Cell(195,8," ","$rmc1",1,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(73,5,"$fir_mzdt05","$rmc",0,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(43,11,"$fir_mzdt04","$rmc",1,"L");
+$pdf->Cell(195,3," ","$rmc1",1,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(72,6,"$fir_fem1","$rmc",0,"L");
 //odoslane
-$pdf->Cell(41,8,"$odoslane_sk","$rmc",1,"C");
-
-//modul 100307
-$pdf->Cell(195,33," ","$rmc1",1,"L");
-$pdf->Cell(81,5," ","$rmc1",0,"C");$pdf->Cell(108,6,"$fir_mzdt05","$rmc",1,"C");
-$pdf->Cell(81,5," ","$rmc1",0,"C");$pdf->Cell(108,6,"$fir_mzdt04","$rmc",1,"C");
-$pdf->Cell(81,5," ","$rmc1",0,"C");$pdf->Cell(108,6,"$fir_fem1","$rmc",1,"C");
+$pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(43,6,"$odoslane_sk","$rmc",1,"L");
                                        }
 
 if ( $strana == 2 OR $strana == 9999 ) {
@@ -541,43 +525,36 @@ $pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
-$mod2r01=$hlavicka->mod2r01;
-if ( $mod2r01 == 0 ) $mod2r01="";
-$mod2r02=$hlavicka->mod2r02;
-if ( $mod2r02 == 0 ) $mod2r02="";
-$predajdni=$hlavicka->predajdni;
-if ( $predajdni == 0 ) $predajdni="";
-$mod124r01=$hlavicka->mod124r01;
-if ( $mod124r01 == 0 ) $mod124r01="";
-$mod124r02=$hlavicka->mod124r02;
-if ( $mod124r02 == 0 ) $mod124r02="";
-$mod124r03=$hlavicka->mod124r03;
-if ( $mod124r03 == 0 ) $mod124r03="";
-$mod124r04=$hlavicka->mod124r04;
-if ( $mod124r04 == 0 ) $mod124r04="";
+$mod2r01=$hlavicka->mod2r01; if ( $mod2r01 == 0 ) $mod2r01="";
+$mod2r02=$hlavicka->mod2r02; if ( $mod2r02 == 0 ) $mod2r02="";
+$predajdni=$hlavicka->predajdni; if ( $predajdni == 0 ) $predajdni="";
+$mod124r01=$hlavicka->mod124r01; if ( $mod124r01 == 0 ) $mod124r01="";
+$mod124r02=$hlavicka->mod124r02; if ( $mod124r02 == 0 ) $mod124r02="";
+$mod124r03=$hlavicka->mod124r03; if ( $mod124r03 == 0 ) $mod124r03="";
+$mod124r04=$hlavicka->mod124r04; if ( $mod124r04 == 0 ) $mod124r04="";
 
 //modul 100340
-$pdf->Cell(195,25," ","$rmc1",1,"L");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6.5,"$aktivita","$rmc",1,"C");
+$pdf->Cell(195,45," ","$rmc1",1,"L");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,7,"$aktivita","$rmc",1,"C");
 $sknace=str_replace(".", "", $fir_sknace);
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$sknace","$rmc",1,"C");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,8,"$sknace","$rmc",1,"C");
 
 //modul 2
-$pdf->Cell(195,26," ","$rmc1",1,"L");
-$pdf->Cell(153,5," ","$rmc1",0,"C");$pdf->Cell(36,8,"$mod2r01","$rmc",1,"C");
-$pdf->Cell(153,5," ","$rmc1",0,"C");$pdf->Cell(36,9,"$mod2r02","$rmc",1,"C");
+$pdf->Cell(195,37," ","$rmc1",1,"L");
+$pdf->Cell(134,5," ","$rmc1",0,"C");$pdf->Cell(55,8,"$mod2r01","$rmc",1,"C");
+$pdf->Cell(134,5," ","$rmc1",0,"C");$pdf->Cell(55,9,"$mod2r02","$rmc",1,"C");
 
 //modul 100055
-$pdf->Cell(180,26," ","$rmc1",1,"L");
-$pdf->Cell(133,6," ","$rmc1",0,"L");$pdf->Cell(56,8,"$predajdni","$rmc",1,"C");
+$pdf->Cell(180,30," ","$rmc1",1,"L");
+$pdf->Cell(133,6," ","$rmc1",0,"L");$pdf->Cell(56,6,"$predajdni","$rmc",1,"C");
 
 //modul 124
-$pdf->Cell(195,33," ","$rmc1",1,"L");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,6,"$mod124r01","$rmc",1,"R");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,6,"$mod124r02","$rmc",1,"R");
+$pdf->Cell(195,32," ","$rmc1",1,"L");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,8,"$mod124r01","$rmc",1,"R");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,7,"$mod124r02","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,7,"$mod124r03","$rmc",1,"R");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,6.5,"$mod124r04","$rmc",1,"R");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,7,"$hlavicka->mod124r99","$rmc",1,"R");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,7,"$mod124r04","$rmc",1,"R");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(70,7.5,"$hlavicka->mod124r99","$rmc",1,"R");
                                        }
 //koniec 2.strany
 }
