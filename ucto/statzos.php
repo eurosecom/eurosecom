@@ -305,6 +305,7 @@ if ( $kli_vrok < 2012 ) $rok1304="_2011";
 
 <?php
 $rokopu112="";
+if ( $kli_vrok < 2017 ) $rokopu112="_2016";
 if ( $kli_vrok < 2016 ) $rokopu112="_2015";
 if ( $kli_vrok < 2014 ) $rokopu112="_2013";
 ?>

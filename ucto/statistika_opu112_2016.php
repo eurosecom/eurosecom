@@ -1,7 +1,7 @@
 <!doctype html>
 <HTML>
 <?php
-//celkovy zaciatok dokumentu OPU112 rok 2017
+//celkovy zaciatok dokumentu OPU112 rok 2016
 do
 {
 $sys = 'UCT';
@@ -322,7 +322,7 @@ form input[type=text] {
   }
   function TlacVykaz()
   {
-   window.open('../ucto/statistika_opu112.php?copern=11&drupoh=1&page=1&typ=PDF&strana=9999', '_blank');
+   window.open('../ucto/statistika_opu112_2016.php?copern=11&drupoh=1&page=1&typ=PDF&strana=9999', '_blank');
   }
   function UdajeFirma()
   {
@@ -361,11 +361,11 @@ if ( $copern == 2 )
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="statistika_opu112.php?copern=3&strana=<?php echo $strana; ?>">
+<FORM name="formv1" method="post" action="statistika_opu112_2016.php?copern=3&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
-$source="statistika_opu112.php?drupoh=1&page=1";
+$source="statistika_opu112_2016.php?drupoh=1&page=1";
 ?>
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=1&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
