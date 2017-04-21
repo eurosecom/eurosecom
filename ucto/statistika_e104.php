@@ -1,7 +1,7 @@
 <HTML>
 <?php
 
-// celkovy zaciatok dokumentu
+// celkovy zaciatok dokumentu E104 2017
        do
        {
 $sys = 'UCT';

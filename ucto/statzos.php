@@ -284,9 +284,13 @@ if ( $kli_vrok < 2016 ) $rokodpad="_2015";
   }
 
 //vykaz E(MZSR)1-04
+<?php
+$roke104="";
+if ( $kli_vrok < 2017 ) $roke104="_2016";
+?>
   function Emzsr104Uprav()
   {
-   window.open('../ucto/statistika_e104.php?copern=1&drupoh=1&page=1', '_blank');
+   window.open('../ucto/statistika_e104<?php echo $roke104; ?>.php?copern=1&drupoh=1&page=1', '_blank');
   }
 
 //statistika 1304
