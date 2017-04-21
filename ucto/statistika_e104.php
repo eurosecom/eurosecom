@@ -1033,38 +1033,46 @@ if ( $copern == 1 OR $copern == 3 )
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s04";?></td></tr>
 
 
-<tr><td class="fmenu" colspan="3">5. Tržby od ZP za body</td>
+<tr><td class="fmenu" colspan="3">5. Tržby ZP výkon</td>
+<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s15";?></td></tr>
+
+
+<tr><td class="fmenu" colspan="3">6. Tržby od ZP za body</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s05";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">6. Tržby od ZP za kapitáciu/paušál</td>
+<tr><td class="fmenu" colspan="3">7. Tržby od ZP za kapitáciu/paušál</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s06";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">7. Tržby od ZP za iné</td>
-<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s07";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">8. Tržby od obyv. za lieky</td>
-<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s08";?></td></tr>
-
-<tr><td class="fmenu" colspan="3">9. Tržby od obyv. za zdravotnícke pomôcky</td>
-<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s09";?></td></tr>
-
-<tr><td class="fmenu" colspan="3">10. Tržby od obyv. za doplnkový sortiment lekární</td>
-<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s10";?></td></tr>
-
-<tr><td class="fmenu" colspan="3">11. Tržby od obyv. za iné</td>
-<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s11";?></td></tr>
-
-<tr><td class="fmenu" colspan="3">12. Prevádzkové dotácie od zriaïovate¾a</td>
-<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s12";?></td></tr>
-
-<tr><td class="fmenu" colspan="3">13. Ostatné výnosy</td>
-<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s13";?></td></tr>
-
-<tr><td class="fmenu" colspan="3">14. Tržby ZP km min.</td>
+<tr><td class="fmenu" colspan="3">8. Tržby ZP km min.</td>
 <td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s14";?></td></tr>
 
-<tr><td class="fmenu" colspan="3">15. Tržby ZP výkon</td>
-<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s15";?></td></tr>
+
+
+<tr><td class="fmenu" colspan="3">9. Tržby od ZP za iné</td>
+<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s07";?></td></tr>
+
+<tr><td class="fmenu" colspan="3">10. Tržby od obyv. za lieky</td>
+<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s08";?></td></tr>
+
+<tr><td class="fmenu" colspan="3">11. Tržby od obyv. za zdravotnícke pomôcky</td>
+<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s09";?></td></tr>
+
+<tr><td class="fmenu" colspan="3">12. Tržby od obyv. za doplnkový sortiment lekární</td>
+<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s10";?></td></tr>
+
+<tr><td class="fmenu" colspan="3">13. Tržby od obyv. za iné</td>
+<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s11";?></td></tr>
+
+<tr><td class="fmenu" colspan="3">14. Prevádzkové dotácie od zriaïovate¾a</td>
+<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s12";?></td></tr>
+
+<tr><td class="fmenu" colspan="3">15. Ostatné výnosy</td>
+<td class="fmenu" colspan="6" align="left"><?php echo "$mod4102s13";?></td></tr>
+
+
+
+
 </FORM>
 
 </table>
@@ -1439,38 +1447,46 @@ if ( $copern == 2 )
 <tr><td class="fmenu" colspan="3">4. Tržby od ZP za deò pobytu v stacionáry</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s04" id="mod4102s04" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">5. Tržby od ZP za body</td>
+
+<tr><td class="fmenu" colspan="3">5. Tržby ZP výkon</td>
+<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s15" id="mod4102s15" size="90"/></td></tr>
+
+
+<tr><td class="fmenu" colspan="3">6. Tržby od ZP za body</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s05" id="mod4102s05" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">6. Tržby od ZP za kapitáciu/paušál</td>
+<tr><td class="fmenu" colspan="3">7. Tržby od ZP za kapitáciu/paušál</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s06" id="mod4102s06" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">7. Tržby od ZP za iné</td>
-<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s07" id="mod4102s07" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">8. Tržby od obyv. za lieky</td>
-<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s08" id="mod4102s08" size="90"/></td></tr>
-
-<tr><td class="fmenu" colspan="3">9. Tržby od obyv. za zdravotnícke pomôcky</td>
-<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s09" id="mod4102s09" size="90"/></td></tr>
-
-<tr><td class="fmenu" colspan="3">10. Tržby od obyv. za doplnkový sortiment lekární</td>
-<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s10" id="mod4102s10" size="90"/></td></tr>
-
-<tr><td class="fmenu" colspan="3">11. Tržby od obyv. za iné</td>
-<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s11" id="mod4102s11" size="90"/></td></tr>
-
-<tr><td class="fmenu" colspan="3">12. Prevádzkové dotácie od zriaïovate¾a</td>
-<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s12" id="mod4102s12" size="90"/></td></tr>
-
-<tr><td class="fmenu" colspan="3">13. Ostatné výnosy</td>
-<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s13" id="mod4102s13" size="90"/></td></tr>
-
-<tr><td class="fmenu" colspan="3">14. Tržby ZP km min</td>
+<tr><td class="fmenu" colspan="3">8. Tržby ZP km min</td>
 <td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s14" id="mod4102s14" size="90"/></td></tr>
 
-<tr><td class="fmenu" colspan="3">15. Tržby ZP výkon</td>
-<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s15" id="mod4102s15" size="90"/></td></tr>
+
+<tr><td class="fmenu" colspan="3">9. Tržby od ZP za iné</td>
+<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s07" id="mod4102s07" size="90"/></td></tr>
+
+<tr><td class="fmenu" colspan="3">10. Tržby od obyv. za lieky</td>
+<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s08" id="mod4102s08" size="90"/></td></tr>
+
+<tr><td class="fmenu" colspan="3">11. Tržby od obyv. za zdravotnícke pomôcky</td>
+<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s09" id="mod4102s09" size="90"/></td></tr>
+
+<tr><td class="fmenu" colspan="3">12. Tržby od obyv. za doplnkový sortiment lekární</td>
+<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s10" id="mod4102s10" size="90"/></td></tr>
+
+<tr><td class="fmenu" colspan="3">13. Tržby od obyv. za iné</td>
+<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s11" id="mod4102s11" size="90"/></td></tr>
+
+<tr><td class="fmenu" colspan="3">14. Prevádzkové dotácie od zriaïovate¾a</td>
+<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s12" id="mod4102s12" size="90"/></td></tr>
+
+<tr><td class="fmenu" colspan="3">15. Ostatné výnosy</td>
+<td class="fmenu" colspan="6" align="left"><input type="text" name="mod4102s13" id="mod4102s13" size="90"/></td></tr>
+
+
+
+
 
 <tr>
 <td class="obyc" colspan="2"><INPUT type="submit" id="uloz" name="uloz" value="Uloži úpravy"></td>
@@ -2209,6 +2225,18 @@ $sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n12=hodx WHERE ( L
 $oznac = mysql_query("$sqtoz");
  
 
+//nove 2017
+
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n07=-hodx WHERE nstr = 3160 AND ( LEFT(ucmx,6) = 604100 )"; 
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n07=hodx WHERE nstr = 3160 AND ( LEFT(ucdx,6) = 604100 )"; 
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n08=-hodx WHERE nstr = 3160 AND ( LEFT(ucmx,6) = 604300 )"; 
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_statistika_e104prac SET mod4102n08=hodx WHERE nstr = 3160 AND ( LEFT(ucdx,6) = 604300 )"; 
+$oznac = mysql_query("$sqtoz");
+
 //end europkse
 }
 else
@@ -2512,10 +2540,10 @@ $pdf->Cell(190,6,"4102. modul Výnosy v EUR","0",1,"L");
 $pdf->SetFont('arial','',7);
 $pdf->Cell(15,5,"STR","1",0,"C");$pdf->Cell(5,5,"l.r.","1",0,"C");$pdf->Cell(15,5,"ukon.hosp.","1",0,"C");
 $pdf->Cell(15,5,"oš.dni","1",0,"C");$pdf->Cell(15,5,"prip.pol.","1",0,"C");$pdf->Cell(15,5,"deò v stac.","1",0,"C");
-$pdf->Cell(15,5,"body","1",0,"C");$pdf->Cell(15,5,"kapitácia","1",0,"C");
-$pdf->Cell(15,5,"iné","1",0,"C");$pdf->Cell(15,5,"lieky","1",0,"C");$pdf->Cell(15,5,"zdr.pom.","1",0,"C");
-$pdf->Cell(15,5,"dopl.lek.","1",0,"C");$pdf->Cell(15,5,"iné","1",0,"C");$pdf->Cell(15,5,"dotácie","1",0,"C");
-$pdf->Cell(15,5,"Ostatné","1",0,"C");$pdf->Cell(15,5,"ZP km min","1",0,"C");$pdf->Cell(15,5,"ZP výkony","1",1,"C");
+$pdf->Cell(15,5,"ZP výkony","1",0,"C");$pdf->Cell(15,5,"body","1",0,"C");$pdf->Cell(15,5,"kapitácia","1",0,"C");
+$pdf->Cell(15,5,"ZP km min","1",0,"C");$pdf->Cell(15,5,"iné","1",0,"C");$pdf->Cell(15,5,"lieky","1",0,"C");
+$pdf->Cell(15,5,"zdr.pom.","1",0,"C");$pdf->Cell(15,5,"dopl.lek.","1",0,"C");$pdf->Cell(15,5,"iné","1",0,"C");
+$pdf->Cell(15,5,"dotácie","1",0,"C");$pdf->Cell(15,5,"Ostatné","1",1,"C");
 
 $pdf->Cell(15,5,"  ","1",0,"C");$pdf->Cell(5,5,"a","1",0,"C");$pdf->Cell(15,5,"1","1",0,"C");
 $pdf->Cell(15,5,"2","1",0,"C");$pdf->Cell(15,5,"3","1",0,"C");$pdf->Cell(15,5,"4","1",0,"C");
@@ -2533,10 +2561,12 @@ if( $nstr == 99999999 ) $pdf->Cell(15,5,"Spolu","1",0,"R");
 
 $pdf->Cell(5,5,"$pol","1",0,"C");$pdf->Cell(15,5,"$mod4102s01","1",0,"R");
 $pdf->Cell(15,5,"$mod4102s02","1",0,"R");$pdf->Cell(15,5,"$mod4102s03","1",0,"R");$pdf->Cell(15,5,"$mod4102s04","1",0,"R");
-$pdf->Cell(15,5,"$mod4102s05","1",0,"R");$pdf->Cell(15,5,"$mod4102s06","1",0,"R");$pdf->Cell(15,5,"$mod4102s07","1",0,"R");
+$pdf->Cell(15,5,"$mod4102s15","1",0,"R");
+$pdf->Cell(15,5,"$mod4102s05","1",0,"R");$pdf->Cell(15,5,"$mod4102s06","1",0,"R");$pdf->Cell(15,5,"$mod4102s14","1",0,"R");
+$pdf->Cell(15,5,"$mod4102s07","1",0,"R");
 $pdf->Cell(15,5,"$mod4102s08","1",0,"R");$pdf->Cell(15,5,"$mod4102s09","1",0,"R");$pdf->Cell(15,5,"$mod4102s10","1",0,"R");
-$pdf->Cell(15,5,"$mod4102s11","1",0,"R");$pdf->Cell(15,5,"$mod4102s12","1",0,"R");$pdf->Cell(15,5,"$mod4102s13","1",0,"R");
-$pdf->Cell(15,5,"$mod4102s14","1",0,"R");$pdf->Cell(15,5,"$mod4102s15","1",1,"R");
+$pdf->Cell(15,5,"$mod4102s11","1",0,"R");$pdf->Cell(15,5,"$mod4102s12","1",0,"R");$pdf->Cell(15,5,"$mod4102s13","1",1,"R");
+
 
 
 if( $nstr == 99999999 ) {
@@ -3108,11 +3138,21 @@ if( $hlavicka->nstr < 1000 ) $cislostrediska="0".$hlavicka->nstr;
   fwrite($soubor, $text);
 
 
+  $text = "<TRZBY_ZP_VYKON>".$hlavicka->mod4102s15."</TRZBY_ZP_VYKON>"."\r\n";
+  fwrite($soubor, $text);
+
+
   $text = "<TRZBY_ZP_BODY>".$hlavicka->mod4102s05."</TRZBY_ZP_BODY>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<TRZBY_ZP_KAP_PAUS>".$hlavicka->mod4102s06."</TRZBY_ZP_KAP_PAUS>"."\r\n";
   fwrite($soubor, $text);
+
+
+  $text = "<TRZBY_ZP_KM_MIN>".$hlavicka->mod4102s14."</TRZBY_ZP_KM_MIN>"."\r\n";
+  fwrite($soubor, $text);
+
+
 
   $text = "<TRZBY_ZP_INE>".$hlavicka->mod4102s07."</TRZBY_ZP_INE>"."\r\n";
   fwrite($soubor, $text);
@@ -3135,11 +3175,7 @@ if( $hlavicka->nstr < 1000 ) $cislostrediska="0".$hlavicka->nstr;
   $text = "<VYNOSY_OST>".$hlavicka->mod4102s13."</VYNOSY_OST>"."\r\n";
   fwrite($soubor, $text);
 
-  $text = "<TRZBY_ZP_KM_MIN>".$hlavicka->mod4102s14."</TRZBY_ZP_KM_MIN>"."\r\n";
-  fwrite($soubor, $text);
 
-  $text = "<TRZBY_ZP_VYKON>".$hlavicka->mod4102s15."</TRZBY_ZP_VYKON>"."\r\n";
-  fwrite($soubor, $text);
 
   $text = "</OE_01_02>"."\r\n";
   fwrite($soubor, $text);

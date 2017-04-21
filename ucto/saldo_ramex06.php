@@ -435,7 +435,15 @@ $dsqlt = "DELETE FROM F$kli_vxcf"."_prsaldoicofaknesp$kli_uzid WHERE pox = 999 "
 $dsql = mysql_query("$dsqlt");
 }
 
-//exit;
+$h_naix=""; $h_mesx="";
+$sqltt2 = "SELECT * FROM F$kli_vxcf"."_ico WHERE ico = $h_icox "; 
+$sqldo2 = mysql_query("$sqltt2");
+ if (@$zaznam=mysql_data_seek($sqldo2,0))
+ {
+ $riaddo2=mysql_fetch_object($sqldo2);
+ $h_naix=$riaddo2->nai;
+ $h_mesx=$riaddo2->mes;
+ }
 
 ///////////////////////////////////////////////////////////////////////////////pre vsetky ICO
 if ( $copern == 10 AND $drupoh == 1 AND $h_ico == 0 )
@@ -495,6 +503,9 @@ if( $h_obd == 100 ) $h_obdn="Poèiatoèný stav";
 
 $pdf->Cell(90,5,"Konto $h_uce Ramex a.s. $h_obdn ","0",0,"L");
 $pdf->Cell(0,5,"$strana.","0",1,"R");
+
+if( $h_icox > 0 ) { $pdf->Cell(0,5,"$h_icox $h_naix $h_mesx","0",1,"L"); }
+
 
 $pdf->Cell(180,2," ","0",1,"R");
 
