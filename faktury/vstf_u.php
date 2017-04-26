@@ -901,6 +901,7 @@ $sqldok = mysql_query("$sqlttt");
  $cedx=$riaddok->ced;
  $mnox=$riaddok->mno;
  $merx=$riaddok->mer;
+ $z_pon=$riaddok->pon;
  }
 
 $zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_$tablsluzby WHERE ( cpl='$cislo_cpl' )"); 
@@ -918,6 +919,7 @@ $sqldok = mysql_query("$sqlttt");
  $cedx=$riaddok->ced;
  $mnox=$riaddok->mno;
  $merx=$riaddok->mer;
+ $z_pon=$riaddok->poz;
  }
 //echo $cislox.$nazovx.$cepx.$cedx.$mnox.$merx;
 
@@ -5256,6 +5258,7 @@ $sqldok = mysql_query("$sqlttt");
 //echo "maxtextpol".$maxtextpol;
   }
 if( $maxtextpol > 40 ) { $maxtextpol=80; }
+if( $longslu == 1 ) { $maxtextpol=100; }
 //if( $kli_uzid == 17 ) { echo "maxtextpol".$maxtextpol; }
                                                        }
 //nova faktura
@@ -7191,7 +7194,7 @@ if ( $copern == 7 )
 <input type="hidden" name="h_pon" id="h_pon" />
 <?php                        } ?>
 <?php if( $textnadpol == 1 ) { ?>
-<td class="bmenu" colspan="2" >Text nad položkou:<td class="bmenu" colspan="9" ><input type="text" name="h_pon" id="h_pon" size="80" maxlength="80" ></td></tr><tr>
+<td class="bmenu" colspan="2" >Text nad položkou:<td class="bmenu" colspan="9" ><input type="text" name="h_pon" id="h_pon" size="80" maxlength="80" value="<?php echo $z_pon; ?>" ></td></tr><tr>
 <?php                        } ?>
 <?php                                                         } ?>
 <td class="fmenu"><input type="text" name="h_cpl" id="h_cpl" size="5" /></td>
@@ -7210,13 +7213,16 @@ if ( $copern == 87 )
 <?php
 if ( $copern == 87 AND $drupoh == 1 AND $sysx != 'UCT' ) {
 $sqlttt = "SELECT * FROM F$kli_vxcf"."_sklfak WHERE cpl = $z_cpl ";
+if( $h_tlsl == 1 )
+ {
+$sqlttt = "SELECT cpl, pon AS poz FROM F$kli_vxcf"."_fakslu WHERE cpl = $z_cpl ";
+ }
 $sqldok = mysql_query("$sqlttt");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
   $z_pon=$riaddok->poz;
-  }
-                                                         }
+  }                                                         }
 ?>
 <td class="bmenu" colspan="2" >Text nad položkou:<td class="bmenu" colspan="9" ><input type="text" name="h_pon" id="h_pon" size="80" maxlength="80" value="<?php echo $z_pon; ?>" ></td></tr><tr>
 <?php                        } ?>

@@ -69,8 +69,10 @@ if( $ucm5 > 80 ) { $ucm5=80; }
 if( $ucm5 > 40 ) 
 { 
 $sql = "ALTER TABLE F$kli_vxcf"."_fakslu MODIFY nsl VARCHAR(80) NOT NULL";
+if( $longslu == 1 ) { $sql = "ALTER TABLE F$kli_vxcf"."_fakslu MODIFY nsl VARCHAR(100) NOT NULL"; }
 $vysledek = mysql_query("$sql");
 }
+if( $longslu == 1 ) { $sql = "ALTER TABLE F$kli_vxcf"."_sluzby MODIFY nsl VARCHAR(100) NOT NULL"; $vysledek = mysql_query("$sql"); }
 
 $ttvv = "DELETE FROM F$kli_vxcf"."_fakturaset$kli_uzid ";
 $ttqq = mysql_query("$ttvv");

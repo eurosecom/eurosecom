@@ -840,9 +840,12 @@ onchange="return intg(this,1,9999999999999,Cx)" onclick="Fx.style.display='none'
 <input type="hidden" name="h_slu" id="h_slu" value="<?php echo $cislo_slu;?>" />
 <?php
      }
+
+$dlzkaslu=40;
+if( $longslu == 1 ) { $dlzkaslu=100; }
 ?>
 
-<td class="fmenu"><input type="text" name="h_nsl" id="h_nsl" size="40" maxlength="40" onKeyDown="return NslEnter(event.which)"
+<td class="fmenu"><input type="text" name="h_nsl" id="h_nsl" size="<?php echo $dlzkaslu;?>" maxlength="<?php echo $dlzkaslu;?>" onKeyDown="return NslEnter(event.which)"
 onclick="Fx.style.display='none';" onKeyDown="return NslEnter(event.which)" /></td>
 
 <td class="fmenu">

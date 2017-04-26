@@ -225,5 +225,8 @@ if( $_SERVER['SERVER_NAME'] == "www.educto.sk" )
 { 
 if( $kli_vxcf != 2681 AND $kli_vxcf != 2682 ) { $fir_xfa06=0; } 
 }
+$longslu=0;
+if ( $fir_fico == 46529233 ) { $longslu = 1; }
+
 return $citfir;
 ?>
