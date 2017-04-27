@@ -124,7 +124,7 @@ ICO             VARCHAR(8),
 DATROK          VARCHAR(4),
 DATMES          VARCHAR(2),
 TYPORG          VARCHAR(2),
-SYMBOL          VARCHAR(4),
+SYMBOL          VARCHAR(6),
 MENA            VARCHAR(3),
 DAT_CERP        VARCHAR(12),
 DAT_SPLAT       VARCHAR(12),
@@ -190,7 +190,7 @@ $polozky[] = array("ICO", "C", 8);
 $polozky[] = array("DATROK", "C", 4);
 $polozky[] = array("DATMES", "C", 2);
 $polozky[] = array("TYPORG", "C", 2);
-$polozky[] = array("SYMBOL", "C", 4);
+$polozky[] = array("SYMBOL", "C", 6);
 $polozky[] = array("MENA", "C", 3);
 $polozky[] = array("DAT_CERP", "D", 12);
 $polozky[] = array("DAT_SPLAT", "D", 12);
