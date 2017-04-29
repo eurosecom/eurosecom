@@ -500,6 +500,22 @@ exit;
 }
 //koniec statistiky opu201
 
+//zapis do statistickej TABLE ikap201 a prepni do stat zostavy
+$cstat = 1*$_REQUEST['cstat'];
+if( $cstat == 60201 )
+{
+$modul = 1*$_REQUEST['modul'];
+?>
+<script type="text/javascript">
+
+window.open('../ucto/statistika_ikap201.php?copern=1&drupoh=1&page=1&modul=<?php echo $modul; ?>', '_self' )
+
+</script>
+<?php
+exit;
+}
+//koniec statistiky ikap201
+
 //zapis do statistickej TABLE vts201 a prepni do stat zostavy
 $cstat = 1*$_REQUEST['cstat'];
 if( $cstat == 50201 )

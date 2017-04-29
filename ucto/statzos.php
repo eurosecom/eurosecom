@@ -383,6 +383,17 @@ function statopu201()
 window.open('../ucto/statistika_opu201<?php echo $rokopu201; ?>.php?copern=1&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
                 }
 
+//ikap201
+<?php
+$rokikap201="";
+?>
+
+function statikap201()
+                {
+
+window.open('../ucto/statistika_ikap201<?php echo $rokikap201; ?>.php?copern=1&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+                }
+
 //statistika zav101
 <?php
 $rokzav101="";
@@ -1016,6 +1027,18 @@ if ( $dajstatvyk == 1 )
 </div>
 <img src='../obr/zoznam.png' onclick="statzav101();" title="Upravi hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
+
+<div class="line-area">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Roè IKaP 2-01<span>Roèný výkaz produkèných odvetví v malých podnikoch v informáciách, komunikácii...</span></strong>
+ <img src="../obr/info.png" title="Roè IKaP 2-01 verzia <?php echo $kli_vrok; ?>">
+</div>
+</div>
+<img src='../obr/zoznam.png' onclick="statikap201();" title="Upravi hodnoty" class="toleft line-box box-green">
+</div> <!-- .line-area -->
+
 <?php
 }
 ?>
