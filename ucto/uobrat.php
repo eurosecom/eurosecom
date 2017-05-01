@@ -1239,7 +1239,7 @@ $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsx'.$kli_uzid;
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsy'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctzosuce';
-if( $kli_vmes != 12 ) $vysledok = mysql_query("$sqlt");
+if( $kli_vmes != 12 AND $hosprok == 0 ) $vysledok = mysql_query("$sqlt");
 
 // celkovy koniec dokumentu
        } while (false);

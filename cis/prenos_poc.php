@@ -43,6 +43,8 @@ $upozorni2013 = 1*$_REQUEST['upozorni2013'];
 //echo $copern;
 
 $citfir = include("../cis/citaj_fir.php");
+//ak hosp.rok rovnake roky
+if( $hosprok == 1 AND $kli_vrok == $fir_allx12 ) { $databaza=""; }
 
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
@@ -2199,6 +2201,15 @@ $vysledek = mysql_query("$sql");
 
 $sql = "INSERT INTO F".$kli_vxcf."_uctzosuce SELECT * FROM ".$databaza."F".$h_ycf."_uctzosuce WHERE uro = 1";
 $vysledek = mysql_query("$sql");
+
+//ak hosp.rok napr. od 10.2016 do 9.2017 urob doklad z pohybov roka 2016 napr. 10.2016 až 12.2016
+if( $hosprok == 1 AND $kli_vrok != $fir_allx12 )
+  {
+
+
+echo "Všeobecný doklad hospodárskeho roka prenesený.<br />";
+  }
+//koniec ak hosp.rok napr. od 10.2016 do 9.2017 urob doklad z pohybov roka 2016 napr. 10.2016 až 12.2016
 
 $sql = "DELETE FROM F".$kli_vxcf."_uctzosuce WHERE LEFT(uce,1) = 5 OR LEFT(uce,1) = 6 OR LEFT(uce,1) = 8 OR LEFT(uce,1) = 9 ";
 $vysledek = mysql_query("$sql");
