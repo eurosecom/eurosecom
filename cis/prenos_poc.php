@@ -2205,7 +2205,28 @@ $vysledek = mysql_query("$sql");
 //ak hosp.rok napr. od 10.2016 do 9.2017 urob doklad z pohybov roka 2016 napr. 10.2016 až 12.2016
 if( $hosprok == 1 AND $kli_vrok != $fir_allx12 )
   {
+$dokp="99900000" + $fir_allx12;
+$umep="01.".$kli_vrok;
+$datp=$kli_vrok."-01-01";
+$txpp="hospodársky rok ".$fir_allx12;
 
+$sql = "DELETE FROM F".$kli_vxcf."_uctvsdh WHERE uce = 2 AND dok = $dokp ";
+$vysledek = mysql_query("$sql");
+$sql = "DELETE FROM F".$kli_vxcf."_uctvsdp WHERE dok = $dokp ";
+$vysledek = mysql_query("$sql");
+
+$sql = "INSERT INTO F".$kli_vxcf."_uctvsdh ".
+" ( uce,ume,dat,dok,doq,txp,ico,hod,hodm,id,datm ) VALUES ('2','$umep','$datp','$dokp','$dokp','$txpp','$fir_fico','0','0','$kli_uzid',now() ) ";
+$vysledek = mysql_query("$sql");
+
+$sql = "INSERT INTO F".$kli_vxcf."_uctvsdp SELECT ".
+" '$dokp', 5, 0, uce, '39500', 1, 0, zmd, 0, 0, '', '', 0, 0, '', 0, 0, '', '$kli_uzid', now() ".
+" FROM  F".$kli_vxcf."_uctzosuce WHERE zmd != 0 ";
+$vysledek = mysql_query("$sql");
+$sql = "INSERT INTO F".$kli_vxcf."_uctvsdp SELECT ".
+" '$dokp', 5, 0, '39500', uce,  1, 0, zdl, 0, 0, '', '', 0, 0, '', 0, 0, '', '$kli_uzid', now() ".
+" FROM  F".$kli_vxcf."_uctzosuce WHERE zdl != 0 ";
+$vysledek = mysql_query("$sql");
 
 echo "Všeobecný doklad hospodárskeho roka prenesený.<br />";
   }
@@ -2256,6 +2277,20 @@ $sqtoz = "UPDATE F$kli_vxcf"."_uctosnova,F$kli_vxcf"."_uctzosuce SET ".
 "F$kli_vxcf"."_uctosnova.pmd=zmd, pda=zdl WHERE F$kli_vxcf"."_uctosnova.uce = F$kli_vxcf"."_uctzosuce.uce ";
 $oznac = mysql_query("$sqtoz");
 
+//pociatky hosp.rok
+if( $hosprok == 1 AND $kli_vrok != $fir_allx12 )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_uctosnova SET pmd=0, pda=0 WHERE ucc > 0 ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_uctosnova,F$kli_vxcf"."_uctzosuce SET ".
+"F$kli_vxcf"."_uctosnova.pmd=F$kli_vxcf"."_uctzosuce.pmd, pda=F$kli_vxcf"."_uctzosuce.pdl ".
+" WHERE F$kli_vxcf"."_uctosnova.uce = F$kli_vxcf"."_uctzosuce.uce ";
+$oznac = mysql_query("$sqtoz");
+
+  }
+
+
 //pociatok431
 
 $sql = "DROP TABLE F".$kli_vxcf."_uctzosuce ";
@@ -2282,10 +2317,16 @@ $i=$i+1;                   }
 
                }
 
+$prenesaj431=1;
+if( $hosprok == 1 AND $kli_vrok != $fir_allx12 ){ $prenesaj431=0; }
+
+if( $prenesaj431 == 1 )
+  {
 $dsqlt = "UPDATE F$kli_vxcf"."_uctosnova SET pda=$zisk WHERE LEFT(uce,5) = 43100";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 echo "Prenos zisku=$zisk na úèet 43100<br />";
+  }
 
 if( $kli_vrok == 2009 )
 {
