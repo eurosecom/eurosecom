@@ -3137,22 +3137,11 @@ if( $hlavicka->nstr < 1000 ) $cislostrediska="0".$hlavicka->nstr;
   $text = "<TRZBY_ZP_STAC_DEN>".$hlavicka->mod4102s04."</TRZBY_ZP_STAC_DEN>"."\r\n";
   fwrite($soubor, $text);
 
-
-  $text = "<TRZBY_ZP_VYKON>".$hlavicka->mod4102s15."</TRZBY_ZP_VYKON>"."\r\n";
-  fwrite($soubor, $text);
-
-
   $text = "<TRZBY_ZP_BODY>".$hlavicka->mod4102s05."</TRZBY_ZP_BODY>"."\r\n";
   fwrite($soubor, $text);
 
   $text = "<TRZBY_ZP_KAP_PAUS>".$hlavicka->mod4102s06."</TRZBY_ZP_KAP_PAUS>"."\r\n";
   fwrite($soubor, $text);
-
-
-  $text = "<TRZBY_ZP_KM_MIN>".$hlavicka->mod4102s14."</TRZBY_ZP_KM_MIN>"."\r\n";
-  fwrite($soubor, $text);
-
-
 
   $text = "<TRZBY_ZP_INE>".$hlavicka->mod4102s07."</TRZBY_ZP_INE>"."\r\n";
   fwrite($soubor, $text);
@@ -3173,6 +3162,12 @@ if( $hlavicka->nstr < 1000 ) $cislostrediska="0".$hlavicka->nstr;
   fwrite($soubor, $text);
 
   $text = "<VYNOSY_OST>".$hlavicka->mod4102s13."</VYNOSY_OST>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<TRZBY_ZP_KM_MIN>".$hlavicka->mod4102s14."</TRZBY_ZP_KM_MIN>"."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "<TRZBY_ZP_VYKON>".$hlavicka->mod4102s15."</TRZBY_ZP_VYKON>"."\r\n";
   fwrite($soubor, $text);
 
 
