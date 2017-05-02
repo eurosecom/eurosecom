@@ -526,6 +526,12 @@ function MerEnter(e)
   {
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
+
+function importSluzby()
+                {
+window.open('nacitajsluzbycsv.php?copern=10&drupoh=1&page=1&zmtz=1', '_self' );
+                } 
+
 </script>
 </HEAD>
 <BODY class="white" onload="ObnovUI(); VyberVstup();" >
@@ -551,7 +557,7 @@ $konc =($pols*($page-1))+($pols-1);
 <table class="h2" width="100%" >
 <tr>
 <td>EuroSecom  -  Služby a neskladové položky
- <img src='../obr/info.png' width=12 height=12 border=0 alt="EnterNext = v tomto formuláry po zadaní hodnoty položky a stlaèení Enter program prejde na vstup ïalšej položky">
+ <img src='../obr/info.png' width=12 height=12 border=0 title="EnterNext = v tomto formuláry po zadaní hodnoty položky a stlaèení Enter program prejde na vstup ïalšej položky">
 <?php
   if ( $copern == 5 ) echo "- nová položka";
   if ( $copern == 8 ) echo "- úprava položky";
@@ -629,13 +635,16 @@ if ( $copern != 5 AND $copern != 6 AND $copern != 8 )
 <td class="hmenu" ></td>
 <td class="hmenu" ></td>
 <td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
+<td class="hmenu" >
+<?php if( $kli_uzall > 25000 ) { ?>
+<img src="../obr/import.png" onClick="importSluzby();" width=20 height=12 border=0 title="Import èíselníka služieb z CSV súboru, POZOR pred naèítaním všetky položky èíselníka vymaže." ></td>
+<?php                          } ?>
+</td>
 <td class="hmenu" ></td>
 <td class="hmenu" ><a href='cslu_xml.php?copern=10&page=1' target="_blank">
-<img src='../obr/export.png' width=20 height=15 border=0 alt="Export do XML súboru"></a></td>
+<img src='../obr/export.png' width=20 height=15 border=0 title="Export do XML súboru"></a></td>
 <td class="hmenu" ><a href='cslu_web.php?copern=1&page=1' target="_blank">
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 alt="Vzh¾ad webstránky služieb"></a></td>
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="Vzh¾ad webstránky služieb"></a></td>
 </tr>
 <tr>
 <td class="hmenu"><input type="text" name="hladaj_slu" id="hladaj_slu" size="15" value="<?php echo $hladaj_slu;?>" />
@@ -653,7 +662,7 @@ if ( $copern != 5 AND $copern != 6 AND $copern != 8 )
 <tr>
 <th class="hmenu">È.služby<th class="hmenu">Názov služby
 <th class="hmenu">Sadzba DPH<th class="hmenu">PCena bez DPH<th class="hmenu">PCena s DPH<th class="hmenu">MJ
-<th class="hmenu"><img src='../obr/info.png' width=12 height=12 border=0 alt="T1 => zaškrtnuté budú vo WEB ponuke">
+<th class="hmenu"><img src='../obr/info.png' width=12 height=12 border=0 title="T1 => zaškrtnuté budú vo WEB ponuke">
 <th class="hmenu">T2<th class="hmenu">T3<th class="hmenu">Obrázky<th class="hmenu">Uprav<th class="hmenu">Zmaž
 </tr>
 
@@ -674,13 +683,13 @@ $code_mer = URLEncode($riadok->mer);
 <tr>
 <td class="fmenu" width="10%" align="left">
 <a href="#" onClick="window.open('slu_udaje.php?copern=20&cislo_slu=<?php echo $riadok->slu;?>', '_blank', '<?php echo $tlcswin; ?>' )">
-<img src='../obr/zoznam.png' width=15 height=10 border=0 alt="Doplòujúce údaje o službovej položke" ></a>
+<img src='../obr/zoznam.png' width=15 height=10 border=0 title="Doplòujúce údaje o službovej položke" ></a>
 
 <?php echo $riadok->slu;?>
 </td>
 <td class="fmenu" width="30%" >
 <a href='cslu_web.php?copern=11&page=<?php echo $page;?>&cislo_slu=<?php echo $riadok->slu;?>' target="_blank">
-<img src='../obr/ziarovka.png' width=15 height=10 border=0 alt="Doplòujúce informácie na WEB stránku"></a>
+<img src='../obr/ziarovka.png' width=15 height=10 border=0 title="Doplòujúce informácie na WEB stránku"></a>
 <?php echo $riadok->nsl;?>
 </td>
 <td class="fmenu" width="10%" ><?php echo $riadok->dph;?></td>
@@ -695,10 +704,10 @@ $code_mer = URLEncode($riadok->mer);
 if( $copern != 6 AND $copern != 5 AND $copern != 8 )
 {
 ?>
-<a href='vstf_s.php?copern=31&drupoh=1&page=1&cislo_dok=<?php echo $riadok->slu;?>' target="_blank"><img src='../obr/ziarovka.png' width=15 height=10 border=0 alt="Uloženie obrázku A do databázy" ></a>
-<a href='vstf_s.php?copern=32&drupoh=1&page=1&cislo_dok=<?php echo $riadok->slu;?>' target="_blank"><img src='../obr/ziarovka.png' width=15 height=10 border=0 alt="Uloženie obrázku B do databázy" ></a>
-<a href='vstf_s.php?copern=33&drupoh=1&page=1&cislo_dok=<?php echo $riadok->slu;?>' target="_blank"><img src='../obr/ziarovka.png' width=15 height=10 border=0 alt="Uloženie obrázku C do databázy" ></a>
-<a href='vstf_s.php?copern=34&drupoh=1&page=1&cislo_dok=<?php echo $riadok->slu;?>' target="_blank"><img src='../obr/ziarovka.png' width=15 height=10 border=0 alt="Uloženie obrázku D do databázy" ></a>
+<a href='vstf_s.php?copern=31&drupoh=1&page=1&cislo_dok=<?php echo $riadok->slu;?>' target="_blank"><img src='../obr/ziarovka.png' width=15 height=10 border=0 title="Uloženie obrázku A do databázy" ></a>
+<a href='vstf_s.php?copern=32&drupoh=1&page=1&cislo_dok=<?php echo $riadok->slu;?>' target="_blank"><img src='../obr/ziarovka.png' width=15 height=10 border=0 title="Uloženie obrázku B do databázy" ></a>
+<a href='vstf_s.php?copern=33&drupoh=1&page=1&cislo_dok=<?php echo $riadok->slu;?>' target="_blank"><img src='../obr/ziarovka.png' width=15 height=10 border=0 title="Uloženie obrázku C do databázy" ></a>
+<a href='vstf_s.php?copern=34&drupoh=1&page=1&cislo_dok=<?php echo $riadok->slu;?>' target="_blank"><img src='../obr/ziarovka.png' width=15 height=10 border=0 title="Uloženie obrázku D do databázy" ></a>
 <?php
 }
 ?>
