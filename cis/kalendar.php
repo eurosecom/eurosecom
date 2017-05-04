@@ -3523,7 +3523,7 @@ $sqldok = mysql_query("$sqlttt");
 // koniec $sql = "SELECT m032017 FROM kalendar";
      }
 
-$sql = "SELECT m062017 FROM kalendar";
+$sql = "SELECT m062017 FROM $mysqldb2017.kalendar";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
      {
@@ -3537,12 +3537,12 @@ if( $i == 1 ) { $kli_vumeabc="04.2017"; }
 if( $i == 2 ) { $kli_vumeabc="05.2017"; }
 if( $i == 3 ) { $kli_vumeabc="06.2017"; }
 
-$sqlttt = "UPDATE kalendar SET m092012=WEEK(dat) WHERE ume = $kli_vumeabc ";
+$sqlttt = "UPDATE $mysqldb2017.kalendar SET m092012=WEEK(dat) WHERE ume = $kli_vumeabc ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE kalendar SET m092012=m092012-1 WHERE ume = $kli_vumeabc AND akyden = 7 ";
+$sqlttt = "UPDATE $mysqldb2017.kalendar SET m092012=m092012-1 WHERE ume = $kli_vumeabc AND akyden = 7 ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "SELECT * FROM kalendar WHERE ume = $kli_vumeabc ORDER BY dat";
+$sqlttt = "SELECT * FROM $mysqldb2017.kalendar WHERE ume = $kli_vumeabc ORDER BY dat";
 $sqldok = mysql_query("$sqlttt");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
@@ -3551,33 +3551,33 @@ $sqldok = mysql_query("$sqlttt");
   $tyzden=1*$riaddok->m092012;
   }
 
-$sqlttt = "UPDATE kalendar SET m082012=m092012-$tyzden WHERE ume = $kli_vumeabc ";
+$sqlttt = "UPDATE $mysqldb2017.kalendar SET m082012=m092012-$tyzden WHERE ume = $kli_vumeabc ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "SELECT * FROM kalendar WHERE ume = $kli_vumeabc AND akyden = 6 ";
+$sqlttt = "SELECT * FROM $mysqldb2017.kalendar WHERE ume = $kli_vumeabc AND akyden = 6 ";
 $sqldok = mysql_query("$sqlttt"); $pocetsobot = 1*mysql_num_rows($sqldok);
 
-$sqlttt = "SELECT * FROM kalendar WHERE ume = $kli_vumeabc AND akyden = 7 ";
+$sqlttt = "SELECT * FROM $mysqldb2017.kalendar WHERE ume = $kli_vumeabc AND akyden = 7 ";
 $sqldok = mysql_query("$sqlttt"); $pocetnedel = 1*mysql_num_rows($sqldok);
 
-$sqlttt = "UPDATE kalendar SET sodo=$pocetsobot-m082012 WHERE ume = $kli_vumeabc ";
+$sqlttt = "UPDATE $mysqldb2017.kalendar SET sodo=$pocetsobot-m082012 WHERE ume = $kli_vumeabc ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "UPDATE kalendar SET nedo=$pocetnedel-m082012 WHERE ume = $kli_vumeabc ";
+$sqlttt = "UPDATE $mysqldb2017.kalendar SET nedo=$pocetnedel-m082012 WHERE ume = $kli_vumeabc ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "UPDATE kalendar SET sodo=sodo-1 WHERE ume = $kli_vumeabc AND akyden = 7 ";
+$sqlttt = "UPDATE $mysqldb2017.kalendar SET sodo=sodo-1 WHERE ume = $kli_vumeabc AND akyden = 7 ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "UPDATE kalendar SET neod=nedo, sood=sodo WHERE ume = $kli_vumeabc ";
+$sqlttt = "UPDATE $mysqldb2017.kalendar SET neod=nedo, sood=sodo WHERE ume = $kli_vumeabc ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "UPDATE kalendar SET sood=sood-1 WHERE ume = $kli_vumeabc AND akyden = 6 ";
+$sqlttt = "UPDATE $mysqldb2017.kalendar SET sood=sood-1 WHERE ume = $kli_vumeabc AND akyden = 6 ";
 $sqldok = mysql_query("$sqlttt");
-$sqlttt = "UPDATE kalendar SET neod=neod-1 WHERE ume = $kli_vumeabc AND akyden = 7 ";
+$sqlttt = "UPDATE $mysqldb2017.kalendar SET neod=neod-1 WHERE ume = $kli_vumeabc AND akyden = 7 ";
 $sqldok = mysql_query("$sqlttt");
 
-$sqlttt = "UPDATE kalendar SET m082012=0, m092012=0 WHERE ume = $kli_vumeabc ";
+$sqlttt = "UPDATE $mysqldb2017.kalendar SET m082012=0, m092012=0 WHERE ume = $kli_vumeabc ";
 $sqldok = mysql_query("$sqlttt");
 
 $pole = explode(".", $kli_vumeabc);
@@ -3585,14 +3585,14 @@ $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 $pridaj="m".$kli_vmes.$kli_vrok;
 
-$sql = "ALTER TABLE kalendar ADD $pridaj INT(2) DEFAULT 0 AFTER sood";
+$sql = "ALTER TABLE $mysqldb2017.kalendar ADD $pridaj INT(2) DEFAULT 0 AFTER sood";
 $vysledek = mysql_query("$sql");
 
 $i=$i+1;
  }
 
 //pozor ak je prva nedela v mesiaci zmen datum na posledny den mesiaca 30, 31
-$sqlttt = "UPDATE kalendar SET sood=sood+1, sodo=sodo+1 WHERE ume = 1.2017 AND dat <= '2017-01-31' ";
+$sqlttt = "UPDATE $mysqldb2017.kalendar SET sood=sood+1, sodo=sodo+1 WHERE ume = 1.2017 AND dat <= '2017-01-31' ";
 //$sqldok = mysql_query("$sqlttt");
 
 // koniec $sql = "SELECT m062017 FROM kalendar";

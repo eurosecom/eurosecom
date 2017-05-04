@@ -41,6 +41,7 @@ if ($pos === false) {
 } else {
     $msie11=1;
 }
+
 if( $msie11 == 1 ) { $msie10=1; }
 $_SESSION['ie10']=$msie10;
 
@@ -58,6 +59,13 @@ if ($pos === false) {
     $chrome=0;
 } else {
     $chrome=1; $safari=0;
+}
+
+$pos = strpos($prehliadac, "Edge");
+if ($pos === false) {
+    $edge=0;
+} else {
+    $edge=1; $msie=0; $msie10=0; $msie11=0; $chrome=0; $safari=0;
 }
 
 $_SESSION['chrome']=$chrome;
@@ -124,7 +132,8 @@ if( !$uziv ) exit;
   $kli_uzprie = $_SESSION['kli_uzprie'];
   $verzia = $_SESSION['verzia'];
 
-$sql = "SELECT m062017 FROM kalendar";
+
+$sql = "SELECT m062017 FROM $mysqldb2017.kalendar";
 $vysledok = mysql_query($sql);
 if (!$vysledok):
 $kalend = include("cis/kalendar.php");
