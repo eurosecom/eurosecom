@@ -26,8 +26,8 @@ $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
 
 //.jpg podklad
-$jpg_cesta="../dokumenty/statistika2016/roc_opu201/roc_opu201_v16";
-$jpg_popis="tlaËivo RoËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch v obchode, pohostinstve a ubytovanÌ RoË OPU 2-01 ".$kli_vrok;
+$jpg_cesta="../dokumenty/statistika2016/roc_ikap201/roc_ikap201_v16";
+$jpg_popis="tlaËivo RoËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch v inform·ci·ch, komunik·cii a v poöt·ch RoË IKaP 2-01 ".$kli_vrok;
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -562,39 +562,21 @@ $sqlt = <<<statistika_opu201
    mod2r01      DECIMAL(10,0) DEFAULT 0,
    mod2r02      DECIMAL(10,0) DEFAULT 0,
    konx         DECIMAL(10,0) DEFAULT 0,
-   ico          DECIMAL(8,0)
+   ico          DECIMAL(8,0) DEFAULT 0,
+   odoslane     DATE NOT NULL DEFAULT 0,
+   m398r01      DECIMAL(10,0) DEFAULT 0,
+   m398r02      DECIMAL(10,0) DEFAULT 0,
+   m398r99      DECIMAL(10,0) DEFAULT 0
 );
 statistika_opu201;
-
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_statistika_ikap201'.$sqlt;
 $vytvor = mysql_query("$vsql");
 $ttvv = "INSERT INTO F$kli_vxcf"."_statistika_ikap201 ( ico ) VALUES ( '0' )";
 $ttqq = mysql_query("$ttvv");
 }
 
-//1.strana, 2.strana je hore vyssie
-$sql = "SELECT odoslane FROM F$kli_vxcf"."_statistika_ikap201 ";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD odoslane DATE NOT NULL AFTER cinnost";
-$vysledek = mysql_query("$sql");
-}
-
-//3.strana
-$sql = "SELECT m398r99 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m398r01 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m398r02 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m398r99 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-}
-
-$sql = "SELECT m405r99 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
+//4.strana
+$sql = "SELECT m586r299 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -612,11 +594,6 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m405r06 DECIMAL(10,0) D
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m405r99 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-}
-$sql = "SELECT m558r99 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m558r01 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m558r02 DECIMAL(10,0) DEFAULT 0 AFTER konx";
@@ -629,14 +606,10 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m558r05 DECIMAL(10,0) D
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m558r06 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m558r07 DECIMAL(10,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m558r99 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-}
-//4.strana
-$sql = "SELECT m580r299 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m580r11 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m580r12 DECIMAL(10,0) DEFAULT 0 AFTER konx";
@@ -649,11 +622,6 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m580r22 DECIMAL(10,0) D
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m580r299 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-}
-$sql = "SELECT m100044nie FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m586r11 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m586r12 DECIMAL(10,0) DEFAULT 0 AFTER konx";
@@ -674,20 +642,13 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m586r24 DECIMAL(10,0) D
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m586r299 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100062ano DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100062nie DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100044ano DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100044nie DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
 }
-$sql = "SELECT m585r5k FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
+//5.strana
+$sql = "SELECT m571r98 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m585r01 DECIMAL(10,0) DEFAULT 0 AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m585r01 VARCHAR(25) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m585r02 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
@@ -703,12 +664,10 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m585r05 DECIMAL(10,0) D
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m585r5k VARCHAR(20) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-}
-//5.strana
-$sql = "SELECT m571r98 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100044ano DECIMAL(2,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100044nie DECIMAL(2,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m571r10 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m571r12 VARCHAR(25) NOT NULL AFTER konx";
@@ -836,6 +795,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m571r98 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 }
+//6.strana
 $sql = "SELECT m516r299 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
@@ -902,7 +862,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m516r299 DECIMAL(10,0) 
 $vysledek = mysql_query("$sql");
 }
 //6.strana
-$sql = "SELECT m513r699 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
+$sql = "SELECT m581r99 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -1038,11 +998,6 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m513r610 DECIMAL(10,0) 
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m513r699 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-}
-$sql = "SELECT m581r99 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m581r01 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m581r02 DECIMAL(10,0) DEFAULT 0 AFTER konx";
@@ -1050,220 +1005,23 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m581r99 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 }
-$sql = "SELECT m588r351 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r201 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r202 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r203 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r204 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r205 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r206 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r207 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r208 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r209 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r210 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r211 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r212 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r213 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r214 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r215 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r216 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r217 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r218 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r219 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r220 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r221 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r222 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r223 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r224 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r225 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r226 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r227 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r228 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r229 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r230 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r231 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r232 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r233 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r234 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r235 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r236 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r237 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r238 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r239 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r240 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r241 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r242 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r243 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r244 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r245 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r246 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r247 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r248 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r249 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r250 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r251 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r301 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r302 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r303 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r304 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r305 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r306 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r307 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r308 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r309 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r310 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r311 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r312 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r313 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r314 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r315 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r316 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r317 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r318 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r319 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r320 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r321 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r322 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r323 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r324 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r325 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r326 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r327 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r328 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r329 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r330 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r331 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r332 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r333 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r334 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r335 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r336 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r337 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r338 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r339 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r340 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r341 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r342 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r343 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r344 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r345 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r346 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r347 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r348 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r349 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r350 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m588r351 DECIMAL(2,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-}
 //7.strana
-$sql = "SELECT m177r99 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
+$sql = "SELECT m178r99 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100301r1 DECIMAL(2,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100301r2 DECIMAL(2,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100302 DECIMAL(10,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100303r1 DECIMAL(2,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100303r2 DECIMAL(2,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100304 DECIMAL(10,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m177r01 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m177r02 DECIMAL(10,0) DEFAULT 0 AFTER konx";
@@ -1282,12 +1040,6 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m177r08 DECIMAL(10,0) D
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m177r99 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-}
-//8.strana
-$sql = "SELECT m178r99 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m178r01 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m178r02 DECIMAL(10,0) DEFAULT 0 AFTER konx";
@@ -1333,7 +1085,8 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m178r99 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 }
-$sql = "SELECT m179r99 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
+//8.strana
+$sql = "SELECT m183r299 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -1343,11 +1096,6 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m179r02 DECIMAL(10,0) D
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m179r99 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-}
-$sql = "SELECT m182r299 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m182r001 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m182r002 VARCHAR(30) NOT NULL AFTER konx";
@@ -1394,31 +1142,25 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m182r207 DECIMAL(10,0) 
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m182r299 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-}
-//9.strana
-$sql = "SELECT m183r2299 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r001 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r001 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r002 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r002 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r003 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r003 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r004 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r004 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r005 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r005 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r006 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r006 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r007 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r007 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r008 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r008 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r009 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r009 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r010 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r010 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r101 VARCHAR(10) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
@@ -1440,28 +1182,6 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r109 VARCHAR(10) NO
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r110 VARCHAR(10) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m183r001 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m183r002 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m183r003 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m183r004 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m183r005 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m183r006 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m183r007 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m183r008 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m183r009 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m183r010 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r201 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r202 DECIMAL(10,0) DEFAULT 0 AFTER konx";
@@ -1484,32 +1204,31 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r210 DECIMAL(10,0) 
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r299 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m183r2299 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
 }
-$sql = "SELECT m184r2399 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
+//9.strana
+$sql = "SELECT m185r399 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r001 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r001 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r002 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r002 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r003 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r003 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r004 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r004 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r005 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r005 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r006 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r006 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r007 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r007 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r008 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r008 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r009 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r009 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r010 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r010 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r101 VARCHAR(10) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
@@ -1531,28 +1250,6 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r109 VARCHAR(10) NO
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r110 VARCHAR(10) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m184r001 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m184r002 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m184r003 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m184r004 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m184r005 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m184r006 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m184r007 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m184r008 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m184r009 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m184r010 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r201 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r202 DECIMAL(10,0) DEFAULT 0 AFTER konx";
@@ -1597,45 +1294,20 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r310 DECIMAL(10,0) 
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r399 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m184r2399 DECIMAL(10,0) DEFAULT 0 AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r001 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-}
-//10.strana
-$sql = "SELECT m185r2399 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r001 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r002 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r002 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r003 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r003 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r004 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r004 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r005 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r005 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r006 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r006 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r007 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r007 VARCHAR(10) NOT NULL AFTER konx";
-$vysledek = mysql_query("$sql");
-
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m185r001 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m185r002 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m185r003 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m185r004 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m185r005 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m185r006 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m185r007 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-
-
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r101 VARCHAR(10) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r102 VARCHAR(10) NOT NULL AFTER konx";
@@ -1682,43 +1354,26 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r307 DECIMAL(10,0) 
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r399 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m185r2399 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
 }
-$sql = "SELECT m186r2399 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
+//10.strana
+$sql = "SELECT m304r99 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r001 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r001 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r002 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r002 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r003 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r003 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r004 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r004 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r005 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r005 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r006 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r006 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r007 VARCHAR(10) NOT NULL AFTER konx";
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r007 VARCHAR(30) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
-
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m186r001 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m186r002 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m186r003 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m186r004 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m186r005 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m186r006 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m186r007 VARCHAR(30) NOT NULL ";
-$vysledek = mysql_query("$sql");
-
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r101 VARCHAR(10) NOT NULL AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r102 VARCHAR(10) NOT NULL AFTER konx";
@@ -1765,13 +1420,6 @@ $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r307 DECIMAL(10,0) 
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r399 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m186r2399 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-}
-$sql = "SELECT m304r99 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m304r01 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m304r02 DECIMAL(10,0) DEFAULT 0 AFTER konx";
@@ -1927,424 +1575,10 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m474r399 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 }
-//13.strana
-$sql = "SELECT m127r699 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r001 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r002 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r003 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r004 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r005 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r006 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r007 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r008 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r009 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r010 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r011 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r012 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r013 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r014 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r015 VARCHAR(30) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r101 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r102 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r103 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r104 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r105 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r106 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r107 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r108 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r109 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r110 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r111 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r112 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r113 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r114 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r115 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r201 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r202 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r203 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r204 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r205 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r206 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r207 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r208 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r209 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r210 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r211 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r212 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r213 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r214 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r215 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r299 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r301 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r302 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r303 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r304 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r305 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r306 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r307 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r308 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r309 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r310 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r311 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r312 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r313 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r314 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r315 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r399 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r401 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r402 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r403 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r404 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r405 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r406 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r407 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r408 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r409 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r410 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r411 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r412 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r413 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r414 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r415 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r499 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r501 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r502 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r503 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r504 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r505 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r506 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r507 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r508 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r509 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r510 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r511 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r512 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r513 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r514 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r515 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r599 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r601 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r602 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r603 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r604 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r605 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r606 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r607 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r608 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r609 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r610 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r611 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r612 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r613 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r614 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r615 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m127r699 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-}
-//14.strana
-$sql = "SELECT m128r599 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r101 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r102 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r103 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r104 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r105 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r106 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r107 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r108 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r109 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r110 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r111 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r199 VARCHAR(10) NOT NULL";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r201 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r202 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r203 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r204 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r205 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r206 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r207 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r208 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r209 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r210 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r211 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r299 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r301 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r302 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r303 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r304 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r305 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r306 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r307 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r308 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r309 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r310 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r311 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r399 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r401 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r402 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r403 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r404 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r405 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r406 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r407 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r408 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r409 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r410 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r411 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r499 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r501 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r502 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r503 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r504 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r505 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r506 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r507 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r508 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r509 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r510 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r511 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r599 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-}
-$sql = "SELECT m128r600 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m128r101 DECIMAL(10,0) DEFAULT 0 ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m128r102 DECIMAL(10,0) DEFAULT 0 ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m128r103 DECIMAL(10,0) DEFAULT 0 ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m128r104 DECIMAL(10,0) DEFAULT 0 ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m128r105 DECIMAL(10,0) DEFAULT 0 ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m128r106 DECIMAL(10,0) DEFAULT 0 ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m128r107 DECIMAL(10,0) DEFAULT 0 ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m128r108 DECIMAL(10,0) DEFAULT 0 ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m128r109 DECIMAL(10,0) DEFAULT 0 ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m128r110 DECIMAL(10,0) DEFAULT 0 ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m128r111 DECIMAL(10,0) DEFAULT 0 ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m128r199 DECIMAL(10,0) DEFAULT 0 ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m128r600 DECIMAL(10,0) DEFAULT 0 AFTER konx";
-$vysledek = mysql_query("$sql");
-}
-$sql = "SELECT m100304 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD new2015 DECIMAL(2,0) DEFAULT 0 AFTER m128r199";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 MODIFY m585r01 VARCHAR(25) NOT NULL ";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100301r1 DECIMAL(2,0) DEFAULT 0 AFTER new2015";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100301r2 DECIMAL(2,0) DEFAULT 0 AFTER new2015";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100303r1 DECIMAL(2,0) DEFAULT 0 AFTER new2015";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100303r2 DECIMAL(2,0) DEFAULT 0 AFTER new2015";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100302 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m100304 DECIMAL(10,0) DEFAULT 0 AFTER new2015";
-$vysledek = mysql_query("$sql");
-}
-//novinky 2016
-$sql = "SELECT m558r07 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD new2016 DECIMAL(2,0) DEFAULT 0 AFTER ico";
-$vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m558r07 DECIMAL(10,0) DEFAULT 0 AFTER new2016";
-$vysledek = mysql_query("$sql");
-}
 //koniec vytvorenia definicie
 
 //nacitaj mzdy
-if( $citajvsetkymoduly == 1 ) { $copern=200; }
+if ( $citajvsetkymoduly == 1 ) { $copern=200; }
 if ( $copern == 200 )
 {
 $h_mfir = $kli_vxcf;
@@ -3094,179 +2328,6 @@ $m474r305 = strip_tags($_REQUEST['m474r305']);
 $m474r306 = strip_tags($_REQUEST['m474r306']);
 $m474r307 = strip_tags($_REQUEST['m474r307']);
 $m474r399 = strip_tags($_REQUEST['m474r399']);
-$m127r001 = strip_tags($_REQUEST['m127r001']);
-$m127r002 = strip_tags($_REQUEST['m127r002']);
-$m127r003 = strip_tags($_REQUEST['m127r003']);
-$m127r004 = strip_tags($_REQUEST['m127r004']);
-$m127r005 = strip_tags($_REQUEST['m127r005']);
-$m127r006 = strip_tags($_REQUEST['m127r006']);
-$m127r007 = strip_tags($_REQUEST['m127r007']);
-$m127r008 = strip_tags($_REQUEST['m127r008']);
-$m127r009 = strip_tags($_REQUEST['m127r009']);
-$m127r010 = strip_tags($_REQUEST['m127r010']);
-$m127r011 = strip_tags($_REQUEST['m127r011']);
-$m127r012 = strip_tags($_REQUEST['m127r012']);
-$m127r013 = strip_tags($_REQUEST['m127r013']);
-$m127r014 = strip_tags($_REQUEST['m127r014']);
-$m127r015 = strip_tags($_REQUEST['m127r015']);
-$m127r099 = strip_tags($_REQUEST['m127r099']);
-$m127r101 = strip_tags($_REQUEST['m127r101']);
-$m127r102 = strip_tags($_REQUEST['m127r102']);
-$m127r103 = strip_tags($_REQUEST['m127r103']);
-$m127r104 = strip_tags($_REQUEST['m127r104']);
-$m127r105 = strip_tags($_REQUEST['m127r105']);
-$m127r106 = strip_tags($_REQUEST['m127r106']);
-$m127r107 = strip_tags($_REQUEST['m127r107']);
-$m127r108 = strip_tags($_REQUEST['m127r108']);
-$m127r109 = strip_tags($_REQUEST['m127r109']);
-$m127r110 = strip_tags($_REQUEST['m127r110']);
-$m127r111 = strip_tags($_REQUEST['m127r111']);
-$m127r112 = strip_tags($_REQUEST['m127r112']);
-$m127r113 = strip_tags($_REQUEST['m127r113']);
-$m127r114 = strip_tags($_REQUEST['m127r114']);
-$m127r115 = strip_tags($_REQUEST['m127r115']);
-$m127r199 = strip_tags($_REQUEST['m127r199']);
-$m127r201 = strip_tags($_REQUEST['m127r201']);
-$m127r202 = strip_tags($_REQUEST['m127r202']);
-$m127r203 = strip_tags($_REQUEST['m127r203']);
-$m127r204 = strip_tags($_REQUEST['m127r204']);
-$m127r205 = strip_tags($_REQUEST['m127r205']);
-$m127r206 = strip_tags($_REQUEST['m127r206']);
-$m127r207 = strip_tags($_REQUEST['m127r207']);
-$m127r208 = strip_tags($_REQUEST['m127r208']);
-$m127r209 = strip_tags($_REQUEST['m127r209']);
-$m127r210 = strip_tags($_REQUEST['m127r210']);
-$m127r211 = strip_tags($_REQUEST['m127r211']);
-$m127r212 = strip_tags($_REQUEST['m127r212']);
-$m127r213 = strip_tags($_REQUEST['m127r213']);
-$m127r214 = strip_tags($_REQUEST['m127r214']);
-$m127r215 = strip_tags($_REQUEST['m127r215']);
-$m127r299 = strip_tags($_REQUEST['m127r299']);
-$m127r301 = strip_tags($_REQUEST['m127r301']);
-$m127r302 = strip_tags($_REQUEST['m127r302']);
-$m127r303 = strip_tags($_REQUEST['m127r303']);
-$m127r304 = strip_tags($_REQUEST['m127r304']);
-$m127r305 = strip_tags($_REQUEST['m127r305']);
-$m127r306 = strip_tags($_REQUEST['m127r306']);
-$m127r307 = strip_tags($_REQUEST['m127r307']);
-$m127r308 = strip_tags($_REQUEST['m127r308']);
-$m127r309 = strip_tags($_REQUEST['m127r309']);
-$m127r310 = strip_tags($_REQUEST['m127r310']);
-$m127r311 = strip_tags($_REQUEST['m127r311']);
-$m127r312 = strip_tags($_REQUEST['m127r312']);
-$m127r313 = strip_tags($_REQUEST['m127r313']);
-$m127r314 = strip_tags($_REQUEST['m127r314']);
-$m127r315 = strip_tags($_REQUEST['m127r315']);
-$m127r399 = strip_tags($_REQUEST['m127r399']);
-$m127r401 = strip_tags($_REQUEST['m127r401']);
-$m127r402 = strip_tags($_REQUEST['m127r402']);
-$m127r403 = strip_tags($_REQUEST['m127r403']);
-$m127r404 = strip_tags($_REQUEST['m127r404']);
-$m127r405 = strip_tags($_REQUEST['m127r405']);
-$m127r406 = strip_tags($_REQUEST['m127r406']);
-$m127r407 = strip_tags($_REQUEST['m127r407']);
-$m127r408 = strip_tags($_REQUEST['m127r408']);
-$m127r409 = strip_tags($_REQUEST['m127r409']);
-$m127r410 = strip_tags($_REQUEST['m127r410']);
-$m127r411 = strip_tags($_REQUEST['m127r411']);
-$m127r412 = strip_tags($_REQUEST['m127r412']);
-$m127r413 = strip_tags($_REQUEST['m127r413']);
-$m127r414 = strip_tags($_REQUEST['m127r414']);
-$m127r415 = strip_tags($_REQUEST['m127r415']);
-$m127r499 = strip_tags($_REQUEST['m127r499']);
-$m127r501 = strip_tags($_REQUEST['m127r501']);
-$m127r502 = strip_tags($_REQUEST['m127r502']);
-$m127r503 = strip_tags($_REQUEST['m127r503']);
-$m127r504 = strip_tags($_REQUEST['m127r504']);
-$m127r505 = strip_tags($_REQUEST['m127r505']);
-$m127r506 = strip_tags($_REQUEST['m127r506']);
-$m127r507 = strip_tags($_REQUEST['m127r507']);
-$m127r508 = strip_tags($_REQUEST['m127r508']);
-$m127r509 = strip_tags($_REQUEST['m127r509']);
-$m127r510 = strip_tags($_REQUEST['m127r510']);
-$m127r511 = strip_tags($_REQUEST['m127r511']);
-$m127r512 = strip_tags($_REQUEST['m127r512']);
-$m127r513 = strip_tags($_REQUEST['m127r513']);
-$m127r514 = strip_tags($_REQUEST['m127r514']);
-$m127r515 = strip_tags($_REQUEST['m127r515']);
-$m127r599 = strip_tags($_REQUEST['m127r599']);
-$m127r601 = strip_tags($_REQUEST['m127r601']);
-$m127r602 = strip_tags($_REQUEST['m127r602']);
-$m127r603 = strip_tags($_REQUEST['m127r603']);
-$m127r604 = strip_tags($_REQUEST['m127r604']);
-$m127r605 = strip_tags($_REQUEST['m127r605']);
-$m127r606 = strip_tags($_REQUEST['m127r606']);
-$m127r607 = strip_tags($_REQUEST['m127r607']);
-$m127r608 = strip_tags($_REQUEST['m127r608']);
-$m127r609 = strip_tags($_REQUEST['m127r609']);
-$m127r610 = strip_tags($_REQUEST['m127r610']);
-$m127r611 = strip_tags($_REQUEST['m127r611']);
-$m127r612 = strip_tags($_REQUEST['m127r612']);
-$m127r613 = strip_tags($_REQUEST['m127r613']);
-$m127r614 = strip_tags($_REQUEST['m127r614']);
-$m127r615 = strip_tags($_REQUEST['m127r615']);
-$m127r699 = strip_tags($_REQUEST['m127r699']);
-//13.strana
-$m128r101 = strip_tags($_REQUEST['m128r101']);
-$m128r102 = strip_tags($_REQUEST['m128r102']);
-$m128r103 = strip_tags($_REQUEST['m128r103']);
-$m128r104 = strip_tags($_REQUEST['m128r104']);
-$m128r105 = strip_tags($_REQUEST['m128r105']);
-$m128r106 = strip_tags($_REQUEST['m128r106']);
-$m128r107 = strip_tags($_REQUEST['m128r107']);
-$m128r108 = strip_tags($_REQUEST['m128r108']);
-$m128r109 = strip_tags($_REQUEST['m128r109']);
-$m128r110 = strip_tags($_REQUEST['m128r110']);
-$m128r111 = strip_tags($_REQUEST['m128r111']);
-$m128r199 = strip_tags($_REQUEST['m128r199']);
-$m128r201 = strip_tags($_REQUEST['m128r201']);
-$m128r202 = strip_tags($_REQUEST['m128r202']);
-$m128r203 = strip_tags($_REQUEST['m128r203']);
-$m128r204 = strip_tags($_REQUEST['m128r204']);
-$m128r205 = strip_tags($_REQUEST['m128r205']);
-$m128r206 = strip_tags($_REQUEST['m128r206']);
-$m128r207 = strip_tags($_REQUEST['m128r207']);
-$m128r208 = strip_tags($_REQUEST['m128r208']);
-$m128r209 = strip_tags($_REQUEST['m128r209']);
-$m128r210 = strip_tags($_REQUEST['m128r210']);
-$m128r211 = strip_tags($_REQUEST['m128r211']);
-$m128r299 = strip_tags($_REQUEST['m128r299']);
-$m128r301 = strip_tags($_REQUEST['m128r301']);
-$m128r302 = strip_tags($_REQUEST['m128r302']);
-$m128r303 = strip_tags($_REQUEST['m128r303']);
-$m128r304 = strip_tags($_REQUEST['m128r304']);
-$m128r305 = strip_tags($_REQUEST['m128r305']);
-$m128r306 = strip_tags($_REQUEST['m128r306']);
-$m128r307 = strip_tags($_REQUEST['m128r307']);
-$m128r308 = strip_tags($_REQUEST['m128r308']);
-$m128r309 = strip_tags($_REQUEST['m128r309']);
-$m128r310 = strip_tags($_REQUEST['m128r310']);
-$m128r311 = strip_tags($_REQUEST['m128r311']);
-$m128r399 = strip_tags($_REQUEST['m128r399']);
-$m128r401 = strip_tags($_REQUEST['m128r401']);
-$m128r402 = strip_tags($_REQUEST['m128r402']);
-$m128r403 = strip_tags($_REQUEST['m128r403']);
-$m128r404 = strip_tags($_REQUEST['m128r404']);
-$m128r405 = strip_tags($_REQUEST['m128r405']);
-$m128r406 = strip_tags($_REQUEST['m128r406']);
-$m128r407 = strip_tags($_REQUEST['m128r407']);
-$m128r408 = strip_tags($_REQUEST['m128r408']);
-$m128r409 = strip_tags($_REQUEST['m128r409']);
-$m128r410 = strip_tags($_REQUEST['m128r410']);
-$m128r411 = strip_tags($_REQUEST['m128r411']);
-$m128r499 = strip_tags($_REQUEST['m128r499']);
-$m128r501 = strip_tags($_REQUEST['m128r501']);
-$m128r502 = strip_tags($_REQUEST['m128r502']);
-$m128r503 = strip_tags($_REQUEST['m128r503']);
-$m128r504 = strip_tags($_REQUEST['m128r504']);
-$m128r505 = strip_tags($_REQUEST['m128r505']);
-$m128r506 = strip_tags($_REQUEST['m128r506']);
-$m128r507 = strip_tags($_REQUEST['m128r507']);
-$m128r508 = strip_tags($_REQUEST['m128r508']);
-$m128r509 = strip_tags($_REQUEST['m128r509']);
-$m128r510 = strip_tags($_REQUEST['m128r510']);
-$m128r511 = strip_tags($_REQUEST['m128r511']);
-$m128r599 = strip_tags($_REQUEST['m128r599']);
 $uprav="NO";
 
 if ( $strana == 1 ) {
@@ -3469,55 +2530,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_ikap201 SET ".
   m474r201='$m474r201', m474r202='$m474r202', m474r203='$m474r203', m474r204='$m474r204',
   m474r205='$m474r205', m474r206='$m474r206', m474r207='$m474r207', m474r299='$m474r299',
   m474r301='$m474r301', m474r302='$m474r302', m474r303='$m474r303', m474r304='$m474r304',
-  m474r305='$m474r305', m474r306='$m474r306', m474r307='$m474r307', m474r399='$m474r399',
-  m127r001='$m127r001', m127r002='$m127r002', m127r003='$m127r003', m127r004='$m127r004',
-  m127r005='$m127r005', m127r006='$m127r006', m127r007='$m127r007', m127r008='$m127r008',
-  m127r009='$m127r009', m127r010='$m127r010', m127r011='$m127r011', m127r012='$m127r012',
-  m127r013='$m127r013', m127r014='$m127r014', m127r015='$m127r015',
-  m127r101='$m127r101', m127r102='$m127r102', m127r103='$m127r103', m127r104='$m127r104',
-  m127r105='$m127r105', m127r106='$m127r106', m127r107='$m127r107', m127r108='$m127r108',
-  m127r109='$m127r109', m127r110='$m127r110', m127r111='$m127r111', m127r112='$m127r112',
-  m127r113='$m127r113', m127r114='$m127r114', m127r115='$m127r115',
-  m127r201='$m127r201', m127r202='$m127r202', m127r203='$m127r203', m127r204='$m127r204',
-  m127r205='$m127r205', m127r206='$m127r206', m127r207='$m127r207', m127r208='$m127r208',
-  m127r209='$m127r209', m127r210='$m127r210', m127r211='$m127r211', m127r212='$m127r212',
-  m127r213='$m127r213', m127r214='$m127r214', m127r215='$m127r215', m127r299='$m127r299',
-  m127r301='$m127r301', m127r302='$m127r302', m127r303='$m127r303', m127r304='$m127r304',
-  m127r305='$m127r305', m127r306='$m127r306', m127r307='$m127r307', m127r308='$m127r308',
-  m127r309='$m127r309', m127r310='$m127r310', m127r311='$m127r311', m127r312='$m127r312',
-  m127r313='$m127r313', m127r314='$m127r314', m127r315='$m127r315', m127r399='$m127r399',
-  m127r401='$m127r401', m127r402='$m127r402', m127r403='$m127r403', m127r404='$m127r404',
-  m127r405='$m127r405', m127r406='$m127r406', m127r407='$m127r407', m127r408='$m127r408',
-  m127r409='$m127r409', m127r410='$m127r410', m127r411='$m127r411', m127r412='$m127r412',
-  m127r413='$m127r413', m127r414='$m127r414', m127r415='$m127r415', m127r499='$m127r499',
-  m127r501='$m127r501', m127r502='$m127r502', m127r503='$m127r503', m127r504='$m127r504',
-  m127r505='$m127r505', m127r506='$m127r506', m127r507='$m127r507', m127r508='$m127r508',
-  m127r509='$m127r509', m127r510='$m127r510', m127r511='$m127r511', m127r512='$m127r512',
-  m127r513='$m127r513', m127r514='$m127r514', m127r515='$m127r515', m127r599='$m127r599',
-  m127r601='$m127r601', m127r602='$m127r602', m127r603='$m127r603', m127r604='$m127r604',
-  m127r605='$m127r605', m127r606='$m127r606', m127r607='$m127r607', m127r608='$m127r608',
-  m127r609='$m127r609', m127r610='$m127r610', m127r611='$m127r611', m127r612='$m127r612',
-  m127r613='$m127r613', m127r614='$m127r614', m127r615='$m127r615', m127r699='$m127r699' ".
-" WHERE ico >= 0 ";
-                     }
-
-if ( $strana == 13 ) {
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_ikap201 SET ".
-" m128r101='$m128r101', m128r102='$m128r102', m128r103='$m128r103', m128r104='$m128r104',
-  m128r105='$m128r105', m128r106='$m128r106', m128r107='$m128r107', m128r108='$m128r108',
-  m128r109='$m128r109', m128r110='$m128r110', m128r111='$m128r111', m128r199='$m128r199',
-  m128r201='$m128r201', m128r202='$m128r202', m128r203='$m128r203', m128r204='$m128r204',
-  m128r205='$m128r205', m128r206='$m128r206', m128r207='$m128r207', m128r208='$m128r208',
-  m128r209='$m128r209', m128r210='$m128r210', m128r211='$m128r211', m128r299='$m128r299',
-  m128r301='$m128r301', m128r302='$m128r302', m128r303='$m128r303', m128r304='$m128r304',
-  m128r305='$m128r305', m128r306='$m128r306', m128r307='$m128r307', m128r308='$m128r308',
-  m128r309='$m128r309', m128r310='$m128r310', m128r311='$m128r311', m128r399='$m128r399',
-  m128r401='$m128r401', m128r402='$m128r402', m128r403='$m128r403', m128r404='$m128r404',
-  m128r405='$m128r405', m128r406='$m128r406', m128r407='$m128r407', m128r408='$m128r408',
-  m128r409='$m128r409', m128r410='$m128r410', m128r411='$m128r411', m128r499='$m128r499',
-  m128r501='$m128r501', m128r502='$m128r502', m128r503='$m128r503', m128r504='$m128r504',
-  m128r505='$m128r505', m128r506='$m128r506', m128r507='$m128r507', m128r508='$m128r508',
-  m128r509='$m128r509', m128r510='$m128r510', m128r511='$m128r511', m128r599='$m128r599' ".
+  m474r305='$m474r305', m474r306='$m474r306', m474r307='$m474r307', m474r399='$m474r399' ".
 " WHERE ico >= 0 ";
                      }
 
@@ -3608,22 +2621,7 @@ $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_ikap201 SET ".
 " m474r199=m474r101+m474r102+m474r103+m474r104+m474r105+m474r106, ".
 " m474r299=m474r201+m474r202+m474r203+m474r204+m474r205+m474r206+m474r207, ".
-" m474r399=m474r301+m474r302+m474r303+m474r304+m474r305+m474r306+m474r307, ".
-" m127r299=m127r201+m127r202+m127r203+m127r204+m127r205+m127r206+m127r207+m127r208+m127r209+m127r210+m127r211+m127r212+m127r213+m127r214+m127r215, ".
-" m127r399=m127r301+m127r302+m127r303+m127r304+m127r305+m127r306+m127r307+m127r308+m127r309+m127r310+m127r311+m127r312+m127r313+m127r314+m127r315, ".
-" m127r499=m127r401+m127r402+m127r403+m127r404+m127r405+m127r406+m127r407+m127r408+m127r409+m127r410+m127r411+m127r412+m127r413+m127r414+m127r415, ".
-" m127r599=m127r501+m127r502+m127r503+m127r504+m127r505+m127r506+m127r507+m127r508+m127r509+m127r510+m127r511+m127r512+m127r513+m127r514+m127r515, ".
-" m127r699=m127r601+m127r602+m127r603+m127r604+m127r605+m127r606+m127r607+m127r608+m127r609+m127r610+m127r611+m127r612+m127r613+m127r614+m127r615  ".
-" WHERE ico >= 0";
-$upravene = mysql_query("$uprtxt");
-
-//13.strana
-$uprtxt = "UPDATE F$kli_vxcf"."_statistika_ikap201 SET ".
-" m128r299=m128r201+m128r202+m128r203+m128r204+m128r205+m128r206+m128r207+m128r208+m128r209+m128r210+m128r211, ".
-" m128r399=m128r301+m128r302+m128r303+m128r304+m128r305+m128r306+m128r307+m128r308+m128r309+m128r310+m128r311, ".
-" m128r499=m128r401+m128r402+m128r403+m128r404+m128r405+m128r406+m128r407+m128r408+m128r409+m128r410+m128r411, ".
-" m128r599=m128r501+m128r502+m128r503+m128r504+m128r505+m128r506+m128r507+m128r508+m128r509+m128r510+m128r511, ".
-" m128r199=m128r101+m128r102+m128r103+m128r104+m128r105+m128r106+m128r107+m128r108+m128r109+m128r110+m128r111  ".
+" m474r399=m474r301+m474r302+m474r303+m474r304+m474r305+m474r306+m474r307 ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
@@ -4163,179 +3161,6 @@ $m474r305 = $fir_riadok->m474r305;
 $m474r306 = $fir_riadok->m474r306;
 $m474r307 = $fir_riadok->m474r307;
 $m474r399 = $fir_riadok->m474r399;
-$m127r001 = $fir_riadok->m127r001;
-$m127r002 = $fir_riadok->m127r002;
-$m127r003 = $fir_riadok->m127r003;
-$m127r004 = $fir_riadok->m127r004;
-$m127r005 = $fir_riadok->m127r005;
-$m127r006 = $fir_riadok->m127r006;
-$m127r007 = $fir_riadok->m127r007;
-$m127r008 = $fir_riadok->m127r008;
-$m127r009 = $fir_riadok->m127r009;
-$m127r010 = $fir_riadok->m127r010;
-$m127r011 = $fir_riadok->m127r011;
-$m127r012 = $fir_riadok->m127r012;
-$m127r013 = $fir_riadok->m127r013;
-$m127r014 = $fir_riadok->m127r014;
-$m127r015 = $fir_riadok->m127r015;
-$m127r099 = $fir_riadok->m127r099;
-$m127r101 = $fir_riadok->m127r101;
-$m127r102 = $fir_riadok->m127r102;
-$m127r103 = $fir_riadok->m127r103;
-$m127r104 = $fir_riadok->m127r104;
-$m127r105 = $fir_riadok->m127r105;
-$m127r106 = $fir_riadok->m127r106;
-$m127r107 = $fir_riadok->m127r107;
-$m127r108 = $fir_riadok->m127r108;
-$m127r109 = $fir_riadok->m127r109;
-$m127r110 = $fir_riadok->m127r110;
-$m127r111 = $fir_riadok->m127r111;
-$m127r112 = $fir_riadok->m127r112;
-$m127r113 = $fir_riadok->m127r113;
-$m127r114 = $fir_riadok->m127r114;
-$m127r115 = $fir_riadok->m127r115;
-$m127r199 = $fir_riadok->m127r199;
-$m127r201 = $fir_riadok->m127r201;
-$m127r202 = $fir_riadok->m127r202;
-$m127r203 = $fir_riadok->m127r203;
-$m127r204 = $fir_riadok->m127r204;
-$m127r205 = $fir_riadok->m127r205;
-$m127r206 = $fir_riadok->m127r206;
-$m127r207 = $fir_riadok->m127r207;
-$m127r208 = $fir_riadok->m127r208;
-$m127r209 = $fir_riadok->m127r209;
-$m127r210 = $fir_riadok->m127r210;
-$m127r211 = $fir_riadok->m127r211;
-$m127r212 = $fir_riadok->m127r212;
-$m127r213 = $fir_riadok->m127r213;
-$m127r214 = $fir_riadok->m127r214;
-$m127r215 = $fir_riadok->m127r215;
-$m127r299 = $fir_riadok->m127r299;
-$m127r301 = $fir_riadok->m127r301;
-$m127r302 = $fir_riadok->m127r302;
-$m127r303 = $fir_riadok->m127r303;
-$m127r304 = $fir_riadok->m127r304;
-$m127r305 = $fir_riadok->m127r305;
-$m127r306 = $fir_riadok->m127r306;
-$m127r307 = $fir_riadok->m127r307;
-$m127r308 = $fir_riadok->m127r308;
-$m127r309 = $fir_riadok->m127r309;
-$m127r310 = $fir_riadok->m127r310;
-$m127r311 = $fir_riadok->m127r311;
-$m127r312 = $fir_riadok->m127r312;
-$m127r313 = $fir_riadok->m127r313;
-$m127r314 = $fir_riadok->m127r314;
-$m127r315 = $fir_riadok->m127r315;
-$m127r399 = $fir_riadok->m127r399;
-$m127r401 = $fir_riadok->m127r401;
-$m127r402 = $fir_riadok->m127r402;
-$m127r403 = $fir_riadok->m127r403;
-$m127r404 = $fir_riadok->m127r404;
-$m127r405 = $fir_riadok->m127r405;
-$m127r406 = $fir_riadok->m127r406;
-$m127r407 = $fir_riadok->m127r407;
-$m127r408 = $fir_riadok->m127r408;
-$m127r409 = $fir_riadok->m127r409;
-$m127r410 = $fir_riadok->m127r410;
-$m127r411 = $fir_riadok->m127r411;
-$m127r412 = $fir_riadok->m127r412;
-$m127r413 = $fir_riadok->m127r413;
-$m127r414 = $fir_riadok->m127r414;
-$m127r415 = $fir_riadok->m127r415;
-$m127r499 = $fir_riadok->m127r499;
-$m127r501 = $fir_riadok->m127r501;
-$m127r502 = $fir_riadok->m127r502;
-$m127r503 = $fir_riadok->m127r503;
-$m127r504 = $fir_riadok->m127r504;
-$m127r505 = $fir_riadok->m127r505;
-$m127r506 = $fir_riadok->m127r506;
-$m127r507 = $fir_riadok->m127r507;
-$m127r508 = $fir_riadok->m127r508;
-$m127r509 = $fir_riadok->m127r509;
-$m127r510 = $fir_riadok->m127r510;
-$m127r511 = $fir_riadok->m127r511;
-$m127r512 = $fir_riadok->m127r512;
-$m127r513 = $fir_riadok->m127r513;
-$m127r514 = $fir_riadok->m127r514;
-$m127r515 = $fir_riadok->m127r515;
-$m127r599 = $fir_riadok->m127r599;
-$m127r601 = $fir_riadok->m127r601;
-$m127r602 = $fir_riadok->m127r602;
-$m127r603 = $fir_riadok->m127r603;
-$m127r604 = $fir_riadok->m127r604;
-$m127r605 = $fir_riadok->m127r605;
-$m127r606 = $fir_riadok->m127r606;
-$m127r607 = $fir_riadok->m127r607;
-$m127r608 = $fir_riadok->m127r608;
-$m127r609 = $fir_riadok->m127r609;
-$m127r610 = $fir_riadok->m127r610;
-$m127r611 = $fir_riadok->m127r611;
-$m127r612 = $fir_riadok->m127r612;
-$m127r613 = $fir_riadok->m127r613;
-$m127r614 = $fir_riadok->m127r614;
-$m127r615 = $fir_riadok->m127r615;
-$m127r699 = $fir_riadok->m127r699;
-//13.strana
-$m128r101 = $fir_riadok->m128r101;
-$m128r102 = $fir_riadok->m128r102;
-$m128r103 = $fir_riadok->m128r103;
-$m128r104 = $fir_riadok->m128r104;
-$m128r105 = $fir_riadok->m128r105;
-$m128r106 = $fir_riadok->m128r106;
-$m128r107 = $fir_riadok->m128r107;
-$m128r108 = $fir_riadok->m128r108;
-$m128r109 = $fir_riadok->m128r109;
-$m128r110 = $fir_riadok->m128r110;
-$m128r111 = $fir_riadok->m128r111;
-$m128r199 = $fir_riadok->m128r199;
-$m128r201 = $fir_riadok->m128r201;
-$m128r202 = $fir_riadok->m128r202;
-$m128r203 = $fir_riadok->m128r203;
-$m128r204 = $fir_riadok->m128r204;
-$m128r205 = $fir_riadok->m128r205;
-$m128r206 = $fir_riadok->m128r206;
-$m128r207 = $fir_riadok->m128r207;
-$m128r208 = $fir_riadok->m128r208;
-$m128r209 = $fir_riadok->m128r209;
-$m128r210 = $fir_riadok->m128r210;
-$m128r211 = $fir_riadok->m128r211;
-$m128r299 = $fir_riadok->m128r299;
-$m128r301 = $fir_riadok->m128r301;
-$m128r302 = $fir_riadok->m128r302;
-$m128r303 = $fir_riadok->m128r303;
-$m128r304 = $fir_riadok->m128r304;
-$m128r305 = $fir_riadok->m128r305;
-$m128r306 = $fir_riadok->m128r306;
-$m128r307 = $fir_riadok->m128r307;
-$m128r308 = $fir_riadok->m128r308;
-$m128r309 = $fir_riadok->m128r309;
-$m128r310 = $fir_riadok->m128r310;
-$m128r311 = $fir_riadok->m128r311;
-$m128r399 = $fir_riadok->m128r399;
-$m128r401 = $fir_riadok->m128r401;
-$m128r402 = $fir_riadok->m128r402;
-$m128r403 = $fir_riadok->m128r403;
-$m128r404 = $fir_riadok->m128r404;
-$m128r405 = $fir_riadok->m128r405;
-$m128r406 = $fir_riadok->m128r406;
-$m128r407 = $fir_riadok->m128r407;
-$m128r408 = $fir_riadok->m128r408;
-$m128r409 = $fir_riadok->m128r409;
-$m128r410 = $fir_riadok->m128r410;
-$m128r411 = $fir_riadok->m128r411;
-$m128r499 = $fir_riadok->m128r499;
-$m128r501 = $fir_riadok->m128r501;
-$m128r502 = $fir_riadok->m128r502;
-$m128r503 = $fir_riadok->m128r503;
-$m128r504 = $fir_riadok->m128r504;
-$m128r505 = $fir_riadok->m128r505;
-$m128r506 = $fir_riadok->m128r506;
-$m128r507 = $fir_riadok->m128r507;
-$m128r508 = $fir_riadok->m128r508;
-$m128r509 = $fir_riadok->m128r509;
-$m128r510 = $fir_riadok->m128r510;
-$m128r511 = $fir_riadok->m128r511;
-$m128r599 = $fir_riadok->m128r599;
 
 mysql_free_result($fir_vysledok);
      }
@@ -4921,183 +3746,7 @@ form input[type=text] {
    document.formv1.m474r306.value = '<?php echo "$m474r306";?>';
    document.formv1.m474r307.value = '<?php echo "$m474r307";?>';
 //document.formv1.m474r399.value = '<?php echo "$m474r399";?>';
-   document.formv1.m127r001.value = '<?php echo "$m127r001";?>';
-   document.formv1.m127r002.value = '<?php echo "$m127r002";?>';
-   document.formv1.m127r003.value = '<?php echo "$m127r003";?>';
-   document.formv1.m127r004.value = '<?php echo "$m127r004";?>';
-   document.formv1.m127r005.value = '<?php echo "$m127r005";?>';
-   document.formv1.m127r006.value = '<?php echo "$m127r006";?>';
-   document.formv1.m127r007.value = '<?php echo "$m127r007";?>';
-   document.formv1.m127r008.value = '<?php echo "$m127r008";?>';
-   document.formv1.m127r009.value = '<?php echo "$m127r009";?>';
-   document.formv1.m127r010.value = '<?php echo "$m127r010";?>';
-   document.formv1.m127r011.value = '<?php echo "$m127r011";?>';
-   document.formv1.m127r012.value = '<?php echo "$m127r012";?>';
-   document.formv1.m127r013.value = '<?php echo "$m127r013";?>';
-   document.formv1.m127r014.value = '<?php echo "$m127r014";?>';
-   document.formv1.m127r015.value = '<?php echo "$m127r015";?>';
-//document.formv1.m127r099.value = '<?php echo "$m127r099";?>';
-   document.formv1.m127r101.value = '<?php echo "$m127r101";?>';
-   document.formv1.m127r102.value = '<?php echo "$m127r102";?>';
-   document.formv1.m127r103.value = '<?php echo "$m127r103";?>';
-   document.formv1.m127r104.value = '<?php echo "$m127r104";?>';
-   document.formv1.m127r105.value = '<?php echo "$m127r105";?>';
-   document.formv1.m127r106.value = '<?php echo "$m127r106";?>';
-   document.formv1.m127r107.value = '<?php echo "$m127r107";?>';
-   document.formv1.m127r108.value = '<?php echo "$m127r108";?>';
-   document.formv1.m127r109.value = '<?php echo "$m127r109";?>';
-   document.formv1.m127r110.value = '<?php echo "$m127r110";?>';
-   document.formv1.m127r111.value = '<?php echo "$m127r111";?>';
-   document.formv1.m127r112.value = '<?php echo "$m127r112";?>';
-   document.formv1.m127r113.value = '<?php echo "$m127r113";?>';
-   document.formv1.m127r114.value = '<?php echo "$m127r114";?>';
-   document.formv1.m127r115.value = '<?php echo "$m127r115";?>';
-//document.formv1.m127r199.value = '<?php echo "$m127r199";?>';
-   document.formv1.m127r201.value = '<?php echo "$m127r201";?>';
-   document.formv1.m127r202.value = '<?php echo "$m127r202";?>';
-   document.formv1.m127r203.value = '<?php echo "$m127r203";?>';
-   document.formv1.m127r204.value = '<?php echo "$m127r204";?>';
-   document.formv1.m127r205.value = '<?php echo "$m127r205";?>';
-   document.formv1.m127r206.value = '<?php echo "$m127r206";?>';
-   document.formv1.m127r207.value = '<?php echo "$m127r207";?>';
-   document.formv1.m127r208.value = '<?php echo "$m127r208";?>';
-   document.formv1.m127r209.value = '<?php echo "$m127r209";?>';
-   document.formv1.m127r210.value = '<?php echo "$m127r210";?>';
-   document.formv1.m127r211.value = '<?php echo "$m127r211";?>';
-   document.formv1.m127r212.value = '<?php echo "$m127r212";?>';
-   document.formv1.m127r213.value = '<?php echo "$m127r213";?>';
-   document.formv1.m127r214.value = '<?php echo "$m127r214";?>';
-   document.formv1.m127r215.value = '<?php echo "$m127r215";?>';
-//document.formv1.m127r299.value = '<?php echo "$m127r299";?>';
-   document.formv1.m127r301.value = '<?php echo "$m127r301";?>';
-   document.formv1.m127r302.value = '<?php echo "$m127r302";?>';
-   document.formv1.m127r303.value = '<?php echo "$m127r303";?>';
-   document.formv1.m127r304.value = '<?php echo "$m127r304";?>';
-   document.formv1.m127r305.value = '<?php echo "$m127r305";?>';
-   document.formv1.m127r306.value = '<?php echo "$m127r306";?>';
-   document.formv1.m127r307.value = '<?php echo "$m127r307";?>';
-   document.formv1.m127r308.value = '<?php echo "$m127r308";?>';
-   document.formv1.m127r309.value = '<?php echo "$m127r309";?>';
-   document.formv1.m127r310.value = '<?php echo "$m127r310";?>';
-   document.formv1.m127r311.value = '<?php echo "$m127r311";?>';
-   document.formv1.m127r312.value = '<?php echo "$m127r312";?>';
-   document.formv1.m127r313.value = '<?php echo "$m127r313";?>';
-   document.formv1.m127r314.value = '<?php echo "$m127r314";?>';
-   document.formv1.m127r315.value = '<?php echo "$m127r315";?>';
-//document.formv1.m127r399.value = '<?php echo "$m127r399";?>';
-   document.formv1.m127r401.value = '<?php echo "$m127r401";?>';
-   document.formv1.m127r402.value = '<?php echo "$m127r402";?>';
-   document.formv1.m127r403.value = '<?php echo "$m127r403";?>';
-   document.formv1.m127r404.value = '<?php echo "$m127r404";?>';
-   document.formv1.m127r405.value = '<?php echo "$m127r405";?>';
-   document.formv1.m127r406.value = '<?php echo "$m127r406";?>';
-   document.formv1.m127r407.value = '<?php echo "$m127r407";?>';
-   document.formv1.m127r408.value = '<?php echo "$m127r408";?>';
-   document.formv1.m127r409.value = '<?php echo "$m127r409";?>';
-   document.formv1.m127r410.value = '<?php echo "$m127r410";?>';
-   document.formv1.m127r411.value = '<?php echo "$m127r411";?>';
-   document.formv1.m127r412.value = '<?php echo "$m127r412";?>';
-   document.formv1.m127r413.value = '<?php echo "$m127r413";?>';
-   document.formv1.m127r414.value = '<?php echo "$m127r414";?>';
-   document.formv1.m127r415.value = '<?php echo "$m127r415";?>';
-//document.formv1.m127r499.value = '<?php echo "$m127r499";?>';
-   document.formv1.m127r501.value = '<?php echo "$m127r501";?>';
-   document.formv1.m127r502.value = '<?php echo "$m127r502";?>';
-   document.formv1.m127r503.value = '<?php echo "$m127r503";?>';
-   document.formv1.m127r504.value = '<?php echo "$m127r504";?>';
-   document.formv1.m127r505.value = '<?php echo "$m127r505";?>';
-   document.formv1.m127r506.value = '<?php echo "$m127r506";?>';
-   document.formv1.m127r507.value = '<?php echo "$m127r507";?>';
-   document.formv1.m127r508.value = '<?php echo "$m127r508";?>';
-   document.formv1.m127r509.value = '<?php echo "$m127r509";?>';
-   document.formv1.m127r510.value = '<?php echo "$m127r510";?>';
-   document.formv1.m127r511.value = '<?php echo "$m127r511";?>';
-   document.formv1.m127r512.value = '<?php echo "$m127r512";?>';
-   document.formv1.m127r513.value = '<?php echo "$m127r513";?>';
-   document.formv1.m127r514.value = '<?php echo "$m127r514";?>';
-   document.formv1.m127r515.value = '<?php echo "$m127r515";?>';
-//document.formv1.m127r599.value = '<?php echo "$m127r599";?>';
-   document.formv1.m127r601.value = '<?php echo "$m127r601";?>';
-   document.formv1.m127r602.value = '<?php echo "$m127r602";?>';
-   document.formv1.m127r603.value = '<?php echo "$m127r603";?>';
-   document.formv1.m127r604.value = '<?php echo "$m127r604";?>';
-   document.formv1.m127r605.value = '<?php echo "$m127r605";?>';
-   document.formv1.m127r606.value = '<?php echo "$m127r606";?>';
-   document.formv1.m127r607.value = '<?php echo "$m127r607";?>';
-   document.formv1.m127r608.value = '<?php echo "$m127r608";?>';
-   document.formv1.m127r609.value = '<?php echo "$m127r609";?>';
-   document.formv1.m127r610.value = '<?php echo "$m127r610";?>';
-   document.formv1.m127r611.value = '<?php echo "$m127r611";?>';
-   document.formv1.m127r612.value = '<?php echo "$m127r612";?>';
-   document.formv1.m127r613.value = '<?php echo "$m127r613";?>';
-   document.formv1.m127r614.value = '<?php echo "$m127r614";?>';
-   document.formv1.m127r615.value = '<?php echo "$m127r615";?>';
-//document.formv1.m127r699.value = '<?php echo "$m127r699";?>';
 <?php                      } ?>
-
-<?php if ( $strana == 13 ) { ?>
-   document.formv1.m128r101.value = '<?php echo "$m128r101";?>';
-   document.formv1.m128r102.value = '<?php echo "$m128r102";?>';
-   document.formv1.m128r103.value = '<?php echo "$m128r103";?>';
-   document.formv1.m128r104.value = '<?php echo "$m128r104";?>';
-   document.formv1.m128r105.value = '<?php echo "$m128r105";?>';
-   document.formv1.m128r106.value = '<?php echo "$m128r106";?>';
-   document.formv1.m128r107.value = '<?php echo "$m128r107";?>';
-   document.formv1.m128r108.value = '<?php echo "$m128r108";?>';
-   document.formv1.m128r109.value = '<?php echo "$m128r109";?>';
-   document.formv1.m128r110.value = '<?php echo "$m128r110";?>';
-   document.formv1.m128r111.value = '<?php echo "$m128r111";?>';
-//document.formv1.m128r199.value = '<?php echo "$m128r199";?>';
-   document.formv1.m128r201.value = '<?php echo "$m128r201";?>';
-   document.formv1.m128r202.value = '<?php echo "$m128r202";?>';
-   document.formv1.m128r203.value = '<?php echo "$m128r203";?>';
-   document.formv1.m128r204.value = '<?php echo "$m128r204";?>';
-   document.formv1.m128r205.value = '<?php echo "$m128r205";?>';
-   document.formv1.m128r206.value = '<?php echo "$m128r206";?>';
-   document.formv1.m128r207.value = '<?php echo "$m128r207";?>';
-   document.formv1.m128r208.value = '<?php echo "$m128r208";?>';
-   document.formv1.m128r209.value = '<?php echo "$m128r209";?>';
-   document.formv1.m128r210.value = '<?php echo "$m128r210";?>';
-   document.formv1.m128r211.value = '<?php echo "$m128r211";?>';
-//document.formv1.m128r299.value = '<?php echo "$m128r299";?>';
-   document.formv1.m128r301.value = '<?php echo "$m128r301";?>';
-   document.formv1.m128r302.value = '<?php echo "$m128r302";?>';
-   document.formv1.m128r303.value = '<?php echo "$m128r303";?>';
-   document.formv1.m128r304.value = '<?php echo "$m128r304";?>';
-   document.formv1.m128r305.value = '<?php echo "$m128r305";?>';
-   document.formv1.m128r306.value = '<?php echo "$m128r306";?>';
-   document.formv1.m128r307.value = '<?php echo "$m128r307";?>';
-   document.formv1.m128r308.value = '<?php echo "$m128r308";?>';
-   document.formv1.m128r309.value = '<?php echo "$m128r309";?>';
-   document.formv1.m128r310.value = '<?php echo "$m128r310";?>';
-   document.formv1.m128r311.value = '<?php echo "$m128r311";?>';
-//document.formv1.m128r399.value = '<?php echo "$m128r399";?>';
-   document.formv1.m128r401.value = '<?php echo "$m128r401";?>';
-   document.formv1.m128r402.value = '<?php echo "$m128r402";?>';
-   document.formv1.m128r403.value = '<?php echo "$m128r403";?>';
-   document.formv1.m128r404.value = '<?php echo "$m128r404";?>';
-   document.formv1.m128r405.value = '<?php echo "$m128r405";?>';
-   document.formv1.m128r406.value = '<?php echo "$m128r406";?>';
-   document.formv1.m128r407.value = '<?php echo "$m128r407";?>';
-   document.formv1.m128r408.value = '<?php echo "$m128r408";?>';
-   document.formv1.m128r409.value = '<?php echo "$m128r409";?>';
-   document.formv1.m128r410.value = '<?php echo "$m128r410";?>';
-   document.formv1.m128r411.value = '<?php echo "$m128r411";?>';
-//document.formv1.m128r499.value = '<?php echo "$m128r499";?>';
-   document.formv1.m128r501.value = '<?php echo "$m128r501";?>';
-   document.formv1.m128r502.value = '<?php echo "$m128r502";?>';
-   document.formv1.m128r503.value = '<?php echo "$m128r503";?>';
-   document.formv1.m128r504.value = '<?php echo "$m128r504";?>';
-   document.formv1.m128r505.value = '<?php echo "$m128r505";?>';
-   document.formv1.m128r506.value = '<?php echo "$m128r506";?>';
-   document.formv1.m128r507.value = '<?php echo "$m128r507";?>';
-   document.formv1.m128r508.value = '<?php echo "$m128r508";?>';
-   document.formv1.m128r509.value = '<?php echo "$m128r509";?>';
-   document.formv1.m128r510.value = '<?php echo "$m128r510";?>';
-   document.formv1.m128r511.value = '<?php echo "$m128r511";?>';
-//document.formv1.m128r599.value = '<?php echo "$m128r599";?>';
-<?php                      } ?>
-
   }
 <?php
 //koniec uprava
@@ -5303,9 +3952,7 @@ $source="statistika_ikap201.php?";
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=11', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=12', '_self');" class="<?php echo $clas12; ?> toleft">12</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=13', '_self');" class="<?php echo $clas13; ?> toleft">13</a>
-<!-- dopyt, hidden
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=13', '_blank');" class="<?php echo $clas13; ?> toright">13</a>
+<!-- dopyt, hidden -->
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=12', '_blank');" class="<?php echo $clas12; ?> toright">12</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=11', '_blank');" class="<?php echo $clas11; ?> toright">11</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=10', '_blank');" class="<?php echo $clas10; ?> toright">10</a>
@@ -5319,7 +3966,7 @@ $source="statistika_ikap201.php?";
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
  <h6 class="toright">TlaËiù:</h6>
- -->
+
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 </div>
 
@@ -5328,150 +3975,149 @@ $source="statistika_ikap201.php?";
 
 <span class="text-echo" style="top:396px; left:467px; font-size:18px; letter-spacing:24px;"><?php echo $fir_ficox; ?></span>
 <!-- ORGANIZACIA -->
-<span class="text-echo" style="top:952px; left:55px; line-height: 20px;"><?php echo "$fir_fnaz<br>$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
+<span class="text-echo" style="top:950px; left:55px;"><?php echo "$fir_fnaz $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
 <span class="text-echo" style="top:990px; left:806px;"><?php echo $okres; ?></span>
 <img src="../obr/ikony/pencil_blue_icon.png" onclick="StatUdajeFirma();" title="Nastaviù kÛd okresu" class="btn-row-tool" style="top:988px; left:840px;">
 <!-- sknace -->
-<input type="text" name="cinnost" id="cinnost" style="width:380px; top:1030px; left:55px;"/>
-<span class="text-echo" style="top:1035px; left:501px; font-size:18px; letter-spacing:33px;"><?php echo $sknace; ?></span>
+<input type="text" name="cinnost" id="cinnost" style="width:380px; top:1010px; left:55px;"/>
+<span class="text-echo" style="top:1010px; left:501px; font-size:18px; letter-spacing:33px;"><?php echo $sknace; ?></span>
 
 <!-- Vyplnil -->
-<span class="text-echo" style="top:1115px; left:55px;"><?php echo $fir_mzdt05; ?></span>
-<span class="text-echo" style="width:499px; top:1130px; left:480px;"><?php echo $fir_mzdt04; ?></span>
-<span class="text-echo" style="width:499px; top:1180px; left:55px;"><?php echo $fir_fem1; ?></span>
-<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);" style="width:90px; top:1177px; left:390px;"/>
+<span class="text-echo" style="top:1090px; left:55px;"><?php echo $fir_mzdt05; ?></span>
+<span class="text-echo" style="width:499px; top:1101px; left:390px;"><?php echo $fir_mzdt04; ?></span>
+<span class="text-echo" style="width:499px; top:1150px; left:55px;"><?php echo $fir_fem1; ?></span>
+<input type="text" name="odoslane" id="odoslane" onkeyup="CiarkaNaBodku(this);" style="width:90px; top:1147px; left:390px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 2.strana 235kB">
-<span class="text-echo" style="top:68px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 100315 -->
-<span class="text-echo" style="top:251px; left:411px;"><?php echo $cinnost; ?></span>
+<span class="text-echo" style="top:257px; left:411px;"><?php echo $cinnost; ?></span>
 <?php
 $sknace=str_replace(".", "", $fir_sknace);
 ?>
-<span class="text-echo center" style="top:279px; left:630px;"><?php echo $sknace; ?></span>
+<span class="text-echo center" style="top:285px; left:630px;"><?php echo $sknace; ?></span>
 
 <!-- modul 2 -->
-<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:450px; left:730px;"/>
-<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:486px; left:730px;"/>
+<input type="text" name="mod2r01" id="mod2r01" style="width:100px; top:456px; left:730px;"/>
+<input type="text" name="mod2r02" id="mod2r02" style="width:100px; top:493px; left:730px;"/>
 
 <!-- modul 100041 -->
-<input type="checkbox" name="mod100041ano" value="1" onchange="klikm100041ano();" style="top:600px; left:839px;"/>
-<input type="checkbox" name="mod100041nie" value="1" onchange="klikm100041nie();" style="top:620px; left:839px;"/>
+<input type="checkbox" name="mod100041ano" value="1" onchange="klikm100041ano();" style="top:607px; left:839px;"/>
+<input type="checkbox" name="mod100041nie" value="1" onchange="klikm100041nie();" style="top:627px; left:839px;"/>
 
 <!-- modul 100042 -->
-<input type="checkbox" name="mod100042ano" value="1" onchange="klikm100042ano();" style="top:696px; left:839px;"/>
-<input type="checkbox" name="mod100042nie" value="1" onchange="klikm100042nie();" style="top:716px; left:839px;"/>
+<input type="checkbox" name="mod100042ano" value="1" onchange="klikm100042ano();" style="top:702px; left:839px;"/>
+<input type="checkbox" name="mod100042nie" value="1" onchange="klikm100042nie();" style="top:722px; left:839px;"/>
 
 <!-- modul 100043 -->
-<input type="checkbox" name="mod100043ano" value="1" onchange="klikm100043ano();" style="top:792px; left:839px;"/>
-<input type="checkbox" name="mod100043nie" value="1" onchange="klikm100043nie();" style="top:812px; left:839px;"/>
+<input type="checkbox" name="mod100043ano" value="1" onchange="klikm100043ano();" style="top:798px; left:839px;"/>
+<input type="checkbox" name="mod100043nie" value="1" onchange="klikm100043nie();" style="top:818px; left:839px;"/>
 
 <!-- modul 100038 -->
-<input type="text" name="mod100038" id="mod100038" style="width:253px; top:886px; left:643px;"/>
+<input type="text" name="mod100038" id="mod100038" style="width:253px; top:892px; left:643px;"/>
 
 <!-- modul 100039 -->
-<input type="text" name="mod100039" id="mod100039" style="width:253px; top:979px; left:643px;"/>
+<input type="text" name="mod100039" id="mod100039" style="width:253px; top:985px; left:643px;"/>
 
 <!-- modul 100040 -->
-<input type="text" name="mod100040" id="mod100040" style="width:253px; top:1041px; left:643px;"/>
+<input type="text" name="mod100040" id="mod100040" style="width:253px; top:1047px; left:643px;"/>
 
 <!-- modul 100036 -->
-<input type="checkbox" name="mod100036kal" value="1" onchange="klikm100036kal();" style="top:1122px; left:839px;"/>
-<input type="checkbox" name="mod100036hos" value="1" onchange="klikm100036hos();" style="top:1142px; left:839px;"/>
+<input type="checkbox" name="mod100036kal" value="1" onchange="klikm100036kal();" style="top:1128px; left:839px;"/>
+<input type="checkbox" name="mod100036hos" value="1" onchange="klikm100036hos();" style="top:1148px; left:839px;"/>
 
 <!-- modul 100037 -->
-<input type="text" name="mod100037" id="mod100037" style="width:253px; top:1198px; left:643px;"/>
+<input type="text" name="mod100037" id="mod100037" style="width:253px; top:1204px; left:643px;"/>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 3 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 3.strana 235kB">
-<span class="text-echo" style="top:62px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 100069 -->
-<input type="checkbox" name="mod100069ano" value="1" onchange="klikm100069ano();" style="top:175px; left:839px;"/>
-<input type="checkbox" name="mod100069nie" value="1" onchange="klikm100069nie();" style="top:196px; left:839px;"/>
+<input type="checkbox" name="mod100069ano" value="1" onchange="klikm100069ano();" style="top:184px; left:839px;"/>
+<input type="checkbox" name="mod100069nie" value="1" onchange="klikm100069nie();" style="top:204px; left:839px;"/>
 
 <!-- modul 100087 -->
-<input type="checkbox" name="mod100087ano" value="1" onchange="klikm100087ano();" style="top:307px; left:839px;"/>
-<input type="checkbox" name="mod100087nie" value="1" onchange="klikm100087nie();" style="top:328px; left:839px;"/>
+<input type="checkbox" name="mod100087ano" value="1" onchange="klikm100087ano();" style="top:315px; left:839px;"/>
+<input type="checkbox" name="mod100087nie" value="1" onchange="klikm100087nie();" style="top:335px; left:839px;"/>
 
 <!-- modul 100088 -->
-<input type="checkbox" name="mod100088ano" value="1" onchange="klikm100088ano();" style="top:480px; left:839px;"/>
-<input type="checkbox" name="mod100088nie" value="1" onchange="klikm100088nie();" style="top:501px; left:839px;"/>
+<input type="checkbox" name="mod100088ano" value="1" onchange="klikm100088ano();" style="top:489px; left:839px;"/>
+<input type="checkbox" name="mod100088nie" value="1" onchange="klikm100088nie();" style="top:509px; left:839px;"/>
 
 <!-- modul 100089 -->
-<input type="text" name="mod100089" id="mod100089" style="width:253px; top:638px; left:643px;"/>
+<input type="text" name="mod100089" id="mod100089" style="width:253px; top:646px; left:643px;"/>
 
 <!-- modul 100090 -->
-<input type="text" name="mod100090" id="mod100090" style="width:253px; top:763px; left:643px;"/>
+<input type="text" name="mod100090" id="mod100090" style="width:253px; top:772px; left:643px;"/>
 
 <!-- modul 100091 -->
-<input type="text" name="mod100091" id="mod100091" style="width:253px; top:885px; left:643px;"/>
+<input type="text" name="mod100091" id="mod100091" style="width:253px; top:894px; left:643px;"/>
 
 <!-- modul 398a -->
-<input type="text" name="m398r01" id="m398r01" style="width:100px; top:1122px; left:680px;"/>
-<input type="text" name="m398r02" id="m398r02" style="width:100px; top:1149px; left:680px;"/>
-<span class="text-echo" style="top:1181px; right:165px;"><?php echo $m398r99; ?></span>
+<input type="text" name="m398r01" id="m398r01" style="width:100px; top:1130px; left:680px;"/>
+<input type="text" name="m398r02" id="m398r02" style="width:100px; top:1157px; left:680px;"/>
+<span class="text-echo" style="top:1189px; right:165px;"><?php echo $m398r99; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 4 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str4.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 4.strana 279kB">
-<span class="text-echo" style="top:67px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 405a -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(405);" style="top:103px; left:450px;" class="btn-row-tool">
-<input type="text" name="m405r01" id="m405r01" style="width:100px; top:192px; left:710px;"/>
-<input type="text" name="m405r02" id="m405r02" style="width:100px; top:218px; left:710px;"/>
-<input type="text" name="m405r03" id="m405r03" style="width:100px; top:244px; left:710px;"/>
-<input type="text" name="m405r04" id="m405r04" style="width:100px; top:269px; left:710px;"/>
-<input type="text" name="m405r05" id="m405r05" style="width:100px; top:295px; left:710px;"/>
-<input type="text" name="m405r06" id="m405r06" style="width:100px; top:321px; left:710px;"/>
-<span class="text-echo" style="top:350px; right:135px;"><?php echo $m405r99; ?></span>
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(405);" style="top:112px; left:450px;" class="btn-row-tool">
+<input type="text" name="m405r01" id="m405r01" style="width:100px; top:205px; left:710px;"/>
+<input type="text" name="m405r02" id="m405r02" style="width:100px; top:231px; left:710px;"/>
+<input type="text" name="m405r03" id="m405r03" style="width:100px; top:256px; left:710px;"/>
+<input type="text" name="m405r04" id="m405r04" style="width:100px; top:282px; left:710px;"/>
+<input type="text" name="m405r05" id="m405r05" style="width:100px; top:308px; left:710px;"/>
+<input type="text" name="m405r06" id="m405r06" style="width:100px; top:333px; left:710px;"/>
+<span class="text-echo" style="top:363px; right:135px;"><?php echo $m405r99; ?></span>
 
 <!-- modul 558c -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(558);" style="top:429px; left:387px;" class="btn-row-tool">
-<input type="text" name="m558r01" id="m558r01" style="width:100px; top:523px; left:680px;"/>
-<input type="text" name="m558r02" id="m558r02" style="width:100px; top:549px; left:680px;"/>
-<input type="text" name="m558r03" id="m558r03" style="width:100px; top:575px; left:680px;"/>
-<input type="text" name="m558r04" id="m558r04" style="width:100px; top:600px; left:680px;"/>
-<input type="text" name="m558r05" id="m558r05" style="width:100px; top:626px; left:680px;"/>
-<input type="text" name="m558r06" id="m558r06" style="width:100px; top:651px; left:680px;"/>
-<input type="text" name="m558r07" id="m558r07" style="width:100px; top:677px; left:680px;"/>
-<span class="text-echo" style="top:706px; right:165px;"><?php echo $m558r99; ?></span>
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(558);" style="top:423px; left:387px;" class="btn-row-tool">
+<input type="text" name="m558r01" id="m558r01" style="width:100px; top:518px; left:680px;"/>
+<input type="text" name="m558r02" id="m558r02" style="width:100px; top:544px; left:680px;"/>
+<input type="text" name="m558r03" id="m558r03" style="width:100px; top:570px; left:680px;"/>
+<input type="text" name="m558r04" id="m558r04" style="width:100px; top:596px; left:680px;"/>
+<input type="text" name="m558r05" id="m558r05" style="width:100px; top:621px; left:680px;"/>
+<input type="text" name="m558r06" id="m558r06" style="width:100px; top:647px; left:680px;"/>
+<input type="text" name="m558r07" id="m558r07" style="width:100px; top:673px; left:680px;"/>
+<span class="text-echo" style="top:703px; right:165px;"><?php echo $m558r99; ?></span>
 
 <!-- modul 580a -->
-<input type="text" name="m580r11" id="m580r11" style="width:100px; top:896px; left:590px;"/>
-<input type="text" name="m580r21" id="m580r21" style="width:100px; top:896px; left:765px;"/>
-<input type="text" name="m580r12" id="m580r12" style="width:100px; top:922px; left:590px;"/>
-<input type="text" name="m580r22" id="m580r22" style="width:100px; top:922px; left:765px;"/>
-<span class="text-echo" style="top:951px; right:255px;"><?php echo $m580r199; ?></span>
-<span class="text-echo" style="top:951px; right:80px;"><?php echo $m580r299; ?></span>
+<input type="text" name="m580r11" id="m580r11" style="width:100px; top:891px; left:590px;"/>
+<input type="text" name="m580r21" id="m580r21" style="width:100px; top:891px; left:765px;"/>
+<input type="text" name="m580r12" id="m580r12" style="width:100px; top:917px; left:590px;"/>
+<input type="text" name="m580r22" id="m580r22" style="width:100px; top:917px; left:765px;"/>
+<span class="text-echo" style="top:947px; right:255px;"><?php echo $m580r199; ?></span>
+<span class="text-echo" style="top:947px; right:80px;"><?php echo $m580r299; ?></span>
 
 <!-- modul 586b -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(586);" style="top:1011px; left:340px;" class="btn-row-tool">
-<input type="text" name="m586r11" id="m586r11" style="width:100px; top:1106px; left:590px;"/>
-<input type="text" name="m586r21" id="m586r21" style="width:100px; top:1106px; left:765px;"/>
-<input type="text" name="m586r12" id="m586r12" style="width:100px; top:1132px; left:590px;"/>
-<input type="text" name="m586r22" id="m586r22" style="width:100px; top:1132px; left:765px;"/>
-<input type="text" name="m586r13" id="m586r13" style="width:100px; top:1158px; left:590px;"/>
-<input type="text" name="m586r23" id="m586r23" style="width:100px; top:1158px; left:765px;"/>
-<input type="text" name="m586r14" id="m586r14" style="width:100px; top:1184px; left:590px;"/>
-<input type="text" name="m586r24" id="m586r24" style="width:100px; top:1184px; left:765px;"/>
-<span class="text-echo" style="top:1214px; right:253px;"><?php echo $m586r199; ?></span>
-<span class="text-echo" style="top:1214px; right:79px;"><?php echo $m586r299; ?></span>
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(586);" style="top:1008px; left:340px;" class="btn-row-tool">
+<input type="text" name="m586r11" id="m586r11" style="width:100px; top:1102px; left:590px;"/>
+<input type="text" name="m586r21" id="m586r21" style="width:100px; top:1102px; left:765px;"/>
+<input type="text" name="m586r12" id="m586r12" style="width:100px; top:1128px; left:590px;"/>
+<input type="text" name="m586r22" id="m586r22" style="width:100px; top:1128px; left:765px;"/>
+<input type="text" name="m586r13" id="m586r13" style="width:100px; top:1153px; left:590px;"/>
+<input type="text" name="m586r23" id="m586r23" style="width:100px; top:1153px; left:765px;"/>
+<input type="text" name="m586r14" id="m586r14" style="width:100px; top:1179px; left:590px;"/>
+<input type="text" name="m586r24" id="m586r24" style="width:100px; top:1179px; left:765px;"/>
+<span class="text-echo" style="top:1209px; right:253px;"><?php echo $m586r199; ?></span>
+<span class="text-echo" style="top:1209px; right:79px;"><?php echo $m586r299; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 5 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str5.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 5.strana 238kB">
-<span class="text-echo" style="top:76px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<img src="<?php echo $jpg_cesta; ?>_str5.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 5.strana 238kB">
+<span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 585 -->
 <input type="text" name="m585r01" id="m585r01" style="width:100px; top:428px; left:680px;"/>
@@ -5574,624 +4220,442 @@ $sknace=str_replace(".", "", $fir_sknace);
 
 <?php if ( $strana == 6 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str6.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 6.strana 271kB">
-<span class="text-echo" style="top:71px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 516b -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(516);" style="top:109px; left:532px;" class="btn-row-tool">
-<input type="text" name="m516r101" id="m516r101" style="width:100px; top:229px; left:590px;"/>
-<input type="text" name="m516r201" id="m516r201" style="width:100px; top:229px; left:762px;"/>
-<input type="text" name="m516r102" id="m516r102" style="width:100px; top:252px; left:590px;"/>
-<input type="text" name="m516r202" id="m516r202" style="width:100px; top:252px; left:762px;"/>
-<input type="text" name="m516r103" id="m516r103" style="width:100px; top:275px; left:590px;"/>
-<input type="text" name="m516r203" id="m516r203" style="width:100px; top:275px; left:762px;"/>
-<input type="text" name="m516r104" id="m516r104" style="width:100px; top:298px; left:590px;"/>
-<input type="text" name="m516r204" id="m516r204" style="width:100px; top:298px; left:762px;"/>
-<input type="text" name="m516r105" id="m516r105" style="width:100px; top:321px; left:590px;"/>
-<input type="text" name="m516r205" id="m516r205" style="width:100px; top:321px; left:762px;"/>
-<input type="text" name="m516r106" id="m516r106" style="width:100px; top:344px; left:590px;"/>
-<input type="text" name="m516r206" id="m516r206" style="width:100px; top:344px; left:762px;"/>
-<input type="text" name="m516r107" id="m516r107" style="width:100px; top:367px; left:590px;"/>
-<input type="text" name="m516r207" id="m516r207" style="width:100px; top:367px; left:762px;"/>
-<input type="text" name="m516r108" id="m516r108" style="width:100px; top:390px; left:590px;"/>
-<input type="text" name="m516r208" id="m516r208" style="width:100px; top:390px; left:762px;"/>
-<input type="text" name="m516r109" id="m516r109" style="width:100px; top:413px; left:590px;"/>
-<input type="text" name="m516r209" id="m516r209" style="width:100px; top:413px; left:762px;"/>
-<input type="text" name="m516r110" id="m516r110" style="width:100px; top:436px; left:590px;"/>
-<input type="text" name="m516r210" id="m516r210" style="width:100px; top:436px; left:762px;"/>
-<input type="text" name="m516r111" id="m516r111" style="width:100px; top:459px; left:590px;"/>
-<input type="text" name="m516r211" id="m516r211" style="width:100px; top:459px; left:762px;"/>
-<input type="text" name="m516r112" id="m516r112" style="width:100px; top:482px; left:590px;"/>
-<input type="text" name="m516r212" id="m516r212" style="width:100px; top:482px; left:762px;"/>
-<input type="text" name="m516r113" id="m516r113" style="width:100px; top:505px; left:590px;"/>
-<input type="text" name="m516r213" id="m516r213" style="width:100px; top:505px; left:762px;"/>
-<input type="text" name="m516r114" id="m516r114" style="width:100px; top:528px; left:590px;"/>
-<input type="text" name="m516r214" id="m516r214" style="width:100px; top:528px; left:762px;"/>
-<span class="text-echo" style="top:555px; right:260px;"><?php echo $m516r199; ?></span>
-<span class="text-echo" style="top:555px; right:90px;"><?php echo $m516r299; ?></span>
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(516);" style="top:115px; left:532px;" class="btn-row-tool">
+<input type="text" name="m516r101" id="m516r101" style="width:100px; top:237px; left:590px;"/>
+<input type="text" name="m516r201" id="m516r201" style="width:100px; top:237px; left:762px;"/>
+<input type="text" name="m516r102" id="m516r102" style="width:100px; top:260px; left:590px;"/>
+<input type="text" name="m516r202" id="m516r202" style="width:100px; top:260px; left:762px;"/>
+<input type="text" name="m516r103" id="m516r103" style="width:100px; top:283px; left:590px;"/>
+<input type="text" name="m516r203" id="m516r203" style="width:100px; top:283px; left:762px;"/>
+<input type="text" name="m516r104" id="m516r104" style="width:100px; top:306px; left:590px;"/>
+<input type="text" name="m516r204" id="m516r204" style="width:100px; top:306px; left:762px;"/>
+<input type="text" name="m516r105" id="m516r105" style="width:100px; top:329px; left:590px;"/>
+<input type="text" name="m516r205" id="m516r205" style="width:100px; top:329px; left:762px;"/>
+<input type="text" name="m516r106" id="m516r106" style="width:100px; top:352px; left:590px;"/>
+<input type="text" name="m516r206" id="m516r206" style="width:100px; top:352px; left:762px;"/>
+<input type="text" name="m516r107" id="m516r107" style="width:100px; top:375px; left:590px;"/>
+<input type="text" name="m516r207" id="m516r207" style="width:100px; top:375px; left:762px;"/>
+<input type="text" name="m516r108" id="m516r108" style="width:100px; top:398px; left:590px;"/>
+<input type="text" name="m516r208" id="m516r208" style="width:100px; top:398px; left:762px;"/>
+<input type="text" name="m516r109" id="m516r109" style="width:100px; top:421px; left:590px;"/>
+<input type="text" name="m516r209" id="m516r209" style="width:100px; top:421px; left:762px;"/>
+<input type="text" name="m516r110" id="m516r110" style="width:100px; top:444px; left:590px;"/>
+<input type="text" name="m516r210" id="m516r210" style="width:100px; top:444px; left:762px;"/>
+<input type="text" name="m516r111" id="m516r111" style="width:100px; top:467px; left:590px;"/>
+<input type="text" name="m516r211" id="m516r211" style="width:100px; top:467px; left:762px;"/>
+<input type="text" name="m516r112" id="m516r112" style="width:100px; top:490px; left:590px;"/>
+<input type="text" name="m516r212" id="m516r212" style="width:100px; top:490px; left:762px;"/>
+<input type="text" name="m516r113" id="m516r113" style="width:100px; top:513px; left:590px;"/>
+<input type="text" name="m516r213" id="m516r213" style="width:100px; top:513px; left:762px;"/>
+<input type="text" name="m516r114" id="m516r114" style="width:100px; top:536px; left:590px;"/>
+<input type="text" name="m516r214" id="m516r214" style="width:100px; top:536px; left:762px;"/>
+<span class="text-echo" style="top:563px; right:260px;"><?php echo $m516r199; ?></span>
+<span class="text-echo" style="top:563px; right:90px;"><?php echo $m516r299; ?></span>
 
 <!-- modul 513b -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(513);" style="top:628px; left:361px;" class="btn-row-tool">
-<input type="text" name="m513r101" id="m513r101" style="width:90px; top:758px; left:368px;"/>
-<input type="text" name="m513r201" id="m513r201" style="width:67px; top:758px; left:470px;"/>
-<input type="text" name="m513r301" id="m513r301" style="width:70px; top:758px; left:549px;"/>
-<input type="text" name="m513r401" id="m513r401" style="width:78px; top:758px; left:632px;"/>
-<input type="text" name="m513r501" id="m513r501" style="width:87px; top:758px; left:722px;"/>
-<input type="text" name="m513r601" id="m513r601" style="width:71px; top:758px; left:820px;"/>
-<input type="text" name="m513r102" id="m513r102" style="width:90px; top:781px; left:368px;"/>
-<input type="text" name="m513r202" id="m513r202" style="width:67px; top:781px; left:470px;"/>
-<input type="text" name="m513r302" id="m513r302" style="width:70px; top:781px; left:549px;"/>
-<input type="text" name="m513r402" id="m513r402" style="width:78px; top:781px; left:632px;"/>
-<input type="text" name="m513r502" id="m513r502" style="width:87px; top:781px; left:722px;"/>
-<input type="text" name="m513r602" id="m513r602" style="width:71px; top:781px; left:820px;"/>
-<input type="text" name="m513r103" id="m513r103" style="width:90px; top:804px; left:368px;"/>
-<input type="text" name="m513r203" id="m513r203" style="width:67px; top:804px; left:470px;"/>
-<input type="text" name="m513r303" id="m513r303" style="width:70px; top:804px; left:549px;"/>
-<input type="text" name="m513r403" id="m513r403" style="width:78px; top:804px; left:632px;"/>
-<input type="text" name="m513r503" id="m513r503" style="width:87px; top:804px; left:722px;"/>
-<input type="text" name="m513r603" id="m513r603" style="width:71px; top:804px; left:820px;"/>
-<input type="text" name="m513r104" id="m513r104" style="width:90px; top:827px; left:368px;"/>
-<input type="text" name="m513r204" id="m513r204" style="width:67px; top:827px; left:470px;"/>
-<input type="text" name="m513r304" id="m513r304" style="width:70px; top:827px; left:549px;"/>
-<input type="text" name="m513r404" id="m513r404" style="width:78px; top:827px; left:632px;"/>
-<input type="text" name="m513r504" id="m513r504" style="width:87px; top:827px; left:722px;"/>
-<input type="text" name="m513r604" id="m513r604" style="width:71px; top:827px; left:820px;"/>
-<input type="text" name="m513r105" id="m513r105" style="width:90px; top:850px; left:368px;"/>
-<input type="text" name="m513r205" id="m513r205" style="width:67px; top:850px; left:470px;"/>
-<input type="text" name="m513r305" id="m513r305" style="width:70px; top:850px; left:549px;"/>
-<input type="text" name="m513r405" id="m513r405" style="width:78px; top:850px; left:632px;"/>
-<input type="text" name="m513r505" id="m513r505" style="width:87px; top:850px; left:722px;"/>
-<input type="text" name="m513r605" id="m513r605" style="width:71px; top:850px; left:820px;"/>
-<input type="text" name="m513r106" id="m513r106" style="width:90px; top:880px; left:368px;"/>
-<input type="text" name="m513r206" id="m513r206" style="width:67px; top:880px; left:470px;"/>
-<input type="text" name="m513r306" id="m513r306" style="width:70px; top:880px; left:549px;"/>
-<input type="text" name="m513r406" id="m513r406" style="width:78px; top:880px; left:632px;"/>
-<input type="text" name="m513r506" id="m513r506" style="width:87px; top:880px; left:722px;"/>
-<input type="text" name="m513r606" id="m513r606" style="width:71px; top:880px; left:820px;"/>
-<input type="text" name="m513r107" id="m513r107" style="width:90px; top:910px; left:368px;"/>
-<input type="text" name="m513r207" id="m513r207" style="width:67px; top:910px; left:470px;"/>
-<input type="text" name="m513r307" id="m513r307" style="width:70px; top:910px; left:549px;"/>
-<input type="text" name="m513r407" id="m513r407" style="width:78px; top:910px; left:632px;"/>
-<input type="text" name="m513r507" id="m513r507" style="width:87px; top:910px; left:722px;"/>
-<input type="text" name="m513r607" id="m513r607" style="width:71px; top:910px; left:820px;"/>
-<input type="text" name="m513r108" id="m513r108" style="width:90px; top:933px; left:368px;"/>
-<input type="text" name="m513r208" id="m513r208" style="width:67px; top:933px; left:470px;"/>
-<input type="text" name="m513r308" id="m513r308" style="width:70px; top:933px; left:549px;"/>
-<input type="text" name="m513r408" id="m513r408" style="width:78px; top:933px; left:632px;"/>
-<input type="text" name="m513r508" id="m513r508" style="width:87px; top:933px; left:722px;"/>
-<input type="text" name="m513r608" id="m513r608" style="width:71px; top:933px; left:820px;"/>
-<input type="text" name="m513r109" id="m513r109" style="width:90px; top:962px; left:368px;"/>
-<input type="text" name="m513r209" id="m513r209" style="width:67px; top:962px; left:470px;"/>
-<input type="text" name="m513r309" id="m513r309" style="width:70px; top:962px; left:549px;"/>
-<input type="text" name="m513r409" id="m513r409" style="width:78px; top:962px; left:632px;"/>
-<input type="text" name="m513r509" id="m513r509" style="width:87px; top:962px; left:722px;"/>
-<input type="text" name="m513r609" id="m513r609" style="width:71px; top:962px; left:820px;"/>
-<input type="text" name="m513r110" id="m513r110" style="width:90px; top:992px; left:368px;"/>
-<input type="text" name="m513r310" id="m513r310" style="width:70px; top:992px; left:549px;"/>
-<input type="text" name="m513r410" id="m513r410" style="width:78px; top:992px; left:632px;"/>
-<input type="text" name="m513r510" id="m513r510" style="width:87px; top:992px; left:722px;"/>
-<span class="text-echo" style="top:1020px; right:489px;"><?php echo $m513r199; ?></span>
-<span class="text-echo" style="top:1020px; right:410px;"><?php echo $m513r299; ?></span>
-<span class="text-echo" style="top:1020px; right:326px;"><?php echo $m513r399; ?></span>
-<span class="text-echo" style="top:1020px; right:239px;"><?php echo $m513r499; ?></span>
-<span class="text-echo" style="top:1020px; right:137px;"><?php echo $m513r599; ?></span>
-<span class="text-echo" style="top:1020px; right:56px;"><?php echo $m513r699; ?></span>
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(513);" style="top:636px; left:361px;" class="btn-row-tool">
+<input type="text" name="m513r101" id="m513r101" style="width:90px; top:766px; left:368px;"/>
+<input type="text" name="m513r201" id="m513r201" style="width:67px; top:766px; left:470px;"/>
+<input type="text" name="m513r301" id="m513r301" style="width:70px; top:766px; left:549px;"/>
+<input type="text" name="m513r401" id="m513r401" style="width:78px; top:766px; left:632px;"/>
+<input type="text" name="m513r501" id="m513r501" style="width:87px; top:766px; left:722px;"/>
+<input type="text" name="m513r601" id="m513r601" style="width:71px; top:766px; left:820px;"/>
+<input type="text" name="m513r102" id="m513r102" style="width:90px; top:789px; left:368px;"/>
+<input type="text" name="m513r202" id="m513r202" style="width:67px; top:789px; left:470px;"/>
+<input type="text" name="m513r302" id="m513r302" style="width:70px; top:789px; left:549px;"/>
+<input type="text" name="m513r402" id="m513r402" style="width:78px; top:789px; left:632px;"/>
+<input type="text" name="m513r502" id="m513r502" style="width:87px; top:789px; left:722px;"/>
+<input type="text" name="m513r602" id="m513r602" style="width:71px; top:789px; left:820px;"/>
+<input type="text" name="m513r103" id="m513r103" style="width:90px; top:812px; left:368px;"/>
+<input type="text" name="m513r203" id="m513r203" style="width:67px; top:812px; left:470px;"/>
+<input type="text" name="m513r303" id="m513r303" style="width:70px; top:812px; left:549px;"/>
+<input type="text" name="m513r403" id="m513r403" style="width:78px; top:812px; left:632px;"/>
+<input type="text" name="m513r503" id="m513r503" style="width:87px; top:812px; left:722px;"/>
+<input type="text" name="m513r603" id="m513r603" style="width:71px; top:812px; left:820px;"/>
+<input type="text" name="m513r104" id="m513r104" style="width:90px; top:835px; left:368px;"/>
+<input type="text" name="m513r204" id="m513r204" style="width:67px; top:835px; left:470px;"/>
+<input type="text" name="m513r304" id="m513r304" style="width:70px; top:835px; left:549px;"/>
+<input type="text" name="m513r404" id="m513r404" style="width:78px; top:835px; left:632px;"/>
+<input type="text" name="m513r504" id="m513r504" style="width:87px; top:835px; left:722px;"/>
+<input type="text" name="m513r604" id="m513r604" style="width:71px; top:835px; left:820px;"/>
+<input type="text" name="m513r105" id="m513r105" style="width:90px; top:858px; left:368px;"/>
+<input type="text" name="m513r205" id="m513r205" style="width:67px; top:858px; left:470px;"/>
+<input type="text" name="m513r305" id="m513r305" style="width:70px; top:858px; left:549px;"/>
+<input type="text" name="m513r405" id="m513r405" style="width:78px; top:858px; left:632px;"/>
+<input type="text" name="m513r505" id="m513r505" style="width:87px; top:858px; left:722px;"/>
+<input type="text" name="m513r605" id="m513r605" style="width:71px; top:858px; left:820px;"/>
+<input type="text" name="m513r106" id="m513r106" style="width:90px; top:888px; left:368px;"/>
+<input type="text" name="m513r206" id="m513r206" style="width:67px; top:888px; left:470px;"/>
+<input type="text" name="m513r306" id="m513r306" style="width:70px; top:888px; left:549px;"/>
+<input type="text" name="m513r406" id="m513r406" style="width:78px; top:888px; left:632px;"/>
+<input type="text" name="m513r506" id="m513r506" style="width:87px; top:888px; left:722px;"/>
+<input type="text" name="m513r606" id="m513r606" style="width:71px; top:888px; left:820px;"/>
+<input type="text" name="m513r107" id="m513r107" style="width:90px; top:918px; left:368px;"/>
+<input type="text" name="m513r207" id="m513r207" style="width:67px; top:918px; left:470px;"/>
+<input type="text" name="m513r307" id="m513r307" style="width:70px; top:918px; left:549px;"/>
+<input type="text" name="m513r407" id="m513r407" style="width:78px; top:918px; left:632px;"/>
+<input type="text" name="m513r507" id="m513r507" style="width:87px; top:918px; left:722px;"/>
+<input type="text" name="m513r607" id="m513r607" style="width:71px; top:918px; left:820px;"/>
+<input type="text" name="m513r108" id="m513r108" style="width:90px; top:941px; left:368px;"/>
+<input type="text" name="m513r208" id="m513r208" style="width:67px; top:941px; left:470px;"/>
+<input type="text" name="m513r308" id="m513r308" style="width:70px; top:941px; left:549px;"/>
+<input type="text" name="m513r408" id="m513r408" style="width:78px; top:941px; left:632px;"/>
+<input type="text" name="m513r508" id="m513r508" style="width:87px; top:941px; left:722px;"/>
+<input type="text" name="m513r608" id="m513r608" style="width:71px; top:941px; left:820px;"/>
+<input type="text" name="m513r109" id="m513r109" style="width:90px; top:971px; left:368px;"/>
+<input type="text" name="m513r209" id="m513r209" style="width:67px; top:971px; left:470px;"/>
+<input type="text" name="m513r309" id="m513r309" style="width:70px; top:971px; left:549px;"/>
+<input type="text" name="m513r409" id="m513r409" style="width:78px; top:971px; left:632px;"/>
+<input type="text" name="m513r509" id="m513r509" style="width:87px; top:971px; left:722px;"/>
+<input type="text" name="m513r609" id="m513r609" style="width:71px; top:971px; left:820px;"/>
+<input type="text" name="m513r110" id="m513r110" style="width:90px; top:1000px; left:368px;"/>
+<input type="text" name="m513r310" id="m513r310" style="width:70px; top:1000px; left:549px;"/>
+<input type="text" name="m513r410" id="m513r410" style="width:78px; top:1000px; left:632px;"/>
+<input type="text" name="m513r510" id="m513r510" style="width:87px; top:1000px; left:722px;"/>
+<span class="text-echo" style="top:1028px; right:489px;"><?php echo $m513r199; ?></span>
+<span class="text-echo" style="top:1028px; right:410px;"><?php echo $m513r299; ?></span>
+<span class="text-echo" style="top:1028px; right:326px;"><?php echo $m513r399; ?></span>
+<span class="text-echo" style="top:1028px; right:239px;"><?php echo $m513r499; ?></span>
+<span class="text-echo" style="top:1028px; right:137px;"><?php echo $m513r599; ?></span>
+<span class="text-echo" style="top:1028px; right:56px;"><?php echo $m513r699; ?></span>
 
 <!-- modul 581a -->
-<input type="text" name="m581r01" id="m581r01" style="width:100px; top:1165px; left:680px;"/>
-<input type="text" name="m581r02" id="m581r02" style="width:100px; top:1189px; left:680px;"/>
-<span class="text-echo" style="top:1216px; right:165px;"><?php echo $m581r99; ?></span>
+<input type="text" name="m581r01" id="m581r01" style="width:100px; top:1174px; left:680px;"/>
+<input type="text" name="m581r02" id="m581r02" style="width:100px; top:1197px; left:680px;"/>
+<span class="text-echo" style="top:1224px; right:165px;"><?php echo $m581r99; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 7 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str7.jpg" class="form-background"
      alt="<?php echo $jpg_popis; ?> 7.strana 265kB">
-<span class="text-echo" style="top:68px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 100301 -->
-<input type="checkbox" name="m100301r1" value="1" onchange="klikm100301ano();" style="top:124px; left:839px;"/>
-<input type="checkbox" name="m100301r2" value="1" onchange="klikm100301nie();" style="top:145px; left:839px;"/>
+<input type="checkbox" name="m100301r1" value="1" onchange="klikm100301ano();" style="top:132px; left:839px;"/>
+<input type="checkbox" name="m100301r2" value="1" onchange="klikm100301nie();" style="top:153px; left:839px;"/>
 
 <!-- modul 100302 -->
-<input type="text" name="m100302" id="m100302" style="width:253px; top:218px; left:643px;"/>
+<input type="text" name="m100302" id="m100302" style="width:253px; top:226px; left:643px;"/>
 
 <!-- modul 100303 -->
-<input type="checkbox" name="m100303r1" value="1" onchange="klikm100303ano();" style="top:281px; left:839px;"/>
-<input type="checkbox" name="m100303r2" value="1" onchange="klikm100303nie();" style="top:301px; left:839px;"/>
+<input type="checkbox" name="m100303r1" value="1" onchange="klikm100303ano();" style="top:289px; left:839px;"/>
+<input type="checkbox" name="m100303r2" value="1" onchange="klikm100303nie();" style="top:310px; left:839px;"/>
 
 <!-- modul 100304 -->
-<input type="text" name="m100304" id="m100304" style="width:253px; top:375px; left:643px;"/>
+<input type="text" name="m100304" id="m100304" style="width:253px; top:383px; left:643px;"/>
 
 <!-- modul 177a -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(177);" style="top:415px; left:313px;" class="btn-row-tool">
-<input type="text" name="m177r01" id="m177r01" style="width:100px; top:503px; left:680px;"/>
-<input type="text" name="m177r02" id="m177r02" style="width:100px; top:526px; left:680px;"/>
-<input type="text" name="m177r03" id="m177r03" style="width:100px; top:549px; left:680px;"/>
-<input type="text" name="m177r04" id="m177r04" style="width:100px; top:572px; left:680px;"/>
-<input type="text" name="m177r05" id="m177r05" style="width:100px; top:595px; left:680px;"/>
-<input type="text" name="m177r06" id="m177r06" style="width:100px; top:618px; left:680px;"/>
-<input type="text" name="m177r07" id="m177r07" style="width:100px; top:641px; left:680px;"/>
-<input type="text" name="m177r08" id="m177r08" style="width:100px; top:664px; left:680px;"/>
-<span class="text-echo" style="top:691px; right:165px;"><?php echo $m177r99; ?></span>
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(177);" style="top:423px; left:313px;" class="btn-row-tool">
+<input type="text" name="m177r01" id="m177r01" style="width:100px; top:511px; left:680px;"/>
+<input type="text" name="m177r02" id="m177r02" style="width:100px; top:534px; left:680px;"/>
+<input type="text" name="m177r03" id="m177r03" style="width:100px; top:557px; left:680px;"/>
+<input type="text" name="m177r04" id="m177r04" style="width:100px; top:580px; left:680px;"/>
+<input type="text" name="m177r05" id="m177r05" style="width:100px; top:603px; left:680px;"/>
+<input type="text" name="m177r06" id="m177r06" style="width:100px; top:626px; left:680px;"/>
+<input type="text" name="m177r07" id="m177r07" style="width:100px; top:649px; left:680px;"/>
+<input type="text" name="m177r08" id="m177r08" style="width:100px; top:672px; left:680px;"/>
+<span class="text-echo" style="top:699px; right:165px;"><?php echo $m177r99; ?></span>
 
 <!-- modul 178a -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(178);" style="top:732px; left:530px;" class="btn-row-tool">
-<input type="text" name="m178r01" id="m178r01" style="width:100px; top:821px; left:680px;"/>
-<input type="text" name="m178r02" id="m178r02" style="width:100px; top:844px; left:680px;"/>
-<input type="text" name="m178r03" id="m178r03" style="width:100px; top:867px; left:680px;"/>
-<input type="text" name="m178r04" id="m178r04" style="width:100px; top:890px; left:680px;"/>
-<input type="text" name="m178r05" id="m178r05" style="width:100px; top:913px; left:680px;"/>
-<input type="text" name="m178r06" id="m178r06" style="width:100px; top:936px; left:680px;"/>
-<input type="text" name="m178r12" id="m178r12" style="width:100px; top:959px; left:680px;"/>
-<input type="text" name="m178r13" id="m178r13" style="width:100px; top:989px; left:680px;"/>
-<input type="text" name="m178r14" id="m178r14" style="width:100px; top:1019px; left:680px;"/>
-<input type="text" name="m178r15" id="m178r15" style="width:100px; top:1042px; left:680px;"/>
-<input type="text" name="m178r16" id="m178r16" style="width:100px; top:1065px; left:680px;"/>
-<input type="text" name="m178r17" id="m178r17" style="width:100px; top:1088px; left:680px;"/>
-<input type="text" name="m178r18" id="m178r18" style="width:100px; top:1111px; left:680px;"/>
-<input type="text" name="m178r19" id="m178r19" style="width:100px; top:1134px; left:680px;"/>
-<input type="text" name="m178r20" id="m178r20" style="width:100px; top:1157px; left:680px;"/>
-<input type="text" name="m178r21" id="m178r21" style="width:100px; top:1180px; left:680px;"/>
-<span class="text-echo" style="top:1207px; right:165px;"><?php echo $m178r99; ?></span>
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z Obratovky" onclick="NacitajZobratovky(178);" style="top:740px; left:530px;" class="btn-row-tool">
+<input type="text" name="m178r01" id="m178r01" style="width:100px; top:829px; left:680px;"/>
+<input type="text" name="m178r02" id="m178r02" style="width:100px; top:852px; left:680px;"/>
+<input type="text" name="m178r03" id="m178r03" style="width:100px; top:875px; left:680px;"/>
+<input type="text" name="m178r04" id="m178r04" style="width:100px; top:898px; left:680px;"/>
+<input type="text" name="m178r05" id="m178r05" style="width:100px; top:921px; left:680px;"/>
+<input type="text" name="m178r06" id="m178r06" style="width:100px; top:944px; left:680px;"/>
+<input type="text" name="m178r12" id="m178r12" style="width:100px; top:967px; left:680px;"/>
+<input type="text" name="m178r13" id="m178r13" style="width:100px; top:997px; left:680px;"/>
+<input type="text" name="m178r14" id="m178r14" style="width:100px; top:1027px; left:680px;"/>
+<input type="text" name="m178r15" id="m178r15" style="width:100px; top:1050px; left:680px;"/>
+<input type="text" name="m178r16" id="m178r16" style="width:100px; top:1073px; left:680px;"/>
+<input type="text" name="m178r17" id="m178r17" style="width:100px; top:1096px; left:680px;"/>
+<input type="text" name="m178r18" id="m178r18" style="width:100px; top:1119px; left:680px;"/>
+<input type="text" name="m178r19" id="m178r19" style="width:100px; top:1142px; left:680px;"/>
+<input type="text" name="m178r20" id="m178r20" style="width:100px; top:1165px; left:680px;"/>
+<input type="text" name="m178r21" id="m178r21" style="width:100px; top:1188px; left:680px;"/>
+<span class="text-echo" style="top:1215px; right:165px;"><?php echo $m178r99; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 8 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str8.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 8.strana 245kB">
-<span class="text-echo" style="top:68px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 179b -->
-<input type="text" name="m179r01" id="m179r01" style="width:100px; top:219px; left:680px;"/>
-<input type="text" name="m179r02" id="m179r02" style="width:100px; top:247px; left:680px;"/>
-<span class="text-echo" style="top:278px; right:164px;"><?php echo $m179r99; ?></span>
+<input type="text" name="m179r01" id="m179r01" style="width:100px; top:227px; left:680px;"/>
+<input type="text" name="m179r02" id="m179r02" style="width:100px; top:255px; left:680px;"/>
+<span class="text-echo" style="top:287px; right:164px;"><?php echo $m179r99; ?></span>
 
 <!-- modul 182a -->
-<input type="text" name="m182r001" id="m182r001" style="width:346px; top:480px; left:52px;"/>
-<input type="text" name="m182r101" id="m182r101" style="width:212px; top:480px; left:452px;"/>
-<input type="text" name="m182r201" id="m182r201" style="width:212px; top:480px; left:678px;"/>
-<input type="text" name="m182r002" id="m182r002" style="width:346px; top:508px; left:52px;"/>
-<input type="text" name="m182r102" id="m182r102" style="width:212px; top:508px; left:452px;"/>
-<input type="text" name="m182r202" id="m182r202" style="width:212px; top:508px; left:678px;"/>
-<input type="text" name="m182r003" id="m182r003" style="width:346px; top:535px; left:52px;"/>
-<input type="text" name="m182r103" id="m182r103" style="width:212px; top:535px; left:452px;"/>
-<input type="text" name="m182r203" id="m182r203" style="width:212px; top:535px; left:678px;"/>
-<input type="text" name="m182r004" id="m182r004" style="width:346px; top:562px; left:52px;"/>
-<input type="text" name="m182r104" id="m182r104" style="width:212px; top:562px; left:452px;"/>
-<input type="text" name="m182r204" id="m182r204" style="width:212px; top:562px; left:678px;"/>
-<input type="text" name="m182r005" id="m182r005" style="width:346px; top:590px; left:52px;"/>
-<input type="text" name="m182r105" id="m182r105" style="width:212px; top:590px; left:452px;"/>
-<input type="text" name="m182r205" id="m182r205" style="width:212px; top:590px; left:678px;"/>
-<input type="text" name="m182r006" id="m182r006" style="width:346px; top:617px; left:52px;"/>
-<input type="text" name="m182r106" id="m182r106" style="width:212px; top:617px; left:452px;"/>
-<input type="text" name="m182r206" id="m182r206" style="width:212px; top:617px; left:678px;"/>
-<input type="text" name="m182r007" id="m182r007" style="width:346px; top:645px; left:52px;"/>
-<input type="text" name="m182r107" id="m182r107" style="width:212px; top:645px; left:452px;"/>
-<input type="text" name="m182r207" id="m182r207" style="width:212px; top:645px; left:678px;"/>
-<span class="text-echo" style="top:676px; right:70px;"><?php echo $m182r299; ?></span>
+<input type="text" name="m182r001" id="m182r001" style="width:346px; top:488px; left:52px;"/>
+<input type="text" name="m182r101" id="m182r101" style="width:212px; top:488px; left:452px;"/>
+<input type="text" name="m182r201" id="m182r201" style="width:212px; top:488px; left:678px;"/>
+<input type="text" name="m182r002" id="m182r002" style="width:346px; top:516px; left:52px;"/>
+<input type="text" name="m182r102" id="m182r102" style="width:212px; top:516px; left:452px;"/>
+<input type="text" name="m182r202" id="m182r202" style="width:212px; top:516px; left:678px;"/>
+<input type="text" name="m182r003" id="m182r003" style="width:346px; top:543px; left:52px;"/>
+<input type="text" name="m182r103" id="m182r103" style="width:212px; top:543px; left:452px;"/>
+<input type="text" name="m182r203" id="m182r203" style="width:212px; top:543px; left:678px;"/>
+<input type="text" name="m182r004" id="m182r004" style="width:346px; top:571px; left:52px;"/>
+<input type="text" name="m182r104" id="m182r104" style="width:212px; top:571px; left:452px;"/>
+<input type="text" name="m182r204" id="m182r204" style="width:212px; top:571px; left:678px;"/>
+<input type="text" name="m182r005" id="m182r005" style="width:346px; top:598px; left:52px;"/>
+<input type="text" name="m182r105" id="m182r105" style="width:212px; top:598px; left:452px;"/>
+<input type="text" name="m182r205" id="m182r205" style="width:212px; top:598px; left:678px;"/>
+<input type="text" name="m182r006" id="m182r006" style="width:346px; top:625px; left:52px;"/>
+<input type="text" name="m182r106" id="m182r106" style="width:212px; top:625px; left:452px;"/>
+<input type="text" name="m182r206" id="m182r206" style="width:212px; top:625px; left:678px;"/>
+<input type="text" name="m182r007" id="m182r007" style="width:346px; top:653px; left:52px;"/>
+<input type="text" name="m182r107" id="m182r107" style="width:212px; top:653px; left:452px;"/>
+<input type="text" name="m182r207" id="m182r207" style="width:212px; top:653px; left:678px;"/>
+<span class="text-echo" style="top:685px; right:65px;"><?php echo $m182r299; ?></span>
 
 <!-- modul 183a -->
-<input type="text" name="m183r001" id="m183r001" style="width:346px; top:908px; left:52px;"/>
-<input type="text" name="m183r101" id="m183r101" style="width:212px; top:908px; left:452px;"/>
-<input type="text" name="m183r201" id="m183r201" style="width:212px; top:908px; left:678px;"/>
-<input type="text" name="m183r002" id="m183r002" style="width:346px; top:936px; left:52px;"/>
-<input type="text" name="m183r102" id="m183r102" style="width:212px; top:936px; left:452px;"/>
-<input type="text" name="m183r202" id="m183r202" style="width:212px; top:936px; left:678px;"/>
-<input type="text" name="m183r003" id="m183r003" style="width:346px; top:963px; left:52px;"/>
-<input type="text" name="m183r103" id="m183r103" style="width:212px; top:963px; left:452px;"/>
-<input type="text" name="m183r203" id="m183r203" style="width:212px; top:963px; left:678px;"/>
-<input type="text" name="m183r004" id="m183r004" style="width:346px; top:991px; left:52px;"/>
-<input type="text" name="m183r104" id="m183r104" style="width:212px; top:991px; left:452px;"/>
-<input type="text" name="m183r204" id="m183r204" style="width:212px; top:991px; left:678px;"/>
-<input type="text" name="m183r005" id="m183r005" style="width:346px; top:1018px; left:52px;"/>
-<input type="text" name="m183r105" id="m183r105" style="width:212px; top:1018px; left:452px;"/>
-<input type="text" name="m183r205" id="m183r205" style="width:212px; top:1018px; left:678px;"/>
-<input type="text" name="m183r006" id="m183r006" style="width:346px; top:1045px; left:52px;"/>
-<input type="text" name="m183r106" id="m183r106" style="width:212px; top:1045px; left:452px;"/>
-<input type="text" name="m183r206" id="m183r206" style="width:212px; top:1045px; left:678px;"/>
-<input type="text" name="m183r007" id="m183r007" style="width:346px; top:1073px; left:52px;"/>
-<input type="text" name="m183r107" id="m183r107" style="width:212px; top:1073px; left:452px;"/>
-<input type="text" name="m183r207" id="m183r207" style="width:212px; top:1073px; left:678px;"/>
-<input type="text" name="m183r008" id="m183r008" style="width:346px; top:1100px; left:52px;"/>
-<input type="text" name="m183r108" id="m183r108" style="width:212px; top:1100px; left:452px;"/>
-<input type="text" name="m183r208" id="m183r208" style="width:212px; top:1100px; left:678px;"/>
-<input type="text" name="m183r009" id="m183r009" style="width:346px; top:1127px; left:52px;"/>
-<input type="text" name="m183r109" id="m183r109" style="width:212px; top:1127px; left:452px;"/>
-<input type="text" name="m183r209" id="m183r209" style="width:212px; top:1127px; left:678px;"/>
-<input type="text" name="m183r010" id="m183r010" style="width:346px; top:1155px; left:52px;"/>
-<input type="text" name="m183r110" id="m183r110" style="width:212px; top:1155px; left:452px;"/>
-<input type="text" name="m183r210" id="m183r210" style="width:212px; top:1155px; left:678px;"/>
-<span class="text-echo" style="top:1187px; right:70px;"><?php echo $m183r299; ?></span>
+<input type="text" name="m183r001" id="m183r001" style="width:346px; top:916px; left:52px;"/>
+<input type="text" name="m183r101" id="m183r101" style="width:212px; top:916px; left:452px;"/>
+<input type="text" name="m183r201" id="m183r201" style="width:212px; top:916px; left:678px;"/>
+<input type="text" name="m183r002" id="m183r002" style="width:346px; top:944px; left:52px;"/>
+<input type="text" name="m183r102" id="m183r102" style="width:212px; top:944px; left:452px;"/>
+<input type="text" name="m183r202" id="m183r202" style="width:212px; top:944px; left:678px;"/>
+<input type="text" name="m183r003" id="m183r003" style="width:346px; top:971px; left:52px;"/>
+<input type="text" name="m183r103" id="m183r103" style="width:212px; top:971px; left:452px;"/>
+<input type="text" name="m183r203" id="m183r203" style="width:212px; top:971px; left:678px;"/>
+<input type="text" name="m183r004" id="m183r004" style="width:346px; top:999px; left:52px;"/>
+<input type="text" name="m183r104" id="m183r104" style="width:212px; top:999px; left:452px;"/>
+<input type="text" name="m183r204" id="m183r204" style="width:212px; top:999px; left:678px;"/>
+<input type="text" name="m183r005" id="m183r005" style="width:346px; top:1026px; left:52px;"/>
+<input type="text" name="m183r105" id="m183r105" style="width:212px; top:1026px; left:452px;"/>
+<input type="text" name="m183r205" id="m183r205" style="width:212px; top:1026px; left:678px;"/>
+<input type="text" name="m183r006" id="m183r006" style="width:346px; top:1053px; left:52px;"/>
+<input type="text" name="m183r106" id="m183r106" style="width:212px; top:1053px; left:452px;"/>
+<input type="text" name="m183r206" id="m183r206" style="width:212px; top:1053px; left:678px;"/>
+<input type="text" name="m183r007" id="m183r007" style="width:346px; top:1081px; left:52px;"/>
+<input type="text" name="m183r107" id="m183r107" style="width:212px; top:1081px; left:452px;"/>
+<input type="text" name="m183r207" id="m183r207" style="width:212px; top:1081px; left:678px;"/>
+<input type="text" name="m183r008" id="m183r008" style="width:346px; top:1108px; left:52px;"/>
+<input type="text" name="m183r108" id="m183r108" style="width:212px; top:1108px; left:452px;"/>
+<input type="text" name="m183r208" id="m183r208" style="width:212px; top:1108px; left:678px;"/>
+<input type="text" name="m183r009" id="m183r009" style="width:346px; top:1136px; left:52px;"/>
+<input type="text" name="m183r109" id="m183r109" style="width:212px; top:1136px; left:452px;"/>
+<input type="text" name="m183r209" id="m183r209" style="width:212px; top:1136px; left:678px;"/>
+<input type="text" name="m183r010" id="m183r010" style="width:346px; top:1163px; left:52px;"/>
+<input type="text" name="m183r110" id="m183r110" style="width:212px; top:1163px; left:452px;"/>
+<input type="text" name="m183r210" id="m183r210" style="width:212px; top:1163px; left:678px;"/>
+<span class="text-echo" style="top:1195px; right:65px;"><?php echo $m183r299; ?></span>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 9 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str9.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 9.strana 225kB">
-<span class="text-echo" style="top:66px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 184a -->
-<input type="text" name="m184r001" id="m184r001" style="width:255px; top:252px; left:52px;"/>
-<input type="text" name="m184r101" id="m184r101" style="width:119px; top:252px; left:361px;"/>
-<input type="text" name="m184r201" id="m184r201" style="width:191px; top:252px; left:493px;"/>
-<input type="text" name="m184r301" id="m184r301" style="width:195px; top:252px; left:696px;"/>
-<input type="text" name="m184r002" id="m184r002" style="width:255px; top:280px; left:52px;"/>
-<input type="text" name="m184r102" id="m184r102" style="width:119px; top:280px; left:361px;"/>
-<input type="text" name="m184r202" id="m184r202" style="width:191px; top:280px; left:493px;"/>
-<input type="text" name="m184r302" id="m184r302" style="width:195px; top:280px; left:696px;"/>
-<input type="text" name="m184r003" id="m184r003" style="width:255px; top:307px; left:52px;"/>
-<input type="text" name="m184r103" id="m184r103" style="width:119px; top:307px; left:361px;"/>
-<input type="text" name="m184r203" id="m184r203" style="width:191px; top:307px; left:493px;"/>
-<input type="text" name="m184r303" id="m184r303" style="width:195px; top:307px; left:696px;"/>
-<input type="text" name="m184r004" id="m184r004" style="width:255px; top:335px; left:52px;"/>
-<input type="text" name="m184r104" id="m184r104" style="width:119px; top:335px; left:361px;"/>
-<input type="text" name="m184r204" id="m184r204" style="width:191px; top:335px; left:493px;"/>
-<input type="text" name="m184r304" id="m184r304" style="width:195px; top:335px; left:696px;"/>
-<input type="text" name="m184r005" id="m184r005" style="width:255px; top:362px; left:52px;"/>
-<input type="text" name="m184r105" id="m184r105" style="width:119px; top:362px; left:361px;"/>
-<input type="text" name="m184r205" id="m184r205" style="width:191px; top:362px; left:493px;"/>
-<input type="text" name="m184r305" id="m184r305" style="width:195px; top:362px; left:696px;"/>
-<input type="text" name="m184r006" id="m184r006" style="width:255px; top:389px; left:52px;"/>
-<input type="text" name="m184r106" id="m184r106" style="width:119px; top:389px; left:361px;"/>
-<input type="text" name="m184r206" id="m184r206" style="width:191px; top:389px; left:493px;"/>
-<input type="text" name="m184r306" id="m184r306" style="width:195px; top:389px; left:696px;"/>
-<input type="text" name="m184r007" id="m184r007" style="width:255px; top:416px; left:52px;"/>
-<input type="text" name="m184r107" id="m184r107" style="width:119px; top:416px; left:361px;"/>
-<input type="text" name="m184r207" id="m184r207" style="width:191px; top:416px; left:493px;"/>
-<input type="text" name="m184r307" id="m184r307" style="width:195px; top:416px; left:696px;"/>
-<input type="text" name="m184r008" id="m184r008" style="width:255px; top:444px; left:52px;"/>
-<input type="text" name="m184r108" id="m184r108" style="width:119px; top:444px; left:361px;"/>
-<input type="text" name="m184r208" id="m184r208" style="width:191px; top:444px; left:493px;"/>
-<input type="text" name="m184r308" id="m184r308" style="width:195px; top:444px; left:696px;"/>
-<input type="text" name="m184r009" id="m184r009" style="width:255px; top:471px; left:52px;"/>
-<input type="text" name="m184r109" id="m184r109" style="width:119px; top:471px; left:361px;"/>
-<input type="text" name="m184r209" id="m184r209" style="width:191px; top:471px; left:493px;"/>
-<input type="text" name="m184r309" id="m184r309" style="width:195px; top:471px; left:696px;"/>
-<input type="text" name="m184r010" id="m184r010" style="width:255px; top:499px; left:52px;"/>
-<input type="text" name="m184r110" id="m184r110" style="width:119px; top:499px; left:361px;"/>
-<input type="text" name="m184r210" id="m184r210" style="width:191px; top:499px; left:493px;"/>
-<input type="text" name="m184r310" id="m184r310" style="width:195px; top:499px; left:696px;"/>
-<span class="text-echo" style="top:531px; right:265px;"><?php echo $m184r299; ?></span>
-<span class="text-echo" style="top:531px; right:60px;"><?php echo $m184r399; ?></span>
+<input type="text" name="m184r001" id="m184r001" style="width:255px; top:260px; left:52px;"/>
+<input type="text" name="m184r101" id="m184r101" style="width:119px; top:260px; left:361px;"/>
+<input type="text" name="m184r201" id="m184r201" style="width:191px; top:260px; left:493px;"/>
+<input type="text" name="m184r301" id="m184r301" style="width:195px; top:260px; left:696px;"/>
+<input type="text" name="m184r002" id="m184r002" style="width:255px; top:288px; left:52px;"/>
+<input type="text" name="m184r102" id="m184r102" style="width:119px; top:288px; left:361px;"/>
+<input type="text" name="m184r202" id="m184r202" style="width:191px; top:288px; left:493px;"/>
+<input type="text" name="m184r302" id="m184r302" style="width:195px; top:288px; left:696px;"/>
+<input type="text" name="m184r003" id="m184r003" style="width:255px; top:315px; left:52px;"/>
+<input type="text" name="m184r103" id="m184r103" style="width:119px; top:315px; left:361px;"/>
+<input type="text" name="m184r203" id="m184r203" style="width:191px; top:315px; left:493px;"/>
+<input type="text" name="m184r303" id="m184r303" style="width:195px; top:315px; left:696px;"/>
+<input type="text" name="m184r004" id="m184r004" style="width:255px; top:342px; left:52px;"/>
+<input type="text" name="m184r104" id="m184r104" style="width:119px; top:342px; left:361px;"/>
+<input type="text" name="m184r204" id="m184r204" style="width:191px; top:342px; left:493px;"/>
+<input type="text" name="m184r304" id="m184r304" style="width:195px; top:342px; left:696px;"/>
+<input type="text" name="m184r005" id="m184r005" style="width:255px; top:370px; left:52px;"/>
+<input type="text" name="m184r105" id="m184r105" style="width:119px; top:370px; left:361px;"/>
+<input type="text" name="m184r205" id="m184r205" style="width:191px; top:370px; left:493px;"/>
+<input type="text" name="m184r305" id="m184r305" style="width:195px; top:370px; left:696px;"/>
+<input type="text" name="m184r006" id="m184r006" style="width:255px; top:397px; left:52px;"/>
+<input type="text" name="m184r106" id="m184r106" style="width:119px; top:397px; left:361px;"/>
+<input type="text" name="m184r206" id="m184r206" style="width:191px; top:397px; left:493px;"/>
+<input type="text" name="m184r306" id="m184r306" style="width:195px; top:397px; left:696px;"/>
+<input type="text" name="m184r007" id="m184r007" style="width:255px; top:425px; left:52px;"/>
+<input type="text" name="m184r107" id="m184r107" style="width:119px; top:425px; left:361px;"/>
+<input type="text" name="m184r207" id="m184r207" style="width:191px; top:425px; left:493px;"/>
+<input type="text" name="m184r307" id="m184r307" style="width:195px; top:425px; left:696px;"/>
+<input type="text" name="m184r008" id="m184r008" style="width:255px; top:452px; left:52px;"/>
+<input type="text" name="m184r108" id="m184r108" style="width:119px; top:452px; left:361px;"/>
+<input type="text" name="m184r208" id="m184r208" style="width:191px; top:452px; left:493px;"/>
+<input type="text" name="m184r308" id="m184r308" style="width:195px; top:452px; left:696px;"/>
+<input type="text" name="m184r009" id="m184r009" style="width:255px; top:479px; left:52px;"/>
+<input type="text" name="m184r109" id="m184r109" style="width:119px; top:479px; left:361px;"/>
+<input type="text" name="m184r209" id="m184r209" style="width:191px; top:479px; left:493px;"/>
+<input type="text" name="m184r309" id="m184r309" style="width:195px; top:479px; left:696px;"/>
+<input type="text" name="m184r010" id="m184r010" style="width:255px; top:507px; left:52px;"/>
+<input type="text" name="m184r110" id="m184r110" style="width:119px; top:507px; left:361px;"/>
+<input type="text" name="m184r210" id="m184r210" style="width:191px; top:507px; left:493px;"/>
+<input type="text" name="m184r310" id="m184r310" style="width:195px; top:507px; left:696px;"/>
+<span class="text-echo" style="top:539px; right:265px;"><?php echo $m184r299; ?></span>
+<span class="text-echo" style="top:539px; right:60px;"><?php echo $m184r399; ?></span>
 
 <!-- modul 185a -->
-<input type="text" name="m185r001" id="m185r001" style="width:255px; top:790px; left:52px;"/>
-<input type="text" name="m185r101" id="m185r101" style="width:119px; top:790px; left:361px;"/>
-<input type="text" name="m185r201" id="m185r201" style="width:191px; top:790px; left:493px;"/>
-<input type="text" name="m185r301" id="m185r301" style="width:195px; top:790px; left:696px;"/>
-<input type="text" name="m185r002" id="m185r002" style="width:255px; top:818px; left:52px;"/>
-<input type="text" name="m185r102" id="m185r102" style="width:119px; top:818px; left:361px;"/>
-<input type="text" name="m185r202" id="m185r202" style="width:191px; top:818px; left:493px;"/>
-<input type="text" name="m185r302" id="m185r302" style="width:195px; top:818px; left:696px;"/>
-<input type="text" name="m185r003" id="m185r003" style="width:255px; top:845px; left:52px;"/>
-<input type="text" name="m185r103" id="m185r103" style="width:119px; top:845px; left:361px;"/>
-<input type="text" name="m185r203" id="m185r203" style="width:191px; top:845px; left:493px;"/>
-<input type="text" name="m185r303" id="m185r303" style="width:195px; top:845px; left:696px;"/>
-<input type="text" name="m185r004" id="m185r004" style="width:255px; top:873px; left:52px;"/>
-<input type="text" name="m185r104" id="m185r104" style="width:119px; top:873px; left:361px;"/>
-<input type="text" name="m185r204" id="m185r204" style="width:191px; top:873px; left:493px;"/>
-<input type="text" name="m185r304" id="m185r304" style="width:195px; top:873px; left:696px;"/>
-<input type="text" name="m185r005" id="m185r005" style="width:255px; top:900px; left:52px;"/>
-<input type="text" name="m185r105" id="m185r105" style="width:119px; top:900px; left:361px;"/>
-<input type="text" name="m185r205" id="m185r205" style="width:191px; top:900px; left:493px;"/>
-<input type="text" name="m185r305" id="m185r305" style="width:195px; top:900px; left:696px;"/>
-<input type="text" name="m185r006" id="m185r006" style="width:255px; top:927px; left:52px;"/>
-<input type="text" name="m185r106" id="m185r106" style="width:119px; top:927px; left:361px;"/>
-<input type="text" name="m185r206" id="m185r206" style="width:191px; top:927px; left:493px;"/>
-<input type="text" name="m185r306" id="m185r306" style="width:195px; top:927px; left:696px;"/>
-<input type="text" name="m185r007" id="m185r007" style="width:255px; top:955px; left:52px;"/>
-<input type="text" name="m185r107" id="m185r107" style="width:119px; top:955px; left:361px;"/>
-<input type="text" name="m185r207" id="m185r207" style="width:191px; top:955px; left:493px;"/>
-<input type="text" name="m185r307" id="m185r307" style="width:195px; top:955px; left:696px;"/>
-<span class="text-echo" style="top:987px; right:265px;"><?php echo $m185r299; ?></span>
-<span class="text-echo" style="top:987px; right:60px;"><?php echo $m185r399; ?></span>
+<input type="text" name="m185r001" id="m185r001" style="width:255px; top:798px; left:52px;"/>
+<input type="text" name="m185r101" id="m185r101" style="width:119px; top:798px; left:361px;"/>
+<input type="text" name="m185r201" id="m185r201" style="width:191px; top:798px; left:493px;"/>
+<input type="text" name="m185r301" id="m185r301" style="width:195px; top:798px; left:696px;"/>
+<input type="text" name="m185r002" id="m185r002" style="width:255px; top:827px; left:52px;"/>
+<input type="text" name="m185r102" id="m185r102" style="width:119px; top:827px; left:361px;"/>
+<input type="text" name="m185r202" id="m185r202" style="width:191px; top:827px; left:493px;"/>
+<input type="text" name="m185r302" id="m185r302" style="width:195px; top:827px; left:696px;"/>
+<input type="text" name="m185r003" id="m185r003" style="width:255px; top:853px; left:52px;"/>
+<input type="text" name="m185r103" id="m185r103" style="width:119px; top:853px; left:361px;"/>
+<input type="text" name="m185r203" id="m185r203" style="width:191px; top:853px; left:493px;"/>
+<input type="text" name="m185r303" id="m185r303" style="width:195px; top:853px; left:696px;"/>
+<input type="text" name="m185r004" id="m185r004" style="width:255px; top:881px; left:52px;"/>
+<input type="text" name="m185r104" id="m185r104" style="width:119px; top:881px; left:361px;"/>
+<input type="text" name="m185r204" id="m185r204" style="width:191px; top:881px; left:493px;"/>
+<input type="text" name="m185r304" id="m185r304" style="width:195px; top:881px; left:696px;"/>
+<input type="text" name="m185r005" id="m185r005" style="width:255px; top:908px; left:52px;"/>
+<input type="text" name="m185r105" id="m185r105" style="width:119px; top:908px; left:361px;"/>
+<input type="text" name="m185r205" id="m185r205" style="width:191px; top:908px; left:493px;"/>
+<input type="text" name="m185r305" id="m185r305" style="width:195px; top:908px; left:696px;"/>
+<input type="text" name="m185r006" id="m185r006" style="width:255px; top:936px; left:52px;"/>
+<input type="text" name="m185r106" id="m185r106" style="width:119px; top:936px; left:361px;"/>
+<input type="text" name="m185r206" id="m185r206" style="width:191px; top:936px; left:493px;"/>
+<input type="text" name="m185r306" id="m185r306" style="width:195px; top:936px; left:696px;"/>
+<input type="text" name="m185r007" id="m185r007" style="width:255px; top:963px; left:52px;"/>
+<input type="text" name="m185r107" id="m185r107" style="width:119px; top:963px; left:361px;"/>
+<input type="text" name="m185r207" id="m185r207" style="width:191px; top:963px; left:493px;"/>
+<input type="text" name="m185r307" id="m185r307" style="width:195px; top:963px; left:696px;"/>
+<span class="text-echo" style="top:995px; right:265px;"><?php echo $m185r299; ?></span>
+<span class="text-echo" style="top:995px; right:60px;"><?php echo $m185r399; ?></span>
 <?php                                         } ?>
 
 
 <?php if ( $strana == 10 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str10.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 10.strana 264kB">
-<span class="text-echo" style="top:68px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<img src="<?php echo $jpg_cesta; ?>_str10.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 10.strana 264kB">
+<span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 186a -->
-<input type="text" name="m186r001" id="m186r001" style="width:255px; top:236px; left:52px;"/>
-<input type="text" name="m186r101" id="m186r101" style="width:119px; top:236px; left:361px;"/>
-<input type="text" name="m186r201" id="m186r201" style="width:191px; top:236px; left:493px;"/>
-<input type="text" name="m186r301" id="m186r301" style="width:195px; top:236px; left:696px;"/>
-<input type="text" name="m186r002" id="m186r002" style="width:255px; top:264px; left:52px;"/>
-<input type="text" name="m186r102" id="m186r102" style="width:119px; top:264px; left:361px;"/>
-<input type="text" name="m186r202" id="m186r202" style="width:191px; top:264px; left:493px;"/>
-<input type="text" name="m186r302" id="m186r302" style="width:195px; top:264px; left:696px;"/>
-<input type="text" name="m186r003" id="m186r003" style="width:255px; top:291px; left:52px;"/>
-<input type="text" name="m186r103" id="m186r103" style="width:119px; top:291px; left:361px;"/>
-<input type="text" name="m186r203" id="m186r203" style="width:191px; top:291px; left:493px;"/>
-<input type="text" name="m186r303" id="m186r303" style="width:195px; top:291px; left:696px;"/>
-<input type="text" name="m186r004" id="m186r004" style="width:255px; top:319px; left:52px;"/>
-<input type="text" name="m186r104" id="m186r104" style="width:119px; top:319px; left:361px;"/>
-<input type="text" name="m186r204" id="m186r204" style="width:191px; top:319px; left:493px;"/>
-<input type="text" name="m186r304" id="m186r304" style="width:195px; top:319px; left:696px;"/>
-<input type="text" name="m186r005" id="m186r005" style="width:255px; top:346px; left:52px;"/>
-<input type="text" name="m186r105" id="m186r105" style="width:119px; top:346px; left:361px;"/>
-<input type="text" name="m186r205" id="m186r205" style="width:191px; top:346px; left:493px;"/>
-<input type="text" name="m186r305" id="m186r305" style="width:195px; top:346px; left:696px;"/>
-<input type="text" name="m186r006" id="m186r006" style="width:255px; top:374px; left:52px;"/>
-<input type="text" name="m186r106" id="m186r106" style="width:119px; top:374px; left:361px;"/>
-<input type="text" name="m186r206" id="m186r206" style="width:191px; top:374px; left:493px;"/>
-<input type="text" name="m186r306" id="m186r306" style="width:195px; top:374px; left:696px;"/>
-<input type="text" name="m186r007" id="m186r007" style="width:255px; top:401px; left:52px;"/>
-<input type="text" name="m186r107" id="m186r107" style="width:119px; top:401px; left:361px;"/>
-<input type="text" name="m186r207" id="m186r207" style="width:191px; top:401px; left:493px;"/>
-<input type="text" name="m186r307" id="m186r307" style="width:195px; top:401px; left:696px;"/>
-<span class="text-echo" style="top:433px; right:265px;"><?php echo $m186r299; ?></span>
-<span class="text-echo" style="top:433px; right:60px;"><?php echo $m186r399; ?></span>
+<input type="text" name="m186r001" id="m186r001" style="width:255px; top:245px; left:52px;"/>
+<input type="text" name="m186r101" id="m186r101" style="width:119px; top:245px; left:361px;"/>
+<input type="text" name="m186r201" id="m186r201" style="width:191px; top:245px; left:493px;"/>
+<input type="text" name="m186r301" id="m186r301" style="width:195px; top:245px; left:696px;"/>
+<input type="text" name="m186r002" id="m186r002" style="width:255px; top:272px; left:52px;"/>
+<input type="text" name="m186r102" id="m186r102" style="width:119px; top:272px; left:361px;"/>
+<input type="text" name="m186r202" id="m186r202" style="width:191px; top:272px; left:493px;"/>
+<input type="text" name="m186r302" id="m186r302" style="width:195px; top:272px; left:696px;"/>
+<input type="text" name="m186r003" id="m186r003" style="width:255px; top:299px; left:52px;"/>
+<input type="text" name="m186r103" id="m186r103" style="width:119px; top:299px; left:361px;"/>
+<input type="text" name="m186r203" id="m186r203" style="width:191px; top:299px; left:493px;"/>
+<input type="text" name="m186r303" id="m186r303" style="width:195px; top:299px; left:696px;"/>
+<input type="text" name="m186r004" id="m186r004" style="width:255px; top:327px; left:52px;"/>
+<input type="text" name="m186r104" id="m186r104" style="width:119px; top:327px; left:361px;"/>
+<input type="text" name="m186r204" id="m186r204" style="width:191px; top:327px; left:493px;"/>
+<input type="text" name="m186r304" id="m186r304" style="width:195px; top:327px; left:696px;"/>
+<input type="text" name="m186r005" id="m186r005" style="width:255px; top:354px; left:52px;"/>
+<input type="text" name="m186r105" id="m186r105" style="width:119px; top:354px; left:361px;"/>
+<input type="text" name="m186r205" id="m186r205" style="width:191px; top:354px; left:493px;"/>
+<input type="text" name="m186r305" id="m186r305" style="width:195px; top:354px; left:696px;"/>
+<input type="text" name="m186r006" id="m186r006" style="width:255px; top:382px; left:52px;"/>
+<input type="text" name="m186r106" id="m186r106" style="width:119px; top:382px; left:361px;"/>
+<input type="text" name="m186r206" id="m186r206" style="width:191px; top:382px; left:493px;"/>
+<input type="text" name="m186r306" id="m186r306" style="width:195px; top:382px; left:696px;"/>
+<input type="text" name="m186r007" id="m186r007" style="width:255px; top:409px; left:52px;"/>
+<input type="text" name="m186r107" id="m186r107" style="width:119px; top:409px; left:361px;"/>
+<input type="text" name="m186r207" id="m186r207" style="width:191px; top:409px; left:493px;"/>
+<input type="text" name="m186r307" id="m186r307" style="width:195px; top:409px; left:696px;"/>
+<span class="text-echo" style="top:440px; right:265px;"><?php echo $m186r299; ?></span>
+<span class="text-echo" style="top:440px; right:60px;"><?php echo $m186r399; ?></span>
 
 <!-- modul 304a -->
-<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z miezd" onclick="NacitajMzdy();" style="top:607px; left:378px;" class="btn-row-tool">
-<input type="text" name="m304r01" id="m304r01" style="width:140px; top:707px; left:660px;"/>
-<input type="text" name="m304r02" id="m304r02" style="width:140px; top:734px; left:660px;"/>
-<input type="text" name="m304r03" id="m304r03" style="width:140px; top:761px; left:660px;"/>
-<input type="text" name="m304r04" id="m304r04" style="width:140px; top:789px; left:660px;"/>
-<input type="text" name="m304r05" id="m304r05" style="width:140px; top:816px; left:660px;"/>
-<input type="text" name="m304r06" id="m304r06" style="width:140px; top:844px; left:660px;"/>
-<span class="text-echo" style="top:876px; right:145px;"><?php echo $m304r99; ?></span>
+<img src="../obr/ikony/download_blue_icon.png" title="NaËÌtaù ˙daje z miezd" onclick="NacitajMzdy();" style="top:615px; left:378px;" class="btn-row-tool">
+<input type="text" name="m304r01" id="m304r01" style="width:140px; top:715px; left:660px;"/>
+<input type="text" name="m304r02" id="m304r02" style="width:140px; top:742px; left:660px;"/>
+<input type="text" name="m304r03" id="m304r03" style="width:140px; top:770px; left:660px;"/>
+<input type="text" name="m304r04" id="m304r04" style="width:140px; top:797px; left:660px;"/>
+<input type="text" name="m304r05" id="m304r05" style="width:140px; top:824px; left:660px;"/>
+<input type="text" name="m304r06" id="m304r06" style="width:140px; top:852px; left:660px;"/>
+<span class="text-echo" style="top:883px; right:145px;"><?php echo $m304r99; ?></span>
 <?php                                         } ?>
 
 
 <?php if ( $strana == 11 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str11.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 11.strana 187kB" style="width:1250px; height:800px;">
-<span class="text-echo" style="top:64px; left:818px; font-size:16px; letter-spacing:22.5px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:65px; left:810px; font-size:16px; letter-spacing:22.5px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 527a -->
-<input type="text" name="m527r101" id="m527r101" style="width:58px; top:302px; left:302px;"/>
-<input type="text" name="m527r201" id="m527r201" style="width:91px; top:302px; left:375px;"/>
-<input type="text" name="m527r301" id="m527r301" style="width:70px; top:302px; left:480px;"/>
-<input type="text" name="m527r401" id="m527r401" style="width:71px; top:302px; left:564px;"/>
-<input type="text" name="m527r501" id="m527r501" style="width:92px; top:302px; left:648px;"/>
-<input type="text" name="m527r601" id="m527r601" style="width:80px; top:302px; left:754px;"/>
-<input type="text" name="m527r701" id="m527r701" style="width:81px; top:302px; left:848px;"/>
-<input type="text" name="m527r801" id="m527r801" style="width:81px; top:302px; left:943px;"/>
-<input type="text" name="m527r901" id="m527r901" style="width:81px; top:302px; left:1038px;"/>
-<input type="text" name="m527r1001" id="m527r1001" style="width:60px; top:302px; left:1133px;"/>
-<input type="text" name="m527r102" id="m527r102" style="width:58px; top:331px; left:302px;"/>
-<input type="text" name="m527r202" id="m527r202" style="width:91px; top:331px; left:375px;"/>
-<input type="text" name="m527r302" id="m527r302" style="width:70px; top:331px; left:480px;"/>
-<input type="text" name="m527r402" id="m527r402" style="width:71px; top:331px; left:564px;"/>
-<input type="text" name="m527r502" id="m527r502" style="width:92px; top:331px; left:648px;"/>
-<input type="text" name="m527r602" id="m527r602" style="width:80px; top:331px; left:754px;"/>
-<input type="text" name="m527r702" id="m527r702" style="width:81px; top:331px; left:848px;"/>
-<input type="text" name="m527r802" id="m527r802" style="width:81px; top:331px; left:943px;"/>
-<input type="text" name="m527r902" id="m527r902" style="width:81px; top:331px; left:1038px;"/>
-<input type="text" name="m527r1002" id="m527r1002" style="width:60px; top:331px; left:1133px;"/>
-<input type="text" name="m527r103" id="m527r103" style="width:58px; top:359px; left:302px;"/>
-<input type="text" name="m527r203" id="m527r203" style="width:91px; top:359px; left:375px;"/>
-<input type="text" name="m527r303" id="m527r303" style="width:70px; top:359px; left:480px;"/>
-<input type="text" name="m527r403" id="m527r403" style="width:71px; top:359px; left:564px;"/>
-<input type="text" name="m527r503" id="m527r503" style="width:92px; top:359px; left:648px;"/>
-<input type="text" name="m527r603" id="m527r603" style="width:80px; top:359px; left:754px;"/>
-<input type="text" name="m527r703" id="m527r703" style="width:81px; top:359px; left:848px;"/>
-<input type="text" name="m527r803" id="m527r803" style="width:81px; top:359px; left:943px;"/>
-<input type="text" name="m527r903" id="m527r903" style="width:81px; top:359px; left:1038px;"/>
-<input type="text" name="m527r1003" id="m527r1003" style="width:60px; top:359px; left:1133px;"/>
-<input type="text" name="m527r104" id="m527r104" style="width:58px; top:387px; left:302px;"/>
-<input type="text" name="m527r204" id="m527r204" style="width:91px; top:387px; left:375px;"/>
-<input type="text" name="m527r304" id="m527r304" style="width:70px; top:387px; left:480px;"/>
-<input type="text" name="m527r404" id="m527r404" style="width:71px; top:387px; left:564px;"/>
-<input type="text" name="m527r504" id="m527r504" style="width:92px; top:387px; left:648px;"/>
-<input type="text" name="m527r604" id="m527r604" style="width:80px; top:387px; left:754px;"/>
-<input type="text" name="m527r704" id="m527r704" style="width:81px; top:387px; left:848px;"/>
-<input type="text" name="m527r804" id="m527r804" style="width:81px; top:387px; left:943px;"/>
-<input type="text" name="m527r904" id="m527r904" style="width:81px; top:387px; left:1038px;"/>
-<input type="text" name="m527r1004" id="m527r1004" style="width:60px; top:387px; left:1133px;"/>
+<input type="text" name="m527r101" id="m527r101" style="width:58px; top:306px; left:302px;"/>
+<input type="text" name="m527r201" id="m527r201" style="width:91px; top:306px; left:375px;"/>
+<input type="text" name="m527r301" id="m527r301" style="width:70px; top:306px; left:480px;"/>
+<input type="text" name="m527r401" id="m527r401" style="width:71px; top:306px; left:564px;"/>
+<input type="text" name="m527r501" id="m527r501" style="width:92px; top:306px; left:648px;"/>
+<input type="text" name="m527r601" id="m527r601" style="width:80px; top:306px; left:754px;"/>
+<input type="text" name="m527r701" id="m527r701" style="width:81px; top:306px; left:848px;"/>
+<input type="text" name="m527r801" id="m527r801" style="width:81px; top:306px; left:943px;"/>
+<input type="text" name="m527r901" id="m527r901" style="width:81px; top:306px; left:1038px;"/>
+<input type="text" name="m527r1001" id="m527r1001" style="width:60px; top:306px; left:1133px;"/>
+<input type="text" name="m527r102" id="m527r102" style="width:58px; top:334px; left:302px;"/>
+<input type="text" name="m527r202" id="m527r202" style="width:91px; top:334px; left:375px;"/>
+<input type="text" name="m527r302" id="m527r302" style="width:70px; top:334px; left:480px;"/>
+<input type="text" name="m527r402" id="m527r402" style="width:71px; top:334px; left:564px;"/>
+<input type="text" name="m527r502" id="m527r502" style="width:92px; top:334px; left:648px;"/>
+<input type="text" name="m527r602" id="m527r602" style="width:80px; top:334px; left:754px;"/>
+<input type="text" name="m527r702" id="m527r702" style="width:81px; top:334px; left:848px;"/>
+<input type="text" name="m527r802" id="m527r802" style="width:81px; top:334px; left:943px;"/>
+<input type="text" name="m527r902" id="m527r902" style="width:81px; top:334px; left:1038px;"/>
+<input type="text" name="m527r1002" id="m527r1002" style="width:60px; top:334px; left:1133px;"/>
+<input type="text" name="m527r103" id="m527r103" style="width:58px; top:358px; left:302px;"/>
+<input type="text" name="m527r203" id="m527r203" style="width:91px; top:358px; left:375px;"/>
+<input type="text" name="m527r303" id="m527r303" style="width:70px; top:358px; left:480px;"/>
+<input type="text" name="m527r403" id="m527r403" style="width:71px; top:358px; left:564px;"/>
+<input type="text" name="m527r503" id="m527r503" style="width:92px; top:358px; left:648px;"/>
+<input type="text" name="m527r603" id="m527r603" style="width:80px; top:358px; left:754px;"/>
+<input type="text" name="m527r703" id="m527r703" style="width:81px; top:358px; left:848px;"/>
+<input type="text" name="m527r803" id="m527r803" style="width:81px; top:358px; left:943px;"/>
+<input type="text" name="m527r903" id="m527r903" style="width:81px; top:358px; left:1038px;"/>
+<input type="text" name="m527r1003" id="m527r1003" style="width:60px; top:358px; left:1133px;"/>
+<input type="text" name="m527r104" id="m527r104" style="width:58px; top:382px; left:302px;"/>
+<input type="text" name="m527r204" id="m527r204" style="width:91px; top:382px; left:375px;"/>
+<input type="text" name="m527r304" id="m527r304" style="width:70px; top:382px; left:480px;"/>
+<input type="text" name="m527r404" id="m527r404" style="width:71px; top:382px; left:564px;"/>
+<input type="text" name="m527r504" id="m527r504" style="width:92px; top:382px; left:648px;"/>
+<input type="text" name="m527r604" id="m527r604" style="width:80px; top:382px; left:754px;"/>
+<input type="text" name="m527r704" id="m527r704" style="width:81px; top:382px; left:848px;"/>
+<input type="text" name="m527r804" id="m527r804" style="width:81px; top:382px; left:943px;"/>
+<input type="text" name="m527r904" id="m527r904" style="width:81px; top:382px; left:1038px;"/>
+<input type="text" name="m527r1004" id="m527r1004" style="width:60px; top:382px; left:1133px;"/>
 <?php                                         } ?>
 
 
 <?php if ( $strana == 12 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 12.strana 165kB">
-<span class="text-echo" style="top:73px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
+<span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 474a -->
-<input type="text" name="m474r101" id="m474r101" style="width:108px; top:275px; left:528px;"/>
-<input type="text" name="m474r201" id="m474r201" style="width:109px; top:275px; left:652px;"/>
-<input type="text" name="m474r301" id="m474r301" style="width:113px; top:275px; left:776px;"/>
-<input type="text" name="m474r102" id="m474r102" style="width:108px; top:307px; left:528px;"/>
-<input type="text" name="m474r202" id="m474r202" style="width:109px; top:307px; left:652px;"/>
-<input type="text" name="m474r302" id="m474r302" style="width:113px; top:307px; left:776px;"/>
-<input type="text" name="m474r103" id="m474r103" style="width:108px; top:339px; left:528px;"/>
-<input type="text" name="m474r203" id="m474r203" style="width:109px; top:339px; left:652px;"/>
-<input type="text" name="m474r303" id="m474r303" style="width:113px; top:339px; left:776px;"/>
-<input type="text" name="m474r104" id="m474r104" style="width:108px; top:371px; left:528px;"/>
-<input type="text" name="m474r204" id="m474r204" style="width:109px; top:371px; left:652px;"/>
-<input type="text" name="m474r304" id="m474r304" style="width:113px; top:371px; left:776px;"/>
+<input type="text" name="m474r101" id="m474r101" style="width:108px; top:294px; left:528px;"/>
+<input type="text" name="m474r201" id="m474r201" style="width:109px; top:294px; left:652px;"/>
+<input type="text" name="m474r301" id="m474r301" style="width:113px; top:294px; left:776px;"/>
+<input type="text" name="m474r102" id="m474r102" style="width:108px; top:321px; left:528px;"/>
+<input type="text" name="m474r202" id="m474r202" style="width:109px; top:321px; left:652px;"/>
+<input type="text" name="m474r302" id="m474r302" style="width:113px; top:321px; left:776px;"/>
+<input type="text" name="m474r103" id="m474r103" style="width:108px; top:348px; left:528px;"/>
+<input type="text" name="m474r203" id="m474r203" style="width:109px; top:348px; left:652px;"/>
+<input type="text" name="m474r303" id="m474r303" style="width:113px; top:348px; left:776px;"/>
+<input type="text" name="m474r104" id="m474r104" style="width:108px; top:376px; left:528px;"/>
+<input type="text" name="m474r204" id="m474r204" style="width:109px; top:376px; left:652px;"/>
+<input type="text" name="m474r304" id="m474r304" style="width:113px; top:376px; left:776px;"/>
 <input type="text" name="m474r105" id="m474r105" style="width:108px; top:403px; left:528px;"/>
 <input type="text" name="m474r205" id="m474r205" style="width:109px; top:403px; left:652px;"/>
 <input type="text" name="m474r305" id="m474r305" style="width:113px; top:403px; left:776px;"/>
-<input type="text" name="m474r106" id="m474r106" style="width:108px; top:434px; left:528px;"/>
-<input type="text" name="m474r206" id="m474r206" style="width:109px; top:434px; left:652px;"/>
-<input type="text" name="m474r306" id="m474r306" style="width:113px; top:434px; left:776px;"/>
-<input type="text" name="m474r207" id="m474r207" style="width:109px; top:466px; left:652px;"/>
-<input type="text" name="m474r307" id="m474r307" style="width:113px; top:466px; left:776px;"/>
-<span class="text-echo" style="top:503px; right:310px;"><?php echo $m474r199; ?></span>
-<span class="text-echo" style="top:503px; right:185px;"><?php echo $m474r299; ?></span>
-<span class="text-echo" style="top:503px; right:58px;"><?php echo $m474r399; ?></span>
-
-<!-- modul 127 -->
-<input type="text" name="m127r001" id="m127r001" style="width:248px; top:794px; left:51px;"/>
-<input type="text" name="m127r101" id="m127r101" style="width:99px; top:794px; left:346px;"/>
-<input type="text" name="m127r201" id="m127r201" style="width:66px; top:794px; left:459px;"/>
-<input type="text" name="m127r301" id="m127r301" style="width:66px; top:794px; left:538px;"/>
-<input type="text" name="m127r401" id="m127r401" style="width:66px; top:794px; left:617px;"/>
-<input type="text" name="m127r501" id="m127r501" style="width:102px; top:794px; left:697px;"/>
-<input type="text" name="m127r601" id="m127r601" style="width:77px; top:794px; left:813px;"/>
-<input type="text" name="m127r002" id="m127r002" style="width:248px; top:822px; left:51px;"/>
-<input type="text" name="m127r102" id="m127r102" style="width:99px; top:822px; left:346px;"/>
-<input type="text" name="m127r202" id="m127r202" style="width:66px; top:822px; left:459px;"/>
-<input type="text" name="m127r302" id="m127r302" style="width:66px; top:822px; left:538px;"/>
-<input type="text" name="m127r402" id="m127r402" style="width:66px; top:822px; left:617px;"/>
-<input type="text" name="m127r502" id="m127r502" style="width:102px; top:822px; left:697px;"/>
-<input type="text" name="m127r602" id="m127r602" style="width:77px; top:822px; left:813px;"/>
-<input type="text" name="m127r003" id="m127r003" style="width:248px; top:849px; left:51px;"/>
-<input type="text" name="m127r103" id="m127r103" style="width:99px; top:849px; left:346px;"/>
-<input type="text" name="m127r203" id="m127r203" style="width:66px; top:849px; left:459px;"/>
-<input type="text" name="m127r303" id="m127r303" style="width:66px; top:849px; left:538px;"/>
-<input type="text" name="m127r403" id="m127r403" style="width:66px; top:849px; left:617px;"/>
-<input type="text" name="m127r503" id="m127r503" style="width:102px; top:849px; left:697px;"/>
-<input type="text" name="m127r603" id="m127r603" style="width:77px; top:849px; left:813px;"/>
-<input type="text" name="m127r004" id="m127r004" style="width:248px; top:877px; left:51px;"/>
-<input type="text" name="m127r104" id="m127r104" style="width:99px; top:877px; left:346px;"/>
-<input type="text" name="m127r204" id="m127r204" style="width:66px; top:877px; left:459px;"/>
-<input type="text" name="m127r304" id="m127r304" style="width:66px; top:877px; left:538px;"/>
-<input type="text" name="m127r404" id="m127r404" style="width:66px; top:877px; left:617px;"/>
-<input type="text" name="m127r504" id="m127r504" style="width:102px; top:877px; left:697px;"/>
-<input type="text" name="m127r604" id="m127r604" style="width:77px; top:877px; left:813px;"/>
-<input type="text" name="m127r005" id="m127r005" style="width:248px; top:904px; left:51px;"/>
-<input type="text" name="m127r105" id="m127r105" style="width:99px; top:904px; left:346px;"/>
-<input type="text" name="m127r205" id="m127r205" style="width:66px; top:904px; left:459px;"/>
-<input type="text" name="m127r305" id="m127r305" style="width:66px; top:904px; left:538px;"/>
-<input type="text" name="m127r405" id="m127r405" style="width:66px; top:904px; left:617px;"/>
-<input type="text" name="m127r505" id="m127r505" style="width:102px; top:904px; left:697px;"/>
-<input type="text" name="m127r605" id="m127r605" style="width:77px; top:904px; left:813px;"/>
-<input type="text" name="m127r006" id="m127r006" style="width:248px; top:932px; left:51px;"/>
-<input type="text" name="m127r106" id="m127r106" style="width:99px; top:932px; left:346px;"/>
-<input type="text" name="m127r206" id="m127r206" style="width:66px; top:932px; left:459px;"/>
-<input type="text" name="m127r306" id="m127r306" style="width:66px; top:932px; left:538px;"/>
-<input type="text" name="m127r406" id="m127r406" style="width:66px; top:932px; left:617px;"/>
-<input type="text" name="m127r506" id="m127r506" style="width:102px; top:932px; left:697px;"/>
-<input type="text" name="m127r606" id="m127r606" style="width:77px; top:932px; left:813px;"/>
-<input type="text" name="m127r007" id="m127r007" style="width:248px; top:959px; left:51px;"/>
-<input type="text" name="m127r107" id="m127r107" style="width:99px; top:959px; left:346px;"/>
-<input type="text" name="m127r207" id="m127r207" style="width:66px; top:959px; left:459px;"/>
-<input type="text" name="m127r307" id="m127r307" style="width:66px; top:959px; left:538px;"/>
-<input type="text" name="m127r407" id="m127r407" style="width:66px; top:959px; left:617px;"/>
-<input type="text" name="m127r507" id="m127r507" style="width:102px; top:959px; left:697px;"/>
-<input type="text" name="m127r607" id="m127r607" style="width:77px; top:959px; left:813px;"/>
-<input type="text" name="m127r008" id="m127r008" style="width:248px; top:986px; left:51px;"/>
-<input type="text" name="m127r108" id="m127r108" style="width:99px; top:986px; left:346px;"/>
-<input type="text" name="m127r208" id="m127r208" style="width:66px; top:986px; left:459px;"/>
-<input type="text" name="m127r308" id="m127r308" style="width:66px; top:986px; left:538px;"/>
-<input type="text" name="m127r408" id="m127r408" style="width:66px; top:986px; left:617px;"/>
-<input type="text" name="m127r508" id="m127r508" style="width:102px; top:986px; left:697px;"/>
-<input type="text" name="m127r608" id="m127r608" style="width:77px; top:986px; left:813px;"/>
-<input type="text" name="m127r009" id="m127r009" style="width:248px; top:1014px; left:51px;"/>
-<input type="text" name="m127r109" id="m127r109" style="width:99px; top:1014px; left:346px;"/>
-<input type="text" name="m127r209" id="m127r209" style="width:66px; top:1014px; left:459px;"/>
-<input type="text" name="m127r309" id="m127r309" style="width:66px; top:1014px; left:538px;"/>
-<input type="text" name="m127r409" id="m127r409" style="width:66px; top:1014px; left:617px;"/>
-<input type="text" name="m127r509" id="m127r509" style="width:102px; top:1014px; left:697px;"/>
-<input type="text" name="m127r609" id="m127r609" style="width:77px; top:1014px; left:813px;"/>
-<input type="text" name="m127r010" id="m127r010" style="width:248px; top:1041px; left:51px;"/>
-<input type="text" name="m127r110" id="m127r110" style="width:99px; top:1041px; left:346px;"/>
-<input type="text" name="m127r210" id="m127r210" style="width:66px; top:1041px; left:459px;"/>
-<input type="text" name="m127r310" id="m127r310" style="width:66px; top:1041px; left:538px;"/>
-<input type="text" name="m127r410" id="m127r410" style="width:66px; top:1041px; left:617px;"/>
-<input type="text" name="m127r510" id="m127r510" style="width:102px; top:1041px; left:697px;"/>
-<input type="text" name="m127r610" id="m127r610" style="width:77px; top:1041px; left:813px;"/>
-<input type="text" name="m127r011" id="m127r011" style="width:248px; top:1069px; left:51px;"/>
-<input type="text" name="m127r111" id="m127r111" style="width:99px; top:1069px; left:346px;"/>
-<input type="text" name="m127r211" id="m127r211" style="width:66px; top:1069px; left:459px;"/>
-<input type="text" name="m127r311" id="m127r311" style="width:66px; top:1069px; left:538px;"/>
-<input type="text" name="m127r411" id="m127r411" style="width:66px; top:1069px; left:617px;"/>
-<input type="text" name="m127r511" id="m127r511" style="width:102px; top:1069px; left:697px;"/>
-<input type="text" name="m127r611" id="m127r611" style="width:77px; top:1069px; left:813px;"/>
-<input type="text" name="m127r012" id="m127r012" style="width:248px; top:1096px; left:51px;"/>
-<input type="text" name="m127r112" id="m127r112" style="width:99px; top:1096px; left:346px;"/>
-<input type="text" name="m127r212" id="m127r212" style="width:66px; top:1096px; left:459px;"/>
-<input type="text" name="m127r312" id="m127r312" style="width:66px; top:1096px; left:538px;"/>
-<input type="text" name="m127r412" id="m127r412" style="width:66px; top:1096px; left:617px;"/>
-<input type="text" name="m127r512" id="m127r512" style="width:102px; top:1096px; left:697px;"/>
-<input type="text" name="m127r612" id="m127r612" style="width:77px; top:1096px; left:813px;"/>
-<input type="text" name="m127r013" id="m127r013" style="width:248px; top:1123px; left:51px;"/>
-<input type="text" name="m127r113" id="m127r113" style="width:99px; top:1123px; left:346px;"/>
-<input type="text" name="m127r213" id="m127r213" style="width:66px; top:1123px; left:459px;"/>
-<input type="text" name="m127r313" id="m127r313" style="width:66px; top:1123px; left:538px;"/>
-<input type="text" name="m127r413" id="m127r413" style="width:66px; top:1123px; left:617px;"/>
-<input type="text" name="m127r513" id="m127r513" style="width:102px; top:1123px; left:697px;"/>
-<input type="text" name="m127r613" id="m127r613" style="width:77px; top:1123px; left:813px;"/>
-<input type="text" name="m127r014" id="m127r014" style="width:248px; top:1151px; left:51px;"/>
-<input type="text" name="m127r114" id="m127r114" style="width:99px; top:1151px; left:346px;"/>
-<input type="text" name="m127r214" id="m127r214" style="width:66px; top:1151px; left:459px;"/>
-<input type="text" name="m127r314" id="m127r314" style="width:66px; top:1151px; left:538px;"/>
-<input type="text" name="m127r414" id="m127r414" style="width:66px; top:1151px; left:617px;"/>
-<input type="text" name="m127r514" id="m127r514" style="width:102px; top:1151px; left:697px;"/>
-<input type="text" name="m127r614" id="m127r614" style="width:77px; top:1151px; left:813px;"/>
-<input type="text" name="m127r015" id="m127r015" style="width:248px; top:1178px; left:51px;"/>
-<input type="text" name="m127r115" id="m127r115" style="width:99px; top:1178px; left:346px;"/>
-<input type="text" name="m127r215" id="m127r215" style="width:66px; top:1178px; left:459px;"/>
-<input type="text" name="m127r315" id="m127r315" style="width:66px; top:1178px; left:538px;"/>
-<input type="text" name="m127r415" id="m127r415" style="width:66px; top:1178px; left:617px;"/>
-<input type="text" name="m127r515" id="m127r515" style="width:102px; top:1178px; left:697px;"/>
-<input type="text" name="m127r615" id="m127r615" style="width:77px; top:1178px; left:813px;"/>
-<span class="text-echo" style="top:1211px; right:422px;"><?php echo $m127r299; ?></span>
-<span class="text-echo" style="top:1211px; right:343px;"><?php echo $m127r399; ?></span>
-<span class="text-echo" style="top:1211px; right:264px;"><?php echo $m127r499; ?></span>
-<span class="text-echo" style="top:1211px; right:148px;"><?php echo $m127r599; ?></span>
-<span class="text-echo" style="top:1211px; right:58px;"><?php echo $m127r699; ?></span>
-<?php                                         } ?>
-
-
-<?php if ( $strana == 13 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str13.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 13.strana 207kB">
-<span class="text-echo" style="top:75px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
-<!-- modul 128 -->
-<input type="text" name="m128r101" id="m128r101" style="width:76px; top:313px; left:437px;"/>
-<input type="text" name="m128r201" id="m128r201" style="width:78px; top:313px; left:526px;"/>
-<input type="text" name="m128r301" id="m128r301" style="width:66px; top:313px; left:617px;"/>
-<input type="text" name="m128r401" id="m128r401" style="width:102px; top:313px; left:697px;"/>
-<input type="text" name="m128r501" id="m128r501" style="width:76px; top:313px; left:813px;"/>
-<input type="text" name="m128r102" id="m128r102" style="width:76px; top:345px; left:437px;"/>
-<input type="text" name="m128r202" id="m128r202" style="width:78px; top:345px; left:526px;"/>
-<input type="text" name="m128r302" id="m128r302" style="width:66px; top:345px; left:617px;"/>
-<input type="text" name="m128r402" id="m128r402" style="width:102px; top:345px; left:697px;"/>
-<input type="text" name="m128r502" id="m128r502" style="width:76px; top:345px; left:813px;"/>
-<input type="text" name="m128r103" id="m128r103" style="width:76px; top:380px; left:437px;"/>
-<input type="text" name="m128r203" id="m128r203" style="width:78px; top:380px; left:526px;"/>
-<input type="text" name="m128r303" id="m128r303" style="width:66px; top:380px; left:617px;"/>
-<input type="text" name="m128r403" id="m128r403" style="width:102px; top:380px; left:697px;"/>
-<input type="text" name="m128r503" id="m128r503" style="width:76px; top:380px; left:813px;"/>
-<input type="text" name="m128r104" id="m128r104" style="width:76px; top:414px; left:437px;"/>
-<input type="text" name="m128r204" id="m128r204" style="width:78px; top:414px; left:526px;"/>
-<input type="text" name="m128r304" id="m128r304" style="width:66px; top:414px; left:617px;"/>
-<input type="text" name="m128r404" id="m128r404" style="width:102px; top:414px; left:697px;"/>
-<input type="text" name="m128r504" id="m128r504" style="width:76px; top:414px; left:813px;"/>
-<input type="text" name="m128r105" id="m128r105" style="width:76px; top:448px; left:437px;"/>
-<input type="text" name="m128r205" id="m128r205" style="width:78px; top:448px; left:526px;"/>
-<input type="text" name="m128r305" id="m128r305" style="width:66px; top:448px; left:617px;"/>
-<input type="text" name="m128r405" id="m128r405" style="width:102px; top:448px; left:697px;"/>
-<input type="text" name="m128r505" id="m128r505" style="width:76px; top:448px; left:813px;"/>
-<input type="text" name="m128r106" id="m128r106" style="width:76px; top:482px; left:437px;"/>
-<input type="text" name="m128r206" id="m128r206" style="width:78px; top:482px; left:526px;"/>
-<input type="text" name="m128r306" id="m128r306" style="width:66px; top:482px; left:617px;"/>
-<input type="text" name="m128r406" id="m128r406" style="width:102px; top:482px; left:697px;"/>
-<input type="text" name="m128r506" id="m128r506" style="width:76px; top:482px; left:813px;"/>
-<input type="text" name="m128r107" id="m128r107" style="width:76px; top:517px; left:437px;"/>
-<input type="text" name="m128r207" id="m128r207" style="width:78px; top:517px; left:526px;"/>
-<input type="text" name="m128r307" id="m128r307" style="width:66px; top:517px; left:617px;"/>
-<input type="text" name="m128r407" id="m128r407" style="width:102px; top:517px; left:697px;"/>
-<input type="text" name="m128r507" id="m128r507" style="width:76px; top:517px; left:813px;"/>
-<input type="text" name="m128r108" id="m128r108" style="width:76px; top:551px; left:437px;"/>
-<input type="text" name="m128r208" id="m128r208" style="width:78px; top:551px; left:526px;"/>
-<input type="text" name="m128r308" id="m128r308" style="width:66px; top:551px; left:617px;"/>
-<input type="text" name="m128r408" id="m128r408" style="width:102px; top:551px; left:697px;"/>
-<input type="text" name="m128r508" id="m128r508" style="width:76px; top:551px; left:813px;"/>
-<input type="text" name="m128r109" id="m128r109" style="width:76px; top:583px; left:437px;"/>
-<input type="text" name="m128r209" id="m128r209" style="width:78px; top:583px; left:526px;"/>
-<input type="text" name="m128r309" id="m128r309" style="width:66px; top:583px; left:617px;"/>
-<input type="text" name="m128r409" id="m128r409" style="width:102px; top:583px; left:697px;"/>
-<input type="text" name="m128r509" id="m128r509" style="width:76px; top:583px; left:813px;"/>
-<input type="text" name="m128r110" id="m128r110" style="width:76px; top:615px; left:437px;"/>
-<input type="text" name="m128r210" id="m128r210" style="width:78px; top:615px; left:526px;"/>
-<input type="text" name="m128r310" id="m128r310" style="width:66px; top:615px; left:617px;"/>
-<input type="text" name="m128r410" id="m128r410" style="width:102px; top:615px; left:697px;"/>
-<input type="text" name="m128r510" id="m128r510" style="width:76px; top:615px; left:813px;"/>
-<input type="text" name="m128r111" id="m128r111" style="width:76px; top:646px; left:437px;"/>
-<input type="text" name="m128r211" id="m128r211" style="width:78px; top:646px; left:526px;"/>
-<input type="text" name="m128r311" id="m128r311" style="width:66px; top:646px; left:617px;"/>
-<input type="text" name="m128r411" id="m128r411" style="width:102px; top:646px; left:697px;"/>
-<input type="text" name="m128r511" id="m128r511" style="width:76px; top:646px; left:813px;"/>
-<span class="text-echo" style="top:684px; right:433px;"><?php echo $m128r199; ?></span>
-<span class="text-echo" style="top:684px; right:343px;"><?php echo $m128r299; ?></span>
-<span class="text-echo" style="top:684px; right:263px;"><?php echo $m128r399; ?></span>
-<span class="text-echo" style="top:684px; right:148px;"><?php echo $m128r499; ?></span>
-<span class="text-echo" style="top:684px; right:57px;"><?php echo $m128r599; ?></span>
+<input type="text" name="m474r106" id="m474r106" style="width:108px; top:431px; left:528px;"/>
+<input type="text" name="m474r206" id="m474r206" style="width:109px; top:431px; left:652px;"/>
+<input type="text" name="m474r306" id="m474r306" style="width:113px; top:431px; left:776px;"/>
+<input type="text" name="m474r207" id="m474r207" style="width:109px; top:458px; left:652px;"/>
+<input type="text" name="m474r307" id="m474r307" style="width:113px; top:458px; left:776px;"/>
+<span class="text-echo" style="top:489px; right:310px;"><?php echo $m474r199; ?></span>
+<span class="text-echo" style="top:489px; right:185px;"><?php echo $m474r299; ?></span>
+<span class="text-echo" style="top:489px; right:58px;"><?php echo $m474r399; ?></span>
 <?php                                         } ?>
 
 <div class="navbar">
@@ -6207,8 +4671,6 @@ $sknace=str_replace(".", "", $fir_sknace);
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=11', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=12', '_self');" class="<?php echo $clas12; ?> toleft">12</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=13', '_self');" class="<?php echo $clas13; ?> toleft">13</a>
- <!-- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=14', '_self');" class="<?php echo $clas14; ?> toleft">14</a> -->
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
 </div>
 
@@ -6279,9 +4741,9 @@ $pdf->Cell(7,7,"$E","$rmc",0,"C");$pdf->Cell(8,7,"$F","$rmc",0,"C");
 $pdf->Cell(7,7,"$G","$rmc",0,"C");$pdf->Cell(8,7,"$H","$rmc",1,"C");
 
 //ORGANIZACIA
-$pdf->Cell(190,122," ","$rmc1",1,"L");
-$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(153,4,"$fir_fnaz","$rmc",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(153,6,"$fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",0,"L");$pdf->Cell(34,4,"$okres","$rmc",1,"C");
+$pdf->Cell(190,121," ","$rmc1",1,"L");
+$pdf->Cell(1,4," ","$rmc1",0,"L");$pdf->Cell(153,4,"$fir_fnaz, $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc","$rmc",0,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(34,6,"$okres","$rmc",1,"C");
 //SKNACE
 $text=$sknace;
 $A=substr($text,0,1);
@@ -6289,7 +4751,7 @@ $B=substr($text,1,1);
 $C=substr($text,2,1);
 $D=substr($text,3,1);
 $E=substr($text,4,1);
-$pdf->Cell(190,8," ","$rmc1",1,"L");
+$pdf->Cell(190,6," ","$rmc1",1,"L");
 $pdf->Cell(1,6," ","$rmc1",0,"L");$pdf->Cell(95,7,"$hlavicka->cinnost","$rmc",0,"L");
 $pdf->Cell(1,6," ","$rmc1",0,"L");
 $pdf->Cell(10,8,"$A","$rmc",0,"C");$pdf->Cell(9,8,"$B","$rmc",0,"C");
@@ -6297,13 +4759,13 @@ $pdf->Cell(10,8,"$C","$rmc",0,"C");$pdf->Cell(9,8,"$D","$rmc",0,"C");
 $pdf->Cell(10,8,"$E","$rmc",1,"C");
 
 //VYPLNIL
-$pdf->Cell(195,11," ","$rmc1",1,"L");
+$pdf->Cell(195,10," ","$rmc1",1,"L");
 $pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(73,6,"$fir_mzdt05","$rmc",0,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(43,14,"$fir_mzdt04","$rmc",1,"L");
-$pdf->Cell(195,1," ","$rmc1",1,"L");
-$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(72,6,"$fir_fem1","$rmc",0,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(43,12,"$fir_mzdt04","$rmc",1,"L");
+$pdf->Cell(195,2," ","$rmc1",1,"L");
+$pdf->Cell(1,5," ","$rmc1",0,"L");$pdf->Cell(72,7,"$fir_fem1","$rmc",0,"L");
 //odoslane
-$pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(43,6,"$odoslane_sk","$rmc",1,"L");
+$pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(43,7,"$odoslane_sk","$rmc",1,"L");
                                        }
 
 if ( $strana == 2 OR $strana == 9999 ) {
@@ -6326,7 +4788,7 @@ $E=substr($fir_ficox,4,1);
 $F=substr($fir_ficox,5,1);
 $G=substr($fir_ficox,6,1);
 $H=substr($fir_ficox,7,1);
-$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(190,2," ","$rmc1",1,"L");
 $pdf->Cell(94,7," ","$rmc1",0,"L");
 $pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");
 $pdf->Cell(7,6,"$C","$rmc",0,"C");$pdf->Cell(8,6,"$D","$rmc",0,"C");
@@ -6334,14 +4796,14 @@ $pdf->Cell(7,6,"$E","$rmc",0,"C");$pdf->Cell(8,6,"$F","$rmc",0,"C");
 $pdf->Cell(7,6,"$G","$rmc",0,"C");$pdf->Cell(8,6,"$H","$rmc",1,"C");
 
 //modul 100315
-$pdf->Cell(195,35," ","$rmc1",1,"L");
+$pdf->Cell(195,36," ","$rmc1",1,"L");
 $pdf->Cell(79,5," ","$rmc1",0,"L");$pdf->Cell(110,7,"$cinnost","$rmc",1,"C");
 $pdf->Cell(79,5," ","$rmc1",0,"L");$pdf->Cell(110,6,"$fir_sknace","$rmc",1,"C");
 
 //modul 2
 $mod2r01=$hlavicka->mod2r01; if ( $mod2r01 == 0 ) $mod2r01="";
 $mod2r02=$hlavicka->mod2r02; if ( $mod2r02 == 0 ) $mod2r02="";
-$pdf->Cell(195,33," ","$rmc1",1,"L");
+$pdf->Cell(195,32," ","$rmc1",1,"L");
 $pdf->Cell(134,5," ","$rmc1",0,"C");$pdf->Cell(55,9,"$mod2r01","$rmc",1,"C");
 $pdf->Cell(134,5," ","$rmc1",0,"C");$pdf->Cell(55,8,"$mod2r02","$rmc",1,"C");
 
@@ -6350,9 +4812,9 @@ $mod100041ano=" ";
 $mod100041nie=" ";
 if ( $hlavicka->mod100041ano == 1 ) { $mod100041ano="x"; }
 if ( $hlavicka->mod100041nie == 1 ) { $mod100041nie="x"; }
-$pdf->Cell(190,18," ","$rmc1",1,"L");
+$pdf->Cell(190,19," ","$rmc1",1,"L");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$mod100041ano","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$mod100041nie","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$mod100041nie","$rmc",1,"C");
 
 //modul 100042
 $mod100042ano=" ";
@@ -6368,15 +4830,15 @@ $mod100043ano=" ";
 $mod100043nie=" ";
 if ( $hlavicka->mod100043ano == 1 ) { $mod100043ano="x"; }
 if ( $hlavicka->mod100043nie == 1 ) { $mod100043nie="x"; }
-$pdf->Cell(190,12," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$mod100043ano","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$mod100043nie","$rmc",1,"C");
+$pdf->Cell(190,13," ","$rmc1",1,"L");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$mod100043ano","$rmc",1,"C");
+$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$mod100043nie","$rmc",1,"C");
 
 //modul 100038
 $pdf->SetFont('arial','',10);
 $mod100038=$hlavicka->mod100038;
 if ( $hlavicka->mod100038 == 0 ) $mod100038="";
-$pdf->Cell(190,13," ","$rmc1",1,"L");
+$pdf->Cell(190,12.5," ","$rmc1",1,"L");
 $pdf->Cell(132,6," ","$rmc1",0,"L");$pdf->Cell(57,5,"$mod100038","$rmc",1,"C");
 
 //modul 100039
@@ -6418,7 +4880,7 @@ if ( File_Exists($jpg_cesta.'_str3.jpg') AND $i == 0 )
 {
 $pdf->Image($jpg_cesta.'_str3.jpg',0,0,210,297);
 }
-$pdf->SetY(8);
+$pdf->SetY(10);
 
 //ico
 $A=substr($fir_ficox,0,1);
@@ -6503,7 +4965,7 @@ if ( File_Exists($jpg_cesta.'_str4.jpg') AND $i == 0 )
 {
 $pdf->Image($jpg_cesta.'_str4.jpg',0,0,210,297);
 }
-$pdf->SetY(9);
+$pdf->SetY(10);
 
 //ico
 $A=substr($fir_ficox,0,1);
@@ -6530,7 +4992,7 @@ $m405r05=$hlavicka->m405r05; if ( $m405r05 == 0 ) $m405r05="";
 $m405r06=$hlavicka->m405r06; if ( $m405r06 == 0 ) $m405r06="";
 $m405r99=$hlavicka->m405r99;
 //if ( $m405r99 == 0 ) $m405r99="";
-$pdf->Cell(195,23.5," ","$rmc1",1,"L");
+$pdf->Cell(195,25," ","$rmc1",1,"L");
 $pdf->Cell(131,5," ","$rmc1",0,"C");$pdf->Cell(57,6,"$m405r01","$rmc",1,"R");
 $pdf->Cell(131,5," ","$rmc1",0,"C");$pdf->Cell(57,6,"$m405r02","$rmc",1,"R");
 $pdf->Cell(131,5," ","$rmc1",0,"C");$pdf->Cell(57,5,"$m405r03","$rmc",1,"R");
@@ -6549,10 +5011,10 @@ $m558r06=$hlavicka->m558r06; if ( $m558r06 == 0 ) $m558r06="";
 $m558r07=$hlavicka->m558r07; if ( $m558r07 == 0 ) $m558r07="";
 $m558r99=$hlavicka->m558r99;
 //if ( $m558r99 == 0 ) $m558r99="";
-$pdf->Cell(195,34," ","$rmc1",1,"L");
+$pdf->Cell(195,31," ","$rmc1",1,"L");
 $pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(74,6,"$m558r01","$rmc",1,"R");
 $pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(74,6,"$m558r02","$rmc",1,"R");
-$pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(74,6,"$m558r03","$rmc",1,"R");
+$pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(74,5,"$m558r03","$rmc",1,"R");
 $pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(74,6,"$m558r04","$rmc",1,"R");
 $pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(74,6,"$m558r05","$rmc",1,"R");
 $pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(74,6,"$m558r06","$rmc",1,"R");
@@ -6568,7 +5030,7 @@ $m580r199=$hlavicka->m580r199;
 //if ( $m580r199 == 0 ) $m580r199="";
 $m580r299=$hlavicka->m580r299;
 //if ( $m580r299 == 0 ) $m580r299="";
-$pdf->Cell(195,38," ","$rmc1",1,"L");
+$pdf->Cell(195,38.5," ","$rmc1",1,"L");
 $pdf->Cell(114,5," ","$rmc1",0,"C");
 $pdf->Cell(37,6,"$m580r11","$rmc",0,"R");$pdf->Cell(37,6,"$m580r21","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");
@@ -6611,7 +5073,7 @@ if ( File_Exists($jpg_cesta.'_str5.jpg') AND $i == 0 )
 {
 $pdf->Image($jpg_cesta.'_str5.jpg',0,0,210,297);
 }
-$pdf->SetY(10);
+$pdf->SetY(8);
 
 //ico
 $A=substr($fir_ficox,0,1);
@@ -6622,7 +5084,7 @@ $E=substr($fir_ficox,4,1);
 $F=substr($fir_ficox,5,1);
 $G=substr($fir_ficox,6,1);
 $H=substr($fir_ficox,7,1);
-$pdf->Cell(190,1," ","$rmc1",1,"L");
+$pdf->Cell(190,2," ","$rmc1",1,"L");
 $pdf->Cell(94,7," ","$rmc1",0,"L");
 $pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");
 $pdf->Cell(7,6,"$C","$rmc",0,"C");$pdf->Cell(8,6,"$D","$rmc",0,"C");
@@ -6638,9 +5100,9 @@ $m585r05=$hlavicka->m585r05; if ( $m585r05 == 0 ) $m585r05="";
 $m585r3k=$hlavicka->m585r3k;
 $m585r4k=$hlavicka->m585r4k;
 $m585r5k=$hlavicka->m585r5k;
-$pdf->Cell(195,75," ","$rmc1",1,"L");
+$pdf->Cell(195,75.5," ","$rmc1",1,"L");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6.5,"$m585r01","$rmc",1,"L");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,8,"$m585r02","$rmc",1,"L");
+$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,8.5,"$m585r02","$rmc",1,"L");
 $pdf->Cell(78,6,"","$rmc1",0,"L");$pdf->Cell(27,6,"$m585r3k","$rmc",0,"L");
 $pdf->Cell(9,6,"","$rmc1",0,"L");$pdf->Cell(75,6,"$m585r03","$rmc",1,"L");
 $pdf->Cell(78,6,"","$rmc1",0,"L");$pdf->Cell(27,6,"$m585r4k","$rmc",0,"L");
@@ -6847,7 +5309,7 @@ $m516r213=$hlavicka->m516r213; if ( $m516r213 == 0 ) $m516r213="";
 $m516r214=$hlavicka->m516r214; if ( $m516r214 == 0 ) $m516r214="";
 $m516r299=$hlavicka->m516r299;
 //if ( $m516r299 == 0 ) $m516r299="";
-$pdf->Cell(195,31," ","$rmc1",1,"L");
+$pdf->Cell(195,33," ","$rmc1",1,"L");
 $pdf->Cell(114,5," ","$rmc1",0,"C");
 $pdf->Cell(37,5,"$m516r101","$rmc",0,"R");$pdf->Cell(38,5,"$m516r201","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");
@@ -7029,7 +5491,7 @@ $E=substr($fir_ficox,4,1);
 $F=substr($fir_ficox,5,1);
 $G=substr($fir_ficox,6,1);
 $H=substr($fir_ficox,7,1);
-$pdf->Cell(190,0," ","$rmc1",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
 $pdf->Cell(94,7," ","$rmc1",0,"L");
 $pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");
 $pdf->Cell(7,6,"$C","$rmc",0,"C");$pdf->Cell(8,6,"$D","$rmc",0,"C");
@@ -7041,7 +5503,7 @@ $m100301r1=" ";
 $m100301r2=" ";
 if ( $hlavicka->m100301r1 == 1 ) { $m100301r1="x"; }
 if ( $hlavicka->m100301r2 == 1 ) { $m100301r2="x"; }
-$pdf->Cell(190,7.5," ","$rmc1",1,"L");
+$pdf->Cell(190,8.5," ","$rmc1",1,"L");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m100301r1","$rmc",1,"C");
 $pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m100301r2","$rmc",1,"C");
 
@@ -7156,7 +5618,7 @@ $E=substr($fir_ficox,4,1);
 $F=substr($fir_ficox,5,1);
 $G=substr($fir_ficox,6,1);
 $H=substr($fir_ficox,7,1);
-$pdf->Cell(190,0," ","$rmc1",1,"L");
+$pdf->Cell(190,1," ","$rmc1",1,"L");
 $pdf->Cell(94,7," ","$rmc1",0,"L");
 $pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");
 $pdf->Cell(7,6,"$C","$rmc",0,"C");$pdf->Cell(8,6,"$D","$rmc",0,"C");
@@ -7168,7 +5630,7 @@ $m179r01=$hlavicka->m179r01; if ( $m179r01 == 0 ) $m179r01="";
 $m179r02=$hlavicka->m179r02; if ( $m179r02 == 0 ) $m179r02="";
 $m179r99=$hlavicka->m179r99;
 //if ( $m179r99 == 0 ) $m179r99="";
-$pdf->Cell(195,29," ","$rmc1",1,"L");
+$pdf->Cell(195,30," ","$rmc1",1,"L");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(74,7,"$m179r01","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(74,6,"$m179r02","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(74,7,"$m179r99","$rmc",1,"R");
@@ -7303,7 +5765,7 @@ if ( File_Exists($jpg_cesta.'_str9.jpg') AND $i == 0 )
 {
 $pdf->Image($jpg_cesta.'_str9.jpg',0,0,210,297);
 }
-$pdf->SetY(9);
+$pdf->SetY(10);
 
 //ico
 $A=substr($fir_ficox,0,1);
@@ -7368,7 +5830,7 @@ $m184r309=$hlavicka->m184r309; if ( $m184r309 == 0 ) $m184r309="";
 $m184r310=$hlavicka->m184r310; if ( $m184r310 == 0 ) $m184r310="";
 $m184r399=$hlavicka->m184r399;
 //if ( $m184r399 == 0 ) $m184r399="";
-$pdf->Cell(195,36," ","$rmc1",1,"L");
+$pdf->Cell(195,37," ","$rmc1",1,"L");
 $pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(59,7,"$m184r001","$rmc",0,"L");
 $pdf->Cell(9,5," ","$rmc1",0,"C");$pdf->Cell(29,7,"$m184r101","$rmc",0,"C");
 $pdf->Cell(45,7,"$m184r201","$rmc",0,"R");$pdf->Cell(46,7,"$m184r301","$rmc",1,"R");
@@ -7451,9 +5913,9 @@ $pdf->Cell(45,6,"$m185r203","$rmc",0,"R");$pdf->Cell(46,6,"$m185r303","$rmc",1,"
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(59,6,"$m185r004","$rmc",0,"L");
 $pdf->Cell(9,6," ","$rmc1",0,"C");$pdf->Cell(29,6,"$m185r104","$rmc",0,"C");
 $pdf->Cell(45,6,"$m185r204","$rmc",0,"R");$pdf->Cell(46,6,"$m185r304","$rmc",1,"R");
-$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(59,7,"$m185r005","$rmc",0,"L");
-$pdf->Cell(9,7," ","$rmc1",0,"C");$pdf->Cell(29,7,"$m185r105","$rmc",0,"C");
-$pdf->Cell(45,7,"$m185r205","$rmc",0,"R");$pdf->Cell(46,7,"$m185r305","$rmc",1,"R");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(59,6,"$m185r005","$rmc",0,"L");
+$pdf->Cell(9,6," ","$rmc1",0,"C");$pdf->Cell(29,6,"$m185r105","$rmc",0,"C");
+$pdf->Cell(45,6,"$m185r205","$rmc",0,"R");$pdf->Cell(46,6,"$m185r305","$rmc",1,"R");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(59,6,"$m185r006","$rmc",0,"L");
 $pdf->Cell(9,6," ","$rmc1",0,"C");$pdf->Cell(29,6,"$m185r106","$rmc",0,"C");
 $pdf->Cell(45,6,"$m185r206","$rmc",0,"R");$pdf->Cell(46,6,"$m185r306","$rmc",1,"R");
@@ -7474,7 +5936,7 @@ if ( File_Exists($jpg_cesta.'_str10.jpg') AND $i == 0 )
 {
 $pdf->Image($jpg_cesta.'_str10.jpg',0,0,210,297);
 }
-$pdf->SetY(9);
+$pdf->SetY(10);
 
 //ico
 $A=substr($fir_ficox,0,1);
@@ -7532,9 +5994,9 @@ $pdf->Cell(45,7,"$m186r201","$rmc",0,"R");$pdf->Cell(46,7,"$m186r301","$rmc",1,"
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(59,6,"$m186r002","$rmc",0,"L");
 $pdf->Cell(9,6," ","$rmc1",0,"C");$pdf->Cell(29,6,"$m186r102","$rmc",0,"C");
 $pdf->Cell(45,6,"$m186r202","$rmc",0,"R");$pdf->Cell(46,6,"$m186r302","$rmc",1,"R");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(59,6,"$m186r003","$rmc",0,"L");
-$pdf->Cell(9,6," ","$rmc1",0,"C");$pdf->Cell(29,6,"$m186r103","$rmc",0,"C");
-$pdf->Cell(45,6,"$m186r203","$rmc",0,"R");$pdf->Cell(46,6,"$m186r303","$rmc",1,"R");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(59,6.5,"$m186r003","$rmc",0,"L");
+$pdf->Cell(9,6," ","$rmc1",0,"C");$pdf->Cell(29,6.5,"$m186r103","$rmc",0,"C");
+$pdf->Cell(45,6.5,"$m186r203","$rmc",0,"R");$pdf->Cell(46,6.5,"$m186r303","$rmc",1,"R");
 $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(59,7,"$m186r004","$rmc",0,"L");
 $pdf->Cell(9,7," ","$rmc1",0,"C");$pdf->Cell(29,7,"$m186r104","$rmc",0,"C");
 $pdf->Cell(45,7,"$m186r204","$rmc",0,"R");$pdf->Cell(46,7,"$m186r304","$rmc",1,"R");
@@ -7579,7 +6041,7 @@ if ( File_Exists($jpg_cesta.'_str11.jpg') AND $i == 0 )
 {
 $pdf->Image($jpg_cesta.'_str11.jpg',0,0,297,210);
 }
-$pdf->SetY(9);
+$pdf->SetY(10);
 
 //ico
 $A=substr($fir_ficox,0,1);
@@ -7591,7 +6053,7 @@ $F=substr($fir_ficox,5,1);
 $G=substr($fir_ficox,6,1);
 $H=substr($fir_ficox,7,1);
 $pdf->Cell(190,0," ","$rmc1",1,"L");
-$pdf->Cell(182,7," ","$rmc1",0,"L");
+$pdf->Cell(180,7," ","$rmc1",0,"L");
 $pdf->Cell(7,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");
 $pdf->Cell(7,6,"$C","$rmc",0,"C");$pdf->Cell(8,6,"$D","$rmc",0,"C");
 $pdf->Cell(7,6,"$E","$rmc",0,"C");$pdf->Cell(8,6,"$F","$rmc",0,"C");
@@ -7642,27 +6104,27 @@ $pdf->Cell(195,57," ","$rmc1",1,"L");
 $pdf->Cell(61,8," ","$rmc1",0,"C");$pdf->Cell(17,8,"$m527r101","$rmc",0,"R");
 $pdf->Cell(25,8,"$m527r201","$rmc",0,"R");$pdf->Cell(20,8,"$m527r301","$rmc",0,"R");
 $pdf->Cell(20,8,"$m527r401","$rmc",0,"R");$pdf->Cell(25,8,"$m527r501","$rmc",0,"R");
-$pdf->Cell(23,8,"$m527r601","$rmc",0,"R");$pdf->Cell(22,8,"$m527r701","$rmc",0,"R");
-$pdf->Cell(23,8,"$m527r801","$rmc",0,"R");$pdf->Cell(22,8,"$m527r901","$rmc",0,"R");
+$pdf->Cell(22,8,"$m527r601","$rmc",0,"R");$pdf->Cell(23,8,"$m527r701","$rmc",0,"R");
+$pdf->Cell(22,8,"$m527r801","$rmc",0,"R");$pdf->Cell(23,8,"$m527r901","$rmc",0,"R");
 $pdf->Cell(18,8,"$m527r1001","$rmc",1,"R");
-$pdf->Cell(61,8," ","$rmc1",0,"C");$pdf->Cell(17,8,"$m527r102","$rmc",0,"R");
-$pdf->Cell(25,8,"$m527r202","$rmc",0,"R");$pdf->Cell(20,8,"$m527r302","$rmc",0,"R");
-$pdf->Cell(20,8,"$m527r402","$rmc",0,"R");$pdf->Cell(25,8,"$m527r502","$rmc",0,"R");
-$pdf->Cell(23,8,"$m527r602","$rmc",0,"R");$pdf->Cell(22,8,"$m527r702","$rmc",0,"R");
-$pdf->Cell(23,8,"$m527r802","$rmc",0,"R");$pdf->Cell(22,8,"$m527r902","$rmc",0,"R");
-$pdf->Cell(18,8,"$m527r1002","$rmc",1,"R");
-$pdf->Cell(61,7," ","$rmc1",0,"C");$pdf->Cell(17,7,"$m527r103","$rmc",0,"R");
-$pdf->Cell(25,7,"$m527r203","$rmc",0,"R");$pdf->Cell(20,7,"$m527r303","$rmc",0,"R");
-$pdf->Cell(20,7,"$m527r403","$rmc",0,"R");$pdf->Cell(25,7,"$m527r503","$rmc",0,"R");
-$pdf->Cell(23,7,"$m527r603","$rmc",0,"R");$pdf->Cell(22,7,"$m527r703","$rmc",0,"R");
-$pdf->Cell(23,7,"$m527r803","$rmc",0,"R");$pdf->Cell(22,7,"$m527r903","$rmc",0,"R");
-$pdf->Cell(18,7,"$m527r1003","$rmc",1,"R");
-$pdf->Cell(61,8," ","$rmc1",0,"C");$pdf->Cell(17,8,"$m527r104","$rmc",0,"R");
-$pdf->Cell(25,8,"$m527r204","$rmc",0,"R");$pdf->Cell(20,8,"$m527r304","$rmc",0,"R");
-$pdf->Cell(20,8,"$m527r404","$rmc",0,"R");$pdf->Cell(25,8,"$m527r504","$rmc",0,"R");
-$pdf->Cell(23,8,"$m527r604","$rmc",0,"R");$pdf->Cell(22,8,"$m527r704","$rmc",0,"R");
-$pdf->Cell(23,8,"$m527r804","$rmc",0,"R");$pdf->Cell(22,8,"$m527r904","$rmc",0,"R");
-$pdf->Cell(18,8,"$m527r1004","$rmc",1,"R");
+$pdf->Cell(61,8," ","$rmc1",0,"C");$pdf->Cell(17,7,"$m527r102","$rmc",0,"R");
+$pdf->Cell(25,7,"$m527r202","$rmc",0,"R");$pdf->Cell(20,7,"$m527r302","$rmc",0,"R");
+$pdf->Cell(20,7,"$m527r402","$rmc",0,"R");$pdf->Cell(25,7,"$m527r502","$rmc",0,"R");
+$pdf->Cell(22,7,"$m527r602","$rmc",0,"R");$pdf->Cell(23,7,"$m527r702","$rmc",0,"R");
+$pdf->Cell(22,7,"$m527r802","$rmc",0,"R");$pdf->Cell(23,7,"$m527r902","$rmc",0,"R");
+$pdf->Cell(18,7,"$m527r1002","$rmc",1,"R");
+$pdf->Cell(61,6," ","$rmc1",0,"C");$pdf->Cell(17,6,"$m527r103","$rmc",0,"R");
+$pdf->Cell(25,6,"$m527r203","$rmc",0,"R");$pdf->Cell(20,6,"$m527r303","$rmc",0,"R");
+$pdf->Cell(20,6,"$m527r403","$rmc",0,"R");$pdf->Cell(25,6,"$m527r503","$rmc",0,"R");
+$pdf->Cell(22,6,"$m527r603","$rmc",0,"R");$pdf->Cell(23,6,"$m527r703","$rmc",0,"R");
+$pdf->Cell(22,6,"$m527r803","$rmc",0,"R");$pdf->Cell(23,6,"$m527r903","$rmc",0,"R");
+$pdf->Cell(18,6,"$m527r1003","$rmc",1,"R");
+$pdf->Cell(61,8," ","$rmc1",0,"C");$pdf->Cell(17,7,"$m527r104","$rmc",0,"R");
+$pdf->Cell(25,7,"$m527r204","$rmc",0,"R");$pdf->Cell(20,7,"$m527r304","$rmc",0,"R");
+$pdf->Cell(20,7,"$m527r404","$rmc",0,"R");$pdf->Cell(25,7,"$m527r504","$rmc",0,"R");
+$pdf->Cell(22,7,"$m527r604","$rmc",0,"R");$pdf->Cell(23,7,"$m527r704","$rmc",0,"R");
+$pdf->Cell(22,7,"$m527r804","$rmc",0,"R");$pdf->Cell(23,7,"$m527r904","$rmc",0,"R");
+$pdf->Cell(18,7,"$m527r1004","$rmc",1,"R");
                                         }
 
 if ( $strana == 12 OR $strana == 9999 ) {
@@ -7720,365 +6182,23 @@ $m474r306=$hlavicka->m474r306; if ( $m474r306 == 0 ) $m474r306="";
 $m474r307=$hlavicka->m474r307; if ( $m474r307 == 0 ) $m474r307="";
 $m474r399=$hlavicka->m474r399;
 //if ( $m474r399 == 0 ) $m474r399="";
-$pdf->Cell(195,40," ","$rmc1",1,"L");
-$pdf->Cell(106,5," ","$rmc1",0,"C");$pdf->Cell(27,8,"$m474r101","$rmc",0,"R");
-$pdf->Cell(28,8,"$m474r201","$rmc",0,"R");$pdf->Cell(28,8,"$m474r301","$rmc",1,"R");
-$pdf->Cell(106,7," ","$rmc1",0,"C");$pdf->Cell(27,7,"$m474r102","$rmc",0,"R");
-$pdf->Cell(28,7,"$m474r202","$rmc",0,"R");$pdf->Cell(28,7,"$m474r302","$rmc",1,"R");
-$pdf->Cell(106,5," ","$rmc1",0,"C");$pdf->Cell(27,8,"$m474r103","$rmc",0,"R");
-$pdf->Cell(28,8,"$m474r203","$rmc",0,"R");$pdf->Cell(28,8,"$m474r303","$rmc",1,"R");
-$pdf->Cell(106,7," ","$rmc1",0,"C");$pdf->Cell(27,7,"$m474r104","$rmc",0,"R");
-$pdf->Cell(28,7,"$m474r204","$rmc",0,"R");$pdf->Cell(28,7,"$m474r304","$rmc",1,"R");
-$pdf->Cell(106,8," ","$rmc1",0,"C");$pdf->Cell(27,8,"$m474r105","$rmc",0,"R");
-$pdf->Cell(28,8,"$m474r205","$rmc",0,"R");$pdf->Cell(28,8,"$m474r305","$rmc",1,"R");
+$pdf->Cell(195,45," ","$rmc1",1,"L");
+$pdf->Cell(106,5," ","$rmc1",0,"C");$pdf->Cell(27,7,"$m474r101","$rmc",0,"R");
+$pdf->Cell(28,7,"$m474r201","$rmc",0,"R");$pdf->Cell(28,7,"$m474r301","$rmc",1,"R");
+$pdf->Cell(106,6," ","$rmc1",0,"C");$pdf->Cell(27,6,"$m474r102","$rmc",0,"R");
+$pdf->Cell(28,6,"$m474r202","$rmc",0,"R");$pdf->Cell(28,6,"$m474r302","$rmc",1,"R");
+$pdf->Cell(106,5," ","$rmc1",0,"C");$pdf->Cell(27,6,"$m474r103","$rmc",0,"R");
+$pdf->Cell(28,6,"$m474r203","$rmc",0,"R");$pdf->Cell(28,6,"$m474r303","$rmc",1,"R");
+$pdf->Cell(106,6," ","$rmc1",0,"C");$pdf->Cell(27,6,"$m474r104","$rmc",0,"R");
+$pdf->Cell(28,6,"$m474r204","$rmc",0,"R");$pdf->Cell(28,6,"$m474r304","$rmc",1,"R");
+$pdf->Cell(106,6," ","$rmc1",0,"C");$pdf->Cell(27,6,"$m474r105","$rmc",0,"R");
+$pdf->Cell(28,6,"$m474r205","$rmc",0,"R");$pdf->Cell(28,6,"$m474r305","$rmc",1,"R");
 $pdf->Cell(106,7," ","$rmc1",0,"C");$pdf->Cell(27,7,"$m474r106","$rmc",0,"R");
 $pdf->Cell(28,7,"$m474r206","$rmc",0,"R");$pdf->Cell(28,7,"$m474r306","$rmc",1,"R");
-$pdf->Cell(106,7," ","$rmc1",0,"C");$pdf->Cell(27,7,"$m474r107","$rmc",0,"R");
-$pdf->Cell(28,7,"$m474r207","$rmc",0,"R");$pdf->Cell(28,7,"$m474r307","$rmc",1,"R");
-$pdf->Cell(106,7," ","$rmc1",0,"C");$pdf->Cell(27,7,"$m474r199","$rmc",0,"R");
-$pdf->Cell(28,7,"$m474r299","$rmc",0,"R");$pdf->Cell(28,7,"$m474r399","$rmc",1,"R");
-
-//modul 127
-$m127r001=$hlavicka->m127r001;
-$m127r002=$hlavicka->m127r002;
-$m127r003=$hlavicka->m127r003;
-$m127r004=$hlavicka->m127r004;
-$m127r005=$hlavicka->m127r005;
-$m127r006=$hlavicka->m127r006;
-$m127r007=$hlavicka->m127r007;
-$m127r008=$hlavicka->m127r008;
-$m127r009=$hlavicka->m127r009;
-$m127r010=$hlavicka->m127r010;
-$m127r011=$hlavicka->m127r011;
-$m127r012=$hlavicka->m127r012;
-$m127r013=$hlavicka->m127r013;
-$m127r014=$hlavicka->m127r014;
-$m127r015=$hlavicka->m127r015;
-$m127r101=$hlavicka->m127r101;
-$m127r102=$hlavicka->m127r102;
-$m127r103=$hlavicka->m127r103;
-$m127r104=$hlavicka->m127r104;
-$m127r105=$hlavicka->m127r105;
-$m127r106=$hlavicka->m127r106;
-$m127r107=$hlavicka->m127r107;
-$m127r108=$hlavicka->m127r108;
-$m127r109=$hlavicka->m127r109;
-$m127r110=$hlavicka->m127r110;
-$m127r111=$hlavicka->m127r111;
-$m127r112=$hlavicka->m127r112;
-$m127r113=$hlavicka->m127r113;
-$m127r114=$hlavicka->m127r114;
-$m127r115=$hlavicka->m127r115;
-$m127r201=$hlavicka->m127r201; if ( $m127r201 == 0 ) $m127r201="";
-$m127r202=$hlavicka->m127r202; if ( $m127r202 == 0 ) $m127r202="";
-$m127r203=$hlavicka->m127r203; if ( $m127r203 == 0 ) $m127r203="";
-$m127r204=$hlavicka->m127r204; if ( $m127r204 == 0 ) $m127r204="";
-$m127r205=$hlavicka->m127r205; if ( $m127r205 == 0 ) $m127r205="";
-$m127r206=$hlavicka->m127r206; if ( $m127r206 == 0 ) $m127r206="";
-$m127r207=$hlavicka->m127r207; if ( $m127r207 == 0 ) $m127r207="";
-$m127r208=$hlavicka->m127r208; if ( $m127r208 == 0 ) $m127r208="";
-$m127r209=$hlavicka->m127r209; if ( $m127r209 == 0 ) $m127r209="";
-$m127r210=$hlavicka->m127r210; if ( $m127r210 == 0 ) $m127r210="";
-$m127r211=$hlavicka->m127r211; if ( $m127r211 == 0 ) $m127r211="";
-$m127r212=$hlavicka->m127r212; if ( $m127r212 == 0 ) $m127r212="";
-$m127r213=$hlavicka->m127r213; if ( $m127r213 == 0 ) $m127r213="";
-$m127r214=$hlavicka->m127r214; if ( $m127r214 == 0 ) $m127r214="";
-$m127r215=$hlavicka->m127r215; if ( $m127r215 == 0 ) $m127r215="";
-$m127r299=$hlavicka->m127r299;
-//if ( $m127r299 == 0 ) $m127r299="";
-$m127r301=$hlavicka->m127r301; if ( $m127r301 == 0 ) $m127r301="";
-$m127r302=$hlavicka->m127r302; if ( $m127r302 == 0 ) $m127r302="";
-$m127r303=$hlavicka->m127r303; if ( $m127r303 == 0 ) $m127r303="";
-$m127r304=$hlavicka->m127r304; if ( $m127r304 == 0 ) $m127r304="";
-$m127r305=$hlavicka->m127r305; if ( $m127r305 == 0 ) $m127r305="";
-$m127r306=$hlavicka->m127r306; if ( $m127r306 == 0 ) $m127r306="";
-$m127r307=$hlavicka->m127r307; if ( $m127r307 == 0 ) $m127r307="";
-$m127r308=$hlavicka->m127r308; if ( $m127r308 == 0 ) $m127r308="";
-$m127r309=$hlavicka->m127r309; if ( $m127r309 == 0 ) $m127r309="";
-$m127r310=$hlavicka->m127r310; if ( $m127r310 == 0 ) $m127r310="";
-$m127r311=$hlavicka->m127r311; if ( $m127r311 == 0 ) $m127r311="";
-$m127r312=$hlavicka->m127r312; if ( $m127r312 == 0 ) $m127r312="";
-$m127r313=$hlavicka->m127r313; if ( $m127r313 == 0 ) $m127r313="";
-$m127r314=$hlavicka->m127r314; if ( $m127r314 == 0 ) $m127r314="";
-$m127r315=$hlavicka->m127r315; if ( $m127r315 == 0 ) $m127r315="";
-$m127r399=$hlavicka->m127r399;
-//if ( $m127r399 == 0 ) $m127r399="";
-$m127r401=$hlavicka->m127r401; if ( $m127r401 == 0 ) $m127r401="";
-$m127r402=$hlavicka->m127r402; if ( $m127r402 == 0 ) $m127r402="";
-$m127r403=$hlavicka->m127r403; if ( $m127r403 == 0 ) $m127r403="";
-$m127r404=$hlavicka->m127r404; if ( $m127r404 == 0 ) $m127r404="";
-$m127r405=$hlavicka->m127r405; if ( $m127r405 == 0 ) $m127r405="";
-$m127r406=$hlavicka->m127r406; if ( $m127r406 == 0 ) $m127r406="";
-$m127r407=$hlavicka->m127r407; if ( $m127r407 == 0 ) $m127r407="";
-$m127r408=$hlavicka->m127r408; if ( $m127r408 == 0 ) $m127r408="";
-$m127r409=$hlavicka->m127r409; if ( $m127r409 == 0 ) $m127r409="";
-$m127r410=$hlavicka->m127r410; if ( $m127r410 == 0 ) $m127r410="";
-$m127r411=$hlavicka->m127r411; if ( $m127r411 == 0 ) $m127r411="";
-$m127r412=$hlavicka->m127r412; if ( $m127r412 == 0 ) $m127r412="";
-$m127r413=$hlavicka->m127r413; if ( $m127r413 == 0 ) $m127r413="";
-$m127r414=$hlavicka->m127r414; if ( $m127r414 == 0 ) $m127r414="";
-$m127r415=$hlavicka->m127r415; if ( $m127r415 == 0 ) $m127r415="";
-$m127r499=$hlavicka->m127r499;
-//if ( $m127r499 == 0 ) $m127r499="";
-$m127r501=$hlavicka->m127r501; if ( $m127r501 == 0 ) $m127r501="";
-$m127r502=$hlavicka->m127r502; if ( $m127r502 == 0 ) $m127r502="";
-$m127r503=$hlavicka->m127r503; if ( $m127r503 == 0 ) $m127r503="";
-$m127r504=$hlavicka->m127r504; if ( $m127r504 == 0 ) $m127r504="";
-$m127r505=$hlavicka->m127r505; if ( $m127r505 == 0 ) $m127r505="";
-$m127r506=$hlavicka->m127r506; if ( $m127r506 == 0 ) $m127r506="";
-$m127r507=$hlavicka->m127r507; if ( $m127r507 == 0 ) $m127r507="";
-$m127r508=$hlavicka->m127r508; if ( $m127r508 == 0 ) $m127r508="";
-$m127r509=$hlavicka->m127r509; if ( $m127r509 == 0 ) $m127r509="";
-$m127r510=$hlavicka->m127r510; if ( $m127r510 == 0 ) $m127r510="";
-$m127r511=$hlavicka->m127r511; if ( $m127r511 == 0 ) $m127r511="";
-$m127r512=$hlavicka->m127r512; if ( $m127r512 == 0 ) $m127r512="";
-$m127r513=$hlavicka->m127r513; if ( $m127r513 == 0 ) $m127r513="";
-$m127r514=$hlavicka->m127r514; if ( $m127r514 == 0 ) $m127r514="";
-$m127r515=$hlavicka->m127r515; if ( $m127r515 == 0 ) $m127r515="";
-$m127r599=$hlavicka->m127r599;
-//if ( $m127r599 == 0 ) $m127r599="";
-$m127r601=$hlavicka->m127r601; if ( $m127r601 == 0 ) $m127r601="";
-$m127r602=$hlavicka->m127r602; if ( $m127r602 == 0 ) $m127r602="";
-$m127r603=$hlavicka->m127r603; if ( $m127r603 == 0 ) $m127r603="";
-$m127r604=$hlavicka->m127r604; if ( $m127r604 == 0 ) $m127r604="";
-$m127r605=$hlavicka->m127r605; if ( $m127r605 == 0 ) $m127r605="";
-$m127r606=$hlavicka->m127r606; if ( $m127r606 == 0 ) $m127r606="";
-$m127r607=$hlavicka->m127r607; if ( $m127r607 == 0 ) $m127r607="";
-$m127r608=$hlavicka->m127r608; if ( $m127r608 == 0 ) $m127r608="";
-$m127r609=$hlavicka->m127r609; if ( $m127r609 == 0 ) $m127r609="";
-$m127r610=$hlavicka->m127r610; if ( $m127r610 == 0 ) $m127r610="";
-$m127r611=$hlavicka->m127r611; if ( $m127r611 == 0 ) $m127r611="";
-$m127r612=$hlavicka->m127r612; if ( $m127r612 == 0 ) $m127r612="";
-$m127r613=$hlavicka->m127r613; if ( $m127r613 == 0 ) $m127r613="";
-$m127r614=$hlavicka->m127r614; if ( $m127r614 == 0 ) $m127r614="";
-$m127r615=$hlavicka->m127r615; if ( $m127r615 == 0 ) $m127r615="";
-$m127r699=$hlavicka->m127r699;
-//if ( $m127r699 == 0 ) $m127r699="";
-$pdf->Cell(195,60.5," ","$rmc1",1,"L");
-$pdf->Cell(1,6," ","$rmc1",0,"C");
-$pdf->Cell(57,6,"$m127r001","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"C");
-$pdf->Cell(25,6,"$m127r101","$rmc",0,"C");$pdf->Cell(17,6,"$m127r201","$rmc",0,"R");
-$pdf->Cell(18,6,"$m127r301","$rmc",0,"R");$pdf->Cell(17,6,"$m127r401","$rmc",0,"R");
-$pdf->Cell(26,6,"$m127r501","$rmc",0,"R");$pdf->Cell(20,6,"$m127r601","$rmc",1,"R");
-$pdf->Cell(1,8," ","$rmc1",0,"C");
-$pdf->Cell(57,7,"$m127r002","$rmc",0,"L");$pdf->Cell(8,7," ","$rmc1",0,"C");
-$pdf->Cell(25,7,"$m127r102","$rmc",0,"C");$pdf->Cell(17,7,"$m127r202","$rmc",0,"R");
-$pdf->Cell(18,7,"$m127r302","$rmc",0,"R");$pdf->Cell(17,7,"$m127r402","$rmc",0,"R");
-$pdf->Cell(26,7,"$m127r502","$rmc",0,"R");$pdf->Cell(20,7,"$m127r602","$rmc",1,"R");
-$pdf->Cell(1,8," ","$rmc1",0,"C");
-$pdf->Cell(57,6,"$m127r003","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"C");
-$pdf->Cell(25,6,"$m127r103","$rmc",0,"C");$pdf->Cell(17,6,"$m127r203","$rmc",0,"R");
-$pdf->Cell(18,6,"$m127r303","$rmc",0,"R");$pdf->Cell(17,6,"$m127r403","$rmc",0,"R");
-$pdf->Cell(26,6,"$m127r503","$rmc",0,"R");$pdf->Cell(20,6,"$m127r603","$rmc",1,"R");
-$pdf->Cell(1,8," ","$rmc1",0,"C");
-$pdf->Cell(57,7,"$m127r004","$rmc",0,"L");$pdf->Cell(8,7," ","$rmc1",0,"C");
-$pdf->Cell(25,7,"$m127r104","$rmc",0,"C");$pdf->Cell(17,7,"$m127r204","$rmc",0,"R");
-$pdf->Cell(18,7,"$m127r304","$rmc",0,"R");$pdf->Cell(17,7,"$m127r404","$rmc",0,"R");
-$pdf->Cell(26,7,"$m127r504","$rmc",0,"R");$pdf->Cell(20,7,"$m127r604","$rmc",1,"R");
-$pdf->Cell(1,8," ","$rmc1",0,"C");
-$pdf->Cell(57,6,"$m127r005","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"C");
-$pdf->Cell(25,6,"$m127r105","$rmc",0,"C");$pdf->Cell(17,6,"$m127r205","$rmc",0,"R");
-$pdf->Cell(18,6,"$m127r305","$rmc",0,"R");$pdf->Cell(17,6,"$m127r405","$rmc",0,"R");
-$pdf->Cell(26,6,"$m127r505","$rmc",0,"R");$pdf->Cell(20,6,"$m127r605","$rmc",1,"R");
-$pdf->Cell(1,8," ","$rmc1",0,"C");
-$pdf->Cell(57,6,"$m127r006","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"C");
-$pdf->Cell(25,6,"$m127r106","$rmc",0,"C");$pdf->Cell(17,6,"$m127r206","$rmc",0,"R");
-$pdf->Cell(18,6,"$m127r306","$rmc",0,"R");$pdf->Cell(17,6,"$m127r406","$rmc",0,"R");
-$pdf->Cell(26,6,"$m127r506","$rmc",0,"R");$pdf->Cell(20,6,"$m127r606","$rmc",1,"R");
-$pdf->Cell(1,8," ","$rmc1",0,"C");
-$pdf->Cell(57,6,"$m127r007","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"C");
-$pdf->Cell(25,6,"$m127r107","$rmc",0,"C");$pdf->Cell(17,6,"$m127r207","$rmc",0,"R");
-$pdf->Cell(18,6,"$m127r307","$rmc",0,"R");$pdf->Cell(17,6,"$m127r407","$rmc",0,"R");
-$pdf->Cell(26,6,"$m127r507","$rmc",0,"R");$pdf->Cell(20,6,"$m127r607","$rmc",1,"R");
-$pdf->Cell(1,8," ","$rmc1",0,"C");
-$pdf->Cell(57,6,"$m127r008","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"C");
-$pdf->Cell(25,6,"$m127r108","$rmc",0,"C");$pdf->Cell(17,6,"$m127r208","$rmc",0,"R");
-$pdf->Cell(18,6,"$m127r308","$rmc",0,"R");$pdf->Cell(17,6,"$m127r408","$rmc",0,"R");
-$pdf->Cell(26,6,"$m127r508","$rmc",0,"R");$pdf->Cell(20,6,"$m127r608","$rmc",1,"R");
-$pdf->Cell(1,8," ","$rmc1",0,"C");
-$pdf->Cell(57,6,"$m127r009","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"C");
-$pdf->Cell(25,6,"$m127r109","$rmc",0,"C");$pdf->Cell(17,6,"$m127r209","$rmc",0,"R");
-$pdf->Cell(18,6,"$m127r309","$rmc",0,"R");$pdf->Cell(17,6,"$m127r409","$rmc",0,"R");
-$pdf->Cell(26,6,"$m127r509","$rmc",0,"R");$pdf->Cell(20,6,"$m127r609","$rmc",1,"R");
-$pdf->Cell(1,8," ","$rmc1",0,"C");
-$pdf->Cell(57,7,"$m127r010","$rmc",0,"L");$pdf->Cell(8,7," ","$rmc1",0,"C");
-$pdf->Cell(25,7,"$m127r110","$rmc",0,"C");$pdf->Cell(17,7,"$m127r210","$rmc",0,"R");
-$pdf->Cell(18,7,"$m127r310","$rmc",0,"R");$pdf->Cell(17,7,"$m127r410","$rmc",0,"R");
-$pdf->Cell(26,7,"$m127r510","$rmc",0,"R");$pdf->Cell(20,7,"$m127r610","$rmc",1,"R");
-$pdf->Cell(1,6," ","$rmc1",0,"C");
-$pdf->Cell(57,6,"$m127r011","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"C");
-$pdf->Cell(25,6,"$m127r111","$rmc",0,"C");$pdf->Cell(17,6,"$m127r211","$rmc",0,"R");
-$pdf->Cell(18,6,"$m127r311","$rmc",0,"R");$pdf->Cell(17,6,"$m127r411","$rmc",0,"R");
-$pdf->Cell(26,6,"$m127r511","$rmc",0,"R");$pdf->Cell(20,6,"$m127r611","$rmc",1,"R");
-$pdf->Cell(1,8," ","$rmc1",0,"C");
-$pdf->Cell(57,7,"$m127r012","$rmc",0,"L");$pdf->Cell(8,7," ","$rmc1",0,"C");
-$pdf->Cell(25,7,"$m127r112","$rmc",0,"C");$pdf->Cell(17,7,"$m127r212","$rmc",0,"R");
-$pdf->Cell(18,7,"$m127r312","$rmc",0,"R");$pdf->Cell(17,7,"$m127r412","$rmc",0,"R");
-$pdf->Cell(26,7,"$m127r512","$rmc",0,"R");$pdf->Cell(20,7,"$m127r612","$rmc",1,"R");
-$pdf->Cell(1,6," ","$rmc1",0,"C");
-$pdf->Cell(57,6,"$m127r013","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"C");
-$pdf->Cell(25,6,"$m127r113","$rmc",0,"C");$pdf->Cell(17,6,"$m127r213","$rmc",0,"R");
-$pdf->Cell(18,6,"$m127r313","$rmc",0,"R");$pdf->Cell(17,6,"$m127r413","$rmc",0,"R");
-$pdf->Cell(26,6,"$m127r513","$rmc",0,"R");$pdf->Cell(20,6,"$m127r613","$rmc",1,"R");
-$pdf->Cell(1,8," ","$rmc1",0,"C");
-$pdf->Cell(57,6,"$m127r014","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"C");
-$pdf->Cell(25,6,"$m127r114","$rmc",0,"C");$pdf->Cell(17,6,"$m127r214","$rmc",0,"R");
-$pdf->Cell(18,6,"$m127r314","$rmc",0,"R");$pdf->Cell(17,6,"$m127r414","$rmc",0,"R");
-$pdf->Cell(26,6,"$m127r514","$rmc",0,"R");$pdf->Cell(20,6,"$m127r614","$rmc",1,"R");
-$pdf->Cell(1,8," ","$rmc1",0,"C");
-$pdf->Cell(57,7,"$m127r015","$rmc",0,"L");$pdf->Cell(8,7," ","$rmc1",0,"C");
-$pdf->Cell(25,7,"$m127r115","$rmc",0,"C");$pdf->Cell(17,7,"$m127r215","$rmc",0,"R");
-$pdf->Cell(18,7,"$m127r315","$rmc",0,"R");$pdf->Cell(17,7,"$m127r415","$rmc",0,"R");
-$pdf->Cell(26,7,"$m127r515","$rmc",0,"R");$pdf->Cell(20,7,"$m127r615","$rmc",1,"R");
-$pdf->Cell(1,8," ","$rmc1",0,"C");
-$pdf->Cell(57,6,"$m127r099","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"C");
-$pdf->Cell(25,6,"$m127r199","$rmc",0,"C");$pdf->Cell(17,6,"$m127r299","$rmc",0,"R");
-$pdf->Cell(18,6,"$m127r399","$rmc",0,"R");$pdf->Cell(17,6,"$m127r499","$rmc",0,"R");
-$pdf->Cell(26,6,"$m127r599","$rmc",0,"R");$pdf->Cell(20,6,"$m127r699","$rmc",1,"R");
-                                        }
-
-if ( $strana == 13 OR $strana == 9999 ) {
-$pdf->AddPage();
-$pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10);
-$pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str13.jpg') AND $i == 0 )
-{
-$pdf->Image($jpg_cesta.'_str13.jpg',0,0,210,297);
-}
-$pdf->SetY(10);
-
-//ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,0.5," ","$rmc1",1,"L");
-$pdf->Cell(94,7," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");
-$pdf->Cell(7,6,"$C","$rmc",0,"C");$pdf->Cell(8,6,"$D","$rmc",0,"C");
-$pdf->Cell(7,6,"$E","$rmc",0,"C");$pdf->Cell(8,6,"$F","$rmc",0,"C");
-$pdf->Cell(7,6,"$G","$rmc",0,"C");$pdf->Cell(8,6,"$H","$rmc",1,"C");
-
-//modul 128
-$m128r101=$hlavicka->m128r101; if ( $m128r101 == 0 ) $m128r101="";
-$m128r102=$hlavicka->m128r102; if ( $m128r102 == 0 ) $m128r102="";
-$m128r103=$hlavicka->m128r103; if ( $m128r103 == 0 ) $m128r103="";
-$m128r104=$hlavicka->m128r104; if ( $m128r104 == 0 ) $m128r104="";
-$m128r105=$hlavicka->m128r105; if ( $m128r105 == 0 ) $m128r105="";
-$m128r106=$hlavicka->m128r106; if ( $m128r106 == 0 ) $m128r106="";
-$m128r107=$hlavicka->m128r107; if ( $m128r107 == 0 ) $m128r107="";
-$m128r108=$hlavicka->m128r108; if ( $m128r108 == 0 ) $m128r108="";
-$m128r109=$hlavicka->m128r109; if ( $m128r109 == 0 ) $m128r109="";
-$m128r110=$hlavicka->m128r110; if ( $m128r110 == 0 ) $m128r110="";
-$m128r111=$hlavicka->m128r111; if ( $m128r111 == 0 ) $m128r111="";
-$m128r199=$hlavicka->m128r199;
-//if ( $m128r199 == 0 ) $m128r199="";
-$m128r201=$hlavicka->m128r201; if ( $m128r201 == 0 ) $m128r201="";
-$m128r202=$hlavicka->m128r202; if ( $m128r202 == 0 ) $m128r202="";
-$m128r203=$hlavicka->m128r203; if ( $m128r203 == 0 ) $m128r203="";
-$m128r204=$hlavicka->m128r204; if ( $m128r204 == 0 ) $m128r204="";
-$m128r205=$hlavicka->m128r205; if ( $m128r205 == 0 ) $m128r205="";
-$m128r206=$hlavicka->m128r206; if ( $m128r206 == 0 ) $m128r206="";
-$m128r207=$hlavicka->m128r207; if ( $m128r207 == 0 ) $m128r207="";
-$m128r208=$hlavicka->m128r208; if ( $m128r208 == 0 ) $m128r208="";
-$m128r209=$hlavicka->m128r209; if ( $m128r209 == 0 ) $m128r209="";
-$m128r210=$hlavicka->m128r210; if ( $m128r210 == 0 ) $m128r210="";
-$m128r211=$hlavicka->m128r211; if ( $m128r211 == 0 ) $m128r211="";
-$m128r299=$hlavicka->m128r299;
-//if ( $m128r299 == 0 ) $m128r299="";
-$m128r301=$hlavicka->m128r301; if ( $m128r301 == 0 ) $m128r301="";
-$m128r302=$hlavicka->m128r302; if ( $m128r302 == 0 ) $m128r302="";
-$m128r303=$hlavicka->m128r303; if ( $m128r303 == 0 ) $m128r303="";
-$m128r304=$hlavicka->m128r304; if ( $m128r304 == 0 ) $m128r304="";
-$m128r305=$hlavicka->m128r305; if ( $m128r305 == 0 ) $m128r305="";
-$m128r306=$hlavicka->m128r306; if ( $m128r306 == 0 ) $m128r306="";
-$m128r307=$hlavicka->m128r307; if ( $m128r307 == 0 ) $m128r307="";
-$m128r308=$hlavicka->m128r308; if ( $m128r308 == 0 ) $m128r308="";
-$m128r309=$hlavicka->m128r309; if ( $m128r309 == 0 ) $m128r309="";
-$m128r310=$hlavicka->m128r310; if ( $m128r310 == 0 ) $m128r310="";
-$m128r311=$hlavicka->m128r311; if ( $m128r311 == 0 ) $m128r311="";
-$m128r399=$hlavicka->m128r399;
-//if ( $m128r399 == 0 ) $m128r399="";
-$m128r401=$hlavicka->m128r401; if ( $m128r401 == 0 ) $m128r401="";
-$m128r402=$hlavicka->m128r402; if ( $m128r402 == 0 ) $m128r402="";
-$m128r403=$hlavicka->m128r403; if ( $m128r403 == 0 ) $m128r403="";
-$m128r404=$hlavicka->m128r404; if ( $m128r404 == 0 ) $m128r404="";
-$m128r405=$hlavicka->m128r405; if ( $m128r405 == 0 ) $m128r405="";
-$m128r406=$hlavicka->m128r406; if ( $m128r406 == 0 ) $m128r406="";
-$m128r407=$hlavicka->m128r407; if ( $m128r407 == 0 ) $m128r407="";
-$m128r408=$hlavicka->m128r408; if ( $m128r408 == 0 ) $m128r408="";
-$m128r409=$hlavicka->m128r409; if ( $m128r409 == 0 ) $m128r409="";
-$m128r410=$hlavicka->m128r410; if ( $m128r410 == 0 ) $m128r410="";
-$m128r411=$hlavicka->m128r411; if ( $m128r411 == 0 ) $m128r411="";
-$m128r499=$hlavicka->m128r499;
-//if ( $m128r499 == 0 ) $m128r499="";
-$m128r501=$hlavicka->m128r501; if ( $m128r501 == 0 ) $m128r501="";
-$m128r502=$hlavicka->m128r502; if ( $m128r502 == 0 ) $m128r502="";
-$m128r503=$hlavicka->m128r503; if ( $m128r503 == 0 ) $m128r503="";
-$m128r504=$hlavicka->m128r504; if ( $m128r504 == 0 ) $m128r504="";
-$m128r505=$hlavicka->m128r505; if ( $m128r505 == 0 ) $m128r505="";
-$m128r506=$hlavicka->m128r506; if ( $m128r506 == 0 ) $m128r506="";
-$m128r507=$hlavicka->m128r507; if ( $m128r507 == 0 ) $m128r507="";
-$m128r508=$hlavicka->m128r508; if ( $m128r508 == 0 ) $m128r508="";
-$m128r509=$hlavicka->m128r509; if ( $m128r509 == 0 ) $m128r509="";
-$m128r510=$hlavicka->m128r510; if ( $m128r510 == 0 ) $m128r510="";
-$m128r511=$hlavicka->m128r511; if ( $m128r511 == 0 ) $m128r511="";
-$m128r599=$hlavicka->m128r599;
-//if ( $m128r599 == 0 ) $m128r599="";
-$pdf->Cell(195,49," ","$rmc1",1,"L");
-$pdf->Cell(86,5," ","$rmc1",0,"C");
-$pdf->Cell(20,7,"$m128r101","$rmc",0,"R");$pdf->Cell(20,7,"$m128r201","$rmc",0,"R");
-$pdf->Cell(17,7,"$m128r301","$rmc",0,"R");$pdf->Cell(26,7,"$m128r401","$rmc",0,"R");
-$pdf->Cell(20,7,"$m128r501","$rmc",1,"R");
-$pdf->Cell(86,7," ","$rmc1",0,"C");
-$pdf->Cell(20,7,"$m128r102","$rmc",0,"R");$pdf->Cell(20,7,"$m128r202","$rmc",0,"R");
-$pdf->Cell(17,7,"$m128r302","$rmc",0,"R");$pdf->Cell(26,7,"$m128r402","$rmc",0,"R");
-$pdf->Cell(20,7,"$m128r502","$rmc",1,"R");
-$pdf->Cell(86,9," ","$rmc1",0,"C");
-$pdf->Cell(20,9,"$m128r103","$rmc",0,"R");$pdf->Cell(20,9,"$m128r203","$rmc",0,"R");
-$pdf->Cell(17,9,"$m128r303","$rmc",0,"R");$pdf->Cell(26,9,"$m128r403","$rmc",0,"R");
-$pdf->Cell(20,9,"$m128r503","$rmc",1,"R");
-$pdf->Cell(86,7," ","$rmc1",0,"C");
-$pdf->Cell(20,7,"$m128r104","$rmc",0,"R");$pdf->Cell(20,7,"$m128r204","$rmc",0,"R");
-$pdf->Cell(17,7,"$m128r304","$rmc",0,"R");$pdf->Cell(26,7,"$m128r404","$rmc",0,"R");
-$pdf->Cell(20,7,"$m128r504","$rmc",1,"R");
-$pdf->Cell(86,9," ","$rmc1",0,"C");
-$pdf->Cell(20,9,"$m128r105","$rmc",0,"R");$pdf->Cell(20,9,"$m128r205","$rmc",0,"R");
-$pdf->Cell(17,9,"$m128r305","$rmc",0,"R");$pdf->Cell(26,9,"$m128r405","$rmc",0,"R");
-$pdf->Cell(20,9,"$m128r505","$rmc",1,"R");
-$pdf->Cell(86,7," ","$rmc1",0,"C");
-$pdf->Cell(20,6,"$m128r106","$rmc",0,"R");$pdf->Cell(20,6,"$m128r206","$rmc",0,"R");
-$pdf->Cell(17,6,"$m128r306","$rmc",0,"R");$pdf->Cell(26,6,"$m128r406","$rmc",0,"R");
-$pdf->Cell(20,6,"$m128r506","$rmc",1,"R");
-$pdf->Cell(86,9," ","$rmc1",0,"C");
-$pdf->Cell(20,9,"$m128r107","$rmc",0,"R");$pdf->Cell(20,9,"$m128r207","$rmc",0,"R");
-$pdf->Cell(17,9,"$m128r307","$rmc",0,"R");$pdf->Cell(26,9,"$m128r407","$rmc",0,"R");
-$pdf->Cell(20,9,"$m128r507","$rmc",1,"R");
-$pdf->Cell(86,7," ","$rmc1",0,"C");
-$pdf->Cell(20,7,"$m128r108","$rmc",0,"R");$pdf->Cell(20,7,"$m128r208","$rmc",0,"R");
-$pdf->Cell(17,7,"$m128r308","$rmc",0,"R");$pdf->Cell(26,7,"$m128r408","$rmc",0,"R");
-$pdf->Cell(20,7,"$m128r508","$rmc",1,"R");
-$pdf->Cell(86,7," ","$rmc1",0,"C");
-$pdf->Cell(20,7,"$m128r109","$rmc",0,"R");$pdf->Cell(20,7,"$m128r209","$rmc",0,"R");
-$pdf->Cell(17,7,"$m128r309","$rmc",0,"R");$pdf->Cell(26,7,"$m128r409","$rmc",0,"R");
-$pdf->Cell(20,7,"$m128r509","$rmc",1,"R");
-$pdf->Cell(86,8," ","$rmc1",0,"C");
-$pdf->Cell(20,8,"$m128r110","$rmc",0,"R");$pdf->Cell(20,8,"$m128r210","$rmc",0,"R");
-$pdf->Cell(17,8,"$m128r310","$rmc",0,"R");$pdf->Cell(26,8,"$m128r410","$rmc",0,"R");
-$pdf->Cell(20,8,"$m128r510","$rmc",1,"R");
-$pdf->Cell(86,7," ","$rmc1",0,"C");
-$pdf->Cell(20,7,"$m128r111","$rmc",0,"R");$pdf->Cell(20,7,"$m128r211","$rmc",0,"R");
-$pdf->Cell(17,7,"$m128r311","$rmc",0,"R");$pdf->Cell(26,7,"$m128r411","$rmc",0,"R");
-$pdf->Cell(20,7,"$m128r511","$rmc",1,"R");
-$pdf->Cell(86,7," ","$rmc1",0,"C");
-$pdf->Cell(20,7,"$m128r199","$rmc",0,"R");$pdf->Cell(20,7,"$m128r299","$rmc",0,"R");
-$pdf->Cell(17,7,"$m128r399","$rmc",0,"R");$pdf->Cell(26,7,"$m128r499","$rmc",0,"R");
-$pdf->Cell(20,7,"$m128r599","$rmc",1,"R");
+$pdf->Cell(106,6," ","$rmc1",0,"C");$pdf->Cell(27,6,"$m474r107","$rmc",0,"R");
+$pdf->Cell(28,6,"$m474r207","$rmc",0,"R");$pdf->Cell(28,6,"$m474r307","$rmc",1,"R");
+$pdf->Cell(106,6," ","$rmc1",0,"C");$pdf->Cell(27,6,"$m474r199","$rmc",0,"R");
+$pdf->Cell(28,6,"$m474r299","$rmc",0,"R");$pdf->Cell(28,6,"$m474r399","$rmc",1,"R");
                                         }
 }
 $i = $i + 1;
