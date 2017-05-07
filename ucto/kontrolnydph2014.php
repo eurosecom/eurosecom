@@ -2100,6 +2100,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid,F$kli_vxcf"."_prcprizdphsp$kli_uzid ".
 " SET F$kli_vxcf"."_prcprizdphst$kli_uzid.er1=0 ".
 " WHERE F$kli_vxcf"."_prcprizdphst$kli_uzid.kvodd=F$kli_vxcf"."_prcprizdphsp$kli_uzid.kvodd ".
+" AND   F$kli_vxcf"."_prcprizdphst$kli_uzid.kvmnot=F$kli_vxcf"."_prcprizdphsp$kli_uzid.kvmnot ".
 " AND   F$kli_vxcf"."_prcprizdphst$kli_uzid.kvicd=F$kli_vxcf"."_prcprizdphsp$kli_uzid.kvicd ".
 " AND   F$kli_vxcf"."_prcprizdphst$kli_uzid.kvfak=F$kli_vxcf"."_prcprizdphsp$kli_uzid.kvfak ".
 " AND   F$kli_vxcf"."_prcprizdphst$kli_uzid.kvpvf=F$kli_vxcf"."_prcprizdphsp$kli_uzid.kvpvf ".
@@ -2115,6 +2116,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphsp$kli_uzid,F$kli_vxcf"."_prcprizdphst$kli_uzid ".
 " SET F$kli_vxcf"."_prcprizdphsp$kli_uzid.er1=0 ".
 " WHERE F$kli_vxcf"."_prcprizdphsp$kli_uzid.kvodd=F$kli_vxcf"."_prcprizdphst$kli_uzid.kvodd ".
+" AND   F$kli_vxcf"."_prcprizdphsp$kli_uzid.kvmnot=F$kli_vxcf"."_prcprizdphst$kli_uzid.kvmnot ".
 " AND   F$kli_vxcf"."_prcprizdphsp$kli_uzid.kvicd=F$kli_vxcf"."_prcprizdphst$kli_uzid.kvicd ".
 " AND   F$kli_vxcf"."_prcprizdphsp$kli_uzid.kvfak=F$kli_vxcf"."_prcprizdphst$kli_uzid.kvfak ".
 " AND   F$kli_vxcf"."_prcprizdphsp$kli_uzid.kvpvf=F$kli_vxcf"."_prcprizdphst$kli_uzid.kvpvf ".
@@ -2123,6 +2125,19 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphsp$kli_uzid,F$kli_vxcf"."_prcprizdphst$
 " AND   F$kli_vxcf"."_prcprizdphsp$kli_uzid.kvzkl=F$kli_vxcf"."_prcprizdphst$kli_uzid.kvzkl ".
 " AND   F$kli_vxcf"."_prcprizdphsp$kli_uzid.kvodn=F$kli_vxcf"."_prcprizdphst$kli_uzid.kvodn  ";
 $oznac = mysql_query("$sqtoz");
+
+if( $cislo_ume == 1.2017 OR $cislo_ume == 2.2017 OR $cislo_ume == 3.2017 )
+  {
+//opravny pak stavebne prace na vystupe prenos dph 32,82 tagy mj a mn
+//echo "idem".$cislo_ume;
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphst$kli_uzid SET er1=2 WHERE kvodd = 'A2' AND kvmnot = 0 AND kvmerj = '' ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphsp$kli_uzid SET er1=1, kvmnot=0.01, kvmerj='xxx' WHERE kvodd = 'A2' AND kvmnot = 0 AND kvmerj = '' ";
+$oznac = mysql_query("$sqtoz");
+  }
+
 
 $sqtoz = "DELETE FROM F$kli_vxcf"."_prcprizdphst$kli_uzid WHERE er1 != 2 ";
 $oznac = mysql_query("$sqtoz");
@@ -2281,7 +2296,15 @@ if ( $hlavicka->kvodd == "A2" )
 if ( trim($hlavicka->kvkodt) != "" ) { $text = $text." TK=\"".$hlavicka->kvkodt."\" "; }
 if ( trim($hlavicka->kvdtov) != "" ) { $text = $text." TD=\"".$hlavicka->kvdtov."\" "; }
 
-  $text = $text." Mn=\"".$hlavicka->kvmnot."\" MJ=\"".$hlavicka->kvmerj."\" ";
+if( $hlavicka->kvmerj != 'xxx' )
+    {
+if ( $hlavicka->kvmnot != 0 ) { $text = $text." Mn=\"".$hlavicka->kvmnot."\" "; }
+if ( trim($hlavicka->kvmerj) != "" ) { $text = $text." MJ=\"".$hlavicka->kvmerj."\" "; }
+    }else
+    {
+$text = $text." Mn=\"0.00\" MJ=\"\" ";
+    }
+
   if( $ajkopr == 0 ) { $text=$text." />"."\r\n"; fwrite($soubor, $text); }
   if( $ajkopr == 1 ) { $text=$text." KOpr=\"".$kopr."\" />"."\r\n"; fwrite($soubor, $text); }
    }
