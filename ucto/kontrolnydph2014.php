@@ -2126,7 +2126,9 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcprizdphsp$kli_uzid,F$kli_vxcf"."_prcprizdphst$
 " AND   F$kli_vxcf"."_prcprizdphsp$kli_uzid.kvodn=F$kli_vxcf"."_prcprizdphst$kli_uzid.kvodn  ";
 $oznac = mysql_query("$sqtoz");
 
-if( $cislo_ume == 1.2017 OR $cislo_ume == 2.2017 OR $cislo_ume == 3.2017 )
+$oprav32=0;
+if( $cislo_ume == 1.2017 OR $cislo_ume == 2.2017 OR $cislo_ume == 3.2017 ) { $oprav32=1; }
+if( $oprav32 == 1 )
   {
 //opravny pak stavebne prace na vystupe prenos dph 32,82 tagy mj a mn
 //echo "idem".$cislo_ume;
