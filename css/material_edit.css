@@ -1,0 +1,184 @@
+/* MY EDIT */
+body {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  min-width: 720px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.toleft {
+  float: left;
+}
+.toright {
+  float: right;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.full-width {
+  width: 100%;
+}
+.ukaz {
+  outline: 1px solid red;
+  border: 1px solid red;
+}
+
+
+/* HEADER */
+.ui-header {
+  min-height: 48px;
+}
+.ui-app-row {
+  height: 56px;
+}
+@media screen and (max-width: 1024px) {
+  .mdl-layout--no-desktop-drawer-button .ui-header .ui-app-row {
+    padding-left: 56px;
+  }
+}
+.ui-app-row .mdl-grid {
+  width: 100%;
+}
+.ui-app-row .mdl-layout-title {
+  font-size: 16px;
+  padding-top: 2px;
+}
+.ui-app-row .mdl-layout-title > a {
+  font-weight: 400;
+}
+/* header navigation */
+.ui-app-row .header-nav {
+  justify-content: center;
+}
+.ui-app-row .header-nav-link {
+  height: 53px;
+  line-height: 58px;
+  border-bottom: 3px solid transparent;
+  padding: 0 24px;
+
+  color: rgba(255,255,255,.7); /*dopyt, kopíroval som z firebase, možno iná farba*/
+  opacity: unset;
+  letter-spacing: 0.02em;
+}
+.ui-app-row .header-nav-link:hover, .ui-app-row .header-nav-link.active {
+  color: rgba(255,255,255,1);
+}
+.ui-app-row .header-nav-link.active {
+  border-bottom-color: #fff;
+}
+/* header user info */
+.header-list .mdl-list__item {
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  padding: 0;
+  min-height: 32px;
+}
+.item-avatar-md.material-icons {
+  height: 32px;
+  width: 32px;
+  font-size: 32px;
+  margin-right: 10px;
+}
+
+/* BUTTON */
+/* floating action button */
+.floating-toolbar {
+  z-index: 10;
+  position: absolute;
+  right: 20px;
+  width: 56px;
+}
+.floating-toolbar > .mdl-button {
+  margin-bottom: 24px;
+}
+
+
+
+
+
+
+/* DATA TABLE */
+.mdl-data-table.mdl-shadow--2dp {
+  border: 0;
+}
+
+.data-table thead th {
+  line-height: 1;
+  font-weight: 500;
+}
+
+.data-table .two-line td {
+  line-height: 1.2;
+  height: 56px;
+
+}
+
+.data-table .one-line {
+  line-height: 1.2;
+  height: 48px;
+
+}
+.data-table .one-line.slim-row {
+  height: 42px;
+
+
+
+}
+
+
+
+
+
+
+
+
+.data-table tbody td.cell-button {
+  padding-top: 0;
+  padding-bottom: 0;
+
+}
+
+
+td.tbody-cell-toolbar {
+  text-align: center;
+}
+.tbody-cell-toolbar > button {
+  outline: 0px solid red;
+  margin: 0 3%;
+}
+
+.table-header thead {
+  line-height: 1;
+  padding-bottom: 0;
+
+}
+.table-header th {
+  /*padding-bottom: 4px;*/
+  line-height: 16px;
+  height: auto;
+  padding-top: 8px;
+
+}
+.table-header td {
+  /*border-top-color: transparent;*/
+
+}
+
+.table-header tr td:first-child {
+  /*border-bottom: 1px solid transparent;*/
+}
+
+
+
+
+
+
+
