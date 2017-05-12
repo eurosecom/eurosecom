@@ -1,5 +1,36 @@
 <!doctype html>
 <html>
+<?php
+$sys = 'ALL';
+$urov = 50000;
+$uziv = include("uziv.php");
+if( !$uziv ) exit;
+
+  require_once("pswd/password.php");
+
+$newdelenie=0;
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+$dtb2 = include("oddel_dtb3new.php");
+          }
+
+  @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
+  if (!$spojeni):
+    echo "Spojenie so serverom nedostupne.";
+    exit;
+  endif;
+  mysql_select_db($mysqldb);
+
+// cislo operacie
+$copern = 1*$_REQUEST['copern'];
+$strana = 1*$_REQUEST['strana'];
+if( $strana == 0 ) { $strana = 1; }
+$min_uzall=50000;
+if( $kli_uzall >= 100000 ) { $min_uzall=999999;}
+
+
+?>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
@@ -7,6 +38,26 @@
 <link rel="stylesheet" href="css/material.css">
 <link rel="stylesheet" href="css/material_edit.css">
 <title>Uívatelia | EuroSecom</title>
+<script type="text/javascript">
+
+
+
+  function Uzivatelia()
+  { 
+  window.open('users_md.php?copern=1&strana=1&xxx=1', '_self');
+  }
+
+  function NastavFirmu( id, page )
+  { 
+  window.open('users_md.php?cislo_id=' + id + '&copern=1001&strana=' + page + '&xxx=1', '_self' );
+  }
+
+  function ZoznamFir(uzivatel)
+  { 
+  window.open('../cis/setuzfir.php?copern=1&uzid=' + uzivatel + '&tt=1','_blank','width=980, height=800, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes'); 
+  }
+
+</script>
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
@@ -22,7 +73,7 @@
   <div class="mdl-cell mdl-cell--4-col mdl-cell--hide-tablet mdl-cell--hide-phone">
     <nav class="mdl-navigation mdl-layout--large-screen-only header-nav">
       <a href="admin_md.php" class="mdl-navigation__link header-nav-link">Preh¾ad</a> <!-- <i class="material-icons">home</i> -->
-      <a href="users_md.php" class="mdl-navigation__link header-nav-link active">Uívatelia</a> <!-- <i class="material-icons">people</i> -->
+      <a href="users_md.php?copern=1&strana=1&xxx=1" onclick="Uzivatelia();" class="mdl-navigation__link header-nav-link active">Uívatelia</a> <!-- <i class="material-icons">people</i> -->
       <a href="firms_md.php" class="mdl-navigation__link header-nav-link">Firmy</a> <!-- <i class="material-icons">business</i> -->
     </nav>
   </div>
@@ -77,6 +128,28 @@
   </div>
 
 
+<?php if( $copern == 1 ) { 
+
+$sql = mysql_query("SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY id_klienta ");
+// celkom poloziek
+$cpol = mysql_num_rows($sql);
+$npol = $cpol + 1;
+
+// pocet poloziek na stranu
+$pols = 15;
+// pocet stran
+$xstr =ceil($cpol / $pols);
+$npage =  $strana + 1;
+// predchadzajuca strana
+$ppage =  $strana - 1;
+if( $ppage == 0 ) { $ppage=1; }
+// zaciatok cyklu
+$i = ( $strana - 1 ) * $pols;
+// koniec cyklu
+$konc =($pols*($strana-1))+($pols-1);
+
+?>
+
   <div class="mdl-card mdl-color--blue-grey-50 card-data-table  " style="overflow: auto; padding: 0 10px 10px 10px; display: inline-block; margin: 0 auto; text-align: center;">
 
   <table class="mdl-data-table data-table mdl-shadow--2dp" style=""> <!-- width: 100%; -->
@@ -106,86 +179,50 @@
    </tr>
   </thead>
   <tbody>
+
+
+<?php
+   while ($i <= $konc )
+   {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+  {
+$riadok=mysql_fetch_object($sql);
+?>
+
+
     <tr class="two-line">
-      <td class="mdl-data-table__cell--non-numeric">21</td>
-      <td class="mdl-data-table__cell--non-numeric"><span style="font-size: 14px; font-weight: 500;">ÈUívate¾ skúšobnı</span><br><span style="font-size: 12px; color: rgba(0,0,0,.54);">Èuzivatel@domena.sk</span></td>
-      <td class="mdl-data-table__cell--non-numeric">Èlogin1 - password1</td>
-      <td>200-230,701-805</td>
-      <td>10000</td>
-      <td>3000<br>3000</td>
-      <td>3000<br>3000</td>
-      <td>3000<br>3000</td>
-      <td>3000<br>3000</td>
+      <td class="mdl-data-table__cell--non-numeric"><?php echo $riadok->id_klienta;?></td>
+      <td class="mdl-data-table__cell--non-numeric"><span style="font-size: 14px; font-weight: 500;"><?php echo $riadok->meno;?> <?php echo $riadok->priezvisko;?></span><br><span style="font-size: 12px; color: rgba(0,0,0,.54);"> </span></td>
+      <td class="mdl-data-table__cell--non-numeric"><?php echo $riadok->uziv_meno;?> - <?php echo $riadok->uziv_heslo;?></td>
+      <td><?php if( $riadok->txt1 == "0-0" ) { ?>
+<img src='../obr/zoznam.png' width=15 height=12 border=1 onClick='ZoznamFir(<?php echo $riadok->id_klienta; ?>);' title='Zoznam firiem pre uívate¾a <?php echo $riadok->id_klienta; ?>' >
+<?php                              } ?>
+<?php echo $riadok->txt1;?>
+</td>
+      <td><img src='../obr/naradie.png' onClick="NastavFirmu(<?php echo $riadok->id_klienta;?>, <?php echo $strana;?>);" width=15 height=15 border=0 title='Nastavi predvolenú FIRmu a UME pod¾a môjho konta' >
+<?php echo $riadok->all_prav;?>
+</td>
+      <td><?php echo $riadok->uct_prav;?><br><?php echo $riadok->him_prav;?></td>
+      <td><?php echo $riadok->mzd_prav;?><br><?php echo $riadok->dop_prav;?></td>
+      <td><?php echo $riadok->fak_prav;?><br><?php echo $riadok->vyr_prav;?></td>
+      <td><?php echo $riadok->skl_prav;?><br><?php echo $riadok->ana_prav;?></td>
       <td>
         <i class="material-icons mdl-color-text--light-blue-600">edit</i>
         <i class="material-icons mdl-color-text--grey-500">content_copy</i>
         <i class="material-icons mdl-color-text--red-500">clear</i>
       </td>
     </tr>
-    <tr class="two-line">
-      <td class="mdl-data-table__cell--non-numeric">22</td>
-      <td class="mdl-data-table__cell--non-numeric">Uívate¾ skúšobnı<br>uzivatel@domena.sk</td>
-      <td class="mdl-data-table__cell--non-numeric">login1 - password1</td>
-      <td>200-230,701-805</td>
-      <td>10000</td>
-      <td>3000<br>3000</td>
-      <td>3000<br>3000</td>
-      <td>3000<br>3000</td>
-      <td>3000<br>3000</td>
-      <td>
-        <i class="material-icons mdl-color-text--light-blue-600">edit</i>
-        <i class="material-icons mdl-color-text--grey-500">content_copy</i>
-        <i class="material-icons mdl-color-text--red-500">clear</i>
-      </td>
-    </tr>
-    <tr class="one-line slim-row">
-      <td class="mdl-data-table__cell--non-numeric">23</td>
-      <td class="mdl-data-table__cell--non-numeric">Uívate¾ skúšobnı</td>
-      <td class="mdl-data-table__cell--non-numeric">login1 - password1</td>
-      <td>200-230,701-805</td>
-      <td>10000</td>
-      <td>3000</td>
-      <td>3000</td>
-      <td>3000</td>
-      <td>3000</td>
-      <td class="cell-button">
-        <i class="material-icons mdl-color-text--light-blue-600">edit</i>
-        <i class="material-icons mdl-color-text--grey-500">content_copy</i>
-        <i class="material-icons mdl-color-text--red-500">clear</i>
-      </td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">25</td>
-      <td class="mdl-data-table__cell--non-numeric">Uívate¾ skúšobnı<br>uzivatel@domena.sk</td>
-      <td class="mdl-data-table__cell--non-numeric">login1 - password1</td>
-      <td>200-230,701-805</td>
-      <td>10000</td>
-      <td>3000<br>3000</td>
-      <td>3000<br>3000</td>
-      <td>3000<br>3000</td>
-      <td>3000<br>3000</td>
-      <td>
-        <i class="material-icons mdl-color-text--light-blue-600">edit</i>
-        <i class="material-icons mdl-color-text--grey-500">content_copy</i>
-        <i class="material-icons mdl-color-text--red-500">clear</i>
-      </td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">25</td>
-      <td class="mdl-data-table__cell--non-numeric">Uívate¾ skúšobnı<br>uzivatel@domena.sk</td>
-      <td class="mdl-data-table__cell--non-numeric">login1 - password1</td>
-      <td>200-230,701-805</td>
-      <td>10000</td>
-      <td>3000<br>3000</td>
-      <td>3000<br>3000</td>
-      <td>3000<br>3000</td>
-      <td>3000<br>3000</td>
-      <td>
-        <i class="material-icons mdl-color-text--light-blue-600">edit</i>
-        <i class="material-icons mdl-color-text--grey-500">content_copy</i>
-        <i class="material-icons mdl-color-text--red-500">clear</i>
-      </td>
-    </tr>
+    
+<?php
+  } 
+$i = $i + 1;
+   }
+?>
+
+<?php
+      } //copern=1 
+?>
+
     <tr style="display: none;">
       <td colspan="10" style="display: none;">
 <form action="#" class="hidden">
@@ -258,7 +295,7 @@
   <tfoot class="" style="background-color: #F5F5F5;">
   <tr>
     <td colspan="2" class="mdl-data-table__cell--non-numeric">
-      <div style="font-size: 12px; color:rgba(0, 0, 0, 0.54); font-family: Roboto; font-weight: 600;">= 120</div> <!-- dopyt, tento údaj mi niè nehovorí -->
+      <div style="font-size: 12px; color:rgba(0, 0, 0, 0.54); font-family: Roboto; font-weight: 600;">= <?php echo $cpol;?></div> <!-- dopyt, tento údaj mi niè nehovorí -->
     </td>
     <td colspan="8">
     <form action="#" class="" style="display: flex; align-items: center;">
@@ -271,11 +308,11 @@
               <option value="">3</option>
               <option value="">4</option>
               <option value="">5</option>
-            </select>&nbsp;/ 40</label>
+            </select>&nbsp;/ <?php echo $xstr;?></label>
 
         <span class="">
-            <button id="pageprev" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">keyboard_arrow_left</i></button><div class="mdl-tooltip" data-mdl-for="pageprev" >Prejs na stranu 1</div>
-            <button id="pagenext" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">keyboard_arrow_right</i></button><div class="mdl-tooltip" data-mdl-for="pagenext">Prejs na stranu 2</div>
+            <button id="pageprev" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">keyboard_arrow_left</i></button><div class="mdl-tooltip" data-mdl-for="pageprev" >Prejs na stranu <?php echo $ppage;?></div>
+            <button id="pagenext" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">keyboard_arrow_right</i></button><div class="mdl-tooltip" data-mdl-for="pagenext">Prejs na stranu <?php echo $npage;?></div>
           </span>
       </div>
 
