@@ -40,7 +40,10 @@ if( $kli_uzall >= 100000 ) { $min_uzall=999999;}
 <title>UûÌvatelia | EuroSecom</title>
 <script type="text/javascript">
 
-
+  function ObnovUI()
+  {
+   document.forma3.selectpage.value = '<?php echo "$strana"; ?>';
+  }
 
   function Uzivatelia()
   { 
@@ -57,9 +60,20 @@ if( $kli_uzall >= 100000 ) { $min_uzall=999999;}
   window.open('../cis/setuzfir.php?copern=1&uzid=' + uzivatel + '&tt=1','_blank','width=980, height=800, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes'); 
   }
 
+  function ChodNaStranu()
+  {
+   var chodna = document.forma3.selectpage.value;
+   window.open('users_md.php?copern=1&strana=' + chodna + '', '_self');
+  }
+
+  function NaStr(chodna)
+  {
+   window.open('users_md.php?copern=1&strana=' + chodna + '', '_self');
+  }
+
 </script>
 </head>
-<body>
+<body onload="ObnovUI();" >
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
 <header class="mdl-layout__header mdl-color--light-blue-700 mdl-layout__header--waterfall ui-header">
 <div class="mdl-layout__header-row ui-app-row">
@@ -143,6 +157,7 @@ $npage =  $strana + 1;
 // predchadzajuca strana
 $ppage =  $strana - 1;
 if( $ppage == 0 ) { $ppage=1; }
+if( $npage >  $xstr ) { $npage=$xstr; }
 // zaciatok cyklu
 $i = ( $strana - 1 ) * $pols;
 // koniec cyklu
@@ -298,21 +313,26 @@ $i = $i + 1;
       <div style="font-size: 12px; color:rgba(0, 0, 0, 0.54); font-family: Roboto; font-weight: 600;">= <?php echo $cpol;?></div> <!-- dopyt, tento ˙daj mi niË nehovorÌ -->
     </td>
     <td colspan="8">
-    <form action="#" class="" style="display: flex; align-items: center;">
+    <form  name="forma3" id="forma3" action="#" class="" style="display: flex; align-items: center;">
 
       <div class="mdl-layout-spacer"></div>
       <div class=" pagination " style="padding: 0;">
-        <label for="">&nbsp;Strana<select name="" id="">
-              <option value="">1</option>
-              <option value="">2</option>
-              <option value="">3</option>
-              <option value="">4</option>
-              <option value="">5</option>
+        <label for="">&nbsp;Strana<select name="selectpage" id="selectpage" onchange="ChodNaStranu();">
+<?php
+$is = 1;
+while ( $is <= $xstr )
+{
+?>
+<option value="<?php echo $is; ?>"><?php echo $is; ?></option>
+<?php
+$is = $is + 1;
+}
+?>
             </select>&nbsp;/ <?php echo $xstr;?></label>
 
         <span class="">
-            <button id="pageprev" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">keyboard_arrow_left</i></button><div class="mdl-tooltip" data-mdl-for="pageprev" >Prejsù na stranu <?php echo $ppage;?></div>
-            <button id="pagenext" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">keyboard_arrow_right</i></button><div class="mdl-tooltip" data-mdl-for="pagenext">Prejsù na stranu <?php echo $npage;?></div>
+            <button id="pageprev" onclick="NaStr(<?php echo $ppage;?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">keyboard_arrow_left</i></button><div class="mdl-tooltip" data-mdl-for="pageprev" >Prejsù na stranu <?php echo $ppage;?></div>
+            <button id="pagenext" onclick="NaStr(<?php echo $npage;?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">keyboard_arrow_right</i></button><div class="mdl-tooltip" data-mdl-for="pagenext">Prejsù na stranu <?php echo $npage;?></div>
           </span>
       </div>
 
