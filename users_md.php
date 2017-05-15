@@ -62,7 +62,7 @@ $upravttt = "UPDATE klienti SET uziv_meno='$h_uzm', uziv_heslo='$h_uzh', priezvi
  vyr_prav='$h_vyr', fak_prav='$h_fak', ana_prav='$h_ana', txt1='$h_txt1', cis1='$cis1' WHERE id_klienta=$cislo_id";
 
 $upravene = mysql_query("$upravttt");
-echo $upravttt;
+//echo $upravttt;
 
 $copern=1;
 $uprav=0;
@@ -240,6 +240,7 @@ $sqldok = mysql_query("$sqlttt");
 <?php if( $copern == 1 ) {
 
 $sql = mysql_query("SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY id_klienta ");
+//$sql = mysql_query("SELECT * FROM klienti WHERE all_prav < 1 ORDER BY id_klienta ");//prazdny zoznam
 // celkom poloziek
 $cpol = mysql_num_rows($sql);
 $npol = $cpol + 1;
@@ -258,7 +259,7 @@ $i = ( $strana - 1 ) * $pols;
 // koniec cyklu
 $konc =($pols*($strana-1))+($pols-1);
 
-//$cpol = "0";
+
 ?>
 
   <div class="mdl-card mdl-shadow--2dp card-data-table" style=" ">
@@ -323,10 +324,23 @@ $sqlpok = mysql_query("$sqlpoktt");
   $riadokpok=mysql_fetch_object($sqlpok);
   $jegrid=1;
   }
+
+//uzivatel s obmedzenim skriptov
+$jemenp=0;
+$sqlpoktt = "SELECT * FROM menp WHERE prav = $riadok->id_klienta ";
+$sqlpok = mysql_query("$sqlpoktt");
+  if (@$zaznam=mysql_data_seek($sqlpok,0))
+  {
+  $riadokpok=mysql_fetch_object($sqlpok);
+  $jemenp=1;
+  }
 ?>
       <td class="mdl-data-table__cell--non-numeric"><?php echo "$riadok->uziv_meno - $riadok->uziv_heslo"; ?><br>
 <?php if ( $jegrid == 1 ) { ?>
         <span class="text-chip">Grid</span>
+<?php                     } ?>
+<?php if ( $jemenp == 1 ) { ?>
+        <span class="text-chip">Menp</span>
 <?php                     } ?>
       </td>
       <td class="" style="">
@@ -368,51 +382,52 @@ $i = $i + 1;
 
     <tr style="">
       <td colspan="9" style="">
-<form action="users_md.php?copern=8&strana=<?php echo $strana;?>" id="formv" name="formv" class="">
+<form method="post" action="users_md.php?copern=8&strana=<?php echo $strana;?>&cislo_id=<?php echo $cislo_id;?>" id="formv" name="formv" class="">
 <div class="mdl-card mdl-shadow--4dp mdl-color--blue-grey-100">
 
+  <INPUT type="submit" id="uloz" name="uloz" value="Uloz">
 
   <div class="mdl-textfield mdl-js-textfield " style="">
-    <input class="mdl-textfield__input" type="text" id="h_id" style="font-size: 14px;">
+    <input class="mdl-textfield__input" type="text" id="h_id" name="h_id" style="font-size: 14px;">
     <label class="mdl-textfield__label" for="h_id" style="">Id</label>
   </div>
 
   <div class="mdl-textfield mdl-js-textfield " style="">
-    <input class="mdl-textfield__input" type="text" id="h_meno" style="font-size: 14px;">
+    <input class="mdl-textfield__input" type="text" id="h_meno" name="h_meno" style="font-size: 14px;">
     <label class="mdl-textfield__label" for="h_meno" style="">Meno užívate¾a</label>
   </div>
   <div class="mdl-textfield mdl-js-textfield " style="">
-    <input class="mdl-textfield__input" type="text" id="h_prie" style="font-size: 14px;">
+    <input class="mdl-textfield__input" type="text" id="h_prie" name="h_prie" style="font-size: 14px;">
     <label class="mdl-textfield__label" for="h_prie" style="">Priezvisko užívate¾a</label>
   </div>
 
   <div class="mdl-textfield mdl-js-textfield " style="">
-    <input class="mdl-textfield__input" type="text" id="h_uzm" style="font-size: 14px;">
+    <input class="mdl-textfield__input" type="text" id="h_uzm" name="h_uzm" style="font-size: 14px;">
     <label class="mdl-textfield__label" for="h_uzm" style="">Prihlasovacie meno</label>
   </div>
   <div class="mdl-textfield mdl-js-textfield " style="">
-    <input class="mdl-textfield__input" type="text" id="h_uzh" style="font-size: 14px;">
+    <input class="mdl-textfield__input" type="text" id="h_uzh" name="h_uzh" style="font-size: 14px;">
     <label class="mdl-textfield__label" for="h_uzh" style="">Prihlasovacie heslo</label>
   </div>
 
 
   <div class="mdl-textfield mdl-js-textfield " style="">
-    <input class="mdl-textfield__input" type="text" id="h_txt1" style="font-size: 14px;">
+    <input class="mdl-textfield__input" type="text" id="h_txt1" name="h_txt1" style="font-size: 14px;">
     <label class="mdl-textfield__label" for="h_txt1" style="">Firmy</label>
   </div>
 
 
 
   <div class="mdl-textfield mdl-js-textfield " style="">
-    <input class="mdl-textfield__input" type="text" id="h_all" style="font-size: 14px;">
+    <input class="mdl-textfield__input" type="text" id="h_all" name="h_all" style="font-size: 14px;">
     <label class="mdl-textfield__label" for="h_all" style="">Celkové práva</label>
   </div>
   <div class="mdl-textfield mdl-js-textfield " style="">
-    <input class="mdl-textfield__input" type="text" id="h_uct" style="font-size: 14px;">
+    <input class="mdl-textfield__input" type="text" id="h_uct" name="h_uct" style="font-size: 14px;">
     <label class="mdl-textfield__label" for="h_uct" style="">Úètovníctvo</label>
   </div>
   <div class="mdl-textfield mdl-js-textfield " style="">
-    <input class="mdl-textfield__input" type="text" id="h_mzd" style="font-size: 14px;">
+    <input class="mdl-textfield__input" type="text" id="h_mzd" name="h_mzd" style="font-size: 14px;">
     <label class="mdl-textfield__label" for="h_mzd" style="">Mzdy</label>
   </div>
 
@@ -420,7 +435,7 @@ $i = $i + 1;
 
 
 
-  <INPUT type="submit" id="uloz" name="uloz" value="Uloz">
+
 
 
 </div>
