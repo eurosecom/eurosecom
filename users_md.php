@@ -10,7 +10,7 @@ if( !$uziv ) exit;
 
 $newdelenie=0;
 if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
-if ( $newdelenie == 1 ) 
+if ( $newdelenie == 1 )
           {
 $dtb2 = include("oddel_dtb3new.php");
           }
@@ -32,7 +32,7 @@ if( $kli_uzall >= 100000 ) { $min_uzall=999999;}
 $uprav = 1*$_REQUEST['uprav'];
 $cislo_id = 1*$_REQUEST['cislo_id'];
 
-echo $copern;
+//echo $copern;
 
 //uprava
 if ( $copern == 8 )
@@ -136,18 +136,18 @@ $sqldok = mysql_query("$sqlttt");
   }
 
   function Uzivatelia()
-  { 
+  {
   window.open('users_md.php?copern=1&strana=1&xxx=1', '_self');
   }
 
   function NastavFirmu( id, page )
-  { 
+  {
   window.open('users_md.php?cislo_id=' + id + '&copern=1001&strana=' + page + '&xxx=1', '_self' );
   }
 
   function ZoznamFir(uzivatel)
-  { 
-  window.open('../cis/setuzfir.php?copern=1&uzid=' + uzivatel + '&tt=1','_blank','width=980, height=800, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes'); 
+  {
+  window.open('../cis/setuzfir.php?copern=1&uzid=' + uzivatel + '&tt=1','_blank','width=980, height=800, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }
 
   function ChodNaStranu()
@@ -162,13 +162,13 @@ $sqldok = mysql_query("$sqlttt");
   }
 
   function upravId(uzivatel)
-  { 
-  window.open('users_md.php?copern=<?php echo $copern;?>&strana=<?php echo $strana;?>&cislo_id=' + uzivatel + '&uprav=1','_self'); 
+  {
+  window.open('users_md.php?copern=<?php echo $copern;?>&strana=<?php echo $strana;?>&cislo_id=' + uzivatel + '&uprav=1','_self');
   }
 
   function zmazId(uzivatel)
-  { 
-  window.open('users_md.php?copern=6&strana=<?php echo $strana;?>&cislo_id=' + uzivatel + '&tt=1','_self'); 
+  {
+  window.open('users_md.php?copern=6&strana=<?php echo $strana;?>&cislo_id=' + uzivatel + '&tt=1','_self');
   }
 
 </script>
@@ -218,23 +218,18 @@ $sqldok = mysql_query("$sqlttt");
 <main class="mdl-layout__content mdl-color--blue-grey-50">
 
 <!-- floating action button -->
-<aside class="floating-toolbar" style="top:50px;">
+<aside class="floating-toolbar" style="top:50px; ">
   <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-color--green-500"><i class="material-icons">add</i></button>
   <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"><i class="material-icons">print</i></button>
 </aside>
 
-
-
-
-<article class="ui-page center" style="min-width: 720px; max-width: 1290px; overflow: auto; margin: auto; ">
-
+<article class="" style="max-width: 1290px; margin: auto; padding-bottom: 20px;">
 
 
 
 
 
-
-    <div class="left " style="height: 56px; ">
+  <div class="" style="height: 56px; ">
     <span class="mdl-color-text--grey-600" style="font-size: 14px; font-family: Roboto; font-weight: 400; text-transform: uppercase; text-indent: 16px;">»ÌselnÌk uûÌvateæov</span>
     <i class="material-icons">arrow_drop_down</i>
 
@@ -242,7 +237,7 @@ $sqldok = mysql_query("$sqlttt");
   </div>
 
 
-<?php if( $copern == 1 ) { 
+<?php if( $copern == 1 ) {
 
 $sql = mysql_query("SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY id_klienta ");
 // celkom poloziek
@@ -263,29 +258,28 @@ $i = ( $strana - 1 ) * $pols;
 // koniec cyklu
 $konc =($pols*($strana-1))+($pols-1);
 
+//$cpol = "0";
 ?>
 
-  <div class="mdl-card mdl-color--blue-grey-50 card-data-table  " style="overflow: auto; padding: 0 10px 10px 10px; display: inline-block; margin: 0 auto; text-align: center;">
-
-  <table class="mdl-data-table data-table mdl-shadow--2dp" style=""> <!-- width: 100%; -->
-<!--   <colgroup>
-    <col style="width:5%;">
-    <col style="width:15%;">
-    <col style="width:10%;">
-    <col style="width:20%;">
-    <col style="width:10%;">
-    <col style="width:10%;">
-    <col style="width:10%;">
-    <col style="width:10%;">
-    <col style="width:10%;">
-  </colgroup> -->
-  <thead class="" style="">
+  <div class="mdl-card mdl-shadow--2dp card-data-table" style=" ">
+  <table class="mdl-data-table data-table full-width" style="">
+  <colgroup>
+    <col style="width:18%;">
+    <col style="width:14%;">
+    <col class="" style="width:15%;">
+    <col style="width:8%;">
+    <col style="width:8%;">
+    <col style="width:8%;">
+    <col style="width:8%;">
+    <col style="width:8%;">
+    <col style="width:13%;">
+  </colgroup>
+  <thead>
    <tr>
-    <th class="mdl-data-table__cell--non-numeric " style="vertical-align: middle;">ID</th>
-    <th class="mdl-data-table__cell--non-numeric " style="vertical-align: middle;">UûÌvateæ</th>
-    <th class="mdl-data-table__cell--non-numeric " style="vertical-align: middle;">Login<br>meno - heslo</th>
-    <th class=" " style="vertical-align: middle;">Firmy</th>
-    <th class=" " style="vertical-align: middle;">PrÌstup</th>
+    <th class="mdl-data-table__cell--non-numeric">UûÌvateæ</th>
+    <th class="mdl-data-table__cell--non-numeric" style="">Prihlasovacie<br>meno - heslo</th>
+    <th class=" ">Firmy</th>
+    <th class=" ">PrÌstup</th>
     <th class="">⁄Ëto<br>Majetok</th>
     <th class="">Mzdy<br>Doprava</th>
     <th class="">Odbyt<br>V˝roba</th>
@@ -294,7 +288,14 @@ $konc =($pols*($strana-1))+($pols-1);
    </tr>
   </thead>
   <tbody>
-
+<?php if ( $cpol == 0 ) { ?>
+    <tr class="mdl-color--blue-grey-100">
+      <td colspan="9" class="mdl-data-table__cell--non-numeric">
+        <i class="material-icons toleft mdl-color-text--blue-grey-400">info</i>
+        <span class="row-alert toleft">V tabuæke nie s˙ poloûky</span>
+      </td>
+    </tr>
+<?php } ?>
 
 <?php
    while ($i <= $konc )
@@ -303,48 +304,71 @@ $konc =($pols*($strana-1))+($pols-1);
   {
 $riadok=mysql_fetch_object($sql);
 ?>
-
-
-    <tr class="two-line">
-      <td class="mdl-data-table__cell--non-numeric"><?php echo $riadok->id_klienta;?></td>
-      <td class="mdl-data-table__cell--non-numeric"><span style="font-size: 14px; font-weight: 500;"><?php echo $riadok->meno;?> <?php echo $riadok->priezvisko;?></span><br><span style="font-size: 12px; color: rgba(0,0,0,.54);"> </span></td>
-      <td class="mdl-data-table__cell--non-numeric"><?php echo $riadok->uziv_meno;?> - <?php echo $riadok->uziv_heslo;?></td>
-      <td><?php if( $riadok->txt1 == "0-0" ) { ?>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">
+<div class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+      <span class="mdl-list__item-avatar"><?php echo $riadok->id_klienta; ?></span>
+      <span><?php echo "$riadok->meno $riadok->priezvisko"; ?></span>
+    </span>
+  </div>
+      </td>
+<?php
+//uzivatel s gridkartou
+$jegrid=0;
+$sqlpoktt = "SELECT * FROM krtgrd WHERE id = $riadok->id_klienta ";
+$sqlpok = mysql_query("$sqlpoktt");
+  if (@$zaznam=mysql_data_seek($sqlpok,0))
+  {
+  $riadokpok=mysql_fetch_object($sqlpok);
+  $jegrid=1;
+  }
+?>
+      <td class="mdl-data-table__cell--non-numeric"><?php echo "$riadok->uziv_meno - $riadok->uziv_heslo"; ?><br>
+<?php if ( $jegrid == 1 ) { ?>
+        <span class="text-chip">Grid</span>
+<?php                     } ?>
+      </td>
+      <td class="" style="">
+      <?php if ( $riadok->txt1 == "0-0" ) { ?>
 <img src='../obr/zoznam.png' width=15 height=12 border=1 onClick='ZoznamFir(<?php echo $riadok->id_klienta; ?>);' title='Zoznam firiem pre uûÌvateæa <?php echo $riadok->id_klienta; ?>' >
 <?php                              } ?>
-<?php echo $riadok->txt1;?>
-</td>
-      <td><img src='../obr/naradie.png' onClick="NastavFirmu(<?php echo $riadok->id_klienta;?>, <?php echo $strana;?>);" width=15 height=15 border=0 title='Nastaviù predvolen˙ FIRmu a UME podæa mÙjho konta' >
-<?php echo $riadok->all_prav;?>
+        <div class="wide-text"><?php echo $riadok->txt1;?></div>
+      </td>
+      <td>
+      <img src='../obr/naradie.png' onClick="NastavFirmu(<?php echo $riadok->id_klienta;?>, <?php echo $strana;?>);" style="width: 16px; height: 16px; display: ;" title='Nastaviù predvolen˙ FIRmu a UME podæa mÙjho konta' >
+<?php echo $riadok->all_prav; ?>
 </td>
       <td><?php echo $riadok->uct_prav;?><br><?php echo $riadok->him_prav;?></td>
       <td><?php echo $riadok->mzd_prav;?><br><?php echo $riadok->dop_prav;?></td>
       <td><?php echo $riadok->fak_prav;?><br><?php echo $riadok->vyr_prav;?></td>
       <td><?php echo $riadok->skl_prav;?><br><?php echo $riadok->ana_prav;?></td>
-      <td>
-        <i onClick="upravId(<?php echo $riadok->id_klienta;?>);" class="material-icons mdl-color-text--light-blue-600">edit</i>
-        <i class="material-icons mdl-color-text--grey-500">content_copy</i>
-        <i class="material-icons mdl-color-text--red-500">clear</i>
+      <td class="">
+      <div style="">
+          <button type="button" id="itemedit" onClick="upravId(<?php echo $riadok->id_klienta;?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons">edit</i></button><div class="mdl-tooltip" data-mdl-for="itemedit">Upraviù</div>
+          <button type="button" id="itemcopy" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">content_copy</i></button><div class="mdl-tooltip" data-mdl-for="itemcopy">KopÌrovaù</div>
+          <button type="button" id="itemdelete" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">remove</i></button><div class="mdl-tooltip" data-mdl-for="itemdelete">Vymazaù</div>
+  </div>
       </td>
     </tr>
-    
+
 <?php
-  } 
+  }
 $i = $i + 1;
    }
 ?>
 
 <?php
-      } //copern=1 
+      } //copern=1
 ?>
 
-<?php if( $uprav == 1 ) { 
+<?php if( $uprav == 1 ) {
 
 ?>
 
-    <tr style="display: ok;">
-      <td colspan="10" style="display: ok;">
-<form action="users_md.php?copern=8&strana=<?php echo $strana;?>" id="formv" name="formv">
+    <tr style="">
+      <td colspan="9" style="">
+<form action="users_md.php?copern=8&strana=<?php echo $strana;?>" id="formv" name="formv" class="">
 <div class="mdl-card mdl-shadow--4dp mdl-color--blue-grey-100">
 
 
@@ -396,44 +420,23 @@ $i = $i + 1;
 
 
 
-<div class="mdl-textfield mdl-js-textfield " style="">
-    <input class="mdl-textfield__input" type="text" id="nazov" style="">
-    <label class="mdl-textfield__label" for="nazov">N·zov firmy</label>
- </div>
-
-
-<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: inherit;">
-    <input class="mdl-textfield__input" type="text" id="obdobie" style="">
-    <label class="mdl-textfield__label" for="obdobie">Obdobie</label>
- </div>
-
-
-<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: inherit;">
-    <input class="mdl-textfield__input" type="text" id="druh" style="">
-    <label class="mdl-textfield__label" for="druh">Druh firmy</label>
- </div>
-
   <INPUT type="submit" id="uloz" name="uloz" value="Uloz">
 
 
 </div>
 </form>
-
-
       </td>
     </tr>
 
 <?php
-      } //uprav=1 
+      } //uprav=1
 ?>
-
   </tbody>
-  <tfoot class="" style="background-color: #F5F5F5;">
-  <tr>
-    <td colspan="2" class="mdl-data-table__cell--non-numeric">
-      <div style="font-size: 12px; color:rgba(0, 0, 0, 0.54); font-family: Roboto; font-weight: 600;">= <?php echo $cpol;?></div> <!-- dopyt, tento ˙daj mi niË nehovorÌ -->
-    </td>
-    <td colspan="8">
+  </table>
+<div style="background-color: #F5F5F5;">
+
+    <div style="font-size: 12px; color:rgba(0, 0, 0, 0.54); font-family: Roboto; font-weight: 600;">= <?php echo $cpol;?></div> <!-- dopyt, tento ˙daj mi niË nehovorÌ -->
+
     <form  name="forma3" id="forma3" action="#" class="" style="display: flex; align-items: center;">
 
       <div class="mdl-layout-spacer"></div>
@@ -452,8 +455,8 @@ $is = $is + 1;
             </select>&nbsp;/ <?php echo $xstr;?></label>
 
         <span class="">
-            <button id="pageprev" onclick="NaStr(<?php echo $ppage;?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">keyboard_arrow_left</i></button><div class="mdl-tooltip" data-mdl-for="pageprev" >Prejsù na stranu <?php echo $ppage;?></div>
-            <button id="pagenext" onclick="NaStr(<?php echo $npage;?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">keyboard_arrow_right</i></button><div class="mdl-tooltip" data-mdl-for="pagenext">Prejsù na stranu <?php echo $npage;?></div>
+            <button id="pageprev" type="button" onclick="NaStr(<?php echo $ppage;?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">keyboard_arrow_left</i></button><div class="mdl-tooltip" data-mdl-for="pageprev" >Prejsù na stranu <?php echo $ppage;?></div>
+            <button id="pagenext" type="button" onclick="NaStr(<?php echo $npage;?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">keyboard_arrow_right</i></button><div class="mdl-tooltip" data-mdl-for="pagenext">Prejsù na stranu <?php echo $npage;?></div>
           </span>
       </div>
 
@@ -462,12 +465,7 @@ $is = $is + 1;
 
 
     </form>
-    </td>
-  </tr>
-  </tfoot>
-  </table>
-
-
+  </div>
 </div> <!-- .mdl-card -->
 </article>
 
@@ -476,10 +474,7 @@ $is = $is + 1;
 
 
 
-<div class="mdl-grid     " style=""> <!-- mdl-grid--no-spacing mdl-color--white mdl-color--blue-grey-50 -->
-<div class="mdl-cell mdl-cell--12-col " style="">
-</div>
-</div> <!-- .mdl-grid -->
+
 
 </main>
 
