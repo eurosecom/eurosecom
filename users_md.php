@@ -29,6 +29,8 @@ if( $strana == 0 ) { $strana = 1; }
 $min_uzall=50000;
 if( $kli_uzall >= 100000 ) { $min_uzall=999999;}
 
+$uprav = 1*$_REQUEST['uprav'];
+
 
 ?>
 <head>
@@ -69,6 +71,11 @@ if( $kli_uzall >= 100000 ) { $min_uzall=999999;}
   function NaStr(chodna)
   {
    window.open('users_md.php?copern=1&strana=' + chodna + '', '_self');
+  }
+
+  function upravId(uzivatel)
+  { 
+  window.open('users_md.php?copern=<?php echo $copern;?>&strana=<?php echo $strana;?>&cislo_id=' + uzivatel + '&uprav=1','_self'); 
   }
 
 </script>
@@ -222,7 +229,7 @@ $riadok=mysql_fetch_object($sql);
       <td><?php echo $riadok->fak_prav;?><br><?php echo $riadok->vyr_prav;?></td>
       <td><?php echo $riadok->skl_prav;?><br><?php echo $riadok->ana_prav;?></td>
       <td>
-        <i class="material-icons mdl-color-text--light-blue-600">edit</i>
+        <i onClick="upravId(<?php echo $riadok->id_klienta;?>);" class="material-icons mdl-color-text--light-blue-600">edit</i>
         <i class="material-icons mdl-color-text--grey-500">content_copy</i>
         <i class="material-icons mdl-color-text--red-500">clear</i>
       </td>
@@ -238,8 +245,12 @@ $i = $i + 1;
       } //copern=1 
 ?>
 
-    <tr style="display: none;">
-      <td colspan="10" style="display: none;">
+<?php if( $uprav == 1 ) { 
+
+?>
+
+    <tr style="display: ok;">
+      <td colspan="10" style="display: ok;">
 <form action="#" class="hidden">
 <div class="mdl-card mdl-shadow--4dp mdl-color--blue-grey-100">
   <div class="mdl-textfield mdl-js-textfield " style="">
@@ -304,8 +315,14 @@ $i = $i + 1;
 
 </div>
 </form>
+
+
       </td>
     </tr>
+
+<?php
+      } //uprav=1 
+?>
   </tbody>
   <tfoot class="" style="background-color: #F5F5F5;">
   <tr>
