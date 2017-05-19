@@ -181,29 +181,13 @@ $konc =($pols*($strana-1))+($pols-1);
 ?>
 
 
-
-<div class="mdl-card mdl-shadow--2dp card-data-table " style="margin-top: 30px;  ">
-
-  <div class="mdl-card__title mdl-card--border mdl-color--grey-100" style="">
-    <span class="mdl-card__title-text card-title-upper">»ÌselnÌk uûÌvateæov</span>
-  </div>
-
-<div class="mdl-card__menu" style="top: 0;">
-<form action="#">
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable " style="padding-top: 11px;">
-    <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6" style="top:9px;">
-      <i class="material-icons">search</i>
-    </label>
-    <div class="mdl-textfield__expandable-holder">
-      <input class="mdl-textfield__input " type="text" id="sample6" style="font-size: 14px;">
-      <label class="mdl-textfield__label " for="sample6" style="top: 4px; left: 0; font-size: 14px;">Hæadan˝ v˝raz...</label> <!-- dopyt, lepöÌ text -->
-    </div>
-  </div>
-</form>
-</div>
+    <!-- <span class="mdl-card__title-text "></span> -->
 
 
-  <table class="mdl-data-table data-table full-width">
+
+
+
+  <table class="mdl-data-table mdl-shadow--2dp data-table full-width" style=" margin-top: 10px;">
   <colgroup>
     <col style="width:21%;">
     <col style="width:14%;">
@@ -216,6 +200,25 @@ $konc =($pols*($strana-1))+($pols-1);
     <col style="width:12%;">
   </colgroup>
   <thead class="mdl-color--grey-100">
+    <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
+      <th colspan="2" class="mdl-data-table__cell--non-numeric">
+        <span class="table-title-upper">»ÌselnÌk uûÌvateæov</span>
+      </th>
+      <th colspan="7">
+<form action="#" class="">
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable " style="padding-top: 11px;">
+    <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6" style="top:9px;">
+      <i class="material-icons">search</i>
+    </label>
+    <div class="mdl-textfield__expandable-holder">
+      <input class="mdl-textfield__input " type="text" id="sample6" style="font-size: 14px;">
+      <label class="mdl-textfield__label " for="sample6" style="top: 4px; left: 0; font-size: 14px;">Hæadan˝ v˝raz...</label>
+    </div>
+  </div>
+</form>
+
+      </th>
+    </tr>
    <tr>
     <th class="mdl-data-table__cell--non-numeric">UûÌvateæ</th>
     <th class="mdl-data-table__cell--non-numeric">Prihlasovacie<br>meno - heslo</th>
@@ -283,8 +286,10 @@ $sqlpok = mysql_query("$sqlpoktt");
 <?php if ( $jemenp == 1 ) { ?>
         <span class="text-chip">Skripty</span>
 <?php                     } ?>
-<i id="<?php echo $riadok->id_klienta; ?>browser" class="material-icons mdl-color-text--grey-500" style="font-size: 16px; vertical-align: middle;">public</i><div class="mdl-tooltip" data-mdl-for="<?php echo $riadok->id_klienta; ?>browser">Meno a priezvisko uûÌvateæa: verzia prehliadaËa</div>
-<i id="<?php echo $riadok->id_klienta; ?>timelogin" class="material-icons mdl-color-text--grey-500" style="font-size: 16px; vertical-align: middle;">timer</i><div class="mdl-tooltip" data-mdl-for="<?php echo $riadok->id_klienta; ?>timelogin">Meno a priezvisko uûÌvateæa<br>poslednÈ prihl·senie:</div>
+<i id="<?php echo $riadok->id_klienta; ?>browser" class="material-icons mdl-color-text--grey-500" style="font-size: 16px; vertical-align: middle;">public</i>
+<div class="mdl-tooltip mdl-tooltip--right tooltip-triangle" data-mdl-for="<?php echo $riadok->id_klienta; ?>browser">Meno a priezvisko uûÌvateæa:<br> verzia prehliadaËa</div>
+<i id="<?php echo $riadok->id_klienta; ?>timelogin" class="material-icons mdl-color-text--grey-500" style="font-size: 16px; vertical-align: middle;">timer</i>
+<div class="mdl-tooltip mdl-tooltip--right" data-mdl-for="<?php echo $riadok->id_klienta; ?>timelogin">Meno a priezvisko uûÌvateæa<br>poslednÈ prihl·senie:</div>
       </td>
       <td>
       <?php if ( $riadok->txt1 == "0-0" ) { ?>
@@ -301,16 +306,11 @@ $sqlpok = mysql_query("$sqlpoktt");
         <button type="button" id="<?php echo $riadok->id_klienta; ?>itemedit" onClick="upravId(<?php echo $riadok->id_klienta;?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
       <div class="mdl-tooltip" data-mdl-for="<?php echo $riadok->id_klienta; ?>itemedit">Upraviù</div>
         <button id="<?php echo $riadok->id_klienta; ?>moretools" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">more_vert</i></button>
-<!--           <button type="button" id="itemcopy" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">content_copy</i></button><div class="mdl-tooltip" data-mdl-for="itemcopy">KopÌrovaù</div> -->
-<!--           <button type="button" id="itemdelete" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">remove</i></button><div class="mdl-tooltip" data-mdl-for="itemdelete">Vymazaù</div> -->
-<!--                 <img src='../obr/naradie.png' onClick="NastavFirmu(<?php echo $riadok->id_klienta;?>, <?php echo $strana;?>);" style="width: 16px; height: 16px; display: ;" title='Nastaviù predvolen˙ FIRmu a UME podæa mÙjho konta' > -->
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="<?php echo $riadok->id_klienta; ?>moretools" style=""  >
-  <li class="mdl-menu__item"><i class="material-icons mdl-color-text--grey-500">content_copy</i>KopÌrovaù</li>
-  <li class="mdl-menu__item"><i class="material-icons mdl-color-text--red-500">remove</i>Vymazaù</li>
+<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect table-row-menu" for="<?php echo $riadok->id_klienta; ?>moretools" style=""  >
+  <li class="mdl-menu__item"><i class="material-icons mdl-color-text--grey-500 vacenter" style="">content_copy</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KopÌrovaù</li>
+  <li class="mdl-menu__item"><i class="material-icons mdl-color-text--red-500 vacenter">remove</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vymazaù</li>
   <li onclick="NastavFirmu(<?php echo $riadok->id_klienta; ?>, <?php echo $strana; ?>);" class="mdl-menu__item">Nastaviù firmu "" a mesiac ""</li>
 </ul>
-
-
      </td>
     </tr>
 
@@ -381,13 +381,6 @@ $i = $i + 1;
     <label class="mdl-textfield__label" for="h_mzd" style="">Mzdy</label>
   </div>
 
-
-
-
-
-
-
-
 </div>
 </form>
       </td>
@@ -397,12 +390,12 @@ $i = $i + 1;
       } //uprav=1
 ?>
   </tbody>
-  </table>
-  <div class="mdl-card__actions mdl-color--grey-100 clearfix">
-    <div class="toleft" style="line-height: 34px; font-size: 12px; ">= <?php echo $cpol; ?></div>
-    <div class="mdl-layout-spacer"></div>
-<form name="forma3" id="forma3" action="#" class="toright table-pagination" style="">
-      <label for="selectpage" style="font-size: 12px;">Strana&nbsp;&nbsp;&nbsp;<select name="selectpage" id="selectpage" onchange="ChodNaStranu();" style="font-size: 12px; border: 0; color: rgba(0,0,0, 0.87); border-bottom: 1px solid rgba(0,0,0,0.12); background-color: transparent; min-width: 32px; padding-bottom: 2px; padding-top: 4px;">
+  <tfoot class="mdl-color--grey-100">
+    <tr>
+      <td colspan="2" class="mdl-data-table__cell--non-numeric">= <?php echo $cpol; ?></td>
+      <td colspan="6">
+<form name="forma3" id="forma3" action="#" class="table-pagination " style="">
+      <label for="selectpage" class="" style="vertical-align: middle; ">Strana&nbsp;&nbsp;&nbsp;<select name="selectpage" id="selectpage" onchange="ChodNaStranu();" style="font-size: 12px; border: 0; color: rgba(0,0,0, 0.87); border-bottom: 1px solid rgba(0,0,0,0.12); background-color: transparent; min-width: 32px; padding-bottom: 2px; padding-top: 4px;">
 <?php
 $is = 1;
 while ( $is <= $xstr )
@@ -413,22 +406,19 @@ while ( $is <= $xstr )
 $is = $is + 1;
 }
 ?>
-      </select>&nbsp;&nbsp;/&nbsp;&nbsp;<?php echo $xstr; ?></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </select>&nbsp;&nbsp;/&nbsp;&nbsp;<?php echo $xstr; ?></label>
+      </td>
+      <td>
       <button id="btnpageprev" type="button" onclick="NaStr(<?php echo $ppage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_before</i></button><div class="mdl-tooltip" data-mdl-for="btnpageprev" >Prejsù na stranu <?php echo $ppage; ?></div>
       <button id="btnpagenext" type="button" onclick="NaStr(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_next</i></button><div class="mdl-tooltip" data-mdl-for="btnpagenext">Prejsù na stranu <?php echo $npage; ?></div>
+      </td>
 </form>
-  </div>
-
-</div> <!-- .mdl-card -->
-
-
+    </tr>
+  </tfoot>
+  </table>
 
 </div> <!-- .mdl-cell -->
 </div> <!-- .mdl-grid -->
-
-
-
-
 
 </main>
 
@@ -504,12 +494,19 @@ $is = $is + 1;
   {
    document.forma3.selectpage.value = '<?php echo "$strana"; ?>';
 
+//block page button
 <?php if ( $strana == 1 ) { ?>
    document.getElementById('btnpageprev').disabled = true;
 <?php } ?>
 <?php if ( $strana == $xstr ) { ?>
    document.getElementById('btnpagenext').disabled = true;
 <?php } ?>
+
+//var widthview = document.documentElement.clientWidth;
+//var menu =  document.getElementById('<?php echo $riadok->id_klienta; ?>moretools');
+
+//if ( widthview =< 1024 ) { menu.className=menu.className=='mdl-menu--bottom-right'?'mdl-menu--bottom-left':'mdl-menu--bottom-right'; }
+
 
 
 <?php if( $uprav == 1 ) { ?>
