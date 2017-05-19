@@ -105,73 +105,7 @@ $sqldok = mysql_query("$sqlttt");
 <link rel="stylesheet" href="css/material.css">
 <link rel="stylesheet" href="css/material_edit.css">
 <title>UûÌvatelia | EuroSecom</title>
-<script type="text/javascript">
 
-  function ObnovUI()
-  {
-   document.forma3.selectpage.value = '<?php echo "$strana"; ?>';
-
-
-<?php if( $uprav == 1 ) { ?>
-
-   document.formv.h_id.value = '<?php echo "$cislo_id"; ?>';
-   document.formv.h_uzm.value = '<?php echo "$h_uzm"; ?>';
-   document.formv.h_uzh.value = '<?php echo "$h_uzh"; ?>';
-   document.formv.h_prie.value = '<?php echo "$h_prie"; ?>';
-   document.formv.h_meno.value = '<?php echo "$h_meno"; ?>';
-   document.formv.h_txt1.value = '<?php echo "$h_txt1"; ?>';
-   document.formv.h_all.value = '<?php echo "$h_all"; ?>';
-   document.formv.h_uct.value = '<?php echo "$h_uct"; ?>';
-   document.formv.h_mzd.value = '<?php echo "$h_mzd"; ?>';
-   document.formv.h_skl.value = '<?php echo "$h_skl"; ?>';
-   document.formv.h_fak.value = '<?php echo "$h_fak"; ?>';
-   document.formv.h_him.value = '<?php echo "$h_him"; ?>';
-   document.formv.h_dop.value = '<?php echo "$h_dop"; ?>';
-   document.formv.h_vyr.value = '<?php echo "$h_vyr"; ?>';
-   document.formv.h_ana.value = '<?php echo "$h_ana"; ?>';
-
-
-<?php                   } ?>
-
-  }
-
-  function Uzivatelia()
-  {
-  window.open('users_md.php?copern=1&strana=1&xxx=1', '_self');
-  }
-
-  function NastavFirmu( id, page )
-  {
-  window.open('users_md.php?cislo_id=' + id + '&copern=1001&strana=' + page + '&xxx=1', '_self' );
-  }
-
-  function ZoznamFir(uzivatel)
-  {
-  window.open('../cis/setuzfir.php?copern=1&uzid=' + uzivatel + '&tt=1','_blank','width=980, height=800, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
-  }
-
-  function ChodNaStranu()
-  {
-   var chodna = document.forma3.selectpage.value;
-   window.open('users_md.php?copern=1&strana=' + chodna + '', '_self');
-  }
-
-  function NaStr(chodna)
-  {
-   window.open('users_md.php?copern=1&strana=' + chodna + '', '_self');
-  }
-
-  function upravId(uzivatel)
-  {
-  window.open('users_md.php?copern=<?php echo $copern;?>&strana=<?php echo $strana;?>&cislo_id=' + uzivatel + '&uprav=1','_self');
-  }
-
-  function zmazId(uzivatel)
-  {
-  window.open('users_md.php?copern=6&strana=<?php echo $strana;?>&cislo_id=' + uzivatel + '&tt=1','_self');
-  }
-
-</script>
 </head>
 <body onload="ObnovUI();" >
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
@@ -215,7 +149,7 @@ $sqldok = mysql_query("$sqlttt");
 
 
 
-<div class="mdl-grid mdl-grid--no-spacing" style="max-width: 1190px; margin: 0px auto; padding-bottom: 50px;">
+<div class="mdl-grid mdl-grid--no-spacing" style="max-width: 1190px; margin: 0px auto; ">
 <div class="mdl-cell--12-col">
 
 
@@ -363,22 +297,21 @@ $sqlpok = mysql_query("$sqlpoktt");
       <td><?php echo $riadok->mzd_prav;?><br><?php echo $riadok->dop_prav;?></td>
       <td><?php echo $riadok->fak_prav;?><br><?php echo $riadok->vyr_prav;?></td>
       <td><?php echo $riadok->skl_prav;?><br><?php echo $riadok->ana_prav;?></td>
-      <td>
-        <button type="button" id="<?php echo $riadok->id_klienta; ?>itemedit" onClick="upravId(<?php echo $riadok->id_klienta;?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button><div class="mdl-tooltip" data-mdl-for="<?php echo $riadok->id_klienta; ?>itemedit">Upraviù</div>
+      <td style="">
+        <button type="button" id="<?php echo $riadok->id_klienta; ?>itemedit" onClick="upravId(<?php echo $riadok->id_klienta;?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
+      <div class="mdl-tooltip" data-mdl-for="<?php echo $riadok->id_klienta; ?>itemedit">Upraviù</div>
         <button id="<?php echo $riadok->id_klienta; ?>moretools" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">more_vert</i></button>
 <!--           <button type="button" id="itemcopy" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">content_copy</i></button><div class="mdl-tooltip" data-mdl-for="itemcopy">KopÌrovaù</div> -->
 <!--           <button type="button" id="itemdelete" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">remove</i></button><div class="mdl-tooltip" data-mdl-for="itemdelete">Vymazaù</div> -->
 <!--                 <img src='../obr/naradie.png' onClick="NastavFirmu(<?php echo $riadok->id_klienta;?>, <?php echo $strana;?>);" style="width: 16px; height: 16px; display: ;" title='Nastaviù predvolen˙ FIRmu a UME podæa mÙjho konta' > -->
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="<?php echo $riadok->id_klienta; ?>moretools">
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="<?php echo $riadok->id_klienta; ?>moretools" style=""  >
   <li class="mdl-menu__item"><i class="material-icons mdl-color-text--grey-500">content_copy</i>KopÌrovaù</li>
   <li class="mdl-menu__item"><i class="material-icons mdl-color-text--red-500">remove</i>Vymazaù</li>
-<!--   <li disabled class="mdl-menu__item">Disabled Action</li> -->
   <li onclick="NastavFirmu(<?php echo $riadok->id_klienta; ?>, <?php echo $strana; ?>);" class="mdl-menu__item">Nastaviù firmu "" a mesiac ""</li>
 </ul>
 
 
-
-      </td>
+     </td>
     </tr>
 
 <?php
@@ -469,7 +402,7 @@ $i = $i + 1;
     <div class="toleft" style="line-height: 34px; font-size: 12px; ">= <?php echo $cpol; ?></div>
     <div class="mdl-layout-spacer"></div>
 <form name="forma3" id="forma3" action="#" class="toright table-pagination" style="">
-      <label for="selectpage" style="font-size: 12px;">Strana&nbsp;&nbsp;&nbsp;<select name="selectpage" id="selectpage" onchange="ChodNaStranu();" style="font-size: 12px; border: 0; color: rgba(0,0,0, 0.87); border-bottom: 1px solid rgba(0,0,0,0.12); background-color: transparent; min-width: 32px; padding-bottom: 2px;">
+      <label for="selectpage" style="font-size: 12px;">Strana&nbsp;&nbsp;&nbsp;<select name="selectpage" id="selectpage" onchange="ChodNaStranu();" style="font-size: 12px; border: 0; color: rgba(0,0,0, 0.87); border-bottom: 1px solid rgba(0,0,0,0.12); background-color: transparent; min-width: 32px; padding-bottom: 2px; padding-top: 4px;">
 <?php
 $is = 1;
 while ( $is <= $xstr )
@@ -481,11 +414,13 @@ $is = $is + 1;
 }
 ?>
       </select>&nbsp;&nbsp;/&nbsp;&nbsp;<?php echo $xstr; ?></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button id="pageprev" type="button" onclick="NaStr(<?php echo $ppage; ?>);" class="mdl-button mdl-js-button mdl-button--icon "><i class="material-icons">navigate_before</i></button><div class="mdl-tooltip" data-mdl-for="pageprev" >Prejsù na stranu <?php echo $ppage; ?></div>
-      <button id="pagenext" type="button" onclick="NaStr(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon "><i class="material-icons">navigate_next</i></button><div class="mdl-tooltip" data-mdl-for="pagenext">Prejsù na stranu <?php echo $npage; ?></div>
+      <button id="btnpageprev" type="button" onclick="NaStr(<?php echo $ppage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_before</i></button><div class="mdl-tooltip" data-mdl-for="btnpageprev" >Prejsù na stranu <?php echo $ppage; ?></div>
+      <button id="btnpagenext" type="button" onclick="NaStr(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_next</i></button><div class="mdl-tooltip" data-mdl-for="btnpagenext">Prejsù na stranu <?php echo $npage; ?></div>
 </form>
   </div>
+
 </div> <!-- .mdl-card -->
+
 
 
 </div> <!-- .mdl-cell -->
@@ -562,6 +497,81 @@ $is = $is + 1;
 </footer>
 </div> <!-- .mdl-layout -->
 
+
+<script type="text/javascript">
+
+  function ObnovUI()
+  {
+   document.forma3.selectpage.value = '<?php echo "$strana"; ?>';
+
+<?php if ( $strana == 1 ) { ?>
+   document.getElementById('btnpageprev').disabled = true;
+<?php } ?>
+<?php if ( $strana == $xstr ) { ?>
+   document.getElementById('btnpagenext').disabled = true;
+<?php } ?>
+
+
+<?php if( $uprav == 1 ) { ?>
+
+   document.formv.h_id.value = '<?php echo "$cislo_id"; ?>';
+   document.formv.h_uzm.value = '<?php echo "$h_uzm"; ?>';
+   document.formv.h_uzh.value = '<?php echo "$h_uzh"; ?>';
+   document.formv.h_prie.value = '<?php echo "$h_prie"; ?>';
+   document.formv.h_meno.value = '<?php echo "$h_meno"; ?>';
+   document.formv.h_txt1.value = '<?php echo "$h_txt1"; ?>';
+   document.formv.h_all.value = '<?php echo "$h_all"; ?>';
+   document.formv.h_uct.value = '<?php echo "$h_uct"; ?>';
+   document.formv.h_mzd.value = '<?php echo "$h_mzd"; ?>';
+   document.formv.h_skl.value = '<?php echo "$h_skl"; ?>';
+   document.formv.h_fak.value = '<?php echo "$h_fak"; ?>';
+   document.formv.h_him.value = '<?php echo "$h_him"; ?>';
+   document.formv.h_dop.value = '<?php echo "$h_dop"; ?>';
+   document.formv.h_vyr.value = '<?php echo "$h_vyr"; ?>';
+   document.formv.h_ana.value = '<?php echo "$h_ana"; ?>';
+
+
+<?php                   } ?>
+
+  }
+
+  function Uzivatelia()
+  {
+  window.open('users_md.php?copern=1&strana=1&xxx=1', '_self');
+  }
+
+  function NastavFirmu( id, page )
+  {
+  window.open('users_md.php?cislo_id=' + id + '&copern=1001&strana=' + page + '&xxx=1', '_self' );
+  }
+
+  function ZoznamFir(uzivatel)
+  {
+  window.open('../cis/setuzfir.php?copern=1&uzid=' + uzivatel + '&tt=1','_blank','width=980, height=800, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+  }
+
+  function ChodNaStranu()
+  {
+   var chodna = document.forma3.selectpage.value;
+   window.open('users_md.php?copern=1&strana=' + chodna + '', '_self');
+  }
+
+  function NaStr(chodna)
+  {
+   window.open('users_md.php?copern=1&strana=' + chodna + '', '_self');
+  }
+
+  function upravId(uzivatel)
+  {
+  window.open('users_md.php?copern=<?php echo $copern;?>&strana=<?php echo $strana;?>&cislo_id=' + uzivatel + '&uprav=1','_self');
+  }
+
+  function zmazId(uzivatel)
+  {
+  window.open('users_md.php?copern=6&strana=<?php echo $strana;?>&cislo_id=' + uzivatel + '&tt=1','_self');
+  }
+
+</script>
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </body>
 </html>
