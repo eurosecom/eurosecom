@@ -95,8 +95,6 @@ $sqldok = mysql_query("$sqlttt");
 
      }
 //koniec nacitaj udaje
-
-
 ?>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -105,37 +103,27 @@ $sqldok = mysql_query("$sqlttt");
 <link rel="stylesheet" href="css/material.css">
 <link rel="stylesheet" href="css/material_edit.css">
 <title>Užívatelia | EuroSecom</title>
-
 </head>
 <body onload="ObnovUI();" >
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
-<header class="mdl-layout__header mdl-color--light-blue-700 mdl-layout__header--waterfall ui-header">
-<div class="mdl-layout__header-row ui-app-row">
-  <div class="mdl-grid mdl-grid--no-spacing">
-  <div class="mdl-cell mdl-cell--4-col mdl-cell--3-col-phone mdl-cell--middle">
-    <div class="mdl-layout-title">
-      <a href="http://www.edcom.sk/web/eurosecom.html" target="_blank" class="mdl-color-text--yellow-A100">EuroSecom</a>
-      <a href="admin_md.php" class="mdl-color-text--white mdl-layout--large-screen-only">euroalchem.sk</a>
-    </div>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button"> <!--  -->
+<header class="mdl-layout__header mdl-color--light-blue-700 mdl-layout__header--waterfall ui-header" style="">
+  <div class="mdl-layout__header-row ui-app-row" style=" ">
+  <div class="mdl-layout-title " style="">
+    <a href="http://www.edcom.sk/web/eurosecom.html" target="_blank" class="mdl-color-text--yellow-A100">EuroSecom</a>
+    <a href="admin_md.php" class="mdl-color-text--white ">eshopp3service.sk</a> <!-- dopyt, doplni doménu -->
   </div>
-  <div class="mdl-cell mdl-cell--4-col mdl-cell--hide-tablet mdl-cell--hide-phone">
-    <nav class="mdl-navigation mdl-layout--large-screen-only header-nav">
-      <a href="admin_md.php" class="mdl-navigation__link header-nav-link">Preh¾ad</a> <!-- <i class="material-icons">home</i> -->
-      <a href="users_md.php?copern=1&strana=1&xxx=1" onclick="Uzivatelia();" class="mdl-navigation__link header-nav-link active">Užívatelia</a> <!-- <i class="material-icons">people</i> -->
-      <a href="firms_md.php" class="mdl-navigation__link header-nav-link">Firmy</a> <!-- <i class="material-icons">business</i> -->
-    </nav>
-  </div>
-  <div class="mdl-cell mdl-cell--4-col mdl-cell--1-col-phone mdl-cell--middle">
-  <div class="toright">
-    <div class="mdl-list header-list">
+  <nav class="mdl-navigation mdl-layout--large-screen-only header-nav">
+    <a href="admin_md.php" class="mdl-navigation__link header-nav-link">Preh¾ad</a> <!-- dopyt, cez onclick -->
+    <a href="#" onclick="Uzivatelia();" class="mdl-navigation__link header-nav-link active">Užívatelia</a>
+    <a href="firms_md.php" class="mdl-navigation__link header-nav-link">Firmy</a> <!-- dopyt, cez onclick -->
+  </nav>
+  <div class="mdl-layout-spacer"></div>
+  <div class="mdl-list header-list">
     <div class="mdl-list__item mdl-color-text--blue-grey-100">
       <i class="material-icons mdl-list__item-avatar mdl-color--blue-A100 mdl-color-text--blue-A700 item-avatar-md">person</i>
-      <span>Užívate¾ skúšobný</span>
+      <span class="">Užívate¾ skúšobný</span>
     </div>
-    </div>
-  </div> <!-- .toright -->
-  </div> <!-- .mdl-cell -->
-  </div> <!-- .mdl-grid -->
+  </div>
 </div> <!-- .ui-app-row -->
 </header>
 
@@ -148,9 +136,9 @@ $sqldok = mysql_query("$sqlttt");
 </aside>
 
 
-
-<div class="mdl-grid mdl-grid--no-spacing" style="max-width: 1190px; margin: 0px auto; ">
-<div class="mdl-cell--12-col">
+ <!-- mdl-grid--no-spacing -->
+<div class="mdl-grid" style="max-width: 1200px;">
+<div class="mdl-cell--12-col tocenter">
 
 
 
@@ -176,27 +164,19 @@ if( $npage >  $xstr ) { $npage=$xstr; }
 $i = ( $strana - 1 ) * $pols;
 // koniec cyklu
 $konc =($pols*($strana-1))+($pols-1);
-
-
 ?>
 
 
-    <!-- <span class="mdl-card__title-text "></span> -->
-
-
-
-
-
-  <table class="mdl-data-table mdl-shadow--2dp data-table full-width" style=" margin-top: 10px;">
+  <table class="mdl-data-table mdl-shadow--2dp data-table full-width tocenter" style=" ">
   <colgroup>
-    <col style="width:21%;">
+    <col style="width:22%;">
     <col style="width:14%;">
-    <col style="width:18%;">
-    <col style="width:7%;">
-    <col style="width:7%;">
-    <col style="width:7%;">
-    <col style="width:7%;">
-    <col style="width:7%;">
+    <col style="width:20%;">
+    <col style="width:8%;">
+    <col style="width:6%;">
+    <col style="width:6%;">
+    <col style="width:6%;">
+    <col style="width:6%;">
     <col style="width:12%;">
   </colgroup>
   <thead class="mdl-color--grey-100">
@@ -429,10 +409,9 @@ $is = $is + 1;
 <div class="mdl-layout__drawer">
   <span class="mdl-layout-title">EuroSecom</span>
   <nav class="mdl-navigation">
-    <a href="admin_md.php" class="mdl-navigation__link" >Preh¾ad</a>
-    <a class="mdl-navigation__link" href="admin_md.php">Doména</a>
+    <a href="admin_md.php" class="mdl-navigation__link">Preh¾ad</a>
     <a href="users_md.php" class="mdl-navigation__link mdl-navigation__link--current">Užívatelia</a>
-    <a class="mdl-navigation__link" href="">Úèt. jednotky</a>
+    <a href="firms_md.php" class="mdl-navigation__link">Firmy</a>
   </nav>
 </div>
 
@@ -464,14 +443,7 @@ $is = $is + 1;
 
 
 
-<!--     <div class="" style=" overflow: auto; height: 48px; line-height: 48px; display: none;">
-    <h5 class="toleft" style="margin:0;">Èíselník užívate¾ov</h5>
 
-    <div class="mdl-navigation toright" >
-      <a href="#" class="mdl-navigation__link">História</a>
-      <a href="#" class="mdl-navigation__link">Prístupy</a>
-    </div>
-    </div> -->
 
 <footer class="mdl-mini-footer mdl-color--white hidden">
   <div class="mdl-mini-footer__left-section">
