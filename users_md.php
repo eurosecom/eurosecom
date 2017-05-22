@@ -32,7 +32,7 @@ if( $kli_uzall >= 100000 ) { $min_uzall=999999;}
 $uprav = 1*$_REQUEST['uprav'];
 $cislo_id = 1*$_REQUEST['cislo_id'];
 
-$kopkli=0;
+//echo $copern;
 
 //uprava
 if ( $copern == 8 )
@@ -66,7 +66,6 @@ $upravene = mysql_query("$upravttt");
 
 $copern=1;
 $uprav=0;
-$kopkli=1;
      }
 //koniec uprava
 
@@ -97,259 +96,6 @@ $sqldok = mysql_query("$sqlttt");
      }
 //koniec nacitaj udaje
 
-//nastav fir a ume podla mojho konta
-if( $copern == 1001 )
-{
-$cislo_id = 1*$_REQUEST['cislo_id'];
-
-//xcf  id  ume  pr3  pr2  pr1  robot  datm  
-$sqlttt = "SELECT * FROM nas_id WHERE id = $kli_uzid ";
-$sqldok = mysql_query("$sqlttt");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $firma=$riaddok->xcf;
-  $ume=$riaddok->ume;
-  }
-
-$sqty = "DELETE FROM nas_id WHERE id = $cislo_id  ";
-$ulozene = mysql_query("$sqty");
-
-$Cislo=$ume+"";
-$ume=sprintf("%0.4f", $Cislo);
-
-$sqty = "INSERT INTO nas_id ( xcf,id,ume,pr3,pr2,pr1,robot,datm )".
-" VALUES ( '$firma', '$cislo_id', '$ume', 0, 0, 0, 1, now()  );"; 
-$ulozene = mysql_query("$sqty");
-
-$copern=1;
-}
-//koniec nastav fir a ume podla mojho konta
-
-if( $newdelenie == 1 AND $kopkli == 1 )
-          {
-
-if( $mysqldb2016 != $mysqldb2015 AND $mysqldb2015 != '' ) {
-$sqlttt=" DROP TABLE `".$mysqldb2015."`.`klienti` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2015."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2015.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-//echo $sql;
-$sql = "ALTER TABLE ".$mysqldb2015.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2015."`.`firuz` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2015."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2015.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2015."`.`menp` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2015."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-                                   }
-
-
-if( $mysqldb2016 != $mysqldb2017 AND $mysqldb2017 != '' ) {
-$sqlttt=" DROP TABLE `".$mysqldb2017."`.`klienti` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2017."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2017.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-//echo $sql;
-$sql = "ALTER TABLE ".$mysqldb2017.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2017."`.`firuz` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2017."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2017.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2017."`.`menp` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2017."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-                                   }
-
-if( $mysqldb2016 != $mysqldb2018 AND $mysqldb2018 != '' ) {
-$sqlttt=" DROP TABLE `".$mysqldb2018."`.`klienti` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2018."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2018.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-//echo $sql;
-$sql = "ALTER TABLE ".$mysqldb2018.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2018."`.`firuz` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2018."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2018.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2018."`.`menp` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2018."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-                                   }
-
-if( $mysqldb2016 != $mysqldb2019 AND $mysqldb2019 != '' ) {
-$sqlttt=" DROP TABLE `".$mysqldb2019."`.`klienti` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2019."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2019.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-//echo $sql;
-$sql = "ALTER TABLE ".$mysqldb2019.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2019."`.`firuz` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2019."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2019.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2019."`.`menp` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2019."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-                                   }
-
-if( $mysqldb2016 != $mysqldb2014 AND $mysqldb2014 != '' ) {
-$sqlttt=" DROP TABLE `".$mysqldb2014."`.`klienti` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2014."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2014.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-//echo $sql;
-$sql = "ALTER TABLE ".$mysqldb2014.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2014."`.`firuz` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2014."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2014.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2014."`.`menp` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2014."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-                                   }
-
-if( $mysqldb2016 != $mysqldb2013 AND $mysqldb2013 != '' ) {
-$sqlttt=" DROP TABLE `".$mysqldb2013."`.`klienti` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2013."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2013.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-//echo $sql;
-$sql = "ALTER TABLE ".$mysqldb2013.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2013."`.`firuz` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2013."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2013.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2013."`.`menp` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2013."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-                                   }
-
-if( $mysqldb2016 != $mysqldb2012 AND $mysqldb2012 != '' ) {
-$sqlttt=" DROP TABLE `".$mysqldb2012."`.`klienti` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2012."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2012.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-//echo $sql;
-$sql = "ALTER TABLE ".$mysqldb2012.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2012."`.`firuz` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2012."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2012.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2012."`.`menp` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2012."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-                                   }
-
-if( $mysqldb2016 != $mysqldb2011 AND $mysqldb2011 != '' ) {
-$sqlttt=" DROP TABLE `".$mysqldb2011."`.`klienti` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2011."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2011.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-//echo $sql;
-$sql = "ALTER TABLE ".$mysqldb2011.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2011."`.`firuz` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2011."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2011.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2011."`.`menp` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2011."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-                                   }
-
-if( $mysqldb2016 != $mysqldb2010 AND $mysqldb2010 != '' ) {
-$sqlttt=" DROP TABLE `".$mysqldb2010."`.`klienti` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2010."`.`klienti` SELECT * FROM `".$mysqldb2016."`.`klienti` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2010.".klienti MODIFY id_klienta int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-//echo $sql;
-$sql = "ALTER TABLE ".$mysqldb2010.".klienti MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2010."`.`firuz` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2010."`.`firuz` SELECT * FROM `".$mysqldb2016."`.`firuz` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-$sql = "ALTER TABLE ".$mysqldb2010.".firuz MODIFY cplf int PRIMARY KEY not null auto_increment ";
-$vysledek = mysql_query("$sql");
-
-$sqlttt=" DROP TABLE `".$mysqldb2010."`.`menp` "; $sql = mysql_query("$sqlttt");
-$sqlttt=" CREATE TABLE `".$mysqldb2010."`.`menp` SELECT * FROM `".$mysqldb2016."`.`menp` "; $sql = mysql_query("$sqlttt");
-//echo $sqlttt;
-
-                                   }
-
-
-          }
-//if( $newdelenie == 1 )
-
 
 ?>
 <head>
@@ -360,14 +106,6 @@ $sqlttt=" CREATE TABLE `".$mysqldb2010."`.`menp` SELECT * FROM `".$mysqldb2016."
 <link rel="stylesheet" href="css/material_edit.css">
 <title>UûÌvatelia | EuroSecom</title>
 
-<script type="text/javascript">
-
-  function NastavFirmu( id, strana )
-  { 
-  window.open('ckli.php?cislo_id=' + id + '&copern=1001&strana=' + strana + '&xxx=1', '_self' );
-  }
-
-</script>
 </head>
 <body onload="ObnovUI();" >
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
@@ -501,6 +239,7 @@ $konc =($pols*($strana-1))+($pols-1);
       </td>
     </tr>
 <?php                   } ?>
+
 <?php
    while ($i <= $konc )
    {
@@ -539,51 +278,6 @@ $sqlpok = mysql_query("$sqlpoktt");
   $riadokpok=mysql_fetch_object($sqlpok);
   $jemenp=1;
   }
-
-//posledne prihlasenie
-$poslpr="";
-$sqlpoktt = "SELECT * FROM dlogin WHERE id = $riadok->id_klienta ORDER BY datm DESC";
-$sqlpok = mysql_query("$sqlpoktt");
-  if (@$zaznam=mysql_data_seek($sqlpok,0))
-  {
-  $riadokpok=mysql_fetch_object($sqlpok);
-  $poslpr=$riadokpok->datm;
-  }
-
-//nastav moju firmu a ume
-if( $i == 0 )
-    {
-$mojexcf=0; $mojeume=0;
-$sqlpoktt = "SELECT * FROM nas_id WHERE id = $kli_uzid ORDER BY datm DESC";
-$sqlpok = mysql_query("$sqlpoktt");
-  if (@$zaznam=mysql_data_seek($sqlpok,0))
-  {
-  $riadokpok=mysql_fetch_object($sqlpok);
-  $mojexcf=1*$riadokpok->xcf;
-  $mojeume=1*$riadokpok->ume;
-  }
-    }
-
-//vypis firiem
-$akefirmy="";
-if( $riadok->txt1 == "0-0" )
-        {
-$ipok=0;
-$sqlpoktt = "SELECT * FROM firuz WHERE uzid = $riadok->id_klienta ORDER BY fiod ";
-$sqlpok = mysql_query("$sqlpoktt");
-$cpolpok = mysql_num_rows($sqlpok);
-   while ($ipok <= $cpolpok )
-   {
-  if (@$zaznampok=mysql_data_seek($sqlpok,$ipok))
-  {
-  $riadokpok=mysql_fetch_object($sqlpok);
-  $akefirmy=$akefirmy.$riadokpok->fiod."-".$riadokpok->fido."<br />";
-
-  }
-$ipok=$ipok+1;
-   }
-        }
-
 ?>
       <td class="mdl-data-table__cell--non-numeric"><?php echo "$riadok->uziv_meno - $riadok->uziv_heslo"; ?><br>
 <?php if ( $jegrid == 1 ) { ?>
@@ -595,11 +289,11 @@ $ipok=$ipok+1;
 <i id="<?php echo $riadok->id_klienta; ?>browser" class="material-icons mdl-color-text--grey-500" style="font-size: 16px; vertical-align: middle;">public</i>
 <div class="mdl-tooltip mdl-tooltip--right tooltip-triangle" data-mdl-for="<?php echo $riadok->id_klienta; ?>browser">Meno a priezvisko uûÌvateæa:<br> verzia prehliadaËa</div>
 <i id="<?php echo $riadok->id_klienta; ?>timelogin" class="material-icons mdl-color-text--grey-500" style="font-size: 16px; vertical-align: middle;">timer</i>
-<div class="mdl-tooltip mdl-tooltip--right" data-mdl-for="<?php echo $riadok->id_klienta; ?>timelogin">Meno a priezvisko uûÌvateæa<br>poslednÈ prihl·senie:<?php echo $poslpr; ?></div>
+<div class="mdl-tooltip mdl-tooltip--right" data-mdl-for="<?php echo $riadok->id_klienta; ?>timelogin">Meno a priezvisko uûÌvateæa<br>poslednÈ prihl·senie:</div>
       </td>
       <td>
       <?php if ( $riadok->txt1 == "0-0" ) { ?>
-<?php echo $akefirmy; ?> <img src='../obr/zoznam.png' width=15 height=12 border=1 onClick='ZoznamFir(<?php echo $riadok->id_klienta; ?>);' title='Zoznam firiem pre uûÌvateæa <?php echo $riadok->id_klienta; ?>' >
+<img src='../obr/zoznam.png' width=15 height=12 border=1 onClick='ZoznamFir(<?php echo $riadok->id_klienta; ?>);' title='Zoznam firiem pre uûÌvateæa <?php echo $riadok->id_klienta; ?>' >
 <?php                              } ?>
         <?php echo $riadok->txt1; ?>
       </td>
@@ -615,7 +309,7 @@ $ipok=$ipok+1;
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect table-row-menu" for="<?php echo $riadok->id_klienta; ?>moretools" style=""  >
   <li class="mdl-menu__item"><i class="material-icons mdl-color-text--grey-500 vacenter" style="">content_copy</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KopÌrovaù</li>
   <li class="mdl-menu__item"><i class="material-icons mdl-color-text--red-500 vacenter">remove</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vymazaù</li>
-  <li onclick="NastavFirmu(<?php echo $riadok->id_klienta; ?>, <?php echo $strana; ?>);" class="mdl-menu__item">Nastaviù firmu <?php echo $mojexcf;?> a mesiac <?php echo $mojeume;?></li>
+  <li onclick="NastavFirmu(<?php echo $riadok->id_klienta; ?>, <?php echo $strana; ?>);" class="mdl-menu__item">Nastaviù firmu "" a mesiac ""</li>
 </ul>
      </td>
     </tr>
