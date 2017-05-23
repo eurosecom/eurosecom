@@ -398,7 +398,7 @@ $sqlttt=" CREATE TABLE `".$mysqldb2010."`.`menp` SELECT * FROM `".$mysqldb2016."
 <div class="mdl-grid mdl-grid--no-spacing" style="max-width: 1200px;">
 <div class="mdl-cell--12-col">
 
-<?php if( $copern == 1 ) {
+<?php
 
 $sql = mysql_query("SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY id_klienta ");
 //$sql = mysql_query("SELECT * FROM klienti WHERE all_prav < 1 ORDER BY id_klienta ");//prazdny zoznam
@@ -481,6 +481,7 @@ $konc =($pols*($strana-1))+($pols-1);
 $riadok=mysql_fetch_object($sql);
 ?>
     <tr>
+<?php  if ( $uprav == 0 OR ( $uprav == 1 AND $riadok->id_klienta != $cislo_id )  ) { ?>
       <td class="mdl-data-table__cell--non-numeric">
 <div class="mdl-list__item">
     <span class="mdl-list__item-primary-content">
@@ -590,41 +591,36 @@ $ipok=$ipok+1;
   <li onclick="NastavFirmu(<?php echo $riadok->id_klienta; ?>, <?php echo $strana; ?>);" class="mdl-menu__item">Nastaviù firmu <?php echo $mojexcf;?> a mesiac <?php echo $mojeume;?></li>
 </ul>
      </td>
-    </tr>
-
 <?php
-  }
-$i = $i + 1;
-   }
+      } //$uprav=0
 ?>
 
-<?php
-      } //copern=1
-?>
-
-
-
-<?php if( $uprav == 1 ) {
+<?php if ( $uprav == 1 AND $riadok->id_klienta == $cislo_id ) {
 
 ?>
-
-    <tr style="">
-      <td colspan="9" style="padding: 0; ">
+<td colspan="9" style="padding: 0; ">
 <form method="post" action="users_md.php?copern=8&strana=<?php echo $strana;?>&cislo_id=<?php echo $cislo_id; ?>" id="formv" name="formv" class="">
 
 
 <div class="mdl-card mdl-shadow--6dp " style="margin: 0 -10px; padding: 0 0px; ">
-  <div class="mdl-card__title mdl-color--light-blue-500" style="width: 100%;">
-<div class="mdl-list__item" style="padding: 0;">
-    <span class="mdl-list__item-primary-content">
-      <span class="mdl-list__item-avatar"><?php echo $cislo_id; ?></span>
-      <span style="font-size: 16px;"><?php echo "$riadok->meno $riadok->priezvisko"; ?> - ˙prava</span>
-    </span>
-  </div>
-
-
-  </div>
-<div style="padding: 16px; text-align: left;">
+<div class="mdl-card__title mdl-card--border" style="width: 100%; padding: 0;">
+<div class="mdl-layout__tab-bar mdl-js-ripple-effect" style="padding: 0; background-color: grey;">
+  <a href="#scroll-tab-1" class="mdl-layout__tab is-active">
+    <div class="mdl-list__item" style="padding: 0;">
+      <span class="mdl-list__item-primary-content">
+        <span class="mdl-list__item-avatar"><?php echo $cislo_id; ?></span>
+        <span style="font-size: 16px;"><?php echo "$riadok->meno $riadok->priezvisko"; ?> - ˙prava</span>
+      </span>
+    </div>
+  </a>
+<!--     <div class="mdl-layout-spacer"></div> -->
+  <a href="#scroll-tab-2" class="mdl-layout__tab">Firmy</a>
+  <a href="#scroll-tab-3" class="mdl-layout__tab">Skripty</a>
+  <a href="#scroll-tab-4" class="mdl-layout__tab">Grid</a>
+</div>
+</div>
+<div style="height: 500px;">
+<section id="scroll-tab-1" class="mdl-layout__tab-panel is-active">
 
 <fieldset class="" style="width: ; display: inline-block;">
 <legend>UûÌvateæ</legend>
@@ -657,12 +653,7 @@ $i = $i + 1;
     <label class="mdl-textfield__label" for="h_uzh" style="">Heslo</label>
   </div>
 </fieldset>
-<fieldset style="display: inline-block;">
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 300px;">
-    <input class="mdl-textfield__input" type="text" id="h_txt1" name="h_txt1" style="font-size: 14px;">
-    <label class="mdl-textfield__label " for="h_txt1" style="">Firmy</label>
-  </div>
-</fieldset>
+
 <fieldset style="display: inline-block;">
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="">
     <input class="mdl-textfield__input" type="text" id="h_all" name="h_all" pattern="-?[0-9]*(\.[0-9]+)?" style="font-size: 14px;">
@@ -702,18 +693,55 @@ $i = $i + 1;
     <label class="mdl-textfield__label" for="h_ana" style="">Anal˝zy</label>
   </div>
 </fieldset>
+  </section>
+
+<section id="scroll-tab-2" class="mdl-layout__tab-panel">
+  <fieldset style="display: inline-block;">
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 300px;">
+    <input class="mdl-textfield__input" type="text" id="h_txt1" name="h_txt1" style="font-size: 14px;">
+    <label class="mdl-textfield__label " for="h_txt1" style="">Firmy</label>
   </div>
+</fieldset>
+
+</section>
+
+<section id="scroll-tab-3" class="mdl-layout__tab-panel">
+Nastavenie skriptov
+
+</section>
+<section id="scroll-tab-4" class="mdl-layout__tab-panel">
+Grid sekcia
+
+</section>
+</div>
+
   <div class="" style="height: 48px; border-top: 1px solid lightgrey;">
 <button id="uloz" name="uloz">Uloûiù</button>
 </div>
 </div> <!-- .mdl-card -->
 </form>
       </td>
-    </tr>
+
 
 <?php
       } //uprav=1
 ?>
+
+
+
+    </tr>
+
+<?php
+  }
+$i = $i + 1;
+   }
+?>
+
+
+
+
+
+
   </tbody>
   <tfoot class="mdl-color--grey-100">
     <tr>
