@@ -40,7 +40,7 @@ $cislo_id = 1*$_REQUEST['cislo_id'];
 $kopkli=0;
 
 //uprava
-if ( $copern == 8 )
+if ( $copern == 8 AND $uprav == 1 )
   {
 $h_id = $_REQUEST['h_id'];
 $h_uzm = $_REQUEST['h_uzm'];
@@ -64,10 +64,10 @@ if( $h_all > 10000 AND $kli_uzall < 100000 ) { $h_all=10000; }
 
 $upravttt = "UPDATE klienti SET uziv_meno='$h_uzm', uziv_heslo='$h_uzh', priezvisko='$h_prie', meno='$h_meno',
  all_prav='$h_all', uct_prav='$h_uct', mzd_prav='$h_mzd', skl_prav='$h_skl', him_prav='$h_him', dop_prav='$h_dop',
- vyr_prav='$h_vyr', fak_prav='$h_fak', ana_prav='$h_ana', txt1='$h_txt1', cis1='$cis1' WHERE id_klienta=$cislo_id";
+ vyr_prav='$h_vyr', fak_prav='$h_fak', ana_prav='$h_ana', cis1='$cis1' WHERE id_klienta=$cislo_id";
 
 $upravene = mysql_query("$upravttt");
-//echo $upravttt;
+echo $upravttt;
 
 $copern=1;
 $uprav=0;
@@ -610,7 +610,7 @@ $ipok=$ipok+1;
 <td colspan="9" class="mdl-data-table__cell--non-numeric" style="background-color: #ECEFF1; padding: 0;">
 <div class="" style="height: 10px; margin: 0 -10px; background-color: #ECEFF1;">&nbsp;</div>
 
-<form method="post" action="users_md.php?copern=8&strana=<?php echo $strana;?>&cislo_id=<?php echo $cislo_id; ?>" id="formv" name="formv">
+<form method="post" action="users_md.php?copern=8&strana=<?php echo $strana;?>&cislo_id=<?php echo $cislo_id; ?>&uprav=<?php echo $uprav; ?>" id="formv" name="formv">
 
 <div class="mdl-card  " style="min-height: 100px;  "> <!-- mdl-shadow--6dp margin: 0 -10px; -->
 <div class="mdl-card__title " style="padding: 0; ">
@@ -727,6 +727,59 @@ $ipok=$ipok+1;
   <fieldset style="width: 600px;">
   sem Tabu¾ka
 
+<?php
+$sqlttf = "SELECT * FROM $mysqldbfir.firuz WHERE uzid = $cislo_id ORDER BY fiod, fido";
+$sqlf = mysql_query("$sqlttf");
+
+// celkom poloziek
+$cpolf = mysql_num_rows($sqlf);
+$if = 0;
+
+?>
+<table class="vstup" width="100%" >
+<tr>
+<td class="hmenu" width="10%" align="left" >UZID
+<td class="hmenu" width="10%" align="left" >xFod
+<td class="hmenu" width="10%" align="left" >xFdo
+<th class="hmenu" width="5%" >Del
+<td class="hmenu" width="65%"> 
+</tr>
+<?php
+   while ($if <= $cpolf )
+   {
+?>
+<?php
+  if (@$zaznamf=mysql_data_seek($sqlf,$if))
+  {
+$riadokf=mysql_fetch_object($sqlf);
+?>
+<tr>
+<td class="fmenu" align="left" colspan="1"><?php echo $riadokf->uzid;?></td>
+<td class="fmenu" align="left" colspan="1"><?php echo $riadokf->fiod;?></td>
+<td class="fmenu" align="left" colspan="1"><?php echo $riadokf->fido;?></td>
+<td class="fmenu"  colspan="1">
+
+<a href="#" onClick="ZmazPolozku(<?php echo $riadok->cplf;?>);">
+<img src='../obr/zmaz.png' width=15 height=10 border=0 title='Vymaza riadok' ></a>
+
+</td>
+</tr>
+<?php
+  }
+$if = $if + 1;
+   }
+?>
+
+<tr>
+<td class="hmenu" colspan="1"><?php echo $uzid; ?>
+<td class="hmenu" colspan="1"><input type="text" name="fiod" id="fiod" size="7"  />
+<td class="hmenu" colspan="1"><input type="text" name="fido" id="fido" size="7"  />
+<td class="obyc" colspan="1">
+<a href="#" onClick="KtoMa();">
+<img src='../obr/info.png' width=15 height=10 border=0 title='Kto má prístup do firiem èíslo od - do' ></a>
+
+</tr>
+</table>
 
 
 
@@ -743,12 +796,86 @@ $ipok=$ipok+1;
 <?php if ( $uprav == 3 ) { ?>
 <section class="mdl-tabs__panel ">
 sem tabu¾ka
+
+<?php
+$sqlttp = "SELECT * FROM menp WHERE prav = $cislo_id ORDER BY prav, datm DESC"; 
+$sqlp = mysql_query("$sqlttp");
+
+// celkom poloziek
+$cpolp = mysql_num_rows($sqlp);
+$ip = 0;
+
+?>
+<table class="vstup" width="100%" >
+<tr>
+<td class="hmenu" width="10%" align="right" >UZID
+<td class="hmenu" width="10%" align="right" >CSLM
+<td class="hmenu" width="20%" align="right" >datum
+<th class="hmenu" width="5%" >Del
+<td class="hmenu" width="55%" align="right" > 
+
+<a href="#" onClick="Help();">
+<img src='../obr/info.png' width=15 height=10 border=0 title='Help' ></a>
+
+</tr>
+<?php
+   while ($ip <= $cpolp )
+   {
+?>
+<?php
+  if (@$zaznamp=mysql_data_seek($sqlp,$ip))
+  {
+$riadokp=mysql_fetch_object($sqlp);
+?>
+<tr>
+
+<td class="fmenu" >
+<a href="#" onClick="JedenID(<?php echo $riadokp->prav;?>);">
+<?php echo $riadokp->prav;?></a></td>
+<td class="fmenu" align="right" ><?php echo $riadokp->cslm;?></td>
+<td class="fmenu" align="left" ><?php echo $riadokp->datm;?> <?php echo $riadokp->sys;?></td>
+<td class="fmenu" width="5%" >
+
+<a href="#" onClick="ZmazPolozku(<?php echo $riadokp->prav;?>, <?php echo $riadokp->cslm;?>, '<?php echo $riadokp->datm;?>' );">
+<img src='../obr/zmaz.png' width=15 height=10 border=0 title='Vymaza riadok' ></a>
+
+</td>
+</tr>
+<?php
+  }
+$ip = $ip + 1;
+   }
+?>
+
+<tr>
+
+<td class="hmenu"><input type="text" name="uzid" id="uzid" size="7"  />
+<td class="hmenu"><input type="text" name="cslm" id="cslm" size="7"  />
+
+</tr>
+
+</table>
+
 </section>
 <?php } ?>
 
 <?php if ( $uprav == 4 ) { ?>
 <section class="mdl-tabs__panel ">
 Grid sekcia
+<tr>
+<td class="hmenu" colspan="3">GridKarta 
+<a href="#" onClick="window.open('../cis/grid.php?copern=10&cislo_id=<?php echo $cislo_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
+<img src='../obr/tlac.png' width=20 height=12 border=0 title="Vytlaèi GridKartu" ></a>
+<a href="#" onClick="window.open('../cis/grid.php?copern=11&cislo_id=<?php echo $cislo_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
+<img src='../obr/zoznam.png' width=20 height=12 border=0 title="Vygenerova novú GridKartu" ></a>
+<a href="#" onClick="window.open('../cis/grid.php?copern=15&cislo_id=<?php echo $cislo_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
+<img src='../obr/orig.png' width=20 height=12 border=0 title="Nastavi PIN GridKartu všetky polia rovnaké" ></a>
+<a href="#" onClick="window.open('../cis/grid.php?copern=13&cislo_id=<?php echo $cislo_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
+<img src='../obr/ziarovka.png' width=20 height=12 border=0 title="Nastavi cviènú GridKartu 1234" ></a>
+<a href="#" onClick="window.open('../cis/grid.php?copern=14&cislo_id=<?php echo $cislo_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
+<img src='../obr/zmazuplne.png' width=20 height=12 border=0 title="Zmaza GridKartu" ></a>
+</tr>
+
 </section>
 <?php } ?>
 
@@ -973,7 +1100,7 @@ $is = $is + 1;
 
   function closeId(uzivatel)
   {
-    window.open('users_md.php?copern=<?php echo $copern; ?>&strana=<?php echo $strana; ?>', '_self');
+    window.open('users_md.php?copern=1&strana=<?php echo $strana; ?>&uprav=0', '_self');
   }
 
   function zmazId(uzivatel)
