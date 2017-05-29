@@ -38,6 +38,74 @@ $cislo_id = 1*$_REQUEST['cislo_id'];
 
 
 $kopkli=0;
+$zmazane=0;
+
+//vymazanie 
+if ( $copern == 6 AND $uprav == 2 )
+    {
+$cplf = 1*strip_tags($_REQUEST['cplf']);
+
+$z_fiod=0; $z_fido=0;
+$sqlpoktt = "SELECT * FROM firuz WHERE cplf='$cplf' ";
+$sqlpok = mysql_query("$sqlpoktt");
+  if (@$zaznam=mysql_data_seek($sqlpok,0))
+  {
+  $riadokpok=mysql_fetch_object($sqlpok);
+  $z_fiod=$riadokpok->fiod;
+  $z_fido=$riadokpok->fido;
+  }
+
+
+$zmazttt = "DELETE FROM firuz WHERE cplf='$cplf' "; 
+$zmazane = mysql_query("$zmazttt");
+//echo $zmazttt."<br />";
+
+$copern=1;
+$uprav=2;
+$kopkli=1;
+$zmazane=1;
+     }
+//koniec vymazania 
+
+//uprava
+if ( $copern == 8 AND $uprav == 2 )
+  {
+$h_id = $_REQUEST['h_id'];
+$h_uzm = $_REQUEST['h_uzm'];
+$h_uzh = $_REQUEST['h_uzh'];
+$h_prie = $_REQUEST['h_prie'];
+$h_meno = $_REQUEST['h_meno'];
+$h_all = $_REQUEST['h_all'];
+$h_uct = $_REQUEST['h_uct'];
+$h_mzd = $_REQUEST['h_mzd'];
+$h_skl = $_REQUEST['h_skl'];
+$h_him = $_REQUEST['h_him'];
+$h_dop = $_REQUEST['h_dop'];
+$h_ana = $_REQUEST['h_ana'];
+$h_vyr = $_REQUEST['h_vyr'];
+$h_fak = $_REQUEST['h_fak'];
+$h_txt1 = $_REQUEST['h_txt1'];
+$cis1 = $_REQUEST['cis1'];
+$cislo_id = $_REQUEST['cislo_id'];
+
+if( $h_all > 10000 AND $kli_uzall < 100000 ) { $h_all=10000; }
+
+$upravttt = "UPDATE klienti SET txt1='$h_txt1' WHERE id_klienta=$cislo_id";
+$upravene = mysql_query("$upravttt");
+//echo $upravttt."<br />";
+
+$fiod = 1*strip_tags($_REQUEST['fiod']);
+$fido = 1*strip_tags($_REQUEST['fido']);
+
+$upravttt = "INSERT INTO firuz ( uzid, fiod, fido ) VALUES ( '$cislo_id', '$fiod', '$fido'  ); "; 
+$upravene = mysql_query("$upravttt");
+//echo $upravttt."<br />";
+
+$copern=1;
+$uprav=2;
+$kopkli=1;
+     }
+//koniec uprava
 
 //uprava
 if ( $copern == 8 AND $uprav == 1 )
@@ -67,7 +135,7 @@ $upravttt = "UPDATE klienti SET uziv_meno='$h_uzm', uziv_heslo='$h_uzh', priezvi
  vyr_prav='$h_vyr', fak_prav='$h_fak', ana_prav='$h_ana', cis1='$cis1' WHERE id_klienta=$cislo_id";
 
 $upravene = mysql_query("$upravttt");
-echo $upravttt;
+//echo $upravttt;
 
 $copern=1;
 $uprav=0;
@@ -767,7 +835,7 @@ $riadokf=mysql_fetch_object($sqlf);
   <td><?php echo $riadokf->uzid;?></td>
   <td><?php echo $riadokf->fiod;?></td>
   <td><?php echo $riadokf->fido;?></td>
-  <td><a href="#" onClick="ZmazPolozku(<?php echo $riadok->cplf;?>);">Vymazaù</a></td>
+  <td><a href="#" onClick="zmazSetFirmy(<?php echo $riadokf->cplf;?>);">Vymazaù</a></td>
 </tr>
 <?php
   }
@@ -776,7 +844,7 @@ $if = $if + 1;
 ?>
 <tr>
 <td><?php echo $uzid; ?></td>
-<td><input type="text" name="fiod" id="fiod" size="7"  /></td>
+<td><input type="text" name="fiod" id="fiod" autofocus size="7"  /></td>
 <td><input type="text" name="fido" id="fido" size="7"  /></td>
 <td><a href="#" onClick="KtoMa();">Kto m· prÌstup do firiem ËÌslo od - do</a></td>
 </tr>
@@ -787,7 +855,7 @@ $if = $if + 1;
   </fieldset>
   <fieldset style="">
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 500px;">
-    <input class="mdl-textfield__input" type="text" id="h_txt1" name="h_txt1" autofocus style="">
+    <input class="mdl-textfield__input" type="text" id="h_txt1" name="h_txt1" style="">
     <label class="mdl-textfield__label " for="h_txt1" style="">Firmy</label>
   </div>
   </fieldset>
@@ -1061,10 +1129,21 @@ $is = $is + 1;
 
 <?php                   } ?>
 
+<?php if ( $uprav == 2 AND $zmazane == 1 ) { ?>
+   document.formv.fiod.value = '<?php echo "$z_fiod"; ?>';
+   document.formv.fido.value = '<?php echo "$z_fido"; ?>';
+
+<?php                   } ?>
+
 <?php if ( $uprav == 2 ) { ?>
    document.formv.h_txt1.value = '<?php echo "$h_txt1"; ?>';
 
 <?php                   } ?>
+
+
+
+
+
   }
 
   function Uzivatelia()
@@ -1111,6 +1190,8 @@ $is = $is + 1;
 
 
 
+
+
   function closeId(uzivatel)
   {
     window.open('users_md.php?copern=1&strana=<?php echo $strana; ?>&uprav=0', '_self');
@@ -1120,6 +1201,13 @@ $is = $is + 1;
   {
   window.open('users_md.php?copern=6&strana=<?php echo $strana;?>&cislo_id=' + uzivatel + '&tt=1','_self');
   }
+
+
+function zmazSetFirmy(cplf)
+                {
+window.open('users_md.php?copern=6&strana=<?php echo $strana; ?>&cislo_id=<?php echo $cislo_id; ?>&uprav=2&cplf=' + cplf + '&drupoh=1', '_self' );
+                }
+
 
 </script>
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
