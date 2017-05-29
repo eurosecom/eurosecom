@@ -391,17 +391,16 @@ $sqlttt=" CREATE TABLE `".$mysqldb2010."`.`menp` SELECT * FROM `".$mysqldb2016."
 
 <!-- floating action button -->
 <aside class="floating-toolbar" style="top:50px; ">
-  <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-color--green-500"><i class="material-icons">add</i></button>
-  <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"><i class="material-icons">print</i></button>
+  <button type="button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-color--green-500"><i class="material-icons">add</i></button>
+  <button type="button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"><i class="material-icons">print</i></button>
 </aside>
 
 
 
-<div class="mdl-grid mdl-grid--no-spacing" style="max-width: 1200px;">
+<div class="mdl-grid mdl-grid--no-spacing" style="max-width: 1200px; ">
 <div class="mdl-cell--12-col">
 
 <?php
-
 $sql = mysql_query("SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY id_klienta ");
 //$sql = mysql_query("SELECT * FROM klienti WHERE all_prav < 1 ORDER BY id_klienta ");//prazdny zoznam
 // celkom poloziek
@@ -422,7 +421,7 @@ $i = ( $strana - 1 ) * $pols;
 // koniec cyklu
 $konc =($pols*($strana-1))+($pols-1);
 ?>
-  <table class="mdl-data-table mdl-shadow--2dp data-table full-width" style="margin-top: 8px;">
+  <table class="mdl-data-table mdl-shadow--2dp data-table full-width" style="margin-top: 8px;     ">
   <colgroup>
     <col style="width:22%;">
     <col style="width:14%;">
@@ -434,7 +433,7 @@ $konc =($pols*($strana-1))+($pols-1);
     <col style="width:6%;">
     <col style="width:12%;">
   </colgroup>
-  <thead class="mdl-color--grey-100">
+  <thead class="mdl-color--grey-100" style="">
     <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
       <th colspan="2" class="mdl-data-table__cell--non-numeric">
         <span class="table-title-upper">»ÌselnÌk uûÌvateæov</span>
@@ -454,7 +453,7 @@ $konc =($pols*($strana-1))+($pols-1);
 
       </th>
     </tr>
-   <tr>
+   <tr style="">
     <th class="mdl-data-table__cell--non-numeric">UûÌvateæ</th>
     <th class="mdl-data-table__cell--non-numeric">Prihlasovacie<br>meno - heslo</th>
     <th>Firmy</th>
@@ -482,9 +481,12 @@ $konc =($pols*($strana-1))+($pols-1);
   {
 $riadok=mysql_fetch_object($sql);
 ?>
-    <tr style="">
+
 <?php  if ( $uprav == 0 OR ( ( $uprav == 1 OR $uprav == 2 OR $uprav == 3 OR $uprav == 4 ) AND $riadok->id_klienta != $cislo_id ) ) { ?>
-      <td class="mdl-data-table__cell--non-numeric">
+    <tr class="row-echo">
+
+
+      <td class="mdl-data-table__cell--non-numeric" >
 <?php if ( $riadok->id_klienta == $kli_uzid ) { ?> <div class="colored-divider">&nbsp;</div> <?php } ?>
 
 <div class="mdl-list__item">
@@ -559,9 +561,6 @@ $ipok=$ipok+1;
    }
         }
 
-
-
-
 ?>
       <td class="mdl-data-table__cell--non-numeric"><?php echo "$riadok->uziv_meno - $riadok->uziv_heslo"; ?><br>
 
@@ -579,14 +578,17 @@ $ipok=$ipok+1;
 <i id="<?php echo $riadok->id_klienta; ?>timelogin" class="material-icons mdl-color-text--grey-500 vacenter" style="font-size: 16px; ">timer</i>
 <div class="mdl-tooltip mdl-tooltip--right" data-mdl-for="<?php echo $riadok->id_klienta; ?>timelogin">PoslednÈ prihl·senie: <?php echo $poslpr; ?></div>
       </td>
-      <td>
-      <?php if ( $riadok->txt1 == "0-0" ) { ?>
-<?php echo $akefirmy; ?> <img src='../obr/zoznam.png' width=15 height=12 border=1 onClick='ZoznamFir(<?php echo $riadok->id_klienta; ?>);' title='Zoznam firiem pre uûÌvateæa <?php echo $riadok->id_klienta; ?>' >
+  <td>
+<?php
+       if ( $riadok->txt1 == "0-0" ) { ?>
+<?php echo $akefirmy; ?>
 <?php                              } ?>
+
         <?php echo $riadok->txt1; ?>
+
       </td>
       <td><?php echo $riadok->all_prav; ?></td>
-      <td><?php echo $riadok->uct_prav;?><br><?php echo $riadok->him_prav;?></td>
+      <td><?php echo $riadok->uct_prav ;?><br><?php echo $riadok->him_prav;?></td>
       <td><?php echo $riadok->mzd_prav;?><br><?php echo $riadok->dop_prav;?></td>
       <td><?php echo $riadok->fak_prav;?><br><?php echo $riadok->vyr_prav;?></td>
       <td><?php echo $riadok->skl_prav;?><br><?php echo $riadok->ana_prav;?></td>
@@ -601,18 +603,22 @@ $ipok=$ipok+1;
   <li onclick="NastavFirmu(<?php echo $riadok->id_klienta; ?>, <?php echo $strana; ?>);" class="mdl-menu__item">Nastaviù firmu <?php echo $mojexcf;?> a mesiac <?php echo $mojeume;?></li>
 </ul>
      </td>
+</tr>
 <?php
       } //$uprav=0
 ?>
 
 <?php if ( ( $uprav == 1 OR $uprav == 2 OR $uprav == 3 OR $uprav == 4 ) AND $riadok->id_klienta == $cislo_id ) {
 ?>
-<td colspan="9" class="mdl-data-table__cell--non-numeric" style="background-color: #ECEFF1; padding: 0;">
-<div class="" style="height: 10px; margin: 0 -10px; background-color: #ECEFF1;">&nbsp;</div>
+<tr style="">
+<td colspan="9" class="mdl-data-table__cell--non-numeric" style="background-color: #ECEFF1; padding: 0; ">
+<!-- <div class="" style="height: 10px; margin: 0 -10px; background-color: #ECEFF1;">&nbsp;</div> -->
 
-<form method="post" action="users_md.php?copern=8&strana=<?php echo $strana;?>&cislo_id=<?php echo $cislo_id; ?>&uprav=<?php echo $uprav; ?>" id="formv" name="formv">
 
-<div class="mdl-card  " style="min-height: 100px;  "> <!-- mdl-shadow--6dp margin: 0 -10px; -->
+
+<form method="post" action="users_md.php?copern=8&strana=<?php echo $strana;?>&cislo_id=<?php echo $cislo_id; ?>&uprav=<?php echo $uprav; ?>" id="formv" name="formv" style="">
+
+<div class="mdl-card mdl-shadow--4dp " style="min-height: 100px;    "> <!-- mdl-shadow--6dp margin: 0 -10px; -->
 <div class="mdl-card__title " style="padding: 0; ">
 
 <div class="mdl-tabs mdl-js-tabs" style="">
@@ -622,14 +628,17 @@ $ipok=$ipok+1;
       <span class="mdl-list__item-primary-content">
         <span class="mdl-list__item-avatar"><?php echo $cislo_id; ?></span>
         <span style="text-transform: none;"><?php echo "$riadok->meno $riadok->priezvisko"; ?> /</span>
-        <span style="font-weight: 400; text-transform: none;">&nbsp;˙prava</span>
+        <span style="font-weight: 400; text-transform: ;">&nbsp;˙prava</span>
       </span>
     </div>
   </a>
   <div class="mdl-layout-spacer"></div>
   <a href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,2);" class="mdl-tabs__tab">Firmy</a>
   <a href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,3);" class="mdl-tabs__tab">Skripty</a>
-  <a href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,4);" class="mdl-tabs__tab">Grid</a>
+  <a href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,4);" class="mdl-tabs__tab">
+<?php if ( $jegrid == 1 ) { ?>
+  <span class="" style="position: absolute; top: 3px; left:50%; border-radius: 50%; margin-left: -3px; background-color: #39f; width: 6px; height: 6px; ">&nbsp;</span>Grid</a>
+<?php                     } ?>
   <a href="#" id="edit-closer" onclick="closeId(<?php echo $riadok->id_klienta; ?>);" class="mdl-tabs__tab"><i class="material-icons vacenter">close</i></a>
   <div data-mdl-for="edit-closer" class="mdl-tooltip">Zavrieù</div>
 </div>
@@ -649,8 +658,9 @@ $ipok=$ipok+1;
     <label for="h_id" class="mdl-textfield__label "  style="">ID</label>
 </div>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100px;">
-    <input type="text" id="h_meno" name="h_meno" autofocus maxlength="20" class="mdl-textfield__input"  style="">
-    <label for="h_meno" class="mdl-textfield__label"  style="">Meno</label>
+    <input type="text" id="h_meno" name="h_meno" autofocus maxlength="20" required class="mdl-textfield__input"  style="">
+    <label for="h_meno" class="mdl-textfield__label"  style="">Meno *</label>
+    <span class="mdl-textfield__error">PovinnÈ pole!</span>
   </div>
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120px;">
     <input type="text" id="h_prie" name="h_prie" maxlength="20" class="mdl-textfield__input"  style="">
@@ -661,12 +671,14 @@ $ipok=$ipok+1;
 <fieldset class="" style="  ">
   <i class="material-icons mdl-color-text--grey-500 vacenter">&nbsp;lock_open&nbsp;</i>
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100px;">
-    <input type="text" id="h_uzm" name="h_uzm" maxlength="10" class="mdl-textfield__input"  style="">
-    <label for="h_uzm" class="mdl-textfield__label"  style="">Meno</label>
+    <input type="text" id="h_uzm" name="h_uzm" maxlength="10" required class="mdl-textfield__input"  style="">
+    <label for="h_uzm" class="mdl-textfield__label"  style="">Meno *</label>
+    <span class="mdl-textfield__error">PovinnÈ pole!</span>
   </div>
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100px;">
-    <input type="text" id="h_uzh" name="h_uzh" maxlength="10" class="mdl-textfield__input"  style="">
-    <label for="h_uzh" class="mdl-textfield__label"  style="">Heslo</label>
+    <input type="text" id="h_uzh" name="h_uzh" maxlength="10" required class="mdl-textfield__input"  style="">
+    <label for="h_uzh" class="mdl-textfield__label"  style="">Heslo *</label>
+    <span class="mdl-textfield__error">PovinnÈ pole!</span>
   </div>
 </fieldset>
 
@@ -725,27 +737,25 @@ $ipok=$ipok+1;
 <?php if ( $uprav == 2 ) { ?>
 <section class="mdl-tabs__panel flexbox">
   <fieldset style="width: 600px;">
-  sem Tabuæka
-
+  <legend>PrÌstupnÈ firmy</legend>
 <?php
 $sqlttf = "SELECT * FROM $mysqldbfir.firuz WHERE uzid = $cislo_id ORDER BY fiod, fido";
 $sqlf = mysql_query("$sqlttf");
 
-// celkom poloziek
+//celkom poloziek
 $cpolf = mysql_num_rows($sqlf);
 $if = 0;
-
 ?>
-<table class="vstup" width="100%" >
+<table>
 <tr>
-<td class="hmenu" width="10%" align="left" >UZID
-<td class="hmenu" width="10%" align="left" >xFod
-<td class="hmenu" width="10%" align="left" >xFdo
-<th class="hmenu" width="5%" >Del
-<td class="hmenu" width="65%"> 
+  <th>UZID</th>
+  <th>»Ìslo OD</th>
+  <th>»Ìslo DO</th>
+  <th>Del</th>
+  <th>&nbsp;</th>
 </tr>
 <?php
-   while ($if <= $cpolf )
+   while ( $if <= $cpolf )
    {
 ?>
 <?php
@@ -754,30 +764,21 @@ $if = 0;
 $riadokf=mysql_fetch_object($sqlf);
 ?>
 <tr>
-<td class="fmenu" align="left" colspan="1"><?php echo $riadokf->uzid;?></td>
-<td class="fmenu" align="left" colspan="1"><?php echo $riadokf->fiod;?></td>
-<td class="fmenu" align="left" colspan="1"><?php echo $riadokf->fido;?></td>
-<td class="fmenu"  colspan="1">
-
-<a href="#" onClick="ZmazPolozku(<?php echo $riadok->cplf;?>);">
-<img src='../obr/zmaz.png' width=15 height=10 border=0 title='Vymazaù riadok' ></a>
-
-</td>
+  <td><?php echo $riadokf->uzid;?></td>
+  <td><?php echo $riadokf->fiod;?></td>
+  <td><?php echo $riadokf->fido;?></td>
+  <td><a href="#" onClick="ZmazPolozku(<?php echo $riadok->cplf;?>);">Vymazaù</a></td>
 </tr>
 <?php
   }
 $if = $if + 1;
    }
 ?>
-
 <tr>
-<td class="hmenu" colspan="1"><?php echo $uzid; ?>
-<td class="hmenu" colspan="1"><input type="text" name="fiod" id="fiod" size="7"  />
-<td class="hmenu" colspan="1"><input type="text" name="fido" id="fido" size="7"  />
-<td class="obyc" colspan="1">
-<a href="#" onClick="KtoMa();">
-<img src='../obr/info.png' width=15 height=10 border=0 title='Kto m· prÌstup do firiem ËÌslo od - do' ></a>
-
+<td><?php echo $uzid; ?></td>
+<td><input type="text" name="fiod" id="fiod" size="7"  /></td>
+<td><input type="text" name="fido" id="fido" size="7"  /></td>
+<td><a href="#" onClick="KtoMa();">Kto m· prÌstup do firiem ËÌslo od - do</a></td>
 </tr>
 </table>
 
@@ -795,28 +796,22 @@ $if = $if + 1;
 
 <?php if ( $uprav == 3 ) { ?>
 <section class="mdl-tabs__panel ">
-sem tabuæka
-
+<fieldset>
+<legend>ObmedzenÈ skripty</legend>
 <?php
-$sqlttp = "SELECT * FROM menp WHERE prav = $cislo_id ORDER BY prav, datm DESC"; 
+$sqlttp = "SELECT * FROM menp WHERE prav = $cislo_id ORDER BY prav, datm DESC";
 $sqlp = mysql_query("$sqlttp");
 
-// celkom poloziek
+//celkom poloziek
 $cpolp = mysql_num_rows($sqlp);
 $ip = 0;
-
 ?>
-<table class="vstup" width="100%" >
+<table>
 <tr>
-<td class="hmenu" width="10%" align="right" >UZID
-<td class="hmenu" width="10%" align="right" >CSLM
-<td class="hmenu" width="20%" align="right" >datum
-<th class="hmenu" width="5%" >Del
-<td class="hmenu" width="55%" align="right" > 
-
-<a href="#" onClick="Help();">
-<img src='../obr/info.png' width=15 height=10 border=0 title='Help' ></a>
-
+  <th>UZID</th>
+  <th>Skript</th>
+  <th>AktualizovanÈ</th>
+  <th>&nbsp;</th>
 </tr>
 <?php
    while ($ip <= $cpolp )
@@ -828,77 +823,65 @@ $ip = 0;
 $riadokp=mysql_fetch_object($sqlp);
 ?>
 <tr>
-
-<td class="fmenu" >
-<a href="#" onClick="JedenID(<?php echo $riadokp->prav;?>);">
-<?php echo $riadokp->prav;?></a></td>
-<td class="fmenu" align="right" ><?php echo $riadokp->cslm;?></td>
-<td class="fmenu" align="left" ><?php echo $riadokp->datm;?> <?php echo $riadokp->sys;?></td>
-<td class="fmenu" width="5%" >
-
-<a href="#" onClick="ZmazPolozku(<?php echo $riadokp->prav;?>, <?php echo $riadokp->cslm;?>, '<?php echo $riadokp->datm;?>' );">
-<img src='../obr/zmaz.png' width=15 height=10 border=0 title='Vymazaù riadok' ></a>
-
-</td>
+  <td><a href="#" onClick="JedenID(<?php echo $riadokp->prav;?>);"><?php echo $riadokp->prav;?></a></td>
+  <td><?php echo $riadokp->cslm;?></td>
+  <td><?php echo $riadokp->datm;?> <?php echo $riadokp->sys;?></td>
+  <td><a href="#" onClick="ZmazPolozku(<?php echo $riadokp->prav;?>, <?php echo $riadokp->cslm;?>, '<?php echo $riadokp->datm;?>' );">Vymazaù</a></td>
 </tr>
 <?php
   }
 $ip = $ip + 1;
    }
 ?>
-
 <tr>
-
-<td class="hmenu"><input type="text" name="uzid" id="uzid" size="7"  />
-<td class="hmenu"><input type="text" name="cslm" id="cslm" size="7"  />
-
+  <td><input type="text" name="uzid" id="uzid" style="width: 50px;" />
+  <td><input type="text" name="cslm" id="cslm" style="width: 50px;"/>
+  <td></td>
+  <td></td>
 </tr>
-
 </table>
-
+  <a href="#" onClick="Help();">Help</a>
+</fieldset>
 </section>
 <?php } ?>
 
 <?php if ( $uprav == 4 ) { ?>
 <section class="mdl-tabs__panel ">
-Grid sekcia
-<tr>
-<td class="hmenu" colspan="3">GridKarta 
-<a href="#" onClick="window.open('../cis/grid.php?copern=10&cislo_id=<?php echo $cislo_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
-<img src='../obr/tlac.png' width=20 height=12 border=0 title="VytlaËiù GridKartu" ></a>
-<a href="#" onClick="window.open('../cis/grid.php?copern=11&cislo_id=<?php echo $cislo_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
-<img src='../obr/zoznam.png' width=20 height=12 border=0 title="Vygenerovaù nov˙ GridKartu" ></a>
-<a href="#" onClick="window.open('../cis/grid.php?copern=15&cislo_id=<?php echo $cislo_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
-<img src='../obr/orig.png' width=20 height=12 border=0 title="Nastaviù PIN GridKartu vöetky polia rovnakÈ" ></a>
-<a href="#" onClick="window.open('../cis/grid.php?copern=13&cislo_id=<?php echo $cislo_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
-<img src='../obr/ziarovka.png' width=20 height=12 border=0 title="Nastaviù cviËn˙ GridKartu 1234" ></a>
-<a href="#" onClick="window.open('../cis/grid.php?copern=14&cislo_id=<?php echo $cislo_id;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
-<img src='../obr/zmazuplne.png' width=20 height=12 border=0 title="Zmazaù GridKartu" ></a>
-</tr>
+<fieldset>
+<legend>Grid karta</legend>
+<p>
 
+<a href="#" onClick="window.open('../cis/grid.php?copern=10&cislo_id=<?php echo $cislo_id;?>', '_blank')">VytlaËiù</a><br>
+<a href="#" onClick="window.open('../cis/grid.php?copern=11&cislo_id=<?php echo $cislo_id;?>', '_blank')">Vygenerovaù nov˙ kartu</a><br>
+<a href="#" onClick="window.open('../cis/grid.php?copern=15&cislo_id=<?php echo $cislo_id;?>', '_blank')">Nastaviù PIN vöetky polia rovnakÈ</a><br>
+<a href="#" onClick="window.open('../cis/grid.php?copern=13&cislo_id=<?php echo $cislo_id;?>', '_blank')">Nastaviù cviËn˙ GridKartu 1234</a><br>
+<a href="#" onClick="window.open('../cis/grid.php?copern=14&cislo_id=<?php echo $cislo_id;?>', '_blank')">Zmazaù</a>
+</p>
+</fieldset>
 </section>
 <?php } ?>
 
 </div>
 
-<div class="mdl-card__actions mdl-card--border" style=" ">
-  <button id="uloz" name="uloz">Uloûiù</button>
+<div class="mdl-card__actions  right" style=" ">
+  <button class="mdl-button mdl-js-button mdl-color-text--grey-500">Zruöiù</button>
+  <button id="uloz" name="uloz" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--light-blue-700">Uloûiù</button>
 </div>
 
 
 </div> <!-- .mdl-card -->
 </form>
-<div class="" style="height: 10px; margin: 0 -10px; background-color: #ECEFF1;">&nbsp;</div>
+<!-- <div class="" style="height: 16px; margin: 0 -10px; background-color: #ECEFF1;">&nbsp;</div> -->
       </td>
 
-
+</tr>
 <?php
       } //uprav=1
 ?>
 
 
 
-    </tr>
+
 
 <?php
   }
@@ -1006,15 +989,45 @@ $is = $is + 1;
 
   function ObnovUI()
   {
-   document.forma3.selectpage.value = '<?php echo "$strana"; ?>';
+   document.forma3.selectpage.value = '<?php echo $strana; ?>';
 
-//blocked page button
+//start end pagination
 <?php if ( $strana == 1 ) { ?>
    document.getElementById('btnpageprev').disabled = true;
 <?php } ?>
 <?php if ( $strana == $xstr ) { ?>
    document.getElementById('btnpagenext').disabled = true;
 <?php } ?>
+
+//edit row
+<?php if ( $uprav != 0 ) { ?>
+  document.getElementById('selectpage').disabled = true;
+  document.getElementById('selectpage').style.cursor = 'default';
+  document.getElementById('selectpage').style.opacity = '0.5';
+  document.querySelector('.floating-toolbar').style.display = 'none';
+  document.querySelector('.data-table').style.backgroundColor = 'transparent';
+
+  // var tableheader = document.querySelector('.data-table thead');
+  // tableheader.className = tableheader.className == 'mdl-color--blue-grey-50' ? 'mdl-color--grey-100' : 'mdl-color--blue-grey-50';
+
+
+
+
+  document.querySelector('.data-table thead tr:last-child').style.opacity = '0.5';
+//dopyt, eöte oöetriù vyhæad·vanie
+  var rows = document.querySelectorAll('.row-echo > td');
+  for ( var i = 0; i < rows.length; i++ ) {
+    rows[i].style.opacity='0.5';
+  }
+  var buttons = document.querySelectorAll('.row-echo button');
+  for ( var i = 0; i < buttons.length; i++ ) {
+    buttons[i].disabled = true;
+  }
+  document.getElementById('btnpageprev').disabled = true;
+  document.getElementById('btnpagenext').disabled = true;
+<?php                    } ?>
+
+
 
 
 
@@ -1066,7 +1079,7 @@ $is = $is + 1;
   }
 
 
-  function ZoznamFir(uzivatel)
+  function ZoznamFir(uzivatel) //dopyt, bude len v ˙prave uûÌvateæa
   {
   window.open('../cis/setuzfir.php?copern=1&uzid=' + uzivatel + '&tt=1','_blank','width=980, height=800, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
   }

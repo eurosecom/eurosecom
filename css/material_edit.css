@@ -169,6 +169,7 @@ legend {
   white-space: normal;
   padding-left: 0px;
   padding-right: 0px;
+  /*min-width: 50px;*/
 }
 .data-table tfoot td {
   height: 48px;
@@ -277,6 +278,7 @@ margin-right: 10px;
 
 
 }
+
 
 
 /* prasarna */
