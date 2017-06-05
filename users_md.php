@@ -41,6 +41,36 @@ $kopkli=0;
 $zmazane=0;
 
 //vymazanie 
+if ( $copern == 6 AND $uprav == 3 )
+    {
+$cslm = 1*strip_tags($_REQUEST['cslm']);
+$uzid = 1*strip_tags($_REQUEST['uzid']);
+$datm = strip_tags($_REQUEST['datm']);
+$cislo_id = $_REQUEST['cislo_id'];
+
+
+$z_prav=0; $z_cslm=0;
+$sqlpoktt = "SELECT * FROM firuz WHERE prav='$cislo_id' AND cslm='$cslm' AND  datm='$datm' ";
+$sqlpok = mysql_query("$sqlpoktt");
+  if (@$zaznam=mysql_data_seek($sqlpok,0))
+  {
+  $riadokpok=mysql_fetch_object($sqlpok);
+  $z_prav=$riadokpok->prav;
+  $z_cslm=$riadokpok->cslm;
+  }
+
+$zmazttt = "DELETE FROM menp WHERE prav='$cislo_id' AND cslm='$cslm' AND  datm='$datm' "; 
+$zmazane = mysql_query("$zmazttt");
+//echo $zmazttt."<br />";
+
+$copern=1;
+$uprav=3;
+$kopkli=1;
+$zmazane=1;
+     }
+//koniec vymazania 
+
+//vymazanie 
 if ( $copern == 6 AND $uprav == 2 )
     {
 $cplf = 1*strip_tags($_REQUEST['cplf']);
@@ -66,6 +96,25 @@ $kopkli=1;
 $zmazane=1;
      }
 //koniec vymazania 
+
+//uprava
+if ( $copern == 8 AND $uprav == 3 )
+  {
+
+$cislo_id = $_REQUEST['cislo_id'];
+$cslm = 1*strip_tags($_REQUEST['cslm']);
+$uzid = 1*strip_tags($_REQUEST['uzid']);
+
+
+$upravttt = "INSERT INTO menp ( sys, cslm, prav ) VALUES ( '', '$cslm', '$cislo_id'  ); "; 
+if( $cslm > 0 ) { $upravene = mysql_query("$upravttt"); }
+//echo $upravttt."<br />";
+
+$copern=1;
+$uprav=3;
+$kopkli=1;
+     }
+//koniec uprava
 
 //uprava
 if ( $copern == 8 AND $uprav == 2 )
@@ -98,7 +147,7 @@ $fiod = 1*strip_tags($_REQUEST['fiod']);
 $fido = 1*strip_tags($_REQUEST['fido']);
 
 $upravttt = "INSERT INTO firuz ( uzid, fiod, fido ) VALUES ( '$cislo_id', '$fiod', '$fido'  ); "; 
-$upravene = mysql_query("$upravttt");
+if( $fiod > 0 AND $fiod <= $fido ) { $upravene = mysql_query("$upravttt"); }
 //echo $upravttt."<br />";
 
 $copern=1;
@@ -138,7 +187,7 @@ $upravene = mysql_query("$upravttt");
 //echo $upravttt;
 
 $copern=1;
-$uprav=0;
+$uprav=1;
 $kopkli=1;
      }
 //koniec uprava
@@ -807,7 +856,7 @@ $ipok=$ipok+1;
   <fieldset style="width: 600px;">
   <legend>PrÌstupnÈ firmy</legend>
 <?php
-$sqlttf = "SELECT * FROM $mysqldbfir.firuz WHERE uzid = $cislo_id ORDER BY fiod, fido";
+$sqlttf = "SELECT * FROM firuz WHERE uzid = $cislo_id ORDER BY fiod, fido";
 $sqlf = mysql_query("$sqlttf");
 
 //celkom poloziek
@@ -891,10 +940,10 @@ $ip = 0;
 $riadokp=mysql_fetch_object($sqlp);
 ?>
 <tr>
-  <td><a href="#" onClick="JedenID(<?php echo $riadokp->prav;?>);"><?php echo $riadokp->prav;?></a></td>
+  <td><?php echo $riadokp->prav;?></td>
   <td><?php echo $riadokp->cslm;?></td>
-  <td><?php echo $riadokp->datm;?> <?php echo $riadokp->sys;?></td>
-  <td><a href="#" onClick="ZmazPolozku(<?php echo $riadokp->prav;?>, <?php echo $riadokp->cslm;?>, '<?php echo $riadokp->datm;?>' );">Vymazaù</a></td>
+  <td>.<?php echo $riadokp->datm;?> <?php echo $riadokp->sys;?></td>
+  <td><a href="#" onClick="ZmazSkript(<?php echo $riadokp->prav;?>, <?php echo $riadokp->cslm;?>, '<?php echo $riadokp->datm;?>' );">Vymazaù</a></td>
 </tr>
 <?php
   }
@@ -1206,6 +1255,11 @@ $is = $is + 1;
 function zmazSetFirmy(cplf)
                 {
 window.open('users_md.php?copern=6&strana=<?php echo $strana; ?>&cislo_id=<?php echo $cislo_id; ?>&uprav=2&cplf=' + cplf + '&drupoh=1', '_self' );
+                }
+
+function ZmazSkript(uzid, cslm, datm)
+                {
+window.open('users_md.php?copern=6&strana=<?php echo $strana; ?>&cislo_id=<?php echo $cislo_id; ?>&uprav=3&cslm=' + cslm + '&datm=' + datm + '&drupoh=1', '_self' );
                 }
 
 
