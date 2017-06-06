@@ -35,7 +35,7 @@ $server_name = $_SERVER['SERVER_NAME'];
 $uprav = 1*$_REQUEST['uprav'];
 $cislo_id = 1*$_REQUEST['cislo_id'];
 //$tab = 1*$_REQUEST['tab'];
-
+$hladanie = 1*$_REQUEST['hladanie'];
 
 $kopkli=0;
 $zmazane=0;
@@ -586,10 +586,10 @@ if ( $uprav != 0 ) echo "/ úprava id $cislo_id";
       </span>
     </th>
     <th colspan="7">
-<form action="#" class="">
+<form action="Hladanie();" method="post" id="formhladaj" class="">
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable " style="padding-top: 11px;">
     <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6" style="top:9px;">
-      <i class="material-icons">search</i>
+      <i class="material-icons" >search</i>
     </label>
     <div class="mdl-textfield__expandable-holder">
       <input class="mdl-textfield__input " type="text" id="sample6" style="font-size: 14px;">
@@ -1429,6 +1429,15 @@ var fdo=document.formv.fido.value;
 window.open('../cis/setuzfir_pdf.php?copern=10&page=1&sysx=UCT&uzid=<?php echo $uzid; ?>&fod=' + fod + '&fdo=' + fdo + '&drupoh=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+  function Hladanie()
+  {
+
+  var hladane = document.formhladaj.sample6
+  if( hladane != "" ) {
+
+   window.open('users_md.php?hladanie=1&copern=1&strana=1&uprav=0', '_self');
+                      }
+  }
 
 </script>
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
