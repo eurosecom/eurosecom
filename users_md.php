@@ -472,6 +472,29 @@ $sqlttt=" CREATE TABLE `".$mysqldb2010."`.`menp` SELECT * FROM `".$mysqldb2016."
           }
 //if( $newdelenie == 1 )
 
+
+
+//vybrany uzivatel cislo_id s gridkartou
+$jegridid=0;
+$sqlpoktt = "SELECT * FROM krtgrd WHERE id = $cislo_id ";
+$sqlpok = mysql_query("$sqlpoktt");
+  if (@$zaznam=mysql_data_seek($sqlpok,0))
+  {
+  $riadokpok=mysql_fetch_object($sqlpok);
+  $jegridid=1;
+  }
+
+//vybrany uzivatel cislo_id s obmedzenim skriptov
+$jemenpid=0;
+$sqlpoktt = "SELECT * FROM menp WHERE prav = $cislo_id ";
+$sqlpok = mysql_query("$sqlpoktt");
+  if (@$zaznam=mysql_data_seek($sqlpok,0))
+  {
+  $riadokpok=mysql_fetch_object($sqlpok);
+  $jemenpid=1;
+  }
+
+
 ?>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -648,7 +671,7 @@ $sqlpok = mysql_query("$sqlpoktt");
   if (@$zaznam=mysql_data_seek($sqlpok,0))
   {
   $riadokpok=mysql_fetch_object($sqlpok);
-  $poslpr=$riadokpok->datm;
+  $poslpr = date("d.m.Y H:i:s", strtotime($riadokpok->datm));
   }
 
 //nastav moju firmu a ume
@@ -754,9 +777,9 @@ $ipok=$ipok+1;
     </span>
   </a>
   <a id="navfirm" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,2);" class="mdl-navigation__link">PrÌstupnÈ firmy</a>
-  <a id="navscript" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,3);" class="mdl-navigation__link">Obmedzovacie skripty<?php if ( $jemenp != 1 ) { ?><span class="circle">&nbsp;</span><?php } ?></a>
+  <a id="navscript" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,3);" class="mdl-navigation__link">Obmedzovacie skripty<?php if ( $jemenpid == 1 ) { ?><span class="circle">&nbsp;</span><?php } ?></a>
 
-  <a id="navgrid" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,4);" class="mdl-navigation__link">Grid karta<?php if ( $jegrid == 1 ) { ?><span class="circle">&nbsp;</span><?php } ?></a>
+  <a id="navgrid" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,4);" class="mdl-navigation__link">Grid karta<?php if ( $jegridid == 1 ) { ?><span class="circle">&nbsp;</span><?php } ?></a>
 </nav>
 <div class="mdl-card__supporting-text" style=" width: 78%; position: relative;"> <!-- padding: 12px 12px 8px 12px; -->
 
@@ -852,7 +875,7 @@ $ipok=$ipok+1;
 <section class="flexbox" style="padding: 0 72px 0 32px; flex-wrap: wrap; align-items: flex-start; ">
 
 <?php
-$sqlttf = "SELECT * FROM firuz WHERE uzid = $cislo_id ORDER BY fiod, fido";
+$sqlttf = "SELECT * FROM firuz WHERE uzid = $cislo_id ORDER BY cplf DESC";
 $sqlf = mysql_query("$sqlttf");
 
 //celkom poloziek
@@ -926,7 +949,7 @@ $if = $if + 1;
 <?php if ( $uprav == 3 ) { ?>
 <section style="padding: 0 72px 0 32px; ">
 <?php
-$sqlttp = "SELECT * FROM menp WHERE prav = $cislo_id ORDER BY prav, datm DESC";
+$sqlttp = "SELECT * FROM menp WHERE prav = $cislo_id ORDER BY datm DESC";
 $sqlp = mysql_query("$sqlttp");
 
 //celkom poloziek
@@ -963,11 +986,12 @@ $ip = 0;
   if (@$zaznamp=mysql_data_seek($sqlp,$ip))
   {
 $riadokp=mysql_fetch_object($sqlp);
+$datmsk = date("d.m.Y H:i:s", strtotime($riadokp->datm));
 ?>
 <tr class="mini-row-echo">
 <!--   <td><?php echo $riadokp->prav;?></td> -->
   <td style="text-align: left;"><?php echo $riadokp->cslm;?></td>
-  <td style="text-align: left;"><?php echo $riadokp->datm;?> <?php echo $riadokp->sys;?></td>
+  <td style="text-align: left;"><?php echo $datmsk;?> <?php echo $riadokp->sys;?></td>
   <td>
     <i id="edit" onClick="ZmazSkript(<?php echo $riadokp->prav;?>, <?php echo $riadokp->cslm;?>, '<?php echo $riadokp->datm;?>' );" class="material-icons mdl-color-text--red-500 vacenter mini-icon-btn" style="cursor: pointer;">remove</i>
     <div data-mdl-for="edit" class="mdl-tooltip">Upraviù / Vymazaù</div>
@@ -989,9 +1013,100 @@ $ip = $ip + 1;
 
 
 <div class="mdl-shadow--2dp" style="background-color: ; height: 150px; width: 300px; font-size: 14px; border-radius: 2px;">
-Sem vloûiù grid kartu z "/cis/grid.php"
 
-<?php if ( $jegrid != 1 ) { ?> éiadna grid karta  <?php } ?> <!-- dopyt, lepöie bude obr·zok -->
+<?php
+//tlac grid
+if ( $jegridid == 1 ) {
+$sqlttg = "SELECT * FROM krtgrd WHERE id = $cislo_id AND aktiv = 1 ";
+$sqlg = mysql_query("$sqlttg"); 
+$cpolg = mysql_num_rows($sqlg);
+$ig=0;
+?>
+
+<table width="300px" align="left" border="1" cellpadding="3" cellspacing="0" bordercolor="lightblue" >
+<tr bgcolor="lightblue">
+<td class="bmenu" align="center" >GRID<td class="hmenu" align="center" >A
+<td class="bmenu" align="center" >B<td class="hmenu" align="center" >C
+<td class="bmenu" align="center" >D<td class="hmenu" align="center" >E
+<td class="bmenu" align="center" >F
+</tr>
+
+<?php
+   while ($ig <= $cpolg )
+   {
+
+if (@$zaznamg=mysql_data_seek($sqlg,$ig))
+{
+$riadokg=mysql_fetch_object($sqlg);
+?>
+<tr>
+<td class="bmenu" align="center" >1
+<td class="bmenu" align="center" ><?php echo $riadokg->a1;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->b1;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->c1;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->d1;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->e1;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->f1;?></td>
+</tr>
+<tr>
+<td class="bmenu" align="center" >2
+<td class="bmenu" align="center" ><?php echo $riadokg->a2;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->b2;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->c2;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->d2;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->e2;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->f2;?></td>
+</tr>
+<tr>
+<td class="bmenu" align="center" >3
+<td class="bmenu" align="center" ><?php echo $riadokg->a3;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->b3;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->c3;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->d3;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->e3;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->f3;?></td>
+</tr>
+<tr>
+<td class="bmenu" align="center" >4
+<td class="bmenu" align="center" ><?php echo $riadokg->a4;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->b4;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->c4;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->d4;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->e4;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->f4;?></td>
+</tr>
+<tr>
+<td class="bmenu" align="center" >5
+<td class="bmenu" align="center" ><?php echo $riadokg->a5;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->b5;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->c5;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->d5;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->e5;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->f5;?></td>
+</tr>
+<tr>
+<td class="bmenu" align="center" >6
+<td class="bmenu" align="center" ><?php echo $riadokg->a6;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->b6;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->c6;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->d6;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->e6;?></td>
+<td class="bmenu" align="center" ><?php echo $riadokg->f6;?></td>
+</tr>
+
+<?php
+  }
+$ig = $ig + 1;
+   }
+?>
+</table>
+<?php
+//koniec tlac grid
+             }
+?>
+
+
+<?php if ( $jegridid != 1 ) { ?> éiadna grid karta  <?php } ?> <!-- dopyt, lepöie bude obr·zok -->
 </div>
 
 <div style="padding-left: 12px; width: 250px;">
@@ -1299,6 +1414,19 @@ $is = $is + 1;
 function zmazSetFirmy(cplf)
                 {
 window.open('users_md.php?copern=6&strana=<?php echo $strana; ?>&cislo_id=<?php echo $cislo_id; ?>&uprav=2&cplf=' + cplf + '&drupoh=1', '_self' );
+                }
+
+function Help()
+                {
+window.open('../cis/pristupy_cslm.php', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function KtoMa()
+                {
+var fod=document.formv.fiod.value;
+var fdo=document.formv.fido.value;
+
+window.open('../cis/setuzfir_pdf.php?copern=10&page=1&sysx=UCT&uzid=<?php echo $uzid; ?>&fod=' + fod + '&fdo=' + fdo + '&drupoh=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 
