@@ -530,7 +530,7 @@ $sqlpok = mysql_query("$sqlpoktt");
 <main class="mdl-layout__content mdl-color--blue-grey-50">
 
 <!-- floating action button -->
-<aside class="floating-toolbar" style="top:50px; ">
+<aside class="floating-toolbar " style="top:80px; ">
   <button type="button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-color--green-500"><i class="material-icons">add</i></button>
   <button type="button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"><i class="material-icons">print</i></button>
 </aside>
@@ -574,7 +574,7 @@ $konc =($pols*($strana-1))+($pols-1);
     <col style="width:12%;">
   </colgroup>
   <thead class="mdl-color--grey-100" style="">
-  <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
+  <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.1); height: 48px;">
     <th colspan="2" class="mdl-data-table__cell--non-numeric">
       <span class="table-title">
         <span class="title-upper">»ÌselnÌk uûÌvateæov</span>
@@ -585,17 +585,25 @@ if ( $uprav != 0 ) echo "/ ˙prava id $cislo_id";
  ?> <!-- dopyt, doplniù Ôalöie stavy -->
       </span>
     </th>
-    <th colspan="7">
+    <th colspan="7" class="">
 <form action="Hladanie();" method="post" id="formhladaj" class="">
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable " style="padding-top: 11px;">
+  <div class="" style=" padding-top: 10px; float: right;  ">
+    <button class="mdl-button mdl-js-button mdl-button--icon mdl-color--grey-300 toleft" style=""><i class="material-icons">search</i></button>
+    <input type="text" id="sample6" name="sample6" placeholder="Hæadan˝ v˝raz..." class="mdl-textfield__input" style="font-size: 14px; width: 150px; float: left;">
+
+  </div>
+
+
+
+<!--   <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable " style="padding-top: 11px;">
     <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6" style="top:9px;">
-      <i class="material-icons" >search</i>
+      <i class="material-icons">search</i>
     </label>
     <div class="mdl-textfield__expandable-holder">
       <input class="mdl-textfield__input " type="text" id="sample6" style="font-size: 14px;">
       <label class="mdl-textfield__label " for="sample6" style="top: 4px; left: 0; font-size: 14px;">Hæadan˝ v˝raz...</label>
     </div>
-  </div>
+  </div> -->
 </form>
 
       </th>
@@ -707,7 +715,6 @@ $cpolpok = mysql_num_rows($sqlpok);
 $ipok=$ipok+1;
    }
         }
-
 ?>
       <td class="mdl-data-table__cell--non-numeric"><?php echo "$riadok->uziv_meno - $riadok->uziv_heslo"; ?><br>
 
@@ -740,10 +747,30 @@ $ipok=$ipok+1;
 
       </td>
       <td><?php echo $riadok->all_prav; ?></td>
-      <td><?php echo $riadok->uct_prav;?><br><?php echo $riadok->him_prav;?></td>
-      <td><?php echo $riadok->mzd_prav;?><br><?php echo $riadok->dop_prav;?></td>
-      <td><?php echo $riadok->fak_prav;?><br><?php echo $riadok->vyr_prav;?></td>
-      <td><?php echo $riadok->skl_prav;?><br><?php echo $riadok->ana_prav;?></td>
+      <td>
+        <span id="<?php echo $riadok->id_klienta; ?>uct"><?php echo $riadok->uct_prav; ?></span><br>
+        <span data-mdl-for="<?php echo $riadok->id_klienta; ?>uct" class="mdl-tooltip" style="margin-top: -7px;">⁄ËtovnÌctvo</span>
+        <span id="<?php echo $riadok->id_klienta; ?>maj"><?php echo $riadok->him_prav; ?></span>
+        <span data-mdl-for="<?php echo $riadok->id_klienta; ?>maj" class="mdl-tooltip" style="margin-top: -7px;">Majetok</span>
+      </td>
+      <td>
+        <span id="<?php echo $riadok->id_klienta; ?>mzd"><?php echo $riadok->mzd_prav; ?></span><br>
+        <span data-mdl-for="<?php echo $riadok->id_klienta; ?>mzd" class="mdl-tooltip" style="margin-top: -7px;">Mzdy</span>
+        <span id="<?php echo $riadok->id_klienta; ?>dop"><?php echo $riadok->dop_prav; ?></span>
+        <span data-mdl-for="<?php echo $riadok->id_klienta; ?>dop" class="mdl-tooltip" style="margin-top: -7px;">Doprava</span>
+      </td>
+      <td>
+        <span id="<?php echo $riadok->id_klienta; ?>fak"><?php echo $riadok->fak_prav; ?></span><br>
+        <span data-mdl-for="<?php echo $riadok->id_klienta; ?>fak" class="mdl-tooltip" style="margin-top: -7px;">Odbyt</span>
+        <span id="<?php echo $riadok->id_klienta; ?>vyr"><?php echo $riadok->vyr_prav; ?></span>
+        <span data-mdl-for="<?php echo $riadok->id_klienta; ?>vyr" class="mdl-tooltip" style="margin-top: -7px;">V˝roba</span>
+      </td>
+      <td>
+        <span id="<?php echo $riadok->id_klienta; ?>skl"><?php echo $riadok->skl_prav; ?></span><br>
+        <span data-mdl-for="<?php echo $riadok->id_klienta; ?>skl" class="mdl-tooltip" style="margin-top: -7px;">Sklad</span>
+        <span id="<?php echo $riadok->id_klienta; ?>ana"><?php echo $riadok->ana_prav; ?></span>
+        <span data-mdl-for="<?php echo $riadok->id_klienta; ?>ana" class="mdl-tooltip" style="margin-top: -7px;">Anal˝zy</span>
+      </td>
       <td>
         <button type="button" id="<?php echo $riadok->id_klienta; ?>itemedit" onclick="upravId(<?php echo $riadok->id_klienta; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
       <div class="mdl-tooltip" data-mdl-for="<?php echo $riadok->id_klienta; ?>itemedit">Upraviù</div>
@@ -751,8 +778,12 @@ $ipok=$ipok+1;
         <div class="mdl-tooltip" data-mdl-for="<?php echo $riadok->id_klienta; ?>moretools">œalöie akcie</div>
 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect table-row-menu" for="<?php echo $riadok->id_klienta; ?>moretools" style=""  >
   <li class="mdl-menu__item"><i class="material-icons mdl-color-text--grey-500 vacenter" style="">content_copy</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KopÌrovaù</li>
-  <li class="mdl-menu__item"><i class="material-icons mdl-color-text--red-500 vacenter">remove</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vymazaù</li>
-  <li onclick="NastavFirmu(<?php echo $riadok->id_klienta; ?>, <?php echo $strana; ?>);" class="mdl-menu__item">Nastaviù firmu <?php echo $mojexcf;?> a mesiac <?php echo $mojeume;?></li>
+  <li disabled class="mdl-menu__item"><i class="material-icons vacenter">remove</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vymazaù
+<i id="<?php echo $riadok->id_klienta; ?>userremove" class="material-icons vacenter" style="">info_outline</i>
+
+  <div data-mdl-for="<?php echo $riadok->id_klienta; ?>userremove" class="mdl-tooltip">Nie je moûnÈ vymazaù uûÌvateæa,<br> iba ho nastaviù ako neaktÌvny</div>
+  </li>
+  <li onclick="NastavFirmu(<?php echo $riadok->id_klienta; ?>, <?php echo $strana; ?>);" class="mdl-menu__item"><i class="material-icons mdl-color-text--grey-500 vacenter">build</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nastaviù firmu <?php echo $mojexcf;?> a mesiac <?php echo $mojeume;?></li>
 </ul>
      </td>
 </tr>
@@ -777,7 +808,7 @@ $ipok=$ipok+1;
     </span>
   </a>
   <a id="navfirm" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,2);" class="mdl-navigation__link">PrÌstupnÈ firmy</a>
-  <a id="navscript" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,3);" class="mdl-navigation__link">Obmedzovacie skripty<?php if ( $jemenpid == 1 ) { ?><span class="circle">&nbsp;</span><?php } ?></a>
+  <a id="navscript" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,3);" class="mdl-navigation__link">BlokovanÈ skripty<?php if ( $jemenpid == 1 ) { ?><span class="circle">&nbsp;</span><?php } ?></a>
 
   <a id="navgrid" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,4);" class="mdl-navigation__link">Grid karta<?php if ( $jegridid == 1 ) { ?><span class="circle">&nbsp;</span><?php } ?></a>
 </nav>
@@ -786,9 +817,13 @@ $ipok=$ipok+1;
 <?php if ( $uprav == 1 ) { ?>
 <section class="flexbox " style="flex-wrap: wrap; background-color: ; padding-left: 12px;">
 
-<input type="hidden" id="h_id" name="h_id">
+
 <fieldset class="" style="margin-right: 24px;  background-color: ; ">
 <i class="material-icons mdl-color-text--grey-500 vacenter" style="">person&nbsp;</i>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 40px; margin-right: 6px;">
+    <input type="text" id="h_id" name="h_id" disabled class="mdl-textfield__input"  style="" value="<?php echo $cislo_id; ?>">
+    <label for="h_id" class="mdl-textfield__label"  style="">ID</label>
+  </div>
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120px; margin-right: 6px;">
     <input type="text" id="h_meno" name="h_meno" autofocus maxlength="20" required class="mdl-textfield__input"  style="">
     <label for="h_meno" class="mdl-textfield__label"  style="">Meno *</label>
@@ -860,12 +895,15 @@ $ipok=$ipok+1;
     <span class="mdl-textfield__error">PovolenÈ s˙ ËÌsla!</span>
   </div>
 </fieldset>
-<fieldset class="" style="padding-left: 32px; width: 200px; padding-top: 12px; padding-bottom: 0px;">
-<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect " for="switch-1" style=" ">
+<fieldset class=" " style="width: 300px; padding-left: 32px; padding-top: 12px; ">
+<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect toleft" for="switch-1" style=" ">
   <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
   <span class="mdl-switch__label">Ne/aktÌvny</span>
 </label>
-</fieldset>
+<div id="uvolni" onmouseover="return Povol_uloz();" class="ukaz" style="position: absolute; right: 0; bottom: 0; padding: 16px;">
+  <button id="uloz" name="uloz" class=" " style="">Uloûiù</button>
+</div>
+</fieldset> <!-- mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--light-blue-700 -->
   </section>
 <?php } ?>
 
@@ -883,10 +921,12 @@ $cpolf = mysql_num_rows($sqlf);
 $if = 0;
 ?>
 
-<table class="mdl-data-table data-table" style="border: 0; width: 280px; margin-bottom: 20px; margin-right: 72px;">
+<table class="mdl-data-table data-table" style="border: 0; width: 320px; margin-bottom: 20px; margin-right: 72px;">
 <thead class="mdl-color--grey-200">
 <tr style=" ">
-  <th class="" style="padding:0; width: 25%; font-size: 11px; text-align:center;">»Ìslo<br>firmy:</th> <!-- dopyt, daù sem ikonu s "i" akÈ doæava rozklik·vacÌ zoznam firiem, viÔ firebase -->
+  <th class="" style="padding:0; width: 25%; text-align:center;">Firmy:&nbsp;<a href="#" class="mdl-color-text--grey-500" style="position: absolute; top: 7px;"><i id="listfirm" class="md-18 material-icons" style="line-height: 1; ">info_outline</i></a>
+<span for="listfirm" class="mdl-tooltip">Zobraziù ËÌselnÌk firiem</span>
+</th>
   <th class="" style="width: 25%; text-align: center;">Od</th>
   <th class="" style="width: 25%; text-align: center;">Do</th>
   <th style="width: 25%; padding: 0;">&nbsp;</th>
@@ -912,7 +952,11 @@ $if = 0;
       <span class="mdl-textfield__error">PovolenÈ s˙ ËÌsla!</span>
     </div>
   </td>
-  <td>&nbsp;</td>
+  <td>
+    <div id="uvolni" onmouseover="return Povol_uloz();" class="" style=" padding: 16px;">
+      <button id="uloz" name="uloz" class=" " style="">Uloûiù</button>
+    </div>
+  </td>
 </tr>
 <?php
 while ( $if <= $cpolf )
@@ -938,7 +982,7 @@ $if = $if + 1;
 </tbody>
 </table>
 
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label " style="width: 420px; display: ;">
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label " style="width: 350px; display: ;">
     <input class="mdl-textfield__input" type="text" id="h_txt1" name="h_txt1" style="">
     <label class="mdl-textfield__label " for="h_txt1" style="">Firmy (star˝ form·t)</label>
   </div>
@@ -947,7 +991,7 @@ $if = $if + 1;
 
 
 <?php if ( $uprav == 3 ) { ?>
-<section style="padding: 0 72px 0 32px; ">
+<section class="flexbox" style="padding: 0 72px 0 32px; flex-wrap: wrap;">
 <?php
 $sqlttp = "SELECT * FROM menp WHERE prav = $cislo_id ORDER BY datm DESC";
 $sqlp = mysql_query("$sqlttp");
@@ -956,11 +1000,13 @@ $sqlp = mysql_query("$sqlttp");
 $cpolp = mysql_num_rows($sqlp);
 $ip = 0;
 ?>
-<table class="mdl-data-table data-table" style="border: 0; width: 330px; margin-bottom: 20px;">
+<table class="mdl-data-table data-table" style="border: 0; width: 350px; margin-bottom: 20px; margin-right: 72px;">
 <thead class="mdl-color--grey-200">
 <tr>
 <!--   <th>UZID</th> -->
-  <th class="" style="width: 40%; text-align: left;">Skript&nbsp;&nbsp;<a href="#" onclick="Help();">i</a></th>
+  <th class="" style="width: 40%; text-align: left;">Skript&nbsp;<a href="#" onclick="Help();" class="mdl-color-text--grey-500" style="position: absolute; top: 7px;"><i id="listscript" class="md-18 material-icons" style="line-height: 1; ">info_outline</i></a>
+<span for="listscript" class="mdl-tooltip">Zobraziù ËÌselnÌk skriptov</span>
+  </th>
   <th style="width: 40%; text-align: left;">AktualizovanÈ</th>
   <th style="width: 20%;">&nbsp;</th>
 </tr>
@@ -976,7 +1022,9 @@ $ip = 0;
     </div>
   </td>
   <td>&nbsp;</td>
-  <td>&nbsp;</td>
+  <td><div id="uvolni" onmouseover="return Povol_uloz();" class="" style=" padding: 16px;">
+  <button id="uloz" name="uloz" class=" " style="">Uloûiù</button>
+</div></td>
 </tr>
 <?php
    while ($ip <= $cpolp )
@@ -1004,6 +1052,8 @@ $ip = $ip + 1;
 ?>
 </tbody>
 </table>
+
+
 </section>
 <?php } ?>
 
@@ -1012,25 +1062,35 @@ $ip = $ip + 1;
 <section class="flexbox" style="padding: 0 32px 0 32px; flex-wrap: wrap;">
 
 
-<div class="mdl-shadow--2dp" style="background-color: ; height: 150px; width: 300px; font-size: 14px; border-radius: 2px;">
+
 
 <?php
 //tlac grid
 if ( $jegridid == 1 ) {
-$sqlttg = "SELECT * FROM krtgrd WHERE id = $cislo_id AND aktiv = 1 ";
-$sqlg = mysql_query("$sqlttg"); 
+$sqlttg = "SELECT * FROM krtgrd WHERE id = $cislo_id AND aktiv = 1";
+$sqlg = mysql_query("$sqlttg");
 $cpolg = mysql_num_rows($sqlg);
 $ig=0;
 ?>
-
-<table width="300px" align="left" border="1" cellpadding="3" cellspacing="0" bordercolor="lightblue" >
-<tr bgcolor="lightblue">
-<td class="bmenu" align="center" >GRID<td class="hmenu" align="center" >A
-<td class="bmenu" align="center" >B<td class="hmenu" align="center" >C
-<td class="bmenu" align="center" >D<td class="hmenu" align="center" >E
-<td class="bmenu" align="center" >F
+<table class=" grid-table" style="width: 350px;  border:0; border-collapse: collapse; padding: 0; ">
+<colgroup>
+  <col style="width:16%;">
+  <col style="width:14%;">
+  <col style="width:14%;">
+  <col style="width:14%;">
+  <col style="width:14%;">
+  <col style="width:14%;">
+  <col style="width:14%;">
+</colgroup>
+<tr>
+  <th style="width: 16%; border:0;">&nbsp;</th>
+  <th style="width: 14%;">A</th>
+  <th style="width: 14%;">B</th>
+  <th style="width: 14%;">C</th>
+  <th style="width: 14%;">D</th>
+  <th style="width: 14%;">E</th>
+  <th style="width: 14%;">F</th>
 </tr>
-
 <?php
    while ($ig <= $cpolg )
    {
@@ -1040,65 +1100,69 @@ if (@$zaznamg=mysql_data_seek($sqlg,$ig))
 $riadokg=mysql_fetch_object($sqlg);
 ?>
 <tr>
-<td class="bmenu" align="center" >1
-<td class="bmenu" align="center" ><?php echo $riadokg->a1;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->b1;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->c1;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->d1;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->e1;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->f1;?></td>
+  <th>1</th>
+  <td style="border:0;"><?php echo $riadokg->a1; ?></td>
+  <td style="border:0;"><?php echo $riadokg->b1; ?></td>
+  <td style="border:0;"><?php echo $riadokg->c1; ?></td>
+  <td style="border:0;"><?php echo $riadokg->d1; ?></td>
+  <td style="border:0;"><?php echo $riadokg->e1; ?></td>
+  <td style="border:0;"><?php echo $riadokg->f1; ?></td>
 </tr>
 <tr>
-<td class="bmenu" align="center" >2
-<td class="bmenu" align="center" ><?php echo $riadokg->a2;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->b2;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->c2;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->d2;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->e2;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->f2;?></td>
+  <th>2</th>
+  <td><?php echo $riadokg->a2; ?></td>
+  <td><?php echo $riadokg->b2; ?></td>
+  <td><?php echo $riadokg->c2; ?></td>
+  <td><?php echo $riadokg->d2; ?></td>
+  <td><?php echo $riadokg->e2; ?></td>
+  <td><?php echo $riadokg->f2; ?></td>
 </tr>
 <tr>
-<td class="bmenu" align="center" >3
-<td class="bmenu" align="center" ><?php echo $riadokg->a3;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->b3;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->c3;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->d3;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->e3;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->f3;?></td>
+  <th>3</th>
+  <td><?php echo $riadokg->a3; ?></td>
+  <td><?php echo $riadokg->b3; ?></td>
+  <td><?php echo $riadokg->c3; ?></td>
+  <td><?php echo $riadokg->d3; ?></td>
+  <td><?php echo $riadokg->e3; ?></td>
+  <td><?php echo $riadokg->f3; ?></td>
 </tr>
 <tr>
-<td class="bmenu" align="center" >4
-<td class="bmenu" align="center" ><?php echo $riadokg->a4;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->b4;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->c4;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->d4;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->e4;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->f4;?></td>
+  <th>4</th>
+  <td><?php echo $riadokg->a4; ?></td>
+  <td><?php echo $riadokg->b4; ?></td>
+  <td><?php echo $riadokg->c4; ?></td>
+  <td><?php echo $riadokg->d4; ?></td>
+  <td><?php echo $riadokg->e4; ?></td>
+  <td><?php echo $riadokg->f4; ?></td>
 </tr>
 <tr>
-<td class="bmenu" align="center" >5
-<td class="bmenu" align="center" ><?php echo $riadokg->a5;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->b5;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->c5;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->d5;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->e5;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->f5;?></td>
+  <th>5</th>
+  <td><?php echo $riadokg->a5; ?></td>
+  <td><?php echo $riadokg->b5; ?></td>
+  <td><?php echo $riadokg->c5; ?></td>
+  <td><?php echo $riadokg->d5; ?></td>
+  <td><?php echo $riadokg->e5; ?></td>
+  <td><?php echo $riadokg->f5; ?></td>
 </tr>
 <tr>
-<td class="bmenu" align="center" >6
-<td class="bmenu" align="center" ><?php echo $riadokg->a6;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->b6;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->c6;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->d6;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->e6;?></td>
-<td class="bmenu" align="center" ><?php echo $riadokg->f6;?></td>
+  <th style="border:0;">6</th>
+  <td style="border:0;"><?php echo $riadokg->a6; ?></td>
+  <td style="border:0;"><?php echo $riadokg->b6; ?></td>
+  <td style="border:0;"><?php echo $riadokg->c6; ?></td>
+  <td style="border:0;"><?php echo $riadokg->d6; ?></td>
+  <td style="border:0;"><?php echo $riadokg->e6; ?></td>
+  <td style="border:0;"><?php echo $riadokg->f6; ?></td>
 </tr>
-
 <?php
   }
 $ig = $ig + 1;
    }
 ?>
+<?php if ( $jegridid != 1 ) { ?>
+<tr>
+  <td colspan="7" rowspan="7"> éiadna grid karta</td> <!-- dopyt, lepöie bude obr·zok -->
+</tr>
+<?php } ?>
 </table>
 <?php
 //koniec tlac grid
@@ -1106,12 +1170,12 @@ $ig = $ig + 1;
 ?>
 
 
-<?php if ( $jegridid != 1 ) { ?> éiadna grid karta  <?php } ?> <!-- dopyt, lepöie bude obr·zok -->
-</div>
 
-<div style="padding-left: 12px; width: 250px;">
+
+
+<div style="padding-left: 12px; width: 210px;">
   <button type="button" onclick="window.open('../cis/grid.php?copern=10&cislo_id=<?php echo $cislo_id;?>', '_blank')" class="mdl-button mdl-js-button " style="width: 100%; font-size: 12px; text-align: left;  background-color: ;">
-    <i class="material-icons mdl-list__item-icon" style="margin: -1px 16px 0 0; background-color: ;">print</i>Zobraziù
+    <i class="material-icons mdl-list__item-icon" style="margin: -1px 16px 0 0; background-color: ;">print</i>VytlaËiù
   </button>
   <button type="button" onclick="window.open('../cis/grid.php?copern=11&cislo_id=<?php echo $cislo_id;?>', '_blank')" class="mdl-button mdl-js-button " style="width: 100%; font-size: 12px; text-align: left;  background-color: ;">
     <i class="material-icons mdl-list__item-icon" style="margin: -1px 16px 0 0; background-color: ;">add</i>Generovaù
@@ -1133,7 +1197,7 @@ $ig = $ig + 1;
 </section>
 <?php } ?>
 
-  <button id="uloz" name="uloz" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--light-blue-700" style="position: absolute; bottom: 16px; right: 16px;">Uloûiù</button>
+
 </div> <!-- .mdl-card__supporting-text -->
 
 <div class="mdl-card__menu" style="top: 8px; right: 12px;">
@@ -1270,7 +1334,9 @@ $is = $is + 1;
 <?php } ?>
 
 //edit row
-<?php if ( $uprav != 0 ) { ?>
+<?php if ( $uprav != 0 )
+{
+?>
   document.getElementById('selectpage').disabled = true;
   document.getElementById('selectpage').style.cursor = 'default';
   document.getElementById('selectpage').style.opacity = '0.5';
@@ -1293,7 +1359,22 @@ $is = $is + 1;
 
   document.getElementById('btnpageprev').disabled = true;
   document.getElementById('btnpagenext').disabled = true;
-<?php                    } ?>
+
+  // var links = document.querySelectorAll('.mdl-navigation > .mdl-navigation__link');
+  // for ( var i = 0; i < links.length; i++ ) {
+  //   links[i].style.cssText='pointer-events: none;';
+  // }
+  // document.querySelector('.header-nav > .header-nav-link.active').style.cssText='color: rgba(255,255,255,.7); border-bottom-color: rgba(255,255,255,.7); pointer-events: none;'
+
+
+
+
+
+
+<?php
+}
+//edit row
+?>
 
 <?php if ( $uprav == 1 ) { ?> document.getElementById('navuser').className += ' active'; <?php } ?>
 <?php if ( $uprav == 2 ) { ?> document.getElementById('navfirm').className += ' active'; <?php } ?>
@@ -1429,7 +1510,7 @@ var fdo=document.formv.fido.value;
 window.open('../cis/setuzfir_pdf.php?copern=10&page=1&sysx=UCT&uzid=<?php echo $uzid; ?>&fod=' + fod + '&fdo=' + fdo + '&drupoh=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-  function Hladanie()
+function Hladanie()
   {
 
   var hladane = document.formhladaj.sample6
