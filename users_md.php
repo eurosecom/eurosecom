@@ -12,7 +12,7 @@ $newdelenie=0;
 if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
 if ( $newdelenie == 1 )
           {
-$dtb2 = include("oddel_dtb3new.php");
+$dtb2 = include("../oddel_dtb3new.php");
           }
 
   @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
@@ -1183,19 +1183,19 @@ $ig = $ig + 1;
 
 
 <div style="padding-left: 12px; width: 210px;">
-  <button type="button" onclick="window.open('../cis/grid.php?copern=10&cislo_id=<?php echo $cislo_id;?>', '_blank')" class="mdl-button mdl-js-button " style="width: 100%; font-size: 12px; text-align: left;  background-color: ;">
+  <button type="button" onclick="window.open('../cis/grid.php?copern=10&cislo_id=<?php echo $cislo_id;?>&usermd=1', '_blank')" class="mdl-button mdl-js-button " style="width: 100%; font-size: 12px; text-align: left;  background-color: ;">
     <i class="material-icons mdl-list__item-icon" style="margin: -1px 16px 0 0; background-color: ;">print</i>VytlaËiù
   </button>
-  <button type="button" onclick="window.open('../cis/grid.php?copern=11&cislo_id=<?php echo $cislo_id;?>', '_blank')" class="mdl-button mdl-js-button " style="width: 100%; font-size: 12px; text-align: left;  background-color: ;">
+  <button type="button" onclick="window.open('../cis/grid.php?copern=11&cislo_id=<?php echo $cislo_id;?>&usermd=1', '_self')" class="mdl-button mdl-js-button " style="width: 100%; font-size: 12px; text-align: left;  background-color: ;">
     <i class="material-icons mdl-list__item-icon" style="margin: -1px 16px 0 0; background-color: ;">add</i>Generovaù
   </button>
-  <button type="button" onclick="window.open('../cis/grid.php?copern=15&cislo_id=<?php echo $cislo_id;?>', '_blank')" class="mdl-button mdl-js-button " style="width: 100%; font-size: 12px; text-align: left;  background-color: ;">
+  <button type="button" onclick="window.open('../cis/grid.php?copern=15&cislo_id=<?php echo $cislo_id;?>&usermd=1', '_self')" class="mdl-button mdl-js-button " style="width: 100%; font-size: 12px; text-align: left;  background-color: ;">
     <i class="material-icons mdl-list__item-icon" style="margin: -1px 16px 0 0; background-color: ;">settings</i>Nastaviù rovnakÈ PIN
   </button>
-  <button type="button" onclick="window.open('../cis/grid.php?copern=13&cislo_id=<?php echo $cislo_id;?>', '_blank')" class="mdl-button mdl-js-button " style="width: 100%; font-size: 12px; text-align: left;  background-color: ;">
+  <button type="button" onclick="window.open('../cis/grid.php?copern=13&cislo_id=<?php echo $cislo_id;?>&usermd=1', '_self')" class="mdl-button mdl-js-button " style="width: 100%; font-size: 12px; text-align: left;  background-color: ;">
     <i class="material-icons mdl-list__item-icon" style="margin: -1px 16px 0 0; background-color: ;">settings</i>Nastaviù PIN 1234
   </button>
-  <button type="button" onclick="window.open('../cis/grid.php?copern=14&cislo_id=<?php echo $cislo_id;?>', '_blank')" class="mdl-button mdl-js-button " style="width: 100%; font-size: 12px; text-align: left;  background-color: ;">
+  <button type="button" onclick="window.open('../cis/grid.php?copern=14&cislo_id=<?php echo $cislo_id;?>&usermd=1', '_self')" class="mdl-button mdl-js-button " style="width: 100%; font-size: 12px; text-align: left;  background-color: ;">
     <i class="material-icons mdl-list__item-icon" style="margin: -1px 16px 0 0; background-color: ;">remove_circle_outline</i>Zruöiù
   </button>
 
