@@ -586,9 +586,9 @@ if ( $uprav != 0 ) echo "/ úprava id $cislo_id";
       </span>
     </th>
     <th colspan="7" class="">
-<form action="Hladanie();" method="post" id="formhladaj" class="">
+<form action="users_md.php?hladanie=1&copern=1&strana=1&uprav=0" method="post" id="formhladaj" class="">
   <div class="" style=" padding-top: 10px; float: right;  ">
-    <button class="mdl-button mdl-js-button mdl-button--icon mdl-color--grey-300 toleft" style=""><i class="material-icons">search</i></button>
+    <button onclick="Hladanie();" class="mdl-button mdl-js-button mdl-button--icon mdl-color--grey-300 toleft" style=""><i class="material-icons">search</i></button>
     <input type="text" id="sample6" name="sample6" placeholder="H¾adaný výraz..." class="mdl-textfield__input" style="font-size: 14px; width: 150px; float: left;">
 
   </div>
