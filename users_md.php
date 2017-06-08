@@ -36,6 +36,9 @@ $uprav = 1*$_REQUEST['uprav'];
 $cislo_id = 1*$_REQUEST['cislo_id'];
 //$tab = 1*$_REQUEST['tab'];
 $hladanie = 1*$_REQUEST['hladanie'];
+$cohladat = trim($_REQUEST['cohladat']);
+if( $cohladat == '' ){ $hladanie=0; }
+//echo $cohladat."<br />";
 
 $kopkli=0;
 $zmazane=0;
@@ -541,7 +544,12 @@ $sqlpok = mysql_query("$sqlpoktt");
 <div class="mdl-cell--12-col">
 
 <?php
-$sql = mysql_query("SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY id_klienta ");
+$sqltt = "SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY id_klienta ";
+if( $hladanie == 1 )
+{ 
+$sqltt = "SELECT * FROM klienti WHERE all_prav < $min_uzall AND ( priezvisko LIKE '%$cohladat%' OR meno LIKE '%$cohladat%' ) ORDER BY id_klienta ";
+}
+$sql = mysql_query("$sqltt");
 //$sql = mysql_query("SELECT * FROM klienti WHERE all_prav < 1 ORDER BY id_klienta ");//prazdny zoznam
 // celkom poloziek
 $cpol = mysql_num_rows($sql);
@@ -549,6 +557,7 @@ $npol = $cpol + 1;
 
 // pocet poloziek na stranu
 $pols = 15;
+if( $hladanie == 1 ){ $pols = 900; }
 // pocet stran
 $xstr =ceil($cpol / $pols);
 $npage =  $strana + 1;
@@ -586,10 +595,10 @@ if ( $uprav != 0 ) echo "/ úprava id $cislo_id";
       </span>
     </th>
     <th colspan="7" class="">
-<form action="users_md.php?hladanie=1&copern=1&strana=1&uprav=0" method="post" id="formhladaj" class="">
+<form method="post" action="users_md.php?hladanie=1&copern=1&strana=1&uprav=0" id="formhladaj" name="formhladaj">
   <div class="" style=" padding-top: 10px; float: right;  ">
-    <button onclick="Hladanie();" class="mdl-button mdl-js-button mdl-button--icon mdl-color--grey-300 toleft" style=""><i class="material-icons">search</i></button>
-    <input type="text" id="sample6" name="sample6" placeholder="H¾adaný výraz..." class="mdl-textfield__input" style="font-size: 14px; width: 150px; float: left;">
+    <button id="ulozh" name="ulozh" type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-color--grey-300 toleft" style=""><i class="material-icons">search</i></button>
+    <input type="text" id="cohladat" name="cohladat" value="<?php echo $cohladat; ?>" placeholder="H¾adaný výraz..." class="mdl-textfield__input" style="font-size: 14px; width: 150px; float: left;">
 
   </div>
 
@@ -600,8 +609,8 @@ if ( $uprav != 0 ) echo "/ úprava id $cislo_id";
       <i class="material-icons">search</i>
     </label>
     <div class="mdl-textfield__expandable-holder">
-      <input class="mdl-textfield__input " type="text" id="sample6" style="font-size: 14px;">
-      <label class="mdl-textfield__label " for="sample6" style="top: 4px; left: 0; font-size: 14px;">H¾adaný výraz...</label>
+      <input class="mdl-textfield__input " type="text" id="cohladat" name="cohladat" style="font-size: 14px;">
+      <label class="mdl-textfield__label " for="cohladat" style="top: 4px; left: 0; font-size: 14px;">H¾adaný výraz...</label>
     </div>
   </div> -->
 </form>
@@ -795,7 +804,7 @@ $ipok=$ipok+1;
 ?>
 <tr>
 <td colspan="9" class="mdl-data-table__cell--non-numeric" style="padding: 0;">
-<form method="post" action="users_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_id=<?php echo $cislo_id; ?>&uprav=<?php echo $uprav; ?>" id="formv" name="formv">
+<form method="post" action="users_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_id=<?php echo $cislo_id; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>" id="formv" name="formv">
 
 <div class="mdl-card mdl-shadow--4dp card-row-edit" style="flex-direction: row;">
 
@@ -1462,7 +1471,7 @@ $is = $is + 1;
 
   function upravId(uzivatel,uprav)
   {
-    window.open('users_md.php?copern=<?php echo $copern; ?>&strana=<?php echo $strana; ?>&cislo_id=' + uzivatel + '&uprav=' + uprav + '', '_self');
+    window.open('users_md.php?copern=<?php echo $copern; ?>&strana=<?php echo $strana; ?>&cislo_id=' + uzivatel + '&uprav=' + uprav + '&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_self');
   // var tab = document.getElementsByClassName("mdl-tabs__tab");
 
 
@@ -1483,12 +1492,12 @@ $is = $is + 1;
 
   function closeId(uzivatel)
   {
-    window.open('users_md.php?copern=1&strana=<?php echo $strana; ?>', '_self');
+    window.open('users_md.php?copern=1&strana=<?php echo $strana; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_self');
   }
 
   function zmazId(uzivatel)
   {
-  window.open('users_md.php?copern=6&strana=<?php echo $strana;?>&cislo_id=' + uzivatel + '&tt=1','_self');
+  window.open('users_md.php?copern=6&strana=<?php echo $strana;?>&cislo_id=' + uzivatel + '&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>','_self');
   }
 
 
@@ -1510,15 +1519,7 @@ var fdo=document.formv.fido.value;
 window.open('../cis/setuzfir_pdf.php?copern=10&page=1&sysx=UCT&uzid=<?php echo $uzid; ?>&fod=' + fod + '&fdo=' + fdo + '&drupoh=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-function Hladanie()
-  {
 
-  var hladane = document.formhladaj.sample6
-  if( hladane != "" ) {
-
-   window.open('users_md.php?hladanie=1&copern=1&strana=1&uprav=0', '_self');
-                      }
-  }
 
 </script>
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
