@@ -53,7 +53,7 @@ $cislo_id = $_REQUEST['cislo_id'];
 
 
 $z_prav=0; $z_cslm=0;
-$sqlpoktt = "SELECT * FROM firuz WHERE prav='$cislo_id' AND cslm='$cslm' AND  datm='$datm' ";
+$sqlpoktt = "SELECT * FROM menp WHERE prav='$cislo_id' AND cslm='$cslm' AND  datm='$datm' ";
 $sqlpok = mysql_query("$sqlpoktt");
   if (@$zaznam=mysql_data_seek($sqlpok,0))
   {
@@ -1432,14 +1432,43 @@ $is = $is + 1;
 
 <?php if ( $uprav == 2 ) { ?>
    document.formv.h_txt1.value = '<?php echo "$h_txt1"; ?>';
+   document.formv.uloz.disabled = true; 
 
 <?php                   } ?>
 
 
+<?php if ( $uprav == 3 AND $zmazane == 1 ) { ?>
+   document.formv.cslm.value = '<?php echo "$z_cslm"; ?>';
 
+<?php                   } ?>
+
+<?php if ( $uprav == 3 ) { ?>
+   document.formv.uloz.disabled = true; 
+
+<?php                   } ?>
 
 
   }
+
+    function Povol_uloz()
+    {
+    var okvstup=1;
+<?php if ( $uprav == 2 ) { ?>
+    if ( document.formv.fiod.value == '' ) okvstup=0;
+    if ( document.formv.fido.value == '' ) okvstup=0;
+    if ( document.formv.fiod.value == '0' ) okvstup=0;
+    if ( document.formv.fido.value == '0' ) okvstup=0;
+<?php                   } ?>
+
+<?php if ( $uprav == 3 ) { ?>
+    if ( document.formv.cslm.value == '' ) okvstup=0;
+    if ( document.formv.cslm.value == '0' ) okvstup=0;
+<?php                   } ?>
+
+    if ( okvstup == 1 ) { document.formv.uloz.disabled = false; return (true); }
+       else { document.formv.uloz.disabled = true; return (false) ; }
+
+    }
 
   function Uzivatelia()
   {
