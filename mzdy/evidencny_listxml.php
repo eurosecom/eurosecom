@@ -285,8 +285,20 @@ if( $hlavicka->oprav == 1 ) { $opravx="1"; }
   fwrite($soubor, $text);
   $hodnota=iconv("CP1250", "UTF-8", $hlavicka->zuli);
   $text = "   <ulica><![CDATA[".$hodnota."]]></ulica> "."\r\n"; fwrite($soubor, $text);
+
+$hodnotas=""; $hodnotao="";
   $hodnota=iconv("CP1250", "UTF-8", $hlavicka->zcdm);
-  $text = "   <oCislo><![CDATA[".$hodnota."]]></oCislo> "."\r\n"; fwrite($soubor, $text);
+  $hodnota = trim(str_replace(" ","",$hodnota));
+$pole = explode("/", $hodnota);
+$hodnotas=1*$pole[0];
+$hodnotao=1*$pole[1];
+if( $hodnotao == 0 ) { $hodnotao=""; }
+
+
+  $text = "   <supCislo><![CDATA[".$hodnotas."]]></supCislo> "."\r\n"; fwrite($soubor, $text);
+  $text = "   <oCislo><![CDATA[".$hodnotao."]]></oCislo> "."\r\n"; fwrite($soubor, $text);
+
+
   $hodnota=iconv("CP1250", "UTF-8", $hlavicka->zmes);
   $text = "   <obec><![CDATA[".$hodnota."]]></obec> "."\r\n"; fwrite($soubor, $text);
   $hodnota=iconv("CP1250", "UTF-8", $hlavicka->zpsc);
