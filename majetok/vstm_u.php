@@ -2058,7 +2058,7 @@ if( $drupoh == 1 OR $drupoh == 11 )
 </td>
 <td class="pvstup">Percento odpisu:</td>
 <td class="hvstup" >
-<input class="hvstup" type="text" name="h_perc_dan" id="h_perc_dan" size="8" maxlength="6" value="<?php echo $h_perc;?>"
+<input class="hvstup" type="text" name="h_perc_dan" id="h_perc_dan" size="8" maxlength="6" value="<?php echo $h_perc_dan;?>"
  onchange="return cele(this,0,999999999,H2d,2,document.fhlv1.err_perc_dan)" 
  onkeyup="KontrolaDcisla(this, H2d)" 
  onKeyDown="return Perc_danEnter(event.which)" />
