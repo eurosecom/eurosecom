@@ -400,7 +400,7 @@ $fir_uctt01 = iconv("CP1250", "UTF-8", $fir_uctt01);
   fwrite($soubor, $text);
 
 
-$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_archivdph WHERE ume = $cislo_ume AND druh = $cislo_druh AND stvrtrok = $cislo_stvrt ");
+$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_archivdph WHERE ume = $cislo_ume AND druh = $cislo_druh AND stvrtrok = $cislo_stvrt AND cpid = $cislo_cpid ");
   if (@$zaznam=mysql_data_seek($sql,0))
   {
   $riadok=mysql_fetch_object($sql);
