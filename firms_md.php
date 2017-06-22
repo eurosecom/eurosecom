@@ -1,5 +1,197 @@
 <!doctype html>
 <html>
+<?php
+$sys = 'ALL';
+$urov = 15000;
+$uziv = include("uziv.php");
+if( !$uziv ) exit;
+
+  require_once("pswd/password.php");
+
+$newdelenie=0;
+if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
+if ( $newdelenie == 1 )
+          {
+$dtb2 = include("../oddel_dtb3new.php");
+          }
+
+  @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
+  if (!$spojeni):
+    echo "Spojenie so serverom nedostupne.";
+    exit;
+  endif;
+  mysql_select_db($mysqldb);
+
+//cislo operacie
+$copern = 1*$_REQUEST['copern'];
+if( $copern == 0 ) { $copern = 1; }
+$strana = 1*$_REQUEST['strana'];
+if( $strana == 0 ) { $strana = 1; }
+
+$server_name = $_SERVER['SERVER_NAME'];
+
+$uprav = 1*$_REQUEST['uprav'];
+$cislo_xcf = 1*$_REQUEST['cislo_xcf'];
+$hladanie = 1*$_REQUEST['hladanie'];
+$cohladat = trim($_REQUEST['cohladat']);
+if( $cohladat == '' ){ $hladanie=0; }
+//echo $cohladat."<br />";
+
+$kopkli=0;
+$zmazane=0;
+
+//nacitaj udaje
+if ( $copern >= 1 )
+     {
+$sqlttt = "SELECT * FROM fir WHERE xcf = $cislo_xcf ";
+$sqldok = mysql_query("$sqlttt");
+//echo $sqlttt;
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+ $h_xcf=$riaddok->xcf;
+ $h_naz=$riaddok->naz;
+ $h_rok=$riaddok->rok;
+ $h_duj=$riaddok->duj;
+ }
+
+     }
+//koniec nacitaj udaje
+
+if( $newdelenie == 1 AND $kopkli == 1 )
+          {
+
+if( $mysqldb2016 != $mysqldb2017 AND $mysqldb2017 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2017."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2017."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2017.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2017.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2018 AND $mysqldb2018 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2018."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2018."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2018.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2018.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2019 AND $mysqldb2019 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2019."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2019."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2019.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2019.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2015 AND $mysqldb2015 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2015."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2015."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2015.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2015.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2014 AND $mysqldb2014 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2014."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2014."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2014.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2014.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2013 AND $mysqldb2013 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2013."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2013."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2013.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2013.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2012 AND $mysqldb2012 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2012."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2012."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2012.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2012.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2011 AND $mysqldb2011 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2011."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2011."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2011.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2011.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+if( $mysqldb2016 != $mysqldb2010 AND $mysqldb2010 != '' ) {
+$sqlttt=" DROP TABLE `".$mysqldb2010."`.`fir` "; $sql = mysql_query("$sqlttt");
+$sqlttt=" CREATE TABLE `".$mysqldb2010."`.`fir` SELECT * FROM `".$mysqldb2016."`.`fir` "; $sql = mysql_query("$sqlttt");
+//echo $sqlttt;
+
+$sql = "ALTER TABLE ".$mysqldb2010.".fir MODIFY id_klienta int PRIMARY KEY ";
+$vysledek = mysql_query("$sql");
+//echo $sql;
+$sql = "ALTER TABLE ".$mysqldb2010.".fir MODIFY datm timestamp ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
+$vysledek = mysql_query("$sql");
+
+
+                                   }
+
+
+          }
+//if( $newdelenie == 1 )
+
+?>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
@@ -130,7 +322,7 @@ table {
 
 </style>
 </head>
-<body>
+<body onload="ObnovUI();" >
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 <header class="mdl-layout__header mdl-layout__header--waterfall ui-header ui-header-three-row">
 <div class="mdl-layout__header-row mdl-color--light-blue-700 ui-header-app-row">
@@ -149,6 +341,36 @@ table {
 </div> <!-- .ui-header-page-row -->
 <div class="mdl-layout__header-row mdl-color--light-blue-600">
   <div class="tocenter" style="max-width: 1080px; left:-28px; position: relative; width: 100%;">
+
+
+<?php
+$sqltt = "SELECT * FROM fir WHERE xcf >= 0 ORDER BY xcf ";
+if( $hladanie == 1 )
+{ 
+$sqltt = "SELECT * FROM klienti WHERE  xcf >= 0  AND ( naz LIKE '%$cohladat%' OR rok LIKE '%$cohladat%' ) ORDER BY xcf ";
+}
+$sql = mysql_query("$sqltt");
+//$sql = mysql_query("SELECT * FROM fir WHERE xcf < 0 ORDER BY xcf ");//prazdny zoznam
+// celkom poloziek
+$cpol = mysql_num_rows($sql);
+$npol = $cpol + 1;
+
+// pocet poloziek na stranu
+$pols = 10;
+if( $hladanie == 1 ){ $pols = 900; }
+// pocet stran
+$xstr =ceil($cpol / $pols);
+$npage =  $strana + 1;
+// predchadzajuca strana
+$ppage =  $strana - 1;
+if( $ppage == 0 ) { $ppage=1; }
+if( $npage >  $xstr ) { $npage=$xstr; }
+// zaciatok cyklu
+$i = ( $strana - 1 ) * $pols;
+// koniec cyklu
+$konc =($pols*($strana-1))+($pols-1);
+?>
+
   <table class="ui-table-layout">
   <thead>
    <tr>
@@ -178,294 +400,49 @@ table {
     <col style="width:20%;">
   </colgroup>
   <tbody>
+
+<?php
+   while ($i <= $konc )
+   {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+  {
+$riadok=mysql_fetch_object($sql);
+?>
+
+<?php  if ( $riadok->xcf != $cislo_xcf ) { ?>
+
   <tr style="background-color: ;">
-    <td class="">1</td>
-    <td >Firma ABC</td>
-    <td>2017</td>
-    <td class="">5</td>
+    <td class=""><?php echo $riadok->xcf; ?></td>
+    <td ><?php echo $riadok->naz; ?></td>
+    <td><?php echo $riadok->rok; ?></td>
+    <td class=""><?php echo $riadok->duj; ?></td>
     <td class="">
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-      <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-      <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-    </td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Firma ABC</td>
-    <td>2017</td>
-    <td>5</td>
-    <td>
-      <button type="button" id="itemedit" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
+      <button type="button" id="itemedit" onclick="upravXcf(<?php echo $riadok->xcf; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
       <button type="button" id="usercopy" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
       <button type="button" id="userremove" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
     </td>
   </tr>
 
+<?php                                    } ?>
 
+<?php  if ( $uprav != 0 AND $riadok->xcf == $cislo_xcf ) { ?>
+<form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>" id="formv" name="formv">
+
+  <tr style="background-color: ;">
+    <td class=""><?php echo $riadok->xcf; ?></td>
+    <td ><input type="text" id="h_naz" name="h_naz" ></td>
+    <td><input type="text" id="h_rok" name="h_rok" ></td>
+    <td class=""><input type="text" id="h_duj" name="h_duj" ></td>
+  </tr>
+
+</form>
+<?php                                                    } ?>
+
+<?php
+  }
+$i = $i + 1;
+   }
+?>
 
 
 
@@ -473,6 +450,33 @@ table {
 
 
   </tbody>
+
+  <tfoot class="mdl-color--grey-100">
+    <tr>
+      <td colspan="2" class="mdl-data-table__cell--non-numeric">= <?php echo $cpol; ?></td>
+      <td colspan="6">
+<form name="forma3" id="forma3" action="#" class="table-pagination " style="">
+      <label for="selectpage" class="" style="vertical-align: middle; ">Strana&nbsp;&nbsp;&nbsp;<select name="selectpage" id="selectpage" onchange="ChodNaStranu();" style="font-size: 12px; border: 0; color: rgba(0,0,0, 0.87); border-bottom: 1px solid rgba(0,0,0,0.12); background-color: transparent; min-width: 32px; padding-bottom: 2px; padding-top: 4px;">
+<?php
+$is = 1;
+while ( $is <= $xstr )
+{
+?>
+<option value="<?php echo $is; ?>"><?php echo $is; ?></option>
+<?php
+$is = $is + 1;
+}
+?>
+      </select>&nbsp;&nbsp;/&nbsp;&nbsp;<?php echo $xstr; ?></label>
+      </td>
+      <td>
+      <button id="btnpageprev" type="button" onclick="NaStr(<?php echo $ppage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_before</i></button><div class="mdl-tooltip" data-mdl-for="btnpageprev" >Prejsù na stranu <?php echo $ppage; ?></div>
+      <button id="btnpagenext" type="button" onclick="NaStr(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_next</i></button><div class="mdl-tooltip" data-mdl-for="btnpagenext">Prejsù na stranu <?php echo $npage; ?></div>
+      </td>
+</form>
+    </tr>
+  </tfoot>
+
   </table>
   </div> <!-- .tocenter -->
 </div>
@@ -502,5 +506,52 @@ table {
 </div> <!-- .mdl-layout -->
 
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+<script type="text/javascript">
+
+  function ObnovUI()
+  {
+
+   document.forma3.selectpage.value = '<?php echo $strana; ?>';
+
+//start end pagination
+<?php if ( $strana == 1 ) { ?>
+   document.getElementById('btnpageprev').disabled = true;
+<?php } ?>
+<?php if ( $strana == $xstr ) { ?>
+   document.getElementById('btnpagenext').disabled = true;
+<?php } ?>
+
+<?php if ( $uprav == 1 ) { ?>
+
+   document.formv.h_naz.value = '<?php echo "$h_naz"; ?>';
+   document.formv.h_rok.value = '<?php echo "$h_rok"; ?>';
+   document.formv.h_duj.value = '<?php echo "$h_duj"; ?>';
+
+<?php                   } ?>
+
+  }
+
+
+  function upravXcf(xcf,uprav)
+  {
+    window.open('firms_md.php?copern=<?php echo $copern; ?>&strana=<?php echo $strana; ?>&cislo_xcf=' + xcf + '&uprav=' + uprav + '&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_self');
+
+  }
+
+  function ChodNaStranu()
+  {
+   var chodna = document.forma3.selectpage.value;
+   window.open('firms_md.php?copern=1&strana=' + chodna + '', '_self');
+  }
+
+  function NaStr(chodna)
+  {
+   window.open('firms_md.php?copern=1&strana=' + chodna + '', '_self');
+  }
+
+
+</script>
+
 </body>
 </html>
