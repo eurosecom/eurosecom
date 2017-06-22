@@ -42,7 +42,10 @@ legend {
   clear: both;
 }
 .flexbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+
 }
 
 
@@ -77,10 +80,10 @@ legend {
   justify-content: center;
   width: 300px;
   height: 56px;
-  position: absolute;
-  top: 0;
+  /*position: absolute;*/
+/*  top: 0;
   left: 50%;
-  margin-left: -150px;
+  margin-left: -150px;*/
 }
 .ui-app-row .header-nav-link {
   height: 53px;
@@ -119,8 +122,13 @@ legend {
   z-index: 10;
   position: fixed;
   right: 2%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   /*width: 56px;*/
 }
 .floating-toolbar > .mdl-button {
@@ -433,5 +441,9 @@ td.tbody-cell-toolbar {
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
-
+.skusam td {
+  height: 32px;
+  border-bottom: 1px solid #9c9c9c;
+  border-collapse: collapse;
+}
 
