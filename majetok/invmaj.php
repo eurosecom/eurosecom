@@ -684,6 +684,15 @@ htmlmenu2 += " Komisia 3 ";
   }
 
 
+function Maj2mjobraty()
+                {
+
+var h_obdp = 1;
+var h_obdk = 12;
+
+window.open('maj2mj_obraty.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=2&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
     
 </script>
 </HEAD>
@@ -961,6 +970,25 @@ zobrazene menu
 </tr>
 </FORM>
 </table>
+
+<?php if( $polno == 1 ) { ?>
+<table class="vstup" width="100%" >
+<FORM name="formrpm1" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="Maj2mjobraty();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi vo formáte PDF' ></a>
+</td>
+<td class="bmenu" width="38%">Roèné obraty - druhu majetku 26 a 27
+
+<td class="bmenu" width="60%">
+
+</td>
+
+</tr>
+</FORM>
+</table>
+<?php                    } ?>
 
 <?php
 //koniec ponuka
