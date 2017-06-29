@@ -368,7 +368,16 @@ var sirkawic = screen.width-10;
 <br />
 
 <?php
-if (File_Exists ("../tmp/zos2mj$kli_uzid.pdf")) { $soubor = unlink("../tmp/zos2mj$kli_uzid.pdf"); }
+$hhmmss = Date ("is", MkTime(date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")) );
+
+ $outfilexdel="../tmp/maj2mj_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/maj2mj_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -492,7 +501,7 @@ $pdf->SetFont('arial','',6);
 
 if ( $copern == 10  )  { 
 $pdf->Cell(30,5,"SKL - CIS","1",0,"L");$pdf->Cell(10,5,"Pohyb","1",0,"R");$pdf->Cell(60,5,"Popis pohybu ","1",0,"L");
-$pdf->Cell(27,5,"Množstvo ","1",0,"R");$pdf->Cell(27,5,"Množstvo ","1",0,"R");$pdf->Cell(0,5,"Hodnota Eur","1",1,"R");
+$pdf->Cell(27,5,"Množstvo ","1",0,"R");$pdf->Cell(0,5,"Hodnota Eur","1",1,"R");
                        }
 
 if ( $copern == 20  )  { 
@@ -500,7 +509,7 @@ $xtxt="KrmneZaRok";
 if( $polno == 0 ) $xtxt="";
 $pdf->Cell(80,5,"SKL - CIS","1",0,"L");
 $pdf->Cell(20,5,"$xtxt","1",0,"R");
-$pdf->Cell(27,5,"Množstvo ","1",0,"R");$pdf->Cell(27,5,"Množstvo ","1",0,"R");$pdf->Cell(0,5,"Hodnota Eur","1",1,"R");
+$pdf->Cell(27,5,"Množstvo ","1",0,"R");$pdf->Cell(0,5,"Hodnota Eur","1",1,"R");
                        }
 
      }
@@ -527,7 +536,7 @@ $pdf->Cell(30,5,"$riadok->skl- $riadok->cis","0",0,"L");$pdf->Cell(10,5,"$riadok
 $pdf->SetFont('arial','',6);
 $pdf->Cell(60,5,"$nazpoh","0",0,"L");
 $pdf->SetFont('arial','',8);
-$pdf->Cell(27,5,"$riadok->mno$riadok->mer","0",0,"R");$pdf->Cell(27,5,"$riadok->mn2$riadok->xmer2","0",0,"R");
+$pdf->Cell(27,5,"$riadok->mn2 ks","0",0,"R");
 $pdf->Cell(0,5,"$riadok->zas","0",1,"R");
 $j=$j+1;
 }
@@ -539,7 +548,7 @@ $pdf->SetFont('arial','',8);
 
 $pdf->Cell(30,5," ","0",0,"R");
 $pdf->Cell(70,5,"CELKOM príjem","T",0,"R");
-$pdf->Cell(27,5,"$riadok->mno$riadok->mer","T",0,"R");$pdf->Cell(27,5,"$riadok->mn2$riadok->xmer2","T",0,"R");
+$pdf->Cell(27,5,"$riadok->mn2 ks","T",0,"R");
 $pdf->Cell(0,5,"$riadok->zas","T",1,"R");
 $j=$j+1;
 }
@@ -551,7 +560,7 @@ $pdf->SetFont('arial','',8);
 
 $pdf->Cell(30,5," ","0",0,"R");
 $pdf->Cell(70,5,"CELKOM výdaj","T",0,"R");
-$pdf->Cell(27,5,"$riadok->mno$riadok->mer","T",0,"R");$pdf->Cell(27,5,"$riadok->mn2$riadok->xmer2","T",0,"R");
+$pdf->Cell(27,5,"$riadok->mn2 ks","T",0,"R");
 $pdf->Cell(0,5,"$riadok->zas","T",1,"R");
 $j=$j+1;
 }
@@ -562,7 +571,7 @@ if( $riadok->pox == 0 AND $riadok->poh == 999999 AND $riadok->pox1 == 8 )
 $pdf->SetFont('arial','',8);
 
 $pdf->Cell(100,5,"CELKOM  $riadok->cis -  $riadok->nat","T",0,"L");
-$pdf->Cell(27,5,"$riadok->mno$riadok->mer","T",0,"R");$pdf->Cell(27,5,"$riadok->mn2$riadok->xmer2","T",0,"R");
+$pdf->Cell(27,5,"$riadok->mn2 ks","T",0,"R");
 $pdf->Cell(0,5,"$riadok->zas","T",1,"R");
 
 $pdf->Cell(0,5," ","0",1,"R");
@@ -652,7 +661,7 @@ if( $j > 44 ) $j=0;
   }
 
 
-$pdf->Output("../tmp/zos2mj.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 $pole = explode(".", $kli_vume);
 $kli_vmesx=$pole[0];
@@ -666,7 +675,7 @@ $vysledok = mysql_query("$sqlt");
 ?> 
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/zos2mj.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 ?>
