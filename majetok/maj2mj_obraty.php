@@ -58,13 +58,13 @@ if ( $copern == 10 OR $copern == 20 )
 
 if ( $copern == 10 OR $copern == 20 ) $podm_poc = "ume < ".$kli_vume;
 if ( $copern == 10 OR $copern == 20 ) $podm_obd = "ume = ".$kli_vume;
-if ( $copern == 10 OR $copern == 20 ) $podm_obm = "ume < ".$kli_vume;
+if ( $copern == 10 OR $copern == 20 ) $podm_obm = "ume <= ".$kli_vume;
 //rocne obraty
 if ( $drupoh == 2 )
 {
 if ( $copern == 10 OR $copern == 20 ) $podm_poc = "ume < 1.".$kli_vrok;
 if ( $copern == 10 OR $copern == 20 ) $podm_obd = "ume = ".$kli_vume;
-if ( $copern == 10 OR $copern == 20 ) $podm_obm = "ume < ".$kli_vume;
+if ( $copern == 10 OR $copern == 20 ) $podm_obm = "ume <= ".$kli_vume;
 }
 
 //echo 'pociatok'.$podm_poc;
@@ -81,7 +81,7 @@ $sqlt = <<<sklprc
 (
    pox         INT,
    pox1        INT,
-   ume         FLOAT(8,4),
+   ume         DECIMAL(10,4),
    dat         DATE,
    skl         DECIMAL(15,0),
    poh         INT,
@@ -106,12 +106,15 @@ $vytvor = mysql_query("$vsql");
 
 $ume1="1.".$kli_vrok;
 $dat1=$kli_vrok."-01-01";
+$majmaj1="majmaj_1_".$kli_vrok;
 
 //poc.stav
 $dsqlt = "INSERT INTO F$kli_vxcf"."_sklprc".
-" SELECT 0,0,'$ume1','$dat1',2401,1,drm,mno,cen,(mno*cen),'0','0','0','0',(mno*cen),1,0 FROM F$kli_vxcf"."_majmaj_1_2017 WHERE ( drm = 26 OR drm = 27 ) ";
+" SELECT 0,0,'$ume1','$dat1',2401,1,drm,mno,cen,(mno*cen),'0','0','0','0',(mno*cen),1,0 FROM F$kli_vxcf"."_$majmaj1 WHERE ( drm = 26 OR drm = 27 ) ";
 $dsql = mysql_query("$dsqlt");
 
+if( $drupoh != 2 )
+    {
 //prijem minuly
 $dsqlt = "INSERT INTO F$kli_vxcf"."_sklprc".
 " SELECT 0,0,'$ume1','$dat1',2401,20,drm,mno,cen,(mno*cen),'0','0','0',(mno*cen),'0',1,0 FROM F$kli_vxcf"."_majpoh ".
@@ -119,12 +122,12 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_sklprc".
 $dsql = mysql_query("$dsqlt");
 //echo $dsqlt;
 
-
 //vydaj minuly
 $dsqlt = "INSERT INTO F$kli_vxcf"."_sklprc".
 " SELECT 0,0,'$ume1','$dat1',2401,50,drm,-mno,cen,(-mno*cen),'0','0',(-mno*cen),'0','0',-1,0 FROM F$kli_vxcf"."_majpoh ".
 " WHERE ( drm = 26 OR drm = 27 ) AND poh = 3 AND $podm_obm ";
 $dsql = mysql_query("$dsqlt");
+    }
 
 if( $kli_uzid == 1177 )
 {
@@ -174,21 +177,35 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_sklprc SET poh=1 ";
 $dsql = mysql_query("$dsqlt");
 
-
-//prijem mesiaca
+if( $drupoh == 2 )
+    {
+//prijem mesiaca nakup
 $dsqlt = "INSERT INTO F$kli_vxcf"."_sklprc".
-" SELECT 0,0,'$ume1','$dat1',2401,20,drm,mno,cen,(mno*cen),'0','0','0',(mno*cen),'0',1,0 FROM F$kli_vxcf"."_majpoh ".
-" WHERE ( drm = 26 OR drm = 27 ) AND poh = 2 AND $podm_obd ";
+" SELECT 0,0,ume,dob,2401,20,drm,mno,cen,(mno*cen),'0','0','0',(mno*cen),'0',1,0 FROM F$kli_vxcf"."_majpoh ".
+" WHERE ( drm = 26 OR drm = 27 ) AND poh = 2 AND $podm_obm AND dph = 2 ";
+$dsql = mysql_query("$dsqlt");
+
+//prijem mesiaca ine
+$dsqlt = "INSERT INTO F$kli_vxcf"."_sklprc".
+" SELECT 0,0,ume,dob,2401,42,drm,mno,cen,(mno*cen),'0','0','0',(mno*cen),'0',1,0 FROM F$kli_vxcf"."_majpoh ".
+" WHERE ( drm = 26 OR drm = 27 ) AND poh = 2 AND $podm_obm AND dph != 2 ";
 $dsql = mysql_query("$dsqlt");
 //echo $dsqlt;
 
-
-//vydaj mesiaca
+//vydaj mesiaca predaj
 $dsqlt = "INSERT INTO F$kli_vxcf"."_sklprc".
-" SELECT 0,0,'$ume1','$dat1',2401,50,drm,-mno,cen,(-mno*cen),'0','0',(-mno*cen),'0','0',-1,0 FROM F$kli_vxcf"."_majpoh ".
-" WHERE ( drm = 26 OR drm = 27 ) AND poh = 3 AND $podm_obd ";
+" SELECT 0,0,ume,dob,2401,50,drm,-mno,cen,(-mno*cen),'0','0',(-mno*cen),'0','0',-1,0 FROM F$kli_vxcf"."_majpoh ".
+" WHERE ( drm = 26 OR drm = 27 ) AND poh = 3 AND $podm_obm AND dph = 2  ";
 $dsql = mysql_query("$dsqlt");
 
+//vydaj mesiaca ine
+$dsqlt = "INSERT INTO F$kli_vxcf"."_sklprc".
+" SELECT 0,0,ume,dob,2401,70,drm,-mno,cen,(-mno*cen),'0','0',(-mno*cen),'0','0',-1,0 FROM F$kli_vxcf"."_majpoh ".
+" WHERE ( drm = 26 OR drm = 27 ) AND poh = 3 AND $podm_obm AND dph != 2 ";
+$dsql = mysql_query("$dsqlt");
+
+//exit;
+    }
 
 //rekapitulacia krmne dni bezneho do krd
 if( $copern == 20 )
@@ -213,10 +230,10 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "DELETE FROM F$kli_vxcf"."_sklprc WHERE pox1 = 999 ";
 $dsql = mysql_query("$dsqlt");
 
-//group za skl,cis,poh
+//group za skl,cis,poh,ume
 $dsqlt = "INSERT INTO F$kli_vxcf"."_sklprc2".
 " SELECT 0,0,ume,dat,skl,poh,cis,SUM(mno),cen,SUM(zas),SUM(prs),SUM(pdj),SUM(vdj),SUM(prj),SUM(pcs),SUM(mn2),SUM(krd) FROM F$kli_vxcf"."_sklprc ".
-" GROUP BY skl,cis,poh".
+" GROUP BY skl,cis,poh,ume".
 "";
 $dsql = mysql_query("$dsqlt");
 
@@ -282,7 +299,7 @@ $vysledok = mysql_query("$sqlt");
     }
 
 
-if( $kli_uzid == 171717171 )
+if( $kli_uzid == 171717 )
 {
 
 $sqltt = "SELECT * FROM F$kli_vxcf"."_sklprc2 WHERE mno > 0 ";
@@ -298,7 +315,7 @@ $i=0;
  {
 $rtov=mysql_fetch_object($tov);
 
-echo $rtov->skl.";".$rtov->cis.";".$rtov->mno.";".$rtov->cen.";".$rtov->pcs."<br />";
+echo $rtov->ume.";".$rtov->cis.";".$rtov->mno.";".$rtov->cen.";".$rtov->pcs.";".$rtov->poh."<br />";
 
   
 
@@ -394,7 +411,7 @@ if ( $copern == 10 )
   {
 $sqltt = "SELECT F$kli_vxcf"."_sklprc2.skl, F$kli_vxcf"."_sklprc2.poh, F$kli_vxcf"."_sklprc2.zas, F$kli_vxcf"."_sklprc2.pox,  ".
 " F$kli_vxcf"."_sklprc2.pox1, F$kli_vxcf"."_sklcph.nph, F$kli_vxcf"."_skl.nas, F$kli_vxcf"."_sklprc2.cis, F$kli_vxcf"."_sklcis.nat, ".
-" F$kli_vxcf"."_sklcis.mer, F$kli_vxcf"."_sklcisudaje.xmer2, F$kli_vxcf"."_sklprc2.mno, F$kli_vxcf"."_sklprc2.mn2  ".
+" F$kli_vxcf"."_sklcis.mer, F$kli_vxcf"."_sklcisudaje.xmer2, F$kli_vxcf"."_sklprc2.mno, F$kli_vxcf"."_sklprc2.mn2, F$kli_vxcf"."_sklprc2.ume  ".
 " FROM F$kli_vxcf"."_sklprc2".
 " LEFT JOIN F$kli_vxcf"."_sklcis".
 " ON F$kli_vxcf"."_sklprc2.cis=F$kli_vxcf"."_sklcis.cis".
@@ -405,52 +422,24 @@ $sqltt = "SELECT F$kli_vxcf"."_sklprc2.skl, F$kli_vxcf"."_sklprc2.poh, F$kli_vxc
 " LEFT JOIN F$kli_vxcf"."_sklcph".
 " ON F$kli_vxcf"."_sklprc2.poh=F$kli_vxcf"."_sklcph.poh".
 " WHERE ( pox = 0 OR pox = 8 OR pox = 10 OR pox = 20 ) ".
-" ORDER by F$kli_vxcf"."_sklprc2.skl,cis,pox,pox1,F$kli_vxcf"."_sklprc2.poh".
+" ORDER by F$kli_vxcf"."_sklprc2.skl,cis,pox,pox1,F$kli_vxcf"."_sklprc2.poh,F$kli_vxcf"."_sklprc2.ume".
 "";
   }
 
 if ( $copern == 20  )
   {
 //uprava krmne dni od zaciatku roka ak sa prenasa v priebehu
-//castkov
-if( $kli_vrok == 2010 AND $fir_fico == 31104452 )
-     {
-
-$sqlttt = "UPDATE F$kli_vxcf"."_sklprc2 SET krd=krd+6784 WHERE skl = 2401 AND cis = 101120 ";
-$sql = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_sklprc2 SET krd=krd+16461 WHERE skl = 2401 AND cis = 101222 ";
-$sql = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_sklprc2 SET krd=krd+7087 WHERE skl = 2401 AND cis = 101240 ";
-$sql = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_sklprc2 SET krd=krd+9935 WHERE skl = 2402 AND cis = 101100 ";
-$sql = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_sklprc2 SET krd=krd+9650 WHERE skl = 2402 AND cis = 101120 ";
-$sql = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_sklprc2 SET krd=krd+6673 WHERE skl = 2406 AND cis = 121230 ";
-$sql = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_sklprc2 SET krd=krd+10589 WHERE skl = 2410 AND cis = 102101 ";
-$sql = mysql_query("$sqlttt");
-$sqlttt = "UPDATE F$kli_vxcf"."_sklprc2 SET krd=krd+47633 WHERE skl = 2410 AND cis = 102220 ";
-$sql = mysql_query("$sqlttt");
-
-     }
-//koniec castkov
-//koniec uprava krmne dni od zaciatku roka ak sa prenasa v priebehu
 
 $sqltt = "SELECT F$kli_vxcf"."_sklprc2.skl, F$kli_vxcf"."_sklprc2.poh, F$kli_vxcf"."_sklprc2.zas, F$kli_vxcf"."_sklprc2.pox, F$kli_vxcf"."_sklprc2.pcs,  ".
 " F$kli_vxcf"."_sklprc2.pox1, F$kli_vxcf"."_sklcph.nph, F$kli_vxcf"."_skl.nas, F$kli_vxcf"."_sklprc2.cis, F$kli_vxcf"."_sklcis.nat, ".
-" F$kli_vxcf"."_sklprc2.krd,F$kli_vxcf"."_sklcis.mer, F$kli_vxcf"."_sklcisudaje.xmer2, F$kli_vxcf"."_sklprc2.mno, F$kli_vxcf"."_sklprc2.mn2  ".
+" F$kli_vxcf"."_sklprc2.krd,F$kli_vxcf"."_sklcis.mer, F$kli_vxcf"."_sklcisudaje.xmer2, F$kli_vxcf"."_sklprc2.mno, F$kli_vxcf"."_sklprc2.mn2, F$kli_vxcf"."_sklprc2.ume  ".
 " FROM F$kli_vxcf"."_sklprc2".
-" LEFT JOIN F$kli_vxcf"."_sklcis".
-" ON F$kli_vxcf"."_sklprc2.cis=F$kli_vxcf"."_sklcis.cis".
-" LEFT JOIN F$kli_vxcf"."_sklcisudaje".
-" ON F$kli_vxcf"."_sklprc2.cis=F$kli_vxcf"."_sklcisudaje.xcis".
 " LEFT JOIN F$kli_vxcf"."_skl".
 " ON F$kli_vxcf"."_sklprc2.skl=F$kli_vxcf"."_skl.skl".
 " LEFT JOIN F$kli_vxcf"."_sklcph".
 " ON F$kli_vxcf"."_sklprc2.poh=F$kli_vxcf"."_sklcph.poh".
 " WHERE ( pox1 = 8 OR pox = 10 OR pox = 20 ) ".
-" ORDER by F$kli_vxcf"."_sklprc2.skl,cis,pox,pox1,F$kli_vxcf"."_sklprc2.poh".
+" ORDER by F$kli_vxcf"."_sklprc2.skl,cis,pox,pox1,F$kli_vxcf"."_sklprc2.poh,F$kli_vxcf"."_sklprc2.ume".
 "";
   }
 
@@ -488,7 +477,7 @@ $dnesoktime = Date ("d.m.Y H.s", MkTime (date("H"),date("i"),date("s"),date("m")
 if ( $copern == 10 AND $polno == 0 AND $drupoh == 1 )  { $pdf->Cell(90,6,"Zostava obratov 2MJ položiek za $kli_vume ","LTB",0,"L"); }
 if ( $copern == 10 AND $polno == 0 AND $drupoh == 2 )  { $pdf->Cell(90,6,"Zostava roèných obratov 2MJ položiek za 1.$kli_vrok až $kli_vume ","LTB",0,"L"); }
 if ( $copern == 10 AND $polno == 1 AND $drupoh == 1 )  { $pdf->Cell(90,6,"Zostava obratov zvierat za $kli_vume ","LTB",0,"L"); }
-if ( $copern == 10 AND $polno == 1 AND $drupoh == 2 )  { $pdf->Cell(90,6,"Zostava roèných obratov zvierat za 1.$kli_vrok až $kli_vume ","LTB",0,"L"); }
+if ( $copern == 10 AND $polno == 1 AND $drupoh == 2 )  { $pdf->Cell(90,6,"Zostava roèných obratov zvierat za 1.$kli_vrok až $kli_vume","LTB",0,"L"); }
 
 if ( $copern == 20 AND $polno == 0 )  { $pdf->Cell(90,6,"Rekapitulácia 2MJ položiek za $kli_vume ","LTB",0,"L"); }
 if ( $copern == 20 AND $polno == 1 )  { $pdf->Cell(90,6,"Rekapitulácia zvierat za $kli_vume ","LTB",0,"L"); }
@@ -501,7 +490,7 @@ $pdf->SetFont('arial','',6);
 
 if ( $copern == 10  )  { 
 $pdf->Cell(30,5,"SKL - CIS","1",0,"L");$pdf->Cell(10,5,"Pohyb","1",0,"R");$pdf->Cell(60,5,"Popis pohybu ","1",0,"L");
-$pdf->Cell(27,5,"Množstvo ","1",0,"R");$pdf->Cell(0,5,"Hodnota Eur","1",1,"R");
+$pdf->Cell(15,5,"Ume","1",0,"R");$pdf->Cell(27,5,"Množstvo ","1",0,"R");$pdf->Cell(0,5,"Hodnota Eur","1",1,"R");
                        }
 
 if ( $copern == 20  )  { 
@@ -509,6 +498,7 @@ $xtxt="KrmneZaRok";
 if( $polno == 0 ) $xtxt="";
 $pdf->Cell(80,5,"SKL - CIS","1",0,"L");
 $pdf->Cell(20,5,"$xtxt","1",0,"R");
+$pdf->Cell(15,5,"Ume","1",0,"R");
 $pdf->Cell(27,5,"Množstvo ","1",0,"R");$pdf->Cell(0,5,"Hodnota Eur","1",1,"R");
                        }
 
@@ -536,6 +526,8 @@ $pdf->Cell(30,5,"$riadok->skl- $riadok->cis","0",0,"L");$pdf->Cell(10,5,"$riadok
 $pdf->SetFont('arial','',6);
 $pdf->Cell(60,5,"$nazpoh","0",0,"L");
 $pdf->SetFont('arial','',8);
+
+$pdf->Cell(15,5,"$riadok->ume","0",0,"R");
 $pdf->Cell(27,5,"$riadok->mn2 ks","0",0,"R");
 $pdf->Cell(0,5,"$riadok->zas","0",1,"R");
 $j=$j+1;
@@ -547,7 +539,7 @@ if( $riadok->pox == 0 AND $riadok->poh == 999999 AND $riadok->pox1 == 1 )
 $pdf->SetFont('arial','',8);
 
 $pdf->Cell(30,5," ","0",0,"R");
-$pdf->Cell(70,5,"CELKOM príjem","T",0,"R");
+$pdf->Cell(85,5,"CELKOM príjem","T",0,"R");
 $pdf->Cell(27,5,"$riadok->mn2 ks","T",0,"R");
 $pdf->Cell(0,5,"$riadok->zas","T",1,"R");
 $j=$j+1;
@@ -559,7 +551,7 @@ if( $riadok->pox == 0 AND $riadok->poh == 999999 AND $riadok->pox1 == 6 )
 $pdf->SetFont('arial','',8);
 
 $pdf->Cell(30,5," ","0",0,"R");
-$pdf->Cell(70,5,"CELKOM výdaj","T",0,"R");
+$pdf->Cell(85,5,"CELKOM výdaj","T",0,"R");
 $pdf->Cell(27,5,"$riadok->mn2 ks","T",0,"R");
 $pdf->Cell(0,5,"$riadok->zas","T",1,"R");
 $j=$j+1;
@@ -570,7 +562,7 @@ if( $riadok->pox == 0 AND $riadok->poh == 999999 AND $riadok->pox1 == 8 )
 
 $pdf->SetFont('arial','',8);
 
-$pdf->Cell(100,5,"CELKOM  $riadok->cis -  $riadok->nat","T",0,"L");
+$pdf->Cell(115,5,"CELKOM  $riadok->cis -  $riadok->nat","T",0,"L");
 $pdf->Cell(27,5,"$riadok->mn2 ks","T",0,"R");
 $pdf->Cell(0,5,"$riadok->zas","T",1,"R");
 
@@ -584,7 +576,7 @@ if( $riadok->pox == 10 )
 
 $pdf->SetFont('arial','',8);
 
-$pdf->Cell(150,5,"CELKOM sklad $riadok->skl -  $riadok->nas","1",0,"L");
+$pdf->Cell(165,5,"CELKOM sklad $riadok->skl -  $riadok->nas","1",0,"L");
 $pdf->Cell(0,5,"$riadok->zas","1",1,"R");
 
 $pdf->Cell(0,5," ","0",1,"R");
