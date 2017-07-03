@@ -40,6 +40,27 @@ if( $cohladat == '' ){ $hladanie=0; }
 $kopkli=0;
 $zmazane=0;
 
+//uprava
+if ( $copern == 8 AND $uprav == 1 )
+  {
+
+$h_naz = strip_tags($_REQUEST['h_naz']);
+$h_rok = 1*strip_tags($_REQUEST['h_rok']);
+$h_duj = 1*strip_tags($_REQUEST['h_duj']);
+$h_dtb = strip_tags($_REQUEST['h_dtb']);
+$h_prav = strip_tags($_REQUEST['h_prav']);
+
+$upravttt = "UPDATE fir SET naz='$h_naz', rok='$h_rok', duj='$h_duj' WHERE xcf = $cislo_xcf  ";
+$upravene = mysql_query("$upravttt"); 
+//echo $upravttt."<br />";
+
+$copern=1;
+$uprav=0;
+$cislo_xcf=0;
+$kopkli=1;
+     }
+//koniec uprava
+
 //nacitaj udaje
 if ( $copern >= 1 )
      {
@@ -53,6 +74,8 @@ $sqldok = mysql_query("$sqlttt");
  $h_naz=$riaddok->naz;
  $h_rok=$riaddok->rok;
  $h_duj=$riaddok->duj;
+ $h_dtb=$riaddok->dtb;
+ $h_prav=$riaddok->prav;
  }
 
      }
@@ -421,7 +444,9 @@ table {
 </style>
 </head>
 <body onload="ObnovUI();">
+<!-- problem v ie11 pri uprave, asi nespravne class alebo uzatvorenie, treba otestovat... 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
+-->
 <header class="mdl-layout__header mdl-layout__header--waterfall ui-header ui-header-three-row">
 <div class="mdl-layout__header-row mdl-color--light-blue-700 ui-header-app-row">
   <a href="http://www.edcom.sk/web/eurosecom.html" target="_blank" class="mdl-layout-title mdl-color-text--yellow-A100">EuroSecom</a>&nbsp;
@@ -661,7 +686,7 @@ $riadok=mysql_fetch_object($sql);
         <button id="uloz" name="uloz" class="mdl-button mdl-js-button mdl-button--icon mdl-color--green-500 mdl-color-text--white"><i class="material-icons">done</i></button>
       </div>
 <div data-mdl-for="uloz" class="mdl-tooltip">Uloûiù</div>
-      <button type="button" id="edit-closer" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-700 " style=""><i class="material-icons">close</i></button>
+      <button type="button" id="edit-closer" onclick="closeXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-700 " style=""><i class="material-icons">close</i></button>
       <div data-mdl-for="edit-closer" class="mdl-tooltip">Zavrieù</div>
     </td>
   </tr>
@@ -821,6 +846,20 @@ function Firmy()
 {
   window.open('firms_md.php', '_self');
 }
+
+  function closeXcf(firma)
+  {
+    window.open('firms_md.php?copern=1&strana=<?php echo $strana; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_self');
+  }
+
+    function Povol_uloz()
+    {
+
+<?php if ( $uprav == 1 ) { ?>
+   document.getElementById('uloz').disabled = false;
+<?php } ?>
+
+    }
 
 </script>
 
