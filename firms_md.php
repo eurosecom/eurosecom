@@ -599,8 +599,8 @@ $konc =($pols*($strana-1))+($pols-1);
 <?php                   } ?>
 
 <div id="tablelayout" class="mdl-color--white">
-  <div class="wrap-ui-table tocenter" style="max-width: 1080px; ">
-<form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>" id="formv" name="formv" style="width: 100%;" >
+  <div class="wrap-ui-table tocenter" style="max-width: 1080px; background-color: ;">
+<form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>" id="formv" name="formv">
   <table class="ui-table">
   <colgroup>
     <col style="width:8%;">
@@ -621,11 +621,11 @@ $riadok=mysql_fetch_object($sql);
 
 <?php if ( $riadok->xcf != $cislo_xcf ) { ?>
 <!-- row echo -->
-  <tr class="row-echo">
-    <td><?php echo $riadok->xcf; ?></td>
-    <td><?php echo $riadok->naz; ?></td>
-    <td class="right"  ><?php echo $riadok->rok; ?></td>
-    <td class="right" style=" "><?php echo $riadok->duj; ?></td>
+  <tr class="row-echo" style="background-color: ; ">
+    <td class=""><?php echo $riadok->xcf; ?></td>
+    <td ><?php echo $riadok->naz; ?></td>
+    <td class="right"><?php echo $riadok->rok; ?></td>
+    <td class="right"><?php echo $riadok->duj; ?></td>
     <td class="right">
       <button type="button" id="edit<?php echo $riadok->xcf; ?>" onclick="upravXcf(<?php echo $riadok->xcf; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
 <div data-mdl-for="edit<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Upraviù</div>
@@ -643,29 +643,28 @@ $riadok=mysql_fetch_object($sql);
   <tr class="mdl-color--white mdl-shadow--2dp row-form" style=" ">
     <td style="vertical-align: top;">
       <div class="mdl-textfield mdl-js-textfield" style="width: 80%;">
-        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="h_xcf" name="h_xcf" value="<?php echo $riadok->xcf; ?>" disabled tabindex="1">
+        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="h_xcf" name="h_xcf" value="<?php echo $riadok->xcf; ?>" disabled>
         <label class="mdl-textfield__label" for="h_xcf">Number...</label>
         <span class="mdl-textfield__error">Input is not a number!</span>
       </div>
     </td>
     <td>
       <div class="mdl-textfield mdl-js-textfield " style="width: 80%;">
-        <input class="mdl-textfield__input" type="text" id="h_naz" name="h_naz" autofocus required tabindex="2">
+        <input class="mdl-textfield__input" type="text" id="h_naz" name="h_naz" autofocus required>
         <label class="mdl-textfield__label" for="h_naz">N·zov firmy</label>
-      </div>
-      <br>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: auto;">
-        <input class="mdl-textfield__input" type="text" id="" tabindex="5">
+      </div><br>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style=" width: auto;">
+        <input class="mdl-textfield__input" type="text" id="">
         <label class="mdl-textfield__label" for="">dtb</label>
       </div>&nbsp;&nbsp;
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: auto;">
-        <input class="mdl-textfield__input" type="text" id="" tabindex="6">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style=" width: auto;">
+        <input class="mdl-textfield__input" type="text" id="">
         <label class="mdl-textfield__label" for="">prav</label>
       </div>
     </td>
-    <td class="right" style="vertical-align: top; " >
+    <td class="right" style="vertical-align: top;">
       <div class="mdl-textfield mdl-js-textfield" style="width: auto;">
-        <select name="h_rok" id="h_rok" class="mdl-textfield__input" required tabindex="3">
+        <select name="h_rok" id="h_rok" class="mdl-textfield__input" required>
           <option value="2017">2017</option>
           <option value="2016">2016</option>
           <option value="2015">2015</option>
@@ -680,7 +679,7 @@ $riadok=mysql_fetch_object($sql);
     </td>
     <td class="right" style="vertical-align: top;">
       <div class="mdl-textfield mdl-js-textfield" style="width: auto;">
-        <select name="h_duj" id="h_duj" class="mdl-textfield__input" required tabindex="4">
+        <select name="h_duj" id="h_duj" class="mdl-textfield__input" required>
           <option value="0">0 = P⁄</option>
           <option value="1">1 = NO P⁄</option>
           <option value="9">9 = J⁄</option>
@@ -689,10 +688,11 @@ $riadok=mysql_fetch_object($sql);
       </div>
     </td>
     <td class="right" style="">
-      <span id="uvolni" onmouseover="return Povol_uloz();" style="padding: 12px;"><button id="uloz" name="uloz" onclick="Zapis_COOK();">Uloûiù</button></span>
-      <button type="button" id="edit-closer" onclick="closeXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-700" style=""><i class="material-icons">close</i></button>
+      <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" onclick="Zapis_COOK();" ><SPAN id="uvolni" onmouseover="return Povol_uloz();">&nbsp;</SPAN>
+      <button type="button" id="edit-closer" onclick="closeXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-700 " style=""><i class="material-icons">close</i></button>
       <div data-mdl-for="edit-closer" class="mdl-tooltip">Zavrieù</div>
     </td>
+    <td colspan="3">&nbsp;</td>
   </tr>
 <?php                                                    } ?>
 
