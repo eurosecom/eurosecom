@@ -51,7 +51,7 @@ $h_dtb = strip_tags($_REQUEST['h_dtb']);
 $h_prav = strip_tags($_REQUEST['h_prav']);
 
 $upravttt = "UPDATE fir SET naz='$h_naz', rok='$h_rok', duj='$h_duj' WHERE xcf = $cislo_xcf  ";
-$upravene = mysql_query("$upravttt"); 
+$upravene = mysql_query("$upravttt");
 //echo $upravttt."<br />";
 
 $copern=1;
@@ -444,9 +444,7 @@ table {
 </style>
 </head>
 <body onload="ObnovUI();">
-<!-- problem v ie11 pri uprave, asi nespravne class alebo uzatvorenie, treba otestovat... 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
--->
 <header class="mdl-layout__header mdl-layout__header--waterfall ui-header ui-header-three-row">
 <div class="mdl-layout__header-row mdl-color--light-blue-700 ui-header-app-row">
   <a href="http://www.edcom.sk/web/eurosecom.html" target="_blank" class="mdl-layout-title mdl-color-text--yellow-A100">EuroSecom</a>&nbsp;
@@ -484,7 +482,7 @@ if ( $copern == 8 ) { echo "| ˙prava firmy"; }
 
 
 
-<!-- <button id="printlist" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-grey-50 " style=""><i class="material-icons">print</i></button> -->
+
 
 </div> <!-- .ui-header-page-row -->
 
@@ -602,6 +600,7 @@ $konc =($pols*($strana-1))+($pols-1);
 
 <div id="tablelayout" class="mdl-color--white">
   <div class="wrap-ui-table tocenter" style="max-width: 1080px; background-color: ;">
+<form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>" id="formv" name="formv">
   <table class="ui-table">
   <colgroup>
     <col style="width:8%;">
@@ -641,9 +640,8 @@ $riadok=mysql_fetch_object($sql);
 
 <?php  if ( $uprav != 0 AND $riadok->xcf == $cislo_xcf ) { ?>
 <!-- row edit/delete/new -->
-<form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>" id="formv" name="formv">
-  <tr class="mdl-color--white mdl-shadow--2dp row-form" style=" height: ; ">
-    <td>
+  <tr class="mdl-color--white mdl-shadow--2dp row-form" style=" ">
+    <td style="vertical-align: top;">
       <div class="mdl-textfield mdl-js-textfield" style="width: 80%;">
         <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="h_xcf" name="h_xcf" value="<?php echo $riadok->xcf; ?>" disabled>
         <label class="mdl-textfield__label" for="h_xcf">Number...</label>
@@ -654,9 +652,17 @@ $riadok=mysql_fetch_object($sql);
       <div class="mdl-textfield mdl-js-textfield " style="width: 80%;">
         <input class="mdl-textfield__input" type="text" id="h_naz" name="h_naz" autofocus required>
         <label class="mdl-textfield__label" for="h_naz">N·zov firmy</label>
+      </div><br>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style=" width: auto;">
+        <input class="mdl-textfield__input" type="text" id="">
+        <label class="mdl-textfield__label" for="">dtb</label>
+      </div>&nbsp;&nbsp;
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style=" width: auto;">
+        <input class="mdl-textfield__input" type="text" id="">
+        <label class="mdl-textfield__label" for="">prav</label>
       </div>
     </td>
-    <td class="right">
+    <td class="right" style="vertical-align: top;">
       <div class="mdl-textfield mdl-js-textfield" style="width: auto;">
         <select name="h_rok" id="h_rok" class="mdl-textfield__input" required>
           <option value="2017">2017</option>
@@ -671,7 +677,7 @@ $riadok=mysql_fetch_object($sql);
         <label for="h_rok" class="mdl-textfield__label">Obdobie</label>
       </div>
     </td>
-    <td class="right">
+    <td class="right" style="vertical-align: top;">
       <div class="mdl-textfield mdl-js-textfield" style="width: auto;">
         <select name="h_duj" id="h_duj" class="mdl-textfield__input" required>
           <option value="0">0 = P⁄</option>
@@ -681,16 +687,13 @@ $riadok=mysql_fetch_object($sql);
         <label for="h_duj" class="mdl-textfield__label">Druh</label>
       </div>
     </td>
-    <td class="right ">
-      <div id="uvolni" onmouseover="return Povol_uloz();" class=" " style="padding: 12px; position: absolute; right: 60px; top: 6px;">
-        <button id="uloz" name="uloz" class="mdl-button mdl-js-button mdl-button--icon mdl-color--green-500 mdl-color-text--white"><i class="material-icons">done</i></button>
-      </div>
-<div data-mdl-for="uloz" class="mdl-tooltip">Uloûiù</div>
+    <td class="right" style="">
+      <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù" onclick="Zapis_COOK();" ><SPAN id="uvolni" onmouseover="return Povol_uloz();">&nbsp;</SPAN>
       <button type="button" id="edit-closer" onclick="closeXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-700 " style=""><i class="material-icons">close</i></button>
       <div data-mdl-for="edit-closer" class="mdl-tooltip">Zavrieù</div>
     </td>
+    <td colspan="3">&nbsp;</td>
   </tr>
-</form>
 <?php                                                    } ?>
 
 <?php
@@ -699,6 +702,7 @@ $i = $i + 1;
    }
 ?>
   </table>
+</form>
 <form name="forma3" id="forma3" action="#" style="">
   <div class="mdl-color-text--grey-600 flexbox ui-table-pagination " style="height: 40px;  font-size: 12px; background-color: ; justify-content: space-between; align-items: center; ">
     <span class="">= <?php echo $cpol; ?></span>
@@ -736,20 +740,6 @@ $is = $is + 1;
     <a href="firms_md.php" class="mdl-navigation__link header-nav-link">Firmy</a> <!-- dopyt, cez onclick -->
   </nav>
 
-<!-- <div class="mdl-layout__drawer">
-  <span class="mdl-layout-title">EuroSecom</span>
-  <nav class="mdl-navigation">
-    <a href="admin_md.php" class="mdl-navigation__link">Prehæad</a>
-    <a href="users_md.php" class="mdl-navigation__link mdl-navigation__link--current">UûÌvatelia</a>
-    <a href="firms_md.php" class="mdl-navigation__link">Firmy</a>
-    <a href="" class="mdl-navigation__link">⁄ËtovnÌctvo</a>
-    <a href="" class="mdl-navigation__link">Mzdy</a>
-    <a href="" class="mdl-navigation__link">Odbyt</a>
-    <a href="" class="mdl-navigation__link">Sklad</a>
-    <a href="" class="mdl-navigation__link">Majetok</a>
-    <a href="" class="mdl-navigation__link">Anal˝zy</a>
-  </nav>
-</div> -->
 
 </div> <!-- .mdl-layout -->
 
