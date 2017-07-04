@@ -50,7 +50,7 @@ $h_duj = 1*strip_tags($_REQUEST['h_duj']);
 $h_dtb = strip_tags($_REQUEST['h_dtb']);
 $h_prav = strip_tags($_REQUEST['h_prav']);
 
-$upravttt = "UPDATE fir SET naz='$h_naz', rok='$h_rok', duj='$h_duj' WHERE xcf = $cislo_xcf  ";
+$upravttt = "UPDATE fir SET naz='$h_naz', rok='$h_rok', duj='$h_duj', dtb='$h_dtb', prav='$h_prav' WHERE xcf = $cislo_xcf  ";
 $upravene = mysql_query("$upravttt");
 //echo $upravttt."<br />";
 
@@ -469,19 +469,18 @@ if ( $copern == 8 ) { echo "| ˙prava firmy"; }
   </span>
   <div class="mdl-layout-spacer"></div>
 
-<form method="post" action="" id="" name="">
+
+<form method="post" action="firms_md.php?hladanie=1&copern=1&strana=1&uprav=0" id="formhladaj" name="formhladaj">
   <div class="mdl-textfield mdl-js-textfield mdl-color--light-blue-500 search-box">
     <button id="searchbtn" class="mdl-button mdl-js-button mdl-button--icon" style="bottom: 4px; left: 8px; "><i class="material-icons" style="">search</i></button>
-    <input type="text" id="" name="" value="" class="mdl-textfield__input" style="border:0; font-size: 14px; height: 32px; background-color: ;    width: 100%;   ">
+    <input type="text" id="cohladat" name="cohladat" value="<?php echo $cohladat; ?>" class="mdl-textfield__input" style="border:0; font-size: 14px; height: 32px; background-color: ;    width: 100%;   ">
     <label for="" class="mdl-textfield__label mdl-color-text--white"  style="font-size: 14px; top: 6px; left: 48px; height: 32px; line-height: 32px; width: 204px; background-color: ;">Hæadaù v ËÌselnÌku</label>
-    <button id="resetsearchbtn" class="mdl-button mdl-js-button mdl-button--icon" style="bottom: 4px; right: 8px; "><i class="material-icons">close</i></button>
+    <button id="resetsearchbtn" onclick="document.formhladaj.cohladat.value='';" class="mdl-button mdl-js-button mdl-button--icon" style="bottom: 4px; right: 8px; "><i class="material-icons">close</i></button>
   </div>
 </form>
 
+
   <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-color--white mdl-color-text--blue-grey-400" style="margin-left: 24px;"><i class="material-icons">add</i>&nbsp;Firma</button>
-
-
-
 
 
 </div> <!-- .ui-header-page-row -->
@@ -567,7 +566,7 @@ if ( $copern == 8 ) { echo "| ˙prava firmy"; }
 $sqltt = "SELECT * FROM fir WHERE xcf >= 0 ORDER BY xcf ";
 if( $hladanie == 1 )
 {
-$sqltt = "SELECT * FROM klienti WHERE  xcf >= 0  AND ( naz LIKE '%$cohladat%' OR rok LIKE '%$cohladat%' ) ORDER BY xcf ";
+$sqltt = "SELECT * FROM fir WHERE  xcf >= 0  AND ( naz LIKE '%$cohladat%' OR rok LIKE '%$cohladat%' ) ORDER BY xcf ";
 }
 $sql = mysql_query("$sqltt");
 //$sql = mysql_query("SELECT * FROM fir WHERE xcf < 0 ORDER BY xcf ");//prazdny zoznam
@@ -654,12 +653,12 @@ $riadok=mysql_fetch_object($sql);
         <label class="mdl-textfield__label" for="h_naz">N·zov firmy</label>
       </div><br>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style=" width: auto;">
-        <input class="mdl-textfield__input" type="text" id="">
-        <label class="mdl-textfield__label" for="">dtb</label>
+        <input class="mdl-textfield__input" type="text" id="h_dtb" name="h_dtb">
+        <label class="mdl-textfield__label" for="h_dtb">Parametre</label>
       </div>&nbsp;&nbsp;
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style=" width: auto;">
-        <input class="mdl-textfield__input" type="text" id="">
-        <label class="mdl-textfield__label" for="">prav</label>
+        <input class="mdl-textfield__input" type="text"  id="h_prav" name="h_prav">
+        <label class="mdl-textfield__label" for="h_prav">Prav</label>
       </div>
     </td>
     <td class="right" style="vertical-align: top;">
@@ -791,9 +790,10 @@ for ( var i = 0; i < rows.length; i++ ) {
 <?php if ( $uprav == 1 ) { ?>
 
    document.formv.h_naz.value = '<?php echo "$h_naz"; ?>';
-  document.formv.h_rok.value = '<?php echo "$h_rok"; ?>';
-      // document.formv.h_rok.value = '<?php echo $naz_rok;?>';
+   document.formv.h_rok.value = '<?php echo "$h_rok"; ?>';
+   document.formv.h_dtb.value = '<?php echo "$h_dtb"; ?>';
    document.formv.h_duj.value = '<?php echo "$h_duj"; ?>';
+   document.formv.h_prav.value = '<?php echo "$h_prav"; ?>';
 
 <?php                   } ?>
 
@@ -852,6 +852,7 @@ function Firmy()
 <?php } ?>
 
     }
+
 
 </script>
 
