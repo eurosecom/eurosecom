@@ -764,6 +764,8 @@ $is = $is + 1;
 <?php if ( $uprav != 0 )
 {
 ?>
+   document.getElementById('uloz').disabled = true;
+
 var bodylist = document.getElementById('tablelayout');
     bodylist.className = bodylist.className == 'mdl-color--blue-grey-50' ? 'mdl-color--white' : 'mdl-color--blue-grey-50';
 
