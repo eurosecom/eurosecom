@@ -642,29 +642,29 @@ $riadok=mysql_fetch_object($sql);
   <tr class="mdl-color--white mdl-shadow--2dp row-form" style=" ">
     <td style="vertical-align: top;">
       <div class="mdl-textfield mdl-js-textfield" style="width: 80%;">
-        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="h_xcf" name="h_xcf" value="<?php echo $riadok->xcf; ?>" disabled tabindex="1">
+        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="h_xcf" name="h_xcf" onKeyDown="return XcfEnter(event.which)" value="<?php echo $riadok->xcf; ?>" disabled tabindex="1">
         <label class="mdl-textfield__label" for="h_xcf">Number...</label>
         <span class="mdl-textfield__error">Input is not a number!</span>
       </div>
     </td>
     <td>
       <div class="mdl-textfield mdl-js-textfield " style="width: 80%;">
-        <input class="mdl-textfield__input" type="text" id="h_naz" name="h_naz" autofocus required tabindex="2">
+        <input class="mdl-textfield__input" type="text" id="h_naz" name="h_naz" onKeyDown="return NazEnter(event.which)" autofocus required tabindex="2">
         <label class="mdl-textfield__label" for="h_naz">Názov firmy</label>
       </div>
       <br>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style=" width: auto;">
-        <input class="mdl-textfield__input" type="text" id="h_dtb" name="h_dtb" tabindex="5">
+        <input class="mdl-textfield__input" type="text" id="h_dtb" name="h_dtb" onKeyDown="return DtbEnter(event.which)" tabindex="5">
         <label class="mdl-textfield__label" for="h_dtb">Parametre</label>
       </div>&nbsp;&nbsp;
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style=" width: auto;">
-        <input class="mdl-textfield__input" type="text"  id="h_prav" name="h_prav" tabindex="6">
+        <input class="mdl-textfield__input" type="text"  id="h_prav" name="h_prav" onKeyDown="return PravEnter(event.which)" tabindex="6">
         <label class="mdl-textfield__label" for="h_prav">Prav</label>
       </div>
     </td>
     <td class="right" style="vertical-align: top;">
       <div class="mdl-textfield mdl-js-textfield" style="width: auto;">
-        <select name="h_rok" id="h_rok" class="mdl-textfield__input" required tabindex="3">
+        <select name="h_rok" id="h_rok" class="mdl-textfield__input" required tabindex="3" onKeyDown="return RokEnter(event.which)" >
           <option value="2017">2017</option>
           <option value="2016">2016</option>
           <option value="2015">2015</option>
@@ -679,7 +679,7 @@ $riadok=mysql_fetch_object($sql);
     </td>
     <td class="right" style="vertical-align: top;">
       <div class="mdl-textfield mdl-js-textfield" style="width: auto;">
-        <select name="h_duj" id="h_duj" class="mdl-textfield__input" required tabindex="4">
+        <select name="h_duj" id="h_duj" class="mdl-textfield__input" required tabindex="4" onKeyDown="return DujEnter(event.which)" >
           <option value="0">0 = PÚ</option>
           <option value="1">1 = NO PÚ</option>
           <option value="9">9 = JÚ</option>
@@ -854,6 +854,75 @@ function Firmy()
 
     }
 
+//enternext
+
+function XcfEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_naz.focus();
+        document.forms.formv.h_naz.select();
+              }
+
+                }
+
+function NazEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_rok.focus();
+        document.forms.formv.h_rok.select();
+              }
+
+                }
+
+function RokEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_duj.focus();
+        document.forms.formv.h_duj.select();
+              }
+
+                }
+
+function DujEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_dtb.focus();
+        document.forms.formv.h_dtb.select();
+              }
+
+                }
+
+function DtbEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_prav.focus();
+        document.forms.formv.h_prav.select();
+              }
+
+                }
+
+function PravEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+    var okvstup=1;
+    if ( document.formv.h_naz.value == '' ) okvstup=0;
+    if ( okvstup == 0 ) { document.formv.h_naz.focus(); return (false); }
+    if ( okvstup == 1 ) { document.forms.formv.submit(); return (true); }
+              }
+
+                }
 
 </script>
 
