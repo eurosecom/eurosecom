@@ -36,6 +36,7 @@ $hladanie = 1*$_REQUEST['hladanie'];
 $cohladat = trim($_REQUEST['cohladat']);
 if( $cohladat == '' ){ $hladanie=0; }
 //echo $cohladat."<br />";
+$nova = 1*$_REQUEST['nova'];
 
 $kopkli=0;
 $zmazane=0;
@@ -480,7 +481,7 @@ if ( $copern == 8 ) { echo "| ˙prava firmy"; }
 </form>
 
 
-  <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-color--white mdl-color-text--blue-grey-400" style="margin-left: 24px;"><i class="material-icons">add</i>&nbsp;Firma</button>
+  <button type="button" onclick="novaXcf();" class="mdl-button mdl-js-button mdl-button--raised mdl-color--white mdl-color-text--blue-grey-400" style="margin-left: 24px;"><i class="material-icons">add</i>&nbsp;Firma</button>
 
 
 </div> <!-- .ui-header-page-row -->
@@ -599,7 +600,7 @@ $konc =($pols*($strana-1))+($pols-1);
 
 <div id="tablelayout" class="mdl-color--white">
   <div class="wrap-ui-table tocenter" style="max-width: 1080px; background-color: ;">
-<form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>" id="formv" name="formv">
+<form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>&nova=<?php echo $nova; ?>" id="formv" name="formv">
   <table class="ui-table">
   <colgroup>
     <col style="width:8%;">
@@ -617,39 +618,19 @@ $riadok=mysql_fetch_object($sql);
 ?>
 
 
-
-<?php if ( $riadok->xcf != $cislo_xcf ) { ?>
-<!-- row echo -->
-  <tr class="row-echo" style="background-color: ; ">
-    <td class=""><?php echo $riadok->xcf; ?></td>
-    <td ><?php echo $riadok->naz; ?></td>
-    <td class="right"><?php echo $riadok->rok; ?></td>
-    <td class="right"><?php echo $riadok->duj; ?></td>
-    <td class="right">
-      <button type="button" id="edit<?php echo $riadok->xcf; ?>" onclick="upravXcf(<?php echo $riadok->xcf; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-<div data-mdl-for="edit<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Upraviù</div>
-      <button type="button" id="copy<?php echo $riadok->xcf; ?>" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-<div data-mdl-for="copy<?php echo $riadok->xcf; ?>" class="mdl-tooltip">KopÌrovaù</div>
-      <button type="button" id="remove<?php echo $riadok->xcf; ?>" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-<div data-mdl-for="remove<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Vymazaù</div>
-    </td>
-  </tr>
-
-<?php                                    } ?>
-
-<?php  if ( $uprav != 0 AND $riadok->xcf == $cislo_xcf ) { ?>
+<?php  if ( ( $uprav != 0 AND $riadok->xcf == $cislo_xcf ) OR ( $nova == 1 AND $i == 0 ) ) { ?>
 <!-- row edit/delete/new -->
   <tr class="mdl-color--white mdl-shadow--2dp row-form" style=" ">
     <td style="vertical-align: top;">
       <div class="mdl-textfield mdl-js-textfield" style="width: 80%;">
-        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="h_xcf" name="h_xcf" onKeyDown="return XcfEnter(event.which)" value="<?php echo $riadok->xcf; ?>" disabled tabindex="1">
+        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="h_xcf" name="h_xcf" onKeyDown="return XcfEnter(event.which)" value="<?php echo $riadok->xcf; ?>" <?php if( $nova == 1 ) { echo "autofocus"; } ?>  tabindex="1">
         <label class="mdl-textfield__label" for="h_xcf">Number...</label>
         <span class="mdl-textfield__error">Input is not a number!</span>
       </div>
     </td>
     <td>
       <div class="mdl-textfield mdl-js-textfield " style="width: 80%;">
-        <input class="mdl-textfield__input" type="text" id="h_naz" name="h_naz" onKeyDown="return NazEnter(event.which)" autofocus required tabindex="2">
+        <input class="mdl-textfield__input" type="text" id="h_naz" name="h_naz" onKeyDown="return NazEnter(event.which)" required <?php if( $uprav == 1 ) { echo "autofocus"; } ?> tabindex="2">
         <label class="mdl-textfield__label" for="h_naz">N·zov firmy</label>
       </div>
       <br>
@@ -695,6 +676,26 @@ $riadok=mysql_fetch_object($sql);
     <td colspan="3">&nbsp;</td>
   </tr>
 <?php                                                    } ?>
+
+
+<?php if ( $riadok->xcf != $cislo_xcf OR $nova == 1 ) { ?>
+<!-- row echo -->
+  <tr class="row-echo" style="background-color: ; ">
+    <td class=""><?php echo $riadok->xcf; ?></td>
+    <td ><?php echo $riadok->naz; ?></td>
+    <td class="right"><?php echo $riadok->rok; ?></td>
+    <td class="right"><?php echo $riadok->duj; ?></td>
+    <td class="right">
+      <button type="button" id="edit<?php echo $riadok->xcf; ?>" onclick="upravXcf(<?php echo $riadok->xcf; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
+<div data-mdl-for="edit<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Upraviù</div>
+      <button type="button" id="copy<?php echo $riadok->xcf; ?>" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
+<div data-mdl-for="copy<?php echo $riadok->xcf; ?>" class="mdl-tooltip">KopÌrovaù</div>
+      <button type="button" id="remove<?php echo $riadok->xcf; ?>" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
+<div data-mdl-for="remove<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Vymazaù</div>
+    </td>
+  </tr>
+
+<?php                                    } ?>
 
 <?php
   }
@@ -760,11 +761,23 @@ $is = $is + 1;
    document.getElementById('btnpagenext').disabled = true;
 <?php } ?>
 
+//row new
+<?php if ( $nova != 0 )
+{
+?>
+   document.getElementById('uloz').disabled = true;
+
+<?php
+}
+//new row
+?>
+
 //row edit
 <?php if ( $uprav != 0 )
 {
 ?>
    document.getElementById('uloz').disabled = true;
+   document.getElementById('h_xcf').disabled = true;
 
 var bodylist = document.getElementById('tablelayout');
     bodylist.className = bodylist.className == 'mdl-color--blue-grey-50' ? 'mdl-color--white' : 'mdl-color--blue-grey-50';
@@ -843,6 +856,11 @@ function Firmy()
   function closeXcf(firma)
   {
     window.open('firms_md.php?copern=1&strana=<?php echo $strana; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_self');
+  }
+
+  function novaXcf()
+  {
+    window.open('firms_md.php?copern=1&strana=1&hladanie=0&cohladat=&nova=1', '_self');
   }
 
     function Povol_uloz()
