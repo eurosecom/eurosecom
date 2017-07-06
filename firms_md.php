@@ -41,6 +41,41 @@ $nova = 1*$_REQUEST['nova'];
 $kopkli=0;
 $zmazane=0;
 
+//nova
+if ( $copern == 8 AND $nova == 1 )
+  {
+
+$h_xcf = 1*strip_tags($_REQUEST['h_xcf']);
+$h_naz = strip_tags($_REQUEST['h_naz']);
+$h_rok = 1*strip_tags($_REQUEST['h_rok']);
+$h_duj = 1*strip_tags($_REQUEST['h_duj']);
+$h_dtb = strip_tags($_REQUEST['h_dtb']);
+$h_prav = strip_tags($_REQUEST['h_prav']);
+
+$jexcf=0;
+$sqlttt = "SELECT * FROM fir WHERE xcf = $h_xcf ";
+$sqldok = mysql_query("$sqlttt");
+//echo $sqlttt;
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+$jexcf=1;
+ }
+
+if( $jexcf == 1 ) { $h_xcf=0; }
+
+$upravttt = "INSERT INTO fir ( xcf, naz, rok, duj, dtb, prav ) ".
+" VALUES ( '$h_xcf', '$h_naz', '$h_rok', '$h_duj', '$h_dtb', '$h_prav' )";
+if( $h_xcf > 0 ) { $upravene = mysql_query("$upravttt"); }
+//echo $upravttt."<br />";
+
+$copern=1;
+$nova=0;
+$cislo_xcf=0;
+$kopkli=1;
+     }
+//koniec uprava
+
 //uprava
 if ( $copern == 8 AND $uprav == 1 )
   {
@@ -623,7 +658,7 @@ $riadok=mysql_fetch_object($sql);
   <tr class="mdl-color--white mdl-shadow--2dp row-form" style=" ">
     <td style="vertical-align: top;">
       <div class="mdl-textfield mdl-js-textfield" style="width: 80%;">
-        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="h_xcf" name="h_xcf" onKeyDown="return XcfEnter(event.which)" value="<?php echo $riadok->xcf; ?>" <?php if( $nova == 1 ) { echo "autofocus"; } ?>  tabindex="1">
+        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="h_xcf" name="h_xcf" onKeyDown="return XcfEnter(event.which)" <?php if( $nova != 1 ) { echo "value=\"$riadok->xcf\""; } ?> <?php if( $nova == 1 ) { echo "autofocus"; } ?>  tabindex="1">
         <label class="mdl-textfield__label" for="h_xcf">Number...</label>
         <span class="mdl-textfield__error">Input is not a number!</span>
       </div>
