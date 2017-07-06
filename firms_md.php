@@ -37,9 +37,25 @@ $cohladat = trim($_REQUEST['cohladat']);
 if( $cohladat == '' ){ $hladanie=0; }
 //echo $cohladat."<br />";
 $nova = 1*$_REQUEST['nova'];
+$zmaz = 1*$_REQUEST['zmaz'];
 
 $kopkli=0;
 $zmazane=0;
+
+//zmaz
+if ( $copern == 8 AND $zmaz == 1 )
+  {
+
+$upravttt = "DELETE FROM fir WHERE xcf = $cislo_xcf ";
+//$upravene = mysql_query("$upravttt"); 
+//echo $upravttt."<br />";
+
+$copern=1;
+$zmaz=0;
+$cislo_xcf=0;
+$kopkli=1;
+     }
+//koniec zmaz
 
 //nova
 if ( $copern == 8 AND $nova == 1 )
@@ -635,7 +651,7 @@ $konc =($pols*($strana-1))+($pols-1);
 
 <div id="tablelayout" class="mdl-color--white">
   <div class="wrap-ui-table tocenter" style="max-width: 1080px; background-color: ;">
-<form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>&nova=<?php echo $nova; ?>" id="formv" name="formv">
+<form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&zmaz=<?php echo $zmaz; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>&nova=<?php echo $nova; ?>" id="formv" name="formv">
   <table class="ui-table">
   <colgroup>
     <col style="width:8%;">
@@ -653,7 +669,7 @@ $riadok=mysql_fetch_object($sql);
 ?>
 
 
-<?php  if ( ( $uprav != 0 AND $riadok->xcf == $cislo_xcf ) OR ( $nova == 1 AND $i == 0 ) ) { ?>
+<?php  if ( ( $uprav != 0 AND $riadok->xcf == $cislo_xcf ) OR ( $nova == 1 AND $i == 0 ) OR ( $zmaz != 0 AND $riadok->xcf == $cislo_xcf ) ) { ?>
 <!-- row edit/delete/new -->
   <tr class="mdl-color--white mdl-shadow--2dp row-form" style=" ">
     <td style="vertical-align: top;">
@@ -724,12 +740,14 @@ $riadok=mysql_fetch_object($sql);
 <div data-mdl-for="edit<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Upraviù</div>
       <button type="button" id="copy<?php echo $riadok->xcf; ?>" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
 <div data-mdl-for="copy<?php echo $riadok->xcf; ?>" class="mdl-tooltip">KopÌrovaù</div>
-      <button type="button" id="remove<?php echo $riadok->xcf; ?>" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
+      <button type="button" id="remove<?php echo $riadok->xcf; ?>" onclick="zmazXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
 <div data-mdl-for="remove<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Vymazaù</div>
     </td>
   </tr>
 
 <?php                                    } ?>
+
+
 
 <?php
   }
@@ -806,6 +824,18 @@ $is = $is + 1;
 //new row
 ?>
 
+//row del
+<?php if ( $zmaz != 0 )
+{
+?>
+   document.getElementById('uloz').disabled = true;
+
+
+<?php
+}
+//del row
+?>
+
 //row edit
 <?php if ( $uprav != 0 )
 {
@@ -835,7 +865,7 @@ for ( var i = 0; i < rows.length; i++ ) {
 //edit row
 ?>
 
-<?php if ( $uprav == 1 ) { ?>
+<?php if ( $uprav == 1 OR $zmaz == 1 ) { ?>
 
    document.formv.h_naz.value = '<?php echo "$h_naz"; ?>';
    document.formv.h_rok.value = '<?php echo "$h_rok"; ?>';
@@ -860,6 +890,12 @@ for ( var i = 0; i < rows.length; i++ ) {
   function upravXcf(xcf,uprav)
   {
     window.open('firms_md.php?copern=<?php echo $copern; ?>&strana=<?php echo $strana; ?>&cislo_xcf=' + xcf + '&uprav=' + uprav + '&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_self');
+
+  }
+
+  function zmazXcf(xcf)
+  {
+    window.open('firms_md.php?copern=<?php echo $copern; ?>&zmaz=1&strana=<?php echo $strana; ?>&cislo_xcf=' + xcf + '&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_self');
 
   }
 
