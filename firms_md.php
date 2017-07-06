@@ -668,12 +668,11 @@ $riadok=mysql_fetch_object($sql);
         <label for="h_duj" class="mdl-textfield__label">Druh</label>
       </div>
     </td>
-    <td class="right" style="">
-      <span id="uvolni" onmouseover="return Povol_uloz();" style="padding: 12px;"><button id="uloz" name="uloz" onclick="Zapis_COOK();">Uloûiù</button></span>
+    <td class="right">
+      <span id="uvolni" onmouseover="return Povol_uloz();" class="ukaz" style="padding: 12px;"><button id="uloz" name="uloz" onclick="Zapis_COOK();">Uloûiù</button></span>
       <button type="button" id="edit-closer" onclick="closeXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-700 " style=""><i class="material-icons">close</i></button>
       <div data-mdl-for="edit-closer" class="mdl-tooltip">Zavrieù</div>
     </td>
-    <td colspan="3">&nbsp;</td>
   </tr>
 <?php                                                    } ?>
 
@@ -867,6 +866,10 @@ function Firmy()
     {
 
 <?php if ( $uprav == 1 ) { ?>
+   document.getElementById('uloz').disabled = false;
+<?php } ?>
+
+<?php if ( $nova == 1 ) { ?>
    document.getElementById('uloz').disabled = false;
 <?php } ?>
 
