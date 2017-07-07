@@ -47,7 +47,7 @@ if ( $copern == 8 AND $zmaz == 1 )
   {
 
 $upravttt = "DELETE FROM fir WHERE xcf = $cislo_xcf ";
-//$upravene = mysql_query("$upravttt");
+$upravene = mysql_query("$upravttt");
 //echo $upravttt."<br />";
 
 $copern=1;
@@ -58,6 +58,7 @@ $kopkli=1;
 //koniec zmaz
 
 //nova
+$bolanova=0;
 if ( $copern == 8 AND $nova == 1 )
   {
 
@@ -89,6 +90,7 @@ $copern=1;
 $nova=0;
 $cislo_xcf=0;
 $kopkli=1;
+$bolanova=1;
      }
 //koniec uprava
 
@@ -626,6 +628,10 @@ if ( $uprav == 1 ) { echo "úprava"; }
 <main class="mdl-layout__content mdl-color--blue-grey-50" style="padding: 0 0 50px 0; ">
 <?php
 $sqltt = "SELECT * FROM fir WHERE xcf >= 0 ORDER BY xcf ";
+if( $nova == 1 OR $bolanova == 1 )
+{
+$sqltt = "SELECT * FROM fir WHERE xcf >= 0  ORDER BY datm DESC ";
+}
 if( $hladanie == 1 )
 {
 $sqltt = "SELECT * FROM fir WHERE  xcf >= 0  AND ( naz LIKE '%$cohladat%' OR rok LIKE '%$cohladat%' ) ORDER BY xcf ";
