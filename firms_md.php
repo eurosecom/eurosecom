@@ -42,6 +42,7 @@ $zmaz = 1*$_REQUEST['zmaz'];
 $kopkli=0;
 $zmazane=0;
 
+
 //zmaz
 if ( $copern == 8 AND $zmaz == 1 )
   {
@@ -92,7 +93,34 @@ $cislo_xcf=0;
 $kopkli=1;
 $bolanova=1;
      }
-//koniec uprava
+//koniec nova
+
+//kopiruj
+$kopiruj = 1*$_REQUEST['kopiruj'];
+if ( $copern == 8 AND $kopiruj == 1 )
+  {
+
+$sqlttt = "SELECT * FROM fir WHERE xcf = $cislo_xcf ";
+$sqldok = mysql_query("$sqlttt");
+echo $sqlttt;
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+ $h_xcf=$riaddok->xcf+1;
+ $h_naz=$riaddok->naz;
+ $h_rok=$riaddok->rok;
+ $h_duj=$riaddok->duj;
+ $h_dtb=$riaddok->dtb;
+ $h_prav=$riaddok->prav; 
+ }
+
+
+$cislo_xcf=$cislo_xcf+1;
+$copern=1;
+$nova=1;
+$kopkli=0;
+     }
+//koniec kopiruj
 
 //uprava
 if ( $copern == 8 AND $uprav == 1 )
@@ -754,7 +782,7 @@ $riadok=mysql_fetch_object($sql);
     <td class="right">
       <button type="button" id="edit<?php echo $riadok->xcf; ?>" onclick="upravXcf(<?php echo $riadok->xcf; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
 <div data-mdl-for="edit<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Upraviù</div>
-      <button type="button" id="copy<?php echo $riadok->xcf; ?>" onclick="" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
+      <button type="button" id="copy<?php echo $riadok->xcf; ?>" onclick="kopirujXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
 <div data-mdl-for="copy<?php echo $riadok->xcf; ?>" class="mdl-tooltip">KopÌrovaù</div>
       <button type="button" id="remove<?php echo $riadok->xcf; ?>" onclick="zmazXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
 <div data-mdl-for="remove<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Vymazaù</div>
@@ -897,6 +925,20 @@ for ( var i = 0; i < rows.length; i++ ) {
 //edit row
 ?>
 
+<?php if ( $kopiruj == 1 ) { ?>
+
+   document.formv.h_xcf.value = '<?php echo "$h_xcf"; ?>';
+   document.formv.h_naz.value = '<?php echo "$h_naz"; ?>';
+   document.formv.h_rok.value = '<?php echo "$h_rok"; ?>';
+   document.formv.h_dtb.value = '<?php echo "$h_dtb"; ?>';
+   document.formv.h_duj.value = '<?php echo "$h_duj"; ?>';
+   document.formv.h_prav.value = '<?php echo "$h_prav"; ?>';
+
+
+
+
+<?php                   } ?>
+
 <?php if ( $uprav == 1 OR $zmaz == 1 ) { ?>
 
    document.formv.h_naz.value = '<?php echo "$h_naz"; ?>';
@@ -930,6 +972,12 @@ for ( var i = 0; i < rows.length; i++ ) {
   function upravXcf(xcf,uprav)
   {
     window.open('firms_md.php?copern=<?php echo $copern; ?>&strana=<?php echo $strana; ?>&cislo_xcf=' + xcf + '&uprav=' + uprav + '&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_self');
+
+  }
+
+  function kopirujXcf(xcf)
+  {
+    window.open('firms_md.php?copern=8&strana=1&cislo_xcf=' + xcf + '&kopiruj=1&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_self');
 
   }
 
