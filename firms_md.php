@@ -47,7 +47,7 @@ if ( $copern == 8 AND $zmaz == 1 )
   {
 
 $upravttt = "DELETE FROM fir WHERE xcf = $cislo_xcf ";
-//$upravene = mysql_query("$upravttt"); 
+//$upravene = mysql_query("$upravttt");
 //echo $upravttt."<br />";
 
 $copern=1;
@@ -479,7 +479,9 @@ table {
 }
 .search-box > * {
   opacity: .7;
-
+}
+.search-box.is-focused > * {
+  opacity: 1;
 }
 
 .search-box.is-focused .mdl-textfield__label:after {
@@ -488,10 +490,13 @@ table {
 .search-box .mdl-button--icon {
   position: absolute;
 }
-.search-box.is-focused > * {
-  opacity: 1;
-
+.search-box input[type=text]::-ms-clear { /* ie hidden clear "x" */
+    display: none;
 }
+
+
+
+
 
 </style>
 </head>
@@ -504,19 +509,23 @@ table {
   <div class="mdl-layout-spacer"></div>
   <button id="appsmenubtn" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-grey-100" style=""><i class="material-icons">apps</i></button>
   <div class="mdl-list header-list" style="margin-left: 8px;  ">
-    <div class="mdl-list__item mdl-color-text--blue-grey-100 " style="min-height: 40px; padding: 0; ">
-      <i class="material-icons mdl-list__item-avatar mdl-color--blue-A100 mdl-color-text--blue-A700 item-avatar-md" style="font-size: 24px; height: 24px; line-height: 24px; width: 24px; margin-right: 6px;">person</i>
-      <span class="mdl-color-text--blue-grey-100" style="font-size: 12px; letter-spacing: 0.02em;"><?php echo "$kli_uzmeno $kli_uzprie / $kli_uzid";?></span>
+    <div class="mdl-list__item mdl-color-text--blue-grey-100 " style="padding: 0; height: 40px;">
+      <span class="mdl-list__item-avatar  mdl-color-text--blue-grey-100 item-avatar-md center" style="font-size: 12px; height: 28px; line-height: 28px; width: 28px; margin-right: 6px; background-color: #5C6BC0; letter-spacing: 0.02em; "><?php echo "$kli_uzid"; ?></span>
+
+      <span class="mdl-color-text--blue-grey-100" style="font-size: 12px; letter-spacing: 0.02em;"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
     </div>
   </div>
 </div> <!-- .ui-header-app-row -->
 <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row">
-  <span id="headertitle" class="mdl-layout-title" style="cursor: pointer;">»ÌselnÌk firiem<i class="material-icons" style="vertical-align: -6px;">arrow_drop_down</i></span>
-  <span class="mdl-layout-title mdl-color-text--yellow-A100">
+  <span id="headertitle" class="mdl-layout-title " style="cursor: pointer; border-right: 2px solid rgba(255,255,255,0.8); margin-right: 16px; padding-right: 8px;">»ÌselnÌk firiem<i class="material-icons" style="vertical-align: -6px;">arrow_drop_down</i></span>
+
+
+
+  <span class="mdl-layout-title mdl-color-text--yellow-A100" style="font-size: 16px; ">
 <?php
-if ( $copern == 5 ) { echo "| nov· firma"; }
-if ( $copern == 6 ) { echo "| vymazanie firmy"; }
-if ( $copern == 8 ) { echo "| ˙prava firmy"; }
+if ( $nova == 1 ) { echo "nov·"; }
+if ( $zmaz == 1 ) { echo "vymazanie"; }
+if ( $uprav == 1 ) { echo "˙prava"; }
 ?>
   </span>
   <div class="mdl-layout-spacer"></div>
@@ -525,11 +534,12 @@ if ( $copern == 8 ) { echo "| ˙prava firmy"; }
 <form method="post" action="firms_md.php?hladanie=1&copern=1&strana=1&uprav=0" id="formhladaj" name="formhladaj">
   <div class="mdl-textfield mdl-js-textfield mdl-color--light-blue-500 search-box">
     <button id="searchbtn" class="mdl-button mdl-js-button mdl-button--icon" style="bottom: 4px; left: 8px; "><i class="material-icons" style="">search</i></button>
-    <input type="text" id="cohladat" name="cohladat" value="<?php echo $cohladat; ?>" class="mdl-textfield__input" style="border:0; font-size: 14px; height: 32px; background-color: ;    width: 100%;   ">
-    <label for="" class="mdl-textfield__label mdl-color-text--white"  style="font-size: 14px; top: 6px; left: 48px; height: 32px; line-height: 32px; width: 204px; background-color: ;">Hæadaù v ËÌselnÌku</label>
-    <button id="resetsearchbtn" onclick="document.formhladaj.cohladat.value='';" class="mdl-button mdl-js-button mdl-button--icon" style="bottom: 4px; right: 8px; "><i class="material-icons">close</i></button>
+    <input type="text" id="cohladat" name="cohladat" value="<?php echo $cohladat; ?>" class="mdl-textfield__input search-input" style="border:0; font-size: 14px; height: 32px; background-color: ;    width: 100%;   ">
+    <label for="cohladat" class="mdl-textfield__label mdl-color-text--white"  style="font-size: 14px; top: 5px; left: 48px; height: 32px; line-height: 32px; width: 204px; background-color: ;">Hæadaù v ËÌselnÌku</label>
+    <button id="resetsearchbtn" onclick="document.formhladaj.cohladat.value='';" class="mdl-button mdl-js-button mdl-button--icon search-reset" style="bottom: 4px; right: 8px; "><i class="material-icons">close</i></button>
   </div>
 </form>
+
 
 
   <button type="button" onclick="novaXcf();" class="mdl-button mdl-js-button mdl-button--raised mdl-color--white mdl-color-text--blue-grey-400" style="margin-left: 24px;"><i class="material-icons">add</i>&nbsp;Firma</button>
@@ -554,9 +564,9 @@ if ( $copern == 8 ) { echo "| ˙prava firmy"; }
 </header>
 
 <ul for="headertitle" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-color--white dropdown-menu" style="top:-23px;">
-  <li class="mdl-menu__item" onclick="Domena();">DomÈna</li>
-  <li class="mdl-menu__item" onclick="Uzivatelia();">»ÌselnÌk uûÌvateæov</li>
-  <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="Firmy();" style="">»ÌselnÌk firiem</li>
+  <li class="mdl-menu__item" onclick="Domain();">DomÈna</li>
+  <li class="mdl-menu__item" onclick="Users();">»ÌselnÌk uûÌvateæov</li>
+  <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="Firms();" style="">»ÌselnÌk firiem</li>
 </ul>
 
 <span class="mdl-tooltip" data-mdl-for="appsmenubtn">EuroSecom podsystÈmy</span>
@@ -645,12 +655,12 @@ $konc =($pols*($strana-1))+($pols-1);
 <!-- empty state -->
 <div class="no-item " style="  margin: 12% auto 5%; width: 300px; height: 120px; text-align: center;">
   <i class="material-icons mdl-color-text--grey-400" style="font-size: 64px;">sentiment_dissatisfied</i>
-  <div class="mdl-color-text--grey-600" style="letter-spacing: 0.02em; font-size: 16px;  font-weight: 500; padding-top: 32px;">»ÌselnÌk je pr·zdny</div>
+  <div class="mdl-color-text--grey-600" style="letter-spacing: 0.02em; font-size: 16px;  font-weight: 500; padding-top: 32px;">Nenaöiel som ûiadne poloûky</div>
 </div>
 <?php                   } ?>
 
 <div id="tablelayout" class="mdl-color--white">
-  <div class="wrap-ui-table tocenter" style="max-width: 1080px; background-color: ;">
+  <div class="wrap-ui-table tocenter" style="max-width: 1080px;">
 <form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&zmaz=<?php echo $zmaz; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>&nova=<?php echo $nova; ?>" id="formv" name="formv">
   <table class="ui-table">
   <colgroup>
@@ -674,14 +684,14 @@ $riadok=mysql_fetch_object($sql);
   <tr class="mdl-color--white mdl-shadow--2dp row-form" style=" ">
     <td style="vertical-align: top;">
       <div class="mdl-textfield mdl-js-textfield" style="width: 80%;">
-        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="h_xcf" name="h_xcf" onKeyDown="return XcfEnter(event.which)" <?php if( $nova != 1 ) { echo "value=\"$riadok->xcf\""; } ?> <?php if( $nova == 1 ) { echo "autofocus"; } ?>  tabindex="1">
-        <label class="mdl-textfield__label" for="h_xcf">Number...</label>
-        <span class="mdl-textfield__error">Input is not a number!</span>
+        <input type="text" name="h_xcf" id="h_xcf" onKeyDown="return XcfEnter(event.which)" pattern="-?[0-9]*(\.[0-9]+)?" tabindex="1" required class="mdl-textfield__input" >
+        <label class="mdl-textfield__label" for="h_xcf">»Ìslo firmy</label>
+        <span class="mdl-textfield__error">PouûÌvajte ËÌsla!</span>
       </div>
     </td>
     <td>
       <div class="mdl-textfield mdl-js-textfield " style="width: 80%;">
-        <input class="mdl-textfield__input" type="text" id="h_naz" name="h_naz" onKeyDown="return NazEnter(event.which)" required <?php if( $uprav == 1 ) { echo "autofocus"; } ?> tabindex="2">
+        <input class="mdl-textfield__input" type="text" id="h_naz" name="h_naz" onKeyDown="return NazEnter(event.which)" required tabindex="2">
         <label class="mdl-textfield__label" for="h_naz">N·zov firmy</label>
       </div>
       <br>
@@ -747,8 +757,6 @@ $riadok=mysql_fetch_object($sql);
 
 <?php                                    } ?>
 
-
-
 <?php
   }
 $i = $i + 1;
@@ -756,7 +764,7 @@ $i = $i + 1;
 ?>
   </table>
 </form>
-<form name="forma3" id="forma3" action="#" style="">
+<form name="forma3" id="forma3" action="#">
   <div class="mdl-color-text--grey-600 flexbox ui-table-pagination " style="height: 40px;  font-size: 12px; background-color: ; justify-content: space-between; align-items: center; ">
     <span class="">= <?php echo $cpol; ?></span>
     <div>
@@ -784,20 +792,11 @@ $is = $is + 1;
   </div>
 </form>
   </div> <!-- .wrap-ui-table -->
-</div>
+</div> <!-- #tablelayout -->
 </main>
-
-<nav class="mdl-navigation mdl-layout--large-screen-only header-nav " style="width: 300px; display: none;">
-    <a href="admin_md.php" class="mdl-navigation__link header-nav-link">Prehæad</a> <!-- dopyt, cez onclick -->
-    <a href="#" onclick="Uzivatelia();" class="mdl-navigation__link header-nav-link active">UûÌvatelia</a>
-    <a href="firms_md.php" class="mdl-navigation__link header-nav-link">Firmy</a> <!-- dopyt, cez onclick -->
-  </nav>
-
-
 </div> <!-- .mdl-layout -->
 
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-
 <script type="text/javascript">
 
   function ObnovUI()
@@ -813,11 +812,26 @@ $is = $is + 1;
    document.getElementById('btnpagenext').disabled = true;
 <?php } ?>
 
+
+<?php if ( $nova != 1 )
+{
+?>
+   document.formv.h_xcf.value = '<?php echo "$h_xcf"; ?>';
+
+
+<?php
+}
+
+?>
+
 //row new
 <?php if ( $nova != 0 )
 {
 ?>
-   document.getElementById('uloz').disabled = true;
+   document.formv.uloz.disabled = true;
+   document.formv.h_xcf.autofocus = true;
+
+
 
 <?php
 }
@@ -828,21 +842,17 @@ $is = $is + 1;
 <?php if ( $zmaz != 0 )
 {
 ?>
-   document.getElementById('uloz').disabled = true;
-
-
+   document.formv.uloz.disabled = true;
+   document.formv.uloz.innerHTML = "Vymazaù";
 <?php
 }
 //del row
 ?>
 
-//row edit
-<?php if ( $uprav != 0 )
+//row action
+<?php if ( $uprav == 1 OR $nova == 1 OR $zmaz == 1 )
 {
 ?>
-   document.getElementById('uloz').disabled = true;
-   document.getElementById('h_xcf').disabled = true;
-
 var bodylist = document.getElementById('tablelayout');
     bodylist.className = bodylist.className == 'mdl-color--blue-grey-50' ? 'mdl-color--white' : 'mdl-color--blue-grey-50';
 
@@ -855,6 +865,22 @@ for ( var i = 0; i < rows.length; i++ ) {
   for ( var i = 0; i < buttons.length; i++ ) {
     buttons[i].disabled = true;
   }
+
+<?php
+}
+//row action
+?>
+
+//row edit
+<?php if ( $uprav != 0 )
+{
+?>
+   document.formv.uloz.disabled = true;
+   document.formv.h_xcf.disabled = true;
+   document.formv.h_naz.autofocus = true;
+
+
+
 
 // document.getElementById('rowecho').style.opacity = '0.5';
   document.getElementById('btnpageprev').disabled = true;
@@ -873,16 +899,24 @@ for ( var i = 0; i < rows.length; i++ ) {
    document.formv.h_duj.value = '<?php echo "$h_duj"; ?>';
    document.formv.h_prav.value = '<?php echo "$h_prav"; ?>';
 
+
+
+
 <?php                   } ?>
 
+<?php if ( $zmaz == 1 ) { ?>
+  document.formv.h_xcf.disabled = true;
+  document.formv.h_naz.disabled = true;
+  document.formv.h_rok.disabled = true;
+  document.formv.h_duj.disabled = true;
+  document.formv.h_dtb.disabled = true;
+  document.formv.h_prav.disabled = true;
+<?php                   } ?>
   }
 
 //empty state
 <?php if ( $cpol == 0 ) { ?>
   document.forma3.style.visibility='hidden';
-
-
-
 
 
 <?php                   } ?>
@@ -910,17 +944,17 @@ for ( var i = 0; i < rows.length; i++ ) {
    window.open('firms_md.php?copern=1&strana=' + chodna + '', '_self');
   }
 
-function Uzivatelia()
+function Users()
   {
   window.open('users_md.php?copern=1&strana=1&xxx=1', '_self');
   }
-function Domena()
+function Domain()
 {
   window.open('admin_md.php', '_self');
 }
-function Firmy()
+function Firms()
 {
-  window.open('firms_md.php', '_self');
+  window.open('firms_md.php?copern=1&strana=1', '_self');
 }
 
   function closeXcf(firma)
@@ -941,6 +975,10 @@ function Firmy()
 <?php } ?>
 
 <?php if ( $nova == 1 ) { ?>
+   document.getElementById('uloz').disabled = false;
+<?php } ?>
+
+<?php if ( $zmaz == 1 ) { ?>
    document.getElementById('uloz').disabled = false;
 <?php } ?>
 
