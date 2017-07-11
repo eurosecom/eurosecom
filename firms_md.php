@@ -28,7 +28,7 @@ if( $copern == 0 ) { $copern = 1; }
 $strana = 1*$_REQUEST['strana'];
 if( $strana == 0 ) { $strana = 1; }
 
-$server_name = $_SERVER['SERVER_NAME'];
+$domain = $_SERVER['SERVER_NAME'];
 
 $uprav = 1*$_REQUEST['uprav'];
 $cislo_xcf = 1*$_REQUEST['cislo_xcf'];
@@ -111,7 +111,7 @@ echo $sqlttt;
  $h_rok=$riaddok->rok;
  $h_duj=$riaddok->duj;
  $h_dtb=$riaddok->dtb;
- $h_prav=$riaddok->prav; 
+ $h_prav=$riaddok->prav;
  }
 
 
@@ -300,229 +300,27 @@ $vysledek = mysql_query("$sql");
 <head>
   <meta charset="cp1250">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="css/material.css">
-  <!-- <link rel="stylesheet" href="css/material_edit.css"> -->
+  <link rel="stylesheet" href="css/material.min.css">
+  <link rel="stylesheet" href="css/material_edit.css">
   <title>Firmy | EuroSecom</title>
 <style>
-html {
-  box-sizing: border-box; /* width + padding + border */
-}
-*, *:after, *:before {
-  box-sizing: inherit;
-}
-body {
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  line-height: 1;
-}
-a {
-  text-decoration: none;
-  display: inline-block;
-}
-table {
-  border-collapse: collapse;
-  width: 100%;
-  /*background-color: red;*/
-}
-.right {
-  text-align: right;
-}
-.left {
-  text-align: left;
-}
-.center {
-  text-align: center;
-}
-.tocenter {
-  margin: auto;
-}
-.toleft {
-  float: left;
-}
-.toright {
-  float: right;
-}
-/* prasarna */
-.mdl-layout__header-row {
-  padding: 0 24px 0 80px;
-}
-/* prasarna */
-.mdl-layout--no-drawer-button .mdl-layout__header-row {
-  padding-left: 24px;
-}
-
-
-
-
-.ui-header .mdl-layout__drawer-button {
-  margin: 0 8px;
-  width: 40px;
-  height: 40px;
-  line-height: 1;
-  background-color: transparent;
-  min-height: 40px;
-  max-height: 40px;
-  padding-top: 8px;
-}
-.ui-header-three-row .mdl-layout__header-row:not(.ui-header-page-row) {
-  height: 40px;
-}
-.ui-header-three-row.is-compact {
-  max-height: 136px;
-}
-
-
-
-.ui-header-app-row .mdl-layout-title {
-  font-size: 12px;
-  /*font-weight: 400;*/
-}
-.ui-header-page-row {
-  height: 56px;
-  padding: 0 20px 0 56px;
-}
-.ui-header-page-row .mdl-layout-title {
-  font-size: 18px;
-}
-
-.material-icons.md-18 { font-size: 18px; }
 
 .mdl-textfield__label:after {
   /*background-color: transparent;*/
 }
 
-/* prasarna */
-.mdl-tooltip {
-  font-size: 11px;
-  letter-spacing: 0.02em;
-  padding: 12px;
-  max-width: 300px;
-  text-transform: none;
-
-}
 
 
 
-.dropdown-menu > li {
-  height: 40px;
-  line-height: 40px;
-}
 
 
-
-.flexbox {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-
-.ukaz {
-  outline: 1px solid red;
-  border: 1px solid red;
-}
-
-
-.ui-table th {
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 1.2;
-  box-sizing: border-box;
-  text-overflow: ellipsis;
-  position: relative;
-  height: 40px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 0 0 0 0;
-}
-
-.ui-table th:first-of-type {
-  padding-left: 24px;
-}
-.ui-table th:last-of-type {
-  padding-right: 24px;
-}
-
-
-.ui-table .row-echo:hover {
-  background-color: #eeeeee;
-}
-
-
-
-.ui-table tr:last-of-type td {
-  border: 0;
-}
-
-
-.ui-table tr {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
-}
-.ui-table tr:first-of-type {
-  border-top-color: rgba(0, 0, 0, 0);
-}
-.ui-table tr:last-of-type {
-  /*border-bottom-color: rgba(0, 0, 0, 0);*/
-}
-
-.ui-table .row-form td:first-of-type:before {
-  background-color: #39f;
-  width: 3px;
-  display: inline-block;
-  height: 100%;
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-.ui-table td {
-  /*height: 42px;*/
-  height: 40px;
-
-  font-size: 13px;
-  color: rgba(0,0,0, 0.87);
-
-  line-height: 1.2;
-  vertical-align: middle;
-  position: relative;
-  padding: 0;
-}
-.ui-table td:first-of-type {
-  padding-left: 24px;
-}
-.ui-table td:last-of-type {
-  padding-right: 24px;
-
-}
 .ui-table th > .material-icons {
   /*position: absolute;*/
 }
 
-.search-box {
-  border-radius: 2px;
-  height: 40px;
-  width: 300px;
-  padding: 4px 48px;
-}
-.search-box > * {
-  opacity: .7;
-}
-.search-box.is-focused > * {
-  opacity: 1;
-}
 
-.search-box.is-focused .mdl-textfield__label:after {
-  visibility: hidden;
-}
-.search-box .mdl-button--icon {
-  position: absolute;
-}
-.search-box input[type=text]::-ms-clear { /* ie hidden clear "x" */
-    display: none;
-}
 
 
 
@@ -533,75 +331,232 @@ table {
 <body onload="ObnovUI();">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
 <header class="mdl-layout__header mdl-layout__header--waterfall ui-header ui-header-three-row">
-<div class="mdl-layout__header-row mdl-color--light-blue-700 ui-header-app-row">
-  <a href="http://www.edcom.sk/web/eurosecom.html" target="_blank" class="mdl-layout-title mdl-color-text--yellow-A100">EuroSecom</a>&nbsp;
-  <span class="mdl-layout-title mdl-color-text--blue-grey-50"><?php echo $server_name; ?></span>
-  <div class="mdl-layout-spacer"></div>
-  <button id="appsmenubtn" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-grey-100" style=""><i class="material-icons">apps</i></button>
-  <div class="mdl-list header-list" style="margin-left: 8px;  ">
-    <div class="mdl-list__item mdl-color-text--blue-grey-100 " style="padding: 0; height: 40px;">
-      <span class="mdl-list__item-avatar  mdl-color-text--blue-grey-100 item-avatar-md center" style="font-size: 12px; height: 28px; line-height: 28px; width: 28px; margin-right: 6px; background-color: #5C6BC0; letter-spacing: 0.02em; "><?php echo "$kli_uzid"; ?></span>
-
-      <span class="mdl-color-text--blue-grey-100" style="font-size: 12px; letter-spacing: 0.02em;"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
-    </div>
-  </div>
-</div> <!-- .ui-header-app-row -->
-<div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row">
-  <span id="headertitle" class="mdl-layout-title " style="cursor: pointer; border-right: 2px solid rgba(255,255,255,0.8); margin-right: 16px; padding-right: 8px;">Číselník firiem<i class="material-icons" style="vertical-align: -6px;">arrow_drop_down</i></span>
-
-
-
-  <span class="mdl-layout-title mdl-color-text--yellow-A100" style="font-size: 16px; ">
+  <div class="mdl-layout__header-row mdl-color--light-blue-700 ui-header-app-row">
+    <a href="http://www.edcom.sk/web/eurosecom.html" target="_blank" class="mdl-layout-title mdl-color-text--yellow-A100">EuroSecom</a>&nbsp;
+    <span class="mdl-layout-title mdl-color-text--blue-grey-50"><?php echo $domain; ?></span>
+    <div class="mdl-layout-spacer"></div>
+    <button type="button" id="appsmenubtn" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-grey-100"><i class="material-icons">apps</i></button>&nbsp;&nbsp;
+    <button type="button" id="ilogin_user" class="mdl-button mdl-js-button mdl-button--icon user-avatar">
+      <span class="mdl-color-text--blue-grey-100"><?php echo $kli_uzid; ?></span>
+    </button>
+  </div> <!-- .ui-header-app-row -->
+  <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row">
+    <span id="header_title" class="mdl-layout-title" style="cursor: pointer;">Číselník firiem<i class="material-icons" style="vertical-align: -6px;">arrow_drop_down</i>&nbsp;
+    </span>
+    <span class="mdl-layout-title mdl-color-text--yellow-A100" style="font-size: 16px;">
 <?php
 if ( $nova == 1 ) { echo "nová"; }
 if ( $zmaz == 1 ) { echo "vymazanie"; }
 if ( $uprav == 1 ) { echo "úprava"; }
 ?>
-  </span>
-  <div class="mdl-layout-spacer"></div>
-
-
+    </span>
+    <div class="mdl-layout-spacer"></div>
 <form method="post" action="firms_md.php?hladanie=1&copern=1&strana=1&uprav=0" id="formhladaj" name="formhladaj">
-  <div class="mdl-textfield mdl-js-textfield mdl-color--light-blue-500 search-box">
-    <button id="searchbtn" class="mdl-button mdl-js-button mdl-button--icon" style="bottom: 4px; left: 8px; "><i class="material-icons" style="">search</i></button>
-    <input type="text" id="cohladat" name="cohladat" value="<?php echo $cohladat; ?>" class="mdl-textfield__input search-input" style="border:0; font-size: 14px; height: 32px; background-color: ;    width: 100%;   ">
-    <label for="cohladat" class="mdl-textfield__label mdl-color-text--white"  style="font-size: 14px; top: 5px; left: 48px; height: 32px; line-height: 32px; width: 204px; background-color: ;">Hľadať v číselníku</label>
-    <button id="resetsearchbtn" onclick="document.formhladaj.cohladat.value='';" class="mdl-button mdl-js-button mdl-button--icon search-reset" style="bottom: 4px; right: 8px; "><i class="material-icons">close</i></button>
-  </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-color--light-blue-500 search-box">
+      <button id="searchbtn" class="mdl-button mdl-js-button mdl-button--icon" style="bottom: 4px; left: 8px;"><i class="material-icons">search</i></button>
+      <input type="text" id="cohladat" name="cohladat" value="<?php echo $cohladat; ?>" class="mdl-textfield__input search-input" style="border:0; font-size: 14px; height: 32px; width: 100%;">
+      <label for="cohladat" class="mdl-textfield__label mdl-color-text--white" style="font-size: 14px; top: 5px; left: 48px; height: 32px; line-height: 32px; width: 204px;">Hľadať v číselníku</label>
+      <button id="resetsearchbtn" onclick="document.formhladaj.cohladat.value='';" class="mdl-button mdl-js-button mdl-button--icon search-reset" style="bottom: 4px; right: 8px;"><i class="material-icons">close</i></button>
+    </div>
 </form>
-
-
-
-  <button type="button" onclick="novaXcf();" class="mdl-button mdl-js-button mdl-button--raised mdl-color--white mdl-color-text--blue-grey-400" style="margin-left: 24px;"><i class="material-icons">add</i>&nbsp;Firma</button>
-
-
-</div> <!-- .ui-header-page-row -->
-
-<div class="mdl-layout__header-row mdl-color--light-blue-600" style="padding-left: 0; padding-right: 0;">
-  <div class="wrap-ui-table tocenter" style="max-width: 1080px;  width: 100%;  background-color: ;">
-  <table class="ui-table">
-  <tr>
-    <th class="left" style="width: 8%;">Číslo</th>
-    <th class="left" style="width: 47%;">Názov</th>
-    <th class="right" style="width: 10%;">Obdobie</th>
-    <th class="right" style="width: 15%;">Druh&nbsp;<i id="druhfirm" class="material-icons md-18" style="vertical-align: -5px;">info_outline</i>
-    </th>
-    <th style="width: 20%;">&nbsp;</th>
-  </tr>
-  </table>
-  </div>
-</div>
+    <button type="button" onclick="novaXcf();" class="mdl-button mdl-js-button mdl-button--raised mdl-color--white mdl-color-text--blue-grey-400" style="margin-left: 24px;"><i class="material-icons">add</i>&nbsp;Firma</button>
+  </div> <!-- .ui-header-page-row -->
+  <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-table">
+    <table class="ui-table tocenter">
+    <tr>
+      <th class="left" style="width:8%;">Číslo</th>
+      <th class="left" style="width:47%;">Názov</th>
+      <th class="right" style="width:10%;">Obdobie</th>
+      <th class="right" style="width:15%;">Druh&nbsp;<i id="druhfirm" class="material-icons md-18">info_outline</i>
+      </th>
+      <th style="width: 20%;">&nbsp;</th>
+    </tr>
+    </table>
+  </div> <!-- .ui-header-table -->
 </header>
 
-<ul for="headertitle" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-color--white dropdown-menu" style="top:-23px;">
+<main class="mdl-layout__content mdl-color--blue-grey-50" style="padding-bottom: 50px; ">
+<?php
+$sqltt = "SELECT * FROM fir WHERE xcf >= 0 ORDER BY xcf ";
+if( $nova == 1 OR $bolanova == 1 )
+{
+$sqltt = "SELECT * FROM fir WHERE xcf >= 0  ORDER BY datm DESC ";
+}
+if( $hladanie == 1 )
+{
+$sqltt = "SELECT * FROM fir WHERE  xcf >= 0  AND ( naz LIKE '%$cohladat%' OR rok LIKE '%$cohladat%' ) ORDER BY xcf ";
+}
+$sql = mysql_query("$sqltt");
+//prazdny zoznam
+//$sql = mysql_query("SELECT * FROM fir WHERE xcf < 0 ORDER BY xcf ");
+//celkom poloziek
+$cpol = mysql_num_rows($sql);
+$npol = $cpol + 1;
+
+// pocet poloziek na stranu
+$pols = 10;
+if ( $hladanie == 1 ) { $pols = 900; }
+// pocet stran
+$xstr =ceil($cpol / $pols);
+$npage = $strana + 1;
+// predchadzajuca strana
+$ppage = $strana - 1;
+if( $ppage == 0 ) { $ppage=1; }
+if( $npage > $xstr ) { $npage=$xstr; }
+// zaciatok cyklu
+$i = ( $strana - 1 ) * $pols;
+// koniec cyklu
+$konc =($pols*($strana-1))+($pols-1);
+?>
+
+<!-- empty state -->
+<div class="ui-no-item">
+  <i class="material-icons mdl-color-text--grey-400 md-64">sentiment_dissatisfied</i>
+  <div class="mdl-color-text--grey-600 no-item-alert">Nenašiel som žiadne položky</div>
+</div>
+
+<div id="table_layout" class="mdl-color--white">
+<form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&zmaz=<?php echo $zmaz; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>&nova=<?php echo $nova; ?>" id="formv" name="formv">
+  <table class="ui-table tocenter">
+  <colgroup>
+    <col style="width:8%;">
+    <col style="width:47%;">
+    <col style="width:10%;">
+    <col style="width:15%;">
+    <col style="width:20%;">
+  </colgroup>
+<?php
+   while ( $i <= $konc )
+   {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+  {
+$riadok=mysql_fetch_object($sql);
+?>
+
+<?php  if ( ( $uprav != 0 AND $riadok->xcf == $cislo_xcf ) OR ( $nova == 1 AND $i == 0 ) OR ( $zmaz != 0 AND $riadok->xcf == $cislo_xcf ) ) { ?>
+<!-- row edit/delete/new -->
+  <tr class="mdl-color--white mdl-shadow--2dp row-form">
+    <td class="vatop">
+      <div class="mdl-textfield mdl-js-textfield" style="width:80%;">
+        <input type="text" name="h_xcf" id="h_xcf" onKeyDown="return XcfEnter(event.which)" pattern="-?[0-9]*(\.[0-9]+)?" tabindex="1" required class="mdl-textfield__input" >
+        <label for="h_xcf" class="mdl-textfield__label">Číslo firmy</label>
+        <span class="mdl-textfield__error">Používajte čísla!</span>
+<?php if ( $bolanova == 1 ) { ?>
+        <span class="mdl-textfield__error">Číslo už existuje!</span>
+<?php } ?>
+      </div>
+    </td>
+    <td>
+      <div class="mdl-textfield mdl-js-textfield" style="width:80%;">
+        <input type="text" id="h_naz" name="h_naz" onKeyDown="return NazEnter(event.which)" required tabindex="2" class="mdl-textfield__input">
+        <label for="h_naz" class="mdl-textfield__label">Názov firmy</label>
+      </div>
+      <br>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:auto;">
+        <input type="text" id="h_dtb" name="h_dtb" onKeyDown="return DtbEnter(event.which)" tabindex="5" class="mdl-textfield__input">
+        <label for="h_dtb" class="mdl-textfield__label">Parametre</label>
+      </div>&nbsp;&nbsp;&nbsp;
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:auto;">
+        <input type="text" id="h_prav" name="h_prav" onKeyDown="return PravEnter(event.which)" tabindex="6" class="mdl-textfield__input">
+        <label for="h_prav" class="mdl-textfield__label">Prav</label>
+      </div>
+    </td>
+    <td class="vatop right">
+      <div class="mdl-textfield mdl-js-textfield" style="width:auto;">
+        <select name="h_rok" id="h_rok" required tabindex="3" onKeyDown="return RokEnter(event.which)" class="mdl-textfield__input">
+          <option value="2017">2017</option>
+          <option value="2016">2016</option>
+          <option value="2015">2015</option>
+          <option value="2014">2014</option>
+          <option value="2013">2013</option>
+          <option value="2012">2012</option>
+          <option value="2011">2011</option>
+          <option value="2010">2010</option>
+        </select>
+        <label for="h_rok" class="mdl-textfield__label">Obdobie</label>
+      </div>
+    </td>
+    <td class="vatop right">
+      <div class="mdl-textfield mdl-js-textfield" style="width:auto;">
+        <select name="h_duj" id="h_duj" required tabindex="4" onKeyDown="return DujEnter(event.which)" class="mdl-textfield__input">
+          <option value="0">0 = PÚ</option>
+          <option value="1">1 = NO PÚ</option>
+          <option value="9">9 = JÚ</option>
+        </select>
+        <label for="h_duj" class="mdl-textfield__label">Druh</label>
+      </div>
+    </td>
+    <td class="right">
+      <button type="button" id="edit-closer" onclick="closeXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-700" style="position: absolute; top: 6px; right: 8px;"><i class="material-icons">close</i></button>
+      <div data-mdl-for="edit-closer" class="mdl-tooltip">Zavrieť</div>
+      <span id="uvolni" onmouseover="return Povol_uloz();" style="padding: 16px; position: relative; top: 40px; right: -16px;"><button id="uloz" name="uloz" onclick="Zapis_COOK();">Uložiť</button></span>
+    </td>
+  </tr>
+<?php                                                    } ?>
+
+
+<?php if ( $riadok->xcf != $cislo_xcf OR $nova == 1 ) { ?>
+<!-- row echo -->
+  <tr class="row-echo">
+    <td><?php echo $riadok->xcf; ?></td>
+    <td><?php echo $riadok->naz; ?></td>
+    <td class="right"><?php echo $riadok->rok; ?></td>
+    <td class="right"><?php echo $riadok->duj; ?></td>
+    <td class="right">
+      <button type="button" id="edit<?php echo $riadok->xcf; ?>" onclick="upravXcf(<?php echo $riadok->xcf; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons">edit</i></button>
+      <button type="button" id="copy<?php echo $riadok->xcf; ?>" onclick="kopirujXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">content_copy</i></button>
+      <button type="button" id="remove<?php echo $riadok->xcf; ?>" onclick="zmazXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">remove</i></button>
+        <div data-mdl-for="copy<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Kopírovať</div>
+        <div data-mdl-for="edit<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Upraviť</div>
+        <div data-mdl-for="remove<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Vymazať</div>
+    </td>
+  </tr>
+
+<?php                                    } ?>
+
+<?php
+  }
+$i = $i + 1;
+   }
+?>
+  </table>
+</form>
+<form name="forma3" id="forma3" action="#">
+  <div class="mdl-color-text--grey-600 tocenter ui-table-pagination">
+    <span>= <?php echo $cpol; ?></span>
+    <div class="mdl-layout-spacer"></div>
+    <label for="selectpage" style="margin-right: 24px;">Strana
+    <select name="selectpage" id="selectpage" onchange="ChodNaStranu();" class="mdl-textfield__input">
+<?php
+$is = 1;
+while ( $is <= $xstr )
+{
+?>
+<option value="<?php echo $is; ?>"><?php echo $is; ?></option>
+<?php
+$is = $is + 1;
+}
+?>
+    </select>/&nbsp;&nbsp;<?php echo $xstr; ?></label>
+    <button id="btnpageprev" type="button" onclick="NaStr(<?php echo $ppage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_before</i></button>
+    <button id="btnpagenext" type="button" onclick="NaStr(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_next</i></button>
+      <div class="mdl-tooltip" data-mdl-for="btnpageprev">Prejsť na stranu <?php echo $ppage; ?></div>
+      <div class="mdl-tooltip" data-mdl-for="btnpagenext">Prejsť na stranu <?php echo $npage; ?></div>
+  </div> <!-- .ui-table-pagination -->
+</form>
+
+</div> <!-- #table_layout -->
+</main>
+</div> <!-- .mdl-layout -->
+
+<!-- header nav menu -->
+<ul for="header_title" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-color--white" style="top:-23px;">
   <li class="mdl-menu__item" onclick="Domain();">Doména</li>
   <li class="mdl-menu__item" onclick="Users();">Číselník užívateľov</li>
-  <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="Firms();" style="">Číselník firiem</li>
+  <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="Firms();">Číselník firiem</li>
 </ul>
 
-<span class="mdl-tooltip" data-mdl-for="appsmenubtn">EuroSecom podsystémy</span>
-<!-- <span class="mdl-tooltip" data-mdl-for="printlist">Zobraziť číselník</span> -->
-
+<!-- subsystem nav menu -->
 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="appsmenubtn" style="padding: 24px; width: 224px; ">
   <li class="mdl-menu__item toleft" style="width: 88px; height: 88px; padding: 0;   line-height: unset;">
     <div class="center " style="width: 100%; height: 64px; padding: 8px 0;    ">
@@ -647,188 +602,12 @@ if ( $uprav == 1 ) { echo "úprava"; }
   </li>
 </ul>
 
+<!-- tooltip -->
+<span class="mdl-tooltip" data-mdl-for="ilogin_user"><?php echo "$kli_uzid $kli_uzmeno $kli_uzprie"; ?></span>
+<span class="mdl-tooltip" data-mdl-for="appsmenubtn">EuroSecom podsystémy</span>
 <span class="mdl-tooltip" data-mdl-for="resetsearchbtn">Vymazať vyhľadávanie</span>
 <span data-mdl-for="druhfirm" class="mdl-tooltip">0 = Podvojné účtovníctvo<br>1 = NO podvojné účtovníctvo<br>9 = Jednoduché účtovníctvo</span>
-
-  <span class="mdl-tooltip" data-mdl-for="searchbtn">Hľadať</span>
-
-
-<main class="mdl-layout__content mdl-color--blue-grey-50" style="padding: 0 0 50px 0; ">
-<?php
-$sqltt = "SELECT * FROM fir WHERE xcf >= 0 ORDER BY xcf ";
-if( $nova == 1 OR $bolanova == 1 )
-{
-$sqltt = "SELECT * FROM fir WHERE xcf >= 0  ORDER BY datm DESC ";
-}
-if( $hladanie == 1 )
-{
-$sqltt = "SELECT * FROM fir WHERE  xcf >= 0  AND ( naz LIKE '%$cohladat%' OR rok LIKE '%$cohladat%' ) ORDER BY xcf ";
-}
-$sql = mysql_query("$sqltt");
-//$sql = mysql_query("SELECT * FROM fir WHERE xcf < 0 ORDER BY xcf ");//prazdny zoznam
-// celkom poloziek
-$cpol = mysql_num_rows($sql);
-$npol = $cpol + 1;
-
-// pocet poloziek na stranu
-$pols = 10;
-if( $hladanie == 1 ){ $pols = 900; }
-// pocet stran
-$xstr =ceil($cpol / $pols);
-$npage = $strana + 1;
-// predchadzajuca strana
-$ppage = $strana - 1;
-if( $ppage == 0 ) { $ppage=1; }
-if( $npage > $xstr ) { $npage=$xstr; }
-// zaciatok cyklu
-$i = ( $strana - 1 ) * $pols;
-// koniec cyklu
-$konc =($pols*($strana-1))+($pols-1);
-?>
-<?php if ( $cpol == 0 ) { ?>
-<!-- empty state -->
-<div class="no-item " style="  margin: 12% auto 5%; width: 300px; height: 120px; text-align: center;">
-  <i class="material-icons mdl-color-text--grey-400" style="font-size: 64px;">sentiment_dissatisfied</i>
-  <div class="mdl-color-text--grey-600" style="letter-spacing: 0.02em; font-size: 16px;  font-weight: 500; padding-top: 32px;">Nenašiel som žiadne položky</div>
-</div>
-<?php                   } ?>
-
-<div id="tablelayout" class="mdl-color--white">
-  <div class="wrap-ui-table tocenter" style="max-width: 1080px;">
-<form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&zmaz=<?php echo $zmaz; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>&nova=<?php echo $nova; ?>" id="formv" name="formv">
-  <table class="ui-table">
-  <colgroup>
-    <col style="width:8%;">
-    <col style="width:47%;">
-    <col style="width:10%;">
-    <col style="width:15%;">
-    <col style="width:20%;">
-  </colgroup>
-<?php
-   while ( $i <= $konc )
-   {
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-?>
-
-
-<?php  if ( ( $uprav != 0 AND $riadok->xcf == $cislo_xcf ) OR ( $nova == 1 AND $i == 0 ) OR ( $zmaz != 0 AND $riadok->xcf == $cislo_xcf ) ) { ?>
-<!-- row edit/delete/new -->
-  <tr class="mdl-color--white mdl-shadow--2dp row-form" style=" ">
-    <td style="vertical-align: top;">
-      <div class="mdl-textfield mdl-js-textfield" style="width: 80%;">
-        <input type="text" name="h_xcf" id="h_xcf" onKeyDown="return XcfEnter(event.which)" pattern="-?[0-9]*(\.[0-9]+)?" tabindex="1" required class="mdl-textfield__input" >
-        <label class="mdl-textfield__label" for="h_xcf">Číslo firmy</label>
-        <span class="mdl-textfield__error">Používajte čísla!</span>
-      </div>
-    </td>
-    <td>
-      <div class="mdl-textfield mdl-js-textfield " style="width: 80%;">
-        <input class="mdl-textfield__input" type="text" id="h_naz" name="h_naz" onKeyDown="return NazEnter(event.which)" required tabindex="2">
-        <label class="mdl-textfield__label" for="h_naz">Názov firmy</label>
-      </div>
-      <br>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style=" width: auto;">
-        <input class="mdl-textfield__input" type="text" id="h_dtb" name="h_dtb" onKeyDown="return DtbEnter(event.which)" tabindex="5">
-        <label class="mdl-textfield__label" for="h_dtb">Parametre</label>
-      </div>&nbsp;&nbsp;
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style=" width: auto;">
-        <input class="mdl-textfield__input" type="text"  id="h_prav" name="h_prav" onKeyDown="return PravEnter(event.which)" tabindex="6">
-        <label class="mdl-textfield__label" for="h_prav">Prav</label>
-      </div>
-    </td>
-    <td class="right" style="vertical-align: top;">
-      <div class="mdl-textfield mdl-js-textfield" style="width: auto;">
-        <select name="h_rok" id="h_rok" class="mdl-textfield__input" required tabindex="3" onKeyDown="return RokEnter(event.which)" >
-          <option value="2017">2017</option>
-          <option value="2016">2016</option>
-          <option value="2015">2015</option>
-          <option value="2014">2014</option>
-          <option value="2013">2013</option>
-          <option value="2012">2012</option>
-          <option value="2011">2011</option>
-          <option value="2010">2010</option>
-        </select>
-        <label for="h_rok" class="mdl-textfield__label">Obdobie</label>
-      </div>
-    </td>
-    <td class="right" style="vertical-align: top;">
-      <div class="mdl-textfield mdl-js-textfield" style="width: auto;">
-        <select name="h_duj" id="h_duj" class="mdl-textfield__input" required tabindex="4" onKeyDown="return DujEnter(event.which)" >
-          <option value="0">0 = PÚ</option>
-          <option value="1">1 = NO PÚ</option>
-          <option value="9">9 = JÚ</option>
-        </select>
-        <label for="h_duj" class="mdl-textfield__label">Druh</label>
-      </div>
-    </td>
-    <td class="right">
-      <span id="uvolni" onmouseover="return Povol_uloz();" class="ukaz" style="padding: 12px;"><button id="uloz" name="uloz" onclick="Zapis_COOK();">Uložiť</button></span>
-      <button type="button" id="edit-closer" onclick="closeXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-700 " style=""><i class="material-icons">close</i></button>
-      <div data-mdl-for="edit-closer" class="mdl-tooltip">Zavrieť</div>
-    </td>
-  </tr>
-<?php                                                    } ?>
-
-
-<?php if ( $riadok->xcf != $cislo_xcf OR $nova == 1 ) { ?>
-<!-- row echo -->
-  <tr class="row-echo" style="background-color: ; ">
-    <td class=""><?php echo $riadok->xcf; ?></td>
-    <td ><?php echo $riadok->naz; ?></td>
-    <td class="right"><?php echo $riadok->rok; ?></td>
-    <td class="right"><?php echo $riadok->duj; ?></td>
-    <td class="right">
-      <button type="button" id="edit<?php echo $riadok->xcf; ?>" onclick="upravXcf(<?php echo $riadok->xcf; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-500"><i class="material-icons ">edit</i></button>
-<div data-mdl-for="edit<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Upraviť</div>
-      <button type="button" id="copy<?php echo $riadok->xcf; ?>" onclick="kopirujXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons ">content_copy</i></button>
-<div data-mdl-for="copy<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Kopírovať</div>
-      <button type="button" id="remove<?php echo $riadok->xcf; ?>" onclick="zmazXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons ">remove</i></button>
-<div data-mdl-for="remove<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Vymazať</div>
-    </td>
-  </tr>
-
-<?php                                    } ?>
-
-<?php
-  }
-$i = $i + 1;
-   }
-?>
-  </table>
-</form>
-<form name="forma3" id="forma3" action="#">
-  <div class="mdl-color-text--grey-600 flexbox ui-table-pagination " style="height: 40px;  font-size: 12px; background-color: ; justify-content: space-between; align-items: center; ">
-    <span class="">= <?php echo $cpol; ?></span>
-    <div>
-      <label for="selectpage" class="" style="margin-right: 24px;">Strana
-      <select name="selectpage" id="selectpage" onchange="ChodNaStranu();" style="font-size: 12px; border: 0; color: rgba(0,0,0, 0.87); border-bottom: 1px solid rgba(0,0,0,0.12); background-color: transparent; min-width: 32px; padding-bottom: 2px; padding-top: 4px; margin: 0 7px;">
-<?php
-$is = 1;
-while ( $is <= $xstr )
-{
-?>
-<option value="<?php echo $is; ?>"><?php echo $is; ?></option>
-<?php
-$is = $is + 1;
-}
-?>
-      </select>
-      /&nbsp;&nbsp;&nbsp;<?php echo $xstr; ?></label>
-
-      <button id="btnpageprev" type="button" onclick="NaStr(<?php echo $ppage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_before</i></button><div class="mdl-tooltip" data-mdl-for="btnpageprev" >Prejsť na stranu <?php echo $ppage; ?></div>
-      <button id="btnpagenext" type="button" onclick="NaStr(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_next</i></button><div class="mdl-tooltip" data-mdl-for="btnpagenext">Prejsť na stranu <?php echo $npage; ?></div>
-    </div>
-
-
-
-  </div>
-</form>
-  </div> <!-- .wrap-ui-table -->
-</div> <!-- #tablelayout -->
-</main>
-</div> <!-- .mdl-layout -->
+<span class="mdl-tooltip" data-mdl-for="searchbtn">Hľadať</span>
 
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script type="text/javascript">
@@ -850,9 +629,7 @@ $is = $is + 1;
 <?php if ( $nova != 1 )
 {
 ?>
-   document.formv.h_xcf.value = '<?php echo "$h_xcf"; ?>';
-
-
+   document.formv.h_xcf.value = '<?php echo "$h_xcf"; ?>'; //dopyt v prehliadači konzole hlási chybu
 <?php
 }
 
@@ -887,7 +664,7 @@ $is = $is + 1;
 <?php if ( $uprav == 1 OR $nova == 1 OR $zmaz == 1 )
 {
 ?>
-var bodylist = document.getElementById('tablelayout');
+var bodylist = document.getElementById('table_layout');
     bodylist.className = bodylist.className == 'mdl-color--blue-grey-50' ? 'mdl-color--white' : 'mdl-color--blue-grey-50';
 
 var rows = document.querySelectorAll('.row-echo');
@@ -964,7 +741,9 @@ for ( var i = 0; i < rows.length; i++ ) {
 
 //empty state
 <?php if ( $cpol == 0 ) { ?>
-  document.forma3.style.visibility='hidden';
+  // document.forma3.style.visibility='hidden';
+  document.querySelector('.ui-no-item').style.display='block';
+  document.querySelector('#table_layout').style.display='none';
 
 
 <?php                   } ?>
