@@ -313,6 +313,7 @@ $oznac = mysql_query("$sqtoz");
 //presunul som to sem aby vyriesil ak pomer 1 jedno osobne a dohoda druhe osobne
 //ak je ZP DOVERA a DOHODAR presun CELK.PRIJEM PRE ODP. do CELK.INY PRIJ. od 1.7.2015 zacali kontrolovat
 //od 1.9.2016 rovnako chcu aj VSZP
+//od 1.7.2017 rovnako chcu aj UNION a chcu to prerobit opravnymi od 1.1.2016
 $sqltt = "SELECT * FROM F$kli_vxcf"."_$mzdkun ".
 "LEFT JOIN F$kli_vxcf"."_mzdpomer ON F$kli_vxcf"."_$mzdkun.pom=F$kli_vxcf"."_mzdpomer.pm ".
 " WHERE ume = $kli_vume AND pm_doh = 1 ORDER BY oc ";
@@ -325,12 +326,12 @@ $i=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
-$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_inp=zcel_odp WHERE oc = $hlavicka->oc AND konx2 = 888 AND zcel_odp != 0 AND xdrv >= 2300 AND xdrv <= 2599 ";
+$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_inp=zcel_odp WHERE oc = $hlavicka->oc AND konx2 = 888 AND zcel_odp != 0 AND xdrv >= 2300 AND xdrv <= 2799 ";
 $sqlx = mysql_query("$sqlttx");
 
 //echo $sqlttx."<br />";
 
-$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_odp=0 WHERE oc = $hlavicka->oc AND konx2 = 888 AND zcel_odp != 0 AND xdrv >= 2300 AND xdrv <= 2599 ";
+$sqlttx = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid SET zcel_odp=0 WHERE oc = $hlavicka->oc AND konx2 = 888 AND zcel_odp != 0 AND xdrv >= 2300 AND xdrv <= 2799 ";
 $sqlx = mysql_query("$sqlttx");
 
 }
