@@ -59,7 +59,7 @@ $kopkli=1;
 //koniec zmaz
 
 //nova
-$bolanova=0;
+$bolanova=0; $jexcf=0;
 if ( $copern == 8 AND $nova == 1 )
   {
 
@@ -80,18 +80,13 @@ $sqldok = mysql_query("$sqlttt");
 $jexcf=1;
  }
 
-if( $jexcf == 1 ) { $h_xcf=0; }
-
 $upravttt = "INSERT INTO fir ( xcf, naz, rok, duj, dtb, prav ) ".
 " VALUES ( '$h_xcf', '$h_naz', '$h_rok', '$h_duj', '$h_dtb', '$h_prav' )";
-if( $h_xcf > 0 ) { $upravene = mysql_query("$upravttt"); }
+if( $jexcf == 0 ) { $upravene = mysql_query("$upravttt"); $kopkli=1; $cislo_xcf=0; $nova=0;  }
 //echo $upravttt."<br />";
 
-$copern=1;
-$nova=0;
-$cislo_xcf=0;
-$kopkli=1;
 $bolanova=1;
+$copern=1;
      }
 //koniec nova
 
@@ -440,9 +435,11 @@ $riadok=mysql_fetch_object($sql);
       <div class="mdl-textfield mdl-js-textfield" style="width:80%;">
         <input type="text" name="h_xcf" id="h_xcf" onKeyDown="return XcfEnter(event.which)" pattern="-?[0-9]*(\.[0-9]+)?" tabindex="1" required class="mdl-textfield__input" >
         <label for="h_xcf" class="mdl-textfield__label">»Ìslo firmy</label>
+<?php if ( $jexcf == 0 OR $bolanova == 0 ) { ?>
         <span class="mdl-textfield__error">PouûÌvajte ËÌsla!</span>
-<?php if ( $bolanova == 1 ) { ?>
-        <span class="mdl-textfield__error">»Ìslo uû existuje!</span>
+<?php } ?>
+<?php if ( $jexcf == 1 AND $bolanova == 1 ) { ?>
+        <span class="mdl-textfield__error2">NeuloûenÈ. »Ìslo <?php echo $h_xcf; ?> uû existuje!</span>
 <?php } ?>
       </div>
     </td>
@@ -489,7 +486,7 @@ $riadok=mysql_fetch_object($sql);
     <td class="right">
       <button type="button" id="edit-closer" onclick="closeXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-700" style="position: absolute; top: 6px; right: 8px;"><i class="material-icons">close</i></button>
       <div data-mdl-for="edit-closer" class="mdl-tooltip">Zavrieù</div>
-      <span id="uvolni" onmouseover="return Povol_uloz();" style="padding: 16px; position: relative; top: 40px; right: -16px;"><button id="uloz" name="uloz" onclick="Zapis_COOK();">Uloûiù</button></span>
+      <span id="uvolni" onmouseover="return Povol_uloz();" style="padding: 16px; position: relative; top: 40px; right: -16px;"><button id="uloz" name="uloz" >Uloûiù</button></span>
     </td>
   </tr>
 <?php                                                    } ?>
@@ -626,10 +623,10 @@ $is = $is + 1;
 <?php } ?>
 
 
-<?php if ( $nova != 1 )
+<?php if ( $zmaz == 1 OR $uprav == 1 )
 {
 ?>
-   document.formv.h_xcf.value = '<?php echo "$h_xcf"; ?>'; //dopyt v prehliadaËi konzole hl·si chybu
+   document.formv.h_xcf.value = '<?php echo "$h_xcf"; ?>'; 
 <?php
 }
 
@@ -702,7 +699,7 @@ for ( var i = 0; i < rows.length; i++ ) {
 //edit row
 ?>
 
-<?php if ( $kopiruj == 1 ) { ?>
+<?php if ( $kopiruj == 1 OR $jexcf == 1 ) { ?>
 
    document.formv.h_xcf.value = '<?php echo "$h_xcf"; ?>';
    document.formv.h_naz.value = '<?php echo "$h_naz"; ?>';
