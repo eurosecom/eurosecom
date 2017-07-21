@@ -238,6 +238,9 @@ $uprt = "UPDATE F$kli_vxcf"."_fakodb SET ".
 
 $upravene = mysql_query("$uprt"); 
 
+
+if( $fir_fico == 46529233 AND $h_uce == 31101 ) { $h_uce=31100; }
+
 //doklad polozky
 if( $h_zk0 != 0 )
 {

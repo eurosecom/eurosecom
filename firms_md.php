@@ -12,7 +12,7 @@ $newdelenie=0;
 if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
 if ( $newdelenie == 1 )
           {
-$dtb2 = include("../oddel_dtb3new.php");
+$dtb2 = include("oddel_dtb3new.php");
           }
 
   @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
@@ -752,7 +752,7 @@ function Firms()
 
 function viewFirms()
 {
-  window.open('cfir_t.php?copern=10', '_blank');
+  window.open('firms_pdf.php?copern=10&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_blank');
 }
 
   function closeXcf(firma)
