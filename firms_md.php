@@ -307,6 +307,9 @@ $vysledek = mysql_query("$sql");
 </style>
 </head>
 <body onload="ObnovUI();">
+<?php
+if( $copern == 1 OR $copern == 8 ) {
+?>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
 <header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="max-height: 136px;">
   <div class="mdl-layout__header-row mdl-color--light-blue-700 ui-header-app-row">
@@ -356,6 +359,7 @@ if ( $uprav == 1 ) { echo "úprava # $cislo_xcf"; }
 
 <main class="mdl-layout__content mdl-color--blue-grey-50">
 <?php
+
 $sqltt = "SELECT * FROM fir WHERE xcf >= 0 ORDER BY xcf ";
 if( $nova == 1 OR $bolanova == 1 )
 {
@@ -604,6 +608,106 @@ $is = $is + 1;
 <span data-mdl-for="druhfirm" class="mdl-tooltip">0 = Podvojné úètovníctvo<br>1 = NO podvojné úètovníctvo<br>9 = Jednoduché úètovníctvo</span>
 </div> <!-- .mdl-layout -->
 
+<?php             }
+//end of print copern = 1,8
+?>
+
+<?php
+//print 
+if( $copern == 11 ) {
+
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="tmp/firmy_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="tmp/firmy_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
+   define('FPDF_FONTPATH','fpdf/font/');
+   require('fpdf/fpdf.php');
+
+$pdf=new FPDF("P","mm","A4");
+$pdf->Open();
+$pdf->AddFont('arial','','arial.php');
+
+
+$sqltt = "SELECT * FROM fir WHERE xcf >= 0 ORDER BY xcf ";
+if( $hladanie == 1 )
+{
+$sqltt = "SELECT * FROM fir WHERE  xcf >= 0  AND ( naz LIKE '%$cohladat%' OR rok LIKE '%$cohladat%' ) ORDER BY xcf ";
+}
+//echo $sqltt;
+$tov = mysql_query("$sqltt");
+$tvpol = mysql_num_rows($tov);
+//echo $tvpol;
+
+$strana=0;
+$j=0;           
+$i=0;
+  while ($i <= $tvpol )
+  {
+
+  if (@$zaznam=mysql_data_seek($tov,$i))
+{
+$riadok=mysql_fetch_object($tov);
+$dat_sk = date("d.m.Y H:i:s", strtotime($riadok->dat));
+
+//hlavicka strany
+if ( $j == 0 )
+     {
+
+$pdf->AddPage();
+
+$pdf->SetLeftMargin(15); 
+$pdf->SetTopMargin(15); 
+
+$strana=$strana+1;
+
+$pdf->SetFont('arial','',10);
+$pdf->Cell(90,6,"Firmy","LTB",0,"L"); 
+$pdf->Cell(0,6,"$kli_nxcf strana $strana","RTB",1,"R");
+
+$pdf->SetFont('arial','',8);
+
+
+$pdf->Cell(20,6,"èíslo","1",0,"R");$pdf->Cell(80,6,"nazov","1",0,"L");
+$pdf->Cell(0,6,"rok","1",1,"L");
+
+     }
+//koniec hlavicky j=0
+
+
+
+$pdf->SetFont('arial','',8);
+
+$pdf->Cell(20,6,"$riadok->xcf","0",0,"R");
+$pdf->Cell(80,6,"$riadok->naz","0",0,"L");
+$pdf->Cell(0,6,"$riadok->rok","0",1,"L");
+$pdf->Cell(0,1," ","B",1,"L");
+
+}
+$i = $i + 1;
+$j = $j + 1;
+if( $j > 40 ) $j=0;
+
+  }
+
+$pdf->Output("$outfilex");
+
+?> 
+<script type="text/javascript">
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
+</script>
+<?php  
+echo $sqltt;
+exit;        
+               }
+//end of print copern = 11
+?> 
+
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script type="text/javascript">
 
@@ -752,7 +856,7 @@ function Firms()
 
 function viewFirms()
 {
-  window.open('firms_pdf.php?copern=10&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_blank');
+  window.open('firms_md.php?copern=11&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
 }
 
   function closeXcf(firma)
