@@ -49,11 +49,6 @@ select:enabled {
 .full-width {
   width: 100%;
 }
-.clearfix:after {
-/*  content: '';
-  display: table;
-  clear: both;*/
-}
 .flexbox {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -167,22 +162,20 @@ select:enabled {
   padding-top: 32px;
 }
 
-.container {
+.container { /* dopyt, v každom skripte môže byť iný */
   max-width: 1200px;
 }
 
-/* TABLE */
-.ui-table tr:not(:first-of-type) {
-  border-bottom: 1px solid #CFD8DC;
+
+/* BASIC TABLE */
+.data-table tr:not(:first-of-type) {
   border-top: 1px solid #CFD8DC;
+  border-bottom: 1px solid #CFD8DC;
 }
-.ui-table-content tr:not(.row-form):hover {
+.data-table tr.row-echo:hover {
   background-color: #ECEFF1;
 }
-.ui-table tr {
-  height: 40px;
-}
-.ui-table th {
+.data-table th {
   font-size: 11px;
   font-weight: 500;
   line-height: 1.2;
@@ -191,33 +184,38 @@ select:enabled {
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
-.ui-table-header th:first-of-type, .ui-table-content .row-echo th:first-of-type {
-  padding-left: 24px;
-}
-.ui-table-header th:last-of-type, .ui-table-content .row-echo th:last-of-type {
-  padding-right: 24px;
-}
-.ui-table th .md-18 { /*dopyt, dať cez style*/
-  vertical-align: -5px;
-}
-
-.ui-table td {
+.data-table td {
   height: inherit;
   font-size: 13px;
   color: rgba(0,0,0,.87);
   line-height: 1.2;
   position: relative;
 }
-.ui-table td:first-of-type {
-  padding-left: 24px;
-}
-.ui-table td:last-of-type {
-  padding-right: 24px;
-}
-.ui-table td strong {
+.data-table td strong {
   font-weight: 500;
 }
 
+/* LAYOUT TABLE */
+.ui-table tr {
+  height: 40px;
+}
+.ui-table th:first-of-type, .ui-table td:first-of-type {
+  padding-left: 24px;
+}
+.ui-table th:last-of-type, .ui-table td:last-of-type {
+  padding-right: 24px;
+}
+@media screen and (max-width: 1024px) {
+  .ui-table td:first-of-type, .ui-table th:first-of-type {
+    padding-left: 8px;
+  }
+  .ui-table td:last-of-type, .ui-table th:last-of-type {
+    padding-right: 8px;
+  }
+}
+.ui-table th .md-18 {
+  vertical-align: -5px;
+}
 .ui-table-pagination {
   height: 40px;
   display: -webkit-box;
@@ -228,7 +226,7 @@ select:enabled {
       -ms-flex-align: center;
           align-items: center;
 }
-.ui-table-pagination .mdl-textfield__input {
+.ui-table-pagination .mdl-textfield__input { /* dopyt, ešte sa pohrať*/
   font-size: 12px;
   display: inline;
   margin: 0 4px;
@@ -256,11 +254,11 @@ select:enabled {
   text-align: center;
   height: 24px;
 }
-.grid-table td:first-of-type {
-  padding-left: 0;
+.grid-table td:first-of-type, .grid-table th:first-of-type {
+  padding: 0;
 }
-.grid-table td:last-of-type {
-  padding-right: 0;
+.grid-table td:last-of-type, .grid-table th:last-of-type {
+  padding: 0;
 }
 .grid-table-tools .mdl-button, .grid-table-tools .mdl-menu__item {
   color: #757575;
@@ -274,21 +272,22 @@ select:enabled {
 
 
 
-
-.row-form .mdl-navigation {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+@media screen and (min-width: 840px) {
+  .row-form .mdl-navigation {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 .row-form .mdl-navigation__link {
   padding: 12px 0 12px 24px;
   width: 100%;
   line-height: 1.2;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 840px) {
   .row-form .mdl-navigation__link {
-    padding-left: 8px;
+    padding: 12px 24px 12px 24px;
   }
 }
 .row-form .mdl-navigation__link:hover {
@@ -303,8 +302,12 @@ select:enabled {
   min-width: 48px;
   margin-top: 16px;
 }
+.row-form > td {
+  padding-top: 16px;
+  padding-bottom: 8px;
 
 
+}
 
 
 .row-form-content .mdl-textfield {
@@ -322,7 +325,18 @@ select:enabled {
 
 
 
-
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
 
 
@@ -356,22 +370,21 @@ select:enabled {
 
 
 
-.ui-table .text-chip {
-  border-radius: 8px;
+.text-chip {
   display: inline-block;
+  font-size: 12px;
+}
+.chip-sm {
+  border-radius: 8px;
   height: 16px;
   line-height: 16px;
-  font-size: 12px;
-  /*font-weight: 400;*/
   padding: 0 10px;
-
-  /*color: rgba(0,0,0, 0.87);*/
-  /*background-color: #CFD8DC;*/
-
-
-  position: relative; /*dopyt,urobiť inak */
-  top: 3px;
-
+}
+.chip-md {
+  border-radius: 10px;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 12px;
 }
 
 
@@ -382,14 +395,38 @@ select:enabled {
 
 
 
+.external-link:after {
+  display: inline-block;
+  font-family: 'Material Icons';
+  content: 'open_in_new';
+  font-size: 16px;
+  vertical-align: top;
+  margin-left: 4px;
+}
+.dropdown-arrow:after {
+  display: inline-block;
+  font-family: 'Material Icons';
+  content: 'arrow_drop_down';
+  font-size: 24px;
+  vertical-align: middle;
+  margin-left: 0px;
+}
 
 
 
 
+#uvolni {
+  padding: 16px;
+}
+#row_form_close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+}
 
-
-
-
+[onclick] {
+  cursor: pointer;
+}
 
 /* BUTTON */
 
@@ -406,24 +443,17 @@ select:enabled {
 
 
 
-@media screen and (max-width: 1024px) {
-  .data-table td:first-of-type, .data-table th:first-of-type {
-    padding-left: 8px;
-  }
-  .data-table td:last-of-type, .data-table th:last-of-type {
-    padding-right: 8px;
-  }
-}
+
 
 
 
 
 /* INPUT */
-.mdl-textfield.is-dirty .mdl-textfield__label.label-static {
+/*.mdl-textfield.is-dirty .mdl-textfield__label.label-static {
   visibility: visible;
   position: static;
   font-size: 14px;
-}
+}*/
 
 
 

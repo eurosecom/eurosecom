@@ -542,11 +542,11 @@ if ( $uprav != 0 ) { echo "˙prava # $cislo_id"; }
       <button id="resetsearchbtn" onclick="document.formhladaj.cohladat.value='';" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--white search-reset" style="bottom: 4px; right: 8px;"><i class="material-icons">close</i></button>
     </div>
 </form>
-    <button type="button" id="view_list" onclick="viewUsers();" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-grey-50" style="margin-left: 8px;"><i class="material-icons">print</i></button>
+
     <button type="button" id="new_item" onclick="" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white mdl-color-text--blue-grey-300" style="margin-left: 24px;"><i class="material-icons">add</i></button> <!-- dopyt, rozbehaù  -->
   </div> <!-- .ui-header-page-row -->
   <div class="mdl-layout__header-row mdl-color--light-blue-600" style="padding:0; height: 40px;">
-    <table class="ui-table-header ui-table container tocenter">
+    <table class="ui-table-header ui-table data-table container tocenter">
     <tr class="mdl-color-text--blue-grey-50">
       <th class="left" style="width:22%;"><span style="position: relative; top: -6px;">UûÌvateæ</span></th>
       <th class="left" style="width:14%;">Prihlasovacie<br>meno - heslo</th>
@@ -563,6 +563,7 @@ if ( $uprav != 0 ) { echo "˙prava # $cislo_id"; }
 </header>
 
 <main class="mdl-layout__content mdl-color--blue-grey-50">
+<div id="table_body" class="mdl-color--white">
 <?php
 $sqltt = "SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY id_klienta";
 if ( $hladanie == 1 )
@@ -591,8 +592,8 @@ $i = ( $strana - 1 ) * $pols;
 // koniec cyklu
 $konc = ( $pols*($strana-1))+($pols-1);
 ?>
-<div id="table_body" class="mdl-color--white">
-  <table class="ui-table-content ui-table container tocenter">
+  <div class="container tocenter">
+  <table class="ui-table data-table">
   <colgroup>
     <col style="width:22%;">
     <col style="width:14%;">
@@ -687,8 +688,8 @@ $ipok=$ipok+1;
 ?>
     <td>
       <?php echo "$riadok->uziv_meno - $riadok->uziv_heslo"; ?><br>
-<?php if ( $jegrid == 1 ) { ?> <span id="grid<?php echo $riadok->id_klienta; ?>" class="text-chip mdl-color--grey-300">Grid</span> <?php } ?>
-<?php if ( $jemenp == 1 ) { ?> <span id="script<?php echo $riadok->id_klienta; ?>" class="text-chip mdl-color--grey-300">Skripty</span> <?php } ?>
+<?php if ( $jegrid == 1 ) { ?> <span id="grid<?php echo $riadok->id_klienta; ?>" class="text-chip chip-sm mdl-color--grey-300" style="position: relative; top: 3px;">Grid</span> <?php } ?>
+<?php if ( $jemenp == 1 ) { ?> <span id="script<?php echo $riadok->id_klienta; ?>" class="text-chip chip-sm mdl-color--grey-300" style="position: relative; top: 3px;">Skripty</span> <?php } ?>
       <i id="logged<?php echo $riadok->id_klienta; ?>" class="material-icons mdl-color-text--grey-500 md-18 vacenter">timer</i>
         <span data-mdl-for="grid<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">UûÌvateæ s grid kartou</span>
         <span data-mdl-for="script<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">UûÌvateæ s obmedzen˝m prÌstupom</span>
@@ -749,7 +750,7 @@ $ipok=$ipok+1;
 <form method="post" action="users_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_id=<?php echo $cislo_id; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>" id="formv" name="formv">
     <div class="mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
 <!-- left column -->
-    <div class="mdl-cell mdl-cell--2-col mdl-color--grey-200 ui-row-form-nav" style="padding: 8px 0;">
+    <div class="mdl-cell mdl-cell--2-col mdl-color--grey-200" style="padding: 8px 0;">
       <nav class="mdl-navigation">
         <a id="nav_user" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,1);" class="mdl-navigation__link">
           <span class="mdl-color--white avatar" style="border: 1px solid #039BE5; color: rgba(0,0,0,.87);"><?php echo $riadok->id_klienta; ?></span>&nbsp;
@@ -771,7 +772,7 @@ $ipok=$ipok+1;
 
 <!-- right column -->
     <div class="mdl-cell mdl-cell--10-col mdl-color--white ui-row-form-content" style="padding: 24px 16px 16px 32px;">
-      <button type="button" id="row_form_close" onclick="closeId(<?php echo $riadok->id_klienta; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500" style="position: absolute; top: 6px; right: 8px;"><i class="material-icons">close</i></button>
+      <button type="button" id="row_form_close" onclick="closeId(<?php echo $riadok->id_klienta; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">close</i></button>
         <div data-mdl-for="row_form_close" class="mdl-tooltip">Zavrieù</div>
 <?php
 if ( $uprav == 1 )
@@ -861,15 +862,17 @@ if ( $uprav == 1 )
           <span class="mdl-textfield__error">PovolenÈ s˙ ËÌsla!</span>
         </div>
       </fieldset>
-      <fieldset style="width: 140px; margin: 8px 0 8px 48px;">
-        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="h_status" style=" ">
-          <input type="checkbox" id="h_status" class="mdl-switch__input" checked>
+      <fieldset style="width: 132px; margin: 8px 0 0 48px;">
+        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="h_status">
+          <input type="checkbox" id="h_status" checked class="mdl-switch__input">
           <span class="mdl-switch__label">Ne/aktÌvny</span>
         </label>
       </fieldset>
-      <span id="uvolni" onmouseover="return Povol_uloz();" style="padding: 16px; position: absolute; bottom: 0; right: 0;">
+      <span id="uvolni" onmouseover="return Povol_uloz();" style="position: absolute; bottom: 0; right: 0;">
         <button id="uloz" name="uloz">Uloûiù</button>
       </span>
+      <div id="info_enternext" class="mdl-color--grey-400 mdl-color-text--white text-chip chip-md" style="position: absolute; top: 12px; right: 72px;">EnterNext</div>
+        <span data-mdl-for="info_enternext" class="mdl-tooltip">Na pres˙vanie medzi polÌËkami pouûite kl·vesu ENTER. TlaËidlo ULOéIç aktivujete prejdenÌm kurzoru okolo tlaËidla.</span>
     </section>
 <?php
      }
@@ -889,7 +892,7 @@ $if = 0;
 ?>
     <section class="row-form-content mdl-grid mdl-grid--no-spacing">
     <div class="mdl-cell mdl-cell--5-col" style=" margin-bottom: 20px; ">
-      <table class="ui-table tocenter" style="width: 320px;">
+      <table class="data-table tocenter" style="width: 320px;">
       <colgroup>
         <col style="width:22%;">
         <col style="width:20%;">
@@ -907,8 +910,8 @@ $if = 0;
       </tr>
       <tr class="row-form">
         <td class="center">
-          <button type="button" id="search_access" onclick="KtoMa();" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">search</i></button>
-            <div data-mdl-for="search_access" class="mdl-tooltip">Hæadaù, kto m· prÌstup vo firm·ch</div>
+          <button type="button" id="search_user_firms" onclick="KtoMa();" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">search</i></button>
+            <div data-mdl-for="search_user_firms" class="mdl-tooltip">Hæadaù uûÌvateæov s prÌstupom do firiem od do</div>
         </td>
         <td class="right">
           <div class="mdl-textfield mdl-js-textfield" style="width: 50px;">
@@ -977,7 +980,7 @@ $sqlp = mysql_query("$sqlttp");
 $cpolp = mysql_num_rows($sqlp);
 $ip = 0;
 ?>
-      <table class="ui-table" style="width: 350px;">
+      <table class="data-table" style="width: 350px;">
       <colgroup>
         <col style="width:30%;">
         <col style="width:45%;">
@@ -1040,7 +1043,7 @@ if ( $uprav == 4 )
      {
 ?>
     <section class="row-form-content mdl-grid mdl-grid--no-spacing">
-    <div class="mdl-cell mdl-cell--7-col">
+    <div class="mdl-cell mdl-cell--7-col ukaz">
 <?php
 //tlac grid
 if ( $jegridid == 1 )
@@ -1050,7 +1053,7 @@ $sqlg = mysql_query("$sqlttg");
 $cpolg = mysql_num_rows($sqlg);
 $ig=0;
 ?>
-      <table class="grid-table tocenter" style="width: 385px;">
+      <table class="grid-table data-table tocenter" style="width: 385px;">
       <colgroup>
         <col style="width:55px;">
         <col style="width:55px;">
@@ -1070,7 +1073,7 @@ $ig=0;
         <th>F</th>
       </tr>
 <?php
-   while ($ig <= $cpolg )
+   while ( $ig <= $cpolg )
    {
 if (@$zaznamg=mysql_data_seek($sqlg,$ig))
 {
@@ -1186,7 +1189,7 @@ $ig = $ig + 1;
 $i = $i + 1;
    }
 ?>
-  </table> <!-- .ui-table-content -->
+  </table> <!-- .ui-table -->
 <form name="forma3" id="forma3" action="#">
   <div class="mdl-color-text--grey-600 ui-table-pagination container tocenter">
     <span>= <?php echo $cpol; ?></span>
@@ -1210,7 +1213,8 @@ $is = $is + 1;
       <div class="mdl-tooltip" data-mdl-for="page_next">Prejsù na stranu <?php echo $npage; ?></div>
   </div> <!-- .ui-table-pagination -->
 </form>
-</div> <!-- .mdl-color-white -->
+  </div> <!-- .container -->
+</div> <!-- #table_body -->
 
 <!-- empty state -->
 <?php if ( $cpol == 0 ) { ?>
@@ -1224,7 +1228,7 @@ $is = $is + 1;
   <div class="mdl-mini-footer__left-section">
     <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
     <ul class="mdl-mini-footer__link-list">
-      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-600">Novinky</a></li>
+      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-500">Novinky</a></li>
     </ul>
   </div>
   <div class="mdl-mini-footer__right-section">
@@ -1291,7 +1295,7 @@ $is = $is + 1;
 <!-- tooltip -->
 <span class="mdl-tooltip" data-mdl-for="ilogin_user"><?php echo "$kli_uzid $kli_uzmeno $kli_uzprie"; ?></span>
 <span class="mdl-tooltip" data-mdl-for="apps_menu">EuroSecom podsystÈmy</span>
-<span class="mdl-tooltip" data-mdl-for="view_list">Zobraziù ËÌselnÌk</span>
+
 <span class="mdl-tooltip" data-mdl-for="new_item">Vytvoriù novÈho uûÌvateæa</span>
 <span class="mdl-tooltip" data-mdl-for="searchbtn">Hæadaù</span>
 <span class="mdl-tooltip" data-mdl-for="resetsearchbtn">Vymazaù vyhæad·vanie</span>
@@ -1550,7 +1554,7 @@ function delGrid()
 
 function viewFirms()
 {
-  window.open('cfir_t.php?copern=10', '_blank');
+  window.open('firms_pdf.php?copern=10', '_blank');
 }
 
   function Edcom()
@@ -1562,10 +1566,7 @@ function viewFirms()
    window.open('http://www.edcom.sk/ram1/novinkyweb.php', '_blank');
   }
 
-  function viewUsers()
-  {
-    window.open('ckli_t.php?copern=10', '_blank');
-  }
+
 
 </script>
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>

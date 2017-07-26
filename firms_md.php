@@ -344,7 +344,7 @@ if ( $uprav == 1 ) { echo "úprava # $cislo_xcf"; }
     <button type="button" onclick="novaXcf();" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white mdl-color-text--blue-grey-300" style="margin-left: 24px;"><i class="material-icons">add</i></button>
   </div> <!-- .ui-header-page-row -->
   <div class="mdl-layout__header-row mdl-color--light-blue-600" style="padding:0; height: 40px;">
-    <table class="ui-table-header ui-table container tocenter">
+    <table class="ui-table-header ui-table data-table container tocenter">
     <tr class="mdl-color-text--blue-grey-50">
       <th class="left" style="width:8%;">Èíslo</th>
       <th class="left" style="width:47%;">Názov</th>
@@ -358,8 +358,8 @@ if ( $uprav == 1 ) { echo "úprava # $cislo_xcf"; }
 </header>
 
 <main class="mdl-layout__content mdl-color--blue-grey-50">
+<div id="table_body" class="mdl-color--white">
 <?php
-
 $sqltt = "SELECT * FROM fir WHERE xcf >= 0 ORDER BY xcf ";
 if( $nova == 1 OR $bolanova == 1 )
 {
@@ -391,9 +391,9 @@ $i = ( $strana - 1 ) * $pols;
 // koniec cyklu
 $konc =($pols*($strana-1))+($pols-1);
 ?>
-<div id="table_body" class="mdl-color--white">
+  <div class="container tocenter">
 <form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&zmaz=<?php echo $zmaz; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>&nova=<?php echo $nova; ?>" id="formv" name="formv">
-  <table class="ui-table-content ui-table container tocenter">
+  <table class="ui-table-content ui-table data-table">
   <colgroup>
     <col style="width:8%;">
     <col style="width:47%;">
@@ -411,19 +411,19 @@ $riadok=mysql_fetch_object($sql);
 <?php if ( ( $uprav != 0 AND $riadok->xcf == $cislo_xcf ) OR ( $nova == 1 AND $i == 0 ) OR ( $zmaz != 0 AND $riadok->xcf == $cislo_xcf ) ) { ?>
   <tr class="row-form mdl-color--white mdl-shadow--2dp">
     <td class="vatop">
-      <div class="mdl-textfield mdl-js-textfield" style="width:50px;">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50px;">
         <input type="text" name="h_xcf" id="h_xcf" onKeyDown="return XcfEnter(event.which)" pattern="-?[0-9]*(\.[0-9]+)?" tabindex="1" required class="mdl-textfield__input">
         <label for="h_xcf" class="mdl-textfield__label">Èíslo firmy *</label>
 <?php if ( $jexcf == 0 OR $bolanova == 0 ) { ?>
         <span class="mdl-textfield__error">Pouívajte èísla!</span>
 <?php } ?>
 <?php if ( $jexcf == 1 AND $bolanova == 1 ) { ?>
-        <span class="mdl-textfield__error2">Neuloené. Èíslo <?php echo $h_xcf; ?> u existuje!</span>
+        <span class="mdl-textfield__error2">Èíslo <?php echo $h_xcf; ?> u existuje!</span>
 <?php } ?>
       </div>
     </td>
     <td>
-      <div class="mdl-textfield mdl-js-textfield" style="width:80%;">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:80%;">
         <input type="text" id="h_naz" name="h_naz" onKeyDown="return NazEnter(event.which)" required tabindex="2" class="mdl-textfield__input">
         <label for="h_naz" class="mdl-textfield__label">Názov firmy *</label>
       </div>
@@ -438,7 +438,7 @@ $riadok=mysql_fetch_object($sql);
       </div>
     </td>
     <td class="vatop right">
-      <div class="mdl-textfield mdl-js-textfield" style="width:auto;">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:auto;">
         <select name="h_rok" id="h_rok" required tabindex="3" onKeyDown="return RokEnter(event.which)" class="mdl-textfield__input">
           <option value="2017">2017</option>
           <option value="2016">2016</option>
@@ -453,19 +453,21 @@ $riadok=mysql_fetch_object($sql);
       </div>
     </td>
     <td class="vatop right">
-      <div class="mdl-textfield mdl-js-textfield" style="width:auto;">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:auto;">
         <select name="h_duj" id="h_duj" required tabindex="4" onKeyDown="return DujEnter(event.which)" class="mdl-textfield__input">
           <option value="0">0 = PÚ</option>
           <option value="1">1 = NO PÚ</option>
           <option value="9">9 = JÚ</option>
         </select>
-        <label for="h_duj" class="mdl-textfield__label">Druh *</label>
+        <label for="h_duj" class="mdl-textfield__label">Druh firmy *</label>
       </div>
     </td>
-    <td class="right">
-      <button type="button" id="row_form_close" onclick="closeXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500" style="position: absolute; top: 6px; right: 8px;"><i class="material-icons">close</i></button>
+    <td class="right" style="">
+      <div id="info_enternext" class="mdl-color--grey-400 mdl-color-text--white text-chip chip-md" style="position: absolute; top: 12px; right: 72px;">EnterNext</div>
+        <span data-mdl-for="info_enternext" class="mdl-tooltip">Na presúvanie medzi políèkami pouite klávesu ENTER. Tlaèidlo ULOI aktivujete prejdením kurzoru okolo tlaèidla.</span>
+      <button type="button" id="row_form_close" onclick="closeXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">close</i></button>
         <div data-mdl-for="row_form_close" class="mdl-tooltip">Zavrie</div>
-      <span id="uvolni" onmouseover="return Povol_uloz();" style="padding: 16px; position: absolute; bottom: 0; right: 0;">
+      <span id="uvolni" onmouseover="return Povol_uloz();" style="position: absolute; top: 105px; right: 0;">
         <button id="uloz" name="uloz">Uloi</button>
       </span>
     </td>
@@ -488,7 +490,6 @@ $riadok=mysql_fetch_object($sql);
     </td>
   </tr> <!-- .row-echo -->
 <?php                                    } ?>
-
 <?php
   }
 $i = $i + 1;
@@ -497,7 +498,7 @@ $i = $i + 1;
   </table>
 </form>
 <form name="forma3" id="forma3" action="#">
-  <div class="mdl-color-text--grey-600 ui-table-pagination container tocenter">
+  <div class="mdl-color-text--grey-600 ui-table-pagination">
     <span>= <?php echo $cpol; ?></span>
     <div class="mdl-layout-spacer"></div>
     <label for="page_goto" style="margin-right: 24px;">Strana
@@ -519,7 +520,8 @@ $is = $is + 1;
       <div class="mdl-tooltip" data-mdl-for="page_next">Prejs na stranu <?php echo $npage; ?></div>
   </div> <!-- .ui-table-pagination -->
 </form>
-</div> <!-- .mdl-color-white -->
+  </div> <!-- .container -->
+</div> <!-- #table_body -->
 
 <!-- empty state -->
 <?php if ( $cpol == 0 ) { ?>
@@ -533,7 +535,7 @@ $is = $is + 1;
   <div class="mdl-mini-footer__left-section">
     <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
     <ul class="mdl-mini-footer__link-list">
-      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-600">Novinky</a></li>
+      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-500">Novinky</a></li>
     </ul>
   </div>
   <div class="mdl-mini-footer__right-section">
@@ -607,13 +609,12 @@ $is = $is + 1;
 <span class="mdl-tooltip" data-mdl-for="resetsearchbtn">Vymaza vyh¾adávanie</span>
 <span data-mdl-for="druhfirm" class="mdl-tooltip">0 = Podvojné úètovníctvo<br>1 = NO podvojné úètovníctvo<br>9 = Jednoduché úètovníctvo</span>
 </div> <!-- .mdl-layout -->
-
 <?php             }
 //end of print copern = 1,8
 ?>
 
 <?php
-//print 
+//print
 if( $copern == 11 ) {
 
 $hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
@@ -645,7 +646,7 @@ $tvpol = mysql_num_rows($tov);
 //echo $tvpol;
 
 $strana=0;
-$j=0;           
+$j=0;
 $i=0;
   while ($i <= $tvpol )
   {
@@ -661,13 +662,13 @@ if ( $j == 0 )
 
 $pdf->AddPage();
 
-$pdf->SetLeftMargin(15); 
-$pdf->SetTopMargin(15); 
+$pdf->SetLeftMargin(15);
+$pdf->SetTopMargin(15);
 
 $strana=$strana+1;
 
 $pdf->SetFont('arial','',10);
-$pdf->Cell(90,6,"Firmy","LTB",0,"L"); 
+$pdf->Cell(90,6,"Firmy","LTB",0,"L");
 $pdf->Cell(0,6,"$kli_nxcf strana $strana","RTB",1,"R");
 
 $pdf->SetFont('arial','',8);
@@ -697,19 +698,23 @@ if( $j > 40 ) $j=0;
 
 $pdf->Output("$outfilex");
 
-?> 
+?>
 <script type="text/javascript">
   var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
-<?php  
+<?php
 echo $sqltt;
-exit;        
+exit;
                }
 //end of print copern = 11
-?> 
+?>
+
+
 
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script type="text/javascript">
+//dimensions blank window
+var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; //dopyt, premennú do eng a neskôr poui
 
   function ObnovUI()
   {
@@ -856,7 +861,7 @@ function Firms()
 
 function viewFirms()
 {
-  window.open('firms_md.php?copern=11&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+  window.open('firms_md.php?copern=11&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_blank', param);
 }
 
   function closeXcf(firma)
