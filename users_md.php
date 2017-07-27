@@ -12,7 +12,7 @@ $newdelenie=0;
 if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) { $newdelenie=1; }
 if ( $newdelenie == 1 )
           {
-$dtb2 = include("../oddel_dtb3new.php");
+$dtb2 = include("oddel_dtb3new.php");
           }
 
   @$spojeni = mysql_connect($mysqlhost, $mysqluser, $mysqlpasswd);
@@ -695,11 +695,16 @@ $ipok=$ipok+1;
         <span data-mdl-for="script<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Užívate¾ s obmedzeným prístupom</span>
         <span data-mdl-for="logged<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Posledné prihlásenie: <?php echo $poslpr; ?></span>
     </td>
-    <td>
-      <i id="firms<?php echo $riadok->id_klienta; ?>" class="material-icons mdl-color-text--grey-500 md-18 vacenter">error_outline</i>
-<?php if ( $riadok->txt1 == "0-0" ) { ?> <?php echo $akefirmy; ?> <?php } ?>
+    <td>      
+<?php if ( $riadok->txt1 != "0-0" ) { ?>
+<i id="firms<?php echo $riadok->id_klienta; ?>" class="material-icons mdl-color-text--grey-500 md-18 vacenter">error_outline</i>
       <?php echo $riadok->txt1; ?>
       <span data-mdl-for="firms<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Firmy nastavené v starom formáte</span>
+<?php } ?>
+<?php if ( $riadok->txt1 == "0-0" ) { ?>
+ <?php echo $akefirmy; ?>
+      <?php echo $riadok->txt1; ?>
+<?php } ?>
     </td>
     <td class="right"><?php echo $riadok->all_prav; ?></td>
     <td class="right">
