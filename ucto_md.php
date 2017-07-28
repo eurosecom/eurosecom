@@ -183,6 +183,20 @@ $copernx="alibaba40";
 //echo "idem";
 $clean = include("funkcie/subory.php");
 }
+
+//month navigation
+$zmenume=1*$zmenume;
+$pole = explode(".", $vyb_ume);
+$kli_vmes=$pole[0];
+$kli_vrok=$pole[1];
+$kli_pmes=$kli_vmes-1;
+if ( $kli_pmes < 1 ) $kli_pmes=1;
+$kli_dmes=$kli_vmes+1;
+if ( $kli_dmes > 12 ) $kli_dmes=12;
+$kli_pume=$kli_pmes.".".$kli_vrok;
+$kli_dume=$kli_dmes.".".$kli_vrok;
+$odkaz="../ucto_md.php?copern=1";
+$odkaz64=urlencode($odkaz);
 ?>
 <head>
   <meta charset="cp1250">
@@ -200,7 +214,7 @@ $clean = include("funkcie/subory.php");
 </head>
 <body> <!-- dopyt, riešiť cez .js -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
-<header class="mdl-layout__header mdl-layout__header--waterfall">
+<header class="mdl-layout__header mdl-layout__header--waterfall ">
   <div class="mdl-layout__header-row mdl-color--light-blue-600 ">
     <span class="mdl-layout-title mdl-color-text--yellow-A100">EuroSecom</span>&nbsp;
 <?php
@@ -213,15 +227,29 @@ if ( $vyb_xcf == '' ) { $copern=22; } //dopyt, preveriť
 //$btn_action="noactive";
 //if ( $copern == 22 ) $btn_action="active";
 ?>
-    <button type="button" id="show-dialog" onclick="window.open('ucto_md.php?copern=22', '_self');" class="mdl-button mdl-js-button mdl-color--light-blue-700" style="font-family: unset; color: rgba(255,255,255,.7); letter-spacing: 0.02em;">
-      <strong class="mdl-color-text--white"><?php echo $vyb_xcf; ?></strong>&nbsp;
+    <button type="button" id="show-dialog" onclick="window.open('ucto_md.php?copern=22', '_self');" class="mdl-button mdl-js-button mdl-color--light-blue-700" style="color: rgba(255,255,255,.7); letter-spacing: 0.02em;">
+      <strong class="mdl-color-text--white"><?php echo $vyb_xcf; ?></strong>
       <span class="mdl-color-text--white" style="text-transform: none; font-weight: 400;"><?php echo $vyb_naz; ?></span>
       <i class="material-icons vacenter">arrow_drop_down</i>
     </button>
- <a href="ucto_md.php?copern=24" title="Vybrať účtovné obdobie" class="dropdown-toggle <?php echo $active; ?>">&nbsp;<?php echo $vyb_ume; ?><i class="material-icons md-18 toright">arrow_drop_down</i></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">navigate_before</i>
+    </button>
+    <button type="button" id="show-dialog1" onclick="window.open('ucto_md.php?copern=24', '_self');" class="mdl-button mdl-js-button mdl-color--light-blue-700" style="color: rgba(255,255,255,.7); letter-spacing: 0.02em;">
+      <span class="mdl-color-text--white" style="text-transform: none; font-weight: 400;"><?php echo $vyb_ume; ?></span>
+      <i class="material-icons vacenter">arrow_drop_down</i>
+    </button>
+
+    <button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">navigate_next</i>
+    </button>
+      <div class="mdl-tooltip" data-mdl-for="month_prev">Prejsť na <?php echo $kli_pume; ?></div>
+      <div class="mdl-tooltip" data-mdl-for="month_next">Prejsť na <?php echo $kli_dume; ?></div>
 
     <div class="mdl-layout-spacer"></div>
-    <button type="button" id="ilogin_user" class="mdl-button mdl-js-button mdl-button--icon mdl-color--indigo-400 mdl-color-text--blue-grey-50 avatar"><?php echo $kli_uzid; ?></button>&nbsp;&nbsp;
+    <button type="button" id="user" class="mdl-button mdl-js-button mdl-button--icon mdl-color--indigo-400 mdl-color-text--blue-grey-50 avatar"><?php echo $kli_uzid; ?></button>&nbsp;&nbsp;
     <span class="mdl-color-text--blue-grey-50"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
   </div>
 <!-- Tabs -->
@@ -554,8 +582,8 @@ zobrazene menu
 </div> <!-- .mdl-layout -->
 
 <?php
-$robot=1;
-$zmenume=1; $odkaz="../podvojneu.php?copern=1&newmenu=$newmenu";
+//$robot=1;
+//$zmenume=1; $odkaz="../ucto_md.php?copern=1";
 
 
 
@@ -569,25 +597,22 @@ $zmenume=1; $odkaz="../podvojneu.php?copern=1&newmenu=$newmenu";
 //dimensions blank window
 var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; //dopyt, premennú do eng a neskôr použiť
 
-//preklikavanie mesiacov
-<?php
-$zmenume=1*$zmenume;
-$pole = explode(".", $vyb_ume);
-$kli_vmes=$pole[0];
-$kli_vrok=$pole[1];
-$kli_pmes=$kli_vmes-1;
-if ( $kli_pmes < 1 ) $kli_pmes=1;
-$kli_dmes=$kli_vmes+1;
-if ( $kli_dmes > 12 ) $kli_dmes=12;
-$kli_pume=$kli_pmes.".".$kli_vrok;
-$kli_dume=$kli_dmes.".".$kli_vrok;
-$odkaz="../ucto_md.php?copern=1";
-$odkaz64=urlencode($odkaz);
-?>
-  function ZmenMesiac(kam)
+<?php if ( $kli_vmes == 1 ) { ?>
+  document.getElementById('month_prev').disabled = true;
+<?php } ?>
+<?php if ( $kli_vmes == 12 ) { ?>
+  document.getElementById('month_next').disabled = true;
+<?php } ?>
+
+
+
+  function navMonth(kam)
   {
    window.open('../cis/zmenume.php?odkaz=<?php echo $odkaz64; ?>&copern=' + kam + '', '_self');
   }
+
+
+
 
 //vstup dat
   function OdberFa()
