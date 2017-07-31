@@ -249,6 +249,8 @@ $sqty = "INSERT INTO nas_id ( xcf,id,ume,pr3,pr2,pr1,robot,datm )".
 $ulozene = mysql_query("$sqty");
 
 $copern=1;
+$uprav=0;
+$cislo_id=0;
 }
 //koniec nastav fir a ume podla mojho konta
 
@@ -1370,7 +1372,7 @@ for ( var i = 0; i < buttons.length; i++ ) {
 
 
 
-<?php if ( $uprav == 3 ) { ?>
+<?php if ( $uprav == 3 ) { ?> //tu je bug, treba opravit lebo potom nechodia vsetky veci dole od tohoto riadka v javascripte pri uprav=3
 var scriptdot = document.querySelector('#nav_script > .dot');
     scriptdot.className = scriptdot.className == 'mdl-color--white dot vacenter' ? 'mdl-color--grey-600 dot vacenter' : 'mdl-color--white dot vacenter';
 <?php } ?>
@@ -1439,10 +1441,8 @@ var griddot = document.querySelector('#nav_grid > .dot');
     {
     var okvstup=1;
 <?php if ( $uprav == 2 ) { ?>
-    if ( document.formv.fiod.value == '' ) okvstup=0;
-    if ( document.formv.fido.value == '' ) okvstup=0;
-    if ( document.formv.fiod.value == '0' ) okvstup=0;
-    if ( document.formv.fido.value == '0' ) okvstup=0;
+    if ( document.formv.fiod.value == '' && document.formv.h_txt1.value == '' ) okvstup=0;
+    if ( document.formv.fido.value == '' && document.formv.h_txt1.value == '' ) okvstup=0;
 <?php                   } ?>
 
 <?php if ( $uprav == 3 ) { ?>

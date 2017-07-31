@@ -173,7 +173,7 @@ limitations under the License.
           // [START_EXCLUDE]
           document.getElementById('quickstart-sign-in-status').textContent = 'Prihlasene';
           document.getElementById('quickstart-sign-in').textContent = 'Odhlasit';
-          document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
+          //document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
           if (!emailVerified) {
             document.getElementById('quickstart-verify-email').disabled = true;          
           }
@@ -196,7 +196,7 @@ limitations under the License.
           // [START_EXCLUDE]
           document.getElementById('quickstart-sign-in-status').textContent = 'Odhlasene';
           document.getElementById('quickstart-sign-in').textContent = 'Prihlasit';
-          document.getElementById('quickstart-account-details').textContent = 'null';
+          //document.getElementById('quickstart-account-details').textContent = 'null';
           $( "#myIcoElement" ).empty();
           $( "#ucto" ).hide();
           $( "#mzdy" ).hide();
@@ -299,7 +299,7 @@ limitations under the License.
           <br/><br/>
   <script type="text/javascript" src="gotosys.js"></script>
             <div id="fbauth">Firebase auth <code>currentUser</code> object value:</div>
-            <pre id="accdetails"><code id="quickstart-account-details">null</code></pre>
+            <pre id="accdetails"><code id="quickstart-account-details"></code></pre>
             <div id="myIcoElement"></div>
           </div>
         </div>
