@@ -1443,6 +1443,8 @@ var griddot = document.querySelector('#nav_grid > .dot');
 <?php if ( $uprav == 2 ) { ?>
     if ( document.formv.fiod.value == '' && document.formv.h_txt1.value == '' ) okvstup=0;
     if ( document.formv.fido.value == '' && document.formv.h_txt1.value == '' ) okvstup=0;
+    if ( document.formv.fiod.value == '0' && document.formv.h_txt1.value == '' ) okvstup=0;
+    if ( document.formv.fido.value == '0' && document.formv.h_txt1.value == '' ) okvstup=0;
 <?php                   } ?>
 
 <?php if ( $uprav == 3 ) { ?>
