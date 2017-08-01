@@ -164,7 +164,7 @@ $ulozene = mysql_query("$sqty");
 
 
 //tlac grid
-if ( $usermd == 0 OR ( $usermd == 1 AND $copern >= 10 AND $copern <= 11 ) )
+if ( $usermd == 0 OR ( $usermd == 1 AND $copern >= 10 AND $copern <= 10 ) )
 {
 
 if ( $copern == 10 OR $copern == 11 OR $copern == 12 OR $copern == 13 OR $copern == 14 OR $copern == 15 )
@@ -344,12 +344,26 @@ $sqlttt=" CREATE TABLE `".$mysqldb2010."`.`krtgrd` SELECT * FROM `".$mysqldb2016
 <?php
 if ( $copern == 11 )
 {
+if ( $usermd == 0 )
+    {
 ?>
 <br />
 <a href="#" onClick="window.open('../cis/grid.php?copern=12&cislo_id=<?php echo $idnove;?>&usermd=<?php echo $usermd; ?>', '_self', '<?php echo $tlcuwin; ?>' )">
 <img src='../obr/ok.png' width=20 height=12 border=0 alt="Uloži novú GridKartu" ></a>
 <?php
 exit;
+    }
+if ( $usermd == 1 )
+    {
+?>
+<script type="text/javascript">
+
+window.open('../cis/grid.php?copern=12&cislo_id=<?php echo $idnove;?>&usermd=<?php echo $usermd; ?>', '_self' );
+
+</script>
+<?php
+exit;
+    }
 }
 ?>
 
