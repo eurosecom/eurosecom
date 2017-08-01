@@ -5,7 +5,8 @@ $mysqldbdatax=$mysqldbdata;
 
 if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
           {
-$dtb2 = include("oddel_dtb1new.php");
+if (File_Exists ("pswd/newdeleniedtb.ano")) { $dtb2 = include("oddel_dtb1new.php"); }
+if (File_Exists ("../pswd/newdeleniedtb.ano")) { $dtb2 = include("../oddel_dtb1new.php"); }
           }
 
 $mysqldbdata=$mysqldbdatax;
