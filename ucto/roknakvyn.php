@@ -98,7 +98,20 @@ $fir_allx11 = 1*$fir_riadok->allx11;
 if( $fir_allx11 > 0 ) { $firm4=$fir_allx11; }
 
 $databaza="";
-$dtb2 = include("../cis/oddel_dtbz1.php");
+if (File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+$kli_vroka=$kli_vrok-1;
+if( $kli_vroka == 2019 ) { $databaza=$databaza=$mysqldb2019."."; }
+if( $kli_vroka == 2018 ) { $databaza=$databaza=$mysqldb2018."."; }
+if( $kli_vroka == 2017 ) { $databaza=$databaza=$mysqldb2017."."; }
+if( $kli_vroka == 2016 ) { $databaza=$databaza=$mysqldb2016."."; }
+if( $kli_vroka == 2015 ) { $databaza=$databaza=$mysqldb2015."."; }
+if( $kli_vroka == 2014 ) { $databaza=$databaza=$mysqldb2014."."; }
+if( $kli_vroka == 2013 ) { $databaza=$databaza=$mysqldb2013."."; }
+if( $kli_vroka == 2012 ) { $databaza=$databaza=$mysqldb2012."."; }
+if( $kli_vroka == 2011 ) { $databaza=$databaza=$mysqldb2011."."; }
+if( $kli_vroka == 2010 ) { $databaza=$databaza=$mysqldb2010."."; }
+          }
 
 
 if( $firm4 > 0 )
@@ -111,9 +124,20 @@ $fir_allx11 = 1*$fir_riadok->allx11;
 if( $fir_allx11 > 0 ) { $firm3=$fir_allx11; }
 }
 
-if( $kli_vrok == 2012 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
-if( $kli_vrok == 2013 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
-if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2012db2013.php")) { $databaza=$mysqldb2012."."; } }
+if (File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+$kli_vroka=$kli_vrok-2;
+if( $kli_vroka == 2019 ) { $databaza=$databaza=$mysqldb2019."."; }
+if( $kli_vroka == 2018 ) { $databaza=$databaza=$mysqldb2018."."; }
+if( $kli_vroka == 2017 ) { $databaza=$databaza=$mysqldb2017."."; }
+if( $kli_vroka == 2016 ) { $databaza=$databaza=$mysqldb2016."."; }
+if( $kli_vroka == 2015 ) { $databaza=$databaza=$mysqldb2015."."; }
+if( $kli_vroka == 2014 ) { $databaza=$databaza=$mysqldb2014."."; }
+if( $kli_vroka == 2013 ) { $databaza=$databaza=$mysqldb2013."."; }
+if( $kli_vroka == 2012 ) { $databaza=$databaza=$mysqldb2012."."; }
+if( $kli_vroka == 2011 ) { $databaza=$databaza=$mysqldb2011."."; }
+if( $kli_vroka == 2010 ) { $databaza=$databaza=$mysqldb2010."."; }
+          }
 
 if( $firm3 > 0 )
 {
@@ -125,8 +149,20 @@ $fir_allx11 = 1*$fir_riadok->allx11;
 if( $fir_allx11 > 0 ) { $firm2=$fir_allx11; }
 }
 
-if( $kli_vrok == 2013 ) { if (File_Exists ("../pswd/oddelena2010db2011.php")) { $databaza=$mysqldb2010."."; } }
-if( $kli_vrok == 2014 ) { if (File_Exists ("../pswd/oddelena2011db2012.php")) { $databaza=$mysqldb2011."."; } }
+if (File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+$kli_vroka=$kli_vrok-3;
+if( $kli_vroka == 2019 ) { $databaza=$databaza=$mysqldb2019."."; }
+if( $kli_vroka == 2018 ) { $databaza=$databaza=$mysqldb2018."."; }
+if( $kli_vroka == 2017 ) { $databaza=$databaza=$mysqldb2017."."; }
+if( $kli_vroka == 2016 ) { $databaza=$databaza=$mysqldb2016."."; }
+if( $kli_vroka == 2015 ) { $databaza=$databaza=$mysqldb2015."."; }
+if( $kli_vroka == 2014 ) { $databaza=$databaza=$mysqldb2014."."; }
+if( $kli_vroka == 2013 ) { $databaza=$databaza=$mysqldb2013."."; }
+if( $kli_vroka == 2012 ) { $databaza=$databaza=$mysqldb2012."."; }
+if( $kli_vroka == 2011 ) { $databaza=$databaza=$mysqldb2011."."; }
+if( $kli_vroka == 2010 ) { $databaza=$databaza=$mysqldb2010."."; }
+          }
 
 if( $firm2 > 0 )
 {
@@ -172,7 +208,23 @@ $kli_vrok=$xrok;
 $databaza="";
 $kli_vrokx=$kli_vrok;
 $kli_vrok=$xrok;
-$dtb2 = include("../cis/oddel_dtbz1.php");
+
+
+if (File_Exists ("../pswd/newdeleniedtb.ano")) 
+          {
+if( $kli_vrok == 2019 ) { $databaza=$databaza=$mysqldb2019."."; }
+if( $kli_vrok == 2018 ) { $databaza=$databaza=$mysqldb2018."."; }
+if( $kli_vrok == 2017 ) { $databaza=$databaza=$mysqldb2017."."; }
+if( $kli_vrok == 2016 ) { $databaza=$databaza=$mysqldb2016."."; }
+if( $kli_vrok == 2015 ) { $databaza=$databaza=$mysqldb2015."."; }
+if( $kli_vrok == 2014 ) { $databaza=$databaza=$mysqldb2014."."; }
+if( $kli_vrok == 2013 ) { $databaza=$databaza=$mysqldb2013."."; }
+if( $kli_vrok == 2012 ) { $databaza=$databaza=$mysqldb2012."."; }
+if( $kli_vrok == 2011 ) { $databaza=$databaza=$mysqldb2011."."; }
+if( $kli_vrok == 2010 ) { $databaza=$databaza=$mysqldb2010."."; }
+          }
+
+
 $kli_vrok=$kli_vrokx;  
 
 
