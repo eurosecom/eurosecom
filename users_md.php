@@ -747,7 +747,7 @@ if ( $uprav == 1 OR $nova == 1 )
       <span id="uvolni" onmouseover="return Povol_uloz();" style="position: absolute; bottom: 0; right: 0;">
         <button id="uloz" name="uloz">Uloi</button>
       </span>
-      <div id="info_enternext" class="mdl-color--grey-400 mdl-color-text--white text-chip chip-md" style="position: absolute; top: 12px; right: 72px;">EnterNext</div>
+      <div id="info_enternext" class="mdl-color--light-blue-600 mdl-color-text--white text-chip" style="position: absolute; top: 12px; right: 72px;">EnterNext</div>
         <span data-mdl-for="info_enternext" class="mdl-tooltip">Na presúvanie medzi políèkami pouite klávesu ENTER. Tlaèidlo ULOI aktivujete prejdením kurzoru okolo tlaèidla.</span>
     </section>
 <?php
@@ -1140,8 +1140,11 @@ $ipok=$ipok+1;
 ?>
     <td>
       <?php echo "$riadok->uziv_meno - $riadok->uziv_heslo"; ?><br>
-<?php if ( $jegrid == 1 ) { ?> <span id="grid<?php echo $riadok->id_klienta; ?>" class="text-chip chip-sm mdl-color--grey-300" style="position: relative; top: 3px;">Grid</span> <?php } ?>
-<?php if ( $jemenp == 1 ) { ?> <span id="script<?php echo $riadok->id_klienta; ?>" class="text-chip chip-sm mdl-color--grey-300" style="position: relative; top: 3px;">Skripty</span> <?php } ?>
+<?php if ( $jegrid == 1 ) { ?>
+ <span id="grid<?php echo $riadok->id_klienta; ?>" class="text-chip mdl-color--grey-300" style="position: relative; top: 3px;">Grid</span> <?php } ?>
+<?php if ( $jemenp == 1 ) { ?>
+ <span id="script<?php echo $riadok->id_klienta; ?>" class="text-chip mdl-color--grey-300" style="position: relative; top: 3px;">Skripty</span>
+  <?php } ?>
       <i id="logged<?php echo $riadok->id_klienta; ?>" class="material-icons mdl-color-text--grey-500 md-18 vacenter">timer</i>
         <span data-mdl-for="grid<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Uívate¾ s grid kartou</span>
         <span data-mdl-for="script<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Uívate¾ s obmedzenım prístupom</span>

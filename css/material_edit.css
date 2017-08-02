@@ -74,8 +74,27 @@ select:enabled {
   max-width: 300px;
   text-transform: none;
 }
-
-
+.mdl-layout__tab {
+  color: rgba(255,255,255,0.6);
+  height: 64px;
+  line-height: 64px;
+  /*letter-spacing: 0.02em;*/
+}
+.mdl-layout.is-upgraded .mdl-layout__tab.is-active,
+.mdl-layout__tab-bar-button.is-active {
+  color: rgb(255,255,255);
+}
+.mdl-layout.is-upgraded .mdl-layout__tab.is-active::after {
+  height: 3px;
+  background: rgb(255,255,255);
+}
+.mdl-layout__tab-bar-button, .mdl-layout__tab-bar, .mdl-layout__tab-bar-container {
+  background-color: #039BE5;
+  height: 64px;
+}
+.mdl-layout__tab-bar-button .material-icons {
+  line-height: 64px;
+}
 
 
 /* HEADER */
@@ -373,19 +392,11 @@ select:enabled {
 .text-chip {
   display: inline-block;
   font-size: 12px;
+  line-height: 1;
+  border-radius: 9px;
+  padding: 3px 9px;
 }
-.chip-sm {
-  border-radius: 8px;
-  height: 16px;
-  line-height: 16px;
-  padding: 0 10px;
-}
-.chip-md {
-  border-radius: 10px;
-  height: 20px;
-  line-height: 20px;
-  padding: 0 12px;
-}
+
 
 
 
@@ -403,6 +414,7 @@ select:enabled {
   vertical-align: top;
   margin-left: 4px;
 }
+
 .dropdown-arrow:after {
   display: inline-block;
   font-family: 'Material Icons';
@@ -411,6 +423,7 @@ select:enabled {
   vertical-align: middle;
   margin-left: 0px;
 }
+
 
 
 
