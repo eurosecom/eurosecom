@@ -1147,7 +1147,7 @@ $ipok=$ipok+1;
         <span data-mdl-for="script<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Užívate¾ s obmedzeným prístupom</span>
         <span data-mdl-for="logged<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Posledné prihlásenie: <?php echo $poslpr; ?></span>
     </td>
-    <td>      
+    <td>
 <?php if ( $riadok->txt1 != "0-0" ) { ?>
 <i id="firms<?php echo $riadok->id_klienta; ?>" class="material-icons mdl-color-text--grey-500 md-18 vacenter">error_outline</i>
       <?php echo $riadok->txt1; ?>
@@ -1372,7 +1372,7 @@ for ( var i = 0; i < buttons.length; i++ ) {
 
 
 
-<?php if ( $uprav == 3 ) { ?> //tu je bug, treba opravit lebo potom nechodia vsetky veci dole od tohoto riadka v javascripte pri uprav=3
+<?php if ( $uprav == 3 AND $jemenpid ) { ?> //tu je bug, treba opravit lebo potom nechodia vsetky veci dole od tohoto riadka v javascripte pri uprav=3
 var scriptdot = document.querySelector('#nav_script > .dot');
     scriptdot.className = scriptdot.className == 'mdl-color--white dot vacenter' ? 'mdl-color--grey-600 dot vacenter' : 'mdl-color--white dot vacenter';
 <?php } ?>
