@@ -14,6 +14,14 @@ a {
   text-decoration: none;
   display: inline-block;
 }
+ul, ol, dl {
+  list-style: none;
+}
+ol, ul, li, dl, dt, dd {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
 table {
   border-collapse: collapse;
   width: 100%;
@@ -476,3 +484,8 @@ select:enabled {
 .material-icons.md-40 { font-size: 40px; }
 .material-icons.md-48 { font-size: 48px; }
 .material-icons.md-64 { font-size: 64px; }
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }

@@ -12,7 +12,7 @@ $copern = 1*$_REQUEST['copern'];
 //$newmenu = 1*$_REQUEST['newmenu'];
 //if( $_SESSION['chrome'] == 0 ) { $newmenu = 0; }
 //if( $_SESSION['nieie'] == 1 ) { $newmenu = 1; }
-//$copern = 1*$_REQUEST['copern'];
+
 $parwin="width=' + sirkawin + ', height=' + vyskawin + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes"; //dopyt, pôjde preè
 $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes"; //dopyt, pôjde preè
 $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes"; //dopyt, pôjde preè
@@ -207,6 +207,85 @@ $odkaz64=urlencode($odkaz);
   <link rel="stylesheet" href="css/material_edit.css">
   <title>Úètovníctvo | EuroSecom</title>
 <style>
+.mdl-grid {
+  max-width: 1200px;
+}
+.mdl-cell {
+  min-width: 224px;
+  max-width: 368px;
+  /*padding: 4px;*/
+}
+.card-module {
+  margin-bottom: 16px;
+  /*min-width: 224px;*/
+  min-height: 56px;
+  padding: 10px 0;
+}
+.card-module-header {
+  height: 36px;
+  padding: 6px 8px 6px 0;
+  position: relative;
+  /*background-color: lightgrey;*/
+}
+.card-module-header .material-icons {
+  color: rgba(0,0,0,.54);
+  margin: 0 16px;
+  float: left;
+    /*background-color: red;*/
+}
+.card-module-title {
+  font-size: 19px;
+  color: rgba(0,0,0,.87);
+  float: left;
+  height: 24px;
+  padding-top: 3px;
+  margin-left: -1px;
+  /*background-color: red;*/
+}
+.card-module-content .card-item {
+  font-size: 13px;
+  padding-left: 56px;
+  height: 36px;
+  padding-top: 12px;
+  /*line-height: 36px;*/
+  letter-spacing: 0.02em;
+  position: relative;
+  /*color: #039BE5;*/
+
+}
+.card-module *[onclick]:hover {
+  background-color: #eee;
+}
+.card-module .external-link:after {
+  display: inline-block;
+  font-family: 'Material Icons';
+  content: '\e89e';
+  font-size: 18px;
+  position: absolute;
+  right: 9px;
+  top: 9px;
+  color: rgba(0,0,0,0);
+}
+.card-module *[onclick]:hover:after {
+  color: rgba(0,0,0,.54);
+}
+.card-module strong {
+  font-weight: 500;
+}
+
+
+/*.card-module-header[onclick]:after {
+  top: 9px;
+}
+.card-module-content .card-item[onclick]:after {
+  top: 9px;
+
+}*/
+
+
+
+
+
 
 
 
@@ -214,46 +293,38 @@ $odkaz64=urlencode($odkaz);
 </head>
 <body> <!-- dopyt, rieši cez .js -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
-<header class="mdl-layout__header mdl-layout__header--waterfall ">
-  <div class="mdl-layout__header-row mdl-color--light-blue-600 ">
-    <span class="mdl-layout-title mdl-color-text--yellow-A100">EuroSecom</span>&nbsp;
+<header class="mdl-layout__header ui-header ">
+  <div class="mdl-layout__header-row mdl-color--light-blue-700" style="height: 48px;">
+    <span class="mdl-layout-title mdl-color-text--yellow-A100" style="font-size: 16px;">EuroSecom</span>&nbsp;&nbsp;
 <?php
 //first login new user
 if ( $vyb_xcf == '' ) { $copern=22; } //dopyt, preveri
 ?>
 
-<?php
-//change firm
-//$btn_action="noactive";
-//if ( $copern == 22 ) $btn_action="active";
-?>
-    <button type="button" id="show-dialog" onclick="window.open('ucto_md.php?copern=22', '_self');" class="mdl-button mdl-js-button mdl-color--light-blue-700" style="color: rgba(255,255,255,.7); letter-spacing: 0.02em;">
-      <strong class="mdl-color-text--white"><?php echo $vyb_xcf; ?></strong>
+
+    <button type="button" id="select_firm" onclick="window.open('ucto_md.php?copern=22', '_self');" class="mdl-button mdl-js-button mdl-color--light-blue-700" style="color: rgba(255,255,255,.6); letter-spacing: 0.02em;">
+      <strong class="mdl-color-text--white" style=""><?php echo $vyb_xcf; ?></strong>&nbsp;
       <span class="mdl-color-text--white" style="text-transform: none; font-weight: 400;"><?php echo $vyb_naz; ?></span>
       <i class="material-icons vacenter">arrow_drop_down</i>
     </button>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    <button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button mdl-button--icon">
-      <i class="material-icons">navigate_before</i>
-    </button>
-    <button type="button" id="show-dialog1" onclick="window.open('ucto_md.php?copern=24', '_self');" class="mdl-button mdl-js-button mdl-color--light-blue-700" style="color: rgba(255,255,255,.7); letter-spacing: 0.02em;">
-      <span class="mdl-color-text--white" style="text-transform: none; font-weight: 400;"><?php echo $vyb_ume; ?></span>
-      <i class="material-icons vacenter">arrow_drop_down</i>
-    </button>
 
-    <button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button mdl-button--icon">
-      <i class="material-icons">navigate_next</i>
-    </button>
-      <div class="mdl-tooltip" data-mdl-for="month_prev">Prejs na <?php echo $kli_pume; ?></div>
-      <div class="mdl-tooltip" data-mdl-for="month_next">Prejs na <?php echo $kli_dume; ?></div>
+
+
+
+
+
 
     <div class="mdl-layout-spacer"></div>
-    <button type="button" id="user" class="mdl-button mdl-js-button mdl-button--icon mdl-color--indigo-400 mdl-color-text--blue-grey-50 avatar"><?php echo $kli_uzid; ?></button>&nbsp;&nbsp;
-    <span class="mdl-color-text--blue-grey-50"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
+    <button type="button" id="select_month" onclick="window.open('ucto_md.php?copern=24', '_self');" class="mdl-button mdl-js-button " style="color: rgba(255,255,255,.6); letter-spacing: 0.02em;">
+      <span class="mdl-color-text--white" style="font-weight: 400;"><?php echo $vyb_ume; ?></span>
+      <i class="material-icons vacenter">arrow_drop_down</i>
+    </button>
+    <button type="button" id="user" class="mdl-button mdl-js-button mdl-button--icon mdl-color--indigo-400 avatar" style="color: rgba(255,255,255,0.8);"><?php echo $kli_uzid; ?></button>&nbsp;&nbsp;
+    <span class="" style="color: rgba(255,255,255,0.8);"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
   </div>
 <!-- Tabs -->
-  <div class="mdl-layout__tab-bar" style="">
+  <div class="mdl-layout__tab-bar " style="background-color: ;  overflow: auto;">
     <a href="#" onclick="Ucto();" class="mdl-layout__tab is-active">Úètovníctvo
 <?php
 if ( $vyb_duj == 0 ) { echo "podvojné"; }
@@ -264,15 +335,37 @@ if ( $vyb_duj == 9 ) { echo "jednoduché"; }
     <a href="#" onclick="Odbyt();" class="mdl-layout__tab">Odbyt</a>
     <a href="#" onclick="Sklad();" class="mdl-layout__tab">Sklad</a>
     <a href="#" onclick="Majetok();" class="mdl-layout__tab">Majetok</a>
-    <a href="#" onclick="Doprava();" class="mdl-layout__tab">Doprava</a>
-    <a href="#" onclick="Vyroba();" class="mdl-layout__tab">Vyroba</a>
-    <a href="#" onclick="Analyzy();" class="mdl-layout__tab">Analızy</a>
+    <a href="#" id="more_subs" class="mdl-layout__tab mdl-layout--small-screen-only" style="padding: 0;"><i class="material-icons vacenter">more_horiz</i></a>
+    <a href="#" onclick="Doprava();" class="mdl-layout__tab mdl-layout--large-screen-only">Doprava</a>
+    <a href="#" onclick="Vyroba();" class="mdl-layout__tab mdl-layout--large-screen-only">Vyroba</a>
+    <a href="#" onclick="Analyzy();" class="mdl-layout__tab mdl-layout--large-screen-only">Analızy</a>
     <div class="mdl-layout-spacer"></div>
-    <a href="#" id="settings" class="mdl-layout__tab" style="text-transform: none; padding: 0 8px;">Nastavenia<i class="material-icons vacenter">arrow_drop_down</i></a>
-    <a href="#" id="codelist" class="mdl-layout__tab" style="text-transform: none; padding: 0 8px;">Èíselníky<i class="material-icons vacenter">arrow_drop_down</i></a>
-    <a href="#" id="tools" class="mdl-layout__tab" style="text-transform: none; padding: 0 8px;">Nástroje<i class="material-icons vacenter">arrow_drop_down</i></a>
+    <a href="#" id="settings" class="mdl-layout__tab" style="text-transform: none; padding: 0 8px; color: rgba(255,255,255,1);">Nastavenia<i class="material-icons vacenter">arrow_drop_down</i></a>
+<button class="mdl-button mdl-js-button mdl-button--icon " title="Preh¾adávanie" style="margin-top: 16px;">
+  <i class="material-icons">search</i>
+</button>
+<button class="mdl-button mdl-js-button mdl-button--icon " title="Prenosy" style="margin-top: 16px;">
+  <i class="material-icons">hourglass_empty</i>
+</button>
+<button id="tools" class="mdl-button mdl-js-button mdl-button--icon " title="Viac nástrojov" style="margin-top: 16px;">
+  <i class="material-icons">more_vert</i>
+</button>
+
+<!--     <a href="#" id="codelist" class="mdl-layout__tab" style="text-transform: none; padding: 0 0 0 8px; color: rgba(255,255,255,1);">Èíselníky<i class="material-icons vacenter">arrow_drop_down</i></a> -->
   </div> <!-- tabs -->
+
+    <!-- <a href="#" id="tools" class="mdl-layout__tab" style="text-transform: none; padding: 0 8px; color: white;">Nástroje<i class="material-icons vacenter">arrow_drop_down</i></a> -->
+    <!-- <a href="#" id="tools" class="mdl-layout__tab" style="text-transform: none; padding: 0 8px; color: white;"><i class="material-icons vacenter">build</i><i class="material-icons vacenter">arrow_drop_down</i></a> -->
+
+
 </header>
+
+<!-- more subs nav menu -->
+<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="more_subs">
+  <li onclick="Doprava();" class="mdl-menu__item">Doprava</li>
+  <li onclick="Vyroba();" class="mdl-menu__item">Vıroba</li>
+  <li onclick="Analyzy();" class="mdl-menu__item">Analızy</li>
+</ul>
 
 <!-- select firm and period -->
 <?php
@@ -404,7 +497,6 @@ mysql_close();
 mysql_free_result($sql);
 //koniec zmena firmy
      }
-
 ?>
 
 
@@ -444,15 +536,15 @@ if ( $copern == 23 OR $copern == 24 )
 
 
 <!-- nastavenia nav menu -->
-<ul for="settings" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" style="">
+<ul for="settings" class="mdl-menu mdl-menu--bottom-right mdl-js-menu" style="">
   <li class="mdl-menu__item" onclick="PrmUcto();">Parametre úètovníctva</li>
   <li class="mdl-menu__item" onclick="UctOsn();">Úètová osnova</li>
-  <li class="mdl-menu__item" onclick="DphDruh();">Kódy DPH</li>
+  <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="DphDruh();">Kódy DPH</li>
   <li class="mdl-menu__item" onclick="PoklDruh();">Pokladnice</li>
   <li class="mdl-menu__item" onclick="OdberDruh();">Odberate¾ské úèty</li>
   <li class="mdl-menu__item" onclick="DodavDruh();">Dodávate¾ské úèty</li>
-  <li class="mdl-menu__item" onclick="BanDruh();">Bankové úèty</li>
-  <li class="mdl-menu__item" onclick="Ufir();">Údaje o firme</li>
+  <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="BanDruh();">Bankové úèty</li>
+  <!-- <li class="mdl-menu__item" onclick="Ufir();">Údaje o firme</li> -->
   <li class="mdl-menu__item" onclick="NastavAutouct();">Ekorobot nastavenie</li>
   <li class="mdl-menu__item" onclick="PredvolText();">Predvolené texty</li>
 </ul>
@@ -469,71 +561,148 @@ if ( $copern == 23 OR $copern == 24 )
 
 <!-- nastroje nav menu -->
 <ul for="tools" class="mdl-menu mdl-menu--bottom-right mdl-js-menu" style="">
-  <li class="mdl-menu__item" onclick="PrenosPoc();">Prenos poèiatkov</li>
-  <li class="mdl-menu__item" onclick="ZalDat();">Zálohovanie dát</li>
+<!--   <li class="mdl-menu__item" onclick="PrenosPoc();">Prenos poèiatkov</li> -->
   <li class="mdl-menu__item" onclick="Users();">Kontrola úètovania</li>
+  <li class="mdl-menu__item" onclick="ZalDat();">Zálohovanie dát</li>
   <li class="mdl-menu__item" onclick="Kalkulacka();">Kalkulaèka</li>
 </ul>
 
+<!-- month nav button -->
+<button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="position: absolute; top: 50%; left: 16px; z-index: 10; margin-top: -20px;">
+  <i class="material-icons">navigate_before</i>
+</button>
+<button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="position: absolute; top: 50%; right: 16px; z-index: 10; margin-top: -20px;">
+  <i class="material-icons">navigate_next</i>
+</button>
+  <div class="mdl-tooltip" data-mdl-for="month_prev">Prejs na <?php echo $kli_pume; ?></div>
+  <div class="mdl-tooltip" data-mdl-for="month_next">Prejs na <?php echo $kli_dume; ?></div>
+
 <main class="mdl-layout__content mdl-color--blue-grey-50">
-  <div class="mdl-grid" style="">
-    <div class="mdl-cell mdl-cell--3-col clearfix" style="padding: 0 0;">
-      <div class="" style="font-size: 12px;">Vstup dát</div>
-      <div class="mdl-shadow--2dp mdl-color--white " style=" padding: 4px 4px 4px 4px; width: 46%; margin: 8px 2%; float: left;">
-        <div class="material-icons md-18 right full-width" style="">open_in_new</div>
-        <div class="material-icons md-40 mdl-color-text--blue-500 center full-width" style="padding: 8px 0 24px 0; ">account_balance</div>
-        <div class="center " style="font-size: 12px; letter-spacing: 0.02em; line-height: 1.2; ">Odberate¾ské faktúry</div>
+<div class="mdl-grid " style=" " >
+<!-- 1.column -->
+  <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone" style="">
+<!-- vstup dat -->
+    <div class="mdl-color--white mdl-shadow--2dp card-module">
+      <div class="card-module-header">
+        <i class="material-icons">add_to_photos</i>
+        <span class="card-module-title">Vstup dát</span>
       </div>
-      <div class="mdl-shadow--2dp mdl-color--white " style=" padding: 4px 4px 4px 4px; width: 46%; margin: 8px 2%; float: left;">
-        <div class="material-icons md-18 right full-width" style="">open_in_new</div>
-        <div class="material-icons md-40 mdl-color-text--blue-500 center full-width" style="padding: 8px 0 24px 0; ">account_balance</div>
-        <div class="center " style="font-size: 12px; letter-spacing: 0.02em; line-height: 1.2; ">Dodávate¾ské faktúry</div>
+      <ul class="card-module-content">
+        <li onclick="" class="card-item external-link">Odberate¾ské faktúry</i></li>
+        <li onclick="" class="card-item external-link">Dodávate¾ské faktúry</li>
+        <li onclick="" class="card-item external-link">Príjmové pokladnièné doklady</li>
+        <li onclick="" class="card-item external-link">Vıdavkové pokladnièné doklady</li>
+        <li onclick="" class="card-item external-link">Bankové vıpisy</li>
+        <li onclick="" class="card-item external-link">Všeobecné úètovné doklady</li>
+      </ul>
+    </div>
+<!-- ekorobot -->
+    <div class="card-module " style="">
+<!--       <div class="card-module-header">
+        <span class="card-module-title" style="padding-left: 56px;">Ekorobot</span>
+      </div> -->
+      <div class="card-module-content" style="padding-left: 56px;">
+        <img src="obr/robot/robot3.jpg" onclick="UkazLista(ekorobot);" title="Ak máte elanie, kliknite na mòa" class="">
       </div>
-      <div class="mdl-shadow--2dp mdl-color--white " style=" padding: 4px 4px 4px 4px; width: 46%; margin: 8px 2%; float: left;">
-        <div class="material-icons md-18 right full-width" style="">open_in_new</div>
-        <div class="material-icons md-40 mdl-color-text--blue-500 center full-width" style="padding: 8px 0 24px 0; ">account_balance</div>
-        <div class="center " style="font-size: 12px; letter-spacing: 0.02em; line-height: 1.2; ">Príjmové pokladnièné doklady</div>
-      </div>
-      <div class="mdl-shadow--2dp mdl-color--white " style=" padding: 4px 4px 4px 4px; width: 46%; margin: 8px 2%; float: left;">
-        <div class="material-icons md-18 right full-width" style="">open_in_new</div>
-        <div class="material-icons md-40 mdl-color-text--blue-500 center full-width" style="padding: 8px 0 24px 0; ">account_balance</div>
-        <div class="center " style="font-size: 12px; letter-spacing: 0.02em; line-height: 1.2; ">Vıdavkové pokladnièné doklady</div>
-      </div>
-      <div class="mdl-shadow--2dp mdl-color--white " style=" padding: 4px 4px 4px 4px; width: 46%; margin: 8px 2%; clear: both;">
-        <div class="material-icons md-18 right full-width" style="">open_in_new</div>
-        <div class="material-icons md-40 mdl-color-text--blue-500 center full-width" style="padding: 8px 0 24px 0; ">account_balance</div>
-        <div class="center " style="font-size: 12px; letter-spacing: 0.02em; line-height: 1.2; ">Bankové doklady</div>
-      </div>
-      <div class="mdl-shadow--2dp mdl-color--white" style=" padding: 4px 4px 4px 4px; width: 46%; margin: 8px 2%; ">
-        <div class="material-icons md-18 right full-width" style="">open_in_new</div>
-        <div class="material-icons md-40 mdl-color-text--blue-500 center full-width" style="padding: 8px 0 24px 0; ">account_balance</div>
-        <div class="center " style="font-size: 12px; letter-spacing: 0.02em; line-height: 1.2; ">Všeobecné doklady</div>
-      </div>
+    </div>
+  </div> <!-- .mdl-cell -->
 
+<!-- 2.column -->
+  <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone" style="">
+<!-- vystupy -->
+    <div class="mdl-color--white mdl-shadow--2dp card-module">
+      <div class="card-module-header">
+        <i class="material-icons">call_made</i>
+        <span class="card-module-title">Vıstupy</span>
+      </div>
+      <ul class="card-module-content">
+        <li onclick="" class="card-item external-link">Úètovné zostavy</li>
+        <li onclick="" class="card-item external-link">Štatistické vıkazy</li>
+        <li onclick="" class="card-item external-link">Daòové formuláre</li>
+      </ul>
+    </div>
+<!-- dph -->
+    <div class="mdl-color--white mdl-shadow--2dp card-module">
+      <div onclick="" class="card-module-header external-link">
+        <i class="material-icons">playlist_add</i>
+        <span class="card-module-title">Daò z pridanej hodnoty</span>
+      </div>
+    </div>
+<!-- data podsystemy -->
+    <div class="mdl-color--white mdl-shadow--2dp card-module">
+      <div onclick="" class="card-module-header external-link">
+        <i class="material-icons">storage</i>
+        <span class="card-module-title">Dáta z podsystémov</span>
+      </div>
+      <ul class="card-module-content">
+        <li onclick="" class="card-item external-link">Mzdy a personalistika</li>
+        <li onclick="" class="card-item external-link">Sklad</li>
+        <li onclick="" class="card-item external-link">Majetok</li>
+      </ul>
+    </div>
+<!-- cudzia mena -->
+    <div class="mdl-color--white mdl-shadow--2dp card-module">
+      <div onclick="" class="card-module-header external-link">
+        <i class="material-icons">playlist_add</i>
+        <span class="card-module-title">Cudzia mena</span>
+      </div>
+    </div>
+  </div> <!-- mdl-cell -->
 
+<!-- 3.column -->
+  <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone" style="">
+<!-- saldokonto -->
+    <div class="mdl-color--white mdl-shadow--2dp card-module">
+      <div onclick="" class="card-module-header external-link">
+        <i class="material-icons">thumbs_up_down</i>
+        <span class="card-module-title">Saldokonto</span>
+      </div>
+      <ul class="card-module-content">
+        <li onclick="" class="card-item external-link">Upomienky</li>
+        <li onclick="" class="card-item external-link">Vzájomné zápoèty</li>
+        <li onclick="" class="card-item external-link">Faktoring</li>
+        <li onclick="" class="card-item external-link">Príkazy na úhradu</li>
+      </ul>
+    </div>
+<!-- ciselniky -->
+    <div class="mdl-color--white mdl-shadow--2dp card-module">
+      <div onclick="" class="card-module-header external-link">
+        <i class="material-icons">home</i>
+        <span class="card-module-title">Firma XYZ</span>
+      </div>
+      <ul class="card-module-content">
+        <li class="card-item clearfix" style="height: 48px; line-height: 1.4; padding-top: 8px;">
+          <div class="toleft" style="min-width: 88px;">Firma ID<br><strong><?php echo $kli_vxcf; ?></strong></div>
+          <div>Firma obdobie<br><strong><?php echo $kli_vrok; ?></strong></div>
+        </li>
+        <li onclick="" class="card-item external-link">Èíselník IÈO</li>
+        <li onclick="" class="card-item external-link">Strediská, Zákazky &hellip;</li>
 
-    </div> <!-- .mdl-cell -->
-
-    <div class="mdl-cell mdl-cell--3-col" style="padding: 0 32px;">
-      <div style="font-size: 12px;">Mesaèné spracovanie</div>
+      </ul>
     </div>
 
-    <div class="mdl-cell mdl-cell--3-col" style="padding: 0 16px;">
-      <div style="font-size: 12px;">Informácie</div>
-    </div>
+<!--     <div class="mdl-shadow--2dp mdl-color--white module" style="padding-bottom: 12px; padding-top: 8px;">
+      <div class="card-title" style="font-size: 18px; line-height: 24px; padding-left: 16px; padding-top: 16px; padding-bottom: 8px;">
+        <i class="material-icons vacenter" style="">playlist_add</i><span style="padding-left: 16px; ">Nástroje</span>
+      </div>
+      <a href="#" style="line-height: 32px; width: 100%; font-size: 13px; font-weight: normal; color: grey; padding-left: 56px; letter-spacing: 0.02em;">Preh¾adávanie<i class="material-icons md-18 vacenter mdl-color-text--blue-grey-200" style="">open_in_new</i></a>
+      <a href="#" style="line-height: 32px; width: 100%; font-size: 13px; font-weight: normal; color: grey; padding-left: 56px; letter-spacing: 0.02em;">Kontrola</a>
+      <a href="#" style="line-height: 32px; width: 100%; font-size: 13px; font-weight: normal; color: grey; padding-left: 56px; letter-spacing: 0.02em;">Prenos</a>
+      <a href="#" style="line-height: 32px; width: 100%; font-size: 13px; font-weight: normal; color: grey; padding-left: 56px; letter-spacing: 0.02em;">Záloha</a>
+      <a href="#" style="line-height: 32px; width: 100%; font-size: 13px; font-weight: normal; color: grey; padding-left: 56px; letter-spacing: 0.02em;">Kalkulaèka</a>
+    </div> -->
+  </div> <!-- .mdl-cell -->
+</div> <!-- .mdl-grid -->
 
-    <div class="mdl-cell mdl-cell--3-col" style="padding: 0 16px;">
-      <div style="font-size: 12px;">EkoRobot</div>
-    </div>
-<?php $akyrobot = include("akyrobot.php"); //dopyt, prerobi, css sprite
- ?>
-
-
-    <div class="mdl-cell mdl-cell--2-col ">
 
 
 
-    </div>
+
+
+
+
+
+
 
 
 
