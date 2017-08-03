@@ -856,7 +856,7 @@ if( $typ == 'HTML' )
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobrats'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsx'.$kli_uzid;
-if( $analyzy == 0 ) { $vysledok = mysql_query("$sqlt"); }
+if( $analyzy == 10 ) { $vysledok = mysql_query("$sqlt"); }
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsy'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 
