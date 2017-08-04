@@ -197,6 +197,18 @@ $kli_pume=$kli_pmes.".".$kli_vrok;
 $kli_dume=$kli_dmes.".".$kli_vrok;
 $odkaz="../ucto_md.php?copern=1";
 $odkaz64=urlencode($odkaz);
+
+
+//udaje z ufir
+$jemenpid=0;
+$sqlpoktt = "SELECT * FROM F$kli_vxcf"."_ufir ";
+$sqlpok = mysql_query("$sqlpoktt");
+  if (@$zaznam=mysql_data_seek($sqlpok,0))
+  {
+  $riadokpok=mysql_fetch_object($sqlpok);
+  $fir_fnaz=$riadokpok->fnaz;
+  }
+//echo $fir_fnaz;
 ?>
 <head>
   <meta charset="cp1250">
