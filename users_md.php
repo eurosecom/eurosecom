@@ -190,7 +190,7 @@ if( $nova == 1 )
 $upravttt = "INSERT INTO klienti ( uziv_meno,uziv_heslo,priezvisko,meno,all_prav,uct_prav,mzd_prav,skl_prav,him_prav,dop_prav, ".
 " vyr_prav,fak_prav,ana_prav,txt1,cis1 ) VALUES ('$h_uzm', '$h_uzh', '$h_prie', '$h_meno', '$h_all', '$h_uct', '$h_mzd', '$h_skl', '$h_him', ".
 " '$h_dop', '$h_vyr', '$h_fak', '$h_ana', '$h_txt1', '$cis1') ";
-$upravene = mysql_query("$upravttt"); 
+$upravene = mysql_query("$upravttt");
 //echo $upravttt;
 
 $cislo_id=0;
@@ -565,7 +565,7 @@ if ( $uprav != 0 ) { echo "˙prava # $cislo_id"; }
     <div class="mdl-textfield mdl-js-textfield mdl-color--light-blue-500 search-box">
       <button id="searchbtn" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--white" style="bottom: 4px; left: 8px;"><i class="material-icons">search</i></button>
       <input type="text" id="cohladat" name="cohladat" value="<?php echo $cohladat; ?>" class="mdl-textfield__input mdl-color-text--white search-input" style="border:0; font-size: 14px; height: 32px; width: 100%;">
-      <label for="cohladat" class="mdl-textfield__label mdl-color-text--white" style="font-size: 14px; top: 5px; left: 48px; height: 32px; line-height: 32px; width: 204px;">Hæadaù v ËÌselnÌku</label>
+      <label for="cohladat" class="mdl-textfield__label mdl-color-text--white" style="font-size: 14px; top: 5px; left: 48px; height: 32px; line-height: 32px; width: 204px;">Zadajte uûÌvateæa</label>
       <button id="resetsearchbtn" onclick="document.formhladaj.cohladat.value='';" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--white search-reset" style="bottom: 4px; right: 8px;"><i class="material-icons">close</i></button>
     </div>
 </form>
@@ -949,7 +949,7 @@ if ( $uprav == 4 )
      {
 ?>
     <section class="row-form-content mdl-grid mdl-grid--no-spacing">
-    <div class="mdl-cell mdl-cell--7-col ukaz">
+    <div class="mdl-cell mdl-cell--7-col">
 <?php
 //tlac grid
 if ( $jegridid == 1 )
@@ -1274,19 +1274,7 @@ $is = $is + 1;
 </div>
 <?php                   } ?>
 
-<footer class="mdl-mini-footer mdl-color--blue-grey-50 container tocenter" style="padding: 32px 0;">
-  <div class="mdl-mini-footer__left-section">
-    <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
-    <ul class="mdl-mini-footer__link-list">
-      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-500">Novinky</a></li>
-    </ul>
-  </div>
-  <div class="mdl-mini-footer__right-section">
-    <ul class="mdl-mini-footer__link-list">
-      <li><a href="#" onclick="Edcom();" title="EuroSecom powered by EDcom" class="mdl-color-text--light-blue-500">EDcom</a></li>
-    </ul>
-  </div>
-</footer>
+
 </main>
 
 <!-- header nav menu -->
@@ -1604,7 +1592,7 @@ function delGrid()
 
 function viewFirms()
 {
-  window.open('firms_pdf.php?copern=10', '_blank');
+  window.open('firms_md.php?copern=11', '_blank');
 }
 
   function Edcom()
