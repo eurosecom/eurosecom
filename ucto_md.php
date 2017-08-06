@@ -198,16 +198,15 @@ $kli_dume=$kli_dmes.".".$kli_vrok;
 $odkaz="../ucto_md.php?copern=1";
 $odkaz64=urlencode($odkaz);
 
-
 //udaje z ufir
 $jemenpid=0;
 $sqlpoktt = "SELECT * FROM F$kli_vxcf"."_ufir ";
 $sqlpok = mysql_query("$sqlpoktt");
-  if (@$zaznam=mysql_data_seek($sqlpok,0))
-  {
-  $riadokpok=mysql_fetch_object($sqlpok);
-  $fir_fnaz=$riadokpok->fnaz;
-  }
+if (@$zaznam=mysql_data_seek($sqlpok,0))
+{
+$riadokpok=mysql_fetch_object($sqlpok);
+$fir_fnaz=$riadokpok->fnaz;
+}
 //echo $fir_fnaz;
 ?>
 <head>
@@ -220,22 +219,17 @@ $sqlpok = mysql_query("$sqlpoktt");
   <title>⁄ËtovnÌctvo | EuroSecom</title>
 <style>
 .mdl-grid {
-  max-width: 1200px;
+  max-width: 1440px;
 }
-.mdl-cell {
-  min-width: 224px;
-  max-width: 368px;
-  /*padding: 4px;*/
-}
+
 .card-module {
-  margin-bottom: 16px;
-  /*min-width: 224px;*/
+  margin: 16px 0;
   min-height: 56px;
   padding: 10px 0;
 }
 .card-module-header {
   height: 36px;
-  padding: 6px 8px 6px 0;
+  padding: 6px 9px 6px 0;
   position: relative;
   /*background-color: lightgrey;*/
 }
@@ -249,9 +243,14 @@ $sqlpok = mysql_query("$sqlpoktt");
   font-size: 19px;
   color: rgba(0,0,0,.87);
   float: left;
+  /*width: 100%;*/
   height: 24px;
   padding-top: 3px;
+  /*padding-right: 24px;*/
   margin-left: -1px;
+overflow: hidden; white-space: nowrap;
+text-overflow: ellipsis;
+width: calc(100% - 72px);
   /*background-color: red;*/
 }
 .card-module-content .card-item {
@@ -259,10 +258,14 @@ $sqlpok = mysql_query("$sqlpoktt");
   padding-left: 56px;
   height: 36px;
   padding-top: 12px;
+  padding-right: 24px;
   /*line-height: 36px;*/
   letter-spacing: 0.02em;
   position: relative;
   /*color: #039BE5;*/
+overflow: hidden; white-space: nowrap;
+text-overflow: ellipsis;
+
 
 }
 .card-module *[onclick]:hover {
@@ -286,35 +289,72 @@ $sqlpok = mysql_query("$sqlpoktt");
 }
 
 
-/*.card-module-header[onclick]:after {
-  top: 9px;
+.selected { /*dopyt, lepöia class name*/
+  font-weight: 500;
 }
-.card-module-content .card-item[onclick]:after {
-  top: 9px;
 
-}*/
-
+/*font-size: 13px; max-width: 768px; min-width: 512px; overflow: hidden;
+position: relative; top: 10px; left: 16px; z-index: 10;*/
 
 
 
 
 
+
+
+
+
+.modal-cover {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(33,33,33); /* Fallback color */
+  background-color: rgba(33,33,33,0.45);
+}
+.modal {
+  background-color: #fff;
+  overflow: auto;
+  /*max-width: 768px;*/
+  width: 56%;
+  height: 480px;
+  /*padding: 24px;*/
+
+  position: absolute;
+  top: 50%;
+  margin-top: -260px;
+
+}
+.modal-header {
+  /*height: 40px;*/
+}
+.modal-title {
+  font-size: 20px;
+  letter-spacing: 0.02em;
+}
 
 
 </style>
 </head>
 <body> <!-- dopyt, rieöiù cez .js -->
+
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
 <header class="mdl-layout__header ui-header ">
   <div class="mdl-layout__header-row mdl-color--light-blue-700" style="height: 48px;">
     <span class="mdl-layout-title mdl-color-text--yellow-A100" style="font-size: 16px;">EuroSecom</span>&nbsp;&nbsp;
+
+
+
+
 <?php
 //first login new user
 if ( $vyb_xcf == '' ) { $copern=22; } //dopyt, preveriù
 ?>
 
 
-    <button type="button" id="select_firm" onclick="window.open('ucto_md.php?copern=22', '_self');" class="mdl-button mdl-js-button mdl-color--light-blue-700" style="color: rgba(255,255,255,.6); letter-spacing: 0.02em;">
+    <button type="button" id="select_firm" onclick="selectFirm();" class="mdl-button mdl-js-button " style="color: rgba(255,255,255,.6); letter-spacing: 0.02em;">
       <strong class="mdl-color-text--white" style=""><?php echo $vyb_xcf; ?></strong>&nbsp;
       <span class="mdl-color-text--white" style="text-transform: none; font-weight: 400;"><?php echo $vyb_naz; ?></span>
       <i class="material-icons vacenter">arrow_drop_down</i>
@@ -328,10 +368,11 @@ if ( $vyb_xcf == '' ) { $copern=22; } //dopyt, preveriù
 
 
     <div class="mdl-layout-spacer"></div>
-    <button type="button" id="select_month" onclick="window.open('ucto_md.php?copern=24', '_self');" class="mdl-button mdl-js-button " style="color: rgba(255,255,255,.6); letter-spacing: 0.02em;">
+    <button type="button" id="select_month" onclick="selectPeriod();" class="mdl-button mdl-js-button " style="color: rgba(255,255,255,.6); letter-spacing: 0.02em;">
       <span class="mdl-color-text--white" style="font-weight: 400;"><?php echo $vyb_ume; ?></span>
       <i class="material-icons vacenter">arrow_drop_down</i>
     </button>
+
     <button type="button" id="user" class="mdl-button mdl-js-button mdl-button--icon mdl-color--indigo-400 avatar" style="color: rgba(255,255,255,0.8);"><?php echo $kli_uzid; ?></button>&nbsp;&nbsp;
     <span class="" style="color: rgba(255,255,255,0.8);"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
   </div>
@@ -372,14 +413,12 @@ if ( $vyb_duj == 9 ) { echo "jednoduchÈ"; }
 
 </header>
 
-<!-- more subs nav menu -->
-<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="more_subs">
-  <li onclick="Doprava();" class="mdl-menu__item">Doprava</li>
-  <li onclick="Vyroba();" class="mdl-menu__item">V˝roba</li>
-  <li onclick="Analyzy();" class="mdl-menu__item">Anal˝zy</li>
-</ul>
-
 <!-- select firm and period -->
+<?php
+if ( $copern == 22 OR $copern == 23 OR $copern == 24 )
+     {
+?>
+<div class="modal-cover">
 <?php
 if ( $copern == 22 )
      {
@@ -450,59 +489,53 @@ $sql = mysql_query("SELECT xcf,naz FROM $mysqldbfir.fir WHERE ( $akefirmy ) AND 
 //celkom poloziek
 //$cpol = mysql_num_rows($sql);
 ?>
-<FORM name="fir1" method="post" action="ucto_md.php?copern=23">
-<div class="mdl-color--grey-50" style="box-shadow: 0 7px 8px -4px rgba(0,0,0,0.2), 0 13px 19px 2px rgba(0,0,0,0.14), 0 5px 24px 4px rgba(0,0,0,0.12); color: rgba(0,0,0,0.87); font-size: 13px; max-width: 768px; min-width: 512px; opacity: 1; position: relative; overflow: auto;  ">
-  <div class="modal-title " style="font-size: 20px; letter-spacing: 0.02em; height: 24px; margin: 12px 24px 12px 24px;">V˝ber firmy</div>
-  <div class="modal-content" style="padding: 0 24px 24px 24px;">
-    <div>
-      <table style="width: 100%; " style="overflow: auto;">
-        <tr style="height: 24px;">
-          <th class="right" style="width: 10%;">»Ìslo</th>
-          <th style="width: 90%;">N·zov</th>
-        </tr>
-<style>
-.selected {
-  font-weight: 500;
-}
-</style>
+  <div class="mdl-dialog modal" style="">
+    <div class="mdl-dialog__title modal-title ">V˝ber firmy</div>
+    <div class="mdl-dialog__content modal-content" style="overflow: auto;">
+    <table class=" data-table" style="width: 100%; ">
+    <tr style="height: 24px;">
+      <th class="right" style="width: 10%; ">»Ìslo</th>
+      <th class="left" style="width: 75%; ">N·zov</th>
+      <th style="width: 15%; ">Obdobie</th>
+    </tr>
+    <tbody style="overflow: auto; height: 40px;">
 <?php
 while($zaznam=mysql_fetch_array($sql)):
 if ( $zaznam["xcf"] == $vyb_xcf ) { $class = 'selected'; }
 ?>
-        <tr class="<?php echo $class; ?>" style="font-size: 13px; height: 32px; padding: 3px 0; border-top: 1px solid lightgrey; border-bottom: 1px solid lightgrey;">
-          <td class="right"><?php echo $zaznam["xcf"]; ?></td>
-          <td>&nbsp;<?php echo $zaznam["naz"]; ?></td>
-        </tr>
+
+    <tr class="<?php echo $class; ?>" style="font-size: 13px; height: 32px; padding: 3px 0; border-top: 1px solid lightgrey; border-bottom: 1px solid lightgrey;">
+      <td class="right"><?php echo $zaznam["xcf"]; ?></td>
+      <td>&nbsp;<?php echo $zaznam["naz"]; ?></td>
+      <td>&nbsp;</td>
+    </tr>
 <?php endwhile; ?>
-      </table>
+    </tbody>
+    </table>
     </div>
-  </div>
-  <div class="modal-action" style="height: 48px;">
-    <INPUT type="hidden" id="umes" name="umes" value="<?php echo $umes1; ?>">
-    <button id="firv" name="firv" class="mdl-button">Vybraù</button>
-  </div>
-</div>
-</FORM>
+  </div> <!-- .modal -->
+<!-- dopyt, z pÙvodnÈho som nepouûil:
+$umes1="1.".$zaznam["rok"]
+<INPUT type="hidden" id="umes" name="umes" value="<?php echo $umes1; ?>">
+ -->
 
 
 
-<FORM name="fir1" method="post" action="ucto_md.php?copern=23">
-<select name="firs" id="firs" size="10"> <!-- dopyt, nahradiù size -->
+
+<!-- <FORM name="fir1" method="post" action="ucto_md.php?copern=23" class="modal-content" style="">
+<select name="firs" id="firs" size="10" style=" ">
 <?php while($zaznam=mysql_fetch_array($sql)): ?>
  <option value="<?php echo $zaznam["xcf"]; ?>"
 <?php
 if ( $zaznam["xcf"] == $vyb_xcf ) echo " selected='selected'";
-$umes1="1.".$zaznam["rok"] //dopyt, neviem kde zaradiù
+$umes1="1.".$zaznam["rok"]
 ?>><?php echo $zaznam["xcf"].$zaznam["naz"]; ?>
  </option>
 <?php endwhile; ?>
 </select>
 <INPUT type="hidden" id="umes" name="umes" value="<?php echo $umes1; ?>">
 <button id="firv" name="firv" >Vybraù</button>
-
-</FORM>
-
-
+</FORM> -->
 
 <?php
 mysql_close();
@@ -513,14 +546,34 @@ mysql_free_result($sql);
 
 
 
-
-
 <?php
 //zmena obdobia
 if ( $copern == 23 OR $copern == 24 )
      {
 ?>
-<FORM name="fir1" method="post" action="ucto_md.php?copern=25">
+  <div class="modal" style="">
+<!-- dopyt dorobiù nieËo na spÙsob : -->
+<?php
+//while($zaznam=mysql_fetch_array($sql)):
+//if ( $zaznam["xcf"] == $vyb_xcf ) { $class = 'selected'; }
+?>
+<!-- aby som mohol aktu·lnemu mesiacu urËiù class -->
+
+<ul>
+  <li>01.<?php echo $vyb_rok; ?></li>
+  <li>02.<?php echo $vyb_rok; ?></li>
+  <li>03.<?php echo $vyb_rok; ?></li>
+  <li>04.<?php echo $vyb_rok; ?></li>
+  <li>05.<?php echo $vyb_rok; ?></li>
+  <li>06.<?php echo $vyb_rok; ?></li>
+  <li>07.<?php echo $vyb_rok; ?></li>
+  <li>08.<?php echo $vyb_rok; ?></li>
+  <li>09.<?php echo $vyb_rok; ?></li>
+  <li>10.<?php echo $vyb_rok; ?></li>
+  <li>11.<?php echo $vyb_rok; ?></li>
+  <li>12.<?php echo $vyb_rok; ?></li>
+</ul>
+<!-- <FORM name="fir1" method="post" action="ucto_md.php?copern=25">
 <select size="12" name="umes" id="umes">
  <option value="01.<?php echo $vyb_rok; ?>" selected="selected">01.<?php echo $vyb_rok; ?></option>
  <option value="02.<?php echo $vyb_rok; ?>">02.<?php echo $vyb_rok; ?></option>
@@ -535,17 +588,28 @@ if ( $copern == 23 OR $copern == 24 )
  <option value="11.<?php echo $vyb_rok; ?>">11.<?php echo $vyb_rok; ?></option>
  <option value="12.<?php echo $vyb_rok; ?>">12.<?php echo $vyb_rok; ?></option>
 </select>
-<INPUT type="hidden" id="firs" name="firs" value="<?php echo $vyb_xcf; ?>">
-<button type="submit" id="umev" name="umev">Vybraù</button>
-</FORM>
+-->
+<!-- <INPUT type="hidden" id="firs" name="firs" value="<?php echo $vyb_xcf; ?>"> dopyt, neviem kam -->
+<!-- <button type="submit" id="umev" name="umev">Vybraù</button> -->
+<!-- </FORM> -->
+
+  </div> <!-- .modal -->
 <?php
     }
 //koniec zmena obdobia
 ?>
+</div> <!-- .modal-cover -->
+<?php
+//$copern=22,23,24
+}
+?>
 
-
-
-
+<!-- more subs nav menu -->
+<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="more_subs">
+  <li onclick="Doprava();" class="mdl-menu__item">Doprava</li>
+  <li onclick="Vyroba();" class="mdl-menu__item">V˝roba</li>
+  <li onclick="Analyzy();" class="mdl-menu__item">Anal˝zy</li>
+</ul>
 
 <!-- nastavenia nav menu -->
 <ul for="settings" class="mdl-menu mdl-menu--bottom-right mdl-js-menu" style="">
@@ -588,6 +652,10 @@ if ( $copern == 23 OR $copern == 24 )
 </button>
   <div class="mdl-tooltip" data-mdl-for="month_prev">Prejsù na <?php echo $kli_pume; ?></div>
   <div class="mdl-tooltip" data-mdl-for="month_next">Prejsù na <?php echo $kli_dume; ?></div>
+
+
+
+
 
 <main class="mdl-layout__content mdl-color--blue-grey-50">
 <div class="mdl-grid " style=" " >
@@ -680,7 +748,7 @@ if ( $copern == 23 OR $copern == 24 )
     <div class="mdl-color--white mdl-shadow--2dp card-module">
       <div onclick="" class="card-module-header external-link">
         <i class="material-icons">home</i>
-        <span class="card-module-title">Firma XYZ</span>
+        <span class="card-module-title"><?php echo $fir_fnaz; ?></span>
       </div>
       <ul class="card-module-content">
         <li class="card-item clearfix" style="height: 48px; line-height: 1.4; padding-top: 8px;">
@@ -725,9 +793,8 @@ if ( $copern == 23 OR $copern == 24 )
 
 
 
-  </div> <!-- .mdl-grid -->
-</main>
 
+</main>
 
 
 
@@ -762,6 +829,7 @@ zobrazene menu
 
 </div> <!-- .mdl-layout -->
 
+
 <?php
 //$robot=1;
 //$zmenume=1; $odkaz="../ucto_md.php?copern=1";
@@ -771,6 +839,8 @@ zobrazene menu
 //celkovy koniec dokumentu
        } while (false);
 ?>
+
+
 
 
 
@@ -1043,10 +1113,19 @@ if ( $vyb_rok <= 2012 ) { $rokdph=2012; }
 
   function Kalkulacka()
   {
-   window.open('../ucto/paskovacka.php?copern=5', '_blank');
+    window.open('../ucto/paskovacka.php?copern=5', '_blank');
   }
 
 
+
+  function selectFirm()
+  {
+    window.open('ucto_md.php?copern=22', '_self');
+  }
+  function selectPeriod()
+  {
+    window.open('ucto_md.php?copern=24', '_self');
+  }
 
 
 
