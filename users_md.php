@@ -161,6 +161,7 @@ $kopkli=1;
 //koniec uprava
 
 //uprava
+$bolanova=0;
 if ( $copern == 8 AND $uprav == 1 )
   {
 $h_id = $_REQUEST['h_id'];
@@ -182,6 +183,29 @@ $cis1 = $_REQUEST['cis1'];
 $cislo_id = $_REQUEST['cislo_id'];
 
 if( $h_all > 10000 AND $kli_uzall < 100000 ) { $h_all=10000; }
+
+if( $nova == 1 )
+    {
+
+$upravttt = "INSERT INTO klienti ( uziv_meno,uziv_heslo,priezvisko,meno,all_prav,uct_prav,mzd_prav,skl_prav,him_prav,dop_prav, ".
+" vyr_prav,fak_prav,ana_prav,txt1,cis1 ) VALUES ('$h_uzm', '$h_uzh', '$h_prie', '$h_meno', '$h_all', '$h_uct', '$h_mzd', '$h_skl', '$h_him', ".
+" '$h_dop', '$h_vyr', '$h_fak', '$h_ana', '$h_txt1', '$cis1') ";
+$upravene = mysql_query("$upravttt"); 
+//echo $upravttt;
+
+$cislo_id=0;
+$sqlttt = "SELECT * FROM klienti WHERE id_klienta > 0 ORDER BY id_klienta DESC ";
+$sqldok = mysql_query("$sqlttt");
+ if (@$zaznam=mysql_data_seek($sqldok,0))
+ {
+ $riaddok=mysql_fetch_object($sqldok);
+ $cislo_id=1*$riaddok->id_klienta;
+ }
+
+$bolanova=1;
+$nova=0;
+    }
+
 
 $upravttt = "UPDATE klienti SET uziv_meno='$h_uzm', uziv_heslo='$h_uzh', priezvisko='$h_prie', meno='$h_meno',
  all_prav='$h_all', uct_prav='$h_uct', mzd_prav='$h_mzd', skl_prav='$h_skl', him_prav='$h_him', dop_prav='$h_dop',
@@ -573,6 +597,12 @@ if ( $hladanie == 1 )
 {
 $sqltt = "SELECT * FROM klienti WHERE all_prav < $min_uzall AND ( priezvisko LIKE '%$cohladat%' OR meno LIKE '%$cohladat%' ) ORDER BY id_klienta";
 }
+if ( $bolanova == 1 )
+{
+$sqltt = "SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY id_klienta DESC";
+}
+
+
 $sql = mysql_query("$sqltt");
 //prazdny zoznam
 //$sql = mysql_query("SELECT * FROM klienti WHERE all_prav < 1 ORDER BY id_klienta ");
@@ -621,7 +651,7 @@ $riadok=mysql_fetch_object($sql);
 <?php if ( ( $uprav != 0 AND $riadok->id_klienta == $cislo_id ) OR ( $nova == 1 AND $i == 0 ) ) { ?>
   <tr class="row-form">
     <td colspan="9" style="padding: 0;">
-<form method="post" action="users_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_id=<?php echo $cislo_id; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>" id="formv" name="formv">
+<form method="post" action="users_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_id=<?php echo $cislo_id; ?>&nova=<?php echo $nova; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>" id="formv" name="formv">
     <div class="mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
 <!-- left column -->
     <div class="mdl-cell mdl-cell--2-col mdl-color--grey-200" style="padding: 8px 0;">
@@ -1368,7 +1398,7 @@ for ( var i = 0; i < buttons.length; i++ ) {
 
   document.formhladaj.cohladat.disabled = true;
 
-<?php if ( $uprav == 1 ) { ?> document.getElementById('nav_user').className += ' active'; <?php } ?>
+<?php if ( $uprav == 1 ) { ?> document.getElementById('nav_user').className += ' active'; <?php } ?>//tento riadok ak nova=1 odstavi javascript pod riadkom dole
 <?php if ( $uprav == 2 ) { ?> document.getElementById('nav_firm').className += ' active'; <?php } ?>
 <?php if ( $uprav == 3 ) { ?> document.getElementById('nav_script').className += ' active'; <?php } ?>
 <?php if ( $uprav == 4 ) { ?> document.getElementById('nav_grid').className += ' active'; <?php } ?>
@@ -1588,7 +1618,7 @@ function viewFirms()
 
   function novyId()
   {
-    window.open('users_md.php?copern=1&strana=1&hladanie=0&cohladat=&nova=1', '_self');
+    window.open('users_md.php?copern=1&strana=1&hladanie=0&cohladat=&nova=1&uprav=1', '_self');
   }
 
 
