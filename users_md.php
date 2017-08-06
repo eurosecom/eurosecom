@@ -557,7 +557,7 @@ $sqlpok = mysql_query("$sqlpoktt");
     <span class="mdl-layout-title mdl-color-text--yellow-A100">
 <?php
 if ( $nova == 1 ) { echo "nový #"; }
-if ( $uprav != 0 ) { echo "úprava # $cislo_id"; }
+if ( $uprav != 0 AND $nova == 0 ) { echo "úprava # $cislo_id"; }
 ?>
     </span>
     <div class="mdl-layout-spacer"></div>
@@ -656,7 +656,7 @@ $riadok=mysql_fetch_object($sql);
 <!-- left column -->
     <div class="mdl-cell mdl-cell--2-col mdl-color--grey-200" style="padding: 8px 0;">
       <nav class="mdl-navigation">
-<?php if( $nova == 0 ){ ?>
+<?php if( $nova >= 0 ){ ?>
         <a id="nav_user" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,1);" class="mdl-navigation__link">
           <span class="mdl-color--white avatar" style="border: 1px solid #039BE5; color: rgba(0,0,0,.87);"><?php echo $riadok->id_klienta; ?></span>&nbsp;
           <strong><?php echo "$riadok->meno $riadok->priezvisko"; ?></strong>
