@@ -207,7 +207,7 @@ if (@$zaznam=mysql_data_seek($sqlpok,0))
 $riadokpok=mysql_fetch_object($sqlpok);
 $fir_fnaz=$riadokpok->fnaz;
 }
-//echo $fir_fnaz;
+
 ?>
 <head>
   <meta charset="cp1250">
@@ -226,6 +226,8 @@ $fir_fnaz=$riadokpok->fnaz;
   margin: 16px 0;
   min-height: 56px;
   padding: 10px 0;
+  background-color: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 .card-module-header {
   height: 36px;
@@ -241,7 +243,7 @@ $fir_fnaz=$riadokpok->fnaz;
 }
 .card-module-title {
   font-size: 19px;
-  color: rgba(0,0,0,.87);
+  /*color: rgba(0,0,0,.87);*/
   float: left;
   /*width: 100%;*/
   height: 24px;
@@ -253,6 +255,9 @@ text-overflow: ellipsis;
 width: calc(100% - 72px);
   /*background-color: red;*/
 }
+.card-module-content {
+  position: relative;
+}
 .card-module-content .card-item {
   font-size: 13px;
   padding-left: 56px;
@@ -263,8 +268,9 @@ width: calc(100% - 72px);
   letter-spacing: 0.02em;
   position: relative;
   /*color: #039BE5;*/
-overflow: hidden; white-space: nowrap;
-text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
 
 }
@@ -287,15 +293,26 @@ text-overflow: ellipsis;
 .card-module strong {
   font-weight: 500;
 }
-
+.mdl-menu__item.external-link:after {
+  top: 0;
+}
 
 .selected { /*dopyt, lepšia class name*/
   font-weight: 500;
 }
 
-/*font-size: 13px; max-width: 768px; min-width: 512px; overflow: hidden;
-position: relative; top: 10px; left: 16px; z-index: 10;*/
+.card-module.noactive {
+  background-color: transparent;
+  box-shadow: none;
+  color: rgba(0,0,0,.54);
+}
 
+.card-module .noactive, .card-module.noactive {
+  color: rgba(0,0,0,.54);
+  pointer-events: none;
+}
+
+.mdl-menu__item[disabled], .mdl-menu__item[data-mdl-disabled]
 
 
 
@@ -366,15 +383,17 @@ if ( $vyb_xcf == '' ) { $copern=22; } //dopyt, preveriť
 
 
 
-
-    <div class="mdl-layout-spacer"></div>
     <button type="button" id="select_month" onclick="selectPeriod();" class="mdl-button mdl-js-button " style="color: rgba(255,255,255,.6); letter-spacing: 0.02em;">
       <span class="mdl-color-text--white" style="font-weight: 400;"><?php echo $vyb_ume; ?></span>
       <i class="material-icons vacenter">arrow_drop_down</i>
     </button>
-
-    <button type="button" id="user" class="mdl-button mdl-js-button mdl-button--icon mdl-color--indigo-400 avatar" style="color: rgba(255,255,255,0.8);"><?php echo $kli_uzid; ?></button>&nbsp;&nbsp;
-    <span class="" style="color: rgba(255,255,255,0.8);"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
+    <div class="mdl-layout-spacer"></div>
+    <button id="news" onclick="News();" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+      <i class="material-icons">today</i>
+    </button>
+      <div data-mdl-for="news" class="mdl-tooltip">Novinky v programe</div>
+    <button type="button" id="user" class="mdl-button mdl-js-button mdl-button--icon mdl-color--indigo-400 mdl-color-text--white avatar"><?php echo $kli_uzid; ?></button>&nbsp;&nbsp;
+    <span class="mdl-color-text--white"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
   </div>
 <!-- Tabs -->
   <div class="mdl-layout__tab-bar " style="background-color: ;  overflow: auto;">
@@ -393,25 +412,44 @@ if ( $vyb_duj == 9 ) { echo "jednoduché"; }
     <a href="#" onclick="Vyroba();" class="mdl-layout__tab mdl-layout--large-screen-only">Vyroba</a>
     <a href="#" onclick="Analyzy();" class="mdl-layout__tab mdl-layout--large-screen-only">Analýzy</a>
     <div class="mdl-layout-spacer"></div>
-    <a href="#" id="settings" class="mdl-layout__tab" style="text-transform: none; padding: 0 8px; color: rgba(255,255,255,1);">Nastavenia<i class="material-icons vacenter">arrow_drop_down</i></a>
-<button class="mdl-button mdl-js-button mdl-button--icon " title="Prehľadávanie" style="margin-top: 16px;">
-  <i class="material-icons">search</i>
-</button>
-<button class="mdl-button mdl-js-button mdl-button--icon " title="Prenosy" style="margin-top: 16px;">
-  <i class="material-icons">hourglass_empty</i>
-</button>
-<button id="tools" class="mdl-button mdl-js-button mdl-button--icon " title="Viac nástrojov" style="margin-top: 16px;">
-  <i class="material-icons">more_vert</i>
-</button>
+<!-- tools -->
+    <button id="searching" onclick="Searching();" class="mdl-button mdl-js-button mdl-button--icon " title="Prehľadávanie" style="margin-top: 16px;">
+      <i class="material-icons">search</i>
+    </button>
+    <button id="transfer" onclick="Transfer();" class="mdl-button mdl-js-button mdl-button--icon " title="Prenosy" style="margin-top: 16px; margin-right: 16px;">
+      <i class="material-icons">hourglass_empty</i>
+    </button>
+    <div style="position:fixed; right: 16px; margin-left: 24px; ">
+      <button id="more_tools" class="mdl-button mdl-js-button mdl-button--icon " title="Viac nástrojov" style="margin-top: 16px; ">
+        <i class="material-icons">more_vert</i>
+      </button>
+      <ul for="more_tools" class="mdl-menu mdl-menu--bottom-right mdl-js-menu" style=" ">
+      <!--   <li class="mdl-menu__item" onclick="PrenosPoc();">Prenos počiatkov</li> -->
+        <li id="account_checks" class="mdl-menu__item external-link" onclick="AccountChecks();">Kontrola účtovania</li>
+        <li id="backup" class="mdl-menu__item external-link" onclick="Backup();">Zálohovanie dát</li>
+        <li id="calculator" class="mdl-menu__item external-link" onclick="Calculator();">Kalkulačka</li>
+      </ul>
+    </div>
 
 <!--     <a href="#" id="codelist" class="mdl-layout__tab" style="text-transform: none; padding: 0 0 0 8px; color: rgba(255,255,255,1);">Číselníky<i class="material-icons vacenter">arrow_drop_down</i></a> -->
   </div> <!-- tabs -->
 
     <!-- <a href="#" id="tools" class="mdl-layout__tab" style="text-transform: none; padding: 0 8px; color: white;">Nástroje<i class="material-icons vacenter">arrow_drop_down</i></a> -->
     <!-- <a href="#" id="tools" class="mdl-layout__tab" style="text-transform: none; padding: 0 8px; color: white;"><i class="material-icons vacenter">build</i><i class="material-icons vacenter">arrow_drop_down</i></a> -->
-
-
 </header>
+
+<!-- more subs nav menu -->
+<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="more_subs">
+  <li onclick="Doprava();" class="mdl-menu__item">Doprava</li>
+  <li onclick="Vyroba();" class="mdl-menu__item">Výroba</li>
+  <li onclick="Analyzy();" class="mdl-menu__item">Analýzy</li>
+</ul>
+
+
+
+
+
+
 
 <!-- select firm and period -->
 <?php
@@ -604,15 +642,10 @@ if ( $copern == 23 OR $copern == 24 )
 }
 ?>
 
-<!-- more subs nav menu -->
-<ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="more_subs">
-  <li onclick="Doprava();" class="mdl-menu__item">Doprava</li>
-  <li onclick="Vyroba();" class="mdl-menu__item">Výroba</li>
-  <li onclick="Analyzy();" class="mdl-menu__item">Analýzy</li>
-</ul>
+
 
 <!-- nastavenia nav menu -->
-<ul for="settings" class="mdl-menu mdl-menu--bottom-right mdl-js-menu" style="">
+<!-- <ul for="settings" class="mdl-menu mdl-menu--bottom-right mdl-js-menu" style="">
   <li class="mdl-menu__item" onclick="PrmUcto();">Parametre účtovníctva</li>
   <li class="mdl-menu__item" onclick="UctOsn();">Účtová osnova</li>
   <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="DphDruh();">Kódy DPH</li>
@@ -620,30 +653,16 @@ if ( $copern == 23 OR $copern == 24 )
   <li class="mdl-menu__item" onclick="OdberDruh();">Odberateľské účty</li>
   <li class="mdl-menu__item" onclick="DodavDruh();">Dodávateľské účty</li>
   <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="BanDruh();">Bankové účty</li>
-  <!-- <li class="mdl-menu__item" onclick="Ufir();">Údaje o firme</li> -->
   <li class="mdl-menu__item" onclick="NastavAutouct();">Ekorobot nastavenie</li>
   <li class="mdl-menu__item" onclick="PredvolText();">Predvolené texty</li>
-</ul>
+</ul> -->
 
-<!-- ciselniky nav menu -->
-<ul for="codelist" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" style="">
-  <li class="mdl-menu__item" onclick="CisIco();">Číselník IČO</li>
-  <li class="mdl-menu__item" onclick="Strediska();">Číselník stredísk</li>
-  <li class="mdl-menu__item" onclick="Zakazky();">Číselník zákaziek</li>
-  <li class="mdl-menu__item" onclick="Skupiny();">Číselník skupín</li>
-  <li class="mdl-menu__item" onclick="Stavby();">Číselník stavieb</li>
-  <li class="mdl-menu__item" onclick="Ezakaznik();">E-zákazníci</li>
-</ul>
 
-<!-- nastroje nav menu -->
-<ul for="tools" class="mdl-menu mdl-menu--bottom-right mdl-js-menu" style="">
-<!--   <li class="mdl-menu__item" onclick="PrenosPoc();">Prenos počiatkov</li> -->
-  <li class="mdl-menu__item" onclick="Users();">Kontrola účtovania</li>
-  <li class="mdl-menu__item" onclick="ZalDat();">Zálohovanie dát</li>
-  <li class="mdl-menu__item" onclick="Kalkulacka();">Kalkulačka</li>
-</ul>
 
-<!-- month nav button -->
+
+
+
+<!-- month nav -->
 <button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="position: absolute; top: 50%; left: 16px; z-index: 10; margin-top: -20px;">
   <i class="material-icons">navigate_before</i>
 </button>
@@ -662,67 +681,89 @@ if ( $copern == 23 OR $copern == 24 )
 <!-- 1.column -->
   <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone" style="">
 <!-- vstup dat -->
-    <div class="mdl-color--white mdl-shadow--2dp card-module">
+    <div id="vstup_data" class="card-module">
       <div class="card-module-header">
         <i class="material-icons">add_to_photos</i>
         <span class="card-module-title">Vstup dát</span>
       </div>
       <ul class="card-module-content">
-        <li onclick="" class="card-item external-link">Odberateľské faktúry</i></li>
-        <li onclick="" class="card-item external-link">Dodávateľské faktúry</li>
-        <li onclick="" class="card-item external-link">Príjmové pokladničné doklady</li>
-        <li onclick="" class="card-item external-link">Výdavkové pokladničné doklady</li>
-        <li onclick="" class="card-item external-link">Bankové výpisy</li>
-        <li onclick="" class="card-item external-link">Všeobecné účtovné doklady</li>
+        <li id="odber_faktury" onclick="OdberFa();" class="card-item external-link">Odberateľské faktúry</i></li>
+        <li id="dodav_faktury" onclick="DodavFa();" class="card-item external-link">Dodávateľské faktúry</li>
+        <li id="prijem_pokladna" onclick="PrijemPokl();" class="card-item external-link">Príjmové pokladničné doklady</li>
+        <li id="vydaj_pokladna" onclick="VydavPokl();" class="card-item external-link">Výdavkové pokladničné doklady</li>
+        <li id="bank_vypisy" onclick="BankVyp();" class="card-item external-link">Bankové výpisy</li>
+        <li id="vseobec_doklady" onclick="VseoDokl();" class="card-item external-link">Všeobecné účtovné doklady</li>
       </ul>
     </div>
 <!-- ekorobot -->
-    <div class="card-module " style="">
-<!--       <div class="card-module-header">
-        <span class="card-module-title" style="padding-left: 56px;">Ekorobot</span>
-      </div> -->
-      <div class="card-module-content" style="padding-left: 56px;">
-        <img src="obr/robot/robot3.jpg" onclick="UkazLista(ekorobot);" title="Ak máte želanie, kliknite na mňa" class="">
+    <div id="ekorobot" class="card-module" style="background-color: transparent; box-shadow: none; padding-left: 56px;">
+      <div class="card-module-content">
+        <img src="obr/robot/robot3.jpg" onclick="showRobotMenu();" title="Ak máte želanie, kliknite na mňa" class="">
       </div>
+    </div>
+<!-- data podsystemy -->
+    <div id="podsystem_data" class="card-module">
+      <div onclick="PodsystemData();" class="card-module-header external-link">
+        <i class="material-icons">storage</i>
+        <span class="card-module-title">Dáta z podsystémov</span>
+      </div>
+      <ul class="card-module-content">
+        <li id="mzdy_data" onclick="MzdyData();" class="card-item external-link">Mzdy a personalistika</li>
+        <li id="sklad_data" onclick="SkladData();" class="card-item external-link">Sklad</li>
+        <li id="majetok_data" onclick="MajetokData();" class="card-item external-link">Majetok</li>
+      </ul>
     </div>
   </div> <!-- .mdl-cell -->
 
 <!-- 2.column -->
   <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone" style="">
+<!-- saldokonto -->
+    <div id="saldo" class="card-module">
+      <div onclick="Saldo();" class="card-module-header external-link">
+        <i class="material-icons">thumbs_up_down</i>
+        <span class="card-module-title">Saldokonto</span>
+      </div>
+      <ul class="card-module-content">
+        <li id="upomienky" onclick="Upomienky();" class="card-item external-link">Upomienky</li>
+        <li id="zapocty" onclick="Zapocty();" class="card-item external-link">Vzájomné zápočty</li>
+        <li id="faktoring" onclick="Faktoring();" class="card-item external-link">Faktoring</li>
+        <li id="prikazy" onclick="Prikazy();" class="card-item external-link">Príkazy na úhradu</li>
+      </ul>
+    </div>
 <!-- vystupy -->
-    <div class="mdl-color--white mdl-shadow--2dp card-module">
+    <div id="vystupy" class="card-module">
       <div class="card-module-header">
         <i class="material-icons">call_made</i>
         <span class="card-module-title">Výstupy</span>
       </div>
       <ul class="card-module-content">
-        <li onclick="" class="card-item external-link">Účtovné zostavy</li>
-        <li onclick="" class="card-item external-link">Štatistické výkazy</li>
-        <li onclick="" class="card-item external-link">Daňové formuláre</li>
+        <li id="uct_zostavy" onclick="UctZostavy();" class="card-item external-link">Účtovné zostavy
+          <button id="account_report" class="mdl-button mdl-js-button mdl-button--icon" style="position: absolute; top: 2px; right: 24px;">
+            <i class="material-icons md-dark">more_vert</i>
+          </button>
+        </li>
+        <li>
+          <ul for="account_report" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+             style="" >
+            <li id="obratovka" onclick="Obratovka();" class="mdl-menu__item external-link">Obratová predvaha</li>
+            <li id="vysledovka" onclick="Vysledovka();" class="mdl-menu__item external-link">Výsledovka jednoduchá</li>
+          </ul>
+        </li>
+        <li id="stat_vykazy" onclick="StatVykazy();" class="card-item external-link">Štatistické výkazy</li>
+        <li id="dan_form" onclick="DanForms();" class="card-item external-link">Daňové formuláre</li>
       </ul>
     </div>
 <!-- dph -->
-    <div class="mdl-color--white mdl-shadow--2dp card-module">
-      <div onclick="" class="card-module-header external-link">
+    <div id="dph" class="card-module">
+      <div onclick="Dph();" class="card-module-header external-link">
         <i class="material-icons">playlist_add</i>
         <span class="card-module-title">Daň z pridanej hodnoty</span>
       </div>
     </div>
-<!-- data podsystemy -->
-    <div class="mdl-color--white mdl-shadow--2dp card-module">
-      <div onclick="" class="card-module-header external-link">
-        <i class="material-icons">storage</i>
-        <span class="card-module-title">Dáta z podsystémov</span>
-      </div>
-      <ul class="card-module-content">
-        <li onclick="" class="card-item external-link">Mzdy a personalistika</li>
-        <li onclick="" class="card-item external-link">Sklad</li>
-        <li onclick="" class="card-item external-link">Majetok</li>
-      </ul>
-    </div>
+
 <!-- cudzia mena -->
-    <div class="mdl-color--white mdl-shadow--2dp card-module">
-      <div onclick="" class="card-module-header external-link">
+    <div id="mena" class="card-module">
+      <div onclick="Mena();" class="card-module-header external-link">
         <i class="material-icons">playlist_add</i>
         <span class="card-module-title">Cudzia mena</span>
       </div>
@@ -731,22 +772,45 @@ if ( $copern == 23 OR $copern == 24 )
 
 <!-- 3.column -->
   <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone" style="">
-<!-- saldokonto -->
-    <div class="mdl-color--white mdl-shadow--2dp card-module">
-      <div onclick="" class="card-module-header external-link">
-        <i class="material-icons">thumbs_up_down</i>
-        <span class="card-module-title">Saldokonto</span>
+<!-- nastavenia -->
+    <div id="nastavenia" class="card-module">
+      <div class="card-module-header">
+        <i class="material-icons">settings</i>
+        <span class="card-module-title">Nastavenia</span>
       </div>
       <ul class="card-module-content">
-        <li onclick="" class="card-item external-link">Upomienky</li>
-        <li onclick="" class="card-item external-link">Vzájomné zápočty</li>
-        <li onclick="" class="card-item external-link">Faktoring</li>
-        <li onclick="" class="card-item external-link">Príkazy na úhradu</li>
+        <li id="parametre" onclick="PrmUcto();" class="card-item external-link">Parametre účtovníctva</li>
+        <li id="osnova" onclick="UctOsn();" class="card-item external-link">Účtová osnova</li>
+        <li id="dph_kody" onclick="DphKody();" class="card-item external-link">Kódy DPH</li>
+        <li onclick="" class="card-item external-link">Analytické účty
+          <button id="account_analytical" class="mdl-button mdl-js-button mdl-button--icon" style="position: absolute; top: 2px; right: 24px;">
+            <i class="material-icons md-dark">more_vert</i>
+          </button>
+        </li>
+        <li>
+          <ul for="account_analytical" class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect">
+            <li id="odber_ucty" onclick="OdberUcty();" class="mdl-menu__item external-link">Odberateľské účty</li>
+            <li id="dodav_ucty" onclick="DodavUcty();" class="mdl-menu__item external-link">Dodávateľské účty</li>
+            <li id="pokladna_ucty" onclick="PoklUcty();" class="mdl-menu__item external-link">Pokladnice</li>
+            <li id="banka_ucty" onclick="BankaUcty();" class="mdl-menu__item external-link">Bankové účty</li>
+          </ul>
+        </li>
+<!--         <li onclick="" class="card-item external-link">Voliteľné nastavenia
+          <button id="optional_settings" class="mdl-button mdl-js-button mdl-button--icon" style="position: absolute; top: 2px; right: 24px;">
+            <i class="material-icons md-dark">more_vert</i>
+          </button>
+        </li>
+        <li>
+          <ul for="optional_settings" class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect">
+            <li onclick="" class="mdl-menu__item external-link">Predvolené texty</li>
+            <li onclick="" class="mdl-menu__item external-link">Automatické účtovanie</li>
+          </ul>
+        </li> -->
       </ul>
     </div>
 <!-- ciselniky -->
-    <div class="mdl-color--white mdl-shadow--2dp card-module">
-      <div onclick="" class="card-module-header external-link">
+    <div id="firma_udaje" class="card-module">
+      <div onclick="FirmaUdaje();" class="card-module-header external-link">
         <i class="material-icons">home</i>
         <span class="card-module-title"><?php echo $fir_fnaz; ?></span>
       </div>
@@ -755,11 +819,31 @@ if ( $copern == 23 OR $copern == 24 )
           <div class="toleft" style="min-width: 88px;">Firma ID<br><strong><?php echo $kli_vxcf; ?></strong></div>
           <div>Firma obdobie<br><strong><?php echo $kli_vrok; ?></strong></div>
         </li>
-        <li onclick="" class="card-item external-link">Číselník IČO</li>
-        <li onclick="" class="card-item external-link">Strediská, Zákazky &hellip;</li>
-
+        <li id="cico" onclick="CisIco();" class="card-item external-link">Číselník IČO</li>
+        <li onclick="" class="card-item external-link">Číselníky
+          <button id="codelist" class="mdl-button mdl-js-button mdl-button--icon" style="position: absolute; top: 2px; right: 24px;">
+            <i class="material-icons md-dark">more_vert</i>
+        </li>
+        <li>
+          <ul for="codelist" class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect">
+            <li id="strediska" onclick="Strediska();" class="mdl-menu__item external-link">Strediská</li>
+            <li id="zakazky" onclick="Zakazky();" class="mdl-menu__item external-link">Zákazky</li>
+            <li id="skupiny" onclick="Skupiny();" class="mdl-menu__item external-link">Skupiny</li>
+            <li id="stavby" onclick="Stavby();" class="mdl-menu__item external-link">Stavby</li>
+          </ul>
+        </li>
       </ul>
     </div>
+
+<!-- <ul for="codelist" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" style="">
+  <li class="mdl-menu__item" onclick="CisIco();">Číselník IČO</li>
+  <li class="mdl-menu__item" onclick="Strediska();">Číselník stredísk</li>
+  <li class="mdl-menu__item" onclick="Zakazky();">Číselník zákaziek</li>
+  <li class="mdl-menu__item" onclick="Skupiny();">Číselník skupín</li>
+  <li class="mdl-menu__item" onclick="Stavby();">Číselník stavieb</li>
+  <li class="mdl-menu__item" onclick="Ezakaznik();">E-zákazníci</li>
+</ul> -->
+
 
 <!--     <div class="mdl-shadow--2dp mdl-color--white module" style="padding-bottom: 12px; padding-top: 8px;">
       <div class="card-title" style="font-size: 18px; line-height: 24px; padding-left: 16px; padding-top: 16px; padding-bottom: 8px;">
@@ -848,155 +932,253 @@ zobrazene menu
 //dimensions blank window
 var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; //dopyt, premennú do eng a neskôr použiť
 
-<?php if ( $kli_vmes == 1 ) { ?>
-  document.getElementById('month_prev').disabled = true;
-<?php } ?>
-<?php if ( $kli_vmes == 12 ) { ?>
-  document.getElementById('month_next').disabled = true;
-<?php } ?>
-
-
-
+//month nav
   function navMonth(kam)
   {
-   window.open('../cis/zmenume.php?odkaz=<?php echo $odkaz64; ?>&copern=' + kam + '', '_self');
+    window.open('../cis/zmenume.php?odkaz=<?php echo $odkaz64; ?>&copern=' + kam + '', '_self');
+  }
+<?php if ( $kli_vmes == 1 ) { ?> document.getElementById('month_prev').disabled = true; <?php } ?>
+<?php if ( $kli_vmes == 12 ) { ?> document.getElementById('month_next').disabled = true; <?php } ?>
+
+//select firm/month
+  function selectFirm()
+  {
+    window.open('ucto_md.php?copern=22', '_self');
+  }
+  function selectPeriod()
+  {
+    window.open('ucto_md.php?copern=24', '_self');
+  }
+  function News()
+  {
+    window.open('https://www.edcom.sk/ram1/novinkyweb.php', '_blank');
   }
 
+//subsystems
+  function Ucto()
+  {
+    window.open('ucto_md.php?copern=1', '_self');
+  }
+  function Mzdy()
+  {
+    window.open('mzdy_md.php?copern=1', '_self');
+  }
+  function Odbyt()
+  {
+    window.open('faktury_md.php?copern=1', '_self');
+  }
+  function Sklad()
+  {
+    window.open('sklad_md.php?copern=1', '_self');
+  }
+  function Majetok()
+  {
+    window.open('majetok_md.php?copern=1', '_self');
+  }
+  function Doprava()
+  {
+    window.open('doprava_md.php?copern=1', '_self');
+  }
+  function Vyroba()
+  {
+    window.open('vyroba_md.php?copern=1', '_self');
+  }
+  function Analyzy()
+  {
+    window.open('analyzy_md.php?copern=1', '_self');
+  }
 
-
+//tools
+  function Searching()
+  {
+    window.open('../ucto/uctohladaj_md.php?copern=1&sysx=UCT', '_blank');
+  }
+  function Transfer()
+  {
+    window.open('../cis/prenos_md.php?copern=10&upozorni2011=1&upozorni2012=1&upozorni2013=1', '_blank');
+  }
+  function AccountChecks()
+  {
+    window.open('../ucto/ucto_kontrol_md.php?copern=40&drupoh=1&page=1', '_blank'); //page=1 nebude treba, otestovať bez drupoh
+  }
+  function Backup()
+  {
+    window.open('../cis/zaldat_ucto_md.php?copern=101', '_blank');
+  }
+  function Calculator()
+  {
+    window.open('../ucto/calculator_md.php?copern=5', '_blank');
+  }
 
 //vstup dat
   function OdberFa()
   {
-   window.open('../faktury/vstfak_new.php?copern=1&drupoh=1001&page=1&pocstav=0', '_blank');
+    window.open('../faktury/vstfak_md.php?copern=1&drupoh=1001&page=1&pocstav=0', '_blank');
   }
   function DodavFa()
   {
-   window.open('../faktury/vstfak_new.php?copern=1&drupoh=1002&page=1&pocstav=0', '_blank');
+    window.open('../faktury/vstfak_md.php?copern=1&drupoh=1002&page=1&pocstav=0', '_blank');
   }
-  function PrijPokl()
+  function PrijemPokl()
   {
-   window.open('../ucto/vstpok_new.php?copern=1&drupoh=1&page=1&sysx=UCT', '_blank');
+    window.open('../ucto/vstpok_md.php?copern=1&drupoh=1&page=1&sysx=UCT', '_blank');
   }
   function VydavPokl()
   {
-   window.open('../ucto/vstpok_new.php?copern=1&drupoh=2&page=1&sysx=UCT', '_blank');
+    window.open('../ucto/vstpok_md.php?copern=1&drupoh=2&page=1&sysx=UCT', '_blank');
   }
   function BankVyp()
   {
-   window.open('../ucto/vstban_new.php?copern=1&drupoh=4&page=1&sysx=UCT', '_blank');
+    window.open('../ucto/vstdok_md.php?copern=1&drupoh=4&page=1&sysx=UCT', '_blank');
   }
   function VseoDokl()
   {
-   window.open('../ucto/vstvse_new.php?copern=1&drupoh=5&page=1&sysx=UCT', '_blank');
+    window.open('../ucto/vstdok_md.php?copern=1&drupoh=5&page=1&sysx=UCT', '_blank');
   }
-//mesacne
-  function UctZos()
+//data podsystemy
+  function PodsystemData()
   {
-   window.open('../ucto/meszos_new.php?copern=1&sysx=UCT', '_blank');
+    window.open('../ucto/podsys_md.php?copern=1&sysx=UCT', '_blank');
   }
-  function StatVyk()
+  function MzdyData()
   {
-   window.open('../ucto/statzos_new.php?copern=1&sysx=UCT', '_blank');
+    window.open('../ucto/podsys_md.php?copern=308&drupoh=1&page=1', '_blank'); /*dopyt, page=1 nebude mať význam, pretože tam nie je stránkovanie*/
   }
-  function UprPodsys()
+  function MajetokData()
   {
-   window.open('../ucto/oprsys_new.php?copern=1&sysx=UCT', '_blank');
+    window.open('../ucto/podsys_md.php?copern=308&drupoh=2&page=1', '_blank'); /*dopyt, page=1 nebude mať význam, pretože tam nie je stránkovanie*/
   }
-  function DanZos()
+  function SkladData()
   {
-   window.open('../ucto/danprij_new.php?copern=1&sysx=UCT', '_blank');
+    window.open('../ucto/podsys_md.php?copern=308&drupoh=3&page=1', '_blank'); /*dopyt, page=1 nebude mať význam, pretože tam nie je stránkovanie*/
   }
-  function DphZos()
-  {
-//   var okno =;
-// dopyt, dorobiť
-  }
-//informacie
-  function UctPohyby()
-  {
-   window.open('../ucto/uctpohyby_new.php?copern=1&sysx=UCT', '_blank');
-  }
-  function HladajDokl()
-  {
-   window.open('../ucto/hladaj_dok_new.php?copern=1&sysx=UCT', '_blank');
-  }
+//saldokonto
   function Saldo()
   {
-   window.open('../ucto/saldo_new.php?copern=1&sysx=UCT&typhtml=0', '_blank');
+    window.open('../ucto/saldo_md.php?copern=1&sysx=UCT&typhtml=0', '_blank');
   }
-  function RucneSpar()
+  function Upomienky()
   {
-   window.open('../ucto/saldo_new.php?copern=1&sysx=UCT&typhtml=1&cinnost=9', '_blank');
+    window.open('../ucto/saldo_md.php?copern=1&sysx=UCT&typhtml=1&cinnost=1', '_blank');
   }
-  function VzajZap()
+  function Zapocty()
   {
-   window.open('../ucto/saldo_new.php?copern=1&sysx=UCT&typhtml=1&cinnost=8', '_blank');
-  }
-  function PrikUhr()
-  {
-   window.open('../ucto/vstpru_new.php?copern=1&page=1&sysx=UCT', '_blank');
+    window.open('../ucto/saldo_md.php?copern=1&sysx=UCT&typhtml=1&cinnost=8', '_blank');
   }
   function Faktoring()
   {
-   window.open('../ucto/saldo_new.php?copern=1&sysx=UCT&typhtml=1&cinnost=6', '_blank');
+    window.open('../ucto/saldo_md.php?copern=1&sysx=UCT&typhtml=1&cinnost=6', '_blank');
   }
-  function Upomienka()
+  function Prikazy()
   {
-   window.open('../ucto/saldo_new.php?copern=1&sysx=UCT&typhtml=1&cinnost=1', '_blank');
+    window.open('../ucto/prikazy_md.php?copern=1&page=1&sysx=UCT', '_blank');
   }
-  function Cudzie()
+//vystupy
+  function UctZostavy()
   {
-   window.open('../ucto/cudzie_new.php?copern=1&drupoh=1&sysx=UCT', '_blank');
+    window.open('../ucto/uctozos_md.php?copern=1&sysx=UCT', '_blank');
   }
-  function KurzListok() //dopyt, možno zruším
+  function Obratovka()
   {
-   window.open('../ucto/kurzy.php?copern=1&page=1', '_blank');
+    window.open('../ucto/uobrat_md.php?copern=10&drupoh=1&page=1&typ=HTML', '_blank'); /*dopyt, page=1 zbytočné, buď copern alebo typ použiť a drupoh preveriť*/
   }
-  function ZozDokl()
+  function Vysledovka()
   {
-   window.open('../ucto/prhdok.php?copern=1&sysx=UCT', '_blank');
+    window.open('../ucto/vys_mala_md.php?copern=10&h_obdp=1&h_obdk=1&drupoh=1&page=1&typ=PDF&vyb_ume=1.2016&obdx=1', '_blank');
+  }
+  function StatVykazy()
+  {
+    window.open('../ucto/statzos_md.php?copern=1&sysx=UCT', '_blank');
+  }
+  function DanForms()
+  {
+    window.open('../ucto/danzos_md.php?copern=1&sysx=UCT', '_blank');
+  }
+//dph
+  function Dph()
+  {
+    window.open('../ucto/dph_md.php?copern=1', '_blank');
+  }
+//mena
+  function Mena()
+  {
+    window.open('../ucto/mena_md.php?copern=1&drupoh=1&sysx=UCT', '_blank');
   }
 //nastavenia
   function PrmUcto()
   {
-   window.open('../cis/ufir_new.php?copern=91', '_blank');
+    window.open('../cis/prmpodsys_md.php?copern=91', '_blank');
   }
   function UctOsn()
   {
-   window.open('../ucto/uctosn_new.php?copern=1&page=1', '_blank');
+    window.open('../ucto/uctosn_md.php?copern=1&page=1', '_blank');
   }
-  function DphDruh()
+  function DphKody()
   {
-   window.open('../ucto/drudan_new.php?copern=1&page=1', '_blank');
+    window.open('../ucto/drudan_md.php?copern=1&page=1', '_blank');
   }
-  function OdberDruh()
+  function OdberUcty()
   {
-   window.open('../faktury/dodb_new.php?copern=1&page=1', '_blank');
+    window.open('../faktury/dodb_md.php?copern=1&page=1', '_blank');
   }
-  function DodavDruh()
+  function DodavUcty()
   {
-   window.open('../faktury/ddod_new.php?copern=1&page=1', '_blank');
+    window.open('../faktury/ddod_md.php?copern=1&page=1', '_blank');
   }
-  function PoklDruh()
+  function PoklUcty()
   {
-   window.open('../ucto/dpok_new.php?copern=1&page=1', '_blank');
+    window.open('../ucto/dpok_md.php?copern=1&page=1', '_blank');
   }
-  function BanDruh()
+  function BankaUcty()
   {
-   window.open('../ucto/dban_new.php?copern=1&page=1', '_blank');
+    window.open('../ucto/dban_md.php?copern=1&page=1', '_blank');
   }
+//ciselniky
+  function FirmaUdaje()
+  {
+    window.open('../cis/ufir_md.php?copern=1', '_blank');
+  }
+  function CisIco()
+  {
+    window.open('../cis/cico_md.php?copern=1&page=1', '_blank');
+  }
+  function Strediska()
+  {
+    window.open('../cis/cstr_md.php?copern=1&page=1', '_blank');
+  }
+  function Zakazky()
+  {
+    window.open('../cis/czak_md.php?copern=1&page=1', '_blank');
+  }
+  function Skupiny()
+  {
+    window.open('../cis/csku_md.php?copern=1&page=1', '_blank');
+  }
+  function Stavby()
+  {
+    window.open('../cis/csta_md.php?copern=1&page=1', '_blank');
+  }
+
+
+
+
+
+
+
+
+
+//nepouzite
   function OdberPoc()
   {
-   window.open('../faktury/vstfak_new.php?copern=1&drupoh=1001&page=1&pocstav=1', '_blank');
+    window.open('../faktury/vstfak_new.php?copern=1&drupoh=1001&page=1&pocstav=1', '_blank');
   }
   function DodavPoc()
   {
-   window.open('../faktury/vstfak_new.php?copern=1&drupoh=1002&page=1&pocstav=1', '_blank');
+    window.open('../faktury/vstfak_new.php?copern=1&drupoh=1002&page=1&pocstav=1', '_blank');
   }
   function UhradyPoc()
   {
-   window.open('../ucto/oprsys_new.php?copern=308&drupoh=8', '_blank');
+    window.open('../ucto/oprsys_new.php?copern=308&drupoh=8', '_blank');
   }
   function PredvolText()
   {
@@ -1006,48 +1188,41 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; /
   {
    window.open('../ucto/uctpoh_new.php?copern=1&page=1', '_blank');
   }
-//ciselniky
-  function Ufir()
+
+  function UctPohyby()
   {
-   var okno = window.open('../cis/ufir_new.php?copern=1', '_blank');
+   window.open('../ucto/uctpohyby_new.php?copern=1&sysx=UCT', '_blank');
   }
-  function CisIco()
+
+
+
+  function KurzListok() //dopyt, možno zruším
   {
-   window.open('../cis/cico_new.php?copern=1&page=1', '_blank');
+   window.open('../ucto/kurzy.php?copern=1&page=1', '_blank');
   }
-  function Strediska()
-  {
-   window.open('../cis/cstr.php?copern=1&page=1', '_blank');
-  }
-  function Skupiny()
-  {
-   window.open('../cis/csku.php?copern=1&page=1', '_blank');
-  }
-  function Stavby()
-  {
-   window.open('../cis/csta.php?copern=1&page=1', '_blank');
-  }
-  function Zakazky()
-  {
-   window.open('../cis/czak.php?copern=1&page=1', '_blank');
-  }
-  function ZalDat()
-  {
-   window.open('../cis/zaldat_ucto_new.php?copern=101', '_blank');
-  }
-  function Ezakaznik()
-  {
-   window.open('../cis/ezak.php?copern=1&page=1', '_blank');
-  }
-  function PrenosPoc()
-  {
-   window.open('../cis/prenos_poc_new.php?copern=10&upozorni2011=1&upozorni2012=1&upozorni2013=1', '_blank');
-  }
+
+
+
+
+
 
 
 
 
 //ekorobot
+  function showRobotMenu()
+  {
+    robotmenu.style.display='block';
+  }
+  function hideRobotMenu()
+  {
+    robotmenu.style.display='none';
+  }
+
+
+
+
+
   function NacitajKurzDnes()
   {
    window.open('../cis/stiahni_ecb.php?copern=1010', '_blank');
@@ -1056,10 +1231,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; /
   {
    window.open('../cis/stiahni_ecb.php?copern=1010&dni90=1', '_blank');
   }
-  function KontrolaUct() //dopyt, bude presunute vyssie
-  {
-   window.open('../ucto/ucto_kontrol_new.php?copern=40&drupoh=1&page=1', '_blank'); //page=1 nebude treba, otestovať bez drupoh
-  }
+
 <?php
 $rokdph=2014;
 if ( $vyb_rok <= 2013 ) { $rokdph=2013; }
@@ -1074,58 +1246,6 @@ if ( $vyb_rok <= 2012 ) { $rokdph=2012; }
    window.open('../ucto/prizdph<?php echo $rokdph; ?>.php?copern=10&drupoh=1&page=1fir_uctx01=0&h_drp=1&h_dap=&h_arch=0', '_blank'); //page=1 nebude treba, otestovať bez drupoh
   }
 
-
-
-//podsystemy
-  function Ucto()
-  {
-    window.open('ucto_md.php?copern=1', '_self');
-  }
-  function Mzdy()
-  {
-   window.open('mzdy_md.php?copern=1', '_self');
-  }
-  function Odbyt()
-  {
-   window.open('odbyt_md.php?copern=1', '_self');
-  }
-  function Sklad()
-  {
-   window.open('sklad_md.php?copern=1', '_self');
-  }
-  function Majetok()
-  {
-   window.open('majetok_md.php?copern=1', '_self');
-  }
-  function Doprava()
-  {
-   window.open('doprava_md.php?copern=1', '_self');
-  }
-  function Vyroba()
-  {
-   window.open('vyroba_md.php?copern=1', '_self');
-  }
-  function Analyzy()
-  {
-   window.open('analyzy_md.php?copern=1', '_self');
-  }
-
-
-  function Kalkulacka()
-  {
-    window.open('../ucto/paskovacka.php?copern=5', '_blank');
-  }
-
-
-
-  function selectFirm()
-  {
-    window.open('ucto_md.php?copern=22', '_self');
-  }
-  function selectPeriod()
-  {
-    window.open('ucto_md.php?copern=24', '_self');
-  }
 
 
 
