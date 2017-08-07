@@ -656,7 +656,7 @@ $riadok=mysql_fetch_object($sql);
 <!-- left column -->
     <div class="mdl-cell mdl-cell--2-col mdl-color--grey-200" style="padding: 8px 0;">
       <nav class="mdl-navigation">
-<?php if( $nova >= 0 ){ ?>
+<?php if( $nova == 0 ){ ?>
         <a id="nav_user" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,1);" class="mdl-navigation__link">
           <span class="mdl-color--white avatar" style="border: 1px solid #039BE5; color: rgba(0,0,0,.87);"><?php echo $riadok->id_klienta; ?></span>&nbsp;
           <strong><?php echo "$riadok->meno $riadok->priezvisko"; ?></strong>
@@ -673,6 +673,15 @@ $riadok=mysql_fetch_object($sql);
 <?php } ?>
         </a>
 <?php } //ak nova == 0 ?>
+<?php if( $nova == 1 ){ ?>
+        <a id="nav_user" href="#" onclick="" class="mdl-navigation__link">
+          <span class="mdl-color--white avatar" style="border: 1px solid #039BE5; color: rgba(0,0,0,.87);"></span>&nbsp;
+          <strong>nový</strong>
+        </a>
+        <a id="nav_firm" href="#" onclick="" class="mdl-navigation__link"></a>
+        <a id="nav_script" href="#" onclick="" class="mdl-navigation__link"></a>
+        <a id="nav_grid" href="#" onclick="" class="mdl-navigation__link"></a>
+<?php } //ak nova == 1 ?>
       </nav>
     </div>
 
