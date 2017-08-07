@@ -699,16 +699,16 @@ if ( $uprav == 1 OR $nova == 1 )
           <i class="material-icons mdl-color-text--grey-400 md-32">person</i>
         </legend>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 40px; margin-right: 8px;">
-          <input type="text" id="h_id" name="h_id" <?php if( $nova == 0 ){ ?>value="<?php echo $cislo_id; ?>"<?php } ?> disabled class="mdl-textfield__input">
+          <input type="text" id="h_id" name="h_id" onKeyDown="return H_idEnter(event.which)" <?php if( $nova == 0 ){ ?>value="<?php echo $cislo_id; ?>"<?php } ?> disabled class="mdl-textfield__input">
           <label for="h_id" class="mdl-textfield__label">ID</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120px; margin-right: 8px;">
-          <input type="text" id="h_meno" name="h_meno" autofocus maxlength="20" class="mdl-textfield__input">
+          <input type="text" id="h_meno" name="h_meno" onKeyDown="return H_menoEnter(event.which)" autofocus maxlength="20" class="mdl-textfield__input">
           <label for="h_meno" class="mdl-textfield__label">Meno</label>
           <span class="mdl-textfield__error">Povinné pole!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120px; margin-right: 8px;">
-          <input type="text" id="h_prie" name="h_prie" maxlength="20" required class="mdl-textfield__input">
+          <input type="text" id="h_prie" name="h_prie" onKeyDown="return H_prieEnter(event.which)" maxlength="20" required class="mdl-textfield__input">
           <label for="h_prie" class="mdl-textfield__label">Priezvisko *</label>
         </div>
       </fieldset>
@@ -717,12 +717,12 @@ if ( $uprav == 1 OR $nova == 1 )
           <i class="material-icons mdl-color-text--grey-400 md-32">lock_open</i>
         </legend>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120px; margin-right: 8px;">
-          <input type="text" id="h_uzm" name="h_uzm" maxlength="10" required class="mdl-textfield__input">
+          <input type="text" id="h_uzm" name="h_uzm" onKeyDown="return H_uzmEnter(event.which)" maxlength="10" required class="mdl-textfield__input">
           <label for="h_uzm" class="mdl-textfield__label">Meno *</label>
           <span class="mdl-textfield__error">Povinné pole!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 120px; margin-right: 8px;">
-          <input type="text" id="h_uzh" name="h_uzh" maxlength="10" required class="mdl-textfield__input">
+          <input type="text" id="h_uzh" name="h_uzh" onKeyDown="return H_uzhEnter(event.which)" maxlength="10" required class="mdl-textfield__input">
           <label for="h_uzh" class="mdl-textfield__label">Heslo *</label>
           <span class="mdl-textfield__error">Povinné pole!</span>
         </div>
@@ -732,47 +732,47 @@ if ( $uprav == 1 OR $nova == 1 )
           <i class="material-icons mdl-color-text--grey-400 md-32">verified_user</i>
         </legend>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100px; margin-right: 32px;">
-          <input type="text" id="h_all" name="h_all" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
+          <input type="text" id="h_all" name="h_all" onKeyDown="return H_allEnter(event.which)" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
           <label for="h_all" class="mdl-textfield__label">Celkovo</label>
           <span class="mdl-textfield__error">Povolené sú èísla!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70px; margin-right: 16px;">
-          <input type="text" id="h_uct" name="h_uct" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
+          <input type="text" id="h_uct" name="h_uct" onKeyDown="return H_uctEnter(event.which)" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
           <label for="h_uct" class="mdl-textfield__label">Úètovníctvo</label>
           <span class="mdl-textfield__error">Povolené sú èísla!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70px; margin-right: 16px;">
-          <input type="text" id="h_mzd" name="h_mzd" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
+          <input type="text" id="h_mzd" name="h_mzd" onKeyDown="return H_mzdEnter(event.which)" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
           <label for="h_mzd" class="mdl-textfield__label">Mzdy</label>
           <span class="mdl-textfield__error">Povolené sú èísla!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70px; margin-right: 16px;">
-          <input type="text" id="h_fak" name="h_fak" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
+          <input type="text" id="h_fak" name="h_fak" onKeyDown="return H_fakEnter(event.which)" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
           <label for="h_fak" class="mdl-textfield__label">Odbyt</label>
           <span class="mdl-textfield__error">Povolené sú èísla!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70px; margin-right: 16px;">
-          <input type="text" id="h_skl" name="h_skl" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
+          <input type="text" id="h_skl" name="h_skl" onKeyDown="return H_sklEnter(event.which)" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
           <label for="h_skl" class="mdl-textfield__label">Sklad</label>
           <span class="mdl-textfield__error">Povolené sú èísla!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70px; margin-right: 16px;">
-          <input type="text" id="h_him" name="h_him" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
+          <input type="text" id="h_him" name="h_him" maxlength="6" onKeyDown="return H_himEnter(event.which)" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
           <label for="h_him" class="mdl-textfield__label">Majetok</label>
           <span class="mdl-textfield__error">Povolené sú èísla!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70px; margin-right: 16px;">
-          <input type="text" id="h_dop" name="h_dop" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
+          <input type="text" id="h_dop" name="h_dop" onKeyDown="return H_dopEnter(event.which)" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
           <label for="h_dop" class="mdl-textfield__label">Doprava</label>
           <span class="mdl-textfield__error">Povolené sú èísla!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70px; margin-right: 16px;">
-          <input type="text" id="h_vyr" name="h_vyr" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
+          <input type="text" id="h_vyr" name="h_vyr" onKeyDown="return H_vyrEnter(event.which)" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
           <label for="h_vyr" class="mdl-textfield__label">Výroba</label>
           <span class="mdl-textfield__error">Povolené sú èísla!</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 70px; margin-right: 16px;">
-          <input type="text" id="h_ana" name="h_ana" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
+          <input type="text" id="h_ana" name="h_ana" onKeyDown="return H_anaEnter(event.which)" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
           <label for="h_ana" class="mdl-textfield__label">Analýzy</label>
           <span class="mdl-textfield__error">Povolené sú èísla!</span>
         </div>
@@ -831,14 +831,14 @@ $if = 0;
         <td class="right">
           <div class="mdl-textfield mdl-js-textfield" style="width: 50px;">
             <label class="mdl-textfield__label" for="fiod">od</label>
-            <input type="text" id="fiod" name="fiod" autofocus maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
+            <input type="text" id="fiod" name="fiod" onKeyDown="return FiodEnter(event.which)" autofocus maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
             <span class="mdl-textfield__error">Povolené sú èísla!</span>
           </div>
         </td>
         <td class="right">
           <div class="mdl-textfield mdl-js-textfield" style="width: 50px;">
             <label class="mdl-textfield__label" for="fido">do</label>
-            <input type="text" id="fido" name="fido" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
+            <input type="text" id="fido" name="fido" onKeyDown="return FidoEnter(event.which)" maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
             <span class="mdl-textfield__error">Povolené sú èísla!</span>
           </div>
         </td>
@@ -914,7 +914,7 @@ $ip = 0;
           <input type="hidden" name="uzid" id="uzid"/>
           <div class="mdl-textfield mdl-js-textfield" style="width: 100px;">
             <label for="cslm" class="mdl-textfield__label">Èíslo skriptu</label>
-            <input type="text" id="cslm" name="cslm" autofocus maxlength="8" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
+            <input type="text" id="cslm" name="cslm" onKeyDown="return CslmEnter(event.which)" autofocus maxlength="8" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
             <span class="mdl-textfield__error">Povolené sú èísla!</span>
           </div>
         </td>
@@ -1619,6 +1619,203 @@ function viewFirms()
   }
 
 
+//enternext
+
+function FiodEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.fido.focus();
+        document.forms.formv.fido.select();
+              }
+
+                }
+
+function FidoEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+    var okvstup=1;
+    if ( document.formv.fiod.value == '' && document.formv.fido.value == '' && document.formv.h_txt1.value == ''  ) okvstup=0;
+    if ( okvstup == 0 ) { document.formv.fiod.focus(); return (false); }
+    if ( okvstup == 1 ) { document.forms.formv.submit(); return (true); }
+              }
+
+                }
+
+function CslmEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+    var okvstup=1;
+    if ( document.formv.cslm.value == '' ) okvstup=0;
+    if ( document.formv.cslm.value == '0' ) okvstup=0;
+    if ( okvstup == 0 ) { document.formv.cslm.focus(); return (false); }
+              }
+
+                }
+
+function H_idEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_meno.focus();
+        document.forms.formv.h_meno.select();
+              }
+
+                }
+
+function H_menoEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_prie.focus();
+        document.forms.formv.h_prie.select();
+              }
+
+                }
+
+
+function H_prieEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_uzm.focus();
+        document.forms.formv.h_uzm.select();
+              }
+
+                }
+
+function H_uzmEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_uzh.focus();
+        document.forms.formv.h_uzh.select();
+              }
+
+                }
+
+function H_uzhEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_all.focus();
+        document.forms.formv.h_all.select();
+              }
+
+                }
+
+function H_allEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_uct.focus();
+        document.forms.formv.h_uct.select();
+              }
+
+                }
+
+function H_uctEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_mzd.focus();
+        document.forms.formv.h_mzd.select();
+              }
+
+                }
+
+function H_mzdEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_fak.focus();
+        document.forms.formv.h_fak.select();
+              }
+
+                }
+
+function H_fakEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_skl.focus();
+        document.forms.formv.h_skl.select();
+              }
+
+                }
+
+function H_sklEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_him.focus();
+        document.forms.formv.h_him.select();
+              }
+
+                }
+
+function H_himEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_dop.focus();
+        document.forms.formv.h_dop.select();
+              }
+
+                }
+
+function H_dopEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_vyr.focus();
+        document.forms.formv.h_vyr.select();
+              }
+
+                }
+
+function H_vyrEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+        document.forms.formv.h_ana.focus();
+        document.forms.formv.h_ana.select();
+              }
+
+                }
+
+function  H_anaEnter(e)
+                {
+  var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
+
+  if(k == 13 ){
+    var okvstup=1;
+    if ( document.formv.h_meno.value == '' ) okvstup=0;
+    if ( document.formv.h_prie.value == '' ) okvstup=0;
+    if ( document.formv.h_uzm.value == ''  ) okvstup=0;
+    if ( okvstup == 0 ) { document.formv.h_meno.focus(); return (false); }
+    if ( okvstup == 1 ) { document.forms.formv.submit(); return (true); }
+              }
+
+                }
 
 </script>
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
