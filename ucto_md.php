@@ -355,7 +355,7 @@ width: calc(100% - 72px);
 
 </style>
 </head>
-<body> <!-- dopyt, rieöiù cez .js -->
+<body>
 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
 <header class="mdl-layout__header ui-header ">
@@ -1167,39 +1167,15 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; /
 
 
 
-//nepouzite
-  function OdberPoc()
-  {
-    window.open('../faktury/vstfak_new.php?copern=1&drupoh=1001&page=1&pocstav=1', '_blank');
-  }
-  function DodavPoc()
-  {
-    window.open('../faktury/vstfak_new.php?copern=1&drupoh=1002&page=1&pocstav=1', '_blank');
-  }
-  function UhradyPoc()
-  {
-    window.open('../ucto/oprsys_new.php?copern=308&drupoh=8', '_blank');
-  }
-  function PredvolText()
-  {
-   window.open('../faktury/ftexty_new.php?copern=105', '_blank');
-  }
-  function NastavAutouct()
-  {
-   window.open('../ucto/uctpoh_new.php?copern=1&page=1', '_blank');
-  }
-
-  function UctPohyby()
-  {
-   window.open('../ucto/uctpohyby_new.php?copern=1&sysx=UCT', '_blank');
-  }
 
 
 
-  function KurzListok() //dopyt, moûno zruöÌm
-  {
-   window.open('../ucto/kurzy.php?copern=1&page=1', '_blank');
-  }
+
+
+
+
+
+
 
 
 
@@ -1246,7 +1222,10 @@ if ( $vyb_rok <= 2012 ) { $rokdph=2012; }
    window.open('../ucto/prizdph<?php echo $rokdph; ?>.php?copern=10&drupoh=1&page=1fir_uctx01=0&h_drp=1&h_dap=&h_arch=0', '_blank'); //page=1 nebude treba, otestovaù bez drupoh
   }
 
-
+  function KurzListok() //dopyt, moûno zruöÌm
+  {
+   window.open('../ucto/kurzy.php?copern=1&page=1', '_blank');
+  }
 
 
 
