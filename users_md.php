@@ -673,14 +673,13 @@ $riadok=mysql_fetch_object($sql);
 <?php } ?>
         </a>
 <?php } //ak nova == 0 ?>
+
 <?php if( $nova == 1 ){ ?>
-        <a id="nav_user" href="#" onclick="" class="mdl-navigation__link">
-          <span class="mdl-color--white avatar" style="border: 1px solid #039BE5; color: rgba(0,0,0,.87);"></span>&nbsp;
+        <a id="nav_user" href="#" class="mdl-navigation__link">
+          <span class="mdl-color--white avatar" style="border: 1px solid #039BE5; color: rgba(0,0,0,.87);">&nbsp;</span>&nbsp;
           <strong>nový</strong>
         </a>
-        <a id="nav_firm" href="#" onclick="" class="mdl-navigation__link"></a>
-        <a id="nav_script" href="#" onclick="" class="mdl-navigation__link"></a>
-        <a id="nav_grid" href="#" onclick="" class="mdl-navigation__link"></a>
+
 <?php } //ak nova == 1 ?>
       </nav>
     </div>
@@ -925,7 +924,7 @@ $ip = 0;
         </td>
       </tr>
 <?php
-   while ($ip <= $cpolp )
+   while ( $ip <= $cpolp )
    {
 ?>
 <?php
@@ -1395,14 +1394,14 @@ for ( var i = 0; i < buttons.length; i++ ) {
 
   document.formhladaj.cohladat.disabled = true;
 
-<?php if ( $uprav == 1 ) { ?> document.getElementById('nav_user').className += ' active'; <?php } ?>//tento riadok ak nova=1 odstavi javascript pod riadkom dole
+<?php if ( $uprav == 1 ) { ?> document.getElementById('nav_user').className += ' active'; <?php } ?>
 <?php if ( $uprav == 2 ) { ?> document.getElementById('nav_firm').className += ' active'; <?php } ?>
 <?php if ( $uprav == 3 ) { ?> document.getElementById('nav_script').className += ' active'; <?php } ?>
 <?php if ( $uprav == 4 ) { ?> document.getElementById('nav_grid').className += ' active'; <?php } ?>
 
 
 
-<?php if ( $uprav == 3 AND $jemenpid ) { ?> //tu je bug, treba opravit lebo potom nechodia vsetky veci dole od tohoto riadka v javascripte pri uprav=3
+<?php if ( $uprav == 3 AND $jemenpid ) { ?>
 var scriptdot = document.querySelector('#nav_script > .dot');
     scriptdot.className = scriptdot.className == 'mdl-color--white dot vacenter' ? 'mdl-color--grey-600 dot vacenter' : 'mdl-color--white dot vacenter';
 <?php } ?>
@@ -1435,6 +1434,8 @@ var griddot = document.querySelector('#nav_grid > .dot');
 <?php if ( $uprav == 1 OR $uprav == 2 OR $uprav == 3 OR $nova == 1 ) { ?>
   document.formv.uloz.disabled = true;
 <?php                   } ?>
+
+
 
 <?php if ( $uprav == 1 ) { ?>
    document.formv.h_id.value = '<?php echo "$cislo_id"; ?>';
@@ -1619,15 +1620,15 @@ function viewFirms()
   }
 
 
-//enternext
 
+//enternext firms
 function FiodEnter(e)
                 {
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.fido.focus();
-        document.forms.formv.fido.select();
+        document.formv.fido.focus();
+        document.formv.fido.select();
               }
 
                 }
@@ -1640,11 +1641,11 @@ function FidoEnter(e)
     var okvstup=1;
     if ( document.formv.fiod.value == '' && document.formv.fido.value == '' && document.formv.h_txt1.value == ''  ) okvstup=0;
     if ( okvstup == 0 ) { document.formv.fiod.focus(); return (false); }
-    if ( okvstup == 1 ) { document.forms.formv.submit(); return (true); }
+    if ( okvstup == 1 ) { document.formv.submit(); return (true); }
               }
 
                 }
-
+//enternext user
 function CslmEnter(e)
                 {
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
@@ -1663,8 +1664,8 @@ function H_idEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.h_meno.focus();
-        document.forms.formv.h_meno.select();
+        document.formv.h_meno.focus();
+        document.formv.h_meno.select();
               }
 
                 }
@@ -1674,8 +1675,8 @@ function H_menoEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.h_prie.focus();
-        document.forms.formv.h_prie.select();
+        document.formv.h_prie.focus();
+        document.formv.h_prie.select();
               }
 
                 }
@@ -1686,8 +1687,8 @@ function H_prieEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.h_uzm.focus();
-        document.forms.formv.h_uzm.select();
+        document.formv.h_uzm.focus();
+        document.formv.h_uzm.select();
               }
 
                 }
@@ -1697,8 +1698,8 @@ function H_uzmEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.h_uzh.focus();
-        document.forms.formv.h_uzh.select();
+        document.formv.h_uzh.focus();
+        document.formv.h_uzh.select();
               }
 
                 }
@@ -1708,8 +1709,8 @@ function H_uzhEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.h_all.focus();
-        document.forms.formv.h_all.select();
+        document.formv.h_all.focus();
+        document.formv.h_all.select();
               }
 
                 }
@@ -1719,8 +1720,8 @@ function H_allEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.h_uct.focus();
-        document.forms.formv.h_uct.select();
+        document.formv.h_uct.focus();
+        document.formv.h_uct.select();
               }
 
                 }
@@ -1730,8 +1731,8 @@ function H_uctEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.h_mzd.focus();
-        document.forms.formv.h_mzd.select();
+        document.formv.h_mzd.focus();
+        document.formv.h_mzd.select();
               }
 
                 }
@@ -1741,8 +1742,8 @@ function H_mzdEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.h_fak.focus();
-        document.forms.formv.h_fak.select();
+        document.formv.h_fak.focus();
+        document.formv.h_fak.select();
               }
 
                 }
@@ -1752,8 +1753,8 @@ function H_fakEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.h_skl.focus();
-        document.forms.formv.h_skl.select();
+        document.formv.h_skl.focus();
+        document.formv.h_skl.select();
               }
 
                 }
@@ -1763,8 +1764,8 @@ function H_sklEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.h_him.focus();
-        document.forms.formv.h_him.select();
+        document.formv.h_him.focus();
+        document.formv.h_him.select();
               }
 
                 }
@@ -1774,8 +1775,8 @@ function H_himEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.h_dop.focus();
-        document.forms.formv.h_dop.select();
+        document.formv.h_dop.focus();
+        document.formv.h_dop.select();
               }
 
                 }
@@ -1785,8 +1786,8 @@ function H_dopEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.h_vyr.focus();
-        document.forms.formv.h_vyr.select();
+        document.formv.h_vyr.focus();
+        document.formv.h_vyr.select();
               }
 
                 }
@@ -1796,8 +1797,8 @@ function H_vyrEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.forms.formv.h_ana.focus();
-        document.forms.formv.h_ana.select();
+        document.formv.h_ana.focus();
+        document.formv.h_ana.select();
               }
 
                 }
@@ -1812,7 +1813,7 @@ function  H_anaEnter(e)
     if ( document.formv.h_prie.value == '' ) okvstup=0;
     if ( document.formv.h_uzm.value == ''  ) okvstup=0;
     if ( okvstup == 0 ) { document.formv.h_meno.focus(); return (false); }
-    if ( okvstup == 1 ) { document.forms.formv.submit(); return (true); }
+    if ( okvstup == 1 ) { document.formv.submit(); return (true); }
               }
 
                 }
