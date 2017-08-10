@@ -82,11 +82,10 @@ select:enabled {
   max-width: 300px;
   text-transform: none;
 }
-.mdl-layout__tab {
+/*.mdl-layout__tab {
   color: rgba(255,255,255,0.6);
   height: 64px;
   line-height: 64px;
-  /*letter-spacing: 0.02em;*/
 }
 .mdl-layout.is-upgraded .mdl-layout__tab.is-active,
 .mdl-layout__tab-bar-button.is-active {
@@ -102,7 +101,7 @@ select:enabled {
 }
 .mdl-layout__tab-bar-button .material-icons {
   line-height: 64px;
-}
+}*/
 
 
 /* HEADER */
@@ -439,10 +438,27 @@ select:enabled {
 }
 
 /* BUTTON */
+.page-nav-btn {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  margin-top: -28px;
+  height: 56px;
+  width: 56px;
+  min-width: 56px;
+  padding: 8px;
+  border-radius: 50%;
+}
+.page-nav-btn:first-of-type {
+  left: 0;
+}
+.page-nav-btn:last-of-type {
+  right: 0;
+}
 
 
 
-
+/* MODAL */
 
 
 
