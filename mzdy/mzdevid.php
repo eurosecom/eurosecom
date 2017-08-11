@@ -428,7 +428,16 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdprm");
 if( $copern == 10 )
 {
 
-if (File_Exists ("../tmp/mzdList.$kli_uzid.pdf")) { $soubor = unlink("../tmp/mzdList.$kli_uzid.pdf"); }
+$hhmmss = Date ("is", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/mzdlist_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/mzdlist_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
 
    define('FPDF_FONTPATH','../fpdf/font/');
    require('../fpdf/fpdf.php');
@@ -992,7 +1001,7 @@ $j=0;
 
 
 
-$pdf->Output("../tmp/mzdList.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 
 
 ?>
@@ -1011,7 +1020,7 @@ exit;
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/mzdList.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 
