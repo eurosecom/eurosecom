@@ -48,6 +48,8 @@ $dtb2 = include("oddel_dtb1.php");
 $firs = 1*$_REQUEST['firs'];
 $umes = 1*$_REQUEST['umes'];
 
+//echo "copern ".$copern." firs ".$firs;
+
 // zmena firmy
 if ( $copern == 25 OR $copern == 23 )
      {
@@ -63,22 +65,9 @@ $sqlmax = mysql_query("SELECT * FROM $mysqldbfir.fir WHERE xcf=$firs");
   }
      }
 
-$query="START TRANSACTION;";
-$trans = mysql_query($query);
 
 $zmazane = mysql_query("DELETE FROM $mysqldbfir.nas_id WHERE id='$kli_uzid'");
 $ulozene = mysql_query("INSERT INTO $mysqldbfir.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
-
-if ( $ulozene )
-{
-$query="COMMIT;";
-$trans = mysql_query($query);
-}
-if ( !$ulozene )
-{
-$query="ROLLBACK;";
-$trans = mysql_query($query);
-}
 
 if( $oddelnew == 1 )
   {
@@ -663,8 +652,11 @@ if ( $vyb_duj == 9 ) { echo "jednoduché"; }
 <?php
 if ( $copern == 22 OR $copern == 23 OR $copern == 24 )
      {
+$zobrazdiv="display: none;";
+if( $copern == 22 ) { $zobrazdiv="display: ok;"; }
+if( $copern != 22 ) { $zobrazdiv="display: none;"; }
 ?>
-<div class="modal-cover">
+<div class="modal-cover" style="<?php echo $zobrazdiv; ?>">
 <?php
 if ( $copern == 22 )
      {
@@ -731,9 +723,8 @@ if ( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin9 AND xcf <= $kli
 
 if ( $akefirmy == "( xcf >= 0 AND xcf <= 0 )" ) { $setuzfir = include("cis/vybuzfir.php"); }
 
-$sql = mysql_query("SELECT xcf,naz FROM $mysqldbfir.fir WHERE ( $akefirmy ) AND SUBSTRING(prav,$kli_uzid,1) != 'n' ORDER BY xcf");
-//celkom poloziek
-//$cpol = mysql_num_rows($sql);
+$sql = mysql_query("SELECT xcf,naz, rok FROM $mysqldbfir.fir WHERE ( $akefirmy ) AND SUBSTRING(prav,$kli_uzid,1) != 'n' ORDER BY xcf");
+$cpol = mysql_num_rows($sql);
 ?>
 <FORM name="fir1" method="post" action="ucto_md.php?copern=23">
   <div class="mdl-dialog modal" style="">
@@ -752,39 +743,29 @@ while($zaznam=mysql_fetch_array($sql)):
 if ( $zaznam["xcf"] == $vyb_xcf ) { $class = 'selected'; }
 ?>
     <tr class="<?php echo $class; ?>" style="height: 32px;">
-      <td style="height: 32px; padding-top: 4px; padding-bottom: 4px;"><input type="radio" name="h_cfir" id="<?php echo $zaznam["xcf"]; ?>"></td>
+      <td style="height: 32px; padding-top: 4px; padding-bottom: 4px;"><input type="radio" name="firs" id="firs<?php echo $zaznam["xcf"]; ?>" value="<?php echo $zaznam["xcf"]; ?>"></td>
       <td style="height: 32px; padding-top: 4px; padding-bottom: 4px;"><?php echo $zaznam["xcf"]; ?></td>
       <td style="text-align: left; height: 32px; padding-top: 4px; padding-bottom: 4px;"><?php echo $zaznam["naz"]; ?></td>
-      <td style="height: 32px; padding-top: 4px; padding-bottom: 4px;">&nbsp;</td>
+      <td style="height: 32px; padding-top: 4px; padding-bottom: 4px;"><?php echo $zaznam["rok"]; ?></td>
     </tr>
-    <tr class="<?php echo $class; ?>" style="height: 32px;">
-      <td style="height: 32px; padding-top: 4px; padding-bottom: 4px;"><input type="radio" name="h_cfir" id="<?php echo $zaznam["xcf"]; ?>"></td>
-      <td style="height: 32px; padding-top: 4px; padding-bottom: 4px;"><?php echo $zaznam["xcf"]; ?></td>
-      <td style="text-align: left; height: 32px; padding-top: 4px; padding-bottom: 4px;"><?php echo $zaznam["naz"]; ?></td>
-      <td style="height: 32px; padding-top: 4px; padding-bottom: 4px;">&nbsp;</td>
-    </tr>
-    <tr class="<?php echo $class; ?>" style="height: 32px;">
-      <td style="height: 32px; padding-top: 4px; padding-bottom: 4px;"><input type="radio" name="h_cfir" id="<?php echo $zaznam["xcf"]; ?>"></td>
-      <td style="height: 32px; padding-top: 4px; padding-bottom: 4px;"><?php echo $zaznam["xcf"]; ?></td>
-      <td style="text-align: left; height: 32px; padding-top: 4px; padding-bottom: 4px;"><?php echo $zaznam["naz"]; ?></td>
-      <td style="height: 32px; padding-top: 4px; padding-bottom: 4px;">&nbsp;</td>
-    </tr>
+
 <?php endwhile; ?>
     </tbody>
     </table>
-
     </div> <!-- .modal-content -->
     <div class="mdl-dialog__actions">
       <button class="mdl-button mdl-button--raised" style="margin-right: 20px;">Agree</button>
     </div>
   </div> <!-- .modal -->
 </FORM>
-<!-- dopyt, z pôvodného som nepoužil:
-$umes1="1.".$zaznam["rok"]
-<INPUT type="hidden" id="umes" name="umes" value="<?php echo $umes1; ?>">
- -->
 
-
+<script type="text/javascript">
+//tuto ho treba prinutit aby odscrolloval na poziciu, ktoru checkoval document.fir1.firs<?php echo $vyb_xcf; ?> teda na firmu
+<?php if ( $vyb_xcf > 0 AND $copern == 22 ) { ?> 
+document.fir1.firs<?php echo $vyb_xcf; ?>.checked = 'true'; 
+document.fir1.firs<?php echo $vyb_xcf; ?>.focus(); 
+<?php } ?>
+</script>
 
 
 <!-- <FORM name="fir1" method="post" action="ucto_md.php?copern=23" class="modal-content" style="">
