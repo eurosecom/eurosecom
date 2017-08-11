@@ -169,9 +169,7 @@ select:enabled {
     display: none;
 }
 
-.mdl-layout__content {
-  /*padding-bottom: 50px;*/
-}
+
 
 
 
@@ -192,6 +190,9 @@ select:enabled {
   max-width: 1200px;
 }
 
+.mdl-color--light-blue-600 .data-table th {
+  color: #ECEFF1;
+}
 
 /* BASIC TABLE */
 .data-table tr:not(:first-of-type) {
@@ -205,9 +206,10 @@ select:enabled {
   font-size: 11px;
   font-weight: 500;
   line-height: 1.2;
+  color: rgba(0,0,0,.56);
   position: relative;
   height: inherit;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 .data-table td {
@@ -216,10 +218,28 @@ select:enabled {
   color: rgba(0,0,0,.87);
   line-height: 1.2;
   position: relative;
+  padding: 0;
 }
 .data-table td strong {
   font-weight: 500;
 }
+.data-table.highlight-row tr.row-echo, .highlight-list li {
+  transition: all ease-in-out .25s;
+}
+.data-table.highlight-row tr.selected, .highlight-list li.selected {
+  background-color: #4FC3F7;
+}
+.data-table.highlight-row tr.row-echo:not(.selected):hover, .highlight-list li:not(.selected):hover {
+  background-color: #E1F5FE;
+}
+.data-table.highlight-row td label, .highlight-list li label {
+  display: block;
+  height: 32px;
+  line-height: 32px;
+  cursor: pointer;
+  background-color: ;
+}
+
 
 /* LAYOUT TABLE */
 .ui-table tr {
@@ -258,6 +278,7 @@ select:enabled {
   margin: 0 4px;
   width: auto;
 }
+
 
 
 
