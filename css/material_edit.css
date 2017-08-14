@@ -122,10 +122,29 @@ select:enabled {
 .ui-header-page-row .mdl-layout-title {
   font-size: 18px;
 }
+.mdl-layout__header .mdl-color--light-blue-700,
+.mdl-layout__header .mdl-color--light-blue-600 .mdl-button--icon {
+  color: rgba(255,255,255,.7);
+
+}
+.mdl-layout__header .mdl-color--light-blue-600 .mdl-button--icon:hover {
+  color: rgba(255,255,255,1);
+}
 
 
 
-
+.ui-header .mdl-list__item-avatar {
+  font-size: 12px;
+  height: 32px;
+  line-height: 32px;
+  width: 32px;
+  text-align: center;
+}
+.ui-header .mdl-list__item-avatar + .item-avatar-title { /* dopyt, toto bude v style skriptu */
+  color: rgba(255,255,255,.7);
+  letter-spacing: 0.02em;
+  font-size: 14px;
+}
 
 
 
@@ -151,7 +170,7 @@ select:enabled {
   height: 40px;
   width: 300px;
   padding: 4px 48px;
-
+  margin: 0 8px;
 }
 .search-box > * {
   opacity: .7;

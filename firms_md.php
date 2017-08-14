@@ -316,9 +316,15 @@ if( $copern == 1 OR $copern == 8 ) {
     <span onclick="AppPage();" class="mdl-color-text--yellow-A100">EuroSecom</span>&nbsp;
     <span class="mdl-color-text--blue-grey-50"><?php echo $domain; ?></span>
     <div class="mdl-layout-spacer"></div>
-    <button type="button" id="apps_menu" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-grey-50"><i class="material-icons">apps</i></button>&nbsp;&nbsp;&nbsp;
-    <button type="button" id="ilogin_user" class="mdl-button mdl-js-button mdl-button--icon mdl-color--indigo-400 mdl-color-text--blue-grey-50 avatar"><?php echo $kli_uzid; ?></button>&nbsp;&nbsp;
-    <span class="mdl-color-text--blue-grey-50"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
+
+
+<!-- User -->
+    <div class="mdl-list__item" style="padding-right: 0;">
+      <span class="mdl-list__item-primary-content">
+        <span class="mdl-list__item-avatar mdl-color--indigo-400" style="margin-right: 8px;"><?php echo $kli_uzid; ?></span>
+        <span class="item-avatar-title" style="font-size: 12px;"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
+      </span>
+    </div>
   </div> <!-- .ui-header-app-row -->
   <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row">
     <span id="header_title" class="mdl-layout-title mdl-color-text--white" style="cursor: pointer;">»ÌselnÌk firiem<i class="material-icons" style="vertical-align: -6px;">arrow_drop_down</i>&nbsp;
@@ -339,14 +345,14 @@ if ( $uprav == 1 ) { echo "˙prava # $cislo_xcf"; }
       <button id="resetsearchbtn" onclick="document.formhladaj.cohladat.value='';" class="mdl-button mdl-js-button mdl-button--icon search-reset mdl-color-text--white" style="bottom: 4px; right: 8px;"><i class="material-icons">close</i></button>
     </div>
 </form>
-    <button type="button" id="view_list" onclick="viewFirms();" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-grey-50" style="margin-left: 8px;"><i class="material-icons">print</i></button>
+    <button type="button" id="view_list" onclick="viewFirms();" class="mdl-button mdl-js-button mdl-button--icon " style=""><i class="material-icons">print</i></button>
 
-    <button type="button" onclick="novaXcf();" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--white mdl-color-text--blue-grey-300" style="margin-left: 24px;"><i class="material-icons">add</i></button>
+    <button type="button" onclick="novaXcf();" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;"><i class="material-icons">add</i></button>
   </div> <!-- .ui-header-page-row -->
   <div class="mdl-layout__header-row mdl-color--light-blue-600" style="padding:0; height: 40px;">
     <table class="ui-table-header ui-table data-table container tocenter">
     <tr class="mdl-color-text--blue-grey-50">
-      <th class="left" style="width:8%;">»Ìslo</th>
+      <th class="right" style="width:8%; padding-right: 16px;">»Ìslo</th>
       <th class="left" style="width:47%;">N·zov</th>
       <th class="right" style="width:10%;">Obdobie</th>
       <th class="right" style="width:15%;">Druh&nbsp;<i id="druhfirm" class="material-icons md-18">help_outline</i>
@@ -377,7 +383,7 @@ $cpol = mysql_num_rows($sql);
 $npol = $cpol + 1;
 
 // pocet poloziek na stranu
-$pols = 10;
+$pols = 15; //dopyt, dame 15
 if ( $hladanie == 1 ) { $pols = 900; }
 // pocet stran
 $xstr =ceil($cpol / $pols);
@@ -408,6 +414,23 @@ $konc =($pols*($strana-1))+($pols-1);
   {
 $riadok=mysql_fetch_object($sql);
 ?>
+<?php if ( $riadok->xcf != $cislo_xcf OR $nova == 1 ) { ?>
+  <tr id="echo_row" class="row-echo">
+    <td class="right" style="padding-right: 16px;"><strong><?php echo $riadok->xcf; ?></strong></td>
+    <td><?php echo $riadok->naz; ?></td>
+    <td class="right"><?php echo $riadok->rok; ?></td>
+    <td class="right"><?php echo $riadok->duj; ?></td>
+    <td class="right">
+      <button type="button" id="edit<?php echo $riadok->xcf; ?>" onclick="upravXcf(<?php echo $riadok->xcf; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">edit</i></button>
+      <button type="button" id="copy<?php echo $riadok->xcf; ?>" onclick="kopirujXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">content_copy</i></button>
+      <button type="button" id="remove<?php echo $riadok->xcf; ?>" onclick="zmazXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">remove</i></button>
+        <div data-mdl-for="edit<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Upraviù</div>
+        <div data-mdl-for="copy<?php echo $riadok->xcf; ?>" class="mdl-tooltip">KopÌrovaù</div>
+        <div data-mdl-for="remove<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Vymazaù</div>
+    </td>
+  </tr> <!-- .row-echo -->
+<?php                                    } ?>
+
 <?php if ( ( $uprav != 0 AND $riadok->xcf == $cislo_xcf ) OR ( $nova == 1 AND $i == 0 ) OR ( $zmaz != 0 AND $riadok->xcf == $cislo_xcf ) ) { ?>
   <tr class="row-form mdl-color--white mdl-shadow--2dp">
     <td class="vatop">
@@ -474,22 +497,7 @@ $riadok=mysql_fetch_object($sql);
   </tr> <!-- .row-form -->
 <?php                                                    } ?>
 
-<?php if ( $riadok->xcf != $cislo_xcf OR $nova == 1 ) { ?>
-  <tr id="echo_row" class="row-echo">
-    <td><strong><?php echo $riadok->xcf; ?></strong></td>
-    <td><?php echo $riadok->naz; ?></td>
-    <td class="right"><?php echo $riadok->rok; ?></td>
-    <td class="right"><?php echo $riadok->duj; ?></td>
-    <td class="right">
-      <button type="button" id="edit<?php echo $riadok->xcf; ?>" onclick="upravXcf(<?php echo $riadok->xcf; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">edit</i></button>
-      <button type="button" id="copy<?php echo $riadok->xcf; ?>" onclick="kopirujXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">content_copy</i></button>
-      <button type="button" id="remove<?php echo $riadok->xcf; ?>" onclick="zmazXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">remove</i></button>
-        <div data-mdl-for="edit<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Upraviù</div>
-        <div data-mdl-for="copy<?php echo $riadok->xcf; ?>" class="mdl-tooltip">KopÌrovaù</div>
-        <div data-mdl-for="remove<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Vymazaù</div>
-    </td>
-  </tr> <!-- .row-echo -->
-<?php                                    } ?>
+
 <?php
   }
 $i = $i + 1;
@@ -542,60 +550,19 @@ $is = $is + 1;
   <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="Firms();">»ÌselnÌk firiem</li>
 </ul>
 
-<!-- subsystem nav menu -->
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="appsmenubtn" style="padding: 24px; width: 224px; ">
-  <li class="mdl-menu__item toleft" style="width: 88px; height: 88px; padding: 0;   line-height: unset;">
-    <div class="center " style="width: 100%; height: 64px; padding: 8px 0;    ">
-      <i class="material-icons mdl-color-text--blue-grey-300 " style="font-size: 48px; ">account_balance</i>
-      <i class="material-icons mdl-color-text--blue-grey-200" style="font-size: 18px; position: absolute; top: 0; right: 0;">open_in_new</i>
-    </div>
-    <div class="mdl-color-text--blue-grey-400 center" style="width: 100%; height: 24px; ">⁄ËtovnÌctvo</div>
-  </li>
-  <li class="mdl-menu__item " style="width: 88px; height: 88px; padding: 0;   line-height: unset;">
-    <div class="center " style="width: 100%; height: 64px; padding: 8px 0;    ">
-      <i class="material-icons mdl-color-text--blue-grey-300 " style="font-size: 48px; ">euro_symbol</i>
-      <i class="material-icons mdl-color-text--blue-grey-200" style="font-size: 18px; position: absolute; top: 0; right: 0;">open_in_new</i>
-    </div>
-    <div class="mdl-color-text--blue-grey-400 center" style="width: 100%; height: 24px; ">Mzdy</div>
-  </li>
-  <li class="mdl-menu__item toleft" style="width: 88px; height: 88px; padding: 0;   line-height: unset;">
-    <div class="center " style="width: 100%; height: 64px; padding: 8px 0;    ">
-      <i class="material-icons mdl-color-text--blue-grey-300 " style="font-size: 48px; "></i>
-      <i class="material-icons mdl-color-text--blue-grey-200" style="font-size: 18px; position: absolute; top: 0; right: 0;">open_in_new</i>
-    </div>
-    <div class="mdl-color-text--blue-grey-400 center" style="width: 100%; height: 24px; ">Odbyt</div>
-  </li>
-  <li class="mdl-menu__item " style="width: 88px; height: 88px; padding: 0;   line-height: unset;">
-    <div class="center " style="width: 100%; height: 64px; padding: 8px 0;    ">
-      <i class="material-icons mdl-color-text--blue-grey-300 " style="font-size: 48px; "></i>
-      <i class="material-icons mdl-color-text--blue-grey-200" style="font-size: 18px; position: absolute; top: 0; right: 0;">open_in_new</i>
-    </div>
-    <div class="mdl-color-text--blue-grey-400 center" style="width: 100%; height: 24px; ">Sklad</div>
-  </li>
-  <li class="mdl-menu__item toleft" style="width: 88px; height: 88px; padding: 0;   line-height: unset;">
-    <div class="center " style="width: 100%; height: 64px; padding: 8px 0;    ">
-      <i class="material-icons mdl-color-text--blue-grey-300 " style="font-size: 48px; ">business</i>
-      <i class="material-icons mdl-color-text--blue-grey-200" style="font-size: 18px; position: absolute; top: 0; right: 0;">open_in_new</i>
-    </div>
-    <div class="mdl-color-text--blue-grey-400 center" style="width: 100%; height: 24px; ">Majetok</div>
-  </li>
-  <li class="mdl-menu__item " style="width: 88px; height: 88px; padding: 0;   line-height: unset;">
-    <div class="center " style="width: 100%; height: 64px; padding: 8px 0;    ">
-      <i class="material-icons mdl-color-text--blue-grey-300 " style="font-size: 48px; "></i>
-      <i class="material-icons mdl-color-text--blue-grey-200" style="font-size: 18px; position: absolute; top: 0; right: 0;">open_in_new</i>
-    </div>
-    <div class="mdl-color-text--blue-grey-400 center" style="width: 100%; height: 24px; ">Anal˝zy</div>
-  </li>
-</ul>
+
 
 <!-- tooltip -->
 <span class="mdl-tooltip" data-mdl-for="ilogin_user"><?php echo "$kli_uzid $kli_uzmeno $kli_uzprie"; ?></span>
-<span class="mdl-tooltip" data-mdl-for="apps_menu">EuroSecom podsystÈmy</span>
+
 <span class="mdl-tooltip" data-mdl-for="view_list">Zobraziù ËÌselnÌk</span>
 <span class="mdl-tooltip" data-mdl-for="new_item">Vytvoriù novÈho uûÌvateæa</span>
 <span class="mdl-tooltip" data-mdl-for="searchbtn">Hæadaù</span>
 <span class="mdl-tooltip" data-mdl-for="resetsearchbtn">Vymazaù vyhæad·vanie</span>
 <span data-mdl-for="druhfirm" class="mdl-tooltip">0 = PodvojnÈ ˙ËtovnÌctvo<br>1 = NO podvojnÈ ˙ËtovnÌctvo<br>9 = JednoduchÈ ˙ËtovnÌctvo</span>
+
+
+
 </div> <!-- .mdl-layout -->
 <?php             }
 //end of print copern = 1,8
@@ -842,10 +809,7 @@ function Firms()
   {
    window.open('http://www.edcom.sk', '_blank');
   }
-  function News()
-  {
-   window.open('http://www.edcom.sk/ram1/novinkyweb.php', '_blank');
-  }
+
 
 function viewFirms()
 {
