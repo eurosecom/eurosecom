@@ -399,8 +399,16 @@ width: 720px;
     </button>
     <div class="mdl-layout-spacer"></div>
 
-    <button type="button" id="user" class="mdl-button mdl-js-button mdl-button--icon mdl-color--indigo-400 mdl-color-text--white avatar"><?php echo $kli_uzid; ?></button>&nbsp;&nbsp;
-    <span class="mdl-color-text--white"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
+
+
+
+<!-- User -->
+    <div class="mdl-list__item" style="padding-right: 0;">
+      <span class="mdl-list__item-primary-content">
+        <span class="mdl-list__item-avatar mdl-color--indigo-400" style="margin-right: 8px;"><?php echo $kli_uzid; ?></span>
+        <span class="item-avatar-title"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
+      </span>
+    </div>
   </div>
 <!-- Tabs -->
   <div class="mdl-layout__tab-bar ui-header-nav" style="  overflow: auto;">
@@ -640,18 +648,48 @@ if ( $vyb_duj == 9 ) { echo "jednoduchÈ"; }
   </div> -->
 
 
-
-
-
-
-
-
-
 <?php
-if ( $copern == 22 OR $copern == 23 OR $copern == 24 )
+// zmena ume
+if ( $copern == 23 OR $copern == 24 )
      {
 ?>
-<div class="modal-cover">
+<div style="position:absolute; top:48px; left:10px; z-index: 100; background-color: lightgrey; padding: 16px;">
+
+<FORM name="fir1" method="post" action="ucto_md.php?copern=25">
+<select size="12" name="umes" id="umes" >
+<option value="01.<?php echo $vyb_rok;?>" selected='selected'
+ >01.<?php echo $vyb_rok;?></option>
+<option value="02.<?php echo $vyb_rok;?>"
+ >02.<?php echo $vyb_rok;?></option>
+<option value="03.<?php echo $vyb_rok;?>"
+ >03.<?php echo $vyb_rok;?></option>
+<option value="04.<?php echo $vyb_rok;?>"
+ >04.<?php echo $vyb_rok;?></option>
+<option value="05.<?php echo $vyb_rok;?>"
+ >05.<?php echo $vyb_rok;?></option>
+<option value="06.<?php echo $vyb_rok;?>"
+ >06.<?php echo $vyb_rok;?></option>
+<option value="07.<?php echo $vyb_rok;?>"
+ >07.<?php echo $vyb_rok;?></option>
+<option value="08.<?php echo $vyb_rok;?>"
+ >08.<?php echo $vyb_rok;?></option>
+<option value="09.<?php echo $vyb_rok;?>"
+ >09.<?php echo $vyb_rok;?></option>
+<option value="10.<?php echo $vyb_rok;?>"
+ >10.<?php echo $vyb_rok;?></option>
+<option value="11.<?php echo $vyb_rok;?>"
+ >11.<?php echo $vyb_rok;?></option>
+<option value="12.<?php echo $vyb_rok;?>"
+ >12.<?php echo $vyb_rok;?></option>
+<INPUT type="hidden" id="firs" name="firs" value="<?php echo $vyb_xcf;?>" ><br>
+<INPUT type="submit" id="umev" name="umev" value="Vybraù ˙ËtovnÈ obdobie" >
+</FORM>
+</div>
+<?php
+     }
+//toto je koniec zmeny ume
+?>
+
 <?php
 //select period
 if ( $copern == 22 )
@@ -667,246 +705,88 @@ $pole1 = explode("-", $pole[1]);
 $kli_fmin1=$pole1[0];
 $kli_fmax1=$pole1[1];
 $cislo=1*$kli_fmin1;
-if ( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin1 AND xcf <= $kli_fmax1 )";
+if( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin1 AND xcf <= $kli_fmax1 )";
 
 $pole2 = explode("-", $pole[2]);
 $kli_fmin2=$pole2[0];
 $kli_fmax2=$pole2[1];
 $cislo=1*$kli_fmin2;
-if ( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin2 AND xcf <= $kli_fmax2 )";
+if( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin2 AND xcf <= $kli_fmax2 )";
 
 $pole3 = explode("-", $pole[3]);
 $kli_fmin3=$pole3[0];
 $kli_fmax3=$pole3[1];
 $cislo=1*$kli_fmin3;
-if ( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin3 AND xcf <= $kli_fmax3 )";
+if( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin3 AND xcf <= $kli_fmax3 )";
 
 $pole4 = explode("-", $pole[4]);
 $kli_fmin4=$pole4[0];
 $kli_fmax4=$pole4[1];
 $cislo=1*$kli_fmin4;
-if ( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin4 AND xcf <= $kli_fmax4 )";
+if( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin4 AND xcf <= $kli_fmax4 )";
 
 $pole5 = explode("-", $pole[5]);
 $kli_fmin5=$pole5[0];
 $kli_fmax5=$pole5[1];
 $cislo=1*$kli_fmin5;
-if ( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin5 AND xcf <= $kli_fmax5 )";
+if( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin5 AND xcf <= $kli_fmax5 )";
 
 $pole6 = explode("-", $pole[6]);
 $kli_fmin6=$pole6[0];
 $kli_fmax6=$pole6[1];
 $cislo=1*$kli_fmin6;
-if ( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin6 AND xcf <= $kli_fmax6 )";
+if( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin6 AND xcf <= $kli_fmax6 )";
 
 $pole7 = explode("-", $pole[7]);
 $kli_fmin7=$pole7[0];
 $kli_fmax7=$pole7[1];
 $cislo=1*$kli_fmin7;
-if ( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin7 AND xcf <= $kli_fmax7 )";
+if( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin7 AND xcf <= $kli_fmax7 )";
 
 $pole8 = explode("-", $pole[8]);
 $kli_fmin8=$pole8[0];
 $kli_fmax8=$pole8[1];
 $cislo=1*$kli_fmin8;
-if ( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin8 AND xcf <= $kli_fmax8 )";
+if( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin8 AND xcf <= $kli_fmax8 )";
 
 $pole9 = explode("-", $pole[9]);
 $kli_fmin9=$pole9[0];
 $kli_fmax9=$pole9[1];
 $cislo=1*$kli_fmin9;
-if ( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin9 AND xcf <= $kli_fmax9 )";
+if( $cislo > 0 ) $akefirmy = $akefirmy." OR ( xcf >= $kli_fmin9 AND xcf <= $kli_fmax9 )";
 
-if ( $akefirmy == "( xcf >= 0 AND xcf <= 0 )" ) { $setuzfir = include("cis/vybuzfir.php"); }
+if( $akefirmy == "( xcf >= 0 AND xcf <= 0 )" ) { $setuzfir = include("cis/vybuzfir.php"); }
 
-$sql = mysql_query("SELECT xcf,naz, rok FROM $mysqldbfir.fir WHERE ( $akefirmy ) AND SUBSTRING(prav,$kli_uzid,1) != 'n' ORDER BY xcf");
-$cpol = mysql_num_rows($sql);
+$setuzrok = include("cis/citajrok.php");
+
+$sql = mysql_query("SELECT xcf,naz,rok FROM $mysqldbfir.fir WHERE ( $akefirmy ) AND SUBSTRING(prav,$kli_uzid,1) != 'n' AND rok > $citajrok ORDER BY xcf");
+// celkom poloziek
+// $cpol = mysql_num_rows($sql);
 ?>
-<FORM name="fir1" method="post" action="ucto_md.php?copern=23">
-  <div class="mdl-dialog modal" style="">
-    <div class="mdl-dialog__title modal-title ">V˝ber firmy</div>
-    <div class="mdl-dialog__content modal-content" style="overflow: auto; height: 300px;">
-    <table class="data-table highlight-row" style="width: 500px;">
-    <tr id="first_row" style="height: 24px;">
-      <th class="right" style="width: 80px; padding-right: 16px;">»Ìslo</th>
-      <th class="left" style="width: 320px;">N·zov</th>
-      <th class="right" style="width: 100px; padding-right: 16px;">Obdobie</th>
-    </tr>
-<style>
-.preselect {
-  font-weight: 500;
-  /*background-color: #B3E5FC;*/
-}
-</style>
+<div style="position:absolute; top:48px; left:10px; z-index: 100; background-color: lightgrey; padding: 16px;">
+<FORM name="fir1" method="post" action="ucto_md.php?copern=23" >
+<select size="10" name="firs" id="firs" >
+<?php while($zaznam=mysql_fetch_array($sql)):?>
+<option value="<?php echo $zaznam["xcf"];?>"
 <?php
-while ( $zaznam=mysql_fetch_array($sql) ):
-if ( $zaznam["xcf"] == $vyb_xcf ) { $row_state = 'preselect'; } //dopyt, class priraden· viacer˝m riadkom
+if ( $zaznam["xcf"] == $vyb_xcf ) echo " selected='selected'";
+$umes1="1.".$zaznam["rok"]
 ?>
-    <tr class="<?php echo $row_state; ?> row-echo" style="height: 32px;">
-      <td class="right">
-        <input type="radio" name="firs" id="firs<?php echo $zaznam["xcf"]; ?>" value="<?php echo $zaznam["xcf"]; ?>" class="hidden">
-        <label for="firs<?php echo $zaznam["xcf"]; ?>" style="padding-right: 16px;"><?php echo $zaznam["xcf"]; ?></label>
-      </td>
-      <td style="">
-        <label for="firs<?php echo $zaznam["xcf"]; ?>"><?php echo $zaznam["naz"]; ?></label>
-      </td>
-      <td class="right" style="">
-        <label for="firs<?php echo $zaznam["xcf"]; ?>" style="padding-right: 16px;"><?php echo $zaznam["rok"]; ?></label>
-      </td>
-    </tr>
-<?php endwhile; ?>
-    </table>
-    </div> <!-- .modal-content -->
-    <div class="mdl-dialog__actions">
-      <button class="mdl-button mdl-js-button mdl-button--primary" style="margin-right: 20px;">Vybraù</button>
-    </div>
-  </div> <!-- .modal -->
+ ><?php echo $zaznam["xcf"];?> - <?php echo $zaznam["naz"];?></option>
+<?php endwhile;?>
+</select>
+<INPUT type="hidden" id="umes" name="umes" value="<?php echo $umes1;?>" ><br>
+<INPUT type="submit" id="firv" name="firv" value="Vybraù ˙Ëtovn˙ jednotku" >
 </FORM>
-<script type="text/javascript">
-<?php if ( $vyb_xcf > 0 AND $copern == 22 ) { ?>
-  //toto cele nedavat prec, myslel som prec len komentar nie tieto dva riadky pod komentarom, teraz tam ale potrebujem vloûiù prÌkaz na
-  //focusovanie aktu·lne vybranej firmy pred zmenou. Z kÛdu Ëo si zmenil nevidÌm ten prÌkaz onclik a jednoduch˝ javascript checked a focus nefunguje
-  document.fir1.firs<?php echo $vyb_xcf; ?>.checked = 'true';
-  document.fir1.firs<?php echo $vyb_xcf; ?>.focus();
-<?php } ?>
-</script>
+</div>
 <?php
 mysql_close();
 mysql_free_result($sql);
-//end select firm
+// toto je koniec zmeny firmy
      }
+
+$akyrobot = include("akyrobot.php");
 ?>
-
-<?php
-//select period
-if ( $copern == 23 OR $copern == 24 )
-     {
-?>
- <FORM name="fir1" method="post" action="ucto_md.php?copern=25">
-  <div class="mdl-dialog modal" style="">
-    <div class="mdl-dialog__title modal-title">V˝ber obdobia</div>
-    <div class="mdl-dialog__content modal-content" style="overflow: auto; height: 300px;">
-
-<!-- dopyt dorobiù nieËo na spÙsob : -->
-<?php
-//while($zaznam=mysql_fetch_array($sql)):
-//if ( $zaznam["xcf"] == $vyb_xcf ) { $class = 'selected'; }
-?>
-<!-- aby som mohol aktu·lnemu mesiacu urËiù class -->
-<style>
-.highlight-list li {
-  height: 30px;
-  line-height: 30px;
-  border-bottom: 1px solid #CFD8DC;
-  font-size: 13px;
-}
-.highlight-list li input[type='radio'] {
-  float: left;
-
-}
-
-</style>
-
-
-<ul class="highlight-list tocenter" style="width: 200px;">
-  <li id="first_row" style="height: 0;">&nbsp;</li>
-  <li>
-    <input type="radio" name="period" id="01.<?php echo $vyb_rok; ?>" value="01.<?php echo $vyb_rok; ?>">
-    <label for="01.<?php echo $vyb_rok; ?>">01.<?php echo $vyb_rok; ?></label>
-  </li>
-  <li>
-    <input type="radio" name="period" id="02.<?php echo $vyb_rok; ?>" value="02.<?php echo $vyb_rok; ?>">
-    <label for="02.<?php echo $vyb_rok; ?>">02.<?php echo $vyb_rok; ?></label>
-  </li>
-  <li>
-    <input type="radio" name="period" id="03.<?php echo $vyb_rok; ?>" value="03.<?php echo $vyb_rok; ?>">
-    <label for="03.<?php echo $vyb_rok; ?>">03.<?php echo $vyb_rok; ?></label>
-  </li>
-  <li>
-    <input type="radio" name="period" id="04.<?php echo $vyb_rok; ?>" value="04.<?php echo $vyb_rok; ?>">
-    <label for="04.<?php echo $vyb_rok; ?>">04.<?php echo $vyb_rok; ?></label>
-  </li>
-  <li>
-    <input type="radio" name="period" id="05.<?php echo $vyb_rok; ?>" value="05.<?php echo $vyb_rok; ?>">
-    <label for="05.<?php echo $vyb_rok; ?>">05.<?php echo $vyb_rok; ?></label>
-  </li>
-  <li>
-    <input type="radio" name="period" id="06.<?php echo $vyb_rok; ?>" value="06.<?php echo $vyb_rok; ?>">
-    <label for="06.<?php echo $vyb_rok; ?>">06.<?php echo $vyb_rok; ?></label>
-  </li>
-  <li>
-    <input type="radio" name="period" id="07.<?php echo $vyb_rok; ?>" value="07.<?php echo $vyb_rok; ?>">
-    <label for="07.<?php echo $vyb_rok; ?>">07.<?php echo $vyb_rok; ?></label>
-  </li>
-  <li>
-    <input type="radio" name="period" id="08.<?php echo $vyb_rok; ?>" value="08.<?php echo $vyb_rok; ?>">
-    <label for="08.<?php echo $vyb_rok; ?>">08.<?php echo $vyb_rok; ?></label>
-  </li>
-  <li>
-    <input type="radio" name="period" id="09.<?php echo $vyb_rok; ?>" value="09.<?php echo $vyb_rok; ?>">
-    <label for="09.<?php echo $vyb_rok; ?>">09.<?php echo $vyb_rok; ?></label>
-  </li>
-  <li>
-    <input type="radio" name="period" id="10.<?php echo $vyb_rok; ?>" value="10.<?php echo $vyb_rok; ?>">
-    <label for="10.<?php echo $vyb_rok; ?>">10.<?php echo $vyb_rok; ?></label>
-  </li>
-  <li>
-    <input type="radio" name="period" id="11.<?php echo $vyb_rok; ?>" value="11.<?php echo $vyb_rok; ?>">
-    <label for="11.<?php echo $vyb_rok; ?>">11.<?php echo $vyb_rok; ?></label>
-  </li>
-  <li>
-    <input type="radio" name="period" id="12.<?php echo $vyb_rok; ?>" value="12.<?php echo $vyb_rok; ?>">
-    <label for="12.<?php echo $vyb_rok; ?>">12.<?php echo $vyb_rok; ?></label>
-  </li>
-</ul>
-
-<!-- <select size="12" name="umes" id="umes">
- <option value="01.<?php echo $vyb_rok; ?>" selected="selected">01.<?php echo $vyb_rok; ?></option>
- <option value="02.<?php echo $vyb_rok; ?>">02.<?php echo $vyb_rok; ?></option>
- <option value="03.<?php echo $vyb_rok; ?>">03.<?php echo $vyb_rok; ?></option>
- <option value="04.<?php echo $vyb_rok; ?>">04.<?php echo $vyb_rok; ?></option>
- <option value="05.<?php echo $vyb_rok; ?>">05.<?php echo $vyb_rok; ?></option>
- <option value="06.<?php echo $vyb_rok; ?>">06.<?php echo $vyb_rok; ?></option>
- <option value="07.<?php echo $vyb_rok; ?>">07.<?php echo $vyb_rok; ?></option>
- <option value="08.<?php echo $vyb_rok; ?>">08.<?php echo $vyb_rok; ?></option>
- <option value="09.<?php echo $vyb_rok; ?>">09.<?php echo $vyb_rok; ?></option>
- <option value="10.<?php echo $vyb_rok; ?>">10.<?php echo $vyb_rok; ?></option>
- <option value="11.<?php echo $vyb_rok; ?>">11.<?php echo $vyb_rok; ?></option>
- <option value="12.<?php echo $vyb_rok; ?>">12.<?php echo $vyb_rok; ?></option>
-</select> -->
-
-<!-- <INPUT type="hidden" id="firs" name="firs" value="<?php echo $vyb_xcf; ?>"> dopyt, neviem kam -->
-<!-- <button type="submit" id="umev" name="umev">Vybraù</button> -->
-    </div> <!-- .modal-content -->
-    <div class="mdl-dialog__actions">
-      <button class="mdl-button mdl-js-button mdl-button--primary" style="margin-right: 20px;">Vybraù</button>
-    </div>
-  </div> <!-- .modal -->
-</FORM>
-<?php
-    }
-//end select period
-?>
-</div> <!-- .modal-cover -->
-<?php
-//$copern=22,23,24
-}
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!-- <div id="robotokno" style="cursor: hand; display: none; position: absolute; z-index: 200; top: 200; left: 40; width:60; height:100;">
@@ -927,10 +807,6 @@ zobrazene menu
 
 <?php
 //$robot=1;
-
-
-
-
 //celkovy koniec dokumentu
        } while (false);
 ?>
@@ -951,66 +827,6 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; /
 <?php if ( $kli_vmes == 1 ) { ?> document.getElementById('month_prev').disabled = true; <?php } ?>
 <?php if ( $kli_vmes == 12 ) { ?> document.getElementById('month_next').disabled = true; <?php } ?>
 
-//select firm/month
-  function selectFirm()
-  {
-    window.open('ucto_md.php?copern=22', '_self');
-  }
-  function selectPeriod()
-  {
-    window.open('ucto_md.php?copern=24', '_self');
-  }
-
-
-  function selectRow()
-  {
-    var radios = document.getElementsByName("firs");
-    for( var i = 0; i < radios.length; i++ )
-    {
-      radios[i].onclick = function()
-      {
-        //remove class from the other rows
-        var el = document.getElementById("first_row");
-          //go to the nex sibing
-          while(el = el.nextSibling)
-          {
-            if(el.tagName === "TR")
-            {
-              //remove the selected class
-              el.classList.remove("selected");
-            }
-          }
-        //radio.td.tr
-        this.parentElement.parentElement.classList.toggle("selected");
-      };
-    }
-  }
-  selectRow();
-
-  // function selectRow(period)
-  // {
-  //   var radios = document.getElementsByName("period");
-  //   for( var i = 0; i < radios.length; i++ )
-  //   {
-  //     radios[i].onclick = function()
-  //     {
-  //       //remove class from the other rows
-  //       var el = document.getElementById("first_row");
-  //         //go to the nex sibing
-  //         while(el = el.nextSibling)
-  //         {
-  //           if(el.tagName === "LI")
-  //           {
-  //             //remove the selected class
-  //             el.classList.remove("selected");
-  //           }
-  //         }
-  //       //radio.li
-  //       this.parentElement.classList.toggle("selected");
-  //     };
-  //   }
-  // }
-  // selectRow(period);
 
 
 
@@ -1289,7 +1105,15 @@ if ( $vyb_rok <= 2012 ) { $rokdph=2012; }
   }
 
 
-
+//select firm/month
+  function selectFirm()
+  {
+    window.open('ucto_md.php?copern=22', '_self');
+  }
+  function selectPeriod()
+  {
+    window.open('ucto_md.php?copern=24', '_self');
+  }
 
 
 
