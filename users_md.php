@@ -653,147 +653,6 @@ $konc = ( $pols*($strana-1))+($pols-1);
   {
 $riadok=mysql_fetch_object($sql);
 ?>
-<?php if ( $riadok->id_klienta != $cislo_id ) { ?>
-  <tr id="echo_row" class="row-echo">
-    <td>
-<?php if ( $riadok->id_klienta == $kli_uzid ) { ?>
-      <span class="mdl-color--light-blue-400 dot" style="position: absolute; top: 22px; left: 8px;">&nbsp;</span>
- <?php } ?>
-      <span class="mdl-color--white avatar" style="margin: 8px 0; border: 1px solid #039BE5;"><strong><?php echo $riadok->id_klienta; ?></strong></span>&nbsp;&nbsp;
-      <strong><?php echo "$riadok->meno $riadok->priezvisko"; ?></strong>
-    </td>
-<?php
-//user + grid
-$jegrid=0;
-$sqlpoktt = "SELECT * FROM krtgrd WHERE id = $riadok->id_klienta ";
-$sqlpok = mysql_query("$sqlpoktt");
-  if (@$zaznam=mysql_data_seek($sqlpok,0))
-  {
-  $riadokpok=mysql_fetch_object($sqlpok);
-  $jegrid=1;
-  }
-
-//user + script
-$jemenp=0;
-$sqlpoktt = "SELECT * FROM menp WHERE prav = $riadok->id_klienta ";
-$sqlpok = mysql_query("$sqlpoktt");
-  if (@$zaznam=mysql_data_seek($sqlpok,0))
-  {
-  $riadokpok=mysql_fetch_object($sqlpok);
-  $jemenp=1;
-  }
-
-//last logged
-$poslpr="";
-$sqlpoktt = "SELECT * FROM dlogin WHERE id = $riadok->id_klienta ORDER BY datm DESC";
-$sqlpok = mysql_query("$sqlpoktt");
-  if (@$zaznam=mysql_data_seek($sqlpok,0))
-  {
-  $riadokpok=mysql_fetch_object($sqlpok);
-  $poslpr = date("d.m.Y H:i:s", strtotime($riadokpok->datm));
-  }
-
-//set my firm + period
-if( $i == 0 )
-    {
-$mojexcf=0; $mojeume=0;
-$sqlpoktt = "SELECT * FROM nas_id WHERE id = $kli_uzid ORDER BY datm DESC";
-$sqlpok = mysql_query("$sqlpoktt");
-  if (@$zaznam=mysql_data_seek($sqlpok,0))
-  {
-  $riadokpok=mysql_fetch_object($sqlpok);
-  $mojexcf=1*$riadokpok->xcf;
-  $mojeume=1*$riadokpok->ume;
-  }
-    }
-
-//firms echo
-$akefirmy="";
-if( $riadok->txt1 == "0-0" )
-        {
-$ipok=0;
-$sqlpoktt = "SELECT * FROM firuz WHERE uzid = $riadok->id_klienta ORDER BY fiod ";
-$sqlpok = mysql_query("$sqlpoktt");
-$cpolpok = mysql_num_rows($sqlpok);
-   while ($ipok <= $cpolpok )
-   {
-  if (@$zaznampok=mysql_data_seek($sqlpok,$ipok))
-  {
-  $riadokpok=mysql_fetch_object($sqlpok);
-  $akefirmy=$akefirmy.$riadokpok->fiod."-".$riadokpok->fido."<br />";
-
-  }
-$ipok=$ipok+1;
-   }
-        }
-?>
-    <td>
-      <?php echo "$riadok->uziv_meno - $riadok->uziv_heslo"; ?><br>
-<?php if ( $jegrid == 1 ) { ?>
- <span id="grid<?php echo $riadok->id_klienta; ?>" class="text-chip mdl-color--grey-300" style="position: relative; top: 3px;">Grid</span> <?php } ?>
-<?php if ( $jemenp == 1 ) { ?>
- <span id="script<?php echo $riadok->id_klienta; ?>" class="text-chip mdl-color--grey-300" style="position: relative; top: 3px;">Skripty</span>
-  <?php } ?>
-      <i id="logged<?php echo $riadok->id_klienta; ?>" class="material-icons mdl-color-text--grey-500 md-18 vacenter">timer</i>
-        <span data-mdl-for="grid<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Uívate¾ s grid kartou</span>
-        <span data-mdl-for="script<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Uívate¾ s obmedzenım prístupom</span>
-        <span data-mdl-for="logged<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Posledné prihlásenie: <?php echo $poslpr; ?></span>
-    </td>
-    <td>
-<?php if ( $riadok->txt1 != "0-0" ) { ?>
-<i id="firms<?php echo $riadok->id_klienta; ?>" class="material-icons mdl-color-text--grey-500 md-18 vacenter">error_outline</i>
-      <?php echo $riadok->txt1; ?>
-      <span data-mdl-for="firms<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Firmy nastavené v starom formáte</span>
-<?php } ?>
-<?php if ( $riadok->txt1 == "0-0" ) { ?>
- <?php echo $akefirmy; ?>
-      <?php echo $riadok->txt1; ?>
-<?php } ?>
-    </td>
-    <td class="right"><?php echo $riadok->all_prav; ?></td>
-    <td class="right">
-      <span id="uct<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->uct_prav; ?></span><br>
-      <span id="maj<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->him_prav; ?></span>
-        <span data-mdl-for="uct<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Úètovníctvo</span>
-        <span data-mdl-for="maj<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Majetok</span>
-    </td>
-    <td class="right">
-      <span id="mzd<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->mzd_prav; ?></span><br>
-      <span id="dop<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->dop_prav; ?></span>
-        <span data-mdl-for="mzd<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Mzdy</span>
-        <span data-mdl-for="dop<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Doprava</span>
-    </td>
-    <td class="right">
-      <span id="fak<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->fak_prav; ?></span><br>
-      <span id="vyr<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->vyr_prav; ?></span>
-        <span data-mdl-for="fak<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Odbyt</span>
-        <span data-mdl-for="vyr<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Vıroba</span>
-    </td>
-    <td class="right">
-      <span id="skl<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->skl_prav; ?></span><br>
-      <span id="ana<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->ana_prav; ?></span>
-        <span data-mdl-for="skl<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Sklad</span>
-        <span data-mdl-for="ana<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Analızy</span>
-    </td>
-    <td class="right">
-      <button type="button" id="edit<?php echo $riadok->id_klienta; ?>" onclick="upravId(<?php echo $riadok->id_klienta; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">edit</i></button>
-      <button id="more<?php echo $riadok->id_klienta; ?>" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-grey-300"><i class="material-icons">more_vert</i></button>
-        <ul for="more<?php echo $riadok->id_klienta; ?>" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect">
-          <li class="mdl-menu__item"><i class="material-icons mdl-color-text--blue-grey-300 vacenter">content_copy</i>&nbsp;&nbsp;&nbsp;&nbsp;Kopírova</li>
-          <li disabled class="mdl-menu__item"><i class="material-icons vacenter">remove</i>&nbsp;&nbsp;&nbsp;&nbsp;Vymaza&nbsp;&nbsp;&nbsp;<i id="user_remove<?php echo $riadok->id_klienta; ?>" class="material-icons vacenter">info_outline</i>
-            <div data-mdl-for="user_remove<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip">Nie je moné vymaza uívate¾a,<br>iba ho nastavi neaktívnym</div>
-          </li>
-          <li onclick="NastavFirmu(<?php echo $riadok->id_klienta; ?>, <?php echo $strana; ?>);" class="mdl-menu__item"><i class="material-icons mdl-color-text--blue-grey-400 vacenter">build</i>&nbsp;&nbsp;&nbsp;&nbsp;Nastavi firmu <?php echo $mojexcf; ?> a mesiac <?php echo $mojeume; ?></li>
-        </ul>
-        <div data-mdl-for="edit<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip">Upravi</div>
-        <div data-mdl-for="more<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip">Ïalšie akcie</div>
-     </td>
-  </tr> <!-- .row-echo -->
-<?php
-      } //$uprav=0
-?>
-
-
 <?php if ( ( $uprav != 0 AND $riadok->id_klienta == $cislo_id ) OR ( $nova == 1 AND $i == 0 ) ) { ?>
   <tr class="row-form">
     <td colspan="9" style="padding: 0;">
@@ -1245,6 +1104,145 @@ $ig = $ig + 1;
       }
 ?>
 
+<?php if ( $riadok->id_klienta != $cislo_id ) { ?>
+  <tr id="echo_row" class="row-echo">
+    <td>
+<?php if ( $riadok->id_klienta == $kli_uzid ) { ?>
+      <span class="mdl-color--light-blue-400 dot" style="position: absolute; top: 22px; left: 8px;">&nbsp;</span>
+ <?php } ?>
+      <span class="mdl-color--white avatar" style="margin: 8px 0; border: 1px solid #039BE5;"><strong><?php echo $riadok->id_klienta; ?></strong></span>&nbsp;&nbsp;
+      <strong><?php echo "$riadok->meno $riadok->priezvisko"; ?></strong>
+    </td>
+<?php
+//user + grid
+$jegrid=0;
+$sqlpoktt = "SELECT * FROM krtgrd WHERE id = $riadok->id_klienta ";
+$sqlpok = mysql_query("$sqlpoktt");
+  if (@$zaznam=mysql_data_seek($sqlpok,0))
+  {
+  $riadokpok=mysql_fetch_object($sqlpok);
+  $jegrid=1;
+  }
+
+//user + script
+$jemenp=0;
+$sqlpoktt = "SELECT * FROM menp WHERE prav = $riadok->id_klienta ";
+$sqlpok = mysql_query("$sqlpoktt");
+  if (@$zaznam=mysql_data_seek($sqlpok,0))
+  {
+  $riadokpok=mysql_fetch_object($sqlpok);
+  $jemenp=1;
+  }
+
+//last logged
+$poslpr="";
+$sqlpoktt = "SELECT * FROM dlogin WHERE id = $riadok->id_klienta ORDER BY datm DESC";
+$sqlpok = mysql_query("$sqlpoktt");
+  if (@$zaznam=mysql_data_seek($sqlpok,0))
+  {
+  $riadokpok=mysql_fetch_object($sqlpok);
+  $poslpr = date("d.m.Y H:i:s", strtotime($riadokpok->datm));
+  }
+
+//set my firm + period
+if( $i == 0 )
+    {
+$mojexcf=0; $mojeume=0;
+$sqlpoktt = "SELECT * FROM nas_id WHERE id = $kli_uzid ORDER BY datm DESC";
+$sqlpok = mysql_query("$sqlpoktt");
+  if (@$zaznam=mysql_data_seek($sqlpok,0))
+  {
+  $riadokpok=mysql_fetch_object($sqlpok);
+  $mojexcf=1*$riadokpok->xcf;
+  $mojeume=1*$riadokpok->ume;
+  }
+    }
+
+//firms echo
+$akefirmy="";
+if( $riadok->txt1 == "0-0" )
+        {
+$ipok=0;
+$sqlpoktt = "SELECT * FROM firuz WHERE uzid = $riadok->id_klienta ORDER BY fiod ";
+$sqlpok = mysql_query("$sqlpoktt");
+$cpolpok = mysql_num_rows($sqlpok);
+   while ($ipok <= $cpolpok )
+   {
+  if (@$zaznampok=mysql_data_seek($sqlpok,$ipok))
+  {
+  $riadokpok=mysql_fetch_object($sqlpok);
+  $akefirmy=$akefirmy.$riadokpok->fiod."-".$riadokpok->fido."<br />";
+
+  }
+$ipok=$ipok+1;
+   }
+        }
+?>
+    <td>
+      <?php echo "$riadok->uziv_meno - $riadok->uziv_heslo"; ?><br>
+<?php if ( $jegrid == 1 ) { ?>
+ <span id="grid<?php echo $riadok->id_klienta; ?>" class="text-chip mdl-color--grey-300" style="position: relative; top: 3px;">Grid</span> <?php } ?>
+<?php if ( $jemenp == 1 ) { ?>
+ <span id="script<?php echo $riadok->id_klienta; ?>" class="text-chip mdl-color--grey-300" style="position: relative; top: 3px;">Skripty</span>
+  <?php } ?>
+      <i id="logged<?php echo $riadok->id_klienta; ?>" class="material-icons mdl-color-text--grey-500 md-18 vacenter">timer</i>
+        <span data-mdl-for="grid<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Uívate¾ s grid kartou</span>
+        <span data-mdl-for="script<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Uívate¾ s obmedzenım prístupom</span>
+        <span data-mdl-for="logged<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Posledné prihlásenie: <?php echo $poslpr; ?></span>
+    </td>
+    <td>
+<?php if ( $riadok->txt1 != "0-0" ) { ?>
+<i id="firms<?php echo $riadok->id_klienta; ?>" class="material-icons mdl-color-text--grey-500 md-18 vacenter">error_outline</i>
+      <?php echo $riadok->txt1; ?>
+      <span data-mdl-for="firms<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">Firmy nastavené v starom formáte</span>
+<?php } ?>
+<?php if ( $riadok->txt1 == "0-0" ) { ?>
+ <?php echo $akefirmy; ?>
+      <?php echo $riadok->txt1; ?>
+<?php } ?>
+    </td>
+    <td class="right"><?php echo $riadok->all_prav; ?></td>
+    <td class="right">
+      <span id="uct<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->uct_prav; ?></span><br>
+      <span id="maj<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->him_prav; ?></span>
+        <span data-mdl-for="uct<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Úètovníctvo</span>
+        <span data-mdl-for="maj<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Majetok</span>
+    </td>
+    <td class="right">
+      <span id="mzd<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->mzd_prav; ?></span><br>
+      <span id="dop<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->dop_prav; ?></span>
+        <span data-mdl-for="mzd<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Mzdy</span>
+        <span data-mdl-for="dop<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Doprava</span>
+    </td>
+    <td class="right">
+      <span id="fak<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->fak_prav; ?></span><br>
+      <span id="vyr<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->vyr_prav; ?></span>
+        <span data-mdl-for="fak<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Odbyt</span>
+        <span data-mdl-for="vyr<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Vıroba</span>
+    </td>
+    <td class="right">
+      <span id="skl<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->skl_prav; ?></span><br>
+      <span id="ana<?php echo $riadok->id_klienta; ?>"><?php echo $riadok->ana_prav; ?></span>
+        <span data-mdl-for="skl<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Sklad</span>
+        <span data-mdl-for="ana<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip" style="margin-top: -7px;">Analızy</span>
+    </td>
+    <td class="right">
+      <button type="button" id="edit<?php echo $riadok->id_klienta; ?>" onclick="upravId(<?php echo $riadok->id_klienta; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">edit</i></button>
+      <button id="more<?php echo $riadok->id_klienta; ?>" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--blue-grey-300"><i class="material-icons">more_vert</i></button>
+        <ul for="more<?php echo $riadok->id_klienta; ?>" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect">
+          <li class="mdl-menu__item"><i class="material-icons mdl-color-text--blue-grey-300 vacenter">content_copy</i>&nbsp;&nbsp;&nbsp;&nbsp;Kopírova</li>
+          <li disabled class="mdl-menu__item"><i class="material-icons vacenter">remove</i>&nbsp;&nbsp;&nbsp;&nbsp;Vymaza&nbsp;&nbsp;&nbsp;<i id="user_remove<?php echo $riadok->id_klienta; ?>" class="material-icons vacenter">info_outline</i>
+            <div data-mdl-for="user_remove<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip">Nie je moné vymaza uívate¾a,<br>iba ho nastavi neaktívnym</div>
+          </li>
+          <li onclick="NastavFirmu(<?php echo $riadok->id_klienta; ?>, <?php echo $strana; ?>);" class="mdl-menu__item"><i class="material-icons mdl-color-text--blue-grey-400 vacenter">build</i>&nbsp;&nbsp;&nbsp;&nbsp;Nastavi firmu <?php echo $mojexcf; ?> a mesiac <?php echo $mojeume; ?></li>
+        </ul>
+        <div data-mdl-for="edit<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip">Upravi</div>
+        <div data-mdl-for="more<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip">Ïalšie akcie</div>
+     </td>
+  </tr> <!-- .row-echo -->
+<?php
+      } //$uprav=0
+?>
 
 
 

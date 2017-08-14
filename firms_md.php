@@ -290,7 +290,6 @@ $vysledek = mysql_query("$sql");
 
           }
 //if( $newdelenie == 1 )
-
 ?>
 <head>
   <meta charset="cp1250">
@@ -414,22 +413,6 @@ $konc =($pols*($strana-1))+($pols-1);
   {
 $riadok=mysql_fetch_object($sql);
 ?>
-<?php if ( $riadok->xcf != $cislo_xcf OR $nova == 1 ) { ?>
-  <tr id="echo_row" class="row-echo">
-    <td class="right" style="padding-right: 16px;"><strong><?php echo $riadok->xcf; ?></strong></td>
-    <td><?php echo $riadok->naz; ?></td>
-    <td class="right"><?php echo $riadok->rok; ?></td>
-    <td class="right"><?php echo $riadok->duj; ?></td>
-    <td class="right">
-      <button type="button" id="edit<?php echo $riadok->xcf; ?>" onclick="upravXcf(<?php echo $riadok->xcf; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">edit</i></button>
-      <button type="button" id="copy<?php echo $riadok->xcf; ?>" onclick="kopirujXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">content_copy</i></button>
-      <button type="button" id="remove<?php echo $riadok->xcf; ?>" onclick="zmazXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">remove</i></button>
-        <div data-mdl-for="edit<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Upraviť</div>
-        <div data-mdl-for="copy<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Kopírovať</div>
-        <div data-mdl-for="remove<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Vymazať</div>
-    </td>
-  </tr> <!-- .row-echo -->
-<?php                                    } ?>
 
 <?php if ( ( $uprav != 0 AND $riadok->xcf == $cislo_xcf ) OR ( $nova == 1 AND $i == 0 ) OR ( $zmaz != 0 AND $riadok->xcf == $cislo_xcf ) ) { ?>
   <tr class="row-form mdl-color--white mdl-shadow--2dp">
@@ -497,6 +480,22 @@ $riadok=mysql_fetch_object($sql);
   </tr> <!-- .row-form -->
 <?php                                                    } ?>
 
+<?php if ( $riadok->xcf != $cislo_xcf OR $nova == 1 ) { ?>
+  <tr id="echo_row" class="row-echo">
+    <td class="right" style="padding-right: 16px;"><strong><?php echo $riadok->xcf; ?></strong></td>
+    <td><?php echo $riadok->naz; ?></td>
+    <td class="right"><?php echo $riadok->rok; ?></td>
+    <td class="right"><?php echo $riadok->duj; ?></td>
+    <td class="right">
+      <button type="button" id="edit<?php echo $riadok->xcf; ?>" onclick="upravXcf(<?php echo $riadok->xcf; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">edit</i></button>
+      <button type="button" id="copy<?php echo $riadok->xcf; ?>" onclick="kopirujXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">content_copy</i></button>
+      <button type="button" id="remove<?php echo $riadok->xcf; ?>" onclick="zmazXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">remove</i></button>
+        <div data-mdl-for="edit<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Upraviť</div>
+        <div data-mdl-for="copy<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Kopírovať</div>
+        <div data-mdl-for="remove<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Vymazať</div>
+    </td>
+  </tr> <!-- .row-echo -->
+<?php                                    } ?>
 
 <?php
   }
