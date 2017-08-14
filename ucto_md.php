@@ -762,6 +762,14 @@ if ( $zaznam["xcf"] == $vyb_xcf ) { $row_state = 'preselect'; } //dopyt, class p
     </div>
   </div> <!-- .modal -->
 </FORM>
+<script type="text/javascript">
+<?php if ( $vyb_xcf > 0 AND $copern == 22 ) { ?>
+  //toto cele nedavat prec, myslel som prec len komentar nie tieto dva riadky pod komentarom, teraz tam ale potrebujem vloûiù prÌkaz na
+  //focusovanie aktu·lne vybranej firmy pred zmenou. Z kÛdu Ëo si zmenil nevidÌm ten prÌkaz onclik a jednoduch˝ javascript checked a focus nefunguje
+  document.fir1.firs<?php echo $vyb_xcf; ?>.checked = 'true';
+  document.fir1.firs<?php echo $vyb_xcf; ?>.focus();
+<?php } ?>
+</script>
 <?php
 mysql_close();
 mysql_free_result($sql);
@@ -952,10 +960,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; /
   {
     window.open('ucto_md.php?copern=24', '_self');
   }
-<?php if ( $vyb_xcf > 0 AND $copern == 22 ) { ?>
-  document.fir1.firs<?php echo $vyb_xcf; ?>.checked = 'true';
-  document.fir1.firs<?php echo $vyb_xcf; ?>.focus();
-<?php } ?>
+
 
   function selectRow()
   {
