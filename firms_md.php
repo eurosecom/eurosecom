@@ -427,6 +427,10 @@ $riadok=mysql_fetch_object($sql);
         <span class="mdl-textfield__error2">»Ìslo <?php echo $h_xcf; ?> uû existuje!</span>
 <?php } ?>
       </div>
+      <button type="button" id="all_firms" onclick="allFirms();" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-400" style="">
+        <i class="material-icons">print</i>
+      </button>
+        <span class="mdl-tooltip" data-mdl-for="all_firms">ObsadenÈ ËÌsla firiem</span>
     </td>
     <td>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:80%;">
@@ -469,13 +473,13 @@ $riadok=mysql_fetch_object($sql);
       </div>
     </td>
     <td class="right" style="">
-      <div id="info_enternext" class="mdl-color--grey-400 mdl-color-text--white text-chip chip-md" style="position: absolute; top: 12px; right: 72px;">EnterNext</div>
-        <span data-mdl-for="info_enternext" class="mdl-tooltip">Na pres˙vanie medzi polÌËkami pouûite kl·vesu ENTER. TlaËidlo ULOéIç aktivujete prejdenÌm kurzoru okolo tlaËidla.</span>
       <button type="button" id="row_form_close" onclick="closeXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">close</i></button>
         <div data-mdl-for="row_form_close" class="mdl-tooltip">Zavrieù</div>
       <span id="uvolni" onmouseover="return Povol_uloz();" style="position: absolute; top: 105px; right: 0;">
         <button id="uloz" name="uloz">Uloûiù</button>
       </span>
+      <div id="enternext" class="mdl-color--light-blue-600 mdl-color-text--white text-chip" style="position: absolute; top: 12px; right: 72px;">EnterNext</div>
+        <span data-mdl-for="enternext" class="mdl-tooltip">Na pres˙vanie medzi polÌËkami pouûite kl·vesu ENTER. TlaËidlo ULOéIç aktivujete prejdenÌm kurzoru okolo tlaËidla.</span>
     </td>
   </tr> <!-- .row-form -->
 <?php                                                    } ?>
@@ -537,18 +541,17 @@ $is = $is + 1;
   <div class="mdl-color-text--grey-500 no-item-alert">éiadne poloûky</div>
 </div>
 <?php                   } ?>
-
-
 </main>
 
 
 <!-- header nav menu -->
-<ul for="header_title" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-color--white" style="top:-24px;">
-  <li class="mdl-menu__item" onclick="Domain();">DomÈna</li>
-  <li class="mdl-menu__item" onclick="Users();">»ÌselnÌk uûÌvateæov</li>
-  <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="Firms();">»ÌselnÌk firiem</li>
-</ul>
-
+<div style="position:fixed; left: 0px; top: -24px; z-index: 10;">
+  <ul for="header_title" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+<!--     <li class="mdl-menu__item" onclick="Domain();">DomÈna</li> -->
+    <li class="mdl-menu__item" onclick="Users();">»ÌselnÌk uûÌvateæov</li>
+    <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="Firms();">»ÌselnÌk firiem</li>
+  </ul>
+</div>
 
 
 <!-- tooltip -->
@@ -814,6 +817,10 @@ function viewFirms()
 {
   window.open('firms_md.php?copern=11&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_blank', param);
 }
+function allFirms()
+{
+  window.open('firms_md.php?copern=11', '_blank', param);
+}
 
   function closeXcf(firma)
   {
@@ -849,8 +856,8 @@ function XcfEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kÛd stlaËenej kl·vesy
 
   if(k == 13 ){
-        document.forms.formv.h_naz.focus();
-        document.forms.formv.h_naz.select();
+        document.formv.h_naz.focus();
+        document.formv.h_naz.select();
               }
 
                 }
@@ -860,8 +867,8 @@ function NazEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kÛd stlaËenej kl·vesy
 
   if(k == 13 ){
-        document.forms.formv.h_rok.focus();
-        document.forms.formv.h_rok.select();
+        document.formv.h_rok.focus();
+        document.formv.h_rok.select();
               }
 
                 }
@@ -871,8 +878,8 @@ function RokEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kÛd stlaËenej kl·vesy
 
   if(k == 13 ){
-        document.forms.formv.h_duj.focus();
-        document.forms.formv.h_duj.select();
+        document.formv.h_duj.focus();
+        document.formv.h_duj.select();
               }
 
                 }
@@ -882,8 +889,8 @@ function DujEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kÛd stlaËenej kl·vesy
 
   if(k == 13 ){
-        document.forms.formv.h_dtb.focus();
-        document.forms.formv.h_dtb.select();
+        document.formv.h_dtb.focus();
+        document.formv.h_dtb.select();
               }
 
                 }
@@ -893,8 +900,8 @@ function DtbEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; // kÛd stlaËenej kl·vesy
 
   if(k == 13 ){
-        document.forms.formv.h_prav.focus();
-        document.forms.formv.h_prav.select();
+        document.formv.h_prav.focus();
+        document.formv.h_prav.select();
               }
 
                 }

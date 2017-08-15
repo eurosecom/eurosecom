@@ -547,11 +547,6 @@ $sqlpok = mysql_query("$sqlpoktt");
     <span onclick="AppPage();" class="mdl-color-text--yellow-A100">EuroSecom</span>&nbsp;
     <span class="mdl-color-text--blue-grey-50"><?php echo $domain; ?></span>
     <div class="mdl-layout-spacer"></div>
-
-
-
-
-
 <!-- User -->
     <div class="mdl-list__item" style="padding-right: 0;">
       <span class="mdl-list__item-primary-content">
@@ -661,30 +656,33 @@ $riadok=mysql_fetch_object($sql);
 <!-- left column -->
     <div class="mdl-cell mdl-cell--2-col mdl-color--grey-200" style="padding: 8px 0;">
       <nav class="mdl-navigation">
-<?php if( $nova == 0 ){ ?>
-        <a id="nav_user" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,1);" class="mdl-navigation__link">
-          <span class="mdl-color--white avatar" style="border: 1px solid #039BE5; color: rgba(0,0,0,.87);"><?php echo $riadok->id_klienta; ?></span>&nbsp;
-          <strong><?php echo "$riadok->meno $riadok->priezvisko"; ?></strong>
+<?php if ( $nova == 0 ) { ?>
+        <a href="#" id="nav_user" onclick="upravId(<?php echo $riadok->id_klienta; ?>,1);" class="mdl-navigation__link">
+          <div class="mdl-list__item" style="cursor: pointer;">
+            <span class="mdl-list__item-primary-content">
+              <span class="mdl-list__item-avatar mdl-color--white" style=""><?php echo $riadok->id_klienta; ?></span>
+              <span class="item-avatar-title" style="font-size: 14px;"><?php echo "$riadok->meno $riadok->priezvisko"; ?></span>
+            </span>
+          </div>
         </a>
         <a id="nav_firm" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,2);" class="mdl-navigation__link">Firmy</a>
-        <a id="nav_script" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,3);" class="mdl-navigation__link">Skripty&nbsp;
-<?php if ( $jemenpid == 1 ) { ?>
-        <span class="mdl-color--grey-600 dot vacenter">&nbsp;</span>
-<?php } ?>
+        <a id="nav_script" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,3);" class="mdl-navigation__link">Skripty
+<?php if ( $jemenpid == 1 ) { ?> <span class="dot vacenter">&nbsp;</span> <?php } ?>
         </a>
-        <a id="nav_grid" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,4);" class="mdl-navigation__link">Grid karta&nbsp;
-<?php if ( $jegridid == 1 ) { ?>
-        <span class="mdl-color--grey-600 dot vacenter">&nbsp;</span>
-<?php } ?>
+        <a id="nav_grid" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,4);" class="mdl-navigation__link">Grid karta
+<?php if ( $jegridid == 1 ) { ?> <span class="dot vacenter">&nbsp;</span> <?php } ?>
         </a>
-<?php } //ak nova == 0 ?>
+<?php                  } //nova == 0 ?>
 
-<?php if( $nova == 1 ){ ?>
-        <a id="nav_user" href="#" class="mdl-navigation__link">
-          <span class="mdl-color--white avatar" style="border: 1px solid #039BE5; color: rgba(0,0,0,.87);">&nbsp;</span>&nbsp;
-          <strong>nov˝</strong>
+<?php if ( $nova == 1 ) { ?>
+        <a href="#" id="nav_user" class="mdl-navigation__link">
+          <div class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+              <span class="mdl-list__item-avatar mdl-color--white">0</span>
+              <span class="item-avatar-title" style="font-size: 14px;">nov˝ uûÌvateæ</span>
+            </span>
+          </div>
         </a>
-
 <?php } //ak nova == 1 ?>
       </nav>
     </div>
@@ -790,8 +788,8 @@ if ( $uprav == 1 OR $nova == 1 )
       <span id="uvolni" onmouseover="return Povol_uloz();" style="position: absolute; bottom: 0; right: 0;">
         <button id="uloz" name="uloz">Uloûiù</button>
       </span>
-      <div id="info_enternext" class="mdl-color--light-blue-600 mdl-color-text--white text-chip" style="position: absolute; top: 12px; right: 72px;">EnterNext</div>
-        <span data-mdl-for="info_enternext" class="mdl-tooltip">Na pres˙vanie medzi polÌËkami pouûite kl·vesu ENTER. TlaËidlo ULOéIç aktivujete prejdenÌm kurzoru okolo tlaËidla.</span>
+      <div id="enternext" class="mdl-color--light-blue-600 mdl-color-text--white text-chip" style="position: absolute; top: 12px; right: 72px;">EnterNext</div>
+        <span data-mdl-for="enternext" class="mdl-tooltip">Na pres˙vanie medzi polÌËkami pouûite kl·vesu ENTER. TlaËidlo ULOéIç aktivujete prejdenÌm kurzoru okolo tlaËidla.</span>
     </section>
 <?php
      }
@@ -810,29 +808,29 @@ $cpolf = mysql_num_rows($sqlf);
 $if = 0;
 ?>
     <section class="row-form-content mdl-grid mdl-grid--no-spacing">
-    <div class="mdl-cell mdl-cell--5-col" style=" margin-bottom: 20px; ">
-      <table class="data-table tocenter" style="width: 320px;">
+    <div class="mdl-cell mdl-cell--5-col" style="margin-bottom: 8px;">
+      <table class="data-table firm-table tocenter" style="width: 320px; margin-top: -8px;">
       <colgroup>
-        <col style="width:22%;">
         <col style="width:20%;">
-        <col style="width:24%;">
-        <col style="width:34%;">
+        <col style="width:25%;">
+        <col style="width:25%;">
+        <col style="width:30%;">
       </colgroup>
-      <tr class="mdl-color--grey-300 mdl-color-text--grey-600">
-        <th class="left">&nbsp;
-          <a href="#" id="firm_list" onclick="viewFirms();" class="mdl-color-text--grey-500 material-icons md-18">help_outline</a>&nbsp;Firmy:
-            <span for="firm_list" class="mdl-tooltip">Zobraziù ËÌselnÌk firiem</span>
+      <tr style="height: 32px">
+        <th class="right">Firmy</th>
+        <th class="right" style="color: rgb(3,169,244);">Od</th>
+        <th class="right" style="color: rgb(3,169,244);">Do</th>
+        <th class="right">
+          <button type="button" id="firm_list" onclick="viewFirms();" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons md-18">help_outline</i></button>
+            <span for="firm_list" class="mdl-tooltip">Zobraziù dostupnÈ firmy</span>
         </th>
-        <th class="right">Od</th>
-        <th class="right">Do</th>
-        <th>&nbsp;</th>
       </tr>
       <tr class="row-form">
-        <td class="center">
-          <button type="button" id="search_user_firms" onclick="KtoMa();" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">search</i></button>
-            <div data-mdl-for="search_user_firms" class="mdl-tooltip">Hæadaù uûÌvateæov s prÌstupom do firiem od do</div>
-        </td>
         <td class="right">
+          <button type="button" id="search_user_firms" onclick="KtoMa();" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">search</i></button>
+            <div data-mdl-for="search_user_firms" class="mdl-tooltip">Hæadaù uûÌvateæov s prÌstupom do firiem "od do"</div>
+        </td>
+        <td class="right" >
           <div class="mdl-textfield mdl-js-textfield" style="width: 50px;">
             <label class="mdl-textfield__label" for="fiod">od</label>
             <input type="text" id="fiod" name="fiod" onKeyDown="return FiodEnter(event.which)" autofocus maxlength="6" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
@@ -847,7 +845,7 @@ $if = 0;
           </div>
         </td>
         <td class="right">
-          <span id="uvolni" onmouseover="return Povol_uloz();" style="padding: 16px;">
+          <span id="uvolni" onmouseover="return Povol_uloz();">
             <button id="uloz" name="uloz">Uloûiù</button>
           </span>
         </td>
@@ -859,7 +857,7 @@ while ( $if <= $cpolf )
   {
 $riadokf=mysql_fetch_object($sqlf);
 ?>
-      <tr class="row-echo" style="height: 32px;">
+      <tr class="row-echo" style="height: 30px;">
         <td>&nbsp;</td>
         <td class="right"><?php echo $riadokf->fiod; ?></td>
         <td class="right"><?php echo $riadokf->fido; ?></td>
@@ -890,7 +888,7 @@ $if = $if + 1;
 if ( $uprav == 3 )
      {
 ?>
-    <section class="row-form-content" style="padding-left: 32px;">
+    <section class="row-form-content" style="padding-left: 32px; padding-bottom: 8px;">
 <?php
 $sqlttp = "SELECT * FROM menp WHERE prav = $cislo_id ORDER BY datm DESC";
 $sqlp = mysql_query("$sqlttp");
@@ -899,31 +897,32 @@ $sqlp = mysql_query("$sqlttp");
 $cpolp = mysql_num_rows($sqlp);
 $ip = 0;
 ?>
-      <table class="data-table" style="width: 350px;">
+      <table class="data-table script-table" style="width: 360px; margin-top: -8px;">
       <colgroup>
         <col style="width:30%;">
-        <col style="width:45%;">
-        <col style="width:25%;">
+        <col style="width:44%;">
+        <col style="width:26%;">
       </colgroup>
-      <tr class="mdl-color--grey-300 mdl-color-text--grey-600">
-        <th class="" style="padding-left: 8px;">
-          <a href="#" id="script_list" onclick="ScriptHelp();" class="mdl-color-text--grey-500 material-icons md-18">help_outline</a>&nbsp;Skript
-            <span for="script_list" class="mdl-tooltip">Zobraziù ËÌselnÌk skriptov</span>
+      <tr style="height: 32px;">
+        <th class="right" style="color: rgb(3,169,244);">Skript</th>
+        <th class="right">AktualizovanÈ</th>
+        <th class="right">
+          <button type="button" id="script_list" onclick="ScriptHelp();" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons md-18">help_outline</i></button>
+            <span for="script_list" class="mdl-tooltip">Zobraziù nastaviteænÈ skripty</span>
         </th>
-        <th class="left">AktualizovanÈ</th>
-        <th>&nbsp;</th>
       </tr>
       <tr class="row-form">
-        <td colspan="2" style="padding-left: 16px;">
+        <td class="right" style="">
           <input type="hidden" name="uzid" id="uzid"/>
-          <div class="mdl-textfield mdl-js-textfield" style="width: 100px;">
+          <div class="mdl-textfield mdl-js-textfield" style="width: 90px;">
             <label for="cslm" class="mdl-textfield__label">»Ìslo skriptu</label>
             <input type="text" id="cslm" name="cslm" onKeyDown="return CslmEnter(event.which)" autofocus maxlength="8" pattern="-?[0-9]*(\.[0-9]+)?" class="mdl-textfield__input">
             <span class="mdl-textfield__error">PovolenÈ s˙ ËÌsla!</span>
           </div>
         </td>
+        <td>&nbsp;</td>
         <td class="right">
-          <span id="uvolni" onmouseover="return Povol_uloz();" style="padding: 16px;">
+          <span id="uvolni" onmouseover="return Povol_uloz();">
             <button id="uloz" name="uloz">Uloûiù</button>
           </span>
         </td>
@@ -938,12 +937,12 @@ $ip = 0;
 $riadokp=mysql_fetch_object($sqlp);
 $datmsk = date("d.m.Y H:i:s", strtotime($riadokp->datm));
 ?>
-      <tr class="row-echo" style="height: 32px;">
-        <td class="center"><?php echo $riadokp->cslm; ?></td>
-        <td class="left"><?php echo $datmsk; ?> <?php echo $riadokp->sys; ?></td>
+      <tr class="row-echo" style="height: 30px;">
+        <td class="right"><?php echo $riadokp->cslm; ?></td>
+        <td class="right"><?php echo $datmsk; ?> <?php echo $riadokp->sys; ?></td>
         <td class="right">
-          <button type="button" id="script_edit" onclick="ZmazSkript(<?php echo $riadokp->prav;?>, <?php echo $riadokp->cslm;?>, '<?php echo $riadokp->datm;?>');" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500 mini-icon-btn"><i class="material-icons">remove</i></button>
-            <div data-mdl-for="script_edit" class="mdl-tooltip">Upraviù / Vymazaù</div>
+          <button type="button" id="script_edit<?php echo "$riadokp->prav, $riadokp->cslm, $riadokp->datm;" ?>" onclick="ZmazSkript(<?php echo $riadokp->prav;?>, <?php echo $riadokp->cslm;?>, '<?php echo $riadokp->datm;?>');" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500 mini-icon-btn"><i class="material-icons">remove</i></button>
+            <div data-mdl-for="script_edit<?php echo "$riadokp->prav, $riadokp->cslm, $riadokp->datm;" ?>" class="mdl-tooltip">Upraviù / Vymazaù</div>
         </td>
       </tr>
 <?php
@@ -1103,15 +1102,18 @@ $ig = $ig + 1;
  //uprav=1/2/3/4
       }
 ?>
-
 <?php if ( $riadok->id_klienta != $cislo_id ) { ?>
   <tr id="echo_row" class="row-echo">
     <td>
 <?php if ( $riadok->id_klienta == $kli_uzid ) { ?>
-      <span class="mdl-color--light-blue-400 dot" style="position: absolute; top: 22px; left: 8px;">&nbsp;</span>
+      <span class="mdl-color-text--light-blue-400 dot toleft" style="line-height: 48px; margin-left: -19px; padding-right: 7px;">&nbsp;</span>
  <?php } ?>
-      <span class="mdl-color--white avatar" style="margin: 8px 0; border: 1px solid #039BE5;"><strong><?php echo $riadok->id_klienta; ?></strong></span>&nbsp;&nbsp;
-      <strong><?php echo "$riadok->meno $riadok->priezvisko"; ?></strong>
+      <div class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          <span class="mdl-list__item-avatar mdl-color--white"><?php echo $riadok->id_klienta; ?></span>
+          <span class="item-avatar-title" style="font-size: 13px;"><?php echo "$riadok->meno $riadok->priezvisko"; ?></span>
+        </span>
+      </div>
     </td>
 <?php
 //user + grid
@@ -1287,17 +1289,16 @@ $is = $is + 1;
   <div class="mdl-color-text--grey-500 no-item-alert">éiadne poloûky</div>
 </div>
 <?php                   } ?>
-
-
 </main>
 
 <!-- header nav menu -->
-<ul for="header_title" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-color--white" style="top:-24px;">
-  <li class="mdl-menu__item" onclick="Domain();">DomÈna</li>
-  <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="Users();">»ÌselnÌk uûÌvateæov</li>
-  <li class="mdl-menu__item" onclick="Firms();">»ÌselnÌk firiem</li>
-</ul>
-
+<div style="position:fixed; left: 0px; top: -24px; z-index: 10;">
+  <ul for="header_title" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+    <!-- <li class="mdl-menu__item" onclick="Domain();">DomÈna</li> -->
+    <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="Users();">»ÌselnÌk uûÌvateæov</li>
+    <li class="mdl-menu__item" onclick="Firms();">»ÌselnÌk firiem</li>
+  </ul>
+</div>
 
 <!-- tooltip -->
 <span class="mdl-tooltip" data-mdl-for="ilogin_user"><?php echo "$kli_uzid $kli_uzmeno $kli_uzprie"; ?></span>
@@ -1361,17 +1362,6 @@ for ( var i = 0; i < buttons.length; i++ ) {
 <?php if ( $uprav == 4 ) { ?> document.getElementById('nav_grid').className += ' active'; <?php } ?>
 
 
-
-<?php if ( $uprav == 3 AND $jemenpid ) { ?>
-var scriptdot = document.querySelector('#nav_script > .dot');
-    scriptdot.className = scriptdot.className == 'mdl-color--white dot vacenter' ? 'mdl-color--grey-600 dot vacenter' : 'mdl-color--white dot vacenter';
-<?php } ?>
-
-
-<?php if ( $uprav == 4 AND $jegridid == 1 ) { ?>
-var griddot = document.querySelector('#nav_grid > .dot');
-    griddot.className = griddot.className == 'mdl-color--white dot vacenter' ? 'mdl-color--grey-600 dot vacenter' : 'mdl-color--white dot vacenter';
-<?php } ?>
 
 <?php if ( $uprav == 4 AND $jegridid == 0 ) { ?>
   document.getElementById('grid_view').disabled = true;

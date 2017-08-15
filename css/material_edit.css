@@ -26,7 +26,7 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
-select:enabled {
+select:enabled, button:enabled {
   cursor: pointer;
 }
 /* BASIC CLASS */
@@ -133,7 +133,7 @@ select:enabled {
 
 
 
-.ui-header .mdl-list__item-avatar {
+.ui-header .mdl-list__item-avatar, .ui-table .mdl-list__item-avatar { /* dopyt, toto bude v style skriptu */
   font-size: 12px;
   height: 32px;
   line-height: 32px;
@@ -145,7 +145,23 @@ select:enabled {
   letter-spacing: 0.02em;
   font-size: 14px;
 }
-
+/* user avatar - table echo + form */
+.ui-table .mdl-list__item {
+  padding: 0;
+  line-height: 48px;
+}
+.ui-table .mdl-list__item-avatar {
+  margin-right: 8px !important;
+  border: 1px solid #039BE5;
+  color: inherit;
+}
+.ui-table .mdl-list__item-avatar + .item-avatar-title {
+  letter-spacing: 0;
+}
+.mdl-navigation__link.active .item-avatar-title {
+  color: #fff;
+  font-weight: 500;
+}
 
 
 
@@ -336,6 +352,11 @@ select:enabled {
   margin: -1px 16px 0 0;
 }
 
+/* dopyt, pôjde do style */
+.firm-table .row-form > td, .script-table .row-form > td {
+  padding: 0;
+}
+
 
 
 @media screen and (min-width: 840px) {
@@ -397,15 +418,19 @@ select:enabled {
 
 
 
-.dot {
-  border-radius: 50%;
-  width: 6px;
-  height: 6px;
-  display: inline-block;
+
+.row-form .mdl-navigation__link .dot:after { /* dopyt, pôjde do style */
+  vertical-align: -3px;
 }
 
 
-
+.dot:after {
+  display: inline-block;
+  content: '\2022';
+  font-size: 24px;
+  color: inherit;
+  line-height: 24px;
+}
 
 
 
@@ -451,14 +476,14 @@ select:enabled {
   margin-left: 4px;
 }
 
-.dropdown-arrow:after {
-  display: inline-block;
+/*.dropdown-arrow:after {
+  display: inline;
   font-family: 'Material Icons';
   content: 'arrow_drop_down';
   font-size: 24px;
-  vertical-align: middle;
+  vertical-align: -6px;
   margin-left: 0px;
-}
+}*/
 
 
 
