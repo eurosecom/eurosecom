@@ -658,19 +658,22 @@ $riadok=mysql_fetch_object($sql);
       <nav class="mdl-navigation">
 <?php if ( $nova == 0 ) { ?>
         <a href="#" id="nav_user" onclick="upravId(<?php echo $riadok->id_klienta; ?>,1);" class="mdl-navigation__link">
+<?php if ( $riadok->id_klienta == $kli_uzid ) { ?>
+          <abbr class="dot" title="Prihl·sen˝ uûÌvateæ" style="position: absolute; top: 32px; left: 4px;">&nbsp;</abbr>
+ <?php } ?>
           <div class="mdl-list__item" style="cursor: pointer;">
             <span class="mdl-list__item-primary-content">
-              <span class="mdl-list__item-avatar mdl-color--white" style=""><?php echo $riadok->id_klienta; ?></span>
+              <span class="mdl-list__item-avatar mdl-color--white"><?php echo $riadok->id_klienta; ?></span>
               <span class="item-avatar-title" style="font-size: 14px;"><?php echo "$riadok->meno $riadok->priezvisko"; ?></span>
             </span>
           </div>
         </a>
         <a id="nav_firm" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,2);" class="mdl-navigation__link">Firmy</a>
         <a id="nav_script" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,3);" class="mdl-navigation__link">Skripty
-<?php if ( $jemenpid == 1 ) { ?> <span class="dot vacenter">&nbsp;</span> <?php } ?>
+          <?php if ( $jemenpid == 1 ) { ?> <abbr class="dot">&nbsp;</abbr> <?php } ?>
         </a>
         <a id="nav_grid" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,4);" class="mdl-navigation__link">Grid karta
-<?php if ( $jegridid == 1 ) { ?> <span class="dot vacenter">&nbsp;</span> <?php } ?>
+          <?php if ( $jegridid == 1 ) { ?> <abbr class="dot">&nbsp;</abbr> <?php } ?>
         </a>
 <?php                  } //nova == 0 ?>
 
@@ -785,10 +788,10 @@ if ( $uprav == 1 OR $nova == 1 )
           <span class="mdl-switch__label">Ne/aktÌvny</span>
         </label>
       </fieldset>
-      <span id="uvolni" onmouseover="return Povol_uloz();" style="position: absolute; bottom: 0; right: 0;">
+      <span id="freedom" onmouseover="return Povol_uloz();" style="position: absolute; bottom: 0; right: 0;">
         <button id="uloz" name="uloz">Uloûiù</button>
       </span>
-      <div id="enternext" class="mdl-color--light-blue-600 mdl-color-text--white text-chip" style="position: absolute; top: 12px; right: 72px;">EnterNext</div>
+      <abbr id="enternext" class="mdl-color--light-blue-600 mdl-color-text--white text-chip" style="position: absolute; top: 13px; right: 72px;">EnterNext</abbr>
         <span data-mdl-for="enternext" class="mdl-tooltip">Na pres˙vanie medzi polÌËkami pouûite kl·vesu ENTER. TlaËidlo ULOéIç aktivujete prejdenÌm kurzoru okolo tlaËidla.</span>
     </section>
 <?php
@@ -845,7 +848,7 @@ $if = 0;
           </div>
         </td>
         <td class="right">
-          <span id="uvolni" onmouseover="return Povol_uloz();">
+          <span id="freedom" onmouseover="return Povol_uloz();">
             <button id="uloz" name="uloz">Uloûiù</button>
           </span>
         </td>
@@ -922,7 +925,7 @@ $ip = 0;
         </td>
         <td>&nbsp;</td>
         <td class="right">
-          <span id="uvolni" onmouseover="return Povol_uloz();">
+          <span id="freedom" onmouseover="return Povol_uloz();">
             <button id="uloz" name="uloz">Uloûiù</button>
           </span>
         </td>
@@ -1106,7 +1109,7 @@ $ig = $ig + 1;
   <tr id="echo_row" class="row-echo">
     <td>
 <?php if ( $riadok->id_klienta == $kli_uzid ) { ?>
-      <span class="mdl-color-text--light-blue-400 dot toleft" style="line-height: 48px; margin-left: -19px; padding-right: 7px;">&nbsp;</span>
+      <abbr class="mdl-color-text--light-blue-400 dot" title="Prihl·sen˝ uûÌvateæ" style="position: absolute; top: 14px; left: 4px;">&nbsp;</abbr>
  <?php } ?>
       <div class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
@@ -1183,9 +1186,9 @@ $ipok=$ipok+1;
     <td>
       <?php echo "$riadok->uziv_meno - $riadok->uziv_heslo"; ?><br>
 <?php if ( $jegrid == 1 ) { ?>
- <span id="grid<?php echo $riadok->id_klienta; ?>" class="text-chip mdl-color--grey-300" style="position: relative; top: 3px;">Grid</span> <?php } ?>
+ <abbr id="grid<?php echo $riadok->id_klienta; ?>" class="text-chip mdl-color--grey-300" style="position: relative; top: 3px;">Grid</abbr> <?php } ?>
 <?php if ( $jemenp == 1 ) { ?>
- <span id="script<?php echo $riadok->id_klienta; ?>" class="text-chip mdl-color--grey-300" style="position: relative; top: 3px;">Skripty</span>
+ <abbr id="script<?php echo $riadok->id_klienta; ?>" class="text-chip mdl-color--grey-300" style="position: relative; top: 3px;">Skripty</abbr>
   <?php } ?>
       <i id="logged<?php echo $riadok->id_klienta; ?>" class="material-icons mdl-color-text--grey-500 md-18 vacenter">timer</i>
         <span data-mdl-for="grid<?php echo $riadok->id_klienta; ?>" class="mdl-tooltip mdl-tooltip--right">UûÌvateæ s grid kartou</span>

@@ -163,6 +163,9 @@ select:enabled, button:enabled {
   font-weight: 500;
 }
 
+abbr.dot {
+  text-decoration: none;
+}
 
 
 .avatar {
@@ -421,6 +424,7 @@ select:enabled, button:enabled {
 
 .row-form .mdl-navigation__link .dot:after { /* dopyt, pôjde do style */
   vertical-align: -3px;
+  font-weight: 400;
 }
 
 
@@ -489,7 +493,7 @@ select:enabled, button:enabled {
 
 
 
-#uvolni {
+#freedom {
   padding: 16px;
 }
 #row_form_close {
