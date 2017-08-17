@@ -1,4 +1,5 @@
-<HTML>
+<!doctype html>
+<html>
 <?php
 @session_start();
 
@@ -14,7 +15,7 @@ if( $copern == 155 OR $copern == 156 OR $copern == 167 OR $copern == 168 )
 {
 $sys = 'ALL';
 $urov = 10000;
-} 
+}
 $drupoh = strip_tags($_REQUEST['drupoh']);
 $regpok = 1*$_REQUEST['regpok'];
 if( $drupoh == 31 OR $drupoh == 12 OR $drupoh == 22 OR $drupoh == 42 OR $drupoh == 52 OR $copern == 267 OR $copern == 268 )
@@ -571,9 +572,9 @@ $adrdok = "dopreg";
 $zassluzby = "dopsluzbyzas";
 $rozuct='NIE';
 $sysx='INE';
-if( $regpok == 1 ) 
-  {  
-$tablsluzby = "fakslu"; 
+if( $regpok == 1 )
+  {
+$tablsluzby = "fakslu";
   }
 }
 if( $drupoh == 52 )
@@ -668,14 +669,14 @@ $uprav="NO";
 
 //import z ../import/dopdol.csv a dopslu.csv
     if (( $copern == 167 OR $copern == 168 OR $copern == 155 OR $copern == 156 ) AND ( $drupoh == 1 OR $drupoh == 2 ) AND $pocstav == 1 )
-    { 
+    {
     if( $kli_vduj != 9 ) { $uziv = include("../faktury/fakpoc_import.php"); }
-    if( $kli_vduj == 9 ) { $uziv = include("../faktury/fakpoc_import_ju.php"); } 
+    if( $kli_vduj == 9 ) { $uziv = include("../faktury/fakpoc_import_ju.php"); }
     }
     if ( $copern == 155 AND $drupoh == 12 )
     {
 ?>
-<script type="text/javascript">
+<script type="text/javascript"> //dopyta, skult˙rniù
 if( !confirm ("Chcete importovaù poloûky \r zo s˙boru ../import/dopdol.csv ?") )
          { window.close()  }
 else
@@ -712,7 +713,7 @@ while (! feof($subor))
   if( $x_str == '0' ) $x_str = $fir_dopstr;
   if( $x_zak == '0' ) $x_zak = $fir_dopzak;
 
- 
+
 $sqult = "INSERT INTO F$kli_vxcf"."_dopdol ( uce,dok,doq,dol,ico,str,zak,dat,daz,das,zk2,dn2,sp2,hod,id,".
 "zk1,dn1,sp1,zk0,zao,zal,ruc,uhr,zk3,zk4,dn3,dn4,sz1,sz2,sz3,sz4,fak,prf,skl,poh,".
 "obj,unk,dpr,ksy,ssy,poz,txz,txp,ume)".
@@ -722,7 +723,7 @@ $sqult = "INSERT INTO F$kli_vxcf"."_dopdol ( uce,dok,doq,dol,ico,str,zak,dat,daz
 " '', '', '', '', '', '', '', '', '$x_ume' ".
 ");";
 
-$ulozene = mysql_query("$sqult"); 
+$ulozene = mysql_query("$sqult");
 }
 echo "Tabulka F$kli_vxcf"."_dopdol!"." naimportovan· <br />";
 fclose ($subor);
@@ -747,14 +748,14 @@ while (! feof($subor))
 
   $x_dok = 59000 + $x_dol;
 
- 
+
 $sqult = "INSERT INTO F$kli_vxcf"."_dopslu ( dok,dol,slu,nsl,cep,ced,mno,dph,id,".
 "fak,prf,cen,pfak,cfak,dfak,pop,pon,mer,xfak)".
 " VALUES ( '$x_dok', '$x_dol', '$x_slu', '$x_nsl', '$x_cep', '$x_ced', '$x_mno', '19', '$kli_uzid',".
 " '0', '0', '0', '0', '$x_cfak', '0', '', '', '', '' ".
 ");";
 
-$ulozene = mysql_query("$sqult"); 
+$ulozene = mysql_query("$sqult");
 }
 echo "Tabulka F$kli_vxcf"."_dopslu!"." naimportovan· <br />";
 fclose ($subor);
@@ -764,7 +765,7 @@ fclose ($subor);
     if ( $copern == 167 AND $drupoh == 12 )
     {
 ?>
-<script type="text/javascript">
+<script type="text/javascript"> //dopyta, skult˙rniù
 if( !confirm ("Chcete vymazaù vöetky poloûky \r dodacÌch listov ?") )
          { window.close()  }
 else
@@ -793,7 +794,7 @@ echo "Tabulka F$kli_vxcf"."_dopslu!"." vynulovan· <br />";
     if ( $copern == 267 )
     {
 ?>
-<script type="text/javascript">
+<script type="text/javascript"> //dopyta, skult˙rniù
 if( !confirm ("Chcete vymazaù vöetky poloûky \r vn˙tropodnikov˝ch fakt˙r za mesiac <?php echo $kli_vume; ?> ?") )
          { window.close()  }
 else
@@ -808,8 +809,8 @@ $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
-$zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_dopvnp WHERE ( ume = $kli_vume AND poh = 99 )"); 
-$zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_dopslu WHERE ( cfak = 99 AND dfak = 99 AND pfak = $kli_vmes )"); 
+$zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_dopvnp WHERE ( ume = $kli_vume AND poh = 99 )");
+$zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_dopslu WHERE ( cfak = 99 AND dfak = 99 AND pfak = $kli_vmes )");
 
 $sqtz = "UPDATE F$kli_vxcf"."_dopslu SET pfak=0, dfak=0,".
 " cfak=0, xfak=''".
@@ -892,12 +893,12 @@ $zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_$tablsluzby WHERE dok='$cislo_
 }
 
 //vymaz polozky zauctovania
-if( $drupoh == 1 ) { $zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_uctodb WHERE dok='$cislo_dok' "); 
+if( $drupoh == 1 ) { $zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_uctodb WHERE dok='$cislo_dok' ");
 include("../ucto/saldo_zmaz_ok.php");
-} 
-if( $drupoh == 2 ) { $zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_uctdod WHERE dok='$cislo_dok' "); 
+}
+if( $drupoh == 2 ) { $zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_uctdod WHERE dok='$cislo_dok' ");
 include("../ucto/saldo_zmaz_ok.php");
-} 
+}
 
 //odznac vyfakturovane pre dopravu v stazkach a dodakoch a odznac aj z kuchyne dodaky
 if( $drupoh == 31 OR $drupoh == 42 OR $drupoh == 22 )
@@ -913,16 +914,16 @@ $sqtoz = "UPDATE F$kli_vxcf"."_dopstzp SET pfak='0', cfak='0',".
 $oznac = mysql_query("$sqtoz");
 
 $kuchyna=0;
-if (File_Exists ("../kuchyna/pouzivam_kuchynu.php")) 
-  { 
+if (File_Exists ("../kuchyna/pouzivam_kuchynu.php"))
+  {
 $kuchyna=1;
 $sqtoz = "UPDATE F$kli_vxcf"."_kuchdodp SET cfak='0', dfak='0' ".
 " WHERE cfak = $cislo_dok ";
 $oznac = mysql_query("$sqtoz");
   }
 $ubyt=0;
-if (File_Exists ("../ubyt/pouzivam_ubyt.php")) 
-  { 
+if (File_Exists ("../ubyt/pouzivam_ubyt.php"))
+  {
 $ubyt=1;
 $sqtoz = "UPDATE F$kli_vxcf"."_ubytdodp SET cfak='0', dfak='0' ".
 " WHERE cfak = $cislo_dok ";
@@ -931,7 +932,7 @@ $oznac = mysql_query("$sqtoz");
 }
 
 //vymazat zo zoznamu dokladov
-$zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_$tabl WHERE dok='$cislo_dok' "); 
+$zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_$tabl WHERE dok='$cislo_dok' ");
 $copern=1;
 if (!$zmazane):
 ?>
@@ -943,7 +944,7 @@ $zmaz="OK";
 //uprav cislo v tabulke
 if( $cisdokodd != 1 OR $drupoh == 42 )
         {
-$upravene = mysql_query("UPDATE F$kli_vxcf"."_ufir SET $cisdok='$cislo_dok' WHERE $cisdok > '$cislo_dok'"); 
+$upravene = mysql_query("UPDATE F$kli_vxcf"."_ufir SET $cisdok='$cislo_dok' WHERE $cisdok > '$cislo_dok'");
         }
 if( $cisdokodd == 1 AND $drupoh != 42 )
         {
@@ -964,7 +965,7 @@ if( $fir_uctx14 == 1 AND ( $drupoh == 1 OR $drupoh == 2 ) ) { $zhodaradu="LEFT(c
 //uprav cislo cbl ak registracka
 if( $drupoh == 42 )
 {
-$upravcbl = mysql_query("UPDATE F$kli_vxcf"."_dopdkp SET cbl='$cislo_fak' WHERE cbl > '$cislo_fak'"); 
+$upravcbl = mysql_query("UPDATE F$kli_vxcf"."_dopdkp SET cbl='$cislo_fak' WHERE cbl > '$cislo_fak'");
 }
 //echo "POLOéKA DOK:$cislo_dok BOLA VYMAZAN¡ ";
 endif;
@@ -979,7 +980,7 @@ $cislo_dok = strip_tags($_REQUEST['cislo_dok']);
 $cislo_fak = strip_tags($_REQUEST['cislo_fak']);
 
 //vymazat zo zoznamu dokladov
-$zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_$tabl WHERE dok='$cislo_dok' "); 
+$zmazane = mysql_query("DELETE FROM F$kli_vxcf"."_$tabl WHERE dok='$cislo_dok' ");
 $copern=1;
 if (!$zmazane):
 ?>
@@ -1013,7 +1014,7 @@ $h_fak = $newdok;
 
 $sqlhh = "INSERT INTO F$kli_vxcf"."_$tabl ( dok,doq,fak,id ) VALUES ( $newdok, $newdok, $newdok, $kli_uzid )";
 //echo $sqlhh;
-$ulozene = mysql_query("$sqlhh"); 
+$ulozene = mysql_query("$sqlhh");
 
 //copern55skopiruj donho udaje zahlavia
 $faktt = "SELECT * FROM F$kli_vxcf"."_$tabl"." WHERE dok = $cislo_dok "." ORDER BY dok";
@@ -1037,11 +1038,11 @@ $friadok=mysql_fetch_object($dsql);
 
 $upravene = mysql_query("$uprt");
   }
-  
+
 
 //copern55skopiruj polozky do fakslu
 $sluztt = "SELECT dok, fak, dol, prf, cpl, slu, nsl, pop, dph,".
-" mno, mer, cep, ced". 
+" mno, mer, cep, ced".
 " FROM F$kli_vxcf"."_fakslu".
 " WHERE dok = $cislo_dok ".
 " ORDER BY cpl";
@@ -1059,7 +1060,7 @@ $driadok=mysql_fetch_object($dsql);
 
 $sqty = "INSERT INTO F$kli_vxcf"."_fakslu ( dok,fak,dol,prf,slu,nsl,pop,dph,cep,ced,mno,mer,id )".
 " VALUES ('$newdok', '$newdok', '$driadok->dol', '$driadok->prf', '$driadok->slu', '$driadok->nsl', '$driadok->pop',".
-" '$driadok->dph', '$driadok->cep', '$driadok->ced', '$driadok->mno', '$driadok->mer', '$kli_uzid' );"; 
+" '$driadok->dph', '$driadok->cep', '$driadok->ced', '$driadok->mno', '$driadok->mer', '$kli_uzid' );";
 
 //echo $sqty;
 $kopia = mysql_query("$sqty");
@@ -1079,19 +1080,19 @@ if ( $copern == 416  )
 $cislo_dok = strip_tags($_REQUEST['cislo_dok']);
 
 if( $drupoh == 1 ) {
-$upravttt = "UPDATE F$kli_vxcf"."_fakodb SET zk0u=0, zk1u=0, zk2u=0, dn1u=0, dn2u=0, sp0u=0, sp1u=0, sp2u=0, hodu=0 WHERE dok='$cislo_dok' "; 
-$upravene = mysql_query("$upravttt"); 
+$upravttt = "UPDATE F$kli_vxcf"."_fakodb SET zk0u=0, zk1u=0, zk2u=0, dn1u=0, dn2u=0, sp0u=0, sp1u=0, sp2u=0, hodu=0 WHERE dok='$cislo_dok' ";
+$upravene = mysql_query("$upravttt");
 
-$zmazttt = "DELETE FROM F$kli_vxcf"."_uctodb WHERE dok='$cislo_dok' "; 
-$zmazane = mysql_query("$zmazttt"); 
+$zmazttt = "DELETE FROM F$kli_vxcf"."_uctodb WHERE dok='$cislo_dok' ";
+$zmazane = mysql_query("$zmazttt");
                    }
 
 if( $drupoh == 2 ) {
-$upravttt = "UPDATE F$kli_vxcf"."_fakdod SET zk0u=0, zk1u=0, zk2u=0, dn1u=0, dn2u=0, sp0u=0, sp1u=0, sp2u=0, hodu=0 WHERE dok='$cislo_dok' "; 
-$upravene = mysql_query("$upravttt"); 
+$upravttt = "UPDATE F$kli_vxcf"."_fakdod SET zk0u=0, zk1u=0, zk2u=0, dn1u=0, dn2u=0, sp0u=0, sp1u=0, sp2u=0, hodu=0 WHERE dok='$cislo_dok' ";
+$upravene = mysql_query("$upravttt");
 
-$zmazttt = "DELETE FROM F$kli_vxcf"."_uctdod WHERE dok='$cislo_dok' "; 
-$zmazane = mysql_query("$zmazttt"); 
+$zmazttt = "DELETE FROM F$kli_vxcf"."_uctdod WHERE dok='$cislo_dok' ";
+$zmazane = mysql_query("$zmazttt");
                    }
 
 include("../ucto/saldo_zmaz_ok.php");
@@ -1101,77 +1102,24 @@ $copern=1;
 //koniec vymazania rozuctovania
 
 //echo "ucex ".$_SESSION['nastavene_uce'];
-
 ?>
-
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
-  <link type="text/css" rel="stylesheet" href="../css/styl.css">
+<head>
+  <meta charset="cp1250">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="../css/material.min.css">
+  <link rel="stylesheet" href="../css/material_edit.css">
+  <title>
 <?php
-if ( $drupoh == 1 OR $drupoh == 2 )
-  {
-?>
-<title>Zoznam fakt˙r</title>
-<?php
-}
-?>
-<?php
-if ( $drupoh == 11 )
-  {
-?>
-<title>Zoznam dodacÌch listov</title>
-<?php
-}
-?>
-<?php
-if ( $drupoh == 12 )
-  {
-?>
-<title>Zoznam dodacÌch listov</title>
-<?php
-}
-?>
-<?php
-if ( $drupoh == 31 )
-  {
-?>
-<title>Zoznam odberateæsk˝ch fakt˙r</title>
-<?php
-}
-?>
-<?php
-if ( $drupoh == 21 )
-  {
-?>
-<title>Zoznam vn˙tropod.fakt˙r</title>
-<?php
-}
-?>
-<?php
-if ( $drupoh == 22 )
-  {
-?>
-<title>Zoznam vn˙tropod.fakt˙r</title>
-<?php
-}
-?>
-<?php
-if ( $drupoh == 42 )
-  {
-?>
-<title>RegistraËn· pokladnica</title>
-<?php
-}
-?>
-<?php
-if ( $drupoh == 52 )
-  {
-?>
-<title>Predfakt˙ra</title>
-<?php
-}
-?>
-  <style type="text/css">
+if ( $drupoh == 1 OR $drupoh == 31 ) echo "OdberateæskÈ fakt˙ry";
+if ( $drupoh == 2 ) echo "Dod·vateæskÈ fakt˙ry";
+if ( $drupoh == 11 OR $drupoh == 12 ) echo "Dodacie listy";
+if ( $drupoh == 21 OR $drupoh == 22 ) echo "Vn˙tropodnikovÈ fakt˙ry";
+if ( $drupoh == 42 ) echo "RegistraËn· pokladnica";
+if ( $drupoh == 52 ) echo "Predfakt˙ry";
+?> | EuroSecom</title>
+<style> /*dopyt, okno pÙjde preË*/
     #Okno{ display: none; cursor: hand; width: 150px;
              position: absolute; top: 0; left: 0;
              border: "1 solid";
@@ -1182,17 +1130,842 @@ if ( $drupoh == 52 )
              border-bottom-color: "blue";
              font-size: 8pt; font-family: Arial;
            }
-  </style>
-<SCRIPT Language="JavaScript" Src="../js/cookies.js">
-</SCRIPT>
+</style>
+</head>
+<body onload="ObnovUI(); VyberVstup();">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="max-height: 136px;">
+  <div class="mdl-layout__header-row mdl-color--light-blue-700 ui-header-app-row">
+    <span class="mdl-color-text--yellow-A100">EuroSecom</span>
+    <span class="mdl-color-text--blue-grey-50">⁄ËtovnÌctvo</span> <!-- dopyt, mÙûe baù aj odbyt -->
+    <div class="mdl-layout-spacer"></div>
+<?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf";?>
+
+
+<!-- User -->
+    <div class="mdl-list__item" style="padding-right: 0;">
+      <span class="mdl-list__item-primary-content">
+        <span class="mdl-list__item-avatar mdl-color--indigo-400" style="margin-right: 8px;"><?php echo $kli_uzid; ?></span>
+        <span class="item-avatar-title" style="font-size: 12px;"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
+      </span>
+    </div>
+  </div> <!-- .ui-header-app-row -->
+<?php
+// toto je cast na zobrazenie tabulky a prechody medzi stranami
+// 1=volanie z menu.php
+// 2=dalsia strana
+// 3=predosla strana
+// 4=prejst na stranu
+// 5=nova polozka
+// 6=mazanie
+// 7=hladanie
+// 8=uprava
+// 9=hladanie
+$citcbl='';
+if( $drupoh == 42 ) $citcbl=", cbl";
+
+if ( $copern == 1 || $copern == 2 || $copern == 3 || $copern == 4 || $copern == 7 || $copern == 9 OR $copern == 10 )
+     {
+
+if ( $copern != 1 && $copern != 2 && $copern != 3 && $copern != 4 && $copern != 7 && $copern != 9 AND $copern != 10 ) break;
+
+    do
+    {
+// zobraz vsetko co je v tabulke
+if ( $copern == 1 || $copern == 2 || $copern == 3 || $copern == 4 || $copern == 7 || $copern == 9 OR $copern == 10 )
+  {
+//[[[[[
+
+$hladaj_ucex=$hladaj_uce;
+
+//ak viac rad pre jednu analytiku
+if( $fir_uctx14 == 1 AND ( $drupoh == 1 OR $drupoh == 2 ))
+{
+if( $drupoh == 1 )
+     {
+$sqluce = mysql_query("SELECT dodb,nodb,ucod FROM F$kli_vxcf"."_dodb WHERE ( dodb = $hladaj_uce ) ORDER BY dodb");
+  if (@$zaznam=mysql_data_seek($sqluce,0))
+  {
+  //echo "idem";
+  $riaduce=mysql_fetch_object($sqluce);
+  $hladaj_ucex=$riaduce->ucod;
+  }
+     }
+if( $drupoh == 2 )
+     {
+$sqluce = mysql_query("SELECT ddod,ndod,ucdo FROM F$kli_vxcf"."_ddod WHERE ( ddod = $hladaj_uce ) ORDER BY ddod");
+  if (@$zaznam=mysql_data_seek($sqluce,0))
+  {
+  //echo "idem";
+  $riaduce=mysql_fetch_object($sqluce);
+  $hladaj_ucex=$riaduce->ucdo;
+  }
+     }
+$_SESSION['nastavene_uce'] = $hladaj_uce;
+}
+
+
+
+$akeume=">= ".$kli_vume;
+$hladaj_ucep="= ".$hladaj_ucex;
+$order="dok";
+if( $drupoh == 22 ) { $akeume="= ".$kli_vume; $hladaj_ucep=" > 0 "; }
+if( $pocstav == 1 ) { $akeume="> 0 "; $order="F".$kli_vxcf."_".$tabl.".ume,dok";}
+$chodu="";
+if( $sysx == 'UCT' ) $chodu="hodu,poh,";
+if( $drupoh == 42 ) $chodu="ruc,";
+
+$sqltt = "SELECT uce, dok, DATE_FORMAt(dat, '%d.%m.%Y' ) AS dat, F$kli_vxcf"."_$tabl.ico, F$kli_vxcf"."_ico.nai,".
+" fak, dol, prf, str, zak, hod,".$chodu." strv, zakv".$citcbl.
+" FROM F$kli_vxcf"."_$tabl".
+" LEFT JOIN F$kli_vxcf"."_ico".
+" ON F$kli_vxcf"."_$tabl.ico=F$kli_vxcf"."_ico.ico".
+" LEFT JOIN F$kli_vxcf"."_dodb".
+" ON F$kli_vxcf"."_$tabl.uce=F$kli_vxcf"."_dodb.dodb".
+" WHERE ( F$kli_vxcf"."_$tabl.uce $hladaj_ucep AND F$kli_vxcf"."_$tabl.dok > 0 AND F$kli_vxcf"."_$tabl.ume $akeume )".
+" OR isnull( F$kli_vxcf"."_$tabl.ume) ".
+" OR isnull( F$kli_vxcf"."_$tabl.dat) OR isnull( F$kli_vxcf"."_$tabl.uce) OR F$kli_vxcf"."_$tabl.uce = ''".
+" ORDER BY ".$order." DESC".
+"";
+
+//echo $sqltt;
+
+$sql = mysql_query("$sqltt");
+
+  }
+// zobraz hladanie vo vsetkych prijemkach
+if ( $copern == 9 )
+  {
+
+$hladaj_nai = strip_tags($_REQUEST['hladaj_nai']);
+$hladaj_dok = strip_tags($_REQUEST['hladaj_dok']);
+$hladaj_dat = strip_tags($_REQUEST['hladaj_dat']);
+$hladaj_uce = strip_tags($_REQUEST['hladaj_uce']);
+
+if ( $hladaj_nai != "" ) {
+
+$chlad_nai = 1*$hladaj_nai;
+
+if( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 21 OR $drupoh == 12 OR $drupoh == 31 OR $drupoh == 22 OR $drupoh == 42 OR $drupoh == 52 )
+{
+$sqltx = "SELECT uce, dok, DATE_FORMAt(dat, '%d.%m.%Y' ) AS dat, F$kli_vxcf"."_$tabl.ico, F$kli_vxcf"."_ico.nai,".
+" fak, dol, prf, str, zak, hod,".$chodu." strv, zakv".$citcbl.
+" FROM F$kli_vxcf"."_$tabl".
+" LEFT JOIN F$kli_vxcf"."_ico".
+" ON F$kli_vxcf"."_$tabl.ico=F$kli_vxcf"."_ico.ico".
+" LEFT JOIN F$kli_vxcf"."_dodb".
+" ON F$kli_vxcf"."_$tabl.uce=F$kli_vxcf"."_dodb.dodb".
+" WHERE F$kli_vxcf"."_$tabl.uce $hladaj_ucep AND ( F$kli_vxcf"."_ico.nai LIKE '%$hladaj_nai%' OR F$kli_vxcf"."_$tabl.ico = $chlad_nai ) ".
+" ORDER BY dok DESC".
+"";
+
+}
+
+$sql = mysql_query("$sqltx");
+
+                        }
+
+if ( $hladaj_dat != "" ) {
+
+$chladaj_dat=1*$hladaj_dat;
+if( $chladaj_dat == 1 OR $chladaj_dat == 2 OR $chladaj_dat == 3 OR $chladaj_dat == 4 OR $chladaj_dat == 5 OR $chladaj_dat == 6 OR $chladaj_dat == 7 OR $chladaj_dat == 8 OR $chladaj_dat == 9 OR $chladaj_dat == 10 OR $chladaj_dat == 11 OR $chladaj_dat == 12 )
+{ $hladaj_dat=$chladaj_dat.".".$kli_vrok; }
+
+    if( strlen($hladaj_dat) == 6 OR strlen($hladaj_dat) == 7 )
+         {
+$sqltt = "SELECT uce, dok, DATE_FORMAt(dat, '%d.%m.%Y' ) AS dat, F$kli_vxcf"."_$tabl.ico, F$kli_vxcf"."_ico.nai,".
+" fak, dol, prf, str, zak, hod,".$chodu." strv, zakv".$citcbl.
+" FROM F$kli_vxcf"."_$tabl".
+" LEFT JOIN F$kli_vxcf"."_ico".
+" ON F$kli_vxcf"."_$tabl.ico=F$kli_vxcf"."_ico.ico".
+" LEFT JOIN F$kli_vxcf"."_dodb".
+" ON F$kli_vxcf"."_$tabl.uce=F$kli_vxcf"."_dodb.dodb".
+" WHERE F$kli_vxcf"."_$tabl.uce $hladaj_ucep AND F$kli_vxcf"."_$tabl.ume = $hladaj_dat ".
+" ORDER BY dok DESC".
+"";
+         }
+
+    if( strlen($hladaj_dat) != 6 AND strlen($hladaj_dat) != 7 )
+         {
+         $datsql = SqlDatum($hladaj_dat);
+$sqltt = "SELECT uce, dok, DATE_FORMAt(dat, '%d.%m.%Y' ) AS dat, F$kli_vxcf"."_$tabl.ico, F$kli_vxcf"."_ico.nai,".
+" fak, dol, prf, str, zak, hod,".$chodu." strv, zakv".$citcbl.
+" FROM F$kli_vxcf"."_$tabl".
+" LEFT JOIN F$kli_vxcf"."_ico".
+" ON F$kli_vxcf"."_$tabl.ico=F$kli_vxcf"."_ico.ico".
+" LEFT JOIN F$kli_vxcf"."_dodb".
+" ON F$kli_vxcf"."_$tabl.uce=F$kli_vxcf"."_dodb.dodb".
+" WHERE F$kli_vxcf"."_$tabl.uce $hladaj_ucep AND F$kli_vxcf"."_$tabl.dat = '$datsql' ".
+" ORDER BY dok DESC".
+"";
+
+         }
+
+$sql = mysql_query("$sqltt");
+}
+
+if ( $hladaj_dok != "" ) {
+
+$sqltt = "SELECT uce, dok, DATE_FORMAt(dat, '%d.%m.%Y' ) AS dat, F$kli_vxcf"."_$tabl.ico, ".
+" fak, dol, prf, str, zak, hod,".$chodu." F$kli_vxcf"."_ico.nai ".$citcbl.
+" FROM F$kli_vxcf"."_$tabl".
+" LEFT JOIN F$kli_vxcf"."_ico".
+" ON F$kli_vxcf"."_$tabl.ico=F$kli_vxcf"."_ico.ico".
+" WHERE ".
+" ( F$kli_vxcf"."_$tabl.dok = '$hladaj_dok' OR F$kli_vxcf"."_$tabl.fak = '$hladaj_dok' OR F$kli_vxcf"."_$tabl.dol = '$hladaj_dok' )".
+" ORDER BY dok DESC".
+"";
+//echo $sqltt;
+$sql = mysql_query("$sqltt");
+}
+
+  }
+
+// celkom poloziek
+$cpol = mysql_num_rows($sql);
+$npol = $cpol + 1;
+// pocet stran
+$xstr =1*(ceil($cpol / $pols));
+if ( $xstr == 0 ) $xstr=1;
+
+$hdrupoh=$drupoh;
+if ( $rozuct == 'ANO' ) $hdrupoh=1*1000+$drupoh;
+
+//searching period
+if( $hladaj_dat == '' ) $hladaj_dat=$kli_vume;
+$pole = explode(".", $hladaj_dat);
+$mesiac_dat=1*$pole[0];
+$rok_dat=1*$pole[1];
+$mesiac_dap=$mesiac_dat-1;
+if( $mesiac_dap == 0 ) $mesiac_dap=1;
+$mesiac_dan=$mesiac_dat+1;
+if( $mesiac_dan > 12 ) $mesiac_dan=12;
+$kli_pume=$mesiac_dap.".".$rok_dat;
+$kli_nume=$mesiac_dan.".".$rok_dat;
+
+
+// aktualna strana
+$page = strip_tags($_REQUEST['page']);
+// nasledujuca strana
+$npage =  $page + 1;
+// predchadzajuca strana
+$ppage =  $page - 1;
+// pocet poloziek na stranu
+$pols = 15;
+if( $copern == 9 ) $pols = 900;
+// zaciatok cyklu
+$i = ( $page - 1 ) * $pols;
+// koniec cyklu
+$konc =($pols*($page-1))+($pols-1);
+?>
+<form name="formhl1" method="post" action="vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&drupoh=<?php echo $hdrupoh; ?>&page=1&copern=9
+&rozuct=<?php echo $rozuct;?>&sysx=<?php echo $sysx;?>&hladaj_uce=<?php echo $hladaj_uce; ?>">
+  <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row">
+    <span id="header_title" class="mdl-layout-title mdl-color-text--white" style="cursor: pointer;">
+<?php
+if ( $drupoh == 1 OR $drupoh == 31 ) echo "OdberateæskÈ fakt˙ry";
+if ( $drupoh == 2 ) echo "Dod·vateæskÈ fakt˙ry";
+if ( $drupoh == 11 OR $drupoh == 12 ) echo "Dodacie listy";
+if ( $drupoh == 21 OR $drupoh == 22 ) echo "Vn˙tropodnikovÈ fakt˙ry";
+if ( $drupoh == 42 ) echo "RegistraËn· pokladnica";
+if ( $drupoh == 52 ) echo "Predfakt˙ry";
+?>
+<?php if( $pocstav == 1 ) echo " - PoËiatoËn˝ stav"; ?>
+ <!-- dopyt, urËiù si hore premenn˙, rovnak˝ text je aj v <title> str·nky -->
+    <i class="material-icons" style="vertical-align: -6px;">arrow_drop_down</i>&nbsp;
+    </span>
+<?php
+if ( $drupoh != 2 AND $drupoh != 42 )
+{
+if( $drupoh == 1 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 1 ) ORDER BY dodb"); }
+if( $drupoh == 31 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 11 ) ORDER BY dodb"); }
+if( $drupoh == 11 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 2 ) ORDER BY dodb"); }
+if( $drupoh == 12 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 12 ) ORDER BY dodb"); }
+if( $drupoh == 21 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 3 ) ORDER BY dodb"); }
+if( $drupoh == 22 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 13 ) ORDER BY dodb"); }
+if( $drupoh == 52 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 14 ) ORDER BY dodb"); }
+?>
+<select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();">
+<?php while($zaznam=mysql_fetch_array($sqls)):?>
+<option value="<?php echo $zaznam["dodb"];?>" >
+<?php
+$polmen = $zaznam["nodb"];
+$poltxt = SubStr($polmen,0,20);
+?>
+<?php echo $zaznam['dodb']." - ".$poltxt; ?></option>
+<?php endwhile;?>
+</select>
+
+<?php
+}
+?>
+<?php
+if ( $drupoh == 2  )
+{
+$sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_ddod WHERE ( drdo = 1 ) ORDER BY ucdo");
+?>
+<select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();">
+<?php while($zaznam=mysql_fetch_array($sqls)):?>
+<option value="<?php echo $zaznam["ddod"];?>" >
+<?php
+$polmen = $zaznam["ndod"];
+$poltxt = SubStr($polmen,0,20);
+?>
+<?php echo $zaznam['ddod']." - ".$poltxt; ?></option>
+<?php endwhile;?>
+</select>
+<?php
+}
+?>
+
+<?php
+if ( $drupoh == 42  )
+{
+$sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dpok WHERE ( drpk = 9 ) ORDER BY dpok");
+?>
+<select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();">
+<?php while($zaznam=mysql_fetch_array($sqls)):?>
+<option value="<?php echo $zaznam["dpok"];?>" >
+<?php
+$polmen = $zaznam["npok"];
+$poltxt = SubStr($polmen,0,20);
+?>
+<?php echo $zaznam['dpok']." - ".$poltxt; ?></option>
+<?php endwhile;?>
+</select>
+<?php
+}
+?>
+<!-- <input type="text" name="hladaj_dok" id="hladaj_dok" value="<?php echo $hladaj_dok; ?>"/>
+<input type="text" name="hladaj_dat" id="hladaj_dat" value="<?php echo $hladaj_dat; ?>"/>
+<input type="text" name="hladaj_nai" id="hladaj_nai" value="<?php echo $hladaj_nai; ?>"/>
+<INPUT type="submit" id="hlad1" name="hlad1" value="Hæadaù">
+<a href="#" onclick="ResetHladanie();" title="Obnoviù" class="reset">Obnoviù</a>-->
+
+
+<div class="mdl-layout-spacer"></div>
+<?php
+if ( ( $drupoh == 1 OR $drupoh == 2 ) AND $pocstav != 1 )
+{
+?>
+<!--     <button type="button" id="view_list" onclick="viewFirms();" class="mdl-button mdl-js-button mdl-button--icon " style=""><i class="material-icons">print</i></button> -->
+<a href="#" onClick="ZoznamFaktur();"><img src='../obr/orig.png' width=15 height=15 border=0 alt="Zoznam fakt˙r PDF" title="Zoznam fakt˙r PDF"></a>
+<a href="#" onClick="ZoznamRaktur();"><img src='../obr/pdf.png' width=15 height=15 border=0 alt="Zoznam fakt˙r s roz˙ËtovanÌm PDF" title="Zoznam fakt˙r s roz˙ËtovanÌm PDF" ></a>
+
+<?php
+}
+?>
+
+<?php
+if ( $drupoh == 2 )
+  {
+?>
+
+<a href="#" onClick="window.open('vstf_importorangexml.php?copern=1&drupoh=<?php echo $drupoh;?>&page=1&cislo_uce=<?php echo $hladaj_uce;?>', '_self' )">
+<img src='../obr/import.png' width=15 height=15 border=0 title="Import ORANGE fakt˙r" ></a>
+
+
+<a href="#" onClick="window.open('vstf_importfakxml.php?copern=1&drupoh=<?php echo $drupoh;?>&page=1&cislo_uce=<?php echo $hladaj_uce;?>', '_self' )">
+<img src='../obr/import.png' width=15 height=15 border=0 title="Import XML fakt˙r" ></a>
+
+<?php
+  }
+?>
+
+
+<?php
+if ( $drupoh == 1 AND $pocstav != 1 )
+  {
+?>
+
+<a href="#" onClick="ExportFakturyCsv();">
+<img src='../obr/export.png' width=15 height=15 border=0 title="Export odberateæsk˝ch fakt˙r za <?php echo $kli_vume;?> do CSV" ></a>
+
+<?php
+  }
+?>
+<?php
+  if ( ( $drupoh == 2 OR $drupoh == 1 OR $drupoh == 12 ) AND $pocstav == 1 AND $kli_uzall > 3000 )
+  {
+?>
+<a href='../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>
+&copern=167&page=1&drupoh=<?php echo $drupoh; ?>&pocstav=<?php echo $pocstav; ?>'>
+<img src='../obr/kos.png' width=20 height=15 border=0 alt="Vymazanie vöetk˝ch poloûiek"></a>
+<a href='../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>
+&copern=155&page=1&drupoh=<?php echo $drupoh; ?>&pocstav=<?php echo $pocstav; ?>'>
+<img src='../obr/import.png' width=20 height=15 border=0 alt="Import ˙dajov z TXT"></a>
+<?php
+     }
+?>
+<?php
+  if ( $drupoh == 22 AND $fir_fico == '31419623' )
+  {
+?>
+<a href='../doprava/vnfpdf.php?copern=10&page=1&drupoh=22' target="_blank">
+<img src='../obr/pdf.png' width=20 height=15 border=0 alt="TlaË vöetk˝ch vn˙tropodnikov˝ch fakt˙r za mesiac <?php echo $kli_vume;?>"></a>
+<a href='vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=267&page=1&drupoh=22'>
+<img src='../obr/kos.png' width=20 height=15 border=0 alt="Vymazanie vöetk˝ch vn˙tropodnikov˝ch fakt˙r za mesiac <?php echo $kli_vume;?>"></a>
+<?php
+     }
+?>
+<?php
+  if ( $drupoh == 42 )
+  {
+$ajmes=0;
+?>
+<a href="#" title="KÛpia poslednÈho pokladniËnÈho dokladu" onClick="window.open('../doprava/regpok_pdf.php?copern=490&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">kPD
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="KÛpia poslednÈho pokladniËnÈho dokladu" ></a>
+<a href="#" title="KÛpia poslednej dennej uz·vierky" onClick="window.open('../doprava/regpok_pdf.php?copern=290&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">kDU
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="KÛpia poslednej dennej uz·vierky" ></a>
+<?php if( $ajmes == 1 ) { ?>
+<a href="#" title="KÛpia poslednej mesaËnej uz·vierky" onClick="window.open('../doprava/regpok.php?copern=390&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">kMU
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="KÛpia poslednej mesaËnej uz·vierky" ></a>
+<?php                   } ?>
+<a href="#" title="Nastavenie registraËnej pokladnice" onClick="window.open('../doprava/regpok.php?copern=1&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">Set
+<img src='../obr/naradie.png' width=20 height=15 border=0 title="Nastavenie registraËnej pokladnice" ></a>
+
+
+<a href="#" title="TlaË dennej uz·vierky" onClick="window.open('../doprava/regpok_pdf.php?copern=200&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">DU
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="TlaË dennej uz·vierky" ></a>
+<?php if( $ajmes == 1 ) { ?>
+<a href="#" title="TlaË mesaËnej uz·vierky" onClick="window.open('../doprava/regpok.php?copern=300&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">MU
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="TlaË mesaËnej uz·vierky" ></a>
+<?php                   } ?>
+<a href="#" title="TlaË priebeûnej uz·vierky" onClick="window.open('../doprava/regpok_pdf.php?copern=400&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">PU
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="TlaË priebeûnej uz·vierky" ></a>
+<?php
+     }
+?>
+
+
+    <button type="button" onclick="novyDok(); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;"><i class="material-icons">add</i></button>
+
+  </div> <!-- .ui-header-page-row -->
+<!-- <div id="Okno"></div> -->
+</form>
+<form name="formp2" method="post" action="../ucto/vspk_u.php?drupoh=<?php echo $drupoh;?>&page=1&copern=55">
+  <div class="mdl-layout__header-row mdl-color--light-blue-600" style="padding:0; height: 40px;">
+    <table class="ui-table-header ui-table data-table container tocenter">
+    <tr class="mdl-color-text--blue-grey-50">
+      <th class="left" style="width:7%;">⁄Ëet</th>
+      <th class="left" style="width:19%;">Doklad -
+<?php
+if ( $drupoh == 1 OR $drupoh == 31 OR $drupoh == 2 ) echo "Fakt˙ra";
+if ( $drupoh == 11 OR $drupoh == 12 ) echo "DodacÌ list";
+if ( $drupoh == 21 OR $drupoh == 22 ) echo "VNF";
+if ( $drupoh == 42 ) echo "ËÌslo v dni";
+if ( $drupoh == 52 ) echo "Predfakt˙ra";
+?>
+      </th>
+      <th>DAT/UME
+<?php if ( $drupoh == 1 OR $drupoh == 31 ) { ?>
+  <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )"><img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>"></a>
+  <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
+<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" title="Doklady za mesiac <?php echo $kli_nume; ?>"></a>
+<?php } ?>
+
+<?php if ( $drupoh == 11 OR $drupoh == 12 ) { ?>
+<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
+&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
+<img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>" ></a>
+<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
+&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
+<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" title="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
+<?php  } ?>
+
+<?php if ( $drupoh == 21 OR $drupoh == 22 ) { ?>
+<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
+<img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" ></a>
+<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
+<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
+<?php  } ?>
+
+<?php if ( $drupoh == 2 ) { ?>
+<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
+<img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>" ></a>
+<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
+<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" title="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
+<?php  } ?>
+
+<?php if ( $drupoh == 42 ) { ?>
+<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
+<img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" ></a>
+<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
+<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
+<?php } ?>
+
+<?php if ( $drupoh == 52 ) { ?>
+<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
+<img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" ></a>
+<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
+<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
+<?php   } ?>
+      </th>
+      <th class="left">
+<?php
+if ( $drupoh == 1 OR $drupoh == 31 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 52 ) echo "Odberateæ";
+if ( $drupoh == 2 ) echo "Dod·vateæ";
+if ( $drupoh == 21 OR $drupoh == 22 ) echo "Odberateæ S - Z";
+?>
+      </th>
+      <th class="left">
+<?php
+if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 31 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 52 ) echo "Str - Z·k";
+if ( $drupoh == 21 OR $drupoh == 22 ) echo "Dod·vateæ Str - Z·k";
+if ( $drupoh == 42 ) echo "DKP";
+?>
+      </th>
+      <th class="right">
+<?php
+if ( $drupoh == 1 OR $drupoh == 31 OR $drupoh == 2 )
+     {
+if ( $sysx == 'UCT' AND $pocstav != 1 ) echo "⁄ËtovanÈ /";
+     }
+?>
+<span style="font-weight:normal;">Hodnota</span>
+      </th>
+      <th class="right">
+<?php
+if ( $drupoh == 1 OR $drupoh == 31 )
+{
+?>
+        <input type="checkbox" name="uhradp" value="1"  onmouseover="UkazSkryj('Uhradiù v hotovosti<br />vybranÈ doklady<br />zaökrtnite a OK');" onmouseout="Okno.style.display='none';" onclick="document.formp2.pokl.disabled = false;">
+        <INPUT type="submit" id="pokl" name="pokl" value="OK" />
+<?php
+}
+?>
+<?php
+if ( $drupoh == 11 )
+{
+?>
+        <input type="checkbox" name="dodfak" value="1" >
+        <img src='../obr/ok.png' width=15 height=15 border=0 onclick="dodacieFak();" title="Vyfakt˙rovaù vybranÈ dodacie listy na jednu fakt˙ru ( maxim·lne 10 riadkov ), ak s˙hlasÌte ûaökrtnite checkbox" >
+<script type="text/javascript">
+    function dodacieFak()
+    {
+    var dodfak = 0;
+    if( document.formp2.dodfak.checked ) var dodfak=1;
+    var h_t10 = 0;
+    <?php if( $cpol > 0 ) { echo "if( document.formp2.h_tl0.checked ) var h_t10=document.formp2.h_tl0.value;"; } ?>
+    var h_t11 = 0;
+    <?php if( $cpol > 1 ) { echo "if( document.formp2.h_tl1.checked ) var h_t11=document.formp2.h_tl1.value;"; } ?>
+    var h_t12 = 0;
+    <?php if( $cpol > 2 ) { echo "if( document.formp2.h_tl2.checked ) var h_t12=document.formp2.h_tl2.value;"; } ?>
+    var h_t13 = 0;
+    <?php if( $cpol > 3 ) { echo "if( document.formp2.h_tl3.checked ) var h_t13=document.formp2.h_tl3.value;"; } ?>
+    var h_t14 = 0;
+    <?php if( $cpol > 4 ) { echo "if( document.formp2.h_tl4.checked ) var h_t14=document.formp2.h_tl4.value;"; } ?>
+    var h_t15 = 0;
+    <?php if( $cpol > 5 ) { echo "if( document.formp2.h_tl5.checked ) var h_t15=document.formp2.h_tl5.value;"; } ?>
+    var h_t16 = 0;
+    <?php if( $cpol > 6 ) { echo "if( document.formp2.h_tl6.checked ) var h_t16=document.formp2.h_tl6.value;"; } ?>
+    var h_t17 = 0;
+    <?php if( $cpol > 7 ) { echo "if( document.formp2.h_tl7.checked ) var h_t17=document.formp2.h_tl7.value;"; } ?>
+    var h_t18 = 0;
+    <?php if( $cpol > 8 ) { echo "if( document.formp2.h_tl8.checked ) var h_t18=document.formp2.h_tl8.value;"; } ?>
+    var h_t19 = 0;
+    <?php if( $cpol > 9 ) { echo "if( document.formp2.h_tl9.checked ) var h_t19=document.formp2.h_tl9.value;"; } ?>
+
+
+    if( dodfak == 1 )
+          {
+    window.open('presundod_fak.php?&copern=20&drupoh=<?php echo $drupoh;?>&tl10=' + h_t10 + '&tl11=' + h_t11 + '&tl12=' + h_t12 + '&tl13=' + h_t13 + '&tl14=' + h_t14 + '&tl15=' + h_t15 + '&tl16=' + h_t16 + '&tl17=' + h_t17 + '&tl18=' + h_t18 + '&tl19=' + h_t19 + '&tt=1', '_self')
+          }
+
+    }
+  </script>
+<?php
+}
+?>
+      </th>
+    </tr>
+    </table> <!-- .ui-table-header -->
+  </div>
+</header>
+
+<main class="mdl-layout__content mdl-color--blue-grey-50">
+<div id="table_body" class="mdl-color--white">
+  <div class="container tocenter">
+  <table class="ui-table data-table">
+  <colgroup>
+    <col style="width:22%;">
+    <col style="width:14%;">
+    <col style="width:20%;">
+    <col style="width:8%;">
+    <col style="width:6%;">
+    <col style="width:6%;">
+    <col style="width:6%;">
+  </colgroup>
+<?php
+   while ( $i <= $konc )
+   {
+?>
+<?php
+  if (@$zaznam=mysql_data_seek($sql,$i))
+  {
+$riadok=mysql_fetch_object($sql);
+?>
+  <tr class="row-echo">
+    <td><?php echo $riadok->uce; ?></td>
+    <td>
+<?php if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 21 OR $drupoh == 31 OR $drupoh == 22 OR $drupoh == 42 )
+      {
+$uctminusdok=$riadok->hodu-$riadok->hod;
+  if ( $sysx == 'UCT' AND $kli_vduj >= 0 AND $pocstav != 1 )
+  {
+?>
+<a href="#" onclick="window.open('../faktury/vstf_t_new.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=ANO&copern=20&drupoh=<?php echo $drupoh; ?>&page=<?php echo $page;?>&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $riadok->dok; ?>&h_ico=<?php echo $riadok->ico; ?>&h_uce=<?php echo $riadok->uce; ?>&h_unk=<?php echo $riadok->unk; ?>&h_poh=<?php echo $riadok->poh; ?>', '_self'); window.name = 'zoznam';" title="Roz˙Ëtovanie dokladu" class="imgbtn img-menu"></a><!-- dopyt, cez funkciu -->
+<?php
+  }
+?>
+<strong><?php echo $riadok->dok;?></strong> -
+<span id="dokfak" onclick="ListaFakUct(<?php echo $riadok->fak; ?>);" title="Zobraziù doklady s ËÌslom fakt˙ry <?php echo $riadok->fak; ?>" class="text-link-out"><?php echo $riadok->fak; ?></span>
+<?php if ( $uctminusdok != 0 AND $riadok->hod != 0 AND $sysx == 'UCT' AND $kli_vduj >= 0 AND $pocstav != 1 ) { ?>
+<img src='../obr/eschange/pozor.png' title='Doklad nie je spr·vne roz˙Ëtovan˝' style='vertical-align:-4px;'> <!-- dopyt, nie cez echo <span> s background a hl·öka vyskakovacia s pozadÌm, napr. #F39C12 -->
+<?php                                                                                                        } ?>
+<?php
+      }
+if ( $drupoh == 11 OR $drupoh == 12 ) echo "$riadok->dok - $riadok->dol";
+if ( $drupoh == 52 ) echo "$riadok->dok - $riadok->prf";
+?>
+    </td>
+    <td>
+<?php echo $riadok->dat; ?>
+<?php if ( $drupoh == 42 ) { ?>
+<a href="#" onclick="uzavierka(<?php echo $riadok->dok;?>)" title="Rozpis dennej uz·vierky z <?php echo $riadok->dat; ?>">uzavierka</a>
+<?php                      } ?>
+    </td>
+    <td>
+      <span class="text-badge-gray"><?php echo $riadok->ico; ?></span>
+<?php if( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 31 OR $drupoh == 52 ) { ?>
+      <span id="dokfak" onclick="ListaIcoUct(<?php echo $riadok->ico; ?>);" title="Zobraziù doklady s iËo <?php echo $riadok->ico; ?>" class="text-link-out"><?php echo $riadok->nai; ?></span>
+<?php } ?>
+<?php if ( $drupoh == 21 OR $drupoh == 22 ) echo "$riadok->nai - $riadok->str - $riadok->zak"; ?>
+<?php if ( $drupoh == 42 ) echo "$riadok->nai"; ?>
+    </td>
+    <td class="center">
+<?php
+if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 31 OR $drupoh == 52 ) echo "$riadok->str - $riadok->zak";
+if ( $drupoh == 21 OR $drupoh == 22 ) echo "$riadok->strv - $riadok->zakv";
+if ( $drupoh == 42 ) echo $riadok->txp;
+?>
+    </td>
+    <td class="right">
+     <strong><?php if ( $sysx == 'UCT' AND $pocstav != 1 ) { echo "$riadok->hodu / "; } ?></strong><?php echo $riadok->hod; ?>
+    </td>
+    <td>
+<?php
+if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 31 OR $drupoh == 21 OR $drupoh == 12 OR $drupoh == 22 OR $drupoh == 52 )
+     {
+?>
+      <a href="#" onClick="VytlacFakt(<?php echo $riadok->dok;?>);"><img src='../obr/pdf.png' width=15 height=10 border=0 alt="TlaË vybranÈho dokladu PDF" title="TlaË vybranÈho dokladu PDF"></a>
+<?php
+     }
+?>
+<?php if( $drupoh == 42 )  { ?>
+      <a href="#" onClick="window.open('../doprava/regpok_pdf.php?copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&sysx=<?php echo $sysx; ?>&cislo_dok=<?php echo $riadok->dok;?>&regpok=<?php echo $regpok;?>', '_blank', '<?php echo $tlcuwin; ?>' )"><img src='../obr/tlac.png' width=15 height=10 border=0 title="TlaË vybranÈho dokladu " ></a>
+<?php                                                 } ?>
+
+<?php
+$ukazzmaz=1;
+if( $drupoh == 42 ) { $nezar = 1*$riadok->ruc; }
+if( $drupoh == 42 AND $nezar != 0 ) { $ukazzmaz = 0; }
+if( $drupoh == 42 AND $kli_uzid == 17 ) { $ukazzmaz = 1; }
+if( $drupoh == 42 AND $kli_uzid == 114 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ukazzmaz = 1; }
+
+if( $copern != 10 AND $ukazzmaz == 1  )
+{
+?>
+      <a href="#" onclick="window.open('vstf_u.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=8&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&hladaj_uce=<?php echo $hladaj_uce; ?><?php if ( $fir_xfa01 == 1 ) { ?> &h_tlsl=1&h_tltv=0&rozb1=NOT&rozb2=NOT <?php } ?><?php if ( $fir_xfa01 == 2 ) { ?> &h_tltv=1&h_tlsl=0&rozb1=NOT&rozb2=NOT <?php } ?>&cislo_dok=<?php echo $riadok->dok;?>&h_fak=<?php echo $riadok->fak;?>&h_dol=<?php echo $riadok->dol;?>&h_prf=<?php echo $riadok->prf;?>'); window.name = 'zoznam';"><img src='../obr/uprav.png' width=15 height=10 border=0 alt="⁄prava vybranÈho dokladu" title="⁄prava vybranÈho dokladu"></a>
+<?php
+}
+?>
+
+<?php if ( $copern != 10 AND $ukazzmaz == 1 AND $kli_nemazat != 1 ) { ?>
+      <a href="#" onclick="ZmazatDok(<?php echo $riadok->dok; ?>);" title="Vymazaù" class="imgbtn img-cancel"></a>
+<?php                                                               } ?>
+<?php
+//aky subor existuje podla toho daj koncovku
+$jesub=0;
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.pdf"))
+{
+$jesub=1;
+?>
+      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.pdf' target="_blank"><img src='../obr/pdf.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
+<?php
+}
+?>
+<?php
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.jpg") AND $jesub == 0 )
+{
+$jesub=1;
+?>
+      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.jpg' target="_blank"><img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
+<?php
+}
+?>
+<?php
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.bmp") AND $jesub == 0 )
+{
+$jesub=1;
+?>
+      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.bmp' target="_blank"><img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
+<?php
+}
+?>
+<?php
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.gif") AND $jesub == 0 )
+{
+$jesub=1;
+?>
+      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.gif' target="_blank"><img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
+<?php
+}
+?>
+<?php
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.png") AND $jesub == 0 )
+{
+$jesub=1;
+?>
+      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.png' target="_blank"><img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
+<?php
+}
+?>
+<?php
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/dd$riadok->dok.pdf"))
+{
+$jesub=1;
+?>
+      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/dd<?php echo $riadok->dok;?>.pdf' target="_blank"><img src='../obr/pdf.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
+<?php
+}
+?>
+<?php if ( ( $drupoh == 1 OR $drupoh == 11 OR $drupoh == 31 ) AND $pocstav != 1 ) { ?>
+      <input type="checkbox" name="h_tl<?php echo $i; ?>" value="<?php echo $riadok->dok;?>"/>
+<?php                                                            } ?>
+    </td>
+  </tr>
+<?php
+  }
+$i = $i + 1;
+   }
+?>
+  </table> <!-- .ui-table -->
+</form>
+<form name="forma3" method="post" action="vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=4&drupoh=<?php echo $drupoh;?>&hladaj_uce=<?php echo $hladaj_uce; ?>
+&page=<?php echo $xstr;?>" >
+  <div class="mdl-color-text--grey-600 ui-table-pagination">
+    <span>= <?php echo $cpol; ?></span>
+    <div class="mdl-layout-spacer"></div>
+
+<FORM name="forma2" class="obyc" method="post" action="vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&
+<?php
+if ( $copern != 9 )
+{
+echo "copern=3&hladaj_uce=$hladaj_uce";
+}
+if ( $copern == 9 )
+{
+echo "copern=9&hladaj_dat=$hladaj_dat&hladaj_dok=$hladaj_dok&hladaj_nai=$hladaj_nai&hladaj_uce=$hladaj_uce";
+}
+?>
+&drupoh=<?php echo $drupoh;?>&page=<?php echo $ppage;?>" >
+<INPUT type="submit" id="pstrana" name="pstrana" value="Predoöl· strana" >
+</FORM>
+<FORM name="forma1" class="obyc" method="post" action="vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&
+<?php
+if ( $copern != 9 )
+{
+echo "copern=2&hladaj_uce=$hladaj_uce";
+}
+if ( $copern == 9 )
+{
+echo "copern=9&hladaj_dat=$hladaj_dat&hladaj_dok=$hladaj_dok&hladaj_nai=$hladaj_nai&hladaj_uce=$hladaj_uce";
+}
+?>
+&drupoh=<?php echo $drupoh;?>&page=<?php echo $npage;?>" >
+<INPUT type="submit" id="dstrana" value="œalöia strana" >
+</FORM>
+
+
+
+
+
+
+
+
+
+
+<INPUT type="submit" id="sstrana" value="Prejsù na stranu:" >
+<input type="text" name="page" id="page" value="<?php echo $xstr;?>" size="4" onkeyup="KontrolaCisla(this, Ax)"/>
+
+
+  </div> <!-- .ui-table-pagination -->
+</form>
+  </div> <!-- .container -->
+</div> <!-- #table_body -->
+
+<?php
+//mysql_close();
+mysql_free_result($sql);
+    } while (false);
+//koniec 1,2,3,4,7,9
+?>
+
+
+<!-- empty state -->
+<?php if ( $cpol == 0 ) { ?>
+<div id="empty_body" class="ui-no-item" style="margin: 12% auto 10% auto;">
+  <i class="material-icons mdl-color-text--grey-400 md-64">sentiment_dissatisfied</i>
+  <div class="mdl-color-text--grey-500 no-item-alert">éiadne poloûky</div>
+</div>
+<?php                   } ?>
+
+<span id="Zm" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:yellow; color:black;">
+ Doklad DOK=<?php echo $cislo_dok;?> vymazan˝</span>
+</main>
+
+
+
+</div> <!-- .mdl-layout -->
+
+<?php
+// toto je koniec casti na zobrazenie tabulky a prechody medzi stranami
+     }
+
+if( $sys != 'DOP' AND $sysx != 'UCT' )
+{
+if( $copern == 1 ) {
+$zmenume=1;
+$odkaz="../faktury/vstfak.php?regpok=$regpok&vyroba=$vyroba&copern=1&drupoh=$drupoh&page=1&sysx=$sysx&hladaj_uce=$hladaj_uce&rozuct=$rozuct";
+                   }
+
+$cislista = include("fak_lista.php");
+}
+
+if( $sys == 'DOP' ) $cislista = include("../doprava/dop_lista.php");
+
+if( $sysx == 'UCT' )
+{
+if( $copern == 1 ) {
+$zmenume=1;
+$odkaz="../faktury/vstfak.php?regpok=$regpok&vyroba=$vyroba&copern=1&drupoh=$drupoh&page=1&sysx=$sysx&hladaj_uce=$hladaj_uce&rozuct=$rozuct";
+                   }
+$cislista = include("../ucto/uct_lista.php");
+}
+
+// celkovy koniec dokumentu
+       } while (false);
+?>
+<SCRIPT Language="JavaScript" Src="../js/cookies.js"></SCRIPT>
 <script type="text/javascript">
 //sirka a vyska okna
 var sirkawin = screen.width-10;
 var vyskawin = screen.height-175;
 
 
-      function ZmazatDok( doklad ) 
-      { 
+      function ZmazatDok( doklad )
+      {
 
   var ucet = document.formhl1.hladaj_uce.value;
 
@@ -1216,8 +1989,8 @@ if( $fir_xfa01 == 2 )
       }
 
 
-      function dajuce() 
-      { 
+      function dajuce()
+      {
 
   var ucet = document.formhl1.hladaj_uce.value;
 <?php if( $sysx != 'UCT' ) { ?>
@@ -1229,7 +2002,7 @@ if( $fir_xfa01 == 2 )
       }
 
 
-//funkcia na zobrazenie popisu 
+//funkcia na zobrazenie popisu
     function UkazSkryj (text)
     {
 <?php if( $_SESSION['nieie'] == 0 )  { ?>
@@ -1240,41 +2013,41 @@ if( $fir_xfa01 == 2 )
 <?php                                } ?>
     }
 
-// Kontrola cisla celeho v rozsahu x az y  
-      function intg(x1,x,y,Oznam) 
-      { 
+// Kontrola cisla celeho v rozsahu x az y
+      function intg(x1,x,y,Oznam)
+      {
        var b;
        b=x1.value;
        var anyString=b;
        Oznam.style.display="none";
          if (b == "") return true;
          else{
-         if (Math.floor(b)==b && b>=x && b<=y) return true; 
+         if (Math.floor(b)==b && b>=x && b<=y) return true;
          else {
          Oznam.style.display="";
          document.formv1.uloz.disabled = true;
          x1.focus();
          return false;
-              } 
+              }
              }
       }
 
-// Kontrola des.cisla v rozsahu x az y  
-      function cele(x1,x,y,Oznam) 
-      { 
+// Kontrola des.cisla v rozsahu x az y
+      function cele(x1,x,y,Oznam)
+      {
        var b;
        b=x1.value;
        var anyString=b;
        Oznam.style.display="none";
          if (b == "") return true;
          else{
-         if (b>=x && b<=y) return true; 
+         if (b>=x && b<=y) return true;
          else {
          Oznam.style.display="";
          document.formv1.uloz.disabled = true;
          x1.focus();
          return false;
-              } 
+              }
              }
       }
 
@@ -1328,7 +2101,7 @@ if( $fir_xfa01 == 2 )
 
     function VyberVstup()
     {
-    document.forma3.page.focus();
+    //document.forma3.page.focus();
     document.forma3.page.select();
     }
 
@@ -1455,962 +2228,14 @@ window.open('../faktury/int_fakt.php?copern=55&page=1&h_sys=85&h_obdp=<?php echo
 
                 }
 
+  function novyDok()
+  {
+   window.open('vstf_u.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=5&drupoh=<?php echo $drupoh;?>&hladaj_uce=<?php echo $hladaj_uce; ?>&page=1', '_self'); //dopyt, "page=1" d·m preË
+
+
+
+  }
+
   </script>
-</HEAD>
-<BODY class="white" onload="ObnovUI(); VyberVstup();" >
-
-<?php 
-
-
-// aktualna strana
-$page = strip_tags($_REQUEST['page']);
-// nasledujuca strana
-$npage =  $page + 1;
-// predchadzajuca strana
-$ppage =  $page - 1;
-// pocet poloziek na stranu
-$pols = 15;
-if( $copern == 9 ) $pols = 900;
-// zaciatok cyklu
-$i = ( $page - 1 ) * $pols;
-// koniec cyklu
-$konc =($pols*($page-1))+($pols-1);
-
-?>
-
-<table class="h2" width="100%" >
-<tr>
-<?php if( $drupoh == 1 ) echo "<td>EuroSecom  -  OdberateæskÈ fakt˙ry"; ?>
-<?php if( $drupoh == 11 ) echo "<td>EuroSecom  - Dodacie listy"; ?>
-<?php if( $drupoh == 12 ) echo "<td>EuroSecom  - Dodacie listy"; ?>
-<?php if( $drupoh == 21 ) echo "<td>EuroSecom  - Vn˙tropodnikovÈ fakt˙ry"; ?>
-<?php if( $drupoh == 22 ) echo "<td>EuroSecom  - Vn˙tropodnikovÈ fakt˙ry"; ?>
-<?php if( $drupoh == 42 ) echo "<td>EuroSecom  - RegistraËn· pokladnica"; ?>
-<?php if( $drupoh == 52 ) echo "<td>EuroSecom  - Predfakt˙ry"; ?>
-<?php if( $drupoh == 2 ) echo "<td>EuroSecom  -  Dod·vateæskÈ fakt˙ry"; ?>
-<?php if( $drupoh == 31 ) echo "<td>EuroSecom  -  OdberateæskÈ fakt˙ry"; ?>
-<?php if( $pocstav == 1 ) echo " - PoËiatoËn˝ stav"; ?>
-</td>
-<td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
-</tr>
-</table>
-<br />
-<div id="Okno"></div>
-
-<?php
-// toto je cast na zobrazenie tabulky a prechody medzi stranami
-// 1=volanie z menu.php
-// 2=dalsia strana
-// 3=predosla strana
-// 4=prejst na stranu
-// 5=nova polozka
-// 6=mazanie
-// 7=hladanie
-// 8=uprava
-// 9=hladanie
-$citcbl='';
-if( $drupoh == 42 ) $citcbl=", cbl";
-
-if ( $copern == 1 || $copern == 2 || $copern == 3 || $copern == 4 || $copern == 7 || $copern == 9 OR $copern == 10 )
-     {
-
-if ( $copern != 1 && $copern != 2 && $copern != 3 && $copern != 4 && $copern != 7 && $copern != 9 AND $copern != 10 ) break;
-
-    do
-    {
-// zobraz vsetko co je v tabulke
-if ( $copern == 1 || $copern == 2 || $copern == 3 || $copern == 4 || $copern == 7 || $copern == 9 OR $copern == 10 )
-  {
-//[[[[[
-
-$hladaj_ucex=$hladaj_uce;
-
-//ak viac rad pre jednu analytiku
-if( $fir_uctx14 == 1 AND ( $drupoh == 1 OR $drupoh == 2 ))
-{
-if( $drupoh == 1 )
-     {
-$sqluce = mysql_query("SELECT dodb,nodb,ucod FROM F$kli_vxcf"."_dodb WHERE ( dodb = $hladaj_uce ) ORDER BY dodb"); 
-  if (@$zaznam=mysql_data_seek($sqluce,0))
-  {
-  //echo "idem";
-  $riaduce=mysql_fetch_object($sqluce);
-  $hladaj_ucex=$riaduce->ucod;
-  }
-     }
-if( $drupoh == 2 )
-     {
-$sqluce = mysql_query("SELECT ddod,ndod,ucdo FROM F$kli_vxcf"."_ddod WHERE ( ddod = $hladaj_uce ) ORDER BY ddod"); 
-  if (@$zaznam=mysql_data_seek($sqluce,0))
-  {
-  //echo "idem";
-  $riaduce=mysql_fetch_object($sqluce);
-  $hladaj_ucex=$riaduce->ucdo;
-  }
-     }
-$_SESSION['nastavene_uce'] = $hladaj_uce;
-}
-
-
-
-$akeume=">= ".$kli_vume;
-$hladaj_ucep="= ".$hladaj_ucex;
-$order="dok";
-if( $drupoh == 22 ) { $akeume="= ".$kli_vume; $hladaj_ucep=" > 0 "; }
-if( $pocstav == 1 ) { $akeume="> 0 "; $order="F".$kli_vxcf."_".$tabl.".ume,dok";}
-$chodu="";
-if( $sysx == 'UCT' ) $chodu="hodu,poh,";
-if( $drupoh == 42 ) $chodu="ruc,";
-
-$sqltt = "SELECT uce, dok, DATE_FORMAt(dat, '%d.%m.%Y' ) AS dat, F$kli_vxcf"."_$tabl.ico, F$kli_vxcf"."_ico.nai,".
-" fak, dol, prf, str, zak, hod,".$chodu." strv, zakv".$citcbl. 
-" FROM F$kli_vxcf"."_$tabl".
-" LEFT JOIN F$kli_vxcf"."_ico".
-" ON F$kli_vxcf"."_$tabl.ico=F$kli_vxcf"."_ico.ico".
-" LEFT JOIN F$kli_vxcf"."_dodb".
-" ON F$kli_vxcf"."_$tabl.uce=F$kli_vxcf"."_dodb.dodb".
-" WHERE ( F$kli_vxcf"."_$tabl.uce $hladaj_ucep AND F$kli_vxcf"."_$tabl.dok > 0 AND F$kli_vxcf"."_$tabl.ume $akeume )".
-" OR isnull( F$kli_vxcf"."_$tabl.ume) ".
-" OR isnull( F$kli_vxcf"."_$tabl.dat) OR isnull( F$kli_vxcf"."_$tabl.uce) OR F$kli_vxcf"."_$tabl.uce = ''". 
-" ORDER BY ".$order." DESC".
-"";
-
-//echo $sqltt;
-
-$sql = mysql_query("$sqltt");
-
-  }
-// zobraz hladanie vo vsetkych prijemkach
-if ( $copern == 9 )
-  {
-
-$hladaj_nai = strip_tags($_REQUEST['hladaj_nai']);
-$hladaj_dok = strip_tags($_REQUEST['hladaj_dok']);
-$hladaj_dat = strip_tags($_REQUEST['hladaj_dat']);
-$hladaj_uce = strip_tags($_REQUEST['hladaj_uce']);
-
-if ( $hladaj_nai != "" ) {
-
-$chlad_nai = 1*$hladaj_nai;
-
-if( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 21 OR $drupoh == 12 OR $drupoh == 31 OR $drupoh == 22 OR $drupoh == 42 OR $drupoh == 52 )
-{
-$sqltx = "SELECT uce, dok, DATE_FORMAt(dat, '%d.%m.%Y' ) AS dat, F$kli_vxcf"."_$tabl.ico, F$kli_vxcf"."_ico.nai,".
-" fak, dol, prf, str, zak, hod,".$chodu." strv, zakv".$citcbl. 
-" FROM F$kli_vxcf"."_$tabl".
-" LEFT JOIN F$kli_vxcf"."_ico".
-" ON F$kli_vxcf"."_$tabl.ico=F$kli_vxcf"."_ico.ico".
-" LEFT JOIN F$kli_vxcf"."_dodb".
-" ON F$kli_vxcf"."_$tabl.uce=F$kli_vxcf"."_dodb.dodb".
-" WHERE F$kli_vxcf"."_$tabl.uce $hladaj_ucep AND ( F$kli_vxcf"."_ico.nai LIKE '%$hladaj_nai%' OR F$kli_vxcf"."_$tabl.ico = $chlad_nai ) ".
-" ORDER BY dok DESC".
-"";
-
-}
-
-$sql = mysql_query("$sqltx");
-
-                        }
-
-if ( $hladaj_dat != "" ) {
-
-$chladaj_dat=1*$hladaj_dat;
-if( $chladaj_dat == 1 OR $chladaj_dat == 2 OR $chladaj_dat == 3 OR $chladaj_dat == 4 OR $chladaj_dat == 5 OR $chladaj_dat == 6 OR $chladaj_dat == 7 OR $chladaj_dat == 8 OR $chladaj_dat == 9 OR $chladaj_dat == 10 OR $chladaj_dat == 11 OR $chladaj_dat == 12 ) 
-{ $hladaj_dat=$chladaj_dat.".".$kli_vrok; }
-
-    if( strlen($hladaj_dat) == 6 OR strlen($hladaj_dat) == 7 )
-         {
-$sqltt = "SELECT uce, dok, DATE_FORMAt(dat, '%d.%m.%Y' ) AS dat, F$kli_vxcf"."_$tabl.ico, F$kli_vxcf"."_ico.nai,".
-" fak, dol, prf, str, zak, hod,".$chodu." strv, zakv".$citcbl. 
-" FROM F$kli_vxcf"."_$tabl".
-" LEFT JOIN F$kli_vxcf"."_ico".
-" ON F$kli_vxcf"."_$tabl.ico=F$kli_vxcf"."_ico.ico".
-" LEFT JOIN F$kli_vxcf"."_dodb".
-" ON F$kli_vxcf"."_$tabl.uce=F$kli_vxcf"."_dodb.dodb".
-" WHERE F$kli_vxcf"."_$tabl.uce $hladaj_ucep AND F$kli_vxcf"."_$tabl.ume = $hladaj_dat ".
-" ORDER BY dok DESC".
-"";
-         }  
-
-    if( strlen($hladaj_dat) != 6 AND strlen($hladaj_dat) != 7 )
-         {
-         $datsql = SqlDatum($hladaj_dat);
-$sqltt = "SELECT uce, dok, DATE_FORMAt(dat, '%d.%m.%Y' ) AS dat, F$kli_vxcf"."_$tabl.ico, F$kli_vxcf"."_ico.nai,".
-" fak, dol, prf, str, zak, hod,".$chodu." strv, zakv".$citcbl.
-" FROM F$kli_vxcf"."_$tabl".
-" LEFT JOIN F$kli_vxcf"."_ico".
-" ON F$kli_vxcf"."_$tabl.ico=F$kli_vxcf"."_ico.ico".
-" LEFT JOIN F$kli_vxcf"."_dodb".
-" ON F$kli_vxcf"."_$tabl.uce=F$kli_vxcf"."_dodb.dodb".
-" WHERE F$kli_vxcf"."_$tabl.uce $hladaj_ucep AND F$kli_vxcf"."_$tabl.dat = '$datsql' ".
-" ORDER BY dok DESC".
-"";
-
-         } 
-
-$sql = mysql_query("$sqltt");
-}
-
-if ( $hladaj_dok != "" ) {
-
-$sqltt = "SELECT uce, dok, DATE_FORMAt(dat, '%d.%m.%Y' ) AS dat, F$kli_vxcf"."_$tabl.ico, ".
-" fak, dol, prf, str, zak, hod,".$chodu." F$kli_vxcf"."_ico.nai ".$citcbl. 
-" FROM F$kli_vxcf"."_$tabl".
-" LEFT JOIN F$kli_vxcf"."_ico".
-" ON F$kli_vxcf"."_$tabl.ico=F$kli_vxcf"."_ico.ico".
-" WHERE ".
-" ( F$kli_vxcf"."_$tabl.dok = '$hladaj_dok' OR F$kli_vxcf"."_$tabl.fak = '$hladaj_dok' OR F$kli_vxcf"."_$tabl.dol = '$hladaj_dok' )".
-" ORDER BY dok DESC".
-"";
-//echo $sqltt;
-$sql = mysql_query("$sqltt");
-}
-
-  }
-
-// celkom poloziek
-$cpol = mysql_num_rows($sql);
-$npol = $cpol + 1;
-// pocet stran
-$xstr =1*(ceil($cpol / $pols));
-if ( $xstr == 0 ) $xstr=1;
-?>
-
-<table class="fmenu" width="100%" >
-
-<?php
-//nezobraz hladanie pre novu,upravu a mazanie
-if ( $copern != 5 AND $copern != 6 AND $copern != 8 )
-     {
-$hdrupoh=$drupoh;
-if ( $rozuct == 'ANO' ) $hdrupoh=1*1000+$drupoh;
-?>
-<tr>
-<FORM name="formhl1" class="hmenu" method="post" action="vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&drupoh=<?php echo $hdrupoh;?>&page=1&copern=9
-&rozuct=<?php echo $rozuct;?>&sysx=<?php echo $sysx;?>&hladaj_uce=<?php echo $hladaj_uce; ?>" >
-<td class="hmenu" ><img src='../obr/hladaj.png' width=15 height=10 border=0 alt="Vyhæad·vanie" title="Vyhæad·vanie" >
-<?php
-  if ( $drupoh == 42 )
-  {
-$ajmes=0;
-?>
-<td class="hmenu" >
-<a href="#" title="KÛpia poslednÈho pokladniËnÈho dokladu" onClick="window.open('../doprava/regpok_pdf.php?copern=490&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">kPD
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="KÛpia poslednÈho pokladniËnÈho dokladu" ></a>
-<a href="#" title="KÛpia poslednej dennej uz·vierky" onClick="window.open('../doprava/regpok_pdf.php?copern=290&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">kDU
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="KÛpia poslednej dennej uz·vierky" ></a>
-<?php if( $ajmes == 1 ) { ?>
-<a href="#" title="KÛpia poslednej mesaËnej uz·vierky" onClick="window.open('../doprava/regpok.php?copern=390&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">kMU
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="KÛpia poslednej mesaËnej uz·vierky" ></a>
-<?php                   } ?>
-<a href="#" title="Nastavenie registraËnej pokladnice" onClick="window.open('../doprava/regpok.php?copern=1&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">Set
-<img src='../obr/naradie.png' width=20 height=15 border=0 title="Nastavenie registraËnej pokladnice" ></a>
-</td>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ><a href="#" title="TlaË dennej uz·vierky" onClick="window.open('../doprava/regpok_pdf.php?copern=200&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">DU
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="TlaË dennej uz·vierky" ></a>
-<?php if( $ajmes == 1 ) { ?>
-<td class="hmenu" ><a href="#" title="TlaË mesaËnej uz·vierky" onClick="window.open('../doprava/regpok.php?copern=300&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">MU
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="TlaË mesaËnej uz·vierky" ></a>
-<?php                   } ?>
-<td class="hmenu" ><a href="#" title="TlaË priebeûnej uz·vierky" onClick="window.open('../doprava/regpok_pdf.php?copern=400&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">PU
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="TlaË priebeûnej uz·vierky" ></a>
-<?php
-     }
-?>
-<?php
-  if ( ( $drupoh == 2 OR $drupoh == 1 OR $drupoh == 12 ) AND $pocstav == 1 AND $kli_uzall > 3000 )
-  {
-?>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ><a href='../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>
-&copern=167&page=1&drupoh=<?php echo $drupoh; ?>&pocstav=<?php echo $pocstav; ?>'>
-<img src='../obr/kos.png' width=20 height=15 border=0 alt="Vymazanie vöetk˝ch poloûiek"></a>
-<td class="hmenu" ><a href='../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>
-&copern=155&page=1&drupoh=<?php echo $drupoh; ?>&pocstav=<?php echo $pocstav; ?>'>
-<img src='../obr/import.png' width=20 height=15 border=0 alt="Import ˙dajov z TXT"></a>
-<?php
-     }
-?>
-<?php
-  if ( $drupoh == 22 AND $fir_fico == '31419623' )
-  {
-?>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ><a href='../doprava/vnfpdf.php?copern=10&page=1&drupoh=22' target="_blank">
-<img src='../obr/pdf.png' width=20 height=15 border=0 alt="TlaË vöetk˝ch vn˙tropodnikov˝ch fakt˙r za mesiac <?php echo $kli_vume;?>"></a>
-<td class="hmenu" ></td>
-<td class="hmenu" ></td>
-<td class="hmenu" ><a href='vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=267&page=1&drupoh=22'>
-<img src='../obr/kos.png' width=20 height=15 border=0 alt="Vymazanie vöetk˝ch vn˙tropodnikov˝ch fakt˙r za mesiac <?php echo $kli_vume;?>"></a>
-<?php
-     }
-?>
-</tr>
-<tr>
-<?php
-if( $drupoh != 2 AND $drupoh != 42 )
-{
-if( $drupoh == 1 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 1 ) ORDER BY dodb"); }
-if( $drupoh == 31 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 11 ) ORDER BY dodb"); }
-if( $drupoh == 11 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 2 ) ORDER BY dodb"); }
-if( $drupoh == 12 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 12 ) ORDER BY dodb"); }
-if( $drupoh == 21 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 3 ) ORDER BY dodb"); }
-if( $drupoh == 22 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 13 ) ORDER BY dodb"); }
-if( $drupoh == 52 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 14 ) ORDER BY dodb"); }
-?>
-<td class="hmenu">
-<select class="hvstup" size="1" name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce;?>"  
- onchange="dajuce();" >
-<?php while($zaznam=mysql_fetch_array($sqls)):?>
-<option value="<?php echo $zaznam["dodb"];?>" >
-<?php 
-$polmen = $zaznam["nodb"];
-$poltxt = SubStr($polmen,0,20);
-?>
-<?php echo $zaznam["dodb"];?></option>
-<?php endwhile;?>
-</select>
-</td>
-<?php
-}
-?>
-<?php
-if( $drupoh == 2  )
-{
-if( $drupoh == 2 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_ddod WHERE ( drdo = 1 ) ORDER BY ucdo"); }
-?>
-<td class="hmenu">
-<select class="hvstup" size="1" name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce;?>"  
- onchange="dajuce();" >
-<?php while($zaznam=mysql_fetch_array($sqls)):?>
-<option value="<?php echo $zaznam["ddod"];?>" >
-<?php 
-$polmen = $zaznam["ndod"];
-$poltxt = SubStr($polmen,0,20);
-?>
-<?php echo $zaznam["ddod"];?></option>
-<?php endwhile;?>
-</select>
-</td>
-<?php
-}
-?>
-<?php
-if( $drupoh == 42  )
-{
-if( $drupoh == 42 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dpok WHERE ( drpk = 9 ) ORDER BY dpok"); }
-?>
-<td class="hmenu">
-<select class="hvstup" size="1" name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce;?>"  
- onchange="dajuce();" >
-<?php while($zaznam=mysql_fetch_array($sqls)):?>
-<option value="<?php echo $zaznam["dpok"];?>" >
-<?php 
-$polmen = $zaznam["npok"];
-$poltxt = SubStr($polmen,0,20);
-?>
-<?php echo $zaznam["dpok"];?></option>
-<?php endwhile;?>
-</select>
-</td>
-<?php
-}
-?>
-
-
-<td class="hmenu"><input type="text" name="hladaj_dok" id="hladaj_dok" size="15" value="<?php echo $hladaj_dok;?>" />
-<td class="hmenu"><input type="text" name="hladaj_dat" id="hladaj_dat" size="8" value="<?php echo $hladaj_dat;?>" />
-<td class="hmenu"><input type="text" name="hladaj_nai" id="hladaj_nai" size="30" value="<?php echo $hladaj_nai;?>" /> 
-<td class="obyc" align="left"><INPUT type="submit" id="hlad1" name="hlad1" value="Hæadaù" ></td>
-</FORM>
-<FORM name="formhl2" class="hmenu" method="post" action="vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&drupoh=<?php echo $hdrupoh;?>&page=1&copern=1
-&rozuct=<?php echo $rozuct;?>&sysx=<?php echo $sysx;?>&hladaj_uce=<?php echo $hladaj_uce; ?>" >
-<td class="obyc" align="left"><INPUT type="submit" id="hlad2" name="hlad2" value="Vöetko" ></td>
-<td class="hmenu"></td>
-<td class="hmenu"></td>
-<?php
-if ( ( $drupoh == 1 OR $drupoh == 2 ) AND $pocstav != 1 )
-{
-?>
-<td class="hmenu">
-<a href="#" onClick="ZoznamFaktur();">
-<img src='../obr/orig.png' width=15 height=15 border=0 alt="Zoznam fakt˙r PDF" title="Zoznam fakt˙r PDF"></a>
-<a href="#" onClick="ZoznamRaktur();">
-<img src='../obr/pdf.png' width=15 height=15 border=0 alt="Zoznam fakt˙r s roz˙ËtovanÌm PDF" title="Zoznam fakt˙r s roz˙ËtovanÌm PDF" ></a>
-</td>
-<?php
-}
-?>
-
-<?php
-if ( $drupoh == 2 )
-  {
-?>
-<td class="hmenu">
-<a href="#" onClick="window.open('vstf_importorangexml.php?copern=1&drupoh=<?php echo $drupoh;?>&page=1&cislo_uce=<?php echo $hladaj_uce;?>', '_self' )">
-<img src='../obr/import.png' width=15 height=15 border=0 title="Import ORANGE fakt˙r" ></a>
-</td>
-<td class="hmenu">
-<a href="#" onClick="window.open('vstf_importfakxml.php?copern=1&drupoh=<?php echo $drupoh;?>&page=1&cislo_uce=<?php echo $hladaj_uce;?>', '_self' )">
-<img src='../obr/import.png' width=15 height=15 border=0 title="Import XML fakt˙r" ></a>
-</td>
-<?php
-  }
-?>
-
-
-<?php
-if ( $drupoh == 1 AND $pocstav != 1 )
-  {
-?>
-<td class="hmenu">
-<a href="#" onClick="ExportFakturyCsv();">
-<img src='../obr/export.png' width=15 height=15 border=0 title="Export odberateæsk˝ch fakt˙r za <?php echo $kli_vume;?> do CSV" ></a>
-</td>
-<?php
-  }
-?>
-</tr>
-</FORM>
-<?php
-     }
-?>
-<FORM name="formp2" class="obyc" method="post" action="../ucto/vspk_u.php?drupoh=<?php echo $drupoh;?>&page=1&copern=55" >
-<tr>
-<?php
-if( $hladaj_dat == '' ) $hladaj_dat=$kli_vume;
-$pole = explode(".", $hladaj_dat);
-$mesiac_dat=1*$pole[0];
-$rok_dat=1*$pole[1];
-$mesiac_dap=$mesiac_dat-1;
-if( $mesiac_dap == 0 ) $mesiac_dap=1;
-$mesiac_dan=$mesiac_dat+1;
-if( $mesiac_dan > 12 ) $mesiac_dan=12;
-$kli_pume=$mesiac_dap.".".$rok_dat;
-$kli_nume=$mesiac_dan.".".$rok_dat;
-  if ( $drupoh == 1 OR $drupoh == 31 )
-  {
-?>
-<th class="hmenu">⁄Ëet<th class="hmenu">Doklad - Fakt˙ra
-<th class="hmenu">
-<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
-&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
-<img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>"></a>
-DAT/UME
-<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
-&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
-<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" title="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
-<th class="hmenu">Odberateæ<th class="hmenu">STR - Z¡K<th class="hmenu"><?php if( $sysx == 'UCT' AND $pocstav != 1 ) { echo '⁄ËtovanÈ/'; } ?>Hodnota
-<th class="hmenu">TlaË<th class="hmenu">Uprav<th class="hmenu">Zmaû<th class="hmenu">Orig<th class="hmenu">Ozn
-<?php
-  }
-?>
-<?php
-  if ( $drupoh == 11 OR $drupoh == 12 )
-  {
-?>
-<th class="hmenu">⁄Ëet<th class="hmenu">Doklad - DodacÌ list
-<th class="hmenu">
-<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
-&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
-<img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>" ></a>
-DAT/UME
-<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
-&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
-<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" title="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
-<th class="hmenu">Odberateæ<th class="hmenu">STR - Z¡K<th class="hmenu">Hodnota
-<th class="hmenu">TlaË<th class="hmenu">Uprav<th class="hmenu">Zmaû<th class="hmenu">Orig<th class="hmenu">Ozn
-<?php
-  }
-?>
-<?php
-  if ( $drupoh == 21 OR $drupoh == 22 )
-  {
-?>
-<th class="hmenu"><br />⁄Ëet<th class="hmenu"><br />Doklad - VNF
-<th class="hmenu">
-<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
-&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
-<img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" ></a>
-DAT/UME
-<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
-&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
-<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
-<th class="hmenu"><br />Odberateæ - STR - Z¡K<th class="hmenu">Dod·vateæ STR-Z¡K<th class="hmenu"><br />Hodnota
-<th class="hmenu">TlaË<th class="hmenu">Uprav<th class="hmenu">Zmaû<th class="hmenu">Orig<th class="hmenu">Ozn
-<?php
-  }
-?>
-<?php
-  if ( $drupoh == 2 )
-  {
-?>
-<th class="hmenu">⁄Ëet<th class="hmenu">Doklad - Fakt˙ra
-<th class="hmenu">
-<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
-&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
-<img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>" ></a>
-DAT/UME
-<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
-&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
-<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" title="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
-<th class="hmenu">Dod·vateæ<th class="hmenu">STR - Z¡K<th class="hmenu"><?php if( $sysx == 'UCT' AND $pocstav != 1 ) { echo '⁄ËtovanÈ/'; } ?>Hodnota
-<th class="hmenu">TlaË<th class="hmenu">Uprav<th class="hmenu">Zmaû<th class="hmenu">Orig<th class="hmenu">Ozn
-<?php
-  }
-?>
-<?php
-  if ( $drupoh == 42 )
-  {
-?>
-<th class="hmenu"><br />⁄Ëet<th class="hmenu"><br />Doklad - »Ìslo v dni
-<th class="hmenu">
-<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
-&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
-<img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" ></a>
-DAT/UME
-<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
-&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
-<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
-<th class="hmenu"><br />Odberateæ<th class="hmenu">DKP<th class="hmenu"><br />Hodnota
-<th class="hmenu">TlaË<th class="hmenu">Uprav<th class="hmenu">Zmaû<th class="hmenu">Orig<th class="hmenu">Ozn
-<?php
-  }
-?>
-<?php
-  if ( $drupoh == 52 )
-  {
-?>
-<th class="hmenu">⁄Ëet<th class="hmenu">Doklad - Predfakt˙ra
-<th class="hmenu">
-<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
-&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
-<img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" ></a>
-DAT/UME
-<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>
-&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
-<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
-<th class="hmenu">Odberateæ<th class="hmenu">STR - Z¡K<th class="hmenu">Hodnota
-<th class="hmenu">TlaË<th class="hmenu">Uprav<th class="hmenu">Zmaû<th class="hmenu">Orig<th class="hmenu">Ozn
-<?php
-  }
-?>
-</tr>
-
-<?php
-   while ($i <= $konc )
-   {
-?>
-<?php
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-?>
-<tr>
-<td class="fmenu" width="10%" ><?php echo $riadok->uce;?></td>
-<?php
-  if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 21 OR $drupoh == 31 OR $drupoh == 22 OR $drupoh == 42 )
-  {
-?>
-<td class="fmenu" width="15%" >
-<?php
-$uctminusdok=$riadok->hodu-$riadok->hod;
-  if ( $sysx == 'UCT' AND $kli_vduj >= 0 AND $pocstav != 1 )
-  {
-?>
-<a href="#" onClick="window.open('../faktury/vstf_t.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>
-&rozuct=ANO&copern=20&drupoh=<?php echo $drupoh;?>
-&page=<?php echo $page;?>&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $riadok->dok;?>&h_ico=<?php echo $riadok->ico;?>
-&h_uce=<?php echo $riadok->uce;?>&h_unk=<?php echo $riadok->unk;?>&h_poh=<?php echo $riadok->poh;?>', '_self' ); window.name = 'zoznam'; ">
-<img src='../obr/zoznam.png' width=15 height=12 border=0 alt="Roz˙Ëtovanie dokladu" title="Roz˙Ëtovanie dokladu" ></a>
-<?php
-  }
-?>
-<span id="dokfak" onclick="ListaFakUct(<?php echo $riadok->fak;?>);" ><?php echo $riadok->dok;?> - <?php echo $riadok->fak;?></span>
-<?php if( $uctminusdok != 0 AND $riadok->hod != 0 AND $sysx == 'UCT' AND $kli_vduj >= 0 AND $pocstav != 1 )
- echo " <img src='../obr/pozor.png' width=12 height=12 border=0 alt='Doklad nie je spr·vne roz˙Ëtovan˝' title='Doklad nie je spr·vne roz˙Ëtovan˝' >"; ?>
-</td>
-<?php
-  }
-?>
-<?php
-  if ( $drupoh == 11 OR $drupoh == 12 )
-  {
-?>
-<td class="fmenu" width="15%" ><?php echo $riadok->dok;?> - <?php echo $riadok->dol;?></td>
-<?php
-  }
-?>
-<?php
-  if ( $drupoh == 52 )
-  {
-?>
-<td class="fmenu" width="15%" ><?php echo $riadok->dok;?> - <?php echo $riadok->prf;?></td>
-<?php
-  }
-?>
-<td class="fmenu" width="8%" >
-<?php if ( $drupoh == 42 ) { ?>
-<a href="#" title="Rozpis dennej uz·vierky za <?php echo $riadok->dat;?>" onclick="uzavierka(<?php echo $riadok->dok;?>)" >
-<?php                      } ?>
-<?php echo $riadok->dat;?>
-<?php if ( $drupoh == 42 ) { ?>
-</a>
-<?php                      } ?>
-</td>
-<?php
-if( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 31 OR $drupoh == 52 )
-{
-?>
-<td class="fmenu" width="28%" >
-<span id="dokfak" onclick="ListaIcoUct(<?php echo $riadok->ico;?>);" ><?php echo $riadok->ico;?> <?php echo $riadok->nai;?></span></td>
-<td class="fmenu" width="6%" ><?php echo $riadok->str;?> - <?php echo $riadok->zak;?></td>
-<?php
-}
-?>
-<?php
-if( $drupoh == 21 OR $drupoh == 22 )
-{
-?>
-<td class="fmenu" width="28%" ><?php echo $riadok->ico;?> <?php echo $riadok->nai;?> - <?php echo $riadok->str;?> - <?php echo $riadok->zak;?></td>
-<td class="fmenu" width="6%" ><?php echo $riadok->strv;?> - <?php echo $riadok->zakv;?></td>
-<?php
-}
-?>
-<?php
-if( $drupoh == 42 )
-{
-?>
-<td class="fmenu" width="28%" ><?php echo $riadok->ico;?> <?php echo $riadok->nai;?></td>
-<td class="fmenu" width="6%" ><?php echo $riadok->txp;?></td>
-<?php
-}
-?>
-<?php
-$tlaclenpdf=1;
-if( $kli_vrok < 2014 ) { $tlaclenpdf=0; }
-if( $_SESSION['nieie'] == 1 ) { $tlaclenpdf=1; }
-?>
-<td class="fmenu" width="10%" align="right"><?php if( $sysx == 'UCT' AND $pocstav != 1 ) { echo $riadok->hodu.' / '; } ?><?php echo $riadok->hod;?></td>
-<td class="fmenu" width="7%" >
-<?php if( $tlaclenpdf == 0 AND $drupoh != 42 ) { ?>
-<a href="#" onClick="window.open('vstf_t.php?copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&sysx=<?php echo $sysx;?>
-&cislo_dok=<?php echo $riadok->dok;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
-<img src='../obr/tlac.png' width=15 height=10 border=0 alt="TlaË vybranÈho dokladu HTML" title="TlaË vybranÈho dokladu HTML" ></a>
-<?php                                          } ?>
-<?php if( $drupoh == 42 )  { ?>
-<a href="#" onClick="window.open('../doprava/regpok_pdf.php?copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&sysx=<?php echo $sysx;?>
-&cislo_dok=<?php echo $riadok->dok;?>&regpok=<?php echo $regpok;?>', '_blank', '<?php echo $tlcuwin; ?>' )">
-<img src='../obr/tlac.png' width=15 height=10 border=0 title="TlaË vybranÈho dokladu " ></a>
-<?php                                                 } ?>
-
-<?php
-if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 31 OR $drupoh == 21 OR $drupoh == 12 OR $drupoh == 22 OR $drupoh == 52 )
-     {
-?>
-<a href="#" onClick="VytlacFakt(<?php echo $riadok->dok;?>);">
-<img src='../obr/pdf.png' width=15 height=10 border=0 alt="TlaË vybranÈho dokladu PDF" title="TlaË vybranÈho dokladu PDF"></a>
-<?php
-     }
-?>
-</td>
-<td class="fmenu" width="4%" >
-<?php
-$ukazzmaz=1;
-if( $drupoh == 42 ) { $nezar = 1*$riadok->ruc; }
-if( $drupoh == 42 AND $nezar != 0 ) { $ukazzmaz = 0; }
-if( $drupoh == 42 AND $kli_uzid == 17 ) { $ukazzmaz = 1; }
-if( $drupoh == 42 AND $kli_uzid == 114 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ukazzmaz = 1; }
-
-if( $copern != 10 AND $ukazzmaz == 1  )
-{
-?>
-<a href='vstf_u.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=8&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&hladaj_uce=<?php echo $hladaj_uce; ?>
-<?php
-if( $fir_xfa01 == 1 )
-{
-?>
-&h_tlsl=1&h_tltv=0&rozb1=NOT&rozb2=NOT
-<?php
-}
-?>
-<?php
-if( $fir_xfa01 == 2 )
-{
-?>
-&h_tltv=1&h_tlsl=0&rozb1=NOT&rozb2=NOT
-<?php
-}
-?>
-&cislo_dok=<?php echo $riadok->dok;?>&h_fak=<?php echo $riadok->fak;?>&h_dol=<?php echo $riadok->dol;?>
-&h_prf=<?php echo $riadok->prf;?>'>
-<img src='../obr/uprav.png' width=15 height=10 border=0 alt="⁄prava vybranÈho dokladu" title="⁄prava vybranÈho dokladu" onclick="window.name = 'zoznam';"></a></td>
-<?php
-}
-?>
-<td class="fmenu" width="4%" >
-<?php
-if( $copern != 10 AND $ukazzmaz == 1 AND $kli_nemazat != 1  )
-{
-?>
-<img src='../obr/zmaz.png' onclick='ZmazatDok(<?php echo $riadok->dok;?>)' width=15 height=10 border=0 alt="Vymazanie vybranÈho dokladu" title="Vymazanie vybranÈho dokladu" ></a></td></a>
-<?php
-}
-?>
-</td>
-<td class="fmenu" width="4%" >
-<?php
-//aky subor existuje podla toho daj koncovku
-$jesub=0;
-if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.pdf"))  
-{
-$jesub=1;
-?>
-<a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.pdf' target="_blank">
-<img src='../obr/pdf.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
-<?php
-} 
-?>
-<?php
-if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.jpg") AND $jesub == 0 )  
-{
-$jesub=1;
-?>
-<a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.jpg' target="_blank">
-<img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
-<?php
-} 
-?>
-<?php
-if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.bmp") AND $jesub == 0 )  
-{
-$jesub=1;
-?>
-<a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.bmp' target="_blank">
-<img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
-<?php
-} 
-?>
-<?php
-if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.gif") AND $jesub == 0 )  
-{
-$jesub=1;
-?>
-<a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.gif' target="_blank">
-<img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
-<?php
-} 
-?>
-<?php
-if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.png") AND $jesub == 0 )  
-{
-$jesub=1;
-?>
-<a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.png' target="_blank">
-<img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
-<?php
-} 
-?>
-<?php
-if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/dd$riadok->dok.pdf"))  
-{
-$jesub=1;
-?>
-<a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/dd<?php echo $riadok->dok;?>.pdf' target="_blank">
-<img src='../obr/pdf.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
-<?php
-} 
-?>
-</td>
-<td class="fmenu" width="4%" >
-<input type="checkbox" name="h_tl<?php echo $i; ?>" value="<?php echo $riadok->dok;?>" width=10 height=10 />
-</td>
-</tr>
-<?php
-  }
-$i = $i + 1;
-   }
-if ( $copern != 5 AND $copern != 8 AND $copern != 6 ) echo "</table>";
-?>
-<table class="fmenu" width="100%" >
-<tr>
-<td class="bmenu" width="80%" >
-<?php echo "Strana:$page  Celkom poloûiek/str·n v celej tabulke:$cpol/$xstr ";?>
-</td>
-<td class="bmenu" width="20%" align="center">
-<?php
-if ( $drupoh == 1 OR $drupoh == 31 )
-{
-?>
-<input type="checkbox" name="uhradp" value="1"  onmouseover="UkazSkryj('Uhradiù v hotovosti<br />vybranÈ doklady<br />zaökrtnite a OK');"
- onmouseout="Okno.style.display='none';" onclick="document.formp2.pokl.disabled = false;">
-<INPUT type="submit" id="pokl" name="pokl" value="OK" />
-<?php
-}
-?>
-<?php
-if ( $drupoh == 11 )
-{
-?>
-<input type="checkbox" name="dodfak" value="1" >
-<img src='../obr/ok.png' width=15 height=15 border=0 onclick="dodacieFak();" title="Vyfakt˙rovaù vybranÈ dodacie listy na jednu fakt˙ru ( maxim·lne 10 riadkov ), ak s˙hlasÌte ûaökrtnite checkbox" >
-<script type="text/javascript">
-    function dodacieFak()
-    {
-    var dodfak = 0;
-    if( document.formp2.dodfak.checked ) var dodfak=1;
-    var h_t10 = 0;
-    <?php if( $cpol > 0 ) { echo "if( document.formp2.h_tl0.checked ) var h_t10=document.formp2.h_tl0.value;"; } ?>
-    var h_t11 = 0;
-    <?php if( $cpol > 1 ) { echo "if( document.formp2.h_tl1.checked ) var h_t11=document.formp2.h_tl1.value;"; } ?>
-    var h_t12 = 0;
-    <?php if( $cpol > 2 ) { echo "if( document.formp2.h_tl2.checked ) var h_t12=document.formp2.h_tl2.value;"; } ?>
-    var h_t13 = 0;
-    <?php if( $cpol > 3 ) { echo "if( document.formp2.h_tl3.checked ) var h_t13=document.formp2.h_tl3.value;"; } ?>
-    var h_t14 = 0;
-    <?php if( $cpol > 4 ) { echo "if( document.formp2.h_tl4.checked ) var h_t14=document.formp2.h_tl4.value;"; } ?>
-    var h_t15 = 0;
-    <?php if( $cpol > 5 ) { echo "if( document.formp2.h_tl5.checked ) var h_t15=document.formp2.h_tl5.value;"; } ?>
-    var h_t16 = 0;
-    <?php if( $cpol > 6 ) { echo "if( document.formp2.h_tl6.checked ) var h_t16=document.formp2.h_tl6.value;"; } ?>
-    var h_t17 = 0;
-    <?php if( $cpol > 7 ) { echo "if( document.formp2.h_tl7.checked ) var h_t17=document.formp2.h_tl7.value;"; } ?>
-    var h_t18 = 0;
-    <?php if( $cpol > 8 ) { echo "if( document.formp2.h_tl8.checked ) var h_t18=document.formp2.h_tl8.value;"; } ?>
-    var h_t19 = 0;
-    <?php if( $cpol > 9 ) { echo "if( document.formp2.h_tl9.checked ) var h_t19=document.formp2.h_tl9.value;"; } ?>
-
-
-    if( dodfak == 1 )
-          {
-    window.open('presundod_fak.php?&copern=20&drupoh=<?php echo $drupoh;?>&tl10=' + h_t10 + '&tl11=' + h_t11 + '&tl12=' + h_t12 + '&tl13=' + h_t13 + '&tl14=' + h_t14 + '&tl15=' + h_t15 + '&tl16=' + h_t16 + '&tl17=' + h_t17 + '&tl18=' + h_t18 + '&tl19=' + h_t19 + '&tt=1', '_self')
-          }
-
-    }
-  </script>
-<?php
-}
-?>
-</td>
-</FORM>
-</td>
-</tr>
-</table>
-<?php
-//mysql_close();
-mysql_free_result($sql);
-    } while (false);
-//koniec 1,2,3,4,7,9
-
-//nezobraz pre novu,upravu a mazanie
-if ( $copern != 5 AND $copern != 6 AND $copern != 8 )
-     {
-?>
-<tr>
-<span id="Ax" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:red; color:black;">
- Zadajte ËÌslo strany - ˙daj musÌ byù celÈ kladnÈ ËÌslo</span>
-<span id="Zm" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:yellow; color:black;">
- Doklad DOK=<?php echo $cislo_dok;?> vymazan˝</span>
-</tr>
-
-<table>
-<tr>
-<td>
-<FORM name="forma2" class="obyc" method="post" action="vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&
-<?php
-if ( $copern != 9 )
-{
-echo "copern=3&hladaj_uce=$hladaj_uce";
-}
-if ( $copern == 9 )
-{
-echo "copern=9&hladaj_dat=$hladaj_dat&hladaj_dok=$hladaj_dok&hladaj_nai=$hladaj_nai&hladaj_uce=$hladaj_uce";
-}
-?>
-&drupoh=<?php echo $drupoh;?>&page=<?php echo $ppage;?>" >
-<INPUT type="submit" id="pstrana" name="pstrana" value="Predoöl· strana" >
-</FORM>
-</td>
-<td>
-<FORM name="forma1" class="obyc" method="post" action="vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&
-<?php
-if ( $copern != 9 )
-{
-echo "copern=2&hladaj_uce=$hladaj_uce";
-}
-if ( $copern == 9 )
-{
-echo "copern=9&hladaj_dat=$hladaj_dat&hladaj_dok=$hladaj_dok&hladaj_nai=$hladaj_nai&hladaj_uce=$hladaj_uce";
-}
-?>
-&drupoh=<?php echo $drupoh;?>&page=<?php echo $npage;?>" >
-<INPUT type="submit" id="dstrana" value="œalöia strana" >
-</FORM>
-</td>
-<td>
-<FORM name="forma3" class="obyc" method="post" action="vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=4&drupoh=<?php echo $drupoh;?>&hladaj_uce=<?php echo $hladaj_uce; ?>
-&page=<?php echo $xstr;?>" >
-<INPUT type="submit" id="sstrana" value="Prejsù na stranu:" >
-<input type="text" name="page" id="page" value="<?php echo $xstr;?>" size="4" onkeyup="KontrolaCisla(this, Ax)"/>
-</FORM>
-</td>
-<td>
-<FORM name="forma4" class="obyc" method="post" action="vstf_u.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=5&drupoh=<?php echo $drupoh;?>&hladaj_uce=<?php echo $hladaj_uce; ?>
-&page=1" >
-<INPUT type="submit" name="npol" id="npol" value="Nov˝ doklad" onclick="window.name = 'zoznam';">
-</FORM>
-</td>
-</tr>
-</table>
-
-<?php
-     }
-//koniec nezobraz pre novu,upravu a mazanie
-?>
-
-
-<?php
-// toto je koniec casti na zobrazenie tabulky a prechody medzi stranami 
-     }
-
-if( $sys != 'DOP' AND $sysx != 'UCT' ) 
-{
-if( $copern == 1 ) { 
-$zmenume=1; 
-$odkaz="../faktury/vstfak.php?regpok=$regpok&vyroba=$vyroba&copern=1&drupoh=$drupoh&page=1&sysx=$sysx&hladaj_uce=$hladaj_uce&rozuct=$rozuct"; 
-                   }
-
-$cislista = include("fak_lista.php");
-}
-
-if( $sys == 'DOP' ) $cislista = include("../doprava/dop_lista.php");
-
-if( $sysx == 'UCT' ) 
-{
-if( $copern == 1 ) { 
-$zmenume=1; 
-$odkaz="../faktury/vstfak.php?regpok=$regpok&vyroba=$vyroba&copern=1&drupoh=$drupoh&page=1&sysx=$sysx&hladaj_uce=$hladaj_uce&rozuct=$rozuct"; 
-                   }
-$cislista = include("../ucto/uct_lista.php");
-}
-
-// celkovy koniec dokumentu
-       } while (false);
-?>
-</BODY>
-</HTML>
+</body>
+</html>
