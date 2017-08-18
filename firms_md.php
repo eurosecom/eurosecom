@@ -362,7 +362,7 @@ if ( $uprav == 1 ) { echo "úprava # $cislo_xcf"; }
   </div>
 </header>
 
-<main class="mdl-layout__content mdl-color--blue-grey-50">
+<main class="mdl-layout__content mdl-color--blue-grey-50 sticky-footer">
 <div id="table_body" class="mdl-color--white">
 <?php
 $sqltt = "SELECT * FROM fir WHERE xcf >= 0 ORDER BY xcf ";
@@ -541,7 +541,23 @@ $is = $is + 1;
   <div class="mdl-color-text--grey-500 no-item-alert">Žiadne položky</div>
 </div>
 <?php                   } ?>
+
+<div class="mdl-layout-spacer"></div>
+<footer class="mdl-mini-footer mdl-color--blue-grey-50 container">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-500">Novinky</a></li>
+    </ul>
+  </div>
+  <div class="mdl-mini-footer__right-section">
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="#" onclick="Edcom();" title="EuroSecom powered by EDcom" class="mdl-color-text--light-blue-500">EDcom</a></li>
+    </ul>
+  </div>
+</footer>
 </main>
+
 
 
 <!-- header nav menu -->
@@ -567,7 +583,7 @@ $is = $is + 1;
 
 </div> <!-- .mdl-layout -->
 <?php             }
-//end of print copern = 1,8
+//end copern = 1,8
 ?>
 
 <?php

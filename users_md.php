@@ -592,7 +592,7 @@ if ( $uprav != 0 AND $nova == 0 ) { echo "úprava # $cislo_id"; }
   </div>
 </header>
 
-<main class="mdl-layout__content mdl-color--blue-grey-50">
+<main class="mdl-layout__content mdl-color--blue-grey-50 sticky-footer">
 <div id="table_body" class="mdl-color--white">
 <?php
 $sqltt = "SELECT * FROM klienti WHERE all_prav < $min_uzall ORDER BY id_klienta";
@@ -1292,7 +1292,25 @@ $is = $is + 1;
   <div class="mdl-color-text--grey-500 no-item-alert">Žiadne položky</div>
 </div>
 <?php                   } ?>
+
+<div class="mdl-layout-spacer"></div>
+<footer class="mdl-mini-footer mdl-color--blue-grey-50 container">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-500">Novinky</a></li>
+    </ul>
+  </div>
+  <div class="mdl-mini-footer__right-section">
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="#" onclick="Edcom();" title="EuroSecom powered by EDcom" class="mdl-color-text--light-blue-500">EDcom</a></li>
+    </ul>
+  </div>
+</footer>
 </main>
+
+
+
 
 <!-- header nav menu -->
 <div style="position:fixed; left: 0px; top: -24px; z-index: 10;">

@@ -1130,14 +1130,23 @@ if ( $drupoh == 52 ) echo "Predfakt˙ry";
              border-bottom-color: "blue";
              font-size: 8pt; font-family: Arial;
            }
+
+
+
+
+
+
+
+
+
 </style>
 </head>
 <body onload="ObnovUI(); VyberVstup();">
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header ">
 <header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="max-height: 136px;">
   <div class="mdl-layout__header-row mdl-color--light-blue-700 ui-header-app-row">
     <span class="mdl-color-text--yellow-A100">EuroSecom</span>
-    <span class="mdl-color-text--blue-grey-50">⁄ËtovnÌctvo</span> <!-- dopyt, mÙûe baù aj odbyt -->
+    <span class="mdl-color-text--blue-grey-50">⁄ËtovnÌctvo</span> <!-- dopyt, mÙûe byù aj odbyt -->
     <div class="mdl-layout-spacer"></div>
 <?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf";?>
 
@@ -1371,7 +1380,6 @@ if ( $drupoh == 42 ) echo "RegistraËn· pokladnica";
 if ( $drupoh == 52 ) echo "Predfakt˙ry";
 ?>
 <?php if( $pocstav == 1 ) echo " - PoËiatoËn˝ stav"; ?>
- <!-- dopyt, urËiù si hore premenn˙, rovnak˝ text je aj v <title> str·nky -->
     <i class="material-icons" style="vertical-align: -6px;">arrow_drop_down</i>&nbsp;
     </span>
 <?php
@@ -1547,8 +1555,8 @@ $ajmes=0;
   <div class="mdl-layout__header-row mdl-color--light-blue-600" style="padding:0; height: 40px;">
     <table class="ui-table-header ui-table data-table container tocenter">
     <tr class="mdl-color-text--blue-grey-50">
-      <th class="left" style="width:7%;">⁄Ëet</th>
-      <th class="left" style="width:19%;">Doklad -
+      <th class="left " style="width:6%;">⁄Ëet</th>
+      <th class="left" style="width:18%;">Doklad -
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 OR $drupoh == 2 ) echo "Fakt˙ra";
 if ( $drupoh == 11 OR $drupoh == 12 ) echo "DodacÌ list";
@@ -1557,7 +1565,7 @@ if ( $drupoh == 42 ) echo "ËÌslo v dni";
 if ( $drupoh == 52 ) echo "Predfakt˙ra";
 ?>
       </th>
-      <th>DAT/UME
+      <th style="width: 8%;">DAT/UME
 <?php if ( $drupoh == 1 OR $drupoh == 31 ) { ?>
   <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )"><img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>"></a>
   <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
@@ -1601,21 +1609,21 @@ if ( $drupoh == 52 ) echo "Predfakt˙ra";
 <img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
 <?php   } ?>
       </th>
-      <th class="left">
+      <th class="left" style="width: 25%;">
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 52 ) echo "Odberateæ";
 if ( $drupoh == 2 ) echo "Dod·vateæ";
 if ( $drupoh == 21 OR $drupoh == 22 ) echo "Odberateæ S - Z";
 ?>
       </th>
-      <th class="left">
+      <th class="left" style="width: 8%;">
 <?php
 if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 31 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 52 ) echo "Str - Z·k";
 if ( $drupoh == 21 OR $drupoh == 22 ) echo "Dod·vateæ Str - Z·k";
 if ( $drupoh == 42 ) echo "DKP";
 ?>
       </th>
-      <th class="right">
+      <th class="right" style="width: 14%;">
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 OR $drupoh == 2 )
      {
@@ -1624,7 +1632,7 @@ if ( $sysx == 'UCT' AND $pocstav != 1 ) echo "⁄ËtovanÈ /";
 ?>
 <span style="font-weight:normal;">Hodnota</span>
       </th>
-      <th class="right">
+      <th class="right" style="width: 24%;">
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 )
 {
@@ -1683,18 +1691,18 @@ if ( $drupoh == 11 )
   </div>
 </header>
 
-<main class="mdl-layout__content mdl-color--blue-grey-50">
+<main class="mdl-layout__content mdl-color--blue-grey-50 sticky-footer">
 <div id="table_body" class="mdl-color--white">
   <div class="container tocenter">
   <table class="ui-table data-table">
   <colgroup>
-    <col style="width:22%;">
-    <col style="width:14%;">
-    <col style="width:20%;">
+    <col style="width:6%;">
+    <col style="width:18%;">
     <col style="width:8%;">
-    <col style="width:6%;">
-    <col style="width:6%;">
-    <col style="width:6%;">
+    <col style="width:25%;">
+    <col style="width:8%;">
+    <col style="width:14%;">
+    <col style="width:21%;">
   </colgroup>
 <?php
    while ( $i <= $konc )
@@ -1753,12 +1761,13 @@ if ( $drupoh == 42 ) echo $riadok->txp;
     <td class="right">
      <strong><?php if ( $sysx == 'UCT' AND $pocstav != 1 ) { echo "$riadok->hodu / "; } ?></strong><?php echo $riadok->hod; ?>
     </td>
-    <td>
+    <td class="right">
 <?php
 if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 31 OR $drupoh == 21 OR $drupoh == 12 OR $drupoh == 22 OR $drupoh == 52 )
      {
 ?>
-      <a href="#" onClick="VytlacFakt(<?php echo $riadok->dok;?>);"><img src='../obr/pdf.png' width=15 height=10 border=0 alt="TlaË vybranÈho dokladu PDF" title="TlaË vybranÈho dokladu PDF"></a>
+      <button type="button" id="view<?php echo $riadok->dok; ?>" onclick="viewItem(<?php echo $riadok->dok; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">print</i></button>
+        <div data-mdl-for="view<?php echo $riadok->dok; ?>" class="mdl-tooltip">Zobraziù v PDF</div>
 <?php
      }
 ?>
@@ -1772,18 +1781,22 @@ if( $drupoh == 42 ) { $nezar = 1*$riadok->ruc; }
 if( $drupoh == 42 AND $nezar != 0 ) { $ukazzmaz = 0; }
 if( $drupoh == 42 AND $kli_uzid == 17 ) { $ukazzmaz = 1; }
 if( $drupoh == 42 AND $kli_uzid == 114 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ukazzmaz = 1; }
-
 if( $copern != 10 AND $ukazzmaz == 1  )
 {
 ?>
-      <a href="#" onclick="window.open('vstf_u.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=8&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&hladaj_uce=<?php echo $hladaj_uce; ?><?php if ( $fir_xfa01 == 1 ) { ?> &h_tlsl=1&h_tltv=0&rozb1=NOT&rozb2=NOT <?php } ?><?php if ( $fir_xfa01 == 2 ) { ?> &h_tltv=1&h_tlsl=0&rozb1=NOT&rozb2=NOT <?php } ?>&cislo_dok=<?php echo $riadok->dok;?>&h_fak=<?php echo $riadok->fak;?>&h_dol=<?php echo $riadok->dol;?>&h_prf=<?php echo $riadok->prf;?>'); window.name = 'zoznam';"><img src='../obr/uprav.png' width=15 height=10 border=0 alt="⁄prava vybranÈho dokladu" title="⁄prava vybranÈho dokladu"></a>
+      <button type="button" id="edit<?php echo $riadok->dok; ?>" onclick="editItem(<?php echo $riadok->dok; ?>); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">edit</i></button>
+        <div data-mdl-for="edit<?php echo $riadok->dok; ?>" class="mdl-tooltip">Upraviù</div>
 <?php
 }
 ?>
-
 <?php if ( $copern != 10 AND $ukazzmaz == 1 AND $kli_nemazat != 1 ) { ?>
-      <a href="#" onclick="ZmazatDok(<?php echo $riadok->dok; ?>);" title="Vymazaù" class="imgbtn img-cancel"></a>
+      <button type="button" id="remove<?php echo $riadok->dok; ?>" onclick="removeItem(<?php echo $riadok->dok; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">remove</i></button>
+        <div data-mdl-for="remove<?php echo $riadok->dok; ?>" class="mdl-tooltip">Vymazaù</div>
 <?php                                                               } ?>
+
+
+
+
 <?php
 //aky subor existuje podla toho daj koncovku
 $jesub=0;
@@ -1852,11 +1865,29 @@ $i = $i + 1;
 ?>
   </table> <!-- .ui-table -->
 </form>
-<form name="forma3" method="post" action="vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=4&drupoh=<?php echo $drupoh;?>&hladaj_uce=<?php echo $hladaj_uce; ?>
-&page=<?php echo $xstr;?>" >
+<form name="forma3" method="post" action="#"> <!-- vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=4&drupoh=<?php echo $drupoh;?>&hladaj_uce=<?php echo $hladaj_uce; ?>&page=<?php echo $xstr;?> -->
   <div class="mdl-color-text--grey-600 ui-table-pagination">
     <span>= <?php echo $cpol; ?></span>
     <div class="mdl-layout-spacer"></div>
+    <label for="page_goto" style="margin-right: 24px;">Strana
+    <select name="page_goto" id="page_goto" onchange="gotoPage();" class="mdl-textfield__input">
+<?php
+$is = 1;
+while ( $is <= $xstr )
+{
+?>
+<option value="<?php echo $is; ?>"><?php echo $is; ?></option>
+<?php
+$is = $is + 1;
+}
+?>
+    </select>/&nbsp;&nbsp;<?php echo $xstr; ?></label>
+    <button type="button" id="page_prev" onclick="navPage(<?php echo $ppage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_before</i></button>
+    <button type="button" id="page_next" onclick="navPage(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_next</i></button>
+      <div class="mdl-tooltip" data-mdl-for="page_prev">Prejsù na stranu <?php echo $ppage; ?></div>
+      <div class="mdl-tooltip" data-mdl-for="page_next">Prejsù na stranu <?php echo $npage; ?></div>
+
+
 
 <FORM name="forma2" class="obyc" method="post" action="vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&
 <?php
@@ -1921,11 +1952,37 @@ mysql_free_result($sql);
 </div>
 <?php                   } ?>
 
-<span id="Zm" style="display:none; width:100%; align:center; font-family:bold; font-weight:bold; background-color:yellow; color:black;">
+<span id="Zm" style="display:none; width:100%; font-family:bold; font-weight:bold; background-color:yellow; color:black;">
  Doklad DOK=<?php echo $cislo_dok;?> vymazan˝</span>
+
+
+
+
+<div class="mdl-layout-spacer"></div>
+<footer class="mdl-mini-footer mdl-color--blue-grey-50 container">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-500">Novinky</a></li>
+    </ul>
+  </div>
+  <div class="mdl-mini-footer__right-section">
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="#" onclick="Edcom();" title="EuroSecom powered by EDcom" class="mdl-color-text--light-blue-500">EDcom</a></li>
+    </ul>
+  </div>
+</footer>
 </main>
 
-
+<div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Title</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+    </nav>
+  </div>
 
 </div> <!-- .mdl-layout -->
 
@@ -1957,6 +2014,7 @@ $cislista = include("../ucto/uct_lista.php");
 // celkovy koniec dokumentu
        } while (false);
 ?>
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <SCRIPT Language="JavaScript" Src="../js/cookies.js"></SCRIPT>
 <script type="text/javascript">
 //sirka a vyska okna
@@ -1964,29 +2022,7 @@ var sirkawin = screen.width-10;
 var vyskawin = screen.height-175;
 
 
-      function ZmazatDok( doklad )
-      {
 
-  var ucet = document.formhl1.hladaj_uce.value;
-
-<?php
-if( $fir_xfa01 != 2 )
-{
-?>
-  var okno = window.open("vstf_u.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&cislo_dok=" + doklad + "&copern=6&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&hladaj_uce=" + ucet + "&h_tlsl=1&h_tltv=0&rozb1=NOT&rozb2=NOT", "_self");
-<?php
-}
-?>
-<?php
-if( $fir_xfa01 == 2 )
-{
-?>
-  var okno = window.open("vstf_u.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&cislo_dok=" + doklad + "&copern=6&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&hladaj_uce=" + ucet + "&h_tltv=1&h_tlsl=0&rozb1=NOT&rozb2=NOT", "_self");
-<?php
-}
-?>
-
-      }
 
 
       function dajuce()
@@ -2181,27 +2217,40 @@ if( $fir_xfa01 == 2 )
     }
 <?php  } ?>
 
-<?php if( $_SESSION['nieie'] == 0 )  { ?>
-    function VytlacFakt(doklad)
-    {
-    var hladaj_dok = document.formhl1.hladaj_dok.value;
-    var hladaj_dok = document.formhl1.hladaj_dok.value;
-    var cislo_dok = doklad;
-    window.open('vstf_pdf.php?sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&hladaj_dok=' + hladaj_dok + '&copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&cislo_dok=' + cislo_dok + '&fff=1', '_blank', '<?php echo $tlcuwin; ?>' )
 
-    }
-<?php                                } ?>
 
-<?php if( $_SESSION['nieie'] == 1 )  { ?>
-    function VytlacFakt(doklad)
-    {
-    var hladaj_dok = document.formhl1.hladaj_dok.value;
-    var hladaj_dok = document.formhl1.hladaj_dok.value;
-    var cislo_dok = doklad;
-    window.open('vstf_pdf.php?sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&hladaj_dok=' + hladaj_dok + '&copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&cislo_dok=' + cislo_dok + '&fff=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+  function viewItem(doklad)
+  {
+   var hladaj_dok = document.formhl1.hladaj_dok.value;
+   var hladaj_dok = document.formhl1.hladaj_dok.value;
+   var cislo_dok = doklad;
+   window.open('vstf_pdf.php?sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&hladaj_dok=' + hladaj_dok + '&copern=20&drupoh=<?php echo $drupoh; ?>&page=<?php echo $page; ?>&cislo_dok=' + cislo_dok + '&fff=1', '_blank', param);
+  }
 
-    }
-<?php                                } ?>
+  function editItem(doklad)
+  {
+<?php if( $fir_xfa01 == 1 ) { ?>
+   window.open('vstf_u.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=8&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&hladaj_uce=<?php echo $hladaj_uce; ?>&h_tlsl=1&h_tltv=0&rozb1=NOT&rozb2=NOT&cislo_dok=' + doklad + '&h_fak=<?php echo $riadok->fak;?>&h_dol=<?php echo $riadok->dol;?>&h_prf=<?php echo $riadok->prf;?>', '_self');
+<?php } ?>
+
+<?php if( $fir_xfa01 == 2 ) { ?>
+   window.open('vstf_u.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=8&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&hladaj_uce=<?php echo $hladaj_uce; ?>&h_tltv=1&h_tlsl=0&rozb1=NOT&rozb2=NOT&cislo_dok=' + doklad + '&h_fak=<?php echo $riadok->fak;?>&h_dol=<?php echo $riadok->dol;?>&h_prf=<?php echo $riadok->prf;?>', '_self');
+<?php } ?>
+  }
+
+      function removeItem(doklad)
+      {
+        var ucet = document.formhl1.hladaj_uce.value;
+<?php if( $fir_xfa01 != 2 ) { ?>
+  window.open("vstf_u.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&cislo_dok=" + doklad + "&copern=6&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&hladaj_uce=" + ucet + "&h_tlsl=1&h_tltv=0&rozb1=NOT&rozb2=NOT", "_self");
+<?php } ?>
+<?php if( $fir_xfa01 == 2 ) { ?>
+  window.open("vstf_u.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&cislo_dok=" + doklad + "&copern=6&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&hladaj_uce=" + ucet + "&h_tltv=1&h_tlsl=0&rozb1=NOT&rozb2=NOT", "_self");
+<?php } ?>
+
+      }
+
+
 
 <?php if ( $agrostav == 1 OR $_SERVER['SERVER_NAME'] == "localhost" )  { ?>
     function VytlacPokl(doklad)

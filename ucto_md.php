@@ -451,11 +451,11 @@ if ( $vyb_duj == 9 ) { echo "jednoduché"; }
 
 <!-- more header tools -->
 <div style="position:fixed; right: 32px; top: 56px; z-index: 10;">
-      <ul for="more_tools" class="mdl-menu mdl-menu--bottom-right mdl-js-menu">
-        <li id="account_checks" class="mdl-menu__item" onclick="AccountChecks();">Kontrola úètovania</li>
-        <li id="backup" class="mdl-menu__item" onclick="Backup();">Zálohovanie dát</li>
-        <li id="calculator" class="mdl-menu__item" onclick="Calculator();">Kalkulaèka</li>
-      </ul>
+  <ul for="more_tools" class="mdl-menu mdl-menu--bottom-right mdl-js-menu">
+    <li id="account_checks" class="mdl-menu__item" onclick="AccountChecks();">Kontrola úètovania</li>
+    <li id="backup" class="mdl-menu__item" onclick="Backup();">Zálohovanie dát</li>
+    <li id="calculator" class="mdl-menu__item" onclick="Calculator();">Kalkulaèka</li>
+  </ul>
 </div>
 
 
@@ -481,8 +481,9 @@ if ( $vyb_duj == 9 ) { echo "jednoduché"; }
 
 
 
-<main class="mdl-layout__content mdl-color--blue-grey-50">
-<div class="mdl-grid container">
+<main class="mdl-layout__content mdl-color--blue-grey-50 sticky-footer">
+<div class="container tocenter">
+<div class="mdl-grid ">
 <!-- 1.column -->
   <div class="mdl-cell mdl-cell--4-col">
 <!-- vstup dat -->
@@ -630,6 +631,22 @@ if ( $vyb_duj == 9 ) { echo "jednoduché"; }
     </div>
   </div> <!-- .mdl-cell -->
 </div> <!-- .mdl-grid -->
+</div> <!-- .container -->
+
+<div class="mdl-layout-spacer"></div>
+<footer class="mdl-mini-footer mdl-color--blue-grey-50 container">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-500">Novinky</a></li>
+    </ul>
+  </div>
+  <div class="mdl-mini-footer__right-section">
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="#" onclick="Edcom();" title="EuroSecom powered by EDcom" class="mdl-color-text--light-blue-500">EDcom</a></li>
+    </ul>
+  </div>
+</footer>
 </main>
 
 
