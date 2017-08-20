@@ -9,7 +9,6 @@ html {
 body {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   line-height: 1;
-
 }
 a {
   text-decoration: none;
@@ -70,85 +69,103 @@ select:enabled, button:enabled {
 }
 
 /* CHANGE DEFAULT */
-.mdl-layout__header-row {
-  padding: 0 24px 0 80px;
-}
-.mdl-layout--no-drawer-button .mdl-layout__header-row {
-  padding-left: 24px;
-}
 .mdl-tooltip {
   font-size: 11px;
   letter-spacing: 0.02em;
   padding: 12px;
-  max-width: 300px;
+  max-width: 360px;
   text-transform: none;
 }
 
 
 
-/*.mdl-layout__tab {
-  color: rgba(255,255,255,0.6);
-  height: 64px;
-  line-height: 64px;
-}
-.mdl-layout.is-upgraded .mdl-layout__tab.is-active,
-.mdl-layout__tab-bar-button.is-active {
-  color: rgb(255,255,255);
-}
-.mdl-layout.is-upgraded .mdl-layout__tab.is-active::after {
-  height: 3px;
-  background: rgb(255,255,255);
-}
-.mdl-layout__tab-bar-button, .mdl-layout__tab-bar, .mdl-layout__tab-bar-container {
-  background-color: #039BE5;
-  height: 64px;
-}
-.mdl-layout__tab-bar-button .material-icons {
-  line-height: 64px;
-}*/
+
+
 
 
 /* HEADER */
-.ui-header-app-row {
-  font-size: 12px;
-  letter-spacing: .02em;
+.ui-header .mdl-layout__drawer-button {
+  height: 40px;
+  width: 40px;
+  margin: 0 12px 0 12px;
+  line-height: 48px;
+  color: rgba(255,255,255,.7);/*dopyt, naviazať na všetky buttony v header*/
+  background-color: #0288D1;
 }
+.ui-header .mdl-layout__drawer-button:hover { /*dopyt, naviazať na všetky buttony v header*/
+  color: rgba(255,255,255,1);
+}
+.ui-header-app-row {
+  background-color: #0288D1;
+  height: 40px;
+  font-size: 13px;
+  letter-spacing: .02em;
+  color: rgba(255,255,255,.7);
+  padding-left: 64px;
+}
+
+.ilogin .mdl-list__item {
+  height: 32px;
+  min-height: 32px;
+  padding: 0;
+  margin-left: 24px;
+  float: left;
+}
+.ilogin .mdl-list__item-primary-content {
+  font-size: 13px;
+  line-height: 1;
+}
+.ilogin .mdl-list__item-primary-content span:nth-child(2) {
+  color: rgba(255,255,255,.7);
+  font-size: inherit;
+}
+.ilogin .mdl-list__item-primary-content .mdl-list__item-avatar {
+  font-size: 12px;
+  margin-right: 0;
+  height: 32px;
+  line-height: 32px;
+  width: 32px;
+  text-align: center;
+}
+
+
+
+
 .ui-header .mdl-button.mdl-color-text--blue-grey-50 :hover {
   color: #fff;
 }
-.ui-header-app-row { /* dopyt, po prerobení hlavičky pôjde preč*/
-  height: 40px;
-}
+
 .ui-header-page-row {
   height: 56px;
-  padding: 0 20px 0 56px;
+  padding-left: 64px;
+
 }
 .ui-header-page-row .mdl-layout-title {
   font-size: 18px;
 }
-.mdl-layout__header .mdl-color--light-blue-700,
-.mdl-layout__header .mdl-color--light-blue-600 .mdl-button--icon {
-  color: rgba(255,255,255,.7);
 
-}
 .mdl-layout__header .mdl-color--light-blue-600 .mdl-button--icon:hover {
   color: rgba(255,255,255,1);
 }
 
 
 
-.ui-header .mdl-list__item-avatar, .ui-table .mdl-list__item-avatar { /* dopyt, toto bude v style skriptu */
+.ui-table .mdl-list__item-avatar { /* dopyt, toto bude v style skriptu */
   font-size: 12px;
   height: 32px;
   line-height: 32px;
   width: 32px;
   text-align: center;
 }
-.ui-header .mdl-list__item-avatar + .item-avatar-title { /* dopyt, toto bude v style skriptu */
+.ui-header .mdl-list__item-avatar + span { /* dopyt, toto bude v style skriptu */
   color: rgba(255,255,255,.7);
   letter-spacing: 0.02em;
-  font-size: 14px;
+  /*font-size: 13px;*/
 }
+
+
+
+
 /* user avatar - table echo + form */
 .ui-table .mdl-list__item {
   padding: 0;
@@ -242,6 +259,9 @@ abbr.dot {
   border-top: 1px solid #CFD8DC;
   border-bottom: 1px solid #CFD8DC;
 }
+
+
+
 .data-table tr.row-echo:hover {
   background-color: #ECEFF1;
 }

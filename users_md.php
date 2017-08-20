@@ -542,18 +542,20 @@ $sqlpok = mysql_query("$sqlpoktt");
 </head>
 <body onload="ObnovUI();">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
-<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="max-height: 136px;">
-  <div class="mdl-layout__header-row mdl-color--light-blue-700 ui-header-app-row">
+<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="min-height: 136px;">
+  <div class="mdl-layout__header-row ui-header-app-row">
     <span onclick="AppPage();" class="mdl-color-text--yellow-A100">EuroSecom</span>&nbsp;
     <span class="mdl-color-text--blue-grey-50"><?php echo $domain; ?></span>
     <div class="mdl-layout-spacer"></div>
-<!-- User -->
-    <div class="mdl-list__item" style="padding-right: 0;">
-      <span class="mdl-list__item-primary-content">
-        <span class="mdl-list__item-avatar mdl-color--indigo-400" style="margin-right: 8px;"><?php echo $kli_uzid; ?></span>
-        <span class="item-avatar-title" style="font-size: 12px;"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
-      </span>
-    </div>
+<!-- user -->
+    <ul class="mdl-list clearfix ilogin">
+      <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          <span class="mdl-list__item-avatar mdl-color--indigo-400"><?php echo $kli_uzid; ?></span>
+          <span style="margin-left: 8px;"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
+        </span>
+      </li>
+    </ul>
   </div> <!-- .ui-header-app-row -->
   <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row">
     <span id="header_title" class="mdl-layout-title mdl-color-text--white" style="cursor: pointer;">Èíselník užívate¾ov<i class="material-icons" style="vertical-align: -6px;">arrow_drop_down</i>&nbsp;

@@ -1142,22 +1142,33 @@ if ( $drupoh == 52 ) echo "Predfaktúry";
 </style>
 </head>
 <body onload="ObnovUI(); VyberVstup();">
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header ">
-<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="max-height: 136px;">
-  <div class="mdl-layout__header-row mdl-color--light-blue-700 ui-header-app-row">
-    <span class="mdl-color-text--yellow-A100">EuroSecom</span>
-    <span class="mdl-color-text--blue-grey-50">Úètovníctvo</span> <!-- dopyt, môže by aj odbyt -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="min-height: 136px;">
+  <div class="mdl-layout__header-row ui-header-app-row">
+    <span class="mdl-color-text--yellow-A100">EuroSecom&nbsp;</span>
+    <span>
+<?php
+if ( $sysx == 'UCT' ) echo "Úètovníctvo";
+if ( $sysx == 'FAK' ) echo "Odbyt";
+?>
+    </span>
     <div class="mdl-layout-spacer"></div>
-<?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf";?>
-
-
-<!-- User -->
-    <div class="mdl-list__item" style="padding-right: 0;">
-      <span class="mdl-list__item-primary-content">
-        <span class="mdl-list__item-avatar mdl-color--indigo-400" style="margin-right: 8px;"><?php echo $kli_uzid; ?></span>
-        <span class="item-avatar-title" style="font-size: 12px;"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
-      </span>
-    </div>
+    <ul class="mdl-list clearfix ilogin">
+<!-- firm + period -->
+      <li class="mdl-list__item mdl-list__item--two-line">
+        <span class="mdl-list__item-primary-content right" style="padding-top: 4px;">
+          <span class="mdl-color-text--white"><?php echo "<strong>$kli_vxcf</strong>&nbsp;&nbsp;$kli_nxcf"; ?></span>
+          <span class="mdl-list__item-sub-title"><?php echo $kli_vume; ?></span>
+        </span>
+      </li>
+<!-- user -->
+      <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          <span id="user" class="mdl-list__item-avatar mdl-color--indigo-400"><?php echo $kli_uzid; ?></span>
+        </span>
+      </li>
+    </ul>
+    <span data-mdl-for="user" class="mdl-tooltip">Prihlásený užívate¾:<br><?php echo "$kli_uzmeno $kli_uzprie / $kli_uzid"; ?></span>
   </div> <!-- .ui-header-app-row -->
 <?php
 // toto je cast na zobrazenie tabulky a prechody medzi stranami
@@ -1367,10 +1378,9 @@ $i = ( $page - 1 ) * $pols;
 // koniec cyklu
 $konc =($pols*($page-1))+($pols-1);
 ?>
-<form name="formhl1" method="post" action="vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&drupoh=<?php echo $hdrupoh; ?>&page=1&copern=9
-&rozuct=<?php echo $rozuct;?>&sysx=<?php echo $sysx;?>&hladaj_uce=<?php echo $hladaj_uce; ?>">
-  <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row">
-    <span id="header_title" class="mdl-layout-title mdl-color-text--white" style="cursor: pointer;">
+<form name="formhl1" method="post" action="vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&drupoh=<?php echo $hdrupoh; ?>&page=1&copern=9&rozuct=<?php echo $rozuct;?>&sysx=<?php echo $sysx;?>&hladaj_uce=<?php echo $hladaj_uce; ?>">
+  <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row" style="height: 56px;"> <!-- border-bottom: 1px solid #CFD8DC; -->
+    <span id="header_title" class="mdl-layout-title mdl-color-text--white" style="cursor: pointer; font-size: 18px;  ">
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 ) echo "Odberate¾ské faktúry";
 if ( $drupoh == 2 ) echo "Dodávate¾ské faktúry";
@@ -1379,9 +1389,8 @@ if ( $drupoh == 21 OR $drupoh == 22 ) echo "Vnútropodnikové faktúry";
 if ( $drupoh == 42 ) echo "Registraèná pokladnica";
 if ( $drupoh == 52 ) echo "Predfaktúry";
 ?>
-<?php if( $pocstav == 1 ) echo " - Poèiatoèný stav"; ?>
-    <i class="material-icons" style="vertical-align: -6px;">arrow_drop_down</i>&nbsp;
-    </span>
+<?php if( $pocstav == 1 ) echo " - Poèiatoèný stav"; ?><i class="material-icons" style="vertical-align: -6px;">arrow_drop_down</i>&nbsp;
+    </span>&nbsp;&nbsp;
 <?php
 if ( $drupoh != 2 AND $drupoh != 42 )
 {
@@ -1546,15 +1555,15 @@ $ajmes=0;
 ?>
 
 
-    <button type="button" onclick="novyDok(); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;"><i class="material-icons">add</i></button>
+<!--     <button type="button" onclick="novyDok(); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;"><i class="material-icons">add</i></button> -->
 
   </div> <!-- .ui-header-page-row -->
 <!-- <div id="Okno"></div> -->
 </form>
 <form name="formp2" method="post" action="../ucto/vspk_u.php?drupoh=<?php echo $drupoh;?>&page=1&copern=55">
-  <div class="mdl-layout__header-row mdl-color--light-blue-600" style="padding:0; height: 40px;">
-    <table class="ui-table-header ui-table data-table container tocenter">
-    <tr class="mdl-color-text--blue-grey-50">
+  <div class="mdl-layout__header-row mdl-color--white" style="padding-left: 0; padding-right: 0; height: 40px; border-bottom: 1px solid #CFD8DC !important;">
+    <table class="ui-table-header ui-table data-table container tocenter" style="">
+    <tr class="" style="">
       <th class="left " style="width:6%;">Úèet</th>
       <th class="left" style="width:18%;">Doklad -
 <?php

@@ -204,6 +204,9 @@ if ( $vyb_xcf == '' ) { $copern=22; } //dopyt, preveriù
   <link rel="stylesheet" href="css/material_edit.css">
   <title>⁄ËtovnÌctvo | EuroSecom</title>
 <style>
+
+
+
 /* change default */
 .mdl-layout__tab-bar-container {
   border-bottom: 1px solid #CFD8DC;
@@ -384,7 +387,7 @@ width: 720px;
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
 <header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="min-height: 112px;">
-  <div class="mdl-layout__header-row mdl-color--light-blue-700" style="height: 48px;  ">
+  <div class="mdl-layout__header-row ui-header-app-row" style="height: 48px;">
     <span class="mdl-layout-title mdl-color-text--yellow-A100" style="font-size: 16px;">EuroSecom</span>&nbsp;&nbsp;
 
     <button type="button" id="select_firm" onclick="selectFirm();" class="mdl-button mdl-js-button btn-dropdown">
@@ -402,15 +405,22 @@ width: 720px;
 
 
 
-<!-- User -->
-    <div class="mdl-list__item" style="padding-right: 0;">
-      <span class="mdl-list__item-primary-content">
-        <span class="mdl-list__item-avatar mdl-color--indigo-400" style="margin-right: 8px;"><?php echo $kli_uzid; ?></span>
-        <span class="item-avatar-title"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
-      </span>
-    </div>
-  </div>
-<!-- Tabs -->
+
+
+
+
+<!-- user -->
+    <ul class="mdl-list clearfix ilogin">
+      <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          <span class="mdl-list__item-avatar mdl-color--indigo-400"><?php echo $kli_uzid; ?></span>
+          <span style="margin-left: 12px;"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
+        </span>
+      </li>
+    </ul>
+
+  </div> <!-- .ui-header-app-row -->
+<!-- tabs -->
   <div class="mdl-layout__tab-bar ui-header-nav" style="  overflow: auto;">
     <a href="#" onclick="Ucto();" class="mdl-layout__tab is-active">⁄ËtovnÌctvo
 <?php
