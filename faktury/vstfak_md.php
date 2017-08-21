@@ -1341,6 +1341,10 @@ $sql = mysql_query("$sqltt");
 
   }
 
+// pocet poloziek na stranu
+$pols = 15;
+if( $copern == 9 ) $pols = 900;
+
 // celkom poloziek
 $cpol = mysql_num_rows($sql);
 $npol = $cpol + 1;
@@ -1370,9 +1374,6 @@ $page = strip_tags($_REQUEST['page']);
 $npage =  $page + 1;
 // predchadzajuca strana
 $ppage =  $page - 1;
-// pocet poloziek na stranu
-$pols = 15;
-if( $copern == 9 ) $pols = 900;
 // zaciatok cyklu
 $i = ( $page - 1 ) * $pols;
 // koniec cyklu
