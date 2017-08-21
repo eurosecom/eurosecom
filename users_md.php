@@ -542,7 +542,7 @@ $sqlpok = mysql_query("$sqlpoktt");
 </head>
 <body onload="ObnovUI();">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
-<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="min-height: 136px;">
+<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="min-height: 144px;">
   <div class="mdl-layout__header-row ui-header-app-row">
     <span onclick="AppPage();" class="mdl-color-text--yellow-A100">EuroSecom</span>&nbsp;
     <span class="mdl-color-text--blue-grey-50"><?php echo $domain; ?></span>
@@ -557,7 +557,7 @@ $sqlpok = mysql_query("$sqlpoktt");
       </li>
     </ul>
   </div> <!-- .ui-header-app-row -->
-  <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row">
+  <div class="mdl-layout__header-row ui-header-page-row">
     <span id="header_title" class="mdl-layout-title dropdown">Èíselník uívate¾ov</span>
     <span class="mdl-layout-title mdl-color-text--yellow-A100">
 <?php
@@ -576,13 +576,13 @@ if ( $uprav != 0 AND $nova == 0 ) { echo "úprava # $cislo_id"; }
 </form>
     <button type="button" id="new_item" onclick="novyId();" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;"><i class="material-icons">add</i></button>
   </div> <!-- .ui-header-page-row -->
-  <div class="mdl-layout__header-row mdl-color--light-blue-600" style="padding:0; height: 40px;">
-    <table class="ui-table-header ui-table data-table container tocenter">
+  <div class="mdl-layout__header-row ui-wrap-table-header" style="height: 40px;">
+    <table class="ui-table-header ui-table data-table container">
     <tr class="mdl-color-text--blue-grey-50">
-      <th class="left" style="width:22%;"><span style="position: relative; top: -6px;">Uívate¾</span></th>
+      <th class="left" style="width:22%;">Uívate¾</th>
       <th class="left" style="width:14%;">Prihlasovacie<br>meno - heslo</th>
-      <th class="left" style="width:20%;"><span style="position: relative; top: -6px;">Firmy</span></th>
-      <th class="right" style="width:8%;"><span style="position: relative; top: -6px;">Prístup</span></th>
+      <th class="left" style="width:20%;">Firmy</th>
+      <th class="right" style="width:8%;">Prístup</th>
       <th class="right" style="width:6%;">Úèto<br>Majetok</th>
       <th class="right" style="width:6%;">Mzdy<br>Doprava</th>
       <th class="right" style="width:6%;">Odbyt<br>Vıroba</th>
@@ -629,8 +629,7 @@ $i = ( $strana - 1 ) * $pols;
 // koniec cyklu
 $konc = ( $pols*($strana-1))+($pols-1);
 ?>
-  <div class="container tocenter">
-  <table class="ui-table data-table">
+  <table class="ui-table data-table container">
   <colgroup>
     <col style="width:22%;">
     <col style="width:14%;">
@@ -1261,7 +1260,7 @@ $i = $i + 1;
 ?>
   </table> <!-- .ui-table -->
 <form name="forma3" id="forma3" action="#">
-  <div class="mdl-color-text--grey-600 ui-table-pagination container tocenter">
+  <div class="ui-table-footer container">
     <span>= <?php echo $cpol; ?></span>
     <div class="mdl-layout-spacer"></div>
     <label for="page_goto" style="margin-right: 24px;">Strana
@@ -1281,9 +1280,9 @@ $is = $is + 1;
     <button type="button" id="page_next" onclick="navPage(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_next</i></button>
       <div class="mdl-tooltip" data-mdl-for="page_prev">Prejs na stranu <?php echo $ppage; ?></div>
       <div class="mdl-tooltip" data-mdl-for="page_next">Prejs na stranu <?php echo $npage; ?></div>
-  </div> <!-- .ui-table-pagination -->
+  </div> <!-- .ui-table-footer -->
 </form>
-  </div> <!-- .container -->
+
 </div> <!-- #table_body -->
 
 <!-- empty state -->

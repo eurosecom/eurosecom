@@ -1340,10 +1340,10 @@ $sql = mysql_query("$sqltt");
 }
 
   }
-
 // pocet poloziek na stranu
 $pols = 15;
 if( $copern == 9 ) $pols = 900;
+
 // celkom poloziek
 $cpol = mysql_num_rows($sql);
 $npol = $cpol + 1;
@@ -1380,11 +1380,7 @@ $i = ( $page - 1 ) * $pols;
 $konc =($pols*($page-1))+($pols-1);
 ?>
 <form name="formhl1" method="post" action="vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&drupoh=<?php echo $hdrupoh; ?>&page=1&copern=9&rozuct=<?php echo $rozuct;?>&sysx=<?php echo $sysx;?>&hladaj_uce=<?php echo $hladaj_uce; ?>">
-  <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row" style="height: 56px;">
-
-
-
-
+  <div class="mdl-layout__header-row ui-header-page-row">
     <span id="header_title" class="mdl-layout-title dropdown">
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 ) echo "Odberate¾ské faktúry";
@@ -1566,10 +1562,10 @@ $ajmes=0;
 <!-- <div id="Okno"></div> -->
 </form>
 <form name="formp2" method="post" action="../ucto/vspk_u.php?drupoh=<?php echo $drupoh;?>&page=1&copern=55">
-  <div class="mdl-layout__header-row mdl-color--white" style="padding-left: 0; padding-right: 0; height: 40px; border-bottom: 1px solid #CFD8DC !important;">
-    <table class="ui-table-header ui-table data-table container tocenter" style="">
-    <tr class="" style="">
-      <th class="left " style="width:6%;">Úèet</th>
+  <div class="mdl-layout__header-row ui-wrap-table-header">
+    <table class="ui-table-header ui-table data-table container">
+    <tr>
+      <th class="left" style="width:6%;">Úèet</th>
       <th class="left" style="width:18%;">Doklad -
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 OR $drupoh == 2 ) echo "Faktúra";
@@ -1707,8 +1703,7 @@ if ( $drupoh == 11 )
 
 <main class="mdl-layout__content mdl-color--blue-grey-50 sticky-footer">
 <div id="table_body" class="mdl-color--white">
-  <div class="container tocenter">
-  <table class="ui-table data-table">
+  <table class="ui-table data-table container">
   <colgroup>
     <col style="width:6%;">
     <col style="width:18%;">
@@ -1880,7 +1875,7 @@ $i = $i + 1;
   </table> <!-- .ui-table -->
 </form>
 <form name="forma3" method="post" action="#"> <!-- vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=4&drupoh=<?php echo $drupoh;?>&hladaj_uce=<?php echo $hladaj_uce; ?>&page=<?php echo $xstr;?> -->
-  <div class="mdl-color-text--grey-600 ui-table-pagination">
+  <div class="ui-table-footer container">
     <span>= <?php echo $cpol; ?></span>
     <div class="mdl-layout-spacer"></div>
     <label for="page_goto" style="margin-right: 24px;">Strana
@@ -1947,7 +1942,7 @@ echo "copern=9&hladaj_dat=$hladaj_dat&hladaj_dok=$hladaj_dok&hladaj_nai=$hladaj_
 
   </div> <!-- .ui-table-pagination -->
 </form>
-  </div> <!-- .container -->
+
 </div> <!-- #table_body -->
 
 <?php

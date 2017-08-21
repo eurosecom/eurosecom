@@ -84,11 +84,6 @@ select:enabled, button:enabled {
 
 
 /* HEADER */
-/*.mdl-layout__header-row:not(.ui-header-app-row) {
-
-}*/
-
-
 .ui-header .mdl-layout__drawer-button {
   height: 40px;
   width: 40px;
@@ -100,6 +95,9 @@ select:enabled, button:enabled {
 .ui-header .mdl-layout__drawer-button:hover { /*dopyt, naviazať na všetky buttony v header*/
   color: rgba(255,255,255,1);
 }
+.mdl-layout__header-row:not(.ui-header-app-row) {
+  background-color: #039BE5;
+}
 .ui-header-app-row {
   background-color: #0288D1;
   height: 40px;
@@ -108,6 +106,22 @@ select:enabled, button:enabled {
   color: rgba(255,255,255,.7);
   padding-left: 64px;
 }
+
+.ui-header-page-row {
+  /*height: 56px;*/
+  padding-left: 64px;
+}
+.ui-header-page-row .mdl-layout-title {
+  /*font-size: 18px;*/
+  color: #fff;
+}
+.ui-wrap-table-header, .mdl-layout--no-drawer-button .ui-wrap-table-header {
+  height: 32px;
+  padding: 0;
+}
+
+
+
 
 .ilogin .mdl-list__item {
   height: 32px;
@@ -154,15 +168,7 @@ select:enabled, button:enabled {
   color: #fff;
 }
 
-.ui-header-page-row {
-  height: 56px;
-  padding-left: 64px;
 
-}
-.ui-header-page-row .mdl-layout-title {
-  font-size: 18px;
-  color: #fff;
-}
 
 .mdl-layout__header .mdl-color--light-blue-600 .mdl-button--icon:hover {
   color: rgba(255,255,255,1);
@@ -324,8 +330,15 @@ abbr.dot {
 
 
 /* LAYOUT TABLE */
-.ui-table tr {
+.ui-table.container, .ui-table-footer.container {
+  margin: 0 auto;
+}
+.ui-table:not(.ui-table-header) tr, .ui-table-footer {
   height: 40px;
+}
+.ui-table-header th {
+  vertical-align: top;
+  color: rgba(255,255,255,.7);
 }
 .ui-table th:first-of-type, .ui-table td:first-of-type {
   padding-left: 24px;
@@ -341,11 +354,15 @@ abbr.dot {
     padding-right: 8px;
   }
 }
+
+
+
+
+
 .ui-table th .md-18 {
   vertical-align: -5px;
 }
-.ui-table-pagination {
-  height: 40px;
+.ui-table-footer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -353,12 +370,14 @@ abbr.dot {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  color: rgba(0,0,0,.54);
 }
-.ui-table-pagination .mdl-textfield__input { /* dopyt, ešte sa pohrať*/
-  font-size: 12px;
+.ui-table-footer .mdl-textfield__input {
+  font-size: inherit;
   display: inline;
-  margin: 0 4px;
+  margin: 0 8px;
   width: auto;
+  color: rgba(0,0,0,.87);
 }
 
 

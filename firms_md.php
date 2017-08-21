@@ -310,7 +310,7 @@ $vysledek = mysql_query("$sql");
 if ( $copern == 1 OR $copern == 8 ) {
 ?>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
-<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="min-height: 128px;">
+<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="min-height: 136px;">
   <div class="mdl-layout__header-row mdl-color--light-blue-700 ui-header-app-row">
     <span onclick="AppPage();" class="mdl-color-text--yellow-A100">EuroSecom</span>&nbsp;
     <span class="mdl-color-text--blue-grey-50"><?php echo $domain; ?></span>
@@ -347,9 +347,9 @@ if ( $uprav == 1 ) { echo "˙prava # $cislo_xcf"; }
 
     <button type="button" onclick="novaXcf();" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;"><i class="material-icons">add</i></button>
   </div> <!-- .ui-header-page-row -->
-  <div class="mdl-layout__header-row mdl-color--light-blue-600" style="padding:0; height: 32px;">
-    <table class="ui-table-header ui-table data-table container tocenter">
-    <tr class="mdl-color-text--blue-grey-50" style="height: 32px;">
+  <div class="mdl-layout__header-row ui-wrap-table-header">
+    <table class="ui-table-header ui-table data-table container">
+    <tr>
       <th class="right" style="width:8%; padding-right: 16px;">»Ìslo</th>
       <th class="left" style="width:47%;">N·zov</th>
       <th class="right" style="width:10%;">Obdobie</th>
@@ -395,9 +395,8 @@ $i = ( $strana - 1 ) * $pols;
 // koniec cyklu
 $konc =($pols*($strana-1))+($pols-1);
 ?>
-  <div class="container tocenter">
 <form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&zmaz=<?php echo $zmaz; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>&nova=<?php echo $nova; ?>" id="formv" name="formv">
-  <table class="ui-table-content ui-table data-table">
+  <table class="ui-table data-table container">
   <colgroup>
     <col style="width:8%;">
     <col style="width:47%;">
@@ -508,7 +507,7 @@ $i = $i + 1;
   </table>
 </form>
 <form name="forma3" id="forma3" action="#">
-  <div class="mdl-color-text--grey-600 ui-table-pagination">
+  <div class="ui-table-footer container">
     <span>= <?php echo $cpol; ?></span>
     <div class="mdl-layout-spacer"></div>
     <label for="page_goto" style="margin-right: 24px;">Strana
@@ -528,9 +527,8 @@ $is = $is + 1;
     <button type="button" id="page_next" onclick="navPage(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_next</i></button>
       <div class="mdl-tooltip" data-mdl-for="page_prev">Prejsù na stranu <?php echo $ppage; ?></div>
       <div class="mdl-tooltip" data-mdl-for="page_next">Prejsù na stranu <?php echo $npage; ?></div>
-  </div> <!-- .ui-table-pagination -->
+  </div> <!-- .ui-table-footer -->
 </form>
-  </div> <!-- .container -->
 </div> <!-- #table_body -->
 
 <!-- empty state -->
