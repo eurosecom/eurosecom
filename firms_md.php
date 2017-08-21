@@ -310,7 +310,7 @@ $vysledek = mysql_query("$sql");
 if ( $copern == 1 OR $copern == 8 ) {
 ?>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
-<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="min-height: 136px;">
+<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="min-height: 128px;">
   <div class="mdl-layout__header-row mdl-color--light-blue-700 ui-header-app-row">
     <span onclick="AppPage();" class="mdl-color-text--yellow-A100">EuroSecom</span>&nbsp;
     <span class="mdl-color-text--blue-grey-50"><?php echo $domain; ?></span>
@@ -326,8 +326,7 @@ if ( $copern == 1 OR $copern == 8 ) {
     </ul>
   </div> <!-- .ui-header-app-row -->
   <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row">
-    <span id="header_title" class="mdl-layout-title mdl-color-text--white" style="cursor: pointer;">»ÌselnÌk firiem<i class="material-icons" style="vertical-align: -6px;">arrow_drop_down</i>&nbsp;
-    </span>
+    <span id="header_title" class="mdl-layout-title dropdown">»ÌselnÌk firiem</span>
     <span class="mdl-layout-title mdl-color-text--yellow-A100">
 <?php
 if ( $nova == 1 ) { echo "nov·"; }
@@ -348,9 +347,9 @@ if ( $uprav == 1 ) { echo "˙prava # $cislo_xcf"; }
 
     <button type="button" onclick="novaXcf();" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;"><i class="material-icons">add</i></button>
   </div> <!-- .ui-header-page-row -->
-  <div class="mdl-layout__header-row mdl-color--light-blue-600" style="padding:0; height: 40px;">
+  <div class="mdl-layout__header-row mdl-color--light-blue-600" style="padding:0; height: 32px;">
     <table class="ui-table-header ui-table data-table container tocenter">
-    <tr class="mdl-color-text--blue-grey-50">
+    <tr class="mdl-color-text--blue-grey-50" style="height: 32px;">
       <th class="right" style="width:8%; padding-right: 16px;">»Ìslo</th>
       <th class="left" style="width:47%;">N·zov</th>
       <th class="right" style="width:10%;">Obdobie</th>

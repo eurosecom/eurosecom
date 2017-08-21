@@ -84,6 +84,11 @@ select:enabled, button:enabled {
 
 
 /* HEADER */
+/*.mdl-layout__header-row:not(.ui-header-app-row) {
+
+}*/
+
+
 .ui-header .mdl-layout__drawer-button {
   height: 40px;
   width: 40px;
@@ -128,7 +133,21 @@ select:enabled, button:enabled {
   text-align: center;
 }
 
+.dropdown:after {
+  display: inline-block;
+  font-family: 'Material Icons';
+  content: '\e5c5';
+  font-size: 24px;
+}
+.mdl-layout-title.dropdown {
+  cursor: pointer;
+  margin-right: 6px;
+}
 
+.mdl-layout-title.dropdown:after {
+  vertical-align: -6px;
+  text-indent: 2px;
+}
 
 
 .ui-header .mdl-button.mdl-color-text--blue-grey-50 :hover {
@@ -142,6 +161,7 @@ select:enabled, button:enabled {
 }
 .ui-header-page-row .mdl-layout-title {
   font-size: 18px;
+  color: #fff;
 }
 
 .mdl-layout__header .mdl-color--light-blue-600 .mdl-button--icon:hover {
@@ -260,8 +280,6 @@ abbr.dot {
   border-bottom: 1px solid #CFD8DC;
 }
 
-
-
 .data-table tr.row-echo:hover {
   background-color: #ECEFF1;
 }
@@ -277,11 +295,12 @@ abbr.dot {
 }
 .data-table td {
   height: inherit;
-  font-size: 13px;
+  font-size: 12px;
   color: rgba(0,0,0,.87);
   line-height: 1.2;
   position: relative;
   padding: 0;
+  letter-spacing: 0.01em;
 }
 .data-table td strong {
   font-weight: 500;

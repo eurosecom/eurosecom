@@ -204,7 +204,19 @@ if ( $vyb_xcf == '' ) { $copern=22; } //dopyt, preveriù
   <link rel="stylesheet" href="css/material_edit.css">
   <title>⁄ËtovnÌctvo | EuroSecom</title>
 <style>
-
+.ui-header-app-row .mdl-button.dropdown {
+  text-transform: none;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+.ui-header-app-row .mdl-button.dropdown:hover {
+  background-color: #039BE5;
+}
+.ui-header-app-row .mdl-button.dropdown:after {
+  vertical-align: middle;
+  color: rgba(255,255,255,.7);
+}
 
 
 /* change default */
@@ -333,13 +345,8 @@ if ( $vyb_xcf == '' ) { $copern=22; } //dopyt, preveriù
 
 
 
-.mdl-layout__header-row .btn-dropdown {
-  color: rgba(255,255,255,.6);
-  letter-spacing: 0.02em;
-}
-.mdl-layout__header-row .btn-dropdown:hover {
-  background-color: #039BE5;
-}
+
+
 
 
 
@@ -390,15 +397,13 @@ width: 720px;
   <div class="mdl-layout__header-row ui-header-app-row" style="height: 48px;">
     <span class="mdl-layout-title mdl-color-text--yellow-A100" style="font-size: 16px;">EuroSecom</span>&nbsp;&nbsp;
 
-    <button type="button" id="select_firm" onclick="selectFirm();" class="mdl-button mdl-js-button btn-dropdown">
-      <strong class="mdl-color-text--white" style=""><?php echo $vyb_xcf; ?></strong>&nbsp;
-      <span class="mdl-color-text--white" style="text-transform: none; font-weight: 400;"><?php echo $vyb_naz; ?></span>
-      <i class="material-icons vacenter">arrow_drop_down</i>
+    <button type="button" id="select_firm" onclick="selectFirm();" class="mdl-button mdl-js-button dropdown">
+      <strong><?php echo $vyb_xcf; ?></strong>&nbsp;
+      <span><?php echo $vyb_naz; ?></span>
     </button>
 
-    <button type="button" id="select_month" onclick="selectPeriod();" class="mdl-button mdl-js-button btn-dropdown">
-      <span class="mdl-color-text--white" style="font-weight: 400;"><?php echo $vyb_ume; ?></span>
-      <i class="material-icons vacenter">arrow_drop_down</i>
+    <button type="button" id="select_month" onclick="selectPeriod();" class="mdl-button mdl-js-button dropdown">
+      <span><?php echo $vyb_ume; ?></span>
     </button>
     <div class="mdl-layout-spacer"></div>
 

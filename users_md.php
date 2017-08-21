@@ -558,8 +558,7 @@ $sqlpok = mysql_query("$sqlpoktt");
     </ul>
   </div> <!-- .ui-header-app-row -->
   <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row">
-    <span id="header_title" class="mdl-layout-title mdl-color-text--white" style="cursor: pointer;">Èíselník užívate¾ov<i class="material-icons" style="vertical-align: -6px;">arrow_drop_down</i>&nbsp;
-    </span>
+    <span id="header_title" class="mdl-layout-title dropdown">Èíselník užívate¾ov</span>
     <span class="mdl-layout-title mdl-color-text--yellow-A100">
 <?php
 if ( $nova == 1 ) { echo "nový #"; }

@@ -1344,7 +1344,6 @@ $sql = mysql_query("$sqltt");
 // pocet poloziek na stranu
 $pols = 15;
 if( $copern == 9 ) $pols = 900;
-
 // celkom poloziek
 $cpol = mysql_num_rows($sql);
 $npol = $cpol + 1;
@@ -1374,14 +1373,19 @@ $page = strip_tags($_REQUEST['page']);
 $npage =  $page + 1;
 // predchadzajuca strana
 $ppage =  $page - 1;
+
 // zaciatok cyklu
 $i = ( $page - 1 ) * $pols;
 // koniec cyklu
 $konc =($pols*($page-1))+($pols-1);
 ?>
 <form name="formhl1" method="post" action="vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&drupoh=<?php echo $hdrupoh; ?>&page=1&copern=9&rozuct=<?php echo $rozuct;?>&sysx=<?php echo $sysx;?>&hladaj_uce=<?php echo $hladaj_uce; ?>">
-  <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row" style="height: 56px;"> <!-- border-bottom: 1px solid #CFD8DC; -->
-    <span id="header_title" class="mdl-layout-title mdl-color-text--white" style="cursor: pointer; font-size: 18px;  ">
+  <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row" style="height: 56px;">
+
+
+
+
+    <span id="header_title" class="mdl-layout-title dropdown">
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 ) echo "Odberate¾ské faktúry";
 if ( $drupoh == 2 ) echo "Dodávate¾ské faktúry";
@@ -1390,8 +1394,8 @@ if ( $drupoh == 21 OR $drupoh == 22 ) echo "Vnútropodnikové faktúry";
 if ( $drupoh == 42 ) echo "Registraèná pokladnica";
 if ( $drupoh == 52 ) echo "Predfaktúry";
 ?>
-<?php if( $pocstav == 1 ) echo " - Poèiatoèný stav"; ?><i class="material-icons" style="vertical-align: -6px;">arrow_drop_down</i>&nbsp;
-    </span>&nbsp;&nbsp;
+<?php if( $pocstav == 1 ) echo " - Poèiatoèný stav"; ?></span>
+
 <?php
 if ( $drupoh != 2 AND $drupoh != 42 )
 {
@@ -1403,7 +1407,7 @@ if( $drupoh == 21 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHER
 if( $drupoh == 22 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 13 ) ORDER BY dodb"); }
 if( $drupoh == 52 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 14 ) ORDER BY dodb"); }
 ?>
-<select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();">
+<select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" style="">
 <?php while($zaznam=mysql_fetch_array($sqls)):?>
 <option value="<?php echo $zaznam["dodb"];?>" >
 <?php
