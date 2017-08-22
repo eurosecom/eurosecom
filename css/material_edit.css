@@ -84,16 +84,19 @@ select:enabled, button:enabled {
 
 
 /* HEADER */
+.ui-header .mdl-layout__drawer-button, .ui-header .mdl-button--icon, .ui-header-app-row, .ilogin .mdl-list__item-primary-content span:nth-child(2) {
+  color: rgba(255,255,255,.7);/*dopyt, naviazať na všetky buttony i texty v header*/
+}
+.ui-header .mdl-layout__drawer-button:hover, .ui-header .mdl-button--icon:hover { /*dopyt, naviazať na všetky buttony v header*/
+  color: rgba(255,255,255,1);
+}
+
 .ui-header .mdl-layout__drawer-button {
   height: 40px;
   width: 40px;
   margin: 0 12px 0 12px;
   line-height: 48px;
-  color: rgba(255,255,255,.7);/*dopyt, naviazať na všetky buttony v header*/
   background-color: #0288D1;
-}
-.ui-header .mdl-layout__drawer-button:hover { /*dopyt, naviazať na všetky buttony v header*/
-  color: rgba(255,255,255,1);
 }
 .mdl-layout__header-row:not(.ui-header-app-row) {
   background-color: #039BE5;
@@ -103,49 +106,83 @@ select:enabled, button:enabled {
   height: 40px;
   font-size: 13px;
   letter-spacing: .02em;
-  color: rgba(255,255,255,.7);
+}
+.ui-header-app-row, .ui-header-page-row {
   padding-left: 64px;
 }
 
-.ui-header-page-row {
-  /*height: 56px;*/
-  padding-left: 64px;
-}
-.ui-header-page-row .mdl-layout-title {
-  /*font-size: 18px;*/
-  color: #fff;
-}
-.ui-wrap-table-header, .mdl-layout--no-drawer-button .ui-wrap-table-header {
-  height: 32px;
-  padding: 0;
-}
 
 
 
 
-.ilogin .mdl-list__item {
+.ilogin .mdl-list__item, .ui-table .mdl-list__item {
   height: 32px;
   min-height: 32px;
   padding: 0;
-  margin-left: 24px;
-  float: left;
+  letter-spacing: .02em;
+}
+.mdl-list__item .mdl-list__item-primary-content .list-item-avatar {
+  margin-right: 8px;
+  height: 32px;
+  line-height: 32px;
+  width: 32px;
+  font-size: 12px;
+  text-align: center;
 }
 .ilogin .mdl-list__item-primary-content {
   font-size: 13px;
   line-height: 1;
 }
-.ilogin .mdl-list__item-primary-content span:nth-child(2) {
-  color: rgba(255,255,255,.7);
-  font-size: inherit;
+
+
+
+
+
+
+/* CONTENT */
+.ui-content {
+  background-color: #ECEFF1;
 }
-.ilogin .mdl-list__item-primary-content .mdl-list__item-avatar {
-  font-size: 12px;
-  margin-right: 0;
-  height: 32px;
-  line-height: 32px;
-  width: 32px;
-  text-align: center;
+.ui-content.sticky-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .dropdown:after {
   display: inline-block;
@@ -164,51 +201,19 @@ select:enabled, button:enabled {
 }
 
 
-.ui-header .mdl-button.mdl-color-text--blue-grey-50 :hover {
-  color: #fff;
-}
-
-
-
-.mdl-layout__header .mdl-color--light-blue-600 .mdl-button--icon:hover {
-  color: rgba(255,255,255,1);
-}
-
-
-
-.ui-table .mdl-list__item-avatar { /* dopyt, toto bude v style skriptu */
-  font-size: 12px;
-  height: 32px;
-  line-height: 32px;
-  width: 32px;
-  text-align: center;
-}
-.ui-header .mdl-list__item-avatar + span { /* dopyt, toto bude v style skriptu */
-  color: rgba(255,255,255,.7);
-  letter-spacing: 0.02em;
-  /*font-size: 13px;*/
-}
 
 
 
 
-/* user avatar - table echo + form */
-.ui-table .mdl-list__item {
-  padding: 0;
-  line-height: 48px;
-}
-.ui-table .mdl-list__item-avatar {
-  margin-right: 8px !important;
-  border: 1px solid #039BE5;
-  color: inherit;
-}
-.ui-table .mdl-list__item-avatar + .item-avatar-title {
-  letter-spacing: 0;
-}
-.mdl-navigation__link.active .item-avatar-title {
-  color: #fff;
-  font-weight: 500;
-}
+
+
+
+
+
+
+
+
+
 
 abbr.dot {
   text-decoration: none;
@@ -259,12 +264,12 @@ abbr.dot {
 
 
 /* empty state */
-.ui-no-item {
+.ui-no-item { /* head style */
   width: 300px;
   height: 110px;
   text-align: center;
 }
-.no-item-alert {
+.no-item-alert { /* head style*/
   letter-spacing: 0.02em;
   font-size: 16px;
   font-weight: 500;
@@ -311,7 +316,11 @@ abbr.dot {
 .data-table td strong {
   font-weight: 500;
 }
+
+
+
 .data-table.highlight-row tr.row-echo, .highlight-list li {
+  -webkit-transition: all ease-in-out .25s;
   transition: all ease-in-out .25s;
 }
 .data-table.highlight-row tr.selected, .highlight-list li.selected {
@@ -328,49 +337,74 @@ abbr.dot {
   background-color: ;
 }
 
-
 /* LAYOUT TABLE */
-.ui-table.container, .ui-table-footer.container {
-  margin: 0 auto;
-}
-.ui-table:not(.ui-table-header) tr, .ui-table-footer {
+.ui-table-footer, .ui-table tr { /*pôjde do head style a zjednotiť s ui-table tr*/
   height: 40px;
 }
-.ui-table-header th {
-  vertical-align: top;
-  color: rgba(255,255,255,.7);
+.ui-table.container {
+  margin: 0 auto;
 }
-.ui-table th:first-of-type, .ui-table td:first-of-type {
+
+.ui-table-header > li:first-of-type, .ui-table td:first-of-type {
   padding-left: 24px;
 }
-.ui-table th:last-of-type, .ui-table td:last-of-type {
+.ui-table-header > li:last-of-type, .ui-table td:last-of-type {
   padding-right: 24px;
 }
 @media screen and (max-width: 1024px) {
-  .ui-table td:first-of-type, .ui-table th:first-of-type {
+  .ui-table-header > li:first-of-type, .ui-table td:first-of-type {
     padding-left: 8px;
   }
-  .ui-table td:last-of-type, .ui-table th:last-of-type {
+  .ui-table-header > li:last-of-type, .ui-table td:last-of-type {
+    padding-right: 8px;
+  }
+}
+
+.data-table > li:first-of-type.right, .data-table td:first-of-type.right {
+  padding-right: 24px;
+}
+@media screen and (max-width: 1024px) {
+  .data-table > li:first-of-type.right, .ui-table td:first-of-type.right {
     padding-right: 8px;
   }
 }
 
 
-
-
-
-.ui-table th .md-18 {
-  vertical-align: -5px;
-}
-.ui-table-footer {
+.ui-table-header, .ui-table-footer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  font-size: 12px;
+}
+.ui-table-header {
+  height: inherit;
+}
+.ui-table-footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.ui-table-header.two-line > li {
+  padding-top: 0;
+  line-height: 1.2;
+}
+.ui-table-header > li { /*dopyt, zosúladiť s data-table th*/
+  padding-top: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+}
+
+.ui-table-footer {
+  font-size: 12px;
   color: rgba(0,0,0,.54);
+}
+.ui-table-header .md-18 { /*head style*/
+  float: right;
+  margin-top: -4px;
+  margin-left: 4px;
 }
 .ui-table-footer .mdl-textfield__input {
   font-size: inherit;
@@ -528,10 +562,7 @@ abbr.dot {
   text-decoration: underline;
 }
 
-.mdl-layout__content.sticky-footer {
-  display: flex;
-  flex-direction: column;
-}
+
 .mdl-layout__content.sticky-footer .mdl-mini-footer {
   padding-top: 32px;
   padding-bottom: 0;

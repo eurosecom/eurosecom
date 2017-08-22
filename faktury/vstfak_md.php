@@ -1119,7 +1119,58 @@ if ( $drupoh == 21 OR $drupoh == 22 ) echo "Vnútropodnikové faktúry";
 if ( $drupoh == 42 ) echo "Registraèná pokladnica";
 if ( $drupoh == 52 ) echo "Predfaktúry";
 ?> | EuroSecom</title>
-<style> /*dopyt, okno pôjde preè*/
+<style>
+/* header */
+.ui-header {
+  min-height: 136px;
+}
+@media screen and (max-width: 1024px) {
+  .ui-header {
+    min-height: 128px;
+  }
+}
+
+/* table layout */
+.ui-wrap-table-header, .mdl-layout--no-drawer-button .ui-wrap-table-header {
+  height: 32px;
+  padding: 0;
+}
+
+.ui-table > li:nth-child(1), .ui-table td:nth-child(1) {
+  width: 6%;
+  text-align: left;
+}
+.ui-table > li:nth-child(2), .ui-table td:nth-child(2) {
+  width: 18%;
+  text-align: left;
+}
+.ui-table > li:nth-child(3), .ui-table td:nth-child(3) {
+  width: 8%;
+  text-align: left;
+}
+.ui-table > li:nth-child(4), .ui-table td:nth-child(4) {
+  width: 25%;
+  text-align: left;
+}
+.ui-table > li:nth-child(5), .ui-table td:nth-child(5) {
+  width: 8%;
+  text-align: left;
+}
+.ui-table > li:nth-child(6), .ui-table td:nth-child(6) {
+  width: 14%;
+  text-align: right;
+}
+.ui-table > li:nth-child(7), .ui-table td:nth-child(7) {
+  width: 21%;
+  text-align: right;
+}
+
+
+
+
+
+
+ /*dopyt, okno pôjde preè*/
     #Okno{ display: none; cursor: hand; width: 150px;
              position: absolute; top: 0; left: 0;
              border: "1 solid";
@@ -1143,9 +1194,9 @@ if ( $drupoh == 52 ) echo "Predfaktúry";
 </head>
 <body onload="ObnovUI(); VyberVstup();">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="min-height: 136px;">
+<header class="mdl-layout__header mdl-layout__header--waterfall ui-header">
   <div class="mdl-layout__header-row ui-header-app-row">
-    <span class="mdl-color-text--yellow-A100">EuroSecom&nbsp;</span>
+    <span class="mdl-color-text--yellow-A100">EuroSecom</span>&nbsp;
     <span>
 <?php
 if ( $sysx == 'UCT' ) echo "Úètovníctvo";
@@ -1155,20 +1206,20 @@ if ( $sysx == 'FAK' ) echo "Odbyt";
     <div class="mdl-layout-spacer"></div>
     <ul class="mdl-list clearfix ilogin">
 <!-- firm + period -->
-      <li class="mdl-list__item mdl-list__item--two-line">
+      <li class="mdl-list__item mdl-list__item--two-line toleft">
         <span class="mdl-list__item-primary-content right" style="padding-top: 4px;">
           <span class="mdl-color-text--white"><?php echo "<strong>$kli_vxcf</strong>&nbsp;&nbsp;$kli_nxcf"; ?></span>
-          <span class="mdl-list__item-sub-title"><?php echo $kli_vume; ?></span>
+          <span class="mdl-list__item-sub-title" style="font-size: 13px;"><?php echo $kli_vume; ?></span>
         </span>
       </li>
 <!-- user -->
-      <li class="mdl-list__item">
+      <li class="mdl-list__item toleft" style="margin-left: 24px;">
         <span class="mdl-list__item-primary-content">
-          <span id="user" class="mdl-list__item-avatar mdl-color--indigo-400"><?php echo $kli_uzid; ?></span>
+          <span id="user" class="mdl-list__item-avatar list-item-avatar mdl-color--indigo-400" style="margin-right: 0;"><?php echo $kli_uzid; ?></span>
         </span>
       </li>
     </ul>
-    <span data-mdl-for="user" class="mdl-tooltip">Prihlásený užívate¾:<br><?php echo "$kli_uzmeno $kli_uzprie / $kli_uzid"; ?></span>
+      <span data-mdl-for="user" class="mdl-tooltip">Prihlásený užívate¾:<br><?php echo "$kli_uzmeno $kli_uzprie / $kli_uzid"; ?></span>
   </div> <!-- .ui-header-app-row -->
 <?php
 // toto je cast na zobrazenie tabulky a prechody medzi stranami
@@ -1381,7 +1432,7 @@ $konc =($pols*($page-1))+($pols-1);
 ?>
 <form name="formhl1" method="post" action="vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&drupoh=<?php echo $hdrupoh; ?>&page=1&copern=9&rozuct=<?php echo $rozuct;?>&sysx=<?php echo $sysx;?>&hladaj_uce=<?php echo $hladaj_uce; ?>">
   <div class="mdl-layout__header-row ui-header-page-row">
-    <span id="header_title" class="mdl-layout-title dropdown">
+    <span id="header_title" class="mdl-layout-title mdl-color-text--white dropdown">
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 ) echo "Odberate¾ské faktúry";
 if ( $drupoh == 2 ) echo "Dodávate¾ské faktúry";
@@ -1390,7 +1441,7 @@ if ( $drupoh == 21 OR $drupoh == 22 ) echo "Vnútropodnikové faktúry";
 if ( $drupoh == 42 ) echo "Registraèná pokladnica";
 if ( $drupoh == 52 ) echo "Predfaktúry";
 ?>
-<?php if( $pocstav == 1 ) echo " - Poèiatoèný stav"; ?></span>
+<?php if ( $pocstav == 1 ) echo " - Poèiatoèný stav"; ?></span>
 
 <?php
 if ( $drupoh != 2 AND $drupoh != 42 )
@@ -1422,7 +1473,7 @@ if ( $drupoh == 2  )
 {
 $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_ddod WHERE ( drdo = 1 ) ORDER BY ucdo");
 ?>
-<select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();">
+<select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" style="height: 32px;">
 <?php while($zaznam=mysql_fetch_array($sqls)):?>
 <option value="<?php echo $zaznam["ddod"];?>" >
 <?php
@@ -1559,14 +1610,13 @@ $ajmes=0;
 <!--     <button type="button" onclick="novyDok(); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;"><i class="material-icons">add</i></button> -->
 
   </div> <!-- .ui-header-page-row -->
-<!-- <div id="Okno"></div> -->
+<div id="Okno"></div>
 </form>
 <form name="formp2" method="post" action="../ucto/vspk_u.php?drupoh=<?php echo $drupoh;?>&page=1&copern=55">
   <div class="mdl-layout__header-row ui-wrap-table-header">
-    <table class="ui-table-header ui-table data-table container">
-    <tr>
-      <th class="left" style="width:6%;">Úèet</th>
-      <th class="left" style="width:18%;">Doklad -
+    <ul class="ui-table-header ui-table container">
+      <li>Úèet</li>
+      <li>Doklad -
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 OR $drupoh == 2 ) echo "Faktúra";
 if ( $drupoh == 11 OR $drupoh == 12 ) echo "Dodací list";
@@ -1574,12 +1624,12 @@ if ( $drupoh == 21 OR $drupoh == 22 ) echo "VNF";
 if ( $drupoh == 42 ) echo "èíslo v dni";
 if ( $drupoh == 52 ) echo "Predfaktúra";
 ?>
-      </th>
-      <th style="width: 8%;">DAT/UME
+      </li>
+      <li>DAT/UME
 <?php if ( $drupoh == 1 OR $drupoh == 31 ) { ?>
-  <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )"><img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>"></a>
+<!--   <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )"><img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>"></a>
   <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
-<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" title="Doklady za mesiac <?php echo $kli_nume; ?>"></a>
+<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" title="Doklady za mesiac <?php echo $kli_nume; ?>"></a> -->
 <?php } ?>
 
 <?php if ( $drupoh == 11 OR $drupoh == 12 ) { ?>
@@ -1618,22 +1668,22 @@ if ( $drupoh == 52 ) echo "Predfaktúra";
 <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
 <img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
 <?php   } ?>
-      </th>
-      <th class="left" style="width: 25%;">
+      </li>
+      <li>
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 52 ) echo "Odberate¾";
 if ( $drupoh == 2 ) echo "Dodávate¾";
 if ( $drupoh == 21 OR $drupoh == 22 ) echo "Odberate¾ S - Z";
 ?>
-      </th>
-      <th class="left" style="width: 8%;">
+      </li>
+      <li>
 <?php
 if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 31 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 52 ) echo "Str - Zák";
 if ( $drupoh == 21 OR $drupoh == 22 ) echo "Dodávate¾ Str - Zák";
 if ( $drupoh == 42 ) echo "DKP";
 ?>
-      </th>
-      <th class="right" style="width: 14%;">
+      </li>
+      <li>
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 OR $drupoh == 2 )
      {
@@ -1641,14 +1691,15 @@ if ( $sysx == 'UCT' AND $pocstav != 1 ) echo "Úètované /";
      }
 ?>
 <span style="font-weight:normal;">Hodnota</span>
-      </th>
-      <th class="right" style="width: 24%;">
+      </li>
+      <li>
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 )
 {
 ?>
         <input type="checkbox" name="uhradp" value="1"  onmouseover="UkazSkryj('Uhradi v hotovosti<br />vybrané doklady<br />zaškrtnite a OK');" onmouseout="Okno.style.display='none';" onclick="document.formp2.pokl.disabled = false;">
         <INPUT type="submit" id="pokl" name="pokl" value="OK" />
+        <!-- <button class="mdl-button mdl-js-button mdl-button--accent">Button</button> -->
 <?php
 }
 ?>
@@ -1695,24 +1746,14 @@ if ( $drupoh == 11 )
 <?php
 }
 ?>
-      </th>
-    </tr>
-    </table> <!-- .ui-table-header -->
+      </li>
+    </ul>
   </div>
 </header>
 
-<main class="mdl-layout__content mdl-color--blue-grey-50 sticky-footer">
+<main class="mdl-layout__content ui-content sticky-footer">
 <div id="table_body" class="mdl-color--white">
   <table class="ui-table data-table container">
-  <colgroup>
-    <col style="width:6%;">
-    <col style="width:18%;">
-    <col style="width:8%;">
-    <col style="width:25%;">
-    <col style="width:8%;">
-    <col style="width:14%;">
-    <col style="width:21%;">
-  </colgroup>
 <?php
    while ( $i <= $konc )
    {
@@ -1760,17 +1801,17 @@ if ( $drupoh == 52 ) echo "$riadok->dok - $riadok->prf";
 <?php if ( $drupoh == 21 OR $drupoh == 22 ) echo "$riadok->nai - $riadok->str - $riadok->zak"; ?>
 <?php if ( $drupoh == 42 ) echo "$riadok->nai"; ?>
     </td>
-    <td class="center">
+    <td>
 <?php
 if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 31 OR $drupoh == 52 ) echo "$riadok->str - $riadok->zak";
 if ( $drupoh == 21 OR $drupoh == 22 ) echo "$riadok->strv - $riadok->zakv";
 if ( $drupoh == 42 ) echo $riadok->txp;
 ?>
     </td>
-    <td class="right">
+    <td>
      <strong><?php if ( $sysx == 'UCT' AND $pocstav != 1 ) { echo "$riadok->hodu / "; } ?></strong><?php echo $riadok->hod; ?>
     </td>
-    <td class="right">
+    <td>
 <?php
 if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 31 OR $drupoh == 21 OR $drupoh == 12 OR $drupoh == 22 OR $drupoh == 52 )
      {
@@ -1875,7 +1916,7 @@ $i = $i + 1;
   </table> <!-- .ui-table -->
 </form>
 <form name="forma3" method="post" action="#"> <!-- vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=4&drupoh=<?php echo $drupoh;?>&hladaj_uce=<?php echo $hladaj_uce; ?>&page=<?php echo $xstr;?> -->
-  <div class="ui-table-footer container">
+  <div class="ui-table-footer ui-table container">
     <span>= <?php echo $cpol; ?></span>
     <div class="mdl-layout-spacer"></div>
     <label for="page_goto" style="margin-right: 24px;">Strana

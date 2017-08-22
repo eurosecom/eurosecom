@@ -418,8 +418,8 @@ width: 720px;
     <ul class="mdl-list clearfix ilogin">
       <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-          <span class="mdl-list__item-avatar mdl-color--indigo-400"><?php echo $kli_uzid; ?></span>
-          <span style="margin-left: 12px;"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
+          <span class="mdl-list__item-avatar list-item-avatar mdl-color--indigo-400"><?php echo $kli_uzid; ?></span>
+          <span><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
         </span>
       </li>
     </ul>

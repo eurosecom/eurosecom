@@ -300,6 +300,48 @@ $vysledek = mysql_query("$sql");
   <link rel="stylesheet" href="css/material_edit.css">
   <title>Firmy | EuroSecom</title>
 <style>
+/* header */
+.ui-header {
+  min-height: 136px;
+}
+@media screen and (max-width: 1024px) {
+  .ui-header {
+    min-height: 128px;
+  }
+}
+/* table layout */
+.ui-wrap-table-header, .mdl-layout--no-drawer-button .ui-wrap-table-header {
+  height: 32px;
+  padding: 0;
+}
+
+
+
+.ui-table > li:nth-child(1), .ui-table td:nth-child(1) {
+  width: 8%;
+  text-align: right;
+  padding-right: 24px;
+}
+.ui-table > li:nth-child(2), .ui-table td:nth-child(2) {
+  width: 47%;
+  text-align: left;
+}
+.ui-table > li:nth-child(3), .ui-table td:nth-child(3) {
+  width: 10%;
+  text-align: right;
+}
+.ui-table > li:nth-child(4), .ui-table td:nth-child(4) {
+  width: 15%;
+  text-align: right;
+}
+.ui-table > li:nth-child(5), .ui-table td:nth-child(5) {
+  width: 20%;
+  text-align: right;
+}
+
+
+
+
 
 
 
@@ -307,26 +349,28 @@ $vysledek = mysql_query("$sql");
 </head>
 <body onload="ObnovUI();">
 <?php
-if ( $copern == 1 OR $copern == 8 ) {
+//layout
+if ( $copern == 1 OR $copern == 8 )
+{
 ?>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
-<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="min-height: 136px;">
-  <div class="mdl-layout__header-row mdl-color--light-blue-700 ui-header-app-row">
+<header class="mdl-layout__header mdl-layout__header--waterfall ui-header">
+  <div class="mdl-layout__header-row ui-header-app-row">
     <span onclick="AppPage();" class="mdl-color-text--yellow-A100">EuroSecom</span>&nbsp;
-    <span class="mdl-color-text--blue-grey-50"><?php echo $domain; ?></span>
+    <span><?php echo $domain; ?></span>
     <div class="mdl-layout-spacer"></div>
 <!-- user -->
     <ul class="mdl-list clearfix ilogin">
       <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-          <span class="mdl-list__item-avatar mdl-color--indigo-400"><?php echo $kli_uzid; ?></span>
-          <span style="margin-left: 8px;"><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
+          <span class="mdl-list__item-avatar list-item-avatar mdl-color--indigo-400"><?php echo $kli_uzid; ?></span>
+          <span><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
         </span>
       </li>
     </ul>
   </div> <!-- .ui-header-app-row -->
-  <div class="mdl-layout__header-row mdl-color--light-blue-600 ui-header-page-row">
-    <span id="header_title" class="mdl-layout-title dropdown">»ÌselnÌk firiem</span>
+  <div class="mdl-layout__header-row ui-header-page-row">
+    <span id="header_title" class="mdl-layout-title mdl-color-text--white dropdown">»ÌselnÌk firiem</span>
     <span class="mdl-layout-title mdl-color-text--yellow-A100">
 <?php
 if ( $nova == 1 ) { echo "nov·"; }
@@ -342,26 +386,31 @@ if ( $uprav == 1 ) { echo "˙prava # $cislo_xcf"; }
       <label for="cohladat" class="mdl-textfield__label mdl-color-text--white" style="font-size: 14px; top: 5px; left: 48px; height: 32px; line-height: 32px; width: 204px;">Zadajte n·zov firmy</label>
       <button id="resetsearchbtn" onclick="document.formhladaj.cohladat.value='';" class="mdl-button mdl-js-button mdl-button--icon search-reset mdl-color-text--white" style="bottom: 4px; right: 8px;"><i class="material-icons">close</i></button>
     </div>
+      <span class="mdl-tooltip" data-mdl-for="searchbtn">Hæadaù</span>
+      <span class="mdl-tooltip" data-mdl-for="resetsearchbtn">Vymazaù vyhæad·vanie</span>
 </form>
-    <button type="button" id="view_list" onclick="viewFirms();" class="mdl-button mdl-js-button mdl-button--icon " style=""><i class="material-icons">print</i></button>
-
-    <button type="button" onclick="novaXcf();" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;"><i class="material-icons">add</i></button>
+    <button type="button" id="view_list" onclick="viewFirms();" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">print</i>
+    </button>
+      <span class="mdl-tooltip" data-mdl-for="view_list">Zobraziù ËÌselnÌk</span>
+    <button type="button" id="new_item" onclick="novaXcf();" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;">
+      <i class="material-icons">add</i>
+    </button>
+      <span class="mdl-tooltip" data-mdl-for="new_item">Vytvoriù nov˙ firmu</span>
   </div> <!-- .ui-header-page-row -->
   <div class="mdl-layout__header-row ui-wrap-table-header">
-    <table class="ui-table-header ui-table data-table container">
-    <tr>
-      <th class="right" style="width:8%; padding-right: 16px;">»Ìslo</th>
-      <th class="left" style="width:47%;">N·zov</th>
-      <th class="right" style="width:10%;">Obdobie</th>
-      <th class="right" style="width:15%;">Druh&nbsp;<i id="druhfirm" class="material-icons md-18">help_outline</i>
-      </th>
-      <th style="width: 20%;">&nbsp;</th>
-    </tr>
-    </table>
+    <ul class="ui-table-header ui-table container">
+      <li>»Ìslo</li>
+      <li>N·zov</li>
+      <li>Obdobie</li>
+      <li>Druh<i id="druhfirm" class="material-icons md-18">help_outline</i></li>
+      <li>&nbsp;</li>
+    </ul>
   </div>
+    <span data-mdl-for="druhfirm" class="mdl-tooltip">0 = PodvojnÈ ˙ËtovnÌctvo<br>1 = NO podvojnÈ ˙ËtovnÌctvo<br>9 = JednoduchÈ ˙ËtovnÌctvo</span>
 </header>
 
-<main class="mdl-layout__content mdl-color--blue-grey-50 sticky-footer">
+<main class="mdl-layout__content ui-content sticky-footer">
 <div id="table_body" class="mdl-color--white">
 <?php
 $sqltt = "SELECT * FROM fir WHERE xcf >= 0 ORDER BY xcf ";
@@ -397,13 +446,6 @@ $konc =($pols*($strana-1))+($pols-1);
 ?>
 <form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&zmaz=<?php echo $zmaz; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>&nova=<?php echo $nova; ?>" id="formv" name="formv">
   <table class="ui-table data-table container">
-  <colgroup>
-    <col style="width:8%;">
-    <col style="width:47%;">
-    <col style="width:10%;">
-    <col style="width:15%;">
-    <col style="width:20%;">
-  </colgroup>
 <?php
    while ( $i <= $konc )
    {
@@ -484,14 +526,20 @@ $riadok=mysql_fetch_object($sql);
 
 <?php if ( $riadok->xcf != $cislo_xcf OR $nova == 1 ) { ?>
   <tr id="echo_row" class="row-echo">
-    <td class="right" style="padding-right: 16px;"><strong><?php echo $riadok->xcf; ?></strong></td>
+    <td><strong><?php echo $riadok->xcf; ?></strong></td>
     <td><?php echo $riadok->naz; ?></td>
-    <td class="right"><?php echo $riadok->rok; ?></td>
-    <td class="right"><?php echo $riadok->duj; ?></td>
-    <td class="right">
-      <button type="button" id="edit<?php echo $riadok->xcf; ?>" onclick="upravXcf(<?php echo $riadok->xcf; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">edit</i></button>
-      <button type="button" id="copy<?php echo $riadok->xcf; ?>" onclick="kopirujXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">content_copy</i></button>
-      <button type="button" id="remove<?php echo $riadok->xcf; ?>" onclick="zmazXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">remove</i></button>
+    <td><?php echo $riadok->rok; ?></td>
+    <td><?php echo $riadok->duj; ?></td>
+    <td>
+      <button type="button" id="edit<?php echo $riadok->xcf; ?>" onclick="upravXcf(<?php echo $riadok->xcf; ?>,1);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500">
+        <i class="material-icons">edit</i>
+      </button>
+      <button type="button" id="copy<?php echo $riadok->xcf; ?>" onclick="kopirujXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500">
+        <i class="material-icons">content_copy</i>
+      </button>
+      <button type="button" id="remove<?php echo $riadok->xcf; ?>" onclick="zmazXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500">
+        <i class="material-icons">remove</i>
+      </button>
         <div data-mdl-for="edit<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Upraviù</div>
         <div data-mdl-for="copy<?php echo $riadok->xcf; ?>" class="mdl-tooltip">KopÌrovaù</div>
         <div data-mdl-for="remove<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Vymazaù</div>
@@ -504,10 +552,10 @@ $riadok=mysql_fetch_object($sql);
 $i = $i + 1;
    }
 ?>
-  </table>
+  </table> <!-- .ui-table -->
 </form>
 <form name="forma3" id="forma3" action="#">
-  <div class="ui-table-footer container">
+  <div class="ui-table-footer ui-table container">
     <span>= <?php echo $cpol; ?></span>
     <div class="mdl-layout-spacer"></div>
     <label for="page_goto" style="margin-right: 24px;">Strana
@@ -567,20 +615,16 @@ $is = $is + 1;
 </div>
 
 
-<!-- tooltip -->
-<span class="mdl-tooltip" data-mdl-for="ilogin_user"><?php echo "$kli_uzid $kli_uzmeno $kli_uzprie"; ?></span>
 
-<span class="mdl-tooltip" data-mdl-for="view_list">Zobraziù ËÌselnÌk</span>
-<span class="mdl-tooltip" data-mdl-for="new_item">Vytvoriù novÈho uûÌvateæa</span>
-<span class="mdl-tooltip" data-mdl-for="searchbtn">Hæadaù</span>
-<span class="mdl-tooltip" data-mdl-for="resetsearchbtn">Vymazaù vyhæad·vanie</span>
-<span data-mdl-for="druhfirm" class="mdl-tooltip">0 = PodvojnÈ ˙ËtovnÌctvo<br>1 = NO podvojnÈ ˙ËtovnÌctvo<br>9 = JednoduchÈ ˙ËtovnÌctvo</span>
+
+
+
 
 
 
 </div> <!-- .mdl-layout -->
 <?php             }
-//end copern = 1,8
+//layout
 ?>
 
 <?php
