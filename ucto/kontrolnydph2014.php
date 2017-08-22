@@ -2204,7 +2204,7 @@ $i=0;
 $j=0; //zaciatok strany ak by som chcel strankovat
   while ($i <= $pol )
   {
-  if (@$zaznam=mysql_data_seek($sql,$i))
+  if (@$zaznam=mysql_data_seek($sql,$i) OR $i == 0 )
 {
 $hlavicka=mysql_fetch_object($sql);
 
