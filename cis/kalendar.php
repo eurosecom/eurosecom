@@ -3396,7 +3396,7 @@ $sqlttt = "UPDATE kalendar SET sood=sood+1, sodo=sodo+1 WHERE ume = 5.2016 AND d
 // koniec $sql = "SELECT m122016 FROM kalendar";
      }
 
-echo "Kalendar 2017"."<br />";
+//echo "Kalendar 2017"."<br />";
 
 //OD TADETO LEN JEDEN RAZ rok 2017
 $sql = "SELECT rok2017 FROM kalendar";
@@ -3747,6 +3747,55 @@ $sqldok = mysql_query("$sqlttt");
 
 // koniec $sql = "SELECT m122017 FROM kalendar";
      }
+
+echo "Kalendar 2018"."<br />";
+
+//OD TADETO LEN JEDEN RAZ rok 2018
+$sql = "SELECT rok2018 FROM $mysqldb2017.kalendar";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+     {
+
+echo "Vytvaram Kalendar 2018"."<br />";
+
+$den=1;
+$i=0;
+  while ($i <= 364 )
+  {
+
+$datum = Date ("Y-m-d", MkTime (0,0,0,1,$den+$i,2018)); 
+//echo $datum;
+$pole = explode("-", $datum);
+$h_ume = $pole[1].".".$pole[0];
+
+$ttvv = "INSERT INTO $mysqldb2017.kalendar ( dat,ume,akyden,svt ) VALUES ( '$datum', '$h_ume', '0', '0' )";
+$ttqq = mysql_query("$ttvv");
+
+$i = $i + 1;
+  }
+
+//sviatky 2018
+$uprt = "UPDATE $mysqldb2017.kalendar SET svt=1".
+" WHERE dat = '2018-01-01' OR dat = '2018-01-06' OR dat = '2018-03-30' OR dat = '2018-04-02' ".
+" OR dat = '2018-05-01' OR dat = '2018-05-08' OR dat = '2018-07-05' ".
+" OR dat = '2018-08-29' OR dat = '2018-09-01' OR dat = '2018-09-15' ".
+" OR dat = '2018-11-01' OR dat = '2018-11-17' ".
+" OR dat = '2018-12-24' OR dat = '2018-12-25' OR dat = '2018-12-26' ";
+$upravene = mysql_query("$uprt");
+
+
+$uprt = "UPDATE $mysqldb2017.kalendar SET akyden=DAYOFWEEK(dat) WHERE ume > 0 ";
+$upravene = mysql_query("$uprt");
+$uprt = "UPDATE $mysqldb2017.kalendar SET akyden=8 WHERE akyden = 1 ";
+$upravene = mysql_query("$uprt");
+$uprt = "UPDATE $mysqldb2017.kalendar SET akyden=akyden-1 WHERE akyden > 0 ";
+$upravene = mysql_query("$uprt");
+
+$sql = "ALTER TABLE $mysqldb2017.kalendar ADD rok2018 DECIMAL(4,0) DEFAULT 2018 AFTER svt";
+$vysledek = mysql_query("$sql");
+
+     }
+//koniec OD TADETO LEN JEDEN RAZ rok 2018
 
 $vtvkal = 1;
 return $vtvkal;
