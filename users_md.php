@@ -649,10 +649,10 @@ $sqlpok = mysql_query("$sqlpoktt");
 /* firm table + script table layout in row form */
 .firm-table tr:not(:first-of-type), .script-table tr:not(:first-of-type) {
   border-top: 1px solid #CFD8DC;
-  border-bottom: 0;
 }
 .firm-table th, .script-table th {
   vertical-align: top;
+
 }
 .firm-table .row-form td, .script-table .row-form td {
   padding: 0;
@@ -717,6 +717,16 @@ $sqlpok = mysql_query("$sqlpoktt");
 }
 .grid-table-tools .material-icons {
   margin: -1px 16px 0 0;
+}
+/* table with fixed header */
+.fixed-header thead {
+  display: block;
+  border-bottom: 1px solid #CFD8DC;
+}
+.fixed-header tbody {
+  overflow: auto;
+  max-height: 132px;
+  display: block;
 }
 </style>
 </head>
@@ -988,7 +998,8 @@ $if = 0;
 ?>
     <section class="row-form-content mdl-grid mdl-grid--no-spacing">
     <div class="mdl-cell mdl-cell--6-col">
-      <table class="firm-table data-table tocenter" style="width: 320px;">
+      <table class="firm-table data-table tocenter fixed-header" style="width: 320px;">
+      <thead>
       <tr style="height: 24px">
         <th>Firmy</th>
         <th style="color: rgb(3,169,244);">Od</th>
@@ -1025,6 +1036,8 @@ $if = 0;
           </span>
         </td>
       </tr>
+      </thead>
+      <tbody>
 <?php
 while ( $if <= $cpolf )
 {
@@ -1048,6 +1061,7 @@ $riadokf=mysql_fetch_object($sqlf);
 $if = $if + 1;
    }
 ?>
+      </tbody>
       </table>
       <abbr id="enternext_user" class="enternext text-chip">EnterNext</abbr>
         <span data-mdl-for="enternext_user" class="mdl-tooltip">Na pres˙vanie medzi polÌËkami mÙûete pouûiù kl·vesu ENTER. TlaËidlo ULOéIç aktivujete prejdenÌm kurzoru okolo tlaËidla.</span>
@@ -1076,7 +1090,8 @@ $sqlp = mysql_query("$sqlttp");
 $cpolp = mysql_num_rows($sqlp);
 $ip = 0;
 ?>
-      <table class="script-table data-table" style="width: 360px; margin-left: 32px;">
+      <table class="script-table data-table fixed-header" style="width: 360px; margin-left: 32px;">
+      <thead>
       <tr style="height: 24px;">
         <th style="color: rgb(3,169,244);">Skript</th>
         <th>AktualizovanÈ</th>
@@ -1101,6 +1116,8 @@ $ip = 0;
           </span>
         </td>
       </tr>
+      </thead>
+      <tbody>
 <?php
    while ( $ip <= $cpolp )
    {
@@ -1126,6 +1143,7 @@ $datmsk = date("d.m.Y H:i:s", strtotime($riadokp->datm));
 $ip = $ip + 1;
    }
 ?>
+      </tbody>
       </table>
     </section>
 <?php

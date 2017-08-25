@@ -22,7 +22,7 @@ ol, ul, li, dl, dt, dd {
   padding: 0;
   line-height: 1;
 }
-select:enabled, button:enabled, [onclick] {
+select:enabled, button:enabled, [onclick] { /*dopyt, zistiť, kto môže mať hodnotu enabled a príp. všetky prvky*/
   cursor: pointer;
 }
 /* BASIC CLASS */
@@ -88,7 +88,7 @@ select:enabled, button:enabled, [onclick] {
 
 /* HEADER */
 .ui-header .mdl-layout__drawer-button, .ui-header .mdl-button--icon, .ui-header-app-row, .ilogin .mdl-list__item-primary-content span:nth-child(2) {
-  color: rgba(255,255,255,.7);/*dopyt, naviazať na všetky buttony i texty v header*/
+  color: rgba(255,255,255,.7);/*dopyt, naviazať na všetky buttony i texty v header */ /*skusiť tag button */
 }
 .ui-header .mdl-layout__drawer-button:hover, .ui-header .mdl-button--icon:hover { /*dopyt, naviazať na všetky buttony v header*/
   color: rgba(255,255,255,1);
@@ -173,21 +173,12 @@ select:enabled, button:enabled, [onclick] {
 
 
 
-abbr.dot {
+abbr.dot { /*dopyt, asi celkovo abbr zrušiť*/
   text-decoration: none;
 }
 
 
-.avatar { /* dopyt, asi môže ísť preč*/
-/*  display: inline-block;
-  border-radius: 50%;
-  font-size: 12px;
-  text-align: center;
-  letter-spacing: 0.02em;
-  width: 32px;
-  height: 32px;
-  line-height: 32px;*/
-}
+
 
 
 
