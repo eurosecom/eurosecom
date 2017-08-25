@@ -298,53 +298,31 @@ $vysledek = mysql_query("$sql");
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="css/material.min.css">
   <link rel="stylesheet" href="css/material_edit.css">
+  <link rel="stylesheet" href="css/material_list_layout.css">
   <title>Firmy | EuroSecom</title>
 <style>
-/* header */
-.ui-header {
-  min-height: 136px;
-}
-@media screen and (max-width: 1024px) {
-  .ui-header {
-    min-height: 128px;
-  }
-}
 /* table layout */
-.ui-wrap-table-header, .mdl-layout--no-drawer-button .ui-wrap-table-header {
-  height: 32px;
-  padding: 0;
-}
-
-
-
-.ui-table > li:nth-child(1), .ui-table td:nth-child(1) {
+.ui-list th:nth-child(1), .ui-list td:nth-child(1) {
   width: 8%;
   text-align: right;
   padding-right: 24px;
 }
-.ui-table > li:nth-child(2), .ui-table td:nth-child(2) {
+.ui-list th:nth-child(2), .ui-list td:nth-child(2) {
   width: 47%;
   text-align: left;
 }
-.ui-table > li:nth-child(3), .ui-table td:nth-child(3) {
+.ui-list th:nth-child(3), .ui-list td:nth-child(3) {
   width: 10%;
   text-align: right;
 }
-.ui-table > li:nth-child(4), .ui-table td:nth-child(4) {
+.ui-list th:nth-child(4), .ui-list td:nth-child(4) {
   width: 15%;
   text-align: right;
 }
-.ui-table > li:nth-child(5), .ui-table td:nth-child(5) {
+.ui-list th:nth-child(5), .ui-list td:nth-child(5) {
   width: 20%;
   text-align: right;
 }
-
-
-
-
-
-
-
 </style>
 </head>
 <body onload="ObnovUI();">
@@ -398,20 +376,22 @@ if ( $uprav == 1 ) { echo "úprava # $cislo_xcf"; }
     </button>
       <span class="mdl-tooltip" data-mdl-for="new_item">Vytvori novú firmu</span>
   </div> <!-- .ui-header-page-row -->
-  <div class="mdl-layout__header-row ui-wrap-table-header">
-    <ul class="ui-table-header ui-table container">
-      <li>Èíslo</li>
-      <li>Názov</li>
-      <li>Obdobie</li>
-      <li>Druh<i id="druhfirm" class="material-icons md-18">help_outline</i></li>
-      <li>&nbsp;</li>
-    </ul>
+  <div class="mdl-layout__header-row wrap-ui-list">
+    <table class="ui-list-header ui-list ui-container">
+    <tr>
+      <th>Èíslo</th>
+      <th>Názov</th>
+      <th>Obdobie</th>
+      <th>Druh<i id="druhfirm" class="material-icons md-18">help_outline</i></th>
+      <th>&nbsp;</th>
+    </tr>
+    </table>
   </div>
     <span data-mdl-for="druhfirm" class="mdl-tooltip">0 = Podvojné úètovníctvo<br>1 = NO podvojné úètovníctvo<br>9 = Jednoduché úètovníctvo</span>
 </header>
 
 <main class="mdl-layout__content ui-content sticky-footer">
-<div id="table_body" class="mdl-color--white">
+<div id="table_body" class="wrap-ui-list">
 <?php
 $sqltt = "SELECT * FROM fir WHERE xcf >= 0 ORDER BY xcf ";
 if( $nova == 1 OR $bolanova == 1 )
@@ -445,7 +425,7 @@ $i = ( $strana - 1 ) * $pols;
 $konc =($pols*($strana-1))+($pols-1);
 ?>
 <form method="post" action="firms_md.php?copern=8&strana=<?php echo $strana; ?>&cislo_xcf=<?php echo $cislo_xcf; ?>&zmaz=<?php echo $zmaz; ?>&uprav=<?php echo $uprav; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>&nova=<?php echo $nova; ?>" id="formv" name="formv">
-  <table class="ui-table data-table container">
+  <table class="ui-list-content ui-list ui-container">
 <?php
    while ( $i <= $konc )
    {
@@ -455,8 +435,8 @@ $riadok=mysql_fetch_object($sql);
 ?>
 
 <?php if ( ( $uprav != 0 AND $riadok->xcf == $cislo_xcf ) OR ( $nova == 1 AND $i == 0 ) OR ( $zmaz != 0 AND $riadok->xcf == $cislo_xcf ) ) { ?>
-  <tr class="row-form mdl-color--white mdl-shadow--2dp">
-    <td class="vatop">
+  <tr class="ui-row-form mdl-shadow--2dp">
+    <td>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50px;">
         <input type="text" name="h_xcf" id="h_xcf" onKeyDown="return XcfEnter(event.which)" pattern="-?[0-9]*(\.[0-9]+)?" tabindex="1" required class="mdl-textfield__input">
         <label for="h_xcf" class="mdl-textfield__label">Èíslo firmy *</label>
@@ -470,7 +450,7 @@ $riadok=mysql_fetch_object($sql);
       <button type="button" id="all_firms" onclick="allFirms();" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-400" style="">
         <i class="material-icons">print</i>
       </button>
-        <span class="mdl-tooltip" data-mdl-for="all_firms">Obsadené èísla firiem</span>
+        <span class="mdl-tooltip" data-mdl-for="all_firms">Pouité èísla firiem</span>
     </td>
     <td>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:80%;">
@@ -521,11 +501,11 @@ $riadok=mysql_fetch_object($sql);
       <abbr id="enternext" class="mdl-color--light-blue-600 mdl-color-text--white text-chip" style="position: absolute; top: 13px; right: 72px;">EnterNext</abbr>
         <span data-mdl-for="enternext" class="mdl-tooltip">Na presúvanie medzi políèkami pouite klávesu ENTER. Tlaèidlo ULOI aktivujete prejdením kurzoru okolo tlaèidla.</span>
     </td>
-  </tr> <!-- .row-form -->
+  </tr> <!-- .ui-row-form -->
 <?php                                                    } ?>
 
 <?php if ( $riadok->xcf != $cislo_xcf OR $nova == 1 ) { ?>
-  <tr id="echo_row" class="row-echo">
+  <tr id="echo_row" class="ui-row-echo">
     <td><strong><?php echo $riadok->xcf; ?></strong></td>
     <td><?php echo $riadok->naz; ?></td>
     <td><?php echo $riadok->rok; ?></td>
@@ -544,7 +524,7 @@ $riadok=mysql_fetch_object($sql);
         <div data-mdl-for="copy<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Kopírova</div>
         <div data-mdl-for="remove<?php echo $riadok->xcf; ?>" class="mdl-tooltip">Vymaza</div>
     </td>
-  </tr> <!-- .row-echo -->
+  </tr> <!-- .ui-row-echo -->
 <?php                                    } ?>
 
 <?php
@@ -552,10 +532,10 @@ $riadok=mysql_fetch_object($sql);
 $i = $i + 1;
    }
 ?>
-  </table> <!-- .ui-table -->
+  </table> <!-- .ui-list -->
 </form>
 <form name="forma3" id="forma3" action="#">
-  <div class="ui-table-footer ui-table container">
+  <div class="ui-list-footer ui-list ui-container">
     <span>= <?php echo $cpol; ?></span>
     <div class="mdl-layout-spacer"></div>
     <label for="page_goto" style="margin-right: 24px;">Strana
@@ -575,7 +555,7 @@ $is = $is + 1;
     <button type="button" id="page_next" onclick="navPage(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_next</i></button>
       <div class="mdl-tooltip" data-mdl-for="page_prev">Prejs na stranu <?php echo $ppage; ?></div>
       <div class="mdl-tooltip" data-mdl-for="page_next">Prejs na stranu <?php echo $npage; ?></div>
-  </div> <!-- .ui-table-footer -->
+  </div> <!-- .ui-list-footer -->
 </form>
 </div> <!-- #table_body -->
 
@@ -588,7 +568,7 @@ $is = $is + 1;
 <?php                   } ?>
 
 <div class="mdl-layout-spacer"></div>
-<footer class="mdl-mini-footer mdl-color--blue-grey-50 container">
+<footer class="mdl-mini-footer ui-container">
   <div class="mdl-mini-footer__left-section">
     <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
     <ul class="mdl-mini-footer__link-list">
@@ -791,6 +771,7 @@ for ( var i = 0; i < buttons.length; i++ ) {
 <?php if ( $uprav == 1 OR $zmaz == 1 ) { ?>
   document.formv.h_xcf.disabled = true;
   document.formv.h_naz.autofocus = true;
+  document.formv.h_xcf.style.textAlign = 'right';
 <?php } ?>
 
 <?php if ( $zmaz == 1 ) { ?>

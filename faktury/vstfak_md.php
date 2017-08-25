@@ -1110,6 +1110,7 @@ $copern=1;
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="../css/material.min.css">
   <link rel="stylesheet" href="../css/material_edit.css">
+  <link rel="stylesheet" href="../css/material_list_layout.css">
   <title>
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 ) echo "Odberate¾ské faktúry";
@@ -1120,50 +1121,43 @@ if ( $drupoh == 42 ) echo "Registraèná pokladnica";
 if ( $drupoh == 52 ) echo "Predfaktúry";
 ?> | EuroSecom</title>
 <style>
-/* header */
-.ui-header {
-  min-height: 136px;
-}
-@media screen and (max-width: 1024px) {
-  .ui-header {
-    min-height: 128px;
-  }
-}
-
 /* table layout */
-.ui-wrap-table-header, .mdl-layout--no-drawer-button .ui-wrap-table-header {
-  height: 32px;
-  padding: 0;
-}
-
-.ui-table > li:nth-child(1), .ui-table td:nth-child(1) {
+.ui-list th:nth-child(1), .ui-list td:nth-child(1) {
   width: 6%;
   text-align: left;
 }
-.ui-table > li:nth-child(2), .ui-table td:nth-child(2) {
+.ui-list th:nth-child(2), .ui-list td:nth-child(2) {
   width: 18%;
   text-align: left;
 }
-.ui-table > li:nth-child(3), .ui-table td:nth-child(3) {
+.ui-list th:nth-child(3), .ui-list td:nth-child(3) {
   width: 8%;
   text-align: left;
 }
-.ui-table > li:nth-child(4), .ui-table td:nth-child(4) {
+.ui-list th:nth-child(4), .ui-list td:nth-child(4) {
   width: 25%;
   text-align: left;
 }
-.ui-table > li:nth-child(5), .ui-table td:nth-child(5) {
+.ui-list th:nth-child(5), .ui-list td:nth-child(5) {
   width: 8%;
   text-align: left;
 }
-.ui-table > li:nth-child(6), .ui-table td:nth-child(6) {
+.ui-list th:nth-child(6), .ui-list td:nth-child(6) {
   width: 14%;
   text-align: right;
 }
-.ui-table > li:nth-child(7), .ui-table td:nth-child(7) {
+.ui-list th:nth-child(7), .ui-list td:nth-child(7) {
   width: 21%;
   text-align: right;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1181,15 +1175,6 @@ if ( $drupoh == 52 ) echo "Predfaktúry";
              border-bottom-color: "blue";
              font-size: 8pt; font-family: Arial;
            }
-
-
-
-
-
-
-
-
-
 </style>
 </head>
 <body onload="ObnovUI(); VyberVstup();">
@@ -1613,10 +1598,11 @@ $ajmes=0;
 <div id="Okno"></div>
 </form>
 <form name="formp2" method="post" action="../ucto/vspk_u.php?drupoh=<?php echo $drupoh;?>&page=1&copern=55">
-  <div class="mdl-layout__header-row ui-wrap-table-header">
-    <ul class="ui-table-header ui-table container">
-      <li>Úèet</li>
-      <li>Doklad -
+  <div class="mdl-layout__header-row wrap-ui-list">
+    <table class="ui-list-header ui-list ui-container">
+    <tr>
+      <th>Úèet</th>
+      <th>Doklad -
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 OR $drupoh == 2 ) echo "Faktúra";
 if ( $drupoh == 11 OR $drupoh == 12 ) echo "Dodací list";
@@ -1624,8 +1610,8 @@ if ( $drupoh == 21 OR $drupoh == 22 ) echo "VNF";
 if ( $drupoh == 42 ) echo "èíslo v dni";
 if ( $drupoh == 52 ) echo "Predfaktúra";
 ?>
-      </li>
-      <li>DAT/UME
+      </th>
+      <th>DAT/UME
 <?php if ( $drupoh == 1 OR $drupoh == 31 ) { ?>
 <!--   <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )"><img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>"></a>
   <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
@@ -1668,22 +1654,22 @@ if ( $drupoh == 52 ) echo "Predfaktúra";
 <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
 <img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
 <?php   } ?>
-      </li>
-      <li>
+      </th>
+      <th>
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 52 ) echo "Odberate¾";
 if ( $drupoh == 2 ) echo "Dodávate¾";
 if ( $drupoh == 21 OR $drupoh == 22 ) echo "Odberate¾ S - Z";
 ?>
-      </li>
-      <li>
+      </th>
+      <th>
 <?php
 if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 31 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 52 ) echo "Str - Zák";
 if ( $drupoh == 21 OR $drupoh == 22 ) echo "Dodávate¾ Str - Zák";
 if ( $drupoh == 42 ) echo "DKP";
 ?>
-      </li>
-      <li>
+      </th>
+      <th>
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 OR $drupoh == 2 )
      {
@@ -1691,8 +1677,8 @@ if ( $sysx == 'UCT' AND $pocstav != 1 ) echo "Úètované /";
      }
 ?>
 <span style="font-weight:normal;">Hodnota</span>
-      </li>
-      <li>
+      </th>
+      <th>
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 )
 {
@@ -1746,14 +1732,15 @@ if ( $drupoh == 11 )
 <?php
 }
 ?>
-      </li>
-    </ul>
+      </th>
+    </tr>
+    </table> <!-- .ui-list-header -->
   </div>
 </header>
 
 <main class="mdl-layout__content ui-content sticky-footer">
-<div id="table_body" class="mdl-color--white">
-  <table class="ui-table data-table container">
+<div id="table_body" class="wrap-ui-list">
+  <table class="ui-list-content ui-list ui-container">
 <?php
    while ( $i <= $konc )
    {
@@ -1763,7 +1750,7 @@ if ( $drupoh == 11 )
   {
 $riadok=mysql_fetch_object($sql);
 ?>
-  <tr class="row-echo">
+  <tr class="ui-row-echo">
     <td><?php echo $riadok->uce; ?></td>
     <td>
 <?php if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 21 OR $drupoh == 31 OR $drupoh == 22 OR $drupoh == 42 )
@@ -1913,10 +1900,10 @@ $jesub=1;
 $i = $i + 1;
    }
 ?>
-  </table> <!-- .ui-table -->
+  </table> <!-- .ui-list -->
 </form>
 <form name="forma3" method="post" action="#"> <!-- vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=4&drupoh=<?php echo $drupoh;?>&hladaj_uce=<?php echo $hladaj_uce; ?>&page=<?php echo $xstr;?> -->
-  <div class="ui-table-footer ui-table container">
+  <div class="ui-list-footer ui-list ui-container">
     <span>= <?php echo $cpol; ?></span>
     <div class="mdl-layout-spacer"></div>
     <label for="page_goto" style="margin-right: 24px;">Strana
@@ -2009,7 +1996,7 @@ mysql_free_result($sql);
 
 
 <div class="mdl-layout-spacer"></div>
-<footer class="mdl-mini-footer mdl-color--blue-grey-50 container">
+<footer class="mdl-mini-footer ui-container">
   <div class="mdl-mini-footer__left-section">
     <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
     <ul class="mdl-mini-footer__link-list">

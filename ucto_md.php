@@ -204,6 +204,11 @@ if ( $vyb_xcf == '' ) { $copern=22; } //dopyt, preveriù
   <link rel="stylesheet" href="css/material_edit.css">
   <title>⁄ËtovnÌctvo | EuroSecom</title>
 <style>
+/* layout */
+.ui-container {
+  max-width: 1440px;
+}
+
 .ui-header-app-row .mdl-button.dropdown {
   text-transform: none;
   font-weight: 400;
@@ -257,9 +262,7 @@ if ( $vyb_xcf == '' ) { $copern=22; } //dopyt, preveriù
 
 
 
-.container {
-  max-width: 1440px;
-}
+
 
 
 .card-module {
@@ -395,7 +398,7 @@ width: 720px;
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
 <header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="min-height: 112px;">
   <div class="mdl-layout__header-row ui-header-app-row" style="height: 48px;">
-    <span class="mdl-layout-title mdl-color-text--yellow-A100" style="font-size: 16px;">EuroSecom</span>&nbsp;&nbsp;
+    <span class="mdl-layout-title mdl-color-text--yellow-A100" style="font-size: 16px;">EuroSecom</span>
 
     <button type="button" id="select_firm" onclick="selectFirm();" class="mdl-button mdl-js-button dropdown">
       <strong><?php echo $vyb_xcf; ?></strong>&nbsp;
@@ -483,11 +486,11 @@ if ( $vyb_duj == 9 ) { echo "jednoduchÈ"; }
 
 
 <!-- month nav -->
-<button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button page-nav-btn mdl-button--colored">
+<button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
   <i class="material-icons md-40">navigate_before</i>
 </button>
   <div class="mdl-tooltip" data-mdl-for="month_prev">Prejsù na <?php echo $kli_pume; ?></div>
-<button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button page-nav-btn mdl-button--colored">
+<button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
   <i class="material-icons md-40">navigate_next</i>
 </button>
   <div class="mdl-tooltip" data-mdl-for="month_next">Prejsù na <?php echo $kli_dume; ?></div>
@@ -496,9 +499,9 @@ if ( $vyb_duj == 9 ) { echo "jednoduchÈ"; }
 
 
 
-<main class="mdl-layout__content mdl-color--blue-grey-50 sticky-footer">
-<div class="container tocenter">
-<div class="mdl-grid ">
+<main class="mdl-layout__content ui-content sticky-footer">
+<div class="ui-container">
+<div class="mdl-grid">
 <!-- 1.column -->
   <div class="mdl-cell mdl-cell--4-col">
 <!-- vstup dat -->
@@ -649,7 +652,7 @@ if ( $vyb_duj == 9 ) { echo "jednoduchÈ"; }
 </div> <!-- .container -->
 
 <div class="mdl-layout-spacer"></div>
-<footer class="mdl-mini-footer mdl-color--blue-grey-50 container">
+<footer class="mdl-mini-footer ui-container">
   <div class="mdl-mini-footer__left-section">
     <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
     <ul class="mdl-mini-footer__link-list">
