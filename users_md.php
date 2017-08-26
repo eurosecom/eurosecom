@@ -534,6 +534,17 @@ $sqlpok = mysql_query("$sqlpoktt");
   <link rel="stylesheet" href="css/material_list_layout.css">
   <title>UûÌvatelia | EuroSecom</title>
 <style>
+/* zero row = helper col dimensions */
+.ui-list-content tr.zero-row {
+  height: 0;
+}
+.wrap-ui-list > .ui-list-content tr.zero-row + tr {
+  border-top-color: #fff;
+}
+.ui-list-content tr.zero-row > td {
+  padding: 0;
+  line-height: 0;
+}
 /* table layout */
 .ui-list th:nth-child(1), .ui-list td:nth-child(1) {
   width: 22%;
@@ -599,14 +610,16 @@ $sqlpok = mysql_query("$sqlpoktt");
 .ui-row-form .mdl-navigation__link { /* mobile first */
   padding: 12px 8px 12px 8px;
   min-height: 32px;
+  line-height: 32px;
   min-width: 100px;
   text-align: center;
-  line-height: 32px;
 }
 @media screen and (min-width: 839px) {
   .ui-row-form .mdl-navigation__link {
-    padding: 8px 2px 8px 24px;
+    padding: 12px 2px 12px 24px;
     text-align: left;
+    min-height: 24px;
+    line-height: 24px;
   }
 }
 .ui-row-form .mdl-navigation__link:hover {
@@ -618,7 +631,7 @@ $sqlpok = mysql_query("$sqlpoktt");
   background-color: #039BE5;
 }
 .ui-row-form .mdl-navigation__link .dot:after {
-  vertical-align: -3px;
+  vertical-align: -4px;
   font-weight: 400;
 }
 .ui-row-form .mdl-navigation__link.mdl-list .mdl-list__item {
@@ -645,16 +658,15 @@ $sqlpok = mysql_query("$sqlpoktt");
     right: 72px;
   }
 }
-
-/* firm table + script table layout in row form */
-.firm-table tr:not(:first-of-type), .script-table tr:not(:first-of-type) {
-  border-top: 1px solid #CFD8DC;
+/* table with fixed header */
+.data-table.fixed-header tbody {
+  max-height: 132px;
 }
-.firm-table th, .script-table th {
+/* common for firms and script */
+.data-table:not(.grid-table) th {
   vertical-align: top;
-
 }
-.firm-table .row-form td, .script-table .row-form td {
+.data-table .row-form td {
   padding: 0;
 }
 /* firm table layout */
@@ -717,16 +729,6 @@ $sqlpok = mysql_query("$sqlpoktt");
 }
 .grid-table-tools .material-icons {
   margin: -1px 16px 0 0;
-}
-/* table with fixed header */
-.fixed-header thead {
-  display: block;
-  border-bottom: 1px solid #CFD8DC;
-}
-.fixed-header tbody {
-  overflow: auto;
-  max-height: 132px;
-  display: block;
 }
 </style>
 </head>
@@ -825,6 +827,17 @@ $i = ( $strana - 1 ) * $pols;
 $konc = ( $pols*($strana-1))+($pols-1);
 ?>
   <table class="ui-list-content ui-list ui-container">
+  <tr class="zero-row">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
 <?php
    while ( $i <= $konc )
    {
@@ -854,7 +867,7 @@ $riadok=mysql_fetch_object($sql);
         </a>
         <a id="nav_firm" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,2);" class="mdl-navigation__link">Firmy</a>
         <a id="nav_script" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,3);" class="mdl-navigation__link">Skripty
-          <?php if ( $jemenpid == 1 ) { ?> <abbr class="dot">&nbsp;</abbr> <?php } ?>
+          <?php if ( $jemenpid == 1 ) { ?> <abbr class="dot" style="padding: 0;">&nbsp;</abbr> <?php } ?>
         </a>
         <a id="nav_grid" href="#" onclick="upravId(<?php echo $riadok->id_klienta; ?>,4);" class="mdl-navigation__link">Grid karta
           <?php if ( $jegridid == 1 ) { ?> <abbr class="dot">&nbsp;</abbr> <?php } ?>
@@ -998,7 +1011,8 @@ $if = 0;
 ?>
     <section class="row-form-content mdl-grid mdl-grid--no-spacing">
     <div class="mdl-cell mdl-cell--6-col">
-      <table class="firm-table data-table tocenter fixed-header" style="width: 320px;">
+      <div class="tocenter" style="width: 340px;">
+      <table class="firm-table data-table fixed-header">
       <thead>
       <tr style="height: 24px">
         <th>Firmy</th>
@@ -1063,6 +1077,7 @@ $if = $if + 1;
 ?>
       </tbody>
       </table>
+      </div> <!-- .tocenter -->
       <abbr id="enternext_user" class="enternext text-chip">EnterNext</abbr>
         <span data-mdl-for="enternext_user" class="mdl-tooltip">Na pres˙vanie medzi polÌËkami mÙûete pouûiù kl·vesu ENTER. TlaËidlo ULOéIç aktivujete prejdenÌm kurzoru okolo tlaËidla.</span>
     </div> <!-- .mdl-cell -->
@@ -1090,7 +1105,8 @@ $sqlp = mysql_query("$sqlttp");
 $cpolp = mysql_num_rows($sqlp);
 $ip = 0;
 ?>
-      <table class="script-table data-table fixed-header" style="width: 360px; margin-left: 32px;">
+      <div class="tocenter" style="width: 380px;">
+      <table class="script-table data-table fixed-header">
       <thead>
       <tr style="height: 24px;">
         <th style="color: rgb(3,169,244);">Skript</th>
@@ -1145,6 +1161,7 @@ $ip = $ip + 1;
 ?>
       </tbody>
       </table>
+      </div>
     </section>
 <?php
      }
@@ -1537,7 +1554,7 @@ for ( var i = 0; i < headbuttons.length; i++ ) {
 }
   table_body.style.backgroundColor = '#eceff1';
 
-// table_body.className = table_body.className == 'mdl-color--grey-50' ? 'mdl-color--white' : 'mdl-color--blue-grey-50';
+
 
 document.getElementById('header_title').style.pointerEvents = 'none';
 

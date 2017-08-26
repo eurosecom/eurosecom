@@ -732,8 +732,9 @@ for ( var i = 0; i < headbuttons.length; i++ ) {
   headbuttons[i].disabled = true;
   headbuttons[i].style.opacity = '0.5';
 }
+  table_body.style.backgroundColor = '#eceff1';
 
-table_body.className = table_body.className == 'mdl-color--grey-50' ? 'mdl-color--white' : 'mdl-color--blue-grey-50';
+
 
 var rows = document.querySelectorAll('#echo_row > td');
 for ( var i = 0; i < rows.length; i++ ) {

@@ -1739,7 +1739,7 @@ if ( $drupoh == 11 )
 </header>
 
 <main class="mdl-layout__content ui-content sticky-footer">
-<div id="table_body" class="wrap-ui-list">
+<div class="wrap-ui-list">
   <table class="ui-list-content ui-list ui-container">
 <?php
    while ( $i <= $konc )
@@ -1971,7 +1971,7 @@ echo "copern=9&hladaj_dat=$hladaj_dat&hladaj_dok=$hladaj_dok&hladaj_nai=$hladaj_
   </div> <!-- .ui-table-pagination -->
 </form>
 
-</div> <!-- #table_body -->
+</div> <!-- .wrap-ui-list -->
 
 <?php
 //mysql_close();

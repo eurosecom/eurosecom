@@ -30,6 +30,9 @@
   height: 32px;
   padding: 0;
 }
+table.ui-list {
+  table-layout: fixed;
+}
 /* table header */
 .ui-list-header th {
   color: rgba(255,255,255,.7);

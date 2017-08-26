@@ -13,6 +13,7 @@ body {
 a {
   text-decoration: none;
   display: inline-block;
+  color: inherit;
 }
 ul, ol, dl {
   list-style: none;
@@ -252,21 +253,32 @@ table .mini-icon-btn {
 
 
 /* basic table */
-.data-table tr:not(:first-of-type) {
-  border-top: 1px solid #CFD8DC;
-  /*border-bottom: 1px solid #CFD8DC;*/
+.data-table {
+  /*table-layout: fixed;*/
+}
+.data-table tr:not(:last-of-type),
+.data-table.fixed-header thead tr,
+.data-table.fixed-header tbody tr:not(:last-of-type) {
+  border-bottom: 1px solid #CFD8DC;
 }
 .data-table .row-echo:hover {
   background-color: #ECEFF1;
 }
-
-
 .data-table th:first-of-type, .data-table td:first-of-type {
   padding-left: 16px;
 }
 .data-table th:last-of-type, .data-table td:last-of-type {
   padding-right: 16px;
 }
+
+/* table with fixed header */
+.data-table.fixed-header thead, .data-table.fixed-header tbody {
+  display: block;
+}
+.data-table.fixed-header tbody {
+  overflow: auto;
+}
+
 
 
 
