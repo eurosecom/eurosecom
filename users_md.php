@@ -1378,7 +1378,8 @@ $cpolpok = mysql_num_rows($sqlpok);
   if (@$zaznampok=mysql_data_seek($sqlpok,$ipok))
   {
   $riadokpok=mysql_fetch_object($sqlpok);
-  $akefirmy=$akefirmy.$riadokpok->fiod."-".$riadokpok->fido."<br />";
+  if( $ipok == 0 ) { $akefirmy=$akefirmy.$riadokpok->fiod."-".$riadokpok->fido; }
+  if( $ipok >  0 ) { $akefirmy=$akefirmy.", ".$riadokpok->fiod."-".$riadokpok->fido; }
 
   }
 $ipok=$ipok+1;
@@ -1405,7 +1406,7 @@ $ipok=$ipok+1;
 <?php } ?>
 <?php if ( $riadok->txt1 == "0-0" ) { ?>
  <?php echo $akefirmy; ?>
-      <?php echo $riadok->txt1; ?>
+      
 <?php } ?>
     </td>
     <td><?php echo $riadok->all_prav; ?></td>
