@@ -1121,7 +1121,7 @@ if ( $drupoh == 42 ) echo "RegistraËn· pokladnica";
 if ( $drupoh == 52 ) echo "Predfakt˙ry";
 ?> | EuroSecom</title>
 <style>
-/* table layout */
+/* list layout */
 .ui-list th:nth-child(1), .ui-list td:nth-child(1) {
   width: 6%;
   text-align: left;
@@ -1376,16 +1376,30 @@ $sql = mysql_query("$sqltt");
 }
 
   }
-// pocet poloziek na stranu
-$pols = 15;
-if( $copern == 9 ) $pols = 900;
 
 // celkom poloziek
 $cpol = mysql_num_rows($sql);
 $npol = $cpol + 1;
+
+// pocet poloziek na stranu
+$pols = 15;
+if( $copern == 9 ) $pols = 900;
+
 // pocet stran
-$xstr =1*(ceil($cpol / $pols));
+$xstr = 1*(ceil($cpol / $pols));
 if ( $xstr == 0 ) $xstr=1;
+
+// aktualna strana
+$page = strip_tags($_REQUEST['page']);
+// predchadzajuca strana
+$ppage = $page - 1;
+// nasledujuca strana
+$npage = $page + 1;
+
+// zaciatok cyklu
+$i = ( $page - 1 ) * $pols;
+// koniec cyklu
+$konc =($pols*($page-1))+($pols-1);
 
 $hdrupoh=$drupoh;
 if ( $rozuct == 'ANO' ) $hdrupoh=1*1000+$drupoh;
@@ -1401,20 +1415,20 @@ $mesiac_dan=$mesiac_dat+1;
 if( $mesiac_dan > 12 ) $mesiac_dan=12;
 $kli_pume=$mesiac_dap.".".$rok_dat;
 $kli_nume=$mesiac_dan.".".$rok_dat;
-
-
-// aktualna strana
-$page = strip_tags($_REQUEST['page']);
-// nasledujuca strana
-$npage =  $page + 1;
-// predchadzajuca strana
-$ppage =  $page - 1;
-
-// zaciatok cyklu
-$i = ( $page - 1 ) * $pols;
-// koniec cyklu
-$konc =($pols*($page-1))+($pols-1);
 ?>
+<script>
+function gotoPage()
+{
+  var chodna = document.forma3.page_goto.value;
+  window.open('vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=4&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&page=' + chodna + '', '_self');
+}
+function navPage(chodna)
+{
+  window.open('vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&page=' + chodna + '', '_self');
+
+}
+</script>
+
 <form name="formhl1" method="post" action="vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&drupoh=<?php echo $hdrupoh; ?>&page=1&copern=9&rozuct=<?php echo $rozuct;?>&sysx=<?php echo $sysx;?>&hladaj_uce=<?php echo $hladaj_uce; ?>">
   <div class="mdl-layout__header-row ui-header-page-row">
     <span id="header_title" class="mdl-layout-title mdl-color-text--white dropdown">
@@ -1497,7 +1511,12 @@ $poltxt = SubStr($polmen,0,20);
 <a href="#" onclick="ResetHladanie();" title="Obnoviù" class="reset">Obnoviù</a>-->
 
 
-<div class="mdl-layout-spacer"></div>
+
+  <div class="mdl-layout-spacer"></div>
+
+
+
+
 <?php
 if ( ( $drupoh == 1 OR $drupoh == 2 ) AND $pocstav != 1 )
 {
@@ -1592,10 +1611,12 @@ $ajmes=0;
 ?>
 
 
-<!--     <button type="button" onclick="novyDok(); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;"><i class="material-icons">add</i></button> -->
-
+  <button type="button" id="new_item" onclick="newItem(); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;">
+    <i class="material-icons">add</i>
+  </button>
+    <span class="mdl-tooltip" data-mdl-for="new_item">Vytvoriù nov˙ fakt˙ru</span> <!-- dopyt, oöetriù vöetky doklady -->
   </div> <!-- .ui-header-page-row -->
-<div id="Okno"></div>
+<div id="Okno"></div> <!-- dopyt, chcem daù preË -->
 </form>
 <form name="formp2" method="post" action="../ucto/vspk_u.php?drupoh=<?php echo $drupoh;?>&page=1&copern=55">
   <div class="mdl-layout__header-row wrap-ui-list">
@@ -1759,7 +1780,7 @@ $uctminusdok=$riadok->hodu-$riadok->hod;
   if ( $sysx == 'UCT' AND $kli_vduj >= 0 AND $pocstav != 1 )
   {
 ?>
-<a href="#" onclick="window.open('../faktury/vstf_t_new.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=ANO&copern=20&drupoh=<?php echo $drupoh; ?>&page=<?php echo $page;?>&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $riadok->dok; ?>&h_ico=<?php echo $riadok->ico; ?>&h_uce=<?php echo $riadok->uce; ?>&h_unk=<?php echo $riadok->unk; ?>&h_poh=<?php echo $riadok->poh; ?>', '_self'); window.name = 'zoznam';" title="Roz˙Ëtovanie dokladu" class="imgbtn img-menu"></a><!-- dopyt, cez funkciu -->
+<a href="#" onclick="window.open('../faktury/vstf_t_md.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=ANO&copern=20&drupoh=<?php echo $drupoh; ?>&page=<?php echo $page;?>&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $riadok->dok; ?>&h_ico=<?php echo $riadok->ico; ?>&h_uce=<?php echo $riadok->uce; ?>&h_unk=<?php echo $riadok->unk; ?>&h_poh=<?php echo $riadok->poh; ?>', '_self'); window.name = 'zoznam';" title="Roz˙Ëtovanie dokladu" class="imgbtn img-menu"></a><!-- dopyt, cez funkciu -->
 <?php
   }
 ?>
@@ -1920,40 +1941,12 @@ $is = $is + 1;
 ?>
     </select>/&nbsp;&nbsp;<?php echo $xstr; ?></label>
     <button type="button" id="page_prev" onclick="navPage(<?php echo $ppage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_before</i></button>
-    <button type="button" id="page_next" onclick="navPage(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_next</i></button>
       <div class="mdl-tooltip" data-mdl-for="page_prev">Prejsù na stranu <?php echo $ppage; ?></div>
+    <button type="button" id="page_next" onclick="navPage(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_next</i></button>
       <div class="mdl-tooltip" data-mdl-for="page_next">Prejsù na stranu <?php echo $npage; ?></div>
 
 
 
-<FORM name="forma2" class="obyc" method="post" action="vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&
-<?php
-if ( $copern != 9 )
-{
-echo "copern=3&hladaj_uce=$hladaj_uce";
-}
-if ( $copern == 9 )
-{
-echo "copern=9&hladaj_dat=$hladaj_dat&hladaj_dok=$hladaj_dok&hladaj_nai=$hladaj_nai&hladaj_uce=$hladaj_uce";
-}
-?>
-&drupoh=<?php echo $drupoh;?>&page=<?php echo $ppage;?>" >
-<INPUT type="submit" id="pstrana" name="pstrana" value="Predoöl· strana" >
-</FORM>
-<FORM name="forma1" class="obyc" method="post" action="vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&
-<?php
-if ( $copern != 9 )
-{
-echo "copern=2&hladaj_uce=$hladaj_uce";
-}
-if ( $copern == 9 )
-{
-echo "copern=9&hladaj_dat=$hladaj_dat&hladaj_dok=$hladaj_dok&hladaj_nai=$hladaj_nai&hladaj_uce=$hladaj_uce";
-}
-?>
-&drupoh=<?php echo $drupoh;?>&page=<?php echo $npage;?>" >
-<INPUT type="submit" id="dstrana" value="œalöia strana" >
-</FORM>
 
 
 
@@ -1964,8 +1957,8 @@ echo "copern=9&hladaj_dat=$hladaj_dat&hladaj_dok=$hladaj_dok&hladaj_nai=$hladaj_
 
 
 
-<INPUT type="submit" id="sstrana" value="Prejsù na stranu:" >
-<input type="text" name="page" id="page" value="<?php echo $xstr;?>" size="4" onkeyup="KontrolaCisla(this, Ax)"/>
+
+
 
 
   </div> <!-- .ui-table-pagination -->
@@ -2062,15 +2055,17 @@ var vyskawin = screen.height-175;
 
 
 
+
+
       function dajuce()
       {
 
   var ucet = document.formhl1.hladaj_uce.value;
 <?php if( $sysx != 'UCT' ) { ?>
-  var okno = window.open("vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&hladaj_uce=" + ucet + "&drupoh=<?php echo 2*1000+$drupoh;?>&page=1&copern=1", "_self");
+  var okno = window.open("vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&hladaj_uce=" + ucet + "&drupoh=<?php echo 2*1000+$drupoh;?>&page=1&copern=1", "_self");
 <?php                      } ?>
 <?php if( $sysx == 'UCT' ) { ?>
-  var okno = window.open("vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&hladaj_uce=" + ucet + "&drupoh=<?php echo 1*1000+$drupoh;?>&page=1&copern=1", "_self");
+  var okno = window.open("vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&hladaj_uce=" + ucet + "&drupoh=<?php echo 1*1000+$drupoh;?>&page=1&copern=1", "_self");
 <?php                      } ?>
       }
 
@@ -2139,6 +2134,7 @@ var vyskawin = screen.height-175;
   }
 //koniec hladania
 ?>
+
 <?php
 //hladanie
   if ( $copern == 9 )
@@ -2146,7 +2142,7 @@ var vyskawin = screen.height-175;
 ?>
     function VyberVstup()
     {
-
+   document.forma3.page_goto.value = '<?php echo "$page"; ?>';
     }
 
     function ObnovUI()
@@ -2168,26 +2164,87 @@ var vyskawin = screen.height-175;
 //  Kontrola cisla
     function KontrolaCisla(Vstup, Oznam)
     {
-     if ( Vstup.value.search(/[^0-9]/g) != -1) { Oznam.style.display=""; document.forma3.sstrana.disabled = true; }
-     else { Oznam.style.display="none"; document.forma3.sstrana.disabled = false; }
+//     if ( Vstup.value.search(/[^0-9]/g) != -1) { Oznam.style.display=""; document.forma3.sstrana.disabled = true; }
+//     else { Oznam.style.display="none"; document.forma3.sstrana.disabled = false; }
     }
 
     function VyberVstup()
     {
-    //document.forma3.page.focus();
-    document.forma3.page.select();
+   document.formhl1.hladaj_uce.focus();
+   document.forma3.page_goto.value = '<?php echo "$page"; ?>';
+
+
+
+
+
     }
 
     function ObnovUI()
     {
     document.formhl1.hladaj_uce.value='<?php echo $hladaj_uce;?>';
 <?php if ( $copern != 10 AND ( $drupoh == 1 OR $drupoh == 31 ) ) echo "document.formp2.pokl.disabled = true;"; ?>
-    var ii=1*<?php echo strip_tags($_REQUEST['page']);?>;
-    if ( ii == 1 ) document.forma2.pstrana.disabled = true;
+
+//    var ii=1*<?php echo strip_tags($_REQUEST['page']);?>;
+//    if ( ii == 1 ) document.forma2.pstrana.disabled = true;
     <?php if( $zmaz == 'OK' ) echo "Zm.style.display='';";?>
     <?php if( $uprav == 'OK' ) echo "Up.style.display='';";?>
-    }
 
+
+
+
+//pagination
+   document.forma3.page_goto.value = '<?php echo "$page"; ?>';
+<?php if ( $page == 1 ) { ?>
+   document.forma3.page_prev.disabled = true;
+<?php } ?>
+<?php if ( $page == $xstr ) { ?>
+   document.forma3.page_next.disabled = true;
+<?php } ?>
+
+
+
+
+
+
+//   function PredchStrana()
+//   {
+// <?php if ( $copern != 9 ) { ?>
+//    window.open('vstfak_new.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=3&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&page=<?php echo $ppage; ?>', '_self');
+// <?php                     } ?>
+// <?php if ( $copern == 9 ) { ?>
+//    window.open('vstfak_new.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&hladaj_uce=<?php echo $hladaj_uce; ?>&hladaj_dat=<?php echo $hladaj_dat; ?>&hladaj_dok=<?php echo $hladaj_dok; ?>&hladaj_nai=<?php echo $hladaj_nai; ?>&drupoh=<?php echo $drupoh; ?>&page=<?php echo $ppage; ?>', '_self');
+// <?php                     } ?>
+//   }
+//   function DalsiaStrana()
+//   {
+// <?php if ( $copern != 9 ) { ?>
+//    window.open('vstfak_new.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=2&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&page=<?php echo $npage; ?>', '_self');
+// <?php                     } ?>
+// <?php if ( $copern == 9 ) { ?>
+//    window.open('vstfak_new.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&hladaj_uce=<?php echo $hladaj_uce; ?>&hladaj_dat=<?php echo $hladaj_dat; ?>&hladaj_dok=<?php echo $hladaj_dok; ?>&hladaj_nai=<?php echo $hladaj_nai; ?>&drupoh=<?php echo $drupoh; ?>&page=<?php echo $npage; ?>', '_self');
+// <?php                     } ?>
+//   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 <?php
   }
 ?>
@@ -2314,13 +2371,13 @@ window.open('../faktury/int_fakt.php?copern=55&page=1&h_sys=85&h_obdp=<?php echo
 
                 }
 
-  function novyDok()
+  function newItem()
   {
-   window.open('vstf_u.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=5&drupoh=<?php echo $drupoh;?>&hladaj_uce=<?php echo $hladaj_uce; ?>&page=1', '_self'); //dopyt, "page=1" d·m preË
-
-
-
+   window.open('vstf_u_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=5&drupoh=<?php echo $drupoh; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&page=1', '_self'); //dopyt, "page=1" d·m preË
   }
+
+
+
 
   </script>
 </body>
