@@ -113,7 +113,7 @@ select:enabled, button:enabled, [onclick] { /*dopyt, zistiť, kto môže mať ho
 .ui-header-app-row, .ui-header-page-row {
   padding-left: 64px;
 }
-/* page title width dropdown */
+/* page title with dropdown */
 .mdl-layout-title.dropdown {
   cursor: pointer;
   margin-right: 6px;
@@ -122,6 +122,23 @@ select:enabled, button:enabled, [onclick] { /*dopyt, zistiť, kto môže mať ho
   vertical-align: -6px;
   text-indent: 2px;
 }
+/* page title with select */
+.ui-header-page-row > .select-btn {
+  height: 32px;
+  border-radius: 2px;
+  padding: 0 4px 0 8px;
+  font-size: 12px;
+  border: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  outline: 0;
+  color: rgba(0,0,0,.87);
+  letter-spacing: 0.01em;
+}
+.ui-header-page-row > .select-btn:focus {
+  font-weight: 500;
+}
+
+
 
 /* logged in .ui-header-app-row */
 .ilogin .mdl-list__item {

@@ -1102,6 +1102,28 @@ $copern=1;
 //koniec vymazania rozuctovania
 
 //echo "ucex ".$_SESSION['nastavene_uce'];
+
+//month navigation
+$zmenume=1*$zmenume;
+$pole = explode(".", $kli_vume);
+$kli_vmes=$pole[0];
+$kli_vrok=$pole[1];
+$kli_pmes=$kli_vmes-1;
+if ( $kli_pmes < 1 ) $kli_pmes=1;
+$kli_dmes=$kli_vmes+1;
+if ( $kli_dmes > 12 ) $kli_dmes=12;
+$kli_pume=$kli_pmes.".".$kli_vrok;
+$kli_dume=$kli_dmes.".".$kli_vrok;
+$odkaz="../faktury/vstfak_md.php?regpok=$regpok&vyroba=$vyroba&copern=1&drupoh=$drupoh&page=1&sysx=$sysx&hladaj_uce=$hladaj_uce&rozuct=$rozuct";
+$odkaz64=urlencode($odkaz);
+
+
+
+
+
+
+
+
 ?>
 <head>
   <meta charset="cp1250">
@@ -1442,9 +1464,7 @@ if ( $drupoh == 52 ) echo "Predfaktúry";
 ?>
 <?php if ( $pocstav == 1 ) echo " - Počiatočný stav"; ?></span>
 
-<?php
-if ( $drupoh != 2 AND $drupoh != 42 )
-{
+<?php if ( $drupoh != 2 AND $drupoh != 42 ) {
 if( $drupoh == 1 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 1 ) ORDER BY dodb"); }
 if( $drupoh == 31 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 11 ) ORDER BY dodb"); }
 if( $drupoh == 11 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 2 ) ORDER BY dodb"); }
@@ -1453,57 +1473,47 @@ if( $drupoh == 21 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHER
 if( $drupoh == 22 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 13 ) ORDER BY dodb"); }
 if( $drupoh == 52 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 14 ) ORDER BY dodb"); }
 ?>
-<select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" style="">
-<?php while($zaznam=mysql_fetch_array($sqls)):?>
-<option value="<?php echo $zaznam["dodb"];?>" >
+  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" class="mdl-shadow--2dp select-btn">
+<?php while($zaznam=mysql_fetch_array($sqls)): ?>
+    <option value="<?php echo $zaznam["dodb"]; ?>">
 <?php
 $polmen = $zaznam["nodb"];
 $poltxt = SubStr($polmen,0,20);
 ?>
 <?php echo $zaznam['dodb']." - ".$poltxt; ?></option>
-<?php endwhile;?>
-</select>
-
-<?php
-}
-?>
-<?php
-if ( $drupoh == 2  )
-{
+<?php endwhile; ?>
+  </select>
+<?php                                       } ?>
+<?php if ( $drupoh == 2 ) {
 $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_ddod WHERE ( drdo = 1 ) ORDER BY ucdo");
 ?>
-<select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" style="height: 32px;">
-<?php while($zaznam=mysql_fetch_array($sqls)):?>
-<option value="<?php echo $zaznam["ddod"];?>" >
+  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" class="mdl-shadow--2dp select-btn">
+<?php while($zaznam=mysql_fetch_array($sqls)): ?>
+    <option value="<?php echo $zaznam["ddod"]; ?>">
 <?php
 $polmen = $zaznam["ndod"];
 $poltxt = SubStr($polmen,0,20);
 ?>
 <?php echo $zaznam['ddod']." - ".$poltxt; ?></option>
-<?php endwhile;?>
-</select>
-<?php
-}
-?>
-
-<?php
-if ( $drupoh == 42  )
-{
+<?php endwhile; ?>
+  </select>
+<?php                     } ?>
+<?php if ( $drupoh == 42 ) {
 $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dpok WHERE ( drpk = 9 ) ORDER BY dpok");
 ?>
-<select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();">
+  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" class="mdl-shadow--2dp select-btn">
 <?php while($zaznam=mysql_fetch_array($sqls)):?>
-<option value="<?php echo $zaznam["dpok"];?>" >
+    <option value="<?php echo $zaznam["dpok"];?>" >
 <?php
 $polmen = $zaznam["npok"];
 $poltxt = SubStr($polmen,0,20);
 ?>
 <?php echo $zaznam['dpok']." - ".$poltxt; ?></option>
 <?php endwhile;?>
-</select>
-<?php
-}
-?>
+  </select>
+<?php                      } ?>
+  <div class="mdl-layout-spacer"></div>
+
 <!-- <input type="text" name="hladaj_dok" id="hladaj_dok" value="<?php echo $hladaj_dok; ?>"/>
 <input type="text" name="hladaj_dat" id="hladaj_dat" value="<?php echo $hladaj_dat; ?>"/>
 <input type="text" name="hladaj_nai" id="hladaj_nai" value="<?php echo $hladaj_nai; ?>"/>
@@ -1512,7 +1522,7 @@ $poltxt = SubStr($polmen,0,20);
 
 
 
-  <div class="mdl-layout-spacer"></div>
+
 
 
 
@@ -2004,6 +2014,30 @@ mysql_free_result($sql);
 </footer>
 </main>
 
+<!-- header nav menu -->
+<div style="position:fixed; left: 0px; top: -24px; z-index: 10;">
+  <ul for="header_title" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+<?php if ( $drupoh == 1 OR $drupoh == 31 ) { ?>
+    <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="OdberFa();">Odberateľské faktúry</li>
+    <li class="mdl-menu__item" onclick="OdberUcty();">Odberateľské účty</li>
+<?php } ?>
+<?php if ( $drupoh == 2 ) { ?>
+    <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="DodavFa();">Dodávateľské faktúry</li>
+    <li class="mdl-menu__item" onclick="DodavUcty();">Dodávateľské účty</li>
+<?php } ?>
+  </ul>
+</div>
+
+<!-- month nav -->
+<button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
+  <i class="material-icons md-40">navigate_before</i>
+</button>
+  <span class="mdl-tooltip" data-mdl-for="month_prev">Prejsť na <?php echo $kli_pume; ?></span>
+<button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
+  <i class="material-icons md-40">navigate_next</i>
+</button>
+  <span class="mdl-tooltip" data-mdl-for="month_next">Prejsť na <?php echo $kli_dume; ?></span>
+
 <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Title</span>
     <nav class="mdl-navigation">
@@ -2020,26 +2054,11 @@ mysql_free_result($sql);
 // toto je koniec casti na zobrazenie tabulky a prechody medzi stranami
      }
 
-if( $sys != 'DOP' AND $sysx != 'UCT' )
-{
-if( $copern == 1 ) {
-$zmenume=1;
-$odkaz="../faktury/vstfak.php?regpok=$regpok&vyroba=$vyroba&copern=1&drupoh=$drupoh&page=1&sysx=$sysx&hladaj_uce=$hladaj_uce&rozuct=$rozuct";
-                   }
 
-$cislista = include("fak_lista.php");
-}
 
-if( $sys == 'DOP' ) $cislista = include("../doprava/dop_lista.php");
 
-if( $sysx == 'UCT' )
-{
-if( $copern == 1 ) {
-$zmenume=1;
-$odkaz="../faktury/vstfak.php?regpok=$regpok&vyroba=$vyroba&copern=1&drupoh=$drupoh&page=1&sysx=$sysx&hladaj_uce=$hladaj_uce&rozuct=$rozuct";
-                   }
-$cislista = include("../ucto/uct_lista.php");
-}
+
+
 
 // celkovy koniec dokumentu
        } while (false);
@@ -2047,6 +2066,30 @@ $cislista = include("../ucto/uct_lista.php");
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <SCRIPT Language="JavaScript" Src="../js/cookies.js"></SCRIPT>
 <script type="text/javascript">
+//month nav
+  function navMonth(kam)
+  {
+    window.open('../cis/zmenume.php?odkaz=<?php echo $odkaz64; ?>&copern=' + kam + '', '_self');
+  }
+<?php if ( $kli_vmes == 1 ) { ?> document.getElementById('month_prev').disabled = true; <?php } ?>
+<?php if ( $kli_vmes == 12 ) { ?> document.getElementById('month_next').disabled = true; <?php } ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //sirka a vyska okna
 var sirkawin = screen.width-10;
 var vyskawin = screen.height-175;
@@ -2344,7 +2387,10 @@ var vyskawin = screen.height-175;
 
       }
 
-
+  function newItem()
+  {
+   window.open('vstf_u_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=5&drupoh=<?php echo $drupoh; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&page=1', '_self'); //dopyt, "page=1" dám preč
+  }
 
 <?php if ( $agrostav == 1 OR $_SERVER['SERVER_NAME'] == "localhost" )  { ?>
     function VytlacPokl(doklad)
@@ -2371,12 +2417,24 @@ window.open('../faktury/int_fakt.php?copern=55&page=1&h_sys=85&h_obdp=<?php echo
 
                 }
 
-  function newItem()
+
+
+  function OdberFa()
   {
-   window.open('vstf_u_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=5&drupoh=<?php echo $drupoh; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&page=1', '_self'); //dopyt, "page=1" dám preč
+    window.open('../faktury/vstfak_md.php?copern=1&drupoh=1001&page=1&pocstav=0', '_self');
   }
-
-
+  function DodavFa()
+  {
+    window.open('../faktury/vstfak_md.php?copern=1&drupoh=1002&page=1&pocstav=0', '_self');
+  }
+  function OdberUcty()
+  {
+    window.open('../faktury/dodb_md.php?copern=1&page=1', '_self');
+  }
+  function DodavUcty()
+  {
+    window.open('../faktury/ddod_md.php?copern=1&page=1', '_self');
+  }
 
 
   </script>
