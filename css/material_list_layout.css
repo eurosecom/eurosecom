@@ -33,7 +33,7 @@
 table.ui-list {
   table-layout: fixed;
 }
-/* table header */
+/* list header */
 .ui-list-header th {
   color: rgba(255,255,255,.7);
   height: 32px;
@@ -53,6 +53,14 @@ table.ui-list {
 }
 .ui-list-content tr {
   height: 40px
+}
+.ui-list-content .ui-row-echo td {
+
+
+}
+.ui-list-content .ui-row-echo .mdl-button--icon {
+  color: rgba(0,0,0,.26);
+
 }
 .ui-list-content .ui-row-echo:not(:first-of-type) {
   border-top: 1px solid #CFD8DC;
@@ -75,7 +83,7 @@ table.ui-list {
   top: 6px;
   right: 8px;
 }
-/* table footer */
+/* list footer */
 .ui-list-footer {
   display: -webkit-box;
   display: -ms-flexbox;

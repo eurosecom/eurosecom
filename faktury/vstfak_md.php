@@ -470,8 +470,7 @@ if( $kli_vmcf > 0 ) { $dsql = mysql_query("$dsqlt"); echo "Znovu prenos ËÌselnÌk
 }
 //koniec oprava ciselnika uctdrdp
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
+
 
 // druh pohybu 1=odber , 2=dodav , 11=dodacielisty , 12=dodacielisty doprava , 21=VNF, 22=VNFdoprava
 $drupoh = strip_tags($_REQUEST['drupoh']);
@@ -1442,15 +1441,13 @@ $kli_nume=$mesiac_dan.".".$rok_dat;
 function gotoPage()
 {
   var chodna = document.forma3.page_goto.value;
-  window.open('vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=4&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&page=' + chodna + '', '_self');
+  window.open('vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&copern=4&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&page=' + chodna + '', '_self');
 }
 function navPage(chodna)
 {
-  window.open('vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&page=' + chodna + '', '_self');
-
+  window.open('vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&copern=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&page=' + chodna + '', '_self');
 }
 </script>
-
 <form name="formhl1" method="post" action="vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&drupoh=<?php echo $hdrupoh; ?>&page=1&copern=9&rozuct=<?php echo $rozuct;?>&sysx=<?php echo $sysx;?>&hladaj_uce=<?php echo $hladaj_uce; ?>">
   <div class="mdl-layout__header-row ui-header-page-row">
     <span id="header_title" class="mdl-layout-title mdl-color-text--white dropdown">
@@ -1473,7 +1470,7 @@ if( $drupoh == 21 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHER
 if( $drupoh == 22 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 13 ) ORDER BY dodb"); }
 if( $drupoh == 52 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 14 ) ORDER BY dodb"); }
 ?>
-  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" class="mdl-shadow--2dp select-btn">
+  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" autofocus class="mdl-shadow--2dp select-btn">
 <?php while($zaznam=mysql_fetch_array($sqls)): ?>
     <option value="<?php echo $zaznam["dodb"]; ?>">
 <?php
@@ -1487,7 +1484,7 @@ $poltxt = SubStr($polmen,0,20);
 <?php if ( $drupoh == 2 ) {
 $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_ddod WHERE ( drdo = 1 ) ORDER BY ucdo");
 ?>
-  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" class="mdl-shadow--2dp select-btn">
+  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" autofocus class="mdl-shadow--2dp select-btn">
 <?php while($zaznam=mysql_fetch_array($sqls)): ?>
     <option value="<?php echo $zaznam["ddod"]; ?>">
 <?php
@@ -1501,7 +1498,7 @@ $poltxt = SubStr($polmen,0,20);
 <?php if ( $drupoh == 42 ) {
 $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dpok WHERE ( drpk = 9 ) ORDER BY dpok");
 ?>
-  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" class="mdl-shadow--2dp select-btn">
+  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" autofocus class="mdl-shadow--2dp select-btn">
 <?php while($zaznam=mysql_fetch_array($sqls)):?>
     <option value="<?php echo $zaznam["dpok"];?>" >
 <?php
@@ -1512,119 +1509,26 @@ $poltxt = SubStr($polmen,0,20);
 <?php endwhile;?>
   </select>
 <?php                      } ?>
-  <div class="mdl-layout-spacer"></div>
 
-<!-- <input type="text" name="hladaj_dok" id="hladaj_dok" value="<?php echo $hladaj_dok; ?>"/>
+<div style="visibility: hidden;">
+<input type="text" name="hladaj_dok" id="hladaj_dok" value="<?php echo $hladaj_dok; ?>"/>
 <input type="text" name="hladaj_dat" id="hladaj_dat" value="<?php echo $hladaj_dat; ?>"/>
 <input type="text" name="hladaj_nai" id="hladaj_nai" value="<?php echo $hladaj_nai; ?>"/>
 <INPUT type="submit" id="hlad1" name="hlad1" value="Hæadaù">
-<a href="#" onclick="ResetHladanie();" title="Obnoviù" class="reset">Obnoviù</a>-->
-
-
-
-
-
-
-
-
-<?php
-if ( ( $drupoh == 1 OR $drupoh == 2 ) AND $pocstav != 1 )
-{
-?>
-<!--     <button type="button" id="view_list" onclick="viewFirms();" class="mdl-button mdl-js-button mdl-button--icon " style=""><i class="material-icons">print</i></button> -->
-<a href="#" onClick="ZoznamFaktur();"><img src='../obr/orig.png' width=15 height=15 border=0 alt="Zoznam fakt˙r PDF" title="Zoznam fakt˙r PDF"></a>
-<a href="#" onClick="ZoznamRaktur();"><img src='../obr/pdf.png' width=15 height=15 border=0 alt="Zoznam fakt˙r s roz˙ËtovanÌm PDF" title="Zoznam fakt˙r s roz˙ËtovanÌm PDF" ></a>
-
-<?php
-}
-?>
-
-<?php
-if ( $drupoh == 2 )
-  {
-?>
-
-<a href="#" onClick="window.open('vstf_importorangexml.php?copern=1&drupoh=<?php echo $drupoh;?>&page=1&cislo_uce=<?php echo $hladaj_uce;?>', '_self' )">
-<img src='../obr/import.png' width=15 height=15 border=0 title="Import ORANGE fakt˙r" ></a>
-
-
-<a href="#" onClick="window.open('vstf_importfakxml.php?copern=1&drupoh=<?php echo $drupoh;?>&page=1&cislo_uce=<?php echo $hladaj_uce;?>', '_self' )">
-<img src='../obr/import.png' width=15 height=15 border=0 title="Import XML fakt˙r" ></a>
-
-<?php
-  }
-?>
-
-
-<?php
-if ( $drupoh == 1 AND $pocstav != 1 )
-  {
-?>
-
-<a href="#" onClick="ExportFakturyCsv();">
-<img src='../obr/export.png' width=15 height=15 border=0 title="Export odberateæsk˝ch fakt˙r za <?php echo $kli_vume;?> do CSV" ></a>
-
-<?php
-  }
-?>
-<?php
-  if ( ( $drupoh == 2 OR $drupoh == 1 OR $drupoh == 12 ) AND $pocstav == 1 AND $kli_uzall > 3000 )
-  {
-?>
-<a href='../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>
-&copern=167&page=1&drupoh=<?php echo $drupoh; ?>&pocstav=<?php echo $pocstav; ?>'>
-<img src='../obr/kos.png' width=20 height=15 border=0 alt="Vymazanie vöetk˝ch poloûiek"></a>
-<a href='../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>
-&copern=155&page=1&drupoh=<?php echo $drupoh; ?>&pocstav=<?php echo $pocstav; ?>'>
-<img src='../obr/import.png' width=20 height=15 border=0 alt="Import ˙dajov z TXT"></a>
-<?php
-     }
-?>
-<?php
-  if ( $drupoh == 22 AND $fir_fico == '31419623' )
-  {
-?>
-<a href='../doprava/vnfpdf.php?copern=10&page=1&drupoh=22' target="_blank">
-<img src='../obr/pdf.png' width=20 height=15 border=0 alt="TlaË vöetk˝ch vn˙tropodnikov˝ch fakt˙r za mesiac <?php echo $kli_vume;?>"></a>
-<a href='vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=267&page=1&drupoh=22'>
-<img src='../obr/kos.png' width=20 height=15 border=0 alt="Vymazanie vöetk˝ch vn˙tropodnikov˝ch fakt˙r za mesiac <?php echo $kli_vume;?>"></a>
-<?php
-     }
-?>
-<?php
-  if ( $drupoh == 42 )
-  {
-$ajmes=0;
-?>
-<a href="#" title="KÛpia poslednÈho pokladniËnÈho dokladu" onClick="window.open('../doprava/regpok_pdf.php?copern=490&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">kPD
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="KÛpia poslednÈho pokladniËnÈho dokladu" ></a>
-<a href="#" title="KÛpia poslednej dennej uz·vierky" onClick="window.open('../doprava/regpok_pdf.php?copern=290&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">kDU
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="KÛpia poslednej dennej uz·vierky" ></a>
-<?php if( $ajmes == 1 ) { ?>
-<a href="#" title="KÛpia poslednej mesaËnej uz·vierky" onClick="window.open('../doprava/regpok.php?copern=390&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">kMU
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="KÛpia poslednej mesaËnej uz·vierky" ></a>
-<?php                   } ?>
-<a href="#" title="Nastavenie registraËnej pokladnice" onClick="window.open('../doprava/regpok.php?copern=1&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">Set
-<img src='../obr/naradie.png' width=20 height=15 border=0 title="Nastavenie registraËnej pokladnice" ></a>
-
-
-<a href="#" title="TlaË dennej uz·vierky" onClick="window.open('../doprava/regpok_pdf.php?copern=200&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">DU
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="TlaË dennej uz·vierky" ></a>
-<?php if( $ajmes == 1 ) { ?>
-<a href="#" title="TlaË mesaËnej uz·vierky" onClick="window.open('../doprava/regpok.php?copern=300&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">MU
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="TlaË mesaËnej uz·vierky" ></a>
-<?php                   } ?>
-<a href="#" title="TlaË priebeûnej uz·vierky" onClick="window.open('../doprava/regpok_pdf.php?copern=400&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">PU
-<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="TlaË priebeûnej uz·vierky" ></a>
-<?php
-     }
-?>
-
-
+<a href="#" onclick="ResetHladanie();" title="Obnoviù" class="reset">Obnoviù</a>
+</div>
+  <div class="mdl-layout-spacer"></div>
   <button type="button" id="new_item" onclick="newItem(); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;">
     <i class="material-icons">add</i>
   </button>
     <span class="mdl-tooltip" data-mdl-for="new_item">Vytvoriù nov˙ fakt˙ru</span> <!-- dopyt, oöetriù vöetky doklady -->
+
+
+
+  <button type="button" id="more_tool" class="mdl-button mdl-js-button mdl-button--icon">
+    <i class="material-icons">more_vert</i>
+  </button>
+    <span data-mdl-for="more_tool" class="mdl-tooltip">œalöie akcie</span>
   </div> <!-- .ui-header-page-row -->
 <div id="Okno"></div> <!-- dopyt, chcem daù preË -->
 </form>
@@ -1769,6 +1673,88 @@ if ( $drupoh == 11 )
   </div>
 </header>
 
+<!-- more header tools -->
+<div style="position:fixed; right: 0; top: 0; z-index: 10;">
+  <ul for="more_tool" class="mdl-menu mdl-menu--bottom-right mdl-js-menu">
+<?php if ( ( $drupoh == 1 OR $drupoh == 2 ) AND $pocstav != 1 ) { ?>
+    <li class="mdl-menu__item" onclick="listFaktury();" style="height: 40px; line-height: 40px;">
+      <i class="material-icons vacenter" style="margin-right: 16px;">print</i>Fakt˙ry <?php echo $kli_vume; ?>
+    </li>
+<?php if ( $sysx == 'UCT' ) { ?>
+    <li class="mdl-menu__item" onclick="listFakturyUct();">
+      <i class="material-icons vacenter">print</i>Fakt. <?php echo $kli_vume; ?> + roz˙Ët.
+    </li>
+<?php                       } ?>
+<?php } ?>
+
+<?php if ( $drupoh == 1 AND $pocstav != 1 ) { ?>
+    <li class="mdl-menu__item" onclick="ExportFakturyCsv();">
+      <i class="material-icons vacenter">file_upload</i>Fakt˙ry <?php echo $kli_vume; ?> do CSV
+    </li>
+<?php                                       } ?>
+
+<?php if ( $drupoh == 2 ) { ?>
+    <li class="mdl-menu__item" onclick="window.open('vstf_importorangexml.php?copern=1&drupoh=<?php echo $drupoh; ?>&page=1&cislo_uce=<?php echo $hladaj_uce; ?>', '_self');">
+      <i class="material-icons vacenter">file_download</i>Orange fakt˙ry <?php echo $kli_vume; ?>
+    </li>
+    <li class="mdl-menu__item" onclick="window.open('vstf_importfakxml.php?copern=1&drupoh=<?php echo $drupoh; ?>&page=1&cislo_uce=<?php echo $hladaj_uce; ?>', '_self');">
+      <i class="material-icons vacenter">file_download</i>Fakt˙ry v XML <?php echo $kli_vume; ?>
+    </li>
+<?php } ?>
+
+<?php if ( ( $drupoh == 2 OR $drupoh == 1 OR $drupoh == 12 ) AND $pocstav == 1 AND $kli_uzall > 3000 ) { ?> <!-- dopyt, $drupoh zbytoËnÈ, alebo aj tam je poËiatoËn˝ stav -->
+    <li class="mdl-menu__item" onclick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=167&page=1&drupoh=<?php echo $drupoh; ?>&pocstav=<?php echo $pocstav; ?>', '_self');">
+      <i class="material-icons vacenter">cancel</i>Vöetky poloûky
+    </li> <!-- dopyt, pred vymazanÌm op˝taù -->
+    <li class="mdl-menu__item" onclick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=155&page=1&drupoh=<?php echo $drupoh; ?>&pocstav=<?php echo $pocstav; ?>', '_self');">
+      <i class="material-icons vacenter">file_download</i>⁄daje v TXT
+    </li>
+<?php      } ?>
+
+<?php if ( $drupoh == 22 AND $fir_fico == '31419623' ) { ?>
+    <li class="mdl-menu__item" onclick="window.open('../doprava/vnfpdf.php?copern=10&page=1&drupoh=22', '_blank', frame);">
+      <i class="material-icons vacenter">print</i>Vn˙tropod. fakt. <?php echo $kli_vume; ?>
+    </li>
+    <li class="mdl-menu__item" onclick="window.open('vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=267&page=1&drupoh=22', '_self');">
+      <i class="material-icons vacenter">cancel</i>Vn˙tropod. fakt. <?php echo $kli_vume; ?>
+    </li> <!-- dopyt, pred vymazanÌm op˝taù -->
+<?php } ?>
+
+<?php
+  if ( $drupoh == 42 )
+  {
+$ajmes=0;
+?>
+<a href="#" title="KÛpia poslednÈho pokladniËnÈho dokladu" onClick="window.open('../doprava/regpok_pdf.php?copern=490&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">kPD
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="KÛpia poslednÈho pokladniËnÈho dokladu" ></a>
+<a href="#" title="KÛpia poslednej dennej uz·vierky" onClick="window.open('../doprava/regpok_pdf.php?copern=290&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">kDU
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="KÛpia poslednej dennej uz·vierky" ></a>
+<?php if( $ajmes == 1 ) { ?>
+<a href="#" title="KÛpia poslednej mesaËnej uz·vierky" onClick="window.open('../doprava/regpok.php?copern=390&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">kMU
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="KÛpia poslednej mesaËnej uz·vierky" ></a>
+<?php                   } ?>
+<a href="#" title="Nastavenie registraËnej pokladnice" onClick="window.open('../doprava/regpok.php?copern=1&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">Set
+<img src='../obr/naradie.png' width=20 height=15 border=0 title="Nastavenie registraËnej pokladnice" ></a>
+
+
+<a href="#" title="TlaË dennej uz·vierky" onClick="window.open('../doprava/regpok_pdf.php?copern=200&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">DU
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="TlaË dennej uz·vierky" ></a>
+<?php if( $ajmes == 1 ) { ?>
+<a href="#" title="TlaË mesaËnej uz·vierky" onClick="window.open('../doprava/regpok.php?copern=300&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">MU
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="TlaË mesaËnej uz·vierky" ></a>
+<?php                   } ?>
+<a href="#" title="TlaË priebeûnej uz·vierky" onClick="window.open('../doprava/regpok_pdf.php?copern=400&page=1&drupoh=42', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">PU
+<img src='../obr/ziarovka.png' width=20 height=15 border=0 title="TlaË priebeûnej uz·vierky" ></a>
+<?php
+     }
+?>
+  </ul>
+</div> <!-- more header tools -->
+
+
+
+
+
 <main class="mdl-layout__content ui-content sticky-footer">
 <div class="wrap-ui-list">
   <table class="ui-list-content ui-list ui-container">
@@ -1782,7 +1768,7 @@ if ( $drupoh == 11 )
 $riadok=mysql_fetch_object($sql);
 ?>
   <tr class="ui-row-echo">
-    <td><?php echo $riadok->uce; ?></td>
+    <td><span style="color: rgba(0, 0, 0, 0.54); "><?php echo $riadok->uce; ?></span></td>
     <td>
 <?php if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 21 OR $drupoh == 31 OR $drupoh == 22 OR $drupoh == 42 )
       {
@@ -1794,7 +1780,7 @@ $uctminusdok=$riadok->hodu-$riadok->hod;
 <?php
   }
 ?>
-<strong><?php echo $riadok->dok;?></strong> -
+<?php echo $riadok->dok;?> -
 <span id="dokfak" onclick="ListaFakUct(<?php echo $riadok->fak; ?>);" title="Zobraziù doklady s ËÌslom fakt˙ry <?php echo $riadok->fak; ?>" class="text-link-out"><?php echo $riadok->fak; ?></span>
 <?php if ( $uctminusdok != 0 AND $riadok->hod != 0 AND $sysx == 'UCT' AND $kli_vduj >= 0 AND $pocstav != 1 ) { ?>
 <img src='../obr/eschange/pozor.png' title='Doklad nie je spr·vne roz˙Ëtovan˝' style='vertical-align:-4px;'> <!-- dopyt, nie cez echo <span> s background a hl·öka vyskakovacia s pozadÌm, napr. #F39C12 -->
@@ -1819,7 +1805,7 @@ if ( $drupoh == 52 ) echo "$riadok->dok - $riadok->prf";
 <?php if ( $drupoh == 21 OR $drupoh == 22 ) echo "$riadok->nai - $riadok->str - $riadok->zak"; ?>
 <?php if ( $drupoh == 42 ) echo "$riadok->nai"; ?>
     </td>
-    <td>
+    <td style="color: rgba(0, 0, 0, 0.54);">
 <?php
 if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 31 OR $drupoh == 52 ) echo "$riadok->str - $riadok->zak";
 if ( $drupoh == 21 OR $drupoh == 22 ) echo "$riadok->strv - $riadok->zakv";
@@ -1827,20 +1813,20 @@ if ( $drupoh == 42 ) echo $riadok->txp;
 ?>
     </td>
     <td>
-     <strong><?php if ( $sysx == 'UCT' AND $pocstav != 1 ) { echo "$riadok->hodu / "; } ?></strong><?php echo $riadok->hod; ?>
+     <?php if ( $sysx == 'UCT' AND $pocstav != 1 ) { echo "$riadok->hodu / "; } ?><span style="color: rgba(0,0,0,.54);"><?php echo $riadok->hod; ?></span>
     </td>
     <td>
 <?php
 if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 31 OR $drupoh == 21 OR $drupoh == 12 OR $drupoh == 22 OR $drupoh == 52 )
      {
 ?>
-      <button type="button" id="view<?php echo $riadok->dok; ?>" onclick="viewItem(<?php echo $riadok->dok; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">print</i></button>
+      <button type="button" id="view<?php echo $riadok->dok; ?>" onclick="viewItem(<?php echo $riadok->dok; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">print</i></button>
         <div data-mdl-for="view<?php echo $riadok->dok; ?>" class="mdl-tooltip">Zobraziù v PDF</div>
 <?php
      }
 ?>
 <?php if( $drupoh == 42 )  { ?>
-      <a href="#" onClick="window.open('../doprava/regpok_pdf.php?copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&sysx=<?php echo $sysx; ?>&cislo_dok=<?php echo $riadok->dok;?>&regpok=<?php echo $regpok;?>', '_blank', '<?php echo $tlcuwin; ?>' )"><img src='../obr/tlac.png' width=15 height=10 border=0 title="TlaË vybranÈho dokladu " ></a>
+      <a href="#" onClick="window.open('../doprava/regpok_pdf.php?copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&sysx=<?php echo $sysx; ?>&cislo_dok=<?php echo $riadok->dok;?>&regpok=<?php echo $regpok;?>', '_blank', frame);"><img src='../obr/tlac.png' width=15 height=10 border=0 title="TlaË vybranÈho dokladu " ></a>
 <?php                                                 } ?>
 
 <?php
@@ -1852,13 +1838,13 @@ if( $drupoh == 42 AND $kli_uzid == 114 AND $_SERVER['SERVER_NAME'] == "www.educt
 if( $copern != 10 AND $ukazzmaz == 1  )
 {
 ?>
-      <button type="button" id="edit<?php echo $riadok->dok; ?>" onclick="editItem(<?php echo $riadok->dok; ?>); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--light-blue-500"><i class="material-icons">edit</i></button>
+      <button type="button" id="edit<?php echo $riadok->dok; ?>" onclick="editItem(<?php echo $riadok->dok; ?>); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">edit</i></button>
         <div data-mdl-for="edit<?php echo $riadok->dok; ?>" class="mdl-tooltip">Upraviù</div>
 <?php
 }
 ?>
 <?php if ( $copern != 10 AND $ukazzmaz == 1 AND $kli_nemazat != 1 ) { ?>
-      <button type="button" id="remove<?php echo $riadok->dok; ?>" onclick="removeItem(<?php echo $riadok->dok; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--red-500"><i class="material-icons">remove</i></button>
+      <button type="button" id="remove<?php echo $riadok->dok; ?>" onclick="removeItem(<?php echo $riadok->dok; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">remove</i></button>
         <div data-mdl-for="remove<?php echo $riadok->dok; ?>" class="mdl-tooltip">Vymazaù</div>
 <?php                                                               } ?>
 
@@ -1933,7 +1919,7 @@ $i = $i + 1;
 ?>
   </table> <!-- .ui-list -->
 </form>
-<form name="forma3" method="post" action="#"> <!-- vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=4&drupoh=<?php echo $drupoh;?>&hladaj_uce=<?php echo $hladaj_uce; ?>&page=<?php echo $xstr;?> -->
+<form name="forma3" method="post" action="#">
   <div class="ui-list-footer ui-list ui-container">
     <span>= <?php echo $cpol; ?></span>
     <div class="mdl-layout-spacer"></div>
@@ -1954,23 +1940,6 @@ $is = $is + 1;
       <div class="mdl-tooltip" data-mdl-for="page_prev">Prejsù na stranu <?php echo $ppage; ?></div>
     <button type="button" id="page_next" onclick="navPage(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_next</i></button>
       <div class="mdl-tooltip" data-mdl-for="page_next">Prejsù na stranu <?php echo $npage; ?></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </div> <!-- .ui-table-pagination -->
 </form>
 
@@ -2066,6 +2035,12 @@ mysql_free_result($sql);
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <SCRIPT Language="JavaScript" Src="../js/cookies.js"></SCRIPT>
 <script type="text/javascript">
+//dimensions blank window
+var frame = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, height=900';
+
+
+
+
 //month nav
   function navMonth(kam)
   {
@@ -2090,9 +2065,9 @@ mysql_free_result($sql);
 
 
 
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
+
+
+
 
 
 
@@ -2105,16 +2080,16 @@ var vyskawin = screen.height-175;
 
   var ucet = document.formhl1.hladaj_uce.value;
 <?php if( $sysx != 'UCT' ) { ?>
-  var okno = window.open("vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&hladaj_uce=" + ucet + "&drupoh=<?php echo 2*1000+$drupoh;?>&page=1&copern=1", "_self");
+  window.open('vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&hladaj_uce=' + ucet + '&drupoh=<?php echo 2*1000+$drupoh;?>&page=1&copern=1', '_self');
 <?php                      } ?>
 <?php if( $sysx == 'UCT' ) { ?>
-  var okno = window.open("vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&hladaj_uce=" + ucet + "&drupoh=<?php echo 1*1000+$drupoh;?>&page=1&copern=1", "_self");
+  window.open('vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&hladaj_uce=' + ucet + '&drupoh=<?php echo 1*1000+$drupoh;?>&page=1&copern=1', '_self');
 <?php                      } ?>
       }
 
 
 //funkcia na zobrazenie popisu
-    function UkazSkryj (text)
+    function UkazSkryj (text) //dopyt, keÔ pÙjde preË tlaËÌtko tak aj toto
     {
 <?php if( $_SESSION['nieie'] == 0 )  { ?>
         Okno.innerHTML = text ;
@@ -2124,43 +2099,7 @@ var vyskawin = screen.height-175;
 <?php                                } ?>
     }
 
-// Kontrola cisla celeho v rozsahu x az y
-      function intg(x1,x,y,Oznam)
-      {
-       var b;
-       b=x1.value;
-       var anyString=b;
-       Oznam.style.display="none";
-         if (b == "") return true;
-         else{
-         if (Math.floor(b)==b && b>=x && b<=y) return true;
-         else {
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         return false;
-              }
-             }
-      }
 
-// Kontrola des.cisla v rozsahu x az y
-      function cele(x1,x,y,Oznam)
-      {
-       var b;
-       b=x1.value;
-       var anyString=b;
-       Oznam.style.display="none";
-         if (b == "") return true;
-         else{
-         if (b>=x && b<=y) return true;
-         else {
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         return false;
-              }
-             }
-      }
 
 <?php
 //hladanie
@@ -2169,7 +2108,7 @@ var vyskawin = screen.height-175;
 ?>
     function VyberVstup()
     {
-    document.formhl1.hladaj_nai.focus();
+//    document.formhl1.hladaj_nai.focus();
 <?php if ( $copern != 10 AND ( $drupoh == 1 OR $drupoh == 31 ) ) echo "document.formp2.pokl.disabled = true;"; ?>
     }
 
@@ -2204,22 +2143,12 @@ var vyskawin = screen.height-175;
   if ( $copern == 1 OR $copern == 2 OR $copern == 3 OR $copern == 4 OR $copern == 10 )
   {
 ?>
-//  Kontrola cisla
-    function KontrolaCisla(Vstup, Oznam)
-    {
-//     if ( Vstup.value.search(/[^0-9]/g) != -1) { Oznam.style.display=""; document.forma3.sstrana.disabled = true; }
-//     else { Oznam.style.display="none"; document.forma3.sstrana.disabled = false; }
-    }
+
 
     function VyberVstup()
     {
-   document.formhl1.hladaj_uce.focus();
+//   document.formhl1.hladaj_uce.focus();
    document.forma3.page_goto.value = '<?php echo "$page"; ?>';
-
-
-
-
-
     }
 
     function ObnovUI()
@@ -2244,115 +2173,42 @@ var vyskawin = screen.height-175;
    document.forma3.page_next.disabled = true;
 <?php } ?>
 
-
-
-
-
-
-//   function PredchStrana()
-//   {
-// <?php if ( $copern != 9 ) { ?>
-//    window.open('vstfak_new.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=3&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&page=<?php echo $ppage; ?>', '_self');
-// <?php                     } ?>
-// <?php if ( $copern == 9 ) { ?>
-//    window.open('vstfak_new.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&hladaj_uce=<?php echo $hladaj_uce; ?>&hladaj_dat=<?php echo $hladaj_dat; ?>&hladaj_dok=<?php echo $hladaj_dok; ?>&hladaj_nai=<?php echo $hladaj_nai; ?>&drupoh=<?php echo $drupoh; ?>&page=<?php echo $ppage; ?>', '_self');
-// <?php                     } ?>
-//   }
-//   function DalsiaStrana()
-//   {
-// <?php if ( $copern != 9 ) { ?>
-//    window.open('vstfak_new.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=2&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&page=<?php echo $npage; ?>', '_self');
-// <?php                     } ?>
-// <?php if ( $copern == 9 ) { ?>
-//    window.open('vstfak_new.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&hladaj_uce=<?php echo $hladaj_uce; ?>&hladaj_dat=<?php echo $hladaj_dat; ?>&hladaj_dok=<?php echo $hladaj_dok; ?>&hladaj_nai=<?php echo $hladaj_nai; ?>&drupoh=<?php echo $drupoh; ?>&page=<?php echo $npage; ?>', '_self');
-// <?php                     } ?>
-//   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 <?php
   }
 ?>
 
-<?php if ( $drupoh == 1 AND $_SESSION['nieie'] == 0 )  { ?>
-    function ZoznamFaktur()
-    {
-    var hladaj_dok = document.formhl1.hladaj_dok.value;
-    var ucet = document.formhl1.hladaj_uce.value;
-    window.open('../ucto/zozdok.php?copern=101&drupoh=1&page=1&cislo_uce=' + ucet + '&hladaj_dok=' + hladaj_dok + '&page=1', '_blank', '<?php echo $tlcswin; ?>' )
-    }
 
-    function ZoznamRaktur()
-    {
+  function listFaktury()
+  {
     var hladaj_dok = document.formhl1.hladaj_dok.value;
     var ucet = document.formhl1.hladaj_uce.value;
-    window.open('../ucto/rozdok.php?copern=101&drupoh=1&page=1&cislo_uce=' + ucet + '&hladaj_dok=' + hladaj_dok + '&page=1&tlacitR=1', '_blank', '<?php echo $tlcswin; ?>' )
-    }
-<?php  } ?>
+<?php if ( $drupoh == 1 ) { ?>
+    window.open('../ucto/zozdok.php?copern=101&drupoh=1&page=1&cislo_uce=' + ucet + '&hladaj_dok=' + hladaj_dok + '&page=1', '_blank', frame);
+<?php                     } ?>
+<?php if ( $drupoh == 2 ) { ?>
+    window.open('../ucto/zozdok.php?copern=102&drupoh=2&page=1&cislo_uce=' + ucet + '&hladaj_dok=' + hladaj_dok + '&page=1', '_blank', frame);
+<?php                     } ?>
+  }
+  function listFakturyUct()
+  {
+    var hladaj_dok = document.formhl1.hladaj_dok.value;
+    var ucet = document.formhl1.hladaj_uce.value;
+<?php if ( $drupoh == 1 ) { ?>
+    window.open('../ucto/rozdok.php?copern=101&drupoh=1&page=1&cislo_uce=' + ucet + '&hladaj_dok=' + hladaj_dok + '&page=1&tlacitR=1', '_blank', frame);
+<?php                     } ?>
+<?php if ( $drupoh == 2 ) { ?>
+    window.open('../ucto/rozdok.php?copern=102&drupoh=2&page=1&cislo_uce=' + ucet + '&hladaj_dok=' + hladaj_dok + '&page=1&tlacitR=1', '_blank', frame);
+<?php                     } ?>
+  }
 
-<?php if ( $drupoh == 2 AND $_SESSION['nieie'] == 0 )  { ?>
-    function ZoznamFaktur()
-    {
-    var hladaj_dok = document.formhl1.hladaj_dok.value;
-    var ucet = document.formhl1.hladaj_uce.value;
-    window.open('../ucto/zozdok.php?copern=102&drupoh=2&page=1&cislo_uce=' + ucet + '&hladaj_dok=' + hladaj_dok + '&page=1', '_blank', '<?php echo $tlcswin; ?>' )
-    }
-    function ZoznamRaktur()
-    {
-    var hladaj_dok = document.formhl1.hladaj_dok.value;
-    var ucet = document.formhl1.hladaj_uce.value;
-    window.open('../ucto/rozdok.php?copern=102&drupoh=2&page=1&cislo_uce=' + ucet + '&hladaj_dok=' + hladaj_dok + '&page=1&tlacitR=1', '_blank', '<?php echo $tlcswin; ?>' )
-    }
-<?php  } ?>
 
-<?php if ( $drupoh == 1 AND $_SESSION['nieie'] == 1 )  { ?>
-    function ZoznamFaktur()
-    {
-    var hladaj_dok = document.formhl1.hladaj_dok.value;
-    var ucet = document.formhl1.hladaj_uce.value;
-    window.open('../ucto/zozdok.php?copern=101&drupoh=1&page=1&cislo_uce=' + ucet + '&hladaj_dok=' + hladaj_dok + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-    }
 
-    function ZoznamRaktur()
-    {
-    var hladaj_dok = document.formhl1.hladaj_dok.value;
-    var ucet = document.formhl1.hladaj_uce.value;
-    window.open('../ucto/rozdok.php?copern=101&drupoh=1&page=1&cislo_uce=' + ucet + '&hladaj_dok=' + hladaj_dok + '&page=1&tlacitR=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-    }
-<?php  } ?>
 
-<?php if ( $drupoh == 2 AND $_SESSION['nieie'] == 1 )  { ?>
-    function ZoznamFaktur()
-    {
-    var hladaj_dok = document.formhl1.hladaj_dok.value;
-    var ucet = document.formhl1.hladaj_uce.value;
-    window.open('../ucto/zozdok.php?copern=102&drupoh=2&page=1&cislo_uce=' + ucet + '&hladaj_dok=' + hladaj_dok + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-    }
-    function ZoznamRaktur()
-    {
-    var hladaj_dok = document.formhl1.hladaj_dok.value;
-    var ucet = document.formhl1.hladaj_uce.value;
-    window.open('../ucto/rozdok.php?copern=102&drupoh=2&page=1&cislo_uce=' + ucet + '&hladaj_dok=' + hladaj_dok + '&page=1&tlacitR=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-    }
-<?php  } ?>
+
+
+
+
 
 
 
@@ -2396,7 +2252,7 @@ var vyskawin = screen.height-175;
     function VytlacPokl(doklad)
     {
     var cislo_dok = doklad;
-    window.open('pokldok_pdf.php?cislo_dok=' + cislo_dok + '&fff=1', '_blank', '<?php echo $tlcuwin; ?>' )
+    window.open('pokldok_pdf.php?cislo_dok=' + cislo_dok + '&fff=1', '_blank', frame);
     }
 <?php                        } ?>
 
@@ -2418,7 +2274,7 @@ window.open('../faktury/int_fakt.php?copern=55&page=1&h_sys=85&h_obdp=<?php echo
                 }
 
 
-
+//header title nav
   function OdberFa()
   {
     window.open('../faktury/vstfak_md.php?copern=1&drupoh=1001&page=1&pocstav=0', '_self');
