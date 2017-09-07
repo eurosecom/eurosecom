@@ -891,7 +891,7 @@ $riadok=mysql_fetch_object($sql);
     <div class="mdl-cell mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-color--white" style="padding: 24px 16px 20px 32px;">
 
 <?php
-if ( $kopkli == 1 )
+if ( $kopkli == 1 AND $uprav == 1 )
      {
 echo "Uložené zmeny.";
      }
