@@ -489,11 +489,11 @@ if ( $vyb_duj == 9 ) { echo "jednoduché"; }
 <button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
   <i class="material-icons md-40">navigate_before</i>
 </button>
-  <div class="mdl-tooltip" data-mdl-for="month_prev">Prejs na <?php echo $kli_pume; ?></div>
+  <span class="mdl-tooltip" data-mdl-for="month_prev">Prejs na <?php echo $kli_pume; ?></span>
 <button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
   <i class="material-icons md-40">navigate_next</i>
 </button>
-  <div class="mdl-tooltip" data-mdl-for="month_next">Prejs na <?php echo $kli_dume; ?></div>
+  <span class="mdl-tooltip" data-mdl-for="month_next">Prejs na <?php echo $kli_dume; ?></span>
 
 
 

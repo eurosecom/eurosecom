@@ -246,6 +246,7 @@ th, td {
   position: relative;
   line-height: 1.2;
   text-align: left;
+  padding: 0;
 }
 th {
   font-size: 11px;
@@ -257,7 +258,6 @@ th {
 td {
   font-size: 12px;
   color: rgba(0,0,0,.87);
-  /*color: rgba(0,0,0,.54);*/
   letter-spacing: .01em;
 }
 td strong {
@@ -422,6 +422,8 @@ table .mini-icon-btn {
 
 
 /* BUTTON */
+
+
 .period-nav-btn {
   position: absolute;
   z-index: 10;
@@ -441,7 +443,16 @@ table .mini-icon-btn {
 }
 
 
-
+/* more tools menu */
+.tool-more-menu .mdl-menu__item {
+  height: 40px;
+  line-height: 40px;
+}
+.tool-more-menu .mdl-menu__item .material-icons {
+  vertical-align: middle;
+  margin-right: 16px;
+  color: rgba(0,0,0,.54);
+}
 
 
 

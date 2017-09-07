@@ -1148,7 +1148,7 @@ if ( $drupoh == 52 ) echo "Predfaktúry";
   text-align: left;
 }
 .ui-list th:nth-child(2), .ui-list td:nth-child(2) {
-  width: 18%;
+  width: 20%;
   text-align: left;
 }
 .ui-list th:nth-child(3), .ui-list td:nth-child(3) {
@@ -1160,18 +1160,22 @@ if ( $drupoh == 52 ) echo "Predfaktúry";
   text-align: left;
 }
 .ui-list th:nth-child(5), .ui-list td:nth-child(5) {
-  width: 8%;
-  text-align: left;
+  width: 10%;
+  text-align: right;
 }
 .ui-list th:nth-child(6), .ui-list td:nth-child(6) {
-  width: 14%;
+  width: 16%;
   text-align: right;
 }
 .ui-list th:nth-child(7), .ui-list td:nth-child(7) {
-  width: 21%;
+  width: 15%;
   text-align: right;
+  padding-right: 0;
 }
+.ui-list td:nth-child(1), .ui-list td:nth-child(5) {
+  color: rgba(0,0,0,.54);
 
+}
 
 
 
@@ -1521,14 +1525,14 @@ $poltxt = SubStr($polmen,0,20);
   <button type="button" id="new_item" onclick="newItem(); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;">
     <i class="material-icons">add</i>
   </button>
-    <span class="mdl-tooltip" data-mdl-for="new_item">Vytvori novú faktúru</span> <!-- dopyt, ošetri všetky doklady -->
+    <span class="mdl-tooltip" data-mdl-for="new_item">Vytvori novú faktúru</span>
 
 
 
-  <button type="button" id="more_tool" class="mdl-button mdl-js-button mdl-button--icon">
+  <button type="button" id="header_more_tool" class="mdl-button mdl-js-button mdl-button--icon" style="margin-left: 12px;">
     <i class="material-icons">more_vert</i>
   </button>
-    <span data-mdl-for="more_tool" class="mdl-tooltip">Ïalšie akcie</span>
+    <span data-mdl-for="header_more_tool" class="mdl-tooltip">Ïalšie akcie</span>
   </div> <!-- .ui-header-page-row -->
 <div id="Okno"></div> <!-- dopyt, chcem da preè -->
 </form>
@@ -1673,35 +1677,334 @@ if ( $drupoh == 11 )
   </div>
 </header>
 
+<main class="mdl-layout__content ui-content sticky-footer">
+<div class="wrap-ui-list">
+  <table class="ui-list-content ui-list ui-container">
+<?php
+   while ( $i <= $konc )
+   {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+  {
+$riadok=mysql_fetch_object($sql);
+?>
+  <tr class="ui-row-echo">
+    <td><label class="vacenter"><?php echo $riadok->uce; ?></label></td>
+    <td>
+<?php if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 21 OR $drupoh == 31 OR $drupoh == 22 OR $drupoh == 42 )
+      {
+$uctminusdok=$riadok->hodu-$riadok->hod;
+  if ( $sysx == 'UCT' AND $kli_vduj >= 0 AND $pocstav != 1 ) {
+?>
+      <button type="button" id="account<?php echo $riadok->dok; ?>" onclick="accountItem(); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">menu</i>
+      </button>
+        <span data-mdl-for="account<?php echo $riadok->dok; ?>" class="mdl-tooltip">Rozúètovanie dokladu</span>
+<?php   } ?>
+      <label style="position: relative; top: 2px;"><?php echo $riadok->dok; ?> -</label>
+      <label id="dokfak<?php echo $riadok->dok; ?>" onclick="ListaFakUct(<?php echo $riadok->fak; ?>);" style="position: relative; top: 2px;"><?php echo $riadok->fak; ?></label>
+        <span data-mdl-for="dokfak<?php echo $riadok->dok; ?>" class="mdl-tooltip">Zobrazi doklady s èíslom faktúry <?php echo $riadok->fak; ?></span>
+<?php if ( $uctminusdok != 0 AND $riadok->hod != 0 AND $sysx == 'UCT' AND $kli_vduj >= 0 AND $pocstav != 1 ) { ?>
+      <i id="account_alert" class="material-icons md-18 mdl-color-text--red-500 vacenter">priority_high</i>
+        <span data-mdl-for="account_alert" class="mdl-tooltip">Doklad nie je správne rozúètovanı</span>
+<?php                                                                                                        } ?>
+<?php
+      }
+if ( $drupoh == 11 OR $drupoh == 12 ) echo "$riadok->dok - $riadok->dol";
+if ( $drupoh == 52 ) echo "$riadok->dok - $riadok->prf";
+?>
+    </td>
+    <td>
+      <label class="vacenter"><?php echo $riadok->dat; ?></label>
+<?php if ( $drupoh == 42 ) { ?>
+<a href="#" onclick="uzavierka(<?php echo $riadok->dok;?>)" title="Rozpis dennej uzávierky z <?php echo $riadok->dat; ?>">uzavierka</a>
+<?php                      } ?>
+    </td>
+    <td>
+<?php if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 31 OR $drupoh == 52 ) { ?>
+      <label id="dokico<?php echo $riadok->dok; ?>" onclick="ListaIcoUct(<?php echo $riadok->ico; ?>);" class="vacenter"><?php echo $riadok->ico; ?></label>
+        <span data-mdl-for="dokico<?php echo $riadok->dok; ?>" class="mdl-tooltip">Zobrazi doklady s ièo <?php echo $riadok->ico; ?></span>
+      <label class="vacenter"><?php echo $riadok->nai; ?></label>
+<?php } ?>
+<?php if ( $drupoh == 21 OR $drupoh == 22 ) echo "$riadok->nai - $riadok->str - $riadok->zak"; ?>
+<?php if ( $drupoh == 42 ) echo "$riadok->nai"; ?>
+    </td>
+    <td>
+      <label class="vacenter">
+<?php
+if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 31 OR $drupoh == 52 ) echo "$riadok->str - $riadok->zak";
+if ( $drupoh == 21 OR $drupoh == 22 ) echo "$riadok->strv - $riadok->zakv";
+if ( $drupoh == 42 ) echo $riadok->txp;
+?>
+      </label>
+    </td>
+    <td>
+      <label class="vacenter">
+<?php if ( $sysx == 'UCT' AND $pocstav != 1 ) { echo "$riadok->hodu / "; } ?><span style="color: rgba(0,0,0,.54);"><?php echo $riadok->hod; ?></span>
+      </label>
+    </td>
+    <td>
+<?php
+if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 31 OR $drupoh == 21 OR $drupoh == 12 OR $drupoh == 22 OR $drupoh == 52 )
+     {
+?>
+      <button type="button" id="view<?php echo $riadok->dok; ?>" onclick="viewItem(<?php echo $riadok->dok; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-layout--large-screen-only">
+        <i class="material-icons">print</i>
+      </button>
+        <span data-mdl-for="view<?php echo $riadok->dok; ?>" class="mdl-tooltip">Zobrazi v PDF</span>
+<?php
+     }
+?>
+<?php
+$ukazzmaz=1;
+if( $drupoh == 42 ) { $nezar = 1*$riadok->ruc; }
+if( $drupoh == 42 AND $nezar != 0 ) { $ukazzmaz = 0; }
+if( $drupoh == 42 AND $kli_uzid == 17 ) { $ukazzmaz = 1; }
+if( $drupoh == 42 AND $kli_uzid == 114 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ukazzmaz = 1; }
+if( $copern != 10 AND $ukazzmaz == 1  )
+{
+?>
+      <button type="button" id="edit<?php echo $riadok->dok; ?>" onclick="editItem(<?php echo $riadok->dok; ?>); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--icon mdl-layout--large-screen-only">
+        <i class="material-icons">edit</i>
+      </button>
+        <span data-mdl-for="edit<?php echo $riadok->dok; ?>" class="mdl-tooltip">Upravi</span>
+<?php
+}
+?>
+<?php if( $drupoh == 42 )  { ?>
+      <a href="#" onClick="window.open('../doprava/regpok_pdf.php?copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&sysx=<?php echo $sysx; ?>&cislo_dok=<?php echo $riadok->dok;?>&regpok=<?php echo $regpok;?>', '_blank', frame);"><img src='../obr/tlac.png' width=15 height=10 border=0 title="Tlaè vybraného dokladu " ></a>
+<?php                                                 } ?>
+      <button type="button" id="more<?php echo $riadok->dok; ?>" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">more_vert</i>
+      </button>
+        <span data-mdl-for="more<?php echo $riadok->dok; ?>" class="mdl-tooltip">Ïalšie akcie</span>
+        <ul for="more<?php echo $riadok->dok; ?>" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect tool-more-menu">
+<?php
+if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 31 OR $drupoh == 21 OR $drupoh == 12 OR $drupoh == 22 OR $drupoh == 52 ) { ?>
+          <li onclick="viewItem(<?php echo $riadok->dok; ?>);" class="mdl-menu__item mdl-layout--small-screen-only">
+            <i class="material-icons">print</i>Zobrazi v PDF
+          </li>
+<?php } ?>
+<?php
+$ukazzmaz=1;
+if( $drupoh == 42 ) { $nezar = 1*$riadok->ruc; }
+if( $drupoh == 42 AND $nezar != 0 ) { $ukazzmaz = 0; }
+if( $drupoh == 42 AND $kli_uzid == 17 ) { $ukazzmaz = 1; }
+if( $drupoh == 42 AND $kli_uzid == 114 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ukazzmaz = 1; }
+if( $copern != 10 AND $ukazzmaz == 1  )
+{
+?>
+          <li onclick="editItem(<?php echo $riadok->dok; ?>); window.name = 'zoznam';" class="mdl-menu__item mdl-layout--small-screen-only">
+            <i class="material-icons">edit</i>Upravi
+          </li>
+<?php
+}
+?>
+<?php if ( $copern != 10 AND $ukazzmaz == 1 AND $kli_nemazat != 1 ) { ?>
+          <li onclick="removeItem(<?php echo $riadok->dok; ?>);" class="mdl-menu__item">
+            <i class="material-icons">remove</i>Vymaza
+          </li>
+<?php } ?>
+<?php
+//aky subor existuje podla toho daj koncovku
+$jesub=0;
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.pdf"))
+{
+$jesub=1;
+?>
+          <li onclick="window.open('../dokumenty/FIR<?php echo $kli_vxcf; ?>/<?php echo $adrdok; ?>/d<?php echo $riadok->dok; ?>.pdf', '_blank', frame);" class="mdl-menu__item">
+            <i class="material-icons">picture_as_pdf</i>Zobrazi originál v PDF
+          </li>
+<?php
+}
+?>
+<?php
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.jpg") AND $jesub == 0 )
+{
+$jesub=1;
+?>
+          <li onclick="window.open('../dokumenty/FIR<?php echo $kli_vxcf; ?>/<?php echo $adrdok; ?>/d<?php echo $riadok->dok; ?>.jpg', '_blank', frame);" class="mdl-menu__item">
+            <i class="material-icons">photo_library</i>Zobrazi originál v JPG
+          </li>
+<?php
+}
+?>
+<?php
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.bmp") AND $jesub == 0 )
+{
+$jesub=1;
+?>
+      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.bmp' target="_blank"><img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie originálu dokladu" title="Zobrazenie originálu dokladu" ></a>
+<?php
+}
+?>
+<?php
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.gif") AND $jesub == 0 )
+{
+$jesub=1;
+?>
+      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.gif' target="_blank"><img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie originálu dokladu" title="Zobrazenie originálu dokladu" ></a>
+<?php
+}
+?>
+<?php
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.png") AND $jesub == 0 )
+{
+$jesub=1;
+?>
+          <li onclick="window.open('../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.png', '_blank', frame);" class="mdl-menu__item">
+            <i class="material-icons">photo_library</i>Zobrazi originál v PNG
+          </li>
+<?php
+}
+?>
+<?php
+if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/dd$riadok->dok.pdf"))
+{
+$jesub=1;
+?>
+          <li onclick="window.open('../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/dd<?php echo $riadok->dok;?>.pdf', '_blank', frame);" class="mdl-menu__item">
+            <i class="material-icons">picture_as_pdf</i>Zobrazi originál v PDF
+          </li>
+<?php
+}
+?>
+        </ul>
+<?php if ( ( $drupoh == 1 OR $drupoh == 11 OR $drupoh == 31 ) AND $pocstav != 1 ) { ?>
+      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" style="padding: 0; width: 24px; position: relative; top: 1px;">
+        <input type="checkbox" name="h_tl<?php echo $i; ?>" value="<?php echo $riadok->dok; ?>" class="mdl-checkbox__input">
+      </label>
+<?php                                                            } ?>
+    </td>
+  </tr>
+<?php
+  }
+$i = $i + 1;
+   }
+?>
+  </table> <!-- .ui-list-content -->
+</form>
+<form name="forma3" method="post" action="#">
+  <div class="ui-list-footer ui-list ui-container">
+    <span>= <?php echo $cpol; ?></span>
+    <div class="mdl-layout-spacer"></div>
+    <label for="page_goto" style="margin-right: 24px;">Strana
+    <select name="page_goto" id="page_goto" onchange="gotoPage();" class="mdl-textfield__input">
+<?php
+$is = 1;
+while ( $is <= $xstr )
+{
+?>
+<option value="<?php echo $is; ?>"><?php echo $is; ?></option>
+<?php
+$is = $is + 1;
+}
+?>
+    </select>/&nbsp;&nbsp;<?php echo $xstr; ?></label>
+    <button type="button" id="page_prev" onclick="navPage(<?php echo $ppage; ?>);" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">navigate_before</i>
+    </button>
+      <span class="mdl-tooltip" data-mdl-for="page_prev">Prejs na stranu <?php echo $ppage; ?></span>
+    <button type="button" id="page_next" onclick="navPage(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon">
+      <i class="material-icons">navigate_next</i>
+    </button>
+      <span class="mdl-tooltip" data-mdl-for="page_next">Prejs na stranu <?php echo $npage; ?></span>
+  </div> <!-- .ui-list-footer -->
+</form>
+</div> <!-- .wrap-ui-list -->
+<?php
+//mysql_close();
+mysql_free_result($sql);
+    } while (false);
+//koniec 1,2,3,4,7,9
+?>
+
+<!-- empty state -->
+<?php if ( $cpol == 0 ) { ?>
+<div id="empty_body" class="ui-no-item" style="margin: 12% auto 10% auto;">
+  <i class="material-icons mdl-color-text--grey-400 md-64">sentiment_dissatisfied</i>
+  <div class="mdl-color-text--grey-500 no-item-alert">iadne poloky</div>
+</div>
+<?php                   } ?>
+
+<span id="Zm" style="display:none; width:100%; font-family:bold; font-weight:bold; background-color:yellow; color:black;">
+ Doklad DOK=<?php echo $cislo_dok;?> vymazanı</span>
+
+<div class="mdl-layout-spacer"></div>
+<footer class="mdl-mini-footer ui-container">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-500">Novinky</a></li>
+    </ul>
+  </div>
+  <div class="mdl-mini-footer__right-section">
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="#" onclick="Edcom();" title="EuroSecom powered by EDcom" class="mdl-color-text--light-blue-500">EDcom</a></li>
+    </ul>
+  </div>
+</footer>
+</main>
+
+<!-- header nav menu -->
+<div style="position:fixed; left: 0px; top: -24px; z-index: 10;">
+  <ul for="header_title" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+<?php if ( $drupoh == 1 OR $drupoh == 31 ) { ?>
+    <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="OdberFa();">Odberate¾ské faktúry</li>
+    <li class="mdl-menu__item" onclick="OdberUcty();">Odberate¾ské úèty</li>
+<?php } ?>
+<?php if ( $drupoh == 2 ) { ?>
+    <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="DodavFa();">Dodávate¾ské faktúry</li>
+    <li class="mdl-menu__item" onclick="DodavUcty();">Dodávate¾ské úèty</li>
+<?php } ?>
+  </ul>
+</div>
+
+<!-- month nav -->
+<button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
+  <i class="material-icons md-40">navigate_before</i>
+</button>
+  <span class="mdl-tooltip" data-mdl-for="month_prev">Prejs na <?php echo $kli_pume; ?></span>
+<button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
+  <i class="material-icons md-40">navigate_next</i>
+</button>
+  <span class="mdl-tooltip" data-mdl-for="month_next">Prejs na <?php echo $kli_dume; ?></span>
+
+<div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Title</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+    </nav>
+  </div>
+
 <!-- more header tools -->
 <div style="position:fixed; right: 0; top: 0; z-index: 10;">
-  <ul for="more_tool" class="mdl-menu mdl-menu--bottom-right mdl-js-menu">
+  <ul for="header_more_tool" class="mdl-menu mdl-menu--bottom-right mdl-js-menu tool-more-menu">
 <?php if ( ( $drupoh == 1 OR $drupoh == 2 ) AND $pocstav != 1 ) { ?>
-    <li class="mdl-menu__item" onclick="listFaktury();" style="height: 40px; line-height: 40px;">
-      <i class="material-icons vacenter" style="margin-right: 16px;">print</i>Faktúry <?php echo $kli_vume; ?>
+    <li onclick="listFaktury();" class="mdl-menu__item">
+      <i class="material-icons">print</i>Zobrazi faktúry za <strong><?php echo $kli_vume; ?></strong>
     </li>
 <?php if ( $sysx == 'UCT' ) { ?>
-    <li class="mdl-menu__item" onclick="listFakturyUct();">
-      <i class="material-icons vacenter">print</i>Fakt. <?php echo $kli_vume; ?> + rozúèt.
+    <li onclick="listFakturyUct();" class="mdl-menu__item mdl-menu__item--full-bleed-divider">
+      <i class="material-icons">print</i>Zobrazi faktúry s rozúètov. za <?php echo $kli_vume; ?>
     </li>
 <?php                       } ?>
 <?php } ?>
-
 <?php if ( $drupoh == 1 AND $pocstav != 1 ) { ?>
-    <li class="mdl-menu__item" onclick="ExportFakturyCsv();">
-      <i class="material-icons vacenter">file_upload</i>Faktúry <?php echo $kli_vume; ?> do CSV
+    <li onclick="ExportFakturyCsv();" class="mdl-menu__item" >
+      <i class="material-icons">file_upload</i>Exportova faktúry <?php echo $kli_vume; ?> do CSV
     </li>
 <?php                                       } ?>
-
 <?php if ( $drupoh == 2 ) { ?>
-    <li class="mdl-menu__item" onclick="window.open('vstf_importorangexml.php?copern=1&drupoh=<?php echo $drupoh; ?>&page=1&cislo_uce=<?php echo $hladaj_uce; ?>', '_self');">
-      <i class="material-icons vacenter">file_download</i>Orange faktúry <?php echo $kli_vume; ?>
+    <li onclick="window.open('vstf_importorangexml.php?copern=1&drupoh=<?php echo $drupoh; ?>&page=1&cislo_uce=<?php echo $hladaj_uce; ?>', '_self');" class="mdl-menu__item">
+      <i class="material-icons">file_download</i>Naèíta Orange faktúry
     </li>
-    <li class="mdl-menu__item" onclick="window.open('vstf_importfakxml.php?copern=1&drupoh=<?php echo $drupoh; ?>&page=1&cislo_uce=<?php echo $hladaj_uce; ?>', '_self');">
-      <i class="material-icons vacenter">file_download</i>Faktúry v XML <?php echo $kli_vume; ?>
+    <li onclick="window.open('vstf_importfakxml.php?copern=1&drupoh=<?php echo $drupoh; ?>&page=1&cislo_uce=<?php echo $hladaj_uce; ?>', '_self');" class="mdl-menu__item">
+      <i class="material-icons">file_download</i>Naèíta faktúry v XML
     </li>
 <?php } ?>
-
 <?php if ( ( $drupoh == 2 OR $drupoh == 1 OR $drupoh == 12 ) AND $pocstav == 1 AND $kli_uzall > 3000 ) { ?> <!-- dopyt, $drupoh zbytoèné, alebo aj tam je poèiatoènı stav -->
     <li class="mdl-menu__item" onclick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=167&page=1&drupoh=<?php echo $drupoh; ?>&pocstav=<?php echo $pocstav; ?>', '_self');">
       <i class="material-icons vacenter">cancel</i>Všetky poloky
@@ -1754,271 +2057,7 @@ $ajmes=0;
 
 
 
-
-<main class="mdl-layout__content ui-content sticky-footer">
-<div class="wrap-ui-list">
-  <table class="ui-list-content ui-list ui-container">
-<?php
-   while ( $i <= $konc )
-   {
-?>
-<?php
-  if (@$zaznam=mysql_data_seek($sql,$i))
-  {
-$riadok=mysql_fetch_object($sql);
-?>
-  <tr class="ui-row-echo">
-    <td><span style="color: rgba(0, 0, 0, 0.54); "><?php echo $riadok->uce; ?></span></td>
-    <td>
-<?php if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 21 OR $drupoh == 31 OR $drupoh == 22 OR $drupoh == 42 )
-      {
-$uctminusdok=$riadok->hodu-$riadok->hod;
-  if ( $sysx == 'UCT' AND $kli_vduj >= 0 AND $pocstav != 1 )
-  {
-?>
-<a href="#" onclick="window.open('../faktury/vstf_t_md.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=ANO&copern=20&drupoh=<?php echo $drupoh; ?>&page=<?php echo $page;?>&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $riadok->dok; ?>&h_ico=<?php echo $riadok->ico; ?>&h_uce=<?php echo $riadok->uce; ?>&h_unk=<?php echo $riadok->unk; ?>&h_poh=<?php echo $riadok->poh; ?>', '_self'); window.name = 'zoznam';" title="Rozúètovanie dokladu" class="imgbtn img-menu"></a><!-- dopyt, cez funkciu -->
-<?php
-  }
-?>
-<?php echo $riadok->dok;?> -
-<span id="dokfak" onclick="ListaFakUct(<?php echo $riadok->fak; ?>);" title="Zobrazi doklady s èíslom faktúry <?php echo $riadok->fak; ?>" class="text-link-out"><?php echo $riadok->fak; ?></span>
-<?php if ( $uctminusdok != 0 AND $riadok->hod != 0 AND $sysx == 'UCT' AND $kli_vduj >= 0 AND $pocstav != 1 ) { ?>
-<img src='../obr/eschange/pozor.png' title='Doklad nie je správne rozúètovanı' style='vertical-align:-4px;'> <!-- dopyt, nie cez echo <span> s background a hláška vyskakovacia s pozadím, napr. #F39C12 -->
-<?php                                                                                                        } ?>
-<?php
-      }
-if ( $drupoh == 11 OR $drupoh == 12 ) echo "$riadok->dok - $riadok->dol";
-if ( $drupoh == 52 ) echo "$riadok->dok - $riadok->prf";
-?>
-    </td>
-    <td>
-<?php echo $riadok->dat; ?>
-<?php if ( $drupoh == 42 ) { ?>
-<a href="#" onclick="uzavierka(<?php echo $riadok->dok;?>)" title="Rozpis dennej uzávierky z <?php echo $riadok->dat; ?>">uzavierka</a>
-<?php                      } ?>
-    </td>
-    <td>
-      <span class="text-badge-gray"><?php echo $riadok->ico; ?></span>
-<?php if( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 31 OR $drupoh == 52 ) { ?>
-      <span id="dokfak" onclick="ListaIcoUct(<?php echo $riadok->ico; ?>);" title="Zobrazi doklady s ièo <?php echo $riadok->ico; ?>" class="text-link-out"><?php echo $riadok->nai; ?></span>
-<?php } ?>
-<?php if ( $drupoh == 21 OR $drupoh == 22 ) echo "$riadok->nai - $riadok->str - $riadok->zak"; ?>
-<?php if ( $drupoh == 42 ) echo "$riadok->nai"; ?>
-    </td>
-    <td style="color: rgba(0, 0, 0, 0.54);">
-<?php
-if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 31 OR $drupoh == 52 ) echo "$riadok->str - $riadok->zak";
-if ( $drupoh == 21 OR $drupoh == 22 ) echo "$riadok->strv - $riadok->zakv";
-if ( $drupoh == 42 ) echo $riadok->txp;
-?>
-    </td>
-    <td>
-     <?php if ( $sysx == 'UCT' AND $pocstav != 1 ) { echo "$riadok->hodu / "; } ?><span style="color: rgba(0,0,0,.54);"><?php echo $riadok->hod; ?></span>
-    </td>
-    <td>
-<?php
-if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 31 OR $drupoh == 21 OR $drupoh == 12 OR $drupoh == 22 OR $drupoh == 52 )
-     {
-?>
-      <button type="button" id="view<?php echo $riadok->dok; ?>" onclick="viewItem(<?php echo $riadok->dok; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">print</i></button>
-        <div data-mdl-for="view<?php echo $riadok->dok; ?>" class="mdl-tooltip">Zobrazi v PDF</div>
-<?php
-     }
-?>
-<?php if( $drupoh == 42 )  { ?>
-      <a href="#" onClick="window.open('../doprava/regpok_pdf.php?copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&sysx=<?php echo $sysx; ?>&cislo_dok=<?php echo $riadok->dok;?>&regpok=<?php echo $regpok;?>', '_blank', frame);"><img src='../obr/tlac.png' width=15 height=10 border=0 title="Tlaè vybraného dokladu " ></a>
-<?php                                                 } ?>
-
-<?php
-$ukazzmaz=1;
-if( $drupoh == 42 ) { $nezar = 1*$riadok->ruc; }
-if( $drupoh == 42 AND $nezar != 0 ) { $ukazzmaz = 0; }
-if( $drupoh == 42 AND $kli_uzid == 17 ) { $ukazzmaz = 1; }
-if( $drupoh == 42 AND $kli_uzid == 114 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ukazzmaz = 1; }
-if( $copern != 10 AND $ukazzmaz == 1  )
-{
-?>
-      <button type="button" id="edit<?php echo $riadok->dok; ?>" onclick="editItem(<?php echo $riadok->dok; ?>); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">edit</i></button>
-        <div data-mdl-for="edit<?php echo $riadok->dok; ?>" class="mdl-tooltip">Upravi</div>
-<?php
-}
-?>
-<?php if ( $copern != 10 AND $ukazzmaz == 1 AND $kli_nemazat != 1 ) { ?>
-      <button type="button" id="remove<?php echo $riadok->dok; ?>" onclick="removeItem(<?php echo $riadok->dok; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">remove</i></button>
-        <div data-mdl-for="remove<?php echo $riadok->dok; ?>" class="mdl-tooltip">Vymaza</div>
-<?php                                                               } ?>
-
-
-
-
-<?php
-//aky subor existuje podla toho daj koncovku
-$jesub=0;
-if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.pdf"))
-{
-$jesub=1;
-?>
-      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.pdf' target="_blank"><img src='../obr/pdf.png' width=15 height=10 border=0 alt="Zobrazenie originálu dokladu" title="Zobrazenie originálu dokladu" ></a>
-<?php
-}
-?>
-<?php
-if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.jpg") AND $jesub == 0 )
-{
-$jesub=1;
-?>
-      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.jpg' target="_blank"><img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie originálu dokladu" title="Zobrazenie originálu dokladu" ></a>
-<?php
-}
-?>
-<?php
-if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.bmp") AND $jesub == 0 )
-{
-$jesub=1;
-?>
-      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.bmp' target="_blank"><img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie originálu dokladu" title="Zobrazenie originálu dokladu" ></a>
-<?php
-}
-?>
-<?php
-if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.gif") AND $jesub == 0 )
-{
-$jesub=1;
-?>
-      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.gif' target="_blank"><img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie originálu dokladu" title="Zobrazenie originálu dokladu" ></a>
-<?php
-}
-?>
-<?php
-if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.png") AND $jesub == 0 )
-{
-$jesub=1;
-?>
-      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.png' target="_blank"><img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie originálu dokladu" title="Zobrazenie originálu dokladu" ></a>
-<?php
-}
-?>
-<?php
-if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/dd$riadok->dok.pdf"))
-{
-$jesub=1;
-?>
-      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/dd<?php echo $riadok->dok;?>.pdf' target="_blank"><img src='../obr/pdf.png' width=15 height=10 border=0 alt="Zobrazenie originálu dokladu" title="Zobrazenie originálu dokladu" ></a>
-<?php
-}
-?>
-<?php if ( ( $drupoh == 1 OR $drupoh == 11 OR $drupoh == 31 ) AND $pocstav != 1 ) { ?>
-      <input type="checkbox" name="h_tl<?php echo $i; ?>" value="<?php echo $riadok->dok;?>"/>
-<?php                                                            } ?>
-    </td>
-  </tr>
-<?php
-  }
-$i = $i + 1;
-   }
-?>
-  </table> <!-- .ui-list -->
-</form>
-<form name="forma3" method="post" action="#">
-  <div class="ui-list-footer ui-list ui-container">
-    <span>= <?php echo $cpol; ?></span>
-    <div class="mdl-layout-spacer"></div>
-    <label for="page_goto" style="margin-right: 24px;">Strana
-    <select name="page_goto" id="page_goto" onchange="gotoPage();" class="mdl-textfield__input">
-<?php
-$is = 1;
-while ( $is <= $xstr )
-{
-?>
-<option value="<?php echo $is; ?>"><?php echo $is; ?></option>
-<?php
-$is = $is + 1;
-}
-?>
-    </select>/&nbsp;&nbsp;<?php echo $xstr; ?></label>
-    <button type="button" id="page_prev" onclick="navPage(<?php echo $ppage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_before</i></button>
-      <div class="mdl-tooltip" data-mdl-for="page_prev">Prejs na stranu <?php echo $ppage; ?></div>
-    <button type="button" id="page_next" onclick="navPage(<?php echo $npage; ?>);" class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons">navigate_next</i></button>
-      <div class="mdl-tooltip" data-mdl-for="page_next">Prejs na stranu <?php echo $npage; ?></div>
-  </div> <!-- .ui-table-pagination -->
-</form>
-
-</div> <!-- .wrap-ui-list -->
-
-<?php
-//mysql_close();
-mysql_free_result($sql);
-    } while (false);
-//koniec 1,2,3,4,7,9
-?>
-
-
-<!-- empty state -->
-<?php if ( $cpol == 0 ) { ?>
-<div id="empty_body" class="ui-no-item" style="margin: 12% auto 10% auto;">
-  <i class="material-icons mdl-color-text--grey-400 md-64">sentiment_dissatisfied</i>
-  <div class="mdl-color-text--grey-500 no-item-alert">iadne poloky</div>
-</div>
-<?php                   } ?>
-
-<span id="Zm" style="display:none; width:100%; font-family:bold; font-weight:bold; background-color:yellow; color:black;">
- Doklad DOK=<?php echo $cislo_dok;?> vymazanı</span>
-
-
-
-
-<div class="mdl-layout-spacer"></div>
-<footer class="mdl-mini-footer ui-container">
-  <div class="mdl-mini-footer__left-section">
-    <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
-    <ul class="mdl-mini-footer__link-list">
-      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-500">Novinky</a></li>
-    </ul>
-  </div>
-  <div class="mdl-mini-footer__right-section">
-    <ul class="mdl-mini-footer__link-list">
-      <li><a href="#" onclick="Edcom();" title="EuroSecom powered by EDcom" class="mdl-color-text--light-blue-500">EDcom</a></li>
-    </ul>
-  </div>
-</footer>
-</main>
-
-<!-- header nav menu -->
-<div style="position:fixed; left: 0px; top: -24px; z-index: 10;">
-  <ul for="header_title" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-<?php if ( $drupoh == 1 OR $drupoh == 31 ) { ?>
-    <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="OdberFa();">Odberate¾ské faktúry</li>
-    <li class="mdl-menu__item" onclick="OdberUcty();">Odberate¾ské úèty</li>
-<?php } ?>
-<?php if ( $drupoh == 2 ) { ?>
-    <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="DodavFa();">Dodávate¾ské faktúry</li>
-    <li class="mdl-menu__item" onclick="DodavUcty();">Dodávate¾ské úèty</li>
-<?php } ?>
-  </ul>
-</div>
-
-<!-- month nav -->
-<button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
-  <i class="material-icons md-40">navigate_before</i>
-</button>
-  <span class="mdl-tooltip" data-mdl-for="month_prev">Prejs na <?php echo $kli_pume; ?></span>
-<button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
-  <i class="material-icons md-40">navigate_next</i>
-</button>
-  <span class="mdl-tooltip" data-mdl-for="month_next">Prejs na <?php echo $kli_dume; ?></span>
-
-<div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">Title</span>
-    <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-    </nav>
-  </div>
-
 </div> <!-- .mdl-layout -->
-
 <?php
 // toto je koniec casti na zobrazenie tabulky a prechody medzi stranami
      }
@@ -2248,6 +2287,16 @@ var frame = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, height=90
    window.open('vstf_u_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=5&drupoh=<?php echo $drupoh; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&page=1', '_self'); //dopyt, "page=1" dám preè
   }
 
+  function accountItem()
+  {
+    window.open('../faktury/vstf_t.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=ANO&copern=20&drupoh=<?php echo $drupoh; ?>&page=<?php echo $page;?>&h_tlsl=1&rozb1=NOT&rozb2=NOT&cislo_dok=<?php echo $riadok->dok; ?>&h_ico=<?php echo $riadok->ico; ?>&h_uce=<?php echo $riadok->uce; ?>&h_unk=<?php echo $riadok->unk; ?>&h_poh=<?php echo $riadok->poh; ?>', '_blank');
+  }
+
+
+
+
+
+
 <?php if ( $agrostav == 1 OR $_SERVER['SERVER_NAME'] == "localhost" )  { ?>
     function VytlacPokl(doklad)
     {
@@ -2290,6 +2339,18 @@ window.open('../faktury/int_fakt.php?copern=55&page=1&h_sys=85&h_obdp=<?php echo
   function DodavUcty()
   {
     window.open('../faktury/ddod_md.php?copern=1&page=1', '_self');
+  }
+
+
+  function ListaFakUct(faktura)
+  {
+   var h_fak = faktura;
+   window.open('../ucto/hladaj_fakicotlac.php?&h_fak=' + h_fak + '&h_datp=01.01.1990&h_datk=31.12.2050&copern=31&drupoh=1&page=1&typ=HTML', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  }
+  function ListaIcoUct(ico)
+  {
+   var h_ico = ico;
+   window.open('../ucto/hladaj_fakicotlac.php?&h_ico=' + h_ico + '&h_datp=01.01.1990&h_datk=31.12.2050&copern=31&drupoh=1&page=1&typ=HTML', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 
 
