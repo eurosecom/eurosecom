@@ -889,6 +889,14 @@ $riadok=mysql_fetch_object($sql);
 
 <!-- right column -->
     <div class="mdl-cell mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-color--white" style="padding: 24px 16px 20px 32px;">
+
+<?php
+if ( $kopkli == 1 )
+     {
+echo "Uložené zmeny.";
+     }
+?>
+
       <button type="button" id="row_form_close" onclick="closeId(<?php echo $riadok->id_klienta; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500">
         <i class="material-icons">close</i>
       </button>
