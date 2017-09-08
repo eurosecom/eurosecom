@@ -495,8 +495,10 @@ $riadok=mysql_fetch_object($sql);
     <td class="right" style="">
       <button type="button" id="row_form_close" onclick="closeXcf(<?php echo $riadok->xcf; ?>);" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-500"><i class="material-icons">close</i></button>
         <div data-mdl-for="row_form_close" class="mdl-tooltip">Zavrie</div>
-      <span id="freedom" onmouseover="return Povol_uloz();" style="position: absolute; top: 105px; right: 0;">
-        <button id="uloz" name="uloz">Uloi</button>
+      <span id="freedom" onmouseover="return Povol_uloz();" style="position: absolute; top: 103px; right: 0;">
+        <button id="uloz" name="uloz" title="Uloi a zavrie" style="height: 24px;">
+          <i class="material-icons md-18">reply</i><span style="position: relative; top: -4px;">&nbsp;Uloi</span>
+        </button>
       </span>
       <abbr id="enternext" class="mdl-color--light-blue-600 mdl-color-text--white text-chip" style="position: absolute; top: 13px; right: 72px;">EnterNext</abbr>
         <span data-mdl-for="enternext" class="mdl-tooltip">Na presúvanie medzi políèkami pouite klávesu ENTER. Tlaèidlo ULOI aktivujete prejdením kurzoru okolo tlaèidla.</span>
