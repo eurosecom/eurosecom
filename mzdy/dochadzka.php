@@ -40,6 +40,11 @@ $kli_nxcf=$vyb_naz;
 $kli_vume=$vyb_ume;
 $kli_vrok=$vyb_rok;
 
+if( $_SERVER['SERVER_NAME'] == "www.ala.sk" AND $kli_vrok == 2017 ) { $mysqldb=$mysqldb2017; }
+if( $_SERVER['SERVER_NAME'] == "www.ala.sk" AND $kli_vrok == 2018 ) { $mysqldb=$mysqldb2018; }
+if( $_SERVER['SERVER_NAME'] == "www.ala.sk" AND $kli_vrok == 2019 ) { $mysqldb=$mysqldb2019; }
+mysql_select_db($mysqldb);
+
 $cislooc=0;
 $sqlttt = "SELECT * FROM klienti WHERE id_klienta = $kli_uzid ";
 $sqldok = mysql_query("$sqlttt");
