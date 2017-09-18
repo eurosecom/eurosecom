@@ -1174,7 +1174,6 @@ if ( $drupoh == 52 ) echo "Predfakt˙ry";
 }
 .ui-list td:nth-child(1), .ui-list td:nth-child(5) {
   color: rgba(0,0,0,.54);
-
 }
 
 
@@ -1514,6 +1513,16 @@ $poltxt = SubStr($polmen,0,20);
   </select>
 <?php                      } ?>
 
+<!-- month nav -->
+<button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button period-nav-btn">
+  <i class="material-icons md-32">navigate_before</i>
+</button>
+  <span class="mdl-tooltip" data-mdl-for="month_prev">Prejsù na <?php echo $kli_pume; ?></span>
+<button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button period-nav-btn" style="">
+  <i class="material-icons md-32">navigate_next</i>
+</button>
+  <span class="mdl-tooltip" data-mdl-for="month_next">Prejsù na <?php echo $kli_dume; ?></span>
+
 <div style="visibility: hidden;">
 <input type="text" name="hladaj_dok" id="hladaj_dok" value="<?php echo $hladaj_dok; ?>"/>
 <input type="text" name="hladaj_dat" id="hladaj_dat" value="<?php echo $hladaj_dat; ?>"/>
@@ -1536,7 +1545,7 @@ $poltxt = SubStr($polmen,0,20);
   </div> <!-- .ui-header-page-row -->
 <div id="Okno"></div> <!-- dopyt, chcem daù preË -->
 </form>
-<form name="formp2" method="post" action="../ucto/vspk_u.php?drupoh=<?php echo $drupoh;?>&page=1&copern=55">
+<form name="formp2" method="post" action="../faktury/vstfak_md.php?drupoh=<?php echo $drupoh;?>&page=1&copern=55">
   <div class="mdl-layout__header-row wrap-ui-list">
     <table class="ui-list-header ui-list ui-container">
     <tr>
@@ -1550,11 +1559,17 @@ if ( $drupoh == 42 ) echo "ËÌslo v dni";
 if ( $drupoh == 52 ) echo "Predfakt˙ra";
 ?>
       </th>
-      <th>DAT/UME
+      <th>D·tum
+        <button id="searchbtn" class="mdl-button mdl-js-button mdl-button--icon" style="width: 24px; height: 24px; min-width: 24px; position: absolute; left: auto; top: 2px;">
+          <i class="material-icons md-18">search</i>
+        </button>
+
+
 <?php if ( $drupoh == 1 OR $drupoh == 31 ) { ?>
-<!--   <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )"><img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>"></a>
-  <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
-<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" title="Doklady za mesiac <?php echo $kli_nume; ?>"></a> -->
+<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
+  <img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>"></a>
+<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
+<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" title="Doklady za mesiac <?php echo $kli_nume; ?>"></a>
 <?php } ?>
 
 <?php if ( $drupoh == 11 OR $drupoh == 12 ) { ?>
@@ -1574,10 +1589,10 @@ if ( $drupoh == 52 ) echo "Predfakt˙ra";
 <?php  } ?>
 
 <?php if ( $drupoh == 2 ) { ?>
-<a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
+<!-- <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
 <img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>" ></a>
 <a href="#" onClick="window.open('../faktury/vstfak.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&copern=9&page=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
-<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" title="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
+<img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" title="Doklady za mesiac <?php echo $kli_nume; ?>" ></a> -->
 <?php  } ?>
 
 <?php if ( $drupoh == 42 ) { ?>
@@ -1688,7 +1703,7 @@ if ( $drupoh == 11 )
 $riadok=mysql_fetch_object($sql);
 ?>
   <tr class="ui-row-echo">
-    <td><label class="vacenter"><?php echo $riadok->uce; ?></label></td>
+    <td><label><?php echo $riadok->uce; ?></label></td>
     <td>
 <?php if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 21 OR $drupoh == 31 OR $drupoh == 22 OR $drupoh == 42 )
       {
@@ -1700,8 +1715,8 @@ $uctminusdok=$riadok->hodu-$riadok->hod;
       </button>
         <span data-mdl-for="account<?php echo $riadok->dok; ?>" class="mdl-tooltip">Roz˙Ëtovanie dokladu</span>
 <?php   } ?>
-      <label style="position: relative; top: 2px;"><?php echo $riadok->dok; ?> -</label>
-      <label id="dokfak<?php echo $riadok->dok; ?>" onclick="ListaFakUct(<?php echo $riadok->fak; ?>);" style="position: relative; top: 2px;"><?php echo $riadok->fak; ?></label>
+      <label style="position: relative; top: 1px;"><?php echo $riadok->dok; ?> -</label>
+      <label id="dokfak<?php echo $riadok->dok; ?>" onclick="ListaFakUct(<?php echo $riadok->fak; ?>);" class="text-link" style="position: relative; top: 1px;"><?php echo $riadok->fak; ?></label>
         <span data-mdl-for="dokfak<?php echo $riadok->dok; ?>" class="mdl-tooltip">Zobraziù doklady s ËÌslom fakt˙ry <?php echo $riadok->fak; ?></span>
 <?php if ( $uctminusdok != 0 AND $riadok->hod != 0 AND $sysx == 'UCT' AND $kli_vduj >= 0 AND $pocstav != 1 ) { ?>
       <i id="account_alert" class="material-icons md-18 mdl-color-text--red-500 vacenter">priority_high</i>
@@ -1714,22 +1729,22 @@ if ( $drupoh == 52 ) echo "$riadok->dok - $riadok->prf";
 ?>
     </td>
     <td>
-      <label class="vacenter"><?php echo $riadok->dat; ?></label>
+      <label><?php echo $riadok->dat; ?></label>
 <?php if ( $drupoh == 42 ) { ?>
 <a href="#" onclick="uzavierka(<?php echo $riadok->dok;?>)" title="Rozpis dennej uz·vierky z <?php echo $riadok->dat; ?>">uzavierka</a>
 <?php                      } ?>
     </td>
     <td>
 <?php if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 31 OR $drupoh == 52 ) { ?>
-      <label id="dokico<?php echo $riadok->dok; ?>" onclick="ListaIcoUct(<?php echo $riadok->ico; ?>);" class="vacenter"><?php echo $riadok->ico; ?></label>
+      <label id="dokico<?php echo $riadok->dok; ?>" onclick="ListaIcoUct(<?php echo $riadok->ico; ?>);" class="text-link"><?php echo $riadok->ico; ?></label>
         <span data-mdl-for="dokico<?php echo $riadok->dok; ?>" class="mdl-tooltip">Zobraziù doklady s iËo <?php echo $riadok->ico; ?></span>
-      <label class="vacenter"><?php echo $riadok->nai; ?></label>
+      <label><?php echo $riadok->nai; ?></label>
 <?php } ?>
 <?php if ( $drupoh == 21 OR $drupoh == 22 ) echo "$riadok->nai - $riadok->str - $riadok->zak"; ?>
 <?php if ( $drupoh == 42 ) echo "$riadok->nai"; ?>
     </td>
     <td>
-      <label class="vacenter">
+      <label>
 <?php
 if ( $drupoh == 1 OR $drupoh == 2 OR $drupoh == 11 OR $drupoh == 12 OR $drupoh == 31 OR $drupoh == 52 ) echo "$riadok->str - $riadok->zak";
 if ( $drupoh == 21 OR $drupoh == 22 ) echo "$riadok->strv - $riadok->zakv";
@@ -1738,7 +1753,7 @@ if ( $drupoh == 42 ) echo $riadok->txp;
       </label>
     </td>
     <td>
-      <label class="vacenter">
+      <label>
 <?php if ( $sysx == 'UCT' AND $pocstav != 1 ) { echo "$riadok->hodu / "; } ?><span style="color: rgba(0,0,0,.54);"><?php echo $riadok->hod; ?></span>
       </label>
     </td>
@@ -1833,7 +1848,9 @@ if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.bmp") AND $jes
 {
 $jesub=1;
 ?>
-      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.bmp' target="_blank"><img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
+          <li onclick="../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.bmp', '_blank', frame);" class="mdl-menu__item">
+            <i class="material-icons">photo_library</i>Zobraziù origin·l v BMP
+          </li>
 <?php
 }
 ?>
@@ -1842,7 +1859,9 @@ if (File_Exists ("../dokumenty/FIR$kli_vxcf/$adrdok/d$riadok->dok.gif") AND $jes
 {
 $jesub=1;
 ?>
-      <a href='../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.gif' target="_blank"><img src='../obr/orig.png' width=15 height=10 border=0 alt="Zobrazenie origin·lu dokladu" title="Zobrazenie origin·lu dokladu" ></a>
+          <li onclick="../dokumenty/FIR<?php echo $kli_vxcf;?>/<?php echo $adrdok;?>/d<?php echo $riadok->dok;?>.gif', '_blank', frame);" class="mdl-menu__item">
+            <i class="material-icons">photo_library</i>Zobraziù origin·l v GIF
+          </li>
 <?php
 }
 ?>
@@ -1959,15 +1978,7 @@ mysql_free_result($sql);
   </ul>
 </div>
 
-<!-- month nav -->
-<button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
-  <i class="material-icons md-40">navigate_before</i>
-</button>
-  <span class="mdl-tooltip" data-mdl-for="month_prev">Prejsù na <?php echo $kli_pume; ?></span>
-<button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
-  <i class="material-icons md-40">navigate_next</i>
-</button>
-  <span class="mdl-tooltip" data-mdl-for="month_next">Prejsù na <?php echo $kli_dume; ?></span>
+
 
 <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Title</span>
