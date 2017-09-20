@@ -429,20 +429,16 @@ table .mini-icon-btn {
 
 
 /* BUTTON */
-
-
-.period-nav-btn {
-  height: 40px;
-  width: 40px;
-  min-width: 40px;
-  padding: 0px;
-  border-radius: 50%;
+.period-nav-btn { /*dopyt, zosúladiť s ostatnými btn v záhlaví*/
   color: rgba(255,255,255,.7);
-  background-color: #039BE5;
 }
 .period-nav-btn:hover {
-  background-color: #039BE5;
   color: rgba(255,255,255,1);
+}
+@media screen and (max-width: 1400px) {
+  .period-nav-btn {
+    box-shadow: none;
+  }
 }
 @media screen and (min-width: 1401px) {
   .period-nav-btn {

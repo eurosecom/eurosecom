@@ -1512,16 +1512,18 @@ $poltxt = SubStr($polmen,0,20);
 <?php endwhile;?>
   </select>
 <?php                      } ?>
+  <div style="width: 16px;">&nbsp;</div>
 
 <!-- month nav -->
-<button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button period-nav-btn">
-  <i class="material-icons md-32">navigate_before</i>
-</button>
-  <span class="mdl-tooltip" data-mdl-for="month_prev">Prejs na <?php echo $kli_pume; ?></span>
-<button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button period-nav-btn" style="">
-  <i class="material-icons md-32">navigate_next</i>
-</button>
-  <span class="mdl-tooltip" data-mdl-for="month_next">Prejs na <?php echo $kli_dume; ?></span>
+  <button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--light-blue-600 period-nav-btn">
+    <i class="material-icons">navigate_before</i>
+  </button>
+    <span class="mdl-tooltip" data-mdl-for="month_prev">Prejs na <?php echo $kli_pume; ?></span>
+
+  <button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--light-blue-600 period-nav-btn">
+    <i class="material-icons">navigate_next</i>
+  </button>
+    <span class="mdl-tooltip" data-mdl-for="month_next">Prejs na <?php echo $kli_dume; ?></span>
 
 <div style="visibility: hidden;">
 <input type="text" name="hladaj_dok" id="hladaj_dok" value="<?php echo $hladaj_dok; ?>"/>
@@ -1710,7 +1712,7 @@ $riadok=mysql_fetch_object($sql);
 $uctminusdok=$riadok->hodu-$riadok->hod;
   if ( $sysx == 'UCT' AND $kli_vduj >= 0 AND $pocstav != 1 ) {
 ?>
-      <button type="button" id="account<?php echo $riadok->dok; ?>" onclick="accountItem(); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--icon">
+      <button type="button" id="account<?php echo $riadok->dok; ?>" onclick="accountItem(); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--icon" style="margin: 0;">
         <i class="material-icons">menu</i>
       </button>
         <span data-mdl-for="account<?php echo $riadok->dok; ?>" class="mdl-tooltip">Rozúètovanie dokladu</span>
