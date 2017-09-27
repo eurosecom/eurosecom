@@ -559,15 +559,7 @@ $is = $is + 1;
       <div class="mdl-tooltip" data-mdl-for="page_next">Prejs na stranu <?php echo $npage; ?></div>
   </div> <!-- .ui-list-footer -->
 </form>
-</div> <!-- #table_body -->
-
-<!-- empty state -->
-<?php if ( $cpol == 0 ) { ?>
-<div id="empty_body" class="ui-no-item" style="margin: 12% auto 10% auto;">
-  <i class="material-icons mdl-color-text--grey-400 md-64">sentiment_dissatisfied</i>
-  <div class="mdl-color-text--grey-500 no-item-alert">iadne poloky</div>
-</div>
-<?php                   } ?>
+</div> <!-- .wrap-ui-list -->
 
 <div class="mdl-layout-spacer"></div>
 <footer class="mdl-mini-footer ui-container">
@@ -585,7 +577,13 @@ $is = $is + 1;
 </footer>
 </main>
 
-
+<!-- empty state -->
+<?php if ( $cpol == 0 ) { ?>
+<div class="ui-no-item">
+  <i class="material-icons mdl-color-text--grey-400 md-64">sentiment_dissatisfied</i>
+  <div class="mdl-color-text--grey-500" style="padding-top: 32px;">iadne poloky</div>
+</div>
+<?php                   } ?>
 
 <!-- header nav menu -->
 <div style="position:fixed; left: 0px; top: -24px; z-index: 10;">

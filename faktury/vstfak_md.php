@@ -1939,13 +1939,7 @@ mysql_free_result($sql);
 //koniec 1,2,3,4,7,9
 ?>
 
-<!-- empty state -->
-<?php if ( $cpol == 0 ) { ?>
-<div id="empty_body" class="ui-no-item" style="margin: 12% auto 10% auto;">
-  <i class="material-icons mdl-color-text--grey-400 md-64">sentiment_dissatisfied</i>
-  <div class="mdl-color-text--grey-500 no-item-alert">Žiadne položky</div>
-</div>
-<?php                   } ?>
+
 
 <span id="Zm" style="display:none; width:100%; font-family:bold; font-weight:bold; background-color:yellow; color:black;">
  Doklad DOK=<?php echo $cislo_dok;?> vymazaný</span>
@@ -1965,6 +1959,14 @@ mysql_free_result($sql);
   </div>
 </footer>
 </main>
+
+<!-- empty state -->
+<?php if ( $cpol == 0 ) { ?>
+<div class="ui-no-item">
+  <i class="material-icons mdl-color-text--grey-400 md-64">sentiment_dissatisfied</i>
+  <div class="mdl-color-text--grey-500" style="padding-top: 32px;">Žiadne položky</div>
+</div>
+<?php                   } ?>
 
 <!-- header nav menu -->
 <div style="position:fixed; left: 0px; top: -24px; z-index: 10;">
@@ -2090,9 +2092,6 @@ $ajmes=0;
 //dimensions blank window
 var frame = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, height=900';
 
-
-
-
 //month nav
   function navMonth(kam)
   {
@@ -2213,8 +2212,10 @@ var frame = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, height=90
     <?php if( $zmaz == 'OK' ) echo "Zm.style.display='';";?>
     <?php if( $uprav == 'OK' ) echo "Up.style.display='';";?>
 
-
-
+//empty state
+<?php if ( $cpol == 0 ) { ?>
+   document.querySelector('.ui-content > .wrap-ui-list').style.display='none';
+<?php                   } ?>
 
 //pagination
    document.forma3.page_goto.value = '<?php echo "$page"; ?>';
