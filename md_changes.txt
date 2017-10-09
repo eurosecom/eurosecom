@@ -1,0 +1,36 @@
+=== Zmenene nazvy ===
+root
+ckli.php + ckli_u.php => users_md.php
+cfir.php + cfir_u.php => firms_md.php
+podvojneu.php => ucto_md.php
+mzdy.php => mzdy_md.php
+fakt.php => faktury_md.php
+sklad.php => sklad_md.php
+majetok.php => majetok_md.php
+dopr.php => doprava_md.php
+vyroba.php => vyroba_md.php
+analyzy.php => analyzy_md.php
+ucto
+../ucto/hladaj_dok.php + ../ucto/uctpohyby.php => ../ucto/uctohladaj_md.php
+../ucto/ucto_kontrol.php => ../ucto/uctokontrol_md.php
+../ucto/paskovacka.php => ../ucto/calculator_md.php
+../ucto/vstpok.php => ../ucto/vstpok_md.php (pokladnica) a ../ucto/vstdok_md.php (banka a vseobecne)
+../ucto/oprsys.php => ../ucto/podsys_md.php
+../ucto/saldo.php => ../ucto/saldo_md.php
+../ucto/vstpru.php => ../ucto/prikazy_md.php
+../ucto/meszos.php => ../ucto/uctozos_md.php
+../ucto/statzos.php => ../ucto/statzos_md.php
+../ucto/danprij.php => ../ucto/danzos_md.php
+../ucto/dph_md.php => novinka
+../ucto/cudzie_md.php => ../ucto/mena_md.php
+../ucto/uctpoh.php => ../cis/prmpodsys_md.php
+cis
+../cis/prenos_poc.php => ../cis/prenos_md.php
+../cis/zaldat_ucto.php + ../cis/zaldat_mzdy.php => ../cis/zaloha_md.php
+../cis/ufir.php + ../cis/ufirdalsie.php => ../cis/ufir_md.php
+../cis/ufir.php => ../cis/ufir_md.php (udaje o firme) a ../cis/prmpodsys_md.php (parametre podsystemu)
+../cis/cico.php => ../cis/cico_md.php
+../cis/cstr.php + ../cis/czak.php + ../cis/csku.php + ../cis/csta.php => ../cis/ciselniky_md.php
+faktury
+../faktury/vstfak.php => ../faktury/vstfak_md.php
+../faktury/ftexty.php => ../cis/prmpodsys_md.php
