@@ -1414,7 +1414,7 @@ $ipok=$ipok+1;
 <?php } ?>
 <?php if ( $riadok->txt1 == "0-0" ) { ?>
  <?php echo $akefirmy; ?>
-      
+
 <?php } ?>
     </td>
     <td><?php echo $riadok->all_prav; ?></td>
@@ -1496,15 +1496,9 @@ $is = $is + 1;
       <span class="mdl-tooltip" data-mdl-for="page_next">Prejsù na stranu <?php echo $npage; ?></span>
   </div> <!-- .ui-table-footer -->
 </form>
-</div> <!-- #table_body -->
+</div> <!-- .wrap-ui-list -->
 
-<!-- empty state -->
-<?php if ( $cpol == 0 ) { ?>
-<div id="empty_body" class="ui-no-item" style="margin: 12% auto 10% auto;">
-  <i class="material-icons mdl-color-text--grey-400 md-64">sentiment_dissatisfied</i>
-  <div class="mdl-color-text--grey-500 no-item-alert">éiadne poloûky</div>
-</div>
-<?php                   } ?>
+
 
 <div class="mdl-layout-spacer"></div>
 <footer class="mdl-mini-footer ui-container">
@@ -1522,7 +1516,13 @@ $is = $is + 1;
 </footer>
 </main>
 
-
+<!-- empty state -->
+<?php if ( $cpol == 0 ) { ?>
+<div class="ui-no-item">
+  <i class="material-icons mdl-color-text--grey-400 md-64">sentiment_dissatisfied</i>
+  <div class="mdl-color-text--grey-500" style="padding-top: 32px;">éiadne poloûky</div>
+</div>
+<?php                   } ?>
 
 
 <!-- header nav menu -->
@@ -1608,6 +1608,9 @@ for ( var i = 0; i < buttons.length; i++ ) {
 <?php if ( $cpol == 0 ) { ?>
   document.getElementById('table_body').style.display='none';
 <?php                   } ?>
+
+
+
 
 <?php if ( $uprav == 1 OR $uprav == 2 OR $uprav == 3 OR $nova == 1 ) { ?>
   document.formv.uloz.disabled = true;
