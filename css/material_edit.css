@@ -113,6 +113,13 @@ select:enabled, button:enabled, [onclick] { /*dopyt, zistiť, kto môže mať ho
 .ui-header-app-row, .ui-header-page-row {
   padding-left: 64px;
 }
+@media screen and (max-width: 1024px) {
+  .ui-header-page-row {
+    padding-left: 16px;
+  }
+}
+
+
 /* page title with dropdown */
 .mdl-layout-title.dropdown {
   cursor: pointer;
@@ -126,7 +133,7 @@ select:enabled, button:enabled, [onclick] { /*dopyt, zistiť, kto môže mať ho
 .ui-header-page-row > .select-btn {
   height: 32px;
   border-radius: 2px;
-  padding: 0 4px 0 8px;
+  padding: 0 0px 0 8px;
   font-size: 12px;
   border: 0;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
@@ -422,24 +429,30 @@ table .mini-icon-btn {
 
 
 /* BUTTON */
-
-
-.period-nav-btn {
-  position: absolute;
-  z-index: 10;
-  top: 50%;
-  margin-top: -28px;
-  height: 56px;
-  width: 56px;
-  min-width: 56px;
-  padding: 8px;
-  border-radius: 50%;
+.period-nav-btn { /*dopyt, zosúladiť s ostatnými btn v záhlaví*/
+  color: rgba(255,255,255,.7);
 }
-.period-nav-btn:first-of-type {
-  left: 0;
+.period-nav-btn:hover {
+  color: rgba(255,255,255,1);
 }
-.period-nav-btn:last-of-type {
-  right: 0;
+@media screen and (max-width: 1400px) {
+  .period-nav-btn {
+    box-shadow: none;
+  }
+}
+@media screen and (min-width: 1401px) {
+  .period-nav-btn {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    margin-top: -20px;
+  }
+  .period-nav-btn:nth-of-type(1) {
+    left: 16px;
+  }
+  .period-nav-btn:nth-of-type(2) {
+    right: 16px;
+  }
 }
 
 

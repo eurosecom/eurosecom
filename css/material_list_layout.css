@@ -1,6 +1,7 @@
 /* LAYOUT */
 .ui-container {
-  max-width: 1200px;
+  max-width: 1280px;
+  /*min-width: 800px;*/
 }
 /* first and last col */
 .ui-list th:first-of-type, .ui-list td:first-of-type {
@@ -11,10 +12,10 @@
 }
 @media screen and (max-width: 1024px) {
   .ui-list th:first-of-type, .ui-list td:first-of-type {
-    padding-left: 8px;
+    padding-left: 16px;
   }
   .ui-list th:last-of-type, .ui-list td:last-of-type {
-    padding-right: 8px;
+    padding-right: 16px;
   }
 }
 /* HEADER */
@@ -53,22 +54,37 @@ table.ui-list {
   background-color: #fff;
 }
 .ui-list-content tr {
-  height: 36px
+  height: 36px;
 }
-.ui-row-echo:hover td label[onclick] {
+@media screen and (min-height: 800px) {
+  .ui-list-content tr {
+    height: 40px;
+  }
+}
+@media screen and (min-height: 920px) {
+  .ui-list-content tr {
+    height: 44px;
+  }
+}
+@media screen and (min-height: 1040px) {
+  .ui-list-content tr {
+    height: 48px;
+  }
+  .ui-list-content tr td {
+    font-size: 0.9285714285714286em; /* 13/14 */
+  }
+}
+
+
+.ui-row-echo:hover .text-link {
   border-bottom: 1px solid currentColor;
 }
-.ui-row-echo td label[onclick]:hover {
+.ui-row-echo .text-link:hover {
   color: rgb(3,169,244);
 }
 
-.ui-list-content .ui-row-echo td > label {
-/*  position: relative;
-  top: 1px;*/
-  /*display: inline-block;*/
-  /*font-size: 13px;*/
-  /*vertical-align: unset;*/
-  /*padding: 0;*/
+.ui-row-echo label {
+  vertical-align: middle;
 }
 
 
@@ -126,12 +142,17 @@ table.ui-list {
 /* empty state */
 .ui-no-item {
   width: 300px;
-  height: 110px;
+  height: 120px;
   text-align: center;
-}
-.no-item-alert {
   letter-spacing: 0.02em;
   font-size: 16px;
   font-weight: 500;
-  padding-top: 32px;
+  position: absolute;
+  top: 50%;
+  margin-top: -60px;
+  z-index: 10;
+  left: 50%;
+  margin-left: -150px;
 }
+
+
