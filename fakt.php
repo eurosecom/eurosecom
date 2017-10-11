@@ -826,9 +826,9 @@ if( $newmenu == 1 )
 <center><a href="#" ><img border=0 src='../obr/menutexty/faktury/s1-r5.jpg' style='width:98%; height:20;' alt='Príjmový pokladnièný doklad' ></a></center></td></tr>
 <tr><td width='100%' colspan='2' onClick="Otvorpvyd();" onmouseover="MZvyrazni(this);" onmouseout="MNeZvyrazni(this);">
 <center><a href="#" ><img border=0 src='../obr/menutexty/faktury/s1-r6.jpg' style='width:98%; height:20;' alt='Výdavkový pokladnièný doklad' ></a></center></td></tr>
-<tr><td width='100%' colspan='2' onClick="Otvorpvyd();" onmouseover="MZvyrazni(this);" onmouseout="MNeZvyrazni(this);">
+<tr><td width='100%' colspan='2' onClick="Upomienka();" onmouseover="MZvyrazni(this);" onmouseout="MNeZvyrazni(this);">
 <center><a href="#" ><img border=0 src='../obr/menutexty/faktury/s1-r7.jpg' style='width:98%; height:20;' alt='Upomienka odberate¾ských faktúr' ></a></center></td></tr>
-<tr><td width='100%' colspan='2' onClick="Otvorpvyd();" onmouseover="MZvyrazni(this);" onmouseout="MNeZvyrazni(this);">
+<tr><td width='100%' colspan='2' onClick="Priku();" onmouseover="MZvyrazni(this);" onmouseout="MNeZvyrazni(this);">
 <center><a href="#" ><img border=0 src='../obr/menutexty/faktury/s1-r8.jpg' style='width:98%; height:20;' alt='Príkaz na úhradu dodáv.faktúr' ></a></center></td></tr>
 
 
