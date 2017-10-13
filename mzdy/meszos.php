@@ -85,6 +85,14 @@ function Dovolenky()
 window.open('../mzdy/dovolenky.php?&copern=1&aktpr=' + aktpr + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function DovolenkyDoCsv()
+                {
+  var aktpr = 0;
+  if( document.forms.formnd1.aktpr.checked ) aktpr=1;
+
+window.open('../mzdy/dovolenky.php?&copern=1&aktpr=' + aktpr + '&page=1&dajcsv=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 function DovolenkySTR()
                 {
 
@@ -446,7 +454,12 @@ Uprav
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Èerpanie a zostatok dovolenky zamestnancov vo formáte PDF' ></a>
 </td>
 
-<td class="bmenu" width="28%">Èerpanie a zostatok dovolenky zamestnancov</td>
+<td class="bmenu" width="28%">Èerpanie a zostatok dovolenky zamestnancov
+
+<a href="#" onClick="DovolenkyDoCsv();">
+<img src='../obr/export.png' width=20 height=15 border=0 title='Export Èerpanie a zostatok dovolenky zamestnancov do formátu CSV' ></a>
+
+</td>
 <td class="bmenu" width="70%">  
 <input type="checkbox" name="aktpr" value="1"  />
  Aktuálne priemery z údajov o zamestnancoch 
