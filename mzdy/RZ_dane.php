@@ -506,7 +506,8 @@ window.open('../mzdy/priznaniefoa_xml<?php echo $rokfoa; ?>.php?cislo_oc=' + h_o
 
 //oznamenie ZRD
 <?php
-$rokzrd=2015;
+$rokzrd=$kli_vrok;
+if( $rokzrd >= 2016 ) { $rokzrd="2016";  }
 ?>
 
 function TlacZRD()
