@@ -100,7 +100,7 @@ $sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD xtitulp VARCHAR(15) AFT
 $sqldok = mysql_query("$sqlfir");
 }
 //v2016
-$sql = "SELECT xspmes FROM F$kli_vxcf"."_mzdoznameniezrd ";
+$sql = "SELECT datvrat FROM F$kli_vxcf"."_mzdoznameniezrd ";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
@@ -148,6 +148,12 @@ $sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD ucet DECIMAL(4,0) DEFAU
 $sqldok = mysql_query("$sqlfir");
 $sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD datvrat DATE NOT NULL AFTER xmes";
 $sqldok = mysql_query("$sqlfir");
+}
+
+$sql = "SELECT xspmes FROM F$kli_vxcf"."_mzdoznameniezrdpol ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
 $sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrdpol ADD xstat VARCHAR(15) AFTER xmes ";
 $sqldok = mysql_query("$sqlfir");
 $sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrdpol ADD xspuli VARCHAR(30) NOT NULL AFTER xmes";
@@ -181,6 +187,30 @@ $copern = 1*strip_tags($_REQUEST['copern']);
 $cislo_xplat = 1*$_REQUEST['cislo_xplat'];
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 
+//vlozit novu polozku
+if ( $copern == 801 AND $strana == 4 )
+     {
+
+$uprtxt = "INSERT INTO F$kli_vxcf"."_mzdoznameniezrdpol (xplat,stvrt) VALUES ('$cislo_xplat', '$zaobdobie' )";
+$upravene = mysql_query("$uprtxt");
+
+$cislo_cpl=0;
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY cpl DESC";
+$sqldok = mysql_query("$sqlfir");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $cislo_cpl=1*$riaddok->cpl;
+    }
+
+$uprav="NO";
+$copern=101;
+$strana=2;
+$dajnew=0;
+if( $cislo_cpl > 0 ) { $strana=4; }
+
+     }
+//koniec vlozit novu polozku
 
 //zapis upravene udaje
 if ( $copern == 801 AND $strana == 1 )
@@ -295,30 +325,7 @@ $strana=3;
      }
 //koniec upravit polozku
 
-//vlozit novu polozku
-if ( $copern == 801 AND $strana == 4 )
-     {
 
-$uprtxt = "INSERT INTO F$kli_vxcf"."_mzdoznameniezrdpol (xplat,stvrt) VALUES ('$cislo_xplat', '$zaobdobie' )";
-$upravene = mysql_query("$uprtxt");
-
-$cislo_cpl=0;
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY cpl DESC";
-$sqldok = mysql_query("$sqlfir");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-    {
-    $riaddok=mysql_fetch_object($sqldok);
-    $cislo_cpl=1*$riaddok->cpl;
-    }
-
-$uprav="NO";
-$copern=101;
-$strana=2;
-$dajnew=0;
-if( $cislo_cpl > 0 ) { $strana=3; }
-
-     }
-//koniec vlozit novu polozku
 
 
 //zmazat polozku
@@ -329,7 +336,7 @@ $uprtxt = "DELETE FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE cpl = $cislo_cpl "
 $upravene = mysql_query("$uprtxt");
 
 $copern=101;
-$strana=2;
+$strana=5;
      }
 //koniec zmazat polozku
 
@@ -710,7 +717,7 @@ table.zariadenia td {
   }
   function NoveVzd()
   {
-   window.open('oznamenie_zrd2016.php?copern=801&strana=2&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>', '_self' )
+   window.open('oznamenie_zrd2016.php?copern=801&strana=4&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>', '_self' )
   }
 
 
@@ -767,7 +774,7 @@ if ( $cislo_xplat > 9999 ) { $nazovplat=$cislo_xplat." ".$fir_fnazovx; }
  </table>
 </div>
 
-
+<?php //echo "copern ".$copern." strana ".$strana; ?>
 <div id="content">
 <FORM name="formv1" method="post"
       action="oznamenie_zrd2016.php?copern=801&cislo_cpl=<?php echo $cislo_cpl; ?>&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=<?php echo $strana; ?>">
@@ -782,11 +789,13 @@ $source="../mzdy/oznamenie_zrd2016.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=1', '_self');"
     class="<?php echo $clas1; ?> toleft">1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=2', '_self');"
-    class="<?php echo $clas2; ?> toleft">Zoznam drûiteæov</a>
-<?php if ( $strana == 3 ) { ?>
+    class="<?php echo $clas1; ?> toleft">2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=3', '_self');"
-    class="<?php echo $clas3; ?> toleft">⁄prava drûiteæa</a>
-<?php                     } ?>
+    class="<?php echo $clas1; ?> toleft">3</a>
+
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=5', '_self');"
+    class="<?php echo $clas2; ?> toleft">Zoznam drûiteæov</a>
+
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=40&strana=1', '_blank');"
     class="<?php echo $clas1; ?> toright">1</a>
  <h6 class="toright">TlaËiù:</h6>
@@ -796,7 +805,7 @@ $source="../mzdy/oznamenie_zrd2016.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 </div>
 
 <?php if ( $copern == 101 AND $strana == 1 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str1.jpg"
+<img src="../dokumenty/dan_z_prijmov2016/oznamenie_zrd/ozn4317a_v16_str1.jpg"
      alt="tlaËivo Ozn·menie nepeÚaûnÈ plnenie 1.strana 243kB" class="form-background">
 
 <!-- ZAHLAVIE -->
@@ -844,8 +853,79 @@ $source="../mzdy/oznamenie_zrd2016.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 //koniec copern == 101, strana 1
 ?>
 
+<?php if ( $copern == 101 AND $strana == 2 ) { ?>
+<img src="../dokumenty/dan_z_prijmov2016/oznamenie_zrd/ozn4317a_v16_str2.jpg"
+     alt="tlaËivo Ozn·menie nepeÚaûnÈ plnenie 2.strana 221kB" class="form-background">
+<span class="text-echo" style="top:93px; left:182px;"><?php echo $mdic; ?></span>
+<span class="text-echo" style="top:93px; left:528px;"><?php echo $zaobdobie; ?></span>
+<span class="text-echo" style="top:93px; left:574px;"><?php echo $kli_vrok; ?></span>
 
-<?php if ( $copern == 101 AND $strana == 2 ) {
+
+
+<?php                       }
+//koniec copern == 101, strana 2
+?>
+
+
+
+<?php if ( $copern == 101 AND $strana == 3 ) { ?>
+<img src="../dokumenty/dan_z_prijmov2016/oznamenie_zrd/ozn4317a_v16_str3.jpg"
+     alt="tlaËivo Ozn·menie nepeÚaûnÈ plnenie 3.strana 221kB" class="form-background">
+<span class="text-echo" style="top:93px; left:182px;"><?php echo $mdic; ?></span>
+<span class="text-echo" style="top:93px; left:528px;"><?php echo $zaobdobie; ?></span>
+<span class="text-echo" style="top:93px; left:574px;"><?php echo $kli_vrok; ?></span>
+
+<!-- DRZITEL  -->
+<input type="text" name="xdic" id="xdic" style="width:220px; top:186px; left:52px;"/>
+<input type="text" name="prj" id="prj" onkeyup="CiarkaNaBodku(this);"
+       style="width:220px; top:178px; left:630px;"/>
+<?php if ( $dajnew == 1 ) { ?>
+<img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="Pridaù drûiteæa"
+     style="position:absolute; top:134px; left:9px; width:24px; height:24px; cursor:pointer;">
+<?php                     } ?>
+<img src="../obr/ikony/copy5_blue_x32.png" title="KopÌrovaù ˙daje drûiteæa" onclick="ddrz.style.display='block'"
+     style="width:32px; height:32px; position:absolute; top:130px; right:6px; cursor:pointer;">
+<!-- FO -->
+<input type="text" name="xpfo" id="xpfo" style="width:358px; top:262px; left:52px;"/>
+<input type="text" name="xmfo" id="xmfo" style="width:244px; top:262px; left:431px;"/>
+<input type="text" name="xtitulp" id="xtitulp" style="width:113px; top:262px; left:692px;"/>
+<input type="text" name="xtitulz" id="xtitulz" style="width:67px; top:262px; left:827px;"/>
+<!-- PO -->
+<input type="text" name="xnpo" id="xnpo" style="width:842px; top:337px; left:52px;"/>
+
+<!-- Adresa -->
+<input type="text" name="xuli" id="xuli" style="width:634px; top:412px; left:52px;"/>
+<input type="text" name="xcis" id="xcis" style="width:173px; top:412px; left:719px;"/>
+<input type="text" name="xpsc" id="xpsc" style="width:105px; top:467px; left:52px;"/>
+<input type="text" name="xmes" id="xmes" style="width:701px; top:467px; left:191px;"/>
+
+<!-- vyplnil a pocet priloh cez echo  -->
+<!-- Vypracoval -->
+<div class="input-echo" style="width:310px; top:919px; left:52px;"><?php echo $fir_mzdt05; ?></div>
+<input type="text" name="datd" id="datd" onkeyup="CiarkaNaBodku(this);"
+       style="width:198px; top:918px; left:385px;"/>
+<div class="input-echo" style="width:290px; top:919px; left:602px;"><?php echo $fir_mzdt04; ?></div>
+<!-- Prilozene strany -->
+<div class="input-echo" style="width:105px; top:989px; left:172px; text-align:right;"><?php echo $prilohy; ?></div>
+
+<?php                       }
+//koniec copern == 101, strana 3
+?>
+
+<?php if ( $copern == 101 AND $strana == 4 ) { ?>
+<img src="../dokumenty/dan_z_prijmov2016/oznamenie_zrd/ozn4317a_v16_str4.jpg"
+     alt="tlaËivo Ozn·menie nepeÚaûnÈ plnenie 4.strana 221kB" class="form-background">
+<span class="text-echo" style="top:93px; left:182px;"><?php echo $mdic; ?></span>
+<span class="text-echo" style="top:93px; left:528px;"><?php echo $zaobdobie; ?></span>
+<span class="text-echo" style="top:93px; left:574px;"><?php echo $kli_vrok; ?></span>
+
+
+
+<?php                       }
+//koniec copern == 101, strana 4
+?>
+
+<?php if ( $copern == 101 AND $strana == 5 ) {
 //ZOZNAM DRZITELOV
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY cpl";
 $sluz = mysql_query("$sqltt");
@@ -902,58 +982,14 @@ $i=$i+1;
  </table>
 </div>
 <?php                                        }
-//koniec copern == 101, strana 2
+//koniec copern == 101, strana 5
 ?>
 
-
-<?php if ( $copern == 101 AND $strana == 3 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str2.jpg"
-     alt="tlaËivo Ozn·menie nepeÚaûnÈ plnenie 2.strana 221kB" class="form-background">
-<span class="text-echo" style="top:93px; left:182px;"><?php echo $mdic; ?></span>
-<span class="text-echo" style="top:93px; left:528px;"><?php echo $zaobdobie; ?></span>
-<span class="text-echo" style="top:93px; left:574px;"><?php echo $kli_vrok; ?></span>
-
-<!-- DRZITEL  -->
-<input type="text" name="xdic" id="xdic" style="width:220px; top:186px; left:52px;"/>
-<input type="text" name="prj" id="prj" onkeyup="CiarkaNaBodku(this);"
-       style="width:220px; top:178px; left:630px;"/>
-<?php if ( $dajnew == 1 ) { ?>
-<img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="Pridaù drûiteæa"
-     style="position:absolute; top:134px; left:9px; width:24px; height:24px; cursor:pointer;">
-<?php                     } ?>
-<img src="../obr/ikony/copy5_blue_x32.png" title="KopÌrovaù ˙daje drûiteæa" onclick="ddrz.style.display='block'"
-     style="width:32px; height:32px; position:absolute; top:130px; right:6px; cursor:pointer;">
-<!-- FO -->
-<input type="text" name="xpfo" id="xpfo" style="width:358px; top:262px; left:52px;"/>
-<input type="text" name="xmfo" id="xmfo" style="width:244px; top:262px; left:431px;"/>
-<input type="text" name="xtitulp" id="xtitulp" style="width:113px; top:262px; left:692px;"/>
-<input type="text" name="xtitulz" id="xtitulz" style="width:67px; top:262px; left:827px;"/>
-<!-- PO -->
-<input type="text" name="xnpo" id="xnpo" style="width:842px; top:337px; left:52px;"/>
-
-<!-- Adresa -->
-<input type="text" name="xuli" id="xuli" style="width:634px; top:412px; left:52px;"/>
-<input type="text" name="xcis" id="xcis" style="width:173px; top:412px; left:719px;"/>
-<input type="text" name="xpsc" id="xpsc" style="width:105px; top:467px; left:52px;"/>
-<input type="text" name="xmes" id="xmes" style="width:701px; top:467px; left:191px;"/>
-
-<!-- vyplnil a pocet priloh cez echo  -->
-<!-- Vypracoval -->
-<div class="input-echo" style="width:310px; top:919px; left:52px;"><?php echo $fir_mzdt05; ?></div>
-<input type="text" name="datd" id="datd" onkeyup="CiarkaNaBodku(this);"
-       style="width:198px; top:918px; left:385px;"/>
-<div class="input-echo" style="width:290px; top:919px; left:602px;"><?php echo $fir_mzdt04; ?></div>
-<!-- Prilozene strany -->
-<div class="input-echo" style="width:105px; top:989px; left:172px; text-align:right;"><?php echo $prilohy; ?></div>
-
-<?php                       }
-//koniec copern == 101, strana 3
-?>
 
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=1', '_self');"
     class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=2', '_self');"
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=5', '_self');"
     class="<?php echo $clas2; ?> toleft">Zoznam drûiteæov</a>
 <?php if ( $strana == 3 ) { ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=101&strana=3', '_self');"
