@@ -76,7 +76,7 @@ $sqltv = <<<trexima
    odvod        DECIMAL(10,2) DEFAULT 0,
    konx7        DECIMAL(10,0) DEFAULT 0,
    PRIMARY KEY(cpl)
-);  
+);
 trexima;
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdoznameniezrd'.$sqltv;
 $vytvor = mysql_query("$vsql");
@@ -97,6 +97,66 @@ $sqldok = mysql_query("$sqlfir");
 $sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD xtitulz VARCHAR(15) AFTER xmes ";
 $sqldok = mysql_query("$sqlfir");
 $sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD xtitulp VARCHAR(15) AFTER xmes ";
+$sqldok = mysql_query("$sqlfir");
+}
+//v2016
+$sql = "SELECT xspmes FROM F$kli_vxcf"."_mzdoznameniezrd ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD opravne DECIMAL(4,0) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD sruli VARCHAR(30) NOT NULL AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD srcdm VARCHAR(10) NOT NULL AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD srpsc VARCHAR(10) NOT NULL AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD srmes VARCHAR(30) NOT NULL AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r40 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r41 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r42 DECIMAL(10,0) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r43 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r44 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r45 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r46 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r47 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r48 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r49 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r50 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r51 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r52 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD vrat DECIMAL(4,0) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD post DECIMAL(4,0) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD ucet DECIMAL(4,0) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD datvrat DATE NOT NULL AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrdpol ADD xstat VARCHAR(15) AFTER xmes ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrdpol ADD xspuli VARCHAR(30) NOT NULL AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrdpol ADD xspcdm VARCHAR(10) NOT NULL AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrdpol ADD xsppsc VARCHAR(10) NOT NULL AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrdpol ADD xspmes VARCHAR(30) NOT NULL AFTER xmes";
 $sqldok = mysql_query("$sqlfir");
 }
 
@@ -122,57 +182,112 @@ $cislo_xplat = 1*$_REQUEST['cislo_xplat'];
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 
 
-//ulozit sumar strana
+//zapis upravene udaje
 if ( $copern == 801 AND $strana == 1 )
      {
 $mdic = strip_tags($_REQUEST['mdic']);
+$opravne = strip_tags($_REQUEST['opravne']);
+$sruli = strip_tags($_REQUEST['sruli']);
+$srcdm = strip_tags($_REQUEST['srcdm']);
+$srpsc = strip_tags($_REQUEST['srpsc']);
+$srmes = strip_tags($_REQUEST['srmes']);
+
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET".
+" mdic='$mdic', opravne='$opravne', sruli='$sruli', srcdm='$srcdm', srpsc='$srpsc', srmes='$srmes' ".
+" WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie "; //dopyt, už nie je štvrrok
+$upravene = mysql_query("$uprtxt");
+//echo $uprtxt;
+$uprav="NO";
+$copern=101;
+     }
+//koniec zapis
+
+if ( $copern == 801 AND $strana == 2 )
+     {
 $zzul = strip_tags($_REQUEST['zzul']);
 $zzcs = strip_tags($_REQUEST['zzcs']);
 $zzps = strip_tags($_REQUEST['zzps']);
 $zzms = strip_tags($_REQUEST['zzms']);
 $datum = strip_tags($_REQUEST['datum']);
 $datum_sql=SqlDatum($datum);
+$r40 = 1*strip_tags($_REQUEST['r40']);
+$r41 = 1*strip_tags($_REQUEST['r41']);
+$r42 = 1*strip_tags($_REQUEST['r42']);
+$r43 = 1*strip_tags($_REQUEST['r43']);
+$r44 = 1*strip_tags($_REQUEST['r44']);
 
-
-$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET datum='$datum_sql', zzul='$zzul', zzps='$zzps', zzms='$zzms', zzcs='$zzcs', mdic='$mdic' ".
-" WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-$upravene = mysql_query("$uprtxt"); 
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET".
+" zzul='$zzul', zzps='$zzps', zzms='$zzms', zzcs='$zzcs', datum='$datum_sql', ".
+" r40='$r40', r41='$r41', r42='$r42', r43='$r43', r44='$r44' ".
+" WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie "; //dopyt, už nie je štvrrok
+$upravene = mysql_query("$uprtxt");
 //echo $uprtxt;
 $uprav="NO";
 $copern=101;
      }
-//koniec ulozit sumar strana
+//koniec zapis
 
-
-//upravit polozku
 if ( $copern == 801 AND $strana == 3 )
      {
-$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
+$r45 = 1*strip_tags($_REQUEST['r45']);
+$r46 = 1*strip_tags($_REQUEST['r46']);
+$r47 = 1*strip_tags($_REQUEST['r47']);
+$r48 = 1*strip_tags($_REQUEST['r48']);
+$r49 = 1*strip_tags($_REQUEST['r49']);
+$r50 = 1*strip_tags($_REQUEST['r50']);
+$r51 = 1*strip_tags($_REQUEST['r51']);
+$r52 = 1*strip_tags($_REQUEST['r52']);
+$datd = strip_tags($_REQUEST['datd']);
+$datd_sql=SqlDatum($datd);
+$vrat = strip_tags($_REQUEST['vrat']);
+$post = strip_tags($_REQUEST['post']);
+$ucet = strip_tags($_REQUEST['ucet']);
+$datvrat = strip_tags($_REQUEST['datvrat']);
+$datvrat_sql=SqlDatum($datvrat);
 
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET".
+" r45='$r45', r46='$r46', r47='$r47', r48='$r48', r49='$r49', r50='$r50', r51='$r51', r52='$r52', ".
+" datd='$datd_sql', vrat='$vrat', post='$post', ucet='$ucet', datvrat='$datvrat_sql' ".
+" WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie "; //dopyt, už nie je štvrrok
+$upravene = mysql_query("$uprtxt");
+//echo $uprtxt;
+$uprav="NO";
+$copern=101;
+     }
+//koniec zapis
+
+//upravit polozku
+if ( $copern == 801 AND $strana == 4 )
+     {
+$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 $xdic = strip_tags($_REQUEST['xdic']);
+$prj = 1*strip_tags($_REQUEST['prj']);
 $xmfo = strip_tags($_REQUEST['xmfo']);
 $xpfo = strip_tags($_REQUEST['xpfo']);
+$xtitulp = strip_tags($_REQUEST['xtitulp']);
+$xtitulz = strip_tags($_REQUEST['xtitulz']);
 $xnpo = strip_tags($_REQUEST['xnpo']);
 $xuli = strip_tags($_REQUEST['xuli']);
 $xcis = strip_tags($_REQUEST['xcis']);
 $xpsc = strip_tags($_REQUEST['xpsc']);
 $xmes = strip_tags($_REQUEST['xmes']);
+$xstat = strip_tags($_REQUEST['xstat']);
+$xspuli = strip_tags($_REQUEST['xspuli']);
+$xspcdm = strip_tags($_REQUEST['xspcdm']);
+$xsppsc = strip_tags($_REQUEST['xsppsc']);
+$xspcdm = strip_tags($_REQUEST['xspcdm']);
+$xsppsc = strip_tags($_REQUEST['xsppsc']);
+$xspmes = strip_tags($_REQUEST['xspmes']);
 
-$xtitulp = strip_tags($_REQUEST['xtitulp']);
-$xtitulz = strip_tags($_REQUEST['xtitulz']);
-
-$prj = 1*strip_tags($_REQUEST['prj']);
-$datd = strip_tags($_REQUEST['datd']);
-$datd_sql=SqlDatum($datd);
-
-
-$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrdpol SET xdic='$xdic', xuli='$xuli', xcis='$xcis', xpsc='$xpsc', xmes='$xmes', ".
-" xmfo='$xmfo', xpfo='$xpfo', xnpo='$xnpo', prj='$prj', datd='$datd_sql', xtitulp='$xtitulp', xtitulz='$xtitulz' ".
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrdpol SET".
+" xdic='$xdic', prj='$prj', xmfo='$xmfo', xpfo='$xpfo', xtitulp='$xtitulp', xtitulz='$xtitulz', ".
+" xnpo='$xnpo', xuli='$xuli', xcis='$xcis', xpsc='$xpsc', xmes='$xmes', xstat='$xstat', ".
+" xspuli='$xspuli', xspcdm='$xspcdm', xsppsc='$xsppsc', xspmes='$xspmes' ".
 " WHERE  cpl = $cislo_cpl ";
-$upravene = mysql_query("$uprtxt"); 
+$upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET datd='$datd_sql' WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-$upravene = mysql_query("$uprtxt"); 
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET datd='$datd_sql' WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";  //dopyt, už nie je štvrrok
+$upravene = mysql_query("$uprtxt");
 
 $uprav="NO";
 $copern=101;
@@ -181,7 +296,7 @@ $strana=3;
 //koniec upravit polozku
 
 //vlozit novu polozku
-if ( $copern == 801 AND $strana == 2 )
+if ( $copern == 801 AND $strana == 4 )
      {
 
 $uprtxt = "INSERT INTO F$kli_vxcf"."_mzdoznameniezrdpol (xplat,stvrt) VALUES ('$cislo_xplat', '$zaobdobie' )";
@@ -194,7 +309,7 @@ $sqldok = mysql_query("$sqlfir");
     {
     $riaddok=mysql_fetch_object($sqldok);
     $cislo_cpl=1*$riaddok->cpl;
-    } 
+    }
 
 $uprav="NO";
 $copern=101;
@@ -211,7 +326,7 @@ if ( $copern == 502 )
      {
 $cislo_cpl = strip_tags($_REQUEST['cislo_cpl']);
 $uprtxt = "DELETE FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE cpl = $cislo_cpl ";
-$upravene = mysql_query("$uprtxt"); 
+$upravene = mysql_query("$uprtxt");
 
 $copern=101;
 $strana=2;
@@ -219,9 +334,33 @@ $strana=2;
 //koniec zmazat polozku
 
 
-//nacitaj 
+//nacitaj
 if ( $copern == 101 OR $copern == 40 )
      {
+$opravne = $fir_riadok->opravne;
+$sruli = $fir_riadok->sruli;
+$srcdm = $fir_riadok->srcdm;
+$srpsc = $fir_riadok->srpsc;
+$srmes = $fir_riadok->srmes;
+$r40 = $fir_riadok->r40;
+$r41 = $fir_riadok->r41;
+$r42 = $fir_riadok->r42;
+$r43 = $fir_riadok->r43;
+$r44 = $fir_riadok->r44;
+$r45 = $fir_riadok->r45;
+$r46 = $fir_riadok->r46;
+$r47 = $fir_riadok->r47;
+$r48 = $fir_riadok->r48;
+$r49 = $fir_riadok->r49;
+$r50 = $fir_riadok->r50;
+$r51 = $fir_riadok->r51;
+$r52 = $fir_riadok->r52;
+$vrat = $fir_riadok->vrat;
+$post = $fir_riadok->post;
+$ucet = $fir_riadok->ucet;
+$datvrat_sk = SkDatum($fir_riadok->datvrat);
+
+
 //udaje o platitelovi - zamestnancovi
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_xplat ";
 //echo $sqlfir;
@@ -246,6 +385,7 @@ $fir_riadok=mysql_fetch_object($fir_vysledok);
 
 $titulz = $fir_riadok->ztitz;
 $fir_fdicx = $fir_riadok->zdic;
+$zstat = $fir_riadok->zstat;
 
 mysql_free_result($fir_vysledok);
 
@@ -265,7 +405,7 @@ $fir_fdicx=$mdic;
 
 mysql_free_result($fir_vysledok);
 
-if( $strana == 3 ) 
+if( $strana == 4 )
   {
 //udaje priloha
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE cpl = $cislo_cpl ";
@@ -283,6 +423,11 @@ $xpsc = $fir_riadok->xpsc;
 $xmes = $fir_riadok->xmes;
 $xtitulp = $fir_riadok->xtitulp;
 $xtitulz = $fir_riadok->xtitulz;
+$xstat = $fir_riadok->xstat;
+$xspul = $fir_riadok->xspul;
+$xspcs = $fir_riadok->xspcs;
+$xspps = $fir_riadok->xspps;
+$xspms = $fir_riadok->xspms;
 
 mysql_free_result($fir_vysledok);
   }
@@ -471,40 +616,69 @@ table.zariadenia td {
   function ObnovUI()
   {
 
-<?php if( $strana == 1 ) { ?>
-
-
+<?php if ( $strana == 1 ) { ?>
    document.formv1.mdic.value = "<?php echo $mdic; ?>";
+<?php if ( $opravne == 1 ) { ?> document.formv1.opravne.checked = 'true'; <?php } ?>
+   document.formv1.sruli.value = "<?php echo $sruli; ?>";
+   document.formv1.srcdm.value = "<?php echo $srcdm; ?>";
+   document.formv1.srpsc.value = "<?php echo $srpsc; ?>";
+   document.formv1.srmes.value = "<?php echo $srmes; ?>";
+   document.formv1.uloz.disabled = true;
+   document.formv1.uloz1.disabled = true;
+<?php                    } ?>
+
+<?php if ( $strana == 2 ) { ?>
    document.formv1.zzul.value = "<?php echo $zzul; ?>";
    document.formv1.zzcs.value = "<?php echo $zzcs; ?>";
    document.formv1.zzps.value = "<?php echo $zzps; ?>";
    document.formv1.zzms.value = "<?php echo $zzms; ?>";
    document.formv1.datum.value = "<?php echo $datum_sk; ?>";
-
+   document.formv1.r40.value = "<?php echo $r40; ?>";
+   document.formv1.r41.value = "<?php echo $r41; ?>";
+   document.formv1.r42.value = "<?php echo $r42; ?>";
+   document.formv1.r43.value = "<?php echo $r43; ?>";
+   document.formv1.r44.value = "<?php echo $r44; ?>";
    document.formv1.uloz.disabled = true;
    document.formv1.uloz1.disabled = true;
-
 <?php                    } ?>
 
-<?php if( $strana == 3 ) { ?>
+<?php if ( $strana == 3 ) { ?>
+   document.formv1.r45.value = "<?php echo $r45; ?>";
+   document.formv1.r46.value = "<?php echo $r46; ?>";
+   document.formv1.r47.value = "<?php echo $r47; ?>";
+   document.formv1.r48.value = "<?php echo $r48; ?>";
+   document.formv1.r49.value = "<?php echo $r49; ?>";
+   document.formv1.r50.value = "<?php echo $r50; ?>";
+   document.formv1.r51.value = "<?php echo $r51; ?>";
+   document.formv1.r52.value = "<?php echo $r52; ?>";
+   document.formv1.datd.value = "<?php echo $datd_sk; ?>";
+   document.formv1.datvrat.value = "<?php echo $datvrat_sk; ?>";
+   document.formv1.uloz.disabled = true;
+   document.formv1.uloz1.disabled = true;
+<?php                    } ?>
 
+<?php if ( $strana == 4 ) { ?>
    document.formv1.xdic.value = "<?php echo $xdic; ?>";
    document.formv1.xmfo.value = "<?php echo $xmfo; ?>";
    document.formv1.xpfo.value = "<?php echo $xpfo; ?>";
    document.formv1.xnpo.value = "<?php echo $xnpo; ?>";
    document.formv1.prj.value = "<?php echo $prj; ?>";
-   document.formv1.datd.value = "<?php echo $datd_sk; ?>";
-
+<?php if ( $vrat == 1 ) { ?> document.formv1.vrat.checked = 'true'; <?php } ?>
+<?php if ( $post == 1 ) { ?> document.formv1.post.checked = 'true'; <?php } ?>
+<?php if ( $ucet == 1 ) { ?> document.formv1.ucet.checked = 'true'; <?php } ?>
    document.formv1.xuli.value = "<?php echo $xuli; ?>";
    document.formv1.xcis.value = "<?php echo $xcis; ?>";
    document.formv1.xpsc.value = "<?php echo $xpsc; ?>";
    document.formv1.xmes.value = "<?php echo $xmes; ?>";
+   document.formv1.xstat.value = "<?php echo $xstat; ?>";
    document.formv1.xtitulp.value = "<?php echo $xtitulp; ?>";
    document.formv1.xtitulz.value = "<?php echo $xtitulz; ?>";
-
+   document.formv1.xspuli.value = "<?php echo $xspuli; ?>";
+   document.formv1.xspcdm.value = "<?php echo $xspcdm; ?>";
+   document.formv1.xsppsc.value = "<?php echo $xsppsc; ?>";
+   document.formv1.xspmes.value = "<?php echo $xspmes; ?>";
    document.formv1.uloz.disabled = true;
    document.formv1.uloz1.disabled = true;
-
 <?php                    } ?>
 
   }
@@ -647,6 +821,10 @@ $source="../mzdy/oznamenie_zrd2016.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 <div class="input-echo" style="width:173px; top:696px; left:720px;"><?php echo $zcdm; ?></div>
 <div class="input-echo" style="width:105px; top:750px; left:52px;"><?php echo $zpsc; ?></div>
 <div class="input-echo" style="width:700px; top:750px; left:191px;"><?php echo $zmes; ?></div>
+<div class="input-echo" style="width:245px; top:583px; left:649px;"><?php echo $zstat; ?></div> <!-- dopyt, novinka -->
+
+
+
 
 <!-- Adresa zdravotnickeho zariadenie -->
 <input type="text" name="zzul" id="zzul" style="width:634px; top:823px; left:52px;"/>
@@ -737,7 +915,7 @@ $i=$i+1;
 
 <!-- DRZITEL  -->
 <input type="text" name="xdic" id="xdic" style="width:220px; top:186px; left:52px;"/>
-<input type="text" name="prj" id="prj" onkeyup="CiarkaNaBodku(this);" 
+<input type="text" name="prj" id="prj" onkeyup="CiarkaNaBodku(this);"
        style="width:220px; top:178px; left:630px;"/>
 <?php if ( $dajnew == 1 ) { ?>
 <img src="../obr/ikony/plus_lgreen_icon.png" onclick="NoveVzd();" title="Prida držite¾a"
