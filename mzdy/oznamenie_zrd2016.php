@@ -1167,7 +1167,17 @@ $i=$i+1;
 ///////////////////////////////////////////////////VYTLAC oznamenie
 if ( $copern == 40 )
 {
-if ( File_Exists("../tmp/priznaniedmv.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/priznaniedmv.$kli_uzid.pdf"); }
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+
+ $outfilexdel="../tmp/oznzrd_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/oznzrd_".$kli_uzid."_".$hhmmss.".pdf";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -2120,10 +2130,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$E","$rmc",1,"C");
 //1.DRZITEL
 $pdf->SetY(32);
 }
-//2.DRZITEL
-if ( $iv == 1 ) {
-$pdf->SetY(111);
-                }
+
 
 //dic
 $pdf->Cell(190,6," ","$rmc1",1,"L");
@@ -2474,8 +2481,24 @@ $iv = $iv + 1;
                                        } //koniec 2.strany
 
 if ( $strana == 3 OR $strana == 9999 ) {
+
+$pdf->AddPage();
+$pdf->SetFont('arial','',10);
+$pdf->SetLeftMargin(8);
+$pdf->SetTopMargin(10);
+if ( File_Exists('../dokumenty/dan_z_prijmov2016/oznamenie_zrd/ozn4317a_v16_str3.jpg') )
+{
+$pdf->Image('../dokumenty/dan_z_prijmov2016/oznamenie_zrd/ozn4317a_v16_str3.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
+
+
+
+                                       } //koniec 3.strany
+
+if ( $strana == 4 OR $strana == 9999 ) {
 $stranav=0;
-$sqlttv = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY xdic LIMIT 2,100 ";
+$sqlttv = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY xdic LIMIT 1,100 ";
 $sqlv = mysql_query("$sqlttv");
 $polv = mysql_num_rows($sqlv);
 //echo $polv;
@@ -2495,9 +2518,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists('../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str3.jpg') )
+if ( File_Exists('../dokumenty/dan_z_prijmov2016/oznamenie_zrd/ozn4317a_v16_str4.jpg') )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2015/oznamenie_zrd/ozn43a_v15_str3.jpg',0,0,210,297);
+$pdf->Image('../dokumenty/dan_z_prijmov2016/oznamenie_zrd/ozn4317a_v16_str4.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -2571,10 +2594,7 @@ if ( $jv == 1 ) {
 $pdf->SetY(121);
                 }
 
-if ( $jv == 2 ) {
-//3.DRZITEL V PRILOHE
-$pdf->SetY(200);
-                }
+
 //dic
 $pdf->Cell(190,6," ","$rmc1",1,"L");
 $text="1234567890";
@@ -2920,18 +2940,16 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F1","$rmc",1,"C");
 }
 $iv = $iv + 1;
 $jv = $jv + 1;
-if ( $jv == 3 ) { $jv=0; }
+if ( $jv == 2 ) { $jv=0; }
   }
-                                       } //koniec 3.strany
+                                       } //koniec 4.strany
+$pdf->Output("$outfilex");
 
-$pdf->Output("../tmp/priznaniedmv.$kli_uzid.pdf");
 
-
-$pdf->Output("../tmp/oznamzrd$kli_uzid.pdf");
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/oznamzrd<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 <?php

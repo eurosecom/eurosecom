@@ -998,9 +998,15 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 
 <td class="bmenu" width="28%">
 <select size="1" name="h_stv" id="h_stv" >
+<?php if( $kli_vrok < 2016 )
+ {
+?>
 <option value="1" >1.ötvrùrok</option>
 <option value="2" >2.ötvrùrok</option>
 <option value="3" >3.ötvrùrok</option>
+<?php
+ }
+?>
 <option value="4" >4.ötvrùrok</option>
 </select>
 </td> 
