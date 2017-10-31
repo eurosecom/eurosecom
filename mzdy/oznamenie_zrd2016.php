@@ -42,6 +42,7 @@ $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
 $zaobdobie=1*$_REQUEST['h_stv'];
+$zaobdobie=4;
 $dajnew=1;
 
 $sql = "SELECT konx7 FROM F$kli_vxcf"."_mzdoznameniezrd ";
@@ -192,30 +193,6 @@ $copern = 1*strip_tags($_REQUEST['copern']);
 $cislo_xplat = 1*$_REQUEST['cislo_xplat'];
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 
-//vlozit novu polozku
-if ( $copern == 801 AND $strana == 4 )
-     {
-
-$uprtxt = "INSERT INTO F$kli_vxcf"."_mzdoznameniezrdpol (xplat,stvrt) VALUES ('$cislo_xplat', '$zaobdobie' )";
-$upravene = mysql_query("$uprtxt");
-
-$cislo_cpl=0;
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY cpl DESC";
-$sqldok = mysql_query("$sqlfir");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-    {
-    $riaddok=mysql_fetch_object($sqldok);
-    $cislo_cpl=1*$riaddok->cpl;
-    }
-
-$uprav="NO";
-$copern=101;
-$strana=2;
-$dajnew=0;
-if( $cislo_cpl > 0 ) { $strana=4; }
-
-     }
-//koniec vlozit novu polozku
 
 //zapis upravene udaje
 if ( $copern == 801 AND $strana == 1 )
@@ -231,7 +208,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET".
 " mdic='$mdic', opravne='$opravne', sruli='$sruli', srcdm='$srcdm', srpsc='$srpsc', srmes='$srmes' ".
 " WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie "; //dopyt, už nie je štvrrok
 $upravene = mysql_query("$uprtxt");
-//echo $uprtxt;
+echo $uprtxt;
 $uprav="NO";
 $copern=101;
      }
@@ -326,11 +303,34 @@ $upravene = mysql_query("$uprtxt");
 
 $uprav="NO";
 $copern=101;
-$strana=3;
+$strana=4;
      }
 //koniec upravit polozku
 
+//vlozit novu polozku
+if ( $copern == 801 AND $strana == 5 )
+     {
 
+$uprtxt = "INSERT INTO F$kli_vxcf"."_mzdoznameniezrdpol (xplat,stvrt) VALUES ('$cislo_xplat', '$zaobdobie' )";
+$upravene = mysql_query("$uprtxt");
+
+$cislo_cpl=0;
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY cpl DESC";
+$sqldok = mysql_query("$sqlfir");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $cislo_cpl=1*$riaddok->cpl;
+    }
+
+$uprav="NO";
+$copern=101;
+$strana=4;
+$dajnew=0;
+if( $cislo_cpl > 0 ) { $strana=4; }
+
+     }
+//koniec vlozit novu polozku
 
 
 //zmazat polozku
@@ -349,6 +349,11 @@ $strana=5;
 //nacitaj
 if ( $copern == 101 OR $copern == 40 )
      {
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrd WHERE xplat = $cislo_xplat ";
+//echo $sqlfir;
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
 $opravne = $fir_riadok->opravne;
 $sruli = $fir_riadok->sruli;
 $srcdm = $fir_riadok->srcdm;
@@ -664,6 +669,9 @@ table.zariadenia td {
    document.formv1.r50.value = "<?php echo $r50; ?>";
    document.formv1.r51.value = "<?php echo $r51; ?>";
    document.formv1.r52.value = "<?php echo $r52; ?>";
+<?php if ( $vrat == 1 ) { ?> document.formv1.vrat.checked = 'true'; <?php } ?>
+<?php if ( $post == 1 ) { ?> document.formv1.post.checked = 'true'; <?php } ?>
+<?php if ( $ucet == 1 ) { ?> document.formv1.ucet.checked = 'true'; <?php } ?>
    document.formv1.datd.value = "<?php echo $datd_sk; ?>";
    document.formv1.datvrat.value = "<?php echo $datvrat_sk; ?>";
    document.formv1.uloz.disabled = true;
@@ -676,9 +684,6 @@ table.zariadenia td {
    document.formv1.xpfo.value = "<?php echo $xpfo; ?>";
    document.formv1.xnpo.value = "<?php echo $xnpo; ?>";
    document.formv1.prj.value = "<?php echo $prj; ?>";
-<?php if ( $vrat == 1 ) { ?> document.formv1.vrat.checked = 'true'; <?php } ?>
-<?php if ( $post == 1 ) { ?> document.formv1.post.checked = 'true'; <?php } ?>
-<?php if ( $ucet == 1 ) { ?> document.formv1.ucet.checked = 'true'; <?php } ?>
    document.formv1.xuli.value = "<?php echo $xuli; ?>";
    document.formv1.xcis.value = "<?php echo $xcis; ?>";
    document.formv1.xpsc.value = "<?php echo $xpsc; ?>";
@@ -734,7 +739,7 @@ table.zariadenia td {
   }
   function NoveVzd()
   {
-   window.open('oznamenie_zrd2016.php?copern=801&strana=4&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>', '_self' )
+   window.open('oznamenie_zrd2016.php?copern=801&strana=5&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>', '_self' )
   }
 
 
