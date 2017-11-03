@@ -208,7 +208,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET".
 " mdic='$mdic', opravne='$opravne', sruli='$sruli', srcdm='$srcdm', srpsc='$srpsc', srmes='$srmes' ".
 " WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie "; //dopyt, už nie je štvrrok
 $upravene = mysql_query("$uprtxt");
-echo $uprtxt;
+//echo $uprtxt;
 $uprav="NO";
 $copern=101;
      }
@@ -421,6 +421,9 @@ $datum_sk = SkDatum($fir_riadok->datum);
 $datd_sk = SkDatum($fir_riadok->datd);
 $fir_fdicx=$mdic;
 
+$prj = $fir_riadok->prj;
+$zrd = $fir_riadok->zrd;
+
 mysql_free_result($fir_vysledok);
 
 if( $strana == 4 )
@@ -522,8 +525,8 @@ $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_x
 $sqldok = mysql_query("$sqlfir");
 if ( $sqldok ) { $pocetdic = mysql_num_rows($sqldok); }
 
-$pocetdic2=$pocetdic-2;
-$pocetdic3=$pocetdic2/3;
+$pocetdic2=$pocetdic-1;
+$pocetdic3=$pocetdic2/2;
 $prilohy=ceil($pocetdic3);
 if ( $prilohy < 0 ) { $prilohy=0; }
 if ( $prilohy == -0 ) { $prilohy=0; }
@@ -877,11 +880,11 @@ $t02=substr($rokp,3,1);
 <img src="../obr/ikony/list_blue_icon.png" onclick="dzdrzar.style.display='block';" title="Zobrazi uložené adresy" style="width:32px; height:32px; position:absolute; top:112px; right:6px; cursor:pointer;">
 
 <!-- II.ODDIEL -->
-<div class="input-echo" style="width:220px; top:283px; left:572px; text-align:right;"><?php echo $r20; ?>&nbsp;</div>
+<div class="input-echo" style="width:220px; top:283px; left:572px; text-align:right;"><?php echo $prj; ?>&nbsp;</div>
 <div class="input-echo" style="width:220px; top:322px; left:572px; text-align:right;"><?php echo $r21; ?>&nbsp;</div>
 <div class="input-echo" style="width:220px; top:366px; left:572px; text-align:right;"><?php echo $r21a; ?>&nbsp;</div>
 <div class="input-echo" style="width:220px; top:411px; left:571px; text-align:right;"><?php echo $r22; ?>&nbsp;</div>
-<div class="input-echo" style="width:220px; top:450px; left:571px; text-align:right;"><?php echo $r23; ?>&nbsp;</div>
+<div class="input-echo" style="width:220px; top:450px; left:571px; text-align:right;"><?php echo $zrd; ?>&nbsp;</div>
 <input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:488px; left:596px;"/>
 
 <!-- III.ODDIEL -->
@@ -1798,19 +1801,17 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F1","$rmc",1,"C");
                                        } //koniec 1.strany
-}
-$i = $i + 1;
-  }
+
 
 if ( $strana == 2 OR $strana == 9999 ) {
-$sqlttv = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY xdic ";
+$sqlttv = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY xdic LIMIT 1 ";
 $sqlv = mysql_query("$sqlttv");
 $polv = mysql_num_rows($sqlv);
 $iv=0;
 
   while ($iv <= 1 )
   {
-  if (@$zaznam=mysql_data_seek($sqlv,$iv))
+  if (@$zaznam=mysql_data_seek($sqlv,$iv) OR $iv == 0 )
 {
 $hlavickav=mysql_fetch_object($sqlv);
 
@@ -2001,7 +2002,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F1","$rmc",1,"C");
 //SUHRNNE UDAJE
 //riadok 20
 $pdf->Cell(190,11," ","$rmc1",1,"L");
-$hodx=100*$r20;
+$hodx=100*$prj;
 //if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 9s",$hodx);
 //$text="12456789";
@@ -2097,7 +2098,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",1,"C");
 //riadok 23
 $pdf->Cell(190,3," ","$rmc1",1,"L");
-$hodx=100*$r23;
+$hodx=100*$zrd;
 //if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 9s",$hodx);
 //$text="123456789";
@@ -3106,6 +3107,10 @@ $pdf->Cell(18,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"R");$pdf->Cel
 $pdf->Cell(4,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"L");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"L");
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"R");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",1,"R");
                                        } //koniec 3.strany
+
+}
+$i = $i + 1;
+  }
 
 if ( $strana == 4 OR $strana == 9999 ) {
 $stranav=0;
