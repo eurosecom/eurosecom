@@ -104,7 +104,7 @@ else
     {
 $h_dbmain = strip_tags($_REQUEST['h_dbmain']);
 
-if( $h_dbmain <= 2015 ) 
+if( $h_dbmain <= 2017 ) 
  {
 echo "Databáza pre rok ".$h_dbmain." ???";
 exit;
@@ -266,7 +266,7 @@ $sql = "ALTER TABLE ".$mysqldbkam.".uctpohyby MODIFY datm timestamp ON UPDATE CU
 $vysledek = mysql_query("$sql");
 
 
-echo "Databaza 2017 zalozena.<br />";
+echo "Databaza 2018 zalozena.<br />";
 
 
 $copern=2;
