@@ -172,6 +172,23 @@ $sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrdpol ADD xspmes VARCHAR(30) N
 $sqldok = mysql_query("$sqlfir");
 }
 
+$sql = "SELECT r23 FROM F$kli_vxcf"."_mzdoznameniezrdpol";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r20 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r21 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r21a DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r22 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "ALTER TABLE F$kli_vxcf"."_mzdoznameniezrd ADD r23 DECIMAL(10,2) DEFAULT 0 AFTER xmes";
+$sqldok = mysql_query("$sqlfir");
+}
+
+
 $jezam=0;
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrd WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
 $sqldok = mysql_query("$sqlfir");
@@ -220,6 +237,11 @@ $zzul = strip_tags($_REQUEST['zzul']);
 $zzcs = strip_tags($_REQUEST['zzcs']);
 $zzps = strip_tags($_REQUEST['zzps']);
 $zzms = strip_tags($_REQUEST['zzms']);
+$r20 = 1*strip_tags($_REQUEST['r20']);
+$r21 = 1*strip_tags($_REQUEST['r21']);
+$r21a = 1*strip_tags($_REQUEST['r21a']);
+$r22 = 1*strip_tags($_REQUEST['r22']);
+$r23 = 1*strip_tags($_REQUEST['r23']);
 $datum = strip_tags($_REQUEST['datum']);
 $datum_sql=SqlDatum($datum);
 $r40 = 1*strip_tags($_REQUEST['r40']);
@@ -229,7 +251,8 @@ $r43 = 1*strip_tags($_REQUEST['r43']);
 $r44 = 1*strip_tags($_REQUEST['r44']);
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET".
-" zzul='$zzul', zzps='$zzps', zzms='$zzms', zzcs='$zzcs', datum='$datum_sql', ".
+" zzul='$zzul', zzps='$zzps', zzms='$zzms', zzcs='$zzcs', ".
+" r20='$r20', r21='$r21', r21a='$r21a', r22='$r22', r23='$r23', datum='$datum_sql', ".
 " r40='$r40', r41='$r41', r42='$r42', r43='$r43', r44='$r44' ".
 " WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie "; //dopyt, už nie je štvrrok
 $upravene = mysql_query("$uprtxt");
@@ -359,6 +382,11 @@ $sruli = $fir_riadok->sruli;
 $srcdm = $fir_riadok->srcdm;
 $srpsc = $fir_riadok->srpsc;
 $srmes = $fir_riadok->srmes;
+$r20 = $fir_riadok->r20;
+$r21 = $fir_riadok->r21;
+$r21a = $fir_riadok->r21a;
+$r22 = $fir_riadok->r22;
+$r23 = $fir_riadok->r23;
 $r40 = $fir_riadok->r40;
 $r41 = $fir_riadok->r41;
 $r42 = $fir_riadok->r42;
@@ -654,6 +682,11 @@ table.zariadenia td {
    document.formv1.zzps.value = "<?php echo $zzps; ?>";
    document.formv1.zzms.value = "<?php echo $zzms; ?>";
    document.formv1.datum.value = "<?php echo $datum_sk; ?>";
+   document.formv1.r20.value = "<?php echo $r20; ?>";
+   document.formv1.r21.value = "<?php echo $r21; ?>";
+   document.formv1.r21a.value = "<?php echo $r21a; ?>";
+   document.formv1.r22.value = "<?php echo $r22; ?>";
+   document.formv1.r23.value = "<?php echo $r23; ?>";
    document.formv1.r40.value = "<?php echo $r40; ?>";
    document.formv1.r41.value = "<?php echo $r41; ?>";
    document.formv1.r42.value = "<?php echo $r42; ?>";
@@ -880,11 +913,13 @@ $t02=substr($rokp,3,1);
 <img src="../obr/ikony/list_blue_icon.png" onclick="dzdrzar.style.display='block';" title="Zobrazi uložené adresy" style="width:32px; height:32px; position:absolute; top:112px; right:6px; cursor:pointer;">
 
 <!-- II.ODDIEL -->
-<div class="input-echo" style="width:220px; top:283px; left:572px; text-align:right;"><?php echo $prj; ?>&nbsp;</div>
-<div class="input-echo" style="width:220px; top:322px; left:572px; text-align:right;"><?php echo $r21; ?>&nbsp;</div>
-<div class="input-echo" style="width:220px; top:366px; left:572px; text-align:right;"><?php echo $r21a; ?>&nbsp;</div>
-<div class="input-echo" style="width:220px; top:411px; left:571px; text-align:right;"><?php echo $r22; ?>&nbsp;</div>
-<div class="input-echo" style="width:220px; top:450px; left:571px; text-align:right;"><?php echo $zrd; ?>&nbsp;</div>
+<input type="text" name="r20" id="r20" onkeyup="CiarkaNaBodku(this);" style="width:220px; top:283px; left:572px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="" title="Vypoèíta riadok 20 na základe prílohy" style="width:32px; height:32px; position:absolute; top:280px; right:6px; cursor:pointer;">
+<input type="text" name="r21" id="r21" onkeyup="CiarkaNaBodku(this);" style="width:220px; top:322px; left:572px;"/>
+<input type="text" name="r21a" id="r21a" onkeyup="CiarkaNaBodku(this);" style="width:220px; top:366px; left:572px;"/>
+<input type="text" name="r22" id="r22" onkeyup="CiarkaNaBodku(this);" style="width:220px; top:411px; left:572px;"/>
+<input type="text" name="r23" id="r23" onkeyup="CiarkaNaBodku(this);" style="width:220px; top:450px; left:572px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="" title="Vypoèíta daò na riadku 23" style="width:32px; height:32px; position:absolute; top:447px; right:6px; cursor:pointer;">
 <input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:488px; left:596px;"/>
 
 <!-- III.ODDIEL -->
@@ -2002,7 +2037,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F1","$rmc",1,"C");
 //SUHRNNE UDAJE
 //riadok 20
 $pdf->Cell(190,11," ","$rmc1",1,"L");
-$hodx=100*$prj;
+$hodx=100*$r20;
 //if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 9s",$hodx);
 //$text="12456789";
@@ -2098,7 +2133,7 @@ $pdf->Cell(6,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",1,"C");
 //riadok 23
 $pdf->Cell(190,3," ","$rmc1",1,"L");
-$hodx=100*$zrd;
+$hodx=100*$r23;
 //if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 9s",$hodx);
 //$text="123456789";
