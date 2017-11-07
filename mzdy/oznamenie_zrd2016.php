@@ -368,6 +368,72 @@ $strana=5;
      }
 //koniec zmazat polozku
 
+// nacitaj sumu a dane
+$nacitajsumu=0;
+$vypocitajdan=0;
+$nacitajsumu = $_REQUEST['nacitajsumu'];
+$vypocitajdan = $_REQUEST['vypocitajdan'];
+if( $nacitajsumu == 1 )
+  {
+$celprj=0;
+$sqlfir = "SELECT SUM(prj) AS sumprj FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+    {
+    $riaddok=mysql_fetch_object($sqldok);
+    $celprj=1*$riaddok->sumprj;
+    }
+
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r21=0, r21a=0, r22=0, r23=0, r20=$celprj, kkx1=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+
+$vypocitajdan=1;
+  }
+if( $vypocitajdan == 1 )
+  {
+
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r22=r20+r21, kkx1=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET kkx1=r22*19 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET kkx1=kkx1/100 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET kkx1=kkx1-0.0049 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r23=kkx1 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r49=r23 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+
+  }
+//koniec nacitaj sumu a dane
+
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r22=r20+r21 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+
+
+//dan po vynati prijmov zo zdrojov v zahranici
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r41=0, r43=0, r49=0, kkx1=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r40 != 0 ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r41=r22-r40 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r40 != 0 ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET kkx1=r41*19 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r40 != 0 ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET kkx1=kkx1/100 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r40 != 0 ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET kkx1=kkx1-0.0049 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r40 != 0 ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r43=kkx1, r49=kkx1 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r40 != 0 ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r49=r43-r48 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r40 != 0 ";
+$sqldok = mysql_query("$sqlfir");
+
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r51=r49-r50, r52=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r52=-r51 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r51 < 0 ";
+$sqldok = mysql_query("$sqlfir");
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r51=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r51 < 0 ";
+$sqldok = mysql_query("$sqlfir");
 
 //nacitaj
 if ( $copern == 101 OR $copern == 40 )
@@ -517,36 +583,6 @@ if ( $nar_sk == '00.00.0000' ) { $nar_sk=""; }
 
   }
 
-//suma dane
-$celprj=0;
-$sqlfir = "SELECT SUM(prj) AS sumprj FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-$sqldok = mysql_query("$sqlfir");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-    {
-    $riaddok=mysql_fetch_object($sqldok);
-    $celprj=1*$riaddok->sumprj;
-    }
-
-$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET prj=$celprj WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-$sqldok = mysql_query("$sqlfir");
-$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET kkx1=prj*19 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-$sqldok = mysql_query("$sqlfir");
-$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET kkx1=kkx1/100 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-$sqldok = mysql_query("$sqlfir");
-$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET kkx1=kkx1-0.0049 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-$sqldok = mysql_query("$sqlfir");
-$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET zrd=kkx1 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-$sqldok = mysql_query("$sqlfir");
-
-$r15=0; $r16=0;
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrd WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-$sqldok = mysql_query("$sqlfir");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-    {
-    $riaddok=mysql_fetch_object($sqldok);
-    $r15=$riaddok->prj;
-    $r16=$riaddok->zrd;
-    }
 
 $prilohy=0; $pocetdic=0; $pocetdic2=0; $pocetdic3=0;
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie";
@@ -745,6 +781,14 @@ table.zariadenia td {
   {
    window.open('oznamenie_zrd2016.php?copern=40&cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&strana=9999', '_blank');
   }
+  function nacitajSumu()
+  {
+   window.open('oznamenie_zrd2016.php?cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&copern=101&drupoh=1&strana=2&nacitajsumu=1', '_self');
+  }
+  function vypocitajDan()
+  {
+   window.open('oznamenie_zrd2016.php?cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&copern=101&drupoh=1&strana=2&vypocitajdan=1', '_self');
+  }
 
 //Z ciarky na bodku
   function CiarkaNaBodku(Vstup)
@@ -914,12 +958,12 @@ $t02=substr($rokp,3,1);
 
 <!-- II.ODDIEL -->
 <input type="text" name="r20" id="r20" onkeyup="CiarkaNaBodku(this);" style="width:220px; top:283px; left:572px;"/>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="" title="Vypoèíta riadok 20 na základe prílohy" style="width:32px; height:32px; position:absolute; top:280px; right:6px; cursor:pointer;">
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="nacitajSumu();" title="Vypoèíta riadok 20 na základe prílohy" style="width:32px; height:32px; position:absolute; top:280px; right:6px; cursor:pointer;">
 <input type="text" name="r21" id="r21" onkeyup="CiarkaNaBodku(this);" style="width:220px; top:322px; left:572px;"/>
 <input type="text" name="r21a" id="r21a" onkeyup="CiarkaNaBodku(this);" style="width:220px; top:366px; left:572px;"/>
 <input type="text" name="r22" id="r22" onkeyup="CiarkaNaBodku(this);" style="width:220px; top:411px; left:572px;"/>
 <input type="text" name="r23" id="r23" onkeyup="CiarkaNaBodku(this);" style="width:220px; top:450px; left:572px;"/>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="" title="Vypoèíta daò na riadku 23" style="width:32px; height:32px; position:absolute; top:447px; right:6px; cursor:pointer;">
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocitajDan();" title="Vypoèíta daò na riadku 23" style="width:32px; height:32px; position:absolute; top:447px; right:6px; cursor:pointer;">
 <input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:488px; left:596px;"/>
 
 <!-- III.ODDIEL -->
