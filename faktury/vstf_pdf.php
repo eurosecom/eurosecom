@@ -806,6 +806,7 @@ $hlavicka->icd="SK2022858728";
 
 $icoodber=$hlavicka->ico;
 if( $hlavicka->ico == 313114 ) { $icoodber="00313114"; }
+if( $_SERVER['SERVER_NAME'] == "www.vppsro.sk" AND $icoodber <= 999999 ) { $icoodber="00".$icoodber; } 
 
 $pdf->Cell(180,3,"     ","0",1,"L");
 $pdf->Cell(90,6,"$dodavatel","1",0,"L");$pdf->Cell(90,6,"$odberatel","1",1,"L");
