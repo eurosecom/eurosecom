@@ -346,15 +346,6 @@ $zpsc = $fir_fpsc;
 if ( $nar_sk == '00.00.0000' ) { $nar_sk=""; }
    }
 
-$r15=0; $r16=0;
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrd WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-$sqldok = mysql_query("$sqlfir");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-    {
-    $riaddok=mysql_fetch_object($sqldok);
-    $r15=$riaddok->prj;
-    $r16=$riaddok->zrd;
-    }
 
 if ( $strana == 3 )
    {
@@ -413,9 +404,11 @@ if ( $j == 0 )
 
   $text = " <dic><![CDATA[".$mdic."]]></dic>"."\r\n"; fwrite($soubor, $text);
   $text = " <zaObdobie>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <stvrtRok><![CDATA[".$zaobdobie."]]></stvrtRok>"."\r\n"; fwrite($soubor, $text);
   $text = "  <rok><![CDATA[".$kli_vrok."]]></rok>"."\r\n"; fwrite($soubor, $text);
   $text = " </zaObdobie>"."\r\n"; fwrite($soubor, $text);
+
+$doplnenie=1*$hlavicka->opravne;
+  $text = "  <doplnenie><![CDATA[".$doplnenie."]]></doplnenie>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
 $prie = iconv("CP1250", "UTF-8", $prie);
@@ -444,6 +437,15 @@ $zmes = iconv("CP1250", "UTF-8", $zmes);
   $text = "  <obec><![CDATA[".$zmes."]]></obec>"."\r\n"; fwrite($soubor, $text);
   $text = " </sidlo>"."\r\n"; fwrite($soubor, $text);
 
+  $text = " <sidloNaUzemiSr>"."\r\n"; fwrite($soubor, $text);
+$sruli = iconv("CP1250", "UTF-8", $hlavicka->sruli);
+  $text = "  <ulica><![CDATA[".$sruli."]]></ulica>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <supisneOrientacneCislo><![CDATA[".$hlavicka->srcdm."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <psc><![CDATA[".$hlavicka->srpsc."]]></psc>"."\r\n"; fwrite($soubor, $text);
+$srmes = iconv("CP1250", "UTF-8", $hlavicka->srmes);
+  $text = "  <obec><![CDATA[".$srmes."]]></obec>"."\r\n"; fwrite($soubor, $text);
+  $text = " </sidloNaUzemiSr>"."\r\n"; fwrite($soubor, $text);
+
   $text = " <adresaZariadenia>"."\r\n"; fwrite($soubor, $text);
 $zzul = iconv("CP1250", "UTF-8", $zzul);
   $text = "  <ulica><![CDATA[".$zzul."]]></ulica>"."\r\n"; fwrite($soubor, $text);
@@ -454,20 +456,42 @@ $zzms = iconv("CP1250", "UTF-8", $zzms);
   $text = " </adresaZariadenia>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <suhrnneUdaje>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <vyska><![CDATA[".$r15."]]></vyska>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <suma><![CDATA[".$r16."]]></suma>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <vyskaSr><![CDATA[".$hlavicka->r20."]]></vyskaSr>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <vyskaZahr><![CDATA[".$hlavicka->r21."]]></vyskaZahr>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <vyskaZahrSr><![CDATA[".$hlavicka->r21a."]]></vyskaZahrSr>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <vyskaSpolu><![CDATA[".$hlavicka->r22."]]></vyskaSpolu>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <dan><![CDATA[".$hlavicka->r23."]]></dan>"."\r\n"; fwrite($soubor, $text);
 $text=SkDatum($hlavicka->datum);
   $text = "  <datum><![CDATA[".$text."]]></datum>"."\r\n"; fwrite($soubor, $text);
   $text = " </suhrnneUdaje>"."\r\n"; fwrite($soubor, $text);
 
+  $text = " <zamedzenieDvojZdaneniu>"."\r\n"; fwrite($soubor, $text);
+  $text = " <uhrn1><![CDATA[".$hlavicka->r40."]]></uhrn1>"."\r\n"; fwrite($soubor, $text);
+  $text = " <plneniaPoVynati><![CDATA[".$hlavicka->r41."]]></plneniaPoVynati>"."\r\n"; fwrite($soubor, $text);
+  $text = " <sadzba><![CDATA[".$hlavicka->r42."]]></sadzba>"."\r\n"; fwrite($soubor, $text);
+  $text = " <dan><![CDATA[".$hlavicka->r43."]]></dan>"."\r\n"; fwrite($soubor, $text);
+  $text = " <uhrn2><![CDATA[".$hlavicka->r44."]]></uhrn2>"."\r\n"; fwrite($soubor, $text);
+  $text = " <uhrn3><![CDATA[".$hlavicka->r45."]]></uhrn3>"."\r\n"; fwrite($soubor, $text);
+  $text = " <percento><![CDATA[".$hlavicka->r46."]]></percento>"."\r\n"; fwrite($soubor, $text);
+  $text = " <danMaximalna><![CDATA[".$hlavicka->r47."]]></danMaximalna>"."\r\n"; fwrite($soubor, $text);
+  $text = " <danZapocet><![CDATA[".$hlavicka->r48."]]></danZapocet>"."\r\n"; fwrite($soubor, $text);
+  $text = " <danPoVynati><![CDATA[".$hlavicka->r49."]]></danPoVynati>"."\r\n"; fwrite($soubor, $text);
+  $text = " <danZrazena><![CDATA[".$hlavicka->r50."]]></danZrazena>"."\r\n"; fwrite($soubor, $text);
+  $text = " <danNaOdvedenie><![CDATA[".$hlavicka->r51."]]></danNaOdvedenie>"."\r\n"; fwrite($soubor, $text);
+  $text = " <danNaVratenie><![CDATA[".$hlavicka->r52."]]></danNaVratenie>"."\r\n"; fwrite($soubor, $text);
+  $text = " </zamedzenieDvojZdaneniu>"."\r\n"; fwrite($soubor, $text);
+
+
   $text = " <vypracoval>"."\r\n"; fwrite($soubor, $text);
+$fir_mzdt05 = iconv("CP1250", "UTF-8", $fir_mzdt05);
+  $text = "  <vypracoval><![CDATA[".$fir_mzdt05."]]></vypracoval>"."\r\n"; fwrite($soubor, $text);
+
 $text=SkDatum($hlavicka->datd);
   $text = "  <dna><![CDATA[".$text."]]></dna>"."\r\n"; fwrite($soubor, $text);
 
 $telefon=str_replace("/","",$fir_mzdt04);
   $text = "  <telefon><![CDATA[".$telefon."]]></telefon>"."\r\n"; fwrite($soubor, $text);
-$fir_mzdt05 = iconv("CP1250", "UTF-8", $fir_mzdt05);
-  $text = "  <vypracoval><![CDATA[".$fir_mzdt05."]]></vypracoval>"."\r\n"; fwrite($soubor, $text);
+
 $podpis="1";
   $text = "  <podpis><![CDATA[".$podpis."]]></podpis>"."\r\n"; fwrite($soubor, $text);
   $text = " </vypracoval>"."\r\n"; fwrite($soubor, $text);
@@ -475,6 +499,32 @@ $textx=$prilohy;
 if ( $textx == 0 ) $textx="";
   $text = " <pocetStrPrilohy><![CDATA[".$textx."]]></pocetStrPrilohy>"."\r\n"; fwrite($soubor, $text);
   $text = "</hlavicka>"."\r\n"; fwrite($soubor, $text);
+
+
+  $text = " <ziadost>"."\r\n"; fwrite($soubor, $text);
+
+$vrat=1*$hlavicka->vrat;
+  $text = " <vratit><![CDATA[".$vrat."]]></vratit>"."\r\n"; fwrite($soubor, $text);
+  $text = " <sposobPlatby>"."\r\n"; fwrite($soubor, $text);
+
+$post=1*$hlavicka->post;
+  $text = " <poukazka><![CDATA[".$post."]]></poukazka>"."\r\n"; fwrite($soubor, $text);
+
+$ucet=1*$hlavicka->ucet;
+  $text = " <ucet><![CDATA[".$ucet."]]></ucet>"."\r\n"; fwrite($soubor, $text);
+  $text = " </sposobPlatby>"."\r\n"; fwrite($soubor, $text);
+  $text = " <iban><![CDATA[".$fir_fib1."]]></iban>"."\r\n"; fwrite($soubor, $text);
+
+$datd=SkDatum($hlavicka->datd);
+  $text = " <datum><![CDATA[".$datd."]]></datum>"."\r\n"; fwrite($soubor, $text);
+
+$podpis="1";
+  $text = " <podpis><![CDATA[".$podpis."]]></podpis>"."\r\n"; fwrite($soubor, $text);
+  $text = " </ziadost>"."\r\n"; fwrite($soubor, $text);
+
+
+//po tadeto ok
+
      }
 //koniec ak j=0
 
