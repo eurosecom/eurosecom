@@ -223,7 +223,7 @@ $srmes = strip_tags($_REQUEST['srmes']);
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET".
 " mdic='$mdic', opravne='$opravne', sruli='$sruli', srcdm='$srcdm', srpsc='$srpsc', srmes='$srmes' ".
-" WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie "; //dopyt, už nie je štvrrok
+" WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
 $upravene = mysql_query("$uprtxt");
 //echo $uprtxt;
 $uprav="NO";
@@ -254,7 +254,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET".
 " zzul='$zzul', zzps='$zzps', zzms='$zzms', zzcs='$zzcs', ".
 " r20='$r20', r21='$r21', r21a='$r21a', r22='$r22', r23='$r23', datum='$datum_sql', ".
 " r40='$r40', r41='$r41', r42='$r42', r43='$r43', r44='$r44' ".
-" WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie "; //dopyt, už nie je štvrrok
+" WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
 $upravene = mysql_query("$uprtxt");
 //echo $uprtxt;
 $uprav="NO";
@@ -283,7 +283,7 @@ $datvrat_sql=SqlDatum($datvrat);
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET".
 " r45='$r45', r46='$r46', r47='$r47', r48='$r48', r49='$r49', r50='$r50', r51='$r51', r52='$r52', ".
 " datd='$datd_sql', vrat='$vrat', post='$post', ucet='$ucet', datvrat='$datvrat_sql' ".
-" WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie "; //dopyt, už nie je štvrrok
+" WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
 $upravene = mysql_query("$uprtxt");
 //echo $uprtxt;
 $uprav="NO";
@@ -321,7 +321,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrdpol SET".
 " WHERE  cpl = $cislo_cpl ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET datd='$datd_sql' WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";  //dopyt, už nie je štvrrok
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET datd='$datd_sql' WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
 $upravene = mysql_query("$uprtxt");
 
 $uprav="NO";
@@ -869,6 +869,8 @@ if ( $cislo_xplat > 9999 ) { $nazovplat=$cislo_xplat." ".$fir_fnazovx; }
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="InfoFRSR();"
          title="Aktuálna informácia od Finanèného riadite¾stva SR" class="btn-form-tool">
+    <img src="../obr/ikony/upbox_blue_icon.png" onclick="" title="Export do XML" class="btn-form-tool">
+    <img src="../obr/ikony/pencil_blue_icon.png" onclick="" title="Upravi" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
