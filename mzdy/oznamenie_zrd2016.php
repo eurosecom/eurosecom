@@ -847,6 +847,14 @@ table.zariadenia td {
 
    ddrz.style.display='none';
   }
+
+function ZRDXML()
+                {
+
+window.open('../mzdy/oznamenie_zrdxml2016.php?cislo_xplat=<?php echo $cislo_xplat; ?>&h_stv=<?php echo $zaobdobie; ?>&copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 </script>
 </HEAD>
 <?php if( $copern != 40 ) { ?>
@@ -869,7 +877,7 @@ if ( $cislo_xplat > 9999 ) { $nazovplat=$cislo_xplat." ".$fir_fnazovx; }
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="InfoFRSR();"
          title="Aktuálna informácia od Finanèného riadite¾stva SR" class="btn-form-tool">
-    <img src="../obr/ikony/upbox_blue_icon.png" onclick="" title="Export do XML" class="btn-form-tool">
+    <img src="../obr/ikony/upbox_blue_icon.png" onclick="ZRDXML();" title="Export do XML" class="btn-form-tool">
     <img src="../obr/ikony/pencil_blue_icon.png" onclick="" title="Upravi" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>

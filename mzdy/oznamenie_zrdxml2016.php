@@ -53,11 +53,19 @@ $tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resiz
 $tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
-$hhmm = Date ("H_i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
-$idx=$kli_uzid.$hhmm;
 
-$nazsub="OZNAMENIE_stvrtrok_".$zaobdobie."_".$kli_vrok."_".$idx.".xml";
-$cislo_oc=1;
+$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+ $outfilexdel="../tmp/oznzrdx_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
+
+$outfilex="../tmp/oznzrdx_".$kli_uzid."_".$hhmmss.".xml";
+if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
+
+$nazsub=$outfilex;
+
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -87,8 +95,7 @@ var sirkawic = screen.width-10;
 if ( $copern == 110 )
      {
 //prva strana
-if ( File_Exists("../tmp/$nazsub") ) { $soubor = unlink("../tmp/$nazsub"); }
-$soubor = fopen("../tmp/$nazsub", "a+");
+$soubor = fopen("$nazsub", "a+");
 
 //verzia 2016
 $sqlt = <<<mzdprc
@@ -498,8 +505,6 @@ $podpis="1";
 $textx=$prilohy;
 if ( $textx == 0 ) $textx="";
   $text = " <pocetStrPrilohy><![CDATA[".$textx."]]></pocetStrPrilohy>"."\r\n"; fwrite($soubor, $text);
-  $text = "</hlavicka>"."\r\n"; fwrite($soubor, $text);
-
 
   $text = " <ziadost>"."\r\n"; fwrite($soubor, $text);
 
@@ -522,7 +527,7 @@ $podpis="1";
   $text = " <podpis><![CDATA[".$podpis."]]></podpis>"."\r\n"; fwrite($soubor, $text);
   $text = " </ziadost>"."\r\n"; fwrite($soubor, $text);
 
-
+  $text = "</hlavicka>"."\r\n"; fwrite($soubor, $text);
 //po tadeto ok
 
      }
@@ -543,7 +548,7 @@ $pol = mysql_num_rows($sql);
 $i=0;
 $j=0;
 $aktualna=1;
-$celkovo=$pol;
+$celkovo=ceil($pol/2);
 
   while ($i < $pol )
   {
@@ -557,6 +562,7 @@ if ( $j == 0 ) {
   $text = "  <aktualna><![CDATA[".$aktualna."]]></aktualna>"."\r\n"; fwrite($soubor, $text);
   $text = "  <celkovo><![CDATA[".$celkovo."]]></celkovo>"."\r\n"; fwrite($soubor, $text);
   $text = " </strana>"."\r\n"; fwrite($soubor, $text);
+
                }
 
   $text = " <drzitel>"."\r\n"; fwrite($soubor, $text);
@@ -584,18 +590,30 @@ $xuli = iconv("CP1250", "UTF-8", $hlavicka->xuli);
   $text = "   <psc><![CDATA[".$hlavicka->xpsc."]]></psc>"."\r\n"; fwrite($soubor, $text);
 $xmes = iconv("CP1250", "UTF-8", $hlavicka->xmes);
   $text = "   <obec><![CDATA[".$xmes."]]></obec>"."\r\n"; fwrite($soubor, $text);
+$xstat = iconv("CP1250", "UTF-8", $hlavicka->xstat);
+  $text = "   <stat><![CDATA[".$xstat."]]></stat>"."\r\n"; fwrite($soubor, $text);
   $text = "  </sidlo>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "  <sidloPrevadzky>"."\r\n"; fwrite($soubor, $text);
+$xspuli = iconv("CP1250", "UTF-8", $hlavicka->xspuli);
+  $text = "   <ulica><![CDATA[".$xspuli."]]></ulica>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <supisneOrientacneCislo><![CDATA[".$hlavicka->xspcdm."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <psc><![CDATA[".$hlavicka->xsppsc."]]></psc>"."\r\n"; fwrite($soubor, $text);
+$xspmes = iconv("CP1250", "UTF-8", $hlavicka->xspmes);
+  $text = "   <obec><![CDATA[".$xspmes."]]></obec>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </sidloPrevadzky>"."\r\n"; fwrite($soubor, $text);
+
   $text = " </drzitel>"."\r\n"; fwrite($soubor, $text);
-  $text = "</priloha>"."\r\n"; fwrite($soubor, $text);
 
 }
 $i = $i + 1;
 $j = $j + 1;
-if( $j == 3 ) { $j=0; $aktualna=$aktualna+1; }
-$j=0;
+$koniecpriloha=0;
+if( $j == 2 ) { $j=0; $aktualna=$aktualna+1; $text = "</priloha>"."\r\n"; fwrite($soubor, $text); $koniecpriloha=1; }
   }
 //koniec drzitelov
 
+if( $koniecpriloha == 0 ) { $text = "</priloha>"."\r\n"; fwrite($soubor, $text); }
 
   $text = "</telo>"."\r\n"; fwrite($soubor, $text);
   $text = "</dokument>"."\r\n"; fwrite($soubor, $text);
@@ -608,7 +626,7 @@ fclose($soubor);
 Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a naèítajte na www.drsr.sk alebo do aplikácie eDane:
 <br />
 <br />
-<a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
+<a href="<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>
 <br />
 <br />
 <?php                       } ?>
