@@ -40,6 +40,7 @@ $mesiac="03";
 if ( $kli_vmes > 3 ) { $stvrtrok=2; $vyb_ump="4.".$kli_vrok; $vyb_ums="5.".$kli_vrok; $vyb_umk="6.".$kli_vrok; $mesiac="06"; }
 if ( $kli_vmes > 6 ) { $stvrtrok=3; $vyb_ump="7.".$kli_vrok; $vyb_ums="8.".$kli_vrok; $vyb_umk="9.".$kli_vrok; $mesiac="09"; }
 if ( $kli_vmes > 9 ) { $stvrtrok=4; $vyb_ump="10.".$kli_vrok; $vyb_ums="11.".$kli_vrok; $vyb_umk="12.".$kli_vrok; $mesiac="12"; }
+$kli_vrokx = substr($kli_vrok,2,2);
 
 // cislo operacie
 $copern = 1*strip_tags($_REQUEST['copern']);
@@ -503,6 +504,11 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_treximafir ");
   $riaddok=mysql_fetch_object($sqldok);
   $okres=$riaddok->uzemie;
   }
+
+//6-miestne ico
+$fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
+
+
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -641,13 +647,12 @@ $source="stat_praca204.php?cislo_oc=".$cislo_oc."";
  <h6 class="toright">Tlačiť:</h6>
  <INPUT type="submit" id="uloz" name="uloz" value="Uložiť zmeny" class="btn-top-formsave">
 </div>
-<?php
- $fir_ficox=$fir_fico; if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
- $kli_vrokx = substr($kli_vrok,2,2);
-?>
+
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 1.strana 240kB">
+<span class="text-echo" style="top:225px; left:480px; font-size:24px; letter-spacing:0.02em;"><?php echo $kli_vrok; ?></span>
+<span class="text-echo" style="top:348px; left:247px; font-size:18px; letter-spacing:36px;"><?php echo $kli_vrokx; ?></span>
 <span class="text-echo" style="top:348px; left:338px; font-size:18px; letter-spacing:34px;"><?php echo $mesiac; ?></span>
 <span class="text-echo" style="top:348px; left:429px; font-size:18px; letter-spacing:37px;"><?php echo $fir_ficox; ?></span>
 <!-- ORGANIZACIA -->
@@ -755,12 +760,21 @@ if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
 $pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
+//za rok
+$pdf->SetFont('arial','',16);
+$pdf->Cell(190,35," ","$rmc1",1,"L");
+$pdf->Cell(95,6," ","$rmc1",0,"L");$pdf->Cell(16,8,"$kli_vrok","$rmc",1,"C");
+$pdf->SetFont('arial','',12);
 
-//OBDOBIA
+//rok
+$A=substr($kli_vrokx,0,1);
+$B=substr($kli_vrokx,1,1);
+$pdf->Cell(190,19," ","$rmc1",1,"L");
+$pdf->Cell(41,6," ","$rmc1",0,"L");$pdf->Cell(10,8,"$A","$rmc",0,"C");$pdf->Cell(10,8,"$B","$rmc",0,"C");
+//mesiac
 $A=substr($mesiac,0,1);
 $B=substr($mesiac,1,1);
-$pdf->Cell(190,62," ","$rmc1",1,"L");
-$pdf->Cell(61,5," ","$rmc1",0,"L");$pdf->Cell(10,8,"$A","$rmc",0,"C");$pdf->Cell(10,8,"$B","$rmc",0,"C");
+$pdf->Cell(10,8,"$A","$rmc",0,"C");$pdf->Cell(10,8,"$B","$rmc",0,"C");
 //ico
 $fir_ficx=$fir_fico;
 $cfico=1*$fir_fico;
