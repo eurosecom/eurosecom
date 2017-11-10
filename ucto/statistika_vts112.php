@@ -39,6 +39,8 @@ $kli_vrok=$pole[1];
 $mesiac=$kli_vmes;
 $vyb_ump="1.".$kli_vrok; $vyb_umk=$kli_vmes.".".$kli_vrok;
 
+
+
 //cislo operacie
 $copern = 1*strip_tags($_REQUEST['copern']);
 $modul = 1*$_REQUEST['modul'];
@@ -496,9 +498,9 @@ $i=$i+1;
 </div>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 1.strana 127kB">
-
+<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 1.strana 127kB">
+<span class="text-echo" style="top:250px; left:480px; font-size:24px; letter-spacing:0.02em;"><?php echo $kli_vrok; ?></span>
+<span class="text-echo" style="top:370px; left:196px; font-size:18px; letter-spacing:24px;"><?php echo $kli_vrokx; ?></span>
 <span class="text-echo" style="top:370px; left:263px; font-size:18px; letter-spacing:24px;"><?php echo $mesiacx; ?></span>
 <span class="text-echo" style="top:370px; left:332px; font-size:18px; letter-spacing:24px;"><?php echo $fir_ficox; ?></span>
 <!-- ORGANIZACIA -->
@@ -600,12 +602,21 @@ if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
 $pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
+//za rok
+$pdf->SetFont('arial','',16);
+$pdf->Cell(190,41," ","$rmc1",1,"L");
+$pdf->Cell(95,6," ","$rmc1",0,"L");$pdf->Cell(16,7,"$kli_vrok","$rmc",1,"C");
+$pdf->SetFont('arial','',12);
 
+//rok
+$A=substr($kli_vrokx,0,1);
+$B=substr($kli_vrokx,1,1);
+$pdf->Cell(190,19," ","$rmc1",1,"L");
+$pdf->Cell(31,6," ","$rmc1",0,"L");$pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
 //mesiac
 $A=substr($mesiacx,0,1);
 $B=substr($mesiacx,1,1);
-$pdf->Cell(190,67," ","$rmc1",1,"L");
-$pdf->Cell(46,6," ","$rmc1",0,"L");$pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
+$pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
 //ico
 $A=substr($fir_ficox,0,1);
 $B=substr($fir_ficox,1,1);
