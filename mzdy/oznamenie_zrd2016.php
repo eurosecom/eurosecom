@@ -878,7 +878,6 @@ if ( $cislo_xplat > 9999 ) { $nazovplat=$cislo_xplat." ".$fir_fnazovx; }
     <img src="../obr/ikony/info_blue_icon.png" onclick="InfoFRSR();"
          title="Aktuálna informácia od Finanèného riadite¾stva SR" class="btn-form-tool">
     <img src="../obr/ikony/upbox_blue_icon.png" onclick="ZRDXML();" title="Export do XML" class="btn-form-tool">
-    <img src="../obr/ikony/pencil_blue_icon.png" onclick="" title="Upravi" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
@@ -1024,7 +1023,6 @@ $t02=substr($rokp,3,1);
 <?php if ( $copern == 101 AND $strana == 4 ) { ?>
 <img src="<?php echo $jpg_cesta; ?>_str4.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 4.strana">
 <span class="text-echo" style="top:76px; left:337px;"><?php echo $mdic; ?></span>
-<!-- dopyt, strankovanie cez echo -->
 
 <!-- strankovanie -->
 <span class="text-echo" style="top:138px; left:108px; width: 111px; text-align: right;"></span>
