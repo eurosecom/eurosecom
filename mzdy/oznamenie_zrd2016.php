@@ -384,7 +384,7 @@ $sqldok = mysql_query("$sqlfir");
     $celprj=1*$riaddok->sumprj;
     }
 
-$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r21=0, r21a=0, r22=0, r23=0, r20=$celprj, kkx1=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r21=0, r21a=0, r22=0, r23=0, r41=0, r49=0, r51=0, r52=0, r20=$celprj, kkx1=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
 $sqldok = mysql_query("$sqlfir");
 
 $vypocitajdan=1;
@@ -402,8 +402,7 @@ $sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET kkx1=kkx1-0.0049 WHERE xplat
 $sqldok = mysql_query("$sqlfir");
 $sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r23=kkx1 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
 $sqldok = mysql_query("$sqlfir");
-$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r49=r23 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-$sqldok = mysql_query("$sqlfir");
+
 
   }
 //koniec nacitaj sumu a dane
@@ -428,11 +427,11 @@ $sqldok = mysql_query("$sqlfir");
 $sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r49=r43-r48 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r40 != 0 ";
 $sqldok = mysql_query("$sqlfir");
 
-$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r51=r49-r50, r52=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r51=r49-r50, r52=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r40 != 0 ";
 $sqldok = mysql_query("$sqlfir");
-$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r52=-r51 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r51 < 0 ";
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r52=-r51 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r51 < 0 AND r40 != 0 ";
 $sqldok = mysql_query("$sqlfir");
-$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r51=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r51 < 0 ";
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r51=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r51 < 0 AND r40 != 0 ";
 $sqldok = mysql_query("$sqlfir");
 
 //nacitaj

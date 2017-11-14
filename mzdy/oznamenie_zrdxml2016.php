@@ -473,19 +473,33 @@ $text=SkDatum($hlavicka->datum);
   $text = " </suhrnneUdaje>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <zamedzenieDvojZdaneniu>"."\r\n"; fwrite($soubor, $text);
-  $text = " <uhrn1><![CDATA[".$hlavicka->r40."]]></uhrn1>"."\r\n"; fwrite($soubor, $text);
-  $text = " <plneniaPoVynati><![CDATA[".$hlavicka->r41."]]></plneniaPoVynati>"."\r\n"; fwrite($soubor, $text);
-  $text = " <sadzba><![CDATA[".$hlavicka->r42."]]></sadzba>"."\r\n"; fwrite($soubor, $text);
-  $text = " <dan><![CDATA[".$hlavicka->r43."]]></dan>"."\r\n"; fwrite($soubor, $text);
-  $text = " <uhrn2><![CDATA[".$hlavicka->r44."]]></uhrn2>"."\r\n"; fwrite($soubor, $text);
-  $text = " <uhrn3><![CDATA[".$hlavicka->r45."]]></uhrn3>"."\r\n"; fwrite($soubor, $text);
-  $text = " <percento><![CDATA[".$hlavicka->r46."]]></percento>"."\r\n"; fwrite($soubor, $text);
-  $text = " <danMaximalna><![CDATA[".$hlavicka->r47."]]></danMaximalna>"."\r\n"; fwrite($soubor, $text);
-  $text = " <danZapocet><![CDATA[".$hlavicka->r48."]]></danZapocet>"."\r\n"; fwrite($soubor, $text);
-  $text = " <danPoVynati><![CDATA[".$hlavicka->r49."]]></danPoVynati>"."\r\n"; fwrite($soubor, $text);
-  $text = " <danZrazena><![CDATA[".$hlavicka->r50."]]></danZrazena>"."\r\n"; fwrite($soubor, $text);
-  $text = " <danNaOdvedenie><![CDATA[".$hlavicka->r51."]]></danNaOdvedenie>"."\r\n"; fwrite($soubor, $text);
-  $text = " <danNaVratenie><![CDATA[".$hlavicka->r52."]]></danNaVratenie>"."\r\n"; fwrite($soubor, $text);
+
+$hodnota=$hlavicka->r40; if( $hodnota == 0 ) { $hodnota=""; }
+  $text = " <uhrn1><![CDATA[".$hodnota."]]></uhrn1>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->r41; if( $hodnota == 0 ) { $hodnota=""; }
+  $text = " <plneniaPoVynati><![CDATA[".$hodnota."]]></plneniaPoVynati>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->r42; if( $hodnota == 0 ) { $hodnota=""; }
+  $text = " <sadzba><![CDATA[".$hodnota."]]></sadzba>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->r43; if( $hodnota == 0 ) { $hodnota=""; }
+  $text = " <dan><![CDATA[".$hodnota."]]></dan>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->r44; if( $hodnota == 0 ) { $hodnota=""; }
+  $text = " <uhrn2><![CDATA[".$hodnota."]]></uhrn2>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->r45; if( $hodnota == 0 ) { $hodnota=""; }
+  $text = " <uhrn3><![CDATA[".$hodnota."]]></uhrn3>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->r46; if( $hodnota == 0 ) { $hodnota=""; }
+  $text = " <percento><![CDATA[".$hodnota."]]></percento>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->r47; if( $hodnota == 0 ) { $hodnota=""; }
+  $text = " <danMaximalna><![CDATA[".$hodnota."]]></danMaximalna>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->r48; if( $hodnota == 0 ) { $hodnota=""; }
+  $text = " <danZapocet><![CDATA[".$hodnota."]]></danZapocet>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->r49; if( $hodnota == 0 ) { $hodnota=""; }
+  $text = " <danPoVynati><![CDATA[".$hodnota."]]></danPoVynati>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->r50; if( $hodnota == 0 ) { $hodnota=""; }
+  $text = " <danZrazena><![CDATA[".$hodnota."]]></danZrazena>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->r51; if( $hodnota == 0 ) { $hodnota=""; }
+  $text = " <danNaOdvedenie><![CDATA[".$hodnota."]]></danNaOdvedenie>"."\r\n"; fwrite($soubor, $text);
+$hodnota=$hlavicka->r52; if( $hodnota == 0 ) { $hodnota=""; }
+  $text = " <danNaVratenie><![CDATA[".$hodnota."]]></danNaVratenie>"."\r\n"; fwrite($soubor, $text);
   $text = " </zamedzenieDvojZdaneniu>"."\r\n"; fwrite($soubor, $text);
 
 
@@ -519,18 +533,24 @@ if ( $textx == 0 ) $textx="";
   $text = " <ziadost>"."\r\n"; fwrite($soubor, $text);
 
 $vrat=1*$hlavicka->vrat;
+if( $hlavicka->r52 == 0 ) { $vrat="0"; }
   $text = " <vratit><![CDATA[".$vrat."]]></vratit>"."\r\n"; fwrite($soubor, $text);
   $text = " <sposobPlatby>"."\r\n"; fwrite($soubor, $text);
 
 $post=1*$hlavicka->post;
+if( $hlavicka->r52 == 0 ) { $post="0"; }
   $text = " <poukazka><![CDATA[".$post."]]></poukazka>"."\r\n"; fwrite($soubor, $text);
 
 $ucet=1*$hlavicka->ucet;
+if( $hlavicka->r52 == 0 ) { $ucet="0"; }
   $text = " <ucet><![CDATA[".$ucet."]]></ucet>"."\r\n"; fwrite($soubor, $text);
   $text = " </sposobPlatby>"."\r\n"; fwrite($soubor, $text);
+
+if( $hlavicka->r52 == 0 ) { $fir_fib1=""; }
   $text = " <iban><![CDATA[".$fir_fib1."]]></iban>"."\r\n"; fwrite($soubor, $text);
 
 $datd=SkDatum($hlavicka->datd);
+if( $hlavicka->r52 == 0 ) { $datd=""; }
   $text = " <datum><![CDATA[".$datd."]]></datum>"."\r\n"; fwrite($soubor, $text);
 
 $podpis="1";
