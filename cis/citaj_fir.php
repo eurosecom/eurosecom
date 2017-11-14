@@ -201,6 +201,7 @@ if ( $fir_fico == 31419623 ) { $agrostav = 1; }
 if ( $fir_fico == 31681743 ) { $autovalas = 1; $fir_big=1; $kontrolstrzak=1; }
 if ( $fir_fico == 31424318 ) { $polno=1; }
 if ( $fir_fico == 31104452 ) { $polno=1; }
+if ( $fir_fico == 45232903 ) { $fir_big=1; } //eurodiskont
 if( $_SERVER['SERVER_NAME'] == "www.stavoimpexsro.sk" ) { $stavoimpex=1; }
 if( $_SERVER['SERVER_NAME'] == "www.lsucto.sk" ) { $lsucto=1; }
 if( $_SERVER['SERVER_NAME'] == "www.merkfood.sk" ) { $merkfood=1; }
