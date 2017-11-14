@@ -384,13 +384,22 @@ $sqldok = mysql_query("$sqlfir");
     $celprj=1*$riaddok->sumprj;
     }
 
-$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r21=0, r21a=0, r22=0, r23=0, r41=0, r49=0, r51=0, r52=0, r20=$celprj, kkx1=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r21=0, r21a=0, r22=0, r23=0, r41=0, r43=0, r49=0, r51=0, r52=0, r20=$celprj, kkx1=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r22=r20+r21 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
 $sqldok = mysql_query("$sqlfir");
 
 $vypocitajdan=1;
   }
 if( $vypocitajdan == 1 )
   {
+
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r22=0, r23=0, r41=0, r43=0, r49=0, r51=0, r52=0, kkx1=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r22=r20+r21 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
 
 $sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r22=r20+r21, kkx1=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
 $sqldok = mysql_query("$sqlfir");
@@ -406,9 +415,6 @@ $sqldok = mysql_query("$sqlfir");
 
   }
 //koniec nacitaj sumu a dane
-
-$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r22=r20+r21 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
-$sqldok = mysql_query("$sqlfir");
 
 
 //dan po vynati prijmov zo zdrojov v zahranici
@@ -427,7 +433,7 @@ $sqldok = mysql_query("$sqlfir");
 $sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r49=r43-r48 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r40 != 0 ";
 $sqldok = mysql_query("$sqlfir");
 
-$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r51=r49-r50, r52=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r40 != 0 ";
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r51=r49-r23-r50, r52=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r40 != 0 ";
 $sqldok = mysql_query("$sqlfir");
 $sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r52=-r51 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r51 < 0 AND r40 != 0 ";
 $sqldok = mysql_query("$sqlfir");
