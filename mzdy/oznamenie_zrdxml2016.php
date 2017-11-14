@@ -502,6 +502,16 @@ $telefon=str_replace("/","",$fir_mzdt04);
 $podpis="1";
   $text = "  <podpis><![CDATA[".$podpis."]]></podpis>"."\r\n"; fwrite($soubor, $text);
   $text = " </vypracoval>"."\r\n"; fwrite($soubor, $text);
+
+
+
+$sqlttpoc = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY xdic ";
+
+$sqlpoc = mysql_query("$sqlttpoc");
+$polpoc = mysql_num_rows($sqlpoc);
+$prilohy=ceil($polpoc/2);
+
+
 $textx=$prilohy;
 if ( $textx == 0 ) $textx="";
   $text = " <pocetStrPrilohy><![CDATA[".$textx."]]></pocetStrPrilohy>"."\r\n"; fwrite($soubor, $text);
