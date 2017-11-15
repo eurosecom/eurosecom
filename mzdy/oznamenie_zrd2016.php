@@ -3135,11 +3135,7 @@ $textb=" "; if ( $hlavicka->ucet == 1 ) $textb="x";
 $pdf->Cell(18,5," ","$rmc1",0,"R");$pdf->Cell(4,3,"$textp","$rmc",0,"C");$pdf->Cell(42,4," ","$rmc1",0,"R");$pdf->Cell(4,3,"$textb","$rmc",1,"C");
 //iban
 $pdf->Cell(190,3," ","$rmc1",1,"L");
-$text=" ";
-if ( $hlavicka->vrat == 1 AND ( $hlavicka->post == 1 OR $hlavicka->ucet == 1 ) )
-{
 $text=$ziban;
-}
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);

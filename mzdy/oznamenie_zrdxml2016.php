@@ -301,6 +301,7 @@ $fir_riadok=mysql_fetch_object($fir_vysledok);
 
 $titulz = $fir_riadok->ztitz;
 $fir_fdicx = $fir_riadok->zdic;
+$ziban = $fir_riadok->ziban;
 
 mysql_free_result($fir_vysledok);
 
@@ -546,8 +547,7 @@ if( $hlavicka->r52 == 0 ) { $ucet="0"; }
   $text = " <ucet><![CDATA[".$ucet."]]></ucet>"."\r\n"; fwrite($soubor, $text);
   $text = " </sposobPlatby>"."\r\n"; fwrite($soubor, $text);
 
-if( $hlavicka->r52 == 0 ) { $fir_fib1=""; }
-  $text = " <iban><![CDATA[".$fir_fib1."]]></iban>"."\r\n"; fwrite($soubor, $text);
+  $text = " <iban><![CDATA[".$ziban."]]></iban>"."\r\n"; fwrite($soubor, $text);
 
 $datd=SkDatum($hlavicka->datd);
 if( $hlavicka->r52 == 0 ) { $datd=""; }
