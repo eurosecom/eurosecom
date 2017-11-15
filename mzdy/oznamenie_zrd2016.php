@@ -924,7 +924,7 @@ $source="../mzdy/oznamenie_zrd2016.php?subor=0&h_stv=".$zaobdobie."&cislo_xplat=
 <img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 1.strana">
 
 <!-- ZAHLAVIE -->
-<input type="text" name="mdic" id="mdic" style="width:220px; top:470px; left:52px;"/>
+<input type="text" name="mdic" id="mdic" maxlength="10" style="width:220px; top:470px; left:52px;"/>
 <?php
 $rokp=$kli_vrok;
 $t01=substr($rokp,2,1);
@@ -1728,6 +1728,9 @@ $E=substr($zstat,4,1);
 $F=substr($zstat,5,1);
 $G=substr($zstat,6,1);
 $H=substr($zstat,7,1);
+$I=substr($zstat,8,1);
+$J=substr($zstat,9,1);
+$K=substr($zstat,10,1);
 $pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");
@@ -2565,6 +2568,9 @@ $E=substr($xstat,4,1);
 $F=substr($xstat,5,1);
 $G=substr($xstat,6,1);
 $H=substr($xstat,7,1);
+$I=substr($xstat,8,1);
+$J=substr($xstat,9,1);
+$K=substr($xstat,10,1);
 $pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");
@@ -3129,7 +3135,11 @@ $textb=" "; if ( $hlavicka->ucet == 1 ) $textb="x";
 $pdf->Cell(18,5," ","$rmc1",0,"R");$pdf->Cell(4,3,"$textp","$rmc",0,"C");$pdf->Cell(42,4," ","$rmc1",0,"R");$pdf->Cell(4,3,"$textb","$rmc",1,"C");
 //iban
 $pdf->Cell(190,3," ","$rmc1",1,"L");
+$text=" ";
+if ( $hlavicka->vrat == 1 AND ( $hlavicka->post == 1 OR $hlavicka->ucet == 1 ) )
+{
 $text=$ziban;
+}
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,2,1);
@@ -3617,6 +3627,9 @@ $E=substr($xstat,4,1);
 $F=substr($xstat,5,1);
 $G=substr($xstat,6,1);
 $H=substr($xstat,7,1);
+$I=substr($xstat,8,1);
+$J=substr($xstat,9,1);
+$K=substr($xstat,10,1);
 $pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");
