@@ -1019,6 +1019,7 @@ $t02=substr($rokp,3,1);
 <input type="checkbox" name="vrat" value="1" style="top:619px; left:59px;"/>
 <input type="checkbox" name="post" value="1" onchange="klikpost();" style="top:639px; left:116px;"/>
 <input type="checkbox" name="ucet" value="1" onchange="klikucet();" style="top:639px; left:323px;"/>
+<img src="../obr/ikony/info_blue_icon.png" title="IBAN z údajov o zamestnancovi sa zobrazí, ak je vyplnený riadok 52" style="width:24px; height:24px; position:absolute; top:667px; left: 10px;">
 <?php if ( $r52 == 0 ) { $ziban=""; } ?>
 <span class="text-echo" style="top:672px; left:120px;"><?php echo $ziban; ?></span>
 <input type="text" name="datvrat" id="datvrat" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:196px; top:707px; left:116px;"/>
