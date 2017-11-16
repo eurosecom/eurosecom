@@ -547,6 +547,7 @@ if( $hlavicka->r52 == 0 ) { $ucet="0"; }
   $text = " <ucet><![CDATA[".$ucet."]]></ucet>"."\r\n"; fwrite($soubor, $text);
   $text = " </sposobPlatby>"."\r\n"; fwrite($soubor, $text);
 
+if( $hlavicka->r52 == 0 ) { $ziban=""; }
   $text = " <iban><![CDATA[".$ziban."]]></iban>"."\r\n"; fwrite($soubor, $text);
 
 $datd=SkDatum($hlavicka->datd);
