@@ -37,7 +37,8 @@ if ( $rokrocnezuc == 2012 ) { $rokrocnezuc="2012"; }
 if ( $rokrocnezuc == 2013 ) { $rokrocnezuc="2013"; }
 if ( $rokrocnezuc == 2014 ) { $rokrocnezuc="2014"; }
 if ( $rokrocnezuc == 2015 ) { $rokrocnezuc="2015"; }
-if ( $rokrocnezuc >= 2016 ) { $rokrocnezuc="2016"; }
+if ( $rokrocnezuc == 2016 ) { $rokrocnezuc="2016"; }
+if ( $rokrocnezuc >= 2017 ) { $rokrocnezuc="2017"; }
 
 $rokrocnezucz=$kli_vrok;
 if ( $rokrocnezucz < 2011 ) { $rokrocnezucz=""; }
@@ -46,7 +47,8 @@ if ( $rokrocnezucz == 2012 ) { $rokrocnezucz="2012"; }
 if ( $rokrocnezucz == 2013 ) { $rokrocnezucz="2013"; }
 if ( $rokrocnezucz == 2014 ) { $rokrocnezucz="2013"; }
 if ( $rokrocnezucz == 2015 ) { $rokrocnezucz="2013"; }
-if ( $rokrocnezucz >= 2016 ) { $rokrocnezucz="2013"; }
+if ( $rokrocnezucz == 2016 ) { $rokrocnezucz="2013"; }
+if ( $rokrocnezucz >= 2017 ) { $rokrocnezucz="2013"; }
 
 //toto neviem preco tam bolo ???!!???
 $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdrocnedane WHERE r00 > 999998 ";
@@ -331,7 +333,7 @@ if ( $polozka->vykx == 1 ) { $rzclass="rzclassano"; }
  </tbody>
 <?php                            }
 
-if ( $polozka->psys == 9 ) { 
+if ( $polozka->psys == 9 ) {
 $r00x=$polozka->r00x;
 $r03x=$polozka->r03x;
 $r04ax=$polozka->r04ax;
@@ -446,7 +448,7 @@ $zostatokeur=0;
 $zostatok=0;
 $new=0;
 $strana=0;
-$j=0;           
+$j=0;
 $i=0;
   while ($i <= $tvpol )
   {
