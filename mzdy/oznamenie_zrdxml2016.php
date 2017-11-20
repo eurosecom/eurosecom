@@ -71,8 +71,69 @@ $nazsub=$outfilex;
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
  <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>EuroSecom - OZNAMENIE xml</title>
-<style type="text/css">
-
+<style>
+#content {
+  box-sizing: border-box;
+  background-color: white;
+  padding: 30px 25px;
+   -webkit-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  -moz-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+  box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.298);
+}
+#content > p {
+  line-height: 22px;
+  font-size: 14px;
+}
+#content > p > a {
+  color: #00e;
+}
+#content > p > a:hover {
+  text-decoration: underline;
+}
+#upozornenie > h2 {
+  line-height: 20px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  overflow: auto;
+}
+#upozornenie > h2 > strong {
+  font-size: 16px;
+  font-weight: bold;
+}
+#upozornenie > ul > li {
+  line-height: 18px;
+  margin: 10px 0;
+  font-size: 13px;
+}
+.red {
+  border-left: 4px solid #f22613;
+  text-indent: 8px;
+}
+.orange {
+  border-left: 4px solid #f89406;
+  text-indent: 8px;
+}
+dl.legend-area {
+  height: 14px;
+  line-height: 14px;
+  font-size: 11px;
+  position: relative;
+  top: 5px;
+}
+dl.legend-area > dt {
+  width:10px;
+  height:10px;
+  margin: 2px 5px 0 12px;
+}
+.box-red {
+  background-color: #f22613;
+}
+.box-orange {
+  background-color: #f89406;
+}
+.header-section {
+  padding-top: 5px;
+}
 </style>
 <script type="text/javascript">
 //sirka a vyska okna
@@ -572,22 +633,22 @@ $j = $j + 1;
   $text = "<telo>"."\r\n"; fwrite($soubor, $text);
 
 //vytlac drzitelov
-$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY xdic ";
+$sqlttd = "SELECT * FROM F$kli_vxcf"."_mzdoznameniezrdpol WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ORDER BY xdic ";
 
-$sql = mysql_query("$sqltt");
-$pol = mysql_num_rows($sql);
-$i=0;
-$j=0;
+$sqld = mysql_query("$sqlttd");
+$pold = mysql_num_rows($sqld);
+$id=0;
+$jd=0;
 $aktualna=1;
-$celkovo=ceil($pol/2);
+$celkovo=ceil($pold/2);
 
-  while ($i < $pol )
+  while ($id < $pold )
   {
-  if (@$zaznam=mysql_data_seek($sql,$i) OR $stlpec < 3 )
+  if (@$zaznam=mysql_data_seek($sqld,$id) OR $stlpec < 3 )
 {
-$hlavicka=mysql_fetch_object($sql);
+$hlavickad=mysql_fetch_object($sqld);
 
-if ( $j == 0 ) {
+if ( $jd == 0 ) {
   $text = "<priloha>"."\r\n"; fwrite($soubor, $text);
   $text = " <strana>"."\r\n"; fwrite($soubor, $text);
   $text = "  <aktualna><![CDATA[".$aktualna."]]></aktualna>"."\r\n"; fwrite($soubor, $text);
@@ -597,50 +658,50 @@ if ( $j == 0 ) {
                }
 
   $text = " <drzitel>"."\r\n"; fwrite($soubor, $text);
-$xdic = iconv("CP1250", "UTF-8", $hlavicka->xdic);
+$xdic = iconv("CP1250", "UTF-8", $hlavickad->xdic);
   $text = "  <dic><![CDATA[".$xdic."]]></dic>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <vyska><![CDATA[".$hlavicka->prj."]]></vyska>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <vyska><![CDATA[".$hlavickad->prj."]]></vyska>"."\r\n"; fwrite($soubor, $text);
   $text = "  <fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
-$xpfo = iconv("CP1250", "UTF-8", $hlavicka->xpfo);
+$xpfo = iconv("CP1250", "UTF-8", $hlavickad->xpfo);
   $text = "   <priezvisko><![CDATA[".$xpfo."]]></priezvisko>"."\r\n"; fwrite($soubor, $text);
-$xmfo = iconv("CP1250", "UTF-8", $hlavicka->xmfo);
+$xmfo = iconv("CP1250", "UTF-8", $hlavickad->xmfo);
   $text = "   <meno><![CDATA[".$xmfo."]]></meno>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <titulPred><![CDATA[".$hlavicka->xtitulp."]]></titulPred>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <titulZa><![CDATA[".$hlavicka->xtitulz."]]></titulZa>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <titulPred><![CDATA[".$hlavickad->xtitulp."]]></titulPred>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <titulZa><![CDATA[".$hlavickad->xtitulz."]]></titulZa>"."\r\n"; fwrite($soubor, $text);
   $text = "  </fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
-$xnpo = iconv("CP1250", "UTF-8", $hlavicka->xnpo);
+$xnpo = iconv("CP1250", "UTF-8", $hlavickad->xnpo);
   $text = "   <obchodneMeno><![CDATA[".$xnpo."]]></obchodneMeno>"."\r\n"; fwrite($soubor, $text);
   $text = "  </pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <sidlo>"."\r\n"; fwrite($soubor, $text);
-$xuli = iconv("CP1250", "UTF-8", $hlavicka->xuli);
+$xuli = iconv("CP1250", "UTF-8", $hlavickad->xuli);
   $text = "   <ulica><![CDATA[".$xuli."]]></ulica>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <supisneOrientacneCislo><![CDATA[".$hlavicka->xcis."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <psc><![CDATA[".$hlavicka->xpsc."]]></psc>"."\r\n"; fwrite($soubor, $text);
-$xmes = iconv("CP1250", "UTF-8", $hlavicka->xmes);
+  $text = "   <supisneOrientacneCislo><![CDATA[".$hlavickad->xcis."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <psc><![CDATA[".$hlavickad->xpsc."]]></psc>"."\r\n"; fwrite($soubor, $text);
+$xmes = iconv("CP1250", "UTF-8", $hlavickad->xmes);
   $text = "   <obec><![CDATA[".$xmes."]]></obec>"."\r\n"; fwrite($soubor, $text);
-$xstat = iconv("CP1250", "UTF-8", $hlavicka->xstat);
+$xstat = iconv("CP1250", "UTF-8", $hlavickad->xstat);
   $text = "   <stat><![CDATA[".$xstat."]]></stat>"."\r\n"; fwrite($soubor, $text);
   $text = "  </sidlo>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <sidloPrevadzky>"."\r\n"; fwrite($soubor, $text);
-$xspuli = iconv("CP1250", "UTF-8", $hlavicka->xspuli);
+$xspuli = iconv("CP1250", "UTF-8", $hlavickad->xspuli);
   $text = "   <ulica><![CDATA[".$xspuli."]]></ulica>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <supisneOrientacneCislo><![CDATA[".$hlavicka->xspcdm."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
-  $text = "   <psc><![CDATA[".$hlavicka->xsppsc."]]></psc>"."\r\n"; fwrite($soubor, $text);
-$xspmes = iconv("CP1250", "UTF-8", $hlavicka->xspmes);
+  $text = "   <supisneOrientacneCislo><![CDATA[".$hlavickad->xspcdm."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <psc><![CDATA[".$hlavickad->xsppsc."]]></psc>"."\r\n"; fwrite($soubor, $text);
+$xspmes = iconv("CP1250", "UTF-8", $hlavickad->xspmes);
   $text = "   <obec><![CDATA[".$xspmes."]]></obec>"."\r\n"; fwrite($soubor, $text);
   $text = "  </sidloPrevadzky>"."\r\n"; fwrite($soubor, $text);
 
   $text = " </drzitel>"."\r\n"; fwrite($soubor, $text);
 
 }
-$i = $i + 1;
-$j = $j + 1;
+$id = $id + 1;
+$jd = $jd + 1;
 $koniecpriloha=0;
-if( $j == 2 ) { $j=0; $aktualna=$aktualna+1; $text = "</priloha>"."\r\n"; fwrite($soubor, $text); $koniecpriloha=1; }
+if( $jd == 2 ) { $jd=0; $aktualna=$aktualna+1; $text = "</priloha>"."\r\n"; fwrite($soubor, $text); $koniecpriloha=1; }
   }
 //koniec drzitelov
 
@@ -662,12 +723,81 @@ Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a načítajte na www.drs
 <br />
 <?php                       } ?>
 
+
+<?php
+/////////////////////////////////////////////////////////////////////UPOZORNENIE
+$upozorni1=0; $upozorni2=0; $upozorni3=0;
+?>
+<div id="upozornenie" style="display:none;">
+<h2>
+<strong class="toleft">Upozornenie</strong>
+<dl class="toright legend-area">
+ <dt class="toleft box-red"></dt><dd class="toleft">kritické</dd>
+ <dt class="toleft box-orange"></dt><dd class="toleft">logické</dd>
+</dl>
+</h2>
+
+<ul id="alertpage3" style="display:none;">
+<li class="header-section">STRANA 3</li>
+<?php if ( $hlavicka->r52 <= 0 AND $hlavicka->vrat == 1 )
+{
+$upozorni3=1;
+echo "<li class='red'>";
+echo "Nulové <strong>r52</strong> a je zaškrtnutá žiadosť o vrátenie.";
+echo "</li>";
+}
+?>
+
+<?php if ( $hlavicka->r52 <= 0 AND $hlavicka->ucet == 1 )
+{
+$upozorni3=1;
+echo "<li class='red'>";
+echo "Nulové <strong>r52</strong> a je zaškrtnuté vrátenie na účet.";
+echo "</li>";
+}
+?>
+
+<?php if ( $hlavicka->r52 <= 0 AND $hlavicka->post == 1 )
+{
+$upozorni3=1;
+echo "<li class='red'>";
+echo "Nulové <strong>r52</strong> a je zaškrtnuté vrátenie poukážkou.";
+echo "</li>";
+}
+?>
+
+<?php if ( $hlavicka->r52 > 0 AND $hlavicka->vrat == 0  )
+{
+$upozorni3=1;
+echo "<li class='red'>";
+echo "Nenulové <strong>r52</strong> a nie je vyplnená žiadosť o vrátenie.";
+echo "</li>";
+}
+?>
+
+</ul>
+
+</div> <!-- #upozornenie -->
+
+<script type="text/javascript">
+<?php
+if ( $upozorni1 == 1 OR $upozorni2 == 1 OR $upozorni3 == 1 )
+     { echo "upozornenie.style.display='block';"; }
+if ( $upozorni1 == 1 ) { echo "alertpage1.style.display='block';"; } 
+if ( $upozorni2 == 1 ) { echo "alertpage2.style.display='block';"; } 
+if ( $upozorni3 == 1 ) { echo "alertpage3.style.display='block';"; }
+?>
+</script>
+
+
 <?php
 //mysql_free_result($vysledok);
     }
 /////////////////////////////////////////////////////koniec TLAC a VYTVORENIE XML SUBORU PRE ELEKTRONIKU
+?>
 
 
+<?php
 //celkovy koniec dokumentu
 } while (false);
 ?>
