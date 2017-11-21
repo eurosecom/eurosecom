@@ -65,11 +65,11 @@ $outfilex="../tmp/oznzrdx_".$kli_uzid."_".$hhmmss.".xml";
 if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
 $nazsub=$outfilex;
-
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link type="text/css" rel="stylesheet" href="../css/styl.css">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - OZNAMENIE xml</title>
 <style>
 #content {
@@ -135,22 +135,21 @@ dl.legend-area > dt {
   padding-top: 5px;
 }
 </style>
-<script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height;
-var sirkawic = screen.width-10;
-</script>
+
 </HEAD>
-<BODY class="white">
- <table class="h2" width="100%" >
+<BODY>
+<div id="wrap-heading">
+ <table id="heading">
  <tr>
-  <td>EuroSecom - Oznámenie o dani z nepeňažného plnenia ... - export do XML</td>
-  <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid";?></span></td>
+  <td class="ilogin">EuroSecom</td>
+  <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid"; ?></td>
+ </tr>
+ <tr>
+  <td class="header">Oznámenie o dani z nepeňažného plnenia ... - export do XML</td>
+  <td></td>
  </tr>
  </table>
-
+</div>
 <?php
 ///////////////////////////////////////////////////TLAC a VYTVORENIE XML SUBORU elsubor=1,2
 if ( $copern == 110 )
@@ -712,15 +711,14 @@ if( $koniecpriloha == 0 ) { $text = "</priloha>"."\r\n"; fwrite($soubor, $text);
 fclose($soubor);
 ?>
 
+<div id="content">
 <?php if ( $copern == 110 ) { ?>
-<br />
-<br />
-Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a načítajte na www.drsr.sk alebo do aplikácie eDane:
-<br />
-<br />
-<a href="<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>
-<br />
-<br />
+  <p style="line-height: 2;">Stiahnite si nižšie uvedený súbor <strong>.xml</strong> do Vášho počítača a načítajte ho na
+    <a href="https://www.financnasprava.sk/sk/titulna-stranka" target="_blank" title="Stránka Finančnej správy">www.financnasprava.sk</a> alebo do aplikácie eDane:
+  </p>
+  <p style="line-height: 2;">
+    <a href="<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>
+  </p>
 <?php                       } ?>
 
 
@@ -783,13 +781,13 @@ echo "</li>";
 <?php
 if ( $upozorni1 == 1 OR $upozorni2 == 1 OR $upozorni3 == 1 )
      { echo "upozornenie.style.display='block';"; }
-if ( $upozorni1 == 1 ) { echo "alertpage1.style.display='block';"; } 
-if ( $upozorni2 == 1 ) { echo "alertpage2.style.display='block';"; } 
+if ( $upozorni1 == 1 ) { echo "alertpage1.style.display='block';"; }
+if ( $upozorni2 == 1 ) { echo "alertpage2.style.display='block';"; }
 if ( $upozorni3 == 1 ) { echo "alertpage3.style.display='block';"; }
 ?>
 </script>
 
-
+</div><!-- #content -->
 <?php
 //mysql_free_result($vysledok);
     }
