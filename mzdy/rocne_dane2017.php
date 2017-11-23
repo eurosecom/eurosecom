@@ -102,7 +102,7 @@ $sqldok = mysql_query("$sqlttt");
   }
 $sqtoz = "DELETE FROM F$kli_vxcf"."_mzdrocnedane WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
-$copern=10;
+$copern=20;
 if ( $zupravy == 1 ) $copern=20;
 $subor=1;
 $vsetkyprepocty=1;
@@ -818,22 +818,22 @@ $oznac = mysql_query("$sqtoz");
 //koniec pracovneho suboru pre rocne
 
 //vypocty
-//vsetky vypocty su aktualizovane na rok 2015
+//vsetky vypocty su aktualizovane na rok 2017
 $nepocitaj=0;
 if ( ( $copern == 10 OR $copern == 20 ) AND $nepocitaj == 0 )
 {
-//vypocitaj 2015
+//vypocitaj 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
-" SET r00=r00z1+r00z2, r00a=r00a1+r00a2, r00b=r00b1+r00b2, r00c=r00c1+r00c2, r00d=r00d1+r00d2, r01=r00-r00a, r03=r01+r02, r04a=r04a1+r04a2  ".
+" SET r00=r00z1+r00z2, r00a=r00a1+r00a2, r00b=r00b1+r00b2, r00c=r00c1+r00c2, r00d=r00d1+r00d2, r01=r00-r00a, r03=r01+r02, r04a=r04a1+r04a2 ".
 "  WHERE oc = $cislo_oc";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//len vynulujem nepouzivane 2015
+//len vynulujem nepouzivane 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r04c1=0, r04c2=0, r04e=0, r04f=0 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 
-//nezdanitelna cast na danovnika za 2015 rovnako ako v 2014
+//nezdanitelna cast na danovnika za 2017 rovnako ako v 2016
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 " SET r04a1=3803.33, r04a2=0   WHERE oc = $cislo_oc AND r04a1 != 0 AND r04a2 >= 0 AND r01 <= 19809.00 ";
 //echo $sqtoz;
@@ -845,7 +845,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 $oznac = mysql_query("$sqtoz");
 
 
-//milionarska dan za 2015 rovnako ako v 2014
+//milionarska dan za 2017 rovnako ako v 2016
 if ( $vsetkyprepocty == 1 )
      {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
@@ -864,9 +864,9 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r04a=0, r04a1=0, r04a2=0 WHERE oc = $cislo_oc AND r01 >= 35022.32 ";
 $oznac = mysql_query("$sqtoz");
      }
-//koniec milionarska dan za 2015
+//koniec milionarska dan za 2017
 
-//rok 2015
+//rok 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 " SET po6=0, px4=0, r04x=r04a+r04b+r04c+r04d, r05=r03-r04x  WHERE oc = $cislo_oc";
 //echo $sqtoz;
@@ -876,7 +876,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r05=0  WHERE oc = $cislo_oc AND 
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//dan z prijmu 2015
+//dan z prijmu 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET po6=0, px4=0, r06=0 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 
@@ -896,7 +896,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r06=0 WHERE oc = $cislo_oc AND r
 $oznac = mysql_query("$sqtoz");
 
 
-//zam.premia 2015
+//zam.premia 2017
 //2013	2026.20		2014	2112.00 6nasobok min.mzdy
 //2013	4052.40		2014	4224.00 12nasobok min.mzdy
 //2013	3509.76		2014	3658.08 zaklad dane zo sumy 12nasobku min.mzdy
@@ -904,7 +904,7 @@ $oznac = mysql_query("$sqtoz");
 //2014	2112.00		2015	2280.00
 //2014	4224.00		2015	4560.00
 //2014	3658.08
-if ( $vsetkyprepocty == 1 AND $kli_vrok >= 2015 )
+if ( $vsetkyprepocty == 1 AND $kli_vrok >= 2017 )
      {
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 " SET r07=r01, px4=0, po6=0 WHERE oc = $cislo_oc";
@@ -941,10 +941,10 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r09=27.60  WHERE oc = $cislo_oc 
 $oznac = mysql_query("$sqtoz");
 
      }
-//koniec zam.premia 2015
+//koniec zam.premia 2017
 
 
-//dan.bonus 2015 max. 256.92 na rok na 1 dieta
+//dan.bonus 2017 max. 256.92 na rok na 1 dieta
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 " SET r12=0, r13=0, r11=r11a+r11b, r12=r10-r11 WHERE oc = $cislo_oc";
 //echo $sqtoz;
@@ -1006,7 +1006,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 $oznac = mysql_query("$sqtoz");
      }
 }
-//koniec vypocty 2015
+//koniec vypocty 2017
 
 
 //nacitaj udaje pre upravu
