@@ -8,6 +8,8 @@ if( !$uziv ) exit;
 if(!isset($kli_vxcf)) $kli_vxcf = 1;
 if(!isset($kli_vduj)) $kli_vduj = 1;
 
+//od 1.1.2018 nová štruktúra CSV
+
        do
        {
 

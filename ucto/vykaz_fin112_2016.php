@@ -1219,6 +1219,13 @@ window.open('fin112nujpoddbf.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&drupo
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function CsvFin1a12()
+                {
+
+window.open('fin1a12csv.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
   function Vymaz(cpl)
   {
    window.open('vykaz_fin112_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=316&drupoh=1&page=1&subor=0&strana=<?php echo $strana; ?>&cislo_cpl=' + cpl + '&xx=1',
@@ -1254,6 +1261,7 @@ if ( $copern == 20 )
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
     <img src="../obr/ikony/upbox_blue_icon.png" onclick="DbfFin112nujpod();" title="Export do DBF" class="btn-form-tool">
+    <img src="../obr/ikony/upbox_blue_icon.png" onclick="CsvFin1a12();" title="Export do CSV" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
