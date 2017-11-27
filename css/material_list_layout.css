@@ -20,13 +20,15 @@
 }
 /* HEADER */
 .ui-header {
-  min-height: 136px;
+  min-height: 96px;
+  background-color: #039BE5;
 }
 @media screen and (max-width: 1024px) {
   .ui-header {
-    min-height: 128px;
+    min-height: 88px;
   }
 }
+
 .wrap-ui-list.mdl-layout__header-row {
   height: 32px;
   padding: 0;
@@ -156,3 +158,10 @@ table.ui-list {
 }
 
 
+/* button new item */
+.mdl-layout > .mdl-button--fab.mdl-button--colored {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 10;
+}

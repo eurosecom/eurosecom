@@ -525,14 +525,14 @@ $sqlpok = mysql_query("$sqlpoktt");
   }
 ?>
 <head>
-  <meta charset="cp1250">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="css/material.min.css">
-  <link rel="stylesheet" href="css/material_edit.css">
-  <link rel="stylesheet" href="css/material_list_layout.css">
-  <title>Užívatelia | EuroSecom</title>
+<meta charset="cp1250">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="css/material.min.css">
+<link rel="stylesheet" href="css/material_edit.css">
+<link rel="stylesheet" href="css/material_list_layout.css">
+<title>Užívatelia | EuroSecom</title>
 <style>
 /* zero row = helper col dimensions */
 .ui-list-content tr.zero-row {
@@ -582,7 +582,15 @@ $sqlpok = mysql_query("$sqlpoktt");
   width: 12%;
   text-align: right;
 }
-/* avatar */
+/* avatar in list */
+.mdl-list__item .mdl-list__item-primary-content .list-item-avatar {
+  margin-right: 8px;
+  height: 32px;
+  line-height: 32px;
+  width: 32px;
+  font-size: 12px;
+  text-align: center;
+}
 .ui-list .mdl-list__item {
   height: 32px;
   min-height: 32px;
@@ -735,28 +743,30 @@ $sqlpok = mysql_query("$sqlpoktt");
 <body onload="ObnovUI();">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
 <header class="mdl-layout__header mdl-layout__header--waterfall ui-header">
-  <div class="mdl-layout__header-row ui-header-app-row">
-    <span onclick="AppPage();" class="mdl-color-text--yellow-A100">EuroSecom</span>&nbsp;
-    <span><?php echo $domain; ?></span>
-    <div class="mdl-layout-spacer"></div>
-<!-- user -->
-    <ul class="mdl-list clearfix ilogin">
-      <li class="mdl-list__item">
-        <span class="mdl-list__item-primary-content">
-          <span class="mdl-list__item-avatar list-item-avatar mdl-color--indigo-400"><?php echo $kli_uzid; ?></span>
-          <span><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
-        </span>
-      </li>
-    </ul>
-  </div> <!-- .ui-header-app-row -->
-  <div class="mdl-layout__header-row ui-header-page-row">
-    <span id="header_title" class="mdl-layout-title mdl-color-text--white dropdown">Číselník užívateľov</span>
-    <span class="mdl-layout-title mdl-color-text--yellow-A100">
+  <div class="mdl-layout__header-row ui-header-title-row">
+    <ol class="mdl-layout-title ui-header-breadcrumb">
+    <li onclick="AppPage();" class="mdl-color-text--yellow-A100">EuroSecom</li>
+    <li class="breadcrumb-item"><span style="padding: 0 4px;"><?php echo $domain; ?></span></li>
+    <li class="breadcrumb-item active">
+      <a href="#" id="header_dropdown_menu" class="dropdown">Číselník užívateľov</a>
+      <span class="mdl-color-text--yellow-A100">
 <?php
 if ( $nova == 1 ) { echo "nový #"; }
 if ( $uprav != 0 AND $nova == 0 ) { echo "úprava # $cislo_id"; }
 ?>
-    </span>
+      </span>
+    </li>
+<!-- header dropdown nav menu -->
+    <li class="wrap-dropdown-menu">
+      <ul for="header_dropdown_menu" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+        <li onclick="Users();" class="mdl-menu__item active">Číselník užívateľov</li>
+        <li onclick="Firms();" class="mdl-menu__item">Číselník firiem</li>
+      </ul>
+    </li>
+    </ol><!-- .ui-header-breadcrumb -->
+
+
+
     <div class="mdl-layout-spacer"></div>
 <form method="post" action="users_md.php?hladanie=1&copern=1&strana=1&uprav=0" id="formhladaj" name="formhladaj">
     <div class="mdl-textfield mdl-js-textfield mdl-color--light-blue-500 search-box">
@@ -768,11 +778,13 @@ if ( $uprav != 0 AND $nova == 0 ) { echo "úprava # $cislo_id"; }
       <span class="mdl-tooltip" data-mdl-for="searchbtn">Hľadať</span>
       <span class="mdl-tooltip" data-mdl-for="resetsearchbtn">Vymazať vyhľadávanie</span>
 </form>
-    <button type="button" id="new_item" onclick="novyId();" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;">
-      <i class="material-icons">add</i>
-    </button>
-      <span class="mdl-tooltip" data-mdl-for="new_item">Vytvoriť nového užívateľa</span>
-  </div> <!-- .ui-header-page-row -->
+
+<!-- login user -->
+    <ul class="ilogin-inline-list" style="margin-left: 16px;">
+      <li class="mdl-color--indigo-400 ilogin-list-item item-avatar"><?php echo $kli_uzid; ?></li>
+      <li class="ilogin-list-item" style="margin-left: 0;"><?php echo "$kli_uzmeno&nbsp;$kli_uzprie"; ?></li>
+    </ul>
+  </div><!-- .ui-header-title-row -->
   <div class="mdl-layout__header-row wrap-ui-list">
     <table class="ui-list-header ui-list two-line ui-container">
     <tr>
@@ -1503,15 +1515,7 @@ $is = $is + 1;
 <div class="mdl-layout-spacer"></div>
 <footer class="mdl-mini-footer ui-container">
   <div class="mdl-mini-footer__left-section">
-    <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
-    <ul class="mdl-mini-footer__link-list">
-      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-500">Novinky</a></li>
-    </ul>
-  </div>
-  <div class="mdl-mini-footer__right-section">
-    <ul class="mdl-mini-footer__link-list">
-      <li><a href="#" onclick="Edcom();" title="EuroSecom powered by EDcom" class="mdl-color-text--light-blue-500">EDcom</a></li>
-    </ul>
+    <div class="mdl-logo mdl-color-text--grey-500">© 2018 EuroSecom</div>
   </div>
 </footer>
 </main>
@@ -1524,15 +1528,14 @@ $is = $is + 1;
 </div>
 <?php                   } ?>
 
+<!-- new item button -->
+<button type="button" id="new_item" onclick="newUser();" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect mdl-shadow--4dp">
+  <i class="material-icons">add</i>
+</button>
+  <span data-mdl-for="new_item" class="mdl-tooltip mdl-tooltip--left">Vytvoriť nového užívateľa</span>
 
-<!-- header nav menu -->
-<div style="position:fixed; left: 0px; top: -24px; z-index: 10;">
-  <ul for="header_title" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-    <!-- <li class="mdl-menu__item" onclick="Domain();">Doména</li> -->
-    <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="Users();">Číselník užívateľov</li>
-    <li class="mdl-menu__item" onclick="Firms();">Číselník firiem</li>
-  </ul>
-</div>
+
+
 
 </div> <!-- .mdl-layout -->
 
@@ -1565,7 +1568,7 @@ for ( var i = 0; i < headbuttons.length; i++ ) {
 
 
 
-document.getElementById('header_title').style.pointerEvents = 'none';
+document.getElementById('header_dropdown_menu').style.pointerEvents = 'none';
 
 var rows = document.querySelectorAll('#echo_row > td');
 for ( var i = 0; i < rows.length; i++ ) {
@@ -1792,7 +1795,7 @@ function viewFirms()
   }
 
 
-  function novyId()
+  function newUser()
   {
     window.open('users_md.php?copern=1&strana=1&hladanie=0&cohladat=&nova=1&uprav=1', '_self');
   }

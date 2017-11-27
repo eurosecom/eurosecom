@@ -292,14 +292,14 @@ $vysledek = mysql_query("$sql");
 //if( $newdelenie == 1 )
 ?>
 <head>
-  <meta charset="cp1250">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="css/material.min.css">
-  <link rel="stylesheet" href="css/material_edit.css">
-  <link rel="stylesheet" href="css/material_list_layout.css">
-  <title>Firmy | EuroSecom</title>
+<meta charset="cp1250">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="css/material.min.css">
+<link rel="stylesheet" href="css/material_edit.css">
+<link rel="stylesheet" href="css/material_list_layout.css">
+<title>Firmy | EuroSecom</title>
 <style>
 /* table layout */
 .ui-list th:nth-child(1), .ui-list td:nth-child(1) {
@@ -333,29 +333,32 @@ if ( $copern == 1 OR $copern == 8 )
 ?>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
 <header class="mdl-layout__header mdl-layout__header--waterfall ui-header">
-  <div class="mdl-layout__header-row ui-header-app-row">
-    <span onclick="AppPage();" class="mdl-color-text--yellow-A100">EuroSecom</span>&nbsp;
-    <span><?php echo $domain; ?></span>
-    <div class="mdl-layout-spacer"></div>
-<!-- user -->
-    <ul class="mdl-list clearfix ilogin">
-      <li class="mdl-list__item">
-        <span class="mdl-list__item-primary-content">
-          <span class="mdl-list__item-avatar list-item-avatar mdl-color--indigo-400"><?php echo $kli_uzid; ?></span>
-          <span><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
-        </span>
-      </li>
-    </ul>
-  </div> <!-- .ui-header-app-row -->
-  <div class="mdl-layout__header-row ui-header-page-row">
-    <span id="header_title" class="mdl-layout-title mdl-color-text--white dropdown">Číselník firiem</span>
-    <span class="mdl-layout-title mdl-color-text--yellow-A100">
+  <div class="mdl-layout__header-row ui-header-title-row">
+    <ol class="mdl-layout-title ui-header-breadcrumb">
+    <li onclick="AppPage();" class="mdl-color-text--yellow-A100">EuroSecom</li>
+    <li class="breadcrumb-item"><span style="padding: 0 4px;"><?php echo $domain; ?></span></li>
+    <li class="breadcrumb-item active">
+      <a href="#" id="header_dropdown_menu" class="dropdown">Číselník firiem</a>
+      <span class="mdl-color-text--yellow-A100">
 <?php
 if ( $nova == 1 ) { echo "nová"; }
 if ( $zmaz == 1 ) { echo "vymazanie # $cislo_xcf"; }
 if ( $uprav == 1 ) { echo "úprava # $cislo_xcf"; }
 ?>
-    </span>
+      </span>
+    </li>
+<!-- header dropdown nav menu -->
+    <li class="wrap-dropdown-menu">
+      <ul for="header_dropdown_menu" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+        <li onclick="Users();" class="mdl-menu__item">Číselník užívateľov</li>
+        <li onclick="Firms();" class="mdl-menu__item active">Číselník firiem</li>
+      </ul>
+    </li>
+    </ol><!-- .ui-header-breadcrumb -->
+
+
+
+
     <div class="mdl-layout-spacer"></div>
 <form method="post" action="firms_md.php?hladanie=1&copern=1&strana=1&uprav=0" id="formhladaj" name="formhladaj">
     <div class="mdl-textfield mdl-js-textfield mdl-color--light-blue-500 search-box">
@@ -367,15 +370,17 @@ if ( $uprav == 1 ) { echo "úprava # $cislo_xcf"; }
       <span class="mdl-tooltip" data-mdl-for="searchbtn">Hľadať</span>
       <span class="mdl-tooltip" data-mdl-for="resetsearchbtn">Vymazať vyhľadávanie</span>
 </form>
-    <button type="button" id="view_list" onclick="viewFirms();" class="mdl-button mdl-js-button mdl-button--icon">
+    <button type="button" id="view_list" onclick="viewFirms();" class="mdl-button mdl-js-button mdl-button--icon" style="margin: 0  16px 0 8px;">
       <i class="material-icons">print</i>
     </button>
       <span class="mdl-tooltip" data-mdl-for="view_list">Zobraziť číselník</span>
-    <button type="button" id="new_item" onclick="novaXcf();" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;">
-      <i class="material-icons">add</i>
-    </button>
-      <span class="mdl-tooltip" data-mdl-for="new_item">Vytvoriť novú firmu</span>
-  </div> <!-- .ui-header-page-row -->
+
+<!-- login user -->
+    <ul class="ilogin-inline-list">
+      <li class="mdl-color--indigo-400 ilogin-list-item item-avatar"><?php echo $kli_uzid; ?></li>
+      <li class="ilogin-list-item" style="margin-left: 0;"><?php echo "$kli_uzmeno&nbsp;$kli_uzprie"; ?></li>
+    </ul>
+  </div><!-- .ui-header-title-row -->
   <div class="mdl-layout__header-row wrap-ui-list">
     <table class="ui-list-header ui-list ui-container">
     <tr>
@@ -564,15 +569,7 @@ $is = $is + 1;
 <div class="mdl-layout-spacer"></div>
 <footer class="mdl-mini-footer ui-container">
   <div class="mdl-mini-footer__left-section">
-    <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
-    <ul class="mdl-mini-footer__link-list">
-      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-500">Novinky</a></li>
-    </ul>
-  </div>
-  <div class="mdl-mini-footer__right-section">
-    <ul class="mdl-mini-footer__link-list">
-      <li><a href="#" onclick="Edcom();" title="EuroSecom powered by EDcom" class="mdl-color-text--light-blue-500">EDcom</a></li>
-    </ul>
+    <div class="mdl-logo mdl-color-text--grey-500">© 2018 EuroSecom</div>
   </div>
 </footer>
 </main>
@@ -585,14 +582,14 @@ $is = $is + 1;
 </div>
 <?php                   } ?>
 
-<!-- header nav menu -->
-<div style="position:fixed; left: 0px; top: -24px; z-index: 10;">
-  <ul for="header_title" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-<!--     <li class="mdl-menu__item" onclick="Domain();">Doména</li> -->
-    <li class="mdl-menu__item" onclick="Users();">Číselník užívateľov</li>
-    <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="Firms();">Číselník firiem</li>
-  </ul>
-</div>
+<!-- new item button -->
+<button type="button" id="new_item" onclick="newFirm();" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect mdl-shadow--4dp">
+  <i class="material-icons">add</i>
+</button>
+  <span data-mdl-for="new_item" class="mdl-tooltip mdl-tooltip--left">Vytvoriť novú firmu</span>
+
+
+
 
 
 
@@ -725,7 +722,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; /
 <?php if ( $uprav == 1 OR $nova == 1 OR $zmaz == 1 )
 {
 ?>
-document.getElementById('header_title').style.pointerEvents = 'none';
+document.getElementById('header_dropdown_menu').style.pointerEvents = 'none';
 
 var headbuttons = document.querySelectorAll('header button');
 for ( var i = 0; i < headbuttons.length; i++ ) {
@@ -846,10 +843,7 @@ function Firms()
 {
   window.open('firms_md.php?copern=1&strana=1', '_self');
 }
-  function Edcom()
-  {
-   window.open('http://www.edcom.sk', '_blank');
-  }
+
 
 
 function viewFirms()
@@ -866,7 +860,7 @@ function allFirms()
     window.open('firms_md.php?copern=1&strana=<?php echo $strana; ?>&hladanie=<?php echo $hladanie; ?>&cohladat=<?php echo $cohladat; ?>', '_self');
   }
 
-  function novaXcf()
+  function newFirm()
   {
     window.open('firms_md.php?copern=1&strana=1&hladanie=0&cohladat=&nova=1', '_self');
   }

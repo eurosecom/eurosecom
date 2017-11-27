@@ -1125,14 +1125,14 @@ $odkaz64=urlencode($odkaz);
 
 ?>
 <head>
-  <meta charset="cp1250">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="../css/material.min.css">
-  <link rel="stylesheet" href="../css/material_edit.css">
-  <link rel="stylesheet" href="../css/material_list_layout.css">
-  <title>
+<meta charset="cp1250">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="../css/material.min.css">
+<link rel="stylesheet" href="../css/material_edit.css">
+<link rel="stylesheet" href="../css/material_list_layout.css">
+<title>
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 ) echo "Odberateľské faktúry";
 if ( $drupoh == 2 ) echo "Dodávateľské faktúry";
@@ -1180,14 +1180,6 @@ if ( $drupoh == 52 ) echo "Predfaktúry";
 
 
 
-
-
-
-
-
-
-
-
  /*dopyt, okno pôjde preč*/
     #Okno{ display: none; cursor: hand; width: 150px;
              position: absolute; top: 0; left: 0;
@@ -1204,32 +1196,6 @@ if ( $drupoh == 52 ) echo "Predfaktúry";
 <body onload="ObnovUI(); VyberVstup();">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 <header class="mdl-layout__header mdl-layout__header--waterfall ui-header">
-  <div class="mdl-layout__header-row ui-header-app-row">
-    <span class="mdl-color-text--yellow-A100">EuroSecom</span>&nbsp;
-    <span>
-<?php
-if ( $sysx == 'UCT' ) echo "Účtovníctvo";
-if ( $sysx == 'FAK' ) echo "Odbyt";
-?>
-    </span>
-    <div class="mdl-layout-spacer"></div>
-    <ul class="mdl-list clearfix ilogin">
-<!-- firm + period -->
-      <li class="mdl-list__item mdl-list__item--two-line toleft">
-        <span class="mdl-list__item-primary-content right" style="padding-top: 4px;">
-          <span class="mdl-color-text--white"><?php echo "<strong>$kli_vxcf</strong>&nbsp;&nbsp;$kli_nxcf"; ?></span>
-          <span class="mdl-list__item-sub-title" style="font-size: 13px;"><?php echo $kli_vume; ?></span>
-        </span>
-      </li>
-<!-- user -->
-      <li class="mdl-list__item toleft" style="margin-left: 24px;">
-        <span class="mdl-list__item-primary-content">
-          <span id="user" class="mdl-list__item-avatar list-item-avatar mdl-color--indigo-400" style="margin-right: 0;"><?php echo $kli_uzid; ?></span>
-        </span>
-      </li>
-    </ul>
-      <span data-mdl-for="user" class="mdl-tooltip">Prihlásený užívateľ:<br><?php echo "$kli_uzmeno $kli_uzprie / $kli_uzid"; ?></span>
-  </div> <!-- .ui-header-app-row -->
 <?php
 // toto je cast na zobrazenie tabulky a prechody medzi stranami
 // 1=volanie z menu.php
@@ -1451,9 +1417,20 @@ function navPage(chodna)
   window.open('vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&copern=1&hladaj_uce=<?php echo $hladaj_uce; ?>&drupoh=<?php echo $drupoh; ?>&page=' + chodna + '', '_self');
 }
 </script>
-<form name="formhl1" method="post" action="vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&drupoh=<?php echo $hdrupoh; ?>&page=1&copern=9&rozuct=<?php echo $rozuct;?>&sysx=<?php echo $sysx;?>&hladaj_uce=<?php echo $hladaj_uce; ?>">
-  <div class="mdl-layout__header-row ui-header-page-row">
-    <span id="header_title" class="mdl-layout-title mdl-color-text--white dropdown">
+
+<form name="formhl1" method="post" action="vstfak_md.php?regpok=<?php echo $regpok; ?>&vyroba=<?php echo $vyroba; ?>&drupoh=<?php echo $hdrupoh; ?>&page=1&copern=9&rozuct=<?php echo $rozuct; ?>&sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>">
+  <div class="mdl-layout__header-row ui-header-title-row">
+    <ol class="mdl-layout-title ui-header-breadcrumb">
+    <li class="breadcrumb-item">
+<?php if ( $sysx == 'UCT' ) { ?>
+      <a href="#" onclick="Ucto();">Účtovníctvo</a>
+<?php } ?>
+<?php if ( $sysx == 'FAK' ) { ?>
+      <a href="#" onclick="Odbyt();">Odbyt</a>
+<?php } ?>
+    </li>
+    <li class="breadcrumb-item active">
+      <a href="#" id="header_dropdown_menu" class="dropdown">
 <?php
 if ( $drupoh == 1 OR $drupoh == 31 ) echo "Odberateľské faktúry";
 if ( $drupoh == 2 ) echo "Dodávateľské faktúry";
@@ -1462,7 +1439,8 @@ if ( $drupoh == 21 OR $drupoh == 22 ) echo "Vnútropodnikové faktúry";
 if ( $drupoh == 42 ) echo "Registračná pokladnica";
 if ( $drupoh == 52 ) echo "Predfaktúry";
 ?>
-<?php if ( $pocstav == 1 ) echo " - Počiatočný stav"; ?></span>
+      </a>
+<?php if ( $pocstav == 1 ) echo " - Počiatočný stav"; ?> <!-- dopyt, neskôr pôjde preč -->
 
 <?php if ( $drupoh != 2 AND $drupoh != 42 ) {
 if( $drupoh == 1 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 1 ) ORDER BY dodb"); }
@@ -1473,7 +1451,7 @@ if( $drupoh == 21 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHER
 if( $drupoh == 22 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 13 ) ORDER BY dodb"); }
 if( $drupoh == 52 ) { $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dodb WHERE ( drod = 14 ) ORDER BY dodb"); }
 ?>
-  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" autofocus class="mdl-shadow--2dp select-btn">
+  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" autofocus class="select-btn toleft">
 <?php while($zaznam=mysql_fetch_array($sqls)): ?>
     <option value="<?php echo $zaznam["dodb"]; ?>">
 <?php
@@ -1487,7 +1465,7 @@ $poltxt = SubStr($polmen,0,20);
 <?php if ( $drupoh == 2 ) {
 $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_ddod WHERE ( drdo = 1 ) ORDER BY ucdo");
 ?>
-  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" autofocus class="mdl-shadow--2dp select-btn">
+  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" autofocus class="select-btn toleft">
 <?php while($zaznam=mysql_fetch_array($sqls)): ?>
     <option value="<?php echo $zaznam["ddod"]; ?>">
 <?php
@@ -1501,9 +1479,9 @@ $poltxt = SubStr($polmen,0,20);
 <?php if ( $drupoh == 42 ) {
 $sqls = mysql_query("SELECT * FROM F$kli_vxcf"."_dpok WHERE ( drpk = 9 ) ORDER BY dpok");
 ?>
-  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" autofocus class="mdl-shadow--2dp select-btn">
+  <select name="hladaj_uce" id="hladaj_uce" value="<?php echo $hladaj_uce; ?>" onchange="dajuce();" autofocus class="select-btn toleft">
 <?php while($zaznam=mysql_fetch_array($sqls)):?>
-    <option value="<?php echo $zaznam["dpok"];?>" >
+    <option value="<?php echo $zaznam["dpok"];?>">
 <?php
 $polmen = $zaznam["npok"];
 $poltxt = SubStr($polmen,0,20);
@@ -1512,42 +1490,79 @@ $poltxt = SubStr($polmen,0,20);
 <?php endwhile;?>
   </select>
 <?php                      } ?>
-  <div style="width: 16px;">&nbsp;</div>
+    </li>
+<!-- header dropdown nav menu -->
+    <li class="wrap-dropdown-menu">
+<?php
+if ( $drupoh == 1 OR $drupoh == 31 ) { $link_odber="active"; }
+if ( $drupoh == 2 ) { $link_dodav="active"; }
+?>
+      <ul for="header_dropdown_menu" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+        <li onclick="OdberFa();" class="mdl-menu__item <?php echo $link_odber; ?>">Odberateľské faktúry</li>
+        <li onclick="DodavFa();" class="mdl-menu__item <?php echo $link_dodav; ?>">Dodávateľské faktúry</li>
+<?php if ( $drupoh == 1 OR $drupoh == 31 ) { ?>
+        <li onclick="OdberUcty();" class="mdl-menu__item">Odberateľské účty</li>
+<?php } ?>
+<?php if ( $drupoh == 2 ) { ?>
+        <li onclick="DodavUcty();" class="mdl-menu__item">Dodávateľské účty</li>
+<?php } ?>
+      </ul>
+    </li>
+    </ol><!-- .ui-header-breadcrumb -->
+    <div class="mdl-layout-spacer"></div>
 
-<!-- month nav -->
-  <button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--light-blue-600 period-nav-btn">
-    <i class="material-icons">navigate_before</i>
-  </button>
-    <span class="mdl-tooltip" data-mdl-for="month_prev">Prejsť na <?php echo $kli_pume; ?></span>
+      <button id="searching" onclick="Searching();" class="mdl-button mdl-js-button mdl-button--icon toleft" style="margin: 0 2px;">
+        <i class="material-icons">search</i>
+      </button>
+      <button type="button" id="header_more_tool" class="mdl-button mdl-js-button mdl-button--icon toleft" style="margin: 0 2px;">
+        <i class="material-icons">more_vert</i>
+      </button>
+        <span data-mdl-for="header_more_tool" class="mdl-tooltip">Ďalšie akcie</span>
+      <div class="toleft vertical-divider" style="width: 1px; background-color: rgba(255,255,255,.7); height: 32px; padding: 4px 0; margin: 0 8px;">&nbsp;</div>
 
-  <button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--light-blue-600 period-nav-btn">
-    <i class="material-icons">navigate_next</i>
-  </button>
-    <span class="mdl-tooltip" data-mdl-for="month_next">Prejsť na <?php echo $kli_dume; ?></span>
 
-<div style="visibility: hidden;">
+
+
+
+<!-- period nav -->
+    <div class="clearfix" style=" margin-right: 16px;">
+      <button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button mdl-button--icon toleft" style="background-color: ;">
+        <i class="material-icons">navigate_before</i>
+      </button>
+        <span class="mdl-tooltip" data-mdl-for="month_prev">Prejsť na <?php echo $kli_pume; ?></span>
+      <button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button mdl-button--icon toleft" style="background-color: ;">
+        <i class="material-icons">navigate_next</i>
+      </button>
+        <span class="mdl-tooltip" data-mdl-for="month_next">Prejsť na <?php echo $kli_dume; ?></span>
+      <span class="toleft" style="font-size: 14px; line-height: 32px; margin-left: 4px;"><?php echo $kli_vume; ?></span>
+    </div>
+
+<!-- login firm + user -->
+    <ul class="ilogin-inline-list">
+      <li class="ilogin-list-item"><?php echo "<strong>$kli_vxcf</strong>&nbsp;&nbsp;$kli_nxcf"; ?></li>
+      <li id="ilogin_user" class="mdl-color--indigo-400 ilogin-list-item item-avatar"><?php echo $kli_uzid; ?></li>
+    </ul>
+      <span data-mdl-for="ilogin_user" class="mdl-tooltip">Prihlásený užívateľ:<br><?php echo "$kli_uzmeno $kli_uzprie / $kli_uzid"; ?></span>
+
+
+
+
+
+
+
+<!-- <div style="visibility: hidden;">
 <input type="text" name="hladaj_dok" id="hladaj_dok" value="<?php echo $hladaj_dok; ?>"/>
-<input type="text" name="hladaj_dat" id="hladaj_dat" value="<?php echo $hladaj_dat; ?>"/>
+<input type="text" name="hladaj_dat" id="hladaj_dat" onkeyup="CiarkaNaBodku(this);" value="<?php echo $hladaj_dat; ?>"/>
 <input type="text" name="hladaj_nai" id="hladaj_nai" value="<?php echo $hladaj_nai; ?>"/>
 <INPUT type="submit" id="hlad1" name="hlad1" value="Hľadať">
 <a href="#" onclick="ResetHladanie();" title="Obnoviť" class="reset">Obnoviť</a>
-</div>
-  <div class="mdl-layout-spacer"></div>
-  <button type="button" id="new_item" onclick="newItem(); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin-left: 24px;">
-    <i class="material-icons">add</i>
-  </button>
-    <span class="mdl-tooltip" data-mdl-for="new_item">Vytvoriť novú faktúru</span>
-
-
-
-  <button type="button" id="header_more_tool" class="mdl-button mdl-js-button mdl-button--icon" style="margin-left: 12px;">
-    <i class="material-icons">more_vert</i>
-  </button>
-    <span data-mdl-for="header_more_tool" class="mdl-tooltip">Ďalšie akcie</span>
-  </div> <!-- .ui-header-page-row -->
+</div> -->
 <div id="Okno"></div> <!-- dopyt, chcem dať preč -->
+
+  </div><!-- .ui-header-title-row -->
 </form>
-<form name="formp2" method="post" action="../faktury/vstfak_md.php?drupoh=<?php echo $drupoh;?>&page=1&copern=55">
+
+<form name="formp2" method="post" action="../faktury/vstfak_md.php?drupoh=<?php echo $drupoh; ?>&page=1&copern=55">
   <div class="mdl-layout__header-row wrap-ui-list">
     <table class="ui-list-header ui-list ui-container">
     <tr>
@@ -1641,7 +1656,7 @@ if ( $drupoh == 1 OR $drupoh == 31 )
 ?>
         <input type="checkbox" name="uhradp" value="1"  onmouseover="UkazSkryj('Uhradiť v hotovosti<br />vybrané doklady<br />zaškrtnite a OK');" onmouseout="Okno.style.display='none';" onclick="document.formp2.pokl.disabled = false;">
         <INPUT type="submit" id="pokl" name="pokl" value="OK" />
-        <!-- <button class="mdl-button mdl-js-button mdl-button--accent">Button</button> -->
+
 <?php
 }
 ?>
@@ -1690,10 +1705,9 @@ if ( $drupoh == 11 )
 ?>
       </th>
     </tr>
-    </table> <!-- .ui-list-header -->
-  </div>
+    </table><!-- .ui-list-header -->
+  </div><!-- .wrap-ui-list -->
 </header>
-
 <main class="mdl-layout__content ui-content sticky-footer">
 <div class="wrap-ui-list">
   <table class="ui-list-content ui-list ui-container">
@@ -1896,7 +1910,7 @@ $jesub=1;
       </label>
 <?php                                                            } ?>
     </td>
-  </tr>
+  </tr><!-- ui-row-echo -->
 <?php
   }
 $i = $i + 1;
@@ -1929,9 +1943,9 @@ $is = $is + 1;
       <i class="material-icons">navigate_next</i>
     </button>
       <span class="mdl-tooltip" data-mdl-for="page_next">Prejsť na stranu <?php echo $npage; ?></span>
-  </div> <!-- .ui-list-footer -->
+  </div><!-- .ui-list-footer -->
 </form>
-</div> <!-- .wrap-ui-list -->
+</div><!-- .wrap-ui-list -->
 <?php
 //mysql_close();
 mysql_free_result($sql);
@@ -1948,17 +1962,19 @@ mysql_free_result($sql);
 <footer class="mdl-mini-footer ui-container">
   <div class="mdl-mini-footer__left-section">
     <div class="mdl-logo mdl-color-text--grey-500">© 2017 EuroSecom</div>
-    <ul class="mdl-mini-footer__link-list">
-      <li><a href="#" onclick="News();" title="Novinky v EuroSecom" class="mdl-color-text--light-blue-500">Novinky</a></li>
-    </ul>
-  </div>
-  <div class="mdl-mini-footer__right-section">
-    <ul class="mdl-mini-footer__link-list">
-      <li><a href="#" onclick="Edcom();" title="EuroSecom powered by EDcom" class="mdl-color-text--light-blue-500">EDcom</a></li>
-    </ul>
   </div>
 </footer>
 </main>
+
+<div class="mdl-layout__drawer">
+  <span class="mdl-layout-title">Title</span>
+  <nav class="mdl-navigation">
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+  </nav>
+</div>
 
 <!-- empty state -->
 <?php if ( $cpol == 0 ) { ?>
@@ -1968,31 +1984,11 @@ mysql_free_result($sql);
 </div>
 <?php                   } ?>
 
-<!-- header nav menu -->
-<div style="position:fixed; left: 0px; top: -24px; z-index: 10;">
-  <ul for="header_title" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-<?php if ( $drupoh == 1 OR $drupoh == 31 ) { ?>
-    <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="OdberFa();">Odberateľské faktúry</li>
-    <li class="mdl-menu__item" onclick="OdberUcty();">Odberateľské účty</li>
-<?php } ?>
-<?php if ( $drupoh == 2 ) { ?>
-    <li class="mdl-menu__item mdl-color-text--light-blue-600" onclick="DodavFa();">Dodávateľské faktúry</li>
-    <li class="mdl-menu__item" onclick="DodavUcty();">Dodávateľské účty</li>
-<?php } ?>
-  </ul>
-</div>
 
 
 
-<div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">Title</span>
-    <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-    </nav>
-  </div>
+
+
 
 <!-- more header tools -->
 <div style="position:fixed; right: 0; top: 0; z-index: 10;">
@@ -2067,12 +2063,16 @@ $ajmes=0;
      }
 ?>
   </ul>
-</div> <!-- more header tools -->
+</div><!-- more header tools -->
 
 
+<!-- new item button -->
+<button type="button" id="new_item" onclick="newItem(); window.name = 'zoznam';" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect mdl-shadow--4dp">
+  <i class="material-icons">add</i>
+</button>
+  <span data-mdl-for="new_item" class="mdl-tooltip mdl-tooltip--left">Vytvoriť novú faktúru</span>
 
-
-</div> <!-- .mdl-layout -->
+</div><!-- .mdl-layout -->
 <?php
 // toto je koniec casti na zobrazenie tabulky a prechody medzi stranami
      }

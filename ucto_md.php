@@ -196,13 +196,13 @@ if ( $vyb_xcf == '' ) { $copern=22; } //dopyt, preveriť
 
 ?>
 <head>
-  <meta charset="cp1250">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="css/material.min.css">
-  <link rel="stylesheet" href="css/material_edit.css">
-  <title>Účtovníctvo | EuroSecom</title>
+<meta charset="cp1250">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="css/material.min.css">
+<link rel="stylesheet" href="css/material_edit.css">
+<title>Účtovníctvo | EuroSecom</title>
 <style>
 /* layout */
 .ui-container {
@@ -224,7 +224,7 @@ if ( $vyb_xcf == '' ) { $copern=22; } //dopyt, preveriť
 }
 
 
-/* change default */
+/* CHANGE DEFAULT */
 .mdl-layout__tab-bar-container {
   border-bottom: 1px solid #CFD8DC;
 }
@@ -396,55 +396,44 @@ width: 720px;
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-drawer-button">
-<header class="mdl-layout__header mdl-layout__header--waterfall ui-header" style="min-height: 112px;">
-  <div class="mdl-layout__header-row ui-header-app-row" style="height: 48px;">
-    <span class="mdl-layout-title mdl-color-text--yellow-A100" style="font-size: 16px;">EuroSecom</span>
-
-    <button type="button" id="select_firm" onclick="selectFirm();" class="mdl-button mdl-js-button dropdown">
-      <strong><?php echo $vyb_xcf; ?></strong>&nbsp;
-      <span><?php echo $vyb_naz; ?></span>
-    </button>
-
-    <button type="button" id="select_month" onclick="selectPeriod();" class="mdl-button mdl-js-button dropdown">
-      <span><?php echo $vyb_ume; ?></span>
-    </button>
-    <div class="mdl-layout-spacer"></div>
-
-
-
-
-
-
-
-
-<!-- user -->
-    <ul class="mdl-list clearfix ilogin">
-      <li class="mdl-list__item">
-        <span class="mdl-list__item-primary-content">
-          <span class="mdl-list__item-avatar list-item-avatar mdl-color--indigo-400"><?php echo $kli_uzid; ?></span>
-          <span><?php echo "$kli_uzmeno $kli_uzprie"; ?></span>
-        </span>
-      </li>
-    </ul>
-
-  </div> <!-- .ui-header-app-row -->
-<!-- tabs -->
-  <div class="mdl-layout__tab-bar ui-header-nav" style="  overflow: auto;">
-    <a href="#" onclick="Ucto();" class="mdl-layout__tab is-active">Účtovníctvo
+<header class="mdl-layout__header mdl-layout__header--waterfall ui-header">
+  <div class="mdl-layout__header-row ui-header-title-row" style="">
+    <ol class="mdl-layout-title ui-header-breadcrumb">
+    <li onclick="AppPage();" class="mdl-color-text--yellow-A100">EuroSecom</li>
+    <li class="breadcrumb-item active">
+      <a href="#" id="header_dropdown_menu" class="dropdown">Účtovníctvo
 <?php
 if ( $vyb_duj == 0 ) { echo "podvojné"; }
 if ( $vyb_duj == 9 ) { echo "jednoduché"; }
 ?>
-    </a>
-    <a href="#" onclick="Mzdy();" class="mdl-layout__tab">Mzdy</a>
-    <a href="#" onclick="Odbyt();" class="mdl-layout__tab">Odbyt</a>
-    <a href="#" onclick="Sklad();" class="mdl-layout__tab">Sklad</a>
-    <a href="#" onclick="Majetok();" class="mdl-layout__tab">Majetok</a>
-    <a href="#" id="more_subs" class="mdl-layout__tab mdl-layout--small-screen-only" style="padding: 0;"><i class="material-icons vacenter">more_horiz</i></a>
-    <a href="#" onclick="Doprava();" class="mdl-layout__tab mdl-layout--large-screen-only">Doprava</a>
-    <a href="#" onclick="Vyroba();" class="mdl-layout__tab mdl-layout--large-screen-only">Vyroba</a>
-    <a href="#" onclick="Analyzy();" class="mdl-layout__tab mdl-layout--large-screen-only">Analýzy</a>
+      </a>
+    </li>
+<!-- header dropdown nav menu -->
+    <li class="wrap-dropdown-menu">
+      <ul for="header_dropdown_menu" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+        <li onclick="Ucto();" class="mdl-menu__item active">Účtovníctvo
+<?php
+if ( $vyb_duj == 0 ) { echo "podvojné"; }
+if ( $vyb_duj == 9 ) { echo "jednoduché"; }
+?>
+        </li>
+        <li onclick="Mzdy();" class="mdl-menu__item">Mzdy</li>
+        <li onclick="Odbyt();" class="mdl-menu__item">Odbyt</li>
+        <li onclick="Sklad();" class="mdl-menu__item">Sklad</li>
+        <li onclick="Majetok();" class="mdl-menu__item">Majetok</li>
+        <li onclick="Doprava();" class="mdl-menu__item">Doprava</li>
+        <li onclick="Vyroba();" class="mdl-menu__item">Výroba</li>
+        <li onclick="Analyzy();" class="mdl-menu__item">Analýzy</li>
+      </ul>
+    </li>
+    </ol><!-- .ui-header-breadcrumb -->
+
+    <button type="button" id="select_firm" onclick="selectFirm();" class="mdl-button mdl-js-button dropdown " style="background-color: white; height: 40px; line-height: 40px; font-weight: 400;">
+      <strong><?php echo $vyb_xcf; ?></strong>&nbsp;
+      <span><?php echo $vyb_naz; ?></span>
+    </button>
     <div class="mdl-layout-spacer"></div>
+
 <!-- tools -->
     <div class="ui-header-toolbar flexbox" style="padding: 12px 0; ">
       <button id="searching" onclick="Searching();" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" title="Prehľadávanie">
@@ -457,7 +446,30 @@ if ( $vyb_duj == 9 ) { echo "jednoduché"; }
         <i class="material-icons">more_vert</i>
       </button>
     </div> <!-- .ui-header-toolbar -->
-  </div> <!-- tabs -->
+
+<!-- period nav -->
+    <div class="clearfix " style=" margin-right: 16px;">
+      <button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button mdl-button--icon toleft">
+        <i class="material-icons">navigate_before</i>
+      </button>
+        <span class="mdl-tooltip" data-mdl-for="month_prev">Prejsť na <?php echo $kli_pume; ?></span>
+      <button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button mdl-button--icon toleft">
+        <i class="material-icons">navigate_next</i>
+      </button>
+        <span class="mdl-tooltip" data-mdl-for="month_next">Prejsť na <?php echo $kli_dume; ?></span>
+      <button type="button" id="select_month" onclick="selectPeriod();" class="mdl-button mdl-js-button dropdown">
+        <span><?php echo $vyb_ume; ?></span>
+      </button>
+    </div>
+
+
+
+<!-- login user -->
+    <ul class="ilogin-inline-list">
+      <li class="mdl-color--indigo-400 ilogin-list-item item-avatar"><?php echo $kli_uzid; ?></li>
+      <li class="ilogin-list-item" style="margin-left: 0;"><?php echo "$kli_uzmeno&nbsp;$kli_uzprie"; ?></li>
+    </ul>
+  </div><!-- .ui-header-title-row -->
 </header>
 
 <!-- more subs nav menu -->
@@ -485,15 +497,7 @@ if ( $vyb_duj == 9 ) { echo "jednoduché"; }
 
 
 
-<!-- month nav -->
-<button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
-  <i class="material-icons md-40">navigate_before</i>
-</button>
-  <span class="mdl-tooltip" data-mdl-for="month_prev">Prejsť na <?php echo $kli_pume; ?></span>
-<button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button period-nav-btn mdl-button--colored">
-  <i class="material-icons md-40">navigate_next</i>
-</button>
-  <span class="mdl-tooltip" data-mdl-for="month_next">Prejsť na <?php echo $kli_dume; ?></span>
+
 
 
 
@@ -513,8 +517,8 @@ if ( $vyb_duj == 9 ) { echo "jednoduché"; }
       <ul class="card-module-content">
         <li id="odber_faktury" onclick="OdberFa();" class="card-item">Odberateľské faktúry</li>
         <li id="dodav_faktury" onclick="DodavFa();" class="card-item">Dodávateľské faktúry</li>
-        <li id="prijem_pokladna" onclick="PrijemPokl();" class="card-item">Príjmové pokladničné doklady</li>
-        <li id="vydaj_pokladna" onclick="VydavPokl();" class="card-item">Výdavkové pokladničné doklady</li>
+        <li id="prijem_pokladna" onclick="PokladnicaPrijem();" class="card-item">Príjmové pokladničné doklady</li>
+        <li id="vydaj_pokladna" onclick="PokladnicaVydaj();" class="card-item">Výdavkové pokladničné doklady</li>
         <li id="bank_vypisy" onclick="BankVyp();" class="card-item">Bankové výpisy</li>
         <li id="vseobec_doklady" onclick="VseoDokl();" class="card-item">Všeobecné účtovné doklady</li>
       </ul>
@@ -614,7 +618,7 @@ if ( $vyb_duj == 9 ) { echo "jednoduché"; }
           <ul for="account_analytical" class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect">
             <li id="odber_ucty" onclick="OdberUcty();" class="mdl-menu__item">Odberateľské účty</li>
             <li id="dodav_ucty" onclick="DodavUcty();" class="mdl-menu__item">Dodávateľské účty</li>
-            <li id="pokladna_ucty" onclick="PoklUcty();" class="mdl-menu__item">Pokladnice</li>
+            <li id="pokladna_ucty" onclick="PokladnicaUcty();" class="mdl-menu__item">Pokladnice</li>
             <li id="banka_ucty" onclick="BankaUcty();" class="mdl-menu__item">Bankové účty</li>
           </ul>
         </li>
@@ -931,11 +935,11 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; /
   {
     window.open('../faktury/vstfak_md.php?copern=1&drupoh=1002&page=1&pocstav=0', '_blank');
   }
-  function PrijemPokl()
+  function PokladnicaPrijem()
   {
     window.open('../ucto/vstpok_md.php?copern=1&drupoh=1&page=1&sysx=UCT', '_blank');
   }
-  function VydavPokl()
+  function PokladnicaVydaj()
   {
     window.open('../ucto/vstpok_md.php?copern=1&drupoh=2&page=1&sysx=UCT', '_blank');
   }
@@ -1037,7 +1041,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; /
   {
     window.open('../faktury/ddod_md.php?copern=1&page=1', '_blank');
   }
-  function PoklUcty()
+  function PokladnicaUcty()
   {
     window.open('../ucto/dpok_md.php?copern=1&page=1', '_blank');
   }

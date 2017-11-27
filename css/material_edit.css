@@ -73,67 +73,99 @@ select:enabled, button:enabled, [onclick] { /*dopyt, zistiť, kto môže mať ho
   max-width: 360px;
   text-transform: none;
 }
+.mdl-layout__header-row {
+  padding-left: 64px; /*dopyt, naviazať, iba keď je ikona hamburger*/
+  padding-right: 8px;
+}
 
 
-/*.container {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-}*/
-
-
+/* LAYOUT */
 .ui-container {
   width: 100%;
   margin: 0 auto;
 }
 
 /* HEADER */
-.ui-header .mdl-layout__drawer-button, .ui-header .mdl-button--icon, .ui-header-app-row, .ilogin .mdl-list__item-primary-content span:nth-child(2) {
-  color: rgba(255,255,255,.7);/*dopyt, naviazať na všetky buttony i texty v header */ /*skusiť tag button */
+.ui-header {
+  background-color: #039BE5;
+  color: rgba(255,255,255,.7);
 }
+
+
+.ui-header .mdl-layout__drawer-button, .ui-header .mdl-button--icon {
+  color: rgba(255,255,255,.7);
+}
+
+
+
 .ui-header .mdl-layout__drawer-button:hover, .ui-header .mdl-button--icon:hover { /*dopyt, naviazať na všetky buttony v header*/
   color: rgba(255,255,255,1);
-}
-.ui-header .mdl-layout__drawer-button, .ui-header-app-row {
-  background-color: #0288D1;
-  height: 40px;
-}
-.ui-header .mdl-layout__drawer-button {
-  width: 40px;
-  margin: 0 12px 0 12px;
-  line-height: 48px;
-}
-.ui-header-app-row {
-  font-size: 13px;
-  letter-spacing: .02em;
-}
-.mdl-layout__header-row:not(.ui-header-app-row) {
-  background-color: #039BE5;
-}
-.ui-header-app-row, .ui-header-page-row {
-  padding-left: 64px;
-}
-@media screen and (max-width: 1024px) {
-  .ui-header-page-row {
-    padding-left: 16px;
-  }
+  /*background-color: rgb(2, 136, 209);*/
+  background-color: rgba(0,0,0,0.071);
+  border-radius: 50%;
+/*background-color: rgba(0,0,0,.12);*/
 }
 
 
-/* page title with dropdown */
-.mdl-layout-title.dropdown {
-  cursor: pointer;
-  margin-right: 6px;
+
+
+
+
+
+
+
+
+/* breadcrumb in header title */
+.ui-header-breadcrumb {
+
 }
-.mdl-layout-title.dropdown:after {
-  vertical-align: -6px;
-  text-indent: 2px;
-}
-/* page title with select */
-.ui-header-page-row > .select-btn {
+.ui-header-breadcrumb > li {
+  float: left;
   height: 32px;
+  line-height: 32px;
+}
+.ui-header-breadcrumb > .breadcrumb-item:not(.active):after {
+  display: inline-block;
+  content: '/'; /*dopyt, dať cez entitu*/
+  margin: 0 4px;
+}
+.ui-header-breadcrumb > .breadcrumb-item.active {
+  color: rgba(255,255,255,1);
+}
+.ui-header-breadcrumb > .breadcrumb-item > a {
+  font-weight: inherit;
   border-radius: 2px;
-  padding: 0 0px 0 8px;
+  padding: 0 4px;
+  float: left;
+}
+.ui-header-breadcrumb > .breadcrumb-item > a:hover {
+  /*background-color: rgb(2, 136, 209);*/
+  background-color: rgba(0,0,0,0.071);
+}
+.ui-header-breadcrumb > .breadcrumb-item > a.dropdown:after {
+  vertical-align: -5px;
+}
+.ui-header-breadcrumb .select-btn {
+  height: inherit;
+  border-radius: 16px;
+  padding-left: 8px;
+/*  background-color: rgb(3, 169, 244);
+  color: white;*/
+}
+/* header nav dropdown menu */
+.ui-header-title-row .mdl-menu__item.active {
+  color: #039be5;
+}
+.ui-header-title-row .wrap-dropdown-menu {
+  position: fixed;
+  left: auto;
+  top: -16px;
+  z-index: 10;
+}
+
+
+/* select button */
+.select-btn {
   font-size: 12px;
   border: 0;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
@@ -141,30 +173,49 @@ select:enabled, button:enabled, [onclick] { /*dopyt, zistiť, kto môže mať ho
   color: rgba(0,0,0,.87);
   letter-spacing: 0.01em;
 }
-.ui-header-page-row > .select-btn:focus {
+.select-btn:focus {
   font-weight: 500;
+}
+
+
+/* ilogin section in header */
+.ilogin-list-item {
+  float: left;
+  height: 32px;
+  line-height: 32px;
+  letter-spacing: 0.02em;
+  color: #fff;
+  margin-right: 8px;
+  margin-left: 8px;
+  font-size: 14px;
+}
+.ilogin-list-item.item-avatar {
+  width: 32px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 12px;
 }
 
 
 
 /* logged in .ui-header-app-row */
 .ilogin .mdl-list__item {
-  height: 32px;
+/*  height: 32px;
   min-height: 32px;
   padding: 0;
-  letter-spacing: .02em;
+  letter-spacing: .02em;*/
 }
 .mdl-list__item .mdl-list__item-primary-content .list-item-avatar {
-  margin-right: 8px;
+/*  margin-right: 8px;
   height: 32px;
   line-height: 32px;
   width: 32px;
   font-size: 12px;
-  text-align: center;
+  text-align: center;*/
 }
 .ilogin .mdl-list__item-primary-content {
-  font-size: 13px;
-  line-height: 1;
+/*  font-size: 13px;
+  line-height: 1;*/
 }
 
 
@@ -431,16 +482,18 @@ table .mini-icon-btn {
 /* BUTTON */
 .period-nav-btn { /*dopyt, zosúladiť s ostatnými btn v záhlaví*/
   color: rgba(255,255,255,.7);
+  width: 36px;
+  color: rgba(255,255,255,.7); width: 24px; min-width: 24px;
 }
 .period-nav-btn:hover {
   color: rgba(255,255,255,1);
 }
-@media screen and (max-width: 1400px) {
+/*@media screen and (max-width: 1400px) {
   .period-nav-btn {
     box-shadow: none;
   }
-}
-@media screen and (min-width: 1401px) {
+}*/
+/*@media screen and (min-width: 1401px) {
   .period-nav-btn {
     position: absolute;
     z-index: 10;
@@ -453,7 +506,7 @@ table .mini-icon-btn {
   .period-nav-btn:nth-of-type(2) {
     right: 16px;
   }
-}
+}*/
 
 
 /* more tools menu */
