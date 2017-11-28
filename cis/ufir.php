@@ -520,10 +520,10 @@ $fir_fakdod = strip_tags($_REQUEST['fir_fakdod']);
 
 $uprav="NO";
 
-
-if( $fir_uctx03 == 1 )
-           {
 //ak neexistuje uctpohyby tak ju vytvor
+//toto som zrusil od 1.1.2018
+if( $fir_uctx03 == 1001 )
+           {
 $sql = "SELECT * FROM F$kli_vxcf"."_uctpohyby";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
@@ -601,7 +601,8 @@ $citfir = include("../cis/citaj_fir.php");
 //koniec nacitania
 
 //ak neexistuje uctpohyby vytvor
-if( $fir_uctx03 == 1 )
+//toto som zrusil od 1.1.2018
+if( $fir_uctx03 == 1001 )
            {
 //ak neexistuje uctpohyby tak ju vytvor
 $sql = "SELECT * FROM F$kli_vxcf"."_uctpohyby";
@@ -2655,8 +2656,8 @@ $riadok=mysql_fetch_object($vysledok);
 <td class="fmenu" ><?php echo $riadok->allx13;?></td><td class="bmenu" colspan="5" >0=Dátum_vyhotovenia-Enter-Dátum_odpoètu, 1=Dátum_vyhotovenia-Enter-Dátum_dodania-Enter-Dátum_odpoètu</td>
 </tr>
 <tr>
-<td class="fmenu" width="10%" colspan="2">Odpoèet a odvod DPH po úhrade faktúry:</td>
-<td class="fmenu" ><?php echo $riadok->xvr05;?></td><td class="bmenu" colspan="5" >0=nie, 1=áno</td>
+<td class="fmenu" width="10%" colspan="2">Registrácia pre uplatòovanie DPH po prijatí platby:</td>
+<td class="fmenu" ><?php echo $riadok->xvr05;?></td><td class="bmenu" colspan="5" >0=nie som registrovaný, 1=áno som registrovaný, 2=nie som registrovaný a nemám registrovaných dodávate¾ov</td>
 </tr>
 <tr></tr><tr></tr>
 
@@ -2800,8 +2801,8 @@ if ( $copern == 92 )
 <td class="fmenu" ><input type="text" name="fir_allx13" id="fir_allx13" /></td><td class="bmenu" colspan="5">0=Dátum_vyhotovenia-Enter-Dátum_odpoètu, 1=Dátum_vyhotovenia-Enter-Dátum_dodania-Enter-Dátum_odpoètu</td>
 </tr>
 <tr>
-<td class="fmenu" width="10%" colspan="2">Odpoèet a odvod DPH po úhrade faktúry:</td>
-<td class="fmenu" ><input type="text" name="fir_xvr05" id="fir_xvr05" /></td><td class="bmenu" colspan="5" >0=nie, 1=áno</td>
+<td class="fmenu" width="10%" colspan="2">Registrácia pre uplatòovanie DPH po prijatí platby:</td>
+<td class="fmenu" ><input type="text" name="fir_xvr05" id="fir_xvr05" /></td><td class="bmenu" colspan="5" >0=nie som registrovaný, 1=áno som registrovaný, 2=nie som registrovaný a nemám registrovaných dodávate¾ov</td>
 </tr>
 <tr></tr><tr></tr>
 

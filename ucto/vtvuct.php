@@ -1193,154 +1193,51 @@ $sqlt = <<<uctpohyby
    datm        TIMESTAMP(14)
 );
 uctpohyby;
-
 $sql = 'CREATE TABLE uctpohyby'.$sqlt;
-////echo 'CREATE TABLE uctpohyby'.$sqlt;
-
 $vysledek = mysql_query("$sql");
-
 
 //pridaj stlpec
 $sql = "ALTER TABLE uctpohyby ENGINE InnoDB";
 $vysledek = mysql_query("$sql");
-
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '1', 'trbu v hotovosti za tovar', '9', '1', '30', '51', '30', '60', '30', '59', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '2', 'trbu v hotovosti za vırobky,sluby', '9', '1', '31', '51', '31', '60', '31', '59', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '3', 'trbu v hotovosti ostatné', '9', '1', '32', '51', '32', '60', '32', '59', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '4', 'vklad v hotovosti podnikate¾a', '9', '1', '42', '1', '42', '1', '42', '1', '42', '42', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '5', 'úhradu v hotovosti odber.faktúry za tovar', '9', '1', '60', '1', '60', '1', '60', '1', '34399', '34399', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '6', 'úhradu v hotovosti odber.faktúry za vırobky,sluby', '9', '1', '61', '1', '61', '1', '61', '1', '34399', '34399', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '7', 'úhradu v hotovosti odber.faktúry ostatné', '9', '1', '62', '1', '62', '1', '62', '1', '34399', '34399', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '51', 'nákup materiálu v hotovosti', '9', '2', '2', '1', '2', '30', '2', '29', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '52', 'nákup tovaru v hotovosti', '9', '2', '3', '1', '3', '30', '3', '29', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '53', 'vyplatenie èistıch miezd', '9', '2', '4', '1', '4', '30', '4', '29', '4', '4', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '54', 'vıdavok na réiu v hotovosti', '9', '2', '8', '1', '8', '30', '8', '29', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '55', 'osobnú spotrebu v hotovosti', '9', '2', '15', '1', '15', '1', '15', '1', '15', '15', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '56', 'úhradu v hotovosti dodav.faktúry za materiál', '9', '2', '22', '1', '22', '1', '22', '1', '34399', '34399', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '57', 'úhradu v hotovosti dodav.faktúry za tovar', '9', '2', '23', '1', '23', '1', '23', '1', '34399', '34399', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '58', 'úhradu v hotovosti dodav.faktúry ostatné', '9', '2', '24', '1', '24', '1', '24', '1', '34399', '34399', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '1001', 'trbu v hotovosti za tovar', '0', '1', '60400', '51', '60400', '60', '60400', '59', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '1002', 'trbu v hotovosti za vırobky,sluby', '0', '1', '60100', '51', '60100', '60', '60100', '59', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '1003', 'trbu za predaj majetku', '0', '1', '64100', '51', '64100', '60', '64100', '59', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '1004', 'vıber z BÚ vklad do pokladnice', '0', '1', '26100', '1', '26100', '1', '26100', '1', '26100', '26100', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '1005', 'úhradu v hotovosti odber.faktúry', '0', '1', '31100', '1', '31100', '1', '31100', '1', '31100', '31100', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '1051', 'nákup materiálu v hotovosti', '0', '2', '50100', '1', '50100', '30', '50100', '29', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '1052', 'nákup tovaru v hotovosti', '0', '2', '50400', '1', '50400', '30', '50400', '29', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '1053', 'vyplatenie èistıch miezd', '0', '2', '33100', '1', '33100', '1', '33100', '1', '33100', '33100', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '1054', 'vıdavok na sluby v hotovosti', '0', '2', '51800', '1', '51800', '30', '51800', '29', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '1055', 'vıber z pokladnice odvod na BÚ ', '0', '2', '26100', '1', '26100', '1', '26100', '1', '26100', '26100', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '1056', 'úhradu v hotovosti dodav.faktúry', '0', '2', '32100', '1', '32100', '1', '32100', '1', '32100', '32100', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '2001', 'odberate¾skú faktúru za tovar', '0', '11', '60400', '51', '60400', '60', '60400', '59', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '2002', 'odberate¾skú faktúru za sluby', '0', '11', '60200', '51', '60200', '60', '60200', '59', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '2003', 'odberate¾skú faktúru za predaj majetku', '0', '11', '64100', '51', '64100', '60', '64100', '59', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '2051', 'dodávate¾ská faktúra za materiál', '0', '12', '50100', '1', '50100', '30', '50100', '29', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '2052', 'dodávate¾ská faktúra za tovar', '0', '12', '50400', '1', '50400', '30', '50400', '29', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '2053', 'dodávate¾ská faktúra za sluby', '0', '12', '51800', '1', '51800', '30', '51800', '29', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '101', 'odberate¾skú faktúru tuzemsko', '9', '11', '0', '51', '0', '60', '0', '59', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '102', 'odberate¾skú faktúru vıvoz EU', '9', '11', '0', '51', '0', '70', '0', '69', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '103', 'odberate¾skú faktúru vıvoz 3K', '9', '11', '0', '71', '0', '71', '0', '71', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '201', 'dodávate¾skú faktúru tuzemsko', '9', '12', '0', '1', '0', '30', '0', '29', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '204', 'dodávate¾skú faktúru dovoz 3K', '9', '12', '0', '49', '0', '49', '0', '49', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
 }
 
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '2081', 'dodávate¾ská faktúra dovoz EU - tovar', '0', '12', '13200', '1', '13200', '40', '13200', '39', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '2082', 'dodávate¾ská faktúra dovoz EU - sluby', '0', '12', '51800', '1', '51800', '47', '51800', '37', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '281', 'dodávate¾ská faktúra dovoz EU - tovar', '9', '12', '0', '1', '0', '40', '0', '39', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '282', 'dodávate¾ská faktúra dovoz EU - sluby', '9', '12', '0', '1', '0', '47', '0', '37', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-$ttvv = "INSERT INTO uctpohyby (cpoh,pohp,ucto,druh,uzk0,dzk0,uzk1,dzk1,uzk2,dzk2,udn1,udn2,hfak,hico,hstr,hzak) ".
-"VALUES ( '2004', 'odberate¾skú faktúru za vırobky', '0', '11', '60100', '51', '60100', '60', '60100', '59', '34300', '34300', '0', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
+$sql = "SELECT * FROM F$kli_vxcf"."_uctpohyby";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+//echo "Vytvorit tabulku uctpohyby!"."<br />";
+
+$sqlt = <<<uctpohyby
+(
+   cpoh        int PRIMARY KEY not null UNIQUE,
+   pohp        VARCHAR(50) NOT NULL,
+   ucto        INT DEFAULT 0,
+   druh        INT DEFAULT 1,
+   uzk0        VARCHAR(11) NOT NULL,
+   dzk0        INT DEFAULT 0,
+   uzk1        VARCHAR(11) NOT NULL,
+   dzk1        INT DEFAULT 0,
+   uzk2        VARCHAR(11) NOT NULL,
+   dzk2        INT DEFAULT 0,
+   udn1        VARCHAR(11) NOT NULL,
+   ddn1        INT DEFAULT 0,
+   udn2        VARCHAR(11) NOT NULL,
+   ddn2        INT DEFAULT 0,
+   hfak        INT DEFAULT 0,
+   hico        INT DEFAULT 0,
+   hstr        INT DEFAULT 0,
+   hzak        INT DEFAULT 0,
+   id          INT,
+   datm        TIMESTAMP(14)
+);
+uctpohyby;
+$sql = "CREATE TABLE F$kli_vxcf"."_uctpohyby".$sqlt;
+$vysledek = mysql_query("$sql");
+
+//pridaj stlpec
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpohyby ENGINE InnoDB";
+$vysledek = mysql_query("$sql");
+}
 //koniec tabulky uctpohyby
 
 //Tabulka vtvuct
