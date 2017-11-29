@@ -123,7 +123,7 @@ $upravene = mysql_query("$uprtxt");
 $copern=20;
 $strana=2;
 //exit;
-//koniec nacitania rozpoctu minuleho roka 
+//koniec nacitania rozpoctu minuleho roka
     }
 
 
@@ -186,7 +186,7 @@ $vytvor = mysql_query("$vsql");
 $umex=$kli_vume;
 
 $psys=1;
- while ($psys <= 9 ) 
+ while ($psys <= 9 )
  {
 //zober prijmove pokl
 if( $psys == 1 ) { $uctovanie="uctpokuct"; $doklad="pokpri"; }
@@ -250,17 +250,17 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobratsy$kli_uzid"." SELECT".
 $dsql = mysql_query("$dsqlt");
 
 
-if( $_SERVER['SERVER_NAME'] == "www.eurodpsgbely.sk" ) 
+if( $_SERVER['SERVER_NAME'] == "www.eurodpsgbely.sk" )
 {
-$dfzdroj=41; 
+$dfzdroj=41;
 $sqtoz = "DELETE FROM F$kli_vxcf"."_prcuobratsy$kli_uzid WHERE LEFT(ucm,5) = 37810 ";
 $oznac = mysql_query("$sqtoz");
 }
 
 
 
-if( $_SERVER['SERVER_NAME'] == "www.eurodpsgbely.sk" ) 
-{  
+if( $_SERVER['SERVER_NAME'] == "www.eurodpsgbely.sk" )
+{
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid SET zdroj=46 WHERE uce = 66510 ";
 $oznac = mysql_query("$sqtoz");
@@ -280,8 +280,8 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid,F$kli_vxcf"."_zak ".
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) 
-{  
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" )
+{
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobratsy$kli_uzid SET podnk=2 WHERE LEFT(uce,3) = 551 ";
 $oznac = mysql_query("$sqtoz");
 }
@@ -316,15 +316,15 @@ $sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid,F$kli_vxcf"."_crf104nuj_no".
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-//vymaz 3kove ucty ak nemaju polozku 
+//vymaz 3kove ucty ak nemaju polozku
 $sqtoz = "DELETE FROM F$kli_vxcf"."_prcuobrats$kli_uzid WHERE LEFT(uce,1) = 3 AND poloz = 0 ";
 $oznac = mysql_query("$sqtoz");
 
 //exit;
 
-//psys  uro  cpl  ume  dat  dok  uce  ur1  puc  ucm  ucd  rdp  ico  fak  str  zak  hod  mdt  dal  zos  pop  pox  
-//pmd  pdl  bmd  bdl  omd  odl  zmd  zdl  uhrad  zdroj  poloz  rpje 
-//tu nastav presun zo zdroj1 a polozka1 na zdroj2 a polozka2 ak uce, dok, hod == 0 
+//psys  uro  cpl  ume  dat  dok  uce  ur1  puc  ucm  ucd  rdp  ico  fak  str  zak  hod  mdt  dal  zos  pop  pox
+//pmd  pdl  bmd  bdl  omd  odl  zmd  zdl  uhrad  zdroj  poloz  rpje
+//tu nastav presun zo zdroj1 a polozka1 na zdroj2 a polozka2 ak uce, dok, hod == 0
 
 //sem este presun z zdroja,polozky na novy zdroj,polozku opravene vyssie
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobrats$kli_uzid "." SELECT".
@@ -350,42 +350,42 @@ $dsql = mysql_query("$dsqlt");
 
 $zdroj3pol=1;
 if( $zdroj3pol == 1 )
-    {  
+    {
 
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=41 WHERE poloz > 0 ";
 
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $fir_fico == 37990845 ) 
-{ 
-$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=46 WHERE poloz > 0 "; 
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $fir_fico == 37990845 )
+{
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=46 WHERE poloz > 0 ";
 }
 
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 OR $kli_vxcf == 809 ) ) 
-{ 
-$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=46 WHERE poloz > 0 "; 
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 OR $kli_vxcf == 809 ) )
+{
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=46 WHERE poloz > 0 ";
 }
 
-if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) 
-{ 
-$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=41 WHERE poloz > 0 "; 
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" )
+{
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=41 WHERE poloz > 0 ";
 }
 
-if( $_SERVER['SERVER_NAME'] == "www.mpsbm.sk" ) 
-{ 
-$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=71 WHERE poloz > 0 "; 
+if( $_SERVER['SERVER_NAME'] == "www.mpsbm.sk" )
+{
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=71 WHERE poloz > 0 ";
 }
 
 $oznac = mysql_query("$sqtoz");
 
 
-if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) 
-{ 
-$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 610 AND str = 24 "; 
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" )
+{
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 610 AND str = 24 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 620 AND str = 24 "; 
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 620 AND str = 24 ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 641  "; 
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 641  ";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 310  "; 
+$sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=111 WHERE poloz = 310  ";
 $oznac = mysql_query("$sqtoz");
 
 }
@@ -404,7 +404,7 @@ exit;
                }
 
 //exit;
-//koniec kontrola na generovanie 
+//koniec kontrola na generovanie
 
 //sumar za rozp.polozky a zdroj
 $dsqlt = "INSERT INTO F$kli_vxcf"."_prcuobrats$kli_uzid "." SELECT".
@@ -423,8 +423,8 @@ $dsql = mysql_query("$dsqlt");
 //exit;
 
 //prenes do rozpoctu ale opacne nacitaj schvaleny a po zmenach do tohoto a zober skutocne z tohoto
-//cpl  px12  oc  druh  okres  obec  daz  kor  prx  uce  ucm  ucd  hod  mdt  dal  
-//program  zdroj  oddiel  xoddiel  skupina  trieda  podtrieda  polozka  xpolozka  podpolozka  nazov  schvaleny  zmeneny  skutocnost  ico  
+//cpl  px12  oc  druh  okres  obec  daz  kor  prx  uce  ucm  ucd  hod  mdt  dal
+//program  zdroj  oddiel  xoddiel  skupina  trieda  podtrieda  polozka  xpolozka  podpolozka  nazov  schvaleny  zmeneny  skutocnost  ico
 
 $sqtoz = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin104 SELECT ".
 "0,px12,oc,druh,okres,obec,daz,kor,prx,uce,ucm,ucd,hod,mdt,dal, ".
@@ -480,31 +480,31 @@ $nostp=trim($nostp);
 $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, oddiel='10.7.0.2' ";
 $oznac = mysql_query("$sqtoz");
 
-if( $nostp != "" ) 
+if( $nostp != "" )
 {
 $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, oddiel='$nostp' ";
 $oznac = mysql_query("$sqtoz");
 }
 
-if( $_SERVER['SERVER_NAME'] == "www.mpsbm.sk" ) 
+if( $_SERVER['SERVER_NAME'] == "www.mpsbm.sk" )
 {
 $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, oddiel='04.1.1' ";
 $oznac = mysql_query("$sqtoz");
 }
 
-if( $_SERVER['SERVER_NAME'] == "www.eurodpsgbely.sk" ) 
+if( $_SERVER['SERVER_NAME'] == "www.eurodpsgbely.sk" )
 {
 $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, oddiel='10.1.2.2' ";
 $oznac = mysql_query("$sqtoz");
 }
 
-if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) 
+if( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" )
 {
 $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, program='9.2', oddiel='0.8.2.0' ";
 $oznac = mysql_query("$sqtoz");
 }
 
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 OR $kli_vxcf == 809 )) 
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 OR $kli_vxcf == 809 ))
 {
 $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, program='', oddiel='0.7.2.2' ";
 $oznac = mysql_query("$sqtoz");
@@ -540,7 +540,7 @@ $sqltt = "SELECT * FROM F$kli_vxcf"."_prcuobrats$kli_uzid WHERE zak != 7777 AND 
 $sql = mysql_query("$sqltt"); $pol = mysql_num_rows($sql);
 if( $pol > 0 ) {
 $i=0; while ($i <= $pol )  {
-if (@$zaznam=mysql_data_seek($sql,$i)) 
+if (@$zaznam=mysql_data_seek($sql,$i))
 { $polozka=mysql_fetch_object($sql); echo "Rozpoètová položka zdroj=".$polozka->zdroj." položka=".$polozka->poloz." nie je v rozpoète ! <br />"; }
 $i=$i+1;                   }
 exit;
@@ -602,9 +602,9 @@ $zdroj = strip_tags($_REQUEST['zdroj']);
 $oddiel = strip_tags($_REQUEST['oddiel']);
 
 
-if( $strana == 1 )                     { 
+if( $strana == 1 )                     {
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET daz='$daz_sql' ";
-$upravene = mysql_query("$uprtxt"); 
+$upravene = mysql_query("$uprtxt");
                                        }
 
 if ( $strana == 2 OR $strana == 4 )    {
@@ -671,7 +671,7 @@ endif;
 //koniec zapisu polozky
 
 
-//prac.subor a subor 
+//prac.subor a subor
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykaz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykazx'.$kli_uzid;
@@ -774,7 +774,7 @@ $upravene = mysql_query("$uprtxt");
 
 }
 
-//koniec vytvorenie 
+//koniec vytvorenie
 
 
 //vypocty
@@ -787,7 +787,7 @@ $upravene = mysql_query("$uprtxt");
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET ".
 " xpolozka=SUBSTRING(polozka,1,3), podpolozka=SUBSTRING(polozka,4,3), ".
 " xoddiel=SUBSTRING(oddiel,1,2), skupina=SUBSTRING(oddiel,4,1), trieda=SUBSTRING(oddiel,6,1), podtrieda=SUBSTRING(oddiel,8,1) ".
-" WHERE oc >= 0 "; 
+" WHERE oc >= 0 ";
 //echo $uprtxt;
 $upravene = mysql_query("$uprtxt");
 
@@ -962,12 +962,35 @@ a.btn-down-x26:hover {
   -khtml-opacity: 1;
   opacity: 1;
 }
+.btn-text {
+  border: 0;
+  box-sizing: border-box;
+  color: #39f;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 28px;
+  line-height: 28px;
+  /*min-width: 64px;*/
+  padding: 0 8px;
+  text-align: center;
+  text-transform: uppercase;
+  /*vertical-align: middle;*/
+  background-color: transparent;
+  border-radius: 2px;
+}
+.btn-text:hover {
+  background-color: rgba(158,158,158,.2);
+}
+
+
 </style>
 <script type="text/javascript">
 <?php
-//uprava 
+//uprava
   if ( $copern == 20 )
-  { 
+  {
 ?>
 
 
@@ -1036,7 +1059,7 @@ function SchvalenyEnter(e)
   var k = (navigator.appName=="Netscape") ? e : event.keyCode; //kód stlaèenej klávesy
 
   if(k == 13 ){
-        document.formv1.zmeneny.value=document.formv1.schvaleny.value; 
+        document.formv1.zmeneny.value=document.formv1.schvaleny.value;
         document.forms.formv1.zmeneny.focus();
         document.forms.formv1.zmeneny.select();
               }
@@ -1109,7 +1132,7 @@ document.formv1.predpoklad.value = '<?php echo $predpoklad;?>';
 document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
         document.formv1.uloz.disabled = true;
-        document.forms.formv1.zdroj.focus(); 
+        document.forms.formv1.zdroj.focus();
         document.forms.formv1.zdroj.select();
 
 
@@ -1185,7 +1208,7 @@ document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
 
 <?php
   if ( $copern != 20 )
-  { 
+  {
 ?>
     function ObnovUI()
     {
@@ -1260,8 +1283,8 @@ if ( $copern == 20 )
   <td>
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
-    <img src="../obr/ikony/upbox_blue_icon.png" onclick="DbfFin112nujpod();" title="Export do DBF" class="btn-form-tool">
-    <img src="../obr/ikony/upbox_blue_icon.png" onclick="CsvFin1a12();" title="Export do CSV" class="btn-form-tool">
+    <button type="button" onclick="DbfFin112nujpod();" title="Export do DBF" class="btn-text toright" style="position: relative; top: -4px;">DBF</button>
+    <button type="button" onclick="CsvFin1a12();" title="Export do CSV" class="btn-text toright" style="position: relative; top: -4px; margin-left: 12px;">CSV</button>
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
@@ -1868,8 +1891,8 @@ $vysledok = mysql_query("$sqlt");
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctprcvykazx'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctvykaz_fin104 WHERE druh = 5 ";
 $vytvor = mysql_query("$vsql");
 
-// cpl  px12  oc  druh  okres  obec  daz  kor  prx  uce  ucm  ucd  hod  mdt  dal  
-// program  zdroj  oddiel  xoddiel  skupina  trieda  podtrieda  polozka  xpolozka  podpolozka  nazov  schvaleny  zmeneny  skutocnost  ico  
+// cpl  px12  oc  druh  okres  obec  daz  kor  prx  uce  ucm  ucd  hod  mdt  dal
+// program  zdroj  oddiel  xoddiel  skupina  trieda  podtrieda  polozka  xpolozka  podpolozka  nazov  schvaleny  zmeneny  skutocnost  ico
 
 //prijmy
 //sumare
@@ -1985,7 +2008,7 @@ $j=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
-$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 $dat_dat = SkDatum($hlavicka->da21 );
 if( $dat_dat == '0000-00-00' ) $dat_dat="";
 
@@ -2467,7 +2490,7 @@ $pdf->Cell(195,12," ","$rmc1",1,"L");
 $pdf->Cell(40,5," ","$rmc1",0,"C");$pdf->Cell(22,4,"$daz","$rmc",1,"C");
 
      }
-//koniec ak i=0 
+//koniec ak i=0
 
 
 
@@ -2674,7 +2697,7 @@ $pdf->Output("$outfilex");
 
 <?php
 }
-/////////////////////////////////////////KONIEC VYTLACENIA 
+/////////////////////////////////////////KONIEC VYTLACENIA
 ?>
 
 
