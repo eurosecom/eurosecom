@@ -1,4 +1,5 @@
-<HTML>
+<!doctype html>
+<html>
 <?php
 $sys = 'UCT';
 $urov = 1000;
@@ -66,30 +67,1557 @@ if (File_Exists ("../tmp/zoznam$kli_uzid.pdf")) { $soubor = unlink("../tmp/zozna
 if (File_Exists ("../tmp/saldo.$kli_uzid.pdf")) { $soubor = unlink("../tmp/saldo.$kli_uzid.pdf"); }
 if (File_Exists ("../tmp/inventura.$kli_uzid.pdf")) { $soubor = unlink("../tmp/inventura.$kli_uzid.pdf"); }
 
-?> 
+?>
+<head>
+<meta charset="cp1250">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="../css/material.min.css">
+<link rel="stylesheet" href="../css/material_edit.css">
+<title>Účtovné zostavy | EuroSecom</title>
+<style>
+/* layout */
+.ui-container {
+  max-width: 1160px; /*max-width: 1440px;*/
+}
+.inline-card {
 
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
-  <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>Mesačné zostavy</title>
-  <style type="text/css">
 
-  </style>
+  /*margin: 10px 0;*/
+  /*min-height: 48px;*/
+}
+.inline-card > .divider-horizontal {
+  background-color: rgba(0,0,0,.1);
+  height: 1px;
+}
+.inline-card-content {
+  height: 52px;
+  padding: 10px 12px;
+  overflow: auto;
+  background-color: #fff;
+  border-radius: 2px;
+}
+.inline-card-content > :first-child {
+  min-width: 72px;
+}
+.inline-card-content > div:not(.toright) {
+  float: left;
+}
+.card-title {
+  padding: 0px 8px;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+.card-title > strong {
+  font-weight: 500;
+}
+.card-title > .select-bg {
+  background-color: rgba(0,0,0,.04);
+  border-radius: 2px;
+  color: rgba(0,0,0,.54);
+  margin: 0 4px;
+  height: 32px;
+  padding: 0 2px 0 4px;
+  border: 0;
+  font-size: 14px;
+}
+.card-actions > .mdl-button--icon {
+  float: left;
+  margin: 0 2px;
+}
+
+</style>
+</head>
+<body onload="VyberVstup();">
+<?php
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendens'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendensx'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendensy'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcudenniks'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcudenniksx'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcudenniksy'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prchlknihas'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prchlknihasx'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prchlknihasy'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobrats'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsx'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsy'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphs'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphsx'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+?>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<header class="mdl-layout__header mdl-layout__header--waterfall ui-header">
+  <div class="mdl-layout__header-row ui-header-title-row">
+    <ol class="mdl-layout-title ui-header-breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#" onclick="Ucto();">Účtovníctvo</a>
+    </li>
+    <li class="breadcrumb-item active">
+      <a href="#" id="header_dropdown_menu" class="dropdown">Účtovné zostavy</a>
+    </li>
+<!-- header dropdown nav menu -->
+    <li class="wrap-dropdown-menu">
+      <ul for="header_dropdown_menu" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+        <li onclick="UctZostavy();" class="mdl-menu__item active">Účtovné zostavy</li>
+        <li onclick="StatVykazy();" class="mdl-menu__item">Štatistické výkazy</li>
+        <li onclick="DanForms();" class="mdl-menu__item">Daňové formuláre</li>
+      </ul>
+    </li>
+    </ol><!-- .ui-header-breadcrumb -->
+    <div class="mdl-layout-spacer"></div>
+
+<!-- period nav -->
+    <div class="clearfix" style="margin-right: 16px;">
+      <button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button mdl-button--icon toleft" style="background-color: ;">
+        <i class="material-icons">navigate_before</i>
+      </button>
+        <span class="mdl-tooltip" data-mdl-for="month_prev">Prejsť na <?php echo $kli_pume; ?></span>
+      <button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button mdl-button--icon toleft" style="background-color: ;">
+        <i class="material-icons">navigate_next</i>
+      </button>
+        <span class="mdl-tooltip" data-mdl-for="month_next">Prejsť na <?php echo $kli_dume; ?></span>
+      <div class="toleft" style="font-size: 14px; line-height: 32px; margin-left: 4px;"><?php echo $kli_vume; ?></div>
+    </div>
+
+<?php if ( $kli_vduj != 9 ) { ?>
+<!-- <a href="#" onClick="window.open('../analyzy/danovy_csv.php?copern=1&drupoh=1&page=1', '_self' )">
+  <img src='../obr/export.png' width=20 height=15 border=0 title='Prejsť do exportu pre DÚ do CSV' ></a>
+<a href="#" onClick="window.open('../analyzy/export_csv.php?copern=1&drupoh=1&page=1', '_self' )">
+  <img src='../obr/export.png' width=20 height=15 border=0 title='Prejsť do exportu do CSV' ></a> -->
+<?php                     } ?>
+
+<!-- login firm + user -->
+    <ul class="ilogin-inline-list">
+      <li class="ilogin-list-item"><?php echo "<strong>$kli_vxcf</strong>&nbsp;&nbsp;$kli_nxcf"; ?></li>
+      <li id="ilogin_user" class="mdl-color--indigo-400 ilogin-list-item item-avatar"><?php echo $kli_uzid; ?></li>
+    </ul>
+      <span data-mdl-for="ilogin_user" class="mdl-tooltip">Prihlásený užívateľ:<br><?php echo "$kli_uzmeno $kli_uzprie / $kli_uzid"; ?></span>
+  </div><!-- .ui-header-title-row -->
+</header>
+<main class="mdl-layout__content ui-content sticky-footer">
+<div class="mdl-grid ui-container">
+
+<!-- legend -->
+<div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop inline-card">
+  <ul class="mdl-list toright legend-inline-card-area" style="padding: 0;">
+    <li class="mdl-list__item" style="font-size: 11px; min-height: auto; padding: 0;">
+      <span class="mdl-list__item-primary-content">
+        <i class="material-icons mdl-list__item-icon md-dark md-inactive md-18" style="margin: 0 2px 0 16px; height: 18px;">print</i>Zobraziť v PDF
+      </span>
+      <span class="mdl-list__item-primary-content">
+        <i class="material-icons mdl-list__item-icon md-dark md-inactive md-18" style="margin: 0 2px 0 16px; height: 18px;">arrow_forward</i>Vstúpiť
+      </span>
+    </li>
+  </ul>
+</div>
+
+<?php
+if ( $kli_vduj != 9 )
+     {
+?>
+<!-- obratovka -->
+<div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop">
+  <div class="mdl-shadow--2dp inline-card">
+    <div class="inline-card-content">
+      <div class="card-actions">
+        <button type="button" id="obratovka_pdf" onclick="ObratovkaPDF();" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark">print</i>
+        </button>
+          <span data-mdl-for="obratovka_pdf" class="mdl-tooltip">Zobraziť v PDF</span>
+      </div>
+      <div class="card-title">Obratová predvaha</div>
+      <div class="card-actions toright">
+        <button type="button" id="obratovka" onclick="Obratovka();" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+          <i class="material-icons">arrow_forward</i>
+        </button>
+          <span data-mdl-for="obratovka" class="mdl-tooltip">Vstúpiť, náhľad</span>
+      </div>
+    </div><!-- .inline-card-content -->
+  </div><!-- .inline-card -->
+</div><!-- .mdl-cell -->
+
+<!-- hlavna kniha -->
+<div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop">
+  <div class="mdl-shadow--2dp inline-card">
+    <form name="formhkp1" method="post" action="#" class="inline-card-content">
+      <div class="card-actions">
+        <button type="button" id="hk_detail_pdf" onclick="HlavnaKnihaPolozkovitaPDF();" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark">print</i>
+        </button>
+          <span data-mdl-for="hk_detail_pdf" class="mdl-tooltip">Zobraziť v PDF</span>
+      </div>
+      <div class="card-title">
+        Hlavná kniha&nbsp;<strong>položkovitá</strong>
+<?php if ( $fir_big == 1 ) { ?>
+        <select name="h_s200" id="h_s200" size="1" class="select-bg">
+          <option value="1">strany 1-150</option>
+          <option value="2">strany 150-300</option>
+          <option value="3">strany 300-450</option>
+          <option value="4">strany 450-600</option>
+        </select>
+<?php                     } ?>
+      </div>
+      <div class="card-actions toright">
+<?php if ( $fir_big == 0 ) { ?>
+        <button type="button" id="hk_detail" onclick="HlavnaKnihaPolozkovita();" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+          <i class="material-icons">arrow_forward</i>
+        </button>
+          <span data-mdl-for="hk_detail" class="mdl-tooltip">Vstúpiť, náhľad</span>
+         <!-- dopyt, spraviť disable pri veľkých a napísať, vzhľadom na veľkosť dát, nie je možné vstúpiť -->
+<?php                     } ?>
+      </div> <!-- dopyt, dať disable pri veľkých firmách a prečo je disable -->
+
+    </form><!-- .inline-card-content -->
+    <div class="divider-horizontal">&nbsp;</div>
+    <form name="formhk1" method="post" action="#" class="inline-card-content">
+      <div class="card-actions">
+        <button type="button" id="hk_all_ana_pdf" onclick="HlavnaKnihaSumarnaPDF();" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark">print</i>
+        </button>
+          <span data-mdl-for="hk_all_ana_pdf" class="mdl-tooltip">Za analytické účty zobraziť v PDF</span>
+        <button type="button" id="hk_all_more" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark md-inactive">more_vert</i>
+        </button>
+          <span data-mdl-for="hk_all_more" class="mdl-tooltip">Ďalšie možnosti</span>
+      </div>
+      <div class="card-title">
+        Hlavná kniha&nbsp;<strong>sumárna</strong>
+        <select name="h_obdp" id="h_obdp" size="1" class="select-bg">
+          <option value="1">01.<?php echo $kli_vrok; ?></option>
+          <option value="2">02.<?php echo $kli_vrok; ?></option>
+          <option value="3">03.<?php echo $kli_vrok; ?></option>
+          <option value="4">04.<?php echo $kli_vrok; ?></option>
+          <option value="5">05.<?php echo $kli_vrok; ?></option>
+          <option value="6">06.<?php echo $kli_vrok; ?></option>
+          <option value="7">07.<?php echo $kli_vrok; ?></option>
+          <option value="8">08.<?php echo $kli_vrok; ?></option>
+          <option value="9">09.<?php echo $kli_vrok; ?></option>
+          <option value="10">10.<?php echo $kli_vrok; ?></option>
+          <option value="11">11.<?php echo $kli_vrok; ?></option>
+          <option value="12">12.<?php echo $kli_vrok; ?></option>
+        </select>
+        <i class="material-icons md-dark md-inactive">trending_flat</i>
+        <select name="h_obdk" id="h_obdk" size="1" class="select-bg">
+          <option value="1">01.<?php echo $kli_vrok; ?></option>
+          <option value="2">02.<?php echo $kli_vrok; ?></option>
+          <option value="3">03.<?php echo $kli_vrok; ?></option>
+          <option value="4">04.<?php echo $kli_vrok; ?></option>
+          <option value="5">05.<?php echo $kli_vrok; ?></option>
+          <option value="6">06.<?php echo $kli_vrok; ?></option>
+          <option value="7">07.<?php echo $kli_vrok; ?></option>
+          <option value="8">08.<?php echo $kli_vrok; ?></option>
+          <option value="9">09.<?php echo $kli_vrok; ?></option>
+          <option value="10">10.<?php echo $kli_vrok; ?></option>
+          <option value="11">11.<?php echo $kli_vrok; ?></option>
+          <option value="12">12.<?php echo $kli_vrok; ?></option>
+        </select>
+      </div>
+      <div class="card-actions toright">
+        <button type="button" id="hk_all_ana" onclick="HlavnaKnihaSumarna();" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+          <i class="material-icons">arrow_forward</i>
+        </button>
+          <span data-mdl-for="hk_all_ana" class="mdl-tooltip">Vstúpiť, náhľad</span>
+      </div>
+
+  <ul for="hk_all_more" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+    <li onclick="HlavnaKnihaSumarnaSUPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Za syntetické účty zobraziť v PDF</li>
+    <li onclick="HlavnaKnihaSumarnaSUAUPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Za syntetické + analytické účty zobraziť v PDF</li>
+    <li onclick="HlavnaKnihaSumarnaSUAUnazovPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Za syntetické + analytické účty s názvom účtu zobraziť v PDF</li>
+  </ul>
+    </form><!-- .inline-card-content -->
+  </div><!-- .inline-card -->
+</div><!-- .mdl-cell -->
+
+<!-- uctovny dennik -->
+<div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop">
+  <div class="mdl-shadow--2dp inline-card">
+    <div class="inline-card-content">
+      <div class="card-actions">
+        <button type="button" id="dennik_pdf" onclick="DennikPDF();" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark">print</i>
+        </button>
+          <span data-mdl-for="dennik_pdf" class="mdl-tooltip">Zobraziť v PDF</span>
+      </div>
+      <div class="card-title">Účtovný denník</div>
+<!-- <?php if( $fir_fico == 36084344 OR $_SERVER['SERVER_NAME'] == "localhost" ) { ?>
+<a href="#" onClick="window.open('../ucto/udennik36084344.php?copern=10&drupoh=1&page=1&typ=PDF', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/pdf.png' width=20 height=15 border=0 title='Účtovný denník STR 5 PRO REGION n. o. DSS Svetluška' ></a>
+<?php                     } ?> dopyt, zruším, už nepotrebujú -->
+      <div class="card-actions toright">
+<?php if ( $fir_big == 0 ) { ?>
+        <button type="button" id="dennik" onclick="Dennik();" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+          <i class="material-icons">arrow_forward</i>
+        </button>
+          <span data-mdl-for="dennik" class="mdl-tooltip">Vstúpiť, náhľad</span>
+<?php                     } ?>
+      </div> <!-- dopyt, dať disable pri veľkých firmách a prečo je disable -->
+    </div><!-- .inline-card-content -->
+  </div><!-- .inline-card -->
+</div><!-- .mdl-cell -->
+
+<!-- kniha faktur -->
+<div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop">
+  <div class="mdl-shadow--2dp inline-card">
+    <form name="formkf1" method="post" action="#" class="inline-card-content">
+      <div class="card-actions">
+        <button type="button" id="kniha_fak_pdf" onclick="KnihaFakturPDF();" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark">print</i>
+        </button>
+          <span data-mdl-for="kniha_fak_pdf" class="mdl-tooltip">Zobraziť v PDF</span>
+      </div>
+      <div class="card-title">
+        Kniha
+        <select name="h_drp" id="h_drp" size="1" style="font-size: inherit; font-weight: 500; border:0; font-family: 'Roboto', 'Arial'; color: inherit; height: 32px; padding-bottom: 1px;">
+          <option value="1">odberateľských</option>
+          <option value="2">dodávateľských</option>
+        </select>
+        faktúr
+        <select name="h_obdp" id="h_obdp" size="1" class="select-bg">
+          <option value="1">01.<?php echo $kli_vrok; ?></option>
+          <option value="2">02.<?php echo $kli_vrok; ?></option>
+          <option value="3">03.<?php echo $kli_vrok; ?></option>
+          <option value="4">04.<?php echo $kli_vrok; ?></option>
+          <option value="5">05.<?php echo $kli_vrok; ?></option>
+          <option value="6">06.<?php echo $kli_vrok; ?></option>
+          <option value="7">07.<?php echo $kli_vrok; ?></option>
+          <option value="8">08.<?php echo $kli_vrok; ?></option>
+          <option value="9">09.<?php echo $kli_vrok; ?></option>
+          <option value="10">10.<?php echo $kli_vrok; ?></option>
+          <option value="11">11.<?php echo $kli_vrok; ?></option>
+          <option value="12">12.<?php echo $kli_vrok; ?></option>
+        </select>
+        <i class="material-icons md-dark md-inactive">trending_flat</i>
+        <select name="h_obdk" id="h_obdk" size="1" class="select-bg">
+          <option value="1">01.<?php echo $kli_vrok; ?></option>
+          <option value="2">02.<?php echo $kli_vrok; ?></option>
+          <option value="3">03.<?php echo $kli_vrok; ?></option>
+          <option value="4">04.<?php echo $kli_vrok; ?></option>
+          <option value="5">05.<?php echo $kli_vrok; ?></option>
+          <option value="6">06.<?php echo $kli_vrok; ?></option>
+          <option value="7">07.<?php echo $kli_vrok; ?></option>
+          <option value="8">08.<?php echo $kli_vrok; ?></option>
+          <option value="9">09.<?php echo $kli_vrok; ?></option>
+          <option value="10">10.<?php echo $kli_vrok; ?></option>
+          <option value="11">11.<?php echo $kli_vrok; ?></option>
+          <option value="12">12.<?php echo $kli_vrok; ?></option>
+        </select>
+      </div>
+    </form><!-- .inline-card-content -->
+  </div><!-- .inline-card -->
+</div><!-- .mdl-cell -->
+
+<!-- suvaha a vysledovka -->
+<div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop">
+  <div class="mdl-shadow--2dp inline-card">
+    <div class="inline-card-content">
+      <div class="card-actions">
+        <button type="button" id="suvaha_pdf" onclick="SuvahaPDF();" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark">print</i>
+        </button>
+          <span data-mdl-for="suvaha_pdf" class="mdl-tooltip">Zobraziť v PDF</span>
+        <button type="button" id="suvaha_more" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark md-inactive">more_vert</i>
+        </button>
+          <span data-mdl-for="suvaha_more" class="mdl-tooltip">Ďalšie možnosti zobrazenia</span>
+      </div>
+      <div class="card-title">Súvaha jednoduchá</div>
+<ul for="suvaha_more" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+  <li onclick="SuvahaSUPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Za syntetické účty zobraziť v PDF</li>
+  <li onclick="SuvahaMesPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Mesačný prehľad súvahových účtov bežného roka zobraziť v pdf</li>
+  <li onclick="SuvahaMesTextPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Mesačný prehľad súvahových účtov bežného roka aj s názvom účtu zobraziť v PDF</li>
+  <li onclick="SuvahaRokPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Medziročný prehľad súvahových účtov zobraziť v PDF</li>
+  <li onclick="SuvahaRokTextPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Medziročný prehľad súvahových účtov aj s názvom účtu zobraziť v PDF</li>
+</ul>
+    </div><!-- .inline-card-content -->
+    <div class="divider-horizontal">&nbsp;</div>
+    <form name="formvm1" method="post" action="#" class="inline-card-content">
+      <div class="card-actions">
+        <button type="button" id="vysledovka_pdf" onclick="VysledovkaPDF();" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark">print</i>
+        </button>
+          <span data-mdl-for="vysledovka_pdf" class="mdl-tooltip">Zobraziť v PDF</span>
+        <button type="button" id="vysledovka_more" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark md-inactive">more_vert</i>
+        </button>
+          <span data-mdl-for="vysledovka_more" class="mdl-tooltip">Ďalšie možnosti zobrazenia</span>
+      </div>
+      <div class="card-title">
+        Výsledovka jednoduchá
+        <select name="h_obdp" id="h_obdp" size="1" class="select-bg">
+<?php if ( $kli_vmes >= 1 ) { echo "<option value='1'>01.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes >= 2 ) { echo "<option value='2'>02.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes >= 3 ) { echo "<option value='3'>03.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes >= 4 ) { echo "<option value='4'>04.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes >= 5 ) { echo "<option value='5'>05.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes >= 6 ) { echo "<option value='6'>06.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes >= 7 ) { echo "<option value='7'>07.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes >= 8 ) { echo "<option value='8'>08.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes >= 9 ) { echo "<option value='9'>09.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes >= 10 ) { echo "<option value='10'>od 10.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes >= 11 ) { echo "<option value='11'>od 11.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes >= 12 ) { echo "<option value='12'>od 12.$kli_vrok</option>"; } ?>
+        </select>
+        <i class="material-icons md-dark md-inactive">trending_flat</i>
+        <select name="h_obdk" id="h_obdk" size="1" class="select-bg">
+<?php if ( $kli_vmes == 1 ) { echo "<option value='1'>01.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes == 2 ) { echo "<option value='2'>02.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes == 3 ) { echo "<option value='3'>03.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes == 4 ) { echo "<option value='4'>04.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes == 5 ) { echo "<option value='5'>05.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes == 6 ) { echo "<option value='6'>06.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes == 7 ) { echo "<option value='7'>07.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes == 8 ) { echo "<option value='8'>08.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes == 9 ) { echo "<option value='9'>09.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes == 10 ) { echo "<option value='10'>do 10.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes == 11 ) { echo "<option value='11'>do 11.$kli_vrok</option>"; } ?>
+<?php if ( $kli_vmes == 12 ) { echo "<option value='12'>do 12.$kli_vrok</option>"; } ?>
+        </select>
+      </div>
+    </form><!-- .inline-card-content -->
+  </div><!-- .inline-card -->
+</div><!-- .mdl-cell -->
+
+<ul for="vysledovka_more" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+  <li onclick="VysledovkaSUPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Za syntetické účty zobraziť v PDF</li>
+  <li onclick="VysledovkaStrPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Za strediská zobraziť v pdf</li>
+  <li onclick="VysledovkaZakPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Za zákazky zobraziť v pdf</li>
+  <li onclick="VysledovkaStrZakPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Za strediská a zákazky zobraziť v pdf</li>
+  <li onclick="VysledovkaSkuPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Za skupiny zobraziť v pdf</li>
+  <li onclick="VysledovkaSkuPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Za stavby zobraziť v pdf</li>
+<?php if ( $stavoimpex == 1 OR $_SERVER['SERVER_NAME'] == "localhost" ) { ?>
+  <li onclick="window.open('../ucto/vys_stvimpx.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', blank_param);" class="mdl-menu__item"><i class="material-icons">print</i>Za bytové domy zobraziť v pdf</li>
+<?php                        } ?> <!-- dopyt, podľa mňa nevyužívajú, ide slepé črevo -->
+
+  <li onclick="VysledovkaMesPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Mesačný prehľad nákladov a výnosov bežného roka zobraziť v pdf</li>
+  <li onclick="VysledovkaMesTextPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Mesačný prehľad nákladov a výnosov bežného roka aj s názvom účtu zobraziť v PDF</li>
+  <li onclick="VysledovkaRokPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Medziročný prehľad nákladov a výnosov zobraziť v PDF</li>
+  <li onclick="VysledovkaRokTextPDF();" class="mdl-menu__item"><i class="material-icons">print</i>Medziročný prehľad nákladov a výnosov aj s názvom účtu zobraziť v PDF</li>
+</ul>
+
+
+<?php
+if ( $kli_vrok < 2009 )
+{
+?>
+<!-- dopyt, nič som nerobil, ale budem musieť, lebo je nečitateľné -->
+<table class="vstup" width="100%" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/suvaha2008.php?copern=10&drupoh=1&page=1&tis=0&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/suvaha2008.php?copern=10&drupoh=1&page=1&tis=1&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V tisícoch <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/suvaha2008.php?copern=10&drupoh=1&page=1&tis=1&fort=0&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V tisícoch <?php echo $mena1; ?> bez formulára - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="90%">Súvaha Úč POD 1-01 verzia UVPOD1v07_1</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=22&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
+</td>
+</tr>
+</table>
+
+<table class="vstup" width="100%" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/vykzis2008.php?copern=10&drupoh=1&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/vykzis2008.php?copern=10&drupoh=1&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V tisícoch <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/vykzis2008.php?copern=10&drupoh=1&page=1&tis=1&fort=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V tisícoch <?php echo $mena1; ?> bez formulára - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="90%">Výkaz ziskov a strát Úč POD 2-01 verzia UVPOD2v07_2</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=21&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
+</td>
+</tr>
+</table>
+<?php
+}
+//$kli_vrok < 2009
+?>
+
+<?php
+if ( $kli_vrok >= 2009 AND $kli_vrok <= 2013 )
+{
+?>
+<!-- dopyt, nič som nerobil, ale budem musieť, lebo je nečitateľné -->
+
+<?php
+//$povelak=""; tymto by urobil zostavu vzor 2008
+$povelak="__x";
+?>
 <script type="text/javascript">
+
+function SUvAHA()
+                {
+var h_zos = document.forms.formsv1.h_zos.value;
+var h_sch = document.forms.formsv1.h_sch.value;
+
+window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=0&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
+function SUvAHAEUR()
+                {
+var h_zos = document.forms.formsv1.h_zos.value;
+var h_sch = document.forms.formsv1.h_sch.value;
+
+window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+</script>
+
+<table class="vstup" width="100%" >
+<form name="formsv1" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="SUvAHA();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="SUvAHAEUR();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
+</td>
+<?php $versuv="UVPOD1v09_1"; if( $kli_vrok > 2010 ) $versuv="UVPOD1v11 "; ?>
+
+<td class="bmenu" width="55%">Súvaha Úč POD 1-01 ( platná do 30.12.2014 )
+
+<a href="#" onClick="SynGenSuv();">
+<img src='../obr/zoznam.png' width=15 height=15 border=0 title='Syntetické generovanie riadkov súvahy' ></a>
+</td>
+<td class="bmenu" width="35%">
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
+ Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=22&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
+</td>
+</tr>
+</form>
+</table>
+
+<?php
+$povelak="__x";
+?>
+
+<script type="text/javascript">
+
+function VYKZIS()
+                {
+var h_zos = document.forms.formvz1.h_zos.value;
+var h_sch = document.forms.formvz1.h_sch.value;
+
+window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+
+function VYKZISEUR()
+                {
+var h_zos = document.forms.formvz1.h_zos.value;
+var h_sch = document.forms.formvz1.h_sch.value;
+
+window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+
+                }
+</script>
+
+<table class="vstup" width="100%" >
+<form name="formvz1" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="VYKZIS();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="VYKZISEUR();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="55%">Výkaz ziskov a strát Úč POD 2-01 ( platný do 30.12.2014 )
+
+</td>
+<td class="bmenu" width="35%">
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
+ Zostavený: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+ Schválený: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=21&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
+</td>
+</tr>
+</form>
+</table>
+<?php
+}
+//$kli_vrok >= 2009 AND $kli_vrok <= 2013
+?>
+
+
+<?php
+if ( $kli_nezis == 1 )
+     {
+?>
+<?php
+if ( $kli_vrok < 2012 )
+{
+?>
+<!-- dopyt, nič som nerobil, ale budem musieť, lebo je nečitateľné -->
+<table class="vstup" width="100%" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/suvaha_no2011.php?copern=10&drupoh=1&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/suvaha_no2011.php?copern=10&drupoh=1&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="92%">Súvaha Úč NUJ 1-01 príloha č.1 k opatreniu č. MF/25682/2007-74</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="GenSuvNo();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie riadkov súvahy NO' ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=32&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
+</td>
+</tr>
+</table>
+
+<table class="vstup" width="100%" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/vykzis_no2011.php?copern=10&drupoh=1&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/vykzis_no2011.php?copern=10&drupoh=1&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="94%">Výsledovka Úč NUJ 2-01 príloha č.2 k opatreniu č. MF/25682/2007-74</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=31&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
+</td>
+</tr>
+</table>
+<?php
+}
+//$kli_vrok < 2012
+?>
+<?php if ( $kli_vrok >= 2012 AND $kli_vrok < 2015 )
+{
+?>
+<!-- dopyt, nič som nerobil, ale budem musieť, lebo je nečitateľné -->
+<table class="vstup" width="100%" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="92%">Súvaha Úč NUJ 1-01 príloha č.1 k opatreniu č. MF/22603/2012-74</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="GenSuvNo();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie riadkov súvahy NO' ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=32&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
+</td>
+</tr>
+</table>
+
+<table class="vstup" width="100%" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/vykzis_no.php?copern=10&drupoh=1&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/vykzis_no.php?copern=10&drupoh=1&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="94%">Výsledovka Úč NUJ 2-01 príloha č.2 k opatreniu č. MF/22603/2012-74</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=31&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
+</td>
+</tr>
+</table>
+<?php
+}
+//$kli_vrok >= 2012 AND $kli_vrok < 2015
+?>
+<?php
+     }
+//$kli_nezis == 1
+?>
+
+<!-- dopyt, pôjde do inej card, tu bude len odkaz, takže nerobiť nič -->
+<table class="vstup" width="100%" style="display: none;">
+<form name="formp1" class="obyc" method="post" action="#" >
+<tr>
+<?php if( $kli_vrok >= 2009 ) { ?>
+<td class="bmenu" width="2%">
+<a href="#" onClick="PriznanieDPH();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF" ></a>
+</td>
+<?php if( $kli_vrok <  2011 ) { ?>
+<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv10
+<?php                        } ?>
+<?php if( $kli_vrok == 2011 ) { ?>
+<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv11
+<?php                        } ?>
+<?php if( $kli_vrok >  2011 ) { ?>
+<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv12
+<?php                        } ?>
+<select size="1" name="h_drp" id="h_drp" >
+<option value="1" >Riadne</option>
+<option value="2" >Opravné</option>
+<option value="3" >Dodatočné</option>
+</select>
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
+ Dátum: <input type="text" name="h_dap" id="h_dap" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+<select size="1" name="fir_uctx01" id="fir_uctx01" >
+<option value="1" >Mesačné</option>
+<option value="2" >Štvrťročné</option>
+<option value="4" >Ročné</option>
+</select>
+<a href="#" onClick="TlacPotvrdDPH();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť potvrdenie o podaní daňového priznania DPH vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="10%">
+<select size="1" name="h_arch" id="h_arch" >
+<option value="0" >Nearchivovať</option>
+<option value="1" >Archivovať</option>
+</select>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/archivdph<?php echo $rokdph; ?>.php?copern=80&drupoh=1&page=1', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Archív Daňových priznaní DPH rok <?php echo $kli_vrok; ?>' ></a>
+</td>
+<?php                        } ?>
+
+<?php if( $kli_vrok < 2009 ) { ?>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/prizdph_2008.php?copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv07_1</td>
+<?php                        } ?>
+</tr>
+</form>
+</table>
+
+<table class="vstup" width="100%" style="display: none;">
+<form name="formg1" class="obyc" method="post" action="#" >
+<tr>
+<?php if( $kli_vrok >= 2009 ) { ?>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TZoznamDPH();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po riadkoch DPH vo formáte PDF" ></a>
+<td class="bmenu" width="2%">
+<a href="#" onClick="ZoznamDPH();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po riadkoch DPH vo formáte HTML' ></a>
+</td>
+</td>
+<td class="bmenu" width="54%">Daň z pridanej hodnoty - Zoznamy dokladov a chybové hlásenia v.<?php echo $kli_vrok; ?>
+<select size="1" name="fir_uctx01" id="fir_uctx01" >
+<option value="1" >Mesačný</option>
+<option value="2" >Štvrťročný</option>
+<option value="4" >Ročné</option>
+</select>
+</td>
+
+<td class="bmenu" align="right" width="8%">
+<?php if( $fir_xvr05 != 2 AND $kli_vrok >= 2016 ) { ?>
+PRP
+<a href="#" onClick="TZoznamDPHPRP();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam prijatých platieb pre uplatnenie DPH vo formáte PDF" ></a>
+<?php                                             } ?>
+</td>
+
+<td class="bmenu" align="right" width="8%">FKT
+<a href="#" onClick="TZoznamDPHFAK();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po faktúrach vo formáte PDF" ></a>
+<a href="#" onClick="ZoznamDPHFAK();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po faktúrach vo formáte HTML' ></a>
+</td>
+
+<td class="bmenu" align="right" width="8%">DOK
+<a href="#" onClick="TZoznamDPHDOK();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po dokladoch vo formáte PDF" ></a>
+<a href="#" onClick="ZoznamDPHDOK();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po dokladoch vo formáte HTML' ></a>
+</td>
+
+<td class="bmenu" align="right" width="8%">DRD
+<a href="#" onClick="TZoznamDPHDRD();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po druhoch DPH vo formáte PDF" ></a>
+<a href="#" onClick="ZoznamDPHDRD();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po druhoch DPH vo formáte HTML' ></a>
+</td>
+
+<td class="bmenu" align="right" width="8%">CHB
+<a href="#" onClick="TZoznamDPHCHB();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam chybových hlásení DPH vo formáte PDF" ></a>
+<a href="#" onClick="ZoznamDPHCHB();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam chybových hlásení DPH vo formáte HTML' ></a>
+</td>
+
+<?php                        } ?>
+<?php if( $kli_vrok < 2009 ) { ?>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/prizdph_2008.php?copern=20&drupoh=1&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF" ></a>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/prizdph_2008.php?copern=30&drupoh=1&page=1&typ=HTML', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazenie a úprava DPH' ></a>
+</td>
+</td>
+<td class="bmenu" width="90%">Daň z pridanej hodnoty - Zoznam dokladov a chybové hlásenia v.2008</td>
+<?php                        } ?>
+
+</tr>
+</form>
+</table>
+
+
+
+<script type="text/javascript">
+//obratova predvaha
+  function ObratovkaPDF()
+  {
+    window.open('../ucto/uobrat.php?copern=10&drupoh=1&page=1&typ=PDF', '_blank', blank_param);
+  }
+  function Obratovka()
+  {
+    window.open('../ucto/uobrat.php?copern=10&drupoh=1&page=1&typ=HTML', '_self');
+  }
+//hlavna kniha polozkovita
+  function HlavnaKnihaPolozkovitaPDF()
+  {
+<?php if ( $fir_big == 1 ) { echo "var h_s200 = document.forms.formhkp1.h_s200.value;"; } ?>
+<?php if ( $fir_big == 0 ) { echo "var h_s200=1;"; } ?>
+    window.open('../ucto/hlkniha_polpdf.php?h_s200=' + h_s200 + '&copern=10&drupoh=1&page=1&typ=PDF', '_blank', blank_param);
+  }
+  function HlavnaKnihaPolozkovita()
+  {
+    window.open('../ucto/hlkniha_pdf.php?copern=10&drupoh=1&page=1&typ=HTML', '_self');
+  }
+//hlavna kniha sumarna
+  function HlavnaKnihaSumarnaPDF()
+  {
+    var h_obdp = document.forms.formhk1.h_obdp.value;
+    var h_obdk = document.forms.formhk1.h_obdk.value;
+    window.open('../ucto/hlkniha.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=PDF', '_blank', blank_param);
+  }
+  function HlavnaKnihaSumarnaSUPDF()
+  {
+    var h_obdp = document.forms.formhk1.h_obdp.value;
+    var h_obdk = document.forms.formhk1.h_obdk.value;
+    window.open('../ucto/hlkniha_su.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=PDF&su=1', '_blank', blank_param);
+  }
+  function HlavnaKnihaSumarnaSUAUPDF()
+  {
+    var h_obdp = document.forms.formhk1.h_obdp.value;
+    var h_obdk = document.forms.formhk1.h_obdk.value;
+    window.open('../ucto/hlkniha_suau.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=PDF&su=1', '_blank', blank_param);
+  }
+  function HlavnaKnihaSumarnaSUAUnazovPDF()
+  {
+    var h_obdp = document.forms.formhk1.h_obdp.value;
+    var h_obdk = document.forms.formhk1.h_obdk.value;
+    window.open('../ucto/hlkniha_suau.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=PDF&su=1&nazvy=1', '_blank', blank_param);
+  }
+  function HlavnaKnihaSumarna()
+  {
+    var h_obdp = document.forms.formhk1.h_obdp.value;
+    var h_obdk = document.forms.formhk1.h_obdk.value;
+    window.open('../ucto/hlkniha.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=HTML', '_self');
+  }
+//uctovny dennik
+  function DennikPDF()
+  {
+    window.open('../ucto/udennik.php?copern=10&drupoh=1&page=1&typ=PDF', '_blank', blank_param);
+  }
+  function Dennik()
+  {
+    window.open('../ucto/udennik.php?copern=10&drupoh=1&page=1&typ=HTML', '_self');
+  }
+//suvaha jednoducha
+  function SuvahaPDF()
+  {
+    window.open('../ucto/suv_mala.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', blank_param);
+  }
+  function SuvahaSUPDF()
+  {
+    window.open('../ucto/suv_mala.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&synt=1', '_blank', blank_param);
+  }
+  function SuvahaMesPDF()
+  {
+    window.open('../ucto/messuv.php?copern=10&drupoh=1&h_obdp=1&h_obdk=<?php echo $kli_vmes; ?>&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1', '_blank', blank_param);
+  }
+  function SuvahaMesTextPDF()
+  {
+    window.open('../ucto/messuv.php?copern=10&drupoh=1&h_obdp=1&h_obdk=<?php echo $kli_vmes; ?>&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1&ajtext=1', '_blank', blank_param);
+  }
+  function SuvahaRokPDF()
+  {
+    window.open('../ucto/roksuv.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1', '_blank',blank_param);
+  }
+  function SuvahaRokTextPDF()
+  {
+    window.open('../ucto/roksuv.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1&ajtext=1', '_blank', blank_param);
+  }
+//vysledovka jednoducha
+  function VysledovkaPDF()
+  {
+    var h_obdp = document.forms.formvm1.h_obdp.value;
+    var h_obdk = document.forms.formvm1.h_obdk.value;
+    window.open('../ucto/vys_mala.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1', '_blank', blank_param);
+  }
+  function VysledovkaSUPDF()
+  {
+    var h_obdp = document.forms.formvm1.h_obdp.value;
+    var h_obdk = document.forms.formvm1.h_obdk.value;
+    window.open('../ucto/vys_mala.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&synt=1&obdx=1', '_blank', blank_param);
+  }
+  function VysledovkaStrPDF()
+  {
+    window.open('../ucto/vys_str.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', blank_param);
+  }
+  function VysledovkaZakPDF()
+  {
+    window.open('../ucto/vys_zak.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', blank_param);
+  }
+  function VysledovkaStrZakPDF()
+  {
+    window.open('../ucto/vys_strzak.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', blank_param);
+  }
+  function VysledovkaSkuPDF()
+  {
+    window.open('../ucto/vys_sku.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', blank_param) ;
+  }
+  function VysledovkaStaPDF()
+  {
+    window.open('../ucto/vys_stv.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', blank_param);
+  }
+  function VysledovkaMesPDF()
+  {
+    var h_obdp = document.forms.formvm1.h_obdp.value;
+    var h_obdk = document.forms.formvm1.h_obdk.value;
+    window.open('../ucto/mesnakvyn.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1', '_blank',blank_param);
+  }
+  function VysledovkaMesTextPDF()
+  {
+    var h_obdp = document.forms.formvm1.h_obdp.value;
+    var h_obdk = document.forms.formvm1.h_obdk.value;
+    window.open('../ucto/mesnakvyn.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1&ajtext=1', '_blank',blank_param);
+  }
+  function VysledovkaRokPDF()
+  {
+    var h_obdp = document.forms.formvm1.h_obdp.value;
+    var h_obdk = document.forms.formvm1.h_obdk.value;
+    window.open('../ucto/roknakvyn.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1', '_blank', blank_param);
+  }
+  function VysledovkaRokTextPDF()
+  {
+    var h_obdp = document.forms.formvm1.h_obdp.value;
+    var h_obdk = document.forms.formvm1.h_obdk.value;
+    window.open('../ucto/roknakvyn.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1&ajtext=1', '_blank', blank_param);
+  }
+</script>
+<?php
+     }
+//$kli_vduj != 9
+?>
+
+
+<?php
+if ( $kli_vduj == 9 )
+     {
+?>
+<!-- <a href="#" onClick="window.open('../analyzy/danovy_csv.php?copern=1&drupoh=1&page=1', '_self' )">
+<img src='../obr/export.png' width=20 height=15 border=0 title='Prejsť do exportu pre DÚ do CSV' ></a> -->
+
+<!-- penazny dennik1 -->
+<div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop">
+  <div class="mdl-shadow--2dp inline-card">
+    <div class="inline-card-content">
+      <div class="card-actions">
+        <button type="button" id="pen_dennik1_pdf" onclick="PenaznyDennik1PDF();" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark">print</i>
+        </button>
+          <span data-mdl-for="pen_dennik1_pdf" class="mdl-tooltip">Zobraziť v PDF</span>
+      </div>
+      <div class="card-title">Peňažný denník&nbsp;<i title="druh 1" class="material-icons md-dark md-inactive">looks_one</i></div>
+      <div class="card-actions toright">
+        <button type="button" id="pen_dennik1" onclick="PenaznyDennik1();" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+          <i class="material-icons">arrow_forward</i>
+        </button>
+          <span data-mdl-for="pen_dennik1" class="mdl-tooltip">Vstúpiť, náhľad</span>
+      </div>
+    </div><!-- .inline-card-content -->
+  </div><!-- .inline-card -->
+</div><!-- .mdl-cell -->
+
+<!-- penazny dennik2 -->
+<div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop">
+  <div class="mdl-shadow--2dp inline-card">
+    <form name="formd2" method="post" action="#" class="inline-card-content">
+      <div class="card-actions">
+        <button type="button" id="pen_dennik22012" onclick="PenaznyDennik22012PDF();" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark">print</i>
+        </button>
+          <span data-mdl-for="pen_dennik22012" class="mdl-tooltip">Zobraziť v PDF</span>
+      </div>
+      <div class="card-title">
+        Peňažný denník&nbsp;<i title="druh 2" class="material-icons md-dark md-inactive">looks_two</i>
+        <select name="h_aky" id="h_aky" size="1" style="font-size: inherit; font-weight: 500; border:0; font-family: 'Roboto', 'Arial'; color: inherit; height: 32px; padding-bottom: 1px;">
+          <option value="1">položkovitý</option>
+          <option value="2">suma za doklady</option>
+        </select>
+        verzia pre rok 2012
+<?php
+$dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$prvy = "01.01.".$kli_vrok;
+?>
+ Dátum: <input type="text" name="h_dap" id="h_dap" maxlenght="10" value="<?php echo $prvy; ?>" style="width: 70px;"/>
+ <input type="text" name="h_dak" id="h_dak" maxlenght="10" value="<?php echo $dnes; ?>" style="width: 70px;"/>
+ Strany: <input type="text" name="h_stp" id="h_stp" maxlenght="10" value="1" style="width: 20px;"/>
+ <input type="text" name="h_stk" id="h_stk" maxlenght="10" value="999" style="width: 30px;"/>
+      </div>
+      <div class="card-actions toright">
+        <button type="button" id="pen_dennik22012_druh" onclick="PenaznyDennik22012Druh();" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+          <i class="material-icons">settings</i>
+        </button>
+          <span data-mdl-for="pen_dennik22012_druh" class="mdl-tooltip">Nastavenie druh pohybu -> stĺpec peňažného denníka pre rok 2012</span>
+      </div>
+    </form><!-- .inline-card-content -->
+    <div class="divider-horizontal">&nbsp;</div>
+    <form name="formd2013" method="post" action="#" class="inline-card-content">
+      <div class="card-actions">
+        <button type="button" id="pen_dennik22013" onclick="PenaznyDennik22013PDF();" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark">print</i>
+        </button>
+          <span data-mdl-for="pen_dennik22013" class="mdl-tooltip">Zobraziť v PDF</span>
+      </div>
+      <div class="card-title">
+        Peňažný denník&nbsp;<i title="druh 2" class="material-icons md-dark md-inactive">looks_two</i>
+        <select name="h_aky" id="h_aky" size="1" style="font-size: inherit; font-weight: 500; border:0; font-family: 'Roboto', 'Arial'; color: inherit; height: 32px; padding-bottom: 1px;">
+          <option value="1">položkovitý</option>
+          <option value="2">suma za doklady</option>
+        </select>
+        &nbsp;verzia pre rok 2013
+<?php
+$dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$prvy = "01.01.".$kli_vrok;
+?>
+ Dátum: <input type="text" name="h_dap" id="h_dap" maxlenght="10" value="<?php echo $prvy; ?>" style="width: 70px;"/>
+ <input type="text" name="h_dak" id="h_dak" maxlenght="10" value="<?php echo $dnes; ?>" style="width: 70px;"/>
+ Strany: <input type="text" name="h_stp" id="h_stp" maxlenght="10" value="1" style="width: 20px;"/>
+ <input type="text" name="h_stk" id="h_stk" maxlenght="10" value="999" style="width: 30px;"/>
+      </div>
+      <div class="card-actions toright">
+        <button type="button" id="pen_dennik22013_druh" onclick="PenaznyDennik22013Druh();" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+          <i class="material-icons">settings</i>
+        </button>
+          <span data-mdl-for="pen_dennik22013_druh" class="mdl-tooltip">Nastavenie druh pohybu -> stĺpec peňažného denníka pre rok 2013</span>
+      </div>
+    </form><!-- .inline-card-content -->
+  </div><!-- .inline-card -->
+</div><!-- .mdl-cell -->
+
+<!-- kniha pohladavok/zavazkov -->
+<div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop">
+  <div class="mdl-shadow--2dp inline-card">
+    <form name="formkf1" method="post" action="#" class="inline-card-content">
+      <div class="card-actions">
+        <button type="button" id="kniha_pohzav_pdf" onclick="KnihaFakturPDF();" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark">print</i>
+        </button>
+          <span data-mdl-for="kniha_pohzav_pdf" class="mdl-tooltip">Zobraziť v PDF</span>
+      </div>
+      <div class="card-title">
+        Kniha
+        <select name="h_drp" id="h_drp" size="1" style="font-size: inherit; font-weight: 500; border:0; font-family: 'Roboto', 'Arial'; color: inherit; height: 32px; padding-bottom: 1px;">
+          <option value="3">pohľadávok</option>
+          <option value="4">záväzkov</option>
+        </select>
+        <select name="h_obdp" id="h_obdp" size="1" class="select-bg">
+          <option value="1">01.<?php echo $kli_vrok; ?></option>
+          <option value="2">02.<?php echo $kli_vrok; ?></option>
+          <option value="3">03.<?php echo $kli_vrok; ?></option>
+          <option value="4">04.<?php echo $kli_vrok; ?></option>
+          <option value="5">05.<?php echo $kli_vrok; ?></option>
+          <option value="6">06.<?php echo $kli_vrok; ?></option>
+          <option value="7">07.<?php echo $kli_vrok; ?></option>
+          <option value="8">08.<?php echo $kli_vrok; ?></option>
+          <option value="9">09.<?php echo $kli_vrok; ?></option>
+          <option value="10">10.<?php echo $kli_vrok; ?></option>
+          <option value="11">11.<?php echo $kli_vrok; ?></option>
+          <option value="12">12.<?php echo $kli_vrok; ?></option>
+        </select>
+        <i class="material-icons md-dark md-inactive">trending_flat</i>
+        <select name="h_obdk" id="h_obdk" size="1" class="select-bg">
+          <option value="1">01.<?php echo $kli_vrok; ?></option>
+          <option value="2">02.<?php echo $kli_vrok; ?></option>
+          <option value="3">03.<?php echo $kli_vrok; ?></option>
+          <option value="4">04.<?php echo $kli_vrok; ?></option>
+          <option value="5">05.<?php echo $kli_vrok; ?></option>
+          <option value="6">06.<?php echo $kli_vrok; ?></option>
+          <option value="7">07.<?php echo $kli_vrok; ?></option>
+          <option value="8">08.<?php echo $kli_vrok; ?></option>
+          <option value="9">09.<?php echo $kli_vrok; ?></option>
+          <option value="10">10.<?php echo $kli_vrok; ?></option>
+          <option value="11">11.<?php echo $kli_vrok; ?></option>
+          <option value="12">12.<?php echo $kli_vrok; ?></option>
+        </select>
+      </div>
+    </form><!-- .inline-card-content -->
+  </div><!-- .inline-card -->
+</div><!-- .mdl-cell -->
+
+<!-- prehlad pohybov -->
+<div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop">
+  <div class="mdl-shadow--2dp inline-card">
+    <form name="formhk1" method="post" action="#" class="inline-card-content">
+      <div class="card-actions">
+        <button type="button" id="ju_pohyby_pdf" onclick="PohybyUctyPDF();" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-dark">print</i>
+        </button>
+          <span data-mdl-for="ju_pohyby_pdf" class="mdl-tooltip">Zobraziť v PDF</span>
+      </div>
+      <div class="card-title">
+        Prehľad účtovných pohybov
+        <select name="h_obdp" id="h_obdp" size="1" class="select-bg">
+          <option value="1">01.<?php echo $kli_vrok; ?></option>
+          <option value="2">02.<?php echo $kli_vrok; ?></option>
+          <option value="3">03.<?php echo $kli_vrok; ?></option>
+          <option value="4">04.<?php echo $kli_vrok; ?></option>
+          <option value="5">05.<?php echo $kli_vrok; ?></option>
+          <option value="6">06.<?php echo $kli_vrok; ?></option>
+          <option value="7">07.<?php echo $kli_vrok; ?></option>
+          <option value="8">08.<?php echo $kli_vrok; ?></option>
+          <option value="9">09.<?php echo $kli_vrok; ?></option>
+          <option value="10">10.<?php echo $kli_vrok; ?></option>
+          <option value="11">11.<?php echo $kli_vrok; ?></option>
+          <option value="12">12.<?php echo $kli_vrok; ?></option>
+        </select>
+        <i class="material-icons md-dark md-inactive">trending_flat</i>
+        <select name="h_obdk" id="h_obdk" size="1" class="select-bg">
+          <option value="1">01.<?php echo $kli_vrok; ?></option>
+          <option value="2">02.<?php echo $kli_vrok; ?></option>
+          <option value="3">03.<?php echo $kli_vrok; ?></option>
+          <option value="4">04.<?php echo $kli_vrok; ?></option>
+          <option value="5">05.<?php echo $kli_vrok; ?></option>
+          <option value="6">06.<?php echo $kli_vrok; ?></option>
+          <option value="7">07.<?php echo $kli_vrok; ?></option>
+          <option value="8">08.<?php echo $kli_vrok; ?></option>
+          <option value="9">09.<?php echo $kli_vrok; ?></option>
+          <option value="10">10.<?php echo $kli_vrok; ?></option>
+          <option value="11">11.<?php echo $kli_vrok; ?></option>
+          <option value="12">12.<?php echo $kli_vrok; ?></option>
+        </select>
+      </div>
+      <div class="card-actions toright">
+        <button type="button" id="ju_pohyby" onclick="PohybyUcty();" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+          <i class="material-icons">arrow_forward</i>
+        </button>
+          <span data-mdl-for="ju_pohyby" class="mdl-tooltip">Vstúpiť, náhľad</span>
+      </div>
+    </form><!-- .inline-card-content -->
+  </div><!-- .inline-card -->
+</div><!-- .mdl-cell -->
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="vstup" width="100%" style="display: none;"> <!-- dopyt, pôjde do zvlášť card -->
+<form name="formvm1ju" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="MesNakVynJu();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title='Mesačný prehľad príjmov a výdavkov započítateľných do daňového základu Vytlačiť vo formáte PDF' ></a>
+</td>
+<td class="bmenu" width="72%">Mesačný prehľad príjmov a výdavkov započítateľných do daňového základu
+<a href="#" onClick="MesNakVynTextJu();">
+MESTx<img src='../obr/tlac.png' width=20 height=15 border=0 title='Mesačný prehľad príjmov a výdavkov aj s názvom pohybu Vytlačiť vo formáte PDF' ></a>
+</td>
+<?php
+//echo $kli_vmes;
+?>
+
+<td class="bmenu" width="20%" >
+<select size="1" name="h_obdp" id="h_obdp" >
+<?php if( $kli_vmes >= 1 ) { echo "<option value='1' >od 01.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes >= 2 ) { echo "<option value='2' >od 02.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes >= 3 ) { echo "<option value='3' >od 03.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes >= 4 ) { echo "<option value='4' >od 04.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes >= 5 ) { echo "<option value='5' >od 05.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes >= 6 ) { echo "<option value='6' >od 06.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes >= 7 ) { echo "<option value='7' >od 07.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes >= 8 ) { echo "<option value='8' >od 08.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes >= 9 ) { echo "<option value='9' >od 09.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes >= 10 ) { echo "<option value='10' >od 10.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes >= 11 ) { echo "<option value='11' >od 11.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes >= 12 ) { echo "<option value='12' >od 12.$kli_vrok</option>";  } ?>
+</select>
+
+<select size="1" name="h_obdk" id="h_obdk" >
+<?php if( $kli_vmes == 1 ) { echo "<option value='1' >do 01.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes == 2 ) { echo "<option value='2' >do 02.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes == 3 ) { echo "<option value='3' >do 03.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes == 4 ) { echo "<option value='4' >do 04.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes == 5 ) { echo "<option value='5' >do 05.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes == 6 ) { echo "<option value='6' >do 06.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes == 7 ) { echo "<option value='7' >do 07.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes == 8 ) { echo "<option value='8' >do 08.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes == 9 ) { echo "<option value='9' >do 09.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes == 10 ) { echo "<option value='10' >do 10.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes == 11 ) { echo "<option value='11' >do 11.$kli_vrok</option>";  } ?>
+<?php if( $kli_vmes == 12 ) { echo "<option value='12' >do 12.$kli_vrok</option>";  } ?>
+</select>
+</tr>
+</form>
+</table>
+
+<?php
+$jedrok=2013;
+if( $kli_vrok < 2013 ) { $jedrok=""; }
+$zobraz="";
+if( $kli_vrok > 2015 ) { $zobraz="style=\"display:none;\""; }
+
+?>
+
+<table class="vstup" width="100%" <?php echo $zobraz; ?> >
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/vprivyd<?php echo $jedrok; ?>.php?copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF v eurocentoch" ></a>
+</td>
+<td class="bmenu" width="88%">Výkaz o príjmoch a výdavkoch Úč. FO 1-01</td>
+<td class="bmenu" width="2%" >
+<a href="#" onClick="JUvykpvpohHTML()">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Výkaz o príjmoch a výdavkoch podľa účtovných pohybov' ></a>
+
+</tr>
+</table>
+
+<table class="vstup" width="100%" <?php echo $zobraz; ?> >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/vmajzav<?php echo $jedrok; ?>.php?copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF v eurocentoch" ></a>
+</td>
+<td class="bmenu" width="90%">Výkaz o majetku a záväzkoch Úč. FO 2-01 </td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=42&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
+</td>
+</tr>
+<tr>
+</table>
+
+<table class="vstup" width="100%" style="display: none;"> <!-- dopyt, pôjde do zvlášť card dph -->
+<form name="formrd2" class="obyc" method="post" action="#" >
+<tr>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TlacRD();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Zoznam faktúr" ></a>
+</td>
+<td class="bmenu" width="38%">DPH zaúčtovaná a zaplatená na faktúrach
+ <select size="1" name="h_aky" id="h_aky" >
+<option value="1" >dodávateľských</option>
+<option value="2" >odberateľských</option>
+</select>
+</td>
+<td class="bmenu" width="60%"></td>
+</tr>
+<tr>
+</form>
+</table>
+
+<table class="vstup" width="100%" style="display: none;">
+<form name="formp1" class="obyc" method="post" action="#" >
+<tr>
+<?php if( $kli_vrok >= 2009 ) { ?>
+<td class="bmenu" width="2%">
+<a href="#" onClick="PriznanieDPH();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF" ></a>
+</td>
+
+<?php if( $kli_vrok <  2011 ) { ?>
+<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv10
+<?php                        } ?>
+<?php if( $kli_vrok == 2011 ) { ?>
+<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv11
+<?php                        } ?>
+<?php if( $kli_vrok >  2011 ) { ?>
+<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv12
+<?php                        } ?>
+
+<select size="1" name="h_drp" id="h_drp" >
+<option value="1" >Riadne</option>
+<option value="2" >Opravné</option>
+<option value="3" >Dodatočné</option>
+</select>
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
+ Dátum: <input type="text" name="h_dap" id="h_dap" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
+<select size="1" name="fir_uctx01" id="fir_uctx01" >
+<option value="1" >Mesačné</option>
+<option value="2" >Štvrťročné</option>
+<option value="4" >Ročné</option>
+</select>
+<a href="#" onClick="TlacPotvrdDPH();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť potvrdenie o podaní daňového priznania DPH vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="10%">
+<select size="1" name="h_arch" id="h_arch" >
+<option value="0" >Nearchivovať</option>
+<option value="1" >Archivovať</option>
+</select>
+</td>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/archivdph<?php echo $rokdph; ?>.php?copern=80&drupoh=1&page=1', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Archív Daňových priznaní DPH rok <?php echo $kli_vrok; ?>' ></a>
+</td>
+<?php                        } ?>
+
+<?php if( $kli_vrok < 2009 ) { ?>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/prizdph_2008.php?copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po riadkoch DPH vo formáte PDF" ></a>
+</td>
+<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv07_1</td>
+<?php                        } ?>
+</tr>
+</form>
+</table>
+
+<table class="vstup" width="100%" style="display: none;">
+<form name="formg1" class="obyc" method="post" action="#" >
+<tr>
+<?php if( $kli_vrok >= 2009 ) { ?>
+<td class="bmenu" width="2%">
+<a href="#" onClick="TZoznamDPH();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po riadkoch DPH vo formáte PDF" ></a>
+<td class="bmenu" width="2%">
+<a href="#" onClick="ZoznamDPH();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po riadkoch DPH vo formáte HTML' ></a>
+</td>
+</td>
+<td class="bmenu" width="70%">Daň z pridanej hodnoty - Zoznamy dokladov a chybové hlásenia v.<?php echo $kli_vrok; ?>
+<select size="1" name="fir_uctx01" id="fir_uctx01" >
+<option value="1" >Mesačný</option>
+<option value="2" >Štvrťročný</option>
+</select>
+</td>
+
+<td class="bmenu" align="right" width="8%">DOK
+<a href="#" onClick="TZoznamDPHDOK();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po dokladoch DPH vo formáte PDF" ></a>
+<a href="#" onClick="ZoznamDPHDOK();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po dokladoch DPH vo formáte HTML' ></a>
+</td>
+
+<td class="bmenu" align="right" width="8%">DRD
+<a href="#" onClick="TZoznamDPHDRD();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po druhoch DPH vo formáte PDF" ></a>
+<a href="#" onClick="ZoznamDPHDRD();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po druhoch DPH vo formáte HTML' ></a>
+</td>
+
+<td class="bmenu" align="right" width="8%">CHB
+<a href="#" onClick="TZoznamDPHCHB();">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam chybových hlásení DPH vo formáte PDF" ></a>
+<a href="#" onClick="ZoznamDPHCHB();">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam chybových hlásení DPH vo formáte HTML' ></a>
+</td>
+<?php                        } ?>
+<?php if( $kli_vrok < 2009 ) { ?>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/prizdph_2008.php?copern=20&drupoh=1&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF" ></a>
+<td class="bmenu" width="2%">
+<a href="#" onClick="window.open('../ucto/prizdph_2008.php?copern=30&drupoh=1&page=1&typ=HTML', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
+<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazenie a úprava DPH' ></a>
+</td>
+</td>
+<td class="bmenu" width="90%">Daň z pridanej hodnoty - Zoznam dokladov a chybové hlásenia v.2008</td>
+<?php                        } ?>
+
+</tr>
+</form>
+</table>
+
+
+<script>
+//penazny dennik1
+  function PenaznyDennik1PDF()
+  {
+    window.open('../ucto/penden.php?copern=10&drupoh=1&page=1&typ=PDF', '_blank', blank_param);
+  }
+  function PenaznyDennik1()
+  {
+    window.open('../ucto/penden.php?copern=10&drupoh=1&page=1&typ=HTML', '_self');
+  }
+//penazny dennik2 2012
+  function PenaznyDennik22012PDF()
+  {
+    var h_dap = document.forms.formd2.h_dap.value;
+    var h_dak = document.forms.formd2.h_dak.value;
+    var h_stp = document.forms.formd2.h_stp.value;
+    var h_stk = document.forms.formd2.h_stk.value;
+    var h_aky = document.forms.formd2.h_aky.value;
+    window.open('../ucto/penden2.php?h_dap=' + h_dap + '&h_dak=' + h_dak + '&h_stp=' + h_stp + '&h_stk=' + h_stk + '&h_aky=' + h_aky + '&copern=10&drupoh=1&page=1&typ=PDF', '_blank', blank_param)
+  }
+  function PenaznyDennik22012Druh()
+  {
+    window.open('../ucto/oprsys.php?copern=308&drupoh=29&page=1&sysx=UCT', '_blank', blank_param);
+  }
+//penazny dennik2 2013
+  function PenaznyDennik22013PDF()
+  {
+    var h_dap = document.forms.formd2013.h_dap.value;
+    var h_dak = document.forms.formd2013.h_dak.value;
+    var h_stp = document.forms.formd2013.h_stp.value;
+    var h_stk = document.forms.formd2013.h_stk.value;
+    var h_aky = document.forms.formd2013.h_aky.value;
+    window.open('../ucto/penden2013.php?h_dap=' + h_dap + '&h_dak=' + h_dak + '&h_stp=' + h_stp + '&h_stk=' + h_stk + '&h_aky=' + h_aky + '&copern=10&drupoh=1&page=1&typ=PDF', '_blank', blank_param);
+  }
+  function PenaznyDennik22013Druh()
+  {
+    window.open('../ucto/oprsys.php?copern=308&drupoh=28&page=1&sysx=UCT', '_blank', blank_param);
+  }
+//prehlad pohybov
+  function PohybyUctyPDF()
+  {
+    var h_obdp = document.forms.formhk1.h_obdp.value;
+    var h_obdk = document.forms.formhk1.h_obdk.value;
+    window.open('../ucto/juknihapoh.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=PDF', '_blank', blank_param);
+  }
+  function PohybyUcty()
+  {
+    var h_obdp = document.forms.formhk1.h_obdp.value;
+    var h_obdk = document.forms.formhk1.h_obdk.value;
+    window.open('../ucto/juknihapoh.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=HTML', '_blank', blank_param);
+  }
+
+</script>
+<?php
+     }
+//$kli_vduj == 9
+?>
+</div><!-- .mdl-grid -->
+
+
+<div class="mdl-layout-spacer"></div>
+<footer class="mdl-mini-footer ui-container">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo mdl-color-text--grey-500">© 2018 EuroSecom</div>
+  </div>
+</footer>
+</main>
+
+
+<div class="mdl-layout__drawer">
+  <span class="mdl-layout-title">Title</span>
+  <nav class="mdl-navigation">
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+  </nav>
+</div>
+
+
+
+
+</div><!-- .mdl-layout -->
+
+
+<?php
+// celkovy koniec dokumentu
+
+//$zmenume=1; $odkaz="../ucto/meszos.php?copern=1&drupoh=1&page=1&sysx=UCT";
+//$cislista = include("uct_lista.php");
+
+       } while (false);
+?>
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script type="text/javascript">
+//dimensions blank window
+var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, height=900';
+//dopyt, zakomponovať aj "_blank"
+
+//kniha faktur
+  function KnihaFakturPDF()
+  {
+    var h_obdp = document.forms.formkf1.h_obdp.value;
+    var h_obdk = document.forms.formkf1.h_obdk.value;
+    var h_drp = document.forms.formkf1.h_drp.value;
+    window.open('../ucto/kniha_faktur.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&h_drp=' + h_drp +  '&copern=1&drupoh=1&page=1&typ=PDF', '_blank', blank_param);
+  }
+
+
+
+
 //sirka a vyska okna
 var sirkawin = screen.width-10;
 var vyskawin = screen.height-175;
 var vyskawic = screen.height;
 var sirkawic = screen.width-10;
 
-function KnihaFakturPDF()
-                {
-var h_obdp = document.forms.formkf1.h_obdp.value;
-var h_obdk = document.forms.formkf1.h_obdk.value;
-var h_drp = document.forms.formkf1.h_drp.value;
 
-window.open('../ucto/kniha_faktur.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&h_drp=' + h_drp +  '&copern=1&drupoh=1&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
 
 
 function PriznanieDPH()
@@ -119,55 +1647,6 @@ window.open('../ucto/prizdph<?php echo $rokdph; ?>.php?fir_uctx01=' + fir_uctx01
 
                 }
 
-function HlavnaKnihaSumarnaPDF()
-                {
-var h_obdp = document.forms.formhk1.h_obdp.value;
-var h_obdk = document.forms.formhk1.h_obdk.value;
-
-window.open('../ucto/hlkniha.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-
-
-                }
-
-function HlavnaKnihaSumarnaSUPDF()
-                {
-var h_obdp = document.forms.formhk1.h_obdp.value;
-var h_obdk = document.forms.formhk1.h_obdk.value;
-
-window.open('../ucto/hlkniha_su.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=PDF&su=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-
-
-                }
-
-function HlavnaKnihaSumarnaSUAUPDF()
-                {
-var h_obdp = document.forms.formhk1.h_obdp.value;
-var h_obdk = document.forms.formhk1.h_obdk.value;
-
-window.open('../ucto/hlkniha_suau.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=PDF&su=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-
-
-                }
-
-function HlavnaKnihaSumarnaSUAUnazovPDF()
-                {
-var h_obdp = document.forms.formhk1.h_obdp.value;
-var h_obdk = document.forms.formhk1.h_obdk.value;
-
-window.open('../ucto/hlkniha_suau.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=PDF&su=1&nazvy=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-
-
-                }
-
-function HlavnaKnihaSumarnaHTML()
-                {
-var h_obdp = document.forms.formhk1.h_obdp.value;
-var h_obdk = document.forms.formhk1.h_obdk.value;
-
-window.open('../ucto/hlkniha.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=HTML', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-
-
-                }
 
 function VyberVstup()
                 {
@@ -180,23 +1659,7 @@ function VyberVstup()
                 }
 
 
-function JUKnihaSumarnaPDF()
-                {
-var h_obdp = document.forms.formhk1.h_obdp.value;
-var h_obdk = document.forms.formhk1.h_obdk.value;
 
-window.open('../ucto/juknihapoh.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-
-
-                }
-
-function JUKnihaSumarnaHTML()
-                {
-var h_obdp = document.forms.formhk1.h_obdp.value;
-var h_obdk = document.forms.formhk1.h_obdk.value;
-
-window.open('../ucto/juknihapoh.php?h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&copern=11&drupoh=2&page=1&typ=HTML', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
 
 function JUvykpvpohHTML()
                 {
@@ -212,27 +1675,9 @@ function TlacPotvrdDPH()
   var okno = window.open("../tmp/potvrddph<?php echo $kli_vume; ?>.<?php echo $kli_uzid; ?>.pdf", '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
-function TlacPD2()
-                {
-var h_dap = document.forms.formd2.h_dap.value;
-var h_dak = document.forms.formd2.h_dak.value;
-var h_stp = document.forms.formd2.h_stp.value;
-var h_stk = document.forms.formd2.h_stk.value;
-var h_aky = document.forms.formd2.h_aky.value;
 
-window.open('../ucto/penden2.php?h_dap=' + h_dap + '&h_dak=' + h_dak + '&h_stp=' + h_stp + '&h_stk=' + h_stk + '&h_aky=' + h_aky + '&copern=10&drupoh=1&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
 
-function TlacPD2013()
-                {
-var h_dap = document.forms.formd2013.h_dap.value;
-var h_dak = document.forms.formd2013.h_dak.value;
-var h_stp = document.forms.formd2013.h_stp.value;
-var h_stk = document.forms.formd2013.h_stk.value;
-var h_aky = document.forms.formd2013.h_aky.value;
 
-window.open('../ucto/penden2013.php?h_dap=' + h_dap + '&h_dak=' + h_dak + '&h_stp=' + h_stp + '&h_stk=' + h_stk + '&h_aky=' + h_aky + '&copern=10&drupoh=1&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
 
 function ZoznamDPHDOK()
                 {
@@ -308,7 +1753,7 @@ window.open('../ucto/prijplat_dph.php?fir_uctx01=' + fir_uctx01 + '&copern=40&dr
                 }
 
   function SynGenSuv()
-  { 
+  {
 
 window.open('../ucto/oprsys.php?copern=308&drupoh=44&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 
@@ -322,30 +1767,12 @@ var h_aky = document.forms.formrd2.h_aky.value;
 
 window.open('../ucto/fakt_dph.php?h_aky=' + h_aky + '&copern=40&drupoh=1&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
                 }
-    
-function VysMalaSU()
-                {
-var h_obdp = document.forms.formvm1.h_obdp.value;
-var h_obdk = document.forms.formvm1.h_obdk.value;
 
-window.open('../ucto/vys_mala.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&synt=1&obdx=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
 
-function VysMalaAU()
-                {
-var h_obdp = document.forms.formvm1.h_obdp.value;
-var h_obdk = document.forms.formvm1.h_obdk.value;
 
-window.open('../ucto/vys_mala.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
 
-function MesNakVyn()
-                {
-var h_obdp = document.forms.formvm1.h_obdp.value;
-var h_obdk = document.forms.formvm1.h_obdk.value;
 
-window.open('../ucto/mesnakvyn.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
+
 
 function MesNakVynJu()
                 {
@@ -355,13 +1782,7 @@ var h_obdk = document.forms.formvm1ju.h_obdk.value;
 window.open('../ucto/mesnakvynju.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
                 }
 
-function MesNakVynText()
-                {
-var h_obdp = document.forms.formvm1.h_obdp.value;
-var h_obdk = document.forms.formvm1.h_obdk.value;
 
-window.open('../ucto/mesnakvyn.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1&ajtext=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
 
 function MesNakVynTextJu()
                 {
@@ -371,1225 +1792,25 @@ var h_obdk = document.forms.formvm1ju.h_obdk.value;
 window.open('../ucto/mesnakvynju.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1&ajtext=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
                 }
 
-function HlavnaKnihapolozkovita()
-                {
-<?php if( $fir_big == 1 ) { echo "var h_s200 = document.forms.formhkp1.h_s200.value;"; } ?>
-<?php if( $fir_big == 0 ) { echo "var h_s200=1;"; } ?>
 
-window.open('../ucto/hlkniha_polpdf.php?h_s200=' + h_s200 + '&copern=10&drupoh=1&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-
-                }
 
   function GenSuvNo()
-  { 
+  {
 
 window.open('../ucto/oprcis.php?copern=308&drupoh=96&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 
   }
 
-function MesSuv()
-                {
-
-window.open('../ucto/messuv.php?copern=10&drupoh=1&h_obdp=1&h_obdk=<?php echo $kli_vmes; ?>&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
 
 
-function MesSuvText()
-                {
 
-window.open('../ucto/messuv.php?copern=10&drupoh=1&h_obdp=1&h_obdk=<?php echo $kli_vmes; ?>&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1&ajtext=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
 
-function RokNakVyn()
-                {
-var h_obdp = document.forms.formvm1.h_obdp.value;
-var h_obdk = document.forms.formvm1.h_obdk.value;
 
-window.open('../ucto/roknakvyn.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
 
-function RokNakVynText()
-                {
-var h_obdp = document.forms.formvm1.h_obdp.value;
-var h_obdk = document.forms.formvm1.h_obdk.value;
 
-window.open('../ucto/roknakvyn.php?copern=10&h_obdp=' + h_obdp + '&h_obdk=' + h_obdk + '&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1&ajtext=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
 
-function RokSuv()
-                {
 
-window.open('../ucto/roksuv.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
-
-function RokSuvText()
-                {
-
-window.open('../ucto/roksuv.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&obdx=1&ajtext=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-                }
 
 </script>
-</HEAD>
-<BODY class="white" onload="VyberVstup();">
-
-<?php 
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendens'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendensx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendensy'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcudenniks'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcudenniksx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcudenniksy'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prchlknihas'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prchlknihasx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prchlknihasy'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobrats'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsy'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphs'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphsx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-
-?>
-
-
-
-
-
-<?php
-if( $copern == 1 AND $kli_vduj != 9 )
-           {
-?>
-<table class="h2" width="100%" >
-<tr>
-<td>EuroSecom  -  Finančné účtovníctvo - Mesačné zostavy PU
-
-<a href="#" onClick="window.open('../analyzy/danovy_csv.php?copern=1&drupoh=1&page=1', '_self' )">
-<img src='../obr/export.png' width=20 height=15 border=0 title='Prejsť do exportu pre DÚ do CSV' ></a>
-
-<a href="#" onClick="window.open('../analyzy/export_csv.php?copern=1&drupoh=1&page=1', '_self' )">
-<img src='../obr/export.png' width=20 height=15 border=0 title='Prejsť do exportu do CSV' ></a>
-
-</td>
-<td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
-</tr>
-</table>
-<br />
-
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/uobrat.php?copern=10&drupoh=1&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/uobrat.php?copern=10&drupoh=1&page=1&typ=HTML', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazenie a úprava obratovej predvahy' ></a>
-</td>
-<td class="bmenu" width="90%">Obratová predvaha</td>
-</tr>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formhkp1" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="HlavnaKnihapolozkovita();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<?php if( $fir_big == 0 ) { ?>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/hlkniha_pdf.php?copern=10&drupoh=1&page=1&typ=HTML', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazenie a úprava hlavnej knihy' ></a>
-</td>
-<?php                     } ?>
-<td class="bmenu" width="90%">Hlavná kniha - položkovitá
-<?php if( $fir_big == 1 ) { ?>
- <select size="1" name="h_s200" id="h_s200" >
-<option value="1" >strany 001-150</option>
-<option value="2" >strany 150-300</option>
-<option value="3" >strany 300-450</option>
-<option value="4" >strany 450-600</option>
-</select>
-<?php                     } ?>
-</td>
-</tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formhk1" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="HlavnaKnihaSumarnaPDF();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Za analytické účty vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="HlavnaKnihaSumarnaHTML()">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazenie a úprava hlavnej knihy za analytické účty ' ></a>
-</td>
-<td class="bmenu" width="70%">Hlavná kniha - sumárna
- <a href="#" onClick="HlavnaKnihaSumarnaSUPDF();">
- <img src='../obr/tlac.png' width=20 height=15 border=0 title='Za syntetické účty vytlačiť vo formáte PDF' ></a>
-
- <a href="#" onClick="HlavnaKnihaSumarnaSUAUPDF();">
- <img src='../obr/tlac.png' width=20 height=15 border=0 title='Za syntetické aj analytické účty vytlačiť vo formáte PDF' ></a>
-
- <a href="#" onClick="HlavnaKnihaSumarnaSUAUnazovPDF();">
- <img src='../obr/tlac.png' width=20 height=15 border=0 title='Za syntetické aj analytické účty s názvom účtu vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="20%">
-<select size="1" name="h_obdp" id="h_obdp" >
-<option value="1" >od 01.<?php echo $kli_vrok;?></option>
-<option value="2" >od 02.<?php echo $kli_vrok;?></option>
-<option value="3" >od 03.<?php echo $kli_vrok;?></option>
-<option value="4" >od 04.<?php echo $kli_vrok;?></option>
-<option value="5" >od 05.<?php echo $kli_vrok;?></option>
-<option value="6" >od 06.<?php echo $kli_vrok;?></option>
-<option value="7" >od 07.<?php echo $kli_vrok;?></option>
-<option value="8" >od 08.<?php echo $kli_vrok;?></option>
-<option value="9" >od 09.<?php echo $kli_vrok;?></option>
-<option value="10" >od 10.<?php echo $kli_vrok;?></option>
-<option value="11" >od 11.<?php echo $kli_vrok;?></option>
-<option value="12" >od 12.<?php echo $kli_vrok;?></option>
-</select>
-
-<select size="1" name="h_obdk" id="h_obdk" >
-<option value="1" >do 01.<?php echo $kli_vrok;?></option>
-<option value="2" >do 02.<?php echo $kli_vrok;?></option>
-<option value="3" >do 03.<?php echo $kli_vrok;?></option>
-<option value="4" >do 04.<?php echo $kli_vrok;?></option>
-<option value="5" >do 05.<?php echo $kli_vrok;?></option>
-<option value="6" >do 06.<?php echo $kli_vrok;?></option>
-<option value="7" >do 07.<?php echo $kli_vrok;?></option>
-<option value="8" >do 08.<?php echo $kli_vrok;?></option>
-<option value="9" >do 09.<?php echo $kli_vrok;?></option>
-<option value="10" >do 10.<?php echo $kli_vrok;?></option>
-<option value="11" >do 11.<?php echo $kli_vrok;?></option>
-<option value="12" >do 12.<?php echo $kli_vrok;?></option>
-</select>
-</td>
-</tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/udennik.php?copern=10&drupoh=1&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<?php if( $fir_big == 0 ) { ?>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/udennik.php?copern=10&drupoh=1&page=1&typ=HTML', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazenie a úprava účtovného denníka' ></a>
-</td>
-<?php                     } ?>
-<td class="bmenu" width="90%">Účtovný denník</td>
-<td class="bmenu" width="2%">
-<?php if( $fir_fico == 36084344 OR $_SERVER['SERVER_NAME'] == "localhost" ) { ?>
-<a href="#" onClick="window.open('../ucto/udennik36084344.php?copern=10&drupoh=1&page=1&typ=PDF', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/pdf.png' width=20 height=15 border=0 title='Účtovný denník STR 5 PRO REGION n. o. DSS Svetluška' ></a>
-<?php                     } ?>
-</td>
-</tr>
-</table>
-
-
-<table class="vstup" width="100%" >
-<FORM name="formkf1" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="KnihaFakturPDF();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="72%">Kniha faktúr 
-<select size="1" name="h_drp" id="h_drp" >
-<option value="1" >odberateľských</option>
-<option value="2" >dodávateľských</option>
-</select>
-</td>
-<td class="bmenu" width="20%">
-<select size="1" name="h_obdp" id="h_obdp" >
-<option value="1" >od 01.<?php echo $kli_vrok;?></option>
-<option value="2" >od 02.<?php echo $kli_vrok;?></option>
-<option value="3" >od 03.<?php echo $kli_vrok;?></option>
-<option value="4" >od 04.<?php echo $kli_vrok;?></option>
-<option value="5" >od 05.<?php echo $kli_vrok;?></option>
-<option value="6" >od 06.<?php echo $kli_vrok;?></option>
-<option value="7" >od 07.<?php echo $kli_vrok;?></option>
-<option value="8" >od 08.<?php echo $kli_vrok;?></option>
-<option value="9" >od 09.<?php echo $kli_vrok;?></option>
-<option value="10" >od 10.<?php echo $kli_vrok;?></option>
-<option value="11" >od 11.<?php echo $kli_vrok;?></option>
-<option value="12" >od 12.<?php echo $kli_vrok;?></option>
-</select>
-
-<select size="1" name="h_obdk" id="h_obdk" >
-<option value="1" >do 01.<?php echo $kli_vrok;?></option>
-<option value="2" >do 02.<?php echo $kli_vrok;?></option>
-<option value="3" >do 03.<?php echo $kli_vrok;?></option>
-<option value="4" >do 04.<?php echo $kli_vrok;?></option>
-<option value="5" >do 05.<?php echo $kli_vrok;?></option>
-<option value="6" >do 06.<?php echo $kli_vrok;?></option>
-<option value="7" >do 07.<?php echo $kli_vrok;?></option>
-<option value="8" >do 08.<?php echo $kli_vrok;?></option>
-<option value="9" >do 09.<?php echo $kli_vrok;?></option>
-<option value="10" >do 10.<?php echo $kli_vrok;?></option>
-<option value="11" >do 11.<?php echo $kli_vrok;?></option>
-<option value="12" >do 12.<?php echo $kli_vrok;?></option>
-</select>
-</td>
-</tr>
-</FORM>
-</table>
-
-
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/suv_mala.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="25%">Súvaha jednoduchá</td>
-<td class="bmenu" width="4%">
-<a href="#" onClick="window.open('../ucto/suv_mala.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>&synt=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-SU<img src='../obr/tlac.png' width=20 height=15 border=0 title='Za syntetický účet Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="33%" >
-<a href="#" onClick="MesSuv();">
-MES<img src='../obr/tlac.png' width=20 height=15 border=0 title='Mesačný prehľad súvahových účtov bežného roka Vytlačiť vo formáte PDF' ></a>
-<a href="#" onClick="MesSuvText();">
-MESTx<img src='../obr/tlac.png' width=20 height=15 border=0 title='Mesačný prehľad súvahových účtov bežného roka aj s názvom účtu Vytlačiť vo formáte PDF' ></a>
-
-<a href="#" onClick="RokSuv();">
-ROK<img src='../obr/tlac.png' width=20 height=15 border=0 title='Medziročný prehľad súvahových účtov Vytlačiť vo formáte PDF' ></a>
-<a href="#" onClick="RokSuvText();">
-ROKTx<img src='../obr/tlac.png' width=20 height=15 border=0 title='Medziročný prehľad súvahových účtov aj s názvom účtu Vytlačiť vo formáte PDF' ></a>
-
-<td class="bmenu" width="36%">
-</tr>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formvm1" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="VysMalaAU();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Za analytický účet Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="25%">Výsledovka jednoduchá</td>
-<td class="bmenu" width="4%">
-<a href="#" onClick="VysMalaSU();">
-SU<img src='../obr/tlac.png' width=20 height=15 border=0 title='Za syntetický účet Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="4%">
-<a href="#" onClick="window.open('../ucto/vys_str.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-STR<img src='../obr/tlac.png' width=20 height=15 border=0 title='Za Strediská Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="4%">
-<a href="#" onClick="window.open('../ucto/vys_zak.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-ZAK<img src='../obr/tlac.png' width=20 height=15 border=0 title='Za Zákazky Vytlačiť vo formáte PDF' ></a>
-</td>
-
-<td class="bmenu" width="4%">
-<a href="#" onClick="window.open('../ucto/vys_strzak.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-STRZAK<img src='../obr/tlac.png' width=20 height=15 border=0 title='Za Strediská a Zákazky Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="4%">
-<a href="#" onClick="window.open('../ucto/vys_sku.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-SKU<img src='../obr/tlac.png' width=20 height=15 border=0 title='Za Skupiny Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="4%" >
-<a href="#" onClick="window.open('../ucto/vys_stv.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-STA<img src='../obr/tlac.png' width=20 height=15 border=0 title='Za Stavby Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="33%" >
-<a href="#" onClick="MesNakVyn();">
-MES<img src='../obr/tlac.png' width=20 height=15 border=0 title='Mesačný prehľad nákladov a výnosov bežného roka Vytlačiť vo formáte PDF' ></a>
-<a href="#" onClick="MesNakVynText();">
-MESTx<img src='../obr/tlac.png' width=20 height=15 border=0 title='Mesačný prehľad nákladov a výnosov bežného roka aj s názvom účtu Vytlačiť vo formáte PDF' ></a>
-
-<?php if( $stavoimpex == 1 ) { ?>
-<a href="#" onClick="window.open('../ucto/vys_stvimpx.php?copern=10&drupoh=1&page=1&typ=PDF&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-BYT<img src='../obr/tlac.png' width=20 height=15 border=0 title='Za Bytové domy Vytlačiť vo formáte PDF' ></a>
-<?php                        } ?>
-
-<a href="#" onClick="RokNakVyn();">
-ROK<img src='../obr/tlac.png' width=20 height=15 border=0 title='Medziročný prehľad nákladov a výnosov Vytlačiť vo formáte PDF' ></a>
-<a href="#" onClick="RokNakVynText();">
-ROKTx<img src='../obr/tlac.png' width=20 height=15 border=0 title='Medziročný prehľad nákladov a výnosov aj s názvom účtu Vytlačiť vo formáte PDF' ></a>
-
-
-</td>
-<?php
-//echo $kli_vmes;
-?>
-
-<td class="bmenu" width="20%" >
-<select size="1" name="h_obdp" id="h_obdp" >
-<?php if( $kli_vmes >= 1 ) { echo "<option value='1' >od 01.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 2 ) { echo "<option value='2' >od 02.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 3 ) { echo "<option value='3' >od 03.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 4 ) { echo "<option value='4' >od 04.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 5 ) { echo "<option value='5' >od 05.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 6 ) { echo "<option value='6' >od 06.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 7 ) { echo "<option value='7' >od 07.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 8 ) { echo "<option value='8' >od 08.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 9 ) { echo "<option value='9' >od 09.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 10 ) { echo "<option value='10' >od 10.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 11 ) { echo "<option value='11' >od 11.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 12 ) { echo "<option value='12' >od 12.$kli_vrok</option>";  } ?>
-</select>
-
-<select size="1" name="h_obdk" id="h_obdk" >
-<?php if( $kli_vmes == 1 ) { echo "<option value='1' >do 01.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 2 ) { echo "<option value='2' >do 02.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 3 ) { echo "<option value='3' >do 03.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 4 ) { echo "<option value='4' >do 04.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 5 ) { echo "<option value='5' >do 05.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 6 ) { echo "<option value='6' >do 06.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 7 ) { echo "<option value='7' >do 07.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 8 ) { echo "<option value='8' >do 08.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 9 ) { echo "<option value='9' >do 09.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 10 ) { echo "<option value='10' >do 10.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 11 ) { echo "<option value='11' >do 11.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 12 ) { echo "<option value='12' >do 12.$kli_vrok</option>";  } ?>
-</select>
-</tr>
-</FORM>
-</table>
-
-<?php if( $kli_vrok < 2009 ) { ?>
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/suvaha2008.php?copern=10&drupoh=1&page=1&tis=0&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/suvaha2008.php?copern=10&drupoh=1&page=1&tis=1&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V tisícoch <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/suvaha2008.php?copern=10&drupoh=1&page=1&tis=1&fort=0&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V tisícoch <?php echo $mena1; ?> bez formulára - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="90%">Súvaha Úč POD 1-01 verzia UVPOD1v07_1</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=22&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
-</td>
-</tr>
-</table>
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/vykzis2008.php?copern=10&drupoh=1&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/vykzis2008.php?copern=10&drupoh=1&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V tisícoch <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/vykzis2008.php?copern=10&drupoh=1&page=1&tis=1&fort=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V tisícoch <?php echo $mena1; ?> bez formulára - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="90%">Výkaz ziskov a strát Úč POD 2-01 verzia UVPOD2v07_2</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=21&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
-</td>
-</tr>
-</table>
-
-<?php              } //koniec rok 2008; ?>
-
-<?php if( $kli_vrok >= 2009 AND $kli_vrok <= 2013 ) { ?>
-
-
-<?php
-//$povelak=""; tymto by urobil zostavu vzor 2008
-$povelak="__x";
-?>
-
-<script type="text/javascript">
-
-function SUvAHA()
-                {
-var h_zos = document.forms.formsv1.h_zos.value;
-var h_sch = document.forms.formsv1.h_sch.value;
-
-window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=0&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-function SUvAHAEUR()
-                {
-var h_zos = document.forms.formsv1.h_zos.value;
-var h_sch = document.forms.formsv1.h_sch.value;
-
-window.open('../ucto/suvaha<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1&vyb_ume=<?php echo $kli_vume; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-</script>
-
-<table class="vstup" width="100%" >
-<FORM name="formsv1" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="SUvAHA();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="SUvAHAEUR();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
-</td>
-<?php $versuv="UVPOD1v09_1"; if( $kli_vrok > 2010 ) $versuv="UVPOD1v11 "; ?>
-
-<td class="bmenu" width="55%">Súvaha Úč POD 1-01 ( platná do 30.12.2014 )
-
-<a href="#" onClick="SynGenSuv();">
-<img src='../obr/zoznam.png' width=15 height=15 border=0 title='Syntetické generovanie riadkov súvahy' ></a>
-</td>
-<td class="bmenu" width="35%">
-<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavená: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválená: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=22&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
-</td>
-</tr>
-</FORM>
-</table>
-
-<?php
-$povelak="__x";
-?>
-
-<script type="text/javascript">
-
-function VYKZIS()
-                {
-var h_zos = document.forms.formvz1.h_zos.value;
-var h_sch = document.forms.formvz1.h_sch.value;
-
-window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
-                }
-
-function VYKZISEUR()
-                {
-var h_zos = document.forms.formvz1.h_zos.value;
-var h_sch = document.forms.formvz1.h_sch.value;
-
-window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-
-                }
-</script>
-
-<table class="vstup" width="100%" >
-<FORM name="formvz1" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="VYKZIS();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="VYKZISEUR();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="55%">Výkaz ziskov a strát Úč POD 2-01 ( platný do 30.12.2014 )
-
-</td>
-<td class="bmenu" width="35%">
-<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Zostavený: <input type="text" name="h_zos" id="h_zos" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Schválený: <input type="text" name="h_sch" id="h_sch" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=21&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
-</td>
-</tr>
-</FORM>
-</table>
-
-<?php              } //koniec rok 2009 az 2014; ?>
-
-
-<?php if( $kli_nezis == 1  ) { ?>
-
-<?php if( $kli_vrok < 2012 )    { ?>
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/suvaha_no2011.php?copern=10&drupoh=1&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/suvaha_no2011.php?copern=10&drupoh=1&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="92%">Súvaha Úč NUJ 1-01 príloha č.1 k opatreniu č. MF/25682/2007-74</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="GenSuvNo();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie riadkov súvahy NO' ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=32&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
-</td>
-</tr>
-</table>
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/vykzis_no2011.php?copern=10&drupoh=1&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/vykzis_no2011.php?copern=10&drupoh=1&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="94%">Výsledovka Úč NUJ 2-01 príloha č.2 k opatreniu č. MF/25682/2007-74</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=31&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
-</td>
-</tr>
-</table>
-
-<?php                           } ?>
-
-<?php if( $kli_vrok >= 2012 AND $kli_vrok < 2015 )   { ?>
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="92%">Súvaha Úč NUJ 1-01 príloha č.1 k opatreniu č. MF/22603/2012-74</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="GenSuvNo();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Generovanie riadkov súvahy NO' ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=32&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
-</td>
-</tr>
-</table>
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/vykzis_no.php?copern=10&drupoh=1&page=1&tis=0', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V <?php echo $mena1; ?> a centoch - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/vykzis_no.php?copern=10&drupoh=1&page=1&tis=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="V celých <?php echo $mena1; ?> - vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="94%">Výsledovka Úč NUJ 2-01 príloha č.2 k opatreniu č. MF/22603/2012-74</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=31&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
-</td>
-</tr>
-</table>
-
-<?php                           } ?>
-
-<?php                      } ?>
-
-<table class="vstup" width="100%" >
-<FORM name="formp1" class="obyc" method="post" action="#" >
-<tr>
-<?php if( $kli_vrok >= 2009 ) { ?>
-<td class="bmenu" width="2%">
-<a href="#" onClick="PriznanieDPH();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF" ></a>
-</td>
-<?php if( $kli_vrok <  2011 ) { ?>
-<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv10
-<?php                        } ?>
-<?php if( $kli_vrok == 2011 ) { ?>
-<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv11
-<?php                        } ?>
-<?php if( $kli_vrok >  2011 ) { ?>
-<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv12
-<?php                        } ?>
-<select size="1" name="h_drp" id="h_drp" >
-<option value="1" >Riadne</option>
-<option value="2" >Opravné</option>
-<option value="3" >Dodatočné</option>
-</select>
-<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Dátum: <input type="text" name="h_dap" id="h_dap" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
-<select size="1" name="fir_uctx01" id="fir_uctx01" >
-<option value="1" >Mesačné</option>
-<option value="2" >Štvrťročné</option>
-<option value="4" >Ročné</option>
-</select>
-<a href="#" onClick="TlacPotvrdDPH();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť potvrdenie o podaní daňového priznania DPH vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="10%">
-<select size="1" name="h_arch" id="h_arch" >
-<option value="0" >Nearchivovať</option>
-<option value="1" >Archivovať</option>
-</select>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/archivdph<?php echo $rokdph; ?>.php?copern=80&drupoh=1&page=1', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Archív Daňových priznaní DPH rok <?php echo $kli_vrok; ?>' ></a>
-</td>
-<?php                        } ?>
-
-<?php if( $kli_vrok < 2009 ) { ?>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/prizdph_2008.php?copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv07_1</td>
-<?php                        } ?>
-</tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formg1" class="obyc" method="post" action="#" >
-<tr>
-<?php if( $kli_vrok >= 2009 ) { ?>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TZoznamDPH();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po riadkoch DPH vo formáte PDF" ></a>
-<td class="bmenu" width="2%">
-<a href="#" onClick="ZoznamDPH();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po riadkoch DPH vo formáte HTML' ></a>
-</td>
-</td>
-<td class="bmenu" width="54%">Daň z pridanej hodnoty - Zoznamy dokladov a chybové hlásenia v.<?php echo $kli_vrok; ?>
-<select size="1" name="fir_uctx01" id="fir_uctx01" >
-<option value="1" >Mesačný</option>
-<option value="2" >Štvrťročný</option>
-<option value="4" >Ročné</option>
-</select>
-</td>
-
-<td class="bmenu" align="right" width="8%">
-<?php if( $fir_xvr05 != 2 AND $kli_vrok >= 2016 ) { ?>
-PRP
-<a href="#" onClick="TZoznamDPHPRP();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam prijatých platieb pre uplatnenie DPH vo formáte PDF" ></a>
-<?php                                             } ?>
-</td>
-
-<td class="bmenu" align="right" width="8%">FKT
-<a href="#" onClick="TZoznamDPHFAK();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po faktúrach vo formáte PDF" ></a>
-<a href="#" onClick="ZoznamDPHFAK();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po faktúrach vo formáte HTML' ></a>
-</td>
-
-<td class="bmenu" align="right" width="8%">DOK
-<a href="#" onClick="TZoznamDPHDOK();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po dokladoch vo formáte PDF" ></a>
-<a href="#" onClick="ZoznamDPHDOK();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po dokladoch vo formáte HTML' ></a>
-</td>
-
-<td class="bmenu" align="right" width="8%">DRD
-<a href="#" onClick="TZoznamDPHDRD();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po druhoch DPH vo formáte PDF" ></a>
-<a href="#" onClick="ZoznamDPHDRD();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po druhoch DPH vo formáte HTML' ></a>
-</td>
-
-<td class="bmenu" align="right" width="8%">CHB
-<a href="#" onClick="TZoznamDPHCHB();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam chybových hlásení DPH vo formáte PDF" ></a>
-<a href="#" onClick="ZoznamDPHCHB();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam chybových hlásení DPH vo formáte HTML' ></a>
-</td>
-
-<?php                        } ?>
-<?php if( $kli_vrok < 2009 ) { ?>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/prizdph_2008.php?copern=20&drupoh=1&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF" ></a>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/prizdph_2008.php?copern=30&drupoh=1&page=1&typ=HTML', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazenie a úprava DPH' ></a>
-</td>
-</td>
-<td class="bmenu" width="90%">Daň z pridanej hodnoty - Zoznam dokladov a chybové hlásenia v.2008</td>
-<?php                        } ?>
-
-</tr>
-</FORM>
-</table>
-
-
-<?php
-           }
-?>
-
-
-<?php
-if( $copern == 1 AND $kli_vduj == 9 )
-           {
-?>
-<table class="h2" width="100%" >
-<tr>
-<td>EuroSecom  -  Finančné účtovníctvo - Mesačné zostavy JU
-
-<a href="#" onClick="window.open('../analyzy/danovy_csv.php?copern=1&drupoh=1&page=1', '_self' )">
-<img src='../obr/export.png' width=20 height=15 border=0 title='Prejsť do exportu pre DÚ do CSV' ></a>
-
-</td>
-<td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
-</tr>
-</table>
-<br />
-
-
-<table class="vstup" width="100%" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/penden.php?copern=10&drupoh=1&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/penden.php?copern=10&drupoh=1&page=1&typ=HTML', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazenie a úprava peňažného denníka' ></a>
-</td>
-<td class="bmenu" width="90%">Peňažný denník - druh 1</td>
-</tr>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formd2" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacPD2();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="30%">Peňažný denník - druh 2 verzia pre rok 2012
- <select size="1" name="h_aky" id="h_aky" >
-<option value="1" >položkovitý</option>
-<option value="2" >suma za doklady</option>
-</select>
-</td>
-<td class="bmenu" width="60%">
-<?php 
-$dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
-$prvy = "01.01.".$kli_vrok; 
-?>
- Dátum od: <input type="text" name="h_dap" id="h_dap" maxlenght="10" size="8" value="<?php echo $prvy;?>" /> 
- do: <input type="text" name="h_dak" id="h_dak" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Strany od: <input type="text" name="h_stp" id="h_stp" maxlenght="10" size="8" value="1" /> 
- do: <input type="text" name="h_stk" id="h_stk" maxlenght="10" size="8" value="999" />
-<td class="bmenu" width="10%"></td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=29&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Nastavenie druh pohybu -> stĺpec peňažného denníka pre rok 2012' ></a>
-</td>
-</tr>
-<tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formd2013" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacPD2013();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="30%">Peňažný denník - druh 2 verzia pre rok 2013
- <select size="1" name="h_aky" id="h_aky" >
-<option value="1" >položkovitý</option>
-<option value="2" >suma za doklady</option>
-</select>
-</td>
-<td class="bmenu" width="60%">
-<?php 
-$dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
-$prvy = "01.01.".$kli_vrok; 
-?>
- Dátum od: <input type="text" name="h_dap" id="h_dap" maxlenght="10" size="8" value="<?php echo $prvy;?>" /> 
- do: <input type="text" name="h_dak" id="h_dak" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
- Strany od: <input type="text" name="h_stp" id="h_stp" maxlenght="10" size="8" value="1" /> 
- do: <input type="text" name="h_stk" id="h_stk" maxlenght="10" size="8" value="999" />
-<td class="bmenu" width="10%"></td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=28&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Nastavenie druh pohybu -> stĺpec peňažného denníka pre rok 2013' ></a>
-</td>
-</tr>
-<tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formkf1" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="KnihaFakturPDF();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="72%">Kniha   
-<select size="1" name="h_drp" id="h_drp" >
-<option value="3" >pohľadávok</option>
-<option value="4" >záväzkov</option>
-</select>
-</td>
-<td class="bmenu" width="20%">
-<select size="1" name="h_obdp" id="h_obdp" >
-<option value="1" >od 01.<?php echo $kli_vrok;?></option>
-<option value="2" >od 02.<?php echo $kli_vrok;?></option>
-<option value="3" >od 03.<?php echo $kli_vrok;?></option>
-<option value="4" >od 04.<?php echo $kli_vrok;?></option>
-<option value="5" >od 05.<?php echo $kli_vrok;?></option>
-<option value="6" >od 06.<?php echo $kli_vrok;?></option>
-<option value="7" >od 07.<?php echo $kli_vrok;?></option>
-<option value="8" >od 08.<?php echo $kli_vrok;?></option>
-<option value="9" >od 09.<?php echo $kli_vrok;?></option>
-<option value="10" >od 10.<?php echo $kli_vrok;?></option>
-<option value="11" >od 11.<?php echo $kli_vrok;?></option>
-<option value="12" >od 12.<?php echo $kli_vrok;?></option>
-</select>
-
-<select size="1" name="h_obdk" id="h_obdk" >
-<option value="1" >do 01.<?php echo $kli_vrok;?></option>
-<option value="2" >do 02.<?php echo $kli_vrok;?></option>
-<option value="3" >do 03.<?php echo $kli_vrok;?></option>
-<option value="4" >do 04.<?php echo $kli_vrok;?></option>
-<option value="5" >do 05.<?php echo $kli_vrok;?></option>
-<option value="6" >do 06.<?php echo $kli_vrok;?></option>
-<option value="7" >do 07.<?php echo $kli_vrok;?></option>
-<option value="8" >do 08.<?php echo $kli_vrok;?></option>
-<option value="9" >do 09.<?php echo $kli_vrok;?></option>
-<option value="10" >do 10.<?php echo $kli_vrok;?></option>
-<option value="11" >do 11.<?php echo $kli_vrok;?></option>
-<option value="12" >do 12.<?php echo $kli_vrok;?></option>
-</select>
-</td>
-</tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formhk1" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="JUKnihaSumarnaPDF();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="JUKnihaSumarnaHTML()">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazenie a úprava účtovných pohybov' ></a>
-</td>
-<td class="bmenu" width="72%">Prehľad účtovných pohybov</td>
-<td class="bmenu" width="20%">
-<select size="1" name="h_obdp" id="h_obdp" >
-<option value="1" >od 01.<?php echo $kli_vrok;?></option>
-<option value="2" >od 02.<?php echo $kli_vrok;?></option>
-<option value="3" >od 03.<?php echo $kli_vrok;?></option>
-<option value="4" >od 04.<?php echo $kli_vrok;?></option>
-<option value="5" >od 05.<?php echo $kli_vrok;?></option>
-<option value="6" >od 06.<?php echo $kli_vrok;?></option>
-<option value="7" >od 07.<?php echo $kli_vrok;?></option>
-<option value="8" >od 08.<?php echo $kli_vrok;?></option>
-<option value="9" >od 09.<?php echo $kli_vrok;?></option>
-<option value="10" >od 10.<?php echo $kli_vrok;?></option>
-<option value="11" >od 11.<?php echo $kli_vrok;?></option>
-<option value="12" >od 12.<?php echo $kli_vrok;?></option>
-</select>
-
-<select size="1" name="h_obdk" id="h_obdk" >
-<option value="1" >do 01.<?php echo $kli_vrok;?></option>
-<option value="2" >do 02.<?php echo $kli_vrok;?></option>
-<option value="3" >do 03.<?php echo $kli_vrok;?></option>
-<option value="4" >do 04.<?php echo $kli_vrok;?></option>
-<option value="5" >do 05.<?php echo $kli_vrok;?></option>
-<option value="6" >do 06.<?php echo $kli_vrok;?></option>
-<option value="7" >do 07.<?php echo $kli_vrok;?></option>
-<option value="8" >do 08.<?php echo $kli_vrok;?></option>
-<option value="9" >do 09.<?php echo $kli_vrok;?></option>
-<option value="10" >do 10.<?php echo $kli_vrok;?></option>
-<option value="11" >do 11.<?php echo $kli_vrok;?></option>
-<option value="12" >do 12.<?php echo $kli_vrok;?></option>
-</select>
-</td>
-</tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formvm1ju" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="MesNakVynJu();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title='Mesačný prehľad príjmov a výdavkov započítateľných do daňového základu Vytlačiť vo formáte PDF' ></a>
-</td>
-<td class="bmenu" width="72%">Mesačný prehľad príjmov a výdavkov započítateľných do daňového základu
-<a href="#" onClick="MesNakVynTextJu();">
-MESTx<img src='../obr/tlac.png' width=20 height=15 border=0 title='Mesačný prehľad príjmov a výdavkov aj s názvom pohybu Vytlačiť vo formáte PDF' ></a>
-</td>
-<?php
-//echo $kli_vmes;
-?>
-
-<td class="bmenu" width="20%" >
-<select size="1" name="h_obdp" id="h_obdp" >
-<?php if( $kli_vmes >= 1 ) { echo "<option value='1' >od 01.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 2 ) { echo "<option value='2' >od 02.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 3 ) { echo "<option value='3' >od 03.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 4 ) { echo "<option value='4' >od 04.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 5 ) { echo "<option value='5' >od 05.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 6 ) { echo "<option value='6' >od 06.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 7 ) { echo "<option value='7' >od 07.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 8 ) { echo "<option value='8' >od 08.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 9 ) { echo "<option value='9' >od 09.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 10 ) { echo "<option value='10' >od 10.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 11 ) { echo "<option value='11' >od 11.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes >= 12 ) { echo "<option value='12' >od 12.$kli_vrok</option>";  } ?>
-</select>
-
-<select size="1" name="h_obdk" id="h_obdk" >
-<?php if( $kli_vmes == 1 ) { echo "<option value='1' >do 01.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 2 ) { echo "<option value='2' >do 02.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 3 ) { echo "<option value='3' >do 03.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 4 ) { echo "<option value='4' >do 04.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 5 ) { echo "<option value='5' >do 05.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 6 ) { echo "<option value='6' >do 06.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 7 ) { echo "<option value='7' >do 07.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 8 ) { echo "<option value='8' >do 08.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 9 ) { echo "<option value='9' >do 09.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 10 ) { echo "<option value='10' >do 10.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 11 ) { echo "<option value='11' >do 11.$kli_vrok</option>";  } ?>
-<?php if( $kli_vmes == 12 ) { echo "<option value='12' >do 12.$kli_vrok</option>";  } ?>
-</select>
-</tr>
-</FORM>
-</table>
-
-<?php
-$jedrok=2013;
-if( $kli_vrok < 2013 ) { $jedrok=""; } 
-$zobraz="";
-if( $kli_vrok > 2015 ) { $zobraz="style=\"display:none;\""; } 
-
-?>
-
-<table class="vstup" width="100%" <?php echo $zobraz; ?> >
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/vprivyd<?php echo $jedrok; ?>.php?copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF v eurocentoch" ></a>
-</td>
-<td class="bmenu" width="88%">Výkaz o príjmoch a výdavkoch Úč. FO 1-01</td>
-<td class="bmenu" width="2%" >
-<a href="#" onClick="JUvykpvpohHTML()">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Výkaz o príjmoch a výdavkoch podľa účtovných pohybov' ></a>
-
-</tr>
-</table>
-
-<table class="vstup" width="100%" <?php echo $zobraz; ?> >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/vmajzav<?php echo $jedrok; ?>.php?copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF v eurocentoch" ></a>
-</td>
-<td class="bmenu" width="90%">Výkaz o majetku a záväzkoch Úč. FO 2-01 </td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/oprsys.php?copern=308&drupoh=42&page=1&sysx=UCT', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Údaje bezprostredne predchádzajúceho účtovného obdobia' ></a>
-</td>
-</tr>
-<tr>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formrd2" class="obyc" method="post" action="#" >
-<tr>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TlacRD();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title="Zoznam faktúr" ></a>
-</td>
-<td class="bmenu" width="38%">DPH zaúčtovaná a zaplatená na faktúrach 
- <select size="1" name="h_aky" id="h_aky" >
-<option value="1" >dodávateľských</option>
-<option value="2" >odberateľských</option>
-</select>
-</td>
-<td class="bmenu" width="60%"></td>
-</tr>
-<tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formp1" class="obyc" method="post" action="#" >
-<tr>
-<?php if( $kli_vrok >= 2009 ) { ?>
-<td class="bmenu" width="2%">
-<a href="#" onClick="PriznanieDPH();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF" ></a>
-</td>
-
-<?php if( $kli_vrok <  2011 ) { ?>
-<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv10
-<?php                        } ?>
-<?php if( $kli_vrok == 2011 ) { ?>
-<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv11
-<?php                        } ?>
-<?php if( $kli_vrok >  2011 ) { ?>
-<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv12
-<?php                        } ?>
-
-<select size="1" name="h_drp" id="h_drp" >
-<option value="1" >Riadne</option>
-<option value="2" >Opravné</option>
-<option value="3" >Dodatočné</option>
-</select>
-<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
- Dátum: <input type="text" name="h_dap" id="h_dap" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
-<select size="1" name="fir_uctx01" id="fir_uctx01" >
-<option value="1" >Mesačné</option>
-<option value="2" >Štvrťročné</option>
-<option value="4" >Ročné</option>
-</select>
-<a href="#" onClick="TlacPotvrdDPH();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť potvrdenie o podaní daňového priznania DPH vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="10%">
-<select size="1" name="h_arch" id="h_arch" >
-<option value="0" >Nearchivovať</option>
-<option value="1" >Archivovať</option>
-</select>
-</td>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/archivdph<?php echo $rokdph; ?>.php?copern=80&drupoh=1&page=1', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Archív Daňových priznaní DPH rok <?php echo $kli_vrok; ?>' ></a>
-</td>
-<?php                        } ?>
-
-<?php if( $kli_vrok < 2009 ) { ?>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/prizdph_2008.php?copern=10&drupoh=1&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po riadkoch DPH vo formáte PDF" ></a>
-</td>
-<td class="bmenu" width="90%">Daňové priznanie Daň z pridanej hodnoty verzia DPHv07_1</td>
-<?php                        } ?>
-</tr>
-</FORM>
-</table>
-
-<table class="vstup" width="100%" >
-<FORM name="formg1" class="obyc" method="post" action="#" >
-<tr>
-<?php if( $kli_vrok >= 2009 ) { ?>
-<td class="bmenu" width="2%">
-<a href="#" onClick="TZoznamDPH();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po riadkoch DPH vo formáte PDF" ></a>
-<td class="bmenu" width="2%">
-<a href="#" onClick="ZoznamDPH();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po riadkoch DPH vo formáte HTML' ></a>
-</td>
-</td>
-<td class="bmenu" width="70%">Daň z pridanej hodnoty - Zoznamy dokladov a chybové hlásenia v.<?php echo $kli_vrok; ?>
-<select size="1" name="fir_uctx01" id="fir_uctx01" >
-<option value="1" >Mesačný</option>
-<option value="2" >Štvrťročný</option>
-</select>
-</td>
-
-<td class="bmenu" align="right" width="8%">DOK
-<a href="#" onClick="TZoznamDPHDOK();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po dokladoch DPH vo formáte PDF" ></a>
-<a href="#" onClick="ZoznamDPHDOK();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po dokladoch DPH vo formáte HTML' ></a>
-</td>
-
-<td class="bmenu" align="right" width="8%">DRD
-<a href="#" onClick="TZoznamDPHDRD();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam dokladov po druhoch DPH vo formáte PDF" ></a>
-<a href="#" onClick="ZoznamDPHDRD();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam dokladov po druhoch DPH vo formáte HTML' ></a>
-</td>
-
-<td class="bmenu" align="right" width="8%">CHB
-<a href="#" onClick="TZoznamDPHCHB();">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť Zoznam chybových hlásení DPH vo formáte PDF" ></a>
-<a href="#" onClick="ZoznamDPHCHB();">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Vytlačiť Zoznam chybových hlásení DPH vo formáte HTML' ></a>
-</td>
-<?php                        } ?>
-<?php if( $kli_vrok < 2009 ) { ?>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/prizdph_2008.php?copern=20&drupoh=1&page=1&typ=PDF', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlačiť vo formáte PDF" ></a>
-<td class="bmenu" width="2%">
-<a href="#" onClick="window.open('../ucto/prizdph_2008.php?copern=30&drupoh=1&page=1&typ=HTML', '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )">
-<img src='../obr/zoznam.png' width=20 height=15 border=0 title='Zobrazenie a úprava DPH' ></a>
-</td>
-</td>
-<td class="bmenu" width="90%">Daň z pridanej hodnoty - Zoznam dokladov a chybové hlásenia v.2008</td>
-<?php                        } ?>
-
-</tr>
-</FORM>
-</table>
-
-
-<?php
-           }
-?>
-
-
-
-
-
-<br /><br />
-<?php
-// celkovy koniec dokumentu
-
-$zmenume=1; $odkaz="../ucto/meszos.php?copern=1&drupoh=1&page=1&sysx=UCT";
-$cislista = include("uct_lista.php");
-
-       } while (false);
-?>
-</BODY>
-</HTML>
+</body>
+</html>
