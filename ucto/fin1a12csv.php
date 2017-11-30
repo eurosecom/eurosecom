@@ -40,10 +40,6 @@ $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
 
 $fir_ficox=$fir_fico;
 if( $fir_fico < 100000 ) $fir_ficox="00".$fir_fico;
@@ -144,7 +140,8 @@ if( $fico8 < 999999 ) { $fico8="00".$fico8; }
 $rokmes=$kli_vmes.$kli_vrok;
 
 //rozp.polozky
-$nazsub=$fico8."_PRI_N_".$kli_vrok."_".$dat_bez.".csv";
+$nazsub=$fico8."_PRI_N_".$kli_vrok."_".$dat_bez.".CSV";
+$nazsub="PRI_N_".$kli_vrok."_".$dat_bez.".CSV";
 
 if (File_Exists ("../tmp/$nazsub")) { $soubor = unlink("../tmp/$nazsub"); }
 
@@ -209,7 +206,8 @@ fclose($soubor);
 //koniec rozp.polozky
 
 //nerozp.polozky
-$nazsub2=$fico8."_PRI_NP_".$kli_vrok."_".$dat_bez.".csv";
+$nazsub2=$fico8."_PRI_NP_".$kli_vrok."_".$dat_bez.".CSV";
+$nazsub2="PRI_NP_".$kli_vrok."_".$dat_bez.".CSV";
 
 if (File_Exists ("../tmp/$nazsub2")) { $soubor = unlink("../tmp/$nazsub2"); }
 
@@ -343,7 +341,8 @@ $dsql = mysql_query("$dsqlt");
 
 
 //rozp.polozky
-$nazsub3=$fico8."_VYD_N_".$kli_vrok."_".$dat_bez.".csv";
+$nazsub3=$fico8."_VYD_N_".$kli_vrok."_".$dat_bez.".CSV";
+$nazsub3="VYD_N_".$kli_vrok."_".$dat_bez.".CSV";
 
 if (File_Exists ("../tmp/$nazsub3")) { $soubor = unlink("../tmp/$nazsub3"); }
 
@@ -413,7 +412,8 @@ fclose($soubor);
 //koniec rozp.polozky
 
 //nerozp.polozky
-$nazsub4=$fico8."_VYD_NP_".$kli_vrok."_".$dat_bez.".csv";
+$nazsub4=$fico8."_VYD_NP_".$kli_vrok."_".$dat_bez.".CSV";
+$nazsub4="VYD_NP_".$kli_vrok."_".$dat_bez.".CSV";
 
 if (File_Exists ("../tmp/$nazsub4")) { $soubor = unlink("../tmp/$nazsub4"); }
 
