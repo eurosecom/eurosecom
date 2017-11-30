@@ -830,7 +830,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane".
 $oznac = mysql_query("$sqtoz");
 
 //len vynulujem nepouzivane 2017
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r04c1=0, r04c2=0, r04e=0, r04f=0 WHERE oc = $cislo_oc";
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdrocnedane SET r04c=0, r04c1=0, r04c2=0, r04e=0, r04f=0 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 
 //nezdanitelna cast na danovnika za 2017 rovnako ako v 2016
