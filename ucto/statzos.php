@@ -51,7 +51,7 @@ if ( $_SERVER['SERVER_NAME'] == "www.enposro.sk" ) { $dajstatvyk=0; }
 $dajfinvykazy=0;
 $volajfin1a12=1;
 if ( $kli_nezis == 1 ) { $dajfinvykazy=1; $volajfin1a12=1; }
-if ( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $dajfinvykazy=1; $volajfin1a12=0; } 
+if ( $_SERVER['SERVER_NAME'] == "www.smmgbely.sk" ) { $dajfinvykazy=1; $volajfin1a12=0; }
 if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $dajfinvykazy=1; }
 if ( $_SERVER['SERVER_NAME'] == "www.enposro.sk" ) { $dajfinvykazy=0; }
 
@@ -63,11 +63,11 @@ if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $dajhlaodpad=1; }
 
 $tlacodpady=1;
 if ( $_SERVER['SERVER_NAME'] == "www.enposro.sk" )
-{ 
+{
 if ( $kli_uzid != 17 AND $kli_uzid != 23 AND $kli_uzid != 57 AND $kli_uzid != 58 AND $kli_uzid != 141 AND $kli_uzid != 164 ) { $tlacodpady=0; }
 }
 
-?> 
+?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
 <link rel="stylesheet" href="../css/reset.css">
@@ -187,7 +187,7 @@ img.line-box {
   padding: 8px;
   cursor: pointer;
   border-radius: 3px;
-  margin-right: 4px;
+  margin: 0 2px;
 }
 img.line-box:hover {
   opacity: 0.8;
@@ -215,6 +215,28 @@ body, .box-bluedefault {
 }
 .toright {
   float: right;
+}
+.btn-text {
+  border: 0;
+  box-sizing: border-box;
+  color: #39f;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 32px;
+  line-height: 32px;
+  /*min-width: 64px;*/
+  padding: 0 8px;
+  text-align: center;
+  text-transform: uppercase;
+  /*vertical-align: middle;*/
+  background-color: transparent;
+  border-radius: 2px;
+  margin: 0 2px;
+}
+.btn-text:hover {
+  background-color: rgba(158,158,158,.2);
 }
 </style>
 <script type="text/javascript">
@@ -805,7 +827,7 @@ function VyberVstup()
                 {
 
 <?php  if( $dajfinvykazy == 1 ) { ?>
-        document.forms.formfin1a12.h_oc.value='<?php echo $kli_vmes; ?>'; 
+        document.forms.formfin1a12.h_oc.value='<?php echo $kli_vmes; ?>';
         document.forms.formfin204no16.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
         document.forms.formfin204pod16.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
         document.forms.formfin304.h_oc.value='<?php echo $cislo_stvrtrok; ?>';
@@ -1080,15 +1102,15 @@ $nazfin1a12="FIN 1-12";
 <img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=98&page=1&sysx=UCT', '_blank');"
      title="Nastaviť generovanie" class="toleft line-box box-brown">
 <?php if ( $kli_vrok < 2016 ) { ?>
-<img src='../obr/export.png' onclick="DbfFin1a12();" title="Export do DBF" class="toleft line-box box-red">
+  <button type="button" onclick="DbfFin1a12();" title="Export do DBF" class="btn-text toleft">DBF</button>
 <?php                         } ?>
 <?php if ( $kli_vrok >= 2016 ) { ?>
-<img src='../obr/export.png' onclick="DbfFin112nujpod();" title="Export do DBF" class="toleft line-box box-red">
+  <button type="button" onclick="DbfFin112nujpod();" title="Export do DBF" class="btn-text toleft">DBF</button>
 <?php                          } ?>
 <?php
 $nedaj=1;
 if ( $nedaj == 0 ) { ?>
-<img src='../obr/export.png' onclick="CsvFin1a12();" title="Export do CSV" class="toleft line-box box-red">
+  <button type="button" onclick="CsvFin1a12();" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php              } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin1a12();" title="Upraviť hodnoty" class="toleft line-box box-green">
 </FORM>
@@ -1114,7 +1136,10 @@ if ( $nedaj == 0 ) { ?>
 <img src='../obr/vlozit.png' onclick="ZnovuFin204no16();" title="Načítať údaje" class="toleft line-box box-lightblue">
 <img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=92&page=1&sysx=UCT', '_blank');"
      title="Nastaviť generovanie" class="toleft line-box box-brown">
-<img src='../obr/export.png' onclick="DbfFin204no16();" title="Export do DBF" class="toleft line-box box-red">
+  <button type="button" onclick="DbfFin204no16();" title="Export do DBF" class="btn-text toleft">DBF</button>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+  <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
+<?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin204no16();" title="Upraviť hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
@@ -1139,7 +1164,10 @@ if ( $nedaj == 0 ) { ?>
 <img src='../obr/vlozit.png' onclick="ZnovuFin204pod16();" title="Načítať údaje" class="toleft line-box box-lightblue">
 <img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=91&page=1&sysx=UCT', '_blank');"
      title="Nastaviť generovanie" class="toleft line-box box-brown">
-<img src='../obr/export.png' onclick="DbfFin204pod16();" title="Export do DBF" class="toleft line-box box-red">
+  <button type="button" onclick="DbfFin204pod16();" title="Export do DBF" class="btn-text toleft">DBF</button>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+  <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
+<?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin204pod16();" title="Upraviť hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
@@ -1164,7 +1192,10 @@ if ( $nedaj == 0 ) { ?>
 <img src='../obr/vlozit.png' onclick="ZnovuFin304();" title="Načítať údaje" class="toleft line-box box-lightblue">
 <img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=93&page=1&sysx=UCT', '_blank');"
      title="Nastaviť generovanie" class="toleft line-box box-brown">
-<img src='../obr/export.png' onclick="DbfFin304();" title="Export do DBF" class="toleft line-box box-red">
+  <button type="button" onclick="DbfFin304();" title="Export do DBF" class="btn-text toleft">DBF</button>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+  <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
+<?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin304();" title="Upraviť hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
@@ -1189,7 +1220,10 @@ if ( $nedaj == 0 ) { ?>
 <img src='../obr/vlozit.png' onclick="ZnovuFin404();" title="Načítať údaje" class="toleft line-box box-lightblue">
 <img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=94&page=1&sysx=UCT', '_blank');"
      title="Nastaviť generovanie" class="toleft line-box box-brown">
-<img src='../obr/export.png' onclick="DbfFin404();" title="Export do DBF" class="toleft line-box box-red">
+  <button type="button" onclick="DbfFin404();" title="Export do DBF" class="btn-text toleft">DBF</button>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+  <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
+<?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin404();" title="Upraviť hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
@@ -1213,7 +1247,10 @@ if ( $nedaj == 0 ) { ?>
 </div>
 <div class="toleft line-box"></div>
 <div class="toleft line-box"></div>
-<img src='../obr/export.png' onclick="DbfFin504();" title="Export do DBF" class="toleft line-box box-red">
+  <button type="button" onclick="DbfFin504();" title="Export do DBF" class="btn-text toleft">DBF</button>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+  <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
+<?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin504();" title="Upraviť hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
@@ -1241,7 +1278,10 @@ if ( $kli_vrok >= 2013 ) {
 <img src='../obr/vlozit.png' onclick="ZnovuFin604();" title="Načítať údaje" class="toleft line-box box-lightblue">
 <img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=96&page=1&sysx=UCT', '_blank');"
      title="Nastaviť generovanie" class="toleft line-box box-brown">
-<img src='../obr/export.png' onclick="DbfFin604();" title="Export do DBF" class="toleft line-box box-red">
+  <button type="button" onclick="DbfFin604();" title="Export do DBF" class="btn-text toleft">DBF</button>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+  <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
+<?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin604();" title="Upraviť hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
@@ -1266,7 +1306,10 @@ if ( $kli_vrok >= 2013 ) {
 <img src='../obr/vlozit.png' onclick="ZnovuFin704();" title="Načítať údaje" class="toleft line-box box-lightblue">
 <img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=97&page=1&sysx=UCT', '_blank');"
      title="Nastaviť generovanie" class="toleft line-box box-brown">
-<img src='../obr/export.png' onclick="DbfFin704();" title="Export do DBF" class="toleft line-box box-red">
+  <button type="button" onclick="DbfFin704();" title="Export do DBF" class="btn-text toleft">DBF</button>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+  <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
+<?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin704();" title="Upraviť hodnoty" class="toleft line-box box-green">
 </FORM>
 </div> <!-- .line-area -->
@@ -1279,7 +1322,7 @@ if ( $kli_vrok >= 2013 ) {
 ?>
 
 <?php
-if( $dajhlaodpad == 1 ) { 
+if( $dajhlaodpad == 1 ) {
 ?>
 <div class="line-area">
 <FORM name="formhlaodpad" method="post" action="#">
@@ -1344,7 +1387,7 @@ if( $dajhlaodpad == 1 ) {
 </div> <!-- .line-area -->
 <?php
 $dajhlaodpad=0;
-                        } 
+                        }
 ?>
 
 </div> <!-- .content -->
