@@ -67,10 +67,21 @@ $fir_ficox="00310000";
 $typorg="22";
 }
 
+$dat_bez = Date ("Ymdhi", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+$fico8=$fir_fico;
+if( $fico8 < 999999 ) { $fico8="00".$fico8; }
+$rokmes=$kli_vmes.$kli_vrok;
+
+//nazov
+$nazsub="FIN1_PO_OSVS_".$dat_bez.".csv";
+
+if (File_Exists ("../tmp/$nazsub")) { $soubor = unlink("../tmp/$nazsub"); }
+
+
 //////////////////////////////////////////////////////////// FIN 112p
 
 
-$sqlx = 'DROP TABLE prijdbf';
+$sqlx = "DROP TABLE prijdbf";
 $vysledx = mysql_query("$sqlx");
 
 $sqlx = "SELECT * FROM prijdbf";
@@ -81,19 +92,13 @@ if (!$vysledx)
 
 $sqlt = <<<prijdbf
 (
-okres           VARCHAR(3),
-ico             VARCHAR(8),
-kodob           VARCHAR(6),
-datrok          VARCHAR(4),
-datmes          VARCHAR(2),
-typorg          VARCHAR(2),
-cast            VARCHAR(1),
+cast            DECIMAL(1,0),
 zdroj           VARCHAR(4),
-pol             VARCHAR(3),
-podp            VARCHAR(3),
-rs00001         DECIMAL(12,2),
-rs00002         DECIMAL(12,2),
-rs00003         DECIMAL(12,2)
+polozka         VARCHAR(6),
+schvaleny       DECIMAL(12,2),
+zmeneny         DECIMAL(12,2),
+predpoklad      DECIMAL(12,2),
+skutocnost      DECIMAL(12,2)
 );
 prijdbf;
 
@@ -101,26 +106,20 @@ $sqlx = 'CREATE TABLE prijdbf'.$sqlt;
 $vysledx = mysql_query("$sqlx");
 
 
-$ttvv = "INSERT INTO prijdbf ( okres, ico, kodob, datrok, datmes, typorg, rs00101  ) ".
-" VALUES ( '205', '00310000', '504831', '2010', '03', '22', '65932'  )";
-//$ttqq = mysql_query("$ttvv");
-
 }
 //koniec vytvorenia
 
 //vloz vykaz do vytvorenej databazy
 
 $dsqlt = "INSERT INTO prijdbf "." SELECT".
-" okres,'$fir_ficox',obec,'$kli_vrok','$mesiac','$typorg',".
-" 1,zdroj,xpolozka,podpolozka,schvaleny,zmeneny,skutocnost ".
+" 1,zdroj,polozka,schvaleny,zmeneny,predpoklad,skutocnost ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 1 ORDER BY polozka";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO prijdbf "." SELECT".
-" okres,'$fir_ficox',obec,'$kli_vrok','$mesiac','$typorg',".
-" 3,zdroj,xpolozka,podpolozka,schvaleny,zmeneny,skutocnost ".
+" 3,zdroj,polozka,schvaleny,zmeneny,predpoklad,skutocnost ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
 " WHERE druh = 3 ORDER BY polozka";
 //echo $dsqlt;
@@ -139,20 +138,19 @@ $fico8=$fir_fico;
 if( $fico8 < 999999 ) { $fico8="00".$fico8; }
 $rokmes=$kli_vmes.$kli_vrok;
 
-//rozp.polozky
-$nazsub=$fico8."_PRI_N_".$kli_vrok."_".$dat_bez.".CSV";
-$nazsub="PRI_N_".$kli_vrok."_".$dat_bez.".CSV";
-
-if (File_Exists ("../tmp/$nazsub")) { $soubor = unlink("../tmp/$nazsub"); }
-
 $soubor = fopen("../tmp/$nazsub", "a+");
 
-$dotaz = "select * from prijdbf where cast = 1 order by cast,zdroj,pol,podp ";
-
+//rozp.polozky
+$dotaz = "select * from prijdbf where cast = 1 order by cast,zdroj,polozka ";
 
 $sql = mysql_query("$dotaz");
 $pol = mysql_num_rows($sql);
 //exit;
+
+$sumschvaleny=0;
+$sumzmeneny=0;
+$sumpredpoklad=0;
+$sumskutocnost=0;
 
 $i=0;
   while ($i <= $pol )
@@ -163,36 +161,38 @@ $i=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
+$sumschvaleny=$sumschvaleny+$hlavicka->schvaleny;
+$sumzmeneny=$sumzmeneny+$hlavicka->zmeneny;
+$sumpredpoklad=$sumpredpoklad+$hlavicka->predpoklad;
+$sumskutocnost=$sumskutocnost+$hlavicka->skutocnost;
+
 //hlavicka
 if( $i == 0 )
      {
 $obdobie=$kli_vmes;
 $dat_dat = Date ("Y-m-d-h-i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
-
-
-//111;ORG;20131203120001;pocet_poloziek_tela;
-//00327921;525359;2014;;
-
-
-  $text = "113;ORG;".$dat_bez.";".$pol."\r\n";
+  $text = "\"hlavicka,1\""."\r\n";
   fwrite($soubor, $text);
 
-  $text = $fico8.";".$hlavicka->kodob.";".$kli_vrok.";".$rokmes."\r\n";
+  $text = "\"ico\","."\"rok\","."\"mesiac\""."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"".$fico8."\","."\"".$kli_vrok."\","."\"".$kli_vmes."\""."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"prijmy,".$pol."\""."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"Sb\","."\"Sc\","."\"S1\","."\"S2\","."\"S3\","."\"S4\""."\r\n";
   fwrite($soubor, $text);
 
      }
 
 //polozky
-//081;0041;212;003;73690,5;93939;333.33;444.44;;;
 
-$hodrm1=""; $hodrp1=""; $hodrp2="";
-$rs00001=$hlavicka->rs00001; $rs00001=str_replace(".",",",$rs00001);
-$rs00002=$hlavicka->rs00002; $rs00002=str_replace(".",",",$rs00002);
-$rs00003=$hlavicka->rs00003; $rs00003=str_replace(".",",",$rs00003);
-
-  $text = "081;".$hlavicka->zdroj.";".$hlavicka->pol.";".$hlavicka->podp.";".$hodrm1.";".$rs00001.";".$hodrp1.";";
-  $text = $text.$hodrp2.";".$rs00002.";".$rs00003;
+  $text = "\"".$hlavicka->zdroj."\",\"".$hlavicka->polozka."\",\"".$hlavicka->schvaleny."\",\"".$hlavicka->zmeneny."\",\"";
+  $text = $text.$hlavicka->predpoklad."\",\"".$hlavicka->skutocnost."\"";
   $text = $text."\r\n";
 
   fwrite($soubor, $text);
@@ -202,23 +202,34 @@ $i = $i + 1;
   }
 
 
-fclose($soubor);
+//spolu
+  $text = "\"prijmy-spolu,1\""."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"S1\","."\"S2\","."\"S3\","."\"S4\""."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"".$sumschvaleny."\",\"".$sumzmeneny."\",\"";
+  $text = $text.$sumpredpoklad."\",\"".$sumskutocnost."\"";
+  $text = $text."\r\n";
+
+  fwrite($soubor, $text);
+
+
 //koniec rozp.polozky
 
 //nerozp.polozky
-$nazsub2=$fico8."_PRI_NP_".$kli_vrok."_".$dat_bez.".CSV";
-$nazsub2="PRI_NP_".$kli_vrok."_".$dat_bez.".CSV";
-
-if (File_Exists ("../tmp/$nazsub2")) { $soubor = unlink("../tmp/$nazsub2"); }
-
-$soubor = fopen("../tmp/$nazsub2", "a+");
-
-$dotaz = "select * from prijdbf where cast = 3 order by cast,zdroj,pol,podp ";
+$dotaz = "select * from prijdbf where cast = 3 order by cast,zdroj,polozka ";
 
 
 $sql = mysql_query("$dotaz");
 $pol = mysql_num_rows($sql);
 //exit;
+
+$sumschvaleny=0;
+$sumzmeneny=0;
+$sumpredpoklad=0;
+$sumskutocnost=0;
 
 $i=0;
   while ($i <= $pol )
@@ -229,47 +240,53 @@ $i=0;
 {
 $hlavicka=mysql_fetch_object($sql);
 
+$sumschvaleny=$sumschvaleny+$hlavicka->schvaleny;
+$sumzmeneny=$sumzmeneny+$hlavicka->zmeneny;
+$sumpredpoklad=$sumpredpoklad+$hlavicka->predpoklad;
+$sumskutocnost=$sumskutocnost+$hlavicka->skutocnost;
+
 //hlavicka
 if( $i == 0 )
      {
-$obdobie=$kli_vmes;
-$dat_dat = Date ("Y-m-d-h-i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
-
-
-//111;ORG;20131203120001;pocet_poloziek_tela;
-//00327921;525359;2014;;
-
-
-  $text = "133;ORG;".$dat_bez.";".$pol."\r\n";
+  $text = "\"prijmy-fo,".$pol."\""."\r\n";
   fwrite($soubor, $text);
 
-  $text = $fico8.";".$hlavicka->kodob.";".$kli_vrok.";".$rokmes."\r\n";
+  $text = "\"Sb\","."\"Sc\","."\"S1\","."\"S2\","."\"S3\","."\"S4\""."\r\n";
   fwrite($soubor, $text);
 
      }
 
 //polozky
-//081;0041;212;003;73690,5;93939;333.33;444.44;;;
 
-$hodrm1=""; $hodrp1=""; $hodrp2="";
-$rs00003=$hlavicka->rs00003; $rs00003=str_replace(".",",",$rs00003);
-
-
-  $text = "081;".$hlavicka->pol.";".$hlavicka->podp.";".$rs00003;
+  $text = "\"".$hlavicka->zdroj."\",\"".$hlavicka->polozka."\",\"".$hlavicka->schvaleny."\",\"".$hlavicka->zmeneny."\",\"";
+  $text = $text.$hlavicka->predpoklad."\",\"".$hlavicka->skutocnost."\"";
   $text = $text."\r\n";
 
   fwrite($soubor, $text);
+
+
 
 }
 $i = $i + 1;
   }
 
+//spolu
+  $text = "\"prijmy-fo-spolu,1\""."\r\n";
+  fwrite($soubor, $text);
 
-fclose($soubor);
+  $text = "\"S1\","."\"S2\","."\"S3\","."\"S4\""."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"".$sumschvaleny."\",\"".$sumzmeneny."\",\"";
+  $text = $text.$sumpredpoklad."\",\"".$sumskutocnost."\"";
+  $text = $text."\r\n";
+
+  fwrite($soubor, $text);
+
 //koniec nerozp.polozky
 
-$sqlx = 'DROP TABLE prijdbf';
+$sqlx = "DROP TABLE prijdbf";
 //$vysledx = mysql_query("$sqlx");
 
 
@@ -341,15 +358,7 @@ $dsql = mysql_query("$dsqlt");
 
 
 //rozp.polozky
-$nazsub3=$fico8."_VYD_N_".$kli_vrok."_".$dat_bez.".CSV";
-$nazsub3="VYD_N_".$kli_vrok."_".$dat_bez.".CSV";
-
-if (File_Exists ("../tmp/$nazsub3")) { $soubor = unlink("../tmp/$nazsub3"); }
-
-$soubor = fopen("../tmp/$nazsub3", "a+");
-
-$dotaz = "select * from vyddbf where cast = 1 order by cast,zdroj,pol,podp ";
-
+$dotaz = "select * from vyddbf where cast = 1 order by cast,zdroj,pol,podpddd ";
 
 $sql = mysql_query("$dotaz");
 $pol = mysql_num_rows($sql);
@@ -363,26 +372,6 @@ $i=0;
   if (@$zaznam=mysql_data_seek($sql,$i))
 {
 $hlavicka=mysql_fetch_object($sql);
-
-//hlavicka
-if( $i == 0 )
-     {
-$obdobie=$kli_vmes;
-$dat_dat = Date ("Y-m-d-h-i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-
-
-
-//111;ORG;20131203120001;pocet_poloziek_tela;
-//00327921;525359;2014;;
-
-
-  $text = "123;ORG;".$dat_bez.";".$pol."\r\n";
-  fwrite($soubor, $text);
-
-  $text = $fico8.";".$hlavicka->kodob.";".$kli_vrok.";".$rokmes."\r\n";
-  fwrite($soubor, $text);
-
-     }
 
 //polozky
 //081;0041;212;003;73690,5;93939;333.33;444.44;;;
@@ -407,20 +396,10 @@ $podprog=""; $projekt="";
 $i = $i + 1;
   }
 
-
-fclose($soubor);
 //koniec rozp.polozky
 
 //nerozp.polozky
-$nazsub4=$fico8."_VYD_NP_".$kli_vrok."_".$dat_bez.".CSV";
-$nazsub4="VYD_NP_".$kli_vrok."_".$dat_bez.".CSV";
-
-if (File_Exists ("../tmp/$nazsub4")) { $soubor = unlink("../tmp/$nazsub4"); }
-
-$soubor = fopen("../tmp/$nazsub4", "a+");
-
-$dotaz = "select * from vyddbf where cast = 4 order by cast,zdroj,pol,podp,odd,skup,trieda,podtr ";
-
+$dotaz = "select * from vyddbf where cast = 4 order by cast,zdroj,pol,podp,odd,skup,trieda,podtrddd ";
 
 $sql = mysql_query("$dotaz");
 $pol = mysql_num_rows($sql);
@@ -434,26 +413,6 @@ $i=0;
   if (@$zaznam=mysql_data_seek($sql,$i))
 {
 $hlavicka=mysql_fetch_object($sql);
-
-//hlavicka
-if( $i == 0 )
-     {
-$obdobie=$kli_vmes;
-$dat_dat = Date ("Y-m-d-h-i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-
-
-
-//111;ORG;20131203120001;pocet_poloziek_tela;
-//00327921;525359;2014;;
-
-
-  $text = "143;ORG;".$dat_bez.";".$pol."\r\n";
-  fwrite($soubor, $text);
-
-  $text = $fico8.";".$hlavicka->kodob.";".$kli_vrok.";".$rokmes."\r\n";
-  fwrite($soubor, $text);
-
-     }
 
 //polozky
 //081;0041;212;003;73690,5;93939;333.33;444.44;;;
@@ -489,46 +448,18 @@ $sqlx = 'DROP TABLE vyddbf';
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
-<title>DBF</title>
+<title>CSV</title>
   <style type="text/css">
-
   </style>
-<script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height;
-var sirkawic = screen.width-10;
-
-
-
-function VyberVstup()
-                {
-
-                }
-
-
-function TlacPrehlad()
-                {
-var h_oc = document.forms.formp2.h_oc.value;
-var h_fmzdy = document.forms.formp2.h_fmzdy.value;
-
-window.open('../mzdy/prehlad_dane.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-                }
-
-
-    
+<script type="text/javascript">   
 </script>
 </HEAD>
-<BODY class="white" onload="VyberVstup();">
-
-
+<BODY class="white">
 
 
 <table class="h2" width="100%" >
 <tr>
-<td>EuroSecom  -  FIN 1a-12 CSV</td>
+<td>EuroSecom  -  FIN 1a-12 CSV súbor FIN1_PO_OSVS.csv</td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
 </table>
@@ -541,22 +472,10 @@ if( $copern == 1 )
 ?>
 <br />
 <br />
-Stiahnite si nižšie uvedené súbory na Váš lokálny disk  :
+Stiahnite si nižšie uvedený súbor na Váš lokálny disk :
 <br />
 <br />
-<a href="../tmp/<?php echo $nazsub; ?>">Rozpoètované príjmy <?php echo $nazsub; ?></a>
-<br />
-<br />
-<a href="../tmp/<?php echo $nazsub2; ?>">Nerozpoètované prímy <?php echo $nazsub2; ?></a>
-<br />
-<br />
-<a href="../tmp/<?php echo $nazsub3; ?>">Rozpoètované výdavky <?php echo $nazsub3; ?></a>
-<br />
-<br />
-<a href="../tmp/<?php echo $nazsub4; ?>">Nerozpoètované výdavky <?php echo $nazsub4; ?></a>
-<br />
-<br />
-
+<a href="../tmp/<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>
 <br />
 <br />
 <?php

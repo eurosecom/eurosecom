@@ -1108,7 +1108,7 @@ $nazfin1a12="FIN 1-12";
   <button type="button" onclick="DbfFin112nujpod();" title="Export do DBF" class="btn-text toleft">DBF</button>
 <?php                          } ?>
 <?php
-$nedaj=1;
+$nedaj=0;
 if ( $nedaj == 0 ) { ?>
   <button type="button" onclick="CsvFin1a12();" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php              } ?>
@@ -1137,7 +1137,7 @@ if ( $nedaj == 0 ) { ?>
 <img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=92&page=1&sysx=UCT', '_blank');"
      title="Nastavi generovanie" class="toleft line-box box-brown">
   <button type="button" onclick="DbfFin204no16();" title="Export do DBF" class="btn-text toleft">DBF</button>
-<?php if ( $kli_vrok >= 2018 ) { ?>
+<?php if ( $kli_vrok >= 2017 ) { ?>
   <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin204no16();" title="Upravi hodnoty" class="toleft line-box box-green">
@@ -1165,7 +1165,7 @@ if ( $nedaj == 0 ) { ?>
 <img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=91&page=1&sysx=UCT', '_blank');"
      title="Nastavi generovanie" class="toleft line-box box-brown">
   <button type="button" onclick="DbfFin204pod16();" title="Export do DBF" class="btn-text toleft">DBF</button>
-<?php if ( $kli_vrok >= 2018 ) { ?>
+<?php if ( $kli_vrok >= 2017 ) { ?>
   <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin204pod16();" title="Upravi hodnoty" class="toleft line-box box-green">
@@ -1193,7 +1193,7 @@ if ( $nedaj == 0 ) { ?>
 <img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=93&page=1&sysx=UCT', '_blank');"
      title="Nastavi generovanie" class="toleft line-box box-brown">
   <button type="button" onclick="DbfFin304();" title="Export do DBF" class="btn-text toleft">DBF</button>
-<?php if ( $kli_vrok >= 2018 ) { ?>
+<?php if ( $kli_vrok >= 2017 ) { ?>
   <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin304();" title="Upravi hodnoty" class="toleft line-box box-green">
@@ -1221,7 +1221,7 @@ if ( $nedaj == 0 ) { ?>
 <img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=94&page=1&sysx=UCT', '_blank');"
      title="Nastavi generovanie" class="toleft line-box box-brown">
   <button type="button" onclick="DbfFin404();" title="Export do DBF" class="btn-text toleft">DBF</button>
-<?php if ( $kli_vrok >= 2018 ) { ?>
+<?php if ( $kli_vrok >= 2017 ) { ?>
   <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin404();" title="Upravi hodnoty" class="toleft line-box box-green">
@@ -1248,7 +1248,7 @@ if ( $nedaj == 0 ) { ?>
 <div class="toleft line-box"></div>
 <div class="toleft line-box"></div>
   <button type="button" onclick="DbfFin504();" title="Export do DBF" class="btn-text toleft">DBF</button>
-<?php if ( $kli_vrok >= 2018 ) { ?>
+<?php if ( $kli_vrok >= 2017 ) { ?>
   <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin504();" title="Upravi hodnoty" class="toleft line-box box-green">
@@ -1279,7 +1279,7 @@ if ( $kli_vrok >= 2013 ) {
 <img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=96&page=1&sysx=UCT', '_blank');"
      title="Nastavi generovanie" class="toleft line-box box-brown">
   <button type="button" onclick="DbfFin604();" title="Export do DBF" class="btn-text toleft">DBF</button>
-<?php if ( $kli_vrok >= 2018 ) { ?>
+<?php if ( $kli_vrok >= 2017 ) { ?>
   <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin604();" title="Upravi hodnoty" class="toleft line-box box-green">
@@ -1307,7 +1307,7 @@ if ( $kli_vrok >= 2013 ) {
 <img src='../obr/naradie.png' onclick="window.open('../ucto/fin_cis.php?copern=308&drupoh=97&page=1&sysx=UCT', '_blank');"
      title="Nastavi generovanie" class="toleft line-box box-brown">
   <button type="button" onclick="DbfFin704();" title="Export do DBF" class="btn-text toleft">DBF</button>
-<?php if ( $kli_vrok >= 2018 ) { ?>
+<?php if ( $kli_vrok >= 2017 ) { ?>
   <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin704();" title="Upravi hodnoty" class="toleft line-box box-green">
