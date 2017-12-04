@@ -787,7 +787,7 @@ var h_oc = document.forms.formfin1a12.h_oc.value;
 var h_fmzdy = 0;
 
 
-window.open('fin1a12csv.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+window.open('vykaz_fin112_csv.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
