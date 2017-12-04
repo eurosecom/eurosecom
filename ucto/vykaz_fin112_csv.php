@@ -172,6 +172,9 @@ if( $i == 0 )
 $obdobie=$kli_vmes;
 $dat_dat = Date ("Y-m-d-h-i", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
+  $text = "\r\n";
+  fwrite($soubor, $text);
+
   $text = "\"hlavicka,1\""."\r\n";
   fwrite($soubor, $text);
 
@@ -179,6 +182,9 @@ $dat_dat = Date ("Y-m-d-h-i", MkTime (date("H"),date("i"),date("s"),date("m"),da
   fwrite($soubor, $text);
 
   $text = "\"".$fico8."\","."\"".$kli_vrok."\","."\"".$kli_vmes."\""."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\r\n";
   fwrite($soubor, $text);
 
   $text = "\"prijmy,".$pol."\""."\r\n";
@@ -203,6 +209,9 @@ $i = $i + 1;
 
 
 //spolu
+  $text = "\r\n";
+  fwrite($soubor, $text);
+
   $text = "\"prijmy-spolu,1\""."\r\n";
   fwrite($soubor, $text);
 
@@ -249,6 +258,9 @@ $sumskutocnost=$sumskutocnost+$hlavicka->skutocnost;
 if( $i == 0 )
      {
 
+  $text = "\r\n";
+  fwrite($soubor, $text);
+
   $text = "\"prijmy-fo,".$pol."\""."\r\n";
   fwrite($soubor, $text);
 
@@ -272,6 +284,9 @@ $i = $i + 1;
   }
 
 //spolu
+  $text = "\r\n";
+  fwrite($soubor, $text);
+
   $text = "\"prijmy-fo-spolu,1\""."\r\n";
   fwrite($soubor, $text);
 
@@ -371,6 +386,9 @@ $sumskutocnost=$sumskutocnost+$hlavicka->skutocnost;
 if( $i == 0 )
      {
 
+  $text = "\r\n";
+  fwrite($soubor, $text);
+
   $text = "\"vydavky,".$pol."\""."\r\n";
   fwrite($soubor, $text);
 
@@ -393,6 +411,9 @@ $i = $i + 1;
   }
 
 //spolu
+  $text = "\r\n";
+  fwrite($soubor, $text);
+
   $text = "\"vydavky-spolu,1\""."\r\n";
   fwrite($soubor, $text);
 
@@ -437,6 +458,9 @@ $sumskutocnost=$sumskutocnost+$hlavicka->skutocnost;
 if( $i == 0 )
      {
 
+  $text = "\r\n";
+  fwrite($soubor, $text);
+
   $text = "\"vydavky-fo,".$pol."\""."\r\n";
   fwrite($soubor, $text);
 
@@ -459,6 +483,9 @@ $i = $i + 1;
   }
 
 //spolu
+  $text = "\r\n";
+  fwrite($soubor, $text);
+
   $text = "\"vydavky-fo-spolu,1\""."\r\n";
   fwrite($soubor, $text);
 
