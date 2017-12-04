@@ -83,7 +83,7 @@ $sql = 'CREATE TABLE F'.$kli_vxcf.'_genfin704'.$sqlt;
 $vysledek = mysql_query("$sql");
 
 
-$sqult = "INSERT INTO F$kli_vxcf"."_genfin704 ( uce,crs ) VALUES ( '601', '1' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin704 ( uce,crs ) VALUES ( '601', '1' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin704 ( uce,crs ) VALUES ( '602', '1' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin704 ( uce,crs ) VALUES ( '604', '2' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin704 ( uce,crs ) VALUES ( '504', '3' ); "; $ulozene = mysql_query("$sqult");
@@ -208,7 +208,7 @@ $daz_sql = SqlDatum($daz);
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin704 SET ".
 " daz='$daz_sql' ".
-" WHERE oc = $cislo_oc"; 
+" WHERE oc = $cislo_oc";
                     }
 
 if ( $strana == 2 ) {
@@ -265,10 +265,10 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin704 SET ".
   r31='$r31', rm31='$rm31', r32='$r32', rm32='$rm32', r33='$r33', rm33='$rm33',
   r34='$r34', rm34='$rm34', r35='$r35', rm35='$rm35', r36='$r36', rm36='$rm36',
   r37='$r37', rm37='$rm37', r38='$r38', rm38='$rm38' ".
-" WHERE oc = $cislo_oc"; 
+" WHERE oc = $cislo_oc";
                     }
 //echo $uprtxt;
-$upravene = mysql_query("$uprtxt");  
+$upravene = mysql_query("$uprtxt");
 
 $nepoc = 1*$_REQUEST['nepoc'];
 $vsetkyprepocty=1;
@@ -286,7 +286,7 @@ endif;
      }
 //koniec zapisu upravenych udajov
 
-//prac.subor a subor 
+//prac.subor a subor
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykaz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykazx'.$kli_uzid;
@@ -408,7 +408,7 @@ mzdprc;
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctvykaz_fin704'.$sqlt;
 $vytvor = mysql_query("$vsql");
 }
-//koniec vytvorenie 
+//koniec vytvorenie
 
 
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctprcvykaz'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctvykaz_fin704";
@@ -462,7 +462,7 @@ $dtb2 = include("../cis/oddel_dtbz1.php");
 //$sqtoz = "UPDATE F$kli_vxcf"."_vyhlaseniedane,".$databaza."F$kli_vmcf"."_vyhlaseniedane SET ".
 
 $psys=1;
-while ($psys <= 9 ) 
+while ($psys <= 9 )
   {
 //zober prijmove pokl
 if( $psys == 1 ) { $uctovanie="uctpokuct"; $doklad="pokpri"; }
@@ -681,23 +681,23 @@ exit;
 //rozdel do riadkov , vypocitaj netto
 
 $rdk=1;
-while ($rdk <= 38 ) 
+while ($rdk <= 38 )
   {
 $crdk=$rdk;
 if( $rdk < 10 ) $crdk="0".$rdk;
 
 $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=mdt-dal WHERE rdk = $rdk AND kor = 0 ";
-if( $rdk == 1 OR $rdk == 2 OR $rdk == 4 OR $rdk == 5 OR $rdk == 20 OR $rdk == 23 OR $rdk == 24 OR $rdk == 25 OR $rdk == 28 OR $rdk == 29 OR $rdk == 31 OR $rdk == 33 OR $rdk == 35 OR $rdk == 38 ) 
-  { 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=dal-mdt WHERE rdk = $rdk AND kor = 0 "; 
+if( $rdk == 1 OR $rdk == 2 OR $rdk == 4 OR $rdk == 5 OR $rdk == 20 OR $rdk == 23 OR $rdk == 24 OR $rdk == 25 OR $rdk == 28 OR $rdk == 29 OR $rdk == 31 OR $rdk == 33 OR $rdk == 35 OR $rdk == 38 )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET r$crdk=dal-mdt WHERE rdk = $rdk AND kor = 0 ";
   }
 $oznac = mysql_query("$sqtoz");
 
 
 $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rm$crdk=mdt-dal WHERE rdk = $rdk AND kor = 1 ";
-if( $rdk == 1 OR $rdk == 2 OR $rdk == 4 OR $rdk == 5 OR $rdk == 20 OR $rdk == 23 OR $rdk == 24 OR $rdk == 25 OR $rdk == 28 OR $rdk == 29 OR $rdk == 31 OR $rdk == 33 OR $rdk == 35 OR $rdk == 38 ) 
-  { 
-$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rm$crdk=dal-mdt WHERE rdk = $rdk AND kor = 1 "; 
+if( $rdk == 1 OR $rdk == 2 OR $rdk == 4 OR $rdk == 5 OR $rdk == 20 OR $rdk == 23 OR $rdk == 24 OR $rdk == 25 OR $rdk == 28 OR $rdk == 29 OR $rdk == 31 OR $rdk == 33 OR $rdk == 35 OR $rdk == 38 )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid SET rm$crdk=dal-mdt WHERE rdk = $rdk AND kor = 1 ";
   }
 $oznac = mysql_query("$sqtoz");
 
@@ -732,7 +732,7 @@ $dsql = mysql_query("$dsqlt");
 
 /////////////////////////////////koniec naCITAJ HODNOTY
 
-//uloz 
+//uloz
 $sqtoz = "DELETE FROM F$kli_vxcf"."_uctvykaz_fin704 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 
@@ -746,7 +746,7 @@ $dsql = mysql_query("$dsqlt");
 
 
 }
-//koniec pracovneho suboru pre rocne 
+//koniec pracovneho suboru pre rocne
 
 //vypocty
 if ( $copern == 10 OR $copern == 20 )
@@ -904,12 +904,35 @@ div.input-echo {
   background-color: #fff;
   font-weight: bold;
 }
+img.btn-form-tool {
+  margin: 0 8px;
+}
+.btn-text {
+  border: 0;
+  box-sizing: border-box;
+  color: #39f;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 6px;
+  text-align: center;
+  text-transform: uppercase;
+  /*vertical-align: middle;*/
+  background-color: transparent;
+  border-radius: 2px;
+}
+.btn-text:hover {
+  background-color: rgba(158,158,158,.2);
+}
 </style>
 <script type="text/javascript">
 <?php
 //uprava sadzby
   if ( $copern == 20 )
-  { 
+  {
 ?>
   function ObnovUI()
   {
@@ -1002,7 +1025,7 @@ div.input-echo {
 ?>
 <?php
   if ( $copern != 20 )
-  { 
+  {
 ?>
   function ObnovUI()
   {
@@ -1060,8 +1083,11 @@ if ( $copern == 20 )
   <td>
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
+    <button type="button" onclick="DbfFin704();" title="Export do DBF" class="btn-text toright" style="position: relative; top: -4px;">DBF</button>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+    <button type="button" onclick="" title="Export do CSV" class="btn-text toright" style="position: relative; top: -4px;">CSV</button>
+<?php } ?>
     <img src="../obr/ikony/download_blue_icon.png" onclick="Nacitaj();" title="Naèíta údaje" class="btn-form-tool">
-    <img src="../obr/ikony/upbox_blue_icon.png" onclick="DbfFin704();" title="Export do DBF" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
@@ -1859,7 +1885,7 @@ $pdf->Output("$outfilex");
 
 <?php
 }
-/////////////////////////////////////////KONIEC VYTLACENIA 
+/////////////////////////////////////////KONIEC VYTLACENIA
 ?>
 
 <?php

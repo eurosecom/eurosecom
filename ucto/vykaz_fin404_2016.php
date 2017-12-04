@@ -81,15 +81,15 @@ crf204nuj_no;
 $sql = 'CREATE TABLE F'.$kli_vxcf.'_genfin404'.$sqlt;
 $vysledek = mysql_query("$sql");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '241', '1' ); "; $ulozene = mysql_query("$sqult"); 
-$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '473', '1' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '241', '1' ); "; $ulozene = mysql_query("$sqult");
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '473', '1' ); "; $ulozene = mysql_query("$sqult");
 
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '322', '3' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '473', '3' ); "; $ulozene = mysql_query("$sqult");
 
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '461', '7' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '231', '7' ); "; $ulozene = mysql_query("$sqult");
-$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '232', '7' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '232', '7' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin404 ( uce,crs ) VALUES ( '562', '8' ); "; $ulozene = mysql_query("$sqult");
 
 $nacitajgen = 1*$_REQUEST['nacitajgen'];
@@ -134,7 +134,7 @@ $daz_sql = SqlDatum($daz);
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin404 SET ".
 " daz='$daz_sql' ".
-" WHERE oc = $cislo_oc"; 
+" WHERE oc = $cislo_oc";
                     }
 
 if ( $strana == 2 ) {
@@ -222,7 +222,7 @@ $zoss10 = 1*$_REQUEST['zoss10'];
 $zoss11 = 1*$_REQUEST['zoss11'];
 $zoss12 = 1*$_REQUEST['zoss12'];
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin404 SET ".
-" znis01='$znis01', znis02='$znis02', znis03='$znis03', znis04='$znis04', 
+" znis01='$znis01', znis02='$znis02', znis03='$znis03', znis04='$znis04',
   znis07='$znis07', znis08='$znis08', znis09='$znis09', znis10='$znis10',
   znis11='$znis11', znis12='$znis12',
   oces01='$oces01', oces02='$oces02', oces03='$oces03', oces04='$oces04', oces05='$oces05',
@@ -238,7 +238,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin404 SET ".
                     }
 
 //echo $uprtxt;
-$upravene = mysql_query("$uprtxt");  
+$upravene = mysql_query("$uprtxt");
 
 $nepoc = 1*$_REQUEST['nepoc'];
 $vsetkyprepocty=1;
@@ -256,7 +256,7 @@ endif;
      }
 //koniec zapisu upravenych udajov
 
-//prac.subor a subor 
+//prac.subor a subor
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykaz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykazx'.$kli_uzid;
@@ -376,7 +376,7 @@ mzdprc;
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctvykaz_fin404'.$sqlt;
 $vytvor = mysql_query("$vsql");
 }
-//koniec vytvorenie 
+//koniec vytvorenie
 
 
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctprcvykaz'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctvykaz_fin404";
@@ -455,7 +455,7 @@ $dsql = mysql_query("$dsqlt");
 //exit;
 
 $psys=1;
-while ($psys <= 9 ) 
+while ($psys <= 9 )
   {
 //zober prijmove pokl
 if( $psys == 1 ) { $uctovanie="uctpokuct"; $doklad="pokpri"; }
@@ -555,10 +555,10 @@ $oznac = mysql_query("$sqtoz");
 //exit;
 
 
-//rozdel do riadkov 
+//rozdel do riadkov
 
 $rdk=1;
-while ($rdk <= 12 ) 
+while ($rdk <= 12 )
   {
 $crdk=$rdk;
 if( $rdk < 10 ) $crdk="0".$rdk;
@@ -600,7 +600,7 @@ $dsql = mysql_query("$dsqlt");
 
 /////////////////////////////////koniec naCITAJ HODNOTY
 
-//uloz 
+//uloz
 $sqtoz = "DELETE FROM F$kli_vxcf"."_uctvykaz_fin404 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 
@@ -614,7 +614,7 @@ $dsql = mysql_query("$dsqlt");
 
 //exit;
 }
-//koniec pracovneho suboru pre rocne 
+//koniec pracovneho suboru pre rocne
 
 //vypocty
 if ( $copern == 10 OR $copern == 20 )
@@ -847,12 +847,35 @@ div.input-echo {
   background-color: #fff;
   font-weight: bold;
 }
+img.btn-form-tool {
+  margin: 0 8px;
+}
+.btn-text {
+  border: 0;
+  box-sizing: border-box;
+  color: #39f;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 6px;
+  text-align: center;
+  text-transform: uppercase;
+  /*vertical-align: middle;*/
+  background-color: transparent;
+  border-radius: 2px;
+}
+.btn-text:hover {
+  background-color: rgba(158,158,158,.2);
+}
 </style>
 <script type="text/javascript">
 <?php
 //uprava sadzby
   if ( $copern == 20 )
-  { 
+  {
 ?>
   function ObnovUI()
   {
@@ -942,7 +965,7 @@ div.input-echo {
 ?>
 <?php
   if ( $copern != 20 )
-  { 
+  {
 ?>
   function ObnovUI()
   {
@@ -999,8 +1022,11 @@ if ( $copern == 20 )
   <td>
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
+    <button type="button" onclick="DbfFin404();" title="Export do DBF" class="btn-text toright" style="position: relative; top: -4px;">DBF</button>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+    <button type="button" onclick="" title="Export do CSV" class="btn-text toright" style="position: relative; top: -4px;">CSV</button>
+<?php } ?>
     <img src="../obr/ikony/download_blue_icon.png" onclick="Nacitaj();" title="Naèíta údaje" class="btn-form-tool">
-    <img src="../obr/ikony/upbox_blue_icon.png" onclick="DbfFin404();" title="Export do DBF" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
@@ -2109,7 +2135,7 @@ $pdf->Output("../tmp/vykazfin.$kli_uzid.pdf");
 
 <?php
 }
-/////////////////////////////////////////KONIEC VYTLACENIA 
+/////////////////////////////////////////KONIEC VYTLACENIA
 ?>
 
 <?php

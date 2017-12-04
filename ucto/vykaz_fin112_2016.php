@@ -962,6 +962,9 @@ a.btn-down-x26:hover {
   -khtml-opacity: 1;
   opacity: 1;
 }
+img.btn-form-tool {
+  margin: 0 8px;
+}
 .btn-text {
   border: 0;
   box-sizing: border-box;
@@ -972,8 +975,7 @@ a.btn-down-x26:hover {
   font-weight: 500;
   height: 28px;
   line-height: 28px;
-  /*min-width: 64px;*/
-  padding: 0 8px;
+  padding: 0 6px;
   text-align: center;
   text-transform: uppercase;
   /*vertical-align: middle;*/
@@ -983,8 +985,6 @@ a.btn-down-x26:hover {
 .btn-text:hover {
   background-color: rgba(158,158,158,.2);
 }
-
-
 </style>
 <script type="text/javascript">
 <?php
@@ -1284,7 +1284,9 @@ if ( $copern == 20 )
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
     <button type="button" onclick="DbfFin112nujpod();" title="Export do DBF" class="btn-text toright" style="position: relative; top: -4px;">DBF</button>
-    <button type="button" onclick="CsvFin1a12();" title="Export do CSV" class="btn-text toright" style="position: relative; top: -4px; margin-left: 12px;">CSV</button>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+    <button type="button" onclick="CsvFin1a12();" title="Export do CSV" class="btn-text toright" style="position: relative; top: -4px;">CSV</button>
+<?php } ?>
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>

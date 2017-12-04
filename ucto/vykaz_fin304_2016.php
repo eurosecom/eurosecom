@@ -81,7 +81,7 @@ crf204nuj_no;
 $sql = 'CREATE TABLE F'.$kli_vxcf.'_genfin304'.$sqlt;
 $vysledek = mysql_query("$sql");
 
-$sqult = "INSERT INTO F$kli_vxcf"."_genfin304 ( uce,crs ) VALUES ( '251', '2' ); "; $ulozene = mysql_query("$sqult"); 
+$sqult = "INSERT INTO F$kli_vxcf"."_genfin304 ( uce,crs ) VALUES ( '251', '2' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin304 ( uce,crs ) VALUES ( '257', '2' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin304 ( uce,crs ) VALUES ( '291', '2' ); "; $ulozene = mysql_query("$sqult");
 $sqult = "INSERT INTO F$kli_vxcf"."_genfin304 ( uce,crs ) VALUES ( '061', '2' ); "; $ulozene = mysql_query("$sqult");
@@ -144,7 +144,7 @@ $daz_sql = SqlDatum($daz);
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin304 SET ".
 " daz='$daz_sql' ".
-" WHERE oc = $cislo_oc"; 
+" WHERE oc = $cislo_oc";
                     }
 
 if ( $strana == 2 ) {
@@ -230,7 +230,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin304 SET ".
                     }
 
 //echo $uprtxt;
-$upravene = mysql_query("$uprtxt");  
+$upravene = mysql_query("$uprtxt");
 
 $nepoc = 1*$_REQUEST['nepoc'];
 $vsetkyprepocty=1;
@@ -248,7 +248,7 @@ endif;
      }
 //koniec zapisu upravenych udajov
 
-//prac.subor a subor 
+//prac.subor a subor
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykaz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykazx'.$kli_uzid;
@@ -356,7 +356,7 @@ mzdprc;
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctvykaz_fin304'.$sqlt;
 $vytvor = mysql_query("$vsql");
 }
-//koniec vytvorenie 
+//koniec vytvorenie
 
 
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctprcvykaz'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_uctvykaz_fin304";
@@ -435,7 +435,7 @@ $dsql = mysql_query("$dsqlt");
 //exit;
 
 $psys=1;
-while ($psys <= 9 ) 
+while ($psys <= 9 )
   {
 //zober prijmove pokl
 if( $psys == 1 ) { $uctovanie="uctpokuct"; $doklad="pokpri"; }
@@ -534,10 +534,10 @@ $sqtoz = "UPDATE F$kli_vxcf"."_uctprcvykaz$kli_uzid,F$kli_vxcf"."_genfin304".
 $oznac = mysql_query("$sqtoz");
 //exit;
 
-//rozdel do riadkov 
+//rozdel do riadkov
 
 $rdk=1;
-while ($rdk <= 10 ) 
+while ($rdk <= 10 )
   {
 $crdk=$rdk;
 if( $rdk < 10 ) $crdk="0".$rdk;
@@ -595,7 +595,7 @@ $sqtoz = "DROP TABLE F$kli_vxcf"."_prcfinneg$kli_uzid ";
 //$oznac = mysql_query("$sqtoz");
 exit;
           }
-//koniec vypis 
+//koniec vypis
 
 
 //sumar za riadky
@@ -619,7 +619,7 @@ $dsql = mysql_query("$dsqlt");
 
 /////////////////////////////////koniec naCITAJ HODNOTY
 
-//uloz 
+//uloz
 $sqtoz = "DELETE FROM F$kli_vxcf"."_uctvykaz_fin304 WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
 
@@ -633,7 +633,7 @@ $dsql = mysql_query("$dsqlt");
 
 
 }
-//koniec pracovneho suboru pre rocne 
+//koniec pracovneho suboru pre rocne
 
 //vypocty
 if ( $copern == 10 OR $copern == 20 )
@@ -868,12 +868,35 @@ div.input-echo {
   background-color: #fff;
   font-weight: bold;
 }
+img.btn-form-tool {
+  margin: 0 8px;
+}
+.btn-text {
+  border: 0;
+  box-sizing: border-box;
+  color: #39f;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 6px;
+  text-align: center;
+  text-transform: uppercase;
+  /*vertical-align: middle;*/
+  background-color: transparent;
+  border-radius: 2px;
+}
+.btn-text:hover {
+  background-color: rgba(158,158,158,.2);
+}
 </style>
 <script type="text/javascript">
 <?php
 //uprava sadzby
   if ( $copern == 20 )
-  { 
+  {
 ?>
   function ObnovUI()
   {
@@ -953,7 +976,7 @@ div.input-echo {
 ?>
 <?php
   if ( $copern != 20 )
-  { 
+  {
 ?>
   function ObnovUI()
   {
@@ -1010,8 +1033,11 @@ if ( $copern == 20 )
   <td>
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
+    <button type="button" onclick="DbfFin304();" title="Export do DBF" class="btn-text toright" style="position: relative; top: -4px;">DBF</button>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+    <button type="button" onclick="" title="Export do CSV" class="btn-text toright" style="position: relative; top: -4px;">CSV</button>
+<?php } ?>
     <img src="../obr/ikony/download_blue_icon.png" onclick="Nacitaj();" title="Naèíta údaje" class="btn-form-tool">
-    <img src="../obr/ikony/upbox_blue_icon.png" onclick="DbfFin304();" title="Export do DBF" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
@@ -2073,7 +2099,7 @@ $pdf->Output("../tmp/vykazfin.$kli_uzid.pdf");
 
 <?php
 }
-/////////////////////////////////////////KONIEC VYTLACENIA 
+/////////////////////////////////////////KONIEC VYTLACENIA
 ?>
 
 <?php

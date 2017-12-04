@@ -73,7 +73,7 @@ $daz_sql = SqlDatum($daz);
 $uprtxt = "UPDATE F$kli_vxcf"."_uctvykaz_fin504 SET daz='$daz_sql' ";
 
 $upravene = mysql_query("$uprtxt");
- 
+
                     }
 
 if ( $strana == 2 ) {
@@ -97,7 +97,7 @@ $rs00004 = 1*strip_tags($_REQUEST['rs00004']);
 
 $uprtxt = "INSERT INTO F$kli_vxcf"."_uctvykaz_fin504 (oc,druh,stlpa,stlpb,stlp1,stlp2,stlp3,stlp4,stlp5,stlp6,rs00003,rs00004) VALUES ".
 " (  '$stvrtrok', 1, '$stlpa', '$stlpb', '$stlp1_sql', '$stlp2_sql', '$stlp3', '$stlp4', '$stlp5', '$stlp6', '$rs00003', '$rs00004' ) ";
-if( $stlp5 >= 0 OR $stlp6 >= 0 ) { $upravene = mysql_query("$uprtxt"); } 
+if( $stlp5 >= 0 OR $stlp6 >= 0 ) { $upravene = mysql_query("$uprtxt"); }
 
                     }
 
@@ -115,7 +115,7 @@ endif;
 //koniec zapisu upravenych udajov
 
 
-//prac.subor a subor 
+//prac.subor a subor
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykaz'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_uctprcvykazx'.$kli_uzid;
@@ -205,7 +205,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctvykaz_fin504 ADD xxc DECIMAL(10,0) DEFAULT 0 AFTER stlp6";
 $vysledek = mysql_query("$sql");
 }
-//koniec vytvorenie 
+//koniec vytvorenie
 
 
 //vypocty
@@ -338,12 +338,35 @@ tr.zero-line > td { /* urcenie sirky stlpcov */
   border: 0;
   background-color: none;
 }
+img.btn-form-tool {
+  margin: 0 8px;
+}
+.btn-text {
+  border: 0;
+  box-sizing: border-box;
+  color: #39f;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 6px;
+  text-align: center;
+  text-transform: uppercase;
+  /*vertical-align: middle;*/
+  background-color: transparent;
+  border-radius: 2px;
+}
+.btn-text:hover {
+  background-color: rgba(158,158,158,.2);
+}
 </style>
 <script type="text/javascript">
 <?php
 //uprava sadzby
   if ( $copern == 20 )
-  { 
+  {
 ?>
   function ObnovUI()
   {
@@ -423,7 +446,10 @@ if ( $copern == 20 )
   <td>
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
-    <img src="../obr/ikony/upbox_blue_icon.png" onclick="DbfFin504();" title="Export do DBF" class="btn-form-tool">
+    <button type="button" onclick="DbfFin504();" title="Export do DBF" class="btn-text toright" style="position: relative; top: -4px;">DBF</button>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+    <button type="button" onclick="" title="Export do CSV" class="btn-text toright" style="position: relative; top: -4px;">CSV</button>
+<?php } ?>
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
@@ -1151,8 +1177,8 @@ if( $stlp2 == '00.00.0000' ) { $stlp2=""; }
 $stlp3=$hlavicka->stlp3;
 $stlp4=$hlavicka->stlp4; if ( $stlp4 == 0 ) $stlp4="";
 $stlp5=$hlavicka->stlp5; if ( $stlp5 == 0 ) $stlp5="";
-$stlp6=$hlavicka->rs00003; if ( $stlp6 == 0 ) $stlp6=""; 
-$stlp7=$hlavicka->rs00004; if ( $stlp7 == 0 ) $stlp7=""; 
+$stlp6=$hlavicka->rs00003; if ( $stlp6 == 0 ) $stlp6="";
+$stlp7=$hlavicka->rs00004; if ( $stlp7 == 0 ) $stlp7="";
 
 if ( $hlavicka->px01 == 0 )
      {
@@ -1183,7 +1209,7 @@ $pdf->Output("$outfilex");
 
 <?php
 }
-/////////////////////////////////////////KONIEC VYTLACENIA 
+/////////////////////////////////////////KONIEC VYTLACENIA
 ?>
 
 <?php
