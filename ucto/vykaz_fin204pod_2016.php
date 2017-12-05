@@ -2042,6 +2042,13 @@ window.open('fin204poddbf_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&dru
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function CsvFin204pod16()
+                {
+
+window.open('vykaz_fin204pod_csv.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 </script>
 </HEAD>
 <BODY onload="ObnovUI();">
@@ -2064,8 +2071,8 @@ if ( $copern == 20 )
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
     <button type="button" onclick="DbfFin204pod16();" title="Export do DBF" class="btn-text toright" style="position: relative; top: -4px;">DBF</button>
-<?php if ( $kli_vrok >= 2018 ) { ?>
-    <button type="button" onclick="" title="Export do CSV" class="btn-text toright" style="position: relative; top: -4px;">CSV</button>
+<?php if ( $kli_vrok >= 2017 ) { ?>
+    <button type="button" onclick="CsvFin204pod16()" title="Export do CSV" class="btn-text toright" style="position: relative; top: -4px;">CSV</button>
 <?php } ?>
     <img src="../obr/ikony/download_blue_icon.png" onclick="Nacitaj();" title="Naèíta údaje" class="btn-form-tool">
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
