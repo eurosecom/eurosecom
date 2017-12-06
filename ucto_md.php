@@ -945,11 +945,11 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; /
   }
   function BankVyp()
   {
-    window.open('../ucto/vstdok_md.php?copern=1&drupoh=4&page=1&sysx=UCT', '_blank');
+    window.open('../ucto/vstban_md.php?copern=1&drupoh=4&page=1&sysx=UCT', '_blank');
   }
   function VseoDokl()
   {
-    window.open('../ucto/vstdok_md.php?copern=1&drupoh=5&page=1&sysx=UCT', '_blank');
+    window.open('../ucto/vstvse_md.php?copern=1&drupoh=5&page=1&sysx=UCT', '_blank');
   }
 //data podsystemy
   function PodsystemData()
