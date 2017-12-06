@@ -716,6 +716,15 @@ window.open('fin304dbf_2016.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&s
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
+function CsvFin304()
+                {
+var h_oc = document.forms.formfin304.h_oc.value;
+var h_fmzdy = 0;
+
+window.open('vykaz_fin304_csv.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 function DbfFin404()
                 {
 var h_oc = document.forms.formfin404.h_oc.value;
@@ -1203,7 +1212,7 @@ if ( $nedaj == 0 ) { ?>
      title="Nastavi generovanie" class="toleft line-box box-brown">
   <button type="button" onclick="DbfFin304();" title="Export do DBF" class="btn-text toleft">DBF</button>
 <?php if ( $kli_vrok >= 2017 ) { ?>
-  <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
+  <button type="button" onclick="CsvFin304();" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin304();" title="Upravi hodnoty" class="toleft line-box box-green">
 </FORM>
