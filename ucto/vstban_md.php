@@ -271,7 +271,7 @@ $konc =($pols*($page-1))+($pols-1);
   padding-right: 0;
 }
 .ui-list td:nth-child(1), .ui-list td:nth-child(5) {
-  color: rgba(0,0,0,.54);
+  /*color: rgba(0,0,0,.54);*/
 }
 </style>
 </head>
@@ -449,7 +449,7 @@ $kli_nume=$mesiac_dan.".".$rok_dat;
       <a href="#" onclick="Ucto();">Úètovníctvo</a>
     </li>
     <li class="breadcrumb-item active">
-      <div class="toleft">Bankové výpisy</div>
+      <a href="#" id="header_dropdown_menu" class="dropdown">Bankové výpisy</a>
 <?php
 $sqls = mysql_query("SELECT dban,nban,uceb FROM F$kli_vxcf"."_dban WHERE ( dban > 0 ) ORDER BY dban");
 ?>
@@ -463,6 +463,13 @@ $poltxt = SubStr($polmen,0,20);
 <?php echo $zaznam["dban"]." - ".$poltxt; ?></option>
 <?php endwhile; ?>
       </select>
+    </li>
+<!-- header dropdown nav menu -->
+    <li class="wrap-dropdown-menu">
+      <ul for="header_dropdown_menu" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+        <li onclick="BankaVypisy();" class="mdl-menu__item active">Bankové výpisy</li>
+        <li onclick="BankaUcty();" class="mdl-menu__item">Bankové úèty</li>
+      </ul>
     </li>
     </ol><!-- .ui-header-breadcrumb -->
     <div class="mdl-layout-spacer"></div>
@@ -939,6 +946,16 @@ window.open('../ucto/precisluj_pok.php?cislo_uce=<?php echo $hladaj_uce; ?>&cope
   {
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
+
+  function BankaVypisy()
+  {
+    window.open('../ucto/vstban_md.php?copern=1&drupoh=4&page=1&sysx=UCT', '_self');
+  }
+  function BankaUcty()
+  {
+    window.open('../ucto/dban_md.php?copern=1&page=1', '_self');
+  }
+
 
 </script>
 </body>

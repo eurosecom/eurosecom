@@ -519,7 +519,7 @@ if ( $vyb_duj == 9 ) { echo "jednoduché"; }
         <li id="dodav_faktury" onclick="DodavFa();" class="card-item">Dodávate¾ské faktúry</li>
         <li id="prijem_pokladna" onclick="PokladnicaPrijem();" class="card-item">Príjmové pokladnièné doklady</li>
         <li id="vydaj_pokladna" onclick="PokladnicaVydaj();" class="card-item">Výdavkové pokladnièné doklady</li>
-        <li id="bank_vypisy" onclick="BankVyp();" class="card-item">Bankové výpisy</li>
+        <li id="bank_vypisy" onclick="BankaVypisy();" class="card-item">Bankové výpisy</li>
         <li id="vseobec_doklady" onclick="VseoDokl();" class="card-item">Všeobecné úètovné doklady</li>
       </ul>
     </div>
@@ -943,7 +943,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; /
   {
     window.open('../ucto/vstpok_md.php?copern=1&drupoh=2&page=1&sysx=UCT', '_blank');
   }
-  function BankVyp()
+  function BankaVypisy()
   {
     window.open('../ucto/vstban_md.php?copern=1&drupoh=4&page=1&sysx=UCT', '_blank');
   }
