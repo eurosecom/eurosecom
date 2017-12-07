@@ -1,4 +1,4 @@
-<?PHP
+<?php
 session_start();
 $_SESSION['ucto_sys'] = 1;
 $_SESSION['pocstav'] = 0; /*dopyt, nebude treba v budúcnosti, nebudem rozlišova*/
@@ -520,7 +520,7 @@ if ( $vyb_duj == 9 ) { echo "jednoduché"; }
         <li id="prijem_pokladna" onclick="PokladnicaPrijem();" class="card-item">Príjmové pokladnièné doklady</li>
         <li id="vydaj_pokladna" onclick="PokladnicaVydaj();" class="card-item">Výdavkové pokladnièné doklady</li>
         <li id="bank_vypisy" onclick="BankaVypisy();" class="card-item">Bankové výpisy</li>
-        <li id="vseobec_doklady" onclick="VseoDokl();" class="card-item">Všeobecné úètovné doklady</li>
+        <li id="vseobec_doklady" onclick="VseoDoklady();" class="card-item">Všeobecné úètovné doklady</li>
       </ul>
     </div>
 <!-- ekorobot -->
@@ -945,11 +945,11 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; /
   }
   function BankaVypisy()
   {
-    window.open('../ucto/vstban_md.php?copern=1&drupoh=4&page=1&sysx=UCT', '_blank');
+    window.open('../ucto/vstban_md.php?copern=1&page=1', '_blank');
   }
-  function VseoDokl()
+  function VseoDoklady()
   {
-    window.open('../ucto/vstvse_md.php?copern=1&drupoh=5&page=1&sysx=UCT', '_blank');
+    window.open('../ucto/vstvse_md.php?copern=1&page=1', '_blank');
   }
 //data podsystemy
   function PodsystemData()

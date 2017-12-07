@@ -60,9 +60,7 @@ $citfir = include("../cis/citaj_fir.php");
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
+
 
 $ucto_sys=$_SESSION['ucto_sys'];
 //echo $ucto_sys;
@@ -72,7 +70,7 @@ $rozuct='ANO';
 $sysx='UCT';
 }
 
-// druh pohybu 1=odber , 2=dodav
+//druh pohybu 1,3=Prijmove; 2=Vydavkove
 $drupoh = strip_tags($_REQUEST['drupoh']);
 
 if( $autovalas == 1 AND $drupoh >= 1 AND $drupoh <= 2 AND ( $kli_uzid == 53 OR $kli_uzid == 54 ) ) $nemazat=0;
@@ -99,20 +97,6 @@ $sqluce = mysql_query("SELECT dpok,npok FROM F$kli_vxcf"."_dpok WHERE ( drpk = 2
   $hladaj_uce=$riaduce->dpok;
   }
 }
-if( $drupoh == 4 )
-{
-$sqluce = mysql_query("SELECT * FROM F$kli_vxcf"."_dban WHERE ( dban > 0 ) ORDER BY dban");
-  if (@$zaznam=mysql_data_seek($sqluce,0))
-  {
-  $riaduce=mysql_fetch_object($sqluce);
-  $hladaj_uce=$riaduce->dban;
-  }
-}
-if( $drupoh == 5 )
-{
-  $hladaj_uce=1;
-}
-
 }
 //koniec nastavenia uctu
 
@@ -141,23 +125,6 @@ $adrdok = "doppokprijem";
 $uctpol = "uctpok";
 $uctpoh = "uctpokuct";
 }
-if( $drupoh == 4 )
-{
-$tabl = "banvyp";
-$cisdok = "uctx04";
-$adrdok = "banvyp";
-$uctpol = "uctban";
-$uctpoh = "uctban";
-}
-if( $drupoh == 5 )
-{
-$tabl = "uctvsdh";
-$cisdok = "uctx05";
-if( $hladaj_uce == 2 ) $cisdok = "uctx13";
-$adrdok = "vsdh";
-$uctpol = "uctvsdp";
-$uctpoh = "uctvsdp";
-}
 
 $uloz="NO";
 $zmaz="NO";
@@ -183,17 +150,15 @@ endif;
 if ($zmazane):
 $zmaz="OK";
 
-if( ( $cisdokodd != 1 AND $cislo_dok > 1 ) OR $drupoh == 5 )
+if ( $cisdokodd != 1 AND $cislo_dok > 1 )
         {
 $upravene = mysql_query("UPDATE F$kli_vxcf"."_ufir SET $cisdok='$cislo_dok' WHERE $cisdok > '$cislo_dok'");
         }
-if( $cisdokodd == 1 AND $drupoh != 5 )
+if ( $cisdokodd == 1 )
         {
-
  if( $drupoh == 1 AND $cislo_dok > 1 ) { $upravttt = "UPDATE F$kli_vxcf"."_dpok SET cpri='$cislo_dok' WHERE cpri > '$cislo_dok' AND drpk = 1 AND dpok = $hladaj_uce"; }
  if( $drupoh == 2 AND $cislo_dok > 1 ) { $upravttt = "UPDATE F$kli_vxcf"."_dpok SET cvyd='$cislo_dok' WHERE cvyd > '$cislo_dok' AND drpk = 1 AND dpok = $hladaj_uce"; }
  if( $drupoh == 3 AND $cislo_dok > 1 ) { $upravttt = "UPDATE F$kli_vxcf"."_dpok SET cpri='$cislo_dok' WHERE cpri > '$cislo_dok' AND drpk = 2 AND dpok = $hladaj_uce"; }
- if( $drupoh == 4 AND $cislo_dok > 1 ) { $upravttt = "UPDATE F$kli_vxcf"."_dban SET cban='$cislo_dok' WHERE cban > '$cislo_dok' AND dban = $hladaj_uce"; }
  //echo $upravtt;
  $upravene = mysql_query("$upravttt");
         }
@@ -216,7 +181,7 @@ endif;
 //koniec vymazania
 
 
-//month navigation
+
 
 
 
@@ -444,8 +409,7 @@ $kli_nume=$mesiac_dan.".".$rok_dat;
 
 </script>
         <!-- <li class="mdl-color-text--yellow-A100" style="">EuroSecom</li> -->
-<form name="formhl1" method="post" action="vstpok_md.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>
-&rozuct=<?php echo $rozuct; ?>&drupoh=<?php echo $drupoh; ?>&page=1&copern=9">
+<form name="formhl1" method="post" action="vstpok_md.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=<?php echo $rozuct; ?>&drupoh=<?php echo $drupoh; ?>&page=1&copern=9">
   <div class="mdl-layout__header-row ui-header-title-row">
     <ol class="mdl-layout-title ui-header-breadcrumb">
     <li class="breadcrumb-item">
@@ -577,7 +541,6 @@ if ( $drupoh == 2 ) { $link_vydaj="active"; }
 
   </div><!-- .ui-header-title-row -->
 </form>
-
   <div class="mdl-layout__header-row wrap-ui-list" style="background-color: ;">
     <table class="ui-list-header ui-list ui-container">
     <tr>
@@ -722,7 +685,7 @@ $jesub=1;
 }
 ?>
     </td>
-  </tr><!-- ui-row-echo -->
+  </tr><!-- .ui-row-echo -->
 <?php
   }
 $i = $i + 1;
@@ -928,43 +891,7 @@ var vyskawin = screen.height-175;
 <?php                      } ?>
       }
 
-// Kontrola cisla celeho v rozsahu x az y
-      function intg(x1,x,y,Oznam)
-      {
-       var b;
-       b=x1.value;
-       var anyString=b;
-       Oznam.style.display="none";
-         if (b == "") return true;
-         else{
-         if (Math.floor(b)==b && b>=x && b<=y) return true;
-         else {
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         return false;
-              }
-             }
-      }
 
-// Kontrola des.cisla v rozsahu x az y
-      function cele(x1,x,y,Oznam)
-      {
-       var b;
-       b=x1.value;
-       var anyString=b;
-       Oznam.style.display="none";
-         if (b == "") return true;
-         else{
-         if (b>=x && b<=y) return true;
-         else {
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         return false;
-              }
-             }
-      }
 
 <?php
 //hladanie

@@ -60,9 +60,6 @@ $citfir = include("../cis/citaj_fir.php");
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
 
 $ucto_sys=$_SESSION['ucto_sys'];
 //echo $ucto_sys;
@@ -73,7 +70,7 @@ $sysx='UCT';
 }
 
 // druh pohybu 1=odber , 2=dodav
-$drupoh = strip_tags($_REQUEST['drupoh']);
+$drupoh = strip_tags($_REQUEST['drupoh']); //dopyt, pÙjde preË
 
 if( $autovalas == 1 AND $drupoh >= 1 AND $drupoh <= 2 AND ( $kli_uzid == 53 OR $kli_uzid == 54 ) ) $nemazat=0;
 
@@ -81,83 +78,18 @@ if( $autovalas == 1 AND $drupoh >= 1 AND $drupoh <= 2 AND ( $kli_uzid == 53 OR $
 $hladaj_uce = strip_tags($_REQUEST['hladaj_uce']);
 if(!isset($hladaj_uce) OR $hladaj_uce == '')
 {
-if( $drupoh == 1 OR $drupoh == 2 )
-{
-$sqluce = mysql_query("SELECT dpok,npok FROM F$kli_vxcf"."_dpok WHERE ( drpk = 1 ) ORDER BY dpok");
-  if (@$zaznam=mysql_data_seek($sqluce,0))
-  {
-  $riaduce=mysql_fetch_object($sqluce);
-  $hladaj_uce=$riaduce->dpok;
-  }
-}
-if( $drupoh == 3 )
-{
-$sqluce = mysql_query("SELECT dpok,npok FROM F$kli_vxcf"."_dpok WHERE ( drpk = 2 ) ORDER BY dpok");
-  if (@$zaznam=mysql_data_seek($sqluce,0))
-  {
-  $riaduce=mysql_fetch_object($sqluce);
-  $hladaj_uce=$riaduce->dpok;
-  }
-}
-if( $drupoh == 4 )
-{
-$sqluce = mysql_query("SELECT * FROM F$kli_vxcf"."_dban WHERE ( dban > 0 ) ORDER BY dban");
-  if (@$zaznam=mysql_data_seek($sqluce,0))
-  {
-  $riaduce=mysql_fetch_object($sqluce);
-  $hladaj_uce=$riaduce->dban;
-  }
-}
-if( $drupoh == 5 )
-{
   $hladaj_uce=1;
-}
-
 }
 //koniec nastavenia uctu
 
 
-if( $drupoh == 1 )
-{
-$tabl = "pokpri";
-$cisdok = "pokpri";
-$adrdok = "pokprijem";
-$uctpol = "uctpok";
-$uctpoh = "uctpokuct";
-}
-if( $drupoh == 2 )
-{
-$tabl = "pokvyd";
-$cisdok = "pokvyd";
-$adrdok = "pokvydaj";
-$uctpol = "uctpok";
-$uctpoh = "uctpokuct";
-}
-if( $drupoh == 3 )
-{
-$tabl = "doppokpri";
-$cisdok = "xdp05";
-$adrdok = "doppokprijem";
-$uctpol = "uctpok";
-$uctpoh = "uctpokuct";
-}
-if( $drupoh == 4 )
-{
-$tabl = "banvyp";
-$cisdok = "uctx04";
-$adrdok = "banvyp";
-$uctpol = "uctban";
-$uctpoh = "uctban";
-}
-if( $drupoh == 5 )
-{
 $tabl = "uctvsdh";
 $cisdok = "uctx05";
 if( $hladaj_uce == 2 ) $cisdok = "uctx13";
 $adrdok = "vsdh";
 $uctpol = "uctvsdp";
 $uctpoh = "uctvsdp";
-}
+
 
 $uloz="NO";
 $zmaz="NO";
@@ -183,30 +115,13 @@ endif;
 if ($zmazane):
 $zmaz="OK";
 
-if( ( $cisdokodd != 1 AND $cislo_dok > 1 ) OR $drupoh == 5 )
+if ( $cisdokodd != 1 AND $cislo_dok > 1 )
         {
 $upravene = mysql_query("UPDATE F$kli_vxcf"."_ufir SET $cisdok='$cislo_dok' WHERE $cisdok > '$cislo_dok'");
         }
-if( $cisdokodd == 1 AND $drupoh != 5 )
-        {
 
- if( $drupoh == 1 AND $cislo_dok > 1 ) { $upravttt = "UPDATE F$kli_vxcf"."_dpok SET cpri='$cislo_dok' WHERE cpri > '$cislo_dok' AND drpk = 1 AND dpok = $hladaj_uce"; }
- if( $drupoh == 2 AND $cislo_dok > 1 ) { $upravttt = "UPDATE F$kli_vxcf"."_dpok SET cvyd='$cislo_dok' WHERE cvyd > '$cislo_dok' AND drpk = 1 AND dpok = $hladaj_uce"; }
- if( $drupoh == 3 AND $cislo_dok > 1 ) { $upravttt = "UPDATE F$kli_vxcf"."_dpok SET cpri='$cislo_dok' WHERE cpri > '$cislo_dok' AND drpk = 2 AND dpok = $hladaj_uce"; }
- if( $drupoh == 4 AND $cislo_dok > 1 ) { $upravttt = "UPDATE F$kli_vxcf"."_dban SET cban='$cislo_dok' WHERE cban > '$cislo_dok' AND dban = $hladaj_uce"; }
- //echo $upravtt;
- $upravene = mysql_query("$upravttt");
-        }
 
-//ak jedna rada pokladne zapis aj v druhom druhu dokladu prij.vyd
-if( $pvpokljed == 1 AND $drupoh >= 1 AND $drupoh <= 2 )
-{
- if( $drupoh == 2 AND $cislo_dok > 1 ) { $upravttt = "UPDATE F$kli_vxcf"."_dpok SET cpri='$cislo_dok' WHERE cpri > '$cislo_dok' AND drpk = 1 AND dpok = $hladaj_uce"; }
- if( $drupoh == 1 AND $cislo_dok > 1 ) { $upravttt = "UPDATE F$kli_vxcf"."_dpok SET cvyd='$cislo_dok' WHERE cvyd > '$cislo_dok' AND drpk = 1 AND dpok = $hladaj_uce"; }
 
- $upravene = mysql_query("$upravttt");
-}
-//koniec ak jedna rada pokladne zapis aj v druhom druhu dokladu prij.vyd
 
 //echo "POLOéKA DOK:$cislo_dok BOLA VYMAZAN¡ ";
 endif;
@@ -434,7 +349,7 @@ $kli_nume=$mesiac_dan.".".$rok_dat;
 
 </script>
 
-<form name="formhl1" method="post" action="vstvse.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=<?php echo $rozuct; ?>&drupoh=<?php echo $drupoh;?>&page=1&copern=9">
+<form name="formhl1" method="post" action="vstvse_md.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=<?php echo $rozuct; ?>&page=1&copern=9">
   <div class="mdl-layout__header-row ui-header-title-row">
     <ol class="mdl-layout-title ui-header-breadcrumb">
     <li class="breadcrumb-item">
@@ -488,7 +403,7 @@ $kli_nume=$mesiac_dan.".".$rok_dat;
 <input type="text" name="hladaj_nai" id="hladaj_nai" size="30" value="<?php echo $hladaj_nai;?>"/>
 <input type="text" name="hladaj_txp" id="hladaj_txp" size="30" value="<?php echo $hladaj_txp;?>"/>
 <INPUT type="submit" id="hlad1" name="hlad1" value="Hæadaù" >
-<form name="formhl2" method="post" action="vstpok.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=<?php echo $rozuct; ?>&drupoh=<?php echo $drupoh;?>&page=1&copern=1">
+<form name="formhl2" method="post" action="vstvse_md.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=<?php echo $rozuct; ?>&page=1&copern=1">
 <INPUT type="submit" id="hlad2" name="hlad2" value="Vöetko" >
 </form> -->
 
@@ -500,11 +415,11 @@ $kli_nume=$mesiac_dan.".".$rok_dat;
       <th>Druh</th>
       <th>Doklad</th>
       <th>Vystaven˝
-<a href="#" onClick="window.open('../ucto/vstpok.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>
-&rozuct=<?php echo $rozuct; ?>&copern=9&page=1&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
+<a href="#" onClick="window.open('../ucto/vstvse_md.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>
+&rozuct=<?php echo $rozuct; ?>&copern=9&page=1&hladaj_dat=<?php echo $kli_pume; ?>', '_self' )">
 <img src='../obr/prev.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_pume; ?>" title="Doklady za mesiac <?php echo $kli_pume; ?>" ></a>
-<a href="#" onClick="window.open('../ucto/vstpok.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>
-&rozuct=<?php echo $rozuct; ?>&copern=9&page=1&drupoh=<?php echo $drupoh; ?>&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
+<a href="#" onClick="window.open('../ucto/vstvse_md.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>
+&rozuct=<?php echo $rozuct; ?>&copern=9&page=1&hladaj_dat=<?php echo $kli_nume; ?>', '_self' )">
 <img src='../obr/next.png' width=10 height=10 border=0 alt="Doklady za mesiac <?php echo $kli_nume; ?>" title="Doklady za mesiac <?php echo $kli_nume; ?>" ></a>
       </th>
       <th>Firma</th>
@@ -534,7 +449,7 @@ $uctminusdok=$riadok->hodu-$riadok->hod;
   {
 ?>
 <a href='vspk_u.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>
-&rozuct=ANO&copern=8&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&h_tlsl=1&rozb1=NOT&rozb2=NOT
+&rozuct=ANO&copern=8&page=<?php echo $page;?>&h_tlsl=1&rozb1=NOT&rozb2=NOT
 &cislo_dok=<?php echo $riadok->dok;?>&h_ico=<?php echo $riadok->ico;?>&h_uce=<?php echo $riadok->uce;?>&h_unk=<?php echo $riadok->unk;?>'>
 <img src='../obr/zoznam.png' width=15 height=12 border=0 alt="Roz˙Ëtovanie dokladu" title="Roz˙Ëtovanie dokladu" ></a>
 <?php
@@ -556,7 +471,7 @@ if( $copern != 10 AND $kli_nemazat != 1 )
 {
 ?>
 <a href='vspk_u.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>
-&rozuct=<?php echo $rozuct; ?>&copern=6&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&cislo_dok=<?php echo $riadok->dok;?>'>
+&rozuct=<?php echo $rozuct; ?>&copern=6&page=<?php echo $page;?>&cislo_dok=<?php echo $riadok->dok;?>'>
 <img src='../obr/zmaz.png' width=15 height=10 border=0 alt="Vymazanie vybranÈho dokladu" title="Vymazanie vybranÈho dokladu" ></a></td></a>
 <?php
 }
@@ -621,7 +536,7 @@ $i = $i + 1;
    }
 ?>
   </table> <!-- .ui-list-content -->
-<form name="forma3" class="obyc" method="post" action="vstpok.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=<?php echo $rozuct; ?>&copern=4&drupoh=<?php echo $drupoh;?>&page=<?php echo $xstr;?>" style="visibility: hidden;">
+<form name="forma3" class="obyc" method="post" action="vstvse_md.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=<?php echo $rozuct; ?>&copern=4&page=<?php echo $xstr;?>" style="visibility: hidden;">
 <INPUT type="submit" id="sstrana" value="Prejsù na stranu:" >
 <input type="text" name="page" id="page" value="<?php echo $xstr;?>" size="4" onkeyup="KontrolaCisla(this, Ax)"/>
   <div class="ui-list-footer ui-list ui-container">
@@ -631,7 +546,7 @@ $i = $i + 1;
 
 
 </form>
-<FORM name="forma2" class="obyc" method="post" action="vstpok.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>
+<FORM name="forma2" class="obyc" method="post" action="vstvse_md.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>
 &rozuct=<?php echo $rozuct; ?>&
 <?php
 if ( $copern != 9 )
@@ -643,11 +558,11 @@ if ( $copern == 9 )
 echo "copern=9&hladaj_dat=$hladaj_dat&hladaj_dok=$hladaj_dok&hladaj_nai=$hladaj_nai&hladaj_uce=$hladaj_uce&hladaj_txp=$hladaj_txp";
 }
 ?>
-&drupoh=<?php echo $drupoh;?>&page=<?php echo $ppage;?>" style="visibility: hidden;">
+&page=<?php echo $ppage;?>" style="visibility: hidden;">
 <INPUT type="submit" id="pstrana" name="pstrana" value="Predoöl· strana" >
 </FORM>
 
-<FORM name="forma1" class="obyc" method="post" action="vstpok.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>
+<FORM name="forma1" class="obyc" method="post" action="vstvse_md.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>
 &rozuct=<?php echo $rozuct; ?>&
 <?php
 if ( $copern != 9 )
@@ -659,7 +574,7 @@ if ( $copern == 9 )
 echo "copern=9&hladaj_dat=$hladaj_dat&hladaj_dok=$hladaj_dok&hladaj_nai=$hladaj_nai&hladaj_uce=$hladaj_uce&hladaj_txp=$hladaj_txp";
 }
 ?>
-&drupoh=<?php echo $drupoh;?>&page=<?php echo $npage;?>" style="visibility: hidden;">
+&page=<?php echo $npage;?>" style="visibility: hidden;">
 <INPUT type="submit" id="dstrana" value="œalöia strana" >
 </FORM>
   </div><!-- .ui-list-footer -->
@@ -705,7 +620,7 @@ if ( $copern != 5 AND $copern != 6 AND $copern != 8 )
 
 
 <!-- new item button -->
-<button type="button" id="new_item" onclick="window.open('vspk_u.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=<?php echo $rozuct; ?>&copern=5&drupoh=<?php echo $drupoh;?>&page=1');" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect mdl-shadow--4dp">
+<button type="button" id="new_item" onclick="window.open('vspk_u.php?sysx=<?php echo $sysx; ?>&hladaj_uce=<?php echo $hladaj_uce; ?>&rozuct=<?php echo $rozuct; ?>&copern=5&page=1');" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect mdl-shadow--4dp">
   <i class="material-icons">add</i>
 </button>
   <span data-mdl-for="new_item" class="mdl-tooltip mdl-tooltip--left">Vytvoriù nov˝ doklad</span>
@@ -722,7 +637,7 @@ if ( $copern != 5 AND $copern != 6 AND $copern != 8 )
      }
 if( $copern == 1 ) {
 $zmenume=1;
-$odkaz="../ucto/vstpok.php?copern=1&drupoh=$drupoh&page=1&sysx=$sysx&hladaj_uce=$hladaj_uce&rozuct=$rozuct";
+$odkaz="../ucto/vstvse_md.php?copern=1&page=1&sysx=$sysx&hladaj_uce=$hladaj_uce&rozuct=$rozuct";
                    }
 //echo $odkaz;
 
@@ -740,53 +655,12 @@ var vyskawin = screen.height-175;
 
       function dajuce()
       {
-
   var ucet = document.formhl1.hladaj_uce.value;
-<?php if( $sysx != 'UCT' ) { ?>
-  var okno = window.open("vstpok.php?sysx=<?php echo $sysx; ?>&hladaj_uce=" + ucet + "&rozuct=<?php echo $rozuct; ?>&drupoh=<?php echo $drupoh;?>&page=1&copern=1", "_self");
-<?php                      } ?>
-<?php if( $sysx == 'UCT' ) { ?>
-  var okno = window.open("vstpok.php?sysx=UCT&hladaj_uce=" + ucet + "&rozuct=ANO&drupoh=<?php echo $drupoh;?>&page=1&copern=1", "_self");
-<?php                      } ?>
+  var okno = window.open("vstvse_md.php?sysx=UCT&hladaj_uce=" + ucet + "&rozuct=ANO&page=1&copern=1", "_self");
+
       }
 
-// Kontrola cisla celeho v rozsahu x az y
-      function intg(x1,x,y,Oznam)
-      {
-       var b;
-       b=x1.value;
-       var anyString=b;
-       Oznam.style.display="none";
-         if (b == "") return true;
-         else{
-         if (Math.floor(b)==b && b>=x && b<=y) return true;
-         else {
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         return false;
-              }
-             }
-      }
 
-// Kontrola des.cisla v rozsahu x az y
-      function cele(x1,x,y,Oznam)
-      {
-       var b;
-       b=x1.value;
-       var anyString=b;
-       Oznam.style.display="none";
-         if (b == "") return true;
-         else{
-         if (b>=x && b<=y) return true;
-         else {
-         Oznam.style.display="";
-         document.formv1.uloz.disabled = true;
-         x1.focus();
-         return false;
-              }
-             }
-      }
 
 <?php
 //hladanie
@@ -857,61 +731,23 @@ var vyskawin = screen.height-175;
 
 
 
-<?php if( $_SESSION['nieie'] >= 0 )  { ?>
+
 
     function VytlacPokl(doklad)
     {
     var hladaj_dok = document.formhl1.hladaj_dok.value;
     var cislo_dok = doklad;
-    window.open('vspk_pdf.php?sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&hladaj_dok=' + hladaj_dok + '&copern=20&drupoh=<?php echo $drupoh;?>&page=<?php echo $page;?>&cislo_dok=' + cislo_dok + '&fff=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
+    window.open('vspk_pdf.php?sysx=<?php echo $sysx; ?>&rozuct=<?php echo $rozuct; ?>&hladaj_dok=' + hladaj_dok + '&copern=20&page=<?php echo $page;?>&cislo_dok=' + cislo_dok + '&fff=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
 
     }
 
 
-    function PoklKniha()
-    {
-
-    var ucet = document.formhl1.hladaj_uce.value;
-    window.open('pokl_kniha.php?copern=40&drupoh=<?php echo $drupoh; ?>&page=1&typ=HTML&cislo_uce=' + ucet + '&page=1&cele=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-
-    }
-
-    function MesPoklKniha()
-    {
-
-    var ucet = document.formhl1.hladaj_uce.value;
-    window.open('pokl_kniha.php?copern=40&drupoh=<?php echo $drupoh; ?>&page=1&typ=HTML&cislo_uce=' + ucet + '&page=1&cele=0&rozuct=<?php echo $rozuct; ?>', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-
-    }
 
 
-    function DnesPoklKniha()
-    {
-
-<?php $dnesne = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
-
-window.open('../ucto/uctpohyby_dokxxl.php?uctpohyby=1&cislo_uce=<?php echo $hladaj_uce; ?>&h_obdk=0&h_obdp=0&h_datk=<?php echo $dnesne; ?>&h_datp=<?php echo $dnesne; ?>&copern=40&drupoh=11&page=1&typ=HTML',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-    }
 
 
-<?php if ( $drupoh == 1 )  { ?>
-    function ZoznamPokl()
-    {
-    var ucet = document.formhl1.hladaj_uce.value;
-    window.open('../ucto/zozdok.php?copern=103&drupoh=1&page=1&cislo_uce=' + ucet + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-    }
-<?php  } ?>
 
-<?php if ( $drupoh == 2 )  { ?>
-    function ZoznamPokl()
-    {
-    var ucet = document.formhl1.hladaj_uce.value;
-    window.open('../ucto/zozdok.php?copern=104&drupoh=2&page=1&cislo_uce=' + ucet + '&page=1', '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' )
-    }
-<?php  } ?>
 
-<?php                                } ?>
 
 
 
@@ -920,7 +756,7 @@ window.open('../ucto/uctpohyby_dokxxl.php?uctpohyby=1&cislo_uce=<?php echo $hlad
     var hladaj_dok = document.formhl1.hladaj_dok.value;
 if( hladaj_dok == 2010 || hladaj_dok == 2011 )
   {
-window.open('../ucto/precisluj_pok.php?cislo_uce=<?php echo $hladaj_uce; ?>&copern=40&drupoh=<?php echo $drupoh; ?>&page=1&typ=HTML&kontrola=1',
+window.open('../ucto/precisluj_pok.php?cislo_uce=<?php echo $hladaj_uce; ?>&copern=40&page=1&typ=HTML&kontrola=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
     }
@@ -931,6 +767,14 @@ window.open('../ucto/precisluj_pok.php?cislo_uce=<?php echo $hladaj_uce; ?>&cope
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-  </script>
+
+//header nav
+  function Ucto()
+  {
+    window.open('../ucto_md.php?copern=1', '_self');
+  }
+
+
+</script>
 </body>
 </html>
