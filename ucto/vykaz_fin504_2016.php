@@ -425,6 +425,13 @@ img.btn-form-tool {
    window.open('vykaz_fin504_2016.php?cislo_oc=<?php echo $cislo_oc;?>&copern=316&drupoh=1&page=1&subor=0&strana=2&cislo_cpl=' + cpl + '&xx=1',
 '_self', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
+
+function CsvFin504()
+                {
+window.open('vykaz_fin504_csv.php?cislo_oc=<?php echo $cislo_oc;?>&copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+                }
+
 </script>
 </HEAD>
 <BODY onload="ObnovUI();">
@@ -447,8 +454,8 @@ if ( $copern == 20 )
    <div class="bar-btn-form-tool">
     <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();" title="Vysvetlivky na vyplnenie výkazu" class="btn-form-tool">
     <button type="button" onclick="DbfFin504();" title="Export do DBF" class="btn-text toright" style="position: relative; top: -4px;">DBF</button>
-<?php if ( $kli_vrok >= 2018 ) { ?>
-    <button type="button" onclick="" title="Export do CSV" class="btn-text toright" style="position: relative; top: -4px;">CSV</button>
+<?php if ( $kli_vrok >= 2017 ) { ?>
+    <button type="button" onclick="CsvFin504();" title="Export do CSV" class="btn-text toright" style="position: relative; top: -4px;">CSV</button>
 <?php } ?>
     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
    </div>
