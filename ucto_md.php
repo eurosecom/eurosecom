@@ -992,7 +992,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900'; /
 //vystupy
   function UctZostavy()
   {
-    window.open('../ucto/uctozos_md.php?copern=1&sysx=UCT', '_blank');
+    window.open('../ucto/uctzos_md.php?copern=1&sysx=UCT', '_blank');
   }
   function Obratovka()
   {

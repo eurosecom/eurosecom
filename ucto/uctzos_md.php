@@ -172,7 +172,7 @@ $vysledok = mysql_query("$sqlt");
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 <header class="mdl-layout__header mdl-layout__header--waterfall ui-header">
   <div class="mdl-layout__header-row ui-header-title-row">
-    <ol class="mdl-layout-title ui-header-breadcrumb">
+    <ol class="mdl-layout-title ui-header-breadcrumb" style="">
     <li class="breadcrumb-item">
       <a href="#" onclick="Ucto();">⁄ËtovnÌctvo</a>
     </li>
@@ -191,31 +191,22 @@ $vysledok = mysql_query("$sqlt");
     <div class="mdl-layout-spacer"></div>
 
 <!-- period nav -->
-    <div class="clearfix" style="margin-right: 16px;">
-      <button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button mdl-button--icon toleft" style="background-color: ;">
+    <div class="clearfix" style="margin-top: 16px;">
+      <button type="button" id="month_prev" onclick="navMonth(1);" class="mdl-button mdl-js-button mdl-button--icon toleft">
         <i class="material-icons">navigate_before</i>
       </button>
-        <span class="mdl-tooltip" data-mdl-for="month_prev">Prejsù na <?php echo $kli_pume; ?></span>
-      <button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button mdl-button--icon toleft" style="background-color: ;">
+        <span data-mdl-for="month_prev" class="mdl-tooltip">Prejsù na <?php echo $kli_pume; ?></span>
+      <button type="button" id="month_next" onclick="navMonth(2);" class="mdl-button mdl-js-button mdl-button--icon toleft">
         <i class="material-icons">navigate_next</i>
       </button>
-        <span class="mdl-tooltip" data-mdl-for="month_next">Prejsù na <?php echo $kli_dume; ?></span>
-      <div class="toleft" style="font-size: 14px; line-height: 32px; margin-left: 4px;"><?php echo $kli_vume; ?></div>
+        <span data-mdl-for="month_next" class="mdl-tooltip">Prejsù na <?php echo $kli_dume; ?></span>
+      <div class="toleft" style="font-size: 16px; line-height: 32px; margin-left: 4px;"><?php echo $kli_vume; ?></div>
     </div>
-
-<?php if ( $kli_vduj != 9 ) { ?>
-<!-- <a href="#" onClick="window.open('../analyzy/danovy_csv.php?copern=1&drupoh=1&page=1', '_self' )">
-  <img src='../obr/export.png' width=20 height=15 border=0 title='Prejsù do exportu pre D⁄ do CSV' ></a>
-<a href="#" onClick="window.open('../analyzy/export_csv.php?copern=1&drupoh=1&page=1', '_self' )">
-  <img src='../obr/export.png' width=20 height=15 border=0 title='Prejsù do exportu do CSV' ></a> -->
-<?php                     } ?>
-
 <!-- login firm + user -->
-    <ul class="ilogin-inline-list">
-      <li class="ilogin-list-item"><?php echo "<strong>$kli_vxcf</strong>&nbsp;&nbsp;$kli_nxcf"; ?></li>
-      <li id="ilogin_user" class="mdl-color--indigo-400 ilogin-list-item item-avatar"><?php echo $kli_uzid; ?></li>
+    <ul class="small-list-absolute" style="top: 0; right: 8px;">
+      <li class="mdl-color-text--white"><?php echo "<strong>$kli_vxcf</strong>&nbsp;&nbsp;$kli_nxcf"; ?></li>
+      <li title="<?php echo "$kli_uzmeno $kli_uzprie"; ?>"><?php echo $kli_uzid; ?></li>
     </ul>
-      <span data-mdl-for="ilogin_user" class="mdl-tooltip">Prihl·sen˝ uûÌvateæ:<br><?php echo "$kli_uzmeno $kli_uzprie / $kli_uzid"; ?></span>
   </div><!-- .ui-header-title-row -->
 </header>
 <main class="mdl-layout__content ui-content sticky-footer">
@@ -792,6 +783,16 @@ if ( $kli_vrok < 2012 )
      }
 //$kli_nezis == 1
 ?>
+
+<?php if ( $kli_vduj != 9 ) { ?>
+<!-- <a href="#" onClick="window.open('../analyzy/danovy_csv.php?copern=1&drupoh=1&page=1', '_self' )">
+  <img src='../obr/export.png' width=20 height=15 border=0 title='Prejsù do exportu pre D⁄ do CSV' ></a>
+<a href="#" onClick="window.open('../analyzy/export_csv.php?copern=1&drupoh=1&page=1', '_self' )">
+  <img src='../obr/export.png' width=20 height=15 border=0 title='Prejsù do exportu do CSV' ></a> -->
+<?php                     } ?>
+<!-- dopyt, ikony urobiù priamo v zostav·ch a buÔ v hlavnom menu, ale lepöie vo vst˙più -->
+
+
 
 <!-- dopyt, pÙjde do inej card, tu bude len odkaz, takûe nerobiù niË -->
 <table class="vstup" width="100%" style="display: none;">

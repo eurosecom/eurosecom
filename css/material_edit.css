@@ -75,7 +75,8 @@ select:enabled, button:enabled, [onclick] { /*dopyt, zistiť, kto môže mať ho
 }
 .mdl-layout__header-row {
   padding-left: 64px; /*dopyt, naviazať, iba keď je ikona hamburger*/
-  padding-right: 8px;
+  padding-right: 16px;
+  position: relative; /* ie11 bug */
 }
 
 
@@ -178,8 +179,27 @@ select:enabled, button:enabled, [onclick] { /*dopyt, zistiť, kto môže mať ho
 }
 
 
+
+
+
+
+
+.ui-header-title-row .small-list-absolute {
+  position: absolute;
+  font-size: 12px;
+  letter-spacing: .02em;
+  background-color: ;
+  height: 16px;
+  padding-top: 4px;
+}
+.ui-header-title-row .small-list-absolute > li {
+  float: left;
+  margin: 0 4px;
+}
+
+
 /* ilogin section in header */
-.ilogin-list-item {
+.ilogin-list-item { /*dopyt, pôjde len do style v head skriptov hlavné menu, firmy, uzivatelia*/
   float: left;
   height: 32px;
   line-height: 32px;
@@ -189,7 +209,7 @@ select:enabled, button:enabled, [onclick] { /*dopyt, zistiť, kto môže mať ho
   margin-left: 8px;
   font-size: 14px;
 }
-.ilogin-list-item.item-avatar {
+.ilogin-list-item.item-avatar { /*dopyt, pôjde len do style v head skriptov hlavné menu, firmy, uzivatelia*/
   width: 32px;
   border-radius: 50%;
   text-align: center;
