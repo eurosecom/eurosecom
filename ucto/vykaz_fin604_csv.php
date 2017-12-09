@@ -96,7 +96,7 @@ $rokmes=$kli_vmes.$kli_vrok;
 
 $soubor = fopen("../tmp/$nazsub", "a+");
 
-$dotaz = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin204pod WHERE F$kli_vxcf"."_uctvykaz_fin204pod.oc = $cislo_oc  ORDER BY oc";
+$dotaz = "SELECT * FROM F$kli_vxcf"."_uctvykaz_fin604 WHERE F$kli_vxcf"."_uctvykaz_fin604.oc = $cislo_oc  ORDER BY oc";
 
 $sql = mysql_query("$dotaz");
 $pol = mysql_num_rows($sql);
@@ -145,6 +145,50 @@ $hlavicka=mysql_fetch_object($sql);
   fwrite($soubor, $text);
 
   $text = "\"R2\",\"".$hlavicka->r02."\",\"".$hlavicka->rm02."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R3\",\"".$hlavicka->r03."\",\"".$hlavicka->rm03."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R4\",\"".$hlavicka->r04."\",\"".$hlavicka->rm04."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R5\",\"".$hlavicka->r05."\",\"".$hlavicka->rm05."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R6\",\"".$hlavicka->r06."\",\"".$hlavicka->rm06."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R7\",\"".$hlavicka->r07."\",\"".$hlavicka->rm07."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R8\",\"".$hlavicka->r08."\",\"".$hlavicka->rm08."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R9\",\"".$hlavicka->r09."\",\"".$hlavicka->rm09."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R10\",\"".$hlavicka->r10."\",\"".$hlavicka->rm10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R11\",\"".$hlavicka->r11."\",\"".$hlavicka->rm11."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R12\",\"".$hlavicka->r12."\",\"".$hlavicka->rm12."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R13\",\"".$hlavicka->r13."\",\"".$hlavicka->rm13."\"";
   $text = $text."\r\n";
   fwrite($soubor, $text);
 
