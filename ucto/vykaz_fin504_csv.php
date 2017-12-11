@@ -122,7 +122,7 @@ $dat_dat = Date ("Y-m-d-h-i", MkTime (date("H"),date("i"),date("s"),date("m"),da
   $text = "\"ico\","."\"rok\","."\"mesiac\""."\r\n";
   fwrite($soubor, $text);
 
-  $text = "\"".$fico8."\","."\"".$kli_vrok."\","."\"".$kli_vmes."\""."\r\n";
+  $text = "\"".$fico8."\","."\"".$kli_vrok."\","."\"".$mesiac."\""."\r\n";
   fwrite($soubor, $text);
 
   $text = "\r\n";
@@ -138,9 +138,17 @@ $dat_dat = Date ("Y-m-d-h-i", MkTime (date("H"),date("i"),date("s"),date("m"),da
 
 //polozky
 
+$stlp1=$hlavicka->stlp1;
+$pole = explode("-", $stlp1);
+$stlp1x=$pole[0].$pole[1].$pole[2];
+
+$stlp2=$hlavicka->stlp2;
+$pole = explode("-", $stlp2);
+$stlp2x=$pole[0].$pole[1].$pole[2];
+
 
   $text = "\"".$hlavicka->stlpa."\",\"".$hlavicka->stlpb."\",\"";
-  $text = $text.$hlavicka->stlp1."\",\"".$hlavicka->stlp2."\",\"".$hlavicka->stlp3."\",\"".$hlavicka->stlp4."\",\"".$hlavicka->stlp5."\",\"";
+  $text = $text.$stlp1x."\",\"".$stlp2x."\",\"".$hlavicka->stlp3."\",\"".$hlavicka->stlp4."\",\"".$hlavicka->stlp5."\",\"";
   $text = $text.$hlavicka->rs00003."\",\"".$hlavicka->rs00004."\"";
   $text = $text."\r\n";
 
