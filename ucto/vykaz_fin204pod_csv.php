@@ -598,7 +598,7 @@ if( $copern == 1 )
 ?>
 <br />
 <br />
-Stiahnite si nižšie uvedený súbor na Váš lokálny disk :
+Stiahnite si nižšie uvedený súbor na Váš lokálny disk a uložte ho s názvom FIN2.csv :
 <br />
 <br />
 <a href="../tmp/<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>

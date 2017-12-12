@@ -36,6 +36,7 @@ $sysx = $_REQUEST['sysx'];
 if(!isset($sysx)) $sysx = 'INE';
 if( $sysx == 'UCT' ) $rozuct="ANO";
 
+
 $pole = explode(".", $kli_vume);
 $kli_vmes=$pole[0];
 $kli_vrok=$pole[1];
@@ -138,17 +139,248 @@ $hlavicka=mysql_fetch_object($sql);
   fwrite($soubor, $text);
 
 
-//polozky aktiva
+//polozky pocs
 
-
-  $text = "\"R1\",\"".$hlavicka->pocs01."\",\"".$hlavicka->pocs02."\",\"".$hlavicka->pocs03."\",\"".$hlavicka->pocs04.
-"\",\"".$hlavicka->pocs05."\",\"".$hlavicka->pocs06."\",\"".$hlavicka->pocs07.
-"\",\"".$hlavicka->pocs08."\",\"".$hlavicka->pocs09."\",\"".$hlavicka->pocs10."\"";
+  $text = "\"R1\",\"".$hlavicka->pocs01."\",\"".$hlavicka->pocs02."\",\"".$hlavicka->pocs03."\",\"".$hlavicka->pocs04;
+  $text = $text."\",\"".$hlavicka->pocs05."\",\"".$hlavicka->pocs06."\",\"".$hlavicka->pocs07;
+  $text = $text."\",\"".$hlavicka->pocs08."\",\"".$hlavicka->pocs09."\",\"".$hlavicka->pocs10."\"";
   $text = $text."\r\n";
+  fwrite($soubor, $text);
 
+  $text = "\"R2\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R3\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R4\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R5\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R6\",\"".$hlavicka->pocs01."\",\"".$hlavicka->pocs02."\",\"".$hlavicka->pocs03."\",\"".$hlavicka->pocs04;
+  $text = $text."\",\"".$hlavicka->pocs05."\",\"".$hlavicka->pocs06."\",\"".$hlavicka->pocs07;
+  $text = $text."\",\"".$hlavicka->pocs08."\",\"".$hlavicka->pocs09."\",\"".$hlavicka->pocs10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R7\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R8\",\"".$hlavicka->pocs01."\",\"".$hlavicka->pocs02."\",\"".$hlavicka->pocs03."\",\"".$hlavicka->pocs04;
+  $text = $text."\",\"".$hlavicka->pocs05."\",\"".$hlavicka->pocs06."\",\"".$hlavicka->pocs07;
+  $text = $text."\",\"".$hlavicka->pocs08."\",\"".$hlavicka->pocs09."\",\"".$hlavicka->pocs10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R9\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R10\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R11\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R12\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
   fwrite($soubor, $text);
 
 
+//polozky zvys
+
+  $text = "\"R13\",\"".$hlavicka->zvys01."\",\"".$hlavicka->zvys02."\",\"".$hlavicka->zvys03."\",\"".$hlavicka->zvys04;
+  $text = $text."\",\"".$hlavicka->zvys05."\",\"".$hlavicka->zvys06."\",\"".$hlavicka->zvys07;
+  $text = $text."\",\"".$hlavicka->zvys08."\",\"".$hlavicka->zvys09."\",\"".$hlavicka->zvys10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R14\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R15\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R16\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R17\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R18\",\"".$hlavicka->zvys01."\",\"".$hlavicka->zvys02."\",\"".$hlavicka->zvys03."\",\"".$hlavicka->zvys04;
+  $text = $text."\",\"".$hlavicka->zvys05."\",\"".$hlavicka->zvys06."\",\"".$hlavicka->zvys07;
+  $text = $text."\",\"".$hlavicka->zvys08."\",\"".$hlavicka->zvys09."\",\"".$hlavicka->zvys10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R19\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R20\",\"".$hlavicka->zvys01."\",\"".$hlavicka->zvys02."\",\"".$hlavicka->zvys03."\",\"".$hlavicka->zvys04;
+  $text = $text."\",\"".$hlavicka->zvys05."\",\"".$hlavicka->zvys06."\",\"".$hlavicka->zvys07;
+  $text = $text."\",\"".$hlavicka->zvys08."\",\"".$hlavicka->zvys09."\",\"".$hlavicka->zvys10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R21\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R22\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R23\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R24\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+
+//polozky znis
+
+  $text = "\"R25\",\"".$hlavicka->znis01."\",\"".$hlavicka->znis02."\",\"".$hlavicka->znis03."\",\"".$hlavicka->znis04;
+  $text = $text."\",\"".$hlavicka->znis05."\",\"".$hlavicka->znis06."\",\"".$hlavicka->znis07;
+  $text = $text."\",\"".$hlavicka->znis08."\",\"".$hlavicka->znis09."\",\"".$hlavicka->znis10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R26\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R27\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R28\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R29\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R30\",\"".$hlavicka->znis01."\",\"".$hlavicka->znis02."\",\"".$hlavicka->znis03."\",\"".$hlavicka->znis04;
+  $text = $text."\",\"".$hlavicka->znis05."\",\"".$hlavicka->znis06."\",\"".$hlavicka->znis07;
+  $text = $text."\",\"".$hlavicka->znis08."\",\"".$hlavicka->znis09."\",\"".$hlavicka->znis10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R31\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R32\",\"".$hlavicka->znis01."\",\"".$hlavicka->znis02."\",\"".$hlavicka->znis03."\",\"".$hlavicka->znis04;
+  $text = $text."\",\"".$hlavicka->znis05."\",\"".$hlavicka->znis06."\",\"".$hlavicka->znis07;
+  $text = $text."\",\"".$hlavicka->znis08."\",\"".$hlavicka->znis09."\",\"".$hlavicka->znis10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R33\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R34\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R35\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R36\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+
+//polozky oces
+
+  $text = "\"R37\",\"".$hlavicka->oces01."\",\"".$hlavicka->oces02."\",\"".$hlavicka->oces03."\",\"".$hlavicka->oces04;
+  $text = $text."\",\"".$hlavicka->oces05."\",\"".$hlavicka->oces06."\",\"".$hlavicka->oces07;
+  $text = $text."\",\"".$hlavicka->oces08."\",\"".$hlavicka->oces09."\",\"".$hlavicka->oces10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+//polozky osts
+
+  $text = "\"R38\",\"".$hlavicka->osts01."\",\"".$hlavicka->osts02."\",\"".$hlavicka->osts03."\",\"".$hlavicka->osts04;
+  $text = $text."\",\"".$hlavicka->osts05."\",\"".$hlavicka->osts06."\",\"".$hlavicka->osts07;
+  $text = $text."\",\"".$hlavicka->osts08."\",\"".$hlavicka->osts09."\",\"".$hlavicka->osts10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+//polozky zoss
+
+  $text = "\"R39\",\"".$hlavicka->zoss01."\",\"".$hlavicka->zoss02."\",\"".$hlavicka->zoss03."\",\"".$hlavicka->zoss04;
+  $text = $text."\",\"".$hlavicka->zoss05."\",\"".$hlavicka->zoss06."\",\"".$hlavicka->zoss07;
+  $text = $text."\",\"".$hlavicka->zoss08."\",\"".$hlavicka->zoss09."\",\"".$hlavicka->zoss10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R40\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R41\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R42\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R43\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R44\",\"".$hlavicka->zoss01."\",\"".$hlavicka->zoss02."\",\"".$hlavicka->zoss03."\",\"".$hlavicka->zoss04;
+  $text = $text."\",\"".$hlavicka->zoss05."\",\"".$hlavicka->zoss06."\",\"".$hlavicka->zoss07;
+  $text = $text."\",\"".$hlavicka->zoss08."\",\"".$hlavicka->zoss09."\",\"".$hlavicka->zoss10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R45\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R46\",\"".$hlavicka->zoss01."\",\"".$hlavicka->zoss02."\",\"".$hlavicka->zoss03."\",\"".$hlavicka->zoss04;
+  $text = $text."\",\"".$hlavicka->zoss05."\",\"".$hlavicka->zoss06."\",\"".$hlavicka->zoss07;
+  $text = $text."\",\"".$hlavicka->zoss08."\",\"".$hlavicka->zoss09."\",\"".$hlavicka->zoss10."\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R47\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R48\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R49\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
+
+  $text = "\"R50\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\",\"0.00\"";
+  $text = $text."\r\n";
+  fwrite($soubor, $text);
 
 
 }
@@ -192,7 +424,7 @@ if( $copern == 1 )
 ?>
 <br />
 <br />
-Stiahnite si nižšie uvedený súbor na Váš lokálny disk :
+Stiahnite si nižšie uvedený súbor na Váš lokálny diska uložte ho s názvom FIN3.csv :
 <br />
 <br />
 <a href="../tmp/<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>

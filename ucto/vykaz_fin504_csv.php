@@ -72,6 +72,12 @@ $fico8=$fir_fico;
 if( $fico8 < 999999 ) { $fico8="00".$fico8; }
 $rokmes=$kli_vmes.$kli_vrok;
 
+$pole = explode(".", $kli_vume);
+$kli_vmes=$pole[0];
+$kli_vrok=$pole[1];
+$kli_vxr=substr($kli_vrok,2,2);;
+if( $kli_vmes < 10 ) $kli_vmes = ""."0".$kli_vmes;
+
 //nazov
 $nazsub="FIN5_".$dat_bez.".csv";
 
@@ -122,7 +128,7 @@ $dat_dat = Date ("Y-m-d-h-i", MkTime (date("H"),date("i"),date("s"),date("m"),da
   $text = "\"ico\","."\"rok\","."\"mesiac\""."\r\n";
   fwrite($soubor, $text);
 
-  $text = "\"".$fico8."\","."\"".$kli_vrok."\","."\"".$mesiac."\""."\r\n";
+  $text = "\"".$fico8."\","."\"".$kli_vrok."\","."\"".$kli_vmes."\""."\r\n";
   fwrite($soubor, $text);
 
   $text = "\r\n";
@@ -218,7 +224,7 @@ if( $copern == 1 )
 ?>
 <br />
 <br />
-Stiahnite si nižšie uvedený súbor na Váš lokálny disk :
+Stiahnite si nižšie uvedený súbor na Váš lokálny disk a uložte ho s názvom FIN5.csv :
 <br />
 <br />
 <a href="../tmp/<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>
