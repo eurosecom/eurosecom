@@ -1924,13 +1924,23 @@ $kli_vrok=$pole[1];
 $kli_vxr=substr($kli_vrok,2,2);;
 if( $kli_vmes < 10 ) $kli_vmes = ""."0".$kli_vmes;
 
+$akadavka="N";
+if( $h_oprav == 1 ) { $akadavka="O"; }
+$akazp="vszp";
+if( $cislo_zdrv >= 2400 AND $cislo_zdrv <= 2499 ) { $akazp="dovera"; }
+if( $cislo_zdrv >= 2700 AND $cislo_zdrv <= 2799 ) { $akazp="union"; }
 
-$nazsub="N514".$kli_vxr.$kli_vmes;
+$hhmm = Date ("Hi", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+$nazsub="../tmp/".$akadavka."514".$kli_vxr.$kli_vmes."_".$kli_uzid."_".$akazp."_".$hhmm.".001";
+
+ $outfilexdel="../tmp/".$akadavka."514".$kli_vxr.$kli_vmes."_".$kli_uzid."_*.*";
+ foreach (glob("$outfilexdel") as $filename) {
+    unlink($filename);
+ }
 
 
-if (File_Exists ("../tmp/$nazsub.001")) { $soubor = unlink("../tmp/$nazsub.001"); }
-
-$soubor = fopen("../tmp/$nazsub.001", "a+");
+$soubor = fopen("$nazsub", "a+");
 
 /////////////NACITANIE CISLA PLATITELA,NAZVU Z CISELNIKA ZP
 $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_zdravpois WHERE zdrv=$cislo_zdrv ");
@@ -2297,8 +2307,8 @@ $j = $j + 1;
 fclose($soubor);
 ?>
 
-<a href="../tmp/<?php echo $nazsub; ?>.001">../tmp/<?php echo $nazsub; ?>.001</a>
-
+<a href="<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>
+<br />
 
 <?php
 
@@ -2327,8 +2337,6 @@ $vysledok = mysql_query("$sqlt");
 ?>
 <?php
 // celkovy koniec dokumentu
-$zmenume=1; $odkaz="../mzdy/vykaz_ZP.php?&copern=1&page=1&ostre=0";
-$cislista = include("mzd_lista.php");
 
        } while (false);
 ?>
