@@ -64,79 +64,146 @@ $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdrocnedane WHERE r08 > 12 ";
  <link rel="stylesheet" href="../css/tlaciva.css">
 <title>EuroSecom - Zoznam RZ dane z príjmu</title>
 <style type="text/css">
-div.navbar > h5 {
-  float: left;
-  display: block;
-  padding: 6px 10px 5px 10px;
+.list-nav > h5 {
+  padding: 6px 16px 5px 16px;
   font-size: 13px;
   color: #000;
   text-align: center;
   background-color: #fff;
+  letter-spacing: .02em;
 }
-div.navbar > h4 {
-  float: right;
-  display: block;
-  padding: 7px 10px 6px 10px;
+.list-nav > h4 {
+  padding: 7px 16px 6px 16px;
   font-size: 11px;
   font-weight: bold;
   color: #000;
   text-align: center;
   background-color: #fff;
+  letter-spacing: .02em;
 }
-span.puntik {
-  padding: 0 5px;
+.puntik {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
   background-color: #93ccde;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 8px;
 }
-div.wrap-zoznam {
-  overflow: auto;
-  width: 100%;
-  background-color: #fff;
+.wrap-list {
+  position: absolute;
+  top: 72px;
+  left: 50%;
+  width: 1024px;
+  margin-left: -512px;
+  padding-bottom: 20px;
+  height: calc(100% - 100px);
+
+
+
 }
-table.zoznam {
-  width: 940px;
-  margin: 5px auto;
+
+/* list layout */
+.list th:nth-child(1), .list td:nth-child(1) {
+  width: 48px;
+  text-align: center;
+}
+.list th:nth-child(2), .list td:nth-child(2) {
+  width: 240px;
+  text-align: left;
+}
+.list th:nth-child(3), .list td:nth-child(3) {
+  width: 70px;
+  text-align: right;
+}
+.list th:nth-child(4), .list td:nth-child(4) {
+  width: 80px;
+  text-align: right;
+}
+.list th:nth-child(5), .list td:nth-child(5) {
+  width: 70px;
+  text-align: right;
+}
+.list th:nth-child(6), .list td:nth-child(6) {
+  width: 70px;
+  text-align: right;
+}
+.list th:nth-child(7), .list td:nth-child(7) {
+  width: 70px;
+  text-align: right;
+}
+.list th:nth-child(8), .list td:nth-child(8) {
+  width: 80px;
+  text-align: right;
+}
+.list th:nth-child(9), .list td:nth-child(9) {
+  width: 70px;
+  text-align: right;
+}
+.list th:nth-child(10), .list td:nth-child(10) {
+  width: 80px;
+  text-align: right;
+}
+.list th:nth-child(11), .list td:nth-child(11) {
+  width: 80px;
+  text-align: right;
+}
+.list th:nth-child(12), .list td:nth-child(12) {
+  width: 48px;
+  text-align: center;
+}
+.list {
   font-size: 12px;
+  height: 100%;
+  display: block;
 }
-table.zoznam thead th {
+.list tbody, .list thead {
+  display: block;
+  background-color: white;
+}
+.list tbody {
+  overflow-y: auto;
+  max-height: calc(100% - 60px);
+}
+.list thead th {
   height: 16px;
   line-height: 16px;
   font-size: 11px;
-  vertical-align: middle;
   color: #999;
+  padding: 8px 0 4px 0;
 }
-table.zoznam tr.stripe-dark {
+table.list tr.stripe-dark {
   background-color: #e1f1f6;
 }
-table.zoznam tbody td {
-  height: 24px;
-  line-height: 24px;
-  border-top: 2px solid #fff;
-  text-align: right;
+.list tbody tr:not(.last-row):hover {
+  background-color: rgba(0,0,0,.10);
 }
-table.zoznam tbody td.rzclassano {
+.list tbody td {
+  height: 30px;
+  line-height: 30px;
+}
+table.list tbody td.rzclassano {
   background-color: #93ccde;
   font-weight: bold;
 }
-table.zoznam tbody img {
+.list tbody img {
   position: relative;
-  top: 5px;
+  top: 4px;
   width: 16px;
   height: 16px;
   cursor: pointer;
 }
-table.zoznam tbody a { color: #000; }
-table.zoznam tbody a:hover { color: #39f; }
-table.zoznam tfoot td {
-  height: 18px;
-  line-height: 18px;
-  border-top: 2px solid #add8e6;
+.list tbody a { color: #000; }
+.list tbody a:hover { color: #39f; }
+.list .last-row td {
+  height: 24px;
+  line-height: 24px;
+  padding-bottom: 4px;
   font-size: 11px;
   font-weight: bold;
-  text-align: right;
   color: #999;
 }
 </style>
-
 <script type="text/javascript">
 //parameter okna
 var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
@@ -161,7 +228,6 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
 </script>
 </HEAD>
 <BODY>
-
 <div id="wrap-heading">
  <table id="heading">
  <tr>
@@ -179,12 +245,11 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
  </table>
 </div>
 
-<div id="content">
-<div class="navbar">
- <h5>Zamestnanci</h5>
- <h4><span class="puntik">&nbsp;</span>&nbsp;&nbsp;Vykonané RZ</h4>
-</div>
-
+<div class="wrap-list">
+  <div class="list-nav" style="overflow: auto;">
+    <h5 class="toleft">Zamestnanci</h5>
+    <h4 class="toright"><span class="puntik"></span>Vykonané RZ</h4>
+  </div>
 <?php
 //zoznam zamestnancov
 if ( $copern != 11 )
@@ -251,35 +316,32 @@ $j=0; //zaciatok strany ak by som chcel strankovat
   while ($i <= $pol )
   {
 if ( $j == 0 ) { ?>
-<div class="wrap-zoznam">
- <table class="zoznam">
- <thead>
- <tr>
-  <th style="width:220px;">Zamestnanec</th>
-  <th style="width:80px;">Úhrn<br>príjmov</th>
-  <th style="width:80px;">Základ<br>dane</th>
-  <th style="width:80px;">Odpoè.<br>daòov.</th>
-  <th style="width:70px;">Daò</th>
-  <th style="width:70px;">Zam.<br>prémia</th>
-  <th style="width:80px;">Daò. bonus<br>Vypl / -Vybr</th>
-  <th style="width:80px;">Preddavky</th>
-  <th style="width:80px;">Daò.<br>Nedo/ -Prepl</th>
-  <th style="width:100px;">Nedo.<br>/ -Prepl.</th>
- </tr>
- <tr>
-  <th>Os.è.<span style="font-weight:normal;">&nbsp;Priezvisko Meno / pomer</span></th>
-  <th>R00</th>
-  <th>R03</th>
-  <th>R04a</th>
-  <th>R06</th>
-  <th>R09</th>
-  <th>R12 / -R13</th>
-  <th>R14</th>
-  <th>R15 / -R16</th>
-  <th>R18n / -R18p</th>
- </tr>
- </thead>
-
+  <table class="list">
+  <thead>
+  <tr>
+    <th>&nbsp;</th>
+    <th>
+      <span>Zamestnanec</span><br>
+      <span style="position: relative; top: 4px;">Os.è.<span style="font-weight:normal;">&nbsp;Priezvisko Meno / pomer</span></span>
+    </th>
+    <th>Úhrn<br>príjmov<br>
+<?php
+if ( $kli_vrok >= 2017 ) { echo "R01"; }
+if ( $kli_vrok < 2017 ) { echo "R00"; }
+?>
+    </th>
+    <th>Základ<br>dane<br>R03</th>
+    <th>Odpoè.<br>daòov.<br>R04a</th>
+    <th>Daò<br>R06</th>
+    <th>Zam.<br>prémia<br>R09</th>
+    <th>Daò. bonus<br>Vypl / -Vybr<br>R12 / -R13</th>
+    <th>Predd.<br>R14</th>
+    <th>Daò.<br>Nedo/ -Prepl<br>R15 / -R16</th>
+    <th>Nedo.<br>/ -Prepl.<br>R18n / -R18p</th>
+    <th>&nbsp;</th>
+  </tr>
+  </thead>
+  <tbody>
 <?php          }
 //koniec j=0
 
@@ -309,28 +371,29 @@ $Cislo=$hotp+"";
 $rzclass="rzclass";
 if ( $polozka->vykx == 1 ) { $rzclass="rzclassano"; }
 ?>
-
 <?php if ( $polozka->psys == 0 ) { ?>
- <tbody>
- <tr class="<?php echo $stripe; ?>">
-  <td class="<?php echo $rzclass; ?>" style="text-align:left;">
-   &nbsp;<img src="../obr/ikony/printer_blue_icon.png" onclick="TlacRZ(<?php echo $polozka->oc;?>);" title="Zobrazi RZ v PDF">
-   <a href="#" onclick="UpravRZ(<?php echo $polozka->oc;?>);" title="Upravi RZ"><strong><?php echo $polozka->oc;?></strong>
-   <?php echo "$polozka->prie $polozka->meno / $polozka->pom"; ?>&nbsp;<img src="../obr/ikony/pencil_blue_icon.png"></a>
-  </td>
-  <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r00x;?></td>
-  <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r03x;?></td>
-  <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r04ax;?></td>
-  <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r06x;?></td>
-  <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r09x;?></td>
-  <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r11x;?></td>
-  <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r14x;?></td>
-  <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r15x;?></td>
-  <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r18x;?>&nbsp;
-   <img src="../obr/ikony/download_blue_icon.png" onclick="ZnovuRZ(<?php echo $polozka->oc;?>);" title="Naèíta hodnoty z miezd">&nbsp;
-  </td>
- </tr>
- </tbody>
+  <tr class="<?php echo $stripe; ?>">
+    <td>
+      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacRZ(<?php echo $polozka->oc;?>);" title="Zobrazi RZ v PDF">
+    </td>
+    <td class="<?php echo $rzclass; ?>">
+      <a href="#" onclick="UpravRZ(<?php echo $polozka->oc;?>);" title="Upravi RZ"><strong><?php echo $polozka->oc;?></strong>
+      <?php echo "$polozka->prie $polozka->meno / $polozka->pom"; ?>&nbsp;&nbsp;<img src="../obr/ikony/pencil_blue_icon.png"></a>
+    </td>
+    <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r00x; ?></td>
+    <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r03x; ?></td>
+    <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r04ax; ?></td>
+    <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r06x; ?></td>
+    <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r09x; ?></td>
+    <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r11x; ?></td>
+    <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r14x; ?></td>
+    <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r15x; ?></td>
+    <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r18x; ?></td>
+    <td>
+      <img src="../obr/ikony/download_blue_icon.png" onclick="ZnovuRZ(<?php echo $polozka->oc;?>);" title="Naèíta hodnoty z miezd">
+    </td>
+  </tr>
+
 <?php                            }
 
 if ( $polozka->psys == 9 ) {
@@ -353,28 +416,23 @@ else { $par=0; }
      }
 //koniec zoznamu
 ?>
- <tfoot>
- <tr>
-  <td style="text-align:left;">&nbsp;SPOLU</td>
-  <td><?php echo $r00x;?></td>
-  <td><?php echo $r03x;?></td>
-  <td><?php echo $r04ax;?></td>
-  <td><?php echo $r06x;?></td>
-  <td><?php echo $r09x;?></td>
-  <td><?php echo $r11x;?></td>
-  <td><?php echo $r14x;?></td>
-  <td><?php echo $r15x;?></td>
-  <td><?php echo $r18x;?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
- </tr>
- </tfoot>
- </table>
-</div>
-
-<div class="navbar">
- <h5>Zamestnanci</h5>
-</div>
-</div> <!-- koniec #content -->
-
+  <tr class="last-row">
+    <td>&nbsp;</td>
+    <td>SPOLU</td>
+    <td><?php echo $r00x; ?></td>
+    <td><?php echo $r03x; ?></td>
+    <td><?php echo $r04ax; ?></td>
+    <td><?php echo $r06x; ?></td>
+    <td><?php echo $r09x; ?></td>
+    <td><?php echo $r11x; ?></td>
+    <td><?php echo $r14x; ?></td>
+    <td><?php echo $r15x; ?></td>
+    <td><?php echo $r18x; ?></td>
+    <td>&nbsp;</td>
+  </tr>
+  </tbody>
+  </table>
+</div><!-- .wrap-list -->
 <?php
 //tlac zoznamu pdf
 if ( $copern == 11 )
