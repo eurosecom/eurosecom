@@ -530,8 +530,8 @@ $sqlpok = mysql_query("$sqlpoktt");
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="css/material.min.css">
-<link rel="stylesheet" href="css/material_edit.css">
-<link rel="stylesheet" href="css/material_list_layout.css">
+<link rel="stylesheet" href="css/material_edit_origin.css">
+<link rel="stylesheet" href="css/material_list_layout_origin.css">
 <title>Užívatelia | EuroSecom</title>
 <style>
 /* zero row = helper col dimensions */
@@ -738,6 +738,12 @@ $sqlpok = mysql_query("$sqlpoktt");
 .grid-table-tools .material-icons {
   margin: -1px 16px 0 0;
 }
+
+
+
+
+
+
 </style>
 </head>
 <body onload="ObnovUI();">

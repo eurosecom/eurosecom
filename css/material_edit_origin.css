@@ -1,0 +1,571 @@
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; /* width + padding + border */
+}
+*, *:after, *:before {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+body {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  line-height: 1;
+}
+a {
+  text-decoration: none;
+  display: inline-block;
+  color: inherit;
+}
+ul, ol, dl {
+  list-style: none;
+}
+ol, ul, li, dl, dt, dd {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+select:enabled, button:enabled, [onclick] { /*dopyt, zistiť, kto môže mať hodnotu enabled a príp. všetky prvky*/
+  cursor: pointer;
+}
+/* BASIC CLASS */
+.center {
+  text-align: center;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.tocenter {
+  margin: auto;
+}
+.toleft {
+  float: left;
+}
+.toright {
+  float: right;
+}
+.vacenter {
+  vertical-align: middle;
+}
+.vatop {
+  vertical-align: top;
+}
+.full-width {
+  width: 100%;
+}
+.flexbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.ukaz {
+  outline: 1px solid red;
+  border: 1px solid red;
+}
+
+/* CHANGE DEFAULT */
+.mdl-tooltip {
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  padding: 12px;
+  max-width: 360px;
+  text-transform: none;
+}
+.mdl-layout__header-row {
+  padding-left: 64px; /*dopyt, naviazať, iba keď je ikona hamburger*/
+  padding-right: 16px;
+  position: relative; /* ie11 bug */
+}
+
+
+/* LAYOUT */
+.ui-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.ui-header {
+  background-color: #039BE5;
+  color: rgba(255,255,255,.7);
+}
+
+
+.ui-header .mdl-layout__drawer-button, .ui-header .mdl-button--icon {
+  color: rgba(255,255,255,.7);
+}
+
+
+
+.ui-header .mdl-layout__drawer-button:hover, .ui-header .mdl-button--icon:hover { /*dopyt, naviazať na všetky buttony v header*/
+  color: rgba(255,255,255,1);
+  /*background-color: rgb(2, 136, 209);*/
+  background-color: rgba(0,0,0,0.071);
+  border-radius: 50%;
+/*background-color: rgba(0,0,0,.12);*/
+}
+
+
+
+
+
+
+
+
+
+
+/* breadcrumb in header title */
+.ui-header-breadcrumb {
+
+}
+.ui-header-breadcrumb > li {
+  float: left;
+  height: 32px;
+  line-height: 32px;
+}
+.ui-header-breadcrumb > .breadcrumb-item:not(.active):after {
+  display: inline-block;
+  content: '/'; /*dopyt, dať cez entitu*/
+  margin: 0 4px;
+}
+.ui-header-breadcrumb > .breadcrumb-item.active {
+  color: rgba(255,255,255,1);
+}
+.ui-header-breadcrumb > .breadcrumb-item > a {
+  font-weight: inherit;
+  border-radius: 2px;
+  padding: 0 4px;
+  float: left;
+}
+.ui-header-breadcrumb > .breadcrumb-item > a:hover {
+  /*background-color: rgb(2, 136, 209);*/
+  background-color: rgba(0,0,0,0.071);
+}
+.ui-header-breadcrumb > .breadcrumb-item > a.dropdown:after {
+  vertical-align: -5px;
+}
+.ui-header-breadcrumb .select-btn {
+  height: inherit;
+  border-radius: 16px;
+  padding-left: 8px;
+/*  background-color: rgb(3, 169, 244);
+  color: white;*/
+}
+/* header nav dropdown menu */
+.ui-header-title-row .mdl-menu__item.active {
+  color: #039be5;
+}
+.ui-header-title-row .wrap-dropdown-menu {
+  position: fixed;
+  left: auto;
+  top: -16px;
+  z-index: 10;
+}
+
+
+/* select button */
+.select-btn {
+  font-size: 12px;
+  border: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  outline: 0;
+  color: rgba(0,0,0,.87);
+  letter-spacing: 0.01em;
+}
+.select-btn:focus {
+  font-weight: 500;
+}
+
+
+
+
+
+
+
+.ui-header-title-row .small-list-absolute {
+  position: absolute;
+  font-size: 12px;
+  letter-spacing: .02em;
+  background-color: ;
+  height: 16px;
+  padding-top: 4px;
+}
+.ui-header-title-row .small-list-absolute > li {
+  float: left;
+  margin: 0 4px;
+}
+
+
+/* ilogin section in header */
+.ilogin-list-item { /*dopyt, pôjde len do style v head skriptov hlavné menu, firmy, uzivatelia*/
+  float: left;
+  height: 32px;
+  line-height: 32px;
+  letter-spacing: 0.02em;
+  color: #fff;
+  margin-right: 8px;
+  margin-left: 8px;
+  font-size: 14px;
+}
+.ilogin-list-item.item-avatar { /*dopyt, pôjde len do style v head skriptov hlavné menu, firmy, uzivatelia*/
+  width: 32px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 12px;
+}
+
+
+
+/* logged in .ui-header-app-row */
+.ilogin .mdl-list__item {
+/*  height: 32px;
+  min-height: 32px;
+  padding: 0;
+  letter-spacing: .02em;*/
+}
+.mdl-list__item .mdl-list__item-primary-content .list-item-avatar {
+/*  margin-right: 8px;
+  height: 32px;
+  line-height: 32px;
+  width: 32px;
+  font-size: 12px;
+  text-align: center;*/
+}
+.ilogin .mdl-list__item-primary-content {
+/*  font-size: 13px;
+  line-height: 1;*/
+}
+
+
+
+
+
+
+/* CONTENT */
+.ui-content {
+  background-color: #eceff1;
+}
+.ui-content.sticky-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+abbr.dot { /*dopyt, asi celkovo abbr zrušiť*/
+  text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+.search-box {
+  border-radius: 2px;
+  height: 40px;
+  width: 300px;
+  padding: 4px 48px;
+  margin: 0 8px;
+}
+.search-box > * {
+  opacity: .7;
+}
+.search-box.is-focused > * {
+  opacity: 1;
+}
+.search-box.is-focused .mdl-textfield__label:after {
+  visibility: hidden;
+}
+.search-box .mdl-button--icon {
+  position: absolute;
+}
+.search-box input[type=text]::-ms-clear { /* ie hidden clear "x" */
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* TABLE */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  height: inherit;
+  position: relative;
+  line-height: 1.2;
+  text-align: left;
+  padding: 0;
+}
+th {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(0,0,0,.54);
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+td {
+  font-size: 12px;
+  color: rgba(0,0,0,.87);
+  letter-spacing: .01em;
+}
+td strong {
+  font-weight: 500;
+}
+table .mini-icon-btn {
+  height: 24px;
+  min-width: 24px;
+  width: 24px;
+}
+
+
+/* basic table */
+.data-table tr:not(:last-of-type),
+.data-table.fixed-header thead tr,
+.data-table.fixed-header tbody tr:not(:last-of-type) {
+  border-bottom: 1px solid #CFD8DC;
+}
+.data-table .row-echo:hover {
+  background-color: #ECEFF1;
+}
+.data-table th:first-of-type, .data-table td:first-of-type {
+  padding-left: 16px;
+}
+.data-table th:last-of-type, .data-table td:last-of-type {
+  padding-right: 16px;
+}
+
+/* table with fixed header */
+.data-table.fixed-header thead, .data-table.fixed-header tbody {
+  display: block;
+}
+.data-table.fixed-header tbody {
+  overflow: auto;
+}
+
+
+
+
+
+/* first col width right align */
+/*.data-table th:first-of-type.right, .data-table td:first-of-type.right {
+  padding-right: 16px;
+}
+@media screen and (max-width: 1024px) {
+  .data-table th:first-of-type.right, .ui-table td:first-of-type.right {
+    padding-right: 8px;
+  }
+}*/
+
+
+
+
+
+.data-table.highlight-row tr.row-echo, .highlight-list li { /*dopyt, pôjde do head-style */
+  -webkit-transition: all ease-in-out .25s;
+  transition: all ease-in-out .25s;
+}
+.data-table.highlight-row tr.selected, .highlight-list li.selected {
+  background-color: #4FC3F7;
+}
+.data-table.highlight-row tr.row-echo:not(.selected):hover, .highlight-list li:not(.selected):hover {
+  background-color: #E1F5FE;
+}
+.data-table.highlight-row td label, .highlight-list li label {
+  display: block;
+  height: 32px;
+  line-height: 32px;
+  cursor: pointer;
+  background-color: ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ICONS */
+.dropdown:after { /*tu bude len obrázok, jeho formátovanie, až dať inak*/
+  display: inline-block;
+  font-family: 'Material Icons';
+  content: '\e5c5';
+  font-size: 24px;
+}
+.dot:after {
+  display: inline-block;
+  content: '\2022';
+  font-size: 24px;
+  color: inherit;
+  line-height: 24px;
+}
+.external-link:after {
+  display: inline-block;
+  font-family: 'Material Icons';
+  content: 'open_in_new';
+  font-size: 16px;
+  vertical-align: top;
+  margin-left: 4px;
+}
+
+
+
+
+
+
+.text-chip {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1;
+  border-radius: 9px;
+  padding: 3px 9px;
+}
+
+
+/* FOOTER */
+.mdl-mini-footer .mdl-logo, .mdl-mini-footer__link-list a {
+  font-size: 12px;
+  font-weight: 400;
+}
+.mdl-mini-footer__link-list a:hover {
+  text-decoration: underline;
+}
+/* sticky footer */
+.ui-content.sticky-footer .mdl-mini-footer {
+  padding: 32px 0 0 0;
+  background-color: transparent;
+}
+
+
+
+
+
+
+/* wrapper for button save */
+#freedom {
+  padding: 16px;
+}
+
+
+
+
+
+/* BUTTON */
+.period-nav-btn { /*dopyt, zosúladiť s ostatnými btn v záhlaví*/
+  color: rgba(255,255,255,.7);
+  width: 36px;
+  color: rgba(255,255,255,.7); width: 24px; min-width: 24px;
+}
+.period-nav-btn:hover {
+  color: rgba(255,255,255,1);
+}
+/*@media screen and (max-width: 1400px) {
+  .period-nav-btn {
+    box-shadow: none;
+  }
+}*/
+/*@media screen and (min-width: 1401px) {
+  .period-nav-btn {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    margin-top: -20px;
+  }
+  .period-nav-btn:nth-of-type(1) {
+    left: 16px;
+  }
+  .period-nav-btn:nth-of-type(2) {
+    right: 16px;
+  }
+}*/
+
+
+/* more tools menu */
+.tool-more-menu .mdl-menu__item {
+  height: 40px;
+  line-height: 40px;
+}
+.tool-more-menu .mdl-menu__item .material-icons {
+  vertical-align: middle;
+  margin-right: 16px;
+  color: rgba(0,0,0,.54);
+}
+
+
+
+
+
+
+
+
+
+/* MATERIAL ICONS */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-32 { font-size: 32px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-40 { font-size: 40px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-64 { font-size: 64px; }
+
+
+
+
+
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.38); } /*dopyt, pôvodne na 26% */
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.5); }/*dopyt, pôvodne na 26% */
+
+.material-icons.orange600 { color: #FB8C00; }
