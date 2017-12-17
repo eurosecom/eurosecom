@@ -430,6 +430,23 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
+//OZNAMENIE O ODLOZENI 
+  function TlacOzOdl()
+  {
+   window.open('../ucto/uzavierka_ozn493.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function UpravOzOdl()
+  {
+   window.open('../ucto/uzavierka_ozn493.php?copern=20&drupoh=1&page=1&strana=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function OzOdldoXML()
+  {
+   window.open('../ucto/uzavierka_ozn493xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+
 //OZNAMENIE O SCHVALENI 
   function TlacOzUz()
   {
@@ -1488,6 +1505,21 @@ if ( $copern == 1 AND $kli_vduj == 9 )
 <a href="#" onclick="UpravDMV();" title="Upravi hodnoty"
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </div> <!-- .line-area priznanie dmv -->
+
+<div class="line-area"> <!-- oznamenie odlož -->
+<div class="toleft line-box"></div>
+<a href="#" onclick="TlacOzOdl();" title="Zobrazi v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>Oznámenie daòovníka o predåžení lehoty na podanie daòového priznania</strong>
+</div>
+</div>
+<a href="#" onclick="OzOdldoXML();" title="export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravOzOdl();" title="Upravi hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area oznamenie odlož -->
 
 <div class="line-area"> <!-- oznamenie o uz -->
 <div class="toleft line-box"></div>
