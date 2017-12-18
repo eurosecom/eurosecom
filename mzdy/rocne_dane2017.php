@@ -1032,14 +1032,15 @@ $zamestnanec = $fir_riadok->meno." ".$fir_riadok->prie;
 $meno = $fir_riadok->meno;
 $prie = $fir_riadok->prie;
 $narodeny=SkDatum($fir_riadok->dar);
-$rodne = $fir_riadok->rdc."/".$fir_riadok->rdk;
-if ( $rodne != "/" ) { $narodeny=""; }
 $rodnec = $fir_riadok->rdc;
 $rodnek = $fir_riadok->rdk;
 
+if ( $rodnec == "" ) { $rodne1r = $narodeny; }
+if ( $rodnec != "" ) { $rodne1r = $fir_riadok->rdc."/".$fir_riadok->rdk; }
 
+if ( $rodnec == "" ) { $rodne1p = ""; $narod1p=str_replace(".","",$narodeny);}
+if ( $rodnec != "" ) { $rodne1p = $fir_riadok->rdc.$fir_riadok->rdk; $narod1p=""; }
 
-//if ( $rodne == "0/" ) { $rodne="$dar"; }
 
 $ptitl = $fir_riadok->titl;
 $adresa = $fir_riadok->zuli." ".$fir_riadok->zcdm.", ".$fir_riadok->zmes;
@@ -1582,7 +1583,7 @@ $source="../mzdy/rocne_dane2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 
 <!-- zamestnanec -->
 <div class="input-echo" style="top:136px; left:302px; font-size: 18px;"><?php echo "$ptitl $zamestnanec"; ?></div>
-<div class="input-echo" style="top:136px; left:667px; font-size: 18px;"><?php echo $rodne; ?></div>
+<div class="input-echo" style="top:136px; left:667px; font-size: 18px;"><?php echo $rodne1r; ?></div>
 <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upravi údaje o zamestnancovi" class="btn-row-tool" style="top:138px; left:785px; width:20px; height:20px;">
 <div class="input-echo" style="top:163px; left:247px; font-size: 18px;"><?php echo $adresa; ?></div>
 <div class="input-echo" style="top:163px; left:672px; font-size: 18px;"><?php echo $zpsc; ?></div>
@@ -1700,7 +1701,7 @@ $kli_vrokx = substr($kli_vrok,2,2);
 <span class="text-echo" style="width:128px; top:183px; left:57px;"><?php echo $rodnec; ?></span>
 <span class="text-echo" style="width:81px; top:183px; left:220px;"><?php echo $rodnek; ?></span>
 
-<span class="text-echo" style="top:183px; left:357px;"><?php echo $narodeny; ?></span>
+<span class="text-echo" style="top:183px; left:357px;"><?php echo $narod1p; ?></span>
 
 <?php
 $kli_vrokx = substr($kli_vrok,2,2);
