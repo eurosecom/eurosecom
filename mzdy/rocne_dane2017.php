@@ -1033,11 +1033,9 @@ $meno = $fir_riadok->meno;
 $prie = $fir_riadok->prie;
 $narodeny=SkDatum($fir_riadok->dar);
 $rodne = $fir_riadok->rdc."/".$fir_riadok->rdk;
-if ( $rodne == "/" ) { $rodne=$narodeny; }
+if ( $rodne != "/" ) { $narodeny=""; }
 $rodnec = $fir_riadok->rdc;
 $rodnek = $fir_riadok->rdk;
-$narodenyx=$narodeny;
-if ( $rodne != "/" ) $narodenyx="";
 
 
 
@@ -1702,7 +1700,7 @@ $kli_vrokx = substr($kli_vrok,2,2);
 <span class="text-echo" style="width:128px; top:183px; left:57px;"><?php echo $rodnec; ?></span>
 <span class="text-echo" style="width:81px; top:183px; left:220px;"><?php echo $rodnek; ?></span>
 
-<span class="text-echo" style="top:183px; left:357px;"><?php echo $narodenyx; ?></span>
+<span class="text-echo" style="top:183px; left:357px;"><?php echo $narodeny; ?></span>
 
 <?php
 $kli_vrokx = substr($kli_vrok,2,2);
