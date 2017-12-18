@@ -1,5 +1,5 @@
 <!doctype html>
-<HTML>
+<html>
 <?php
 //celkovy zaciatok dokumentu Oznamenie daÚovnÌka o predÂûenÌ lehoty na podanie daÚovÈho priznania v. 2017
 do
@@ -22,7 +22,7 @@ require_once("../pswd/password.php");
   mysql_select_db($mysqldb);
 
 //ramcek fpdf 1=zap,0=vyp
-$rmc=0;
+$rmc=1;
 $rmc1=0;
 
 //datumove funkcie
@@ -36,6 +36,12 @@ $citfir = include("../cis/citaj_fir.php");
 $cislo_oc = 1*$_REQUEST['cislo_oc'];
 $subor = $_REQUEST['subor'];
 $jedn = 1*$_REQUEST['jedn'];
+$strana = 1*$_REQUEST['strana'];
+if ( $strana == 0 ) { $strana = 1; }
+
+//.jpg source
+$jpg_source="../dokumenty/dan_z_prijmov2017/ozn493/ozn493_v17";
+$jpg_popis="tlaËivo Ozn·menie daÚovnÌka o predÂûenÌ lehoty na podanie daÚovÈho priznania pre rok ".$kli_vrok;
 
 //znovu nacitaj
 if ( $copern == 26 )
@@ -69,10 +75,10 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uzavozn493 SET ".
 " datk='$datk_sql', datz='$datz_sql', dats='$dats_sql', ".
 " obbod='$obbod', obbdo='$obbdo', obmod='$obmod', obmdo='$obmdo', ".
 " druhuz='$druhuz', druhuj='$druhuj' ".
-" WHERE oc = $cislo_oc "; 
+" WHERE oc = $cislo_oc ";
 //echo $uprtxt;
-$upravene = mysql_query("$uprtxt"); 
-//exit; 
+$upravene = mysql_query("$uprtxt");
+//exit;
 //exit;
 $copern=20;
 if (!$upravene):
@@ -152,7 +158,7 @@ $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
 
   }
 
-if( $datuk_sql != '' AND $datuk_sql != '0000-00-00' ) 
+if( $datuk_sql != '' AND $datuk_sql != '0000-00-00' )
     {
 $sqlfir = "UPDATE F$kli_vxcf"."_uzavozn493 SET ".
 " datk='$datuk_sql', obbod='$datbod_sql', obbdo='$datbdo_sql', obmod='$datmod_sql', obmdo='$datmdo_sql' ".
@@ -160,7 +166,7 @@ $sqlfir = "UPDATE F$kli_vxcf"."_uzavozn493 SET ".
 $fir_vysledok = mysql_query($sqlfir);
     }
 
-if( $datuk_sql == '0000-00-00' ) 
+if( $datuk_sql == '0000-00-00' )
     {
 $datuk_sql=$kli_vrok."-12-31";
 $datbod_sql="01.".$kli_vrok; $datbdo_sql="12.".$kli_vrok;
@@ -198,7 +204,7 @@ $druhuj = $fir_riadok->druhuj;
 
 
 ?>
-<HEAD>
+<head>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
  <link rel="stylesheet" href="../css/reset.css">
  <link rel="stylesheet" href="../css/tlaciva.css">
@@ -215,58 +221,9 @@ div.input-echo {
 }
 </style>
 
-<script type="text/javascript">
-<?php
-//uprava
-  if ( $copern == 20 )
-  { 
-?>
-  function ObnovUI()
-  {
-   document.formv1.datk.value = '<?php echo "$datk_sk";?>';
-   document.formv1.datz.value = '<?php echo "$datz_sk";?>';
-   document.formv1.dats.value = '<?php echo "$dats_sk";?>';
-   document.formv1.obbod.value = '<?php echo "$obbod";?>';
-   document.formv1.obbdo.value = '<?php echo "$obbdo";?>';
-   document.formv1.obmod.value = '<?php echo "$obmod";?>';
-   document.formv1.obmdo.value = '<?php echo "$obmdo";?>';
-<?php if ( $druhuz == 0 ) { ?> document.formv1.druhuz0.checked = 'true'; <?php } ?>
-<?php if ( $druhuz == 1 ) { ?> document.formv1.druhuz1.checked = 'true'; <?php } ?>
-<?php if ( $druhuj == 0 ) { ?> document.formv1.druhuj0.checked = 'true'; <?php } ?>
-<?php if ( $druhuj == 1 ) { ?> document.formv1.druhuj1.checked = 'true'; <?php } ?>
-<?php if ( $druhuj == 2 ) { ?> document.formv1.druhuj2.checked = 'true'; <?php } ?>
-<?php if ( $druhuj == 3 ) { ?> document.formv1.druhuj3.checked = 'true'; <?php } ?>
-  }
-<?php
-//koniec uprava
-  }
-?>
 
-<?php
-  if ( $copern != 20 )
-  {
-?>
-  function ObnovUI()
-  {
-  }
-<?php
-  }
-?>
-
-//Z ciarky na bodku
-  function CiarkaNaBodku(Vstup)
-  {
-   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-  }
-
-
-  function tlacUzOz()
-  {
-   window.open('uzavierka_ozn493.php?copern=10&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc;?>', '_blank');
-  }
-</script>
-</HEAD>
-<BODY id="white" onload="ObnovUI();">
+</head>
+<body id="white" onload="ObnovUI();">
 <?php
 //uprav udaje
 if ( $copern == 20 )
@@ -283,8 +240,7 @@ if ( $copern == 20 )
    </td>
    <td>
     <div class="bar-btn-form-tool">
-     <img src="../obr/ikony/printer_blue_icon.png" onclick="tlacUzOz();"
-      title="Zobraziù v PDF" class="btn-form-tool">
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="FormPDF(9999);" title="Zobraziù v PDF" class="btn-form-tool">
     </div>
    </td>
   </tr>
@@ -293,13 +249,24 @@ if ( $copern == 20 )
 
 <div id="content">
 <FORM name="formv1" method="post" action="uzavierka_ozn493.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>">
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave" style="top:4px;">
 
-<img src="../dokumenty/dan_z_prijmov2014/uzozn_v14.jpg"
- alt="tlaËivo Ozn·menie o d·tume schv·lenia ˙Ëtovnej z·vierky pre rok 2014 204kB"
- class="form-background">
-<input type="text" name="datk" id="datk" onkeyup="CiarkaNaBodku(this);"
-       style="width:195px; top:112px; left:426px;"/>
+<?php
+$clas1="noactive"; $clas2="noactive";
+if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
+?>
+<div class="navbar">
+  <a href="#" onclick="editForm(1);" class="<?php echo $clas1; ?> toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
+  <a href="#" onclick="FormPDF(2);" class="<?php echo $clas2; ?> toright">2</a>
+  <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a>
+  <h6 class="toright">TlaËiù:</h6>
+  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+</div>
+
+<?php if ( $strana == 1 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str1.jpg" alt="<?php echo $jpg_popis; ?> 1.strana 208kB" class="form-background">
+
+<input type="text" name="datk" id="datk" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:112px; left:426px;"/>
 
 <span class="text-echo" style="top:268px; left:57px;"><?php echo $fir_fdic; ?></span>
 <?php
@@ -335,9 +302,23 @@ if ( $fir_fico < 1000000 ) { $ico="00".$fir_fico; }
 <div class="input-echo" style="width:290px; top:836px; left:52px;"><?php echo $fir_ftel; ?></div>
 <div class="input-echo" style="width:290px; top:836px; left:372px;"><?php echo $fir_ffax; ?></div>
 <div class="input-echo" style="width:843px; top:891px; left:52px;"><?php echo $fir_fem1; ?></div>
+<?php                     } ?>
+
+
+<?php if ( $strana == 2 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str2.jpg" alt="<?php echo $jpg_popis; ?> 2.strana 184kB" class="form-background">
+
+
+<?php                     } ?>
+
+<div class="navbar">
+  <a href="#" onclick="editForm(1);" class="<?php echo $clas1; ?> toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
+  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+</div>
 
 </FORM>
-</div> <!-- koniec #content -->
+</div><!-- koniec #content -->
 <?php
 //mysql_free_result($vysledok);
      }
@@ -346,7 +327,7 @@ if ( $fir_fico < 1000000 ) { $ico="00".$fir_fico; }
 
 
 <?php
-/////////////////////////////////////////////////VYTLAC 
+//PDF
 if ( $copern == 10 )
 {
 if ( File_Exists("../tmp/uzoznamenie.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/uzoznamenie.$kli_uzid.pdf"); }
@@ -373,20 +354,23 @@ $j=0; //zaciatok strany ak by som chcel strankovat
 {
 $hlavicka=mysql_fetch_object($sql);
 
-  $ozam_np = $hlavicka->ozam_np;
+/*
+	  $ozam_np = $hlavicka->ozam_np;
   $pole = explode(".", $ozam_np);
   $Cozam_np = $pole[0];
   $Dozam_np = substr($pole[1],0,1);
+*/
 
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
+if ( $strana == 1 OR $strana == 9999 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(8);
-$pdf->SetTopMargin(15);
-if ( File_Exists('../dokumenty/dan_z_prijmov2014/uzozn_v14.jpg') AND $i == 0 )
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str1.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2014/uzozn_v14.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -948,12 +932,24 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F1","$rmc",0,"C");$pdf->Cell(
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H1","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J1","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$K1","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$L1","$rmc",1,"C");
+                                       } //$strana == 1 OR $strana == 9999
+
+if ( $strana == 2 OR $strana == 9999 ) {
+$pdf->AddPage();
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
+$pdf->SetTopMargin(10);
+if ( File_Exists($jpg_source.'_str2.jpg') AND $i == 0 )
+{
+$pdf->Image($jpg_source.'_str2.jpg',0,0,210,297);
+}
+$pdf->SetY(10);
 
 
 
 
 
-
+                                       } //$strana == 2 OR $strana == 9999
 }
 $i = $i + 1;
   }
@@ -966,7 +962,7 @@ $pdf->Output("../tmp/uzoznamenie.$kli_uzid.pdf");
 
 <?php
 }
-//koniec vytlac
+//$copern == 10
 ?>
 
 <?php
@@ -980,5 +976,67 @@ $vysledok = mysql_query("$sqlt");
 //celkovy koniec dokumentu
 } while (false);
 ?>
-</BODY>
-</HTML>
+
+<script type="text/javascript">
+//dimensions blank
+var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, height=900';
+
+<?php
+//uprava
+  if ( $copern == 20 )
+  {
+?>
+  function ObnovUI()
+  {
+<?php if ( $strana == 1 ) { ?>
+   document.formv1.datk.value = '<?php echo "$datk_sk";?>';
+   document.formv1.datz.value = '<?php echo "$datz_sk";?>';
+   document.formv1.dats.value = '<?php echo "$dats_sk";?>';
+   document.formv1.obbod.value = '<?php echo "$obbod";?>';
+   document.formv1.obbdo.value = '<?php echo "$obbdo";?>';
+   document.formv1.obmod.value = '<?php echo "$obmod";?>';
+   document.formv1.obmdo.value = '<?php echo "$obmdo";?>';
+<?php if ( $druhuz == 0 ) { ?> document.formv1.druhuz0.checked = 'true'; <?php } ?>
+<?php if ( $druhuz == 1 ) { ?> document.formv1.druhuz1.checked = 'true'; <?php } ?>
+<?php if ( $druhuj == 0 ) { ?> document.formv1.druhuj0.checked = 'true'; <?php } ?>
+<?php if ( $druhuj == 1 ) { ?> document.formv1.druhuj1.checked = 'true'; <?php } ?>
+<?php if ( $druhuj == 2 ) { ?> document.formv1.druhuj2.checked = 'true'; <?php } ?>
+<?php if ( $druhuj == 3 ) { ?> document.formv1.druhuj3.checked = 'true'; <?php } ?>
+<?php                     } ?>
+
+<?php if ( $strana == 2 ) { ?>
+
+<?php                     } ?>
+  }
+<?php
+//koniec uprava
+  }
+?>
+
+<?php
+  if ( $copern != 20 )
+  {
+?>
+  function ObnovUI()
+  {
+  }
+<?php
+  }
+?>
+
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
+  }
+  function editForm(strana)
+  {
+    window.open('uzavierka_ozn493.php?copern=20&strana=' + strana + '&drupoh=1', '_self');
+  }
+  function FormPDF(strana)
+  {
+    window.open('uzavierka_ozn493.php?copern=10&strana=' + strana + '&drupoh=1', '_blank', blank_param);
+  }
+</script>
+</body>
+</html>
