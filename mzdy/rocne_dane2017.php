@@ -42,8 +42,14 @@ if ( $strana == 0 ) { $strana = 1; }
 $vsetkyprepocty=0;
 
 //.jpg podklad
+if ( $strana <= 2 ) {
 $jpg_cesta="../dokumenty/dan_z_prijmov2017/dan_zo_zavislej2017/rz/rzfo_v17";
 $jpg_popis="tlaËivo RoËnÈ z˙Ëtovanie preddavkov na daÚ z prÌjmov FO zo z·vislej Ëinnosti pre rok ".$kli_vrok;
+                    }
+if ( $strana == 3 ) {
+$jpg_source="../dokumenty/dan_z_prijmov2017/dan_zo_zavislej2017/rz/v2pp_v17";
+$jpg_popis="tlaËivo Potvrdenie o zaplatenÌ dane z prÌjmov zo z·vislej Ëinnosti na ˙Ëely vyhl·senia o pouk·zanÌ sumy do v˝öky 2 % alebo 3 % zaplatenej dane fyzickej osoby pre rok ".$kli_vrok;
+                    }
 
 $sqtoz = "DELETE FROM F513_mzdrocnedane WHERE r00 > 99999999.98 ";
 //$oznac = mysql_query("$sqtoz");
@@ -1025,9 +1031,18 @@ $vyk = $fir_riadok->vyk;
 $zamestnanec = $fir_riadok->meno." ".$fir_riadok->prie;
 $meno = $fir_riadok->meno;
 $prie = $fir_riadok->prie;
+$narodeny=SkDatum($fir_riadok->dar);
 $rodne = $fir_riadok->rdc."/".$fir_riadok->rdk;
-$dar=SkDatum($fir_riadok->dar);
-if ( $rodne == "0/" ) { $rodne="$dar"; }
+if ( $rodne == "/" ) { $rodne=$narodeny; }
+$rodnec = $fir_riadok->rdc;
+$rodnek = $fir_riadok->rdk;
+$narodenyx=$narodeny;
+if ( $rodne != "/" ) $narodenyx="";
+
+
+
+//if ( $rodne == "0/" ) { $rodne="$dar"; }
+
 $ptitl = $fir_riadok->titl;
 $adresa = $fir_riadok->zuli." ".$fir_riadok->zcdm.", ".$fir_riadok->zmes;
 $zuli = $fir_riadok->zuli;
@@ -1274,6 +1289,9 @@ if ( $fir_uctt03 == 999 )
 {
 $fir_fnaz=""; $fir_uctt03tlac="";
 }
+
+
+
 ?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -1338,6 +1356,10 @@ div.input-echo {
   text-align: right;
   font-weight: bold;
 }
+span.text-echo {
+  font-size: 18px;
+  letter-spacing: 13px;
+}
 </style>
 <script type="text/javascript">
 //parameter okna
@@ -1395,7 +1417,7 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
   }
   function ZoznamRocnezucto()
   {
-   window.open('../mzdy/rocne_danezoznam2013.php?copern=1&drupoh=1&page=1&subor=0', '_self');
+   window.open('../mzdy/rocne_danezoznam2013.php?copern=1&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc; ?>', '_self');
   }
 
 <?php
@@ -1558,15 +1580,14 @@ $source="../mzdy/rocne_dane2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
   <option value="0">Nevykonaù</option>
   <option value="1">Vykonaù</option>
  </select>
-<span class="text-echo" style="top:92px; left:573px; font-size:18px;"><?php echo $kli_vrok; ?></span>
+<div class="input-echo" style="top:88px; left:573px; font-size:18px;"><?php echo $kli_vrok; ?></div>
 
 <!-- zamestnanec -->
-<span class="text-echo" style="top:141px; left:302px; "><?php echo "$ptitl $zamestnanec"; ?></span>
-<span class="text-echo" style="top:141px; left:670px; "><?php echo $rodne; ?></span>
-<img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();"
- title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool" style="top:139px; left:780px; width:20px; height:20px;">
-<span class="text-echo" style="top:168px; left:247px;"><?php echo $adresa; ?></span>
-<span class="text-echo" style="top:168px; left:672px;"><?php echo $zpsc; ?></span>
+<div class="input-echo" style="top:136px; left:302px; font-size: 18px;"><?php echo "$ptitl $zamestnanec"; ?></div>
+<div class="input-echo" style="top:136px; left:667px; font-size: 18px;"><?php echo $rodne; ?></div>
+<img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool" style="top:138px; left:785px; width:20px; height:20px;">
+<div class="input-echo" style="top:163px; left:247px; font-size: 18px;"><?php echo $adresa; ?></div>
+<div class="input-echo" style="top:163px; left:672px; font-size: 18px;"><?php echo $zpsc; ?></div>
 
 <!-- I.CAST -->
 <div class="input-echo" style="width:80px; top:259px; left:661px;"><?php echo $r00; ?></div>
@@ -1622,7 +1643,7 @@ $source="../mzdy/rocne_dane2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 <input type="text" name="r18n" id="r18n" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1135px; left:661px;"/>
 <input type="text" name="r18p" id="r18p" onkeyup="CiarkaNaBodku(this);" style="width:80px; top:1167px; left:661px;"/>
 <!-- Vykonal a pozn -->
-<span class="text-echo" style="top:1230px; left:77px;"><?php echo $kli_uzprie; ?></span>
+<div class="input-echo" style="top:1222px; left:74px; font-size: 18px;"><?php echo $kli_uzprie; ?></div>
 <input type="text" name="da21" id="da21" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:118px; top:1216px; left:383px;"/>
 <input type="text" name="pozn" id="pozn" style="width:300px; top:1255px; left:610px;"/>
 <div class="leg-pozn">Pozn·mka</div>
@@ -1634,10 +1655,10 @@ $source="../mzdy/rocne_dane2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 
 <!-- II. CAST -->
 <input type="text" name="da2str" id="da2str" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:90px; top:142px; left:440px;"/>
-<span class="text-echo" style="top:181px; left:465px; "><?php echo $kli_vrok; ?></span>
+<div class="input-echo" style="top:176px; left:465px; "><?php echo $kli_vrok; ?></div>
 
 <!-- tabulka -->
-<span class="text-echo" style="top:246px; left:88px;"><?php echo $zamestnanec; ?></span>
+<div class="input-echo" style="top:241px; left:86px; font-size: 18px;"><?php echo $zamestnanec; ?></div>
 <!-- zrazene -->
 <input type="text" name="suma1" id="suma1" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:276px; left:606px;"/>
 <input type="text" name="zost1" id="zost1" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:276px; left:741px;"/>
@@ -1660,29 +1681,60 @@ $source="../mzdy/rocne_dane2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 <input type="text" name="suma7" id="suma7" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:486px; left:606px;"/>
 <input type="text" name="zost7" id="zost7" onkeyup="CiarkaNaBodku(this);" style="width:120px; top:486px; left:741px;"/>
 
-<span class="text-echo" style="top:626px; left:75px;"><?php echo $fir_fmes; ?></span>
+<div class="input-echo" style="top:621px; left:75px; font-size: 18px;"><?php echo $fir_fmes; ?></div>
 <!-- Dna -->
 <input type="text" name="da2ked" id="da2ked" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:117px; top:620px; left:354px;"/>
 <?php                     } ?>
 
 
 <?php if ( $strana == 3 ) { ?>
-<img src="../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/rz/rz_potvrdenie_dane_v13_form.jpg"
-     alt="tlaËivo Potvrdenie o zaplatenÌ dane z prÌjmov zo z·vislej Ëinnosti 305kB" class="form-background">
-<span class="text-echo" style="top:111px; left:742px; font-size:18px;"><?php echo $kli_vrok; ?></span>
-
 <!-- POTVRDENIE ZAPLATENIE DANE -->
+<img src="<?php echo $jpg_source; ?>.jpg" alt="<?php echo $jpg_popis; ?> 2.strana 222kB" class="form-background">
+<?php
+$kli_vrokx = substr($kli_vrok,2,2);
+
+?>
+
+
+
+
+
+<span class="text-echo" style="width:128px; top:183px; left:57px;"><?php echo $rodnec; ?></span>
+<span class="text-echo" style="width:81px; top:183px; left:220px;"><?php echo $rodnek; ?></span>
+
+<span class="text-echo" style="top:183px; left:357px;"><?php echo $narodenyx; ?></span>
+
+<?php
+$kli_vrokx = substr($kli_vrok,2,2);
+?>
+<span class="text-echo" style="top:180px; left:780px;"><?php echo $kli_vrokx; ?></span>
+
+
+
+
+
+
+
+<!-- dopyt, rodnÈ ËÌslo a d·tum narodenia nem·m -->
+
 <!-- I.Zamestnanec -->
-<div class="input-echo" style="top:216px; left:119px;"><?php echo $prie; ?></div>
-<div class="input-echo" style="top:216px; left:409px;"><?php echo $meno; ?></div>
-<div class="input-echo" style="top:216px; left:590px;"><?php echo $rodne; ?></div>
-<div class="input-echo" style="top:252px; left:220px;"><?php echo $ptitl; ?></div>
-<div class="input-echo" style="top:252px; left:610px;"><?php echo $titulza; ?></div>
+<div class="input-echo" style="top:276px; left:55px; font-size:18px;"><?php echo $prie; ?></div>
+<div class="input-echo" style="top:263px; left:409px; font-size:18px;"><?php echo $meno; ?></div>
+<div class="input-echo" style="top:263px; left:550px; font-size:18px;"><?php echo $ptitl; ?></div>
+<div class="input-echo" style="top:263px; left:610px; font-size:18px;"><?php echo $titulza; ?></div>
+
+
+
+
+
 <div class="input-echo" style="top:309px; left:155px;"><?php echo $zuli; ?></div>
 <div class="input-echo" style="top:309px; left:535px;"><?php echo $zcdm; ?></div>
 <div class="input-echo" style="top:309px; left:700px;"><?php echo $zpsc; ?></div>
 <div class="input-echo" style="top:344px; left:155px;"><?php echo $zmes; ?></div>
-<div class="input-echo" style="top:344px; left:530px;"><?php echo $statznec; ?></div>
+<div class="input-echo" style="top:344px; left:530px;"><?php echo $statznec; ?></div> <!-- dopyt, daù zstat -->
+
+<span class="text-echo" style="top:490px; left:57px;"><?php echo $fir_fdic; ?></span>
+
 <!-- II.Zamestnavatel -->
 <div class="input-echo" style="top:484px; left:120px;"><?php echo $dprie; ?></div>
 <div class="input-echo" style="top:484px; left:408px;"><?php echo $dmeno; ?></div>

@@ -10,6 +10,8 @@ $typ = $_REQUEST['typ'];
 $cislo_uce = $_REQUEST['cislo_uce'];
 $drupoh = 1*$_REQUEST['drupoh'];
 
+$cislo_oc = 1*$_REQUEST['cislo_oc'];
+
 $uziv = include("../uziv.php");
 if ( !$uziv ) exit;
 
@@ -98,11 +100,7 @@ $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdrocnedane WHERE r08 > 12 ";
   margin-left: -512px;
   padding-bottom: 20px;
   height: calc(100% - 100px);
-
-
-
 }
-
 /* list layout */
 .list th:nth-child(1), .list td:nth-child(1) {
   width: 48px;
@@ -165,15 +163,17 @@ $dsqlt = "DELETE FROM F$kli_vxcf"."_mzdrocnedane WHERE r08 > 12 ";
   overflow-y: auto;
   max-height: calc(100% - 60px);
 }
+.list tbody tr:not(:first-of-type) {
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
 .list thead th {
   height: 16px;
   line-height: 16px;
   font-size: 11px;
   color: #999;
   padding: 8px 0 4px 0;
-}
-table.list tr.stripe-dark {
-  background-color: #e1f1f6;
 }
 .list tbody tr:not(.last-row):hover {
   background-color: rgba(0,0,0,.10);
@@ -182,7 +182,8 @@ table.list tr.stripe-dark {
   height: 30px;
   line-height: 30px;
 }
-table.list tbody td.rzclassano {
+
+.list tbody td.rzclassano {
   background-color: #93ccde;
   font-weight: bold;
 }
@@ -196,9 +197,9 @@ table.list tbody td.rzclassano {
 .list tbody a { color: #000; }
 .list tbody a:hover { color: #39f; }
 .list .last-row td {
-  height: 24px;
-  line-height: 24px;
-  padding-bottom: 4px;
+  height: 30px;
+  line-height: 30px;
+  padding-bottom: 0px;
   font-size: 11px;
   font-weight: bold;
   color: #999;
@@ -225,9 +226,16 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
   {
    window.open('../mzdy/rocne_danezoznam<?php echo $rokrocnezucz; ?>.php?copern=11&drupoh=1&page=1&subor=0', '_blank', param);
   }
+
+  function ObnovUI()
+  {
+<?php if ( $cislo_oc > 0) { ?>
+    document.getElementById('<?php echo $cislo_oc; ?>').scrollIntoView();
+<?php } ?>
+  }
 </script>
 </HEAD>
-<BODY>
+<BODY onload="ObnovUI();">
 <div id="wrap-heading">
  <table id="heading">
  <tr>
@@ -318,7 +326,7 @@ $j=0; //zaciatok strany ak by som chcel strankovat
 if ( $j == 0 ) { ?>
   <table class="list">
   <thead>
-  <tr>
+  <tr style="border-bottom: 1px solid lightblue;">
     <th>&nbsp;</th>
     <th>
       <span>Zamestnanec</span><br>
@@ -350,8 +358,6 @@ if ( $typ == 'HTML' ) $j=1;
 
   if (@$zaznam=mysql_data_seek($sql,$i))
 {
-$stripe="stripe-dark";
-if ( $par == 1 ) { $stripe="stripe-light"; }
 
 $polozka=mysql_fetch_object($sql);
 $h_hotp=0;
@@ -368,16 +374,17 @@ $h_hotv=$polozka->hotv;
 $hotp = $hotp + $h_hotp;
 $Cislo=$hotp+"";
 
+//zvyrazni ano rz
 $rzclass="rzclass";
 if ( $polozka->vykx == 1 ) { $rzclass="rzclassano"; }
 ?>
 <?php if ( $polozka->psys == 0 ) { ?>
-  <tr class="<?php echo $stripe; ?>">
-    <td>
+  <tr id="<?php echo $polozka->oc; ?>">
+    <td class="<?php echo $rzclass; ?>">
       <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacRZ(<?php echo $polozka->oc;?>);" title="Zobrazi RZ v PDF">
     </td>
     <td class="<?php echo $rzclass; ?>">
-      <a href="#" onclick="UpravRZ(<?php echo $polozka->oc;?>);" title="Upravi RZ"><strong><?php echo $polozka->oc;?></strong>
+      <a href="#" onclick="UpravRZ(<?php echo $polozka->oc; ?>);" title="Upravi RZ"><strong><?php echo $polozka->oc;?></strong>
       <?php echo "$polozka->prie $polozka->meno / $polozka->pom"; ?>&nbsp;&nbsp;<img src="../obr/ikony/pencil_blue_icon.png"></a>
     </td>
     <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r00x; ?></td>
@@ -389,7 +396,7 @@ if ( $polozka->vykx == 1 ) { $rzclass="rzclassano"; }
     <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r14x; ?></td>
     <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r15x; ?></td>
     <td class="<?php echo $rzclass; ?>"><?php echo $polozka->r18x; ?></td>
-    <td>
+    <td class="<?php echo $rzclass; ?>">
       <img src="../obr/ikony/download_blue_icon.png" onclick="ZnovuRZ(<?php echo $polozka->oc;?>);" title="Naèíta hodnoty z miezd">
     </td>
   </tr>
@@ -410,8 +417,6 @@ $r18x=$polozka->r18x;
 }
 $i = $i + 1;
 $j = $j + 1;
-if ( $par == 0 ) { $par=1; }
-else { $par=0; }
   }
      }
 //koniec zoznamu
