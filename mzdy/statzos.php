@@ -83,13 +83,17 @@ function VyberVstup()
 <?php  echo "document.forms.formcc1.h_obdk.value=$kli_vmes; "; ?>
                 }
 
+<?php
+$roktrexima="";
+if( $kli_vrok >= 2018 ) { $roktrexima=2018; }
+?>
 
 function SuborTrexima()
                 {
 var h_oc = document.forms.formp2.h_oc.value;
 var h_fmzdy = document.forms.formp2.h_fmzdy.value;
 
-window.open('../mzdy/trexima.php?cislo_oc=' + h_oc + '&copern=12&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+window.open('../mzdy/trexima<?php echo $roktrexima; ?>.php?cislo_oc=' + h_oc + '&copern=12&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -99,7 +103,7 @@ function PDFTrexima()
 var h_oc = document.forms.formp2.h_oc.value;
 var h_fmzdy = document.forms.formp2.h_fmzdy.value;
 
-window.open('../mzdy/trexima.php?cislo_oc=' + h_oc + '&copern=13&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+window.open('../mzdy/trexima<?php echo $roktrexima; ?>.php?cislo_oc=' + h_oc + '&copern=13&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -108,7 +112,7 @@ function UdajeFirma()
 var h_oc = document.forms.formp2.h_oc.value;
 var h_fmzdy = document.forms.formp2.h_fmzdy.value;
 
-window.open('../mzdy/trexima.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+window.open('../mzdy/trexima<?php echo $roktrexima; ?>.php?cislo_oc=' + h_oc + '&copern=1&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -117,7 +121,7 @@ function UdajeZamestnanci()
 var h_oc = document.forms.formp2.h_oc.value;
 var h_fmzdy = document.forms.formp2.h_fmzdy.value;
 
-window.open('../mzdy/trexima.php?cislo_oc=' + h_oc + '&copern=101&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
+window.open('../mzdy/trexima<?php echo $roktrexima; ?>.php?cislo_oc=' + h_oc + '&copern=101&drupoh=1&fmzdy=' + h_fmzdy + '&page=1&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
