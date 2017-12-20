@@ -58,8 +58,6 @@ if (!$vysledok)
 $sqlt = <<<mzdprc
 (
    oc           INT(7) DEFAULT 0,
-//   obbod        DATE NOT NULL,
-//   obbdo        DATE NOT NULL,
    datopr       DATE NOT NULL,
    opr          DECIMAL(2,0) DEFAULT 0,
    drdc         VARCHAR(6) NOT NULL,
