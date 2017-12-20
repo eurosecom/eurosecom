@@ -1,5 +1,5 @@
 <!doctype html>
-<HTML>
+<html>
 <?php
 //RZ 2017
 do
@@ -7,8 +7,8 @@ do
 $sys = 'MZD';
 $urov = 3000;
 $copern = $_REQUEST['copern'];
-$tis = $_REQUEST['tis'];
-if (!isset($tis)) $tis = 0;
+//$tis = $_REQUEST['tis'];
+//if (!isset($tis)) $tis = 0;
 
 $uziv = include("../uziv.php");
 if ( !$uziv ) exit;
@@ -20,10 +20,6 @@ require_once("../pswd/password.php");
     exit;
   endif;
   mysql_select_db($mysqldb);
-
-//ramcek fpdf 1=zap,0=vyp
-$rmc=0;
-$rmc1=0;
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -43,12 +39,12 @@ $vsetkyprepocty=0;
 
 //.jpg podklad
 if ( $strana <= 2 ) {
-$jpg_cesta="../dokumenty/dan_z_prijmov2017/dan_zo_zavislej2017/rz/rzfo_v17";
-$jpg_popis="tlaËivo RoËnÈ z˙Ëtovanie preddavkov na daÚ z prÌjmov FO zo z·vislej Ëinnosti pre rok ".$kli_vrok;
+$jpg_source="../dokumenty/dan_z_prijmov2017/dan_zo_zavislej2017/rz/rzfo_v17";
+$jpg_title="tlaËivo RoËnÈ z˙Ëtovanie preddavkov na daÚ z prÌjmov FO zo z·vislej Ëinnosti pre rok ".$kli_vrok;
                     }
 if ( $strana == 3 ) {
 $jpg_source="../dokumenty/dan_z_prijmov2017/dan_zo_zavislej2017/rz/v2pp_v17";
-$jpg_popis="tlaËivo Potvrdenie o zaplatenÌ dane z prÌjmov zo z·vislej Ëinnosti na ˙Ëely vyhl·senia o pouk·zanÌ sumy do v˝öky 2 % alebo 3 % zaplatenej dane fyzickej osoby pre rok ".$kli_vrok;
+$jpg_title="tlaËivo Potvrdenie o zaplatenÌ dane z prÌjmov zo z·vislej Ëinnosti na ˙Ëely vyhl·senia o pouk·zanÌ sumy do v˝öky 2 % alebo 3 % zaplatenej dane fyzickej osoby pre rok ".$kli_vrok;
                     }
 
 $sqtoz = "DELETE FROM F513_mzdrocnedane WHERE r00 > 99999999.98 ";
@@ -1288,15 +1284,12 @@ if ( $fir_uctt03 == 999 )
 {
 $fir_fnaz=""; $fir_uctt03tlac="";
 }
-
-
-
 ?>
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link rel="stylesheet" href="../css/reset.css">
- <link rel="stylesheet" href="../css/tlaciva.css">
-<title>EuroSecom - RZ dane z prÌjmu</title>
+<head>
+<meta charset="cp1250">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/tlaciva.css">
+<title>RZFO | EuroSecom</title>
 <style type="text/css">
 form.prenos-bar {
   display: block;
@@ -1360,153 +1353,10 @@ span.text-echo {
   letter-spacing: 13px;
 }
 </style>
-<script type="text/javascript">
-//parameter okna
-var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
 
-<?php if ( $copern != 20 ) { ?>
-  function ObnovUI()
-  {
-  }
-<?php                      } ?>
 
-//Z ciarky na bodku
-  function CiarkaNaBodku(Vstup)
-  {
-   if ( Vstup.value.search(/[^0-9.-]/g) != -1 ) { Vstup.value=Vstup.value.replace(",","."); }
-  }
-
-  function prevOC()
-  {
-   window.open('rocne_dane2017.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $prev_oc;?>', '_self');
-  }
-  function nextOC()
-  {
-   window.open('rocne_dane2017.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $next_oc;?>', '_self');
-  }
-  function TlacRZ()
-  {
-   window.open('../mzdy/rocne_dane2017.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999', '_blank', param);
-  }
-  function reNacitajMzdy()
-  {
-   window.open('../mzdy/rocne_dane2017.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0', '_self');
-  }
-  function UpravZamestnanca()
-  {
-   window.open('zamestnanci.php?sys=<?php echo $sys; ?>&copern=8&page=1&cislo_oc=<?php echo $cislo_oc;?>&h_oc=<?php echo $cislo_oc;?>', '_blank', param);
-  }
-  function TlacMzdovyList()
-  {
-   window.open('../mzdy/mzdevid.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1', '_blank', param);
-  }
-
-  function NacitajMzdy()
-  {
-   var fix = document.forms.emzdy.fix.value;
-   var umx = document.forms.emzdy.umx.value;
-   var dmx = document.forms.emzdy.dmx.value;
-   var pre = 1*document.forms.formv1.r16.value;
-   var ned = 1*document.forms.formv1.r15.value;
-   var prebon = 1*document.forms.formv1.r12.value;
-   var nedbon = 1*document.forms.formv1.r13.value;
-   var zampre = 1*document.forms.formv1.r09.value;
-   var zamprex = 1*document.forms.formv1.r09a.value;
-   window.open('../mzdy/rocne_dane2017.php?fix=' + fix + '&zamprex=' + zamprex + '&zampre=' + zampre + '&prebon=' + prebon +  '&nedbon=' + nedbon + '&pre=' + pre + '&ned=' + ned + '&umx=' + umx + '&dmx=' + dmx + '&cislo_oc=<?php echo $cislo_oc;?>&copern=27&drupoh=1&page=1&subor=0', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function ZoznamRocnezucto()
-  {
-   window.open('../mzdy/rocne_danezoznam2013.php?copern=1&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc; ?>', '_self');
-  }
-
-<?php
-//uprava sadzby
-  if ( $copern == 20 )
-  {
-?>
-  function ObnovUI()
-  {
-<?php if ( $strana == 1 ) { ?>
-   document.formv1.vyk.value = '<?php echo "$vyk";?>';
-   document.formv1.r00z1.value = '<?php echo "$r00z1";?>';
-   document.formv1.r00z2.value = '<?php echo "$r00z2";?>';
-   document.formv1.r00d1.value = '<?php echo "$r00d1";?>';
-   document.formv1.r00d2.value = '<?php echo "$r00d2";?>';
-   document.formv1.r00a1.value = '<?php echo "$r00a1";?>';
-   document.formv1.r00a2.value = '<?php echo "$r00a2";?>';
-   document.formv1.r00b1.value = '<?php echo "$r00b1";?>';
-   document.formv1.r00b2.value = '<?php echo "$r00b2";?>';
-   document.formv1.r00c1.value = '<?php echo "$r00c1";?>';
-   document.formv1.r00c2.value = '<?php echo "$r00c2";?>';
-//   document.formv1.r02.value = '<?php echo "$r02";?>';
-   document.formv1.r04a1.value = '<?php echo "$r04a1";?>';
-   document.formv1.r04a2.value = '<?php echo "$r04a2";?>';
-   document.formv1.r04b.value = '<?php echo "$r04b";?>';
-//   document.formv1.r04c.value = '<?php echo "$r04c";?>';
-   document.formv1.r04d.value = '<?php echo "$r04d";?>';
-   document.formv1.r06.value = '<?php echo "$r06";?>';
-   document.formv1.r07.value = '<?php echo "$r07";?>';
-   document.formv1.r08.value = '<?php echo "$r08";?>';
-   document.formv1.r09.value = '<?php echo "$r09";?>';
-   document.formv1.r09a.value = '<?php echo "$r09a";?>';
-   document.formv1.r10.value = '<?php echo "$r10";?>';
-   document.formv1.r11a.value = '<?php echo "$r11a";?>';
-   document.formv1.r11b.value = '<?php echo "$r11b";?>';
-   document.formv1.r12.value = '<?php echo "$r12";?>';
-   document.formv1.r12a.value = '<?php echo "$r12a";?>';
-   document.formv1.r13.value = '<?php echo "$r13";?>';
-   document.formv1.r14a.value = '<?php echo "$r14a";?>';
-   document.formv1.r14b.value = '<?php echo "$r14b";?>';
-   document.formv1.r15.value = '<?php echo "$r15";?>';
-   document.formv1.r16.value = '<?php echo "$r16";?>';
-   document.formv1.r17n.value = '<?php echo "$r17n";?>';
-   document.formv1.r17p.value = '<?php echo "$r17p";?>';
-   document.formv1.r18n.value = '<?php echo "$r18n";?>';
-   document.formv1.r18p.value = '<?php echo "$r18p";?>';
-   document.formv1.da21.value = '<?php echo "$da21";?>';
-   document.formv1.pozn.value = '<?php echo "$pozn";?>';
-<?php                     } ?>
-
-<?php if ( $strana == 2 ) { ?>
-   document.formv1.da2str.value = '<?php echo "$da2strsk";?>';
-   document.formv1.suma1.value = '<?php echo "$suma1";?>';
-   document.formv1.zost1.value = '<?php echo "$zost1";?>';
-   document.formv1.datm2.value = '<?php echo "$datm2sk";?>';
-   document.formv1.suma2.value = '<?php echo "$suma2";?>';
-   document.formv1.zost2.value = '<?php echo "$zost2";?>';
-   document.formv1.datm3.value = '<?php echo "$datm3sk";?>';
-   document.formv1.suma3.value = '<?php echo "$suma3";?>';
-   document.formv1.zost3.value = '<?php echo "$zost3";?>';
-   document.formv1.suma4.value = '<?php echo "$suma4";?>';
-   document.formv1.zost4.value = '<?php echo "$zost4";?>';
-   document.formv1.datm5.value = '<?php echo "$datm5sk";?>';
-   document.formv1.suma5.value = '<?php echo "$suma5";?>';
-   document.formv1.zost5.value = '<?php echo "$zost5";?>';
-   document.formv1.datm6.value = '<?php echo "$datm6sk";?>';
-   document.formv1.suma6.value = '<?php echo "$suma6";?>';
-   document.formv1.zost6.value = '<?php echo "$zost6";?>';
-   document.formv1.datm7.value = '<?php echo "$datm7sk";?>';
-   document.formv1.suma7.value = '<?php echo "$suma7";?>';
-   document.formv1.zost7.value = '<?php echo "$zost7";?>';
-   document.formv1.da2ked.value = '<?php echo "$da2kedsk";?>';
-<?php                     } ?>
-
-<?php if ( $strana == 3 ) { ?>
-   document.formv1.zp2dat.value = '<?php echo "$zp2datsk";?>';
-   document.formv1.zp2dak.value = '<?php echo "$zp2daksk";?>';
-   document.formv1.zp2hod.value = '<?php echo "$zp2hod";?>';
-<?php                     } ?>
-
-<?php  if ( $copern == 299 ) { ?>
-<?php                        } ?>
-  }
-<?php
-//koniec uprav
-  }
-?>
-</script>
-</HEAD>
-<BODY id="white" onload="ObnovUI();">
+</head>
+<body id="white" onload="ObnovUI();">
 <?php
 //uprav udaje
 if ( $copern == 20 )
@@ -1529,13 +1379,13 @@ if ( $copern == 20 )
     <div class="bar-btn-form-tool">
      <img src="../obr/ikony/reload_blue_icon.png" onclick="reNacitajMzdy();" title="Znovu naËÌtaù hodnoty z miezd" class="btn-form-tool">
      <img src="../obr/ikony/list_blue_icon.png" onclick="TlacMzdovyList();" title="Zobraziù mzdov˝ list v PDF" class="btn-form-tool">
-     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacRZ();" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="FormPDF(9999);" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
     </div>
    </td>
   </tr>
  </table>
 
- <FORM name="emzdy" method="post" action="#" class="prenos-bar">
+ <form name="emzdy" method="post" action="#" class="prenos-bar">
 <?php if ( $strana == 1 ) { ?>
   <a href="#" onclick="NacitajMzdy();" title="Preniesù preplatok alebo nedoplatok do mesaËnej mzdovej d·vky vpravo nastavenej firmy,
    mzdovej zloûky a ˙ËtovnÈho mesiaca. RZ = dm903, daÚ.bonus = dm952 a zam.prÈmia = dm953.">Preniesù</a>
@@ -1547,30 +1397,39 @@ if ( $copern == 20 )
   </tr>
   </table>
 <?php                     } ?>
- </FORM>
+ </form>
 </div>
-
 <div id="content">
-<FORM name="formv1" method="post" action="rocne_dane2017.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>">
+<form name="formv1" method="post" action="rocne_dane2017.php?copern=23&cislo_oc=<?php echo $cislo_oc; ?>&strana=<?php echo $strana; ?>">
 <?php
-$clas1="noactive"; $clas2="noactive";
+$clas1="noactive"; $clas2="noactive"; $clas3="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active"; if ( $strana == 3 ) $clas3="active";
-$source="../mzdy/rocne_dane2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0";
+//$source="../mzdy/rocne_dane2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0";
 ?>
 <div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">Potvrdenie 2%</a>
- <a href="#" onclick="ZoznamRocnezucto();" class="toleft">Zamestnanci</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=90&strana=1', '_blank');" class="<?php echo $clas3; ?> toright">Potvrdenie 2%</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
- <h6 class="toright">TlaËiù:</h6>
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+  <a href="#" onclick="editForm(1);" class="<?php echo $clas1; ?> toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
+  <a href="#" onclick="editForm(3);" class="<?php echo $clas3; ?> toleft">Potvrdenie 2%</a>
+  <a href="#" onclick="ZoznamRocnezucto();" class="toleft">Zamestnanci</a>
+  <a href="#" onclick="FormPDF(3);" class="<?php echo $clas3; ?> toright">Potvrdenie 2%</a> <!-- dopyt, pozor $copern == 90 -->
+  <a href="#" onclick="FormPDF(2);" class="<?php echo $clas2; ?> toright">2</a>
+  <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a>
+  <h6 class="toright">TlaËiù:</h6>
+ <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 </div>
 
+
+ <!-- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">Potvrdenie 2%</a> -->
+
+<!--  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=90&strana=1', '_blank');" class="<?php echo $clas3; ?> toright">Potvrdenie 2%</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a> -->
+
+
 <?php if ( $strana == 1 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str1_form.jpg" alt="<?php echo $jpg_popis; ?> 1.strana 247kB" class="form-background">
+<img src="<?php echo $jpg_source; ?>_str1_form.jpg" alt="<?php echo $jpg_popis; ?> 1.strana" class="form-background">
 <?php $nepoc=0; ?>
  <input type="checkbox" name="nepoc" value="1" class="btn-prepocet"/>
 <?php if ( $nepoc == 1 ) { ?> <script type="text/javascript">document.formv1.nepoc.checked = "checked";</script> <?php } ?>
@@ -1650,7 +1509,7 @@ $source="../mzdy/rocne_dane2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 
 
 <?php if ( $strana == 2 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str2_form.jpg" alt="<?php echo $jpg_popis; ?> 2.strana 352kB" class="form-background">
+<img src="<?php echo $jpg_source; ?>_str2_form.jpg" alt="<?php echo $jpg_title; ?> 2.strana" class="form-background">
 
 <!-- II. CAST -->
 <input type="text" name="da2str" id="da2str" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:90px; top:142px; left:440px;"/>
@@ -1688,7 +1547,7 @@ $source="../mzdy/rocne_dane2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor
 
 <?php if ( $strana == 3 ) { ?>
 <!-- POTVRDENIE ZAPLATENIE DANE -->
-<img src="<?php echo $jpg_source; ?>.jpg" alt="<?php echo $jpg_popis; ?> 2.strana 222kB" class="form-background">
+<img src="<?php echo $jpg_source; ?>.jpg" alt="<?php echo $jpg_title; ?> 2.strana" class="form-background">
 <?php
 $kli_vrokx = substr($kli_vrok,2,2);
 
@@ -1772,19 +1631,22 @@ if ( $zpr03 <= 0 ) { $zpr03=""; }
  <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
 </div>
 
-</FORM>
-</div> <!-- koniec #content -->
+</form>
+</div><!-- #content -->
 <?php
 //mysql_free_result($vysledok);
 }
 //koniec uprav udaje
 ?>
 
-
 <?php
-/////////////////////////////////////////////////VYTLAC ROCNE
+//PDF
 if ( $copern == 10 )
 {
+//ramcek fpdf 1=zap,0=vyp
+$rmc=1;
+$rmc1=0;
+
 $hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
  $outfilexdel="../tmp/rzdane_".$kli_uzid."_*.*";
@@ -1834,9 +1696,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str1.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str1.jpg',0,0,210,297);
 }
 
 //za zdanovacie obdobie
@@ -1943,7 +1805,7 @@ $sql2 = mysql_query("$sqltt2");
 $pol2 = mysql_num_rows($sql2);
 
 $i2=0;
-  while ($i2 <= $pol2 )
+  while ( $i2 <= $pol2 )
   {
   if (@$zaznam2=mysql_data_seek($sql2,$i2))
 {
@@ -1952,10 +1814,12 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',10);
 $pdf->SetLeftMargin(8);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i2 == 0 )
+if ( File_Exists($jpg_source.'_str2.jpg') AND $i2 == 0 )
 {
-$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str2.jpg',0,0,210,297);
 }
+
+
 
 //II. CAST
 $pdf->Cell(190,28," ","$rmc1",1,"L");
@@ -2136,14 +2000,16 @@ $hlavicka=mysql_fetch_object($sql);
   $Dozam_np = substr($pole[1],0,1);
 
 $pdf->AddPage();
-$pdf->SetFont('arial','',10);
-$pdf->SetLeftMargin(8);
+$pdf->SetFont('arial','',12);
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-
-if ( File_Exists('../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/rz/rz_potvrdenie_dane_v13.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'.jpg') AND $i == 0 )
 {
-$pdf->Image('../dokumenty/dan_z_prijmov2013/dan_zo_zavislej2013/rz/rz_potvrdenie_dane_v13.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'.jpg',0,0,210,297);
 }
+
+
+
 
 //za rok
 $pdf->Cell(190,24," ","$rmc1",1,"L");
@@ -2238,5 +2104,157 @@ $vysledok = mysql_query("$sqlt");
 $cislista = include("mzd_lista_norm.php");
 } while (false);
 ?>
-</BODY>
-</HTML>
+<script type="text/javascript">
+//dimensions blank
+var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, height=900';
+
+<?php if ( $copern != 20 ) { ?>
+  function ObnovUI()
+  {
+  }
+<?php                      } ?>
+
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1 ) { Vstup.value=Vstup.value.replace(",","."); }
+  }
+
+  function prevOC()
+  {
+   window.open('rocne_dane2017.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $prev_oc;?>', '_self');
+  }
+  function nextOC()
+  {
+   window.open('rocne_dane2017.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $next_oc;?>', '_self');
+  }
+
+  function reNacitajMzdy()
+  {
+   window.open('../mzdy/rocne_dane2017.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0', '_self');
+  }
+  function UpravZamestnanca()
+  {
+   window.open('zamestnanci.php?sys=<?php echo $sys; ?>&copern=8&page=1&cislo_oc=<?php echo $cislo_oc;?>&h_oc=<?php echo $cislo_oc;?>', '_blank', blank_param);
+  }
+  function TlacMzdovyList()
+  {
+   window.open('../mzdy/mzdevid.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1', '_blank', blank_param);
+  }
+
+  function NacitajMzdy()
+  {
+   var fix = document.forms.emzdy.fix.value;
+   var umx = document.forms.emzdy.umx.value;
+   var dmx = document.forms.emzdy.dmx.value;
+   var pre = 1*document.forms.formv1.r16.value;
+   var ned = 1*document.forms.formv1.r15.value;
+   var prebon = 1*document.forms.formv1.r12.value;
+   var nedbon = 1*document.forms.formv1.r13.value;
+   var zampre = 1*document.forms.formv1.r09.value;
+   var zamprex = 1*document.forms.formv1.r09a.value;
+   window.open('../mzdy/rocne_dane2017.php?fix=' + fix + '&zamprex=' + zamprex + '&zampre=' + zampre + '&prebon=' + prebon +  '&nedbon=' + nedbon + '&pre=' + pre + '&ned=' + ned + '&umx=' + umx + '&dmx=' + dmx + '&cislo_oc=<?php echo $cislo_oc;?>&copern=27&drupoh=1&page=1&subor=0', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function ZoznamRocnezucto()
+  {
+   window.open('../mzdy/rocne_danezoznam2013.php?copern=1&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc; ?>', '_self');
+  }
+
+<?php
+//uprava sadzby
+  if ( $copern == 20 )
+  {
+?>
+  function ObnovUI()
+  {
+<?php if ( $strana == 1 ) { ?>
+   document.formv1.vyk.value = '<?php echo "$vyk";?>';
+   document.formv1.r00z1.value = '<?php echo "$r00z1";?>';
+   document.formv1.r00z2.value = '<?php echo "$r00z2";?>';
+   document.formv1.r00d1.value = '<?php echo "$r00d1";?>';
+   document.formv1.r00d2.value = '<?php echo "$r00d2";?>';
+   document.formv1.r00a1.value = '<?php echo "$r00a1";?>';
+   document.formv1.r00a2.value = '<?php echo "$r00a2";?>';
+   document.formv1.r00b1.value = '<?php echo "$r00b1";?>';
+   document.formv1.r00b2.value = '<?php echo "$r00b2";?>';
+   document.formv1.r00c1.value = '<?php echo "$r00c1";?>';
+   document.formv1.r00c2.value = '<?php echo "$r00c2";?>';
+//   document.formv1.r02.value = '<?php echo "$r02";?>';
+   document.formv1.r04a1.value = '<?php echo "$r04a1";?>';
+   document.formv1.r04a2.value = '<?php echo "$r04a2";?>';
+   document.formv1.r04b.value = '<?php echo "$r04b";?>';
+//   document.formv1.r04c.value = '<?php echo "$r04c";?>';
+   document.formv1.r04d.value = '<?php echo "$r04d";?>';
+   document.formv1.r06.value = '<?php echo "$r06";?>';
+   document.formv1.r07.value = '<?php echo "$r07";?>';
+   document.formv1.r08.value = '<?php echo "$r08";?>';
+   document.formv1.r09.value = '<?php echo "$r09";?>';
+   document.formv1.r09a.value = '<?php echo "$r09a";?>';
+   document.formv1.r10.value = '<?php echo "$r10";?>';
+   document.formv1.r11a.value = '<?php echo "$r11a";?>';
+   document.formv1.r11b.value = '<?php echo "$r11b";?>';
+   document.formv1.r12.value = '<?php echo "$r12";?>';
+   document.formv1.r12a.value = '<?php echo "$r12a";?>';
+   document.formv1.r13.value = '<?php echo "$r13";?>';
+   document.formv1.r14a.value = '<?php echo "$r14a";?>';
+   document.formv1.r14b.value = '<?php echo "$r14b";?>';
+   document.formv1.r15.value = '<?php echo "$r15";?>';
+   document.formv1.r16.value = '<?php echo "$r16";?>';
+   document.formv1.r17n.value = '<?php echo "$r17n";?>';
+   document.formv1.r17p.value = '<?php echo "$r17p";?>';
+   document.formv1.r18n.value = '<?php echo "$r18n";?>';
+   document.formv1.r18p.value = '<?php echo "$r18p";?>';
+   document.formv1.da21.value = '<?php echo "$da21";?>';
+   document.formv1.pozn.value = '<?php echo "$pozn";?>';
+<?php                     } ?>
+
+<?php if ( $strana == 2 ) { ?>
+   document.formv1.da2str.value = '<?php echo "$da2strsk";?>';
+   document.formv1.suma1.value = '<?php echo "$suma1";?>';
+   document.formv1.zost1.value = '<?php echo "$zost1";?>';
+   document.formv1.datm2.value = '<?php echo "$datm2sk";?>';
+   document.formv1.suma2.value = '<?php echo "$suma2";?>';
+   document.formv1.zost2.value = '<?php echo "$zost2";?>';
+   document.formv1.datm3.value = '<?php echo "$datm3sk";?>';
+   document.formv1.suma3.value = '<?php echo "$suma3";?>';
+   document.formv1.zost3.value = '<?php echo "$zost3";?>';
+   document.formv1.suma4.value = '<?php echo "$suma4";?>';
+   document.formv1.zost4.value = '<?php echo "$zost4";?>';
+   document.formv1.datm5.value = '<?php echo "$datm5sk";?>';
+   document.formv1.suma5.value = '<?php echo "$suma5";?>';
+   document.formv1.zost5.value = '<?php echo "$zost5";?>';
+   document.formv1.datm6.value = '<?php echo "$datm6sk";?>';
+   document.formv1.suma6.value = '<?php echo "$suma6";?>';
+   document.formv1.zost6.value = '<?php echo "$zost6";?>';
+   document.formv1.datm7.value = '<?php echo "$datm7sk";?>';
+   document.formv1.suma7.value = '<?php echo "$suma7";?>';
+   document.formv1.zost7.value = '<?php echo "$zost7";?>';
+   document.formv1.da2ked.value = '<?php echo "$da2kedsk";?>';
+<?php                     } ?>
+
+<?php if ( $strana == 3 ) { ?>
+   document.formv1.zp2dat.value = '<?php echo "$zp2datsk";?>';
+   document.formv1.zp2dak.value = '<?php echo "$zp2daksk";?>';
+   document.formv1.zp2hod.value = '<?php echo "$zp2hod";?>';
+<?php                     } ?>
+
+<?php  if ( $copern == 299 ) { ?>
+<?php                        } ?>
+  }
+<?php
+//koniec uprav
+  }
+?>
+
+  function editForm(strana)
+  {
+    window.open('rocne_dane2017.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=20&strana=' + strana + '&drupoh=1&page=1&subor=0', '_self');
+  }
+  function FormPDF(strana)
+  {
+    window.open('rocne_dane2017.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=10&strana=' + strana + '&drupoh=1&page=1&subor=0', '_blank', blank_param);
+  }
+
+</script>
+</body>
+</html>
