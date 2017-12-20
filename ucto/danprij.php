@@ -438,7 +438,7 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
   }
   function UpravOzOdl()
   {
-   window.open('../ucto/uzavierka_ozn493.php?copern=20&drupoh=1&page=1&strana=1',
+   window.open('../ucto/uzavierka_ozn493.php?copern=20&drupoh=1&strana=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function OzOdldoXML()
@@ -1506,6 +1506,7 @@ if ( $copern == 1 AND $kli_vduj == 9 )
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </div> <!-- .line-area priznanie dmv -->
 
+<?php if ( $kli_vrok >= 2017 ) { ?>
 <div class="line-area"> <!-- oznamenie odlož -->
 <div class="toleft line-box"></div>
 <a href="#" onclick="TlacOzOdl();" title="Zobrazi v PDF"
@@ -1520,6 +1521,8 @@ if ( $copern == 1 AND $kli_vduj == 9 )
 <a href="#" onclick="UpravOzOdl();" title="Upravi hodnoty"
    class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
 </div> <!-- .line-area oznamenie odlož -->
+<?php } ?>
+
 
 <div class="line-area"> <!-- oznamenie o uz -->
 <div class="toleft line-box"></div>
