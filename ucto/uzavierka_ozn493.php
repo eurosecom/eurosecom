@@ -81,22 +81,6 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_uzavozn493 ( oc ) VALUES ( '0' ) ";
 $dsql = mysql_query("$dsqlt");
 }
 
-//verzia 2014
-// $sql = "SELECT new2014 FROM F$kli_vxcf"."_uzavozn493";
-// $vysledok = mysql_query("$sql");
-// if (!$vysledok)
-// {
-// $sql = "ALTER TABLE F$kli_vxcf"."_uzavozn493 ADD new2014 DECIMAL(4,0) DEFAULT 0 AFTER konx";
-// $vysledek = mysql_query("$sql");
-// }
-
-// $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
-// $vysledok = mysql_query("$sqlt");
-// $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid;
-// $vysledok = mysql_query("$sqlt");
-// $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvyplz'.$kli_uzid;
-// $vysledok = mysql_query("$sqlt");
-
 $vsql = "CREATE TABLE F".$kli_vxcf."_mzdprcvypl".$kli_uzid." SELECT * FROM F".$kli_vxcf."_uzavozn493 WHERE oc < 0 ";
 $vytvor = mysql_query("$vsql");
 $vsql = "CREATE TABLE F".$kli_vxcf."_mzdprcvyplx".$kli_uzid." SELECT * FROM F".$kli_vxcf."_uzavozn493 WHERE oc < 0 ";
@@ -107,10 +91,6 @@ $vytvor = mysql_query("$vsql");
 if ( $copern == 23 )
      {
 if ( $strana == 1 ) {
-//$obbod = strip_tags($_REQUEST['obbod']);
-//$obbod_sql = SqlDatum($obbod);
-//$obbdo = strip_tags($_REQUEST['obbdo']);
-//$obbdo_sql = SqlDatum($obbdo);
 $datopr = strip_tags($_REQUEST['datopr']);
 $datopr_sql = SqlDatum($datopr);
 $opr = 1*$_REQUEST['opr'];
@@ -124,8 +104,7 @@ $srpsc = strip_tags($_REQUEST['srpsc']);
 $srmes = strip_tags($_REQUEST['srmes']);
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uzavozn493 SET ".
-//" obbod='$obbod_sql', obbdo='$obbdo_sql', datopr='$datopr_sql',  ".
-" opr='$opr', ".
+" datopr='$datopr_sql', opr='$opr', ".
 " drdc='$drdc', drdk='$drdk', ddar='$ddar_sql', ".
 " sruli='$sruli', srcdm='$srcdm', srpsc='$srpsc', srmes='$srmes' ".
 " WHERE oc = $cislo_oc ";
@@ -161,41 +140,6 @@ endif;
      }
 //koniec zapisu upravenych udajov
 
-//nacitaj obdobia z ufirdalsie
-$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
-  if (@$zaznam=mysql_data_seek($sql,0))
-  {
-  $riadok=mysql_fetch_object($sql);
-
-  $datbod_sql=$riadok->datbod; $pole = explode("-", $datbod_sql); $datbod_sql=$pole[1].".".$pole[0];
-  $datbdo_sql=$riadok->datbdo; $pole = explode("-", $datbdo_sql); $datbdo_sql=$pole[1].".".$pole[0];
-  $datmod_sql=$riadok->datmod; $pole = explode("-", $datmod_sql); $datmod_sql=$pole[1].".".$pole[0];
-  $datmdo_sql=$riadok->datmdo; $pole = explode("-", $datmdo_sql); $datmdo_sql=$pole[1].".".$pole[0];
-  $datuk_sql=$riadok->datk;
-
-  }
-
-if( $datuk_sql != '' AND $datuk_sql != '0000-00-00' )
-    {
-$sqlfir = "UPDATE F$kli_vxcf"."_uzavozn493 SET ".
-" datk='$datuk_sql', obbod='$datbod_sql', obbdo='$datbdo_sql', obmod='$datmod_sql', obmdo='$datmdo_sql' ".
-" WHERE datk = '0000-00-00' ";
-$fir_vysledok = mysql_query($sqlfir);
-    }
-
-if( $datuk_sql == '0000-00-00' )
-    {
-$datuk_sql=$kli_vrok."-12-31";
-$datbod_sql="01.".$kli_vrok; $datbdo_sql="12.".$kli_vrok;
-$kli_mrok=$kli_vrok-1;
-$datmod_sql="01.".$kli_mrok; $datmdo_sql="12.".$kli_mrok;
-
-$sqlfir = "UPDATE F$kli_vxcf"."_uzavozn493 SET ".
-" datk='$datuk_sql', obbod='$datbod_sql', obbdo='$datbdo_sql', obmod='$datmod_sql', obmdo='$datmdo_sql' ".
-" WHERE datk = '0000-00-00' ";
-$fir_vysledok = mysql_query($sqlfir);
-    }
-
 //nacitaj udaje pre upravu
 if ( $copern == 20 )
      {
@@ -219,57 +163,12 @@ if ( $strana == 2 ) {
 $predl3mes = $fir_riadok->predl3mes;
 $predl6mes = $fir_riadok->predl6mes;
 $datpredl_sk = SkDatum($fir_riadok->datpredl);
-$zrobil = $fir_mzdt05; if ( $fir_mzdt05 == '' ) $zrobil=$kli_uzmeno." ".$kli_uzprie;
 $datp_sk = SkDatum($fir_riadok->datp);
                     }
      }
 //koniec nacitania
 
-//FO z ufirdalsie
-if ( $fir_uctt03 == 999 )
-{
-$sqlc = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE icox = 0";
-$vysledokc = mysql_query($sqlc);
-if ( $vysledokc )
-     {
-$riadokc=mysql_fetch_object($vysledokc);
-$dprie = $riadokc->dprie;
-$dmeno = $riadokc->dmeno;
-$dtitl = $riadokc->dtitl;
-$dtitz = $riadokc->dtitz;
-$duli = $riadokc->duli;
-$dcdm = $riadokc->dcdm;
-$dpsc = $riadokc->dpsc;
-$dmes = $riadokc->dmes;
-$dstat = $riadokc->dstat;
-//$dtel = $riadokc->dtel;
-//$dfax = $riadokc->dfax;
-     }
-}
-if ( $fir_uctt03 != 999 )
-{
-$dmeno=""; $dprie=""; $dtitl=""; $dtitz="";
-$duli=$fir_fuli; $dcdm=$fir_fcdm; $dmes=$fir_fmes; $dpsc=$fir_fpsc;
-$dstat="Slovensko";
-//$dtel=$fir_ftel; $dfax=$fir_ffax;
-}
-$fir_uctt03tlac=$fir_uctt03;
-if ( $fir_uctt03 == 999 )
-{
-$fir_fnaz="";
-//2-miestne za rok
-$kli_vrokx = substr($kli_vrok,2,2);
-}
-
-//6-miestne ico
-if ( $fir_uctt03 != 999 AND $fir_fdic == "" )
-{
-$ico=$fir_fico;
-if ( $fir_fico < 1000000 ) { $ico="00".$fir_fico; }
-}
-
-
-//blok okolo obdobi uzavierky
+//obdobia z ufirdalsie
 $sqlt = 'DROP TABLE prcdatum'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
 $sqlt = <<<prcdatum
@@ -320,17 +219,17 @@ $datp_sk=SkDatum($datp_dph);
 $datk_sk=SkDatum($datk_dph);
 
 //nacitaj uzavierka k datumu z ufirdalsie
-$datksk="";
-$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
-  if (@$zaznam=mysql_data_seek($sql,0))
-  {
-  $riadok=mysql_fetch_object($sql);
-  $datksk=SkDatum($riadok->datk);
-  }
-if ( $datksk != '' AND $datksk != '00.00.0000' ) { $datk_sk=$datksk; }
+// $datksk="";
+// $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
+//   if (@$zaznam=mysql_data_seek($sql,0))
+//   {
+//   $riadok=mysql_fetch_object($sql);
+//   $datksk=SkDatum($riadok->datk);
+//   }
+// if ( $datksk != '' AND $datksk != '00.00.0000' ) { $datk_sk=$datksk; }
 
 
-//nacitaj nacitaj uzavierka k datumu a obdobia z ufirdalsie
+//nacitaj uzavierka k datumu a obdobia z ufirdalsie
 $pole = explode(".", $kli_vume);
 $kli_vmesx=$pole[0];
 $kli_vrokx=$pole[1];
@@ -349,13 +248,64 @@ if ( $riadok->datbod != '0000-00-00' )
   $datbdosk=SkDatum($riadok->datbdo);
   $datmodsk=SkDatum($riadok->datmod);
   $datmdosk=SkDatum($riadok->datmdo);
-  if( $datmodsk == '00.00.0000' ) { $datmodsk=""; $datmdosk=""; }
+//  if( $datmodsk == '00.00.0000' ) { $datmodsk=""; $datmdosk=""; }
      }
-  }
+  }//koniec blok okolo obdobi uzavierky
 
-echo $datk_sk." ".$datbodsk." ".$datbdosk." ".$datmodsk." ".$datmdosk;
-//koniec blok okolo obdobi uzavierky
+//FO z ufirdalsie
+if ( $fir_uctt03 == 999 )
+{
+$sqlc = "SELECT * FROM F$kli_vxcf"."_ufirdalsie WHERE icox = 0";
+$vysledokc = mysql_query($sqlc);
+if ( $vysledokc )
+     {
+$riadokc=mysql_fetch_object($vysledokc);
+$dprie = $riadokc->dprie;
+$dmeno = $riadokc->dmeno;
+$dtitl = $riadokc->dtitl;
+$dtitz = $riadokc->dtitz;
+$duli = $riadokc->duli;
+$dcdm = $riadokc->dcdm;
+$dpsc = $riadokc->dpsc;
+$dmes = $riadokc->dmes;
+$dstat = $riadokc->dstat;
+//$dtel = $riadokc->dtel;
+//$dfax = $riadokc->dfax;
+     }
+}
+if ( $fir_uctt03 != 999 )
+{
+$dmeno=""; $dprie=""; $dtitl=""; $dtitz="";
+$duli=$fir_fuli; $dcdm=$fir_fcdm; $dmes=$fir_fmes; $dpsc=$fir_fpsc;
+$dstat="Slovensko";
+//$dtel=$fir_ftel; $dfax=$fir_ffax;
+}
+$fir_uctt03tlac=$fir_uctt03;
+if ( $fir_uctt03 == 999 )
+{
+$fir_fnaz="";
+$datbodsk="";
+$datbdosk="";
+//2-miestny rok
+$kli_vrokx2 = substr($kli_vrok,2,2);
+}
 
+//6-miestne ico
+if ( $fir_uctt03 != 999 AND $fir_fdic == "" )
+{
+$ico=$fir_fico;
+if ( $fir_fico < 1000000 ) { $ico="00".$fir_fico; }
+}
+//za obdobie nasekanie
+$datbodskdni = substr($datbodsk,0,2);
+$datbodskmes = substr($datbodsk,3,2);
+$datbodskrok = substr($datbodsk,8,9);
+$datbdoskdni = substr($datbdosk,0,2);
+$datbdoskmes = substr($datbdosk,3,2);
+$datbdoskrok = substr($datbdosk,8,9);
+
+//vypracoval
+$zrobil = $fir_mzdt05; if ( $fir_mzdt05 == '' ) $zrobil=$kli_uzmeno." ".$kli_uzprie;
 ?>
 <head>
 <meta charset="cp1250">
@@ -416,14 +366,13 @@ if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 <?php if ( $strana == 1 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str1.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:327px; left:57px;"><?php echo $fir_fdic; ?></span>
-<span class="text-echo" style="top:332px; left:484px;"><?php echo $kli_vrokx; ?></span>
-
-<span class="text-echo" style="top:312px; left:700px;">0<?php echo $obbod; ?></span>
-<span class="text-echo" style="top:350px; left:700px;">1<?php echo $obbdo; ?></span>
-
-<!-- <input type="text" name="obbod" id="obbod" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:195px; top:300px; left:695px;"/>
-<input type="text" name="obbdo" id="obbdo" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:195px; top:340px; left:695px;"/> -->
-
+<span class="text-echo" style="top:332px; left:484px;"><?php echo $kli_vrokx2; ?></span>
+<span class="text-echo" style="top:311px; left:701px;"><?php echo $datbodskdni; ?></span>
+<span class="text-echo" style="top:311px; left:759px;"><?php echo $datbodskmes; ?></span>
+<span class="text-echo" style="top:311px; left:860px;"><?php echo $datbodskrok; ?></span>
+<span class="text-echo" style="top:349px; left:701px;"><?php echo $datbdoskdni; ?></span>
+<span class="text-echo" style="top:349px; left:759px;"><?php echo $datbdoskmes; ?></span>
+<span class="text-echo" style="top:349px; left:860px;"><?php echo $datbdoskrok; ?></span>
 <input type="checkbox" name="opr" value="1" style="top:387px; left:180px;"/>
 <input type="text" name="datopr" id="datopr" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:195px; top:385px; left:697px;"/>
 
@@ -449,21 +398,6 @@ if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 <input type="text" name="srcdm" id="srcdm" style="width:174px; top:962px; left:718px;"/>
 <input type="text" name="srpsc" id="srpsc" maxlength="5" style="width:105px; top:1017px; left:52px;"/>
 <input type="text" name="srmes" id="srmes" style="width:450px; top:1017px; left:178px;"/>
-
-
-
-<!-- nepoužité -->
-<!-- <input type="text" name="datk" id="datk" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:1112px; left:426px;"/> -->
-<!-- <input type="text" name="obbod" id="obbod" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:1260px; left:752px;"/>
-<input type="text" name="obbdo" id="obbdo" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:1298px; left:752px;"/> -->
-<!-- <input type="text" name="obmod" id="obmod" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:1338px; left:752px;"/>
-<input type="text" name="obmdo" id="obmdo" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:1376px; left:752px;"/> -->
-<!-- <input type="radio" id="druhuz0" name="druhuz" value="0" style="top:1444px; left:67px;"/>
-<input type="radio" id="druhuz1" name="druhuz" value="1" style="top:1471px; left:67px;"/>
-<input type="radio" id="druhuj0" name="druhuj" value="0" style="top:1422px; left:417px;"/>
-<input type="radio" id="druhuj1" name="druhuj" value="1" style="top:1449px; left:417px;"/>
-<input type="radio" id="druhuj2" name="druhuj" value="2" style="top:1477px; left:417px;"/>
-<input type="radio" id="druhuj3" name="druhuj" value="3" style="top:1505px; left:417px;"/> -->
 <?php                     } ?>
 
 
@@ -522,14 +456,6 @@ $j=0; //zaciatok strany ak by som chcel strankovat
 {
 $hlavicka=mysql_fetch_object($sql);
 
-/*
-	  $ozam_np = $hlavicka->ozam_np;
-  $pole = explode(".", $ozam_np);
-  $Cozam_np = $pole[0];
-  $Dozam_np = substr($pole[1],0,1);
-*/
-
-//$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
 if ( $strana == 1 OR $strana == 9999 ) {
 $pdf->AddPage();
@@ -564,54 +490,39 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t09","$rmc",0,"C");$pdf->Cell
 
 //fo-obdobie
 $textxx="1234567890";
-$text=$kli_vrokx;
+$text=$kli_vrokx2;
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $pdf->Cell(45,6," ","$rmc1",0,"R");$pdf->Cell(4,8,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,8,"$t02","$rmc",0,"C");
 
 //po-obdobie-od
 $pdf->SetY(64.5);
-$text=SkDatum($hlavicka->obbod);
-//if ( $text == '00.00.0000' ) { $text=""; }
-//if ( $text == '00.00.0000' ) { $text="01.01.".$kli_vrok; }
-//$pole = explode(".", $hlavicka->obbod);
-//$mesiac=$pole[0];
-//if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
-//$od1=substr($mesiac,0,1);
-//$od2=substr($mesiac,1,1);
-//$rok=$pole[1];
-//$rok1=substr($rok,2,1);
-//$rok2=substr($rok,3,1);
+$text=$datbodsk;
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
 $t03=substr($text,3,1);
 $t04=substr($text,4,1);
 $t05=substr($text,8,1);
 $t06=substr($text,9,1);
-$pdf->Cell(144,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
-$pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
-$pdf->Cell(13,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",1,"C");
-//po-obdobie-do
-$pdf->Cell(190,3," ","$rmc1",1,"L");
-$text=SkDatum($hlavicka->obbdo);
-//if ( $textdo == '00.00.0000' ) { $textdo="31.12.".$kli_vrok; }
-$text=$hlavicka->obbdo;
-if ( $text == '00.0000' ) { $text=""; }
-//if ( $text == '00.00.0000' ) { $text=""; }
-/*$pole = explode(".", $hlavicka->obbdo);
-$mesiac=$pole[0];
-if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
-$od1=substr($mesiac,0,1);
-$od2=substr($mesiac,1,1);
-$rok=$pole[1];
-$rok1=substr($rok,2,1);
-$rok2=substr($rok,3,1);*/
-$pdf->Cell(144,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(144,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t01","$rmc",0,"R");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(13,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",1,"C");
 
+//po-obdobie-do
+$pdf->Cell(190,3," ","$rmc1",1,"L");
+$text=$datbdosk;
+$t01=substr($text,0,1);
+$t02=substr($text,1,1);
+$t03=substr($text,3,1);
+$t04=substr($text,4,1);
+$t05=substr($text,8,1);
+$t06=substr($text,9,1);
+$pdf->Cell(144,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t01","$rmc",0,"R");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
+$pdf->Cell(13,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",0,"C");
+
 //opravne
-$pdf->Cell(190,4," ","$rmc1",1,"L");
+$pdf->Cell(190,10," ","$rmc1",1,"L");
 $text="x"; if ( $hlavicka->opr == 0 ) $text=" ";
 $pdf->Cell(30,7," ","$rmc1",0,"C");$pdf->Cell(4,3,"$text","$rmc",0,"C");
 //opravne-datum
@@ -1176,7 +1087,7 @@ $pdf->Cell(13,6," ","$rcm1",0,"C");$pdf->Cell(4,5,"$t05","$rmc",0,"C");$pdf->Cel
 //vypracoval
 $pdf->Cell(190,16.5," ","$rmc1",1,"L");
 $textxx="1234567890";
-$text=$zrobil; //dopyt, nefunguje
+$text=$zrobil;
 $pdf->Cell(1,6," ","$rmc1",0,"R");$pdf->Cell(70,5,"$text","$rmc",0,"L");
 //vypracoval-dna
 $text=SkDatum($hlavicka->datp);
@@ -1252,10 +1163,8 @@ var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, hei
   function ObnovUI()
   {
 <?php if ( $strana == 1 ) { ?>
-/*    document.formv1.obbod.value = '<?php echo "$obbod_sk"; ?>';
-    document.formv1.obbdo.value = '<?php echo "$obbdo_sk"; ?>';*/
-    document.formv1.datopr.value = '<?php echo "$datopr_sk"; ?>';
 <?php if ( $opr == 1 ) { ?> document.formv1.opr.checked = 'true'; <?php } ?>
+    document.formv1.datopr.value = '<?php echo "$datopr_sk"; ?>';
     document.formv1.drdc.value = '<?php echo "$drdc"; ?>';
     document.formv1.drdk.value = '<?php echo "$drdk"; ?>';
     document.formv1.ddar.value = '<?php echo "$ddar_sk"; ?>';
@@ -1287,7 +1196,7 @@ var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, hei
   }
 ?>
 
-//bud alebo predlzenie
+//predlzenie 3mes vs. 6mes
   function klikpredl3mes()
   {
    document.formv1.predl6mes.checked = false;
@@ -1302,6 +1211,7 @@ var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, hei
   {
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
+
   function editForm(strana)
   {
     window.open('uzavierka_ozn493.php?copern=20&strana=' + strana + '&drupoh=1', '_self');
