@@ -267,6 +267,95 @@ if ( $fir_uctt03 != 999 AND $fir_fdic == "" )
 $ico=$fir_fico;
 if ( $fir_fico < 1000000 ) { $ico="00".$fir_fico; }
 }
+
+
+//blok okolo obdobi uzavierky
+$sqlt = 'DROP TABLE prcdatum'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = <<<prcdatum
+(
+   datp          DATE,
+   datk          DATE,
+   fic          INT
+);
+prcdatum;
+
+$vsql = 'CREATE TABLE prcdatum'.$kli_uzid.$sqlt;
+$vytvor = mysql_query("$vsql");
+
+$pole = explode(".", $kli_vume);
+$kli_mdph=$pole[0];
+$kli_rdph=$pole[1];
+if ( $kli_mdph < 10 ) $kli_mdph="0".$kli_mdph;
+
+$pole = explode(".", $kli_vume);
+$mesp_dph=$pole[0];
+$mesk_dph=$pole[0];
+$rokp_dph=$pole[1];
+
+$datp_dph=$rokp_dph.'-'.$mesp_dph.'-01';
+$datk_dph=$rokp_dph.'-'.$mesk_dph.'-01';
+
+$ttvv = "INSERT INTO prcdatum".$kli_uzid." ( datp,datk,fic ) VALUES ( '$datp_dph', '$datp_dph', 0 )";
+$ttqq = mysql_query("$ttvv");
+
+
+$dsqlt = "UPDATE prcdatum".$kli_uzid.
+" SET datp='$datp_dph',  datk=LAST_DAY('$datk_dph')".
+" WHERE fic >= 0 ".
+"";
+$dsql = mysql_query("$dsqlt");
+
+$sql = mysql_query("SELECT * FROM prcdatum$kli_uzid");
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $datp_dph=$riadok->datp;
+  $datk_dph=$riadok->datk;
+  }
+$sqlt = 'DROP TABLE prcdatum'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$datp_sk=SkDatum($datp_dph);
+$datk_sk=SkDatum($datk_dph);
+
+//nacitaj uzavierka k datumu z ufirdalsie
+$datksk="";
+$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $datksk=SkDatum($riadok->datk);
+  }
+if ( $datksk != '' AND $datksk != '00.00.0000' ) { $datk_sk=$datksk; }
+
+
+//nacitaj nacitaj uzavierka k datumu a obdobia z ufirdalsie
+$pole = explode(".", $kli_vume);
+$kli_vmesx=$pole[0];
+$kli_vrokx=$pole[1];
+if( $kli_vmesx < 10 ) { $kli_vmesx="0".$kli_vmesx; }
+$kli_mrokx=$kli_vrokx-1;
+
+$datbodsk="01.01.".$kli_vrokx; $datbdosk="31.".$kli_vmesx.".".$kli_vrokx; $datmodsk="01.01.".$kli_mrokx; $datmdosk="31.12.".$kli_mrokx;
+$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+
+if ( $riadok->datbod != '0000-00-00' )
+     {
+  $datbodsk=SkDatum($riadok->datbod);
+  $datbdosk=SkDatum($riadok->datbdo);
+  $datmodsk=SkDatum($riadok->datmod);
+  $datmdosk=SkDatum($riadok->datmdo);
+  if( $datmodsk == '00.00.0000' ) { $datmodsk=""; $datmdosk=""; }
+     }
+  }
+
+echo $datk_sk." ".$datbodsk." ".$datbdosk." ".$datmodsk." ".$datmdosk;
+//koniec blok okolo obdobi uzavierky
+
 ?>
 <head>
 <meta charset="cp1250">
