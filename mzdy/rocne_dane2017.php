@@ -38,7 +38,7 @@ if ( $strana == 0 ) { $strana = 1; }
 $vsetkyprepocty=0;
 
 //.jpg podklad
-if ( $strana <= 2 ) {
+if ( $strana <= 2 OR $strana == 9999 ) {
 $jpg_source="../dokumenty/dan_z_prijmov2017/dan_zo_zavislej2017/rz/rzfo_v17";
 $jpg_title="tlaËivo RoËnÈ z˙Ëtovanie preddavkov na daÚ z prÌjmov FO zo z·vislej Ëinnosti pre rok ".$kli_vrok;
                     }
@@ -1011,8 +1011,9 @@ $oznac = mysql_query("$sqtoz");
 //koniec vypocty 2017
 
 
+
 //nacitaj udaje pre upravu
-if ( $copern == 20 )
+if ( $copern == 20 OR $copern == 10 )
      {
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdrocnedane".
 " LEFT JOIN F$kli_vxcf"."_mzdkun".
@@ -1023,27 +1024,24 @@ $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
 $oc = $fir_riadok->oc;
-$vyk = $fir_riadok->vyk;
-$zamestnanec = $fir_riadok->meno." ".$fir_riadok->prie;
-$meno = $fir_riadok->meno;
-$prie = $fir_riadok->prie;
-$narodeny=SkDatum($fir_riadok->dar);
-$rodnec = $fir_riadok->rdc;
-$rodnek = $fir_riadok->rdk;
 
-if ( $rodnec == "" ) { $rodne1r = $narodeny; }
-if ( $rodnec != "" ) { $rodne1r = $fir_riadok->rdc."/".$fir_riadok->rdk; }
-
-if ( $rodnec == "" ) { $rodne1p = ""; $narod1p=str_replace(".","",$narodeny);}
-if ( $rodnec != "" ) { $rodne1p = $fir_riadok->rdc.$fir_riadok->rdk; $narod1p=""; }
-
-
-$ptitl = $fir_riadok->titl;
-$adresa = $fir_riadok->zuli." ".$fir_riadok->zcdm.", ".$fir_riadok->zmes;
+$zprie=$fir_riadok->prie;
+$zmeno=$fir_riadok->meno;
+$zamestnanec = $zmeno." ".$zprie;
+$ztitlp=$fir_riadok->titl;
+$zdar=SkDatum($riaddok->dar);
+$zrdc = $fir_riadok->rdc;
+$zrdk = $fir_riadok->rdk;
 $zuli = $fir_riadok->zuli;
 $zcdm = $fir_riadok->zcdm;
 $zpsc = $fir_riadok->zpsc;
 $zmes = $fir_riadok->zmes;
+//rodne vs. narodeny
+if ( $zrdc != '' OR $zrdk != '' ) { $rodne = $zrdc."/".$zrdk; }
+if ( $zrdc == '' OR $zrdk == '' ) { $rodne = $zdar; $narodeny = $zdar; }
+
+
+$vyk = $fir_riadok->vyk;
 $r00 = $fir_riadok->r00;
 $r00z1 = $fir_riadok->r00z1;
 $r00z2 = $fir_riadok->r00z2;
@@ -1233,24 +1231,54 @@ if ( $next_oc > 9999 ) $next_oc=9999;
 }
 //koniec novy=0
 
-//statna prislusnost z statistiky treximaoc
-$statznec="SK";
-$sqlttt = "SELECT * FROM F$kli_vxcf"."_treximaoc WHERE idec = $cislo_oc LIMIT 1 "; $sqldok = mysql_query("$sqlttt");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $statznec=trim($riaddok->stprisl);
-  }
-if ( $statznec == '' ) { $statznec="SK"; }
 
-//titul za zo ziadosti o rz
-$titulza="";
-$sqlttt = "SELECT * FROM F$kli_vxcf"."_rocneziadost WHERE oc = $cislo_oc LIMIT 1 "; $sqldok = mysql_query("$sqlttt");
+
+
+
+//$zadresa = $riaddok->zuli." ".$fir_riaddok->zcdm.", ".$riaddok->zmes;
+
+
+// $rodne1r = $zrdc."/".$zrdk;
+// if ( $rodne1r = '' ) {   }
+// if ( $rodnec == "" ) { $rodne1r = $zrdc."/".$zrdk; }
+// if ( $rodnec != "" ) { $rodne1r = $zdar; }
+// if ( $rodnec == "" ) { $rodne1p = ""; $narod1p=str_replace(".","",$zdar);}
+// if ( $rodnec != "" ) { $rodne1p = $zrdc.$zrdk; $narod1p=""; }
+
+
+
+//dopl. udaje o zamestn.
+$ztitlz=" ";
+$zstat="Slovensko"; $zstak="703";
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_mzdtextmzd WHERE invt = $cislo_oc ");
   if (@$zaznam=mysql_data_seek($sqldok,0))
   {
   $riaddok=mysql_fetch_object($sqldok);
-  $titulza=trim($riaddok->ztitl);
+  $ztitlz=$riaddok->ztitz;
+  $zstat=$riaddok->zstat;
   }
+if ( $zstat == '' ) { $zstat="Slovensko"; }
+
+
+//statna prislusnost z statistiky treximaoc
+// $statznec="SK";
+// $sqlttt = "SELECT * FROM F$kli_vxcf"."_treximaoc WHERE idec = $cislo_oc LIMIT 1 "; $sqldok = mysql_query("$sqlttt");
+//   if (@$zaznam=mysql_data_seek($sqldok,0))
+//   {
+//   $riaddok=mysql_fetch_object($sqldok);
+//   $statznec=trim($riaddok->stprisl);
+//   }
+// if ( $statznec == '' ) { $statznec="SK"; }
+
+
+// //titul za zo ziadosti o rz
+// $titulza="";
+// $sqlttt = "SELECT * FROM F$kli_vxcf"."_rocneziadost WHERE oc = $cislo_oc LIMIT 1 "; $sqldok = mysql_query("$sqlttt");
+//   if (@$zaznam=mysql_data_seek($sqldok,0))
+//   {
+//   $riaddok=mysql_fetch_object($sqldok);
+//   $titulza=trim($riaddok->ztitl);
+//   }
 
 //FO-Priezvisko,Meno,Titul a trvaly pobyt z ufirdalsie
 if ( $fir_uctt03 == 999 )
@@ -1353,8 +1381,6 @@ span.text-echo {
   letter-spacing: 13px;
 }
 </style>
-
-
 </head>
 <body id="white" onload="ObnovUI();">
 <?php
@@ -1411,7 +1437,7 @@ if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active"; if ( $
   <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
   <a href="#" onclick="editForm(3);" class="<?php echo $clas3; ?> toleft">Potvrdenie 2%</a>
   <a href="#" onclick="ZoznamRocnezucto();" class="toleft">Zamestnanci</a>
-  <a href="#" onclick="FormPDF(3);" class="<?php echo $clas3; ?> toright">Potvrdenie 2%</a> <!-- dopyt, pozor $copern == 90 -->
+  <a href="#" onclick="FormPDF(3);" class="<?php echo $clas3; ?> toright">Potvrdenie 2%</a>
   <a href="#" onclick="FormPDF(2);" class="<?php echo $clas2; ?> toright">2</a>
   <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a>
   <h6 class="toright">TlaËiù:</h6>
@@ -1441,10 +1467,10 @@ if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active"; if ( $
 <div class="input-echo" style="top:88px; left:573px; font-size:18px;"><?php echo $kli_vrok; ?></div>
 
 <!-- zamestnanec -->
-<div class="input-echo" style="top:136px; left:302px; font-size: 18px;"><?php echo "$ptitl $zamestnanec"; ?></div>
-<div class="input-echo" style="top:136px; left:667px; font-size: 18px;"><?php echo $rodne1r; ?></div>
+<div class="input-echo" style="top:136px; left:302px; font-size: 18px;"><?php echo "$ztitlp $zamestnanec $ztitlz"; ?></div>
+<div class="input-echo" style="top:136px; left:667px; font-size: 18px;"><?php echo $rodne; ?></div>
 <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravZamestnanca();" title="Upraviù ˙daje o zamestnancovi" class="btn-row-tool" style="top:138px; left:785px; width:20px; height:20px;">
-<div class="input-echo" style="top:163px; left:247px; font-size: 18px;"><?php echo $adresa; ?></div>
+<div class="input-echo" style="top:163px; left:247px; font-size: 18px;"><?php echo "$zuli $zcdm $zmes"; ?></div>
 <div class="input-echo" style="top:163px; left:672px; font-size: 18px;"><?php echo $zpsc; ?></div>
 
 <!-- I.CAST -->
@@ -1546,19 +1572,17 @@ if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active"; if ( $
 
 
 <?php if ( $strana == 3 ) { ?>
-<!-- POTVRDENIE ZAPLATENIE DANE -->
-<img src="<?php echo $jpg_source; ?>.jpg" alt="<?php echo $jpg_title; ?> 2.strana" class="form-background">
-<?php
-$kli_vrokx = substr($kli_vrok,2,2);
-
-?>
+<!-- potvrdenie -->
+<img src="<?php echo $jpg_source; ?>.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
 
 
 
 
 
-<span class="text-echo" style="width:128px; top:183px; left:57px;"><?php echo $rodnec; ?></span>
-<span class="text-echo" style="width:81px; top:183px; left:220px;"><?php echo $rodnek; ?></span>
+
+<span class="text-echo" style="width:128px; top:183px; left:57px;"><?php echo $zrdc; ?></span>
+<span class="text-echo" style="width:128px; top:183px; left:217px;"><?php echo $zrdk; ?></span>
+<span class="text-echo" style="width:81px; top:183px; left:320px;"><?php echo $narodeny; ?></span> <!-- dopyt, nasekaù -->
 
 <span class="text-echo" style="top:183px; left:357px;"><?php echo $narod1p; ?></span>
 
@@ -1576,10 +1600,10 @@ $kli_vrokx = substr($kli_vrok,2,2);
 <!-- dopyt, rodnÈ ËÌslo a d·tum narodenia nem·m -->
 
 <!-- I.Zamestnanec -->
-<div class="input-echo" style="top:276px; left:55px; font-size:18px;"><?php echo $prie; ?></div>
-<div class="input-echo" style="top:263px; left:409px; font-size:18px;"><?php echo $meno; ?></div>
-<div class="input-echo" style="top:263px; left:550px; font-size:18px;"><?php echo $ptitl; ?></div>
-<div class="input-echo" style="top:263px; left:610px; font-size:18px;"><?php echo $titulza; ?></div>
+<div class="input-echo" style="top:276px; left:55px; font-size:18px;"><?php echo $zprie; ?></div>
+<div class="input-echo" style="top:263px; left:409px; font-size:18px;"><?php echo $zmeno; ?></div>
+<div class="input-echo" style="top:263px; left:550px; font-size:18px;"><?php echo $ztitlp; ?></div>
+<div class="input-echo" style="top:263px; left:610px; font-size:18px;"><?php echo $ztitlz; ?></div>
 
 
 
@@ -1589,7 +1613,7 @@ $kli_vrokx = substr($kli_vrok,2,2);
 <div class="input-echo" style="top:309px; left:535px;"><?php echo $zcdm; ?></div>
 <div class="input-echo" style="top:309px; left:700px;"><?php echo $zpsc; ?></div>
 <div class="input-echo" style="top:344px; left:155px;"><?php echo $zmes; ?></div>
-<div class="input-echo" style="top:344px; left:530px;"><?php echo $statznec; ?></div> <!-- dopyt, daù zstat -->
+<div class="input-echo" style="top:344px; left:530px;"><?php echo $zstat; ?></div>
 
 <span class="text-echo" style="top:490px; left:57px;"><?php echo $fir_fdic; ?></span>
 
@@ -1649,13 +1673,18 @@ $rmc1=0;
 
 $hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
- $outfilexdel="../tmp/rzdane_".$kli_uzid."_*.*";
- foreach (glob("$outfilexdel") as $filename) {
-    unlink($filename);
- }
-
+if ( $strana <= 2 OR $strana == 9999 ) {
+$outfilexdel="../tmp/rzdane_".$kli_uzid."_*.*";
+foreach (glob("$outfilexdel") as $filename) { unlink($filename); }
 $outfilex="../tmp/rzdane_".$kli_uzid."_".$hhmmss.".pdf";
 if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+                    }
+if ( $strana == 3 ) {
+$outfilexdel="../tmp/potvrdzapldan_".$kli_uzid."_*.*";
+foreach (glob("$outfilexdel") as $filename) { unlink($filename); }
+$outfilex="../tmp/potvrdzapldan_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+                    }
 
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
@@ -1683,10 +1712,10 @@ $j=0; //zaciatok strany ak by som chcel strankovat
   if (@$zaznam=mysql_data_seek($sql,$i))
 {
 $hlavicka=mysql_fetch_object($sql);
-$titl=$hlavicka->titl;
-$meno=$hlavicka->meno;
-$prie=$hlavicka->prie;
-$adresa=$hlavicka->zuli." ".$hlavicka->zcdm.",".$hlavicka->zmes;
+//$titl=$hlavicka->titl;
+//$meno=$hlavicka->meno;
+//$prie=$hlavicka->prie;
+//$adresa=$hlavicka->zuli." ".$hlavicka->zcdm.",".$hlavicka->zmes;
 
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 $dat_dat = SkDatum($hlavicka->da21);
@@ -1711,11 +1740,11 @@ $pdf->SetFont('arial','',10);
 //ZAMESTNANEC
 $pdf->Cell(190,9," ","$rmc1",1,"L");
 $dar=SkDatum($hlavicka->dar);
-$tlacrd="$hlavicka->rdc / $hlavicka->rdk";
-if ( $tlacrd == "0 / " ) { $tlacrd="$dar"; }
-$pdf->Cell(60,6," ","$rmc1",0,"L");$pdf->Cell(56,5,"$hlavicka->titl $meno $prie","$rmc",0,"L");$pdf->Cell(23,4," ","$rmc1",0,"L");
-$pdf->Cell(42,5,"$tlacrd","$rmc",1,"L");
-$pdf->Cell(47,7," ","$rmc1",0,"L");$pdf->Cell(78,6.5,"$adresa","$rmc",0,"L");$pdf->Cell(15,7," ","$rmc1",0,"L");$pdf->Cell(20,6.5,"$hlavicka->zpsc","$rmc",1,"L");
+//$tlacrd="$hlavicka->rdc / $hlavicka->rdk";
+//if ( $tlacrd == "0 / " ) { $tlacrd="$dar"; }
+$pdf->Cell(60,6," ","$rmc1",0,"L");$pdf->Cell(56,5,"$ztitlp $zmeno $zprie $ztitlz","$rmc",0,"L");$pdf->Cell(23,4," ","$rmc1",0,"L");
+$pdf->Cell(42,5,"$rodne","$rmc",1,"L");
+$pdf->Cell(47,7," ","$rmc1",0,"L");$pdf->Cell(78,6.5,"$zuli $zcdm $zmes","$rmc",0,"L");$pdf->Cell(15,7," ","$rmc1",0,"L");$pdf->Cell(20,6.5,"$hlavicka->zpsc","$rmc",1,"L");
 
 //I. CAST
 $r00 = $hlavicka->r00; if ( $hlavicka->r00 == 0 ) $r00="";
@@ -1830,15 +1859,15 @@ $pdf->Cell(93,5," ","$rmc1",0,"L");$pdf->Cell(24,4,"$da2strsk","$rmc",1,"C");
 $pdf->Cell(106,4," ","$rmc1",0,"L");$pdf->Cell(20,5,"$kli_vrok","$rmc",1,"C");
 
 //Zamestnanec
-$sqlttt = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_oc ";
-$sqldok = mysql_query("$sqlttt");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $prie=$riaddok->prie;
-  $meno=$riaddok->meno;
-  $titl=$riaddok->titl;
-  }
+// $sqlttt = "SELECT * FROM F$kli_vxcf"."_mzdkun WHERE oc = $cislo_oc ";
+// $sqldok = mysql_query("$sqlttt");
+//   if (@$zaznam=mysql_data_seek($sqldok,0))
+//   {
+//   $riaddok=mysql_fetch_object($sqldok);
+//   $prie=$riaddok->prie;
+//   $meno=$riaddok->meno;
+//   $titl=$riaddok->titl;
+//   }
 $pdf->Cell(190,9," ","$rmc1",1,"L");
 $pdf->Cell(10,6," ","$rmc1",0,"L");$pdf->Cell(80,5,"$titl $meno $prie","$rmc",0,"L");$pdf->Cell(23,4," ","$rmc1",0,"L");
 
@@ -1905,24 +1934,10 @@ $pdf->Cell(10,5," ","$rmc1",0,"R");$pdf->Cell(27,6,"$da2kedsk","$rmc",1,"C");
 }
 $i2 = $i2 + 1;
   }
-                                       } //koniec 2.strany
+                                       } //$strana == 2 OR $strana == 9999
 
-$pdf->Output("$outfilex");
-?>
-
-<script type="text/javascript">
-  var okno = window.open("<?php echo $outfilex; ?>","_self");
-</script>
-
-<?php
-}
-/////////////////////////////////////////KONIEC VYTLACENIA ROCNEHO
-?>
-
-<?php
-/////////////////////////////////////////////////VYTLAC Potvrdenie o zaplatenÌ dane z prÌjmov zo z·vislej Ëinnosti
-if ( $copern == 90 )
-{
+//potvrdenie
+if ( $strana == 3 ) {
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdrocnedane2strana WHERE oc = $cislo_oc ";
 
 $fir_vysledok = mysql_query($sqlfir);
@@ -1938,50 +1953,13 @@ if ( $fir_riadok->zp2dat == '0000-00-00' ) $zp2datsk="";
 if ( $fir_riadok->zp2dak == '0000-00-00' ) $zp2daksk="";
 mysql_free_result($fir_vysledok);
 
-$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-
- $outfilexdel="../tmp/potvrdzapldan_".$kli_uzid."_*.*";
- foreach (glob("$outfilexdel") as $filename) {
-    unlink($filename);
- }
-
-$outfilex="../tmp/potvrdzapldan_".$kli_uzid."_".$hhmmss.".pdf";
-if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
-
-     define('FPDF_FONTPATH','../fpdf/font/');
-     require('../fpdf/fpdf.php');
-
-$sirka_vyska="210,320";
-$velkost_strany = explode(",", $sirka_vyska);
-$pdf=new FPDF("P","mm", $velkost_strany);
-$pdf->Open();
-$pdf->AddFont('arial','','arial.php');
-
-
-//statna prislusnost z statistiky treximaoc
-$statznec="SK";
-$sqlttt = "SELECT * FROM F$kli_vxcf"."_treximaoc WHERE idec = $cislo_oc LIMIT 1 "; $sqldok = mysql_query("$sqlttt");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $statznec=trim($riaddok->stprisl);
-  }
-if ( $statznec == '' ) { $statznec="SK"; }
-
-//titul za zo ziadosti o rz
-$titulza="";
-$sqlttt = "SELECT * FROM F$kli_vxcf"."_rocneziadost WHERE oc = $cislo_oc LIMIT 1 "; $sqldok = mysql_query("$sqlttt");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $titulza=trim($riaddok->ztitl);
-  }
-
 //vytlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_mzdrocnedane".
 " LEFT JOIN F$kli_vxcf"."_mzdkun".
 " ON F$kli_vxcf"."_mzdrocnedane.oc=F$kli_vxcf"."_mzdkun.oc".
 " WHERE F$kli_vxcf"."_mzdrocnedane.oc = $cislo_oc AND konx1 = 2 ORDER BY konx1,prie,meno";
+
+
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -2079,18 +2057,18 @@ $pdf->Cell(50,5," ","$rmc1",0,"L");$pdf->Cell(47,5,"$kli_uzprie $kli_uzmeno","$r
 }
 $i = $i + 1;
   }
+            } //$strana == 3
+
 $pdf->Output("$outfilex");
 ?>
 
 <script type="text/javascript">
- var okno = window.open("<?php echo $outfilex; ?>","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
-
 <?php
 }
-/////////////////////////////////////////KONIEC VYTLACENIA Potvrdenie o zaplatenÌ dane z prÌjmov zo z·vislej Ëinnosti
+//$copern == 10
 ?>
-
 
 <?php
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
@@ -2122,24 +2100,24 @@ var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, hei
 
   function prevOC()
   {
-   window.open('rocne_dane2017.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $prev_oc;?>', '_self');
+   window.open('rocne_dane2017.php?copern=20&subor=0&cislo_oc=<?php echo $prev_oc;?>', '_self');
   }
   function nextOC()
   {
-   window.open('rocne_dane2017.php?copern=20&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $next_oc;?>', '_self');
+   window.open('rocne_dane2017.php?copern=20&subor=0&cislo_oc=<?php echo $next_oc;?>', '_self');
   }
 
   function reNacitajMzdy()
   {
-   window.open('../mzdy/rocne_dane2017.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&drupoh=1&page=1&subor=0', '_self');
+   window.open('../mzdy/rocne_dane2017.php?cislo_oc=<?php echo $cislo_oc;?>&copern=26&subor=0', '_self');
   }
   function UpravZamestnanca()
   {
-   window.open('zamestnanci.php?sys=<?php echo $sys; ?>&copern=8&page=1&cislo_oc=<?php echo $cislo_oc;?>&h_oc=<?php echo $cislo_oc;?>', '_blank', blank_param);
+   window.open('zamestnanci.php?sys=<?php echo $sys; ?>&copern=8&cislo_oc=<?php echo $cislo_oc;?>&h_oc=<?php echo $cislo_oc;?>', '_blank', blank_param);
   }
   function TlacMzdovyList()
   {
-   window.open('../mzdy/mzdevid.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1', '_blank', blank_param);
+   window.open('../mzdy/mzdevid.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=10', '_blank', blank_param);
   }
 
   function NacitajMzdy()
@@ -2153,11 +2131,11 @@ var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, hei
    var nedbon = 1*document.forms.formv1.r13.value;
    var zampre = 1*document.forms.formv1.r09.value;
    var zamprex = 1*document.forms.formv1.r09a.value;
-   window.open('../mzdy/rocne_dane2017.php?fix=' + fix + '&zamprex=' + zamprex + '&zampre=' + zampre + '&prebon=' + prebon +  '&nedbon=' + nedbon + '&pre=' + pre + '&ned=' + ned + '&umx=' + umx + '&dmx=' + dmx + '&cislo_oc=<?php echo $cislo_oc;?>&copern=27&drupoh=1&page=1&subor=0', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../mzdy/rocne_dane2017.php?fix=' + fix + '&zamprex=' + zamprex + '&zampre=' + zampre + '&prebon=' + prebon +  '&nedbon=' + nedbon + '&pre=' + pre + '&ned=' + ned + '&umx=' + umx + '&dmx=' + dmx + '&cislo_oc=<?php echo $cislo_oc;?>&copern=27&subor=0', '_self', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function ZoznamRocnezucto()
   {
-   window.open('../mzdy/rocne_danezoznam2013.php?copern=1&drupoh=1&page=1&subor=0&cislo_oc=<?php echo $cislo_oc; ?>', '_self');
+   window.open('../mzdy/rocne_danezoznam2013.php?copern=1&subor=0&cislo_oc=<?php echo $cislo_oc; ?>', '_self');
   }
 
 <?php
@@ -2248,11 +2226,11 @@ var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, hei
 
   function editForm(strana)
   {
-    window.open('rocne_dane2017.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=20&strana=' + strana + '&drupoh=1&page=1&subor=0', '_self');
+    window.open('rocne_dane2017.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=20&strana=' + strana + '&subor=0', '_self');
   }
   function FormPDF(strana)
   {
-    window.open('rocne_dane2017.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=10&strana=' + strana + '&drupoh=1&page=1&subor=0', '_blank', blank_param);
+    window.open('rocne_dane2017.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=10&strana=' + strana + '&subor=0', '_blank', blank_param);
   }
 
 </script>

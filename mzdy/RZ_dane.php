@@ -200,7 +200,7 @@ function TlacRocnezucto()
                 {
 var h_oc = document.forms.formrz1.h_oc.value;
 
-window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&page=1&subor=0&strana=9999',
+window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=10&subor=0&strana=9999',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -208,7 +208,7 @@ function UpravRocnezucto()
                 {
 var h_oc = document.forms.formrz1.h_oc.value;
 
-window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&page=1&subor=0',
+window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=20&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
@@ -256,14 +256,13 @@ function TlacPotvrd2pdane()
 var h_oc = document.forms.formrz1.h_oc.value;
 
 <?php if( $kli_vrok <= 2015 ) { ?>
-window.open('../mzdy/potvrdenie_2pdane<?php echo $rokrocnezuczp; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&page=1&subor=0',
+window.open('../mzdy/potvrdenie_2pdane<?php echo $rokrocnezuczp; ?>.php?cislo_oc=' + h_oc + '&copern=10&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 <?php                         } ?>
 <?php if( $kli_vrok >= 2016 ) { ?>
-window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=90&drupoh=1&page=1&subor=0',
+window.open('../mzdy/rocne_dane<?php echo $rokrocnezuc; ?>.php?cislo_oc=' + h_oc + '&copern=10&subor=0&strana=3',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 <?php                         } ?>
-
                 }
 
 
@@ -537,7 +536,7 @@ var h_stv = document.forms.formzrd1.h_stv.value;
 window.open('../mzdy/oznamenie_zrdxml<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&h_stv=' + h_stv + '&copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
-   
+
 </script>
 </HEAD>
 <BODY class="white" id="white" onload="" >
@@ -545,7 +544,7 @@ window.open('../mzdy/oznamenie_zrdxml<?php echo $rokzrd; ?>.php?cislo_xplat=' + 
 <table class="h2" width="100%" >
 <tr>
 
-<td>EuroSecom  -  Daò z príjmov zo závislej èinnosti FO 
+<td>EuroSecom  -  Daò z príjmov zo závislej èinnosti FO
 
 </td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
@@ -809,7 +808,7 @@ if( $kli_vrok < 2012 ) {
 <option value="2" >Opravné</option>
 <option value="3" >Dodatoèné</option>
 </select>
-<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
  Dátum: <input type="text" name="h_dap" id="h_dap" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 
 <a href="#" onClick="TlacPotvrdRocHlasenie();">
@@ -866,7 +865,7 @@ if( $kli_vrok >= 2012 ) {
 <a href="#" onClick="TlacRocHlasenie<?php echo $rocnehlasenier; ?>();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title='Vytlaèi hlásenie vo formáte PDF' ></a>
 </td>
-<td class="bmenu" width="76%">Roèné Hlásenie o vyúètovaní dane, úhrne príjmov, zrazenıch preddavkoch a daòovom bonuse  HLASENIEv<?php echo $rocnehlasenier; ?> 
+<td class="bmenu" width="76%">Roèné Hlásenie o vyúètovaní dane, úhrne príjmov, zrazenıch preddavkoch a daòovom bonuse  HLASENIEv<?php echo $rocnehlasenier; ?>
 
 <?php if( $kli_vrok == 2012 ) { ?>
 <select size="1" name="h_drp" id="h_drp" >
@@ -874,7 +873,7 @@ if( $kli_vrok >= 2012 ) {
 <option value="2" >Opravné</option>
 <option value="3" >Dodatoèné</option>
 </select>
-<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?> 
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
  Dátum: <input type="text" name="h_dap" id="h_dap" maxlenght="10" size="8" value="<?php echo $dnes;?>" />
 <?php                         } ?>
 <?php if( $kli_vrok >= 2013 ) { ?>
@@ -955,7 +954,7 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 </td>
 
 
-<td class="bmenu" width="28%"></td> 
+<td class="bmenu" width="28%"></td>
 
 <td class="bmenu" width="2%">
 <img src='../obr/export.png' onclick='FOAdoXML();' width=20 height=15 border=0 title='XML súbor pre elektronické podávanie priznania' >
@@ -1010,7 +1009,7 @@ $sql = mysql_query("SELECT oc,prie,meno FROM F$kli_vxcf"."_mzdkun WHERE oc > 0 O
 ?>
 <option value="4" >4.štvrrok</option>
 </select>
-</td> 
+</td>
 
 <td class="bmenu" width="2%"></td>
 
