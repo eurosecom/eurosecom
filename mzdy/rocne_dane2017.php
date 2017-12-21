@@ -1938,28 +1938,7 @@ $i2 = $i2 + 1;
 
 //potvrdenie
 if ( $strana == 3 ) {
-$sqlfir = "SELECT * FROM F$kli_vxcf"."_mzdrocnedane2strana WHERE oc = $cislo_oc ";
-
-$fir_vysledok = mysql_query($sqlfir);
-$fir_riadok=mysql_fetch_object($fir_vysledok);
-
-$zp2dat = $fir_riadok->zp2dat;
-$zp2datsk =SkDatum($zp2dat);
-$zp2dak = $fir_riadok->zp2dak;
-$zp2daksk =SkDatum($zp2dak);
-$zp2hod = $fir_riadok->zp2hod;
-if ( $fir_riadok->zp2hod == 0 ) $zp2hod="";
-if ( $fir_riadok->zp2dat == '0000-00-00' ) $zp2datsk="";
-if ( $fir_riadok->zp2dak == '0000-00-00' ) $zp2daksk="";
-mysql_free_result($fir_vysledok);
-
-//vytlac
-$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdrocnedane".
-" LEFT JOIN F$kli_vxcf"."_mzdkun".
-" ON F$kli_vxcf"."_mzdrocnedane.oc=F$kli_vxcf"."_mzdkun.oc".
-" WHERE F$kli_vxcf"."_mzdrocnedane.oc = $cislo_oc AND konx1 = 2 ORDER BY konx1,prie,meno";
-
-
+$sqltt = "SELECT * FROM F$kli_vxcf"."_mzdrocnedane2strana WHERE oc = $cislo_oc ";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -1968,14 +1947,18 @@ $i=0;
 $j=0; //zaciatok strany ak by som chcel strankovat
   while ( $i <= $pol )
   {
-  if (@$zaznam=mysql_data_seek($sql,$i))
+  if (@$zaznam=mysql_data_seek($sql,$i) OR $i == 0 )
 {
 $hlavicka=mysql_fetch_object($sql);
 
-  $ozam_np = $hlavicka->ozam_np;
-  $pole = explode(".", $ozam_np);
-  $Cozam_np = $pole[0];
-  $Dozam_np = substr($pole[1],0,1);
+$zp2dat = $hlavicka->zp2dat;
+$zp2datsk =SkDatum($zp2dat);
+$zp2dak = $hlavicka->zp2dak;
+$zp2daksk =SkDatum($zp2dak);
+$zp2hod = $hlavicka->zp2hod;
+if ( $hlavicka->zp2hod == 0 ) $zp2hod="";
+if ( $hlavicka->zp2dat == '0000-00-00' ) $zp2datsk="";
+if ( $hlavicka->zp2dak == '0000-00-00' ) $zp2daksk="";
 
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
@@ -1987,15 +1970,13 @@ $pdf->Image($jpg_source.'.jpg',0,0,210,297);
 }
 
 
-
-
 //za rok
 $pdf->Cell(190,24," ","$rmc1",1,"L");
 $pdf->Cell(155,4," ","$rmc1",0,"L");$pdf->Cell(35,4,"$kli_vrok","$rmc",0,"L");
 
 //I. ZAMESTNANEC
 $pdf->Cell(190,25," ","$rmc1",1,"L");
-$pdf->Cell(18,4," ","$rmc1",0,"L");$pdf->Cell(63,6,"$hlavicka->prie","$rmc",0,"L");$pdf->Cell(2,4," ","$rmc1",0,"L");$pdf->Cell(35,6,"$hlavicka->meno","$rmc",0,"L");
+$pdf->Cell(18,4," ","$rmc1",0,"L");$pdf->Cell(63,6,"$zprie","$rmc",0,"L");$pdf->Cell(2,4," ","$rmc1",0,"L");$pdf->Cell(35,6,"$zmeno","$rmc",0,"L");
 $dar=SkDatum($hlavicka->dar);
 $tlacrd="$hlavicka->rdc / $hlavicka->rdk";
 if ( $tlacrd == "0 / " ) { $tlacrd="$dar"; }
