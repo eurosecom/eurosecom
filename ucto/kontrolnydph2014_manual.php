@@ -1322,8 +1322,11 @@ window.open('../ucto/kontrolnydph2014_manual.php?copern=18099&drupoh=1&page=1&ty
   {
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
-
-
+//poucenie
+  function PoucVyplnenie2018()
+  {
+   window.open('../dokumenty/tlacivo2018/dph/kvdph_v18_poucenie.pdf', '_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }
 
 </script>
 <script type="text/javascript" src="spr_kvdph_xml.js"></script>
@@ -1340,8 +1343,10 @@ window.open('../ucto/kontrolnydph2014_manual.php?copern=18099&drupoh=1&page=1&ty
    <td class="header">Dodatoèný KV DPH - <span class="subheader">id <?php echo $xdod;?></span></td>
    <td>
     <div class="bar-btn-form-tool">
+<?php if ( $kli_vrok == 2018 ) { ?> 
+      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie2018();" title="Pouèenie na vyplnenie" class="btn-form-tool">
+<?php                          } ?>
      <img src="../obr/ikony/floppy_blue_icon.png" onclick="SavePridavok();" title="Uloži tieto riadky KVDPH ako prídavok ku KVDPH s ID èíslom zadaným v inpute ID pôvodného KVDPH:" class="btn-form-tool">
-
      <img src="../obr/ikony/download_blue_icon.png" onclick="RozdielyKvXml(<?php echo $xdod; ?>,'<?php echo $xume; ?>',3,<?php echo $xstv; ?>,'',<?php echo $xpov; ?>);" title="Naèíta rozdielové riadky oproti pôvodnému KVDPH" class="btn-form-tool">
      <img src="../obr/ikony/upbox_blue_icon.png" onclick="vytvorXML();" title="Export do XML" class="btn-form-tool">
      <img src="../obr/ikony/trash_blue_icon.png" onclick="New();" title="Vymaza všetky položky" class="btn-form-tool">
