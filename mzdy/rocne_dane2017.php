@@ -2426,7 +2426,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t11","$rmc",1,"C");
 
 //III.UDAJE
 $pdf->Cell(190,11," ","$rmc1",1,"L");
-$hodx=100*$hlavicka->r06;
+$hodx=100*$r06;
 //if ( $hodx == 0 ) $hodx="";
 $text=sprintf('% 10s',$hodx);
 $A=substr($text,0,1);
@@ -2448,28 +2448,25 @@ $pdf->Cell(5,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1
 
 
 
-
-
-$r06=$hlavicka->r06;
 $Cislo=$r06+"";
 $r06=sprintf("%0.2f", $Cislo);
 if ( $r06 == 0.00 ) $r06="";
 $pdf->Cell(95,11," ","$rmc1",0,"L");$pdf->Cell(55,7,"$r06","$rmc",1,"R");
-$r10=$hlavicka->r10;
+
 $Cislo=$r10+"";
 $r10=sprintf("%0.2f", $Cislo);
-if ( $hlavicka->r10 == 0.00 ) $r10="";
+if ( $r10 == 0.00 ) $r10="";
 $pdf->Cell(150,10," ","$rmc1",0,"L");$pdf->Cell(28,11,"$r10","$rmc",1,"R");
 
-$roz=$hlavicka->r06-$hlavicka->r10;
+$roz=$r06-$r10;
 if ( $roz < 0 ) $roz=0;
 $Cislo=$roz+"";
 $roz=sprintf("%0.2f", $Cislo);
 if ( $roz == 0.00 ) $roz="";
-$r17n=$hlavicka->r17n;
+
 $Cislo=$r17n+"";
 $r17n=sprintf("%0.2f", $Cislo);
-if ( $hlavicka->r17n == 0.00 ) $r17n="";
+if ( $r17n == 0.00 ) $r17n="";
 
 
 $pdf->Cell(150,10," ","$rmc1",0,"L");$pdf->Cell(28,10,"$roz","$rmc",1,"R");
