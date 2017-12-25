@@ -406,8 +406,14 @@ img.btn-form-tool {
 
   function MetodVypln()
   {
+<?php if ( $kli_vrok < 2018 ) { ?>
    window.open('<?php echo $jpg_cesta; ?>_vysvetlivky.pdf',
 '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+<?php              } ?>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+   window.open('../dokumenty/tlacivo2018/fin5-04/fin5-04_v18_vysvetlivky.pdf',
+'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+<?php              } ?>
   }
   function TlacVykaz()
   {
@@ -587,12 +593,23 @@ if ( $i > 25 ) { $topx=231+25.7*$i; }
  <option value="DU">Dodávate¾ské úvery (DU)</option>
  <option value="SFRB">Úvery od Štátneho fondu rozvoja bývania (SFRB)</option>
  <option value="ENVF">Úvery od Environmentálneho fondu (ENVF)</option>
- <option value="EPC">Úvery vyplývajúce zo zmlúv o dodávke energetických služieb (EPC)</option>
- <option value="NFV">Návratné finanèné výpomoci a ostatné pôžièky prijaté od subjektov VS (NFV)</option>
  <option value="FP">Finanèný prenájom (FP)</option>
- <option value="OST">Ostatné nebankové pôžièky (OST)</option>
  <option value="ZAB">Prijaté zábezpeky (ZAB)</option>
+
+<?php if ( $kli_vrok < 2018 ) { ?>
+ <option value="NFV">Návratné finanèné výpomoci a ostatné pôžièky prijaté od subjektov VS (NFV)</option>
+ <option value="OST">Ostatné nebankové pôžièky (OST)</option>
+ <option value="EPC">Úvery vyplývajúce zo zmlúv o dodávke energetických služieb (EPC)</option>
  <option value="VZPP">Vybrané záväzky a prijaté preddavky (VZPP)</option>
+<?php              } ?>
+<?php if ( $kli_vrok >= 2018 ) { ?>
+ <option value="NFV">Finanèné výpomoci a pôžièky od subjektov VS (NFV)</option>
+ <option value="OST">Nebankové pôžièky a finanèné výpomoci od subjektov mimo verejnej správy (OST)</option>
+ <option value="EPC">Záväzky vyplývajúce zo zmlúv o dodávke energetických služieb (EPC)</option>
+ <option value="KZOS">Záväzky z obchodného styku a prijaté preddavky - krátkodobé (KZOS)</option>
+ <option value="DZOS">Záväzky z obchodného styku a prijaté preddavky - dlhodobé (KZOS)</option>
+ <option value="VZ">Vybrané záväzky</option>
+<?php              } ?>
  <option value=""></option>
 </select>
 <select size="1" name="stlpb" id="stlpb" style="width:84px; top:<?php echo $topx;?>px; left:278px;">
