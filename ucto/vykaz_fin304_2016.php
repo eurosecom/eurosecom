@@ -996,7 +996,7 @@ img.btn-form-tool {
    window.open('<?php echo $jpg_cesta; ?>_vysvetlivky.pdf',
 '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
 <?php              } ?>
-<?php if ( $kli_vrok == 2018 ) { ?>
+<?php if ( $kli_vrok >= 2018 ) { ?>
    window.open('../dokumenty/tlacivo2018/fin3-04/fin3-04_v18_vysvetlivky.pdf',
 '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
 <?php              } ?>

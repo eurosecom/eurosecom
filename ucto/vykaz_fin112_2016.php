@@ -1230,7 +1230,7 @@ document.formv1.skutocnost.value = '<?php echo $skutocnost;?>';
    window.open('<?php echo $jpg_cesta; ?>_vysvetlivky.pdf',
 '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
 <?php              } ?>
-<?php if ( $kli_vrok == 2018 ) { ?>
+<?php if ( $kli_vrok >= 2018 ) { ?>
    window.open('../dokumenty/tlacivo2018/fin1-12/fin1-12_v18_vysvetlivky.pdf',
 '_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
 <?php              } ?>
