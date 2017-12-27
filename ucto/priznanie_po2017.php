@@ -2745,10 +2745,10 @@ if ( $strana == 13 ) $clas13="active";
   <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
   <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
   <a href="#" onclick="editForm(13);" class="<?php echo $clas13; ?> toleft">13</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=1101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P1</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P2</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=11&drupoh=1&page=1', '_blank')" class="toright">P2</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=1011&drupoh=1&page=1', '_blank')" class="toright">P1</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P1</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P2</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=11&drupoh=1&page=1', '_blank')" class="toright">P2</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1011&drupoh=1&page=1', '_blank')" class="toright">P1</a>
 <!--   <a href="#" onclick="FormPDF(13);" class="<?php echo $clas13; ?> toright">13</a>
   <a href="#" onclick="FormPDF(12);" class="<?php echo $clas12; ?> toright">12</a>
   <a href="#" onclick="FormPDF(11);" class="<?php echo $clas11; ?> toright">11</a>
@@ -3333,8 +3333,8 @@ $sn1c=substr($sknacec,0,1);
   <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
   <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
   <a href="#" onclick="editForm(13);" class="<?php echo $clas13; ?> toleft">13</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=1101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P1</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P2</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P1</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P2</a>
 <input type="submit" id="uloz" name="uloz" value="Uloži zmeny" class="btn-bottom-formsave">
 </div>
 </form>
