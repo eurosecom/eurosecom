@@ -61,10 +61,9 @@ if ( $copern == 101 ) { $copern=102; }
 $xml = 1*$_REQUEST['xml'];
 $prepocitaj = 1*$_REQUEST['prepocitaj'];
 
-//.jpg source
-$jpg_source="../dokumenty/dan_z_prijmov2017/dppo/dppo_v15_str$strana.jpg";
+//jpg source
+$jpg_source="../dokumenty/dan_z_prijmov2017/dppo/dppo_v15";
 $jpg_title="tlaËivo DaÚ z prÌjmov PO pre rok.$kli_vrok $strana.strana";
-$jpg_source_potvrdenie="../dokumenty/dan_z_prijmov2017/dppo/dppo_v15_potvrdenie.jpg";
 
 //nacitanie minuleho roka do PO
   if ( $copern == 3155 ) { ?>
@@ -2705,7 +2704,7 @@ div.input-echo {
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="PouËenie na vyplnenie" class="btn-form-tool">
      <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="NaËÌtaù ˙daje z minulÈho roka" class="btn-form-tool">
      <img src="../obr/ikony/upbox_blue_icon.png" onclick="POdoXML();" title="Export do XML" class="btn-form-tool">
-     <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacPO();" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
+     <img src="../obr/ikony/printer_blue_icon.png" onclick="FormPDF(999);" title="Zobraziù vöetky strany bez prÌloh v PDF" class="btn-form-tool">
     </div>
    </td>
   </tr>
@@ -2719,55 +2718,62 @@ if ( $copern == 102 )
     {
 $prepocitaj=1;
 ?>
-<FORM name="formv1" method="post" action="priznanie_po2017.php?strana=<?php echo $strana; ?>&copern=103">
+<form name="formv1" method="post" action="priznanie_po2017.php?strana=<?php echo $strana; ?>&copern=103">
 <?php
 $clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive"; $clas5="noactive";
-$clas6="noactive"; $clas7="noactive"; $clas8="noactive"; $clas9="noactive"; $clas10="noactive"; $clas11="noactive"; $clas12="noactive";
+$clas6="noactive"; $clas7="noactive"; $clas8="noactive"; $clas9="noactive"; $clas10="noactive";
+$clas11="noactive"; $clas12="noactive"; $clas13="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active"; if ( $strana == 3 ) $clas3="active";
 if ( $strana == 4 ) $clas4="active"; if ( $strana == 5 ) $clas5="active"; if ( $strana == 6 ) $clas6="active";
 if ( $strana == 7 ) $clas7="active"; if ( $strana == 8 ) $clas8="active"; if ( $strana == 9 ) $clas9="active";
-if ( $strana == 10 ) $clas10="active";
+if ( $strana == 10 ) $clas10="active"; if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
+if ( $strana == 13 ) $clas13="active";
 
-$source="../ucto/priznanie_po2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0";
+//$source="../ucto/priznanie_po2017.php?drupoh=1&page=1&subor=0";
 ?>
 <div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=7', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=8', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=9', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=1101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P1</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P2</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=11&drupoh=1&page=1', '_blank')" class="toright">P2</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=1011&drupoh=1&page=1', '_blank')" class="toright">P1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=10', '_blank');" class="<?php echo $clas10; ?> toright">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=9', '_blank');" class="<?php echo $clas9; ?> toright">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=8', '_blank');" class="<?php echo $clas8; ?> toright">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=7', '_blank');" class="<?php echo $clas7; ?> toright">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=6', '_blank');" class="<?php echo $clas6; ?> toright">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=5', '_blank');" class="<?php echo $clas5; ?> toright">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=4', '_blank');" class="<?php echo $clas4; ?> toright">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=3', '_blank');" class="<?php echo $clas3; ?> toright">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
- <h6 class="toright">TlaËiù:</h6>
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
-
- <input type="checkbox" name="prepocitaj" value="1" class="btn-prepocet"/>
+  <a href="#" onclick="editForm(1);" class="<?php echo $clas1; ?> toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
+  <a href="#" onclick="editForm(3);" class="<?php echo $clas3; ?> toleft">3</a>
+  <a href="#" onclick="editForm(4);" class="<?php echo $clas4; ?> toleft">4</a>
+  <a href="#" onclick="editForm(5);" class="<?php echo $clas5; ?> toleft">5</a>
+  <a href="#" onclick="editForm(6);" class="<?php echo $clas6; ?> toleft">6</a>
+  <a href="#" onclick="editForm(7);" class="<?php echo $clas7; ?> toleft">7</a>
+  <a href="#" onclick="editForm(8);" class="<?php echo $clas8; ?> toleft">8</a>
+  <a href="#" onclick="editForm(9);" class="<?php echo $clas9; ?> toleft">9</a>
+  <a href="#" onclick="editForm(10);" class="<?php echo $clas10; ?> toleft">10</a>
+  <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
+  <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
+  <a href="#" onclick="editForm(13);" class="<?php echo $clas13; ?> toleft">13</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=1101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P1</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P2</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=11&drupoh=1&page=1', '_blank')" class="toright">P2</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=1011&drupoh=1&page=1', '_blank')" class="toright">P1</a>
+<!--   <a href="#" onclick="FormPDF(13);" class="<?php echo $clas13; ?> toright">13</a>
+  <a href="#" onclick="FormPDF(12);" class="<?php echo $clas12; ?> toright">12</a>
+  <a href="#" onclick="FormPDF(11);" class="<?php echo $clas11; ?> toright">11</a>
+  <a href="#" onclick="FormPDF(10);" class="<?php echo $clas10; ?> toright">10</a>
+  <a href="#" onclick="FormPDF(9);" class="<?php echo $clas9; ?> toright">9</a>
+  <a href="#" onclick="FormPDF(8);" class="<?php echo $clas8; ?> toright">8</a>
+  <a href="#" onclick="FormPDF(7);" class="<?php echo $clas7; ?> toright">7</a>
+  <a href="#" onclick="FormPDF(6);" class="<?php echo $clas6; ?> toright">6</a>
+  <a href="#" onclick="FormPDF(5);" class="<?php echo $clas5; ?> toright">5</a>
+  <a href="#" onclick="FormPDF(4);" class="<?php echo $clas4; ?> toright">4</a>
+  <a href="#" onclick="FormPDF(3);" class="<?php echo $clas3; ?> toright">3</a>
+  <a href="#" onclick="FormPDF(2);" class="<?php echo $clas2; ?> toright">2</a>
+  <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a> -->
+  <h6 class="toright">TlaËiù:</h6>
+  <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+  <input type="checkbox" name="prepocitaj" value="1" class="btn-prepocet"/>
 <?php if ( $prepocitaj == 1 ) { ?>
- <script type="text/javascript">document.formv1.prepocitaj.checked = "checked";</script>
+  <script type="text/javascript">document.formv1.prepocitaj.checked = "checked";</script>
 <?php                         } ?>
- <h5 class="btn-prepocet-title">PrepoËÌtaù hodnoty</h5>
- <div class="alert-pocitam"><?php echo $alertprepocet; ?></div>
-</div>
+  <h5 class="btn-prepocet-title">PrepoËÌtaù hodnoty</h5>
+  <div class="alert-pocitam"><?php echo $alertprepocet; ?></div>
+</div><!-- .navbar -->
 
 <?php if ( $strana == 1 ) { ?>
-<img src="<?php echo $jpg_source; ?>" class="form-background" alt="<?php echo $jpg_title; ?>">
+<img src="<?php echo $jpg_source; ?>_str1.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 
 <span class="text-echo" style="top:263px; left:57px;"><?php echo $fir_fdic; ?></span>
 <span class="text-echo" style="top:320px; left:57px;"><?php echo $fir_fico6; ?></span>
@@ -2829,7 +2835,7 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 2 ) { ?>
-<img src="<?php echo $jpg_source; ?>" class="form-background" alt="<?php echo $jpg_title; ?>">
+<img src="<?php echo $jpg_source; ?>_str2.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 <!-- II.CAST -->
@@ -2869,7 +2875,7 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 3 ) { ?>
-<img src="<?php echo $jpg_source; ?>" class="form-background" alt="<?php echo $jpg_title; ?>">
+<img src="<?php echo $jpg_source; ?>_str3.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 <!-- II.CAST pokracovanie -->
@@ -2919,7 +2925,7 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 4 ) { ?>
-<img src="<?php echo $jpg_source; ?>" class="form-background" alt="<?php echo $jpg_title; ?>">
+<img src="<?php echo $jpg_source; ?>_str4.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 <!-- II.CAST pokracovanie -->
@@ -2971,7 +2977,7 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 5 ) { ?>
-<img src="<?php echo $jpg_source; ?>" class="form-background" alt="<?php echo $jpg_title; ?>">
+<img src="<?php echo $jpg_source; ?>_str5.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 <!-- III.CAST -->
@@ -3044,7 +3050,7 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 6 ) { ?>
-<img src="<?php echo $jpg_source; ?>" class="form-background" alt="<?php echo $jpg_title; ?>">
+<img src="<?php echo $jpg_source; ?>_str6.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 <!-- III.CAST pokracovanie -->
@@ -3097,7 +3103,7 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 7 ) { ?>
-<img src="<?php echo $jpg_source; ?>" class="form-background" alt="<?php echo $jpg_title; ?>">
+<img src="<?php echo $jpg_source; ?>_str7.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 <!-- III.CAST pokracovanie -->
@@ -3129,7 +3135,7 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 8 ) { ?>
-<img src="<?php echo $jpg_source; ?>" class="form-background" alt="<?php echo $jpg_title; ?>">
+<img src="<?php echo $jpg_source; ?>_str8.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 <!-- III.CAST pokracovanie -->
@@ -3174,7 +3180,7 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 9 ) { ?>
-<img src="<?php echo $jpg_source; ?>" class="form-background" alt="<?php echo $jpg_title; ?>">
+<img src="<?php echo $jpg_source; ?>_str9.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 <!-- III.CAST pokracovanie -->
@@ -3246,7 +3252,7 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 10 ) { ?>
-<img src="<?php echo $jpg_source; ?>" class="form-background" alt="<?php echo $jpg_title; ?>">
+<img src="<?php echo $jpg_source; ?>_str10.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 <!-- V.CAST -->
@@ -3281,7 +3287,7 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 11 ) { ?>
-<img src="<?php echo $jpg_source; ?>" class="form-background" alt="<?php echo $jpg_title; ?>">
+<img src="<?php echo $jpg_source; ?>_str11.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 
@@ -3293,7 +3299,7 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 12 ) { ?>
-<img src="<?php echo $jpg_source; ?>" class="form-background" alt="<?php echo $jpg_title; ?>">
+<img src="<?php echo $jpg_source; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 
@@ -3304,7 +3310,7 @@ $sn1c=substr($sknacec,0,1);
 
 
 <?php if ( $strana == 13 ) { ?>
-<img src="<?php echo $jpg_source; ?>" class="form-background" alt="<?php echo $jpg_title; ?>">
+<img src="<?php echo $jpg_source; ?>_str13.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 
@@ -3313,23 +3319,25 @@ $sn1c=substr($sknacec,0,1);
 
 <?php                     } ?>
 
-
 <div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=7', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=8', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=9', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=1101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P1</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P2</a>
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+  <a href="#" onclick="editForm(1);" class="<?php echo $clas1; ?> toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
+  <a href="#" onclick="editForm(3);" class="<?php echo $clas3; ?> toleft">3</a>
+  <a href="#" onclick="editForm(4);" class="<?php echo $clas4; ?> toleft">4</a>
+  <a href="#" onclick="editForm(5);" class="<?php echo $clas5; ?> toleft">5</a>
+  <a href="#" onclick="editForm(6);" class="<?php echo $clas6; ?> toleft">6</a>
+  <a href="#" onclick="editForm(7);" class="<?php echo $clas7; ?> toleft">7</a>
+  <a href="#" onclick="editForm(8);" class="<?php echo $clas8; ?> toleft">8</a>
+  <a href="#" onclick="editForm(9);" class="<?php echo $clas9; ?> toleft">9</a>
+  <a href="#" onclick="editForm(10);" class="<?php echo $clas10; ?> toleft">10</a>
+  <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
+  <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
+  <a href="#" onclick="editForm(13);" class="<?php echo $clas13; ?> toleft">13</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=1101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P1</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2015.php?copern=101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P2</a>
+<input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
 </div>
-</FORM>
+</form>
 
 <?php if ( $strana == 4 ) { ?>
 <!-- pripocitalne nastavenie -->
@@ -3489,9 +3497,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source) AND $i == 0 )
+if ( File_Exists($jpg_source.'_str1.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_source,0,0,210,297);
+$pdf->Image($jpg_source.'_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -3958,9 +3966,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source) AND $i == 0 )
+if ( File_Exists($jpg_source.'_str2.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_source,0,0,210,297);
+$pdf->Image($jpg_source.'_str2.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -4547,9 +4555,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source) AND $i == 0 )
+if ( File_Exists($jpg_source.'_str3.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_source,0,0,210,297);
+$pdf->Image($jpg_source.'_str3.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -5020,9 +5028,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source) AND $i == 0 )
+if ( File_Exists($jpg_source.'_str4.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_source,0,0,210,297);
+$pdf->Image($jpg_source.'_str4.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -5535,9 +5543,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source) AND $i == 0 )
+if ( File_Exists($jpg_source.'_str5.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_source,0,0,210,297);
+$pdf->Image($jpg_source.'_str5.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -6154,9 +6162,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source) AND $i == 0 )
+if ( File_Exists($jpg_source.'_str6.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_source,0,0,210,297);
+$pdf->Image($jpg_source.'_str6.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -6899,9 +6907,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source) AND $i == 0 )
+if ( File_Exists($jpg_source.'_str7.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_source,0,0,210,297);
+$pdf->Image($jpg_source.'_str7.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -7382,9 +7390,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source) AND $i == 0 )
+if ( File_Exists($jpg_source.'_str8.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_source,0,0,210,297);
+$pdf->Image($jpg_source.'_str8.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -8192,9 +8200,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source) AND $i == 0 )
+if ( File_Exists($jpg_source.'_str9.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_source,0,0,210,297);
+$pdf->Image($jpg_source.'_str9.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -8996,9 +9004,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source) AND $i == 0 )
+if ( File_Exists($jpg_source.'_str10.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_source,0,0,210,297);
+$pdf->Image($jpg_source.'_str10.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -9443,9 +9451,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source) AND $i == 0 )
+if ( File_Exists($jpg_source.'_str11.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_source,0,0,210,297);
+$pdf->Image($jpg_source.'_str11.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -9484,9 +9492,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source) AND $i == 0 )
+if ( File_Exists($jpg_source.'_str12.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_source,0,0,210,297);
+$pdf->Image($jpg_source.'_str12.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -9525,9 +9533,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source) AND $i == 0 )
+if ( File_Exists($jpg_source.'_str13.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_source,0,0,210,297);
+$pdf->Image($jpg_source.'_str13.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -9581,9 +9589,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(13);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_source_potvrdenie) )
+if ( File_Exists($jpg_source.'_potvrdenie.jpg') )
 {
-$pdf->Image($jpg_source_potvrdenie,0,0,210,297);
+$pdf->Image($jpg_source.'_potvrdenie.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -10082,6 +10090,16 @@ if ( $copern == 102 )
   {
    window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&nacitajdanlicencia=1&licencia2015=1', '_self');
   }
+
+  function editForm(strana)
+  {
+    window.open('priznanie_po2017.php?copern=102&strana=' + strana + '&drupoh=1&page=1', '_self');
+  }
+  function FormPDF(strana)
+  {
+    window.open('priznanie_po2017.php?copern=11&strana=' + strana + '&drupoh=1&page=1', '_blank', blank_param);
+  }
+
 
 </script>
 </body>
