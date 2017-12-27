@@ -262,13 +262,13 @@ if ( $rokdppo >= 2017 ) { $rokdppo="2017";  }
   function TlacPriznanie()
   {
    var h_oc = 0;
-   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=11&drupoh=1&page=1&typ=PDF&strana=999',
+   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=11&drupoh=1&typ=PDF&strana=999',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravPriznanie()
   {
    var h_oc = 0;
-   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=101&drupoh=1&page=1&strana=1',
+   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=101&drupoh=1&strana=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function TlacPotvrdDPO()
@@ -278,7 +278,7 @@ if ( $rokdppo >= 2017 ) { $rokdppo="2017";  }
   }
   function POdoXML()
   {
-   window.open('../ucto/priznaniepo_xml<?php echo $rokdppo; ?>.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+   window.open('../ucto/priznaniepo_xml<?php echo $rokdppo; ?>.php?copern=110&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
@@ -299,13 +299,13 @@ if ( $rokfob >= 2011 ) { $skriptfob="../ucto/priznanie_fob"; }
   function TlacFOB()
   {
    var h_oc = 9999;
-   window.open('<?php echo $skriptfob.$rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&page=1&subor=0&strana=9999',
+   window.open('<?php echo $skriptfob.$rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=10&drupoh=1&subor=0&strana=9999',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravFOB()
   {
    var h_oc = 9999;
-   window.open('<?php echo $skriptfob.$rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&page=1&subor=0&prepocitaj=101',
+   window.open('<?php echo $skriptfob.$rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&subor=0&prepocitaj=101',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function TlacPotvrdFOB()
@@ -315,7 +315,7 @@ if ( $rokfob >= 2011 ) { $skriptfob="../ucto/priznanie_fob"; }
   }
   function FOBdoXML()
   {
-   window.open('../ucto/priznaniefob_xml<?php echo $rokfob; ?>.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+   window.open('../ucto/priznaniefob_xml<?php echo $rokfob; ?>.php?copern=110&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 

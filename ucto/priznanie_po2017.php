@@ -71,7 +71,7 @@ $jpg_title="tlaËivo DaÚ z prÌjmov PO pre rok.$kli_vrok $strana.strana";
 if ( !confirm ("Chcete naËÌtaù ˙daje do DPPO z firmy minulÈho roka ?") )
          { window.close() }
 else
-         { location.href='priznanie_po2017.php?copern=3156&page=1&drupoh=1&cislo_oc=<?php echo $cislo_oc; ?>' }
+         { location.href='priznanie_po2017.php?copern=3156&drupoh=1&cislo_oc=<?php echo $cislo_oc; ?>' }
 </script>
 <?php                    }
 
@@ -1153,7 +1153,7 @@ $vsql = 'DROP TABLE F'.$kli_vxcf.'_prizprac'.$kli_uzid;
 $vytvor = mysql_query("$vsql");
 ?>
 <script type="text/javascript">
-window.open('../ucto/priznanie_po2017.php?strana=<?php echo $strana; ?>&copern=102&drupoh=1&page=1&prepocitaj=1', '_self')
+window.open('../ucto/priznanie_po2017.php?strana=<?php echo $strana; ?>&copern=102&drupoh=1&prepocitaj=1', '_self')
 </script>
 <?php
 }
@@ -1239,7 +1239,7 @@ $vsql = 'DROP TABLE F'.$kli_vxcf.'_prizprac'.$kli_uzid;
 //$vytvor = mysql_query("$vsql");
 ?>
 <script type="text/javascript">
-window.open('../ucto/priznanie_po2017.php?strana=<?php echo $strana; ?>&copern=102&drupoh=1&page=1&prepocitaj=1', '_self')
+window.open('../ucto/priznanie_po2017.php?strana=<?php echo $strana; ?>&copern=102&drupoh=1&prepocitaj=1', '_self')
 </script>
 <?php
 }
@@ -2745,10 +2745,10 @@ if ( $strana == 13 ) $clas13="active";
   <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
   <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
   <a href="#" onclick="editForm(13);" class="<?php echo $clas13; ?> toleft">13</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P1</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P2</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=11&drupoh=1&page=1', '_blank')" class="toright">P2</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1011&drupoh=1&page=1', '_blank')" class="toright">P1</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1&volapo=1', '_self')" class="toleft">P1</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1&volapo=1', '_self')" class="toleft">P2</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=11&drupoh=1', '_blank')" class="toright">P2</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1011&drupoh=1', '_blank')" class="toright">P1</a>
 <!--   <a href="#" onclick="FormPDF(13);" class="<?php echo $clas13; ?> toright">13</a>
   <a href="#" onclick="FormPDF(12);" class="<?php echo $clas12; ?> toright">12</a>
   <a href="#" onclick="FormPDF(11);" class="<?php echo $clas11; ?> toright">11</a>
@@ -3333,8 +3333,8 @@ $sn1c=substr($sknacec,0,1);
   <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
   <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
   <a href="#" onclick="editForm(13);" class="<?php echo $clas13; ?> toleft">13</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P1</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1&page=1&volapo=1', '_self')" class="toleft">P2</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1&volapo=1', '_self')" class="toleft">P1</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1&volapo=1', '_self')" class="toleft">P2</a>
 <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
 </div>
 </form>
@@ -10005,12 +10005,12 @@ if ( $copern == 102 )
 
   function TlacPO()
   {
-   window.open('../ucto/priznanie_po2017.php?strana=999&copern=11&drupoh=1&page=1&typ=PDF',
+   window.open('../ucto/priznanie_po2017.php?strana=999&copern=11&drupoh=1&typ=PDF',
 '_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
   }
   function NacitajMinRok()
   {
-   window.open('../ucto/priznanie_po2017.php?cislo_oc=<?php echo $cislo_oc;?>&copern=3155&drupoh=1&page=1', '_self','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/priznanie_po2017.php?cislo_oc=<?php echo $cislo_oc;?>&copern=3155&drupoh=1', '_self','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
   }
   function PoucVyplnenie()
   {
@@ -10019,7 +10019,7 @@ if ( $copern == 102 )
   }
   function NacitajVHpredDanou()
   {
-   window.open('../ucto/priznanie_po2017.php?strana=2&copern=200&drupoh=1&page=1&typ=PDF&dppo=1', '_self');
+   window.open('../ucto/priznanie_po2017.php?strana=2&copern=200&drupoh=1&typ=PDF&dppo=1', '_self');
   }
   function NacitajRozdielOdpisov()
   {
@@ -10027,7 +10027,7 @@ if ( $copern == 102 )
   }
   function NacitajOdpisy()
   {
-   window.open('../ucto/priznanie_po2017.php?strana=<?php echo $strana; ?>&copern=200&drupoh=1&page=1&typ=PDF&dppo=2', '_self');
+   window.open('../ucto/priznanie_po2017.php?strana=<?php echo $strana; ?>&copern=200&drupoh=1&typ=PDF&dppo=2', '_self');
   }
   function NacitajNedVyd()
   {
