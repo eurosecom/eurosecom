@@ -219,14 +219,14 @@ $datp_sk=SkDatum($datp_dph);
 $datk_sk=SkDatum($datk_dph);
 
 //nacitaj uzavierka k datumu z ufirdalsie
-// $datksk="";
-// $sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
-//   if (@$zaznam=mysql_data_seek($sql,0))
-//   {
-//   $riadok=mysql_fetch_object($sql);
-//   $datksk=SkDatum($riadok->datk);
-//   }
-// if ( $datksk != '' AND $datksk != '00.00.0000' ) { $datk_sk=$datksk; }
+$datksk="";
+$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
+   if (@$zaznam=mysql_data_seek($sql,0))
+   {
+   $riadok=mysql_fetch_object($sql);
+   $datksk=SkDatum($riadok->datk);
+   }
+if ( $datksk != '' AND $datksk != '00.00.0000' ) { $datk_sk=$datksk; }
 
 
 //nacitaj uzavierka k datumu a obdobia z ufirdalsie
@@ -248,7 +248,7 @@ if ( $riadok->datbod != '0000-00-00' )
   $datbdosk=SkDatum($riadok->datbdo);
   $datmodsk=SkDatum($riadok->datmod);
   $datmdosk=SkDatum($riadok->datmdo);
-//  if( $datmodsk == '00.00.0000' ) { $datmodsk=""; $datmdosk=""; }
+if( $datmodsk == '00.00.0000' ) { $datmodsk=""; $datmdosk=""; }
      }
   }//koniec blok okolo obdobi uzavierky
 
