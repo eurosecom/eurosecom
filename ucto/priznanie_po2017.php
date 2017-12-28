@@ -1250,13 +1250,13 @@ if ( $copern == 103 OR $copern == 4103 OR $copern == 5103 )
      {
 if ( $strana == 1 ) {
 $druh = 1*$_REQUEST['druh'];
-$obod = $_REQUEST['obod'];
-$obodsql=SqlDatum($obod);
-$obdo = $_REQUEST['obdo'];
-$obdosql=SqlDatum($obdo);
+//$obod = $_REQUEST['obod'];
+//$obodsql=SqlDatum($obod);
+//$obdo = $_REQUEST['obdo'];
+//$obdosql=SqlDatum($obdo);
 
-if ( $obodsql == '0000-00-00' ) { $obodsql=$kli_vrok."-01-01"; }
-if ( $obdosql == '0000-00-00' ) { $obdosql=$kli_vrok."-12-31"; }
+//if ( $obodsql == '0000-00-00' ) { $obodsql=$kli_vrok."-01-01"; }
+//if ( $obdosql == '0000-00-00' ) { $obdosql=$kli_vrok."-12-31"; }
 
 //$obdd1 = strip_tags($_REQUEST['obdd1']);
 //$obdm1 = strip_tags($_REQUEST['obdm1']);
@@ -1290,9 +1290,10 @@ $chpdl = 1*$_REQUEST['chpdl'];
 $chndl = 1*$_REQUEST['chndl'];
 $zapdl = 1*$_REQUEST['zapdl'];
 
+//obod='$obodsql', obdo='$obdosql',
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " chpld='$chpld', cho5k='$cho5k', chpdl='$chpdl', chndl='$chndl', zapdl='$zapdl', ".
-" druh='$druh', obod='$obodsql', obdo='$obdosql', cinnost='$cinnost', uoskr='$uoskr', koskr='$koskr', ".
+" druh='$druh',  cinnost='$cinnost', uoskr='$uoskr', koskr='$koskr', ".
 " nerezident='$nerezident', zahrprep='$zahrprep', pruli='$pruli', prcdm='$prcdm', prpsc='$prpsc', prmes='$prmes', prpoc='$prpoc' ".
 " WHERE ico >= 0";
                     }
@@ -2188,8 +2189,8 @@ $sqldok = mysql_query("$sqlttt");
  $riaddok=mysql_fetch_object($sqldok);
  $dl2014=1*$riaddok->r830;
  $dl2015=1*$riaddok->r820;
- $obod=$riaddok->obod;
- $obdo=$riaddok->obdo;
+ //$obod=$riaddok->obod;
+ //$obdo=$riaddok->obdo;
  $k1od=$riaddok->k1od;
  $k1do=$riaddok->k1do;
  $k2r01=1*$riaddok->k2r01;
@@ -2259,10 +2260,10 @@ $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
 $druh = $fir_riadok->druh;
-$obod = $fir_riadok->obod;
-$obodsk=SkDatum($obod);
-$obdo = $fir_riadok->obdo;
-$obdosk=SkDatum($obdo);
+//$obod = $fir_riadok->obod;
+//$obodsk=SkDatum($obod);
+//$obdo = $fir_riadok->obdo;
+//$obdosk=SkDatum($obdo);
 $cinnost = $fir_riadok->cinnost;
 $uoskr = $fir_riadok->uoskr;
 $koskr = $fir_riadok->koskr;
@@ -2613,8 +2614,93 @@ mysql_free_result($fir_vysledok);
 $fir_fico6=$fir_fico;
 if ( $fir_fico < 1000000 ) { $fir_fico6="00".$fir_fico; }
 
+//obdobia z ufirdalsie
+$sqlt = 'DROP TABLE prcdatum'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = <<<prcdatum
+(
+   datp          DATE,
+   datk          DATE,
+   fic          INT
+);
+prcdatum;
+
+$vsql = 'CREATE TABLE prcdatum'.$kli_uzid.$sqlt;
+$vytvor = mysql_query("$vsql");
+
+$pole = explode(".", $kli_vume);
+$kli_mdph=$pole[0];
+$kli_rdph=$pole[1];
+if ( $kli_mdph < 10 ) $kli_mdph="0".$kli_mdph;
+
+$pole = explode(".", $kli_vume);
+$mesp_dph=$pole[0];
+$mesk_dph=$pole[0];
+$rokp_dph=$pole[1];
+
+$datp_dph=$rokp_dph.'-'.$mesp_dph.'-01';
+$datk_dph=$rokp_dph.'-'.$mesk_dph.'-01';
+
+$ttvv = "INSERT INTO prcdatum".$kli_uzid." ( datp,datk,fic ) VALUES ( '$datp_dph', '$datp_dph', 0 )";
+$ttqq = mysql_query("$ttvv");
 
 
+$dsqlt = "UPDATE prcdatum".$kli_uzid.
+" SET datp='$datp_dph',  datk=LAST_DAY('$datk_dph')".
+" WHERE fic >= 0 ".
+"";
+$dsql = mysql_query("$dsqlt");
+
+$sql = mysql_query("SELECT * FROM prcdatum$kli_uzid");
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+  $datp_dph=$riadok->datp;
+  $datk_dph=$riadok->datk;
+  }
+$sqlt = 'DROP TABLE prcdatum'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$datp_sk=SkDatum($datp_dph);
+$datk_sk=SkDatum($datk_dph);
+
+//nacitaj obdobia z ufirdalsie
+$pole = explode(".", $kli_vume);
+$kli_vmesx=$pole[0];
+$kli_vrokx=$pole[1];
+if( $kli_vmesx < 10 ) { $kli_vmesx="0".$kli_vmesx; }
+$kli_mrokx=$kli_vrokx-1;
+
+$datbodsk="01.01.".$kli_vrokx; $datbdosk="31.".$kli_vmesx.".".$kli_vrokx; $datmodsk="01.01.".$kli_mrokx; $datmdosk="31.12.".$kli_mrokx;
+$sql = mysql_query("SELECT * FROM F$kli_vxcf"."_ufirdalsie ");
+  if (@$zaznam=mysql_data_seek($sql,0))
+  {
+  $riadok=mysql_fetch_object($sql);
+
+if ( $riadok->datbod != '0000-00-00' )
+     {
+  $datbodsk=SkDatum($riadok->datbod);
+  $datbdosk=SkDatum($riadok->datbdo);
+  $datmodsk=SkDatum($riadok->datmod);
+  $datmdosk=SkDatum($riadok->datmdo);
+//  if( $datmodsk == '00.00.0000' ) { $datmodsk=""; $datmdosk=""; }
+     }
+  }//koniec blok okolo obdobi uzavierky
+
+//za obdobie nasekanie
+$datbodskdni = substr($datbodsk,0,2);
+$datbodskmes = substr($datbodsk,3,2);
+$datbodskrok = substr($datbodsk,8,9);
+$datbdoskdni = substr($datbdosk,0,2);
+$datbdoskmes = substr($datbdosk,3,2);
+$datbdoskrok = substr($datbdosk,8,9);
+
+//6-miestne ico
+if ( $fir_uctt03 != 999 )
+{
+$ico=$fir_fico;
+if ( $fir_fico < 1000000 ) { $ico="00".$fir_fico; }
+}
 ?>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
@@ -2704,7 +2790,7 @@ div.input-echo {
     <div class="bar-btn-form-tool">
      <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="Pouèenie na vyplnenie" class="btn-form-tool">
      <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="Naèíta údaje z minulého roka" class="btn-form-tool">
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick="POdoXML();" title="Export do XML" class="btn-form-tool">
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="FormXML();" title="Export do XML" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="FormPDF(999);" title="Zobrazi všetky strany bez príloh v PDF" class="btn-form-tool">
     </div>
    </td>
@@ -2777,7 +2863,7 @@ if ( $strana == 13 ) $clas13="active";
 <img src="<?php echo $jpg_source; ?>_str1.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 
 <span class="text-echo" style="top:263px; left:57px;"><?php echo $fir_fdic; ?></span>
-<span class="text-echo" style="top:320px; left:57px;"><?php echo $fir_fico6; ?></span>
+<span class="text-echo" style="top:320px; left:57px;"><?php echo $ico; ?></span>
 <?php
 $fir_uctt03x=$fir_uctt03;
 if ( $fir_uctt03 == 999 ) { $fir_uctt03x=""; }
@@ -2788,8 +2874,17 @@ if ( $fir_uctt03 == 999 ) { $fir_uctt03x=""; }
 <input type="radio" id="druh2" name="druh" value="2" style="top:285px; left:417px;"/>
 <input type="radio" id="druh3" name="druh" value="3" style="top:310px; left:417px;"/>
 <!-- Za obdobie -->
-<input type="text" name="obod" id="obod" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:265px; left:690px;"/>
-<input type="text" name="obdo" id="obdo" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:304px; left:690px;"/>
+<span class="text-echo" style="top:272px; left:696px;"><?php echo $datbodskdni; ?></span>
+<span class="text-echo" style="top:272px; left:753px;"><?php echo $datbodskmes; ?></span>
+<span class="text-echo" style="top:272px; left:855px;"><?php echo $datbodskrok; ?></span>
+<span class="text-echo" style="top:310px; left:696px;"><?php echo $datbdoskdni; ?></span>
+<span class="text-echo" style="top:310px; left:753px;"><?php echo $datbdoskmes; ?></span>
+<span class="text-echo" style="top:310px; left:855px;"><?php echo $datbdoskrok; ?></span>
+
+
+
+<!-- <input type="text" name="obod" id="obod" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:265px; left:690px;"/>
+<input type="text" name="obdo" id="obdo" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:304px; left:690px;"/> -->
 <?php
 $pole = explode(".", $fir_sknace);
 $sknacea=$pole[0];
@@ -2807,7 +2902,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="cinnost" id="cinnost" style="width:624px; height:46px; top:354px; left:267px;"/>
 
 <!-- I.CAST -->
-<div class="input-echo" style="width:843px; top:469px; left:52px;"><?php echo $fir_fnaz; ?></div>
+<div class="input-echo" style="width:843px; height:100px; top:469px; left:52px;"><?php echo $fir_fnaz; ?></div>
 <div class="input-echo" style="width:635px; top:619px; left:52px;"><?php echo $fir_fuli; ?></div>
 <div class="input-echo" style="width:163px; top:619px; left:718px;"><?php echo $fir_fcdm; ?></div>
 <div class="input-echo" style="width:110px; top:674px; left:52px;"><?php echo $fir_fpsc; ?></div>
@@ -3244,7 +3339,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="p1ico" id="p1ico" style="width:175px; top:993px; left:51px;"/>
 <input type="text" name="p1sid" id="p1sid" style="width:84px; top:993px; left:258px;"/>
 <input type="text" name="p1pfr" id="p1pfr" style="width:519px; top:993px; left:374px;"/>
-<input type="text" name="p1men" id="p1men" style="width:842px; top:1044px; left:51px;"/>
+<input type="text" name="p1men" id="p1men" style="width:842px; height:60px; top:1044px; left:51px;"/>
 <input type="text" name="p1uli" id="p1uli" style="width:635px; top:1150px; left:51px;"/>
 <input type="text" name="p1cdm" id="p1cdm" style="width:174px; top:1150px; left:719px;"/>
 <input type="text" name="p1psc" id="p1psc" style="width:106px; top:1205px; left:51px;"/>
@@ -9672,8 +9767,8 @@ if ( $copern == 102 )
   {
 
 <?php if ( $strana == 1 ) { ?>
-   document.formv1.obod.value = '<?php echo "$obodsk";?>';
-   document.formv1.obdo.value = '<?php echo "$obdosk";?>';
+//   document.formv1.obod.value = '<?php echo "$obodsk";?>';
+//   document.formv1.obdo.value = '<?php echo "$obdosk";?>';
 <?php if ( $druh == 0 ) { ?> document.formv1.druh1.checked = 'true'; <?php } ?>
 <?php if ( $druh == 1 ) { ?> document.formv1.druh1.checked = 'true'; <?php } ?>
 <?php if ( $druh == 2 ) { ?> document.formv1.druh2.checked = 'true'; <?php } ?>
@@ -10004,20 +10099,17 @@ if ( $copern == 102 )
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-  function TlacPO()
-  {
-   window.open('../ucto/priznanie_po2017.php?strana=999&copern=11&drupoh=1&typ=PDF',
-'_blank', 'width=1050, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
-  }
+
   function NacitajMinRok()
   {
    window.open('../ucto/priznanie_po2017.php?cislo_oc=<?php echo $cislo_oc;?>&copern=3155&drupoh=1', '_self','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
   }
+
   function PoucVyplnenie()
   {
-   window.open('../dokumenty/dan_z_prijmov2015/dppo2015/dppo_v15_poucenie.pdf',
-'_blank', 'width=1080, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+   window.open('<?php echo $jpg_source; ?>_poucenie.pdf', '_blank', blank_param);
   }
+
   function NacitajVHpredDanou()
   {
    window.open('../ucto/priznanie_po2017.php?strana=2&copern=200&drupoh=1&typ=PDF&dppo=1', '_self');
@@ -10071,11 +10163,7 @@ if ( $copern == 102 )
    var h_riadok = riadok;
    window.open('priznanie_po2017.php?h_riadok=' + h_riadok + '&copern=266&drupoh=1&page=1', '_self');
   }
-  function POdoXML()
-  {
-   window.open('../ucto/priznaniepo_xml2017.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
+
   function InfoPreddDane()
   {
    window.open('../dokumenty/dan_z_prijmov2015/dppo2015/dppo_v15_r1110_vypocet.pdf',
@@ -10094,13 +10182,16 @@ if ( $copern == 102 )
 
   function editForm(strana)
   {
-    window.open('priznanie_po2017.php?copern=102&strana=' + strana + '&drupoh=1&page=1', '_self');
+    window.open('priznanie_po2017.php?copern=102&strana=' + strana + '&drupoh=1', '_self');
   }
   function FormPDF(strana)
   {
-    window.open('priznanie_po2017.php?copern=11&strana=' + strana + '&drupoh=1&page=1', '_blank', blank_param);
+    window.open('priznanie_po2017.php?copern=11&strana=' + strana + '&drupoh=1', '_blank', blank_param);
   }
-
+  function FormXML()
+  {
+   window.open('../ucto/priznaniepo_xml2017.php?copern=110&sysx=UCT&drupoh=1&uprav=1', '_blank', blank_param);
+  }
 
 </script>
 </body>
