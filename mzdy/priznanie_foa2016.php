@@ -936,12 +936,19 @@ $copern=20;
 }
 //koniec pracovneho suboru pre rocne 
 
-//vypocty su aktualizovane vsetky na 2016
+//vypocty su aktualizovane vsetky na 2016,2017
 //$prepoc=0;
 $alertprepocet="";
 if ( ( $copern == 10 OR $copern == 20 ) AND $prepoc == 1 )
 {
 $alertprepocet="!!! Prepoèítavam hodnoty v riadkoch !!!";
+
+//v 2017 sa podla poucenia nevyplna r35 a r39
+if ( $kli_vrok >= 2017 )
+   {
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r35=0, r39=0 WHERE oc = $cislo_oc";
+$oznac = mysql_query("$sqtoz");
+   }
 
 //vypocitaj 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r34=r32-r33, r36=r34+r35 WHERE oc = $cislo_oc";
@@ -957,7 +964,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r37=3803.33 WHERE oc = $cislo_oc  ";
 $oznac = mysql_query("$sqtoz");
 
-//milionarska dan 2016 rovnaka ako v 2015
+//milionarska dan 2017,2016 rovnaka ako v 2015
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET des6=8755.578-(r36/4) WHERE oc = $cislo_oc AND r36 > 19809.00 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -977,7 +984,7 @@ $oznac = mysql_query("$sqtoz");
 
 if ( $namanzelku == 1 )
    {
-//nezdanitelna cast na manzelku 2015 rovnaka ako 2014
+//nezdanitelna cast na manzelku 2017, 2016, 2015 rovnaka ako 2014
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET des6=0, des2=0 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
@@ -1005,21 +1012,21 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r38=0 WHERE oc = $cislo_oc A
 $oznac = mysql_query("$sqtoz");
    }
 
-//nezdanitelne polozky 2016
+//nezdanitelne polozky 2016, 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r41=r37+r38+r39+r40 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r41=r36 WHERE oc = $cislo_oc AND r41 > r36 ";
 $oznac = mysql_query("$sqtoz");
 
-//zaklad po odpocitani 2016
+//zaklad po odpocitani 2016, 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r42=r36-r41 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r42=0 WHERE oc = $cislo_oc AND r42 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//dan z prijmu 2016 rovnaka ako v 2015
+//dan z prijmu 2016, 2017 rovnaka ako v 2015
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET des6=0, des2=0 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
@@ -1084,9 +1091,9 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r44=0, r46=0 WHERE oc = $cislo_oc AND r44 >= r37  ";
 $oznac = mysql_query("$sqtoz");
    }
-//koniec zam.premia 2016
+//koniec zam.premia 2016, 2017
 
-//vynate prijmy 2016 zo zdrojov v zahranici ak r48 > 0 to su vynate prijmy zo zahranicia 2016
+//vynate prijmy 2016, 2017 zo zdrojov v zahranici ak r48 > 0 to su vynate prijmy zo zahranicia 2016, 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r49=r42-r48 WHERE oc = $cislo_oc AND r48 > 0 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r49=0, r50=0 WHERE oc = $cislo_oc AND r48 <= 0 ";
@@ -1099,7 +1106,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r50=0, r56=0, r58=0 WHERE oc = $cislo_oc AND r49 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//dan uznana na zapocet 2016
+//dan uznana na zapocet 2016, 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r56=r43-r55 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r56=r50-r55 WHERE oc = $cislo_oc AND r50 > 0 ";
@@ -1109,7 +1116,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r56=0 WHERE oc = $cislo_oc AND r56 <= 16.60 AND r57 = 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//dan po odpocitani danoveho bonusu 2016
+//dan po odpocitani danoveho bonusu 2016, 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r58=r56-r57 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r58=0 WHERE oc = $cislo_oc AND r58 < 0 ";
@@ -1122,7 +1129,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r49=0, r50=0, r56=0, r58=0 W
 $oznac = mysql_query("$sqtoz");
 
 
-//vysporiadanie danoveho bonusu 2016
+//vysporiadanie danoveho bonusu 2016, 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r60=r57-r59 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r60=0 WHERE oc = $cislo_oc AND r60 < 0 ";
@@ -1136,7 +1143,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r62=0 WHERE oc = $cislo_oc AND r62 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//dan na uhradu, preplatok 2016
+//dan na uhradu, preplatok 2016, 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r66=0, r65=r56-r57+r59+r61-r63-r63a-r64+r47 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r66=-r65, r65=0 WHERE oc = $cislo_oc AND r65 < 0 ";
