@@ -2249,6 +2249,7 @@ $vysledok = mysql_query($sql);
 if ( $vysledok ) {
 $riadok=mysql_fetch_object($vysledok);
 $fstat = $riadok->fstat;
+if( $fstat == "" ) { $fstat="SR"; }
                  }
      }
 //koniec nacitania
