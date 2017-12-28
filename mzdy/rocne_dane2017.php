@@ -1769,7 +1769,7 @@ $pdf->SetFont('arial','',10);
 $pdf->Cell(190,2," ","$rmc1",1,"L");
 $pdf->Cell(11,7," ","$rmc1",0,"L");$pdf->Cell(42,4,"$zrobil","$rmc",0,"L");
 $dat_dat = SkDatum($hlavicka->da21);
-//if ( $dat_dat == '0000-00-00' ) $dat_dat="";
+if ( $dat_dat == '00.00.0000' ) $dat_dat="";
 $pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(20,4,"$dat_dat","$rmc",0,"L");
 $pdf->Cell(4,5," ","$rmc1",0,"L");$pdf->Cell(60,4,"$fir_ftel","$rmc",1,"L");
 
