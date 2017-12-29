@@ -131,9 +131,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa,".$databaza."F$h_ycf"."_mzdpriz
 " F$kli_vxcf"."_mzdpriznanie_foa.dar=".$databaza."F$h_ycf"."_mzdpriznanie_foa.dar, ".
 " F$kli_vxcf"."_mzdpriznanie_foa.rdk=".$databaza."F$h_ycf"."_mzdpriznanie_foa.rdk, ".
 " F$kli_vxcf"."_mzdpriznanie_foa.rdc=".$databaza."F$h_ycf"."_mzdpriznanie_foa.rdc  ".
-" WHERE F$kli_vxcf"."_mzdpriznanie_foa.oc=".$databaza."F$h_ycf"."_mzdpriznanie_foa.oc "; 
+" WHERE F$kli_vxcf"."_mzdpriznanie_foa.oc=".$databaza."F$h_ycf"."_mzdpriznanie_foa.oc ";
 
-$upravene = mysql_query("$uprtxt"); 
+$upravene = mysql_query("$uprtxt");
 echo $uprtxt;
 $copern=20;
 //koniec nacitania celeho minuleho roka do FOA
@@ -352,7 +352,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET ".
 " d4prie='$d4prie', d4rod='$d4rod', d4pomc='$d4pomc', d4pom1='$d4pom1', d4pom2='$d4pom2', d4pom3='$d4pom3', d4pom4='$d4pom4', d4pom5='$d4pom5', ".
 " d4pom6='$d4pom6', d4pom7='$d4pom7', d4pom8='$d4pom8', d4pom9='$d4pom9', d4pom10='$d4pom10', d4pom11='$d4pom11', d4pom12='$d4pom12', det4='$det4', ".
 " r32='$r32', r32a='$r32a', r33a='$r33a', r33b='$r33b', r33='$r33', r34='$r34', r35='$r35'  ".
-" WHERE oc = $cislo_oc"; 
+" WHERE oc = $cislo_oc";
                     }
 
 $r36 = 1*$_REQUEST['r36'];
@@ -413,7 +413,7 @@ if ( $strana == 4 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET ".
 " r62='$r62', r63='$r63', r63a='$r63a', r64='$r64', r65='$r65', ".
 " r66='$r66', r67='$r67', r68='$r68', r69='$r69', r70='$r70', r71='$r71', r72='$r72', r73='$r73', r74='$r74' ".
-" WHERE oc = $cislo_oc"; 
+" WHERE oc = $cislo_oc";
                     }
 
 $upl50 = 1*$_REQUEST['upl50'];
@@ -485,7 +485,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET ".
                     }
 
 //echo $uprtxt;
-$upravene = mysql_query("$uprtxt");  
+$upravene = mysql_query("$uprtxt");
 
 $nepoc = 1*$_REQUEST['nepoc'];
 $vsetkyprepocty=1;
@@ -934,7 +934,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r00z2='$xr00z2', r00a2='$xr0
 $prepoc=1;
 $copern=20;
 }
-//koniec pracovneho suboru pre rocne 
+//koniec pracovneho suboru pre rocne
 
 //vypocty su aktualizovane vsetky na 2016,2017
 //$prepoc=0;
@@ -950,7 +950,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r35=0, r39=0 WHERE oc = $cis
 $oznac = mysql_query("$sqtoz");
    }
 
-//vypocitaj 
+//vypocitaj
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET r34=r32-r33, r36=r34+r35 WHERE oc = $cislo_oc";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
@@ -1374,9 +1374,9 @@ $pril = $fir_riadok->pril;
 $dat = $fir_riadok->dat;
 $datsk=Skdatum($dat);
 //takto to uzivatelia nechcu, ak nezadaju tak chcu nevyplnit v tlaci a v xml upozorni
-if ( $datsk == '00.00.0000' ) 
-{ 
-//$datsk=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); 
+if ( $datsk == '00.00.0000' )
+{
+//$datsk=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 //$datsql=SqlDatum($datsk);
 //$sqlx = "UPDATE F$kli_vxcf"."_mzdpriznanie_foa SET dat='$datsql' ";
 //$vysledekx = mysql_query("$sqlx");
@@ -1710,7 +1710,13 @@ if ( $copern == 20 )
   }
   function PoucVyplnenie()
   {
+<?php if ( $kli_vrok < 2017 ) { ?>
    window.open('<?php echo $jpg_cesta; ?>_poucenie.pdf', '_blank', param);
+<?php              } ?>
+<?php if ( $kli_vrok >= 2017 ) { ?>
+   window.open('../dokumenty/dan_z_prijmov2017/dpfoa/dpfoa_v17_poucenie.pdf',
+'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
+<?php              } ?>
   }
   function NacitajPriPred()
   {
@@ -1801,7 +1807,7 @@ if ( $copern == 20 )
      <img src="../obr/ikony/usertwo_blue_icon.png" onclick="DetiZamestnanca();" title="Deti zamestnanca" class="btn-form-tool">
      <img src="../obr/ikony/user_blue_icon.png" onclick="UpravZamestnanca();" title="Upravi údaje o zamestnancovi" class="btn-form-tool">
      <img src="../obr/ikony/list_blue_icon.png" onclick="TlacMzdovyList();" title="Zobrazi mzdový list v PDF" class="btn-form-tool">
-     <img src="../obr/ikony/upbox_blue_icon.png" onclick="FOAdoXML();" title="Export do XML" class="btn-form-tool"> 
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="FOAdoXML();" title="Export do XML" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacFOA();" title="Zobrazi všetky strany v PDF" class="btn-form-tool">
     </div>
    </td>
@@ -1982,6 +1988,7 @@ $t02=substr($rokp,3,1);
 <input type="text" name="r33b" id="r33b" onkeyup="CiarkaNaBodku(this);" style="width:176px; top:1064px; left:551px;"/>
 <input type="text" name="r34" id="r34" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:1104px; left:482px;"/>
 <input type="text" name="r35" id="r35" onkeyup="CiarkaNaBodku(this);" style="width:176px; top:1150px; left:551px;"/>
+<img src="../obr/ikony/info_blue_icon.png" title="Riadok 35 sa za rok 2017 sa nevypåòa." class="btn-row-tool" style="top:1152px; left:748px;">
 <?php                                        } ?>
 
 
@@ -1998,6 +2005,9 @@ $t02=substr($rokp,3,1);
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="namanzelku();"
       title="Doplni odpoèet na manželku a zoh¾adni milionársku daò" class="btn-row-tool" style="top:233px; left:736px;">
 <input type="text" name="r39" id="r39" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:272px; left:569px;"/>
+<img src="../obr/ikony/info_blue_icon.png" title="Riadok 39 sa za rok 2017 nevypåòa, pretože nie je možné uplatni sumu
+preukázate¾ne zaplatených dobrovo¾ných príspevkov na SDS ako nezdanite¾nú èas základu dane." class="btn-row-tool" style="top:274px; left:740px;">
+
 <input type="text" name="r40" id="r40" onkeyup="CiarkaNaBodku(this);" style="width:151px; top:311px; left:569px;"/>
 <input type="text" name="r41" id="r41" onkeyup="CiarkaNaBodku(this);" style="width:174px; top:352px; left:546px;"/>
 <input type="text" name="r42" id="r42" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:395px; left:477px;"/>
