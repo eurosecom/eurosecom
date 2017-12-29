@@ -120,13 +120,13 @@ $copern=102;
     }
 
 //pracovny subor
-/*$sql = "SELECT fstat FROM F".$kli_vxcf."_ufirdalsie";
+$sql = "SELECT fstat FROM F".$kli_vxcf."_ufirdalsie";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD fstat VARCHAR(30) DEFAULT 'SR' AFTER kkx";
 $vysledek = mysql_query("$sql");
-}*/
+}
 
 $sql = "SELECT d7r01 FROM F$kli_vxcf"."_uctpriznanie_po WHERE ico=0";
 $vysledok = mysql_query("$sql");
