@@ -120,13 +120,13 @@ $copern=102;
     }
 
 //pracovny subor
-$sql = "SELECT fstat FROM F".$kli_vxcf."_ufirdalsie";
+/*$sql = "SELECT fstat FROM F".$kli_vxcf."_ufirdalsie";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD fstat VARCHAR(30) DEFAULT 'SR' AFTER kkx";
 $vysledek = mysql_query("$sql");
-}
+}*/
 
 $sql = "SELECT d7r01 FROM F$kli_vxcf"."_uctpriznanie_po WHERE ico=0";
 $vysledok = mysql_query("$sql");
@@ -2243,17 +2243,6 @@ $upravene = mysql_query("$uprtxt");
 //////////////////koniec vypoctov
 
 //nacitaj udaje pre upravu
-if ( $copern == 102 OR $copern == 11 )
-     {
-$sql = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
-$vysledok = mysql_query($sql);
-if ( $vysledok ) {
-$riadok=mysql_fetch_object($vysledok);
-$fstat = $riadok->fstat;
-if( $fstat == "" ) { $fstat="SR"; }
-                 }
-     }
-//koniec nacitania
 
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_po WHERE ico >= 0";
 $fir_vysledok = mysql_query($sqlfir);
@@ -2611,8 +2600,8 @@ mysql_free_result($fir_vysledok);
 //koniec nacitania
 
 //6-miestne ico
-$fir_fico6=$fir_fico;
-if ( $fir_fico < 1000000 ) { $fir_fico6="00".$fir_fico; }
+//$fir_fico6=$fir_fico;
+//if ( $fir_fico < 1000000 ) { $fir_fico6="00".$fir_fico; }
 
 //obdobia z ufirdalsie
 $sqlt = 'DROP TABLE prcdatum'.$kli_uzid;
@@ -2681,8 +2670,8 @@ if ( $riadok->datbod != '0000-00-00' )
      {
   $datbodsk=SkDatum($riadok->datbod);
   $datbdosk=SkDatum($riadok->datbdo);
-  $datmodsk=SkDatum($riadok->datmod);
-  $datmdosk=SkDatum($riadok->datmdo);
+//  $datmodsk=SkDatum($riadok->datmod);
+//  $datmdosk=SkDatum($riadok->datmdo);
 //  if( $datmodsk == '00.00.0000' ) { $datmodsk=""; $datmdosk=""; }
      }
   }//koniec blok okolo obdobi uzavierky
@@ -2701,6 +2690,15 @@ if ( $fir_uctt03 != 999 )
 $ico=$fir_fico;
 if ( $fir_fico < 1000000 ) { $ico="00".$fir_fico; }
 }
+
+//sidlo-stat z ufir
+$sql = "SELECT * FROM F$kli_vxcf"."_ufirdalsie ";
+$vysledok = mysql_query($sql);
+if ( $vysledok ) {
+$riadok=mysql_fetch_object($vysledok);
+$fstat = $riadok->fstat;
+if ( $fstat == "" ) { $fstat="Slovensko"; }
+                 }
 ?>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
