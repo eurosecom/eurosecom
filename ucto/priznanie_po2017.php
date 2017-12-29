@@ -62,8 +62,8 @@ $xml = 1*$_REQUEST['xml'];
 $prepocitaj = 1*$_REQUEST['prepocitaj'];
 
 //jpg source
-$jpg_source="../dokumenty/dan_z_prijmov2017/dppo/dppo_v15";
-$jpg_title="tlaËivo DaÚ z prÌjmov PO pre rok.$kli_vrok $strana.strana";
+$jpg_source="../dokumenty/dan_z_prijmov2017/dppo/dppo_v17";
+$jpg_title="tlaËivo DaÚ z prÌjmov PO pre rok $kli_vrok $strana.strana";
 
 //nacitanie minuleho roka do PO
   if ( $copern == 3155 ) { ?>
@@ -120,13 +120,13 @@ $copern=102;
     }
 
 //pracovny subor
-$sql = "SELECT fstat FROM F".$kli_vxcf."_ufirdalsie";
+/*$sql = "SELECT fstat FROM F".$kli_vxcf."_ufirdalsie";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
 $sql = "ALTER TABLE F$kli_vxcf"."_ufirdalsie ADD fstat VARCHAR(30) DEFAULT 'SR' AFTER kkx";
 $vysledek = mysql_query("$sql");
-}
+}*/
 
 $sql = "SELECT d7r01 FROM F$kli_vxcf"."_uctpriznanie_po WHERE ico=0";
 $vysledok = mysql_query("$sql");
@@ -2559,13 +2559,13 @@ $oostat = $fir_riadok->oostat;
 $pril = $fir_riadok->pril;
 $datum = $fir_riadok->datum;
 $datum_sk = SkDatum($datum);
-if ( $datum_sk == '00.00.0000' )
-{
-$datum_sk=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
-$datum_sql=SqlDatum($datum_sk);
-$sqlx = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET datum='$datum_sql' ";
-$vysledekx = mysql_query("$sqlx");
-}
+// if ( $datum_sk == '00.00.0000' )
+// {
+// $datum_sk=Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+// $datum_sql=SqlDatum($datum_sk);
+// $sqlx = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET datum='$datum_sql' ";
+// $vysledekx = mysql_query("$sqlx");
+// }
 $datuk = $fir_riadok->datuk;
 $datuk_sk = SkDatum($datuk);
 $vrat = $fir_riadok->vrat;
@@ -2701,66 +2701,11 @@ if ( $fstat == "" ) { $fstat="Slovensko"; }
                  }
 ?>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link rel="stylesheet" href="../css/reset.css">
- <link rel="stylesheet" href="../css/tlaciva.css">
-<title>EuroSecom - DaÚ z prÌjmov PO</title>
+<meta charset="cp1250">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/tlaciva.css">
+<title>DPPO | EuroSecom</title>
 <style type="text/css">
-span.pripo-btn {
-  position: absolute;
-  left: 836px;
-  color: #39f;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 14px;
-}
-form.pripo-area {
-  position: absolute;
-  left: 524px;
-  width: 385px;
-  padding: 5px 7px;
-  background-color: #ffff90;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* prefixy */
-}
-form.pripo-area > img {
-  position: absolute;
-  top: 6px;
-  right: 7px;
-  width: 22px;
-  height: 22px;
-  cursor: pointer;
-  opacity: 1; /* prefixy */
-}
-form.pripo-area > img:hover {
-  opacity: 0.8; /* prefixy */
-}
-form.pripo-area > input[type=submit] {
-  float: right;
-  width: 70px;
-  height: 24px;
-}
-table.pripo-box {
-  width: 100%;
-  background-color: #add8e6;
-  border-radius: 1px;
-  margin-bottom: 4px;
-}
-table.pripo-box > caption {
-  height: 30px;
-  line-height: 26px;
-  font-size: 11px;
-  text-align: left;
-}
-table.pripo-box > caption > strong {
-  font-size: 14px;
-  padding-right: 4px;
-}
-table.pripo-box input[type=text] {
-  position: relative;
-  left: 7px;
-  width: 94%;
-}
-
 span.text-echo {
   font-size: 18px;
   letter-spacing: 13px;
@@ -2771,9 +2716,6 @@ div.input-echo {
   background-color: #fff;
 }
 </style>
-
-
-
 </head>
 <body onload="ObnovUI(); <?php if ( $copern == 102 AND ( $strana == 2 OR $strana == 4 OR $strana == 6 ) ) ?>">
 <div id="wrap-heading">
@@ -2786,7 +2728,7 @@ div.input-echo {
    <td class="header">DaÚ z prÌjmov PO</td>
    <td>
     <div class="bar-btn-form-tool">
-     <img src="../obr/ikony/info_blue_icon.png" onclick="PoucVyplnenie();" title="PouËenie na vyplnenie" class="btn-form-tool">
+     <img src="../obr/ikony/info_blue_icon.png" onclick="FormPoucenie();" title="PouËenie na vyplnenie" class="btn-form-tool">
      <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajMinRok();" title="NaËÌtaù ˙daje z minulÈho roka" class="btn-form-tool">
      <img src="../obr/ikony/upbox_blue_icon.png" onclick="FormXML();" title="Export do XML" class="btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="FormPDF(999);" title="Zobraziù vöetky strany bez prÌloh v PDF" class="btn-form-tool">
@@ -2965,6 +2907,20 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r301" id="r301" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1117px; left:529px;"/>
 <input type="text" name="r302" id="r302" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1156px; left:529px;"/>
 <input type="text" name="r303" id="r303" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1204px; left:529px;"/>
+<script>
+  function NacitajVHpredDanou()
+  {
+   window.open('../ucto/priznanie_po2017.php?strana=2&copern=200&drupoh=1&typ=PDF&dppo=1', '_self');
+  }
+  function NacitajRozdielOdpisov()
+  {
+   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&rozdielodpisov=1', '_self');
+  }
+  function NacitajNedVyd()
+  {
+   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&nedanovevydavky=1', '_self');
+  }
+</script>
 <?php                     } ?>
 
 
@@ -3015,6 +2971,20 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r820" id="r820" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:984px; left:667px;"/>
 <input type="text" name="r830" id="r830" style="width:82px; top:1029px; left:667px;"/>
 <input type="text" name="r900" id="r900" style="width:82px; top:1073px; left:667px;"/>
+<script>
+  function OdpocetVyskum()
+  {
+   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&odpocetvyskum=1', '_self');
+  }
+  function ZapocetDane()
+  {
+   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&zapocetdane=1', '_self');
+  }
+  function OdpocetStraty()
+  {
+   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&odpocetstraty=1', '_self');
+  }
+</script>
 <?php                     } ?>
 
 
@@ -3054,7 +3024,8 @@ $sn1c=substr($sknacec,0,1);
 <!-- III.CAST -->
 <!-- A-Pripocitatelne polozky -->
 <span id="pripoknobtn1" onclick="pripokno1.style.display='block'; pripoknobtn1.style.display='none';"
-   title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn" style="top:952px;">Nastaviù</span>
+   title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn" style="position:absolute; top:952px; left:836px; color:#39f; cursor:pointer;
+font-weight:bold; font-size:14px;">Nastaviù</span>
 <input type="text" name="a1r01" id="a1r01" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:991px; left:529px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(1);"
       title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:991px; left:832px;">
@@ -3067,6 +3038,22 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="a1r04" id="a1r04" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1189px; left:529px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(4);"
       title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:1189px; left:832px;">
+<script>
+  function InfoPreddDane()
+  {
+   window.open('../dokumenty/dan_z_prijmov2015/dppo2015/dppo_v15_r1110_vypocet.pdf',
+'_blank', 'width=1080, height=540, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function Preddavky()
+  {
+   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&preddavky=1', '_self');
+  }
+  function LicenciaTabK()
+  {
+   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&licenciatabk=1', '_self');
+  }
+
+</script>
 <?php                     } ?>
 
 
@@ -3077,7 +3064,8 @@ $sn1c=substr($sknacec,0,1);
 <!-- III.CAST -->
 <!-- A-Pripocitatelne polozky pokracovanie -->
 <span id="pripoknobtn2" onclick="pripokno2.style.display='block'; pripoknobtn2.style.display='none';"
-   title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn" style="top:94px;">Nastaviù</span>
+   title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn" style="position:absolute; top:94px; left:836px; color:#39f; cursor:pointer;
+font-weight:bold; font-size:14px;">Nastaviù</span>
 <input type="text" name="a1r05" id="a1r05" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:115px; left:529px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(5);"
       title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:115px; left:832px;">
@@ -3137,9 +3125,14 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="c1r04" id="c1r04" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1052px; left:529px;"/>
 <input type="text" name="c1r05" id="c1r05" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1090px; left:529px;"/>
 
-
-<a href="#" id="pripoknobtn" onclick="pripokno.style.display='block'; pripoknobtn.style.display='none';"
-   title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn hidden">Nastaviù</a>
+<script>
+  function NacitajOdpisy()
+  {
+   window.open('../ucto/priznanie_po2017.php?strana=<?php echo $strana; ?>&copern=200&drupoh=1&typ=PDF&dppo=2', '_self');
+  }
+</script>
+<!-- <a href="#" id="pripoknobtn" onclick="pripokno.style.display='block'; pripoknobtn.style.display='none';"
+   title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn hidden">Nastaviù</a> -->
 <?php                     } ?>
 
 
@@ -3342,6 +3335,18 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="p1cdm" id="p1cdm" style="width:174px; top:1150px; left:719px;"/>
 <input type="text" name="p1psc" id="p1psc" style="width:106px; top:1205px; left:51px;"/>
 <input type="text" name="p1mes" id="p1mes" style="width:703px; top:1205px; left:190px;"/>
+
+<script>
+  function NacitajDanLicencia()
+  {
+   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&nacitajdanlicencia=1', '_self');
+  }
+
+  function NacitajDanLicencia2015()
+  {
+   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&nacitajdanlicencia=1&licencia2015=1', '_self');
+  }
+</script>
 <?php                     } ?>
 
 
@@ -3377,6 +3382,17 @@ $sn1c=substr($sknacec,0,1);
 <div class="input-echo" style="width:381px; top:1127px; left:59px;"><?php echo $fir_fuc1; ?></div>
 <div class="input-echo" style="width:81px; top:1127px; left:483px;"><?php echo $fir_fnm1; ?></div>
 <input type="text" name="datuk" id="datuk" onkeyup="CiarkaNaBodku(this);" style="width:197px; top:1196px; left:75px;"/>
+
+<script>
+  function klikpost()
+  {
+   document.formv1.vruc.checked = false;
+  }
+  function klikucet()
+  {
+   document.formv1.vrpp.checked = false;
+  }
+</script>
 <?php                     } ?>
 
 
@@ -3435,6 +3451,54 @@ $sn1c=substr($sknacec,0,1);
 
 <?php if ( $strana == 4 ) { ?>
 <!-- pripocitalne nastavenie -->
+<style>
+form.pripo-area {
+  position: absolute;
+  left: 524px;
+  width: 385px;
+  padding: 5px 7px;
+  background-color: #ffff90;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* prefixy */
+}
+form.pripo-area > img {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  opacity: 1; /* prefixy */
+}
+form.pripo-area > img:hover {
+  opacity: 0.8; /* prefixy */
+}
+form.pripo-area > input[type=submit] {
+  float: right;
+  width: 70px;
+  height: 24px;
+}
+table.pripo-box {
+  width: 100%;
+  background-color: #add8e6;
+  border-radius: 1px;
+  margin-bottom: 4px;
+}
+table.pripo-box > caption {
+  height: 30px;
+  line-height: 26px;
+  font-size: 11px;
+  text-align: left;
+}
+table.pripo-box > caption > strong {
+  font-size: 14px;
+  padding-right: 4px;
+}
+table.pripo-box input[type=text] {
+  position: relative;
+  left: 7px;
+  width: 94%;
+}
+</style>
 <FORM id="pripokno1" method="post" action="priznanie_po2017.php?strana=4&copern=4103"
       class="pripo-area" style="display:none; top:935px; height:336px;">
  <img src="../obr/ikony/turnoff_blue_icon.png" title="Skryù"
@@ -3467,6 +3531,54 @@ $sn1c=substr($sknacec,0,1);
 <?php                     } ?>
 
 <?php if ( $strana == 5 ) { ?>
+<style>
+form.pripo-area {
+  position: absolute;
+  left: 524px;
+  width: 385px;
+  padding: 5px 7px;
+  background-color: #ffff90;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* prefixy */
+}
+form.pripo-area > img {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  opacity: 1; /* prefixy */
+}
+form.pripo-area > img:hover {
+  opacity: 0.8; /* prefixy */
+}
+form.pripo-area > input[type=submit] {
+  float: right;
+  width: 70px;
+  height: 24px;
+}
+table.pripo-box {
+  width: 100%;
+  background-color: #add8e6;
+  border-radius: 1px;
+  margin-bottom: 4px;
+}
+table.pripo-box > caption {
+  height: 30px;
+  line-height: 26px;
+  font-size: 11px;
+  text-align: left;
+}
+table.pripo-box > caption > strong {
+  font-size: 14px;
+  padding-right: 4px;
+}
+table.pripo-box input[type=text] {
+  position: relative;
+  left: 7px;
+  width: 94%;
+}
+</style>
 <FORM id="pripokno2" method="post" action="priznanie_po2017.php?strana=5&copern=5103"
       class="pripo-area" style="display:none; top:70px; height:536px;">
  <img src="../obr/ikony/turnoff_blue_icon.png" title="Skryù"
@@ -9681,7 +9793,7 @@ $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(13);
+$pdf->SetLeftMargin(10); //dopyt, menil som okraj, pÙvodne 13, tak skontrolovaù Ëi sedÌ
 $pdf->SetTopMargin(10);
 if ( File_Exists($jpg_source.'_potvrdenie.jpg') )
 {
@@ -10097,87 +10209,19 @@ if ( $copern == 102 )
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-
   function NacitajMinRok()
   {
-   window.open('../ucto/priznanie_po2017.php?cislo_oc=<?php echo $cislo_oc;?>&copern=3155&drupoh=1', '_self','width=1060, height=900, top=0, left=12, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/priznanie_po2017.php?cislo_oc=<?php echo $cislo_oc;?>&copern=3155&drupoh=1', '_self');
   }
-
-  function PoucVyplnenie()
+  function FormPoucenie()
   {
    window.open('<?php echo $jpg_source; ?>_poucenie.pdf', '_blank', blank_param);
   }
-
-  function NacitajVHpredDanou()
-  {
-   window.open('../ucto/priznanie_po2017.php?strana=2&copern=200&drupoh=1&typ=PDF&dppo=1', '_self');
-  }
-  function NacitajRozdielOdpisov()
-  {
-   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&rozdielodpisov=1', '_self');
-  }
-  function NacitajOdpisy()
-  {
-   window.open('../ucto/priznanie_po2017.php?strana=<?php echo $strana; ?>&copern=200&drupoh=1&typ=PDF&dppo=2', '_self');
-  }
-  function NacitajNedVyd()
-  {
-   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&nedanovevydavky=1', '_self');
-  }
-  function OdpocetStraty()
-  {
-   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&odpocetstraty=1', '_self');
-  }
-  function ZapocetDane()
-  {
-   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&zapocetdane=1', '_self');
-  }
-  function OdpocetVyskum()
-  {
-   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&odpocetvyskum=1', '_self');
-  }
-
-  function LicenciaTabK()
-  {
-   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&licenciatabk=1', '_self');
-  }
-  function Preddavky()
-  {
-   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&preddavky=1', '_self');
-  }
-
-//bud alebo checkbox v vi.cast
-  function klikpost()
-  {
-   document.formv1.vruc.checked = false;
-  }
-  function klikucet()
-  {
-   document.formv1.vrpp.checked = false;
-  }
-
   function NacitatUdaje(riadok)
   {
    var h_riadok = riadok;
-   window.open('priznanie_po2017.php?h_riadok=' + h_riadok + '&copern=266&drupoh=1&page=1', '_self');
+   window.open('priznanie_po2017.php?h_riadok=' + h_riadok + '&copern=266&drupoh=1', '_self');
   }
-
-  function InfoPreddDane()
-  {
-   window.open('../dokumenty/dan_z_prijmov2015/dppo2015/dppo_v15_r1110_vypocet.pdf',
-'_blank', 'width=1080, height=540, top=0, left=20, status=yes, resizable=yes, scrollbars=yes');
-  }
-
-  function NacitajDanLicencia()
-  {
-   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&nacitajdanlicencia=1', '_self');
-  }
-
-  function NacitajDanLicencia2015()
-  {
-   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&nacitajdanlicencia=1&licencia2015=1', '_self');
-  }
-
   function editForm(strana)
   {
     window.open('priznanie_po2017.php?copern=102&strana=' + strana + '&drupoh=1', '_self');
@@ -10190,7 +10234,6 @@ if ( $copern == 102 )
   {
    window.open('../ucto/priznaniepo_xml2017.php?copern=110&sysx=UCT&drupoh=1&uprav=1', '_blank', blank_param);
   }
-
 </script>
 </body>
 </html>
