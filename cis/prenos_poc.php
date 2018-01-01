@@ -299,28 +299,28 @@ window.open('../cis/prenos_poc.php?h_ycf=' + h_ycf + '&h_xcf=<?php echo $kli_vxc
 function HelpUcto()
                 {
 
-window.open('../cis/Prenos_UCTO_2017.pdf',
+window.open('../cis/Prenos_UCTO_2018.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function HelpMaj()
                 {
 
-window.open('../cis/Prenos_MAJETOK_2017.pdf',
+window.open('../cis/Prenos_MAJETOK_2018.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function HelpMzdy()
                 {
 
-window.open('../cis/Prenos_MZDY_2017.pdf',
+window.open('../cis/Prenos_MZDY_2018.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
 function HelpSklad()
                 {
 
-window.open('../cis/Prenos_SKLAD_a_FAKTURY_2017.pdf',
+window.open('../cis/Prenos_SKLAD_a_FAKTURY_2018.pdf',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
