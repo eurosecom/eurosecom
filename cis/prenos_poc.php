@@ -58,15 +58,15 @@ $databaza=$mysqldb2015.".";
 echo "db".$databaza;
   }
 
-//znovu prenos z 2015 do 2016 UCTO a MAJ ak nastavena firma minuleho roku 2015 a rok 2015 v udajoch o firme, a cislo firmy 2016 musi byt vacsie ako cislo firmy 2015
+//znovu prenos z 2016 do 2017 UCTO a MAJ ak nastavena firma minuleho roku 2016 a rok 2016 v udajoch o firme, a cislo firmy 2017 musi byt vacsie ako cislo firmy 2016
 $aj2013=0;
-if( $fir_allx11 > 0 AND $fir_allx11 < $kli_vxcf AND $kli_vrok == 2016 AND $fir_allx12 == 2015 )
+if( $fir_allx11 > 0 AND $fir_allx11 < $kli_vxcf AND $kli_vrok == 2017 AND $fir_allx12 == 2016 )
 {
 if( $copern == 2 OR $copern == 10   )  { $aj2013=1; }
 if( $copernx == 2 OR $copernx == 10 )  { $aj2013=1; }
 }
 
-//ak chcem dovolit natvrdo prenos z 2015 do 2016, inak dovoli v UCTO a MAJ ak nastavena firma roku 2015 a rok 2015 v udajoch o firme
+//ak chcem dovolit natvrdo prenos z 2016 do 2017, inak dovoli v UCTO a MAJ ak nastavena firma roku 2016 a rok 2016 v udajoch o firme
 if( $kli_vxcf == 0 )
   {
 $aj2013=1;
@@ -74,29 +74,29 @@ $aj2013=1;
 
 //echo $kli_vrok;
 
-if( $kli_vrok == 2016 AND $aj2013 == 0 )
+if( $kli_vrok == 2017 AND $aj2013 == 0 )
     {
 ?>
 <script type="text/javascript">
-alert ("                   POZOR ! \r MusÌte byù vo firme roku 2017 ! ");
+alert ("                   POZOR ! \r MusÌte byù vo firme roku 2018 ! ");
 window.close();
 </script>
 <?php
 exit;
     }
-//koniec ak nie je firma roku 2017
+//koniec ak nie je firma roku 2018
 
 
 
-if( $kli_vrok == 2016 AND $upozorni2013 == 1 )
+if( $kli_vrok == 2017 AND $upozorni2013 == 1 )
     {
 ?>
 <script type="text/javascript">
-alert ("           POZOR !!! Nie ste vo firme roku 2017 !  \r  Chcete znovu pren·öaù ˙daje do roku 2016 z roku 2015 ??? ");
+alert ("           POZOR !!! Nie ste vo firme roku 2018 !  \r  Chcete znovu pren·öaù ˙daje do roku 2017 z roku 2016 ??? ");
 </script>
 <?php
     }
-//koniec ak nie je firma roku 2017
+//koniec ak nie je firma roku 2018
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
