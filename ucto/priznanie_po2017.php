@@ -900,6 +900,22 @@ $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD r306 DECIMAL(10,2) DEFAULT
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD r307 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
 $vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD r1061 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD r1062 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD r1080 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD r1090 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD r1160 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD r1170 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD r1180 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD r1190 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
 
 }
 //koniec pracovny def subor
@@ -1395,8 +1411,12 @@ $r1020 = strip_tags($_REQUEST['r1020']);
 $r1030 = strip_tags($_REQUEST['r1030']);
 $r1040 = strip_tags($_REQUEST['r1040']);
 $r1050 = strip_tags($_REQUEST['r1050']);
-//$r1060 = strip_tags($_REQUEST['r1060']);
-//$r1070 = strip_tags($_REQUEST['r1070']);
+$r1060 = strip_tags($_REQUEST['r1060']);
+$r1061 = strip_tags($_REQUEST['r1061']);
+$r1062 = strip_tags($_REQUEST['r1062']);
+$r1070 = strip_tags($_REQUEST['r1070']);
+$r1080 = strip_tags($_REQUEST['r1080']);
+$r1090 = strip_tags($_REQUEST['r1090']);
 $r1100 = strip_tags($_REQUEST['r1100']);
 $r1101 = strip_tags($_REQUEST['r1101']);
 $r1110 = strip_tags($_REQUEST['r1110']);
@@ -1404,9 +1424,26 @@ $r1120 = strip_tags($_REQUEST['r1120']);
 $r1130 = strip_tags($_REQUEST['r1130']);
 $r1140 = strip_tags($_REQUEST['r1140']);
 $r1150 = strip_tags($_REQUEST['r1150']);
+$r1160 = strip_tags($_REQUEST['r1160']);
+$r1170 = strip_tags($_REQUEST['r1170']);
+$r1180 = strip_tags($_REQUEST['r1180']);
+$r1190 = strip_tags($_REQUEST['r1190']);
 $dadod = strip_tags($_REQUEST['dadod']);
 $dadod_sql=SqlDatum($dadod);
 
+
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
+" r1000='$r1000', r1010='$r1010', r1020='$r1020', r1030='$r1030', r1040='$r1040', r1050='$r1050', ".
+" r1060='$r1060', r1061='$r1061', r1062='$r1062', r1070='$r1070', r1080='$r1080', r1090='$r1090', ".
+" r1100='$r1100', r1101='$r1101', r1110='$r1110', r1120='$r1120', r1130='$r1130', r1140='$r1140', r1150='$r1150', ".
+" r1160='$r1160', r1170='$r1170', r1180='$r1180', r1190='$r1190', ".
+" dadod='$dadod_sql' ".
+" WHERE ico >= 0";
+
+                    }
+
+if ( $strana == 5 ) {
 $a1r01 = strip_tags($_REQUEST['a1r01']);
 $a1r02 = strip_tags($_REQUEST['a1r02']);
 $a1r03 = strip_tags($_REQUEST['a1r03']);
@@ -1416,25 +1453,6 @@ $a1u02 = strip_tags($_REQUEST['a1u02']);
 $a1u03 = strip_tags($_REQUEST['a1u03']);
 $a1u04 = strip_tags($_REQUEST['a1u04']);
 
-if ( $copern == 103 )
-     {
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
-" r1000='$r1000', r1010='$r1010', r1020='$r1020', r1030='$r1030', r1040='$r1040', r1050='$r1050', ".
-" r1100='$r1100', r1101='$r1101', r1110='$r1110', r1120='$r1120', r1130='$r1130', r1140='$r1140', r1150='$r1150', ".
-" dadod='$dadod_sql', ".
-" a1r01='$a1r01', a1r02='$a1r02', a1r03='$a1r03', a1r04='$a1r04' ".
-" WHERE ico >= 0";
-     }
-if ( $copern == 4103 )
-     {
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
-" a1u01='$a1u01', a1u02='$a1u02', a1u03='$a1u03', a1u04='$a1u04' ".
-" WHERE ico >= 0";
-$copern=103;
-     }
-                    }
-
-if ( $strana == 5 ) {
 $a1r05 = strip_tags($_REQUEST['a1r05']);
 $a1r06 = strip_tags($_REQUEST['a1r06']);
 $a1r07 = strip_tags($_REQUEST['a1r07']);
@@ -1465,25 +1483,21 @@ $b1r03 = strip_tags($_REQUEST['b1r03']);
 $b1r04 = strip_tags($_REQUEST['b1r04']);
 $b1r05 = strip_tags($_REQUEST['b1r05']);
 $b1r06 = strip_tags($_REQUEST['b1r06']);
-$c1r01 = strip_tags($_REQUEST['c1r01']);
-$c1r02 = strip_tags($_REQUEST['c1r02']);
-$c1r03 = strip_tags($_REQUEST['c1r03']);
-$c1r04 = strip_tags($_REQUEST['c1r04']);
-$c1r05 = strip_tags($_REQUEST['c1r05']);
+
 
 if ( $copern == 103 )
      {
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET".
-" a1r05='$a1r05', a1r06='$a1r06', a1r07='$a1r07', a1r08='$a1r08', a1r09='$a1r09', a1r10='$a1r10', ".
+" a1r01='$a1r01', a1r02='$a1r02', a1r03='$a1r03', a1r04='$a1r04', a1r05='$a1r05', a1r06='$a1r06', a1r07='$a1r07', a1r08='$a1r08', a1r09='$a1r09', a1r10='$a1r10', ".
 " a1r11='$a1r11', a1r12='$a1r12', a1r13='$a1r13', a1r14='$a1r14', a1r15='$a1r15', a1r16='$a1r16', ".
-" b1r01='$b1r01', b1r02='$b1r02', b1r03='$b1r03', b1r04='$b1r04', b1r05='$b1r05', b1r06='$b1r06', ".
-" c1r01='$c1r01', c1r02='$c1r02', c1r03='$c1r03', c1r04='$c1r04', c1r05='$c1r05' ".
+" b1r01='$b1r01', b1r02='$b1r02', b1r03='$b1r03', b1r04='$b1r04', b1r05='$b1r05', b1r06='$b1r06' ".
+
 " WHERE ico >= 0";
      }
 if ( $copern == 5103 )
      {
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET".
-" a1u05='$a1u05', a1u06='$a1u06', a1u07='$a1u07', a1u08='$a1u08', a1u09='$a1u09', ".
+" a1u01='$a1u01', a1u02='$a1u02', a1u03='$a1u03', a1u04='$a1u04', a1u05='$a1u05', a1u06='$a1u06', a1u07='$a1u07', a1u08='$a1u08', a1u09='$a1u09', ".
 " a1u10='$a1u10', a1u11='$a1u11', a1u12='$a1u12', a1u13='$a1u13', a1u14='$a1u14', ".
 " a1u15='$a1u15', a1u16='$a1u16' ".
 " WHERE ico >= 0";
@@ -1492,6 +1506,11 @@ $copern=103;
                     }
 
 if ( $strana == 6 ) {
+$c1r01 = strip_tags($_REQUEST['c1r01']);
+$c1r02 = strip_tags($_REQUEST['c1r02']);
+$c1r03 = strip_tags($_REQUEST['c1r03']);
+$c1r04 = strip_tags($_REQUEST['c1r04']);
+$c1r05 = strip_tags($_REQUEST['c1r05']);
 $c2r01 = strip_tags($_REQUEST['c2r01']);
 $c2r02 = strip_tags($_REQUEST['c2r02']);
 $c2r03 = strip_tags($_REQUEST['c2r03']);
@@ -1569,6 +1588,7 @@ $d7r03 = strip_tags($_REQUEST['d7r03']);
 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
+" c1r01='$c1r01', c1r02='$c1r02', c1r03='$c1r03', c1r04='$c1r04', c1r05='$c1r05', ".
 " c2r01='$c2r01', c2r02='$c2r02', c2r03='$c2r03', c2r04='$c2r04', c2r05='$c2r05', ".
 " d1r01='$d1r01', d1r02='$d1r02', d1r03='$d1r03', d2r01='$d2r01', d2r02='$d2r02', d2r03='$d2r03', ".
 " d2od='$d2odsql', d2do='$d2dosql', d3od='$d3odsql', d3do='$d3dosql', d4od='$d4odsql', d4do='$d4dosql',".
@@ -2355,6 +2375,12 @@ $r1020 = $fir_riadok->r1020;
 $r1030 = $fir_riadok->r1030;
 $r1040 = $fir_riadok->r1040;
 $r1050 = $fir_riadok->r1050;
+$r1060 = $fir_riadok->r1060;
+$r1061 = $fir_riadok->r1061;
+$r1062 = $fir_riadok->r1062;
+$r1070 = $fir_riadok->r1070;
+$r1080 = $fir_riadok->r1080;
+$r1090 = $fir_riadok->r1090;
 $r1100 = $fir_riadok->r1100;
 $r1101 = $fir_riadok->r1101;
 $r1110 = $fir_riadok->r1110;
@@ -2362,7 +2388,14 @@ $r1120 = $fir_riadok->r1120;
 $r1130 = $fir_riadok->r1130;
 $r1140 = $fir_riadok->r1140;
 $r1150 = $fir_riadok->r1150;
+$r1160 = $fir_riadok->r1160;
+$r1170 = $fir_riadok->r1170;
+$r1180 = $fir_riadok->r1180;
+$r1190 = $fir_riadok->r1190;
 $dadod_sk = SkDatum($fir_riadok->dadod);
+                                      }
+
+if ( $strana == 5 OR $strana == 999 ) {
 $a1r01 = $fir_riadok->a1r01;
 $a1r02 = $fir_riadok->a1r02;
 $a1r03 = $fir_riadok->a1r03;
@@ -2371,9 +2404,6 @@ $a1u01 = $fir_riadok->a1u01;
 $a1u02 = $fir_riadok->a1u02;
 $a1u03 = $fir_riadok->a1u03;
 $a1u04 = $fir_riadok->a1u04;
-                                      }
-
-if ( $strana == 5 OR $strana == 999 ) {
 $a1r05 = $fir_riadok->a1r05;
 $a1r06 = $fir_riadok->a1r06;
 $a1r07 = $fir_riadok->a1r07;
@@ -2405,14 +2435,14 @@ $b1r03 = $fir_riadok->b1r03;
 $b1r04 = $fir_riadok->b1r04;
 $b1r05 = $fir_riadok->b1r05;
 $b1r06 = $fir_riadok->b1r06;
+                                      }
+
+if ( $strana == 6 OR $strana == 999 ) {
 $c1r01 = $fir_riadok->c1r01;
 $c1r02 = $fir_riadok->c1r02;
 $c1r03 = $fir_riadok->c1r03;
 $c1r04 = $fir_riadok->c1r04;
 $c1r05 = $fir_riadok->c1r05;
-                                      }
-
-if ( $strana == 6 OR $strana == 999 ) {
 $c2r01 = $fir_riadok->c2r01;
 $c2r02 = $fir_riadok->c2r02;
 $c2r03 = $fir_riadok->c2r03;
@@ -2981,6 +3011,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r900" id="r900" style="width:82px; top:1105px; left:667px;"/>
 <input type="text" name="r910" id="r910" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1171px; left:529px;"/>
 <input type="text" name="r920" id="r920" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1213px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="LicenciaTabK();" title="Kladn˝ rozdiel medzi daÚovou licenciou a daÚou z predch. obdobÌ z r.5 stÂpec 4. tabuæky K na 9.strane max. do v˝öky na riadku 910" class="btn-row-tool" style="top:1214px; left:833px;">
 <script>
   function OdpocetVyskum()
   {
@@ -2994,6 +3025,10 @@ $sn1c=substr($sknacec,0,1);
   {
    window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&odpocetstraty=1', '_self');
   }
+  function LicenciaTabK()
+  {
+   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&licenciatabk=1', '_self');
+  }
 </script>
 <?php                     } ?>
 
@@ -3001,52 +3036,33 @@ $sn1c=substr($sknacec,0,1);
 <?php if ( $strana == 4 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str4.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
-
 <!-- II.CAST pokracovanie -->
-
-
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="LicenciaTabK();"
-      title="Kladn˝ rozdiel medzi daÚovou licenciou a daÚou z predch. obdobÌ z r.5 stÂpec 4. tabuæky K na 9.strane max. do v˝öky na riadku 910"
-      class="btn-row-tool" style="top:177px; left:833px;">
-
-<input type="text" name="r1000" id="r1000" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:219px; left:529px;"/>
-<input type="text" name="r1010" id="r1010" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:304px; left:529px;"/>
-<input type="text" name="r1020" id="r1020" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:343px; left:529px;"/>
-<input type="text" name="r1030" id="r1030" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:382px; left:529px;"/>
-<input type="text" name="r1040" id="r1040" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:421px; left:529px;"/>
-<input type="text" name="r1050" id="r1050" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:462px; left:529px;"/>
-<input type="text" name="r1100" id="r1100" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:504px; left:529px;"/>
-<input type="text" name="r1101" id="r1101" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:543px; left:529px;"/>
-
- <img src="../obr/ikony/info_blue_icon.png" title="SpÙsob v˝poËtu preddavku"
-      onclick="InfoPreddDane();" class="btn-row-tool" style="top:627px; left:440px;">
-<input type="text" name="r1110" id="r1110" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:627px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="Preddavky();"
-      title="VypoËÌtaù v˝öku preddavku na daÚ" class="btn-row-tool" style="top:627px; left:833px;">
-
-<input type="text" name="dadod" id="dadod" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:695px; left:529px;"/>
-<input type="text" name="r1120" id="r1120" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:735px; left:529px;"/>
-<input type="text" name="r1130" id="r1130" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:773px; left:529px;"/>
-<input type="text" name="r1140" id="r1140" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:812px; left:529px;"/>
-<input type="text" name="r1150" id="r1150" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:851px; left:529px;"/>
-
-<!-- III.CAST -->
-<!-- A-Pripocitatelne polozky -->
-<span id="pripoknobtn1" onclick="pripokno1.style.display='block'; pripoknobtn1.style.display='none';"
-   title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn" style="position:absolute; top:952px; left:836px; color:#39f; cursor:pointer;
-font-weight:bold; font-size:14px;">Nastaviù</span>
-<input type="text" name="a1r01" id="a1r01" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:991px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(1);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:991px; left:832px;">
-<input type="text" name="a1r02" id="a1r02" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1067px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(2);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:1067px; left:832px;">
-<input type="text" name="a1r03" id="a1r03" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1127px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(3);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:1127px; left:832px;">
-<input type="text" name="a1r04" id="a1r04" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1189px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(4);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:1189px; left:832px;">
+<input type="text" name="r1000" id="r1000" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:113px; left:529px;"/>
+<input type="text" name="r1010" id="r1010" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:196px; left:529px;"/>
+<input type="text" name="r1020" id="r1020" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:235px; left:529px;"/>
+<input type="text" name="r1030" id="r1030" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:274px; left:529px;"/>
+<input type="text" name="r1040" id="r1040" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:313px; left:529px;"/>
+<input type="text" name="r1050" id="r1050" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:352px; left:529px;"/>
+<input type="text" name="r1060" id="r1060" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:390px; left:529px;"/><!-- dopyt, new -->
+<input type="text" name="r1061" id="r1061" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:434px; left:529px;"/><!-- dopyt, new -->
+<input type="text" name="r1062" id="r1062" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:481px; left:529px;"/><!-- dopyt, new -->
+<input type="text" name="r1070" id="r1070" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:525px; left:529px;"/><!-- dopyt, new -->
+<input type="text" name="r1080" id="r1080" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:564px; left:529px;"/><!-- dopyt, new -->
+<input type="text" name="r1090" id="r1090" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:603px; left:529px;"/><!-- dopyt, new -->
+<input type="text" name="r1100" id="r1100" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:641px; left:529px;"/>
+<input type="text" name="r1101" id="r1101" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:681px; left:529px;"/>
+<img src="../obr/ikony/info_blue_icon.png" title="SpÙsob v˝poËtu preddavku" onclick="InfoPreddDane();" class="btn-row-tool" style="top:817px; left:440px;">
+<input type="text" name="r1110" id="r1110" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:817px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="Preddavky();" title="VypoËÌtaù v˝öku preddavku na daÚ" class="btn-row-tool" style="top:817px; left:833px;">
+<input type="text" name="dadod" id="dadod" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:882px; left:529px;"/>
+<input type="text" name="r1120" id="r1120" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:920px; left:529px;"/>
+<input type="text" name="r1130" id="r1130" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:959px; left:529px;"/>
+<input type="text" name="r1140" id="r1140" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:998px; left:529px;"/>
+<input type="text" name="r1150" id="r1150" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1038px; left:529px;"/>
+<input type="text" name="r1160" id="r1160" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1077px; left:529px;"/> <!-- dopyt, new -->
+<input type="text" name="r1170" id="r1170" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1115px; left:529px;"/> <!-- dopyt, new -->
+<input type="text" name="r1180" id="r1180" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1154px; left:529px;"/> <!-- dopyt, new -->
+<input type="text" name="r1190" id="r1190" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1194px; left:529px;"/> <!-- dopyt, new -->
 <script>
   function InfoPreddDane()
   {
@@ -3057,11 +3073,6 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
   {
    window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&preddavky=1', '_self');
   }
-  function LicenciaTabK()
-  {
-   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&licenciatabk=1', '_self');
-  }
-
 </script>
 <?php                     } ?>
 
@@ -3069,71 +3080,53 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <?php if ( $strana == 5 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str5.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
-
 <!-- III.CAST -->
-<!-- A-Pripocitatelne polozky pokracovanie -->
-<span id="pripoknobtn2" onclick="pripokno2.style.display='block'; pripoknobtn2.style.display='none';"
-   title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn" style="position:absolute; top:94px; left:836px; color:#39f; cursor:pointer;
+<!-- A -->
+<span id="pripoknobtn1" onclick="pripokno1.style.display='block'; pripoknobtn1.style.display='none';" title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn" style="position:absolute; top:113px; left:836px; color:#39f; cursor:pointer;
 font-weight:bold; font-size:14px;">Nastaviù</span>
-<input type="text" name="a1r05" id="a1r05" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:115px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(5);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:115px; left:832px;">
-<input type="text" name="a1r06" id="a1r06" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:157px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(6);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:157px; left:832px;">
-<input type="text" name="a1r07" id="a1r07" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:199px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(7);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:199px; left:832px;">
-<input type="text" name="a1r08" id="a1r08" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:237px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(8);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:237px; left:832px;">
-<input type="text" name="a1r09" id="a1r09" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:275px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(9);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:275px; left:832px;">
-<input type="text" name="a1r10" id="a1r10" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:315px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(10);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:315px; left:832px;">
-<input type="text" name="a1r11" id="a1r11" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:353px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(11);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:353px; left:832px;">
-<input type="text" name="a1r12" id="a1r12" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:392px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(12);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:392px; left:832px;">
-<input type="text" name="a1r13" id="a1r13" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:431px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(13);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:431px; left:832px;">
-<input type="text" name="a1r14" id="a1r14" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:470px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(14);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:470px; left:832px;">
-<input type="text" name="a1r15" id="a1r15" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:509px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(15);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:510px; left:832px;">
-<input type="text" name="a1r16" id="a1r16" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:548px; left:529px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(16);"
-      title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:548px; left:832px;">
-<div class="input-echo right" style="width:289px; top:588px; left:530px;"><?php echo $a1r17; ?>&nbsp;</div>
-
-<!-- B-Odpisy HM -->
-<input type="text" name="b1r01" id="b1r01" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:657px; left:529px;"/>
- <img src="../obr/ikony/info_blue_icon.png" class="btn-row-tool" style="top:658px; left:839px; cursor:default;"
-      title="Musia byù spracovanÈ mesaËnÈ ˙ËtovnÈ odpisy za 12.<?php echo $kli_vrok; ?>,
-             daÚovÈ odpisy a zostava neuplatnenÈho odpisu v 1.roku odpisovania">
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajOdpisy();"
-      title="Z podsystÈmu majetok naËÌtaù ˙ËtovnÈ, daÚovÈ odpisy a pomern˙ Ëasù z roËnÈho odpisu neuplatnen˙ v 1.roku odpisovania"
-      class="btn-row-tool" style="top:658px; left:870px;">
-<input type="text" name="b1r02" id="b1r02" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:695px; left:529px;"/>
-<input type="text" name="b1r03" id="b1r03" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:735px; left:529px;"/>
-<input type="text" name="b1r04" id="b1r04" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:774px; left:529px;"/>
-<input type="text" name="b1r05" id="b1r05" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:812px; left:529px;"/>
-<input type="text" name="b1r06" id="b1r06" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:851px; left:529px;"/>
-
-<!-- C1 -->
-<input type="text" name="c1r01" id="c1r01" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:935px; left:529px;"/>
-<input type="text" name="c1r02" id="c1r02" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:974px; left:529px;"/>
-<input type="text" name="c1r03" id="c1r03" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1012px; left:529px;"/>
-<input type="text" name="c1r04" id="c1r04" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1052px; left:529px;"/>
-<input type="text" name="c1r05" id="c1r05" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1090px; left:529px;"/>
-
+<input type="text" name="a1r01" id="a1r01" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:180px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(1);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:180px; left:832px;">
+<input type="text" name="a1r02" id="a1r02" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:255px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(2);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:255px; left:832px;">
+<input type="text" name="a1r03" id="a1r03" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:316px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(3);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:316px; left:832px;">
+<input type="text" name="a1r04" id="a1r04" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:376px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(4);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:376px; left:832px;">
+<span id="pripoknobtn2" onclick="pripokno2.style.display='block'; pripoknobtn2.style.display='none';" title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn" style="position:absolute; top:451px; left:910px; color:#39f; cursor:pointer; font-weight:bold; font-size:14px;">Nastaviù</span>
+<input type="text" name="a1r05" id="a1r05" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:444px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(5);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:444px; left:832px;">
+<input type="text" name="a1r06" id="a1r06" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:486px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(6);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:486px; left:832px;">
+<input type="text" name="a1r07" id="a1r07" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:527px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(7);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:527px; left:832px;">
+<input type="text" name="a1r08" id="a1r08" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:567px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(8);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:568px; left:832px;">
+<input type="text" name="a1r09" id="a1r09" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:605px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(9);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:605px; left:832px;">
+<input type="text" name="a1r10" id="a1r10" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:645px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(10);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:645px; left:832px;">
+<input type="text" name="a1r11" id="a1r11" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:683px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(11);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:683px; left:832px;">
+<input type="text" name="a1r12" id="a1r12" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:723px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(12);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:723px; left:832px;">
+<input type="text" name="a1r13" id="a1r13" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:761px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(13);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:761px; left:832px;">
+<input type="text" name="a1r14" id="a1r14" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:800px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(14);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:800px; left:832px;">
+<input type="text" name="a1r15" id="a1r15" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:839px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(15);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:839px; left:832px;">
+<input type="text" name="a1r16" id="a1r16" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:877px; left:529px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(16);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:877px; left:832px;">
+<div class="input-echo right" style="width:289px; top:918px; left:530px;"><?php echo $a1r17; ?>&nbsp;</div>
+<!-- B -->
+<input type="text" name="b1r01" id="b1r01" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:986px; left:529px;"/>
+<img src="../obr/ikony/info_blue_icon.png" class="btn-row-tool" style="top:986px; left:839px; cursor:default;" title="Musia byù spracovanÈ mesaËnÈ ˙ËtovnÈ odpisy za 12.<?php echo $kli_vrok; ?>, daÚovÈ odpisy a zostava neuplatnenÈho odpisu v 1.roku odpisovania">
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajOdpisy();" title="Z podsystÈmu majetok naËÌtaù ˙ËtovnÈ, daÚovÈ odpisy a pomern˙ Ëasù z roËnÈho odpisu neuplatnen˙ v 1.roku odpisovania" class="btn-row-tool" style="top:986px; left:870px;">
+<input type="text" name="b1r02" id="b1r02" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1025px; left:529px;"/>
+<input type="text" name="b1r03" id="b1r03" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1064px; left:529px;"/>
+<input type="text" name="b1r04" id="b1r04" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1103px; left:529px;"/>
+<input type="text" name="b1r05" id="b1r05" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1142px; left:529px;"/>
+<input type="text" name="b1r06" id="b1r06" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1181px; left:529px;"/>
 <script>
   function NacitajOdpisy()
   {
@@ -3148,8 +3141,16 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <?php if ( $strana == 6 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str6.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
-
 <!-- III.CAST pokracovanie -->
+
+<!-- C1 -->
+<input type="text" name="c1r01" id="c1r01" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:935px; left:529px;"/>
+<input type="text" name="c1r02" id="c1r02" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:974px; left:529px;"/>
+<input type="text" name="c1r03" id="c1r03" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1012px; left:529px;"/>
+<input type="text" name="c1r04" id="c1r04" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1052px; left:529px;"/>
+<input type="text" name="c1r05" id="c1r05" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1090px; left:529px;"/>
+
+
 <!-- C2 -->
 <input type="text" name="c2r01" id="c2r01" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:149px; left:529px;"/>
 <input type="text" name="c2r02" id="c2r02" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:187px; left:529px;"/>
@@ -3458,7 +3459,7 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 </div>
 </form>
 
-<?php if ( $strana == 4 ) { ?>
+<?php if ( $strana == 5 ) { ?>
 <!-- pripocitalne nastavenie -->
 <style>
 form.pripo-area {
@@ -3508,10 +3509,8 @@ table.pripo-box input[type=text] {
   width: 94%;
 }
 </style>
-<FORM id="pripokno1" method="post" action="priznanie_po2017.php?strana=4&copern=4103"
-      class="pripo-area" style="display:none; top:935px; height:336px;">
- <img src="../obr/ikony/turnoff_blue_icon.png" title="Skryù"
-      onclick="pripokno1.style.display='none'; pripoknobtn1.style.display='block';" >
+<FORM id="pripokno1" method="post" action="priznanie_po2017.php?strana=5&copern=5103" class="pripo-area" style="display:none; top:80px; height:336px;">
+<img src="../obr/ikony/turnoff_blue_icon.png" title="Skryù" onclick="pripokno1.style.display='none'; pripoknobtn1.style.display='block';" >
 <table class="pripo-box">
 <caption><strong>Nastavenie ˙Ëtov</strong>(v plnom tvare, napr. 51301,51302)</caption>
 <tr>
@@ -3537,9 +3536,7 @@ table.pripo-box input[type=text] {
 </table>
 <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù">
 </FORM>
-<?php                     } ?>
 
-<?php if ( $strana == 5 ) { ?>
 <style>
 form.pripo-area {
   position: absolute;
@@ -3589,7 +3586,7 @@ table.pripo-box input[type=text] {
 }
 </style>
 <FORM id="pripokno2" method="post" action="priznanie_po2017.php?strana=5&copern=5103"
-      class="pripo-area" style="display:none; top:70px; height:536px;">
+      class="pripo-area" style="display:none; top:450px; height:536px;">
  <img src="../obr/ikony/turnoff_blue_icon.png" title="Skryù"
       onclick="pripokno2.style.display='none'; pripoknobtn2.style.display='block';" >
 <table class="pripo-box">
@@ -9963,14 +9960,18 @@ if ( $copern == 102 )
 <?php                     } ?>
 
 <?php if ( $strana == 4 ) { ?>
-   pripokno1.style.display='none';
-
    document.formv1.r1000.value = '<?php echo $r1000; ?>';
    document.formv1.r1010.value = '<?php echo $r1010; ?>';
    document.formv1.r1020.value = '<?php echo $r1020; ?>';
    document.formv1.r1030.value = '<?php echo $r1030; ?>';
    document.formv1.r1040.value = '<?php echo $r1040; ?>';
    document.formv1.r1050.value = '<?php echo $r1050; ?>';
+   document.formv1.r1060.value = '<?php echo $r1060; ?>';
+   document.formv1.r1061.value = '<?php echo $r1061; ?>';
+   document.formv1.r1062.value = '<?php echo $r1062; ?>';
+   document.formv1.r1070.value = '<?php echo $r1070; ?>';
+   document.formv1.r1080.value = '<?php echo $r1080; ?>';
+   document.formv1.r1090.value = '<?php echo $r1090; ?>';
    document.formv1.r1100.value = '<?php echo $r1100; ?>';
    document.formv1.r1101.value = '<?php echo $r1101; ?>';
    document.formv1.r1110.value = '<?php echo $r1110; ?>';
@@ -9979,14 +9980,19 @@ if ( $copern == 102 )
    document.formv1.r1130.value = '<?php echo $r1130; ?>';
    document.formv1.r1140.value = '<?php echo $r1140; ?>';
    document.formv1.r1150.value = '<?php echo $r1150; ?>';
+   document.formv1.r1160.value = '<?php echo $r1160; ?>';
+   document.formv1.r1170.value = '<?php echo $r1170; ?>';
+   document.formv1.r1180.value = '<?php echo $r1180; ?>';
+   document.formv1.r1190.value = '<?php echo $r1190; ?>';
+<?php                     } ?>
+
+<?php if ( $strana == 5 ) { ?>
+   pripokno1.style.display='none';
+   pripokno2.style.display='none';
    document.formv1.a1r01.value = '<?php echo $a1r01; ?>';
    document.formv1.a1r02.value = '<?php echo $a1r02; ?>';
    document.formv1.a1r03.value = '<?php echo $a1r03; ?>';
    document.formv1.a1r04.value = '<?php echo $a1r04; ?>';
-<?php                     } ?>
-
-<?php if ( $strana == 5 ) { ?>
-   pripokno2.style.display='none';
    document.formv1.a1r05.value = '<?php echo $a1r05; ?>';
    document.formv1.a1r06.value = '<?php echo $a1r06; ?>';
    document.formv1.a1r07.value = '<?php echo $a1r07; ?>';
