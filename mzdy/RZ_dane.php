@@ -275,7 +275,9 @@ if( $rokziadosti == 2011 ) { $rokziadosti="2011";  }
 if( $rokziadosti == 2012 ) { $rokziadosti="2012";  }
 if( $rokziadosti == 2013 ) { $rokziadosti="2013";  }
 if( $rokziadosti == 2014 ) { $rokziadosti="2014";  }
-if( $rokziadosti >= 2015 ) { $rokziadosti="2015";  }
+if( $rokziadosti == 2015 ) { $rokziadosti="2015";  }
+if( $rokziadosti == 2016 ) { $rokziadosti="2015";  }
+if( $rokziadosti >= 2017 ) { $rokziadosti="2017";  }
 ?>
 
 function TlacRocneziadost()
