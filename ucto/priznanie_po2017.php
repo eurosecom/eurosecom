@@ -1414,7 +1414,7 @@ window.open('../ucto/priznanie_po2017.php?strana=<?php echo $strana; ?>&copern=1
 //koniec copern=200 nacitaj data dppo=2
 
 // zapis upravene udaje
-if ( $copern == 103 OR $copern == 4103 OR $copern == 5103 )
+if ( $copern == 103 OR $copern == 5103 )
      {
 if ( $strana == 1 ) {
 $druh = 1*$_REQUEST['druh'];
@@ -3337,7 +3337,6 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(3);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:316px; left:832px;">
 <input type="text" name="a1r04" id="a1r04" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:376px; left:529px;"/>
 <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(4);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:376px; left:832px;">
-<span id="pripoknobtn2" onclick="pripokno2.style.display='block'; pripoknobtn2.style.display='none';" title="Nastaviù ˙Ëty PripoËÌtateæn˝ch poloûiek" class="pripo-btn" style="position:absolute; top:451px; left:910px; color:#39f; cursor:pointer; font-weight:bold; font-size:14px;">Nastaviù</span>
 <input type="text" name="a1r05" id="a1r05" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:444px; left:529px;"/>
 <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitatUdaje(5);" title="NaËÌtaù odpoËÌtateæn˙" class="btn-row-tool" style="top:444px; left:832px;">
 <input type="text" name="a1r06" id="a1r06" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:486px; left:529px;"/>
@@ -3778,10 +3777,11 @@ table.pripo-box {
   margin-bottom: 4px;
 }
 table.pripo-box > caption {
-  height: 30px;
-  line-height: 26px;
+  height: 48px;
+  line-height: 48px;
   font-size: 11px;
   text-align: left;
+  letter-spacing: .02em;
 }
 table.pripo-box > caption > strong {
   font-size: 14px;
@@ -3793,10 +3793,10 @@ table.pripo-box input[type=text] {
   width: 94%;
 }
 </style>
-<FORM id="pripokno1" method="post" action="priznanie_po2017.php?strana=5&copern=5103" class="pripo-area" style="display:none; top:80px; height:336px;">
+<form id="pripokno1" method="post" action="priznanie_po2017.php?strana=5&copern=5103" class="pripo-area" style="display:none; top:105px; height:832px;">
 <img src="../obr/ikony/turnoff_blue_icon.png" title="Skryù" onclick="pripokno1.style.display='none'; pripoknobtn1.style.display='block';" >
 <table class="pripo-box">
-<caption><strong>Nastavenie ˙Ëtov</strong>(v plnom tvare, napr. 51301,51302)</caption>
+<caption><strong>Nastavenie ˙Ëtov</strong>( VyplÚte v plnom tvare, napr. 51301,51302 )</caption>
 <tr>
  <td style="height:74px; line-height:74px;">
   <input type="text" name="a1u01" id="a1u01" value="<?php echo $a1u01; ?>"/>
@@ -3817,138 +3817,75 @@ table.pripo-box input[type=text] {
   <input type="text" name="a1u04" id="a1u04" value="<?php echo $a1u04; ?>"/>
  </td>
 </tr>
-</table>
-<INPUT type="submit" id="uloz" name="uloz" value="Uloûiù">
-</FORM>
-
-<style>
-form.pripo-area {
-  position: absolute;
-  left: 524px;
-  width: 385px;
-  padding: 5px 7px;
-  background-color: #ffff90;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* prefixy */
-}
-form.pripo-area > img {
-  position: absolute;
-  top: 6px;
-  right: 7px;
-  width: 22px;
-  height: 22px;
-  cursor: pointer;
-  opacity: 1; /* prefixy */
-}
-form.pripo-area > img:hover {
-  opacity: 0.8; /* prefixy */
-}
-form.pripo-area > input[type=submit] {
-  float: right;
-  width: 70px;
-  height: 24px;
-}
-table.pripo-box {
-  width: 100%;
-  background-color: #add8e6;
-  border-radius: 1px;
-  margin-bottom: 4px;
-}
-table.pripo-box > caption {
-  height: 30px;
-  line-height: 26px;
-  font-size: 11px;
-  text-align: left;
-}
-table.pripo-box > caption > strong {
-  font-size: 14px;
-  padding-right: 4px;
-}
-table.pripo-box input[type=text] {
-  position: relative;
-  left: 7px;
-  width: 94%;
-}
-</style>
-<FORM id="pripokno2" method="post" action="priznanie_po2017.php?strana=5&copern=5103"
-      class="pripo-area" style="display:none; top:450px; height:536px;">
- <img src="../obr/ikony/turnoff_blue_icon.png" title="Skryù"
-      onclick="pripokno2.style.display='none'; pripoknobtn2.style.display='block';" >
-<table class="pripo-box">
-<caption><strong>Nastavenie ˙Ëtov</strong>(v plnom tvare, napr. 51301,51302)</caption>
 <tr>
- <td style="height:46px; line-height:46px;">
+ <td style="height:44px; line-height:44px;">
   <input type="text" name="a1u05" id="a1u05" value="<?php echo $a1u05; ?>"/>
  </td>
 </tr>
 <tr>
- <td style="height:42px; line-height:42px;">
+ <td style="height:38px; line-height:38px;">
   <input type="text" name="a1u06" id="a1u06" value="<?php echo $a1u06; ?>"/>
  </td>
 </tr>
 <tr>
- <td style="height:38px; line-height:38px;">
+ <td style="height:48px; line-height:48px;">
   <input type="text" name="a1u07" id="a1u07" value="<?php echo $a1u07; ?>"/>
  </td>
 </tr>
 <tr>
- <td style="height:40px; line-height:40px;">
+ <td style="height:28px; line-height:28px;">
   <input type="text" name="a1u08" id="a1u08" value="<?php echo $a1u08; ?>"/>
  </td>
 </tr>
 <tr>
- <td style="height:40px; line-height:40px;">
+ <td style="height:52px; line-height:52px;">
   <input type="text" name="a1u09" id="a1u09" value="<?php echo $a1u09; ?>"/>
  </td>
 </tr>
 <tr>
- <td style="height:38px; line-height:38px;">
+ <td style="height:28px; line-height:28px;">
   <input type="text" name="a1u10" id="a1u10" value="<?php echo $a1u10; ?>"/>
  </td>
 </tr>
 <tr>
- <td style="height:40px; line-height:40px;">
+ <td style="height:48px; line-height:48px;">
   <input type="text" name="a1u11" id="a1u11" value="<?php echo $a1u11; ?>"/>
  </td>
 </tr>
 <tr>
- <td style="height:38px; line-height:38px;">
+ <td style="height:28px; line-height:28px;">
   <input type="text" name="a1u12" id="a1u12" value="<?php echo $a1u12; ?>"/>
  </td>
 </tr>
 <tr>
- <td style="height:38px; line-height:38px;">
+ <td style="height:48px; line-height:48px;">
   <input type="text" name="a1u13" id="a1u13" value="<?php echo $a1u13; ?>"/>
  </td>
 </tr>
 <tr>
- <td style="height:38px; line-height:38px;">
+ <td style="height:32px; line-height:32px;">
   <input type="text" name="a1u14" id="a1u14" value="<?php echo $a1u14; ?>"/>
  </td>
 </tr>
 <tr>
- <td style="height:40px; line-height:40px;">
+ <td style="height:44px; line-height:44px;">
   <input type="text" name="a1u15" id="a1u15" value="<?php echo $a1u15; ?>"/>
  </td>
 </tr>
 <tr>
- <td style="height:40px; line-height:40px;">
+ <td style="height:38px; line-height:32px;">
   <input type="text" name="a1u16" id="a1u16" value="<?php echo $a1u16; ?>"/>
  </td>
 </tr>
 </table>
-<INPUT type="submit" id="uloz" name="uloz" value="Uloûiù">
-</FORM>
+<input type="submit" id="uloz" name="uloz" value="Uloûiù">
+</form>
 <?php                     } ?>
-</div> <!-- koniec #content -->
 <?php
 //mysql_free_result($vysledok);
-    }
+    } //$copern==102
 ?>
-
-
-
-
-
+</div> <!-- koniec #content -->
 
 <?php
 //XML
@@ -5347,7 +5284,6 @@ if ( $copern == 102 )
 
 <?php if ( $strana == 5 ) { ?>
    pripokno1.style.display='none';
-   pripokno2.style.display='none';
    document.formv1.a1r01.value = '<?php echo $a1r01; ?>';
    document.formv1.a1r02.value = '<?php echo $a1r02; ?>';
    document.formv1.a1r03.value = '<?php echo $a1r03; ?>';
@@ -5673,16 +5609,16 @@ if ( $copern == 102 )
 </html>
 <!--
 TODO
-- zruöiù $elsubor a prÌp. inÈ premennÈ
-- odpo/pripo poloûky podobne ako generovanie v ˙Ët.z·vierke, dÙleûitÈ info Ëo nastavuj˙, asi cez legendu, niekde v okne
-- zaremovanÈ obdo a obod vyzer·, ûe s˙ naviazanÈ na obdobie daÚovej licencie = preveriù
+- sp˝taù, kde mÙûe byù v s˙Ëtov˝ch echo
+- tlaË priznania
+
 - input=date vysk˙öaù v d·tumoch
 - input=number vysk˙öaù v ËÌslach
 - export xml priamo v okne s formul·rom, buÔ modal, z hornej liöty vys˙vacÌ zoznam alebo
   vys˙vacÌ doprava/doæava v riadku so öipkou na skrytie, link na s˙bor bez cesty a ikona na stiahnutie
 - n·zov .xml = "dppo2017r_f586_id54_1854.xml"
-- sp˝taù, kde mÙûe byù v s˙Ëtov˝ch echo
 - predplnenie d·tumu vyhl·senia po kliknutÌ do inputu
 - ûiadam v ix.Ëasti bude disable checkbox pouk·ûka/˙Ëet a neuk·ûe iban z ufir
 - aktualiz·cia xml, Ëo som menil = aû keÔ budem robiù .xml
+- zaremovanÈ obdo a obod vyzer·, ûe s˙ naviazanÈ na obdobie daÚovej licencie = preveriù
 -->
