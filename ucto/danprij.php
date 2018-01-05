@@ -278,7 +278,7 @@ if ( $rokdppo >= 2017 ) { $rokdppo="2017";  }
   }
   function POdoXML()
   {
-   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=10&sysx=UCT&drupoh=1&uprav=1',
+   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=10&sysx=UCT&drupoh=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 

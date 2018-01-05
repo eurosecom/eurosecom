@@ -31,9 +31,6 @@ window.close();
 exit;
      }
 
-
-$elsubor=2; //dopyt, nemuselo by a rozdelím cez copern
-
 $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
 
@@ -3955,7 +3952,7 @@ table.pripo-box input[type=text] {
 
 <?php
 //XML
-if ( $copern == 10 AND $elsubor == 2  )
+if ( $copern == 10 )
      {
 ?>
 <table class="h2" width="100%">
@@ -5199,7 +5196,7 @@ $j = $j + 1;
 fclose($soubor);
 ?>
 
-<?php if ( $elsubor == 2 ) { ?>
+
 <br />
 <br />
 Stiahnite si nišie uvedenı súbor XML na Váš lokálny disk a naèítajte na www.financnasprava.sk alebo do aplikácie eDane:
@@ -5208,8 +5205,8 @@ Stiahnite si nišie uvedenı súbor XML na Váš lokálny disk a naèítajte na www.fin
 <a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a>
 <br />
 <br />
-<?php                      }
-?>
+
+
 
 <?php
 //mysql_free_result($vysledok);
@@ -5648,7 +5645,7 @@ if ( $copern == 102 )
 
   function NacitajMinRok()
   {
-   window.open('../ucto/priznanie_po2017.php?cislo_oc=<?php echo $cislo_oc;?>&copern=3155&drupoh=1', '_self');
+   window.open('../ucto/priznanie_po2017.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=3155&drupoh=1', '_self');
   }
   function FormPoucenie()
   {
@@ -5669,7 +5666,7 @@ if ( $copern == 102 )
   }
   function FormXML()
   {
-   window.open('priznanie_po2017.php?copern=10&drupoh=1&uprav=1&elsubor=2', '_blank', blank_param);
+   window.open('priznanie_po2017.php?copern=10&drupoh=1', '_blank', blank_param);
   }
 </script>
 </body>
@@ -5677,8 +5674,6 @@ if ( $copern == 102 )
 <!--
 TODO
 - zruši $elsubor a príp. iné premenné
-- aktualizácia xml, èo som menil
-
 - odpo/pripo poloky podobne ako generovanie v úèt.závierke, dôleité info èo nastavujú, asi cez legendu, niekde v okne
 - zaremované obdo a obod vyzerá, e sú naviazané na obdobie daòovej licencie = preveri
 - input=date vyskúša v dátumoch
@@ -5689,4 +5684,5 @@ TODO
 - spıta, kde môe by v súètovıch echo
 - predplnenie dátumu vyhlásenia po kliknutí do inputu
 - iadam v ix.èasti bude disable checkbox poukáka/úèet a neukáe iban z ufir
+- aktualizácia xml, èo som menil = a keï budem robi .xml
 -->
