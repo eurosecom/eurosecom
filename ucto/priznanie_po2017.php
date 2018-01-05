@@ -1029,7 +1029,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD ozd2r06 DECIMAL(10,2) DEFA
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD ozdr07 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD ozdr08 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD ozdr09 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD pcdan DECIMAL(10,2) DEFAULT 0 AFTER new2017";
 $vysledek = mysql_query("$sql");
@@ -1058,6 +1058,10 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD ozdspl5sum DECIMAL(10,2) DEFAULT 0 AFTER new2017";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD ozdspldat DATE NOT NULL AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d7r01 DECIMAL(10,2) DEFAULT 0";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d8r01 DECIMAL(10,2) DEFAULT 0";
 $vysledek = mysql_query("$sql");
 }
 //koniec pracovny def subor
@@ -1528,11 +1532,10 @@ $r820 = strip_tags($_REQUEST['r820']);
 $r900 = strip_tags($_REQUEST['r900']);
 $r910 = strip_tags($_REQUEST['r910']);
 $r920 = strip_tags($_REQUEST['r920']);
-
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET  ".
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET".
 " r304='$r304', r305='$r305', r306='$r306', r307='$r307', r310='$r310', r320='$r320', r330='$r330', r400='$r400', r410='$r410', ".
 " r500='$r500', r501='$r501', r510='$r510', r550='$r550', r600='$r600', r610='$r610', r610text='$r610text', ".
-" r700='$r700', r710='$r710', r800='$r800', r810='$r810', r820='$r820', r910='$r910', r920='$r920' ".
+" r700='$r700', r710='$r710', r800='$r800', r810='$r810', r820='$r820', r910='$r910', r920='$r920', ".
 " r900='$r900' ".
 " WHERE ico >= 0";
                     }
@@ -1917,12 +1920,12 @@ $ozd2r05 = strip_tags($_REQUEST['ozd2r05']);
 $ozd1r06 = strip_tags($_REQUEST['ozd1r06']);
 $ozd2r06 = strip_tags($_REQUEST['ozd2r06']);
 $ozdr07 = strip_tags($_REQUEST['ozdr07']);
-$ozdr08 = strip_tags($_REQUEST['ozdr08']);
+$ozdr09 = strip_tags($_REQUEST['ozdr09']);
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET".
 " psr24='$psr24', psr25='$psr25', psr26='$psr26', psr27='$psr27', psr29='$psr29', psr30='$psr30', psr31='$psr31', ".
 " ozd1r01='$ozd1r01', ozd1r02='$ozd1r02', ozd1r03='$ozd1r03', ".
 " ozd1r04='$ozd1r04', ozd2r04='$ozd2r04', ozd1r05='$ozd1r05', ozd2r05='$ozd2r05', ozd1r06='$ozd1r06', ozd2r06='$ozd2r06', ".
-" ozdr07='$ozdr07', ozdr08='$ozdr08' ".
+" ozdr07='$ozdr07', ozdr09='$ozdr09' ".
 " WHERE ico >= 0";
                      }
 
@@ -2534,7 +2537,6 @@ $r310 = $fir_riadok->r310;
 $r320 = $fir_riadok->r320;
 $r330 = $fir_riadok->r330;
 $r400 = $fir_riadok->r400;
-
 $r410 = $fir_riadok->r410;
 $r500 = $fir_riadok->r500;
 $r501 = $fir_riadok->r501;
@@ -2554,7 +2556,6 @@ $r920 = $fir_riadok->r920;
                                       }
 
 if ( $strana == 4 OR $strana == 999 ) {
-
 $r1000 = $fir_riadok->r1000;
 $r1010 = $fir_riadok->r1010;
 $r1020 = $fir_riadok->r1020;
@@ -2818,7 +2819,7 @@ $ozd2r05 = $fir_riadok->ozd2r05;
 $ozd1r06 = $fir_riadok->ozd1r06;
 $ozd2r06 = $fir_riadok->ozd2r06;
 $ozdr07 = $fir_riadok->ozdr07;
-$ozdr08 = $fir_riadok->ozdr08;
+$ozdr09 = $fir_riadok->ozdr09;
                                       }
 
 if ( $strana == 12 OR $strana == 999 ) {
@@ -3065,7 +3066,7 @@ if ( $strana == 13 ) $clas13="active";
 <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1&volapo=1', '_self')" class="toleft">P2</a>
 <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=11&drupoh=1', '_blank')" class="toright">P2</a>
 <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1011&drupoh=1', '_blank')" class="toright">P1</a>
-<!--   <a href="#" onclick="FormPDF(13);" class="<?php echo $clas13; ?> toright">13</a>
+  <a href="#" onclick="FormPDF(13);" class="<?php echo $clas13; ?> toright">13</a>
   <a href="#" onclick="FormPDF(12);" class="<?php echo $clas12; ?> toright">12</a>
   <a href="#" onclick="FormPDF(11);" class="<?php echo $clas11; ?> toright">11</a>
   <a href="#" onclick="FormPDF(10);" class="<?php echo $clas10; ?> toright">10</a>
@@ -3077,7 +3078,7 @@ if ( $strana == 13 ) $clas13="active";
   <a href="#" onclick="FormPDF(4);" class="<?php echo $clas4; ?> toright">4</a>
   <a href="#" onclick="FormPDF(3);" class="<?php echo $clas3; ?> toright">3</a>
   <a href="#" onclick="FormPDF(2);" class="<?php echo $clas2; ?> toright">2</a>
-  <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a> -->
+  <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a>
   <h6 class="toright">TlaËiù:</h6>
   <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
   <input type="checkbox" name="prepocitaj" value="1" class="btn-prepocet"/>
@@ -3642,7 +3643,7 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <input type="text" name="ozd1r06" id="ozd1r06" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:807px; left:293px;"/>
 <input type="text" name="ozd2r06" id="ozd2r06" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:807px; left:603px;"/>
 <input type="text" name="ozdr07" id="ozdr07" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:900px; left:385px;"/>
-<input type="text" name="ozdr08" id="ozdr08" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:978px; left:385px;"/>
+<input type="text" name="ozdr09" id="ozdr09" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:978px; left:385px;"/>
 <?php                     } ?>
 
 
@@ -5501,7 +5502,7 @@ if ( $copern == 102 )
    document.formv1.ozd1r06.value = '<?php echo $ozd1r06; ?>';
    document.formv1.ozd2r06.value = '<?php echo $ozd2r06; ?>';
    document.formv1.ozdr07.value = '<?php echo $ozdr07; ?>';
-   document.formv1.ozdr08.value = '<?php echo $ozdr08; ?>';
+   document.formv1.ozdr09.value = '<?php echo $ozdr09; ?>';
 <?php                      } ?>
 
 <?php if ( $strana == 12 ) { ?>
@@ -5621,4 +5622,6 @@ TODO
 - ûiadam v ix.Ëasti bude disable checkbox pouk·ûka/˙Ëet a neuk·ûe iban z ufir
 - aktualiz·cia xml, Ëo som menil = aû keÔ budem robiù .xml
 - zaremovanÈ obdo a obod vyzer·, ûe s˙ naviazanÈ na obdobie daÚovej licencie = preveriù
+- pri dodatoËnom priznanÌ daù disable dadod,1120-1190, blokovaù pri generovanÌ v pdf, html cez disable
+  nemusel bych v tlaËi, ale oöetril pri generovanÌ
 -->
