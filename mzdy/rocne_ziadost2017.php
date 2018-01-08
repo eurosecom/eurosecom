@@ -512,10 +512,11 @@ $sqlfir = "SELECT * FROM F$kli_vxcf"."_rocneziadost".
 
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
-
 $oc = $fir_riadok->oc;
 $zmeno = $fir_riadok->meno;
 $zprie = $fir_riadok->prie;
+
+if ( $strana == 2 OR $strana == 9999 ) {
 $zrodne = $fir_riadok->rdc."/".$fir_riadok->rdk;
 $dar=SkDatum($fir_riadok->dar);
 if ( $zrodne == "/" ) { $zrodne="$dar"; }
@@ -545,8 +546,8 @@ $doceur = $fir_riadok->doceur;
 //$sdseur = $fir_riadok->sdseur;
 $upldds = $fir_riadok->upldds;
 $ddseur = $fir_riadok->ddseur;
-
-if ( $strana == 2 ) {
+                                       }
+if ( $strana == 2 OR $strana == 9999 ) {
 $bonus = $fir_riadok->bonus;
 $det01 = $fir_riadok->det01;
 $rod01 = $fir_riadok->rod01;
@@ -588,7 +589,7 @@ $ziad9 = $fir_riadok->ziad9;
 $ineuda = $fir_riadok->ineuda;
 $datum = $fir_riadok->datum;
 $datum_sk=SkDatum($datum);
-                    }
+                                       }
 mysql_free_result($fir_vysledok);
      }
 //koniec nacitania
@@ -992,22 +993,23 @@ $pdf->Cell(168,5," ","$rmc1",0,"L");$pdf->Cell(4,3,"$text","$rmc",1,"C");
 $pdf->SetFont('arial','',9);
 if ( $bonus == 0 )
 {
-$hlavicka->det01=" "; $hlavicka->rod01=" "; $hlavicka->mes01=" ";
-$hlavicka->det02=" "; $hlavicka->rod02=" "; $hlavicka->mes02=" ";
-$hlavicka->det03=" "; $hlavicka->rod03=" "; $hlavicka->mes03=" ";
-$hlavicka->det04=" "; $hlavicka->rod04=" "; $hlavicka->mes04=" ";
-$hlavicka->det05=" "; $hlavicka->rod05=" "; $hlavicka->mes05=" ";
-$hlavicka->det06=" "; $hlavicka->rod06=" "; $hlavicka->mes06=" ";
-$hlavicka->det07=" "; $hlavicka->rod07=" "; $hlavicka->mes07=" ";
-$hlavicka->det08=" "; $hlavicka->rod08=" "; $hlavicka->mes08=" ";
-$hlavicka->det09=" "; $hlavicka->rod09=" "; $hlavicka->mes09=" ";
-$hlavicka->det10=" "; $hlavicka->rod10=" "; $hlavicka->mes10=" ";
-$hlavicka->priskbonus=" "; $hlavicka->doceur=" ";
+$det01=" "; $rod01=" "; $mes01=" ";
+$det02=" "; $rod02=" "; $mes02=" ";
+$det03=" "; $rod03=" "; $mes03=" ";
+$det04=" "; $rod04=" "; $mes04=" ";
+$det05=" "; $rod05=" "; $mes05=" ";
+$det06=" "; $rod06=" "; $mes06=" ";
+$det07=" "; $rod07=" "; $mes07=" ";
+$det08=" "; $rod08=" "; $mes08=" ";
+$det09=" "; $rod09=" "; $mes09=" ";
+$det10=" "; $rod10=" "; $mes10=" ";
+$priskbonus=" "; $doceur=" ";
 }
 $pdf->Cell(190,22," ","$rmc1",1,"L");
 $pdf->Cell(17,5," ","$rmc1",0,"L");
 $pdf->Cell(45,5,"$det01","$rmc",0,"L");$pdf->Cell(20,5,"$rod01","$rmc",0,"C");$pdf->Cell(17,5,"$mes01","$rmc",0,"L");
 $pdf->Cell(45,5,"$det06","$rmc",0,"L");$pdf->Cell(20,5,"$rod06","$rmc",0,"C");$pdf->Cell(16,5,"$mes06","$rmc",1,"L");
+$pdf->Cell(190,0.5," ","$rmc1",1,"L");
 $pdf->Cell(17,5," ","$rmc1",0,"L");
 $pdf->Cell(45,5,"$det02","$rmc",0,"L");$pdf->Cell(20,5,"$rod02","$rmc",0,"C");$pdf->Cell(17,5,"$mes02","$rmc",0,"L");
 $pdf->Cell(45,5,"$det07","$rmc",0,"L");$pdf->Cell(20,5,"$rod07","$rmc",0,"C");$pdf->Cell(16,5,"$mes07","$rmc",1,"L");
@@ -1018,12 +1020,12 @@ $pdf->Cell(17,5," ","$rmc1",0,"L");
 $pdf->Cell(45,5.5,"$det04","$rmc",0,"L");$pdf->Cell(20,5.5,"$rod04","$rmc",0,"C");$pdf->Cell(17,5.5,"$mes04","$rmc",0,"L");
 $pdf->Cell(45,5.5,"$det09","$rmc",0,"L");$pdf->Cell(20,5.5,"$rod09","$rmc",0,"C");$pdf->Cell(16,5.5,"$mes09","$rmc",1,"L");
 $pdf->Cell(17,5," ","$rmc1",0,"L");
-$pdf->Cell(45,6,"$det05","$rmc",0,"L");$pdf->Cell(20,6,"$rod05","$rmc",0,"C");$pdf->Cell(17,6,"$mes05","$rmc",0,"L");
-$pdf->Cell(45,6,"$det10","$rmc",0,"L");$pdf->Cell(20,6,"$rod10","$rmc",0,"C");$pdf->Cell(16,6,"$mes10","$rmc",1,"L");
+$pdf->Cell(45,5,"$det05","$rmc",0,"L");$pdf->Cell(20,5,"$rod05","$rmc",0,"C");$pdf->Cell(17,5,"$mes05","$rmc",0,"L");
+$pdf->Cell(45,5,"$det10","$rmc",0,"L");$pdf->Cell(20,5,"$rod10","$rmc",0,"C");$pdf->Cell(16,5,"$mes10","$rmc",1,"L");
 $pdf->SetFont('arial','',10);
 
 //IV.POISTNE
-$pdf->Cell(190,17," ","$rmc1",1,"L");
+$pdf->Cell(190,17.5," ","$rmc1",1,"L");
 $text=" "; if ( $uplpoist == 1 ) { $text="x"; }
 $pdf->Cell(170,5," ","$rmc1",0,"L");$pdf->Cell(4,3.5,"$text","$rmc",1,"C");
 //
