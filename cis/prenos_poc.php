@@ -3991,10 +3991,10 @@ $dsql = mysql_query("$dsqlt");
 $dsqlt = "CREATE TABLE F$kli_vxcf"."_vyrzakpol SELECT * FROM ".$databaza."F$h_ycf"."_vyrzakpol ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakpol WHERE zak >= 150000 AND zak <= 159999 ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakpol WHERE zak >= 160000 AND zak <= 169999 ";
 $dsql = mysql_query("$dsqlt");
 
-$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakdopln WHERE zak >= 150000 AND zak <= 159999 ";
+$dsqlt = "DELETE FROM F$kli_vxcf"."_vyrzakdopln WHERE zak >= 160000 AND zak <= 169999 ";
 $dsql = mysql_query("$dsqlt");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

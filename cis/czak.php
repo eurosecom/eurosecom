@@ -41,6 +41,55 @@ $mena1 = $fir_mena1;
 $mena2 = $fir_mena2;
 $kurz12 = $fir_kurz12;
 
+if( $sekov == 1 AND $copern == 1 AND $kli_vxcf == 523 )
+     {
+$databaza="";
+
+$sqlt = "DROP TABLE F".$kli_vxcf."_zakprenos";
+$vysledok = mysql_query("$sqlt");
+
+$sqlt = "DROP TABLE F".$kli_vxcf."_zakpovodne";
+$vysledok = mysql_query("$sqlt");
+
+$sql = "CREATE TABLE F".$kli_vxcf."_zakpovodne SELECT * FROM F".$kli_vxcf."_zak WHERE zak >= 0";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_zakpovodne ADD plati DECIMAL(3,0) DEFAULT 0 FIRST";
+$vysledek = mysql_query("$sql");
+
+$sql = "CREATE TABLE F".$kli_vxcf."_zakprenos SELECT * FROM ".$databaza."F238_zak WHERE zak >= 0";
+$vysledek = mysql_query("$sql");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_zakprenos ADD plati DECIMAL(3,0) DEFAULT 0 FIRST";
+$vysledek = mysql_query("$sql");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_zakprenos,F$kli_vxcf"."_zak SET plati=9".
+" WHERE F$kli_vxcf"."_zakprenos.zak = F$kli_vxcf"."_zak.zak AND F$kli_vxcf"."_zakprenos.str = F$kli_vxcf"."_zak.str ";
+$oznac = mysql_query("$sqtoz");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_zak WHERE zak >= 0";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_zak SELECT ".
+"str,zak,nza,sku,stv,dzk,uzk,datm FROM F$kli_vxcf"."_zakprenos WHERE plati != 9";
+$dsql = mysql_query("$dsqlt");
+
+$dsqlt = "INSERT INTO F$kli_vxcf"."_zak SELECT ".
+"str,zak,nza,sku,stv,dzk,uzk,datm FROM F$kli_vxcf"."_zakpovodne ".
+" WHERE plati != 9";
+$dsql = mysql_query("$dsqlt");
+
+$sqlt = "DROP TABLE F".$kli_vxcf."_zakprenos";
+$vysledok = mysql_query("$sqlt");
+
+$sqlt = "DROP TABLE F".$kli_vxcf."_zakpovodne";
+$vysledok = mysql_query("$sqlt");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_zak WHERE str = 10 AND zak < 170000";
+$dsql = mysql_query("$dsqlt");
+     }
+
+
 if( $sekov == 1 AND $copern == 1 AND $kli_vxcf == 522 )
      {
 $databaza="";
