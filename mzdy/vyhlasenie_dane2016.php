@@ -817,7 +817,13 @@ $sqtoz = "UPDATE F$kli_vxcf"."_vyhlaseniedane".
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
 
-if ( File_Exists("../tmp/vyhlasenie.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/vyhlasenie.$kli_uzid.pdf"); }
+$hhmmss = Date ("His", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+$outfilexdel="../tmp/vyhlasenie_".$kli_uzid."_*.*";
+foreach (glob("$outfilexdel") as $filename) { unlink($filename); }
+$outfilex="../tmp/vyhlasenie_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -951,6 +957,16 @@ $pdf->Cell(190,56," ","$rmc1",1,"L");
 $datum=SkDatum($hlavicka->datum);
 if ( $datum == '00.00.0000' ) $datum="";
 $pdf->Cell(24,3," ","$rmc1",0,"L");$pdf->Cell(60,6,"$datum","$rmc",1,"C");
+
+
+$verzia="VYH36v16_1";
+if( $kli_vrok >= 2018 ) { $verzia="VYH36v18_1"; }
+$pdf->SetY(11);
+$pdf->SetX(5);
+$pdf->SetFont('arial','',í);
+$pdf->Cell(60,6,"$verzia","$rmc",1,"C");
+
+
                                        } //koniec 1.strany
 
 if ( $strana == 2 OR $strana == 9999 ) {
@@ -963,15 +979,23 @@ if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
 $pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
+
+$verzia="VYH36v16_2";
+if( $kli_vrok >= 2018 ) { $verzia="VYH36v18_2"; }
+$pdf->SetY(11);
+$pdf->SetX(5);
+$pdf->SetFont('arial','',í);
+$pdf->Cell(60,6,"$verzia","$rmc",1,"C");
+
                                        } //koniec 2.strany
   }
 $i = $i + 1;
   }
-$pdf->Output("../tmp/vyhlasenie.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 ?>
 
 <script type="text/javascript">
-  var okno = window.open("../tmp/vyhlasenie.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 
 <?php
