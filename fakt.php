@@ -121,9 +121,10 @@ $cit_nas = include("cis/citaj_nas.php");
   $ajnajom=0;
   if (File_Exists ("secomnajom/najom.php")) { $ajnajom=1; }
   if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $vyb_xcf == 814 ) { $ajnajom=1; }
-  if( $vyb_xcf != 2686 AND $vyb_xcf != 2687 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=0; }
+  if( $vyb_xcf != 2686 AND $vyb_xcf != 2687 AND $vyb_xcf != 2688 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=0; }
   if( $vyb_xcf == 2686 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=1; }
   if( $vyb_xcf == 2687 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=1; }
+  if( $vyb_xcf == 2688 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=1; }
 
 $cook=0;
 if( $cook == 1 )
@@ -637,6 +638,7 @@ htmlmenu += "<a href=\"#\" onClick=\"window.open('../faktury/vstf_u.php?pocstav=
   $ajregistracka=0;
   if (File_Exists ("dokumenty/FIR$vyb_xcf/ajregistracka.ano")) { $ajregistracka=1; }
 if( $vyb_xcf == 2687 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajregistracka=1; }
+if( $vyb_xcf == 2688 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajregistracka=1; }
   if( $ajregistracka == 1 ) {
   $sql = mysql_query("SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_dpok WHERE drpk = 9");
   if (@$zaznam=mysql_data_seek($sql,0))
