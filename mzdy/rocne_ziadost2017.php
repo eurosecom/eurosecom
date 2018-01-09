@@ -516,7 +516,7 @@ $oc = $fir_riadok->oc;
 $zmeno = $fir_riadok->meno;
 $zprie = $fir_riadok->prie;
 
-if ( $strana == 2 OR $strana == 9999 ) {
+if ( $strana == 1 OR $strana == 9999 ) {
 $zrodne = $fir_riadok->rdc."/".$fir_riadok->rdk;
 $dar=SkDatum($fir_riadok->dar);
 if ( $zrodne == "/" ) { $zrodne="$dar"; }
