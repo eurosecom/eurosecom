@@ -494,7 +494,7 @@ $dnes = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d")
 
 $sqtoz = "DELETE FROM F$kli_vxcf"."_rocneziadost WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "INSERT INTO F$kli_vxcf"."_rocneziadost ( oc, datum ) VALUES ( $cislo_oc, '$dnes' )";
+$sqtoz = "INSERT INTO F$kli_vxcf"."_rocneziadost ( oc ) VALUES ( $cislo_oc )";
 $oznac = mysql_query("$sqtoz");
 
 }
@@ -506,6 +506,8 @@ $oznac = mysql_query("$sqtoz");
 //nacitaj udaje pre upravu
 if ( $copern == 20 OR $copern == 10 )
      {
+$dnessk = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_rocneziadost".
 " LEFT JOIN F$kli_vxcf"."_mzdkun".
 " ON F$kli_vxcf"."_rocneziadost.oc=F$kli_vxcf"."_mzdkun.oc".
@@ -797,7 +799,7 @@ if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 <input type="checkbox" name="ziad9" value="1" style="top:696px; left:798px;"/>
 <input type="text" name="ineuda" id="ineuda" style="width:60px; top:815px; left:141px;"/>
 <span class="text-echo" style="top:1037px; left:108px;"><?php echo $fir_fmes; ?></span>
-<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" style="width:110px; top:1030px; left:388px;"/>
+<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" onclick="dajDnes();" style="width:110px; top:1030px; left:388px;"/>
 <?php                                        } ?>
 
 <div class="navbar">
@@ -1203,6 +1205,11 @@ var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, hei
   function FormPDF(strana)
   {
     window.open('rocne_ziadost2017.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=10&strana=' + strana + '&drupoh=1&subor=0', '_blank', blank_param);
+  }
+  function dajDnes()
+  {
+  if( document.formv1.datum.value == '00.00.0000' ) { document.formv1.datum.value = '<?php echo $dnessk; ?>' }
+  if( document.formv1.datum.value == '' ) { document.formv1.datum.value = '<?php echo $dnessk; ?>' }
   }
 </script>
 </body>
