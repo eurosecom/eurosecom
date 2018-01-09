@@ -819,7 +819,14 @@ if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 //pdf
 if ( $copern == 10 )
 {
-if ( File_Exists("../tmp/vyhlasenie.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/vyhlasenie.$kli_uzid.pdf"); }
+
+$hhmmss = Date ("His", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+$outfilexdel="../tmp/rzziadost_".$kli_uzid."_*.*";
+foreach (glob("$outfilexdel") as $filename) { unlink($filename); }
+$outfilex="../tmp/rzziadost_".$kli_uzid."_".$hhmmss.".pdf";
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
 
@@ -1053,11 +1060,11 @@ $pdf->Cell(9,3," ","$rmc1",0,"L");$pdf->Cell(24,5,"$text","$rmc",1,"C");
   }
 $i = $i + 1;
   }
-$pdf->Output("../tmp/vyhlasenie.$kli_uzid.pdf");
+$pdf->Output("$outfilex");
 ?>
 
 <script type="text/javascript">
- var okno = window.open("../tmp/vyhlasenie.<?php echo $kli_uzid; ?>.pdf","_self");
+ var okno = window.open("<?php echo $outfilex; ?>","_self");
 </script>
 <?php
 }
