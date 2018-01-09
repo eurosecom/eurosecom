@@ -494,8 +494,9 @@ $dnes = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d")
 
 $sqtoz = "DELETE FROM F$kli_vxcf"."_rocneziadost WHERE oc = $cislo_oc";
 $oznac = mysql_query("$sqtoz");
-$sqtoz = "INSERT INTO F$kli_vxcf"."_rocneziadost ( oc ) VALUES ( $cislo_oc )";
+$sqtoz = "INSERT INTO F$kli_vxcf"."_rocneziadost ( oc, datum ) VALUES ( $cislo_oc, '$dnes' )";
 $oznac = mysql_query("$sqtoz");
+
 }
 //koniec pracovneho suboru pre potvrdenie
 ?>
@@ -939,7 +940,6 @@ $pdf->Cell(5,6," ","$rmc1",0,"C");$pdf->Cell(6,5,"$t05","$rmc",0,"C");$pdf->Cell
 $pdf->Cell(190,5," ","$rmc1",1,"L");
 $text=" "; if ( $upldoc == 1 ) { $text="x"; }
 $pdf->Cell(169,5," ","$rmc1",0,"L");$pdf->Cell(4,4,"$text","$rmc",1,"C");
-if ( $hlavicka->upldoc == 0 ) { $hlavicka->docx=" "; $hlavicka->doceur=" "; } //dopyt, opýta, èi má osta podmienka
 $pdf->Cell(190,9," ","$rmc1",1,"L");
 $hodx=100*$doceur;
 if ( $hodx == 0 ) $hodx="";
@@ -961,7 +961,7 @@ $text=" "; if ( $upldds == 1 ) { $text="x"; }
 $pdf->Cell(168,5," ","$rmc1",0,"L");$pdf->Cell(3,3,"$text","$rmc",1,"C");
 $pdf->Cell(191,10," ","$rmc1",1,"L");
 $hodx=100*$ddseur;
-if ( $hodx == 0 OR $upldds == 0 ) $hodx="";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 6s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -991,20 +991,7 @@ $pdf->Cell(190,20," ","$rmc1",1,"L");
 $text=" "; if ( $bonus == 1 ) { $text="x"; }
 $pdf->Cell(168,5," ","$rmc1",0,"L");$pdf->Cell(4,3,"$text","$rmc",1,"C");
 $pdf->SetFont('arial','',9);
-if ( $bonus == 0 )
-{
-$det01=" "; $rod01=" "; $mes01=" ";
-$det02=" "; $rod02=" "; $mes02=" ";
-$det03=" "; $rod03=" "; $mes03=" ";
-$det04=" "; $rod04=" "; $mes04=" ";
-$det05=" "; $rod05=" "; $mes05=" ";
-$det06=" "; $rod06=" "; $mes06=" ";
-$det07=" "; $rod07=" "; $mes07=" ";
-$det08=" "; $rod08=" "; $mes08=" ";
-$det09=" "; $rod09=" "; $mes09=" ";
-$det10=" "; $rod10=" "; $mes10=" ";
-$priskbonus=" "; $doceur=" ";
-}
+
 $pdf->Cell(190,22," ","$rmc1",1,"L");
 $pdf->Cell(17,5," ","$rmc1",0,"L");
 $pdf->Cell(45,5,"$det01","$rmc",0,"L");$pdf->Cell(20,5,"$rod01","$rmc",0,"C");$pdf->Cell(17,5,"$mes01","$rmc",0,"L");
@@ -1031,7 +1018,7 @@ $pdf->Cell(170,5," ","$rmc1",0,"L");$pdf->Cell(4,3.5,"$text","$rmc",1,"C");
 //
 $pdf->Cell(190,6.5," ","$rmc1",1,"L");
 $hodx=100*$zappoistne;
-if ( $hodx == 0 OR $uplpoist ==  0 ) $hodx="";
+if ( $hodx == 0 ) $hodx="";
 $text=sprintf("% 6s",$hodx);
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
