@@ -401,6 +401,16 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD r10dds DECIMAL(10,2) DEFAULT 0 AFTER new2016";
 $vysledek = mysql_query("$sql");
 }
+//zmeny2017
+$sql = "SELECT ume FROM F$kli_vxcf"."_mzdpotvrdenieFO ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+//echo "idem";
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpotvrdenieFO ADD ume DECIMAL(7,4) DEFAULT 0 AFTER oc";
+$vysledek = mysql_query("$sql");
+//exit;
+}
 
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid;
 $vysledok = mysql_query("$sqlt");
@@ -415,6 +425,20 @@ $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvyplx'.$kli_uzid.$sqltnew;
 $vytvor = mysql_query("$vsql");
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvyplz'.$kli_uzid.$sqltnew;
 $vytvor = mysql_query("$vsql");
+
+$sql = "SELECT ume FROM F$kli_vxcf"."_mzdprcvypl".$kli_uzid." ";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+//echo "idem";
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvypl".$kli_uzid." ADD ume DECIMAL(7,4) DEFAULT 0 AFTER oc";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvyplx".$kli_uzid." ADD ume DECIMAL(7,4) DEFAULT 0 AFTER oc";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvyplz".$kli_uzid." ADD ume DECIMAL(7,4) DEFAULT 0 AFTER oc";
+$vysledek = mysql_query("$sql");
+//exit;
+}
 
 
 $jepotvrd=0;
@@ -435,7 +459,7 @@ $oznac = mysql_query("$sqtoz");
 
 //zober data zo sum zaklady,odvody spocitane novym eurosecom
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,".
+" SELECT oc,ume,".
 "(zdan_dnp+pdan_zn1),'',pdan_fnd,ozam_zp,0,0,'',pdan_dnv,0,".
 "'','','','','','','','','','','','',0,0,0,0,0,0,".
 "0,(pdan_fnd-ozam_zp),0,0,0,0,0,".
@@ -452,7 +476,7 @@ $dsql = mysql_query("$dsqlt");
 
 //zober bonus z vy
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,".
+" SELECT oc,ume,".
 "0,'',0,0,0,0,'',0,-(kc),".
 "'','','','','','','','','','','','',-(kc),0,0,0,0,0,".
 "-(kc),0,0,0,0,0,0,".
@@ -469,7 +493,7 @@ $dsql = mysql_query("$dsqlt");
 
 //zober dan z prijmu 901 z vy
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,".
+" SELECT oc,ume,".
 "0,'',0,0,0,kc,'',0,0,".
 "'','','','','','','','','','','','',0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,".
@@ -486,7 +510,7 @@ $dsql = mysql_query("$dsqlt");
 
 //zober doplatok ZP 954 z vy a pripocitaj k odvodom ak doplacal (954 +kc)
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,".
+" SELECT oc,ume,".
 "0,'',kc,kc,0,0,'',0,0,".
 "'','','','','','','','','','','','',0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,".
@@ -503,7 +527,7 @@ $dsql = mysql_query("$dsqlt");
 
 //zober doplatok ZP 954 z vy a pripocitaj k prijmu ak sa mu vracalo (954 -kc)
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,".
+" SELECT oc,ume,".
 "-(kc),'',0,0,0,0,'',0,0,".
 "'','','','','','','','','','','','',0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,".
@@ -520,7 +544,7 @@ $dsql = mysql_query("$dsqlt");
 
 //zober DM 968 dobrovolne poistenie dochodkove
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,".
+" SELECT oc,ume,".
 "0,'',0,0,0,0,'',0,0,".
 "'','','','','','','','','','','','',0,0,0,0,0,0,".
 "0,0,kc,0,0,0,0,".
@@ -535,9 +559,33 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+//dopln pomer a dohodu a z toho na dohodu prijem podla mesiacov
+$iume=1;
+while( $iume <= 12 ) {
+
+$umexx=$iume.".".$kli_vrok;
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdzalkun".
+" SET podpn=pom ".
+" WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc = F$kli_vxcf"."_mzdzalkun.oc AND F$kli_vxcf"."_mzdzalkun.ume = $umexx ";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdpomer".
+" SET podpa=pm_doh ".
+" WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.podpn = F$kli_vxcf"."_mzdpomer.pm";
+$oznac = mysql_query("$sqtoz");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid ".
+" SET r13=r01 WHERE podpa = 1 AND ume = $umexx ";
+$oznac = mysql_query("$sqtoz");
+
+$iume=$iume+1;
+}
+//exit;
+
 //sumarizuj za oc
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
-" SELECT oc,".
+" SELECT oc,0,".
 "sum(r01),r02,sum(r03a),sum(r03b),sum(r04),sum(r05),r06mes,sum(r06sum),sum(r07),".
 "'','','','','','',r07mes1,r07mes2,r07mes3,r07mes4,r07mes5,r07mes6,SUM(r07sum1),r07sum2,r07sum3,r07sum4,r07sum5,r07sum6,".
 "sum(r08),sum(r09),sum(r10),sum(r11),sum(r12a),sum(r12b),sum(r13),".
@@ -554,21 +602,6 @@ $dsql = mysql_query("$dsqlt");
 $sqtoz = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE konx = 1";
 $oznac = mysql_query("$sqtoz");
 
-//dopln pomer a dohodu a z toho na dohodu prijem
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
-" SET podpn=pom ".
-" WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc = F$kli_vxcf"."_mzdkun.oc";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdpomer".
-" SET podpa=pm_doh ".
-" WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.podpn = F$kli_vxcf"."_mzdpomer.pm";
-$oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid ".
-" SET r13=r01 WHERE podpa = 1";
-$oznac = mysql_query("$sqtoz");
-
 //nastav par50
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid".
 " SET podpn=1, podpa=0 WHERE oc >= 0";
@@ -579,7 +612,7 @@ if ( $alchem == 1 )
 {
 //zober 197 a nastav par50
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplx".$kli_uzid.
-" SELECT oc,".
+" SELECT oc,0,".
 "0,'',0,0,0,0,'',0,kc,".
 "'','','','','','','','','','','','',0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,".
@@ -594,7 +627,7 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplx".$kli_uzid.
 $dsql = mysql_query("$dsqlt");
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvyplx".$kli_uzid.
-" SELECT oc,".
+" SELECT oc,0,".
 "0,'',0,0,0,0,'',0,SUM(r07),".
 "'','','','','','','','','','','','',0,0,0,0,0,0,".
 "0,0,0,0,0,0,0,".
@@ -814,7 +847,7 @@ $dat_dat = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("
 //podpa	podpn	prija	prijn	konx3	datv
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdpotvrdenieFO".
-" SELECT oc,".
+" SELECT oc,0,".
 "sum(r01),r02,sum(r03a),sum(r03b),sum(r04),sum(r05),r06mes,sum(r06sum),sum(r07),".
 "r07det1,r07det2,r07det3,r07det4,r07det5,r07det6,r07det7,r07mes1,r07mes2,r07mes3,r07mes4,r07mes5,r07mes6,r07mes7,SUM(r07sum1),r07sum2,r07sum3,r07sum4,r07sum5,r07sum6,0,".
 "r07rod1,r07rod2,r07rod3,r07rod4,r07rod5,r07rod6,r07rod7,".
