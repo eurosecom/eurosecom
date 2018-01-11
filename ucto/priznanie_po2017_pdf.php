@@ -8529,24 +8529,14 @@ $t06=substr($text,9,1);
 $pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(14,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",1,"C");
-
-
-
-
-
-
-
                                        } //koniec 13.strana
   }
 $i = $i + 1;
   }
-
 $pdf->Output("$outfilex");
-//koniec zostava PDF
+//koniec form PDF
 
-//potvrdenie o podani
-if ( $copern == 11 )
-     {
+//potvrdenie
 if ( File_Exists("../tmp/potvrddpo.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/potvrddpo.$kli_uzid.pdf"); }
      $sirka_vyska="210,320";
      $velkost_strany = explode(",", $sirka_vyska);
@@ -8556,7 +8546,7 @@ $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10); //dopyt, menil som okraj, pôvodne 13, tak skontrolova èi sedí
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
 if ( File_Exists($jpg_source.'_potvrdenie.jpg') )
 {
@@ -8566,14 +8556,13 @@ $pdf->SetY(10);
 
 //za obdobie
 $pdf->Cell(190,25," ","$rmc1",1,"L");
-$pdf->Cell(98,6," ","$rmc1",0,"C");$pdf->Cell(34,6,"$kli_vrok","$rmc",1,"C");
+$pdf->Cell(100,6," ","$rmc1",0,"C");$pdf->Cell(34,7,"$kli_vrok","$rmc",1,"C");
 
-//nazov
-$pdf->Cell(190,27," ","$rmc1",1,"L");
-$pdf->Cell(11,7," ","$rmc1",0,"L");$pdf->Cell(141,7,"$fir_fnaz","$rmc",1,"L");
-
+//danovnik
+$pdf->Cell(190,26.5," ","$rmc1",1,"L");
+$pdf->Cell(14,7," ","$rmc1",0,"L");$pdf->Cell(141,6,"$fir_fnaz","$rmc",1,"L");
 //dic
-$pdf->Cell(190,6," ","$rmc1",1,"L");
+$pdf->Cell(190,6.5," ","$rmc1",1,"L");
 $A=substr($fir_fdic,0,1);
 $B=substr($fir_fdic,1,1);
 $C=substr($fir_fdic,2,1);
@@ -8584,49 +8573,41 @@ $G=substr($fir_fdic,6,1);
 $H=substr($fir_fdic,7,1);
 $I=substr($fir_fdic,8,1);
 $J=substr($fir_fdic,9,1);
-$pdf->Cell(11,8," ","$rmc1",0,"R");$pdf->Cell(5,5,"$A","$rmc",0,"C");$pdf->Cell(5,5,"$B","$rmc",0,"C");$pdf->Cell(5,5,"$C","$rmc",0,"C");
-$pdf->Cell(5,5,"$D","$rmc",0,"C");$pdf->Cell(6,5,"$E","$rmc",0,"C");$pdf->Cell(5,5,"$F","$rmc",0,"C");$pdf->Cell(5,5,"$G","$rmc",0,"C");
+$pdf->Cell(14,8," ","$rmc1",0,"R");$pdf->Cell(5,5,"$A","$rmc",0,"C");$pdf->Cell(5,5,"$B","$rmc",0,"C");$pdf->Cell(5,5,"$C","$rmc",0,"C");
+$pdf->Cell(6,5,"$D","$rmc",0,"C");$pdf->Cell(5,5,"$E","$rmc",0,"C");$pdf->Cell(5,5,"$F","$rmc",0,"C");$pdf->Cell(5,5,"$G","$rmc",0,"C");
 $pdf->Cell(5,5,"$H","$rmc",0,"C");$pdf->Cell(6,5,"$I","$rmc",0,"C");$pdf->Cell(5,5,"$J","$rmc",1,"C");
-
-//ulica
-$pdf->Cell(190,13," ","$rmc1",1,"L");
-$pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(141,8,"$fir_fuli $fir_fcdm","$rmc",1,"L");
-
-//psc a obec
-$pdf->Cell(190,5," ","$rmc1",1,"L");
-$pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(26,8,"$fir_fpsc","$rmc",0,"L");$pdf->Cell(20,6," ","$rmc1",0,"L");$pdf->Cell(95,8,"$fir_fmes","$rmc",1,"L");
-
-//stat
-$pdf->Cell(190,6," ","$rmc1",1,"L");
-$pdf->Cell(11,6," ","$rmc1",0,"L");$pdf->Cell(46,6,"$fstat","$rmc",1,"L");
-
-//udaje o danovom priznani
+//sidlo
+$pdf->Cell(190,14," ","$rmc1",1,"L");
+$pdf->Cell(14,6," ","$rmc1",0,"L");$pdf->Cell(141,6,"$fir_fuli $fir_fcdm","$rmc",1,"L");
+$pdf->Cell(190,7," ","$rmc1",1,"L");
+$pdf->Cell(14,6," ","$rmc1",0,"L");$pdf->Cell(26,6,"$fir_fpsc","$rmc",0,"L");
+$pdf->Cell(20,6," ","$rmc1",0,"L");$pdf->Cell(95,6,"$fir_fmes","$rmc",1,"L");
+$pdf->Cell(190,7," ","$rmc1",1,"L");
+$pdf->Cell(14,6," ","$rmc1",0,"L");$pdf->Cell(46,6,"$fstat","$rmc",1,"L");
+//udaje
 $pdf->Cell(190,16," ","$rmc1",1,"L");
-if ( $r500 == 0 ) $r500="0.00";
+//if ( $r500 == 0 ) $r500="0.00";
+if ( $psr27 == 0 ) $psr27="";
+if ( $ozdr07 == 0 ) $ozdr07="";
+if ( $r510 == 0 ) $r510="0.00";
 if ( $r1100 == 0 ) $r1100="";
 if ( $r1101 == 0 ) $r1101="";
-$pdf->Cell(122,7," ","$rmc1",0,"L");$pdf->Cell(51,7,"$kli_vrok","$rmc",1,"C");
-$pdf->Cell(122,7," ","$rmc1",0,"L");$pdf->Cell(51,8,"$r510","$rmc",1,"R");
-$pdf->Cell(122,7," ","$rmc1",0,"L");$pdf->Cell(51,7,"$r1100","$rmc",1,"R");
-$pdf->Cell(122,8," ","$rmc1",0,"L");$pdf->Cell(51,8,"$r1101","$rmc",1,"R");
+if ( $r1090 == 0 ) $r1090="";
+$pdf->Cell(130,7," ","$rmc1",0,"L");$pdf->Cell(46,7,"$kli_vrok","$rmc",1,"C");
+$pdf->Cell(130,7," ","$rmc1",0,"L");$pdf->Cell(45,8,"$psr27","$rmc",1,"R");
+$pdf->Cell(130,7," ","$rmc1",0,"L");$pdf->Cell(45,7.5,"$ozdr07","$rmc",1,"R");
+$pdf->Cell(130,7," ","$rmc1",0,"L");$pdf->Cell(45,7,"$r510","$rmc",1,"R");
+$pdf->Cell(130,7," ","$rmc1",0,"L");$pdf->Cell(45,7,"$r1100","$rmc",1,"R");
+$pdf->Cell(130,8," ","$rmc1",0,"L");$pdf->Cell(45,8,"$r1101","$rmc",1,"R");
+$pdf->Cell(130,8," ","$rmc1",0,"L");$pdf->Cell(45,10,"$r1090","$rmc",1,"R");
 
 $pdf->Output("../tmp/potvrddpo.$kli_uzid.pdf");
-     }
 //koniec potvrdenia o podani
 ?>
-
-
 <script type="text/javascript"> var okno = window.open("<?php echo $outfilex; ?>","_self"); </script>
 <?php
      }
 ?>
-
-
-
-
-
-
-
 
 <?php
 //celkovy koniec dokumentu
