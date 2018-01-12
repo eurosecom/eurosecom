@@ -2148,7 +2148,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r550=22, r600=(r550*r510), psys=0 WHERE ico >= 0";
+" r550=21, r600=(r550*r510), psys=0 WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
@@ -2320,7 +2320,7 @@ if ( $preddavky == 1 )
   {
 //upravene na rok 2015 a 2016
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r1110=r510*22, psys=0 WHERE ico >= 0";
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r1110=r510*21, psys=0 WHERE ico >= 0";
 if( $kli_vrok >= 2016 )
          {
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r1110=r510*21, psys=0 WHERE ico >= 0";
