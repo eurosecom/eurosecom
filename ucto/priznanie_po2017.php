@@ -3938,7 +3938,10 @@ if ( $copern == 10 )
 <?php
 $hhmm = Date( "Hi", MkTime( date("H"),date("i"),date("s"),date("m"),date("d"),date("Y") ) );
 //$idx=$kli_uzid.$hhmm;
-$nazsub="dppo".$kli_vrok."_".$kli_nxcf."_id".$kli_uzid."_".$hhmm.".xml";
+$kli_nxcf10 = substr($kli_nxcf,0,10);
+$kli_nxcf10=trim(str_replace(" ","",$kli_nxcf10));
+
+$nazsub="../tmp/dppo".$kli_vrok."_id".$kli_uzid."_".$kli_nxcf."_".$hhmm.".xml";
 //dopyt, ešte typ priznania
 //dopyt, prvých 10 znakov názvu firmy
 
@@ -3960,8 +3963,13 @@ $sqldok = mysql_query("$sqlttt");
 ?>
 <?php
 //prva strana
-if ( File_Exists("../tmp/$nazsub") ) { $soubor = unlink("../tmp/$nazsub"); }
-     $soubor = fopen("../tmp/$nazsub", "a+");
+
+$outfilexdel="../tmp/dppo".$kli_vrok."_id".$kli_uzid."_*.*";
+foreach (glob("$outfilexdel") as $filename) { unlink($filename); }
+$outfilex=$nazsub;
+if ( File_Exists("$outfilex") ) { $soubor = unlink("$outfilex"); }
+
+     $soubor = fopen("$nazsub", "a+");
 
 //hlavicka
 $sqltt = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_po ";
@@ -5167,7 +5175,7 @@ fclose($soubor);
 <div style="background-color: white; padding: 16px 24px; border-radius: 2px;">
   <p style="line-height: 32px;">Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a naèítajte na www.financnasprava.sk alebo do aplikácie eDane:
   </p>
-  <p style="line-height: 48px;"><a href="../tmp/<?php echo $nazsub; ?>">../tmp/<?php echo $nazsub; ?></a></p>
+  <p style="line-height: 48px;"><a href="<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a></p>
 </div>
 <?php
 //mysql_free_result($vysledok);
