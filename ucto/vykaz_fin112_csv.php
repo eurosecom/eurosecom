@@ -118,6 +118,16 @@ $dsqlt = "INSERT INTO prijdbf "." SELECT".
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
+//zober zdroj pre nerozpoctovane polozky
+$zdrojhlavny="";
+$sqldok = mysql_query("SELECT zdroj FROM prijdbf");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $zdrojhlavny=$riaddok->zdroj; 
+
+  }
+
 $dsqlt = "INSERT INTO prijdbf "." SELECT".
 " 3,zdroj,polozka,schvaleny,zmeneny,predpoklad,skutocnost ".
 " FROM F$kli_vxcf"."_uctvykaz_fin104".
@@ -271,7 +281,7 @@ if( $i == 0 )
 
 //polozky
 
-  $text = "\"".$hlavicka->zdroj."\",\"".$hlavicka->polozka."\",\"".$hlavicka->schvaleny."\",\"".$hlavicka->zmeneny."\",\"";
+  $text = "\"".$zdrojhlavny."\",\"".$hlavicka->polozka."\",\"".$hlavicka->schvaleny."\",\"".$hlavicka->zmeneny."\",\"";
   $text = $text.$hlavicka->predpoklad."\",\"".$hlavicka->skutocnost."\"";
   $text = $text."\r\n";
 
@@ -347,6 +357,16 @@ $dsqlt = "INSERT INTO vyddbf "." SELECT".
 " WHERE druh = 2 ORDER BY polozka";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
+
+//zober zdroj pre nerozpoctovane polozky
+$zdrojhlavny="";
+$sqldok = mysql_query("SELECT zdroj FROM vyddbf");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $zdrojhlavny=$riaddok->zdroj; 
+
+  }
 
 $dsqlt = "INSERT INTO vyddbf "." SELECT".
 " 4,zdroj,oddiel,polozka,schvaleny,zmeneny,predpoklad,skutocnost ".
@@ -472,7 +492,7 @@ if( $i == 0 )
 //polozky
 $oddiel5=str_replace(".", "", $hlavicka->oddiel);
 
-  $text = "\"".$hlavicka->zdroj."\",\"".$oddiel5."\",\"".$hlavicka->polozka."\",\"".$hlavicka->schvaleny."\",\"".$hlavicka->zmeneny."\",\"";
+  $text = "\"".$zdrojhlavny."\",\"".$oddiel5."\",\"".$hlavicka->polozka."\",\"".$hlavicka->schvaleny."\",\"".$hlavicka->zmeneny."\",\"";
   $text = $text.$hlavicka->predpoklad."\",\"".$hlavicka->skutocnost."\"";
   $text = $text."\r\n";
 
