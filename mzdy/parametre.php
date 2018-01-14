@@ -101,6 +101,17 @@ $vysledek = mysql_query("$sql");
 $sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012017c";
 $vysledek = mysql_query("$sql");
 }
+if( $kli_vrok == 2018 )
+{
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018a";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018b";
+$vysledek = mysql_query("$sql");
+$sql = "DROP TABLE F$kli_vxcf"."_mzdprm_new012018c";
+$vysledek = mysql_query("$sql");
+}
 
 $sql = "SELECT * FROM F$kli_vxcf"."_vtvall";
 $vysledok = mysql_query($sql);

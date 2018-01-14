@@ -1134,6 +1134,34 @@ $setprm = include("mzdy/sepa2017.php");
 }
 //uprava sepa od 1.1.2017
 
+
+//uprava parametrov miezd na aktualny stav od 1.1.2018
+$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_new012018a";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+//echo "idem prm18";
+$vyb_roks=$vyb_rok;
+$mysqldbdatas=$mysqldbdata;
+$vyb_xcfs=$vyb_xcf;
+$setprm = include("mzdy/set2018parametre.php");
+}
+//uprava parametrov miezd na aktualny stav od 1.1.2018
+
+//uprava sepa od 1.1.2018
+$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_mzdprm_sepa012018a";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+//echo "idem sepa18";
+$vyb_roks=$vyb_rok;
+$mysqldbdatas=$mysqldbdata;
+$vyb_xcfs=$vyb_xcf;
+$setprm = include("mzdy/sepa2018.php");
+}
+//uprava sepa od 1.1.2018
+
+
 //cleaning
 $datdnessql = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 $jeclean=0;
