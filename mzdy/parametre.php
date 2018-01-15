@@ -1173,8 +1173,11 @@ $riadok=mysql_fetch_object($vysledok);
 <?php if( $kli_vrok == 2014 ) { ?>
  + 25.00% z rozdielu (základ dane - 2918.53) ak Základ dane > 2918.53 
 <?php                         } ?>
-<?php if( $kli_vrok >= 2015 ) { ?>
+<?php if( $kli_vrok >= 2015 AND $kli_vrok < 2018 ) { ?>
  + 25.00% z rozdielu (základ dane - 2918.53) ak Základ dane > 2918.53 
+<?php                         } ?>
+<?php if( $kli_vrok >= 2018 ) { ?>
+ + 25.00% z rozdielu (základ dane - 2939.01) ak Základ dane > 2939.01 
 <?php                         } ?>
 </td>
 <td></td>

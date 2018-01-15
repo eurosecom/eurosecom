@@ -119,17 +119,7 @@ if( $kli_vrok < 2017 )
 exit;
 }
 
-if( $kli_vrok < 2018 )
-{
-?>
-<script type="text/javascript">
-  var okno = window.open("../mzdy/vyplat_paska2017.php?copern=<?php echo $copern; ?>&drupoh=<?php echo $drupoh; ?>&ostre=<?php echo $ostre; ?>
-&cislo_oc=<?php echo $cislo_oc; ?>&cislo_kanc=<?php echo $cislo_kanc; ?>&kanc=<?php echo $kanc; ?>&kontrola=<?php echo $kontrola; ?>
-&vyb_osc=<?php echo $vyb_osc; ?>","_self");
-</script>
-<?php
-exit;
-}
+echo "Výplatné pásky rok 2017."."<br />";
 
 //vyplatne pasky z menu po ostrom
 if( $copern == 11 )
@@ -601,10 +591,10 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_$mzdprm");
   }
 
 
-//danovy bonus sa bude asi menit od 1.7.2018 rovnaky cely rok
-if( $kli_vume <= 12.2018 AND $kli_vrok == 2018 )
+//danovy bonus sa bude asi menit od 1.7.2016, maximalne vymeriavacie pre SP,ZP sa budu menit az od 1.1.
+if( $kli_vume < 7.2017 AND $kli_vrok == 2017 )
           {
-$dan_bonus=21.56;
+$dan_bonus=21.41;
           }
 
 //koniec nacitania parametrov
@@ -1448,7 +1438,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_mzdpomer SET zma
 $oznac = mysql_query("$sqtoz");
 //exit;
 
-//uprava zakladov SP,IP,RF pre pomer=41 podla veku od 1.1.2015 18rokov(vratane v mesiaci ma 18nast)-200Eur,26rokov(v celom roku)-200Eur rovnako plati aj od 1.1.2018
+//uprava zakladov SP,IP,RF pre pomer=41 podla veku od 1.1.2015 18rokov(vratane v mesiaci ma 18nast)-200Eur,26rokov(v celom roku)-200Eur rovnako aj od 1.1.2016 a 1.1.2017
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
 " SET des1=YEAR(dar), des2=MONTH(dar) ".
@@ -1916,19 +1906,19 @@ $neprprijem = include("neprav_prijem.php");
      }
 //koniec odvody nepravidelny prijem
 
-//dan z prijmu vypocet od 1.1.2018 zmena oproti 2017 do 2939,01 Eur zaklad 19% a 25% z rozdielu nad 2939,01 Eur zaklad ZOSTAVA rovnako aj po 1.1.2016 a po 1.1.2017
+//dan z prijmu vypocet od 1.1.2014 do 2918,53 Eur zaklad 19% a 25% z rozdielu nad 2918,53 Eur zaklad ZOSTAVA rovnako aj po 1.1.2016 a po 1.1.2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
 " SET pdan_fnd=ozam_zp+ozam_np+ozam_sp+ozam_ip+ozam_pn+ozam_up+ozam_gf+ozam_rf, pdan_zn1=ddp_fir,".
 " zakl_dan=zdan_dnp-pdan_dnv-pdan_fnd+pdan_zn1-pdan_zn2, des6=($dan_perc*zakl_dan)/100, des6=des6-0.005, des2=des6, odan_dnp=des2, ".
 " des1=0, des2=0, des3=0, des6=0  ".
-" WHERE oc > 0 AND zakl_dan <= 2939.01  ";
+" WHERE oc > 0 AND zakl_dan <= 2918.53  ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
 " SET pdan_fnd=ozam_zp+ozam_np+ozam_sp+ozam_ip+ozam_pn+ozam_up+ozam_gf+ozam_rf, pdan_zn1=ddp_fir,".
-" zakl_dan=zdan_dnp-pdan_dnv-pdan_fnd+pdan_zn1-pdan_zn2-2939.01, des6=(25*zakl_dan)/100, des6=des6+558.4119, des6=des6-0.005, des2=des6, odan_dnp=des2, ".
+" zakl_dan=zdan_dnp-pdan_dnv-pdan_fnd+pdan_zn1-pdan_zn2-2918.53, des6=(25*zakl_dan)/100, des6=des6+554.5207, des6=des6-0.005, des2=des6, odan_dnp=des2, ".
 " des1=0, des2=0, des3=0, des6=0  ".
-" WHERE oc > 0 AND zakl_dan > 2939.01 ";
+" WHERE oc > 0 AND zakl_dan > 2918.53 ";
 $oznac = mysql_query("$sqtoz");
 
 //poistka ak dan < 0 potom dan=0
