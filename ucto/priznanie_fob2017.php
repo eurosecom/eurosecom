@@ -143,7 +143,7 @@ $namanzelku = 1*$_REQUEST['namanzelku'];
 $xml = 1*$_REQUEST['xml'];
 
 //.jpg podklad
-$jpg_source="../dokumenty/dan_z_prijmov2017/dpfob/dpfob_v16";
+$jpg_source="../dokumenty/dan_z_prijmov2017/dpfob/dpfob_v17";
 $jpg_title="tlaËivo DaÚ z prÌjmov FO typ B pre rok $kli_vrok $strana.strana";
 
 $zablokovane=1;
@@ -477,10 +477,10 @@ $uppr4 = 1*$_REQUEST['uppr4'];
 
 $uvp61 = 1*$_REQUEST['uvp61'];
 $uvp64 = 1*$_REQUEST['uvp64'];
-$uvp61m = 1*$_REQUEST['uvp61m'];
-if ( $uvp61m > 12 ) { $uvp61m = 12; }
-$uvp64m = 1*$_REQUEST['uvp64m'];
-if ( $uvp64m > 12 ) { $uvp64m = 12; }
+//$uvp61m = 1*$_REQUEST['uvp61m'];
+//if ( $uvp61m > 12 ) { $uvp61m = 12; }
+//$uvp64m = 1*$_REQUEST['uvp64m'];
+//if ( $uvp64m > 12 ) { $uvp64m = 12; }
 
 $uos61 = 1*$_REQUEST['uos61'];
 $uos64 = 1*$_REQUEST['uos64'];
@@ -488,7 +488,7 @@ $kos61 = 1*$_REQUEST['kos61'];
 $kos64 = 1*$_REQUEST['kos64'];
 
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
-" uppr1='$uppr1', uppr3='$uppr3', uppr4='$uppr4', uvp61='$uvp61', uvp64='$uvp64', uvp61m='$uvp61m', uvp64m='$uvp64m', ".
+" uppr1='$uppr1', uppr3='$uppr3', uppr4='$uppr4', uvp61='$uvp61', uvp64='$uvp64', ".
 " uos61='$uos61', uos64='$uos64', kos61='$kos61', kos64='$kos64', ".
 " t1p1='$t1p1', t1p2='$t1p2', t1p3='$t1p3', t1p4='$t1p4', t1p5='$t1p5', t1p6='$t1p6',  ".
 " t1p7='$t1p7', t1p8='$t1p8', t1p9='$t1p9', t1p11='$t1p11', t1p12='$t1p12', ".
@@ -677,7 +677,7 @@ $r72 = 1*$_REQUEST['r72'];
 $r73 = 1*$_REQUEST['r73'];
 $r74 = 1*$_REQUEST['r74'];
 $r75 = 1*$_REQUEST['r75'];
-$r76 = 1*$_REQUEST['r76'];
+//$r76 = 1*$_REQUEST['r76'];
 $r77 = 1*$_REQUEST['r77'];
 $r78 = 1*$_REQUEST['r78'];
 $r79 = 1*$_REQUEST['r79'];
@@ -697,7 +697,7 @@ $r92 = 1*$_REQUEST['r92'];
 $r93 = 1*$_REQUEST['r93'];
 $r94 = 1*$_REQUEST['r94'];
 $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
-" r72='$r72', r73='$r73', r74='$r74', r75='$r75', r76='$r76', r77='$r77', r78='$r78', r79='$r79', r80='$r80', r81='$r81', r82='$r82', r83='$r83', ".
+" r72='$r72', r73='$r73', r74='$r74', r75='$r75', r77='$r77', r78='$r78', r79='$r79', r80='$r80', r81='$r81', r82='$r82', r83='$r83', ".
 " r84='$r84', r85='$r85', r86='$r86', r87='$r87', r88='$r88', r89='$r89', r90='$r90', r91='$r91', r92='$r92', r93='$r93', r94='$r94' ".
 " WHERE oc = $cislo_oc";
                     }
@@ -1613,8 +1613,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD szdat DATE NOT NULL AFTER des2";
 $vysledek = mysql_query("$sql");
 }
-
-//zmeny pre rok 2013
+//zmeny2013
 $sql = "SELECT pzs01 FROM F".$kli_vxcf."_mzdpriznanie_fob";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
@@ -1849,7 +1848,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD pzthvd6 DECIMAL(10,2) DEFAULT 0 AFTER new2013";
 $vysledek = mysql_query("$sql");
 }
-//zmeny pre rok 2014
+//zmeny2014
 $sql = "SELECT r40pu FROM F".$kli_vxcf."_mzdpriznanie_fob";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
@@ -1885,7 +1884,7 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD r40pu DECIMAL(10,2) DEFAULT 0 AFTER new2014";
 $vysledek = mysql_query("$sql");
 }
-//zmeny pre rok 2015
+//zmeny2015
 $sql = "SELECT t3v15 FROM F".$kli_vxcf."_mzdpriznanie_fob";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
@@ -1970,7 +1969,7 @@ $vysledek = mysql_query("$sql");
 }
 //koniec uprav def. tabulky
 
-//zmeny pre rok 2016
+//zmeny2016
 $sql = "SELECT pdrm6 FROM F".$kli_vxcf."_mzdpriznanie_fob";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
@@ -2010,7 +2009,17 @@ $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD pdrm5 VARCHAR(3) NOT NULL
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD pdrm6 VARCHAR(3) NOT NULL AFTER new2016";
 $vysledek = mysql_query("$sql");
+}
+//zmeny2017
+$sql = "SELECT new2017 FROM F".$kli_vxcf."_mzdpriznanie_fob";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD new2017 DECIMAL(2,0) NOT NULL AFTER new2016";
+$vysledek = mysql_query("$sql");
 
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob MODIFY r51 DECIMAL(10,2) DEFAULT 0";
+$vysledek = mysql_query("$sql");
 }
 
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob";
@@ -2564,8 +2573,6 @@ $uppr4 = $fir_riadok->uppr4;
 
 $uvp61 = $fir_riadok->uvp61;
 $uvp64 = $fir_riadok->uvp64;
-$uvp61m = $fir_riadok->uvp61m;
-$uvp64m = $fir_riadok->uvp64m;
 
 $uos61 = $fir_riadok->uos61;
 $uos64 = $fir_riadok->uos64;
@@ -2714,7 +2721,7 @@ $r72 = $fir_riadok->r72;
 $r73 = $fir_riadok->r73;
 $r74 = $fir_riadok->r74;
 $r75 = $fir_riadok->r75;
-$r76 = $fir_riadok->r76;
+//$r76 = $fir_riadok->r76;
 $r77 = $fir_riadok->r77;
 $r78 = $fir_riadok->r78;
 $r79 = $fir_riadok->r79;
@@ -2945,7 +2952,6 @@ div.input-echo {
   background-color: #fff;
 }
 </style>
-
 </head>
 <?php if( $zandroidu == 1 ) { ?>
 <body class="white">
@@ -2989,7 +2995,7 @@ div.input-echo {
 </div>
 
 <div id="content">
-<FORM name="formv1" method="post" action="priznanie_fob2017.php?copern=23&cislo_oc=<?php echo $cislo_oc;?>&strana=<?php echo $strana;?>">
+<form name="formv1" method="post" action="priznanie_fob2017.php?copern=23&cislo_oc=<?php echo $cislo_oc; ?>&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive"; $clas5="noactive";
 $clas6="noactive"; $clas7="noactive"; $clas8="noactive"; $clas9="noactive"; $clas10="noactive";
@@ -3023,21 +3029,7 @@ if ( $strana == 15 ) $clas15="active"; if ( $strana == 16 ) $clas16="active";
   <a href="#" onclick="editForm(15);" class="<?php echo $clas15; ?> toleft">P2</a>
   <a href="#" onclick="editForm(16);" class="<?php echo $clas16; ?> toleft">P3</a>
 
- <!-- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1&prepocitaj=101', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2&prepocitaj=101', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=3&prepocitaj=101', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=4&prepocitaj=101', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=5&prepocitaj=101', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=6&prepocitaj=101', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=7&prepocitaj=101', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=8&prepocitaj=101', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=9&prepocitaj=101', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=10&prepocitaj=101', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=11&prepocitaj=101', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=12&prepocitaj=101', '_self');" class="<?php echo $clas12; ?> toleft">12</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=13&prepocitaj=101', '_self');" class="<?php echo $clas13; ?> toleft">P1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=14&prepocitaj=101', '_self');" class="<?php echo $clas14; ?> toleft">P2</a> -->
-<!--
+ <!--
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=14', '_blank');" class="<?php echo $clas14; ?> toright">P2</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=13', '_blank');" class="<?php echo $clas13; ?> toright">P1</a>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=12', '_blank');" class="<?php echo $clas12; ?> toright">12</a>
@@ -3095,7 +3087,7 @@ $sn1c=substr($sknacec,0,1);
 ?>
 <span class="text-echo" style="top:371px; left:57px;"><?php echo "$sn1a$sn2a"; ?></span>
 <span class="text-echo" style="top:371px; left:114px;"><?php echo "$sn1b$sn2b"; ?></span>
-<span class="text-echo" style="top:371px; left:170px;"><?php echo "$sn1c"; ?></span>
+<span class="text-echo" style="top:371px; left:170px;"><?php echo $sn1c; ?></span>
 <input type="text" name="cinnost" id="cinnost" style="width:621px; height:46px; top:347px; left:267px;"/>
 
 <!-- I.ODDIEL -->
@@ -3119,7 +3111,6 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="d2cdm" id="d2cdm" style="width:175px; top:690px; left:718px;"/>
 <input type="text" name="d2psc" id="d2psc" maxlength="5" style="width:107px; top:742px; left:51px;"/>
 <input type="text" name="d2mes" id="d2mes" style="width:451px; top:742px; left:178px;"/>
-
 <!-- II.ODDIEL -->
 <input type="text" name="zprie" id="zprie" style="width:359px; top:850px; left:51px;"/>
 <input type="text" name="zmeno" id="zmeno" style="width:244px; top:850px; left:430px;"/>
@@ -3141,7 +3132,6 @@ $sn1c=substr($sknacec,0,1);
 <?php if ( $strana == 2 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str2.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
-
 <!-- III.ODDIEL -->
 <input type="checkbox" name="r29" value="1" style="top:285px; left:746px;"/>
 <input type="text" name="r30" id="r30" onkeyup="CiarkaNaBodku(this);" style="width:175px; top:330px; left:701px;"/>
@@ -3149,7 +3139,6 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="mrod" id="mrod" style="width:240px; top:419px; left:413px;"/>
 <input type="text" name="mpri" id="mpri" onkeyup="CiarkaNaBodku(this);" style="width:153px; top:419px; left:671px;"/>
 <input type="text" name="mpom" id="mpom" style="width:38px; top:419px; left:850px;"/>
-
 <!-- IV.ODDIEL -->
 <!-- 1.riadok -->
 <input type="text" name="d1prie" id="d1prie" style="width:243px; top:656px; left:47px;"/>
@@ -3216,7 +3205,6 @@ $sn1c=substr($sknacec,0,1);
 <input type="checkbox" name="d4pom11" value="1" style="top:800px; left:851px;"/>
 <input type="checkbox" name="d4pom12" value="1" style="top:800px; left:877px;"/>
 <input type="checkbox" name="r33" value="1" style="top:828px; left:86px;"/>
-
 <!-- V.ODDIEL -->
 <input type="text" name="r34" id="r34" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:1017px; left:501px;"/>
 <input type="text" name="r34a" id="r34a" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:1056px; left:501px;"/>
@@ -3228,16 +3216,13 @@ $sn1c=substr($sknacec,0,1);
 <?php if ( $strana == 3 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str3.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
-
 <!-- VI.ODDIEL -->
 <!-- Tabulka1 -->
 <input type="text" name="t1p1" id="t1p1" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:240px; left:410px;"/>
 <input type="text" name="t1v1" id="t1v1" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:240px; left:661px;"/>
 <input type="text" name="t1p2" id="t1p2" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:279px; left:410px;"/>
 <input type="text" name="t1v2" id="t1v2" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:279px; left:661px;"/>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajVHpredDanou();"
-     title="NaËÌtaù prÌjmy, v˝davky a zaplatenÈ poistnÈ SP a ZP zo ûivnosti do tabuæky Ë.1 (VI.oddiel FOB 3. strana).
-            MusÌte maù spracovan˝ V˝kaz o prÌjmoch a v˝davkoch za 12.<?php echo $kli_vrok; ?>" class="btn-row-tool" style="top:280px; left:910px;">
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajVHpredDanou();" title="NaËÌtaù prÌjmy, v˝davky a zaplatenÈ poistnÈ SP a ZP zo ûivnosti. Pred naËÌtanÌm spracujte V˝kaz o prÌjmoch a v˝davkoch za 12.<?php echo $kli_vrok; ?>" class="btn-row-tool" style="top:280px; left:910px;">
 <input type="text" name="t1p3" id="t1p3" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:318px; left:410px;"/>
 <input type="text" name="t1v3" id="t1v3" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:318px; left:661px;"/>
 <input type="text" name="t1p4" id="t1p4" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:359px; left:410px;"/>
@@ -3260,21 +3245,17 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="t1v12" id="t1v12" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:691px; left:661px;"/>
 <div class="input-echo right" style="width:230px; top:732px; left:413px;"><?php echo $t1p13; ?>&nbsp;</div>
 <div class="input-echo right" style="width:230px; top:732px; left:662px;"><?php echo $t1v13; ?>&nbsp;</div>
-
 <!-- uplatnujem -->
 <input type="checkbox" name="uppr1" value="1" style="top:830px; left:65px;"/>
 <input type="checkbox" name="uppr3" value="1" style="top:830px; left:360px;"/>
 <input type="checkbox" name="uppr4" value="1" style="top:830px; left:633px;"/>
 <input type="checkbox" name="uvp61" value="1" style="top:883px; left:65px;"/>
-<input type="text" name="uvp61m" id="uvp61m" maxlength="2" style="width:37px; top:876px; left:390px;"/>
 <input type="checkbox" name="uvp64" value="1" style="top:918px; left:65px;"/>
-<input type="text" name="uvp64m" id="uvp64m" maxlength="2" style="width:37px; top:913px; left:390px;"/>
 <input type="text" name="psp6" id="psp6" onkeyup="CiarkaNaBodku(this);" style="width:175px; top:954px; left:556px;"/>
 <input type="checkbox" name="uos61" value="1" style="top:1010px; left:65px;"/>
 <input type="checkbox" name="uos64" value="1" style="top:1010px; left:441px;"/>
 <input type="checkbox" name="kos61" value="1" style="top:1058px; left:65px;"/>
 <input type="checkbox" name="kos64" value="1" style="top:1058px; left:441px;"/>
-
 <!-- Tabulka1a -->
 <input type="text" name="t1az1" id="t1az1" onkeyup="CiarkaNaBodku(this);" style="width:233px; top:1173px; left:410px;"/>
 <input type="text" name="t1ak1" id="t1ak1" onkeyup="CiarkaNaBodku(this);" style="width:233px; top:1173px; left:660px;"/>
@@ -3286,7 +3267,6 @@ $sn1c=substr($sknacec,0,1);
 <?php if ( $strana == 4 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str4.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
-
 <!-- VI.ODDIEL pokracovanie -->
 <!-- Tabulka1a pokracovanie -->
 <input type="text" name="t1az3" id="t1az3" onkeyup="CiarkaNaBodku(this);" style="width:233px; top:114px; left:410px;"/>
@@ -3331,7 +3311,7 @@ $sn1c=substr($sknacec,0,1);
 <!-- prehlad straty pokracovanie -->
 <input type="text" name="r49" id="r49" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:115px; left:507px;"/>
 <input type="text" name="r50" id="r50" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:155px; left:507px;"/>
-<input type="text" name="r51" id="r51" maxlength="4" style="width:80px; top:196px; left:381px;"/>
+<input type="text" name="r51" id="r51" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:196px; left:507px;"/>
 <input type="text" name="r52" id="r52" maxlength="4" style="width:80px; top:235px; left:381px;"/>
 <input type="text" name="r53" id="r53" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:277px; left:506px;"/>
 <input type="text" name="r54" id="r54" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:317px; left:506px;"/>
@@ -3346,7 +3326,6 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r63" id="r63" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:769px; left:506px;"/>
 <input type="text" name="r64" id="r64" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:814px; left:506px;"/>
 <input type="text" name="r65" id="r65" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:876px; left:506px;"/>
-
 <!-- VII.ODDIEL -->
 <!-- Tabulka2 -->
 <input type="text" name="t2p1" id="t2p1" onkeyup="CiarkaNaBodku(this);" style="width:233px; top:1215px; left:410px;"/>
@@ -3357,7 +3336,6 @@ $sn1c=substr($sknacec,0,1);
 <?php if ( $strana == 6 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str6.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
-
 <!-- VII.ODDIEL pokracovanie -->
 <!-- Tabulka2 -->
 <input type="text" name="t2p2" id="t2p2" onkeyup="CiarkaNaBodku(this);" style="width:233px; top:134px; left:410px;"/>
@@ -3384,8 +3362,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r66" id="r66" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:897px; left:482px;"/>
 <input type="text" name="r67" id="r67" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:935px; left:482px;"/>
 <input type="text" name="r68" id="r68" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:974px; left:482px;"/>
-
-<!-- VII.ODDIEL -->
+<!-- VIII.ODDIEL -->
 <!-- Tabulka3 -->
 <input type="text" name="t3p1" id="t3p1" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1130px; left:411px;"/>
 <input type="text" name="t3v1" id="t3v1" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1130px; left:661px;"/>
@@ -3399,8 +3376,7 @@ $sn1c=substr($sknacec,0,1);
 <?php if ( $strana == 7 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str7.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
-
-<!-- VII.ODDIEL pokracovanie -->
+<!-- VIII.ODDIEL pokracovanie -->
 <!-- Tabulka3 pokracovanie -->
 <input type="text" name="t3p4" id="t3p4" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:113px; left:411px;"/>
 <input type="text" name="t3v4" id="t3v4" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:113px; left:661px;"/>
@@ -3429,27 +3405,22 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="t3p16" id="t3p16" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:626px; left:411px;"/>
 <div class="input-echo right" style="width:230px; top:672px; left:413px;"><?php echo $t3p17; ?>&nbsp;</div>
 <div class="input-echo right" style="width:230px; top:672px; left:662px;"><?php echo $t3v17; ?>&nbsp;</div>
-
-<input type="text" name="r69" id="r69" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1106px; left:441px;"/>
-<input type="text" name="r70" id="r70" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1146px; left:441px;"/>
-<input type="text" name="r71" id="r71" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1186px; left:441px;"/>
+<input type="text" name="r69" id="r69" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1085px; left:441px;"/>
+<input type="text" name="r70" id="r70" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1125px; left:441px;"/>
+<input type="text" name="r71" id="r71" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1165px; left:441px;"/>
 <?php                     } ?>
 
 
 <?php if ( $strana == 8 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str8.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
-
-<!-- IX. ODDIEL -->
+<!-- IX.ODDIEL -->
 <input type="text" name="r72" id="r72" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:150px; left:488px;"/>
-<input type="text" name="r73" id="r73" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:194px; left:580px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetOP();"
-      title="VypoËÌtaù odpoËÌtateæn˙ poloûku na daÚovnÌka" class="btn-row-tool" style="top:195px; left:750px;">
-<input type="text" name="r74" id="r74" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:233px; left:580px;"/>
- <img src="../obr/ikony/calculator_blue_icon.png" onclick="namanzelku();"
-      title="VypoËÌtaù odpoËÌtateæn˙ poloûku na manûelku" class="btn-row-tool" style="top:233px; left:750px;">
+<input type="text" name="r73" id="r73" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:195px; left:580px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="vypocetOP();" title="VypoËÌtaù odpoËÌtateæn˙ poloûku na daÚovnÌka" class="btn-row-tool" style="top:196px; left:750px;">
+<input type="text" name="r74" id="r74" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:234px; left:580px;"/>
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="namanzelku();" title="VypoËÌtaù odpoËÌtateæn˙ poloûku na manûelku" class="btn-row-tool" style="top:235px; left:750px;">
 <input type="text" name="r75" id="r75" onkeyup="CiarkaNaBodku(this);" style="width:176px; top:272px; left:556px;"/>
-<input type="text" name="r76" id="r76" onkeyup="CiarkaNaBodku(this);" style="width:176px; top:311px; left:556px;"/>
 <input type="text" name="r77" id="r77" onkeyup="CiarkaNaBodku(this);" style="width:176px; top:350px; left:556px;"/>
 <input type="text" name="r78" id="r78" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:389px; left:488px;"/>
 <input type="text" name="r79" id="r79" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:428px; left:488px;"/>
@@ -3474,7 +3445,6 @@ $sn1c=substr($sknacec,0,1);
 <?php if ( $strana == 9 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str9.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
-
 <!-- IX.ODDIEL pokracovanie -->
 <input type="text" name="r95" id="r95" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:117px; left:500px;"/>
 <input type="text" name="r96" id="r96" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:168px; left:500px;"/>
@@ -3486,21 +3456,21 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r102" id="r102" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:460px; left:500px;"/>
 <input type="text" name="r103" id="r103" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:522px; left:500px;"/>
 <input type="text" name="r104" id="r104" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:580px; left:500px;"/>
-<input type="text" name="r105" id="r105" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:632px; left:500px;"/>
-<input type="text" name="r106" id="r106" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:676px; left:592px;"/>
-<input type="text" name="r107" id="r107" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:715px; left:500px;"/>
-<input type="text" name="r108" id="r108" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:755px; left:592px;"/>
-<input type="text" name="r109" id="r109" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:795px; left:592px;"/>
-<input type="text" name="r110" id="r110" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:835px; left:592px;"/>
-<input type="text" name="r111" id="r111" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:875px; left:592px;"/>
-<input type="text" name="r112" id="r112" onkeyup="CiarkaNaBodku(this);" style="width:130px; top:915px; left:614px;"/>
-<input type="text" name="r113" id="r113" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:955px; left:500px;"/>
-<input type="text" name="r114" id="r114" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:999px; left:500px;"/>
-<input type="text" name="r115" id="r115" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1045px; left:500px;"/>
-<input type="text" name="r116" id="r116" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1085px; left:500px;"/>
-<input type="text" name="r117" id="r117" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1125px; left:500px;"/>
-<input type="text" name="r118" id="r118" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1165px; left:500px;"/>
-<input type="text" name="r119" id="r119" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1205px; left:500px;"/>
+<input type="text" name="r105" id="r105" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:639px; left:500px;"/>
+<input type="text" name="r106" id="r106" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:692px; left:592px;"/>
+<input type="text" name="r107" id="r107" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:731px; left:500px;"/>
+<input type="text" name="r108" id="r108" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:770px; left:592px;"/>
+<input type="text" name="r109" id="r109" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:811px; left:592px;"/>
+<input type="text" name="r110" id="r110" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:851px; left:592px;"/>
+<input type="text" name="r111" id="r111" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:891px; left:592px;"/>
+<input type="text" name="r112" id="r112" onkeyup="CiarkaNaBodku(this);" style="width:130px; top:931px; left:614px;"/>
+<input type="text" name="r113" id="r113" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:971px; left:500px;"/>
+<input type="text" name="r114" id="r114" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1017px; left:500px;"/>
+<input type="text" name="r115" id="r115" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1062px; left:500px;"/>
+<input type="text" name="r116" id="r116" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1101px; left:500px;"/>
+<input type="text" name="r117" id="r117" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1141px; left:500px;"/>
+<input type="text" name="r118" id="r118" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1181px; left:500px;"/>
+<input type="text" name="r119" id="r119" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1221px; left:500px;"/>
 <?php                     } ?>
 
 
@@ -3597,6 +3567,16 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="pzpr6" id="pzpr6" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1113px; left:234px;"/>
 <input type="text" name="pzvd6" id="pzvd6" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1113px; left:483px;"/>
 <input type="text" name="pzthvd6" id="pzthvd6" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:1113px; left:731px;"/>
+<script>
+  function KlikNeuplAno()
+  {
+   document.formv1.spl3d.checked = false;
+  }
+  function KlikNeuplNie()
+  {
+   document.formv1.upl50.checked = false;
+  }
+</script>
 <?php                      } ?>
 
 
@@ -3616,6 +3596,17 @@ $sn1c=substr($sknacec,0,1);
 <input type="checkbox" name="ucet" value="1" onchange="klikucet();" style="top:1085px; left:323px;"/>
 <input type="text" name="diban" id="diban" style="width:773px; top:1119px; left:116px;"/>
 <input type="text" name="da2" id="da2" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:196px; top:1206px; left:116px;"/>
+
+<script>
+  function klikpost()
+  {
+   document.formv1.ucet.checked = false;
+  }
+  function klikucet()
+  {
+   document.formv1.post.checked = false;
+  }
+</script>
 <?php                      } ?>
 
 <?php if ( $strana == 13 ) { ?>
@@ -3782,7 +3773,7 @@ if ( $dat_dat == '0000-00-00' ) $dat_dat="";
 if ( $strana == 1 OR $strana == 9999 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(10);
+$pdf->SetLeftMargin(10); //dopyt, menil som okraj, takûe vöetky strany skontrolovaù rozmery tlaËe
 $pdf->SetTopMargin(10);
 if ( File_Exists($jpg_source.'_str1.jpg') )
 {
@@ -11316,43 +11307,43 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
   function ObnovUI()
   {
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-   document.formv1.dar.value = '<?php echo "$darsk";?>';
+   document.formv1.dar.value = '<?php echo $darsk; ?>';
 <?php if ( $druh == 0 ) { ?> document.formv1.druh1.checked = 'true'; <?php } ?>
 <?php if ( $druh == 1 ) { ?> document.formv1.druh1.checked = 'true'; <?php } ?>
 <?php if ( $druh == 2 ) { ?> document.formv1.druh2.checked = 'true'; <?php } ?>
 <?php if ( $druh == 3 ) { ?> document.formv1.druh3.checked = 'true'; <?php } ?>
-   document.formv1.ddp.value = '<?php echo "$ddpsk";?>';
-   document.formv1.cinnost.value = '<?php echo "$cinnost";?>';
+   document.formv1.ddp.value = '<?php echo $ddpsk; ?>';
+   document.formv1.cinnost.value = '<?php echo $cinnost; ?>';
 <?php if ( $nrz == 1 ) { ?> document.formv1.nrz.checked = "checked"; <?php } ?>
 <?php if ( $prp == 1 ) { ?> document.formv1.prp.checked = "checked"; <?php } ?>
-   document.formv1.d2uli.value = '<?php echo "$d2uli";?>';
-   document.formv1.d2cdm.value = '<?php echo "$d2cdm";?>';
-   document.formv1.d2psc.value = '<?php echo "$d2psc";?>';
-   document.formv1.d2mes.value = '<?php echo "$d2mes";?>';
-   document.formv1.zprie.value = '<?php echo "$zprie";?>';
-   document.formv1.zmeno.value = '<?php echo "$zmeno";?>';
-   document.formv1.ztitl.value = '<?php echo "$ztitl";?>';
-   document.formv1.ztitz.value = '<?php echo "$ztitz";?>';
-   document.formv1.zrdc.value = '<?php echo "$zrdc";?>';
-   document.formv1.zrdk.value = '<?php echo "$zrdk";?>';
-   document.formv1.zuli.value = '<?php echo "$zuli";?>';
-   document.formv1.zcdm.value = '<?php echo "$zcdm";?>';
-   document.formv1.zpsc.value = '<?php echo "$zpsc";?>';
-   document.formv1.zmes.value = '<?php echo "$zmes";?>';
-   document.formv1.zstat.value = '<?php echo "$zstat";?>';
-   document.formv1.dtel.value = '<?php echo "$dtel";?>';
-   document.formv1.dmailfax.value = '<?php echo "$dmailfax";?>';
+   document.formv1.d2uli.value = '<?php echo $d2uli; ?>';
+   document.formv1.d2cdm.value = '<?php echo $d2cdm; ?>';
+   document.formv1.d2psc.value = '<?php echo $d2psc; ?>';
+   document.formv1.d2mes.value = '<?php echo $d2mes; ?>';
+   document.formv1.zprie.value = '<?php echo $zprie; ?>';
+   document.formv1.zmeno.value = '<?php echo $zmeno; ?>';
+   document.formv1.ztitl.value = '<?php echo $ztitl; ?>';
+   document.formv1.ztitz.value = '<?php echo $ztitz; ?>';
+   document.formv1.zrdc.value = '<?php echo $zrdc; ?>';
+   document.formv1.zrdk.value = '<?php echo $zrdk; ?>';
+   document.formv1.zuli.value = '<?php echo $zuli; ?>';
+   document.formv1.zcdm.value = '<?php echo $zcdm; ?>';
+   document.formv1.zpsc.value = '<?php echo $zpsc; ?>';
+   document.formv1.zmes.value = '<?php echo $zmes; ?>';
+   document.formv1.zstat.value = '<?php echo $zstat; ?>';
+   document.formv1.dtel.value = '<?php echo $dtel; ?>';
+   document.formv1.dmailfax.value = '<?php echo $dmailfax; ?>';
 <?php                                        } ?>
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-   document.formv1.r30.value = '<?php echo "$r30";?>';
+   document.formv1.r30.value = '<?php echo $r30; ?>';
 <?php if ( $r29 == 1 ) { ?> document.formv1.r29.checked = "checked"; <?php } ?>
-   document.formv1.mprie.value = '<?php echo "$mprie";?>';
-   document.formv1.mrod.value = '<?php echo "$mrod";?>';
-   document.formv1.mpri.value = '<?php echo "$mpri";?>';
-   document.formv1.mpom.value = '<?php echo "$mpom";?>';
-   document.formv1.d1prie.value = '<?php echo "$d1prie";?>';
-   document.formv1.d1rod.value = '<?php echo "$d1rod";?>';
+   document.formv1.mprie.value = '<?php echo $mprie; ?>';
+   document.formv1.mrod.value = '<?php echo $mrod; ?>';
+   document.formv1.mpri.value = '<?php echo $mpri; ?>';
+   document.formv1.mpom.value = '<?php echo $mpom; ?>';
+   document.formv1.d1prie.value = '<?php echo $d1prie; ?>';
+   document.formv1.d1rod.value = '<?php echo $d1rod; ?>';
 <?php if ( $d1pomc == 1 ) { ?> document.formv1.d1pomc.checked = "checked"; <?php } ?>
 <?php if ( $d1pom1 == 1 ) { ?> document.formv1.d1pom1.checked = "checked"; <?php } ?>
 <?php if ( $d1pom2 == 1 ) { ?> document.formv1.d1pom2.checked = "checked"; <?php } ?>
@@ -11366,8 +11357,8 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
 <?php if ( $d1pom10 == 1 ) { ?> document.formv1.d1pom10.checked = "checked"; <?php } ?>
 <?php if ( $d1pom11 == 1 ) { ?> document.formv1.d1pom11.checked = "checked"; <?php } ?>
 <?php if ( $d1pom12 == 1 ) { ?> document.formv1.d1pom12.checked = "checked"; <?php } ?>
-   document.formv1.d2prie.value = '<?php echo "$d2prie";?>';
-   document.formv1.d2rod.value = '<?php echo "$d2rod";?>';
+   document.formv1.d2prie.value = '<?php echo $d2prie; ?>';
+   document.formv1.d2rod.value = '<?php echo $d2rod; ?>';
 <?php if ( $d2pomc == 1 ) { ?> document.formv1.d2pomc.checked = "checked"; <?php } ?>
 <?php if ( $d2pom1 == 1 ) { ?> document.formv1.d2pom1.checked = "checked"; <?php } ?>
 <?php if ( $d2pom2 == 1 ) { ?> document.formv1.d2pom2.checked = "checked"; <?php } ?>
@@ -11381,8 +11372,8 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
 <?php if ( $d2pom10 == 1 ) { ?> document.formv1.d2pom10.checked = "checked"; <?php } ?>
 <?php if ( $d2pom11 == 1 ) { ?> document.formv1.d2pom11.checked = "checked"; <?php } ?>
 <?php if ( $d2pom12 == 1 ) { ?> document.formv1.d2pom12.checked = "checked"; <?php } ?>
-   document.formv1.d3prie.value = '<?php echo "$d3prie";?>';
-   document.formv1.d3rod.value = '<?php echo "$d3rod";?>';
+   document.formv1.d3prie.value = '<?php echo $d3prie; ?>';
+   document.formv1.d3rod.value = '<?php echo $d3rod; ?>';
 <?php if ( $d3pomc == 1 ) { ?> document.formv1.d3pomc.checked = "checked"; <?php } ?>
 <?php if ( $d3pom1 == 1 ) { ?> document.formv1.d3pom1.checked = "checked"; <?php } ?>
 <?php if ( $d3pom2 == 1 ) { ?> document.formv1.d3pom2.checked = "checked"; <?php } ?>
@@ -11396,8 +11387,8 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
 <?php if ( $d3pom10 == 1 ) { ?> document.formv1.d3pom10.checked = "checked"; <?php } ?>
 <?php if ( $d3pom11 == 1 ) { ?> document.formv1.d3pom11.checked = "checked"; <?php } ?>
 <?php if ( $d3pom12 == 1 ) { ?> document.formv1.d3pom12.checked = "checked"; <?php } ?>
-   document.formv1.d4prie.value = '<?php echo "$d4prie";?>';
-   document.formv1.d4rod.value = '<?php echo "$d4rod";?>';
+   document.formv1.d4prie.value = '<?php echo $d4prie; ?>';
+   document.formv1.d4rod.value = '<?php echo $d4rod; ?>';
 <?php if ( $d4pomc == 1 ) { ?> document.formv1.d4pomc.checked = "checked"; <?php } ?>
 <?php if ( $d4pom1 == 1 ) { ?> document.formv1.d4pom1.checked = "checked"; <?php } ?>
 <?php if ( $d4pom2 == 1 ) { ?> document.formv1.d4pom2.checked = "checked"; <?php } ?>
@@ -11412,35 +11403,35 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
 <?php if ( $d4pom11 == 1 ) { ?> document.formv1.d4pom11.checked = "checked"; <?php } ?>
 <?php if ( $d4pom12 == 1 ) { ?> document.formv1.d4pom12.checked = "checked"; <?php } ?>
 <?php if ( $r33 == 1 ) { ?> document.formv1.r33.checked = "checked"; <?php } ?>
-   document.formv1.r34.value = '<?php echo "$r34";?>';
-   document.formv1.r34a.value = '<?php echo "$r34a";?>';
-   document.formv1.r35.value = '<?php echo "$r35";?>';
-   document.formv1.r36.value = '<?php echo "$r36";?>';
+   document.formv1.r34.value = '<?php echo $r34; ?>';
+   document.formv1.r34a.value = '<?php echo $r34a; ?>';
+   document.formv1.r35.value = '<?php echo $r35; ?>';
+   document.formv1.r36.value = '<?php echo $r36; ?>';
 <?php                                        } ?>
 
 <?php if ( $strana == 3 OR $strana == 9999 ) { ?>
-   document.formv1.t1p1.value = '<?php echo "$t1p1";?>';
-   document.formv1.t1p2.value = '<?php echo "$t1p2";?>';
-   document.formv1.t1p3.value = '<?php echo "$t1p3";?>';
-   document.formv1.t1p4.value = '<?php echo "$t1p4";?>';
-   document.formv1.t1p5.value = '<?php echo "$t1p5";?>';
-   document.formv1.t1p6.value = '<?php echo "$t1p6";?>';
-   document.formv1.t1p7.value = '<?php echo "$t1p7";?>';
-   document.formv1.t1p8.value = '<?php echo "$t1p8";?>';
-   document.formv1.t1p9.value = '<?php echo "$t1p9";?>';
-   document.formv1.t1p11.value = '<?php echo "$t1p11";?>';
-   document.formv1.t1p12.value = '<?php echo "$t1p12";?>';
-   document.formv1.t1v1.value = '<?php echo "$t1v1";?>';
-   document.formv1.t1v2.value = '<?php echo "$t1v2";?>';
-   document.formv1.t1v3.value = '<?php echo "$t1v3";?>';
-   document.formv1.t1v4.value = '<?php echo "$t1v4";?>';
-   document.formv1.t1v5.value = '<?php echo "$t1v5";?>';
-   document.formv1.t1v6.value = '<?php echo "$t1v6";?>';
-   document.formv1.t1v7.value = '<?php echo "$t1v7";?>';
-   document.formv1.t1v8.value = '<?php echo "$t1v8";?>';
-   document.formv1.t1v9.value = '<?php echo "$t1v9";?>';
-   document.formv1.t1v11.value = '<?php echo "$t1v11";?>';
-   document.formv1.t1v12.value = '<?php echo "$t1v12";?>';
+   document.formv1.t1p1.value = '<?php echo $t1p1; ?>';
+   document.formv1.t1p2.value = '<?php echo $t1p2; ?>';
+   document.formv1.t1p3.value = '<?php echo $t1p3; ?>';
+   document.formv1.t1p4.value = '<?php echo $t1p4; ?>';
+   document.formv1.t1p5.value = '<?php echo $t1p5; ?>';
+   document.formv1.t1p6.value = '<?php echo $t1p6; ?>';
+   document.formv1.t1p7.value = '<?php echo $t1p7; ?>';
+   document.formv1.t1p8.value = '<?php echo $t1p8; ?>';
+   document.formv1.t1p9.value = '<?php echo $t1p9; ?>';
+   document.formv1.t1p11.value = '<?php echo $t1p11; ?>';
+   document.formv1.t1p12.value = '<?php echo $t1p12; ?>';
+   document.formv1.t1v1.value = '<?php echo $t1v1; ?>';
+   document.formv1.t1v2.value = '<?php echo $t1v2; ?>';
+   document.formv1.t1v3.value = '<?php echo $t1v3; ?>';
+   document.formv1.t1v4.value = '<?php echo $t1v4; ?>';
+   document.formv1.t1v5.value = '<?php echo $t1v5; ?>';
+   document.formv1.t1v6.value = '<?php echo $t1v6; ?>';
+   document.formv1.t1v7.value = '<?php echo $t1v7; ?>';
+   document.formv1.t1v8.value = '<?php echo $t1v8; ?>';
+   document.formv1.t1v9.value = '<?php echo $t1v9; ?>';
+   document.formv1.t1v11.value = '<?php echo $t1v11; ?>';
+   document.formv1.t1v12.value = '<?php echo $t1v12; ?>';
 <?php if ( $uppr1 == 1 ) { ?> document.formv1.uppr1.checked = "checked"; <?php } ?>
 <?php if ( $uppr3 == 1 ) { ?> document.formv1.uppr3.checked = "checked"; <?php } ?>
 <?php if ( $uppr4 == 1 ) { ?> document.formv1.uppr4.checked = "checked"; <?php } ?>
@@ -11451,327 +11442,323 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
 <?php if ( $kos61 == 1 ) { ?> document.formv1.kos61.checked = "checked"; <?php } ?>
 <?php if ( $kos64 == 1 ) { ?> document.formv1.kos64.checked = "checked"; <?php } ?>
 
-   document.formv1.uvp61m.value = '<?php echo "$uvp61m";?>';
-   document.formv1.uvp64m.value = '<?php echo "$uvp64m";?>';
+   document.formv1.psp6.value = '<?php echo $psp6; ?>';
+   document.formv1.t1az1.value = '<?php echo $t1az1; ?>';
+   document.formv1.t1az2.value = '<?php echo $t1az2; ?>';
 
-   document.formv1.psp6.value = '<?php echo "$psp6";?>';
-   document.formv1.t1az1.value = '<?php echo "$t1az1";?>';
-   document.formv1.t1az2.value = '<?php echo "$t1az2";?>';
-
-   document.formv1.t1ak1.value = '<?php echo "$t1ak1";?>';
-   document.formv1.t1ak2.value = '<?php echo "$t1ak2";?>';
+   document.formv1.t1ak1.value = '<?php echo $t1ak1; ?>';
+   document.formv1.t1ak2.value = '<?php echo $t1ak2; ?>';
 <?php                                        } ?>
 
 <?php if ( $strana == 4 OR $strana == 9999 ) { ?>
-   document.formv1.t1az3.value = '<?php echo "$t1az3";?>';
-   document.formv1.t1az4.value = '<?php echo "$t1az4";?>';
-   document.formv1.t1az5.value = '<?php echo "$t1az5";?>';
-   document.formv1.t1ak3.value = '<?php echo "$t1ak3";?>';
-   document.formv1.t1ak4.value = '<?php echo "$t1ak4";?>';
-   document.formv1.t1ak5.value = '<?php echo "$t1ak5";?>';
-   document.formv1.t1bz1.value = '<?php echo "$t1bz1";?>';
-   document.formv1.t1bz2.value = '<?php echo "$t1bz2";?>';
-   document.formv1.t1bk1.value = '<?php echo "$t1bk1";?>';
-   document.formv1.t1bk2.value = '<?php echo "$t1bk2";?>';
+   document.formv1.t1az3.value = '<?php echo $t1az3; ?>';
+   document.formv1.t1az4.value = '<?php echo $t1az4; ?>';
+   document.formv1.t1az5.value = '<?php echo $t1az5; ?>';
+   document.formv1.t1ak3.value = '<?php echo $t1ak3; ?>';
+   document.formv1.t1ak4.value = '<?php echo $t1ak4; ?>';
+   document.formv1.t1ak5.value = '<?php echo $t1ak5; ?>';
+   document.formv1.t1bz1.value = '<?php echo $t1bz1; ?>';
+   document.formv1.t1bz2.value = '<?php echo $t1bz2; ?>';
+   document.formv1.t1bk1.value = '<?php echo $t1bk1; ?>';
+   document.formv1.t1bk2.value = '<?php echo $t1bk2; ?>';
 
 
-   document.formv1.r37.value = '<?php echo "$r37";?>';
-   document.formv1.r38.value = '<?php echo "$r38";?>';
-   document.formv1.r39.value = '<?php echo "$r39";?>';
-   document.formv1.r40.value = '<?php echo "$r40";?>';
-   document.formv1.r39pu.value = '<?php echo "$r39pu";?>';
-   document.formv1.r40pu.value = '<?php echo "$r40pu";?>';
-   document.formv1.r41.value = '<?php echo "$r41";?>';
-   document.formv1.r42.value = '<?php echo "$r42";?>';
-   document.formv1.r43.value = '<?php echo "$r43";?>';
-   document.formv1.r44.value = '<?php echo "$r44";?>';
-   document.formv1.r45.value = '<?php echo "$r45";?>';
-   document.formv1.r46.value = '<?php echo "$r46";?>';
-   document.formv1.r47.value = '<?php echo "$r47";?>';
-   document.formv1.r48.value = '<?php echo "$r48";?>';
+   document.formv1.r37.value = '<?php echo $r37; ?>';
+   document.formv1.r38.value = '<?php echo $r38; ?>';
+   document.formv1.r39.value = '<?php echo $r39; ?>';
+   document.formv1.r40.value = '<?php echo $r40; ?>';
+   document.formv1.r39pu.value = '<?php echo $r39pu; ?>';
+   document.formv1.r40pu.value = '<?php echo $r40pu; ?>';
+   document.formv1.r41.value = '<?php echo $r41; ?>';
+   document.formv1.r42.value = '<?php echo $r42; ?>';
+   document.formv1.r43.value = '<?php echo $r43; ?>';
+   document.formv1.r44.value = '<?php echo $r44; ?>';
+   document.formv1.r45.value = '<?php echo $r45; ?>';
+   document.formv1.r46.value = '<?php echo $r46; ?>';
+   document.formv1.r47.value = '<?php echo $r47; ?>';
+   document.formv1.r48.value = '<?php echo $r48; ?>';
 
 <?php                                        } ?>
 
 <?php if ( $strana == 5 OR $strana == 9999 ) { ?>
-   document.formv1.r49.value = '<?php echo "$r49";?>';
-   document.formv1.r50.value = '<?php echo "$r50";?>';
-   document.formv1.r51.value = '<?php echo "$r51";?>';
-   document.formv1.r52.value = '<?php echo "$r52";?>';
-   document.formv1.r53.value = '<?php echo "$r53";?>';
-   document.formv1.r54.value = '<?php echo "$r54";?>';
-   document.formv1.r55.value = '<?php echo "$r55";?>';
-   document.formv1.r56.value = '<?php echo "$r56";?>';
-   document.formv1.r57.value = '<?php echo "$r57";?>';
-   document.formv1.r58.value = '<?php echo "$r58";?>';
-   document.formv1.r59.value = '<?php echo "$r59";?>';
-   document.formv1.r60.value = '<?php echo "$r60";?>';
-   document.formv1.r61.value = '<?php echo "$r61";?>';
-   document.formv1.r62.value = '<?php echo "$r62";?>';
-   document.formv1.r63.value = '<?php echo "$r63";?>';
-   document.formv1.r64.value = '<?php echo "$r64";?>';
-   document.formv1.r65.value = '<?php echo "$r65";?>';
+   document.formv1.r49.value = '<?php echo $r49; ?>';
+   document.formv1.r50.value = '<?php echo $r50; ?>';
+   document.formv1.r51.value = '<?php echo $r51; ?>';
+   document.formv1.r52.value = '<?php echo $r52; ?>';
+   document.formv1.r53.value = '<?php echo $r53; ?>';
+   document.formv1.r54.value = '<?php echo $r54; ?>';
+   document.formv1.r55.value = '<?php echo $r55; ?>';
+   document.formv1.r56.value = '<?php echo $r56; ?>';
+   document.formv1.r57.value = '<?php echo $r57; ?>';
+   document.formv1.r58.value = '<?php echo $r58; ?>';
+   document.formv1.r59.value = '<?php echo $r59; ?>';
+   document.formv1.r60.value = '<?php echo $r60; ?>';
+   document.formv1.r61.value = '<?php echo $r61; ?>';
+   document.formv1.r62.value = '<?php echo $r62; ?>';
+   document.formv1.r63.value = '<?php echo $r63; ?>';
+   document.formv1.r64.value = '<?php echo $r64; ?>';
+   document.formv1.r65.value = '<?php echo $r65; ?>';
 
-   document.formv1.t2p1.value = '<?php echo "$t2p1";?>';
+   document.formv1.t2p1.value = '<?php echo $t2p1; ?>';
 
-   document.formv1.t2v1.value = '<?php echo "$t2v1";?>';
+   document.formv1.t2v1.value = '<?php echo $t2v1; ?>';
 
 <?php                                        } ?>
 
 <?php if ( $strana == 6 OR $strana == 9999 ) { ?>
-   document.formv1.t2p2.value = '<?php echo "$t2p2";?>';
-   document.formv1.t2p3.value = '<?php echo "$t2p3";?>';
-   document.formv1.t2p4.value = '<?php echo "$t2p4";?>';
-   document.formv1.t2p5.value = '<?php echo "$t2p5";?>';
-   document.formv1.t2p6.value = '<?php echo "$t2p6";?>';
-   document.formv1.t2p7.value = '<?php echo "$t2p7";?>';
-   document.formv1.t2p8.value = '<?php echo "$t2p8";?>';
-   document.formv1.t2p9.value = '<?php echo "$t2p9";?>';
-   document.formv1.t2p10.value = '<?php echo "$t2p10";?>';
-   document.formv1.t2p12.value = '<?php echo "$t2p12";?>';
-   document.formv1.t2v2.value = '<?php echo "$t2v2";?>';
-   document.formv1.t2v3.value = '<?php echo "$t2v3";?>';
-   document.formv1.t2v4.value = '<?php echo "$t2v4";?>';
-   document.formv1.t2v5.value = '<?php echo "$t2v5";?>';
-   document.formv1.t2v6.value = '<?php echo "$t2v6";?>';
-   document.formv1.t2v7.value = '<?php echo "$t2v7";?>';
-   document.formv1.t2v8.value = '<?php echo "$t2v8";?>';
-   document.formv1.t2v9.value = '<?php echo "$t2v9";?>';
-   document.formv1.t2v10.value = '<?php echo "$t2v10";?>';
-   document.formv1.r66.value = '<?php echo "$r66";?>';
-   document.formv1.r67.value = '<?php echo "$r67";?>';
-   document.formv1.r68.value = '<?php echo "$r68";?>';
-   document.formv1.t3p1.value = '<?php echo "$t3p1";?>';
-   document.formv1.t3p2.value = '<?php echo "$t3p2";?>';
-   document.formv1.t3p3.value = '<?php echo "$t3p3";?>';
-   document.formv1.t3v1.value = '<?php echo "$t3v1";?>';
-   document.formv1.t3v2.value = '<?php echo "$t3v2";?>';
-   document.formv1.t3v3.value = '<?php echo "$t3v3";?>';
+   document.formv1.t2p2.value = '<?php echo $t2p2; ?>';
+   document.formv1.t2p3.value = '<?php echo $t2p3; ?>';
+   document.formv1.t2p4.value = '<?php echo $t2p4; ?>';
+   document.formv1.t2p5.value = '<?php echo $t2p5; ?>';
+   document.formv1.t2p6.value = '<?php echo $t2p6; ?>';
+   document.formv1.t2p7.value = '<?php echo $t2p7; ?>';
+   document.formv1.t2p8.value = '<?php echo $t2p8; ?>';
+   document.formv1.t2p9.value = '<?php echo $t2p9; ?>';
+   document.formv1.t2p10.value = '<?php echo $t2p10; ?>';
+   document.formv1.t2p12.value = '<?php echo $t2p12; ?>';
+   document.formv1.t2v2.value = '<?php echo $t2v2; ?>';
+   document.formv1.t2v3.value = '<?php echo $t2v3; ?>';
+   document.formv1.t2v4.value = '<?php echo $t2v4; ?>';
+   document.formv1.t2v5.value = '<?php echo $t2v5; ?>';
+   document.formv1.t2v6.value = '<?php echo $t2v6; ?>';
+   document.formv1.t2v7.value = '<?php echo $t2v7; ?>';
+   document.formv1.t2v8.value = '<?php echo $t2v8; ?>';
+   document.formv1.t2v9.value = '<?php echo $t2v9; ?>';
+   document.formv1.t2v10.value = '<?php echo $t2v10; ?>';
+   document.formv1.r66.value = '<?php echo $r66; ?>';
+   document.formv1.r67.value = '<?php echo $r67; ?>';
+   document.formv1.r68.value = '<?php echo $r68; ?>';
+   document.formv1.t3p1.value = '<?php echo $t3p1; ?>';
+   document.formv1.t3p2.value = '<?php echo $t3p2; ?>';
+   document.formv1.t3p3.value = '<?php echo $t3p3; ?>';
+   document.formv1.t3v1.value = '<?php echo $t3v1; ?>';
+   document.formv1.t3v2.value = '<?php echo $t3v2; ?>';
+   document.formv1.t3v3.value = '<?php echo $t3v3; ?>';
 <?php                                        } ?>
 
 <?php if ( $strana == 7 OR $strana == 9999 ) { ?>
 
-   document.formv1.t3p4.value = '<?php echo "$t3p4";?>';
-   document.formv1.t3p5.value = '<?php echo "$t3p5";?>';
-   document.formv1.t3p6.value = '<?php echo "$t3p6";?>';
-   document.formv1.t3p7.value = '<?php echo "$t3p7";?>';
-   document.formv1.t3p8.value = '<?php echo "$t3p8";?>';
-   document.formv1.t3p9.value = '<?php echo "$t3p9";?>';
-   document.formv1.t3p10.value = '<?php echo "$t3p10";?>';
-   document.formv1.t3p11.value = '<?php echo "$t3p11";?>';
-   document.formv1.t3p12.value = '<?php echo "$t3p12";?>';
-   document.formv1.t3p13.value = '<?php echo "$t3p13";?>';
-   document.formv1.t3p14.value = '<?php echo "$t3p14";?>';
-   document.formv1.t3p15.value = '<?php echo "$t3p15";?>';
-   document.formv1.t3p16.value = '<?php echo "$t3p16";?>';
+   document.formv1.t3p4.value = '<?php echo $t3p4; ?>';
+   document.formv1.t3p5.value = '<?php echo $t3p5; ?>';
+   document.formv1.t3p6.value = '<?php echo $t3p6; ?>';
+   document.formv1.t3p7.value = '<?php echo $t3p7; ?>';
+   document.formv1.t3p8.value = '<?php echo $t3p8; ?>';
+   document.formv1.t3p9.value = '<?php echo $t3p9; ?>';
+   document.formv1.t3p10.value = '<?php echo $t3p10; ?>';
+   document.formv1.t3p11.value = '<?php echo $t3p11; ?>';
+   document.formv1.t3p12.value = '<?php echo $t3p12; ?>';
+   document.formv1.t3p13.value = '<?php echo $t3p13; ?>';
+   document.formv1.t3p14.value = '<?php echo $t3p14; ?>';
+   document.formv1.t3p15.value = '<?php echo $t3p15; ?>';
+   document.formv1.t3p16.value = '<?php echo $t3p16; ?>';
 
-   document.formv1.t3v4.value = '<?php echo "$t3v4";?>';
-   document.formv1.t3v5.value = '<?php echo "$t3v5";?>';
-   document.formv1.t3v6.value = '<?php echo "$t3v6";?>';
-   document.formv1.t3v7.value = '<?php echo "$t3v7";?>';
-   document.formv1.t3v8.value = '<?php echo "$t3v8";?>';
-   document.formv1.t3v9.value = '<?php echo "$t3v9";?>';
-   document.formv1.t3v10.value = '<?php echo "$t3v10";?>';
-   document.formv1.t3v11.value = '<?php echo "$t3v11";?>';
-   document.formv1.t3v12.value = '<?php echo "$t3v12";?>';
-   document.formv1.t3v13.value = '<?php echo "$t3v13";?>';
-   document.formv1.t3v14.value = '<?php echo "$t3v14";?>';
-   document.formv1.t3v15.value = '<?php echo "$t3v15";?>';
-   document.formv1.r69.value = '<?php echo "$r69";?>';
-   document.formv1.r70.value = '<?php echo "$r70";?>';
-   document.formv1.r71.value = '<?php echo "$r71";?>';
+   document.formv1.t3v4.value = '<?php echo $t3v4; ?>';
+   document.formv1.t3v5.value = '<?php echo $t3v5; ?>';
+   document.formv1.t3v6.value = '<?php echo $t3v6; ?>';
+   document.formv1.t3v7.value = '<?php echo $t3v7; ?>';
+   document.formv1.t3v8.value = '<?php echo $t3v8; ?>';
+   document.formv1.t3v9.value = '<?php echo $t3v9; ?>';
+   document.formv1.t3v10.value = '<?php echo $t3v10; ?>';
+   document.formv1.t3v11.value = '<?php echo $t3v11; ?>';
+   document.formv1.t3v12.value = '<?php echo $t3v12; ?>';
+   document.formv1.t3v13.value = '<?php echo $t3v13; ?>';
+   document.formv1.t3v14.value = '<?php echo $t3v14; ?>';
+   document.formv1.t3v15.value = '<?php echo $t3v15; ?>';
+   document.formv1.r69.value = '<?php echo $r69; ?>';
+   document.formv1.r70.value = '<?php echo $r70; ?>';
+   document.formv1.r71.value = '<?php echo $r71; ?>';
 <?php                                        } ?>
 
 <?php if ( $strana == 8 OR $strana == 9999 ) { ?>
-   document.formv1.r72.value = '<?php echo "$r72";?>';
-   document.formv1.r73.value = '<?php echo "$r73";?>';
-   document.formv1.r74.value = '<?php echo "$r74";?>';
-   document.formv1.r75.value = '<?php echo "$r75";?>';
-   document.formv1.r76.value = '<?php echo "$r76";?>';
-   document.formv1.r77.value = '<?php echo "$r77";?>';
-   document.formv1.r78.value = '<?php echo "$r78";?>';
-   document.formv1.r79.value = '<?php echo "$r79";?>';
-   document.formv1.r80.value = '<?php echo "$r80";?>';
-   document.formv1.r81.value = '<?php echo "$r81";?>';
-   document.formv1.r82.value = '<?php echo "$r82";?>';
-   document.formv1.r83.value = '<?php echo "$r83";?>';
-   document.formv1.r84.value = '<?php echo "$r84";?>';
-   document.formv1.r85.value = '<?php echo "$r85";?>';
-   document.formv1.r86.value = '<?php echo "$r86";?>';
-   document.formv1.r87.value = '<?php echo "$r87";?>';
-   document.formv1.r88.value = '<?php echo "$r88";?>';
-   document.formv1.r89.value = '<?php echo "$r89";?>';
-   document.formv1.r90.value = '<?php echo "$r90";?>';
-   document.formv1.r91.value = '<?php echo "$r91";?>';
-   document.formv1.r92.value = '<?php echo "$r92";?>';
-   document.formv1.r93.value = '<?php echo "$r93";?>';
-   document.formv1.r94.value = '<?php echo "$r94";?>';
+   document.formv1.r72.value = '<?php echo $r72; ?>';
+   document.formv1.r73.value = '<?php echo $r73; ?>';
+   document.formv1.r74.value = '<?php echo $r74; ?>';
+   document.formv1.r75.value = '<?php echo $r75; ?>';
+   document.formv1.r77.value = '<?php echo $r77; ?>';
+   document.formv1.r78.value = '<?php echo $r78; ?>';
+   document.formv1.r79.value = '<?php echo $r79; ?>';
+   document.formv1.r80.value = '<?php echo $r80; ?>';
+   document.formv1.r81.value = '<?php echo $r81; ?>';
+   document.formv1.r82.value = '<?php echo $r82; ?>';
+   document.formv1.r83.value = '<?php echo $r83; ?>';
+   document.formv1.r84.value = '<?php echo $r84; ?>';
+   document.formv1.r85.value = '<?php echo $r85; ?>';
+   document.formv1.r86.value = '<?php echo $r86; ?>';
+   document.formv1.r87.value = '<?php echo $r87; ?>';
+   document.formv1.r88.value = '<?php echo $r88; ?>';
+   document.formv1.r89.value = '<?php echo $r89; ?>';
+   document.formv1.r90.value = '<?php echo $r90; ?>';
+   document.formv1.r91.value = '<?php echo $r91; ?>';
+   document.formv1.r92.value = '<?php echo $r92; ?>';
+   document.formv1.r93.value = '<?php echo $r93; ?>';
+   document.formv1.r94.value = '<?php echo $r94; ?>';
 <?php                                        } ?>
 
 <?php if ( $strana == 9 OR $strana == 9999 ) { ?>
-   document.formv1.r95.value = '<?php echo "$r95";?>';
-   document.formv1.r96.value = '<?php echo "$r96";?>';
-   document.formv1.r97.value = '<?php echo "$r97";?>';
-   document.formv1.r98.value = '<?php echo "$r98";?>';
-   document.formv1.r99.value = '<?php echo "$r99";?>';
-   document.formv1.r100.value = '<?php echo "$r100";?>';
-   document.formv1.r101.value = '<?php echo "$r101";?>';
-   document.formv1.r102.value = '<?php echo "$r102";?>';
-   document.formv1.r103.value = '<?php echo "$r103";?>';
-   document.formv1.r104.value = '<?php echo "$r104";?>';
-   document.formv1.r105.value = '<?php echo "$r105";?>';
-   document.formv1.r106.value = '<?php echo "$r106";?>';
-   document.formv1.r107.value = '<?php echo "$r107";?>';
-   document.formv1.r108.value = '<?php echo "$r108";?>';
-   document.formv1.r109.value = '<?php echo "$r109";?>';
-   document.formv1.r110.value = '<?php echo "$r110";?>';
-   document.formv1.r111.value = '<?php echo "$r111";?>';
-   document.formv1.r112.value = '<?php echo "$r112";?>';
-   document.formv1.r113.value = '<?php echo "$r113";?>';
-   document.formv1.r114.value = '<?php echo "$r114";?>';
-   document.formv1.r115.value = '<?php echo "$r115";?>';
-   document.formv1.r116.value = '<?php echo "$r116";?>';
-   document.formv1.r117.value = '<?php echo "$r117";?>';
-   document.formv1.r118.value = '<?php echo "$r118";?>';
-   document.formv1.r119.value = '<?php echo "$r119";?>';
+   document.formv1.r95.value = '<?php echo $r95; ?>';
+   document.formv1.r96.value = '<?php echo $r96; ?>';
+   document.formv1.r97.value = '<?php echo $r97; ?>';
+   document.formv1.r98.value = '<?php echo $r98; ?>';
+   document.formv1.r99.value = '<?php echo $r99; ?>';
+   document.formv1.r100.value = '<?php echo $r100; ?>';
+   document.formv1.r101.value = '<?php echo $r101; ?>';
+   document.formv1.r102.value = '<?php echo $r102; ?>';
+   document.formv1.r103.value = '<?php echo $r103; ?>';
+   document.formv1.r104.value = '<?php echo $r104; ?>';
+   document.formv1.r105.value = '<?php echo $r105; ?>';
+   document.formv1.r106.value = '<?php echo $r106; ?>';
+   document.formv1.r107.value = '<?php echo $r107; ?>';
+   document.formv1.r108.value = '<?php echo $r108; ?>';
+   document.formv1.r109.value = '<?php echo $r109; ?>';
+   document.formv1.r110.value = '<?php echo $r110; ?>';
+   document.formv1.r111.value = '<?php echo $r111; ?>';
+   document.formv1.r112.value = '<?php echo $r112; ?>';
+   document.formv1.r113.value = '<?php echo $r113; ?>';
+   document.formv1.r114.value = '<?php echo $r114; ?>';
+   document.formv1.r115.value = '<?php echo $r115; ?>';
+   document.formv1.r116.value = '<?php echo $r116; ?>';
+   document.formv1.r117.value = '<?php echo $r117; ?>';
+   document.formv1.r118.value = '<?php echo $r118; ?>';
+   document.formv1.r119.value = '<?php echo $r119; ?>';
 <?php                                        } ?>
 
 <?php if ( $strana == 10 OR $strana == 9999 ) { ?>
-   document.formv1.r120.value = '<?php echo "$r120"; ?>';
-   document.formv1.r121.value = '<?php echo "$r121"; ?>';
-   document.formv1.r122.value = '<?php echo "$r122"; ?>';
-   document.formv1.r123.value = '<?php echo "$r123"; ?>';
-   document.formv1.r124.value = '<?php echo "$r124"; ?>';
-   document.formv1.r125.value = '<?php echo "$r125"; ?>';
-   document.formv1.r126.value = '<?php echo "$r126"; ?>';
-   document.formv1.r127.value = '<?php echo "$r127"; ?>';
-   document.formv1.sdnr.value = '<?php echo "$sdnr";?>';
-   document.formv1.r129.value = '<?php echo "$r129"; ?>';
-   document.formv1.r130.value = '<?php echo "$r130"; ?>';
+   document.formv1.r120.value = '<?php echo $r120; ?>';
+   document.formv1.r121.value = '<?php echo $r121; ?>';
+   document.formv1.r122.value = '<?php echo $r122; ?>';
+   document.formv1.r123.value = '<?php echo $r123; ?>';
+   document.formv1.r124.value = '<?php echo $r124; ?>';
+   document.formv1.r125.value = '<?php echo $r125; ?>';
+   document.formv1.r126.value = '<?php echo $r126; ?>';
+   document.formv1.r127.value = '<?php echo $r127; ?>';
+   document.formv1.sdnr.value = '<?php echo $sdnr; ?>';
+   document.formv1.r129.value = '<?php echo $r129; ?>';
+   document.formv1.r130.value = '<?php echo $r130; ?>';
 <?php                                         } ?>
 
 <?php if ( $strana == 11 OR $strana == 9999 ) { ?>
-   document.formv1.r131.value = '<?php echo "$r131"; ?>';
+   document.formv1.r131.value = '<?php echo $r131; ?>';
 <?php if ( $ldnr == 1 ) { ?> document.formv1.ldnr.checked = "checked"; <?php } ?>
-   document.formv1.nrzsprev.value = '<?php echo "$nrzsprev";?>';
+   document.formv1.nrzsprev.value = '<?php echo "$nrzsprev"; ?>';
 //<?php if ( $upl50 == 1 ) { ?> document.formv1.upl50.checked = "checked"; <?php } ?>
 //<?php if ( $spl3d == 1 ) { ?> document.formv1.spl3d.checked = "checked"; <?php } ?>
 
 <?php if ( $upl50 == 1 ) { echo "document.formv1.upl50.checked='checked';"; } ?>
 <?php if ( $spl3d == 1 ) { echo "document.formv1.spl3d.checked='checked';"; } ?>
 
-   document.formv1.r134.value = '<?php echo "$r134"; ?>';
-   document.formv1.pico.value = '<?php echo "$pico"; ?>';
-   document.formv1.psid.value = '<?php echo "$psid"; ?>';
-   document.formv1.pfor.value = '<?php echo "$pfor"; ?>';
-   document.formv1.pmen.value = '<?php echo "$pmen"; ?>';
-   document.formv1.puli.value = '<?php echo "$puli"; ?>';
-   document.formv1.pcdm.value = '<?php echo "$pcdm"; ?>';
-   document.formv1.ppsc.value = '<?php echo "$ppsc"; ?>';
-   document.formv1.pmes.value = '<?php echo "$pmes"; ?>';
+   document.formv1.r134.value = '<?php echo $r134; ?>';
+   document.formv1.pico.value = '<?php echo $pico; ?>';
+   document.formv1.psid.value = '<?php echo $psid; ?>';
+   document.formv1.pfor.value = '<?php echo $pfor; ?>';
+   document.formv1.pmen.value = '<?php echo $pmen; ?>';
+   document.formv1.puli.value = '<?php echo $puli; ?>';
+   document.formv1.pcdm.value = '<?php echo $pcdm; ?>';
+   document.formv1.ppsc.value = '<?php echo $ppsc; ?>';
+   document.formv1.pmes.value = '<?php echo $pmes; ?>';
 <?php if ( $zslu == 1 ) { ?> document.formv1.zslu.checked = "checked"; <?php } ?>
 <?php if ( $uoso == 1 ) { ?> document.formv1.uoso.checked = "checked"; <?php } ?>
-   document.formv1.pzks1.value = '<?php echo "$pzks1"; ?>';
-   document.formv1.pdrp1.value = '<?php echo "$pdrp1"; ?>';
-   document.formv1.pdro1.value = '<?php echo "$pdro1"; ?>';
-   document.formv1.pdrm1.value = '<?php echo "$pdrm1"; ?>';
-   document.formv1.pzpr1.value = '<?php echo "$pzpr1"; ?>';
-   document.formv1.pzvd1.value = '<?php echo "$pzvd1"; ?>';
-   document.formv1.pzthvd1.value = '<?php echo "$pzthvd1"; ?>';
-   document.formv1.pzks2.value = '<?php echo "$pzks2";?>';
-   document.formv1.pdrp2.value = '<?php echo "$pdrp2";?>';
-   document.formv1.pdro2.value = '<?php echo "$pdro2";?>';
-   document.formv1.pdrm2.value = '<?php echo "$pdrm2"; ?>';
-   document.formv1.pzpr2.value = '<?php echo "$pzpr2";?>';
-   document.formv1.pzvd2.value = '<?php echo "$pzvd2";?>';
-   document.formv1.pzthvd2.value = '<?php echo "$pzthvd2";?>';
-   document.formv1.pzks3.value = '<?php echo "$pzks3";?>';
-   document.formv1.pdrp3.value = '<?php echo "$pdrp3";?>';
-   document.formv1.pdro3.value = '<?php echo "$pdro3";?>';
-   document.formv1.pdrm3.value = '<?php echo "$pdrm3"; ?>';
-   document.formv1.pzpr3.value = '<?php echo "$pzpr3";?>';
-   document.formv1.pzvd3.value = '<?php echo "$pzvd3";?>';
-   document.formv1.pzthvd3.value = '<?php echo "$pzthvd3";?>';
-   document.formv1.pzks4.value = '<?php echo "$pzks4";?>';
-   document.formv1.pdrp4.value = '<?php echo "$pdrp4";?>';
-   document.formv1.pdro4.value = '<?php echo "$pdro4";?>';
-   document.formv1.pdrm4.value = '<?php echo "$pdrm4"; ?>';
-   document.formv1.pzpr4.value = '<?php echo "$pzpr4";?>';
-   document.formv1.pzvd4.value = '<?php echo "$pzvd4";?>';
-   document.formv1.pzthvd4.value = '<?php echo "$pzthvd4";?>';
-   document.formv1.pzks5.value = '<?php echo "$pzks5";?>';
-   document.formv1.pdrp5.value = '<?php echo "$pdrp5";?>';
-   document.formv1.pdro5.value = '<?php echo "$pdro5";?>';
-   document.formv1.pdrm5.value = '<?php echo "$pdrm5"; ?>';
-   document.formv1.pzpr5.value = '<?php echo "$pzpr5";?>';
-   document.formv1.pzvd5.value = '<?php echo "$pzvd5";?>';
-   document.formv1.pzthvd5.value = '<?php echo "$pzthvd5";?>';
-   document.formv1.pzks6.value = '<?php echo "$pzks6";?>';
-   document.formv1.pdrp6.value = '<?php echo "$pdrp6";?>';
-   document.formv1.pdro6.value = '<?php echo "$pdro6";?>';
-   document.formv1.pdrm6.value = '<?php echo "$pdrm6"; ?>';
-   document.formv1.pzpr6.value = '<?php echo "$pzpr6";?>';
-   document.formv1.pzvd6.value = '<?php echo "$pzvd6";?>';
-   document.formv1.pzthvd6.value = '<?php echo "$pzthvd6";?>';
+   document.formv1.pzks1.value = '<?php echo $pzks1; ?>';
+   document.formv1.pdrp1.value = '<?php echo $pdrp1; ?>';
+   document.formv1.pdro1.value = '<?php echo $pdro1; ?>';
+   document.formv1.pdrm1.value = '<?php echo $pdrm1; ?>';
+   document.formv1.pzpr1.value = '<?php echo $pzpr1; ?>';
+   document.formv1.pzvd1.value = '<?php echo $pzvd1; ?>';
+   document.formv1.pzthvd1.value = '<?php echo $pzthvd1; ?>';
+   document.formv1.pzks2.value = '<?php echo $pzks2; ?>';
+   document.formv1.pdrp2.value = '<?php echo $pdrp2; ?>';
+   document.formv1.pdro2.value = '<?php echo $pdro2; ?>';
+   document.formv1.pdrm2.value = '<?php echo $pdrm2; ?>';
+   document.formv1.pzpr2.value = '<?php echo $pzpr2; ?>';
+   document.formv1.pzvd2.value = '<?php echo $pzvd2; ?>';
+   document.formv1.pzthvd2.value = '<?php echo $pzthvd2; ?>';
+   document.formv1.pzks3.value = '<?php echo $pzks3; ?>';
+   document.formv1.pdrp3.value = '<?php echo $pdrp3; ?>';
+   document.formv1.pdro3.value = '<?php echo $pdro3; ?>';
+   document.formv1.pdrm3.value = '<?php echo $pdrm3; ?>';
+   document.formv1.pzpr3.value = '<?php echo $pzpr3; ?>';
+   document.formv1.pzvd3.value = '<?php echo $pzvd3; ?>';
+   document.formv1.pzthvd3.value = '<?php echo $pzthvd3; ?>';
+   document.formv1.pzks4.value = '<?php echo $pzks4; ?>';
+   document.formv1.pdrp4.value = '<?php echo $pdrp4; ?>';
+   document.formv1.pdro4.value = '<?php echo $pdro4; ?>';
+   document.formv1.pdrm4.value = '<?php echo $pdrm4; ?>';
+   document.formv1.pzpr4.value = '<?php echo $pzpr4; ?>';
+   document.formv1.pzvd4.value = '<?php echo $pzvd4; ?>';
+   document.formv1.pzthvd4.value = '<?php echo $pzthvd4; ?>';
+   document.formv1.pzks5.value = '<?php echo $pzks5; ?>';
+   document.formv1.pdrp5.value = '<?php echo $pdrp5; ?>';
+   document.formv1.pdro5.value = '<?php echo $pdro5; ?>';
+   document.formv1.pdrm5.value = '<?php echo $pdrm5; ?>';
+   document.formv1.pzpr5.value = '<?php echo $pzpr5; ?>';
+   document.formv1.pzvd5.value = '<?php echo $pzvd5; ?>';
+   document.formv1.pzthvd5.value = '<?php echo $pzthvd5; ?>';
+   document.formv1.pzks6.value = '<?php echo $pzks6; ?>';
+   document.formv1.pdrp6.value = '<?php echo $pdrp6; ?>';
+   document.formv1.pdro6.value = '<?php echo $pdro6; ?>';
+   document.formv1.pdrm6.value = '<?php echo $pdrm6; ?>';
+   document.formv1.pzpr6.value = '<?php echo $pzpr6; ?>';
+   document.formv1.pzvd6.value = '<?php echo $pzvd6; ?>';
+   document.formv1.pzthvd6.value = '<?php echo $pzthvd6; ?>';
 <?php                                         } ?>
 
 <?php if ( $strana == 12 OR $strana == 9999 ) { ?>
-   document.formv1.pril.value = '<?php echo "$pril"; ?>';
-   document.formv1.dat.value = '<?php echo "$datsk"; ?>';
+   document.formv1.pril.value = '<?php echo $pril; ?>';
+   document.formv1.dat.value = '<?php echo $datsk; ?>';
 <?php if ( $zdbo == 1 ) { ?> document.formv1.zdbo.checked = "checked"; <?php } ?>
 <?php if ( $zpre == 1 ) { ?> document.formv1.zpre.checked = "checked"; <?php } ?>
 <?php if ( $post == 1 ) { ?> document.formv1.post.checked = "checked"; <?php } ?>
 <?php if ( $ucet == 1 ) { ?> document.formv1.ucet.checked = "checked"; <?php } ?>
-   document.formv1.diban.value = '<?php echo "$diban";?>';
-   document.formv1.da2.value = '<?php echo "$da2sk";?>';
+   document.formv1.diban.value = '<?php echo $diban; ?>';
+   document.formv1.da2.value = '<?php echo $da2sk; ?>';
 <?php                                         } ?>
 
 <?php if ( $strana == 13 OR $strana == 9999 ) { ?>
-   document.formv1.prpdzc.value = '<?php echo "$prpdzcsk"; ?>';
+   document.formv1.prpdzc.value = '<?php echo $prpdzcsk; ?>';
 
-   document.formv1.prpzo1.value = '<?php echo "$prpzo1sk"; ?>';
-   document.formv1.prpzo2.value = '<?php echo "$prpzo2sk"; ?>';
-   document.formv1.prpzo3.value = '<?php echo "$prpzo3sk"; ?>';
-   document.formv1.prpzo4.value = '<?php echo "$prpzo4sk"; ?>';
-   document.formv1.prpzo5.value = '<?php echo "$prpzo5sk"; ?>';
+   document.formv1.prpzo1.value = '<?php echo $prpzo1sk; ?>';
+   document.formv1.prpzo2.value = '<?php echo $prpzo2sk; ?>';
+   document.formv1.prpzo3.value = '<?php echo $prpzo3sk; ?>';
+   document.formv1.prpzo4.value = '<?php echo $prpzo4sk; ?>';
+   document.formv1.prpzo5.value = '<?php echo $prpzo5sk; ?>';
 
-   document.formv1.prpzd1.value = '<?php echo "$prpzd1sk"; ?>';
-   document.formv1.prpzd2.value = '<?php echo "$prpzd2sk"; ?>';
-   document.formv1.prpzd3.value = '<?php echo "$prpzd3sk"; ?>';
-   document.formv1.prpzd4.value = '<?php echo "$prpzd4sk"; ?>';
-   document.formv1.prpzd5.value = '<?php echo "$prpzd5sk"; ?>';
+   document.formv1.prpzd1.value = '<?php echo $prpzd1sk; ?>';
+   document.formv1.prpzd2.value = '<?php echo $prpzd2sk; ?>';
+   document.formv1.prpzd3.value = '<?php echo $prpzd3sk; ?>';
+   document.formv1.prpzd4.value = '<?php echo $prpzd4sk; ?>';
+   document.formv1.prpzd5.value = '<?php echo $prpzd5sk; ?>';
 
-   document.formv1.prpvz1.value = '<?php echo "$prpvz1"; ?>';
-   document.formv1.prpvz2.value = '<?php echo "$prpvz2"; ?>';
-   document.formv1.prpvz3.value = '<?php echo "$prpvz3"; ?>';
-   document.formv1.prpvz4.value = '<?php echo "$prpvz4"; ?>';
-   document.formv1.prpvz5.value = '<?php echo "$prpvz5"; ?>';
+   document.formv1.prpvz1.value = '<?php echo $prpvz1; ?>';
+   document.formv1.prpvz2.value = '<?php echo $prpvz2; ?>';
+   document.formv1.prpvz3.value = '<?php echo $prpvz3; ?>';
+   document.formv1.prpvz4.value = '<?php echo $prpvz4; ?>';
+   document.formv1.prpvz5.value = '<?php echo $prpvz5; ?>';
 
-   document.formv1.prpod1.value = '<?php echo "$prpod1"; ?>';
-   document.formv1.prpod2.value = '<?php echo "$prpod2"; ?>';
-   document.formv1.prpod3.value = '<?php echo "$prpod3"; ?>';
-   document.formv1.prpod4.value = '<?php echo "$prpod4"; ?>';
-   document.formv1.prpod5.value = '<?php echo "$prpod5"; ?>';
+   document.formv1.prpod1.value = '<?php echo $prpod1; ?>';
+   document.formv1.prpod2.value = '<?php echo $prpod2; ?>';
+   document.formv1.prpod3.value = '<?php echo $prpod3; ?>';
+   document.formv1.prpod4.value = '<?php echo $prpod4; ?>';
+   document.formv1.prpod5.value = '<?php echo $prpod5; ?>';
 <?php                                         } ?>
 
 <?php if ( $strana == 14 OR $strana == 9999 ) { ?>
-   document.formv1.sz1p1.value = '<?php echo "$sz1p1";?>';
-   document.formv1.sz1v1.value = '<?php echo "$sz1v1";?>';
-   document.formv1.sz2.value = '<?php echo "$sz2";?>';
-   document.formv1.sz3.value = '<?php echo "$sz3";?>';
-   document.formv1.sz4.value = '<?php echo "$sz4";?>';
-   document.formv1.sz5.value = '<?php echo "$sz5";?>';
-   document.formv1.sz6.value = '<?php echo "$sz6";?>';
-   document.formv1.sz7.value = '<?php echo "$sz7";?>';
-   document.formv1.sz8.value = '<?php echo "$sz8";?>';
-   document.formv1.sz9.value = '<?php echo "$sz9";?>';
-   document.formv1.sz10.value = '<?php echo "$sz10";?>';
-   document.formv1.sz11.value = '<?php echo "$sz11";?>';
-   document.formv1.sz12.value = '<?php echo "$sz12";?>';
-   document.formv1.sz13.value = '<?php echo "$sz13";?>';
-   document.formv1.sz14.value = '<?php echo "$sz14";?>';
-   document.formv1.sz15.value = '<?php echo "$sz15";?>';
-   document.formv1.sz16.value = '<?php echo "$sz16";?>';
-   document.formv1.szdat.value = '<?php echo "$szdatsk";?>';
+   document.formv1.sz1p1.value = '<?php echo $sz1p1; ?>';
+   document.formv1.sz1v1.value = '<?php echo $sz1v1; ?>';
+   document.formv1.sz2.value = '<?php echo $sz2; ?>';
+   document.formv1.sz3.value = '<?php echo $sz3; ?>';
+   document.formv1.sz4.value = '<?php echo $sz4; ?>';
+   document.formv1.sz5.value = '<?php echo $sz5; ?>';
+   document.formv1.sz6.value = '<?php echo $sz6; ?>';
+   document.formv1.sz7.value = '<?php echo $sz7; ?>';
+   document.formv1.sz8.value = '<?php echo $sz8; ?>';
+   document.formv1.sz9.value = '<?php echo $sz9; ?>';
+   document.formv1.sz10.value = '<?php echo $sz10; ?>';
+   document.formv1.sz11.value = '<?php echo $sz11; ?>';
+   document.formv1.sz12.value = '<?php echo $sz12; ?>';
+   document.formv1.sz13.value = '<?php echo $sz13; ?>';
+   document.formv1.sz14.value = '<?php echo $sz14; ?>';
+   document.formv1.sz15.value = '<?php echo $sz15; ?>';
+   document.formv1.sz16.value = '<?php echo $sz16; ?>';
+   document.formv1.szdat.value = '<?php echo $szdatsk; ?>';
 <?php if ( $vpdu == 1 ) { ?> document.formv1.vpdu.checked = "checked"; <?php } ?>
 <?php                                         } ?>
   }
@@ -11792,10 +11779,7 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
   }
 
-  // function FormPDF()
-  // {
-  //  window.open('../ucto/priznanie_fob2017.php?cislo_oc=<?php echo $cislo_oc;?>&copern=10&drupoh=1&page=1&subor=0&strana=9999', '_blank', blank_param);
-  // }
+
 
   function FormPDF(strana)
   {
@@ -11839,14 +11823,7 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
   }
 //bud alebo checkbox v xiv.oddiele
 //dopyt, vraziù na konkrÈtnu stranu
-  function klikpost()
-  {
-   document.formv1.ucet.checked = false;
-  }
-  function klikucet()
-  {
-   document.formv1.post.checked = false;
-  }
+
 
   function FormXML()
   {
@@ -11857,16 +11834,14 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
    window.open('../cis/ciselnik_krajin.pdf', '_blank', blank_param);
   }
 
-//neuplatnujem vs. poukazujem 3%
-//dopyt, vraziù na konkrÈtnu stranu
-  function KlikNeuplAno()
-  {
-   document.formv1.spl3d.checked = false;
-  }
-  function KlikNeuplNie()
-  {
-   document.formv1.upl50.checked = false;
-  }
+
 </script>
 </body>
 </html>
+<!--
+Todo
+- pridaù xml Ëasù
+- pdf Ëasù zvl·öù
+- zistiù echo bunky
+
+ -->
