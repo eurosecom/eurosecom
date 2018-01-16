@@ -1494,7 +1494,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
 $oznac = mysql_query("$sqtoz");
 //koniec uprava zakladov SP,IP,RF pre pomer=41  
 
-//uprav zaklad podla max a min od 1.2012 do zmin_up ulozim neupraveny zzam_zp
+//uprav zaklad podla max a min od 1.2012 do zmin_up ulozim neupraveny zzam_zp andrejko
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zmin_up=zzam_zp WHERE oc > 0 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -1724,8 +1724,8 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
 $oznac = mysql_query("$sqtoz");
 
 //exit;
-
-//koniec tuto vypocitam odvodovu ulavu zp
+//v zmin_pn znizeny, v zmin_ip je znizenie zakladu, v zmin_up je povodny
+//koniec tuto vypocitam odvodovu ulavu zp andrejko
 
 //exit;
 
@@ -1800,6 +1800,15 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
 " SET zfir_zp=zzam_zp, zfir_np=zzam_np, zfir_sp=zzam_sp, zfir_ip=zzam_ip, zfir_pn=zzam_pn, zfir_up=zzam_up, zfir_gf=zzam_gf, zfir_rf=zzam_rf ".
 " WHERE oc > 0 ";
 $oznac = mysql_query("$sqtoz");
+
+//ak ma odpocitatelnu ZP od 1.1.2018 za zamestnavatela neuplatnuje andrejko
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
+" SET zfir_zp=zmin_up ".
+" WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND deti_sp = 1";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+//exit;
 
 //vypocet odvody
 //od 1.1.2011 zaokruhlenie odvodov SP na eurocenty dole
