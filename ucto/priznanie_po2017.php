@@ -887,7 +887,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD zmx1 DECIMAL(2,0) DEFAULT 
 $vysledek = mysql_query("$sql");
 }
 //zmeny 2017
-$sql = "SELECT r307 FROM F".$kli_vxcf."_uctpriznanie_po";
+$sql = "SELECT ozdspldat FROM F".$kli_vxcf."_uctpriznanie_po";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -5638,7 +5638,7 @@ if ( $copern == 102 )
 TODO
 
 
-- v pdf poruši podmienky, nech nevypåòami niè za nich
+
 
 
 - input=date vyskúša v dátumoch
@@ -5654,6 +5654,6 @@ TODO
 - pri dodatoènom priznaní da disable dadod,1120-1190, blokova pri generovaní v pdf, html cez disable
   nemusel bych v tlaèi, ale ošetril pri generovaní, ïalšie disable pozrie v pdf, kde sú obmedzenia
 - s prílohou niè nerobi, pokia¾ nebude .xml, aby sme vedeli èi 1 alebo 2 inputy
-- v VI.èasti checkbox neuplatòujem a súhlasím môže by buï alebo = nerobi
+
 - ièo/sid v príjimate¾och nie je vyriešený, dám na 12 znakov input a v tlaèi zarovnanie zprava = poèkáme na xml, potom budeme rieši
 -->
