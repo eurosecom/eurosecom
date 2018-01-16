@@ -887,7 +887,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD zmx1 DECIMAL(2,0) DEFAULT 
 $vysledek = mysql_query("$sql");
 }
 //zmeny 2017
-$sql = "SELECT ozdspldat FROM F".$kli_vxcf."_uctpriznanie_po";
+$sql = "SELECT all2017 FROM F".$kli_vxcf."_uctpriznanie_po";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -1062,6 +1062,8 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d7r01 DECIMAL(10,2) DEFAULT 0";
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po MODIFY d8r01 DECIMAL(10,2) DEFAULT 0";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_po ADD all2017 DECIMAL(1,0) DEFAULT 0 AFTER new2017";
 $vysledek = mysql_query("$sql");
 }
 //koniec pracovny def subor
