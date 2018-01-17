@@ -903,6 +903,58 @@ $uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
                      }
 
 if ( $strana == 14 ) {
+$ozd1r01 = strip_tags($_REQUEST['ozd1r01']);
+$ozd1r02 = strip_tags($_REQUEST['ozd1r02']);
+$ozd1r03 = strip_tags($_REQUEST['ozd1r03']);
+$ozd1r04 = strip_tags($_REQUEST['ozd1r04']);
+$ozd2r04 = strip_tags($_REQUEST['ozd2r04']);
+$ozd1r05 = strip_tags($_REQUEST['ozd1r05']);
+$ozd2r05 = strip_tags($_REQUEST['ozd2r05']);
+$ozd1r06 = strip_tags($_REQUEST['ozd1r06']);
+$ozd2r06 = strip_tags($_REQUEST['ozd2r06']);
+$ozdr07 = strip_tags($_REQUEST['ozdr07']);
+$ozdr08 = strip_tags($_REQUEST['ozdr08']);
+$ozdr09 = strip_tags($_REQUEST['ozdr09']);
+$ozdr10 = strip_tags($_REQUEST['ozdr10']);
+$ozdr11 = strip_tags($_REQUEST['ozdr11']);
+$ozdr12 = strip_tags($_REQUEST['ozdr12']);
+$ozdr13 = strip_tags($_REQUEST['ozdr13']);
+$ozdr14 = strip_tags($_REQUEST['ozdr14']);
+$ozdr15 = strip_tags($_REQUEST['ozdr15']);
+$ozdr16 = strip_tags($_REQUEST['ozdr16']);
+$ozdr17 = strip_tags($_REQUEST['ozdr17']);
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET".
+" ozd1r01='$ozd1r01', ozd1r02='$ozd1r02', ozd1r03='$ozd1r03', ".
+" ozd1r04='$ozd1r04', ozd2r04='$ozd2r04', ozd1r05='$ozd1r05', ozd2r05='$ozd2r05', ozd1r06='$ozd1r06', ozd2r06='$ozd2r06', ".
+" ozdr07='$ozdr07', ozdr08='$ozdr08', ozdr09='$ozdr09', ozdr10='$ozdr10', ozdr11='$ozdr11', ".
+" ozdr12='$ozdr12', ozdr13='$ozdr13', ozdr14='$ozdr14', ozdr15='$ozdr15', ozdr16='$ozdr16', ".
+" ozdr17='$ozdr17' ".
+" WHERE oc = $cislo_oc";
+                     }
+
+if ( $strana == 15 ) {
+$ozdr18 = strip_tags($_REQUEST['ozdr18']);
+$ozd1r19 = strip_tags($_REQUEST['ozd1r19']);
+$ozd1r20 = strip_tags($_REQUEST['ozd1r20']);
+$ozd1r21 = strip_tags($_REQUEST['ozd1r21']);
+$ozd1r22 = strip_tags($_REQUEST['ozd1r22']);
+$ozd2r22 = strip_tags($_REQUEST['ozd2r22']);
+$ozd1r23 = strip_tags($_REQUEST['ozd1r23']);
+$ozd2r23 = strip_tags($_REQUEST['ozd2r23']);
+$ozd1r24 = strip_tags($_REQUEST['ozd1r24']);
+$ozd2r24 = strip_tags($_REQUEST['ozd2r24']);
+$ozdr25 = strip_tags($_REQUEST['ozdr25']);
+$ozdr26 = strip_tags($_REQUEST['ozdr26']);
+$ozdr27 = strip_tags($_REQUEST['ozdr27']);
+$ozdr28 = strip_tags($_REQUEST['ozdr28']);
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET".
+" ozdr18='$ozdr18', ozd1r19='$ozd1r19', ozd1r20='$ozd1r20', ozd1r21='$ozd1r21', ".
+" ozd1r22='$ozd1r22', ozd2r22='$ozd2r22', ozd1r23='$ozd1r23', ozd2r23='$ozd2r23', ozd1r24='$ozd1r24', ozd2r24='$ozd2r24', ".
+" ozdr25='$ozdr25', ozdr26='$ozdr26', ozdr27='$ozdr27', ozdr28='$ozdr28' ".
+" WHERE oc = $cislo_oc";
+                     }
+
+if ( $strana == 16 ) {
 $sz1p1 = 1*$_REQUEST['sz1p1'];
 $sz1v1 = 1*$_REQUEST['sz1v1'];
 $sz2 = 1*$_REQUEST['sz2'];
@@ -924,7 +976,7 @@ $vpdu = 1*$_REQUEST['vpdu'];
 $szdat = $_REQUEST['szdat'];
 $szdatsql=Sqldatum($szdat);
 
-$uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ".
+$uprtxt = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET".
 " sz1p1='$sz1p1', sz1v1='$sz1v1', sz2='$sz2', sz3='$sz3', sz4='$sz4', sz5='$sz5', sz6='$sz6', sz7='$sz7', sz8='$sz8', sz9='$sz9', sz10='$sz10', ".
 " sz11='$sz11', sz12='$sz12', sz13='$sz13', sz14='$sz14', sz15='$sz15', sz16='$sz16', szdat='$szdatsql', vpdu='$vpdu' ".
 " WHERE oc = $cislo_oc";
@@ -2015,11 +2067,77 @@ $sql = "SELECT new2017 FROM F".$kli_vxcf."_mzdpriznanie_fob";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD new2017 DECIMAL(2,0) NOT NULL AFTER new2016";
-$vysledek = mysql_query("$sql");
-
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob MODIFY r51 DECIMAL(10,2) DEFAULT 0";
 $vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD new2017 DECIMAL(2,0) NOT NULL AFTER new2016";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd1r01 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd1r02 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd1r03 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd1r04 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd2r04 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd1r05 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd2r05 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd1r06 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd2r06 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr07 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr08 DECIMAL(2,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr09 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr10 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr11 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr12 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr13 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr14 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr15 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr16 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr17 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr18 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd1r19 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd1r20 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd1r21 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd1r22 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd2r22 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd1r23 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd2r23 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd1r24 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozd2r24 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr25 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr27 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr28 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+
 }
 
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprcvypl'.$kli_uzid." SELECT * FROM F$kli_vxcf"."_mzdpriznanie_fob";
@@ -2911,6 +3029,46 @@ $prptxt = $fir_riadok->prptxt;
                      }
 
 if ( $strana == 14 ) {
+$ozd1r01 = $fir_riadok->ozd1r01;
+$ozd1r02 = $fir_riadok->ozd1r02;
+$ozd1r03 = $fir_riadok->ozd1r03;
+$ozd1r04 = $fir_riadok->ozd1r04;
+$ozd2r04 = $fir_riadok->ozd2r04;
+$ozd1r05 = $fir_riadok->ozd1r05;
+$ozd2r05 = $fir_riadok->ozd2r05;
+$ozd1r06 = $fir_riadok->ozd1r06;
+$ozd2r06 = $fir_riadok->ozd2r06;
+$ozdr07 = $fir_riadok->ozdr07;
+$ozdr08 = $fir_riadok->ozdr08;
+$ozdr09 = $fir_riadok->ozdr09;
+$ozdr10 = $fir_riadok->ozdr10;
+$ozdr11 = $fir_riadok->ozdr11;
+$ozdr12 = $fir_riadok->ozdr12;
+$ozdr13 = $fir_riadok->ozdr13;
+$ozdr14 = $fir_riadok->ozdr14;
+$ozdr15 = $fir_riadok->ozdr15;
+$ozdr16 = $fir_riadok->ozdr16;
+$ozdr17 = $fir_riadok->ozdr17;
+                     }
+
+if ( $strana == 15 ) {
+$ozdr18 = $fir_riadok->ozdr18;
+$ozd1r19 = $fir_riadok->ozd1r19;
+$ozd1r20 = $fir_riadok->ozd1r20;
+$ozd1r21 = $fir_riadok->ozd1r21;
+$ozd1r22 = $fir_riadok->ozd1r22;
+$ozd2r22 = $fir_riadok->ozd2r22;
+$ozd1r23 = $fir_riadok->ozd1r23;
+$ozd2r23 = $fir_riadok->ozd2r23;
+$ozd1r24 = $fir_riadok->ozd1r24;
+$ozd2r24 = $fir_riadok->ozd2r24;
+$ozdr25 = $fir_riadok->ozdr25;
+$ozdr26 = $fir_riadok->ozdr26;
+$ozdr27 = $fir_riadok->ozdr27;
+$ozdr28 = $fir_riadok->ozdr28;
+                     }
+
+if ( $strana == 16 ) {
 $sz1p1 = $fir_riadok->sz1p1;
 $sz1v1 = $fir_riadok->sz1v1;
 $sz2 = $fir_riadok->sz2;
@@ -3477,35 +3635,30 @@ $sn1c=substr($sknacec,0,1);
 <?php if ( $strana == 10 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str10.jpg" alt="<?php echo $jpg_title ?>" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
-
 <!-- IX.ODDIEL pokracovanie -->
 <input type="text" name="r120" id="r120" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:123px; left:499px;"/>
 <input type="text" name="r121" id="r121" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:176px; left:499px;"/>
-
 <!-- X.ODDIEL -->
-<input type="text" name="r122" id="r122" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:774px; left:648px;"/>
-<input type="text" name="r123" id="r123" onkeyup="CiarkaNaBodku(this);" style="width:264px; top:817px; left:628px;"/>
-<input type="text" name="r124" id="r124" onkeyup="CiarkaNaBodku(this);" style="width:264px; top:859px; left:628px;"/>
-<input type="text" name="r125" id="r125" onkeyup="CiarkaNaBodku(this);" style="width:264px; top:915px; left:628px;"/>
-<input type="text" name="r126" id="r126" onkeyup="CiarkaNaBodku(this);" style="width:153px; top:971px; left:739px;"/>
-<input type="text" name="r127" id="r127" onkeyup="CiarkaNaBodku(this);" style="width:172px; top:1017px; left:720px;"/>
-
+<input type="text" name="r122" id="r122" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:724px; left:648px;"/>
+<input type="text" name="r123" id="r123" onkeyup="CiarkaNaBodku(this);" style="width:264px; top:767px; left:628px;"/>
+<input type="text" name="r124" id="r124" onkeyup="CiarkaNaBodku(this);" style="width:264px; top:809px; left:628px;"/>
+<input type="text" name="r125" id="r125" onkeyup="CiarkaNaBodku(this);" style="width:264px; top:866px; left:628px;"/>
+<input type="text" name="r126" id="r126" onkeyup="CiarkaNaBodku(this);" style="width:153px; top:922px; left:739px;"/>
+<input type="text" name="r127" id="r127" onkeyup="CiarkaNaBodku(this);" style="width:172px; top:966px; left:720px;"/>
 <!-- XI.ODDIEL -->
-<input type="text" name="sdnr" id="sdnr" style="width:842px; top:1138px; left:51px;"/>
-<input type="text" name="r129" id="r129" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:1179px; left:648px;"/>
-<input type="text" name="r130" id="r130" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:1218px; left:648px;"/>
+<input type="text" name="sdnr" id="sdnr" style="width:842px; top:1089px; left:51px;"/>
+<input type="text" name="r129" id="r129" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:1129px; left:648px;"/>
+<input type="text" name="r130" id="r130" onkeyup="CiarkaNaBodku(this);" style="width:245px; top:1168px; left:648px;"/>
 <?php                      } ?>
 
 
 <?php if ( $strana == 11 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str11.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
-
 <!-- XI.ODDIEL pokracovanie -->
 <input type="text" name="r131" id="r131" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:116px; left:648px;"/>
 <input type="checkbox" name="ldnr" value="1" style="top:160px; left:413px;"/>
 <input type="text" name="nrzsprev" id="nrzsprev" maxlength="2" style="width:37px; top:156px; left:855px;"/>
-
 <!-- XII.ODDIEL -->
 <input type="checkbox" name="upl50" value="1" onchange="KlikNeuplAno();" style="top:313px; left:59px;"/>
 <input type="checkbox" name="spl3d" value="1" onchange="KlikNeuplNie();" style="top:313px; left:295px;"/>
@@ -3514,59 +3667,58 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="pico" id="pico" maxlength="8" style="width:175px; top:440px; left:51px;"/>
 <input type="text" name="psid" id="psid" maxlength="4" style="width:83px; top:440px; left:258px;"/>
 <input type="text" name="pfor" id="pfor" style="width:520px; top:440px; left:373px;"/>
-<input type="text" name="pmen" id="pmen" style="width:842px; top:494px; left:51px;"/>
+<input type="text" name="pmen" id="pmen" style="width:842px; height:62px; top:494px; left:51px;"/>
 <input type="text" name="puli" id="puli" style="width:635px; top:603px; left:51px;"/>
 <input type="text" name="pcdm" id="pcdm" style="width:175px; top:603px; left:718px;"/>
 <input type="text" name="ppsc" id="ppsc" maxlength="5" style="width:106px; top:657px; left:51px;"/>
 <input type="text" name="pmes" id="pmes" style="width:703px; top:657px; left:190px;"/>
 <input type="checkbox" name="zslu" value="1" style="top:700px; left:59px;"/>
-
 <!-- XIII.ODDIEL -->
-<input type="checkbox" name="uoso" value="1" style="top:817px; left:59px; z-index:100;"/>
-<div style="z-index:10; position:absolute; top:815px; left:58px; background-color:#39f; width:22px; height:22px; border-radius:3px;">&nbsp;</div>
+<input type="checkbox" name="uoso" value="1" style="top:834px; left:59px; z-index:100;"/>
+<div style="z-index:10; position:absolute; top:832px; left:58px; background-color:#39f; width:22px; height:22px; border-radius:3px;">&nbsp;</div>
 <img src="../obr/ikony/info_blue_icon.png" title="Štatistický èíselník krajín" onclick="CisKrajin();" class="btn-row-tool" style="top:870px; left:7px;">
-<input type="text" name="pzks1" id="pzks1" maxlength="3" style="width:59px; top:913px; left:51px;"/>
-<input type="text" name="pdrp1" id="pdrp1" style="width:14px; top:913px; left:131px;"/>
-<input type="text" name="pdro1" id="pdro1" style="width:14px; top:913px; left:164px;"/>
-<input type="text" name="pdrm1" id="pdrm1" style="width:14px; top:913px; left:200px;"/>
-<input type="text" name="pzpr1" id="pzpr1" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:913px; left:234px;"/>
-<input type="text" name="pzvd1" id="pzvd1" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:913px; left:483px;"/>
-<input type="text" name="pzthvd1" id="pzthvd1" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:913px; left:731px;"/>
-<input type="text" name="pzks2" id="pzks2" maxlength="3" style="width:59px; top:952px; left:51px;"/>
-<input type="text" name="pdrp2" id="pdrp2" style="width:14px; top:952px; left:131px;"/>
-<input type="text" name="pdro2" id="pdro2" style="width:14px; top:952px; left:164px;"/>
-<input type="text" name="pdrm2" id="pdrm2" style="width:14px; top:952px; left:200px;"/>
-<input type="text" name="pzpr2" id="pzpr2" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:952px; left:234px;"/>
-<input type="text" name="pzvd2" id="pzvd2" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:952px; left:483px;"/>
-<input type="text" name="pzthvd2" id="pzthvd2" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:952px; left:731px;"/>
-<input type="text" name="pzks3" id="pzks3" maxlength="3" style="width:59px; top:992px; left:51px;"/>
-<input type="text" name="pdrp3" id="pdrp3" style="width:14px; top:992px; left:131px;"/>
-<input type="text" name="pdro3" id="pdro3" style="width:14px; top:992px; left:164px;"/>
-<input type="text" name="pdrm3" id="pdrm3" style="width:14px; top:992px; left:200px;"/>
-<input type="text" name="pzpr3" id="pzpr3" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:992px; left:234px;"/>
-<input type="text" name="pzvd3" id="pzvd3" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:992px; left:483px;"/>
-<input type="text" name="pzthvd3" id="pzthvd3" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:992px; left:731px;"/>
-<input type="text" name="pzks4" id="pzks4" maxlength="3" style="width:59px; top:1032px; left:51px;"/>
-<input type="text" name="pdrp4" id="pdrp4" style="width:14px; top:1032px; left:131px;"/>
-<input type="text" name="pdro4" id="pdro4" style="width:14px; top:1032px; left:164px;"/>
-<input type="text" name="pdrm4" id="pdrm4" style="width:14px; top:1032px; left:200px;"/>
-<input type="text" name="pzpr4" id="pzpr4" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1032px; left:234px;"/>
-<input type="text" name="pzvd4" id="pzvd4" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1032px; left:483px;"/>
-<input type="text" name="pzthvd4" id="pzthvd4" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:1032px; left:731px;"/>
-<input type="text" name="pzks5" id="pzks5" maxlength="3" style="width:59px; top:1072px; left:51px;"/>
-<input type="text" name="pdrp5" id="pdrp5" style="width:14px; top:1072px; left:131px;"/>
-<input type="text" name="pdro5" id="pdro5" style="width:14px; top:1072px; left:164px;"/>
-<input type="text" name="pdrm5" id="pdrm5" style="width:14px; top:1072px; left:200px;"/>
-<input type="text" name="pzpr5" id="pzpr5" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1072px; left:234px;"/>
-<input type="text" name="pzvd5" id="pzvd5" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1072px; left:483px;"/>
-<input type="text" name="pzthvd5" id="pzthvd5" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:1072px; left:731px;"/>
-<input type="text" name="pzks6" id="pzks6" maxlength="3" style="width:59px; top:1113px; left:51px;"/>
-<input type="text" name="pdrp6" id="pdrp6" style="width:14px; top:1113px; left:131px;"/>
-<input type="text" name="pdro6" id="pdro6" style="width:14px; top:1113px; left:164px;"/>
-<input type="text" name="pdrm6" id="pdrm6" style="width:14px; top:1113px; left:200px;"/>
-<input type="text" name="pzpr6" id="pzpr6" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1113px; left:234px;"/>
-<input type="text" name="pzvd6" id="pzvd6" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1113px; left:483px;"/>
-<input type="text" name="pzthvd6" id="pzthvd6" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:1113px; left:731px;"/>
+<input type="text" name="pzks1" id="pzks1" maxlength="3" style="width:59px; top:944px; left:51px;"/>
+<input type="text" name="pdrp1" id="pdrp1" style="width:14px; top:944px; left:131px;"/>
+<input type="text" name="pdro1" id="pdro1" style="width:14px; top:944px; left:164px;"/>
+<input type="text" name="pdrm1" id="pdrm1" style="width:14px; top:944px; left:200px;"/>
+<input type="text" name="pzpr1" id="pzpr1" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:944px; left:234px;"/>
+<input type="text" name="pzvd1" id="pzvd1" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:944px; left:483px;"/>
+<input type="text" name="pzthvd1" id="pzthvd1" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:944px; left:731px;"/>
+<input type="text" name="pzks2" id="pzks2" maxlength="3" style="width:59px; top:984px; left:51px;"/>
+<input type="text" name="pdrp2" id="pdrp2" style="width:14px; top:984px; left:131px;"/>
+<input type="text" name="pdro2" id="pdro2" style="width:14px; top:984px; left:164px;"/>
+<input type="text" name="pdrm2" id="pdrm2" style="width:14px; top:984px; left:200px;"/>
+<input type="text" name="pzpr2" id="pzpr2" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:984px; left:234px;"/>
+<input type="text" name="pzvd2" id="pzvd2" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:984px; left:483px;"/>
+<input type="text" name="pzthvd2" id="pzthvd2" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:984px; left:731px;"/>
+<input type="text" name="pzks3" id="pzks3" maxlength="3" style="width:59px; top:1024px; left:51px;"/>
+<input type="text" name="pdrp3" id="pdrp3" style="width:14px; top:1024px; left:131px;"/>
+<input type="text" name="pdro3" id="pdro3" style="width:14px; top:1024px; left:164px;"/>
+<input type="text" name="pdrm3" id="pdrm3" style="width:14px; top:1024px; left:200px;"/>
+<input type="text" name="pzpr3" id="pzpr3" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1024px; left:234px;"/>
+<input type="text" name="pzvd3" id="pzvd3" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1024px; left:483px;"/>
+<input type="text" name="pzthvd3" id="pzthvd3" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:1024px; left:731px;"/>
+<input type="text" name="pzks4" id="pzks4" maxlength="3" style="width:59px; top:1064px; left:51px;"/>
+<input type="text" name="pdrp4" id="pdrp4" style="width:14px; top:1064px; left:131px;"/>
+<input type="text" name="pdro4" id="pdro4" style="width:14px; top:1064px; left:164px;"/>
+<input type="text" name="pdrm4" id="pdrm4" style="width:14px; top:1064px; left:200px;"/>
+<input type="text" name="pzpr4" id="pzpr4" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1064px; left:234px;"/>
+<input type="text" name="pzvd4" id="pzvd4" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1064px; left:483px;"/>
+<input type="text" name="pzthvd4" id="pzthvd4" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:1064px; left:731px;"/>
+<input type="text" name="pzks5" id="pzks5" maxlength="3" style="width:59px; top:1104px; left:51px;"/>
+<input type="text" name="pdrp5" id="pdrp5" style="width:14px; top:1104px; left:131px;"/>
+<input type="text" name="pdro5" id="pdro5" style="width:14px; top:1104px; left:164px;"/>
+<input type="text" name="pdrm5" id="pdrm5" style="width:14px; top:1104px; left:200px;"/>
+<input type="text" name="pzpr5" id="pzpr5" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1104px; left:234px;"/>
+<input type="text" name="pzvd5" id="pzvd5" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1104px; left:483px;"/>
+<input type="text" name="pzthvd5" id="pzthvd5" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:1104px; left:731px;"/>
+<input type="text" name="pzks6" id="pzks6" maxlength="3" style="width:59px; top:1144px; left:51px;"/>
+<input type="text" name="pdrp6" id="pdrp6" style="width:14px; top:1144px; left:131px;"/>
+<input type="text" name="pdro6" id="pdro6" style="width:14px; top:1144px; left:164px;"/>
+<input type="text" name="pdrm6" id="pdrm6" style="width:14px; top:1144px; left:200px;"/>
+<input type="text" name="pzpr6" id="pzpr6" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1144px; left:234px;"/>
+<input type="text" name="pzvd6" id="pzvd6" onkeyup="CiarkaNaBodku(this);" style="width:232px; top:1144px; left:483px;"/>
+<input type="text" name="pzthvd6" id="pzthvd6" onkeyup="CiarkaNaBodku(this);" style="width:163px; top:1144px; left:731px;"/>
 <script>
   function KlikNeuplAno()
   {
@@ -3612,7 +3764,6 @@ $sn1c=substr($sknacec,0,1);
 <?php if ( $strana == 13 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str13.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
-
 <!-- PRILOHA 1 -->
 <div class="input-echo right" style="top:167px; left:269px; width:36px;"><?php echo $prpcp; ?>&nbsp;</div>
 <div class="input-echo right" style="top:167px; left:338px; width:36px;"><?php echo $prppp; ?>&nbsp;</div>
@@ -3646,8 +3797,57 @@ $sn1c=substr($sknacec,0,1);
 <?php if ( $strana == 14 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str14.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
-
 <!-- PRILOHA 2 -->
+<input type="text" name="ozd1r01" id="ozd1r01" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:351px; left:410px;"/>
+<input type="text" name="ozd1r02" id="ozd1r02" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:390px; left:410px;"/>
+<input type="text" name="ozd1r03" id="ozd1r03" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:429px; left:410px;"/>
+<input type="text" name="ozd1r04" id="ozd1r04" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:468px; left:410px;"/>
+<input type="text" name="ozd2r04" id="ozd2r04" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:468px; left:661px;"/>
+<input type="text" name="ozd1r05" id="ozd1r05" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:507px; left:410px;"/>
+<input type="text" name="ozd2r05" id="ozd2r05" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:507px; left:661px;"/>
+<div class="input-echo right" style="width:234px; top:546px; left:410px;"><?php echo $ozd1r06; ?>&nbsp;</div>
+<div class="input-echo right" style="width:234px; top:546px; left:661px;"><?php echo $ozd2r06; ?>&nbsp;</div>
+<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:546px; left:913px;">
+<div class="input-echo right" style="width:244px; top:699px; left:557px;"><?php echo $ozdr07; ?>&nbsp;</div>
+<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:699px; left:830px;">
+<input type="text" name="ozdr08" id="ozdr08" maxlength="1" style="width:13px; top:737px; left:695px;"/>
+<div class="input-echo right" style="width:244px; top:782px; left:557px;"><?php echo $ozdr09; ?>&nbsp;</div>
+<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:783px; left:830px;">
+<input type="text" name="ozdr10" id="ozdr10" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:870px; left:557px;"/>
+<input type="text" name="ozdr11" id="ozdr11" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:909px; left:557px;"/>
+<input type="text" name="ozdr12" id="ozdr12" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:952px; left:557px;"/>
+<input type="text" name="ozdr13" id="ozdr13" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1042px; left:557px;"/>
+<input type="text" name="ozdr14" id="ozdr14" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1086px; left:557px;"/>
+<input type="text" name="ozdr15" id="ozdr15" onkeyup="CiarkaNaBodku(this);" style="width:129px; top:1131px; left:672px;"/>
+<input type="text" name="ozdr16" id="ozdr16" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1170px; left:557px;"/>
+<input type="text" name="ozdr17" id="ozdr17" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1210px; left:557px;"/>
+<?php                      } ?>
+
+
+<?php if ( $strana == 15 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str15.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
+<span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
+<!-- PRILOHA 2 pokracovanie -->
+<input type="text" name="ozdr18" id="ozdr18" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:120px; left:557px;"/>
+<input type="text" name="ozd1r19" id="ozd1r19" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:268px; left:410px;"/>
+<input type="text" name="ozd1r20" id="ozd1r20" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:307px; left:410px;"/>
+<input type="text" name="ozd1r21" id="ozd1r21" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:345px; left:410px;"/>
+<input type="text" name="ozd1r22" id="ozd1r22" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:384px; left:410px;"/>
+<input type="text" name="ozd2r22" id="ozd2r22" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:384px; left:661px;"/>
+<input type="text" name="ozd1r23" id="ozd1r23" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:423px; left:410px;"/>
+<input type="text" name="ozd2r23" id="ozd2r23" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:423px; left:661px;"/>
+<input type="text" name="ozd1r24" id="ozd1r24" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:462px; left:410px;"/>
+<input type="text" name="ozd2r24" id="ozd2r24" onkeyup="CiarkaNaBodku(this);" style="width:234px; top:462px; left:661px;"/>
+<input type="text" name="ozdr25" id="ozdr25" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:560px; left:557px;"/>
+<input type="text" name="ozdr27" id="ozdr27" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:644px; left:557px;"/>
+<input type="text" name="ozdr28" id="ozdr28" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:705px; left:557px;"/>
+<?php                      } ?>
+
+
+<?php if ( $strana == 16 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str16.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
+<span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
+<!-- PRILOHA 3 -->
 <input type="text" name="sz1p1" id="sz1p1" onkeyup="CiarkaNaBodku(this);" style="width:233px; top:211px; left:410px;"/>
 <input type="text" name="sz1v1" id="sz1v1" onkeyup="CiarkaNaBodku(this);" style="width:233px; top:211px; left:660px;"/>
 <input type="text" name="sz2" id="sz2" onkeyup="CiarkaNaBodku(this);" style="width:243px; top:275px; left:517px;"/>
@@ -3670,21 +3870,6 @@ $sn1c=substr($sknacec,0,1);
 <input type="checkbox" name="vpdu" value="1" style="top:1102px; left:60px;"/>
 <input type="text" name="sz16" id="sz16" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1134px; left:516px;"/>
 <input type="text" name="szdat" id="szdat" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:196px; top:1205px; left:116px;"/>
-<?php                      } ?>
-
-
-<?php if ( $strana == 15 ) { ?>
-<img src="<?php echo $jpg_source; ?>_str15.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
-<span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
-
-
-<?php                      } ?>
-
-
-<?php if ( $strana == 16 ) { ?>
-<img src="<?php echo $jpg_source; ?>_str16.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
-<span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
-
 
 <?php                      } ?>
 
@@ -11741,6 +11926,42 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
 <?php                                         } ?>
 
 <?php if ( $strana == 14 OR $strana == 9999 ) { ?>
+   document.formv1.ozd1r01.value = '<?php echo $ozd1r01; ?>';
+   document.formv1.ozd1r02.value = '<?php echo $ozd1r02; ?>';
+   document.formv1.ozd1r03.value = '<?php echo $ozd1r03; ?>';
+   document.formv1.ozd1r04.value = '<?php echo $ozd1r04; ?>';
+   document.formv1.ozd2r04.value = '<?php echo $ozd2r04; ?>';
+   document.formv1.ozd1r05.value = '<?php echo $ozd1r05; ?>';
+   document.formv1.ozd2r05.value = '<?php echo $ozd2r05; ?>';
+   document.formv1.ozdr08.value = '<?php echo $ozdr08; ?>';
+   document.formv1.ozdr10.value = '<?php echo $ozdr10; ?>';
+   document.formv1.ozdr11.value = '<?php echo $ozdr11; ?>';
+   document.formv1.ozdr12.value = '<?php echo $ozdr12; ?>';
+   document.formv1.ozdr13.value = '<?php echo $ozdr13; ?>';
+   document.formv1.ozdr14.value = '<?php echo $ozdr14; ?>';
+   document.formv1.ozdr15.value = '<?php echo $ozdr15; ?>';
+   document.formv1.ozdr16.value = '<?php echo $ozdr16; ?>';
+   document.formv1.ozdr17.value = '<?php echo $ozdr17; ?>';
+<?php                                         } ?>
+
+<?php if ( $strana == 15 OR $strana == 9999 ) { ?>
+   document.formv1.ozdr18.value = '<?php echo $ozdr18; ?>';
+   document.formv1.ozd1r19.value = '<?php echo $ozd1r19; ?>';
+   document.formv1.ozd1r20.value = '<?php echo $ozd1r20; ?>';
+   document.formv1.ozd1r21.value = '<?php echo $ozd1r21; ?>';
+   document.formv1.ozd1r22.value = '<?php echo $ozd1r22; ?>';
+   document.formv1.ozd2r22.value = '<?php echo $ozd2r22; ?>';
+   document.formv1.ozd1r23.value = '<?php echo $ozd1r23; ?>';
+   document.formv1.ozd2r23.value = '<?php echo $ozd2r23; ?>';
+   document.formv1.ozd1r24.value = '<?php echo $ozd1r24; ?>';
+   document.formv1.ozd2r24.value = '<?php echo $ozd2r24; ?>';
+   document.formv1.ozdr25.value = '<?php echo $ozdr25; ?>';
+   document.formv1.ozdr27.value = '<?php echo $ozdr27; ?>';
+   document.formv1.ozdr28.value = '<?php echo $ozdr28; ?>';
+<?php                                         } ?>
+
+
+<?php if ( $strana == 16 OR $strana == 9999 ) { ?>
    document.formv1.sz1p1.value = '<?php echo $sz1p1; ?>';
    document.formv1.sz1v1.value = '<?php echo $sz1v1; ?>';
    document.formv1.sz2.value = '<?php echo $sz2; ?>';
@@ -11843,5 +12064,5 @@ Todo
 - prida xml èas
 - pdf èas zvláš
 - zisti echo bunky
-
+- ièo/sid v prijímate¾och poèka na .xml
  -->
