@@ -2467,6 +2467,8 @@ $upravene = mysql_query("$uprtxt");
 
 //nacitaj udaje pre upravu
 
+$dnessk = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_po WHERE ico >= 0";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
@@ -3734,7 +3736,7 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <input type="text" name="ootel" id="ootel" style="width:289px; top:393px; left:52px;"/>
 <input type="text" name="oofax" id="oofax" style="width:521px; top:393px; left:373px;"/>
 <input type="text" name="pril" id="pril" style="width:59px; top:443px; left:143px;"/>
-<input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" style="width:198px; top:543px; left:63px;"/>
+<input type="text" name="datum" id="datum" onclick="dajDnes();" onkeyup="CiarkaNaBodku(this);" style="width:198px; top:543px; left:63px;"/>
 <!-- VIII.CAST -->
 <input type="checkbox" name="ozdspl" value="1" style="top:624px; left:59px;"/>
 <input type="text" name="ozdspl1dat" id="ozdspl1dat" onkeyup="CiarkaNaBodku(this);" style="width:198px; top:677px; left:189px;"/>
@@ -5632,6 +5634,11 @@ if ( $copern == 102 )
   function FormXML()
   {
    window.open('priznanie_po2017.php?copern=10&drupoh=1', '_blank', blank_param);
+  }
+  function dajDnes()
+  {
+  if( document.formv1.datum.value == '00.00.0000' ) { document.formv1.datum.value = '<?php echo $dnessk; ?>' }
+  if( document.formv1.datum.value == '' ) { document.formv1.datum.value = '<?php echo $dnessk; ?>' }
   }
 </script>
 </body>
