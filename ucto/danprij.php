@@ -69,7 +69,7 @@ $ajmuj=1; $ajpod=1;
 if( $druhuj == 1 OR $druhuj == 2 ) { $ajmuj=0; }
 if( $druhuj == 3 ) { $ajpod=0; }
 
-?> 
+?>
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
  <link rel="stylesheet" href="../css/reset.css">
@@ -222,6 +222,9 @@ body, .box-bluedefault {
 }
 </style>
 <script type="text/javascript">
+//parameter okna
+var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
+
 //sirka a vyska okna
 var sirkawin = screen.width-10;
 var vyskawin = screen.height-175;
@@ -248,16 +251,16 @@ var sirkawic = screen.width-10;
   }
 
 //PRIZNANIE PO
+<?php if ( $kli_vrok < 2017 ) { ?>
 <?php
 $rokdppo=$kli_vrok;
-if ( $rokdppo < 2011 ) { $rokdppo="";  }
-if ( $rokdppo == 2011 ) { $rokdppo="2011";  }
-if ( $rokdppo == 2012 ) { $rokdppo="2012";  }
-if ( $rokdppo == 2013 ) { $rokdppo="2013";  }
-if ( $rokdppo == 2014 ) { $rokdppo="2014";  }
-if ( $rokdppo == 2015 ) { $rokdppo="2015";  }
-if ( $rokdppo == 2016 ) { $rokdppo="2015";  }
-if ( $rokdppo >= 2017 ) { $rokdppo="2017";  }
+if ( $rokdppo < 2011 ) { $rokdppo=""; }
+if ( $rokdppo == 2011 ) { $rokdppo="2011"; }
+if ( $rokdppo == 2012 ) { $rokdppo="2012"; }
+if ( $rokdppo == 2013 ) { $rokdppo="2013"; }
+if ( $rokdppo == 2014 ) { $rokdppo="2014"; }
+if ( $rokdppo == 2015 ) { $rokdppo="2015"; }
+if ( $rokdppo == 2016 ) { $rokdppo="2015"; }
 ?>
   function TlacPriznanie()
   {
@@ -281,19 +284,53 @@ if ( $rokdppo >= 2017 ) { $rokdppo="2017";  }
    window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=10&sysx=UCT&drupoh=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
+<?php
+}
+//$kli_vrok < 2017
+?>
+
+<?php if ( $kli_vrok >= 2017 ) { ?>
+<?php
+$rokdppo=$kli_vrok;
+if ( $rokdppo >= 2017 ) { $rokdppo="2017"; }
+?>
+  function TlacPriznanie()
+  {
+   var h_oc = 0;
+   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>_pdf.php?copern=11&drupoh=1&strana=999', '_blank', blank_param);
+  }
+  function UpravPriznanie()
+  {
+   var h_oc = 0;
+   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=101&drupoh=1&strana=1', '_blank', blank_param);
+  }
+  function TlacPotvrdDPO()
+  {
+   var okno = window.open("../tmp/potvrddpo.<?php echo $kli_uzid; ?>.pdf", '_blank', blank_param);
+  }
+  function POdoXML()
+  {
+   window.open('../ucto/priznanie_po<?php echo $rokdppo; ?>.php?copern=10&drupoh=1', '_blank', blank_param);
+  }
+<?php
+}
+//$kli_vrok >= 2017
+?>
+
+
 
 //priznanie FOB
+<?php if ( $kli_vrok < 2017 ) { ?>
 <?php
 $rokfob=$kli_vrok;
 $skriptfob="../mzdy/priznanie_fob";
 if ( $rokfob < 2011 ) { $rokfob="";  }
-if ( $rokfob == 2011 ) { $rokfob="2011";  }
-if ( $rokfob == 2012 ) { $rokfob="2012";  }
-if ( $rokfob == 2013 ) { $rokfob="2013";  }
-if ( $rokfob == 2014 ) { $rokfob="2014";  }
-if ( $rokfob == 2015 ) { $rokfob="2015";  }
-if ( $rokfob == 2016 ) { $rokfob="2016";  }
-if ( $rokfob >= 2017 ) { $rokfob="2017";  }
+if ( $rokfob == 2011 ) { $rokfob="2011"; }
+if ( $rokfob == 2012 ) { $rokfob="2012"; }
+if ( $rokfob == 2013 ) { $rokfob="2013"; }
+if ( $rokfob == 2014 ) { $rokfob="2014"; }
+if ( $rokfob == 2015 ) { $rokfob="2015"; }
+if ( $rokfob == 2016 ) { $rokfob="2016"; }
 if ( $rokfob >= 2011 ) { $skriptfob="../ucto/priznanie_fob"; }
 ?>
   function TlacFOB()
@@ -318,6 +355,39 @@ if ( $rokfob >= 2011 ) { $skriptfob="../ucto/priznanie_fob"; }
    window.open('../ucto/priznaniefob_xml<?php echo $rokfob; ?>.php?copern=110&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
+<?php
+}
+//$kli_vrok < 2017
+?>
+
+<?php if ( $kli_vrok >= 2017 ) { ?>
+<?php
+$rokfob=$kli_vrok;
+if ( $rokfob >= 2017 ) { $rokfob="2017";  }
+?>
+  function TlacFOB()
+  {
+   var h_oc = 9999;
+   window.open('../ucto/priznanie_fob<?php echo $rokfob; ?>_pdf.php?cislo_oc=' + h_oc + '&copern=11&drupoh=1&subor=0&strana=9999', '_blank', blank_param);
+  }
+  function UpravFOB()
+  {
+   var h_oc = 9999;
+   window.open('../ucto/priznanie_fob<?php echo $rokfob; ?>.php?cislo_oc=' + h_oc + '&copern=20&drupoh=1&subor=0&prepocitaj=101', '_blank', blank_param);
+  }
+  function TlacPotvrdFOB()
+  {
+   var okno = window.open("../tmp/potvrdfob<?php echo $kli_vxcf; ?>.<?php echo $kli_uzid; ?>.pdf",
+ '_blank', blank_param);
+  }
+  function FOBdoXML()
+  {
+   window.open('../ucto/priznanie_fob<?php echo $rokfob; ?>.php?copern=10&drupoh=1', '_blank', blank_param);
+  }
+<?php
+}
+//$kli_vrok >= 2017
+?>
 
 //poznamky 2013 podnikatelske
   function TlacPoznamky2013()
@@ -413,12 +483,12 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function SynGenSuv()
-  { 
+  {
    window.open('../ucto/oprsys.php?copern=308&drupoh=44&page=1&sysx=UCT',
  '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function GenSuvNo()
-  { 
+  {
    window.open('../ucto/oprcis.php?copern=308&drupoh=96&page=1&sysx=UCT',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
@@ -433,7 +503,7 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
-//OZNAMENIE O ODLOZENI 
+//OZNAMENIE O ODLOZENI
   function TlacOzOdl()
   {
    window.open('../ucto/uzavierka_ozn493.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
@@ -450,7 +520,7 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
-//OZNAMENIE O SCHVALENI 
+//OZNAMENIE O SCHVALENI
   function TlacOzUz()
   {
    window.open('../ucto/uzavierka_oznamenie.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
@@ -467,7 +537,7 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
-//VSEOBECNE PODANIE  
+//VSEOBECNE PODANIE
   function TlacVseob()
   {
    window.open('../ucto/vp_zavierka2015.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0&kli_nezis=<?php echo $kli_nezis; ?>',
@@ -484,7 +554,7 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
-//OZNAMENIE UPRAVY ZAKLADU DANE  
+//OZNAMENIE UPRAVY ZAKLADU DANE
   function TlacOzn176()
   {
    window.open('../ucto/oznamenie_uprzd.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
@@ -526,7 +596,7 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
 <div class="content">
 <?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
 
-<?php 
+<?php
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendens'.$kli_uzid;
 //$vysledok = mysql_query("$sqlt");
 $sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendensx'.$kli_uzid;
@@ -567,7 +637,7 @@ if ( $copern == 1 AND $kli_vduj != 9 )
            {
 ?>
 <?php
-//POD 2014        
+//POD 2014
 if ( $kli_vrok >= 2013 AND $ajpod == 1 )
 {
 ?>
@@ -650,27 +720,27 @@ if ( $kli_vrok >= 2013 AND $ajpod == 1 )
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function GenSuvPod()
-  { 
+  {
    window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
   function GenVysPod()
-  { 
+  {
    window.open('../ucto/vykazy_cis.php?copern=308&drupoh=194',
  '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function MinSuvPod()
-  { 
+  {
    window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193',
  '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function MinVysPod()
-  { 
+  {
    window.open('../ucto/vykazy_cis.php?copern=308&drupoh=194',
  '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function GesSuvPod()
-  { 
+  {
    window.open('../ucto/vykazy_cis.php?copern=308&drupoh=195',
  '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
@@ -860,27 +930,27 @@ if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function GenSuvMuj()
-  { 
+  {
    window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function GenVysMuj()
-  { 
+  {
    window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94',
  '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function MinSuvMuj()
-  { 
+  {
    window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93',
  '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function MinVysMuj()
-  { 
+  {
    window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94',
  '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function GesSuvMuj()
-  { 
+  {
    window.open('../ucto/vykazy_cis.php?copern=308&drupoh=95',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
@@ -1548,7 +1618,7 @@ if ( $copern == 1 AND $kli_vduj == 9 )
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <div class="toleft line-box-text">
 <div>
- <strong>Všeobecné podanie k účtovnej závierke </strong> 
+ <strong>Všeobecné podanie k účtovnej závierke </strong>
 </div>
 </div>
 <a href="#" onclick="VseobdoXML();" title="export do XML"
@@ -1564,7 +1634,7 @@ if ( $copern == 1 AND $kli_vduj == 9 )
    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
 <div class="toleft line-box-text">
 <div>
- <strong>Oznámenie o vykonaní úpravy základu dane </strong> 
+ <strong>Oznámenie o vykonaní úpravy základu dane </strong>
 </div>
 </div>
 <a href="#" onclick="UpravOzn176();" title="Upraviť hodnoty"

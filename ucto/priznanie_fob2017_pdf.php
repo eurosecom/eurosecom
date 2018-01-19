@@ -1070,7 +1070,7 @@ $sn1c=substr($sknacec,0,1);
 
 
 //PDF
-if ( $copern == 10 )
+if ( $copern == 11 )
 {
 //ramcek fpdf 1=zap,0=vyp
 $rmc=0;
@@ -8543,7 +8543,7 @@ $i = $i + 1;
 $pdf->Output("$outfilex");
 
 //pdf potvrdenie
-if ( $copern == 10 ) {
+if ( $copern == 11 ) {
 if ( File_Exists("../tmp/potvrdfob$kli_vume.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/potvrdfob$kli_vume.$kli_uzid.pdf"); }
      $sirka_vyska="210,320";
      $velkost_strany = explode(",", $sirka_vyska);

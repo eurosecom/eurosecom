@@ -6343,7 +6343,7 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
 
   function FormPDF(strana)
   {
-    window.open('priznanie_fob2017_pdf.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=10&strana=' + strana + '&drupoh=1&subor=0', '_blank', blank_param);
+    window.open('priznanie_fob2017_pdf.php?cislo_oc=<?php echo $cislo_oc; ?>&copern=11&strana=' + strana + '&drupoh=1&subor=0', '_blank', blank_param);
   }
   function editForm(strana)
   {
