@@ -120,7 +120,8 @@ $cit_nas = include("cis/citaj_nas.php");
 
   $ajnajom=0;
   if (File_Exists ("secomnajom/najom.php")) { $ajnajom=1; }
-  if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $vyb_xcf == 814 ) { $ajnajom=1; }
+  if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $vyb_xcf != 914 ) { $ajnajom=0; }
+  if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $vyb_xcf == 914 ) { $ajnajom=1; }
   if( $vyb_xcf != 2686 AND $vyb_xcf != 2687 AND $vyb_xcf != 2688 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=0; }
   if( $vyb_xcf == 2686 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=1; }
   if( $vyb_xcf == 2687 AND $_SERVER['SERVER_NAME'] == "www.educto.sk" ) { $ajeshop=1; }
