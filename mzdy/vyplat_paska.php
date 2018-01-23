@@ -2138,6 +2138,13 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET ozam_dss= 4.25 * ( ozam_sp
   }
 $oznac = mysql_query("$sqtoz");
 
+//vypocitaj odvod na DSS od 1.1.2018 4.50% z 18tich
+if( $kli_vrok > 2017 )
+  {
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET ozam_dss= 4.50 * ( ozam_sp+ofir_sp ) / 18  WHERE oc > 0 AND scdss > 0 ";
+  }
+$oznac = mysql_query("$sqtoz");
+
 //daj do vy jeden riadok za oc zo sum na odstrankovanie konx=9999
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvy".$kli_uzid.
 " SELECT 0,0,0,0,0,0,0,".
