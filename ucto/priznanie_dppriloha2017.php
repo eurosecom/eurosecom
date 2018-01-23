@@ -642,8 +642,8 @@ a.btn-item-new:hover {
 $clas991="noactive"; $clas992="noactive";
 if ( $copern == 1101 OR $copern == 1011 OR $copern == 1201 ) $clas991="active";
 if ( $copern == 101 OR $copern == 11 OR $copern == 201 ) $clas992="active";
-$source="../ucto/priznanie_po2015.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0&volapo=".$volapo;
-if ( $volapo == 0 ) { $source="../ucto/priznanie_fob2015.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0&volapo=".$volapo; }
+$source="../ucto/priznanie_po2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0&volapo=".$volapo;
+if ( $volapo == 0 ) { $source="../ucto/priznanie_fob2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0&volapo=".$volapo; }
 ?>
 <div class="navbar">
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>

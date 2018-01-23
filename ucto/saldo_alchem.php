@@ -434,11 +434,33 @@ $strana=0;
 
 if ( $pol > 0 )
 {
+
+if( $pol == 1 )
+    {
+$tovtt = "DROP TABLE F$kli_vxcf"."_prsaldopolcsv".$kli_uzid." ";
+$tov = mysql_query("$tovtt");
+
+$tovtt = "CREATE TABLE F$kli_vxcf"."_prsaldopolcsv".$kli_uzid." SELECT * FROM  F$kli_vxcf"."_$uctpol WHERE pox = 1 AND uce = $h_uce ";
+$tov = mysql_query("$tovtt");
+    }
+if( $pol == 9 )
+    {
+$tovtt = "DROP TABLE F$kli_vxcf"."_prsaldodolcsv".$kli_uzid." ";
+$tov = mysql_query("$tovtt");
+
+$tovtt = "CREATE TABLE F$kli_vxcf"."_prsaldodolcsv".$kli_uzid." SELECT * FROM  F$kli_vxcf"."_$uctpol WHERE pox = 1 AND uce = $h_uce ";
+$tov = mysql_query("$tovtt");
+    }
+
+//echo $pol." pol ".$tovtt;
+//exit;
+
 $tovtt = "SELECT * FROM F$kli_vxcf"."_$uctpol".
 " LEFT JOIN F$kli_vxcf"."_ico".
 " ON F$kli_vxcf"."_$uctpol.ico=F$kli_vxcf"."_ico.ico".
 " WHERE uce = $h_uce ".
 " ORDER BY pox2,nai,F$kli_vxcf"."_$uctpol.ico,pox,dat,dok";
+
 }
 
 if ( $pol > 0 AND $emotrans == 1 )
@@ -463,6 +485,7 @@ $tovtt = "SELECT * FROM F$kli_vxcf"."_$uctpol".
 
 $tov = mysql_query("$tovtt");
 $tvpol = mysql_num_rows($tov);
+
 if( $tvpol > 0 ) $jetovar=1;
 
 if( $tvpol > 0 ) $nulovazostava=0;

@@ -1540,6 +1540,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET".
 " r700='$r700', r710='$r710', r800='$r800', r810='$r810', r820='$r820', r910='$r910', r920='$r920', ".
 " r900='$r900' ".
 " WHERE ico >= 0";
+echo $uprtxt;
                     }
 
 if ( $strana == 4 ) {
@@ -2050,15 +2051,15 @@ $alertprepocet="";
 if ( $prepocitaj == 1 ) {
 $alertprepocet="!!! Prepoèítavam hodnoty v riadkoch !!!";
 
-//vsetky strany vypocty su upravene pre 2015
-//////////////////////strana 2 2015
+//vsetky strany vypocty nie su upravene pre 2017
+//////////////////////strana 2 2017
 
 if ( $rozdielodpisov == 1 )
   {
 //danove-uctovne prerobim na kliknutie na ikonku
-//upravene na rok 2015
+//upravene na rok 2017
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r150=b1r01-b1r02, r250=0, ".
+" r150=b1r01-b1r06, r250=0, ".
 " psys=0 ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
@@ -2072,7 +2073,7 @@ $upravene = mysql_query("$uprtxt");
 if ( $nedanovevydavky == 1 )
   {
 //danove-uctovne prerobim na kliknutie na ikonku
-//upravene na rok 2015
+//upravene na rok 2017
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r130=a1r17, ".
 " psys=0 ".
@@ -2087,9 +2088,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
-/////////////////////strana 3 2015
+/////////////////////strana 3 2017
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r310=r301+r302+r303+r304-r305, ".
+" r310=r301+r302+r303+r304+r305+r306-r307, ".
 " psys=0 ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
@@ -2102,9 +2103,9 @@ $upravene = mysql_query("$uprtxt");
 
 if ( $odpocetstraty == 1 )
   {
-//upravene na rok 2015
+//upravene na rok 2017
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r410=d7r02, ".
+" r410=d9r02, ".
 " psys=0 ".
 " WHERE ico >= 0 AND r400 > 0 ";
 $upravene = mysql_query("$uprtxt");
@@ -2123,7 +2124,7 @@ $upravene = mysql_query("$uprtxt");
 
 if ( $odpocetvyskum == 1 )
   {
-//upravene na rok 2015
+//upravene na rok 2017
 $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET prpods=prpod1+prpod2+prpod3+prpod4+prpod5 WHERE prcpl > 0 ";
 $sqldok = mysql_query("$sqlttt");
 
@@ -2165,6 +2166,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r600=0 WHERE r510 <= 0";
 $upravene = mysql_query("$uprtxt");
 
+//upravene na rok 2015 andrejko
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r700=r600-r610, ".
 " psys=0 ".
@@ -3181,7 +3183,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r120" id="r120" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:296px; left:529px;"/>
 <input type="text" name="r130" id="r130" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:340px; left:529px;"/>
  <img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajNedVyd();"
-      title="Naèíta nedaòové výdavky (náklady) z tabu¾ky A (III.èas PO 4. a 5.strana)"
+      title="Naèíta nedaòové výdavky (náklady) z tabu¾ky A (III.èas PO 5.strana)"
       class="btn-row-tool" style="top:339px; left:833px;">
 <input type="text" name="r140" id="r140" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:382px; left:529px;"/>
 <input type="text" name="r150" id="r150" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:421px; left:529px;"/>
@@ -3237,7 +3239,7 @@ $sn1c=substr($sknacec,0,1);
 <div class="input-echo right" style="width:290px; top:433px; left:530px;"><?php echo $r400; ?>&nbsp;</div>
 <img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:434px; left:853px;">
 <div class="input-echo right" style="width:290px; top:498px; left:530px;"><?php echo $r410; ?>&nbsp;</div>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="OdpocetStraty();" title="Naèíta odpoèet straty z tabu¾ky D ståpec 7 riadok 2 na str.6" class="btn-row-tool" style="top:498px; left:833px;">
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="OdpocetStraty();" title="Naèíta odpoèet straty z tabu¾ky D ståpec 9 riadok 2 na str.7" class="btn-row-tool" style="top:498px; left:833px;">
 <div class="input-echo right" style="width:290px; top:538px; left:530px;"><?php echo $r500; ?>&nbsp;</div>
 <img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:538px; left:853px;">
 <div class="input-echo right" style="width:290px; top:602px; left:530px;"><?php echo $r501; ?>&nbsp;</div>
@@ -5274,8 +5276,8 @@ if ( $copern == 102 )
 //   document.formv1.r510.value = '<?php echo $r510; ?>';
 //   document.formv1.r550.value = '<?php echo $r550; ?>';
 //   document.formv1.r600.value = '<?php echo $r600; ?>';
-   document.formv1.r610text.value = '<?php echo $r610text; ?>';
    document.formv1.r610.value = '<?php echo $r610; ?>';
+   document.formv1.r610text.value = '<?php echo $r610text; ?>';
 //   document.formv1.r700.value = '<?php echo $r700; ?>';
 //   document.formv1.r710.value = '<?php echo $r710; ?>';
 //   document.formv1.r800.value = '<?php echo $r800; ?>';
