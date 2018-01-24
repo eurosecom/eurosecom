@@ -1225,7 +1225,7 @@ $vytvor = mysql_query("$vsql");
 
 $prepocitaj=1;
 $copern=102;
-$strana=4;
+$strana=5;
 }
 //koniec nacitania
 
@@ -2356,7 +2356,7 @@ $upravene = mysql_query("$uprtxt");
   }
 
 
-//////////////////strana 5 tabulky 2015 andrejko
+//////////////////strana 5 tabulky 2017
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " a1r17=a1r01+a1r02+a1r03+a1r04+a1r05+a1r06+a1r07+a1r08+a1r09+a1r10+a1r11+a1r12+a1r13+a1r14+a1r15+a1r16, ".
 " psys=0 ".
@@ -2371,7 +2371,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $upravene = mysql_query("$uprtxt");
 
 
-//////////////////strana 7 2015
+//////////////////strana 7 2015 andrejko
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET f1r03=f1r01-f1r02, ".
 " psys=0 ".
 " WHERE ico >= 0";
@@ -3210,8 +3210,7 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r280" id="r280" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:961px; left:529px;"/>
 <input type="text" name="r290" id="r290" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1011px; left:529px;"/>
 <div class="input-echo right" style="width:290px; top:1050px; left:530px;"><?php echo $r300; ?>&nbsp;</div>
-<div class="input-echo right" style="width:290px; top:1118px; left:530px;"><?php echo $r301; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:1119px; left:853px;">
+<div class="input-echo right" style="width:290px; top:1118px; left:530px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien na strane"><?php echo $r301; ?>&nbsp;</div>
 <input type="text" name="r302" id="r302" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1156px; left:529px;"/>
 <input type="text" name="r303" id="r303" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1204px; left:529px;"/>
 <script>
@@ -3384,8 +3383,7 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <input type="text" name="b1r03" id="b1r03" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1064px; left:529px;"/>
 <input type="text" name="b1r04" id="b1r04" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1103px; left:529px;"/>
 <input type="text" name="b1r05" id="b1r05" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:1142px; left:529px;"/>
-<div class="input-echo right" style="width:290px; top:1182px; left:530px;"><?php echo $b1r06; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:1182px; left:853px;">
+<div class="input-echo right" style="width:290px; top:1182px; left:530px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien na strane"><?php echo $b1r06; ?>&nbsp;</div>
 <script>
   function NacitajOdpisy()
   {
