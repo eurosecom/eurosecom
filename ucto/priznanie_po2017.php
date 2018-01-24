@@ -2236,7 +2236,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " WHERE ico >= 0 AND r810 <= r800 ";
 $upravene = mysql_query("$uprtxt");
 
-//////////////////strana 3,4 2015  andrejko
+//////////////////strana 3,4 2017 
 
 if ( $licenciatabk == 1 )
   {
@@ -2309,7 +2309,13 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
-" r1100=r1050-r1040, r1101=0, ".
+" r1080=r1050+r1060+r1070, ".
+" psys=0 ".
+" WHERE ico >= 0 ";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" r1100=r1080-r1090-r1040, r1101=0, ".
 " psys=0 ".
 " WHERE ico >= 0 ";
 $upravene = mysql_query("$uprtxt");
@@ -2322,7 +2328,7 @@ $upravene = mysql_query("$uprtxt");
 
 if ( $preddavky == 1 )
   {
-//upravene na rok 2015 a 2016
+//upravene na rok 2017
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r1110=r510*21, psys=0 WHERE ico >= 0";
 if( $kli_vrok >= 2016 )
@@ -2350,14 +2356,14 @@ $upravene = mysql_query("$uprtxt");
   }
 
 
-//////////////////strana 4 tabulky 2015
+//////////////////strana 5 tabulky 2015 andrejko
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " a1r17=a1r01+a1r02+a1r03+a1r04+a1r05+a1r06+a1r07+a1r08+a1r09+a1r10+a1r11+a1r12+a1r13+a1r14+a1r15+a1r16, ".
 " psys=0 ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
-//////////////////strana 5 2015
+
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " b1r06=b1r02-b1r03-b1r04+b1r05, ".
 " psys=0 ".
@@ -3232,23 +3238,18 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r305" id="r305" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:165px; left:529px;"/>
 <input type="text" name="r306" id="r306" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:207px; left:529px;"/> <!-- dopyt,new -->
 <input type="text" name="r307" id="r307" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:247px; left:529px;"/><!-- dopyt,new -->
-<div class="input-echo right" style="width:290px; top:311px; left:530px;"title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r310; ?>&nbsp;</div>
+<div class="input-echo right" style="width:290px; top:311px; left:530px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r310; ?>&nbsp;</div>
 <input type="text" name="r320" id="r320" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:352px; left:529px;"/>
 <input type="text" name="r330" id="r330" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:393px; left:529px;"/>
-<div class="input-echo right" style="width:290px; top:433px; left:530px;"><?php echo $r400; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa prepoèíta po uložení zmien na strane" class="btn-row-tool" style="top:434px; left:853px;">
+<div class="input-echo right" style="width:290px; top:433px; left:530px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r400; ?>&nbsp;</div>
 <input type="text" name="r410" id="r410" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:498px; left:530px;"/>
 <img src="../obr/ikony/calculator_blue_icon.png" onclick="OdpocetStraty();" title="Naèíta odpoèet straty z tabu¾ky D ståpec 9 riadok 2 na str.7" class="btn-row-tool" style="top:498px; left:833px;">
-<div class="input-echo right" style="width:290px; top:538px; left:530px;"><?php echo $r500; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:538px; left:853px;">
-<div class="input-echo right" style="width:290px; top:602px; left:530px;"><?php echo $r501; ?>&nbsp;</div>
+<div class="input-echo right" style="width:290px; top:538px; left:530px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r500; ?>&nbsp;</div>
+<input type="text" name="r501" id="r501" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:602px; left:530px;"/>
 <img src="../obr/ikony/calculator_blue_icon.png" onclick="OdpocetVyskum();" title="Naèíta odpoèet výdavkov na výskum a vývoj z r.7 Prílohy P1" class="btn-row-tool" style="top:601px; left:833px;">
-<div class="input-echo right" style="width:290px; top:641px; left:530px;"><?php echo $r510; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:642px; left:853px;">
+<div class="input-echo right" style="width:290px; top:641px; left:530px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r510; ?>&nbsp;</div>
 <div class="input-echo right" style="width:36px; top:707px; left:530px;"><?php echo $r550; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:707px; left:853px;">
-<div class="input-echo right" style="width:290px; top:746px; left:530px;"><?php echo $r600; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:747px; left:853px;">
+<div class="input-echo right" style="width:290px; top:746px; left:530px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r600; ?>&nbsp;</div>
 <select size="1" id="r610text" name="r610text" style="width:426px; top:821px; left:55px;">
   <option value=""></option>
   <option value="§ 30a zákona è. 595/2003 Z.z.">§ 30a zákona è. 595/2003 Z.z.</option>
@@ -3260,19 +3261,15 @@ $sn1c=substr($sknacec,0,1);
   <option value="§ 35c zákona è. 366/1999 Z.z.">§ 35c zákona è. 366/1999 Z.z.</option>
 </select>
 <input type="text" name="r610" id="r610" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:814px; left:529px;"/>
-<div class="input-echo right" style="width:290px; top:859px; left:530px;"><?php echo $r700; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:859px; left:853px;">
-<div class="input-echo right" style="width:290px; top:923px; left:530px;"><?php echo $r710; ?>&nbsp;</div>
+<div class="input-echo right" style="width:290px; top:859px; left:530px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r700; ?>&nbsp;</div>
+<input type="text" name="r710" id="r710" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:923px; left:530px;"/>
 <img src="../obr/ikony/calculator_blue_icon.png" onclick="ZapocetDane();" title="Naèíta zápoèet dane z tabu¾ky E riadok 6 na str.7" class="btn-row-tool" style="top:922px; left:833px;">
-<div class="input-echo right" style="width:290px; top:962px; left:530px;"><?php echo $r800; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:962px; left:853px;">
+<div class="input-echo right" style="width:290px; top:962px; left:530px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r800; ?>&nbsp;</div>
 <input type="text" name="r810" id="r810" style="width:82px; top:1027px; left:667px;"/>
-<input type="text" name="r820" id="r820" onkeyup="CiarkaNaBodku(this);" style="width:150px; top:1067px; left:667px;"/>
-<div class="input-echo right" style="width:290px; top:1107px; left:530px;"><?php echo $r900; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:1107px; left:853px;">
-<div class="input-echo right" style="width:290px; top:1172px; left:530px;"><?php echo $r910; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:1173px; left:853px;">
-<div class="input-echo right" style="width:290px; top:1214px; left:530px;"><?php echo $r920; ?>&nbsp;</div>
+<div class="input-echo right" style="width:150px; top:1067px; left:667px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r820; ?>&nbsp;</div>
+<div class="input-echo right" style="width:290px; top:1107px; left:530px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r900; ?>&nbsp;</div>
+<input type="text" name="r910" id="r910" style="width:290px; top:1172px; left:530px;"/>
+<input type="text" name="r920" id="r920" style="width:290px; top:1214px; left:530px;"/>
 <img src="../obr/ikony/calculator_blue_icon.png" onclick="LicenciaTabK();" title="Kladný rozdiel medzi daòovou licenciou a daòou z predch. období z r.5 ståpec 4. tabu¾ky K na 9.strane max. do výšky na riadku 910" class="btn-row-tool" style="top:1214px; left:833px;">
 <script>
   function OdpocetVyskum()
@@ -3299,30 +3296,20 @@ $sn1c=substr($sknacec,0,1);
 <img src="<?php echo $jpg_source; ?>_str4.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 <!-- II.CAST pokracovanie -->
-<div class="input-echo right" style="width:290px; top:115px; left:530px;"><?php echo $r1000; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:115px; left:853px;">
+<input type="text" name="r1000" id="r1000" style="width:290px; top:115px; left:530px;"/>
 <input type="text" name="r1010" id="r1010" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:196px; left:529px;"/>
 <input type="text" name="r1020" id="r1020" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:235px; left:529px;"/>
 <input type="text" name="r1030" id="r1030" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:274px; left:529px;"/>
-<div class="input-echo right" style="width:290px; top:313px; left:530px;"><?php echo $r1040; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:314px; left:853px;">
+<div class="input-echo right" style="width:290px; top:313px; left:530px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r1040; ?>&nbsp;</div>
 <input type="text" name="r1050" id="r1050" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:352px; left:529px;"/>
-<div class="input-echo right" style="width:290px; top:391px; left:530px;"><?php echo $r1060; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:391px; left:853px;">
-<div class="input-echo right" style="width:290px; top:434px; left:530px;"><?php echo $r1061; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:435px; left:853px;">
-<div class="input-echo right" style="width:290px; top:482px; left:530px;"><?php echo $r1062; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:483px; left:853px;">
-<div class="input-echo right" style="width:290px; top:525px; left:530px;"><?php echo $r1070; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:525px; left:853px;">
-<div class="input-echo right" style="width:290px; top:564px; left:530px;"><?php echo $r1080; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:564px; left:853px;">
-<div class="input-echo right" style="width:290px; top:603px; left:530px;"><?php echo $r1090; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:603px; left:853px;">
-<div class="input-echo right" style="width:290px; top:642px; left:530px;"><?php echo $r1100; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:642px; left:853px;">
-<div class="input-echo right" style="width:290px; top:681px; left:530px; background-color: #E8F4CE; "><?php echo $r1101; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:681px; left:853px;">
+<input type="text" name="r1060" id="r1060" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:391px; left:530px;"/>
+<input type="text" name="r1061" id="r1061" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:434px; left:530px;"/>
+<input type="text" name="r1062" id="r1062" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:482px; left:530px;"/>
+<input type="text" name="r1070" id="r1070" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:525px; left:530px;"/>
+<div class="input-echo right" style="width:290px; top:564px; left:530px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r1080; ?>&nbsp;</div>
+<input type="text" name="r1090" id="r1090" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:603px; left:530px;"/>
+<div class="input-echo right" style="width:290px; top:642px; left:530px;" title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r1100; ?>&nbsp;</div>
+<div class="input-echo right" style="width:290px; top:681px; left:530px; background-color: #E8F4CE; " title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r1101; ?>&nbsp;</div>
 <img src="../obr/ikony/info_blue_icon.png" title="Spôsob výpoètu preddavku" onclick="InfoPreddDane();" class="btn-row-tool" style="top:817px; left:440px;">
 <input type="text" name="r1110" id="r1110" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:817px; left:529px;"/>
 <img src="../obr/ikony/calculator_blue_icon.png" onclick="Preddavky();" title="Vypoèíta výšku preddavku na daò" class="btn-row-tool" style="top:817px; left:833px;">
@@ -5271,35 +5258,35 @@ if ( $copern == 102 )
 //   document.formv1.r400.value = '<?php echo $r400; ?>';
    document.formv1.r410.value = '<?php echo $r410; ?>';
 //   document.formv1.r500.value = '<?php echo $r500; ?>';
-//   document.formv1.r501.value = '<?php echo $r501; ?>';
+   document.formv1.r501.value = '<?php echo $r501; ?>';
 //   document.formv1.r510.value = '<?php echo $r510; ?>';
 //   document.formv1.r550.value = '<?php echo $r550; ?>';
 //   document.formv1.r600.value = '<?php echo $r600; ?>';
    document.formv1.r610.value = '<?php echo $r610; ?>';
    document.formv1.r610text.value = '<?php echo $r610text; ?>';
 //   document.formv1.r700.value = '<?php echo $r700; ?>';
-//   document.formv1.r710.value = '<?php echo $r710; ?>';
+   document.formv1.r710.value = '<?php echo $r710; ?>';
 //   document.formv1.r800.value = '<?php echo $r800; ?>';
    document.formv1.r810.value = '<?php echo $r810; ?>';
-   document.formv1.r820.value = '<?php echo $r820; ?>';
+//   document.formv1.r820.value = '<?php echo $r820; ?>';
 //   document.formv1.r900.value = '<?php echo $r900; ?>';
-//   document.formv1.r910.value = '<?php echo $r910; ?>';
-//   document.formv1.r920.value = '<?php echo $r920; ?>';
+   document.formv1.r910.value = '<?php echo $r910; ?>';
+   document.formv1.r920.value = '<?php echo $r920; ?>';
 <?php                     } ?>
 
 <?php if ( $strana == 4 ) { ?>
-//   document.formv1.r1000.value = '<?php echo $r1000; ?>';
+   document.formv1.r1000.value = '<?php echo $r1000; ?>';
    document.formv1.r1010.value = '<?php echo $r1010; ?>';
    document.formv1.r1020.value = '<?php echo $r1020; ?>';
    document.formv1.r1030.value = '<?php echo $r1030; ?>';
 //   document.formv1.r1040.value = '<?php echo $r1040; ?>';
    document.formv1.r1050.value = '<?php echo $r1050; ?>';
-//   document.formv1.r1060.value = '<?php echo $r1060; ?>';
-//   document.formv1.r1061.value = '<?php echo $r1061; ?>';
-//   document.formv1.r1062.value = '<?php echo $r1062; ?>';
-//   document.formv1.r1070.value = '<?php echo $r1070; ?>';
+   document.formv1.r1060.value = '<?php echo $r1060; ?>';
+   document.formv1.r1061.value = '<?php echo $r1061; ?>';
+   document.formv1.r1062.value = '<?php echo $r1062; ?>';
+   document.formv1.r1070.value = '<?php echo $r1070; ?>';
 //   document.formv1.r1080.value = '<?php echo $r1080; ?>';
-//   document.formv1.r1090.value = '<?php echo $r1090; ?>';
+   document.formv1.r1090.value = '<?php echo $r1090; ?>';
 //   document.formv1.r1100.value = '<?php echo $r1100; ?>';
 //   document.formv1.r1101.value = '<?php echo $r1101; ?>';
    document.formv1.r1110.value = '<?php echo $r1110; ?>';
