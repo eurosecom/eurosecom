@@ -1540,7 +1540,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET".
 " r700='$r700', r710='$r710', r800='$r800', r810='$r810', r820='$r820', r910='$r910', r920='$r920', ".
 " r900='$r900' ".
 " WHERE ico >= 0";
-echo $uprtxt;
+//echo $uprtxt;
                     }
 
 if ( $strana == 4 ) {
@@ -2166,7 +2166,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r600=0 WHERE r510 <= 0";
 $upravene = mysql_query("$uprtxt");
 
-//upravene na rok 2015 andrejko
+//upravene na rok 2017
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r700=r600-r610, ".
 " psys=0 ".
@@ -2179,7 +2179,7 @@ $upravene = mysql_query("$uprtxt");
 
 if ( $zapocetdane == 1 )
   {
-//upravene na rok 2015
+//upravene na rok 2017
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r710=e1r06 WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
@@ -2195,7 +2195,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r800=0 WHERE r800 <= 0";
 $upravene = mysql_query("$uprtxt");
 
-//danova licencia 2015
+//danova licencia 2017
 //document.formv1.chpld.checked = 'true';  document.formv1.cho5k.checked = 'true';  document.formv1.chpdl.checked = 'true';  document.formv1.chndl.checked = 'true';
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r810=0      WHERE chndl = 1 ";
 $upravene = mysql_query("$uprtxt");
@@ -2211,7 +2211,6 @@ $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET r810=r810/2 WHERE chndl = 0 AND chpdl = 1 ";
 $upravene = mysql_query("$uprtxt");
-
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r820=0, r830=0, r900=0, ".
@@ -2237,7 +2236,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " WHERE ico >= 0 AND r810 <= r800 ";
 $upravene = mysql_query("$uprtxt");
 
-//////////////////strana 4 2015
+//////////////////strana 3,4 2015  andrejko
 
 if ( $licenciatabk == 1 )
   {
@@ -2277,6 +2276,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " WHERE r1000 <= 0 AND r920 > 0 ";
 $upravene = mysql_query("$uprtxt");
   }
+
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " r1040=r1010+r1020+r1030, ".
@@ -3238,7 +3238,10 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r330" id="r330" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:393px; left:529px;"/>
 <div class="input-echo right" style="width:290px; top:433px; left:530px;"><?php echo $r400; ?>&nbsp;</div>
 <img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:434px; left:853px;">
-<div class="input-echo right" style="width:290px; top:498px; left:530px;"><?php echo $r410; ?>&nbsp;</div>
+
+<input type="text" name="r410" id="r410" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:498px; left:530px;"/>
+
+
 <img src="../obr/ikony/calculator_blue_icon.png" onclick="OdpocetStraty();" title="Naèíta odpoèet straty z tabu¾ky D ståpec 9 riadok 2 na str.7" class="btn-row-tool" style="top:498px; left:833px;">
 <div class="input-echo right" style="width:290px; top:538px; left:530px;"><?php echo $r500; ?>&nbsp;</div>
 <img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:538px; left:853px;">
@@ -5270,7 +5273,7 @@ if ( $copern == 102 )
    document.formv1.r320.value = '<?php echo $r320; ?>';
    document.formv1.r330.value = '<?php echo $r330; ?>';
 //   document.formv1.r400.value = '<?php echo $r400; ?>';
-//   document.formv1.r410.value = '<?php echo $r410; ?>';
+   document.formv1.r410.value = '<?php echo $r410; ?>';
 //   document.formv1.r500.value = '<?php echo $r500; ?>';
 //   document.formv1.r501.value = '<?php echo $r501; ?>';
 //   document.formv1.r510.value = '<?php echo $r510; ?>';
