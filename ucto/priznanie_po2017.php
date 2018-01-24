@@ -3232,16 +3232,12 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r305" id="r305" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:165px; left:529px;"/>
 <input type="text" name="r306" id="r306" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:207px; left:529px;"/> <!-- dopyt,new -->
 <input type="text" name="r307" id="r307" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:247px; left:529px;"/><!-- dopyt,new -->
-<div class="input-echo right" style="width:290px; top:311px; left:530px;"><?php echo $r310; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:312px; left:853px;">
+<div class="input-echo right" style="width:290px; top:311px; left:530px;"title="Hodnota sa prepoèíta po uložení zmien na strane"><?php echo $r310; ?>&nbsp;</div>
 <input type="text" name="r320" id="r320" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:352px; left:529px;"/>
 <input type="text" name="r330" id="r330" onkeyup="CiarkaNaBodku(this);" style="width:289px; top:393px; left:529px;"/>
 <div class="input-echo right" style="width:290px; top:433px; left:530px;"><?php echo $r400; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:434px; left:853px;">
-
+<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa prepoèíta po uložení zmien na strane" class="btn-row-tool" style="top:434px; left:853px;">
 <input type="text" name="r410" id="r410" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:498px; left:530px;"/>
-
-
 <img src="../obr/ikony/calculator_blue_icon.png" onclick="OdpocetStraty();" title="Naèíta odpoèet straty z tabu¾ky D ståpec 9 riadok 2 na str.7" class="btn-row-tool" style="top:498px; left:833px;">
 <div class="input-echo right" style="width:290px; top:538px; left:530px;"><?php echo $r500; ?>&nbsp;</div>
 <img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:538px; left:853px;">
