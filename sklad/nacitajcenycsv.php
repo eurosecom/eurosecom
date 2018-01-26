@@ -115,9 +115,8 @@ while (! feof($subor))
   //print "$riadok<br />";
   $pole = explode(";", $riadok);
 
-//cis;cep;minmno;%dph
-//1001;10,797287731;25;20
-//1002;12,283145114;50;10
+//cis;cep;minmno;%dph;icoDodavatela;prodnumDodavatela;cenaDodavatela;oolnySadzobnik
+//1001;0,72;20;20;31427561;;0,3000;1234
 
 
 //polozka
@@ -131,6 +130,7 @@ if( $polozka == 1 )
   $x_idod = 1*$pole[4];
   $x_nat4 = 1*$pole[5];
   $x_pdod= $pole[6];
+  $x_csdz= trim($pole[7]);
 
 $x_ced=str_replace(",",".",$x_ced);
 $x_min=str_replace(",",".",$x_min);
@@ -158,7 +158,7 @@ if( $x_cis > 0 ) { $ulozene = mysql_query("$sqlttt"); }
 $sqlttt = "UPDATE F$kli_vxcf"."_sklcisudaje SET cxc01='$x_min' WHERE xcis = $x_cis ";
 if( $x_cis > 0 AND $fir_fico != 46614478 ) { $ulozene = mysql_query("$sqlttt"); }
 
-$sqlttt = "UPDATE F$kli_vxcf"."_sklcisudaje SET cxc01='$x_min', idod='$x_idod', xnat4='$x_nat4', pdod='$x_pdod' WHERE xcis = $x_cis ";
+$sqlttt = "UPDATE F$kli_vxcf"."_sklcisudaje SET cxc01='$x_min', idod='$x_idod', xnat4='$x_nat4', pdod='$x_pdod', xtxt5='$x_csdz' WHERE xcis = $x_cis ";
 if( $fir_fico == 46614478 ) { $ulozene = mysql_query("$sqlttt"); }
 
           }
