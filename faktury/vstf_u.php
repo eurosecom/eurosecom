@@ -1808,7 +1808,6 @@ if ( $h_tltv == 1 )
 }
 ?>
 <?php
-//andrejko
   $ajeshop=0;
   if (File_Exists ("../eshop/index.php")) { $ajeshop=1; }
 
@@ -5713,7 +5712,6 @@ if ( ( $copern == 7 AND $drupoh == 1 ) OR ( $copern == 7 AND $drupoh == 31 ) )
 <?php
      }
 
-//andrejko
 ?>
 </td>
 </tr>
@@ -7614,7 +7612,21 @@ if ( $copern == 7 AND ( $drupoh == 1 OR $drupoh == 42 ) AND $sysx != 'UCT' )
 
 </td>
 
-<td class="pvstup" width="10%" >&nbsp;</td>
+<td class="pvstup" width="10%" >&nbsp;
+<?php
+if ( $copern == 7 AND ( $drupoh == 1 OR $drupoh == 42 ) AND $sysx != 'UCT' )
+     {
+?>
+<?php if( $drupoh == 1 ) { ?>
+&nbsp&nbsp&nbsp
+<a href="#" onClick="window.open('fak_prendph.php?drupoh=<?php echo $drupoh; ?>&cislo_dok=<?php echo $cislo_dok; ?>&drupoh=<?php echo $drupoh; ?>&copern=900&zlava=1', '_self' )">
+<img src='../obr/vlozit.png' width=15 height=15 border=0 title="Prepoèet Prenosu daòovej povinnosti" ></a>
+<?php                    } ?>
+<?php
+     }
+?>
+
+</td>
 <td class="pvstup" width="10%" >&nbsp;</td>
 <td class="pvstup" width="10%" >&nbsp;</td><td class="pvstup" width="10%" >&nbsp;</td>
 <td class="pvstup" width="10%" >&nbsp;</td>
