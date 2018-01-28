@@ -2481,9 +2481,11 @@ $textlekdop="Lekár dni - nárok $lek_nrk èerpané $lek_cerp, Doprovod dni - nárok 
 $pdf->Cell(80,3," ","0",0,"L");
 $pdf->Cell(100,3,"$textlekdop","0",1,"R");
 
+$texthl2x="Prac.pomer: $hlavicka->pom Úväzok: $hlavicka->suva hod/deò PrNah: $hlavicka->znah";
+if( $fir_fico == 37986830 ) { $texthl2x="Prac.pomer: $hlavicka->pom Úväzok: $hlavicka->suva hod/deò PrNah: $hlavicka->znah FP: $hlavicka->sz4"; }
 
 $pdf->SetFont('arial','',8);
-$pdf->Cell(80,4,"Prac.pomer: $hlavicka->pom Úväzok: $hlavicka->suva hod/deò PrNah: $hlavicka->znah","0",0,"L");
+$pdf->Cell(80,4,"$texthl2x","0",0,"L");
 $pdf->Cell(100,4,"Dovolenka dni - nárok $hlavicka->nrk prenesené $hlavicka->nev èerpané $hlavicka->cerp_dni = zostatok $sZostdov","0",1,"R");
 
 $pdf->SetFont('arial','',8);
