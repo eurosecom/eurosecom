@@ -1473,6 +1473,13 @@ $i=0;
 $rsluz=mysql_fetch_object($sluz);
 
 
+//andrejko
+if( $_SERVER['SERVER_NAME'] == "localhost" OR $_SERVER['SERVER_NAME'] == "www.eurosekov.sk"  ) 
+{ 
+$rsluz->nslp=$rsluz->nslp." ".$rsluz->pon;
+$rsluz->pon="";
+} 
+
 if( $rsluz->nslp != '' AND $drupoh != 12 )
 {
 $pdf->Cell(0,5,"$rsluz->nslp","0",1,"L");
