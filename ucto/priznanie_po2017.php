@@ -2388,10 +2388,10 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET hr10=hr01+h1r02-h2r02+h1r03-
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
-//////////////////strana 9 2016 andrejko
+//////////////////strana 9 2017
 if ( $nacitajdanlicencia == 1 )
   {
-$licencia2015 = 1*$_REQUEST['licencia2015'];
+$licencia2016 = 1*$_REQUEST['licencia2016'];
 
 
 $h_ycf=0;
@@ -2401,47 +2401,55 @@ $databaza="";
 $dtb2 = include("../cis/oddel_dtbz1.php");
 
 $dl2014=0; $dl2015=0; $k2r01=0; $k3r01=0; $k4r01=0; $k5r01=0;
-$sqlttt = "SELECT r830, r820, obdo, obod, k2r01, k3r01, k4r01, k5r01, k1od, k1do FROM ".$databaza."F$h_ycf"."_uctpriznanie_po ";
+$sqlttt = "SELECT r830, r820, obdo, obod, k2r01, k3r01, k4r01, k5r01, k1od, k1do, k2r02, k3r02, k4r02, k5r02, k2od, k2do, k3od, k3do ".
+" FROM ".$databaza."F$h_ycf"."_uctpriznanie_po ";
 $sqldok = mysql_query("$sqlttt");
 //echo $sqlttt;
  if (@$zaznam=mysql_data_seek($sqldok,0))
  {
  $riaddok=mysql_fetch_object($sqldok);
- $dl2014=1*$riaddok->r830;
- $dl2015=1*$riaddok->r820;
- //$obod=$riaddok->obod;
- //$obdo=$riaddok->obdo;
+ $r830=1*$riaddok->r830;
+ $r820=1*$riaddok->r820;
+
+ $obod=$riaddok->obod;
+ $obdo=$riaddok->obdo;
+
  $k1od=$riaddok->k1od;
  $k1do=$riaddok->k1do;
  $k2r01=1*$riaddok->k2r01;
  $k3r01=1*$riaddok->k3r01;
  $k4r01=1*$riaddok->k4r01;
  $k5r01=1*$riaddok->k5r01;
- }
-if( $licencia2015 == 0 )
-    {
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k2r01='$dl2014', k1od='$obod', k1do='$obdo', psys=0  WHERE ico >= 0";
-$upravene = mysql_query("$uprtxt");
-    }
 
-if( $licencia2015 == 1 )
+ $k2od=$riaddok->k2od;
+ $k2do=$riaddok->k2do;
+ $k2r02=1*$riaddok->k2r02;
+ $k3r02=1*$riaddok->k3r02;
+ $k4r02=1*$riaddok->k4r02;
+ $k5r02=1*$riaddok->k5r02;
+ }
+
+
+if( $licencia2016 == 1 )
     {
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " k2r01='$k2r01', k3r01='$k3r01'+'$k4r01', k4r01=0, k1od='$k1od', k1do='$k1do', ".
 " psys=0  ".
 " WHERE ico >= 0";
 
-if( $k5r01 > 0 ) { $upravene = mysql_query("$uprtxt"); }
+$upravene = mysql_query("$uprtxt"); 
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k2r02='$dl2015', k4r02=0, k2od='$obod', k2do='$obdo', ".
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" k2r02='$k2r02', k3r02='$k3r02'+'$k4r02', k4r02=0, k2od='$k2od', k2do='$k2do', ".
 " psys=0  ".
 " WHERE ico >= 0";
-if( $k5r01 > 0 ) { $upravene = mysql_query("$uprtxt"); }
+$upravene = mysql_query("$uprtxt"); 
 
-$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k2r01='$dl2015', k4r01=0, k2od='$obod', k2do='$obdo', ".
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
+" k2r03='$r820', k3od='$obod', k3do='$obdo',  ".
 " psys=0  ".
 " WHERE ico >= 0";
-if( $k5r01 == 0 ) { $upravene = mysql_query("$uprtxt"); }
+$upravene = mysql_query("$uprtxt"); 
 
     }
 
@@ -2456,6 +2464,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k4r05=k4r01+k4r02+k4r03+k4r0
 " psys=0 ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
+
+
+//////////////////strana 10 2016 andrejko
 
 
 //koniec prepocitaj, len ak prepocitaj=1
@@ -3533,7 +3544,7 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <input type="text" name="k1od" id="k1od" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:736px; left:62px;"/>
 <input type="text" name="k1do" id="k1do" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:775px; left:62px;"/>
 <?php if ( $kli_vrok == 2015 ) { ?>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajDanLicencia();" title="NaËÌtaù v˝öku kladnÈho rozdielu medzi daÚovou licenciou a daÚou, ktor˙ moûno zapoËÌtaù v roku 2016 z r.830 Priznania DPPO 2014" class="btn-row-tool" style="top:776px; left:280px;">
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajDanLicencia();" title="NaËÌtaù v˝öku kladnÈho rozdielu medzi daÚovou licenciou a daÚou, ktor˙ moûno zapoËÌtaù v roku 2017 z r.830 Priznania DPPO 2016" class="btn-row-tool" style="top:776px; left:280px;">
 <?php                          } ?>
 <input type="text" name="k2r01" id="k2r01" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:736px; left:276px;"/>
 <input type="text" name="k3r01" id="k3r01" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:736px; left:436px;"/>
@@ -3543,7 +3554,7 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <input type="text" name="k2od" id="k2od" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:814px; left:62px;"/>
 <input type="text" name="k2do" id="k2do" onkeyup="CiarkaNaBodku(this);" style="width:195px; top:852px; left:62px;"/>
 <?php if ( $kli_vrok >= 2016 ) { ?>
-<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajDanLicencia2015();" title="NaËÌtaù v˝öku kladnÈho rozdielu medzi daÚovou licenciou a daÚou, ktor˙ moûno zapoËÌtaù v roku 2016 z r.820 a tabuæky K z Priznania DPPO 2015" class="btn-row-tool" style="top:853px; left:280px;">
+<img src="../obr/ikony/calculator_blue_icon.png" onclick="NacitajDanLicencia2016();" title="NaËÌtaù v˝öku kladnÈho rozdielu medzi daÚovou licenciou a daÚou, ktor˙ moûno zapoËÌtaù v roku 2016 z r.820 a tabuæky K z Priznania DPPO 2015" class="btn-row-tool" style="top:853px; left:280px;">
 <?php                          } ?>
 <input type="text" name="k2r02" id="k2r02" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:814px; left:276px;"/>
 <input type="text" name="k3r02" id="k3r02" onkeyup="CiarkaNaBodku(this);" style="width:140px; top:814px; left:436px;"/>
@@ -3567,14 +3578,11 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <div class="input-echo right" style="width:140px; top:1048px; left:596px;"><?php echo $k4r05; ?>&nbsp;</div>
 <div class="input-echo right" style="width:140px; top:1048px; left:754px;"><?php echo $k5r05; ?>&nbsp;</div>
 <script>
-  function NacitajDanLicencia()
-  {
-   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&nacitajdanlicencia=1', '_self');
-  }
 
-  function NacitajDanLicencia2015()
+
+  function NacitajDanLicencia2016()
   {
-   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&nacitajdanlicencia=1&licencia2015=1', '_self');
+   window.open('priznanie_po2017.php?copern=101&strana=<?php echo $strana; ?>&nacitajdanlicencia=1&licencia2016=1', '_self');
   }
 </script>
 <?php                     } ?>
