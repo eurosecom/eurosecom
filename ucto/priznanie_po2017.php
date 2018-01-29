@@ -2468,6 +2468,26 @@ $upravene = mysql_query("$uprtxt");
 
 //////////////////strana 10 2016 andrejko
 
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ps1r06=ps1r01+ps1r02+ps1r03+ps1r04+ps1r05, ps2r06=ps2r01+ps2r02+ps2r03+ps2r04+ps2r05, ".
+" psys=0 ".
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET psr12=psr07+psr08+psr09+psr10+psr11, ".
+" psys=0 ".
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET psr13=ps1r06-ps2r06+psr12, ".
+" psys=0 ".
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ps1r19=ps1r14+ps1r15+ps1r16+ps1r17+ps1r18, ps2r19=ps2r14+ps2r15+ps2r16+ps2r17+ps2r18, ".
+" psys=0 ".
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
+
 
 //koniec prepocitaj, len ak prepocitaj=1
                         }
@@ -3602,18 +3622,15 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <input type="text" name="ps2r04" id="ps2r04" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:347px; left:603px;"/>
 <input type="text" name="ps1r05" id="ps1r05" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:385px; left:293px;"/>
 <input type="text" name="ps2r05" id="ps2r05" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:385px; left:603px;"/>
-<div class="input-echo right" style="width:290px; top:425px; left:293px;"><?php echo $ps1r06; ?>&nbsp;</div>
-<div class="input-echo right" style="width:290px; top:425px; left:603px;"><?php echo $ps2r06; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:425px; left:913px;">
+<div class="input-echo right" style="width:290px; top:425px; left:293px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien na strane"><?php echo $ps1r06; ?>&nbsp;</div>
+<div class="input-echo right" style="width:290px; top:425px; left:603px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien na strane"><?php echo $ps2r06; ?>&nbsp;</div>
 <input type="text" name="psr07" id="psr07" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:484px; left:385px;"/>
 <input type="text" name="psr08" id="psr08" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:524px; left:385px;"/>
 <input type="text" name="psr09" id="psr09" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:562px; left:385px;"/>
 <input type="text" name="psr10" id="psr10" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:601px; left:385px;"/>
 <input type="text" name="psr11" id="psr11" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:640px; left:385px;"/>
-<div class="input-echo right" style="width:290px; top:680px; left:384px;"><?php echo $psr12; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:681px; left:730px;">
-<div class="input-echo right" style="width:290px; top:719px; left:384px;"><?php echo $psr13; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:719px; left:730px;">
+<div class="input-echo right" style="width:290px; top:680px; left:384px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien na strane"><?php echo $psr12; ?>&nbsp;</div>
+<div class="input-echo right" style="width:290px; top:719px; left:384px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien na strane"><?php echo $psr13; ?>&nbsp;</div>
 <input type="text" name="ps1r14" id="ps1r14" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:823px; left:293px;"/>
 <input type="text" name="ps2r14" id="ps2r14" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:823px; left:603px;"/>
 <input type="text" name="ps1r15" id="ps1r15" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:862px; left:293px;"/>
@@ -3624,9 +3641,8 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <input type="text" name="ps2r17" id="ps2r17" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:940px; left:603px;"/>
 <input type="text" name="ps1r18" id="ps1r18" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:979px; left:293px;"/>
 <input type="text" name="ps2r18" id="ps2r18" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:979px; left:603px;"/>
-<div class="input-echo right" style="width:290px; top:1018px; left:293px;"><?php echo $ps1r19; ?>&nbsp;</div>
-<div class="input-echo right" style="width:290px; top:1018px; left:603px;"><?php echo $ps2r19; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:681px; left:913px;">
+<div class="input-echo right" style="width:290px; top:1018px; left:293px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien na strane"><?php echo $ps1r19; ?>&nbsp;</div>
+<div class="input-echo right" style="width:290px; top:1018px; left:603px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien na strane"><?php echo $ps2r19; ?>&nbsp;</div>
 <input type="text" name="psr20" id="psr20" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:1078px; left:385px;"/>
 <input type="text" name="psr21" id="psr21" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:1117px; left:385px;"/>
 <input type="text" name="psr22" id="psr22" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:1155px; left:385px;"/>
