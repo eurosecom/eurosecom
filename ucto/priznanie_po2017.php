@@ -18,7 +18,7 @@ if (!isset($kli_vxcf)) $kli_vxcf = 1;
   endif;
   mysql_select_db($mysqldb);
 
-$zablokovane=1;
+$zablokovane=0;
 if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
 if ( $zablokovane == 1 )
      {
@@ -2466,7 +2466,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k4r05=k4r01+k4r02+k4r03+k4r0
 $upravene = mysql_query("$uprtxt");
 
 
-//////////////////strana 10 2016 andrejko
+//////////////////strana 10 2017 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ps1r06=ps1r01+ps1r02+ps1r03+ps1r04+ps1r05, ps2r06=ps2r01+ps2r02+ps2r03+ps2r04+ps2r05, ".
 " psys=0 ".
@@ -2484,6 +2484,19 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET psr13=ps1r06-ps2r06+psr12, "
 $upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ps1r19=ps1r14+ps1r15+ps1r16+ps1r17+ps1r18, ps2r19=ps2r14+ps2r15+ps2r16+ps2r17+ps2r18, ".
+" psys=0 ".
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
+
+//////////////////strana 11 2017 andrejko
+
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET psr25=psr20+psr21+psr22+psr23+psr24, ".
+" psys=0 ".
+" WHERE ico >= 0";
+$upravene = mysql_query("$uprtxt");
+
+$uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ozd1r06=ozd1r01+ozd1r02+ozd1r03+ozd1r04+ozd1r05, ozd2r06=ozd2r04+ozd2r05,".
 " psys=0 ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
@@ -3654,15 +3667,14 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <img src="<?php echo $jpg_source; ?>_str11.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 <!-- IV.CAST pokracovanie -->
+
 <input type="text" name="psr24" id="psr24" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:114px; left:500px;"/>
-<div class="input-echo right" style="width:290px; top:154px; left:500px;"><?php echo $psr25; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:154px; left:853px;">
-<div class="input-echo right" style="width:290px; top:193px; left:500px;"><?php echo $psr26; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:193px; left:853px;">
-<div class="input-echo right" style="width:290px; top:232px; left:500px;"><?php echo $psr27; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:232px; left:853px;">
-<div class="input-echo right" style="width:290px; top:310px; left:500px;"><?php echo $psr29; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:310px; left:853px;">
+<div class="input-echo right" style="width:290px; top:154px; left:500px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien na strane"><?php echo $psr25; ?>&nbsp;</div>
+
+<input type="text" name="psr26" id="psr26" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:193px; left:500px;"/>
+<input type="text" name="psr27" id="psr27" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:232px; left:500px;"/>
+<input type="text" name="psr29" id="psr29" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:310px; left:500px;"/>
+
 <input type="text" name="psr30" id="psr30" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:359px; left:500px;"/>
 <input type="text" name="psr31" id="psr31" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:421px; left:500px;"/>
 <!-- V.CAST -->
@@ -3673,13 +3685,12 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <input type="text" name="ozd2r04" id="ozd2r04" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:729px; left:603px;"/>
 <input type="text" name="ozd1r05" id="ozd1r05" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:768px; left:293px;"/>
 <input type="text" name="ozd2r05" id="ozd2r05" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:768px; left:603px;"/>
-<div class="input-echo right" style="width:290px; top:808px; left:294px;"><?php echo $ozd1r06; ?>&nbsp;</div>
-<div class="input-echo right" style="width:290px; top:808px; left:605px;"><?php echo $ozd2r06; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:154px; left:853px;">
-<div class="input-echo right" style="width:290px; top:901px; left:385px;"><?php echo $ozdr07; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:901px; left:753px;">
-<div class="input-echo right" style="width:290px; top:979px; left:385px;"><?php echo $ozdr09; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazÌ po prepoËÌtanÌ a uloûenÌ zmien na strane" class="btn-row-tool" style="top:979px; left:753px;">
+<div class="input-echo right" style="width:290px; top:808px; left:294px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien na strane"><?php echo $ozd1r06; ?>&nbsp;</div>
+<div class="input-echo right" style="width:290px; top:808px; left:605px;" title="Hodnota sa prepoËÌta po uloûenÌ zmien na strane"><?php echo $ozd2r06; ?>&nbsp;</div>
+
+<input type="text" name="ozdr07" id="ozdr07" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:901px; left:385px;"/>
+<input type="text" name="ozdr09" id="ozdr09" onkeyup="CiarkaNaBodku(this);" style="width:290px; top:979px; left:385px;"/>
+
 <?php                     } ?>
 
 
@@ -3928,6 +3939,23 @@ table.pripo-box input[type=text] {
 //xml
 if ( $copern == 10 )
      {
+
+
+$zablokovane=1;
+if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
+if ( $zablokovane == 1 )
+     {
+?>
+<script type="text/javascript">
+alert ("Export do XML DaÚovÈho priznania DPPO 2017 bude pripraven˝ hneÔ po zverejnenÌ novÈho formul·ra na port·le DRSR. Aktu·lne info n·jdete na vstupnej str·nke v bode Novinky, tipy, triky.");
+window.close();
+</script>
+<?php
+exit;
+     }
+
+
+
 ?>
 <?php
 $hhmm = Date( "Hi", MkTime( date("H"),date("i"),date("s"),date("m"),date("d"),date("Y") ) );
@@ -5507,9 +5535,9 @@ if ( $copern == 102 )
 <?php if ( $strana == 11 ) { ?>
    document.formv1.psr24.value = '<?php echo $psr24; ?>';
 //   document.formv1.psr25.value = '<?php echo $psr25; ?>';
-//   document.formv1.psr26.value = '<?php echo $psr26; ?>';
-//   document.formv1.psr27.value = '<?php echo $psr27; ?>';
-//   document.formv1.psr29.value = '<?php echo $psr29; ?>';
+   document.formv1.psr26.value = '<?php echo $psr26; ?>';
+   document.formv1.psr27.value = '<?php echo $psr27; ?>';
+   document.formv1.psr29.value = '<?php echo $psr29; ?>';
    document.formv1.psr30.value = '<?php echo $psr30; ?>';
    document.formv1.psr31.value = '<?php echo $psr31; ?>';
    document.formv1.ozd1r01.value = '<?php echo $ozd1r01; ?>';
@@ -5521,8 +5549,8 @@ if ( $copern == 102 )
    document.formv1.ozd2r05.value = '<?php echo $ozd2r05; ?>';
 //   document.formv1.ozd1r06.value = '<?php echo $ozd1r06; ?>';
 //   document.formv1.ozd2r06.value = '<?php echo $ozd2r06; ?>';
-//   document.formv1.ozdr07.value = '<?php echo $ozdr07; ?>';
-//   document.formv1.ozdr09.value = '<?php echo $ozdr09; ?>';
+   document.formv1.ozdr07.value = '<?php echo $ozdr07; ?>';
+   document.formv1.ozdr09.value = '<?php echo $ozdr09; ?>';
 <?php                      } ?>
 
 <?php if ( $strana == 12 ) { ?>
