@@ -236,7 +236,7 @@ $hod=$hod+($sdph*$rsluz->mnov);
 
 }
 
-if( $colsadzc <= 1 )
+if( $colsadzc <= 1 AND $riadok->bdph == 0 )
 {
 
 $zk2=$zk2+($rsluz->cepv*$rsluz->mnov);
@@ -244,6 +244,13 @@ $hod=$hod+($sdph*$rsluz->mnov);
 
 }
 
+if( $colsadzc <= 1 AND $riadok->bdph == 1 )
+{
+
+$zk0=$zk0+($rsluz->cepv*$rsluz->mnov);
+$hod=$hod+($sdph*$rsluz->mnov);
+
+}
 
 if( $rsluz->txpp != '' )
 {
@@ -284,7 +291,7 @@ $ulozene = mysql_query("$sqlhh");
 if( $riadok->bdph == 1 ) {
 $sqlhh = "INSERT INTO F$kli_vxcf"."_$tabl ( odbm,ume,uce,dok,doq,fak,dol,prf,ico,dat,daz,das,zk0,zk1,zk2,dn1,dn2,hod,id,str,zak,obj,ksy,sp1,sp2,dpr".$zalp." ) ".
 " VALUES ( '$riadok->odbm', $ume, $ucedok, $newdok, $newdok, '$cisfak', '$cisdol', '$cisprf', '$riadok->ico', '$dat_dat', '$dat_dat', '$dat_das',".
-" '$zk2', '0', '0', '0', '0', '$hod', $kli_uzid, '$fir_dopstr', '$vyb_zak', '$riadok->obj', '0308', '0', '0', '$riadok->spzo'".$zalh." )";
+" '$zk0', '0', '$zk2', '0', '$dn2', '$hod', $kli_uzid, '$fir_dopstr', '$vyb_zak', '$riadok->obj', '0308', '0', '0', '$riadok->spzo'".$zalh." )";
 $ulozene = mysql_query("$sqlhh"); 
                          }
 //exit;

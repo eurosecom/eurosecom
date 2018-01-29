@@ -418,8 +418,9 @@ $colsadz=trim($riadok->prcp);
 $colsadzc=1*$colsadz;
 if( $colsadzc > 1 )
 {
-$txp09 = $retezec = iconv("CP1250", "UTF-8", "$riadok->nslp colný sadzobník $riadok->prcp - prenos DP");
+$txp09 = $retezec = iconv("CP1250", "UTF-8", "$riadok->nslp colny sadzobnik $riadok->prcp - prenos DP");
 }
+$txp09=trim($txp09);
 
 if( $txp01 == '' ) $txp01='-';
 if( $txp02 == '' ) $txp02='-';

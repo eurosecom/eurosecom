@@ -1852,6 +1852,16 @@ $riadok=mysql_fetch_object($sql);
 ?>
 
 <?php
+$colsadz=trim($riadok->prcp);
+$colsadzc=1*$colsadz;
+
+if( $colsadzc > 1 AND $riadok->nslp == '' )
+{
+$riadok->nslp=" ";
+}
+?>
+
+<?php
 if( $riadok->nslp != '' )
 {
 $pole = explode("NP:", $riadok->nslp);
@@ -1862,9 +1872,6 @@ $ostat=$pole[1];
 <td class="fmenV" colspan="7" >&nbsp;<?php echo $riadok->nslp;?>
 
 <?php
-$colsadz=trim($riadok->prcp);
-$colsadzc=1*$colsadz;
-
 if( $colsadzc > 1 )
 {
 ?>
