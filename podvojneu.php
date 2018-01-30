@@ -33,9 +33,11 @@ if( !$uziv ) exit;
 
 $mysqldbfir=$mysqldb;
 $mysqldbdata=$mysqldb;
+$oddelnew=0;
 if (File_Exists ("pswd/newdeleniedtb.ano") OR File_Exists ("../pswd/newdeleniedtb.ano")) 
           {
 $dtb2 = include("oddel_dtb1new.php");
+$oddelnew=1;
           }
 else
           {
@@ -74,6 +76,7 @@ $trans = mysql_query($query);
 
 $zmazane = mysql_query("DELETE FROM $mysqldbfir.nas_id WHERE id='$kli_uzid'");
 $ulozene = mysql_query("INSERT INTO $mysqldbfir.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+
 if ( $ulozene )
 {
 $query="COMMIT;";
@@ -84,6 +87,30 @@ if ( !$ulozene )
 $query="ROLLBACK;";
 $trans = mysql_query($query);
 }
+
+if( $oddelnew == 1 )
+  {
+$zmazane = mysql_query("DELETE FROM $mysqldb2010.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2010.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$zmazane = mysql_query("DELETE FROM $mysqldb2011.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2011.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$zmazane = mysql_query("DELETE FROM $mysqldb2012.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2012.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$zmazane = mysql_query("DELETE FROM $mysqldb2013.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2013.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$zmazane = mysql_query("DELETE FROM $mysqldb2014.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2014.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); "); 
+$zmazane = mysql_query("DELETE FROM $mysqldb2015.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2015.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+$zmazane = mysql_query("DELETE FROM $mysqldb2016.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2016.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+$zmazane = mysql_query("DELETE FROM $mysqldb2017.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2017.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+$zmazane = mysql_query("DELETE FROM $mysqldb2018.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2018.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+$zmazane = mysql_query("DELETE FROM $mysqldb2019.nas_id WHERE id='$kli_uzid'");
+$ulozene = mysql_query("INSERT INTO $mysqldb2019.nas_id ( id,xcf,ume ) VALUES ($kli_uzid, $firs, $umes); ");
+  }
      }
 
 $cit_nas = include("cis/citaj_nas.php");
@@ -115,8 +142,8 @@ $dtb2 = include("oddel_dtb2.php");
           }
 
 
-//echo $vyb_rok;
-//echo $mysqldbdata;
+//echo " rok ".$vyb_rok;
+//echo " dbdata ".$mysqldbdata."<br />";
 //exit;
 
   mysql_select_db($mysqldbdata);
@@ -140,310 +167,6 @@ $kalend = include("ucto/vtvuct.php");
 endif;
 }
 
-$sql = "SELECT c01 FROM ".$mysqldbdata.".F$vyb_xcf"."_uctcrv2009";
-$vysledok = mysql_query($sql);
-if (!$vysledok){
-
-if( $vyb_rok > 2008 AND $vyb_duj != 9 )
-{
-$sqlt = <<<uctcrv
-(
-   uce          VARCHAR(11),
-   c01          INT
-);
-uctcrv;
-
-$vsql = 'CREATE TABLE F'.$vyb_xcf.'_uctcrv2009'.$sqlt;
-$vytvor = mysql_query("$vsql");
-
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crv=crv+1 WHERE crv > 20"; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crv=crv+1 WHERE crv > 46"; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crv=crv+1 WHERE crv > 53"; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crv=crv+1 WHERE crv > 58"; $oznac = mysql_query("$sqtoz");
-}
-               }
-
-
-$sql = "SELECT c01 FROM ".$mysqldbdata.".F$vyb_xcf"."_uctcrs2009";
-$vysledok = mysql_query($sql);
-if (!$vysledok){
-
-if( $vyb_rok > 2008 AND $vyb_duj != 9 )
-{
-$sqlt = <<<uctcrs
-(
-   uce          VARCHAR(11),
-   c01          INT
-);
-uctcrs;
-
-$vsql = 'CREATE TABLE F'.$vyb_xcf.'_uctcrs2009'.$sqlt;
-$vytvor = mysql_query("$vsql");
-
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crs=crs-1 WHERE crs > 1"; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crs=crs+1 WHERE crs > 61"; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crs=crs+1 WHERE crs > 63"; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crs=crs+1 WHERE crs > 71"; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crs=crs+1 WHERE crs > 92"; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crs=crs+1 WHERE crs > 119"; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crs=crs+1 WHERE crs > 121"; $oznac = mysql_query("$sqtoz");
-
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crs=72 WHERE LEFT(uce,3) = 353"; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crs=118 WHERE LEFT(uce,3) = 231 OR LEFT(uce,3) = 232 "; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crs=117 WHERE LEFT(uce,3) = 461"; $oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crs=115 WHERE LEFT(uce,3) = 241 OR LEFT(uce,3) = 249 "; $oznac = mysql_query("$sqtoz");
-}
-               }
-
-
-//uprava druhov DPH od 1.1.2010 
-$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_uctdphnew";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-
-$sqlt = <<<vtvmzd
-(
-   xcf         INT,
-   id          INT,
-   datm        TIMESTAMP(14)
-);
-vtvmzd;
-
-if( $vyb_rok == 2010 )
-     {
-
-$sql = "CREATE TABLE ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp2009 SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp";
-$vysledek = mysql_query("$sql");
-
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp SET crz=crz+2 WHERE crz > 9 ";
-$vysledek = mysql_query("$sql");
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp SET crd=crd+2 WHERE crd > 10 ";
-$vysledek = mysql_query("$sql");
-
-     }
-
-$sql = "DROP TABLE ".$mysqldbdata.".F$vyb_xcf"."_uctdphnew_g";
-$vysledek = mysql_query("$sql");
-
-$sql = "CREATE TABLE ".$mysqldbdata.".F$vyb_xcf"."_uctdphnew".$sqlt;
-$vysledek = mysql_query("$sql");
-}
-//uprava druhov DPH od 1.1.2010
-
-
-//oprava druhov DPH od 1.1.2010
-$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_uctdphnew_g";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "DROP TABLE ".$mysqldbdata.".F$vyb_xcf"."_uctdphnew_f";
-$vysledek = mysql_query("$sql");
-
-$sqlt = <<<vtvmzd
-(
-   xcf         INT,
-   id          INT,
-   datm        TIMESTAMP(14)
-);
-vtvmzd;
-
-if( $vyb_rok == 2010 )
-     {
-
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp SET crz=0, crd=22 WHERE rdp = 30 ";
-$vysledek = mysql_query("$sql");
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp SET crz=0, crd=23 WHERE rdp = 29 ";
-$vysledek = mysql_query("$sql");
-
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp SET crz=11, crd=21 WHERE rdp = 37 ";
-$vysledek = mysql_query("$sql");
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp SET crz=7, crd=21 WHERE rdp = 39 ";
-$vysledek = mysql_query("$sql");
-
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp SET crz=0, crd=12 WHERE rdp = 87 ";
-$vysledek = mysql_query("$sql");
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp SET crz=0, crd=8 WHERE rdp = 89 ";
-$vysledek = mysql_query("$sql");
-
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp SET crz=1, crd=2 WHERE rdp = 60 ";
-$vysledek = mysql_query("$sql");
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp SET crz=3, crd=4 WHERE rdp = 59 ";
-$vysledek = mysql_query("$sql");
-
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp SET crz=16, crd=0 WHERE rdp = 51 ";
-$vysledek = mysql_query("$sql");
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp SET crz=16, crd=0 WHERE rdp = 61 ";
-$vysledek = mysql_query("$sql");
-
-$sql = "DELETE FROM ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp WHERE rdp = 62 OR rdp = 63 ";
-$vysledek = mysql_query("$sql");
-
-$ttvv = "INSERT INTO ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp (rdp,nrd,szd,crz,crd,crz1,crd1) VALUES ( '62', 'Daò na výstupe VÝVOZ SLUŽBY EU DPH00% ', '0', '16', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp (rdp,nrd,szd,crz,crd,crz1,crd1) VALUES ( '63', 'Daò na výstupe VÝVOZ TROJSTRANNÝ DPH00% ', '0', '16', '0', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-     }
-
-$sql = "CREATE TABLE ".$mysqldbdata.".F$vyb_xcf"."_uctdphnew_g".$sqlt;
-$vysledek = mysql_query("$sql");
-}
-//koniec oprava druhov DPH od 1.1.2010
-
-//oprava uctova osnova od 1.1.2010
-$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_uctosnovanew_b";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "DROP TABLE ".$mysqldbdata.".F$vyb_xcf"."_uctosnovanew_a";
-$vysledek = mysql_query("$sql");
-
-$sqlt = <<<vtvmzd
-(
-   xcf         INT,
-   id          INT,
-   datm        TIMESTAMP(14)
-);
-vtvmzd;
-
-if( $vyb_rok == 2010 )
-     {
-
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crv=0, crs=56 WHERE uce = 21100 AND crv = 1 AND crs = 1 ";
-$vysledek = mysql_query("$sql");
-
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crv=0, crs=57 WHERE uce = 22100 AND crv = 1 AND crs = 1 ";
-$vysledek = mysql_query("$sql");
-
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crv=0, crs=48 WHERE uce = 31100 AND crv = 1 AND crs = 1 ";
-$vysledek = mysql_query("$sql");
-
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crv=0, crs=106 WHERE uce = 32100 AND crv = 1 AND crs = 1 ";
-$vysledek = mysql_query("$sql");
-
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crv=9, crs=0 WHERE uce = 50100 AND crv = 1 AND crs = 1 ";
-$vysledek = mysql_query("$sql");
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crv=2, crs=0 WHERE uce = 50400 AND crv = 1 AND crs = 1 ";
-$vysledek = mysql_query("$sql");
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crv=5, crs=0 WHERE uce = 60100 AND crv = 1 AND crs = 1 ";
-$vysledek = mysql_query("$sql");
-$sql = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctosnova SET crv=1, crs=0 WHERE uce = 60400 AND crv = 1 AND crs = 1 ";
-$vysledek = mysql_query("$sql");
-     }
-
-$sql = "CREATE TABLE ".$mysqldbdata.".F$vyb_xcf"."_uctosnovanew_b".$sqlt;
-$vysledek = mysql_query("$sql");
-}
-//koniec oprava uctova osnova od 1.1.2010
-
-//ak neexistuje uctpohyby2010 tak ju vytvor
-$sql = "SELECT * FROM uctpohyby2010";
-$vysledok = mysql_query($sql);
-if (!$vysledok)
-{
-$sql = "CREATE TABLE uctpohyby2010 SELECT * FROM uctpohyby ";
-$vysledek = mysql_query("$sql");
-
-}
-//koniec ak neexistuje uctpohyby2010 tak ju vytvor
-
-//oprava druhov DPH od 1.1.2011
-$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_uctdph11new_b";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "DROP TABLE ".$mysqldbdata.".F$vyb_xcf"."_uctdph11new_a";
-$vysledek = mysql_query("$sql");
-
-$sqlt = <<<vtvmzd
-(
-   xcf         INT,
-   id          INT,
-   datm        TIMESTAMP(14)
-);
-vtvmzd;
-
-if( $vyb_rok == 2011 )
-     {
-$ttvv = "DELETE FROM ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp WHERE ( rdp = 25 OR rdp = 35 OR rdp = 34 OR rdp = 55 OR rdp = 65 OR rdp = 85 OR rdp = 84 OR rdp = 45 )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp (rdp,nrd,szd,crz,crd,crz1,crd1) VALUES ( '25', 'Daò na vstupe  TUZEMSKO DPH20%  ', '20', '0', '23', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp (rdp,nrd,szd,crz,crd,crz1,crd1) VALUES ( '35', 'Daò na vstupe  DOVOZ EU DPH20% nákup v EU  ', '20', '7', '21', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp (rdp,nrd,szd,crz,crd,crz1,crd1) VALUES ( '34', 'Daò na vstupe  DOVOZ EU DPH20% služby v EU  ', '20', '11', '21', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp (rdp,nrd,szd,crz,crd,crz1,crd1) VALUES ( '55', 'Daò na výstupe TUZEMSKO DPH20% ', '20', '3', '4', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp (rdp,nrd,szd,crz,crd,crz1,crd1) VALUES ( '65', 'Daò na výstupe VÝVOZ DPH20% ', '20', '3', '4', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp (rdp,nrd,szd,crz,crd,crz1,crd1) VALUES ( '85', 'Daò na výstupe DOVOZ EU DPH20% nákup v EU ', '20', '0', '8', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp (rdp,nrd,szd,crz,crd,crz1,crd1) VALUES ( '84', 'Daò na výstupe DOVOZ EU DPH20% služby v EU ', '20', '0', '12', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "INSERT INTO ".$mysqldbdata.".F$vyb_xcf"."_uctdrdp (rdp,nrd,szd,crz,crd,crz1,crd1) VALUES ( '45', 'Daò na vstupe DOVOZ 3k DPH20%  ', '20', '0', '25', '0', '0' )";
-$ttqq = mysql_query("$ttvv");
-
-$ttvv = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_ufir SET dph2=20, dph4=19 "; $ttqq = mysql_query("$ttvv");
-
-     }
-
-$sql = "CREATE TABLE ".$mysqldbdata.".F$vyb_xcf"."_uctdph11new_b".$sqlt;
-$vysledek = mysql_query("$sql");
-}
-//koniec oprava druhov DPH od 1.1.2011
-
-//oprava Robotpohybov od 1.1.2011
-$sql = "SELECT * FROM ".$mysqldbdata.".F$vyb_xcf"."_uctrobot11new_b";
-$vysledok = mysql_query("$sql");
-if (!$vysledok)
-{
-$sql = "DROP TABLE ".$mysqldbdata.".F$vyb_xcf"."_uctrobot11new_a";
-$vysledek = mysql_query("$sql");
-
-$sqlt = <<<vtvmzd
-(
-   xcf         INT,
-   id          INT,
-   datm        TIMESTAMP(14)
-);
-vtvmzd;
-
-if( $vyb_rok == 2011 )
-     {
-$ttvv = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctpohyby SET dzk2=25 WHERE dzk2 = 29 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctpohyby SET dzk2=35 WHERE dzk2 = 39 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctpohyby SET dzk2=34 WHERE dzk2 = 37 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctpohyby SET dzk2=45 WHERE dzk2 = 49 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctpohyby SET dzk2=55 WHERE dzk2 = 59 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctpohyby SET dzk2=65 WHERE dzk2 = 69 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctpohyby SET dzk2=85 WHERE dzk2 = 89 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE ".$mysqldbdata.".F$vyb_xcf"."_uctpohyby SET dzk2=84 WHERE dzk2 = 87 "; $ttqq = mysql_query("$ttvv");
-
-$ttvv = "UPDATE uctpohyby SET dzk2=25 WHERE dzk2 = 29 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE uctpohyby SET dzk2=35 WHERE dzk2 = 39 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE uctpohyby SET dzk2=34 WHERE dzk2 = 37 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE uctpohyby SET dzk2=45 WHERE dzk2 = 49 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE uctpohyby SET dzk2=55 WHERE dzk2 = 59 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE uctpohyby SET dzk2=65 WHERE dzk2 = 69 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE uctpohyby SET dzk2=85 WHERE dzk2 = 89 "; $ttqq = mysql_query("$ttvv");
-$ttvv = "UPDATE uctpohyby SET dzk2=84 WHERE dzk2 = 87 "; $ttqq = mysql_query("$ttvv");
-
-     }
-
-$sql = "CREATE TABLE ".$mysqldbdata.".F$vyb_xcf"."_uctrobot11new_b".$sqlt;
-$vysledek = mysql_query("$sql");
-}
-//koniec oprava Robotpohybov od 1.1.2011
 
           }
 //len ak je vybrana firma
@@ -1076,7 +799,8 @@ htmlmenu += "<a href=\"#\" onClick=\"window.open('../ucto/suvaha_pod2014.php?cop
 
 <?php                      } 
 
-$rokdph=2014;
+$rokdph=2018;
+if( $vyb_rok <= 2017 ) { $rokdph=2014; }
 if( $vyb_rok <= 2013 ) { $rokdph=2013; }
 if( $vyb_rok <= 2012 ) { $rokdph=2012; }
 ?>

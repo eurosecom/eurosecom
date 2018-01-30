@@ -50,6 +50,7 @@ $rokdph=$kli_vrok;
 if( $kli_vrok <  2012 ) { $rokdph=""; }
 if( $kli_vrok == 2013 ) { $rokdph="2013"; }
 if( $kli_vrok >  2013 ) { $rokdph="2014"; }
+if( $kli_vrok >  2017 ) { $rokdph="2018"; }
 
 //if( $_SERVER['SERVER_NAME'] == "localhost" ) { $kli_vduj=9; }
 
@@ -1045,8 +1046,11 @@ window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=
 <?php if( $kli_vrok == 2011 ) { ?>
 <td class="bmenu" width="90%">Daòové priznanie Daò z pridanej hodnoty verzia DPHv11
 <?php                        } ?>
-<?php if( $kli_vrok >  2011 ) { ?>
+<?php if( $kli_vrok >  2011 AND $kli_vrok <  2018 ) { ?>
 <td class="bmenu" width="90%">Daòové priznanie Daò z pridanej hodnoty verzia DPHv12
+<?php                        } ?>
+<?php if( $kli_vrok >  2017 ) { ?>
+<td class="bmenu" width="90%">Daòové priznanie Daò z pridanej hodnoty verzia DPHv18
 <?php                        } ?>
 <select size="1" name="h_drp" id="h_drp" >
 <option value="1" >Riadne</option>
@@ -1060,8 +1064,10 @@ window.open('../ucto/vykzis<?php echo $povelak; ?>.php?copern=10&drupoh=1&h_zos=
 <option value="2" >Štvrroèné</option>
 <option value="4" >Roèné</option>
 </select>
+<?php if( $rokdph < 2018 ) { ?>
 <a href="#" onClick="TlacPotvrdDPH();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi potvrdenie o podaní daòového priznania DPH vo formáte PDF" ></a>
+<?php                      } ?>
 </td>
 <td class="bmenu" width="10%">
 <select size="1" name="h_arch" id="h_arch" >
@@ -1475,8 +1481,11 @@ if( $kli_vrok > 2015 ) { $zobraz="style=\"display:none;\""; }
 <?php if( $kli_vrok == 2011 ) { ?>
 <td class="bmenu" width="90%">Daòové priznanie Daò z pridanej hodnoty verzia DPHv11
 <?php                        } ?>
-<?php if( $kli_vrok >  2011 ) { ?>
+<?php if( $kli_vrok >  2011 AND $kli_vrok <  2018 ) { ?>
 <td class="bmenu" width="90%">Daòové priznanie Daò z pridanej hodnoty verzia DPHv12
+<?php                        } ?>
+<?php if( $kli_vrok >  2017 ) { ?>
+<td class="bmenu" width="90%">Daòové priznanie Daò z pridanej hodnoty verzia DPHv18
 <?php                        } ?>
 
 <select size="1" name="h_drp" id="h_drp" >
@@ -1491,8 +1500,10 @@ if( $kli_vrok > 2015 ) { $zobraz="style=\"display:none;\""; }
 <option value="2" >Štvrroèné</option>
 <option value="4" >Roèné</option>
 </select>
+<?php if( $rokdph < 2018 ) { ?>
 <a href="#" onClick="TlacPotvrdDPH();">
 <img src='../obr/tlac.png' width=20 height=15 border=0 title="Vytlaèi potvrdenie o podaní daòového priznania DPH vo formáte PDF" ></a>
+<?php                      } ?>
 </td>
 <td class="bmenu" width="10%">
 <select size="1" name="h_arch" id="h_arch" >
