@@ -2051,7 +2051,7 @@ $alertprepocet="";
 if ( $prepocitaj == 1 ) {
 $alertprepocet="!!! Prepoèítavam hodnoty v riadkoch !!!";
 
-//vsetky strany vypocty nie su upravene pre 2017
+//vsetky strany vypocty su upravene pre 2017
 //////////////////////strana 2 2017
 
 if ( $rozdielodpisov == 1 )
@@ -2488,7 +2488,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ps1r19=ps1r14+ps1r15+ps1r16+
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
-//////////////////strana 11 2017 andrejko
+//////////////////strana 11 2017
 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET psr25=psr20+psr21+psr22+psr23+psr24, ".
