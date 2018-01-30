@@ -2213,7 +2213,7 @@ $miliondan = 1*$_REQUEST['miliondan'];
 if ( $miliondan == 1 ) { $prepocitaj=1; }
 if ( $namanzelku == 1 ) { $prepocitaj=1; }
 
-//vsetky vypocty su upravene na rok 2016
+//vsetky vypocty nie su upravene na rok 2017
 //vypocty
 //odstavene vypocty
 //$prepocitaj=0;
@@ -2222,11 +2222,11 @@ if ( ( $copern == 10 OR $copern == 20 ) AND $prepocitaj == 1 )
 {
 $alertprepocet="!!! Prepoèítavam hodnoty v riadkoch !!!";
 
-//str 2 zaklady dane zo zav.cinnosti 2016
+//str 2 zaklady dane zo zav.cinnosti 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r36=r34-r35 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
-//str 3,4 prijmy,vydavky z tabulky 1.(na str3) 2016
+//str 3 prijmy,vydavky z tabulky 1. 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t1p10=t1p1+t1p2+t1p3+t1p4+t1p5+t1p6+t1p7+t1p8+t1p9 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t1v10=t1v1+t1v2+t1v3+t1v4+t1v5+t1v6+t1v7+t1v8+t1v9 WHERE oc = $cislo_oc ";
@@ -2235,6 +2235,8 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t1p13=t1p11+t1p12  WHERE oc 
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t1v13=t1v11+t1v12  WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
+
+//str 4 zaklad dane, danova strata z podnikania 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r37=t1p10, r38=t1v10, r39=0, r40=0, r43=0, r44=0  WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r39=r37-r38+r39pu WHERE oc = $cislo_oc ";
@@ -2248,20 +2250,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r44=-r43, r43=0 WHERE oc = $cislo_oc AND r43 < 0";
 $oznac = mysql_query("$sqtoz");
 
-//str 5 prijmy,vydavky z tabulky 1.(na str3) 2016
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r58=t1p13, r59=t1v13, r60=0, r65=0 WHERE oc = $cislo_oc ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r60=r58-r59 WHERE oc = $cislo_oc ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r65=r60+r61+r63-r64 WHERE oc = $cislo_oc AND r61 >= 0 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r65=r60 WHERE oc = $cislo_oc AND r65 < 0 AND r61 >= 0 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r65=r60+r62+r63-r64 WHERE oc = $cislo_oc AND r62 > 0 ";
-$oznac = mysql_query("$sqtoz");
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r65=r60 WHERE oc = $cislo_oc AND r65 < 0 AND r62 > 0 ";
-$oznac = mysql_query("$sqtoz");
-
+//str 5 2016
 //str 5 uplatnenie danovych strat 2016
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r53=r45+r46+r47+r48+r49+r50 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
@@ -2278,7 +2267,20 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r57=0 WHERE oc = $cislo_oc AND r57 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//str 5,6 prijmy,vydavky z tabulky 2.(na str 5,6) 2016
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r58=t1p13, r59=t1v13, r60=0, r65=0 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r60=r58-r59 WHERE oc = $cislo_oc ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r65=r60+r61+r63-r64 WHERE oc = $cislo_oc AND r61 >= 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r65=r60 WHERE oc = $cislo_oc AND r65 < 0 AND r61 >= 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r65=r60+r62+r63-r64 WHERE oc = $cislo_oc AND r62 > 0 ";
+$oznac = mysql_query("$sqtoz");
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r65=r60 WHERE oc = $cislo_oc AND r65 < 0 AND r62 > 0 ";
+$oznac = mysql_query("$sqtoz");
+
+//str 5,6 prijmy,vydavky z tabulky 2. 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t2p11=t2p1+t2p2+t2p3+t2p4+t2p5+t2p6+t2p7+t2p8+t2p9+t2p10 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t2v11=t2v1+t2v2+t2v3+t2v4+t2v5+t2v6+t2v7+t2v8+t2v9+t2v10 WHERE oc = $cislo_oc ";
@@ -2290,7 +2292,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r68=0 WHERE oc = $cislo_oc AND r68 < 0";
 $oznac = mysql_query("$sqtoz");
 
-//str 6,7 vypocet zakladu dane z ostatnych prijmov tabulka 3.(na str.6,7) 2016
+//str 6,7 vypocet zakladu dane z ostatnych prijmov tabulka 3.(na str.6,7) 2016 andrejko
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t3p17=t3p1+t3p2+t3p3+t3p4+t3p5+t3p6+t3p7+t3p8+t3p9+t3p10+t3p11+t3p12+t3p13+t3p14+t3p15+t3p16 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t3v17=t3v1+t3v2+t3v3+t3v4+t3v5+t3v6+t3v7+t3v8+t3v9+t3v10+t3v11+t3v12+t3v13+t3p14+t3p15 WHERE oc = $cislo_oc ";
