@@ -432,12 +432,12 @@ $xplc=1*$fir_riadokd->xplc;
 
 mysql_free_result($fir_vysledokd);
 
-$plat1="1"; $plat2="0"; $plat3="0"; $plat4="0"; $plat5="0";
-if( $xplc == 2 ) { $plat1="0"; $plat2="1"; $plat3="0"; $plat4="0"; $plat5="0"; }
-if( $xplc == 3 ) { $plat1="0"; $plat2="0"; $plat3="1"; $plat4="0"; $plat5="0"; }
-if( $xplc == 4 ) { $plat1="0"; $plat2="0"; $plat3="0"; $plat4="1"; $plat5="0"; }
-if( $xplc == 5 ) { $plat1="0"; $plat2="0"; $plat3="0"; $plat4="0"; $plat5="1"; }
-
+$plat1="1"; $plat2="0"; $plat3="0"; $plat4="0"; $plat5="0"; $plat6="0";
+if( $xplc == 2 ) { $plat1="0"; $plat2="1"; $plat3="0"; $plat4="0"; $plat5="0"; $plat6="0"; }
+if( $xplc == 3 ) { $plat1="0"; $plat2="0"; $plat3="1"; $plat4="0"; $plat5="0"; $plat6="0"; }
+if( $xplc == 4 ) { $plat1="0"; $plat2="0"; $plat3="0"; $plat4="1"; $plat5="0"; $plat6="0"; }
+if( $xplc == 5 ) { $plat1="0"; $plat2="0"; $plat3="0"; $plat4="0"; $plat5="1"; $plat6="0"; }
+if( $xplc == 6 ) { $plat1="0"; $plat2="0"; $plat3="0"; $plat4="0"; $plat5="0"; $plat6="1"; }
 
   $text = "    <osoba>"."\r\n";   fwrite($soubor, $text);			
   $text = "      <platitel><![CDATA[".$plat1."]]></platitel>"."\r\n";   fwrite($soubor, $text);			
@@ -445,6 +445,11 @@ if( $xplc == 5 ) { $plat1="0"; $plat2="0"; $plat3="0"; $plat4="0"; $plat5="1"; }
   $text = "      <inaPovinna><![CDATA[".$plat3."]]></inaPovinna>"."\r\n";   fwrite($soubor, $text);		
   $text = "      <zdanitelna><![CDATA[".$plat4."]]></zdanitelna>"."\r\n";   fwrite($soubor, $text);	
   $text = "      <zastupca><![CDATA[".$plat5."]]></zastupca>"."\r\n";   fwrite($soubor, $text);	
+  if( $kli_vrok >= 2018 )
+  {
+  $text = "      <zastupca69aa><![CDATA[".$plat6."]]></zastupca69aa>"."\r\n";   fwrite($soubor, $text);	
+  }
+
   $text = "    </osoba>"."\r\n";   fwrite($soubor, $text);	
 
 
@@ -491,6 +496,9 @@ $mesto = iconv("CP1250", "UTF-8", $fir_fmes);
 
   $text = "      <obec><![CDATA[".$mesto."]]></obec>"."\r\n";   fwrite($soubor, $text);			
 
+if( $kli_vrok < 2018 )
+{
+
 $pole = explode("/", $fir_ftel);
 $tel_pred=$pole[0];
 $tel_za=1*$pole[1];
@@ -507,22 +515,57 @@ $fax_za=1*$pole[1];
   $text = "      <fax>"."\r\n";   fwrite($soubor, $text);				
   $text = "        <predcislie><![CDATA[".$fax_pred."]]></predcislie>"."\r\n";   fwrite($soubor, $text);				
   $text = "        <cislo><![CDATA[".$fax_za."]]></cislo>"."\r\n";   fwrite($soubor, $text);			
-  $text = "      </fax>"."\r\n";   fwrite($soubor, $text);		
+  $text = "      </fax>"."\r\n";   fwrite($soubor, $text);
+
+}
+
+if( $kli_vrok >= 2018 )
+{
+
+$telefon = iconv("CP1250", "UTF-8", $fir_ftel);
+$mail = iconv("CP1250", "UTF-8", $fir_fem1);
+				
+  $text = "        <telefon><![CDATA[".$telefon."]]></telefon>"."\r\n";   fwrite($soubor, $text);			
+  $text = "        <email><![CDATA[".$mail."]]></email>"."\r\n";   fwrite($soubor, $text);			
+
+}
+
+
+		
   $text = "    </adresa>"."\r\n";   fwrite($soubor, $text);		
 
 $konatel = iconv("CP1250", "UTF-8", $fir_uctt05);
+
+  $text = "    <opravnenaOsoba>"."\r\n";   fwrite($soubor, $text);
+
+  $text = "        <menoPriezvisko><![CDATA[".$konatel."]]></menoPriezvisko>"."\r\n";   fwrite($soubor, $text);	
+
+if( $kli_vrok < 2018 )
+{
+
 
 $pole = explode("/", $fir_uctt04);
 $tel_pred=$pole[0];
 $tel_za=1*$pole[1];
 
-  $text = "    <opravnenaOsoba>"."\r\n";   fwrite($soubor, $text);
-
-  $text = "        <menoPriezvisko><![CDATA[".$konatel."]]></menoPriezvisko>"."\r\n";   fwrite($soubor, $text);	
   $text = "          <tel>"."\r\n";   fwrite($soubor, $text);
   $text = "            <predcislie><![CDATA[".$tel_pred."]]></predcislie>"."\r\n";   fwrite($soubor, $text);			
   $text = "            <cislo><![CDATA[".$tel_za."]]></cislo>"."\r\n";   fwrite($soubor, $text);		
   $text = "          </tel>"."\r\n";   fwrite($soubor, $text);
+
+}
+if( $kli_vrok >= 2018 )
+{
+
+$telefon = iconv("CP1250", "UTF-8", $fir_uctt04);
+$mail = iconv("CP1250", "UTF-8", "");
+				
+  $text = "        <telefon><![CDATA[".$telefon."]]></telefon>"."\r\n";   fwrite($soubor, $text);			
+  $text = "        <email><![CDATA[".$mail."]]></email>"."\r\n";   fwrite($soubor, $text);			
+
+}
+
+
   $text = "    </opravnenaOsoba>"."\r\n";   fwrite($soubor, $text);	
 
 			
