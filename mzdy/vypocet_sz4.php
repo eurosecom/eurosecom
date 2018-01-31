@@ -97,7 +97,11 @@ uctmzd;
 $sql = 'CREATE TABLE F'.$kli_vxcf.'_mzdprb'.$kli_uzid.$sqlt;
 $ulozene = mysql_query("$sql");
 
-if( $fir_fico == 45741093 ) { $fir_fico=36084514; }
+//dps gbely 36084514
+//dssbrodske 37986830
+
+$fir_ficoorig=$fir_fico;
+if( $fir_fico == 45741093 ) { $fir_fico=37986830; }
 
 $zdravprac=0;
 if( $fir_fico == 36084514 OR $fir_fico == 37986708 OR $fir_fico == 37986830 OR $kli_nezis == 1 )
@@ -120,19 +124,7 @@ $kli_vrokx=$pole[1];
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprc".$kli_uzid." SELECT 0,oc,kc,0 FROM F$kli_vxcf"."_mzdtrn WHERE ( dm = 101 OR dm = 118 OR dm = 217 OR dm = 218 ) ";
 $dsql = mysql_query("$dsqlt");
 
-if( $kli_vume == 10.2009 )
-     {
-$mes1="1.".$kli_vrok; $mes2="2.".$kli_vrok; $mes3="3.".$kli_vrok;
-if( $kli_vmesx > 3 ) { $mes1="1.".$kli_vrok; $mes2="2.".$kli_vrok; $mes3="3.".$kli_vrok; }
-if( $kli_vmesx > 6 ) { $mes1="4.".$kli_vrok; $mes2="5.".$kli_vrok; $mes3="6.".$kli_vrok; }
-if( $kli_vmesx > 9 ) { $mes1="7.".$kli_vrok; $mes2="8.".$kli_vrok; $mes3="9.".$kli_vrok; }
-
-$dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprc".$kli_uzid." SELECT 0,oc,kc,0 FROM F$kli_vxcf"."_mzdzalvy WHERE dm = 308 AND ume >= $mes1 AND ume <= $mes3 ";
-$dsql = mysql_query("$dsqlt");
-
-     }
-
-if( $kli_vume > 10.2009 OR $kli_vrokx > 2009 )
+if( $kli_vrokx > 2009 )
      {
 
 $kli_vxcfxy=$kli_vxcf;
@@ -145,21 +137,21 @@ if( $kli_vmesx > 9 ) { $mes1="7.".$kli_vrok; $mes2="8.".$kli_vrok; $mes3="9.".$k
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprb".$kli_uzid." SELECT 0,oc,kc,0,0 FROM F$kli_vxcfxy"."_mzdzalvy WHERE dm = 308 AND ume >= $mes1 AND ume <= $mes3 ";
 $dsql = mysql_query("$dsqlt");
-if( $fir_fico != 36084514 )
+if( $fir_fico != 37986830 )
        {
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprb".$kli_uzid." SELECT 0,oc,0,hod,0 FROM F$kli_vxcfxy"."_mzdzalvy WHERE dm >= 101 AND dm <= 104 AND ume >= $mes1 AND ume <= $mes3 ";
 $dsql = mysql_query("$dsqlt");
        }
 
-//uprava dps gbely
-if( $fir_fico == 36084514 )
+//uprava dssbrodske
+if( $fir_fico == 37986830 )
        {
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprb".$kli_uzid." SELECT 0,oc,0,1,0 FROM F$kli_vxcfxy"."_mzdzalkun WHERE ume >= $mes1 AND ume <= $mes3 AND pom != 9 ";
 $dsql = mysql_query("$dsqlt");
 
 
        }
-//koniec uprava dps gbely
+//koniec uprava dssbrodske
 
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprb".$kli_uzid." SELECT 1,oc,SUM(kc),SUM(hh),0 FROM F$kli_vxcf"."_mzdprb".$kli_uzid." WHERE prx = 0 GROUP BY oc";
 $dsql = mysql_query("$dsqlt");
@@ -196,8 +188,8 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun,F$kli_vxcf"."_mzdprb".$kli_uzid." SET sz4=
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
 
-//uprava dps gbely
-if( $fir_fico == 36084514 )
+//uprava dssbrodske
+if( $fir_fico == 37986830 )
      {
 
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdprc".$kli_uzid." SET sz4x=kc WHERE oc > 0";
@@ -222,11 +214,21 @@ $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/163 WHERE oc > 0 AND uva = 7.5
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/119.53 WHERE oc > 0 AND uva = 5.5 "; $dsql = mysql_query("$dsqlt");
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz3=sz3/119.53 WHERE oc > 0 AND uva < 5.5 "; $dsql = mysql_query("$dsqlt");
 
+//toto chcem pre dsszavod
+if( $fir_ficoorig == 45741093 ) 
+{
 $dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz4=sz4/($pracsviat*uva) WHERE oc > 0 AND uva > 0 ";
-//echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
+}
+//toto chcem pre dssbrodske
+if( $fir_ficoorig == 37986830 ) 
+{
+$dsqlt = "UPDATE F$kli_vxcf"."_mzdkun SET sz4=sz3, sz3=0 WHERE oc > 0 AND uva > 0 ";
+$dsql = mysql_query("$dsqlt");
+}
 
      }
+//koniec dssbrodske
 
 //vypocet priemeru na nemocenske tento rok _mzdnemzakb
 //len 1.krat po ostrom spracovani
