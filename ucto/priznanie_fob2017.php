@@ -2292,7 +2292,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r68=0 WHERE oc = $cislo_oc AND r68 < 0";
 $oznac = mysql_query("$sqtoz");
 
-//str 6,7 vypocet zakladu dane z ostatnych prijmov tabulka 3.(na str.6,7) 2016 andrejko
+//str 6,7 vypocet zakladu dane z ostatnych prijmov tabulka 3. 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t3p17=t3p1+t3p2+t3p3+t3p4+t3p5+t3p6+t3p7+t3p8+t3p9+t3p10+t3p11+t3p12+t3p13+t3p14+t3p15+t3p16 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET t3v17=t3v1+t3v2+t3v3+t3v4+t3v5+t3v6+t3v7+t3v8+t3v9+t3v10+t3v11+t3v12+t3v13+t3p14+t3p15 WHERE oc = $cislo_oc ";
@@ -2301,7 +2301,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r69=t3p17, r70=t3v17, r71=r6
 $oznac = mysql_query("$sqtoz");
 
 
-//str 8 vypocet zakladu dane 2016
+//str 8 vypocet zakladu dane 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r72=r36+r57 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
@@ -2311,13 +2311,13 @@ if ( $miliondan == 1 )
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
-//max.nezdanitelna cast na danovnika za 2016
+//max.nezdanitelna cast na danovnika za 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r73=3803.33 WHERE oc = $cislo_oc  ";
 $oznac = mysql_query("$sqtoz");
 
-//milionarska dan 2016
+//milionarska dan 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=8755.578-(r72/4) WHERE oc = $cislo_oc AND r72 > 19809.00 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob".
@@ -2328,11 +2328,11 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r73=0 WHERE oc = $cislo_oc AND r72 >= 35022.32 ";
 $oznac = mysql_query("$sqtoz");
      }
-//koniec max.nezdanitelna cast na danovnika za 2016
+//koniec max.nezdanitelna cast na danovnika za 2017
 
 if ( $namanzelku == 1 )
      {
-//nezdanitelna cast na manzelku 2016
+//nezdanitelna cast na manzelku 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
@@ -2361,11 +2361,11 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r74=0 WHERE oc = $cislo_oc AND r72 >= 50235.63 ";
 $oznac = mysql_query("$sqtoz");
      }
-//nezdanitelna na manzelku 2016
+//nezdanitelna na manzelku 2017
 
 
-//str 8 vypocet zakladu dane 2016
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r77=r73+r74+r75+r76  WHERE oc = $cislo_oc ";
+//str 8 vypocet zakladu dane 2017
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r77=r73+r74+r75  WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r77=r72  WHERE oc = $cislo_oc AND r77 > r72 ";
 $oznac = mysql_query("$sqtoz");
@@ -2383,7 +2383,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r80=0 WHERE oc = $cislo_oc A
 $oznac = mysql_query("$sqtoz");
 
 
-//str 8 dan z prijmu 2016
+//str 8 dan z prijmu 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=r80*19/100 WHERE oc = $cislo_oc AND r80 <= 35022.31 ";
@@ -2395,19 +2395,19 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r90=r81 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
-//str 8 dan po vynati prijmov 2016 dan zo zakladu na r83 nepocitam
+//str 8 dan po vynati prijmov 2017 dan zo zakladu na r83 nepocitam 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r83=r80-r82 WHERE oc = $cislo_oc AND r82 > 0 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r83=0 WHERE oc = $cislo_oc AND r83 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//str 8 dan po zapocte 2016
+//str 8 dan po zapocte 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r90=r84-r89 WHERE oc = $cislo_oc AND r83 > 0 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r90=r81-r89 WHERE oc = $cislo_oc AND r83 = 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//str 8 dan z osobitneho zakladu dane na r68
+//str 8 dan z osobitneho zakladu dane na r68 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=0, des2=0 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET des6=r68*19/100 WHERE oc = $cislo_oc AND r68 > 0 ";
@@ -2417,6 +2417,8 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r93=r68-r92 WHERE oc = $cislo_oc AND r68 > 0 AND r92 > 0 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r93=0 WHERE oc = $cislo_oc AND r68 > 0 AND r93 < 0 ";
+
+//str 9 dan z osobitneho zakladu dane podla par.7 2017
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r100=r91-r99 WHERE oc = $cislo_oc AND r68 > 0 AND r91 > 0 ";
 $oznac = mysql_query("$sqtoz");
@@ -2426,7 +2428,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r104=r100-r103 WHERE oc = $c
 $oznac = mysql_query("$sqtoz");
 
 
-//str 9 dan celkom 2016
+//str 9 dan celkom 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r105=r90+r104 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
@@ -2434,13 +2436,13 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r107=0, r109=0, r110=0, r111=0, r100=0  WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
-//dan znizena o dan. bonusu 2016
+//dan znizena o dan. bonusu 2017 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r107=r105-r106 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r107=0 WHERE oc = $cislo_oc AND r107 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//vysporiadanie danoveho bonusu 2016
+//vysporiadanie danoveho bonusu 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r109=r106-r108  WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r109=0 WHERE oc = $cislo_oc AND r109 < 0 ";
@@ -2454,18 +2456,18 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r111=0 WHERE oc = $cislo_oc AND r111 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//zapl.dan z urok.prijmov 2016
-$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r119=r102-r9103  WHERE oc = $cislo_oc ";
+//zapl.dan z urok.prijmov 2017
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r119=r102-r103  WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
-//str 10 dan na uhradu, preplatok 2016
+//str 10 dan na uhradu, preplatok 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r121=0, r120=r105-r106+r108+r110+r112-r113-r114-r115-r116-r117-r118-r119 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r121=-r120, r120=0 WHERE oc = $cislo_oc AND r120 < 0 ";
 $oznac = mysql_query("$sqtoz");
 
 
-//str 12 Priloha 1 o projektoch 2016
+//str 12 Priloha 1 o projektoch 2016 andrejko
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET prpods=prpod1+prpod2+prpod3+prpod4+prpod5 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET prpodv=prpods WHERE oc = $cislo_oc ";
@@ -3668,14 +3670,10 @@ $sn1c=substr($sknacec,0,1);
 <img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:607px; left:770px;">
 <input type="text" name="r84" id="r84" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:660px; left:488px;"/>
 <input type="text" name="r85" id="r85" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:706px; left:488px;"/>
-<div class="input-echo right" style="width:242px; top:756px; left:489px;"><?php echo $r86; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:756px; left:770px;">
-<div class="input-echo right" style="width:242px; top:810px; left:489px;"><?php echo $r87; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:810px; left:770px;">
-<div class="input-echo right" style="width:242px; top:857px; left:489px;"><?php echo $r88; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:857px; left:770px;">
-<div class="input-echo right" style="width:242px; top:899px; left:489px;"><?php echo $r89; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:900px; left:770px;">
+<input type="text" name="r86" id="r86" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:756px; left:489px;"/>
+<input type="text" name="r87" id="r87" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:810px; left:489px;"/>
+<input type="text" name="r88" id="r88" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:857px; left:489px;"/>
+<input type="text" name="r89" id="r89" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:899px; left:489px;"/>
 <div class="input-echo right" style="width:242px; top:944px; left:489px;"><?php echo $r90; ?>&nbsp;</div>
 <img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:944px; left:770px;">
 <div class="input-echo right" style="width:242px; top:988px; left:489px;"><?php echo $r91; ?>&nbsp;</div>
@@ -3683,8 +3681,8 @@ $sn1c=substr($sknacec,0,1);
 <input type="text" name="r92" id="r92" onkeyup="CiarkaNaBodku(this);" style="width:262px; top:1027px; left:470px;"/>
 <div class="input-echo right" style="width:242px; top:1077px; left:489px;"><?php echo $r93; ?>&nbsp;</div>
 <img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:1078px; left:770px;">
-<div class="input-echo right" style="width:242px; top:1131px; left:489px;"><?php echo $r94; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:1131px; left:770px;">
+<input type="text" name="r94" id="r94" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:1131px; left:489px;"/>
+
 <?php                     } ?>
 
 
@@ -3693,21 +3691,19 @@ $sn1c=substr($sknacec,0,1);
 <span class="text-echo" style="top:74px; left:401px;"><?php echo $fir_fdic; ?></span>
 <!-- IX.ODDIEL pokracovanie -->
 <input type="text" name="r95" id="r95" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:117px; left:500px;"/>
-<div class="input-echo right" style="width:242px; top:169px; left:500px;"><?php echo $r96; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:169px; left:770px;">
-<div class="input-echo right" style="width:242px; top:219px; left:500px;"><?php echo $r97; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:219px; left:770px;">
-<div class="input-echo right" style="width:242px; top:261px; left:500px;"><?php echo $r98; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:261px; left:770px;">
-<div class="input-echo right" style="width:242px; top:303px; left:500px;"><?php echo $r99; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:303px; left:770px;">
-<div class="input-echo right" style="width:242px; top:348px; left:500px;"><?php echo $r100; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:348px; left:770px;">
+
+<input type="text" name="r96" id="r96" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:169px; left:500px;"/>
+<input type="text" name="r97" id="r97" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:219px; left:500px;"/>
+<input type="text" name="r98" id="r98" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:261px; left:500px;"/>
+<input type="text" name="r99" id="r99" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:303px; left:500px;"/>
+<input type="text" name="r100" id="r100" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:348px; left:500px;"/>
+
 <input type="text" name="r101" id="r101" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:402px; left:500px;"/>
 <input type="text" name="r102" id="r102" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:460px; left:500px;"/>
 <input type="text" name="r103" id="r103" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:522px; left:500px;"/>
-<div class="input-echo right" style="width:242px; top:581px; left:500px;"><?php echo $r104; ?>&nbsp;</div>
-<img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:581px; left:770px;">
+
+<input type="text" name="r104" id="r104" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:581px; left:500px;"/>
+
 <div class="input-echo right" style="width:242px; top:640px; left:500px;"><?php echo $r105; ?>&nbsp;</div>
 <img src="../obr/ikony/info_blue_icon.png" title="Hodnota sa zobrazí po prepoèítaní a uložení zmien na strane" class="btn-row-tool" style="top:640px; left:770px;">
 <input type="text" name="r106" id="r106" onkeyup="CiarkaNaBodku(this);" style="width:152px; top:692px; left:592px;"/>
@@ -6111,28 +6107,28 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
 //   document.formv1.r83.value = '<?php echo $r83; ?>';
    document.formv1.r84.value = '<?php echo $r84; ?>';
    document.formv1.r85.value = '<?php echo $r85; ?>';
-//   document.formv1.r86.value = '<?php echo $r86; ?>';
-//   document.formv1.r87.value = '<?php echo $r87; ?>';
-//   document.formv1.r88.value = '<?php echo $r88; ?>';
-//   document.formv1.r89.value = '<?php echo $r89; ?>';
+   document.formv1.r86.value = '<?php echo $r86; ?>';
+   document.formv1.r87.value = '<?php echo $r87; ?>';
+   document.formv1.r88.value = '<?php echo $r88; ?>';
+   document.formv1.r89.value = '<?php echo $r89; ?>';
 //   document.formv1.r90.value = '<?php echo $r90; ?>';
 //   document.formv1.r91.value = '<?php echo $r91; ?>';
    document.formv1.r92.value = '<?php echo $r92; ?>';
 //   document.formv1.r93.value = '<?php echo $r93; ?>';
-//   document.formv1.r94.value = '<?php echo $r94; ?>';
+   document.formv1.r94.value = '<?php echo $r94; ?>';
 <?php                                        } ?>
 
 <?php if ( $strana == 9 OR $strana == 9999 ) { ?>
    document.formv1.r95.value = '<?php echo $r95; ?>';
-//   document.formv1.r96.value = '<?php echo $r96; ?>';
-//   document.formv1.r97.value = '<?php echo $r97; ?>';
-//   document.formv1.r98.value = '<?php echo $r98; ?>';
-//   document.formv1.r99.value = '<?php echo $r99; ?>';
-//   document.formv1.r100.value = '<?php echo $r100; ?>';
+   document.formv1.r96.value = '<?php echo $r96; ?>';
+   document.formv1.r97.value = '<?php echo $r97; ?>';
+   document.formv1.r98.value = '<?php echo $r98; ?>';
+   document.formv1.r99.value = '<?php echo $r99; ?>';
+   document.formv1.r100.value = '<?php echo $r100; ?>';
    document.formv1.r101.value = '<?php echo $r101; ?>';
    document.formv1.r102.value = '<?php echo $r102; ?>';
    document.formv1.r103.value = '<?php echo $r103; ?>';
-//   document.formv1.r104.value = '<?php echo $r104; ?>';
+   document.formv1.r104.value = '<?php echo $r104; ?>';
 //   document.formv1.r105.value = '<?php echo $r105; ?>';
    document.formv1.r106.value = '<?php echo $r106; ?>';
 //   document.formv1.r107.value = '<?php echo $r107; ?>';
