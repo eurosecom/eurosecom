@@ -10,6 +10,8 @@ $copern = $_REQUEST['copern'];
 //$tis = $_REQUEST['tis'];
 //if (!isset($tis)) $tis = 0;
 
+//echo $copern;
+
 $uziv = include("../uziv.php");
 if ( !$uziv ) exit;
 
@@ -51,10 +53,14 @@ $subor=1;
 
 
 //vytvorenie tabulky
-$sql = "SELECT konx FROM F$kli_vxcf"."_uzavozn493";
+$sql = "SELECT datvyp FROM F$kli_vxcf"."_uzavozn493";
 $vysledok = mysql_query("$sql");
 if (!$vysledok)
 {
+
+$sql = "DROP TABLE F$kli_vxcf"."_uzavozn493";
+$vysledok = mysql_query("$sql");
+
 $sqlt = <<<mzdprc
 (
    oc           INT(7) DEFAULT 0,
@@ -70,7 +76,7 @@ $sqlt = <<<mzdprc
    predl3mes    DECIMAL(2,0) DEFAULT 0,
    predl6mes    DECIMAL(2,0) DEFAULT 0,
    datpredl     DATE NOT NULL,
-   datp         DATE NOT NULL,
+   datvyp       DATE NOT NULL,
    konx         DECIMAL(1,0) DEFAULT 0
 );
 mzdprc;
@@ -115,12 +121,13 @@ $predl3mes = 1*$_REQUEST['predl3mes'];
 $predl6mes = 1*$_REQUEST['predl6mes'];
 $datpredl = strip_tags($_REQUEST['datpredl']);
 $datpredl_sql = SqlDatum($datpredl);
-$datp = strip_tags($_REQUEST['datp']);
-$datp_sql = SqlDatum($datp);
+$datvyp = strip_tags($_REQUEST['datvyp']);
+$datvyp_sql = SqlDatum($datvyp);
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uzavozn493 SET ".
-" predl3mes='$predl3mes', predl6mes='$predl6mes', datpredl='$datpredl_sql', datp='$datp_sql' ".
+" predl3mes='$predl3mes', predl6mes='$predl6mes', datpredl='$datpredl_sql', datvyp='$datvyp_sql' ".
 " WHERE oc = $cislo_oc ";
+//echo $uprtxt;
                     }
 
 $uprav="NO";
@@ -163,7 +170,7 @@ if ( $strana == 2 ) {
 $predl3mes = $fir_riadok->predl3mes;
 $predl6mes = $fir_riadok->predl6mes;
 $datpredl_sk = SkDatum($fir_riadok->datpredl);
-$datp_sk = SkDatum($fir_riadok->datp);
+$datvyp_sk = SkDatum($fir_riadok->datvyp);
                     }
      }
 //koniec nacitania
@@ -342,6 +349,7 @@ if ( $copern == 20 )
    <td>
     <div class="bar-btn-form-tool">
      <img src="../obr/ikony/printer_blue_icon.png" onclick="FormPDF(9999);" title="Zobrazi v PDF" class="btn-form-tool">
+     <img src="../obr/ikony/upbox_blue_icon.png" onclick="FormXML();" title="Export do XML" class="btn-form-tool">
     </div>
    </td>
   </tr>
@@ -408,7 +416,7 @@ if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 <input type="checkbox" name="predl6mes" value="1" onchange="klikpredl6mes();" style="top:210px; left:54px;"/>
 <input type="text" name="datpredl" id="datpredl" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:195px; top:190px; left:697px;"/>
 <div class="input-echo" style="top:286px; left:52px;"><?php echo $zrobil; ?></div>
-<input type="text" name="datp" id="datp" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:196px; top:285px; left:386px;"/>
+<input type="text" name="datvyp" id="datvyp" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:196px; top:285px; left:386px;"/>
 <div class="input-echo" style="width:290px; top:286px; left:604px;"><?php echo $fir_mzdt04; ?></div>
 <?php                     } ?>
 <div class="navbar">
@@ -1090,7 +1098,7 @@ $textxx="1234567890";
 $text=$zrobil;
 $pdf->Cell(1,6," ","$rmc1",0,"R");$pdf->Cell(70,5,"$text","$rmc",0,"L");
 //vypracoval-dna
-$text=SkDatum($hlavicka->datp);
+$text=SkDatum($hlavicka->datvyp);
 if ( $text == '00.00.0000' ) { $text=""; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
@@ -1151,6 +1159,182 @@ $vysledok = mysql_query("$sqlt");
 } while (false);
 ?>
 
+<?php
+//xml
+if ( $copern == 40 )
+     {
+$hhmm = Date( "Hi", MkTime( date("H"),date("i"),date("s"),date("m"),date("d"),date("Y") ) );
+//$idx=$kli_uzid.$hhmm;
+$kli_nxcf10 = substr($kli_nxcf,0,10);
+$kli_nxcf10=trim(str_replace(" ","",$kli_nxcf10));
+
+$nazsub="../tmp/ozn493".$kli_vrok."_id".$kli_uzid."_".$kli_nxcf."_".$hhmm.".xml";
+
+//prva strana
+if ( File_Exists("../tmp/$nazsub") ) { $soubor = unlink("../tmp/$nazsub"); }
+     $soubor = fopen("../tmp/$nazsub", "a+");
+
+
+//hlavicka
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uzavozn493 ";
+//echo $sqltt;
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+
+$i=0;
+$j=0; //zaciatok strany ak by som chcel strankovat
+  while ( $i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
+
+$obdobie=$kli_vmes;
+$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$dat_datsql = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
+
+if ( $j == 0 )
+     {
+  $text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\r\n"; fwrite($soubor, $text);
+  $text = "<dokument xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"ozn493_2017.xsd\">"."\r\n"; 
+  fwrite($soubor, $text);
+
+  $text = " <hlavicka>"."\r\n"; fwrite($soubor, $text);
+
+$dic=$fir_fdic;
+  $text = "  <dic><![CDATA[".$dic."]]></dic>"."\r\n"; fwrite($soubor, $text);
+$rok=$kli_vrok;
+if ( $fir_uctt03 != 999 ) { $rok=""; }
+  $text = "   <zaRok><![CDATA[".$rok."]]></zaRok>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "   <datumOd><![CDATA[".$datbodsk."]]></datumOd>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <datumDo><![CDATA[".$datbdosk."]]></datumDo>"."\r\n"; fwrite($soubor, $text);
+
+$dovoddoplnenia=1*$hlavicka->opr;
+
+  $text = "   <dovodDoplnenia><![CDATA[".$dovoddoplnenia."]]></dovodDoplnenia>"."\r\n"; fwrite($soubor, $text);
+
+$datopr=SkDatum($hlavicka->datopr);
+if( $datopr == '' ) $datopr="";
+
+  $text = "   <datumPovodne><![CDATA[".$datopr."]]></datumPovodne>"."\r\n"; fwrite($soubor, $text);
+
+
+  $text = " <fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
+$priezvisko=iconv("CP1250", "UTF-8", $dprie);
+  $text = "  <priezvisko><![CDATA[".$priezvisko."]]></priezvisko>"."\r\n"; fwrite($soubor, $text);
+$meno=iconv("CP1250", "UTF-8", $dmeno);
+  $text = "  <meno><![CDATA[".$meno."]]></meno>"."\r\n"; fwrite($soubor, $text);
+$titul=iconv("CP1250", "UTF-8", $dtitl);
+  $text = "  <titulPred><![CDATA[".$titul."]]></titulPred>"."\r\n"; fwrite($soubor, $text);
+$titulza=iconv("CP1250", "UTF-8", $dtitz);
+  $text = "  <titulZa><![CDATA[".$titulza."]]></titulZa>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <rodneCislo>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <rcPredLom><![CDATA[".$rcpred."]]></rcPredLom>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <rcZaLom><![CDATA[".$rcza."]]></rcZaLom>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </rodneCislo>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <datumNarodenia><![CDATA[".$datnar."]]></datumNarodenia>"."\r\n"; fwrite($soubor, $text);
+  $text = " </fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
+
+
+  $text = " <pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
+  $text = " <obchodneMeno>"."\r\n"; fwrite($soubor, $text);
+$riadok=iconv("CP1250", "UTF-8", $fir_fnaz);
+  $text = "  <riadok><![CDATA[".$riadok."]]></riadok>"."\r\n"; fwrite($soubor, $text);
+$riadok="";
+  $text = "  <riadok><![CDATA[".$riadok."]]></riadok>"."\r\n"; fwrite($soubor, $text);
+$riadok="";
+  $text = "  <riadok><![CDATA[".$riadok."]]></riadok>"."\r\n"; fwrite($soubor, $text);
+  $text = " </obchodneMeno>"."\r\n"; fwrite($soubor, $text);
+  $text = " <ico><![CDATA[".$fir_fico."]]></ico>"."\r\n"; fwrite($soubor, $text);
+  $text = " </pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "  <sidlo>"."\r\n"; fwrite($soubor, $text);
+$ulica=iconv("CP1250", "UTF-8", $fir_fuli);
+  $text = "   <ulica><![CDATA[".$ulica."]]></ulica>"."\r\n"; fwrite($soubor, $text);
+$cislo=iconv("CP1250", "UTF-8", $fir_fcdm);
+  $text = "   <supisneOrientacneCislo><![CDATA[".$cislo."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
+$fir_fpsc = str_replace(" ","",$fir_fpsc);
+$psc=iconv("CP1250", "UTF-8", $fir_fpsc);
+  $text = "   <psc><![CDATA[".$psc."]]></psc>"."\r\n"; fwrite($soubor, $text);
+$obec=iconv("CP1250", "UTF-8", $fir_fmes);
+  $text = "   <obec><![CDATA[".$obec."]]></obec>"."\r\n"; fwrite($soubor, $text);
+$fir_fstat="Slovensko";
+$stat=iconv("CP1250", "UTF-8", $fir_fstat);
+  $text = "   <stat><![CDATA[".$stat."]]></stat>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </sidlo>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "  <adresaSr>"."\r\n"; fwrite($soubor, $text);
+$ulica=iconv("CP1250", "UTF-8", $fir_fuli);
+  $text = "   <ulica><![CDATA[".$ulica."]]></ulica>"."\r\n"; fwrite($soubor, $text);
+$cislo=iconv("CP1250", "UTF-8", $fir_fcdm);
+  $text = "   <supisneOrientacneCislo><![CDATA[".$cislo."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
+$fir_fpsc = str_replace(" ","",$fir_fpsc);
+$psc=iconv("CP1250", "UTF-8", $fir_fpsc);
+  $text = "   <psc><![CDATA[".$psc."]]></psc>"."\r\n"; fwrite($soubor, $text);
+$obec=iconv("CP1250", "UTF-8", $fir_fmes);
+  $text = "   <obec><![CDATA[".$obec."]]></obec>"."\r\n"; fwrite($soubor, $text);
+$fir_fstat="Slovensko";
+$stat=iconv("CP1250", "UTF-8", $fir_fstat);
+  $text = "   <stat><![CDATA[".$stat."]]></stat>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </adresaSr>"."\r\n"; fwrite($soubor, $text);
+
+
+$predl3mes=1*$hlavicka->predl3mes;
+$predl6mes=1*$hlavicka->predl6mes;
+  $text = "  <novaLehota>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <predlzenie493a><![CDATA[".$predl3mes."]]></predlzenie493a>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <predlzenie493b><![CDATA[".$predl6mes."]]></predlzenie493b>"."\r\n"; fwrite($soubor, $text);
+
+$datpredl=SkDatum($hlavicka->datpredl);
+
+  $text = "   <datumLehota><![CDATA[".$datpredl."]]></datumLehota>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </novaLehota>"."\r\n"; fwrite($soubor, $text);
+
+$zrobil = $fir_mzdt05; if ( $fir_mzdt05 == '' ) $zrobil=$kli_uzmeno." ".$kli_uzprie;
+
+$zrobil=iconv("CP1250", "UTF-8", $zrobil);
+$telefon=iconv("CP1250", "UTF-8", $fir_mzdt04);
+
+
+  $text = "  <vypracoval>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <vypr><![CDATA[".$zrobil."]]></vypr>"."\r\n"; fwrite($soubor, $text);
+
+$dna=SkDatum($hlavicka->datvyp);
+
+  $text = "   <dna><![CDATA[".$dna."]]></dna>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "   <telefon><![CDATA[".$telefon."]]></telefon>"."\r\n"; fwrite($soubor, $text);
+  $text = "  </vypracoval>"."\r\n"; fwrite($soubor, $text);
+
+
+$podpis=0;
+  $text = "   <podpis><![CDATA[".$podpis."]]></podpis>"."\r\n"; fwrite($soubor, $text);
+
+  $text = " </hlavicka>"."\r\n"; fwrite($soubor, $text);
+
+  $text = "</dokument>"."\r\n"; fwrite($soubor, $text);
+     }
+//koniec ak j=0
+}
+$i = $i + 1;
+$j = $j + 1;
+  }
+fclose($soubor);
+?>
+<div class="bg-white" style="padding: 16px 24px;">
+  <p style="line-height: 1.3;">Stiahnite si nižšie uvedený súbor XML na Váš lokálny disk a naèítajte ho na stránku <a href="https://www.financnasprava.sk/sk/titulna-stranka" target="_blank" title="Stránka Finanènej správy">Finanènej správy</a> alebo do aplikácie eDane:
+  </p>
+  <p style="line-height: 40px;"><a href="<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a></p>
+</div>
+<?php
+//mysql_free_result($vysledok);
+     }
+//$copern == 40
+//koniec xml
+?>
+
 <script type="text/javascript">
 //dimensions blank
 var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, height=900';
@@ -1177,7 +1361,7 @@ var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, hei
 <?php if ( $predl3mes == 1 ) { ?> document.formv1.predl3mes.checked = 'true'; <?php } ?>
 <?php if ( $predl6mes == 1 ) { ?> document.formv1.predl6mes.checked = 'true'; <?php } ?>
     document.formv1.datpredl.value = '<?php echo "$datpredl_sk"; ?>';
-    document.formv1.datp.value = '<?php echo "$datp_sk"; ?>';
+    document.formv1.datvyp.value = '<?php echo "$datvyp_sk"; ?>';
 <?php                     } ?>
   }
 <?php
@@ -1219,6 +1403,11 @@ var blank_param = 'scrollbars=yes, resizable=yes, top=0, left=0, width=1080, hei
   function FormPDF(strana)
   {
     window.open('uzavierka_ozn493.php?copern=10&strana=' + strana + '&drupoh=1', '_blank', blank_param);
+  }
+
+  function FormXML()
+  {
+   window.open('uzavierka_ozn493.php?copern=40&drupoh=1', '_blank', blank_param);
   }
 </script>
 </body>

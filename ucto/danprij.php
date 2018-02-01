@@ -516,7 +516,7 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
   }
   function OzOdldoXML()
   {
-   window.open('../ucto/uzavierka_ozn493xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+   window.open('../ucto/uzavierka_ozn493.php?copern=40&page=1&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
