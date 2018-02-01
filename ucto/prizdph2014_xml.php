@@ -376,7 +376,18 @@ if( $j == 0 )
   fwrite($soubor, $text);
   $text = "      <kodStatu><![CDATA[SK]]></kodStatu>"."\r\n";
   fwrite($soubor, $text);
-  $text = "      <cislo><![CDATA[".$fir_fdic."]]></cislo>	"."\r\n";
+
+$identcislo=$fir_fdic;
+if( $kli_vrok >= 2018 )
+{
+$identcislo=trim(strtoupper($fir_ficd));
+$identcislo=str_replace("SK","",$identcislo);
+}
+
+$identcislo=trim(strtoupper($fir_ficd));
+$identcislo=str_replace("SK","",$identcislo);
+
+  $text = "      <cislo><![CDATA[".$identcislo."]]></cislo>	"."\r\n";
   fwrite($soubor, $text);
   $text = "    </identifikacneCislo>"."\r\n";
   fwrite($soubor, $text);
