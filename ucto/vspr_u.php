@@ -1843,7 +1843,7 @@ $wyplmiesto=1*$riadok->unk;
 ?>
 <a href="#" onClick="uhradMzdy(<?php echo $wyplmiesto;?>);">
 <img src='../obr/zoznam.png' width=15 height=15 border=0 title="Uhradi mzdy" ></a>
-<a href="#" onClick="window.open('../mzdy/priku.php?copern=2&drupoh=1&page=1&cislo_dok=<?php echo $riadok->dok;?>&hladaj_uce=<?php echo $riadok->uce;?>', '_self' )">
+<a href="#" onClick="window.open('../mzdy/priku.php?copern=2&drupoh=1&page=1&cislo_dok=<?php echo $riadok->dok;?>&hladaj_uce=<?php echo $riadok->uce;?>&wyplmiesto=<?php echo $wyplmiesto;?>', '_self' )">
 <img src='../obr/orig.png' width=15 height=15 border=0 title="Uhradi odvody do fondov a daò z príjmu" ></a>
 <a href="#" onClick="window.open('../mzdy/priku.php?copern=3&drupoh=1&page=1&cislo_dok=<?php echo $riadok->dok;?>&hladaj_uce=<?php echo $riadok->uce;?>', '_self' )">
 <img src='../obr/ziarovka.png' width=15 height=15 border=0 title="Uhradi DDP" ></a>

@@ -354,6 +354,7 @@ $vysledek = mysql_query("$sql");
 //odvody a dan z prijmu
 if( $copern == 2 )
      {
+
 //zober data zo sum socialna poistovna dm=1
 $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 " SELECT (ozam_np+ozam_sp+ozam_ip+ozam_pn+ofir_np+ofir_sp+ofir_ip+ofir_pn+ofir_up+ofir_gf+ofir_rf),oc,$cislo_dok,".
@@ -408,6 +409,30 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_mzdprcvypl".$kli_uzid.
 "";
 //echo $dsqlt;
 $dsql = mysql_query("$dsqlt");
+
+
+$wyplmiesto = 1*$_REQUEST['wyplmiesto'];
+if( $wyplmiesto > 0 AND $_SERVER['SERVER_NAME'] == "www.dssbrodske.sk" )
+  {
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvypl$kli_uzid ADD wmm DECIMAL(10,0) AFTER konx";
+$vysledek = mysql_query("$sql");
+
+$sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdkun".
+" SET wmm=wms ".
+" WHERE F$kli_vxcf"."_mzdprcvypl$kli_uzid.oc = F$kli_vxcf"."_mzdkun.oc";
+//echo $sqtoz;
+$oznac = mysql_query("$sqtoz");
+
+$dsqlt = "DELETE FROM F$kli_vxcf"."_mzdprcvypl$kli_uzid WHERE wmm != $wyplmiesto ";
+$dsql = mysql_query("$dsqlt");
+
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdprcvypl$kli_uzid DROP wmm ";
+$vysledek = mysql_query("$sql");
+  }
+
+//echo $wyplmiesto;
+//exit;
+
 
 //dopln banku z mzdprm pre SP
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcvypl$kli_uzid,F$kli_vxcf"."_mzdprm".
