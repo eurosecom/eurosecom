@@ -1247,8 +1247,19 @@ $riadok="";
 $riadok="";
   $text = "  <riadok><![CDATA[".$riadok."]]></riadok>"."\r\n"; fwrite($soubor, $text);
   $text = " </obchodneMeno>"."\r\n"; fwrite($soubor, $text);
-  $text = " <ico><![CDATA[".$fir_fico."]]></ico>"."\r\n"; fwrite($soubor, $text);
+  $text = " <ico></ico>"."\r\n"; fwrite($soubor, $text);
   $text = " </pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
+
+//sidlo PO alebo trvale FO
+if ( $fir_uctt03 == 999 ) 
+{
+
+$fir_fuli=$duli;
+$fir_fcdm=$dcdm;
+$fir_fpsc=$dpsc;
+$fir_fmes=$dmes;
+$fir_fstat=$dstat;
+}
 
   $text = "  <sidlo>"."\r\n"; fwrite($soubor, $text);
 $ulica=iconv("CP1250", "UTF-8", $fir_fuli);
@@ -1266,17 +1277,17 @@ $stat=iconv("CP1250", "UTF-8", $fir_fstat);
   $text = "  </sidlo>"."\r\n"; fwrite($soubor, $text);
 
   $text = "  <adresaSr>"."\r\n"; fwrite($soubor, $text);
-$ulica=iconv("CP1250", "UTF-8", $fir_fuli);
+$ulica=iconv("CP1250", "UTF-8", $hlavicka->sruli);
   $text = "   <ulica><![CDATA[".$ulica."]]></ulica>"."\r\n"; fwrite($soubor, $text);
-$cislo=iconv("CP1250", "UTF-8", $fir_fcdm);
+$cislo=iconv("CP1250", "UTF-8", $hlavicka->srcdm);
   $text = "   <supisneOrientacneCislo><![CDATA[".$cislo."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
-$fir_fpsc = str_replace(" ","",$fir_fpsc);
-$psc=iconv("CP1250", "UTF-8", $fir_fpsc);
+$srpsc = str_replace(" ","",$hlavicka->srpsc);
+$psc=iconv("CP1250", "UTF-8", $srpsc);
   $text = "   <psc><![CDATA[".$psc."]]></psc>"."\r\n"; fwrite($soubor, $text);
-$obec=iconv("CP1250", "UTF-8", $fir_fmes);
+$obec=iconv("CP1250", "UTF-8", $hlavicka->srmes);
   $text = "   <obec><![CDATA[".$obec."]]></obec>"."\r\n"; fwrite($soubor, $text);
-$fir_fstat="Slovensko";
-$stat=iconv("CP1250", "UTF-8", $fir_fstat);
+$srstat="Slovensko";
+$stat=iconv("CP1250", "UTF-8", $srstat);
   $text = "   <stat><![CDATA[".$stat."]]></stat>"."\r\n"; fwrite($soubor, $text);
   $text = "  </adresaSr>"."\r\n"; fwrite($soubor, $text);
 
@@ -1309,7 +1320,7 @@ $dna=SkDatum($hlavicka->datvyp);
   $text = "  </vypracoval>"."\r\n"; fwrite($soubor, $text);
 
 
-$podpis=0;
+$podpis=1;
   $text = "   <podpis><![CDATA[".$podpis."]]></podpis>"."\r\n"; fwrite($soubor, $text);
 
   $text = " </hlavicka>"."\r\n"; fwrite($soubor, $text);
