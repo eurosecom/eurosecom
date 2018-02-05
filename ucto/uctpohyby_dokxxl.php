@@ -540,8 +540,15 @@ $PRI="Príjem";
 $VYD="Výdavok";
     }
 
+$sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_uctosnova WHERE uce = $cislo_uce");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $nazuce=$riaddok->nuc;
+  }
 
-$pdf->Cell(90,5,"Pohyby na úète $cislo_uce $polozka->nuc - sumár za doklad","LTB",0,"L");
+
+$pdf->Cell(90,5,"Pohyby na úète $cislo_uce $nazuce - sumár za doklad","LTB",0,"L");
 $pdf->SetFont('arial','',8);
 $pdf->Cell(0,3,"FIR$kli_vxcf $kli_nxcf strana $strana","RT",1,"R");
 $pdf->SetFont('arial','',6);
