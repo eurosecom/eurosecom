@@ -3666,7 +3666,7 @@ $pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$K","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$L","$rmc",1,"C");
 //r37
 $pdf->Cell(190,9," ","$rmc1",1,"R");
-$h_rxx=sprintf("% 13s",$h_r37);
+$h_rxx=sprintf("% 12s",$h_r37);
 $znamienko=" ";
 if ( $hlavicka->r37 < 0 ) { $znamienko="-"; $h_rxx=str_replace("-"," ",$h_rxx); }
 $A=substr($h_rxx,0,1);
