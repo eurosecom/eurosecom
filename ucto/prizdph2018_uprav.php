@@ -1,5 +1,5 @@
 <!doctype html>
-<HTML>
+<html>
 <?php
 do
 {
@@ -43,12 +43,9 @@ $odpoc = 1*$_REQUEST['odpoc'];
 $strana = 1*$_REQUEST['strana'];
 if ( $strana == 0 ) { $strana=2; }
 
-//tlacove okno
-$tlcuwin="width=700, height=' + vyskawin + ', top=0, left=200, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcswin="width=980, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$tlcvwin="width=1020, height=' + vyskawin + ', top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes";
-$uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, status=yes, resizable=yes, scrollbars=yes, menubar=no, toolbar=no";
-
+//.jpg podklad
+$jpg_source="../dokumenty/tlacivo2018/dph/dph_v18";
+$jpg_title="tlaËivo DaÚovÈ priznanie pre daÚ z pridanej hodnoty pre rok $kli_vrok $strana.strana";
 
 
 //odpocet riadne od dodatocneho
@@ -99,16 +96,16 @@ if ( $copern == 220 )
 $koefmin = 1*$_REQUEST['koefmin'];
 $druhykoef = strip_tags($_REQUEST['druhykoef']);
 
-$uprtxt = "UPDATE F$kli_vxcf"."_archivdphkoef SET koefmin='$koefmin', druhykoef='$druhykoef' WHERE fic >= 0"; 
+$uprtxt = "UPDATE F$kli_vxcf"."_archivdphkoef SET koefmin='$koefmin', druhykoef='$druhykoef' WHERE fic >= 0";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_archivdph SET koefmin='$koefmin', druhykoef='$druhykoef' WHERE ume >= 0"; 
+$uprtxt = "UPDATE F$kli_vxcf"."_archivdph SET koefmin='$koefmin', druhykoef='$druhykoef' WHERE ume >= 0";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_archivdph SET r19orig=r21 WHERE r19orig = 0 AND cpid = $cislo_cpid "; 
+$uprtxt = "UPDATE F$kli_vxcf"."_archivdph SET r19orig=r21 WHERE r19orig = 0 AND cpid = $cislo_cpid ";
 $upravene = mysql_query("$uprtxt");
 
-$uprtxt = "UPDATE F$kli_vxcf"."_archivdph SET r18orig=r20 WHERE r18orig = 0 AND cpid = $cislo_cpid "; 
+$uprtxt = "UPDATE F$kli_vxcf"."_archivdph SET r18orig=r20 WHERE r18orig = 0 AND cpid = $cislo_cpid ";
 $upravene = mysql_query("$uprtxt");
 
 $sqlt = 'DROP TABLE prcdatum'.$kli_uzid;
@@ -209,7 +206,7 @@ $podmrdp=$podmrdp." ) ";
 
 
 $psys=12;
-while ($psys <= 16 ) 
+while ($psys <= 16 )
   {
 //zober vydavkove pokl
 if( $psys == 12 ) { $uctovanie="uctpokuct"; $doklad="pokvyd"; }
@@ -261,8 +258,8 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_prcprizdphs$kli_uzid"." SELECT".
 " 0,SUM(hod),1 FROM F$kli_vxcf"."_prcprizdphs$kli_uzid WHERE prx = 0 GROUP BY prx ";
 $dsql = mysql_query("$dsqlt");
 
-$zmazttt = "DELETE FROM F$kli_vxcf"."_prcprizdphs$kli_uzid WHERE prx = 0 "; 
-$zmazane = mysql_query("$zmazttt"); 
+$zmazttt = "DELETE FROM F$kli_vxcf"."_prcprizdphs$kli_uzid WHERE prx = 0 ";
+$zmazane = mysql_query("$zmazttt");
 
 $sqlmax = mysql_query("SELECT * FROM F$kli_vxcf"."_prcprizdphs$kli_uzid ORDER by dok DESC LIMIT 1");
   if (@$zaznam=mysql_data_seek($sqlmax,0))
@@ -371,7 +368,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_archivdph SET cpop='$cpop',".
 " r20='$r20', r21='$r21', r22='$r22', r23='$r23', r24='$r24', r25='$r25', r26='$r26', r27='$r27', r28='$r28', r29='$r29',".
 " r30='$r30', r32='$r32', r31='$r31', r33='$r33', r34='$r34', r35='$r35', r36='$r36', r37='$r37', r38='$r38', ".
 " par79ods2='$par79ods2' ".
-" WHERE cpid = $cislo_cpid  "; 
+" WHERE cpid = $cislo_cpid  ";
 
                    }
 if( $strana == 1 ) {
@@ -382,19 +379,19 @@ $xplc = 1*$_REQUEST['xplc'];
 $uprtx2 = "DELETE FROM F$kli_vxcf"."_archivdphdalsie WHERE cpid = $cislo_cpid ";
 $upraven2 = mysql_query("$uprtx2");
 $uprtx2 = "INSERT INTO F$kli_vxcf"."_archivdphdalsie ( cpid, xplc ) VALUES ( '$cislo_cpid', '$xplc' ) ";
-$upraven2 = mysql_query("$uprtx2"); 
+$upraven2 = mysql_query("$uprtx2");
 //echo $uprtx2;
 //exit;
 
 
 $uprtxt = "UPDATE F$kli_vxcf"."_archivdph SET ".
 " dad='$dad_sql' ".
-" WHERE cpid = $cislo_cpid  "; 
+" WHERE cpid = $cislo_cpid  ";
 
                    }
 
 //echo $uprtxt;
-$upravene = mysql_query("$uprtxt");  
+$upravene = mysql_query("$uprtxt");
 
 //prepocty
 
@@ -530,13 +527,24 @@ $vysledek = mysql_query("$sql");
 $ttvv = "INSERT INTO F$kli_vxcf"."_archivdphkoef ( fic ) VALUES ( '$fir_fico' )";
 $ttqq = mysql_query("$ttvv");
 }
+
+$fir_ficdx=substr($fir_ficd,2,10);
 ?>
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link rel="stylesheet" href="../css/reset.css">
- <link rel="stylesheet" href="../css/tlaciva.css">
-<title>EuroSecom - Priznanie DPH</title>
+<head>
+<meta charset="cp1250">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/tlaciva.css">
+<title>DPH | EuroSecom</title>
 <style type="text/css">
+span.text-echo {
+  font-size: 18px;
+  letter-spacing: 13px;
+}
+div.input-echo {
+  position: absolute;
+  font-size: 18px;
+  background-color: #fff;
+}
 div.bar-btn-form-tool {
   top: 28px;
 }
@@ -550,54 +558,6 @@ div.bar-btn-form-tool > a {
 }
 div.bar-btn-form-tool > a:hover {
   text-decoration: underline;
-}
-div.navbar {
-  overflow: auto;
-  width: 100%;
-  background-color: #add8e6;
-}
-div.wrap-form-background {
-  overflow: hidden;
-  width: 950px;
-  height: 1300px;
-  background-color: #fff;
-}
-img.form-background {
-  display: block;
-  width: 900px;
-  height: 1250px;
-  margin: 30px 0 0 25px;
-}
-span.text-echo {
-  font-size: 19px;
-  letter-spacing: 12px;
-}
-span.text-echo-field {
-  position: absolute;
-  height: 28px;
-  line-height: 28px;
-  text-indent: 5px;
-  background-color: #fff;
-  letter-spacing: 1px;
-  font-weight: bold;
-  font-size: 18px;
-  color: #000;
-}
-img.ekorobot {
-  position: absolute;
-  top: 570px;
-  left: 440px;
-  width: 90px;
-  height: 130px;
-  cursor: pointer;
-}
-div.wrap-ekorobot-menu {
-  position: absolute;
-  top: 395px;
-  left: 460px;
-  width: 390px;
-  background-color: #ffff90;
-  border: 2px outset #ececec;
 }
 table.ekorobot-menu {
   width: 100%;
@@ -663,17 +623,301 @@ span.alert-success {
   font-weight: normal;
 }
 </style>
+</head>
+<body id="white" onload="ObnovUI();">
+<?php
+//uprav udaje
+if ( $copern == 20 )
+     {
+?>
+<div id="wrap-heading">
+ <table id="heading">
+  <tr>
+   <td class="ilogin">EuroSecom</td>
+   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
+  </tr>
+  <tr>
+<?php
+if ( $cislo_druh == 1 ) { $druh_priz="Riadne"; }
+if ( $cislo_druh == 2 ) { $druh_priz="OpravnÈ"; }
+if ( $cislo_druh == 3 ) { $druh_priz="DodatoËnÈ"; }
+?>
+   <td class="header">
+    <span class="subheader"><?php echo $druh_priz; ?></span> priznanie DPH
+    <span class="subheader">id <?php echo $cislo_cpid; ?></span> - ˙prava
+   </td>
+   <td>
+    <div class="bar-btn-form-tool">
+     <a href="#" title="Sp‰ù do archÌvu" onclick="window.open('../ucto/archivdph2018.php?copern=80&drupoh=1&page=1', '_self' )">Sp‰ù</a>
+     <a style="height:16px; border-right:2px solid #39f;">&nbsp;</a>
+<?php
+if ( $cislo_stvrt == 0 ) { $podmzarchu=" er1 = 0 AND ume = $cislo_ume "; }
+if ( $cislo_stvrt > 0 ) { $podmzarchu=" er1 = $cislo_stvrt "; }
+$jearchzoznam=0;
+$sqlttt = "SELECT * FROM F$kli_vxcf"."_archivdphzoznam WHERE $podmzarchu ";
+$sqldok = mysql_query("$sqlttt");
+  if (@$zaznam=mysql_data_seek($sqldok,0))
+  {
+  $riaddok=mysql_fetch_object($sqldok);
+  $jearchzoznam=1;
+  }
+if ( $jearchzoznam == 1 ) { ?>
+     <a href="#" onclick="TlacZoznam(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $cislo_stvrt;?>);"
+      title="Zobraziù zoznam dokladov k priznaniu DPH podæa riadkov">Doklady DPH</a>
+<?php                     } ?>
+
+<?php if ( $jearchzoznam == 1 ) { ?>
+     <a href="#" onclick="TlacZoznamRP(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $cislo_stvrt;?>);"
+      title='Zobraziù rozdielovÈ doklady, ktorÈ s˙ navyöe oproti archÌvu'>PridanÈ doklady</a>
+     <a href="#" onclick="TlacZoznamRM(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $cislo_stvrt;?>);"
+      title='Zobraziù rozdielovÈ doklady, ktorÈ ch˝baj˙ oproti archÌvu'>Ch˝baj˙ce doklady</a>
+<?php                           } ?>
+    </div>
+   </td>
+  </tr>
+ </table>
+</div>
+
+<div id="content">
+<form name="formv1" method="post" action="prizdph2018_uprav.php?copern=23&cislo_cpid=<?php echo $cislo_cpid; ?>&strana=<?php echo $strana; ?>">
+<?php
+$clas1="noactive"; $clas2="noactive";
+if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
+$source="prizdph2018_uprav.php?cislo_cpid=$cislo_cpid&cislo_ume=$cislo_ume&cislo_druh=$cislo_druh&cislo_stvrt=$cislo_stvrt&drupoh=1&uprav=1";
+?>
+<div class="navbar">
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+ <input type="submit" id="uloz" name="uloz" value="Uloûiù ˙pravy" class="btn-top-formsave">
+</div>
+
+<?php if ( $strana == 1 OR $strana == 9999 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str1.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
+<span class="text-echo" style="top:238px; left:115px; width:233px;"><?php echo $fir_ficdx; ?></span>
+<div class="input-echo" style="top:346px; left:52px; width:280px;"><?php echo $fir_uctt01; ?></div>
+
+<!-- druh priznania -->
+<?php
+$riadne="x";
+$opravne="x";
+$dodatocne="x";
+if ( $cislo_druh == 1 ) { $opravne=""; $dodatocne=""; $dat_dodatocne=""; }
+if ( $cislo_druh == 2 ) { $riadne=""; $dodatocne=""; $dat_dodatocne=""; }
+if ( $cislo_druh == 3 ) { $riadne=""; $opravne=""; $dat_dodatocne=$h_dap; }
+?>
+<span class="text-echo" style="top:230px; left:360px;"><?php echo $riadne; ?></span>
+<span class="text-echo" style="top:254px; left:360px;"><?php echo $opravne; ?></span>
+<span class="text-echo" style="top:278px; left:360px;"><?php echo $dodatocne; ?></span>
+<input type="text" name="dad" id="dad" onkeyup="CiarkaNaBodku(this);" maxlength="10" style="width:194px; top:269px; left:470px;"/>
+
+<!-- zdanovacie obdobie -->
+<?php
+//if ( $stvrtrok == 0 ) { $mesiacx=$cislo_ume; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; } }
+//if ( $stvrtrok != 0 ) { echo $stvrtrok; }
+$mesiac=1*$cislo_ume;
+if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
+if ( $mesiac == 0 ) { $mesiac=""; }
+$mesiacx=substr($mesiac,0,2);
+$mesiacxn=1*$mesiacx;
+if ( $stvrtrok == 0 ) { $stvrtrok=""; }
+if ( $mesiacxn == 0 ) { $mesiacx=""; }
+$stvrtrokx=$stvrtrok;
+?>
+<span class="text-echo" style="top:256px; left:688px;"><?php echo $mesiacx; ?></span>
+<span class="text-echo" style="top:256px; left:763px;"><?php echo $stvrtrokx; ?></span>
+<span class="text-echo" style="top:256px; left:815px;"><?php echo $kli_vrok; ?></span>
+
+<!-- druh osoby -->
+<input type="radio" id="xplc1" name="xplc" value="1" style="top:308px; left:354px;"/>
+<input type="radio" id="xplc2" name="xplc" value="2" style="top:330px; left:354px;"/>
+<input type="radio" id="xplc3" name="xplc" value="3" style="top:353px; left:354px;"/>
+<input type="radio" id="xplc4" name="xplc" value="4" style="top:375px; left:354px;"/>
+<input type="radio" id="xplc5" name="xplc" value="5" style="top:397px; left:354px;"/>
+<input type="radio" id="xplc6" name="xplc" value="6" style="top:420px; left:354px;"/>
+
+<!-- FO / PO -->
+<div class="input-echo" style="top:474px; left:52px; width:842px; height:102px;"><?php echo $fir_fnaz; ?></div>
+<div class="input-echo" style="top:624px; left:52px; width:636px;"><?php echo $fir_fuli; ?></div>
+<div class="input-echo" style="top:624px; left:718px; width:176px;"><?php echo $fir_fcdm; ?></div>
+<div class="input-echo" style="top:679px; left:52px; width:105px;"><?php echo $fir_fpsc; ?></div>
+<div class="input-echo" style="top:679px; left:190px; width:705px;"><?php echo $fir_fmes; ?></div>
+<div class="input-echo" style="top:734px; left:52px; width:290px;"><?php echo $fir_ftel; ?></div>
+<div class="input-echo" style="top:734px; left:374px; width:520px;"><?php echo $fir_fem1; ?></div>
+
+<!-- Opravnena osoba -->
+<div class="input-echo" style="top:795px; left:52px; width:842px;"><?php echo $fir_uctt05; ?></div>
+<div class="input-echo" style="top:849px; left:52px; width:290px;"><?php echo $fir_uctt04; ?></div>
+
+<!-- Vyhlasujem dna -->
+<div class="input-echo" style="top:985px; left:54px; width:198px;"><?php echo $dap; ?></div>
+<?php                                        } ?>
+
+
+<?php if ( $strana == 2 OR $strana == 9999 ) { ?>
+<img src="<?php echo $jpg_source; ?>_str2.jpg" alt="<?php echo $jpg_title; ?>" class="form-background">
+<span class="text-echo" style="top:89px; left:212px; width:220px;"><?php echo $fir_ficdx; ?></span>
+<!-- riadky -->
+<input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);" style="top:141px; left:322px; width:278px;"/>
+<input type="text" name="r02" id="r02" onkeyup="CiarkaNaBodku(this);" style="top:141px; left:638px; width:256px;"/>
+<input type="text" name="r03" id="r03" onkeyup="CiarkaNaBodku(this);" style="top:180px; left:322px; width:278px;"/>
+<input type="text" name="r04" id="r04" onkeyup="CiarkaNaBodku(this);" style="top:180px; left:638px; width:256px;"/>
+<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);" style="top:217px; left:322px; width:278px;"/>
+<input type="text" name="r06" id="r06" onkeyup="CiarkaNaBodku(this);" style="top:217px; left:638px; width:256px;"/>
+<input type="text" name="r07" id="r07" onkeyup="CiarkaNaBodku(this);" style="top:255px; left:322px; width:278px;"/>
+<input type="text" name="r08" id="r08" onkeyup="CiarkaNaBodku(this);" style="top:255px; left:638px; width:256px;"/>
+<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);" style="top:293px; left:322px; width:278px;"/>
+<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);" style="top:293px; left:638px; width:256px;"/>
+<input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);" style="top:331px; left:322px; width:278px;"/>
+<input type="text" name="r12" id="r12" onkeyup="CiarkaNaBodku(this);" style="top:331px; left:638px; width:256px;"/>
+<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);" style="top:369px; left:322px; width:278px;"/>
+<input type="text" name="r14" id="r14" onkeyup="CiarkaNaBodku(this);" style="top:369px; left:638px; width:256px;"/>
+<input type="text" name="r15" id="r15" onkeyup="CiarkaNaBodku(this);" style="top:406px; left:322px; width:278px;"/>
+<input type="text" name="r16" id="r16" onkeyup="CiarkaNaBodku(this);" style="top:444px; left:322px; width:278px;"/>
+<input type="text" name="r17" id="r17" onkeyup="CiarkaNaBodku(this);" style="top:482px; left:322px; width:278px;"/>
+<input type="text" name="r18" id="r18" onkeyup="CiarkaNaBodku(this);" style="top:520px; left:638px; width:256px;"/>
+<div class="input-echo" style="top:558px; left:639px; width:256px;"><?php echo $r19; ?></div>
+<input type="text" name="r20" id="r20" onkeyup="CiarkaNaBodku(this);" style="top:595px; left:638px; width:256px;"/>
+<input type="text" name="r21" id="r21" onkeyup="CiarkaNaBodku(this);" style="top:633px; left:638px; width:256px;"/>
+<input type="text" name="r22" id="r22" onkeyup="CiarkaNaBodku(this);" style="top:671px; left:638px; width:256px;"/>
+<input type="text" name="r23" id="r23" onkeyup="CiarkaNaBodku(this);" style="top:709px; left:638px; width:256px;"/>
+<input type="text" name="r24" id="r24" onkeyup="CiarkaNaBodku(this);" style="top:746px; left:638px; width:256px;"/>
+<input type="text" name="r25" id="r25" onkeyup="CiarkaNaBodku(this);" style="top:784px; left:638px; width:256px;"/>
+<input type="text" name="r26" id="r26" onkeyup="CiarkaNaBodku(this);" style="top:826px; left:320px; width:280px;"/>
+<input type="text" name="r27" id="r27" onkeyup="CiarkaNaBodku(this);" style="top:826px; left:638px; width:256px;"/>
+<input type="text" name="r28" id="r28" onkeyup="CiarkaNaBodku(this);" style="top:868px; left:638px; width:256px;"/>
+<input type="text" name="r29" id="r29" onkeyup="CiarkaNaBodku(this);" style="top:907px; left:638px; width:256px;"/>
+<input type="text" name="r30" id="r30" onkeyup="CiarkaNaBodku(this);" style="top:944px; left:638px; width:256px;"/>
+<div class="input-echo" style="top:983px; left:639px; width:256px;"><?php echo $r31; ?></div>
+<input type="checkbox" name="par79ods2" value="1" style="top:1023px; left:258px;"/>
+<input type="text" name="r32" id="r32" onkeyup="CiarkaNaBodku(this);" style="top:1020px; left:638px; width:256px;"/>
+<input type="text" name="r33" id="r33" onkeyup="CiarkaNaBodku(this);" style="top:1058px; left:638px; width:256px;"/>
+<div class="input-echo" style="top:1096px; left:639px; width:256px;"><?php echo $r34; ?></div>
+<input type="text" name="r35" id="r35" onkeyup="CiarkaNaBodku(this);" style="top:1153px; left:345px; width:256px;"/>
+<input type="text" name="r36" id="r36" onkeyup="CiarkaNaBodku(this);" style="top:1153px; left:638px; width:256px;"/>
+<input type="text" name="r37" id="r37" onkeyup="CiarkaNaBodku(this);" style="top:1220px; left:303px; width:275px;"/>
+<input type="text" name="r38" id="r38" onkeyup="CiarkaNaBodku(this);" style="top:1220px; left:620px; width:275px;"/>
+<!-- ekorobot -->
+<img src='../obr/robot/robot3.jpg' onclick="zobraz_robotmenu();" style="position:absolute; top:570px; left:440px; width:90px; height:130px; cursor:pointer;" title='Zobraziù pomernÈ odpoËÌtanie DPH'>
+
+<?php if ( $cislo_druh == 3 ) { ?>
+<!-- id kvdph = manualna uprava dodatocneho kvdph -->
+<div class="kvdph-menu">
+ <div style="width:270px;"><strong>ID</strong> priznania DPH a KVDPH, ktorÈ opravujem</div>
+ <div style="width:40px;">
+  <input type="text" name="cpop" id="cpop"
+   style="width:30px; font-size:14px; height:18px; line-height:18px;"/>
+ </div>
+ <div>(len u <strong>dodatoËn˝ch</strong> priznanÌ !)</div><!-- ani by nemuselo byt, ked sa zobrazi len u dodatocnych -->
+</div>
+<?php                         } ?>
+<?php if ( $cislo_druh != 3 ) { ?>
+<div class="kvdph-menu">
+ <div style="width:52px;">
+  <input type="hidden" name="cpop" id="cpop" />
+ </div>
+</div>
+<?php                         } ?>
+<?php                                        } //$strana == 2 OR $strana == 9999 ?>
+
+<div class="navbar">
+<!--
+   <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
+ <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
+-->
+  <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave" style="top:0;">
+</div>
+</form>
+<?php
+//mysql_free_result($vysledok);
+     }
+//koniec uprav
+?>
+
+<!-- ekorobot menu -->
+<div id="robotmenu" style="display:none; position:absolute; top:390px; left:460px; width:390px; background-color:#ffff90; border:2px outset #ececec;">
+ <table class="ekorobot-menu">
+ <tr>
+  <th style="width:100%;">Koeficient pomernÈho odpoËÌtania DPH
+    <img src='../obr/zmazuplne.png' onclick='zhasni_menurobot();' title='Zavrieù menu'
+     class="menu-close-btn">
+  </th>
+ </tr>
+<?php if ( $cislo_druh == 3 ) { ?>
+ <tr>
+  <td style="line-height:30px; height:30px; text-align:center;">
+   <a href="#" onclick="Odpoc(<?php echo $cislo_cpid; ?>,'<?php echo $cislo_ume; ?>',<?php echo $cislo_druh; ?>,<?php echo $stvrtrok; ?>);">
+    OdpoËÌtaù riadne priznanie DPH od dodatoËnÈho !</a>
+  </td>
+ </tr>
+<?php                         } ?>
+<?php if ( $koefmin == 0 OR $koefmin > 1 ) $koefmin="1.00"; ?>
+<FORM name='fkoef' method='post' action='#'>
+ <tr>
+  <td style="height:60px;">
+   <p><strong>Druhy</strong> dokladov s pomern˝m uplatnenÌm <span style="font-size:13px;">(napr: 34, 46, 48)</span></p>
+   <input type='text' name='h_druhykoef' id='h_druhykoef' maxlenght='30'
+    value='<?php echo $druhykoef; ?>' style="width:300px;">
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p style="float:left; line-height:34px;"><strong>Koeficient z predch·dz.</strong> kalend·rneho roka</p>
+   <input type='text' name='h_koefmin' id='h_koefmin' maxlenght='4' onkeyup="CiarkaNaBodku(this);"
+    value='<?php echo $koefmin; ?>' style="width:48px; float:right; position:relative; top:4px; right:30px;">
+  </td>
+ </tr>
+<?php if ( $prepoc == 0 ) { ?>
+ <tr>
+  <td style="line-height:30px; height:30px; text-align:center;">
+   <a href="#" onclick="Prepoc(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $stvrtrok;?>);">
+   PrepoËÌtaù pomern˝ odpoËet DPH !</a>
+  </td>
+ </tr>
+<?php                     } ?>
+<?php if ( $prepoc == 1 ) { ?>
+ <tr>
+  <td style="height:60px;">
+   <p>Suma 20% DPH za pomernÈ druhy <strong>celkom</strong></p>
+   <input type='text' name='h_odpocall' id='h_odpocall' maxlenght='10'
+    value='<?php echo $odpocall; ?>' style="width:100px;">
+  </td>
+ </tr>
+ <tr>
+  <td style="height:60px;">
+   <p>Suma 20% DPH za pomernÈ druhy <strong>upraven·</strong></p>
+   <input type='text' name='h_odpocupr' id='h_odpocupr' maxlenght='10'
+    value='<?php echo $odpocupr; ?>' style="width:100px;">
+  </td>
+ </tr>
+ <tr>
+ 	<th style="text-align:center;">
+   <span class="alert-success">-- Pomern˝ odpoËet DPH prepoËÌtan˝. --</span>
+  </th>
+ </tr>
+<?php                     } ?>
+</FORM>
+ </table>
+</div><!-- #content -->
+
+<?php
+if ( $prepoc == 1 ) {
+?>
 <script type="text/javascript">
-//sirka a vyska okna
-var sirkawin = screen.width-10;
-var vyskawin = screen.height-175;
-var vyskawic = screen.height-20;
-var sirkawic = screen.width-10;
+zobraz_robotmenu();
+</script>
+<?php
+                    }
+//celkovy koniec dokumentu
+} while (false);
+?>
+<script type="text/javascript">
+//parameter okna
+var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
 
 <?php
 //uprava
   if ( $copern == 20 )
-  { 
+  {
 ?>
   function ObnovUI()
   {
@@ -755,16 +999,16 @@ var sirkawic = screen.width-10;
 
 //ekorobot menu
   function zobraz_robotmenu()
-  { 
+  {
    robotmenu.style.display='';
   }
   function zhasni_menurobot()
-  { 
+  {
    robotmenu.style.display='none';
   }
 
   function Prepoc(cpid,ume,druh,stvrtrok)
-  { 
+  {
    var cislo_cpid = cpid;
    var h_koefmin = document.forms.fkoef.h_koefmin.value;
    var h_druhykoef = document.forms.fkoef.h_druhykoef.value;
@@ -775,7 +1019,7 @@ window.open('../ucto/prizdph2018_uprav.php?copern=220&page=1&sysx=UCT&cislo_cpid
   }
 
   function Odpoc(cpid,ume,druh,stvrtrok)
-  { 
+  {
    var cislo_cpid = cpid;
    var cislo_ume = ume;
    var cislo_druh = druh;
@@ -813,387 +1057,5 @@ window.open('../ucto/prizdph2018.php?copern=7020&drupoh=1&page=1&typ=PDF&cislo_c
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
   }
 </script>
-</HEAD>
-<BODY id="white" onload="ObnovUI();">
-<?php
-//uprav udaje
-if ( $copern == 20 )
-     {
-?>
-<div id="wrap-heading">
- <table id="heading">
-  <tr>
-   <td class="ilogin">EuroSecom</td>
-   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid";?></td>
-  </tr>
-  <tr>
-<?php
-if ( $cislo_druh == 1 ) { $druh_priz="Riadne"; }
-if ( $cislo_druh == 2 ) { $druh_priz="OpravnÈ"; }
-if ( $cislo_druh == 3 ) { $druh_priz="DodatoËnÈ"; }
-?>
-   <td class="header">
-    <span class="subheader"><?php echo $druh_priz; ?></span> priznanie DPH
-    <span class="subheader">id <?php echo $cislo_cpid; ?></span> - ˙prava
-   </td>
-   <td>
-    <div class="bar-btn-form-tool">
-     <a href="#" title="Sp‰ù do archÌvu" onclick="window.open('../ucto/archivdph2018.php?copern=80&drupoh=1&page=1', '_self' )">Sp‰ù</a>
-     <a style="height:16px; border-right:2px solid #39f;">&nbsp;</a>
-<?php
-if ( $cislo_stvrt == 0 ) { $podmzarchu=" er1 = 0 AND ume = $cislo_ume "; }
-if ( $cislo_stvrt > 0 ) { $podmzarchu=" er1 = $cislo_stvrt "; }
-$jearchzoznam=0;
-$sqlttt = "SELECT * FROM F$kli_vxcf"."_archivdphzoznam WHERE $podmzarchu ";
-$sqldok = mysql_query("$sqlttt");
-  if (@$zaznam=mysql_data_seek($sqldok,0))
-  {
-  $riaddok=mysql_fetch_object($sqldok);
-  $jearchzoznam=1;
-  }
-if ( $jearchzoznam == 1 ) { ?>
-     <a href="#" onclick="TlacZoznam(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $cislo_stvrt;?>);"
-      title="Zobraziù zoznam dokladov k priznaniu DPH podæa riadkov">Doklady DPH</a>
-<?php                     } ?>
-
-<?php if ( $jearchzoznam == 1 ) { ?>
-     <a href="#" onclick="TlacZoznamRP(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $cislo_stvrt;?>);"
-      title='Zobraziù rozdielovÈ doklady, ktorÈ s˙ navyöe oproti archÌvu'>PridanÈ doklady</a>
-     <a href="#" onclick="TlacZoznamRM(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $cislo_stvrt;?>);"
-      title='Zobraziù rozdielovÈ doklady, ktorÈ ch˝baj˙ oproti archÌvu'>Ch˝baj˙ce doklady</a>
-<?php                           } ?>
-    </div>
-   </td>
-  </tr>
- </table>
-</div>
-
-<div id="content">
-<FORM name="formv1" method="post" action="prizdph2018_uprav.php?copern=23&cislo_cpid=<?php echo $cislo_cpid; ?>&strana=<?php echo $strana; ?>">
-<?php
-$clas1="noactive"; $clas2="noactive";
-if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
-$source="prizdph2018_uprav.php?cislo_cpid=$cislo_cpid&cislo_ume=$cislo_ume&cislo_druh=$cislo_druh&cislo_stvrt=$cislo_stvrt&drupoh=1&uprav=1";
-?>
-<div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù ˙pravy" class="btn-top-formsave">
-</div>
-
-<?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<div class="wrap-form-background">
-<img src="../dokumenty/tlacivo2018/dph/dph_v18_str1.jpg" alt="tlaËivo Priznanie DPH 1.strana 309kB"
- class="form-background">
-
-<!-- danove udaje -->
-<?php $fir_ficdx=substr($fir_ficd,2,10); ?>
-<span class="text-echo-field" style="top:233px; left:99px; width:233px;"><?php echo $fir_ficdx; ?></span>
-<span class="text-echo-field" style="top:289px; left:39px; width:234px;"><?php echo $fir_fdicx; ?></span>
-<span class="text-echo-field" style="top:344px; left:39px; width:294px;"><?php echo $fir_uctt01; ?></span>
-
-<!-- Druh priznania -->
-<?php
-$riadne="x";
-$opravne="x";
-$dodatocne="x";
-if ( $cislo_druh == 1 ) { $opravne=""; $dodatocne=""; $dat_dodatocne=""; }
-if ( $cislo_druh == 2 ) { $riadne=""; $dodatocne=""; $dat_dodatocne=""; }
-if ( $cislo_druh == 3 ) { $riadne=""; $opravne=""; $dat_dodatocne=$h_dap; }
-?>
-<span class="text-echo" style="top:235px; left:358px;"><?php echo $riadne; ?></span>
-<span class="text-echo" style="top:262px; left:358px;"><?php echo $opravne; ?></span>
-<span class="text-echo" style="top:289px; left:358px;"><?php echo $dodatocne; ?></span>
-<input type="text" name="dad" id="dad" onkeyup="CiarkaNaBodku(this);"
- style="width:201px; top:283px; left:470px;"/>
-
-<!-- Zdanovacie obdobie -->
-<?php
-//if ( $stvrtrok == 0 ) { $mesiacx=$cislo_ume; if ( $mesiacx < 10 ) { $mesiacx="0".$mesiacx; } }
-//if ( $stvrtrok != 0 ) { echo $stvrtrok; }
-$mesiac=1*$cislo_ume;
-if ( $mesiac < 10 ) { $mesiac="0".$mesiac; }
-if ( $mesiac == 0 ) { $mesiac=""; }
-$mesiacx=substr($mesiac,0,2);
-$mesiacxn=1*$mesiacx;
-if ( $stvrtrok == 0 ) { $stvrtrok=""; }
-if ( $mesiacxn == 0 ) { $mesiacx=""; }
-$stvrtrokx=$stvrtrok;
-?>
-
-<span class="text-echo" style="top:264px; left:698px;"><?php echo $mesiacx; ?></span>
-<span class="text-echo" style="top:264px; left:774px;"><?php echo $stvrtrokx; ?></span>
-<span class="text-echo" style="top:264px; left:829px;"><?php echo $kli_vrok; ?></span>
-
-<!-- druh osoby -->
-<input type="radio" id="xplc1" name="xplc" value="1" style="top:324px; left:352px;"/>
-<input type="radio" id="xplc2" name="xplc" value="2" style="top:348px; left:352px;"/>
-<input type="radio" id="xplc3" name="xplc" value="3" style="top:372px; left:352px;"/>
-<input type="radio" id="xplc4" name="xplc" value="4" style="top:398px; left:352px;"/>
-<input type="radio" id="xplc5" name="xplc" value="5" style="top:423px; left:352px;"/>
-<input type="radio" id="xplc6" name="xplc" value="6" style="top:448px; left:352px;"/>
-
-<!-- FO / PO -->
-<span class="text-echo-field" style="top:474px; left:39px; width:876px;"><?php echo $fir_fnaz; ?></span>
-<span class="text-echo-field" style="top:625px; left:39px; width:661px;"><?php echo $fir_fuli; ?></span>
-<span class="text-echo-field" style="top:625px; left:727px; width:187px;"><?php echo $fir_fcdm; ?></span>
-<span class="text-echo-field" style="top:681px; left:39px; width:115px;"><?php echo $fir_fpsc; ?></span>
-<span class="text-echo-field" style="top:681px; left:182px; width:732px;"><?php echo $fir_fmes; ?></span>
-<?php
-$pole = explode("/", $fir_ftel);
-$tel_pred=1*$pole[0];
-$tel_za=$pole[1];
-?>
-<span class="text-echo-field" style="top:738px; left:63px; width:67px;"><?php echo $tel_pred; ?></span>
-<span class="text-echo-field" style="top:738px; left:158px; width:186px;"><?php echo $tel_za; ?></span>
-<?php
-$pole = explode("/", $fir_ffax);
-$fax_pred=1*$pole[0];
-$fax_za=$pole[1];
-?>
-<span class="text-echo-field" style="top:738px; left:383px; width:67px;"><?php echo $fax_pred; ?></span>
-<span class="text-echo-field" style="top:738px; left:478px; width:186px;"><?php echo $fax_za; ?></span>
-
-<!-- Opravnena osoba -->
-<span class="text-echo-field" style="top:798px; left:39px; width:876px;"><?php echo $fir_uctt05; ?></span>
-<?php
-$pole = explode("/", $fir_uctt04);
-$tel_pred=1*$pole[0];
-$tel_za=$pole[1];
-?>
-<span class="text-echo-field" style="top:853px; left:63px; width:69px;"><?php echo $tel_pred; ?></span>
-<span class="text-echo-field" style="top:853px; left:159px; width:186px;"><?php echo $tel_za; ?></span>
-
-<!-- Vyhlasujem dna -->
-<span class="text-echo-field" style="top:990px; left:42px; width:210px;"><?php echo $dap; ?></span>
-
-</div> <!-- koniec .wrap-form-background -->
-<?php                                        } ?>
-
-
-<?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<div class="wrap-form-background">
-<img src="../dokumenty/tlacivo2018/dph/dph_v18_str2.jpg" alt="tlaËivo Priznanie DPH 2.strana 309kB"
- class="form-background">
-
-<!-- zahlavie strany -->
-<?php $fir_ficdx=substr($fir_ficd,2,10); ?>
-<span class="text-echo-field" style="top:82px; left:200px; width:233px;"><?php echo $fir_ficdx; ?></span>
-<span class="text-echo-field" style="top:82px; left:457px; width:233px;"><?php echo $fir_fdicx; ?></span>
-
-<!-- riadky 01-04 -->
-<input type="text" name="r01" id="r01" onkeyup="CiarkaNaBodku(this);"
- style="top:141px; left:319px; width:287px;"/>
-<input type="text" name="r02" id="r02" onkeyup="CiarkaNaBodku(this);"
- style="top:141px; left:646px; width:263px;"/>
-<input type="text" name="r03" id="r03" onkeyup="CiarkaNaBodku(this);"
- style="top:180px; left:319px; width:287px;"/>
-<input type="text" name="r04" id="r04" onkeyup="CiarkaNaBodku(this);"
- style="top:180px; left:646px; width:263px;"/>
-<!-- riadky 05-08 -->
-<input type="text" name="r05" id="r05" onkeyup="CiarkaNaBodku(this);"
- style="top:218px; left:319px; width:287px;"/>
-<input type="text" name="r06" id="r06" onkeyup="CiarkaNaBodku(this);"
- style="top:218px; left:646px; width:263px;"/>
-<input type="text" name="r07" id="r07" onkeyup="CiarkaNaBodku(this);"
- style="top:255px; left:319px; width:287px;"/>
-<input type="text" name="r08" id="r08" onkeyup="CiarkaNaBodku(this);"
- style="top:255px; left:646px; width:263px;"/>
-<!-- riadky 09-10 -->
-<input type="text" name="r09" id="r09" onkeyup="CiarkaNaBodku(this);"
- style="top:294px; left:319px; width:287px;"/>
-<input type="text" name="r10" id="r10" onkeyup="CiarkaNaBodku(this);"
- style="top:294px; left:646px; width:263px;"/>
-<!-- riadky 11-12 -->
-<input type="text" name="r11" id="r11" onkeyup="CiarkaNaBodku(this);"
- style="top:331px; left:319px; width:287px;"/>
-<input type="text" name="r12" id="r12" onkeyup="CiarkaNaBodku(this);"
- style="top:331px; left:646px; width:263px;"/>
-<!-- riadky 13-14 -->
-<input type="text" name="r13" id="r13" onkeyup="CiarkaNaBodku(this);"
- style="top:370px; left:319px; width:287px;"/>
-<input type="text" name="r14" id="r14" onkeyup="CiarkaNaBodku(this);"
- style="top:370px; left:646px; width:263px;"/>
-<!-- riadky 15-17 -->
-<input type="text" name="r15" id="r15" onkeyup="CiarkaNaBodku(this);"
- style="top:408px; left:319px; width:287px;"/>
-<input type="text" name="r16" id="r16" onkeyup="CiarkaNaBodku(this);"
- style="top:446px; left:319px; width:287px;"/>
-<input type="text" name="r17" id="r17" onkeyup="CiarkaNaBodku(this);"
- style="top:484px; left:319px; width:287px;"/>
-<!-- riadky 18-25 -->
-<input type="text" name="r18" id="r18" onkeyup="CiarkaNaBodku(this);"
- style="top:521px; left:646px; width:263px;"/>
-<span class="text-echo-field" style="top:560px; left:646px; width:269px;"><?php echo $r19; ?></span>
-<input type="text" name="r20" id="r20" onkeyup="CiarkaNaBodku(this);"
- style="top:599px; left:646px; width:263px;"/>
-<input type="text" name="r21" id="r21" onkeyup="CiarkaNaBodku(this);"
- style="top:636px; left:646px; width:263px;"/>
-<input type="text" name="r22" id="r22" onkeyup="CiarkaNaBodku(this);"
- style="top:675px; left:646px; width:263px;"/>
-<input type="text" name="r23" id="r23" onkeyup="CiarkaNaBodku(this);"
- style="top:712px; left:646px; width:263px;"/>
-<input type="text" name="r24" id="r24" onkeyup="CiarkaNaBodku(this);"
- style="top:750px; left:646px; width:263px;"/>
-<input type="text" name="r25" id="r25" onkeyup="CiarkaNaBodku(this);"
- style="top:790px; left:646px; width:263px;"/>
-<!-- riadky 26-27 -->
-<input type="text" name="r26" id="r26" onkeyup="CiarkaNaBodku(this);"
- style="top:831px; left:319px; width:287px;"/>
-<input type="text" name="r27" id="r27" onkeyup="CiarkaNaBodku(this);"
- style="top:830px; left:646px; width:263px;"/>
-<!-- riadky 28-31 -->
-<input type="text" name="r28" id="r28" onkeyup="CiarkaNaBodku(this);"
- style="top:873px; left:646px; width:263px;"/>
-<input type="text" name="r29" id="r29" onkeyup="CiarkaNaBodku(this);"
- style="top:912px; left:646px; width:263px;"/>
-<input type="text" name="r30" id="r30" onkeyup="CiarkaNaBodku(this);"
- style="top:950px; left:646px; width:263px;"/>
-<span class="text-echo-field" style="top:989px; left:646px; width:269px;"><?php echo $r31; ?></span>
-
-<!-- riadok 32 -->
- <input type="checkbox" name="par79ods2" value="1" style="top:1029px; left:252px;"/>
-
-<input type="text" name="r32" id="r32" onkeyup="CiarkaNaBodku(this);"
- style="top:1027px; left:646px; width:263px;"/>
-<!-- riadky 33-34 -->
-<input type="text" name="r33" id="r33" onkeyup="CiarkaNaBodku(this);"
- style="top:1064px; left:646px; width:263px;"/>
-<span class="text-echo-field" style="top:1103px; left:646px; width:269px;"><?php echo $r34; ?></span>
-
-<!-- riadky 35-36 -->
-<input type="text" name="r35" id="r35" onkeyup="CiarkaNaBodku(this);"
- style="top:1161px; left:344px; width:261px;"/>
-<input type="text" name="r36" id="r36" onkeyup="CiarkaNaBodku(this);"
- style="top:1161px; left:646px; width:263px;"/>
-<!-- riadky 37-38 -->
-<input type="text" name="r37" id="r37" onkeyup="CiarkaNaBodku(this);"
- style="top:1228px; left:320px; width:263px;"/>
-<input type="text" name="r38" id="r38" onkeyup="CiarkaNaBodku(this);"
- style="top:1228px; left:646px; width:263px;"/>
-</div> <!-- koniec wrap-form-background -->
-
-<!-- ekorobot -->
- <img src='../obr/robot/robot3.jpg' onclick="zobraz_robotmenu();" class="ekorobot" style="float:left;"
-  title='Dobr˝ deÚ, som V·ö EkoRobot, ak m·te ot·zku Ëi ûelanie, kliknite na mÚa'>
-
-<?php if ( $cislo_druh == 3 ) { ?>
-<!-- id kvdph = manualna uprava dodatocneho kvdph -->
-<div class="kvdph-menu">
- <div style="width:270px;"><strong>ID</strong> priznania DPH a KVDPH, ktorÈ opravujem</div>
- <div style="width:40px;">
-  <input type="text" name="cpop" id="cpop"
-   style="width:30px; font-size:14px; height:18px; line-height:18px;"/>
- </div>
- <div>(len u <strong>dodatoËn˝ch</strong> priznanÌ !)</div>
-</div>
-
-<?php                         } ?>
-<?php if ( $cislo_druh != 3 ) { ?>
-<div class="kvdph-menu">
- <div style="width:52px;">
-  <input type="hidden" name="cpop" id="cpop" />
- </div>
-
-</div>
-
-<?php                         } ?>
-<?php                                        } ?>
-
-<div class="navbar">
-<!--
-   <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>?copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
--->
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny"
-  class="btn-bottom-formsave" style="top:0;">
-</div>
-</FORM>
-
-
-<?php
-//mysql_free_result($vysledok);
-     }
-//koniec uprav
-?>
-
-<!-- ekorobot menu -->
-<div id="robotmenu" class="wrap-ekorobot-menu" style="display:none;">
- <table class="ekorobot-menu">
- <tr>
-  <th style="width:100%;">Koeficient pomernÈho odpoËÌtania DPH
-    <img src='../obr/zmazuplne.png' onclick='zhasni_menurobot();' title='Zavrieù menu'
-     class="menu-close-btn">
-  </th>
- </tr>
-<?php if ( $cislo_druh == 3 ) { ?>
- <tr>
-  <td style="line-height:30px; height:30px; text-align:center;">
-   <a href="#" onclick="Odpoc(<?php echo $cislo_cpid; ?>,'<?php echo $cislo_ume; ?>',<?php echo $cislo_druh; ?>,<?php echo $stvrtrok; ?>);">
-    OdpoËÌtaù riadne priznanie DPH od dodatoËnÈho !</a>
-  </td>
- </tr>
-<?php                         } ?>
-<?php if ( $koefmin == 0 OR $koefmin > 1 ) $koefmin="1.00"; ?>
-<FORM name='fkoef' method='post' action='#'>
- <tr>
-  <td style="height:60px;">
-   <p><strong>Druhy</strong> dokladov s pomern˝m uplatnenÌm <span style="font-size:13px;">(napr: 34, 46, 48)</span></p>
-   <input type='text' name='h_druhykoef' id='h_druhykoef' maxlenght='30'
-    value='<?php echo $druhykoef; ?>' style="width:300px;">
-  </td>
- </tr>
- <tr>
-  <td>
-   <p style="float:left; line-height:34px;"><strong>Koeficient z predch·dz.</strong> kalend·rneho roka</p>
-   <input type='text' name='h_koefmin' id='h_koefmin' maxlenght='4' onkeyup="CiarkaNaBodku(this);"
-    value='<?php echo $koefmin; ?>' style="width:48px; float:right; position:relative; top:4px; right:30px;">
-  </td>
- </tr>
-<?php if ( $prepoc == 0 ) { ?>
- <tr>
-  <td style="line-height:30px; height:30px; text-align:center;">
-   <a href="#" onclick="Prepoc(<?php echo $cislo_cpid;?>,'<?php echo $cislo_ume;?>',<?php echo $cislo_druh;?>,<?php echo $stvrtrok;?>);">
-   PrepoËÌtaù pomern˝ odpoËet DPH !</a>
-  </td>
- </tr>
-<?php                     } ?>
-<?php if ( $prepoc == 1 ) { ?>
- <tr>
-  <td style="height:60px;">
-   <p>Suma 20% DPH za pomernÈ druhy <strong>celkom</strong></p>
-   <input type='text' name='h_odpocall' id='h_odpocall' maxlenght='10'
-    value='<?php echo $odpocall; ?>' style="width:100px;">
-  </td>
- </tr>
- <tr>
-  <td style="height:60px;">
-   <p>Suma 20% DPH za pomernÈ druhy <strong>upraven·</strong></p>
-   <input type='text' name='h_odpocupr' id='h_odpocupr' maxlenght='10'
-    value='<?php echo $odpocupr; ?>' style="width:100px;">
-  </td>
- </tr>
- <tr>
- 	<th style="text-align:center;">
-   <span class="alert-success">-- Pomern˝ odpoËet DPH prepoËÌtan˝. --</span>
-  </th>
- </tr>
-<?php                     } ?>
-</FORM>
- </table>
-</div> <!-- koniec ekorobot-menu -->
-</div> <!-- koniec #content -->
-
-<?php
-if ( $prepoc == 1 ) {
-?>
-<script type="text/javascript">
-zobraz_robotmenu();
-</script>
-<?php
-                    }
-//celkovy koniec dokumentu
-} while (false);
-?>
-</BODY>
-</HTML>
+</body>
+</html>
