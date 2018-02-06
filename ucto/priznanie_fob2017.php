@@ -2063,7 +2063,7 @@ $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD pdrm6 VARCHAR(3) NOT NULL
 $vysledek = mysql_query("$sql");
 }
 //zmeny2017
-$sql = "SELECT all2017 FROM F".$kli_vxcf."_mzdpriznanie_fob";
+$sql = "SELECT alla2017 FROM F".$kli_vxcf."_mzdpriznanie_fob";
 $vysledok = mysql_query($sql);
 if (!$vysledok)
 {
@@ -2137,7 +2137,9 @@ $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr27 DECIMAL(10,2) DEFA
 $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD ozdr28 DECIMAL(10,2) DEFAULT 0 AFTER new2017";
 $vysledek = mysql_query("$sql");
-$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD all2017 DECIMAL(2,0) NOT NULL AFTER new2017";
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob MODIFY pico DECIMAL(12,0) DEFAULT 0";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_mzdpriznanie_fob ADD alla2017 DECIMAL(2,0) NOT NULL AFTER new2017";
 $vysledek = mysql_query("$sql");
 }
 

@@ -112,6 +112,16 @@ priznaniepo;
 $vsql = 'CREATE TABLE F'.$kli_vxcf.'_uctpriznanie_dppriloha'.$sqlt;
 $vytvor = mysql_query("$vsql");
 }
+//zmeny 2017
+$sql = "SELECT alla2017 FROM F".$kli_vxcf."_uctpriznanie_dppriloha";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dppriloha MODIFY p1ico DECIMAL(12,0) DEFAULT 0";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctpriznanie_dppriloha ADD alla2017 DECIMAL(1,0) DEFAULT 0 AFTER ico";
+$vysledek = mysql_query("$sql");
+}
 
 //cislo operacie
 $copern = 1*strip_tags($_REQUEST['copern']);
