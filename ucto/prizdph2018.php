@@ -3394,7 +3394,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$L","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$M","$rmc",0,"C");
 //r27
-$h_r27="1234";
 $h_rxx=sprintf("% 12s",$h_r27);
 $znamienko=" ";
 if ( $hlavicka->r27 < 0 ) { $znamienko="-"; $h_rxx=str_replace("-"," ",$h_rxx); }
