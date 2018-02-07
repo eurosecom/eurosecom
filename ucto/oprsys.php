@@ -1934,6 +1934,14 @@ window.open('../faktury/int_fakt2017medo.php?copern=55&page=1&h_sys=' + h_sys + 
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
 <?php                                       } ?>
 
+<?php if( $medo == 1 AND $kli_vrok == 2018 ) { ?>
+var h_obdp = document.forms.formct2.h_obdp.value;
+var h_sys = document.forms.formct2.h_sys.value;
+
+window.open('../faktury/int_fakt2018medo.php?copern=55&page=1&h_sys=' + h_sys + '&h_obdp=' + h_obdp + '&drupoh=1&uprav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+<?php                                       } ?>
+
 <?php if( $berext == 1 AND $kli_vrok == 2013 ) { ?>
 var h_obdp = document.forms.formct2.h_obdp.value;
 var h_sys = document.forms.formct2.h_sys.value;
@@ -2371,6 +2379,36 @@ if($urob) { $blok688=" - BLOKOVANÉ"; }
 <option value="657" >SYS 657 FastFood NM <?php echo $blok657;?></option>
 <option value="677" >SYS 677 GastroBENE <?php echo $blok677;?></option>
 <option value="688" >SYS 688 ZK Vrbové <?php echo $blok688;?></option>
+<?php                                         } ?>
+
+<?php if( $medo == 1 AND $kli_vrok == 2018 ) { ?>
+<?php
+$blok608="";
+$blok648="";
+$blok678="";
+$blok689="";
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak608_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok608=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak648_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok648=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak678_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok678=" - BLOKOVANÉ"; }
+
+$sql = "SELECT * FROM F$kli_vxcf"."_uctblokfak689_".$h_obdp." ";
+$urob = mysql_query("$sql");
+if($urob) { $blok689=" - BLOKOVANÉ"; }
+?>
+
+<option value="608" >SYS 608 Ubytovanie <?php echo $blok608;?></option>
+<option value="648" >SYS 648 FastFood NM GastroBENE <?php echo $blok648;?></option>
+<option value="678" >SYS 678 GastroBENE Vrbové <?php echo $blok678;?></option>
+<option value="689" >SYS 689 ZK Vrbové <?php echo $blok689;?></option>
 <?php                                         } ?>
 
 <?php if( $berext == 1 AND $kli_vrok == 2013 ) { ?>
