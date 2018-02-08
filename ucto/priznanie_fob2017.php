@@ -2399,7 +2399,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r90=r81 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
-//str 8 dan po vynati prijmov 2017 dan zo zakladu na r83 nepocitam 
+//str 8 dan po vynati prijmov 2017 dan zo zakladu na r83 nepocitam
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r83=r80-r82 WHERE oc = $cislo_oc AND r82 > 0 ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r83=0 WHERE oc = $cislo_oc AND r83 < 0 ";
@@ -2440,7 +2440,7 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r107=0, r109=0, r110=0, r111=0, r100=0  WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
-//dan znizena o dan. bonusu 2017 
+//dan znizena o dan. bonusu 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r107=r105-r106 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET r107=0 WHERE oc = $cislo_oc AND r107 < 0 ";
@@ -2481,14 +2481,14 @@ $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET prpcp=1, prppp=1 WHERE prpods > 0 AND oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
-//Priloha 2 dividendy 2017 
+//Priloha 2 dividendy 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ozd1r06=ozd1r01+ozd1r02+ozd1r03+ozd1r04+ozd1r05, ozd2r06=ozd2r04+ozd2r05 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET ozd1r24=ozd1r19+ozd1r20+ozd1r21+ozd1r22+ozd1r23, ozd2r24=ozd2r22+ozd2r23 WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 
-//Priloha 3 socialne a zdravotne poistenie 2017 
+//Priloha 3 socialne a zdravotne poistenie 2017
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET sz2=sz1p1-sz1v1, sz3=0  WHERE oc = $cislo_oc ";
 $oznac = mysql_query("$sqtoz");
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdpriznanie_fob SET sz3=-sz2, sz2=0  WHERE oc = $cislo_oc AND sz2 < 0";
@@ -3259,23 +3259,25 @@ if ( $strana == 15 ) $clas15="active"; if ( $strana == 16 ) $clas16="active";
   <a href="#" onclick="editForm(14);" class="<?php echo $clas14; ?> toleft">P2</a>
   <a href="#" onclick="editForm(15);" class="<?php echo $clas15; ?> toleft">P2</a>
   <a href="#" onclick="editForm(16);" class="<?php echo $clas16; ?> toleft">P3</a>
-
- <!--
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=14', '_blank');" class="<?php echo $clas14; ?> toright">P2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=13', '_blank');" class="<?php echo $clas13; ?> toright">P1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=12', '_blank');" class="<?php echo $clas12; ?> toright">12</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=11', '_blank');" class="<?php echo $clas11; ?> toright">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=10', '_blank');" class="<?php echo $clas10; ?> toright">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=9', '_blank');" class="<?php echo $clas9; ?> toright">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=8', '_blank');" class="<?php echo $clas8; ?> toright">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=7', '_blank');" class="<?php echo $clas7; ?> toright">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=6', '_blank');" class="<?php echo $clas6; ?> toright">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=5', '_blank');" class="<?php echo $clas5; ?> toright">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=4', '_blank');" class="<?php echo $clas4; ?> toright">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=3', '_blank');" class="<?php echo $clas3; ?> toright">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=10&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
- <h6 class="toright">TlaËiù:</h6> -->
+<!--
+  <a href="#" onclick="FormPDF(16);" class="<?php echo $clas16; ?> toright">P3</a>
+  <a href="#" onclick="FormPDF(15);" class="<?php echo $clas15; ?> toright">P2</a>
+  <a href="#" onclick="FormPDF(14);" class="<?php echo $clas14; ?> toright">P2</a>
+  <a href="#" onclick="FormPDF(13);" class="<?php echo $clas13; ?> toright">P1</a>
+  <a href="#" onclick="FormPDF(12);" class="<?php echo $clas12; ?> toright">12</a>
+  <a href="#" onclick="FormPDF(11);" class="<?php echo $clas11; ?> toright">11</a>
+  <a href="#" onclick="FormPDF(10);" class="<?php echo $clas10; ?> toright">10</a>
+  <a href="#" onclick="FormPDF(9);" class="<?php echo $clas9; ?> toright">9</a>
+  <a href="#" onclick="FormPDF(8);" class="<?php echo $clas8; ?> toright">8</a>
+  <a href="#" onclick="FormPDF(7);" class="<?php echo $clas7; ?> toright">7</a>
+  <a href="#" onclick="FormPDF(6);" class="<?php echo $clas6; ?> toright">6</a>
+  <a href="#" onclick="FormPDF(5);" class="<?php echo $clas5; ?> toright">5</a>
+  <a href="#" onclick="FormPDF(4);" class="<?php echo $clas4; ?> toright">4</a>
+  <a href="#" onclick="FormPDF(3);" class="<?php echo $clas3; ?> toright">3</a>
+  <a href="#" onclick="FormPDF(2);" class="<?php echo $clas2; ?> toright">2</a>
+  <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a>
+  <h6 class="toright">TlaËiù:</h6>
+-->
   <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 <?php
 if ( $prepocitaj == 0 ) { $prepocitaj=1; }
@@ -3776,8 +3778,8 @@ $sn1c=substr($sknacec,0,1);
 <input type="checkbox" name="spl3d" value="1" onchange="KlikNeuplNie();" style="top:313px; left:295px;"/>
 <input type="text" name="r134" id="r134" onkeyup="CiarkaNaBodku(this);" style="width:197px; top:355px; left:316px;"/>
 <!-- Prijimatel -->
-<input type="text" name="pico" id="pico" maxlength="8" style="width:175px; top:440px; left:51px;"/>
-<input type="text" name="psid" id="psid" maxlength="4" style="width:83px; top:440px; left:258px;"/>
+<input type="text" name="pico" id="pico" maxlength="12" style="width:267px; top:440px; left:51px;"/>
+<input type="hidden" name="psid" id="psid"/>
 <input type="text" name="pfor" id="pfor" style="width:520px; top:440px; left:373px;"/>
 <input type="text" name="pmen" id="pmen" style="width:842px; height:62px; top:494px; left:51px;"/>
 <input type="text" name="puli" id="puli" style="width:635px; top:603px; left:51px;"/>
@@ -4034,10 +4036,9 @@ $hhmm = Date( "Hi", MkTime( date("H"),date("i"),date("s"),date("m"),date("d"),da
 $kli_nxcf10 = substr($kli_nxcf,0,10);
 $kli_nxcf10=trim(str_replace(" ","",$kli_nxcf10));
 
-$nazsub="../tmp/dpfob".$kli_vrok."_id".$kli_uzid."_".$kli_nxcf."_".$hhmm.".xml";
+$nazsub="../tmp/dpfob".$kli_vrok."_id".$kli_uzid."_".$kli_nxcf10."_".$hhmm.".xml";
 
 //prva strana
-
 $outfilexdel="../tmp/dpfob".$kli_vrok."_id".$kli_uzid."_*.*";
 foreach (glob("$outfilexdel") as $filename) { unlink($filename); }
 $outfilex=$nazsub;
@@ -4177,7 +4178,6 @@ $mail=iconv("CP1250", "UTF-8", $hlavicka->dmailfax);
   $text = "  </zastupca>"."\r\n"; fwrite($soubor, $text);
 
   $text = " </hlavicka>"."\r\n"; fwrite($soubor, $text);
-
 
 //telo
   $text = " <telo>"."\r\n"; fwrite($soubor, $text);
@@ -6513,10 +6513,3 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
 </script>
 </body>
 </html>
-<!--
-Todo
-- pridaù xml Ëasù
-- pdf Ëasù zvl·öù
-- zistiù echo bunky
-- iËo/sid v prijÌmateæoch poËkaù na .xml
- -->
