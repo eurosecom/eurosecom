@@ -3962,6 +3962,7 @@ $hhmm = Date( "Hi", MkTime( date("H"),date("i"),date("s"),date("m"),date("d"),da
 //$idx=$kli_uzid.$hhmm;
 $kli_nxcf10 = substr($kli_nxcf,0,10);
 $kli_nxcf10=trim(str_replace(" ","",$kli_nxcf10));
+$kli_nxcf10 = StrTr($kli_nxcf10, "áäèïéìëí¾òôóöàøšúùüıÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜİ","aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
 
 $nazsub="../tmp/dppo".$kli_vrok."_id".$kli_uzid."_".$kli_nxcf10."_".$hhmm.".xml";
 //dopyt, ešte typ priznania
