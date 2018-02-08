@@ -1944,7 +1944,7 @@ $pc155 = strip_tags($_REQUEST['pc155']);
 $pcpoc = strip_tags($_REQUEST['pcpoc']);
 $pcsum = strip_tags($_REQUEST['pcsum']);
 $p1ico = strip_tags($_REQUEST['p1ico']);
-$p1sid = strip_tags($_REQUEST['p1sid']);
+//$p1sid = strip_tags($_REQUEST['p1sid']);
 $p1pfr = strip_tags($_REQUEST['p1pfr']);
 $p1men = strip_tags($_REQUEST['p1men']);
 $p1uli = strip_tags($_REQUEST['p1uli']);
@@ -1956,7 +1956,7 @@ $osobit = strip_tags($_REQUEST['osobit']);
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET".
 " pzano='$pzano', zslu='$zslu', ".
 " pcdan='$pcdan', pcpod='$pcpod', pcdar='$pcdar', pc155='$pc155', pcpoc='$pcpoc', pcsum='$pcsum', ".
-" p1ico='$p1ico', p1sid='$p1sid', p1pfr='$p1pfr', p1men='$p1men', p1uli='$p1uli', p1cdm='$p1cdm', p1psc='$p1psc', p1mes='$p1mes', ".
+" p1ico='$p1ico', p1pfr='$p1pfr', p1men='$p1men', p1uli='$p1uli', p1cdm='$p1cdm', p1psc='$p1psc', p1mes='$p1mes', ".
 " osldan='$osldan', osobit='$osobit' ".
 " WHERE ico >= 0";
                      }
@@ -2238,7 +2238,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " WHERE ico >= 0 AND r810 <= r800 ";
 $upravene = mysql_query("$uprtxt");
 
-//////////////////strana 3,4 2017 
+//////////////////strana 3,4 2017
 
 if ( $licenciatabk == 1 )
   {
@@ -2379,7 +2379,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET f1r03=f1r01-f1r02, ".
 " WHERE ico >= 0";
 $upravene = mysql_query("$uprtxt");
 
-//////////////////strana 8 2017 
+//////////////////strana 8 2017
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET g3r04=g3r01+g3r02-g3r03, ".
 " psys=0 ".
 " WHERE ico >= 0";
@@ -2439,19 +2439,19 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " psys=0  ".
 " WHERE ico >= 0";
 
-$upravene = mysql_query("$uprtxt"); 
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " k2r02='$k2r02', k3r02='$k3r02'+'$k4r02', k4r02=0, k2od='$k2od', k2do='$k2do', ".
 " psys=0  ".
 " WHERE ico >= 0";
-$upravene = mysql_query("$uprtxt"); 
+$upravene = mysql_query("$uprtxt");
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ".
 " k2r03='$r820', k3od='$obod', k3do='$obdo',  ".
 " psys=0  ".
 " WHERE ico >= 0";
-$upravene = mysql_query("$uprtxt"); 
+$upravene = mysql_query("$uprtxt");
 
     }
 
@@ -2468,7 +2468,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET k4r05=k4r01+k4r02+k4r03+k4r0
 $upravene = mysql_query("$uprtxt");
 
 
-//////////////////strana 10 2017 
+//////////////////strana 10 2017
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_po SET ps1r06=ps1r01+ps1r02+ps1r03+ps1r04+ps1r05, ps2r06=ps2r01+ps2r02+ps2r03+ps2r04+ps2r05, ".
 " psys=0 ".
@@ -2879,7 +2879,6 @@ $pc155 = $fir_riadok->pc155;
 $pcpoc = $fir_riadok->pcpoc;
 $pcsum = $fir_riadok->pcsum;
 $p1ico = $fir_riadok->p1ico;
-$p1sid = $fir_riadok->p1sid;
 $p1pfr = $fir_riadok->p1pfr;
 $p1men = $fir_riadok->p1men;
 $p1uli = $fir_riadok->p1uli;
@@ -3113,8 +3112,8 @@ if ( $strana == 13 ) $clas13="active";
   <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
   <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
   <a href="#" onclick="editForm(13);" class="<?php echo $clas13; ?> toleft">13</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1&volapo=1', '_self')" class="toleft">P1</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1&volapo=1', '_self')" class="toleft">P2</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1', '_self')" class="toleft">P1</a>
+<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1', '_self')" class="toleft">P2</a>
 <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=11&drupoh=1', '_blank')" class="toright">P2</a>
 <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1011&drupoh=1', '_blank')" class="toright">P1</a>
 <!--   <a href="#" onclick="FormPDF(13);" class="<?php echo $clas13; ?> toright">13</a>
@@ -3709,8 +3708,7 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
 <input type="text" name="pcpoc" id="pcpoc" style="width:84px; top:348px; left:626px;"/>
 <!-- Prijimatel 1 -->
 <input type="text" name="pcsum" id="pcsum" onkeyup="CiarkaNaBodku(this);" style="width:268px; top:482px; left:201px;"/>
-<input type="text" name="p1ico" id="p1ico" style="width:175px; top:539px; left:51px;"/><!-- dopyt, zmenili form·tovanie, zistiù ako sa zapisuje Ëi s lomÌtkom alebo za sebou ËÌslice -->
-<input type="text" name="p1sid" id="p1sid" style="width:84px; top:539px; left:258px;"/><!-- dopyt, uû je s˙Ëasùou ico, zatiaæ nechaù -->
+<input type="text" name="p1ico" id="p1ico" maxlength="12" style="width:266px; top:539px; left:51px;"/>
 <input type="text" name="p1pfr" id="p1pfr" style="width:519px; top:539px; left:374px;"/>
 <input type="text" name="p1men" id="p1men" style="width:842px; height:60px; top:590px; left:51px;"/>
 <input type="text" name="p1uli" id="p1uli" style="width:635px; top:697px; left:51px;"/>
@@ -3786,8 +3784,8 @@ font-weight:bold; font-size:14px;">Nastaviù</span>
   <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
   <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
   <a href="#" onclick="editForm(13);" class="<?php echo $clas13; ?> toleft">13</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1&volapo=1', '_self')" class="toleft">P1</a>
-<a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1&volapo=1', '_self')" class="toleft">P2</a>
+  <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1', '_self')" class="toleft">P1</a>
+  <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1', '_self')" class="toleft">P2</a>
 <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
 </div>
 </form>
@@ -3965,9 +3963,8 @@ $hhmm = Date( "Hi", MkTime( date("H"),date("i"),date("s"),date("m"),date("d"),da
 $kli_nxcf10 = substr($kli_nxcf,0,10);
 $kli_nxcf10=trim(str_replace(" ","",$kli_nxcf10));
 
-$nazsub="../tmp/dppo".$kli_vrok."_id".$kli_uzid."_".$kli_nxcf."_".$hhmm.".xml";
+$nazsub="../tmp/dppo".$kli_vrok."_id".$kli_uzid."_".$kli_nxcf10."_".$hhmm.".xml";
 //dopyt, eöte typ priznania
-//dopyt, prv˝ch 10 znakov n·zvu firmy
 
 //vypocty
 $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET prpods=prpod1+prpod2+prpod3+prpod4+prpod5, prppp=1 WHERE prcpl > 0 ";
@@ -5025,7 +5022,7 @@ $riadok=$hlavicka->psr31; if ( $riadok == 0 ) { $riadok=""; }
   $text = "  	<r31><![CDATA[".$riadok."]]></r31>"."\r\n"; fwrite($soubor, $text);
   $text = "  </zdaneniePar17f>"."\r\n"; fwrite($soubor, $text);
 
-//<xsd:element name="podielyNaZisku" type="podielyNaZiskuType"/> nove 2017 
+//<xsd:element name="podielyNaZisku" type="podielyNaZiskuType"/> nove 2017
 
   $text = "  <podielyNaZisku>"."\r\n"; fwrite($soubor, $text);
 $riadok=$hlavicka->ozd1r01; if ( $riadok == 0 ) { $riadok=""; }
@@ -5379,13 +5376,13 @@ if( $sumaxx > 0 ) {
 
   $text = "   <prijimatel>"."\r\n"; fwrite($soubor, $text);
 
-//p1cpl  psys  druh  p1cis  pcsum  p1ico  p1sid  p1pfr  p1men  p1uli  p1cdm  p1psc  p1mes  ico
+//p1cpl  psys  druh  p1cis  pcsum  p1ico  p1pfr  p1men  p1uli  p1cdm  p1psc  p1mes  ico
 
 $poradoveCislo=$hlavickap->p1cis;
 $suma=$hlavickap->pcsum;
 $pico=$hlavickap->p1ico;
 if ( $hlavickap->p1ico < 1000000 AND $hlavickap->p1ico > 0 ) { $pico="00".$hlavickap->p1ico; }
-$psid=$hlavickap->p1sid;
+//$psid=$hlavickap->p1sid;
 $pravnaForma=iconv("CP1250", "UTF-8", $hlavickap->p1pfr);
 $obchodneMeno=iconv("CP1250", "UTF-8", $hlavickap->p1men);
 $ulica=iconv("CP1250", "UTF-8", $hlavickap->p1uli);
@@ -5805,7 +5802,7 @@ if ( $copern == 102 )
    document.formv1.pcpoc.value = '<?php echo $pcpoc; ?>';
    document.formv1.pcsum.value = '<?php echo $pcsum; ?>';
    document.formv1.p1ico.value = '<?php echo $p1ico; ?>';
-   document.formv1.p1sid.value = '<?php echo $p1sid; ?>';
+//   document.formv1.p1sid.value = '<?php echo $p1sid; ?>';
    document.formv1.p1pfr.value = '<?php echo $p1pfr; ?>';
    document.formv1.p1men.value = '<?php echo $p1men; ?>';
    document.formv1.p1uli.value = '<?php echo $p1uli; ?>';
@@ -5913,7 +5910,7 @@ TODO
 - input=date vysk˙öaù v d·tumoch
 - input=number vysk˙öaù v ËÌslach
 
-- n·zov .xml = "dppo2017r_f586_id54_1854.xml"
+
 
 - predplnenie d·tumu vyhl·senia po kliknutÌ do inputu
 
@@ -5922,7 +5919,7 @@ TODO
 - ûiadam v ix.Ëasti bude disable checkbox pouk·ûka/˙Ëet a neuk·ûe iban z ufir
 - pri dodatoËnom priznanÌ daù disable dadod,1120-1190, blokovaù pri generovanÌ v pdf, html cez disable
   nemusel bych v tlaËi, ale oöetril pri generovanÌ, Ôalöie disable pozrieù v pdf, kde s˙ obmedzenia
-- s prÌlohou niË nerobiù, pokiaæ nebude .xml, aby sme vedeli Ëi 1 alebo 2 inputy
 
-- iËo/sid v prÌjimateæoch nie je vyrieöen˝, d·m na 12 znakov input a v tlaËi zarovnanie zprava = poËk·me na xml, potom budeme rieöiù
+
+
 -->

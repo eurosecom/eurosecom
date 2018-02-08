@@ -1,5 +1,5 @@
 <!doctype html>
-<HTML>
+<html>
 <?php
 //celkovy zaciatok dokumentu
   do
@@ -18,16 +18,12 @@ if (!isset($kli_vxcf)) $kli_vxcf = 1;
   endif;
   mysql_select_db($mysqldb);
 
-//ramcek fpdf 1=zap,0=vyp
-$rmc=0;
-$rmc1=0;
-
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
 
 //.jpg podklad
-$jpg_cesta="../dokumenty/dan_z_prijmov2015/dppo2015/dppo_v15";
-$jpg_popis="tlaËivo DaÚ z prÌjmov PO pre rok ".$kli_vrok;
+$jpg_source="../dokumenty/dan_z_prijmov2017/dppo/dppo_v17";
+$jpg_title="tlaËivo DaÚ z prÌjmov PO pre rok ".$kli_vrok;
 
 $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
@@ -128,15 +124,14 @@ $copern = 1*strip_tags($_REQUEST['copern']);
 $cislo_p1cpl = 1*strip_tags($_REQUEST['cislo_p1cpl']);
 $cislo_prcpl = 1*strip_tags($_REQUEST['cislo_prcpl']);
 $drupoh = 1*$_REQUEST['drupoh'];
-$volapo = 1*$_REQUEST['volapo'];
 
-//zapis upravene udaje 
+//zapis upravene udaje
 if ( $copern == 202 )
      {
 $p1cis = strip_tags($_REQUEST['p1cis']);
 $pcsum = strip_tags($_REQUEST['pcsum']);
 $p1ico = strip_tags($_REQUEST['p1ico']);
-$p1sid = strip_tags($_REQUEST['p1sid']);
+//$p1sid = strip_tags($_REQUEST['p1sid']);
 $p1pfr = strip_tags($_REQUEST['p1pfr']);
 $p1men = strip_tags($_REQUEST['p1men']);
 $p1uli = strip_tags($_REQUEST['p1uli']);
@@ -147,23 +142,23 @@ $p1mes = strip_tags($_REQUEST['p1mes']);
 $uprav="NO";
 $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dppriloha SET ".
 " p1cis='$p1cis', pcsum='$pcsum', ".
-" p1ico='$p1ico', p1sid='$p1sid', p1pfr='$p1pfr', p1men='$p1men', p1uli='$p1uli', p1cdm='$p1cdm', ".
+" p1ico='$p1ico', p1pfr='$p1pfr', p1men='$p1men', p1uli='$p1uli', p1cdm='$p1cdm', ".
 " p1psc='$p1psc', p1mes='$p1mes' ".
-" WHERE p1cpl = $cislo_p1cpl "; 
+" WHERE p1cpl = $cislo_p1cpl ";
 //echo $uprtxt;
 
 $upravene = mysql_query("$uprtxt");
 $copern=203;
 if (!$upravene):
 ?>
-<script type="text/javascript"> alert( "⁄DAJE NEBOLI UPRAVEN… " ) </script>
+<script type="text/javascript"> alert( "⁄DAJE NEBOLI UPRAVEN…" ) </script>
 <?php
 endif;
 if ($upravene):
 $uprav="OK";
 endif;
      }
-//koniec zapisu upravenych udajov 
+//koniec zapisu upravenych udajov
 
 
 
@@ -215,7 +210,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET ".
 " prpzd1='$prpzd1sql', prpzd2='$prpzd2sql', prpzd3='$prpzd3sql', prpzd4='$prpzd4sql', prpzd5='$prpzd5sql', ".
 " prpvz1='$prpvz1', prpvz2='$prpvz2', prpvz3='$prpvz3', prpvz4='$prpvz4', prpvz5='$prpvz5', ".
 " prpod1='$prpod1', prpod2='$prpod2', prpod3='$prpod3', prpod4='$prpod4', prpod5='$prpod5' ".
-" WHERE prcpl = $cislo_prcpl "; 
+" WHERE prcpl = $cislo_prcpl ";
 //echo $uprtxt;
 
 $upravene = mysql_query("$uprtxt");
@@ -229,7 +224,7 @@ if ($upravene):
 $uprav="OK";
 endif;
      }
-//koniec zapisu upravenych udajov proj 
+//koniec zapisu upravenych udajov proj
 
 //novy prijimatel
     if ( $copern == 336 )
@@ -260,7 +255,7 @@ $sqldok = mysql_query("$sqlttt");
 
 $pcsum = "0.00";
 $p1ico = 0;
-$p1sid = 0;
+//$p1sid = 0;
 $copern=203;
 
     }
@@ -304,12 +299,12 @@ $cislo_p1cpl = 1*$_REQUEST['cislo_p1cpl'];
 ?>
 <script type="text/javascript">
 if( confirm ("Chcete zmazaù prijÌmateæa Ë.<?php echo $cislo_p1cpl; ?> ?") )
-         { location.href='priznanie_dppriloha2017.php?copern=207&uprav=0&cislo_p1cpl=<?php echo $cislo_p1cpl; ?>&tt=1&volapo=<?php echo $volapo; ?>' }
+         { location.href='priznanie_dppriloha2017.php?copern=207&uprav=0&cislo_p1cpl=<?php echo $cislo_p1cpl; ?>&tt=1' }
 else
-         { location.href='priznanie_dppriloha2017.php?copern=101&uprav=0&cislo_p1cpl=&tt=1&volapo=<?php echo $volapo; ?>' }
+         { location.href='priznanie_dppriloha2017.php?copern=101&uprav=0&cislo_p1cpl=&tt=1' }
 </script>
 <?php
-exit;                      
+exit;
     }
     if ( $copern == 207 )
     {
@@ -330,12 +325,12 @@ $cislo_prcpl = 1*$_REQUEST['cislo_prcpl'];
 ?>
 <script type="text/javascript">
 if( confirm ("Chcete zmazaù projekt Ë.<?php echo $cislo_prcpl; ?> ?") )
-         { location.href='priznanie_dppriloha2017.php?copern=1207&uprav=0&cislo_prcpl=<?php echo $cislo_prcpl; ?>&tt=1&volapo=<?php echo $volapo; ?>' }
+         { location.href='priznanie_dppriloha2017.php?copern=1207&uprav=0&cislo_prcpl=<?php echo $cislo_prcpl; ?>&tt=1' }
 else
-         { location.href='priznanie_dppriloha2017.php?copern=1101&uprav=0&cislo_prcpl=&tt=1&volapo=<?php echo $volapo; ?>' }
+         { location.href='priznanie_dppriloha2017.php?copern=1101&uprav=0&cislo_prcpl=&tt=1' }
 </script>
 <?php
-exit;                      
+exit;
     }
     if ( $copern == 1207 )
     {
@@ -367,7 +362,7 @@ $sqldok = mysql_query("$sqlttt");
 $sqlttt = "UPDATE F$kli_vxcf"."_uctpriznanie_dpprilpro SET prpodv='$prpodv', prppp='$prppp' WHERE prcpl > 0 ";
 $sqldok = mysql_query("$sqlttt");
 
-//nacitaj udaje 
+//nacitaj udaje
 if ( $copern == 203 ) {
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_uctpriznanie_dppriloha WHERE p1cpl = $cislo_p1cpl ";
 //echo $sqlfir;
@@ -378,7 +373,7 @@ $fir_riadok=mysql_fetch_object($fir_vysledok);
 $p1cis = $fir_riadok->p1cis;
 $pcsum = $fir_riadok->pcsum;
 $p1ico = $fir_riadok->p1ico;
-$p1sid = $fir_riadok->p1sid;
+//$p1sid = $fir_riadok->p1sid;
 $p1pfr = $fir_riadok->p1pfr;
 $p1men = $fir_riadok->p1men;
 $p1uli = $fir_riadok->p1uli;
@@ -442,11 +437,11 @@ $prptxt = $fir_riadok->prptxt;
 $copern=1201;
                       }
 ?>
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link rel="stylesheet" href="../css/reset.css">
- <link rel="stylesheet" href="../css/tlaciva.css">
-<title>EuroSecom - prÌloha k DP</title>
+<head>
+<meta charset="cp1250">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/tlaciva.css">
+<title>DPPO prÌloha | EuroSecom</title>
 <style type="text/css">
 div.wrap-prijimatelia {
   overflow: auto;
@@ -521,168 +516,49 @@ a.btn-item-new:hover {
   background-color: #1abd5f;
 }
 </style>
-<script language="JavaScript" src="../js/cookies.js"></script>
-<script type="text/javascript">
-<?php
-//uprava sadzby strana prij
-  if ( $copern == 201 )
-  { 
-?>
-  function ObnovUI()
-  {
-   document.formv1.p1cis.value = '<?php echo "$p1cis";?>';
-   document.formv1.pcsum.value = '<?php echo "$pcsum";?>';
-   document.formv1.p1ico.value = '<?php echo "$p1ico";?>';
-   document.formv1.p1sid.value = '<?php echo "$p1sid";?>';
-   document.formv1.p1pfr.value = '<?php echo "$p1pfr";?>';
-   document.formv1.p1men.value = '<?php echo "$p1men";?>';
-   document.formv1.p1uli.value = '<?php echo "$p1uli";?>';
-   document.formv1.p1cdm.value = '<?php echo "$p1cdm";?>';
-   document.formv1.p1psc.value = '<?php echo "$p1psc";?>';
-   document.formv1.p1mes.value = '<?php echo "$p1mes";?>';
-  }
-<?php
-//koniec uprava
-  }
-?>
-
-<?php
-//uprava sadzby strana proj
-  if ( $copern == 1201 )
-  { 
-?>
-  function ObnovUI()
-  {
-   document.formv1.prcpr.value = '<?php echo "$prcpr"; ?>';
-   document.formv1.prpdzc.value = '<?php echo "$prpdzcsk"; ?>';
-   document.formv1.prpzo1.value = '<?php echo "$prpzo1sk"; ?>';
-   document.formv1.prpzo2.value = '<?php echo "$prpzo2sk"; ?>';
-   document.formv1.prpzo3.value = '<?php echo "$prpzo3sk"; ?>';
-   document.formv1.prpzo4.value = '<?php echo "$prpzo4sk"; ?>';
-   document.formv1.prpzo5.value = '<?php echo "$prpzo5sk"; ?>';
-   document.formv1.prpzd1.value = '<?php echo "$prpzd1sk"; ?>';
-   document.formv1.prpzd2.value = '<?php echo "$prpzd2sk"; ?>';
-   document.formv1.prpzd3.value = '<?php echo "$prpzd3sk"; ?>';
-   document.formv1.prpzd4.value = '<?php echo "$prpzd4sk"; ?>';
-   document.formv1.prpzd5.value = '<?php echo "$prpzd5sk"; ?>';
-   document.formv1.prpvz1.value = '<?php echo "$prpvz1"; ?>';
-   document.formv1.prpvz2.value = '<?php echo "$prpvz2"; ?>';
-   document.formv1.prpvz3.value = '<?php echo "$prpvz3"; ?>';
-   document.formv1.prpvz4.value = '<?php echo "$prpvz4"; ?>';
-   document.formv1.prpvz5.value = '<?php echo "$prpvz5"; ?>';
-   document.formv1.prpod1.value = '<?php echo "$prpod1"; ?>';
-   document.formv1.prpod2.value = '<?php echo "$prpod2"; ?>';
-   document.formv1.prpod3.value = '<?php echo "$prpod3"; ?>';
-   document.formv1.prpod4.value = '<?php echo "$prpod4"; ?>';
-   document.formv1.prpod5.value = '<?php echo "$prpod5"; ?>';
-  }
-<?php
-//koniec uprava
-  }
-?>
-
-<?php
-//nie uprava
-  if ( $copern != 201 AND $copern != 1201 )
-  { 
-?>
-  function ObnovUI()
-  {
-  }
-<?php
-//koniec uprava
-  }
-?>
-//Z ciarky na bodku
-  function CiarkaNaBodku(Vstup)
-  {
-   if ( Vstup.value.search(/[^0-9.-]/g) != -1 ) { Vstup.value=Vstup.value.replace(",","."); }
-  }
-
-  function NovyPrmatel()
-  {
-   window.open('../ucto/priznanie_dppriloha2017.php?copern=336&uprav=0&volapo=<?php echo $volapo; ?>', '_self')
-  }
-  function UpravPrmatel(p1cpl)
-  {
-   window.open('../ucto/priznanie_dppriloha2017.php?copern=203&uprav=0&cislo_p1cpl=' + p1cpl + '&tt=1&volapo=<?php echo $volapo; ?>', '_self')
-  }
-  function ZmazPrmatel(p1cpl)
-  {
-   window.open('../ucto/priznanie_dppriloha2017.php?copern=206&uprav=0&cislo_p1cpl=' + p1cpl + '&tt=1&volapo=<?php echo $volapo; ?>', '_self')
-  }
-
-  function NovyProj()
-  {
-   window.open('../ucto/priznanie_dppriloha2017.php?copern=1336&uprav=0&volapo=<?php echo $volapo; ?>', '_self')
-  }
-  function UpravProj(prcpl)
-  {
-   window.open('../ucto/priznanie_dppriloha2017.php?copern=1203&uprav=0&cislo_prcpl=' + prcpl + '&tt=1&volapo=<?php echo $volapo; ?>', '_self')
-  }
-  function ZmazProj(prcpl)
-  {
-   window.open('../ucto/priznanie_dppriloha2017.php?copern=1206&uprav=0&cislo_prcpl=' + prcpl + '&tt=1&volapo=<?php echo $volapo; ?>', '_self')
-  }
-</script>
-</HEAD>
-<BODY onload="ObnovUI();">
-
+</head>
+<body onload="ObnovUI();">
 <div id="wrap-heading">
- <table id="heading">
+  <table id="heading">
   <tr>
-   <td class="ilogin">EuroSecom</td>
-   <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
+    <td class="ilogin">EuroSecom</td>
+    <td class="ilogin" align="right"><?php echo "<strong>UME</strong> $kli_vume&nbsp;&nbsp;<strong>FIR</strong> $kli_vxcf:$kli_nxcf&nbsp;&nbsp;<strong>login</strong> $kli_uzmeno $kli_uzprie / $kli_uzid ";?></td>
   </tr>
   <tr>
-<?php if ( $volapo == 0 ) { ?> <td class="header">DaÚ z prÌjmov FOB - prÌloha k IV. Ëasti</td> <?php } ?>
-<?php if ( $volapo == 1 ) { ?>
-   <td class="header">DaÚ z prÌjmov PO -
+    <td class="header">DaÚ z prÌjmov PO -
 <?php if ( $copern == 1101 OR $copern == 1203 OR $copern == 1201 ) echo "prÌloha k ß 30c z·k."; ?>
 <?php if ( $copern == 101 OR $copern == 203 OR $copern == 201 ) echo "prÌloha k IV. Ëasti"; ?>
-   </td>
-<?php                     } ?>
-   <td><div class="bar-btn-form-tool"></div></td>
+    </td>
+    <td><div class="bar-btn-form-tool"></div></td>
   </tr>
- </table>
+  </table>
 </div>
-
 <div id="content">
 <?php
 $clas991="noactive"; $clas992="noactive";
 if ( $copern == 1101 OR $copern == 1011 OR $copern == 1201 ) $clas991="active";
 if ( $copern == 101 OR $copern == 11 OR $copern == 201 ) $clas992="active";
-$source="../ucto/priznanie_po2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0&volapo=".$volapo;
-if ( $volapo == 0 ) { $source="../ucto/priznanie_fob2017.php?cislo_oc=".$cislo_oc."&drupoh=1&page=1&subor=0&volapo=".$volapo; }
 ?>
 <div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=7', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=8', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=9', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_self')" class="<?php echo $clas991; ?> toleft">P1</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_self')" class="<?php echo $clas992; ?> toleft">P2</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=11&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_blank')" class="<?php echo $clas992; ?> toright">P2</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1011&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_blank')" class="<?php echo $clas991; ?> toright">P1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=10', '_blank');" class="<?php echo $clas10; ?> toright">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=9', '_blank');" class="<?php echo $clas9; ?> toright">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=8', '_blank');" class="<?php echo $clas8; ?> toright">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=7', '_blank');" class="<?php echo $clas7; ?> toright">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=6', '_blank');" class="<?php echo $clas6; ?> toright">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=5', '_blank');" class="<?php echo $clas5; ?> toright">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=4', '_blank');" class="<?php echo $clas4; ?> toright">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=3', '_blank');" class="<?php echo $clas3; ?> toright">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
- <h6 class="toright">TlaËiù:</h6>
+  <a href="#" onclick="editForm(1);" class="toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="toleft">2</a>
+  <a href="#" onclick="editForm(3);" class="toleft">3</a>
+  <a href="#" onclick="editForm(4);" class="toleft">4</a>
+  <a href="#" onclick="editForm(5);" class="toleft">5</a>
+  <a href="#" onclick="editForm(6);" class="toleft">6</a>
+  <a href="#" onclick="editForm(7);" class="toleft">7</a>
+  <a href="#" onclick="editForm(8);" class="toleft">8</a>
+  <a href="#" onclick="editForm(9);" class="toleft">9</a>
+  <a href="#" onclick="editForm(10);" class="toleft">10</a>
+  <a href="#" onclick="editForm(11);" class="toleft">11</a>
+  <a href="#" onclick="editForm(12);" class="toleft">12</a>
+  <a href="#" onclick="editForm(13);" class="toleft">13</a>
+  <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1', '_self')" class="<?php echo $clas991; ?> toleft">P1</a>
+  <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1', '_self')" class="<?php echo $clas992; ?> toleft">P2</a>
+  <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=11&drupoh=1', '_blank')" class="<?php echo $clas992; ?> toright">P2</a>
+  <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1011&drupoh=1', '_blank')" class="<?php echo $clas991; ?> toright">P1</a>
+  <h6 class="toright">TlaËiù:</h6>
 </div>
-
 <?php
 //zobraz udaje
 if ( $copern != 11 )
@@ -706,8 +582,7 @@ $riadok=mysql_fetch_object($sql);
 
 if ( $i == 0 ) { ?>
 <div class="wrap-prijimatelia">
- <a href="#" onclick="NovyPrmatel();" title="Pridaù prijÌmateæa" class="btn-item-new"
-    style="left:177px;">+ PrijÌmateæ</a>
+ <a href="#" onclick="NovyPrmatel();" title="Pridaù prijÌmateæa" class="btn-item-new" style="left:177px;">+ PrijÌmateæ</a>
 <table class="prijimatelia">
 <caption>Zoznam prijÌmateæov</caption>
 <tr class="zero-line">
@@ -716,7 +591,7 @@ if ( $i == 0 ) { ?>
 </tr>
 <tr>
  <th>»Ìslo</th>
- <th class="left">N·zov - I»O / SID</th>
+ <th class="left">N·zov - I»O</th>
  <th class="right">Suma</th>
  <th>&nbsp;</th>
 </tr>
@@ -724,7 +599,7 @@ if ( $i == 0 ) { ?>
 if ( $riadok->p1cpl > 0 ) { ?>
 <tr class="body">
  <td class="center"><strong><?php echo $riadok->p1cis; ?></strong></td>
- <td><?php echo "$riadok->p1men $riadok->p1mes - $riadok->p1ico / $riadok->p1sid"; ?></td>
+ <td><?php echo "$riadok->p1men $riadok->p1mes - $riadok->p1ico"; ?></td>
  <td class="right"><?php echo $riadok->pcsum; ?></td>
  <td class="center">
   <img src="../obr/ikony/pencil_blue_icon.png" onclick="UpravPrmatel(<?php echo $riadok->p1cpl;?>);" title="Upraviù">&nbsp;&nbsp;
@@ -787,7 +662,6 @@ if ( $riadok->prcpl > 0 ) { ?>
   <img src="../obr/ikony/xmark_lred_icon.png" onclick="ZmazProj(<?php echo $riadok->prcpl;?>);" title="Vymazaù">
  </td>
 </tr>
-
 <?php
                           }
   }
@@ -806,31 +680,23 @@ $i = $i + 1;
 if ( $copern == 201 )
 {
 ?>
-<FORM name="formv1" method="post" action="priznanie_dppriloha2017.php?copern=202&cislo_p1cpl=<?php echo $cislo_p1cpl; ?>&volapo=<?php echo $volapo; ?>">
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
-<?php if ( $volapo == 0 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 12.strana 240kB">
-<?php                     } ?>
-<?php if ( $volapo == 1 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 12.strana 240kB">
-<?php                     } ?>
+<form name="formv1" method="post" action="priznanie_dppriloha2017.php?copern=202&cislo_p1cpl=<?php echo $cislo_p1cpl; ?>">
+<input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+<img src="<?php echo $jpg_source; ?>_str15.jpg" class="form-background" alt="<?php echo $jpg_title; ?> 15.strana">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
-
 <!-- PRILOHA k IV.casti -->
 <input type="text" name="p1cis" id="p1cis" style="width:86px; top:154px; left:169px;"/>
 <input type="text" name="pcsum" id="pcsum" onkeyup="CiarkaNaBodku(this);" style="width:266px; top:209px; left:161px;"/>
-
-<input type="text" name="p1ico" id="p1ico" style="width:175px; top:264px; left:51px;"/>
-<input type="text" name="p1sid" id="p1sid" style="width:82px; top:264px; left:259px;"/>
-<input type="text" name="p1pfr" id="p1pfr" style="width:519px; top:264px; left:374px;"/>
+<input type="text" name="p1ico" id="p1ico" maxlength="12" style="width:267px; top:265px; left:51px;"/>
+<input type="text" name="p1pfr" id="p1pfr" style="width:519px; top:265px; left:374px;"/>
 <input type="text" name="p1men" id="p1men" style="width:842px; top:316px; left:51px;"/>
 <input type="text" name="p1uli" id="p1uli" style="width:635px; top:420px; left:51px;"/>
 <input type="text" name="p1cdm" id="p1cdm" style="width:175px; top:420px; left:718px;"/>
 <input type="text" name="p1psc" id="p1psc" style="width:107px; top:474px; left:51px;"/>
 <input type="text" name="p1mes" id="p1mes" style="width:703px; top:474px; left:190px;"/>
 
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
-</FORM>
+<input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+</form>
 <?php
 }
 //koniec uprava jedneho
@@ -841,19 +707,14 @@ if ( $copern == 201 )
 if ( $copern == 1201 )
 {
 ?>
-<FORM name="formv1" method="post" action="priznanie_dppriloha2017.php?copern=1202&cislo_prcpl=<?php echo $cislo_prcpl; ?>&volapo=<?php echo $volapo; ?>">
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
-<?php if ( $volapo == 0 ) { ?>
- <img src="<?php echo $jpg_cesta; ?>_str11.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 12.strana 240kB">
-<?php                     } ?>
-<?php if ( $volapo == 1 ) { ?>
- <img src="<?php echo $jpg_cesta; ?>_str11.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 12.strana 240kB">
-<?php                     } ?>
+<form name="formv1" method="post" action="priznanie_dppriloha2017.php?copern=1202&cislo_prcpl=<?php echo $cislo_prcpl; ?>">
+<input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+<img src="<?php echo $jpg_source; ?>_str14.jpg" class="form-background" alt="<?php echo $jpg_title; ?> 14.strana">
 <span class="text-echo" style="top:75px; left:337px;"><?php echo $fir_fdic; ?></span>
 
 <!-- PRILOHA 1 -->
-<input type="text" name="prcpr" id="prcpr" onkeyup="CiarkaNaBodku(this);" style="width:35px; top:166px; left:268px;"/>
-<div class="input-echo right" style="width:38px; top:167px; left:336px;"><?php echo $prppp; ?>&nbsp;</div>
+<input type="text" name="prcpr" id="prcpr" onkeyup="CiarkaNaBodku(this);" maxlength="3" style="width:60px; top:166px; left:268px;"/>
+<div class="input-echo right" style="width:60px; top:167px; left:359px;"><?php echo $prppp; ?>&nbsp;</div>
 <input type="text" name="prpdzc" id="prpdzc" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:166px; left:697px;"/>
 
 <input type="text" name="prpzo1" id="prpzo1" onkeyup="CiarkaNaBodku(this);" style="width:196px; top:254px; left:72px;"/>
@@ -884,8 +745,8 @@ if ( $copern == 1201 )
 <div class="input-echo right" style="width:290px; top:644px; left:604px;"><?php echo $prpods; ?>&nbsp;</div>
 <textarea name="prptxt" id="prptxt" style="width:838px; height:400px; top:700px; left:53px;"><?php echo $prptxt; ?></textarea>
 <div class="input-echo right" style="width:290px; top:1150px; left:604px;"><?php echo $prpodv; ?>&nbsp;</div>
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
-</FORM>
+<input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+</form>
 <?php
 }
 //koniec uprava proj
@@ -893,23 +754,26 @@ if ( $copern == 1201 )
 
 <?php
      }
-//koniec zobrazenia udajov 
+//koniec zobrazenia udajov
 ?>
 <div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=7', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=8', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=9', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_self')" class="<?php echo $clas991; ?> toleft">P1</a>
- <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1&page=1&volapo=<?php echo $volapo; ?>', '_self')" class="<?php echo $clas992; ?> toleft">P2</a>
+  <a href="#" onclick="editForm(1);" class="toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="toleft">2</a>
+  <a href="#" onclick="editForm(3);" class="toleft">3</a>
+  <a href="#" onclick="editForm(4);" class="toleft">4</a>
+  <a href="#" onclick="editForm(5);" class="toleft">5</a>
+  <a href="#" onclick="editForm(6);" class="toleft">6</a>
+  <a href="#" onclick="editForm(7);" class="toleft">7</a>
+  <a href="#" onclick="editForm(8);" class="toleft">8</a>
+  <a href="#" onclick="editForm(9);" class="toleft">9</a>
+  <a href="#" onclick="editForm(10);" class="toleft">10</a>
+  <a href="#" onclick="editForm(11);" class="toleft">11</a>
+  <a href="#" onclick="editForm(12);" class="toleft">12</a>
+  <a href="#" onclick="editForm(13);" class="toleft">13</a>
+  <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=1101&drupoh=1', '_self')" class="<?php echo $clas991; ?> toleft">P1</a>
+  <a href="#" onclick="window.open('priznanie_dppriloha2017.php?copern=101&drupoh=1', '_self')" class="<?php echo $clas992; ?> toleft">P2</a>
 </div>
-</div> <!-- #content -->
+</div><!-- #content -->
 
 <?php
 //PDF PRIJIMATELIA
@@ -918,6 +782,10 @@ if ( $copern == 11 )
 if ( File_Exists("../tmp/dppriloha.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/dppriloha.$kli_uzid.pdf"); }
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
+
+//ramcek fpdf 1=zap,0=vyp
+$rmc=0;
+$rmc1=0;
 
 $sirka_vyska="210,320";
 $velkost_strany = explode(",", $sirka_vyska);
@@ -943,11 +811,11 @@ $hlavicka=mysql_fetch_object($sql);
 if ( $j == 0 ) {
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(6);
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str12.jpg') )
+if ( File_Exists($jpg_source.'_str15.jpg') )
 {
-$pdf->Image($jpg_cesta.'_str12.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str15.jpg',0,0,210,297);
 }
 $strana=$strana+1;
 $pdf->SetY(10);
@@ -964,7 +832,7 @@ $G=substr($fir_fdic,6,1);
 $H=substr($fir_fdic,7,1);
 $I=substr($fir_fdic,8,1);
 $J=substr($fir_fdic,9,1);
-$pdf->Cell(68,5," ","$rmc1",0,"R");$pdf->Cell(4,5,"$A","$rmc",0,"C");$pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$B","$rmc",0,"C");
+$pdf->Cell(64,5," ","$rmc1",0,"R");$pdf->Cell(4,5,"$A","$rmc",0,"C");$pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$B","$rmc",0,"C");
 $pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$C","$rmc",0,"C");$pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$D","$rmc",0,"C");
 $pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$E","$rmc",0,"C");$pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$F","$rmc",0,"C");
 $pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$G","$rmc",0,"C");$pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$H","$rmc",0,"C");
@@ -976,7 +844,7 @@ if ( $j == 0 ) { $pozy=30; }
 if ( $j == 1 ) { $pozy=116; }
 if ( $j == 2 ) { $pozy=201; }
 
-$pdf->SetY($pozy); 
+$pdf->SetY($pozy);
 
 //PRIJIMATEL
 //cislo
@@ -984,7 +852,12 @@ $text=sprintf('% 2s',$hlavicka->p1cis);
 if ( $druh == 3 OR $hlavicka->pzano == 1 ) { $text=""; }
 $t01=substr($text,0,1);
 $t02=substr($text,1,1);
-$pdf->Cell(32,7," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",1,"C");
+$t03=substr($text,2,1);
+$t04=substr($text,3,1);
+$pdf->Cell(28,7," ","$rmc1",0,"C");$pdf->Cell(4.5,6,"$t01","$rmc",0,"C");
+$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");
+$pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",1,"C");
 
 //suma
 $pdf->Cell(190,7," ","$rmc1",1,"L");
@@ -1003,7 +876,7 @@ $H=substr($text,7,1);
 $I=substr($text,8,1);
 $J=substr($text,9,1);
 $K=substr($text,10,1);
-$pdf->Cell(30,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$pdf->Cell(26,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
@@ -1012,10 +885,11 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$K","$rmc",1,"C");
 
 //ico
 $pdf->Cell(190,6.5," ","$rmc1",1,"L");
-$text=$hlavicka->p1ico;
-if ( $text == 0 ) $text="";
-if ( $druh == 3 OR $hlavicka->pzano == 1 ) { $text=""; }
-if ( $hlavicka->p1ico < 1000000 ) { $text="00".$hlavicka->p1ico; }
+$hodx=$hlavicka->p1ico;
+if ( $hodx == 0 ) $hodx="";
+if ( $druh == 3 OR $hlavicka->pzano == 1 ) { $hodx=""; }
+//if ( $hlavicka->p1ico < 1000000 ) { $text="00".$hlavicka->p1ico; }
+$text=sprintf('% 12s',$hodx);
 $A=substr($text,0,1);
 $B=substr($text,1,1);
 $C=substr($text,2,1);
@@ -1024,21 +898,22 @@ $E=substr($text,4,1);
 $F=substr($text,5,1);
 $G=substr($text,6,1);
 $H=substr($text,7,1);
-$pdf->Cell(5,6," ","$rmc1",0,"R");$pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
-
-//sid
-$text=$hlavicka->p1sid;
-if ( $text == 0 ) { $text=""; }
-if ( $druh == 3 OR $hlavicka->pzano == 1 ) { $text=""; }
-$A=substr($text,0,1);
-$B=substr($text,1,1);
-$C=substr($text,2,1);
-$D=substr($text,3,1);
-$pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
-$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$D","$rmc",0,"C");
+$I=substr($text,8,1);
+$J=substr($text,9,1);
+$K=substr($text,10,1);
+$L=substr($text,11,1);
+$pdf->Cell(1,6," ","$rmc1",0,"R");$pdf->Cell(5,6,"$A","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$K","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$L","$rmc",0,"C");
 
 //pravna forma
 $text=$hlavicka->p1pfr;
@@ -1066,7 +941,7 @@ $U=substr($text,19,1);
 $V=substr($text,20,1);
 $W=substr($text,21,1);
 $X=substr($text,22,1);
-$pdf->Cell(6,6," ","$rmc1",0,"L");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$pdf->Cell(12,6," ","$rmc1",0,"L");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
@@ -1120,7 +995,7 @@ $I1=substr($text,33,1);
 $J1=substr($text,34,1);
 $K1=substr($text,35,1);
 $L1=substr($text,36,1);
-$pdf->Cell(5,6," ","$rmc1",0,"R");$pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"R");$pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
@@ -1172,7 +1047,7 @@ $Z=substr($text,24,1);
 $A1=substr($text,25,1);
 $B1=substr($text,26,1);
 $C1=substr($text,27,1);
-$pdf->Cell(5,6," ","$rmc1",0,"R");$pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"R");$pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");
@@ -1212,7 +1087,7 @@ $B=substr($text,1,1);
 $C=substr($text,2,1);
 $D=substr($text,3,1);
 $E=substr($text,4,1);
-$pdf->Cell(5,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");
 
@@ -1273,12 +1148,9 @@ if ( $j == 3 ) $j=0;
   }
 $pdf->Output("../tmp/dppriloha.$kli_uzid.pdf");
 ?>
-
 <script type="text/javascript">
   var okno = window.open("../tmp/dppriloha.<?php echo $kli_uzid; ?>.pdf","_self");
 </script>
-
-
 <?php
 //koniec tlac prijimatelov copern=11
      }
@@ -1291,6 +1163,10 @@ if ( $copern == 1011 )
 if ( File_Exists("../tmp/dppriloha.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/dppriloha.$kli_uzid.pdf"); }
      define('FPDF_FONTPATH','../fpdf/font/');
      require('../fpdf/fpdf.php');
+
+//ramcek fpdf 1=zap,0=vyp
+$rmc=0;
+$rmc1=0;
 
 $sirka_vyska="210,320";
 $velkost_strany = explode(",", $sirka_vyska);
@@ -1314,11 +1190,11 @@ $hlavicka=mysql_fetch_object($sql);
 
 $pdf->AddPage();
 $pdf->SetFont('arial','',12);
-$pdf->SetLeftMargin(6);
+$pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str11.jpg') )
+if ( File_Exists($jpg_source.'_str14.jpg') )
 {
-$pdf->Image($jpg_cesta.'_str11.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str14.jpg',0,0,210,297);
 }
 $strana=$strana+1;
 $pdf->SetY(10);
@@ -1335,7 +1211,7 @@ $G=substr($fir_fdic,6,1);
 $H=substr($fir_fdic,7,1);
 $I=substr($fir_fdic,8,1);
 $J=substr($fir_fdic,9,1);
-$pdf->Cell(68,5," ","$rmc1",0,"R");$pdf->Cell(4,5,"$A","$rmc",0,"C");$pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$B","$rmc",0,"C");
+$pdf->Cell(64,5," ","$rmc1",0,"R");$pdf->Cell(4,5,"$A","$rmc",0,"C");$pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$B","$rmc",0,"C");
 $pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$C","$rmc",0,"C");$pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$D","$rmc",0,"C");
 $pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$E","$rmc",0,"C");$pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$F","$rmc",0,"C");
 $pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$G","$rmc",0,"C");$pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$H","$rmc",0,"C");
@@ -1345,19 +1221,24 @@ $pdf->Cell(1,5," ","$rmc1",0,"C");$pdf->Cell(4,5,"$I","$rmc",0,"C");$pdf->Cell(1
 //projekt cislo
 $pdf->Cell(195,17," ","$rmc1",1,"L");
 $tlachod=$hlavicka->prcpr;
-$tlachod_c=sprintf("% 2s",$tlachod);
+$tlachod_c=sprintf("% 3s",$tlachod);
 $A=substr($tlachod_c,0,1);
 $B=substr($tlachod_c,1,1);
-$pdf->Cell(53,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");
+$C=substr($tlachod_c,2,1);
+$pdf->Cell(49,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");
 
 //pocet projektov
 $tlachod=$hlavicka->prppp;
 $tlachodxx="222";
-$tlachod_c=sprintf("% 2s",$tlachod);
+$tlachod_c=sprintf("% 3s",$tlachod);
 $A=substr($tlachod_c,0,1);
 $B=substr($tlachod_c,1,1);
-$pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$C=substr($tlachod_c,2,1);
+$pdf->Cell(7,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
+$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");
 
 //zaciatok projektu
 $text=SKDatum($hlavicka->prpdzc);
@@ -1371,7 +1252,7 @@ $t03=substr($text,2,1);
 $t04=substr($text,3,1);
 $t05=substr($text,4,1);
 $t06=substr($text,5,1);
-$pdf->Cell(71,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"R");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(60,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"R");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"L");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"L");
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"R");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",1,"R");
 
@@ -1388,7 +1269,7 @@ $t03=substr($text,2,1);
 $t04=substr($text,3,1);
 $t05=substr($text,4,1);
 $t06=substr($text,5,1);
-$pdf->Cell(10,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",0,"C");
 //
@@ -1450,7 +1331,7 @@ $t03=substr($text,2,1);
 $t04=substr($text,3,1);
 $t05=substr($text,4,1);
 $t06=substr($text,5,1);
-$pdf->Cell(10,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",1,"C");
 
@@ -1467,7 +1348,7 @@ $t03=substr($text,2,1);
 $t04=substr($text,3,1);
 $t05=substr($text,4,1);
 $t06=substr($text,5,1);
-$pdf->Cell(10,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",0,"C");
 //
@@ -1529,7 +1410,7 @@ $t03=substr($text,2,1);
 $t04=substr($text,3,1);
 $t05=substr($text,4,1);
 $t06=substr($text,5,1);
-$pdf->Cell(10,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",1,"C");
 
@@ -1546,7 +1427,7 @@ $t03=substr($text,2,1);
 $t04=substr($text,3,1);
 $t05=substr($text,4,1);
 $t06=substr($text,5,1);
-$pdf->Cell(10,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",0,"C");
 //
@@ -1608,7 +1489,7 @@ $t03=substr($text,2,1);
 $t04=substr($text,3,1);
 $t05=substr($text,4,1);
 $t06=substr($text,5,1);
-$pdf->Cell(10,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",1,"C");
 
@@ -1625,7 +1506,7 @@ $t03=substr($text,2,1);
 $t04=substr($text,3,1);
 $t05=substr($text,4,1);
 $t06=substr($text,5,1);
-$pdf->Cell(10,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",0,"C");
 //
@@ -1687,7 +1568,7 @@ $t03=substr($text,2,1);
 $t04=substr($text,3,1);
 $t05=substr($text,4,1);
 $t06=substr($text,5,1);
-$pdf->Cell(10,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",1,"C");
 
@@ -1704,7 +1585,7 @@ $t03=substr($text,2,1);
 $t04=substr($text,3,1);
 $t05=substr($text,4,1);
 $t06=substr($text,5,1);
-$pdf->Cell(10,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",0,"C");
 //
@@ -1766,7 +1647,7 @@ $t03=substr($text,2,1);
 $t04=substr($text,3,1);
 $t05=substr($text,4,1);
 $t06=substr($text,5,1);
-$pdf->Cell(10,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(4,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(13,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",1,"C");
 
@@ -1788,7 +1669,7 @@ $t09=substr($text,8,1);
 $t10=substr($text,9,1);
 $t11=substr($text,10,1);
 $t12=substr($text,11,1);
-$pdf->Cell(128,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(124,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t08","$rmc",0,"C");
@@ -1802,7 +1683,7 @@ if ( $poleprptxt[0] != '' )
      {
 $ipole=1;
 foreach( $poleprptxt as $hodnota ) {
-$pdf->Cell(6,5," ","$rmc1",0,"L");$pdf->Cell(186,8,"$hodnota","$rmc",1,"L");
+$pdf->Cell(2,5," ","$rmc1",0,"L");$pdf->Cell(186,8,"$hodnota","$rmc",1,"L");
 $ipole=$ipole+1;
                                  }
      }
@@ -1825,7 +1706,7 @@ $t09=substr($text,8,1);
 $t10=substr($text,9,1);
 $t11=substr($text,10,1);
 $t12=substr($text,11,1);
-$pdf->Cell(128,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
+$pdf->Cell(124,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$t01","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t02","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t06","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t07","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t08","$rmc",0,"C");
@@ -1837,11 +1718,9 @@ $i=$i+1;
   }
 $pdf->Output("../tmp/dppriloha.$kli_uzid.pdf");
 ?>
-
 <script type="text/javascript">
   var okno = window.open("../tmp/dppriloha.<?php echo $kli_uzid; ?>.pdf","_self");
 </script>
-
 <?php
 //koniec tlac projektov copern=1011
      }
@@ -1851,5 +1730,112 @@ $pdf->Output("../tmp/dppriloha.$kli_uzid.pdf");
 //celkovy koniec dokumentu
   } while (false);
 ?>
-</BODY>
-</HTML>
+<script language="JavaScript" src="../js/cookies.js"></script>
+<script type="text/javascript">
+<?php
+//uprava sadzby strana prij
+  if ( $copern == 201 )
+  {
+?>
+  function ObnovUI()
+  {
+   document.formv1.p1cis.value = '<?php echo $p1cis;?>';
+   document.formv1.pcsum.value = '<?php echo $pcsum;?>';
+   document.formv1.p1ico.value = '<?php echo $p1ico;?>';
+   document.formv1.p1pfr.value = '<?php echo $p1pfr;?>';
+   document.formv1.p1men.value = '<?php echo $p1men;?>';
+   document.formv1.p1uli.value = '<?php echo $p1uli;?>';
+   document.formv1.p1cdm.value = '<?php echo $p1cdm;?>';
+   document.formv1.p1psc.value = '<?php echo $p1psc;?>';
+   document.formv1.p1mes.value = '<?php echo $p1mes;?>';
+  }
+<?php
+//koniec uprava
+  }
+?>
+
+<?php
+//uprava sadzby strana proj
+  if ( $copern == 1201 )
+  {
+?>
+  function ObnovUI()
+  {
+   document.formv1.prcpr.value = '<?php echo $prcpr; ?>';
+   document.formv1.prpdzc.value = '<?php echo $prpdzcsk; ?>';
+   document.formv1.prpzo1.value = '<?php echo $prpzo1sk; ?>';
+   document.formv1.prpzo2.value = '<?php echo $prpzo2sk; ?>';
+   document.formv1.prpzo3.value = '<?php echo $prpzo3sk; ?>';
+   document.formv1.prpzo4.value = '<?php echo $prpzo4sk; ?>';
+   document.formv1.prpzo5.value = '<?php echo $prpzo5sk; ?>';
+   document.formv1.prpzd1.value = '<?php echo $prpzd1sk; ?>';
+   document.formv1.prpzd2.value = '<?php echo $prpzd2sk; ?>';
+   document.formv1.prpzd3.value = '<?php echo $prpzd3sk; ?>';
+   document.formv1.prpzd4.value = '<?php echo $prpzd4sk; ?>';
+   document.formv1.prpzd5.value = '<?php echo $prpzd5sk; ?>';
+   document.formv1.prpvz1.value = '<?php echo $prpvz1; ?>';
+   document.formv1.prpvz2.value = '<?php echo $prpvz2; ?>';
+   document.formv1.prpvz3.value = '<?php echo $prpvz3; ?>';
+   document.formv1.prpvz4.value = '<?php echo $prpvz4; ?>';
+   document.formv1.prpvz5.value = '<?php echo $prpvz5; ?>';
+   document.formv1.prpod1.value = '<?php echo $prpod1; ?>';
+   document.formv1.prpod2.value = '<?php echo $prpod2; ?>';
+   document.formv1.prpod3.value = '<?php echo $prpod3; ?>';
+   document.formv1.prpod4.value = '<?php echo $prpod4; ?>';
+   document.formv1.prpod5.value = '<?php echo $prpod5; ?>';
+  }
+<?php
+//koniec uprava
+  }
+?>
+
+<?php
+//nie uprava
+  if ( $copern != 201 AND $copern != 1201 )
+  {
+?>
+  function ObnovUI()
+  {
+  }
+<?php
+//koniec uprava
+  }
+?>
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+   if ( Vstup.value.search(/[^0-9.-]/g) != -1 ) { Vstup.value=Vstup.value.replace(",","."); }
+  }
+
+  function NovyPrmatel()
+  {
+   window.open('../ucto/priznanie_dppriloha2017.php?copern=336&uprav=0', '_self')
+  }
+  function UpravPrmatel(p1cpl)
+  {
+   window.open('../ucto/priznanie_dppriloha2017.php?copern=203&uprav=0&cislo_p1cpl=' + p1cpl + '&tt=1', '_self')
+  }
+  function ZmazPrmatel(p1cpl)
+  {
+   window.open('../ucto/priznanie_dppriloha2017.php?copern=206&uprav=0&cislo_p1cpl=' + p1cpl + '&tt=1', '_self')
+  }
+
+  function NovyProj()
+  {
+   window.open('../ucto/priznanie_dppriloha2017.php?copern=1336&uprav=0', '_self')
+  }
+  function UpravProj(prcpl)
+  {
+   window.open('../ucto/priznanie_dppriloha2017.php?copern=1203&uprav=0&cislo_prcpl=' + prcpl + '&tt=1', '_self')
+  }
+  function ZmazProj(prcpl)
+  {
+   window.open('../ucto/priznanie_dppriloha2017.php?copern=1206&uprav=0&cislo_prcpl=' + prcpl + '&tt=1', '_self')
+  }
+  function editForm(strana)
+  {
+    window.open('priznanie_po2017.php?copern=102&strana=' + strana + '&drupoh=1', '_self');
+  }
+</script>
+</body>
+</html>

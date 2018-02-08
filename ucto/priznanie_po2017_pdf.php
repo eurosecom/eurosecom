@@ -422,7 +422,6 @@ $pc155 = $fir_riadok->pc155;
 $pcpoc = $fir_riadok->pcpoc;
 $pcsum = $fir_riadok->pcsum;
 $p1ico = $fir_riadok->p1ico;
-$p1sid = $fir_riadok->p1sid;
 $p1pfr = $fir_riadok->p1pfr;
 $p1men = $fir_riadok->p1men;
 $p1uli = $fir_riadok->p1uli;
@@ -7611,10 +7610,11 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(6
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$K","$rmc",1,"C");
 //ico
 $pdf->Cell(190,7," ","$rmc1",1,"L");
-$text=$hlavicka->p1ico.$hlavicka->p1sid;
-if ( $text == 0 ) { $text=""; }
-if ( $druh == 3 OR $hlavicka->pzano == 1 ) { $text=""; }
-if ( $hlavicka->p1ico < 1000000 AND $hlavicka->p1ico > 1 ) { $text="00".$hlavicka->p1ico; }
+$hodx=$hlavicka->p1ico;
+if ( $hodx == 0 ) $hodx="";
+if ( $druh == 3 OR $hlavicka->pzano == 1 ) { $hodx=""; }
+//if ( $hlavicka->p1ico < 1000000 AND $hlavicka->p1ico > 1 ) { $text="00".$hlavicka->p1ico; }
+$text=sprintf('% 12s',$hodx);
 $A=substr($text,0,1);
 $B=substr($text,1,1);
 $C=substr($text,2,1);
@@ -7632,17 +7632,6 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$C","$rmc",0,"C");$pdf->Cell(1
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$E","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$F","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$G","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$H","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$I","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$J","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$K","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$L","$rmc",0,"C");
-
-//sid
-// $text=$hlavicka->p1sid;
-// if ( $text == 0 ) { $text=""; }
-// if ( $druh == 3 OR $hlavicka->pzano == 1 ) { $text=""; }
-// $A=substr($text,0,1);
-// $B=substr($text,1,1);
-// $C=substr($text,2,1);
-// $D=substr($text,3,1);
-// $pdf->Cell(6,6," ","$rmc1",0,"R");$pdf->Cell(4,6,"$A","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$B","$rmc",0,"C");
-// $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$C","$rmc",0,"C");$pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$D","$rmc",0,"C");
 //forma
 $text=$hlavicka->p1pfr;
 if ( $druh == 3 OR $hlavicka->pzano == 1 ) { $text=""; }
@@ -8608,7 +8597,6 @@ $pdf->Output("../tmp/potvrddpo.$kli_uzid.pdf");
 <?php
      }
 ?>
-
 <?php
 //celkovy koniec dokumentu
   } while (false);
