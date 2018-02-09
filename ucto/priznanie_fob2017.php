@@ -3926,15 +3926,15 @@ $sn1c=substr($sknacec,0,1);
 
 <input type="text" name="ozdr09" id="ozdr09" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:782px; left:557px;"/>
 <input type="text" name="ozdr10" id="ozdr10" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:870px; left:557px;"/>
-<input type="text" name="ozdr11" id="ozdr11" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:909px; left:560px;"/>
-<input type="text" name="ozdr12" id="ozdr12" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:954px; left:560px;"/>
+<input type="text" name="ozdr11" id="ozdr11" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:909px; left:557px;"/>
+<input type="text" name="ozdr12" id="ozdr12" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:954px; left:557px;"/>
 
 <input type="text" name="ozdr13" id="ozdr13" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1042px; left:557px;"/>
 <input type="text" name="ozdr14" id="ozdr14" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1086px; left:557px;"/>
 
-<input type="text" name="ozdr15" id="ozdr15" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:1131px; left:560px;"/>
-<input type="text" name="ozdr16" id="ozdr16" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:1171px; left:560px;"/>
-<input type="text" name="ozdr17" id="ozdr17" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:1210px; left:560px;"/>
+<input type="text" name="ozdr15" id="ozdr15" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1131px; left:560px;"/>
+<input type="text" name="ozdr16" id="ozdr16" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1171px; left:560px;"/>
+<input type="text" name="ozdr17" id="ozdr17" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:1210px; left:557px;"/>
 
 <?php                      } ?>
 
@@ -3954,9 +3954,9 @@ $sn1c=substr($sknacec,0,1);
 <div class="input-echo right" style="width:234px; top:463px; left:410px;"><?php echo $ozd1r24; ?>&nbsp;</div>
 <div class="input-echo right" style="width:234px; top:463px; left:661px;"><?php echo $ozd2r24; ?>&nbsp;</div>
 
-<input type="text" name="ozdr25" id="ozdr25" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:561px; left:560px;"/>
-<input type="text" name="ozdr27" id="ozdr27" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:645px; left:560px;"/>
-<input type="text" name="ozdr28" id="ozdr28" onkeyup="CiarkaNaBodku(this);" style="width:242px; top:705px; left:560px;"/>
+<input type="text" name="ozdr25" id="ozdr25" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:561px; left:558px;"/>
+<input type="text" name="ozdr27" id="ozdr27" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:645px; left:558px;"/>
+<input type="text" name="ozdr28" id="ozdr28" onkeyup="CiarkaNaBodku(this);" style="width:244px; top:705px; left:558px;"/>
 
 <?php                      } ?>
 
