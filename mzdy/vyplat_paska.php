@@ -1494,7 +1494,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
 $oznac = mysql_query("$sqtoz");
 //koniec uprava zakladov SP,IP,RF pre pomer=41  
 
-//uprav zaklad podla max a min od 1.2012 do zmin_up ulozim neupraveny zzam_zp andrejko
+//uprav zaklad podla max a min od 1.2012 do zmin_up ulozim neupraveny zzam_zp
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid SET zmin_up=zzam_zp WHERE oc > 0 ";
 $oznac = mysql_query("$sqtoz");
 
@@ -1834,12 +1834,14 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid".
 " WHERE oc > 0 ";
 $oznac = mysql_query("$sqtoz");
 
-//znizene odvody do ZP polozka v kun zpno=1
+//znizene odvody do ZP polozka v kun zpno=1 andrejko
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
 " SET des6=($zam_zpn*zzam_zp)/100, des2=999 ".
 " WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND zpno = 1";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
+
+//exit;
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
 " SET des6=des6-0.005, des2=des6, ozam_zp=des2 ".
@@ -1848,7 +1850,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid ".
 $oznac = mysql_query("$sqtoz");
 
 $sqtoz = "UPDATE F$kli_vxcf"."_mzdprcsum$kli_uzid,F$kli_vxcf"."_$mzdkun".
-" SET des6=($fir_zpn*zzam_zp)/100, des2=999 ".
+" SET des6=($fir_zpn*zfir_zp)/100, des2=999 ".
 " WHERE F$kli_vxcf"."_mzdprcsum$kli_uzid.oc = F$kli_vxcf"."_$mzdkun.oc AND zpno = 1";
 //echo $sqtoz;
 $oznac = mysql_query("$sqtoz");
