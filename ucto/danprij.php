@@ -506,18 +506,15 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
 //OZNAMENIE O ODLOZENI
   function TlacOzOdl()
   {
-   window.open('../ucto/uzavierka_ozn493.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/uzavierka_ozn493.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0', '_blank', blank_param);
   }
   function UpravOzOdl()
   {
-   window.open('../ucto/uzavierka_ozn493.php?copern=20&drupoh=1&strana=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/uzavierka_ozn493.php?copern=20&drupoh=1&strana=1', '_blank', blank_param);
   }
   function OzOdldoXML()
   {
-   window.open('../ucto/uzavierka_ozn493.php?copern=40&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+   window.open('../ucto/uzavierka_ozn493.php?copern=40&drupoh=1', '_blank', blank_param);
   }
 
 //OZNAMENIE O SCHVALENI
