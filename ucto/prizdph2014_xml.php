@@ -456,7 +456,7 @@ if( $xplc == 6 ) { $plat1="0"; $plat2="0"; $plat3="0"; $plat4="0"; $plat5="0"; $
   $text = "      <inaPovinna><![CDATA[".$plat3."]]></inaPovinna>"."\r\n";   fwrite($soubor, $text);		
   $text = "      <zdanitelna><![CDATA[".$plat4."]]></zdanitelna>"."\r\n";   fwrite($soubor, $text);	
   $text = "      <zastupca><![CDATA[".$plat5."]]></zastupca>"."\r\n";   fwrite($soubor, $text);	
-  if( $kli_vrok >= 2018 )
+  if( $kli_vrok >= 2008 )
   {
   $text = "      <zastupca69aa><![CDATA[".$plat6."]]></zastupca69aa>"."\r\n";   fwrite($soubor, $text);	
   }
@@ -507,7 +507,7 @@ $mesto = iconv("CP1250", "UTF-8", $fir_fmes);
 
   $text = "      <obec><![CDATA[".$mesto."]]></obec>"."\r\n";   fwrite($soubor, $text);			
 
-if( $kli_vrok < 2018 )
+if( $kli_vrok < 2008 )
 {
 
 $pole = explode("/", $fir_ftel);
@@ -530,7 +530,7 @@ $fax_za=1*$pole[1];
 
 }
 
-if( $kli_vrok >= 2018 )
+if( $kli_vrok >= 2008 )
 {
 
 $telefon = iconv("CP1250", "UTF-8", $fir_ftel);
@@ -551,7 +551,7 @@ $konatel = iconv("CP1250", "UTF-8", $fir_uctt05);
 
   $text = "        <menoPriezvisko><![CDATA[".$konatel."]]></menoPriezvisko>"."\r\n";   fwrite($soubor, $text);	
 
-if( $kli_vrok < 2018 )
+if( $kli_vrok < 2008 )
 {
 
 
@@ -565,7 +565,7 @@ $tel_za=1*$pole[1];
   $text = "          </tel>"."\r\n";   fwrite($soubor, $text);
 
 }
-if( $kli_vrok >= 2018 )
+if( $kli_vrok >= 2008 )
 {
 
 $telefon = iconv("CP1250", "UTF-8", $fir_uctt04);
