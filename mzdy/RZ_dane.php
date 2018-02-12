@@ -509,7 +509,8 @@ window.open('../mzdy/priznaniefoa_xml<?php echo $rokfoa; ?>.php?cislo_oc=' + h_o
 //oznamenie ZRD
 <?php
 $rokzrd=$kli_vrok;
-if( $rokzrd >= 2016 ) { $rokzrd="2016";  }
+if( $rokzrd == 2016 ) { $rokzrd="2016";  }
+if( $rokzrd >= 2017 ) { $rokzrd="2017";  }
 ?>
 
 function TlacZRD()
@@ -535,7 +536,7 @@ function ZRDXML()
 var h_oc = document.forms.formzrd1.h_oc.value;
 var h_stv = document.forms.formzrd1.h_stv.value;
 
-window.open('../mzdy/oznamenie_zrdxml<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&h_stv=' + h_stv + '&copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
+window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&h_stv=' + h_stv + '&copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
                 }
 
