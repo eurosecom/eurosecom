@@ -1,7 +1,7 @@
 <!doctype html>
 <HTML>
 <?php
-//celkovy zaciatok
+//celkovy zaciatok FIN 112 rovnaké aj pre rok 2018
 do
 {
 $sys = 'UCT';
@@ -359,7 +359,7 @@ if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND $fir_fico == 37990845 )
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=46 WHERE poloz > 0 ";
 }
 
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 OR $kli_vxcf == 809 ) )
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 909 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 OR $kli_vxcf == 809 ) )
 {
 $sqtoz = "UPDATE F$kli_vxcf"."_prcuobrats$kli_uzid SET zdroj=46 WHERE poloz > 0 ";
 }
@@ -504,7 +504,7 @@ $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, program='9.2', oddiel
 $oznac = mysql_query("$sqtoz");
 }
 
-if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 409 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 OR $kli_vxcf == 809 ))
+if( $_SERVER['SERVER_NAME'] == "www.europkse.sk" AND ( $kli_vxcf == 909 OR $kli_vxcf == 509 OR $kli_vxcf == 609 OR $kli_vxcf == 709 OR $kli_vxcf == 809 ))
 {
 $sqtoz = "UPDATE F$kli_vxcf"."_uctvykaz_fin104 SET px12=0, program='', oddiel='0.7.2.2' ";
 $oznac = mysql_query("$sqtoz");

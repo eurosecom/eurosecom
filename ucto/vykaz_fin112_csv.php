@@ -8,7 +8,7 @@ if( !$uziv ) exit;
 if(!isset($kli_vxcf)) $kli_vxcf = 1;
 if(!isset($kli_vduj)) $kli_vduj = 1;
 
-//od 1.1.2018 nová štruktúra CSV
+//od 1.1.2018 nová štruktúra FIn 112 CSV
 
        do
        {
@@ -73,7 +73,7 @@ if( $fico8 < 999999 ) { $fico8="00".$fico8; }
 $rokmes=$kli_vmes.$kli_vrok;
 
 //nazov
-$nazsub="FIN1_PO_OSVS_".$dat_bez.".csv";
+$nazsub="FIN1_OSVS_".$dat_bez.".csv";
 
 if (File_Exists ("../tmp/$nazsub")) { $soubor = unlink("../tmp/$nazsub"); }
 
@@ -200,7 +200,7 @@ $dat_dat = Date ("Y-m-d-h-i", MkTime (date("H"),date("i"),date("s"),date("m"),da
   $text = "\"prijmy,".$pol."\""."\r\n";
   fwrite($soubor, $text);
 
-  $text = "\"Sb\","."\"Sc\","."\"S1\","."\"S2\","."\"S3\","."\"S4\""."\r\n";
+  $text = "\"Sb\","."\"Sc-d\","."\"S1\","."\"S2\","."\"S3\","."\"S4\""."\r\n";
   fwrite($soubor, $text);
 
      }
@@ -274,7 +274,7 @@ if( $i == 0 )
   $text = "\"prijmy-fo,".$pol."\""."\r\n";
   fwrite($soubor, $text);
 
-  $text = "\"Sb\","."\"Sc\","."\"S1\","."\"S2\","."\"S3\","."\"S4\""."\r\n";
+  $text = "\"Sc\","."\"Sd-e\","."\"S1\","."\"S2\","."\"S3\","."\"S4\""."\r\n";
   fwrite($soubor, $text);
 
      }
@@ -412,7 +412,7 @@ if( $i == 0 )
   $text = "\"vydavky,".$pol."\""."\r\n";
   fwrite($soubor, $text);
 
-  $text = "\"Sb\","."\"Sd\","."\"Se\","."\"S1\","."\"S2\","."\"S3\","."\"S4\""."\r\n";
+  $text = "\"Sb\","."\"Sd-g\","."\"Sh-i\","."\"S1\","."\"S2\","."\"S3\","."\"S4\""."\r\n";
   fwrite($soubor, $text);
 
      }
@@ -484,7 +484,7 @@ if( $i == 0 )
   $text = "\"vydavky-fo,".$pol."\""."\r\n";
   fwrite($soubor, $text);
 
-  $text = "\"Sc\","."\"Sd\","."\"Se\","."\"S1\","."\"S2\","."\"S3\","."\"S4\""."\r\n";
+  $text = "\"Sc\","."\"Sd-g\","."\"Sh-i\","."\"S1\","."\"S2\","."\"S3\","."\"S4\""."\r\n";
   fwrite($soubor, $text);
 
      }
@@ -547,7 +547,7 @@ $sqlx = 'DROP TABLE vyddbf';
 
 <table class="h2" width="100%" >
 <tr>
-<td>EuroSecom  -  FIN 1a-12 CSV súbor FIN1_PO_OSVS.csv</td>
+<td>EuroSecom  -  FIN 1a-12 CSV súbor FIN1_OSVS.csv</td>
 <td align="right"><span class="login"><?php echo "UME $kli_vume FIR$kli_vxcf-$kli_nxcf  login: $kli_uzmeno $kli_uzprie / $kli_uzid ";?></span></td>
 </tr>
 </table>
@@ -560,7 +560,7 @@ if( $copern == 1 )
 ?>
 <br />
 <br />
-Stiahnite si nižšie uvedený súbor na Váš lokálny disk a uložte ho s názvom FIN1_PO_OSVS.csv :
+Stiahnite si nižšie uvedený súbor na Váš lokálny disk a uložte ho s názvom FIN1_OSVS.csv :
 <br />
 <br />
 <a href="../tmp/<?php echo $nazsub; ?>"><?php echo $nazsub; ?></a>

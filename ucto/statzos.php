@@ -1149,7 +1149,7 @@ $nazfin1a12="FIN 1-12";
 <?php if ( $kli_vrok < 2016 ) { ?>
   <button type="button" onclick="DbfFin1a12();" title="Export do DBF" class="btn-text toleft">DBF</button>
 <?php                         } ?>
-<?php if ( $kli_vrok >= 2016 ) { ?>
+<?php if ( $kli_vrok >= 2016 AND $kli_vrok < 2018 ) { ?>
   <button type="button" onclick="DbfFin112nujpod();" title="Export do DBF" class="btn-text toleft">DBF</button>
 <?php                          } ?>
 <?php
