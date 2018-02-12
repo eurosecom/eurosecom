@@ -1375,12 +1375,12 @@ if ( $drupoh == 93 OR $drupoh == 193 OR $drupoh == 94 OR $drupoh == 194 ) $varti
 ?>
 <?php if ( $kli_vrok > 2013 AND  $drupoh != 93 AND $drupoh != 193 AND $drupoh != 94 AND $drupoh != 194 ) { ?>
  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
-  title="Naèíta <?php echo $vartitle; ?> generovania z firmy predchádzajúceho úètovného obdobia"
+  title="Naèíta <?php echo $vartitle; ?> generovania z firmy predchádzajúceho úètovného obdobia."
   class="btn-down-x26 toright">Generovanie <?php echo $kli_minrok; ?></a>
 <?php                         } ?>
 <?php if ( $kli_vrok > 2013 AND ( $drupoh == 93 OR $drupoh == 193 OR $drupoh == 94 OR $drupoh == 194 ) ) { ?>
  <a href='vykazy_cis.php?drupoh=<?php echo $drupoh; ?>&copern=4055&page=1'
-  title="Naèíta <?php echo $vartitle; ?> v ståpci bezprostredne predch. obdobie z firmy predchádzajúceho úètovného obdobia"
+  title="Naèíta <?php echo $vartitle; ?> v ståpci bezprostredne predch. obdobie z firmy predchádzajúceho úètovného obdobia. Vytvorte najprv vo firme minulého roka Uzávierku v CELİCH EURách !!!"
   class="btn-down-x26 toright">Minulı rok</a>
 <?php                         } ?>
 <?php if ( $drupoh != 93 AND $drupoh != 193 AND $drupoh != 94 AND $drupoh != 194 ) { ?>
