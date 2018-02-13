@@ -420,7 +420,9 @@ $i=0;
 <td class="hmenu" width="10%" >ZákladDPH
 <td class="hmenu" width="10%" >SumaDPH
 <td class="hmenu" width="10%" >Množstvo
+ <img border=1 src="../obr/info.png" style="width:15; height:15;" title="Desatinné èíslo na 2 desatinné miesta" >
 <td class="hmenu" width="10%" >MJ
+ <img border=1 src="../obr/info.png" style="width:15; height:15;" title="Zadajte t, m, kg alebo ks" >
 <td class="hmenu" width="10%" >Parameter
 <th class="hmenu" width="5%" >Zmaž/Uprav
 <th class="hmenu" width="25%" >
