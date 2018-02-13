@@ -50,10 +50,9 @@ $uliscwin="width=' + sirkawic + ', height=' + vyskawic + ', top=0, left=0, statu
 <META http-equiv="Content-Type" content="text/html; charset=cp1250">
   <link type="text/css" rel="stylesheet" href="../css/styl.css">
 <title>Daň z príjmov FO</title>
-  <style type="text/css">
-
-  </style>
 <script type="text/javascript">
+//parameter okna
+var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
 
 //sirka a vyska okna
 var sirkawin = screen.width-10;
@@ -518,8 +517,7 @@ function TlacZRD()
 var h_oc = document.forms.formzrd1.h_oc.value;
 var h_stv = document.forms.formzrd1.h_stv.value;
 
-window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&h_stv=' + h_stv + '&copern=40&drupoh=1&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&h_stv=' + h_stv + '&copern=40&drupoh=1&strana=9999', '_blank', blank_param);
                 }
 
 function UpravZRD()
@@ -527,8 +525,8 @@ function UpravZRD()
 var h_oc = document.forms.formzrd1.h_oc.value;
 var h_stv = document.forms.formzrd1.h_stv.value;
 
-window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&h_stv=' + h_stv + '&copern=101&drupoh=1&strana=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&h_stv=' + h_stv + '&copern=101&drupoh=1&strana=1',
+ '_blank', blank_param);
                 }
 
 function ZRDXML()
@@ -536,10 +534,9 @@ function ZRDXML()
 var h_oc = document.forms.formzrd1.h_oc.value;
 var h_stv = document.forms.formzrd1.h_stv.value;
 
-window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&h_stv=' + h_stv + '&copern=110&page=1&sysx=UCT&drupoh=1&uprav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+window.open('../mzdy/oznamenie_zrd<?php echo $rokzrd; ?>.php?cislo_xplat=' + h_oc + '&h_stv=' + h_stv + '&copern=110&drupoh=1',
+ '_blank', blank_param);
                 }
-
 </script>
 </HEAD>
 <BODY class="white" id="white" onload="" >
