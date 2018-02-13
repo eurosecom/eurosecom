@@ -796,9 +796,7 @@ $t02=substr($rokp,3,1);
 <div class="input-echo" style="width:66px; top:582px; left:827px;"><?php echo $titulz; ?></div>
 <div class="input-echo" style="width:196px; top:636px; left:52px;"><?php echo $nar_sk; ?></div>
 <!-- PO -->
-<?php if ( $fir_uctt03 != 999 AND $cislo_xplat > 9999 ) { ?> <!-- dopyt, inak rieši podmienku -->
 <div class="input-echo" style="width:840px; top:712px; left:52px;"><?php echo $fir_fnazx; ?></div>
-<?php                           } ?>
 <!-- Adresa -->
 <div class="input-echo" style="width:634px; top:827px; left:52px;"><?php echo $zuli; ?></div>
 <div class="input-echo" style="width:173px; top:827px; left:720px;"><?php echo $zcdm; ?></div>
@@ -1110,7 +1108,6 @@ $i=$i+1;
 //xml
 if ( $copern == 110 )
      {
-$zaobdobie=1*$_REQUEST['h_stv']; //dopyt, toto je aj na riadku 39
 
 //$zablokovane=1;
 if ( $_SERVER['SERVER_NAME'] == "localhost" ) { $zablokovane=0; }
@@ -1125,14 +1122,21 @@ window.close();
 exit;
      }
 
-$hhmmss = Date ("d_m_H_i_s", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$hhmm = Date( "Hi", MkTime( date("H"),date("i"),date("s"),date("m"),date("d"),date("Y") ) );
+//$idx=$kli_uzid.$hhmm;
+$kli_nxcf10 = substr($kli_nxcf,0,10);
+$kli_nxcf10=trim(str_replace(" ","",$kli_nxcf10));
+$kli_nxcf10=trim(str_replace(".","",$kli_nxcf10));
+$kli_nxcf10=trim(str_replace(",","",$kli_nxcf10));
+$kli_nxcf10=trim(str_replace("-","",$kli_nxcf10));
+$kli_nxcf10 = StrTr($kli_nxcf10, "áäèïéìëí¾òôóöàøšúùüıÁÄÈÏÉÌËÍ¼ÒÓÖÔØÀŠÚÙÜİ","aacdeeeilnooorrstuuuyzAACDEEELINOOORRSTUUUYZ");
 
- $outfilexdel="../tmp/oznzrdx_".$kli_uzid."_*.*";
+ $outfilexdel="../tmp/oznzrd_id".$kli_uzid."_*.*";
  foreach (glob("$outfilexdel") as $filename) {
     unlink($filename);
  }
 
-$outfilex="../tmp/oznzrdx_".$kli_uzid."_".$hhmmss.".xml";
+$outfilex="../tmp/oznzrd_id".$kli_uzid."_".$hhmm.".xml";
 if (File_Exists ("$outfilex")) { $soubor = unlink("$outfilex"); }
 
 $nazsub=$outfilex;
@@ -1274,7 +1278,6 @@ $j=0; //zaciatok strany ak by som chcel strankovat
 {
 $hlavicka=mysql_fetch_object($sql);
 
-$obdobie=$kli_vmes; //dopyt, s touto premennou pracujeme v xml?
 $dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
 
 if ( $j == 0 )
