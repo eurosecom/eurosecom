@@ -68,43 +68,22 @@ $kli_vrok=$kli_vrokxy;
 $dtb2 = include("../cis/oddel_dtbz2.php");
 $kli_vrok=$kli_vrokx;
 
-$ulozttt = "INSERT INTO F$kli_vxcf"."_poznamky_muj2014texty ( ozntxt, hdntxt ) VALUES ('$h_ozntxt', '' ) "; 
-$ulozene = mysql_query("$ulozttt"); 
-
-$nerob=1;
-
-if( $nerob == 0 )
-  {
-$sqlfir = "SELECT * FROM ".$databaza."F$firmax"."_poznamky_muj2014texty WHERE ozntxt='$oznacx' ";
-//echo $sqlfir; 
+//dorobit zobrat jeden text z MUJtextov
+$sqlfir = "SELECT * FROM ".$databaza."F$firmax"."_poznamky_muj2014texty WHERE ozntxt = '$h_ozntxt' ";
 $fir_vysledok = mysql_query($sqlfir);
-if ($fir_vysledok) { $fir_riadok=mysql_fetch_object($fir_vysledok); 
-$h_hdntxtplus = str_replace("\r\n","###rn###",$fir_riadok->hdntxt); $h_hdntxtplusx=str_replace("\r","###r###",$h_hdntxtplus); }
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+$h_hdntxt = $fir_riadok->hdntxt;
 
-$ulozttt = "UPDATE F$kli_vxcf"."_poznamky_muj2014texty SET hdntxt='".$h_hdntxtplusx."' WHERE ozntxt='$h_ozntxt' "; 
+
+$ulozttt = "DELETE FROM F$kli_vxcf"."_poznamky_muj2014texty WHERE  ozntxt='$h_ozntxt' "; 
+$ulozene = mysql_query("$ulozttt");
+
+$ulozttt = "INSERT INTO F$kli_vxcf"."_poznamky_muj2014texty ( ozntxt, hdntxt ) VALUES ('$h_ozntxt', '$h_hdntxt' ) "; 
 $ulozene = mysql_query("$ulozttt"); 
 
-echo $ulozttt;
-
-$sqult = "UPDATE F$kli_vxcf"."_poznamky_muj2014texty SET hdntxt=REPLACE(hdntxt,'###rn###','\r\n') WHERE ozntxt='$h_ozntxt' ";
-$ulozene = mysql_query("$sqult"); 
-$sqult = "UPDATE F$kli_vxcf"."_poznamky_muj2014texty SET hdntxt=REPLACE(hdntxt,'###r###','\r') WHERE ozntxt='$h_ozntxt' ";
-$ulozene = mysql_query("$sqult"); 
-  }
-
-$ulozttt = "DROP TABLE F$kli_vxcf"."_poznamky_muj2014textyxxx "; 
-$ulozene = mysql_query("$ulozttt"); 
-$ulozttt = "CREATE TABLE F$kli_vxcf"."_poznamky_muj2014textyxxx SELECT * FROM ".$databaza."F$firmax"."_poznamky_muj2014texty WHERE  ozntxt='$oznacx' "; 
+$ulozttt = "UPDATE F$kli_vxcf"."_poznamky_muj2014texty SET hdntxt='$h_hdntxt' WHERE ozntxt='$h_ozntxt' "; 
 $ulozene = mysql_query("$ulozttt"); 
 
-
-$ulozttt = "UPDATE F$kli_vxcf"."_poznamky_muj2014texty,F$kli_vxcf"."_poznamky_muj2014textyxxx SET ".
-" F$kli_vxcf"."_poznamky_muj2014texty.hdntxt=F$kli_vxcf"."_poznamky_muj2014textyxxx.hdntxt ".
-" WHERE F$kli_vxcf"."_poznamky_muj2014texty.ozntxt='$h_ozntxt' "; 
-$ulozene = mysql_query("$ulozttt"); 
-
-$ulozttt = "DROP TABLE F$kli_vxcf"."_poznamky_muj2014textyxxx "; 
-$ulozene = mysql_query("$ulozttt"); 
 
 $copern=1;
 $ulozenx="Text uložený";
@@ -298,7 +277,7 @@ if( $firmaneex == 1 ) { echo "Zadaná firma èíslo ".$fix." neexistuje v èíselníku
 $databaza="";
 $kli_vrokx=$kli_vrok;
 $kli_vrok=$kli_vrokxy;
-$dtb2 = include("../cis/oddel_dtbz2.php");
+$dtb2 = include("../cis/oddel_dtbz4.php");
 $kli_vrok=$kli_vrokx;
 
 //_poznamky_muj2014texty   psys  ozntxt  hdntxt  prmx1  prmx2  prmx3  prmx4  oldp  oldc1  oldc2  konx  konx8  ico 

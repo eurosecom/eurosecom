@@ -298,7 +298,9 @@ if( $firmaneex == 1 ) { echo "Zadaná firma èíslo ".$fix." neexistuje v èíselníku
 $databaza="";
 $kli_vrokx=$kli_vrok;
 $kli_vrok=$kli_vrokxy;
-$dtb2 = include("../cis/oddel_dtbz2.php");
+//echo $kli_vrok;
+$dtb2 = include("../cis/oddel_dtbz4.php");
+//echo $databaza;
 $kli_vrok=$kli_vrokx;
 
 //_poznamky_po2011texty   psys  ozntxt  hdntxt  prmx1  prmx2  prmx3  prmx4  oldp  oldc1  oldc2  konx  konx8  ico 
