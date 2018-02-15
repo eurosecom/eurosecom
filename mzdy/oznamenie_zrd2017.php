@@ -346,6 +346,10 @@ $strana=5;
      }
 //koniec zmazat polozku
 
+//vypocet strana 2
+$sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r22=r20+r21 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie ";
+$sqldok = mysql_query("$sqlfir");
+
 // nacitaj sumu a dane
 $nacitajsumu=0;
 $vypocitajdan=0;
@@ -370,6 +374,7 @@ $sqldok = mysql_query("$sqlfir");
 
 $vypocitajdan=1;
   }
+
 if( $vypocitajdan == 1 )
   {
 
@@ -391,7 +396,6 @@ $sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r23=kkx1 WHERE xplat = $cisl
 $sqldok = mysql_query("$sqlfir");
   }
 //koniec nacitaj sumu a dane
-
 
 //dan po vynati prijmov zo zdrojov v zahranici
 $sqlfir = "UPDATE F$kli_vxcf"."_mzdoznameniezrd SET r41=0, r43=0, r49=0, kkx1=0 WHERE xplat = $cislo_xplat AND stvrt = $zaobdobie AND r40 != 0 ";
