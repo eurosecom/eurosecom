@@ -1167,6 +1167,8 @@ if ( $j == 0 )
 
   $text = "<hlavicka>"."\r\n"; fwrite($soubor, $text);
 
+if( $mdic == 0 ) { $mdic=""; }
+
   $text = " <dic><![CDATA[".$mdic."]]></dic>"."\r\n"; fwrite($soubor, $text);
   $text = " <zaObdobie>"."\r\n"; fwrite($soubor, $text);
   $text = "  <rok><![CDATA[".$kli_vrok."]]></rok>"."\r\n"; fwrite($soubor, $text);
@@ -1190,6 +1192,7 @@ $meno = iconv("CP1250", "UTF-8", $meno);
 $fir_fnazx = iconv("CP1250", "UTF-8", $fir_fnazx);
 $fir_fnazx1 = iconv("CP1250", "UTF-8", $fir_fnazx1);
   $text = "   <riadok><![CDATA[".$fir_fnazx.$fir_fnazx1."]]></riadok>"."\r\n"; fwrite($soubor, $text);
+  $text = "   <riadok></riadok>"."\r\n"; fwrite($soubor, $text);
   $text = "  </obchodneMeno>"."\r\n"; fwrite($soubor, $text);
   $text = " </pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
 
@@ -1200,6 +1203,7 @@ $zuli = iconv("CP1250", "UTF-8", $zuli);
   $text = "  <psc><![CDATA[".$zpsc."]]></psc>"."\r\n"; fwrite($soubor, $text);
 $zmes = iconv("CP1250", "UTF-8", $zmes);
   $text = "  <obec><![CDATA[".$zmes."]]></obec>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <stat>SR</stat>"."\r\n"; fwrite($soubor, $text);
   $text = " </sidlo>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <sidloNaUzemiSr>"."\r\n"; fwrite($soubor, $text);
