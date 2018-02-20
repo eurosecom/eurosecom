@@ -1,9 +1,0 @@
-Hlásenie - zmeny
-- drobné zmeny v texte (verzia, vypustenie fax na 2.strane, poznámky pod èiarou)
-- 4.strana, v 3.riadku: pridaný riadok "Príjmy vyplatené zamestnávate¾om, ktorý podáva hlásenie"
-- 4.strana, pridaný 9.riadok "NÈZD na zaplatený príspevok na DDS" a tým pádom sa posúvajú všetky riadky pod
-- 4.strana, presunutý pôvodný 9.riadok na riadok 10 = "Suma zamestnaneckej prémie" a "Poèet mesiacov na vznik nároku"
-- 4.strana, presunutý pôvodný 10.riadok na riadok 11 = "Daòový bonus" a "Poèet mesiacov"
-- 4.strana, presunutý pôvodný 11.riadok na riadok 12 ="Nedoplatok(+) alebo preplatok (-) z roèného zúètovania"
-Hlásenie potvrdenie - zmeny
-- drobné zmeny v texte (vypustenie èiarky, posunutie textu)
