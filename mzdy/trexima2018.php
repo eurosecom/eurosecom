@@ -523,7 +523,7 @@ mysql_free_result($fir_vysledok);
     function ObnovUI()
     {
 
-    document.formv1.zamest.value = '<?php echo "$zamest";?>';
+    //document.formv1.zamest.value = '<?php echo "$zamest";?>';
     document.formv1.vzdelanie.value = '<?php echo "$vzdelanie";?>';
     document.formv1.tartrieda.value = '<?php echo "$tartrieda";?>';
     document.formv1.typzmluvy.value = '<?php echo "$typzmluvy";?>';
@@ -537,8 +537,8 @@ mysql_free_result($fir_vysledok);
     document.formv1.postihnutie.value = '<?php echo "$postihnutie";?>';
     document.formv1.odborvzdelania.value = '<?php echo "$odborvzdelania";?>';
 
-        document.forms.formv1.zamest.focus();
-        document.forms.formv1.zamest.select();
+        document.forms.formv1.vzdelanie.focus();
+        document.forms.formv1.vzdelanie.select();
     }
 <?php
 //koniec uprava
@@ -730,10 +730,7 @@ $i = 0;
 
 <tr>
 <td class="hmenu" colspan="3" >Zamestnanec - èíslo,priezvisko,meno</td>
-<td class="hmenu" colspan="1" >Kód èinnosti
-  <a href="#" onClick="window.open('../dokumenty/trexima/kzam.htm', '_blank', '<?php echo $tlcswin; ?>' )">
-<img src='../obr/help.png' width=12 height=12 border=0 title='Zobrazi èíselník' ></a>
-</td>
+
 <td class="hmenu" colspan="1" >Kód SKISCO
   <a href="#" onClick="window.open('../dokumenty/trexima/skisco.htm', '_blank', '<?php echo $tlcswin; ?>' )">
 <img src='../obr/help.png' width=12 height=12 border=0 title='Zobrazi èíselník' ></a>
@@ -792,7 +789,7 @@ $riadok=mysql_fetch_object($sql);
 ?>
 <tr>
 <td class="fmenu" colspan="3" ><?php echo $riadok->idec;?> <?php echo $riadok->prie;?>, <?php echo $riadok->meno;?>, <?php echo $riadok->titl;?> PP<?php echo $riadok->pom;?></td>
-<td class="fmenu" ><?php echo $riadok->zamest;?></td>
+
 <td class="fmenu" ><?php echo $riadok->skisco08;?></td>
 <td class="fmenu" ><?php echo $riadok->pracpozicia;?></td>
 <td class="fmenu" ><?php echo $riadok->postihnutie;?></td>
@@ -997,10 +994,7 @@ $i = 0;
 
 <tr>
 <td class="hmenu" colspan="3" >Zamestnanec - èíslo,priezvisko,meno</td>
-<td class="hmenu" colspan="1" >Kód èinnosti
-  <a href="#" onClick="window.open('../dokumenty/trexima/kzam.htm', '_blank', '<?php echo $tlcswin; ?>' )">
-<img src='../obr/help.png' width=12 height=12 border=0 title='Zobrazi èíselník' ></a>
-</td>
+
 <td class="hmenu" colspan="1" >Kód SKISCO
   <a href="#" onClick="window.open('../dokumenty/trexima/skisco.htm', '_blank', '<?php echo $tlcswin; ?>' )">
 <img src='../obr/help.png' width=12 height=12 border=0 title='Zobrazi èíselník' ></a>
@@ -1059,7 +1053,7 @@ $riadok=mysql_fetch_object($sql);
 ?>
 <tr>
 <td class="fmenu" colspan="3" ><?php echo $riadok->idec;?> <?php echo $riadok->prie;?>, <?php echo $riadok->meno;?>, <?php echo $riadok->titl;?></td>
-<td class="fmenu" ><?php echo $riadok->zamest;?></td>
+
 <td class="fmenu" ><?php echo $riadok->skisco08;?></td>
 <td class="fmenu" ><?php echo $riadok->pracpozicia;?></td>
 <td class="fmenu" ><?php echo $riadok->postihnutie;?></td>
@@ -1087,7 +1081,7 @@ $i = $i + 1;
 
 <tr>
 <td class="fmenu" colspan="3" align="left"><?php echo $idec;?> <?php echo $prie;?>, <?php echo $meno;?></td>
-<td class="fmenu" colspan="1" align="left"><input type="text" name="zamest" id="zamest" size="8"/></td>
+
 <td class="fmenu" colspan="1" align="left"><input type="text" name="skisco08" id="skisco08" size="7"/></td>
 <td class="fmenu" colspan="1" align="left"><input type="text" name="pracpozicia" id="pracpozicia" size="30"/></td>
 <td class="fmenu" colspan="1" align="left"><input type="text" name="postihnutie" id="postihnutie" size="2"/></td>
@@ -1225,6 +1219,26 @@ $dsqlt = "INSERT INTO F$kli_vxcf"."_treximaprac SELECT".
 "0,".
 "0,0,0,0,0,0,0 ".
 " FROM F$kli_vxcf"."_mzdzalvy".
+" WHERE ume >= $vyb_ump AND ume <= $vyb_umk ".
+"";
+//echo $dsqlt;
+$dsql = mysql_query("$dsqlt");
+
+//cena prace
+$dsqlt = "INSERT INTO F$kli_vxcf"."_treximaprac SELECT".
+" 1,oc,0,0,0,ume,".
+"0,".//konz1;
+"'','','','',0,0,".
+"0,".//konx1;
+"0,0,0,0,0,0,".
+"0,".//konx2;
+"sum_cccp,0,0,0,0,0,0,0,".
+"0,".//konx3;
+"0,0,0,0,0,0,0,".
+"0,0,0,0,".//konx4;
+"0,".
+"0,0,0,0,0,0,0 ".
+" FROM F$kli_vxcf"."_mzdzalsum ".
 " WHERE ume >= $vyb_ump AND ume <= $vyb_umk ".
 "";
 //echo $dsqlt;
