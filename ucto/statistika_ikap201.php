@@ -1,5 +1,5 @@
 <!doctype html>
-<HTML>
+<html>
 <?php
 //celkovy zaciatok dokumentu Stat IKaP201 rok 2016
 do
@@ -18,16 +18,8 @@ if (!isset($kli_vxcf)) $kli_vxcf = 1;
   endif;
   mysql_select_db($mysqldb);
 
-//ramcek fpdf 1=zap,0=vyp
-$rmc=0;
-$rmc1=0;
-
 $citfir = include("../cis/citaj_fir.php");
 $citnas = include("../cis/citaj_nas.php");
-
-//.jpg podklad
-$jpg_cesta="../dokumenty/statistika2016/roc_ikap201/roc_ikap201_v16";
-$jpg_popis="tlaËivo RoËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch v inform·ci·ch, komunik·cii a v poöt·ch RoË IKaP 2-01 ".$kli_vrok;
 
 //datumove funkcie
 $sDat = include("../funkcie/dat_sk_us.php");
@@ -38,7 +30,6 @@ $kli_vrok=$pole[1];
 $mesiac=$kli_vmes;
 $vyb_ump="1.".$kli_vrok; $vyb_umk=$kli_vmes.".".$kli_vrok;
 
-
 //cislo operacie
 $copern = 1*strip_tags($_REQUEST['copern']);
 $modul = 1*$_REQUEST['modul'];
@@ -47,8 +38,11 @@ $modul = 1*$_REQUEST['modul'];
 $strana = 1*$_REQUEST['strana'];
 if ( $strana == 0 AND $copern == 11 ) $strana=9999;
 if ( $strana == 0 ) $strana=1;
-
 if ( $copern == 1 ) { $copern=102; };
+
+//.jpg source
+$jpg_source="../dokumenty/statistika2016/roc_ikap201/roc_ikap201_v16";
+$jpg_title="tlaËivo RoËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch v inform·ci·ch, komunik·cii a v poöt·ch RoË IKaP 2-01 pre rok $kli_vrok $strana.strana";
 
 //vsetky moduly z obratovky
 $citajvsetkymoduly=0;
@@ -1865,8 +1859,8 @@ $m585r05 = strip_tags($_REQUEST['m585r05']);
 $m585r3k = strip_tags($_REQUEST['m585r3k']);
 $m585r4k = strip_tags($_REQUEST['m585r4k']);
 $m585r5k = strip_tags($_REQUEST['m585r5k']);
-$m100044ano = strip_tags($_REQUEST['m100044ano']);
-$m100044nie = strip_tags($_REQUEST['m100044nie']);
+//$m100044ano = strip_tags($_REQUEST['m100044ano']);
+//$m100044nie = strip_tags($_REQUEST['m100044nie']);
 $m571r10 = strip_tags($_REQUEST['m571r10']);
 $m571r12 = strip_tags($_REQUEST['m571r12']);
 $m571r13 = strip_tags($_REQUEST['m571r13']);
@@ -2377,7 +2371,6 @@ if ( $strana == 5 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_ikap201 SET ".
 " m585r01='$m585r01', m585r02='$m585r02', m585r03='$m585r03', m585r04='$m585r04',
   m585r05='$m585r05', m585r3k='$m585r3k', m585r4k='$m585r4k', m585r5k='$m585r5k',
-  m100044ano='$m100044ano', m100044nie='$m100044nie',
   m571r10='$m571r10', m571r12='$m571r12', m571r13='$m571r13', m571r15='$m571r15',
   m571r16='$m571r16', m571r17='$m571r17', m571r18='$m571r18',
   m571r20='$m571r20', m571r22='$m571r22', m571r23='$m571r23', m571r25='$m571r25',
@@ -2707,8 +2700,8 @@ $m585r05 = $fir_riadok->m585r05;
 $m585r3k = $fir_riadok->m585r3k;
 $m585r4k = $fir_riadok->m585r4k;
 $m585r5k = $fir_riadok->m585r5k;
-$m100044ano = $fir_riadok->m100044ano;
-$m100044nie = $fir_riadok->m100044nie;
+//$m100044ano = $fir_riadok->m100044ano;
+//$m100044nie = $fir_riadok->m100044nie;
 $m571r10 = $fir_riadok->m571r10;
 $m571r12 = $fir_riadok->m571r12;
 $m571r13 = $fir_riadok->m571r13;
@@ -3181,12 +3174,14 @@ if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
 //sknace bez bodiek
 $sknace=str_replace(".", "", $fir_sknace);
+//2-miestny rok
+$kli_vrokx = substr($kli_vrok,2,2);
 ?>
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
- <link rel="stylesheet" href="../css/reset.css">
- <link rel="stylesheet" href="../css/tlaciva.css">
-<title>EuroSecom - v˝kaz IKaP 2-01</title>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=cp1250">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/tlaciva.css">
+<title>v˝kaz IKaP 2-01 | EuroSecom</title>
 <style type="text/css">
 img.btn-row-tool {
   width: 20px;
@@ -3202,693 +3197,8 @@ form input[type=text] {
 }
 </style>
 
-<script type="text/javascript">
-<?php
-//uprava
-  if ( $copern == 102 )
-  {
-?>
-  function ObnovUI()
-  {
-<?php if ( $strana == 1 ) { ?>
-   document.formv1.odoslane.value = '<?php echo "$odoslane_sk"; ?>';
-   document.formv1.cinnost.value = '<?php echo "$cinnost"; ?>';
-<?php                     } ?>
-
-<?php if ( $strana == 2 ) { ?>
-   document.formv1.mod2r01.value = '<?php echo "$mod2r01"; ?>';
-   document.formv1.mod2r02.value = '<?php echo "$mod2r02"; ?>';
-<?php if ( $mod100041ano == 1 ) { echo "document.formv1.mod100041ano.checked='checked';"; } ?>
-<?php if ( $mod100041nie == 1 ) { echo "document.formv1.mod100041nie.checked='checked';"; } ?>
-<?php if ( $mod100042ano == 1 ) { echo "document.formv1.mod100042ano.checked='checked';"; } ?>
-<?php if ( $mod100042nie == 1 ) { echo "document.formv1.mod100042nie.checked='checked';"; } ?>
-<?php if ( $mod100043ano == 1 ) { echo "document.formv1.mod100043ano.checked='checked';"; } ?>
-<?php if ( $mod100043nie == 1 ) { echo "document.formv1.mod100043nie.checked='checked';"; } ?>
-   document.formv1.mod100038.value = '<?php echo "$mod100038"; ?>';
-   document.formv1.mod100039.value = '<?php echo "$mod100039"; ?>';
-   document.formv1.mod100040.value = '<?php echo "$mod100040"; ?>';
-<?php if ( $mod100036kal == 1 ) { echo "document.formv1.mod100036kal.checked='checked';"; } ?>
-<?php if ( $mod100036hos == 1 ) { echo "document.formv1.mod100036hos.checked='checked';"; } ?>
-   document.formv1.mod100037.value = '<?php echo "$mod100037"; ?>';
-<?php                     } ?>
-
-<?php if ( $strana == 3 ) { ?>
-<?php if ( $mod100069ano == 1 ) { echo "document.formv1.mod100069ano.checked='checked';"; } ?>
-<?php if ( $mod100069nie == 1 ) { echo "document.formv1.mod100069nie.checked='checked';"; } ?>
-<?php if ( $mod100087ano == 1 ) { echo "document.formv1.mod100087ano.checked='checked';"; } ?>
-<?php if ( $mod100087nie == 1 ) { echo "document.formv1.mod100087nie.checked='checked';"; } ?>
-<?php if ( $mod100088ano == 1 ) { echo "document.formv1.mod100088ano.checked='checked';"; } ?>
-<?php if ( $mod100088nie == 1 ) { echo "document.formv1.mod100088nie.checked='checked';"; } ?>
-   document.formv1.mod100089.value = '<?php echo "$mod100089"; ?>';
-   document.formv1.mod100090.value = '<?php echo "$mod100090"; ?>';
-   document.formv1.mod100091.value = '<?php echo "$mod100091"; ?>';
-   document.formv1.m398r01.value = '<?php echo "$m398r01";?>';
-   document.formv1.m398r02.value = '<?php echo "$m398r02";?>';
-<?php                     } ?>
-
-<?php if ( $strana == 4 ) { ?>
-   document.formv1.m405r01.value = '<?php echo "$m405r01";?>';
-   document.formv1.m405r02.value = '<?php echo "$m405r02";?>';
-   document.formv1.m405r03.value = '<?php echo "$m405r03";?>';
-   document.formv1.m405r04.value = '<?php echo "$m405r04";?>';
-   document.formv1.m405r05.value = '<?php echo "$m405r05";?>';
-   document.formv1.m405r06.value = '<?php echo "$m405r06";?>';
-   document.formv1.m558r01.value = '<?php echo "$m558r01";?>';
-   document.formv1.m558r02.value = '<?php echo "$m558r02";?>';
-   document.formv1.m558r03.value = '<?php echo "$m558r03";?>';
-   document.formv1.m558r04.value = '<?php echo "$m558r04";?>';
-   document.formv1.m558r05.value = '<?php echo "$m558r05";?>';
-   document.formv1.m558r06.value = '<?php echo "$m558r06";?>';
-   document.formv1.m558r07.value = '<?php echo "$m558r07";?>';
-   document.formv1.m580r11.value = '<?php echo "$m580r11";?>';
-   document.formv1.m580r12.value = '<?php echo "$m580r12";?>';
-   document.formv1.m580r21.value = '<?php echo "$m580r21";?>';
-   document.formv1.m580r22.value = '<?php echo "$m580r22";?>';
-   document.formv1.m586r11.value = '<?php echo "$m586r11";?>';
-   document.formv1.m586r12.value = '<?php echo "$m586r12";?>';
-   document.formv1.m586r13.value = '<?php echo "$m586r13";?>';
-   document.formv1.m586r14.value = '<?php echo "$m586r14";?>';
-//document.formv1.m586r199.value = '<?php echo "$m586r199";?>';
-   document.formv1.m586r21.value = '<?php echo "$m586r21";?>';
-   document.formv1.m586r22.value = '<?php echo "$m586r22";?>';
-   document.formv1.m586r23.value = '<?php echo "$m586r23";?>';
-   document.formv1.m586r24.value = '<?php echo "$m586r24";?>';
-//document.formv1.m586r299.value = '<?php echo "$m586r299";?>';
-<?php                     } ?>
-
-<?php if ( $strana == 5 ) { ?>
-   document.formv1.m585r01.value = '<?php echo "$m585r01";?>';
-   document.formv1.m585r02.value = '<?php echo "$m585r02";?>';
-   document.formv1.m585r03.value = '<?php echo "$m585r03";?>';
-   document.formv1.m585r04.value = '<?php echo "$m585r04";?>';
-   document.formv1.m585r05.value = '<?php echo "$m585r05";?>';
-   document.formv1.m585r3k.value = '<?php echo "$m585r3k";?>';
-   document.formv1.m585r4k.value = '<?php echo "$m585r4k";?>';
-   document.formv1.m585r5k.value = '<?php echo "$m585r5k";?>';
-<?php if ( $m100044ano == 1 ) { echo "document.formv1.m100044ano.checked='checked';"; } ?>
-<?php if ( $m100044nie == 1 ) { echo "document.formv1.m100044nie.checked='checked';"; } ?>
-   document.formv1.m571r10.value = '<?php echo "$m571r10";?>';
-   document.formv1.m571r12.value = '<?php echo "$m571r12";?>';
-   document.formv1.m571r13.value = '<?php echo "$m571r13";?>';
-   //document.formv1.m571r14.value = '<?php echo "$m571r14";?>';
-   document.formv1.m571r15.value = '<?php echo "$m571r15";?>';
-   document.formv1.m571r16.value = '<?php echo "$m571r16";?>';
-   document.formv1.m571r17.value = '<?php echo "$m571r17";?>';
-   document.formv1.m571r18.value = '<?php echo "$m571r18";?>';
-   document.formv1.m571r20.value = '<?php echo "$m571r20";?>';
-   document.formv1.m571r22.value = '<?php echo "$m571r22";?>';
-   document.formv1.m571r23.value = '<?php echo "$m571r23";?>';
-   //document.formv1.m571r24.value = '<?php echo "$m571r24";?>';
-   document.formv1.m571r25.value = '<?php echo "$m571r25";?>';
-   document.formv1.m571r26.value = '<?php echo "$m571r26";?>';
-   document.formv1.m571r27.value = '<?php echo "$m571r27";?>';
-   document.formv1.m571r28.value = '<?php echo "$m571r28";?>';
-   document.formv1.m571r30.value = '<?php echo "$m571r30";?>';
-   document.formv1.m571r32.value = '<?php echo "$m571r32";?>';
-   document.formv1.m571r33.value = '<?php echo "$m571r33";?>';
-   //document.formv1.m571r34.value = '<?php echo "$m571r34";?>';
-   document.formv1.m571r35.value = '<?php echo "$m571r35";?>';
-   document.formv1.m571r36.value = '<?php echo "$m571r36";?>';
-   document.formv1.m571r37.value = '<?php echo "$m571r37";?>';
-   document.formv1.m571r38.value = '<?php echo "$m571r38";?>';
-   document.formv1.m571r40.value = '<?php echo "$m571r40";?>';
-   document.formv1.m571r42.value = '<?php echo "$m571r42";?>';
-   document.formv1.m571r43.value = '<?php echo "$m571r43";?>';
-   //document.formv1.m571r44.value = '<?php echo "$m571r44";?>';
-   document.formv1.m571r45.value = '<?php echo "$m571r45";?>';
-   document.formv1.m571r46.value = '<?php echo "$m571r46";?>';
-   document.formv1.m571r47.value = '<?php echo "$m571r47";?>';
-   document.formv1.m571r48.value = '<?php echo "$m571r48";?>';
-   document.formv1.m571r50.value = '<?php echo "$m571r50";?>';
-   document.formv1.m571r52.value = '<?php echo "$m571r52";?>';
-   document.formv1.m571r53.value = '<?php echo "$m571r53";?>';
-   //document.formv1.m571r54.value = '<?php echo "$m571r54";?>';
-   document.formv1.m571r55.value = '<?php echo "$m571r55";?>';
-   document.formv1.m571r56.value = '<?php echo "$m571r56";?>';
-   document.formv1.m571r57.value = '<?php echo "$m571r57";?>';
-   document.formv1.m571r58.value = '<?php echo "$m571r58";?>';
-   document.formv1.m571r60.value = '<?php echo "$m571r60";?>';
-   document.formv1.m571r62.value = '<?php echo "$m571r62";?>';
-   document.formv1.m571r63.value = '<?php echo "$m571r63";?>';
-   //document.formv1.m571r64.value = '<?php echo "$m571r64";?>';
-   document.formv1.m571r65.value = '<?php echo "$m571r65";?>';
-   document.formv1.m571r66.value = '<?php echo "$m571r66";?>';
-   document.formv1.m571r67.value = '<?php echo "$m571r67";?>';
-   document.formv1.m571r68.value = '<?php echo "$m571r68";?>';
-   document.formv1.m571r70.value = '<?php echo "$m571r70";?>';
-   document.formv1.m571r72.value = '<?php echo "$m571r72";?>';
-   document.formv1.m571r73.value = '<?php echo "$m571r73";?>';
-   //document.formv1.m571r74.value = '<?php echo "$m571r74";?>';
-   document.formv1.m571r75.value = '<?php echo "$m571r75";?>';
-   document.formv1.m571r76.value = '<?php echo "$m571r76";?>';
-   document.formv1.m571r77.value = '<?php echo "$m571r77";?>';
-   document.formv1.m571r78.value = '<?php echo "$m571r78";?>';
-   document.formv1.m571r80.value = '<?php echo "$m571r80";?>';
-   document.formv1.m571r82.value = '<?php echo "$m571r82";?>';
-   document.formv1.m571r83.value = '<?php echo "$m571r83";?>';
-   //document.formv1.m571r84.value = '<?php echo "$m571r84";?>';
-   document.formv1.m571r85.value = '<?php echo "$m571r85";?>';
-   document.formv1.m571r86.value = '<?php echo "$m571r86";?>';
-   document.formv1.m571r87.value = '<?php echo "$m571r87";?>';
-   document.formv1.m571r88.value = '<?php echo "$m571r88";?>';
-   document.formv1.m571r90.value = '<?php echo "$m571r90";?>';
-   document.formv1.m571r92.value = '<?php echo "$m571r92";?>';
-   document.formv1.m571r93.value = '<?php echo "$m571r93";?>';
-   //document.formv1.m571r94.value = '<?php echo "$m571r94";?>';
-   document.formv1.m571r95.value = '<?php echo "$m571r95";?>';
-   document.formv1.m571r96.value = '<?php echo "$m571r96";?>';
-   document.formv1.m571r97.value = '<?php echo "$m571r97";?>';
-   document.formv1.m571r98.value = '<?php echo "$m571r98";?>';
-<?php                     } ?>
-
-<?php if (  $strana == 6 ) { ?>
-   document.formv1.m516r101.value = '<?php echo "$m516r101";?>';
-   document.formv1.m516r102.value = '<?php echo "$m516r102";?>';
-   document.formv1.m516r103.value = '<?php echo "$m516r103";?>';
-   document.formv1.m516r104.value = '<?php echo "$m516r104";?>';
-   document.formv1.m516r105.value = '<?php echo "$m516r105";?>';
-   document.formv1.m516r106.value = '<?php echo "$m516r106";?>';
-   document.formv1.m516r107.value = '<?php echo "$m516r107";?>';
-   document.formv1.m516r108.value = '<?php echo "$m516r108";?>';
-   document.formv1.m516r109.value = '<?php echo "$m516r109";?>';
-   document.formv1.m516r110.value = '<?php echo "$m516r110";?>';
-   document.formv1.m516r111.value = '<?php echo "$m516r111";?>';
-   document.formv1.m516r112.value = '<?php echo "$m516r112";?>';
-   document.formv1.m516r113.value = '<?php echo "$m516r113";?>';
-   document.formv1.m516r114.value = '<?php echo "$m516r114";?>';
-//document.formv1.m516r199.value = '<?php echo "$m516r199";?>';
-   document.formv1.m516r201.value = '<?php echo "$m516r201";?>';
-   document.formv1.m516r202.value = '<?php echo "$m516r202";?>';
-   document.formv1.m516r203.value = '<?php echo "$m516r203";?>';
-   document.formv1.m516r204.value = '<?php echo "$m516r204";?>';
-   document.formv1.m516r205.value = '<?php echo "$m516r205";?>';
-   document.formv1.m516r206.value = '<?php echo "$m516r206";?>';
-   document.formv1.m516r207.value = '<?php echo "$m516r207";?>';
-   document.formv1.m516r208.value = '<?php echo "$m516r208";?>';
-   document.formv1.m516r209.value = '<?php echo "$m516r209";?>';
-   document.formv1.m516r210.value = '<?php echo "$m516r210";?>';
-   document.formv1.m516r211.value = '<?php echo "$m516r211";?>';
-   document.formv1.m516r212.value = '<?php echo "$m516r212";?>';
-   document.formv1.m516r213.value = '<?php echo "$m516r213";?>';
-   document.formv1.m516r214.value = '<?php echo "$m516r214";?>';
-//document.formv1.m516r299.value = '<?php echo "$m516r299";?>';
-   document.formv1.m513r101.value = '<?php echo "$m513r101";?>';
-   document.formv1.m513r102.value = '<?php echo "$m513r102";?>';
-   document.formv1.m513r103.value = '<?php echo "$m513r103";?>';
-   document.formv1.m513r104.value = '<?php echo "$m513r104";?>';
-   document.formv1.m513r105.value = '<?php echo "$m513r105";?>';
-   document.formv1.m513r106.value = '<?php echo "$m513r106";?>';
-   document.formv1.m513r107.value = '<?php echo "$m513r107";?>';
-   document.formv1.m513r108.value = '<?php echo "$m513r108";?>';
-   document.formv1.m513r109.value = '<?php echo "$m513r109";?>';
-   document.formv1.m513r110.value = '<?php echo "$m513r110";?>';
-//document.formv1.m513r199.value = '<?php echo "$m513r199";?>';
-   document.formv1.m513r201.value = '<?php echo "$m513r201";?>';
-   document.formv1.m513r202.value = '<?php echo "$m513r202";?>';
-   document.formv1.m513r203.value = '<?php echo "$m513r203";?>';
-   document.formv1.m513r204.value = '<?php echo "$m513r204";?>';
-   document.formv1.m513r205.value = '<?php echo "$m513r205";?>';
-   document.formv1.m513r206.value = '<?php echo "$m513r206";?>';
-   document.formv1.m513r207.value = '<?php echo "$m513r207";?>';
-   document.formv1.m513r208.value = '<?php echo "$m513r208";?>';
-   document.formv1.m513r209.value = '<?php echo "$m513r209";?>';
-//document.formv1.m513r299.value = '<?php echo "$m513r299";?>';
-   document.formv1.m513r301.value = '<?php echo "$m513r301";?>';
-   document.formv1.m513r302.value = '<?php echo "$m513r302";?>';
-   document.formv1.m513r303.value = '<?php echo "$m513r303";?>';
-   document.formv1.m513r304.value = '<?php echo "$m513r304";?>';
-   document.formv1.m513r305.value = '<?php echo "$m513r305";?>';
-   document.formv1.m513r306.value = '<?php echo "$m513r306";?>';
-   document.formv1.m513r307.value = '<?php echo "$m513r307";?>';
-   document.formv1.m513r308.value = '<?php echo "$m513r308";?>';
-   document.formv1.m513r309.value = '<?php echo "$m513r309";?>';
-   document.formv1.m513r310.value = '<?php echo "$m513r310";?>';
-//document.formv1.m513r399.value = '<?php echo "$m513r399";?>';
-   document.formv1.m513r401.value = '<?php echo "$m513r401";?>';
-   document.formv1.m513r402.value = '<?php echo "$m513r402";?>';
-   document.formv1.m513r403.value = '<?php echo "$m513r403";?>';
-   document.formv1.m513r404.value = '<?php echo "$m513r404";?>';
-   document.formv1.m513r405.value = '<?php echo "$m513r405";?>';
-   document.formv1.m513r406.value = '<?php echo "$m513r406";?>';
-   document.formv1.m513r407.value = '<?php echo "$m513r407";?>';
-   document.formv1.m513r408.value = '<?php echo "$m513r408";?>';
-   document.formv1.m513r409.value = '<?php echo "$m513r409";?>';
-   document.formv1.m513r410.value = '<?php echo "$m513r410";?>';
-//document.formv1.m513r499.value = '<?php echo "$m513r499";?>';
-   document.formv1.m513r501.value = '<?php echo "$m513r501";?>';
-   document.formv1.m513r502.value = '<?php echo "$m513r502";?>';
-   document.formv1.m513r503.value = '<?php echo "$m513r503";?>';
-   document.formv1.m513r504.value = '<?php echo "$m513r504";?>';
-   document.formv1.m513r505.value = '<?php echo "$m513r505";?>';
-   document.formv1.m513r506.value = '<?php echo "$m513r506";?>';
-   document.formv1.m513r507.value = '<?php echo "$m513r507";?>';
-   document.formv1.m513r508.value = '<?php echo "$m513r508";?>';
-   document.formv1.m513r509.value = '<?php echo "$m513r509";?>';
-   document.formv1.m513r510.value = '<?php echo "$m513r510";?>';
-//document.formv1.m513r599.value = '<?php echo "$m513r599";?>';
-   document.formv1.m513r601.value = '<?php echo "$m513r601";?>';
-   document.formv1.m513r602.value = '<?php echo "$m513r602";?>';
-   document.formv1.m513r603.value = '<?php echo "$m513r603";?>';
-   document.formv1.m513r604.value = '<?php echo "$m513r604";?>';
-   document.formv1.m513r605.value = '<?php echo "$m513r605";?>';
-   document.formv1.m513r606.value = '<?php echo "$m513r606";?>';
-   document.formv1.m513r607.value = '<?php echo "$m513r607";?>';
-   document.formv1.m513r608.value = '<?php echo "$m513r608";?>';
-   document.formv1.m513r609.value = '<?php echo "$m513r609";?>';
-//document.formv1.m513r699.value = '<?php echo "$m513r699";?>';
-   document.formv1.m581r01.value = '<?php echo "$m581r01";?>';
-   document.formv1.m581r02.value = '<?php echo "$m581r02";?>';
-//document.formv1.m581r99.value = '<?php echo "$m581r99";?>';
-<?php                     } ?>
-
-<?php if (  $strana == 7 ) { ?>
-<?php if ( $m100301r1 == 1 ) { echo "document.formv1.m100301r1.checked='checked';"; } ?>
-<?php if ( $m100301r2 == 1 ) { echo "document.formv1.m100301r2.checked='checked';"; } ?>
-<?php if ( $m100303r1 == 1 ) { echo "document.formv1.m100303r1.checked='checked';"; } ?>
-<?php if ( $m100303r2 == 1 ) { echo "document.formv1.m100303r2.checked='checked';"; } ?>
-   document.formv1.m100302.value = '<?php echo "$m100302"; ?>';
-   document.formv1.m100304.value = '<?php echo "$m100304"; ?>';
-   document.formv1.m177r01.value = '<?php echo "$m177r01";?>';
-   document.formv1.m177r02.value = '<?php echo "$m177r02";?>';
-   document.formv1.m177r03.value = '<?php echo "$m177r03";?>';
-   document.formv1.m177r04.value = '<?php echo "$m177r04";?>';
-   document.formv1.m177r05.value = '<?php echo "$m177r05";?>';
-   document.formv1.m177r06.value = '<?php echo "$m177r06";?>';
-   document.formv1.m177r07.value = '<?php echo "$m177r07";?>';
-   document.formv1.m177r08.value = '<?php echo "$m177r08";?>';
-//document.formv1.m177r99.value = '<?php echo "$m177r99";?>';
-   document.formv1.m178r01.value = '<?php echo "$m178r01";?>';
-   document.formv1.m178r02.value = '<?php echo "$m178r02";?>';
-   document.formv1.m178r03.value = '<?php echo "$m178r03";?>';
-   document.formv1.m178r04.value = '<?php echo "$m178r04";?>';
-   document.formv1.m178r05.value = '<?php echo "$m178r05";?>';
-   document.formv1.m178r06.value = '<?php echo "$m178r06";?>';
-   document.formv1.m178r12.value = '<?php echo "$m178r12";?>';
-   document.formv1.m178r13.value = '<?php echo "$m178r13";?>';
-   document.formv1.m178r14.value = '<?php echo "$m178r14";?>';
-   document.formv1.m178r15.value = '<?php echo "$m178r15";?>';
-   document.formv1.m178r16.value = '<?php echo "$m178r16";?>';
-   document.formv1.m178r17.value = '<?php echo "$m178r17";?>';
-   document.formv1.m178r18.value = '<?php echo "$m178r18";?>';
-   document.formv1.m178r19.value = '<?php echo "$m178r19";?>';
-   document.formv1.m178r20.value = '<?php echo "$m178r20";?>';
-   document.formv1.m178r21.value = '<?php echo "$m178r21";?>';
-//document.formv1.m178r99.value = '<?php echo "$m178r99";?>';
-<?php                     } ?>
-
-<?php if ( $strana == 8 ) { ?>
-   document.formv1.m179r01.value = '<?php echo "$m179r01";?>';
-   document.formv1.m179r02.value = '<?php echo "$m179r02";?>';
-   document.formv1.m182r001.value = '<?php echo "$m182r001";?>';
-   document.formv1.m182r002.value = '<?php echo "$m182r002";?>';
-   document.formv1.m182r003.value = '<?php echo "$m182r003";?>';
-   document.formv1.m182r004.value = '<?php echo "$m182r004";?>';
-   document.formv1.m182r005.value = '<?php echo "$m182r005";?>';
-   document.formv1.m182r006.value = '<?php echo "$m182r006";?>';
-   document.formv1.m182r007.value = '<?php echo "$m182r007";?>';
-//document.formv1.m182r099.value = '<?php echo "$m182r099";?>';
-   document.formv1.m182r101.value = '<?php echo "$m182r101";?>';
-   document.formv1.m182r102.value = '<?php echo "$m182r102";?>';
-   document.formv1.m182r103.value = '<?php echo "$m182r103";?>';
-   document.formv1.m182r104.value = '<?php echo "$m182r104";?>';
-   document.formv1.m182r105.value = '<?php echo "$m182r105";?>';
-   document.formv1.m182r106.value = '<?php echo "$m182r106";?>';
-   document.formv1.m182r107.value = '<?php echo "$m182r107";?>';
-//document.formv1.m182r199.value = '<?php echo "$m182r199";?>';
-   document.formv1.m182r201.value = '<?php echo "$m182r201";?>';
-   document.formv1.m182r202.value = '<?php echo "$m182r202";?>';
-   document.formv1.m182r203.value = '<?php echo "$m182r203";?>';
-   document.formv1.m182r204.value = '<?php echo "$m182r204";?>';
-   document.formv1.m182r205.value = '<?php echo "$m182r205";?>';
-   document.formv1.m182r206.value = '<?php echo "$m182r206";?>';
-   document.formv1.m182r207.value = '<?php echo "$m182r207";?>';
-//document.formv1.m182r299.value = '<?php echo "$m182r299";?>';
-   document.formv1.m183r001.value = '<?php echo "$m183r001";?>';
-   document.formv1.m183r002.value = '<?php echo "$m183r002";?>';
-   document.formv1.m183r003.value = '<?php echo "$m183r003";?>';
-   document.formv1.m183r004.value = '<?php echo "$m183r004";?>';
-   document.formv1.m183r005.value = '<?php echo "$m183r005";?>';
-   document.formv1.m183r006.value = '<?php echo "$m183r006";?>';
-   document.formv1.m183r007.value = '<?php echo "$m183r007";?>';
-   document.formv1.m183r008.value = '<?php echo "$m183r008";?>';
-   document.formv1.m183r009.value = '<?php echo "$m183r009";?>';
-   document.formv1.m183r010.value = '<?php echo "$m183r010";?>';
-//document.formv1.m183r099.value = '<?php echo "$m183r099";?>';
-   document.formv1.m183r101.value = '<?php echo "$m183r101";?>';
-   document.formv1.m183r102.value = '<?php echo "$m183r102";?>';
-   document.formv1.m183r103.value = '<?php echo "$m183r103";?>';
-   document.formv1.m183r104.value = '<?php echo "$m183r104";?>';
-   document.formv1.m183r105.value = '<?php echo "$m183r105";?>';
-   document.formv1.m183r106.value = '<?php echo "$m183r106";?>';
-   document.formv1.m183r107.value = '<?php echo "$m183r107";?>';
-   document.formv1.m183r108.value = '<?php echo "$m183r108";?>';
-   document.formv1.m183r109.value = '<?php echo "$m183r109";?>';
-   document.formv1.m183r110.value = '<?php echo "$m183r110";?>';
-//document.formv1.m183r199.value = '<?php echo "$m183r199";?>';
-   document.formv1.m183r201.value = '<?php echo "$m183r201";?>';
-   document.formv1.m183r202.value = '<?php echo "$m183r202";?>';
-   document.formv1.m183r203.value = '<?php echo "$m183r203";?>';
-   document.formv1.m183r204.value = '<?php echo "$m183r204";?>';
-   document.formv1.m183r205.value = '<?php echo "$m183r205";?>';
-   document.formv1.m183r206.value = '<?php echo "$m183r206";?>';
-   document.formv1.m183r207.value = '<?php echo "$m183r207";?>';
-   document.formv1.m183r208.value = '<?php echo "$m183r208";?>';
-   document.formv1.m183r209.value = '<?php echo "$m183r209";?>';
-   document.formv1.m183r210.value = '<?php echo "$m183r210";?>';
-//document.formv1.m183r299.value = '<?php echo "$m183r299";?>';
-<?php                     } ?>
-
-<?php if ( $strana == 9 ) { ?>
-   document.formv1.m184r001.value = '<?php echo "$m184r001";?>';
-   document.formv1.m184r002.value = '<?php echo "$m184r002";?>';
-   document.formv1.m184r003.value = '<?php echo "$m184r003";?>';
-   document.formv1.m184r004.value = '<?php echo "$m184r004";?>';
-   document.formv1.m184r005.value = '<?php echo "$m184r005";?>';
-   document.formv1.m184r006.value = '<?php echo "$m184r006";?>';
-   document.formv1.m184r007.value = '<?php echo "$m184r007";?>';
-   document.formv1.m184r008.value = '<?php echo "$m184r008";?>';
-   document.formv1.m184r009.value = '<?php echo "$m184r009";?>';
-   document.formv1.m184r010.value = '<?php echo "$m184r010";?>';
-//document.formv1.m184r099.value = '<?php echo "$m184r099";?>';
-   document.formv1.m184r101.value = '<?php echo "$m184r101";?>';
-   document.formv1.m184r102.value = '<?php echo "$m184r102";?>';
-   document.formv1.m184r103.value = '<?php echo "$m184r103";?>';
-   document.formv1.m184r104.value = '<?php echo "$m184r104";?>';
-   document.formv1.m184r105.value = '<?php echo "$m184r105";?>';
-   document.formv1.m184r106.value = '<?php echo "$m184r106";?>';
-   document.formv1.m184r107.value = '<?php echo "$m184r107";?>';
-   document.formv1.m184r108.value = '<?php echo "$m184r108";?>';
-   document.formv1.m184r109.value = '<?php echo "$m184r109";?>';
-   document.formv1.m184r110.value = '<?php echo "$m184r110";?>';
-//document.formv1.m184r199.value = '<?php echo "$m184r199";?>';
-   document.formv1.m184r201.value = '<?php echo "$m184r201";?>';
-   document.formv1.m184r202.value = '<?php echo "$m184r202";?>';
-   document.formv1.m184r203.value = '<?php echo "$m184r203";?>';
-   document.formv1.m184r204.value = '<?php echo "$m184r204";?>';
-   document.formv1.m184r205.value = '<?php echo "$m184r205";?>';
-   document.formv1.m184r206.value = '<?php echo "$m184r206";?>';
-   document.formv1.m184r207.value = '<?php echo "$m184r207";?>';
-   document.formv1.m184r208.value = '<?php echo "$m184r208";?>';
-   document.formv1.m184r209.value = '<?php echo "$m184r209";?>';
-   document.formv1.m184r210.value = '<?php echo "$m184r210";?>';
-//document.formv1.m184r299.value = '<?php echo "$m184r299";?>';
-   document.formv1.m184r301.value = '<?php echo "$m184r301";?>';
-   document.formv1.m184r302.value = '<?php echo "$m184r302";?>';
-   document.formv1.m184r303.value = '<?php echo "$m184r303";?>';
-   document.formv1.m184r304.value = '<?php echo "$m184r304";?>';
-   document.formv1.m184r305.value = '<?php echo "$m184r305";?>';
-   document.formv1.m184r306.value = '<?php echo "$m184r306";?>';
-   document.formv1.m184r307.value = '<?php echo "$m184r307";?>';
-   document.formv1.m184r308.value = '<?php echo "$m184r308";?>';
-   document.formv1.m184r309.value = '<?php echo "$m184r309";?>';
-   document.formv1.m184r310.value = '<?php echo "$m184r310";?>';
-//document.formv1.m184r399.value = '<?php echo "$m184r399";?>';
-   document.formv1.m185r001.value = '<?php echo "$m185r001";?>';
-   document.formv1.m185r002.value = '<?php echo "$m185r002";?>';
-   document.formv1.m185r003.value = '<?php echo "$m185r003";?>';
-   document.formv1.m185r004.value = '<?php echo "$m185r004";?>';
-   document.formv1.m185r005.value = '<?php echo "$m185r005";?>';
-   document.formv1.m185r006.value = '<?php echo "$m185r006";?>';
-   document.formv1.m185r007.value = '<?php echo "$m185r007";?>';
-//document.formv1.m185r099.value = '<?php echo "$m185r099";?>';
-   document.formv1.m185r101.value = '<?php echo "$m185r101";?>';
-   document.formv1.m185r102.value = '<?php echo "$m185r102";?>';
-   document.formv1.m185r103.value = '<?php echo "$m185r103";?>';
-   document.formv1.m185r104.value = '<?php echo "$m185r104";?>';
-   document.formv1.m185r105.value = '<?php echo "$m185r105";?>';
-   document.formv1.m185r106.value = '<?php echo "$m185r106";?>';
-   document.formv1.m185r107.value = '<?php echo "$m185r107";?>';
-//document.formv1.m185r199.value = '<?php echo "$m185r199";?>';
-   document.formv1.m185r201.value = '<?php echo "$m185r201";?>';
-   document.formv1.m185r202.value = '<?php echo "$m185r202";?>';
-   document.formv1.m185r203.value = '<?php echo "$m185r203";?>';
-   document.formv1.m185r204.value = '<?php echo "$m185r204";?>';
-   document.formv1.m185r205.value = '<?php echo "$m185r205";?>';
-   document.formv1.m185r206.value = '<?php echo "$m185r206";?>';
-   document.formv1.m185r207.value = '<?php echo "$m185r207";?>';
-//document.formv1.m185r299.value = '<?php echo "$m185r299";?>';
-   document.formv1.m185r301.value = '<?php echo "$m185r301";?>';
-   document.formv1.m185r302.value = '<?php echo "$m185r302";?>';
-   document.formv1.m185r303.value = '<?php echo "$m185r303";?>';
-   document.formv1.m185r304.value = '<?php echo "$m185r304";?>';
-   document.formv1.m185r305.value = '<?php echo "$m185r305";?>';
-   document.formv1.m185r306.value = '<?php echo "$m185r306";?>';
-   document.formv1.m185r307.value = '<?php echo "$m185r307";?>';
-//document.formv1.m185r399.value = '<?php echo "$m185r399";?>';
-<?php                     } ?>
-
-<?php if ( $strana == 10 ) { ?>
-   document.formv1.m186r001.value = '<?php echo "$m186r001";?>';
-   document.formv1.m186r002.value = '<?php echo "$m186r002";?>';
-   document.formv1.m186r003.value = '<?php echo "$m186r003";?>';
-   document.formv1.m186r004.value = '<?php echo "$m186r004";?>';
-   document.formv1.m186r005.value = '<?php echo "$m186r005";?>';
-   document.formv1.m186r006.value = '<?php echo "$m186r006";?>';
-   document.formv1.m186r007.value = '<?php echo "$m186r007";?>';
-//document.formv1.m186r099.value = '<?php echo "$m186r099";?>';
-   document.formv1.m186r101.value = '<?php echo "$m186r101";?>';
-   document.formv1.m186r102.value = '<?php echo "$m186r102";?>';
-   document.formv1.m186r103.value = '<?php echo "$m186r103";?>';
-   document.formv1.m186r104.value = '<?php echo "$m186r104";?>';
-   document.formv1.m186r105.value = '<?php echo "$m186r105";?>';
-   document.formv1.m186r106.value = '<?php echo "$m186r106";?>';
-   document.formv1.m186r107.value = '<?php echo "$m186r107";?>';
-//document.formv1.m186r199.value = '<?php echo "$m186r199";?>';
-   document.formv1.m186r201.value = '<?php echo "$m186r201";?>';
-   document.formv1.m186r202.value = '<?php echo "$m186r202";?>';
-   document.formv1.m186r203.value = '<?php echo "$m186r203";?>';
-   document.formv1.m186r204.value = '<?php echo "$m186r204";?>';
-   document.formv1.m186r205.value = '<?php echo "$m186r205";?>';
-   document.formv1.m186r206.value = '<?php echo "$m186r206";?>';
-   document.formv1.m186r207.value = '<?php echo "$m186r207";?>';
-//document.formv1.m186r299.value = '<?php echo "$m186r299";?>';
-   document.formv1.m186r301.value = '<?php echo "$m186r301";?>';
-   document.formv1.m186r302.value = '<?php echo "$m186r302";?>';
-   document.formv1.m186r303.value = '<?php echo "$m186r303";?>';
-   document.formv1.m186r304.value = '<?php echo "$m186r304";?>';
-   document.formv1.m186r305.value = '<?php echo "$m186r305";?>';
-   document.formv1.m186r306.value = '<?php echo "$m186r306";?>';
-   document.formv1.m186r307.value = '<?php echo "$m186r307";?>';
-//document.formv1.m186r399.value = '<?php echo "$m186r399";?>';
-   document.formv1.m304r01.value = '<?php echo "$m304r01";?>';
-   document.formv1.m304r02.value = '<?php echo "$m304r02";?>';
-   document.formv1.m304r03.value = '<?php echo "$m304r03";?>';
-   document.formv1.m304r04.value = '<?php echo "$m304r04";?>';
-   document.formv1.m304r05.value = '<?php echo "$m304r05";?>';
-   document.formv1.m304r06.value = '<?php echo "$m304r06";?>';
-//document.formv1.m304r99.value = '<?php echo "$m304r99";?>';
-<?php                      } ?>
-
-<?php if ( $strana == 11 ) { ?>
-   document.formv1.m527r101.value = '<?php echo "$m527r101";?>';
-   document.formv1.m527r102.value = '<?php echo "$m527r102";?>';
-   document.formv1.m527r103.value = '<?php echo "$m527r103";?>';
-   document.formv1.m527r104.value = '<?php echo "$m527r104";?>';
-   document.formv1.m527r201.value = '<?php echo "$m527r201";?>';
-   document.formv1.m527r202.value = '<?php echo "$m527r202";?>';
-   document.formv1.m527r203.value = '<?php echo "$m527r203";?>';
-   document.formv1.m527r204.value = '<?php echo "$m527r204";?>';
-   document.formv1.m527r301.value = '<?php echo "$m527r301";?>';
-   document.formv1.m527r302.value = '<?php echo "$m527r302";?>';
-   document.formv1.m527r303.value = '<?php echo "$m527r303";?>';
-   document.formv1.m527r304.value = '<?php echo "$m527r304";?>';
-   document.formv1.m527r401.value = '<?php echo "$m527r401";?>';
-   document.formv1.m527r402.value = '<?php echo "$m527r402";?>';
-   document.formv1.m527r403.value = '<?php echo "$m527r403";?>';
-   document.formv1.m527r404.value = '<?php echo "$m527r404";?>';
-   document.formv1.m527r501.value = '<?php echo "$m527r501";?>';
-   document.formv1.m527r502.value = '<?php echo "$m527r502";?>';
-   document.formv1.m527r503.value = '<?php echo "$m527r503";?>';
-   document.formv1.m527r504.value = '<?php echo "$m527r504";?>';
-   document.formv1.m527r601.value = '<?php echo "$m527r601";?>';
-   document.formv1.m527r602.value = '<?php echo "$m527r602";?>';
-   document.formv1.m527r603.value = '<?php echo "$m527r603";?>';
-   document.formv1.m527r604.value = '<?php echo "$m527r604";?>';
-   document.formv1.m527r701.value = '<?php echo "$m527r701";?>';
-   document.formv1.m527r702.value = '<?php echo "$m527r702";?>';
-   document.formv1.m527r703.value = '<?php echo "$m527r703";?>';
-   document.formv1.m527r704.value = '<?php echo "$m527r704";?>';
-   document.formv1.m527r801.value = '<?php echo "$m527r801";?>';
-   document.formv1.m527r802.value = '<?php echo "$m527r802";?>';
-   document.formv1.m527r803.value = '<?php echo "$m527r803";?>';
-   document.formv1.m527r804.value = '<?php echo "$m527r804";?>';
-   document.formv1.m527r901.value = '<?php echo "$m527r901";?>';
-   document.formv1.m527r902.value = '<?php echo "$m527r902";?>';
-   document.formv1.m527r903.value = '<?php echo "$m527r903";?>';
-   document.formv1.m527r904.value = '<?php echo "$m527r904";?>';
-   document.formv1.m527r1001.value = '<?php echo "$m527r1001";?>';
-   document.formv1.m527r1002.value = '<?php echo "$m527r1002";?>';
-   document.formv1.m527r1003.value = '<?php echo "$m527r1003";?>';
-   document.formv1.m527r1004.value = '<?php echo "$m527r1004";?>';
-<?php                      } ?>
-
-<?php if ( $strana == 12 ) { ?>
-   document.formv1.m474r101.value = '<?php echo "$m474r101";?>';
-   document.formv1.m474r102.value = '<?php echo "$m474r102";?>';
-   document.formv1.m474r103.value = '<?php echo "$m474r103";?>';
-   document.formv1.m474r104.value = '<?php echo "$m474r104";?>';
-   document.formv1.m474r105.value = '<?php echo "$m474r105";?>';
-   document.formv1.m474r106.value = '<?php echo "$m474r106";?>';
-//document.formv1.m474r199.value = '<?php echo "$m474r199";?>';
-   document.formv1.m474r201.value = '<?php echo "$m474r201";?>';
-   document.formv1.m474r202.value = '<?php echo "$m474r202";?>';
-   document.formv1.m474r203.value = '<?php echo "$m474r203";?>';
-   document.formv1.m474r204.value = '<?php echo "$m474r204";?>';
-   document.formv1.m474r205.value = '<?php echo "$m474r205";?>';
-   document.formv1.m474r206.value = '<?php echo "$m474r206";?>';
-   document.formv1.m474r207.value = '<?php echo "$m474r207";?>';
-//document.formv1.m474r299.value = '<?php echo "$m474r299";?>';
-   document.formv1.m474r301.value = '<?php echo "$m474r301";?>';
-   document.formv1.m474r302.value = '<?php echo "$m474r302";?>';
-   document.formv1.m474r303.value = '<?php echo "$m474r303";?>';
-   document.formv1.m474r304.value = '<?php echo "$m474r304";?>';
-   document.formv1.m474r305.value = '<?php echo "$m474r305";?>';
-   document.formv1.m474r306.value = '<?php echo "$m474r306";?>';
-   document.formv1.m474r307.value = '<?php echo "$m474r307";?>';
-//document.formv1.m474r399.value = '<?php echo "$m474r399";?>';
-<?php                      } ?>
-  }
-<?php
-//koniec uprava
-  }
-?>
-
-//Z ciarky na bodku
-  function CiarkaNaBodku(Vstup)
-  {
-   if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
-  }
-
-  function CisCPAp2()
-  {
-   window.open('../dokumenty/statistika2016/cpa_ciselnik_pril2_v16.pdf',
-'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
-  }
-  function CisCPAp1()
-  {
-   window.open('../dokumenty/statistika2016/cpa_ciselnik_pril1_v16.pdf',
-'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
-  }
-  function MetodVypln()
-  {
-   window.open('<?php echo $jpg_cesta; ?>_metodika.pdf',
-'_blank', 'width=980, height=900, top=0, left=20, status=yes, resizable=yes, scrollbars=yes, menubar=yes, toolbar=yes');
-  }
-  function TlacVykaz()
-  {
-   window.open('../ucto/statistika_ikap201.php?copern=11&strana=9999', '_blank');
-  }
-  function StatUdajeFirma()
-  {
-   window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0',
-'_blank', 'width=1080, height=900, top=0, left=30, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function NacitajMzdy()
-  {
-   window.open('../ucto/statistika_ikap201.php?copern=200&drupoh=1&page=1', '_self');
-  }
-  function NacitajModuly()
-  {
-   window.open('../ucto/uobrat.php?modul=9200&copern=200&drupoh=1&page=1&typ=PDF&cstat=60201&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
-  }
-  function NacitajZobratovky(modul)
-  {
-   window.open('../ucto/uobrat.php?modul=' + modul + '&copern=200&drupoh=1&page=1&typ=PDF&cstat=60201&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
-  }
-
-//bud alebo checkbox v module 100041
-  function klikm100041ano()
-  {
-   document.formv1.mod100041nie.checked = false;
-  }
-  function klikm100041nie()
-  {
-   document.formv1.mod100041ano.checked = false;
-  }
-//bud alebo checkbox v module 100042
-  function klikm100042ano()
-  {
-   document.formv1.mod100042nie.checked = false;
-  }
-  function klikm100042nie()
-  {
-   document.formv1.mod100042ano.checked = false;
-  }
-//bud alebo checkbox v module 100043
-  function klikm100043ano()
-  {
-   document.formv1.mod100043nie.checked = false;
-  }
-  function klikm100043nie()
-  {
-   document.formv1.mod100043ano.checked = false;
-  }
-//bud alebo checkbox v module 100036
-  function klikm100036kal()
-  {
-   document.formv1.mod100036hos.checked = false;
-  }
-  function klikm100036hos()
-  {
-   document.formv1.mod100036kal.checked = false;
-  }
-//bud alebo checkbox v module 100069
-  function klikm100069ano()
-  {
-   document.formv1.mod100069nie.checked = false;
-  }
-  function klikm100069nie()
-  {
-   document.formv1.mod100069ano.checked = false;
-  }
-//bud alebo checkbox v module 100087
-  function klikm100087ano()
-  {
-   document.formv1.mod100087nie.checked = false;
-  }
-  function klikm100087nie()
-  {
-   document.formv1.mod100087ano.checked = false;
-  }
-//bud alebo checkbox v module 100088
-  function klikm100088ano()
-  {
-   document.formv1.mod100088nie.checked = false;
-  }
-  function klikm100088nie()
-  {
-   document.formv1.mod100088ano.checked = false;
-  }
-//bud alebo checkbox v module 100044
-  function klikm100044ano()
-  {
-   document.formv1.m100044nie.checked = false;
-  }
-  function klikm100044nie()
-  {
-   document.formv1.m100044ano.checked = false;
-  }
-//bud alebo checkbox v module 100301
-  function klikm100301ano()
-  {
-   document.formv1.m100301r2.checked = false;
-  }
-  function klikm100301nie()
-  {
-   document.formv1.m100301r1.checked = false;
-  }
-//bud alebo checkbox v module 100303
-  function klikm100303ano()
-  {
-   document.formv1.m100303r2.checked = false;
-  }
-  function klikm100303nie()
-  {
-   document.formv1.m100303r1.checked = false;
-  }
-</script>
-</HEAD>
-<BODY onload="ObnovUI();">
+</head>
+<body onload="ObnovUI();">
 <?php
 //uprav udaje
 if ( $copern == 102 )
@@ -3904,75 +3214,69 @@ if ( $copern == 102 )
   <td class="header">RoËn˝ v˝kaz produkËn˝ch odvetvÌ v mal˝ch podnikoch v info, komunik·cii...</td>
   <td>
    <div class="bar-btn-form-tool">
-    <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisCPAp2();"
-     title="»ÌselnÌk CPA - prÌloha Ë. 2" class="btn-form-tool">
-    <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisCPAp1();"
-     title="»ÌselnÌk CPA - prÌloha Ë. 1" class="btn-form-tool">
-    <img src="../obr/ikony/info_blue_icon.png" onclick="MetodVypln();"
-     title="MetodickÈ vysvetlivky k obsahu v˝kazu" class="btn-form-tool">
+    <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisCPAp2();" title="»ÌselnÌk CPA - prÌloha Ë. 2" class="btn-form-tool">
+    <img src="../obr/ikony/infocloud_blue_icon.png" onclick="CisCPAp1();" title="»ÌselnÌk CPA - prÌloha Ë. 1" class="btn-form-tool">
+    <img src="../obr/ikony/info_blue_icon.png" onclick="FormMetod();" title="MetodickÈ vysvetlivky k obsahu v˝kazu" class="btn-form-tool">
     <img src="../obr/ikony/download_blue_icon.png" onclick="NacitajModuly();" title="NaËÌtaù ˙daje do vöetk˝ch modulov" class="btn-form-tool">
-    <img src="../obr/ikony/printer_blue_icon.png" onclick="TlacVykaz();" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
+    <img src="../obr/ikony/printer_blue_icon.png" onclick="FormPDF(9999);" title="Zobraziù vöetky strany v PDF" class="btn-form-tool">
    </div>
   </td>
  </tr>
  </table>
 </div>
-
 <?php
 $sirka=950;
 $vyska=1300;
 if ( $strana == 11 ) { $sirka=1250; $vyska=800; }
 ?>
 <div id="content" style="width:<?php echo $sirka; ?>px; height:<?php echo $vyska; ?>px;">
-<FORM name="formv1" method="post" action="statistika_ikap201.php?copern=103&strana=<?php echo $strana; ?>">
+<form name="formv1" method="post" action="statistika_ikap201.php?copern=103&strana=<?php echo $strana; ?>">
 <?php
 $clas1="noactive"; $clas2="noactive"; $clas3="noactive"; $clas4="noactive";
 $clas5="noactive"; $clas6="noactive"; $clas7="noactive"; $clas8="noactive";
 $clas9="noactive"; $clas10="noactive"; $clas11="noactive"; $clas12="noactive";
-$clas13="noactive";
 if ( $strana == 1 ) $clas1="active"; if ( $strana == 2 ) $clas2="active";
 if ( $strana == 3 ) $clas3="active"; if ( $strana == 4 ) $clas4="active";
 if ( $strana == 5 ) $clas5="active"; if ( $strana == 6 ) $clas6="active";
 if ( $strana == 7 ) $clas7="active"; if ( $strana == 8 ) $clas8="active";
 if ( $strana == 9 ) $clas9="active"; if ( $strana == 10 ) $clas10="active";
 if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
-if ( $strana == 13 ) $clas13="active";
-$source="statistika_ikap201.php?";
 ?>
 <div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=7', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=8', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=9', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=11', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=12', '_self');" class="<?php echo $clas12; ?> toleft">12</a>
+  <a href="#" onclick="editForm(1);" class="<?php echo $clas1; ?> toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
+  <a href="#" onclick="editForm(3);" class="<?php echo $clas3; ?> toleft">3</a>
+  <a href="#" onclick="editForm(4);" class="<?php echo $clas4; ?> toleft">4</a>
+  <a href="#" onclick="editForm(5);" class="<?php echo $clas5; ?> toleft">5</a>
+  <a href="#" onclick="editForm(6);" class="<?php echo $clas6; ?> toleft">6</a>
+  <a href="#" onclick="editForm(7);" class="<?php echo $clas7; ?> toleft">7</a>
+  <a href="#" onclick="editForm(8);" class="<?php echo $clas8; ?> toleft">8</a>
+  <a href="#" onclick="editForm(9);" class="<?php echo $clas9; ?> toleft">9</a>
+  <a href="#" onclick="editForm(10);" class="<?php echo $clas10; ?> toleft">10</a>
+  <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
+  <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
 <!-- dopyt, hidden -->
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=12', '_blank');" class="<?php echo $clas12; ?> toright">12</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=11', '_blank');" class="<?php echo $clas11; ?> toright">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=10', '_blank');" class="<?php echo $clas10; ?> toright">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=9', '_blank');" class="<?php echo $clas9; ?> toright">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=8', '_blank');" class="<?php echo $clas8; ?> toright">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=7', '_blank');" class="<?php echo $clas7; ?> toright">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=6', '_blank');" class="<?php echo $clas6; ?> toright">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=5', '_blank');" class="<?php echo $clas5; ?> toright">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=4', '_blank');" class="<?php echo $clas4; ?> toright">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=3', '_blank');" class="<?php echo $clas3; ?> toright">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=2', '_blank');" class="<?php echo $clas2; ?> toright">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=11&strana=1', '_blank');" class="<?php echo $clas1; ?> toright">1</a>
- <h6 class="toright">TlaËiù:</h6>
 
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
+  <a href="#" onclick="FormPDF(12);" class="<?php echo $clas12; ?> toright">12</a>
+  <a href="#" onclick="FormPDF(11);" class="<?php echo $clas11; ?> toright">11</a>
+  <a href="#" onclick="FormPDF(10);" class="<?php echo $clas10; ?> toright">10</a>
+  <a href="#" onclick="FormPDF(9);" class="<?php echo $clas9; ?> toright">9</a>
+  <a href="#" onclick="FormPDF(8);" class="<?php echo $clas8; ?> toright">8</a>
+  <a href="#" onclick="FormPDF(7);" class="<?php echo $clas7; ?> toright">7</a>
+  <a href="#" onclick="FormPDF(6);" class="<?php echo $clas6; ?> toright">6</a>
+  <a href="#" onclick="FormPDF(5);" class="<?php echo $clas5; ?> toright">5</a>
+  <a href="#" onclick="FormPDF(4);" class="<?php echo $clas4; ?> toright">4</a>
+  <a href="#" onclick="FormPDF(3);" class="<?php echo $clas3; ?> toright">3</a>
+  <a href="#" onclick="FormPDF(2);" class="<?php echo $clas2; ?> toright">2</a>
+  <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a>
+  <h6 class="toright">TlaËiù:</h6>
+  <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 </div>
 
 <?php if ( $strana == 1 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str1.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 1.strana 265kB">
-
+<img src="<?php echo $jpg_source; ?>_str1.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
+<span class="text-echo" style="top:277px; left:480px; font-size:24px; letter-spacing:0.02em;"><?php echo $kli_vrok; ?></span>
+<span class="text-echo" style="top:396px; left:332px; font-size:18px; letter-spacing:24px;"><?php echo $kli_vrokx; ?></span>
 <span class="text-echo" style="top:396px; left:467px; font-size:18px; letter-spacing:24px;"><?php echo $fir_ficox; ?></span>
 <!-- ORGANIZACIA -->
 <span class="text-echo" style="top:950px; left:55px;"><?php echo "$fir_fnaz $fir_fuli $fir_fcdm, $fir_fmes, $fir_fpsc"; ?></span>
@@ -3991,7 +3295,7 @@ $source="statistika_ikap201.php?";
 
 
 <?php if ( $strana == 2 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str2.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 2.strana 235kB">
+<img src="<?php echo $jpg_source; ?>_str2.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 2.strana 235kB">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 100315 -->
@@ -4032,11 +3336,45 @@ $sknace=str_replace(".", "", $fir_sknace);
 
 <!-- modul 100037 -->
 <input type="text" name="mod100037" id="mod100037" style="width:253px; top:1204px; left:643px;"/>
+
+<script>
+  function klikm100041ano()
+  {
+    document.formv1.mod100041nie.checked = false;
+  }
+  function klikm100041nie()
+  {
+    document.formv1.mod100041ano.checked = false;
+  }
+  function klikm100042ano()
+  {
+    document.formv1.mod100042nie.checked = false;
+  }
+  function klikm100042nie()
+  {
+    document.formv1.mod100042ano.checked = false;
+  }
+  function klikm100043ano()
+  {
+    document.formv1.mod100043nie.checked = false;
+  }
+  function klikm100043nie()
+  {
+    document.formv1.mod100043ano.checked = false;
+  }
+  function klikm100036kal()
+  {
+    document.formv1.mod100036hos.checked = false;
+  }
+  function klikm100036hos()
+  {
+    document.formv1.mod100036kal.checked = false;
+  }
+</script>
 <?php                                        } ?>
 
-
 <?php if ( $strana == 3 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str3.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 3.strana 235kB">
+<img src="<?php echo $jpg_source; ?>_str3.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 100069 -->
@@ -4064,11 +3402,38 @@ $sknace=str_replace(".", "", $fir_sknace);
 <input type="text" name="m398r01" id="m398r01" style="width:100px; top:1130px; left:680px;"/>
 <input type="text" name="m398r02" id="m398r02" style="width:100px; top:1157px; left:680px;"/>
 <span class="text-echo" style="top:1189px; right:165px;"><?php echo $m398r99; ?></span>
+
+<script>
+  function klikm100069ano()
+  {
+   document.formv1.mod100069nie.checked = false;
+  }
+  function klikm100069nie()
+  {
+   document.formv1.mod100069ano.checked = false;
+  }
+  function klikm100087ano()
+  {
+   document.formv1.mod100087nie.checked = false;
+  }
+  function klikm100087nie()
+  {
+   document.formv1.mod100087ano.checked = false;
+  }
+  function klikm100088ano()
+  {
+   document.formv1.mod100088nie.checked = false;
+  }
+  function klikm100088nie()
+  {
+   document.formv1.mod100088ano.checked = false;
+  }
+</script>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 4 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str4.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 4.strana 279kB">
+<img src="<?php echo $jpg_source; ?>_str4.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 405a -->
@@ -4116,7 +3481,7 @@ $sknace=str_replace(".", "", $fir_sknace);
 
 
 <?php if ( $strana == 5 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str5.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 5.strana 238kB">
+<img src="<?php echo $jpg_source; ?>_str5.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 585 -->
@@ -4129,9 +3494,7 @@ $sknace=str_replace(".", "", $fir_sknace);
 <input type="text" name="m585r5k" id="m585r5k" style="width:110px; top:547px; left:400px;"/>
 <input type="text" name="m585r05" id="m585r05" style="width:100px; top:547px; left:680px;"/>
 
-<!-- modul 100044 -->
-<input type="checkbox" name="m100044ano" value="1" onchange="klikm100044ano();" style="top:684px; left:839px;"/>
-<input type="checkbox" name="m100044nie" value="1" onchange="klikm100044nie();" style="top:705px; left:839px;"/>
+
 
 <!-- modul 571 -->
 <input type="text" name="m571r10" id="m571r10" style="width:78px; top:938px; left:50px;"/>
@@ -4219,7 +3582,7 @@ $sknace=str_replace(".", "", $fir_sknace);
 
 
 <?php if ( $strana == 6 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str6.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 6.strana 271kB">
+<img src="<?php echo $jpg_source; ?>_str6.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 516b -->
@@ -4330,8 +3693,8 @@ $sknace=str_replace(".", "", $fir_sknace);
 
 
 <?php if ( $strana == 7 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str7.jpg" class="form-background"
-     alt="<?php echo $jpg_popis; ?> 7.strana 265kB">
+<img src="<?php echo $jpg_source; ?>_str7.jpg" class="form-background"
+     alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 100301 -->
@@ -4379,11 +3742,29 @@ $sknace=str_replace(".", "", $fir_sknace);
 <input type="text" name="m178r20" id="m178r20" style="width:100px; top:1165px; left:680px;"/>
 <input type="text" name="m178r21" id="m178r21" style="width:100px; top:1188px; left:680px;"/>
 <span class="text-echo" style="top:1215px; right:165px;"><?php echo $m178r99; ?></span>
+<script>
+  function klikm100301ano()
+  {
+   document.formv1.m100301r2.checked = false;
+  }
+  function klikm100301nie()
+  {
+   document.formv1.m100301r1.checked = false;
+  }
+  function klikm100303ano()
+  {
+   document.formv1.m100303r2.checked = false;
+  }
+  function klikm100303nie()
+  {
+   document.formv1.m100303r1.checked = false;
+  }
+</script>
 <?php                                        } ?>
 
 
 <?php if ( $strana == 8 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str8.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 8.strana 245kB">
+<img src="<?php echo $jpg_source; ?>_str8.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 179b -->
@@ -4451,7 +3832,7 @@ $sknace=str_replace(".", "", $fir_sknace);
 
 
 <?php if ( $strana == 9 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str9.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 9.strana 225kB">
+<img src="<?php echo $jpg_source; ?>_str9.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 184a -->
@@ -4533,7 +3914,7 @@ $sknace=str_replace(".", "", $fir_sknace);
 
 
 <?php if ( $strana == 10 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str10.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 10.strana 264kB">
+<img src="<?php echo $jpg_source; ?>_str10.jpg" class="form-background" alt="<?php echo $jpg_title; ?> 10.strana 264kB">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 186a -->
@@ -4581,7 +3962,7 @@ $sknace=str_replace(".", "", $fir_sknace);
 
 
 <?php if ( $strana == 11 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str11.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 11.strana 187kB" style="width:1250px; height:800px;">
+<img src="<?php echo $jpg_source; ?>_str11.jpg" class="form-background" alt="<?php echo $jpg_title; ?>" style="width:1250px; height:800px;">
 <span class="text-echo" style="top:65px; left:810px; font-size:16px; letter-spacing:22.5px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 527a -->
@@ -4629,7 +4010,7 @@ $sknace=str_replace(".", "", $fir_sknace);
 
 
 <?php if ( $strana == 12 OR $strana == 9999 ) { ?>
-<img src="<?php echo $jpg_cesta; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 12.strana 165kB">
+<img src="<?php echo $jpg_source; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
 <!-- modul 474a -->
@@ -4657,33 +4038,30 @@ $sknace=str_replace(".", "", $fir_sknace);
 <span class="text-echo" style="top:489px; right:185px;"><?php echo $m474r299; ?></span>
 <span class="text-echo" style="top:489px; right:58px;"><?php echo $m474r399; ?></span>
 <?php                                         } ?>
-
 <div class="navbar">
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=3', '_self');" class="<?php echo $clas3; ?> toleft">3</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=4', '_self');" class="<?php echo $clas4; ?> toleft">4</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">5</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=6', '_self');" class="<?php echo $clas6; ?> toleft">6</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=7', '_self');" class="<?php echo $clas7; ?> toleft">7</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=8', '_self');" class="<?php echo $clas8; ?> toleft">8</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=9', '_self');" class="<?php echo $clas9; ?> toleft">9</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=10', '_self');" class="<?php echo $clas10; ?> toleft">10</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=11', '_self');" class="<?php echo $clas11; ?> toleft">11</a>
- <a href="#" onclick="window.open('<?php echo $source; ?>&copern=102&strana=12', '_self');" class="<?php echo $clas12; ?> toleft">12</a>
- <INPUT type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
+  <a href="#" onclick="editForm(1);" class="<?php echo $clas1; ?> toleft">1</a>
+  <a href="#" onclick="editForm(2);" class="<?php echo $clas2; ?> toleft">2</a>
+  <a href="#" onclick="editForm(3);" class="<?php echo $clas3; ?> toleft">3</a>
+  <a href="#" onclick="editForm(4);" class="<?php echo $clas4; ?> toleft">4</a>
+  <a href="#" onclick="editForm(5);" class="<?php echo $clas5; ?> toleft">5</a>
+  <a href="#" onclick="editForm(6);" class="<?php echo $clas6; ?> toleft">6</a>
+  <a href="#" onclick="editForm(7);" class="<?php echo $clas7; ?> toleft">7</a>
+  <a href="#" onclick="editForm(8);" class="<?php echo $clas8; ?> toleft">8</a>
+  <a href="#" onclick="editForm(9);" class="<?php echo $clas9; ?> toleft">9</a>
+  <a href="#" onclick="editForm(10);" class="<?php echo $clas10; ?> toleft">10</a>
+  <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
+  <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
+  <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-bottom-formsave">
 </div>
-
-</FORM>
-</div> <!-- koniec #content -->
+</form>
+</div><!-- #content -->
 <?php
      }
 //koniec uprav
 ?>
 
-
 <?php
-/////////////////////////////////////////////////VYTLAC VYKAZ
+//pdf
 if ( $copern == 11 )
 {
 if ( File_Exists("../tmp/statistika.$kli_uzid.pdf") ) { $soubor = unlink("../tmp/statistika.$kli_uzid.pdf"); }
@@ -4696,6 +4074,10 @@ $velkost_strany = explode(",", $sirka_vyska);
 $pdf=new FPDF("P","mm", $velkost_strany );
 $pdf->Open();
 $pdf->AddFont('arial','','arial.php');
+
+//ramcek fpdf 1=zap,0=vyp
+$rmc=0;
+$rmc1=0;
 
 //vytlac
 $sqltt = "SELECT * FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico >= 0 "."";
@@ -4718,12 +4100,23 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str1.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str1.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str1.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str1.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
+//za rok
+$pdf->SetFont('arial','',16);
+$pdf->Cell(190,47," ","$rmc1",1,"L");
+$pdf->Cell(95,6," ","$rmc1",0,"L");$pdf->Cell(16,7,"$kli_vrok","$rmc",1,"C");
+$pdf->SetFont('arial','',12);
+
+//rok
+$A=substr($kli_vrokx,0,1);
+$B=substr($kli_vrokx,1,1);
+$pdf->Cell(190,19," ","$rmc1",1,"L");
+$pdf->Cell(61,6," ","$rmc1",0,"L");$pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
 //ico
 $A=substr($fir_ficox,0,1);
 $B=substr($fir_ficox,1,1);
@@ -4733,12 +4126,11 @@ $E=substr($fir_ficox,4,1);
 $F=substr($fir_ficox,5,1);
 $G=substr($fir_ficox,6,1);
 $H=substr($fir_ficox,7,1);
-$pdf->Cell(190,74," ","$rmc1",1,"L");
-$pdf->Cell(91,7," ","$rmc1",0,"L");
-$pdf->Cell(7,7,"$A","$rmc",0,"C");$pdf->Cell(8,7,"$B","$rmc",0,"C");
-$pdf->Cell(7,7,"$C","$rmc",0,"C");$pdf->Cell(8,7,"$D","$rmc",0,"C");
-$pdf->Cell(7,7,"$E","$rmc",0,"C");$pdf->Cell(8,7,"$F","$rmc",0,"C");
-$pdf->Cell(7,7,"$G","$rmc",0,"C");$pdf->Cell(8,7,"$H","$rmc",1,"C");
+$pdf->Cell(15,7," ","$rmc1",0,"L");
+$pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
+$pdf->Cell(7,8,"$C","$rmc",0,"C");$pdf->Cell(8,8,"$D","$rmc",0,"C");
+$pdf->Cell(7,8,"$E","$rmc",0,"C");$pdf->Cell(8,8,"$F","$rmc",0,"C");
+$pdf->Cell(7,8,"$G","$rmc",0,"C");$pdf->Cell(8,8,"$H","$rmc",1,"C");
 
 //ORGANIZACIA
 $pdf->Cell(190,121," ","$rmc1",1,"L");
@@ -4773,9 +4165,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str2.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str2.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str2.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str2.jpg',0,0,210,297);
 }
 $pdf->SetY(8);
 
@@ -4869,6 +4261,11 @@ $mod100037=$hlavicka->mod100037;
 if ( $hlavicka->mod100037 == 0 ) $mod100037="";
 $pdf->Cell(190,8," ","$rmc1",1,"L");
 $pdf->Cell(132,6," ","$rmc1",0,"L");$pdf->Cell(57,6,"$mod100037","$rmc",1,"C");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"$strana/12","$rmc",1,"R");
                                        }
 
 if ( $strana == 3 OR $strana == 9999 ) {
@@ -4876,9 +4273,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str3.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str3.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str3.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str3.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -4961,9 +4358,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str4.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str4.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str4.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str4.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -5069,9 +4466,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str5.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str5.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str5.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str5.jpg',0,0,210,297);
 }
 $pdf->SetY(8);
 
@@ -5254,9 +4651,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str6.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str6.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str6.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str6.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -5476,9 +4873,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str7.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str7.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str7.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str7.jpg',0,0,210,297);
 }
 $pdf->SetY(9);
 
@@ -5603,9 +5000,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str8.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str8.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str8.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str8.jpg',0,0,210,297);
 }
 $pdf->SetY(9);
 
@@ -5761,9 +5158,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str9.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str9.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str9.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str9.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -5932,9 +5329,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str10.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str10.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str10.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str10.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -6037,9 +5434,9 @@ $pdf->AddPage(L);
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str11.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str11.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str11.jpg',0,0,297,210);
+$pdf->Image($jpg_source.'_str11.jpg',0,0,297,210);
 }
 $pdf->SetY(10);
 
@@ -6132,9 +5529,9 @@ $pdf->AddPage();
 $pdf->SetFont('arial','',12);
 $pdf->SetLeftMargin(10);
 $pdf->SetTopMargin(10);
-if ( File_Exists($jpg_cesta.'_str12.jpg') AND $i == 0 )
+if ( File_Exists($jpg_source.'_str12.jpg') AND $i == 0 )
 {
-$pdf->Image($jpg_cesta.'_str12.jpg',0,0,210,297);
+$pdf->Image($jpg_source.'_str12.jpg',0,0,210,297);
 }
 $pdf->SetY(10);
 
@@ -6206,7 +5603,7 @@ $i = $i + 1;
 $pdf->Output("../tmp/statistika.$kli_uzid.pdf");
 ?>
 <script type="text/javascript">
- var okno = window.open("../tmp/statistika.<?php echo $kli_uzid; ?>.pdf","_self");
+  var okno = window.open("../tmp/statistika.<?php echo $kli_uzid; ?>.pdf","_self");
 </script>
 <?php
 }
@@ -6217,5 +5614,609 @@ $cislista = include("uct_lista_norm.php");
 //celkovy koniec dokumentu
 } while (false);
 ?>
-</BODY>
-</HTML>
+<script type="text/javascript">
+//parameter okna
+var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
+
+<?php
+//uprava
+  if ( $copern == 102 )
+  {
+?>
+  function ObnovUI()
+  {
+<?php if ( $strana == 1 ) { ?>
+   document.formv1.odoslane.value = '<?php echo $odoslane_sk; ?>';
+   document.formv1.cinnost.value = '<?php echo $cinnost; ?>';
+<?php                     } ?>
+
+<?php if ( $strana == 2 ) { ?>
+   document.formv1.mod2r01.value = '<?php echo $mod2r01; ?>';
+   document.formv1.mod2r02.value = '<?php echo $mod2r02; ?>';
+<?php if ( $mod100041ano == 1 ) { echo "document.formv1.mod100041ano.checked='checked';"; } ?>
+<?php if ( $mod100041nie == 1 ) { echo "document.formv1.mod100041nie.checked='checked';"; } ?>
+<?php if ( $mod100042ano == 1 ) { echo "document.formv1.mod100042ano.checked='checked';"; } ?>
+<?php if ( $mod100042nie == 1 ) { echo "document.formv1.mod100042nie.checked='checked';"; } ?>
+<?php if ( $mod100043ano == 1 ) { echo "document.formv1.mod100043ano.checked='checked';"; } ?>
+<?php if ( $mod100043nie == 1 ) { echo "document.formv1.mod100043nie.checked='checked';"; } ?>
+   document.formv1.mod100038.value = '<?php echo $mod100038; ?>';
+   document.formv1.mod100039.value = '<?php echo $mod100039; ?>';
+   document.formv1.mod100040.value = '<?php echo $mod100040; ?>';
+<?php if ( $mod100036kal == 1 ) { echo "document.formv1.mod100036kal.checked='checked';"; } ?>
+<?php if ( $mod100036hos == 1 ) { echo "document.formv1.mod100036hos.checked='checked';"; } ?>
+   document.formv1.mod100037.value = '<?php echo $mod100037; ?>';
+<?php                     } ?>
+
+<?php if ( $strana == 3 ) { ?>
+<?php if ( $mod100069ano == 1 ) { echo "document.formv1.mod100069ano.checked='checked';"; } ?>
+<?php if ( $mod100069nie == 1 ) { echo "document.formv1.mod100069nie.checked='checked';"; } ?>
+<?php if ( $mod100087ano == 1 ) { echo "document.formv1.mod100087ano.checked='checked';"; } ?>
+<?php if ( $mod100087nie == 1 ) { echo "document.formv1.mod100087nie.checked='checked';"; } ?>
+<?php if ( $mod100088ano == 1 ) { echo "document.formv1.mod100088ano.checked='checked';"; } ?>
+<?php if ( $mod100088nie == 1 ) { echo "document.formv1.mod100088nie.checked='checked';"; } ?>
+   document.formv1.mod100089.value = '<?php echo $mod100089; ?>';
+   document.formv1.mod100090.value = '<?php echo $mod100090; ?>';
+   document.formv1.mod100091.value = '<?php echo $mod100091; ?>';
+   document.formv1.m398r01.value = '<?php echo $m398r01; ?>';
+   document.formv1.m398r02.value = '<?php echo $m398r02; ?>';
+<?php                     } ?>
+
+<?php if ( $strana == 4 ) { ?>
+   document.formv1.m405r01.value = '<?php echo $m405r01; ?>';
+   document.formv1.m405r02.value = '<?php echo $m405r02; ?>';
+   document.formv1.m405r03.value = '<?php echo $m405r03; ?>';
+   document.formv1.m405r04.value = '<?php echo $m405r04; ?>';
+   document.formv1.m405r05.value = '<?php echo $m405r05; ?>';
+   document.formv1.m405r06.value = '<?php echo $m405r06; ?>';
+   document.formv1.m558r01.value = '<?php echo $m558r01; ?>';
+   document.formv1.m558r02.value = '<?php echo $m558r02; ?>';
+   document.formv1.m558r03.value = '<?php echo $m558r03; ?>';
+   document.formv1.m558r04.value = '<?php echo $m558r04; ?>';
+   document.formv1.m558r05.value = '<?php echo $m558r05; ?>';
+   document.formv1.m558r06.value = '<?php echo $m558r06; ?>';
+   document.formv1.m558r07.value = '<?php echo $m558r07; ?>';
+   document.formv1.m580r11.value = '<?php echo $m580r11; ?>';
+   document.formv1.m580r12.value = '<?php echo $m580r12; ?>';
+   document.formv1.m580r21.value = '<?php echo $m580r21; ?>';
+   document.formv1.m580r22.value = '<?php echo $m580r22; ?>';
+   document.formv1.m586r11.value = '<?php echo $m586r11; ?>';
+   document.formv1.m586r12.value = '<?php echo $m586r12; ?>';
+   document.formv1.m586r13.value = '<?php echo $m586r13; ?>';
+   document.formv1.m586r14.value = '<?php echo $m586r14; ?>';
+//document.formv1.m586r199.value = '<?php echo "$m586r199";?>';
+   document.formv1.m586r21.value = '<?php echo $m586r21; ?>';
+   document.formv1.m586r22.value = '<?php echo $m586r22; ?>';
+   document.formv1.m586r23.value = '<?php echo $m586r23; ?>';
+   document.formv1.m586r24.value = '<?php echo $m586r24; ?>';
+//document.formv1.m586r299.value = '<?php echo "$m586r299";?>';
+<?php                     } ?>
+
+<?php if ( $strana == 5 ) { ?>
+   document.formv1.m585r01.value = '<?php echo $m585r01; ?>';
+   document.formv1.m585r02.value = '<?php echo $m585r02; ?>';
+   document.formv1.m585r03.value = '<?php echo $m585r03; ?>';
+   document.formv1.m585r04.value = '<?php echo $m585r04; ?>';
+   document.formv1.m585r05.value = '<?php echo $m585r05; ?>';
+   document.formv1.m585r3k.value = '<?php echo $m585r3k; ?>';
+   document.formv1.m585r4k.value = '<?php echo $m585r4k; ?>';
+   document.formv1.m585r5k.value = '<?php echo $m585r5k; ?>';
+<?php if ( $m100044ano == 1 ) { echo "document.formv1.m100044ano.checked='checked';"; } ?>
+<?php if ( $m100044nie == 1 ) { echo "document.formv1.m100044nie.checked='checked';"; } ?>
+   document.formv1.m571r10.value = '<?php echo $m571r10; ?>';
+   document.formv1.m571r12.value = '<?php echo $m571r12; ?>';
+   document.formv1.m571r13.value = '<?php echo $m571r13; ?>';
+   //document.formv1.m571r14.value = '<?php echo "$m571r14";?>';
+   document.formv1.m571r15.value = '<?php echo $m571r15; ?>';
+   document.formv1.m571r16.value = '<?php echo $m571r16; ?>';
+   document.formv1.m571r17.value = '<?php echo $m571r17; ?>';
+   document.formv1.m571r18.value = '<?php echo $m571r18; ?>';
+   document.formv1.m571r20.value = '<?php echo $m571r20; ?>';
+   document.formv1.m571r22.value = '<?php echo $m571r22; ?>';
+   document.formv1.m571r23.value = '<?php echo $m571r23; ?>';
+   //document.formv1.m571r24.value = '<?php echo "$m571r24";?>';
+   document.formv1.m571r25.value = '<?php echo $m571r25; ?>';
+   document.formv1.m571r26.value = '<?php echo $m571r26; ?>';
+   document.formv1.m571r27.value = '<?php echo $m571r27; ?>';
+   document.formv1.m571r28.value = '<?php echo $m571r28; ?>';
+   document.formv1.m571r30.value = '<?php echo $m571r30; ?>';
+   document.formv1.m571r32.value = '<?php echo $m571r32; ?>';
+   document.formv1.m571r33.value = '<?php echo $m571r33; ?>';
+   //document.formv1.m571r34.value = '<?php echo "$m571r34";?>';
+   document.formv1.m571r35.value = '<?php echo $m571r35; ?>';
+   document.formv1.m571r36.value = '<?php echo $m571r36; ?>';
+   document.formv1.m571r37.value = '<?php echo $m571r37; ?>';
+   document.formv1.m571r38.value = '<?php echo $m571r38; ?>';
+   document.formv1.m571r40.value = '<?php echo $m571r40; ?>';
+   document.formv1.m571r42.value = '<?php echo $m571r42; ?>';
+   document.formv1.m571r43.value = '<?php echo $m571r43; ?>';
+   //document.formv1.m571r44.value = '<?php echo "$m571r44";?>';
+   document.formv1.m571r45.value = '<?php echo $m571r45; ?>';
+   document.formv1.m571r46.value = '<?php echo $m571r46; ?>';
+   document.formv1.m571r47.value = '<?php echo $m571r47; ?>';
+   document.formv1.m571r48.value = '<?php echo $m571r48; ?>';
+   document.formv1.m571r50.value = '<?php echo $m571r50; ?>';
+   document.formv1.m571r52.value = '<?php echo $m571r52; ?>';
+   document.formv1.m571r53.value = '<?php echo $m571r53; ?>';
+   //document.formv1.m571r54.value = '<?php echo "$m571r54";?>';
+   document.formv1.m571r55.value = '<?php echo $m571r55; ?>';
+   document.formv1.m571r56.value = '<?php echo $m571r56; ?>';
+   document.formv1.m571r57.value = '<?php echo $m571r57; ?>';
+   document.formv1.m571r58.value = '<?php echo $m571r58; ?>';
+   document.formv1.m571r60.value = '<?php echo $m571r60; ?>';
+   document.formv1.m571r62.value = '<?php echo $m571r62; ?>';
+   document.formv1.m571r63.value = '<?php echo $m571r63; ?>';
+   //document.formv1.m571r64.value = '<?php echo "$m571r64";?>';
+   document.formv1.m571r65.value = '<?php echo $m571r65; ?>';
+   document.formv1.m571r66.value = '<?php echo $m571r66; ?>';
+   document.formv1.m571r67.value = '<?php echo $m571r67; ?>';
+   document.formv1.m571r68.value = '<?php echo $m571r68; ?>';
+   document.formv1.m571r70.value = '<?php echo $m571r70; ?>';
+   document.formv1.m571r72.value = '<?php echo $m571r72; ?>';
+   document.formv1.m571r73.value = '<?php echo $m571r73; ?>';
+   //document.formv1.m571r74.value = '<?php echo "$m571r74";?>';
+   document.formv1.m571r75.value = '<?php echo $m571r75; ?>';
+   document.formv1.m571r76.value = '<?php echo $m571r76; ?>';
+   document.formv1.m571r77.value = '<?php echo $m571r77; ?>';
+   document.formv1.m571r78.value = '<?php echo $m571r78; ?>';
+   document.formv1.m571r80.value = '<?php echo $m571r80; ?>';
+   document.formv1.m571r82.value = '<?php echo $m571r82; ?>';
+   document.formv1.m571r83.value = '<?php echo $m571r83; ?>';
+   //document.formv1.m571r84.value = '<?php echo "$m571r84";?>';
+   document.formv1.m571r85.value = '<?php echo $m571r85; ?>';
+   document.formv1.m571r86.value = '<?php echo $m571r86; ?>';
+   document.formv1.m571r87.value = '<?php echo $m571r87; ?>';
+   document.formv1.m571r88.value = '<?php echo $m571r88; ?>';
+   document.formv1.m571r90.value = '<?php echo $m571r90; ?>';
+   document.formv1.m571r92.value = '<?php echo $m571r92; ?>';
+   document.formv1.m571r93.value = '<?php echo $m571r93; ?>';
+   //document.formv1.m571r94.value = '<?php echo "$m571r94";?>';
+   document.formv1.m571r95.value = '<?php echo $m571r95; ?>';
+   document.formv1.m571r96.value = '<?php echo $m571r96; ?>';
+   document.formv1.m571r97.value = '<?php echo $m571r97; ?>';
+   document.formv1.m571r98.value = '<?php echo $m571r98; ?>';
+<?php                     } ?>
+
+<?php if (  $strana == 6 ) { ?>
+   document.formv1.m516r101.value = '<?php echo $m516r101; ?>';
+   document.formv1.m516r102.value = '<?php echo $m516r102; ?>';
+   document.formv1.m516r103.value = '<?php echo $m516r103; ?>';
+   document.formv1.m516r104.value = '<?php echo $m516r104; ?>';
+   document.formv1.m516r105.value = '<?php echo $m516r105; ?>';
+   document.formv1.m516r106.value = '<?php echo $m516r106; ?>';
+   document.formv1.m516r107.value = '<?php echo $m516r107; ?>';
+   document.formv1.m516r108.value = '<?php echo $m516r108; ?>';
+   document.formv1.m516r109.value = '<?php echo $m516r109; ?>';
+   document.formv1.m516r110.value = '<?php echo $m516r110; ?>';
+   document.formv1.m516r111.value = '<?php echo $m516r111; ?>';
+   document.formv1.m516r112.value = '<?php echo $m516r112; ?>';
+   document.formv1.m516r113.value = '<?php echo $m516r113; ?>';
+   document.formv1.m516r114.value = '<?php echo $m516r114; ?>';
+//document.formv1.m516r199.value = '<?php echo "$m516r199";?>';
+   document.formv1.m516r201.value = '<?php echo $m516r201; ?>';
+   document.formv1.m516r202.value = '<?php echo $m516r202; ?>';
+   document.formv1.m516r203.value = '<?php echo $m516r203; ?>';
+   document.formv1.m516r204.value = '<?php echo $m516r204; ?>';
+   document.formv1.m516r205.value = '<?php echo $m516r205; ?>';
+   document.formv1.m516r206.value = '<?php echo $m516r206; ?>';
+   document.formv1.m516r207.value = '<?php echo $m516r207; ?>';
+   document.formv1.m516r208.value = '<?php echo $m516r208; ?>';
+   document.formv1.m516r209.value = '<?php echo $m516r209; ?>';
+   document.formv1.m516r210.value = '<?php echo $m516r210; ?>';
+   document.formv1.m516r211.value = '<?php echo $m516r211; ?>';
+   document.formv1.m516r212.value = '<?php echo $m516r212; ?>';
+   document.formv1.m516r213.value = '<?php echo $m516r213; ?>';
+   document.formv1.m516r214.value = '<?php echo $m516r214; ?>';
+//document.formv1.m516r299.value = '<?php echo "$m516r299";?>';
+   document.formv1.m513r101.value = '<?php echo $m513r101; ?>';
+   document.formv1.m513r102.value = '<?php echo $m513r102; ?>';
+   document.formv1.m513r103.value = '<?php echo $m513r103; ?>';
+   document.formv1.m513r104.value = '<?php echo $m513r104; ?>';
+   document.formv1.m513r105.value = '<?php echo $m513r105; ?>';
+   document.formv1.m513r106.value = '<?php echo $m513r106; ?>';
+   document.formv1.m513r107.value = '<?php echo $m513r107; ?>';
+   document.formv1.m513r108.value = '<?php echo $m513r108; ?>';
+   document.formv1.m513r109.value = '<?php echo $m513r109; ?>';
+   document.formv1.m513r110.value = '<?php echo $m513r110; ?>';
+//document.formv1.m513r199.value = '<?php echo "$m513r199";?>';
+   document.formv1.m513r201.value = '<?php echo $m513r201; ?>';
+   document.formv1.m513r202.value = '<?php echo $m513r202; ?>';
+   document.formv1.m513r203.value = '<?php echo $m513r203; ?>';
+   document.formv1.m513r204.value = '<?php echo $m513r204; ?>';
+   document.formv1.m513r205.value = '<?php echo $m513r205; ?>';
+   document.formv1.m513r206.value = '<?php echo $m513r206; ?>';
+   document.formv1.m513r207.value = '<?php echo $m513r207; ?>';
+   document.formv1.m513r208.value = '<?php echo $m513r208; ?>';
+   document.formv1.m513r209.value = '<?php echo $m513r209; ?>';
+//document.formv1.m513r299.value = '<?php echo "$m513r299";?>';
+   document.formv1.m513r301.value = '<?php echo $m513r301; ?>';
+   document.formv1.m513r302.value = '<?php echo $m513r302; ?>';
+   document.formv1.m513r303.value = '<?php echo $m513r303; ?>';
+   document.formv1.m513r304.value = '<?php echo $m513r304; ?>';
+   document.formv1.m513r305.value = '<?php echo $m513r305; ?>';
+   document.formv1.m513r306.value = '<?php echo $m513r306; ?>';
+   document.formv1.m513r307.value = '<?php echo $m513r307; ?>';
+   document.formv1.m513r308.value = '<?php echo $m513r308; ?>';
+   document.formv1.m513r309.value = '<?php echo $m513r309; ?>';
+   document.formv1.m513r310.value = '<?php echo $m513r310; ?>';
+//document.formv1.m513r399.value = '<?php echo "$m513r399";?>';
+   document.formv1.m513r401.value = '<?php echo $m513r401; ?>';
+   document.formv1.m513r402.value = '<?php echo $m513r402; ?>';
+   document.formv1.m513r403.value = '<?php echo $m513r403; ?>';
+   document.formv1.m513r404.value = '<?php echo $m513r404; ?>';
+   document.formv1.m513r405.value = '<?php echo $m513r405; ?>';
+   document.formv1.m513r406.value = '<?php echo $m513r406; ?>';
+   document.formv1.m513r407.value = '<?php echo $m513r407; ?>';
+   document.formv1.m513r408.value = '<?php echo $m513r408; ?>';
+   document.formv1.m513r409.value = '<?php echo $m513r409; ?>';
+   document.formv1.m513r410.value = '<?php echo $m513r410; ?>';
+//document.formv1.m513r499.value = '<?php echo "$m513r499";?>';
+   document.formv1.m513r501.value = '<?php echo $m513r501; ?>';
+   document.formv1.m513r502.value = '<?php echo $m513r502; ?>';
+   document.formv1.m513r503.value = '<?php echo $m513r503; ?>';
+   document.formv1.m513r504.value = '<?php echo $m513r504; ?>';
+   document.formv1.m513r505.value = '<?php echo $m513r505; ?>';
+   document.formv1.m513r506.value = '<?php echo $m513r506; ?>';
+   document.formv1.m513r507.value = '<?php echo $m513r507; ?>';
+   document.formv1.m513r508.value = '<?php echo $m513r508; ?>';
+   document.formv1.m513r509.value = '<?php echo $m513r509; ?>';
+   document.formv1.m513r510.value = '<?php echo $m513r510; ?>';
+//document.formv1.m513r599.value = '<?php echo "$m513r599";?>';
+   document.formv1.m513r601.value = '<?php echo $m513r601; ?>';
+   document.formv1.m513r602.value = '<?php echo $m513r602; ?>';
+   document.formv1.m513r603.value = '<?php echo $m513r603; ?>';
+   document.formv1.m513r604.value = '<?php echo $m513r604; ?>';
+   document.formv1.m513r605.value = '<?php echo $m513r605; ?>';
+   document.formv1.m513r606.value = '<?php echo $m513r606; ?>';
+   document.formv1.m513r607.value = '<?php echo $m513r607; ?>';
+   document.formv1.m513r608.value = '<?php echo $m513r608; ?>';
+   document.formv1.m513r609.value = '<?php echo $m513r609; ?>';
+//document.formv1.m513r699.value = '<?php echo "$m513r699";?>';
+   document.formv1.m581r01.value = '<?php echo $m581r01; ?>';
+   document.formv1.m581r02.value = '<?php echo $m581r02; ?>';
+//document.formv1.m581r99.value = '<?php echo "$m581r99";?>';
+<?php                     } ?>
+
+<?php if (  $strana == 7 ) { ?>
+<?php if ( $m100301r1 == 1 ) { echo "document.formv1.m100301r1.checked='checked';"; } ?>
+<?php if ( $m100301r2 == 1 ) { echo "document.formv1.m100301r2.checked='checked';"; } ?>
+<?php if ( $m100303r1 == 1 ) { echo "document.formv1.m100303r1.checked='checked';"; } ?>
+<?php if ( $m100303r2 == 1 ) { echo "document.formv1.m100303r2.checked='checked';"; } ?>
+   document.formv1.m100302.value = '<?php echo $m100302; ?>';
+   document.formv1.m100304.value = '<?php echo $m100304; ?>';
+   document.formv1.m177r01.value = '<?php echo $m177r01; ?>';
+   document.formv1.m177r02.value = '<?php echo $m177r02; ?>';
+   document.formv1.m177r03.value = '<?php echo $m177r03; ?>';
+   document.formv1.m177r04.value = '<?php echo $m177r04; ?>';
+   document.formv1.m177r05.value = '<?php echo $m177r05; ?>';
+   document.formv1.m177r06.value = '<?php echo $m177r06; ?>';
+   document.formv1.m177r07.value = '<?php echo $m177r07; ?>';
+   document.formv1.m177r08.value = '<?php echo $m177r08; ?>';
+//document.formv1.m177r99.value = '<?php echo "$m177r99";?>';
+   document.formv1.m178r01.value = '<?php echo $m178r01; ?>';
+   document.formv1.m178r02.value = '<?php echo $m178r02; ?>';
+   document.formv1.m178r03.value = '<?php echo $m178r03; ?>';
+   document.formv1.m178r04.value = '<?php echo $m178r04; ?>';
+   document.formv1.m178r05.value = '<?php echo $m178r05; ?>';
+   document.formv1.m178r06.value = '<?php echo $m178r06; ?>';
+   document.formv1.m178r12.value = '<?php echo $m178r12; ?>';
+   document.formv1.m178r13.value = '<?php echo $m178r13; ?>';
+   document.formv1.m178r14.value = '<?php echo $m178r14; ?>';
+   document.formv1.m178r15.value = '<?php echo $m178r15; ?>';
+   document.formv1.m178r16.value = '<?php echo $m178r16; ?>';
+   document.formv1.m178r17.value = '<?php echo $m178r17; ?>';
+   document.formv1.m178r18.value = '<?php echo $m178r18; ?>';
+   document.formv1.m178r19.value = '<?php echo $m178r19; ?>';
+   document.formv1.m178r20.value = '<?php echo $m178r20; ?>';
+   document.formv1.m178r21.value = '<?php echo $m178r21; ?>';
+//document.formv1.m178r99.value = '<?php echo "$m178r99";?>';
+<?php                     } ?>
+
+<?php if ( $strana == 8 ) { ?>
+   document.formv1.m179r01.value = '<?php echo $m179r01; ?>';
+   document.formv1.m179r02.value = '<?php echo $m179r02; ?>';
+   document.formv1.m182r001.value = '<?php echo $m182r001; ?>';
+   document.formv1.m182r002.value = '<?php echo $m182r002; ?>';
+   document.formv1.m182r003.value = '<?php echo $m182r003; ?>';
+   document.formv1.m182r004.value = '<?php echo $m182r004; ?>';
+   document.formv1.m182r005.value = '<?php echo $m182r005; ?>';
+   document.formv1.m182r006.value = '<?php echo $m182r006; ?>';
+   document.formv1.m182r007.value = '<?php echo $m182r007; ?>';
+//document.formv1.m182r099.value = '<?php echo "$m182r099";?>';
+   document.formv1.m182r101.value = '<?php echo $m182r101; ?>';
+   document.formv1.m182r102.value = '<?php echo $m182r102; ?>';
+   document.formv1.m182r103.value = '<?php echo $m182r103; ?>';
+   document.formv1.m182r104.value = '<?php echo $m182r104; ?>';
+   document.formv1.m182r105.value = '<?php echo $m182r105; ?>';
+   document.formv1.m182r106.value = '<?php echo $m182r106; ?>';
+   document.formv1.m182r107.value = '<?php echo $m182r107; ?>';
+//document.formv1.m182r199.value = '<?php echo "$m182r199";?>';
+   document.formv1.m182r201.value = '<?php echo $m182r201; ?>';
+   document.formv1.m182r202.value = '<?php echo $m182r202; ?>';
+   document.formv1.m182r203.value = '<?php echo $m182r203; ?>';
+   document.formv1.m182r204.value = '<?php echo $m182r204; ?>';
+   document.formv1.m182r205.value = '<?php echo $m182r205; ?>';
+   document.formv1.m182r206.value = '<?php echo $m182r206; ?>';
+   document.formv1.m182r207.value = '<?php echo $m182r207; ?>';
+//document.formv1.m182r299.value = '<?php echo "$m182r299";?>';
+   document.formv1.m183r001.value = '<?php echo $m183r001; ?>';
+   document.formv1.m183r002.value = '<?php echo $m183r002; ?>';
+   document.formv1.m183r003.value = '<?php echo $m183r003; ?>';
+   document.formv1.m183r004.value = '<?php echo $m183r004; ?>';
+   document.formv1.m183r005.value = '<?php echo $m183r005; ?>';
+   document.formv1.m183r006.value = '<?php echo $m183r006; ?>';
+   document.formv1.m183r007.value = '<?php echo $m183r007; ?>';
+   document.formv1.m183r008.value = '<?php echo $m183r008; ?>';
+   document.formv1.m183r009.value = '<?php echo $m183r009; ?>';
+   document.formv1.m183r010.value = '<?php echo $m183r010; ?>';
+//document.formv1.m183r099.value = '<?php echo "$m183r099";?>';
+   document.formv1.m183r101.value = '<?php echo $m183r101; ?>';
+   document.formv1.m183r102.value = '<?php echo $m183r102; ?>';
+   document.formv1.m183r103.value = '<?php echo $m183r103; ?>';
+   document.formv1.m183r104.value = '<?php echo $m183r104; ?>';
+   document.formv1.m183r105.value = '<?php echo $m183r105; ?>';
+   document.formv1.m183r106.value = '<?php echo $m183r106; ?>';
+   document.formv1.m183r107.value = '<?php echo $m183r107; ?>';
+   document.formv1.m183r108.value = '<?php echo $m183r108; ?>';
+   document.formv1.m183r109.value = '<?php echo $m183r109; ?>';
+   document.formv1.m183r110.value = '<?php echo $m183r110; ?>';
+//document.formv1.m183r199.value = '<?php echo "$m183r199";?>';
+   document.formv1.m183r201.value = '<?php echo $m183r201; ?>';
+   document.formv1.m183r202.value = '<?php echo $m183r202; ?>';
+   document.formv1.m183r203.value = '<?php echo $m183r203; ?>';
+   document.formv1.m183r204.value = '<?php echo $m183r204; ?>';
+   document.formv1.m183r205.value = '<?php echo $m183r205; ?>';
+   document.formv1.m183r206.value = '<?php echo $m183r206; ?>';
+   document.formv1.m183r207.value = '<?php echo $m183r207; ?>';
+   document.formv1.m183r208.value = '<?php echo $m183r208; ?>';
+   document.formv1.m183r209.value = '<?php echo $m183r209; ?>';
+   document.formv1.m183r210.value = '<?php echo $m183r210; ?>';
+//document.formv1.m183r299.value = '<?php echo "$m183r299";?>';
+<?php                     } ?>
+
+<?php if ( $strana == 9 ) { ?>
+   document.formv1.m184r001.value = '<?php echo $m184r001; ?>';
+   document.formv1.m184r002.value = '<?php echo $m184r002; ?>';
+   document.formv1.m184r003.value = '<?php echo $m184r003; ?>';
+   document.formv1.m184r004.value = '<?php echo $m184r004; ?>';
+   document.formv1.m184r005.value = '<?php echo $m184r005; ?>';
+   document.formv1.m184r006.value = '<?php echo $m184r006; ?>';
+   document.formv1.m184r007.value = '<?php echo $m184r007; ?>';
+   document.formv1.m184r008.value = '<?php echo $m184r008; ?>';
+   document.formv1.m184r009.value = '<?php echo $m184r009; ?>';
+   document.formv1.m184r010.value = '<?php echo $m184r010; ?>';
+//document.formv1.m184r099.value = '<?php echo "$m184r099";?>';
+   document.formv1.m184r101.value = '<?php echo $m184r101; ?>';
+   document.formv1.m184r102.value = '<?php echo $m184r102; ?>';
+   document.formv1.m184r103.value = '<?php echo $m184r103; ?>';
+   document.formv1.m184r104.value = '<?php echo $m184r104; ?>';
+   document.formv1.m184r105.value = '<?php echo $m184r105; ?>';
+   document.formv1.m184r106.value = '<?php echo $m184r106; ?>';
+   document.formv1.m184r107.value = '<?php echo $m184r107; ?>';
+   document.formv1.m184r108.value = '<?php echo $m184r108; ?>';
+   document.formv1.m184r109.value = '<?php echo $m184r109; ?>';
+   document.formv1.m184r110.value = '<?php echo $m184r110; ?>';
+//document.formv1.m184r199.value = '<?php echo "$m184r199";?>';
+   document.formv1.m184r201.value = '<?php echo $m184r201; ?>';
+   document.formv1.m184r202.value = '<?php echo $m184r202; ?>';
+   document.formv1.m184r203.value = '<?php echo $m184r203; ?>';
+   document.formv1.m184r204.value = '<?php echo $m184r204; ?>';
+   document.formv1.m184r205.value = '<?php echo $m184r205; ?>';
+   document.formv1.m184r206.value = '<?php echo $m184r206; ?>';
+   document.formv1.m184r207.value = '<?php echo $m184r207; ?>';
+   document.formv1.m184r208.value = '<?php echo $m184r208; ?>';
+   document.formv1.m184r209.value = '<?php echo $m184r209; ?>';
+   document.formv1.m184r210.value = '<?php echo $m184r210; ?>';
+//document.formv1.m184r299.value = '<?php echo "$m184r299";?>';
+   document.formv1.m184r301.value = '<?php echo $m184r301; ?>';
+   document.formv1.m184r302.value = '<?php echo $m184r302; ?>';
+   document.formv1.m184r303.value = '<?php echo $m184r303; ?>';
+   document.formv1.m184r304.value = '<?php echo $m184r304; ?>';
+   document.formv1.m184r305.value = '<?php echo $m184r305; ?>';
+   document.formv1.m184r306.value = '<?php echo $m184r306; ?>';
+   document.formv1.m184r307.value = '<?php echo $m184r307; ?>';
+   document.formv1.m184r308.value = '<?php echo $m184r308; ?>';
+   document.formv1.m184r309.value = '<?php echo $m184r309; ?>';
+   document.formv1.m184r310.value = '<?php echo $m184r310; ?>';
+//document.formv1.m184r399.value = '<?php echo "$m184r399";?>';
+   document.formv1.m185r001.value = '<?php echo $m185r001; ?>';
+   document.formv1.m185r002.value = '<?php echo $m185r002; ?>';
+   document.formv1.m185r003.value = '<?php echo $m185r003; ?>';
+   document.formv1.m185r004.value = '<?php echo $m185r004; ?>';
+   document.formv1.m185r005.value = '<?php echo $m185r005; ?>';
+   document.formv1.m185r006.value = '<?php echo $m185r006; ?>';
+   document.formv1.m185r007.value = '<?php echo $m185r007; ?>';
+//document.formv1.m185r099.value = '<?php echo "$m185r099";?>';
+   document.formv1.m185r101.value = '<?php echo $m185r101; ?>';
+   document.formv1.m185r102.value = '<?php echo $m185r102; ?>';
+   document.formv1.m185r103.value = '<?php echo $m185r103; ?>';
+   document.formv1.m185r104.value = '<?php echo $m185r104; ?>';
+   document.formv1.m185r105.value = '<?php echo $m185r105; ?>';
+   document.formv1.m185r106.value = '<?php echo $m185r106; ?>';
+   document.formv1.m185r107.value = '<?php echo $m185r107; ?>';
+//document.formv1.m185r199.value = '<?php echo "$m185r199";?>';
+   document.formv1.m185r201.value = '<?php echo $m185r201; ?>';
+   document.formv1.m185r202.value = '<?php echo $m185r202; ?>';
+   document.formv1.m185r203.value = '<?php echo $m185r203; ?>';
+   document.formv1.m185r204.value = '<?php echo $m185r204; ?>';
+   document.formv1.m185r205.value = '<?php echo $m185r205; ?>';
+   document.formv1.m185r206.value = '<?php echo $m185r206; ?>';
+   document.formv1.m185r207.value = '<?php echo $m185r207; ?>';
+//document.formv1.m185r299.value = '<?php echo "$m185r299";?>';
+   document.formv1.m185r301.value = '<?php echo $m185r301; ?>';
+   document.formv1.m185r302.value = '<?php echo $m185r302; ?>';
+   document.formv1.m185r303.value = '<?php echo $m185r303; ?>';
+   document.formv1.m185r304.value = '<?php echo $m185r304; ?>';
+   document.formv1.m185r305.value = '<?php echo $m185r305; ?>';
+   document.formv1.m185r306.value = '<?php echo $m185r306; ?>';
+   document.formv1.m185r307.value = '<?php echo $m185r307; ?>';
+//document.formv1.m185r399.value = '<?php echo "$m185r399";?>';
+<?php                     } ?>
+
+<?php if ( $strana == 10 ) { ?>
+   document.formv1.m186r001.value = '<?php echo $m186r001; ?>';
+   document.formv1.m186r002.value = '<?php echo $m186r002; ?>';
+   document.formv1.m186r003.value = '<?php echo $m186r003; ?>';
+   document.formv1.m186r004.value = '<?php echo $m186r004; ?>';
+   document.formv1.m186r005.value = '<?php echo $m186r005; ?>';
+   document.formv1.m186r006.value = '<?php echo $m186r006; ?>';
+   document.formv1.m186r007.value = '<?php echo $m186r007; ?>';
+//document.formv1.m186r099.value = '<?php echo "$m186r099";?>';
+   document.formv1.m186r101.value = '<?php echo $m186r101; ?>';
+   document.formv1.m186r102.value = '<?php echo $m186r102; ?>';
+   document.formv1.m186r103.value = '<?php echo $m186r103; ?>';
+   document.formv1.m186r104.value = '<?php echo $m186r104; ?>';
+   document.formv1.m186r105.value = '<?php echo $m186r105; ?>';
+   document.formv1.m186r106.value = '<?php echo $m186r106; ?>';
+   document.formv1.m186r107.value = '<?php echo $m186r107; ?>';
+//document.formv1.m186r199.value = '<?php echo "$m186r199";?>';
+   document.formv1.m186r201.value = '<?php echo $m186r201; ?>';
+   document.formv1.m186r202.value = '<?php echo $m186r202; ?>';
+   document.formv1.m186r203.value = '<?php echo $m186r203; ?>';
+   document.formv1.m186r204.value = '<?php echo $m186r204; ?>';
+   document.formv1.m186r205.value = '<?php echo $m186r205; ?>';
+   document.formv1.m186r206.value = '<?php echo $m186r206; ?>';
+   document.formv1.m186r207.value = '<?php echo $m186r207; ?>';
+//document.formv1.m186r299.value = '<?php echo "$m186r299";?>';
+   document.formv1.m186r301.value = '<?php echo $m186r301; ?>';
+   document.formv1.m186r302.value = '<?php echo $m186r302; ?>';
+   document.formv1.m186r303.value = '<?php echo $m186r303; ?>';
+   document.formv1.m186r304.value = '<?php echo $m186r304; ?>';
+   document.formv1.m186r305.value = '<?php echo $m186r305; ?>';
+   document.formv1.m186r306.value = '<?php echo $m186r306; ?>';
+   document.formv1.m186r307.value = '<?php echo $m186r307; ?>';
+//document.formv1.m186r399.value = '<?php echo "$m186r399";?>';
+   document.formv1.m304r01.value = '<?php echo $m304r01; ?>';
+   document.formv1.m304r02.value = '<?php echo $m304r02; ?>';
+   document.formv1.m304r03.value = '<?php echo $m304r03; ?>';
+   document.formv1.m304r04.value = '<?php echo $m304r04; ?>';
+   document.formv1.m304r05.value = '<?php echo $m304r05; ?>';
+   document.formv1.m304r06.value = '<?php echo $m304r06; ?>';
+//document.formv1.m304r99.value = '<?php echo "$m304r99";?>';
+<?php                      } ?>
+
+<?php if ( $strana == 11 ) { ?>
+   document.formv1.m527r101.value = '<?php echo $m527r101; ?>';
+   document.formv1.m527r102.value = '<?php echo $m527r102; ?>';
+   document.formv1.m527r103.value = '<?php echo $m527r103; ?>';
+   document.formv1.m527r104.value = '<?php echo $m527r104; ?>';
+   document.formv1.m527r201.value = '<?php echo $m527r201; ?>';
+   document.formv1.m527r202.value = '<?php echo $m527r202; ?>';
+   document.formv1.m527r203.value = '<?php echo $m527r203; ?>';
+   document.formv1.m527r204.value = '<?php echo $m527r204; ?>';
+   document.formv1.m527r301.value = '<?php echo $m527r301; ?>';
+   document.formv1.m527r302.value = '<?php echo $m527r302; ?>';
+   document.formv1.m527r303.value = '<?php echo $m527r303; ?>';
+   document.formv1.m527r304.value = '<?php echo $m527r304; ?>';
+   document.formv1.m527r401.value = '<?php echo $m527r401; ?>';
+   document.formv1.m527r402.value = '<?php echo $m527r402; ?>';
+   document.formv1.m527r403.value = '<?php echo $m527r403; ?>';
+   document.formv1.m527r404.value = '<?php echo $m527r404; ?>';
+   document.formv1.m527r501.value = '<?php echo $m527r501; ?>';
+   document.formv1.m527r502.value = '<?php echo $m527r502; ?>';
+   document.formv1.m527r503.value = '<?php echo $m527r503; ?>';
+   document.formv1.m527r504.value = '<?php echo $m527r504; ?>';
+   document.formv1.m527r601.value = '<?php echo $m527r601; ?>';
+   document.formv1.m527r602.value = '<?php echo $m527r602; ?>';
+   document.formv1.m527r603.value = '<?php echo $m527r603; ?>';
+   document.formv1.m527r604.value = '<?php echo $m527r604; ?>';
+   document.formv1.m527r701.value = '<?php echo $m527r701; ?>';
+   document.formv1.m527r702.value = '<?php echo $m527r702; ?>';
+   document.formv1.m527r703.value = '<?php echo $m527r703; ?>';
+   document.formv1.m527r704.value = '<?php echo $m527r704; ?>';
+   document.formv1.m527r801.value = '<?php echo $m527r801; ?>';
+   document.formv1.m527r802.value = '<?php echo $m527r802; ?>';
+   document.formv1.m527r803.value = '<?php echo $m527r803; ?>';
+   document.formv1.m527r804.value = '<?php echo $m527r804; ?>';
+   document.formv1.m527r901.value = '<?php echo $m527r901; ?>';
+   document.formv1.m527r902.value = '<?php echo $m527r902; ?>';
+   document.formv1.m527r903.value = '<?php echo $m527r903; ?>';
+   document.formv1.m527r904.value = '<?php echo $m527r904; ?>';
+   document.formv1.m527r1001.value = '<?php echo $m527r1001; ?>';
+   document.formv1.m527r1002.value = '<?php echo $m527r1002; ?>';
+   document.formv1.m527r1003.value = '<?php echo $m527r1003; ?>';
+   document.formv1.m527r1004.value = '<?php echo $m527r1004; ?>';
+<?php                      } ?>
+
+<?php if ( $strana == 12 ) { ?>
+   document.formv1.m474r101.value = '<?php echo $m474r101; ?>';
+   document.formv1.m474r102.value = '<?php echo $m474r102; ?>';
+   document.formv1.m474r103.value = '<?php echo $m474r103; ?>';
+   document.formv1.m474r104.value = '<?php echo $m474r104; ?>';
+   document.formv1.m474r105.value = '<?php echo $m474r105; ?>';
+   document.formv1.m474r106.value = '<?php echo $m474r106; ?>';
+//document.formv1.m474r199.value = '<?php echo "$m474r199" ;?>';
+   document.formv1.m474r201.value = '<?php echo $m474r201; ?>';
+   document.formv1.m474r202.value = '<?php echo $m474r202; ?>';
+   document.formv1.m474r203.value = '<?php echo $m474r203; ?>';
+   document.formv1.m474r204.value = '<?php echo $m474r204; ?>';
+   document.formv1.m474r205.value = '<?php echo $m474r205; ?>';
+   document.formv1.m474r206.value = '<?php echo $m474r206; ?>';
+   document.formv1.m474r207.value = '<?php echo $m474r207; ?>';
+//document.formv1.m474r299.value = '<?php echo "$m474r299";?>';
+   document.formv1.m474r301.value = '<?php echo $m474r301; ?>';
+   document.formv1.m474r302.value = '<?php echo $m474r302; ?>';
+   document.formv1.m474r303.value = '<?php echo $m474r303; ?>';
+   document.formv1.m474r304.value = '<?php echo $m474r304; ?>';
+   document.formv1.m474r305.value = '<?php echo $m474r305; ?>';
+   document.formv1.m474r306.value = '<?php echo $m474r306; ?>';
+   document.formv1.m474r307.value = '<?php echo $m474r307; ?>';
+//document.formv1.m474r399.value = '<?php echo "$m474r399";?>';
+<?php                      } ?>
+  }
+<?php
+//koniec uprava
+  }
+?>
+
+//Z ciarky na bodku
+  function CiarkaNaBodku(Vstup)
+  {
+    if ( Vstup.value.search(/[^0-9.-]/g) != -1) { Vstup.value=Vstup.value.replace(",","."); }
+  }
+
+  function CisCPAp2()
+  {
+    window.open('../dokumenty/statistika2016/cpa_ciselnik_pril2_v16.pdf', '_blank', blank_param);
+  }
+  function CisCPAp1()
+  {
+    window.open('../dokumenty/statistika2016/cpa_ciselnik_pril1_v16.pdf', '_blank', blank_param);
+  }
+  function FormMetod()
+  {
+<?php if ( $kli_vrok == 2016 ) { ?>
+    window.open('<?php echo $jpg_source; ?>_metodika.pdf', '_blank', blank_param);
+<?php } ?>
+<?php if ( $kli_vrok > 2016 ) { ?>
+    window.open('../dokumenty/statistika2017/roc_ikap201/roc_ikap201_v17_metodika.pdf');
+<?php } ?>
+  }
+
+  function editForm(strana)
+  {
+    window.open('statistika_ikap201.php?copern=102&strana=' + strana + '', '_self');
+  }
+  function FormPDF(strana)
+  {
+    window.open('statistika_ikap201.php?copern=11&strana=' + strana + '', '_blank', blank_param);
+  }
+  function StatUdajeFirma()
+  {
+   window.open('../mzdy/trexima.php?cislo_oc=1&copern=1&drupoh=1&fmzdy=<?php echo $kli_vxcf; ?>&page=1&subor=0',
+'_blank', blank_param);
+  }
+  function NacitajMzdy()
+  {
+   window.open('../ucto/statistika_ikap201.php?copern=200&drupoh=1&page=1', '_self');
+  }
+  function NacitajModuly()
+  {
+   window.open('../ucto/uobrat.php?modul=9200&copern=200&drupoh=1&page=1&typ=PDF&cstat=60201&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
+  }
+  function NacitajZobratovky(modul)
+  {
+   window.open('../ucto/uobrat.php?modul=' + modul + '&copern=200&drupoh=1&page=1&typ=PDF&cstat=60201&vyb_ume=<?php echo "12.".$kli_vrok; ?>', '_self');
+  }
+</script>
+</body>
+</html>
