@@ -552,15 +552,19 @@ if ( $kli_vrok >= 2013 ) { $poznuj="po2013nuj"; }
   }
 
 //OZNAMENIE UPRAVY ZAKLADU DANE
+<?php
+$rokuprzd="";
+if ( $kli_vrok >= 2017 ) { $rokuprzd=2017; }
+?>
   function TlacOzn176()
   {
-   window.open('../ucto/oznamenie_uprzd.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+   window.open('../ucto/oznamenie_uprzd<?php echo $rokuprzd; ?>.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
   function UpravOzn176()
   {
    var h_oc = 0;
-   window.open('../ucto/oznamenie_uprzd.php?copern=20&drupoh=1&page=1&strana=5',
+   window.open('../ucto/oznamenie_uprzd<?php echo $rokuprzd; ?>.php?copern=20&drupoh=1&page=1&strana=5',
  '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
   }
 
