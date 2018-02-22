@@ -166,10 +166,13 @@ $zomeno = trim(strip_tags($_REQUEST['zomeno']));
 $zotitl = trim(strip_tags($_REQUEST['zotitl']));
 $zotitz = trim(strip_tags($_REQUEST['zotitz']));
 $zonaz = trim(strip_tags($_REQUEST['zonaz']));
+$kriad=1*$_REQUEST['kriad'];
+$kdoda=1*$_REQUEST['kdoda'];
+$oprav=1*$_REQUEST['oprav'];
 
 $uprtxt = "UPDATE F$kli_vxcf"."_uctoznamenie_uprzd SET ".
 " obod='$obodsql', obdo='$obdosql', zodic='$zodic', ulava30a='$ulava30a', ulava30b='$ulava30b', zoprie='$zoprie', ".
-" zomeno='$zomeno', zotitl='$zotitl', zotitz='$zotitz', zonaz='$zonaz' ".
+" zomeno='$zomeno', zotitl='$zotitl', zotitz='$zotitz', zonaz='$zonaz', kriad='$kriad', kdoda='$kdoda', oprav='$oprav' ".
 " WHERE oc = 1 AND cpl = $cislo_cpl ";
                     }
 
@@ -282,6 +285,20 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_uctoznamenie_uprzd MODIFY suma DECIMAL(12,2) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 }
+
+$sql = "SELECT oprav FROM F".$kli_vxcf."_uctoznamenie_uprzd";
+$vysledok = mysql_query($sql);
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_uctoznamenie_uprzd ADD new2017 DECIMAL(2,0) DEFAULT 0 AFTER konx3";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctoznamenie_uprzd ADD kriad DECIMAL(2,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctoznamenie_uprzd ADD kdoda DECIMAL(2,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_uctoznamenie_uprzd ADD oprav DECIMAL(2,0) DEFAULT 0 AFTER new2017";
+$vysledek = mysql_query("$sql");
+}
 //koniec vytvorenie
 ?>
 
@@ -304,6 +321,9 @@ if( $obdosk == '00.00.0000' ) { $obdosk="31.12.".$kli_vrok;}
 $zodic = $fir_riadok->zodic;
 $ulava30a = $fir_riadok->ulava30a;
 $ulava30b = $fir_riadok->ulava30b;
+$kriad = 1*$fir_riadok->kriad;
+$kdoda = 1*$fir_riadok->kdoda;
+$oprav = 1*$fir_riadok->oprav;
 $zoprie = $fir_riadok->zoprie;
 $zomeno = $fir_riadok->zomeno;
 $zotitl = $fir_riadok->zotitl;
@@ -515,6 +535,9 @@ var param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
    document.formv1.zodic.value = '<?php echo "$zodic"; ?>';
 <?php if ( $ulava30a == 1 ) { ?> document.formv1.ulava30a.checked = "checked"; <?php } ?>
 <?php if ( $ulava30b == 1 ) { ?> document.formv1.ulava30b.checked = "checked"; <?php } ?>
+//<?php if ( $kriad == 1 ) { ?> document.formv1.kriad.checked = "checked"; <?php } ?>
+//<?php if ( $kdoda == 1 ) { ?> document.formv1.kdoda.checked = "checked"; <?php } ?>
+//<?php if ( $oprav == 1 ) { ?> document.formv1.oprav.checked = "checked"; <?php } ?>
    document.formv1.zoprie.value = '<?php echo "$zoprie"; ?>';
    document.formv1.zomeno.value = '<?php echo "$zomeno"; ?>';
    document.formv1.zotitl.value = '<?php echo "$zotitl"; ?>';
