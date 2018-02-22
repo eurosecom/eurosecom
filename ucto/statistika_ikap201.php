@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <?php
-//celkovy zaciatok dokumentu Stat IKaP201 rok 2016
+//celkovy zaciatok
 do
 {
 $sys = 'UCT';
@@ -1569,6 +1569,32 @@ $vysledek = mysql_query("$sql");
 $sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m474r399 DECIMAL(10,0) DEFAULT 0 AFTER konx";
 $vysledek = mysql_query("$sql");
 }
+//zmeny2017
+$sql = "SELECT m571r108 FROM F$kli_vxcf"."_statistika_ikap201 WHERE ico=0";
+$vysledok = mysql_query("$sql");
+if (!$vysledok)
+{
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m585r06 VARCHAR(25) NOT NULL AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m585r7k VARCHAR(20) NOT NULL AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m585r07 DECIMAL(10,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m571r100 VARCHAR(30) NOT NULL AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m571r102 VARCHAR(25) NOT NULL AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m571r103 DECIMAL(10,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m571r105 DECIMAL(10,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m571r106 DECIMAL(10,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m571r107 DECIMAL(10,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+$sql = "ALTER TABLE F$kli_vxcf"."_statistika_ikap201 ADD m571r108 DECIMAL(10,0) DEFAULT 0 AFTER konx";
+$vysledek = mysql_query("$sql");
+}
 //koniec vytvorenia definicie
 
 //nacitaj mzdy
@@ -1856,9 +1882,12 @@ $m585r02 = strip_tags($_REQUEST['m585r02']);
 $m585r03 = strip_tags($_REQUEST['m585r03']);
 $m585r04 = strip_tags($_REQUEST['m585r04']);
 $m585r05 = strip_tags($_REQUEST['m585r05']);
+$m585r06 = strip_tags($_REQUEST['m585r06']);
+$m585r07 = strip_tags($_REQUEST['m585r07']);
 $m585r3k = strip_tags($_REQUEST['m585r3k']);
 $m585r4k = strip_tags($_REQUEST['m585r4k']);
 $m585r5k = strip_tags($_REQUEST['m585r5k']);
+$m585r7k = strip_tags($_REQUEST['m585r7k']);
 //$m100044ano = strip_tags($_REQUEST['m100044ano']);
 //$m100044nie = strip_tags($_REQUEST['m100044nie']);
 $m571r10 = strip_tags($_REQUEST['m571r10']);
@@ -1933,6 +1962,14 @@ $m571r95 = strip_tags($_REQUEST['m571r95']);
 $m571r96 = strip_tags($_REQUEST['m571r96']);
 $m571r97 = strip_tags($_REQUEST['m571r97']);
 $m571r98 = strip_tags($_REQUEST['m571r98']);
+$m571r100 = strip_tags($_REQUEST['m571r100']);
+$m571r102 = strip_tags($_REQUEST['m571r102']);
+$m571r103 = strip_tags($_REQUEST['m571r103']);
+$m571r104 = strip_tags($_REQUEST['m571r104']);
+$m571r105 = strip_tags($_REQUEST['m571r105']);
+$m571r106 = strip_tags($_REQUEST['m571r106']);
+$m571r107 = strip_tags($_REQUEST['m571r107']);
+$m571r108 = strip_tags($_REQUEST['m571r108']);
 //6.strana
 $m516r101 = strip_tags($_REQUEST['m516r101']);
 $m516r102 = strip_tags($_REQUEST['m516r102']);
@@ -2370,7 +2407,8 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_ikap201 SET ".
 if ( $strana == 5 ) {
 $uprtxt = "UPDATE F$kli_vxcf"."_statistika_ikap201 SET ".
 " m585r01='$m585r01', m585r02='$m585r02', m585r03='$m585r03', m585r04='$m585r04',
-  m585r05='$m585r05', m585r3k='$m585r3k', m585r4k='$m585r4k', m585r5k='$m585r5k',
+  m585r05='$m585r05', m585r06='$m585r06', m585r07='$m585r07',
+  m585r3k='$m585r3k', m585r4k='$m585r4k', m585r5k='$m585r5k', m585r7k='$m585r7k',
   m571r10='$m571r10', m571r12='$m571r12', m571r13='$m571r13', m571r15='$m571r15',
   m571r16='$m571r16', m571r17='$m571r17', m571r18='$m571r18',
   m571r20='$m571r20', m571r22='$m571r22', m571r23='$m571r23', m571r25='$m571r25',
@@ -2388,7 +2426,9 @@ $uprtxt = "UPDATE F$kli_vxcf"."_statistika_ikap201 SET ".
   m571r80='$m571r80', m571r82='$m571r82', m571r83='$m571r83', m571r85='$m571r85',
   m571r86='$m571r86', m571r87='$m571r87', m571r88='$m571r88',
   m571r90='$m571r90', m571r92='$m571r92', m571r93='$m571r93', m571r95='$m571r95',
-  m571r96='$m571r96', m571r97='$m571r97', m571r98='$m571r98' ".
+  m571r96='$m571r96', m571r97='$m571r97', m571r98='$m571r98',
+  m571r100='$m571r100', m571r102='$m571r102', m571r103='$m571r103', m571r105='$m571r105',
+  m571r106='$m571r106', m571r107='$m571r107', m571r108='$m571r108' ".
 " WHERE ico >= 0 ";
                     }
 
@@ -2697,9 +2737,12 @@ $m585r02 = $fir_riadok->m585r02;
 $m585r03 = $fir_riadok->m585r03;
 $m585r04 = $fir_riadok->m585r04;
 $m585r05 = $fir_riadok->m585r05;
+$m585r06 = $fir_riadok->m585r06;
+$m585r07 = $fir_riadok->m585r07;
 $m585r3k = $fir_riadok->m585r3k;
 $m585r4k = $fir_riadok->m585r4k;
 $m585r5k = $fir_riadok->m585r5k;
+$m585r7k = $fir_riadok->m585r7k;
 //$m100044ano = $fir_riadok->m100044ano;
 //$m100044nie = $fir_riadok->m100044nie;
 $m571r10 = $fir_riadok->m571r10;
@@ -2774,6 +2817,14 @@ $m571r95 = $fir_riadok->m571r95;
 $m571r96 = $fir_riadok->m571r96;
 $m571r97 = $fir_riadok->m571r97;
 $m571r98 = $fir_riadok->m571r98;
+$m571r100 = $fir_riadok->m571r100;
+$m571r102 = $fir_riadok->m571r102;
+$m571r103 = $fir_riadok->m571r103;
+$m571r104 = $fir_riadok->m571r104;
+$m571r105 = $fir_riadok->m571r105;
+$m571r106 = $fir_riadok->m571r106;
+$m571r107 = $fir_riadok->m571r107;
+$m571r108 = $fir_riadok->m571r108;
 //6.strana
 $m516r101 = $fir_riadok->m516r101;
 $m516r102 = $fir_riadok->m516r102;
@@ -3168,17 +3219,18 @@ $sqldok = mysql_query("SELECT * FROM F$kli_vxcf"."_treximafir ");
   $okres=$riaddok->uzemie;
   }
 
+//sknace bez bodiek
+$sknace=str_replace(".", "", $fir_sknace);
+
 //6-miestne ico
 $fir_ficox=$fir_fico;
 if ( $fir_ficox < 999999 ) { $fir_ficox="00".$fir_ficox; }
 
-//sknace bez bodiek
-$sknace=str_replace(".", "", $fir_sknace);
 //2-miestny rok
 $kli_vrokx = substr($kli_vrok,2,2);
 ?>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=cp1250">
+<meta charset="cp1250">
 <link rel="stylesheet" href="../css/reset.css">
 <link rel="stylesheet" href="../css/tlaciva.css">
 <title>v˝kaz IKaP 2-01 | EuroSecom</title>
@@ -3255,8 +3307,7 @@ if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
   <a href="#" onclick="editForm(10);" class="<?php echo $clas10; ?> toleft">10</a>
   <a href="#" onclick="editForm(11);" class="<?php echo $clas11; ?> toleft">11</a>
   <a href="#" onclick="editForm(12);" class="<?php echo $clas12; ?> toleft">12</a>
-<!-- dopyt, hidden -->
-
+<!-- dopyt, hidden
   <a href="#" onclick="FormPDF(12);" class="<?php echo $clas12; ?> toright">12</a>
   <a href="#" onclick="FormPDF(11);" class="<?php echo $clas11; ?> toright">11</a>
   <a href="#" onclick="FormPDF(10);" class="<?php echo $clas10; ?> toright">10</a>
@@ -3270,10 +3321,11 @@ if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
   <a href="#" onclick="FormPDF(2);" class="<?php echo $clas2; ?> toright">2</a>
   <a href="#" onclick="FormPDF(1);" class="<?php echo $clas1; ?> toright">1</a>
   <h6 class="toright">TlaËiù:</h6>
+-->
   <input type="submit" id="uloz" name="uloz" value="Uloûiù zmeny" class="btn-top-formsave">
 </div>
 
-<?php if ( $strana == 1 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 1 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str1.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:277px; left:480px; font-size:24px; letter-spacing:0.02em;"><?php echo $kli_vrok; ?></span>
 <span class="text-echo" style="top:396px; left:332px; font-size:18px; letter-spacing:24px;"><?php echo $kli_vrokx; ?></span>
@@ -3294,7 +3346,7 @@ if ( $strana == 11 ) $clas11="active"; if ( $strana == 12 ) $clas12="active";
 <?php                                        } ?>
 
 
-<?php if ( $strana == 2 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 2 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str2.jpg" class="form-background" alt="<?php echo $jpg_popis; ?> 2.strana 235kB">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
@@ -3373,7 +3425,7 @@ $sknace=str_replace(".", "", $fir_sknace);
 </script>
 <?php                                        } ?>
 
-<?php if ( $strana == 3 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 3 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str3.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
@@ -3432,7 +3484,7 @@ $sknace=str_replace(".", "", $fir_sknace);
 <?php                                        } ?>
 
 
-<?php if ( $strana == 4 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 4 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str4.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
@@ -3480,108 +3532,115 @@ $sknace=str_replace(".", "", $fir_sknace);
 <?php                                        } ?>
 
 
-<?php if ( $strana == 5 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 5 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str5.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
-<span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
+<span class="text-echo" style="top:70px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 <!-- modul 585 -->
-<input type="text" name="m585r01" id="m585r01" style="width:100px; top:428px; left:680px;"/>
-<input type="text" name="m585r02" id="m585r02" style="width:100px; top:460px; left:680px;"/>
-<input type="text" name="m585r3k" id="m585r3k" style="width:110px; top:492px; left:400px;"/>
-<input type="text" name="m585r03" id="m585r03" style="width:100px; top:492px; left:680px;"/>
-<input type="text" name="m585r4k" id="m585r4k" style="width:110px; top:519px; left:400px;"/>
-<input type="text" name="m585r04" id="m585r04" style="width:100px; top:519px; left:680px;"/>
-<input type="text" name="m585r5k" id="m585r5k" style="width:110px; top:547px; left:400px;"/>
-<input type="text" name="m585r05" id="m585r05" style="width:100px; top:547px; left:680px;"/>
-
-
-
+<input type="text" name="m585r01" id="m585r01" style="width:200px; top:523px; left:688px;"/>
+<input type="text" name="m585r02" id="m585r02" style="width:100px; top:546px; left:740px;"/>
+<input type="text" name="m585r3k" id="m585r3k" style="width:60px; top:569px; left:569px;"/>
+<input type="text" name="m585r03" id="m585r03" style="width:100px; top:569px; left:740px;"/>
+<input type="text" name="m585r4k" id="m585r4k" style="width:60px; top:592px; left:569px;"/>
+<input type="text" name="m585r04" id="m585r04" style="width:100px; top:592px; left:740px;"/>
+<input type="text" name="m585r5k" id="m585r5k" style="width:60px; top:615px; left:569px;"/>
+<input type="text" name="m585r05" id="m585r05" style="width:100px; top:615px; left:740px;"/>
+<input type="text" name="m585r06" id="m585r06" style="width:200px; top:638px; left:688px;"/>
+<input type="text" name="m585r7k" id="m585r7k" style="width:60px; top:661px; left:569px;"/>
+<input type="text" name="m585r07" id="m585r07" style="width:100px; top:661px; left:740px;"/>
 <!-- modul 571 -->
-<input type="text" name="m571r10" id="m571r10" style="width:78px; top:938px; left:50px;"/>
+<input type="text" name="m571r10" id="m571r10" style="width:78px; top:972px; left:50px;"/>
 <?php $cslr="1."; if ( $m571r10 == '' ) { $cslr=""; } ?>
-<span class="text-echo" style="top:942px; left:210px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r12" id="m571r12" style="width:125px; top:938px; left:254px;"/>
-<input type="text" name="m571r13" id="m571r13" style="width:58px; top:938px; left:390px;"/>
-<input type="text" name="m571r15" id="m571r15" style="width:81px; top:938px; left:525px;"/>
-<input type="text" name="m571r16" id="m571r16" style="width:80px; top:938px; left:616px;"/>
-<input type="text" name="m571r17" id="m571r17" style="width:102px; top:938px; left:707px;"/>
-<input type="text" name="m571r18" id="m571r18" style="width:71px; top:938px; left:820px;"/>
-<input type="text" name="m571r20" id="m571r20" style="width:78px; top:965px; left:50px;"/>
+<span class="text-echo" style="top:975px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r12" id="m571r12" style="width:114px; top:972px; left:254px;"/>
+<input type="text" name="m571r13" id="m571r13" style="width:62px; top:972px; left:378px;"/>
+<input type="text" name="m571r15" id="m571r15" style="width:58px; top:972px; left:514px;"/>
+<input type="text" name="m571r16" id="m571r16" style="width:103px; top:972px; left:582px;"/>
+<input type="text" name="m571r17" id="m571r17" style="width:107px; top:972px; left:695px;"/>
+<input type="text" name="m571r18" id="m571r18" style="width:80px; top:972px; left:811px;"/>
+<input type="text" name="m571r20" id="m571r20" style="width:78px; top:995px; left:50px;"/>
 <?php $cslr="2."; if ( $m571r20 == '' ) { $cslr=""; } ?>
-<span class="text-echo" style="top:969px; left:210px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r22" id="m571r22" style="width:125px; top:965px; left:254px;"/>
-<input type="text" name="m571r23" id="m571r23" style="width:58px; top:965px; left:390px;"/>
-<input type="text" name="m571r25" id="m571r25" style="width:81px; top:965px; left:525px;"/>
-<input type="text" name="m571r26" id="m571r26" style="width:80px; top:965px; left:616px;"/>
-<input type="text" name="m571r27" id="m571r27" style="width:102px; top:965px; left:707px;"/>
-<input type="text" name="m571r28" id="m571r28" style="width:71px; top:965px; left:820px;"/>
-<input type="text" name="m571r30" id="m571r30" style="width:78px; top:991px; left:50px;"/>
+<span class="text-echo" style="top:998px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r22" id="m571r22" style="width:114px; top:995px; left:254px;"/>
+<input type="text" name="m571r23" id="m571r23" style="width:62px; top:995px; left:378px;"/>
+<input type="text" name="m571r25" id="m571r25" style="width:58px; top:995px; left:514px;"/>
+<input type="text" name="m571r26" id="m571r26" style="width:103px; top:995px; left:582px;"/>
+<input type="text" name="m571r27" id="m571r27" style="width:107px; top:995px; left:695px;"/>
+<input type="text" name="m571r28" id="m571r28" style="width:80px; top:995px; left:811px;"/>
+<input type="text" name="m571r30" id="m571r30" style="width:78px; top:1018px; left:50px;"/>
 <?php $cslr="3."; if ( $m571r30 == '' ) { $cslr=""; } ?>
-<span class="text-echo" style="top:996px; left:210px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r32" id="m571r32" style="width:125px; top:991px; left:254px;"/>
-<input type="text" name="m571r33" id="m571r33" style="width:58px; top:991px; left:390px;"/>
-<input type="text" name="m571r35" id="m571r35" style="width:81px; top:991px; left:525px;"/>
-<input type="text" name="m571r36" id="m571r36" style="width:80px; top:991px; left:616px;"/>
-<input type="text" name="m571r37" id="m571r37" style="width:102px; top:991px; left:707px;"/>
-<input type="text" name="m571r38" id="m571r38" style="width:71px; top:991px; left:820px;"/>
-<input type="text" name="m571r40" id="m571r40" style="width:78px; top:1018px; left:50px;"/>
+<span class="text-echo" style="top:1021px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r32" id="m571r32" style="width:114px; top:1018px; left:254px;"/>
+<input type="text" name="m571r33" id="m571r33" style="width:62px; top:1018px; left:378px;"/>
+<input type="text" name="m571r35" id="m571r35" style="width:58px; top:1018px; left:514px;"/>
+<input type="text" name="m571r36" id="m571r36" style="width:103px; top:1018px; left:582px;"/>
+<input type="text" name="m571r37" id="m571r37" style="width:107px; top:1018px; left:695px;"/>
+<input type="text" name="m571r38" id="m571r38" style="width:80px; top:1018px; left:811px;"/>
+<input type="text" name="m571r40" id="m571r40" style="width:78px; top:1041px; left:50px;"/>
 <?php $cslr="4."; if ( $m571r40 == '' ) { $cslr=""; } ?>
-<span class="text-echo" style="top:1023px; left:210px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r42" id="m571r42" style="width:125px; top:1018px; left:254px;"/>
-<input type="text" name="m571r43" id="m571r43" style="width:58px; top:1018px; left:390px;"/>
-<input type="text" name="m571r45" id="m571r45" style="width:81px; top:1018px; left:525px;"/>
-<input type="text" name="m571r46" id="m571r46" style="width:80px; top:1018px; left:616px;"/>
-<input type="text" name="m571r47" id="m571r47" style="width:102px; top:1018px; left:707px;"/>
-<input type="text" name="m571r48" id="m571r48" style="width:71px; top:1018px; left:820px;"/>
-<input type="text" name="m571r50" id="m571r50" style="width:78px; top:1044px; left:50px;"/>
+<span class="text-echo" style="top:1044px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r42" id="m571r42" style="width:114px; top:1041px; left:254px;"/>
+<input type="text" name="m571r43" id="m571r43" style="width:62px; top:1041px; left:378px;"/>
+<input type="text" name="m571r45" id="m571r45" style="width:58px; top:1041px; left:514px;"/>
+<input type="text" name="m571r46" id="m571r46" style="width:103px; top:1041px; left:582px;"/>
+<input type="text" name="m571r47" id="m571r47" style="width:107px; top:1041px; left:695px;"/>
+<input type="text" name="m571r48" id="m571r48" style="width:80px; top:1041px; left:811px;"/>
+<input type="text" name="m571r50" id="m571r50" style="width:78px; top:1064px; left:50px;"/>
 <?php $cslr="5."; if ( $m571r50 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:1049px; left:210px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r52" id="m571r52" style="width:125px; top:1044px; left:254px;"/>
-<input type="text" name="m571r53" id="m571r53" style="width:58px; top:1044px; left:390px;"/>
-<input type="text" name="m571r55" id="m571r55" style="width:81px; top:1044px; left:525px;"/>
-<input type="text" name="m571r56" id="m571r56" style="width:80px; top:1044px; left:616px;"/>
-<input type="text" name="m571r57" id="m571r57" style="width:102px; top:1044px; left:707px;"/>
-<input type="text" name="m571r58" id="m571r58" style="width:71px; top:1044px; left:820px;"/>
-<input type="text" name="m571r60" id="m571r60" style="width:78px; top:1071px; left:50px;"/>
+ <span class="text-echo" style="top:1067px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r52" id="m571r52" style="width:114px; top:1064px; left:254px;"/>
+<input type="text" name="m571r53" id="m571r53" style="width:62px; top:1064px; left:378px;"/>
+<input type="text" name="m571r55" id="m571r55" style="width:58px; top:1064px; left:514px;"/>
+<input type="text" name="m571r56" id="m571r56" style="width:103px; top:1064px; left:582px;"/>
+<input type="text" name="m571r57" id="m571r57" style="width:107px; top:1064px; left:695px;"/>
+<input type="text" name="m571r58" id="m571r58" style="width:80px; top:1064px; left:811px;"/>
+<input type="text" name="m571r60" id="m571r60" style="width:78px; top:1087px; left:50px;"/>
 <?php $cslr="6."; if ( $m571r60 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:1075px; left:210px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r62" id="m571r62" style="width:125px; top:1071px; left:254px;"/>
-<input type="text" name="m571r63" id="m571r63" style="width:58px; top:1071px; left:390px;"/>
-<input type="text" name="m571r65" id="m571r65" style="width:81px; top:1071px; left:525px;"/>
-<input type="text" name="m571r66" id="m571r66" style="width:80px; top:1071px; left:616px;"/>
-<input type="text" name="m571r67" id="m571r67" style="width:102px; top:1071px; left:707px;"/>
-<input type="text" name="m571r68" id="m571r68" style="width:71px; top:1071px; left:820px;"/>
-<input type="text" name="m571r70" id="m571r70" style="width:78px; top:1098px; left:50px;"/>
+ <span class="text-echo" style="top:1090px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r62" id="m571r62" style="width:114px; top:1087px; left:254px;"/>
+<input type="text" name="m571r63" id="m571r63" style="width:62px; top:1087px; left:378px;"/>
+<input type="text" name="m571r65" id="m571r65" style="width:58px; top:1087px; left:514px;"/>
+<input type="text" name="m571r66" id="m571r66" style="width:103px; top:1087px; left:582px;"/>
+<input type="text" name="m571r67" id="m571r67" style="width:107px; top:1087px; left:695px;"/>
+<input type="text" name="m571r68" id="m571r68" style="width:80px; top:1087px; left:811px;"/>
+<input type="text" name="m571r70" id="m571r70" style="width:78px; top:1110px; left:50px;"/>
 <?php $cslr="7."; if ( $m571r70 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:1102px; left:210px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r72" id="m571r72" style="width:125px; top:1098px; left:254px;"/>
-<input type="text" name="m571r73" id="m571r73" style="width:58px; top:1098px; left:390px;"/>
-<input type="text" name="m571r75" id="m571r75" style="width:81px; top:1098px; left:525px;"/>
-<input type="text" name="m571r76" id="m571r76" style="width:80px; top:1098px; left:616px;"/>
-<input type="text" name="m571r77" id="m571r77" style="width:102px; top:1098px; left:707px;"/>
-<input type="text" name="m571r78" id="m571r78" style="width:71px; top:1098px; left:820px;"/>
-<input type="text" name="m571r80" id="m571r80" style="width:78px; top:1124px; left:50px;"/>
+ <span class="text-echo" style="top:1113px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r72" id="m571r72" style="width:114px; top:1110px; left:254px;"/>
+<input type="text" name="m571r73" id="m571r73" style="width:62px; top:1110px; left:378px;"/>
+<input type="text" name="m571r75" id="m571r75" style="width:58px; top:1110px; left:514px;"/>
+<input type="text" name="m571r76" id="m571r76" style="width:103px; top:1110px; left:582px;"/>
+<input type="text" name="m571r77" id="m571r77" style="width:107px; top:1110px; left:695px;"/>
+<input type="text" name="m571r78" id="m571r78" style="width:80px; top:1110px; left:811px;"/>
+<input type="text" name="m571r80" id="m571r80" style="width:78px; top:1133px; left:50px;"/>
 <?php $cslr="8."; if ( $m571r80 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:1129px; left:210px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r82" id="m571r82" style="width:125px; top:1124px; left:254px;"/>
-<input type="text" name="m571r83" id="m571r83" style="width:58px; top:1124px; left:390px;"/>
-<input type="text" name="m571r85" id="m571r85" style="width:81px; top:1124px; left:525px;"/>
-<input type="text" name="m571r86" id="m571r86" style="width:80px; top:1124px; left:616px;"/>
-<input type="text" name="m571r87" id="m571r87" style="width:102px; top:1124px; left:707px;"/>
-<input type="text" name="m571r88" id="m571r88" style="width:71px; top:1124px; left:820px;"/>
-<input type="text" name="m571r90" id="m571r90" style="width:78px; top:1151px; left:50px;"/>
-<?php $cslr="9."; if ( $m571r30 == '' ) { $cslr=""; } ?>
- <span class="text-echo" style="top:1156px; left:210px;"><?php echo $cslr; ?></span>
-<input type="text" name="m571r92" id="m571r92" style="width:125px; top:1151px; left:254px;"/>
-<input type="text" name="m571r93" id="m571r93" style="width:58px; top:1151px; left:390px;"/>
-<input type="text" name="m571r95" id="m571r95" style="width:81px; top:1151px; left:525px;"/>
-<input type="text" name="m571r96" id="m571r96" style="width:80px; top:1151px; left:616px;"/>
-<input type="text" name="m571r97" id="m571r97" style="width:102px; top:1151px; left:707px;"/>
-<input type="text" name="m571r98" id="m571r98" style="width:71px; top:1151px; left:820px;"/>
+ <span class="text-echo" style="top:1137px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r82" id="m571r82" style="width:114px; top:1133px; left:254px;"/>
+<input type="text" name="m571r83" id="m571r83" style="width:62px; top:1133px; left:378px;"/>
+<input type="text" name="m571r85" id="m571r85" style="width:58px; top:1133px; left:514px;"/>
+<input type="text" name="m571r86" id="m571r86" style="width:103px; top:1133px; left:582px;"/>
+<input type="text" name="m571r87" id="m571r87" style="width:107px; top:1133px; left:695px;"/>
+<input type="text" name="m571r88" id="m571r88" style="width:80px; top:1133px; left:811px;"/>
+<input type="text" name="m571r90" id="m571r90" style="width:78px; top:1156px; left:50px;"/>
+<?php $cslr="9."; if ( $m571r90 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:1160px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r92" id="m571r92" style="width:114px; top:1156px; left:254px;"/>
+<input type="text" name="m571r93" id="m571r93" style="width:62px; top:1156px; left:378px;"/>
+<input type="text" name="m571r95" id="m571r95" style="width:58px; top:1156px; left:514px;"/>
+<input type="text" name="m571r96" id="m571r96" style="width:103px; top:1156px; left:582px;"/>
+<input type="text" name="m571r97" id="m571r97" style="width:107px; top:1156px; left:695px;"/>
+<input type="text" name="m571r98" id="m571r98" style="width:80px; top:1156px; left:811px;"/>
+<input type="text" name="m571r100" id="m571r100" style="width:78px; top:1179px; left:50px;"/>
+<?php $cslr="9."; if ( $m571r100 == '' ) { $cslr=""; } ?>
+<span class="text-echo" style="top:1182px; left:210px;"><?php echo $cslr; ?></span>
+<input type="text" name="m571r102" id="m571r102" style="width:114px; top:1179px; left:254px;"/>
+<input type="text" name="m571r103" id="m571r103" style="width:62px; top:1179px; left:378px;"/>
+<input type="text" name="m571r105" id="m571r105" style="width:58px; top:1179px; left:514px;"/>
+<input type="text" name="m571r106" id="m571r106" style="width:103px; top:1179px; left:582px;"/>
+<input type="text" name="m571r107" id="m571r107" style="width:107px; top:1179px; left:695px;"/>
+<input type="text" name="m571r108" id="m571r108" style="width:80px; top:1179px; left:811px;"/>
 <?php                                        } ?>
 
-
-<?php if ( $strana == 6 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 6 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str6.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
@@ -3692,7 +3751,7 @@ $sknace=str_replace(".", "", $fir_sknace);
 <?php                                        } ?>
 
 
-<?php if ( $strana == 7 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 7 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str7.jpg" class="form-background"
      alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
@@ -3762,8 +3821,7 @@ $sknace=str_replace(".", "", $fir_sknace);
 </script>
 <?php                                        } ?>
 
-
-<?php if ( $strana == 8 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 8 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str8.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
@@ -3830,8 +3888,7 @@ $sknace=str_replace(".", "", $fir_sknace);
 <span class="text-echo" style="top:1195px; right:65px;"><?php echo $m183r299; ?></span>
 <?php                                        } ?>
 
-
-<?php if ( $strana == 9 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 9 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str9.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
 
@@ -3961,7 +4018,7 @@ $sknace=str_replace(".", "", $fir_sknace);
 <?php                                         } ?>
 
 
-<?php if ( $strana == 11 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 11 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str11.jpg" class="form-background" alt="<?php echo $jpg_title; ?>" style="width:1250px; height:800px;">
 <span class="text-echo" style="top:65px; left:810px; font-size:16px; letter-spacing:22.5px;"><?php echo $fir_ficox; ?></span>
 
@@ -4008,11 +4065,9 @@ $sknace=str_replace(".", "", $fir_sknace);
 <input type="text" name="m527r1004" id="m527r1004" style="width:60px; top:382px; left:1133px;"/>
 <?php                                         } ?>
 
-
-<?php if ( $strana == 12 OR $strana == 9999 ) { ?>
+<?php if ( $strana == 12 ) { ?>
 <img src="<?php echo $jpg_source; ?>_str12.jpg" class="form-background" alt="<?php echo $jpg_title; ?>">
 <span class="text-echo" style="top:72px; left:485px; font-size:16px; letter-spacing:25px;"><?php echo $fir_ficox; ?></span>
-
 <!-- modul 474a -->
 <input type="text" name="m474r101" id="m474r101" style="width:108px; top:294px; left:528px;"/>
 <input type="text" name="m474r201" id="m474r201" style="width:109px; top:294px; left:652px;"/>
@@ -4113,19 +4168,21 @@ $pdf->Cell(95,6," ","$rmc1",0,"L");$pdf->Cell(16,7,"$kli_vrok","$rmc",1,"C");
 $pdf->SetFont('arial','',12);
 
 //rok
-$A=substr($kli_vrokx,0,1);
-$B=substr($kli_vrokx,1,1);
+$text=$kli_vrokx;
+$A=substr($text,0,1);
+$B=substr($text,1,1);
 $pdf->Cell(190,19," ","$rmc1",1,"L");
 $pdf->Cell(61,6," ","$rmc1",0,"L");$pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
 //ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
+$text=$fir_ficox;
+$A=substr($text,0,1);
+$B=substr($text,1,1);
+$C=substr($text,2,1);
+$D=substr($text,3,1);
+$E=substr($text,4,1);
+$F=substr($text,5,1);
+$G=substr($text,6,1);
+$H=substr($text,7,1);
 $pdf->Cell(15,7," ","$rmc1",0,"L");
 $pdf->Cell(7,8,"$A","$rmc",0,"C");$pdf->Cell(8,8,"$B","$rmc",0,"C");
 $pdf->Cell(7,8,"$C","$rmc",0,"C");$pdf->Cell(8,8,"$D","$rmc",0,"C");
@@ -4172,14 +4229,15 @@ $pdf->Image($jpg_source.'_str2.jpg',0,0,210,297);
 $pdf->SetY(8);
 
 //ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
+$text=$fir_ficox;
+$A=substr($text,0,1);
+$B=substr($text,1,1);
+$C=substr($text,2,1);
+$D=substr($text,3,1);
+$E=substr($text,4,1);
+$F=substr($text,5,1);
+$G=substr($text,6,1);
+$H=substr($text,7,1);
 $pdf->Cell(190,2," ","$rmc1",1,"L");
 $pdf->Cell(94,7," ","$rmc1",0,"L");
 $pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");
@@ -4261,11 +4319,12 @@ $mod100037=$hlavicka->mod100037;
 if ( $hlavicka->mod100037 == 0 ) $mod100037="";
 $pdf->Cell(190,8," ","$rmc1",1,"L");
 $pdf->Cell(132,6," ","$rmc1",0,"L");$pdf->Cell(57,6,"$mod100037","$rmc",1,"C");
+$pdf->SetFont('arial','',12);
 
 //pagination
 $pdf->SetY(292);
 $pdf->SetX(178);
-$pdf->Cell(20,6,"$strana/12","$rmc",1,"R");
+$pdf->Cell(20,6,"2/12","$rmc",1,"R");
                                        }
 
 if ( $strana == 3 OR $strana == 9999 ) {
@@ -4280,14 +4339,15 @@ $pdf->Image($jpg_source.'_str3.jpg',0,0,210,297);
 $pdf->SetY(10);
 
 //ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
+$text=$fir_ficox;
+$A=substr($text,0,1);
+$B=substr($text,1,1);
+$C=substr($text,2,1);
+$D=substr($text,3,1);
+$E=substr($text,4,1);
+$F=substr($text,5,1);
+$G=substr($text,6,1);
+$H=substr($text,7,1);
 $pdf->Cell(190,0," ","$rmc1",1,"L");
 $pdf->Cell(94,7," ","$rmc1",0,"L");
 $pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");
@@ -4351,6 +4411,11 @@ $pdf->Cell(195,48," ","$rmc1",1,"L");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,7,"$m398r01","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m398r02","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m398r99","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"3/12","$rmc",1,"R");
                                        }
 
 if ( $strana == 4 OR $strana == 9999 ) {
@@ -4365,14 +4430,15 @@ $pdf->Image($jpg_source.'_str4.jpg',0,0,210,297);
 $pdf->SetY(10);
 
 //ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
+$text=$fir_ficox;
+$A=substr($text,0,1);
+$B=substr($text,1,1);
+$C=substr($text,2,1);
+$D=substr($text,3,1);
+$E=substr($text,4,1);
+$F=substr($text,5,1);
+$G=substr($text,6,1);
+$H=substr($text,7,1);
 $pdf->Cell(190,0," ","$rmc1",1,"L");
 $pdf->Cell(94,7," ","$rmc1",0,"L");
 $pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");
@@ -4459,6 +4525,11 @@ $pdf->Cell(114,5," ","$rmc1",0,"C");
 $pdf->Cell(37,5.5,"$m586r14","$rmc",0,"R");$pdf->Cell(37,5.5,"$m586r24","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");
 $pdf->Cell(37,6,"$m586r199","$rmc",0,"R");$pdf->Cell(37,6,"$m586r299","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"4/12","$rmc",1,"R");
                                        }
 
 if ( $strana == 5 OR $strana == 9999 ) {
@@ -4470,51 +4541,48 @@ if ( File_Exists($jpg_source.'_str5.jpg') AND $i == 0 )
 {
 $pdf->Image($jpg_source.'_str5.jpg',0,0,210,297);
 }
-$pdf->SetY(8);
+$pdf->SetY(9);
 
 //ico
-$A=substr($fir_ficox,0,1);
-$B=substr($fir_ficox,1,1);
-$C=substr($fir_ficox,2,1);
-$D=substr($fir_ficox,3,1);
-$E=substr($fir_ficox,4,1);
-$F=substr($fir_ficox,5,1);
-$G=substr($fir_ficox,6,1);
-$H=substr($fir_ficox,7,1);
-$pdf->Cell(190,2," ","$rmc1",1,"L");
+$text=$fir_ficox;
+$A=substr($text,0,1);
+$B=substr($text,1,1);
+$C=substr($text,2,1);
+$D=substr($text,3,1);
+$E=substr($text,4,1);
+$F=substr($text,5,1);
+$G=substr($text,6,1);
+$H=substr($text,7,1);
 $pdf->Cell(94,7," ","$rmc1",0,"L");
-$pdf->Cell(8,6,"$A","$rmc",0,"C");$pdf->Cell(8,6,"$B","$rmc",0,"C");
-$pdf->Cell(7,6,"$C","$rmc",0,"C");$pdf->Cell(8,6,"$D","$rmc",0,"C");
-$pdf->Cell(7,6,"$E","$rmc",0,"C");$pdf->Cell(8,6,"$F","$rmc",0,"C");
-$pdf->Cell(7,6,"$G","$rmc",0,"C");$pdf->Cell(8,6,"$H","$rmc",1,"C");
+$pdf->Cell(8,7,"$A","$rmc",0,"C");$pdf->Cell(8,7,"$B","$rmc",0,"C");
+$pdf->Cell(7,7,"$C","$rmc",0,"C");$pdf->Cell(8,7,"$D","$rmc",0,"C");
+$pdf->Cell(7,7,"$E","$rmc",0,"C");$pdf->Cell(8,7,"$F","$rmc",0,"C");
+$pdf->Cell(7,7,"$G","$rmc",0,"C");$pdf->Cell(8,7,"$H","$rmc",1,"C");
 
 //modul 585
+$pdf->Cell(195,98," ","$rmc1",1,"L");
 $m585r01=$hlavicka->m585r01;
 $m585r02=$hlavicka->m585r02; if ( $m585r02 == 0 ) $m585r02="";
 $m585r03=$hlavicka->m585r03; if ( $m585r03 == 0 ) $m585r03="";
 $m585r04=$hlavicka->m585r04; if ( $m585r04 == 0 ) $m585r04="";
 $m585r05=$hlavicka->m585r05; if ( $m585r05 == 0 ) $m585r05="";
+$m585r06=$hlavicka->m585r06;
+$m585r07=$hlavicka->m585r07; if ( $m585r07 == 0 ) $m585r07="";
 $m585r3k=$hlavicka->m585r3k;
 $m585r4k=$hlavicka->m585r4k;
 $m585r5k=$hlavicka->m585r5k;
-$pdf->Cell(195,75.5," ","$rmc1",1,"L");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6.5,"$m585r01","$rmc",1,"L");
-$pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,8.5,"$m585r02","$rmc",1,"L");
-$pdf->Cell(78,6,"","$rmc1",0,"L");$pdf->Cell(27,6,"$m585r3k","$rmc",0,"L");
-$pdf->Cell(9,6,"","$rmc1",0,"L");$pdf->Cell(75,6,"$m585r03","$rmc",1,"L");
-$pdf->Cell(78,6,"","$rmc1",0,"L");$pdf->Cell(27,6,"$m585r4k","$rmc",0,"L");
-$pdf->Cell(9,6,"","$rmc1",0,"L");$pdf->Cell(75,6,"$m585r04","$rmc",1,"L");
-$pdf->Cell(78,6,"","$rmc1",0,"L");$pdf->Cell(27,7,"$m585r5k","$rmc",0,"L");
-$pdf->Cell(9,6,"","$rmc1",0,"L");$pdf->Cell(75,7,"$m585r05","$rmc",1,"L");
-
-//modul 100062
-$m100044ano=" ";
-$m100044nie=" ";
-if ( $hlavicka->m100044ano == 1 ) { $m100044ano="x"; }
-if ( $hlavicka->m100044nie == 1 ) { $m100044nie="x"; }
-$pdf->Cell(190,25," ","$rmc1",1,"L");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,5,"$m100044ano","$rmc",1,"C");
-$pdf->Cell(173,6," ","$rmc1",0,"L");$pdf->Cell(9,4,"$m100044nie","$rmc",1,"C");
+$m585r7k=$hlavicka->m585r7k;
+$pdf->Cell(141,5," ","$rmc1",0,"C");$pdf->Cell(48,5.5,"$m585r01","$rmc",1,"L");
+$pdf->Cell(141,5," ","$rmc1",0,"C");$pdf->Cell(48,5,"$m585r02","$rmc",1,"C");
+$pdf->Cell(115,6,"","$rmc1",0,"L");$pdf->Cell(16,5.5,"$m585r3k","$rmc",0,"C");
+$pdf->Cell(10,5,"","$rmc1",0,"L");$pdf->Cell(48,5.5,"$m585r03","$rmc",1,"C");
+$pdf->Cell(115,5,"","$rmc1",0,"L");$pdf->Cell(16,5,"$m585r4k","$rmc",0,"C");
+$pdf->Cell(10,5,"","$rmc1",0,"L");$pdf->Cell(48,5,"$m585r04","$rmc",1,"C");
+$pdf->Cell(115,5,"","$rmc1",0,"L");$pdf->Cell(16,5.5,"$m585r5k","$rmc",0,"C");
+$pdf->Cell(10,5,"","$rmc1",0,"L");$pdf->Cell(48,5.5,"$m585r05","$rmc",1,"C");
+$pdf->Cell(141,5," ","$rmc1",0,"C");$pdf->Cell(48,5.5,"$m585r06","$rmc",1,"L");
+$pdf->Cell(115,5,"","$rmc1",0,"L");$pdf->Cell(16,5,"$m585r7k","$rmc",0,"C");
+$pdf->Cell(10,5,"","$rmc1",0,"L");$pdf->Cell(48,5,"$m585r07","$rmc",1,"C");
 
 //modul 571
 $m571r10=$hlavicka->m571r10;
@@ -4526,6 +4594,7 @@ $m571r60=$hlavicka->m571r60;
 $m571r70=$hlavicka->m571r70;
 $m571r80=$hlavicka->m571r80;
 $m571r90=$hlavicka->m571r90;
+$m571r100=$hlavicka->m571r100;
 $cslr1="1."; if ( $m571r10 == '' ) { $cslr1=""; }
 $cslr2="2."; if ( $m571r20 == '' ) { $cslr2=""; }
 $cslr3="3."; if ( $m571r30 == '' ) { $cslr3=""; }
@@ -4535,6 +4604,7 @@ $cslr6="6."; if ( $m571r60 == '' ) { $cslr6=""; }
 $cslr7="7."; if ( $m571r70 == '' ) { $cslr7=""; }
 $cslr8="8."; if ( $m571r80 == '' ) { $cslr8=""; }
 $cslr9="9."; if ( $m571r90 == '' ) { $cslr9=""; }
+$cslr10="10."; if ( $m571r10 == '' ) { $cslr10=""; }
 $m571r12=$hlavicka->m571r12;
 $m571r22=$hlavicka->m571r22;
 $m571r32=$hlavicka->m571r32;
@@ -4544,6 +4614,7 @@ $m571r62=$hlavicka->m571r62;
 $m571r72=$hlavicka->m571r72;
 $m571r82=$hlavicka->m571r82;
 $m571r92=$hlavicka->m571r92;
+$m571r102=$hlavicka->m571r102;
 $m571r13=$hlavicka->m571r13; if ( $m571r13 == 0 ) $m585r13="";
 $m571r23=$hlavicka->m571r23; if ( $m571r23 == 0 ) $m585r23="";
 $m571r33=$hlavicka->m571r33; if ( $m571r33 == 0 ) $m585r33="";
@@ -4553,6 +4624,7 @@ $m571r63=$hlavicka->m571r63; if ( $m571r63 == 0 ) $m585r63="";
 $m571r73=$hlavicka->m571r73; if ( $m571r73 == 0 ) $m585r73="";
 $m571r83=$hlavicka->m571r83; if ( $m571r83 == 0 ) $m585r83="";
 $m571r93=$hlavicka->m571r93; if ( $m571r93 == 0 ) $m585r93="";
+$m571r103=$hlavicka->m571r103; if ( $m571r103 == 0 ) $m585r103="";
 $m571r15=$hlavicka->m571r15; if ( $m571r15 == 0 ) $m585r15="";
 $m571r25=$hlavicka->m571r25; if ( $m571r25 == 0 ) $m585r25="";
 $m571r35=$hlavicka->m571r35; if ( $m571r35 == 0 ) $m585r35="";
@@ -4562,6 +4634,7 @@ $m571r65=$hlavicka->m571r65; if ( $m571r65 == 0 ) $m585r65="";
 $m571r75=$hlavicka->m571r75; if ( $m571r75 == 0 ) $m585r75="";
 $m571r85=$hlavicka->m571r85; if ( $m571r85 == 0 ) $m585r85="";
 $m571r95=$hlavicka->m571r95; if ( $m571r95 == 0 ) $m585r95="";
+$m571r105=$hlavicka->m571r105; if ( $m571r105 == 0 ) $m585r105="";
 $m571r16=$hlavicka->m571r16; if ( $m571r16 == 0 ) $m585r16="";
 $m571r26=$hlavicka->m571r26; if ( $m571r26 == 0 ) $m585r26="";
 $m571r36=$hlavicka->m571r36; if ( $m571r36 == 0 ) $m585r36="";
@@ -4571,6 +4644,7 @@ $m571r66=$hlavicka->m571r66; if ( $m571r66 == 0 ) $m585r66="";
 $m571r76=$hlavicka->m571r76; if ( $m571r76 == 0 ) $m585r76="";
 $m571r86=$hlavicka->m571r86; if ( $m571r86 == 0 ) $m585r86="";
 $m571r96=$hlavicka->m571r96; if ( $m571r96 == 0 ) $m585r96="";
+$m571r106=$hlavicka->m571r106; if ( $m571r106 == 0 ) $m585r106="";
 $m571r17=$hlavicka->m571r17; if ( $m571r17 == 0 ) $m585r17="";
 $m571r27=$hlavicka->m571r27; if ( $m571r27 == 0 ) $m585r27="";
 $m571r37=$hlavicka->m571r37; if ( $m571r37 == 0 ) $m585r37="";
@@ -4580,6 +4654,7 @@ $m571r67=$hlavicka->m571r67; if ( $m571r67 == 0 ) $m585r67="";
 $m571r77=$hlavicka->m571r77; if ( $m571r77 == 0 ) $m585r77="";
 $m571r87=$hlavicka->m571r87; if ( $m571r87 == 0 ) $m585r87="";
 $m571r97=$hlavicka->m571r97; if ( $m571r97 == 0 ) $m585r97="";
+$m571r107=$hlavicka->m571r107; if ( $m571r107 == 0 ) $m585r107="";
 $m571r18=$hlavicka->m571r18; if ( $m571r18 == 0 ) $m585r18="";
 $m571r28=$hlavicka->m571r28; if ( $m571r28 == 0 ) $m585r28="";
 $m571r38=$hlavicka->m571r38; if ( $m571r38 == 0 ) $m585r38="";
@@ -4589,61 +4664,73 @@ $m571r68=$hlavicka->m571r68; if ( $m571r68 == 0 ) $m585r68="";
 $m571r78=$hlavicka->m571r78; if ( $m571r78 == 0 ) $m585r78="";
 $m571r88=$hlavicka->m571r88; if ( $m571r88 == 0 ) $m585r88="";
 $m571r98=$hlavicka->m571r98; if ( $m571r98 == 0 ) $m585r98="";
-$pdf->Cell(195,49," ","$rmc1",1,"L");
+$m571r108=$hlavicka->m571r108; if ( $m571r108 == 0 ) $m585r108="";
+$pdf->Cell(195,65.5," ","$rmc1",1,"L");
 $pdf->Cell(1,5," ","$rmc1",0,"C");
-$pdf->Cell(19,6,"$m571r10","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"C");
-$pdf->Cell(18,6,"$cslr1","$rmc",0,"C");$pdf->Cell(30,6,"$m571r12","$rmc",0,"L");
-$pdf->Cell(15,6,"$m571r13","$rmc",0,"C");$pdf->Cell(15,6,"","$rmc",0,"L");
-$pdf->Cell(20,6,"$m571r15","$rmc",0,"C");$pdf->Cell(20,6,"$m571r16","$rmc",0,"R");
-$pdf->Cell(25,6,"$m571r17","$rmc",0,"R");$pdf->Cell(18,6,"$m571r18","$rmc",1,"R");
+$pdf->Cell(19,5.5,"$m571r10","$rmc",0,"L");$pdf->Cell(9,5," ","$rmc1",0,"C");
+$pdf->Cell(17,5,"$cslr1","$rmc",0,"C");$pdf->Cell(27.5,5,"$m571r12","$rmc",0,"L");
+$pdf->Cell(15,5,"$m571r13","$rmc",0,"C");$pdf->Cell(15,5,"","$rmc",0,"L");
+$pdf->Cell(14.5,5,"$m571r15","$rmc",0,"C");$pdf->Cell(25,5,"$m571r16","$rmc",0,"R");
+$pdf->Cell(26,5,"$m571r17","$rmc",0,"R");$pdf->Cell(19,5,"$m571r18","$rmc",1,"R");
 $pdf->Cell(1,5," ","$rmc1",0,"C");
-$pdf->Cell(19,7,"$m571r20","$rmc",0,"L");$pdf->Cell(8,7," ","$rmc1",0,"C");
-$pdf->Cell(18,7,"$cslr2","$rmc",0,"C");$pdf->Cell(30,7,"$m571r22","$rmc",0,"L");
-$pdf->Cell(15,7,"$m571r23","$rmc",0,"C");$pdf->Cell(15,7,"","$rmc",0,"L");
-$pdf->Cell(20,7,"$m571r25","$rmc",0,"C");$pdf->Cell(20,7,"$m571r26","$rmc",0,"R");
-$pdf->Cell(25,7,"$m571r27","$rmc",0,"R");$pdf->Cell(18,7,"$m571r28","$rmc",1,"R");
+$pdf->Cell(19,6,"$m571r20","$rmc",0,"L");$pdf->Cell(9,6," ","$rmc1",0,"C");
+$pdf->Cell(17,6,"$cslr2","$rmc",0,"C");$pdf->Cell(27.5,6,"$m571r22","$rmc",0,"L");
+$pdf->Cell(15,6,"$m571r23","$rmc",0,"C");$pdf->Cell(15,6,"","$rmc",0,"L");
+$pdf->Cell(14.5,6,"$m571r25","$rmc",0,"C");$pdf->Cell(25,6,"$m571r26","$rmc",0,"R");
+$pdf->Cell(26,6,"$m571r27","$rmc",0,"R");$pdf->Cell(19,6,"$m571r28","$rmc",1,"R");
 $pdf->Cell(1,5," ","$rmc1",0,"C");
-$pdf->Cell(19,5,"$m571r30","$rmc",0,"L");$pdf->Cell(8,5," ","$rmc1",0,"C");
-$pdf->Cell(18,5,"$cslr3","$rmc",0,"C");$pdf->Cell(30,5,"$m571r32","$rmc",0,"L");
+$pdf->Cell(19,5,"$m571r30","$rmc",0,"L");$pdf->Cell(9,5," ","$rmc1",0,"C");
+$pdf->Cell(17,5,"$cslr3","$rmc",0,"C");$pdf->Cell(27.5,5,"$m571r32","$rmc",0,"L");
 $pdf->Cell(15,5,"$m571r33","$rmc",0,"C");$pdf->Cell(15,5,"","$rmc",0,"L");
-$pdf->Cell(20,5,"$m571r35","$rmc",0,"C");$pdf->Cell(20,5,"$m571r36","$rmc",0,"R");
-$pdf->Cell(25,5,"$m571r37","$rmc",0,"R");$pdf->Cell(18,5,"$m571r38","$rmc",1,"R");
+$pdf->Cell(14.5,5,"$m571r35","$rmc",0,"C");$pdf->Cell(25,5,"$m571r36","$rmc",0,"R");
+$pdf->Cell(26,5,"$m571r37","$rmc",0,"R");$pdf->Cell(19,5,"$m571r38","$rmc",1,"R");
 $pdf->Cell(1,5," ","$rmc1",0,"C");
-$pdf->Cell(19,6,"$m571r40","$rmc",0,"L");$pdf->Cell(8,5," ","$rmc1",0,"C");
-$pdf->Cell(18,6,"$cslr4","$rmc",0,"C");$pdf->Cell(30,6,"$m571r42","$rmc",0,"L");
-$pdf->Cell(15,6,"$m571r43","$rmc",0,"C");$pdf->Cell(15,6,"","$rmc",0,"L");
-$pdf->Cell(20,6,"$m571r45","$rmc",0,"C");$pdf->Cell(20,6,"$m571r46","$rmc",0,"R");
-$pdf->Cell(25,6,"$m571r47","$rmc",0,"R");$pdf->Cell(18,6,"$m571r48","$rmc",1,"R");
+$pdf->Cell(19,5,"$m571r40","$rmc",0,"L");$pdf->Cell(9,5," ","$rmc1",0,"C");
+$pdf->Cell(17,5,"$cslr4","$rmc",0,"C");$pdf->Cell(27.5,5,"$m571r42","$rmc",0,"L");
+$pdf->Cell(15,5,"$m571r43","$rmc",0,"C");$pdf->Cell(15,5,"","$rmc",0,"L");
+$pdf->Cell(14.5,5,"$m571r45","$rmc",0,"C");$pdf->Cell(25,5,"$m571r46","$rmc",0,"R");
+$pdf->Cell(26,5,"$m571r47","$rmc",0,"R");$pdf->Cell(19,5,"$m571r48","$rmc",1,"R");
 $pdf->Cell(1,5," ","$rmc1",0,"C");
-$pdf->Cell(19,7,"$m571r50","$rmc",0,"L");$pdf->Cell(8,6," ","$rmc1",0,"C");
-$pdf->Cell(18,7,"$cslr5","$rmc",0,"C");$pdf->Cell(30,7,"$m571r52","$rmc",0,"L");
-$pdf->Cell(15,7,"$m571r53","$rmc",0,"C");$pdf->Cell(15,7,"","$rmc",0,"L");
-$pdf->Cell(20,7,"$m571r55","$rmc",0,"C");$pdf->Cell(20,7,"$m571r56","$rmc",0,"R");
-$pdf->Cell(25,7,"$m571r57","$rmc",0,"R");$pdf->Cell(18,7,"$m571r58","$rmc",1,"R");
+$pdf->Cell(19,6,"$m571r50","$rmc",0,"L");$pdf->Cell(9,6," ","$rmc1",0,"C");
+$pdf->Cell(17,6,"$cslr5","$rmc",0,"C");$pdf->Cell(27.5,6,"$m571r52","$rmc",0,"L");
+$pdf->Cell(15,6,"$m571r53","$rmc",0,"C");$pdf->Cell(15,6,"","$rmc",0,"L");
+$pdf->Cell(14.5,6,"$m571r55","$rmc",0,"C");$pdf->Cell(25,6,"$m571r56","$rmc",0,"R");
+$pdf->Cell(26,6,"$m571r57","$rmc",0,"R");$pdf->Cell(19,6,"$m571r58","$rmc",1,"R");
 $pdf->Cell(1,5," ","$rmc1",0,"C");
-$pdf->Cell(19,6,"$m571r60","$rmc",0,"L");$pdf->Cell(8,5," ","$rmc1",0,"C");
-$pdf->Cell(18,6,"$cslr6","$rmc",0,"C");$pdf->Cell(30,6,"$m571r62","$rmc",0,"L");
-$pdf->Cell(15,6,"$m571r63","$rmc",0,"C");$pdf->Cell(15,6,"","$rmc",0,"L");
-$pdf->Cell(20,6,"$m571r65","$rmc",0,"C");$pdf->Cell(20,6,"$m571r66","$rmc",0,"R");
-$pdf->Cell(25,6,"$m571r67","$rmc",0,"R");$pdf->Cell(18,6,"$m571r68","$rmc",1,"R");
+$pdf->Cell(19,4.5,"$m571r60","$rmc",0,"L");$pdf->Cell(9,4.5," ","$rmc1",0,"C");
+$pdf->Cell(17,4.5,"$cslr6","$rmc",0,"C");$pdf->Cell(27.5,4.5,"$m571r62","$rmc",0,"L");
+$pdf->Cell(15,4.5,"$m571r63","$rmc",0,"C");$pdf->Cell(15,4.5,"","$rmc",0,"L");
+$pdf->Cell(14.5,4.5,"$m571r65","$rmc",0,"C");$pdf->Cell(25,4.5,"$m571r66","$rmc",0,"R");
+$pdf->Cell(26,4.5,"$m571r67","$rmc",0,"R");$pdf->Cell(19,4.5,"$m571r68","$rmc",1,"R");
 $pdf->Cell(1,5," ","$rmc1",0,"C");
-$pdf->Cell(19,6,"$m571r70","$rmc",0,"L");$pdf->Cell(8,5," ","$rmc1",0,"C");
-$pdf->Cell(18,6,"$cslr7","$rmc",0,"C");$pdf->Cell(30,6,"$m571r72","$rmc",0,"L");
+$pdf->Cell(19,6,"$m571r70","$rmc",0,"L");$pdf->Cell(9,5," ","$rmc1",0,"C");
+$pdf->Cell(17,6,"$cslr7","$rmc",0,"C");$pdf->Cell(27.5,6,"$m571r72","$rmc",0,"L");
 $pdf->Cell(15,6,"$m571r73","$rmc",0,"C");$pdf->Cell(15,6,"","$rmc",0,"L");
-$pdf->Cell(20,6,"$m571r75","$rmc",0,"C");$pdf->Cell(20,6,"$m571r76","$rmc",0,"R");
-$pdf->Cell(25,6,"$m571r77","$rmc",0,"R");$pdf->Cell(18,6,"$m571r78","$rmc",1,"R");
+$pdf->Cell(14.5,6,"$m571r75","$rmc",0,"C");$pdf->Cell(25,6,"$m571r76","$rmc",0,"R");
+$pdf->Cell(26,6,"$m571r77","$rmc",0,"R");$pdf->Cell(19,6,"$m571r78","$rmc",1,"R");
 $pdf->Cell(1,5," ","$rmc1",0,"C");
-$pdf->Cell(19,6,"$m571r80","$rmc",0,"L");$pdf->Cell(8,5," ","$rmc1",0,"C");
-$pdf->Cell(18,6,"$cslr8","$rmc",0,"C");$pdf->Cell(30,6,"$m571r82","$rmc",0,"L");
-$pdf->Cell(15,6,"$m571r83","$rmc",0,"C");$pdf->Cell(15,6,"","$rmc",0,"L");
-$pdf->Cell(20,6,"$m571r85","$rmc",0,"C");$pdf->Cell(20,6,"$m571r86","$rmc",0,"R");
-$pdf->Cell(25,6,"$m571r87","$rmc",0,"R");$pdf->Cell(18,6,"$m571r88","$rmc",1,"R");
+$pdf->Cell(19,5,"$m571r80","$rmc",0,"L");$pdf->Cell(9,5," ","$rmc1",0,"C");
+$pdf->Cell(17,5,"$cslr8","$rmc",0,"C");$pdf->Cell(27.5,5,"$m571r82","$rmc",0,"L");
+$pdf->Cell(15,5,"$m571r83","$rmc",0,"C");$pdf->Cell(15,5,"","$rmc",0,"L");
+$pdf->Cell(14.5,5,"$m571r85","$rmc",0,"C");$pdf->Cell(25,5,"$m571r86","$rmc",0,"R");
+$pdf->Cell(26,5,"$m571r87","$rmc",0,"R");$pdf->Cell(19,5,"$m571r88","$rmc",1,"R");
 $pdf->Cell(1,5," ","$rmc1",0,"C");
-$pdf->Cell(19,6,"$m571r90","$rmc",0,"L");$pdf->Cell(8,5," ","$rmc1",0,"C");
-$pdf->Cell(18,6,"$cslr9","$rmc",0,"C");$pdf->Cell(30,6,"$m571r92","$rmc",0,"L");
-$pdf->Cell(15,6,"$m571r93","$rmc",0,"C");$pdf->Cell(15,6,"","$rmc",0,"L");
-$pdf->Cell(20,6,"$m571r95","$rmc",0,"C");$pdf->Cell(20,6,"$m571r96","$rmc",0,"R");
-$pdf->Cell(25,6,"$m571r97","$rmc",0,"R");$pdf->Cell(18,6,"$m571r98","$rmc",1,"R");
+$pdf->Cell(19,5,"$m571r90","$rmc",0,"L");$pdf->Cell(9,5," ","$rmc1",0,"C");
+$pdf->Cell(17,5,"$cslr9","$rmc",0,"C");$pdf->Cell(27.5,5,"$m571r92","$rmc",0,"L");
+$pdf->Cell(15,5,"$m571r93","$rmc",0,"C");$pdf->Cell(15,5,"","$rmc",0,"L");
+$pdf->Cell(14.5,5,"$m571r95","$rmc",0,"C");$pdf->Cell(25,5,"$m571r96","$rmc",0,"R");
+$pdf->Cell(26,5,"$m571r97","$rmc",0,"R");$pdf->Cell(19,5,"$m571r98","$rmc",1,"R");
+$pdf->Cell(1,5," ","$rmc1",0,"C");
+$pdf->Cell(19,6,"$m571r100","$rmc",0,"L");$pdf->Cell(9,5," ","$rmc1",0,"C");
+$pdf->Cell(17,6,"$cslr10","$rmc",0,"C");$pdf->Cell(27.5,6,"$m571r102","$rmc",0,"L");
+$pdf->Cell(15,6,"$m571r103","$rmc",0,"C");$pdf->Cell(15,6,"","$rmc",0,"L");
+$pdf->Cell(14.5,6,"$m571r105","$rmc",0,"C");$pdf->Cell(25,6,"$m571r106","$rmc",0,"R");
+$pdf->Cell(26,6,"$m571r107","$rmc",0,"R");$pdf->Cell(19,6,"$m571r108","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"5/12","$rmc",1,"R");
                                        }
 
 if ( $strana == 6 OR $strana == 9999 ) {
@@ -4866,6 +4953,11 @@ $pdf->Cell(195,28," ","$rmc1",1,"L");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m581r01","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,5,"$m581r02","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(75,6,"$m581r99","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"6/12","$rmc",1,"R");
                                        }
 
 if ( $strana == 7 OR $strana == 9999 ) {
@@ -4993,6 +5085,11 @@ $pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(73,5,"$m178r19","$rmc",1,"R");
 $pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(73,6,"$m178r20","$rmc",1,"R");
 $pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(73,5,"$m178r21","$rmc",1,"R");
 $pdf->Cell(113,5," ","$rmc1",0,"C");$pdf->Cell(73,5,"$m178r99","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"7/12","$rmc",1,"R");
                                        }
 
 if ( $strana == 8 OR $strana == 9999 ) {
@@ -5151,6 +5248,11 @@ $pdf->Cell(50,6,"$m183r110","$rmc",0,"C");$pdf->Cell(48,6,"$m183r210","$rmc",1,"
 $pdf->Cell(1,5," ","$rmc1",0,"C");
 $pdf->Cell(79,5,"","$rmc",0,"L");$pdf->Cell(9,5," ","$rmc1",0,"C");
 $pdf->Cell(50,5,"","$rmc",0,"C");$pdf->Cell(48,7,"$m183r299","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"8/12","$rmc",1,"R");
                                        }
 
 if ( $strana == 9 OR $strana == 9999 ) {
@@ -5322,6 +5424,11 @@ $pdf->Cell(45,6,"$m185r207","$rmc",0,"R");$pdf->Cell(46,6,"$m185r307","$rmc",1,"
 $pdf->Cell(1,7," ","$rmc1",0,"C");$pdf->Cell(59,7,"","$rmc",0,"L");
 $pdf->Cell(9,7," ","$rmc1",0,"C");$pdf->Cell(29,7,"","$rmc",0,"C");
 $pdf->Cell(45,7,"$m185r299","$rmc",0,"R");$pdf->Cell(46,7,"$m185r399","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"9/12","$rmc",1,"R");
                                        }
 
 if ( $strana == 10 OR $strana == 9999 ) {
@@ -5427,6 +5534,11 @@ $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(74,6,"$m304r04","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(74,6,"$m304r05","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(74,7,"$m304r06","$rmc",1,"R");
 $pdf->Cell(114,5," ","$rmc1",0,"C");$pdf->Cell(74,6,"$m304r99","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"10/12","$rmc",1,"R");
                                         }
 
 if ( $strana == 11 OR $strana == 9999 ) {
@@ -5522,6 +5634,11 @@ $pdf->Cell(20,7,"$m527r404","$rmc",0,"R");$pdf->Cell(25,7,"$m527r504","$rmc",0,"
 $pdf->Cell(22,7,"$m527r604","$rmc",0,"R");$pdf->Cell(23,7,"$m527r704","$rmc",0,"R");
 $pdf->Cell(22,7,"$m527r804","$rmc",0,"R");$pdf->Cell(23,7,"$m527r904","$rmc",0,"R");
 $pdf->Cell(18,7,"$m527r1004","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(182);
+$pdf->SetX(265);
+$pdf->Cell(20,6,"11/12","$rmc",1,"R");
                                         }
 
 if ( $strana == 12 OR $strana == 9999 ) {
@@ -5596,6 +5713,11 @@ $pdf->Cell(106,6," ","$rmc1",0,"C");$pdf->Cell(27,6,"$m474r107","$rmc",0,"R");
 $pdf->Cell(28,6,"$m474r207","$rmc",0,"R");$pdf->Cell(28,6,"$m474r307","$rmc",1,"R");
 $pdf->Cell(106,6," ","$rmc1",0,"C");$pdf->Cell(27,6,"$m474r199","$rmc",0,"R");
 $pdf->Cell(28,6,"$m474r299","$rmc",0,"R");$pdf->Cell(28,6,"$m474r399","$rmc",1,"R");
+
+//pagination
+$pdf->SetY(292);
+$pdf->SetX(178);
+$pdf->Cell(20,6,"12/12","$rmc",1,"R");
                                         }
 }
 $i = $i + 1;
@@ -5697,11 +5819,14 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
    document.formv1.m585r03.value = '<?php echo $m585r03; ?>';
    document.formv1.m585r04.value = '<?php echo $m585r04; ?>';
    document.formv1.m585r05.value = '<?php echo $m585r05; ?>';
+   document.formv1.m585r06.value = '<?php echo $m585r06; ?>';
+   document.formv1.m585r07.value = '<?php echo $m585r07; ?>';
    document.formv1.m585r3k.value = '<?php echo $m585r3k; ?>';
    document.formv1.m585r4k.value = '<?php echo $m585r4k; ?>';
    document.formv1.m585r5k.value = '<?php echo $m585r5k; ?>';
-<?php if ( $m100044ano == 1 ) { echo "document.formv1.m100044ano.checked='checked';"; } ?>
-<?php if ( $m100044nie == 1 ) { echo "document.formv1.m100044nie.checked='checked';"; } ?>
+   document.formv1.m585r7k.value = '<?php echo $m585r7k; ?>';
+//<?php if ( $m100044ano == 1 ) { echo "document.formv1.m100044ano.checked='checked';"; } ?>
+//<?php if ( $m100044nie == 1 ) { echo "document.formv1.m100044nie.checked='checked';"; } ?>
    document.formv1.m571r10.value = '<?php echo $m571r10; ?>';
    document.formv1.m571r12.value = '<?php echo $m571r12; ?>';
    document.formv1.m571r13.value = '<?php echo $m571r13; ?>';
@@ -5774,6 +5899,14 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
    document.formv1.m571r96.value = '<?php echo $m571r96; ?>';
    document.formv1.m571r97.value = '<?php echo $m571r97; ?>';
    document.formv1.m571r98.value = '<?php echo $m571r98; ?>';
+   document.formv1.m571r100.value = '<?php echo $m571r100; ?>';
+   document.formv1.m571r102.value = '<?php echo $m571r102; ?>';
+   document.formv1.m571r103.value = '<?php echo $m571r103; ?>';
+   //document.formv1.m571r104.value = '<?php echo "$m571r104";?>';
+   document.formv1.m571r105.value = '<?php echo $m571r105; ?>';
+   document.formv1.m571r106.value = '<?php echo $m571r106; ?>';
+   document.formv1.m571r107.value = '<?php echo $m571r107; ?>';
+   document.formv1.m571r108.value = '<?php echo $m571r108; ?>';
 <?php                     } ?>
 
 <?php if (  $strana == 6 ) { ?>
@@ -6188,7 +6321,7 @@ var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=9
     window.open('<?php echo $jpg_source; ?>_metodika.pdf', '_blank', blank_param);
 <?php } ?>
 <?php if ( $kli_vrok > 2016 ) { ?>
-    window.open('../dokumenty/statistika2017/roc_ikap201/roc_ikap201_v17_metodika.pdf');
+    window.open('../dokumenty/statistika2017/roc_ikap201/roc_ikap201_v17_metodika.pdf', '_blank', blank_param);
 <?php } ?>
   }
 
