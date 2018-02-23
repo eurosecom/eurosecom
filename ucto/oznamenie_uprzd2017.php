@@ -85,7 +85,7 @@ $zoznamaut=0;
     {
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
 $copern=20;
-$strana=1;
+$strana=2;
 $zoznamaut=0;
     }
 //koniec uprav vozidlo
@@ -105,7 +105,7 @@ $sqldok = mysql_query("$sqlttt");
  $cislo_cpl=$riaddok->cpl;
  }
 $copern=20;
-$strana=1;
+$strana=2;
 $zoznamaut=0;
 $_REQUEST['cislo_cpl']=$cislo_cpl;
     }
@@ -165,7 +165,7 @@ $uprtxt = "UPDATE F$kli_vxcf"."_uctoznamenie_uprzd SET ".
 " kriad='$kriad', kdoda='$kdoda', obod='$obodsql', obdo='$obdosql',
   oprav='$oprav', datoprav='$datoprav_sql',
   ulava30a='$ulava30a', ulava30b='$ulava30b', datum='$datumsql' ".
-" WHERE oc = 1 ";
+" WHERE oc >= 0 ";
                     }
 
 if ( $strana == 2 ) {
@@ -306,12 +306,15 @@ $vysledek = mysql_query("$sql");
 //nacitaj udaje pre upravu
 //if ( $copern == 20 OR $copern == 110 OR $copern == 10 )
 //     {
+
+
+if ( $strana == 1 OR $strana == 9999 ) {
+
 $sqlfir = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd".
-" WHERE oc = 1 AND cpl = $cislo_cpl ";
+" WHERE oc = 9999 ";
 $fir_vysledok = mysql_query($sqlfir);
 $fir_riadok=mysql_fetch_object($fir_vysledok);
 
-if ( $strana == 1 OR $strana == 9999 ) {
 $zodic = $fir_riadok->zodic;
 $kriad = 1*$fir_riadok->kriad;
 $kdoda = 1*$fir_riadok->kdoda;
@@ -330,6 +333,12 @@ $datumsk=SkDatum($datum);
                     }
 
 if ( $strana == 2 OR $strana == 9999) {
+
+$sqlfir = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd".
+" WHERE oc = 1 AND cpl = $cislo_cpl ";
+$fir_vysledok = mysql_query($sqlfir);
+$fir_riadok=mysql_fetch_object($fir_vysledok);
+
 $zodic = $fir_riadok->zodic;
 $zoprie = $fir_riadok->zoprie;
 $zomeno = $fir_riadok->zomeno;
@@ -380,6 +389,11 @@ if ( $fir_uctt03 == 999 )
 {
 $fir_fnaz = "";
 }
+
+//pocet stran
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 1 ORDER BY zodic ";
+$sql = mysql_query("$sqltt");
+$pocetstran = 1*mysql_num_rows($sql);
 
 //vypracoval
 $zrobil = $fir_mzdt05; if ( $fir_mzdt05 == '' ) $zrobil=$kli_uzmeno." ".$kli_uzprie;
@@ -536,7 +550,7 @@ dl.legend-area > dt {
   <tr>
    <td class="header">Ozn·menie o ˙prave z·kladu dane
 <?php if ( $copern == 110 ) { ?>
- / Export XML - <span class="subheader"><?php echo $cislo_dic." ".$zonaz.$zoprie." ".$zomeno; ?></span>
+ / Export XML <span class="subheader"></span>
 <?php }     ?>
    </td>
    <td>
@@ -568,8 +582,8 @@ if ( $strana == 5 ) $clas5="active";
 $source="../ucto/oznamenie_uprzd2017.php?cislo_oc=1&drupoh=1&cislo_cpl=$cislo_cpl";
 ?>
 <div class="navbar">
-<?php if ( $strana != 5 ) { ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=1', '_self');" class="<?php echo $clas1; ?> toleft">1</a>
+<?php if ( $strana != 5 AND $cislo_cpl > 0 ) { ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=2', '_self');" class="<?php echo $clas2; ?> toleft">2</a>
 <?php } ?>
  <a href="#" onclick="window.open('<?php echo $source; ?>&copern=20&strana=5', '_self');" class="<?php echo $clas5; ?> toleft">Subjekty</a>
@@ -605,7 +619,7 @@ $source="../ucto/oznamenie_uprzd2017.php?cislo_oc=1&drupoh=1&cislo_cpl=$cislo_cp
 <input type="text" name="datum" id="datum" onkeyup="CiarkaNaBodku(this);" style="width:197px; top:915px; left:385px;"/>
 <div class="input-echo" style="width:290px; top:916px; left:603px;"><?php echo $fir_mzdt04; ?></div>
 <!-- pocet 2.stran -->
-<div class="input-echo" style="width:105px; top:1019px; left:190px;"><?php echo $pol; ?></div><!-- dopyt,v html ned·va -->
+<div class="input-echo" style="width:105px; top:1019px; left:190px;"><?php echo $pocetstran; ?></div><!-- dopyt,v html ned·va -->
 <?php                                        } ?>
 
 <?php if ( $strana == 2 ) { ?>
@@ -847,7 +861,7 @@ $soubor = fopen("$nazsub", "a+");
 
 //hlavicka
 $cislo_cpl = 1*$_REQUEST['cislo_cpl'];
-$sqltt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 1 ORDER BY zodic ";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 9999 ORDER BY zodic ";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -949,36 +963,62 @@ $hodnota="1";
   $text = "  <podpis><![CDATA[".$hodnota."]]></podpis>"."\r\n"; fwrite($soubor, $text);
   $text = " </vypracoval>"."\r\n"; fwrite($soubor, $text);
 
-  $text = "  <pocetStrPrilohy><![CDATA[".$pol."]]></pocetStrPrilohy>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <pocetStrPrilohy><![CDATA[".$pocetstran."]]></pocetStrPrilohy>"."\r\n"; fwrite($soubor, $text);
 
   $text = "<telo>"."\r\n"; fwrite($soubor, $text);
 
      }
 //koniec hlavicka ak j=0
 
+}
+$i = $i + 1;
+$j = $j + 1;
+  }
+
+//telo
+$cislo_cpl = 1*$_REQUEST['cislo_cpl'];
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 1 ORDER BY zodic ";
+
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+
+$i=0;
+$j=0; //zaciatok strany ak by som chcel strankovat
+  while ( $i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$telo=mysql_fetch_object($sql);
+
+$aktualna=$i+1;
+
+$obdobie=$kli_vmes;
+$dat_dat = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+$dat_datsql = Date ("Y-m-d", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y")));
+
   $text = "<priloha>"."\r\n"; fwrite($soubor, $text);
   $text = "  <strana>"."\r\n"; fwrite($soubor, $text);
   $text = "  <aktualna><![CDATA[".$aktualna."]]></aktualna>"."\r\n"; fwrite($soubor, $text);
-  $text = "  <celkovo><![CDATA[".$pol."]]></celkovo>"."\r\n"; fwrite($soubor, $text);
+  $text = "  <celkovo><![CDATA[".$pocetstran."]]></celkovo>"."\r\n"; fwrite($soubor, $text);
   $text = "  </strana>"."\r\n"; fwrite($soubor, $text);
 
   $text = "<zavislaOsoba>"."\r\n"; fwrite($soubor, $text);
-$hodnota=$hlavicka->zodic;
+$hodnota=$telo->zodic;
   $text = " <dic><![CDATA[".$hodnota."]]></dic>"."\r\n"; fwrite($soubor, $text);
   $text = " <fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
-$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zoprie);
+$hodnota=iconv("CP1250", "UTF-8", $telo->zoprie);
   $text = "  <priezvisko><![CDATA[".$hodnota."]]></priezvisko>"."\r\n"; fwrite($soubor, $text);
-$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zomeno);
+$hodnota=iconv("CP1250", "UTF-8", $telo->zomeno);
   $text = "  <meno><![CDATA[".$hodnota."]]></meno>"."\r\n"; fwrite($soubor, $text);
-$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zotitl);
+$hodnota=iconv("CP1250", "UTF-8", $telo->zotitl);
   $text = "  <titulPred><![CDATA[".$hodnota."]]></titulPred>"."\r\n"; fwrite($soubor, $text);
-$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zotitz);
+$hodnota=iconv("CP1250", "UTF-8", $telo->zotitz);
   $text = "  <titulZa><![CDATA[".$hodnota."]]></titulZa>"."\r\n"; fwrite($soubor, $text);
   $text = " </fyzickaOsoba>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
   $text = "  <obchodneMeno>"."\r\n"; fwrite($soubor, $text);
-$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zonaz);
+$hodnota=iconv("CP1250", "UTF-8", $telo->zonaz);
   $text = "   <riadok><![CDATA[".$hodnota."]]></riadok>"."\r\n"; fwrite($soubor, $text);
 $hodnota="";
   $text = "   <riadok><![CDATA[".$hodnota."]]></riadok>"."\r\n"; fwrite($soubor, $text);
@@ -986,26 +1026,26 @@ $hodnota="";
   $text = " </pravnickaOsoba>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <sidlo>"."\r\n"; fwrite($soubor, $text);
-$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zouli);
+$hodnota=iconv("CP1250", "UTF-8", $telo->zouli);
   $text = "  <ulica><![CDATA[".$hodnota."]]></ulica>"."\r\n"; fwrite($soubor, $text);
-$hodnota=$hlavicka->zocdm;
+$hodnota=$telo->zocdm;
   $text = "  <supisneOrientacneCislo><![CDATA[".$hodnota."]]></supisneOrientacneCislo>"."\r\n"; fwrite($soubor, $text);
-$hodnota=$hlavicka->zopsc;
+$hodnota=$telo->zopsc;
 $hodnota=str_replace(" ","",$hodnota);
   $text = "  <psc><![CDATA[".$hodnota."]]></psc>"."\r\n"; fwrite($soubor, $text);
-$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zomes);
+$hodnota=iconv("CP1250", "UTF-8", $telo->zomes);
   $text = "  <obec><![CDATA[".$hodnota."]]></obec>"."\r\n"; fwrite($soubor, $text);
-$hodnota=iconv("CP1250", "UTF-8", $hlavicka->zostat);
+$hodnota=iconv("CP1250", "UTF-8", $telo->zostat);
   $text = "  <stat><![CDATA[".$hodnota."]]></stat>"."\r\n"; fwrite($soubor, $text);
   $text = " </sidlo>"."\r\n"; fwrite($soubor, $text);
 
-$hodnota=1*$hlavicka->zoulava30a;
+$hodnota=1*$telo->zoulava30a;
   $text = " <ulava30a><![CDATA[".$hodnota."]]></ulava30a>"."\r\n"; fwrite($soubor, $text);
-$hodnota=1*$hlavicka->zoulava30b;
+$hodnota=1*$telo->zoulava30b;
   $text = " <ulava30b><![CDATA[".$hodnota."]]></ulava30b>"."\r\n"; fwrite($soubor, $text);
 
   $text = " <upravaZakladu>"."\r\n"; fwrite($soubor, $text);
-$hodnota=$hlavicka->suma;
+$hodnota=$telo->suma;
 if ( $hodnota == 0 ) $hodnota="";
   $text = "  <suma><![CDATA[".$hodnota."]]></suma>"."\r\n"; fwrite($soubor, $text);
   $text = " </upravaZakladu>"."\r\n"; fwrite($soubor, $text);
@@ -1055,95 +1095,100 @@ echo "Subjekt s diË $hlavicka->zodic nem· vyplnenÈ <strong>za zdaÚovacie obdobie
 <?php
 }
 ?>
-<?php if ( $hlavicka->zodic == '0' )
-{
-?>
-<li class="red">
-<?php
-$upozorni1=1;
-echo "Subjekt s diË $hlavicka->zodic nem· vyplnenÈ <strong>diË</strong> z·vislej osoby v II.oddiele ozn·menia.";
-?>
-</li>
-<?php
-}
-?>
-<?php if ( trim($hlavicka->zoprie) == '' AND trim($hlavicka->zomeno) == '' AND trim($hlavicka->zonaz) == '' )
-{
-?>
-<li class="red">
-<?php
-$upozorni1=1;
-echo "Subjekt s diË $hlavicka->zodic nem· vyplnenÈ <strong>priezvisko, meno alebo n·zov</strong> z·vislej osoby v II.oddiele ozn·menia.";
-?>
-</li>
-<?php
-}
-?>
-<?php if ( $hlavicka->zoprie != '' AND $hlavicka->zomeno != ''  AND $hlavicka->zonaz != '' )
-{
-?>
-<li class="red">
-<?php
-$upozorni1=1;
-echo "Subjekt s diË $hlavicka->zodic m· s˙Ëasne vyplnenÈ <strong>priezvisko, meno a n·zov</strong> z·vislej osoby v II.oddiele ozn·menia.";
-?>
-</li>
-<?php
-}
-?>
-<?php if ( $hlavicka->zonaz == '' AND (( $hlavicka->zoprie != '' AND $hlavicka->zomeno == '' ) OR
- ( $hlavicka->zoprie == '' AND $hlavicka->zomeno != '' )) )
-{
-?>
-<li class="red">
-<?php
-$upozorni1=1;
-echo "Subjekt s diË $hlavicka->zodic pri fyzickej osobe musÌte vyplniù <strong>priezvisko aj meno</strong> z·vislej osoby v II.oddiele ozn·menia.";
-?>
-</li>
-<?php
-}
-?>
-</ul>
-
-<ul id="alertpage2" style="display:none;">
-<li class="header-section">STRANA 2</li>
-<?php if ( $hlavicka->zomes == '' )
-{
-?>
-<li class="red">
-<?php
-$upozorni2=1;
-echo "Subjekt s diË $hlavicka->zodic nem· vyplnen˙ poloûku <strong>obec</strong> v adrese z·vislej osoby v II.oddiele ozn·menia.";
-?>
-</li>
-<?php
-}
-?>
-<?php if ( $hlavicka->suma == 0 )
-{
-?>
-<li class="red">
-<?php
-$upozorni2=1;
-echo "Subjekt s diË $hlavicka->zodic nem· vyplnen˙ <strong>sumu ˙pravy z·kladu dane</strong> v III. oddiele ozn·menia.";
-?>
-</li>
-<?php
-}
-?>
 <?php if ( $hlavicka->datum == '0000-00-00' )
 {
 ?>
 <li class="red">
 <?php
-$upozorni2=1;
+$upozorni1=1;
 echo "Subjekt s diË $hlavicka->zodic nem· vyplnen˝ <strong>d·tum vypracovania</strong> ozn·menia.";
 ?>
 </li>
 <?php
 }
 ?>
+
+
+
+</ul>
+
+<ul id="alertpage2" style="display:none;">
+<li class="header-section">STRANA 2</li>
+<?php if ( $telo->zomes == '' )
+{
+?>
+<li class="red">
+<?php
+$upozorni2=1;
+echo "Subjekt s diË $telo->zodic nem· vyplnen˙ poloûku <strong>obec</strong> v adrese z·vislej osoby na 2.strane ozn·menia.";
+?>
+</li>
+<?php
+}
+?>
+<?php if ( $telo->suma == 0 )
+{
+?>
+<li class="red">
+<?php
+$upozorni2=1;
+echo "Subjekt s diË $telo->zodic nem· vyplnen˙ <strong>sumu ˙pravy z·kladu dane</strong> na 2.strane ozn·menia.";
+?>
+</li>
+<?php
+}
+?>
+<?php if ( $telo->zodic == '0' )
+{
+?>
+<li class="red">
+<?php
+$upozorni2=1;
+echo "Subjekt s diË $telo->zodic nem· vyplnenÈ <strong>diË</strong> z·vislej osoby na 2.strane ozn·menia.";
+?>
+</li>
+<?php
+}
+?>
+<?php if ( trim($telo->zoprie) == '' AND trim($telo->zomeno) == '' AND trim($telo->zonaz) == '' )
+{
+?>
+<li class="red">
+<?php
+$upozorni2=1;
+echo "Subjekt s diË $telo->zodic nem· vyplnenÈ <strong>priezvisko, meno alebo n·zov</strong> z·vislej osoby na 2.strane ozn·menia.";
+?>
+</li>
+<?php
+}
+?>
+<?php if ( $telo->zoprie != '' AND $telo->zomeno != ''  AND $telo->zonaz != '' )
+{
+?>
+<li class="red">
+<?php
+$upozorni2=1;
+echo "Subjekt s diË $telo->zodic m· s˙Ëasne vyplnenÈ <strong>priezvisko, meno a n·zov</strong> z·vislej osoby na 2.strane ozn·menia.";
+?>
+</li>
+<?php
+}
+?>
+<?php if ( $telo->zonaz == '' AND (( $telo->zoprie != '' AND $telo->zomeno == '' ) OR
+ ( $telo->zoprie == '' AND $telo->zomeno != '' )) )
+{
+?>
+<li class="red">
+<?php
+$upozorni2=1;
+echo "Subjekt s diË $telo->zodic pri fyzickej osobe musÌte vyplniù <strong>priezvisko aj meno</strong> z·vislej osoby na 2.strane ozn·menia.";
+?>
+</li>
+<?php
+}
+?>
+
+
 </ul>
 </div><!-- #upozornenie -->
 </div><!-- .bg-white -->
@@ -1190,7 +1235,7 @@ $rmc=0;
 $rmc1=0;
 
 //vytlac
-$sqltt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 1 AND cpl > 0 ORDER BY zodic ";
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 9999 AND cpl > 0 ORDER BY zodic ";
 
 $sql = mysql_query("$sqltt");
 $pol = mysql_num_rows($sql);
@@ -1654,7 +1699,7 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t12","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(5,6,"$t13","$rmc",1,"C");
 //pocet-priloh
 $pdf->Cell(190,18," ","$rmc1",1,"L");
-$text=$pol;
+$text=$pocetstran;
 $hodx=$text;
 $text=sprintf("% 5s",$hodx);
 $t01=substr($text,0,1);
@@ -1668,6 +1713,24 @@ $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t03","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t04","$rmc",0,"C");
 $pdf->Cell(1,6," ","$rmc1",0,"C");$pdf->Cell(4,6,"$t05","$rmc",1,"C");
                                        } //koniec 1.strany
+
+}
+$i = $i + 1;
+$j = $j + 1;
+  }
+
+$sqltt = "SELECT * FROM F$kli_vxcf"."_uctoznamenie_uprzd WHERE oc = 1 AND cpl > 0 ORDER BY zodic ";
+
+$sql = mysql_query("$sqltt");
+$pol = mysql_num_rows($sql);
+
+$i=0;
+$j=0; //zaciatok strany ak by som chcel strankovat
+  while ($i <= $pol )
+  {
+  if (@$zaznam=mysql_data_seek($sql,$i))
+{
+$hlavicka=mysql_fetch_object($sql);
 
 if ( $strana == 2 OR $strana == 9999 ) {
 $pdf->AddPage();
