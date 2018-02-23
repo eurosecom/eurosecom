@@ -1,5 +1,5 @@
 <!doctype html>
-<HTML>
+<html>
 <?php
 $sys = 'UCT';
 $urov = 1000;
@@ -68,8 +68,8 @@ if ( $kli_uzid != 17 AND $kli_uzid != 23 AND $kli_uzid != 57 AND $kli_uzid != 58
 }
 
 ?>
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=cp1250">
 <link rel="stylesheet" href="../css/reset.css">
 <title>Štatistika a výkazníctvo</title>
 <style type="text/css">
@@ -895,8 +895,8 @@ function VyberVstup()
 
 
 </script>
-</HEAD>
-<BODY onload="VyberVstup();" >
+</head>
+<body onload="VyberVstup();" >
 <!-- zahlavie -->
 <div class="wrap-heading">
  <div class="ilogin">
@@ -964,7 +964,7 @@ if ( $dajstatvyk == 1 )
 ?>
 <!-- suhrnny dph -->
 <div class="line-area" style="margin-bottom:8px;">
-<FORM name="formp3" method="post" action="#">
+<form name="formp3" method="post" action="#">
 <img src='../obr/tlac.png' onclick="TlacSuhrn();" title="Zobraziť v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
@@ -994,18 +994,29 @@ if ( $dajstatvyk == 1 )
 </div>
 </div>
 <img src='../obr/export.png' onclick="SuborSuhrn();" title="Export do XML" class="toleft line-box box-red">
-</FORM>
+</form>
 </div> <!-- .line-area suhrnny dph -->
 
 <div class="line-area">
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
- <strong>Prod 13-04<span>Štvrťročný výkaz produkčných odvetví v malých podnikoch</span></strong>
- <img src="../obr/info.png" title="Prod 13-04 verzia <?php echo $kli_vrok; ?>">
+ <strong>VTS 1-12<span>Mesačný výkaz vo vybraných trhových službách</span></strong>
+ <img src="../obr/info.png" title="VTS 1-12 verzia 2016">
 </div>
 </div>
-<img src='../obr/zoznam.png' onclick="stat1304();" title="Upraviť hodnoty" class="toleft line-box box-green">
+<img src='../obr/zoznam.png' onclick="statvts112();" title="Upraviť hodnoty" class="toleft line-box box-green">
+</div> <!-- .line-area -->
+
+<div class="line-area" style="margin-bottom:8px;">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>OPU 1-12<span>Mesačný výkaz v obchode, pohostinstve a v ubytovaní</span></strong>
+ <img src="../obr/info.png" title="OPU 1-12 verzia 2016">
+</div>
+</div>
+<img src='../obr/zoznam.png' onclick="statOPU112();" title="Upraviť hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
 
 <div class="line-area">
@@ -1023,6 +1034,17 @@ if ( $dajstatvyk == 1 )
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
+ <strong>Prod 13-04<span>Štvrťročný výkaz produkčných odvetví v malých podnikoch</span></strong>
+ <img src="../obr/info.png" title="Prod 13-04 verzia <?php echo $kli_vrok; ?>">
+</div>
+</div>
+<img src='../obr/zoznam.png' onclick="stat1304();" title="Upraviť hodnoty" class="toleft line-box box-green">
+</div> <!-- .line-area -->
+
+<div class="line-area" style="margin-bottom:8px;">
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
  <strong>Prod 3-04<span>Štvrťročný výkaz produkčných odvetví</span></strong>
  <img src="../obr/info.png" title="Prod 3-04 verzia <?php echo $kli_vrok; ?>">
 </div>
@@ -1034,22 +1056,11 @@ if ( $dajstatvyk == 1 )
 <div class="toleft line-box"></div>
 <div class="toleft line-box-text">
 <div>
- <strong>VTS 1-12<span>Mesačný výkaz vo vybraných trhových službách</span></strong>
- <img src="../obr/info.png" title="VTS 1-12 verzia 2016">
+ <strong>Roč IKaP 2-01<span>Ročný výkaz produkčných odvetví v malých podnikoch v informáciách, komunikácii...</span></strong>
+ <img src="../obr/info.png" title="Roč IKaP 2-01 verzia <?php echo $kli_vrok; ?>">
 </div>
 </div>
-<img src='../obr/zoznam.png' onclick="statvts112();" title="Upraviť hodnoty" class="toleft line-box box-green">
-</div> <!-- .line-area -->
-
-<div class="line-area">
-<div class="toleft line-box"></div>
-<div class="toleft line-box-text">
-<div>
- <strong>OPU 1-12<span>Mesačný výkaz v obchode, pohostinstve a v ubytovaní</span></strong>
- <img src="../obr/info.png" title="OPU 1-12 verzia 2016">
-</div>
-</div>
-<img src='../obr/zoznam.png' onclick="statOPU112();" title="Upraviť hodnoty" class="toleft line-box box-green">
+<img src='../obr/zoznam.png' onclick="statikap201();" title="Upraviť hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
 
 <div class="line-area">
@@ -1095,18 +1106,6 @@ if ( $dajstatvyk == 1 )
 </div>
 <img src='../obr/zoznam.png' onclick="statzav101();" title="Upraviť hodnoty" class="toleft line-box box-green">
 </div> <!-- .line-area -->
-
-<div class="line-area">
-<div class="toleft line-box"></div>
-<div class="toleft line-box-text">
-<div>
- <strong>Roč IKaP 2-01<span>Ročný výkaz produkčných odvetví v malých podnikoch v informáciách, komunikácii...</span></strong>
- <img src="../obr/info.png" title="Roč IKaP 2-01 verzia <?php echo $kli_vrok; ?>">
-</div>
-</div>
-<img src='../obr/zoznam.png' onclick="statikap201();" title="Upraviť hodnoty" class="toleft line-box box-green">
-</div> <!-- .line-area -->
-
 <?php
 }
 ?>
@@ -1117,7 +1116,7 @@ if ( $dajfinvykazy == 1 )
 {
 ?>
 <div class="line-area"> <!-- fin 1-12 -->
-<FORM name="formfin1a12" method="post" action="#">
+<form name="formfin1a12" method="post" action="#">
 <?php
 $nazfin1a12="FIN 1-12";
 ?>
@@ -1159,12 +1158,12 @@ if ( $nedaj == 0 ) { ?>
   <button type="button" onclick="CsvFin1a12();" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php              } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin1a12();" title="Upraviť hodnoty" class="toleft line-box box-green">
-</FORM>
+</form>
 </div> <!-- .line-area fin 1-12 -->
 
 <?php if ( $kli_vrok < 2018 ) { ?>
 <div class="line-area">
-<FORM name="formfin204no16" method="post" action="#">
+<form name="formfin204no16" method="post" action="#">
 <img src='../obr/tlac.png' onclick="TlacFin204no16();" title="Zobraziť v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
@@ -1188,12 +1187,12 @@ if ( $nedaj == 0 ) { ?>
   <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin204no16();" title="Upraviť hodnoty" class="toleft line-box box-green">
-</FORM>
+</form>
 </div> <!-- .line-area -->
 <?php } ?>
 
 <div class="line-area">
-<FORM name="formfin204pod16" method="post" action="#">
+<form name="formfin204pod16" method="post" action="#">
 <img src='../obr/tlac.png' onclick="TlacFin204pod16();" title="Zobraziť v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
@@ -1217,11 +1216,11 @@ if ( $nedaj == 0 ) { ?>
   <button type="button" onclick="CsvFin204pod16()" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin204pod16();" title="Upraviť hodnoty" class="toleft line-box box-green">
-</FORM>
+</form>
 </div> <!-- .line-area -->
 
 <div class="line-area">
-<FORM name="formfin304" method="post" action="#">
+<form name="formfin304" method="post" action="#">
 <img src='../obr/tlac.png' onclick="TlacFin304();" title="Zobraziť v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
@@ -1245,11 +1244,11 @@ if ( $nedaj == 0 ) { ?>
   <button type="button" onclick="CsvFin304();" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin304();" title="Upraviť hodnoty" class="toleft line-box box-green">
-</FORM>
+</form>
 </div> <!-- .line-area -->
 
 <div class="line-area">
-<FORM name="formfin404" method="post" action="#">
+<form name="formfin404" method="post" action="#">
 <img src='../obr/tlac.png' onclick="TlacFin404();" title="Zobraziť v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
@@ -1273,11 +1272,11 @@ if ( $nedaj == 0 ) { ?>
   <button type="button" onclick="CsvFin404();" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin404();" title="Upraviť hodnoty" class="toleft line-box box-green">
-</FORM>
+</form>
 </div> <!-- .line-area -->
 
 <div class="line-area">
-<FORM name="formfin504" method="post" action="#">
+<form name="formfin504" method="post" action="#">
 <img src='../obr/tlac.png' onclick="TlacFin504();" title="Zobraziť v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
@@ -1300,14 +1299,14 @@ if ( $nedaj == 0 ) { ?>
   <button type="button" onclick="CsvFin504();" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin504();" title="Upraviť hodnoty" class="toleft line-box box-green">
-</FORM>
+</form>
 </div> <!-- .line-area -->
 
 <?php
 if ( $kli_vrok >= 2013 ) {
 ?>
 <div class="line-area">
-<FORM name="formfin604" method="post" action="#">
+<form name="formfin604" method="post" action="#">
 <img src='../obr/tlac.png' onclick="TlacFin604();" title="Zobraziť v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
@@ -1331,11 +1330,11 @@ if ( $kli_vrok >= 2013 ) {
   <button type="button" onclick="CsvFin604();" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin604();" title="Upraviť hodnoty" class="toleft line-box box-green">
-</FORM>
+</form>
 </div> <!-- .line-area -->
 
-<div class="line-area">
-<FORM name="formfin704" method="post" action="#">
+<div class="line-area" style="margin-bottom">
+<form name="formfin704" method="post" action="#">
 <img src='../obr/tlac.png' onclick="TlacFin704();" title="Zobraziť v PDF" class="toleft line-box box-blue">
 <div class="toleft line-box-text">
 <div>
@@ -1359,7 +1358,7 @@ if ( $kli_vrok >= 2013 ) {
   <button type="button" onclick="" title="Export do CSV" class="btn-text toleft">CSV</button>
 <?php } ?>
 <img src='../obr/zoznam.png' onclick="UpravFin704();" title="Upraviť hodnoty" class="toleft line-box box-green">
-</FORM>
+</form>
 </div> <!-- .line-area -->
 <?php
                          }
@@ -1373,7 +1372,7 @@ if ( $kli_vrok >= 2013 ) {
 if( $dajhlaodpad == 1 ) {
 ?>
 <div class="line-area">
-<FORM name="formhlaodpad" method="post" action="#">
+<form name="formhlaodpad" method="post" action="#">
 <?php if ( $tlacodpady == 1 ) { ?>
 <img src='../obr/tlac.png' onclick="TlacHlaodpad();" title="Zobraziť v PDF" class="toleft line-box box-blue">
 <?php                         } ?>
@@ -1431,7 +1430,7 @@ if( $dajhlaodpad == 1 ) {
 <img src="../obr/info.png" onclick="XLSHlaodpad();" title="XLS súbory pre offline nahrávanie" class="toleft line-box box-bluedefault">
 <div class="toleft line-box"></div>
 <img src='../obr/zoznam.png' onclick="UpravHlaodpad();" title="Upraviť hodnoty" class="toleft line-box box-green">
-</FORM>
+</form>
 </div> <!-- .line-area -->
 <?php
 $dajhlaodpad=0;
@@ -1446,5 +1445,5 @@ $zmenume=1; $odkaz="../ucto/statzos.php?copern=1&drupoh=1&page=1&sysx=UCT";
 $cislista = include("uct_lista_norm.php");
        } while(false);
 ?>
-</BODY>
-</HTML>
+</body>
+</html>
