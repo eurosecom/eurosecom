@@ -1,5 +1,5 @@
 <!doctype html>
-<HTML>
+<html>
 <?php
 $sys = 'UCT';
 $urov = 1000;
@@ -70,8 +70,8 @@ if( $druhuj == 1 OR $druhuj == 2 ) { $ajmuj=0; }
 if( $druhuj == 3 ) { $ajpod=0; }
 
 ?>
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=cp1250">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=cp1250">
  <link rel="stylesheet" href="../css/reset.css">
 <title>EuroSecom - Daňové tlačivá</title>
 <style type="text/css">
@@ -221,6 +221,1081 @@ body, .box-bluedefault {
   display: none;
 }
 </style>
+</head>
+<body onload="VyberVstupx();">
+<div class="wrap-heading">
+ <div class="ilogin">
+  <h6 class="toleft">EuroSecom</h6>
+  <h6 class="toright">
+   <strong>UME</strong><?php echo $kli_vume; ?>
+   <strong>FIR</strong><?php echo "$kli_vxcf:$kli_nxcf"; ?>
+   <strong>login</strong><?php echo "$kli_uzmeno $kli_uzprie / $kli_uzid"; ?>
+  </h6>
+ </div>
+ <div class="heading">
+  <h1 class="toleft">Daň z príjmov</h1>
+  <dl class="toright legend-area">
+ 	 <dt class="toleft box-blue"></dt><dd class="toleft">Zobraziť v pdf</dd>
+	 <dt class="toleft box-brown"></dt><dd class="toleft">Nastaviť</dd>
+	 <dt class="toleft box-green"></dt><dd class="toleft">Upraviť</dd>
+	 <dt class="toleft box-red"></dt><dd class="toleft">Export</dd>
+	 <dt class="toleft box-lightblue"></dt><dd class="toleft">Načítať</dd>
+  </dl>
+ </div>
+</div> <!-- .wrap-heading -->
+
+<div class="content">
+<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
+
+<?php
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendens'.$kli_uzid;
+//$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendensx'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendensy'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcudenniks'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcudenniksx'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcudenniksy'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prchlknihas'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prchlknihasx'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prchlknihasy'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobrats'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsx'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsy'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphs'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphsx'.$kli_uzid;
+$vysledok = mysql_query("$sqlt");
+?>
+
+<?php
+//podvojne
+if ( $copern == 1 AND $kli_vduj != 9 )
+           {
+?>
+<?php
+//POD 2014
+if ( $kli_vrok >= 2013 AND $ajpod == 1 )
+{
+?>
+<script type="text/javascript">
+  function SuvahaPOD2014()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function VysledovkaPOD2014()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/vykzis_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function SuvahaPOD2014cele()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function VysledovkaPOD2014cele()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/vykzis_pod2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletPOD2014()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=1&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletPOD2014len1()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/uzavierka_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=0&lenvzs=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletPOD2014cele()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=1&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletPOD2014info()
+  {
+   window.open('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_vysvetlivky.pdf',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletPOD2014doxml()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletPOD2014docsv()
+  {
+   var h_zos = document.forms.formuzpod.h_zos.value;
+   var h_sch = document.forms.formuzpod.h_sch.value;
+   var h_drp = document.forms.formuzpod.h_drp.value;
+   window.open('../ucto/uzavierka_pod2014csv.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function GenSuvPod()
+  {
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
+  }
+  function GenVysPod()
+  {
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=194',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function MinSuvPod()
+  {
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function MinVysPod()
+  {
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=194',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function GesSuvPod()
+  {
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=195',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+</script>
+
+<div class="line-area"> <!-- uct.zavierka pu -->
+<form name="formuzpod" method="post" action="#">
+<a href="#" onclick="KompletPOD2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<a href="#" onclick="KompletPOD2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>Účtovná závierka</strong>
+ <img src="../obr/info.png" title="Úč POD verzia 2014">
+</div>
+<div>
+ <select size="1" name="h_drp" id="h_drp">
+  <option value="1">Riadna</option>
+  <option value="2">Mimoriadna</option>
+  <option value="3">Priebežná</option>
+ </select>
+</div>
+<div>
+ <label for="h_zos">Zostavená:</label>
+ <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
+        value="<?php echo $dnes; ?>"/>
+</div>
+<div>
+ <label for="h_sch">Schválená:</label>
+ <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
+        maxlenght="10" value=""/>
+</div>
+</div>
+<a href="#" onclick="KompletPOD2014info();" title="Vysvetlivky k účtovnej závierke"
+   class="toleft line-box box-bluedefault"><img src="../obr/info.png"></a>
+<a href="#" onclick="GenSuvPod();" title="Nastavenie generovania, predchádzajúceho obdobia a zaokrúhlenia"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+<a href="#" onclick="KompletPOD2014doxml();" title="Export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="KompletPOD2014len1();" title="Zobraziť úvodnú stranu vo formáte PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<a href="#" onclick="KompletPOD2014docsv();" title="Export do CSV"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+</form>
+
+<div class="toright" style="width:190px; margin-right:-4px;">
+ <div class="toleft line-box-text" style="width:114px;">Výkaz ziskov a strát</div>
+ <a href="#" onclick="VysledovkaPOD2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
+    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+ <a href="#" onclick="VysledovkaPOD2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+</div>
+<div class="toright" style="width:130px;">
+ <div class="toleft line-box-text" style="width:50px;">Súvaha</div>
+ <a href="#" onclick="SuvahaPOD2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
+    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+ <a href="#" onclick="SuvahaPOD2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
+    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+</div>
+</div> <!-- .line-area uct.zavierka pu -->
+
+
+<div class="line-area" style="margin-bottom:8px;"> <!-- poznamky pu -->
+<?php
+if ( $kli_vrok >= 2013 )
+{
+?>
+<form name="formpoz13" method="post" action="#">
+<a href="#" onclick="TlacPoznamky2013();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<?php
+$textverzia="verzia 2013";
+if ( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
+?>
+<div>
+ <strong>Poznámky</strong>
+ <img src="../obr/info.png" title="Úč POD 3 - 01 k DPPO <?php echo $textverzia; ?>">
+</div>
+<div>
+ <label for="h_zos">Zostavené:</label>
+ <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
+        value="<?php echo $dnes; ?>"/>
+</div>
+<div>
+ <label for="h_sch">Schválené:</label>
+ <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
+        maxlenght="10" value="<?php echo $dnes; ?>"/>
+</div>
+</div>
+<a href="#" onclick="NechcemStranyPOD2013();" title="Nastavenie strán, ktoré nechcem tlačiť"
+   class="toleft line-box box-brown"><img src='../obr/zmaz.png'></a>
+<a href="#" onclick="NacitajPoznamky2013();" title="Načítať údaje do poznámok"
+   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
+<a href="#" onclick="Poznamky2013doxml();" title="export do PDF"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravPoznamky2013();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</form>
+<?php
+}
+?>
+</div> <!-- .line-area uct.poznamky pu -->
+<?php
+}
+//koniec POD 2014
+?>
+
+<?php
+//MUJ 2014
+if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
+{
+?>
+<script type="text/javascript">
+  function SuvahaMUJ2014()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function VysledovkaMUJ2014()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/vykzis_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function SuvahaMUJ2014cele()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function VysledovkaMUJ2014cele()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/vykzis_muj2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletMUJ2014()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=1&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletMUJ2014cele()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=1&lenvzs=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletMUJ2014uvodna()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=0&lenvzs=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletMUJ2014doxml()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletMUJ2014docsv()
+  {
+   var h_zos = document.forms.formuzmuj.h_zos.value;
+   var h_sch = document.forms.formuzmuj.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/uzavierka_muj2014csv.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function GenSuvMuj()
+  {
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function GenVysMuj()
+  {
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function MinSuvMuj()
+  {
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function MinVysMuj()
+  {
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94',
+ '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function GesSuvMuj()
+  {
+   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=95',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+
+//poznamky MUJ 2014
+  function TlacPoznamkyMUJ2014()
+  {
+   var h_zos = document.forms.formpozmuj14.h_zos.value;
+   var h_sch = document.forms.formpozmuj14.h_sch.value;
+   var h_drp = document.forms.formuzmuj.h_drp.value;
+   window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function NacitajPoznamkyMUJ2014()
+  {
+   window.open('../ucto/poznamky_muj2014tlac.php?copern=1&drupoh=1&page=1&subor=0',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function UpravPoznamkyMUJ2014()
+  {
+   window.open('../ucto/poznamky_muj2014.php?copern=1&drupoh=1&page=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+</script>
+
+<div class="line-area"> <!-- uct.zavierka muj -->
+<form name="formuzmuj" method="post" action="#">
+<a href="#" onclick="KompletMUJ2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<a href="#" onclick="KompletMUJ2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>Účtovná závierka MÚJ</strong>
+ <img src="../obr/info.png" title="Úč MUJ">
+</div>
+<div>
+ <select size="1" name="h_drp" id="h_drp">
+  <option value="1">Riadna</option>
+  <option value="2">Mimoriadna</option>
+  <option value="3">Priebežná</option>
+ </select>
+</div>
+<div>
+ <label for="h_zos">Zostavená:</label>
+ <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
+        value="<?php echo $dnes; ?>"/>
+</div>
+<div>
+ <label for="h_sch">Schválená:</label>
+ <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
+        maxlenght="10" value=""/>
+</div>
+</div>
+<a href="#" onclick="GenSuvMuj();" title="Nastavenie generovania, predchádzajúceho obdobia a zaokrúhlenia"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+<a href="#" onclick="KompletMUJ2014doxml();" title="Export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="KompletMUJ2014uvodna();" title="Zobraziť úvodnú stranu vo formáte PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<a href="#" onclick="KompletMUJ2014docsv();" title="Export do CSV"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+</form>
+
+<div class="toright" style="width:216px; margin-right:-4px;">
+ <div class="toleft line-box-text" style="width:140px;">Výkaz ziskov a strát MÚJ</div>
+ <a href="#" onclick="VysledovkaMUJ2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
+    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+ <a href="#" onclick="VysledovkaMUJ2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+</div>
+<div class="toright" style="width:158px;">
+ <div class="toleft line-box-text" style="width:78px;">Súvaha MÚJ</div>
+ <a href="#" onclick="SuvahaMUJ2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
+    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+ <a href="#" onclick="SuvahaMUJ2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
+    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+</div>
+</div> <!-- .line-area uct.zavierka muj -->
+
+
+<div class="line-area" style="margin-bottom:8px;"> <!-- poznamky muj -->
+<form name="formpozmuj14" method="post" action="#">
+<a href="#" onclick="TlacPoznamkyMUJ2014();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Poznámky MÚJ</strong>
+ <img src="../obr/info.png" title="Úč MUJ 3 - 01 k DPPO verzia 2014">
+</div>
+<div>
+ <label for="h_zos">Zostavené:</label>
+ <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
+        value="<?php echo $dnes; ?>"/>
+</div>
+<div>
+ <label for="h_sch">Schválené:</label>
+ <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
+        maxlenght="10" value="<?php echo $dnes; ?>"/>
+</div>
+</div>
+<a href="#" onclick="NacitajPoznamkyMUJ2014();" title="Načítať údaje do poznámok"
+   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
+<a href="#" onclick="TlacPoznamkyMUJ2014();" title="export do PDF"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravPoznamkyMUJ2014();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</form>
+</div> <!-- .line-area poznamky muj -->
+<?php
+}
+//koniec MUJ 2014
+?>
+
+<script type="text/javascript">
+  function CASH2011()
+  {
+   var h_zos = document.forms.formcf1n.h_zos.value;
+   var h_sch = document.forms.formcf1n.h_sch.value;
+   var ktoracast = document.forms.formcf1n.ktoracast.value;
+   window.open('../ucto/cashflow2011.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&ktoracast=' + ktoracast + '&page=1&tis=0&vyb_ume=<?php echo $kli_vume; ?>',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function CASHEUR2011()
+  {
+   var h_zos = document.forms.formcf1n.h_zos.value;
+   var h_sch = document.forms.formcf1n.h_sch.value;
+   var ktoracast = document.forms.formcf1n.ktoracast.value;
+   window.open('../ucto/cashflow2011.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&ktoracast=' + ktoracast + '&page=1&tis=1&vyb_ume=<?php echo $kli_vume; ?>',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function CASHGEN2011()
+  {
+   window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function CASHPREDCH2011()
+  {
+   window.open('../ucto/oprsys.php?copern=308&drupoh=24&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+</script>
+
+<div class="line-area" style="margin-bottom:8px;"> <!-- cash flow priama -->
+<form name="formcf1n" method="post" action="#">
+<a href="#" onclick="CASH2011();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<a href="#" onclick="CASHEUR2011();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+<?php
+$textverzia="verzia 2011";
+if ( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
+?>
+ <strong>Cash Flow - priama metóda</strong>
+ <img src="../obr/info.png" title="CF priama metóda <?php echo $textverzia; ?>">
+</div>
+<div>
+ <label for="h_zos">Zostavený:</label>
+ <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
+        value="<?php echo $dnes; ?>"/>
+</div>
+<div>
+ <label for="h_sch">Schválený:</label>
+ <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
+        maxlenght="10" value="<?php echo $dnes; ?>"/>
+</div>
+<div>
+<?php if ( $fir_big == 1 ) { ?>
+ <select size="1" name="ktoracast" id="ktoracast">
+  <option value="0">všetky časti</option>
+  <option value="1">časť 1</option>
+  <option value="2">časť 2</option>
+  <option value="3">časť 3</option>
+  <option value="4">časť 4</option>
+  <option value="5">časť 5</option>
+  <option value="6">časť 6</option>
+ </select>
+<?php                      } ?>
+<?php if ( $fir_big != 1 ) { ?>
+ <input type="hidden" name="ktoracast" id="ktoracast" value="0"/>
+<?php                      } ?>
+</div>
+</div>
+<a href="#" onclick="CASHGEN2011();" title="Nastavenie generovania"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+<a href="#" onclick="CASHPREDCH2011();" title="Nastavenie predchádzajúceho obdobia"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+</form>
+</div> <!-- .line-area cf priama -->
+
+
+<div class="line-area"> <!-- priznanie po -->
+<div class="toleft line-box"></div>
+<a href="#" onclick="TlacPriznanie();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>Priznanie k dani z príjmov PO</strong>
+</div>
+</div>
+<a href="#" onclick="TlacPotvrdDPO();" title="Zobraziť potvrdenie o podaní v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<a href="#" onclick="POdoXML();" title="export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravPriznanie();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area priznanie po -->
+
+<?php
+if ( $kli_nezis == 1 )
+{
+?>
+
+<?php if ( $kli_vrok >= 2012 ) { ?>
+
+<script type="text/javascript">
+  function SuvahaNO2012()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function VysledovkaNO2012()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   window.open('../ucto/vykzis_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function UzavierkaNUJ2013()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   window.open('../ucto/uzavierka_nuj2013.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletNUJ2013()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   var h_sch = document.forms.formuznuj.h_sch.value;
+   var h_drp = document.forms.formuznuj.h_drp.value;
+   window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletNUJ2013len1()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   var h_sch = document.forms.formuznuj.h_sch.value;
+   var h_drp = document.forms.formuznuj.h_drp.value;
+   window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&len1=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletNUJ2013doxml()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   var h_sch = document.forms.formuznuj.h_sch.value;
+   var h_drp = document.forms.formuznuj.h_drp.value;
+   window.open('../ucto/uzavierka_nuj2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletNUJ2013docsv()
+  {
+   var h_zos = document.forms.formuznuj.h_zos.value;
+   var h_sch = document.forms.formuznuj.h_sch.value;
+   var h_drp = document.forms.formuznuj.h_drp.value;
+   window.open('../ucto/uzavierka_nuj2013csv.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function NechcemStranyNUJ2013()
+  {
+   window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function SuvPredchNUJ2013()
+  {
+   window.open('../ucto/oprsys.php?copern=308&drupoh=32&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function VzasPredchNUJ2013()
+  {
+   window.open('../ucto/oprsys.php?copern=308&drupoh=31&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+</script>
+
+<div class="line-area" style="margin-top:8px;"> <!-- uct.zavierka pu nuj -->
+<form name="formuznuj" method="post" action="#">
+<a href="#" onclick="KompletNUJ2013();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Účtovná závierka NÚJ</strong>
+ <img src="../obr/info.png" title="Úč NUJ resp. UZNUJ">
+</div>
+<div>
+ <select size="1" name="h_drp" id="h_drp">
+  <option value="1">Riadna</option>
+  <option value="2">Mimoriadna</option>
+ </select>
+</div>
+<div>
+ <label for="h_zos">Zostavená:</label>
+ <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
+        value="<?php echo $dnes; ?>"/>
+</div>
+<div>
+ <label for="h_sch">Schválená:</label>
+ <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
+        maxlenght="10" value=""/>
+</div>
+</div>
+<a href="#" onclick="KompletNUJ2013doxml();" title="Export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="KompletNUJ2013len1();" title="Zobraziť úvodnú stranu vo formáte PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<a href="#" onclick="KompletNUJ2013docsv();" title="Export do CSV"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+</form>
+
+<div class="toright" style="width:216px; margin-right:-4px;">
+ <div class="toleft line-box-text" style="width:140px;">Výkaz ziskov a strát NÚJ</div>
+ <a href="#" onclick="VysledovkaNO2012();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
+    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+ <a href="#" onclick="VzasPredchNUJ2013();" title="Nastavenie predchádzajúceho obdobia"
+    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, preveriť -->
+</div>
+<div class="toright" style="width:192px;">
+ <div class="toleft line-box-text" style="width:76px;">Súvaha NÚJ</div>
+ <a href="#" onclick="SuvahaNO2012();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
+    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+ <a href="#" onclick="GenSuvNo();" title="Nastavenie generovania"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+ <a href="#" onclick="SuvPredchNUJ2013();" title="Nastavenie predchádzajúceho obdobia"
+   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, preveriť -->
+</div>
+</div> <!-- .line-area uct.zavierka pu nuj -->
+<?php                          } ?>
+
+<?php $vsetky=1; ?>
+<?php
+if ( $vsetky == 1 ) {
+?>
+<div class="line-area" style="margin-bottom:8px;"> <!-- poznamky pu nuj -->
+<form name="formpoz11no" method="post" action="#">
+<a href="#" onclick="TlacPoznamky2011no();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Poznámky NÚJ</strong>
+ <img src="../obr/info.png" title="Úč NUJ 3-01">
+</div>
+<div>
+ <label for="h_zos">Zostavené:</label>
+ <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
+        value="<?php echo $dnes; ?>"/>
+</div>
+<div>
+ <label for="h_sch">Schválené:</label>
+ <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
+        maxlenght="10" value="<?php echo $dnes; ?>"/>
+</div>
+</div>
+<a href="#" onclick="NechcemStranyNUJ2013();" title="Nastavenie strán, ktoré nechcem tlačiť"
+   class="toleft line-box box-brown"><img src='../obr/zmaz.png'></a>
+<a href="#" onclick="Poznamky2011NOdoxml();" title="export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="NacitajPoznamky2011no();" title="Načítať údaje do poznámok"
+   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
+<a href="#" onclick="UpravPoznamky2011no();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</form>
+</div> <!-- .line-area poznamky pu nuj -->
+<?php               } ?>
+<?php
+}
+?>
+
+<?php
+//koniec podvojne
+           }
+?>
+
+<?php
+$jedrok=2013;
+if ( $kli_vrok < 2013 ) { $jedrok=""; }
+?>
+<?php
+$uzjuforok=2014;
+?>
+<?php
+//jednoduche
+if ( $copern == 1 AND $kli_vduj == 9 )
+           {
+?>
+<script type="text/javascript">
+  function XMLprivyd()
+  {
+   var h_zos = document.forms.formj1.h_zos.value;
+   var h_sch = document.forms.formj1.h_sch.value;
+   window.open('../ucto/vprivyd<?php echo $jedrok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&suborxml=1&celeeura=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function uzavfo2014cele()
+  {
+   var h_zos = document.forms.formuzfo2014.h_zos.value;
+   var h_sch = document.forms.formuzfo2014.h_sch.value;
+   var h_drp = document.forms.formuzfo2014.h_drp.value;
+   window.open('../ucto/vprivyd<?php echo $uzjuforok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&celeeura=1&uzav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function uzavfo2014()
+  {
+   var h_zos = document.forms.formuzfo2014.h_zos.value;
+   var h_sch = document.forms.formuzfo2014.h_sch.value;
+   var h_drp = document.forms.formuzfo2014.h_drp.value;
+   window.open('../ucto/vprivyd<?php echo $uzjuforok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&uzav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function uzavfo2014info()
+  {
+   window.open('../dokumenty/vykazy_ju2014/fo2014/uzfo_v14_vysvetlivky.pdf',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function uzavfo2014xml()
+  {
+   var h_zos = document.forms.formuzfo2014.h_zos.value;
+   var h_sch = document.forms.formuzfo2014.h_sch.value;
+   var h_drp = document.forms.formuzfo2014.h_drp.value;
+   window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&suborxml=1&celeeura=1&uzav=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function vmazprech2014()
+  {
+   window.open('../ucto/oprsys.php?copern=308&drupoh=42&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+</script>
+
+<?php if ( $kli_vrok >= 2014 ) { ?>
+<div class="line-area" style="margin-bottom:8px;"> <!-- uct.zavierka ju -->
+<form name="formuzfo2014" method="post" action="#">
+<a href="#" onclick="uzavfo2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<a href="#" onclick="uzavfo2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>Účtovná závierka</strong>
+ <img src="../obr/info.png" title="Úč FO verzia 2014">
+</div>
+<div>
+ <select size="1" name="h_drp" id="h_drp">
+  <option value="1">Riadna</option>
+  <option value="2">Mimoriadna</option>
+  <option value="3">Priebežná</option>
+ </select>
+</div>
+<div>
+ <label for="h_zos">Zostavená:</label>
+ <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
+        value="<?php echo $dnes; ?>"/>
+</div>
+<div>
+ <label for="h_sch">Schválená:</label>
+ <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
+        maxlenght="10" value=""/>
+</div>
+</div>
+<a href="#" onclick="uzavfo2014info();"
+   title="Vysvetlivky k účtovnej závierke" class="toleft line-box box-bluedefault">
+ <img src="../obr/info.png"></a>
+<a href="#" onclick="uzavfo2014xml();" title="Export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+ <a href="#" onclick="vmazprech2014();" title="Nastavenie predchádzajúceho obdobia výkazu o majetku a záväzkoch"
+  class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, preveriť -->
+</form>
+</div> <!-- .line-area uct.zavierka ju -->
+<?php                          } ?>
+
+
+<?php if ( $kli_vrok >= 2012 ) { ?>
+
+<script type="text/javascript">
+  function GenPriVydNOJU()
+  {
+   window.open('../ucto/oprcis.php?copern=308&drupoh=97&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function GenMajZavNOJU()
+  {
+   window.open('../ucto/oprcis.php?copern=308&drupoh=98&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function PredMajZavNOJU()
+  {
+   window.open('../ucto/oprsys.php?copern=308&drupoh=47&page=1&sysx=UCT',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletNO2013()
+  {
+   var h_zos = document.forms.formuznoj.h_zos.value;
+   var h_sch = document.forms.formuznoj.h_sch.value;
+   var h_drp = document.forms.formuznoj.h_drp.value;
+   window.open('../ucto/privyd_noju.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletNO2013len1()
+  {
+   var h_zos = document.forms.formuznoj.h_zos.value;
+   var h_sch = document.forms.formuznoj.h_sch.value;
+   var h_drp = document.forms.formuznoj.h_drp.value;
+   window.open('../ucto/privyd_noju.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&len1=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletNO2013doxml()
+  {
+   var h_zos = document.forms.formuznoj.h_zos.value;
+   var h_sch = document.forms.formuznoj.h_sch.value;
+   var h_drp = document.forms.formuznoj.h_drp.value;
+  window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+  function KompletNO2013docsv()
+  {
+   var h_zos = document.forms.formuznoj.h_zos.value;
+   var h_sch = document.forms.formuznoj.h_sch.value;
+   var h_drp = document.forms.formuznoj.h_drp.value;
+  window.open('../ucto/uzavierka_no2013csv.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
+ '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+  }
+</script>
+ <!-- uct.zavierka ju nuj -->
+<div class="line-area" style="margin-bottom:8px;">
+<form name="formuznoj" method="post" action="#">
+<a href="#" onclick="KompletNO2013();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Účtovná závierka NÚJ</strong>
+ <img src="../obr/info.png" title="Úč NO resp. UZNO - príloha k opatreniu č. MF/17616/2013-74">
+</div>
+<div>
+ <select size="1" name="h_drp" id="h_drp">
+  <option value="1">Riadna</option>
+  <option value="2">Mimoriadna</option>
+ </select>
+</div>
+<div>
+ <label for="h_zos">Zostavená:</label>
+ <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
+        value="<?php echo $dnes; ?>"/>
+</div>
+<div>
+ <label for="h_sch">Schválená:</label>
+ <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
+        maxlenght="10" value=""/>
+</div>
+</div>
+<a href="#" onclick="KompletNO2013doxml();" title="Export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="KompletNO2013len1();" title="Zobraziť úvodnú stranu vo formáte PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<a href="#" onclick="KompletNO2013docsv();" title="Export do CSV"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+ <a href="#" onclick="GenMajZavNOJU();" title="Nastavenie generovania riadkov výkazu o majetku a záväzkov NÚJ"
+    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+ <a href="#" onclick="PredMajZavNOJU();" title="Nastavenie predchádzajúceho obdobia výkazu o majetku a záväzkov NÚJ"
+    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+ <a href="#" onclick="GenPriVydNOJU();" title="Nastavenie generovania riadkov výkazu o príjmoch a výdavkoch NÚJ"
+    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
+</form>
+</div> <!-- .line-area uct.zavierka ju nuj -->
+<?php                          } ?>
+
+<div class="line-area"> <!-- platby do fondov sp a zp -->
+<a href="#" onclick="platbyju();" title="Ukázať platby v <?php echo $mena1; ?>á + centy"
+   class="toleft line-box box-bluedefault"><img src='../obr/hladaj.png'></a>
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Platby dane z príjmu a odvodov SP a ZP pre budúci rok</strong>
+</div>
+</div>
+</div> <!-- .line-area platby do fondov sp a zp -->
+<?php
+//koniec jednoduche
+           }
+?>
+
+
+<div class="line-area"> <!-- priznanie fob -->
+<a href="#" onclick="TlacFOB();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Priznanie k dani z príjmov FO typ B</strong>
+</div>
+</div>
+<a href="#" onclick="TlacPotvrdFOB();" title="Zobraziť potvrdenie o podaní v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<a href="#" onclick="FOBdoXML();" title="export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravFOB();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area priznanie fob -->
+
+<div class="line-area" style="margin-bottom:8px;"> <!-- priznanie dmv -->
+<a href="#" onclick="TlacDMV();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box"></div>
+<div class="toleft line-box-text">
+<div>
+ <strong>Priznanie k dani z motorových vozidiel</strong>
+</div>
+</div>
+<a href="#" onclick="TlacPotvrdDMV();" title="Zobraziť potvrdenie o podaní v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<a href="#" onclick="DMVdoXML();" title="export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravDMV();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area priznanie dmv -->
+
+<?php if ( $kli_vrok >= 2017 ) { ?>
+<div class="line-area"> <!-- oznamenie odlož -->
+<div class="toleft line-box"></div>
+<a href="#" onclick="TlacOzOdl();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>Oznámenie daňovníka o predĺžení lehoty na podanie daňového priznania</strong>
+</div>
+</div>
+<a href="#" onclick="OzOdldoXML();" title="export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravOzOdl();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area oznamenie odlož -->
+<?php } ?>
+
+
+<div class="line-area"> <!-- oznamenie o uz -->
+<div class="toleft line-box"></div>
+<a href="#" onclick="TlacOzUz();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>Oznámenie o dátume schválenia účtovnej závierky</strong>
+</div>
+</div>
+<a href="#" onclick="OzUzdoXML();" title="export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravOzUz();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div> <!-- .line-area oznamenie o uz -->
+
+<div class="line-area"> <!-- podanie o uz pod-->
+<div class="toleft line-box"></div>
+<a href="#" onclick="TlacVseob();" title="Zobraziť v PDF"
+   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>Všeobecné podanie k účtovnej závierke </strong>
+</div>
+</div>
+<a href="#" onclick="VseobdoXML();" title="export do XML"
+   class="toleft line-box box-red"><img src='../obr/export.png'></a>
+<a href="#" onclick="UpravVseob();" title="Upraviť hodnoty"
+   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div>
+
+
+<div class="line-area"> <!-- podanie ozn176-->
+<div class="toleft line-box"></div>
+  <a href="#" onclick="TlacOzn176();" title="Zobraziť v PDF" class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
+<div class="toleft line-box-text">
+<div>
+ <strong>Oznámenie o vykonaní úpravy základu dane </strong>
+</div>
+</div>
+  <a href="#" onclick="UpravOzn176();" title="Upraviť hodnoty" class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
+</div>
+
+</div><!-- .content -->
+<?php
+//celkovy koniec dokumentu
+$cislista = include("uct_lista_norm.php");
+       } while (false);
+?>
 <script type="text/javascript">
 //parameter okna
 var blank_param = 'scrollbars=yes,resizable=yes,top=0,left=0,width=1080,height=900';
@@ -558,1096 +1633,13 @@ if ( $kli_vrok >= 2017 ) { $rokuprzd=2017; }
 ?>
   function TlacOzn176()
   {
-   window.open('../ucto/oznamenie_uprzd<?php echo $rokuprzd; ?>.php?copern=10&drupoh=1&page=9999&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+    window.open('../ucto/oznamenie_uprzd<?php echo $rokuprzd; ?>.php?copern=10&drupoh=1&strana=9999', '_blank', blank_param);
   }
   function UpravOzn176()
   {
-   var h_oc = 0;
-   window.open('../ucto/oznamenie_uprzd<?php echo $rokuprzd; ?>.php?copern=20&drupoh=1&page=1&strana=5',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-
-
-</script>
-</HEAD>
-<BODY onload="VyberVstupx();">
-
-<div class="wrap-heading">
- <div class="ilogin">
-  <h6 class="toleft">EuroSecom</h6>
-  <h6 class="toright">
-   <strong>UME</strong><?php echo $kli_vume; ?>
-   <strong>FIR</strong><?php echo "$kli_vxcf:$kli_nxcf"; ?>
-   <strong>login</strong><?php echo "$kli_uzmeno $kli_uzprie / $kli_uzid"; ?>
-  </h6>
- </div>
- <div class="heading">
-  <h1 class="toleft">Daň z príjmov</h1>
-  <dl class="toright legend-area">
- 	 <dt class="toleft box-blue"></dt><dd class="toleft">Zobraziť v pdf</dd>
-	 <dt class="toleft box-brown"></dt><dd class="toleft">Nastaviť</dd>
-	 <dt class="toleft box-green"></dt><dd class="toleft">Upraviť</dd>
-	 <dt class="toleft box-red"></dt><dd class="toleft">Export</dd>
-	 <dt class="toleft box-lightblue"></dt><dd class="toleft">Načítať</dd>
-  </dl>
- </div>
-</div> <!-- .wrap-heading -->
-
-<div class="content">
-<?php $dnes = Date ("d.m.Y", MkTime (date("H"),date("i"),date("s"),date("m"),date("d"),date("Y"))); ?>
-
-<?php
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendens'.$kli_uzid;
-//$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendensx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcpendensy'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcudenniks'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcudenniksx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcudenniksy'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prchlknihas'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prchlknihasx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prchlknihasy'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobrats'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcuobratsy'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphs'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-$sqlt = 'DROP TABLE F'.$kli_vxcf.'_prcprizdphsx'.$kli_uzid;
-$vysledok = mysql_query("$sqlt");
-?>
-
-<?php
-//podvojne
-if ( $copern == 1 AND $kli_vduj != 9 )
-           {
-?>
-<?php
-//POD 2014
-if ( $kli_vrok >= 2013 AND $ajpod == 1 )
-{
-?>
-<script type="text/javascript">
-  function SuvahaPOD2014()
-  {
-   var h_zos = document.forms.formuzpod.h_zos.value;
-   var h_sch = document.forms.formuzpod.h_sch.value;
-   var h_drp = document.forms.formuzpod.h_drp.value;
-   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function VysledovkaPOD2014()
-  {
-   var h_zos = document.forms.formuzpod.h_zos.value;
-   var h_sch = document.forms.formuzpod.h_sch.value;
-   var h_drp = document.forms.formuzpod.h_drp.value;
-   window.open('../ucto/vykzis_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function SuvahaPOD2014cele()
-  {
-   var h_zos = document.forms.formuzpod.h_zos.value;
-   var h_sch = document.forms.formuzpod.h_sch.value;
-   var h_drp = document.forms.formuzpod.h_drp.value;
-   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function VysledovkaPOD2014cele()
-  {
-   var h_zos = document.forms.formuzpod.h_zos.value;
-   var h_sch = document.forms.formuzpod.h_sch.value;
-   var h_drp = document.forms.formuzpod.h_drp.value;
-   window.open('../ucto/vykzis_pod2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletPOD2014()
-  {
-   var h_zos = document.forms.formuzpod.h_zos.value;
-   var h_sch = document.forms.formuzpod.h_sch.value;
-   var h_drp = document.forms.formuzpod.h_drp.value;
-   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=1&lenvzs=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletPOD2014len1()
-  {
-   var h_zos = document.forms.formuzpod.h_zos.value;
-   var h_sch = document.forms.formuzpod.h_sch.value;
-   var h_drp = document.forms.formuzpod.h_drp.value;
-   window.open('../ucto/uzavierka_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=0&lenvzs=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletPOD2014cele()
-  {
-   var h_zos = document.forms.formuzpod.h_zos.value;
-   var h_sch = document.forms.formuzpod.h_sch.value;
-   var h_drp = document.forms.formuzpod.h_drp.value;
-   window.open('../ucto/suvaha_pod2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=1&lenvzs=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletPOD2014info()
-  {
-   window.open('../dokumenty/vykazy_pu2014/pod2014/uzpod_v14_vysvetlivky.pdf',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletPOD2014doxml()
-  {
-   var h_zos = document.forms.formuzpod.h_zos.value;
-   var h_sch = document.forms.formuzpod.h_sch.value;
-   var h_drp = document.forms.formuzpod.h_drp.value;
-   window.open('../ucto/uzavierka_pod2014xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletPOD2014docsv()
-  {
-   var h_zos = document.forms.formuzpod.h_zos.value;
-   var h_sch = document.forms.formuzpod.h_sch.value;
-   var h_drp = document.forms.formuzpod.h_drp.value;
-   window.open('../ucto/uzavierka_pod2014csv.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function GenSuvPod()
-  {
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes' );
-  }
-  function GenVysPod()
-  {
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=194',
- '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function MinSuvPod()
-  {
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=193',
- '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function MinVysPod()
-  {
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=194',
- '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function GesSuvPod()
-  {
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=195',
- '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
+    var h_oc = 0;
+    window.open('../ucto/oznamenie_uprzd<?php echo $rokuprzd; ?>.php?copern=20&drupoh=1&strana=5', '_blank', blank_param);
   }
 </script>
-
-<div class="line-area"> <!-- uct.zavierka pu -->
-<FORM name="formuzpod" method="post" action="#">
-<a href="#" onclick="KompletPOD2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<a href="#" onclick="KompletPOD2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box-text">
-<div>
- <strong>Účtovná závierka</strong>
- <img src="../obr/info.png" title="Úč POD verzia 2014">
-</div>
-<div>
- <select size="1" name="h_drp" id="h_drp">
-  <option value="1">Riadna</option>
-  <option value="2">Mimoriadna</option>
-  <option value="3">Priebežná</option>
- </select>
-</div>
-<div>
- <label for="h_zos">Zostavená:</label>
- <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
-        value="<?php echo $dnes; ?>"/>
-</div>
-<div>
- <label for="h_sch">Schválená:</label>
- <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
-        maxlenght="10" value=""/>
-</div>
-</div>
-<a href="#" onclick="KompletPOD2014info();" title="Vysvetlivky k účtovnej závierke"
-   class="toleft line-box box-bluedefault"><img src="../obr/info.png"></a>
-<a href="#" onclick="GenSuvPod();" title="Nastavenie generovania, predchádzajúceho obdobia a zaokrúhlenia"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-<a href="#" onclick="KompletPOD2014doxml();" title="Export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="KompletPOD2014len1();" title="Zobraziť úvodnú stranu vo formáte PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<a href="#" onclick="KompletPOD2014docsv();" title="Export do CSV"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-</FORM>
-
-<div class="toright" style="width:190px; margin-right:-4px;">
- <div class="toleft line-box-text" style="width:114px;">Výkaz ziskov a strát</div>
- <a href="#" onclick="VysledovkaPOD2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
-    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
- <a href="#" onclick="VysledovkaPOD2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-</div>
-<div class="toright" style="width:130px;">
- <div class="toleft line-box-text" style="width:50px;">Súvaha</div>
- <a href="#" onclick="SuvahaPOD2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
-    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
- <a href="#" onclick="SuvahaPOD2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
-    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-</div>
-</div> <!-- .line-area uct.zavierka pu -->
-
-
-<div class="line-area" style="margin-bottom:8px;"> <!-- poznamky pu -->
-<?php
-if ( $kli_vrok >= 2013 )
-{
-?>
-<FORM name="formpoz13" method="post" action="#">
-<a href="#" onclick="TlacPoznamky2013();" title="Zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box"></div>
-<div class="toleft line-box-text">
-<?php
-$textverzia="verzia 2013";
-if ( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
-?>
-<div>
- <strong>Poznámky</strong>
- <img src="../obr/info.png" title="Úč POD 3 - 01 k DPPO <?php echo $textverzia; ?>">
-</div>
-<div>
- <label for="h_zos">Zostavené:</label>
- <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
-        value="<?php echo $dnes; ?>"/>
-</div>
-<div>
- <label for="h_sch">Schválené:</label>
- <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
-        maxlenght="10" value="<?php echo $dnes; ?>"/>
-</div>
-</div>
-<a href="#" onclick="NechcemStranyPOD2013();" title="Nastavenie strán, ktoré nechcem tlačiť"
-   class="toleft line-box box-brown"><img src='../obr/zmaz.png'></a>
-<a href="#" onclick="NacitajPoznamky2013();" title="Načítať údaje do poznámok"
-   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-<a href="#" onclick="Poznamky2013doxml();" title="export do PDF"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravPoznamky2013();" title="Upraviť hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</FORM>
-<?php
-}
-?>
-</div> <!-- .line-area uct.poznamky pu -->
-<?php
-}
-//koniec POD 2014
-?>
-
-<?php
-//MUJ 2014
-if ( $kli_vrok >= 2013 AND $ajmuj == 1 )
-{
-?>
-<script type="text/javascript">
-  function SuvahaMUJ2014()
-  {
-   var h_zos = document.forms.formuzmuj.h_zos.value;
-   var h_sch = document.forms.formuzmuj.h_sch.value;
-   var h_drp = document.forms.formuzmuj.h_drp.value;
-   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function VysledovkaMUJ2014()
-  {
-   var h_zos = document.forms.formuzmuj.h_zos.value;
-   var h_sch = document.forms.formuzmuj.h_sch.value;
-   var h_drp = document.forms.formuzmuj.h_drp.value;
-   window.open('../ucto/vykzis_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function SuvahaMUJ2014cele()
-  {
-   var h_zos = document.forms.formuzmuj.h_zos.value;
-   var h_sch = document.forms.formuzmuj.h_sch.value;
-   var h_drp = document.forms.formuzmuj.h_drp.value;
-   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=1&lenvzs=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function VysledovkaMUJ2014cele()
-  {
-   var h_zos = document.forms.formuzmuj.h_zos.value;
-   var h_sch = document.forms.formuzmuj.h_sch.value;
-   var h_drp = document.forms.formuzmuj.h_drp.value;
-   window.open('../ucto/vykzis_muj2014.php?copern=10&drupoh=1&tis=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&lensuv=0&lenvzs=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletMUJ2014()
-  {
-   var h_zos = document.forms.formuzmuj.h_zos.value;
-   var h_sch = document.forms.formuzmuj.h_sch.value;
-   var h_drp = document.forms.formuzmuj.h_drp.value;
-   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&lensuv=1&lenvzs=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletMUJ2014cele()
-  {
-   var h_zos = document.forms.formuzmuj.h_zos.value;
-   var h_sch = document.forms.formuzmuj.h_sch.value;
-   var h_drp = document.forms.formuzmuj.h_drp.value;
-   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=1&lenvzs=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletMUJ2014uvodna()
-  {
-   var h_zos = document.forms.formuzmuj.h_zos.value;
-   var h_sch = document.forms.formuzmuj.h_sch.value;
-   var h_drp = document.forms.formuzmuj.h_drp.value;
-   window.open('../ucto/suvaha_muj2014.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&tis=1&lensuv=0&lenvzs=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletMUJ2014doxml()
-  {
-   var h_zos = document.forms.formuzmuj.h_zos.value;
-   var h_sch = document.forms.formuzmuj.h_sch.value;
-   var h_drp = document.forms.formuzmuj.h_drp.value;
-   window.open('../ucto/uzavierka_muj2014xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletMUJ2014docsv()
-  {
-   var h_zos = document.forms.formuzmuj.h_zos.value;
-   var h_sch = document.forms.formuzmuj.h_sch.value;
-   var h_drp = document.forms.formuzmuj.h_drp.value;
-   window.open('../ucto/uzavierka_muj2014csv.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function GenSuvMuj()
-  {
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function GenVysMuj()
-  {
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94',
- '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function MinSuvMuj()
-  {
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=93',
- '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function MinVysMuj()
-  {
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=94',
- '_blank','width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function GesSuvMuj()
-  {
-   window.open('../ucto/vykazy_cis.php?copern=308&drupoh=95',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-
-//poznamky MUJ 2014
-  function TlacPoznamkyMUJ2014()
-  {
-   var h_zos = document.forms.formpozmuj14.h_zos.value;
-   var h_sch = document.forms.formpozmuj14.h_sch.value;
-   var h_drp = document.forms.formuzmuj.h_drp.value;
-   window.open('../ucto/poznamky_muj2014tlac.php?cislo_oc=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&copern=10&drupoh=1&page=9999&strana=9999&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function NacitajPoznamkyMUJ2014()
-  {
-   window.open('../ucto/poznamky_muj2014tlac.php?copern=1&drupoh=1&page=1&subor=0',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function UpravPoznamkyMUJ2014()
-  {
-   window.open('../ucto/poznamky_muj2014.php?copern=1&drupoh=1&page=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-</script>
-
-<div class="line-area"> <!-- uct.zavierka muj -->
-<FORM name="formuzmuj" method="post" action="#">
-<a href="#" onclick="KompletMUJ2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<a href="#" onclick="KompletMUJ2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box-text">
-<div>
- <strong>Účtovná závierka MÚJ</strong>
- <img src="../obr/info.png" title="Úč MUJ">
-</div>
-<div>
- <select size="1" name="h_drp" id="h_drp">
-  <option value="1">Riadna</option>
-  <option value="2">Mimoriadna</option>
-  <option value="3">Priebežná</option>
- </select>
-</div>
-<div>
- <label for="h_zos">Zostavená:</label>
- <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
-        value="<?php echo $dnes; ?>"/>
-</div>
-<div>
- <label for="h_sch">Schválená:</label>
- <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
-        maxlenght="10" value=""/>
-</div>
-</div>
-<a href="#" onclick="GenSuvMuj();" title="Nastavenie generovania, predchádzajúceho obdobia a zaokrúhlenia"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-<a href="#" onclick="KompletMUJ2014doxml();" title="Export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="KompletMUJ2014uvodna();" title="Zobraziť úvodnú stranu vo formáte PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<a href="#" onclick="KompletMUJ2014docsv();" title="Export do CSV"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-</FORM>
-
-<div class="toright" style="width:216px; margin-right:-4px;">
- <div class="toleft line-box-text" style="width:140px;">Výkaz ziskov a strát MÚJ</div>
- <a href="#" onclick="VysledovkaMUJ2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
-    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
- <a href="#" onclick="VysledovkaMUJ2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-</div>
-<div class="toright" style="width:158px;">
- <div class="toleft line-box-text" style="width:78px;">Súvaha MÚJ</div>
- <a href="#" onclick="SuvahaMUJ2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
-    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
- <a href="#" onclick="SuvahaMUJ2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
-    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-</div>
-</div> <!-- .line-area uct.zavierka muj -->
-
-
-<div class="line-area" style="margin-bottom:8px;"> <!-- poznamky muj -->
-<FORM name="formpozmuj14" method="post" action="#">
-<a href="#" onclick="TlacPoznamkyMUJ2014();" title="Zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box"></div>
-<div class="toleft line-box-text">
-<div>
- <strong>Poznámky MÚJ</strong>
- <img src="../obr/info.png" title="Úč MUJ 3 - 01 k DPPO verzia 2014">
-</div>
-<div>
- <label for="h_zos">Zostavené:</label>
- <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
-        value="<?php echo $dnes; ?>"/>
-</div>
-<div>
- <label for="h_sch">Schválené:</label>
- <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
-        maxlenght="10" value="<?php echo $dnes; ?>"/>
-</div>
-</div>
-<a href="#" onclick="NacitajPoznamkyMUJ2014();" title="Načítať údaje do poznámok"
-   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-<a href="#" onclick="TlacPoznamkyMUJ2014();" title="export do PDF"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravPoznamkyMUJ2014();" title="Upraviť hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</FORM>
-</div> <!-- .line-area poznamky muj -->
-<?php
-}
-//koniec MUJ 2014
-?>
-
-<script type="text/javascript">
-  function CASH2011()
-  {
-   var h_zos = document.forms.formcf1n.h_zos.value;
-   var h_sch = document.forms.formcf1n.h_sch.value;
-   var ktoracast = document.forms.formcf1n.ktoracast.value;
-   window.open('../ucto/cashflow2011.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&ktoracast=' + ktoracast + '&page=1&tis=0&vyb_ume=<?php echo $kli_vume; ?>',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function CASHEUR2011()
-  {
-   var h_zos = document.forms.formcf1n.h_zos.value;
-   var h_sch = document.forms.formcf1n.h_sch.value;
-   var ktoracast = document.forms.formcf1n.ktoracast.value;
-   window.open('../ucto/cashflow2011.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&ktoracast=' + ktoracast + '&page=1&tis=1&vyb_ume=<?php echo $kli_vume; ?>',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function CASHGEN2011()
-  {
-   window.open('../ucto/oprcis.php?copern=308&drupoh=95&page=1&sysx=UCT',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function CASHPREDCH2011()
-  {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=24&page=1&sysx=UCT',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-</script>
-
-<div class="line-area" style="margin-bottom:8px;"> <!-- cash flow priama -->
-<FORM name="formcf1n" method="post" action="#">
-<a href="#" onclick="CASH2011();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<a href="#" onclick="CASHEUR2011();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box-text">
-<div>
-<?php
-$textverzia="verzia 2011";
-if ( $kli_vrok > 2013 ) { $textverzia="verzia ".$kli_vrok; }
-?>
- <strong>Cash Flow - priama metóda</strong>
- <img src="../obr/info.png" title="CF priama metóda <?php echo $textverzia; ?>">
-</div>
-<div>
- <label for="h_zos">Zostavený:</label>
- <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
-        value="<?php echo $dnes; ?>"/>
-</div>
-<div>
- <label for="h_sch">Schválený:</label>
- <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
-        maxlenght="10" value="<?php echo $dnes; ?>"/>
-</div>
-<div>
-<?php if ( $fir_big == 1 ) { ?>
- <select size="1" name="ktoracast" id="ktoracast">
-  <option value="0">všetky časti</option>
-  <option value="1">časť 1</option>
-  <option value="2">časť 2</option>
-  <option value="3">časť 3</option>
-  <option value="4">časť 4</option>
-  <option value="5">časť 5</option>
-  <option value="6">časť 6</option>
- </select>
-<?php                      } ?>
-<?php if ( $fir_big != 1 ) { ?>
- <input type="hidden" name="ktoracast" id="ktoracast" value="0"/>
-<?php                      } ?>
-</div>
-</div>
-<a href="#" onclick="CASHGEN2011();" title="Nastavenie generovania"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-<a href="#" onclick="CASHPREDCH2011();" title="Nastavenie predchádzajúceho obdobia"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-</FORM>
-</div> <!-- .line-area cf priama -->
-
-
-<div class="line-area"> <!-- priznanie po -->
-<div class="toleft line-box"></div>
-<a href="#" onclick="TlacPriznanie();" title="Zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box-text">
-<div>
- <strong>Priznanie k dani z príjmov PO</strong>
-</div>
-</div>
-<a href="#" onclick="TlacPotvrdDPO();" title="Zobraziť potvrdenie o podaní v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<a href="#" onclick="POdoXML();" title="export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravPriznanie();" title="Upraviť hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</div> <!-- .line-area priznanie po -->
-
-<?php
-if ( $kli_nezis == 1 )
-{
-?>
-
-<?php if ( $kli_vrok >= 2012 ) { ?>
-
-<script type="text/javascript">
-  function SuvahaNO2012()
-  {
-   var h_zos = document.forms.formuznuj.h_zos.value;
-   window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function VysledovkaNO2012()
-  {
-   var h_zos = document.forms.formuznuj.h_zos.value;
-   window.open('../ucto/vykzis_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function UzavierkaNUJ2013()
-  {
-   var h_zos = document.forms.formuznuj.h_zos.value;
-   window.open('../ucto/uzavierka_nuj2013.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&page=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletNUJ2013()
-  {
-   var h_zos = document.forms.formuznuj.h_zos.value;
-   var h_sch = document.forms.formuznuj.h_sch.value;
-   var h_drp = document.forms.formuznuj.h_drp.value;
-   window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletNUJ2013len1()
-  {
-   var h_zos = document.forms.formuznuj.h_zos.value;
-   var h_sch = document.forms.formuznuj.h_sch.value;
-   var h_drp = document.forms.formuznuj.h_drp.value;
-   window.open('../ucto/suvaha_no.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&len1=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletNUJ2013doxml()
-  {
-   var h_zos = document.forms.formuznuj.h_zos.value;
-   var h_sch = document.forms.formuznuj.h_sch.value;
-   var h_drp = document.forms.formuznuj.h_drp.value;
-   window.open('../ucto/uzavierka_nuj2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletNUJ2013docsv()
-  {
-   var h_zos = document.forms.formuznuj.h_zos.value;
-   var h_sch = document.forms.formuznuj.h_sch.value;
-   var h_drp = document.forms.formuznuj.h_drp.value;
-   window.open('../ucto/uzavierka_nuj2013csv.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function NechcemStranyNUJ2013()
-  {
-   window.open('../ucto/poznamky_nujnopage.php?copern=101&page=1&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function SuvPredchNUJ2013()
-  {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=32&page=1&sysx=UCT',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function VzasPredchNUJ2013()
-  {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=31&page=1&sysx=UCT',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-</script>
-
-<div class="line-area" style="margin-top:8px;"> <!-- uct.zavierka pu nuj -->
-<FORM name="formuznuj" method="post" action="#">
-<a href="#" onclick="KompletNUJ2013();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box"></div>
-<div class="toleft line-box-text">
-<div>
- <strong>Účtovná závierka NÚJ</strong>
- <img src="../obr/info.png" title="Úč NUJ resp. UZNUJ">
-</div>
-<div>
- <select size="1" name="h_drp" id="h_drp">
-  <option value="1">Riadna</option>
-  <option value="2">Mimoriadna</option>
- </select>
-</div>
-<div>
- <label for="h_zos">Zostavená:</label>
- <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
-        value="<?php echo $dnes; ?>"/>
-</div>
-<div>
- <label for="h_sch">Schválená:</label>
- <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
-        maxlenght="10" value=""/>
-</div>
-</div>
-<a href="#" onclick="KompletNUJ2013doxml();" title="Export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="KompletNUJ2013len1();" title="Zobraziť úvodnú stranu vo formáte PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<a href="#" onclick="KompletNUJ2013docsv();" title="Export do CSV"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-</FORM>
-
-<div class="toright" style="width:216px; margin-right:-4px;">
- <div class="toleft line-box-text" style="width:140px;">Výkaz ziskov a strát NÚJ</div>
- <a href="#" onclick="VysledovkaNO2012();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
-    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
- <a href="#" onclick="VzasPredchNUJ2013();" title="Nastavenie predchádzajúceho obdobia"
-    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, preveriť -->
-</div>
-<div class="toright" style="width:192px;">
- <div class="toleft line-box-text" style="width:76px;">Súvaha NÚJ</div>
- <a href="#" onclick="SuvahaNO2012();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
-    class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
- <a href="#" onclick="GenSuvNo();" title="Nastavenie generovania"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
- <a href="#" onclick="SuvPredchNUJ2013();" title="Nastavenie predchádzajúceho obdobia"
-   class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, preveriť -->
-</div>
-</div> <!-- .line-area uct.zavierka pu nuj -->
-<?php                          } ?>
-
-<?php $vsetky=1; ?>
-<?php
-if ( $vsetky == 1 ) {
-?>
-<div class="line-area" style="margin-bottom:8px;"> <!-- poznamky pu nuj -->
-<FORM name="formpoz11no" method="post" action="#">
-<a href="#" onclick="TlacPoznamky2011no();" title="Zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box"></div>
-<div class="toleft line-box-text">
-<div>
- <strong>Poznámky NÚJ</strong>
- <img src="../obr/info.png" title="Úč NUJ 3-01">
-</div>
-<div>
- <label for="h_zos">Zostavené:</label>
- <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
-        value="<?php echo $dnes; ?>"/>
-</div>
-<div>
- <label for="h_sch">Schválené:</label>
- <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
-        maxlenght="10" value="<?php echo $dnes; ?>"/>
-</div>
-</div>
-<a href="#" onclick="NechcemStranyNUJ2013();" title="Nastavenie strán, ktoré nechcem tlačiť"
-   class="toleft line-box box-brown"><img src='../obr/zmaz.png'></a>
-<a href="#" onclick="Poznamky2011NOdoxml();" title="export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="NacitajPoznamky2011no();" title="Načítať údaje do poznámok"
-   class="toleft line-box box-lightblue"><img src='../obr/vlozit.png'></a>
-<a href="#" onclick="UpravPoznamky2011no();" title="Upraviť hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</FORM>
-</div> <!-- .line-area poznamky pu nuj -->
-<?php               } ?>
-<?php
-}
-?>
-
-<?php
-//koniec podvojne
-           }
-?>
-
-<?php
-$jedrok=2013;
-if ( $kli_vrok < 2013 ) { $jedrok=""; }
-?>
-<?php
-$uzjuforok=2014;
-?>
-<?php
-//jednoduche
-if ( $copern == 1 AND $kli_vduj == 9 )
-           {
-?>
-<script type="text/javascript">
-  function XMLprivyd()
-  {
-   var h_zos = document.forms.formj1.h_zos.value;
-   var h_sch = document.forms.formj1.h_sch.value;
-   window.open('../ucto/vprivyd<?php echo $jedrok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&page=1&suborxml=1&celeeura=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function uzavfo2014cele()
-  {
-   var h_zos = document.forms.formuzfo2014.h_zos.value;
-   var h_sch = document.forms.formuzfo2014.h_sch.value;
-   var h_drp = document.forms.formuzfo2014.h_drp.value;
-   window.open('../ucto/vprivyd<?php echo $uzjuforok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&celeeura=1&uzav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function uzavfo2014()
-  {
-   var h_zos = document.forms.formuzfo2014.h_zos.value;
-   var h_sch = document.forms.formuzfo2014.h_sch.value;
-   var h_drp = document.forms.formuzfo2014.h_drp.value;
-   window.open('../ucto/vprivyd<?php echo $uzjuforok; ?>.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&uzav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function uzavfo2014info()
-  {
-   window.open('../dokumenty/vykazy_ju2014/fo2014/uzfo_v14_vysvetlivky.pdf',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function uzavfo2014xml()
-  {
-   var h_zos = document.forms.formuzfo2014.h_zos.value;
-   var h_sch = document.forms.formuzfo2014.h_sch.value;
-   var h_drp = document.forms.formuzfo2014.h_drp.value;
-   window.open('../ucto/uzavierka_ju<?php echo $uzjuforok; ?>xml.php?copern=10&drupoh=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&suborxml=1&celeeura=1&uzav=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function vmazprech2014()
-  {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=42&page=1&sysx=UCT',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-</script>
-
-<?php if ( $kli_vrok >= 2014 ) { ?>
-<div class="line-area" style="margin-bottom:8px;"> <!-- uct.zavierka ju -->
-<FORM name="formuzfo2014" method="post" action="#">
-<a href="#" onclick="uzavfo2014();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<a href="#" onclick="uzavfo2014cele();" title="<?php echo $mena1; ?>á - zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box-text">
-<div>
- <strong>Účtovná závierka</strong>
- <img src="../obr/info.png" title="Úč FO verzia 2014">
-</div>
-<div>
- <select size="1" name="h_drp" id="h_drp">
-  <option value="1">Riadna</option>
-  <option value="2">Mimoriadna</option>
-  <option value="3">Priebežná</option>
- </select>
-</div>
-<div>
- <label for="h_zos">Zostavená:</label>
- <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
-        value="<?php echo $dnes; ?>"/>
-</div>
-<div>
- <label for="h_sch">Schválená:</label>
- <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
-        maxlenght="10" value=""/>
-</div>
-</div>
-<a href="#" onclick="uzavfo2014info();"
-   title="Vysvetlivky k účtovnej závierke" class="toleft line-box box-bluedefault">
- <img src="../obr/info.png"></a>
-<a href="#" onclick="uzavfo2014xml();" title="Export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
- <a href="#" onclick="vmazprech2014();" title="Nastavenie predchádzajúceho obdobia výkazu o majetku a záväzkoch"
-  class="toleft line-box box-brown"><img src='../obr/naradie.png'></a> <!-- dopyt, preveriť -->
-</FORM>
-</div> <!-- .line-area uct.zavierka ju -->
-<?php                          } ?>
-
-
-<?php if ( $kli_vrok >= 2012 ) { ?>
-
-<script type="text/javascript">
-  function GenPriVydNOJU()
-  {
-   window.open('../ucto/oprcis.php?copern=308&drupoh=97&page=1&sysx=UCT',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function GenMajZavNOJU()
-  {
-   window.open('../ucto/oprcis.php?copern=308&drupoh=98&page=1&sysx=UCT',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function PredMajZavNOJU()
-  {
-   window.open('../ucto/oprsys.php?copern=308&drupoh=47&page=1&sysx=UCT',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletNO2013()
-  {
-   var h_zos = document.forms.formuznoj.h_zos.value;
-   var h_sch = document.forms.formuznoj.h_sch.value;
-   var h_drp = document.forms.formuznoj.h_drp.value;
-   window.open('../ucto/privyd_noju.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletNO2013len1()
-  {
-   var h_zos = document.forms.formuznoj.h_zos.value;
-   var h_sch = document.forms.formuznoj.h_sch.value;
-   var h_drp = document.forms.formuznoj.h_drp.value;
-   window.open('../ucto/privyd_noju.php?copern=10&drupoh=1&tis=0&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&page=1&kompletka=1&len1=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletNO2013doxml()
-  {
-   var h_zos = document.forms.formuznoj.h_zos.value;
-   var h_sch = document.forms.formuznoj.h_sch.value;
-   var h_drp = document.forms.formuznoj.h_drp.value;
-  window.open('../ucto/uzavierka_no2013xml.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-  function KompletNO2013docsv()
-  {
-   var h_zos = document.forms.formuznoj.h_zos.value;
-   var h_sch = document.forms.formuznoj.h_sch.value;
-   var h_drp = document.forms.formuznoj.h_drp.value;
-  window.open('../ucto/uzavierka_no2013csv.php?copern=110&page=1&sysx=UCT&drupoh=1&uprav=1&h_zos=' + h_zos + '&h_sch=' + h_sch + '&h_drp=' + h_drp + '&tt=1',
- '_blank', 'width=1080, height=900, top=0, left=10, status=yes, resizable=yes, scrollbars=yes');
-  }
-</script>
- <!-- uct.zavierka ju nuj -->
-<div class="line-area" style="margin-bottom:8px;">
-<FORM name="formuznoj" method="post" action="#">
-<a href="#" onclick="KompletNO2013();" title="<?php echo $mena1; ?>á + centy - zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box"></div>
-<div class="toleft line-box-text">
-<div>
- <strong>Účtovná závierka NÚJ</strong>
- <img src="../obr/info.png" title="Úč NO resp. UZNO - príloha k opatreniu č. MF/17616/2013-74">
-</div>
-<div>
- <select size="1" name="h_drp" id="h_drp">
-  <option value="1">Riadna</option>
-  <option value="2">Mimoriadna</option>
- </select>
-</div>
-<div>
- <label for="h_zos">Zostavená:</label>
- <input type="text" name="h_zos" id="h_zos" onkeyup="CiarkaNaBodku(this);" maxlenght="10"
-        value="<?php echo $dnes; ?>"/>
-</div>
-<div>
- <label for="h_sch">Schválená:</label>
- <input type="text" name="h_sch" id="h_sch" onkeyup="CiarkaNaBodku(this);"
-        maxlenght="10" value=""/>
-</div>
-</div>
-<a href="#" onclick="KompletNO2013doxml();" title="Export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="KompletNO2013len1();" title="Zobraziť úvodnú stranu vo formáte PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<a href="#" onclick="KompletNO2013docsv();" title="Export do CSV"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
- <a href="#" onclick="GenMajZavNOJU();" title="Nastavenie generovania riadkov výkazu o majetku a záväzkov NÚJ"
-    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
- <a href="#" onclick="PredMajZavNOJU();" title="Nastavenie predchádzajúceho obdobia výkazu o majetku a záväzkov NÚJ"
-    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
- <a href="#" onclick="GenPriVydNOJU();" title="Nastavenie generovania riadkov výkazu o príjmoch a výdavkoch NÚJ"
-    class="toleft line-box box-brown"><img src='../obr/naradie.png'></a>
-</FORM>
-</div> <!-- .line-area uct.zavierka ju nuj -->
-<?php                          } ?>
-
-<div class="line-area"> <!-- platby do fondov sp a zp -->
-<a href="#" onclick="platbyju();" title="Ukázať platby v <?php echo $mena1; ?>á + centy"
-   class="toleft line-box box-bluedefault"><img src='../obr/hladaj.png'></a>
-<div class="toleft line-box"></div>
-<div class="toleft line-box-text">
-<div>
- <strong>Platby dane z príjmu a odvodov SP a ZP pre budúci rok</strong>
-</div>
-</div>
-</div> <!-- .line-area platby do fondov sp a zp -->
-<?php
-//koniec jednoduche
-           }
-?>
-
-
-<div class="line-area"> <!-- priznanie fob -->
-<a href="#" onclick="TlacFOB();" title="Zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box"></div>
-<div class="toleft line-box-text">
-<div>
- <strong>Priznanie k dani z príjmov FO typ B</strong>
-</div>
-</div>
-<a href="#" onclick="TlacPotvrdFOB();" title="Zobraziť potvrdenie o podaní v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<a href="#" onclick="FOBdoXML();" title="export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravFOB();" title="Upraviť hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</div> <!-- .line-area priznanie fob -->
-
-<div class="line-area" style="margin-bottom:8px;"> <!-- priznanie dmv -->
-<a href="#" onclick="TlacDMV();" title="Zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box"></div>
-<div class="toleft line-box-text">
-<div>
- <strong>Priznanie k dani z motorových vozidiel</strong>
-</div>
-</div>
-<a href="#" onclick="TlacPotvrdDMV();" title="Zobraziť potvrdenie o podaní v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<a href="#" onclick="DMVdoXML();" title="export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravDMV();" title="Upraviť hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</div> <!-- .line-area priznanie dmv -->
-
-<?php if ( $kli_vrok >= 2017 ) { ?>
-<div class="line-area"> <!-- oznamenie odlož -->
-<div class="toleft line-box"></div>
-<a href="#" onclick="TlacOzOdl();" title="Zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box-text">
-<div>
- <strong>Oznámenie daňovníka o predĺžení lehoty na podanie daňového priznania</strong>
-</div>
-</div>
-<a href="#" onclick="OzOdldoXML();" title="export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravOzOdl();" title="Upraviť hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</div> <!-- .line-area oznamenie odlož -->
-<?php } ?>
-
-
-<div class="line-area"> <!-- oznamenie o uz -->
-<div class="toleft line-box"></div>
-<a href="#" onclick="TlacOzUz();" title="Zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box-text">
-<div>
- <strong>Oznámenie o dátume schválenia účtovnej závierky</strong>
-</div>
-</div>
-<a href="#" onclick="OzUzdoXML();" title="export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravOzUz();" title="Upraviť hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</div> <!-- .line-area oznamenie o uz -->
-
-<div class="line-area"> <!-- podanie o uz pod-->
-<div class="toleft line-box"></div>
-<a href="#" onclick="TlacVseob();" title="Zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box-text">
-<div>
- <strong>Všeobecné podanie k účtovnej závierke </strong>
-</div>
-</div>
-<a href="#" onclick="VseobdoXML();" title="export do XML"
-   class="toleft line-box box-red"><img src='../obr/export.png'></a>
-<a href="#" onclick="UpravVseob();" title="Upraviť hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</div>
-
-
-<div class="line-area"> <!-- podanie ozn176-->
-<div class="toleft line-box"></div>
-<a href="#" onclick="TlacOzn176();" title="Zobraziť v PDF"
-   class="toleft line-box box-blue"><img src='../obr/tlac.png'></a>
-<div class="toleft line-box-text">
-<div>
- <strong>Oznámenie o vykonaní úpravy základu dane </strong>
-</div>
-</div>
-<a href="#" onclick="UpravOzn176();" title="Upraviť hodnoty"
-   class="toleft line-box box-green"><img src='../obr/zoznam.png'></a>
-</div>
-
-
-</div> <!-- .content -->
-<?php
-//celkovy koniec dokumentu
-$cislista = include("uct_lista_norm.php");
-       } while (false);
-?>
-</BODY>
-</HTML>
+</body>
+</html>
